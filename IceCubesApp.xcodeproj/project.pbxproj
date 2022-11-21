@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F295540292B6C3400E0E81B /* Timeline in Frameworks */ = {isa = PBXBuildFile; productRef = 9F29553F292B6C3400E0E81B /* Timeline */; };
 		9FBFE63D292A715500C250E9 /* IceCubesAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBFE63C292A715500C250E9 /* IceCubesAppApp.swift */; };
-		9FBFE63F292A715500C250E9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBFE63E292A715500C250E9 /* ContentView.swift */; };
 		9FBFE641292A715600C250E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FBFE640292A715600C250E9 /* Assets.xcassets */; };
 		9FBFE645292A715600C250E9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FBFE644292A715600C250E9 /* Preview Assets.xcassets */; };
 		9FBFE64E292A72BD00C250E9 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 9FBFE64D292A72BD00C250E9 /* Network */; };
@@ -16,9 +16,9 @@
 
 /* Begin PBXFileReference section */
 		9F29553D292B67B600E0E81B /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Network; path = Packages/Network; sourceTree = "<group>"; };
+		9F29553E292B6AF600E0E81B /* Timeline */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Timeline; path = Packages/Timeline; sourceTree = "<group>"; };
 		9FBFE639292A715500C250E9 /* IceCubesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IceCubesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FBFE63C292A715500C250E9 /* IceCubesAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceCubesAppApp.swift; sourceTree = "<group>"; };
-		9FBFE63E292A715500C250E9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9FBFE640292A715600C250E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9FBFE642292A715600C250E9 /* IceCubesApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IceCubesApp.entitlements; sourceTree = "<group>"; };
 		9FBFE644292A715600C250E9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -30,6 +30,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9FBFE64E292A72BD00C250E9 /* Network in Frameworks */,
+				9F295540292B6C3400E0E81B /* Timeline in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +43,7 @@
 				9FBFE63B292A715500C250E9 /* IceCubesApp */,
 				9FBFE63A292A715500C250E9 /* Products */,
 				9FBFE64C292A72BD00C250E9 /* Frameworks */,
+				9F29553E292B6AF600E0E81B /* Timeline */,
 				9F29553D292B67B600E0E81B /* Network */,
 			);
 			sourceTree = "<group>";
@@ -58,7 +60,6 @@
 			isa = PBXGroup;
 			children = (
 				9FBFE63C292A715500C250E9 /* IceCubesAppApp.swift */,
-				9FBFE63E292A715500C250E9 /* ContentView.swift */,
 				9FBFE640292A715600C250E9 /* Assets.xcassets */,
 				9FBFE642292A715600C250E9 /* IceCubesApp.entitlements */,
 				9FBFE643292A715600C250E9 /* Preview Content */,
@@ -99,6 +100,7 @@
 			name = IceCubesApp;
 			packageProductDependencies = (
 				9FBFE64D292A72BD00C250E9 /* Network */,
+				9F29553F292B6C3400E0E81B /* Timeline */,
 			);
 			productName = IceCubesApp;
 			productReference = 9FBFE639292A715500C250E9 /* IceCubesApp.app */;
@@ -154,7 +156,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FBFE63F292A715500C250E9 /* ContentView.swift in Sources */,
 				9FBFE63D292A715500C250E9 /* IceCubesAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -371,6 +372,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9F29553F292B6C3400E0E81B /* Timeline */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Timeline;
+		};
 		9FBFE64D292A72BD00C250E9 /* Network */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Network;

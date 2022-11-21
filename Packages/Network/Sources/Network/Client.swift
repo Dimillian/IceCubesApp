@@ -1,6 +1,7 @@
 import Foundation
+import SwiftUI
 
-public struct Client {
+public class Client: ObservableObject {
   public enum Version: String {
     case v1
   }
