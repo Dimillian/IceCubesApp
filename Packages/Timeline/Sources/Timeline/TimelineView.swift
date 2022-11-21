@@ -20,12 +20,22 @@ public struct TimelineView: View {
     List(statuses) { status in
       StatusRowView(status: status)
     }
+    .listStyle(.plain)
+    .navigationTitle("Public Timeline: \(client.server)")
+    .navigationBarTitleDisplayMode(.inline)
     .task {
-      do {
-        self.statuses = try await client.fetchArray(endpoint: Timeline.pub)
-      } catch {
-        print(error.localizedDescription)
-      }
+      await refreshTimeline()
+    }
+    .refreshable {
+      await refreshTimeline()
+    }
+  }
+  
+  private func refreshTimeline() async {
+    do {
+      self.statuses = try await client.fetchArray(endpoint: Timeline.pub)
+    } catch {
+      print(error.localizedDescription)
     }
   }
 }
