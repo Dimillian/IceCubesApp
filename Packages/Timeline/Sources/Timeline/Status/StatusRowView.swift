@@ -12,14 +12,21 @@ struct StatusRowView: View {
           content: { image in
             image.resizable()
               .aspectRatio(contentMode: .fit)
-              .cornerRadius(13)
-              .frame(maxWidth: 26, maxHeight: 26)
+              .cornerRadius(4)
+              .frame(maxWidth: 40, maxHeight: 40)
           },
           placeholder: {
             ProgressView()
+              .frame(maxWidth: 40, maxHeight: 40)
           }
         )
-        Text(status.account.username)
+        VStack(alignment: .leading) {
+          Text(status.account.displayName)
+            .font(.headline)
+          Text("@\(status.account.acct)")
+            .font(.footnote)
+            .foregroundColor(.gray)
+        }
       }
       Text(status.content)
     }
