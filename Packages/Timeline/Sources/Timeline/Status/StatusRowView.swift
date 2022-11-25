@@ -28,7 +28,7 @@ struct StatusRowView: View {
             .foregroundColor(.gray)
         }
       }
-      Text(status.content)
+      Text(try! AttributedString(markdown: status.contentAsMarkdown))
     }
   }
 }

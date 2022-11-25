@@ -13,10 +13,13 @@ let package = Package(
       name: "Network",
       targets: ["Network"]),
   ],
+  dependencies: [
+    .package(url: "https://gitlab.com/mflint/HTML2Markdown", exact: "1.0.0")
+  ],
   targets: [
     .target(
       name: "Network",
-      dependencies: []),
+      dependencies: ["HTML2Markdown"]),
     .testTarget(
       name: "NetworkTests",
       dependencies: ["Network"]),
