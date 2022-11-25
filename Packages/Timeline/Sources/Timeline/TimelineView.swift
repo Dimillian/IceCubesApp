@@ -2,40 +2,52 @@ import SwiftUI
 import Network
 
 public struct TimelineView: View {
-  public enum Kind {
-    case pub, hastah, home, list
-  }
+  @StateObject private var viewModel: TimelineViewModel
   
-  @EnvironmentObject private var client: Client
-  
-  @State private var statuses: [Status] = []
-  
-  private let kind: Kind
-  
-  public init(kind: Kind) {
-    self.kind = kind
+  public init(client: Client) {
+    _viewModel = StateObject(wrappedValue: TimelineViewModel(client: client))
   }
   
   public var body: some View {
-    List(statuses) { status in
-      StatusRowView(status: status)
+    List {
+      switch viewModel.state {
+      case .loading:
+        loadingRow
+      case .error:
+        Text("An error occurred, please try to refresh")
+      case let .display(statuses, nextPageState):
+        ForEach(statuses) { status in
+          StatusRowView(status: status)
+        }
+        switch nextPageState {
+        case .hasNextPage:
+          loadingRow
+            .onAppear {
+              Task {
+                await viewModel.loadNextPage()
+              }
+            }
+        case .loadingNextPage:
+          loadingRow
+        }
+      }
     }
     .listStyle(.plain)
-    .navigationTitle("Public Timeline: \(client.server)")
+    .navigationTitle("Public Timeline: \(viewModel.serverName)")
     .navigationBarTitleDisplayMode(.inline)
     .task {
-      await refreshTimeline()
+      await viewModel.refreshTimeline()
     }
     .refreshable {
-      await refreshTimeline()
+      await viewModel.refreshTimeline()
     }
   }
   
-  private func refreshTimeline() async {
-    do {
-      self.statuses = try await client.fetchArray(endpoint: Timeline.pub)
-    } catch {
-      print(error.localizedDescription)
+  private var loadingRow: some View {
+    HStack {
+      Spacer()
+      ProgressView()
+      Spacer()
     }
   }
 }

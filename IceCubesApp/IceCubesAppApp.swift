@@ -13,8 +13,7 @@ struct IceCubesAppApp: App {
       TabView {
         ForEach(tabs, id: \.self) { tab in
           NavigationStack {
-            TimelineView(kind: .pub)
-              .environmentObject(Client(server: tab))
+            TimelineView(client: .init(server: tab))
               .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                   Button {

@@ -23,6 +23,7 @@ public class Client: ObservableObject {
     components.scheme = "https"
     components.host = server
     components.path += "/api/\(version.rawValue)/\(endpoint.path())"
+    components.queryItems = endpoint.queryItems()
     return components.url!
   }
     

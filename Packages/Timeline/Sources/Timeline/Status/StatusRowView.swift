@@ -6,7 +6,7 @@ struct StatusRowView: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      HStack {
+      HStack(alignment: .top) {
         AsyncImage(
           url: status.account.avatar,
           content: { image in
@@ -27,6 +27,10 @@ struct StatusRowView: View {
             .font(.footnote)
             .foregroundColor(.gray)
         }
+        Spacer()
+        Text(status.createdAtFormatted)
+          .font(.footnote)
+          .foregroundColor(.gray)
       }
       Text(try! AttributedString(markdown: status.contentAsMarkdown))
     }
