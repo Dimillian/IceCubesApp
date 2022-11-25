@@ -9,7 +9,7 @@ class TimelineViewModel: ObservableObject {
     }
     case loading
     case display(statuses: [Status], nextPageState: State.PadingState)
-    case error
+    case error(error: Error)
   }
   
   private let client: Client
@@ -30,7 +30,7 @@ class TimelineViewModel: ObservableObject {
       statuses = try await client.fetchArray(endpoint: Timeline.pub(sinceId: nil))
       state = .display(statuses: statuses, nextPageState: .hasNextPage)
     } catch {
-      print(error.localizedDescription)
+      state = .error(error: error)
     }
   }
   
@@ -42,7 +42,7 @@ class TimelineViewModel: ObservableObject {
       statuses.append(contentsOf: newStatuses)
       state = .display(statuses: statuses, nextPageState: .hasNextPage)
     } catch {
-      print(error.localizedDescription)
+      state = .error(error: error)
     }
   }
 }

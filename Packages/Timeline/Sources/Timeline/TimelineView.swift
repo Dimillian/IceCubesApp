@@ -13,8 +13,8 @@ public struct TimelineView: View {
       switch viewModel.state {
       case .loading:
         loadingRow
-      case .error:
-        Text("An error occurred, please try to refresh")
+      case let .error(error):
+        Text(error.localizedDescription)
       case let .display(statuses, nextPageState):
         ForEach(statuses) { status in
           StatusRowView(status: status)
