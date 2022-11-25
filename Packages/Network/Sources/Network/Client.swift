@@ -31,9 +31,4 @@ public class Client: ObservableObject {
     let (data, _) = try await urlSession.data(from: makeURL(endpoint: endpoint))
     return try decoder.decode(Entity.self, from: data)
   }
-  
-  public func fetchArray<Entity: Codable>(endpoint: Endpoint) async throws -> [Entity] {
-    let (data, _) = try await urlSession.data(from: makeURL(endpoint: endpoint))
-    return try decoder.decode([Entity].self, from: data)
-  }
 }

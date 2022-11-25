@@ -27,7 +27,7 @@ class TimelineViewModel: ObservableObject {
   
   func refreshTimeline() async {
     do {
-      statuses = try await client.fetchArray(endpoint: Timeline.pub(sinceId: nil))
+      statuses = try await client.fetch(endpoint: Timeline.pub(sinceId: nil))
       state = .display(statuses: statuses, nextPageState: .hasNextPage)
     } catch {
       state = .error(error: error)
