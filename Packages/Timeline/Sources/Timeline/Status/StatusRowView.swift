@@ -1,5 +1,5 @@
 import SwiftUI
-import Network
+import Models
 
 struct StatusRowView: View {
   let status: Status

@@ -1,5 +1,6 @@
 import SwiftUI
 import Network
+import Models
 
 @MainActor
 class TimelineViewModel: ObservableObject {

@@ -4,22 +4,24 @@
 import PackageDescription
 
 let package = Package(
-  name: "Network",
+  name: "Models",
   platforms: [
     .iOS(.v16),
   ],
   products: [
     .library(
-      name: "Network",
-      targets: ["Network"]),
+      name: "Models",
+      targets: ["Models"]),
   ],
-  dependencies: [],
+  dependencies: [
+    .package(url: "https://gitlab.com/mflint/HTML2Markdown", exact: "1.0.0")
+  ],
   targets: [
     .target(
-      name: "Network",
-      dependencies: []),
+      name: "Models",
+      dependencies: ["HTML2Markdown"]),
     .testTarget(
-      name: "NetworkTests",
-      dependencies: ["Network"]),
+      name: "ModelsTests",
+      dependencies: ["Models"]),
   ]
 )
