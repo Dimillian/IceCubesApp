@@ -3,6 +3,7 @@ import Network
 
 public struct TimelineView: View {
   @StateObject private var viewModel: TimelineViewModel
+  @State private var didAppear = false
   
   public init(client: Client) {
     _viewModel = StateObject(wrappedValue: TimelineViewModel(client: client))
@@ -36,7 +37,10 @@ public struct TimelineView: View {
     .navigationTitle("Public Timeline: \(viewModel.serverName)")
     .navigationBarTitleDisplayMode(.inline)
     .task {
-      await viewModel.refreshTimeline()
+      if !didAppear {
+        await viewModel.refreshTimeline()
+        didAppear = true
+      }
     }
     .refreshable {
       await viewModel.refreshTimeline()

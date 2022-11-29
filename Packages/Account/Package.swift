@@ -4,30 +4,28 @@
 import PackageDescription
 
 let package = Package(
-  name: "Timeline",
+  name: "Account",
   platforms: [
     .iOS(.v16),
   ],
   products: [
     .library(
-      name: "Timeline",
-      targets: ["Timeline"]),
+      name: "Account",
+      targets: ["Account"]),
   ],
   dependencies: [
     .package(name: "Network", path: "../Network"),
     .package(name: "Models", path: "../Models"),
-    .package(name: "Routeur", path: "../Routeur"),
   ],
   targets: [
     .target(
-      name: "Timeline",
+      name: "Account",
       dependencies: [
         .product(name: "Network", package: "Network"),
-        .product(name: "Models", package: "Models"),
-        .product(name: "Routeur", package: "Routeur")
+        .product(name: "Models", package: "Models")
       ]),
     .testTarget(
-      name: "TimelineTests",
-      dependencies: ["Timeline"]),
+      name: "AccountTests",
+      dependencies: ["Account"]),
   ]
 )

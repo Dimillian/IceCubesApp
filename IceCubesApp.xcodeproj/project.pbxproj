@@ -7,22 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F24EEB829360C330042359D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F24EEB729360C330042359D /* Preview Assets.xcassets */; };
+		9F24EEBB293619210042359D /* Routeur in Frameworks */ = {isa = PBXBuildFile; productRef = 9F24EEBA293619210042359D /* Routeur */; };
 		9F295540292B6C3400E0E81B /* Timeline in Frameworks */ = {isa = PBXBuildFile; productRef = 9F29553F292B6C3400E0E81B /* Timeline */; };
+		9F398AA62935FE8A00A889F2 /* AppRouteur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F398AA52935FE8A00A889F2 /* AppRouteur.swift */; };
+		9F398AA92935FFDB00A889F2 /* Account in Frameworks */ = {isa = PBXBuildFile; productRef = 9F398AA82935FFDB00A889F2 /* Account */; };
+		9F398AAB2935FFDB00A889F2 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 9F398AAA2935FFDB00A889F2 /* Models */; };
+		9F398AB329360A4C00A889F2 /* TimelineTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F398AB229360A4C00A889F2 /* TimelineTabView.swift */; };
 		9FBFE63D292A715500C250E9 /* IceCubesAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBFE63C292A715500C250E9 /* IceCubesAppApp.swift */; };
 		9FBFE641292A715600C250E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FBFE640292A715600C250E9 /* Assets.xcassets */; };
-		9FBFE645292A715600C250E9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FBFE644292A715600C250E9 /* Preview Assets.xcassets */; };
 		9FBFE64E292A72BD00C250E9 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 9FBFE64D292A72BD00C250E9 /* Network */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9F24EEB729360C330042359D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		9F24EEB92936185B0042359D /* Routeur */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Routeur; path = Packages/Routeur; sourceTree = "<group>"; };
 		9F29553D292B67B600E0E81B /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Network; path = Packages/Network; sourceTree = "<group>"; };
 		9F29553E292B6AF600E0E81B /* Timeline */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Timeline; path = Packages/Timeline; sourceTree = "<group>"; };
 		9F398AA32935F90100A889F2 /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Models; path = Packages/Models; sourceTree = "<group>"; };
+		9F398AA52935FE8A00A889F2 /* AppRouteur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouteur.swift; sourceTree = "<group>"; };
+		9F398AAC2936005300A889F2 /* Account */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Account; path = Packages/Account; sourceTree = "<group>"; };
+		9F398AB229360A4C00A889F2 /* TimelineTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTabView.swift; sourceTree = "<group>"; };
 		9FBFE639292A715500C250E9 /* IceCubesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IceCubesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FBFE63C292A715500C250E9 /* IceCubesAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceCubesAppApp.swift; sourceTree = "<group>"; };
 		9FBFE640292A715600C250E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9FBFE642292A715600C250E9 /* IceCubesApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IceCubesApp.entitlements; sourceTree = "<group>"; };
-		9FBFE644292A715600C250E9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -30,7 +39,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F398AA92935FFDB00A889F2 /* Account in Frameworks */,
 				9FBFE64E292A72BD00C250E9 /* Network in Frameworks */,
+				9F398AAB2935FFDB00A889F2 /* Models in Frameworks */,
+				9F24EEBB293619210042359D /* Routeur in Frameworks */,
 				9F295540292B6C3400E0E81B /* Timeline in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -38,14 +50,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9F398AB429360A5800A889F2 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				9FBFE63C292A715500C250E9 /* IceCubesAppApp.swift */,
+				9F398AA52935FE8A00A889F2 /* AppRouteur.swift */,
+				9F398AB229360A4C00A889F2 /* TimelineTabView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		9F398AB529360A6100A889F2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9F24EEB729360C330042359D /* Preview Assets.xcassets */,
+				9FBFE640292A715600C250E9 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		9FBFE630292A715500C250E9 = {
 			isa = PBXGroup;
 			children = (
 				9FBFE63B292A715500C250E9 /* IceCubesApp */,
 				9FBFE63A292A715500C250E9 /* Products */,
 				9FBFE64C292A72BD00C250E9 /* Frameworks */,
+				9F398AAC2936005300A889F2 /* Account */,
 				9F398AA32935F90100A889F2 /* Models */,
 				9F29553E292B6AF600E0E81B /* Timeline */,
+				9F24EEB92936185B0042359D /* Routeur */,
 				9F29553D292B67B600E0E81B /* Network */,
 			);
 			sourceTree = "<group>";
@@ -61,20 +94,11 @@
 		9FBFE63B292A715500C250E9 /* IceCubesApp */ = {
 			isa = PBXGroup;
 			children = (
-				9FBFE63C292A715500C250E9 /* IceCubesAppApp.swift */,
-				9FBFE640292A715600C250E9 /* Assets.xcassets */,
+				9F398AB429360A5800A889F2 /* App */,
 				9FBFE642292A715600C250E9 /* IceCubesApp.entitlements */,
-				9FBFE643292A715600C250E9 /* Preview Content */,
+				9F398AB529360A6100A889F2 /* Resources */,
 			);
 			path = IceCubesApp;
-			sourceTree = "<group>";
-		};
-		9FBFE643292A715600C250E9 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				9FBFE644292A715600C250E9 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		9FBFE64C292A72BD00C250E9 /* Frameworks */ = {
@@ -103,6 +127,9 @@
 			packageProductDependencies = (
 				9FBFE64D292A72BD00C250E9 /* Network */,
 				9F29553F292B6C3400E0E81B /* Timeline */,
+				9F398AA82935FFDB00A889F2 /* Account */,
+				9F398AAA2935FFDB00A889F2 /* Models */,
+				9F24EEBA293619210042359D /* Routeur */,
 			);
 			productName = IceCubesApp;
 			productReference = 9FBFE639292A715500C250E9 /* IceCubesApp.app */;
@@ -146,7 +173,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FBFE645292A715600C250E9 /* Preview Assets.xcassets in Resources */,
+				9F24EEB829360C330042359D /* Preview Assets.xcassets in Resources */,
 				9FBFE641292A715600C250E9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -158,6 +185,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F398AB329360A4C00A889F2 /* TimelineTabView.swift in Sources */,
+				9F398AA62935FE8A00A889F2 /* AppRouteur.swift in Sources */,
 				9FBFE63D292A715500C250E9 /* IceCubesAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,7 +311,7 @@
 				CODE_SIGN_ENTITLEMENTS = IceCubesApp/IceCubesApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"IceCubesApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"IceCubesApp/Resources\"";
 				DEVELOPMENT_TEAM = Z6P74P6T99;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -320,7 +349,7 @@
 				CODE_SIGN_ENTITLEMENTS = IceCubesApp/IceCubesApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"IceCubesApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"IceCubesApp/Resources\"";
 				DEVELOPMENT_TEAM = Z6P74P6T99;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -374,9 +403,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9F24EEBA293619210042359D /* Routeur */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Routeur;
+		};
 		9F29553F292B6C3400E0E81B /* Timeline */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Timeline;
+		};
+		9F398AA82935FFDB00A889F2 /* Account */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Account;
+		};
+		9F398AAA2935FFDB00A889F2 /* Models */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Models;
 		};
 		9FBFE64D292A72BD00C250E9 /* Network */ = {
 			isa = XCSwiftPackageProductDependency;
