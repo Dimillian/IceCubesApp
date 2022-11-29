@@ -2,12 +2,11 @@ import SwiftUI
 import Network
 
 public struct TimelineView: View {
-  @StateObject private var viewModel: TimelineViewModel
+  @EnvironmentObject private var client: Client
+  @StateObject private var viewModel = TimelineViewModel()
   @State private var didAppear = false
   
-  public init(client: Client) {
-    _viewModel = StateObject(wrappedValue: TimelineViewModel(client: client))
-  }
+  public init() {}
   
   public var body: some View {
     List {
@@ -37,6 +36,7 @@ public struct TimelineView: View {
     .navigationTitle("Public Timeline: \(viewModel.serverName)")
     .navigationBarTitleDisplayMode(.inline)
     .task {
+      viewModel.client = client
       if !didAppear {
         await viewModel.refreshTimeline()
         didAppear = true

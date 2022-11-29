@@ -8,7 +8,7 @@ extension View {
     self.navigationDestination(for: RouteurDestinations.self) { destination in
       switch destination {
       case let .accountDetail(id):
-        AccountView(accountId: id)
+        AccountDetailView(accountId: id)
       case let .statusDetail(id):
         StatusDetailView(statusId: id)
       }

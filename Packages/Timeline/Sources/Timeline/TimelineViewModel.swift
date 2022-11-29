@@ -13,7 +13,7 @@ class TimelineViewModel: ObservableObject {
     case error(error: Error)
   }
   
-  private let client: Client
+  var client: Client = .init(server: "")
   private var statuses: [Status] = []
   
   @Published var state: State = .loading
@@ -21,11 +21,7 @@ class TimelineViewModel: ObservableObject {
   var serverName: String {
     client.server
   }
-  
-  init(client: Client) {
-    self.client = client
-  }
-  
+    
   func refreshTimeline() async {
     do {
       statuses = try await client.fetch(endpoint: Timeline.pub(sinceId: nil))
