@@ -1,7 +1,6 @@
 import SwiftUI
 import Timeline
 import Network
-import Shared
 
 @main
 struct IceCubesAppApp: App {
