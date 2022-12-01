@@ -13,8 +13,12 @@
 		9F398AA62935FE8A00A889F2 /* AppRouteur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F398AA52935FE8A00A889F2 /* AppRouteur.swift */; };
 		9F398AA92935FFDB00A889F2 /* Account in Frameworks */ = {isa = PBXBuildFile; productRef = 9F398AA82935FFDB00A889F2 /* Account */; };
 		9F398AAB2935FFDB00A889F2 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 9F398AAA2935FFDB00A889F2 /* Models */; };
-		9F398AB329360A4C00A889F2 /* TimelineTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F398AB229360A4C00A889F2 /* TimelineTabView.swift */; };
-		9FBFE63D292A715500C250E9 /* IceCubesAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBFE63C292A715500C250E9 /* IceCubesAppApp.swift */; };
+		9F398AB329360A4C00A889F2 /* TimelineTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F398AB229360A4C00A889F2 /* TimelineTab.swift */; };
+		9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE4ACA293783B000772766 /* SettingsTab.swift */; };
+		9FAE4ACE29379A5A00772766 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAE4ACD29379A5A00772766 /* KeychainSwift */; };
+		9FAE4AD129379AD600772766 /* AppAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE4AD029379AD600772766 /* AppAccount.swift */; };
+		9FAE4AD32937A0C600772766 /* AppAccountsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE4AD22937A0C600772766 /* AppAccountsManager.swift */; };
+		9FBFE63D292A715500C250E9 /* IceCubesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBFE63C292A715500C250E9 /* IceCubesApp.swift */; };
 		9FBFE641292A715600C250E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FBFE640292A715600C250E9 /* Assets.xcassets */; };
 		9FBFE64E292A72BD00C250E9 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 9FBFE64D292A72BD00C250E9 /* Network */; };
 /* End PBXBuildFile section */
@@ -27,9 +31,13 @@
 		9F398AA32935F90100A889F2 /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Models; path = Packages/Models; sourceTree = "<group>"; };
 		9F398AA52935FE8A00A889F2 /* AppRouteur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouteur.swift; sourceTree = "<group>"; };
 		9F398AAC2936005300A889F2 /* Account */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Account; path = Packages/Account; sourceTree = "<group>"; };
-		9F398AB229360A4C00A889F2 /* TimelineTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTabView.swift; sourceTree = "<group>"; };
+		9F398AB229360A4C00A889F2 /* TimelineTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTab.swift; sourceTree = "<group>"; };
+		9FAE4AC8293774FF00772766 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		9FAE4ACA293783B000772766 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
+		9FAE4AD029379AD600772766 /* AppAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAccount.swift; sourceTree = "<group>"; };
+		9FAE4AD22937A0C600772766 /* AppAccountsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAccountsManager.swift; sourceTree = "<group>"; };
 		9FBFE639292A715500C250E9 /* IceCubesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IceCubesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		9FBFE63C292A715500C250E9 /* IceCubesAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceCubesAppApp.swift; sourceTree = "<group>"; };
+		9FBFE63C292A715500C250E9 /* IceCubesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceCubesApp.swift; sourceTree = "<group>"; };
 		9FBFE640292A715600C250E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9FBFE642292A715600C250E9 /* IceCubesApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IceCubesApp.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -39,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FAE4ACE29379A5A00772766 /* KeychainSwift in Frameworks */,
 				9F398AA92935FFDB00A889F2 /* Account in Frameworks */,
 				9FBFE64E292A72BD00C250E9 /* Network in Frameworks */,
 				9F398AAB2935FFDB00A889F2 /* Models in Frameworks */,
@@ -53,9 +62,10 @@
 		9F398AB429360A5800A889F2 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				9FBFE63C292A715500C250E9 /* IceCubesAppApp.swift */,
+				9FAE4ACF29379ACA00772766 /* AppAccounts */,
+				9FAE4AC9293783A200772766 /* Tabs */,
+				9FBFE63C292A715500C250E9 /* IceCubesApp.swift */,
 				9F398AA52935FE8A00A889F2 /* AppRouteur.swift */,
-				9F398AB229360A4C00A889F2 /* TimelineTabView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -67,6 +77,24 @@
 				9FBFE640292A715600C250E9 /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		9FAE4AC9293783A200772766 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				9F398AB229360A4C00A889F2 /* TimelineTab.swift */,
+				9FAE4ACA293783B000772766 /* SettingsTab.swift */,
+			);
+			path = Tabs;
+			sourceTree = "<group>";
+		};
+		9FAE4ACF29379ACA00772766 /* AppAccounts */ = {
+			isa = PBXGroup;
+			children = (
+				9FAE4AD029379AD600772766 /* AppAccount.swift */,
+				9FAE4AD22937A0C600772766 /* AppAccountsManager.swift */,
+			);
+			path = AppAccounts;
 			sourceTree = "<group>";
 		};
 		9FBFE630292A715500C250E9 = {
@@ -94,6 +122,7 @@
 		9FBFE63B292A715500C250E9 /* IceCubesApp */ = {
 			isa = PBXGroup;
 			children = (
+				9FAE4AC8293774FF00772766 /* Info.plist */,
 				9F398AB429360A5800A889F2 /* App */,
 				9FBFE642292A715600C250E9 /* IceCubesApp.entitlements */,
 				9F398AB529360A6100A889F2 /* Resources */,
@@ -130,6 +159,7 @@
 				9F398AA82935FFDB00A889F2 /* Account */,
 				9F398AAA2935FFDB00A889F2 /* Models */,
 				9F24EEBA293619210042359D /* Routeur */,
+				9FAE4ACD29379A5A00772766 /* KeychainSwift */,
 			);
 			productName = IceCubesApp;
 			productReference = 9FBFE639292A715500C250E9 /* IceCubesApp.app */;
@@ -159,6 +189,9 @@
 				Base,
 			);
 			mainGroup = 9FBFE630292A715500C250E9;
+			packageReferences = (
+				9FAE4ACC29379A5A00772766 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+			);
 			productRefGroup = 9FBFE63A292A715500C250E9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -185,9 +218,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F398AB329360A4C00A889F2 /* TimelineTabView.swift in Sources */,
+				9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */,
+				9FAE4AD32937A0C600772766 /* AppAccountsManager.swift in Sources */,
+				9F398AB329360A4C00A889F2 /* TimelineTab.swift in Sources */,
 				9F398AA62935FE8A00A889F2 /* AppRouteur.swift in Sources */,
-				9FBFE63D292A715500C250E9 /* IceCubesAppApp.swift in Sources */,
+				9FBFE63D292A715500C250E9 /* IceCubesApp.swift in Sources */,
+				9FAE4AD129379AD600772766 /* AppAccount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +352,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = IceCubesApp/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -354,6 +391,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = IceCubesApp/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -402,6 +440,17 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		9FAE4ACC29379A5A00772766 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		9F24EEBA293619210042359D /* Routeur */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -418,6 +467,11 @@
 		9F398AAA2935FFDB00A889F2 /* Models */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Models;
+		};
+		9FAE4ACD29379A5A00772766 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9FAE4ACC29379A5A00772766 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
 		};
 		9FBFE64D292A72BD00C250E9 /* Network */ = {
 			isa = XCSwiftPackageProductDependency;

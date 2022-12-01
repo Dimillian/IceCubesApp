@@ -33,8 +33,13 @@ public struct TimelineView: View {
       }
     }
     .listStyle(.plain)
-    .navigationTitle("Public Timeline: \(viewModel.serverName)")
+    .navigationTitle("\(viewModel.serverName)")
     .navigationBarTitleDisplayMode(.inline)
+    .toolbar {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        timelineFilterButton
+      }
+    }
     .task {
       viewModel.client = client
       if !didAppear {
@@ -53,5 +58,20 @@ public struct TimelineView: View {
       ProgressView()
       Spacer()
     }
+  }
+  
+  private var timelineFilterButton: some View {
+    Menu {
+      ForEach(TimelineViewModel.TimelineFilter.allCases, id: \.self) { filter in
+        Button {
+          viewModel.timeline = filter
+        } label: {
+          Text(filter.rawValue)
+        }
+      }
+    } label: {
+      Image(systemName: "line.3.horizontal.decrease.circle")
+    }
+
   }
 }

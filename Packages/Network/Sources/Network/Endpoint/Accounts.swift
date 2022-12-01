@@ -1,12 +1,15 @@
 import Foundation
 
-public enum Account: Endpoint {
+public enum Accounts: Endpoint {
   case accounts(id: String)
+  case verifyCredentials
   
   public func path() -> String {
     switch self {
     case .accounts(let id):
       return "accounts/\(id)"
+    case .verifyCredentials:
+      return "accounts/verify_credentials"
     }
   }
   

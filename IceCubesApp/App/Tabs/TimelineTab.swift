@@ -3,16 +3,8 @@ import Timeline
 import Routeur
 import Network
 
-struct TimelineTabView: View {
-  let tab: String
-  
-  private let client: Client
+struct TimelineTab: View {
   @StateObject private var routeurPath = RouterPath()
-  
-  init(tab: String) {
-    self.tab = tab
-    self.client = .init(server: tab)
-  }
   
   var body: some View {
     NavigationStack(path: $routeurPath.path) {
@@ -20,6 +12,5 @@ struct TimelineTabView: View {
         .withAppRouteur()
     }
     .environmentObject(routeurPath)
-    .environmentObject(client)
   }
 }
