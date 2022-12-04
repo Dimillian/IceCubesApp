@@ -80,7 +80,7 @@ struct SettingsTabs: View {
         Label {
           Text("Icon selector")
         } icon: {
-          Image(uiImage: .init(named: UIApplication.shared.alternateIconName ?? "AppIcon")!)
+          Image(uiImage: .init(named: UIApplication.shared.alternateIconName ?? "AppIconInApp")!)
             .resizable()
             .frame(width: 25, height: 25)
             .cornerRadius(4)

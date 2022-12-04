@@ -6,7 +6,7 @@ struct IconSelectorView: View {
       self.rawValue
     }
     
-    case primary = "AppIcon"
+    case primary = "AppIconInApp"
     case alternate1 = "AppIconAlternate1"
     case alternate2 = "AppIconAlternate2"
     case alternate3 = "AppIconAlternate3"

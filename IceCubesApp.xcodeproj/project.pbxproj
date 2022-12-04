@@ -19,8 +19,8 @@
 		9FAE4AD129379AD600772766 /* AppAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE4AD029379AD600772766 /* AppAccount.swift */; };
 		9FAE4AD32937A0C600772766 /* AppAccountsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE4AD22937A0C600772766 /* AppAccountsManager.swift */; };
 		9FBFE63D292A715500C250E9 /* IceCubesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBFE63C292A715500C250E9 /* IceCubesApp.swift */; };
-		9FBFE641292A715600C250E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FBFE640292A715600C250E9 /* Assets.xcassets */; };
 		9FBFE64E292A72BD00C250E9 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 9FBFE64D292A72BD00C250E9 /* Network */; };
+		9FD34823293D06E800DB0EE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FD34822293D06E800DB0EE9 /* Assets.xcassets */; };
 		9FE151A6293C90F900E9683D /* IconSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE151A5293C90F900E9683D /* IconSelectorView.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,8 +39,8 @@
 		9FAE4AD22937A0C600772766 /* AppAccountsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAccountsManager.swift; sourceTree = "<group>"; };
 		9FBFE639292A715500C250E9 /* IceCubesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IceCubesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FBFE63C292A715500C250E9 /* IceCubesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceCubesApp.swift; sourceTree = "<group>"; };
-		9FBFE640292A715600C250E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9FBFE642292A715600C250E9 /* IceCubesApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IceCubesApp.entitlements; sourceTree = "<group>"; };
+		9FD34822293D06E800DB0EE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9FE151A5293C90F900E9683D /* IconSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSelectorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,7 +76,6 @@
 			isa = PBXGroup;
 			children = (
 				9F24EEB729360C330042359D /* Preview Assets.xcassets */,
-				9FBFE640292A715600C250E9 /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -124,6 +123,7 @@
 		9FBFE63B292A715500C250E9 /* IceCubesApp */ = {
 			isa = PBXGroup;
 			children = (
+				9FD34822293D06E800DB0EE9 /* Assets.xcassets */,
 				9FAE4AC8293774FF00772766 /* Info.plist */,
 				9F398AB429360A5800A889F2 /* App */,
 				9FBFE642292A715600C250E9 /* IceCubesApp.entitlements */,
@@ -217,8 +217,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FD34823293D06E800DB0EE9 /* Assets.xcassets in Resources */,
 				9F24EEB829360C330042359D /* Preview Assets.xcassets in Resources */,
-				9FBFE641292A715600C250E9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,7 +380,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thomasricouard.IceCubesApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -420,7 +420,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thomasricouard.IceCubesApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
