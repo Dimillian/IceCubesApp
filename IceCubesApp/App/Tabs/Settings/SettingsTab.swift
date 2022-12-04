@@ -12,27 +12,15 @@ struct SettingsTabs: View {
   
   @State private var signInInProgress = false
   @State private var accountData: Account?
+  @State private var instanceData: Instance?
   @State private var signInServer = IceCubesApp.defaultServer
   
   var body: some View {
     NavigationStack {
       Form {
-        Section("Account") {
-          if let accountData {
-            VStack(alignment: .leading) {
-              Text(appAccountsManager.currentAccount.server)
-                .font(.headline)
-              Text(accountData.displayName)
-              Text(accountData.username)
-                .font(.footnote)
-                .foregroundColor(.gray)
-            }
-            signOutButton
-          } else {
-            TextField("Mastodon server", text: $signInServer)
-            signInButton
-          }
-        }
+        appSection
+        accountSection
+        instanceSection
       }
       .onOpenURL(perform: { url in
         Task {
@@ -46,7 +34,57 @@ struct SettingsTabs: View {
       if appAccountsManager.currentAccount.oauthToken != nil {
         signInInProgress = true
         await refreshAccountInfo()
+        await refreshInstanceInfo()
         signInInProgress = false
+      }
+    }
+  }
+  
+  private var accountSection: some View {
+    Section("Account") {
+      if let accountData {
+        VStack(alignment: .leading) {
+          Text(appAccountsManager.currentAccount.server)
+            .font(.headline)
+          Text(accountData.displayName)
+          Text(accountData.username)
+            .font(.footnote)
+            .foregroundColor(.gray)
+        }
+        signOutButton
+      } else {
+        TextField("Mastodon server", text: $signInServer)
+        signInButton
+      }
+    }
+  }
+  
+  @ViewBuilder
+  private var instanceSection: some View {
+    if let instanceData {
+      Section("Instance info") {
+        LabeledContent("Name", value: instanceData.title)
+        Text(instanceData.shortDescription)
+        LabeledContent("Email", value: instanceData.email)
+        LabeledContent("Version", value: instanceData.version)
+        LabeledContent("Users", value: "\(instanceData.stats.userCount)")
+        LabeledContent("Status", value: "\(instanceData.stats.statusCount)")
+        LabeledContent("Domains", value: "\(instanceData.stats.domainCount)")
+      }
+    }
+  }
+  
+  private var appSection: some View {
+    Section("App") {
+      NavigationLink(destination: IconSelectorView()) {
+        Label {
+          Text("Icon selector")
+        } icon: {
+          Image(uiImage: .init(named: UIApplication.shared.alternateIconName ?? "AppIcon")!)
+            .resizable()
+            .frame(width: 25, height: 25)
+            .cornerRadius(4)
+        }
       }
     }
   }
@@ -68,6 +106,7 @@ struct SettingsTabs: View {
   
   private var signOutButton: some View {
     Button {
+      instanceData = nil
       accountData = nil
       appAccountsManager.delete(account: appAccountsManager.currentAccount)
     } label: {
@@ -91,6 +130,7 @@ struct SettingsTabs: View {
       let oauthToken = try await client.continueOauthFlow(url: url)
       appAccountsManager.add(account: AppAccount(server: client.server, oauthToken: oauthToken))
       await refreshAccountInfo()
+      await refreshInstanceInfo()
       signInInProgress = false
     } catch {
       signInInProgress = false
@@ -99,5 +139,9 @@ struct SettingsTabs: View {
   
   private func refreshAccountInfo() async {
     accountData = try? await client.get(endpoint: Accounts.verifyCredentials)
+  }
+  
+  private func refreshInstanceInfo() async {
+    instanceData = try? await client.get(endpoint: Instances.instance)
   }
 }

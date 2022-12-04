@@ -21,6 +21,7 @@
 		9FBFE63D292A715500C250E9 /* IceCubesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBFE63C292A715500C250E9 /* IceCubesApp.swift */; };
 		9FBFE641292A715600C250E9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FBFE640292A715600C250E9 /* Assets.xcassets */; };
 		9FBFE64E292A72BD00C250E9 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 9FBFE64D292A72BD00C250E9 /* Network */; };
+		9FE151A6293C90F900E9683D /* IconSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE151A5293C90F900E9683D /* IconSelectorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		9FBFE63C292A715500C250E9 /* IceCubesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceCubesApp.swift; sourceTree = "<group>"; };
 		9FBFE640292A715600C250E9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9FBFE642292A715600C250E9 /* IceCubesApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IceCubesApp.entitlements; sourceTree = "<group>"; };
+		9FE151A5293C90F900E9683D /* IconSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSelectorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,8 +84,8 @@
 		9FAE4AC9293783A200772766 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				9FE151A4293C90EA00E9683D /* Settings */,
 				9F398AB229360A4C00A889F2 /* TimelineTab.swift */,
-				9FAE4ACA293783B000772766 /* SettingsTab.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -135,6 +137,15 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9FE151A4293C90EA00E9683D /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				9FAE4ACA293783B000772766 /* SettingsTab.swift */,
+				9FE151A5293C90F900E9683D /* IconSelectorView.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,6 +229,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FE151A6293C90F900E9683D /* IconSelectorView.swift in Sources */,
 				9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */,
 				9FAE4AD32937A0C600772766 /* AppAccountsManager.swift in Sources */,
 				9F398AB329360A4C00A889F2 /* TimelineTab.swift in Sources */,
@@ -342,6 +354,7 @@
 		9FBFE649292A715600C250E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconAlternate1 AppIconAlternate2 AppIconAlternate3 AppIconAlternate4";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = IceCubesApp/IceCubesApp.entitlements;
@@ -381,6 +394,7 @@
 		9FBFE64A292A715600C250E9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconAlternate1 AppIconAlternate2 AppIconAlternate3 AppIconAlternate4";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = IceCubesApp/IceCubesApp.entitlements;
