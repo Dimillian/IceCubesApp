@@ -31,7 +31,7 @@ struct IconSelectorView: View {
               }
             } label: {
               ZStack(alignment: .bottomTrailing) {
-                Image(uiImage: .init(named: icon.rawValue)!)
+                Image(uiImage: .init(named: icon.rawValue) ?? .init())
                   .resizable()
                   .aspectRatio(contentMode: .fit)
                   .frame(minHeight: 125, maxHeight: 1024)

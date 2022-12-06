@@ -1,4 +1,4 @@
 # IceCubesApp
 A SwiftUI Mastodon client
 
-![Icon](IceCubesApp/Resources/Assets.xcassets/AppIcon.appiconset/icon.png?)
+![Icon](IceCubesApp/Assets.xcassets/AppIcon.appiconset/icon.png?)
