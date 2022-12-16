@@ -9,26 +9,45 @@ struct StatusRowView: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      HStack(alignment: .top) {
-        Button {
-          routeurPath.navigate(to: .accountDetail(id: status.account.id))
-        } label: {
-          accountView
-        }.buttonStyle(.plain)
-
-        Spacer()
-        Text(status.createdAtFormatted)
-          .font(.footnote)
-          .foregroundColor(.gray)
-      }
-      NavigationLink(value: RouteurDestinations.statusDetail(id: status.id)) {
-        Text(try! AttributedString(markdown: status.contentAsMarkdown))
-      }
+      reblogView
+      statusView
+      StatusActionsView(status: status)
+        .padding(.vertical, 8)
     }
   }
   
   @ViewBuilder
-  private var accountView: some View {
+  private var reblogView: some View {
+    if status.reblog != nil {
+      HStack(spacing: 2) {
+        Image(systemName:"arrow.left.arrow.right.circle")
+        Text("\(status.account.displayName) reblogged")
+      }
+      .font(.footnote)
+      .foregroundColor(.gray)
+      .fontWeight(.semibold)
+    }
+  }
+  
+  @ViewBuilder
+  private var statusView: some View {
+    if let status: AnyStatus = status.reblog ?? status {
+      Button {
+        routeurPath.navigate(to: .accountDetail(id: status.account.id))
+      } label: {
+        makeAccountView(status: status)
+      }.buttonStyle(.plain)
+      
+      Text(try! AttributedString(markdown: status.contentAsMarkdown))
+        .font(.body)
+        .onTapGesture {
+          routeurPath.navigate(to: .statusDetail(id: status.id))
+        }
+    }
+  }
+  
+  @ViewBuilder
+  private func makeAccountView(status: AnyStatus) -> some View {
     AsyncImage(
       url: status.account.avatar,
       content: { image in
@@ -45,9 +64,15 @@ struct StatusRowView: View {
     VStack(alignment: .leading) {
       Text(status.account.displayName)
         .font(.headline)
-      Text("@\(status.account.acct)")
-        .font(.footnote)
-        .foregroundColor(.gray)
+      HStack {
+        Text("@\(status.account.acct)")
+          .font(.footnote)
+          .foregroundColor(.gray)
+        Spacer()
+        Text(status.createdAtFormatted)
+          .font(.footnote)
+          .foregroundColor(.gray)
+      }
     }
   }
 }
