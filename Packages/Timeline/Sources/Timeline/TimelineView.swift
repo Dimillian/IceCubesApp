@@ -1,5 +1,7 @@
 import SwiftUI
 import Network
+import Models
+import Shimmer
 
 public struct TimelineView: View {
   @EnvironmentObject private var client: Client
@@ -12,7 +14,11 @@ public struct TimelineView: View {
     List {
       switch viewModel.state {
       case .loading:
-        loadingRow
+        ForEach(Status.placeholders()) { placeholder in
+          StatusRowView(status: placeholder)
+            .redacted(reason: .placeholder)
+            .shimmering()
+        }
       case let .error(error):
         Text(error.localizedDescription)
       case let .display(statuses, nextPageState):
@@ -33,7 +39,7 @@ public struct TimelineView: View {
       }
     }
     .listStyle(.plain)
-    .navigationTitle("\(viewModel.serverName)")
+    .navigationTitle(viewModel.timeline.rawValue)
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
       ToolbarItem(placement: .navigationBarTrailing) {

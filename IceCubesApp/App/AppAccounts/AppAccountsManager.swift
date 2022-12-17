@@ -14,7 +14,7 @@ class AppAccountsManager: ObservableObject {
     var defaultAccount = AppAccount(server: IceCubesApp.defaultServer, oauthToken: nil)
     do {
       let keychainAccounts = try AppAccount.retrieveAll()
-      defaultAccount = keychainAccounts.first ?? defaultAccount
+      defaultAccount = keychainAccounts.last ?? defaultAccount
     } catch {}
     currentAccount = defaultAccount
     currentClient = .init(server: defaultAccount.server, oauthToken: defaultAccount.oauthToken)
@@ -29,6 +29,7 @@ class AppAccountsManager: ObservableObject {
   
   func delete(account: AppAccount) {
     account.delete()
+    AppAccount.deleteAll()
     currentAccount = AppAccount(server: IceCubesApp.defaultServer, oauthToken: nil)
   }
 }

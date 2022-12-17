@@ -1,8 +1,10 @@
 import Foundation
 import SwiftUI
+import Models
 
 public enum RouteurDestinations: Hashable {
   case accountDetail(id: String)
+  case accountDetailWithAccount(account: Account)
   case statusDetail(id: String)
 }
 

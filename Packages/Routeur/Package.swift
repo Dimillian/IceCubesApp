@@ -13,11 +13,15 @@ let package = Package(
       name: "Routeur",
       targets: ["Routeur"]),
   ],
-  dependencies: [],
+  dependencies: [
+    .package(name: "Models", path: "../Models")
+  ],
   targets: [
     .target(
       name: "Routeur",
-      dependencies: []),
+      dependencies: [
+        .product(name: "Models", package: "Models"),
+      ]),
     .testTarget(
       name: "RouteurTests",
       dependencies: ["Routeur"]),

@@ -5,7 +5,7 @@ import KeychainSwift
 
 @main
 struct IceCubesApp: App {
-  public static let defaultServer = "mastodon.world"
+  public static let defaultServer = "mastodon.social"
   
   @StateObject private var appAccountsManager = AppAccountsManager()
   

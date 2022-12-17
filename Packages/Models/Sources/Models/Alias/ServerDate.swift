@@ -1,7 +1,8 @@
-import HTML2Markdown
 import Foundation
 
-extension AnyStatus {
+public typealias ServerDate = String
+
+extension ServerDate {
   private static var createdAtDateFormatter: DateFormatter {
     let dateFormatter = DateFormatter()
     dateFormatter.calendar = .init(identifier: .iso8601)
@@ -22,28 +23,20 @@ extension AnyStatus {
     return dateFormatter
   }
   
-  public var contentAsMarkdown: String {
-    do {
-      let dom = try HTMLParser().parse(html: content)
-      return dom.toMarkdown()
-    } catch {
-      return content
-    }
+  public var asDate: Date {
+    Self.createdAtDateFormatter.date(from: self)!
   }
   
-  public var createdAtDate: Date {
-    Self.createdAtDateFormatter.date(from: createdAt)!
-  }
-  
-  public var createdAtFormatted: String {
+  public var formatted: String {
     let calendar = Calendar(identifier: .gregorian)
-    if calendar.numberOfDaysBetween(createdAtDate, and: Date()) > 1 {
-      return Self.createdAtShortDateFormatted.string(from: createdAtDate)
+    if calendar.numberOfDaysBetween(asDate, and: Date()) > 1 {
+      return Self.createdAtShortDateFormatted.string(from: asDate)
     } else {
-      return Self.createdAtRelativeFormatter.localizedString(for: createdAtDate, relativeTo: Date())
+      return Self.createdAtRelativeFormatter.localizedString(for: asDate, relativeTo: Date())
     }
   }
 }
+
 
 extension Calendar {
   func numberOfDaysBetween(_ from: Date, and to: Date) -> Int {

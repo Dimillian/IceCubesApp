@@ -17,6 +17,7 @@ let package = Package(
     .package(name: "Network", path: "../Network"),
     .package(name: "Models", path: "../Models"),
     .package(name: "Routeur", path: "../Routeur"),
+    .package(url: "https://github.com/markiv/SwiftUI-Shimmer", exact: "1.1.0")
   ],
   targets: [
     .target(
@@ -24,7 +25,8 @@ let package = Package(
       dependencies: [
         .product(name: "Network", package: "Network"),
         .product(name: "Models", package: "Models"),
-        .product(name: "Routeur", package: "Routeur")
+        .product(name: "Routeur", package: "Routeur"),
+        .product(name: "Shimmer", package: "SwiftUI-Shimmer")
       ]),
     .testTarget(
       name: "TimelineTests",

@@ -17,6 +17,11 @@ class AccountDetailViewModel: ObservableObject {
     self.accountId = accountId
   }
   
+  init(account: Account) {
+    self.accountId = account.id
+    self.state = .data(account: account)
+  }
+  
   func fetchAccount() async {
     do {
       state = .data(account: try await client.get(endpoint: Accounts.accounts(id: accountId)))

@@ -3,6 +3,7 @@ import Models
 import Routeur
 
 struct StatusRowView: View {
+  @Environment(\.redactionReasons) private var reasons
   @EnvironmentObject private var routeurPath: RouterPath
   
   let status: Status
@@ -33,34 +34,45 @@ struct StatusRowView: View {
   private var statusView: some View {
     if let status: AnyStatus = status.reblog ?? status {
       Button {
-        routeurPath.navigate(to: .accountDetail(id: status.account.id))
+        routeurPath.navigate(to: .accountDetailWithAccount(account: status.account))
       } label: {
         makeAccountView(status: status)
       }.buttonStyle(.plain)
       
-      Text(try! AttributedString(markdown: status.contentAsMarkdown))
+      Text(try! AttributedString(markdown: status.content.asMarkdown))
         .font(.body)
         .onTapGesture {
           routeurPath.navigate(to: .statusDetail(id: status.id))
         }
+      
+      if !status.mediaAttachments.isEmpty {
+        StatusMediaPreviewView(attachements: status.mediaAttachments)
+          .padding(.vertical, 4)
+      }
     }
   }
   
   @ViewBuilder
   private func makeAccountView(status: AnyStatus) -> some View {
-    AsyncImage(
-      url: status.account.avatar,
-      content: { image in
-        image.resizable()
-          .aspectRatio(contentMode: .fit)
-          .cornerRadius(4)
-          .frame(maxWidth: 40, maxHeight: 40)
-      },
-      placeholder: {
-        ProgressView()
-          .frame(maxWidth: 40, maxHeight: 40)
-      }
-    )
+    if reasons == .placeholder {
+      RoundedRectangle(cornerRadius: 4)
+        .fill(.gray)
+        .frame(maxWidth: 40, maxHeight: 40)
+    } else {
+      AsyncImage(
+        url: status.account.avatar,
+        content: { image in
+          image.resizable()
+            .aspectRatio(contentMode: .fit)
+            .cornerRadius(4)
+            .frame(maxWidth: 40, maxHeight: 40)
+        },
+        placeholder: {
+          ProgressView()
+            .frame(maxWidth: 40, maxHeight: 40)
+        }
+      )
+    }
     VStack(alignment: .leading) {
       Text(status.account.displayName)
         .font(.headline)
@@ -69,7 +81,7 @@ struct StatusRowView: View {
           .font(.footnote)
           .foregroundColor(.gray)
         Spacer()
-        Text(status.createdAtFormatted)
+        Text(status.createdAt.formatted)
           .font(.footnote)
           .foregroundColor(.gray)
       }

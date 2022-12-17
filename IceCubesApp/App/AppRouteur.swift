@@ -9,6 +9,8 @@ extension View {
       switch destination {
       case let .accountDetail(id):
         AccountDetailView(accountId: id)
+      case let .accountDetailWithAccount(account):
+        AccountDetailView(account: account)
       case let .statusDetail(id):
         StatusDetailView(statusId: id)
       }
