@@ -31,7 +31,7 @@ public struct StatusMediaPreviewView: View {
       content: { image in
         image.resizable()
           .aspectRatio(contentMode: .fill)
-          .frame(maxHeight: 200)
+          .frame(maxHeight: attachements.count > 2 ? 100 : 200)
           .clipped()
           .cornerRadius(4)
       },

@@ -5,11 +5,11 @@ import Models
 @MainActor
 class TimelineViewModel: ObservableObject {
   enum State {
-    enum PadingState {
+    enum PagingState {
       case hasNextPage, loadingNextPage
     }
     case loading
-    case display(statuses: [Status], nextPageState: State.PadingState)
+    case display(statuses: [Status], nextPageState: State.PagingState)
     case error(error: Error)
   }
   

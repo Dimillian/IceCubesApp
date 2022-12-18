@@ -10,6 +10,7 @@
 		9F24EEB829360C330042359D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F24EEB729360C330042359D /* Preview Assets.xcassets */; };
 		9F24EEBB293619210042359D /* Routeur in Frameworks */ = {isa = PBXBuildFile; productRef = 9F24EEBA293619210042359D /* Routeur */; };
 		9F295540292B6C3400E0E81B /* Timeline in Frameworks */ = {isa = PBXBuildFile; productRef = 9F29553F292B6C3400E0E81B /* Timeline */; };
+		9F35DB44294F9A7D00B3281A /* Status in Frameworks */ = {isa = PBXBuildFile; productRef = 9F35DB43294F9A7D00B3281A /* Status */; };
 		9F398AA62935FE8A00A889F2 /* AppRouteur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F398AA52935FE8A00A889F2 /* AppRouteur.swift */; };
 		9F398AA92935FFDB00A889F2 /* Account in Frameworks */ = {isa = PBXBuildFile; productRef = 9F398AA82935FFDB00A889F2 /* Account */; };
 		9F398AAB2935FFDB00A889F2 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 9F398AAA2935FFDB00A889F2 /* Models */; };
@@ -29,6 +30,8 @@
 		9F24EEB92936185B0042359D /* Routeur */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Routeur; path = Packages/Routeur; sourceTree = "<group>"; };
 		9F29553D292B67B600E0E81B /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Network; path = Packages/Network; sourceTree = "<group>"; };
 		9F29553E292B6AF600E0E81B /* Timeline */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Timeline; path = Packages/Timeline; sourceTree = "<group>"; };
+		9F35DB42294F9A2900B3281A /* Status */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Status; path = Packages/Status; sourceTree = "<group>"; };
+		9F35DB45294FA04C00B3281A /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DesignSystem; path = Packages/DesignSystem; sourceTree = "<group>"; };
 		9F398AA32935F90100A889F2 /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Models; path = Packages/Models; sourceTree = "<group>"; };
 		9F398AA52935FE8A00A889F2 /* AppRouteur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouteur.swift; sourceTree = "<group>"; };
 		9F398AAC2936005300A889F2 /* Account */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Account; path = Packages/Account; sourceTree = "<group>"; };
@@ -53,6 +56,7 @@
 				9F398AA92935FFDB00A889F2 /* Account in Frameworks */,
 				9FBFE64E292A72BD00C250E9 /* Network in Frameworks */,
 				9F398AAB2935FFDB00A889F2 /* Models in Frameworks */,
+				9F35DB44294F9A7D00B3281A /* Status in Frameworks */,
 				9F24EEBB293619210042359D /* Routeur in Frameworks */,
 				9F295540292B6C3400E0E81B /* Timeline in Frameworks */,
 			);
@@ -105,10 +109,12 @@
 				9FBFE63A292A715500C250E9 /* Products */,
 				9FBFE64C292A72BD00C250E9 /* Frameworks */,
 				9F398AAC2936005300A889F2 /* Account */,
+				9F35DB45294FA04C00B3281A /* DesignSystem */,
 				9F398AA32935F90100A889F2 /* Models */,
+				9F29553D292B67B600E0E81B /* Network */,
 				9F29553E292B6AF600E0E81B /* Timeline */,
 				9F24EEB92936185B0042359D /* Routeur */,
-				9F29553D292B67B600E0E81B /* Network */,
+				9F35DB42294F9A2900B3281A /* Status */,
 			);
 			sourceTree = "<group>";
 		};
@@ -171,6 +177,7 @@
 				9F398AAA2935FFDB00A889F2 /* Models */,
 				9F24EEBA293619210042359D /* Routeur */,
 				9FAE4ACD29379A5A00772766 /* KeychainSwift */,
+				9F35DB43294F9A7D00B3281A /* Status */,
 			);
 			productName = IceCubesApp;
 			productReference = 9FBFE639292A715500C250E9 /* IceCubesApp.app */;
@@ -360,7 +367,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = IceCubesApp/IceCubesApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 150;
 				DEVELOPMENT_ASSET_PATHS = "\"IceCubesApp/Resources\"";
 				DEVELOPMENT_TEAM = Z6P74P6T99;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -381,7 +388,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thomasricouard.IceCubesApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -401,7 +408,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = IceCubesApp/IceCubesApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 150;
 				DEVELOPMENT_ASSET_PATHS = "\"IceCubesApp/Resources\"";
 				DEVELOPMENT_TEAM = Z6P74P6T99;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -422,7 +429,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 0.0.1;
+				MARKETING_VERSION = 0.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thomasricouard.IceCubesApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -475,6 +482,10 @@
 		9F29553F292B6C3400E0E81B /* Timeline */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Timeline;
+		};
+		9F35DB43294F9A7D00B3281A /* Status */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Status;
 		};
 		9F398AA82935FFDB00A889F2 /* Account */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -2,6 +2,7 @@ import SwiftUI
 import Network
 import Models
 import Shimmer
+import Status
 
 public struct TimelineView: View {
   @EnvironmentObject private var client: Client

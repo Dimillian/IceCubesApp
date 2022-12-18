@@ -4,35 +4,28 @@
 import PackageDescription
 
 let package = Package(
-  name: "Timeline",
+  name: "Status",
   platforms: [
     .iOS(.v16),
   ],
   products: [
     .library(
-      name: "Timeline",
-      targets: ["Timeline"]),
+      name: "Status",
+      targets: ["Status"]),
   ],
   dependencies: [
-    .package(name: "Network", path: "../Network"),
     .package(name: "Models", path: "../Models"),
     .package(name: "Routeur", path: "../Routeur"),
-    .package(name: "Status", path: "../Status"),
-    .package(url: "https://github.com/markiv/SwiftUI-Shimmer", exact: "1.1.0")
+    .package(name: "DesignSystem", path: "../DesignSystem"),
   ],
   targets: [
     .target(
-      name: "Timeline",
+      name: "Status",
       dependencies: [
-        .product(name: "Network", package: "Network"),
         .product(name: "Models", package: "Models"),
         .product(name: "Routeur", package: "Routeur"),
-        .product(name: "Status", package: "Status"),
-        .product(name: "Shimmer", package: "SwiftUI-Shimmer")
+        .product(name: "DesignSystem", package: "DesignSystem"),
       ]),
-    .testTarget(
-      name: "TimelineTests",
-      dependencies: ["Timeline"]),
   ]
 )
 

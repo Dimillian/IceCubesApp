@@ -2,13 +2,17 @@ import SwiftUI
 import Models
 import Routeur
 
-struct StatusRowView: View {
+public struct StatusRowView: View {
   @Environment(\.redactionReasons) private var reasons
   @EnvironmentObject private var routeurPath: RouterPath
   
-  let status: Status
+  private let status: Status
+  
+  public init(status: Status) {
+    self.status = status
+  }
 
-  var body: some View {
+  public var body: some View {
     VStack(alignment: .leading) {
       reblogView
       statusView

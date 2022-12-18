@@ -1,5 +1,6 @@
 import SwiftUI
 import Models
+import DesignSystem
 
 struct AccountDetailHeaderView: View {
   @Environment(\.redactionReasons) private var reasons
@@ -70,17 +71,17 @@ struct AccountDetailHeaderView: View {
         .font(.body)
         .padding(.top, 8)
     }
-    .padding(.horizontal, 16)
+    .padding(.horizontal, DS.Constants.layoutPadding)
     .offset(y: -40)
   }
   
   private func makeCustomInfoLabel(title: String, count: Int) -> some View {
     VStack {
+      Text("\(count)")
+        .font(.headline)
       Text(title)
         .font(.footnote)
         .foregroundColor(.gray)
-      Text("\(count)")
-        .font(.headline)
     }
   }
 }

@@ -16,8 +16,10 @@ public enum Timelines: Endpoint {
   public func queryItems() -> [URLQueryItem]? {
     switch self {
     case .pub(let sinceId):
+      guard let sinceId else { return nil }
       return [.init(name: "max_id", value: sinceId)]
     case .home(let sinceId):
+      guard let sinceId else { return nil }
       return [.init(name: "max_id", value: sinceId)]
     }
   }

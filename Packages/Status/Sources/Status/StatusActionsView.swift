@@ -30,6 +30,6 @@ struct StatusActionsView: View {
       } label: {
         Image(systemName: "square.and.arrow.up")
       }
-    }
+    }.tint(.black)
   }
 }
