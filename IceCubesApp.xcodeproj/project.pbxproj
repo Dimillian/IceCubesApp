@@ -11,6 +11,8 @@
 		9F24EEBB293619210042359D /* Routeur in Frameworks */ = {isa = PBXBuildFile; productRef = 9F24EEBA293619210042359D /* Routeur */; };
 		9F295540292B6C3400E0E81B /* Timeline in Frameworks */ = {isa = PBXBuildFile; productRef = 9F29553F292B6C3400E0E81B /* Timeline */; };
 		9F35DB44294F9A7D00B3281A /* Status in Frameworks */ = {isa = PBXBuildFile; productRef = 9F35DB43294F9A7D00B3281A /* Status */; };
+		9F35DB4729506F6600B3281A /* NotificationTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F35DB4629506F6600B3281A /* NotificationTab.swift */; };
+		9F35DB4A29506FA100B3281A /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 9F35DB4929506FA100B3281A /* Notifications */; };
 		9F398AA62935FE8A00A889F2 /* AppRouteur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F398AA52935FE8A00A889F2 /* AppRouteur.swift */; };
 		9F398AA92935FFDB00A889F2 /* Account in Frameworks */ = {isa = PBXBuildFile; productRef = 9F398AA82935FFDB00A889F2 /* Account */; };
 		9F398AAB2935FFDB00A889F2 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 9F398AAA2935FFDB00A889F2 /* Models */; };
@@ -32,6 +34,8 @@
 		9F29553E292B6AF600E0E81B /* Timeline */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Timeline; path = Packages/Timeline; sourceTree = "<group>"; };
 		9F35DB42294F9A2900B3281A /* Status */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Status; path = Packages/Status; sourceTree = "<group>"; };
 		9F35DB45294FA04C00B3281A /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DesignSystem; path = Packages/DesignSystem; sourceTree = "<group>"; };
+		9F35DB4629506F6600B3281A /* NotificationTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTab.swift; sourceTree = "<group>"; };
+		9F35DB4829506F7F00B3281A /* Notifications */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Notifications; path = Packages/Notifications; sourceTree = "<group>"; };
 		9F398AA32935F90100A889F2 /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Models; path = Packages/Models; sourceTree = "<group>"; };
 		9F398AA52935FE8A00A889F2 /* AppRouteur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouteur.swift; sourceTree = "<group>"; };
 		9F398AAC2936005300A889F2 /* Account */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Account; path = Packages/Account; sourceTree = "<group>"; };
@@ -59,6 +63,7 @@
 				9F35DB44294F9A7D00B3281A /* Status in Frameworks */,
 				9F24EEBB293619210042359D /* Routeur in Frameworks */,
 				9F295540292B6C3400E0E81B /* Timeline in Frameworks */,
+				9F35DB4A29506FA100B3281A /* Notifications in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +94,7 @@
 			children = (
 				9FE151A4293C90EA00E9683D /* Settings */,
 				9F398AB229360A4C00A889F2 /* TimelineTab.swift */,
+				9F35DB4629506F6600B3281A /* NotificationTab.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -112,6 +118,7 @@
 				9F35DB45294FA04C00B3281A /* DesignSystem */,
 				9F398AA32935F90100A889F2 /* Models */,
 				9F29553D292B67B600E0E81B /* Network */,
+				9F35DB4829506F7F00B3281A /* Notifications */,
 				9F29553E292B6AF600E0E81B /* Timeline */,
 				9F24EEB92936185B0042359D /* Routeur */,
 				9F35DB42294F9A2900B3281A /* Status */,
@@ -178,6 +185,7 @@
 				9F24EEBA293619210042359D /* Routeur */,
 				9FAE4ACD29379A5A00772766 /* KeychainSwift */,
 				9F35DB43294F9A7D00B3281A /* Status */,
+				9F35DB4929506FA100B3281A /* Notifications */,
 			);
 			productName = IceCubesApp;
 			productReference = 9FBFE639292A715500C250E9 /* IceCubesApp.app */;
@@ -242,6 +250,7 @@
 				9F398AB329360A4C00A889F2 /* TimelineTab.swift in Sources */,
 				9F398AA62935FE8A00A889F2 /* AppRouteur.swift in Sources */,
 				9FBFE63D292A715500C250E9 /* IceCubesApp.swift in Sources */,
+				9F35DB4729506F6600B3281A /* NotificationTab.swift in Sources */,
 				9FAE4AD129379AD600772766 /* AppAccount.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -486,6 +495,10 @@
 		9F35DB43294F9A7D00B3281A /* Status */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Status;
+		};
+		9F35DB4929506FA100B3281A /* Notifications */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Notifications;
 		};
 		9F398AA82935FFDB00A889F2 /* Account */ = {
 			isa = XCSwiftPackageProductDependency;

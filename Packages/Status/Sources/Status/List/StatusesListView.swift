@@ -3,22 +3,6 @@ import Models
 import Shimmer
 import DesignSystem
 
-public enum StatusesState {
-  public enum PagingState {
-    case hasNextPage, loadingNextPage
-  }
-  case loading
-  case display(statuses: [Status], nextPageState: StatusesState.PagingState)
-  case error(error: Error)
-}
-
-@MainActor
-public protocol StatusesFetcher: ObservableObject {
-  var statusesState: StatusesState { get }
-  func fetchStatuses() async
-  func fetchNextPage() async
-}
-
 public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
   @ObservedObject private var fetcher: Fetcher
   
@@ -35,7 +19,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
             .redacted(reason: .placeholder)
             .shimmering()
           Divider()
-            .padding(.bottom, DS.Constants.layoutPadding)
+            .padding(.vertical, DS.Constants.dividerPadding)
         }
       case let .error(error):
         Text(error.localizedDescription)
@@ -43,7 +27,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
         ForEach(statuses) { status in
           StatusRowView(status: status)
           Divider()
-            .padding(.bottom, DS.Constants.layoutPadding)
+            .padding(.vertical, DS.Constants.dividerPadding)
         }
         
         switch nextPageState {
@@ -59,7 +43,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
         }
       }
     }
-    .padding(.horizontal, 16)
+    .padding(.horizontal, DS.Constants.layoutPadding)
   }
   
   private var loadingRow: some View {

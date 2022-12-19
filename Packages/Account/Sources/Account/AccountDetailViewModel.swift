@@ -6,7 +6,7 @@ import Status
 @MainActor
 class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   let accountId: String
-  var client: Client = .init(server: "")
+  var client: Client?
   
   enum State {
     case loading, data(account: Account), error(error: Error)
@@ -28,6 +28,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   }
   
   func fetchAccount() async {
+    guard let client else { return }
     do {
       state = .data(account: try await client.get(endpoint: Accounts.accounts(id: accountId)))
     } catch {
@@ -36,6 +37,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   }
   
   func fetchStatuses() async {
+    guard let client else { return }
     do {
       statusesState = .loading
       statuses = try await client.get(endpoint: Accounts.statuses(id: accountId, sinceId: nil))
@@ -46,6 +48,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   }
   
   func fetchNextPage() async {
+    guard let client else { return }
     do {
       guard let lastId = statuses.last?.id else { return }
       statusesState = .display(statuses: statuses, nextPageState: .loadingNextPage)

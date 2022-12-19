@@ -1,15 +1,18 @@
 import SwiftUI
 import Models
 import Routeur
+import DesignSystem
 
 public struct StatusRowView: View {
   @Environment(\.redactionReasons) private var reasons
   @EnvironmentObject private var routeurPath: RouterPath
   
   private let status: Status
+  private let isEmbed: Bool
   
-  public init(status: Status) {
+  public init(status: Status, isEmbed: Bool = false) {
     self.status = status
+    self.isEmbed = isEmbed
   }
 
   public var body: some View {
@@ -37,11 +40,13 @@ public struct StatusRowView: View {
   @ViewBuilder
   private var statusView: some View {
     if let status: AnyStatus = status.reblog ?? status {
-      Button {
-        routeurPath.navigate(to: .accountDetailWithAccount(account: status.account))
-      } label: {
-        makeAccountView(status: status)
-      }.buttonStyle(.plain)
+      if !isEmbed {
+        Button {
+          routeurPath.navigate(to: .accountDetailWithAccount(account: status.account))
+        } label: {
+          makeAccountView(status: status)
+        }.buttonStyle(.plain)
+      }
       
       Text(try! AttributedString(markdown: status.content.asMarkdown))
         .font(.body)
@@ -58,25 +63,7 @@ public struct StatusRowView: View {
   
   @ViewBuilder
   private func makeAccountView(status: AnyStatus) -> some View {
-    if reasons == .placeholder {
-      RoundedRectangle(cornerRadius: 4)
-        .fill(.gray)
-        .frame(maxWidth: 40, maxHeight: 40)
-    } else {
-      AsyncImage(
-        url: status.account.avatar,
-        content: { image in
-          image.resizable()
-            .aspectRatio(contentMode: .fit)
-            .cornerRadius(4)
-            .frame(maxWidth: 40, maxHeight: 40)
-        },
-        placeholder: {
-          ProgressView()
-            .frame(maxWidth: 40, maxHeight: 40)
-        }
-      )
-    }
+    AvatarView(url: status.account.avatar)
     VStack(alignment: .leading) {
       Text(status.account.displayName)
         .font(.headline)

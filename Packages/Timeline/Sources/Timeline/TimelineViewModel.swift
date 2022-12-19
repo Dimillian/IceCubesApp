@@ -17,9 +17,9 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
     }
   }
   
-  var client: Client = .init(server: "") {
+  var client: Client? {
     didSet {
-      timeline = client.isAuth ? .home : .pub
+      timeline = client?.isAuth == true ? .home : .pub
     }
   }
   
@@ -37,10 +37,11 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
   }
   
   var serverName: String {
-    client.server
+    client?.server ?? "Error"
   }
     
   func fetchStatuses() async {
+    guard let client else { return }
     do {
       statusesState = .loading
       statuses = try await client.get(endpoint: timeline.endpoint(sinceId: nil))
@@ -51,6 +52,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
   }
   
   func fetchNextPage() async {
+    guard let client else { return }
     do {
       guard let lastId = statuses.last?.id else { return }
       statusesState = .display(statuses: statuses, nextPageState: .loadingNextPage)

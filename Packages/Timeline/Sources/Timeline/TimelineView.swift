@@ -3,6 +3,7 @@ import Network
 import Models
 import Shimmer
 import Status
+import DesignSystem
 
 public struct TimelineView: View {
   @EnvironmentObject private var client: Client
@@ -16,6 +17,7 @@ public struct TimelineView: View {
       LazyVStack {
         StatusesListView(fetcher: viewModel)
       }
+      .padding(.top, DS.Constants.layoutPadding)
     }
     .navigationTitle(viewModel.timeline.rawValue)
     .navigationBarTitleDisplayMode(.inline)
