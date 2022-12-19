@@ -31,23 +31,8 @@ public struct StatusMediaPreviewView: View {
         }
       }
     }
-    .sheet(item: $selectedMediaSheetManager.selectedAttachement) { attachement in
-      VStack {
-        Spacer()
-        AsyncImage(
-          url: attachement.url,
-          content: { image in
-            image
-              .resizable()
-              .aspectRatio(contentMode: .fit)
-          },
-          placeholder: {
-            ProgressView()
-              .frame(maxWidth: 80, maxHeight: 80)
-          }
-        )
-        Spacer()
-      }
+    .sheet(item: $selectedMediaSheetManager.selectedAttachement) { selectedAttachement in
+      makeSelectedAttachementsSheet(selectedAttachement: selectedAttachement)
     }
   }
   
@@ -84,5 +69,33 @@ public struct StatusMediaPreviewView: View {
           .frame(maxHeight: attachements.count > 2 ? 100 : 200)
       }
     }
+  }
+  
+  
+  private func makeSelectedAttachementsSheet(selectedAttachement: MediaAttachement) -> some View {
+    var attachements = attachements
+    attachements.removeAll(where: { $0.id == selectedAttachement.id })
+    attachements.insert(selectedAttachement, at: 0)
+    return TabView {
+      ForEach(attachements) { attachement in
+        VStack {
+          Spacer()
+          AsyncImage(
+            url: attachement.url,
+            content: { image in
+              image
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+            },
+            placeholder: {
+              ProgressView()
+                .frame(maxWidth: 80, maxHeight: 80)
+            }
+          )
+          Spacer()
+        }
+      }
+    }
+    .tabViewStyle(.page(indexDisplayMode: .always))
   }
 }
