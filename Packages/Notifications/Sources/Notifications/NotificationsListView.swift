@@ -50,6 +50,9 @@ public struct NotificationsListView: View {
         await viewModel.fetchNotifications()
       }
     }
+    .refreshable {
+      await viewModel.fetchNotifications()
+    }
     .navigationTitle(Text("Notifications"))
     .navigationBarTitleDisplayMode(.inline)
   }

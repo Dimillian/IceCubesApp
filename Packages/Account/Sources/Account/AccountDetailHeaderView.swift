@@ -53,7 +53,7 @@ struct AccountDetailHeaderView: View {
       Spacer()
       Group {
         makeCustomInfoLabel(title: "Posts", count: account.statusesCount)
-        makeCustomInfoLabel(title: "Following", count: account.followersCount)
+        makeCustomInfoLabel(title: "Following", count: account.followingCount)
         makeCustomInfoLabel(title: "Followers", count: account.followersCount)
       }.offset(y: 20)
     }
