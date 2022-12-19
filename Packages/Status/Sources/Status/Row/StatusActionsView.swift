@@ -5,31 +5,54 @@ import Routeur
 struct StatusActionsView: View {
   let status: Status
   
+  enum Actions: CaseIterable {
+    case respond, boost, favourite, share
+    
+    var iconName: String {
+      switch self {
+      case .respond:
+        return "bubble.right"
+      case .boost:
+        return "arrow.left.arrow.right.circle"
+      case .favourite:
+        return "star"
+      case .share:
+        return "square.and.arrow.up"
+      }
+    }
+    
+    func count(status: Status) -> Int? {
+      switch self {
+      case .respond:
+        return status.repliesCount
+      case .favourite:
+        return status.favouritesCount
+      case .boost:
+        return status.reblogsCount
+      case .share:
+        return nil
+      }
+    }
+  }
+  
   var body: some View {
     HStack {
-      Button {
-        
-      } label: {
-        Image(systemName: "bubble.right")
+      ForEach(Actions.allCases, id: \.self) { action in
+        Button {
+          
+        } label: {
+          HStack(spacing: 2) {
+            Image(systemName: action.iconName)
+            if let count = action.count(status: status) {
+              Text("\(count)")
+                .font(.footnote)
+            }
+          }
+        }
+        if action != .share {
+          Spacer()
+        }
       }
-      Spacer()
-      Button {
-        
-      } label: {
-        Image(systemName: "arrow.left.arrow.right.circle")
-      }
-      Spacer()
-      Button {
-        
-      } label: {
-        Image(systemName: "star")
-      }
-      Spacer()
-      Button {
-        
-      } label: {
-        Image(systemName: "square.and.arrow.up")
-      }
-    }.tint(.black)
+    }.tint(.gray)
   }
 }

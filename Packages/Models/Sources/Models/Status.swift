@@ -7,6 +7,9 @@ public protocol AnyStatus {
   var createdAt: String { get }
   var mediaAttachments: [MediaAttachement] { get }
   var mentions: [Mention] { get }
+  var repliesCount: Int { get }
+  var reblogsCount: Int { get }
+  var favouritesCount: Int { get }
 }
 
 public struct Status: AnyStatus, Codable, Identifiable {
@@ -17,6 +20,9 @@ public struct Status: AnyStatus, Codable, Identifiable {
   public let reblog: ReblogStatus?
   public let mediaAttachments: [MediaAttachement]
   public let mentions: [Mention]
+  public let repliesCount: Int
+  public let reblogsCount: Int
+  public let favouritesCount: Int
   
   public static func placeholder() -> Status {
     .init(id: UUID().uuidString,
@@ -25,7 +31,10 @@ public struct Status: AnyStatus, Codable, Identifiable {
           createdAt: "2022-12-16T10:20:54.000Z",
           reblog: nil,
           mediaAttachments: [],
-          mentions: [])
+          mentions: [],
+          repliesCount: 0,
+          reblogsCount: 0,
+          favouritesCount: 0)
   }
   
   public static func placeholders() -> [Status] {
@@ -40,4 +49,7 @@ public struct ReblogStatus: AnyStatus, Codable, Identifiable {
   public let createdAt: String
   public let mediaAttachments: [MediaAttachement]
   public let mentions: [Mention]
+  public let repliesCount: Int
+  public let reblogsCount: Int
+  public let favouritesCount: Int
 }
