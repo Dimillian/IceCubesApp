@@ -21,8 +21,7 @@ public struct AccountDetailView: View {
     ScrollView {
       LazyVStack {
         headerView
-        statusesView
-          .padding(.horizontal, 16)
+        StatusesListView(fetcher: viewModel)
       }
     }
     .edgesIgnoringSafeArea(.top)
@@ -45,47 +44,6 @@ public struct AccountDetailView: View {
       Text("Error: \(error.localizedDescription)")
     }
     
-  }
-  
-  @ViewBuilder
-  private var statusesView: some View {
-    switch viewModel.statusesState {
-    case .loading:
-      ForEach(Status.placeholders()) { status in
-        StatusRowView(status: status)
-          .redacted(reason: .placeholder)
-          .shimmering()
-        Divider()
-      }
-    case let .error(error):
-      Text(error.localizedDescription)
-    case let .display(statuses, nextPageState):
-      ForEach(statuses) { status in
-        StatusRowView(status: status)
-        Divider()
-          .padding(.bottom, DS.Constants.layoutPadding)
-      }
-      
-      switch nextPageState {
-      case .hasNextPage:
-        loadingRow
-          .onAppear {
-            Task {
-              await viewModel.loadNextPage()
-            }
-          }
-      case .loadingNextPage:
-        loadingRow
-      }
-    }
-  }
-  
-  private var loadingRow: some View {
-    HStack {
-      Spacer()
-      ProgressView()
-      Spacer()
-    }
   }
 }
 

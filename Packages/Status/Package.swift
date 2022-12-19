@@ -17,6 +17,7 @@ let package = Package(
     .package(name: "Models", path: "../Models"),
     .package(name: "Routeur", path: "../Routeur"),
     .package(name: "DesignSystem", path: "../DesignSystem"),
+    .package(url: "https://github.com/markiv/SwiftUI-Shimmer", exact: "1.1.0")
   ],
   targets: [
     .target(
@@ -25,6 +26,7 @@ let package = Package(
         .product(name: "Models", package: "Models"),
         .product(name: "Routeur", package: "Routeur"),
         .product(name: "DesignSystem", package: "DesignSystem"),
+        .product(name: "Shimmer", package: "SwiftUI-Shimmer")
       ]),
   ]
 )

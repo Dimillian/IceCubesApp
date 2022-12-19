@@ -1,18 +1,10 @@
 import SwiftUI
 import Network
 import Models
+import Status
 
 @MainActor
-class TimelineViewModel: ObservableObject {
-  enum State {
-    enum PagingState {
-      case hasNextPage, loadingNextPage
-    }
-    case loading
-    case display(statuses: [Status], nextPageState: State.PagingState)
-    case error(error: Error)
-  }
-  
+class TimelineViewModel: ObservableObject, StatusesFetcher {
   enum TimelineFilter: String, CaseIterable {
     case pub = "Public"
     case home = "Home"
@@ -33,12 +25,12 @@ class TimelineViewModel: ObservableObject {
   
   private var statuses: [Status] = []
   
-  @Published var state: State = .loading
+  @Published var statusesState: StatusesState = .loading
   @Published var timeline: TimelineFilter = .pub {
     didSet {
       if oldValue != timeline {
         Task {
-          await refreshTimeline()
+          await fetchStatuses()
         }
       }
     }
@@ -48,25 +40,25 @@ class TimelineViewModel: ObservableObject {
     client.server
   }
     
-  func refreshTimeline() async {
+  func fetchStatuses() async {
     do {
-      state = .loading
+      statusesState = .loading
       statuses = try await client.get(endpoint: timeline.endpoint(sinceId: nil))
-      state = .display(statuses: statuses, nextPageState: .hasNextPage)
+      statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
     } catch {
-      state = .error(error: error)
+      statusesState = .error(error: error)
     }
   }
   
-  func loadNextPage() async {
+  func fetchNextPage() async {
     do {
       guard let lastId = statuses.last?.id else { return }
-      state = .display(statuses: statuses, nextPageState: .loadingNextPage)
+      statusesState = .display(statuses: statuses, nextPageState: .loadingNextPage)
       let newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: lastId))
       statuses.append(contentsOf: newStatuses)
-      state = .display(statuses: statuses, nextPageState: .hasNextPage)
+      statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
     } catch {
-      state = .error(error: error)
+      statusesState = .error(error: error)
     }
   }
 }

@@ -1,24 +1,17 @@
 import SwiftUI
 import Network
 import Models
+import Status
 
 @MainActor
-class AccountDetailViewModel: ObservableObject {
+class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   let accountId: String
   var client: Client = .init(server: "")
   
   enum State {
     case loading, data(account: Account), error(error: Error)
   }
-  
-  enum StatusesState {
-    enum PagingState {
-      case hasNextPage, loadingNextPage
-    }
-    case loading
-    case display(statuses: [Status], nextPageState: StatusesState.PagingState)
-    case error(error: Error)
-  }
+
   
   @Published var state: State = .loading
   @Published var statusesState: StatusesState = .loading
@@ -52,7 +45,7 @@ class AccountDetailViewModel: ObservableObject {
     }
   }
   
-  func loadNextPage() async {
+  func fetchNextPage() async {
     do {
       guard let lastId = statuses.last?.id else { return }
       statusesState = .display(statuses: statuses, nextPageState: .loadingNextPage)

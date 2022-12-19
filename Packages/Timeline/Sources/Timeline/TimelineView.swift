@@ -12,34 +12,11 @@ public struct TimelineView: View {
   public init() {}
   
   public var body: some View {
-    List {
-      switch viewModel.state {
-      case .loading:
-        ForEach(Status.placeholders()) { placeholder in
-          StatusRowView(status: placeholder)
-            .redacted(reason: .placeholder)
-            .shimmering()
-        }
-      case let .error(error):
-        Text(error.localizedDescription)
-      case let .display(statuses, nextPageState):
-        ForEach(statuses) { status in
-          StatusRowView(status: status)
-        }
-        switch nextPageState {
-        case .hasNextPage:
-          loadingRow
-            .onAppear {
-              Task {
-                await viewModel.loadNextPage()
-              }
-            }
-        case .loadingNextPage:
-          loadingRow
-        }
+    ScrollView {
+      LazyVStack {
+        StatusesListView(fetcher: viewModel)
       }
     }
-    .listStyle(.plain)
     .navigationTitle(viewModel.timeline.rawValue)
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
@@ -50,22 +27,15 @@ public struct TimelineView: View {
     .task {
       viewModel.client = client
       if !didAppear {
-        await viewModel.refreshTimeline()
+        await viewModel.fetchStatuses()
         didAppear = true
       }
     }
     .refreshable {
-      await viewModel.refreshTimeline()
+      await viewModel.fetchStatuses()
     }
   }
   
-  private var loadingRow: some View {
-    HStack {
-      Spacer()
-      ProgressView()
-      Spacer()
-    }
-  }
   
   private var timelineFilterButton: some View {
     Menu {
