@@ -10,8 +10,15 @@ public struct MediaAttachement: Codable, Identifiable {
     public let y: Float?
   }
   
+  public enum SupportedType: String {
+    case image, gifv
+  }
+  
   public let id: String
   public let type: String
+  public var supportedType: SupportedType? {
+    SupportedType(rawValue: type)
+  }
   public let url: URL
   public let previewUrl: URL
   public let description: String?

@@ -1,5 +1,6 @@
 import SwiftUI
 import Models
+import AVKit
 
 public struct StatusMediaPreviewView: View {
   public let attachements: [MediaAttachement]
@@ -8,37 +9,46 @@ public struct StatusMediaPreviewView: View {
     VStack {
       HStack {
         if let firstAttachement = attachements.first {
-          makePreviewImage(attachement: firstAttachement)
+          makePreview(attachement: firstAttachement)
         }
         if attachements.count > 1, let secondAttachement = attachements[1] {
-          makePreviewImage(attachement: secondAttachement)
+          makePreview(attachement: secondAttachement)
         }
       }
       HStack {
         if attachements.count > 2, let secondAttachement = attachements[2] {
-          makePreviewImage(attachement: secondAttachement)
+          makePreview(attachement: secondAttachement)
         }
         if attachements.count > 3, let secondAttachement = attachements[3] {
-          makePreviewImage(attachement: secondAttachement)
+          makePreview(attachement: secondAttachement)
         }
       }
     }
   }
   
-  private func makePreviewImage(attachement: MediaAttachement) -> some View {
-    AsyncImage(
-      url: attachement.url,
-      content: { image in
-        image.resizable()
-          .aspectRatio(contentMode: .fill)
+  @ViewBuilder
+  private func makePreview(attachement: MediaAttachement) -> some View {
+    if let type = attachement.supportedType {
+      switch type {
+      case .image:
+        AsyncImage(
+          url: attachement.url,
+          content: { image in
+            image.resizable()
+              .aspectRatio(contentMode: .fit)
+              .frame(maxHeight: attachements.count > 2 ? 100 : 200)
+              .clipped()
+              .cornerRadius(4)
+          },
+          placeholder: {
+            ProgressView()
+              .frame(maxWidth: 80, maxHeight: 80)
+          }
+        )
+      case .gifv:
+        VideoPlayer(player: AVPlayer(url: attachement.url))
           .frame(maxHeight: attachements.count > 2 ? 100 : 200)
-          .clipped()
-          .cornerRadius(4)
-      },
-      placeholder: {
-        ProgressView()
-          .frame(maxWidth: 80, maxHeight: 80)
       }
-    )
+    }
   }
 }
