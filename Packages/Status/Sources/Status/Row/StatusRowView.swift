@@ -2,9 +2,11 @@ import SwiftUI
 import Models
 import Routeur
 import DesignSystem
+import Network
 
 public struct StatusRowView: View {
   @Environment(\.redactionReasons) private var reasons
+  @EnvironmentObject private var client: Client
   @EnvironmentObject private var routeurPath: RouterPath
   
   private let status: Status
@@ -48,11 +50,14 @@ public struct StatusRowView: View {
         }.buttonStyle(.plain)
       }
       
-      Text(try! AttributedString(markdown: status.content.asMarkdown))
+      Text(status.content.asSafeAttributedString)
         .font(.body)
         .onTapGesture {
           routeurPath.navigate(to: .statusDetail(id: status.id))
         }
+        .environment(\.openURL, OpenURLAction { url in
+          routeurPath.handleStatus(status: status, url: url)
+        })
       
       if !status.mediaAttachments.isEmpty {
         StatusMediaPreviewView(attachements: status.mediaAttachments)

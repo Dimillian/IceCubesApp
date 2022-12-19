@@ -16,4 +16,12 @@ public class RouterPath: ObservableObject {
   public func navigate(to: RouteurDestinations) {
     path.append(to)
   }
+  
+  public func handleStatus(status: AnyStatus, url: URL) -> OpenURLAction.Result {
+    if let mention = status.mentions.first(where: { $0.url == url }) {
+      navigate(to: .accountDetail(id: mention.id))
+      return .handled
+    }
+    return .systemAction
+  }
 }
