@@ -22,6 +22,6 @@ public struct MediaAttachement: Codable, Identifiable {
   public let url: URL
   public let previewUrl: URL
   public let description: String?
-  public let meta: [String: Meta]
+  public let meta: [String: Meta]?
 }
 
