@@ -2,8 +2,15 @@ import SwiftUI
 import Models
 import AVKit
 
+// Could have just been a state, but SwiftUI .sheet is buggy ATM without @StateObject
+class SelectedMediaSheetManager: ObservableObject {
+  @Published var selectedAttachement: MediaAttachement?
+}
+
 public struct StatusMediaPreviewView: View {
   public let attachements: [MediaAttachement]
+  
+  @StateObject private var selectedMediaSheetManager = SelectedMediaSheetManager()
 
   public var body: some View {
     VStack {
@@ -24,6 +31,24 @@ public struct StatusMediaPreviewView: View {
         }
       }
     }
+    .sheet(item: $selectedMediaSheetManager.selectedAttachement) { attachement in
+      VStack {
+        Spacer()
+        AsyncImage(
+          url: attachement.url,
+          content: { image in
+            image
+              .resizable()
+              .aspectRatio(contentMode: .fit)
+          },
+          placeholder: {
+            ProgressView()
+              .frame(maxWidth: 80, maxHeight: 80)
+          }
+        )
+        Spacer()
+      }
+    }
   }
   
   @ViewBuilder
@@ -31,20 +56,29 @@ public struct StatusMediaPreviewView: View {
     if let type = attachement.supportedType {
       switch type {
       case .image:
-        AsyncImage(
-          url: attachement.url,
-          content: { image in
-            image.resizable()
-              .aspectRatio(contentMode: .fit)
-              .frame(maxHeight: attachements.count > 2 ? 100 : 200)
-              .clipped()
-              .cornerRadius(4)
-          },
-          placeholder: {
-            ProgressView()
-              .frame(maxWidth: 80, maxHeight: 80)
+        Group {
+          GeometryReader { proxy in
+            AsyncImage(
+              url: attachement.url,
+              content: { image in
+                image
+                  .resizable()
+                  .aspectRatio(contentMode: .fill)
+                  .frame(height: attachements.count > 2 ? 100 : 200)
+                  .frame(width: proxy.frame(in: .local).width)
+              },
+              placeholder: {
+                ProgressView()
+                  .frame(maxWidth: 80, maxHeight: 80)
+              }
+            )
           }
-        )
+          .frame(height: attachements.count > 2 ? 100 : 200)
+        }
+        .cornerRadius(4)
+        .onTapGesture {
+          selectedMediaSheetManager.selectedAttachement = attachement
+        }
       case .gifv:
         VideoPlayer(player: AVPlayer(url: attachement.url))
           .frame(maxHeight: attachements.count > 2 ? 100 : 200)
