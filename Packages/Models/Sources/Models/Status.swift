@@ -10,6 +10,7 @@ public protocol AnyStatus {
   var repliesCount: Int { get }
   var reblogsCount: Int { get }
   var favouritesCount: Int { get }
+  var card: Card? { get }
 }
 
 public struct Status: AnyStatus, Codable, Identifiable {
@@ -23,6 +24,7 @@ public struct Status: AnyStatus, Codable, Identifiable {
   public let repliesCount: Int
   public let reblogsCount: Int
   public let favouritesCount: Int
+  public let card: Card?
   
   public static func placeholder() -> Status {
     .init(id: UUID().uuidString,
@@ -34,7 +36,8 @@ public struct Status: AnyStatus, Codable, Identifiable {
           mentions: [],
           repliesCount: 0,
           reblogsCount: 0,
-          favouritesCount: 0)
+          favouritesCount: 0,
+          card: nil)
   }
   
   public static func placeholders() -> [Status] {
@@ -52,4 +55,5 @@ public struct ReblogStatus: AnyStatus, Codable, Identifiable {
   public let repliesCount: Int
   public let reblogsCount: Int
   public let favouritesCount: Int
+  public let card: Card?
 }
