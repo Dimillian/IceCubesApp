@@ -14,6 +14,8 @@ struct StatusCardView: View {
             content: { image in
               image.resizable()
                 .aspectRatio(contentMode: .fill)
+                .frame(maxHeight: 200)
+                .clipped()
             },
             placeholder: {
               ProgressView()

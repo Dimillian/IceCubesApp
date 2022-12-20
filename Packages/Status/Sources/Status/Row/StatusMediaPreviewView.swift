@@ -39,10 +39,10 @@ public struct StatusMediaPreviewView: View {
   @ViewBuilder
   private func makePreview(attachement: MediaAttachement) -> some View {
     if let type = attachement.supportedType {
-      switch type {
-      case .image:
-        Group {
-          GeometryReader { proxy in
+      Group {
+        GeometryReader { proxy in
+          switch type {
+          case .image:
             AsyncImage(
               url: attachement.url,
               content: { image in
@@ -57,16 +57,17 @@ public struct StatusMediaPreviewView: View {
                   .frame(maxWidth: 80, maxHeight: 80)
               }
             )
+          case .gifv:
+            VideoPlayer(player: AVPlayer(url: attachement.url))
+              .frame(width: proxy.frame(in: .local).width)
+              .frame(height: attachements.count > 2 ? 100 : 200)
           }
-          .frame(height: attachements.count > 2 ? 100 : 200)
         }
-        .cornerRadius(4)
-        .onTapGesture {
-          selectedMediaSheetManager.selectedAttachement = attachement
-        }
-      case .gifv:
-        VideoPlayer(player: AVPlayer(url: attachement.url))
-          .frame(maxHeight: attachements.count > 2 ? 100 : 200)
+        .frame(height: attachements.count > 2 ? 100 : 200)
+      }
+      .cornerRadius(4)
+      .onTapGesture {
+        selectedMediaSheetManager.selectedAttachement = attachement
       }
     }
   }
@@ -78,21 +79,28 @@ public struct StatusMediaPreviewView: View {
     attachements.insert(selectedAttachement, at: 0)
     return TabView {
       ForEach(attachements) { attachement in
-        VStack {
-          Spacer()
-          AsyncImage(
-            url: attachement.url,
-            content: { image in
-              image
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-            },
-            placeholder: {
-              ProgressView()
-                .frame(maxWidth: 80, maxHeight: 80)
+        if let type = attachement.supportedType {
+          VStack {
+            Spacer()
+            switch type {
+            case .image:
+              AsyncImage(
+                url: attachement.url,
+                content: { image in
+                  image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                },
+                placeholder: {
+                  ProgressView()
+                    .frame(maxWidth: 80, maxHeight: 80)
+                }
+              )
+            case .gifv:
+              VideoPlayer(player: AVPlayer(url: attachement.url))
             }
-          )
-          Spacer()
+            Spacer()
+          }
         }
       }
     }
