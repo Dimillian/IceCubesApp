@@ -21,12 +21,17 @@ struct IceCubesApp: App {
             .tabItem {
               Label("Notifications", systemImage: "bell")
             }
+          AccountTab()
+            .tabItem {
+              Label("Profile", systemImage: "person.circle")
+            }
         }
         SettingsTabs()
           .tabItem {
             Label("Settings", systemImage: "gear")
           }
       }
+      .tint(.brand)
       .environmentObject(appAccountsManager)
       .environmentObject(appAccountsManager.currentClient)
     }

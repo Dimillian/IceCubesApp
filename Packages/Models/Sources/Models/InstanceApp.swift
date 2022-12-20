@@ -1,6 +1,6 @@
 import Foundation
 
-public struct App: Codable, Identifiable {
+public struct InstanceApp: Codable, Identifiable {
   public let id: String
   public let name: String
   public let website: URL?

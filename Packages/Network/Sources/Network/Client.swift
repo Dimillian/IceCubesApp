@@ -24,7 +24,7 @@ public class Client: ObservableObject, Equatable {
   private let decoder = JSONDecoder()
   
   /// Only used as a transitionary app while in the oauth flow.
-  private var oauthApp: Models.App?
+  private var oauthApp: InstanceApp?
   
   private var oauthToken: OauthToken?
   
@@ -79,7 +79,7 @@ public class Client: ObservableObject, Equatable {
   }
   
   public func oauthURL() async throws -> URL {
-    let app: Models.App = try await post(endpoint: Apps.registerApp)
+    let app: InstanceApp = try await post(endpoint: Apps.registerApp)
     self.oauthApp = app
     return makeURL(endpoint: Oauth.authorize(clientId: app.clientId))
   }

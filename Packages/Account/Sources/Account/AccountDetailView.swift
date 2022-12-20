@@ -10,12 +10,16 @@ public struct AccountDetailView: View {
   @StateObject private var viewModel: AccountDetailViewModel
   @State private var scrollOffset: CGFloat = 0
   
+  private let isCurrentUser: Bool
+  
   public init(accountId: String) {
     _viewModel = StateObject(wrappedValue: .init(accountId: accountId))
+    isCurrentUser = false
   }
   
-  public init(account: Account) {
+  public init(account: Account, isCurrentUser: Bool = false) {
     _viewModel = StateObject(wrappedValue: .init(account: account))
+    self.isCurrentUser = isCurrentUser
   }
   
   public var body: some View {
@@ -32,7 +36,15 @@ public struct AccountDetailView: View {
     .task {
       viewModel.client = client
       await viewModel.fetchAccount()
-      await viewModel.fetchStatuses()
+      if viewModel.statuses.isEmpty {
+        await viewModel.fetchStatuses()
+      }
+    }
+    .refreshable {
+      Task {
+        await viewModel.fetchAccount()
+        await viewModel.fetchStatuses()
+      }
     }
     .edgesIgnoringSafeArea(.top)
     .navigationTitle(Text(scrollOffset < -20 ? viewModel.title : ""))

@@ -18,7 +18,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   @Published var title: String = ""
   
   private var account: Account?
-  private var statuses: [Status] = []
+  private(set) var statuses: [Status] = []
   
   init(accountId: String) {
     self.accountId = accountId
