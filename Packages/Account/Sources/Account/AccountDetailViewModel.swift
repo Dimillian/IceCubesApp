@@ -15,7 +15,9 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   
   @Published var state: State = .loading
   @Published var statusesState: StatusesState = .loading
+  @Published var title: String = ""
   
+  private var account: Account?
   private var statuses: [Status] = []
   
   init(accountId: String) {
@@ -30,7 +32,9 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   func fetchAccount() async {
     guard let client else { return }
     do {
-      state = .data(account: try await client.get(endpoint: Accounts.accounts(id: accountId)))
+      let account: Account = try await client.get(endpoint: Accounts.accounts(id: accountId))
+      self.title = account.displayName
+      state = .data(account: account)
     } catch {
       state = .error(error: error)
     }

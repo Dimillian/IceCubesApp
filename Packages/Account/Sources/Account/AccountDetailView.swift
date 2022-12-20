@@ -8,6 +8,7 @@ import DesignSystem
 public struct AccountDetailView: View {
   @EnvironmentObject private var client: Client
   @StateObject private var viewModel: AccountDetailViewModel
+  @State private var scrollOffset: CGFloat = 0
   
   public init(accountId: String) {
     _viewModel = StateObject(wrappedValue: .init(accountId: accountId))
@@ -18,18 +19,23 @@ public struct AccountDetailView: View {
   }
   
   public var body: some View {
-    ScrollView {
+    ScrollViewOffsetReader { offset in
+      self.scrollOffset = offset
+    } content: {
       LazyVStack {
         headerView
+        Divider()
+          .offset(y: -20)
         StatusesListView(fetcher: viewModel)
       }
     }
-    .edgesIgnoringSafeArea(.top)
     .task {
       viewModel.client = client
       await viewModel.fetchAccount()
       await viewModel.fetchStatuses()
     }
+    .edgesIgnoringSafeArea(.top)
+    .navigationTitle(Text(scrollOffset < -20 ? viewModel.title : ""))
   }
   
   @ViewBuilder

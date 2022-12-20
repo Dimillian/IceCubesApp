@@ -10,6 +10,7 @@ struct TimelineTab: View {
     NavigationStack(path: $routeurPath.path) {
       TimelineView()
         .withAppRouteur()
+        .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
     }
     .environmentObject(routeurPath)
   }

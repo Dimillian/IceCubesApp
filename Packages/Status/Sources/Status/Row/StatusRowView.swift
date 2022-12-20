@@ -39,31 +39,32 @@ public struct StatusRowView: View {
     }
   }
   
-  @ViewBuilder
   private var statusView: some View {
-    if let status: AnyStatus = status.reblog ?? status {
-      if !isEmbed {
-        Button {
-          routeurPath.navigate(to: .accountDetailWithAccount(account: status.account))
-        } label: {
-          makeAccountView(status: status)
-        }.buttonStyle(.plain)
-      }
-      
-      Text(status.content.asSafeAttributedString)
-        .font(.body)
-        .onTapGesture {
-          routeurPath.navigate(to: .statusDetail(id: status.id))
+    VStack(alignment: .leading, spacing: 8) {
+      if let status: AnyStatus = status.reblog ?? status {
+        if !isEmbed {
+          Button {
+            routeurPath.navigate(to: .accountDetailWithAccount(account: status.account))
+          } label: {
+            makeAccountView(status: status)
+          }.buttonStyle(.plain)
         }
-        .environment(\.openURL, OpenURLAction { url in
-          routeurPath.handleStatus(status: status, url: url)
-        })
-      
-      if !status.mediaAttachments.isEmpty {
-        StatusMediaPreviewView(attachements: status.mediaAttachments)
-          .padding(.vertical, 4)
+        
+        Text(status.content.asSafeAttributedString)
+          .font(.body)
+          .onTapGesture {
+            routeurPath.navigate(to: .statusDetail(id: status.id))
+          }
+          .environment(\.openURL, OpenURLAction { url in
+            routeurPath.handleStatus(status: status, url: url)
+          })
+        
+        if !status.mediaAttachments.isEmpty {
+          StatusMediaPreviewView(attachements: status.mediaAttachments)
+            .padding(.vertical, 4)
+        }
+        StatusCardView(status: status)
       }
-      StatusCardView(status: status)
     }
   }
   
@@ -72,16 +73,15 @@ public struct StatusRowView: View {
     AvatarView(url: status.account.avatar)
     VStack(alignment: .leading) {
       Text(status.account.displayName)
-        .font(.headline)
-      HStack {
-        Text("@\(status.account.acct)")
-          .font(.footnote)
-          .foregroundColor(.gray)
-        Spacer()
+        .font(.subheadline)
+        .fontWeight(.semibold)
+      Group {
+        Text("@\(status.account.acct)") +
+        Text(" ⸱ ") +
         Text(status.createdAt.formatted)
-          .font(.footnote)
-          .foregroundColor(.gray)
       }
+      .font(.footnote)
+      .foregroundColor(.gray)
     }
   }
 }

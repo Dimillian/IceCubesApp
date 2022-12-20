@@ -8,8 +8,20 @@ public enum RouteurDestinations: Hashable {
   case statusDetail(id: String)
 }
 
+public enum SheetDestinations: Identifiable {
+  public var id: String {
+    switch self {
+    case .imageDetail:
+      return "imageDetail"
+    }
+  }
+  
+  case imageDetail(url: URL)
+}
+
 public class RouterPath: ObservableObject {
   @Published public var path: [RouteurDestinations] = []
+  @Published public var presentedSheet: SheetDestinations?
   
   public init() {}
   

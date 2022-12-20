@@ -1,11 +1,14 @@
 import SwiftUI
 import Models
 import DesignSystem
+import Routeur
 
 struct AccountDetailHeaderView: View {
+  @EnvironmentObject private var routeurPath: RouterPath
   @Environment(\.redactionReasons) private var reasons
-  let account: Account
   
+  let account: Account
+
   var body: some View {
     VStack(alignment: .leading) {
       headerImageView
@@ -14,21 +17,28 @@ struct AccountDetailHeaderView: View {
   }
   
   private var headerImageView: some View {
-    AsyncImage(
-      url: account.header,
-      content: { image in
-        image.resizable()
-          .aspectRatio(contentMode: .fill)
-          .frame(maxHeight: 200)
-          .clipped()
-      },
-      placeholder: {
-        Color.gray
-          .frame(maxHeight: 20)
-      }
-    )
-    .frame(maxHeight: 200)
-    .background(Color.gray)
+    GeometryReader { proxy in
+      AsyncImage(
+        url: account.header,
+        content: { image in
+          image.resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(height: 200)
+            .frame(width: proxy.frame(in: .local).width)
+            .clipped()
+        },
+        placeholder: {
+          Color.gray
+            .frame(height: 200)
+        }
+      )
+      .background(Color.gray)
+    }
+    .frame(height: 200)
+    .contentShape(Rectangle())
+    .onTapGesture {
+      routeurPath.presentedSheet = .imageDetail(url: account.header)
+    }
   }
   
   private var accountAvatarView: some View {
@@ -50,6 +60,10 @@ struct AccountDetailHeaderView: View {
             .frame(maxWidth: 80, maxHeight: 80)
         }
       )
+      .contentShape(Rectangle())
+      .onTapGesture {
+        routeurPath.presentedSheet = .imageDetail(url: account.avatar)
+      }
       Spacer()
       Group {
         makeCustomInfoLabel(title: "Posts", count: account.statusesCount)

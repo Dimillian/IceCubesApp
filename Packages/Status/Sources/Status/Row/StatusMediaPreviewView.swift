@@ -66,6 +66,7 @@ public struct StatusMediaPreviewView: View {
         .frame(height: attachements.count > 2 ? 100 : 200)
       }
       .cornerRadius(4)
+      .contentShape(Rectangle())
       .onTapGesture {
         selectedMediaSheetManager.selectedAttachement = attachement
       }

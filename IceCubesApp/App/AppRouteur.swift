@@ -3,6 +3,7 @@ import Timeline
 import Account
 import Routeur
 import Status
+import DesignSystem
 
 extension View {
   func withAppRouteur() -> some View {
@@ -14,6 +15,15 @@ extension View {
         AccountDetailView(account: account)
       case let .statusDetail(id):
         StatusDetailView(statusId: id)
+      }
+    }
+  }
+  
+  func withSheetDestinations(sheetDestinations: Binding<SheetDestinations?>) -> some View {
+    self.sheet(item: sheetDestinations) { destination in
+      switch destination {
+      case let .imageDetail(url):
+        ImageSheetView(url: url)
       }
     }
   }

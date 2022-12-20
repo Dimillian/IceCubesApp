@@ -11,6 +11,7 @@ struct NotificationsTab: View {
     NavigationStack(path: $routeurPath.path) {
       NotificationsListView()
         .withAppRouteur()
+        .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
     }
     .environmentObject(routeurPath)
   }
