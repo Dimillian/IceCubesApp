@@ -18,7 +18,8 @@ public struct AccountDetailView: View {
   }
   
   public init(account: Account, isCurrentUser: Bool = false) {
-    _viewModel = StateObject(wrappedValue: .init(account: account))
+    _viewModel = StateObject(wrappedValue: .init(account: account,
+                                                 isCurrentUser: isCurrentUser))
     self.isCurrentUser = isCurrentUser
   }
   
@@ -54,14 +55,30 @@ public struct AccountDetailView: View {
   private var headerView: some View {
     switch viewModel.state {
     case .loading:
-      AccountDetailHeaderView(account: .placeholder())
+      AccountDetailHeaderView(isCurrentUser: isCurrentUser,
+                              account: .placeholder(),
+                              relationship: .constant(.placeholder()),
+                              following: .constant(false))
         .redacted(reason: .placeholder)
     case let .data(account):
-      AccountDetailHeaderView(account: account)
+      AccountDetailHeaderView(isCurrentUser: isCurrentUser,
+                              account: account,
+                              relationship: $viewModel.relationship,
+                              following:
+      .init(get: {
+        viewModel.relationship?.following ?? false
+      }, set: { following in
+        Task {
+          if following {
+            await viewModel.follow()
+          } else {
+            await viewModel.unfollow()
+          }
+        }
+      }))
     case let .error(error):
       Text("Error: \(error.localizedDescription)")
     }
-    
   }
 }
 

@@ -7,7 +7,10 @@ struct AccountDetailHeaderView: View {
   @EnvironmentObject private var routeurPath: RouterPath
   @Environment(\.redactionReasons) private var reasons
   
+  let isCurrentUser: Bool
   let account: Account
+  @Binding var relationship: Relationshionship?
+  @Binding var following: Bool
 
   var body: some View {
     VStack(alignment: .leading) {
@@ -18,20 +21,31 @@ struct AccountDetailHeaderView: View {
   
   private var headerImageView: some View {
     GeometryReader { proxy in
-      AsyncImage(
-        url: account.header,
-        content: { image in
-          image.resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(height: 200)
-            .frame(width: proxy.frame(in: .local).width)
-            .clipped()
-        },
-        placeholder: {
-          Color.gray
-            .frame(height: 200)
+      ZStack(alignment: .bottomTrailing) {
+        AsyncImage(
+          url: account.header,
+          content: { image in
+            image.resizable()
+              .aspectRatio(contentMode: .fill)
+              .frame(height: 200)
+              .frame(width: proxy.frame(in: .local).width)
+              .clipped()
+          },
+          placeholder: {
+            Color.gray
+              .frame(height: 200)
+          }
+        )
+        if relationship?.followedBy == true {
+          Text("Follows You")
+            .font(.footnote)
+            .fontWeight(.semibold)
+            .padding(4)
+            .background(.ultraThinMaterial)
+            .cornerRadius(4)
+            .padding(8)
         }
-      )
+      }
       .background(Color.gray)
     }
     .frame(height: 200)
@@ -76,11 +90,27 @@ struct AccountDetailHeaderView: View {
   private var accountInfoView: some View {
     Group {
       accountAvatarView
-      Text(account.displayName)
-        .font(.headline)
-      Text(account.acct)
-        .font(.callout)
-        .foregroundColor(.gray)
+      HStack {
+        VStack(alignment: .leading, spacing: 0) {
+          Text(account.displayName)
+              .font(.headline)
+          Text(account.acct)
+              .font(.callout)
+              .foregroundColor(.gray)
+        }
+        Spacer()
+        if relationship != nil && !isCurrentUser {
+          Button {
+            following.toggle()
+          } label: {
+            if relationship?.requested == true {
+              Text("Requested")
+            } else {
+              Text(following ? "Following" : "Follow")
+            }
+          }.buttonStyle(.bordered)
+        }
+      }
       Text(account.note.asSafeAttributedString)
         .font(.body)
         .padding(.top, 8)
@@ -102,6 +132,9 @@ struct AccountDetailHeaderView: View {
 
 struct AccountDetailHeaderView_Previews: PreviewProvider {
   static var previews: some View {
-    AccountDetailHeaderView(account: .placeholder())
+    AccountDetailHeaderView(isCurrentUser: false,
+                            account: .placeholder(),
+                            relationship: .constant(.placeholder()),
+                            following: .constant(true))
   }
 }

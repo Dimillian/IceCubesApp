@@ -16,23 +16,32 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   @Published var state: State = .loading
   @Published var statusesState: StatusesState = .loading
   @Published var title: String = ""
+  @Published var relationship: Relationshionship?
   
   private var account: Account?
+  
   private(set) var statuses: [Status] = []
+  private let isCurrentUser: Bool
   
   init(accountId: String) {
     self.accountId = accountId
+    self.isCurrentUser = false
   }
   
-  init(account: Account) {
+  init(account: Account, isCurrentUser: Bool) {
     self.accountId = account.id
     self.state = .data(account: account)
+    self.isCurrentUser = isCurrentUser
   }
   
   func fetchAccount() async {
     guard let client else { return }
     do {
       let account: Account = try await client.get(endpoint: Accounts.accounts(id: accountId))
+      if !isCurrentUser {
+        let relationships: [Relationshionship] = try await client.get(endpoint: Accounts.relationships(id: accountId))
+        self.relationship = relationships.first
+      }
       self.title = account.displayName
       state = .data(account: account)
     } catch {
@@ -61,6 +70,24 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
       statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
     } catch {
       statusesState = .error(error: error)
+    }
+  }
+  
+  func follow() async {
+    guard let client else { return }
+    do {
+      relationship = try await client.post(endpoint: Accounts.follow(id: accountId))
+    } catch {
+      print("Error while following: \(error.localizedDescription)")
+    }
+  }
+  
+  func unfollow() async {
+    guard let client else { return }
+    do {
+      relationship = try await client.post(endpoint: Accounts.unfollow(id: accountId))
+    } catch {
+      print("Error while unfollowing: \(error.localizedDescription)")
     }
   }
 }
