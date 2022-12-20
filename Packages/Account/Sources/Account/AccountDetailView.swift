@@ -6,6 +6,7 @@ import Shimmer
 import DesignSystem
 
 public struct AccountDetailView: View {
+  @Environment(\.redactionReasons) private var reasons
   @EnvironmentObject private var client: Client
   @StateObject private var viewModel: AccountDetailViewModel
   @State private var scrollOffset: CGFloat = 0
@@ -35,6 +36,7 @@ public struct AccountDetailView: View {
       }
     }
     .task {
+      guard reasons != .placeholder else { return }
       viewModel.client = client
       await viewModel.fetchAccount()
       if viewModel.statuses.isEmpty {

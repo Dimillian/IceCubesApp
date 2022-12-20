@@ -8,30 +8,30 @@ public struct StatusRowView: View {
   @Environment(\.redactionReasons) private var reasons
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var routeurPath: RouterPath
+  @StateObject var viewModel: StatusRowViewModel
   
-  private let status: Status
-  private let isEmbed: Bool
-  
-  public init(status: Status, isEmbed: Bool = false) {
-    self.status = status
-    self.isEmbed = isEmbed
+  public init(viewModel: StatusRowViewModel) {
+    _viewModel = StateObject(wrappedValue: viewModel)
   }
-
+  
   public var body: some View {
     VStack(alignment: .leading) {
       reblogView
       statusView
-      StatusActionsView(status: status)
+      StatusActionsView(viewModel: viewModel)
         .padding(.vertical, 8)
+    }
+    .onAppear {
+      viewModel.client = client
     }
   }
   
   @ViewBuilder
   private var reblogView: some View {
-    if status.reblog != nil {
+    if viewModel.status.reblog != nil {
       HStack(spacing: 2) {
         Image(systemName:"arrow.left.arrow.right.circle")
-        Text("\(status.account.displayName) reblogged")
+        Text("\(viewModel.status.account.displayName) reblogged")
       }
       .font(.footnote)
       .foregroundColor(.gray)
@@ -41,8 +41,8 @@ public struct StatusRowView: View {
   
   private var statusView: some View {
     VStack(alignment: .leading, spacing: 8) {
-      if let status: AnyStatus = status.reblog ?? status {
-        if !isEmbed {
+      if let status: AnyStatus = viewModel.status.reblog ?? viewModel.status {
+        if !viewModel.isEmbed {
           Button {
             routeurPath.navigate(to: .accountDetailWithAccount(account: status.account))
           } label: {

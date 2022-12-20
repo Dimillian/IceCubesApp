@@ -36,7 +36,7 @@ struct NotificationRowView: View {
             }
           }
           if let status = notification.status {
-            StatusRowView(status: status, isEmbed: true)
+            StatusRowView(viewModel: .init(status: status, isEmbed: true))
           } else {
             Text(notification.account.acct)
               .font(.callout)

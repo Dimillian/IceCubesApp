@@ -1,34 +1,36 @@
 import SwiftUI
 import Models
 import Routeur
+import Network
 
 struct StatusActionsView: View {
-  let status: Status
-  
+  @ObservedObject var viewModel: StatusRowViewModel
+    
+  @MainActor
   enum Actions: CaseIterable {
     case respond, boost, favourite, share
     
-    var iconName: String {
+    func iconName(viewModel: StatusRowViewModel) -> String {
       switch self {
       case .respond:
         return "bubble.right"
       case .boost:
         return "arrow.left.arrow.right.circle"
       case .favourite:
-        return "star"
+        return viewModel.isFavourited ? "star.fill" : "star"
       case .share:
         return "square.and.arrow.up"
       }
     }
     
-    func count(status: Status) -> Int? {
+    func count(viewModel: StatusRowViewModel) -> Int? {
       switch self {
       case .respond:
-        return status.repliesCount
+        return viewModel.status.repliesCount
       case .favourite:
-        return status.favouritesCount
+        return viewModel.favouritesCount
       case .boost:
-        return status.reblogsCount
+        return viewModel.status.reblogsCount
       case .share:
         return nil
       }
@@ -39,11 +41,11 @@ struct StatusActionsView: View {
     HStack {
       ForEach(Actions.allCases, id: \.self) { action in
         Button {
-          
+          handleAction(action: action)
         } label: {
           HStack(spacing: 2) {
-            Image(systemName: action.iconName)
-            if let count = action.count(status: status) {
+            Image(systemName: action.iconName(viewModel: viewModel))
+            if let count = action.count(viewModel: viewModel) {
               Text("\(count)")
                 .font(.footnote)
             }
@@ -53,6 +55,22 @@ struct StatusActionsView: View {
           Spacer()
         }
       }
-    }.tint(.gray)
+    }
+    .tint(.gray)
+  }
+  
+  private func handleAction(action: Actions) {
+    Task {
+      switch action {
+      case .favourite:
+        if viewModel.isFavourited {
+          await viewModel.unFavourite()
+        } else {
+          await viewModel.favourite()
+        }
+      default:
+        break
+      }
+    }
   }
 }
