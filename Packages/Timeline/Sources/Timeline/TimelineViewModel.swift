@@ -5,30 +5,14 @@ import Status
 
 @MainActor
 class TimelineViewModel: ObservableObject, StatusesFetcher {
-  enum TimelineFilter: String, CaseIterable {
-    case pub = "Public"
-    case home = "Home"
-    
-    func endpoint(sinceId: String?) -> Timelines {
-      switch self {
-        case .pub: return .pub(sinceId: sinceId)
-        case .home: return .home(sinceId: sinceId)
-      }
-    }
-  }
-  
-  var client: Client? {
-    didSet {
-      timeline = client?.isAuth == true ? .home : .pub
-    }
-  }
+  var client: Client?
   
   private var statuses: [Status] = []
   
   @Published var statusesState: StatusesState = .loading
   @Published var timeline: TimelineFilter = .pub {
     didSet {
-      if oldValue != timeline {
+      if oldValue != timeline || statuses.isEmpty {
         Task {
           await fetchStatuses()
         }

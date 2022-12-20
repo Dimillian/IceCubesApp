@@ -2,7 +2,13 @@ import Foundation
 import SwiftUI
 import Models
 
-public class Client: ObservableObject {
+public class Client: ObservableObject, Equatable {
+  public static func == (lhs: Client, rhs: Client) -> Bool {
+    lhs.isAuth == rhs.isAuth &&
+    lhs.server == rhs.server &&
+    lhs.oauthToken?.accessToken == rhs.oauthToken?.accessToken
+  }
+  
   public enum Version: String {
     case v1
   }

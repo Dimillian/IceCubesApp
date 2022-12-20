@@ -6,6 +6,7 @@ public enum RouteurDestinations: Hashable {
   case accountDetail(id: String)
   case accountDetailWithAccount(account: Account)
   case statusDetail(id: String)
+  case hashTag(tag: String)
 }
 
 public enum SheetDestinations: Identifiable {
@@ -30,7 +31,11 @@ public class RouterPath: ObservableObject {
   }
   
   public func handleStatus(status: AnyStatus, url: URL) -> OpenURLAction.Result {
-    if let mention = status.mentions.first(where: { $0.url == url }) {
+    if url.pathComponents.contains(where: { $0 == "tags" }),
+        let tag = url.pathComponents.last {
+      navigate(to: .hashTag(tag: tag))
+      return .handled
+    } else if let mention = status.mentions.first(where: { $0.url == url }) {
       navigate(to: .accountDetail(id: mention.id))
       return .handled
     }

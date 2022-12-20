@@ -8,9 +8,12 @@ import DesignSystem
 public struct TimelineView: View {
   @EnvironmentObject private var client: Client
   @StateObject private var viewModel = TimelineViewModel()
-  @State private var didAppear = false
   
-  public init() {}
+  private let filter: TimelineFilter?
+  
+  public init(timeline: TimelineFilter? = nil) {
+    self.filter = timeline
+  }
   
   public var body: some View {
     ScrollView {
@@ -19,33 +22,38 @@ public struct TimelineView: View {
       }
       .padding(.top, DS.Constants.layoutPadding)
     }
-    .navigationTitle(viewModel.timeline.rawValue)
+    .navigationTitle(filter?.title() ?? viewModel.timeline.title())
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
-        timelineFilterButton
+      if filter == nil {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          timelineFilterButton
+        }
       }
     }
-    .task {
+    .onAppear {
       viewModel.client = client
-      if !didAppear {
-        await viewModel.fetchStatuses()
-        didAppear = true
+      if let filter {
+        viewModel.timeline = filter
+      } else {
+        viewModel.timeline = client.isAuth ? .home : .pub
       }
     }
     .refreshable {
-      await viewModel.fetchStatuses()
+      Task {
+        await viewModel.fetchStatuses()
+      }
     }
   }
   
   
   private var timelineFilterButton: some View {
     Menu {
-      ForEach(TimelineViewModel.TimelineFilter.allCases, id: \.self) { filter in
+      ForEach(TimelineFilter.availableTimeline(), id: \.self) { filter in
         Button {
           viewModel.timeline = filter
         } label: {
-          Text(filter.rawValue)
+          Text(filter.title())
         }
       }
     } label: {

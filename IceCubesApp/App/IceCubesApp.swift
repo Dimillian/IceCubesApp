@@ -16,10 +16,12 @@ struct IceCubesApp: App {
           .tabItem {
             Label("Home", systemImage: "globe")
           }
-        NotificationsTab()
-          .tabItem {
-            Label("Notifications", systemImage: "bell")
-          }
+        if appAccountsManager.currentClient.isAuth {
+          NotificationsTab()
+            .tabItem {
+              Label("Notifications", systemImage: "bell")
+            }
+        }
         SettingsTabs()
           .tabItem {
             Label("Settings", systemImage: "gear")
