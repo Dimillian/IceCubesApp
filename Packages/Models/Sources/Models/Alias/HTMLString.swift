@@ -16,7 +16,9 @@ extension HTMLString {
   
   public var asSafeAttributedString: AttributedString {
     do {
-      return try AttributedString(markdown: asMarkdown)
+      let options = AttributedString.MarkdownParsingOptions(allowsExtendedAttributes: true,
+                                                            interpretedSyntax: .inlineOnlyPreservingWhitespace)
+      return try AttributedString(markdown: asMarkdown, options: options)
     } catch {
       return AttributedString(stringLiteral: self)
     }

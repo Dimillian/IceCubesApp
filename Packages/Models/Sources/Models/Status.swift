@@ -2,7 +2,7 @@ import Foundation
 
 public protocol AnyStatus {
   var id: String { get }
-  var content: String { get }
+  var content: HTMLString { get }
   var account: Account { get }
   var createdAt: String { get }
   var mediaAttachments: [MediaAttachement] { get }
