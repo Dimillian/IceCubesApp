@@ -2,7 +2,9 @@ import Foundation
 
 public enum Accounts: Endpoint {
   case accounts(id: String)
-  case favourites(sinceId: String?)
+  case favourites
+  case followedTags
+  case featuredTags
   case verifyCredentials
   case statuses(id: String, sinceId: String?)
   case relationships(id: String)
@@ -15,6 +17,10 @@ public enum Accounts: Endpoint {
       return "accounts/\(id)"
     case .favourites:
       return "favourites"
+    case .followedTags:
+      return "followed_tags"
+    case .featuredTags:
+      return "featured_tags"
     case .verifyCredentials:
       return "accounts/verify_credentials"
     case .statuses(let id, _):
@@ -31,9 +37,6 @@ public enum Accounts: Endpoint {
   public func queryItems() -> [URLQueryItem]? {
     switch self {
     case .statuses(_, let sinceId):
-      guard let sinceId else { return nil }
-      return [.init(name: "max_id", value: sinceId)]
-    case .favourites(let sinceId):
       guard let sinceId else { return nil }
       return [.init(name: "max_id", value: sinceId)]
     case let .relationships(id):

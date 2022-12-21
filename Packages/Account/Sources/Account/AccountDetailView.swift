@@ -4,20 +4,25 @@ import Network
 import Status
 import Shimmer
 import DesignSystem
+import Routeur
 
 public struct AccountDetailView: View {  
   @Environment(\.redactionReasons) private var reasons
   @EnvironmentObject private var client: Client
+  @EnvironmentObject private var routeurPath: RouterPath
+  
   @StateObject private var viewModel: AccountDetailViewModel
   @State private var scrollOffset: CGFloat = 0
   
   private let isCurrentUser: Bool
   
+  /// When coming from a URL like a mention tap in a status.
   public init(accountId: String) {
     _viewModel = StateObject(wrappedValue: .init(accountId: accountId))
     isCurrentUser = false
   }
   
+  /// When the account is already fetched by the parent caller.
   public init(account: Account, isCurrentUser: Bool = false) {
     _viewModel = StateObject(wrappedValue: .init(account: account,
                                                  isCurrentUser: isCurrentUser))
@@ -44,7 +49,12 @@ public struct AccountDetailView: View {
             .offset(y: -20)
         }
         
-        StatusesListView(fetcher: viewModel)
+        switch viewModel.tabState {
+        case .statuses:
+          StatusesListView(fetcher: viewModel)
+        case let .followedTags(tags):
+          makeTagsListView(tags: tags)
+        }
       }
     }
     .task {
@@ -67,7 +77,7 @@ public struct AccountDetailView: View {
   
   @ViewBuilder
   private var headerView: some View {
-    switch viewModel.state {
+    switch viewModel.accountState {
     case .loading:
       AccountDetailHeaderView(isCurrentUser: isCurrentUser,
                               account: .placeholder(),
@@ -92,6 +102,28 @@ public struct AccountDetailView: View {
       }))
     case let .error(error):
       Text("Error: \(error.localizedDescription)")
+    }
+  }
+  
+  private func makeTagsListView(tags: [Tag]) -> some View {
+    Group {
+      ForEach(tags) { tag in
+        HStack {
+          VStack(alignment: .leading) {
+            Text("#\(tag.name)")
+              .font(.headline)
+            Text("\(tag.totalUses) mentions from \(tag.totalAccounts) users in the last few days")
+              .font(.footnote)
+              .foregroundColor(.gray)
+          }
+          Spacer()
+        }
+        .padding(.horizontal, DS.Constants.layoutPadding)
+        .padding(.vertical, 8)
+        .onTapGesture {
+          routeurPath.navigate(to: .hashTag(tag: tag.name))
+        }
+      }
     }
   }
 }
