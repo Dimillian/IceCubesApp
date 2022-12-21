@@ -24,6 +24,7 @@ public struct NotificationsListView: View {
       .padding(.top, DS.Constants.layoutPadding)
     }
     .task {
+      viewModel.client = client
       await viewModel.fetchNotifications()
     }
     .refreshable {
