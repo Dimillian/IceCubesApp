@@ -35,6 +35,8 @@ public struct AccountDetailView: View {
     } content: {
       LazyVStack {
         headerView
+        featuredTagsView
+          .offset(y: -36)
         if isCurrentUser {
           Picker("", selection: $viewModel.selectedTab) {
             ForEach(AccountDetailViewModel.Tab.allCases, id: \.self) { tab in
@@ -107,6 +109,29 @@ public struct AccountDetailView: View {
     }
   }
   
+  @ViewBuilder
+  private var featuredTagsView: some View {
+    if !viewModel.featuredTags.isEmpty {
+      ScrollView(.horizontal, showsIndicators: false) {
+        HStack(spacing: 4) {
+          ForEach(viewModel.featuredTags) { tag in
+            Button {
+              routeurPath.navigate(to: .hashTag(tag: tag.name, account: viewModel.accountId))
+            } label: {
+              VStack(alignment: .leading, spacing: 0) {
+                Text("#\(tag.name)")
+                  .font(.callout)
+                Text("\(tag.statusesCount) posts")
+                  .font(.caption2)
+              }
+            }.buttonStyle(.bordered)
+          }
+        }
+        .padding(.leading, DS.Constants.layoutPadding)
+      }
+    }
+  }
+  
   private func makeTagsListView(tags: [Tag]) -> some View {
     Group {
       ForEach(tags) { tag in
@@ -123,7 +148,7 @@ public struct AccountDetailView: View {
         .padding(.horizontal, DS.Constants.layoutPadding)
         .padding(.vertical, 8)
         .onTapGesture {
-          routeurPath.navigate(to: .hashTag(tag: tag.name))
+          routeurPath.navigate(to: .hashTag(tag: tag.name, account: nil))
         }
       }
     }

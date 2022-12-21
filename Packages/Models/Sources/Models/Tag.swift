@@ -25,3 +25,13 @@ public struct Tag: Codable, Identifiable {
     history.compactMap{ Int($0.accounts) }.reduce(0, +)
   }
 }
+
+public struct FeaturedTag: Codable, Identifiable {
+  public let id: String
+  public let name: String
+  public let url: URL
+  public let statusesCount: String
+  public var statusesCountInt: Int {
+    Int(statusesCount) ?? 0
+  }
+}

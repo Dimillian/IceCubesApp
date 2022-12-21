@@ -48,6 +48,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   @Published var relationship: Relationshionship?
   @Published var favourites: [Status] = []
   @Published var followedTags: [Tag] = []
+  @Published var featuredTags: [FeaturedTag] = []
   @Published var selectedTab = Tab.statuses {
     didSet {
       reloadTabState()
@@ -82,6 +83,8 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
         let relationships: [Relationshionship] = try await client.get(endpoint: Accounts.relationships(id: accountId))
         self.relationship = relationships.first
       }
+      self.featuredTags = try await client.get(endpoint: Accounts.featuredTags(id: accountId))
+      self.featuredTags.sort { $0.statusesCountInt > $1.statusesCountInt }
       self.title = account.displayName
       accountState = .data(account: account)
     } catch {
@@ -93,7 +96,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
     guard let client else { return }
     do {
       tabState = .statuses(statusesState: .loading)
-      statuses = try await client.get(endpoint: Accounts.statuses(id: accountId, sinceId: nil))
+      statuses = try await client.get(endpoint: Accounts.statuses(id: accountId, sinceId: nil, tag: nil))
       if isCurrentUser {
         favourites = try await client.get(endpoint: Accounts.favourites)
       }
@@ -110,7 +113,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
       case .statuses:
         guard let lastId = statuses.last?.id else { return }
         tabState = .statuses(statusesState: .display(statuses: statuses, nextPageState: .loadingNextPage))
-        let newStatuses: [Status] = try await client.get(endpoint: Accounts.statuses(id: accountId, sinceId: lastId))
+        let newStatuses: [Status] = try await client.get(endpoint: Accounts.statuses(id: accountId, sinceId: lastId, tag: nil))
         statuses.append(contentsOf: newStatuses)
         tabState = .statuses(statusesState: .display(statuses: statuses, nextPageState: .hasNextPage))
       case .favourites, .followedTags:

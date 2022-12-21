@@ -4,7 +4,7 @@ import Network
 
 public enum TimelineFilter: Hashable, Equatable {
   case pub, home
-  case hashtag(tag: String)
+  case hashtag(tag: String, accountId: String?)
   
   public func hash(into hasher: inout Hasher) {
     hasher.combine(title())
@@ -20,17 +20,21 @@ public enum TimelineFilter: Hashable, Equatable {
       return "Public"
     case .home:
       return "Home"
-    case let .hashtag(tag):
+    case let .hashtag(tag, _):
       return "#\(tag)"
     }
   }
   
-  func endpoint(sinceId: String?) -> Timelines {
+  func endpoint(sinceId: String?) -> Endpoint {
     switch self {
-      case .pub: return .pub(sinceId: sinceId)
-      case .home: return .home(sinceId: sinceId)
-      case let .hashtag(tag):
-        return .hashtag(tag: tag, sinceId: sinceId)
+      case .pub: return Timelines.pub(sinceId: sinceId)
+      case .home: return Timelines.home(sinceId: sinceId)
+      case let .hashtag(tag, accountId):
+      if let accountId {
+        return Accounts.statuses(id: accountId, sinceId: nil, tag: tag)
+      } else {
+        return Timelines.hashtag(tag: tag, sinceId: sinceId)
+      }
     }
   }
 }

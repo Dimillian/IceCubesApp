@@ -16,7 +16,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
         Task {
           await fetchStatuses()
           switch timeline {
-          case let .hashtag(tag):
+          case let .hashtag(tag, _):
             await fetchTag(id: tag)
           default:
             break

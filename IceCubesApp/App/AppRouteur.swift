@@ -15,8 +15,8 @@ extension View {
         AccountDetailView(account: account)
       case let .statusDetail(id):
         StatusDetailView(statusId: id)
-      case let .hashTag(tag):
-        TimelineView(timeline: .hashtag(tag: tag))
+      case let .hashTag(tag, accountId):
+        TimelineView(timeline: .hashtag(tag: tag, accountId: accountId))
       }
     }
   }
