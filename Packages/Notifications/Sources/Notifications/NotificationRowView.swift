@@ -25,12 +25,12 @@ struct NotificationRowView: View {
               .aspectRatio(contentMode: .fit)
               .padding(.horizontal, 4)
             if type.displayAccountName() {
-              Text(notification.account.displayName)
-                .font(.headline) +
+              notification.account.displayNameWithEmojis
+                .font(.subheadline)
               Text(" ")
             }
             Text(type.label())
-              .font(.body)
+              .font(.subheadline)
             Spacer()
           }
           if let status = notification.status {
@@ -91,7 +91,7 @@ extension Models.Notification.NotificationType {
     case .status:
       return "pencil"
     case .mention:
-      return "at"
+      return "at.circle.fill"
     case .reblog:
       return "arrow.left.arrow.right.circle.fill"
     case .follow, .follow_request:

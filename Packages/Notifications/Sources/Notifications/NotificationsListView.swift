@@ -7,7 +7,6 @@ import DesignSystem
 public struct NotificationsListView: View {
   @EnvironmentObject private var client: Client
   @StateObject private var viewModel = NotificationsViewModel()
-  @State private var didAppear: Bool = false
   
   public init() { }
   
@@ -25,14 +24,12 @@ public struct NotificationsListView: View {
       .padding(.top, DS.Constants.layoutPadding)
     }
     .task {
-      if !didAppear {
-        didAppear = true
-        viewModel.client = client
-        await viewModel.fetchNotifications()
-      }
+      await viewModel.fetchNotifications()
     }
     .refreshable {
-      await viewModel.fetchNotifications()
+      Task {
+        await viewModel.fetchNotifications()
+      }
     }
     .navigationTitle(Text("Notifications"))
     .navigationBarTitleDisplayMode(.inline)

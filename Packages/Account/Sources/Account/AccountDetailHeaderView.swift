@@ -98,7 +98,7 @@ struct AccountDetailHeaderView: View {
       accountAvatarView
       HStack {
         VStack(alignment: .leading, spacing: 0) {
-          Text(account.displayName)
+          account.displayNameWithEmojis
               .font(.headline)
           Text(account.acct)
               .font(.callout)

@@ -22,7 +22,9 @@ class NotificationsViewModel: ObservableObject {
   func fetchNotifications() async {
     guard let client else { return }
     do {
-      state = .loading
+      if notifications.isEmpty {
+        state = .loading
+      }
       notifications = try await client.get(endpoint: Notifications.notifications(maxId: nil))
       state = .display(notifications: notifications, nextPageState: .hasNextPage)
     } catch {

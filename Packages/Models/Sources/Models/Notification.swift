@@ -24,7 +24,7 @@ public struct Notification: Codable, Identifiable {
   }
   
   public static func placeholders() -> [Notification] {
-    [.placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder()]
+    [.placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder()]
   }
 }
 

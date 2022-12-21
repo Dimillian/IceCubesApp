@@ -31,11 +31,15 @@ public struct StatusRowView: View {
     if viewModel.status.reblog != nil {
       HStack(spacing: 2) {
         Image(systemName:"arrow.left.arrow.right.circle")
-        Text("\(viewModel.status.account.displayName) reblogged")
+        viewModel.status.account.displayNameWithEmojis
+        Text("boosted")
       }
       .font(.footnote)
       .foregroundColor(.gray)
       .fontWeight(.semibold)
+      .onTapGesture {
+        routeurPath.navigate(to: .accountDetailWithAccount(account: viewModel.status.account))
+      }
     }
   }
   
@@ -71,8 +75,8 @@ public struct StatusRowView: View {
   @ViewBuilder
   private func makeAccountView(status: AnyStatus) -> some View {
     AvatarView(url: status.account.avatar)
-    VStack(alignment: .leading) {
-      Text(status.account.displayName)
+    VStack(alignment: .leading, spacing: 0) {
+      status.account.displayNameWithEmojis
         .font(.subheadline)
         .fontWeight(.semibold)
       Group {

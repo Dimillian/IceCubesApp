@@ -16,9 +16,11 @@ extension HTMLString {
   
   public var asSafeAttributedString: AttributedString {
     do {
+      // Add space between hashtags that follow each other
+      let markdown = asMarkdown.replacingOccurrences(of: ")[#", with: ") [#")
       let options = AttributedString.MarkdownParsingOptions(allowsExtendedAttributes: true,
                                                             interpretedSyntax: .inlineOnlyPreservingWhitespace)
-      return try AttributedString(markdown: asMarkdown, options: options)
+      return try AttributedString(markdown: markdown, options: options)
     } catch {
       return AttributedString(stringLiteral: self)
     }
