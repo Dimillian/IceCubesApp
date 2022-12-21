@@ -82,7 +82,8 @@ public struct AccountDetailView: View {
       AccountDetailHeaderView(isCurrentUser: isCurrentUser,
                               account: .placeholder(),
                               relationship: .constant(.placeholder()),
-                              following: .constant(false))
+                              following: .constant(false),
+                              scrollOffset: $scrollOffset)
         .redacted(reason: .placeholder)
     case let .data(account):
       AccountDetailHeaderView(isCurrentUser: isCurrentUser,
@@ -99,7 +100,8 @@ public struct AccountDetailView: View {
             await viewModel.unfollow()
           }
         }
-      }))
+      }),
+                              scrollOffset: $scrollOffset)
     case let .error(error):
       Text("Error: \(error.localizedDescription)")
     }

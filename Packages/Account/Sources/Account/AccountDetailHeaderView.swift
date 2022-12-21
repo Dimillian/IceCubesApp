@@ -11,6 +11,11 @@ struct AccountDetailHeaderView: View {
   let account: Account
   @Binding var relationship: Relationshionship?
   @Binding var following: Bool
+  @Binding var scrollOffset: CGFloat
+  
+  private var bannerHeight: CGFloat {
+    200 + (scrollOffset > 0 ? scrollOffset * 2 : 0)
+  }
 
   var body: some View {
     VStack(alignment: .leading) {
@@ -27,13 +32,13 @@ struct AccountDetailHeaderView: View {
           content: { image in
             image.resizable()
               .aspectRatio(contentMode: .fill)
-              .frame(height: 200)
+              .frame(height: bannerHeight)
               .frame(width: proxy.frame(in: .local).width)
               .clipped()
           },
           placeholder: {
             Color.gray
-              .frame(height: 200)
+              .frame(height: bannerHeight)
           }
         )
         if relationship?.followedBy == true {
@@ -48,7 +53,8 @@ struct AccountDetailHeaderView: View {
       }
       .background(Color.gray)
     }
-    .frame(height: 200)
+    .frame(height: bannerHeight)
+    .offset(y: scrollOffset > 0 ? -scrollOffset : 0)
     .contentShape(Rectangle())
     .onTapGesture {
       routeurPath.presentedSheet = .imageDetail(url: account.header)
@@ -135,6 +141,7 @@ struct AccountDetailHeaderView_Previews: PreviewProvider {
     AccountDetailHeaderView(isCurrentUser: false,
                             account: .placeholder(),
                             relationship: .constant(.placeholder()),
-                            following: .constant(true))
+                            following: .constant(true),
+                            scrollOffset: .constant(0))
   }
 }
