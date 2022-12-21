@@ -15,26 +15,7 @@ public struct NotificationsListView: View {
     ScrollView {
       LazyVStack {
         if client.isAuth {
-          switch viewModel.state {
-          case .loading:
-            ForEach(Models.Notification.placeholders()) { notification in
-              NotificationRowView(notification: notification)
-                .redacted(reason: .placeholder)
-                .shimmering()
-              Divider()
-                .padding(.vertical, DS.Constants.dividerPadding)
-            }
-            
-          case let .display(notifications, _):
-            ForEach(notifications) { notification in
-              NotificationRowView(notification: notification)
-              Divider()
-                .padding(.vertical, DS.Constants.dividerPadding)
-            }
-            
-          case let .error(error):
-            Text(error.localizedDescription)
-          }
+          notificationsView
         } else {
           Text("Please Sign In to see your notifications")
             .font(.title3)
@@ -55,5 +36,49 @@ public struct NotificationsListView: View {
     }
     .navigationTitle(Text("Notifications"))
     .navigationBarTitleDisplayMode(.inline)
+  }
+  
+  @ViewBuilder
+  private var notificationsView: some View {
+    switch viewModel.state {
+    case .loading:
+      ForEach(Models.Notification.placeholders()) { notification in
+        NotificationRowView(notification: notification)
+          .redacted(reason: .placeholder)
+          .shimmering()
+        Divider()
+          .padding(.vertical, DS.Constants.dividerPadding)
+      }
+      
+    case let .display(notifications, nextPageState):
+      ForEach(notifications) { notification in
+        NotificationRowView(notification: notification)
+        Divider()
+          .padding(.vertical, DS.Constants.dividerPadding)
+      }
+      
+      switch nextPageState {
+      case .hasNextPage:
+        loadingRow
+          .onAppear {
+            Task {
+              await viewModel.fetchNextPage()
+            }
+          }
+      case .loadingNextPage:
+        loadingRow
+      }
+      
+    case let .error(error):
+      Text(error.localizedDescription)
+    }
+  }
+  
+  private var loadingRow: some View {
+    HStack {
+      Spacer()
+      ProgressView()
+      Spacer()
+    }
   }
 }

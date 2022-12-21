@@ -15,10 +15,17 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
       if oldValue != timeline || statuses.isEmpty {
         Task {
           await fetchStatuses()
+          switch timeline {
+          case let .hashtag(tag):
+            await fetchTag(id: tag)
+          default:
+            break
+          }
         }
       }
     }
   }
+  @Published var tag: Tag?
   
   var serverName: String {
     client?.server ?? "Error"
@@ -32,6 +39,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
       statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
     } catch {
       statusesState = .error(error: error)
+      print("timeline parse error: \(error)")
     }
   }
   
@@ -46,5 +54,26 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
     } catch {
       statusesState = .error(error: error)
     }
+  }
+  
+  func fetchTag(id: String) async {
+    guard let client else { return }
+    do {
+      tag = try await client.get(endpoint: Tags.tag(id: id))
+    } catch {}
+  }
+  
+  func followTag(id: String) async {
+    guard let client else { return }
+    do {
+      tag = try await client.post(endpoint: Tags.follow(id: id))
+    } catch {}
+  }
+  
+  func unfollowTag(id: String) async {
+    guard let client else { return }
+    do {
+      tag = try await client.post(endpoint: Tags.unfollow(id: id))
+    } catch {}
   }
 }

@@ -15,7 +15,7 @@ struct StatusActionsView: View {
       case .respond:
         return "bubble.right"
       case .boost:
-        return "arrow.left.arrow.right.circle"
+        return viewModel.isReblogged ? "arrow.left.arrow.right.circle.fill" : "arrow.left.arrow.right.circle"
       case .favourite:
         return viewModel.isFavourited ? "star.fill" : "star"
       case .share:
@@ -26,11 +26,11 @@ struct StatusActionsView: View {
     func count(viewModel: StatusRowViewModel) -> Int? {
       switch self {
       case .respond:
-        return viewModel.status.repliesCount
+        return viewModel.repliesCount
       case .favourite:
         return viewModel.favouritesCount
       case .boost:
-        return viewModel.status.reblogsCount
+        return viewModel.reblogsCount
       case .share:
         return nil
       }
@@ -67,6 +67,12 @@ struct StatusActionsView: View {
           await viewModel.unFavourite()
         } else {
           await viewModel.favourite()
+        }
+      case .boost:
+        if viewModel.isReblogged {
+          await viewModel.unReblog()
+        } else {
+          await viewModel.reblog()
         }
       default:
         break

@@ -21,7 +21,7 @@ public enum TimelineFilter: Hashable, Equatable {
     case .home:
       return "Home"
     case let .hashtag(tag):
-      return tag
+      return "#\(tag)"
     }
   }
   

@@ -18,6 +18,8 @@ public struct TimelineView: View {
   public var body: some View {
     ScrollView {
       LazyVStack {
+        tagHeaderView
+          .padding(.bottom, 16)
         StatusesListView(fetcher: viewModel)
       }
       .padding(.top, DS.Constants.layoutPadding)
@@ -46,6 +48,35 @@ public struct TimelineView: View {
     }
   }
   
+  @ViewBuilder
+  private var tagHeaderView: some View {
+    if let tag = viewModel.tag {
+      HStack {
+        VStack(alignment: .leading, spacing: 4) {
+          Text("#\(tag.name)")
+            .font(.headline)
+          Text("\(tag.totalUses) posts from \(tag.totalAccounts) participants")
+            .font(.footnote)
+            .foregroundColor(.gray)
+        }
+        Spacer()
+        Button {
+          Task {
+            if tag.following {
+              await viewModel.unfollowTag(id: tag.name)
+            } else {
+              await viewModel.followTag(id: tag.name)
+            }
+          }
+        } label: {
+          Text(tag.following ? "Following": "Follow")
+        }.buttonStyle(.bordered)
+      }
+      .padding(.horizontal, DS.Constants.layoutPadding)
+      .padding(.vertical, 8)
+      .background(.gray.opacity(0.15))
+    }
+  }
   
   private var timelineFilterButton: some View {
     Menu {

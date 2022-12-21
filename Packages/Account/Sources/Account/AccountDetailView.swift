@@ -112,7 +112,7 @@ public struct AccountDetailView: View {
           VStack(alignment: .leading) {
             Text("#\(tag.name)")
               .font(.headline)
-            Text("\(tag.totalUses) mentions from \(tag.totalAccounts) users in the last few days")
+            Text("\(tag.totalUses) posts from \(tag.totalAccounts) participants")
               .font(.footnote)
               .foregroundColor(.gray)
           }

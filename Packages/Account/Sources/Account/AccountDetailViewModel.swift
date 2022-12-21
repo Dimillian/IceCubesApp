@@ -50,14 +50,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   @Published var followedTags: [Tag] = []
   @Published var selectedTab = Tab.statuses {
     didSet {
-      switch selectedTab {
-      case .statuses:
-        tabState = .statuses(statusesState: .display(statuses: statuses, nextPageState: .hasNextPage))
-      case .favourites:
-        tabState = .statuses(statusesState: .display(statuses: favourites, nextPageState: .none))
-      case .followedTags:
-        tabState = .followedTags(tags: followedTags)
-      }
+      reloadTabState()
     }
   }
   
@@ -104,14 +97,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
       if isCurrentUser {
         favourites = try await client.get(endpoint: Accounts.favourites)
       }
-      switch selectedTab {
-      case .statuses:
-        tabState = .statuses(statusesState:.display(statuses: statuses, nextPageState: .hasNextPage))
-      case .favourites:
-        tabState = .statuses(statusesState: .display(statuses: favourites, nextPageState: .none))
-      case .followedTags:
-        tabState = .followedTags(tags: followedTags)
-      }
+      reloadTabState()
     } catch {
       tabState = .statuses(statusesState: .error(error: error))
     }
@@ -150,6 +136,17 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
       relationship = try await client.post(endpoint: Accounts.unfollow(id: accountId))
     } catch {
       print("Error while unfollowing: \(error.localizedDescription)")
+    }
+  }
+  
+  private func reloadTabState() {
+    switch selectedTab {
+    case .statuses:
+      tabState = .statuses(statusesState: .display(statuses: statuses, nextPageState: .hasNextPage))
+    case .favourites:
+      tabState = .statuses(statusesState: .display(statuses: favourites, nextPageState: .none))
+    case .followedTags:
+      tabState = .followedTags(tags: followedTags)
     }
   }
 }

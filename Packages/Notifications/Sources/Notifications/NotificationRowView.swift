@@ -19,24 +19,29 @@ struct NotificationRowView: View {
         }
         VStack(alignment: .leading, spacing: 4) {
           HStack(spacing: 0) {
-            if (type != .mention) {
-              Image(systemName: type.iconName())
-                .resizable()
-                .frame(width: 16, height: 16)
-                .aspectRatio(contentMode: .fit)
-                .padding(.horizontal, 4)
-              if type.displayAccountName() {
-                Text(notification.account.displayName)
-                  .font(.headline) +
-                Text(" ")
-              }
-              Text(type.label())
-                .font(.body)
-              Spacer()
+            Image(systemName: type.iconName())
+              .resizable()
+              .frame(width: 16, height: 16)
+              .aspectRatio(contentMode: .fit)
+              .padding(.horizontal, 4)
+            if type.displayAccountName() {
+              Text(notification.account.displayName)
+                .font(.headline) +
+              Text(" ")
             }
+            Text(type.label())
+              .font(.body)
+            Spacer()
           }
           if let status = notification.status {
             StatusRowView(viewModel: .init(status: status, isEmbed: true))
+              .padding(8)
+              .background(Color.gray.opacity(0.10))
+              .overlay(
+                RoundedRectangle(cornerRadius: 4)
+                  .stroke(.gray.opacity(0.35), lineWidth: 1)
+              )
+              .padding(.top, 8)
           } else {
             Text(notification.account.acct)
               .font(.callout)
