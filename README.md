@@ -1,5 +1,12 @@
 # IceCubesApp
 
+<img src="Images/image1.png" width="300" />
+<img src="Images/image2.png" width="300" />
+
+
+<img src="Images/image3.png" width="300" />
+<img src="Images/image4.png" width="300" />
+
 IceCubesApp is an open source application for accessing the decentralized social network Mastodon! It's built entirely in SwiftUI, making it fast, lightweight, and easy to use.
 
 You can connect to any Mastodon instance and browse your timeline, interact with other users, and post updates and media.
