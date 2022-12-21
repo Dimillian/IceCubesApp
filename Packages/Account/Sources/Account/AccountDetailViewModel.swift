@@ -11,12 +11,33 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   enum State {
     case loading, data(account: Account), error(error: Error)
   }
-
+  
+  enum Tab: Int, CaseIterable {
+    case statuses, favourites
+    
+    var title: String {
+      switch self {
+      case .statuses: return "Posts"
+      case .favourites: return "Favourites"
+      }
+    }
+  }
   
   @Published var state: State = .loading
   @Published var statusesState: StatusesState = .loading
   @Published var title: String = ""
   @Published var relationship: Relationshionship?
+  @Published var favourites: [Status] = []
+  @Published var selectedTab = Tab.statuses {
+    didSet {
+      switch selectedTab {
+      case .statuses:
+        statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+      case .favourites:
+        statusesState = .display(statuses: favourites, nextPageState: .none)
+      }
+    }
+  }
   
   private var account: Account?
   
@@ -54,7 +75,13 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
     do {
       statusesState = .loading
       statuses = try await client.get(endpoint: Accounts.statuses(id: accountId, sinceId: nil))
-      statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+      favourites = try await client.get(endpoint: Accounts.favourites(sinceId: nil))
+      switch selectedTab {
+      case .statuses:
+        statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+      case .favourites:
+        statusesState = .display(statuses: favourites, nextPageState: .none)
+      }
     } catch {
       statusesState = .error(error: error)
     }
@@ -63,11 +90,16 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   func fetchNextPage() async {
     guard let client else { return }
     do {
-      guard let lastId = statuses.last?.id else { return }
-      statusesState = .display(statuses: statuses, nextPageState: .loadingNextPage)
-      let newStatuses: [Status] = try await client.get(endpoint: Accounts.statuses(id: accountId, sinceId: lastId))
-      statuses.append(contentsOf: newStatuses)
-      statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+      switch selectedTab {
+      case .statuses:
+        guard let lastId = statuses.last?.id else { return }
+        statusesState = .display(statuses: statuses, nextPageState: .loadingNextPage)
+        let newStatuses: [Status] = try await client.get(endpoint: Accounts.statuses(id: accountId, sinceId: lastId))
+        statuses.append(contentsOf: newStatuses)
+        statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+      case .favourites:
+        break
+      }
     } catch {
       statusesState = .error(error: error)
     }

@@ -40,6 +40,8 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
             }
         case .loadingNextPage:
           loadingRow
+        case .none:
+          EmptyView()
         }
       }
     }

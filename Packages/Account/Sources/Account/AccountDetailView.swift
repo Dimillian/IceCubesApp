@@ -5,7 +5,7 @@ import Status
 import Shimmer
 import DesignSystem
 
-public struct AccountDetailView: View {
+public struct AccountDetailView: View {  
   @Environment(\.redactionReasons) private var reasons
   @EnvironmentObject private var client: Client
   @StateObject private var viewModel: AccountDetailViewModel
@@ -30,8 +30,20 @@ public struct AccountDetailView: View {
     } content: {
       LazyVStack {
         headerView
-        Divider()
+        if isCurrentUser {
+          Picker("", selection: $viewModel.selectedTab) {
+            ForEach(AccountDetailViewModel.Tab.allCases, id: \.self) { tab in
+              Text(tab.title).tag(tab)
+            }
+          }
+          .pickerStyle(.segmented)
+          .padding(.horizontal, DS.Constants.layoutPadding)
           .offset(y: -20)
+        } else {
+          Divider()
+            .offset(y: -20)
+        }
+        
         StatusesListView(fetcher: viewModel)
       }
     }

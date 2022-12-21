@@ -3,7 +3,7 @@ import Models
 
 public enum StatusesState {
   public enum PagingState {
-    case hasNextPage, loadingNextPage
+    case hasNextPage, loadingNextPage, none
   }
   case loading
   case display(statuses: [Status], nextPageState: StatusesState.PagingState)
