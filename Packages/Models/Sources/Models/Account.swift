@@ -6,9 +6,13 @@ public struct Account: Codable, Identifiable, Equatable, Hashable {
     hasher.combine(id)
   }
   
-  public struct Field: Codable, Equatable {
+  public struct Field: Codable, Equatable, Identifiable {
+    public var id: String {
+      value + name
+    }
+    
     public let name: String
-    public let value: String
+    public let value: HTMLString
     public let verifiedAt: String?
   }
   public let id: String

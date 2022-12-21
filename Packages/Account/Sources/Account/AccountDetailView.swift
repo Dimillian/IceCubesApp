@@ -13,6 +13,7 @@ public struct AccountDetailView: View {
   
   @StateObject private var viewModel: AccountDetailViewModel
   @State private var scrollOffset: CGFloat = 0
+  @State private var isFieldsSheetDisplayed: Bool = false
   
   private let isCurrentUser: Bool
   
@@ -108,27 +109,69 @@ public struct AccountDetailView: View {
       Text("Error: \(error.localizedDescription)")
     }
   }
-  
+    
   @ViewBuilder
   private var featuredTagsView: some View {
-    if !viewModel.featuredTags.isEmpty {
+    if !viewModel.featuredTags.isEmpty || !viewModel.fields.isEmpty {
       ScrollView(.horizontal, showsIndicators: false) {
         HStack(spacing: 4) {
-          ForEach(viewModel.featuredTags) { tag in
+          if !viewModel.fields.isEmpty {
             Button {
-              routeurPath.navigate(to: .hashTag(tag: tag.name, account: viewModel.accountId))
+              isFieldsSheetDisplayed.toggle()
             } label: {
               VStack(alignment: .leading, spacing: 0) {
-                Text("#\(tag.name)")
+                Text("About")
                   .font(.callout)
-                Text("\(tag.statusesCount) posts")
+                Text("\(viewModel.fields.count) fields")
                   .font(.caption2)
               }
-            }.buttonStyle(.bordered)
+            }
+            .buttonStyle(.bordered)
+            .sheet(isPresented: $isFieldsSheetDisplayed) {
+              fieldSheetView
+            }
+          }
+          if !viewModel.featuredTags.isEmpty {
+            ForEach(viewModel.featuredTags) { tag in
+              Button {
+                routeurPath.navigate(to: .hashTag(tag: tag.name, account: viewModel.accountId))
+              } label: {
+                VStack(alignment: .leading, spacing: 0) {
+                  Text("#\(tag.name)")
+                    .font(.callout)
+                  Text("\(tag.statusesCount) posts")
+                    .font(.caption2)
+                }
+              }.buttonStyle(.bordered)
+            }
           }
         }
         .padding(.leading, DS.Constants.layoutPadding)
       }
+    }
+  }
+  
+  private var fieldSheetView: some View {
+    NavigationStack {
+      List {
+        ForEach(viewModel.fields) { field in
+          VStack(alignment: .leading, spacing: 2) {
+            Text(field.name)
+              .font(.headline)
+            HStack {
+              if field.verifiedAt != nil {
+                Image(systemName: "checkmark.seal")
+                  .foregroundColor(Color.green.opacity(0.80))
+              }
+              Text(field.value.asSafeAttributedString)
+                .foregroundColor(.brand)
+            }
+            .font(.body)
+          }
+          .listRowBackground(field.verifiedAt != nil ? Color.green.opacity(0.15) : nil)
+        }
+      }
+      .navigationTitle("About")
     }
   }
   

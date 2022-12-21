@@ -49,6 +49,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   @Published var favourites: [Status] = []
   @Published var followedTags: [Tag] = []
   @Published var featuredTags: [FeaturedTag] = []
+  @Published var fields: [Account.Field] = []
   @Published var selectedTab = Tab.statuses {
     didSet {
       reloadTabState()
@@ -77,6 +78,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
     guard let client else { return }
     do {
       let account: Account = try await client.get(endpoint: Accounts.accounts(id: accountId))
+      self.fields = account.fields
       if isCurrentUser {
         self.followedTags = try await client.get(endpoint: Accounts.followedTags)
       } else {
