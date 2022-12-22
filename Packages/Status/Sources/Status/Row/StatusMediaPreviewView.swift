@@ -2,8 +2,33 @@ import SwiftUI
 import Models
 import AVKit
 
+private class VideoPlayerViewModel: ObservableObject {
+  @Published var player: AVPlayer?
+  private let url: URL
+  
+  init(url: URL) {
+    self.url = url
+  }
+  
+  func preparePlayer() {
+    player = .init(url: url)
+    player?.play()
+  }
+}
+
+private struct VideoPlayerView: View {
+  @StateObject var viewModel: VideoPlayerViewModel
+  var body: some View {
+    VStack {
+      VideoPlayer(player: viewModel.player)
+    }.onAppear {
+      viewModel.preparePlayer()
+    }
+  }
+}
+
 // Could have just been a state, but SwiftUI .sheet is buggy ATM without @StateObject
-class SelectedMediaSheetManager: ObservableObject {
+private class SelectedMediaSheetManager: ObservableObject {
   @Published var selectedAttachement: MediaAttachement?
 }
 
@@ -58,7 +83,7 @@ public struct StatusMediaPreviewView: View {
               }
             )
           case .gifv:
-            VideoPlayer(player: AVPlayer(url: attachement.url))
+            VideoPlayerView(viewModel: .init(url: attachement.url))
               .frame(width: proxy.frame(in: .local).width)
               .frame(height: attachements.count > 2 ? 100 : 200)
           }
@@ -98,7 +123,7 @@ public struct StatusMediaPreviewView: View {
                 }
               )
             case .gifv:
-              VideoPlayer(player: AVPlayer(url: attachement.url))
+              VideoPlayerView(viewModel: .init(url: attachement.url))
             }
             Spacer()
           }

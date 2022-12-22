@@ -1,15 +1,6 @@
 import Foundation
 
-public struct MediaAttachement: Codable, Identifiable, Hashable {
-  public struct Meta: Codable, Equatable {
-    public let width: Int?
-    public let height: Int?
-    public let size: String?
-    public let aspect: Float?
-    public let x: Float?
-    public let y: Float?
-  }
-  
+public struct MediaAttachement: Codable, Identifiable, Hashable {  
   public enum SupportedType: String {
     case image, gifv
   }
@@ -26,6 +17,5 @@ public struct MediaAttachement: Codable, Identifiable, Hashable {
   public let url: URL
   public let previewUrl: URL?
   public let description: String?
-  public let meta: [String: Meta]?
 }
 
