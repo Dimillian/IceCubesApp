@@ -14,13 +14,15 @@ let package = Package(
       targets: ["Env"]),
   ],
   dependencies: [
-    .package(name: "Models", path: "../Models")
+    .package(name: "Models", path: "../Models"),
+    .package(name: "Network", path: "../Network")
   ],
   targets: [
     .target(
       name: "Env",
       dependencies: [
         .product(name: "Models", package: "Models"),
+        .product(name: "Network", package: "Network"),
       ]),
   ]
 )

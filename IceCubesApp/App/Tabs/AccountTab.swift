@@ -6,14 +6,13 @@ import Models
 import Shimmer
 
 struct AccountTab: View {
-  @EnvironmentObject private var client: Client
+  @EnvironmentObject private var currentAccount: CurrentAccount
   @StateObject private var routeurPath = RouterPath()
-  @State private var loggedUser: Account?
   
   var body: some View {
     NavigationStack(path: $routeurPath.path) {
-      if let loggedUser {
-        AccountDetailView(account: loggedUser, isCurrentUser: true)
+      if let account = currentAccount.account {
+        AccountDetailView(account: account, isCurrentUser: true)
           .withAppRouteur()
           .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
       } else {
@@ -22,24 +21,6 @@ struct AccountTab: View {
           .shimmering()
       }
     }
-    .onAppear {
-      Task {
-        await fetchUser(client: client)
-      }
-    }
-    .onChange(of: client) { newClient in
-      Task {
-        await fetchUser(client: newClient)
-      }
-    }
     .environmentObject(routeurPath)
-  }
-  
-  
-  private func fetchUser(client: Client) async {
-    guard client.isAuth else { return }
-    Task {
-      loggedUser = try? await client.get(endpoint: Accounts.verifyCredentials)
-    }
   }
 }
