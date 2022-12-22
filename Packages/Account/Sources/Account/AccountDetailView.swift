@@ -34,8 +34,10 @@ public struct AccountDetailView: View {
     ScrollViewOffsetReader { offset in
       self.scrollOffset = offset
     } content: {
-      LazyVStack {
+      LazyVStack(alignment: .leading) {
         headerView
+        familliarFollowers
+          .offset(y: -36)
         featuredTagsView
           .offset(y: -36)
         if isCurrentUser {
@@ -148,6 +150,31 @@ public struct AccountDetailView: View {
         }
         .padding(.leading, DS.Constants.layoutPadding)
       }
+    }
+  }
+  
+  @ViewBuilder
+  private var familliarFollowers: some View {
+    if !viewModel.familliarFollowers.isEmpty {
+      VStack(alignment: .leading, spacing: 0) {
+        Text("Also followed by")
+          .font(.headline)
+          .padding(.leading, DS.Constants.layoutPadding)
+        ScrollView(.horizontal, showsIndicators: false) {
+          LazyHStack(spacing: 0) {
+            ForEach(viewModel.familliarFollowers) { account in
+              AvatarView(url: account.avatar, size: .badge)
+                .onTapGesture {
+                  routeurPath.navigate(to: .accountDetailWithAccount(account: account))
+                }
+                .padding(.leading, -4)
+            }
+          }
+          .padding(.leading, DS.Constants.layoutPadding + 4)
+        }
+      }
+      .padding(.top, 2)
+      .padding(.bottom, 12)
     }
   }
   

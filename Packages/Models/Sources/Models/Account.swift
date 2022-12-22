@@ -49,3 +49,8 @@ public struct Account: Codable, Identifiable, Equatable, Hashable {
           emojis: [])
   }
 }
+
+public struct FamilliarAccounts: Codable {
+  public let id: String
+  public let accounts: [Account]
+}

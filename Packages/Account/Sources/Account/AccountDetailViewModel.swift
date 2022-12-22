@@ -50,6 +50,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   @Published var followedTags: [Tag] = []
   @Published var featuredTags: [FeaturedTag] = []
   @Published var fields: [Account.Field] = []
+  @Published var familliarFollowers: [Account] = []
   @Published var selectedTab = Tab.statuses {
     didSet {
       reloadTabState()
@@ -77,18 +78,25 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   func fetchAccount() async {
     guard let client else { return }
     do {
-      let account: Account = try await client.get(endpoint: Accounts.accounts(id: accountId))
-      self.fields = account.fields
-      if isCurrentUser {
-        self.followedTags = try await client.get(endpoint: Accounts.followedTags)
-      } else {
-        let relationships: [Relationshionship] = try await client.get(endpoint: Accounts.relationships(id: accountId))
-        self.relationship = relationships.first
-      }
-      self.featuredTags = try await client.get(endpoint: Accounts.featuredTags(id: accountId))
+      async let account: Account = client.get(endpoint: Accounts.accounts(id: accountId))
+      async let followedTags: [Tag] = client.get(endpoint: Accounts.followedTags)
+      async let relationships: [Relationshionship] = client.get(endpoint: Accounts.relationships(id: accountId))
+      async let featuredTags: [FeaturedTag] = client.get(endpoint: Accounts.featuredTags(id: accountId))
+      async let familliarFollowers: [FamilliarAccounts] = client.get(endpoint: Accounts.familiarFollowers(withAccount: accountId))
+      let loadedAccount = try await account
+      self.featuredTags = try await featuredTags
       self.featuredTags.sort { $0.statusesCountInt > $1.statusesCountInt }
-      self.title = account.displayName
-      accountState = .data(account: account)
+      self.fields = loadedAccount.fields
+      self.title = loadedAccount.displayName
+      if isCurrentUser {
+        self.followedTags = try await followedTags
+      } else {
+        let relationships = try await relationships
+        self.relationship = relationships.first
+        self.familliarFollowers = try await familliarFollowers.first?.accounts ?? []
+      }
+      self.account = loadedAccount
+      accountState = .data(account: loadedAccount)
     } catch {
       accountState = .error(error: error)
     }

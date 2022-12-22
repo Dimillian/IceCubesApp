@@ -10,6 +10,7 @@ public enum Accounts: Endpoint {
   case relationships(id: String)
   case follow(id: String)
   case unfollow(id: String)
+  case familiarFollowers(withAccount: String)
   
   public func path() -> String {
     switch self {
@@ -31,6 +32,8 @@ public enum Accounts: Endpoint {
       return "accounts/\(id)/follow"
     case .unfollow(let id):
       return "accounts/\(id)/unfollow"
+    case .familiarFollowers:
+      return "accounts/familiar_followers"
     }
   }
   
@@ -47,6 +50,8 @@ public enum Accounts: Endpoint {
       return params
     case let .relationships(id):
       return [.init(name: "id", value: id)]
+    case let .familiarFollowers(withAccount):
+      return [.init(name: "id[]", value: withAccount)]
     default:
       return nil
     }
