@@ -2,6 +2,7 @@ import SwiftUI
 import Models
 import AVKit
 import Env
+import Shimmer
 
 private class VideoPlayerViewModel: ObservableObject {
   @Published var player: AVPlayer?
@@ -87,8 +88,11 @@ public struct StatusMediaPreviewView: View {
                   .frame(width: proxy.frame(in: .local).width)
               },
               placeholder: {
-                ProgressView()
-                  .frame(maxWidth: 80, maxHeight: 80)
+                RoundedRectangle(cornerRadius: 4)
+                  .fill(Color.gray)
+                  .frame(height: attachements.count > 2 ? 100 : 200)
+                  .frame(width: proxy.frame(in: .local).width)
+                  .shimmering()
               }
             )
           case .gifv:

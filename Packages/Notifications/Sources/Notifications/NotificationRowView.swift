@@ -17,16 +17,12 @@ struct NotificationRowView: View {
           .onTapGesture {
             routeurPath.navigate(to: .accountDetailWithAccount(account: notification.account))
         }
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: 0) {
           HStack(spacing: 0) {
-            Image(systemName: type.iconName())
-              .resizable()
-              .frame(width: 16, height: 16)
-              .aspectRatio(contentMode: .fit)
-              .padding(.horizontal, 4)
             if type.displayAccountName() {
               notification.account.displayNameWithEmojis
                 .font(.subheadline)
+                .fontWeight(.semibold)
               Text(" ")
             }
             Text(type.label())
@@ -83,25 +79,6 @@ extension Models.Notification.NotificationType {
       return "poll ended"
     case .update:
       return "has been edited"
-    }
-  }
-  
-  func iconName() -> String {
-    switch self {
-    case .status:
-      return "pencil"
-    case .mention:
-      return "at.circle.fill"
-    case .reblog:
-      return "arrow.left.arrow.right.circle.fill"
-    case .follow, .follow_request:
-      return "person.fill.badge.plus"
-    case .favourite:
-      return "star.fill"
-    case .poll:
-      return "chart.bar.fill"
-    case .update:
-      return "pencil.line"
     }
   }
 }

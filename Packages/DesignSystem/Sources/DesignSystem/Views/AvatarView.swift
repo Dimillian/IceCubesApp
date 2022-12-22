@@ -1,4 +1,5 @@
 import SwiftUI
+import Shimmer
 
 public struct AvatarView: View {
   public enum Size {
@@ -35,10 +36,13 @@ public struct AvatarView: View {
           if size == .badge {
             Circle()
               .fill(.gray)
-              .frame(maxWidth: size.size.width, maxHeight: size.size.height)
+              .frame(width: size.size.width, height: size.size.height)
+              .shimmering()
           } else {
-            ProgressView()
-              .frame(maxWidth: size.size.width, maxHeight: size.size.height)
+            RoundedRectangle(cornerRadius: size == .profile ? 4 : size.size.width / 2)
+              .fill(.gray)
+              .frame(width: size.size.width, height: size.size.height)
+              .shimmering()
           }
         case let .success(image):
           image.resizable()

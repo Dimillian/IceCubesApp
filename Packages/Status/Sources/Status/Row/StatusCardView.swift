@@ -1,5 +1,6 @@
 import SwiftUI
 import Models
+import Shimmer
 
 struct StatusCardView: View {
   @Environment(\.openURL) private var openURL
@@ -18,8 +19,10 @@ struct StatusCardView: View {
                 .clipped()
             },
             placeholder: {
-              ProgressView()
-                .frame(maxWidth: 40, maxHeight: 40)
+              Rectangle()
+                .fill(Color.gray)
+                .frame(height: 200)
+                .shimmering()
             }
           )
         }
