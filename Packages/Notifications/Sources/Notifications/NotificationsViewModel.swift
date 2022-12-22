@@ -14,8 +14,21 @@ class NotificationsViewModel: ObservableObject {
     case error(error: Error)
   }
   
+  public enum Tab: String, CaseIterable {
+    case all = "All"
+    case mentions = "Mentions"
+  }
+  
   var client: Client?
   @Published var state: State = .loading
+  @Published var tab: Tab = .all {
+    didSet {
+      notifications = []
+      Task {
+        await fetchNotifications()
+      }
+    }
+  }
   
   private var notifications: [Models.Notification] = []
   
@@ -25,7 +38,8 @@ class NotificationsViewModel: ObservableObject {
       if notifications.isEmpty {
         state = .loading
       }
-      notifications = try await client.get(endpoint: Notifications.notifications(maxId: nil))
+      notifications = try await client.get(endpoint: Notifications.notifications(maxId: nil,
+                                                                                 onlyMentions: tab == .mentions))
       state = .display(notifications: notifications, nextPageState: .hasNextPage)
     } catch {
       state = .error(error: error)
@@ -37,7 +51,8 @@ class NotificationsViewModel: ObservableObject {
     do {
       guard let lastId = notifications.last?.id else { return }
       state = .display(notifications: notifications, nextPageState: .loadingNextPage)
-      let newNotifications: [Models.Notification] = try await client.get(endpoint: Notifications.notifications(maxId: lastId))
+      let newNotifications: [Models.Notification] = try await client.get(endpoint: Notifications.notifications(maxId: lastId,
+                                                                                                               onlyMentions: tab == .mentions))
       notifications.append(contentsOf: newNotifications)
       state = .display(notifications: notifications, nextPageState: .hasNextPage)
     } catch {

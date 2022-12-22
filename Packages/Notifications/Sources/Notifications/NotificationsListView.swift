@@ -14,7 +14,16 @@ public struct NotificationsListView: View {
     ScrollView {
       LazyVStack {
         if client.isAuth {
-          notificationsView
+          Picker("", selection: $viewModel.tab) {
+            ForEach(NotificationsViewModel.Tab.allCases, id: \.self) { tab in
+              Text(tab.rawValue)
+            }
+          }
+          .pickerStyle(.segmented)
+          Group {
+            notificationsView
+          }
+          .padding(.top, 16)
         } else {
           Text("Please Sign In to see your notifications")
             .font(.title3)
