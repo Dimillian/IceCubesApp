@@ -24,8 +24,8 @@ extension View {
   func withSheetDestinations(sheetDestinations: Binding<SheetDestinations?>) -> some View {
     self.sheet(item: sheetDestinations) { destination in
       switch destination {
-      case let .imageDetail(url):
-        ImageSheetView(url: url)
+      default:
+        EmptyView()
       }
     }
   }

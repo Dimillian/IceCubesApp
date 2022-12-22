@@ -12,12 +12,10 @@ public enum RouteurDestinations: Hashable {
 public enum SheetDestinations: Identifiable {
   public var id: String {
     switch self {
-    case .imageDetail:
-      return "imageDetail"
+    default:
+      break
     }
   }
-  
-  case imageDetail(url: URL)
 }
 
 public class RouterPath: ObservableObject {

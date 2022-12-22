@@ -4,6 +4,7 @@ import DesignSystem
 import Env
 
 struct AccountDetailHeaderView: View {
+  @EnvironmentObject private var quickLook: QuickLook
   @EnvironmentObject private var routeurPath: RouterPath
   @Environment(\.redactionReasons) private var reasons
   
@@ -57,7 +58,9 @@ struct AccountDetailHeaderView: View {
     .offset(y: scrollOffset > 0 ? -scrollOffset : 0)
     .contentShape(Rectangle())
     .onTapGesture {
-      routeurPath.presentedSheet = .imageDetail(url: account.header)
+      Task {
+        await quickLook.prepareFor(urls: [account.header], selectedURL: account.header)
+      }
     }
   }
   
@@ -82,7 +85,9 @@ struct AccountDetailHeaderView: View {
       )
       .contentShape(Rectangle())
       .onTapGesture {
-        routeurPath.presentedSheet = .imageDetail(url: account.avatar)
+        Task {
+          await quickLook.prepareFor(urls: [account.avatar], selectedURL: account.avatar)
+        }
       }
       Spacer()
       Group {
