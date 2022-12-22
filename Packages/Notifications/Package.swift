@@ -16,7 +16,7 @@ let package = Package(
   dependencies: [
     .package(name: "Network", path: "../Network"),
     .package(name: "Models", path: "../Models"),
-    .package(name: "Routeur", path: "../Routeur"),
+    .package(name: "Env", path: "../Env"),
     .package(name: "Status", path: "../Status"),
     .package(url: "https://github.com/markiv/SwiftUI-Shimmer", exact: "1.1.0")
   ],
@@ -26,7 +26,7 @@ let package = Package(
       dependencies: [
         .product(name: "Network", package: "Network"),
         .product(name: "Models", package: "Models"),
-        .product(name: "Routeur", package: "Routeur"),
+        .product(name: "Env", package: "Env"),
         .product(name: "Status", package: "Status"),
         .product(name: "Shimmer", package: "SwiftUI-Shimmer")
       ]),

@@ -2,7 +2,7 @@ import SwiftUI
 import Models
 import DesignSystem
 import Status
-import Routeur
+import Env
 
 struct NotificationRowView: View {
   @EnvironmentObject private var routeurPath: RouterPath

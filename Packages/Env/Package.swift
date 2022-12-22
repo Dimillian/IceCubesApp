@@ -4,26 +4,23 @@
 import PackageDescription
 
 let package = Package(
-  name: "Routeur",
+  name: "Env",
   platforms: [
     .iOS(.v16),
   ],
   products: [
     .library(
-      name: "Routeur",
-      targets: ["Routeur"]),
+      name: "Env",
+      targets: ["Env"]),
   ],
   dependencies: [
     .package(name: "Models", path: "../Models")
   ],
   targets: [
     .target(
-      name: "Routeur",
+      name: "Env",
       dependencies: [
         .product(name: "Models", package: "Models"),
       ]),
-    .testTarget(
-      name: "RouteurTests",
-      dependencies: ["Routeur"]),
   ]
 )

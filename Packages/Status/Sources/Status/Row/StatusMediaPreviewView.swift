@@ -1,6 +1,7 @@
 import SwiftUI
 import Models
 import AVKit
+import Env
 
 private class VideoPlayerViewModel: ObservableObject {
   @Published var player: AVPlayer?
@@ -33,9 +34,13 @@ private class SelectedMediaSheetManager: ObservableObject {
 }
 
 public struct StatusMediaPreviewView: View {
+  @EnvironmentObject private var quickLook: QuickLook
+  
   public let attachements: [MediaAttachement]
   
   @StateObject private var selectedMediaSheetManager = SelectedMediaSheetManager()
+  
+  @State private var isQuickLookLoading: Bool = false
 
   public var body: some View {
     VStack {
@@ -56,9 +61,13 @@ public struct StatusMediaPreviewView: View {
         }
       }
     }
-    .sheet(item: $selectedMediaSheetManager.selectedAttachement) { selectedAttachement in
-      makeSelectedAttachementsSheet(selectedAttachement: selectedAttachement)
+    .overlay {
+      if quickLook.isPreparing {
+       quickLookLoadingView
+          .transition(.opacity)
+      }
     }
+
   }
   
   @ViewBuilder
@@ -93,43 +102,25 @@ public struct StatusMediaPreviewView: View {
       .cornerRadius(4)
       .contentShape(Rectangle())
       .onTapGesture {
-        selectedMediaSheetManager.selectedAttachement = attachement
+        Task {
+          await quickLook.prepareFor(urls: attachements.map{ $0.url }, selectedURL: attachement.url)
+        }
       }
     }
   }
   
-  
-  private func makeSelectedAttachementsSheet(selectedAttachement: MediaAttachement) -> some View {
-    var attachements = attachements
-    attachements.removeAll(where: { $0.id == selectedAttachement.id })
-    attachements.insert(selectedAttachement, at: 0)
-    return TabView {
-      ForEach(attachements) { attachement in
-        if let type = attachement.supportedType {
-          VStack {
-            Spacer()
-            switch type {
-            case .image:
-              AsyncImage(
-                url: attachement.url,
-                content: { image in
-                  image
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                },
-                placeholder: {
-                  ProgressView()
-                    .frame(maxWidth: 80, maxHeight: 80)
-                }
-              )
-            case .gifv:
-              VideoPlayerView(viewModel: .init(url: attachement.url))
-            }
-            Spacer()
-          }
+  private var quickLookLoadingView: some View {
+    ZStack(alignment: .center) {
+      VStack {
+        Spacer()
+        HStack {
+          Spacer()
+          ProgressView()
+          Spacer()
         }
+        Spacer()
       }
     }
-    .tabViewStyle(.page(indexDisplayMode: .always))
+    .background(.ultraThinMaterial)
   }
 }

@@ -4,7 +4,7 @@ import Network
 import Status
 import Shimmer
 import DesignSystem
-import Routeur
+import Env
 
 public struct AccountDetailView: View {  
   @Environment(\.redactionReasons) private var reasons

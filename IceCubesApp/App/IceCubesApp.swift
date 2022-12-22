@@ -2,12 +2,14 @@ import SwiftUI
 import Timeline
 import Network
 import KeychainSwift
+import Env
 
 @main
 struct IceCubesApp: App {
   public static let defaultServer = "mastodon.social"
   
   @StateObject private var appAccountsManager = AppAccountsManager()
+  @StateObject private var quickLook = QuickLook()
   
   var body: some Scene {
     WindowGroup {
@@ -32,8 +34,10 @@ struct IceCubesApp: App {
           }
       }
       .tint(.brand)
+      .quickLookPreview($quickLook.url, in: quickLook.urls)
       .environmentObject(appAccountsManager)
       .environmentObject(appAccountsManager.currentClient)
+      .environmentObject(quickLook)
     }
   }
 }
