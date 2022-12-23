@@ -41,18 +41,24 @@ struct StatusActionsView: View {
   var body: some View {
     HStack {
       ForEach(Actions.allCases, id: \.self) { action in
-        Button {
-          handleAction(action: action)
-        } label: {
-          HStack(spacing: 2) {
-            Image(systemName: action.iconName(viewModel: viewModel))
-            if let count = action.count(viewModel: viewModel) {
-              Text("\(count)")
-                .font(.footnote)
+        if action == .share {
+          if let url = viewModel.status.reblog?.url ?? viewModel.status.url {
+            ShareLink(item: url) {
+              Image(systemName: action.iconName(viewModel: viewModel))
             }
           }
-        }
-        if action != .share {
+        } else {
+          Button {
+            handleAction(action: action)
+          } label: {
+            HStack(spacing: 2) {
+              Image(systemName: action.iconName(viewModel: viewModel))
+              if let count = action.count(viewModel: viewModel) {
+                Text("\(count)")
+                  .font(.footnote)
+              }
+            }
+          }
           Spacer()
         }
       }

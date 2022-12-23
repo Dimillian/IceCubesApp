@@ -18,15 +18,20 @@ public class StatusRowViewModel: ObservableObject {
   public init(status: Status, isEmbed: Bool) {
     self.status = status
     self.isEmbed = isEmbed
-    self.isFavourited = status.reblog?.favourited ?? status.favourited
+    if let reblog = status.reblog {
+      self.isFavourited = reblog.favourited == true
+      self.isReblogged = reblog.reblogged == true
+    } else {
+      self.isFavourited = status.favourited == true
+      self.isReblogged = status.reblogged == true
+    }
     self.favouritesCount = status.reblog?.favouritesCount ?? status.favouritesCount
-    self.isReblogged = status.reblog?.reblogged ?? status.reblogged
     self.reblogsCount = status.reblog?.reblogsCount ?? status.reblogsCount
     self.repliesCount = status.reblog?.repliesCount ?? status.repliesCount
   }
   
   func favourite() async {
-    guard let client else { return }
+    guard let client, client.isAuth else { return }
     isFavourited = true
     favouritesCount += 1
     do {
@@ -39,7 +44,7 @@ public class StatusRowViewModel: ObservableObject {
   }
   
   func unFavourite() async {
-    guard let client else { return }
+    guard let client, client.isAuth else { return }
     isFavourited = false
     favouritesCount -= 1
     do {
@@ -52,7 +57,7 @@ public class StatusRowViewModel: ObservableObject {
   }
   
   func reblog() async {
-    guard let client else { return }
+    guard let client, client.isAuth else { return }
     isReblogged = true
     reblogsCount += 1
     do {
@@ -65,7 +70,7 @@ public class StatusRowViewModel: ObservableObject {
   }
   
   func unReblog() async {
-    guard let client else { return }
+    guard let client, client.isAuth else { return }
     isReblogged = false
     reblogsCount -= 1
     do {
@@ -78,9 +83,14 @@ public class StatusRowViewModel: ObservableObject {
   }
   
   private func updateFromStatus(status: Status) {
-    isFavourited = status.reblog?.favourited ?? status.favourited
+    if let reblog = status.reblog {
+      isFavourited = reblog.favourited == true
+      isReblogged = reblog.reblogged == true
+    } else {
+      isFavourited = status.favourited == true
+      isReblogged = status.reblogged == true
+    }
     favouritesCount = status.reblog?.favouritesCount ?? status.favouritesCount
-    isReblogged = status.reblog?.reblogged ?? status.reblogged
     reblogsCount = status.reblog?.reblogsCount ?? status.reblogsCount
     repliesCount = status.reblog?.repliesCount ?? status.repliesCount
   }

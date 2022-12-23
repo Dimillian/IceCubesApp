@@ -11,10 +11,11 @@ public protocol AnyStatus {
   var reblogsCount: Int { get }
   var favouritesCount: Int { get }
   var card: Card? { get }
-  var favourited: Bool { get }
-  var reblogged: Bool { get }
+  var favourited: Bool? { get }
+  var reblogged: Bool? { get }
   var pinned: Bool? { get }
   var emojis: [Emoji] { get }
+  var url: URL? { get }
 }
 
 public struct Status: AnyStatus, Codable, Identifiable {
@@ -29,10 +30,11 @@ public struct Status: AnyStatus, Codable, Identifiable {
   public let reblogsCount: Int
   public let favouritesCount: Int
   public let card: Card?
-  public let favourited: Bool
-  public let reblogged: Bool
+  public let favourited: Bool?
+  public let reblogged: Bool?
   public let pinned: Bool?
   public let emojis: [Emoji]
+  public let url: URL?
   
   public static func placeholder() -> Status {
     .init(id: UUID().uuidString,
@@ -49,7 +51,8 @@ public struct Status: AnyStatus, Codable, Identifiable {
           favourited: false,
           reblogged: false,
           pinned: false,
-          emojis: [])
+          emojis: [],
+          url: nil)
   }
   
   public static func placeholders() -> [Status] {
@@ -68,8 +71,9 @@ public struct ReblogStatus: AnyStatus, Codable, Identifiable {
   public let reblogsCount: Int
   public let favouritesCount: Int
   public let card: Card?
-  public let favourited: Bool
-  public let reblogged: Bool
+  public let favourited: Bool?
+  public let reblogged: Bool?
   public let pinned: Bool?
   public let emojis: [Emoji]
+  public let url: URL?
 }

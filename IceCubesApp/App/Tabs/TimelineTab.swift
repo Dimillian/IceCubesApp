@@ -4,6 +4,7 @@ import Env
 import Network
 
 struct TimelineTab: View {
+  @EnvironmentObject private var client: Client
   @StateObject private var routeurPath = RouterPath()
   
   var body: some View {
@@ -12,13 +13,14 @@ struct TimelineTab: View {
         .withAppRouteur()
         .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
         .toolbar {
-          ToolbarItem(placement: .navigationBarLeading) {
-            Button {
-              routeurPath.presentedSheet = .statusEditor(replyToStatus: nil)
-            } label: {
-              Image(systemName: "square.and.pencil")
+          if client.isAuth {
+            ToolbarItem(placement: .navigationBarLeading) {
+              Button {
+                routeurPath.presentedSheet = .statusEditor(replyToStatus: nil)
+              } label: {
+                Image(systemName: "square.and.pencil")
+              }
             }
-
           }
         }
     }

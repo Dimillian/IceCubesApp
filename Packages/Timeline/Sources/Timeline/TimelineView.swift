@@ -27,7 +27,7 @@ public struct TimelineView: View {
     .navigationTitle(filter?.title() ?? viewModel.timeline.title())
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
-      if filter == nil {
+      if filter == nil, client.isAuth {
         ToolbarItem(placement: .navigationBarTrailing) {
           timelineFilterButton
         }
