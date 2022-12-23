@@ -13,11 +13,18 @@ let package = Package(
       name: "DesignSystem",
       targets: ["DesignSystem"]),
   ],
-  dependencies: [],
+  dependencies: [
+    .package(name: "Models", path: "../Models"),
+    .package(name: "Env", path: "../Env"),
+    .package(url: "https://github.com/markiv/SwiftUI-Shimmer", exact: "1.1.0")],
   targets: [
     .target(
       name: "DesignSystem",
-      dependencies: []),
+      dependencies: [
+        .product(name: "Models", package: "Models"),
+        .product(name: "Env", package: "Env"),
+        .product(name: "Shimmer", package: "SwiftUI-Shimmer")
+      ]),
   ]
 )
 
