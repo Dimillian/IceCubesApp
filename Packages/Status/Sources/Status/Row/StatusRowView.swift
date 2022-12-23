@@ -18,8 +18,10 @@ public struct StatusRowView: View {
     VStack(alignment: .leading) {
       reblogView
       statusView
-      StatusActionsView(viewModel: viewModel)
-        .padding(.vertical, 8)
+      if !viewModel.isEmbed {
+        StatusActionsView(viewModel: viewModel)
+          .padding(.vertical, 8)
+      }
     }
     .onAppear {
       viewModel.client = client
@@ -64,10 +66,14 @@ public struct StatusRowView: View {
           })
         
         if !status.mediaAttachments.isEmpty {
-          StatusMediaPreviewView(attachements: status.mediaAttachments)
-            .padding(.vertical, 4)
+          if viewModel.isEmbed {
+            Image(systemName: "paperclip")
+          } else {
+            StatusMediaPreviewView(attachements: status.mediaAttachments)
+              .padding(.vertical, 4)
+          }
         }
-        if let card = status.card {
+        if let card = status.card, !viewModel.isEmbed {
           StatusCardView(card: card)
         }
       }

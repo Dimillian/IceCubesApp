@@ -19,14 +19,18 @@ struct NotificationRowView: View {
         }
         VStack(alignment: .leading, spacing: 0) {
           HStack(spacing: 0) {
-            if type.displayAccountName() {
-              notification.account.displayNameWithEmojis
-                .font(.subheadline)
-                .fontWeight(.semibold)
-              Text(" ")
-            }
-            Text(type.label())
+            Text(notification.account.displayName)
               .font(.subheadline)
+              .fontWeight(.semibold) +
+            Text(" ") +
+            Text(type.label())
+              .font(.subheadline) +
+            Text(" ⸱ ")
+              .font(.footnote)
+              .foregroundColor(.gray) +
+            Text(notification.createdAt.formatted)
+              .font(.footnote)
+              .foregroundColor(.gray)
             Spacer()
           }
           if let status = notification.status {
@@ -52,15 +56,6 @@ struct NotificationRowView: View {
 }
 
 extension Models.Notification.NotificationType {
-  func displayAccountName() -> Bool {
-    switch self {
-    case .status, .mention, .reblog, .follow, .follow_request, .favourite:
-      return true
-    case .poll, .update:
-      return false
-    }
-  }
-  
   func label() -> String {
     switch self {
     case .status:
