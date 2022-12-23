@@ -77,7 +77,7 @@ public struct AccountDetailView: View {
       }
     }
     .edgesIgnoringSafeArea(.top)
-    .navigationTitle(Text(scrollOffset < -20 ? viewModel.title : ""))
+    .navigationTitle(Text(scrollOffset < -200 ? viewModel.title : ""))
   }
   
   @ViewBuilder
@@ -205,21 +205,9 @@ public struct AccountDetailView: View {
   private func makeTagsListView(tags: [Tag]) -> some View {
     Group {
       ForEach(tags) { tag in
-        HStack {
-          VStack(alignment: .leading) {
-            Text("#\(tag.name)")
-              .font(.headline)
-            Text("\(tag.totalUses) posts from \(tag.totalAccounts) participants")
-              .font(.footnote)
-              .foregroundColor(.gray)
-          }
-          Spacer()
-        }
-        .padding(.horizontal, DS.Constants.layoutPadding)
-        .padding(.vertical, 8)
-        .onTapGesture {
-          routeurPath.navigate(to: .hashTag(tag: tag.name, account: nil))
-        }
+        TagRowView(tag: tag)
+          .padding(.horizontal, DS.Constants.layoutPadding)
+          .padding(.vertical, 8)
       }
     }
   }

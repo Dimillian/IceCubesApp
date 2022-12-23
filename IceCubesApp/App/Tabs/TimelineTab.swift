@@ -11,6 +11,16 @@ struct TimelineTab: View {
       TimelineView()
         .withAppRouteur()
         .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
+        .toolbar {
+          ToolbarItem(placement: .navigationBarLeading) {
+            Button {
+              routeurPath.presentedSheet = .statusEditor(replyToStatus: nil)
+            } label: {
+              Image(systemName: "square.and.pencil")
+            }
+
+          }
+        }
     }
     .environmentObject(routeurPath)
   }

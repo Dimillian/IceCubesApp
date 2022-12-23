@@ -66,24 +66,11 @@ struct AccountDetailHeaderView: View {
   
   private var accountAvatarView: some View {
     HStack {
-      AsyncImage(
-        url: account.avatar,
-        content: { image in
-          image.resizable()
-            .aspectRatio(contentMode: .fit)
-            .cornerRadius(4)
-            .frame(maxWidth: 80, maxHeight: 80)
-            .overlay(
-              RoundedRectangle(cornerRadius: 4)
-                .stroke(.white, lineWidth: 1)
-            )
-        },
-        placeholder: {
-          ProgressView()
-            .frame(maxWidth: 80, maxHeight: 80)
-        }
-      )
-      .contentShape(Rectangle())
+      AvatarView(url: account.avatar, size: .account)
+        .overlay(
+          RoundedRectangle(cornerRadius: 4)
+            .stroke(.white, lineWidth: 1)
+        )
       .onTapGesture {
         Task {
           await quickLook.prepareFor(urls: [account.avatar], selectedURL: account.avatar)

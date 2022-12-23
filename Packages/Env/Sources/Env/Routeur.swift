@@ -10,10 +10,12 @@ public enum RouteurDestinations: Hashable {
 }
 
 public enum SheetDestinations: Identifiable {
+  case statusEditor(replyToStatus: String?)
+  
   public var id: String {
     switch self {
-    default:
-      break
+    case .statusEditor:
+      return "statusEditor"
     }
   }
 }

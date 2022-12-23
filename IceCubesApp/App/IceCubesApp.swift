@@ -11,19 +11,25 @@ struct IceCubesApp: App {
   @StateObject private var appAccountsManager = AppAccountsManager()
   @StateObject private var currentAccount = CurrentAccount()
   @StateObject private var quickLook = QuickLook()
-    
+  
   var body: some Scene {
     WindowGroup {
       TabView {
         TimelineTab()
           .tabItem {
-            Label("Home", systemImage: "globe")
+            Label("Timeline", systemImage: "rectangle.on.rectangle")
           }
         if appAccountsManager.currentClient.isAuth {
           NotificationsTab()
             .tabItem {
               Label("Notifications", systemImage: "bell")
             }
+        }
+        ExploreTab()
+          .tabItem {
+            Label("Explore", systemImage: "magnifyingglass")
+          }
+        if appAccountsManager.currentClient.isAuth {
           AccountTab()
             .tabItem {
               Label("Profile", systemImage: "person.circle")

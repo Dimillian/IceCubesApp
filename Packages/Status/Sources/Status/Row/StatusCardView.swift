@@ -2,12 +2,16 @@ import SwiftUI
 import Models
 import Shimmer
 
-struct StatusCardView: View {
+public struct StatusCardView: View {
   @Environment(\.openURL) private var openURL
-  let status: AnyStatus
+  let card: Card
   
-  var body: some View {
-    if let card = status.card, let title = card.title {
+  public init(card: Card) {
+    self.card = card
+  }
+  
+  public var body: some View {
+    if let title = card.title {
       VStack(alignment: .leading) {
         if let imageURL = card.image {
           AsyncImage(
@@ -57,11 +61,5 @@ struct StatusCardView: View {
         openURL(card.url)
       }
     }
-  }
-}
-
-struct StatusCardView_Previews: PreviewProvider {
-  static var previews: some View {
-    StatusCardView(status: Status.placeholder())
   }
 }

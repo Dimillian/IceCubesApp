@@ -67,14 +67,16 @@ public struct StatusRowView: View {
           StatusMediaPreviewView(attachements: status.mediaAttachments)
             .padding(.vertical, 4)
         }
-        StatusCardView(status: status)
+        if let card = status.card {
+          StatusCardView(card: card)
+        }
       }
     }
   }
   
   @ViewBuilder
   private func makeAccountView(status: AnyStatus) -> some View {
-    AvatarView(url: status.account.avatar)
+    AvatarView(url: status.account.avatar, size: .status)
     VStack(alignment: .leading, spacing: 0) {
       status.account.displayNameWithEmojis
         .font(.subheadline)

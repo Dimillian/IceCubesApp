@@ -4,6 +4,7 @@ import Env
 import Network
 
 struct StatusActionsView: View {
+  @EnvironmentObject private var routeurPath: RouterPath
   @ObservedObject var viewModel: StatusRowViewModel
     
   @MainActor
@@ -62,6 +63,8 @@ struct StatusActionsView: View {
   private func handleAction(action: Actions) {
     Task {
       switch action {
+      case .respond:
+        routeurPath.navigate(to: .statusDetail(id: viewModel.status.reblog?.id ?? viewModel.status.id))
       case .favourite:
         if viewModel.isFavourited {
           await viewModel.unFavourite()

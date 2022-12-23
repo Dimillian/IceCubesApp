@@ -17,6 +17,8 @@
 		9F398AA92935FFDB00A889F2 /* Account in Frameworks */ = {isa = PBXBuildFile; productRef = 9F398AA82935FFDB00A889F2 /* Account */; };
 		9F398AAB2935FFDB00A889F2 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 9F398AAA2935FFDB00A889F2 /* Models */; };
 		9F398AB329360A4C00A889F2 /* TimelineTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F398AB229360A4C00A889F2 /* TimelineTab.swift */; };
+		9F55C68D2955968700F94077 /* ExploreTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F55C68C2955968700F94077 /* ExploreTab.swift */; };
+		9F55C6902955993C00F94077 /* Explore in Frameworks */ = {isa = PBXBuildFile; productRef = 9F55C68F2955993C00F94077 /* Explore */; };
 		9F5E581929545BE700A53960 /* Env in Frameworks */ = {isa = PBXBuildFile; productRef = 9F5E581829545BE700A53960 /* Env */; };
 		9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE4ACA293783B000772766 /* SettingsTab.swift */; };
 		9FAE4ACE29379A5A00772766 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAE4ACD29379A5A00772766 /* KeychainSwift */; };
@@ -41,6 +43,8 @@
 		9F398AA52935FE8A00A889F2 /* AppRouteur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouteur.swift; sourceTree = "<group>"; };
 		9F398AAC2936005300A889F2 /* Account */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Account; path = Packages/Account; sourceTree = "<group>"; };
 		9F398AB229360A4C00A889F2 /* TimelineTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTab.swift; sourceTree = "<group>"; };
+		9F55C68C2955968700F94077 /* ExploreTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreTab.swift; sourceTree = "<group>"; };
+		9F55C68E295598F900F94077 /* Explore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Explore; path = Packages/Explore; sourceTree = "<group>"; };
 		9F5E581729545B5500A53960 /* Env */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Env; path = Packages/Env; sourceTree = "<group>"; };
 		9FAE4AC8293774FF00772766 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9FAE4ACA293783B000772766 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
@@ -58,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F55C6902955993C00F94077 /* Explore in Frameworks */,
 				9FAE4ACE29379A5A00772766 /* KeychainSwift in Frameworks */,
 				9F398AA92935FFDB00A889F2 /* Account in Frameworks */,
 				9FBFE64E292A72BD00C250E9 /* Network in Frameworks */,
@@ -98,6 +103,7 @@
 				9F398AB229360A4C00A889F2 /* TimelineTab.swift */,
 				9F35DB4629506F6600B3281A /* NotificationTab.swift */,
 				9F35DB4B2952005C00B3281A /* AccountTab.swift */,
+				9F55C68C2955968700F94077 /* ExploreTab.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -119,6 +125,7 @@
 				9FBFE64C292A72BD00C250E9 /* Frameworks */,
 				9F398AAC2936005300A889F2 /* Account */,
 				9F35DB45294FA04C00B3281A /* DesignSystem */,
+				9F55C68E295598F900F94077 /* Explore */,
 				9F5E581729545B5500A53960 /* Env */,
 				9F398AA32935F90100A889F2 /* Models */,
 				9F29553D292B67B600E0E81B /* Network */,
@@ -189,6 +196,7 @@
 				9F35DB43294F9A7D00B3281A /* Status */,
 				9F35DB4929506FA100B3281A /* Notifications */,
 				9F5E581829545BE700A53960 /* Env */,
+				9F55C68F2955993C00F94077 /* Explore */,
 			);
 			productName = IceCubesApp;
 			productReference = 9FBFE639292A715500C250E9 /* IceCubesApp.app */;
@@ -256,6 +264,7 @@
 				9FBFE63D292A715500C250E9 /* IceCubesApp.swift in Sources */,
 				9F35DB4729506F6600B3281A /* NotificationTab.swift in Sources */,
 				9FAE4AD129379AD600772766 /* AppAccount.swift in Sources */,
+				9F55C68D2955968700F94077 /* ExploreTab.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,6 +524,10 @@
 		9F398AAA2935FFDB00A889F2 /* Models */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Models;
+		};
+		9F55C68F2955993C00F94077 /* Explore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Explore;
 		};
 		9F5E581829545BE700A53960 /* Env */ = {
 			isa = XCSwiftPackageProductDependency;

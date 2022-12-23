@@ -24,8 +24,8 @@ extension View {
   func withSheetDestinations(sheetDestinations: Binding<SheetDestinations?>) -> some View {
     self.sheet(item: sheetDestinations) { destination in
       switch destination {
-      default:
-        EmptyView()
+      case .statusEditor:
+        StatusEditorView()
       }
     }
   }
