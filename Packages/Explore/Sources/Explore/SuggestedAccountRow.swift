@@ -3,6 +3,7 @@ import Models
 import Network
 import DesignSystem
 import Env
+import Account
 
 @MainActor
 class SuggestedAccountViewModel: ObservableObject {
@@ -14,20 +15,6 @@ class SuggestedAccountViewModel: ObservableObject {
   init(account: Account, relationShip: Relationshionship) {
     self.account = account
     self.relationShip = relationShip
-  }
-  
-  func follow() async {
-    guard let client else { return }
-    do {
-      self.relationShip = try await client.post(endpoint: Accounts.follow(id: account.id))
-    } catch {}
-  }
-  
-  func unfollow() async {
-    guard let client else { return }
-    do {
-      self.relationShip = try await client.post(endpoint: Accounts.unfollow(id: account.id))
-    } catch {}
   }
 }
 
@@ -54,24 +41,8 @@ struct SuggestedAccountRow: View {
           })
       }
       Spacer()
-      Button {
-        Task {
-          if viewModel.relationShip.following {
-            await viewModel.unfollow()
-          } else {
-            await viewModel.follow()
-          }
-        }
-      } label: {
-        if viewModel.relationShip.requested {
-          Text("Requested")
-            .font(.callout)
-        } else {
-          Text(viewModel.relationShip.following ? "Unfollow" : "Follow")
-            .font(.callout)
-        }
-      }
-      .buttonStyle(.bordered)
+      FollowButton(viewModel: .init(accountId: viewModel.account.id,
+                                    relationship: viewModel.relationShip))
     }
     .onAppear {
       viewModel.client = client

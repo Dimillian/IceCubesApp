@@ -10,8 +10,8 @@ struct AccountDetailHeaderView: View {
   
   let isCurrentUser: Bool
   let account: Account
-  @Binding var relationship: Relationshionship?
-  @Binding var following: Bool
+  let relationship: Relationshionship?
+  
   @Binding var scrollOffset: CGFloat
   
   private var bannerHeight: CGFloat {
@@ -97,16 +97,9 @@ struct AccountDetailHeaderView: View {
               .foregroundColor(.gray)
         }
         Spacer()
-        if relationship != nil && !isCurrentUser {
-          Button {
-            following.toggle()
-          } label: {
-            if relationship?.requested == true {
-              Text("Requested")
-            } else {
-              Text(following ? "Following" : "Follow")
-            }
-          }.buttonStyle(.bordered)
+        if let relationship = relationship, !isCurrentUser {
+          FollowButton(viewModel: .init(accountId: account.id,
+                                        relationship: relationship))
         }
       }
       Text(account.note.asSafeAttributedString)
@@ -135,8 +128,7 @@ struct AccountDetailHeaderView_Previews: PreviewProvider {
   static var previews: some View {
     AccountDetailHeaderView(isCurrentUser: false,
                             account: .placeholder(),
-                            relationship: .constant(.placeholder()),
-                            following: .constant(true),
+                            relationship: .placeholder(),
                             scrollOffset: .constant(0))
   }
 }

@@ -86,26 +86,13 @@ public struct AccountDetailView: View {
     case .loading:
       AccountDetailHeaderView(isCurrentUser: isCurrentUser,
                               account: .placeholder(),
-                              relationship: .constant(.placeholder()),
-                              following: .constant(false),
+                              relationship: .placeholder(),
                               scrollOffset: $scrollOffset)
         .redacted(reason: .placeholder)
     case let .data(account):
       AccountDetailHeaderView(isCurrentUser: isCurrentUser,
                               account: account,
-                              relationship: $viewModel.relationship,
-                              following:
-      .init(get: {
-        viewModel.relationship?.following ?? false
-      }, set: { following in
-        Task {
-          if following {
-            await viewModel.follow()
-          } else {
-            await viewModel.unfollow()
-          }
-        }
-      }),
+                              relationship: viewModel.relationship,
                               scrollOffset: $scrollOffset)
     case let .error(error):
       Text("Error: \(error.localizedDescription)")
@@ -156,7 +143,7 @@ public struct AccountDetailView: View {
   @ViewBuilder
   private var familliarFollowers: some View {
     if !viewModel.familliarFollowers.isEmpty {
-      VStack(alignment: .leading, spacing: 0) {
+      VStack(alignment: .leading, spacing: 2) {
         Text("Also followed by")
           .font(.headline)
           .padding(.leading, DS.Constants.layoutPadding)

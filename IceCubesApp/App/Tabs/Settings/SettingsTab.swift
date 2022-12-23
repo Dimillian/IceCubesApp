@@ -86,6 +86,9 @@ struct SettingsTabs: View {
             .cornerRadius(4)
         }
       }
+      Link(destination: URL(string: "https://github.com/Dimillian/IceCubesApp")!) {
+        Text("https://github.com/Dimillian/IceCubesApp")
+      }
     }
   }
   

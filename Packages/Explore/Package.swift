@@ -14,6 +14,7 @@ let package = Package(
       targets: ["Explore"]),
   ],
   dependencies: [
+    .package(name: "Account", path: "../Account"),
     .package(name: "Network", path: "../Network"),
     .package(name: "Models", path: "../Models"),
     .package(name: "Env", path: "../Env"),
@@ -24,6 +25,7 @@ let package = Package(
     .target(
       name: "Explore",
       dependencies: [
+        .product(name: "Account", package: "Account"),
         .product(name: "Network", package: "Network"),
         .product(name: "Models", package: "Models"),
         .product(name: "Env", package: "Env"),
