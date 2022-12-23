@@ -3,28 +3,31 @@ import Models
 import Network
 import DesignSystem
 import Env
-import Account
 
 @MainActor
-class SuggestedAccountViewModel: ObservableObject {
+public class AccountsListRowViewModel: ObservableObject {
   var client: Client?
   
   @Published var account: Account
   @Published var relationShip: Relationshionship
   
-  init(account: Account, relationShip: Relationshionship) {
+  public init(account: Account, relationShip: Relationshionship) {
     self.account = account
     self.relationShip = relationShip
   }
 }
 
-struct SuggestedAccountRow: View {
+public struct AccountsListRow: View {
   @EnvironmentObject private var routeurPath: RouterPath
   @EnvironmentObject private var client: Client
   
-  @StateObject var viewModel: SuggestedAccountViewModel
+  @StateObject var viewModel: AccountsListRowViewModel
   
-  var body: some View {
+  public init(viewModel: AccountsListRowViewModel) {
+    _viewModel = StateObject(wrappedValue: viewModel)
+  }
+  
+  public var body: some View {
     HStack(alignment: .top) {
       AvatarView(url: viewModel.account.avatar, size: .status)
       VStack(alignment: .leading, spacing: 2) {

@@ -48,6 +48,11 @@ public struct Account: Codable, Identifiable, Equatable, Hashable {
           locked: false,
           emojis: [])
   }
+  
+  public static func placeholders() -> [Account] {
+    [.placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(),
+     .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder()]
+  }
 }
 
 public struct FamilliarAccounts: Codable {

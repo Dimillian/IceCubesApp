@@ -44,28 +44,32 @@ public struct AvatarView: View {
       AsyncImage(url: url) { phase in
         switch phase {
         case .empty:
-          if size == .badge {
-            Circle()
-              .fill(.gray)
-              .frame(width: size.size.width, height: size.size.height)
-              .shimmering()
-          } else {
-            RoundedRectangle(cornerRadius: size.cornerRadius)
-              .fill(.gray)
-              .frame(width: size.size.width, height: size.size.height)
-              .shimmering()
-          }
+          placeholderView
+            .shimmering()
         case let .success(image):
           image.resizable()
             .aspectRatio(contentMode: .fit)
             .cornerRadius(size.cornerRadius)
             .frame(maxWidth: size.size.width, maxHeight: size.size.height)
         case .failure:
-          EmptyView()
+          placeholderView
         @unknown default:
-          EmptyView()
+          placeholderView
         }
       }
+    }
+  }
+  
+  @ViewBuilder
+  private var placeholderView: some View {
+    if size == .badge {
+      Circle()
+        .fill(.gray)
+        .frame(width: size.size.width, height: size.size.height)
+    } else {
+      RoundedRectangle(cornerRadius: size.cornerRadius)
+        .fill(.gray)
+        .frame(width: size.size.width, height: size.size.height)
     }
   }
 }

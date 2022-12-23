@@ -79,8 +79,12 @@ struct AccountDetailHeaderView: View {
       Spacer()
       Group {
         makeCustomInfoLabel(title: "Posts", count: account.statusesCount)
-        makeCustomInfoLabel(title: "Following", count: account.followingCount)
-        makeCustomInfoLabel(title: "Followers", count: account.followersCount)
+        NavigationLink(value: RouteurDestinations.following(id: account.id)) {
+          makeCustomInfoLabel(title: "Following", count: account.followingCount)
+        }
+        NavigationLink(value: RouteurDestinations.followers(id: account.id)) {
+          makeCustomInfoLabel(title: "Followers", count: account.followersCount)
+        }
       }.offset(y: 20)
     }
   }
@@ -117,6 +121,7 @@ struct AccountDetailHeaderView: View {
     VStack {
       Text("\(count)")
         .font(.headline)
+        .foregroundColor(.brand)
       Text(title)
         .font(.footnote)
         .foregroundColor(.gray)

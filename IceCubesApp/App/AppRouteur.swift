@@ -17,6 +17,10 @@ extension View {
         StatusDetailView(statusId: id)
       case let .hashTag(tag, accountId):
         TimelineView(timeline: .hashtag(tag: tag, accountId: accountId))
+      case let .following(id):
+        AccountsListView(accountId: id, mode: .following)
+      case let .followers(id):
+        AccountsListView(accountId: id, mode: .followers)
       }
     }
   }

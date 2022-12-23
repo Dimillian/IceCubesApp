@@ -12,6 +12,8 @@ public enum Accounts: Endpoint {
   case unfollow(id: String)
   case familiarFollowers(withAccount: String)
   case suggestions
+  case followers(id: String, sinceId: String?)
+  case following(id: String, sinceId: String?)
   
   public func path() -> String {
     switch self {
@@ -37,6 +39,10 @@ public enum Accounts: Endpoint {
       return "accounts/familiar_followers"
     case .suggestions:
       return "suggestions"
+    case .following(let id, _):
+      return "accounts/\(id)/following"
+    case .followers(let id, _):
+      return "accounts/\(id)/followers"
     }
   }
   
@@ -57,6 +63,12 @@ public enum Accounts: Endpoint {
       }
     case let .familiarFollowers(withAccount):
       return [.init(name: "id[]", value: withAccount)]
+    case let .followers(_, sinceId):
+      guard let sinceId else { return nil }
+      return [.init(name: "max_id", value: sinceId)]
+    case let .following(_, sinceId):
+      guard let sinceId else { return nil }
+      return [.init(name: "max_id", value: sinceId)]
     default:
       return nil
     }

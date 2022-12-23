@@ -5,6 +5,7 @@ import DesignSystem
 import Models
 import Status
 import Shimmer
+import Account
 
 public struct ExploreView: View {
   @EnvironmentObject private var client: Client
@@ -51,14 +52,14 @@ public struct ExploreView: View {
       ForEach(viewModel.suggestedAccounts
         .prefix(upTo: viewModel.suggestedAccounts.count > 3 ? 3 : viewModel.suggestedAccounts.count)) { account in
         if let relationship = viewModel.suggestedAccountsRelationShips.first(where: { $0.id == account.id }) {
-          SuggestedAccountRow(viewModel: .init(account: account, relationShip: relationship))
+          AccountsListRow(viewModel: .init(account: account, relationShip: relationship))
         }
       }
       NavigationLink {
         List {
           ForEach(viewModel.suggestedAccounts) { account in
             if let relationship = viewModel.suggestedAccountsRelationShips.first(where: { $0.id == account.id }) {
-              SuggestedAccountRow(viewModel: .init(account: account, relationShip: relationship))
+              AccountsListRow(viewModel: .init(account: account, relationShip: relationship))
             }
           }
         }
