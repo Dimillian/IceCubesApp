@@ -41,4 +41,13 @@ public class RouterPath: ObservableObject {
     }
     return .systemAction
   }
+  
+  public func handle(url: URL) -> OpenURLAction.Result {
+    if url.pathComponents.contains(where: { $0 == "tags" }),
+        let tag = url.pathComponents.last {
+      navigate(to: .hashTag(tag: tag, account: nil))
+      return .handled
+    }
+    return .systemAction
+  }
 }

@@ -112,6 +112,9 @@ struct AccountDetailHeaderView: View {
       Text(account.note.asSafeAttributedString)
         .font(.body)
         .padding(.top, 8)
+        .environment(\.openURL, OpenURLAction { url in
+          routeurPath.handle(url: url)
+        })
     }
     .padding(.horizontal, DS.Constants.layoutPadding)
     .offset(y: -40)

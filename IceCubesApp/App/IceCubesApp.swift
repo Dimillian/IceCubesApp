@@ -24,12 +24,10 @@ struct IceCubesApp: App {
             .tabItem {
               Label("Notifications", systemImage: "bell")
             }
-        }
-        ExploreTab()
-          .tabItem {
-            Label("Explore", systemImage: "magnifyingglass")
-          }
-        if appAccountsManager.currentClient.isAuth {
+          ExploreTab()
+            .tabItem {
+              Label("Explore", systemImage: "magnifyingglass")
+            }
           AccountTab()
             .tabItem {
               Label("Profile", systemImage: "person.circle")

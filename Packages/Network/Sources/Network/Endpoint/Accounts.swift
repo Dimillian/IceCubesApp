@@ -7,10 +7,11 @@ public enum Accounts: Endpoint {
   case featuredTags(id: String)
   case verifyCredentials
   case statuses(id: String, sinceId: String?, tag: String?)
-  case relationships(id: String)
+  case relationships(ids: [String])
   case follow(id: String)
   case unfollow(id: String)
   case familiarFollowers(withAccount: String)
+  case suggestions
   
   public func path() -> String {
     switch self {
@@ -34,6 +35,8 @@ public enum Accounts: Endpoint {
       return "accounts/\(id)/unfollow"
     case .familiarFollowers:
       return "accounts/familiar_followers"
+    case .suggestions:
+      return "suggestions"
     }
   }
   
@@ -48,8 +51,10 @@ public enum Accounts: Endpoint {
         params.append(.init(name: "max_id", value: sinceId))
       }
       return params
-    case let .relationships(id):
-      return [.init(name: "id", value: id)]
+    case let .relationships(ids):
+      return ids.map {
+        URLQueryItem(name: "id[]", value: $0)
+      }
     case let .familiarFollowers(withAccount):
       return [.init(name: "id[]", value: withAccount)]
     default:

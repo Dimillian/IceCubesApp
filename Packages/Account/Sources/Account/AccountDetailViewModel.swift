@@ -80,7 +80,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
     do {
       async let account: Account = client.get(endpoint: Accounts.accounts(id: accountId))
       async let followedTags: [Tag] = client.get(endpoint: Accounts.followedTags)
-      async let relationships: [Relationshionship] = client.get(endpoint: Accounts.relationships(id: accountId))
+      async let relationships: [Relationshionship] = client.get(endpoint: Accounts.relationships(ids: [accountId]))
       async let featuredTags: [FeaturedTag] = client.get(endpoint: Accounts.featuredTags(id: accountId))
       async let familliarFollowers: [FamilliarAccounts] = client.get(endpoint: Accounts.familiarFollowers(withAccount: accountId))
       let loadedAccount = try await account
