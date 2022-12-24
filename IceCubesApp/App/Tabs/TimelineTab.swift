@@ -2,10 +2,12 @@ import SwiftUI
 import Timeline
 import Env
 import Network
+import Combine
 
 struct TimelineTab: View {
   @EnvironmentObject private var client: Client
   @StateObject private var routeurPath = RouterPath()
+  @Binding var popToRootTab: IceCubesApp.Tab
   
   var body: some View {
     NavigationStack(path: $routeurPath.path) {
@@ -25,5 +27,10 @@ struct TimelineTab: View {
         }
     }
     .environmentObject(routeurPath)
+    .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
+      if popToRootTab == .timeline {
+        routeurPath.path = []
+      }
+    }
   }
 }

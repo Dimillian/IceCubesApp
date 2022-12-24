@@ -6,6 +6,7 @@ import Explore
 
 struct ExploreTab: View {
   @StateObject private var routeurPath = RouterPath()
+  @Binding var popToRootTab: IceCubesApp.Tab
   
   var body: some View {
     NavigationStack(path: $routeurPath.path) {
@@ -14,5 +15,10 @@ struct ExploreTab: View {
         .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
     }
     .environmentObject(routeurPath)
+    .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
+      if popToRootTab == .explore {
+        routeurPath.path = []
+      }
+    }
   }
 }
