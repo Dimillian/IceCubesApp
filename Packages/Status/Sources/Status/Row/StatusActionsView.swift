@@ -2,10 +2,13 @@ import SwiftUI
 import Models
 import Env
 import Network
+import DesignSystem
 
 struct StatusActionsView: View {
   @EnvironmentObject private var routeurPath: RouterPath
   @ObservedObject var viewModel: StatusRowViewModel
+  
+  let generator = UINotificationFeedbackGenerator()
   
   @MainActor
   enum Actions: CaseIterable {
@@ -36,6 +39,17 @@ struct StatusActionsView: View {
         return nil
       }
     }
+    
+    func tintColor(viewModel: StatusRowViewModel) -> Color? {
+      switch self {
+      case .respond, .share:
+        return nil
+      case .favourite:
+        return viewModel.isFavourited ? .yellow : nil
+      case .boost:
+        return viewModel.isReblogged ? .brand : nil
+      }
+    }
   }
   
   var body: some View {
@@ -54,6 +68,7 @@ struct StatusActionsView: View {
             } label: {
               HStack(spacing: 2) {
                 Image(systemName: action.iconName(viewModel: viewModel))
+                  .foregroundColor(action.tintColor(viewModel: viewModel))
                 if let count = action.count(viewModel: viewModel) {
                   Text("\(count)")
                     .font(.footnote)
@@ -110,6 +125,7 @@ struct StatusActionsView: View {
   
   private func handleAction(action: Actions) {
     Task {
+      generator.notificationOccurred(.success)
       switch action {
       case .respond:
         routeurPath.navigate(to: .statusDetail(id: viewModel.status.reblog?.id ?? viewModel.status.id))

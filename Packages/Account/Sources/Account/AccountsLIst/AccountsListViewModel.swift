@@ -72,7 +72,7 @@ class AccountsListViewModel: ObservableObject {
                                             Accounts.relationships(ids: accounts.map{ $0.id }))
       state = .display(accounts: accounts,
                        relationships: relationships,
-                       nextPageState: .hasNextPage)
+                       nextPageState: link?.maxId != nil ? .hasNextPage : .none)
     } catch { }
   }
   
@@ -104,7 +104,7 @@ class AccountsListViewModel: ObservableObject {
       self.nextPageId = link?.maxId
       state = .display(accounts: accounts,
                        relationships: relationships,
-                       nextPageState: .hasNextPage)
+                       nextPageState: link?.maxId != nil ? .hasNextPage : .none)
     } catch {
       print(error)
     }

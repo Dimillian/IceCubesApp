@@ -8,6 +8,7 @@ import Shimmer
 import Account
 
 public struct ExploreView: View {
+  @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var routeurPath: RouterPath
   
@@ -68,7 +69,7 @@ public struct ExploreView: View {
         .navigationBarTitleDisplayMode(.inline)
       } label: {
         Text("See more")
-          .foregroundColor(.brand)
+          .foregroundColor(theme.tintColor)
       }
     }
   }
@@ -92,7 +93,7 @@ public struct ExploreView: View {
         .navigationBarTitleDisplayMode(.inline)
       } label: {
         Text("See more")
-          .foregroundColor(.brand)
+          .foregroundColor(theme.tintColor)
       }
     }
   }
@@ -117,7 +118,7 @@ public struct ExploreView: View {
         .navigationBarTitleDisplayMode(.inline)
       } label: {
         Text("See more")
-          .foregroundColor(.brand)
+          .foregroundColor(theme.tintColor)
       }
     }
   }
@@ -141,7 +142,7 @@ public struct ExploreView: View {
         .navigationBarTitleDisplayMode(.inline)
       } label: {
         Text("See more")
-          .foregroundColor(.brand)
+          .foregroundColor(theme.tintColor)
       }
     }
   }

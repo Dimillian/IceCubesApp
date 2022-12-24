@@ -5,6 +5,7 @@ import Status
 import Env
 
 struct NotificationRowView: View {
+  @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var routeurPath: RouterPath
   @Environment(\.redactionReasons) private var reasons
     
@@ -33,7 +34,7 @@ struct NotificationRowView: View {
       ZStack(alignment: .center) {
         Circle()
           .strokeBorder(Color.white, lineWidth: 1)
-          .background(Circle().foregroundColor(Color.brand))
+          .background(Circle().foregroundColor(theme.tintColor))
           .frame(width: 24, height: 24)
         
         Image(systemName: type.iconName())

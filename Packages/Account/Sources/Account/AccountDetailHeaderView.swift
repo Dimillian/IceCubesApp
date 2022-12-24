@@ -4,6 +4,7 @@ import DesignSystem
 import Env
 
 struct AccountDetailHeaderView: View {
+  @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var quickLook: QuickLook
   @EnvironmentObject private var routeurPath: RouterPath
   @Environment(\.redactionReasons) private var reasons
@@ -121,7 +122,7 @@ struct AccountDetailHeaderView: View {
     VStack {
       Text("\(count)")
         .font(.headline)
-        .foregroundColor(.brand)
+        .foregroundColor(theme.tintColor)
       Text(title)
         .font(.footnote)
         .foregroundColor(.gray)

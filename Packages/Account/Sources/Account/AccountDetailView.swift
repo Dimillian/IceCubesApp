@@ -8,6 +8,7 @@ import Env
 
 public struct AccountDetailView: View {  
   @Environment(\.redactionReasons) private var reasons
+  @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var routeurPath: RouterPath
   
@@ -178,7 +179,7 @@ public struct AccountDetailView: View {
                   .foregroundColor(Color.green.opacity(0.80))
               }
               Text(field.value.asSafeAttributedString)
-                .foregroundColor(.brand)
+                .foregroundColor(theme.tintColor)
             }
             .font(.body)
           }

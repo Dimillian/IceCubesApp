@@ -164,7 +164,8 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
     case .statuses:
       tabState = .statuses(statusesState: .display(statuses: statuses, nextPageState: .hasNextPage))
     case .favourites:
-      tabState = .statuses(statusesState: .display(statuses: favourites, nextPageState: .hasNextPage))
+      tabState = .statuses(statusesState: .display(statuses: favourites,
+                                                   nextPageState: favouritesNextPage != nil ? .hasNextPage : .none))
     case .followedTags:
       tabState = .followedTags(tags: followedTags)
     }

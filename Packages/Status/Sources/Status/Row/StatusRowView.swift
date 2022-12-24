@@ -6,6 +6,7 @@ import Network
 
 public struct StatusRowView: View {
   @Environment(\.redactionReasons) private var reasons
+  @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var routeurPath: RouterPath
   @StateObject var viewModel: StatusRowViewModel
@@ -24,7 +25,7 @@ public struct StatusRowView: View {
       if !viewModel.isEmbed {
         StatusActionsView(viewModel: viewModel)
           .padding(.vertical, 8)
-          .tint(viewModel.isFocused ? .brand : .gray)
+          .tint(viewModel.isFocused ? theme.tintColor : .gray)
       }
     }
     .onAppear {
