@@ -34,8 +34,13 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
   func fetchStatuses() async {
     guard let client else { return }
     do {
-      statusesState = .loading
-      statuses = try await client.get(endpoint: timeline.endpoint(sinceId: nil))
+      if statuses.isEmpty {
+        statusesState = .loading
+        statuses = try await client.get(endpoint: timeline.endpoint(sinceId: nil, maxId: nil))
+      } else if let first = statuses.first {
+        let newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: first.id, maxId: nil))
+        statuses.insert(contentsOf: newStatuses, at: 0)
+      }
       statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
     } catch {
       statusesState = .error(error: error)
@@ -48,7 +53,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
     do {
       guard let lastId = statuses.last?.id else { return }
       statusesState = .display(statuses: statuses, nextPageState: .loadingNextPage)
-      let newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: lastId))
+      let newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil, maxId: lastId))
       statuses.append(contentsOf: newStatuses)
       statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
     } catch {

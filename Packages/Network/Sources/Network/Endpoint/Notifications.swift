@@ -1,7 +1,9 @@
 import Foundation
 
 public enum Notifications: Endpoint {
-  case notifications(maxId: String?, onlyMentions: Bool)
+  case notifications(sinceId: String?,
+                     maxId: String?,
+                     types: [String]?)
   
   public func path() -> String {
     switch self {
@@ -12,13 +14,12 @@ public enum Notifications: Endpoint {
   
   public func queryItems() -> [URLQueryItem]? {
     switch self {
-    case .notifications(let maxId, let onlyMentions):
-      var params: [URLQueryItem] = []
-      if onlyMentions {
-        params.append(.init(name: "types[]", value: "mention"))
-      }
-      if let maxId {
-        params.append(.init(name: "max_id", value: maxId))
+    case .notifications(let sinceId, let maxId, let types):
+      var params = makePaginationParam(sinceId: sinceId, maxId: maxId) ?? []
+      if let types {
+        for type in types {
+          params.append(.init(name: "types[]", value: type))
+        }
       }
       return params
     }

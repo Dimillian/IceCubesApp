@@ -1,9 +1,9 @@
 import Foundation
 
 public enum Timelines: Endpoint {
-  case pub(sinceId: String?)
-  case home(sinceId: String?)
-  case hashtag(tag: String, sinceId: String?)
+  case pub(sinceId: String?, maxId: String?)
+  case home(sinceId: String?, maxId: String?)
+  case hashtag(tag: String, maxId: String?)
   
   public func path() -> String {
     switch self {
@@ -18,15 +18,12 @@ public enum Timelines: Endpoint {
   
   public func queryItems() -> [URLQueryItem]? {
     switch self {
-    case .pub(let sinceId):
-      guard let sinceId else { return nil }
-      return [.init(name: "max_id", value: sinceId)]
-    case .home(let sinceId):
-      guard let sinceId else { return nil }
-      return [.init(name: "max_id", value: sinceId)]
-    case let .hashtag(_, sinceId):
-      guard let sinceId else { return nil }
-      return [.init(name: "max_id", value: sinceId)]
+    case .pub(let sinceId, let maxId):
+      return makePaginationParam(sinceId: sinceId, maxId: maxId)
+    case .home(let sinceId, let maxId):
+      return makePaginationParam(sinceId: sinceId, maxId: maxId)
+    case let .hashtag(_, maxId):
+      return makePaginationParam(sinceId: nil, maxId: maxId)
     }
   }
 }

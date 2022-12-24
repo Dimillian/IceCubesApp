@@ -31,15 +31,25 @@ class NotificationsViewModel: ObservableObject {
   }
   
   private var notifications: [Models.Notification] = []
+  private var queryTypes: [String]? {
+    tab == .mentions ? ["mention"] : nil
+  }
   
   func fetchNotifications() async {
     guard let client else { return }
     do {
       if notifications.isEmpty {
         state = .loading
+        notifications = try await client.get(endpoint: Notifications.notifications(sinceId: nil,
+                                                                                   maxId: nil,
+                                                                                   types: queryTypes))
+      } else if let first = notifications.first {
+        let newNotifications: [Models.Notification] =
+        try await client.get(endpoint: Notifications.notifications(sinceId: first.id,
+                                                                   maxId: nil,
+                                                                   types: queryTypes))
+        notifications.insert(contentsOf: newNotifications, at: 0)
       }
-      notifications = try await client.get(endpoint: Notifications.notifications(maxId: nil,
-                                                                                 onlyMentions: tab == .mentions))
       state = .display(notifications: notifications, nextPageState: .hasNextPage)
     } catch {
       state = .error(error: error)
@@ -51,8 +61,10 @@ class NotificationsViewModel: ObservableObject {
     do {
       guard let lastId = notifications.last?.id else { return }
       state = .display(notifications: notifications, nextPageState: .loadingNextPage)
-      let newNotifications: [Models.Notification] = try await client.get(endpoint: Notifications.notifications(maxId: lastId,
-                                                                                                               onlyMentions: tab == .mentions))
+      let newNotifications: [Models.Notification] =
+      try await client.get(endpoint: Notifications.notifications(sinceId: nil,
+                                                                 maxId: lastId,
+                                                                 types: queryTypes))
       notifications.append(contentsOf: newNotifications)
       state = .display(notifications: notifications, nextPageState: .hasNextPage)
     } catch {

@@ -42,9 +42,7 @@ public struct TimelineView: View {
       }
     }
     .refreshable {
-      Task {
-        await viewModel.fetchStatuses()
-      }
+      await viewModel.fetchStatuses()
     }
   }
   

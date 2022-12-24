@@ -25,15 +25,15 @@ public enum TimelineFilter: Hashable, Equatable {
     }
   }
   
-  func endpoint(sinceId: String?) -> Endpoint {
+  func endpoint(sinceId: String?, maxId: String?) -> Endpoint {
     switch self {
-      case .pub: return Timelines.pub(sinceId: sinceId)
-      case .home: return Timelines.home(sinceId: sinceId)
+    case .pub: return Timelines.pub(sinceId: sinceId, maxId: maxId)
+    case .home: return Timelines.home(sinceId: sinceId, maxId: maxId)
       case let .hashtag(tag, accountId):
       if let accountId {
         return Accounts.statuses(id: accountId, sinceId: nil, tag: tag)
       } else {
-        return Timelines.hashtag(tag: tag, sinceId: sinceId)
+        return Timelines.hashtag(tag: tag, maxId: maxId)
       }
     }
   }

@@ -37,9 +37,7 @@ public struct NotificationsListView: View {
       await viewModel.fetchNotifications()
     }
     .refreshable {
-      Task {
-        await viewModel.fetchNotifications()
-      }
+      await viewModel.fetchNotifications()
     }
     .navigationTitle(Text("Notifications"))
     .navigationBarTitleDisplayMode(.inline)
