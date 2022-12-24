@@ -4,11 +4,13 @@ import Env
 import Network
 import Account
 import Models
+import DesignSystem
 
 struct SettingsTabs: View {
   @Environment(\.openURL) private var openURL
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var appAccountsManager: AppAccountsManager
+  @EnvironmentObject private var theme: Theme
   
   @State private var signInInProgress = false
   @State private var accountData: Account?
@@ -20,6 +22,7 @@ struct SettingsTabs: View {
       Form {
         appSection
         accountSection
+        themeSection
         instanceSection
       }
       .onOpenURL(perform: { url in
@@ -56,6 +59,19 @@ struct SettingsTabs: View {
         TextField("Mastodon server", text: $signInServer)
         signInButton
       }
+    }
+  }
+  
+  private var themeSection: some View {
+    Section("Theme") {
+      ColorPicker("Tint color", selection: $theme.tintColor)
+      Button {
+        theme.tintColor = .brand
+        theme.labelColor = .label
+      } label: {
+        Text("Restore default")
+      }
+
     }
   }
   

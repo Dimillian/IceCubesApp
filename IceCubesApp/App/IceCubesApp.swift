@@ -3,6 +3,7 @@ import Timeline
 import Network
 import KeychainSwift
 import Env
+import DesignSystem
 
 @main
 struct IceCubesApp: App {
@@ -11,10 +12,12 @@ struct IceCubesApp: App {
   }
   
   public static let defaultServer = "mastodon.social"
-  
+    
   @StateObject private var appAccountsManager = AppAccountsManager()
   @StateObject private var currentAccount = CurrentAccount()
   @StateObject private var quickLook = QuickLook()
+  @StateObject private var theme = Theme()
+  
   @State private var selectedTab: Tab = .timeline
   @State private var popToRootTab: Tab = .other
   
@@ -60,7 +63,7 @@ struct IceCubesApp: App {
           }
           .tag(Tab.settings)
       }
-      .tint(.brand)
+      .tint(theme.tintColor)
       .onChange(of: appAccountsManager.currentClient) { newClient in
         currentAccount.setClient(client: newClient)
       }
@@ -71,6 +74,7 @@ struct IceCubesApp: App {
       .environmentObject(appAccountsManager.currentClient)
       .environmentObject(quickLook)
       .environmentObject(currentAccount)
+      .environmentObject(theme)
       .quickLookPreview($quickLook.url, in: quickLook.urls)
     }
   }

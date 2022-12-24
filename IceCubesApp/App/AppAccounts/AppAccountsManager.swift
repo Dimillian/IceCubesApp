@@ -8,15 +8,18 @@ class AppAccountsManager: ObservableObject {
                             oauthToken: currentAccount.oauthToken)
     }
   }
+  @Published var availableAccount: [AppAccount]
   @Published var currentClient: Client
   
   init() {
     var defaultAccount = AppAccount(server: IceCubesApp.defaultServer, oauthToken: nil)
     do {
       let keychainAccounts = try AppAccount.retrieveAll()
+      availableAccount = keychainAccounts
       defaultAccount = keychainAccounts.last ?? defaultAccount
     } catch {}
     currentAccount = defaultAccount
+    availableAccount = [defaultAccount]
     currentClient = .init(server: defaultAccount.server, oauthToken: defaultAccount.oauthToken)
   }
   
