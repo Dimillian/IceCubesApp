@@ -16,8 +16,10 @@ public struct StatusRowView: View {
   
   public var body: some View {
     VStack(alignment: .leading) {
-      reblogView
-      replyView
+      if !viewModel.isEmbed {
+        reblogView
+        replyView
+      }
       statusView
       if !viewModel.isEmbed {
         StatusActionsView(viewModel: viewModel)
