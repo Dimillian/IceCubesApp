@@ -18,9 +18,13 @@ extension View {
       case let .hashTag(tag, accountId):
         TimelineView(timeline: .hashtag(tag: tag, accountId: accountId))
       case let .following(id):
-        AccountsListView(accountId: id, mode: .following)
+        AccountsListView(mode: .followers(accountId: id))
       case let .followers(id):
-        AccountsListView(accountId: id, mode: .followers)
+        AccountsListView(mode: .followers(accountId: id))
+      case let .favouritedBy(id):
+        AccountsListView(mode: .favouritedBy(statusId: id))
+      case let .rebloggedBy(id):
+        AccountsListView(mode: .rebloggedBy(statusId: id))
       }
     }
   }

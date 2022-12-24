@@ -9,6 +9,8 @@ public enum RouteurDestinations: Hashable {
   case hashTag(tag: String, account: String?)
   case followers(id: String)
   case following(id: String)
+  case favouritedBy(id: String)
+  case rebloggedBy(id: String)
 }
 
 public enum SheetDestinations: Identifiable {

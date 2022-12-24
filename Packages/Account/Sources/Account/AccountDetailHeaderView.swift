@@ -96,7 +96,7 @@ struct AccountDetailHeaderView: View {
         VStack(alignment: .leading, spacing: 0) {
           account.displayNameWithEmojis
               .font(.headline)
-          Text(account.acct)
+          Text("@\(account.acct)")
               .font(.callout)
               .foregroundColor(.gray)
         }

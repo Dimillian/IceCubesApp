@@ -6,7 +6,7 @@ import Network
 struct StatusActionsView: View {
   @EnvironmentObject private var routeurPath: RouterPath
   @ObservedObject var viewModel: StatusRowViewModel
-    
+  
   @MainActor
   enum Actions: CaseIterable {
     case respond, boost, favourite, share
@@ -39,32 +39,73 @@ struct StatusActionsView: View {
   }
   
   var body: some View {
-    HStack {
-      ForEach(Actions.allCases, id: \.self) { action in
-        if action == .share {
-          if let url = viewModel.status.reblog?.url ?? viewModel.status.url {
-            ShareLink(item: url) {
-              Image(systemName: action.iconName(viewModel: viewModel))
-            }
-          }
-        } else {
-          Button {
-            handleAction(action: action)
-          } label: {
-            HStack(spacing: 2) {
-              Image(systemName: action.iconName(viewModel: viewModel))
-              if let count = action.count(viewModel: viewModel) {
-                Text("\(count)")
-                  .font(.footnote)
+    VStack(spacing: 12) {
+      HStack {
+        ForEach(Actions.allCases, id: \.self) { action in
+          if action == .share {
+            if let url = viewModel.status.reblog?.url ?? viewModel.status.url {
+              ShareLink(item: url) {
+                Image(systemName: action.iconName(viewModel: viewModel))
               }
             }
+          } else {
+            Button {
+              handleAction(action: action)
+            } label: {
+              HStack(spacing: 2) {
+                Image(systemName: action.iconName(viewModel: viewModel))
+                if let count = action.count(viewModel: viewModel) {
+                  Text("\(count)")
+                    .font(.footnote)
+                }
+              }
+            }
+            .buttonStyle(.borderless)
+            Spacer()
           }
-          .buttonStyle(.borderless)
-          Spacer()
         }
       }
+      if viewModel.isFocused {
+        summaryView
+      }
     }
-    .tint(.gray)
+  }
+  
+  @ViewBuilder
+  private var summaryView: some View {
+    HStack {
+      Text(viewModel.status.createdAt.asDate, style: .date)
+      Text(viewModel.status.createdAt.asDate, style: .time)
+      Spacer()
+      Text(viewModel.status.application?.name ?? "")
+    }
+    .font(.caption)
+    if viewModel.favouritesCount > 0 {
+      Divider()
+      Button {
+        routeurPath.navigate(to: .favouritedBy(id: viewModel.status.id))
+      } label: {
+        HStack {
+          Text("\(viewModel.favouritesCount) favorites")
+          Spacer()
+          Image(systemName: "chevron.right")
+        }
+        .font(.callout)
+      }
+    }
+    if viewModel.reblogsCount > 0 {
+      Divider()
+      Button {
+        routeurPath.navigate(to: .rebloggedBy(id: viewModel.status.id))
+      } label: {
+        HStack {
+          Text("\(viewModel.reblogsCount) boosts")
+          Spacer()
+          Image(systemName: "chevron.right")
+        }
+        .font(.callout)
+      }
+    }
   }
   
   private func handleAction(action: Actions) {

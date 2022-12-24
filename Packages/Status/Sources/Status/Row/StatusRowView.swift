@@ -24,6 +24,7 @@ public struct StatusRowView: View {
       if !viewModel.isEmbed {
         StatusActionsView(viewModel: viewModel)
           .padding(.vertical, 8)
+          .tint(viewModel.isFocused ? .brand : .gray)
       }
     }
     .onAppear {

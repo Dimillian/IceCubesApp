@@ -14,7 +14,7 @@ struct NotificationRowView: View {
     if let type = notification.supportedType {
       HStack(alignment: .top, spacing: 8) {
         makeAvatarView(type: type)
-        VStack(alignment: .leading, spacing: 0) {
+        VStack(alignment: .leading, spacing: 2) {
           makeMainLabel(type: type)
           makeContent(type: type)
         }
@@ -77,14 +77,14 @@ struct NotificationRowView: View {
         )
         .padding(.top, 8)
     } else {
-      Text(notification.account.acct)
+      Text("@\(notification.account.acct)")
         .font(.callout)
         .foregroundColor(.gray)
       
       if type == .follow {
         Text(notification.account.note.asSafeAttributedString)
           .lineLimit(3)
-          .font(.body)
+          .font(.callout)
           .foregroundColor(.gray)
           .environment(\.openURL, OpenURLAction { url in
             routeurPath.handle(url: url)

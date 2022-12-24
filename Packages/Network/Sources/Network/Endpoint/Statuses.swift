@@ -7,6 +7,8 @@ public enum Statuses: Endpoint {
   case unfavourite(id: String)
   case reblog(id: String)
   case unreblog(id: String)
+  case rebloggedBy(id: String, maxId: String?)
+  case favouritedBy(id: String, maxId: String?)
   
   public func path() -> String {
     switch self {
@@ -22,11 +24,19 @@ public enum Statuses: Endpoint {
       return "statuses/\(id)/reblog"
     case .unreblog(let id):
       return "statuses/\(id)/unreblog"
+    case .rebloggedBy(let id, _):
+      return "statuses/\(id)/reblogged_by"
+    case .favouritedBy(let id, _):
+      return "statuses/\(id)/favourited_by"
     }
   }
   
   public func queryItems() -> [URLQueryItem]? {
     switch self {
+    case let .rebloggedBy(_, maxId):
+      return makePaginationParam(sinceId: nil, maxId: maxId)
+    case let .favouritedBy(_, maxId):
+      return makePaginationParam(sinceId: nil, maxId: maxId)
     default:
       return nil
     }

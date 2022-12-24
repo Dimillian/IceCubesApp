@@ -34,11 +34,12 @@ public struct StatusDetailView: View {
                   .padding(.vertical, DS.Constants.dividerPadding)
               }
             }
-            StatusRowView(viewModel: .init(status: status, isEmbed: false))
+            StatusRowView(viewModel: .init(status: status,
+                                           isEmbed: false,
+                                           isFocused: true))
               .id(status.id)
-            makeStatusInfoDetailView(status: status)
             Divider()
-              .padding(.vertical, DS.Constants.dividerPadding * 2)
+              .padding(.bottom, DS.Constants.dividerPadding * 2)
             if !context.descendants.isEmpty {
               ForEach(context.descendants) { descendant in
                 StatusRowView(viewModel: .init(status: descendant, isEmbed: false))
@@ -65,16 +66,5 @@ public struct StatusDetailView: View {
     }
     .navigationTitle(viewModel.title)
     .navigationBarTitleDisplayMode(.inline)
-  }
-  
-  @ViewBuilder
-  private func makeStatusInfoDetailView(status: Status) -> some View {
-    HStack {
-      Text(status.createdAt.asDate, style: .date)
-      Text(status.createdAt.asDate, style: .time)
-      Spacer()
-      Text(status.application?.name ?? "")
-    }
-    .font(.caption)
   }
 }

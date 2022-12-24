@@ -38,7 +38,8 @@ public struct AccountsListRow: View {
           .font(.footnote)
           .foregroundColor(.gray)
         Text(viewModel.account.note.asSafeAttributedString)
-          .font(.callout)
+          .font(.footnote)
+          .lineLimit(3)
           .environment(\.openURL, OpenURLAction { url in
             routeurPath.handle(url: url)
           })

@@ -53,7 +53,7 @@ public struct TimelineView: View {
         VStack(alignment: .leading, spacing: 4) {
           Text("#\(tag.name)")
             .font(.headline)
-          Text("\(tag.totalUses) posts from \(tag.totalAccounts) participants")
+          Text("\(tag.totalUses) recent posts from \(tag.totalAccounts) participants")
             .font(.footnote)
             .foregroundColor(.gray)
         }

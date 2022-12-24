@@ -9,8 +9,8 @@ public struct AccountsListView: View {
   @StateObject private var viewModel: AccountsListViewModel
   @State private var didAppear: Bool = false
   
-  public init(accountId: String, mode: AccountsListMode) {
-    _viewModel = StateObject(wrappedValue: .init(accountId: accountId, mode: mode))
+  public init(mode: AccountsListMode) {
+    _viewModel = StateObject(wrappedValue: .init(mode: mode))
   }
   
   public var body: some View {
@@ -50,7 +50,7 @@ public struct AccountsListView: View {
       }
     }
     .listStyle(.plain)
-    .navigationTitle(viewModel.mode.rawValue.capitalized)
+    .navigationTitle(viewModel.mode.title)
     .navigationBarTitleDisplayMode(.inline)
     .task {
       viewModel.client = client

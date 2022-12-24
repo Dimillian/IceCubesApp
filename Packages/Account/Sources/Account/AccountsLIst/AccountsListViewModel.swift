@@ -2,15 +2,28 @@ import SwiftUI
 import Models
 import Network
 
-public enum AccountsListMode: String {
-  case following, followers
+public enum AccountsListMode {
+  case following(accountId: String), followers(accountId: String)
+  case favouritedBy(statusId: String), rebloggedBy(statusId: String)
+  
+  var title: String {
+    switch self {
+    case .following:
+      return "Following"
+    case .followers:
+      return "Followers"
+    case .favouritedBy:
+      return "Favourited by"
+    case .rebloggedBy:
+      return "Boosted by"
+    }
+  }
 }
 
 @MainActor
 class AccountsListViewModel: ObservableObject {
   var client: Client?
   
-  let accountId: String
   let mode: AccountsListMode
   
   public enum State {
@@ -31,8 +44,7 @@ class AccountsListViewModel: ObservableObject {
   
   private var nextPageId: String?
   
-  init(accountId: String, mode: AccountsListMode) {
-    self.accountId = accountId
+  init(mode: AccountsListMode) {
     self.mode = mode
   }
   
@@ -42,12 +54,18 @@ class AccountsListViewModel: ObservableObject {
       state = .loading
       let link: LinkHandler?
       switch mode {
-      case .followers:
+      case let .followers(accountId):
         (accounts, link) = try await client.getWithLink(endpoint: Accounts.followers(id: accountId,
-                                                                                     sinceId: nil))
-      case .following:
+                                                                                     maxId: nil))
+      case let .following(accountId):
         (accounts, link) = try await client.getWithLink(endpoint: Accounts.following(id: accountId,
-                                                                                     sinceId: nil))
+                                                                                     maxId: nil))
+      case let .rebloggedBy(statusId):
+        (accounts, link) = try await client.getWithLink(endpoint: Statuses.rebloggedBy(id: statusId,
+                                                                                       maxId: nil))
+      case let .favouritedBy(statusId):
+        (accounts, link) = try await client.getWithLink(endpoint: Statuses.favouritedBy(id: statusId,
+                                                                                        maxId: nil))
       }
       nextPageId = link?.maxId
       relationships = try await client.get(endpoint:
@@ -65,12 +83,18 @@ class AccountsListViewModel: ObservableObject {
       let newAccounts: [Account]
       let link: LinkHandler?
       switch mode {
-      case .followers:
+      case let .followers(accountId):
         (newAccounts, link) = try await client.getWithLink(endpoint: Accounts.followers(id: accountId,
-                                                                                        sinceId: nextPageId))
-      case .following:
+                                                                                        maxId: nextPageId))
+      case let .following(accountId):
         (newAccounts, link) = try await client.getWithLink(endpoint: Accounts.following(id: accountId,
-                                                                                        sinceId: nextPageId))
+                                                                                        maxId: nextPageId))
+      case let .rebloggedBy(statusId):
+        (newAccounts, link) = try await client.getWithLink(endpoint: Statuses.rebloggedBy(id: statusId,
+                                                                                          maxId: nextPageId))
+      case let .favouritedBy(statusId):
+        (newAccounts, link) = try await client.getWithLink(endpoint:  Statuses.favouritedBy(id: statusId,
+                                                                                            maxId: nextPageId))
       }
       accounts.append(contentsOf: newAccounts)
       let newRelationships: [Relationshionship] =
