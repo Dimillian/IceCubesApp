@@ -14,7 +14,7 @@ struct StatusActionsView: View {
     func iconName(viewModel: StatusRowViewModel) -> String {
       switch self {
       case .respond:
-        return "bubble.right"
+        return "arrowshape.turn.up.left"
       case .boost:
         return viewModel.isReblogged ? "arrow.left.arrow.right.circle.fill" : "arrow.left.arrow.right.circle"
       case .favourite:
@@ -59,6 +59,7 @@ struct StatusActionsView: View {
               }
             }
           }
+          .buttonStyle(.borderless)
           Spacer()
         }
       }

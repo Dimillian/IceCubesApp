@@ -17,6 +17,7 @@ public struct StatusRowView: View {
   public var body: some View {
     VStack(alignment: .leading) {
       reblogView
+      replyView
       statusView
       if !viewModel.isEmbed {
         StatusActionsView(viewModel: viewModel)
@@ -32,7 +33,7 @@ public struct StatusRowView: View {
   private var reblogView: some View {
     if viewModel.status.reblog != nil {
       HStack(spacing: 2) {
-        Image(systemName:"arrow.left.arrow.right.circle")
+        Image(systemName:"arrow.left.arrow.right.circle.fill")
         viewModel.status.account.displayNameWithEmojis
         Text("boosted")
       }
@@ -42,6 +43,24 @@ public struct StatusRowView: View {
       .onTapGesture {
         routeurPath.navigate(to: .accountDetailWithAccount(account: viewModel.status.account))
       }
+    }
+  }
+  
+  @ViewBuilder
+  var replyView: some View {
+    if let accountId = viewModel.status.inReplyToAccountId,
+       let mention = viewModel.status.mentions.first(where: { $0.id == accountId}) {
+          HStack(spacing: 2) {
+            Image(systemName:"arrowshape.turn.up.left.fill")
+            Text("Replied to")
+            Text(mention.username)
+          }
+          .font(.footnote)
+          .foregroundColor(.gray)
+          .fontWeight(.semibold)
+          .onTapGesture {
+            routeurPath.navigate(to: .accountDetail(id: mention.id))
+          }
     }
   }
   

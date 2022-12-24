@@ -1,5 +1,12 @@
 import Foundation
 
+public struct Application: Codable, Identifiable {
+  public var id: String {
+    name
+  }
+  public let name: String
+}
+
 public protocol AnyStatus {
   var id: String { get }
   var content: HTMLString { get }
@@ -16,6 +23,8 @@ public protocol AnyStatus {
   var pinned: Bool? { get }
   var emojis: [Emoji] { get }
   var url: URL? { get }
+  var application: Application? { get }
+  var inReplyToAccountId: String? { get }
 }
 
 public struct Status: AnyStatus, Codable, Identifiable {
@@ -35,6 +44,8 @@ public struct Status: AnyStatus, Codable, Identifiable {
   public let pinned: Bool?
   public let emojis: [Emoji]
   public let url: URL?
+  public let application: Application?
+  public let inReplyToAccountId: String?
   
   public static func placeholder() -> Status {
     .init(id: UUID().uuidString,
@@ -52,7 +63,9 @@ public struct Status: AnyStatus, Codable, Identifiable {
           reblogged: false,
           pinned: false,
           emojis: [],
-          url: nil)
+          url: nil,
+          application: nil,
+          inReplyToAccountId: nil)
   }
   
   public static func placeholders() -> [Status] {
@@ -76,4 +89,6 @@ public struct ReblogStatus: AnyStatus, Codable, Identifiable {
   public let pinned: Bool?
   public let emojis: [Emoji]
   public let url: URL?
+  public var application: Application?
+  public let inReplyToAccountId: String?
 }
