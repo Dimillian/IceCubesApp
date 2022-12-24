@@ -29,6 +29,8 @@ class AccountsListViewModel: ObservableObject {
   
   @Published var state = State.loading
   
+  private var nextPageId: String?
+  
   init(accountId: String, mode: AccountsListMode) {
     self.accountId = accountId
     self.mode = mode
@@ -38,14 +40,16 @@ class AccountsListViewModel: ObservableObject {
     guard let client else { return }
     do {
       state = .loading
+      let link: LinkHandler?
       switch mode {
       case .followers:
-        accounts = try await client.get(endpoint: Accounts.followers(id: accountId,
-                                                                     sinceId: nil))
+        (accounts, link) = try await client.getWithLink(endpoint: Accounts.followers(id: accountId,
+                                                                                     sinceId: nil))
       case .following:
-        accounts = try await client.get(endpoint: Accounts.following(id: accountId,
-                                                                      sinceId: nil))
+        (accounts, link) = try await client.getWithLink(endpoint: Accounts.following(id: accountId,
+                                                                                     sinceId: nil))
       }
+      nextPageId = link?.maxId
       relationships = try await client.get(endpoint:
                                             Accounts.relationships(ids: accounts.map{ $0.id }))
       state = .display(accounts: accounts,
@@ -55,23 +59,25 @@ class AccountsListViewModel: ObservableObject {
   }
   
   func fetchNextPage() async {
-    guard let client else { return }
+    guard let client, let nextPageId else { return }
     do {
       state = .display(accounts: accounts, relationships: relationships, nextPageState: .loadingNextPage)
       let newAccounts: [Account]
+      let link: LinkHandler?
       switch mode {
       case .followers:
-        newAccounts = try await client.get(endpoint: Accounts.followers(id: accountId,
-                                                                        sinceId: accounts.last?.id))
+        (newAccounts, link) = try await client.getWithLink(endpoint: Accounts.followers(id: accountId,
+                                                                                        sinceId: nextPageId))
       case .following:
-        newAccounts = try await client.get(endpoint: Accounts.following(id: accountId,
-                                                                        sinceId: accounts.last?.id))
+        (newAccounts, link) = try await client.getWithLink(endpoint: Accounts.following(id: accountId,
+                                                                                        sinceId: nextPageId))
       }
       accounts.append(contentsOf: newAccounts)
       let newRelationships: [Relationshionship] =
       try await client.get(endpoint: Accounts.relationships(ids: newAccounts.map{ $0.id }))
       
       relationships.append(contentsOf: newRelationships)
+      self.nextPageId = link?.maxId
       state = .display(accounts: accounts,
                        relationships: relationships,
                        nextPageState: .hasNextPage)

@@ -61,13 +61,27 @@ public class Client: ObservableObject, Equatable {
     }
     return request
   }
+  
+  private func makeGet(endpoint: Endpoint) -> URLRequest {
+    let url = makeURL(endpoint: endpoint)
+    return makeURLRequest(url: url, httpMethod: "GET")
+  }
     
   public func get<Entity: Decodable>(endpoint: Endpoint) async throws -> Entity {
-    let url = makeURL(endpoint: endpoint)
-    let request = makeURLRequest(url: url, httpMethod: "GET")
-    let (data, httpResponse) = try await urlSession.data(for: request)
+    let (data, httpResponse) = try await urlSession.data(for: makeGet(endpoint: endpoint))
     logResponseOnError(httpResponse: httpResponse, data: data)
     return try decoder.decode(Entity.self, from: data)
+  }
+  
+  public func getWithLink<Entity: Decodable>(endpoint: Endpoint) async throws -> (Entity, LinkHandler?) {
+    let (data, httpResponse) = try await urlSession.data(for: makeGet(endpoint: endpoint))
+    var linkHandler: LinkHandler?
+    if let response = httpResponse as? HTTPURLResponse,
+       let link = response.allHeaderFields["Link"] as? String{
+      linkHandler = .init(rawLink: link)
+    }
+    logResponseOnError(httpResponse: httpResponse, data: data)
+    return (try decoder.decode(Entity.self, from: data), linkHandler)
   }
   
   public func post<Entity: Decodable>(endpoint: Endpoint) async throws -> Entity {

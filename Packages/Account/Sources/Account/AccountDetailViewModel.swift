@@ -47,6 +47,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   @Published var title: String = ""
   @Published var relationship: Relationshionship?
   @Published var favourites: [Status] = []
+  private var favouritesNextPage: LinkHandler?
   @Published var followedTags: [Tag] = []
   @Published var featuredTags: [FeaturedTag] = []
   @Published var fields: [Account.Field] = []
@@ -108,7 +109,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
       tabState = .statuses(statusesState: .loading)
       statuses = try await client.get(endpoint: Accounts.statuses(id: accountId, sinceId: nil, tag: nil))
       if isCurrentUser {
-        favourites = try await client.get(endpoint: Accounts.favourites)
+        (favourites, favouritesNextPage) = try await client.getWithLink(endpoint: Accounts.favourites(sinceId: nil))
       }
       reloadTabState()
     } catch {
@@ -126,7 +127,13 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
         let newStatuses: [Status] = try await client.get(endpoint: Accounts.statuses(id: accountId, sinceId: lastId, tag: nil))
         statuses.append(contentsOf: newStatuses)
         tabState = .statuses(statusesState: .display(statuses: statuses, nextPageState: .hasNextPage))
-      case .favourites, .followedTags:
+      case .favourites:
+        guard let nextPageId = favouritesNextPage?.maxId else { return }
+        let newFavourites: [Status]
+        (newFavourites, favouritesNextPage) = try await client.getWithLink(endpoint: Accounts.favourites(sinceId: nextPageId))
+        favourites.append(contentsOf: newFavourites)
+        tabState = .statuses(statusesState: .display(statuses: favourites, nextPageState: .hasNextPage))
+      case .followedTags:
         break
       }
     } catch {
@@ -157,7 +164,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
     case .statuses:
       tabState = .statuses(statusesState: .display(statuses: statuses, nextPageState: .hasNextPage))
     case .favourites:
-      tabState = .statuses(statusesState: .display(statuses: favourites, nextPageState: .none))
+      tabState = .statuses(statusesState: .display(statuses: favourites, nextPageState: .hasNextPage))
     case .followedTags:
       tabState = .followedTags(tags: followedTags)
     }

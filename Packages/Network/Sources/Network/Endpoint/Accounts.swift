@@ -2,7 +2,7 @@ import Foundation
 
 public enum Accounts: Endpoint {
   case accounts(id: String)
-  case favourites
+  case favourites(sinceId: String?)
   case followedTags
   case featuredTags(id: String)
   case verifyCredentials
@@ -67,6 +67,9 @@ public enum Accounts: Endpoint {
       guard let sinceId else { return nil }
       return [.init(name: "max_id", value: sinceId)]
     case let .following(_, sinceId):
+      guard let sinceId else { return nil }
+      return [.init(name: "max_id", value: sinceId)]
+    case let .favourites(sinceId):
       guard let sinceId else { return nil }
       return [.init(name: "max_id", value: sinceId)]
     default:
