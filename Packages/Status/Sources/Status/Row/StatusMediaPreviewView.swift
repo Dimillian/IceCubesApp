@@ -1,56 +1,13 @@
 import SwiftUI
 import Models
-import AVKit
 import Env
 import Shimmer
-
-private class VideoPlayerViewModel: ObservableObject {
-  @Published var player: AVPlayer?
-  private let url: URL
-  
-  init(url: URL) {
-    self.url = url
-  }
-  
-  func preparePlayer() {
-    player = .init(url: url)
-    player?.play()
-    guard let player else { return }
-    NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
-                                           object: player.currentItem, queue: .main) { [weak self] _ in
-        self?.player?.seek(to: CMTime.zero)
-        self?.player?.play()
-    }
-  }
-  
-  deinit {
-    NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: self.player)
-  }
-}
-
-private struct VideoPlayerView: View {
-  @StateObject var viewModel: VideoPlayerViewModel
-  var body: some View {
-    VStack {
-      VideoPlayer(player: viewModel.player)
-    }.onAppear {
-      viewModel.preparePlayer()
-    }
-  }
-}
-
-// Could have just been a state, but SwiftUI .sheet is buggy ATM without @StateObject
-private class SelectedMediaSheetManager: ObservableObject {
-  @Published var selectedAttachement: MediaAttachement?
-}
 
 public struct StatusMediaPreviewView: View {
   @EnvironmentObject private var quickLook: QuickLook
   
   public let attachements: [MediaAttachement]
-  
-  @StateObject private var selectedMediaSheetManager = SelectedMediaSheetManager()
-  
+
   @State private var isQuickLookLoading: Bool = false
   
   private var imageMaxHeight: CGFloat {
