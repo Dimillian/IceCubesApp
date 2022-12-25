@@ -2,6 +2,7 @@ import SwiftUI
 import Network
 import Models
 import Status
+import Env
 
 @MainActor
 class TimelineViewModel: ObservableObject, StatusesFetcher {
@@ -85,10 +86,15 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
     } catch {}
   }
   
-  func handleEvent(event: any StreamEvent) {
+  func handleEvent(event: any StreamEvent, currentAccount: CurrentAccount) {
     guard timeline == .home else { return }
     if let event = event as? StreamEventUpdate {
-      pendingStatuses.insert(event.status, at: 0)
+      if event.status.account.id == currentAccount.account?.id {
+        statuses.insert(event.status, at: 0)
+        statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+      } else {
+        pendingStatuses.insert(event.status, at: 0)
+      }
     } else if let event = event as? StreamEventDelete {
       statuses.removeAll(where: { $0.id == event.status })
       statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)

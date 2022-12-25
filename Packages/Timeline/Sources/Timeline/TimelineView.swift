@@ -7,6 +7,7 @@ import DesignSystem
 import Env
 
 public struct TimelineView: View {
+  @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
   @StateObject private var viewModel = TimelineViewModel()
@@ -56,7 +57,7 @@ public struct TimelineView: View {
     }
     .onChange(of: watcher.latestEvent?.id) { id in
       if let latestEvent = watcher.latestEvent {
-        viewModel.handleEvent(event: latestEvent)
+        viewModel.handleEvent(event: latestEvent, currentAccount: account)
       }
     }
   }
