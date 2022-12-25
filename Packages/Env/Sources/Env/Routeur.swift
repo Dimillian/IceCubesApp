@@ -14,7 +14,7 @@ public enum RouteurDestinations: Hashable {
 }
 
 public enum SheetDestinations: Identifiable {
-  case statusEditor(replyToStatus: String?)
+  case statusEditor(replyToStatus: Status?)
   
   public var id: String {
     switch self {

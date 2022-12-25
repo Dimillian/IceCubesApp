@@ -128,7 +128,7 @@ struct StatusActionsView: View {
       generator.notificationOccurred(.success)
       switch action {
       case .respond:
-        routeurPath.navigate(to: .statusDetail(id: viewModel.status.reblog?.id ?? viewModel.status.id))
+        routeurPath.presentedSheet = .statusEditor(replyToStatus: viewModel.status)
       case .favourite:
         if viewModel.isFavourited {
           await viewModel.unFavourite()

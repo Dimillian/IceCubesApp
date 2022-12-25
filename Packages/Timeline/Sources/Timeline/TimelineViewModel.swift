@@ -12,15 +12,13 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
   @Published var statusesState: StatusesState = .loading
   @Published var timeline: TimelineFilter = .pub {
     didSet {
-      if oldValue != timeline || statuses.isEmpty {
-        Task {
-          await fetchStatuses()
-          switch timeline {
-          case let .hashtag(tag, _):
-            await fetchTag(id: tag)
-          default:
-            break
-          }
+      Task {
+        await fetchStatuses()
+        switch timeline {
+        case let .hashtag(tag, _):
+          await fetchTag(id: tag)
+        default:
+          break
         }
       }
     }
