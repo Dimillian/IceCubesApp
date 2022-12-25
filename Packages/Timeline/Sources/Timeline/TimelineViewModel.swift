@@ -96,6 +96,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
   }
   
   func displayPendingStatuses() {
+    guard timeline == .home else { return }
     statuses.insert(contentsOf: pendingStatuses, at: 0)
     pendingStatuses = []
     statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
