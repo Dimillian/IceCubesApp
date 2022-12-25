@@ -25,7 +25,8 @@ let package = Package(
         .product(name: "Models", package: "Models"),
         .product(name: "Env", package: "Env"),
         .product(name: "Shimmer", package: "SwiftUI-Shimmer"),
-        .product(name: "NukeUI", package: "Nuke")
+        .product(name: "NukeUI", package: "Nuke"),
+        .product(name: "Nuke", package: "Nuke")
       ]),
   ]
 )
