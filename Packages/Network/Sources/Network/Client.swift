@@ -40,9 +40,9 @@ public class Client: ObservableObject, Equatable {
     self.oauthToken = oauthToken
   }
   
-  private func makeURL(endpoint: Endpoint) -> URL {
+  private func makeURL(scheme: String = "https", endpoint: Endpoint) -> URL {
     var components = URLComponents()
-    components.scheme = "https"
+    components.scheme = scheme
     components.host = server
     if type(of: endpoint) == Oauth.self {
       components.path += "/\(endpoint.path())"
@@ -92,6 +92,13 @@ public class Client: ObservableObject, Equatable {
     return try decoder.decode(Entity.self, from: data)
   }
   
+  public func delete(endpoint: Endpoint) async throws -> HTTPURLResponse? {
+    let url = makeURL(endpoint: endpoint)
+    let request = makeURLRequest(url: url, httpMethod: "DELETE")
+    let (_, httpResponse) = try await urlSession.data(for: request)
+    return httpResponse as? HTTPURLResponse
+  }
+  
   public func oauthURL() async throws -> URL {
     let app: InstanceApp = try await post(endpoint: Apps.registerApp)
     self.oauthApp = app
@@ -111,6 +118,12 @@ public class Client: ObservableObject, Equatable {
                                                                  clientSecret: app.clientSecret))
     self.oauthToken = token
     return token
+  }
+  
+  public func makeWebSocketTask(endpoint: Endpoint) -> URLSessionWebSocketTask {
+    let url = makeURL(scheme: "wss", endpoint: endpoint)
+    let request = makeURLRequest(url: url, httpMethod: "GET")
+    return urlSession.webSocketTask(with: request)
   }
   
   private func logResponseOnError(httpResponse: URLResponse, data: Data) {

@@ -13,8 +13,10 @@ struct IceCubesApp: App {
   
   public static let defaultServer = "mastodon.social"
     
+  @Environment(\.scenePhase) private var scenePhase
   @StateObject private var appAccountsManager = AppAccountsManager()
   @StateObject private var currentAccount = CurrentAccount()
+  @StateObject private var watcher = StreamWatcher()
   @StateObject private var quickLook = QuickLook()
   @StateObject private var theme = Theme()
   
@@ -66,16 +68,34 @@ struct IceCubesApp: App {
       .tint(theme.tintColor)
       .onChange(of: appAccountsManager.currentClient) { newClient in
         currentAccount.setClient(client: newClient)
+        watcher.setClient(client: newClient)
+        if newClient.isAuth {
+          watcher.watch(stream: .user)
+        }
       }
       .onAppear {
         currentAccount.setClient(client: appAccountsManager.currentClient)
+        watcher.setClient(client: appAccountsManager.currentClient)
       }
       .environmentObject(appAccountsManager)
       .environmentObject(appAccountsManager.currentClient)
       .environmentObject(quickLook)
       .environmentObject(currentAccount)
       .environmentObject(theme)
+      .environmentObject(watcher)
       .quickLookPreview($quickLook.url, in: quickLook.urls)
     }
+    .onChange(of: scenePhase, perform: { scenePhase in
+      switch scenePhase {
+      case .background:
+        watcher.stopWatching()
+      case .active:
+        watcher.watch(stream: .user)
+      case .inactive:
+        break
+      default:
+        break
+      }
+    })
   }
 }

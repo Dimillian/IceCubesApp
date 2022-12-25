@@ -13,6 +13,9 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
   @Published var timeline: TimelineFilter = .pub {
     didSet {
       Task {
+        if oldValue != timeline {
+          statuses = []
+        }
         await fetchStatuses()
         switch timeline {
         case let .hashtag(tag, _):
@@ -78,5 +81,16 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
     do {
       tag = try await client.post(endpoint: Tags.unfollow(id: id))
     } catch {}
+  }
+  
+  func handleEvent(event: any StreamEvent) {
+    guard timeline == .home else { return }
+    if let event = event as? StreamEventUpdate {
+      statuses.insert(event.status, at: 0)
+      statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+    } else if let event = event as? StreamEventDelete {
+      statuses.removeAll(where: { $0.id == event.status })
+      statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+    }
   }
 }

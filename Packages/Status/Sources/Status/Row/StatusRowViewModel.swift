@@ -86,6 +86,13 @@ public class StatusRowViewModel: ObservableObject {
     }
   }
   
+  func delete() async {
+    guard let client else { return }
+    do {
+      _ = try await client.delete(endpoint: Statuses.status(id: status.id))
+    } catch { }
+  }
+  
   private func updateFromStatus(status: Status) {
     if let reblog = status.reblog {
       isFavourited = reblog.favourited == true

@@ -6,6 +6,7 @@ import Network
 
 public struct StatusRowView: View {
   @Environment(\.redactionReasons) private var reasons
+  @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var routeurPath: RouterPath
@@ -72,11 +73,15 @@ public struct StatusRowView: View {
     VStack(alignment: .leading, spacing: 8) {
       if let status: AnyStatus = viewModel.status.reblog ?? viewModel.status {
         if !viewModel.isEmbed {
-          Button {
-            routeurPath.navigate(to: .accountDetailWithAccount(account: status.account))
-          } label: {
-            makeAccountView(status: status)
-          }.buttonStyle(.plain)
+          HStack(alignment: .top) {
+            Button {
+              routeurPath.navigate(to: .accountDetailWithAccount(account: status.account))
+            } label: {
+              makeAccountView(status: status)
+            }.buttonStyle(.plain)
+            Spacer()
+            menuButton
+          }
         }
         
         Text(status.content.asSafeAttributedString)
@@ -117,6 +122,39 @@ public struct StatusRowView: View {
       }
       .font(.footnote)
       .foregroundColor(.gray)
+    }
+  }
+  
+  private var menuButton: some View {
+    Menu {
+      contextMenu
+    } label: {
+      Image(systemName: "ellipsis")
+    }
+    .foregroundColor(.gray)
+  }
+  
+  @ViewBuilder
+  private var contextMenu: some View {
+    Button { Task {
+      if viewModel.isFavourited {
+        await viewModel.unFavourite()
+      } else {
+        await viewModel.favourite()
+      }
+    } } label: {
+      Label(viewModel.isFavourited ? "Unfavorite" : "Favorite", systemImage: "star")
+    }
+    if let url = viewModel.status.reblog?.url ?? viewModel.status.url {
+      Button { UIApplication.shared.open(url)  } label: {
+        Label("View in Browser", systemImage: "safari")
+      }
+    }
+
+    if account.account?.id == viewModel.status.account.id {
+      Button(role: .destructive) { Task { await viewModel.delete() } } label: {
+        Label("Delete", systemImage: "trash")
+      }
     }
   }
 }
