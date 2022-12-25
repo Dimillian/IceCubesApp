@@ -29,7 +29,7 @@ public struct TimelineView: View {
           }
           .padding(.top, DS.Constants.layoutPadding)
         }
-        if filter == .home {
+        if viewModel.timeline == .home {
           makePendingNewPostsView(proxy: proxy)
         }
       }
@@ -37,7 +37,7 @@ public struct TimelineView: View {
     .navigationTitle(filter?.title() ?? viewModel.timeline.title())
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
-      if filter == nil, client.isAuth {
+      if client.isAuth {
         ToolbarItem(placement: .navigationBarTrailing) {
           timelineFilterButton
         }
