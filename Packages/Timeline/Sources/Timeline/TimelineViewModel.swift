@@ -27,6 +27,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
     }
   }
   @Published var tag: Tag?
+  @Published var pendingStatuses: [Status] = []
   
   var serverName: String {
     client?.server ?? "Error"
@@ -36,6 +37,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
     guard let client else { return }
     do {
       if statuses.isEmpty {
+        pendingStatuses = []
         statusesState = .loading
         statuses = try await client.get(endpoint: timeline.endpoint(sinceId: nil, maxId: nil))
       } else if let first = statuses.first {
@@ -86,11 +88,16 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
   func handleEvent(event: any StreamEvent) {
     guard timeline == .home else { return }
     if let event = event as? StreamEventUpdate {
-      statuses.insert(event.status, at: 0)
-      statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+      pendingStatuses.insert(event.status, at: 0)
     } else if let event = event as? StreamEventDelete {
       statuses.removeAll(where: { $0.id == event.status })
       statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
     }
+  }
+  
+  func displayPendingStatuses() {
+    statuses.insert(contentsOf: pendingStatuses, at: 0)
+    pendingStatuses = []
+    statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
   }
 }

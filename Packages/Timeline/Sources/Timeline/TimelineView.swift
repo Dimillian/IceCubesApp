@@ -18,13 +18,21 @@ public struct TimelineView: View {
   }
   
   public var body: some View {
-    ScrollView {
-      LazyVStack {
-        tagHeaderView
-          .padding(.bottom, 16)
-        StatusesListView(fetcher: viewModel)
+    ScrollViewReader { proxy in
+      ZStack(alignment: .top) {
+        ScrollView {
+          LazyVStack {
+            tagHeaderView
+              .padding(.bottom, 16)
+              .id("top")
+            StatusesListView(fetcher: viewModel)
+          }
+          .padding(.top, DS.Constants.layoutPadding)
+        }
+        if filter == .home {
+          makePendingNewPostsView(proxy: proxy)
+        }
       }
-      .padding(.top, DS.Constants.layoutPadding)
     }
     .navigationTitle(filter?.title() ?? viewModel.timeline.title())
     .navigationBarTitleDisplayMode(.inline)
@@ -50,6 +58,22 @@ public struct TimelineView: View {
       if let latestEvent = watcher.latestEvent {
         viewModel.handleEvent(event: latestEvent)
       }
+    }
+  }
+  
+  @ViewBuilder
+  private func makePendingNewPostsView(proxy: ScrollViewProxy) -> some View {
+    if !viewModel.pendingStatuses.isEmpty {
+      Button {
+        proxy.scrollTo("top")
+        viewModel.displayPendingStatuses()
+      } label: {
+        Text("\(viewModel.pendingStatuses.count) new posts")
+      }
+      .buttonStyle(.bordered)
+      .background(.thinMaterial)
+      .cornerRadius(8)
+      .padding(.top, 6)
     }
   }
   
