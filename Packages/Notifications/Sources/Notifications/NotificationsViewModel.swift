@@ -71,4 +71,11 @@ class NotificationsViewModel: ObservableObject {
       state = .error(error: error)
     }
   }
+  
+  func handleEvent(event: any StreamEvent) {
+    if let event = event as? StreamEventNotification {
+      notifications.insert(event.notification, at: 0)
+      state = .display(notifications: notifications, nextPageState: .hasNextPage)
+    }
+  }
 }

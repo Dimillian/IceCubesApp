@@ -47,6 +47,7 @@ struct IceCubesApp: App {
             .tabItem {
               Label("Notifications", systemImage: "bell")
             }
+            .badge(watcher.unreadNotificationsCount)
             .tag(Tab.notifications)
           ExploreTab(popToRootTab: $popToRootTab)
             .tabItem {

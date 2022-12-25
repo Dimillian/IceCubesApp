@@ -3,8 +3,10 @@ import Network
 import Models
 import Shimmer
 import DesignSystem
+import Env
 
 public struct NotificationsListView: View {
+  @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
   @StateObject private var viewModel = NotificationsViewModel()
   
@@ -39,6 +41,11 @@ public struct NotificationsListView: View {
     .refreshable {
       await viewModel.fetchNotifications()
     }
+    .onChange(of: watcher.latestEvent?.id, perform: { _ in
+      if let latestEvent = watcher.latestEvent {
+        viewModel.handleEvent(event: latestEvent)
+      }
+    })
     .navigationTitle(Text("Notifications"))
     .navigationBarTitleDisplayMode(.inline)
   }

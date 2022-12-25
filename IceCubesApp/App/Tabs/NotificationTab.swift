@@ -5,6 +5,7 @@ import Network
 import Notifications
 
 struct NotificationsTab: View {
+  @EnvironmentObject private var watcher: StreamWatcher
   @StateObject private var routeurPath = RouterPath()
   @Binding var popToRootTab: IceCubesApp.Tab
   
@@ -13,6 +14,9 @@ struct NotificationsTab: View {
       NotificationsListView()
         .withAppRouteur()
         .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
+    }
+    .onAppear {
+      watcher.unreadNotificationsCount = 0
     }
     .environmentObject(routeurPath)
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in

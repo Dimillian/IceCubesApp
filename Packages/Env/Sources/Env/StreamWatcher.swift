@@ -17,6 +17,7 @@ public class StreamWatcher: ObservableObject {
   }
     
   @Published public var events: [any StreamEvent] = []
+  @Published public var unreadNotificationsCount: Int = 0
   @Published public var latestEvent: (any StreamEvent)?
   
   public init() {
@@ -38,6 +39,9 @@ public class StreamWatcher: ObservableObject {
   }
   
   public func watch(stream: Stream) {
+    if client?.isAuth == false && stream == .user {
+      return
+    }
     if task == nil {
       connect()
     }
@@ -71,6 +75,9 @@ public class StreamWatcher: ObservableObject {
               Task { @MainActor in
                 self.events.append(event)
                 self.latestEvent = event
+                if event is StreamEventNotification {
+                  self.unreadNotificationsCount += 1
+                }
               }
             }
           } catch {
