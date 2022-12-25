@@ -6,6 +6,8 @@ import Network
 import DesignSystem
 
 public struct StatusDetailView: View {
+  @EnvironmentObject private var currentAccount: CurrentAccount
+  @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var routeurPath: RouterPath
   @StateObject private var viewModel: StatusDetailViewModel
@@ -62,6 +64,10 @@ public struct StatusDetailView: View {
         DispatchQueue.main.async {
           proxy.scrollTo(viewModel.statusId, anchor: .center)
         }
+      }
+      .onChange(of: watcher.latestEvent?.id) { _ in
+        guard let lastEvent = watcher.latestEvent else { return }
+        viewModel.handleEvent(event: lastEvent, currentAccount: currentAccount.account)
       }
     }
     .navigationTitle(viewModel.title)
