@@ -2,6 +2,7 @@ import SwiftUI
 import DesignSystem
 import Models
 import Network
+import PhotosUI
 
 @MainActor
 class StatusEditorViewModel: ObservableObject {
@@ -13,6 +14,17 @@ class StatusEditorViewModel: ObservableObject {
   }
   
   @Published var isPosting: Bool = false
+  @Published var selectedMedias: [PhotosPickerItem] = [] {
+    didSet {
+      inflateSelectedMedias()
+    }
+  }
+  @Published var mediasImages: [ImageContainer] = []
+  
+  struct ImageContainer: Identifiable {
+    let id = UUID().uuidString
+    let image: UIImage
+  }
   
   var client: Client?
   private var internalUpdate: Bool = false
@@ -76,6 +88,23 @@ class StatusEditorViewModel: ObservableObject {
       internalUpdate = false
     } catch {
       
+    }
+  }
+  
+  func inflateSelectedMedias() {
+    for media in selectedMedias {
+      media.loadTransferable(type: Data.self) { [weak self] result in
+        switch result {
+        case .success(let data?):
+          if let image = UIImage(data: data) {
+            DispatchQueue.main.async {
+              self?.mediasImages.append(.init(image: image))
+            }
+          }
+        default:
+          break
+        }
+      }
     }
   }
    

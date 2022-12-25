@@ -5,6 +5,7 @@ import DesignSystem
 import TextView
 import Models
 import Network
+import PhotosUI
 
 public struct StatusEditorView: View {
   @EnvironmentObject private var client: Client
@@ -20,10 +21,11 @@ public struct StatusEditorView: View {
   public var body: some View {
     NavigationStack {
       ZStack(alignment: .bottom) {
-        VStack {
+        VStack(spacing: 12) {
           accountHeaderView
           TextView($viewModel.statusText)
             .placeholder("What's on your mind")
+          mediasView
           Spacer()
         }
         accessoryView
@@ -64,7 +66,8 @@ public struct StatusEditorView: View {
     }
   }
   
-  @ViewBuilder private var accountHeaderView: some View {
+  @ViewBuilder
+  private var accountHeaderView: some View {
     if let account = currentAccount.account {
       HStack {
         AvatarView(url: account.avatar, size: .status)
@@ -81,11 +84,24 @@ public struct StatusEditorView: View {
     }
   }
   
+  private var mediasView: some View {
+    ScrollView(.horizontal) {
+      HStack {
+        ForEach(viewModel.mediasImages) { container in
+          Image(uiImage: container.image)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(width: 150, height: 150)
+            .clipped()
+        }
+      }
+    }
+  }
+  
   private var accessoryView: some View {
     HStack {
-      Button {
-        
-      } label: {
+      PhotosPicker(selection: $viewModel.selectedMedias,
+                   matching: .images) {
         Image(systemName: "photo.fill.on.rectangle.fill")
       }
       Spacer()
