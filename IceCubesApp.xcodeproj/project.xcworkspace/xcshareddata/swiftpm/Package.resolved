@@ -26,6 +26,15 @@
         "revision" : "965a7cbcbf094cbcf22b9251a2323bdc3432e171",
         "version" : "1.1.0"
       }
+    },
+    {
+      "identity" : "textview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Dimillian/TextView",
+      "state" : {
+        "branch" : "main",
+        "revision" : "0316b7df487f5e6f1b199d326e903310b9044c0d"
+      }
     }
   ],
   "version" : 2
