@@ -1,5 +1,7 @@
 import SwiftUI
 import Shimmer
+import NukeUI
+import Nuke
 
 public struct AvatarView: View {
   public enum Size {
@@ -41,22 +43,20 @@ public struct AvatarView: View {
         .fill(.gray)
         .frame(maxWidth: size.size.width, maxHeight: size.size.height)
     } else {
-      AsyncImage(url: url) { phase in
-        switch phase {
-        case .empty:
+      LazyImage(url: url) { state in
+        if let image = state.image {
+          image
+            .resizingMode(.aspectFit)
+        } else if state.isLoading {
           placeholderView
             .shimmering()
-        case let .success(image):
-          image.resizable()
-            .aspectRatio(contentMode: .fit)
-            .cornerRadius(size.cornerRadius)
-            .frame(maxWidth: size.size.width, maxHeight: size.size.height)
-        case .failure:
-          placeholderView
-        @unknown default:
+        } else {
           placeholderView
         }
       }
+      .processors([ImageProcessors.Resize(size: size.size),
+                   ImageProcessors.RoundedCorners(radius: size.cornerRadius)])
+      .frame(width: size.size.width, height: size.size.height)
     }
   }
   

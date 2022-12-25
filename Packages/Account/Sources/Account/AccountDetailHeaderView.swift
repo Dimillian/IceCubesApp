@@ -2,6 +2,9 @@ import SwiftUI
 import Models
 import DesignSystem
 import Env
+import Shimmer
+import Nuke
+import NukeUI
 
 struct AccountDetailHeaderView: View {
   @EnvironmentObject private var theme: Theme
@@ -29,20 +32,21 @@ struct AccountDetailHeaderView: View {
   private var headerImageView: some View {
     GeometryReader { proxy in
       ZStack(alignment: .bottomTrailing) {
-        AsyncImage(
-          url: account.header,
-          content: { image in
-            image.resizable()
-              .aspectRatio(contentMode: .fill)
+        LazyImage(url: account.header) { state in
+          if let image = state.image {
+            image
+              .resizingMode(.aspectFill)
+          } else if state.isLoading {
+            Color.gray
               .frame(height: bannerHeight)
-              .frame(width: proxy.frame(in: .local).width)
-              .clipped()
-          },
-          placeholder: {
+              .shimmering()
+          } else {
             Color.gray
               .frame(height: bannerHeight)
           }
-        )
+        }
+        .frame(height: bannerHeight)
+        
         if relationship?.followedBy == true {
           Text("Follows You")
             .font(.footnote)

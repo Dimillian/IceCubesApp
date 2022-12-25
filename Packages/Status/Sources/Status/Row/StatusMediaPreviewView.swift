@@ -2,6 +2,8 @@ import SwiftUI
 import Models
 import Env
 import Shimmer
+import Nuke
+import NukeUI
 
 public struct StatusMediaPreviewView: View {
   @EnvironmentObject private var quickLook: QuickLook
@@ -89,24 +91,21 @@ public struct StatusMediaPreviewView: View {
         GeometryReader { proxy in
           switch type {
           case .image:
-            AsyncImage(
-              url: attachement.url,
-              content: { image in
+            LazyImage(url: attachement.url) { state in
+              if let image = state.image {
                 image
-                  .resizable()
-                  .aspectRatio(contentMode: attachements.count == 1 ? .fit : .fill)
-                  .frame(height: imageMaxHeight)
-                  .frame(width: proxy.frame(in: .local).width)
+                  .resizingMode(.aspectFill)
                   .cornerRadius(4)
-              },
-              placeholder: {
+              } else if state.isLoading {
                 RoundedRectangle(cornerRadius: 4)
                   .fill(Color.gray)
                   .frame(maxHeight: imageMaxHeight)
                   .frame(width: proxy.frame(in: .local).width)
                   .shimmering()
               }
-            )
+            }
+            .frame(width: proxy.frame(in: .local).width)
+            .frame(height: imageMaxHeight)
           case .gifv:
             VideoPlayerView(viewModel: .init(url: attachement.url))
               .frame(width: proxy.frame(in: .local).width)

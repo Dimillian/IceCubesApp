@@ -1,6 +1,8 @@
 import SwiftUI
 import Models
 import Shimmer
+import Nuke
+import NukeUI
 
 public struct StatusCardView: View {
   @Environment(\.openURL) private var openURL
@@ -14,21 +16,18 @@ public struct StatusCardView: View {
     if let title = card.title {
       VStack(alignment: .leading) {
         if let imageURL = card.image {
-          AsyncImage(
-            url: imageURL,
-            content: { image in
-              image.resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(maxHeight: 200)
-                .clipped()
-            },
-            placeholder: {
+          LazyImage(url: imageURL) { state in
+            if let image = state.image {
+              image
+                .resizingMode(.aspectFill)
+            } else if state.isLoading {
               Rectangle()
                 .fill(Color.gray)
                 .frame(height: 200)
                 .shimmering()
             }
-          )
+          }
+          .frame(height: 200)
         }
         Spacer()
         HStack {

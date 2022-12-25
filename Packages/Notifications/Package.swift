@@ -18,7 +18,7 @@ let package = Package(
     .package(name: "Models", path: "../Models"),
     .package(name: "Env", path: "../Env"),
     .package(name: "Status", path: "../Status"),
-    .package(url: "https://github.com/markiv/SwiftUI-Shimmer", exact: "1.1.0")
+    .package(name: "DesignSystem", path: "../DesignSystem"),
   ],
   targets: [
     .target(
@@ -28,7 +28,7 @@ let package = Package(
         .product(name: "Models", package: "Models"),
         .product(name: "Env", package: "Env"),
         .product(name: "Status", package: "Status"),
-        .product(name: "Shimmer", package: "SwiftUI-Shimmer")
+        .product(name: "DesignSystem", package: "DesignSystem")
       ]),
   ]
 )
