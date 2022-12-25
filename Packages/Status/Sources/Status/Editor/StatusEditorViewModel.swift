@@ -12,9 +12,13 @@ class StatusEditorViewModel: ObservableObject {
     }
   }
   
+  @Published var isPosting: Bool = false
+  
   var client: Client?
   private var internalUpdate: Bool = false
   private var inReplyTo: Status?
+  
+  let generator = UINotificationFeedbackGenerator()
   
   init(inReplyTo: Status?) {
     self.inReplyTo = inReplyTo
@@ -23,12 +27,17 @@ class StatusEditorViewModel: ObservableObject {
   func postStatus() async -> Status? {
     guard let client else { return nil }
     do {
+      isPosting = true
       let status: Status = try await client.post(endpoint: Statuses.postStatus(status: statusText.string,
                                                                                inReplyTo: inReplyTo?.id,
                                                                                mediaIds: nil,
                                                                                spoilerText: nil))
+      generator.notificationOccurred(.success)
+      isPosting = false
       return status
     } catch {
+      isPosting = false
+      generator.notificationOccurred(.error)
       return nil
     }
   }
@@ -40,7 +49,9 @@ class StatusEditorViewModel: ObservableObject {
   }
   
   func highlightMeta() {
-    let mutableString = NSMutableAttributedString(attributedString: statusText)
+    let mutableString = NSMutableAttributedString(string: statusText.string)
+    mutableString.addAttributes([.foregroundColor: UIColor(Color.label)],
+                                range: NSMakeRange(0, mutableString.string.utf16.count))
     let hashtagPattern = "(#+[a-zA-Z0-9(_)]{1,})"
     let mentionPattern = "(@+[a-zA-Z0-9(_).]{1,})"
     var ranges: [NSRange] = [NSRange]()

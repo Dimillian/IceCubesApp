@@ -24,7 +24,6 @@ public struct StatusEditorView: View {
           accountHeaderView
           TextView($viewModel.statusText)
             .placeholder("What's on your mind")
-            .foregroundColor(.clear)
           Spacer()
         }
         accessoryView
@@ -41,11 +40,17 @@ public struct StatusEditorView: View {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button {
             Task {
-              _ = await viewModel.postStatus()
-              dismiss()
+              let status = await viewModel.postStatus()
+              if status != nil {
+                dismiss()
+              }
             }
           } label: {
-            Text("Post")
+            if viewModel.isPosting {
+              ProgressView()
+            } else {
+              Text("Post")
+            }
           }
         }
         ToolbarItem(placement: .navigationBarLeading) {
