@@ -68,15 +68,13 @@ struct IceCubesApp: App {
       }
       .tint(theme.tintColor)
       .onChange(of: appAccountsManager.currentClient) { newClient in
-        currentAccount.setClient(client: newClient)
-        watcher.setClient(client: newClient)
+        setNewClientsInEnv(client: newClient)
         if newClient.isAuth {
           watcher.watch(stream: .user)
         }
       }
       .onAppear {
-        currentAccount.setClient(client: appAccountsManager.currentClient)
-        watcher.setClient(client: appAccountsManager.currentClient)
+        setNewClientsInEnv(client: appAccountsManager.currentClient)
       }
       .environmentObject(appAccountsManager)
       .environmentObject(appAccountsManager.currentClient)
@@ -87,16 +85,25 @@ struct IceCubesApp: App {
       .quickLookPreview($quickLook.url, in: quickLook.urls)
     }
     .onChange(of: scenePhase, perform: { scenePhase in
-      switch scenePhase {
-      case .background:
-        watcher.stopWatching()
-      case .active:
-        watcher.watch(stream: .user)
-      case .inactive:
-        break
-      default:
-        break
-      }
+      handleScenePhase(scenePhase: scenePhase)
     })
+  }
+  
+  private func setNewClientsInEnv(client: Client) {
+    currentAccount.setClient(client: client)
+    watcher.setClient(client: client)
+  }
+  
+  private func handleScenePhase(scenePhase: ScenePhase) {
+    switch scenePhase {
+    case .background:
+      watcher.stopWatching()
+    case .active:
+      watcher.watch(stream: .user)
+    case .inactive:
+      break
+    default:
+      break
+    }
   }
 }
