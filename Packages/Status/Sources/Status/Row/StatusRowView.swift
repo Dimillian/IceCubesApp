@@ -27,6 +27,10 @@ public struct StatusRowView: View {
         StatusActionsView(viewModel: viewModel)
           .padding(.vertical, 8)
           .tint(viewModel.isFocused ? theme.tintColor : .gray)
+          .contentShape(Rectangle())
+          .onTapGesture {
+            routeurPath.navigate(to: .statusDetail(id: viewModel.status.reblog?.id ?? viewModel.status.id))
+          }
       }
     }
     .onAppear {
@@ -84,25 +88,28 @@ public struct StatusRowView: View {
           }
         }
         
-        Text(status.content.asSafeAttributedString)
-          .font(.body)
-          .onTapGesture {
-            routeurPath.navigate(to: .statusDetail(id: status.id))
+        Group {
+          Text(status.content.asSafeAttributedString)
+            .font(.body)
+            .environment(\.openURL, OpenURLAction { url in
+              routeurPath.handleStatus(status: status, url: url)
+            })
+          
+          if !status.mediaAttachments.isEmpty {
+            if viewModel.isEmbed {
+              Image(systemName: "paperclip")
+            } else {
+              StatusMediaPreviewView(attachements: status.mediaAttachments)
+                .padding(.vertical, 4)
+            }
           }
-          .environment(\.openURL, OpenURLAction { url in
-            routeurPath.handleStatus(status: status, url: url)
-          })
-        
-        if !status.mediaAttachments.isEmpty {
-          if viewModel.isEmbed {
-            Image(systemName: "paperclip")
-          } else {
-            StatusMediaPreviewView(attachements: status.mediaAttachments)
-              .padding(.vertical, 4)
+          if let card = status.card, !viewModel.isEmbed {
+            StatusCardView(card: card)
           }
         }
-        if let card = status.card, !viewModel.isEmbed {
-          StatusCardView(card: card)
+        .contentShape(Rectangle())
+        .onTapGesture {
+          routeurPath.navigate(to: .statusDetail(id: viewModel.status.reblog?.id ?? viewModel.status.id))
         }
       }
     }
@@ -130,8 +137,10 @@ public struct StatusRowView: View {
       contextMenu
     } label: {
       Image(systemName: "ellipsis")
+        .frame(width: 30, height: 30)
     }
     .foregroundColor(.gray)
+    .contentShape(Rectangle())
   }
   
   @ViewBuilder

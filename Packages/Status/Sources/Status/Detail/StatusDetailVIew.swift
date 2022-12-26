@@ -55,6 +55,7 @@ public struct StatusDetailView: View {
           }
         }
         .padding(.horizontal, DS.Constants.layoutPadding)
+        .padding(.top, DS.Constants.layoutPadding)
       }
       .task {
         guard !isLoaded else { return }

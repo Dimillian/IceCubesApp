@@ -22,6 +22,7 @@ public struct TagRowView: View {
       }
       Spacer()
     }
+    .contentShape(Rectangle())
     .onTapGesture {
       routeurPath.navigate(to: .hashTag(tag: tag.name, account: nil))
     }

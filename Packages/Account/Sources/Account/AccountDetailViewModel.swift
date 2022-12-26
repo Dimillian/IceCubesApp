@@ -2,6 +2,7 @@ import SwiftUI
 import Network
 import Models
 import Status
+import Env
 
 @MainActor
 class AccountDetailViewModel: ObservableObject, StatusesFetcher {
@@ -168,6 +169,23 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
                                                    nextPageState: favouritesNextPage != nil ? .hasNextPage : .none))
     case .followedTags:
       tabState = .followedTags(tags: followedTags)
+    }
+  }
+  
+  func handleEvent(event: any StreamEvent, currentAccount: CurrentAccount) {
+    if let event = event as? StreamEventUpdate {
+      if event.status.account.id == currentAccount.account?.id {
+        statuses.insert(event.status, at: 0)
+        statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+      }
+    } else if let event = event as? StreamEventDelete {
+      statuses.removeAll(where: { $0.id == event.status })
+      statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+    } else if let event = event as? StreamEventStatusUpdate {
+      if let originalIndex = statuses.firstIndex(where: { $0.id == event.status.id }) {
+        statuses[originalIndex] = event.status
+        statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+      }
     }
   }
 }

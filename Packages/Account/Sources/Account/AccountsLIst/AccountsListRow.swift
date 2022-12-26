@@ -51,6 +51,7 @@ public struct AccountsListRow: View {
     .onAppear {
       viewModel.client = client
     }
+    .contentShape(Rectangle())
     .onTapGesture {
       routeurPath.navigate(to: .accountDetailWithAccount(account: viewModel.account))
     }

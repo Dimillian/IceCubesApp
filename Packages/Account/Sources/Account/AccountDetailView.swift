@@ -8,6 +8,8 @@ import Env
 
 public struct AccountDetailView: View {  
   @Environment(\.redactionReasons) private var reasons
+  @EnvironmentObject private var watcher: StreamWatcher
+  @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var routeurPath: RouterPath
@@ -75,6 +77,12 @@ public struct AccountDetailView: View {
       Task {
         await viewModel.fetchAccount()
         await viewModel.fetchStatuses()
+      }
+    }
+    .onChange(of: watcher.latestEvent?.id) { id in
+      if let latestEvent = watcher.latestEvent,
+          viewModel.accountId == currentAccount.account?.id {
+        viewModel.handleEvent(event: latestEvent, currentAccount: currentAccount)
       }
     }
     .edgesIgnoringSafeArea(.top)

@@ -28,9 +28,6 @@ struct NotificationRowView: View {
   private func makeAvatarView(type: Models.Notification.NotificationType) -> some View {
     ZStack(alignment: .topLeading) {
       AvatarView(url: notification.account.avatar)
-        .onTapGesture {
-          routeurPath.navigate(to: .accountDetailWithAccount(account: notification.account))
-        }
       ZStack(alignment: .center) {
         Circle()
           .strokeBorder(Color.white, lineWidth: 1)
@@ -43,6 +40,10 @@ struct NotificationRowView: View {
           .foregroundColor(.white)
       }
       .offset(x: -14, y: -4)
+    }
+    .contentShape(Rectangle())
+    .onTapGesture {
+      routeurPath.navigate(to: .accountDetailWithAccount(account: notification.account))
     }
   }
   
@@ -64,6 +65,10 @@ struct NotificationRowView: View {
         Spacer()
       }
     }
+    .contentShape(Rectangle())
+    .onTapGesture {
+      routeurPath.navigate(to: .accountDetailWithAccount(account: notification.account))
+    }
   }
   
   @ViewBuilder
@@ -78,18 +83,24 @@ struct NotificationRowView: View {
         )
         .padding(.top, 8)
     } else {
-      Text("@\(notification.account.acct)")
-        .font(.callout)
-        .foregroundColor(.gray)
-      
-      if type == .follow {
-        Text(notification.account.note.asSafeAttributedString)
-          .lineLimit(3)
+      Group {
+        Text("@\(notification.account.acct)")
           .font(.callout)
           .foregroundColor(.gray)
-          .environment(\.openURL, OpenURLAction { url in
-            routeurPath.handle(url: url)
-          })
+        
+        if type == .follow {
+          Text(notification.account.note.asSafeAttributedString)
+            .lineLimit(3)
+            .font(.callout)
+            .foregroundColor(.gray)
+            .environment(\.openURL, OpenURLAction { url in
+              routeurPath.handle(url: url)
+            })
+        }
+      }
+      .contentShape(Rectangle())
+      .onTapGesture {
+        routeurPath.navigate(to: .accountDetailWithAccount(account: notification.account))
       }
     }
   }
