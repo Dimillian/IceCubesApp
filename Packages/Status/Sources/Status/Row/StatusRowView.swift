@@ -152,6 +152,11 @@ public struct StatusRowView: View {
     }
 
     if account.account?.id == viewModel.status.account.id {
+      Button {
+        routeurPath.presentedSheet = .editStatusEditor(status: viewModel.status)
+      } label: {
+        Label("Edit", systemImage: "pencil")
+      }
       Button(role: .destructive) { Task { await viewModel.delete() } } label: {
         Label("Delete", systemImage: "trash")
       }

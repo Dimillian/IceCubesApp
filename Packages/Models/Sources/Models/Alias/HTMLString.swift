@@ -1,5 +1,6 @@
 import Foundation
 import HTML2Markdown
+import SwiftSoup
 import SwiftUI
 
 public typealias HTMLString = String
@@ -9,6 +10,15 @@ extension HTMLString {
     do {
       let dom = try HTMLParser().parse(html: self)
       return dom.toMarkdown()
+    } catch {
+      return self
+    }
+  }
+  
+  public var asRawText: String {
+    do {
+      let document: Document = try SwiftSoup.parse(self)
+      return try document.text()
     } catch {
       return self
     }

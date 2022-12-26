@@ -5,6 +5,10 @@ public enum Statuses: Endpoint {
                   inReplyTo: String?,
                   mediaIds: [String]?,
                   spoilerText: String?)
+  case editStatus(id: String,
+                  status: String,
+                  mediaIds: [String]?,
+                  spoilerText: String?)
   case status(id: String)
   case context(id: String)
   case favourite(id: String)
@@ -19,6 +23,8 @@ public enum Statuses: Endpoint {
     case .postStatus:
       return "statuses"
     case .status(let id):
+      return "statuses/\(id)"
+    case .editStatus(let id, _, _, _):
       return "statuses/\(id)"
     case .context(let id):
       return "statuses/\(id)/context"
@@ -44,6 +50,17 @@ public enum Statuses: Endpoint {
       if let inReplyTo {
         params.append(.init(name: "in_reply_to_id", value: inReplyTo))
       }
+      if let mediaIds {
+        for mediaId in mediaIds {
+          params.append(.init(name: "media_ids[]", value: mediaId))
+        }
+      }
+      if let spoilerText {
+        params.append(.init(name: "spoiler_text", value: spoilerText))
+      }
+      return params
+    case let .editStatus(_, status, mediaIds, spoilerText):
+      var params: [URLQueryItem] = [.init(name: "status", value: status)]
       if let mediaIds {
         for mediaId in mediaIds {
           params.append(.init(name: "media_ids[]", value: mediaId))

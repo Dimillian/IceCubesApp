@@ -7,6 +7,7 @@ import DesignSystem
 import Env
 
 public struct TimelineView: View {
+  @Environment(\.scenePhase) private var scenePhase
   @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
@@ -53,6 +54,16 @@ public struct TimelineView: View {
     .onChange(of: timeline) { newTimeline in
       viewModel.timeline = timeline
     }
+    .onChange(of: scenePhase, perform: { scenePhase in
+      switch scenePhase {
+      case .active:
+        Task {
+          await viewModel.fetchStatuses(userIntent: false)
+        }
+      default:
+        break
+      }
+    })
   }
   
   @ViewBuilder

@@ -17,6 +17,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
       Task {
         if oldValue != timeline {
           statuses = []
+          pendingStatuses = []
         }
         await fetchStatuses(userIntent: false)
         switch timeline {
@@ -61,18 +62,22 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
   func fetchStatuses(userIntent: Bool) async {
     guard let client else { return }
     do {
-      pendingStatuses = []
       if statuses.isEmpty {
+        pendingStatuses = []
         statusesState = .loading
         statuses = try await client.get(endpoint: timeline.endpoint(sinceId: nil, maxId: nil))
         statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
       } else if let first = statuses.first {
-        let newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: first.id, maxId: nil))
+        var newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: first.id, maxId: nil))
         if userIntent || !pendingStatusesEnabled {
+          pendingStatuses = []
           statuses.insert(contentsOf: newStatuses, at: 0)
           statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
         } else {
-          pendingStatuses = newStatuses
+          newStatuses = newStatuses.filter { status in
+            !pendingStatuses.contains(where: { $0.id == status.id })
+          }
+          pendingStatuses.insert(contentsOf: newStatuses, at: 0)
           pendingStatusesState = .refresh
         }
       }

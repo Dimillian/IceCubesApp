@@ -14,8 +14,8 @@ public struct StatusEditorView: View {
   
   @StateObject private var viewModel: StatusEditorViewModel
   
-  public init(inReplyTo: Status?) {
-    _viewModel = StateObject(wrappedValue: .init(inReplyTo: inReplyTo))
+  public init(mode: StatusEditorViewModel.Mode) {
+    _viewModel = StateObject(wrappedValue: .init(mode: mode))
   }
   
   public var body: some View {
@@ -33,10 +33,10 @@ public struct StatusEditorView: View {
       }
       .onAppear {
         viewModel.client = client
-        viewModel.insertReplyTo()
+        viewModel.prepareStatusText()
       }
       .padding(.horizontal, DS.Constants.layoutPadding)
-      .navigationTitle("New post")
+      .navigationTitle(viewModel.mode.title)
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {

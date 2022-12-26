@@ -128,7 +128,7 @@ struct StatusActionsView: View {
       generator.notificationOccurred(.success)
       switch action {
       case .respond:
-        routeurPath.presentedSheet = .statusEditor(replyToStatus: viewModel.status)
+        routeurPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
       case .favourite:
         if viewModel.isFavourited {
           await viewModel.unFavourite()

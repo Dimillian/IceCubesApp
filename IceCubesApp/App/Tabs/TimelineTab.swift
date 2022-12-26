@@ -19,7 +19,7 @@ struct TimelineTab: View {
           if client.isAuth {
             ToolbarItem(placement: .navigationBarLeading) {
               Button {
-                routeurPath.presentedSheet = .statusEditor(replyToStatus: nil)
+                routeurPath.presentedSheet = .newStatusEditor
               } label: {
                 Image(systemName: "square.and.pencil")
               }

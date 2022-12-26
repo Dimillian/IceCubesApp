@@ -68,9 +68,7 @@ public class Client: ObservableObject, Equatable {
   }
     
   public func get<Entity: Decodable>(endpoint: Endpoint) async throws -> Entity {
-    let (data, httpResponse) = try await urlSession.data(for: makeGet(endpoint: endpoint))
-    logResponseOnError(httpResponse: httpResponse, data: data)
-    return try decoder.decode(Entity.self, from: data)
+    try await makeEntityRequest(endpoint: endpoint, method: "GET")
   }
   
   public func getWithLink<Entity: Decodable>(endpoint: Endpoint) async throws -> (Entity, LinkHandler?) {
@@ -85,11 +83,11 @@ public class Client: ObservableObject, Equatable {
   }
   
   public func post<Entity: Decodable>(endpoint: Endpoint) async throws -> Entity {
-    let url = makeURL(endpoint: endpoint)
-    let request = makeURLRequest(url: url, httpMethod: "POST")
-    let (data, httpResponse) = try await urlSession.data(for: request)
-    logResponseOnError(httpResponse: httpResponse, data: data)
-    return try decoder.decode(Entity.self, from: data)
+    try await makeEntityRequest(endpoint: endpoint, method: "POST")
+  }
+  
+  public func put<Entity: Decodable>(endpoint: Endpoint) async throws -> Entity {
+    try await makeEntityRequest(endpoint: endpoint, method: "PUT")
   }
   
   public func delete(endpoint: Endpoint) async throws -> HTTPURLResponse? {
@@ -97,6 +95,14 @@ public class Client: ObservableObject, Equatable {
     let request = makeURLRequest(url: url, httpMethod: "DELETE")
     let (_, httpResponse) = try await urlSession.data(for: request)
     return httpResponse as? HTTPURLResponse
+  }
+  
+  private func makeEntityRequest<Entity: Decodable>(endpoint: Endpoint, method: String) async throws -> Entity {
+    let url = makeURL(endpoint: endpoint)
+    let request = makeURLRequest(url: url, httpMethod: method)
+    let (data, httpResponse) = try await urlSession.data(for: request)
+    logResponseOnError(httpResponse: httpResponse, data: data)
+    return try decoder.decode(Entity.self, from: data)
   }
   
   public func oauthURL() async throws -> URL {

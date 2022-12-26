@@ -32,8 +32,12 @@ extension View {
   func withSheetDestinations(sheetDestinations: Binding<SheetDestinations?>) -> some View {
     self.sheet(item: sheetDestinations) { destination in
       switch destination {
-      case let .statusEditor(replyToStatus):
-        StatusEditorView(inReplyTo: replyToStatus)
+      case let .replyToStatusEditor(status):
+        StatusEditorView(mode: .replyTo(status: status))
+      case .newStatusEditor:
+        StatusEditorView(mode: .new)
+      case let .editStatusEditor(status):
+        StatusEditorView(mode: .edit(status: status))
       }
     }
   }

@@ -24,7 +24,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
       case let .error(error):
         Text(error.localizedDescription)
       case let .display(statuses, nextPageState):
-        ForEach(statuses) { status in
+        ForEach(statuses, id: \.viewId) { status in
           StatusRowView(viewModel: .init(status: status, isEmbed: false))
           Divider()
             .padding(.vertical, DS.Constants.dividerPadding)

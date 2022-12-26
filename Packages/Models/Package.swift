@@ -14,12 +14,14 @@ let package = Package(
       targets: ["Models"]),
   ],
   dependencies: [
-    .package(url: "https://gitlab.com/mflint/HTML2Markdown", exact: "1.0.0")
+    .package(url: "https://gitlab.com/mflint/HTML2Markdown", exact: "1.0.0"),
+    .package(url: "https://github.com/scinfu/SwiftSoup.git", from: "2.4.3"),
   ],
   targets: [
     .target(
       name: "Models",
-      dependencies: ["HTML2Markdown"]),
+      dependencies: ["HTML2Markdown",
+                     "SwiftSoup"]),
     .testTarget(
       name: "ModelsTests",
       dependencies: ["Models"]),

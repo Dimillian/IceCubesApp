@@ -14,11 +14,13 @@ public enum RouteurDestinations: Hashable {
 }
 
 public enum SheetDestinations: Identifiable {
-  case statusEditor(replyToStatus: Status?)
+  case newStatusEditor
+  case editStatusEditor(status: Status)
+  case replyToStatusEditor(status: Status)
   
   public var id: String {
     switch self {
-    case .statusEditor:
+    case .editStatusEditor, .newStatusEditor, .replyToStatusEditor:
       return "statusEditor"
     }
   }

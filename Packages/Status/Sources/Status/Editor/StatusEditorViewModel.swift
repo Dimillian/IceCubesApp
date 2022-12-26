@@ -5,7 +5,35 @@ import Network
 import PhotosUI
 
 @MainActor
-class StatusEditorViewModel: ObservableObject {
+public class StatusEditorViewModel: ObservableObject {
+  public enum Mode {
+    case replyTo(status: Status)
+    case new
+    case edit(status: Status)
+    
+    var replyToStatus: Status? {
+      switch self {
+        case let .replyTo(status):
+          return status
+        default:
+          return nil
+      }
+    }
+    
+    var title: String {
+      switch self {
+      case .new:
+        return "New Post"
+      case .edit:
+        return "Edit your post"
+      case let .replyTo(status):
+        return "Reply to \(status.account.displayName)"
+      }
+    }
+  }
+  
+  let mode: Mode
+  
   @Published var statusText = NSAttributedString(string: "") {
     didSet {
       guard !internalUpdate else { return }
@@ -28,25 +56,33 @@ class StatusEditorViewModel: ObservableObject {
   
   var client: Client?
   private var internalUpdate: Bool = false
-  private var inReplyTo: Status?
   
   let generator = UINotificationFeedbackGenerator()
   
-  init(inReplyTo: Status?) {
-    self.inReplyTo = inReplyTo
+  init(mode: Mode) {
+    self.mode = mode
   }
   
   func postStatus() async -> Status? {
     guard let client else { return nil }
     do {
       isPosting = true
-      let status: Status = try await client.post(endpoint: Statuses.postStatus(status: statusText.string,
-                                                                               inReplyTo: inReplyTo?.id,
-                                                                               mediaIds: nil,
-                                                                               spoilerText: nil))
+      let postStatus: Status?
+      switch mode {
+      case .new, .replyTo:
+        postStatus = try await client.post(endpoint: Statuses.postStatus(status: statusText.string,
+                                                                         inReplyTo: mode.replyToStatus?.id,
+                                                                         mediaIds: nil,
+                                                                         spoilerText: nil))
+      case let .edit(status):
+        postStatus = try await client.put(endpoint: Statuses.editStatus(id: status.id,
+                                                                        status: statusText.string,
+                                                                        mediaIds: nil,
+                                                                        spoilerText: nil))
+      }
       generator.notificationOccurred(.success)
       isPosting = false
-      return status
+      return postStatus
     } catch {
       isPosting = false
       generator.notificationOccurred(.error)
@@ -54,9 +90,14 @@ class StatusEditorViewModel: ObservableObject {
     }
   }
   
-  func insertReplyTo() {
-    if let inReplyTo {
-      statusText = .init(string: "@\(inReplyTo.account.acct) ")
+  func prepareStatusText() {
+    switch mode {
+    case let .replyTo(status):
+      statusText = .init(string: "@\(status.account.acct) ")
+    case let .edit(status):
+      statusText = .init(string: status.content.asRawText)
+    default:
+      break
     }
   }
   

@@ -8,10 +8,12 @@ public struct Application: Codable, Identifiable {
 }
 
 public protocol AnyStatus {
+  var viewId: String { get }
   var id: String { get }
   var content: HTMLString { get }
   var account: Account { get }
-  var createdAt: String { get }
+  var createdAt: ServerDate { get }
+  var editedAt: ServerDate? { get }
   var mediaAttachments: [MediaAttachement] { get }
   var mentions: [Mention] { get }
   var repliesCount: Int { get }
@@ -27,11 +29,17 @@ public protocol AnyStatus {
   var inReplyToAccountId: String? { get }
 }
 
+
 public struct Status: AnyStatus, Codable, Identifiable {
+  public var viewId: String {
+    id + createdAt + (editedAt ?? "")
+  }
+  
   public let id: String
   public let content: HTMLString
   public let account: Account
   public let createdAt: ServerDate
+  public let editedAt: ServerDate?
   public let reblog: ReblogStatus?
   public let mediaAttachments: [MediaAttachement]
   public let mentions: [Mention]
@@ -52,6 +60,7 @@ public struct Status: AnyStatus, Codable, Identifiable {
           content: "Some post content\n Some more post content \n Some more",
           account: .placeholder(),
           createdAt: "2022-12-16T10:20:54.000Z",
+          editedAt: nil,
           reblog: nil,
           mediaAttachments: [],
           mentions: [],
@@ -74,10 +83,15 @@ public struct Status: AnyStatus, Codable, Identifiable {
 }
 
 public struct ReblogStatus: AnyStatus, Codable, Identifiable {
+  public var viewId: String {
+    id + createdAt + (editedAt ?? "")
+  }
+  
   public let id: String
   public let content: String
   public let account: Account
   public let createdAt: String
+  public let editedAt: ServerDate?
   public let mediaAttachments: [MediaAttachement]
   public let mentions: [Mention]
   public let repliesCount: Int
