@@ -8,6 +8,10 @@
     <img src="Images/image3.png" width="300" />
     <img src="Images/image4.png" width="300" />
 </p>
+<p float="left">
+    <img src="Images/image5.png" width="300" />
+    <img src="Images/image6.png" width="300" />
+</p>
 
 IceCubesApp is an open source application for accessing the decentralized social network Mastodon! It's built entirely in SwiftUI, making it fast, lightweight, and easy to use.
 
