@@ -2,7 +2,6 @@ import SwiftUI
 import Models
 import Env
 import Shimmer
-import Nuke
 import NukeUI
 
 public struct StatusMediaPreviewView: View {

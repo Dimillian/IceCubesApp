@@ -1,7 +1,6 @@
 import SwiftUI
 import Models
 import Shimmer
-import Nuke
 import NukeUI
 
 public struct StatusCardView: View {

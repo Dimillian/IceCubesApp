@@ -1,6 +1,5 @@
 import Foundation
 import SwiftUI
-import Nuke
 import NukeUI
 import Models
 
@@ -21,7 +20,7 @@ extension Account {
                ProgressView()
              }
            }
-           .processors([ImageProcessors.Resize(size: .init(width: 20, height: 20))])
+           .processors([.resize(size: .init(width: 20, height: 20))])
            .frame(width: 20, height: 20)
          } else {
            Text(part)
