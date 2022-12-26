@@ -15,7 +15,7 @@
       "location" : "https://github.com/evgenyneu/keychain-swift",
       "state" : {
         "branch" : "master",
-        "revision" : "32a99b537d1c6f3529a08257c28a5feb70c0c5af"
+        "revision" : "e43f9b99b172ae6a7253047f8ba95c7a0b05b99f"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Nuke",
       "state" : {
-        "revision" : "1e7395a8931ad19659fd1e10137a862b9c1e2a38",
-        "version" : "11.5.0"
+        "revision" : "81f6a3dea0c8ce3b87389c241c48601be07af0b1",
+        "version" : "11.5.1"
       }
     },
     {
