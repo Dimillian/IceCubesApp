@@ -10,11 +10,11 @@ public enum TimelineFilter: Hashable, Equatable {
     hasher.combine(title())
   }
   
-  static func availableTimeline() -> [TimelineFilter] {
+  public static func availableTimeline() -> [TimelineFilter] {
     return [.pub, .home]
   }
   
-  func title() -> String {
+  public func title() -> String {
     switch self {
     case .pub:
       return "Public"
@@ -25,7 +25,7 @@ public enum TimelineFilter: Hashable, Equatable {
     }
   }
   
-  func endpoint(sinceId: String?, maxId: String?) -> Endpoint {
+  public func endpoint(sinceId: String?, maxId: String?) -> Endpoint {
     switch self {
     case .pub: return Timelines.pub(sinceId: sinceId, maxId: maxId)
     case .home: return Timelines.home(sinceId: sinceId, maxId: maxId)

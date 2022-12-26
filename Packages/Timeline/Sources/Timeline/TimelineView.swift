@@ -11,11 +11,10 @@ public struct TimelineView: View {
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
   @StateObject private var viewModel = TimelineViewModel()
+  @Binding var timeline: TimelineFilter
   
-  private let filter: TimelineFilter?
-  
-  public init(timeline: TimelineFilter? = nil) {
-    self.filter = timeline
+  public init(timeline: Binding<TimelineFilter>) {
+    _timeline = timeline
   }
   
   public var body: some View {
@@ -35,30 +34,24 @@ public struct TimelineView: View {
         }
       }
     }
-    .navigationTitle(filter?.title() ?? viewModel.timeline.title())
+    .navigationTitle(timeline.title())
     .navigationBarTitleDisplayMode(.inline)
-    .toolbar {
-      if client.isAuth {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          timelineFilterButton
-        }
-      }
-    }
     .onAppear {
       viewModel.client = client
-      if let filter {
-        viewModel.timeline = filter
-      } else {
-        viewModel.timeline = client.isAuth ? .home : .pub
-      }
+      viewModel.timeline = timeline
     }
     .refreshable {
-      await viewModel.fetchStatuses()
+      Task {
+        await viewModel.fetchStatuses(userIntent: true)
+      }
     }
     .onChange(of: watcher.latestEvent?.id) { id in
       if let latestEvent = watcher.latestEvent {
         viewModel.handleEvent(event: latestEvent, currentAccount: account)
       }
+    }
+    .onChange(of: timeline) { newTimeline in
+      viewModel.timeline = timeline
     }
   }
   
@@ -69,7 +62,7 @@ public struct TimelineView: View {
         proxy.scrollTo("top")
         viewModel.displayPendingStatuses()
       } label: {
-        Text("\(viewModel.pendingStatuses.count) new posts")
+        Text(viewModel.pendingStatusesButtonTitle)
       }
       .buttonStyle(.bordered)
       .background(.thinMaterial)
@@ -106,20 +99,5 @@ public struct TimelineView: View {
       .padding(.vertical, 8)
       .background(.gray.opacity(0.15))
     }
-  }
-  
-  private var timelineFilterButton: some View {
-    Menu {
-      ForEach(TimelineFilter.availableTimeline(), id: \.self) { filter in
-        Button {
-          viewModel.timeline = filter
-        } label: {
-          Text(filter.title())
-        }
-      }
-    } label: {
-      Image(systemName: "line.3.horizontal.decrease.circle")
-    }
-
   }
 }

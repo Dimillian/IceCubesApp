@@ -20,6 +20,15 @@ public struct StreamEventUpdate: StreamEvent {
   }
 }
 
+public struct StreamEventStatusUpdate: StreamEvent {
+  public let date = Date()
+  public var id: String { status.id }
+  public let status: Status
+  public init(status: Status) {
+    self.status = status
+  }
+}
+
 public struct StreamEventDelete: StreamEvent {
   public let date = Date()
   public var id: String { status + date.description }

@@ -8,10 +8,11 @@ struct TimelineTab: View {
   @EnvironmentObject private var client: Client
   @StateObject private var routeurPath = RouterPath()
   @Binding var popToRootTab: IceCubesApp.Tab
+  @State private var timeline: TimelineFilter = .home
   
   var body: some View {
     NavigationStack(path: $routeurPath.path) {
-      TimelineView()
+      TimelineView(timeline: $timeline)
         .withAppRouteur()
         .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
         .toolbar {
@@ -23,8 +24,16 @@ struct TimelineTab: View {
                 Image(systemName: "square.and.pencil")
               }
             }
+            ToolbarItem(placement: .navigationBarTrailing) {
+              timelineFilterButton
+            }
           }
         }
+    }
+    .onAppear {
+      if !client.isAuth {
+        timeline = .pub
+      }
     }
     .environmentObject(routeurPath)
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
@@ -32,5 +41,21 @@ struct TimelineTab: View {
         routeurPath.path = []
       }
     }
+  }
+  
+  
+  private var timelineFilterButton: some View {
+    Menu {
+      ForEach(TimelineFilter.availableTimeline(), id: \.self) { timeline in
+        Button {
+          self.timeline = timeline
+        } label: {
+          Text(timeline.title())
+        }
+      }
+    } label: {
+      Image(systemName: "line.3.horizontal.decrease.circle")
+    }
+
   }
 }

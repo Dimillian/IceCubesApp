@@ -108,6 +108,9 @@ public class StreamWatcher: ObservableObject {
       case "update":
         let status = try decoder.decode(Status.self, from: payloadData)
         return StreamEventUpdate(status: status)
+      case "status.update":
+        let status = try decoder.decode(Status.self, from: payloadData)
+        return StreamEventStatusUpdate(status: status)
       case "delete":
         return StreamEventDelete(status: rawEvent.payload)
       case "notification":

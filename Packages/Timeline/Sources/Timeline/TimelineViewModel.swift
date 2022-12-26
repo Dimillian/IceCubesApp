@@ -8,6 +8,7 @@ import Env
 class TimelineViewModel: ObservableObject, StatusesFetcher {
   var client: Client?
   
+  // Internal source of truth for a timeline.
   private var statuses: [Status] = []
   
   @Published var statusesState: StatusesState = .loading
@@ -17,7 +18,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
         if oldValue != timeline {
           statuses = []
         }
-        await fetchStatuses()
+        await fetchStatuses(userIntent: false)
         switch timeline {
         case let .hashtag(tag, _):
           await fetchTag(id: tag)
@@ -28,24 +29,53 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
     }
   }
   @Published var tag: Tag?
+  
+  enum PendingStatusesState {
+    case refresh, stream
+  }
+  
   @Published var pendingStatuses: [Status] = []
+  @Published var pendingStatusesState: PendingStatusesState = .stream
+  
+  var pendingStatusesButtonTitle: String {
+    switch pendingStatusesState {
+    case .stream:
+      return "\(pendingStatuses.count) new posts"
+    case .refresh:
+      return "See new posts"
+    }
+  }
+  
+  var pendingStatusesEnabled: Bool {
+    timeline == .home
+  }
   
   var serverName: String {
     client?.server ?? "Error"
   }
     
   func fetchStatuses() async {
+    await fetchStatuses(userIntent: false)
+  }
+  
+  func fetchStatuses(userIntent: Bool) async {
     guard let client else { return }
     do {
+      pendingStatuses = []
       if statuses.isEmpty {
-        pendingStatuses = []
         statusesState = .loading
         statuses = try await client.get(endpoint: timeline.endpoint(sinceId: nil, maxId: nil))
+        statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
       } else if let first = statuses.first {
         let newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: first.id, maxId: nil))
-        statuses.insert(contentsOf: newStatuses, at: 0)
+        if userIntent || !pendingStatusesEnabled {
+          statuses.insert(contentsOf: newStatuses, at: 0)
+          statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+        } else {
+          pendingStatuses = newStatuses
+          pendingStatusesState = .refresh
+        }
       }
-      statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
     } catch {
       statusesState = .error(error: error)
       print("timeline parse error: \(error)")
@@ -87,22 +117,32 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
   }
   
   func handleEvent(event: any StreamEvent, currentAccount: CurrentAccount) {
-    guard timeline == .home else { return }
     if let event = event as? StreamEventUpdate {
-      if event.status.account.id == currentAccount.account?.id {
+      if event.status.account.id == currentAccount.account?.id,
+         timeline == .home {
         statuses.insert(event.status, at: 0)
         statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
-      } else {
+      } else if pendingStatusesEnabled,
+                !statuses.contains(where: { $0.id == event.status.id }) {
         pendingStatuses.insert(event.status, at: 0)
+        pendingStatusesState = .stream
       }
     } else if let event = event as? StreamEventDelete {
       statuses.removeAll(where: { $0.id == event.status })
       statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+    } else if let event = event as? StreamEventStatusUpdate {
+      if let originalIndex = statuses.firstIndex(where: { $0.id == event.status.id }) {
+        statuses[originalIndex] = event.status
+        statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+      }
     }
   }
   
   func displayPendingStatuses() {
     guard timeline == .home else { return }
+    pendingStatuses = pendingStatuses.filter { status in
+      !statuses.contains(where: { $0.id == status.id })
+    }
     statuses.insert(contentsOf: pendingStatuses, at: 0)
     pendingStatuses = []
     statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
