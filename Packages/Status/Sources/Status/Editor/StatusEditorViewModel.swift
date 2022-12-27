@@ -158,7 +158,7 @@ public class StatusEditorViewModel: ObservableObject {
       for (index, media) in mediasCopy.enumerated() {
         do {
           if !Task.isCancelled,
-              let data = media.image?.pngData(),
+             let data = media.image?.jpegData(compressionQuality: 0.90),
              let uploadedMedia = try await uploadMedia(data: data) {
             mediasImages[index] = .init(image: nil, mediaAttachement: uploadedMedia, error: nil)
           }
@@ -172,7 +172,7 @@ public class StatusEditorViewModel: ObservableObject {
   private func uploadMedia(data: Data) async throws -> MediaAttachement? {
     guard let client else { return nil }
     do {
-      return try await client.mediaUpload(mimeType: "image/png", data: data)
+      return try await client.mediaUpload(mimeType: "image/jpeg", data: data)
     } catch {
       return nil
     }
