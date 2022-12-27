@@ -9,7 +9,7 @@ struct AccountTab: View {
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var currentAccount: CurrentAccount
   @StateObject private var routeurPath = RouterPath()
-  @Binding var popToRootTab: IceCubesApp.Tab
+  @Binding var popToRootTab: Tab
   
   var body: some View {
     NavigationStack(path: $routeurPath.path) {

@@ -7,10 +7,6 @@ import DesignSystem
 
 @main
 struct IceCubesApp: App {
-  enum Tab: Int {
-    case timeline, notifications, explore, account, settings, other
-  }
-  
   public static let defaultServer = "mastodon.social"
     
   @Environment(\.scenePhase) private var scenePhase
@@ -37,34 +33,14 @@ struct IceCubesApp: App {
         }
         selectedTab = newTab
       })) {
-        TimelineTab(popToRootTab: $popToRootTab)
-          .tabItem {
-            Label("Timeline", systemImage: "rectangle.on.rectangle")
-          }
-          .tag(Tab.timeline)
-        if appAccountsManager.currentClient.isAuth {
-          NotificationsTab(popToRootTab: $popToRootTab)
+        ForEach(appAccountsManager.currentClient.isAuth ? Tab.loggedInTabs() : Tab.loggedOutTab()) { tab in
+          tab.makeContentView(popToRootTab: $popToRootTab)
             .tabItem {
-              Label("Notifications", systemImage: "bell")
+              tab.label
+                .badge(tab == .notifications ? watcher.unreadNotificationsCount : 0)
             }
-            .badge(watcher.unreadNotificationsCount)
-            .tag(Tab.notifications)
-          ExploreTab(popToRootTab: $popToRootTab)
-            .tabItem {
-              Label("Explore", systemImage: "magnifyingglass")
-            }
-            .tag(Tab.explore)
-          AccountTab(popToRootTab: $popToRootTab)
-            .tabItem {
-              Label("Profile", systemImage: "person.circle")
-            }
-            .tag(Tab.account)
+            .tag(tab)
         }
-        SettingsTabs()
-          .tabItem {
-            Label("Settings", systemImage: "gear")
-          }
-          .tag(Tab.settings)
       }
       .tint(theme.tintColor)
       .onChange(of: appAccountsManager.currentClient) { newClient in

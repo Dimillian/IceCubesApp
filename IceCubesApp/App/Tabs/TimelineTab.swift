@@ -7,7 +7,7 @@ import Combine
 struct TimelineTab: View {
   @EnvironmentObject private var client: Client
   @StateObject private var routeurPath = RouterPath()
-  @Binding var popToRootTab: IceCubesApp.Tab
+  @Binding var popToRootTab: Tab
   @State private var timeline: TimelineFilter = .home
   
   var body: some View {

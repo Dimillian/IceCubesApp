@@ -9,7 +9,7 @@ import Network
 struct ExploreTab: View {
   @EnvironmentObject private var client: Client
   @StateObject private var routeurPath = RouterPath()
-  @Binding var popToRootTab: IceCubesApp.Tab
+  @Binding var popToRootTab: Tab
   
   var body: some View {
     NavigationStack(path: $routeurPath.path) {
