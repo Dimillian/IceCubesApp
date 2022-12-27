@@ -40,7 +40,7 @@ public struct StatusMediaPreviewView: View {
         makeFeaturedImagePreview(attachement: attachement)
           .onTapGesture {
             Task {
-              await quickLook.prepareFor(urls: attachements.map{ $0.url }, selectedURL: attachement.url)
+              await quickLook.prepareFor(urls: attachements.compactMap{ $0.url }, selectedURL: attachement.url!)
             }
           }
       } else {
@@ -109,8 +109,10 @@ public struct StatusMediaPreviewView: View {
               })
       }
     case .gifv:
-      VideoPlayerView(viewModel: .init(url: attachement.url))
-        .frame(height: imageMaxHeight)
+      if let url = attachement.url {
+        VideoPlayerView(viewModel: .init(url: url))
+          .frame(height: imageMaxHeight)
+      }
     case .none:
       EmptyView()
     }
@@ -139,16 +141,18 @@ public struct StatusMediaPreviewView: View {
             .frame(width: proxy.frame(in: .local).width)
             .frame(height: imageMaxHeight)
           case .gifv:
-            VideoPlayerView(viewModel: .init(url: attachement.url))
-              .frame(width: proxy.frame(in: .local).width)
-              .frame(height: imageMaxHeight)
+            if let url = attachement.url {
+              VideoPlayerView(viewModel: .init(url: url))
+                .frame(width: proxy.frame(in: .local).width)
+                .frame(height: imageMaxHeight)
+            }
           }
         }
         .frame(height: imageMaxHeight)
       }
       .onTapGesture {
         Task {
-          await quickLook.prepareFor(urls: attachements.map{ $0.url }, selectedURL: attachement.url)
+          await quickLook.prepareFor(urls: attachements.compactMap{ $0.url }, selectedURL: attachement.url!)
         }
       }
     }

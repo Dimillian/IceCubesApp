@@ -134,6 +134,24 @@ public class Client: ObservableObject, Equatable {
     return urlSession.webSocketTask(with: request)
   }
   
+  public func mediaUpload(mimeType: String, data: Data) async throws -> MediaAttachement {
+    let url = makeURL(endpoint: Media.medias, forceVersion: .v2)
+    var request = makeURLRequest(url: url, httpMethod: "POST")
+    let boundary = UUID().uuidString
+    request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+    let httpBody = NSMutableData()
+    httpBody.append("--\(boundary)\r\n".data(using: .utf8)!)
+    httpBody.append("Content-Disposition: form-data; name=\"file\"; filename=\"file.png\"\r\n".data(using: .utf8)!)
+    httpBody.append("Content-Type: \(mimeType)\r\n".data(using: .utf8)!)
+    httpBody.append("\r\n".data(using: .utf8)!)
+    httpBody.append(data)
+    httpBody.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
+    request.httpBody = httpBody as Data
+    let (data, httpResponse) = try await urlSession.data(for: request)
+    logResponseOnError(httpResponse: httpResponse, data: data)
+    return try decoder.decode(MediaAttachement.self, from: data)
+  }
+  
   private func logResponseOnError(httpResponse: URLResponse, data: Data) {
     if let httpResponse = httpResponse as? HTTPURLResponse, httpResponse.statusCode > 299 {
       print(httpResponse)

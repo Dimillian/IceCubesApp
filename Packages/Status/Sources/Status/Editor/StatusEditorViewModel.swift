@@ -8,7 +8,9 @@ import PhotosUI
 public class StatusEditorViewModel: ObservableObject {
   struct ImageContainer: Identifiable {
     let id = UUID().uuidString
-    let image: UIImage
+    let image: UIImage?
+    let mediaAttachement: MediaAttachement?
+    let error: Error?
   }
   
   var mode: Mode
@@ -30,8 +32,9 @@ public class StatusEditorViewModel: ObservableObject {
     }
   }
   @Published var mediasImages: [ImageContainer] = []
-  
   @Published var embededStatus: Status?
+  
+  private var uploadTask: Task<Void, Never>?
     
   init(mode: Mode) {
     self.mode = mode
@@ -46,12 +49,12 @@ public class StatusEditorViewModel: ObservableObject {
       case .new, .replyTo, .quote:
         postStatus = try await client.post(endpoint: Statuses.postStatus(status: statusText.string,
                                                                          inReplyTo: mode.replyToStatus?.id,
-                                                                         mediaIds: nil,
+                                                                         mediaIds: mediasImages.compactMap{ $0.mediaAttachement?.id },
                                                                          spoilerText: nil))
       case let .edit(status):
         postStatus = try await client.put(endpoint: Statuses.editStatus(id: status.id,
                                                                         status: statusText.string,
-                                                                        mediaIds: nil,
+                                                                        mediaIds:  mediasImages.compactMap{ $0.mediaAttachement?.id },
                                                                         spoilerText: nil))
       }
       generator.notificationOccurred(.success)
@@ -127,20 +130,51 @@ public class StatusEditorViewModel: ObservableObject {
   }
   
   func inflateSelectedMedias() {
-    for media in selectedMedias {
-      media.loadTransferable(type: Data.self) { [weak self] result in
-        switch result {
-        case .success(let data?):
-          if let image = UIImage(data: data) {
-            DispatchQueue.main.async {
-              self?.mediasImages.append(.init(image: image))
-            }
+    self.mediasImages = []
+    
+    Task {
+      var medias: [ImageContainer] = []
+      for media in selectedMedias {
+        do {
+          if let data = try await media.loadTransferable(type: Data.self),
+            let image = UIImage(data: data) {
+            medias.append(.init(image: image, mediaAttachement: nil, error: nil))
           }
-        default:
-          break
+        } catch {
+          medias.append(.init(image: nil, mediaAttachement: nil, error: error))
+        }
+      }
+      DispatchQueue.main.async { [weak self] in
+        self?.mediasImages = medias
+        self?.processUpload()
+      }
+    }
+  }
+  
+  private func processUpload() {
+    uploadTask?.cancel()
+    let mediasCopy = mediasImages
+    uploadTask = Task {
+      for (index, media) in mediasCopy.enumerated() {
+        do {
+          if !Task.isCancelled,
+              let data = media.image?.pngData(),
+             let uploadedMedia = try await uploadMedia(data: data) {
+            mediasImages[index] = .init(image: nil, mediaAttachement: uploadedMedia, error: nil)
+          }
+        } catch {
+          mediasImages[index] = .init(image: nil, mediaAttachement: nil, error: error)
         }
       }
     }
   }
    
+  private func uploadMedia(data: Data) async throws -> MediaAttachement? {
+    guard let client else { return nil }
+    do {
+      return try await client.mediaUpload(mimeType: "image/png", data: data)
+    } catch {
+      return nil
+    }
+  }
 }

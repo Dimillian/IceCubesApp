@@ -6,8 +6,10 @@ import TextView
 import Models
 import Network
 import PhotosUI
+import NukeUI
 
 public struct StatusEditorView: View {
+  @EnvironmentObject private var quicklook: QuickLook
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var currentAccount: CurrentAccount
   @Environment(\.dismiss) private var dismiss
@@ -94,16 +96,54 @@ public struct StatusEditorView: View {
   
   private var mediasView: some View {
     ScrollView(.horizontal) {
-      HStack {
+      HStack(spacing: 8) {
         ForEach(viewModel.mediasImages) { container in
-          Image(uiImage: container.image)
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 150, height: 150)
-            .clipped()
+          if let localImage = container.image {
+            makeLocalImage(image: localImage)
+          } else if let url = container.mediaAttachement?.url {
+            ZStack(alignment: .topTrailing) {
+              makeLazyImage(url: url)
+              Button {
+                withAnimation {
+                  viewModel.mediasImages.removeAll(where: { $0.id == container.id })
+                }
+              } label: {
+                Image(systemName: "xmark.circle")
+              }
+              .padding(8)
+            }
+          }
         }
       }
     }
+  }
+  
+  private func makeLocalImage(image: UIImage) -> some View {
+    ZStack(alignment: .center) {
+      Image(uiImage: image)
+        .resizable()
+        .blur(radius: 20 )
+        .aspectRatio(contentMode: .fill)
+        .frame(width: 150, height: 150)
+        .cornerRadius(8)
+      
+      ProgressView()
+    }
+  }
+  
+  private func makeLazyImage(url: URL?) -> some View {
+    LazyImage(url: url) { state in
+      if let image = state.image {
+        image
+          .resizingMode(.aspectFill)
+          .frame(width: 150, height: 150)
+      } else {
+        Rectangle()
+          .frame(width: 150, height: 150)
+      }
+    }
+    .frame(width: 150, height: 150)
+    .cornerRadius(8)
   }
   
   private var accessoryView: some View {
