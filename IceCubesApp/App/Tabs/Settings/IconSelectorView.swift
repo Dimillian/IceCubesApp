@@ -11,6 +11,10 @@ struct IconSelectorView: View {
     case alternate2 = "AppIconAlternate2"
     case alternate3 = "AppIconAlternate3"
     case alternate4 = "AppIconAlternate4"
+    case alternate5 = "AppIconAlternate5"
+    case alternate6 = "AppIconAlternate6"
+    case alternate7 = "AppIconAlternate7"
+    case alternate8 = "AppIconAlternate8"
     
     var iconName: String {
       switch self {
@@ -19,6 +23,10 @@ struct IconSelectorView: View {
       case .alternate2: return "icon2"
       case .alternate3: return "icon3"
       case .alternate4: return "icon4"
+      case .alternate5: return "icon5"
+      case .alternate6: return "icon6"
+      case .alternate7: return "icon7"
+      case .alternate8: return "icon8"
       }
     }
   }
