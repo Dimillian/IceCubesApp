@@ -10,7 +10,7 @@ public class Client: ObservableObject, Equatable {
   }
   
   public enum Version: String {
-    case v1
+    case v1, v2
   }
   
   public enum OauthError: Error {
@@ -40,14 +40,14 @@ public class Client: ObservableObject, Equatable {
     self.oauthToken = oauthToken
   }
   
-  private func makeURL(scheme: String = "https", endpoint: Endpoint) -> URL {
+  private func makeURL(scheme: String = "https", endpoint: Endpoint, forceVersion: Version? = nil) -> URL {
     var components = URLComponents()
     components.scheme = scheme
     components.host = server
     if type(of: endpoint) == Oauth.self {
       components.path += "/\(endpoint.path())"
     } else {
-      components.path += "/api/\(version.rawValue)/\(endpoint.path())"
+      components.path += "/api/\(forceVersion?.rawValue ?? version.rawValue)/\(endpoint.path())"
     }
     components.queryItems = endpoint.queryItems()
     return components.url!
@@ -67,8 +67,8 @@ public class Client: ObservableObject, Equatable {
     return makeURLRequest(url: url, httpMethod: "GET")
   }
     
-  public func get<Entity: Decodable>(endpoint: Endpoint) async throws -> Entity {
-    try await makeEntityRequest(endpoint: endpoint, method: "GET")
+  public func get<Entity: Decodable>(endpoint: Endpoint, forceVersion: Version? = nil) async throws -> Entity {
+    try await makeEntityRequest(endpoint: endpoint, method: "GET", forceVersion: forceVersion)
   }
   
   public func getWithLink<Entity: Decodable>(endpoint: Endpoint) async throws -> (Entity, LinkHandler?) {
@@ -97,8 +97,10 @@ public class Client: ObservableObject, Equatable {
     return httpResponse as? HTTPURLResponse
   }
   
-  private func makeEntityRequest<Entity: Decodable>(endpoint: Endpoint, method: String) async throws -> Entity {
-    let url = makeURL(endpoint: endpoint)
+  private func makeEntityRequest<Entity: Decodable>(endpoint: Endpoint,
+                                                    method: String,
+                                                    forceVersion: Version? = nil) async throws -> Entity {
+    let url = makeURL(endpoint: endpoint, forceVersion: forceVersion)
     let request = makeURLRequest(url: url, httpMethod: method)
     let (data, httpResponse) = try await urlSession.data(for: request)
     logResponseOnError(httpResponse: httpResponse, data: data)

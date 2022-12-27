@@ -24,6 +24,25 @@ extension HTMLString {
     }
   }
   
+  public func findStatusesIds(instance: String) -> [Int]? {
+    do {
+      let document: Document = try SwiftSoup.parse(self)
+      let links: Elements = try document.select("a")
+      var ids: [Int] = []
+      for link in links {
+        let href = try link.attr("href")
+        if href.contains(instance),
+           let url = URL(string: href),
+            let statusId = Int(url.lastPathComponent) {
+          ids.append(statusId)
+        }
+      }
+      return ids
+    } catch {
+      return nil
+    }
+  }
+  
   public var asSafeAttributedString: AttributedString {
     do {
       // Add space between hashtags and mentions that follow each other

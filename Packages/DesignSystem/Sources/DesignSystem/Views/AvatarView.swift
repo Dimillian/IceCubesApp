@@ -5,7 +5,7 @@ import Nuke
 
 public struct AvatarView: View {
   public enum Size {
-    case account, status, badge
+    case account, status, embed, badge
     
     var size: CGSize {
       switch self {
@@ -13,6 +13,8 @@ public struct AvatarView: View {
         return .init(width: 80, height: 80)
       case .status:
         return .init(width: 40, height: 40)
+      case .embed:
+        return .init(width: 34, height: 34)
       case .badge:
         return .init(width: 28, height: 28)
       }

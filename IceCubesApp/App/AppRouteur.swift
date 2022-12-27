@@ -38,6 +38,8 @@ extension View {
         StatusEditorView(mode: .new)
       case let .editStatusEditor(status):
         StatusEditorView(mode: .edit(status: status))
+      case let .quoteStatusEditor(status):
+        StatusEditorView(mode: .quote(status: status))
       }
     }
   }

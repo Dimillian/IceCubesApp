@@ -6,6 +6,28 @@ import Network
 class ExploreViewModel: ObservableObject {
   var client: Client?
   
+  enum Token: String, Identifiable {
+    case user = "@user", tag = "#hasgtag"
+    
+    var id: String {
+      rawValue
+    }
+  }
+  
+  @Published var tokens: [Token] = []
+  @Published var suggestedToken: [Token] = []
+  @Published var searchQuery = "" {
+    didSet {
+      if searchQuery.starts(with: "@") {
+        suggestedToken = [.user]
+      } else if searchQuery.starts(with: "#") {
+        suggestedToken = [.tag]
+      } else if tokens.isEmpty {
+        suggestedToken = []
+      }
+    }
+  }
+  @Published var results: [String: SearchResults] = [:]
   @Published var isLoaded = false
   @Published var suggestedAccounts: [Account] = []
   @Published var suggestedAccountsRelationShips: [Relationshionship] = []
@@ -30,6 +52,13 @@ class ExploreViewModel: ObservableObject {
       self.suggestedAccountsRelationShips = try await client.get(endpoint: Accounts.relationships(ids: self.suggestedAccounts.map{ $0.id }))
       
       isLoaded = true
+    } catch { }
+  }
+  
+  func search() async {
+    guard let client else { return }
+    do {
+      results[searchQuery] = try await client.get(endpoint: Search.search(query: searchQuery, type: nil, offset: nil), forceVersion: .v2)
     } catch { }
   }
 }

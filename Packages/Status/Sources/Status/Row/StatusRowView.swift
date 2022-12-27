@@ -35,6 +35,11 @@ public struct StatusRowView: View {
     }
     .onAppear {
       viewModel.client = client
+      if !viewModel.isEmbed {
+        Task {
+          await viewModel.loadEmbededStatus()
+        }
+      }
     }
   }
   
@@ -87,48 +92,72 @@ public struct StatusRowView: View {
             menuButton
           }
         }
-        
+        makeStatusContentView(status: status)
+      }
+    }
+  }
+  
+  private func makeStatusContentView(status: AnyStatus) -> some View {
+    Group {
+      Text(status.content.asSafeAttributedString)
+        .font(.body)
+        .environment(\.openURL, OpenURLAction { url in
+          routeurPath.handleStatus(status: status, url: url)
+        })
+      
+      embededStatusView
+      
+      if !status.mediaAttachments.isEmpty {
+        if viewModel.isEmbed {
+          Image(systemName: "paperclip")
+        } else {
+          StatusMediaPreviewView(attachements: status.mediaAttachments)
+            .padding(.vertical, 4)
+        }
+      }
+      if let card = status.card, !viewModel.isEmbed {
+        StatusCardView(card: card)
+      }
+    }
+    .contentShape(Rectangle())
+    .onTapGesture {
+      routeurPath.navigate(to: .statusDetail(id: viewModel.status.reblog?.id ?? viewModel.status.id))
+    }
+  }
+  
+  @ViewBuilder
+  private func makeAccountView(status: AnyStatus, size: AvatarView.Size = .status) -> some View {
+    HStack(alignment: .center) {
+      AvatarView(url: status.account.avatar, size: size)
+      VStack(alignment: .leading, spacing: 0) {
+        status.account.displayNameWithEmojis
+          .font(size == .embed ? .footnote : .headline)
+          .fontWeight(.semibold)
         Group {
-          Text(status.content.asSafeAttributedString)
-            .font(.body)
-            .environment(\.openURL, OpenURLAction { url in
-              routeurPath.handleStatus(status: status, url: url)
-            })
-          
-          if !status.mediaAttachments.isEmpty {
-            if viewModel.isEmbed {
-              Image(systemName: "paperclip")
-            } else {
-              StatusMediaPreviewView(attachements: status.mediaAttachments)
-                .padding(.vertical, 4)
-            }
-          }
-          if let card = status.card, !viewModel.isEmbed {
-            StatusCardView(card: card)
-          }
+          Text("@\(status.account.acct)") +
+          Text(" ⸱ ") +
+          Text(status.createdAt.formatted)
         }
-        .contentShape(Rectangle())
-        .onTapGesture {
-          routeurPath.navigate(to: .statusDetail(id: viewModel.status.reblog?.id ?? viewModel.status.id))
-        }
+        .font(size == .embed ? .caption : .footnote)
+        .foregroundColor(.gray)
       }
     }
   }
   
   @ViewBuilder
-  private func makeAccountView(status: AnyStatus) -> some View {
-    AvatarView(url: status.account.avatar, size: .status)
-    VStack(alignment: .leading, spacing: 0) {
-      status.account.displayNameWithEmojis
-        .font(.subheadline)
-        .fontWeight(.semibold)
-      Group {
-        Text("@\(status.account.acct)") +
-        Text(" ⸱ ") +
-        Text(status.createdAt.formatted)
+  private var embededStatusView: some View {
+    if let status = viewModel.embededStatus {
+      VStack(alignment: .leading) {
+        makeAccountView(status: status, size: .embed)
+        StatusRowView(viewModel: .init(status: status, isEmbed: true))
       }
-      .font(.footnote)
-      .foregroundColor(.gray)
+      .padding(8)
+      .background(Color.gray.opacity(0.10))
+      .overlay(
+        RoundedRectangle(cornerRadius: 4)
+          .stroke(.gray.opacity(0.35), lineWidth: 1)
+      )
+      .padding(.top, 8)
     }
   }
   
@@ -154,6 +183,21 @@ public struct StatusRowView: View {
     } } label: {
       Label(viewModel.isFavourited ? "Unfavorite" : "Favorite", systemImage: "star")
     }
+    Button { Task {
+      if viewModel.isReblogged {
+        await viewModel.unReblog()
+      } else {
+        await viewModel.reblog()
+      }
+    } } label: {
+      Label(viewModel.isReblogged ? "Unboost" : "Boost", systemImage: "arrow.left.arrow.right.circle")
+    }
+    Button {
+      routeurPath.presentedSheet = .quoteStatusEditor(status: viewModel.status.reblog ?? viewModel.status)
+    } label: {
+      Label("Quote this status", systemImage: "quote.bubble")
+    }
+
     if let url = viewModel.status.reblog?.url ?? viewModel.status.url {
       Button { UIApplication.shared.open(url)  } label: {
         Label("View in Browser", systemImage: "safari")

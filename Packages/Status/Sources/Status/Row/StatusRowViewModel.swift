@@ -13,6 +13,7 @@ public class StatusRowViewModel: ObservableObject {
   @Published var isReblogged: Bool
   @Published var reblogsCount: Int
   @Published var repliesCount: Int
+  @Published var embededStatus: Status?
   
   var client: Client?
   
@@ -32,6 +33,16 @@ public class StatusRowViewModel: ObservableObject {
     self.favouritesCount = status.reblog?.favouritesCount ?? status.favouritesCount
     self.reblogsCount = status.reblog?.reblogsCount ?? status.reblogsCount
     self.repliesCount = status.reblog?.repliesCount ?? status.repliesCount
+  }
+  
+  func loadEmbededStatus() async {
+    guard let client,
+          let ids = status.content.findStatusesIds(instance: client.server),
+          !ids.isEmpty,
+          let id = ids.first else { return }
+    do {
+      self.embededStatus = try await client.get(endpoint: Statuses.status(id: String(id)))
+    } catch { }
   }
   
   func favourite() async {

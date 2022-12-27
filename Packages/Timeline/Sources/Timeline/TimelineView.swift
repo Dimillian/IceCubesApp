@@ -7,6 +7,10 @@ import DesignSystem
 import Env
 
 public struct TimelineView: View {
+  private enum Constants {
+    static let scrollToTop = "top"
+  }
+  
   @Environment(\.scenePhase) private var scenePhase
   @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var watcher: StreamWatcher
@@ -25,7 +29,7 @@ public struct TimelineView: View {
           LazyVStack {
             tagHeaderView
               .padding(.bottom, 16)
-              .id("top")
+              .id(Constants.scrollToTop)
             StatusesListView(fetcher: viewModel)
           }
           .padding(.top, DS.Constants.layoutPadding)
@@ -70,7 +74,7 @@ public struct TimelineView: View {
   private func makePendingNewPostsView(proxy: ScrollViewProxy) -> some View {
     if !viewModel.pendingStatuses.isEmpty {
       Button {
-        proxy.scrollTo("top")
+        proxy.scrollTo(Constants.scrollToTop)
         viewModel.displayPendingStatuses()
       } label: {
         Text(viewModel.pendingStatusesButtonTitle)

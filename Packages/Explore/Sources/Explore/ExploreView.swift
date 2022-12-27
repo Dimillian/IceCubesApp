@@ -13,8 +13,7 @@ public struct ExploreView: View {
   @EnvironmentObject private var routeurPath: RouterPath
   
   @StateObject private var viewModel = ExploreViewModel()
-  @State private var searchQuery: String = ""
-      
+        
   public init() { }
   
   public var body: some View {
@@ -45,7 +44,13 @@ public struct ExploreView: View {
     }
     .listStyle(.grouped)
     .navigationTitle("Explore")
-    .searchable(text: $searchQuery)
+    .searchable(text: $viewModel.searchQuery,
+                tokens: $viewModel.tokens,
+                suggestedTokens: $viewModel.suggestedToken,
+                prompt: Text("Search users, posts and tags"),
+                token: { token in
+      Text(token.rawValue)
+    })
   }
   
   private var suggestedAccountsSection: some View {
