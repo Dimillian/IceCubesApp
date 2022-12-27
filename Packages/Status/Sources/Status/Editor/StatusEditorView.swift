@@ -34,6 +34,9 @@ public struct StatusEditorView: View {
       .onAppear {
         viewModel.client = client
         viewModel.prepareStatusText()
+        if !client.isAuth {
+          dismiss()
+        }
       }
       .padding(.horizontal, DS.Constants.layoutPadding)
       .navigationTitle(viewModel.mode.title)
