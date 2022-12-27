@@ -6,11 +6,21 @@ struct IconSelectorView: View {
       self.rawValue
     }
     
-    case primary = "AppIconInApp"
+    case primary = "AppIcon"
     case alternate1 = "AppIconAlternate1"
     case alternate2 = "AppIconAlternate2"
     case alternate3 = "AppIconAlternate3"
     case alternate4 = "AppIconAlternate4"
+    
+    var iconName: String {
+      switch self {
+      case .primary: return "icon0"
+      case .alternate1: return "icon1"
+      case .alternate2: return "icon2"
+      case .alternate3: return "icon3"
+      case .alternate4: return "icon4"
+      }
+    }
   }
   
   @State private var currentIcon = UIApplication.shared.alternateIconName ?? Icon.primary.rawValue
@@ -31,7 +41,7 @@ struct IconSelectorView: View {
               }
             } label: {
               ZStack(alignment: .bottomTrailing) {
-                Image(uiImage: .init(named: icon.rawValue) ?? .init())
+                Image(uiImage: .init(named: icon.iconName) ?? .init())
                   .resizable()
                   .aspectRatio(contentMode: .fit)
                   .frame(minHeight: 125, maxHeight: 1024)
