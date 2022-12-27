@@ -6,41 +6,20 @@ import PhotosUI
 
 @MainActor
 public class StatusEditorViewModel: ObservableObject {
-  public enum Mode {
-    case replyTo(status: AnyStatus)
-    case new
-    case edit(status: AnyStatus)
-    case quote(status: AnyStatus)
-    
-    var replyToStatus: AnyStatus? {
-      switch self {
-        case let .replyTo(status):
-          return status
-        default:
-          return nil
-      }
-    }
-    
-    var title: String {
-      switch self {
-      case .new:
-        return "New Post"
-      case .edit:
-        return "Edit your post"
-      case let .replyTo(status):
-        return "Reply to \(status.account.displayName)"
-      case let .quote(status):
-        return "Quote of \(status.account.displayName)"
-      }
-    }
+  struct ImageContainer: Identifiable {
+    let id = UUID().uuidString
+    let image: UIImage
   }
   
-  let mode: Mode
+  var mode: Mode
+  let generator = UINotificationFeedbackGenerator()
   
-  @Published var statusText = NSAttributedString(string: "") {
+  var client: Client?
+  
+  @Published var statusText = NSMutableAttributedString(string: "") {
     didSet {
-      guard !internalUpdate else { return }
       highlightMeta()
+      checkEmbed()
     }
   }
   
@@ -52,16 +31,8 @@ public class StatusEditorViewModel: ObservableObject {
   }
   @Published var mediasImages: [ImageContainer] = []
   
-  struct ImageContainer: Identifiable {
-    let id = UUID().uuidString
-    let image: UIImage
-  }
-  
-  var client: Client?
-  private var internalUpdate: Bool = false
-  
-  let generator = UINotificationFeedbackGenerator()
-  
+  @Published var embededStatus: Status?
+    
   init(mode: Mode) {
     self.mode = mode
   }
@@ -96,59 +67,62 @@ public class StatusEditorViewModel: ObservableObject {
   func prepareStatusText() {
     switch mode {
     case let .replyTo(status):
-      statusText = .init(string: "@\(status.account.acct) ")
+      statusText = .init(string: "@\(status.reblog?.account.acct ?? status.account.acct) ")
     case let .edit(status):
-      statusText = .init(string: status.content.asRawText)
+      statusText = .init(status.content.asSafeAttributedString)
     case let .quote(status):
-      if let url = status.url {
-        statusText = .init(string: "\n\nFrom: @\(status.account.acct)\n\(url)")
+      self.embededStatus = status
+      if let url = status.reblog?.url ?? status.url {
+        statusText = .init(string: "\n\nFrom: @\(status.reblog?.account.acct ?? status.account.acct)\n\(url)")
       }
     default:
       break
     }
   }
   
-  func highlightMeta() {
-    let mutableString = NSMutableAttributedString(string: statusText.string)
-    mutableString.addAttributes([.foregroundColor: UIColor(Color.label)],
-                                range: NSMakeRange(0, mutableString.string.utf16.count))
+  private func highlightMeta() {
+    statusText.addAttributes([.foregroundColor: UIColor(Color.label)],
+                                range: NSMakeRange(0, statusText.string.utf16.count))
     let hashtagPattern = "(#+[a-zA-Z0-9(_)]{1,})"
     let mentionPattern = "(@+[a-zA-Z0-9(_).]{1,})"
     let urlPattern = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)"
-    var ranges: [NSRange] = [NSRange]()
 
     do {
       let hashtagRegex = try NSRegularExpression(pattern: hashtagPattern, options: [])
       let mentionRegex = try NSRegularExpression(pattern: mentionPattern, options: [])
       let urlRegex = try NSRegularExpression(pattern: urlPattern, options: [])
       
-      ranges = hashtagRegex.matches(in: mutableString.string,
+      var ranges = hashtagRegex.matches(in: statusText.string,
                                     options: [],
-                                    range: NSMakeRange(0, mutableString.string.utf16.count)).map { $0.range }
-      ranges.append(contentsOf: mentionRegex.matches(in: mutableString.string,
+                                    range: NSMakeRange(0, statusText.string.utf16.count)).map { $0.range }
+      ranges.append(contentsOf: mentionRegex.matches(in: statusText.string,
                                                      options: [],
-                                                     range: NSMakeRange(0, mutableString.string.utf16.count)).map {$0.range})
+                                                     range: NSMakeRange(0, statusText.string.utf16.count)).map {$0.range})
       
-      let urlRanges = urlRegex.matches(in: mutableString.string,
+      let urlRanges = urlRegex.matches(in: statusText.string,
                                        options: [],
-                                       range: NSMakeRange(0, mutableString.string.utf16.count)).map { $0.range }
+                                       range: NSMakeRange(0, statusText.string.utf16.count)).map { $0.range }
 
       for range in ranges {
-        mutableString.addAttributes([.foregroundColor: UIColor(Color.brand)],
+        statusText.addAttributes([.foregroundColor: UIColor(Color.brand)],
                                    range: NSRange(location: range.location, length: range.length))
       }
       
       for range in urlRanges {
-        mutableString.addAttributes([.foregroundColor: UIColor(Color.brand),
+        statusText.addAttributes([.foregroundColor: UIColor(Color.brand),
                                      .underlineStyle: NSUnderlineStyle.single,
                                      .underlineColor: UIColor(Color.brand)],
                                     range: NSRange(location: range.location, length: range.length))
       }
-      internalUpdate = true
-      statusText = mutableString
-      internalUpdate = false
     } catch {
       
+    }
+  }
+  
+  private func checkEmbed() {
+    if let embededStatus, !statusText.string.contains(embededStatus.reblog?.id ?? embededStatus.id) {
+      self.embededStatus = nil
+      self.mode = .new
     }
   }
   

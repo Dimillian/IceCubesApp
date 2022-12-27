@@ -89,7 +89,7 @@ public struct StatusRowView: View {
             Button {
               routeurPath.navigate(to: .accountDetailWithAccount(account: status.account))
             } label: {
-              makeAccountView(status: status)
+              accountView(status: status)
             }.buttonStyle(.plain)
             Spacer()
             menuButton
@@ -108,7 +108,9 @@ public struct StatusRowView: View {
           routeurPath.handleStatus(status: status, url: url)
         })
       
-      embededStatusView
+      if !viewModel.isEmbed, let embed = viewModel.embededStatus {
+        StatusEmbededView(status: embed)
+      }
       
       if !status.mediaAttachments.isEmpty {
         if viewModel.isEmbed {
@@ -129,38 +131,21 @@ public struct StatusRowView: View {
   }
   
   @ViewBuilder
-  private func makeAccountView(status: AnyStatus, size: AvatarView.Size = .status) -> some View {
+  private func accountView(status: AnyStatus) -> some View {
     HStack(alignment: .center) {
-      AvatarView(url: status.account.avatar, size: size)
+      AvatarView(url: status.account.avatar, size: .status)
       VStack(alignment: .leading, spacing: 0) {
         status.account.displayNameWithEmojis
-          .font(size == .embed ? .footnote : .headline)
+          .font(.headline)
           .fontWeight(.semibold)
         Group {
           Text("@\(status.account.acct)") +
           Text(" ⸱ ") +
           Text(status.createdAt.formatted)
         }
-        .font(size == .embed ? .caption : .footnote)
+        .font(.footnote)
         .foregroundColor(.gray)
       }
-    }
-  }
-  
-  @ViewBuilder
-  private var embededStatusView: some View {
-    if let status = viewModel.embededStatus {
-      VStack(alignment: .leading) {
-        makeAccountView(status: status, size: .embed)
-        StatusRowView(viewModel: .init(status: status, isEmbed: true))
-      }
-      .padding(8)
-      .background(Color.gray.opacity(0.10))
-      .overlay(
-        RoundedRectangle(cornerRadius: 4)
-          .stroke(.gray.opacity(0.35), lineWidth: 1)
-      )
-      .padding(.top, 8)
     }
   }
   
@@ -196,9 +181,9 @@ public struct StatusRowView: View {
       Label(viewModel.isReblogged ? "Unboost" : "Boost", systemImage: "arrow.left.arrow.right.circle")
     }
     Button {
-      routeurPath.presentedSheet = .quoteStatusEditor(status: viewModel.status.reblog ?? viewModel.status)
+      routeurPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
     } label: {
-      Label("Quote this status", systemImage: "quote.bubble")
+      Label("Quote this post", systemImage: "quote.bubble")
     }
 
     if let url = viewModel.status.reblog?.url ?? viewModel.status.url {

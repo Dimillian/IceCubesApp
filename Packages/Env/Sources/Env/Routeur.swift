@@ -16,9 +16,9 @@ public enum RouteurDestinations: Hashable {
 
 public enum SheetDestinations: Identifiable {
   case newStatusEditor
-  case editStatusEditor(status: AnyStatus)
-  case replyToStatusEditor(status: AnyStatus)
-  case quoteStatusEditor(status: AnyStatus)
+  case editStatusEditor(status: Status)
+  case replyToStatusEditor(status: Status)
+  case quoteStatusEditor(status: Status)
   
   public var id: String {
     switch self {
