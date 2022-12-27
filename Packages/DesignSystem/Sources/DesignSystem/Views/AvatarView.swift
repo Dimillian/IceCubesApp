@@ -1,7 +1,6 @@
 import SwiftUI
 import Shimmer
 import NukeUI
-import Nuke
 
 public struct AvatarView: View {
   public enum Size {
@@ -56,8 +55,7 @@ public struct AvatarView: View {
           placeholderView
         }
       }
-      .processors([ImageProcessors.Resize(size: size.size),
-                   ImageProcessors.RoundedCorners(radius: size.cornerRadius)])
+      .processors([.resize(size: size.size), .roundedCorners(radius: size.cornerRadius)])
       .frame(width: size.size.width, height: size.size.height)
     }
   }

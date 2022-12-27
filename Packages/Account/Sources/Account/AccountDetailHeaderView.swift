@@ -3,7 +3,6 @@ import Models
 import DesignSystem
 import Env
 import Shimmer
-import Nuke
 import NukeUI
 
 struct AccountDetailHeaderView: View {
