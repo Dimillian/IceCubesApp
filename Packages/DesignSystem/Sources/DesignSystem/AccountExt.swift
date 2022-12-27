@@ -6,11 +6,16 @@ import Models
 
 @MainActor
 extension Account {
+  private struct Part: Identifiable {
+    let id = UUID().uuidString
+    let value: Substring
+  }
+  
   public var displayNameWithEmojis: some View {
-     let splittedDisplayName = displayName.split(separator: ":")
+     let splittedDisplayName = displayName.split(separator: ":").map{ Part(value: $0) }
      return HStack(spacing: 0) {
-       ForEach(splittedDisplayName, id: \.self) { part in
-         if let emoji = emojis.first(where: { $0.shortcode == part }) {
+       ForEach(splittedDisplayName, id: \.id) { part in
+         if let emoji = emojis.first(where: { $0.shortcode == part.value }) {
            LazyImage(url: emoji.url) { state in
              if let image = state.image {
                image
@@ -24,7 +29,7 @@ extension Account {
            .processors([ImageProcessors.Resize(size: .init(width: 20, height: 20))])
            .frame(width: 20, height: 20)
          } else {
-           Text(part)
+           Text(part.value)
          }
        }
      }

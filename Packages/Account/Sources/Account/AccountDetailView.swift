@@ -34,34 +34,39 @@ public struct AccountDetailView: View {
   }
   
   public var body: some View {
-    ScrollViewOffsetReader { offset in
-      self.scrollOffset = offset
-    } content: {
-      LazyVStack(alignment: .leading) {
-        headerView
-        familliarFollowers
-          .offset(y: -36)
-        featuredTagsView
-          .offset(y: -36)
-        if isCurrentUser {
-          Picker("", selection: $viewModel.selectedTab) {
-            ForEach(AccountDetailViewModel.Tab.allCases, id: \.self) { tab in
-              Text(tab.title).tag(tab)
+    ScrollViewReader { proxy in
+      ScrollViewOffsetReader { offset in
+        self.scrollOffset = offset
+      } content: {
+        LazyVStack(alignment: .leading) {
+          makeHeaderView(proxy: proxy)
+          familliarFollowers
+            .offset(y: -36)
+          featuredTagsView
+            .offset(y: -36)
+          Group {
+            if isCurrentUser {
+              Picker("", selection: $viewModel.selectedTab) {
+                ForEach(AccountDetailViewModel.Tab.allCases, id: \.self) { tab in
+                  Text(tab.title).tag(tab)
+                }
+              }
+              .pickerStyle(.segmented)
+              .padding(.horizontal, DS.Constants.layoutPadding)
+              .offset(y: -20)
+            } else {
+              Divider()
+                .offset(y: -20)
             }
           }
-          .pickerStyle(.segmented)
-          .padding(.horizontal, DS.Constants.layoutPadding)
-          .offset(y: -20)
-        } else {
-          Divider()
-            .offset(y: -20)
-        }
-        
-        switch viewModel.tabState {
-        case .statuses:
-          StatusesListView(fetcher: viewModel)
-        case let .followedTags(tags):
-          makeTagsListView(tags: tags)
+          .id("status")
+          
+          switch viewModel.tabState {
+          case .statuses:
+            StatusesListView(fetcher: viewModel)
+          case let .followedTags(tags):
+            makeTagsListView(tags: tags)
+          }
         }
       }
     }
@@ -90,18 +95,20 @@ public struct AccountDetailView: View {
   }
   
   @ViewBuilder
-  private var headerView: some View {
+  private func makeHeaderView(proxy: ScrollViewProxy?) -> some View {
     switch viewModel.accountState {
     case .loading:
       AccountDetailHeaderView(isCurrentUser: isCurrentUser,
                               account: .placeholder(),
                               relationship: .placeholder(),
+                              scrollViewProxy: proxy,
                               scrollOffset: $scrollOffset)
         .redacted(reason: .placeholder)
     case let .data(account):
       AccountDetailHeaderView(isCurrentUser: isCurrentUser,
                               account: account,
                               relationship: viewModel.relationship,
+                              scrollViewProxy: proxy,
                               scrollOffset: $scrollOffset)
     case let .error(error):
       Text("Error: \(error.localizedDescription)")

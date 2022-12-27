@@ -75,7 +75,9 @@ public struct TimelineView: View {
     if !viewModel.pendingStatuses.isEmpty {
       Button {
         proxy.scrollTo(Constants.scrollToTop)
-        viewModel.displayPendingStatuses()
+        withAnimation {
+          viewModel.displayPendingStatuses()
+        }
       } label: {
         Text(viewModel.pendingStatusesButtonTitle)
       }

@@ -41,6 +41,9 @@ public struct StatusRowView: View {
         }
       }
     }
+    .contextMenu {
+      contextMenu
+    }
   }
   
   @ViewBuilder
