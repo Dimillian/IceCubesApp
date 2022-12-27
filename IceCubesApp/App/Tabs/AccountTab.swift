@@ -6,6 +6,7 @@ import Models
 import Shimmer
 
 struct AccountTab: View {
+  @EnvironmentObject private var client: Client
   @EnvironmentObject private var currentAccount: CurrentAccount
   @StateObject private var routeurPath = RouterPath()
   @Binding var popToRootTab: IceCubesApp.Tab
@@ -27,6 +28,9 @@ struct AccountTab: View {
       if popToRootTab == .account {
         routeurPath.path = []
       }
+    }
+    .onAppear {
+      routeurPath.client = client
     }
   }
 }

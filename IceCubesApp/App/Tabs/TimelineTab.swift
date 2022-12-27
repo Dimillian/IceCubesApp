@@ -31,6 +31,7 @@ struct TimelineTab: View {
         }
     }
     .onAppear {
+      routeurPath.client = client
       if !client.isAuth {
         timeline = .pub
       }
