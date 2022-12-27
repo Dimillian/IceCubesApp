@@ -17,20 +17,16 @@ public struct AccountDetailView: View {
   @StateObject private var viewModel: AccountDetailViewModel
   @State private var scrollOffset: CGFloat = 0
   @State private var isFieldsSheetDisplayed: Bool = false
-  
-  private let isCurrentUser: Bool
+  @State private var isCurrentUser: Bool = false
   
   /// When coming from a URL like a mention tap in a status.
   public init(accountId: String) {
     _viewModel = StateObject(wrappedValue: .init(accountId: accountId))
-    isCurrentUser = false
   }
   
   /// When the account is already fetched by the parent caller.
-  public init(account: Account, isCurrentUser: Bool = false) {
-    _viewModel = StateObject(wrappedValue: .init(account: account,
-                                                 isCurrentUser: isCurrentUser))
-    self.isCurrentUser = isCurrentUser
+  public init(account: Account) {
+    _viewModel = StateObject(wrappedValue: .init(account: account))
   }
   
   public var body: some View {
@@ -72,6 +68,8 @@ public struct AccountDetailView: View {
     }
     .task {
       guard reasons != .placeholder else { return }
+      isCurrentUser = currentAccount.account?.id == viewModel.accountId
+      viewModel.isCurrentUser = isCurrentUser
       viewModel.client = client
       await viewModel.fetchAccount()
       if viewModel.statuses.isEmpty {

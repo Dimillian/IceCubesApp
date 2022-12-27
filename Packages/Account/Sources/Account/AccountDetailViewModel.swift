@@ -8,6 +8,7 @@ import Env
 class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   let accountId: String
   var client: Client?
+  var isCurrentUser: Bool = false
   
   enum AccountState {
     case loading, data(account: Account), error(error: Error)
@@ -62,7 +63,6 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   private var account: Account?
   
   private(set) var statuses: [Status] = []
-  private let isCurrentUser: Bool
   
   /// When coming from a URL like a mention tap in a status.
   init(accountId: String) {
@@ -71,10 +71,9 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   }
   
   /// When the account is already fetched by the parent caller.
-  init(account: Account, isCurrentUser: Bool) {
+  init(account: Account) {
     self.accountId = account.id
     self.accountState = .data(account: account)
-    self.isCurrentUser = isCurrentUser
   }
   
   func fetchAccount() async {

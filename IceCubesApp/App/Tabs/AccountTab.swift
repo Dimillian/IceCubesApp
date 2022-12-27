@@ -14,7 +14,7 @@ struct AccountTab: View {
   var body: some View {
     NavigationStack(path: $routeurPath.path) {
       if let account = currentAccount.account {
-        AccountDetailView(account: account, isCurrentUser: true)
+        AccountDetailView(account: account)
           .withAppRouteur()
           .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
       } else {

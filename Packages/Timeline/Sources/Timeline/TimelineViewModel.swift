@@ -128,7 +128,8 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
         statuses.insert(event.status, at: 0)
         statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
       } else if pendingStatusesEnabled,
-                !statuses.contains(where: { $0.id == event.status.id }) {
+                !statuses.contains(where: { $0.id == event.status.id }),
+                !pendingStatuses.contains(where: { $0.id == event.status.id }){
         pendingStatuses.insert(event.status, at: 0)
         pendingStatusesState = .stream
       }
