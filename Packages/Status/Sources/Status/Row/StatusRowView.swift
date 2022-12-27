@@ -141,7 +141,9 @@ public struct StatusRowView: View {
         Group {
           Text("@\(status.account.acct)") +
           Text(" ⸱ ") +
-          Text(status.createdAt.formatted)
+          Text(status.createdAt.formatted) +
+          Text(" ⸱ ") +
+          Text(Image(systemName: viewModel.status.visibility.iconName))
         }
         .font(.footnote)
         .foregroundColor(.gray)
