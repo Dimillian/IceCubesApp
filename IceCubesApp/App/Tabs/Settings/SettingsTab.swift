@@ -84,7 +84,7 @@ struct SettingsTabs: View {
         LabeledContent("Email", value: instanceData.email)
         LabeledContent("Version", value: instanceData.version)
         LabeledContent("Users", value: "\(instanceData.stats.userCount)")
-        LabeledContent("Status", value: "\(instanceData.stats.statusCount)")
+        LabeledContent("Posts", value: "\(instanceData.stats.statusCount)")
         LabeledContent("Domains", value: "\(instanceData.stats.domainCount)")
       }
     }
