@@ -18,6 +18,7 @@ public class AccountsListRowViewModel: ObservableObject {
 }
 
 public struct AccountsListRow: View {
+  @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var routeurPath: RouterPath
   @EnvironmentObject private var client: Client
   
@@ -45,8 +46,10 @@ public struct AccountsListRow: View {
           })
       }
       Spacer()
-      FollowButton(viewModel: .init(accountId: viewModel.account.id,
-                                    relationship: viewModel.relationShip))
+      if currentAccount.account?.id != viewModel.account.id {
+        FollowButton(viewModel: .init(accountId: viewModel.account.id,
+                                      relationship: viewModel.relationShip))
+      }
     }
     .onAppear {
       viewModel.client = client

@@ -5,6 +5,7 @@ import Network
 import DesignSystem
 
 struct StatusActionsView: View {
+  @Environment(\.openURL) private var openURL
   @EnvironmentObject private var routeurPath: RouterPath
   @ObservedObject var viewModel: StatusRowViewModel
   
@@ -91,10 +92,19 @@ struct StatusActionsView: View {
     HStack {
       Text(viewModel.status.createdAt.asDate, style: .date)
       Text(viewModel.status.createdAt.asDate, style: .time)
+      Text("·")
+      Image(systemName: viewModel.status.visibility.iconName)
       Spacer()
       Text(viewModel.status.application?.name ?? "")
+        .underline()
+        .onTapGesture {
+          if let url = viewModel.status.application?.website {
+            openURL(url)
+          }
+        }
     }
     .font(.caption)
+    .foregroundColor(.gray)
     if viewModel.favouritesCount > 0 {
       Divider()
       Button {

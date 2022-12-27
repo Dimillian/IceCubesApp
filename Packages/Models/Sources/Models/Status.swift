@@ -5,6 +5,14 @@ public struct Application: Codable, Identifiable {
     name
   }
   public let name: String
+  public let website: URL?
+}
+
+public enum Visibility: String, Codable {
+  case pub = "public"
+  case unlisted
+  case priv = "private"
+  case direct
 }
 
 public protocol AnyStatus {
@@ -27,6 +35,7 @@ public protocol AnyStatus {
   var url: URL? { get }
   var application: Application? { get }
   var inReplyToAccountId: String? { get }
+  var visibility: Visibility { get }
 }
 
 
@@ -54,6 +63,7 @@ public struct Status: AnyStatus, Codable, Identifiable {
   public let url: URL?
   public let application: Application?
   public let inReplyToAccountId: String?
+  public let visibility: Visibility
   
   public static func placeholder() -> Status {
     .init(id: UUID().uuidString,
@@ -74,7 +84,8 @@ public struct Status: AnyStatus, Codable, Identifiable {
           emojis: [],
           url: nil,
           application: nil,
-          inReplyToAccountId: nil)
+          inReplyToAccountId: nil,
+          visibility: .pub)
   }
   
   public static func placeholders() -> [Status] {
@@ -105,4 +116,5 @@ public struct ReblogStatus: AnyStatus, Codable, Identifiable {
   public let url: URL?
   public var application: Application?
   public let inReplyToAccountId: String?
+  public let visibility: Visibility
 }

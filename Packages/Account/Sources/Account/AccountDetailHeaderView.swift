@@ -14,6 +14,7 @@ struct AccountDetailHeaderView: View {
   let isCurrentUser: Bool
   let account: Account
   let relationship: Relationshionship?
+  let scrollViewProxy: ScrollViewProxy?
   
   @Binding var scrollOffset: CGFloat
   
@@ -82,7 +83,13 @@ struct AccountDetailHeaderView: View {
       }
       Spacer()
       Group {
-        makeCustomInfoLabel(title: "Posts", count: account.statusesCount)
+        Button {
+          withAnimation {
+            scrollViewProxy?.scrollTo("status", anchor: .top)
+          }
+        } label: {
+          makeCustomInfoLabel(title: "Posts", count: account.statusesCount)
+        }
         NavigationLink(value: RouteurDestinations.following(id: account.id)) {
           makeCustomInfoLabel(title: "Following", count: account.followingCount)
         }
@@ -138,6 +145,7 @@ struct AccountDetailHeaderView_Previews: PreviewProvider {
     AccountDetailHeaderView(isCurrentUser: false,
                             account: .placeholder(),
                             relationship: .placeholder(),
+                            scrollViewProxy: nil,
                             scrollOffset: .constant(0))
   }
 }

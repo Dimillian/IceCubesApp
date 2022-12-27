@@ -3,10 +3,13 @@ import Env
 import Models
 import Shimmer
 import Explore
+import Env
+import Network
 
 struct ExploreTab: View {
+  @EnvironmentObject private var client: Client
   @StateObject private var routeurPath = RouterPath()
-  @Binding var popToRootTab: IceCubesApp.Tab
+  @Binding var popToRootTab: Tab
   
   var body: some View {
     NavigationStack(path: $routeurPath.path) {
@@ -19,6 +22,9 @@ struct ExploreTab: View {
       if popToRootTab == .explore {
         routeurPath.path = []
       }
+    }
+    .onAppear {
+      routeurPath.client = client
     }
   }
 }

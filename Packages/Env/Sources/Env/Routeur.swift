@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 import Models
+import Network
 
 public enum RouteurDestinations: Hashable {
   case accountDetail(id: String)
@@ -17,16 +18,19 @@ public enum SheetDestinations: Identifiable {
   case newStatusEditor
   case editStatusEditor(status: Status)
   case replyToStatusEditor(status: Status)
+  case quoteStatusEditor(status: Status)
   
   public var id: String {
     switch self {
-    case .editStatusEditor, .newStatusEditor, .replyToStatusEditor:
+    case .editStatusEditor, .newStatusEditor, .replyToStatusEditor, .quoteStatusEditor:
       return "statusEditor"
     }
   }
 }
 
 public class RouterPath: ObservableObject {
+  public var client: Client?
+  
   @Published public var path: [RouteurDestinations] = []
   @Published public var presentedSheet: SheetDestinations?
   
@@ -43,6 +47,10 @@ public class RouterPath: ObservableObject {
       return .handled
     } else if let mention = status.mentions.first(where: { $0.url == url }) {
       navigate(to: .accountDetail(id: mention.id))
+      return .handled
+    } else if let client = client,
+              let id = status.content.findStatusesIds(instance: client.server)?.first(where: { String($0) == url.lastPathComponent}) {
+      navigate(to: .statusDetail(id: String(id)))
       return .handled
     }
     return .systemAction

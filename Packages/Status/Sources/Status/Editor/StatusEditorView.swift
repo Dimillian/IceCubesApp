@@ -21,12 +21,17 @@ public struct StatusEditorView: View {
   public var body: some View {
     NavigationStack {
       ZStack(alignment: .bottom) {
-        VStack(spacing: 12) {
-          accountHeaderView
-          TextView($viewModel.statusText)
-            .placeholder("What's on your mind")
-          mediasView
-          Spacer()
+        ScrollView {
+          VStack(spacing: 12) {
+            accountHeaderView
+            TextView($viewModel.statusText)
+              .placeholder("What's on your mind")
+            if let status = viewModel.embededStatus {
+              StatusEmbededView(status: status)
+            }
+            mediasView
+            Spacer()
+          }
         }
         accessoryView
           .padding(.bottom, 12)
@@ -34,6 +39,9 @@ public struct StatusEditorView: View {
       .onAppear {
         viewModel.client = client
         viewModel.prepareStatusText()
+        if !client.isAuth {
+          dismiss()
+        }
       }
       .padding(.horizontal, DS.Constants.layoutPadding)
       .navigationTitle(viewModel.mode.title)

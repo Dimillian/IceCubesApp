@@ -13,19 +13,19 @@ public struct ExploreView: View {
   @EnvironmentObject private var routeurPath: RouterPath
   
   @StateObject private var viewModel = ExploreViewModel()
-  @State private var searchQuery: String = ""
-      
+        
   public init() { }
   
   public var body: some View {
     List {
-      if !viewModel.isLoaded {
-        ForEach(Status.placeholders()) { status in
-          StatusRowView(viewModel: .init(status: status, isEmbed: false))
-            .padding(.vertical, 8)
-            .redacted(reason: .placeholder)
-            .shimmering()
+      if !viewModel.searchQuery.isEmpty {
+        if let results = viewModel.results[viewModel.searchQuery] {
+          makeSearchResultsView(results: results)
+        } else {
+          loadingView
         }
+      } else if !viewModel.isLoaded {
+        loadingView
       } else {
         trendingTagsSection
         suggestedAccountsSection
@@ -45,7 +45,51 @@ public struct ExploreView: View {
     }
     .listStyle(.grouped)
     .navigationTitle("Explore")
-    .searchable(text: $searchQuery)
+    .searchable(text: $viewModel.searchQuery,
+                tokens: $viewModel.tokens,
+                suggestedTokens: $viewModel.suggestedToken,
+                prompt: Text("Search users, posts and tags"),
+                token: { token in
+      Text(token.rawValue)
+    })
+  }
+  
+  private var loadingView: some View {
+    ForEach(Status.placeholders()) { status in
+      StatusRowView(viewModel: .init(status: status, isEmbed: false))
+        .padding(.vertical, 8)
+        .redacted(reason: .placeholder)
+        .shimmering()
+    }
+  }
+  
+  @ViewBuilder
+  private func makeSearchResultsView(results: SearchResults) -> some View {
+    if !results.accounts.isEmpty {
+      Section("Users") {
+        ForEach(results.accounts) { account in
+          if let relationship = results.relationships.first(where: { $0.id == account.id }) {
+            AccountsListRow(viewModel: .init(account: account, relationShip: relationship))
+          }
+        }
+      }
+    }
+    if !results.hashtags.isEmpty {
+      Section("Tags") {
+        ForEach(results.hashtags) { tag in
+          TagRowView(tag: tag)
+            .padding(.vertical, 4)
+        }
+      }
+    }
+    if !results.statuses.isEmpty {
+      Section("Posts") {
+        ForEach(results.statuses) { status in
+          StatusRowView(viewModel: .init(status: status))
+            .padding(.vertical, 8)
+        }
+      }
+    }
   }
   
   private var suggestedAccountsSection: some View {
