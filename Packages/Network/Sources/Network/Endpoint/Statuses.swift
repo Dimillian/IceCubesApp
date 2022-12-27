@@ -1,14 +1,17 @@
 import Foundation
+import Models
 
 public enum Statuses: Endpoint {
   case postStatus(status: String,
                   inReplyTo: String?,
                   mediaIds: [String]?,
-                  spoilerText: String?)
+                  spoilerText: String?,
+                  visibility: Visibility)
   case editStatus(id: String,
                   status: String,
                   mediaIds: [String]?,
-                  spoilerText: String?)
+                  spoilerText: String?,
+                  visibility: Visibility)
   case status(id: String)
   case context(id: String)
   case favourite(id: String)
@@ -24,7 +27,7 @@ public enum Statuses: Endpoint {
       return "statuses"
     case .status(let id):
       return "statuses/\(id)"
-    case .editStatus(let id, _, _, _):
+    case .editStatus(let id, _, _, _, _):
       return "statuses/\(id)"
     case .context(let id):
       return "statuses/\(id)/context"
@@ -45,8 +48,9 @@ public enum Statuses: Endpoint {
   
   public func queryItems() -> [URLQueryItem]? {
     switch self {
-    case let .postStatus(status, inReplyTo, mediaIds, spoilerText):
-      var params: [URLQueryItem] = [.init(name: "status", value: status)]
+    case let .postStatus(status, inReplyTo, mediaIds, spoilerText, visibility):
+      var params: [URLQueryItem] = [.init(name: "status", value: status),
+                                    .init(name: "visibility", value: visibility.rawValue)]
       if let inReplyTo {
         params.append(.init(name: "in_reply_to_id", value: inReplyTo))
       }
@@ -59,8 +63,9 @@ public enum Statuses: Endpoint {
         params.append(.init(name: "spoiler_text", value: spoilerText))
       }
       return params
-    case let .editStatus(_, status, mediaIds, spoilerText):
-      var params: [URLQueryItem] = [.init(name: "status", value: status)]
+    case let .editStatus(_, status, mediaIds, spoilerText, visibility):
+      var params: [URLQueryItem] = [.init(name: "status", value: status),
+                                    .init(name: "visibility", value: visibility.rawValue)]
       if let mediaIds {
         for mediaId in mediaIds {
           params.append(.init(name: "media_ids[]", value: mediaId))

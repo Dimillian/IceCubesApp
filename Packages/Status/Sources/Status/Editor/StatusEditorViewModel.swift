@@ -25,19 +25,33 @@ public class StatusEditorViewModel: ObservableObject {
     }
   }
   
+  @Published var selectedRange: NSRange = .init(location: 0, length: 0)
+  
   @Published var isPosting: Bool = false
   @Published var selectedMedias: [PhotosPickerItem] = [] {
     didSet {
+      if selectedMedias.count > 4 {
+        selectedMedias = selectedMedias.prefix(4).map{ $0 }
+      }
       inflateSelectedMedias()
     }
   }
   @Published var mediasImages: [ImageContainer] = []
   @Published var embededStatus: Status?
   
+  @Published var visibility: Models.Visibility = .pub
+  
   private var uploadTask: Task<Void, Never>?
     
   init(mode: Mode) {
     self.mode = mode
+  }
+  
+  func insertStatusText(text: String) {
+    let string = statusText
+    string.mutableString.insert(text, at: selectedRange.location)
+    statusText = string
+    selectedRange = NSRange(location: selectedRange.location + text.utf16.count, length: 0)
   }
   
   func postStatus() async -> Status? {
@@ -50,12 +64,14 @@ public class StatusEditorViewModel: ObservableObject {
         postStatus = try await client.post(endpoint: Statuses.postStatus(status: statusText.string,
                                                                          inReplyTo: mode.replyToStatus?.id,
                                                                          mediaIds: mediasImages.compactMap{ $0.mediaAttachement?.id },
-                                                                         spoilerText: nil))
+                                                                         spoilerText: nil,
+                                                                         visibility: visibility))
       case let .edit(status):
         postStatus = try await client.put(endpoint: Statuses.editStatus(id: status.id,
                                                                         status: statusText.string,
                                                                         mediaIds:  mediasImages.compactMap{ $0.mediaAttachement?.id },
-                                                                        spoilerText: nil))
+                                                                        spoilerText: nil,
+                                                                        visibility: visibility))
       }
       generator.notificationOccurred(.success)
       isPosting = false
@@ -71,12 +87,15 @@ public class StatusEditorViewModel: ObservableObject {
     switch mode {
     case let .replyTo(status):
       statusText = .init(string: "@\(status.reblog?.account.acct ?? status.account.acct) ")
+      selectedRange = .init(location: statusText.string.utf16.count, length: 0)
     case let .edit(status):
       statusText = .init(status.content.asSafeAttributedString)
+      selectedRange = .init(location: 0, length: 0)
     case let .quote(status):
       self.embededStatus = status
       if let url = status.reblog?.url ?? status.url {
         statusText = .init(string: "\n\nFrom: @\(status.reblog?.account.acct ?? status.account.acct)\n\(url)")
+        selectedRange = .init(location: 0, length: 0)
       }
     default:
       break
@@ -129,6 +148,12 @@ public class StatusEditorViewModel: ObservableObject {
     }
   }
   
+  // MARK: - Media related function
+  
+  private func indexOf(container: ImageContainer) -> Int? {
+    mediasImages.firstIndex(where: { $0.id == container.id })
+  }
+  
   func inflateSelectedMedias() {
     self.mediasImages = []
     
@@ -155,15 +180,29 @@ public class StatusEditorViewModel: ObservableObject {
     uploadTask?.cancel()
     let mediasCopy = mediasImages
     uploadTask = Task {
-      for (index, media) in mediasCopy.enumerated() {
-        do {
-          if !Task.isCancelled,
-             let data = media.image?.jpegData(compressionQuality: 0.90),
-             let uploadedMedia = try await uploadMedia(data: data) {
+      for media in mediasCopy {
+        if !Task.isCancelled {
+          await upload(container: media)
+        }
+      }
+    }
+  }
+  
+  func upload(container: ImageContainer) async {
+    if let index = indexOf(container: container) {
+      let originalContainer = mediasImages[index]
+      let newContainer = ImageContainer(image: originalContainer.image, mediaAttachement: nil, error: nil)
+      mediasImages[index] = newContainer
+      do {
+        if let data = originalContainer.image?.jpegData(compressionQuality: 0.90) {
+          let uploadedMedia = try await uploadMedia(data: data)
+          if let index = indexOf(container: newContainer) {
             mediasImages[index] = .init(image: nil, mediaAttachement: uploadedMedia, error: nil)
           }
-        } catch {
-          mediasImages[index] = .init(image: nil, mediaAttachement: nil, error: error)
+        }
+      } catch {
+        if let index = indexOf(container: newContainer) {
+          mediasImages[index] = .init(image: originalContainer.image, mediaAttachement: nil, error: error)
         }
       }
     }
@@ -171,10 +210,6 @@ public class StatusEditorViewModel: ObservableObject {
    
   private func uploadMedia(data: Data) async throws -> MediaAttachement? {
     guard let client else { return nil }
-    do {
-      return try await client.mediaUpload(mimeType: "image/jpeg", data: data)
-    } catch {
-      return nil
-    }
+    return try await client.mediaUpload(mimeType: "image/jpeg", data: data)
   }
 }

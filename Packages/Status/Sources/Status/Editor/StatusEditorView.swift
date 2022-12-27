@@ -24,19 +24,23 @@ public struct StatusEditorView: View {
     NavigationStack {
       ZStack(alignment: .bottom) {
         ScrollView {
+          Divider()
           VStack(spacing: 12) {
             accountHeaderView
-            TextView($viewModel.statusText)
+              .padding(.horizontal, DS.Constants.layoutPadding)
+            TextView($viewModel.statusText, $viewModel.selectedRange)
               .placeholder("What's on your mind")
+              .padding(.horizontal, DS.Constants.layoutPadding)
             if let status = viewModel.embededStatus {
               StatusEmbededView(status: status)
+                .padding(.horizontal, DS.Constants.layoutPadding)
             }
             mediasView
             Spacer()
           }
+          .padding(.top, 8)
         }
         accessoryView
-          .padding(.bottom, 12)
       }
       .onAppear {
         viewModel.client = client
@@ -45,7 +49,6 @@ public struct StatusEditorView: View {
           dismiss()
         }
       }
-      .padding(.horizontal, DS.Constants.layoutPadding)
       .navigationTitle(viewModel.mode.title)
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
@@ -95,11 +98,11 @@ public struct StatusEditorView: View {
   }
   
   private var mediasView: some View {
-    ScrollView(.horizontal) {
+    ScrollView(.horizontal, showsIndicators: false) {
       HStack(spacing: 8) {
         ForEach(viewModel.mediasImages) { container in
-          if let localImage = container.image {
-            makeLocalImage(image: localImage)
+          if container.image != nil {
+            makeLocalImage(container: container)
           } else if let url = container.mediaAttachement?.url {
             ZStack(alignment: .topTrailing) {
               makeLazyImage(url: url)
@@ -115,19 +118,45 @@ public struct StatusEditorView: View {
           }
         }
       }
+      .padding(.horizontal, DS.Constants.layoutPadding)
     }
   }
   
-  private func makeLocalImage(image: UIImage) -> some View {
+  private func makeLocalImage(container: StatusEditorViewModel.ImageContainer) -> some View {
     ZStack(alignment: .center) {
-      Image(uiImage: image)
+      Image(uiImage: container.image!)
         .resizable()
         .blur(radius: 20 )
         .aspectRatio(contentMode: .fill)
         .frame(width: 150, height: 150)
         .cornerRadius(8)
-      
-      ProgressView()
+      if container.error != nil {
+        VStack {
+          Text("Error uploading")
+          Button {
+            withAnimation {
+              viewModel.mediasImages.removeAll(where: { $0.id == container.id })
+            }
+          } label: {
+            VStack {
+              Text("Delete")
+            }
+          }
+          .buttonStyle(.bordered)
+          Button {
+            Task {
+              await viewModel.upload(container: container)
+            }
+          } label: {
+            VStack {
+              Text("Retry")
+            }
+          }
+          .buttonStyle(.bordered)
+        }
+      } else {
+        ProgressView()
+      }
     }
   }
   
@@ -147,13 +176,49 @@ public struct StatusEditorView: View {
   }
   
   private var accessoryView: some View {
-    HStack {
-      PhotosPicker(selection: $viewModel.selectedMedias,
-                   matching: .images) {
-        Image(systemName: "photo.fill.on.rectangle.fill")
+    VStack(spacing: 0) {
+      Divider()
+      HStack(spacing: 16) {
+        PhotosPicker(selection: $viewModel.selectedMedias,
+                     matching: .images) {
+          Image(systemName: "photo.fill.on.rectangle.fill")
+        }
+        
+        Button {
+          viewModel.insertStatusText(text: " @")
+        } label: {
+          Image(systemName: "at")
+        }
+        
+        Button {
+          viewModel.insertStatusText(text: " #")
+        } label: {
+          Image(systemName: "number")
+        }
+
+        Spacer()
+        
+        visibilityMenu
       }
-      Spacer()
+      .padding(.horizontal, DS.Constants.layoutPadding)
+      .padding(.vertical, 12)
+      .background(.ultraThinMaterial)
     }
+  }
+  
+  private var visibilityMenu: some View {
+    Menu {
+      ForEach(Models.Visibility.allCases, id: \.self) { visibility in
+        Button {
+          viewModel.visibility = visibility
+        } label: {
+          Label(visibility.title, systemImage: visibility.iconName)
+        }
+      }
+    } label: {
+      Image(systemName: viewModel.visibility.iconName)
+    }
+
   }
     
 }

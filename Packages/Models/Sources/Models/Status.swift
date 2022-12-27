@@ -8,7 +8,7 @@ public struct Application: Codable, Identifiable {
   public let website: URL?
 }
 
-public enum Visibility: String, Codable {
+public enum Visibility: String, Codable, CaseIterable {
   case pub = "public"
   case unlisted
   case priv = "private"

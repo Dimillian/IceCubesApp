@@ -13,4 +13,17 @@ extension Visibility {
       return "at.circle"
     }
   }
+  
+  public var title: String {
+    switch self {
+    case .pub:
+      return "Everyone"
+    case .unlisted:
+      return "Unlisted"
+    case .priv:
+      return "Followers"
+    case .direct:
+      return "Private Mention"
+    }
+  }
 }
