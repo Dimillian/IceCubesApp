@@ -46,9 +46,7 @@ public struct TimelineView: View {
       viewModel.timeline = timeline
     }
     .refreshable {
-      Task {
-        await viewModel.fetchStatuses(userIntent: true)
-      }
+      await viewModel.fetchStatuses(userIntent: true)
     }
     .onChange(of: watcher.latestEvent?.id) { id in
       if let latestEvent = watcher.latestEvent {

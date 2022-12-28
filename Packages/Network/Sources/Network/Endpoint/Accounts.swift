@@ -64,9 +64,9 @@ public enum Accounts: Endpoint {
     case let .familiarFollowers(withAccount):
       return [.init(name: "id[]", value: withAccount)]
     case let .followers(_, maxId):
-      return makePaginationParam(sinceId: nil, maxId: maxId)
+      return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
     case let .following(_, maxId):
-      return makePaginationParam(sinceId: nil, maxId: maxId)
+      return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
     case let .favourites(sinceId):
       guard let sinceId else { return nil }
       return [.init(name: "max_id", value: sinceId)]

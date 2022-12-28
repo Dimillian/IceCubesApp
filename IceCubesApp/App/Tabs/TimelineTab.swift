@@ -51,7 +51,7 @@ struct TimelineTab: View {
         Button {
           self.timeline = timeline
         } label: {
-          Text(timeline.title())
+          Label(timeline.title(), systemImage: timeline.iconName() ?? "")
         }
       }
     } label: {

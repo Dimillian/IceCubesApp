@@ -76,9 +76,9 @@ public enum Statuses: Endpoint {
       }
       return params
     case let .rebloggedBy(_, maxId):
-      return makePaginationParam(sinceId: nil, maxId: maxId)
+      return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
     case let .favouritedBy(_, maxId):
-      return makePaginationParam(sinceId: nil, maxId: maxId)
+      return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
     default:
       return nil
     }

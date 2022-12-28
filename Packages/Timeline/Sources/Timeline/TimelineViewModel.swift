@@ -65,14 +65,16 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
       if statuses.isEmpty {
         pendingStatuses = []
         statusesState = .loading
-        statuses = try await client.get(endpoint: timeline.endpoint(sinceId: nil, maxId: nil))
+        statuses = try await client.get(endpoint: timeline.endpoint(sinceId: nil, maxId: nil, minId: nil))
         statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
       } else if let first = statuses.first {
-        var newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: first.id, maxId: nil))
+        var newStatuses: [Status] = await fetchNewPages(minId: first.id, maxPages: 10)
         if userIntent || !pendingStatusesEnabled {
           pendingStatuses = []
           statuses.insert(contentsOf: newStatuses, at: 0)
-          statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+          withAnimation {
+            statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+          }
         } else {
           newStatuses = newStatuses.filter { status in
             !pendingStatuses.contains(where: { $0.id == status.id })
@@ -87,12 +89,35 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
     }
   }
   
+  func fetchNewPages(minId: String, maxPages: Int) async -> [Status] {
+    guard let client else { return [] }
+    var pagesLoaded = 0
+    var allStatuses: [Status] = []
+    var latestMinId = minId
+    do {
+      while let newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
+                                                                                         maxId: nil,
+                                                                                         minId: latestMinId)),
+              !newStatuses.isEmpty,
+              pagesLoaded < maxPages {
+        pagesLoaded += 1
+        allStatuses.insert(contentsOf: newStatuses, at: 0)
+        latestMinId = newStatuses.first?.id ?? ""
+      }
+    } catch {
+      return []
+    }
+    return allStatuses
+  }
+  
   func fetchNextPage() async {
     guard let client else { return }
     do {
       guard let lastId = statuses.last?.id else { return }
       statusesState = .display(statuses: statuses, nextPageState: .loadingNextPage)
-      let newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil, maxId: lastId))
+      let newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
+                                                                                   maxId: lastId,
+                                                                                   minId: nil))
       statuses.append(contentsOf: newStatuses)
       statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
     } catch {
