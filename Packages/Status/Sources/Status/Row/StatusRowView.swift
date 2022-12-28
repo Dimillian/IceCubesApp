@@ -67,17 +67,17 @@ public struct StatusRowView: View {
   var replyView: some View {
     if let accountId = viewModel.status.inReplyToAccountId,
        let mention = viewModel.status.mentions.first(where: { $0.id == accountId}) {
-          HStack(spacing: 2) {
-            Image(systemName:"arrowshape.turn.up.left.fill")
-            Text("Replied to")
-            Text(mention.username)
-          }
-          .font(.footnote)
-          .foregroundColor(.gray)
-          .fontWeight(.semibold)
-          .onTapGesture {
-            routeurPath.navigate(to: .accountDetail(id: mention.id))
-          }
+      HStack(spacing: 2) {
+        Image(systemName:"arrowshape.turn.up.left.fill")
+        Text("Replied to")
+        Text(mention.username)
+      }
+      .font(.footnote)
+      .foregroundColor(.gray)
+      .fontWeight(.semibold)
+      .onTapGesture {
+        routeurPath.navigate(to: .accountDetail(id: mention.id))
+      }
     }
   }
   
@@ -96,17 +96,26 @@ public struct StatusRowView: View {
           }
         }
         makeStatusContentView(status: status)
+          .padding(.vertical, viewModel.displaySpoiler ? 28 : 0)
+          .overlay {
+            if viewModel.displaySpoiler {
+              spoilerView
+            }
+          }
       }
     }
   }
   
   private func makeStatusContentView(status: AnyStatus) -> some View {
     Group {
-      Text(status.content.asSafeAttributedString)
-        .font(.body)
-        .environment(\.openURL, OpenURLAction { url in
-          routeurPath.handleStatus(status: status, url: url)
-        })
+      HStack {
+        Text(status.content.asSafeAttributedString)
+          .font(.body)
+          .environment(\.openURL, OpenURLAction { url in
+            routeurPath.handleStatus(status: status, url: url)
+          })
+        Spacer()
+      }
       
       if !viewModel.isEmbed, let embed = viewModel.embededStatus {
         StatusEmbededView(status: embed)
@@ -191,13 +200,13 @@ public struct StatusRowView: View {
     } label: {
       Label("Quote this post", systemImage: "quote.bubble")
     }
-
+    
     if let url = viewModel.status.reblog?.url ?? viewModel.status.url {
       Button { UIApplication.shared.open(url)  } label: {
         Label("View in Browser", systemImage: "safari")
       }
     }
-
+    
     if account.account?.id == viewModel.status.account.id {
       Button {
         routeurPath.presentedSheet = .editStatusEditor(status: viewModel.status)
@@ -208,5 +217,30 @@ public struct StatusRowView: View {
         Label("Delete", systemImage: "trash")
       }
     }
+  }
+  
+  private var spoilerView: some View {
+    HStack {
+      Spacer()
+      VStack {
+        Spacer()
+        Text(viewModel.status.reblog?.spoilerText ?? viewModel.status.spoilerText)
+          .font(.callout)
+        Button {
+          withAnimation {
+            viewModel.displaySpoiler = false
+          }
+        } label: {
+          Text("See more")
+        }
+        .buttonStyle(.bordered)
+        
+        Spacer()
+      }
+      Spacer()
+    }
+    .background(.ultraThinMaterial)
+    .transition(.opacity)
+    .cornerRadius(4)
   }
 }

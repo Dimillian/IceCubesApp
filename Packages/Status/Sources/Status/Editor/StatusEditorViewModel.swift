@@ -25,6 +25,9 @@ public class StatusEditorViewModel: ObservableObject {
     }
   }
   
+  @Published var spoilerOn: Bool = false
+  @Published var spoilerText: String = ""
+  
   @Published var selectedRange: NSRange = .init(location: 0, length: 0)
   
   @Published var isPosting: Bool = false
@@ -64,13 +67,13 @@ public class StatusEditorViewModel: ObservableObject {
         postStatus = try await client.post(endpoint: Statuses.postStatus(status: statusText.string,
                                                                          inReplyTo: mode.replyToStatus?.id,
                                                                          mediaIds: mediasImages.compactMap{ $0.mediaAttachement?.id },
-                                                                         spoilerText: nil,
+                                                                         spoilerText: spoilerOn ? spoilerText : nil,
                                                                          visibility: visibility))
       case let .edit(status):
         postStatus = try await client.put(endpoint: Statuses.editStatus(id: status.id,
                                                                         status: statusText.string,
                                                                         mediaIds:  mediasImages.compactMap{ $0.mediaAttachement?.id },
-                                                                        spoilerText: nil,
+                                                                        spoilerText: spoilerOn ? spoilerText : nil,
                                                                         visibility: visibility))
       }
       generator.notificationOccurred(.success)
@@ -90,7 +93,10 @@ public class StatusEditorViewModel: ObservableObject {
       selectedRange = .init(location: statusText.string.utf16.count, length: 0)
     case let .edit(status):
       statusText = .init(status.content.asSafeAttributedString)
-      selectedRange = .init(location: 0, length: 0)
+      selectedRange = .init(location: statusText.string.utf16.count, length: 0)
+      spoilerOn = !status.spoilerText.isEmpty
+      spoilerText = status.spoilerText
+      mediasImages = status.mediaAttachments.map{ .init(image: nil, mediaAttachement: $0, error: nil )}
     case let .quote(status):
       self.embededStatus = status
       if let url = status.reblog?.url ?? status.url {

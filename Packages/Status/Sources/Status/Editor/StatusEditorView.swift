@@ -16,6 +16,7 @@ public struct StatusEditorView: View {
   @Environment(\.dismiss) private var dismiss
   
   @StateObject private var viewModel: StatusEditorViewModel
+  @FocusState private var isSpoilerTextFocused: Bool
   
   public init(mode: StatusEditorViewModel.Mode) {
     _viewModel = StateObject(wrappedValue: .init(mode: mode))
@@ -26,6 +27,7 @@ public struct StatusEditorView: View {
       ZStack(alignment: .bottom) {
         ScrollView {
           Divider()
+          spoilerTextView
           VStack(spacing: 12) {
             accountHeaderView
               .padding(.horizontal, DS.Constants.layoutPadding)
@@ -77,6 +79,20 @@ public struct StatusEditorView: View {
           }
         }
       }
+    }
+  }
+  
+  @ViewBuilder
+  private var spoilerTextView: some View {
+    if viewModel.spoilerOn {
+      VStack {
+        TextField("Spoiler Text", text: $viewModel.spoilerText)
+          .focused($isSpoilerTextFocused)
+          .padding(.horizontal, DS.Constants.layoutPadding)
+      }
+      .frame(height: 35)
+      .background(Color.brand.opacity(0.20))
+      .offset(y: -8)
     }
   }
   
@@ -179,7 +195,7 @@ public struct StatusEditorView: View {
   private var accessoryView: some View {
     VStack(spacing: 0) {
       Divider()
-      HStack(spacing: 16) {
+      HStack(alignment: .center, spacing: 16) {
         PhotosPicker(selection: $viewModel.selectedMedias,
                      matching: .images) {
           Image(systemName: "photo.fill.on.rectangle.fill")
@@ -197,12 +213,22 @@ public struct StatusEditorView: View {
           Image(systemName: "number")
         }
         
+        Button {
+          withAnimation {
+            viewModel.spoilerOn.toggle()
+          }
+          isSpoilerTextFocused.toggle()
+        } label: {
+          Image(systemName: viewModel.spoilerOn ? "exclamationmark.triangle.fill": "exclamationmark.triangle")
+        }
+
         visibilityMenu
 
         Spacer()
         
         characterCountView
       }
+      .frame(height: 20)
       .padding(.horizontal, DS.Constants.layoutPadding)
       .padding(.vertical, 12)
       .background(.ultraThinMaterial)
@@ -227,7 +253,6 @@ public struct StatusEditorView: View {
     } label: {
       Image(systemName: viewModel.visibility.iconName)
     }
-
   }
     
 }
