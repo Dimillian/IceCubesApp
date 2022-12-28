@@ -9,12 +9,12 @@ import DesignSystem
 struct SettingsTabs: View {
   @Environment(\.openURL) private var openURL
   @EnvironmentObject private var client: Client
+  @EnvironmentObject private var currentInstance: CurrentInstance
   @EnvironmentObject private var appAccountsManager: AppAccountsManager
   @EnvironmentObject private var theme: Theme
   
   @State private var signInInProgress = false
   @State private var accountData: Account?
-  @State private var instanceData: Instance?
   @State private var signInServer = IceCubesApp.defaultServer
   
   var body: some View {
@@ -37,7 +37,7 @@ struct SettingsTabs: View {
       if appAccountsManager.currentAccount.oauthToken != nil {
         signInInProgress = true
         await refreshAccountInfo()
-        await refreshInstanceInfo()
+        await currentInstance.fetchCurrentInstance()
         signInInProgress = false
       }
     }
@@ -77,7 +77,7 @@ struct SettingsTabs: View {
   
   @ViewBuilder
   private var instanceSection: some View {
-    if let instanceData {
+    if let instanceData = currentInstance.instance {
       Section("Instance info") {
         LabeledContent("Name", value: instanceData.title)
         Text(instanceData.shortDescription)
@@ -86,6 +86,12 @@ struct SettingsTabs: View {
         LabeledContent("Users", value: "\(instanceData.stats.userCount)")
         LabeledContent("Posts", value: "\(instanceData.stats.statusCount)")
         LabeledContent("Domains", value: "\(instanceData.stats.domainCount)")
+      }
+      
+      Section("Instance rules") {
+        ForEach(instanceData.rules) { rule in
+          Text(rule.text)
+        }
       }
     }
   }
@@ -127,7 +133,6 @@ struct SettingsTabs: View {
   
   private var signOutButton: some View {
     Button {
-      instanceData = nil
       accountData = nil
       appAccountsManager.delete(account: appAccountsManager.currentAccount)
     } label: {
@@ -151,7 +156,7 @@ struct SettingsTabs: View {
       let oauthToken = try await client.continueOauthFlow(url: url)
       appAccountsManager.add(account: AppAccount(server: client.server, oauthToken: oauthToken))
       await refreshAccountInfo()
-      await refreshInstanceInfo()
+      await currentInstance.fetchCurrentInstance()
       signInInProgress = false
     } catch {
       signInInProgress = false
@@ -160,9 +165,5 @@ struct SettingsTabs: View {
   
   private func refreshAccountInfo() async {
     accountData = try? await client.get(endpoint: Accounts.verifyCredentials)
-  }
-  
-  private func refreshInstanceInfo() async {
-    instanceData = try? await client.get(endpoint: Instances.instance)
   }
 }

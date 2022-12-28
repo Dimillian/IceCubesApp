@@ -11,6 +11,7 @@ import NukeUI
 public struct StatusEditorView: View {
   @EnvironmentObject private var quicklook: QuickLook
   @EnvironmentObject private var client: Client
+  @EnvironmentObject private var currentInstance: CurrentInstance
   @EnvironmentObject private var currentAccount: CurrentAccount
   @Environment(\.dismiss) private var dismiss
   
@@ -195,15 +196,23 @@ public struct StatusEditorView: View {
         } label: {
           Image(systemName: "number")
         }
+        
+        visibilityMenu
 
         Spacer()
         
-        visibilityMenu
+        characterCountView
       }
       .padding(.horizontal, DS.Constants.layoutPadding)
       .padding(.vertical, 12)
       .background(.ultraThinMaterial)
     }
+  }
+  
+  private var characterCountView: some View {
+    Text("\((currentInstance.instance?.configuration.statuses.maxCharacters ?? 500) - viewModel.statusText.string.utf16.count)")
+      .foregroundColor(.gray)
+      .font(.callout)
   }
   
   private var visibilityMenu: some View {

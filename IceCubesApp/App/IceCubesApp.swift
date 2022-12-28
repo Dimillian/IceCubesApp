@@ -11,6 +11,7 @@ struct IceCubesApp: App {
     
   @Environment(\.scenePhase) private var scenePhase
   @StateObject private var appAccountsManager = AppAccountsManager()
+  @StateObject private var currenInstance = CurrentInstance()
   @StateObject private var currentAccount = CurrentAccount()
   @StateObject private var watcher = StreamWatcher()
   @StateObject private var quickLook = QuickLook()
@@ -56,6 +57,7 @@ struct IceCubesApp: App {
       .environmentObject(appAccountsManager.currentClient)
       .environmentObject(quickLook)
       .environmentObject(currentAccount)
+      .environmentObject(currenInstance)
       .environmentObject(theme)
       .environmentObject(watcher)
       .quickLookPreview($quickLook.url, in: quickLook.urls)
@@ -67,6 +69,7 @@ struct IceCubesApp: App {
   
   private func setNewClientsInEnv(client: Client) {
     currentAccount.setClient(client: client)
+    currenInstance.setClient(client: client)
     watcher.setClient(client: client)
   }
   
