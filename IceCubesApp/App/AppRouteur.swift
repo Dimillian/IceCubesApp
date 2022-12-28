@@ -18,7 +18,7 @@ extension View {
       case let .hashTag(tag, accountId):
         TimelineView(timeline: .constant(.hashtag(tag: tag, accountId: accountId)))
       case let .following(id):
-        AccountsListView(mode: .followers(accountId: id))
+        AccountsListView(mode: .following(accountId: id))
       case let .followers(id):
         AccountsListView(mode: .followers(accountId: id))
       case let .favouritedBy(id):

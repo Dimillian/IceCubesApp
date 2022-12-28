@@ -36,6 +36,7 @@ public protocol AnyStatus {
   var application: Application? { get }
   var inReplyToAccountId: String? { get }
   var visibility: Visibility { get }
+  var poll: Poll? { get }
 }
 
 
@@ -64,6 +65,7 @@ public struct Status: AnyStatus, Codable, Identifiable {
   public let application: Application?
   public let inReplyToAccountId: String?
   public let visibility: Visibility
+  public let poll: Poll?
   
   public static func placeholder() -> Status {
     .init(id: UUID().uuidString,
@@ -85,7 +87,8 @@ public struct Status: AnyStatus, Codable, Identifiable {
           url: nil,
           application: nil,
           inReplyToAccountId: nil,
-          visibility: .pub)
+          visibility: .pub,
+          poll: nil)
   }
   
   public static func placeholders() -> [Status] {
@@ -117,4 +120,5 @@ public struct ReblogStatus: AnyStatus, Codable, Identifiable {
   public var application: Application?
   public let inReplyToAccountId: String?
   public let visibility: Visibility
+  public let poll: Poll?
 }

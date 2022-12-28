@@ -112,6 +112,10 @@ public struct StatusRowView: View {
         StatusEmbededView(status: embed)
       }
       
+      if let poll = status.poll {
+        StatusPollView(poll: poll)
+      }
+      
       if !status.mediaAttachments.isEmpty {
         if viewModel.isEmbed {
           Image(systemName: "paperclip")
