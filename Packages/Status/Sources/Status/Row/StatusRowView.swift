@@ -95,46 +95,51 @@ public struct StatusRowView: View {
             menuButton
           }
         }
-        makeStatusContentView(status: status)
-          .padding(.vertical, viewModel.displaySpoiler ? 28 : 0)
-          .overlay {
-            if viewModel.displaySpoiler {
-              spoilerView
-            }
-          }
-      }
+        makeStatusContentView(status: status)      }
     }
   }
   
   private func makeStatusContentView(status: AnyStatus) -> some View {
     Group {
-      HStack {
+      if !viewModel.status.spoilerText.isEmpty {
+        Text(status.spoilerText)
+          .font(.body)
+      }
+      if viewModel.displaySpoiler {
+        Button {
+          withAnimation {
+            viewModel.displaySpoiler = false
+          }
+        } label: {
+          Text("Show more")
+        }
+        .buttonStyle(.bordered)
+      } else {
         Text(status.content.asSafeAttributedString)
           .font(.body)
           .environment(\.openURL, OpenURLAction { url in
             routeurPath.handleStatus(status: status, url: url)
           })
-        Spacer()
-      }
-      
-      if !viewModel.isEmbed, let embed = viewModel.embededStatus {
-        StatusEmbededView(status: embed)
-      }
-      
-      if let poll = status.poll {
-        StatusPollView(poll: poll)
-      }
-      
-      if !status.mediaAttachments.isEmpty {
-        if viewModel.isEmbed {
-          Image(systemName: "paperclip")
-        } else {
-          StatusMediaPreviewView(attachements: status.mediaAttachments)
-            .padding(.vertical, 4)
+        
+        if !viewModel.isEmbed, let embed = viewModel.embededStatus {
+          StatusEmbededView(status: embed)
         }
-      }
-      if let card = status.card, !viewModel.isEmbed {
-        StatusCardView(card: card)
+        
+        if let poll = status.poll {
+          StatusPollView(poll: poll)
+        }
+        
+        if !status.mediaAttachments.isEmpty {
+          if viewModel.isEmbed {
+            Image(systemName: "paperclip")
+          } else {
+            StatusMediaPreviewView(attachements: status.mediaAttachments)
+              .padding(.vertical, 4)
+          }
+        }
+        if let card = status.card, !viewModel.isEmbed {
+          StatusCardView(card: card)
+        }
       }
     }
     .contentShape(Rectangle())
@@ -217,30 +222,5 @@ public struct StatusRowView: View {
         Label("Delete", systemImage: "trash")
       }
     }
-  }
-  
-  private var spoilerView: some View {
-    HStack {
-      Spacer()
-      VStack {
-        Spacer()
-        Text(viewModel.status.reblog?.spoilerText ?? viewModel.status.spoilerText)
-          .font(.callout)
-        Button {
-          withAnimation {
-            viewModel.displaySpoiler = false
-          }
-        } label: {
-          Text("See more")
-        }
-        .buttonStyle(.bordered)
-        
-        Spacer()
-      }
-      Spacer()
-    }
-    .background(.ultraThinMaterial)
-    .transition(.opacity)
-    .cornerRadius(4)
   }
 }
