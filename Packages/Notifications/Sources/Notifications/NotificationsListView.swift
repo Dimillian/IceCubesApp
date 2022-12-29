@@ -37,6 +37,7 @@ public struct NotificationsListView: View {
     .task {
       viewModel.client = client
       await viewModel.fetchNotifications()
+      await viewModel.clear()
     }
     .refreshable {
       await viewModel.fetchNotifications()

@@ -4,11 +4,14 @@ public enum Notifications: Endpoint {
   case notifications(sinceId: String?,
                      maxId: String?,
                      types: [String]?)
+  case clear
   
   public func path() -> String {
     switch self {
     case .notifications:
       return "notifications"
+    case .clear:
+      return "notifications/clear"
     }
   }
   
@@ -22,6 +25,8 @@ public enum Notifications: Endpoint {
         }
       }
       return params
+    default:
+      return nil
     }
   }
 }

@@ -72,6 +72,13 @@ class NotificationsViewModel: ObservableObject {
     }
   }
   
+  func clear() async {
+    guard let client else { return }
+    do {
+      let _: ServerError = try await client.post(endpoint: Notifications.clear)
+    } catch { }
+  }
+  
   func handleEvent(event: any StreamEvent) {
     if let event = event as? StreamEventNotification {
       notifications.insert(event.notification, at: 0)
