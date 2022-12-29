@@ -18,6 +18,8 @@ public struct TimelineView: View {
   @StateObject private var viewModel = TimelineViewModel()
   @Binding var timeline: TimelineFilter
   
+  private let feedbackGenerator = UIImpactFeedbackGenerator()
+  
   public init(timeline: Binding<TimelineFilter>) {
     _timeline = timeline
   }
@@ -46,7 +48,9 @@ public struct TimelineView: View {
       viewModel.timeline = timeline
     }
     .refreshable {
+      feedbackGenerator.impactOccurred(intensity: 0.3)
       await viewModel.fetchStatuses(userIntent: true)
+      feedbackGenerator.impactOccurred(intensity: 0.7)
     }
     .onChange(of: watcher.latestEvent?.id) { id in
       if let latestEvent = watcher.latestEvent {
