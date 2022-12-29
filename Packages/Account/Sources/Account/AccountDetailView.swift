@@ -64,17 +64,19 @@ public struct AccountDetailView: View {
             makeTagsListView(tags: tags)
           }
         }
-        .background(theme.primaryBackgroundColor)
       }
+      .background(theme.primaryBackgroundColor)
     }
-    .task {
-      guard reasons != .placeholder else { return }
-      isCurrentUser = currentAccount.account?.id == viewModel.accountId
-      viewModel.isCurrentUser = isCurrentUser
-      viewModel.client = client
-      await viewModel.fetchAccount()
-      if viewModel.statuses.isEmpty {
-        await viewModel.fetchStatuses()
+    .onAppear {
+      Task {
+        guard reasons != .placeholder else { return }
+        isCurrentUser = currentAccount.account?.id == viewModel.accountId
+        viewModel.isCurrentUser = isCurrentUser
+        viewModel.client = client
+        await viewModel.fetchAccount()
+        if viewModel.statuses.isEmpty {
+          await viewModel.fetchStatuses()
+        }
       }
     }
     .refreshable {

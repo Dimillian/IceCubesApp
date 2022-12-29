@@ -116,6 +116,8 @@ public struct ExploreView: View {
             }
           }
         }
+        .scrollContentBackground(.hidden)
+        .background(theme.primaryBackgroundColor)
         .listStyle(.plain)
         .navigationTitle("Suggested Users")
         .navigationBarTitleDisplayMode(.inline)
@@ -143,6 +145,8 @@ public struct ExploreView: View {
               .padding(.vertical, 4)
           }
         }
+        .scrollContentBackground(.hidden)
+        .background(theme.primaryBackgroundColor)
         .listStyle(.plain)
         .navigationTitle("Trending Tags")
         .navigationBarTitleDisplayMode(.inline)
@@ -171,6 +175,8 @@ public struct ExploreView: View {
               .padding(.vertical, 8)
           }
         }
+        .scrollContentBackground(.hidden)
+        .background(theme.primaryBackgroundColor)
         .listStyle(.plain)
         .navigationTitle("Trending Posts")
         .navigationBarTitleDisplayMode(.inline)
@@ -198,6 +204,8 @@ public struct ExploreView: View {
               .padding(.vertical, 8)
           }
         }
+        .scrollContentBackground(.hidden)
+        .background(theme.primaryBackgroundColor)
         .listStyle(.plain)
         .navigationTitle("Trending Links")
         .navigationBarTitleDisplayMode(.inline)

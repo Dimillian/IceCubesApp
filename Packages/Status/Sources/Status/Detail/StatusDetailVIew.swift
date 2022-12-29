@@ -58,6 +58,7 @@ public struct StatusDetailView: View {
         .padding(.horizontal, DS.Constants.layoutPadding)
         .padding(.top, DS.Constants.layoutPadding)
       }
+      .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
       .task {
         guard !isLoaded else { return }

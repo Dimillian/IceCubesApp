@@ -126,7 +126,8 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
         tabState = .statuses(statusesState: .display(statuses: statuses, nextPageState: .loadingNextPage))
         let newStatuses: [Status] = try await client.get(endpoint: Accounts.statuses(id: accountId, sinceId: lastId, tag: nil))
         statuses.append(contentsOf: newStatuses)
-        tabState = .statuses(statusesState: .display(statuses: statuses, nextPageState: .hasNextPage))
+        tabState = .statuses(statusesState: .display(statuses: statuses,
+                                                     nextPageState: newStatuses.count < 20 ? .none : .hasNextPage))
       case .favourites:
         guard let nextPageId = favouritesNextPage?.maxId else { return }
         let newFavourites: [Status]
@@ -162,7 +163,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   private func reloadTabState() {
     switch selectedTab {
     case .statuses:
-      tabState = .statuses(statusesState: .display(statuses: statuses, nextPageState: .hasNextPage))
+      tabState = .statuses(statusesState: .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage))
     case .favourites:
       tabState = .statuses(statusesState: .display(statuses: favourites,
                                                    nextPageState: favouritesNextPage != nil ? .hasNextPage : .none))
