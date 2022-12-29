@@ -21,7 +21,7 @@ struct SettingsTabs: View {
     NavigationStack {
       Form {
         appSection
-        accountSection
+        accountsSection
         themeSection
         instanceSection
       }
@@ -43,16 +43,19 @@ struct SettingsTabs: View {
     }
   }
   
-  private var accountSection: some View {
+  private var accountsSection: some View {
     Section("Account") {
       if let accountData = currentAccount.account {
-        VStack(alignment: .leading) {
-          Text(appAccountsManager.currentAccount.server)
-            .font(.headline)
-          Text(accountData.displayName)
-          Text(accountData.username)
-            .font(.footnote)
-            .foregroundColor(.gray)
+        HStack {
+          AvatarView(url: accountData.avatar)
+          VStack(alignment: .leading) {
+            Text(appAccountsManager.currentAccount.server)
+              .font(.headline)
+            Text(accountData.displayName)
+            Text(accountData.username)
+              .font(.footnote)
+              .foregroundColor(.gray)
+          }
         }
         signOutButton
       } else {
