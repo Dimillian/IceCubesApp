@@ -34,7 +34,7 @@ public struct TimelineView: View {
           }
           .padding(.top, DS.Constants.layoutPadding)
         }
-        if viewModel.timeline == .home {
+        if viewModel.pendingStatusesEnabled {
           makePendingNewPostsView(proxy: proxy)
         }
       }

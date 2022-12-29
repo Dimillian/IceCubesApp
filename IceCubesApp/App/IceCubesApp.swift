@@ -38,9 +38,9 @@ struct IceCubesApp: App {
           tab.makeContentView(popToRootTab: $popToRootTab)
             .tabItem {
               tab.label
-                .badge(tab == .notifications ? watcher.unreadNotificationsCount : 0)
             }
             .tag(tab)
+            .badge(tab == .notifications ? watcher.unreadNotificationsCount : 0)
         }
       }
       .tint(theme.tintColor)

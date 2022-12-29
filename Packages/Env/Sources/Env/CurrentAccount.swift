@@ -20,7 +20,10 @@ public class CurrentAccount: ObservableObject {
   }
   
   public func fetchCurrentAccount() async {
-    guard let client = client, client.isAuth else { return }
+    guard let client = client, client.isAuth else {
+      account = nil
+      return
+    }
     Task {
       account = try? await client.get(endpoint: Accounts.verifyCredentials)
     }

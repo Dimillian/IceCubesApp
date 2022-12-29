@@ -32,9 +32,7 @@ struct TimelineTab: View {
     }
     .onAppear {
       routeurPath.client = client
-      if !client.isAuth {
-        timeline = .pub
-      }
+      timeline = client.isAuth ? .home : .pub
     }
     .environmentObject(routeurPath)
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in

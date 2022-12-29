@@ -9,12 +9,12 @@ import DesignSystem
 struct SettingsTabs: View {
   @Environment(\.openURL) private var openURL
   @EnvironmentObject private var client: Client
+  @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var currentInstance: CurrentInstance
   @EnvironmentObject private var appAccountsManager: AppAccountsManager
   @EnvironmentObject private var theme: Theme
   
   @State private var signInInProgress = false
-  @State private var accountData: Account?
   @State private var signInServer = IceCubesApp.defaultServer
   
   var body: some View {
@@ -36,7 +36,7 @@ struct SettingsTabs: View {
     .task {
       if appAccountsManager.currentAccount.oauthToken != nil {
         signInInProgress = true
-        await refreshAccountInfo()
+        await currentAccount.fetchCurrentAccount()
         await currentInstance.fetchCurrentInstance()
         signInInProgress = false
       }
@@ -45,7 +45,7 @@ struct SettingsTabs: View {
   
   private var accountSection: some View {
     Section("Account") {
-      if let accountData {
+      if let accountData = currentAccount.account {
         VStack(alignment: .leading) {
           Text(appAccountsManager.currentAccount.server)
             .font(.headline)
@@ -133,7 +133,6 @@ struct SettingsTabs: View {
   
   private var signOutButton: some View {
     Button {
-      accountData = nil
       appAccountsManager.delete(account: appAccountsManager.currentAccount)
     } label: {
       Text("Sign out").foregroundColor(.red)
@@ -155,15 +154,11 @@ struct SettingsTabs: View {
     do {
       let oauthToken = try await client.continueOauthFlow(url: url)
       appAccountsManager.add(account: AppAccount(server: client.server, oauthToken: oauthToken))
-      await refreshAccountInfo()
+      await currentAccount.fetchCurrentAccount()
       await currentInstance.fetchCurrentInstance()
       signInInProgress = false
     } catch {
       signInInProgress = false
     }
-  }
-  
-  private func refreshAccountInfo() async {
-    accountData = try? await client.get(endpoint: Accounts.verifyCredentials)
   }
 }
