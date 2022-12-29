@@ -12,6 +12,7 @@ public struct TimelineView: View {
   }
   
   @Environment(\.scenePhase) private var scenePhase
+  @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
@@ -36,6 +37,7 @@ public struct TimelineView: View {
           }
           .padding(.top, DS.Constants.layoutPadding)
         }
+        .background(theme.primaryBackgroundColor)
         if viewModel.pendingStatusesEnabled {
           makePendingNewPostsView(proxy: proxy)
         }
@@ -116,7 +118,7 @@ public struct TimelineView: View {
       }
       .padding(.horizontal, DS.Constants.layoutPadding)
       .padding(.vertical, 8)
-      .background(.gray.opacity(0.15))
+      .background(theme.secondaryBackgroundColor)
     }
   }
 }

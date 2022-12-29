@@ -9,6 +9,7 @@ public struct StatusPollView: View {
     static let barHeight: CGFloat = 30
   }
   
+  @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var currentInstance: CurrentInstance
   @StateObject private var viewModel: StatusPollViewModel
@@ -40,7 +41,7 @@ public struct StatusPollView: View {
       ForEach(viewModel.poll.options) { option in
         HStack {
           makeBarView(for: option)
-          if !viewModel.votes.isEmpty {
+          if !viewModel.votes.isEmpty || viewModel.poll.expired {
             Spacer()
             Text("\(percentForOption(option: option)) %")
               .font(.subheadline)
@@ -97,14 +98,14 @@ public struct StatusPollView: View {
                 HStack {
                   let width = widthForOption(option: option, proxy: proxy)
                   Rectangle()
-                    .foregroundColor(Color.brand)
+                    .foregroundColor(theme.tintColor)
                     .frame(height: Constants.barHeight)
                     .frame(width: width)
                   Spacer()
                 }
               }
             }
-            .foregroundColor(Color.brand.opacity(0.40))
+            .foregroundColor(theme.tintColor.opacity(0.40))
             .frame(height: Constants.barHeight)
             .clipShape(RoundedRectangle(cornerRadius: 8))
           

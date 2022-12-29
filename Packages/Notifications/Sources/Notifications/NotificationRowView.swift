@@ -76,7 +76,7 @@ struct NotificationRowView: View {
     if let status = notification.status {
       StatusRowView(viewModel: .init(status: status, isEmbed: true))
         .padding(8)
-        .background(Color.gray.opacity(0.10))
+        .background(theme.secondaryBackgroundColor)
         .overlay(
           RoundedRectangle(cornerRadius: 4)
             .stroke(.gray.opacity(0.35), lineWidth: 1)

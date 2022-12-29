@@ -9,6 +9,7 @@ import PhotosUI
 import NukeUI
 
 public struct StatusEditorView: View {
+  @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var quicklook: QuickLook
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var currentInstance: CurrentInstance
@@ -52,6 +53,7 @@ public struct StatusEditorView: View {
           dismiss()
         }
       }
+      .background(theme.primaryBackgroundColor)
       .navigationTitle(viewModel.mode.title)
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
@@ -91,7 +93,7 @@ public struct StatusEditorView: View {
           .padding(.horizontal, DS.Constants.layoutPadding)
       }
       .frame(height: 35)
-      .background(Color.brand.opacity(0.20))
+      .background(theme.tintColor.opacity(0.20))
       .offset(y: -8)
     }
   }

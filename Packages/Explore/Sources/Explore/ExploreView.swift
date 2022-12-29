@@ -44,6 +44,8 @@ public struct ExploreView: View {
       }
     }
     .listStyle(.grouped)
+    .scrollContentBackground(.hidden)
+    .background(theme.secondaryBackgroundColor)
     .navigationTitle("Explore")
     .searchable(text: $viewModel.searchQuery,
                 tokens: $viewModel.tokens,
@@ -60,6 +62,7 @@ public struct ExploreView: View {
         .padding(.vertical, 8)
         .redacted(reason: .placeholder)
         .shimmering()
+        .listRowBackground(theme.primaryBackgroundColor)
     }
   }
   
@@ -70,6 +73,7 @@ public struct ExploreView: View {
         ForEach(results.accounts) { account in
           if let relationship = results.relationships.first(where: { $0.id == account.id }) {
             AccountsListRow(viewModel: .init(account: account, relationShip: relationship))
+              .listRowBackground(theme.primaryBackgroundColor)
           }
         }
       }
@@ -78,6 +82,7 @@ public struct ExploreView: View {
       Section("Tags") {
         ForEach(results.hashtags) { tag in
           TagRowView(tag: tag)
+            .listRowBackground(theme.primaryBackgroundColor)
             .padding(.vertical, 4)
         }
       }
@@ -86,6 +91,7 @@ public struct ExploreView: View {
       Section("Posts") {
         ForEach(results.statuses) { status in
           StatusRowView(viewModel: .init(status: status))
+            .listRowBackground(theme.primaryBackgroundColor)
             .padding(.vertical, 8)
         }
       }
@@ -98,6 +104,7 @@ public struct ExploreView: View {
         .prefix(upTo: viewModel.suggestedAccounts.count > 3 ? 3 : viewModel.suggestedAccounts.count)) { account in
         if let relationship = viewModel.suggestedAccountsRelationShips.first(where: { $0.id == account.id }) {
           AccountsListRow(viewModel: .init(account: account, relationShip: relationship))
+            .listRowBackground(theme.primaryBackgroundColor)
         }
       }
       NavigationLink {
@@ -105,6 +112,7 @@ public struct ExploreView: View {
           ForEach(viewModel.suggestedAccounts) { account in
             if let relationship = viewModel.suggestedAccountsRelationShips.first(where: { $0.id == account.id }) {
               AccountsListRow(viewModel: .init(account: account, relationShip: relationship))
+                .listRowBackground(theme.primaryBackgroundColor)
             }
           }
         }
@@ -115,6 +123,7 @@ public struct ExploreView: View {
         Text("See more")
           .foregroundColor(theme.tintColor)
       }
+      .listRowBackground(theme.primaryBackgroundColor)
     }
   }
   
@@ -123,12 +132,14 @@ public struct ExploreView: View {
       ForEach(viewModel.trendingTags
         .prefix(upTo: viewModel.trendingTags.count > 5 ? 5 : viewModel.trendingTags.count)) { tag in
         TagRowView(tag: tag)
+            .listRowBackground(theme.primaryBackgroundColor)
           .padding(.vertical, 4)
       }
       NavigationLink {
         List {
           ForEach(viewModel.trendingTags) { tag in
             TagRowView(tag: tag)
+              .listRowBackground(theme.primaryBackgroundColor)
               .padding(.vertical, 4)
           }
         }
@@ -139,6 +150,7 @@ public struct ExploreView: View {
         Text("See more")
           .foregroundColor(theme.tintColor)
       }
+      .listRowBackground(theme.primaryBackgroundColor)
     }
   }
   
@@ -147,6 +159,7 @@ public struct ExploreView: View {
       ForEach(viewModel.trendingStatuses
         .prefix(upTo: viewModel.trendingStatuses.count > 3 ? 3 : viewModel.trendingStatuses.count)) { status in
         StatusRowView(viewModel: .init(status: status, isEmbed: false))
+            .listRowBackground(theme.primaryBackgroundColor)
           .padding(.vertical, 8)
       }
       
@@ -154,6 +167,7 @@ public struct ExploreView: View {
         List {
           ForEach(viewModel.trendingStatuses) { status in
             StatusRowView(viewModel: .init(status: status, isEmbed: false))
+              .listRowBackground(theme.primaryBackgroundColor)
               .padding(.vertical, 8)
           }
         }
@@ -164,6 +178,7 @@ public struct ExploreView: View {
         Text("See more")
           .foregroundColor(theme.tintColor)
       }
+      .listRowBackground(theme.primaryBackgroundColor)
     }
   }
   
@@ -172,12 +187,14 @@ public struct ExploreView: View {
       ForEach(viewModel.trendingLinks
         .prefix(upTo: viewModel.trendingLinks.count > 3 ? 3 : viewModel.trendingLinks.count)) { card in
         StatusCardView(card: card)
+            .listRowBackground(theme.primaryBackgroundColor)
           .padding(.vertical, 8)
       }
       NavigationLink {
         List {
           ForEach(viewModel.trendingLinks) { card in
             StatusCardView(card: card)
+              .listRowBackground(theme.primaryBackgroundColor)
               .padding(.vertical, 8)
           }
         }
@@ -188,6 +205,7 @@ public struct ExploreView: View {
         Text("See more")
           .foregroundColor(theme.tintColor)
       }
+      .listRowBackground(theme.primaryBackgroundColor)
     }
   }
   

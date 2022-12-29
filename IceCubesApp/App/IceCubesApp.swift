@@ -41,18 +41,15 @@ struct IceCubesApp: App {
             }
             .tag(tab)
             .badge(tab == .notifications ? watcher.unreadNotificationsCount : 0)
+            .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .tabBar)
         }
       }
       .tint(theme.tintColor)
-      .onChange(of: appAccountsManager.currentClient) { newClient in
-        setNewClientsInEnv(client: newClient)
-        if newClient.isAuth {
-          watcher.watch(stream: .user)
-        }
-      }
       .onAppear {
         setNewClientsInEnv(client: appAccountsManager.currentClient)
+        setBarsColor(color: theme.primaryBackgroundColor)
       }
+      .preferredColorScheme(theme.colorScheme == "dark" ? .dark : .light)
       .environmentObject(appAccountsManager)
       .environmentObject(appAccountsManager.currentClient)
       .environmentObject(quickLook)
@@ -65,6 +62,15 @@ struct IceCubesApp: App {
     .onChange(of: scenePhase, perform: { scenePhase in
       handleScenePhase(scenePhase: scenePhase)
     })
+    .onChange(of: appAccountsManager.currentClient) { newClient in
+      setNewClientsInEnv(client: newClient)
+      if newClient.isAuth {
+        watcher.watch(stream: .user)
+      }
+    }
+    .onChange(of: theme.primaryBackgroundColor) { newValue in
+      setBarsColor(color: newValue)
+    }
   }
   
   private func setNewClientsInEnv(client: Client) {
@@ -84,5 +90,10 @@ struct IceCubesApp: App {
     default:
       break
     }
+  }
+  
+  private func setBarsColor(color: Color) {
+    UINavigationBar.appearance().isTranslucent = true
+    UINavigationBar.appearance().barTintColor = UIColor(color)
   }
 }

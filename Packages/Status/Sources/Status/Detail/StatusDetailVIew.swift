@@ -6,6 +6,7 @@ import Network
 import DesignSystem
 
 public struct StatusDetailView: View {
+  @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
@@ -57,6 +58,7 @@ public struct StatusDetailView: View {
         .padding(.horizontal, DS.Constants.layoutPadding)
         .padding(.top, DS.Constants.layoutPadding)
       }
+      .background(theme.primaryBackgroundColor)
       .task {
         guard !isLoaded else { return }
         isLoaded = true

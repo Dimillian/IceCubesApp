@@ -30,6 +30,8 @@ struct SettingsTabs: View {
           await continueSignIn(url: url)
         }
       })
+      .scrollContentBackground(.hidden)
+      .background(theme.secondaryBackgroundColor)
       .navigationTitle(Text("Settings"))
       .navigationBarTitleDisplayMode(.inline)
     }
@@ -63,19 +65,33 @@ struct SettingsTabs: View {
         signInButton
       }
     }
+    .listRowBackground(theme.primaryBackgroundColor)
   }
   
   private var themeSection: some View {
     Section("Theme") {
+      Toggle("Prefer dark color scheme", isOn: .init(get: {
+        theme.colorScheme == "dark"
+      }, set: { newValue in
+        if newValue {
+          theme.colorScheme = "dark"
+        } else {
+          theme.colorScheme = "light"
+        }
+      }))
       ColorPicker("Tint color", selection: $theme.tintColor)
+      ColorPicker("Background color", selection: $theme.primaryBackgroundColor)
+      ColorPicker("Secondary Background color", selection: $theme.secondaryBackgroundColor)
       Button {
+        theme.colorScheme = "dark"
         theme.tintColor = .brand
-        theme.labelColor = .label
+        theme.primaryBackgroundColor = .primaryBackground
+        theme.secondaryBackgroundColor = .secondaryBackground
       } label: {
         Text("Restore default")
       }
-
     }
+    .listRowBackground(theme.primaryBackgroundColor)
   }
   
   @ViewBuilder
@@ -90,12 +106,14 @@ struct SettingsTabs: View {
         LabeledContent("Posts", value: "\(instanceData.stats.statusCount)")
         LabeledContent("Domains", value: "\(instanceData.stats.domainCount)")
       }
+      .listRowBackground(theme.primaryBackgroundColor)
       
       Section("Instance rules") {
         ForEach(instanceData.rules) { rule in
           Text(rule.text)
         }
       }
+      .listRowBackground(theme.primaryBackgroundColor)
     }
   }
   
@@ -117,6 +135,7 @@ struct SettingsTabs: View {
         Text("https://github.com/Dimillian/IceCubesApp")
       }
     }
+    .listRowBackground(theme.primaryBackgroundColor)
   }
   
   private var signInButton: some View {

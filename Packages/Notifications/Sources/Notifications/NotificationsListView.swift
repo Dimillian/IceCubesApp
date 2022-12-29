@@ -6,6 +6,7 @@ import DesignSystem
 import Env
 
 public struct NotificationsListView: View {
+  @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
   @StateObject private var viewModel = NotificationsViewModel()
@@ -34,10 +35,10 @@ public struct NotificationsListView: View {
       .padding(.horizontal, DS.Constants.layoutPadding)
       .padding(.top, DS.Constants.layoutPadding)
     }
+    .background(theme.primaryBackgroundColor)
     .task {
       viewModel.client = client
       await viewModel.fetchNotifications()
-      await viewModel.clear()
     }
     .refreshable {
       await viewModel.fetchNotifications()
@@ -71,6 +72,8 @@ public struct NotificationsListView: View {
       }
       
       switch nextPageState {
+      case .none:
+        EmptyView()
       case .hasNextPage:
         loadingRow
           .onAppear {

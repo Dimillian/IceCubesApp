@@ -64,6 +64,7 @@ public struct AccountDetailView: View {
             makeTagsListView(tags: tags)
           }
         }
+        .background(theme.primaryBackgroundColor)
       }
     }
     .task {
@@ -196,9 +197,11 @@ public struct AccountDetailView: View {
             }
             .font(.body)
           }
-          .listRowBackground(field.verifiedAt != nil ? Color.green.opacity(0.15) : nil)
+          .listRowBackground(field.verifiedAt != nil ? Color.green.opacity(0.15) : theme.primaryBackgroundColor)
         }
       }
+      .scrollContentBackground(.hidden)
+      .background(theme.secondaryBackgroundColor)
       .navigationTitle("About")
     }
   }

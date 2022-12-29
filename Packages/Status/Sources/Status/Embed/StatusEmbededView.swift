@@ -4,6 +4,8 @@ import DesignSystem
 
 @MainActor
 public struct StatusEmbededView: View {
+  @EnvironmentObject private var theme: Theme
+  
   public let status: Status
   
   public init(status: Status) {
@@ -19,7 +21,7 @@ public struct StatusEmbededView: View {
       Spacer()
     }
     .padding(8)
-    .background(Color.gray.opacity(0.10))
+    .background(theme.secondaryBackgroundColor)
     .cornerRadius(4)
     .overlay(
       RoundedRectangle(cornerRadius: 4)

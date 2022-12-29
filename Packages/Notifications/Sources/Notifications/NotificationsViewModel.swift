@@ -7,7 +7,7 @@ import Models
 class NotificationsViewModel: ObservableObject {
   public enum State {
     public enum PagingState {
-      case hasNextPage, loadingNextPage
+      case none, hasNextPage, loadingNextPage
     }
     case loading
     case display(notifications: [Models.Notification], nextPageState: State.PagingState)
@@ -38,19 +38,23 @@ class NotificationsViewModel: ObservableObject {
   func fetchNotifications() async {
     guard let client else { return }
     do {
+      var nextPageState: State.PagingState = .hasNextPage
       if notifications.isEmpty {
         state = .loading
         notifications = try await client.get(endpoint: Notifications.notifications(sinceId: nil,
                                                                                    maxId: nil,
                                                                                    types: queryTypes))
+        nextPageState = notifications.count < 15 ? .none : .hasNextPage
       } else if let first = notifications.first {
         let newNotifications: [Models.Notification] =
         try await client.get(endpoint: Notifications.notifications(sinceId: first.id,
                                                                    maxId: nil,
                                                                    types: queryTypes))
+        nextPageState = newNotifications.count < 15 ? .none : .hasNextPage
         notifications.insert(contentsOf: newNotifications, at: 0)
       }
-      state = .display(notifications: notifications, nextPageState: .hasNextPage)
+      state = .display(notifications: notifications,
+                       nextPageState: notifications.isEmpty ? .none : nextPageState)
     } catch {
       state = .error(error: error)
     }
@@ -66,7 +70,7 @@ class NotificationsViewModel: ObservableObject {
                                                                  maxId: lastId,
                                                                  types: queryTypes))
       notifications.append(contentsOf: newNotifications)
-      state = .display(notifications: notifications, nextPageState: .hasNextPage)
+      state = .display(notifications: notifications, nextPageState: newNotifications.count < 15 ? .none : .hasNextPage)
     } catch {
       state = .error(error: error)
     }

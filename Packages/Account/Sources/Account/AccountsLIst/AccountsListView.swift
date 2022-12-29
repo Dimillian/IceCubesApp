@@ -3,8 +3,10 @@ import Network
 import Models
 import Env
 import Shimmer
+import DesignSystem
 
 public struct AccountsListView: View {
+  @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
   @StateObject private var viewModel: AccountsListViewModel
   @State private var didAppear: Bool = false
@@ -21,18 +23,21 @@ public struct AccountsListView: View {
           AccountsListRow(viewModel: .init(account: .placeholder(), relationShip: .placeholder()))
             .redacted(reason: .placeholder)
             .shimmering()
+            .listRowBackground(theme.primaryBackgroundColor)
         }
       case let .display(accounts, relationships, nextPageState):
         ForEach(accounts) { account in
           if let relationship = relationships.first(where: { $0.id == account.id }) {
             AccountsListRow(viewModel: .init(account: account,
                                              relationShip: relationship))
+            .listRowBackground(theme.primaryBackgroundColor)
           }
         }
         
         switch nextPageState {
         case .hasNextPage:
           loadingRow
+            .listRowBackground(theme.primaryBackgroundColor)
             .onAppear {
               Task {
                 await viewModel.fetchNextPage()
@@ -41,14 +46,18 @@ public struct AccountsListView: View {
           
         case .loadingNextPage:
           loadingRow
+            .listRowBackground(theme.primaryBackgroundColor)
         case .none:
           EmptyView()
         }
         
       case let .error(error):
         Text(error.localizedDescription)
+          .listRowBackground(theme.primaryBackgroundColor)
       }
     }
+    .scrollContentBackground(.hidden)
+    .background(theme.primaryBackgroundColor)
     .listStyle(.plain)
     .navigationTitle(viewModel.mode.title)
     .navigationBarTitleDisplayMode(.inline)

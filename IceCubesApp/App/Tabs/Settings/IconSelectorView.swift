@@ -1,4 +1,5 @@
 import SwiftUI
+import DesignSystem
 
 struct IconSelectorView: View {
   enum Icon: String, CaseIterable, Identifiable {
@@ -39,6 +40,7 @@ struct IconSelectorView: View {
     }
   }
   
+  @EnvironmentObject private var theme: Theme
   @State private var currentIcon = UIApplication.shared.alternateIconName ?? Icon.primary.rawValue
   
   private let columns = [GridItem(.adaptive(minimum: 125, maximum: 1024))]
@@ -76,5 +78,6 @@ struct IconSelectorView: View {
       .padding(6)
       .navigationTitle("Icons")
     }
+    .background(theme.primaryBackgroundColor)
   }
 }

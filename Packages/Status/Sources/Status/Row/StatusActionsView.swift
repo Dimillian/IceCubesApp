@@ -6,6 +6,7 @@ import DesignSystem
 
 struct StatusActionsView: View {
   @Environment(\.openURL) private var openURL
+  @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var routeurPath: RouterPath
   @ObservedObject var viewModel: StatusRowViewModel
   
@@ -41,14 +42,14 @@ struct StatusActionsView: View {
       }
     }
     
-    func tintColor(viewModel: StatusRowViewModel) -> Color? {
+    func tintColor(viewModel: StatusRowViewModel, theme: Theme) -> Color? {
       switch self {
       case .respond, .share:
         return nil
       case .favourite:
         return viewModel.isFavourited ? .yellow : nil
       case .boost:
-        return viewModel.isReblogged ? .brand : nil
+        return viewModel.isReblogged ? theme.tintColor : nil
       }
     }
   }
@@ -69,7 +70,7 @@ struct StatusActionsView: View {
             } label: {
               HStack(spacing: 2) {
                 Image(systemName: action.iconName(viewModel: viewModel))
-                  .foregroundColor(action.tintColor(viewModel: viewModel))
+                  .foregroundColor(action.tintColor(viewModel: viewModel, theme: theme))
                 if let count = action.count(viewModel: viewModel) {
                   Text("\(count)")
                     .font(.footnote)

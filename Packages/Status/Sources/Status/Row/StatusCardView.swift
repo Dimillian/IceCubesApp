@@ -2,8 +2,10 @@ import SwiftUI
 import Models
 import Shimmer
 import NukeUI
+import DesignSystem
 
 public struct StatusCardView: View {
+  @EnvironmentObject private var theme: Theme
   @Environment(\.openURL) private var openURL
   let card: Card
   
@@ -49,7 +51,7 @@ public struct StatusCardView: View {
           Spacer()
         }.padding(8)
       }
-      .background(Color.gray.opacity(0.15))
+      .background(theme.secondaryBackgroundColor)
       .cornerRadius(16)
       .overlay(
         RoundedRectangle(cornerRadius: 16)
