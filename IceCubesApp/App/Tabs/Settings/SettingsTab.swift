@@ -6,16 +6,14 @@ import Account
 import Models
 import DesignSystem
 
-struct SettingsTabs: View {
-  @Environment(\.openURL) private var openURL
+struct SettingsTabs: View {  
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var currentInstance: CurrentInstance
   @EnvironmentObject private var appAccountsManager: AppAccountsManager
   @EnvironmentObject private var theme: Theme
   
-  @State private var signInInProgress = false
-  @State private var signInServer = IceCubesApp.defaultServer
+  @State private var addAccountSheetPresented = false
   
   var body: some View {
     NavigationStack {
@@ -25,11 +23,6 @@ struct SettingsTabs: View {
         themeSection
         instanceSection
       }
-      .onOpenURL(perform: { url in
-        Task {
-          await continueSignIn(url: url)
-        }
-      })
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
       .navigationTitle(Text("Settings"))
@@ -37,10 +30,8 @@ struct SettingsTabs: View {
     }
     .task {
       if appAccountsManager.currentAccount.oauthToken != nil {
-        signInInProgress = true
         await currentAccount.fetchCurrentAccount()
         await currentInstance.fetchCurrentInstance()
-        signInInProgress = false
       }
     }
   }
@@ -60,10 +51,8 @@ struct SettingsTabs: View {
           }
         }
         signOutButton
-      } else {
-        TextField("Mastodon server", text: $signInServer)
-        signInButton
       }
+      addAccountButton
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
@@ -97,23 +86,7 @@ struct SettingsTabs: View {
   @ViewBuilder
   private var instanceSection: some View {
     if let instanceData = currentInstance.instance {
-      Section("Instance info") {
-        LabeledContent("Name", value: instanceData.title)
-        Text(instanceData.shortDescription)
-        LabeledContent("Email", value: instanceData.email)
-        LabeledContent("Version", value: instanceData.version)
-        LabeledContent("Users", value: "\(instanceData.stats.userCount)")
-        LabeledContent("Posts", value: "\(instanceData.stats.statusCount)")
-        LabeledContent("Domains", value: "\(instanceData.stats.domainCount)")
-      }
-      .listRowBackground(theme.primaryBackgroundColor)
-      
-      Section("Instance rules") {
-        ForEach(instanceData.rules) { rule in
-          Text(rule.text)
-        }
-      }
-      .listRowBackground(theme.primaryBackgroundColor)
+      InstanceInfoView(instance: instanceData)
     }
   }
   
@@ -138,18 +111,14 @@ struct SettingsTabs: View {
     .listRowBackground(theme.primaryBackgroundColor)
   }
   
-  private var signInButton: some View {
+  private var addAccountButton: some View {
     Button {
-      signInInProgress = true
-      Task {
-        await signIn()
-      }
+      addAccountSheetPresented.toggle()
     } label: {
-      if signInInProgress {
-        ProgressView()
-      } else {
-        Text("Sign in")
-      }
+      Text("Add account")
+    }
+    .sheet(isPresented: $addAccountSheetPresented) {
+      AddAccountView()
     }
   }
   
@@ -158,29 +127,6 @@ struct SettingsTabs: View {
       appAccountsManager.delete(account: appAccountsManager.currentAccount)
     } label: {
       Text("Sign out").foregroundColor(.red)
-    }
-
-  }
-  
-  private func signIn() async {
-    do {
-      client.server = signInServer
-      let oauthURL = try await client.oauthURL()
-      openURL(oauthURL)
-    } catch {
-      signInInProgress = false
-    }
-  }
-  
-  private func continueSignIn(url: URL) async {
-    do {
-      let oauthToken = try await client.continueOauthFlow(url: url)
-      appAccountsManager.add(account: AppAccount(server: client.server, oauthToken: oauthToken))
-      await currentAccount.fetchCurrentAccount()
-      await currentInstance.fetchCurrentInstance()
-      signInInProgress = false
-    } catch {
-      signInInProgress = false
     }
   }
 }
