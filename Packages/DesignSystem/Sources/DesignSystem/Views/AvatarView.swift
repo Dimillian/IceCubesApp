@@ -4,7 +4,7 @@ import NukeUI
 
 public struct AvatarView: View {
   public enum Size {
-    case account, status, embed, badge
+    case account, status, embed, badge, boost
     
     var size: CGSize {
       switch self {
@@ -16,12 +16,14 @@ public struct AvatarView: View {
         return .init(width: 34, height: 34)
       case .badge:
         return .init(width: 28, height: 28)
+      case .boost:
+        return .init(width: 12, height: 12)
       }
     }
     
     var cornerRadius: CGFloat {
       switch self {
-      case .badge:
+      case .badge, .boost:
         return size.width / 2
       default:
         return 4

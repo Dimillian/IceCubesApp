@@ -51,6 +51,7 @@ public struct StatusRowView: View {
     if viewModel.status.reblog != nil {
       HStack(spacing: 2) {
         Image(systemName:"arrow.left.arrow.right.circle.fill")
+        AvatarView(url: viewModel.status.account.avatar, size: .boost)
         viewModel.status.account.displayNameWithEmojis
         Text("boosted")
       }
