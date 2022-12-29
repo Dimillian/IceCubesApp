@@ -9,11 +9,15 @@ public struct StatusMediaPreviewView: View {
   @EnvironmentObject private var quickLook: QuickLook
   
   public let attachements: [MediaAttachement]
+  public let isCompact: Bool
 
   @State private var isQuickLookLoading: Bool = false
   @State private var width: CGFloat = 0
   
   private var imageMaxHeight: CGFloat {
+    if isCompact {
+      return 50
+    }
     if attachements.count == 1 {
       return 300
     }
@@ -21,6 +25,9 @@ public struct StatusMediaPreviewView: View {
   }
   
   private func size(for media: MediaAttachement) -> CGSize? {
+    if isCompact {
+      return .init(width: 50, height: 50)
+    }
     if let width = media.meta?.original.width,
        let height = media.meta?.original.height {
       return .init(width: CGFloat(width), height: CGFloat(height))
@@ -29,6 +36,9 @@ public struct StatusMediaPreviewView: View {
   }
   
   private func imageSize(from: CGSize, newWidth: CGFloat) -> CGSize {
+    if isCompact {
+      return .init(width: 50, height: 50)
+    }
     let ratio = newWidth / from.width
     let newHeight = from.height * ratio
     return .init(width: newWidth, height: newHeight)
@@ -44,21 +54,22 @@ public struct StatusMediaPreviewView: View {
             }
           }
       } else {
-        VStack {
+        if isCompact {
           HStack {
-            if let firstAttachement = attachements.first {
-              makePreview(attachement: firstAttachement)
-            }
-            if attachements.count > 1, let secondAttachement = attachements[1] {
-              makePreview(attachement: secondAttachement)
-            }
+            makeAttachementView(for: 0)
+            makeAttachementView(for: 1)
+            makeAttachementView(for: 2)
+            makeAttachementView(for: 3)
           }
-          HStack {
-            if attachements.count > 2, let secondAttachement = attachements[2] {
-              makePreview(attachement: secondAttachement)
+        } else {
+          VStack {
+            HStack {
+              makeAttachementView(for: 0)
+              makeAttachementView(for: 1)
             }
-            if attachements.count > 3, let secondAttachement = attachements[3] {
-              makePreview(attachement: secondAttachement)
+            HStack {
+              makeAttachementView(for: 2)
+              makeAttachementView(for: 3)
             }
           }
         }
@@ -69,6 +80,13 @@ public struct StatusMediaPreviewView: View {
         quickLookLoadingView
           .transition(.opacity)
       }
+    }
+  }
+  
+  @ViewBuilder
+  private func makeAttachementView(for index: Int) -> some View {
+    if attachements.count > index {
+      makePreview(attachement: attachements[index])
     }
   }
   
@@ -134,20 +152,21 @@ public struct StatusMediaPreviewView: View {
                 RoundedRectangle(cornerRadius: 4)
                   .fill(Color.gray)
                   .frame(maxHeight: imageMaxHeight)
-                  .frame(width: proxy.frame(in: .local).width)
+                  .frame(width: isCompact ? imageMaxHeight : proxy.frame(in: .local).width)
                   .shimmering()
               }
             }
-            .frame(width: proxy.frame(in: .local).width)
+            .frame(width: isCompact ? imageMaxHeight : proxy.frame(in: .local).width)
             .frame(height: imageMaxHeight)
           case .gifv:
             if let url = attachement.url {
               VideoPlayerView(viewModel: .init(url: url))
-                .frame(width: proxy.frame(in: .local).width)
+                .frame(width: isCompact ? imageMaxHeight :  proxy.frame(in: .local).width)
                 .frame(height: imageMaxHeight)
             }
           }
         }
+        .frame(width: isCompact ? imageMaxHeight : nil)
         .frame(height: imageMaxHeight)
       }
       .onTapGesture {

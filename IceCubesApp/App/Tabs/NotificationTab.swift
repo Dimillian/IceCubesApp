@@ -15,6 +15,9 @@ struct NotificationsTab: View {
       NotificationsListView()
         .withAppRouteur()
         .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
+        .toolbar {
+          statusEditorToolbarItem(routeurPath: routeurPath)
+        }
     }
     .onAppear {
       routeurPath.client = client

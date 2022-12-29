@@ -6,7 +6,7 @@ import Account
 import Models
 import DesignSystem
 
-struct SettingsTabs: View {  
+struct SettingsTabs: View {
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var currentInstance: CurrentInstance

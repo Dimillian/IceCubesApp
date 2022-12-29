@@ -17,14 +17,8 @@ struct TimelineTab: View {
         .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
         .toolbar {
           if client.isAuth {
+            statusEditorToolbarItem(routeurPath: routeurPath)
             ToolbarItem(placement: .navigationBarLeading) {
-              Button {
-                routeurPath.presentedSheet = .newStatusEditor
-              } label: {
-                Image(systemName: "square.and.pencil")
-              }
-            }
-            ToolbarItem(placement: .navigationBarTrailing) {
               timelineFilterButton
             }
           }

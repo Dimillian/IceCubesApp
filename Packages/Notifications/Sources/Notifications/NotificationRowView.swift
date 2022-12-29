@@ -74,14 +74,10 @@ struct NotificationRowView: View {
   @ViewBuilder
   private func makeContent(type: Models.Notification.NotificationType) -> some View {
     if let status = notification.status {
-      StatusRowView(viewModel: .init(status: status, isEmbed: true))
-        .padding(8)
-        .background(theme.secondaryBackgroundColor)
-        .overlay(
-          RoundedRectangle(cornerRadius: 4)
-            .stroke(.gray.opacity(0.35), lineWidth: 1)
-        )
-        .padding(.top, 8)
+      HStack {
+        StatusRowView(viewModel: .init(status: status, isCompact: true))
+        Spacer()
+      }
     } else {
       Group {
         Text("@\(notification.account.acct)")

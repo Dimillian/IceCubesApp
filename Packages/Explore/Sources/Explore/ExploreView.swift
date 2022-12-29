@@ -58,7 +58,7 @@ public struct ExploreView: View {
   
   private var loadingView: some View {
     ForEach(Status.placeholders()) { status in
-      StatusRowView(viewModel: .init(status: status, isEmbed: false))
+      StatusRowView(viewModel: .init(status: status, isCompact: false))
         .padding(.vertical, 8)
         .redacted(reason: .placeholder)
         .shimmering()
@@ -162,7 +162,7 @@ public struct ExploreView: View {
     Section("Trending Posts") {
       ForEach(viewModel.trendingStatuses
         .prefix(upTo: viewModel.trendingStatuses.count > 3 ? 3 : viewModel.trendingStatuses.count)) { status in
-        StatusRowView(viewModel: .init(status: status, isEmbed: false))
+        StatusRowView(viewModel: .init(status: status, isCompact: false))
             .listRowBackground(theme.primaryBackgroundColor)
           .padding(.vertical, 8)
       }
@@ -170,7 +170,7 @@ public struct ExploreView: View {
       NavigationLink {
         List {
           ForEach(viewModel.trendingStatuses) { status in
-            StatusRowView(viewModel: .init(status: status, isEmbed: false))
+            StatusRowView(viewModel: .init(status: status, isCompact: false))
               .listRowBackground(theme.primaryBackgroundColor)
               .padding(.vertical, 8)
           }

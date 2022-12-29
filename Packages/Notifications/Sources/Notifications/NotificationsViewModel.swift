@@ -50,7 +50,7 @@ class NotificationsViewModel: ObservableObject {
         try await client.get(endpoint: Notifications.notifications(sinceId: first.id,
                                                                    maxId: nil,
                                                                    types: queryTypes))
-        nextPageState = newNotifications.count < 15 ? .none : .hasNextPage
+        nextPageState = notifications.count < 15 ? .none : .hasNextPage
         notifications.insert(contentsOf: newNotifications, at: 0)
       }
       state = .display(notifications: notifications,

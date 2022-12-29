@@ -16,6 +16,9 @@ struct ExploreTab: View {
       ExploreView()
         .withAppRouteur()
         .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
+        .toolbar {
+          statusEditorToolbarItem(routeurPath: routeurPath)
+        }
     }
     .environmentObject(routeurPath)
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in

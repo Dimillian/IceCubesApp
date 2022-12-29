@@ -17,6 +17,9 @@ struct AccountTab: View {
         AccountDetailView(account: account)
           .withAppRouteur()
           .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
+          .toolbar {
+            statusEditorToolbarItem(routeurPath: routeurPath)
+          }
       } else {
         AccountDetailView(account: .placeholder())
           .redacted(reason: .placeholder)

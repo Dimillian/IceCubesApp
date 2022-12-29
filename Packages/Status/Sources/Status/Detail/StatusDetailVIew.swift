@@ -25,27 +25,27 @@ public struct StatusDetailView: View {
           switch viewModel.state {
           case .loading:
             ForEach(Status.placeholders()) { status in
-              StatusRowView(viewModel: .init(status: status, isEmbed: false))
+              StatusRowView(viewModel: .init(status: status, isCompact: false))
                 .redacted(reason: .placeholder)
                 .shimmering()
             }
           case let.display(status, context):
             if !context.ancestors.isEmpty {
               ForEach(context.ancestors) { ancestor in
-                StatusRowView(viewModel: .init(status: ancestor, isEmbed: false))
+                StatusRowView(viewModel: .init(status: ancestor, isCompact: false))
                 Divider()
                   .padding(.vertical, DS.Constants.dividerPadding)
               }
             }
             StatusRowView(viewModel: .init(status: status,
-                                           isEmbed: false,
+                                           isCompact: false,
                                            isFocused: true))
               .id(status.id)
             Divider()
               .padding(.bottom, DS.Constants.dividerPadding * 2)
             if !context.descendants.isEmpty {
               ForEach(context.descendants) { descendant in
-                StatusRowView(viewModel: .init(status: descendant, isEmbed: false))
+                StatusRowView(viewModel: .init(status: descendant, isCompact: false))
                 Divider()
                   .padding(.vertical, DS.Constants.dividerPadding)
               }

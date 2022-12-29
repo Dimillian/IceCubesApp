@@ -5,7 +5,7 @@ import Network
 @MainActor
 public class StatusRowViewModel: ObservableObject {
   let status: Status
-  let isEmbed: Bool
+  let isCompact: Bool
   let isFocused: Bool
   
   @Published var favouritesCount: Int
@@ -19,10 +19,10 @@ public class StatusRowViewModel: ObservableObject {
   var client: Client?
   
   public init(status: Status,
-              isEmbed: Bool = false,
+              isCompact: Bool = false,
               isFocused: Bool = false) {
     self.status = status
-    self.isEmbed = isEmbed
+    self.isCompact = isCompact
     self.isFocused = isFocused
     if let reblog = status.reblog {
       self.isFavourited = reblog.favourited == true

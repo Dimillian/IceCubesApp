@@ -18,12 +18,12 @@ public struct StatusRowView: View {
   
   public var body: some View {
     VStack(alignment: .leading) {
-      if !viewModel.isEmbed {
+      if !viewModel.isCompact {
         reblogView
         replyView
       }
       statusView
-      if !viewModel.isEmbed {
+      if !viewModel.isCompact {
         StatusActionsView(viewModel: viewModel)
           .padding(.vertical, 8)
           .tint(viewModel.isFocused ? theme.tintColor : .gray)
@@ -35,7 +35,7 @@ public struct StatusRowView: View {
     }
     .onAppear {
       viewModel.client = client
-      if !viewModel.isEmbed {
+      if !viewModel.isCompact {
         Task {
           await viewModel.loadEmbededStatus()
         }
@@ -85,7 +85,7 @@ public struct StatusRowView: View {
   private var statusView: some View {
     VStack(alignment: .leading, spacing: 8) {
       if let status: AnyStatus = viewModel.status.reblog ?? viewModel.status {
-        if !viewModel.isEmbed {
+        if !viewModel.isCompact {
           HStack(alignment: .top) {
             Button {
               routeurPath.navigate(to: .accountDetailWithAccount(account: status.account))
@@ -122,7 +122,7 @@ public struct StatusRowView: View {
             routeurPath.handleStatus(status: status, url: url)
           })
         
-        if !viewModel.isEmbed, let embed = viewModel.embededStatus {
+        if !viewModel.isCompact, let embed = viewModel.embededStatus {
           StatusEmbededView(status: embed)
         }
         
@@ -131,14 +131,10 @@ public struct StatusRowView: View {
         }
         
         if !status.mediaAttachments.isEmpty {
-          if viewModel.isEmbed {
-            Image(systemName: "paperclip")
-          } else {
-            StatusMediaPreviewView(attachements: status.mediaAttachments)
-              .padding(.vertical, 4)
-          }
+          StatusMediaPreviewView(attachements: status.mediaAttachments, isCompact: viewModel.isCompact)
+            .padding(.vertical, 4)
         }
-        if let card = status.card, !viewModel.isEmbed {
+        if let card = status.card, !viewModel.isCompact {
           StatusCardView(card: card)
         }
       }

@@ -16,7 +16,7 @@ public struct StatusEmbededView: View {
     HStack {
       VStack(alignment: .leading) {
         makeAccountView(account: status.reblog?.account ?? status.account)
-        StatusRowView(viewModel: .init(status: status, isEmbed: true))
+        StatusRowView(viewModel: .init(status: status, isCompact: true))
       }
       Spacer()
     }
