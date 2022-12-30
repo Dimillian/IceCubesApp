@@ -2,15 +2,15 @@ import SwiftUI
 
 extension Color {
   public static var brand: Color {
-    Color(red: 187/255, green: 59/255, blue: 226/255)
+    Color("brand", bundle: .module)
   }
   
   public static var primaryBackground: Color {
-    Color(red: 16/255, green: 21/255, blue: 35/255)
+    Color("primaryBackground", bundle: .module)
   }
   
   public static var secondaryBackground: Color {
-    Color(red: 30/255, green: 35/255, blue: 62/255)
+    Color("secondaryBackground", bundle: .module)
   }
   
   public static var label: Color {
