@@ -92,7 +92,14 @@ public struct AccountDetailView: View {
       }
     }
     .edgesIgnoringSafeArea(.top)
-    .navigationTitle(Text(scrollOffset < -200 ? viewModel.title : ""))
+    .navigationBarTitleDisplayMode(.inline)
+    .toolbar {
+        ToolbarItem(placement: .principal) {
+            if scrollOffset < -200 {
+                currentAccount.account?.displayNameWithEmojis
+            }
+        }
+    }
   }
   
   @ViewBuilder
