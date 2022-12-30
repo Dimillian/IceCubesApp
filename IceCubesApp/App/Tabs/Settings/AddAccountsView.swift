@@ -24,8 +24,11 @@ struct AddAccountView: View {
   var body: some View {
     NavigationStack {
       Form {
-        TextField("Instance url", text: $instanceName)
+        TextField("Instance URL", text: $instanceName)
           .listRowBackground(theme.primaryBackgroundColor)
+          .keyboardType(.URL)
+          .textContentType(.URL)
+          .textInputAutocapitalization(.never)
         if let instance {
           Button {
             isSigninIn = true
