@@ -46,7 +46,6 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   }
   @Published var statusesState: StatusesState = .loading
   
-  @Published var title: String = ""
   @Published var relationship: Relationshionship?
   @Published var favourites: [Status] = []
   private var favouritesNextPage: LinkHandler?
@@ -89,7 +88,6 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
       self.featuredTags = try await featuredTags
       self.featuredTags.sort { $0.statusesCountInt > $1.statusesCountInt }
       self.fields = loadedAccount.fields
-      self.title = loadedAccount.displayName
       if isCurrentUser {
         self.followedTags = try await followedTags
       } else {
