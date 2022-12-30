@@ -35,7 +35,7 @@ struct SettingsTabs: View {
   }
   
   private var accountsSection: some View {
-    Section("Account") {
+    Section("Accounts") {
       ForEach(appAccountsManager.availableAccounts) { account in
         HStack {
           AppAccountView(viewModel: .init(appAccount: account))

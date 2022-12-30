@@ -31,7 +31,7 @@ extension HTMLString {
       var ids: [Int] = []
       for link in links {
         let href = try link.attr("href")
-        if href.contains(instance),
+        if href.contains(instance.lowercased()),
            let url = URL(string: href),
             let statusId = Int(url.lastPathComponent) {
           ids.append(statusId)
@@ -47,8 +47,7 @@ extension HTMLString {
     do {
       // Add space between hashtags and mentions that follow each other
       let markdown = asMarkdown
-        .replacingOccurrences(of: ")[#", with: ") [#")
-        .replacingOccurrences(of: ")[@", with: ") [@")
+        .replacingOccurrences(of: ")[", with: ") [")
       let options = AttributedString.MarkdownParsingOptions(allowsExtendedAttributes: true,
                                                             interpretedSyntax: .inlineOnlyPreservingWhitespace)
       return try AttributedString(markdown: markdown, options: options)

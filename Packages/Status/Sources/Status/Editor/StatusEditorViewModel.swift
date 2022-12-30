@@ -86,6 +86,14 @@ public class StatusEditorViewModel: ObservableObject {
     }
   }
   
+  func localURLforStatus(status: Status) -> URL? {
+    guard let server = client?.server else { return nil }
+    if status.url?.host == server.lowercased() {
+      return status.url
+    }
+    return URL(string: "https://\(server.lowercased())/@\(status.account.acct)/\(status.id)")
+  }
+  
   func prepareStatusText() {
     switch mode {
     case let .replyTo(status):
@@ -99,7 +107,7 @@ public class StatusEditorViewModel: ObservableObject {
       mediasImages = status.mediaAttachments.map{ .init(image: nil, mediaAttachement: $0, error: nil )}
     case let .quote(status):
       self.embededStatus = status
-      if let url = status.reblog?.url ?? status.url {
+      if let url = localURLforStatus(status: status) {
         statusText = .init(string: "\n\nFrom: @\(status.reblog?.account.acct ?? status.account.acct)\n\(url)")
         selectedRange = .init(location: 0, length: 0)
       }
@@ -148,7 +156,9 @@ public class StatusEditorViewModel: ObservableObject {
   }
   
   private func checkEmbed() {
-    if let embededStatus, !statusText.string.contains(embededStatus.reblog?.id ?? embededStatus.id) {
+    if let embededStatus,
+        let url = localURLforStatus(status: embededStatus),
+        !statusText.string.contains(url.absoluteString) {
       self.embededStatus = nil
       self.mode = .new
     }
