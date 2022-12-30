@@ -18,12 +18,10 @@ struct AppAccountView: View {
         }
       }
       VStack(alignment: .leading) {
-        Text(viewModel.appAccount.server)
-          .font(.headline)
         if let account = viewModel.account {
-          Text(account.displayName)
-          Text(account.username)
-            .font(.footnote)
+          account.displayNameWithEmojis
+          Text("\(account.username)@\(viewModel.appAccount.server)")
+            .font(.subheadline)
             .foregroundColor(.gray)
         }
       }
