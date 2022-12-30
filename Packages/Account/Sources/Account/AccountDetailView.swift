@@ -94,11 +94,16 @@ public struct AccountDetailView: View {
     .edgesIgnoringSafeArea(.top)
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
-        ToolbarItem(placement: .principal) {
-            if scrollOffset < -200 {
-                currentAccount.account?.displayNameWithEmojis
-            }
+      ToolbarItem(placement: .principal) {
+        if scrollOffset < -200 {
+          switch viewModel.accountState {
+          case let .data(account):
+            account.displayNameWithEmojis.font(.headline)
+          default:
+            EmptyView()
+          }
         }
+      }
     }
   }
   
