@@ -11,6 +11,7 @@ class VideoPlayerViewModel: ObservableObject {
   
   func preparePlayer() {
     player = .init(url: url)
+    player?.isMuted = true
     player?.play()
     guard let player else { return }
     NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
