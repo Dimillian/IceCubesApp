@@ -126,8 +126,6 @@ struct AddAccountView: View {
     do {
       let oauthToken = try await client.continueOauthFlow(url: url)
       appAccountsManager.add(account: AppAccount(server: client.server, oauthToken: oauthToken))
-      await currentAccount.fetchCurrentAccount()
-      await currentInstance.fetchCurrentInstance()
       isSigninIn = false
       dismiss()
     } catch {

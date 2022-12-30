@@ -34,8 +34,8 @@ class AppAccountsManager: ObservableObject {
   func add(account: AppAccount) {
     do {
       try account.save()
-      currentAccount = account
       availableAccounts.append(account)
+      currentAccount = account
     } catch { }
   }
   
