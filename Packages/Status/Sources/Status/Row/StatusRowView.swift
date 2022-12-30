@@ -3,6 +3,7 @@ import Models
 import Env
 import DesignSystem
 import Network
+import Shimmer
 
 public struct StatusRowView: View {
   @Environment(\.redactionReasons) private var reasons
@@ -35,7 +36,7 @@ public struct StatusRowView: View {
     }
     .onAppear {
       viewModel.client = client
-      if !viewModel.isCompact {
+      if !viewModel.isCompact, viewModel.embededStatus == nil {
         Task {
           await viewModel.loadEmbededStatus()
         }
@@ -122,8 +123,14 @@ public struct StatusRowView: View {
             routeurPath.handleStatus(status: status, url: url)
           })
         
-        if !viewModel.isCompact, let embed = viewModel.embededStatus {
-          StatusEmbededView(status: embed)
+        if !reasons.contains(.placeholder) {
+          if !viewModel.isCompact, !viewModel.isEmbedLoading, let embed = viewModel.embededStatus {
+            StatusEmbededView(status: embed)
+          } else if viewModel.isEmbedLoading, !viewModel.isCompact {
+            StatusEmbededView(status: .placeholder())
+              .redacted(reason: .placeholder)
+              .shimmering()
+          }
         }
         
         if let poll = status.poll {
@@ -134,7 +141,7 @@ public struct StatusRowView: View {
           StatusMediaPreviewView(attachements: status.mediaAttachments, isCompact: viewModel.isCompact)
             .padding(.vertical, 4)
         }
-        if let card = status.card, !viewModel.isCompact, viewModel.embededStatus?.url != status.card?.url {
+        if let card = status.card, viewModel.embededStatus?.url != status.card?.url, !viewModel.isEmbedLoading {
           StatusCardView(card: card)
         }
       }

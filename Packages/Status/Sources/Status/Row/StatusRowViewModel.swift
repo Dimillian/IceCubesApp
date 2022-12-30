@@ -15,6 +15,7 @@ public class StatusRowViewModel: ObservableObject {
   @Published var repliesCount: Int
   @Published var embededStatus: Status?
   @Published var displaySpoiler: Bool = false
+  @Published var isEmbedLoading: Bool = true
   
   var client: Client?
   
@@ -41,8 +42,14 @@ public class StatusRowViewModel: ObservableObject {
     guard let client,
           let urls = status.content.findStatusesURLs(),
           !urls.isEmpty,
-          let url = urls.first else { return }
+          let url = urls.first else {
+      isEmbedLoading = false
+      return
+    }
     do {
+      withAnimation {
+        isEmbedLoading = true
+      }
       if url.absoluteString.contains(client.server), let id = Int(url.lastPathComponent) {
         self.embededStatus = try await client.get(endpoint: Statuses.status(id: String(id)))
       } else {
@@ -52,7 +59,12 @@ public class StatusRowViewModel: ObservableObject {
                                                             forceVersion: .v2)
         self.embededStatus = results.statuses.first
       }
-    } catch { }
+      withAnimation {
+        isEmbedLoading = false
+      }
+    } catch {
+      isEmbedLoading = false
+    }
   }
   
   func favourite() async {
