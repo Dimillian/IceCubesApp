@@ -13,6 +13,24 @@
     <img src="Images/image6.png" width="300" />
 </p>
 
+For contributors and myself, here is a todo list of features that could be added (while giving you a good idea of what's already done if not in this list, the app is quite complete already!)
+
+- [ ] DM / Conversations
+- [ ] Display images alt
+- [ ] Editor: Post image alts
+- [ ] Editor: Add / Edit polls
+- [ ] Editor: Support video tyope
+- [ ] Editor: Open camera
+- [ ] Editor: Autocomplete for mentions / hashtags
+- [ ] Better settings tab
+- [ ] Edit profile
+- [ ] Light theme
+- [ ] More themes
+- [ ] Honor & display server side features (filter, default visibility, etc...)
+- [ ] Open remote status locally
+- [ ] More context menu everywhere
+
+
 IceCubesApp is an open source application for accessing the decentralized social network Mastodon! It's built entirely in SwiftUI, making it fast, lightweight, and easy to use.
 
 You can connect to any Mastodon instance and browse your timeline, interact with other users, and post updates and media.
