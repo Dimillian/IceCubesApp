@@ -4,7 +4,18 @@ import Network
 
 @MainActor
 class ExploreViewModel: ObservableObject {
-  var client: Client?
+  var client: Client? {
+    didSet {
+      if oldValue != client {
+        isLoaded = false
+        results = [:]
+        trendingTags = []
+        trendingLinks = []
+        trendingStatuses = []
+        suggestedAccounts = []
+      }
+    }
+  }
   
   enum Token: String, Identifiable {
     case user = "@user"
@@ -56,8 +67,6 @@ class ExploreViewModel: ObservableObject {
   func fetchTrending() async {
     guard let client else { return }
     do {
-      isLoaded = false
-      
       async let suggestedAccounts: [Account] = client.get(endpoint: Accounts.suggestions)
       async let trendingTags: [Tag] = client.get(endpoint: Trends.tags)
       async let trendingStatuses: [Status] = client.get(endpoint: Trends.statuses)
@@ -71,7 +80,9 @@ class ExploreViewModel: ObservableObject {
       self.suggestedAccountsRelationShips = try await client.get(endpoint: Accounts.relationships(ids: self.suggestedAccounts.map{ $0.id }))
       
       isLoaded = true
-    } catch { }
+    } catch {
+      isLoaded = true
+    }
   }
   
   func search() {

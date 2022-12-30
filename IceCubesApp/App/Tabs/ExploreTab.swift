@@ -7,6 +7,7 @@ import Env
 import Network
 
 struct ExploreTab: View {
+  @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var client: Client
   @StateObject private var routeurPath = RouterPath()
   @Binding var popToRootTab: Tab

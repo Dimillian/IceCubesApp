@@ -35,7 +35,6 @@ public struct ExploreView: View {
     }
     .task {
       viewModel.client = client
-      guard !viewModel.isLoaded else { return }
       await viewModel.fetchTrending()
     }
     .refreshable {

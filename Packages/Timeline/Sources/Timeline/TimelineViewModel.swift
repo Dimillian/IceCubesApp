@@ -6,7 +6,13 @@ import Env
 
 @MainActor
 class TimelineViewModel: ObservableObject, StatusesFetcher {
-  var client: Client?
+  var client: Client? {
+    didSet {
+      if oldValue != client {
+        statuses = []
+      }
+    }
+  }
   
   // Internal source of truth for a timeline.
   private var statuses: [Status] = []
@@ -66,14 +72,14 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
         pendingStatuses = []
         statusesState = .loading
         statuses = try await client.get(endpoint: timeline.endpoint(sinceId: nil, maxId: nil, minId: nil))
-        statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+        statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
       } else if let first = statuses.first {
         var newStatuses: [Status] = await fetchNewPages(minId: first.id, maxPages: 10)
         if userIntent || !pendingStatusesEnabled {
           pendingStatuses = []
           statuses.insert(contentsOf: newStatuses, at: 0)
           withAnimation {
-            statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+            statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
           }
         } else {
           newStatuses = newStatuses.filter { status in

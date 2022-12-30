@@ -19,7 +19,13 @@ class NotificationsViewModel: ObservableObject {
     case mentions = "Mentions"
   }
   
-  var client: Client?
+  var client: Client? {
+    didSet {
+      if oldValue != client {
+        notifications = []
+      }
+    }
+  }
   @Published var state: State = .loading
   @Published var tab: Tab = .all {
     didSet {

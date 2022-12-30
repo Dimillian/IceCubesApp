@@ -12,6 +12,8 @@
 		9F2B92F6295AE04800DE16D0 /* Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92F5295AE04800DE16D0 /* Tabs.swift */; };
 		9F2B92FA295DA7D700DE16D0 /* AddAccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92F9295DA7D700DE16D0 /* AddAccountsView.swift */; };
 		9F2B92FC295DA94500DE16D0 /* InstanceInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92FB295DA94500DE16D0 /* InstanceInfoView.swift */; };
+		9F2B92FF295EB87100DE16D0 /* AppAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92FE295EB87100DE16D0 /* AppAccountView.swift */; };
+		9F2B9301295EB8A100DE16D0 /* AppAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B9300295EB8A100DE16D0 /* AppAccountViewModel.swift */; };
 		9F35DB44294F9A7D00B3281A /* Status in Frameworks */ = {isa = PBXBuildFile; productRef = 9F35DB43294F9A7D00B3281A /* Status */; };
 		9F35DB4729506F6600B3281A /* NotificationTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F35DB4629506F6600B3281A /* NotificationTab.swift */; };
 		9F35DB4A29506FA100B3281A /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 9F35DB4929506FA100B3281A /* Notifications */; };
@@ -40,6 +42,8 @@
 		9F2B92F5295AE04800DE16D0 /* Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabs.swift; sourceTree = "<group>"; };
 		9F2B92F9295DA7D700DE16D0 /* AddAccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountsView.swift; sourceTree = "<group>"; };
 		9F2B92FB295DA94500DE16D0 /* InstanceInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceInfoView.swift; sourceTree = "<group>"; };
+		9F2B92FE295EB87100DE16D0 /* AppAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAccountView.swift; sourceTree = "<group>"; };
+		9F2B9300295EB8A100DE16D0 /* AppAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAccountViewModel.swift; sourceTree = "<group>"; };
 		9F35DB42294F9A2900B3281A /* Status */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Status; path = Packages/Status; sourceTree = "<group>"; };
 		9F35DB45294FA04C00B3281A /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DesignSystem; path = Packages/DesignSystem; sourceTree = "<group>"; };
 		9F35DB4629506F6600B3281A /* NotificationTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTab.swift; sourceTree = "<group>"; };
@@ -120,6 +124,8 @@
 			children = (
 				9FAE4AD029379AD600772766 /* AppAccount.swift */,
 				9FAE4AD22937A0C600772766 /* AppAccountsManager.swift */,
+				9F2B92FE295EB87100DE16D0 /* AppAccountView.swift */,
+				9F2B9300295EB8A100DE16D0 /* AppAccountViewModel.swift */,
 			);
 			path = AppAccounts;
 			sourceTree = "<group>";
@@ -269,9 +275,11 @@
 				9F35DB4C2952005C00B3281A /* AccountTab.swift in Sources */,
 				9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */,
 				9FAE4AD32937A0C600772766 /* AppAccountsManager.swift in Sources */,
+				9F2B92FF295EB87100DE16D0 /* AppAccountView.swift in Sources */,
 				9F2B92F6295AE04800DE16D0 /* Tabs.swift in Sources */,
 				9F398AB329360A4C00A889F2 /* TimelineTab.swift in Sources */,
 				9F398AA62935FE8A00A889F2 /* AppRouteur.swift in Sources */,
+				9F2B9301295EB8A100DE16D0 /* AppAccountViewModel.swift in Sources */,
 				9FBFE63D292A715500C250E9 /* IceCubesApp.swift in Sources */,
 				9F2B92FA295DA7D700DE16D0 /* AddAccountsView.swift in Sources */,
 				9F35DB4729506F6600B3281A /* NotificationTab.swift in Sources */,

@@ -4,9 +4,13 @@ import Network
 import KeychainSwift
 import Models
 
-struct AppAccount: Codable {
+struct AppAccount: Codable, Identifiable {
   let server: String
   let oauthToken: OauthToken?
+  
+  var id: String {
+    key
+  }
   
   var key: String {
     if let oauthToken {

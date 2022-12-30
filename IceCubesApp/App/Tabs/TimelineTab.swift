@@ -5,6 +5,7 @@ import Network
 import Combine
 
 struct TimelineTab: View {
+  @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var client: Client
   @StateObject private var routeurPath = RouterPath()
   @Binding var popToRootTab: Tab
@@ -23,6 +24,7 @@ struct TimelineTab: View {
             }
           }
         }
+        .id(currentAccount.account?.id)
     }
     .onAppear {
       routeurPath.client = client

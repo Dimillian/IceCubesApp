@@ -20,6 +20,7 @@ struct AccountTab: View {
           .toolbar {
             statusEditorToolbarItem(routeurPath: routeurPath)
           }
+          .id(account.id)
       } else {
         AccountDetailView(account: .placeholder())
           .redacted(reason: .placeholder)

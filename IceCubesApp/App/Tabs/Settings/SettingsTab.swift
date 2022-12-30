@@ -8,7 +8,6 @@ import DesignSystem
 
 struct SettingsTabs: View {
   @EnvironmentObject private var client: Client
-  @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var currentInstance: CurrentInstance
   @EnvironmentObject private var appAccountsManager: AppAccountsManager
   @EnvironmentObject private var theme: Theme
@@ -30,7 +29,6 @@ struct SettingsTabs: View {
     }
     .task {
       if appAccountsManager.currentAccount.oauthToken != nil {
-        await currentAccount.fetchCurrentAccount()
         await currentInstance.fetchCurrentInstance()
       }
     }
@@ -38,19 +36,21 @@ struct SettingsTabs: View {
   
   private var accountsSection: some View {
     Section("Account") {
-      if let accountData = currentAccount.account {
+      ForEach(appAccountsManager.availableAccounts) { account in
         HStack {
-          AvatarView(url: accountData.avatar)
-          VStack(alignment: .leading) {
-            Text(appAccountsManager.currentAccount.server)
-              .font(.headline)
-            Text(accountData.displayName)
-            Text(accountData.username)
-              .font(.footnote)
-              .foregroundColor(.gray)
+          AppAccountView(viewModel: .init(appAccount: account))
+        }
+        .onTapGesture {
+          withAnimation {
+            appAccountsManager.currentAccount = account
           }
         }
-        signOutButton
+      }
+      .onDelete { indexSet in
+        if let index = indexSet.first {
+          let account = appAccountsManager.availableAccounts[index]
+          appAccountsManager.delete(account: account)
+        }
       }
       addAccountButton
     }

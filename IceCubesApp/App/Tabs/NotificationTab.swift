@@ -7,6 +7,7 @@ import Notifications
 struct NotificationsTab: View {
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var watcher: StreamWatcher
+  @EnvironmentObject private var currentAccount: CurrentAccount
   @StateObject private var routeurPath = RouterPath()
   @Binding var popToRootTab: Tab
   
@@ -18,6 +19,7 @@ struct NotificationsTab: View {
         .toolbar {
           statusEditorToolbarItem(routeurPath: routeurPath)
         }
+        .id(currentAccount.account?.id)
     }
     .onAppear {
       routeurPath.client = client

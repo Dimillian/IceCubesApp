@@ -85,6 +85,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
       async let featuredTags: [FeaturedTag] = client.get(endpoint: Accounts.featuredTags(id: accountId))
       async let familliarFollowers: [FamilliarAccounts] = client.get(endpoint: Accounts.familiarFollowers(withAccount: accountId))
       let loadedAccount = try await account
+      self.account = loadedAccount
       self.featuredTags = try await featuredTags
       self.featuredTags.sort { $0.statusesCountInt > $1.statusesCountInt }
       self.fields = loadedAccount.fields
@@ -96,10 +97,13 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
         self.relationship = relationships.first
         self.familliarFollowers = try await familliarFollowers.first?.accounts ?? []
       }
-      self.account = loadedAccount
       accountState = .data(account: loadedAccount)
     } catch {
-      accountState = .error(error: error)
+      if let account {
+        accountState = .data(account: account)
+      } else {
+        accountState = .error(error: error)
+      }
     }
   }
   
