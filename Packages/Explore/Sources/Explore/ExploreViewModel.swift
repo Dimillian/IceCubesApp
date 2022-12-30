@@ -20,7 +20,7 @@ class ExploreViewModel: ObservableObject {
   enum Token: String, Identifiable {
     case user = "@user"
     case statuses = "@posts"
-    case tag = "#hasgtag"
+    case tag = "#hashtag"
     
     var id: String {
       rawValue
