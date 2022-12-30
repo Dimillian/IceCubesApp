@@ -48,6 +48,7 @@ public struct StatusEditorView: View {
       }
       .onAppear {
         viewModel.client = client
+        viewModel.currentAccount = currentAccount.account
         viewModel.prepareStatusText()
         if !client.isAuth {
           dismiss()

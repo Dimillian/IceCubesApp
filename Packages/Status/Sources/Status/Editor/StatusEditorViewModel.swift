@@ -17,6 +17,7 @@ public class StatusEditorViewModel: ObservableObject {
   let generator = UINotificationFeedbackGenerator()
   
   var client: Client?
+  var currentAccount: Account?
   
   @Published var statusText = NSMutableAttributedString(string: "") {
     didSet {
@@ -40,6 +41,7 @@ public class StatusEditorViewModel: ObservableObject {
     }
   }
   @Published var mediasImages: [ImageContainer] = []
+  @Published var replyToStatus: Status?
   @Published var embededStatus: Status?
   
   @Published var visibility: Models.Visibility = .pub
@@ -93,8 +95,14 @@ public class StatusEditorViewModel: ObservableObject {
   func prepareStatusText() {
     switch mode {
     case let .replyTo(status):
-      statusText = .init(string: "@\(status.reblog?.account.acct ?? status.account.acct) ")
-      selectedRange = .init(location: statusText.string.utf16.count, length: 0)
+      var mentionString = "@\(status.reblog?.account.acct ?? status.account.acct)"
+      for mention in status.mentions where mention.acct != currentAccount?.acct {
+        mentionString += " @\(mention.acct)"
+      }
+      mentionString += " "
+      replyToStatus = status
+      statusText = .init(string: mentionString)
+      selectedRange = .init(location: mentionString.utf16.count, length: 0)
     case let .edit(status):
       statusText = .init(status.content.asSafeAttributedString)
       selectedRange = .init(location: statusText.string.utf16.count, length: 0)
