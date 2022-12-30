@@ -11,7 +11,7 @@ public struct MediaAttachement: Codable, Identifiable, Hashable {
   }
   
   public enum SupportedType: String {
-    case image, gifv
+    case image, gifv, video
   }
   
   public func hash(into hasher: inout Hasher) {

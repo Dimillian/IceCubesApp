@@ -126,7 +126,7 @@ public struct StatusMediaPreviewView: View {
                   .shimmering()
               })
       }
-    case .gifv:
+    case .gifv, .video:
       if let url = attachement.url {
         VideoPlayerView(viewModel: .init(url: url))
           .frame(height: imageMaxHeight)
@@ -158,7 +158,7 @@ public struct StatusMediaPreviewView: View {
             }
             .frame(width: isCompact ? imageMaxHeight : proxy.frame(in: .local).width)
             .frame(height: imageMaxHeight)
-          case .gifv:
+          case .gifv, .video:
             if let url = attachement.url {
               VideoPlayerView(viewModel: .init(url: url))
                 .frame(width: isCompact ? imageMaxHeight :  proxy.frame(in: .local).width)

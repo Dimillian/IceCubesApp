@@ -1,6 +1,7 @@
 import SwiftUI
 import Env
 
+@MainActor
 extension View {
   public func statusEditorToolbarItem(routeurPath: RouterPath) -> some ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
