@@ -39,11 +39,19 @@ public class StatusRowViewModel: ObservableObject {
   
   func loadEmbededStatus() async {
     guard let client,
-          let ids = status.content.findStatusesIds(instance: client.server),
-          !ids.isEmpty,
-          let id = ids.first else { return }
+          let urls = status.content.findStatusesURLs(),
+          !urls.isEmpty,
+          let url = urls.first else { return }
     do {
-      self.embededStatus = try await client.get(endpoint: Statuses.status(id: String(id)))
+      if url.absoluteString.contains(client.server), let id = Int(url.lastPathComponent) {
+        self.embededStatus = try await client.get(endpoint: Statuses.status(id: String(id)))
+      } else {
+        let results: SearchResults = try await client.get(endpoint: Search.search(query: url.absoluteString,
+                                                                                  type: "statuses",
+                                                                                  offset: 0),
+                                                            forceVersion: .v2)
+        self.embededStatus = results.statuses.first
+      }
     } catch { }
   }
   

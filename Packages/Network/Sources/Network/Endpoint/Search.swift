@@ -20,6 +20,7 @@ public enum Search: Endpoint {
       if let offset {
         params.append(.init(name: "offset", value: String(offset)))
       }
+      params.append(.init(name: "resolve", value: "true"))
       return params
     }
   }

@@ -28,6 +28,7 @@ public enum SheetDestinations: Identifiable {
   }
 }
 
+@MainActor
 public class RouterPath: ObservableObject {
   public var client: Client?
   
@@ -49,8 +50,22 @@ public class RouterPath: ObservableObject {
       navigate(to: .accountDetail(id: mention.id))
       return .handled
     } else if let client = client,
-              let id = status.content.findStatusesIds(instance: client.server)?.first(where: { String($0) == url.lastPathComponent}) {
-      navigate(to: .statusDetail(id: String(id)))
+              let id = Int(url.lastPathComponent) {
+      if url.absoluteString.contains(client.server) {
+        navigate(to: .statusDetail(id: String(id)))
+      } else {
+        Task {
+          let results: SearchResults? = try? await client.get(endpoint: Search.search(query: url.absoluteString,
+                                                                                       type: "statuses",
+                                                                                      offset: nil),
+                                                              forceVersion: .v2)
+          if let status = results?.statuses.first {
+            navigate(to: .statusDetail(id: status.id))
+          } else {
+            await UIApplication.shared.open(url)
+          }
+        }
+      }
       return .handled
     }
     return .systemAction

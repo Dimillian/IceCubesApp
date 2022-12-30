@@ -134,7 +134,7 @@ public struct StatusRowView: View {
           StatusMediaPreviewView(attachements: status.mediaAttachments, isCompact: viewModel.isCompact)
             .padding(.vertical, 4)
         }
-        if let card = status.card, !viewModel.isCompact {
+        if let card = status.card, !viewModel.isCompact, viewModel.embededStatus?.url != status.card?.url {
           StatusCardView(card: card)
         }
       }

@@ -24,20 +24,19 @@ extension HTMLString {
     }
   }
   
-  public func findStatusesIds(instance: String) -> [Int]? {
+  public func findStatusesURLs() -> [URL]? {
     do {
       let document: Document = try SwiftSoup.parse(self)
       let links: Elements = try document.select("a")
-      var ids: [Int] = []
+      var URLs: [URL] = []
       for link in links {
         let href = try link.attr("href")
-        if href.contains(instance.lowercased()),
-           let url = URL(string: href),
-            let statusId = Int(url.lastPathComponent) {
-          ids.append(statusId)
+        if let url = URL(string: href),
+            let _ = Int(url.lastPathComponent) {
+          URLs.append(url)
         }
       }
-      return ids
+      return URLs
     } catch {
       return nil
     }
