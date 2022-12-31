@@ -89,20 +89,22 @@ struct AddAccountView: View {
           .listRowBackground(theme.primaryBackgroundColor)
       } else {
         ForEach(instanceName.isEmpty ? instances : instances.filter{ $0.name.contains(instanceName.lowercased()) }) { instance in
-          VStack(alignment: .leading, spacing: 4) {
-            Text(instance.name)
-              .font(.headline)
-            Text(instance.info?.shortDescription ?? "")
-              .font(.body)
-              .foregroundColor(.gray)
-            Text("\(instance.users) users  ⸱  \(instance.statuses) posts")
-              .font(.footnote)
-              .foregroundColor(.gray)
+          Button {
+            self.instanceName = instance.name
+          } label: {
+            VStack(alignment: .leading, spacing: 4) {
+              Text(instance.name)
+                .font(.headline)
+                .foregroundColor(.primary)
+              Text(instance.info?.shortDescription ?? "")
+                .font(.body)
+                .foregroundColor(.gray)
+              Text("\(instance.users) users  ⸱  \(instance.statuses) posts")
+                .font(.footnote)
+                .foregroundColor(.gray)
+            }
           }
           .listRowBackground(theme.primaryBackgroundColor)
-          .onTapGesture {
-            self.instanceName = instance.name
-          }
         }
       }
     }
