@@ -56,7 +56,8 @@ public class StatusRowViewModel: ObservableObject {
       } else {
         let results: SearchResults = try await client.get(endpoint: Search.search(query: url.absoluteString,
                                                                                   type: "statuses",
-                                                                                  offset: 0),
+                                                                                  offset: 0,
+                                                                                  following: nil),
                                                             forceVersion: .v2)
         embed = results.statuses.first
       }

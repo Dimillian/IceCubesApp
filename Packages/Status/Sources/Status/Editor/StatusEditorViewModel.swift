@@ -46,6 +46,10 @@ public class StatusEditorViewModel: ObservableObject {
   
   @Published var visibility: Models.Visibility = .pub
   
+  @Published var mentionsSuggestions: [Account] = []
+  @Published var tagsSuggestions: [Tag] = []
+  private var currentSuggestionRange: NSRange?
+  
   private var embededStatusURL: URL? {
     return embededStatus?.reblog?.url ?? embededStatus?.url
   }
@@ -61,6 +65,14 @@ public class StatusEditorViewModel: ObservableObject {
     string.mutableString.insert(text, at: selectedRange.location)
     statusText = string
     selectedRange = NSRange(location: selectedRange.location + text.utf16.count, length: 0)
+  }
+  
+  func replaceTextWith(text: String, inRange: NSRange) {
+    let string = statusText
+    string.mutableString.deleteCharacters(in: inRange)
+    string.mutableString.insert(text, at: inRange.location)
+    statusText = string
+    selectedRange = NSRange(location: inRange.location + text.utf16.count, length: 0)
   }
   
   func postStatus() async -> Status? {
@@ -143,9 +155,20 @@ public class StatusEditorViewModel: ObservableObject {
                                        options: [],
                                        range: NSMakeRange(0, statusText.string.utf16.count)).map { $0.range }
 
-      for range in ranges {
+      var foundSuggestionRange: Bool = false
+      for nsRange in ranges {
         statusText.addAttributes([.foregroundColor: UIColor(Color.brand)],
-                                   range: NSRange(location: range.location, length: range.length))
+                                   range: nsRange)
+        if selectedRange.location == (nsRange.location + nsRange.length),
+           let range = Range(nsRange, in: statusText.string) {
+          foundSuggestionRange = true
+          currentSuggestionRange = nsRange
+          loadAutoCompleteResults(query: String(statusText.string[range]))
+        }
+      }
+      
+      if !foundSuggestionRange || ranges.isEmpty{
+        resetAutoCompletion()
       }
       
       for range in urlRanges {
@@ -164,6 +187,60 @@ public class StatusEditorViewModel: ObservableObject {
         !statusText.string.contains(url.absoluteString) {
       self.embededStatus = nil
       self.mode = .new
+    }
+  }
+  
+  // MARK: - Autocomplete
+  
+  private func loadAutoCompleteResults(query: String) {
+    guard let client, query.utf8.count > 1 else { return }
+    Task {
+      do {
+        var results: SearchResults?
+        switch query.first {
+        case "#":
+          results = try await client.get(endpoint: Search.search(query: query,
+                                                                 type: "hashtags",
+                                                                 offset: 0,
+                                                                 following: nil),
+                                         forceVersion: .v2)
+          withAnimation {
+            tagsSuggestions = results?.hashtags ?? []
+          }
+        case "@":
+          results = try await client.get(endpoint: Search.search(query: query,
+                                                                 type: "accounts",
+                                                                 offset: 0,
+                                                                 following: true),
+                                         forceVersion: .v2)
+          withAnimation {
+            mentionsSuggestions = results?.accounts ?? []
+          }
+          break
+        default:
+          break
+        }
+      } catch {
+        
+      }
+    }
+  }
+  
+  private func resetAutoCompletion() {
+    tagsSuggestions = []
+    mentionsSuggestions = []
+    currentSuggestionRange = nil
+  }
+  
+  func selectMentionSuggestion(account: Account) {
+    if let range = currentSuggestionRange {
+      replaceTextWith(text: "@\(account.acct) ", inRange: range)
+    }
+  }
+  
+  func selectHashtagSuggestion(tag: Tag) {
+    if let range = currentSuggestionRange {
+      replaceTextWith(text: "#\(tag.name) ", inRange: range)
     }
   }
   

@@ -57,7 +57,8 @@ public class RouterPath: ObservableObject {
         Task {
           let results: SearchResults? = try? await client.get(endpoint: Search.search(query: url.absoluteString,
                                                                                        type: "statuses",
-                                                                                      offset: nil),
+                                                                                      offset: nil,
+                                                                                      following: nil),
                                                               forceVersion: .v2)
           if let status = results?.statuses.first {
             navigate(to: .statusDetail(id: status.id))

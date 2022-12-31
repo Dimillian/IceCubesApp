@@ -95,7 +95,8 @@ class ExploreViewModel: ObservableObject {
         let apiType = tokens.first?.apiType
         var results: SearchResults = try await client.get(endpoint: Search.search(query: searchQuery,
                                                                                   type: apiType,
-                                                                                  offset: nil),
+                                                                                  offset: nil,
+                                                                                  following: nil),
                                                           forceVersion: .v2)
         let relationships: [Relationshionship] =
           try await client.get(endpoint: Accounts.relationships(ids: results.accounts.map{ $0.id }))

@@ -10,9 +10,7 @@ import NukeUI
 
 public struct StatusEditorView: View {
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var quicklook: QuickLook
   @EnvironmentObject private var client: Client
-  @EnvironmentObject private var currentInstance: CurrentInstance
   @EnvironmentObject private var currentAccount: CurrentAccount
   @Environment(\.dismiss) private var dismiss
   
@@ -39,12 +37,17 @@ public struct StatusEditorView: View {
               StatusEmbededView(status: status)
                 .padding(.horizontal, DS.Constants.layoutPadding)
             }
-            mediasView
+            StatusEditorMediaView(viewModel: viewModel)
             Spacer()
           }
           .padding(.top, 8)
+          .padding(.bottom, 40)
         }
-        accessoryView
+        VStack(alignment: .leading, spacing: 0) {
+          StatusEditorAutoCompleteView(viewModel: viewModel)
+          StatusEditorAccessoryView(isSpoilerTextFocused: $isSpoilerTextFocused,
+                                    viewModel: viewModel)
+        }
       }
       .onAppear {
         viewModel.client = client
@@ -116,146 +119,4 @@ public struct StatusEditorView: View {
       }
     }
   }
-  
-  private var mediasView: some View {
-    ScrollView(.horizontal, showsIndicators: false) {
-      HStack(spacing: 8) {
-        ForEach(viewModel.mediasImages) { container in
-          if container.image != nil {
-            makeLocalImage(container: container)
-          } else if let url = container.mediaAttachement?.url {
-            ZStack(alignment: .topTrailing) {
-              makeLazyImage(url: url)
-              Button {
-                withAnimation {
-                  viewModel.mediasImages.removeAll(where: { $0.id == container.id })
-                }
-              } label: {
-                Image(systemName: "xmark.circle")
-              }
-              .padding(8)
-            }
-          }
-        }
-      }
-      .padding(.horizontal, DS.Constants.layoutPadding)
-    }
-  }
-  
-  private func makeLocalImage(container: StatusEditorViewModel.ImageContainer) -> some View {
-    ZStack(alignment: .center) {
-      Image(uiImage: container.image!)
-        .resizable()
-        .blur(radius: 20 )
-        .aspectRatio(contentMode: .fill)
-        .frame(width: 150, height: 150)
-        .cornerRadius(8)
-      if container.error != nil {
-        VStack {
-          Text("Error uploading")
-          Button {
-            withAnimation {
-              viewModel.mediasImages.removeAll(where: { $0.id == container.id })
-            }
-          } label: {
-            VStack {
-              Text("Delete")
-            }
-          }
-          .buttonStyle(.bordered)
-          Button {
-            Task {
-              await viewModel.upload(container: container)
-            }
-          } label: {
-            VStack {
-              Text("Retry")
-            }
-          }
-          .buttonStyle(.bordered)
-        }
-      } else {
-        ProgressView()
-      }
-    }
-  }
-  
-  private func makeLazyImage(url: URL?) -> some View {
-    LazyImage(url: url) { state in
-      if let image = state.image {
-        image
-          .resizingMode(.aspectFill)
-          .frame(width: 150, height: 150)
-      } else {
-        Rectangle()
-          .frame(width: 150, height: 150)
-      }
-    }
-    .frame(width: 150, height: 150)
-    .cornerRadius(8)
-  }
-  
-  private var accessoryView: some View {
-    VStack(spacing: 0) {
-      Divider()
-      HStack(alignment: .center, spacing: 16) {
-        PhotosPicker(selection: $viewModel.selectedMedias,
-                     matching: .images) {
-          Image(systemName: "photo.fill.on.rectangle.fill")
-        }
-        
-        Button {
-          viewModel.insertStatusText(text: " @")
-        } label: {
-          Image(systemName: "at")
-        }
-        
-        Button {
-          viewModel.insertStatusText(text: " #")
-        } label: {
-          Image(systemName: "number")
-        }
-        
-        Button {
-          withAnimation {
-            viewModel.spoilerOn.toggle()
-          }
-          isSpoilerTextFocused.toggle()
-        } label: {
-          Image(systemName: viewModel.spoilerOn ? "exclamationmark.triangle.fill": "exclamationmark.triangle")
-        }
-
-        visibilityMenu
-
-        Spacer()
-        
-        characterCountView
-      }
-      .frame(height: 20)
-      .padding(.horizontal, DS.Constants.layoutPadding)
-      .padding(.vertical, 12)
-      .background(.ultraThinMaterial)
-    }
-  }
-  
-  private var characterCountView: some View {
-    Text("\((currentInstance.instance?.configuration.statuses.maxCharacters ?? 500) - viewModel.statusText.string.utf16.count)")
-      .foregroundColor(.gray)
-      .font(.callout)
-  }
-  
-  private var visibilityMenu: some View {
-    Menu {
-      ForEach(Models.Visibility.allCases, id: \.self) { visibility in
-        Button {
-          viewModel.visibility = visibility
-        } label: {
-          Label(visibility.title, systemImage: visibility.iconName)
-        }
-      }
-    } label: {
-      Image(systemName: viewModel.visibility.iconName)
-    }
-  }
-    
 }
