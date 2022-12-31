@@ -18,6 +18,7 @@ public class StatusEditorViewModel: ObservableObject {
   
   var client: Client?
   var currentAccount: Account?
+  var theme: Theme?
   
   @Published var statusText = NSMutableAttributedString(string: "") {
     didSet {
@@ -157,7 +158,7 @@ public class StatusEditorViewModel: ObservableObject {
 
       var foundSuggestionRange: Bool = false
       for nsRange in ranges {
-        statusText.addAttributes([.foregroundColor: UIColor(Color.brand)],
+        statusText.addAttributes([.foregroundColor: UIColor(theme?.tintColor ?? .brand)],
                                    range: nsRange)
         if selectedRange.location == (nsRange.location + nsRange.length),
            let range = Range(nsRange, in: statusText.string) {
@@ -172,9 +173,9 @@ public class StatusEditorViewModel: ObservableObject {
       }
       
       for range in urlRanges {
-        statusText.addAttributes([.foregroundColor: UIColor(Color.brand),
+        statusText.addAttributes([.foregroundColor: UIColor(theme?.tintColor ?? .brand),
                                      .underlineStyle: NSUnderlineStyle.single,
-                                     .underlineColor: UIColor(Color.brand)],
+                                  .underlineColor: UIColor(theme?.tintColor ?? .brand)],
                                     range: NSRange(location: range.location, length: range.length))
       }
     } catch {
