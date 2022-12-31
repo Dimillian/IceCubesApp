@@ -71,11 +71,17 @@ struct SettingsTabs: View {
       ColorPicker("Tint color", selection: $theme.tintColor)
       ColorPicker("Background color", selection: $theme.primaryBackgroundColor)
       ColorPicker("Secondary Background color", selection: $theme.secondaryBackgroundColor)
+      Picker("Avatar position", selection: $theme.avatarPosition) {
+        ForEach(Theme.AvatarPosition.allCases, id: \.rawValue) { position in
+          Text(position.description).tag(position)
+        }
+      }
       Button {
         theme.colorScheme = "dark"
         theme.tintColor = .brand
         theme.primaryBackgroundColor = .primaryBackground
         theme.secondaryBackgroundColor = .secondaryBackground
+        theme.avatarPosition = .top
       } label: {
         Text("Restore default")
       }

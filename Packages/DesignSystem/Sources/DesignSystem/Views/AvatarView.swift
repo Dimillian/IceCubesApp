@@ -6,7 +6,7 @@ public struct AvatarView: View {
   public enum Size {
     case account, status, embed, badge, boost
     
-    var size: CGSize {
+    public var size: CGSize {
       switch self {
       case .account:
         return .init(width: 80, height: 80)

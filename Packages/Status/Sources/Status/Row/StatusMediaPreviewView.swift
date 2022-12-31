@@ -7,6 +7,7 @@ import DesignSystem
 
 public struct StatusMediaPreviewView: View {
   @EnvironmentObject private var quickLook: QuickLook
+  @EnvironmentObject private var theme: Theme
   
   public let attachements: [MediaAttachement]
   public let isCompact: Bool
@@ -95,8 +96,10 @@ public struct StatusMediaPreviewView: View {
     switch attachement.supportedType {
     case .image:
       if let size = size(for: attachement) {
+        let avatarColumnWidth = theme.avatarPosition == .leading ? AvatarView.Size.status.size.width + DS.Constants.statusColumnsSpacing : 0
+        let availableWidth = UIScreen.main.bounds.width - (DS.Constants.layoutPadding * 2) - avatarColumnWidth
         let newSize = imageSize(from: size,
-                                newWidth: UIScreen.main.bounds.width - (DS.Constants.layoutPadding * 2))
+                                newWidth: availableWidth)
         LazyImage(url: attachement.url) { state in
           if let image = state.image {
             image
