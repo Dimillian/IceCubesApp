@@ -24,11 +24,12 @@ For contributors and myself, here is a todo list of features that could be added
 - [ ] Editor: Autocomplete for mentions / hashtags
 - [ ] Better settings tab
 - [ ] Edit profile
-- [ ] Light theme
+- [X] Light theme
 - [ ] More themes
 - [ ] Honor & display server side features (filter, default visibility, etc...)
 - [ ] Open remote status locally
 - [ ] More context menu everywhere
+- [ ] Support pinned posts
 
 
 IceCubesApp is an open source application for accessing the decentralized social network Mastodon! It's built entirely in SwiftUI, making it fast, lightweight, and easy to use.
