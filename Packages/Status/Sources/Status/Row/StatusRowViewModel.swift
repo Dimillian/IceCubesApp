@@ -50,16 +50,18 @@ public class StatusRowViewModel: ObservableObject {
       withAnimation {
         isEmbedLoading = true
       }
+      var embed: Status?
       if url.absoluteString.contains(client.server), let id = Int(url.lastPathComponent) {
-        self.embededStatus = try await client.get(endpoint: Statuses.status(id: String(id)))
+        embed = try await client.get(endpoint: Statuses.status(id: String(id)))
       } else {
         let results: SearchResults = try await client.get(endpoint: Search.search(query: url.absoluteString,
                                                                                   type: "statuses",
                                                                                   offset: 0),
                                                             forceVersion: .v2)
-        self.embededStatus = results.statuses.first
+        embed = results.statuses.first
       }
       withAnimation {
+        embededStatus = embed
         isEmbedLoading = false
       }
     } catch {
