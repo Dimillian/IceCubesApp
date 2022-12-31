@@ -19,9 +19,9 @@ For contributors and myself, here is a todo list of features that could be added
 - [ ] Display images alt
 - [ ] Editor: Post image alts
 - [ ] Editor: Add / Edit polls
-- [ ] Editor: Support video tyope
+- [ ] Editor: Support video types
 - [ ] Editor: Open camera
-- [ ] Editor: Autocomplete for mentions / hashtags
+- [X] Editor: Autocomplete for mentions / hashtags
 - [ ] Better settings tab
 - [ ] Edit profile
 - [X] Light theme
