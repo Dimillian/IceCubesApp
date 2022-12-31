@@ -65,6 +65,7 @@ public struct AccountDetailView: View {
           }
         }
       }
+      .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
     }
     .onAppear {

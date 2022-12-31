@@ -10,10 +10,11 @@ struct TimelineTab: View {
   @StateObject private var routeurPath = RouterPath()
   @Binding var popToRootTab: Tab
   @State private var timeline: TimelineFilter = .home
+  @State private var scrollToTopSignal: Int = 0
   
   var body: some View {
     NavigationStack(path: $routeurPath.path) {
-      TimelineView(timeline: $timeline)
+      TimelineView(timeline: $timeline, scrollToTopSignal: $scrollToTopSignal)
         .withAppRouteur()
         .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
         .toolbar {
@@ -33,7 +34,11 @@ struct TimelineTab: View {
     .environmentObject(routeurPath)
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
       if popToRootTab == .timeline {
-        routeurPath.path = []
+        if routeurPath.path.isEmpty {
+          scrollToTopSignal += 1
+        } else {
+          routeurPath.path = []
+        }
       }
     }
   }

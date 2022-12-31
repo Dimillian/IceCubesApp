@@ -16,13 +16,18 @@ public struct TimelineView: View {
   @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
+  
   @StateObject private var viewModel = TimelineViewModel()
+
+  @State private var scrollProxy: ScrollViewProxy?
   @Binding var timeline: TimelineFilter
+  @Binding var scrollToTopSignal: Int
   
   private let feedbackGenerator = UIImpactFeedbackGenerator()
   
-  public init(timeline: Binding<TimelineFilter>) {
+  public init(timeline: Binding<TimelineFilter>, scrollToTopSignal: Binding<Int>) {
     _timeline = timeline
+    _scrollToTopSignal = scrollToTopSignal
   }
   
   public var body: some View {
@@ -30,9 +35,11 @@ public struct TimelineView: View {
       ZStack(alignment: .top) {
         ScrollView {
           LazyVStack {
+            Rectangle()
+              .frame(height: 0)
+              .id(Constants.scrollToTop)
             tagHeaderView
               .padding(.bottom, 16)
-              .id(Constants.scrollToTop)
             StatusesListView(fetcher: viewModel)
           }
           .padding(.top, DS.Constants.layoutPadding)
@@ -41,6 +48,9 @@ public struct TimelineView: View {
         if viewModel.pendingStatusesEnabled {
           makePendingNewPostsView(proxy: proxy)
         }
+      }
+      .onAppear {
+        scrollProxy = proxy
       }
     }
     .navigationTitle(timeline.title())
@@ -59,6 +69,11 @@ public struct TimelineView: View {
         viewModel.handleEvent(event: latestEvent, currentAccount: account)
       }
     }
+    .onChange(of: scrollToTopSignal, perform: { _ in
+      withAnimation {
+        scrollProxy?.scrollTo(Constants.scrollToTop, anchor: .top)
+      }
+    })
     .onChange(of: timeline) { newTimeline in
       viewModel.timeline = timeline
     }
