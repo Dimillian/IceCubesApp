@@ -102,7 +102,7 @@ struct SettingsTabs: View {
         Label {
           Text("Icon selector")
         } icon: {
-          if let icon = IconSelectorView.Icon(rawValue: UIApplication.shared.alternateIconName ?? "AppIcon") {
+          if let icon = IconSelectorView.Icon(string: UIApplication.shared.alternateIconName ?? "AppIcon") {
             Image(uiImage: .init(named: icon.iconName)!)
               .resizable()
               .frame(width: 25, height: 25)

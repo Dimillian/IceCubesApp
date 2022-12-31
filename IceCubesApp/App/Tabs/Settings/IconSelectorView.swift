@@ -2,46 +2,40 @@ import SwiftUI
 import DesignSystem
 
 struct IconSelectorView: View {
-  enum Icon: String, CaseIterable, Identifiable {
+  enum Icon: Int, CaseIterable, Identifiable {
     var id: String {
-      self.rawValue
+      "\(rawValue)"
     }
     
-    case primary = "AppIcon"
-    case alternate1 = "AppIconAlternate1"
-    case alternate2 = "AppIconAlternate2"
-    case alternate3 = "AppIconAlternate3"
-    case alternate4 = "AppIconAlternate4"
-    case alternate5 = "AppIconAlternate5"
-    case alternate6 = "AppIconAlternate6"
-    case alternate7 = "AppIconAlternate7"
-    case alternate8 = "AppIconAlternate8"
-    case alternate9 = "AppIconAlternate9"
-    case alternate10 = "AppIconAlternate10"
-    case alternate11 = "AppIconAlternate11"
-    case alternate12 = "AppIconAlternate12"
+    init(string: String) {
+      if string == Icon.primary.appIconName {
+        self = .primary
+      } else {
+        self = .init(rawValue: Int(String(string.last!))!)!
+      }
+    }
+    
+    case primary = 0
+    case alt1, alt2, alt3, alt4, alt5, alt6, alt7, alt8
+    case alt9, alt10, alt11, alt12, alt13, alt14
+    case alt15, alt16, alt17, alt18
+    
+    var appIconName: String {
+      switch self {
+      case .primary:
+        return "AppIcon"
+      default:
+        return "AppIconAlternate\(rawValue)"
+      }
+    }
     
     var iconName: String {
-      switch self {
-      case .primary: return "icon0"
-      case .alternate1: return "icon1"
-      case .alternate2: return "icon2"
-      case .alternate3: return "icon3"
-      case .alternate4: return "icon4"
-      case .alternate5: return "icon5"
-      case .alternate6: return "icon6"
-      case .alternate7: return "icon7"
-      case .alternate8: return "icon8"
-      case .alternate9: return "icon9"
-      case .alternate10: return "icon10"
-      case .alternate11: return "icon11"
-      case .alternate12: return "icon12"
-      }
+      "icon\(rawValue)"
     }
   }
   
   @EnvironmentObject private var theme: Theme
-  @State private var currentIcon = UIApplication.shared.alternateIconName ?? Icon.primary.rawValue
+  @State private var currentIcon = UIApplication.shared.alternateIconName ?? Icon.primary.appIconName
   
   private let columns = [GridItem(.adaptive(minimum: 125, maximum: 1024))]
   
@@ -51,11 +45,11 @@ struct IconSelectorView: View {
         LazyVGrid(columns: columns, spacing: 6) {
           ForEach(Icon.allCases) { icon in
             Button {
-              currentIcon = icon.rawValue
+              currentIcon = icon.appIconName
               if icon.rawValue == Icon.primary.rawValue {
                 UIApplication.shared.setAlternateIconName(nil)
               } else {
-                UIApplication.shared.setAlternateIconName(icon.rawValue)
+                UIApplication.shared.setAlternateIconName(icon.appIconName)
               }
             } label: {
               ZStack(alignment: .bottomTrailing) {
@@ -65,7 +59,7 @@ struct IconSelectorView: View {
                   .frame(minHeight: 125, maxHeight: 1024)
                   .cornerRadius(6)
                   .shadow(radius: 3)
-                if icon.rawValue == currentIcon {
+                if icon.appIconName == currentIcon {
                   Image(systemName: "checkmark.seal.fill")
                     .padding(4)
                     .tint(.green)
