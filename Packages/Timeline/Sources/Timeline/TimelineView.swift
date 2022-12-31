@@ -34,10 +34,10 @@ public struct TimelineView: View {
     ScrollViewReader { proxy in
       ZStack(alignment: .top) {
         ScrollView {
+          Rectangle()
+            .frame(height: 0)
+            .id(Constants.scrollToTop)
           LazyVStack {
-            Rectangle()
-              .frame(height: 0)
-              .id(Constants.scrollToTop)
             tagHeaderView
               .padding(.bottom, 16)
             StatusesListView(fetcher: viewModel)
@@ -93,8 +93,8 @@ public struct TimelineView: View {
   private func makePendingNewPostsView(proxy: ScrollViewProxy) -> some View {
     if !viewModel.pendingStatuses.isEmpty {
       Button {
-        proxy.scrollTo(Constants.scrollToTop)
         withAnimation {
+          proxy.scrollTo(Constants.scrollToTop)
           viewModel.displayPendingStatuses()
         }
       } label: {
