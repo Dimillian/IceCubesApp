@@ -18,20 +18,27 @@ public struct StatusRowView: View {
   }
   
   public var body: some View {
-    VStack(alignment: .leading) {
-      if !viewModel.isCompact {
-        reblogView
-        replyView
+    HStack(alignment: .top, spacing: DS.Constants.statusColumnsSpacing) {
+      if !viewModel.isCompact,
+         theme.avatarPosition == .leading,
+         let status: AnyStatus = viewModel.status.reblog ?? viewModel.status {
+          AvatarView(url: status.account.avatar, size: .status)
       }
-      statusView
-      if !viewModel.isCompact {
-        StatusActionsView(viewModel: viewModel)
-          .padding(.vertical, 8)
-          .tint(viewModel.isFocused ? theme.tintColor : .gray)
-          .contentShape(Rectangle())
-          .onTapGesture {
-            routeurPath.navigate(to: .statusDetail(id: viewModel.status.reblog?.id ?? viewModel.status.id))
-          }
+      VStack(alignment: .leading) {
+        if !viewModel.isCompact {
+          reblogView
+           replyView
+        }
+        statusView
+        if !viewModel.isCompact {
+          StatusActionsView(viewModel: viewModel)
+            .padding(.vertical, 8)
+            .tint(viewModel.isFocused ? theme.tintColor : .gray)
+            .contentShape(Rectangle())
+            .onTapGesture {
+              routeurPath.navigate(to: .statusDetail(id: viewModel.status.reblog?.id ?? viewModel.status.id))
+            }
+        }
       }
     }
     .onAppear {
@@ -155,7 +162,9 @@ public struct StatusRowView: View {
   @ViewBuilder
   private func accountView(status: AnyStatus) -> some View {
     HStack(alignment: .center) {
-      AvatarView(url: status.account.avatar, size: .status)
+      if theme.avatarPosition == .top {
+        AvatarView(url: status.account.avatar, size: .status)
+      }
       VStack(alignment: .leading, spacing: 0) {
         status.account.displayNameWithEmojis
           .font(.headline)
