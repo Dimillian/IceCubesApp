@@ -10,7 +10,10 @@ public enum TimelineFilter: Hashable, Equatable {
     hasher.combine(title())
   }
   
-  public static func availableTimeline() -> [TimelineFilter] {
+  public static func availableTimeline(client: Client) -> [TimelineFilter] {
+    if !client.isAuth {
+      return [.pub, .local]
+    }
     return [.pub, .local, .home]
   }
   

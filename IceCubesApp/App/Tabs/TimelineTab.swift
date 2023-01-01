@@ -3,8 +3,11 @@ import Timeline
 import Env
 import Network
 import Combine
+import DesignSystem
 
 struct TimelineTab: View {
+  @EnvironmentObject private var appAccounts: AppAccountsManager
+  @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var client: Client
   @StateObject private var routeurPath = RouterPath()
@@ -12,6 +15,7 @@ struct TimelineTab: View {
   @State private var timeline: TimelineFilter = .home
   @State private var scrollToTopSignal: Int = 0
   @State private var isAddAccountSheetDisplayed = false
+  @State private var accountsViewModel: [AppAccountViewModel] = []
   
   var body: some View {
     NavigationStack(path: $routeurPath.path) {
@@ -19,11 +23,14 @@ struct TimelineTab: View {
         .withAppRouteur()
         .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
         .toolbar {
+          ToolbarItem(placement: .principal) {
+            timelineFilterButton
+          }
           if client.isAuth {
-            statusEditorToolbarItem(routeurPath: routeurPath)
             ToolbarItem(placement: .navigationBarLeading) {
-              timelineFilterButton
+              accountButton
             }
+            statusEditorToolbarItem(routeurPath: routeurPath)
           } else {
             ToolbarItem(placement: .navigationBarTrailing) {
               addAccountButton
@@ -31,6 +38,9 @@ struct TimelineTab: View {
           }
         }
         .id(currentAccount.account?.id)
+    }
+    .sheet(isPresented: $isAddAccountSheetDisplayed) {
+      AddAccountView()
     }
     .onAppear {
       routeurPath.client = client
@@ -51,7 +61,7 @@ struct TimelineTab: View {
   
   private var timelineFilterButton: some View {
     Menu {
-      ForEach(TimelineFilter.availableTimeline(), id: \.self) { timeline in
+      ForEach(TimelineFilter.availableTimeline(client: client), id: \.self) { timeline in
         Button {
           self.timeline = timeline
         } label: {
@@ -59,8 +69,62 @@ struct TimelineTab: View {
         }
       }
     } label: {
-      Image(systemName: "line.3.horizontal.decrease.circle")
+      HStack {
+        Text(timeline.title())
+        Image(systemName: "chevron.down")
+          .resizable()
+          .aspectRatio(contentMode: .fit)
+          .frame(width: 12)
+          .offset(y: 2)
+      }
+      .font(.headline)
+      .foregroundColor(theme.labelColor)
     }
+    .menuStyle(.button)
+  }
+  
+  private var accountButton: some View {
+    Button {
+      if let account = currentAccount.account {
+        routeurPath.navigate(to: .accountDetailWithAccount(account: account))
+      }
+    } label: {
+      if let avatar = currentAccount.account?.avatar {
+        AvatarView(url: avatar, size: .badge)
+      }
+    }
+    .onAppear {
+      if accountsViewModel.isEmpty || appAccounts.availableAccounts.count != accountsViewModel.count {
+        accountsViewModel = []
+        for account in appAccounts.availableAccounts {
+          let viewModel: AppAccountViewModel = .init(appAccount: account)
+          accountsViewModel.append(viewModel)
+          Task {
+            await viewModel.fetchAccount()
+          }
+        }
+      }
+    }
+    .contextMenu {
+      ForEach(accountsViewModel, id: \.appAccount.id) { viewModel in
+        Button {
+          appAccounts.currentAccount = viewModel.appAccount
+        } label: {
+          HStack {
+            if viewModel.account?.id == currentAccount.account?.id {
+              Image(systemName: "checkmark.circle.fill")
+            }
+            Text("\(viewModel.account?.displayName ?? "")")
+          }
+        }
+      }
+      Button {
+        isAddAccountSheetDisplayed = true
+      } label: {
+        Label("Add Account", systemImage: "person.badge.plus")
+      }
+    }
+
   }
   
   private var addAccountButton: some View {
@@ -68,9 +132,6 @@ struct TimelineTab: View {
       isAddAccountSheetDisplayed = true
     } label: {
       Image(systemName: "person.badge.plus")
-    }
-    .sheet(isPresented: $isAddAccountSheetDisplayed) {
-      AddAccountView()
     }
   }
 }

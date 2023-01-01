@@ -27,7 +27,7 @@ For contributors and myself, here is a todo list of features that could be added
 - [X] Light theme
 - [ ] More themes
 - [ ] Honor & display server side features (filter, default visibility, etc...)
-- [ ] Open remote status locally
+- [X] Open remote status locally
 - [ ] More context menu everywhere
 - [ ] Support pinned posts
 - [ ] Support IceCubesApp://any mastodon links
