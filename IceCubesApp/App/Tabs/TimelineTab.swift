@@ -23,7 +23,7 @@ struct TimelineTab: View {
         .withAppRouteur()
         .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
         .toolbar {
-          ToolbarItem(placement: .principal) {
+          ToolbarTitleMenu {
             timelineFilterButton
           }
           if client.isAuth {
@@ -60,27 +60,13 @@ struct TimelineTab: View {
   
   
   private var timelineFilterButton: some View {
-    Menu {
-      ForEach(TimelineFilter.availableTimeline(client: client), id: \.self) { timeline in
-        Button {
-          self.timeline = timeline
-        } label: {
-          Label(timeline.title(), systemImage: timeline.iconName() ?? "")
-        }
+    ForEach(TimelineFilter.availableTimeline(client: client), id: \.self) { timeline in
+      Button {
+        self.timeline = timeline
+      } label: {
+        Label(timeline.title(), systemImage: timeline.iconName() ?? "")
       }
-    } label: {
-      HStack {
-        Text(timeline.title())
-        Image(systemName: "chevron.down")
-          .resizable()
-          .aspectRatio(contentMode: .fit)
-          .frame(width: 12)
-          .offset(y: 2)
-      }
-      .font(.headline)
-      .foregroundColor(theme.labelColor)
     }
-    .menuStyle(.button)
   }
   
   private var accountButton: some View {
