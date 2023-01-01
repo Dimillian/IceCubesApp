@@ -71,7 +71,10 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
       if statuses.isEmpty {
         pendingStatuses = []
         statusesState = .loading
-        statuses = try await client.get(endpoint: timeline.endpoint(sinceId: nil, maxId: nil, minId: nil))
+        statuses = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
+                                                                    maxId: nil,
+                                                                    minId: nil,
+                                                                    offset: statuses.count))
         statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
       } else if let first = statuses.first {
         var newStatuses: [Status] = await fetchNewPages(minId: first.id, maxPages: 10)
@@ -103,7 +106,8 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
     do {
       while let newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
                                                                                          maxId: nil,
-                                                                                         minId: latestMinId)),
+                                                                                         minId: latestMinId,
+                                                                                         offset: statuses.count)),
               !newStatuses.isEmpty,
               pagesLoaded < maxPages {
         pagesLoaded += 1
@@ -123,7 +127,8 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
       statusesState = .display(statuses: statuses, nextPageState: .loadingNextPage)
       let newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
                                                                                    maxId: lastId,
-                                                                                   minId: nil))
+                                                                                   minId: nil,
+                                                                                   offset: statuses.count))
       statuses.append(contentsOf: newStatuses)
       statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
     } catch {
