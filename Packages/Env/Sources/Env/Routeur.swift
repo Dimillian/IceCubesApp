@@ -68,6 +68,12 @@ public class RouterPath: ObservableObject {
         let tag = url.pathComponents.last {
       navigate(to: .hashTag(tag: tag, account: nil))
       return .handled
+    } else if url.lastPathComponent.first == "@", let host = url.host {
+      let acct = "\(url.lastPathComponent)@\(host)"
+      Task {
+        await navigateToAccountFrom(acct: acct, url: url)
+      }
+      return .handled
     }
     return .systemAction
   }
@@ -88,7 +94,7 @@ public class RouterPath: ObservableObject {
     }
   }
   
-  public func navigateToAccountFrom(acct: String) async {
+  public func navigateToAccountFrom(acct: String, url: URL) async {
     guard let client else { return }
     Task {
       let results: SearchResults? = try? await client.get(endpoint: Search.search(query: acct,
@@ -98,6 +104,8 @@ public class RouterPath: ObservableObject {
                                                           forceVersion: .v2)
       if let account = results?.accounts.first {
         navigate(to: .accountDetailWithAccount(account: account))
+      } else {
+        await UIApplication.shared.open(url)
       }
     }
   }
