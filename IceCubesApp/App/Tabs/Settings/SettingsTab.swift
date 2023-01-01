@@ -12,6 +12,8 @@ struct SettingsTabs: View {
   @EnvironmentObject private var appAccountsManager: AppAccountsManager
   @EnvironmentObject private var theme: Theme
   
+  @StateObject private var routeurPath = RouterPath()
+  
   @State private var addAccountSheetPresented = false
   
   var body: some View {
@@ -26,6 +28,9 @@ struct SettingsTabs: View {
       .background(theme.secondaryBackgroundColor)
       .navigationTitle(Text("Settings"))
       .navigationBarTitleDisplayMode(.inline)
+    }
+    .onAppear {
+      routeurPath.client = client
     }
     .task {
       if appAccountsManager.currentAccount.oauthToken != nil {

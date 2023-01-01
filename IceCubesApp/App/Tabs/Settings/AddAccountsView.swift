@@ -20,6 +20,9 @@ struct AddAccountView: View {
   @State private var isSigninIn = false
   @State private var signInClient: Client?
   @State private var instances: [InstanceSocial] = []
+  @State private var instanceFetchError: String?
+  
+  @FocusState private var isInstanceURLFieldFocused: Bool
   
   var body: some View {
     NavigationStack {
@@ -29,6 +32,10 @@ struct AddAccountView: View {
           .keyboardType(.URL)
           .textContentType(.URL)
           .textInputAutocapitalization(.never)
+          .focused($isInstanceURLFieldFocused)
+        if let instanceFetchError {
+          Text(instanceFetchError)
+        }
         if let instance {
           Button {
             isSigninIn = true
@@ -53,12 +60,14 @@ struct AddAccountView: View {
       .navigationBarTitleDisplayMode(.inline)
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
+      .scrollDismissesKeyboard(.immediately)
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
           Button("Cancel", action: { dismiss() })
         }
       }
       .onAppear {
+        isInstanceURLFieldFocused = true
         let client = InstanceSocialClient()
         Task {
           self.instances = await client.fetchInstances()
@@ -69,6 +78,9 @@ struct AddAccountView: View {
         Task {
           do {
             self.instance = try await client.get(endpoint: Instances.instance)
+          } catch _ as DecodingError {
+            self.instance = nil
+            self.instanceFetchError = "This instance is not currently supported."
           } catch {
             self.instance = nil
           }

@@ -55,16 +55,7 @@ public class RouterPath: ObservableObject {
         navigate(to: .statusDetail(id: String(id)))
       } else {
         Task {
-          let results: SearchResults? = try? await client.get(endpoint: Search.search(query: url.absoluteString,
-                                                                                       type: "statuses",
-                                                                                      offset: nil,
-                                                                                      following: nil),
-                                                              forceVersion: .v2)
-          if let status = results?.statuses.first {
-            navigate(to: .statusDetail(id: status.id))
-          } else {
-            await UIApplication.shared.open(url)
-          }
+          await navigateToStatusFrom(url: url)
         }
       }
       return .handled
@@ -79,5 +70,35 @@ public class RouterPath: ObservableObject {
       return .handled
     }
     return .systemAction
+  }
+  
+  public func navigateToStatusFrom(url: URL) async {
+    guard let client else { return }
+    Task {
+      let results: SearchResults? = try? await client.get(endpoint: Search.search(query: url.absoluteString,
+                                                                                   type: "statuses",
+                                                                                  offset: nil,
+                                                                                  following: nil),
+                                                          forceVersion: .v2)
+      if let status = results?.statuses.first {
+        navigate(to: .statusDetail(id: status.id))
+      } else {
+        await UIApplication.shared.open(url)
+      }
+    }
+  }
+  
+  public func navigateToAccountFrom(acct: String) async {
+    guard let client else { return }
+    Task {
+      let results: SearchResults? = try? await client.get(endpoint: Search.search(query: acct,
+                                                                                   type: "accounts",
+                                                                                  offset: nil,
+                                                                                  following: nil),
+                                                          forceVersion: .v2)
+      if let account = results?.accounts.first {
+        navigate(to: .accountDetailWithAccount(account: account))
+      }
+    }
   }
 }

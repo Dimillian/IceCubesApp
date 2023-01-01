@@ -98,21 +98,22 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
     guard let client else { return }
     do {
       async let account: Account = client.get(endpoint: Accounts.accounts(id: accountId))
-      async let followedTags: [Tag] = client.get(endpoint: Accounts.followedTags)
-      async let relationships: [Relationshionship] = client.get(endpoint: Accounts.relationships(ids: [accountId]))
       async let featuredTags: [FeaturedTag] = client.get(endpoint: Accounts.featuredTags(id: accountId))
-      async let familliarFollowers: [FamilliarAccounts] = client.get(endpoint: Accounts.familiarFollowers(withAccount: accountId))
       let loadedAccount = try await account
       self.account = loadedAccount
       self.featuredTags = try await featuredTags
       self.featuredTags.sort { $0.statusesCountInt > $1.statusesCountInt }
       self.fields = loadedAccount.fields
       if isCurrentUser {
+        async let followedTags: [Tag] = client.get(endpoint: Accounts.followedTags)
         self.followedTags = try await followedTags
       } else {
-        let relationships = try await relationships
-        self.relationship = relationships.first
-        self.familliarFollowers = try await familliarFollowers.first?.accounts ?? []
+        if client.isAuth {
+          async let relationships: [Relationshionship] = client.get(endpoint: Accounts.relationships(ids: [accountId]))
+          async let familliarFollowers: [FamilliarAccounts] = client.get(endpoint: Accounts.familiarFollowers(withAccount: accountId))
+          self.relationship = try await relationships.first
+          self.familliarFollowers = try await familliarFollowers.first?.accounts ?? []
+        }
       }
       accountState = .data(account: loadedAccount)
     } catch {

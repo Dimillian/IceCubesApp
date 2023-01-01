@@ -11,6 +11,7 @@ struct TimelineTab: View {
   @Binding var popToRootTab: Tab
   @State private var timeline: TimelineFilter = .home
   @State private var scrollToTopSignal: Int = 0
+  @State private var isAddAccountSheetDisplayed = false
   
   var body: some View {
     NavigationStack(path: $routeurPath.path) {
@@ -22,6 +23,10 @@ struct TimelineTab: View {
             statusEditorToolbarItem(routeurPath: routeurPath)
             ToolbarItem(placement: .navigationBarLeading) {
               timelineFilterButton
+            }
+          } else {
+            ToolbarItem(placement: .navigationBarTrailing) {
+              addAccountButton
             }
           }
         }
@@ -56,6 +61,16 @@ struct TimelineTab: View {
     } label: {
       Image(systemName: "line.3.horizontal.decrease.circle")
     }
-
+  }
+  
+  private var addAccountButton: some View {
+    Button {
+      isAddAccountSheetDisplayed = true
+    } label: {
+      Image(systemName: "person.badge.plus")
+    }
+    .sheet(isPresented: $isAddAccountSheetDisplayed) {
+      AddAccountView()
+    }
   }
 }
