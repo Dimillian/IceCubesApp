@@ -47,7 +47,7 @@ public enum TimelineFilter: Hashable, Equatable {
     case .home: return Timelines.home(sinceId: sinceId, maxId: maxId, minId: minId)
       case let .hashtag(tag, accountId):
       if let accountId {
-        return Accounts.statuses(id: accountId, sinceId: nil, tag: tag)
+        return Accounts.statuses(id: accountId, sinceId: nil, tag: tag, onlyMedia: nil, excludeReplies: nil)
       } else {
         return Timelines.hashtag(tag: tag, maxId: maxId)
       }

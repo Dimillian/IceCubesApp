@@ -41,19 +41,15 @@ public struct AccountDetailView: View {
           featuredTagsView
             .offset(y: -36)
           Group {
-            if isCurrentUser {
-              Picker("", selection: $viewModel.selectedTab) {
-                ForEach(AccountDetailViewModel.Tab.allCases, id: \.self) { tab in
-                  Text(tab.title).tag(tab)
-                }
+            Picker("", selection: $viewModel.selectedTab) {
+              ForEach(isCurrentUser ? AccountDetailViewModel.Tab.currentAccountTabs : AccountDetailViewModel.Tab.accountTabs,
+                      id: \.self) { tab in
+                Text(tab.title).tag(tab)
               }
-              .pickerStyle(.segmented)
-              .padding(.horizontal, DS.Constants.layoutPadding)
-              .offset(y: -20)
-            } else {
-              Divider()
-                .offset(y: -20)
             }
+            .pickerStyle(.segmented)
+            .padding(.horizontal, DS.Constants.layoutPadding)
+            .offset(y: -20)
           }
           .id("status")
           

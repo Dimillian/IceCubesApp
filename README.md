@@ -20,7 +20,7 @@ For contributors and myself, here is a todo list of features that could be added
 - [ ] Editor: Post image alts
 - [ ] Editor: Add / Edit polls
 - [ ] Editor: Support video types
-- [ ] Editor: Open camera
+- [ ] Editor: Add photos from camera
 - [X] Editor: Autocomplete for mentions / hashtags
 - [ ] Better settings tab
 - [ ] Edit profile
@@ -30,6 +30,10 @@ For contributors and myself, here is a todo list of features that could be added
 - [ ] Open remote status locally
 - [ ] More context menu everywhere
 - [ ] Support pinned posts
+- [ ] Support IceCubesApp://any mastodon links
+- [ ] Add a share sheet
+- [ ] Proper iPad support
+- [ ] macOS support
 
 
 IceCubesApp is an open source application for accessing the decentralized social network Mastodon! It's built entirely in SwiftUI, making it fast, lightweight, and easy to use.

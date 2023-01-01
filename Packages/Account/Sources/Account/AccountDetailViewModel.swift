@@ -14,14 +14,24 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
     case loading, data(account: Account), error(error: Error)
   }
   
-  enum Tab: Int, CaseIterable {
-    case statuses, favourites, followedTags
+  enum Tab: Int {
+    case statuses, favourites, followedTags, postsAndReplies, media
+    
+    static var currentAccountTabs: [Tab] {
+      [.statuses, .favourites, .followedTags]
+    }
+    
+    static var accountTabs: [Tab] {
+      [.statuses, .postsAndReplies, .media]
+    }
     
     var title: String {
       switch self {
       case .statuses: return "Posts"
       case .favourites: return "Favourites"
       case .followedTags: return "Followed Tags"
+      case .postsAndReplies: return "Posts & Replies"
+      case .media: return "Media"
       }
     }
   }
@@ -55,11 +65,20 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   @Published var familliarFollowers: [Account] = []
   @Published var selectedTab = Tab.statuses {
     didSet {
-      reloadTabState()
+      switch selectedTab {
+      case .statuses, .postsAndReplies, .media:
+        tabTask?.cancel()
+        tabTask = Task {
+          await fetchStatuses()
+        }
+      default:
+        reloadTabState()
+      }
     }
   }
   
   private var account: Account?
+  private var tabTask: Task<Void, Never>?
   
   private(set) var statuses: [Status] = []
   
@@ -109,7 +128,12 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
     guard let client else { return }
     do {
       tabState = .statuses(statusesState: .loading)
-      statuses = try await client.get(endpoint: Accounts.statuses(id: accountId, sinceId: nil, tag: nil))
+      statuses =
+      try await client.get(endpoint: Accounts.statuses(id: accountId,
+                                                       sinceId: nil,
+                                                       tag: nil,
+                                                       onlyMedia: selectedTab == .media ? true : nil,
+                                                       excludeReplies: selectedTab == .statuses && !isCurrentUser ? true : nil))
       if isCurrentUser {
         (favourites, favouritesNextPage) = try await client.getWithLink(endpoint: Accounts.favourites(sinceId: nil))
       }
@@ -123,10 +147,15 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
     guard let client else { return }
     do {
       switch selectedTab {
-      case .statuses:
+      case .statuses, .postsAndReplies, .media:
         guard let lastId = statuses.last?.id else { return }
         tabState = .statuses(statusesState: .display(statuses: statuses, nextPageState: .loadingNextPage))
-        let newStatuses: [Status] = try await client.get(endpoint: Accounts.statuses(id: accountId, sinceId: lastId, tag: nil))
+        let newStatuses: [Status] =
+        try await client.get(endpoint: Accounts.statuses(id: accountId,
+                                                         sinceId: lastId,
+                                                         tag: nil,
+                                                         onlyMedia: selectedTab == .media ? true : nil,
+                                                         excludeReplies: selectedTab == .statuses && !isCurrentUser ? true : nil))
         statuses.append(contentsOf: newStatuses)
         tabState = .statuses(statusesState: .display(statuses: statuses,
                                                      nextPageState: newStatuses.count < 20 ? .none : .hasNextPage))
@@ -164,7 +193,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   
   private func reloadTabState() {
     switch selectedTab {
-    case .statuses:
+    case .statuses, .postsAndReplies, .media:
       tabState = .statuses(statusesState: .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage))
     case .favourites:
       tabState = .statuses(statusesState: .display(statuses: favourites,
