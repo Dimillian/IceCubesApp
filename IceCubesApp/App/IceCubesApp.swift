@@ -49,7 +49,7 @@ struct IceCubesApp: App {
         setNewClientsInEnv(client: appAccountsManager.currentClient)
         setBarsColor(color: theme.primaryBackgroundColor)
       }
-      .preferredColorScheme(theme.colorScheme == "dark" ? .dark : .light)
+      .preferredColorScheme(theme.selectedScheme == ColorScheme.dark ? .dark : .light)
       .environmentObject(appAccountsManager)
       .environmentObject(appAccountsManager.currentClient)
       .environmentObject(quickLook)

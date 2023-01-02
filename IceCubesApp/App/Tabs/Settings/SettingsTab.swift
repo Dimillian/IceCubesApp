@@ -28,6 +28,7 @@ struct SettingsTabs: View {
       .background(theme.secondaryBackgroundColor)
       .navigationTitle(Text("Settings"))
       .navigationBarTitleDisplayMode(.inline)
+      .toolbarBackground(theme.primaryBackgroundColor, for: .navigationBar)
     }
     .onAppear {
       routeurPath.client = client
@@ -64,15 +65,11 @@ struct SettingsTabs: View {
   
   private var themeSection: some View {
     Section("Theme") {
-      Toggle("Prefer dark color scheme", isOn: .init(get: {
-        theme.colorScheme == "dark"
-      }, set: { newValue in
-        if newValue {
-          theme.colorScheme = "dark"
-        } else {
-          theme.colorScheme = "light"
+      Picker("Theme", selection: $theme.selectedSet) {
+        ForEach(Theme.allColorSet, id: \.name.rawValue) { set in
+          Text(set.name.rawValue).tag(set.name)
         }
-      }))
+      }
       ColorPicker("Tint color", selection: $theme.tintColor)
       ColorPicker("Background color", selection: $theme.primaryBackgroundColor)
       ColorPicker("Secondary Background color", selection: $theme.secondaryBackgroundColor)
@@ -82,11 +79,7 @@ struct SettingsTabs: View {
         }
       }
       Button {
-        theme.colorScheme = "dark"
-        theme.tintColor = .brand
-        theme.primaryBackgroundColor = .primaryBackground
-        theme.secondaryBackgroundColor = .secondaryBackground
-        theme.avatarPosition = .top
+        theme.selectedSet = .iceCubeDark
       } label: {
         Text("Restore default")
       }
