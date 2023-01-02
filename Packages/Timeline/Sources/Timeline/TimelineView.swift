@@ -16,6 +16,7 @@ public struct TimelineView: View {
   @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
+  @EnvironmentObject private var routerPath: RouterPath
   
   @StateObject private var viewModel = TimelineViewModel()
 
@@ -54,6 +55,22 @@ public struct TimelineView: View {
       }
     }
     .navigationTitle(timeline.title())
+    .toolbar{
+      switch timeline {
+      case let .list(list):
+        ToolbarItem {
+          Button {
+            routerPath.presentedSheet = .listEdit(list: list)
+          } label: {
+            Image(systemName: "pencil")
+          }
+        }
+      default:
+        ToolbarItem {
+          EmptyView()
+        }
+      }
+    }
     .navigationBarTitleDisplayMode(.inline)
     .onAppear {
       viewModel.client = client

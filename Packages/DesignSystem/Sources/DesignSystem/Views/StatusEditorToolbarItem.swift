@@ -13,3 +13,19 @@ extension View {
     }
   }
 }
+
+public struct StatusEditorToolbarItem: ToolbarContent {
+  @EnvironmentObject private var routerPath: RouterPath
+  
+  public init() { }
+  
+  public var body: some ToolbarContent {
+    ToolbarItem(placement: .navigationBarTrailing) {
+      Button {
+        routerPath.presentedSheet = .newStatusEditor
+      } label: {
+        Image(systemName: "square.and.pencil")
+      }
+    }
+  }
+}

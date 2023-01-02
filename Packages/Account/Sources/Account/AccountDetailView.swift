@@ -18,6 +18,8 @@ public struct AccountDetailView: View {
   @State private var scrollOffset: CGFloat = 0
   @State private var isFieldsSheetDisplayed: Bool = false
   @State private var isCurrentUser: Bool = false
+  @State private var isCreateListAlertPresented: Bool = false
+  @State private var createListTitle: String = ""
   
   /// When coming from a URL like a mention tap in a status.
   public init(accountId: String) {
@@ -58,11 +60,28 @@ public struct AccountDetailView: View {
             StatusesListView(fetcher: viewModel)
           case let .followedTags(tags):
             makeTagsListView(tags: tags)
+          case .lists:
+            listsListView
           }
         }
       }
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
+      .toolbar {
+        if viewModel.relationship?.following == true, let account = viewModel.account {
+          ToolbarItem {
+            Menu {
+              Button {
+                routeurPath.presentedSheet = .listAddAccount(account: account)
+              } label: {
+                Label("Add/Remove from lists", systemImage: "list.bullet")
+              }
+            } label: {
+              Image(systemName: "ellipsis")
+            }
+          }
+        }
+      }
     }
     .onAppear {
       Task {
@@ -220,10 +239,60 @@ public struct AccountDetailView: View {
   private func makeTagsListView(tags: [Tag]) -> some View {
     Group {
       ForEach(tags) { tag in
-        TagRowView(tag: tag)
-          .padding(.horizontal, DS.Constants.layoutPadding)
-          .padding(.vertical, 8)
+        HStack {
+          TagRowView(tag: tag)
+          Spacer()
+          Image(systemName: "chevron.right")
+        }
+        .padding(.horizontal, DS.Constants.layoutPadding)
+        .padding(.vertical, 8)
       }
+    }
+  }
+  
+  private var listsListView: some View {
+    Group {
+      ForEach(currentAccount.lists) { list in
+        NavigationLink(value: RouteurDestinations.list(list: list)) {
+          HStack {
+            Text(list.title)
+            Spacer()
+            Image(systemName: "chevron.right")
+          }
+          .padding(.vertical, 8)
+          .padding(.horizontal, DS.Constants.layoutPadding)
+          .font(.headline)
+          .foregroundColor(.white)
+        }
+        .contextMenu {
+          Button("Delete list", role: .destructive) {
+            Task {
+              await currentAccount.deleteList(list: list)
+            }
+          }
+        }
+      }
+      Button("Create a new list") {
+        isCreateListAlertPresented = true
+      }
+      .padding(.horizontal, DS.Constants.layoutPadding)
+    }
+    .alert("Create a new list", isPresented: $isCreateListAlertPresented) {
+      TextField("List name", text: $createListTitle)
+      Button("Cancel") {
+        isCreateListAlertPresented = false
+        createListTitle = ""
+      }
+      Button("Create List") {
+        guard !createListTitle.isEmpty else { return }
+        isCreateListAlertPresented = false
+        Task {
+          await currentAccount.createList(title: createListTitle)
+          createListTitle = ""
+        }
+      }
+    } message: {
+      Text("Enter the name for your list")
     }
   }
 }

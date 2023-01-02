@@ -15,10 +15,10 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   }
   
   enum Tab: Int {
-    case statuses, favourites, followedTags, postsAndReplies, media
+    case statuses, favourites, followedTags, postsAndReplies, media, lists
     
     static var currentAccountTabs: [Tab] {
-      [.statuses, .favourites, .followedTags]
+      [.statuses, .favourites, .followedTags, .lists]
     }
     
     static var accountTabs: [Tab] {
@@ -28,10 +28,11 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
     var title: String {
       switch self {
       case .statuses: return "Posts"
-      case .favourites: return "Favourites"
-      case .followedTags: return "Followed Tags"
+      case .favourites: return "Favorites"
+      case .followedTags: return "Tags"
       case .postsAndReplies: return "Posts & Replies"
       case .media: return "Media"
+      case .lists: return "Lists"
       }
     }
   }
@@ -39,6 +40,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   enum TabState {
     case followedTags(tags: [Tag])
     case statuses(statusesState: StatusesState)
+    case lists
   }
   
   @Published var accountState: AccountState = .loading
@@ -77,7 +79,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
     }
   }
   
-  private var account: Account?
+  private(set) var account: Account?
   private var tabTask: Task<Void, Never>?
   
   private(set) var statuses: [Status] = []
@@ -91,6 +93,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   /// When the account is already fetched by the parent caller.
   init(account: Account) {
     self.accountId = account.id
+    self.account = account
     self.accountState = .data(account: account)
   }
   
@@ -166,7 +169,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
         (newFavourites, favouritesNextPage) = try await client.getWithLink(endpoint: Accounts.favourites(sinceId: nextPageId))
         favourites.append(contentsOf: newFavourites)
         tabState = .statuses(statusesState: .display(statuses: favourites, nextPageState: .hasNextPage))
-      case .followedTags:
+      case .followedTags, .lists:
         break
       }
     } catch {
@@ -201,6 +204,8 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
                                                    nextPageState: favouritesNextPage != nil ? .hasNextPage : .none))
     case .followedTags:
       tabState = .followedTags(tags: followedTags)
+    case .lists:
+      tabState = .lists
     }
   }
   

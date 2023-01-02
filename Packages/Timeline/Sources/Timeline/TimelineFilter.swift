@@ -5,6 +5,7 @@ import Network
 public enum TimelineFilter: Hashable, Equatable {
   case pub, local, home, trending
   case hashtag(tag: String, accountId: String?)
+  case list(list: List)
   
   public func hash(into hasher: inout Hasher) {
     hasher.combine(title())
@@ -29,6 +30,8 @@ public enum TimelineFilter: Hashable, Equatable {
       return "Home"
     case let .hashtag(tag, _):
       return "#\(tag)"
+    case let .list(list):
+      return list.title
     }
   }
   
@@ -42,6 +45,8 @@ public enum TimelineFilter: Hashable, Equatable {
       return "chart.line.uptrend.xyaxis"
     case .home:
       return "house"
+    case .list(_):
+      return "list.bullet"
     default:
       return nil
     }
@@ -53,7 +58,8 @@ public enum TimelineFilter: Hashable, Equatable {
     case .local: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true)
     case .home: return Timelines.home(sinceId: sinceId, maxId: maxId, minId: minId)
     case .trending: return Trends.statuses(offset: offset)
-      case let .hashtag(tag, accountId):
+    case let .list(list): return Timelines.list(listId: list.id, sinceId: sinceId, maxId: maxId, minId: minId)
+    case let .hashtag(tag, accountId):
       if let accountId {
         return Accounts.statuses(id: accountId, sinceId: nil, tag: tag, onlyMedia: nil, excludeReplies: nil)
       } else {

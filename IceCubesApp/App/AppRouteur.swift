@@ -4,6 +4,7 @@ import Account
 import Env
 import Status
 import DesignSystem
+import Lists
 
 extension View {
   func withAppRouteur() -> some View {
@@ -17,6 +18,8 @@ extension View {
         StatusDetailView(statusId: id)
       case let .hashTag(tag, accountId):
         TimelineView(timeline: .constant(.hashtag(tag: tag, accountId: accountId)), scrollToTopSignal: .constant(0))
+      case let .list(list):
+        TimelineView(timeline: .constant(.list(list: list)), scrollToTopSignal: .constant(0))
       case let .following(id):
         AccountsListView(mode: .following(accountId: id))
       case let .followers(id):
@@ -40,6 +43,10 @@ extension View {
         StatusEditorView(mode: .edit(status: status))
       case let .quoteStatusEditor(status):
         StatusEditorView(mode: .quote(status: status))
+      case let .listEdit(list):
+        ListEditView(list: list)
+      case let .listAddAccount(account):
+        ListAddAccountView(account: account)
       }
     }
   }

@@ -14,6 +14,7 @@ public enum Accounts: Endpoint {
   case suggestions
   case followers(id: String, maxId: String?)
   case following(id: String, maxId: String?)
+  case lists(id: String)
   
   public func path() -> String {
     switch self {
@@ -43,6 +44,8 @@ public enum Accounts: Endpoint {
       return "accounts/\(id)/following"
     case .followers(let id, _):
       return "accounts/\(id)/followers"
+    case .lists(let id):
+      return "accounts/\(id)/lists"
     }
   }
   

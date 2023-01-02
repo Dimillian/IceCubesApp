@@ -120,7 +120,7 @@ extension Models.Notification.NotificationType {
     case .poll:
       return "poll ended"
     case .update:
-      return "has been edited"
+      return "edited a post"
     }
   }
   

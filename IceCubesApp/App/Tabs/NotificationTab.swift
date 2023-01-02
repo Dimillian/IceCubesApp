@@ -31,5 +31,8 @@ struct NotificationsTab: View {
         routeurPath.path = []
       }
     }
+    .onChange(of: currentAccount.account?.id) { _ in
+      routeurPath.path = []
+    }
   }
 }

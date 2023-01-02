@@ -33,6 +33,9 @@ struct AccountTab: View {
         routeurPath.path = []
       }
     }
+    .onChange(of: currentAccount.account?.id) { _ in
+      routeurPath.path = []
+    }
     .onAppear {
       routeurPath.client = client
     }
