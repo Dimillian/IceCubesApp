@@ -28,6 +28,7 @@ struct SettingsTabs: View {
       .background(theme.secondaryBackgroundColor)
       .navigationTitle(Text("Settings"))
       .navigationBarTitleDisplayMode(.inline)
+      .toolbarBackground(theme.primaryBackgroundColor, for: .navigationBar)
     }
     .onAppear {
       routeurPath.client = client
