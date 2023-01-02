@@ -68,7 +68,9 @@ public class Theme: ObservableObject {
       IceCubeDark(),
       IceCubeLight(),
       DesertDark(),
-      DesertLight()
+      DesertLight(),
+      NemesisDark(),
+      NemesisLight()
     ]
   }
   
