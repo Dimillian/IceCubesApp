@@ -15,6 +15,8 @@ public enum ColorScheme: String {
 public enum ColorSetName: String {
   case iceCubeDark = "Ice Cube - Dark"
   case iceCubeLight = "Ice Cube - Light"
+  case desertDark = "Desert - Dark"
+  case desertLight = "Desert - Light"
 }
 
 public struct IceCubeDark: ColorSet {
@@ -38,3 +40,26 @@ public struct IceCubeLight: ColorSet {
   
   public init() {}
 }
+
+public struct DesertDark: ColorSet {
+  public var name: ColorSetName = .desertDark
+  public var scheme: ColorScheme = .dark
+  public var tintColor: Color = Color(hex: 0xdf915e)
+  public var primaryBackgroundColor: Color = Color(hex: 0x433744)
+  public var secondaryBackgroundColor: Color = Color(hex:0x654868)
+  public var labelColor: Color = .black
+  
+  public init() {}
+}
+
+public struct DesertLight: ColorSet {
+  public var name: ColorSetName = .desertLight
+  public var scheme: ColorScheme = .light
+  public var tintColor: Color = Color(hex: 0xdf915e)
+  public var primaryBackgroundColor: Color = Color(hex: 0xfcf2eb)
+  public var secondaryBackgroundColor: Color = Color(hex:0xeeede7)
+  public var labelColor: Color = .black
+  
+  public init() {}
+}
+

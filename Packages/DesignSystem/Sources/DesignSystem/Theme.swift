@@ -66,7 +66,9 @@ public class Theme: ObservableObject {
   public static var allColorSet: [ColorSet] {
     [
       IceCubeDark(),
-      IceCubeLight()
+      IceCubeLight(),
+      DesertDark(),
+      DesertLight()
     ]
   }
   
