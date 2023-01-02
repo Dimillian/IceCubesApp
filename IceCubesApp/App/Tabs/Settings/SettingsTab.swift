@@ -78,7 +78,7 @@ struct SettingsTabs: View {
         }
       }
       Button {
-        theme.setColor(withName: .iceCubeDark)
+        theme.selectedSet = .iceCubeDark
       } label: {
         Text("Restore default")
       }
