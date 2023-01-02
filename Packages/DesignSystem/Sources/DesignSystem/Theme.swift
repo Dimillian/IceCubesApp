@@ -35,7 +35,10 @@ public class Theme: ObservableObject {
   private var cancellables = Set<AnyCancellable>()
   
   public init() {
+    selectedSet = storedSet
+    
     // If theme is never set before set the default store. This should only execute once after install.
+    
     if !isSet {
       setColor(withName: .iceCubeDark)
       isSet = true
