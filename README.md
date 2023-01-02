@@ -1,6 +1,6 @@
 # IceCubesApp
 
-[Public TestFlight beta](https://testflight.apple.com/join/tqI3dK1u) (An proper App Store release will come eventually)
+[Public TestFlight beta](https://testflight.apple.com/join/tqI3dK1u) (A proper App Store release will come eventually)
 
 <p float="left">
     <img src="Images/image1.png" width="300" />
