@@ -114,6 +114,16 @@ public struct StatusRowView: View {
         Text(status.spoilerText)
           .font(.body)
       }
+      if viewModel.displaySpoiler == false && !viewModel.status.spoilerText.isEmpty {
+        Button {
+          withAnimation {
+            viewModel.displaySpoiler = true
+          }
+        } label: {
+          Text("Show less")
+        }
+          .buttonStyle(.bordered)
+      }
       if viewModel.displaySpoiler {
         Button {
           withAnimation {
