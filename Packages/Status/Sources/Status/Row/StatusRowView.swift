@@ -18,7 +18,7 @@ public struct StatusRowView: View {
   }
   
   public var body: some View {
-    HStack(alignment: .top, spacing: DS.Constants.statusColumnsSpacing) {
+    HStack(alignment: .top, spacing: .statusColumnsSpacing) {
       if !viewModel.isCompact,
          theme.avatarPosition == .leading,
          let status: AnyStatus = viewModel.status.reblog ?? viewModel.status {

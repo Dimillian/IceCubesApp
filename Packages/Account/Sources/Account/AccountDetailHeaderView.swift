@@ -124,7 +124,7 @@ struct AccountDetailHeaderView: View {
           routeurPath.handle(url: url)
         })
     }
-    .padding(.horizontal, DS.Constants.layoutPadding)
+    .padding(.horizontal, .layoutPadding)
     .offset(y: -40)
   }
   

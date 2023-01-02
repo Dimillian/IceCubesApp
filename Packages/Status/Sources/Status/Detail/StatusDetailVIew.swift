@@ -34,7 +34,7 @@ public struct StatusDetailView: View {
               ForEach(context.ancestors) { ancestor in
                 StatusRowView(viewModel: .init(status: ancestor, isCompact: false))
                 Divider()
-                  .padding(.vertical, DS.Constants.dividerPadding)
+                  .padding(.vertical, .dividerPadding)
               }
             }
             StatusRowView(viewModel: .init(status: status,
@@ -42,12 +42,12 @@ public struct StatusDetailView: View {
                                            isFocused: true))
               .id(status.id)
             Divider()
-              .padding(.bottom, DS.Constants.dividerPadding * 2)
+              .padding(.bottom, .dividerPadding * 2)
             if !context.descendants.isEmpty {
               ForEach(context.descendants) { descendant in
                 StatusRowView(viewModel: .init(status: descendant, isCompact: false))
                 Divider()
-                  .padding(.vertical, DS.Constants.dividerPadding)
+                  .padding(.vertical, .dividerPadding)
               }
             }
             
@@ -55,8 +55,8 @@ public struct StatusDetailView: View {
             Text(error.localizedDescription)
           }
         }
-        .padding(.horizontal, DS.Constants.layoutPadding)
-        .padding(.top, DS.Constants.layoutPadding)
+        .padding(.horizontal, .layoutPadding)
+        .padding(.top, .layoutPadding)
       }
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)

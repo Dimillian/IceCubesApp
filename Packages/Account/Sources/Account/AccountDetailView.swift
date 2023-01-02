@@ -50,7 +50,7 @@ public struct AccountDetailView: View {
               }
             }
             .pickerStyle(.segmented)
-            .padding(.horizontal, DS.Constants.layoutPadding)
+            .padding(.horizontal, .layoutPadding)
             .offset(y: -20)
           }
           .id("status")
@@ -180,7 +180,7 @@ public struct AccountDetailView: View {
             }
           }
         }
-        .padding(.leading, DS.Constants.layoutPadding)
+        .padding(.leading, .layoutPadding)
       }
     }
   }
@@ -191,7 +191,7 @@ public struct AccountDetailView: View {
       VStack(alignment: .leading, spacing: 2) {
         Text("Also followed by")
           .font(.headline)
-          .padding(.leading, DS.Constants.layoutPadding)
+          .padding(.leading, .layoutPadding)
         ScrollView(.horizontal, showsIndicators: false) {
           LazyHStack(spacing: 0) {
             ForEach(viewModel.familliarFollowers) { account in
@@ -202,7 +202,7 @@ public struct AccountDetailView: View {
                 .padding(.leading, -4)
             }
           }
-          .padding(.leading, DS.Constants.layoutPadding + 4)
+          .padding(.leading, .layoutPadding + 4)
         }
       }
       .padding(.top, 2)
@@ -244,7 +244,7 @@ public struct AccountDetailView: View {
           Spacer()
           Image(systemName: "chevron.right")
         }
-        .padding(.horizontal, DS.Constants.layoutPadding)
+        .padding(.horizontal, .layoutPadding)
         .padding(.vertical, 8)
       }
     }
@@ -260,7 +260,7 @@ public struct AccountDetailView: View {
             Image(systemName: "chevron.right")
           }
           .padding(.vertical, 8)
-          .padding(.horizontal, DS.Constants.layoutPadding)
+          .padding(.horizontal, .layoutPadding)
           .font(.headline)
           .foregroundColor(.white)
         }
@@ -275,7 +275,7 @@ public struct AccountDetailView: View {
       Button("Create a new list") {
         isCreateListAlertPresented = true
       }
-      .padding(.horizontal, DS.Constants.layoutPadding)
+      .padding(.horizontal, .layoutPadding)
     }
     .alert("Create a new list", isPresented: $isCreateListAlertPresented) {
       TextField("List name", text: $createListTitle)
