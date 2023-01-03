@@ -36,7 +36,7 @@ For contributors and myself, here is a todo list of features that could be added
 - [ ] Edit filters.
 - [X] Open remote status locally
 - [ ] More context menu everywhere
-- [ ] Support pinned posts
+- [X] Support pinned posts
 - [ ] Support IceCubesApp://any mastodon links
 - [ ] Add a share sheet
 - [ ] Translate button

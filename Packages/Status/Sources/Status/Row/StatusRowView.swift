@@ -238,10 +238,13 @@ public struct StatusRowView: View {
     } } label: {
       Label(viewModel.isReblogged ? "Unboost" : "Boost", systemImage: "arrow.left.arrow.right.circle")
     }
-    Button {
-      routeurPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
-    } label: {
-      Label("Quote this post", systemImage: "quote.bubble")
+    
+    if viewModel.status.visibility == .pub {
+      Button {
+        routeurPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
+      } label: {
+        Label("Quote this post", systemImage: "quote.bubble")
+      }
     }
     
     if let url = viewModel.status.reblog?.url ?? viewModel.status.url {

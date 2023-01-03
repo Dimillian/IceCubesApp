@@ -114,6 +114,7 @@ public class StatusEditorViewModel: ObservableObject {
       }
       mentionString += " "
       replyToStatus = status
+      visibility = status.visibility
       statusText = .init(string: mentionString)
       selectedRange = .init(location: mentionString.utf16.count, length: 0)
     case let .edit(status):
@@ -121,6 +122,7 @@ public class StatusEditorViewModel: ObservableObject {
       selectedRange = .init(location: statusText.string.utf16.count, length: 0)
       spoilerOn = !status.spoilerText.isEmpty
       spoilerText = status.spoilerText
+      visibility = status.visibility
       mediasImages = status.mediaAttachments.map{ .init(image: nil, mediaAttachement: $0, error: nil )}
     case let .quote(status):
       self.embededStatus = status
