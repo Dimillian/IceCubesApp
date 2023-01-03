@@ -20,7 +20,7 @@ For contributors and myself, here is a todo list of features that could be added
 - [ ] DM / Conversations
 - [X] Lists support
 - [X] Display images alt
-- [ ] Editor: Post image alts
+- [X] Editor: Post image alts
 - [ ] Editor: Add / Edit polls
 - [ ] Editor: Support video types
 - [ ] Editor: Add photos from camera
