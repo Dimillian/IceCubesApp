@@ -49,7 +49,7 @@ public struct DesertDark: ColorSet {
   public var tintColor: Color = Color(hex: 0xdf915e)
   public var primaryBackgroundColor: Color = Color(hex: 0x433744)
   public var secondaryBackgroundColor: Color = Color(hex:0x654868)
-  public var labelColor: Color = .black
+  public var labelColor: Color = .white
   
   public init() {}
 }
@@ -71,7 +71,7 @@ public struct NemesisDark: ColorSet {
   public var tintColor: Color = Color(hex: 0x17a2f2)
   public var primaryBackgroundColor: Color = Color(hex: 0x000000)
   public var secondaryBackgroundColor: Color = Color(hex:0x151e2b)
-  public var labelColor: Color = .black
+  public var labelColor: Color = .white
   
   public init() {}
 }
