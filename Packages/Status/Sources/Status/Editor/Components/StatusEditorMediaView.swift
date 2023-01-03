@@ -93,7 +93,7 @@ struct StatusEditorMediaView: View {
     Button {
       editingContainer = container
     } label: {
-      Label(editingContainer?.mediaAttachement?.description?.isEmpty == false ?
+      Label(container.mediaAttachement?.description?.isEmpty == false ?
             "Edit description" : "Add description",
             systemImage: "pencil.line")
     }
