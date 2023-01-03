@@ -16,6 +16,11 @@ public class StatusRowViewModel: ObservableObject {
   @Published var embededStatus: Status?
   @Published var displaySpoiler: Bool = false
   @Published var isEmbedLoading: Bool = true
+  @Published var isFiltered: Bool = false
+  
+  var filter: Filtered? {
+    status.reblog?.filtered.first ?? status.filtered.first
+  }
   
   var client: Client?
   
@@ -36,6 +41,8 @@ public class StatusRowViewModel: ObservableObject {
     self.reblogsCount = status.reblog?.reblogsCount ?? status.reblogsCount
     self.repliesCount = status.reblog?.repliesCount ?? status.repliesCount
     self.displaySpoiler = !status.spoilerText.isEmpty
+    
+    self.isFiltered = filter != nil
   }
   
   func loadEmbededStatus() async {

@@ -31,7 +31,9 @@ For contributors and myself, here is a todo list of features that could be added
 - [ ] Handle emoji in status
 - [X] Light theme
 - [X] More themes
-- [ ] Honor & display server side features (filter, default visibility, etc...)
+- [ ] Display & Edit server side features (filter, default visibility, etc...)
+- [X] Honor filters for statuses.
+- [ ] Edit filters.
 - [X] Open remote status locally
 - [ ] More context menu everywhere
 - [ ] Support pinned posts

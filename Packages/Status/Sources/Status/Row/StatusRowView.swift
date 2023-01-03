@@ -18,43 +18,65 @@ public struct StatusRowView: View {
   }
   
   public var body: some View {
-    HStack(alignment: .top, spacing: .statusColumnsSpacing) {
-      if !viewModel.isCompact,
-         theme.avatarPosition == .leading,
-         let status: AnyStatus = viewModel.status.reblog ?? viewModel.status {
-        Button {
-          routeurPath.navigate(to: .accountDetailWithAccount(account: status.account))
-        } label: {
-          AvatarView(url: status.account.avatar, size: .status)
+    if viewModel.isFiltered, let filter = viewModel.filter {
+      switch filter.filter.filterAction {
+      case .warn:
+        makeFilterView(filter: filter.filter)
+      case .hide:
+        EmptyView()
+      }
+    } else {
+      HStack(alignment: .top, spacing: .statusColumnsSpacing) {
+        if !viewModel.isCompact,
+           theme.avatarPosition == .leading,
+           let status: AnyStatus = viewModel.status.reblog ?? viewModel.status {
+          Button {
+            routeurPath.navigate(to: .accountDetailWithAccount(account: status.account))
+          } label: {
+            AvatarView(url: status.account.avatar, size: .status)
+          }
+        }
+        VStack(alignment: .leading) {
+          if !viewModel.isCompact {
+            reblogView
+             replyView
+          }
+          statusView
+          if !viewModel.isCompact {
+            StatusActionsView(viewModel: viewModel)
+              .padding(.vertical, 8)
+              .tint(viewModel.isFocused ? theme.tintColor : .gray)
+              .contentShape(Rectangle())
+              .onTapGesture {
+                routeurPath.navigate(to: .statusDetail(id: viewModel.status.reblog?.id ?? viewModel.status.id))
+              }
+          }
         }
       }
-      VStack(alignment: .leading) {
-        if !viewModel.isCompact {
-          reblogView
-           replyView
+      .onAppear {
+        viewModel.client = client
+        if !viewModel.isCompact, viewModel.embededStatus == nil {
+          Task {
+            await viewModel.loadEmbededStatus()
+          }
         }
-        statusView
-        if !viewModel.isCompact {
-          StatusActionsView(viewModel: viewModel)
-            .padding(.vertical, 8)
-            .tint(viewModel.isFocused ? theme.tintColor : .gray)
-            .contentShape(Rectangle())
-            .onTapGesture {
-              routeurPath.navigate(to: .statusDetail(id: viewModel.status.reblog?.id ?? viewModel.status.id))
-            }
-        }
+      }
+      .contextMenu {
+        contextMenu
       }
     }
-    .onAppear {
-      viewModel.client = client
-      if !viewModel.isCompact, viewModel.embededStatus == nil {
-        Task {
-          await viewModel.loadEmbededStatus()
+  }
+  
+  private func makeFilterView(filter: Filter) -> some View {
+    HStack {
+      Text("Filtered by: \(filter.title)")
+      Button {
+        withAnimation {
+          viewModel.isFiltered = false
         }
+      } label: {
+        Text("Show anyway")
       }
-    }
-    .contextMenu {
-      contextMenu
     }
   }
   
