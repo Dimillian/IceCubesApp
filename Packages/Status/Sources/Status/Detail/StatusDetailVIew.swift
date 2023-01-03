@@ -26,13 +26,17 @@ public struct StatusDetailView: View {
           case .loading:
             ForEach(Status.placeholders()) { status in
               StatusRowView(viewModel: .init(status: status, isCompact: false))
+                .padding(.horizontal, .layoutPadding)
                 .redacted(reason: .placeholder)
                 .shimmering()
+              Divider()
+                .padding(.vertical, .dividerPadding)
             }
           case let.display(status, context):
             if !context.ancestors.isEmpty {
               ForEach(context.ancestors) { ancestor in
                 StatusRowView(viewModel: .init(status: ancestor, isCompact: false))
+                  .padding(.horizontal, .layoutPadding)
                 Divider()
                   .padding(.vertical, .dividerPadding)
               }
@@ -40,12 +44,14 @@ public struct StatusDetailView: View {
             StatusRowView(viewModel: .init(status: status,
                                            isCompact: false,
                                            isFocused: true))
+            .padding(.horizontal, .layoutPadding)
               .id(status.id)
             Divider()
               .padding(.bottom, .dividerPadding * 2)
             if !context.descendants.isEmpty {
               ForEach(context.descendants) { descendant in
                 StatusRowView(viewModel: .init(status: descendant, isCompact: false))
+                  .padding(.horizontal, .layoutPadding)
                 Divider()
                   .padding(.vertical, .dividerPadding)
               }
@@ -53,9 +59,9 @@ public struct StatusDetailView: View {
             
           case let .error(error):
             Text(error.localizedDescription)
+              .padding(.horizontal, .layoutPadding)
           }
         }
-        .padding(.horizontal, .layoutPadding)
         .padding(.top, .layoutPadding)
       }
       .scrollContentBackground(.hidden)
