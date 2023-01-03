@@ -9,41 +9,24 @@ public struct ThemePreviewView: View {
   public init() {}
   
   public var body: some View {
-    VStack {
-      HStack {
-        Text("Select Theme")
-          .font(.title3)
-          .fontWeight(.medium)
-          .foregroundColor(theme.tintColor)
-        Spacer()
-        Button {
-          dismiss()
-        } label: {
-          Image(systemName: "xmark.circle.fill")
-            .resizable()
-            .frame(width: 24, height: 24)
-            .foregroundColor(theme.tintColor)
-        }
+    ScrollView {
+      HStack (spacing: gutterSpace) {
+        ThemeBoxView(color: IceCubeDark())
+        ThemeBoxView(color: IceCubeLight())
       }
-      .padding()
-      ScrollView {
-        HStack (spacing: gutterSpace) {
-          ThemeBoxView(color: IceCubeDark())
-          ThemeBoxView(color: IceCubeLight())
-        }
-        HStack (spacing: gutterSpace) {
-          ThemeBoxView(color: DesertDark())
-          ThemeBoxView(color: DesertLight())
-        }
-        HStack (spacing: gutterSpace) {
-          ThemeBoxView(color: NemesisDark())
-          ThemeBoxView(color: NemesisLight())
-        }
+      HStack (spacing: gutterSpace) {
+        ThemeBoxView(color: DesertDark())
+        ThemeBoxView(color: DesertLight())
       }
-      .padding([.horizontal], 4)
-      .frame(maxHeight: .infinity)
+      HStack (spacing: gutterSpace) {
+        ThemeBoxView(color: NemesisDark())
+        ThemeBoxView(color: NemesisLight())
+      }
     }
+    .padding(4)
+    .frame(maxHeight: .infinity)
     .background(theme.primaryBackgroundColor)
+    .navigationTitle("Theme Selector")
   }
 }
 
@@ -78,15 +61,21 @@ struct ThemeBoxView: View {
         Text("#icecube, #techhub")
           .foregroundColor(color.tintColor)
         if isSelected {
-          Image(systemName: "checkmark.circle.fill")
-            .resizable()
-            .frame(width: 20, height: 20)
-            .foregroundColor(.green)
+          HStack {
+            Spacer()
+            Image(systemName: "checkmark.seal.fill")
+              .resizable()
+              .frame(width: 20, height: 20)
+              .foregroundColor(.green)
+          }
         } else {
-          Circle()
-            .strokeBorder(color.tintColor, lineWidth: 1)
-            .background(Circle().fill(color.primaryBackgroundColor))
-            .frame(width: 20, height: 20)
+          HStack {
+            Spacer()
+            Circle()
+              .strokeBorder(color.tintColor, lineWidth: 1)
+              .background(Circle().fill(color.primaryBackgroundColor))
+              .frame(width: 20, height: 20)
+          }
         }
       }
       .frame(maxWidth: .infinity)

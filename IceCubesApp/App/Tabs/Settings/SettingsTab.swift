@@ -124,17 +124,16 @@ struct SettingsTabs: View {
   }
   
   private var themeSelectorButton: some View {
-    Button {
-      isThemeSelectorPresented.toggle()
-    } label: {
-      HStack {
-        Text("Select theme")
-        Spacer()
-        Text(theme.selectedSet.rawValue)
+    NavigationLink(destination: ThemePreviewView()) {
+      Button {
+        isThemeSelectorPresented.toggle()
+      } label: {
+        HStack {
+          Text("Theme")
+          Spacer()
+          Text(theme.selectedSet.rawValue)
+        }
       }
-    }
-    .sheet(isPresented: $isThemeSelectorPresented) {
-      ThemePreviewView()
     }
   }
   
