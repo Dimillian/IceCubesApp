@@ -123,7 +123,7 @@ public struct StatusMediaPreviewView: View {
                 .shimmering()
             }
           }
-          if let alt = attachement.description, !isCompact {
+          if let alt = attachement.description, !alt.isEmpty, !isCompact {
             Button {
               altTextDisplayed = alt
               isAltAlertDisplayed = true
@@ -184,7 +184,7 @@ public struct StatusMediaPreviewView: View {
               }
               .frame(width: isCompact ? imageMaxHeight : proxy.frame(in: .local).width)
               .frame(height: imageMaxHeight)
-              if let alt = attachement.description, !isCompact {
+              if let alt = attachement.description, !alt.isEmpty, !isCompact {
                 Button {
                   altTextDisplayed = alt
                   isAltAlertDisplayed = true
