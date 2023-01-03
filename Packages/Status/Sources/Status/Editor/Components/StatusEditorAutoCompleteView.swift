@@ -16,7 +16,7 @@ struct StatusEditorAutoCompleteView: View {
             suggestionsTagView
           }
         }
-        .padding(.horizontal, DS.Constants.layoutPadding)
+        .padding(.horizontal, .layoutPadding)
       }
       .frame(height: 40)
       .background(.ultraThinMaterial)

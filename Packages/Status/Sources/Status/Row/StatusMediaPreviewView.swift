@@ -96,8 +96,8 @@ public struct StatusMediaPreviewView: View {
     switch attachement.supportedType {
     case .image:
       if let size = size(for: attachement) {
-        let avatarColumnWidth = theme.avatarPosition == .leading ? AvatarView.Size.status.size.width + DS.Constants.statusColumnsSpacing : 0
-        let availableWidth = UIScreen.main.bounds.width - (DS.Constants.layoutPadding * 2) - avatarColumnWidth
+        let avatarColumnWidth = theme.avatarPosition == .leading ? AvatarView.Size.status.size.width + .statusColumnsSpacing : 0
+        let availableWidth = UIScreen.main.bounds.width - (.layoutPadding * 2) - avatarColumnWidth
         let newSize = imageSize(from: size,
                                 newWidth: availableWidth)
         LazyImage(url: attachement.url) { state in

@@ -43,7 +43,7 @@ public struct TimelineView: View {
               .padding(.bottom, 16)
             StatusesListView(fetcher: viewModel)
           }
-          .padding(.top, DS.Constants.layoutPadding)
+          .padding(.top, .layoutPadding)
         }
         .background(theme.primaryBackgroundColor)
         if viewModel.pendingStatusesEnabled {
@@ -148,7 +148,7 @@ public struct TimelineView: View {
           Text(tag.following ? "Following": "Follow")
         }.buttonStyle(.bordered)
       }
-      .padding(.horizontal, DS.Constants.layoutPadding)
+      .padding(.horizontal, .layoutPadding)
       .padding(.vertical, 8)
       .background(theme.secondaryBackgroundColor)
     }
