@@ -262,7 +262,7 @@ public struct AccountDetailView: View {
           .padding(.vertical, 8)
           .padding(.horizontal, DS.Constants.layoutPadding)
           .font(.headline)
-          .foregroundColor(.white)
+          .foregroundColor(theme.labelColor)
         }
         .contextMenu {
           Button("Delete list", role: .destructive) {
