@@ -7,6 +7,15 @@ extension StatusEditorViewModel {
     case edit(status: Status)
     case quote(status: Status)
     
+    var isEditing: Bool {
+      switch self {
+      case .edit:
+        return true
+      default:
+        return false
+      }
+    }
+    
     var replyToStatus: Status? {
       switch self {
         case let .replyTo(status):

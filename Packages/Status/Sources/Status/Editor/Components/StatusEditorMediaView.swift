@@ -90,12 +90,14 @@ struct StatusEditorMediaView: View {
   
   @ViewBuilder
   private func makeImageMenu(container: StatusEditorViewModel.ImageContainer) -> some View {
-    Button {
-      editingContainer = container
-    } label: {
-      Label(container.mediaAttachement?.description?.isEmpty == false ?
-            "Edit description" : "Add description",
-            systemImage: "pencil.line")
+    if !viewModel.mode.isEditing {
+      Button {
+        editingContainer = container
+      } label: {
+        Label(container.mediaAttachement?.description?.isEmpty == false ?
+              "Edit description" : "Add description",
+              systemImage: "pencil.line")
+      }
     }
     Button(role: .destructive) {
       withAnimation {

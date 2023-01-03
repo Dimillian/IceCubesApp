@@ -251,24 +251,26 @@ public struct StatusRowView: View {
     }
 
     if account.account?.id == viewModel.status.account.id {
-      Button {
-        Task {
-          if viewModel.isPinned {
-            await viewModel.unPin()
-          } else {
-            await viewModel.pin()
+      Section("Your post") {
+        Button {
+          Task {
+            if viewModel.isPinned {
+              await viewModel.unPin()
+            } else {
+              await viewModel.pin()
+            }
           }
+        } label: {
+          Label(viewModel.isPinned ? "Unpin": "Pin", systemImage: viewModel.isPinned ? "pin.fill" : "pin")
         }
-      } label: {
-        Label(viewModel.isPinned ? "Unpin": "Pin", systemImage: viewModel.isPinned ? "pin.fill" : "pin")
-      }
-      Button {
-        routeurPath.presentedSheet = .editStatusEditor(status: viewModel.status)
-      } label: {
-        Label("Edit", systemImage: "pencil")
-      }
-      Button(role: .destructive) { Task { await viewModel.delete() } } label: {
-        Label("Delete", systemImage: "trash")
+        Button {
+          routeurPath.presentedSheet = .editStatusEditor(status: viewModel.status)
+        } label: {
+          Label("Edit", systemImage: "pencil")
+        }
+        Button(role: .destructive) { Task { await viewModel.delete() } } label: {
+          Label("Delete", systemImage: "trash")
+        }
       }
     }
   }
