@@ -139,17 +139,16 @@ public struct StatusRowView: View {
       if !viewModel.status.spoilerText.isEmpty {
         Text(status.spoilerText)
           .font(.body)
-      }
-      if viewModel.displaySpoiler {
         Button {
           withAnimation {
-            viewModel.displaySpoiler = false
+            viewModel.displaySpoiler.toggle()
           }
         } label: {
-          Text("Show more")
+            Text(viewModel.displaySpoiler ? "Show more" : "Show less")
         }
         .buttonStyle(.bordered)
-      } else {
+      }
+      if !viewModel.displaySpoiler {
         Text(status.content.asSafeAttributedString)
           .font(.body)
           .environment(\.openURL, OpenURLAction { url in
