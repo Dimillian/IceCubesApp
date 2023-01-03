@@ -15,6 +15,7 @@ struct SettingsTabs: View {
   @StateObject private var routeurPath = RouterPath()
   
   @State private var addAccountSheetPresented = false
+  @State private var isThemeSelectorPresented = false
   
   var body: some View {
     NavigationStack {
@@ -65,11 +66,7 @@ struct SettingsTabs: View {
   
   private var themeSection: some View {
     Section("Theme") {
-      Picker("Theme", selection: $theme.selectedSet) {
-        ForEach(Theme.allColorSet, id: \.name.rawValue) { set in
-          Text(set.name.rawValue).tag(set.name)
-        }
-      }
+      themeSelectorButton
       ColorPicker("Tint color", selection: $theme.tintColor)
       ColorPicker("Background color", selection: $theme.primaryBackgroundColor)
       ColorPicker("Secondary Background color", selection: $theme.secondaryBackgroundColor)
@@ -123,6 +120,20 @@ struct SettingsTabs: View {
     }
     .sheet(isPresented: $addAccountSheetPresented) {
       AddAccountView()
+    }
+  }
+  
+  private var themeSelectorButton: some View {
+    NavigationLink(destination: ThemePreviewView()) {
+      Button {
+        isThemeSelectorPresented.toggle()
+      } label: {
+        HStack {
+          Text("Theme")
+          Spacer()
+          Text(theme.selectedSet.rawValue)
+        }
+      }
     }
   }
   
