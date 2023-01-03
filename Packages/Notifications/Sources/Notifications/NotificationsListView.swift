@@ -32,8 +32,8 @@ public struct NotificationsListView: View {
             .font(.title3)
         }
       }
-      .padding(.horizontal, DS.Constants.layoutPadding)
-      .padding(.top, DS.Constants.layoutPadding)
+      .padding(.horizontal, .layoutPadding)
+      .padding(.top, .layoutPadding)
     }
     .background(theme.primaryBackgroundColor)
     .task {
@@ -61,14 +61,14 @@ public struct NotificationsListView: View {
           .redacted(reason: .placeholder)
           .shimmering()
         Divider()
-          .padding(.vertical, DS.Constants.dividerPadding)
+          .padding(.vertical, .dividerPadding)
       }
       
     case let .display(notifications, nextPageState):
       ForEach(notifications) { notification in
         NotificationRowView(notification: notification)
         Divider()
-          .padding(.vertical, DS.Constants.dividerPadding)
+          .padding(.vertical, .dividerPadding)
       }
       
       switch nextPageState {

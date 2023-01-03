@@ -29,13 +29,13 @@ public struct StatusEditorView: View {
           spoilerTextView
           VStack(spacing: 12) {
             accountHeaderView
-              .padding(.horizontal, DS.Constants.layoutPadding)
+              .padding(.horizontal, .layoutPadding)
             TextView($viewModel.statusText, $viewModel.selectedRange)
               .placeholder("What's on your mind")
-              .padding(.horizontal, DS.Constants.layoutPadding)
+              .padding(.horizontal, .layoutPadding)
             if let status = viewModel.embededStatus {
               StatusEmbededView(status: status)
-                .padding(.horizontal, DS.Constants.layoutPadding)
+                .padding(.horizontal, .layoutPadding)
             }
             StatusEditorMediaView(viewModel: viewModel)
             Spacer()
@@ -95,7 +95,7 @@ public struct StatusEditorView: View {
       VStack {
         TextField("Spoiler Text", text: $viewModel.spoilerText)
           .focused($isSpoilerTextFocused)
-          .padding(.horizontal, DS.Constants.layoutPadding)
+          .padding(.horizontal, .layoutPadding)
       }
       .frame(height: 35)
       .background(theme.tintColor.opacity(0.20))

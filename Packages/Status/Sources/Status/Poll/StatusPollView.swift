@@ -26,6 +26,9 @@ public struct StatusPollView: View {
   
   private func percentForOption(option: Poll.Option) -> Int {
     let ratio = (Float(option.votesCount) / Float(viewModel.poll.votesCount)) * 100
+    if ratio.isNaN {
+      return 0
+    }
     return Int(round(ratio))
   }
   

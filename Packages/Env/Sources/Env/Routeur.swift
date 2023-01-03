@@ -8,6 +8,7 @@ public enum RouteurDestinations: Hashable {
   case accountDetailWithAccount(account: Account)
   case statusDetail(id: String)
   case hashTag(tag: String, account: String?)
+  case list(list: Models.List)
   case followers(id: String)
   case following(id: String)
   case favouritedBy(id: String)
@@ -19,11 +20,17 @@ public enum SheetDestinations: Identifiable {
   case editStatusEditor(status: Status)
   case replyToStatusEditor(status: Status)
   case quoteStatusEditor(status: Status)
+  case listEdit(list: Models.List)
+  case listAddAccount(account: Account)
   
   public var id: String {
     switch self {
     case .editStatusEditor, .newStatusEditor, .replyToStatusEditor, .quoteStatusEditor:
       return "statusEditor"
+    case .listEdit:
+      return "listEdit"
+    case .listAddAccount:
+      return "listAddAccount"
     }
   }
 }

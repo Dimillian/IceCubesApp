@@ -18,11 +18,15 @@ public struct StatusRowView: View {
   }
   
   public var body: some View {
-    HStack(alignment: .top, spacing: DS.Constants.statusColumnsSpacing) {
+    HStack(alignment: .top, spacing: .statusColumnsSpacing) {
       if !viewModel.isCompact,
          theme.avatarPosition == .leading,
          let status: AnyStatus = viewModel.status.reblog ?? viewModel.status {
+        Button {
+          routeurPath.navigate(to: .accountDetailWithAccount(account: status.account))
+        } label: {
           AvatarView(url: status.account.avatar, size: .status)
+        }
       }
       VStack(alignment: .leading) {
         if !viewModel.isCompact {

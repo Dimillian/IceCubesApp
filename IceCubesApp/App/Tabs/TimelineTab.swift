@@ -4,6 +4,7 @@ import Env
 import Network
 import Combine
 import DesignSystem
+import Models
 
 struct TimelineTab: View {
   @EnvironmentObject private var appAccounts: AppAccountsManager
@@ -12,6 +13,7 @@ struct TimelineTab: View {
   @EnvironmentObject private var client: Client
   @StateObject private var routeurPath = RouterPath()
   @Binding var popToRootTab: Tab
+  
   @State private var timeline: TimelineFilter = .home
   @State private var scrollToTopSignal: Int = 0
   @State private var isAddAccountSheetDisplayed = false
@@ -45,6 +47,9 @@ struct TimelineTab: View {
     .onAppear {
       routeurPath.client = client
       timeline = client.isAuth ? .home : .pub
+      Task {
+        await currentAccount.fetchLists()
+      }
     }
     .environmentObject(routeurPath)
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
@@ -56,15 +61,30 @@ struct TimelineTab: View {
         }
       }
     }
+    .onChange(of: currentAccount.account?.id) { _ in
+      routeurPath.path = []
+    }
   }
   
   
+  @ViewBuilder
   private var timelineFilterButton: some View {
     ForEach(TimelineFilter.availableTimeline(client: client), id: \.self) { timeline in
       Button {
         self.timeline = timeline
       } label: {
         Label(timeline.title(), systemImage: timeline.iconName() ?? "")
+      }
+    }
+    if !currentAccount.lists.isEmpty {
+      Menu("Lists") {
+        ForEach(currentAccount.lists) { list in
+          Button {
+            timeline = .list(list: list)
+          } label: {
+            Label(list.title, systemImage: "list.bullet")
+          }
+        }
       }
     }
   }
@@ -95,6 +115,7 @@ struct TimelineTab: View {
       ForEach(accountsViewModel, id: \.appAccount.id) { viewModel in
         Button {
           appAccounts.currentAccount = viewModel.appAccount
+          timeline = .home
         } label: {
           HStack {
             if viewModel.account?.id == currentAccount.account?.id {

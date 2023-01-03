@@ -1,5 +1,7 @@
 # IceCubesApp
 
+[Public TestFlight beta](https://testflight.apple.com/join/tqI3dK1u) (A proper App Store release will come eventually)
+
 <p float="left">
     <img src="Images/image1.png" width="300" />
     <img src="Images/image2.png" width="300" />
@@ -16,22 +18,26 @@
 For contributors and myself, here is a todo list of features that could be added (while giving you a good idea of what's already done if not in this list, the app is quite complete already!)
 
 - [ ] DM / Conversations
-- [ ] Display images alt
+- [X] Lists support
+- [X] Display images alt
 - [ ] Editor: Post image alts
 - [ ] Editor: Add / Edit polls
 - [ ] Editor: Support video types
 - [ ] Editor: Add photos from camera
+- [ ] Editor: Support custom emojis
 - [X] Editor: Autocomplete for mentions / hashtags
 - [ ] Better settings tab
 - [ ] Edit profile
+- [ ] Handle emoji in status
 - [X] Light theme
-- [ ] More themes
+- [X] More themes
 - [ ] Honor & display server side features (filter, default visibility, etc...)
 - [X] Open remote status locally
 - [ ] More context menu everywhere
 - [ ] Support pinned posts
 - [ ] Support IceCubesApp://any mastodon links
 - [ ] Add a share sheet
+- [ ] Translate button
 - [ ] Proper iPad support
 - [ ] macOS support
 

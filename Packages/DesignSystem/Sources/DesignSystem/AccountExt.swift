@@ -10,9 +10,20 @@ extension Account {
     let value: Substring
   }
   
+  public var safeDisplayName: String {
+    if displayName.isEmpty {
+      return username
+    }
+    return displayName
+  }
+  
+  @ViewBuilder
   public var displayNameWithEmojis: some View {
+    if displayName.isEmpty {
+      Text(safeDisplayName)
+    }
     let splittedDisplayName = displayName.split(separator: ":").map{ Part(value: $0) }
-    return HStack(spacing: 0) {
+    HStack(spacing: 0) {
       if displayName.isEmpty {
         Text(" ")
       }

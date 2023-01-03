@@ -3,6 +3,7 @@ import Foundation
 public enum Timelines: Endpoint {
   case pub(sinceId: String?, maxId: String?, minId: String?, local: Bool)
   case home(sinceId: String?, maxId: String?, minId: String?)
+  case list(listId: String, sinceId: String?, maxId: String?, minId: String?)
   case hashtag(tag: String, maxId: String?)
   
   public func path() -> String {
@@ -11,6 +12,8 @@ public enum Timelines: Endpoint {
       return "timelines/public"
     case .home:
       return "timelines/home"
+    case let .list(listId, _, _, _):
+      return "timelines/list/\(listId)"
     case let .hashtag(tag, _):
       return "timelines/tag/\(tag)"
     }
@@ -23,6 +26,8 @@ public enum Timelines: Endpoint {
       params.append(.init(name: "local", value: local ? "true" : "false"))
       return params
     case .home(let sinceId, let maxId, let mindId):
+      return makePaginationParam(sinceId: sinceId, maxId: maxId, mindId: mindId)
+    case .list(_, let sinceId, let maxId, let mindId):
       return makePaginationParam(sinceId: sinceId, maxId: maxId, mindId: mindId)
     case let .hashtag(_, maxId):
       return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)

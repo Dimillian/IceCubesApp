@@ -86,6 +86,13 @@ public class Client: ObservableObject, Equatable {
     try await makeEntityRequest(endpoint: endpoint, method: "POST")
   }
   
+  public func post(endpoint: Endpoint) async throws -> HTTPURLResponse? {
+    let url = makeURL(endpoint: endpoint)
+    let request = makeURLRequest(url: url, httpMethod: "POST")
+    let (_, httpResponse) = try await urlSession.data(for: request)
+    return httpResponse as? HTTPURLResponse
+  }
+  
   public func put<Entity: Decodable>(endpoint: Endpoint) async throws -> Entity {
     try await makeEntityRequest(endpoint: endpoint, method: "PUT")
   }

@@ -28,7 +28,7 @@ struct StatusEditorMediaView: View {
           }
         }
       }
-      .padding(.horizontal, DS.Constants.layoutPadding)
+      .padding(.horizontal, .layoutPadding)
     }
   }
   

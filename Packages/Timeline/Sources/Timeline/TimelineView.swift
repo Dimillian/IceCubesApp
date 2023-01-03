@@ -16,6 +16,7 @@ public struct TimelineView: View {
   @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
+  @EnvironmentObject private var routerPath: RouterPath
   
   @StateObject private var viewModel = TimelineViewModel()
 
@@ -42,7 +43,7 @@ public struct TimelineView: View {
               .padding(.bottom, 16)
             StatusesListView(fetcher: viewModel)
           }
-          .padding(.top, DS.Constants.layoutPadding)
+          .padding(.top, .layoutPadding)
         }
         .background(theme.primaryBackgroundColor)
         if viewModel.pendingStatusesEnabled {
@@ -54,6 +55,22 @@ public struct TimelineView: View {
       }
     }
     .navigationTitle(timeline.title())
+    .toolbar{
+      switch timeline {
+      case let .list(list):
+        ToolbarItem {
+          Button {
+            routerPath.presentedSheet = .listEdit(list: list)
+          } label: {
+            Image(systemName: "pencil")
+          }
+        }
+      default:
+        ToolbarItem {
+          EmptyView()
+        }
+      }
+    }
     .navigationBarTitleDisplayMode(.inline)
     .onAppear {
       viewModel.client = client
@@ -131,7 +148,7 @@ public struct TimelineView: View {
           Text(tag.following ? "Following": "Follow")
         }.buttonStyle(.bordered)
       }
-      .padding(.horizontal, DS.Constants.layoutPadding)
+      .padding(.horizontal, .layoutPadding)
       .padding(.vertical, 8)
       .background(theme.secondaryBackgroundColor)
     }

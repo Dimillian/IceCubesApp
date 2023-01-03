@@ -47,7 +47,7 @@ struct StatusEditorAccessoryView: View {
         characterCountView
       }
       .frame(height: 20)
-      .padding(.horizontal, DS.Constants.layoutPadding)
+      .padding(.horizontal, .layoutPadding)
       .padding(.vertical, 12)
       .background(.ultraThinMaterial)
     }
