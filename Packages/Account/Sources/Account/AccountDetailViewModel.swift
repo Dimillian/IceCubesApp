@@ -59,6 +59,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   @Published var statusesState: StatusesState = .loading
   
   @Published var relationship: Relationshionship?
+  @Published var pinned: [Status] = []
   @Published var favourites: [Status] = []
   private var favouritesNextPage: LinkHandler?
   @Published var followedTags: [Tag] = []
@@ -137,7 +138,17 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
                                                        sinceId: nil,
                                                        tag: nil,
                                                        onlyMedia: selectedTab == .media ? true : nil,
-                                                       excludeReplies: selectedTab == .statuses && !isCurrentUser ? true : nil))
+                                                       excludeReplies: selectedTab == .statuses && !isCurrentUser ? true : nil,
+                                                       pinned: nil))
+      if selectedTab == .statuses {
+        pinned =
+        try await client.get(endpoint: Accounts.statuses(id: accountId,
+                                                         sinceId: nil,
+                                                         tag: nil,
+                                                         onlyMedia: nil,
+                                                         excludeReplies: nil,
+                                                         pinned: true))
+      }
       if isCurrentUser {
         (favourites, favouritesNextPage) = try await client.getWithLink(endpoint: Accounts.favourites(sinceId: nil))
       }
@@ -159,7 +170,8 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
                                                          sinceId: lastId,
                                                          tag: nil,
                                                          onlyMedia: selectedTab == .media ? true : nil,
-                                                         excludeReplies: selectedTab == .statuses && !isCurrentUser ? true : nil))
+                                                         excludeReplies: selectedTab == .statuses && !isCurrentUser ? true : nil,
+                                                         pinned: nil))
         statuses.append(contentsOf: newStatuses)
         tabState = .statuses(statusesState: .display(statuses: statuses,
                                                      nextPageState: newStatuses.count < 20 ? .none : .hasNextPage))

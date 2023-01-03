@@ -18,6 +18,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
           StatusRowView(viewModel: .init(status: status, isCompact: false))
             .redacted(reason: .placeholder)
             .shimmering()
+            .padding(.horizontal, .layoutPadding)
           Divider()
             .padding(.vertical, .dividerPadding)
         }
@@ -26,6 +27,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
       case let .display(statuses, nextPageState):
         ForEach(statuses, id: \.viewId) { status in
           StatusRowView(viewModel: .init(status: status, isCompact: false))
+            .padding(.horizontal, .layoutPadding)
           Divider()
             .padding(.vertical, .dividerPadding)
         }
@@ -45,7 +47,6 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
         }
       }
     }
-    .padding(.horizontal, .layoutPadding)
   }
   
   private var loadingRow: some View {
@@ -54,5 +55,6 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
       ProgressView()
       Spacer()
     }
+    .padding(.horizontal, .layoutPadding)
   }
 }

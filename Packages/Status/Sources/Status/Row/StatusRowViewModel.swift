@@ -11,6 +11,7 @@ public class StatusRowViewModel: ObservableObject {
   @Published var favouritesCount: Int
   @Published var isFavourited: Bool
   @Published var isReblogged: Bool
+  @Published var isPinned: Bool
   @Published var reblogsCount: Int
   @Published var repliesCount: Int
   @Published var embededStatus: Status?
@@ -33,9 +34,11 @@ public class StatusRowViewModel: ObservableObject {
     if let reblog = status.reblog {
       self.isFavourited = reblog.favourited == true
       self.isReblogged = reblog.reblogged == true
+      self.isPinned = reblog.pinned == true
     } else {
       self.isFavourited = status.favourited == true
       self.isReblogged = status.reblogged == true
+      self.isPinned = status.pinned == true
     }
     self.favouritesCount = status.reblog?.favouritesCount ?? status.favouritesCount
     self.reblogsCount = status.reblog?.reblogsCount ?? status.reblogsCount
@@ -129,6 +132,28 @@ public class StatusRowViewModel: ObservableObject {
     }
   }
   
+  func pin() async {
+    guard let client, client.isAuth else { return }
+    isPinned = true
+    do {
+      let status: Status = try await client.post(endpoint: Statuses.pin(id: status.reblog?.id ?? status.id))
+      updateFromStatus(status: status)
+    } catch {
+      isPinned = false
+    }
+  }
+  
+  func unPin() async {
+    guard let client, client.isAuth else { return }
+    isPinned = false
+    do {
+      let status: Status = try await client.post(endpoint: Statuses.unpin(id: status.reblog?.id ?? status.id))
+      updateFromStatus(status: status)
+    } catch {
+      isPinned = true
+    }
+  }
+  
   func delete() async {
     guard let client else { return }
     do {
@@ -140,9 +165,11 @@ public class StatusRowViewModel: ObservableObject {
     if let reblog = status.reblog {
       isFavourited = reblog.favourited == true
       isReblogged = reblog.reblogged == true
+      isPinned = reblog.pinned == true
     } else {
       isFavourited = status.favourited == true
       isReblogged = status.reblogged == true
+      isPinned = status.pinned == true
     }
     favouritesCount = status.reblog?.favouritesCount ?? status.favouritesCount
     reblogsCount = status.reblog?.reblogsCount ?? status.reblogsCount

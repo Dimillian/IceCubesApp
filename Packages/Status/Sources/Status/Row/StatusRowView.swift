@@ -249,8 +249,19 @@ public struct StatusRowView: View {
         Label("View in Browser", systemImage: "safari")
       }
     }
-    
+
     if account.account?.id == viewModel.status.account.id {
+      Button {
+        Task {
+          if viewModel.isPinned {
+            await viewModel.unPin()
+          } else {
+            await viewModel.pin()
+          }
+        }
+      } label: {
+        Label(viewModel.isPinned ? "Unpin": "Pin", systemImage: viewModel.isPinned ? "pin.fill" : "pin")
+      }
       Button {
         routeurPath.presentedSheet = .editStatusEditor(status: viewModel.status)
       } label: {

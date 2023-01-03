@@ -57,6 +57,9 @@ public struct AccountDetailView: View {
           
           switch viewModel.tabState {
           case .statuses:
+            if viewModel.selectedTab == .statuses {
+              pinnedPostsView
+            }
             StatusesListView(fetcher: viewModel)
           case let .followedTags(tags):
             makeTagsListView(tags: tags)
@@ -293,6 +296,24 @@ public struct AccountDetailView: View {
       }
     } message: {
       Text("Enter the name for your list")
+    }
+  }
+  
+  @ViewBuilder
+  private var pinnedPostsView: some View {
+    if !viewModel.pinned.isEmpty {
+      ForEach(viewModel.pinned) { status in
+        VStack(alignment: .leading) {
+          Label("Pinned post", systemImage: "pin.fill")
+            .font(.footnote)
+            .foregroundColor(.gray)
+            .fontWeight(.semibold)
+          StatusRowView(viewModel: .init(status: status))
+        }
+        .padding(.horizontal, .layoutPadding)
+        Divider()
+          .padding(.vertical, .dividerPadding)
+      }
     }
   }
 }
