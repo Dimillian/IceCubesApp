@@ -308,7 +308,6 @@ public class StatusEditorViewModel: ObservableObject {
   func addDescription(container: ImageContainer, description: String) async {
     guard let client, let attachment = container.mediaAttachement else { return }
     if let index = indexOf(container: container) {
-      let originalContainer = mediasImages[index]
       do {
         let media: MediaAttachement = try await client.put(endpoint: Media.media(id: attachment.id,
                                                                                  description: description))
