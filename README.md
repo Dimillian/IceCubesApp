@@ -19,14 +19,16 @@ For contributors and myself, here is a todo list of features that could be added
 
 - [ ] DM / Conversations
 - [X] Lists support
-- [ ] Display images alt
+- [X] Display images alt
 - [ ] Editor: Post image alts
 - [ ] Editor: Add / Edit polls
 - [ ] Editor: Support video types
 - [ ] Editor: Add photos from camera
+- [ ] Editor: Support custom emojis
 - [X] Editor: Autocomplete for mentions / hashtags
 - [ ] Better settings tab
 - [ ] Edit profile
+- [ ] Handle emoji in status
 - [X] Light theme
 - [X] More themes
 - [ ] Honor & display server side features (filter, default visibility, etc...)
