@@ -50,7 +50,7 @@ struct NotificationRowView: View {
   private func makeMainLabel(type: Models.Notification.NotificationType) -> some View {
     VStack(alignment: .leading, spacing: 0) {
       HStack(spacing: 0) {
-        Text(notification.account.displayName)
+        Text(notification.account.safeDisplayName)
           .font(.subheadline)
           .fontWeight(.semibold) +
         Text(" ") +
