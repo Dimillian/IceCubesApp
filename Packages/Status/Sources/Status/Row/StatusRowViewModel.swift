@@ -19,7 +19,7 @@ public class StatusRowViewModel: ObservableObject {
   @Published var isFiltered: Bool = false
   
   var filter: Filtered? {
-    status.reblog?.filtered.first ?? status.filtered.first
+    status.reblog?.filtered?.first ?? status.filtered?.first
   }
   
   var client: Client?
