@@ -17,7 +17,8 @@ struct IceCubesApp: App {
   @StateObject private var quickLook = QuickLook()
   @StateObject private var theme = Theme()
   
-  @State private var selectedTab: Tab? = .timeline
+  @State private var selectedTab: Tab = .timeline
+  @State private var selectSidebarItem: Tab? = .timeline
   @State private var popToRootTab: Tab = .other
   
   private var availableTabs: [Tab] {
@@ -73,9 +74,7 @@ struct IceCubesApp: App {
         /// Stupid hack to trigger onChange binding in tab views.
         popToRootTab = .other
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-          if let selectedTab {
-            popToRootTab = selectedTab
-          }
+          popToRootTab = selectedTab
         }
       }
       selectedTab = newTab
@@ -94,7 +93,7 @@ struct IceCubesApp: App {
   
   private var splitView: some View {
     NavigationSplitView {
-      List(availableTabs, selection: $selectedTab) { tab in
+      List(availableTabs, selection: $selectSidebarItem) { tab in
         NavigationLink(value: tab) {
           tab.label
         }
@@ -102,7 +101,7 @@ struct IceCubesApp: App {
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
     } detail: {
-      selectedTab?.makeContentView(popToRootTab: $popToRootTab)
+      selectSidebarItem?.makeContentView(popToRootTab: $popToRootTab)
     }
   }
   
