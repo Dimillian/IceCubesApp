@@ -410,10 +410,10 @@
 		9FBFE649292A715600C250E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconAlternate1 AppIconAlternate2 AppIconAlternate3 AppIconAlternate4";
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconAlternate1 AppIconAlternate2 AppIconAlternate3 AppIconAlternate4 AppIconAlternate5 AppIconAlternate6 AppIconAlternate7 AppIconAlternate8 AppIconAlternate9 AppIconAlternate10 AppIconAlternate11 AppIconAlternate12 AppIconAlternate13 AppIconAlternate14 AppIconAlternate15 AppIconAlternate16 AppIconAlternate17 AppIconAlternate18";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = IceCubesApp/IceCubesApp.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
@@ -458,10 +458,10 @@
 		9FBFE64A292A715600C250E9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconAlternate1 AppIconAlternate2 AppIconAlternate3 AppIconAlternate4";
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconAlternate1 AppIconAlternate2 AppIconAlternate3 AppIconAlternate4 AppIconAlternate5 AppIconAlternate6 AppIconAlternate7 AppIconAlternate8 AppIconAlternate9 AppIconAlternate10 AppIconAlternate11 AppIconAlternate12 AppIconAlternate13 AppIconAlternate14 AppIconAlternate15 AppIconAlternate16 AppIconAlternate17 AppIconAlternate18";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = IceCubesApp/IceCubesApp.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
