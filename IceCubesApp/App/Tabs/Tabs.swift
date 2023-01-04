@@ -4,7 +4,7 @@ import Account
 import Explore
 import SwiftUI
 
-enum Tab: Int, Identifiable {
+enum Tab: Int, Identifiable, Hashable {
   case timeline, notifications, explore, account, settings, other
   
   var id: Int {

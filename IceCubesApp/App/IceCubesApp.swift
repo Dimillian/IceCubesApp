@@ -17,33 +17,16 @@ struct IceCubesApp: App {
   @StateObject private var quickLook = QuickLook()
   @StateObject private var theme = Theme()
   
-  @State private var selectedTab: Tab = .timeline
+  @State private var selectedTab: Tab? = .timeline
   @State private var popToRootTab: Tab = .other
+  
+  private var availableTabs: [Tab] {
+    appAccountsManager.currentClient.isAuth ? Tab.loggedInTabs() : Tab.loggedOutTab()
+  }
   
   var body: some Scene {
     WindowGroup {
-      TabView(selection: .init(get: {
-        selectedTab
-      }, set: { newTab in
-        if newTab == selectedTab {
-          /// Stupid hack to trigger onChange binding in tab views.
-          popToRootTab = .other
-          DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-            popToRootTab = selectedTab
-          }
-        }
-        selectedTab = newTab
-      })) {
-        ForEach(appAccountsManager.currentClient.isAuth ? Tab.loggedInTabs() : Tab.loggedOutTab()) { tab in
-          tab.makeContentView(popToRootTab: $popToRootTab)
-            .tabItem {
-              tab.label
-            }
-            .tag(tab)
-            .badge(tab == .notifications ? watcher.unreadNotificationsCount : 0)
-            .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .tabBar)
-        }
-      }
+      appView
       .tint(theme.tintColor)
       .onAppear {
         setNewClientsInEnv(client: appAccountsManager.currentClient)
@@ -70,6 +53,56 @@ struct IceCubesApp: App {
     }
     .onChange(of: theme.primaryBackgroundColor) { newValue in
       setBarsColor(color: newValue)
+    }
+  }
+  
+  @ViewBuilder
+  private var appView: some View {
+    if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
+      splitView
+    } else {
+      tabBarView
+    }
+  }
+  
+  private var tabBarView: some View {
+    TabView(selection: .init(get: {
+      selectedTab
+    }, set: { newTab in
+      if newTab == selectedTab {
+        /// Stupid hack to trigger onChange binding in tab views.
+        popToRootTab = .other
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+          if let selectedTab {
+            popToRootTab = selectedTab
+          }
+        }
+      }
+      selectedTab = newTab
+    })) {
+      ForEach(availableTabs) { tab in
+        tab.makeContentView(popToRootTab: $popToRootTab)
+          .tabItem {
+            tab.label
+          }
+          .tag(tab)
+          .badge(tab == .notifications ? watcher.unreadNotificationsCount : 0)
+          .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .tabBar)
+      }
+    }
+  }
+  
+  private var splitView: some View {
+    NavigationSplitView {
+      List(availableTabs, selection: $selectedTab) { tab in
+        NavigationLink(value: tab) {
+          tab.label
+        }
+      }
+      .scrollContentBackground(.hidden)
+      .background(theme.secondaryBackgroundColor)
+    } detail: {
+      selectedTab?.makeContentView(popToRootTab: $popToRootTab)
     }
   }
   

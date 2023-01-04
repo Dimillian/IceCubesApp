@@ -104,7 +104,9 @@ public struct StatusMediaPreviewView: View {
   private func makeFeaturedImagePreview(attachement: MediaAttachement) -> some View {
     switch attachement.supportedType {
     case .image:
-      if let size = size(for: attachement) {
+      if let size = size(for: attachement),
+         UIDevice.current.userInterfaceIdiom != .pad,
+          UIDevice.current.userInterfaceIdiom != .mac {
         let avatarColumnWidth = theme.avatarPosition == .leading ? AvatarView.Size.status.size.width + .statusColumnsSpacing : 0
         let availableWidth = UIScreen.main.bounds.width - (.layoutPadding * 2) - avatarColumnWidth
         let newSize = imageSize(from: size,
@@ -142,12 +144,15 @@ public struct StatusMediaPreviewView: View {
                 image
                   .resizable()
                   .aspectRatio(contentMode: .fill)
+                  .frame(maxHeight: imageMaxHeight)
+                  .frame(maxWidth: imageMaxHeight)
                   .cornerRadius(4)
               },
               placeholder: {
                 RoundedRectangle(cornerRadius: 4)
                   .fill(Color.gray)
-                  .frame(height: imageMaxHeight)
+                  .frame(maxHeight: imageMaxHeight)
+                  .frame(maxWidth: imageMaxHeight)
                   .shimmering()
               })
       }

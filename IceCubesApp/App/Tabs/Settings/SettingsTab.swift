@@ -18,7 +18,7 @@ struct SettingsTabs: View {
   @State private var isThemeSelectorPresented = false
   
   var body: some View {
-    NavigationStack {
+    NavigationStack(path: $routeurPath.path) {
       Form {
         appSection
         accountsSection
