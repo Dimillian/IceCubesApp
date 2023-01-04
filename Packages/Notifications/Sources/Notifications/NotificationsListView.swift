@@ -16,24 +16,32 @@ public struct NotificationsListView: View {
   public var body: some View {
     ScrollView {
       LazyVStack {
-        if client.isAuth {
-          Picker("", selection: $viewModel.tab) {
-            ForEach(NotificationsViewModel.Tab.allCases, id: \.self) { tab in
-              Text(tab.rawValue)
-            }
-          }
-          .pickerStyle(.segmented)
-          Group {
-            notificationsView
-          }
-          .padding(.top, 16)
-        } else {
-          Text("Please Sign In to see your notifications")
-            .font(.title3)
+        Group {
+          notificationsView
         }
+        .padding(.top, 16)
       }
       .padding(.horizontal, .layoutPadding)
       .padding(.top, .layoutPadding)
+    }
+    .navigationTitle(viewModel.selectedType?.menuTitle() ?? "All Notifications")
+    .navigationBarTitleDisplayMode(.inline)
+    .toolbar {
+      ToolbarTitleMenu {
+        Button {
+          viewModel.selectedType = nil
+        } label: {
+          Label("All Notifications", systemImage: "bell.fill")
+        }
+        Divider()
+        ForEach(Notification.NotificationType.allCases, id: \.self) { type in
+          Button {
+            viewModel.selectedType = type
+          } label: {
+            Label(type.menuTitle(), systemImage: type.iconName())
+          }
+        }
+      }
     }
     .background(theme.primaryBackgroundColor)
     .task {
@@ -48,8 +56,6 @@ public struct NotificationsListView: View {
         viewModel.handleEvent(event: latestEvent)
       }
     })
-    .navigationTitle(Text("Notifications"))
-    .navigationBarTitleDisplayMode(.inline)
   }
   
   @ViewBuilder

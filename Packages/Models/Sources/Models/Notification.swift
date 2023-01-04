@@ -1,7 +1,7 @@
 import Foundation
 
 public struct Notification: Codable, Identifiable {
-  public enum NotificationType: String {
+  public enum NotificationType: String, CaseIterable {
     case follow, follow_request, mention, reblog, status, favourite, poll, update
   }
   
