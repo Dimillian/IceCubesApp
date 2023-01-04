@@ -23,6 +23,9 @@ public struct StatusRowView: View {
          theme.avatarPosition == .leading,
          let status: AnyStatus = viewModel.status.reblog ?? viewModel.status {
           AvatarView(url: status.account.avatar, size: .status)
+            .onTapGesture {
+              routeurPath.navigate(to: .accountDetailWithAccount(account: status.account))
+            }
       }
       VStack(alignment: .leading) {
         if !viewModel.isCompact {
