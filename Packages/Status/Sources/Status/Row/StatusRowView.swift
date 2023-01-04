@@ -62,7 +62,7 @@ public struct StatusRowView: View {
         }
       }
       .contextMenu {
-        contextMenu
+        StatusRowContextMenu(viewModel: viewModel)
       }
     }
   }
@@ -209,72 +209,12 @@ public struct StatusRowView: View {
   
   private var menuButton: some View {
     Menu {
-      contextMenu
+      StatusRowContextMenu(viewModel: viewModel)
     } label: {
       Image(systemName: "ellipsis")
         .frame(width: 30, height: 30)
     }
     .foregroundColor(.gray)
     .contentShape(Rectangle())
-  }
-  
-  @ViewBuilder
-  private var contextMenu: some View {
-    Button { Task {
-      if viewModel.isFavourited {
-        await viewModel.unFavourite()
-      } else {
-        await viewModel.favourite()
-      }
-    } } label: {
-      Label(viewModel.isFavourited ? "Unfavorite" : "Favorite", systemImage: "star")
-    }
-    Button { Task {
-      if viewModel.isReblogged {
-        await viewModel.unReblog()
-      } else {
-        await viewModel.reblog()
-      }
-    } } label: {
-      Label(viewModel.isReblogged ? "Unboost" : "Boost", systemImage: "arrow.left.arrow.right.circle")
-    }
-    
-    if viewModel.status.visibility == .pub {
-      Button {
-        routeurPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
-      } label: {
-        Label("Quote this post", systemImage: "quote.bubble")
-      }
-    }
-    
-    if let url = viewModel.status.reblog?.url ?? viewModel.status.url {
-      Button { UIApplication.shared.open(url)  } label: {
-        Label("View in Browser", systemImage: "safari")
-      }
-    }
-
-    if account.account?.id == viewModel.status.account.id {
-      Section("Your post") {
-        Button {
-          Task {
-            if viewModel.isPinned {
-              await viewModel.unPin()
-            } else {
-              await viewModel.pin()
-            }
-          }
-        } label: {
-          Label(viewModel.isPinned ? "Unpin": "Pin", systemImage: viewModel.isPinned ? "pin.fill" : "pin")
-        }
-        Button {
-          routeurPath.presentedSheet = .editStatusEditor(status: viewModel.status)
-        } label: {
-          Label("Edit", systemImage: "pencil")
-        }
-        Button(role: .destructive) { Task { await viewModel.delete() } } label: {
-          Label("Delete", systemImage: "trash")
-        }
-      }
-    }
   }
 }

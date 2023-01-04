@@ -61,8 +61,8 @@ public struct AccountDetailView: View {
               pinnedPostsView
             }
             StatusesListView(fetcher: viewModel)
-          case let .followedTags(tags):
-            makeTagsListView(tags: tags)
+          case .followedTags:
+            tagsListView
           case .lists:
             listsListView
           }
@@ -70,21 +70,6 @@ public struct AccountDetailView: View {
       }
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
-      .toolbar {
-        if viewModel.relationship?.following == true, let account = viewModel.account {
-          ToolbarItem {
-            Menu {
-              Button {
-                routeurPath.presentedSheet = .listAddAccount(account: account)
-              } label: {
-                Label("Add/Remove from lists", systemImage: "list.bullet")
-              }
-            } label: {
-              Image(systemName: "ellipsis")
-            }
-          }
-        }
-      }
     }
     .onAppear {
       Task {
@@ -113,16 +98,7 @@ public struct AccountDetailView: View {
     .edgesIgnoringSafeArea(.top)
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
-      ToolbarItem(placement: .principal) {
-        if scrollOffset < -200 {
-          switch viewModel.accountState {
-          case let .data(account):
-            account.displayNameWithEmojis.font(.headline)
-          default:
-            EmptyView()
-          }
-        }
-      }
+      toolbarContent
     }
   }
   
@@ -239,9 +215,9 @@ public struct AccountDetailView: View {
     }
   }
   
-  private func makeTagsListView(tags: [Tag]) -> some View {
+  private var tagsListView: some View {
     Group {
-      ForEach(tags) { tag in
+      ForEach(currentAccount.tags) { tag in
         HStack {
           TagRowView(tag: tag)
           Spacer()
@@ -250,6 +226,8 @@ public struct AccountDetailView: View {
         .padding(.horizontal, .layoutPadding)
         .padding(.vertical, 8)
       }
+    }.task {
+      await currentAccount.fetchFollowedTags()
     }
   }
   
@@ -279,6 +257,9 @@ public struct AccountDetailView: View {
         isCreateListAlertPresented = true
       }
       .padding(.horizontal, .layoutPadding)
+    }
+    .task {
+      await currentAccount.fetchLists()
     }
     .alert("Create a new list", isPresented: $isCreateListAlertPresented) {
       TextField("List name", text: $createListTitle)
@@ -313,6 +294,55 @@ public struct AccountDetailView: View {
         .padding(.horizontal, .layoutPadding)
         Divider()
           .padding(.vertical, .dividerPadding)
+      }
+    }
+  }
+  
+  @ToolbarContentBuilder
+  private var toolbarContent: some ToolbarContent {
+    ToolbarItem(placement: .principal) {
+      if scrollOffset < -200 {
+        switch viewModel.accountState {
+        case let .data(account):
+          account.displayNameWithEmojis.font(.headline)
+        default:
+          EmptyView()
+        }
+      }
+    }
+    
+    ToolbarItem(placement: .navigationBarTrailing) {
+      Menu {
+        if let account = viewModel.account {
+          Section(account.acct) {
+            if !viewModel.isCurrentUser {
+              Button {
+                routeurPath.presentedSheet = .mentionStatusEditor(account: account, visibility: .pub)
+              } label: {
+                Label("Mention", systemImage: "at")
+              }
+              Button {
+                routeurPath.presentedSheet = .mentionStatusEditor(account: account, visibility: .direct)
+              } label: {
+                Label("Message", systemImage: "tray.full")
+              }
+              Divider()
+            }
+            
+            if viewModel.relationship?.following == true {
+              Button {
+                routeurPath.presentedSheet = .listAddAccount(account: account)
+              } label: {
+                Label("Add/Remove from lists", systemImage: "list.bullet")
+              }
+            }
+            if let url = account.url {
+              ShareLink(item: url)
+            }
+          }
+        }
+      } label: {
+        Image(systemName: "ellipsis")
       }
     }
   }

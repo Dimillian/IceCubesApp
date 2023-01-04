@@ -139,9 +139,9 @@ public struct TimelineView: View {
         Button {
           Task {
             if tag.following {
-              await viewModel.unfollowTag(id: tag.name)
+              viewModel.tag = await account.unfollowTag(id: tag.name)
             } else {
-              await viewModel.followTag(id: tag.name)
+              viewModel.tag = await account.followTag(id: tag.name)
             }
           }
         } label: {

@@ -20,12 +20,13 @@ public enum SheetDestinations: Identifiable {
   case editStatusEditor(status: Status)
   case replyToStatusEditor(status: Status)
   case quoteStatusEditor(status: Status)
+  case mentionStatusEditor(account: Account, visibility: Models.Visibility)
   case listEdit(list: Models.List)
   case listAddAccount(account: Account)
   
   public var id: String {
     switch self {
-    case .editStatusEditor, .newStatusEditor, .replyToStatusEditor, .quoteStatusEditor:
+    case .editStatusEditor, .newStatusEditor, .replyToStatusEditor, .quoteStatusEditor, .mentionStatusEditor:
       return "statusEditor"
     case .listEdit:
       return "listEdit"

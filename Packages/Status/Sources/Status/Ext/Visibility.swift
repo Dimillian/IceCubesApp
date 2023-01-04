@@ -10,7 +10,7 @@ extension Visibility {
     case .priv:
       return "lock"
     case .direct:
-      return "at.circle"
+      return "tray.full"
     }
   }
   

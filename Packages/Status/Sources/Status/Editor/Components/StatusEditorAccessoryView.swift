@@ -62,11 +62,13 @@ struct StatusEditorAccessoryView: View {
   
   private var visibilityMenu: some View {
     Menu {
-      ForEach(Models.Visibility.allCases, id: \.self) { visibility in
-        Button {
-          viewModel.visibility = visibility
-        } label: {
-          Label(visibility.title, systemImage: visibility.iconName)
+      Section("Post visibility") {
+        ForEach(Models.Visibility.allCases, id: \.self) { visibility in
+          Button {
+            viewModel.visibility = visibility
+          } label: {
+            Label(visibility.title, systemImage: visibility.iconName)
+          }
         }
       }
     } label: {

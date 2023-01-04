@@ -83,19 +83,23 @@ public class StreamWatcher: ObservableObject {
           } catch {
             print("Error decoding streaming event: \(error.localizedDescription)")
           }
+          
         default:
           break
         }
         
+      self.receiveMessage()
+        
       case .failure:
-        self.stopWatching()
-        self.connect()
-        if let watchedStream = self.watchedStream {
-          self.watch(stream: watchedStream)
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(10)) { [weak self] in
+          guard let self = self else { return }
+          self.stopWatching()
+          self.connect()
+          if let watchedStream = self.watchedStream {
+            self.watch(stream: watchedStream)
+          }
         }
       }
-      
-      self.receiveMessage()
     })
   }
   

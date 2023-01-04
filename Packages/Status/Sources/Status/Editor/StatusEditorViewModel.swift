@@ -82,7 +82,7 @@ public class StatusEditorViewModel: ObservableObject {
       isPosting = true
       let postStatus: Status?
       switch mode {
-      case .new, .replyTo, .quote:
+      case .new, .replyTo, .quote, .mention:
         postStatus = try await client.post(endpoint: Statuses.postStatus(status: statusText.string,
                                                                          inReplyTo: mode.replyToStatus?.id,
                                                                          mediaIds: mediasImages.compactMap{ $0.mediaAttachement?.id },
@@ -117,6 +117,10 @@ public class StatusEditorViewModel: ObservableObject {
       visibility = status.visibility
       statusText = .init(string: mentionString)
       selectedRange = .init(location: mentionString.utf16.count, length: 0)
+    case let .mention(account, visibility):
+      statusText = .init(string: "@\(account.acct) ")
+      self.visibility = visibility
+      selectedRange = .init(location: statusText.string.utf16.count, length: 0)
     case let .edit(status):
       statusText = .init(status.content.asSafeAttributedString)
       selectedRange = .init(location: statusText.string.utf16.count, length: 0)
