@@ -72,10 +72,6 @@ struct AccountDetailHeaderView: View {
   private var accountAvatarView: some View {
     HStack {
       AvatarView(url: account.avatar, size: .account)
-        .overlay(
-          RoundedRectangle(cornerRadius: 4)
-            .stroke(.white, lineWidth: 1)
-        )
       .onTapGesture {
         Task {
           await quickLook.prepareFor(urls: [account.avatar], selectedURL: account.avatar)

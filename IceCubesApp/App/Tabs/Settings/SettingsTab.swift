@@ -75,6 +75,11 @@ struct SettingsTabs: View {
           Text(position.description).tag(position)
         }
       }
+      Picker("Avatar shape", selection: $theme.avatarShape) {
+        ForEach(Theme.AvatarShape.allCases, id: \.rawValue) { shape in
+          Text(shape.description).tag(shape)
+        }
+      }
       Button {
         theme.selectedSet = .iceCubeDark
       } label: {
