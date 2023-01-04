@@ -3,6 +3,8 @@ import Shimmer
 import NukeUI
 
 public struct AvatarView: View {
+  @EnvironmentObject private var theme: Theme
+
   public enum Size {
     case account, status, embed, badge, boost
     
@@ -41,26 +43,41 @@ public struct AvatarView: View {
   }
   
   public var body: some View {
-    if reasons == .placeholder {
-      RoundedRectangle(cornerRadius: size.cornerRadius)
-        .fill(.gray)
-        .frame(maxWidth: size.size.width, maxHeight: size.size.height)
-    } else {
-      LazyImage(url: url) { state in
-        if let image = state.image {
-          image
-            .resizingMode(.aspectFit)
-        } else if state.isLoading {
-          placeholderView
-            .shimmering()
+    Group {
+      if reasons == .placeholder {
+        RoundedRectangle(cornerRadius: size.cornerRadius)
+          .fill(.gray)
+          .frame(maxWidth: size.size.width, maxHeight: size.size.height)
         } else {
-          placeholderView
+          LazyImage(url: url) { state in
+            if let image = state.image {
+              image
+                .resizingMode(.aspectFit)
+            } else if state.isLoading {
+              placeholderView
+                .shimmering()
+            } else {
+              placeholderView
+            }
+          }
+          .processors([.resize(size: size.size), .roundedCorners(radius: size.cornerRadius)])
+          .frame(width: size.size.width, height: size.size.height)
         }
-      }
-      .processors([.resize(size: size.size), .roundedCorners(radius: size.cornerRadius)])
-      .frame(width: size.size.width, height: size.size.height)
     }
+    .clipShape(clipShape)
+    .overlay(
+      clipShape.stroke(Color.primary.opacity(0.25), lineWidth: 1)
+    )
   }
+
+    private var clipShape: some Shape {
+        switch theme.avatarShape {
+        case .circle:
+            return AnyShape(Circle())
+        case .rounded:
+            return AnyShape(RoundedRectangle(cornerRadius: size.cornerRadius))
+        }
+    }
   
   @ViewBuilder
   private var placeholderView: some View {
