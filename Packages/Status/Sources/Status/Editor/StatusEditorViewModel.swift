@@ -139,8 +139,6 @@ public class StatusEditorViewModel: ObservableObject {
         statusText = .init(string: "\n\nFrom: @\(status.reblog?.account.acct ?? status.account.acct)\n\(url)")
         selectedRange = .init(location: 0, length: 0)
       }
-    default:
-      break
     }
   }
   
