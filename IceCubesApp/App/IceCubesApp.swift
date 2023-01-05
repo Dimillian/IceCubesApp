@@ -59,7 +59,7 @@ struct IceCubesApp: App {
   @ViewBuilder
   private var appView: some View {
     if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
-      if ProcessInfo.processInfo.isiOSAppOnMac {
+      if ProcessInfo.processInfo.isiOSAppOnMac || ProcessInfo.processInfo.isMacCatalystApp {
         splitView
       } else {
         splitView
