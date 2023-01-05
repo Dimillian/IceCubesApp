@@ -109,6 +109,7 @@ struct IceCubesApp: App {
       }
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
+      .navigationSplitViewColumnWidth(200)
     } detail: {
       selectSidebarItem?.makeContentView(popToRootTab: $popToRootTab)
     }

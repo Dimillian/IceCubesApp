@@ -9,8 +9,6 @@ class ConversationsListViewModel: ObservableObject {
   @Published var isLoadingFirstPage: Bool = true
   @Published var conversations: [Conversation] = []
   
-  private let feedbackGenerator = UINotificationFeedbackGenerator()
-  
   public init() { }
   
   func fetchConversations() async {
@@ -44,7 +42,6 @@ class ConversationsListViewModel: ObservableObject {
       }
       conversations.insert(event.conversation, at: 0)
       conversations = conversations.sorted(by: { $0.lastStatus.createdAt.asDate > $1.lastStatus.createdAt.asDate })
-      feedbackGenerator.notificationOccurred(.success)
     }
   }
 }
