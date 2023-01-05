@@ -27,6 +27,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
       case let .display(statuses, nextPageState):
         ForEach(statuses, id: \.viewId) { status in
           StatusRowView(viewModel: .init(status: status, isCompact: false))
+            .id(status.id)
             .padding(.horizontal, .layoutPadding)
           Divider()
             .padding(.vertical, .dividerPadding)
