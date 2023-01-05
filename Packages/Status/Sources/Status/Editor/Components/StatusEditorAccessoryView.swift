@@ -47,7 +47,7 @@ struct StatusEditorAccessoryView: View {
         characterCountView
       }
       .frame(height: 20)
-      .padding(.horizontal, DS.Constants.layoutPadding)
+      .padding(.horizontal, .layoutPadding)
       .padding(.vertical, 12)
       .background(.ultraThinMaterial)
     }
@@ -62,11 +62,13 @@ struct StatusEditorAccessoryView: View {
   
   private var visibilityMenu: some View {
     Menu {
-      ForEach(Models.Visibility.allCases, id: \.self) { visibility in
-        Button {
-          viewModel.visibility = visibility
-        } label: {
-          Label(visibility.title, systemImage: visibility.iconName)
+      Section("Post visibility") {
+        ForEach(Models.Visibility.allCases, id: \.self) { visibility in
+          Button {
+            viewModel.visibility = visibility
+          } label: {
+            Label(visibility.title, systemImage: visibility.iconName)
+          }
         }
       }
     } label: {

@@ -4,7 +4,7 @@ import SwiftUI
 public class Theme: ObservableObject {
   enum ThemeKey: String {
     case colorScheme, tint, label, primaryBackground, secondaryBackground
-    case avatarPosition
+    case avatarPosition, avatarShape
     case selectedSet, selectedScheme
   }
   
@@ -20,6 +20,19 @@ public class Theme: ObservableObject {
       }
     }
   }
+
+  public enum AvatarShape: String, CaseIterable {
+    case circle, rounded
+
+    public var description: LocalizedStringKey {
+      switch self {
+      case .circle:
+        return "Circle"
+      case .rounded:
+        return "Rounded"
+      }
+    }
+  }
   
   @AppStorage("is_previously_set") private var isSet: Bool = false
   @AppStorage(ThemeKey.selectedScheme.rawValue) public var selectedScheme: ColorScheme = .dark
@@ -28,10 +41,13 @@ public class Theme: ObservableObject {
   @AppStorage(ThemeKey.secondaryBackground.rawValue) public var secondaryBackgroundColor: Color = .gray
   @AppStorage(ThemeKey.label.rawValue) public var labelColor: Color = .black
   @AppStorage(ThemeKey.avatarPosition.rawValue) var rawAvatarPosition: String = AvatarPosition.top.rawValue
+  @AppStorage(ThemeKey.avatarShape.rawValue) var rawAvatarShape: String = AvatarShape.rounded.rawValue
   @AppStorage(ThemeKey.selectedSet.rawValue) var storedSet: ColorSetName = .iceCubeDark
+
   @Published public var avatarPosition: AvatarPosition = .top
+  @Published public var avatarShape: AvatarShape = .rounded
   @Published public var selectedSet: ColorSetName = .iceCubeDark
-  
+
   private var cancellables = Set<AnyCancellable>()
   
   public init() {
@@ -45,12 +61,21 @@ public class Theme: ObservableObject {
     }
     
     avatarPosition = AvatarPosition(rawValue: rawAvatarPosition) ?? .top
-    
+    avatarShape = AvatarShape(rawValue: rawAvatarShape) ?? .rounded
+
     $avatarPosition
       .dropFirst()
       .map(\.rawValue)
       .sink { [weak self] position in
         self?.rawAvatarPosition = position
+      }
+      .store(in: &cancellables)
+
+    $avatarShape
+      .dropFirst()
+      .map(\.rawValue)
+      .sink { [weak self] shape in
+        self?.rawAvatarShape = shape
       }
       .store(in: &cancellables)
     

@@ -43,6 +43,8 @@ extension View {
         StatusEditorView(mode: .edit(status: status))
       case let .quoteStatusEditor(status):
         StatusEditorView(mode: .quote(status: status))
+      case let .mentionStatusEditor(account, visibility):
+        StatusEditorView(mode: .mention(account: account, visibility: visibility))
       case let .listEdit(list):
         ListEditView(list: list)
       case let .listAddAccount(account):

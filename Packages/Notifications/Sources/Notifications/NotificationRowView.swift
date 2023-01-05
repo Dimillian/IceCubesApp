@@ -50,7 +50,7 @@ struct NotificationRowView: View {
   private func makeMainLabel(type: Models.Notification.NotificationType) -> some View {
     VStack(alignment: .leading, spacing: 0) {
       HStack(spacing: 0) {
-        Text(notification.account.displayName)
+        Text(notification.account.safeDisplayName)
           .font(.subheadline)
           .fontWeight(.semibold) +
         Text(" ") +
@@ -76,6 +76,7 @@ struct NotificationRowView: View {
     if let status = notification.status {
       HStack {
         StatusRowView(viewModel: .init(status: status, isCompact: true))
+          .foregroundColor(type == .mention ? theme.labelColor : .gray)
         Spacer()
       }
     } else {
@@ -98,48 +99,6 @@ struct NotificationRowView: View {
       .onTapGesture {
         routeurPath.navigate(to: .accountDetailWithAccount(account: notification.account))
       }
-    }
-  }
-}
-
-extension Models.Notification.NotificationType {
-  func label() -> String {
-    switch self {
-    case .status:
-      return "posted a status"
-    case .mention:
-      return "mentioned you"
-    case .reblog:
-      return "boosted"
-    case .follow:
-      return "followed you"
-    case .follow_request:
-      return "request to follow you"
-    case .favourite:
-      return "starred"
-    case .poll:
-      return "poll ended"
-    case .update:
-      return "edited a post"
-    }
-  }
-  
-  func iconName() -> String {
-    switch self {
-    case .status:
-      return "pencil"
-    case .mention:
-      return "at"
-    case .reblog:
-      return "arrow.left.arrow.right.circle.fill"
-    case .follow, .follow_request:
-      return "person.fill.badge.plus"
-    case .favourite:
-      return "star.fill"
-    case .poll:
-      return "chart.bar.fill"
-    case .update:
-      return "pencil.line"
     }
   }
 }

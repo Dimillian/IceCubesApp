@@ -14,6 +14,8 @@ public struct StatusMediaPreviewView: View {
 
   @State private var isQuickLookLoading: Bool = false
   @State private var width: CGFloat = 0
+  @State private var altTextDisplayed: String?
+  @State private var isAltAlertDisplayed: Bool = false
   
   private var imageMaxHeight: CGFloat {
     if isCompact {
@@ -82,6 +84,13 @@ public struct StatusMediaPreviewView: View {
           .transition(.opacity)
       }
     }
+    .alert("Image description",
+           isPresented: $isAltAlertDisplayed) {
+      Button("Ok", action: { })
+    } message: {
+      Text(altTextDisplayed ?? "")
+    }
+
   }
   
   @ViewBuilder
@@ -95,22 +104,37 @@ public struct StatusMediaPreviewView: View {
   private func makeFeaturedImagePreview(attachement: MediaAttachement) -> some View {
     switch attachement.supportedType {
     case .image:
-      if let size = size(for: attachement) {
-        let avatarColumnWidth = theme.avatarPosition == .leading ? AvatarView.Size.status.size.width + DS.Constants.statusColumnsSpacing : 0
-        let availableWidth = UIScreen.main.bounds.width - (DS.Constants.layoutPadding * 2) - avatarColumnWidth
+      if let size = size(for: attachement),
+         UIDevice.current.userInterfaceIdiom != .pad,
+          UIDevice.current.userInterfaceIdiom != .mac {
+        let avatarColumnWidth = theme.avatarPosition == .leading ? AvatarView.Size.status.size.width + .statusColumnsSpacing : 0
+        let availableWidth = UIScreen.main.bounds.width - (.layoutPadding * 2) - avatarColumnWidth
         let newSize = imageSize(from: size,
                                 newWidth: availableWidth)
-        LazyImage(url: attachement.url) { state in
-          if let image = state.image {
-            image
-              .resizingMode(.aspectFill)
-              .cornerRadius(4)
-              .frame(width: newSize.width, height: newSize.height)
-          } else {
-            RoundedRectangle(cornerRadius: 4)
-              .fill(Color.gray)
-              .frame(width: newSize.width, height: newSize.height)
-              .shimmering()
+        ZStack(alignment: .bottomTrailing) {
+          LazyImage(url: attachement.url) { state in
+            if let image = state.image {
+              image
+                .resizingMode(.aspectFill)
+                .cornerRadius(4)
+                .frame(width: newSize.width, height: newSize.height)
+            } else {
+              RoundedRectangle(cornerRadius: 4)
+                .fill(Color.gray)
+                .frame(width: newSize.width, height: newSize.height)
+                .shimmering()
+            }
+          }
+          if let alt = attachement.description, !alt.isEmpty, !isCompact {
+            Button {
+              altTextDisplayed = alt
+              isAltAlertDisplayed = true
+            } label: {
+              Text("ALT")
+            }
+            .padding(8)
+            .background(.thinMaterial)
+            .cornerRadius(4)
           }
         }
       } else {
@@ -120,12 +144,15 @@ public struct StatusMediaPreviewView: View {
                 image
                   .resizable()
                   .aspectRatio(contentMode: .fill)
+                  .frame(maxHeight: imageMaxHeight)
+                  .frame(maxWidth: imageMaxHeight)
                   .cornerRadius(4)
               },
               placeholder: {
                 RoundedRectangle(cornerRadius: 4)
                   .fill(Color.gray)
-                  .frame(height: imageMaxHeight)
+                  .frame(maxHeight: imageMaxHeight)
+                  .frame(maxWidth: imageMaxHeight)
                   .shimmering()
               })
       }
@@ -146,21 +173,35 @@ public struct StatusMediaPreviewView: View {
         GeometryReader { proxy in
           switch type {
           case .image:
-            LazyImage(url: attachement.url) { state in
-              if let image = state.image {
-                image
-                  .resizingMode(.aspectFill)
-                  .cornerRadius(4)
-              } else if state.isLoading {
-                RoundedRectangle(cornerRadius: 4)
-                  .fill(Color.gray)
-                  .frame(maxHeight: imageMaxHeight)
-                  .frame(width: isCompact ? imageMaxHeight : proxy.frame(in: .local).width)
-                  .shimmering()
+            ZStack(alignment: .bottomTrailing) {
+              LazyImage(url: attachement.url) { state in
+                if let image = state.image {
+                  image
+                    .resizingMode(.aspectFill)
+                    .cornerRadius(4)
+                } else if state.isLoading {
+                  RoundedRectangle(cornerRadius: 4)
+                    .fill(Color.gray)
+                    .frame(maxHeight: imageMaxHeight)
+                    .frame(width: isCompact ? imageMaxHeight : proxy.frame(in: .local).width)
+                    .shimmering()
+                }
+              }
+              .frame(width: isCompact ? imageMaxHeight : proxy.frame(in: .local).width)
+              .frame(height: imageMaxHeight)
+              if let alt = attachement.description, !alt.isEmpty, !isCompact {
+                Button {
+                  altTextDisplayed = alt
+                  isAltAlertDisplayed = true
+                } label: {
+                  Text("ALT")
+                    .font(.footnote)
+                }
+                .padding(4)
+                .background(.thinMaterial)
+                .cornerRadius(4)
               }
             }
-            .frame(width: isCompact ? imageMaxHeight : proxy.frame(in: .local).width)
-            .frame(height: imageMaxHeight)
           case .gifv, .video:
             if let url = attachement.url {
               VideoPlayerView(viewModel: .init(url: url))

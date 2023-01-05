@@ -20,6 +20,8 @@ public enum Statuses: Endpoint {
   case unreblog(id: String)
   case rebloggedBy(id: String, maxId: String?)
   case favouritedBy(id: String, maxId: String?)
+  case pin(id: String)
+  case unpin(id: String)
   
   public func path() -> String {
     switch self {
@@ -43,6 +45,10 @@ public enum Statuses: Endpoint {
       return "statuses/\(id)/reblogged_by"
     case .favouritedBy(let id, _):
       return "statuses/\(id)/favourited_by"
+    case let .pin(id):
+      return "statuses/\(id)/pin"
+    case let .unpin(id):
+      return "statuses/\(id)/unpin"
     }
   }
   

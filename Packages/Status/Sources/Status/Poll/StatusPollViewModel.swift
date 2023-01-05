@@ -16,14 +16,14 @@ public class StatusPollViewModel: ObservableObject {
   
   public init(poll: Poll) {
     self.poll = poll
-    self.votes = poll.ownVotes
+    self.votes = poll.ownVotes ?? []
   }
   
   public func fetchPoll() async {
     guard let client else { return }
     do {
       poll = try await client.get(endpoint: Polls.poll(id: poll.id))
-      votes = poll.ownVotes
+      votes = poll.ownVotes ?? []
     } catch { }
   }
   
@@ -32,7 +32,7 @@ public class StatusPollViewModel: ObservableObject {
     do {
       poll = try await client.post(endpoint: Polls.vote(id: poll.id, votes: votes))
       withAnimation {
-        votes = poll.ownVotes
+        votes = poll.ownVotes ?? []
       }
     } catch {
       print(error)

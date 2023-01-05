@@ -17,7 +17,7 @@ public struct Poll: Codable {
   public let multiple: Bool
   public let votesCount: Int
   public let votersCount: Int?
-  public let voted: Bool
-  public let ownVotes: [Int]
+  public let voted: Bool?
+  public let ownVotes: [Int]?
   public let options: [Option]
 }

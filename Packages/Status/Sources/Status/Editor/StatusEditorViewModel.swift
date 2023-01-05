@@ -82,7 +82,7 @@ public class StatusEditorViewModel: ObservableObject {
       isPosting = true
       let postStatus: Status?
       switch mode {
-      case .new, .replyTo, .quote:
+      case .new, .replyTo, .quote, .mention:
         postStatus = try await client.post(endpoint: Statuses.postStatus(status: statusText.string,
                                                                          inReplyTo: mode.replyToStatus?.id,
                                                                          mediaIds: mediasImages.compactMap{ $0.mediaAttachement?.id },
@@ -114,13 +114,19 @@ public class StatusEditorViewModel: ObservableObject {
       }
       mentionString += " "
       replyToStatus = status
+      visibility = status.visibility
       statusText = .init(string: mentionString)
       selectedRange = .init(location: mentionString.utf16.count, length: 0)
+    case let .mention(account, visibility):
+      statusText = .init(string: "@\(account.acct) ")
+      self.visibility = visibility
+      selectedRange = .init(location: statusText.string.utf16.count, length: 0)
     case let .edit(status):
       statusText = .init(status.content.asSafeAttributedString)
       selectedRange = .init(location: statusText.string.utf16.count, length: 0)
       spoilerOn = !status.spoilerText.isEmpty
       spoilerText = status.spoilerText
+      visibility = status.visibility
       mediasImages = status.mediaAttachments.map{ .init(image: nil, mediaAttachement: $0, error: nil )}
     case let .quote(status):
       self.embededStatus = status
@@ -301,6 +307,19 @@ public class StatusEditorViewModel: ObservableObject {
         if let index = indexOf(container: newContainer) {
           mediasImages[index] = .init(image: originalContainer.image, mediaAttachement: nil, error: error)
         }
+      }
+    }
+  }
+  
+  func addDescription(container: ImageContainer, description: String) async {
+    guard let client, let attachment = container.mediaAttachement else { return }
+    if let index = indexOf(container: container) {
+      do {
+        let media: MediaAttachement = try await client.put(endpoint: Media.media(id: attachment.id,
+                                                                                 description: description))
+        mediasImages[index] = .init(image: nil, mediaAttachement: media, error: nil)
+      } catch {
+        
       }
     }
   }

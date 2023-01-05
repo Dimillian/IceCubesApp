@@ -26,37 +26,43 @@ public struct StatusDetailView: View {
           case .loading:
             ForEach(Status.placeholders()) { status in
               StatusRowView(viewModel: .init(status: status, isCompact: false))
+                .padding(.horizontal, .layoutPadding)
                 .redacted(reason: .placeholder)
                 .shimmering()
+              Divider()
+                .padding(.vertical, .dividerPadding)
             }
           case let.display(status, context):
             if !context.ancestors.isEmpty {
               ForEach(context.ancestors) { ancestor in
                 StatusRowView(viewModel: .init(status: ancestor, isCompact: false))
+                  .padding(.horizontal, .layoutPadding)
                 Divider()
-                  .padding(.vertical, DS.Constants.dividerPadding)
+                  .padding(.vertical, .dividerPadding)
               }
             }
             StatusRowView(viewModel: .init(status: status,
                                            isCompact: false,
                                            isFocused: true))
+            .padding(.horizontal, .layoutPadding)
               .id(status.id)
             Divider()
-              .padding(.bottom, DS.Constants.dividerPadding * 2)
+              .padding(.bottom, .dividerPadding * 2)
             if !context.descendants.isEmpty {
               ForEach(context.descendants) { descendant in
                 StatusRowView(viewModel: .init(status: descendant, isCompact: false))
+                  .padding(.horizontal, .layoutPadding)
                 Divider()
-                  .padding(.vertical, DS.Constants.dividerPadding)
+                  .padding(.vertical, .dividerPadding)
               }
             }
             
           case let .error(error):
             Text(error.localizedDescription)
+              .padding(.horizontal, .layoutPadding)
           }
         }
-        .padding(.horizontal, DS.Constants.layoutPadding)
-        .padding(.top, DS.Constants.layoutPadding)
+        .padding(.top, .layoutPadding)
       }
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)

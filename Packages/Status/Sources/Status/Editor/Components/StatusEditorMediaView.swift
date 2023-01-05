@@ -6,6 +6,7 @@ import NukeUI
 
 struct StatusEditorMediaView: View {
   @ObservedObject var viewModel: StatusEditorViewModel
+  @State private var editingContainer: StatusEditorViewModel.ImageContainer?
   
   var body: some View {
     ScrollView(.horizontal, showsIndicators: false) {
@@ -14,21 +15,23 @@ struct StatusEditorMediaView: View {
           if container.image != nil {
             makeLocalImage(container: container)
           } else if let url = container.mediaAttachement?.url {
-            ZStack(alignment: .topTrailing) {
-              makeLazyImage(url: url)
-              Button {
-                withAnimation {
-                  viewModel.mediasImages.removeAll(where: { $0.id == container.id })
+            Menu {
+              makeImageMenu(container: container)
+            } label: {
+              ZStack(alignment: .bottomTrailing) {
+                makeLazyImage(url: url)
+                if container.mediaAttachement?.description?.isEmpty == false {
+                  altMarker
                 }
-              } label: {
-                Image(systemName: "xmark.circle")
               }
-              .padding(8)
             }
           }
         }
       }
-      .padding(.horizontal, DS.Constants.layoutPadding)
+      .padding(.horizontal, .layoutPadding)
+    }
+    .sheet(item: $editingContainer) { container in
+      StatusEditorMediaEditView(viewModel: viewModel, container: container)
     }
   }
   
@@ -84,5 +87,35 @@ struct StatusEditorMediaView: View {
     .frame(width: 150, height: 150)
     .cornerRadius(8)
   }
-    
+  
+  @ViewBuilder
+  private func makeImageMenu(container: StatusEditorViewModel.ImageContainer) -> some View {
+    if !viewModel.mode.isEditing {
+      Button {
+        editingContainer = container
+      } label: {
+        Label(container.mediaAttachement?.description?.isEmpty == false ?
+              "Edit description" : "Add description",
+              systemImage: "pencil.line")
+      }
+    }
+    Button(role: .destructive) {
+      withAnimation {
+        viewModel.mediasImages.removeAll(where: { $0.id == container.id })
+      }
+    } label: {
+      Label("Delete", systemImage: "trash")
+    }
+  }
+  
+  private var altMarker: some View {
+    Button {
+    } label: {
+      Text("ALT")
+        .font(.caption2)
+    }
+    .padding(4)
+    .background(.thinMaterial)
+    .cornerRadius(8)
+  }
 }

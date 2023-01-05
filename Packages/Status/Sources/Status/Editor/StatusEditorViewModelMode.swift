@@ -6,6 +6,16 @@ extension StatusEditorViewModel {
     case new
     case edit(status: Status)
     case quote(status: Status)
+    case mention(account: Account, visibility: Visibility)
+    
+    var isEditing: Bool {
+      switch self {
+      case .edit:
+        return true
+      default:
+        return false
+      }
+    }
     
     var replyToStatus: Status? {
       switch self {
@@ -18,7 +28,7 @@ extension StatusEditorViewModel {
     
     var title: String {
       switch self {
-      case .new:
+      case .new, .mention:
         return "New Post"
       case .edit:
         return "Edit your post"

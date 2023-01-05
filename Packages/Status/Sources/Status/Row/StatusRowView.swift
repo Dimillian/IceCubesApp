@@ -18,39 +18,65 @@ public struct StatusRowView: View {
   }
   
   public var body: some View {
-    HStack(alignment: .top, spacing: DS.Constants.statusColumnsSpacing) {
-      if !viewModel.isCompact,
-         theme.avatarPosition == .leading,
-         let status: AnyStatus = viewModel.status.reblog ?? viewModel.status {
-          AvatarView(url: status.account.avatar, size: .status)
+    if viewModel.isFiltered, let filter = viewModel.filter {
+      switch filter.filter.filterAction {
+      case .warn:
+        makeFilterView(filter: filter.filter)
+      case .hide:
+        EmptyView()
       }
-      VStack(alignment: .leading) {
-        if !viewModel.isCompact {
-          reblogView
-           replyView
+    } else {
+      HStack(alignment: .top, spacing: .statusColumnsSpacing) {
+        if !viewModel.isCompact,
+           theme.avatarPosition == .leading,
+           let status: AnyStatus = viewModel.status.reblog ?? viewModel.status {
+          Button {
+            routeurPath.navigate(to: .accountDetailWithAccount(account: status.account))
+          } label: {
+            AvatarView(url: status.account.avatar, size: .status)
+          }
         }
-        statusView
-        if !viewModel.isCompact {
-          StatusActionsView(viewModel: viewModel)
-            .padding(.vertical, 8)
-            .tint(viewModel.isFocused ? theme.tintColor : .gray)
-            .contentShape(Rectangle())
-            .onTapGesture {
-              routeurPath.navigate(to: .statusDetail(id: viewModel.status.reblog?.id ?? viewModel.status.id))
-            }
+        VStack(alignment: .leading) {
+          if !viewModel.isCompact {
+            reblogView
+             replyView
+          }
+          statusView
+          if !viewModel.isCompact {
+            StatusActionsView(viewModel: viewModel)
+              .padding(.vertical, 8)
+              .tint(viewModel.isFocused ? theme.tintColor : .gray)
+              .contentShape(Rectangle())
+              .onTapGesture {
+                routeurPath.navigate(to: .statusDetail(id: viewModel.status.reblog?.id ?? viewModel.status.id))
+              }
+          }
         }
+      }
+      .onAppear {
+        viewModel.client = client
+        if !viewModel.isCompact, viewModel.embededStatus == nil {
+          Task {
+            await viewModel.loadEmbededStatus()
+          }
+        }
+      }
+      .contextMenu {
+        StatusRowContextMenu(viewModel: viewModel)
       }
     }
-    .onAppear {
-      viewModel.client = client
-      if !viewModel.isCompact, viewModel.embededStatus == nil {
-        Task {
-          await viewModel.loadEmbededStatus()
+  }
+  
+  private func makeFilterView(filter: Filter) -> some View {
+    HStack {
+      Text("Filtered by: \(filter.title)")
+      Button {
+        withAnimation {
+          viewModel.isFiltered = false
         }
+      } label: {
+        Text("Show anyway")
       }
-    }
-    .contextMenu {
-      contextMenu
     }
   }
   
@@ -183,56 +209,12 @@ public struct StatusRowView: View {
   
   private var menuButton: some View {
     Menu {
-      contextMenu
+      StatusRowContextMenu(viewModel: viewModel)
     } label: {
       Image(systemName: "ellipsis")
         .frame(width: 30, height: 30)
     }
     .foregroundColor(.gray)
     .contentShape(Rectangle())
-  }
-  
-  @ViewBuilder
-  private var contextMenu: some View {
-    Button { Task {
-      if viewModel.isFavourited {
-        await viewModel.unFavourite()
-      } else {
-        await viewModel.favourite()
-      }
-    } } label: {
-      Label(viewModel.isFavourited ? "Unfavorite" : "Favorite", systemImage: "star")
-    }
-    Button { Task {
-      if viewModel.isReblogged {
-        await viewModel.unReblog()
-      } else {
-        await viewModel.reblog()
-      }
-    } } label: {
-      Label(viewModel.isReblogged ? "Unboost" : "Boost", systemImage: "arrow.left.arrow.right.circle")
-    }
-    Button {
-      routeurPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
-    } label: {
-      Label("Quote this post", systemImage: "quote.bubble")
-    }
-    
-    if let url = viewModel.status.reblog?.url ?? viewModel.status.url {
-      Button { UIApplication.shared.open(url)  } label: {
-        Label("View in Browser", systemImage: "safari")
-      }
-    }
-    
-    if account.account?.id == viewModel.status.account.id {
-      Button {
-        routeurPath.presentedSheet = .editStatusEditor(status: viewModel.status)
-      } label: {
-        Label("Edit", systemImage: "pencil")
-      }
-      Button(role: .destructive) { Task { await viewModel.delete() } } label: {
-        Label("Delete", systemImage: "trash")
-      }
-    }
   }
 }

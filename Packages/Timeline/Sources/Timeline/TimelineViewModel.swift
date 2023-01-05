@@ -24,6 +24,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
         if oldValue != timeline {
           statuses = []
           pendingStatuses = []
+          tag = nil
         }
         await fetchStatuses(userIntent: false)
         switch timeline {
@@ -140,20 +141,6 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
     guard let client else { return }
     do {
       tag = try await client.get(endpoint: Tags.tag(id: id))
-    } catch {}
-  }
-  
-  func followTag(id: String) async {
-    guard let client else { return }
-    do {
-      tag = try await client.post(endpoint: Tags.follow(id: id))
-    } catch {}
-  }
-  
-  func unfollowTag(id: String) async {
-    guard let client else { return }
-    do {
-      tag = try await client.post(endpoint: Tags.unfollow(id: id))
     } catch {}
   }
   

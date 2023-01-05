@@ -27,7 +27,7 @@ class NotificationsViewModel: ObservableObject {
     }
   }
   @Published var state: State = .loading
-  @Published var tab: Tab = .all {
+  @Published var selectedType: Models.Notification.NotificationType? {
     didSet {
       notifications = []
       Task {
@@ -35,11 +35,11 @@ class NotificationsViewModel: ObservableObject {
       }
     }
   }
+  private var queryTypes: [String]? {
+    selectedType != nil ? [selectedType!.rawValue] : nil
+   }
   
   private var notifications: [Models.Notification] = []
-  private var queryTypes: [String]? {
-    tab == .mentions ? ["mention"] : nil
-  }
   
   func fetchNotifications() async {
     guard let client else { return }

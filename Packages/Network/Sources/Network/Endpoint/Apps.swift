@@ -1,4 +1,5 @@
 import Foundation
+import Models
 
 public enum Apps: Endpoint {
   case registerApp
@@ -14,10 +15,10 @@ public enum Apps: Endpoint {
     switch self {
     case .registerApp:
       return [
-        .init(name: "client_name", value: "IceCubesApp"),
-        .init(name: "redirect_uris", value: "icecubesapp://"),
-        .init(name: "scopes", value: "read write follow push"),
-        .init(name: "website", value: "https://github.com/Dimillian/IceCubesApp")
+        .init(name: "client_name", value: AppInfo.clientName),
+        .init(name: "redirect_uris", value: AppInfo.scheme),
+        .init(name: "scopes", value: AppInfo.scopes),
+        .init(name: "website", value: AppInfo.weblink)
       ]
     }
   }

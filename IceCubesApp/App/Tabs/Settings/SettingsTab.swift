@@ -15,9 +15,10 @@ struct SettingsTabs: View {
   @StateObject private var routeurPath = RouterPath()
   
   @State private var addAccountSheetPresented = false
+  @State private var isThemeSelectorPresented = false
   
   var body: some View {
-    NavigationStack {
+    NavigationStack(path: $routeurPath.path) {
       Form {
         appSection
         accountsSection
@@ -65,17 +66,18 @@ struct SettingsTabs: View {
   
   private var themeSection: some View {
     Section("Theme") {
-      Picker("Theme", selection: $theme.selectedSet) {
-        ForEach(Theme.allColorSet, id: \.name.rawValue) { set in
-          Text(set.name.rawValue).tag(set.name)
-        }
-      }
+      themeSelectorButton
       ColorPicker("Tint color", selection: $theme.tintColor)
       ColorPicker("Background color", selection: $theme.primaryBackgroundColor)
       ColorPicker("Secondary Background color", selection: $theme.secondaryBackgroundColor)
       Picker("Avatar position", selection: $theme.avatarPosition) {
         ForEach(Theme.AvatarPosition.allCases, id: \.rawValue) { position in
           Text(position.description).tag(position)
+        }
+      }
+      Picker("Avatar shape", selection: $theme.avatarShape) {
+        ForEach(Theme.AvatarShape.allCases, id: \.rawValue) { shape in
+          Text(shape.description).tag(shape)
         }
       }
       Button {
@@ -123,6 +125,20 @@ struct SettingsTabs: View {
     }
     .sheet(isPresented: $addAccountSheetPresented) {
       AddAccountView()
+    }
+  }
+  
+  private var themeSelectorButton: some View {
+    NavigationLink(destination: ThemePreviewView()) {
+      Button {
+        isThemeSelectorPresented.toggle()
+      } label: {
+        HStack {
+          Text("Theme")
+          Spacer()
+          Text(theme.selectedSet.rawValue)
+        }
+      }
     }
   }
   

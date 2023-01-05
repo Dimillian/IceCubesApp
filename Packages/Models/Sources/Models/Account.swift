@@ -30,6 +30,7 @@ public struct Account: Codable, Identifiable, Equatable, Hashable {
   public let fields: [Field]
   public let locked: Bool
   public let emojis: [Emoji]
+  public let url: URL?
   
   public static func placeholder() -> Account {
     .init(id: UUID().uuidString,
@@ -46,7 +47,8 @@ public struct Account: Codable, Identifiable, Equatable, Hashable {
           lastStatusAt: nil,
           fields: [],
           locked: false,
-          emojis: [])
+          emojis: [],
+          url: nil)
   }
   
   public static func placeholders() -> [Account] {

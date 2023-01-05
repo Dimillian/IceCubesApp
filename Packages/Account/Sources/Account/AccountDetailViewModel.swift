@@ -38,7 +38,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   }
   
   enum TabState {
-    case followedTags(tags: [Tag])
+    case followedTags
     case statuses(statusesState: StatusesState)
     case lists
   }
@@ -59,9 +59,9 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   @Published var statusesState: StatusesState = .loading
   
   @Published var relationship: Relationshionship?
+  @Published var pinned: [Status] = []
   @Published var favourites: [Status] = []
   private var favouritesNextPage: LinkHandler?
-  @Published var followedTags: [Tag] = []
   @Published var featuredTags: [FeaturedTag] = []
   @Published var fields: [Account.Field] = []
   @Published var familliarFollowers: [Account] = []
@@ -107,16 +107,11 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
       self.featuredTags = try await featuredTags
       self.featuredTags.sort { $0.statusesCountInt > $1.statusesCountInt }
       self.fields = loadedAccount.fields
-      if isCurrentUser {
-        async let followedTags: [Tag] = client.get(endpoint: Accounts.followedTags)
-        self.followedTags = try await followedTags
-      } else {
-        if client.isAuth {
-          async let relationships: [Relationshionship] = client.get(endpoint: Accounts.relationships(ids: [accountId]))
-          async let familliarFollowers: [FamilliarAccounts] = client.get(endpoint: Accounts.familiarFollowers(withAccount: accountId))
-          self.relationship = try await relationships.first
-          self.familliarFollowers = try await familliarFollowers.first?.accounts ?? []
-        }
+      if client.isAuth {
+        async let relationships: [Relationshionship] = client.get(endpoint: Accounts.relationships(ids: [accountId]))
+        async let familliarFollowers: [FamilliarAccounts] = client.get(endpoint: Accounts.familiarFollowers(withAccount: accountId))
+        self.relationship = try await relationships.first
+        self.familliarFollowers = try await familliarFollowers.first?.accounts ?? []
       }
       accountState = .data(account: loadedAccount)
     } catch {
@@ -137,7 +132,17 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
                                                        sinceId: nil,
                                                        tag: nil,
                                                        onlyMedia: selectedTab == .media ? true : nil,
-                                                       excludeReplies: selectedTab == .statuses && !isCurrentUser ? true : nil))
+                                                       excludeReplies: selectedTab == .statuses && !isCurrentUser ? true : nil,
+                                                       pinned: nil))
+      if selectedTab == .statuses {
+        pinned =
+        try await client.get(endpoint: Accounts.statuses(id: accountId,
+                                                         sinceId: nil,
+                                                         tag: nil,
+                                                         onlyMedia: nil,
+                                                         excludeReplies: nil,
+                                                         pinned: true))
+      }
       if isCurrentUser {
         (favourites, favouritesNextPage) = try await client.getWithLink(endpoint: Accounts.favourites(sinceId: nil))
       }
@@ -159,7 +164,8 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
                                                          sinceId: lastId,
                                                          tag: nil,
                                                          onlyMedia: selectedTab == .media ? true : nil,
-                                                         excludeReplies: selectedTab == .statuses && !isCurrentUser ? true : nil))
+                                                         excludeReplies: selectedTab == .statuses && !isCurrentUser ? true : nil,
+                                                         pinned: nil))
         statuses.append(contentsOf: newStatuses)
         tabState = .statuses(statusesState: .display(statuses: statuses,
                                                      nextPageState: newStatuses.count < 20 ? .none : .hasNextPage))
@@ -203,7 +209,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
       tabState = .statuses(statusesState: .display(statuses: favourites,
                                                    nextPageState: favouritesNextPage != nil ? .hasNextPage : .none))
     case .followedTags:
-      tabState = .followedTags(tags: followedTags)
+      tabState = .followedTags
     case .lists:
       tabState = .lists
     }

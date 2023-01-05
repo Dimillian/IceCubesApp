@@ -87,6 +87,18 @@ struct TimelineTab: View {
         }
       }
     }
+    
+    if !currentAccount.tags.isEmpty {
+      Menu("Followed Tags") {
+        ForEach(currentAccount.tags) { tag in
+          Button {
+            timeline = .hashtag(tag: tag.name, accountId: nil)
+          } label: {
+            Label("#\(tag.name)", systemImage: "number")
+          }
+        }
+      }
+    }
   }
   
   private var accountButton: some View {

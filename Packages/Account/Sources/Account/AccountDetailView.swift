@@ -50,16 +50,19 @@ public struct AccountDetailView: View {
               }
             }
             .pickerStyle(.segmented)
-            .padding(.horizontal, DS.Constants.layoutPadding)
+            .padding(.horizontal, .layoutPadding)
             .offset(y: -20)
           }
           .id("status")
           
           switch viewModel.tabState {
           case .statuses:
+            if viewModel.selectedTab == .statuses {
+              pinnedPostsView
+            }
             StatusesListView(fetcher: viewModel)
-          case let .followedTags(tags):
-            makeTagsListView(tags: tags)
+          case .followedTags:
+            tagsListView
           case .lists:
             listsListView
           }
@@ -67,21 +70,6 @@ public struct AccountDetailView: View {
       }
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
-      .toolbar {
-        if viewModel.relationship?.following == true, let account = viewModel.account {
-          ToolbarItem {
-            Menu {
-              Button {
-                routeurPath.presentedSheet = .listAddAccount(account: account)
-              } label: {
-                Label("Add/Remove from lists", systemImage: "list.bullet")
-              }
-            } label: {
-              Image(systemName: "ellipsis")
-            }
-          }
-        }
-      }
     }
     .onAppear {
       Task {
@@ -110,16 +98,7 @@ public struct AccountDetailView: View {
     .edgesIgnoringSafeArea(.top)
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
-      ToolbarItem(placement: .principal) {
-        if scrollOffset < -200 {
-          switch viewModel.accountState {
-          case let .data(account):
-            account.displayNameWithEmojis.font(.headline)
-          default:
-            EmptyView()
-          }
-        }
-      }
+      toolbarContent
     }
   }
   
@@ -180,7 +159,7 @@ public struct AccountDetailView: View {
             }
           }
         }
-        .padding(.leading, DS.Constants.layoutPadding)
+        .padding(.leading, .layoutPadding)
       }
     }
   }
@@ -191,7 +170,7 @@ public struct AccountDetailView: View {
       VStack(alignment: .leading, spacing: 2) {
         Text("Also followed by")
           .font(.headline)
-          .padding(.leading, DS.Constants.layoutPadding)
+          .padding(.leading, .layoutPadding)
         ScrollView(.horizontal, showsIndicators: false) {
           LazyHStack(spacing: 0) {
             ForEach(viewModel.familliarFollowers) { account in
@@ -202,7 +181,7 @@ public struct AccountDetailView: View {
                 .padding(.leading, -4)
             }
           }
-          .padding(.leading, DS.Constants.layoutPadding + 4)
+          .padding(.leading, .layoutPadding + 4)
         }
       }
       .padding(.top, 2)
@@ -236,17 +215,19 @@ public struct AccountDetailView: View {
     }
   }
   
-  private func makeTagsListView(tags: [Tag]) -> some View {
+  private var tagsListView: some View {
     Group {
-      ForEach(tags) { tag in
+      ForEach(currentAccount.tags) { tag in
         HStack {
           TagRowView(tag: tag)
           Spacer()
           Image(systemName: "chevron.right")
         }
-        .padding(.horizontal, DS.Constants.layoutPadding)
+        .padding(.horizontal, .layoutPadding)
         .padding(.vertical, 8)
       }
+    }.task {
+      await currentAccount.fetchFollowedTags()
     }
   }
   
@@ -260,9 +241,9 @@ public struct AccountDetailView: View {
             Image(systemName: "chevron.right")
           }
           .padding(.vertical, 8)
-          .padding(.horizontal, DS.Constants.layoutPadding)
+          .padding(.horizontal, .layoutPadding)
           .font(.headline)
-          .foregroundColor(.white)
+          .foregroundColor(theme.labelColor)
         }
         .contextMenu {
           Button("Delete list", role: .destructive) {
@@ -275,7 +256,10 @@ public struct AccountDetailView: View {
       Button("Create a new list") {
         isCreateListAlertPresented = true
       }
-      .padding(.horizontal, DS.Constants.layoutPadding)
+      .padding(.horizontal, .layoutPadding)
+    }
+    .task {
+      await currentAccount.fetchLists()
     }
     .alert("Create a new list", isPresented: $isCreateListAlertPresented) {
       TextField("List name", text: $createListTitle)
@@ -293,6 +277,73 @@ public struct AccountDetailView: View {
       }
     } message: {
       Text("Enter the name for your list")
+    }
+  }
+  
+  @ViewBuilder
+  private var pinnedPostsView: some View {
+    if !viewModel.pinned.isEmpty {
+      ForEach(viewModel.pinned) { status in
+        VStack(alignment: .leading) {
+          Label("Pinned post", systemImage: "pin.fill")
+            .font(.footnote)
+            .foregroundColor(.gray)
+            .fontWeight(.semibold)
+          StatusRowView(viewModel: .init(status: status))
+        }
+        .padding(.horizontal, .layoutPadding)
+        Divider()
+          .padding(.vertical, .dividerPadding)
+      }
+    }
+  }
+  
+  @ToolbarContentBuilder
+  private var toolbarContent: some ToolbarContent {
+    ToolbarItem(placement: .principal) {
+      if scrollOffset < -200 {
+        switch viewModel.accountState {
+        case let .data(account):
+          account.displayNameWithEmojis.font(.headline)
+        default:
+          EmptyView()
+        }
+      }
+    }
+    
+    ToolbarItem(placement: .navigationBarTrailing) {
+      Menu {
+        if let account = viewModel.account {
+          Section(account.acct) {
+            if !viewModel.isCurrentUser {
+              Button {
+                routeurPath.presentedSheet = .mentionStatusEditor(account: account, visibility: .pub)
+              } label: {
+                Label("Mention", systemImage: "at")
+              }
+              Button {
+                routeurPath.presentedSheet = .mentionStatusEditor(account: account, visibility: .direct)
+              } label: {
+                Label("Message", systemImage: "tray.full")
+              }
+              Divider()
+            }
+            
+            if viewModel.relationship?.following == true {
+              Button {
+                routeurPath.presentedSheet = .listAddAccount(account: account)
+              } label: {
+                Label("Add/Remove from lists", systemImage: "list.bullet")
+              }
+            }
+            if let url = account.url {
+              ShareLink(item: url)
+            }
+          }
+        }
+      } label: {
+        Image(systemName: "ellipsis")
+      }
     }
   }
 }

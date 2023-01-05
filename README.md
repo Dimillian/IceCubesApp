@@ -19,20 +19,24 @@ For contributors and myself, here is a todo list of features that could be added
 
 - [ ] DM / Conversations
 - [X] Lists support
-- [ ] Display images alt
-- [ ] Editor: Post image alts
+- [X] Display images alt
+- [X] Editor: Post image alts
 - [ ] Editor: Add / Edit polls
 - [ ] Editor: Support video types
 - [ ] Editor: Add photos from camera
+- [ ] Editor: Support custom emojis
 - [X] Editor: Autocomplete for mentions / hashtags
 - [ ] Better settings tab
 - [ ] Edit profile
+- [ ] Handle emoji in status
 - [X] Light theme
 - [X] More themes
-- [ ] Honor & display server side features (filter, default visibility, etc...)
+- [ ] Display & Edit server side features (filter, default visibility, etc...)
+- [X] Honor filters for statuses.
+- [ ] Edit filters.
 - [X] Open remote status locally
 - [ ] More context menu everywhere
-- [ ] Support pinned posts
+- [X] Support pinned posts
 - [ ] Support IceCubesApp://any mastodon links
 - [ ] Add a share sheet
 - [ ] Translate button
