@@ -179,4 +179,13 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
     pendingStatuses = []
     statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
   }
+  
+  func dequeuePendingStatuses() {
+    guard timeline == .home else { return }
+    if pendingStatuses.count > 1 {
+      let status = pendingStatuses.removeLast()
+      statuses.insert(status, at: 0)
+    }
+    statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+  }
 }

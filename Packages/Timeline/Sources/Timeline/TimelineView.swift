@@ -109,17 +109,31 @@ public struct TimelineView: View {
   @ViewBuilder
   private func makePendingNewPostsView(proxy: ScrollViewProxy) -> some View {
     if !viewModel.pendingStatuses.isEmpty {
-      Button {
-        withAnimation {
-          proxy.scrollTo(Constants.scrollToTop)
-          viewModel.displayPendingStatuses()
+      HStack(spacing: 6) {
+        Button {
+          withAnimation {
+            proxy.scrollTo(Constants.scrollToTop)
+            viewModel.displayPendingStatuses()
+          }
+        } label: {
+          Text(viewModel.pendingStatusesButtonTitle)
         }
-      } label: {
-        Text(viewModel.pendingStatusesButtonTitle)
+        .buttonStyle(.bordered)
+        .background(.thinMaterial)
+        .cornerRadius(8)
+        if viewModel.pendingStatuses.count > 1 {
+          Button {
+            withAnimation {
+              viewModel.dequeuePendingStatuses()
+            }
+          } label: {
+            Image(systemName: "play.square.stack")
+          }
+          .buttonStyle(.bordered)
+          .background(.thinMaterial)
+          .cornerRadius(8)
+        }
       }
-      .buttonStyle(.bordered)
-      .background(.thinMaterial)
-      .cornerRadius(8)
       .padding(.top, 6)
     }
   }
