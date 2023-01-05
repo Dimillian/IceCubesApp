@@ -48,6 +48,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
         }
       }
     }
+    .frame(maxWidth: .maxColumnWidth)
   }
   
   private var loadingRow: some View {

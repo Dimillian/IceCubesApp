@@ -1,11 +1,18 @@
 import Foundation
 
-public struct Tag: Codable, Identifiable {
-  
+public struct Tag: Codable, Identifiable, Equatable, Hashable {
   public struct History: Codable {
     public let day: String
     public let accounts: String
     public let uses: String
+  }
+  
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(name)
+  }
+  
+  public static func == (lhs: Tag, rhs: Tag) -> Bool {
+    lhs.name == rhs.name
   }
   
   public var id: String {

@@ -20,9 +20,11 @@ public struct NotificationsListView: View {
           notificationsView
         }
         .padding(.top, 16)
+        .frame(maxWidth: .maxColumnWidth)
       }
       .padding(.horizontal, .layoutPadding)
       .padding(.top, .layoutPadding)
+      .background(theme.primaryBackgroundColor)
     }
     .navigationTitle(viewModel.selectedType?.menuTitle() ?? "All Notifications")
     .navigationBarTitleDisplayMode(.inline)
@@ -43,6 +45,7 @@ public struct NotificationsListView: View {
         }
       }
     }
+    .scrollContentBackground(.hidden)
     .background(theme.primaryBackgroundColor)
     .task {
       viewModel.client = client
