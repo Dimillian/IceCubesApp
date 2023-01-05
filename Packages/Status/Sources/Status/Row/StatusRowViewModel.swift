@@ -7,6 +7,7 @@ public class StatusRowViewModel: ObservableObject {
   let status: Status
   let isCompact: Bool
   let isFocused: Bool
+  let showActions: Bool
   
   @Published var favouritesCount: Int
   @Published var isFavourited: Bool
@@ -27,10 +28,12 @@ public class StatusRowViewModel: ObservableObject {
   
   public init(status: Status,
               isCompact: Bool = false,
-              isFocused: Bool = false) {
+              isFocused: Bool = false,
+              showActions: Bool = true) {
     self.status = status
     self.isCompact = isCompact
     self.isFocused = isFocused
+    self.showActions = showActions
     if let reblog = status.reblog {
       self.isFavourited = reblog.favourited == true
       self.isReblogged = reblog.reblogged == true

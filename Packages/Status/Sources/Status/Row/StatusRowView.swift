@@ -39,10 +39,10 @@ public struct StatusRowView: View {
         VStack(alignment: .leading) {
           if !viewModel.isCompact {
             reblogView
-             replyView
+            replyView
           }
           statusView
-          if !viewModel.isCompact {
+          if !viewModel.isCompact && viewModel.showActions {
             StatusActionsView(viewModel: viewModel)
               .padding(.vertical, 8)
               .tint(viewModel.isFocused ? theme.tintColor : .gray)
