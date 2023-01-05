@@ -41,7 +41,6 @@ struct IceCubesApp: App {
       .environmentObject(currentInstance)
       .environmentObject(theme)
       .environmentObject(watcher)
-      .quickLookPreview($quickLook.url, in: quickLook.urls)
     }
     .onChange(of: scenePhase, perform: { scenePhase in
       handleScenePhase(scenePhase: scenePhase)
@@ -60,9 +59,15 @@ struct IceCubesApp: App {
   @ViewBuilder
   private var appView: some View {
     if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
-      splitView
+      if ProcessInfo.processInfo.isiOSAppOnMac {
+        splitView
+      } else {
+        splitView
+          .quickLookPreview($quickLook.url, in: quickLook.urls)
+      }
     } else {
       tabBarView
+        .quickLookPreview($quickLook.url, in: quickLook.urls)
     }
   }
   
