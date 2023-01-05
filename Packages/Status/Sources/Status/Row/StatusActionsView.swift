@@ -78,6 +78,7 @@ struct StatusActionsView: View {
               }
             }
             .buttonStyle(.borderless)
+            .disabled(action == .boost && viewModel.status.visibility == .direct)
             Spacer()
           }
         }

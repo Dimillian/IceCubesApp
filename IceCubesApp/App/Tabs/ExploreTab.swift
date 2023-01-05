@@ -18,7 +18,7 @@ struct ExploreTab: View {
         .withAppRouteur()
         .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
         .toolbar {
-          statusEditorToolbarItem(routeurPath: routeurPath)
+          statusEditorToolbarItem(routeurPath: routeurPath, visibility: .pub)
         }
     }
     .environmentObject(routeurPath)

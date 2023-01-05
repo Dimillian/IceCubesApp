@@ -37,8 +37,8 @@ extension View {
       switch destination {
       case let .replyToStatusEditor(status):
         StatusEditorView(mode: .replyTo(status: status))
-      case .newStatusEditor:
-        StatusEditorView(mode: .new)
+      case let .newStatusEditor(visibility):
+        StatusEditorView(mode: .new(vivibilty: visibility))
       case let .editStatusEditor(status):
         StatusEditorView(mode: .edit(status: status))
       case let .quoteStatusEditor(status):

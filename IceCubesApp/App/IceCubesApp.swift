@@ -49,7 +49,7 @@ struct IceCubesApp: App {
     .onChange(of: appAccountsManager.currentClient) { newClient in
       setNewClientsInEnv(client: newClient)
       if newClient.isAuth {
-        watcher.watch(stream: .user)
+        watcher.watch(streams: [.user, .direct])
       }
     }
     .onChange(of: theme.primaryBackgroundColor) { newValue in
@@ -64,6 +64,15 @@ struct IceCubesApp: App {
     } else {
       tabBarView
     }
+  }
+  
+  private func badgeFor(tab: Tab) -> Int {
+    if tab == .notifications && selectedTab != tab {
+      return watcher.unreadNotificationsCount
+    } else if tab == .messages && selectedTab != tab {
+      return watcher.unreadMessagesCount
+    }
+    return 0
   }
   
   private var tabBarView: some View {
@@ -85,7 +94,7 @@ struct IceCubesApp: App {
             tab.label
           }
           .tag(tab)
-          .badge(tab == .notifications ? watcher.unreadNotificationsCount : 0)
+          .badge(badgeFor(tab: tab))
           .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .tabBar)
       }
     }
@@ -116,7 +125,7 @@ struct IceCubesApp: App {
     case .background:
       watcher.stopWatching()
     case .active:
-      watcher.watch(stream: .user)
+      watcher.watch(streams: [.user, .direct])
     case .inactive:
       break
     default:

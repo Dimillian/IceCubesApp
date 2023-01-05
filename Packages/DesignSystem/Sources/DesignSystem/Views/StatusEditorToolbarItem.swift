@@ -1,12 +1,13 @@
 import SwiftUI
 import Env
+import Models
 
 @MainActor
 extension View {
-  public func statusEditorToolbarItem(routeurPath: RouterPath) -> some ToolbarContent {
+  public func statusEditorToolbarItem(routeurPath: RouterPath, visibility: Models.Visibility) -> some ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
       Button {
-        routeurPath.presentedSheet = .newStatusEditor
+        routeurPath.presentedSheet = .newStatusEditor(visibility: visibility)
       } label: {
         Image(systemName: "square.and.pencil")
       }
@@ -16,13 +17,16 @@ extension View {
 
 public struct StatusEditorToolbarItem: ToolbarContent {
   @EnvironmentObject private var routerPath: RouterPath
+  let visibility: Models.Visibility
   
-  public init() { }
+  public init(visibility: Models.Visibility) {
+    self.visibility = visibility
+  }
   
   public var body: some ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
       Button {
-        routerPath.presentedSheet = .newStatusEditor
+        routerPath.presentedSheet = .newStatusEditor(visibility: visibility)
       } label: {
         Image(systemName: "square.and.pencil")
       }

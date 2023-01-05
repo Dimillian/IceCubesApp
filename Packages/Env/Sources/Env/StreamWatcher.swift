@@ -6,7 +6,7 @@ import Network
 public class StreamWatcher: ObservableObject {  
   private var client: Client?
   private var task: URLSessionWebSocketTask?
-  private var watchedStream: Stream?
+  private var watchedStreams: [Stream] = []
   
   private let decoder = JSONDecoder()
   private let encoder = JSONEncoder()
@@ -14,10 +14,12 @@ public class StreamWatcher: ObservableObject {
   public enum Stream: String {
     case publicTimeline = "public"
     case user
+    case direct
   }
     
   @Published public var events: [any StreamEvent] = []
   @Published public var unreadNotificationsCount: Int = 0
+  @Published public var unreadMessagesCount: Int = 0
   @Published public var latestEvent: (any StreamEvent)?
   
   public init() {
@@ -38,15 +40,17 @@ public class StreamWatcher: ObservableObject {
     receiveMessage()
   }
   
-  public func watch(stream: Stream) {
-    if client?.isAuth == false && stream == .user {
+  public func watch(streams: [Stream]) {
+    if client?.isAuth == false {
       return
     }
     if task == nil {
       connect()
     }
-    watchedStream = stream
-    sendMessage(message: StreamMessage(type: "subscribe", stream: stream.rawValue))
+    watchedStreams = streams
+    streams.forEach { stream in
+      sendMessage(message: StreamMessage(type: "subscribe", stream: stream.rawValue))
+    }
   }
   
   public func stopWatching() {
@@ -75,8 +79,10 @@ public class StreamWatcher: ObservableObject {
               Task { @MainActor in
                 self.events.append(event)
                 self.latestEvent = event
-                if event is StreamEventNotification {
+                if let event = event as? StreamEventNotification, event.notification.status?.visibility != .direct {
                   self.unreadNotificationsCount += 1
+                } else if event is StreamEventConversation {
+                  self.unreadMessagesCount += 1
                 }
               }
             }
@@ -95,9 +101,7 @@ public class StreamWatcher: ObservableObject {
           guard let self = self else { return }
           self.stopWatching()
           self.connect()
-          if let watchedStream = self.watchedStream {
-            self.watch(stream: watchedStream)
-          }
+          self.watch(streams: self.watchedStreams)
         }
       }
     })
@@ -120,6 +124,9 @@ public class StreamWatcher: ObservableObject {
       case "notification":
         let notification = try decoder.decode(Notification.self, from: payloadData)
         return StreamEventNotification(notification: notification)
+      case "conversation":
+        let conversation = try decoder.decode(Conversation.self, from: payloadData)
+        return StreamEventConversation(conversation: conversation)
       default:
         return nil
       }

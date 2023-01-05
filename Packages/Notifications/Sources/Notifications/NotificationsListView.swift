@@ -71,10 +71,16 @@ public struct NotificationsListView: View {
       }
       
     case let .display(notifications, nextPageState):
-      ForEach(notifications) { notification in
-        NotificationRowView(notification: notification)
-        Divider()
-          .padding(.vertical, .dividerPadding)
+      if notifications.isEmpty {
+        EmptyView(iconName: "bell.slash",
+                  title: "No notifications",
+                  message: "Notifications? What notifications? Your notification inbox is looking so empty. Keep on being awesome! 📱😎")
+      } else {
+        ForEach(notifications) { notification in
+          NotificationRowView(notification: notification)
+          Divider()
+            .padding(.vertical, .dividerPadding)
+        }
       }
       
       switch nextPageState {

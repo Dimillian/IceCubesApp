@@ -16,7 +16,7 @@ public enum RouteurDestinations: Hashable {
 }
 
 public enum SheetDestinations: Identifiable {
-  case newStatusEditor
+  case newStatusEditor(visibility: Models.Visibility)
   case editStatusEditor(status: Status)
   case replyToStatusEditor(status: Status)
   case quoteStatusEditor(status: Status)

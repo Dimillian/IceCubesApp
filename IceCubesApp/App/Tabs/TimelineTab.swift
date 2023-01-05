@@ -32,7 +32,7 @@ struct TimelineTab: View {
             ToolbarItem(placement: .navigationBarLeading) {
               accountButton
             }
-            statusEditorToolbarItem(routeurPath: routeurPath)
+            statusEditorToolbarItem(routeurPath: routeurPath, visibility: .pub)
           } else {
             ToolbarItem(placement: .navigationBarTrailing) {
               addAccountButton
