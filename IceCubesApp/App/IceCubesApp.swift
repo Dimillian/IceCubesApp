@@ -66,8 +66,12 @@ struct IceCubesApp: App {
           .quickLookPreview($quickLook.url, in: quickLook.urls)
       }
     } else {
-      tabBarView
-        .quickLookPreview($quickLook.url, in: quickLook.urls)
+      if ProcessInfo.processInfo.isiOSAppOnMac || ProcessInfo.processInfo.isMacCatalystApp {
+        tabBarView
+      } else {
+        tabBarView
+          .quickLookPreview($quickLook.url, in: quickLook.urls)
+      }
     }
   }
   
