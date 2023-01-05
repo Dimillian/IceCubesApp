@@ -41,7 +41,7 @@ struct IceCubesApp: App {
       .environmentObject(currentInstance)
       .environmentObject(theme)
       .environmentObject(watcher)
-      //.quickLookPreview($quickLook.url, in: quickLook.urls)
+      .quickLookPreview($quickLook.url, in: quickLook.urls)
     }
     .onChange(of: scenePhase, perform: { scenePhase in
       handleScenePhase(scenePhase: scenePhase)
