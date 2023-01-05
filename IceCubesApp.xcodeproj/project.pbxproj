@@ -26,6 +26,7 @@
 		9F55C6902955993C00F94077 /* Explore in Frameworks */ = {isa = PBXBuildFile; productRef = 9F55C68F2955993C00F94077 /* Explore */; };
 		9F5E581929545BE700A53960 /* Env in Frameworks */ = {isa = PBXBuildFile; productRef = 9F5E581829545BE700A53960 /* Env */; };
 		9F7335EA2966B3F800AFF0BA /* Conversations in Frameworks */ = {isa = PBXBuildFile; productRef = 9F7335E92966B3F800AFF0BA /* Conversations */; };
+		9F7335ED2967463400AFF0BA /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F7335EB2967461B00AFF0BA /* AVKit.framework */; };
 		9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE4ACA293783B000772766 /* SettingsTab.swift */; };
 		9FAE4ACE29379A5A00772766 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAE4ACD29379A5A00772766 /* KeychainSwift */; };
 		9FAE4AD129379AD600772766 /* AppAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE4AD029379AD600772766 /* AppAccount.swift */; };
@@ -59,6 +60,7 @@
 		9F55C68E295598F900F94077 /* Explore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Explore; path = Packages/Explore; sourceTree = "<group>"; };
 		9F5E581729545B5500A53960 /* Env */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Env; path = Packages/Env; sourceTree = "<group>"; };
 		9F7335E82966B3DC00AFF0BA /* Conversations */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Conversations; path = Packages/Conversations; sourceTree = "<group>"; };
+		9F7335EB2967461B00AFF0BA /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.2.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
 		9FAE4AC8293774FF00772766 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9FAE4ACA293783B000772766 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		9FAE4AD029379AD600772766 /* AppAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAccount.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F7335ED2967463400AFF0BA /* AVKit.framework in Frameworks */,
 				9F55C6902955993C00F94077 /* Explore in Frameworks */,
 				9FAE4ACE29379A5A00772766 /* KeychainSwift in Frameworks */,
 				9F7335EA2966B3F800AFF0BA /* Conversations in Frameworks */,
@@ -179,6 +182,7 @@
 		9FBFE64C292A72BD00C250E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9F7335EB2967461B00AFF0BA /* AVKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
