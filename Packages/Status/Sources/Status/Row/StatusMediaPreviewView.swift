@@ -31,8 +31,8 @@ public struct StatusMediaPreviewView: View {
     if isCompact {
       return .init(width: 50, height: 50)
     }
-    if let width = media.meta?.original.width,
-       let height = media.meta?.original.height {
+    if let width = media.meta?.original?.width,
+       let height = media.meta?.original?.height {
       return .init(width: CGFloat(width), height: CGFloat(height))
     }
     return nil

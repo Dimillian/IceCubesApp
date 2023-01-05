@@ -7,7 +7,7 @@ public struct MediaAttachement: Codable, Identifiable, Hashable {
       public let width: Int?
       public let height: Int?
     }
-    public let original: Meta
+    public let original: Meta?
   }
   
   public enum SupportedType: String {
