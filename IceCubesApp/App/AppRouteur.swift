@@ -16,6 +16,8 @@ extension View {
         AccountDetailView(account: account)
       case let .statusDetail(id):
         StatusDetailView(statusId: id)
+      case let .remoteStatusDetail(url):
+        StatusDetailView(remoteStatusURL: url)
       case let .hashTag(tag, accountId):
         TimelineView(timeline: .constant(.hashtag(tag: tag, accountId: accountId)), scrollToTopSignal: .constant(0))
       case let .list(list):
@@ -49,6 +51,8 @@ extension View {
         ListEditView(list: list)
       case let .listAddAccount(account):
         ListAddAccountView(account: account)
+      case .addAccount:
+        AddAccountView()
       }
     }
   }

@@ -112,6 +112,7 @@ public struct AccountDetailView: View {
                               scrollViewProxy: proxy,
                               scrollOffset: $scrollOffset)
         .redacted(reason: .placeholder)
+        .shimmering()
     case let .data(account):
       AccountDetailHeaderView(isCurrentUser: isCurrentUser,
                               account: account,

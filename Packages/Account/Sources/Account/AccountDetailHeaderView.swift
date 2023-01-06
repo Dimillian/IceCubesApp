@@ -32,20 +32,26 @@ struct AccountDetailHeaderView: View {
   private var headerImageView: some View {
     GeometryReader { proxy in
       ZStack(alignment: .bottomTrailing) {
-        LazyImage(url: account.header) { state in
-          if let image = state.image {
-            image
-              .resizingMode(.aspectFill)
-          } else if state.isLoading {
-            Color.gray
-              .frame(height: bannerHeight)
-              .shimmering()
-          } else {
-            Color.gray
-              .frame(height: bannerHeight)
+        if reasons.contains(.placeholder) {
+          Rectangle()
+            .foregroundColor(.gray)
+            .frame(height: bannerHeight)
+        } else {
+          LazyImage(url: account.header) { state in
+            if let image = state.image {
+              image
+                .resizingMode(.aspectFill)
+            } else if state.isLoading {
+              Color.gray
+                .frame(height: bannerHeight)
+                .shimmering()
+            } else {
+              Color.gray
+                .frame(height: bannerHeight)
+            }
           }
+          .frame(height: bannerHeight)
         }
-        .frame(height: bannerHeight)
         
         if relationship?.followedBy == true {
           Text("Follows You")

@@ -8,26 +8,29 @@ struct StatusRowContextMenu: View {
   @ObservedObject var viewModel: StatusRowViewModel
   
   var body: some View {
-    Button { Task {
-      if viewModel.isFavourited {
-        await viewModel.unFavourite()
-      } else {
-        await viewModel.favourite()
+    if !viewModel.isRemote {
+      Button { Task {
+        if viewModel.isFavourited {
+          await viewModel.unFavourite()
+        } else {
+          await viewModel.favourite()
+        }
+      } } label: {
+        Label(viewModel.isFavourited ? "Unfavorite" : "Favorite", systemImage: "star")
       }
-    } } label: {
-      Label(viewModel.isFavourited ? "Unfavorite" : "Favorite", systemImage: "star")
-    }
-    Button { Task {
-      if viewModel.isReblogged {
-        await viewModel.unReblog()
-      } else {
-        await viewModel.reblog()
+      Button { Task {
+        if viewModel.isReblogged {
+          await viewModel.unReblog()
+        } else {
+          await viewModel.reblog()
+        }
+      } } label: {
+        Label(viewModel.isReblogged ? "Unboost" : "Boost", systemImage: "arrow.left.arrow.right.circle")
       }
-    } } label: {
-      Label(viewModel.isReblogged ? "Unboost" : "Boost", systemImage: "arrow.left.arrow.right.circle")
+      
     }
     
-    if viewModel.status.visibility == .pub {
+    if viewModel.status.visibility == .pub, !viewModel.isRemote {
       Button {
         routeurPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
       } label: {
@@ -63,7 +66,7 @@ struct StatusRowContextMenu: View {
           Label("Delete", systemImage: "trash")
         }
       }
-    } else {
+    } else if !viewModel.isRemote {
       Section(viewModel.status.account.acct) {
         Button {
           routeurPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.account, visibility: .pub)

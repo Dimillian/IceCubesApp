@@ -19,6 +19,11 @@ struct MessagesTab: View {
       ConversationsListView()
         .withAppRouteur()
         .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
+        .toolbar {
+          ToolbarItem(placement: .navigationBarLeading) {
+            AppAccountsSelectorView(routeurPath: routeurPath)
+          }
+        }
         .id(currentAccount.account?.id)
     }
     .environmentObject(routeurPath)

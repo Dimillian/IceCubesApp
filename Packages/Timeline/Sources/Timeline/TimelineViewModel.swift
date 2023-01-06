@@ -18,7 +18,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
   private var statuses: [Status] = []
   
   @Published var statusesState: StatusesState = .loading
-  @Published var timeline: TimelineFilter = .pub {
+  @Published var timeline: TimelineFilter = .federated {
     didSet {
       Task {
         if oldValue != timeline {

@@ -3,9 +3,10 @@ import Models
 import Network
 
 public enum TimelineFilter: Hashable, Equatable {
-  case pub, local, home, trending
+  case federated, local, home, trending
   case hashtag(tag: String, accountId: String?)
   case list(list: List)
+  case remoteLocal(server: String)
   
   public func hash(into hasher: inout Hasher) {
     hasher.combine(title())
@@ -13,14 +14,14 @@ public enum TimelineFilter: Hashable, Equatable {
   
   public static func availableTimeline(client: Client) -> [TimelineFilter] {
     if !client.isAuth {
-      return [.pub, .local, .trending]
+      return [.federated, .local, .trending]
     }
-    return [.pub, .local, .trending, .home]
+    return [.federated, .local, .trending, .home]
   }
   
   public func title() -> String {
     switch self {
-    case .pub:
+    case .federated:
       return "Federated"
     case .local:
       return "Local"
@@ -32,12 +33,14 @@ public enum TimelineFilter: Hashable, Equatable {
       return "#\(tag)"
     case let .list(list):
       return list.title
+    case let .remoteLocal(server):
+      return server
     }
   }
   
   public func iconName() -> String? {
     switch self {
-    case .pub:
+    case .federated:
       return "globe.americas"
     case .local:
       return "person.3"
@@ -47,6 +50,8 @@ public enum TimelineFilter: Hashable, Equatable {
       return "house"
     case .list(_):
       return "list.bullet"
+    case .remoteLocal:
+      return "dot.radiowaves.right"
     default:
       return nil
     }
@@ -54,8 +59,9 @@ public enum TimelineFilter: Hashable, Equatable {
   
   public func endpoint(sinceId: String?, maxId: String?, minId: String?, offset: Int?) -> Endpoint {
     switch self {
-    case .pub: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: false)
+    case .federated: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: false)
     case .local: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true)
+    case .remoteLocal: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true)
     case .home: return Timelines.home(sinceId: sinceId, maxId: maxId, minId: minId)
     case .trending: return Trends.statuses(offset: offset)
     case let .list(list): return Timelines.list(listId: list.id, sinceId: sinceId, maxId: maxId, minId: minId)

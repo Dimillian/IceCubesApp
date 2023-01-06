@@ -42,13 +42,13 @@ public struct StatusRowView: View {
             replyView
           }
           statusView
-          if !viewModel.isCompact && viewModel.showActions {
+          if !viewModel.isCompact && !viewModel.isRemote {
             StatusActionsView(viewModel: viewModel)
               .padding(.vertical, 8)
               .tint(viewModel.isFocused ? theme.tintColor : .gray)
               .contentShape(Rectangle())
               .onTapGesture {
-                routeurPath.navigate(to: .statusDetail(id: viewModel.status.reblog?.id ?? viewModel.status.id))
+                viewModel.navigateToDetail(routeurPath: routeurPath)
               }
           }
         }
@@ -93,7 +93,13 @@ public struct StatusRowView: View {
       .foregroundColor(.gray)
       .fontWeight(.semibold)
       .onTapGesture {
-        routeurPath.navigate(to: .accountDetailWithAccount(account: viewModel.status.account))
+        if viewModel.isRemote, let url = viewModel.status.account.url {
+          Task {
+            await routeurPath.navigateToAccountFrom(url: url)
+          }
+        } else {
+          routeurPath.navigate(to: .accountDetailWithAccount(account: viewModel.status.account))
+        }
       }
     }
   }
@@ -111,7 +117,13 @@ public struct StatusRowView: View {
       .foregroundColor(.gray)
       .fontWeight(.semibold)
       .onTapGesture {
-        routeurPath.navigate(to: .accountDetail(id: mention.id))
+        if viewModel.isRemote {
+          Task {
+            await routeurPath.navigateToAccountFrom(url: mention.url)
+          }
+        } else {
+          routeurPath.navigate(to: .accountDetail(id: mention.id))
+        }
       }
     }
   }
@@ -122,7 +134,13 @@ public struct StatusRowView: View {
         if !viewModel.isCompact {
           HStack(alignment: .top) {
             Button {
-              routeurPath.navigate(to: .accountDetailWithAccount(account: status.account))
+              if viewModel.isRemote, let url = status.account.url {
+                Task {
+                  await routeurPath.navigateToAccountFrom(url: url)
+                }
+              } else {
+                routeurPath.navigate(to: .accountDetailWithAccount(account: status.account))
+              }
             } label: {
               accountView(status: status)
             }.buttonStyle(.plain)
@@ -180,7 +198,7 @@ public struct StatusRowView: View {
     }
     .contentShape(Rectangle())
     .onTapGesture {
-      routeurPath.navigate(to: .statusDetail(id: viewModel.status.reblog?.id ?? viewModel.status.id))
+      viewModel.navigateToDetail(routeurPath: routeurPath)
     }
   }
   
