@@ -80,9 +80,11 @@ public struct NotificationsListView: View {
                   message: "Notifications? What notifications? Your notification inbox is looking so empty. Keep on being awesome! 📱😎")
       } else {
         ForEach(notifications) { notification in
-          NotificationRowView(notification: notification)
-          Divider()
-            .padding(.vertical, .dividerPadding)
+            if notification.supportedType != nil {
+                NotificationRowView(notification: notification)
+                Divider()
+                    .padding(.vertical, .dividerPadding)
+            }
         }
       }
       
