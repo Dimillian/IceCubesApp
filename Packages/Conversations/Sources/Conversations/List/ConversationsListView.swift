@@ -51,7 +51,7 @@ public struct ConversationsListView: View {
     .navigationTitle("Direct Messages")
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
-      statusEditorToolbarItem(routeurPath: routeurPath, visibility: .direct)
+      StatusEditorToolbarItem(visibility: .direct)
     }
     .onChange(of: watcher.latestEvent?.id) { id in
       if let latestEvent = watcher.latestEvent {

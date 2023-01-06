@@ -25,7 +25,6 @@ struct MessagesTab: View {
           }
         }
         .id(currentAccount.account?.id)
-        .environmentObject(routeurPath)
     }
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
       if popToRootTab == .messages {
@@ -39,5 +38,6 @@ struct MessagesTab: View {
       routeurPath.client = client
       watcher.unreadMessagesCount = 0
     }
+    .environmentObject(routeurPath)
   }
 }
