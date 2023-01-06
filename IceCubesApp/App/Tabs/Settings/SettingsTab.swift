@@ -7,6 +7,7 @@ import Models
 import DesignSystem
 
 struct SettingsTabs: View {
+  @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var currentInstance: CurrentInstance
   @EnvironmentObject private var appAccountsManager: AppAccountsManager
@@ -15,21 +16,21 @@ struct SettingsTabs: View {
   @StateObject private var routeurPath = RouterPath()
   
   @State private var addAccountSheetPresented = false
-  @State private var isThemeSelectorPresented = false
   
   var body: some View {
     NavigationStack(path: $routeurPath.path) {
       Form {
         appSection
         accountsSection
-        themeSection
-        instanceSection
+        generalSection
       }
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
       .navigationTitle(Text("Settings"))
       .navigationBarTitleDisplayMode(.inline)
       .toolbarBackground(theme.primaryBackgroundColor, for: .navigationBar)
+      .withAppRouteur()
+      .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
     }
     .onAppear {
       routeurPath.client = client
@@ -64,43 +65,29 @@ struct SettingsTabs: View {
     .listRowBackground(theme.primaryBackgroundColor)
   }
   
-  private var themeSection: some View {
-    Section("Theme") {
-      themeSelectorButton
-      ColorPicker("Tint color", selection: $theme.tintColor)
-      ColorPicker("Background color", selection: $theme.primaryBackgroundColor)
-      ColorPicker("Secondary Background color", selection: $theme.secondaryBackgroundColor)
-      Picker("Avatar position", selection: $theme.avatarPosition) {
-        ForEach(Theme.AvatarPosition.allCases, id: \.rawValue) { position in
-          Text(position.description).tag(position)
+  @ViewBuilder
+  private var generalSection: some View {
+    Section("General") {
+      if let instanceData = currentInstance.instance {
+        NavigationLink(destination: InstanceInfoView(instance: instanceData)) {
+          Label("Instance Information", systemImage: "server.rack")
         }
       }
-      Picker("Avatar shape", selection: $theme.avatarShape) {
-        ForEach(Theme.AvatarShape.allCases, id: \.rawValue) { shape in
-          Text(shape.description).tag(shape)
-        }
+      NavigationLink(destination: DisplaySettingsView()) {
+        Label("Display Settings", systemImage: "paintpalette")
       }
-      Button {
-        theme.selectedSet = .iceCubeDark
-      } label: {
-        Text("Restore default")
+      NavigationLink(destination: remoteLocalTimelinesView) {
+        Label("Remote Local Timelines", systemImage: "dot.radiowaves.right")
       }
     }
     .listRowBackground(theme.primaryBackgroundColor)
-  }
-  
-  @ViewBuilder
-  private var instanceSection: some View {
-    if let instanceData = currentInstance.instance {
-      InstanceInfoView(instance: instanceData)
-    }
   }
   
   private var appSection: some View {
     Section("App") {
       NavigationLink(destination: IconSelectorView()) {
         Label {
-          Text("Icon selector")
+          Text("App Icon")
         } icon: {
           if let icon = IconSelectorView.Icon(string: UIApplication.shared.alternateIconName ?? "AppIcon") {
             Image(uiImage: .init(named: icon.iconName)!)
@@ -111,7 +98,7 @@ struct SettingsTabs: View {
         }
       }
       Link(destination: URL(string: "https://github.com/Dimillian/IceCubesApp")!) {
-        Text("https://github.com/Dimillian/IceCubesApp")
+        Label("Source (Github link)", systemImage: "link")
       }
     }
     .listRowBackground(theme.primaryBackgroundColor)
@@ -128,25 +115,25 @@ struct SettingsTabs: View {
     }
   }
   
-  private var themeSelectorButton: some View {
-    NavigationLink(destination: ThemePreviewView()) {
-      Button {
-        isThemeSelectorPresented.toggle()
-      } label: {
-        HStack {
-          Text("Theme")
-          Spacer()
-          Text(theme.selectedSet.rawValue)
+  private var remoteLocalTimelinesView: some View {
+    Form {
+      ForEach(preferences.remoteLocalTimelines, id: \.self) { server in
+        Text(server)
+      }.onDelete { indexes in
+        if let index = indexes.first {
+          _ = preferences.remoteLocalTimelines.remove(at: index)
         }
       }
+      .listRowBackground(theme.primaryBackgroundColor)
+      Button {
+        routeurPath.presentedSheet = .addRemoteLocalTimeline
+      } label: {
+        Label("Add a local timeline", systemImage: "badge.plus.radiowaves.right")
+      }
+      .listRowBackground(theme.primaryBackgroundColor)
     }
-  }
-  
-  private var signOutButton: some View {
-    Button {
-      appAccountsManager.delete(account: appAccountsManager.currentAccount)
-    } label: {
-      Text("Sign out").foregroundColor(.red)
-    }
+    .navigationTitle("Remote Local Timelines")
+    .scrollContentBackground(.hidden)
+    .background(theme.secondaryBackgroundColor)
   }
 }

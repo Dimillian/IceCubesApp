@@ -5,9 +5,11 @@ import DesignSystem
 
 public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
   @ObservedObject private var fetcher: Fetcher
+  private let isRemote: Bool
   
-  public init(fetcher: Fetcher) {
+  public init(fetcher: Fetcher, isRemote: Bool = false) {
     self.fetcher = fetcher
+    self.isRemote = isRemote
   }
   
   public var body: some View {
@@ -26,7 +28,8 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
         Text(error.localizedDescription)
       case let .display(statuses, nextPageState):
         ForEach(statuses, id: \.viewId) { status in
-          StatusRowView(viewModel: .init(status: status, isCompact: false))
+          StatusRowView(viewModel: .init(status: status, isCompact: false, isRemote: isRemote))
+            .id(status.id)
             .padding(.horizontal, .layoutPadding)
           Divider()
             .padding(.vertical, .dividerPadding)
@@ -47,6 +50,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
         }
       }
     }
+    .frame(maxWidth: .maxColumnWidth)
   }
   
   private var loadingRow: some View {

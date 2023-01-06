@@ -18,6 +18,10 @@ public struct StatusDetailView: View {
     _viewModel = StateObject(wrappedValue: .init(statusId: statusId))
   }
   
+  public init(remoteStatusURL: URL) {
+    _viewModel = StateObject(wrappedValue: .init(remoteStatusURL: remoteStatusURL))
+  }
+  
   public var body: some View {
     ScrollViewReader { proxy in
       ScrollView {
@@ -70,7 +74,10 @@ public struct StatusDetailView: View {
         guard !isLoaded else { return }
         isLoaded = true
         viewModel.client = client
-        await viewModel.fetchStatusDetail()
+        let result = await viewModel.fetch()
+        if !result {
+          _ = routeurPath.path.popLast()
+        }
         DispatchQueue.main.async {
           proxy.scrollTo(viewModel.statusId, anchor: .center)
         }

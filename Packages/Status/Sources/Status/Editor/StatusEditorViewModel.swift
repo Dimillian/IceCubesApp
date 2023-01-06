@@ -107,8 +107,13 @@ public class StatusEditorViewModel: ObservableObject {
   
   func prepareStatusText() {
     switch mode {
+    case let .new(visibility):
+      self.visibility = visibility
     case let .replyTo(status):
-      var mentionString = "@\(status.reblog?.account.acct ?? status.account.acct)"
+      var mentionString = ""
+      if (status.reblog?.account.acct ?? status.account.acct) != currentAccount?.acct {
+        mentionString = "@\(status.reblog?.account.acct ?? status.account.acct)"
+      }
       for mention in status.mentions where mention.acct != currentAccount?.acct {
         mentionString += " @\(mention.acct)"
       }
@@ -134,8 +139,6 @@ public class StatusEditorViewModel: ObservableObject {
         statusText = .init(string: "\n\nFrom: @\(status.reblog?.account.acct ?? status.account.acct)\n\(url)")
         selectedRange = .init(location: 0, length: 0)
       }
-    default:
-      break
     }
   }
   
@@ -193,7 +196,7 @@ public class StatusEditorViewModel: ObservableObject {
     if let url = embededStatusURL,
         !statusText.string.contains(url.absoluteString) {
       self.embededStatus = nil
-      self.mode = .new
+      self.mode = .new(vivibilty: visibility)
     }
   }
   

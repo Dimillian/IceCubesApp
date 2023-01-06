@@ -8,6 +8,15 @@ public struct Application: Codable, Identifiable {
   public let website: URL?
 }
 
+extension Application {
+  public init(from decoder: Decoder) throws {
+    let values = try decoder.container(keyedBy: CodingKeys.self)
+
+    name = try values.decodeIfPresent(String.self, forKey: .name) ?? ""
+    website = try? values.decodeIfPresent(URL.self, forKey: .website)
+  }
+}
+
 public enum Visibility: String, Codable, CaseIterable {
   case pub = "public"
   case unlisted
@@ -73,7 +82,7 @@ public struct Status: AnyStatus, Codable, Identifiable {
   
   public static func placeholder() -> Status {
     .init(id: UUID().uuidString,
-          content: "Some post content\n Some more post content \n Some more",
+          content: "This is a #toot\nWith some @content\nAnd some more content for your #eyes @only",
           account: .placeholder(),
           createdAt: "2022-12-16T10:20:54.000Z",
           editedAt: nil,

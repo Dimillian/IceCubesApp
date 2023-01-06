@@ -4,8 +4,11 @@ import Network
 import Account
 import Models
 import Shimmer
+import Conversations
+import Env
 
-struct AccountTab: View {
+struct MessagesTab: View {
+  @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var currentAccount: CurrentAccount
   @StateObject private var routeurPath = RouterPath()
@@ -13,23 +16,18 @@ struct AccountTab: View {
   
   var body: some View {
     NavigationStack(path: $routeurPath.path) {
-      if let account = currentAccount.account {
-        AccountDetailView(account: account)
-          .withAppRouteur()
-          .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
-          .toolbar {
-            statusEditorToolbarItem(routeurPath: routeurPath)
+      ConversationsListView()
+        .withAppRouteur()
+        .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
+        .toolbar {
+          ToolbarItem(placement: .navigationBarLeading) {
+            AppAccountsSelectorView(routeurPath: routeurPath)
           }
-          .id(account.id)
-      } else {
-        AccountDetailView(account: .placeholder())
-          .redacted(reason: .placeholder)
-          .shimmering()
-      }
+        }
+        .id(currentAccount.account?.id)
     }
-    .environmentObject(routeurPath)
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
-      if popToRootTab == .account {
+      if popToRootTab == .messages {
         routeurPath.path = []
       }
     }
@@ -38,6 +36,8 @@ struct AccountTab: View {
     }
     .onAppear {
       routeurPath.client = client
+      watcher.unreadMessagesCount = 0
     }
+    .environmentObject(routeurPath)
   }
 }

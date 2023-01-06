@@ -33,11 +33,18 @@ public struct StatusEditorView: View {
             TextView($viewModel.statusText, $viewModel.selectedRange)
               .placeholder("What's on your mind")
               .padding(.horizontal, .layoutPadding)
+            StatusEditorMediaView(viewModel: viewModel)
             if let status = viewModel.embededStatus {
               StatusEmbededView(status: status)
                 .padding(.horizontal, .layoutPadding)
+                .disabled(true)
+            } else if let status = viewModel.replyToStatus {
+              Divider()
+                .padding(.top, 20)
+              StatusEmbededView(status: status)
+                .padding(.horizontal, .layoutPadding)
+                .disabled(true)
             }
-            StatusEditorMediaView(viewModel: viewModel)
             Spacer()
           }
           .padding(.top, 8)

@@ -3,6 +3,7 @@ import Shimmer
 import NukeUI
 
 public struct AvatarView: View {
+  @Environment(\.redactionReasons) private var reasons
   @EnvironmentObject private var theme: Theme
 
   public enum Size {
@@ -33,7 +34,6 @@ public struct AvatarView: View {
     }
   }
   
-  @Environment(\.redactionReasons) private var reasons
   public let url: URL
   public let size: Size
   
@@ -47,7 +47,7 @@ public struct AvatarView: View {
       if reasons == .placeholder {
         RoundedRectangle(cornerRadius: size.cornerRadius)
           .fill(.gray)
-          .frame(maxWidth: size.size.width, maxHeight: size.size.height)
+          .frame(width: size.size.width, height: size.size.height)
         } else {
           LazyImage(url: url) { state in
             if let image = state.image {

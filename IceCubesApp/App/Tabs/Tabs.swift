@@ -5,7 +5,7 @@ import Explore
 import SwiftUI
 
 enum Tab: Int, Identifiable, Hashable {
-  case timeline, notifications, explore, account, settings, other
+  case timeline, notifications, explore, messages, settings, other
   
   var id: Int {
     rawValue
@@ -16,7 +16,7 @@ enum Tab: Int, Identifiable, Hashable {
   }
   
   static func loggedInTabs() -> [Tab] {
-    [.timeline, .notifications, .explore, .account, .settings]
+    [.timeline, .notifications, .explore, .messages, .settings]
   }
   
   @ViewBuilder
@@ -28,8 +28,8 @@ enum Tab: Int, Identifiable, Hashable {
       NotificationsTab(popToRootTab: popToRootTab)
     case .explore:
       ExploreTab(popToRootTab: popToRootTab)
-    case .account:
-      AccountTab(popToRootTab: popToRootTab)
+    case .messages:
+      MessagesTab(popToRootTab: popToRootTab)
     case .settings:
       SettingsTabs()
     case .other:
@@ -46,8 +46,8 @@ enum Tab: Int, Identifiable, Hashable {
       Label("Notifications", systemImage: "bell")
     case .explore:
       Label("Explore", systemImage: "magnifyingglass")
-    case .account:
-      Label("Profile", systemImage: "person.circle")
+    case .messages:
+      Label("Messages", systemImage: "tray")
     case .settings:
       Label("Settings", systemImage: "gear")
     case .other:

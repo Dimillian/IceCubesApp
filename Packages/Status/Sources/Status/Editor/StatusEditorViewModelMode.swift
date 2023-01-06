@@ -3,7 +3,7 @@ import Models
 extension StatusEditorViewModel {
   public enum Mode {
     case replyTo(status: Status)
-    case new
+    case new(vivibilty: Visibility)
     case edit(status: Status)
     case quote(status: Status)
     case mention(account: Account, visibility: Visibility)
@@ -31,9 +31,9 @@ extension StatusEditorViewModel {
       case .new, .mention:
         return "New Post"
       case .edit:
-        return "Edit your post"
+        return "Editing your post"
       case let .replyTo(status):
-        return "Reply to \(status.reblog?.account.displayName ?? status.account.displayName)"
+        return "Replying to \(status.reblog?.account.displayName ?? status.account.displayName)"
       case let .quote(status):
         return "Quote of \(status.reblog?.account.displayName ?? status.account.displayName)"
       }

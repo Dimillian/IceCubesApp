@@ -17,7 +17,10 @@ struct NotificationsTab: View {
         .withAppRouteur()
         .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
         .toolbar {
-          statusEditorToolbarItem(routeurPath: routeurPath)
+          statusEditorToolbarItem(routeurPath: routeurPath, visibility: .pub)
+          ToolbarItem(placement: .navigationBarLeading) {
+            AppAccountsSelectorView(routeurPath: routeurPath)
+          }
         }
         .id(currentAccount.account?.id)
     }

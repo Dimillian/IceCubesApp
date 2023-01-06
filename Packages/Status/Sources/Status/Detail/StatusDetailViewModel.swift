@@ -5,7 +5,8 @@ import Network
 
 @MainActor
 class StatusDetailViewModel: ObservableObject {
-  public let statusId: String
+  public var statusId: String?
+  public var remoteStatusURL: URL?
   
   var client: Client?
   
@@ -19,10 +20,44 @@ class StatusDetailViewModel: ObservableObject {
   init(statusId: String) {
     state = .loading
     self.statusId = statusId
+    self.remoteStatusURL = nil
   }
   
-  func fetchStatusDetail() async {
-    guard let client else { return }
+  init(remoteStatusURL: URL) {
+    state = .loading
+    self.remoteStatusURL = remoteStatusURL
+    self.statusId = nil
+  }
+  
+  func fetch() async -> Bool {
+    if statusId != nil {
+      await fetchStatusDetail()
+      return true
+    } else if remoteStatusURL != nil {
+      return await fetchRemoteStatus()
+    }
+    return false
+  }
+  
+  private func fetchRemoteStatus() async -> Bool {
+    guard let client, let remoteStatusURL else { return false }
+    let results: SearchResults? = try? await client.get(endpoint: Search.search(query: remoteStatusURL.absoluteString,
+                                                                                 type: "statuses",
+                                                                                offset: nil,
+                                                                                following: nil),
+                                                        forceVersion: .v2)
+    if let statusId = results?.statuses.first?.id {
+      self.statusId = statusId
+      await fetchStatusDetail()
+      return true
+    } else {
+      await UIApplication.shared.open(remoteStatusURL)
+      return false
+    }
+  }
+  
+  private func fetchStatusDetail() async {
+    guard let client, let statusId else { return }
     do {
       let status: Status = try await client.get(endpoint: Statuses.status(id: statusId))
       let context: StatusContext = try await client.get(endpoint: Statuses.context(id: statusId))

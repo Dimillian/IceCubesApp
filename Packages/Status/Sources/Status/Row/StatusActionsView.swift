@@ -29,7 +29,10 @@ struct StatusActionsView: View {
       }
     }
     
-    func count(viewModel: StatusRowViewModel) -> Int? {
+    func count(viewModel: StatusRowViewModel, theme: Theme) -> Int? {
+      if theme.statusActionsDisplay == .discret {
+        return nil
+      }
       switch self {
       case .respond:
         return viewModel.repliesCount
@@ -71,13 +74,14 @@ struct StatusActionsView: View {
               HStack(spacing: 2) {
                 Image(systemName: action.iconName(viewModel: viewModel))
                   .foregroundColor(action.tintColor(viewModel: viewModel, theme: theme))
-                if let count = action.count(viewModel: viewModel) {
+                if let count = action.count(viewModel: viewModel, theme: theme) {
                   Text("\(count)")
                     .font(.footnote)
                 }
               }
             }
             .buttonStyle(.borderless)
+            .disabled(action == .boost && viewModel.status.visibility == .direct)
             Spacer()
           }
         }

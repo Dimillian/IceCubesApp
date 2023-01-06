@@ -4,7 +4,7 @@ import SwiftUI
 public class Theme: ObservableObject {
   enum ThemeKey: String {
     case colorScheme, tint, label, primaryBackground, secondaryBackground
-    case avatarPosition, avatarShape
+    case avatarPosition, avatarShape, statusActionsDisplay
     case selectedSet, selectedScheme
   }
   
@@ -34,6 +34,21 @@ public class Theme: ObservableObject {
     }
   }
   
+  public enum StatusActionsDisplay: String, CaseIterable {
+    case full, discret, none
+
+    public var description: LocalizedStringKey {
+      switch self {
+      case .full:
+        return "All"
+      case .discret:
+        return "Only buttons"
+      case .none:
+        return "No buttons"
+      }
+    }
+  }
+  
   @AppStorage("is_previously_set") private var isSet: Bool = false
   @AppStorage(ThemeKey.selectedScheme.rawValue) public var selectedScheme: ColorScheme = .dark
   @AppStorage(ThemeKey.tint.rawValue) public var tintColor: Color = .black
@@ -43,6 +58,7 @@ public class Theme: ObservableObject {
   @AppStorage(ThemeKey.avatarPosition.rawValue) var rawAvatarPosition: String = AvatarPosition.top.rawValue
   @AppStorage(ThemeKey.avatarShape.rawValue) var rawAvatarShape: String = AvatarShape.rounded.rawValue
   @AppStorage(ThemeKey.selectedSet.rawValue) var storedSet: ColorSetName = .iceCubeDark
+  @AppStorage(ThemeKey.statusActionsDisplay.rawValue) public var statusActionsDisplay: StatusActionsDisplay = .full
 
   @Published public var avatarPosition: AvatarPosition = .top
   @Published public var avatarShape: AvatarShape = .rounded

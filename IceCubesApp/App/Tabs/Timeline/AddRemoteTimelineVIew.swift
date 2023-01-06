@@ -6,24 +6,18 @@ import DesignSystem
 import NukeUI
 import Shimmer
 
-struct AddAccountView: View {
-  @Environment(\.openURL) private var openURL
+struct AddRemoteTimelineView: View {
   @Environment(\.dismiss) private var dismiss
   
-  @EnvironmentObject private var appAccountsManager: AppAccountsManager
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var currentInstance: CurrentInstance
+  @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
   
   @State private var instanceName: String = ""
   @State private var instance: Instance?
-  @State private var isSigninIn = false
-  @State private var signInClient: Client?
   @State private var instances: [InstanceSocial] = []
-  @State private var instanceFetchError: String?
   
   @FocusState private var isInstanceURLFieldFocused: Bool
-  
+    
   var body: some View {
     NavigationStack {
       Form {
@@ -34,30 +28,24 @@ struct AddAccountView: View {
           .textInputAutocapitalization(.never)
           .autocorrectionDisabled()
           .focused($isInstanceURLFieldFocused)
-        if let instanceFetchError {
-          Text(instanceFetchError)
-        }
         if let instance {
-          Button {
-            isSigninIn = true
-            Task {
-              await signIn()
-            }
-          } label: {
-            if isSigninIn {
-              ProgressView()
-            } else {
-              Text("Sign in")
-            }
-          }
-          .listRowBackground(theme.primaryBackgroundColor)
-          InstanceInfoView(instance: instance)
-        } else {
-          instancesListView
+          Label("\(instance.title) is a valid instance", systemImage: "checkmark.seal.fill")
+            .foregroundColor(.green)
+            .listRowBackground(theme.primaryBackgroundColor)
         }
+        Button {
+          guard instance != nil else { return }
+          preferences.remoteLocalTimelines.append(instanceName)
+          dismiss()
+        } label: {
+          Text("Add")
+        }
+        .listRowBackground(theme.primaryBackgroundColor)
+        
+        instancesListView
       }
       .formStyle(.grouped)
-      .navigationTitle("Add account")
+      .navigationTitle("Add remote local timeline")
       .navigationBarTitleDisplayMode(.inline)
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
@@ -67,6 +55,12 @@ struct AddAccountView: View {
           Button("Cancel", action: { dismiss() })
         }
       }
+      .onChange(of: instanceName, perform: { newValue in
+        Task {
+          let client = Client(server: newValue)
+          instance = try? await client.get(endpoint: Instances.instance)
+        }
+      })
       .onAppear {
         isInstanceURLFieldFocused = true
         let client = InstanceSocialClient()
@@ -74,24 +68,6 @@ struct AddAccountView: View {
           self.instances = await client.fetchInstances()
         }
       }
-      .onChange(of: instanceName) { newValue in
-        let client = Client(server: newValue)
-        Task {
-          do {
-            self.instance = try await client.get(endpoint: Instances.instance)
-          } catch _ as DecodingError {
-            self.instance = nil
-            self.instanceFetchError = "This instance is not currently supported."
-          } catch {
-            self.instance = nil
-          }
-        }
-      }
-      .onOpenURL(perform: { url in
-        Task {
-          await continueSignIn(url: url)
-        }
-      })
     }
   }
   
@@ -120,34 +96,6 @@ struct AddAccountView: View {
           .listRowBackground(theme.primaryBackgroundColor)
         }
       }
-    }
-  }
-  
-  private func signIn() async {
-    do {
-      signInClient = .init(server: instanceName)
-      if let oauthURL = try await signInClient?.oauthURL() {
-        openURL(oauthURL)
-      } else {
-        isSigninIn = false
-      }
-    } catch {
-      isSigninIn = false
-    }
-  }
-  
-  private func continueSignIn(url: URL) async {
-    guard let client = signInClient else {
-      isSigninIn = false
-      return
-    }
-    do {
-      let oauthToken = try await client.continueOauthFlow(url: url)
-      appAccountsManager.add(account: AppAccount(server: client.server, oauthToken: oauthToken))
-      isSigninIn = false
-      dismiss()
-    } catch {
-      isSigninIn = false
     }
   }
 }

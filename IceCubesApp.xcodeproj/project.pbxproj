@@ -17,7 +17,7 @@
 		9F35DB44294F9A7D00B3281A /* Status in Frameworks */ = {isa = PBXBuildFile; productRef = 9F35DB43294F9A7D00B3281A /* Status */; };
 		9F35DB4729506F6600B3281A /* NotificationTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F35DB4629506F6600B3281A /* NotificationTab.swift */; };
 		9F35DB4A29506FA100B3281A /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 9F35DB4929506FA100B3281A /* Notifications */; };
-		9F35DB4C2952005C00B3281A /* AccountTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F35DB4B2952005C00B3281A /* AccountTab.swift */; };
+		9F35DB4C2952005C00B3281A /* MessagesTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F35DB4B2952005C00B3281A /* MessagesTab.swift */; };
 		9F398AA62935FE8A00A889F2 /* AppRouteur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F398AA52935FE8A00A889F2 /* AppRouteur.swift */; };
 		9F398AA92935FFDB00A889F2 /* Account in Frameworks */ = {isa = PBXBuildFile; productRef = 9F398AA82935FFDB00A889F2 /* Account */; };
 		9F398AAB2935FFDB00A889F2 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 9F398AAA2935FFDB00A889F2 /* Models */; };
@@ -25,6 +25,12 @@
 		9F55C68D2955968700F94077 /* ExploreTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F55C68C2955968700F94077 /* ExploreTab.swift */; };
 		9F55C6902955993C00F94077 /* Explore in Frameworks */ = {isa = PBXBuildFile; productRef = 9F55C68F2955993C00F94077 /* Explore */; };
 		9F5E581929545BE700A53960 /* Env in Frameworks */ = {isa = PBXBuildFile; productRef = 9F5E581829545BE700A53960 /* Env */; };
+		9F7335EA2966B3F800AFF0BA /* Conversations in Frameworks */ = {isa = PBXBuildFile; productRef = 9F7335E92966B3F800AFF0BA /* Conversations */; };
+		9F7335ED2967463400AFF0BA /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F7335EB2967461B00AFF0BA /* AVKit.framework */; };
+		9F7335EF29674F7100AFF0BA /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F7335EE29674F7100AFF0BA /* QuickLook.framework */; };
+		9F7335F22967608F00AFF0BA /* AddRemoteTimelineVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7335F12967608F00AFF0BA /* AddRemoteTimelineVIew.swift */; };
+		9F7335F72968274500AFF0BA /* AppAccountsSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7335F62968274500AFF0BA /* AppAccountsSelectorView.swift */; };
+		9F7335F92968576500AFF0BA /* DisplaySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7335F82968576500AFF0BA /* DisplaySettingsView.swift */; };
 		9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE4ACA293783B000772766 /* SettingsTab.swift */; };
 		9FAE4ACE29379A5A00772766 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAE4ACD29379A5A00772766 /* KeychainSwift */; };
 		9FAE4AD129379AD600772766 /* AppAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE4AD029379AD600772766 /* AppAccount.swift */; };
@@ -49,7 +55,7 @@
 		9F35DB45294FA04C00B3281A /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DesignSystem; path = Packages/DesignSystem; sourceTree = "<group>"; };
 		9F35DB4629506F6600B3281A /* NotificationTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTab.swift; sourceTree = "<group>"; };
 		9F35DB4829506F7F00B3281A /* Notifications */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Notifications; path = Packages/Notifications; sourceTree = "<group>"; };
-		9F35DB4B2952005C00B3281A /* AccountTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTab.swift; sourceTree = "<group>"; };
+		9F35DB4B2952005C00B3281A /* MessagesTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTab.swift; sourceTree = "<group>"; };
 		9F398AA32935F90100A889F2 /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Models; path = Packages/Models; sourceTree = "<group>"; };
 		9F398AA52935FE8A00A889F2 /* AppRouteur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouteur.swift; sourceTree = "<group>"; };
 		9F398AAC2936005300A889F2 /* Account */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Account; path = Packages/Account; sourceTree = "<group>"; };
@@ -57,6 +63,12 @@
 		9F55C68C2955968700F94077 /* ExploreTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreTab.swift; sourceTree = "<group>"; };
 		9F55C68E295598F900F94077 /* Explore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Explore; path = Packages/Explore; sourceTree = "<group>"; };
 		9F5E581729545B5500A53960 /* Env */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Env; path = Packages/Env; sourceTree = "<group>"; };
+		9F7335E82966B3DC00AFF0BA /* Conversations */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Conversations; path = Packages/Conversations; sourceTree = "<group>"; };
+		9F7335EB2967461B00AFF0BA /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.2.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
+		9F7335EE29674F7100AFF0BA /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.2.sdk/System/Library/Frameworks/QuickLook.framework; sourceTree = DEVELOPER_DIR; };
+		9F7335F12967608F00AFF0BA /* AddRemoteTimelineVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRemoteTimelineVIew.swift; sourceTree = "<group>"; };
+		9F7335F62968274500AFF0BA /* AppAccountsSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAccountsSelectorView.swift; sourceTree = "<group>"; };
+		9F7335F82968576500AFF0BA /* DisplaySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaySettingsView.swift; sourceTree = "<group>"; };
 		9FAE4AC8293774FF00772766 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9FAE4ACA293783B000772766 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		9FAE4AD029379AD600772766 /* AppAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAccount.swift; sourceTree = "<group>"; };
@@ -74,8 +86,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F7335EF29674F7100AFF0BA /* QuickLook.framework in Frameworks */,
+				9F7335ED2967463400AFF0BA /* AVKit.framework in Frameworks */,
 				9F55C6902955993C00F94077 /* Explore in Frameworks */,
 				9FAE4ACE29379A5A00772766 /* KeychainSwift in Frameworks */,
+				9F7335EA2966B3F800AFF0BA /* Conversations in Frameworks */,
 				9F398AA92935FFDB00A889F2 /* Account in Frameworks */,
 				9FBFE64E292A72BD00C250E9 /* Network in Frameworks */,
 				9FD542E72962D2FF0045321A /* Lists in Frameworks */,
@@ -109,13 +124,22 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		9F7335F02967607A00AFF0BA /* Timeline */ = {
+			isa = PBXGroup;
+			children = (
+				9F398AB229360A4C00A889F2 /* TimelineTab.swift */,
+				9F7335F12967608F00AFF0BA /* AddRemoteTimelineVIew.swift */,
+			);
+			path = Timeline;
+			sourceTree = "<group>";
+		};
 		9FAE4AC9293783A200772766 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				9F7335F02967607A00AFF0BA /* Timeline */,
 				9FE151A4293C90EA00E9683D /* Settings */,
-				9F398AB229360A4C00A889F2 /* TimelineTab.swift */,
 				9F35DB4629506F6600B3281A /* NotificationTab.swift */,
-				9F35DB4B2952005C00B3281A /* AccountTab.swift */,
+				9F35DB4B2952005C00B3281A /* MessagesTab.swift */,
 				9F55C68C2955968700F94077 /* ExploreTab.swift */,
 				9F2B92F5295AE04800DE16D0 /* Tabs.swift */,
 			);
@@ -129,6 +153,7 @@
 				9FAE4AD22937A0C600772766 /* AppAccountsManager.swift */,
 				9F2B92FE295EB87100DE16D0 /* AppAccountView.swift */,
 				9F2B9300295EB8A100DE16D0 /* AppAccountViewModel.swift */,
+				9F7335F62968274500AFF0BA /* AppAccountsSelectorView.swift */,
 			);
 			path = AppAccounts;
 			sourceTree = "<group>";
@@ -140,6 +165,7 @@
 				9FBFE63A292A715500C250E9 /* Products */,
 				9FBFE64C292A72BD00C250E9 /* Frameworks */,
 				9F398AAC2936005300A889F2 /* Account */,
+				9F7335E82966B3DC00AFF0BA /* Conversations */,
 				9F35DB45294FA04C00B3281A /* DesignSystem */,
 				9F55C68E295598F900F94077 /* Explore */,
 				9F5E581729545B5500A53960 /* Env */,
@@ -175,6 +201,8 @@
 		9FBFE64C292A72BD00C250E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9F7335EE29674F7100AFF0BA /* QuickLook.framework */,
+				9F7335EB2967461B00AFF0BA /* AVKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -186,6 +214,7 @@
 				9FE151A5293C90F900E9683D /* IconSelectorView.swift */,
 				9F2B92F9295DA7D700DE16D0 /* AddAccountsView.swift */,
 				9F2B92FB295DA94500DE16D0 /* InstanceInfoView.swift */,
+				9F7335F82968576500AFF0BA /* DisplaySettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -217,6 +246,7 @@
 				9F5E581829545BE700A53960 /* Env */,
 				9F55C68F2955993C00F94077 /* Explore */,
 				9FD542E62962D2FF0045321A /* Lists */,
+				9F7335E92966B3F800AFF0BA /* Conversations */,
 			);
 			productName = IceCubesApp;
 			productReference = 9FBFE639292A715500C250E9 /* IceCubesApp.app */;
@@ -277,8 +307,9 @@
 			files = (
 				9FE151A6293C90F900E9683D /* IconSelectorView.swift in Sources */,
 				9F2B92FC295DA94500DE16D0 /* InstanceInfoView.swift in Sources */,
-				9F35DB4C2952005C00B3281A /* AccountTab.swift in Sources */,
+				9F35DB4C2952005C00B3281A /* MessagesTab.swift in Sources */,
 				9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */,
+				9F7335F92968576500AFF0BA /* DisplaySettingsView.swift in Sources */,
 				9FAE4AD32937A0C600772766 /* AppAccountsManager.swift in Sources */,
 				9F2B92FF295EB87100DE16D0 /* AppAccountView.swift in Sources */,
 				9F2B92F6295AE04800DE16D0 /* Tabs.swift in Sources */,
@@ -288,6 +319,8 @@
 				9FBFE63D292A715500C250E9 /* IceCubesApp.swift in Sources */,
 				9F2B92FA295DA7D700DE16D0 /* AddAccountsView.swift in Sources */,
 				9F35DB4729506F6600B3281A /* NotificationTab.swift in Sources */,
+				9F7335F22967608F00AFF0BA /* AddRemoteTimelineVIew.swift in Sources */,
+				9F7335F72968274500AFF0BA /* AppAccountsSelectorView.swift in Sources */,
 				9FAE4AD129379AD600772766 /* AppAccount.swift in Sources */,
 				9F55C68D2955968700F94077 /* ExploreTab.swift in Sources */,
 			);
@@ -448,7 +481,7 @@
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -496,7 +529,7 @@
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -565,6 +598,10 @@
 		9F5E581829545BE700A53960 /* Env */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Env;
+		};
+		9F7335E92966B3F800AFF0BA /* Conversations */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Conversations;
 		};
 		9FAE4ACD29379A5A00772766 /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;

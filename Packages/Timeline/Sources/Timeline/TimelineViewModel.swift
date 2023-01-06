@@ -18,7 +18,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
   private var statuses: [Status] = []
   
   @Published var statusesState: StatusesState = .loading
-  @Published var timeline: TimelineFilter = .pub {
+  @Published var timeline: TimelineFilter = .federated {
     didSet {
       Task {
         if oldValue != timeline {
@@ -47,10 +47,8 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
   
   var pendingStatusesButtonTitle: String {
     switch pendingStatusesState {
-    case .stream:
+    case .stream, .refresh:
       return "\(pendingStatuses.count) new posts"
-    case .refresh:
-      return "See new posts"
     }
   }
   
@@ -77,11 +75,12 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
                                                                     minId: nil,
                                                                     offset: statuses.count))
         statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
-      } else if let first = statuses.first {
-        var newStatuses: [Status] = await fetchNewPages(minId: first.id, maxPages: 10)
+      } else if let first = pendingStatuses.first ?? statuses.first {
+        var newStatuses: [Status] = await fetchNewPages(minId: first.id, maxPages: 20)
         if userIntent || !pendingStatusesEnabled {
+          pendingStatuses.insert(contentsOf: newStatuses, at: 0)
+          statuses.insert(contentsOf: pendingStatuses, at: 0)
           pendingStatuses = []
-          statuses.insert(contentsOf: newStatuses, at: 0)
           withAnimation {
             statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
           }
@@ -116,7 +115,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
         latestMinId = newStatuses.first?.id ?? ""
       }
     } catch {
-      return []
+      return allStatuses
     }
     return allStatuses
   }
@@ -145,20 +144,24 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
   }
   
   func handleEvent(event: any StreamEvent, currentAccount: CurrentAccount) {
-    if let event = event as? StreamEventUpdate {
-      if event.status.account.id == currentAccount.account?.id,
-         timeline == .home {
-        statuses.insert(event.status, at: 0)
-        statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
-      } else if pendingStatusesEnabled,
-                !statuses.contains(where: { $0.id == event.status.id }),
-                !pendingStatuses.contains(where: { $0.id == event.status.id }){
+    if let event = event as? StreamEventUpdate,
+       pendingStatusesEnabled,
+       !statuses.contains(where: { $0.id == event.status.id }),
+       !pendingStatuses.contains(where: { $0.id == event.status.id }){
+      if event.status.account.id == currentAccount.account?.id, pendingStatuses.isEmpty {
+        withAnimation {
+          statuses.insert(event.status, at: 0)
+          statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+        }
+      } else {
         pendingStatuses.insert(event.status, at: 0)
         pendingStatusesState = .stream
       }
     } else if let event = event as? StreamEventDelete {
-      statuses.removeAll(where: { $0.id == event.status })
-      statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+      withAnimation {
+        statuses.removeAll(where: { $0.id == event.status })
+        statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+      }
     } else if let event = event as? StreamEventStatusUpdate {
       if let originalIndex = statuses.firstIndex(where: { $0.id == event.status.id }) {
         statuses[originalIndex] = event.status
@@ -174,6 +177,15 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
     }
     statuses.insert(contentsOf: pendingStatuses, at: 0)
     pendingStatuses = []
+    statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+  }
+  
+  func dequeuePendingStatuses() {
+    guard timeline == .home else { return }
+    if pendingStatuses.count > 1 {
+      let status = pendingStatuses.removeLast()
+      statuses.insert(status, at: 0)
+    }
     statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
   }
 }

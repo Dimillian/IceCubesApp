@@ -7,6 +7,7 @@ public enum RouteurDestinations: Hashable {
   case accountDetail(id: String)
   case accountDetailWithAccount(account: Account)
   case statusDetail(id: String)
+  case remoteStatusDetail(url: URL)
   case hashTag(tag: String, account: String?)
   case list(list: Models.List)
   case followers(id: String)
@@ -16,13 +17,15 @@ public enum RouteurDestinations: Hashable {
 }
 
 public enum SheetDestinations: Identifiable {
-  case newStatusEditor
+  case newStatusEditor(visibility: Models.Visibility)
   case editStatusEditor(status: Status)
   case replyToStatusEditor(status: Status)
   case quoteStatusEditor(status: Status)
   case mentionStatusEditor(account: Account, visibility: Models.Visibility)
   case listEdit(list: Models.List)
   case listAddAccount(account: Account)
+  case addAccount
+  case addRemoteLocalTimeline
   
   public var id: String {
     switch self {
@@ -32,6 +35,10 @@ public enum SheetDestinations: Identifiable {
       return "listEdit"
     case .listAddAccount:
       return "listAddAccount"
+    case .addAccount:
+      return "addAccount"
+    case .addRemoteLocalTimeline:
+      return "addRemoteLocalTimeline"
     }
   }
 }
@@ -62,9 +69,7 @@ public class RouterPath: ObservableObject {
       if url.absoluteString.contains(client.server) {
         navigate(to: .statusDetail(id: String(id)))
       } else {
-        Task {
-          await navigateToStatusFrom(url: url)
-        }
+        navigate(to: .remoteStatusDetail(url: url))
       }
       return .handled
     }
@@ -85,27 +90,27 @@ public class RouterPath: ObservableObject {
     }
     return .systemAction
   }
-  
-  public func navigateToStatusFrom(url: URL) async {
+    
+  public func navigateToAccountFrom(acct: String, url: URL) async {
     guard let client else { return }
     Task {
-      let results: SearchResults? = try? await client.get(endpoint: Search.search(query: url.absoluteString,
-                                                                                   type: "statuses",
+      let results: SearchResults? = try? await client.get(endpoint: Search.search(query: acct,
+                                                                                   type: "accounts",
                                                                                   offset: nil,
                                                                                   following: nil),
                                                           forceVersion: .v2)
-      if let status = results?.statuses.first {
-        navigate(to: .statusDetail(id: status.id))
+      if let account = results?.accounts.first {
+        navigate(to: .accountDetailWithAccount(account: account))
       } else {
         await UIApplication.shared.open(url)
       }
     }
   }
   
-  public func navigateToAccountFrom(acct: String, url: URL) async {
+  public func navigateToAccountFrom(url: URL) async {
     guard let client else { return }
     Task {
-      let results: SearchResults? = try? await client.get(endpoint: Search.search(query: acct,
+      let results: SearchResults? = try? await client.get(endpoint: Search.search(query: url.absoluteString,
                                                                                    type: "accounts",
                                                                                   offset: nil,
                                                                                   following: nil),

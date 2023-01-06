@@ -7,51 +7,43 @@ import DesignSystem
 import Models
 
 struct TimelineTab: View {
-  @EnvironmentObject private var appAccounts: AppAccountsManager
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var currentAccount: CurrentAccount
+  @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var client: Client
   @StateObject private var routeurPath = RouterPath()
   @Binding var popToRootTab: Tab
   
+  @State private var didAppear: Bool = false
   @State private var timeline: TimelineFilter = .home
   @State private var scrollToTopSignal: Int = 0
-  @State private var isAddAccountSheetDisplayed = false
-  @State private var accountsViewModel: [AppAccountViewModel] = []
-  
+    
   var body: some View {
     NavigationStack(path: $routeurPath.path) {
       TimelineView(timeline: $timeline, scrollToTopSignal: $scrollToTopSignal)
         .withAppRouteur()
         .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
         .toolbar {
-          ToolbarTitleMenu {
-            timelineFilterButton
-          }
-          if client.isAuth {
-            ToolbarItem(placement: .navigationBarLeading) {
-              accountButton
-            }
-            statusEditorToolbarItem(routeurPath: routeurPath)
-          } else {
-            ToolbarItem(placement: .navigationBarTrailing) {
-              addAccountButton
-            }
-          }
+          toolbarView
         }
         .id(currentAccount.account?.id)
     }
-    .sheet(isPresented: $isAddAccountSheetDisplayed) {
-      AddAccountView()
-    }
     .onAppear {
       routeurPath.client = client
-      timeline = client.isAuth ? .home : .pub
+      if !didAppear {
+        didAppear = true
+        timeline = client.isAuth ? .home : .federated
+      }
       Task {
         await currentAccount.fetchLists()
       }
     }
-    .environmentObject(routeurPath)
+    .onChange(of: client.isAuth, perform: { isAuth in
+      timeline = isAuth ? .home : .federated
+    })
+    .onChange(of: currentAccount.account?.id, perform: { _ in
+      timeline = client.isAuth ? .home : .federated
+    })
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
       if popToRootTab == .timeline {
         if routeurPath.path.isEmpty {
@@ -64,6 +56,7 @@ struct TimelineTab: View {
     .onChange(of: currentAccount.account?.id) { _ in
       routeurPath.path = []
     }
+    .environmentObject(routeurPath)
   }
   
   
@@ -99,58 +92,68 @@ struct TimelineTab: View {
         }
       }
     }
-  }
-  
-  private var accountButton: some View {
-    Button {
-      if let account = currentAccount.account {
-        routeurPath.navigate(to: .accountDetailWithAccount(account: account))
-      }
-    } label: {
-      if let avatar = currentAccount.account?.avatar {
-        AvatarView(url: avatar, size: .badge)
-      }
-    }
-    .onAppear {
-      if accountsViewModel.isEmpty || appAccounts.availableAccounts.count != accountsViewModel.count {
-        accountsViewModel = []
-        for account in appAccounts.availableAccounts {
-          let viewModel: AppAccountViewModel = .init(appAccount: account)
-          accountsViewModel.append(viewModel)
-          Task {
-            await viewModel.fetchAccount()
-          }
-        }
-      }
-    }
-    .contextMenu {
-      ForEach(accountsViewModel, id: \.appAccount.id) { viewModel in
+    
+    Menu("Local Timelines") {
+      ForEach(preferences.remoteLocalTimelines, id: \.self) { server in
         Button {
-          appAccounts.currentAccount = viewModel.appAccount
-          timeline = .home
+          timeline = .remoteLocal(server: server)
         } label: {
-          HStack {
-            if viewModel.account?.id == currentAccount.account?.id {
-              Image(systemName: "checkmark.circle.fill")
-            }
-            Text("\(viewModel.account?.displayName ?? "")")
-          }
+          Label(server, systemImage: "dot.radiowaves.right")
         }
       }
       Button {
-        isAddAccountSheetDisplayed = true
+        routeurPath.presentedSheet = .addRemoteLocalTimeline
       } label: {
-        Label("Add Account", systemImage: "person.badge.plus")
+        Label("Add a local timeline", systemImage: "badge.plus.radiowaves.right")
       }
     }
-
   }
-  
+    
   private var addAccountButton: some View {
     Button {
-      isAddAccountSheetDisplayed = true
+      routeurPath.presentedSheet = .addAccount
     } label: {
       Image(systemName: "person.badge.plus")
+    }
+  }
+  
+  @ToolbarContentBuilder
+  private var toolbarView: some ToolbarContent {
+    ToolbarTitleMenu {
+      timelineFilterButton
+    }
+    if client.isAuth {
+      ToolbarItem(placement: .navigationBarLeading) {
+        AppAccountsSelectorView(routeurPath: routeurPath)
+      }
+      statusEditorToolbarItem(routeurPath: routeurPath, visibility: .pub)
+    } else {
+      ToolbarItem(placement: .navigationBarTrailing) {
+        addAccountButton
+      }
+    }
+    switch timeline {
+    case let .list(list):
+      ToolbarItem {
+        Button {
+          routeurPath.presentedSheet = .listEdit(list: list)
+        } label: {
+          Image(systemName: "list.bullet")
+        }
+      }
+    case let .remoteLocal(server):
+      ToolbarItem {
+        Button {
+          preferences.remoteLocalTimelines.removeAll(where: { $0 == server })
+          timeline = client.isAuth ? .home : .federated
+        } label: {
+          Image(systemName: "pin.slash")
+        }
+      }
+    default:
+      ToolbarItem {
+        EmptyView()
+      }
     }
   }
 }

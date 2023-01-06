@@ -46,3 +46,12 @@ public struct StreamEventNotification: StreamEvent {
     self.notification = notification
   }
 }
+
+public struct StreamEventConversation: StreamEvent {
+  public let date = Date()
+  public var id: String { conversation.id }
+  public let conversation: Conversation
+  public init(conversation: Conversation) {
+    self.conversation = conversation
+  }
+}

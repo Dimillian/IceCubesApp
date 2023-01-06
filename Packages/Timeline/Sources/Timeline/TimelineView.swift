@@ -41,7 +41,12 @@ public struct TimelineView: View {
           LazyVStack {
             tagHeaderView
               .padding(.bottom, 16)
-            StatusesListView(fetcher: viewModel)
+            switch viewModel.timeline {
+            case .remoteLocal:
+              StatusesListView(fetcher: viewModel, isRemote: true)
+            default:
+              StatusesListView(fetcher: viewModel)
+            }
           }
           .padding(.top, .layoutPadding)
         }
@@ -55,33 +60,19 @@ public struct TimelineView: View {
       }
     }
     .navigationTitle(timeline.title())
-    .toolbar{
-      switch timeline {
-      case let .list(list):
-        ToolbarItem {
-          Button {
-            routerPath.presentedSheet = .listEdit(list: list)
-          } label: {
-            Image(systemName: "pencil")
-          }
-        }
-      default:
-        ToolbarItem {
-          EmptyView()
-        }
-      }
-    }
     .navigationBarTitleDisplayMode(.inline)
     .onAppear {
-      viewModel.client = client
-      viewModel.timeline = timeline
+      if viewModel.client == nil {
+        viewModel.client = client
+        viewModel.timeline = timeline
+      }
     }
     .refreshable {
       feedbackGenerator.impactOccurred(intensity: 0.3)
       await viewModel.fetchStatuses(userIntent: true)
       feedbackGenerator.impactOccurred(intensity: 0.7)
     }
-    .onChange(of: watcher.latestEvent?.id) { id in
+    .onChange(of: watcher.latestEvent?.id) { _ in
       if let latestEvent = watcher.latestEvent {
         viewModel.handleEvent(event: latestEvent, currentAccount: account)
       }
@@ -92,7 +83,13 @@ public struct TimelineView: View {
       }
     })
     .onChange(of: timeline) { newTimeline in
-      viewModel.timeline = timeline
+      switch newTimeline {
+      case let .remoteLocal(server):
+        viewModel.client = Client(server: server)
+      default:
+        viewModel.client = client
+      }
+      viewModel.timeline = newTimeline
     }
     .onChange(of: scenePhase, perform: { scenePhase in
       switch scenePhase {
@@ -109,17 +106,31 @@ public struct TimelineView: View {
   @ViewBuilder
   private func makePendingNewPostsView(proxy: ScrollViewProxy) -> some View {
     if !viewModel.pendingStatuses.isEmpty {
-      Button {
-        withAnimation {
-          proxy.scrollTo(Constants.scrollToTop)
-          viewModel.displayPendingStatuses()
+      HStack(spacing: 6) {
+        Button {
+          withAnimation {
+            proxy.scrollTo(Constants.scrollToTop)
+            viewModel.displayPendingStatuses()
+          }
+        } label: {
+          Text(viewModel.pendingStatusesButtonTitle)
         }
-      } label: {
-        Text(viewModel.pendingStatusesButtonTitle)
+        .buttonStyle(.bordered)
+        .background(.thinMaterial)
+        .cornerRadius(8)
+        if viewModel.pendingStatuses.count > 1 {
+          Button {
+            withAnimation {
+              viewModel.dequeuePendingStatuses()
+            }
+          } label: {
+            Image(systemName: "play.square.stack")
+          }
+          .buttonStyle(.bordered)
+          .background(.thinMaterial)
+          .cornerRadius(8)
+        }
       }
-      .buttonStyle(.bordered)
-      .background(.thinMaterial)
-      .cornerRadius(8)
       .padding(.top, 6)
     }
   }
