@@ -53,6 +53,8 @@ extension View {
         ListAddAccountView(account: account)
       case .addAccount:
         AddAccountView()
+      case .addRemoteLocalTimeline:
+        AddRemoteTimelineView()
       }
     }
   }

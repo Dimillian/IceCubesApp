@@ -73,7 +73,7 @@ public struct Status: AnyStatus, Codable, Identifiable {
   
   public static func placeholder() -> Status {
     .init(id: UUID().uuidString,
-          content: "Some post content\n Some more post content \n Some more",
+          content: "This is a #toot\nWith some @content\nAnd some more content for your #eyes @only",
           account: .placeholder(),
           createdAt: "2022-12-16T10:20:54.000Z",
           editedAt: nil,

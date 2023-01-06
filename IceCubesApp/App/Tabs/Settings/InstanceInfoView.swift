@@ -9,22 +9,27 @@ struct InstanceInfoView: View {
   let instance: Instance
   
   var body: some View {
-    Section("Instance info") {
-      LabeledContent("Name", value: instance.title)
-      Text(instance.shortDescription)
-      LabeledContent("Email", value: instance.email)
-      LabeledContent("Version", value: instance.version)
-      LabeledContent("Users", value: "\(instance.stats.userCount)")
-      LabeledContent("Posts", value: "\(instance.stats.statusCount)")
-      LabeledContent("Domains", value: "\(instance.stats.domainCount)")
-    }
-    .listRowBackground(theme.primaryBackgroundColor)
-    
-    Section("Instance rules") {
-      ForEach(instance.rules) { rule in
-        Text(rule.text)
+    Form {
+      Section("Instance info") {
+        LabeledContent("Name", value: instance.title)
+        Text(instance.shortDescription)
+        LabeledContent("Email", value: instance.email)
+        LabeledContent("Version", value: instance.version)
+        LabeledContent("Users", value: "\(instance.stats.userCount)")
+        LabeledContent("Posts", value: "\(instance.stats.statusCount)")
+        LabeledContent("Domains", value: "\(instance.stats.domainCount)")
       }
+      .listRowBackground(theme.primaryBackgroundColor)
+      
+      Section("Instance rules") {
+        ForEach(instance.rules) { rule in
+          Text(rule.text)
+        }
+      }
+      .listRowBackground(theme.primaryBackgroundColor)
     }
-    .listRowBackground(theme.primaryBackgroundColor)
+    .navigationTitle("Instance Info")
+    .scrollContentBackground(.hidden)
+    .background(theme.secondaryBackgroundColor)
   }
 }

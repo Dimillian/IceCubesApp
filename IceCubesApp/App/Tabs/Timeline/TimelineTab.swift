@@ -17,10 +17,7 @@ struct TimelineTab: View {
   @State private var didAppear: Bool = false
   @State private var timeline: TimelineFilter = .home
   @State private var scrollToTopSignal: Int = 0
-  
-  @State private var newlyAddedLocalTimeline: String = ""
-  @State private var isAddRemoteLocalTimelinePresented: Bool = false
-  
+    
   var body: some View {
     NavigationStack(path: $routeurPath.path) {
       TimelineView(timeline: $timeline, scrollToTopSignal: $scrollToTopSignal)
@@ -30,9 +27,6 @@ struct TimelineTab: View {
           toolbarView
         }
         .id(currentAccount.account?.id)
-    }
-    .sheet(isPresented: $isAddRemoteLocalTimelinePresented) {
-      AddRemoteTimelineVIew(addedInstance: $newlyAddedLocalTimeline)
     }
     .onAppear {
       routeurPath.client = client
@@ -61,13 +55,6 @@ struct TimelineTab: View {
     }
     .onChange(of: currentAccount.account?.id) { _ in
       routeurPath.path = []
-    }
-    .onChange(of: isAddRemoteLocalTimelinePresented) { isPresented in
-      if !isPresented && !newlyAddedLocalTimeline.isEmpty {
-        preferences.remoteLocalTimelines.append(newlyAddedLocalTimeline)
-        timeline = .remoteLocal(server: newlyAddedLocalTimeline)
-        newlyAddedLocalTimeline = ""
-      }
     }
     .environmentObject(routeurPath)
   }
@@ -106,24 +93,20 @@ struct TimelineTab: View {
       }
     }
     
-    if !preferences.remoteLocalTimelines.isEmpty {
-      Menu("Local Timelines") {
-        ForEach(preferences.remoteLocalTimelines, id: \.self) { server in
-          Button {
-            timeline = .remoteLocal(server: server)
-          } label: {
-            Label(server, systemImage: "dot.radiowaves.right")
-          }
+    Menu("Local Timelines") {
+      ForEach(preferences.remoteLocalTimelines, id: \.self) { server in
+        Button {
+          timeline = .remoteLocal(server: server)
+        } label: {
+          Label(server, systemImage: "dot.radiowaves.right")
         }
       }
+      Button {
+        routeurPath.presentedSheet = .addRemoteLocalTimeline
+      } label: {
+        Label("Add a local timeline", systemImage: "badge.plus.radiowaves.right")
+      }
     }
-    
-    Button {
-      isAddRemoteLocalTimelinePresented = true
-    } label: {
-      Label("Add a local timeline", systemImage: "badge.plus.radiowaves.right")
-    }
-
   }
     
   private var addAccountButton: some View {

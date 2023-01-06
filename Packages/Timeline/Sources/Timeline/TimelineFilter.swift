@@ -3,7 +3,7 @@ import Models
 import Network
 
 public enum TimelineFilter: Hashable, Equatable {
-  case federated, local, home, trending
+  case home, local, federated, trending
   case hashtag(tag: String, accountId: String?)
   case list(list: List)
   case remoteLocal(server: String)
@@ -14,9 +14,9 @@ public enum TimelineFilter: Hashable, Equatable {
   
   public static func availableTimeline(client: Client) -> [TimelineFilter] {
     if !client.isAuth {
-      return [.federated, .local, .trending]
+      return [.local, .federated, .trending]
     }
-    return [.federated, .local, .trending, .home]
+    return [.home, .local, .federated, .trending]
   }
   
   public func title() -> String {

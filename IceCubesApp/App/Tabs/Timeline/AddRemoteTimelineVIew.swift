@@ -6,9 +6,10 @@ import DesignSystem
 import NukeUI
 import Shimmer
 
-struct AddRemoteTimelineVIew: View {
+struct AddRemoteTimelineView: View {
   @Environment(\.dismiss) private var dismiss
   
+  @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
   
   @State private var instanceName: String = ""
@@ -16,9 +17,7 @@ struct AddRemoteTimelineVIew: View {
   @State private var instances: [InstanceSocial] = []
   
   @FocusState private var isInstanceURLFieldFocused: Bool
-  
-  @Binding var addedInstance: String
-  
+    
   var body: some View {
     NavigationStack {
       Form {
@@ -36,7 +35,7 @@ struct AddRemoteTimelineVIew: View {
         }
         Button {
           guard instance != nil else { return }
-          addedInstance = instanceName
+          preferences.remoteLocalTimelines.append(instanceName)
           dismiss()
         } label: {
           Text("Add")

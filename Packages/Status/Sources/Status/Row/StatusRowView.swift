@@ -42,7 +42,7 @@ public struct StatusRowView: View {
             replyView
           }
           statusView
-          if !viewModel.isCompact && !viewModel.isRemote {
+          if !viewModel.isCompact && !viewModel.isRemote, theme.statusActionsDisplay != .none {
             StatusActionsView(viewModel: viewModel)
               .padding(.vertical, 8)
               .tint(viewModel.isFocused ? theme.tintColor : .gray)

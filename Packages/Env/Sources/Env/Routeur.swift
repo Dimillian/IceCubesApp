@@ -25,6 +25,7 @@ public enum SheetDestinations: Identifiable {
   case listEdit(list: Models.List)
   case listAddAccount(account: Account)
   case addAccount
+  case addRemoteLocalTimeline
   
   public var id: String {
     switch self {
@@ -36,6 +37,8 @@ public enum SheetDestinations: Identifiable {
       return "listAddAccount"
     case .addAccount:
       return "addAccount"
+    case .addRemoteLocalTimeline:
+      return "addRemoteLocalTimeline"
     }
   }
 }

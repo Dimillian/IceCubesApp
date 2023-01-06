@@ -30,6 +30,7 @@
 		9F7335EF29674F7100AFF0BA /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F7335EE29674F7100AFF0BA /* QuickLook.framework */; };
 		9F7335F22967608F00AFF0BA /* AddRemoteTimelineVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7335F12967608F00AFF0BA /* AddRemoteTimelineVIew.swift */; };
 		9F7335F72968274500AFF0BA /* AppAccountsSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7335F62968274500AFF0BA /* AppAccountsSelectorView.swift */; };
+		9F7335F92968576500AFF0BA /* DisplaySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7335F82968576500AFF0BA /* DisplaySettingsView.swift */; };
 		9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE4ACA293783B000772766 /* SettingsTab.swift */; };
 		9FAE4ACE29379A5A00772766 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAE4ACD29379A5A00772766 /* KeychainSwift */; };
 		9FAE4AD129379AD600772766 /* AppAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE4AD029379AD600772766 /* AppAccount.swift */; };
@@ -67,6 +68,7 @@
 		9F7335EE29674F7100AFF0BA /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.2.sdk/System/Library/Frameworks/QuickLook.framework; sourceTree = DEVELOPER_DIR; };
 		9F7335F12967608F00AFF0BA /* AddRemoteTimelineVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRemoteTimelineVIew.swift; sourceTree = "<group>"; };
 		9F7335F62968274500AFF0BA /* AppAccountsSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAccountsSelectorView.swift; sourceTree = "<group>"; };
+		9F7335F82968576500AFF0BA /* DisplaySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaySettingsView.swift; sourceTree = "<group>"; };
 		9FAE4AC8293774FF00772766 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9FAE4ACA293783B000772766 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		9FAE4AD029379AD600772766 /* AppAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAccount.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				9FE151A5293C90F900E9683D /* IconSelectorView.swift */,
 				9F2B92F9295DA7D700DE16D0 /* AddAccountsView.swift */,
 				9F2B92FB295DA94500DE16D0 /* InstanceInfoView.swift */,
+				9F7335F82968576500AFF0BA /* DisplaySettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				9F2B92FC295DA94500DE16D0 /* InstanceInfoView.swift in Sources */,
 				9F35DB4C2952005C00B3281A /* MessagesTab.swift in Sources */,
 				9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */,
+				9F7335F92968576500AFF0BA /* DisplaySettingsView.swift in Sources */,
 				9FAE4AD32937A0C600772766 /* AppAccountsManager.swift in Sources */,
 				9F2B92FF295EB87100DE16D0 /* AppAccountView.swift in Sources */,
 				9F2B92F6295AE04800DE16D0 /* Tabs.swift in Sources */,
