@@ -25,8 +25,8 @@ struct MessagesTab: View {
           }
         }
         .id(currentAccount.account?.id)
+        .environmentObject(routeurPath)
     }
-    .environmentObject(routeurPath)
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
       if popToRootTab == .messages {
         routeurPath.path = []
