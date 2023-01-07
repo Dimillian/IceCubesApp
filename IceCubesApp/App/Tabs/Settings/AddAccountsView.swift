@@ -51,7 +51,7 @@ struct AddAccountView: View {
             }
           }
           .listRowBackground(theme.primaryBackgroundColor)
-          InstanceInfoView(instance: instance)
+          InstanceInfoSection(instance: instance)
         } else {
           instancesListView
         }
