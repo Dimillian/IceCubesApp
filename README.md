@@ -17,28 +17,16 @@
 
 For contributors and myself, here is a todo list of features that could be added (while giving you a good idea of what's already done if not in this list, the app is quite complete already!)
 
-- [ ] DM / Conversations
-- [X] Lists support
-- [X] Display images alt
-- [X] Editor: Post image alts
 - [ ] Editor: Add / Edit polls
 - [ ] Editor: Support video types
 - [ ] Editor: Add photos from camera
 - [ ] Editor: Support custom emojis
-- [X] Editor: Autocomplete for mentions / hashtags
-- [ ] Better settings tab
 - [ ] Edit profile
 - [ ] Handle emoji in status
-- [X] Light theme
-- [X] More themes
 - [ ] Display & Edit server side features (filter, default visibility, etc...)
-- [X] Honor filters for statuses.
 - [ ] Edit filters.
-- [X] Open remote status locally
 - [ ] More context menu everywhere
-- [X] Support pinned posts
 - [ ] Support IceCubesApp://any mastodon links
-- [ ] Add a share sheet
 - [ ] Translate button
 - [ ] Proper iPad support
 - [ ] macOS support
