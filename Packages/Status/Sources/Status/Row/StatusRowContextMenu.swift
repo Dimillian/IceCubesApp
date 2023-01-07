@@ -45,7 +45,7 @@ struct StatusRowContextMenu: View {
     }
     
     Button {
-      UIPasteboard.general.string = "\(viewModel.status.content.asSafeAttributedString)"
+      UIPasteboard.general.string = viewModel.status.content.asRawText
     } label: {
       Label("Copy Text", systemImage: "doc.on.doc")
     }
