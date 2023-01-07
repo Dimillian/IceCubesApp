@@ -82,10 +82,11 @@ struct SupportAppView: View {
               Spacer()
               Button {
                 isProcessingPurchase = true
-                Purchases.shared.purchase(product: product) { _, _, _, success in
-                  if success {
+                Task {
+                  do {
+                    _ = try await Purchases.shared.purchase(product: product)
                     purchaseSuccessDisplayed = true
-                  } else {
+                  } catch {
                     purchaseErrorDisplayed = true
                   }
                   isProcessingPurchase = false
