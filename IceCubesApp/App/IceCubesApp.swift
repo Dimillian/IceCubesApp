@@ -4,6 +4,8 @@ import Network
 import KeychainSwift
 import Env
 import DesignSystem
+import QuickLook
+import RevenueCat
 
 @main
 struct IceCubesApp: App {
@@ -33,6 +35,7 @@ struct IceCubesApp: App {
       .onAppear {
         setNewClientsInEnv(client: appAccountsManager.currentClient)
         setBarsColor(color: theme.primaryBackgroundColor)
+        setupRevenueCat()
       }
       .preferredColorScheme(theme.selectedScheme == ColorScheme.dark ? .dark : .light)
       .environmentObject(appAccountsManager)
@@ -139,5 +142,10 @@ struct IceCubesApp: App {
   private func setBarsColor(color: Color) {
     UINavigationBar.appearance().isTranslucent = true
     UINavigationBar.appearance().barTintColor = UIColor(color)
+  }
+  
+  private func setupRevenueCat() {
+    Purchases.logLevel = .error
+    Purchases.configure(withAPIKey: "appl_JXmiRckOzXXTsHKitQiicXCvMQi")
   }
 }

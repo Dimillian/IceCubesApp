@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		9F24EEB829360C330042359D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F24EEB729360C330042359D /* Preview Assets.xcassets */; };
 		9F295540292B6C3400E0E81B /* Timeline in Frameworks */ = {isa = PBXBuildFile; productRef = 9F29553F292B6C3400E0E81B /* Timeline */; };
+		9F2A540729699698009B2D7C /* SupportAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2A540629699698009B2D7C /* SupportAppView.swift */; };
+		9F2A540A29699705009B2D7C /* ReceiptParser in Frameworks */ = {isa = PBXBuildFile; productRef = 9F2A540929699705009B2D7C /* ReceiptParser */; };
+		9F2A540C29699705009B2D7C /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 9F2A540B29699705009B2D7C /* RevenueCat */; };
 		9F2B92F6295AE04800DE16D0 /* Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92F5295AE04800DE16D0 /* Tabs.swift */; };
 		9F2B92FA295DA7D700DE16D0 /* AddAccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92F9295DA7D700DE16D0 /* AddAccountsView.swift */; };
 		9F2B92FC295DA94500DE16D0 /* InstanceInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92FB295DA94500DE16D0 /* InstanceInfoView.swift */; };
@@ -46,6 +49,8 @@
 		9F24EEB729360C330042359D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9F29553D292B67B600E0E81B /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Network; path = Packages/Network; sourceTree = "<group>"; };
 		9F29553E292B6AF600E0E81B /* Timeline */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Timeline; path = Packages/Timeline; sourceTree = "<group>"; };
+		9F2A5404296995FB009B2D7C /* QuickLookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLookUI.framework; path = System/Library/Frameworks/QuickLookUI.framework; sourceTree = SDKROOT; };
+		9F2A540629699698009B2D7C /* SupportAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportAppView.swift; sourceTree = "<group>"; };
 		9F2B92F5295AE04800DE16D0 /* Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabs.swift; sourceTree = "<group>"; };
 		9F2B92F9295DA7D700DE16D0 /* AddAccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountsView.swift; sourceTree = "<group>"; };
 		9F2B92FB295DA94500DE16D0 /* InstanceInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceInfoView.swift; sourceTree = "<group>"; };
@@ -88,6 +93,7 @@
 			files = (
 				9F7335EF29674F7100AFF0BA /* QuickLook.framework in Frameworks */,
 				9F7335ED2967463400AFF0BA /* AVKit.framework in Frameworks */,
+				9F2A540C29699705009B2D7C /* RevenueCat in Frameworks */,
 				9F55C6902955993C00F94077 /* Explore in Frameworks */,
 				9FAE4ACE29379A5A00772766 /* KeychainSwift in Frameworks */,
 				9F7335EA2966B3F800AFF0BA /* Conversations in Frameworks */,
@@ -96,6 +102,7 @@
 				9FD542E72962D2FF0045321A /* Lists in Frameworks */,
 				9F398AAB2935FFDB00A889F2 /* Models in Frameworks */,
 				9F5E581929545BE700A53960 /* Env in Frameworks */,
+				9F2A540A29699705009B2D7C /* ReceiptParser in Frameworks */,
 				9F35DB44294F9A7D00B3281A /* Status in Frameworks */,
 				9F295540292B6C3400E0E81B /* Timeline in Frameworks */,
 				9F35DB4A29506FA100B3281A /* Notifications in Frameworks */,
@@ -201,6 +208,7 @@
 		9FBFE64C292A72BD00C250E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9F2A5404296995FB009B2D7C /* QuickLookUI.framework */,
 				9F7335EE29674F7100AFF0BA /* QuickLook.framework */,
 				9F7335EB2967461B00AFF0BA /* AVKit.framework */,
 			);
@@ -215,6 +223,7 @@
 				9F2B92F9295DA7D700DE16D0 /* AddAccountsView.swift */,
 				9F2B92FB295DA94500DE16D0 /* InstanceInfoView.swift */,
 				9F7335F82968576500AFF0BA /* DisplaySettingsView.swift */,
+				9F2A540629699698009B2D7C /* SupportAppView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -247,6 +256,8 @@
 				9F55C68F2955993C00F94077 /* Explore */,
 				9FD542E62962D2FF0045321A /* Lists */,
 				9F7335E92966B3F800AFF0BA /* Conversations */,
+				9F2A540929699705009B2D7C /* ReceiptParser */,
+				9F2A540B29699705009B2D7C /* RevenueCat */,
 			);
 			productName = IceCubesApp;
 			productReference = 9FBFE639292A715500C250E9 /* IceCubesApp.app */;
@@ -278,6 +289,7 @@
 			mainGroup = 9FBFE630292A715500C250E9;
 			packageReferences = (
 				9FAE4ACC29379A5A00772766 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				9F2A540829699705009B2D7C /* XCRemoteSwiftPackageReference "purchases-ios" */,
 			);
 			productRefGroup = 9FBFE63A292A715500C250E9 /* Products */;
 			projectDirPath = "";
@@ -312,6 +324,7 @@
 				9F7335F92968576500AFF0BA /* DisplaySettingsView.swift in Sources */,
 				9FAE4AD32937A0C600772766 /* AppAccountsManager.swift in Sources */,
 				9F2B92FF295EB87100DE16D0 /* AppAccountView.swift in Sources */,
+				9F2A540729699698009B2D7C /* SupportAppView.swift in Sources */,
 				9F2B92F6295AE04800DE16D0 /* Tabs.swift in Sources */,
 				9F398AB329360A4C00A889F2 /* TimelineTab.swift in Sources */,
 				9F398AA62935FE8A00A889F2 /* AppRouteur.swift in Sources */,
@@ -459,6 +472,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IceCubesApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Ice Cubes";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Upload photos & videos to Mastodon";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Upload photos & videos to Mastodon";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -507,6 +521,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IceCubesApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Ice Cubes";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Upload photos & videos to Mastodon";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Upload photos & videos to Mastodon";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -560,6 +575,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		9F2A540829699705009B2D7C /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 		9FAE4ACC29379A5A00772766 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/evgenyneu/keychain-swift";
@@ -574,6 +597,16 @@
 		9F29553F292B6C3400E0E81B /* Timeline */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Timeline;
+		};
+		9F2A540929699705009B2D7C /* ReceiptParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9F2A540829699705009B2D7C /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			productName = ReceiptParser;
+		};
+		9F2A540B29699705009B2D7C /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9F2A540829699705009B2D7C /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			productName = RevenueCat;
 		};
 		9F35DB43294F9A7D00B3281A /* Status */ = {
 			isa = XCSwiftPackageProductDependency;

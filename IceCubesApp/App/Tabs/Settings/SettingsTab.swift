@@ -97,8 +97,14 @@ struct SettingsTabs: View {
           }
         }
       }
-      Link(destination: URL(string: "https://github.com/Dimillian/IceCubesApp")!) {
-        Label("Source (Github link)", systemImage: "link")
+      
+      Label("Source (Github link)", systemImage: "link")
+        .onTapGesture {
+          UIApplication.shared.open(URL(string: "https://github.com/Dimillian/IceCubesApp")!)
+        }
+      
+      NavigationLink(destination: SupportAppView()) {
+        Label("Support the app", systemImage: "wand.and.stars")
       }
     }
     .listRowBackground(theme.primaryBackgroundColor)
