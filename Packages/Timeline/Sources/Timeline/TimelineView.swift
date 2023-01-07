@@ -124,7 +124,7 @@ public struct TimelineView: View {
               viewModel.dequeuePendingStatuses()
             }
           } label: {
-            Image(systemName: "play.square.stack")
+            Image(systemName: "text.insert")
           }
           .buttonStyle(.bordered)
           .background(.thinMaterial)
