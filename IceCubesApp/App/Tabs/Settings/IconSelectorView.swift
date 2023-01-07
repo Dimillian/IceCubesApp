@@ -18,7 +18,7 @@ struct IconSelectorView: View {
     case primary = 0
     case alt1, alt2, alt3, alt4, alt5, alt6, alt7, alt8
     case alt9, alt10, alt11, alt12, alt13, alt14
-    case alt15, alt16, alt17, alt18
+    case alt15, alt16, alt17, alt18, alt19
     
     var appIconName: String {
       switch self {
