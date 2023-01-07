@@ -10,7 +10,7 @@ public struct StatusMediaPreviewView: View {
   @EnvironmentObject private var theme: Theme
   
   public let attachements: [MediaAttachement]
-  public let isCompact: Bool
+  public let isNotifications: Bool
 
   @State private var isQuickLookLoading: Bool = false
   @State private var width: CGFloat = 0
@@ -18,8 +18,11 @@ public struct StatusMediaPreviewView: View {
   @State private var isAltAlertDisplayed: Bool = false
   
   private var imageMaxHeight: CGFloat {
-    if isCompact {
+    if isNotifications {
       return 50
+    }
+    if theme.statusDisplayStyle == .compact {
+      return 100
     }
     if attachements.count == 1 {
       return 300
@@ -28,8 +31,11 @@ public struct StatusMediaPreviewView: View {
   }
   
   private func size(for media: MediaAttachement) -> CGSize? {
-    if isCompact {
+    if isNotifications {
       return .init(width: 50, height: 50)
+    }
+    if theme.statusDisplayStyle == .compact {
+      return .init(width: 100, height: 100)
     }
     if let width = media.meta?.original?.width,
        let height = media.meta?.original?.height {
@@ -39,7 +45,7 @@ public struct StatusMediaPreviewView: View {
   }
   
   private func imageSize(from: CGSize, newWidth: CGFloat) -> CGSize {
-    if isCompact {
+    if isNotifications {
       return .init(width: 50, height: 50)
     }
     let ratio = newWidth / from.width
@@ -57,7 +63,7 @@ public struct StatusMediaPreviewView: View {
             }
           }
       } else {
-        if isCompact {
+        if isNotifications || theme.statusDisplayStyle == .compact {
           HStack {
             makeAttachementView(for: 0)
             makeAttachementView(for: 1)
@@ -104,7 +110,8 @@ public struct StatusMediaPreviewView: View {
   private func makeFeaturedImagePreview(attachement: MediaAttachement) -> some View {
     switch attachement.supportedType {
     case .image:
-      if let size = size(for: attachement),
+      if theme.statusDisplayStyle == .large,
+         let size = size(for: attachement),
          UIDevice.current.userInterfaceIdiom != .pad,
           UIDevice.current.userInterfaceIdiom != .mac {
         let avatarColumnWidth = theme.avatarPosition == .leading ? AvatarView.Size.status.size.width + .statusColumnsSpacing : 0
@@ -125,7 +132,7 @@ public struct StatusMediaPreviewView: View {
                 .shimmering()
             }
           }
-          if let alt = attachement.description, !alt.isEmpty, !isCompact {
+          if let alt = attachement.description, !alt.isEmpty, !isNotifications {
             Button {
               altTextDisplayed = alt
               isAltAlertDisplayed = true
@@ -183,13 +190,13 @@ public struct StatusMediaPreviewView: View {
                   RoundedRectangle(cornerRadius: 4)
                     .fill(Color.gray)
                     .frame(maxHeight: imageMaxHeight)
-                    .frame(width: isCompact ? imageMaxHeight : proxy.frame(in: .local).width)
+                    .frame(width: isNotifications ? imageMaxHeight : proxy.frame(in: .local).width)
                     .shimmering()
                 }
               }
-              .frame(width: isCompact ? imageMaxHeight : proxy.frame(in: .local).width)
+              .frame(width: isNotifications ? imageMaxHeight : proxy.frame(in: .local).width)
               .frame(height: imageMaxHeight)
-              if let alt = attachement.description, !alt.isEmpty, !isCompact {
+              if let alt = attachement.description, !alt.isEmpty, !isNotifications {
                 Button {
                   altTextDisplayed = alt
                   isAltAlertDisplayed = true
@@ -205,12 +212,12 @@ public struct StatusMediaPreviewView: View {
           case .gifv, .video:
             if let url = attachement.url {
               VideoPlayerView(viewModel: .init(url: url))
-                .frame(width: isCompact ? imageMaxHeight :  proxy.frame(in: .local).width)
+                .frame(width: isNotifications ? imageMaxHeight :  proxy.frame(in: .local).width)
                 .frame(height: imageMaxHeight)
             }
           }
         }
-        .frame(width: isCompact ? imageMaxHeight : nil)
+        .frame(width: isNotifications ? imageMaxHeight : nil)
         .frame(height: imageMaxHeight)
       }
       .onTapGesture {

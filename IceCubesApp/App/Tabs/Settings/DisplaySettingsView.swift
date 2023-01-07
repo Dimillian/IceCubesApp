@@ -34,6 +34,12 @@ struct DisplaySettingsView: View {
             Text(buttonStyle.description).tag(buttonStyle)
           }
         }
+        
+        Picker("Status media style", selection: $theme.statusDisplayStyle) {
+          ForEach(Theme.StatusDisplayStyle.allCases, id: \.rawValue) { buttonStyle in
+            Text(buttonStyle.description).tag(buttonStyle)
+          }
+        }
       }
       .listRowBackground(theme.primaryBackgroundColor)
       
