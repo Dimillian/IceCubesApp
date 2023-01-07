@@ -8,6 +8,7 @@ class ConversationsListViewModel: ObservableObject {
   
   @Published var isLoadingFirstPage: Bool = true
   @Published var conversations: [Conversation] = []
+  @Published var isError: Bool = false
   
   public init() { }
   
@@ -20,6 +21,7 @@ class ConversationsListViewModel: ObservableObject {
       conversations = try await client.get(endpoint: Conversations.conversations)
       isLoadingFirstPage = false
     } catch {
+      isError = true
       isLoadingFirstPage = false
     }
   }

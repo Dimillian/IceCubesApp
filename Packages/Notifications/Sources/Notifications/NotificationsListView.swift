@@ -102,8 +102,14 @@ public struct NotificationsListView: View {
         loadingRow
       }
       
-    case let .error(error):
-      Text(error.localizedDescription)
+    case .error:
+      ErrorView(title: "An error occured",
+                message: "An error occured while loading your notifications, please retry.",
+                buttonTitle: "Retry") {
+        Task {
+          await viewModel.fetchNotifications()
+        }
+      }
     }
   }
   

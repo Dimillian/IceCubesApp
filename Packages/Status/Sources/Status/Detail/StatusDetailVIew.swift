@@ -61,9 +61,14 @@ public struct StatusDetailView: View {
               }
             }
             
-          case let .error(error):
-            Text(error.localizedDescription)
-              .padding(.horizontal, .layoutPadding)
+          case .error:
+            ErrorView(title: "An error occured",
+                      message: "An error occured while this post context, please try again.",
+                      buttonTitle: "Retry") {
+              Task {
+                await viewModel.fetch()
+              }
+            }
           }
         }
         .padding(.top, .layoutPadding)

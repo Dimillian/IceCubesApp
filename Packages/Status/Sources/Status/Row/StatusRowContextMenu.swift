@@ -38,6 +38,8 @@ struct StatusRowContextMenu: View {
       }
     }
       
+    Divider()
+    
     if let url = viewModel.status.reblog?.url ?? viewModel.status.url {
         ShareLink(item: url) {
             Label("Share this post", systemImage: "square.and.arrow.up")

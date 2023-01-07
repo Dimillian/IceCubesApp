@@ -38,10 +38,18 @@ public struct ConversationsListView: View {
             }
             Divider()
           }
-        } else if conversations.isEmpty && !viewModel.isLoadingFirstPage {
+        } else if conversations.isEmpty && !viewModel.isLoadingFirstPage && !viewModel.isError {
           EmptyView(iconName: "tray",
                     title: "Inbox Zero",
                     message: "Looking for some social media love? You'll find all your direct messages and private mentions right here. Happy messaging! 📱❤️")
+        } else if viewModel.isError {
+          ErrorView(title: "An error occurred",
+                    message: "Error while loading your messages",
+                    buttonTitle: "Retry") {
+            Task {
+              await viewModel.fetchConversations()
+            }
+          }
         }
       }
       .padding(.top, .layoutPadding)

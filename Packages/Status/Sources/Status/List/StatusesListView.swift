@@ -24,8 +24,15 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
           Divider()
             .padding(.vertical, .dividerPadding)
         }
-      case let .error(error):
-        Text(error.localizedDescription)
+      case .error:
+        ErrorView(title: "An error occured",
+                  message: "An error occured while loading posts, please try again.",
+                  buttonTitle: "Retry") {
+          Task {
+            await fetcher.fetchStatuses()
+          }
+        }
+        
       case let .display(statuses, nextPageState):
         ForEach(statuses, id: \.viewId) { status in
           StatusRowView(viewModel: .init(status: status, isCompact: false, isRemote: isRemote))
