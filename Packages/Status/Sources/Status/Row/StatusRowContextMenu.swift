@@ -37,7 +37,13 @@ struct StatusRowContextMenu: View {
         Label("Quote this post", systemImage: "quote.bubble")
       }
     }
-    
+      
+    if let url = viewModel.status.reblog?.url ?? viewModel.status.url {
+        ShareLink(item: url) {
+            Label("Share this post", systemImage: "square.and.arrow.up")
+        }
+    }
+      
     if let url = viewModel.status.reblog?.url ?? viewModel.status.url {
       Button { UIApplication.shared.open(url)  } label: {
         Label("View in Browser", systemImage: "safari")
