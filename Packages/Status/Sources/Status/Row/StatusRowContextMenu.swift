@@ -43,6 +43,12 @@ struct StatusRowContextMenu: View {
         Label("View in Browser", systemImage: "safari")
       }
     }
+    
+    Button {
+      UIPasteboard.general.string = "\(viewModel.status.content.asSafeAttributedString)"
+    } label: {
+      Label("Copy Text", systemImage: "doc.on.doc")
+    }
 
     if account.account?.id == viewModel.status.account.id {
       Section("Your post") {
