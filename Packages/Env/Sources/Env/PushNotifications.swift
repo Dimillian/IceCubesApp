@@ -133,12 +133,16 @@ public class PushNotifications: ObservableObject {
         return try P256.KeyAgreement.PrivateKey(rawRepresentation: data)
       } catch {
         let key = P256.KeyAgreement.PrivateKey()
-        keychain.set(key.rawRepresentation.base64EncodedString(), forKey: Constants.keychainPrivateKey)
+        keychain.set(key.rawRepresentation.base64EncodedString(),
+                     forKey: Constants.keychainPrivateKey,
+                     withAccess: .accessibleAfterFirstUnlock)
         return key
       }
     } else {
       let key = P256.KeyAgreement.PrivateKey()
-      keychain.set(key.rawRepresentation.base64EncodedString(), forKey: Constants.keychainPrivateKey)
+      keychain.set(key.rawRepresentation.base64EncodedString(),
+                   forKey: Constants.keychainPrivateKey,
+                   withAccess: .accessibleAfterFirstUnlock)
       return key
     }
   }
@@ -149,7 +153,9 @@ public class PushNotifications: ObservableObject {
       return data
     } else {
       let key = Self.makeRandomeNotificationsAuthKey()
-      keychain.set(key.base64EncodedString(), forKey: Constants.keychainAuthKey)
+      keychain.set(key.base64EncodedString(),
+                   forKey: Constants.keychainAuthKey,
+                   withAccess: .accessibleAfterFirstUnlock)
       return key
     }
   }
