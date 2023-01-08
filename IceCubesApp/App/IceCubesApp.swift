@@ -11,8 +11,10 @@ import RevenueCat
 struct IceCubesApp: App {
   public static let defaultServer = "mastodon.social"
     
+  @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
+  
   @Environment(\.scenePhase) private var scenePhase
-  @StateObject private var appAccountsManager = AppAccountsManager()
+  @StateObject private var appAccountsManager = AppAccountsManager.shared
   @StateObject private var currentInstance = CurrentInstance()
   @StateObject private var currentAccount = CurrentAccount()
   @StateObject private var userPreferences = UserPreferences()
@@ -35,6 +37,7 @@ struct IceCubesApp: App {
       .onAppear {
         setNewClientsInEnv(client: appAccountsManager.currentClient)
         setupRevenueCat()
+        refreshPushSubs()
       }
       .environmentObject(appAccountsManager)
       .environmentObject(appAccountsManager.currentClient)
@@ -44,6 +47,7 @@ struct IceCubesApp: App {
       .environmentObject(userPreferences)
       .environmentObject(theme)
       .environmentObject(watcher)
+      .environmentObject(PushNotifications.shared)
       .quickLookPreview($quickLook.url, in: quickLook.urls)
     }
     .onChange(of: scenePhase) { scenePhase in
@@ -137,5 +141,29 @@ struct IceCubesApp: App {
   private func setupRevenueCat() {
     Purchases.logLevel = .error
     Purchases.configure(withAPIKey: "appl_JXmiRckOzXXTsHKitQiicXCvMQi")
+  }
+  
+  private func refreshPushSubs() {
+    PushNotifications.shared.requestPushNotifications()
+  }
+}
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    return true
+  }
+  
+  func application(_ application: UIApplication,
+                   didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    PushNotifications.shared.pushToken = deviceToken
+    Task {
+      await PushNotifications.shared.fetchSubscriptions(accounts: AppAccountsManager.shared.pushAccounts)
+      await PushNotifications.shared.updateSubscriptions(accounts: AppAccountsManager.shared.pushAccounts)
+    }
+  }
+  
+  func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+    print(error)
   }
 }
