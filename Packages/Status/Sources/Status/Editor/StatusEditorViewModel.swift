@@ -146,7 +146,7 @@ public class StatusEditorViewModel: ObservableObject {
     statusText.addAttributes([.foregroundColor: UIColor(Color.label)],
                                 range: NSMakeRange(0, statusText.string.utf16.count))
     let hashtagPattern = "(#+[a-zA-Z0-9(_)]{1,})"
-    let mentionPattern = "(@+[a-zA-Z0-9(_).]{1,})"
+    let mentionPattern = "(@+[a-zA-Z0-9(_).-]{1,})"
     let urlPattern = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)"
 
     do {

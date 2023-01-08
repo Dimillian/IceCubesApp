@@ -12,7 +12,7 @@ struct AppAccountView: View {
           AvatarView(url: account.avatar)
           if viewModel.appAccount.id == appAccounts.currentAccount.id {
             Image(systemName: "checkmark.circle.fill")
-              .foregroundColor(.green)
+              .foregroundStyle(.white, .green)
               .offset(x: 5, y: -5)
           }
         }

@@ -213,6 +213,21 @@ public struct AccountDetailView: View {
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
       .navigationTitle("About")
+      .toolbar {
+        ToolbarItem(placement: .primaryAction) {
+          Button {
+            isFieldsSheetDisplayed = false
+          } label: {
+            Image(systemName: "xmark")
+              .imageScale(.small)
+              .font(.body.weight(.semibold))
+              .frame(width: 30, height: 30)
+              .background(theme.primaryBackgroundColor.opacity(0.5))
+              .clipShape(Circle())
+          }
+          .foregroundColor(theme.tintColor)
+        }
+      }
     }
   }
   
