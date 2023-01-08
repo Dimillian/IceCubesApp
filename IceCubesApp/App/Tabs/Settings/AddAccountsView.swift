@@ -7,7 +7,6 @@ import NukeUI
 import Shimmer
 
 struct AddAccountView: View {
-  @Environment(\.openURL) private var openURL
   @Environment(\.dismiss) private var dismiss
   
   @EnvironmentObject private var appAccountsManager: AppAccountsManager
@@ -128,7 +127,7 @@ struct AddAccountView: View {
     do {
       signInClient = .init(server: instanceName)
       if let oauthURL = try await signInClient?.oauthURL() {
-        openURL(oauthURL)
+        await UIApplication.shared.open(oauthURL)
       } else {
         isSigninIn = false
       }
