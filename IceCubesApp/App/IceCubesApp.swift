@@ -155,9 +155,6 @@ struct IceCubesApp: App {
   
   private func refreshPushSubs() {
     PushNotifications.shared.requestPushNotifications()
-    Task {
-      await PushNotifications.shared.fetchSubscriptions(accounts: appAccountsManager.pushAccounts)
-    }
   }
 }
 
@@ -171,6 +168,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                    didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
     PushNotifications.shared.pushToken = deviceToken
     Task {
+      await PushNotifications.shared.fetchSubscriptions(accounts: AppAccountsManager.shared.pushAccounts)
       await PushNotifications.shared.updateSubscriptions(accounts: AppAccountsManager.shared.pushAccounts)
     }
   }
