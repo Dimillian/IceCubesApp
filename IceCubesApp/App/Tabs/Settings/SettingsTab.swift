@@ -31,6 +31,7 @@ struct SettingsTabs: View {
       .toolbarBackground(theme.primaryBackgroundColor, for: .navigationBar)
       .withAppRouteur()
       .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
+      .withSafariRouteur()
     }
     .onAppear {
       routeurPath.client = client
@@ -40,6 +41,7 @@ struct SettingsTabs: View {
         await currentInstance.fetchCurrentInstance()
       }
     }
+    .environmentObject(routeurPath)
   }
   
   private var accountsSection: some View {
@@ -79,6 +81,9 @@ struct SettingsTabs: View {
       NavigationLink(destination: remoteLocalTimelinesView) {
         Label("Remote Local Timelines", systemImage: "dot.radiowaves.right")
       }
+      Toggle(isOn: $preferences.useInAppSafari) {
+        Label("Open Links with In-App Safari", systemImage: "safari")
+      }
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
@@ -98,10 +103,10 @@ struct SettingsTabs: View {
         }
       }
       
-      Label("Source (Github link)", systemImage: "link")
-        .onTapGesture {
-          UIApplication.shared.open(URL(string: "https://github.com/Dimillian/IceCubesApp")!)
-        }
+      Link(destination: URL(string: "https://github.com/Dimillian/IceCubesApp")!) {
+        Label("Source (Github link)", systemImage: "link")
+      }
+      .tint(theme.labelColor)
       
       NavigationLink(destination: SupportAppView()) {
         Label("Support the app", systemImage: "wand.and.stars")

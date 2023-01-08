@@ -16,6 +16,7 @@ struct NotificationsTab: View {
       NotificationsListView()
         .withAppRouteur()
         .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
+        .withSafariRouteur()
         .toolbar {
           statusEditorToolbarItem(routeurPath: routeurPath, visibility: .pub)
           ToolbarItem(placement: .navigationBarLeading) {

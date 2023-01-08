@@ -19,6 +19,7 @@ struct MessagesTab: View {
       ConversationsListView()
         .withAppRouteur()
         .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
+        .withSafariRouteur()
         .toolbar {
           ToolbarItem(placement: .navigationBarLeading) {
             AppAccountsSelectorView(routeurPath: routeurPath)

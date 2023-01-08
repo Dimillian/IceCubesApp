@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		639CDF9C296AC82F00C35E58 /* SafariRouteur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639CDF9B296AC82F00C35E58 /* SafariRouteur.swift */; };
 		9F24EEB829360C330042359D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F24EEB729360C330042359D /* Preview Assets.xcassets */; };
 		9F295540292B6C3400E0E81B /* Timeline in Frameworks */ = {isa = PBXBuildFile; productRef = 9F29553F292B6C3400E0E81B /* Timeline */; };
 		9F2A540729699698009B2D7C /* SupportAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2A540629699698009B2D7C /* SupportAppView.swift */; };
@@ -47,6 +48,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		639CDF9B296AC82F00C35E58 /* SafariRouteur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariRouteur.swift; sourceTree = "<group>"; };
 		9F24EEB729360C330042359D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9F29553D292B67B600E0E81B /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Network; path = Packages/Network; sourceTree = "<group>"; };
 		9F29553E292B6AF600E0E81B /* Timeline */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Timeline; path = Packages/Timeline; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				9FAE4AC9293783A200772766 /* Tabs */,
 				9FBFE63C292A715500C250E9 /* IceCubesApp.swift */,
 				9F398AA52935FE8A00A889F2 /* AppRouteur.swift */,
+				639CDF9B296AC82F00C35E58 /* SafariRouteur.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				9F2B9301295EB8A100DE16D0 /* AppAccountViewModel.swift in Sources */,
 				9FBFE63D292A715500C250E9 /* IceCubesApp.swift in Sources */,
 				9F2B92FA295DA7D700DE16D0 /* AddAccountsView.swift in Sources */,
+				639CDF9C296AC82F00C35E58 /* SafariRouteur.swift in Sources */,
 				9F35DB4729506F6600B3281A /* NotificationTab.swift in Sources */,
 				9F7335F22967608F00AFF0BA /* AddRemoteTimelineVIew.swift in Sources */,
 				9F7335F72968274500AFF0BA /* AppAccountsSelectorView.swift in Sources */,

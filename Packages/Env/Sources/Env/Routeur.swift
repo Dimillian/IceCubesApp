@@ -46,6 +46,7 @@ public enum SheetDestinations: Identifiable {
 @MainActor
 public class RouterPath: ObservableObject {
   public var client: Client?
+  public var urlHandler: ((URL) -> OpenURLAction.Result)?
   
   @Published public var path: [RouteurDestinations] = []
   @Published public var presentedSheet: SheetDestinations?
@@ -73,7 +74,7 @@ public class RouterPath: ObservableObject {
       }
       return .handled
     }
-    return .systemAction
+    return urlHandler?(url) ?? .systemAction
   }
   
   public func handle(url: URL) -> OpenURLAction.Result {
@@ -88,7 +89,7 @@ public class RouterPath: ObservableObject {
       }
       return .handled
     }
-    return .systemAction
+    return urlHandler?(url) ?? .systemAction
   }
     
   public func navigateToAccountFrom(acct: String, url: URL) async {
