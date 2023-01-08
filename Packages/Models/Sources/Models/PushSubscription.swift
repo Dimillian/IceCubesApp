@@ -7,6 +7,7 @@ public struct PushSubscription: Identifiable, Decodable {
     public let reblog: Bool
     public let mention: Bool
     public let poll: Bool
+    public let status: Bool
   }
   
   public let id: Int

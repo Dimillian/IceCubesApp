@@ -9,7 +9,7 @@ import Env
 struct PushNotificationsView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var appAccountsManager: AppAccountsManager
-  @EnvironmentObject private var pushNotifications: PushNotifications
+  @EnvironmentObject private var pushNotifications: PushNotificationsService
   
   @State private var subscriptions: [PushSubscription] = []
     
@@ -19,25 +19,30 @@ struct PushNotificationsView: View {
         Toggle(isOn: $pushNotifications.isPushEnabled) {
           Text("Push notification")
         }
+      } footer: {
+        Text("Receive push notifications on new activities")
       }
       .listRowBackground(theme.primaryBackgroundColor)
       
       if pushNotifications.isPushEnabled {
         Section {
+          Toggle(isOn: $pushNotifications.isMentionNotificationEnabled) {
+            Label("Mentions", systemImage: "at")
+          }
           Toggle(isOn: $pushNotifications.isFollowNotificationEnabled) {
-            Text("Follow notification")
+            Label("Follows", systemImage: "person.badge.plus")
           }
           Toggle(isOn: $pushNotifications.isFavoriteNotificationEnabled) {
-            Text("Favorite notification")
+            Label("Favorites", systemImage: "star")
           }
           Toggle(isOn: $pushNotifications.isReblogNotificationEnabled) {
-            Text("Boost notification")
-          }
-          Toggle(isOn: $pushNotifications.isMentionNotificationEnabled) {
-            Text("Mention notification")
+            Label("Boosts", systemImage: "arrow.left.arrow.right.circle")
           }
           Toggle(isOn: $pushNotifications.isPollNotificationEnabled) {
-            Text("Polls notification")
+            Label("Polls Results", systemImage: "chart.bar")
+          }
+          Toggle(isOn: $pushNotifications.isNewPostsNotificationEnabled) {
+            Label("New Posts", systemImage: "bubble.right")
           }
         }
         .listRowBackground(theme.primaryBackgroundColor)
@@ -75,6 +80,9 @@ struct PushNotificationsView: View {
       updateSubscriptions()
     }
     .onChange(of: pushNotifications.isFavoriteNotificationEnabled) { _ in
+      updateSubscriptions()
+    }
+    .onChange(of: pushNotifications.isNewPostsNotificationEnabled) { _ in
       updateSubscriptions()
     }
   }

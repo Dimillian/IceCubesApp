@@ -15,7 +15,7 @@ class AppAccountsManager: ObservableObject {
   @Published var availableAccounts: [AppAccount]
   @Published var currentClient: Client
   
-  var pushAccounts: [PushNotifications.PushAccounts] {
+  var pushAccounts: [PushNotificationsService.PushAccounts] {
     availableAccounts.filter{ $0.oauthToken != nil}
       .map{ .init(server: $0.server, token: $0.oauthToken!) }
   }

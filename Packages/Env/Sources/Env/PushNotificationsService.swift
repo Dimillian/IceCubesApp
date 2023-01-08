@@ -7,7 +7,7 @@ import Models
 import Network
 
 @MainActor
-public class PushNotifications: ObservableObject {
+public class PushNotificationsService: ObservableObject {
   enum Constants {
     static let endpoint = "https://icecubesrelay.fly.dev"
     static let keychainGroup = "346J38YKE3.com.thomasricouard.IceCubesApp"
@@ -25,7 +25,7 @@ public class PushNotifications: ObservableObject {
     }
   }
   
-  public static let shared = PushNotifications()
+  public static let shared = PushNotificationsService()
   
   @Published public var pushToken: Data?
   
@@ -42,6 +42,7 @@ public class PushNotifications: ObservableObject {
   @Published public var isReblogNotificationEnabled: Bool = true
   @Published public var isMentionNotificationEnabled: Bool = true
   @Published public var isPollNotificationEnabled: Bool = true
+  @Published public var isNewPostsNotificationEnabled: Bool = true
   
   private var subscriptions: [PushSubscription] = []
   
@@ -89,7 +90,7 @@ public class PushNotifications: ObservableObject {
                                                          p256dh: notificationsPrivateKeyAsKey.publicKey.x963Representation,
                                                          auth: notificationsAuthKeyAsKey,
                                                          mentions: isMentionNotificationEnabled,
-                                                         status: true,
+                                                         status: isNewPostsNotificationEnabled,
                                                          reblog: isReblogNotificationEnabled,
                                                          follow: isFollowNotificationEnabled,
                                                          favourite: isFavoriteNotificationEnabled,
@@ -119,6 +120,7 @@ public class PushNotifications: ObservableObject {
       isReblogNotificationEnabled = sub.alerts.reblog
       isMentionNotificationEnabled = sub.alerts.mention
       isPollNotificationEnabled = sub.alerts.poll
+      isNewPostsNotificationEnabled = sub.alerts.status
     } else {
       isPushEnabled = false
     }

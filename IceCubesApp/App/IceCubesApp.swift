@@ -49,7 +49,7 @@ struct IceCubesApp: App {
       .environmentObject(userPreferences)
       .environmentObject(theme)
       .environmentObject(watcher)
-      .environmentObject(PushNotifications.shared)
+      .environmentObject(PushNotificationsService.shared)
       .quickLookPreview($quickLook.url, in: quickLook.urls)
     }
     .onChange(of: scenePhase, perform: { scenePhase in
@@ -154,7 +154,7 @@ struct IceCubesApp: App {
   }
   
   private func refreshPushSubs() {
-    PushNotifications.shared.requestPushNotifications()
+    PushNotificationsService.shared.requestPushNotifications()
   }
 }
 
@@ -166,10 +166,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   
   func application(_ application: UIApplication,
                    didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-    PushNotifications.shared.pushToken = deviceToken
+    PushNotificationsService.shared.pushToken = deviceToken
     Task {
-      await PushNotifications.shared.fetchSubscriptions(accounts: AppAccountsManager.shared.pushAccounts)
-      await PushNotifications.shared.updateSubscriptions(accounts: AppAccountsManager.shared.pushAccounts)
+      await PushNotificationsService.shared.fetchSubscriptions(accounts: AppAccountsManager.shared.pushAccounts)
+      await PushNotificationsService.shared.updateSubscriptions(accounts: AppAccountsManager.shared.pushAccounts)
     }
   }
   

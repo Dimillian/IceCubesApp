@@ -13,7 +13,7 @@ struct AddAccountView: View {
   @EnvironmentObject private var appAccountsManager: AppAccountsManager
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var currentInstance: CurrentInstance
-  @EnvironmentObject private var pushNotifications: PushNotifications
+  @EnvironmentObject private var pushNotifications: PushNotificationsService
   @EnvironmentObject private var theme: Theme
   
   @State private var instanceName: String = ""
