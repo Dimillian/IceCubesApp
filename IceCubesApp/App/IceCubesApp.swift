@@ -11,8 +11,10 @@ import RevenueCat
 struct IceCubesApp: App {
   public static let defaultServer = "mastodon.social"
     
+  @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
+  
   @Environment(\.scenePhase) private var scenePhase
-  @StateObject private var appAccountsManager = AppAccountsManager()
+  @StateObject private var appAccountsManager = AppAccountsManager.shared
   @StateObject private var currentInstance = CurrentInstance()
   @StateObject private var currentAccount = CurrentAccount()
   @StateObject private var userPreferences = UserPreferences()
@@ -36,6 +38,7 @@ struct IceCubesApp: App {
         setNewClientsInEnv(client: appAccountsManager.currentClient)
         setBarsColor(color: theme.primaryBackgroundColor)
         setupRevenueCat()
+        refreshPushSubs()
       }
       .preferredColorScheme(theme.selectedScheme == ColorScheme.dark ? .dark : .light)
       .environmentObject(appAccountsManager)
@@ -46,6 +49,7 @@ struct IceCubesApp: App {
       .environmentObject(userPreferences)
       .environmentObject(theme)
       .environmentObject(watcher)
+      .environmentObject(PushNotificationsService.shared)
       .quickLookPreview($quickLook.url, in: quickLook.urls)
     }
     .onChange(of: scenePhase, perform: { scenePhase in
@@ -147,5 +151,29 @@ struct IceCubesApp: App {
   private func setupRevenueCat() {
     Purchases.logLevel = .error
     Purchases.configure(withAPIKey: "appl_JXmiRckOzXXTsHKitQiicXCvMQi")
+  }
+  
+  private func refreshPushSubs() {
+    PushNotificationsService.shared.requestPushNotifications()
+  }
+}
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    return true
+  }
+  
+  func application(_ application: UIApplication,
+                   didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+    PushNotificationsService.shared.pushToken = deviceToken
+    Task {
+      await PushNotificationsService.shared.fetchSubscriptions(accounts: AppAccountsManager.shared.pushAccounts)
+      await PushNotificationsService.shared.updateSubscriptions(accounts: AppAccountsManager.shared.pushAccounts)
+    }
+  }
+  
+  func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+    print(error)
   }
 }

@@ -13,6 +13,15 @@
 		9F2A540A29699705009B2D7C /* ReceiptParser in Frameworks */ = {isa = PBXBuildFile; productRef = 9F2A540929699705009B2D7C /* ReceiptParser */; };
 		9F2A540C29699705009B2D7C /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 9F2A540B29699705009B2D7C /* RevenueCat */; };
 		9F2A540E2969A0B0009B2D7C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F2A540D2969A0B0009B2D7C /* StoreKit.framework */; };
+		9F2A5411296A1429009B2D7C /* PushNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2A5410296A1429009B2D7C /* PushNotificationsView.swift */; };
+		9F2A5419296AB631009B2D7C /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2A5418296AB631009B2D7C /* NotificationService.swift */; };
+		9F2A541D296AB631009B2D7C /* IceCubesNotifications.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9F2A5416296AB631009B2D7C /* IceCubesNotifications.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9F2A5424296AB67A009B2D7C /* Env in Frameworks */ = {isa = PBXBuildFile; productRef = 9F2A5423296AB67A009B2D7C /* Env */; };
+		9F2A5426296AB67E009B2D7C /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9F2A5425296AB67E009B2D7C /* KeychainSwift */; };
+		9F2A5428296AB683009B2D7C /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 9F2A5427296AB683009B2D7C /* Models */; };
+		9F2A542A296AF557009B2D7C /* NotificationServiceSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2A5429296AF557009B2D7C /* NotificationServiceSupport.swift */; };
+		9F2A542C296B1177009B2D7C /* glass.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9F2A542B296B1177009B2D7C /* glass.caf */; };
+		9F2A542E296B1CC0009B2D7C /* glass.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9F2A542D296B1CC0009B2D7C /* glass.wav */; };
 		9F2B92F6295AE04800DE16D0 /* Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92F5295AE04800DE16D0 /* Tabs.swift */; };
 		9F2B92FA295DA7D700DE16D0 /* AddAccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92F9295DA7D700DE16D0 /* AddAccountsView.swift */; };
 		9F2B92FC295DA94500DE16D0 /* InstanceInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92FB295DA94500DE16D0 /* InstanceInfoView.swift */; };
@@ -46,6 +55,30 @@
 		9FE151A6293C90F900E9683D /* IconSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE151A5293C90F900E9683D /* IconSelectorView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		9F2A541B296AB631009B2D7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9FBFE631292A715500C250E9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9F2A5415296AB631009B2D7C;
+			remoteInfo = IceCubesNotifications;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9F2A5421296AB631009B2D7C /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				9F2A541D296AB631009B2D7C /* IceCubesNotifications.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		9F24EEB729360C330042359D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9F29553D292B67B600E0E81B /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Network; path = Packages/Network; sourceTree = "<group>"; };
@@ -53,6 +86,14 @@
 		9F2A5404296995FB009B2D7C /* QuickLookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLookUI.framework; path = System/Library/Frameworks/QuickLookUI.framework; sourceTree = SDKROOT; };
 		9F2A540629699698009B2D7C /* SupportAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportAppView.swift; sourceTree = "<group>"; };
 		9F2A540D2969A0B0009B2D7C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		9F2A5410296A1429009B2D7C /* PushNotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationsView.swift; sourceTree = "<group>"; };
+		9F2A5416296AB631009B2D7C /* IceCubesNotifications.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IceCubesNotifications.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F2A5418296AB631009B2D7C /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		9F2A541A296AB631009B2D7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F2A5422296AB64B009B2D7C /* IceCubesNotifications.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IceCubesNotifications.entitlements; sourceTree = "<group>"; };
+		9F2A5429296AF557009B2D7C /* NotificationServiceSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationServiceSupport.swift; sourceTree = "<group>"; };
+		9F2A542B296B1177009B2D7C /* glass.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = glass.caf; sourceTree = "<group>"; };
+		9F2A542D296B1CC0009B2D7C /* glass.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = glass.wav; sourceTree = "<group>"; };
 		9F2B92F5295AE04800DE16D0 /* Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabs.swift; sourceTree = "<group>"; };
 		9F2B92F9295DA7D700DE16D0 /* AddAccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountsView.swift; sourceTree = "<group>"; };
 		9F2B92FB295DA94500DE16D0 /* InstanceInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceInfoView.swift; sourceTree = "<group>"; };
@@ -89,6 +130,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9F2A5413296AB631009B2D7C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F2A5428296AB683009B2D7C /* Models in Frameworks */,
+				9F2A5426296AB67E009B2D7C /* KeychainSwift in Frameworks */,
+				9F2A5424296AB67A009B2D7C /* Env in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9FBFE636292A715500C250E9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -115,6 +166,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9F2A5417296AB631009B2D7C /* IceCubesNotifications */ = {
+			isa = PBXGroup;
+			children = (
+				9F2A5422296AB64B009B2D7C /* IceCubesNotifications.entitlements */,
+				9F2A5418296AB631009B2D7C /* NotificationService.swift */,
+				9F2A5429296AF557009B2D7C /* NotificationServiceSupport.swift */,
+				9F2A541A296AB631009B2D7C /* Info.plist */,
+			);
+			path = IceCubesNotifications;
+			sourceTree = "<group>";
+		};
 		9F398AB429360A5800A889F2 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +191,8 @@
 		9F398AB529360A6100A889F2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9F2A542D296B1CC0009B2D7C /* glass.wav */,
+				9F2A542B296B1177009B2D7C /* glass.caf */,
 				9F24EEB729360C330042359D /* Preview Assets.xcassets */,
 			);
 			path = Resources;
@@ -172,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				9FBFE63B292A715500C250E9 /* IceCubesApp */,
+				9F2A5417296AB631009B2D7C /* IceCubesNotifications */,
 				9FBFE63A292A715500C250E9 /* Products */,
 				9FBFE64C292A72BD00C250E9 /* Frameworks */,
 				9F398AAC2936005300A889F2 /* Account */,
@@ -192,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				9FBFE639292A715500C250E9 /* IceCubesApp.app */,
+				9F2A5416296AB631009B2D7C /* IceCubesNotifications.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -228,6 +294,7 @@
 				9F2B92FB295DA94500DE16D0 /* InstanceInfoView.swift */,
 				9F7335F82968576500AFF0BA /* DisplaySettingsView.swift */,
 				9F2A540629699698009B2D7C /* SupportAppView.swift */,
+				9F2A5410296A1429009B2D7C /* PushNotificationsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -235,6 +302,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		9F2A5415296AB631009B2D7C /* IceCubesNotifications */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F2A541E296AB631009B2D7C /* Build configuration list for PBXNativeTarget "IceCubesNotifications" */;
+			buildPhases = (
+				9F2A5412296AB631009B2D7C /* Sources */,
+				9F2A5413296AB631009B2D7C /* Frameworks */,
+				9F2A5414296AB631009B2D7C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IceCubesNotifications;
+			packageProductDependencies = (
+				9F2A5423296AB67A009B2D7C /* Env */,
+				9F2A5425296AB67E009B2D7C /* KeychainSwift */,
+				9F2A5427296AB683009B2D7C /* Models */,
+			);
+			productName = IceCubesNotifications;
+			productReference = 9F2A5416296AB631009B2D7C /* IceCubesNotifications.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		9FBFE638292A715500C250E9 /* IceCubesApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9FBFE648292A715600C250E9 /* Build configuration list for PBXNativeTarget "IceCubesApp" */;
@@ -242,10 +331,12 @@
 				9FBFE635292A715500C250E9 /* Sources */,
 				9FBFE636292A715500C250E9 /* Frameworks */,
 				9FBFE637292A715500C250E9 /* Resources */,
+				9F2A5421296AB631009B2D7C /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9F2A541C296AB631009B2D7C /* PBXTargetDependency */,
 			);
 			name = IceCubesApp;
 			packageProductDependencies = (
@@ -274,9 +365,12 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1410;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
+					9F2A5415296AB631009B2D7C = {
+						CreatedOnToolsVersion = 14.2;
+					};
 					9FBFE638292A715500C250E9 = {
 						CreatedOnToolsVersion = 14.1;
 					};
@@ -300,23 +394,42 @@
 			projectRoot = "";
 			targets = (
 				9FBFE638292A715500C250E9 /* IceCubesApp */,
+				9F2A5415296AB631009B2D7C /* IceCubesNotifications */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		9F2A5414296AB631009B2D7C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9FBFE637292A715500C250E9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F2A542C296B1177009B2D7C /* glass.caf in Resources */,
 				9FD34823293D06E800DB0EE9 /* Assets.xcassets in Resources */,
 				9F24EEB829360C330042359D /* Preview Assets.xcassets in Resources */,
+				9F2A542E296B1CC0009B2D7C /* glass.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9F2A5412296AB631009B2D7C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F2A542A296AF557009B2D7C /* NotificationServiceSupport.swift in Sources */,
+				9F2A5419296AB631009B2D7C /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9FBFE635292A715500C250E9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -340,12 +453,82 @@
 				9F7335F72968274500AFF0BA /* AppAccountsSelectorView.swift in Sources */,
 				9FAE4AD129379AD600772766 /* AppAccount.swift in Sources */,
 				9F55C68D2955968700F94077 /* ExploreTab.swift in Sources */,
+				9F2A5411296A1429009B2D7C /* PushNotificationsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		9F2A541C296AB631009B2D7C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9F2A5415296AB631009B2D7C /* IceCubesNotifications */;
+			targetProxy = 9F2A541B296AB631009B2D7C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		9F2A541F296AB631009B2D7C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = IceCubesNotifications/IceCubesNotifications.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 730;
+				DEVELOPMENT_TEAM = Z6P74P6T99;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = IceCubesNotifications/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = IceCubesNotifications;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 0.7;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thomasricouard.IceCubesApp.IceCubesNotifications;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9F2A5420296AB631009B2D7C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = IceCubesNotifications/IceCubesNotifications.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 730;
+				DEVELOPMENT_TEAM = Z6P74P6T99;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = IceCubesNotifications/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = IceCubesNotifications;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 0.7;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thomasricouard.IceCubesApp.IceCubesNotifications;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		9FBFE646292A715600C250E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -460,6 +643,7 @@
 		9FBFE649292A715600C250E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconAlternate1 AppIconAlternate2 AppIconAlternate3 AppIconAlternate4 AppIconAlternate5 AppIconAlternate6 AppIconAlternate7 AppIconAlternate8 AppIconAlternate9 AppIconAlternate10 AppIconAlternate11 AppIconAlternate12 AppIconAlternate13 AppIconAlternate14 AppIconAlternate15 AppIconAlternate16 AppIconAlternate17 AppIconAlternate19 AppIconAlternate18";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -509,6 +693,7 @@
 		9FBFE64A292A715600C250E9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconAlternate1 AppIconAlternate2 AppIconAlternate3 AppIconAlternate4 AppIconAlternate5 AppIconAlternate6 AppIconAlternate7 AppIconAlternate8 AppIconAlternate9 AppIconAlternate10 AppIconAlternate11 AppIconAlternate12 AppIconAlternate13 AppIconAlternate14 AppIconAlternate15 AppIconAlternate16 AppIconAlternate17 AppIconAlternate19 AppIconAlternate18";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -558,6 +743,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9F2A541E296AB631009B2D7C /* Build configuration list for PBXNativeTarget "IceCubesNotifications" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F2A541F296AB631009B2D7C /* Debug */,
+				9F2A5420296AB631009B2D7C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9FBFE634292A715500C250E9 /* Build configuration list for PBXProject "IceCubesApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -611,6 +805,19 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9F2A540829699705009B2D7C /* XCRemoteSwiftPackageReference "purchases-ios" */;
 			productName = RevenueCat;
+		};
+		9F2A5423296AB67A009B2D7C /* Env */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Env;
+		};
+		9F2A5425296AB67E009B2D7C /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9FAE4ACC29379A5A00772766 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+		9F2A5427296AB683009B2D7C /* Models */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Models;
 		};
 		9F35DB43294F9A7D00B3281A /* Status */ = {
 			isa = XCSwiftPackageProductDependency;

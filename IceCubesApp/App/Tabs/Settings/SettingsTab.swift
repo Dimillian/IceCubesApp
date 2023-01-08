@@ -7,6 +7,7 @@ import Models
 import DesignSystem
 
 struct SettingsTabs: View {
+  @EnvironmentObject private var pushNotifications: PushNotificationsService
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var currentInstance: CurrentInstance
@@ -57,6 +58,11 @@ struct SettingsTabs: View {
       .onDelete { indexSet in
         if let index = indexSet.first {
           let account = appAccountsManager.availableAccounts[index]
+          if let token = account.oauthToken {
+            Task {
+              await pushNotifications.deleteSubscriptions(accounts: [.init(server: account.server, token: token)])
+            }
+          }
           appAccountsManager.delete(account: account)
         }
       }
@@ -68,6 +74,9 @@ struct SettingsTabs: View {
   @ViewBuilder
   private var generalSection: some View {
     Section("General") {
+      NavigationLink(destination: PushNotificationsView()) {
+        Label("Push notifications", systemImage: "bell.and.waves.left.and.right")
+      }
       if let instanceData = currentInstance.instance {
         NavigationLink(destination: InstanceInfoView(instance: instanceData)) {
           Label("Instance Information", systemImage: "server.rack")

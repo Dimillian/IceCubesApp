@@ -1,5 +1,6 @@
 import SwiftUI
 import Network
+import Env
 
 class AppAccountsManager: ObservableObject {
   @AppStorage("latestCurrentAccountKey") static public var latestCurrentAccountKey: String = ""
@@ -14,18 +15,21 @@ class AppAccountsManager: ObservableObject {
   @Published var availableAccounts: [AppAccount]
   @Published var currentClient: Client
   
-  init() {
+  var pushAccounts: [PushNotificationsService.PushAccounts] {
+    availableAccounts.filter{ $0.oauthToken != nil}
+      .map{ .init(server: $0.server, token: $0.oauthToken!) }
+  }
+  
+  static var shared = AppAccountsManager()
+  
+  private init() {
     var defaultAccount = AppAccount(server: IceCubesApp.defaultServer, oauthToken: nil)
-    do {
-      let keychainAccounts = try AppAccount.retrieveAll()
-      availableAccounts = keychainAccounts
-      if let currentAccount = keychainAccounts.first(where: { $0.id == Self.latestCurrentAccountKey }) {
-        defaultAccount = currentAccount
-      } else {
-        defaultAccount = keychainAccounts.last ?? defaultAccount
-      }
-    } catch {
-      availableAccounts = [defaultAccount]
+    let keychainAccounts = AppAccount.retrieveAll()
+    availableAccounts = keychainAccounts
+    if let currentAccount = keychainAccounts.first(where: { $0.id == Self.latestCurrentAccountKey }) {
+      defaultAccount = currentAccount
+    } else {
+      defaultAccount = keychainAccounts.last ?? defaultAccount
     }
     currentAccount = defaultAccount
     currentClient = .init(server: defaultAccount.server, oauthToken: defaultAccount.oauthToken)
