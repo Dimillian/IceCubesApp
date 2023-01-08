@@ -5,6 +5,9 @@ import Env
 struct StatusRowContextMenu: View {
   @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var routeurPath: RouterPath
+    
+  @Environment(\.openURL) var openURL
+    
   @ObservedObject var viewModel: StatusRowViewModel
   
   var body: some View {
@@ -47,7 +50,7 @@ struct StatusRowContextMenu: View {
     }
       
     if let url = viewModel.status.reblog?.url ?? viewModel.status.url {
-      Button { UIApplication.shared.open(url)  } label: {
+      Button { openURL(url) } label: {
         Label("View in Browser", systemImage: "safari")
       }
     }
