@@ -20,6 +20,7 @@
 		9F2A5426296AB67E009B2D7C /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9F2A5425296AB67E009B2D7C /* KeychainSwift */; };
 		9F2A5428296AB683009B2D7C /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 9F2A5427296AB683009B2D7C /* Models */; };
 		9F2A542A296AF557009B2D7C /* NotificationServiceSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2A5429296AF557009B2D7C /* NotificationServiceSupport.swift */; };
+		9F2A542C296B1177009B2D7C /* glass.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9F2A542B296B1177009B2D7C /* glass.caf */; };
 		9F2B92F6295AE04800DE16D0 /* Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92F5295AE04800DE16D0 /* Tabs.swift */; };
 		9F2B92FA295DA7D700DE16D0 /* AddAccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92F9295DA7D700DE16D0 /* AddAccountsView.swift */; };
 		9F2B92FC295DA94500DE16D0 /* InstanceInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92FB295DA94500DE16D0 /* InstanceInfoView.swift */; };
@@ -90,6 +91,7 @@
 		9F2A541A296AB631009B2D7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F2A5422296AB64B009B2D7C /* IceCubesNotifications.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IceCubesNotifications.entitlements; sourceTree = "<group>"; };
 		9F2A5429296AF557009B2D7C /* NotificationServiceSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationServiceSupport.swift; sourceTree = "<group>"; };
+		9F2A542B296B1177009B2D7C /* glass.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = glass.caf; sourceTree = "<group>"; };
 		9F2B92F5295AE04800DE16D0 /* Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabs.swift; sourceTree = "<group>"; };
 		9F2B92F9295DA7D700DE16D0 /* AddAccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountsView.swift; sourceTree = "<group>"; };
 		9F2B92FB295DA94500DE16D0 /* InstanceInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceInfoView.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 		9F398AB529360A6100A889F2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9F2A542B296B1177009B2D7C /* glass.caf */,
 				9F24EEB729360C330042359D /* Preview Assets.xcassets */,
 			);
 			path = Resources;
@@ -405,6 +408,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F2A542C296B1177009B2D7C /* glass.caf in Resources */,
 				9FD34823293D06E800DB0EE9 /* Assets.xcassets in Resources */,
 				9F24EEB829360C330042359D /* Preview Assets.xcassets in Resources */,
 			);
