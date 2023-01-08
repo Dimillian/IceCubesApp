@@ -52,7 +52,7 @@ class NotificationService: UNNotificationServiceExtension {
       bestAttemptContent.subtitle = ""
       bestAttemptContent.body = notification.body.escape()
       bestAttemptContent.userInfo["plaintext"] = plaintextData
-      bestAttemptContent.sound = UNNotificationSound.init(named: UNNotificationSoundName(rawValue: "glass.caf"))
+      bestAttemptContent.sound = UNNotificationSound.init(named: UNNotificationSoundName(rawValue: "glass.wav"))
       
       if let urlString = notification.icon,
          let url = URL(string: urlString) {
