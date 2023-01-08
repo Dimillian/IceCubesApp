@@ -3,6 +3,7 @@ import KeychainSwift
 import Env
 import CryptoKit
 import Models
+import UIKit
 
 @MainActor
 class NotificationService: UNNotificationServiceExtension {
@@ -24,7 +25,7 @@ class NotificationService: UNNotificationServiceExtension {
         contentHandler(bestAttemptContent)
         return
       }
-  
+      
       guard let encodedPublicKey = bestAttemptContent.userInfo["k"] as? String,
             let publicKeyData = Data(base64Encoded: encodedPublicKey.URLSafeBase64ToBase64()),
             let publicKey = try? P256.KeyAgreement.PublicKey(x963Representation: publicKeyData) else {
@@ -53,7 +54,29 @@ class NotificationService: UNNotificationServiceExtension {
       bestAttemptContent.body = notification.body.escape()
       bestAttemptContent.userInfo["plaintext"] = plaintextData
       
-      contentHandler(bestAttemptContent)
+      if let urlString = notification.icon,
+         let url = URL(string: urlString) {
+        let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("notification-attachments")
+        try? FileManager.default.createDirectory(at: temporaryDirectoryURL, withIntermediateDirectories: true, attributes: nil)
+        let filename = url.lastPathComponent
+        let fileURL = temporaryDirectoryURL.appendingPathComponent(filename)
+        
+        Task {
+          if let (data, _) = try? await URLSession.shared.data(for: .init(url: url)) {
+            if let image = UIImage(data: data) {
+              try? image.pngData()?.write(to: fileURL)
+              if let attachment = try? UNNotificationAttachment(identifier: filename, url: fileURL, options: nil) {
+                bestAttemptContent.attachments = [attachment]
+              }
+            }
+            contentHandler(bestAttemptContent)
+          } else {
+            contentHandler(bestAttemptContent)
+          }
+        }
+      } else {
+        contentHandler(bestAttemptContent)
+      }
     }
   }
   
