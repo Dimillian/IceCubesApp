@@ -27,5 +27,6 @@ public struct EmptyView: View {
     }
     .padding(.top, 100)
     .padding(.layoutPadding)
+    .fixedSize(horizontal: false, vertical: true)
   }
 }
