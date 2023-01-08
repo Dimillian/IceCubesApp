@@ -16,6 +16,7 @@ struct ThemeApplier: ViewModifier {
         content
             .tint(theme.tintColor)
             .preferredColorScheme(theme.selectedScheme == ColorScheme.dark ? .dark : .light)
+            #if canImport(UIKit)
             .onAppear {
                 setWindowTint(theme.tintColor)
                 setWindowUserInterfaceStyle(theme.selectedScheme)
@@ -30,8 +31,10 @@ struct ThemeApplier: ViewModifier {
             .onChange(of: theme.primaryBackgroundColor) { newValue in
                 setBarsColor(newValue)
             }
+            #endif
     }
     
+    #if canImport(UIKit)
     private func setWindowUserInterfaceStyle(_ colorScheme: ColorScheme) {
         allWindows()
             .forEach {
@@ -52,10 +55,8 @@ struct ThemeApplier: ViewModifier {
     }
     
     private func setBarsColor(_ color: Color) {
-        #if canImport(UIKit)
         UINavigationBar.appearance().isTranslucent = true
         UINavigationBar.appearance().barTintColor = UIColor(color)
-        #endif
     }
     
     private func allWindows() -> [UIWindow] {
@@ -63,4 +64,5 @@ struct ThemeApplier: ViewModifier {
             .compactMap { $0 as? UIWindowScene }
             .flatMap { $0.windows }
     }
+    #endif
 }
