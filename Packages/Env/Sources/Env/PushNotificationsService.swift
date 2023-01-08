@@ -74,6 +74,8 @@ public class PushNotificationsService: ObservableObject {
   
   public func updateSubscriptions(accounts: [PushAccounts]) async {
     subscriptions = []
+    let key = notificationsPrivateKeyAsKey.publicKey.x963Representation
+    let authKey = notificationsAuthKeyAsKey
     guard let pushToken = pushToken, isUserPushEnabled else { return }
     for account in accounts {
       let client = Client(server: account.server, oauthToken: account.token)
@@ -87,8 +89,8 @@ public class PushNotificationsService: ObservableObject {
           #endif
           let sub: PushSubscription =
           try await client.post(endpoint: Push.createSub(endpoint: listenerURL,
-                                                         p256dh: notificationsPrivateKeyAsKey.publicKey.x963Representation,
-                                                         auth: notificationsAuthKeyAsKey,
+                                                         p256dh: key,
+                                                         auth: authKey,
                                                          mentions: isMentionNotificationEnabled,
                                                          status: isNewPostsNotificationEnabled,
                                                          reblog: isReblogNotificationEnabled,

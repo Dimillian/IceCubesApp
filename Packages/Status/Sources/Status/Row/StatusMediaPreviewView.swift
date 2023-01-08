@@ -163,7 +163,7 @@ public struct StatusMediaPreviewView: View {
                   .shimmering()
               })
       }
-    case .gifv, .video:
+    case .gifv, .video, .audio:
       if let url = attachement.url {
         VideoPlayerView(viewModel: .init(url: url))
           .frame(height: imageMaxHeight)
@@ -209,7 +209,7 @@ public struct StatusMediaPreviewView: View {
                 .cornerRadius(4)
               }
             }
-          case .gifv, .video:
+          case .gifv, .video, .audio:
             if let url = attachement.url {
               VideoPlayerView(viewModel: .init(url: url))
                 .frame(width: isNotifications ? imageMaxHeight :  proxy.frame(in: .local).width)
