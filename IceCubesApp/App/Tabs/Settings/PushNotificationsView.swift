@@ -19,7 +19,11 @@ struct PushNotificationsView: View {
         Toggle(isOn: $pushNotifications.isPushEnabled) {
           Text("Push notification")
         }
-        Group {
+      }
+      .listRowBackground(theme.primaryBackgroundColor)
+      
+      if pushNotifications.isPushEnabled {
+        Section {
           Toggle(isOn: $pushNotifications.isFollowNotificationEnabled) {
             Text("Follow notification")
           }
@@ -35,9 +39,10 @@ struct PushNotificationsView: View {
           Toggle(isOn: $pushNotifications.isPollNotificationEnabled) {
             Text("Polls notification")
           }
-        }.disabled(!pushNotifications.isPushEnabled)
+        }
+        .listRowBackground(theme.primaryBackgroundColor)
+        .transition(.move(edge: .bottom))
       }
-      .listRowBackground(theme.primaryBackgroundColor)
     }
     .navigationTitle("Push Notifications")
     .scrollContentBackground(.hidden)
