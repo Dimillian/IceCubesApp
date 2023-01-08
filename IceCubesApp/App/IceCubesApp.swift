@@ -33,14 +33,12 @@ struct IceCubesApp: App {
   var body: some Scene {
     WindowGroup {
       appView
-      .tint(theme.tintColor)
+      .applyTheme(theme)
       .onAppear {
         setNewClientsInEnv(client: appAccountsManager.currentClient)
-        setBarsColor(color: theme.primaryBackgroundColor)
         setupRevenueCat()
         refreshPushSubs()
       }
-      .preferredColorScheme(theme.selectedScheme == ColorScheme.dark ? .dark : .light)
       .environmentObject(appAccountsManager)
       .environmentObject(appAccountsManager.currentClient)
       .environmentObject(quickLook)
@@ -52,17 +50,14 @@ struct IceCubesApp: App {
       .environmentObject(PushNotificationsService.shared)
       .quickLookPreview($quickLook.url, in: quickLook.urls)
     }
-    .onChange(of: scenePhase, perform: { scenePhase in
+    .onChange(of: scenePhase) { scenePhase in
       handleScenePhase(scenePhase: scenePhase)
-    })
+    }
     .onChange(of: appAccountsManager.currentClient) { newClient in
       setNewClientsInEnv(client: newClient)
       if newClient.isAuth {
         watcher.watch(streams: [.user, .direct])
       }
-    }
-    .onChange(of: theme.primaryBackgroundColor) { newValue in
-      setBarsColor(color: newValue)
     }
   }
   
@@ -141,11 +136,6 @@ struct IceCubesApp: App {
     default:
       break
     }
-  }
-  
-  private func setBarsColor(color: Color) {
-    UINavigationBar.appearance().isTranslucent = true
-    UINavigationBar.appearance().barTintColor = UIColor(color)
   }
   
   private func setupRevenueCat() {
