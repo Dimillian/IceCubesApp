@@ -16,7 +16,6 @@ struct NotificationsTab: View {
       NotificationsListView()
         .withAppRouteur()
         .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
-        .withSafariRouteur()
         .toolbar {
           statusEditorToolbarItem(routeurPath: routeurPath, visibility: .pub)
           ToolbarItem(placement: .navigationBarLeading) {
@@ -29,6 +28,7 @@ struct NotificationsTab: View {
       routeurPath.client = client
       watcher.unreadNotificationsCount = 0
     }
+    .withSafariRouteur()
     .environmentObject(routeurPath)
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
       if popToRootTab == .notifications {

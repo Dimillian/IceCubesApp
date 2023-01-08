@@ -31,7 +31,6 @@ struct SettingsTabs: View {
       .toolbarBackground(theme.primaryBackgroundColor, for: .navigationBar)
       .withAppRouteur()
       .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
-      .withSafariRouteur()
     }
     .onAppear {
       routeurPath.client = client
@@ -41,6 +40,7 @@ struct SettingsTabs: View {
         await currentInstance.fetchCurrentInstance()
       }
     }
+    .withSafariRouteur()
     .environmentObject(routeurPath)
   }
   

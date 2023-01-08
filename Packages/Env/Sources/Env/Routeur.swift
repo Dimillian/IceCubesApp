@@ -96,7 +96,7 @@ public class RouterPath: ObservableObject {
     guard let client else { return }
     Task {
       let results: SearchResults? = try? await client.get(endpoint: Search.search(query: acct,
-                                                                                   type: "accounts",
+                                                                                  type: "accounts",
                                                                                   offset: nil,
                                                                                   following: nil),
                                                           forceVersion: .v2)
@@ -112,7 +112,7 @@ public class RouterPath: ObservableObject {
     guard let client else { return }
     Task {
       let results: SearchResults? = try? await client.get(endpoint: Search.search(query: url.absoluteString,
-                                                                                   type: "accounts",
+                                                                                  type: "accounts",
                                                                                   offset: nil,
                                                                                   following: nil),
                                                           forceVersion: .v2)

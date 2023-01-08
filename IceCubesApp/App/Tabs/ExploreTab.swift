@@ -17,7 +17,6 @@ struct ExploreTab: View {
       ExploreView()
         .withAppRouteur()
         .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
-        .withSafariRouteur()
         .toolbar {
           statusEditorToolbarItem(routeurPath: routeurPath, visibility: .pub)
           ToolbarItem(placement: .navigationBarLeading) {
@@ -25,6 +24,7 @@ struct ExploreTab: View {
           }
         }
     }
+    .withSafariRouteur()
     .environmentObject(routeurPath)
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
       if popToRootTab == .explore {

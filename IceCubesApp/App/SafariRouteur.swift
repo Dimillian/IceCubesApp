@@ -38,23 +38,48 @@ private struct SafariRouteur: ViewModifier {
                 }
             }
             .background {
-                Presenter(safari: safari)
+                SafariPresenter(safari: safari)
             }
     }
     
-    struct Presenter: UIViewControllerRepresentable {
+    struct SafariPresenter: UIViewRepresentable {
         var safari: SFSafariViewController?
         
-        func makeUIViewController(context: Context) -> UIViewController {
-            let viewController = UIViewController()
-            viewController.view = UIView(frame: .zero)
-            viewController.view.isUserInteractionEnabled = false
-            return viewController
+        func makeUIView(context: Context) -> UIView {
+            let view = UIView(frame: .zero)
+            view.isHidden = true
+            view.isUserInteractionEnabled = false
+            return view
         }
         
-        func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-            guard let safari = safari else { return }
-            uiViewController.present(safari, animated: true)
+        func updateUIView(_ uiView: UIView, context: Context) {
+            guard let safari = safari, let viewController = uiView.findTopViewController() else { return }
+            viewController.present(safari, animated: true)
         }
+    }
+}
+
+private extension UIView {
+    func findTopViewController() -> UIViewController? {
+        if let nextResponder = self.next as? UIViewController {
+            return nextResponder.topViewController()
+        } else if let nextResponder = self.next as? UIView {
+            return nextResponder.findTopViewController()
+        } else {
+            return nil
+        }
+    }
+}
+
+private extension UIViewController {
+    func topViewController() -> UIViewController? {
+        if let nvc = self as? UINavigationController {
+            return nvc.visibleViewController?.topViewController()
+        } else if let tbc = self as? UITabBarController, let selected = tbc.selectedViewController {
+            return selected.topViewController()
+        } else if let presented = self.presentedViewController {
+            return presented.topViewController()
+        }
+        return self
     }
 }

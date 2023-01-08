@@ -23,7 +23,6 @@ struct TimelineTab: View {
       TimelineView(timeline: $timeline, scrollToTopSignal: $scrollToTopSignal)
         .withAppRouteur()
         .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
-        .withSafariRouteur()
         .toolbar {
           toolbarView
         }
@@ -57,6 +56,7 @@ struct TimelineTab: View {
     .onChange(of: currentAccount.account?.id) { _ in
       routeurPath.path = []
     }
+    .withSafariRouteur()
     .environmentObject(routeurPath)
   }
   

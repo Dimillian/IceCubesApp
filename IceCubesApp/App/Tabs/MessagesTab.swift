@@ -19,7 +19,6 @@ struct MessagesTab: View {
       ConversationsListView()
         .withAppRouteur()
         .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
-        .withSafariRouteur()
         .toolbar {
           ToolbarItem(placement: .navigationBarLeading) {
             AppAccountsSelectorView(routeurPath: routeurPath)
@@ -39,6 +38,7 @@ struct MessagesTab: View {
       routeurPath.client = client
       watcher.unreadMessagesCount = 0
     }
+    .withSafariRouteur()
     .environmentObject(routeurPath)
   }
 }
