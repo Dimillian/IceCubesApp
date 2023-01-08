@@ -84,8 +84,17 @@ struct SettingsTabs: View {
       NavigationLink(destination: remoteLocalTimelinesView) {
         Label("Remote Local Timelines", systemImage: "dot.radiowaves.right")
       }
-      Toggle(isOn: $preferences.useInAppSafari) {
-        Label("Open Links with In-App Safari", systemImage: "safari")
+      Picker(selection: $preferences.preferredBrowser) {
+        ForEach(PreferredBrowser.allCases, id: \.rawValue) { browser in
+          switch browser {
+          case .inAppSafari:
+            Text("In-App Safari").tag(browser)
+          case .safari:
+            Text("System Safari").tag(browser)
+          }
+        }
+      } label: {
+        Label("Browser", systemImage: "network")
       }
     }
     .listRowBackground(theme.primaryBackgroundColor)
