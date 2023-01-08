@@ -3,6 +3,7 @@ import Timeline
 import Network
 import KeychainSwift
 import Models
+import CryptoKit
 
 struct AppAccount: Codable, Identifiable {
   let server: String
@@ -20,6 +21,11 @@ struct AppAccount: Codable, Identifiable {
     }
   }
   
+  internal init(server: String, oauthToken: OauthToken? = nil) {
+    self.server = server
+    self.oauthToken = oauthToken
+  }
+  
   func save() throws {
     let encoder = JSONEncoder()
     let data = try encoder.encode(self)
@@ -31,15 +37,16 @@ struct AppAccount: Codable, Identifiable {
     KeychainSwift().delete(key)
   }
   
-  static func retrieveAll() throws -> [AppAccount] {
+  static func retrieveAll() -> [AppAccount] {
     let keychain = KeychainSwift()
     let decoder = JSONDecoder()
     let keys = keychain.allKeys
     var accounts: [AppAccount] = []
     for key in keys {
       if let data = keychain.getData(key) {
-        let account = try decoder.decode(AppAccount.self, from: data)
-        accounts.append(account)
+        if let account = try? decoder.decode(AppAccount.self, from: data) {
+          accounts.append(account)
+        }
       }
     }
     return accounts

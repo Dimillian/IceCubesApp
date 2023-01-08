@@ -70,6 +70,9 @@ struct SettingsTabs: View {
   @ViewBuilder
   private var generalSection: some View {
     Section("General") {
+      NavigationLink(destination: PushNotificationsView()) {
+        Label("Push notifications", systemImage: "bell.and.waves.left.and.right")
+      }
       if let instanceData = currentInstance.instance {
         NavigationLink(destination: InstanceInfoView(instance: instanceData)) {
           Label("Instance Information", systemImage: "server.rack")
