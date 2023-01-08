@@ -53,6 +53,7 @@ class NotificationService: UNNotificationServiceExtension {
       bestAttemptContent.subtitle = ""
       bestAttemptContent.body = notification.body.escape()
       bestAttemptContent.userInfo["plaintext"] = plaintextData
+      bestAttemptContent.sound = UNNotificationSound.default
       
       if let urlString = notification.icon,
          let url = URL(string: urlString) {
