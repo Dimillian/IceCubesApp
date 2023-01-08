@@ -41,6 +41,8 @@ struct SettingsTabs: View {
         await currentInstance.fetchCurrentInstance()
       }
     }
+    .withSafariRouteur()
+    .environmentObject(routeurPath)
   }
   
   private var accountsSection: some View {
@@ -88,6 +90,18 @@ struct SettingsTabs: View {
       NavigationLink(destination: remoteLocalTimelinesView) {
         Label("Remote Local Timelines", systemImage: "dot.radiowaves.right")
       }
+      Picker(selection: $preferences.preferredBrowser) {
+        ForEach(PreferredBrowser.allCases, id: \.rawValue) { browser in
+          switch browser {
+          case .inAppSafari:
+            Text("In-App Safari").tag(browser)
+          case .safari:
+            Text("System Safari").tag(browser)
+          }
+        }
+      } label: {
+        Label("Browser", systemImage: "network")
+      }
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
@@ -107,10 +121,10 @@ struct SettingsTabs: View {
         }
       }
       
-      Label("Source (Github link)", systemImage: "link")
-        .onTapGesture {
-          UIApplication.shared.open(URL(string: "https://github.com/Dimillian/IceCubesApp")!)
-        }
+      Link(destination: URL(string: "https://github.com/Dimillian/IceCubesApp")!) {
+        Label("Source (Github link)", systemImage: "link")
+      }
+      .tint(theme.labelColor)
       
       NavigationLink(destination: SupportAppView()) {
         Label("Support the app", systemImage: "wand.and.stars")

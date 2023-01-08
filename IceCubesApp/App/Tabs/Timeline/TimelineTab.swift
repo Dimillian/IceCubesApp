@@ -56,6 +56,7 @@ struct TimelineTab: View {
     .onChange(of: currentAccount.account?.id) { _ in
       routeurPath.path = []
     }
+    .withSafariRouteur()
     .environmentObject(routeurPath)
   }
   

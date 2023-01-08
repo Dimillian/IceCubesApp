@@ -24,6 +24,7 @@ struct ExploreTab: View {
           }
         }
     }
+    .withSafariRouteur()
     .environmentObject(routeurPath)
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
       if popToRootTab == .explore {
