@@ -44,7 +44,7 @@ public struct StatusRowView: View {
           statusView
           if !viewModel.isCompact && !viewModel.isRemote, theme.statusActionsDisplay != .none {
             StatusActionsView(viewModel: viewModel)
-              .padding(.vertical, 8)
+              .padding(.top, 8)
               .tint(viewModel.isFocused ? theme.tintColor : .gray)
               .contentShape(Rectangle())
               .onTapGesture {
@@ -148,7 +148,12 @@ public struct StatusRowView: View {
             menuButton
           }
         }
-        makeStatusContentView(status: status)      }
+        makeStatusContentView(status: status)
+          .contentShape(Rectangle())
+          .onTapGesture {
+            viewModel.navigateToDetail(routeurPath: routeurPath)
+          }
+      }
     }
   }
   
@@ -167,11 +172,14 @@ public struct StatusRowView: View {
         .buttonStyle(.bordered)
       }
       if !viewModel.displaySpoiler {
-        Text(status.content.asSafeAttributedString)
-          .font(.body)
-          .environment(\.openURL, OpenURLAction { url in
-            routeurPath.handleStatus(status: status, url: url)
-          })
+        HStack {
+          Text(status.content.asSafeAttributedString)
+            .font(.body)
+            .environment(\.openURL, OpenURLAction { url in
+              routeurPath.handleStatus(status: status, url: url)
+            })
+          Spacer()
+        }
         
         if !reasons.contains(.placeholder) {
           if !viewModel.isCompact, !viewModel.isEmbedLoading, let embed = viewModel.embededStatus {
@@ -188,17 +196,20 @@ public struct StatusRowView: View {
         }
         
         if !status.mediaAttachments.isEmpty {
-          StatusMediaPreviewView(attachements: status.mediaAttachments, isNotifications: viewModel.isCompact)
-            .padding(.vertical, 4)
+          HStack {
+            StatusMediaPreviewView(attachements: status.mediaAttachments, isNotifications: viewModel.isCompact)
+              .padding(.vertical, 4)
+            Spacer()
+          }
         }
-        if let card = status.card, viewModel.embededStatus?.url != status.card?.url, !viewModel.isEmbedLoading {
+        if let card = status.card,
+           viewModel.embededStatus?.url != status.card?.url,
+           status.mediaAttachments.isEmpty,
+           !viewModel.isEmbedLoading,
+           theme.statusDisplayStyle == .large {
           StatusCardView(card: card)
         }
       }
-    }
-    .contentShape(Rectangle())
-    .onTapGesture {
-      viewModel.navigateToDetail(routeurPath: routeurPath)
     }
   }
   

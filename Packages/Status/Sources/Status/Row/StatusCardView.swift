@@ -16,7 +16,7 @@ public struct StatusCardView: View {
   public var body: some View {
     if let title = card.title {
       VStack(alignment: .leading) {
-        if let imageURL = card.image, theme.statusDisplayStyle == .large {
+        if let imageURL = card.image {
           LazyImage(url: imageURL) { state in
             if let image = state.image {
               image
@@ -50,6 +50,7 @@ public struct StatusCardView: View {
           Spacer()
         }.padding(8)
       }
+      .fixedSize(horizontal: false, vertical: true)
       .background(theme.secondaryBackgroundColor)
       .cornerRadius(16)
       .overlay(
