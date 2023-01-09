@@ -6,6 +6,7 @@ import DesignSystem
 import Env
 
 public struct NotificationsListView: View {
+  @Environment(\.scenePhase) private var scenePhase
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
@@ -57,6 +58,16 @@ public struct NotificationsListView: View {
     .onChange(of: watcher.latestEvent?.id, perform: { _ in
       if let latestEvent = watcher.latestEvent {
         viewModel.handleEvent(event: latestEvent)
+      }
+    })
+    .onChange(of: scenePhase, perform: { scenePhase in
+      switch scenePhase {
+      case .active:
+        Task {
+          await viewModel.fetchNotifications()
+        }
+      default:
+        break
       }
     })
   }
