@@ -41,6 +41,7 @@ struct AccountDetailHeaderView: View {
             if let image = state.image {
               image
                 .resizingMode(.aspectFill)
+                .overlay(.black.opacity(0.50))
             } else if state.isLoading {
               Color.gray
                 .frame(height: bannerHeight)
