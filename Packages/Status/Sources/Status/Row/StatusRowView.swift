@@ -197,7 +197,9 @@ public struct StatusRowView: View {
         
         if !status.mediaAttachments.isEmpty {
           HStack {
-            StatusMediaPreviewView(attachements: status.mediaAttachments, isNotifications: viewModel.isCompact)
+            StatusMediaPreviewView(attachements: status.mediaAttachments,
+                                   sensitive: status.sensitive,
+                                   isNotifications: viewModel.isCompact)
               .padding(.vertical, 4)
             Spacer()
           }

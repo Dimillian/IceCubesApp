@@ -21,7 +21,7 @@ public class UserPreferences: ObservableObject {
     }
   }
   
-  @Published private var serverPreferences: ServerPreferences?
+  @Published public var serverPreferences: ServerPreferences?
   
   public init() { }
   

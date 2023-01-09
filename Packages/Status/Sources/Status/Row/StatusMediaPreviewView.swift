@@ -6,16 +6,19 @@ import NukeUI
 import DesignSystem
 
 public struct StatusMediaPreviewView: View {
+  @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var quickLook: QuickLook
   @EnvironmentObject private var theme: Theme
   
   public let attachements: [MediaAttachement]
+  public let sensitive: Bool
   public let isNotifications: Bool
 
   @State private var isQuickLookLoading: Bool = false
   @State private var width: CGFloat = 0
   @State private var altTextDisplayed: String?
   @State private var isAltAlertDisplayed: Bool = false
+  @State private var isHidingMedia: Bool = false
   
   private var imageMaxHeight: CGFloat {
     if isNotifications {
@@ -89,12 +92,26 @@ public struct StatusMediaPreviewView: View {
         quickLookLoadingView
           .transition(.opacity)
       }
+      
+      if isHidingMedia {
+        sensitiveMediaOverlay
+          .transition(.opacity)
+      }
     }
     .alert("Image description",
            isPresented: $isAltAlertDisplayed) {
       Button("Ok", action: { })
     } message: {
       Text(altTextDisplayed ?? "")
+    }
+    .onAppear {
+      if sensitive && preferences.serverPreferences?.autoExpandmedia == .hideSensitive {
+        isHidingMedia = true
+      } else if preferences.serverPreferences?.autoExpandmedia == .hideAll {
+        isHidingMedia = true
+      } else {
+        isHidingMedia = false
+      }
     }
 
   }
@@ -241,5 +258,26 @@ public struct StatusMediaPreviewView: View {
       }
     }
     .background(.ultraThinMaterial)
+  }
+  
+  private var sensitiveMediaOverlay: some View {
+    Rectangle()
+      .background(.ultraThinMaterial)
+      .overlay {
+        if !isNotifications {
+          Button {
+            withAnimation {
+              isHidingMedia = false
+            }
+          } label: {
+            if sensitive {
+              Label("Show sensitive content", systemImage: "eye")
+            } else {
+              Label("Show content", systemImage: "eye")
+            }
+          }
+          .buttonStyle(.borderedProminent)
+        }
+      }
   }
 }

@@ -1,11 +1,11 @@
 import Foundation
 
 public struct ServerPreferences: Decodable {
-  public let postVisibility: Visibility
-  public let postIsSensitive: Bool
-  public let postLanguage: String
-  public let autoExpandmedia: AutoExpandMedia
-  public let autoExpandSpoilers: Bool
+  public let postVisibility: Visibility?
+  public let postIsSensitive: Bool?
+  public let postLanguage: String?
+  public let autoExpandmedia: AutoExpandMedia?
+  public let autoExpandSpoilers: Bool?
   
   public enum AutoExpandMedia: String, Decodable {
     case showAll = "show_all"
