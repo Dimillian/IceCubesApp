@@ -121,6 +121,7 @@ struct IceCubesApp: App {
   private func setNewClientsInEnv(client: Client) {
     currentAccount.setClient(client: client)
     currentInstance.setClient(client: client)
+    userPreferences.setClient(client: client)
     watcher.setClient(client: client)
   }
   
@@ -131,6 +132,9 @@ struct IceCubesApp: App {
     case .active:
       watcher.watch(streams: [.user, .direct])
       UIApplication.shared.applicationIconBadgeNumber = 0
+      Task {
+        await userPreferences.refreshServerPreferences()
+      }
     case .inactive:
       break
     default:
