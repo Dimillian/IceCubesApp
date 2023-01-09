@@ -69,6 +69,7 @@ public struct AccountDetailView: View {
             listsListView
           }
         }
+        .frame(maxWidth: .maxColumnWidth)
       }
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)

@@ -31,7 +31,6 @@ struct ConversationsListRow: View {
             }
             Text(conversation.lastStatus.createdAt.formatted)
               .font(.footnote)
-              .foregroundColor(.gray)
           }
           Text(conversation.lastStatus.content.asRawText)
             .foregroundColor(.gray)

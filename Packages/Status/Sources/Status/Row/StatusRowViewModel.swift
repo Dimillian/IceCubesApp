@@ -50,7 +50,7 @@ public class StatusRowViewModel: ObservableObject {
     self.favouritesCount = status.reblog?.favouritesCount ?? status.favouritesCount
     self.reblogsCount = status.reblog?.reblogsCount ?? status.reblogsCount
     self.repliesCount = status.reblog?.repliesCount ?? status.repliesCount
-    self.displaySpoiler = !status.spoilerText.isEmpty
+    self.displaySpoiler = !(status.reblog?.spoilerText ?? status.spoilerText).isEmpty
     
     self.isFiltered = filter != nil
   }

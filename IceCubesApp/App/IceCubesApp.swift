@@ -64,11 +64,14 @@ struct IceCubesApp: App {
   
   @ViewBuilder
   private var appView: some View {
+    /*
     if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
       splitView
     } else {
       tabBarView
     }
+    */
+    tabBarView
   }
   
   private func badgeFor(tab: Tab) -> Int {
@@ -169,6 +172,5 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   }
   
   func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-    print(error)
   }
 }

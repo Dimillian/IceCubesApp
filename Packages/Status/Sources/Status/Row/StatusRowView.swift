@@ -163,7 +163,7 @@ public struct StatusRowView: View {
   
   private func makeStatusContentView(status: AnyStatus) -> some View {
     Group {
-      if !viewModel.status.spoilerText.isEmpty {
+      if !status.spoilerText.isEmpty {
         Text(status.spoilerText)
           .font(.body)
         Button {
