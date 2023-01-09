@@ -7,6 +7,7 @@ import Shimmer
 
 public struct StatusRowView: View {
   @Environment(\.redactionReasons) private var reasons
+  @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
@@ -59,6 +60,9 @@ public struct StatusRowView: View {
           Task {
             await viewModel.loadEmbededStatus()
           }
+        }
+        if preferences.serverPreferences?.autoExpandSpoilers == true {
+          viewModel.displaySpoiler = false
         }
       }
       .contextMenu {
