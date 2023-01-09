@@ -22,6 +22,8 @@ public enum Statuses: Endpoint {
   case favouritedBy(id: String, maxId: String?)
   case pin(id: String)
   case unpin(id: String)
+  case bookmark(id: String)
+  case unbookmark(id: String)
   
   public func path() -> String {
     switch self {
@@ -49,6 +51,10 @@ public enum Statuses: Endpoint {
       return "statuses/\(id)/pin"
     case let .unpin(id):
       return "statuses/\(id)/unpin"
+    case let .bookmark(id):
+      return "statuses/\(id)/bookmark"
+    case let .unbookmark(id):
+      return "statuses/\(id)/unbookmark"
     }
   }
   

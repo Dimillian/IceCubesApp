@@ -3,6 +3,7 @@ import Foundation
 public enum Accounts: Endpoint {
   case accounts(id: String)
   case favourites(sinceId: String?)
+  case bookmarks(sinceId: String?)
   case followedTags
   case featuredTags(id: String)
   case verifyCredentials
@@ -27,6 +28,8 @@ public enum Accounts: Endpoint {
       return "accounts/\(id)"
     case .favourites:
       return "favourites"
+    case .bookmarks:
+      return "bookmarks"
     case .followedTags:
       return "followed_tags"
     case .featuredTags(let id):
@@ -85,6 +88,9 @@ public enum Accounts: Endpoint {
     case let .following(_, maxId):
       return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
     case let .favourites(sinceId):
+      guard let sinceId else { return nil }
+      return [.init(name: "max_id", value: sinceId)]
+    case let .bookmarks(sinceId):
       guard let sinceId else { return nil }
       return [.init(name: "max_id", value: sinceId)]
     default:

@@ -30,7 +30,16 @@ struct StatusRowContextMenu: View {
       } } label: {
         Label(viewModel.isReblogged ? "Unboost" : "Boost", systemImage: "arrow.left.arrow.right.circle")
       }
-      
+      Button { Task {
+        if viewModel.isBookmarked {
+          await viewModel.unbookmark()
+        } else {
+          await viewModel.bookmark()
+        }
+      } } label: {
+        Label(viewModel.isReblogged ? "Unbookmark" : "Bookmark",
+              systemImage: "bookmark")
+      }
     }
     
     if viewModel.status.visibility == .pub, !viewModel.isRemote {

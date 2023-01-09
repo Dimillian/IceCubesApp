@@ -40,6 +40,7 @@ public protocol AnyStatus {
   var favourited: Bool? { get }
   var reblogged: Bool? { get }
   var pinned: Bool? { get }
+  var bookmarked: Bool? { get }
   var emojis: [Emoji] { get }
   var url: URL? { get }
   var application: Application? { get }
@@ -71,6 +72,7 @@ public struct Status: AnyStatus, Codable, Identifiable {
   public let favourited: Bool?
   public let reblogged: Bool?
   public let pinned: Bool?
+  public let bookmarked: Bool?
   public let emojis: [Emoji]
   public let url: URL?
   public let application: Application?
@@ -96,6 +98,7 @@ public struct Status: AnyStatus, Codable, Identifiable {
           favourited: false,
           reblogged: false,
           pinned: false,
+          bookmarked: false,
           emojis: [],
           url: nil,
           application: nil,
@@ -130,6 +133,7 @@ public struct ReblogStatus: AnyStatus, Codable, Identifiable {
   public let favourited: Bool?
   public let reblogged: Bool?
   public let pinned: Bool?
+  public let bookmarked: Bool?
   public let emojis: [Emoji]
   public let url: URL?
   public var application: Application?

@@ -14,6 +14,7 @@ public class StatusRowViewModel: ObservableObject {
   @Published var isFavourited: Bool
   @Published var isReblogged: Bool
   @Published var isPinned: Bool
+  @Published var isBookmarked: Bool
   @Published var reblogsCount: Int
   @Published var repliesCount: Int
   @Published var embededStatus: Status?
@@ -39,10 +40,12 @@ public class StatusRowViewModel: ObservableObject {
       self.isFavourited = reblog.favourited == true
       self.isReblogged = reblog.reblogged == true
       self.isPinned = reblog.pinned == true
+      self.isBookmarked = reblog.bookmarked == true
     } else {
       self.isFavourited = status.favourited == true
       self.isReblogged = status.reblogged == true
       self.isPinned = status.pinned == true
+      self.isBookmarked = status.bookmarked == true
     }
     self.favouritesCount = status.reblog?.favouritesCount ?? status.favouritesCount
     self.reblogsCount = status.reblog?.reblogsCount ?? status.reblogsCount
@@ -166,6 +169,28 @@ public class StatusRowViewModel: ObservableObject {
     }
   }
   
+  func bookmark() async {
+    guard let client, client.isAuth else { return }
+    isBookmarked = true
+    do {
+      let status: Status = try await client.post(endpoint: Statuses.bookmark(id: status.reblog?.id ?? status.id))
+      updateFromStatus(status: status)
+    } catch {
+      isBookmarked = false
+    }
+  }
+  
+  func unbookmark() async {
+    guard let client, client.isAuth else { return }
+    isBookmarked = false
+    do {
+      let status: Status = try await client.post(endpoint: Statuses.unbookmark(id: status.reblog?.id ?? status.id))
+      updateFromStatus(status: status)
+    } catch {
+      isBookmarked = true
+    }
+  }
+  
   func delete() async {
     guard let client else { return }
     do {
@@ -178,10 +203,12 @@ public class StatusRowViewModel: ObservableObject {
       isFavourited = reblog.favourited == true
       isReblogged = reblog.reblogged == true
       isPinned = reblog.pinned == true
+      isBookmarked = reblog.bookmarked == true
     } else {
       isFavourited = status.favourited == true
       isReblogged = status.reblogged == true
       isPinned = status.pinned == true
+      isBookmarked = status.bookmarked == true
     }
     favouritesCount = status.reblog?.favouritesCount ?? status.favouritesCount
     reblogsCount = status.reblog?.reblogsCount ?? status.reblogsCount

@@ -15,24 +15,25 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   }
   
   enum Tab: Int {
-    case statuses, favourites, followedTags, postsAndReplies, media, lists
+    case statuses, favourites, bookmarks, followedTags, postsAndReplies, media, lists
     
     static var currentAccountTabs: [Tab] {
-      [.statuses, .favourites, .followedTags, .lists]
+      [.statuses, .favourites, .bookmarks, .followedTags, .lists]
     }
     
     static var accountTabs: [Tab] {
       [.statuses, .postsAndReplies, .media]
     }
     
-    var title: String {
+    var iconName: String {
       switch self {
-      case .statuses: return "Posts"
-      case .favourites: return "Favorites"
-      case .followedTags: return "Tags"
-      case .postsAndReplies: return "Posts & Replies"
-      case .media: return "Media"
-      case .lists: return "Lists"
+      case .statuses: return "bubble.right"
+      case .favourites: return "star"
+      case .bookmarks: return "bookmark"
+      case .followedTags: return "tag"
+      case .postsAndReplies: return "bubble.left.and.bubble.right"
+      case .media: return "photo.on.rectangle.angled"
+      case .lists: return "list.bullet"
       }
     }
   }
@@ -61,7 +62,9 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   @Published var relationship: Relationshionship?
   @Published var pinned: [Status] = []
   @Published var favourites: [Status] = []
+  @Published var bookmarks: [Status] = []
   private var favouritesNextPage: LinkHandler?
+  private var bookmarksNextPage: LinkHandler?
   @Published var featuredTags: [FeaturedTag] = []
   @Published var fields: [Account.Field] = []
   @Published var familliarFollowers: [Account] = []
@@ -145,6 +148,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
       }
       if isCurrentUser {
         (favourites, favouritesNextPage) = try await client.getWithLink(endpoint: Accounts.favourites(sinceId: nil))
+        (bookmarks, bookmarksNextPage) = try await client.getWithLink(endpoint: Accounts.bookmarks(sinceId: nil))
       }
       reloadTabState()
     } catch {
@@ -175,6 +179,12 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
         (newFavourites, favouritesNextPage) = try await client.getWithLink(endpoint: Accounts.favourites(sinceId: nextPageId))
         favourites.append(contentsOf: newFavourites)
         tabState = .statuses(statusesState: .display(statuses: favourites, nextPageState: .hasNextPage))
+      case .bookmarks:
+        guard let nextPageId = bookmarksNextPage?.maxId else { return }
+        let newBookmarks: [Status]
+        (newBookmarks, bookmarksNextPage) = try await client.getWithLink(endpoint: Accounts.bookmarks(sinceId: nextPageId))
+        bookmarks.append(contentsOf: newBookmarks)
+        tabState = .statuses(statusesState: .display(statuses: bookmarks, nextPageState: .hasNextPage))
       case .followedTags, .lists:
         break
       }
@@ -208,6 +218,9 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
     case .favourites:
       tabState = .statuses(statusesState: .display(statuses: favourites,
                                                    nextPageState: favouritesNextPage != nil ? .hasNextPage : .none))
+    case .bookmarks:
+      tabState = .statuses(statusesState: .display(statuses: bookmarks,
+                                                   nextPageState: bookmarksNextPage != nil ? .hasNextPage : .none))
     case .followedTags:
       tabState = .followedTags
     case .lists:

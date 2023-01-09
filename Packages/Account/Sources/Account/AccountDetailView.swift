@@ -46,7 +46,8 @@ public struct AccountDetailView: View {
             Picker("", selection: $viewModel.selectedTab) {
               ForEach(isCurrentUser ? AccountDetailViewModel.Tab.currentAccountTabs : AccountDetailViewModel.Tab.accountTabs,
                       id: \.self) { tab in
-                Text(tab.title).tag(tab)
+                Image(systemName: tab.iconName)
+                  .tag(tab)
               }
             }
             .pickerStyle(.segmented)

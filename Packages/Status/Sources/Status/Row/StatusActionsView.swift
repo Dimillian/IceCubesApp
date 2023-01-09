@@ -14,7 +14,7 @@ struct StatusActionsView: View {
   
   @MainActor
   enum Actions: CaseIterable {
-    case respond, boost, favourite, share
+    case respond, boost, favourite, bookmark, share
     
     func iconName(viewModel: StatusRowViewModel) -> String {
       switch self {
@@ -24,6 +24,8 @@ struct StatusActionsView: View {
         return viewModel.isReblogged ? "arrow.left.arrow.right.circle.fill" : "arrow.left.arrow.right.circle"
       case .favourite:
         return viewModel.isFavourited ? "star.fill" : "star"
+      case .bookmark:
+        return viewModel.isBookmarked ? "bookmark.fill" : "bookmark"
       case .share:
         return "square.and.arrow.up"
       }
@@ -40,7 +42,7 @@ struct StatusActionsView: View {
         return viewModel.favouritesCount
       case .boost:
         return viewModel.reblogsCount
-      case .share:
+      case .share, .bookmark:
         return nil
       }
     }
@@ -51,6 +53,8 @@ struct StatusActionsView: View {
         return nil
       case .favourite:
         return viewModel.isFavourited ? .yellow : nil
+      case .bookmark:
+        return viewModel.isBookmarked ? .pink : nil
       case .boost:
         return viewModel.isReblogged ? theme.tintColor : nil
       }
@@ -149,6 +153,12 @@ struct StatusActionsView: View {
           await viewModel.unFavourite()
         } else {
           await viewModel.favourite()
+        }
+      case .bookmark:
+        if viewModel.isBookmarked {
+          await viewModel.unbookmark()
+        } else {
+          await viewModel.bookmark()
         }
       case .boost:
         if viewModel.isReblogged {
