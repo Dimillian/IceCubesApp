@@ -10,6 +10,7 @@ public struct AccountDetailView: View {
   @Environment(\.redactionReasons) private var reasons
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var currentAccount: CurrentAccount
+  @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var routeurPath: RouterPath
@@ -334,7 +335,8 @@ public struct AccountDetailView: View {
           Section(account.acct) {
             if !viewModel.isCurrentUser {
               Button {
-                routeurPath.presentedSheet = .mentionStatusEditor(account: account, visibility: .pub)
+                routeurPath.presentedSheet = .mentionStatusEditor(account: account,
+                                                                  visibility: preferences.serverPreferences?.postVisibility ?? .pub)
               } label: {
                 Label("Mention", systemImage: "at")
               }

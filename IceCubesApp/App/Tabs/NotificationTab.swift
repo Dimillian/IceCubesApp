@@ -18,7 +18,8 @@ struct NotificationsTab: View {
         .withAppRouteur()
         .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
         .toolbar {
-          statusEditorToolbarItem(routeurPath: routeurPath, visibility: .pub)
+          statusEditorToolbarItem(routeurPath: routeurPath,
+                                  visibility: userPreferences.serverPreferences?.postVisibility ?? .pub)
           ToolbarItem(placement: .navigationBarLeading) {
             AppAccountsSelectorView(routeurPath: routeurPath)
           }

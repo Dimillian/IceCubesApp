@@ -127,7 +127,8 @@ struct TimelineTab: View {
       ToolbarItem(placement: .navigationBarLeading) {
         AppAccountsSelectorView(routeurPath: routeurPath)
       }
-      statusEditorToolbarItem(routeurPath: routeurPath, visibility: .pub)
+      statusEditorToolbarItem(routeurPath: routeurPath,
+                              visibility: preferences.serverPreferences?.postVisibility ?? .pub)
     } else {
       ToolbarItem(placement: .navigationBarTrailing) {
         addAccountButton
