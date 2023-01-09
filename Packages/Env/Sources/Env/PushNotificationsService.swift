@@ -48,12 +48,14 @@ public class PushNotificationsService: ObservableObject {
   
   private var keychain: KeychainSwift {
     let keychain = KeychainSwift()
-    keychain.accessGroup = Constants.keychainGroup
+    #if !DEBUG
+      keychain.accessGroup = Constants.keychainGroup
+    #endif
     return keychain
   }
   
   public func requestPushNotifications() {
-    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (_, _) in
+    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (_, _) in
       DispatchQueue.main.async {
         UIApplication.shared.registerForRemoteNotifications()
       }

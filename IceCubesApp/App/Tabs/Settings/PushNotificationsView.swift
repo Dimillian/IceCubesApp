@@ -17,7 +17,7 @@ struct PushNotificationsView: View {
     Form {
       Section {
         Toggle(isOn: $pushNotifications.isPushEnabled) {
-          Text("Push notification")
+          Text("Push notifications")
         }
       } footer: {
         Text("Receive push notifications on new activities")

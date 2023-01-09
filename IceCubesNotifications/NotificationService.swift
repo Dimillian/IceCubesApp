@@ -54,6 +54,11 @@ class NotificationService: UNNotificationServiceExtension {
       bestAttemptContent.userInfo["plaintext"] = plaintextData
       bestAttemptContent.sound = UNNotificationSound.init(named: UNNotificationSoundName(rawValue: "glass.wav"))
       
+      let preferences = UserPreferences()
+      preferences.pushNotificationsCount += 1
+      
+      bestAttemptContent.badge = .init(integerLiteral: preferences.pushNotificationsCount)
+      
       if let urlString = notification.icon,
          let url = URL(string: urlString) {
         let temporaryDirectoryURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("notification-attachments")

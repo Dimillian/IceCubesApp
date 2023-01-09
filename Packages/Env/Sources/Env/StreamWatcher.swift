@@ -19,7 +19,6 @@ public class StreamWatcher: ObservableObject {
     
   @Published public var events: [any StreamEvent] = []
   @Published public var unreadNotificationsCount: Int = 0
-  @Published public var unreadMessagesCount: Int = 0
   @Published public var latestEvent: (any StreamEvent)?
   
   public init() {
@@ -81,8 +80,6 @@ public class StreamWatcher: ObservableObject {
                 self.latestEvent = event
                 if let event = event as? StreamEventNotification, event.notification.status?.visibility != .direct {
                   self.unreadNotificationsCount += 1
-                } else if event is StreamEventConversation {
-                  self.unreadMessagesCount += 1
                 }
               }
             }

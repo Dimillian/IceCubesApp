@@ -8,6 +8,7 @@ struct NotificationsTab: View {
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var currentAccount: CurrentAccount
+  @EnvironmentObject private var userPreferences: UserPreferences
   @StateObject private var routeurPath = RouterPath()
   @Binding var popToRootTab: Tab
   
@@ -27,6 +28,7 @@ struct NotificationsTab: View {
     .onAppear {
       routeurPath.client = client
       watcher.unreadNotificationsCount = 0
+      userPreferences.pushNotificationsCount = 0
     }
     .withSafariRouteur()
     .environmentObject(routeurPath)

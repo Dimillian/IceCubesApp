@@ -1,4 +1,5 @@
 import SwiftUI
+import AVFoundation
 import Timeline
 import Network
 import KeychainSwift
@@ -10,7 +11,7 @@ import RevenueCat
 @main
 struct IceCubesApp: App {
   public static let defaultServer = "mastodon.social"
-    
+  
   @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
   
   @Environment(\.scenePhase) private var scenePhase
@@ -72,9 +73,7 @@ struct IceCubesApp: App {
   
   private func badgeFor(tab: Tab) -> Int {
     if tab == .notifications && selectedTab != tab {
-      return watcher.unreadNotificationsCount
-    } else if tab == .messages && selectedTab != tab {
-      return watcher.unreadMessagesCount
+      return watcher.unreadNotificationsCount + userPreferences.pushNotificationsCount
     }
     return 0
   }
@@ -131,6 +130,7 @@ struct IceCubesApp: App {
       watcher.stopWatching()
     case .active:
       watcher.watch(streams: [.user, .direct])
+      UIApplication.shared.applicationIconBadgeNumber = 0
     case .inactive:
       break
     default:
@@ -151,6 +151,7 @@ struct IceCubesApp: App {
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    try? AVAudioSession.sharedInstance().setCategory(.ambient, options: .mixWithOthers)
     return true
   }
   
