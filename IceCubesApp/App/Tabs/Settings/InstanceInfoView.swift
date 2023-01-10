@@ -14,7 +14,7 @@ struct InstanceInfoView: View {
     }
     .navigationTitle("Instance Info")
     .scrollContentBackground(.hidden)
-    .background(theme.secondaryBackgroundColor)
+    .background(theme.primaryBackgroundColor)
   }
 }
 
@@ -33,13 +33,13 @@ public struct InstanceInfoSection: View {
       LabeledContent("Posts", value: "\(instance.stats.statusCount)")
       LabeledContent("Domains", value: "\(instance.stats.domainCount)")
     }
-    .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.secondaryBackgroundColor)
     
     Section("Instance rules") {
       ForEach(instance.rules) { rule in
         Text(rule.text)
       }
     }
-    .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.secondaryBackgroundColor)
   }
 }

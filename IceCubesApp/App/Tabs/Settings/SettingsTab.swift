@@ -28,10 +28,10 @@ struct SettingsTabs: View {
         generalSection
       }
       .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
+      .background(theme.primaryBackgroundColor)
       .navigationTitle(Text("Settings"))
       .navigationBarTitleDisplayMode(.inline)
-      .toolbarBackground(theme.primaryBackgroundColor, for: .navigationBar)
+      .toolbarBackground(theme.secondaryBackgroundColor, for: .navigationBar)
       .withAppRouteur()
       .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
     }
@@ -70,7 +70,7 @@ struct SettingsTabs: View {
       }
       addAccountButton
     }
-    .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.secondaryBackgroundColor)
   }
   
   @ViewBuilder
@@ -103,7 +103,7 @@ struct SettingsTabs: View {
         Label("Browser", systemImage: "network")
       }
     }
-    .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.secondaryBackgroundColor)
   }
   
   private var appSection: some View {
@@ -130,7 +130,7 @@ struct SettingsTabs: View {
         Label("Support the app", systemImage: "wand.and.stars")
       }
     }
-    .listRowBackground(theme.primaryBackgroundColor)
+    .listRowBackground(theme.secondaryBackgroundColor)
   }
   
   private var addAccountButton: some View {
@@ -159,10 +159,10 @@ struct SettingsTabs: View {
       } label: {
         Label("Add a local timeline", systemImage: "badge.plus.radiowaves.right")
       }
-      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.secondaryBackgroundColor)
     }
     .navigationTitle("Remote Local Timelines")
     .scrollContentBackground(.hidden)
-    .background(theme.secondaryBackgroundColor)
+    .background(theme.primaryBackgroundColor)
   }
 }

@@ -64,7 +64,7 @@ struct SupportAppView: View {
           Text("Hi there! My name is Thomas and I absolutely love creating open source apps. Ice Cubes is definitely one of my proudest projects to date - and let's be real, it's also the one that requires the most maintenance due to the ever-changing world of Mastodon and social media. If you're having a blast using Ice Cubes, consider tossing a little tip my way. It'll make my day (and help keep the app running smoothly for you). 🚀")
         }
       }
-      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.secondaryBackgroundColor)
       
       Section {
         if loadingProducts {
@@ -116,11 +116,11 @@ struct SupportAppView: View {
           }
         }
       }
-      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.secondaryBackgroundColor)
     }
     .navigationTitle("Support Ice Cubes")
     .scrollContentBackground(.hidden)
-    .background(theme.secondaryBackgroundColor)
+    .background(theme.primaryBackgroundColor)
     .alert("Thanks!", isPresented: $purchaseSuccessDisplayed, actions: {
       Button { purchaseSuccessDisplayed = false } label: { Text("Ok") }
     }, message: {

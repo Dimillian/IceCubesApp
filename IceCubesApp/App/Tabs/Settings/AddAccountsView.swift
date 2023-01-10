@@ -28,7 +28,7 @@ struct AddAccountView: View {
     NavigationStack {
       Form {
         TextField("Instance URL", text: $instanceName)
-          .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(theme.secondaryBackgroundColor)
           .keyboardType(.URL)
           .textContentType(.URL)
           .textInputAutocapitalization(.never)
@@ -50,7 +50,7 @@ struct AddAccountView: View {
               Text("Sign in")
             }
           }
-          .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(theme.secondaryBackgroundColor)
           InstanceInfoSection(instance: instance)
         } else {
           instancesListView
@@ -60,7 +60,7 @@ struct AddAccountView: View {
       .navigationTitle("Add account")
       .navigationBarTitleDisplayMode(.inline)
       .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
+      .background(theme.primaryBackgroundColor)
       .scrollDismissesKeyboard(.immediately)
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
@@ -99,7 +99,7 @@ struct AddAccountView: View {
     Section("Suggestions") {
       if instances.isEmpty {
         ProgressView()
-          .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(theme.secondaryBackgroundColor)
       } else {
         ForEach(instanceName.isEmpty ? instances : instances.filter{ $0.name.contains(instanceName.lowercased()) }) { instance in
           Button {
@@ -117,7 +117,7 @@ struct AddAccountView: View {
                 .foregroundColor(.gray)
             }
           }
-          .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(theme.secondaryBackgroundColor)
         }
       }
     }

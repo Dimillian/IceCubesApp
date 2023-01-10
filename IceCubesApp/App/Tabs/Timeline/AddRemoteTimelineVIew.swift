@@ -22,7 +22,7 @@ struct AddRemoteTimelineView: View {
     NavigationStack {
       Form {
         TextField("Instance URL", text: $instanceName)
-          .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(theme.secondaryBackgroundColor)
           .keyboardType(.URL)
           .textContentType(.URL)
           .textInputAutocapitalization(.never)
@@ -31,7 +31,7 @@ struct AddRemoteTimelineView: View {
         if let instance {
           Label("\(instance.title) is a valid instance", systemImage: "checkmark.seal.fill")
             .foregroundColor(.green)
-            .listRowBackground(theme.primaryBackgroundColor)
+            .listRowBackground(theme.secondaryBackgroundColor)
         }
         Button {
           guard instance != nil else { return }
@@ -40,7 +40,7 @@ struct AddRemoteTimelineView: View {
         } label: {
           Text("Add")
         }
-        .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.secondaryBackgroundColor)
         
         instancesListView
       }
@@ -48,7 +48,7 @@ struct AddRemoteTimelineView: View {
       .navigationTitle("Add remote local timeline")
       .navigationBarTitleDisplayMode(.inline)
       .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
+      .background(theme.primaryBackgroundColor)
       .scrollDismissesKeyboard(.immediately)
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
@@ -75,7 +75,7 @@ struct AddRemoteTimelineView: View {
     Section("Suggestions") {
       if instances.isEmpty {
         ProgressView()
-          .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(theme.secondaryBackgroundColor)
       } else {
         ForEach(instanceName.isEmpty ? instances : instances.filter{ $0.name.contains(instanceName.lowercased()) }) { instance in
           Button {
@@ -93,7 +93,7 @@ struct AddRemoteTimelineView: View {
                 .foregroundColor(.gray)
             }
           }
-          .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(theme.secondaryBackgroundColor)
         }
       }
     }

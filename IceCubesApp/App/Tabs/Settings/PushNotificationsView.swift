@@ -22,7 +22,7 @@ struct PushNotificationsView: View {
       } footer: {
         Text("Receive push notifications on new activities")
       }
-      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.secondaryBackgroundColor)
       
       if pushNotifications.isPushEnabled {
         Section {
@@ -45,13 +45,13 @@ struct PushNotificationsView: View {
             Label("New Posts", systemImage: "bubble.right")
           }
         }
-        .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.secondaryBackgroundColor)
         .transition(.move(edge: .bottom))
       }
     }
     .navigationTitle("Push Notifications")
     .scrollContentBackground(.hidden)
-    .background(theme.secondaryBackgroundColor)
+    .background(theme.primaryBackgroundColor)
     .onAppear {
       Task {
         await pushNotifications.fetchSubscriptions(accounts: appAccountsManager.pushAccounts)

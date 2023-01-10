@@ -16,7 +16,7 @@ struct DisplaySettingsView: View {
         ColorPicker("Background color", selection: $theme.primaryBackgroundColor)
         ColorPicker("Secondary Background color", selection: $theme.secondaryBackgroundColor)
       }
-      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.secondaryBackgroundColor)
       
       Section("Display") {
         Picker("Avatar position", selection: $theme.avatarPosition) {
@@ -41,7 +41,7 @@ struct DisplaySettingsView: View {
           }
         }
       }
-      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.secondaryBackgroundColor)
       
       Section {
         Button {
@@ -53,11 +53,11 @@ struct DisplaySettingsView: View {
           Text("Restore default")
         }
       }
-      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.secondaryBackgroundColor)
     }
     .navigationTitle("Display Settings")
     .scrollContentBackground(.hidden)
-    .background(theme.secondaryBackgroundColor)
+    .background(theme.primaryBackgroundColor)
   }
   
   private var themeSelectorButton: some View {
