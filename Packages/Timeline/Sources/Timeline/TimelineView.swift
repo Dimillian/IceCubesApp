@@ -48,7 +48,7 @@ public struct TimelineView: View {
               StatusesListView(fetcher: viewModel)
             }
           }
-          .padding(.top, .layoutPadding)
+          .padding(.top, .layoutPadding + (!viewModel.pendingStatuses.isEmpty ? 28 : 0))
         }
         .background(theme.primaryBackgroundColor)
         if viewModel.pendingStatusesEnabled {
