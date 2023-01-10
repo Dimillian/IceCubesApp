@@ -329,6 +329,11 @@ public class StatusEditorViewModel: ObservableObject {
    
   private func uploadMedia(data: Data) async throws -> MediaAttachement? {
     guard let client else { return nil }
-    return try await client.mediaUpload(mimeType: "image/jpeg", data: data)
+    return try await client.mediaUpload(endpoint: Media.medias,
+                                        version: .v2,
+                                        method: "POST",
+                                        mimeType: "image/jpeg",
+                                        filename: "file",
+                                        data: data)
   }
 }

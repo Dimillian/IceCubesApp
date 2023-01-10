@@ -65,6 +65,7 @@ public struct StatusRowView: View {
           viewModel.displaySpoiler = false
         }
       }
+      .background(theme.primaryBackgroundColor)
       .contextMenu {
         StatusRowContextMenu(viewModel: viewModel)
       }
@@ -200,12 +201,19 @@ public struct StatusRowView: View {
         }
         
         if !status.mediaAttachments.isEmpty {
-          HStack {
+          if theme.statusDisplayStyle == .compact {
+            HStack {
+              StatusMediaPreviewView(attachements: status.mediaAttachments,
+                                     sensitive: status.sensitive,
+                                     isNotifications: viewModel.isCompact)
+              Spacer()
+            }
+            .padding(.vertical, 4)
+          } else {
             StatusMediaPreviewView(attachements: status.mediaAttachments,
                                    sensitive: status.sensitive,
                                    isNotifications: viewModel.isCompact)
-              .padding(.vertical, 4)
-            Spacer()
+            .padding(.vertical, 4)
           }
         }
         if let card = status.card,

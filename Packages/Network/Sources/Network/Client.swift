@@ -147,15 +147,20 @@ public class Client: ObservableObject, Equatable {
     let request = makeURLRequest(url: url, httpMethod: "GET")
     return urlSession.webSocketTask(with: request)
   }
-  
-  public func mediaUpload(mimeType: String, data: Data) async throws -> MediaAttachement {
-    let url = makeURL(endpoint: Media.medias, forceVersion: .v2)
-    var request = makeURLRequest(url: url, httpMethod: "POST")
+    
+  public func mediaUpload<Entity: Decodable>(endpoint: Endpoint,
+                                             version: Version,
+                                             method: String,
+                                             mimeType: String,
+                                             filename: String,
+                                             data: Data) async throws -> Entity {
+    let url = makeURL(endpoint: endpoint, forceVersion: version)
+    var request = makeURLRequest(url: url, httpMethod: method)
     let boundary = UUID().uuidString
     request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
     let httpBody = NSMutableData()
     httpBody.append("--\(boundary)\r\n".data(using: .utf8)!)
-    httpBody.append("Content-Disposition: form-data; name=\"file\"; filename=\"file.jpg\"\r\n".data(using: .utf8)!)
+    httpBody.append("Content-Disposition: form-data; name=\"\(filename)\"; filename=\"file.jpg\"\r\n".data(using: .utf8)!)
     httpBody.append("Content-Type: \(mimeType)\r\n".data(using: .utf8)!)
     httpBody.append("\r\n".data(using: .utf8)!)
     httpBody.append(data)
@@ -163,7 +168,7 @@ public class Client: ObservableObject, Equatable {
     request.httpBody = httpBody as Data
     let (data, httpResponse) = try await urlSession.data(for: request)
     logResponseOnError(httpResponse: httpResponse, data: data)
-    return try decoder.decode(MediaAttachement.self, from: data)
+    return try decoder.decode(Entity.self, from: data)
   }
   
   private func logResponseOnError(httpResponse: URLResponse, data: Data) {
