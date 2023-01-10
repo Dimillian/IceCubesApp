@@ -46,12 +46,10 @@ class ExploreViewModel: ObservableObject {
         suggestedToken = [.user, .statuses]
       } else if searchQuery.starts(with: "#") {
         suggestedToken = [.tag]
-      } else if !tokens.isEmpty {
-        suggestedToken = []
-        search()
       } else {
-        search()
+        suggestedToken = []
       }
+      search()
     }
   }
   @Published var results: [String: SearchResults] = [:]
@@ -67,15 +65,11 @@ class ExploreViewModel: ObservableObject {
   func fetchTrending() async {
     guard let client else { return }
     do {
-      async let suggestedAccounts: [Account] = client.get(endpoint: Accounts.suggestions)
-      async let trendingTags: [Tag] = client.get(endpoint: Trends.tags)
-      async let trendingStatuses: [Status] = client.get(endpoint: Trends.statuses(offset: nil))
-      async let trendingLinks: [Card] = client.get(endpoint: Trends.links)
-      
-      self.suggestedAccounts = try await suggestedAccounts
-      self.trendingTags = try await trendingTags
-      self.trendingStatuses = try await trendingStatuses
-      self.trendingLinks = try await trendingLinks
+      let data = try await fetchTrendingsData(client: client)
+      self.suggestedAccounts = data.suggestedAccounts
+      self.trendingTags = data.trendingTags
+      self.trendingStatuses = data.trendingStatuses
+      self.trendingLinks = data.trendingLinks
       
       self.suggestedAccountsRelationShips = try await client.get(endpoint: Accounts.relationships(ids: self.suggestedAccounts.map{ $0.id }))
       
@@ -83,6 +77,24 @@ class ExploreViewModel: ObservableObject {
     } catch {
       isLoaded = true
     }
+  }
+  
+  private struct TrendingData {
+    let suggestedAccounts: [Account]
+    let trendingTags: [Tag]
+    let trendingStatuses: [Status]
+    let trendingLinks: [Card]
+  }
+  
+  private func fetchTrendingsData(client: Client) async throws -> TrendingData {
+    async let suggestedAccounts: [Account] = client.get(endpoint: Accounts.suggestions)
+    async let trendingTags: [Tag] = client.get(endpoint: Trends.tags)
+    async let trendingStatuses: [Status] = client.get(endpoint: Trends.statuses(offset: nil))
+    async let trendingLinks: [Card] = client.get(endpoint: Trends.links)
+    return try await .init(suggestedAccounts: suggestedAccounts,
+                           trendingTags: trendingTags,
+                           trendingStatuses: trendingStatuses,
+                           trendingLinks: trendingLinks)
   }
   
   func search() {
