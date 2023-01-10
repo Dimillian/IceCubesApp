@@ -65,7 +65,6 @@ public struct StatusRowView: View {
           viewModel.displaySpoiler = false
         }
       }
-      .background(theme.primaryBackgroundColor)
       .contextMenu {
         StatusRowContextMenu(viewModel: viewModel)
       }

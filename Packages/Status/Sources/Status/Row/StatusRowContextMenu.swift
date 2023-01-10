@@ -40,6 +40,11 @@ struct StatusRowContextMenu: View {
         Label(viewModel.isReblogged ? "Unbookmark" : "Bookmark",
               systemImage: "bookmark")
       }
+      Button {
+        routeurPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
+      } label: {
+        Label("Reply", systemImage: "arrowshape.turn.up.left")
+      }
     }
     
     if viewModel.status.visibility == .pub, !viewModel.isRemote {

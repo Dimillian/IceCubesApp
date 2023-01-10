@@ -40,12 +40,11 @@ public struct StatusCardView: View {
                 .font(.body)
                 .foregroundColor(.gray)
                 .lineLimit(3)
-            } else {
-              Text(card.url.absoluteString)
-                .font(.body)
-                .foregroundColor(.gray)
-                .lineLimit(3)
             }
+            Text(card.url.host() ?? card.url.absoluteString)
+              .font(.footnote)
+              .foregroundColor(theme.tintColor)
+              .lineLimit(1)
           }
           Spacer()
         }.padding(8)

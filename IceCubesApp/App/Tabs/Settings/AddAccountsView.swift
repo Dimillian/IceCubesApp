@@ -8,6 +8,7 @@ import Shimmer
 
 struct AddAccountView: View {
   @Environment(\.dismiss) private var dismiss
+  @Environment(\.scenePhase) private var scenePhase
   
   @EnvironmentObject private var appAccountsManager: AppAccountsManager
   @EnvironmentObject private var currentAccount: CurrentAccount
@@ -38,19 +39,7 @@ struct AddAccountView: View {
           Text(instanceFetchError)
         }
         if let instance {
-          Button {
-            isSigninIn = true
-            Task {
-              await signIn()
-            }
-          } label: {
-            if isSigninIn {
-              ProgressView()
-            } else {
-              Text("Sign in")
-            }
-          }
-          .listRowBackground(theme.primaryBackgroundColor)
+          signInSection
           InstanceInfoSection(instance: instance)
         } else {
           instancesListView
@@ -73,12 +62,14 @@ struct AddAccountView: View {
         Task {
           self.instances = await client.fetchInstances()
         }
+        isSigninIn = false
       }
       .onChange(of: instanceName) { newValue in
         let client = Client(server: newValue)
         Task {
           do {
             self.instance = try await client.get(endpoint: Instances.instance)
+            self.instanceFetchError = nil
           } catch _ as DecodingError {
             self.instance = nil
             self.instanceFetchError = "This instance is not currently supported."
@@ -87,6 +78,14 @@ struct AddAccountView: View {
           }
         }
       }
+      .onChange(of: scenePhase, perform: { scenePhase in
+        switch scenePhase {
+        case .active:
+          isSigninIn = false
+        default:
+          break
+        }
+      })
       .onOpenURL(perform: { url in
         Task {
           await continueSignIn(url: url)
@@ -95,11 +94,35 @@ struct AddAccountView: View {
     }
   }
   
+  private var signInSection: some View {
+    Section {
+      Button {
+        isSigninIn = true
+        Task {
+          await signIn()
+        }
+      } label: {
+        HStack {
+          Spacer()
+          if isSigninIn {
+            ProgressView()
+              .tint(theme.labelColor)
+          } else {
+            Text("Sign in")
+              .font(.headline)
+          }
+          Spacer()
+        }
+      }
+      .buttonStyle(.borderedProminent)
+    }
+    .listRowBackground(theme.tintColor)
+  }
+  
   private var instancesListView: some View {
     Section("Suggestions") {
       if instances.isEmpty {
-        ProgressView()
-          .listRowBackground(theme.primaryBackgroundColor)
+        placeholderRow
       } else {
         ForEach(instanceName.isEmpty ? instances : instances.filter{ $0.name.contains(instanceName.lowercased()) }) { instance in
           Button {
@@ -121,6 +144,23 @@ struct AddAccountView: View {
         }
       }
     }
+  }
+  
+  private var placeholderRow: some View {
+    VStack(alignment: .leading, spacing: 4) {
+      Text("Loading...")
+        .font(.headline)
+        .foregroundColor(.primary)
+      Text("Loading, loading, loading ....")
+        .font(.body)
+        .foregroundColor(.gray)
+      Text("Loading ...")
+        .font(.footnote)
+        .foregroundColor(.gray)
+    }
+    .redacted(reason: .placeholder)
+    .shimmering()
+    .listRowBackground(theme.primaryBackgroundColor)
   }
   
   private func signIn() async {
