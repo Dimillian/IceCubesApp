@@ -1,4 +1,5 @@
 import Foundation
+import Models
 
 public enum Accounts: Endpoint {
   case accounts(id: String)
@@ -7,6 +8,13 @@ public enum Accounts: Endpoint {
   case followedTags
   case featuredTags(id: String)
   case verifyCredentials
+  case updateCredentials(displayName: String,
+                         note: String,
+                         privacy: Visibility,
+                         isSensitive: Bool,
+                         isBot: Bool,
+                         isLocked: Bool,
+                         isDiscoverable: Bool)
   case statuses(id: String,
                 sinceId: String?,
                 tag: String?,
@@ -37,6 +45,8 @@ public enum Accounts: Endpoint {
       return "accounts/\(id)/featured_tags"
     case .verifyCredentials:
       return "accounts/verify_credentials"
+    case .updateCredentials:
+      return "accounts/update_credentials"
     case .statuses(let id, _, _, _, _, _):
       return "accounts/\(id)/statuses"
     case .relationships:
@@ -96,6 +106,17 @@ public enum Accounts: Endpoint {
     case let .bookmarks(sinceId):
       guard let sinceId else { return nil }
       return [.init(name: "max_id", value: sinceId)]
+    case let .updateCredentials(displayName, note, privacy,
+                                isSensitive, isBot, isLocked, isDiscoverable):
+      var params: [URLQueryItem] = []
+      params.append(.init(name: "display_name", value: displayName))
+      params.append(.init(name: "note", value: note))
+      params.append(.init(name: "source[privacy]", value: privacy.rawValue))
+      params.append(.init(name: "source[sensitive]", value: isSensitive ? "true" : "false"))
+      params.append(.init(name: "bot", value: isBot ? "true" : "false"))
+      params.append(.init(name: "locked", value: isLocked ? "true" : "false"))
+      params.append(.init(name: "discoverable", value: isDiscoverable ? "true" : "false"))
+      return params
     default:
       return nil
     }

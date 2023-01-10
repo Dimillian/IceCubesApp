@@ -21,6 +21,7 @@ public struct AccountDetailView: View {
   @State private var isCurrentUser: Bool = false
   @State private var isCreateListAlertPresented: Bool = false
   @State private var createListTitle: String = ""
+  @State private var isEditingAccount: Bool = false
   
   /// When coming from a URL like a mention tap in a status.
   public init(accountId: String) {
@@ -98,6 +99,17 @@ public struct AccountDetailView: View {
         viewModel.handleEvent(event: latestEvent, currentAccount: currentAccount)
       }
     }
+    .onChange(of: isEditingAccount, perform: { isEditing in
+      if !isEditing {
+        Task {
+          await viewModel.fetchAccount()
+          await preferences.refreshServerPreferences()
+        }
+      }
+    })
+    .sheet(isPresented: $isEditingAccount, content: {
+      EditAccountView()
+    })
     .edgesIgnoringSafeArea(.top)
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
@@ -356,8 +368,19 @@ public struct AccountDetailView: View {
                 Label("Add/Remove from lists", systemImage: "list.bullet")
               }
             }
+            
             if let url = account.url {
               ShareLink(item: url)
+            }
+            
+            Divider()
+            
+            if isCurrentUser {
+              Button {
+                isEditingAccount = true
+              } label: {
+                Label("Edit Info", systemImage: "pencil")
+              }
             }
           }
         }

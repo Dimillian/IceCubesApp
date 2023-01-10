@@ -15,6 +15,15 @@ public struct Account: Codable, Identifiable, Equatable, Hashable {
     public let value: HTMLString
     public let verifiedAt: String?
   }
+  
+  public struct Source: Codable, Equatable {
+    public let privacy: Visibility
+    public let sensitive: Bool
+    public let language: String?
+    public let note: String
+    public let fields: [Field]
+  }
+  
   public let id: String
   public let username: String
   public let displayName: String
@@ -31,6 +40,9 @@ public struct Account: Codable, Identifiable, Equatable, Hashable {
   public let locked: Bool
   public let emojis: [Emoji]
   public let url: URL?
+  public let source: Source?
+  public let bot: Bool
+  public let discoverable: Bool?
   
   public static func placeholder() -> Account {
     .init(id: UUID().uuidString,
@@ -48,7 +60,10 @@ public struct Account: Codable, Identifiable, Equatable, Hashable {
           fields: [],
           locked: false,
           emojis: [],
-          url: nil)
+          url: nil,
+          source: nil,
+          bot: false,
+          discoverable: true)
   }
   
   public static func placeholders() -> [Account] {

@@ -1,6 +1,10 @@
 import Models
 
 extension Visibility {
+  public static var supportDefault: [Visibility] {
+    [.pub, .priv, .unlisted]
+  }
+  
   public var iconName: String {
     switch self {
     case .pub:

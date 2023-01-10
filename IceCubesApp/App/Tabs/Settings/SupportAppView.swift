@@ -2,6 +2,7 @@ import SwiftUI
 import Env
 import DesignSystem
 import RevenueCat
+import Shimmer
 
 struct SupportAppView: View {
   enum Tips: String, CaseIterable {
@@ -67,7 +68,18 @@ struct SupportAppView: View {
       
       Section {
         if loadingProducts {
-          ProgressView()
+          HStack {
+            VStack(alignment: .leading) {
+              Text("Loading ...")
+                .font(.subheadline)
+              Text("Loading subtitle...")
+                .font(.footnote)
+                .foregroundColor(.gray)
+            }
+            .padding(.vertical, 8)
+          }
+          .redacted(reason: .placeholder)
+          .shimmering()
         } else {
           ForEach(products, id: \.productIdentifier) { product in
             let tip = Tips(productId: product.productIdentifier)
@@ -123,7 +135,9 @@ struct SupportAppView: View {
       loadingProducts = true
       Purchases.shared.getProducts(Tips.allCases.map{ $0.productId }) { products in
         self.products = products.sorted(by: { $0.price < $1.price })
-        loadingProducts = false
+        withAnimation {
+          loadingProducts = false
+        }
       }
     }
   }

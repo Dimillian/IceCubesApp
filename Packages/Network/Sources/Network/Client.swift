@@ -93,6 +93,13 @@ public class Client: ObservableObject, Equatable {
     return httpResponse as? HTTPURLResponse
   }
   
+  public func patch(endpoint: Endpoint) async throws -> HTTPURLResponse? {
+    let url = makeURL(endpoint: endpoint)
+    let request = makeURLRequest(url: url, httpMethod: "PATCH")
+    let (_, httpResponse) = try await urlSession.data(for: request)
+    return httpResponse as? HTTPURLResponse
+  }
+  
   public func put<Entity: Decodable>(endpoint: Endpoint) async throws -> Entity {
     try await makeEntityRequest(endpoint: endpoint, method: "PUT")
   }
