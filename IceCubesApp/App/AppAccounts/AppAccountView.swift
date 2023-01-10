@@ -1,7 +1,9 @@
 import SwiftUI
 import DesignSystem
+import Env
 
 struct AppAccountView: View {
+  @EnvironmentObject private var routeurPath: RouterPath
   @EnvironmentObject var appAccounts: AppAccountsManager
   @StateObject var viewModel: AppAccountViewModel
   
@@ -25,10 +27,21 @@ struct AppAccountView: View {
             .foregroundColor(.gray)
         }
       }
+      Spacer()
+      Image(systemName: "chevron.right")
+        .foregroundColor(.gray)
     }
     .onAppear {
       Task {
         await viewModel.fetchAccount()
+      }
+    }
+    .onTapGesture {
+      if appAccounts.currentAccount.id == viewModel.appAccount.id,
+          let account = viewModel.account {
+        routeurPath.navigate(to: .accountDetailWithAccount(account: account))
+      } else {
+        appAccounts.currentAccount = viewModel.appAccount
       }
     }
   }

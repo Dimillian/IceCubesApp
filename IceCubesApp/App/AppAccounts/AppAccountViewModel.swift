@@ -9,6 +9,10 @@ public class AppAccountViewModel: ObservableObject {
   
   @Published var account: Account?
   
+  var acct: String {
+    "@\(account?.acct ?? "...")@\(appAccount.server)"
+  }
+  
   init(appAccount: AppAccount) {
     self.appAccount = appAccount
     self.client = .init(server: appAccount.server, oauthToken: appAccount.oauthToken)

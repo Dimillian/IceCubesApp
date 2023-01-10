@@ -11,9 +11,31 @@ struct AppAccountsSelectorView: View {
   @State private var accountsViewModel: [AppAccountViewModel] = []
   
   var body: some View {
-    Button {
-      if let account = currentAccount.account {
-        routeurPath.navigate(to: .accountDetailWithAccount(account: account))
+    Menu {
+      ForEach(accountsViewModel, id: \.appAccount.id) { viewModel in
+        Section(viewModel.acct) {
+          Button {
+            if let account = currentAccount.account,
+                viewModel.account?.id == account.id {
+              routeurPath.navigate(to: .accountDetailWithAccount(account: account))
+            } else {
+              appAccounts.currentAccount = viewModel.appAccount
+            }
+          } label: {
+            HStack {
+              if viewModel.account?.id == currentAccount.account?.id {
+                Image(systemName: "checkmark.circle.fill")
+              }
+              Text("\(viewModel.account?.displayName ?? "")")
+            }
+          }
+        }
+      }
+      Divider()
+      Button {
+        routeurPath.presentedSheet = .addAccount
+      } label: {
+        Label("Add Account", systemImage: "person.badge.plus")
       }
     } label: {
       if let avatar = currentAccount.account?.avatar {
@@ -25,25 +47,6 @@ struct AppAccountsSelectorView: View {
     .onAppear {
       refreshAccounts()
     }
-    .contextMenu {
-      ForEach(accountsViewModel, id: \.appAccount.id) { viewModel in
-        Button {
-          appAccounts.currentAccount = viewModel.appAccount
-        } label: {
-          HStack {
-            if viewModel.account?.id == currentAccount.account?.id {
-              Image(systemName: "checkmark.circle.fill")
-            }
-            Text("\(viewModel.account?.displayName ?? "")")
-          }
-        }
-      }
-      Button {
-        routeurPath.presentedSheet = .addAccount
-      } label: {
-        Label("Add Account", systemImage: "person.badge.plus")
-      }
-    }
     .onChange(of: currentAccount.account?.id) { _ in
       refreshAccounts()
     }
@@ -54,9 +57,9 @@ struct AppAccountsSelectorView: View {
       accountsViewModel = []
       for account in appAccounts.availableAccounts {
         let viewModel: AppAccountViewModel = .init(appAccount: account)
-        accountsViewModel.append(viewModel)
         Task {
           await viewModel.fetchAccount()
+          accountsViewModel.append(viewModel)
         }
       }
     }

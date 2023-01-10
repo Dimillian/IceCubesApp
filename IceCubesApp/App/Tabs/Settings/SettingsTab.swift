@@ -18,6 +18,8 @@ struct SettingsTabs: View {
   
   @State private var addAccountSheetPresented = false
   
+  @Binding var popToRootTab: Tab
+  
   var body: some View {
     NavigationStack(path: $routeurPath.path) {
       Form {
@@ -43,19 +45,17 @@ struct SettingsTabs: View {
     }
     .withSafariRouteur()
     .environmentObject(routeurPath)
+    .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
+      if popToRootTab == .notifications {
+        routeurPath.path = []
+      }
+    }
   }
   
   private var accountsSection: some View {
     Section("Accounts") {
       ForEach(appAccountsManager.availableAccounts) { account in
-        HStack {
-          AppAccountView(viewModel: .init(appAccount: account))
-        }
-        .onTapGesture {
-          withAnimation {
-            appAccountsManager.currentAccount = account
-          }
-        }
+        AppAccountView(viewModel: .init(appAccount: account))
       }
       .onDelete { indexSet in
         if let index = indexSet.first {

@@ -33,7 +33,6 @@ struct ConversationsListRow: View {
               .font(.footnote)
           }
           Text(conversation.lastStatus.content.asRawText)
-            .foregroundColor(.gray)
             .multilineTextAlignment(.leading)
         }
         Spacer()

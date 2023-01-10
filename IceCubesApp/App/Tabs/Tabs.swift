@@ -31,7 +31,7 @@ enum Tab: Int, Identifiable, Hashable {
     case .messages:
       MessagesTab(popToRootTab: popToRootTab)
     case .settings:
-      SettingsTabs()
+      SettingsTabs(popToRootTab: popToRootTab)
     case .other:
       EmptyView()
     }
