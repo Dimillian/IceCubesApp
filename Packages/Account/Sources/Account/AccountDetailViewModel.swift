@@ -100,23 +100,26 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
     self.accountState = .data(account: account)
   }
   
+  struct AccountData {
+    let account: Account
+    let featuredTags: [FeaturedTag]
+    let relationships: [Relationshionship]
+    let familliarFollowers: [FamilliarAccounts]
+  }
+  
   func fetchAccount() async {
     guard let client else { return }
     do {
-      async let account: Account = client.get(endpoint: Accounts.accounts(id: accountId))
-      async let featuredTags: [FeaturedTag] = client.get(endpoint: Accounts.featuredTags(id: accountId))
-      let loadedAccount = try await account
-      self.account = loadedAccount
-      self.featuredTags = try await featuredTags
-      self.featuredTags.sort { $0.statusesCountInt > $1.statusesCountInt }
-      self.fields = loadedAccount.fields
-      if client.isAuth {
-        async let relationships: [Relationshionship] = client.get(endpoint: Accounts.relationships(ids: [accountId]))
-        async let familliarFollowers: [FamilliarAccounts] = client.get(endpoint: Accounts.familiarFollowers(withAccount: accountId))
-        self.relationship = try await relationships.first
-        self.familliarFollowers = try await familliarFollowers.first?.accounts ?? []
-      }
-      accountState = .data(account: loadedAccount)
+      let data = try await fetchAccountData(accountId: accountId, client: client)
+      accountState = .data(account: data.account)
+  
+      account = data.account
+      fields = data.account.fields
+      featuredTags = data.featuredTags
+      featuredTags.sort { $0.statusesCountInt > $1.statusesCountInt }
+      relationship = data.relationships.first
+      familliarFollowers = data.familliarFollowers.first?.accounts ?? []
+      
     } catch {
       if let account {
         accountState = .data(account: account)
@@ -124,6 +127,23 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
         accountState = .error(error: error)
       }
     }
+  }
+  
+  func fetchAccountData(accountId: String, client: Client) async throws -> AccountData {
+    async let account: Account = client.get(endpoint: Accounts.accounts(id: accountId))
+    async let featuredTags: [FeaturedTag] = client.get(endpoint: Accounts.featuredTags(id: accountId))
+    if client.isAuth && !isCurrentUser {
+      async let relationships: [Relationshionship] = client.get(endpoint: Accounts.relationships(ids: [accountId]))
+      async let familliarFollowers: [FamilliarAccounts] = client.get(endpoint: Accounts.familiarFollowers(withAccount: accountId))
+      return try await .init(account: account,
+                             featuredTags: featuredTags,
+                             relationships: relationships,
+                             familliarFollowers: familliarFollowers)
+    }
+    return try await .init(account: account,
+                           featuredTags: featuredTags,
+                           relationships: [],
+                           familliarFollowers: [])
   }
   
   func fetchStatuses() async {
