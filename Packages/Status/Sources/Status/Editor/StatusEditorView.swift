@@ -84,6 +84,7 @@ public struct StatusEditorView: View {
               Text("Post")
             }
           }
+          .disabled(!viewModel.canPost)
         }
         ToolbarItem(placement: .navigationBarLeading) {
           Button {
