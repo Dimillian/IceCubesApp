@@ -5,10 +5,12 @@ import Models
 import Env
 
 struct StatusEditorAccessoryView: View {
+  @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var currentInstance: CurrentInstance
   
   @FocusState<Bool>.Binding var isSpoilerTextFocused: Bool
   @ObservedObject var viewModel: StatusEditorViewModel
+  @State private var isPrivacySheetDisplayed: Bool = false
   
   var body: some View {
     VStack(spacing: 0) {
@@ -61,18 +63,28 @@ struct StatusEditorAccessoryView: View {
   }
   
   private var visibilityMenu: some View {
-    Menu {
-      Section("Post visibility") {
-        ForEach(Models.Visibility.allCases, id: \.self) { visibility in
-          Button {
-            viewModel.visibility = visibility
-          } label: {
-            Label(visibility.title, systemImage: visibility.iconName)
-          }
-        }
-      }
+    Button {
+      isPrivacySheetDisplayed = true
     } label: {
       Image(systemName: viewModel.visibility.iconName)
+    }
+    .sheet(isPresented: $isPrivacySheetDisplayed) {
+      Form {
+        Section("Post visibility") {
+          ForEach(Models.Visibility.allCases, id: \.self) { visibility in
+            Button {
+              viewModel.visibility = visibility
+              isPrivacySheetDisplayed = false
+            } label: {
+              Label(visibility.title, systemImage: visibility.iconName)
+            }
+          }
+          .listRowBackground(theme.primaryBackgroundColor)
+        }
+      }
+      .presentationDetents([.height(300)])
+      .scrollContentBackground(.hidden)
+      .background(theme.secondaryBackgroundColor)
     }
   }
 }
