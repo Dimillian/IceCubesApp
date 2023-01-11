@@ -149,6 +149,16 @@ public struct StatusMediaPreviewView: View {
                 .shimmering()
             }
           }
+          if sensitive {
+            Button {
+              withAnimation {
+                isHidingMedia = true
+              }
+            } label: {
+              Image(systemName:"eye.slash")
+            }
+              .position(x:20, y:20)
+          }
           if let alt = attachement.description, !alt.isEmpty, !isNotifications {
             Button {
               altTextDisplayed = alt
@@ -213,6 +223,16 @@ public struct StatusMediaPreviewView: View {
               }
               .frame(width: isNotifications ? imageMaxHeight : proxy.frame(in: .local).width)
               .frame(height: imageMaxHeight)
+              if sensitive {
+                Button {
+                  withAnimation {
+                    isHidingMedia = true
+                  }
+                } label: {
+                  Image(systemName:"eye.slash")
+                }
+                  .position(x:20, y:20)
+              }
               if let alt = attachement.description, !alt.isEmpty, !isNotifications {
                 Button {
                   altTextDisplayed = alt
