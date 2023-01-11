@@ -9,6 +9,7 @@ import PhotosUI
 import NukeUI
 
 public struct StatusEditorView: View {
+  @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var currentAccount: CurrentAccount
@@ -16,6 +17,8 @@ public struct StatusEditorView: View {
   
   @StateObject private var viewModel: StatusEditorViewModel
   @FocusState private var isSpoilerTextFocused: Bool
+  
+  @State private var isDismissAlertPresented: Bool = false
   
   public init(mode: StatusEditorViewModel.Mode) {
     _viewModel = StateObject(wrappedValue: .init(mode: mode))
@@ -88,13 +91,30 @@ public struct StatusEditorView: View {
         }
         ToolbarItem(placement: .navigationBarLeading) {
           Button {
-            dismiss()
+            if !viewModel.statusText.string.isEmpty {
+              isDismissAlertPresented = true
+            } else {
+              dismiss()
+            }
           } label: {
             Text("Cancel")
           }
         }
       }
     }
+    .confirmationDialog("",
+                        isPresented: $isDismissAlertPresented,
+                        actions: {
+      Button("Delete Draft", role: .destructive) {
+        dismiss()
+      }
+      Button("Save Draft") {
+        preferences.draftsPosts.insert(viewModel.statusText.string, at: 0)
+        dismiss()
+      }
+      Button("Cancel", role: .cancel) { }
+    })
+    .interactiveDismissDisabled(!viewModel.statusText.string.isEmpty)
   }
   
   @ViewBuilder
@@ -116,16 +136,39 @@ public struct StatusEditorView: View {
     if let account = currentAccount.account {
       HStack {
         AvatarView(url: account.avatar, size: .status)
-        VStack(alignment: .leading, spacing: 0) {
-          account.displayNameWithEmojis
-            .font(.subheadline)
-            .fontWeight(.semibold)
+        VStack(alignment: .leading, spacing: 4) {
+          privacyMenu
           Text("@\(account.acct)")
             .font(.footnote)
             .foregroundColor(.gray)
         }
         Spacer()
       }
+    }
+  }
+  
+  private var privacyMenu: some View {
+    Menu {
+      Section("Post visibility") {
+        ForEach(Models.Visibility.allCases, id: \.self) { visibility in
+          Button {
+            viewModel.visibility = visibility
+          } label: {
+            Label(visibility.title, systemImage: visibility.iconName)
+          }
+        }
+      }
+    } label: {
+      HStack {
+        Label(viewModel.visibility.title, systemImage: viewModel.visibility.iconName)
+        Image(systemName: "chevron.down")
+      }
+      .font(.footnote)
+      .padding(4)
+      .overlay(
+        RoundedRectangle(cornerRadius: 8)
+          .stroke(theme.tintColor, lineWidth: 1)
+      )
     }
   }
 }

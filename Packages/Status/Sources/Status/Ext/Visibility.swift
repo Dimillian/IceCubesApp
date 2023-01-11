@@ -27,7 +27,7 @@ extension Visibility {
     case .priv:
       return "Followers"
     case .direct:
-      return "Private Mention"
+      return "Private"
     }
   }
 }

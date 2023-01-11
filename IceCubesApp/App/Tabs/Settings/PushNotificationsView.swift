@@ -48,27 +48,6 @@ struct PushNotificationsView: View {
         .listRowBackground(theme.primaryBackgroundColor)
         .transition(.move(edge: .bottom))
       }
-      
-      Section {
-        VStack(alignment: .leading) {
-          Text("Auth key:")
-          Text(pushNotifications.notificationsAuthKeyAsKey.base64EncodedString())
-            .font(.footnote)
-            .foregroundColor(.gray)
-        }
-        VStack(alignment: .leading) {
-          Text("Public key:")
-          Text(pushNotifications.notificationsPrivateKeyAsKey.publicKey.x963Representation.base64EncodedString())
-            .font(.footnote)
-            .foregroundColor(.gray)
-        }
-      } header: {
-        Text("Keys information")
-      } footer: {
-        Text("Your notifications are sent through a proxy server and are encrypted using a public/private key pair that is stored only on your device. The public key is sent to the server, so it can encrypt your notifications so that only your device can decrypt them.")
-      }
-      .listRowBackground(theme.primaryBackgroundColor)
-
     }
     .navigationTitle("Push Notifications")
     .scrollContentBackground(.hidden)
