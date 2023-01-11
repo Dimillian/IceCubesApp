@@ -150,15 +150,7 @@ public struct StatusMediaPreviewView: View {
             }
           }
           if sensitive {
-            Button {
-              withAnimation {
-                isHidingMedia = true
-              }
-            } label: {
-              Image(systemName:"eye.slash")
-            }
-              .position(x:30, y:30)
-              .buttonStyle(.bordered)
+            cornerSensitiveButton
           }
           if let alt = attachement.description, !alt.isEmpty, !isNotifications {
             Button {
@@ -225,15 +217,7 @@ public struct StatusMediaPreviewView: View {
               .frame(width: isNotifications ? imageMaxHeight : proxy.frame(in: .local).width)
               .frame(height: imageMaxHeight)
               if sensitive {
-                Button {
-                  withAnimation {
-                    isHidingMedia = true
-                  }
-                } label: {
-                  Image(systemName:"eye.slash")
-                }
-                  .position(x:30, y:30)
-                  .buttonStyle(.bordered)
+                cornerSensitiveButton
               }
               if let alt = attachement.description, !alt.isEmpty, !isNotifications {
                 Button {
@@ -301,5 +285,17 @@ public struct StatusMediaPreviewView: View {
           .buttonStyle(.borderedProminent)
         }
       }
+  }
+  
+  private var cornerSensitiveButton: some View {
+    Button {
+      withAnimation {
+        isHidingMedia = true
+      }
+    } label: {
+      Image(systemName:"eye.slash")
+    }
+    .position(x: 30, y: 30)
+    .buttonStyle(.borderedProminent)
   }
 }
