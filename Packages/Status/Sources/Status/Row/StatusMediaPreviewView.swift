@@ -157,7 +157,8 @@ public struct StatusMediaPreviewView: View {
             } label: {
               Image(systemName:"eye.slash")
             }
-              .position(x:20, y:20)
+              .position(x:30, y:30)
+              .buttonStyle(.bordered)
           }
           if let alt = attachement.description, !alt.isEmpty, !isNotifications {
             Button {
@@ -231,7 +232,8 @@ public struct StatusMediaPreviewView: View {
                 } label: {
                   Image(systemName:"eye.slash")
                 }
-                  .position(x:20, y:20)
+                  .position(x:30, y:30)
+                  .buttonStyle(.bordered)
               }
               if let alt = attachement.description, !alt.isEmpty, !isNotifications {
                 Button {
