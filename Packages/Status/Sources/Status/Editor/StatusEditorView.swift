@@ -7,6 +7,7 @@ import Models
 import Network
 import PhotosUI
 import NukeUI
+import EmojiText
 
 public struct StatusEditorView: View {
   @EnvironmentObject private var theme: Theme
@@ -117,7 +118,7 @@ public struct StatusEditorView: View {
       HStack {
         AvatarView(url: account.avatar, size: .status)
         VStack(alignment: .leading, spacing: 0) {
-          account.displayNameWithEmojis
+          EmojiText(account.safeDisplayName, emojis: account.emojis)
             .font(.subheadline)
             .fontWeight(.semibold)
           Text("@\(account.acct)")

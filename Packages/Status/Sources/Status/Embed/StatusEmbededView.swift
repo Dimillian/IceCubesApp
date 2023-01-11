@@ -1,6 +1,7 @@
 import SwiftUI
 import Models
 import DesignSystem
+import EmojiText
 
 @MainActor
 public struct StatusEmbededView: View {
@@ -34,7 +35,7 @@ public struct StatusEmbededView: View {
     HStack(alignment: .center) {
       AvatarView(url: account.avatar, size: .embed)
       VStack(alignment: .leading, spacing: 0) {
-        status.account.displayNameWithEmojis
+        EmojiText(status.account.safeDisplayName, emojis: account.emojis)
           .font(.footnote)
           .fontWeight(.semibold)
         Group {

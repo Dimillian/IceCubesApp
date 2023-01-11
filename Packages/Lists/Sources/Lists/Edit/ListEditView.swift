@@ -2,6 +2,7 @@ import SwiftUI
 import Models
 import DesignSystem
 import Network
+import EmojiText
 
 public struct ListEditView: View {
   @Environment(\.dismiss) private var dismiss
@@ -30,7 +31,7 @@ public struct ListEditView: View {
               HStack {
                 AvatarView(url: account.avatar, size: .status)
                 VStack(alignment: .leading) {
-                  account.displayNameWithEmojis
+                  EmojiText(account.safeDisplayName, emojis: account.emojis)
                   Text("@\(account.acct)")
                     .foregroundColor(.gray)
                     .font(.footnote)

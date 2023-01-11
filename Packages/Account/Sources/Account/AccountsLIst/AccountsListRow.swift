@@ -3,6 +3,7 @@ import Models
 import Network
 import DesignSystem
 import Env
+import EmojiText
 
 @MainActor
 public class AccountsListRowViewModel: ObservableObject {
@@ -32,13 +33,13 @@ public struct AccountsListRow: View {
     HStack(alignment: .top) {
       AvatarView(url: viewModel.account.avatar, size: .status)
       VStack(alignment: .leading, spacing: 2) {
-        viewModel.account.displayNameWithEmojis
+        EmojiText(viewModel.account.safeDisplayName, emojis: viewModel.account.emojis)
           .font(.subheadline)
           .fontWeight(.semibold)
         Text("@\(viewModel.account.acct)")
           .font(.footnote)
           .foregroundColor(.gray)
-        Text(viewModel.account.note.asSafeAttributedString)
+        EmojiText(viewModel.account.note, emojis: viewModel.account.emojis)
           .font(.footnote)
           .lineLimit(3)
           .environment(\.openURL, OpenURLAction { url in
