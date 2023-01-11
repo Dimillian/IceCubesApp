@@ -21,6 +21,7 @@ class NotificationService: UNNotificationServiceExtension {
       
       guard let encodedPayload = bestAttemptContent.userInfo["m"] as? String,
             let payload = Data(base64Encoded: encodedPayload.URLSafeBase64ToBase64()) else {
+        bestAttemptContent.title = "Failied to decode payload as base 64"
         contentHandler(bestAttemptContent)
         return
       }
@@ -28,12 +29,14 @@ class NotificationService: UNNotificationServiceExtension {
       guard let encodedPublicKey = bestAttemptContent.userInfo["k"] as? String,
             let publicKeyData = Data(base64Encoded: encodedPublicKey.URLSafeBase64ToBase64()),
             let publicKey = try? P256.KeyAgreement.PublicKey(x963Representation: publicKeyData) else {
+        bestAttemptContent.title = "Failied to inflate public key"
         contentHandler(bestAttemptContent)
         return
       }
       
       guard let encodedSalt = bestAttemptContent.userInfo["s"] as? String,
             let salt = Data(base64Encoded: encodedSalt.URLSafeBase64ToBase64()) else {
+        bestAttemptContent.title = "Failied to inflate salt"
         contentHandler(bestAttemptContent)
         return
       }
@@ -44,6 +47,7 @@ class NotificationService: UNNotificationServiceExtension {
                                                             privateKey: privateKey,
                                                             publicKey: publicKey),
             let notification = try? JSONDecoder().decode(MastodonPushNotification.self, from: plaintextData) else {
+        bestAttemptContent.title = "Failied to JSON decode the Notification"
         contentHandler(bestAttemptContent)
         return
       }
