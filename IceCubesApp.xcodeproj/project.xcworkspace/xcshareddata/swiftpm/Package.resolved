@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/divadretlaw/EmojiText",
       "state" : {
-        "revision" : "28f594b23cb7fda4eb25f11c37918d0741748463",
-        "version" : "1.0.0"
+        "revision" : "f349e481499d2c832ab9d2dc28af238e53b1f9b4",
+        "version" : "1.1.0"
       }
     },
     {
