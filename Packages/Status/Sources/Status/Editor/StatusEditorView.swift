@@ -61,8 +61,7 @@ public struct StatusEditorView: View {
         VStack(alignment: .leading, spacing: 0) {
           StatusEditorAutoCompleteView(viewModel: viewModel)
           StatusEditorAccessoryView(isSpoilerTextFocused: $isSpoilerTextFocused,
-                                    viewModel: viewModel,
-                                    isShowingPoll: $viewModel.showPoll)
+                                    viewModel: viewModel)
         }
       }
       .onAppear {

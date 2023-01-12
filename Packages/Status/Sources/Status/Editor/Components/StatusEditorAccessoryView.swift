@@ -14,8 +14,6 @@ struct StatusEditorAccessoryView: View {
   @FocusState<Bool>.Binding var isSpoilerTextFocused: Bool
   @ObservedObject var viewModel: StatusEditorViewModel
   @State private var isDrafsSheetDisplayed: Bool = false
-
-  @Binding var isShowingPoll: Bool
   
   var body: some View {
     VStack(spacing: 0) {
@@ -25,7 +23,7 @@ struct StatusEditorAccessoryView: View {
                      matching: .images) {
           Image(systemName: "photo.fill.on.rectangle.fill")
         }
-        .disabled(isShowingPoll)
+        .disabled(viewModel.showPoll)
         
         Button {
           viewModel.insertStatusText(text: " @")
@@ -46,7 +44,7 @@ struct StatusEditorAccessoryView: View {
         } label: {
           Image(systemName: "chart.bar")
         }
-        .disabled(isShowingPoll)
+        .disabled(viewModel.showPoll)
         
         Button {
           withAnimation {
