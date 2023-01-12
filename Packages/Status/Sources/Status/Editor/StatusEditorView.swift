@@ -49,6 +49,10 @@ public struct StatusEditorView: View {
                 .padding(.horizontal, .layoutPadding)
                 .disabled(true)
             }
+            if viewModel.showPoll {
+              StatusEditorPollView(viewModel: viewModel, showPoll: $viewModel.showPoll)
+                .padding(.horizontal)
+            }
             Spacer()
           }
           .padding(.top, 8)
