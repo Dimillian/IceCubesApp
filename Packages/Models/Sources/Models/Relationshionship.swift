@@ -13,6 +13,7 @@ public struct Relationshionship: Codable {
   public let domainBlocking: Bool
   public let endorsed: Bool
   public let note: String
+  public let notifying: Bool
   
   static public func placeholder() -> Relationshionship {
     .init(id: UUID().uuidString,
@@ -26,6 +27,7 @@ public struct Relationshionship: Codable {
           requested: false,
           domainBlocking: false,
           endorsed: false,
-          note: "")
+          note: "",
+          notifying: false)
   }
 }

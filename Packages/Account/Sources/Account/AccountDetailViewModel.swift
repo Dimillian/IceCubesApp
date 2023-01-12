@@ -212,25 +212,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
       tabState = .statuses(statusesState: .error(error: error))
     }
   }
-  
-  func follow() async {
-    guard let client else { return }
-    do {
-      relationship = try await client.post(endpoint: Accounts.follow(id: accountId))
-    } catch {
-      print("Error while following: \(error.localizedDescription)")
-    }
-  }
-  
-  func unfollow() async {
-    guard let client else { return }
-    do {
-      relationship = try await client.post(endpoint: Accounts.unfollow(id: accountId))
-    } catch {
-      print("Error while unfollowing: \(error.localizedDescription)")
-    }
-  }
-  
+    
   private func reloadTabState() {
     switch selectedTab {
     case .statuses, .postsAndReplies, .media:

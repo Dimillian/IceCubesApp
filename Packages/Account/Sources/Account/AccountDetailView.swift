@@ -122,17 +122,15 @@ public struct AccountDetailView: View {
   private func makeHeaderView(proxy: ScrollViewProxy?) -> some View {
     switch viewModel.accountState {
     case .loading:
-      AccountDetailHeaderView(isCurrentUser: isCurrentUser,
+      AccountDetailHeaderView(viewModel: viewModel,
                               account: .placeholder(),
-                              relationship: .placeholder(),
                               scrollViewProxy: proxy,
                               scrollOffset: $scrollOffset)
         .redacted(reason: .placeholder)
         .shimmering()
     case let .data(account):
-      AccountDetailHeaderView(isCurrentUser: isCurrentUser,
+      AccountDetailHeaderView(viewModel: viewModel,
                               account: account,
-                              relationship: viewModel.relationship,
                               scrollViewProxy: proxy,
                               scrollOffset: $scrollOffset)
     case let .error(error):

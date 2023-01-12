@@ -12,9 +12,8 @@ struct AccountDetailHeaderView: View {
   @EnvironmentObject private var routeurPath: RouterPath
   @Environment(\.redactionReasons) private var reasons
   
-  let isCurrentUser: Bool
+  @ObservedObject var viewModel: AccountDetailViewModel
   let account: Account
-  let relationship: Relationshionship?
   let scrollViewProxy: ScrollViewProxy?
   
   @Binding var scrollOffset: CGFloat
@@ -55,7 +54,7 @@ struct AccountDetailHeaderView: View {
           .frame(height: bannerHeight)
         }
         
-        if relationship?.followedBy == true {
+        if viewModel.relationship?.followedBy == true {
           Text("Follows You")
             .font(.footnote)
             .fontWeight(.semibold)
@@ -116,9 +115,11 @@ struct AccountDetailHeaderView: View {
               .foregroundColor(.gray)
         }
         Spacer()
-        if let relationship = relationship, !isCurrentUser {
-          FollowButton(viewModel: .init(accountId: account.id,
-                                        relationship: relationship))
+        if let relationship = viewModel.relationship, !viewModel.isCurrentUser {
+          HStack {
+            FollowButton(viewModel: .init(accountId: account.id,
+                                          relationship: relationship))
+          }
         }
       }
       EmojiText(account.note, emojis: account.emojis)
@@ -146,9 +147,8 @@ struct AccountDetailHeaderView: View {
 
 struct AccountDetailHeaderView_Previews: PreviewProvider {
   static var previews: some View {
-    AccountDetailHeaderView(isCurrentUser: false,
+    AccountDetailHeaderView(viewModel: .init(account: .placeholder()),
                             account: .placeholder(),
-                            relationship: .placeholder(),
                             scrollViewProxy: nil,
                             scrollOffset: .constant(0))
   }

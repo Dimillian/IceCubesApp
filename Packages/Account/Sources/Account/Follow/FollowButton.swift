@@ -20,7 +20,7 @@ public class FollowButtonViewModel: ObservableObject {
     guard let client else { return }
     isUpdating = true
     do {
-      relationship = try await client.post(endpoint: Accounts.follow(id: accountId))
+      relationship = try await client.post(endpoint: Accounts.follow(id: accountId, notify: false))
     } catch {
       print("Error while following: \(error.localizedDescription)")
     }
@@ -37,6 +37,15 @@ public class FollowButtonViewModel: ObservableObject {
     }
     isUpdating = false
   }
+  
+  func toggleNotify() async {
+    guard let client else { return }
+    do {
+      relationship = try await client.post(endpoint: Accounts.follow(id: accountId, notify: !relationship.notifying))
+    } catch {
+      print("Error while following: \(error.localizedDescription)")
+    }
+  }
 }
 
 public struct FollowButton: View {
@@ -48,23 +57,36 @@ public struct FollowButton: View {
   }
   
   public var body: some View {
-    Button {
-      Task {
-        if viewModel.relationship.following {
-          await viewModel.unfollow()
+    HStack {
+      Button {
+        Task {
+          if viewModel.relationship.following {
+            await viewModel.unfollow()
+          } else {
+            await viewModel.follow()
+          }
+        }
+      } label: {
+        if viewModel.relationship.requested == true {
+          Text("Requested")
         } else {
-          await viewModel.follow()
+          Text(viewModel.relationship.following ? "Following" : "Follow")
         }
       }
-    } label: {
-      if viewModel.relationship.requested == true {
-        Text("Requested")
-      } else {
-        Text(viewModel.relationship.following ? "Following" : "Follow")
+      .buttonStyle(.bordered)
+      .disabled(viewModel.isUpdating)
+      if viewModel.relationship.following {
+        Button {
+          Task {
+            await viewModel.toggleNotify()
+          }
+        } label: {
+          Image(systemName: viewModel.relationship.notifying ? "bell.fill" : "bell")
+        }
+        .buttonStyle(.bordered)
+        .disabled(viewModel.isUpdating)
       }
     }
-    .buttonStyle(.bordered)
-    .disabled(viewModel.isUpdating)
     .onAppear {
       viewModel.client = client
     }
