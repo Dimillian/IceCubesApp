@@ -52,15 +52,20 @@ class NotificationsViewModel: ObservableObject {
                                                                                    types: queryTypes))
         nextPageState = notifications.count < 15 ? .none : .hasNextPage
       } else if let first = notifications.first {
-        let newNotifications: [Models.Notification] =
+        var newNotifications: [Models.Notification] =
         try await client.get(endpoint: Notifications.notifications(sinceId: first.id,
                                                                    maxId: nil,
                                                                    types: queryTypes))
         nextPageState = notifications.count < 15 ? .none : .hasNextPage
+        newNotifications = newNotifications.filter({ notification in
+          !notifications.contains(where: { $0.id == notification.id })
+        })
         notifications.insert(contentsOf: newNotifications, at: 0)
       }
-      state = .display(notifications: notifications,
-                       nextPageState: notifications.isEmpty ? .none : nextPageState)
+      withAnimation {
+        state = .display(notifications: notifications,
+                         nextPageState: notifications.isEmpty ? .none : nextPageState)
+      }
     } catch {
       state = .error(error: error)
     }

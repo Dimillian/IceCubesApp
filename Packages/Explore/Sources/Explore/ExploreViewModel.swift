@@ -72,8 +72,9 @@ class ExploreViewModel: ObservableObject {
       self.trendingLinks = data.trendingLinks
       
       self.suggestedAccountsRelationShips = try await client.get(endpoint: Accounts.relationships(ids: self.suggestedAccounts.map{ $0.id }))
-      
-      isLoaded = true
+      withAnimation {
+        isLoaded = true
+      }
     } catch {
       isLoaded = true
     }

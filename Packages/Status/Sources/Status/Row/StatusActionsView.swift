@@ -98,10 +98,12 @@ struct StatusActionsView: View {
   
   @ViewBuilder
   private var summaryView: some View {
+    Divider()
     HStack {
-      Text(viewModel.status.createdAt.asDate, style: .date)
-      Text(viewModel.status.createdAt.asDate, style: .time)
-      Text("·")
+      Text(viewModel.status.createdAt.asDate, style: .date) +
+      Text(" at ") +
+      Text(viewModel.status.createdAt.asDate, style: .time) +
+      Text("   ·")
       Image(systemName: viewModel.status.visibility.iconName)
       Spacer()
       Text(viewModel.status.application?.name ?? "")
@@ -114,30 +116,23 @@ struct StatusActionsView: View {
     }
     .font(.caption)
     .foregroundColor(.gray)
+    
     if viewModel.favouritesCount > 0 {
       Divider()
-      Button {
-        routeurPath.navigate(to: .favouritedBy(id: viewModel.status.id))
-      } label: {
-        HStack {
-          Text("\(viewModel.favouritesCount) favorites")
-          Spacer()
-          Image(systemName: "chevron.right")
-        }
-        .font(.callout)
+      NavigationLink(value: RouteurDestinations.favouritedBy(id: viewModel.status.id)) {
+        Text("\(viewModel.favouritesCount) favorites")
+          .font(.callout)
+        Spacer()
+        Image(systemName: "chevron.right")
       }
     }
     if viewModel.reblogsCount > 0 {
       Divider()
-      Button {
-        routeurPath.navigate(to: .rebloggedBy(id: viewModel.status.id))
-      } label: {
-        HStack {
-          Text("\(viewModel.reblogsCount) boosts")
-          Spacer()
-          Image(systemName: "chevron.right")
-        }
-        .font(.callout)
+      NavigationLink(value: RouteurDestinations.rebloggedBy(id: viewModel.status.id)) {
+        Text("\(viewModel.reblogsCount) boosts")
+          .font(.callout)
+        Spacer()
+        Image(systemName: "chevron.right")
       }
     }
   }

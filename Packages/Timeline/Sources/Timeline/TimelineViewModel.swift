@@ -74,7 +74,9 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
                                                                     maxId: nil,
                                                                     minId: nil,
                                                                     offset: statuses.count))
-        statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
+        withAnimation {
+          statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
+        }
       } else if let first = pendingStatuses.first ?? statuses.first {
         var newStatuses: [Status] = await fetchNewPages(minId: first.id, maxPages: 20)
         if userIntent || !pendingStatusesEnabled {
