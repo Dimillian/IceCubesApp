@@ -4,6 +4,7 @@ import Env
 import DesignSystem
 import Network
 import Shimmer
+import EmojiText
 
 public struct StatusRowView: View {
   @Environment(\.redactionReasons) private var reasons
@@ -90,7 +91,7 @@ public struct StatusRowView: View {
       HStack(spacing: 2) {
         Image(systemName:"arrow.left.arrow.right.circle.fill")
         AvatarView(url: viewModel.status.account.avatar, size: .boost)
-        viewModel.status.account.displayNameWithEmojis
+        EmojiText(viewModel.status.account.safeDisplayName, emojis: viewModel.status.account.emojis)
         Text("boosted")
       }
       .font(.footnote)
@@ -164,7 +165,7 @@ public struct StatusRowView: View {
   private func makeStatusContentView(status: AnyStatus) -> some View {
     Group {
       if !status.spoilerText.isEmpty {
-        Text(status.spoilerText)
+        EmojiText(status.spoilerText, emojis: status.emojis)
           .font(.body)
         Button {
           withAnimation {
@@ -177,7 +178,7 @@ public struct StatusRowView: View {
       }
       if !viewModel.displaySpoiler {
         HStack {
-          Text(status.content.asSafeAttributedString)
+          EmojiText(status.content, emojis: status.emojis)
             .font(.body)
             .environment(\.openURL, OpenURLAction { url in
               routeurPath.handleStatus(status: status, url: url)
@@ -233,7 +234,7 @@ public struct StatusRowView: View {
         AvatarView(url: status.account.avatar, size: .status)
       }
       VStack(alignment: .leading, spacing: 0) {
-        status.account.displayNameWithEmojis
+        EmojiText(status.account.safeDisplayName, emojis: status.account.emojis)
           .font(.headline)
           .fontWeight(.semibold)
         Group {

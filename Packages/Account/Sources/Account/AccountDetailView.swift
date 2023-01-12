@@ -5,6 +5,7 @@ import Status
 import Shimmer
 import DesignSystem
 import Env
+import EmojiText
 
 public struct AccountDetailView: View {  
   @Environment(\.redactionReasons) private var reasons
@@ -217,7 +218,7 @@ public struct AccountDetailView: View {
                 Image(systemName: "checkmark.seal")
                   .foregroundColor(Color.green.opacity(0.80))
               }
-              Text(field.value.asSafeAttributedString)
+              EmojiText(field.value, emojis: viewModel.account?.emojis ?? [])
                 .foregroundColor(theme.tintColor)
             }
             .font(.body)
@@ -335,7 +336,8 @@ public struct AccountDetailView: View {
       if scrollOffset < -200 {
         switch viewModel.accountState {
         case let .data(account):
-          account.displayNameWithEmojis.font(.headline)
+          EmojiText(account.safeDisplayName, emojis: account.emojis)
+            .font(.headline)
         default:
           EmptyView()
         }

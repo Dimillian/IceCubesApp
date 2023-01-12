@@ -10,6 +10,8 @@ extension HTMLString {
     do {
       let dom = try HTMLParser().parse(html: self)
       return dom.toMarkdown()
+        // Add space between hashtags and mentions that follow each other
+        .replacingOccurrences(of: ")[", with: ") [")
     } catch {
       return self
     }
@@ -44,9 +46,7 @@ extension HTMLString {
   
   public var asSafeAttributedString: AttributedString {
     do {
-      // Add space between hashtags and mentions that follow each other
       let markdown = asMarkdown
-        .replacingOccurrences(of: ")[", with: ") [")
       let options = AttributedString.MarkdownParsingOptions(allowsExtendedAttributes: true,
                                                             interpretedSyntax: .inlineOnlyPreservingWhitespace)
       return try AttributedString(markdown: markdown, options: options)

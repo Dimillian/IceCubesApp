@@ -3,6 +3,7 @@ import Models
 import DesignSystem
 import Status
 import Env
+import EmojiText
 
 struct NotificationRowView: View {
   @EnvironmentObject private var theme: Theme
@@ -50,18 +51,18 @@ struct NotificationRowView: View {
   private func makeMainLabel(type: Models.Notification.NotificationType) -> some View {
     VStack(alignment: .leading, spacing: 0) {
       HStack(spacing: 0) {
-        Text(notification.account.safeDisplayName)
-          .font(.subheadline)
-          .fontWeight(.semibold) +
-        Text(" ") +
-        Text(type.label())
-          .font(.subheadline) +
-        Text(" ⸱ ")
-          .font(.footnote)
-          .foregroundColor(.gray) +
-        Text(notification.createdAt.formatted)
-          .font(.footnote)
-          .foregroundColor(.gray)
+      EmojiText(notification.account.safeDisplayName, emojis: notification.account.emojis)
+        .append {
+          Text(" ") +
+          Text(type.label())
+            .font(.subheadline) +
+          Text(" ⸱ ")
+            .font(.footnote)
+            .foregroundColor(.gray) +
+          Text(notification.createdAt.formatted)
+            .font(.footnote)
+            .foregroundColor(.gray)
+        }
         Spacer()
       }
     }
@@ -86,7 +87,7 @@ struct NotificationRowView: View {
           .foregroundColor(.gray)
         
         if type == .follow {
-          Text(notification.account.note.asSafeAttributedString)
+          EmojiText(notification.account.note, emojis: notification.account.emojis)
             .lineLimit(3)
             .font(.callout)
             .foregroundColor(.gray)

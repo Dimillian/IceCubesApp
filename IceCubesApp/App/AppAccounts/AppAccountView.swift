@@ -1,6 +1,7 @@
 import SwiftUI
 import DesignSystem
 import Env
+import EmojiText
 
 struct AppAccountView: View {
   @EnvironmentObject private var routeurPath: RouterPath
@@ -21,7 +22,7 @@ struct AppAccountView: View {
       }
       VStack(alignment: .leading) {
         if let account = viewModel.account {
-          account.displayNameWithEmojis
+          EmojiText(account.safeDisplayName, emojis: account.emojis)
           Text("\(account.username)@\(viewModel.appAccount.server)")
             .font(.subheadline)
             .foregroundColor(.gray)

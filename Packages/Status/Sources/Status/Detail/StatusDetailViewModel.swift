@@ -62,7 +62,7 @@ class StatusDetailViewModel: ObservableObject {
       let status: Status = try await client.get(endpoint: Statuses.status(id: statusId))
       let context: StatusContext = try await client.get(endpoint: Statuses.context(id: statusId))
       state = .display(status: status, context: context)
-      title = "Post from \(status.account.displayName)"
+      title = "Post from \(status.account.displayNameWithoutEmojis)"
     } catch {
       state = .error(error: error)
     }

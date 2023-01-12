@@ -7,6 +7,7 @@ import Models
 import Network
 import PhotosUI
 import NukeUI
+import EmojiText
 
 public struct StatusEditorView: View {
   @EnvironmentObject private var preferences: UserPreferences

@@ -4,6 +4,7 @@ import DesignSystem
 import Env
 import Shimmer
 import NukeUI
+import EmojiText
 
 struct AccountDetailHeaderView: View {
   @EnvironmentObject private var theme: Theme
@@ -108,7 +109,7 @@ struct AccountDetailHeaderView: View {
       accountAvatarView
       HStack {
         VStack(alignment: .leading, spacing: 0) {
-          account.displayNameWithEmojis
+          EmojiText(account.safeDisplayName, emojis: account.emojis)
               .font(.headline)
           Text("@\(account.acct)")
               .font(.callout)
@@ -120,7 +121,7 @@ struct AccountDetailHeaderView: View {
                                         relationship: relationship))
         }
       }
-      Text(account.note.asSafeAttributedString)
+      EmojiText(account.note, emojis: account.emojis)
         .font(.body)
         .padding(.top, 8)
         .environment(\.openURL, OpenURLAction { url in

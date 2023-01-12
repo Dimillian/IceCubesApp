@@ -33,9 +33,9 @@ extension StatusEditorViewModel {
       case .edit:
         return "Editing your post"
       case let .replyTo(status):
-        return "Replying to \(status.reblog?.account.displayName ?? status.account.displayName)"
+        return "Replying to \(status.reblog?.account.displayNameWithoutEmojis ?? status.account.displayNameWithoutEmojis)"
       case let .quote(status):
-        return "Quote of \(status.reblog?.account.displayName ?? status.account.displayName)"
+        return "Quote of \(status.reblog?.account.displayNameWithoutEmojis ?? status.account.displayNameWithoutEmojis)"
       }
     }
   }
