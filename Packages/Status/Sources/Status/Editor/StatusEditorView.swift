@@ -49,6 +49,10 @@ public struct StatusEditorView: View {
                 .padding(.horizontal, .layoutPadding)
                 .disabled(true)
             }
+            if viewModel.showPoll {
+              PollView(viewModel: viewModel, showPoll: $viewModel.showPoll)
+                .padding(.horizontal)
+            }
             Spacer()
           }
           .padding(.top, 8)
@@ -57,7 +61,8 @@ public struct StatusEditorView: View {
         VStack(alignment: .leading, spacing: 0) {
           StatusEditorAutoCompleteView(viewModel: viewModel)
           StatusEditorAccessoryView(isSpoilerTextFocused: $isSpoilerTextFocused,
-                                    viewModel: viewModel)
+                                    viewModel: viewModel,
+                                    isShowingPoll: $viewModel.showPoll)
         }
       }
       .onAppear {
