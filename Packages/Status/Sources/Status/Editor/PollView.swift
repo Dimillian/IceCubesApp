@@ -90,14 +90,6 @@ struct PollView: View {
         .stroke(theme.secondaryBackgroundColor.opacity(0.6), lineWidth: 1)
         .background(theme.primaryBackgroundColor.opacity(0.3))
     )
-
-    Button {
-      print(viewModel.pollOptions.filter { !$0.trimmingCharacters(in: .whitespaces).isEmpty })
-      print(viewModel.pollDuration.displayString)
-      print(viewModel.pollVotingFrequency.canVoteMultipleTimes)
-    } label: {
-      Text("print to console")
-    }
   }
 
   private func addChoice(at index: Int) {
