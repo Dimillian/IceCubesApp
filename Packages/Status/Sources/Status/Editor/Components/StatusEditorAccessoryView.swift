@@ -44,7 +44,7 @@ struct StatusEditorAccessoryView: View {
         } label: {
           Image(systemName: "chart.bar")
         }
-        .disabled(viewModel.showPoll)
+        .disabled(viewModel.shouldDisablePollButton)
         
         Button {
           withAnimation {

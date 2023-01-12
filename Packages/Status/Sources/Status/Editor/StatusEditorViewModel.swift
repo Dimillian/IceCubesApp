@@ -53,6 +53,10 @@ public class StatusEditorViewModel: ObservableObject {
   var canPost: Bool {
     statusText.length > 0 || !selectedMedias.isEmpty
   }
+
+  var shouldDisablePollButton: Bool {
+    showPoll || !selectedMedias.isEmpty
+  }
   
   @Published var visibility: Models.Visibility = .pub
   
