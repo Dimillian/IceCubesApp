@@ -22,12 +22,21 @@ public class CurrentAccount: ObservableObject {
   
   private func fetchUserData() async {
     await withTaskGroup(of: Void.self) { group in
+      group.addTask { await self.fetchConnections() }
       group.addTask { await self.fetchCurrentAccount() }
       group.addTask { await self.fetchLists() }
       group.addTask { await self.fetchFollowedTags() }
     }
   }
   
+  public func fetchConnections() async {
+    guard let client = client else { return }
+    do {
+      let connections: [String] = try await client.get(endpoint: Instances.peers)
+      client.addConnections(connections)
+    } catch { }
+  }
+    
   public func fetchCurrentAccount() async {
     guard let client = client, client.isAuth else {
       account = nil
@@ -61,7 +70,6 @@ public class CurrentAccount: ObservableObject {
       lists.append(list)
     } catch { }
   }
-  
   
   public func deleteList(list: Models.List) async {
     guard let client else { return }

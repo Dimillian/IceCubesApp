@@ -66,6 +66,8 @@ public class RouterPath: ObservableObject {
       navigate(to: .accountDetail(id: mention.id))
       return .handled
     } else if let client = client,
+              client.isAuth,
+              client.hasConnection(with: url),
               let id = Int(url.lastPathComponent) {
       if url.absoluteString.contains(client.server) {
         navigate(to: .statusDetail(id: String(id)))
