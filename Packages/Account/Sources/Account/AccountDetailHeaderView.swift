@@ -118,7 +118,8 @@ struct AccountDetailHeaderView: View {
         if let relationship = viewModel.relationship, !viewModel.isCurrentUser {
           HStack {
             FollowButton(viewModel: .init(accountId: account.id,
-                                          relationship: relationship))
+                                          relationship: relationship,
+                                          shouldDisplayNotify: true))
           }
         }
       }

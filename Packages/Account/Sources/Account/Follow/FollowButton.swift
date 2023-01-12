@@ -8,12 +8,14 @@ public class FollowButtonViewModel: ObservableObject {
   var client: Client?
   
   public let accountId: String
+  public let shouldDisplayNotify: Bool
   @Published private(set) public var relationship: Relationshionship
   @Published private(set) public var isUpdating: Bool = false
   
-  public init(accountId: String, relationship: Relationshionship) {
+  public init(accountId: String, relationship: Relationshionship, shouldDisplayNotify: Bool) {
     self.accountId = accountId
     self.relationship = relationship
+    self.shouldDisplayNotify = shouldDisplayNotify
   }
   
   func follow() async {
@@ -75,7 +77,7 @@ public struct FollowButton: View {
       }
       .buttonStyle(.bordered)
       .disabled(viewModel.isUpdating)
-      if viewModel.relationship.following {
+      if viewModel.relationship.following, viewModel.shouldDisplayNotify {
         Button {
           Task {
             await viewModel.toggleNotify()
