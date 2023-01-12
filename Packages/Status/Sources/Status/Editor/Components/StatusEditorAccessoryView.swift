@@ -25,6 +25,7 @@ struct StatusEditorAccessoryView: View {
                      matching: .images) {
           Image(systemName: "photo.fill.on.rectangle.fill")
         }
+        .disabled(isShowingPoll)
         
         Button {
           viewModel.insertStatusText(text: " @")
