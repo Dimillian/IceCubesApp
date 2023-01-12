@@ -11,6 +11,7 @@ public struct StatusDetailView: View {
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var routeurPath: RouterPath
+  @Environment(\.openURL) private var openURL
   @StateObject private var viewModel: StatusDetailViewModel
   @State private var isLoaded: Bool = false
     
@@ -81,7 +82,12 @@ public struct StatusDetailView: View {
         viewModel.client = client
         let result = await viewModel.fetch()
         if !result {
-          _ = routeurPath.path.popLast()
+          if let url = viewModel.remoteStatusURL {
+            openURL(url)
+          }
+          DispatchQueue.main.async {
+            _ = routeurPath.path.popLast()
+          }
         }
         DispatchQueue.main.async {
           proxy.scrollTo(viewModel.statusId, anchor: .center)

@@ -51,7 +51,6 @@ class StatusDetailViewModel: ObservableObject {
       await fetchStatusDetail()
       return true
     } else {
-      await UIApplication.shared.open(remoteStatusURL)
       return false
     }
   }

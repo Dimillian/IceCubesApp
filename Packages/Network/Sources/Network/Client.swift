@@ -20,6 +20,7 @@ public class Client: ObservableObject, Equatable {
   
   public var server: String
   public let version: Version
+  public private(set) var connections: Set<String>
   private let urlSession: URLSession
   private let decoder = JSONDecoder()
   
@@ -38,8 +39,20 @@ public class Client: ObservableObject, Equatable {
     self.urlSession = URLSession.shared
     self.decoder.keyDecodingStrategy = .convertFromSnakeCase
     self.oauthToken = oauthToken
+    self.connections = Set([server])
   }
   
+  public func addConnections(_ connections: [String]) {
+    connections.forEach {
+      self.connections.insert($0)
+    }
+  }
+    
+  public func hasConnection(with url: URL) -> Bool {
+    guard let host = url.host(percentEncoded: false) else { return false }
+    return connections.contains(host)
+  }
+    
   private func makeURL(scheme: String = "https", endpoint: Endpoint, forceVersion: Version? = nil) -> URL {
     var components = URLComponents()
     components.scheme = scheme
