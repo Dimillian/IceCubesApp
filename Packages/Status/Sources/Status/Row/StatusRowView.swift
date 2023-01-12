@@ -69,6 +69,13 @@ public struct StatusRowView: View {
       .contextMenu {
         StatusRowContextMenu(viewModel: viewModel)
       }
+      .background {
+        Color.clear
+          .contentShape(Rectangle())
+          .onTapGesture {
+            viewModel.navigateToDetail(routeurPath: routeurPath)
+          }
+      }
     }
   }
   
