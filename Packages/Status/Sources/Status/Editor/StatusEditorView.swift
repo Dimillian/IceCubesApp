@@ -50,7 +50,7 @@ public struct StatusEditorView: View {
                 .disabled(true)
             }
             if viewModel.showPoll {
-              PollView(viewModel: viewModel, showPoll: $viewModel.showPoll)
+              StatusEditorPollView(viewModel: viewModel, showPoll: $viewModel.showPoll)
                 .padding(.horizontal)
             }
             Spacer()

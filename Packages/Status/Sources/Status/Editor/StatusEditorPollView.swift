@@ -2,7 +2,7 @@ import SwiftUI
 import DesignSystem
 import Env
 
-struct PollView: View {
+struct StatusEditorPollView: View {
   enum FocusField: Hashable {
     case option(Int)
   }
