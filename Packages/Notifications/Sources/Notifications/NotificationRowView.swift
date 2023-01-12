@@ -55,14 +55,19 @@ struct NotificationRowView: View {
         .append {
           Text(" ") +
           Text(type.label())
-            .font(.subheadline) +
+            .font(.subheadline)
+            .fontWeight(.regular)  +
           Text(" ⸱ ")
             .font(.footnote)
+            .fontWeight(.regular)
             .foregroundColor(.gray) +
           Text(notification.createdAt.formatted)
             .font(.footnote)
+            .fontWeight(.regular)
             .foregroundColor(.gray)
         }
+        .font(.subheadline)
+        .fontWeight(.semibold)
         Spacer()
       }
     }
