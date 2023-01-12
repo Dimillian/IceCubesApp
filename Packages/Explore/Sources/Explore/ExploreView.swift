@@ -26,11 +26,27 @@ public struct ExploreView: View {
         }
       } else if !viewModel.isLoaded {
         loadingView
+      } else if viewModel.trendingLinks.isEmpty &&
+                  viewModel.trendingTags.isEmpty &&
+                  viewModel.trendingStatuses.isEmpty &&
+                  viewModel.suggestedAccounts.isEmpty {
+        EmptyView(iconName: "magnifyingglass",
+                  title: "Search your instance",
+                  message: "From this screen you can search anything on \(client.server)")
+        .listRowBackground(theme.secondaryBackgroundColor)
       } else {
-        trendingTagsSection
-        suggestedAccountsSection
-        trendingPostsSection
-        trendingLinksSection
+        if !viewModel.trendingTags.isEmpty {
+          trendingTagsSection
+        }
+        if !viewModel.suggestedAccounts.isEmpty {
+          suggestedAccountsSection
+        }
+        if !viewModel.trendingStatuses.isEmpty {
+          trendingPostsSection
+        }
+        if !viewModel.trendingLinks.isEmpty {
+          trendingLinksSection
+        }
       }
     }
     .task {

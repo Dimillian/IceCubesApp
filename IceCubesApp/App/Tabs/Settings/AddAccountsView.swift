@@ -52,8 +52,10 @@ struct AddAccountView: View {
       .background(theme.secondaryBackgroundColor)
       .scrollDismissesKeyboard(.immediately)
       .toolbar {
-        ToolbarItem(placement: .navigationBarLeading) {
-          Button("Cancel", action: { dismiss() })
+        if !appAccountsManager.availableAccounts.isEmpty {
+          ToolbarItem(placement: .navigationBarLeading) {
+            Button("Cancel", action: { dismiss() })
+          }
         }
       }
       .onAppear {

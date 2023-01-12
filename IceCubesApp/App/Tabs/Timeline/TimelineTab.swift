@@ -37,6 +37,9 @@ struct TimelineTab: View {
       Task {
         await currentAccount.fetchLists()
       }
+      if !client.isAuth {
+        routeurPath.presentedSheet = .addAccount
+      }
     }
     .onChange(of: client.isAuth, perform: { isAuth in
       timeline = isAuth ? .home : .federated
