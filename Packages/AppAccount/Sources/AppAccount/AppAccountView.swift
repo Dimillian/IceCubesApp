@@ -3,12 +3,16 @@ import DesignSystem
 import Env
 import EmojiText
 
-struct AppAccountView: View {
+public struct AppAccountView: View {
   @EnvironmentObject private var routeurPath: RouterPath
   @EnvironmentObject var appAccounts: AppAccountsManager
   @StateObject var viewModel: AppAccountViewModel
   
-  var body: some View {
+  public init(viewModel: AppAccountViewModel) {
+    _viewModel = .init(wrappedValue: viewModel)
+  }
+  
+  public var body: some View {
     HStack {
       if let account = viewModel.account {
         ZStack(alignment: .topTrailing) {

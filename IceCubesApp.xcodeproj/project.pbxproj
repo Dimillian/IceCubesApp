@@ -26,8 +26,6 @@
 		9F2B92F6295AE04800DE16D0 /* Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92F5295AE04800DE16D0 /* Tabs.swift */; };
 		9F2B92FA295DA7D700DE16D0 /* AddAccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92F9295DA7D700DE16D0 /* AddAccountsView.swift */; };
 		9F2B92FC295DA94500DE16D0 /* InstanceInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92FB295DA94500DE16D0 /* InstanceInfoView.swift */; };
-		9F2B92FF295EB87100DE16D0 /* AppAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92FE295EB87100DE16D0 /* AppAccountView.swift */; };
-		9F2B9301295EB8A100DE16D0 /* AppAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B9300295EB8A100DE16D0 /* AppAccountViewModel.swift */; };
 		9F35DB44294F9A7D00B3281A /* Status in Frameworks */ = {isa = PBXBuildFile; productRef = 9F35DB43294F9A7D00B3281A /* Status */; };
 		9F35DB4729506F6600B3281A /* NotificationTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F35DB4629506F6600B3281A /* NotificationTab.swift */; };
 		9F35DB4A29506FA100B3281A /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 9F35DB4929506FA100B3281A /* Notifications */; };
@@ -43,17 +41,15 @@
 		9F7335ED2967463400AFF0BA /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F7335EB2967461B00AFF0BA /* AVKit.framework */; };
 		9F7335EF29674F7100AFF0BA /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F7335EE29674F7100AFF0BA /* QuickLook.framework */; };
 		9F7335F22967608F00AFF0BA /* AddRemoteTimelineVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7335F12967608F00AFF0BA /* AddRemoteTimelineVIew.swift */; };
-		9F7335F72968274500AFF0BA /* AppAccountsSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7335F62968274500AFF0BA /* AppAccountsSelectorView.swift */; };
 		9F7335F92968576500AFF0BA /* DisplaySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7335F82968576500AFF0BA /* DisplaySettingsView.swift */; };
 		9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE4ACA293783B000772766 /* SettingsTab.swift */; };
 		9FAE4ACE29379A5A00772766 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAE4ACD29379A5A00772766 /* KeychainSwift */; };
-		9FAE4AD129379AD600772766 /* AppAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE4AD029379AD600772766 /* AppAccount.swift */; };
-		9FAE4AD32937A0C600772766 /* AppAccountsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE4AD22937A0C600772766 /* AppAccountsManager.swift */; };
 		9FBFE63D292A715500C250E9 /* IceCubesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBFE63C292A715500C250E9 /* IceCubesApp.swift */; };
 		9FBFE64E292A72BD00C250E9 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 9FBFE64D292A72BD00C250E9 /* Network */; };
 		9FD34823293D06E800DB0EE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FD34822293D06E800DB0EE9 /* Assets.xcassets */; };
 		9FD542E72962D2FF0045321A /* Lists in Frameworks */ = {isa = PBXBuildFile; productRef = 9FD542E62962D2FF0045321A /* Lists */; };
 		9FE151A6293C90F900E9683D /* IconSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE151A5293C90F900E9683D /* IconSelectorView.swift */; };
+		9FE3DB57296FEFCA00628CB0 /* AppAccount in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE3DB56296FEFCA00628CB0 /* AppAccount */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,8 +95,6 @@
 		9F2B92F5295AE04800DE16D0 /* Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabs.swift; sourceTree = "<group>"; };
 		9F2B92F9295DA7D700DE16D0 /* AddAccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountsView.swift; sourceTree = "<group>"; };
 		9F2B92FB295DA94500DE16D0 /* InstanceInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceInfoView.swift; sourceTree = "<group>"; };
-		9F2B92FE295EB87100DE16D0 /* AppAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAccountView.swift; sourceTree = "<group>"; };
-		9F2B9300295EB8A100DE16D0 /* AppAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAccountViewModel.swift; sourceTree = "<group>"; };
 		9F35DB42294F9A2900B3281A /* Status */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Status; path = Packages/Status; sourceTree = "<group>"; };
 		9F35DB45294FA04C00B3281A /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DesignSystem; path = Packages/DesignSystem; sourceTree = "<group>"; };
 		9F35DB4629506F6600B3281A /* NotificationTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTab.swift; sourceTree = "<group>"; };
@@ -117,18 +111,16 @@
 		9F7335EB2967461B00AFF0BA /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.2.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
 		9F7335EE29674F7100AFF0BA /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.2.sdk/System/Library/Frameworks/QuickLook.framework; sourceTree = DEVELOPER_DIR; };
 		9F7335F12967608F00AFF0BA /* AddRemoteTimelineVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRemoteTimelineVIew.swift; sourceTree = "<group>"; };
-		9F7335F62968274500AFF0BA /* AppAccountsSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAccountsSelectorView.swift; sourceTree = "<group>"; };
 		9F7335F82968576500AFF0BA /* DisplaySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaySettingsView.swift; sourceTree = "<group>"; };
 		9FAE4AC8293774FF00772766 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9FAE4ACA293783B000772766 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
-		9FAE4AD029379AD600772766 /* AppAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAccount.swift; sourceTree = "<group>"; };
-		9FAE4AD22937A0C600772766 /* AppAccountsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAccountsManager.swift; sourceTree = "<group>"; };
 		9FBFE639292A715500C250E9 /* IceCubesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IceCubesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FBFE63C292A715500C250E9 /* IceCubesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceCubesApp.swift; sourceTree = "<group>"; };
 		9FBFE642292A715600C250E9 /* IceCubesApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IceCubesApp.entitlements; sourceTree = "<group>"; };
 		9FD34822293D06E800DB0EE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9FD542E52962D2CE0045321A /* Lists */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Lists; path = Packages/Lists; sourceTree = "<group>"; };
 		9FE151A5293C90F900E9683D /* IconSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSelectorView.swift; sourceTree = "<group>"; };
+		9FE3DB55296FEF5800628CB0 /* AppAccount */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppAccount; path = Packages/AppAccount; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +145,7 @@
 				9F55C6902955993C00F94077 /* Explore in Frameworks */,
 				9FAE4ACE29379A5A00772766 /* KeychainSwift in Frameworks */,
 				9F7335EA2966B3F800AFF0BA /* Conversations in Frameworks */,
+				9FE3DB57296FEFCA00628CB0 /* AppAccount in Frameworks */,
 				9F398AA92935FFDB00A889F2 /* Account in Frameworks */,
 				9FBFE64E292A72BD00C250E9 /* Network in Frameworks */,
 				9FD542E72962D2FF0045321A /* Lists in Frameworks */,
@@ -182,7 +175,6 @@
 		9F398AB429360A5800A889F2 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				9FAE4ACF29379ACA00772766 /* AppAccounts */,
 				9FAE4AC9293783A200772766 /* Tabs */,
 				9FBFE63C292A715500C250E9 /* IceCubesApp.swift */,
 				9F398AA52935FE8A00A889F2 /* AppRouteur.swift */,
@@ -223,18 +215,6 @@
 			path = Tabs;
 			sourceTree = "<group>";
 		};
-		9FAE4ACF29379ACA00772766 /* AppAccounts */ = {
-			isa = PBXGroup;
-			children = (
-				9FAE4AD029379AD600772766 /* AppAccount.swift */,
-				9FAE4AD22937A0C600772766 /* AppAccountsManager.swift */,
-				9F2B92FE295EB87100DE16D0 /* AppAccountView.swift */,
-				9F2B9300295EB8A100DE16D0 /* AppAccountViewModel.swift */,
-				9F7335F62968274500AFF0BA /* AppAccountsSelectorView.swift */,
-			);
-			path = AppAccounts;
-			sourceTree = "<group>";
-		};
 		9FBFE630292A715500C250E9 = {
 			isa = PBXGroup;
 			children = (
@@ -242,6 +222,7 @@
 				9F2A5417296AB631009B2D7C /* IceCubesNotifications */,
 				9FBFE63A292A715500C250E9 /* Products */,
 				9FBFE64C292A72BD00C250E9 /* Frameworks */,
+				9FE3DB55296FEF5800628CB0 /* AppAccount */,
 				9F398AAC2936005300A889F2 /* Account */,
 				9F7335E82966B3DC00AFF0BA /* Conversations */,
 				9F35DB45294FA04C00B3281A /* DesignSystem */,
@@ -356,6 +337,7 @@
 				9F7335E92966B3F800AFF0BA /* Conversations */,
 				9F2A540929699705009B2D7C /* ReceiptParser */,
 				9F2A540B29699705009B2D7C /* RevenueCat */,
+				9FE3DB56296FEFCA00628CB0 /* AppAccount */,
 			);
 			productName = IceCubesApp;
 			productReference = 9FBFE639292A715500C250E9 /* IceCubesApp.app */;
@@ -442,20 +424,15 @@
 				9F35DB4C2952005C00B3281A /* MessagesTab.swift in Sources */,
 				9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */,
 				9F7335F92968576500AFF0BA /* DisplaySettingsView.swift in Sources */,
-				9FAE4AD32937A0C600772766 /* AppAccountsManager.swift in Sources */,
-				9F2B92FF295EB87100DE16D0 /* AppAccountView.swift in Sources */,
 				9F2A540729699698009B2D7C /* SupportAppView.swift in Sources */,
 				9F2B92F6295AE04800DE16D0 /* Tabs.swift in Sources */,
 				9F398AB329360A4C00A889F2 /* TimelineTab.swift in Sources */,
 				9F398AA62935FE8A00A889F2 /* AppRouteur.swift in Sources */,
-				9F2B9301295EB8A100DE16D0 /* AppAccountViewModel.swift in Sources */,
 				9FBFE63D292A715500C250E9 /* IceCubesApp.swift in Sources */,
 				9F2B92FA295DA7D700DE16D0 /* AddAccountsView.swift in Sources */,
 				639CDF9C296AC82F00C35E58 /* SafariRouteur.swift in Sources */,
 				9F35DB4729506F6600B3281A /* NotificationTab.swift in Sources */,
 				9F7335F22967608F00AFF0BA /* AddRemoteTimelineVIew.swift in Sources */,
-				9F7335F72968274500AFF0BA /* AppAccountsSelectorView.swift in Sources */,
-				9FAE4AD129379AD600772766 /* AppAccount.swift in Sources */,
 				9F55C68D2955968700F94077 /* ExploreTab.swift in Sources */,
 				9F2A5411296A1429009B2D7C /* PushNotificationsView.swift in Sources */,
 			);
@@ -865,6 +842,10 @@
 		9FD542E62962D2FF0045321A /* Lists */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Lists;
+		};
+		9FE3DB56296FEFCA00628CB0 /* AppAccount */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppAccount;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

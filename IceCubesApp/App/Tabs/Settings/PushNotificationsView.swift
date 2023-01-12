@@ -5,6 +5,7 @@ import NukeUI
 import Network
 import UserNotifications
 import Env
+import AppAccount
 
 struct PushNotificationsView: View {
   @EnvironmentObject private var theme: Theme

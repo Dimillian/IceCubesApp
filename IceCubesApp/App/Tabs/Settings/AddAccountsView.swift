@@ -5,6 +5,7 @@ import Env
 import DesignSystem
 import NukeUI
 import Shimmer
+import AppAccount
 
 struct AddAccountView: View {
   @Environment(\.dismiss) private var dismiss

@@ -7,11 +7,10 @@ import Env
 import DesignSystem
 import QuickLook
 import RevenueCat
+import AppAccount
 
 @main
-struct IceCubesApp: App {
-  public static let defaultServer = "mastodon.social"
-  
+struct IceCubesApp: App {  
   @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
   
   @Environment(\.scenePhase) private var scenePhase

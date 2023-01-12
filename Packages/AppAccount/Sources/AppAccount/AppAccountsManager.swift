@@ -1,29 +1,30 @@
 import SwiftUI
 import Network
 import Env
+import Models
 
-class AppAccountsManager: ObservableObject {
+public class AppAccountsManager: ObservableObject {
   @AppStorage("latestCurrentAccountKey") static public var latestCurrentAccountKey: String = ""
   
-  @Published var currentAccount: AppAccount {
+  @Published public var currentAccount: AppAccount {
     didSet {
       Self.latestCurrentAccountKey = currentAccount.id
       currentClient = .init(server: currentAccount.server,
                             oauthToken: currentAccount.oauthToken)
     }
   }
-  @Published var availableAccounts: [AppAccount]
-  @Published var currentClient: Client
+  @Published public var availableAccounts: [AppAccount]
+  @Published public var currentClient: Client
   
-  var pushAccounts: [PushNotificationsService.PushAccounts] {
+  public var pushAccounts: [PushNotificationsService.PushAccounts] {
     availableAccounts.filter{ $0.oauthToken != nil}
       .map{ .init(server: $0.server, token: $0.oauthToken!) }
   }
   
-  static var shared = AppAccountsManager()
+  public static var shared = AppAccountsManager()
   
-  private init() {
-    var defaultAccount = AppAccount(server: IceCubesApp.defaultServer, oauthToken: nil)
+  internal init() {
+    var defaultAccount = AppAccount(server: AppInfo.defaultServer, oauthToken: nil)
     let keychainAccounts = AppAccount.retrieveAll()
     availableAccounts = keychainAccounts
     if let currentAccount = keychainAccounts.first(where: { $0.id == Self.latestCurrentAccountKey }) {
@@ -35,7 +36,7 @@ class AppAccountsManager: ObservableObject {
     currentClient = .init(server: defaultAccount.server, oauthToken: defaultAccount.oauthToken)
   }
   
-  func add(account: AppAccount) {
+  public func add(account: AppAccount) {
     do {
       try account.save()
       availableAccounts.append(account)
@@ -43,11 +44,11 @@ class AppAccountsManager: ObservableObject {
     } catch { }
   }
   
-  func delete(account: AppAccount) {
+  public func delete(account: AppAccount) {
     availableAccounts.removeAll(where: { $0.id == account.id })
     account.delete()
     if currentAccount.id == account.id {
-      currentAccount = availableAccounts.first ?? AppAccount(server: IceCubesApp.defaultServer, oauthToken: nil)
+      currentAccount = availableAccounts.first ?? AppAccount(server: AppInfo.defaultServer, oauthToken: nil)
     }
   }
 }

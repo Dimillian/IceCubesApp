@@ -2,7 +2,7 @@ import SwiftUI
 import Env
 import DesignSystem
 
-struct AppAccountsSelectorView: View {
+public struct AppAccountsSelectorView: View {
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var appAccounts: AppAccountsManager
   
@@ -10,7 +10,11 @@ struct AppAccountsSelectorView: View {
   
   @State private var accountsViewModel: [AppAccountViewModel] = []
   
-  var body: some View {
+  public init(routeurPath: RouterPath) {
+    self.routeurPath = routeurPath
+  }
+  
+  public var body: some View {
     Menu {
       ForEach(accountsViewModel, id: \.appAccount.id) { viewModel in
         Section(viewModel.acct) {

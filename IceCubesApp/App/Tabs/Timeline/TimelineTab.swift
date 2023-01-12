@@ -5,6 +5,7 @@ import Network
 import Combine
 import DesignSystem
 import Models
+import AppAccount
 
 struct TimelineTab: View {
   @EnvironmentObject private var theme: Theme

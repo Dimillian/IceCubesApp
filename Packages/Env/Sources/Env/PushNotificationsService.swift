@@ -10,7 +10,6 @@ import Network
 public class PushNotificationsService: ObservableObject {
   enum Constants {
     static let endpoint = "https://icecubesrelay.fly.dev"
-    static let keychainGroup = "346J38YKE3.com.thomasricouard.IceCubesApp"
     static let keychainAuthKey = "notifications_auth_key"
     static let keychainPrivateKey = "notifications_private_key"
   }
@@ -49,7 +48,7 @@ public class PushNotificationsService: ObservableObject {
   private var keychain: KeychainSwift {
     let keychain = KeychainSwift()
     #if !DEBUG
-      keychain.accessGroup = Constants.keychainGroup
+      keychain.accessGroup = AppInfo.keychainGroup
     #endif
     return keychain
   }

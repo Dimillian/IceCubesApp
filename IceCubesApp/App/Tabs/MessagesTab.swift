@@ -6,6 +6,7 @@ import Models
 import Shimmer
 import Conversations
 import Env
+import AppAccount
 
 struct MessagesTab: View {
   @EnvironmentObject private var watcher: StreamWatcher

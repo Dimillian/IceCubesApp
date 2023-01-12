@@ -3,6 +3,7 @@ import Timeline
 import Env
 import Network
 import Notifications
+import AppAccount
 
 struct NotificationsTab: View {
   @EnvironmentObject private var client: Client

@@ -5,6 +5,7 @@ import Network
 import Account
 import Models
 import DesignSystem
+import AppAccount
 
 struct SettingsTabs: View {
   @EnvironmentObject private var pushNotifications: PushNotificationsService

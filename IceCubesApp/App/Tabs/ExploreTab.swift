@@ -5,6 +5,7 @@ import Shimmer
 import Explore
 import Env
 import Network
+import AppAccount
 
 struct ExploreTab: View {
   @EnvironmentObject private var preferences: UserPreferences
