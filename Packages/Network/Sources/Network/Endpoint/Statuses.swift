@@ -6,7 +6,10 @@ public enum Statuses: Endpoint {
                   inReplyTo: String?,
                   mediaIds: [String]?,
                   spoilerText: String?,
-                  visibility: Visibility)
+                  visibility: Visibility,
+                  pollOptions: [String],
+                  pollVotingFrequency: Bool?,
+                  pollDuration: Int?)
   case editStatus(id: String,
                   status: String,
                   mediaIds: [String]?,
@@ -60,7 +63,7 @@ public enum Statuses: Endpoint {
   
   public func queryItems() -> [URLQueryItem]? {
     switch self {
-    case let .postStatus(status, inReplyTo, mediaIds, spoilerText, visibility):
+    case let .postStatus(status, inReplyTo, mediaIds, spoilerText, visibility, pollOptions, pollVotingFrequency, pollDuration):
       var params: [URLQueryItem] = [.init(name: "status", value: status),
                                     .init(name: "visibility", value: visibility.rawValue)]
       if let inReplyTo {
@@ -73,6 +76,14 @@ public enum Statuses: Endpoint {
       }
       if let spoilerText {
         params.append(.init(name: "spoiler_text", value: spoilerText))
+      }
+      if !pollOptions.isEmpty, let pollVotingFrequency, let pollDuration {
+        for option in pollOptions {
+          params.append(.init(name: "poll[options][]", value: option))
+        }
+
+        params.append(.init(name: "poll[multiple]", value: pollVotingFrequency ? "true" : "false"))
+        params.append(.init(name: "poll[expires_in]", value: "\(pollDuration)"))
       }
       return params
     case let .editStatus(_, status, mediaIds, spoilerText, visibility):
