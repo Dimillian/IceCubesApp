@@ -31,7 +31,8 @@ public struct ListEditView: View {
               HStack {
                 AvatarView(url: account.avatar, size: .status)
                 VStack(alignment: .leading) {
-                  EmojiText(account.safeDisplayName, emojis: account.emojis)
+                  EmojiTextApp(account.safeDisplayName.asMarkdown,
+                               emojis: account.emojis)
                   Text("@\(account.acct)")
                     .foregroundColor(.gray)
                     .font(.footnote)

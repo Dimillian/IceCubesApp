@@ -98,7 +98,7 @@ public struct StatusRowView: View {
       HStack(spacing: 2) {
         Image(systemName:"arrow.left.arrow.right.circle.fill")
         AvatarView(url: viewModel.status.account.avatar, size: .boost)
-        EmojiText(viewModel.status.account.safeDisplayName, emojis: viewModel.status.account.emojis)
+        EmojiTextApp(viewModel.status.account.safeDisplayName.asMarkdown, emojis: viewModel.status.account.emojis)
         Text("boosted")
       }
       .font(.footnote)
@@ -172,7 +172,7 @@ public struct StatusRowView: View {
   private func makeStatusContentView(status: AnyStatus) -> some View {
     Group {
       if !status.spoilerText.isEmpty {
-        EmojiText(status.spoilerText, emojis: status.emojis)
+        EmojiTextApp(status.spoilerText.asMarkdown, emojis: status.emojis)
           .font(.body)
         Button {
           withAnimation {
@@ -185,7 +185,7 @@ public struct StatusRowView: View {
       }
       if !viewModel.displaySpoiler {
         HStack {
-          EmojiText(status.content, emojis: status.emojis)
+          EmojiTextApp(status.content.asMarkdown, emojis: status.emojis)
             .font(.body)
             .environment(\.openURL, OpenURLAction { url in
               routeurPath.handleStatus(status: status, url: url)
@@ -241,7 +241,7 @@ public struct StatusRowView: View {
         AvatarView(url: status.account.avatar, size: .status)
       }
       VStack(alignment: .leading, spacing: 0) {
-        EmojiText(status.account.safeDisplayName, emojis: status.account.emojis)
+        EmojiTextApp(status.account.safeDisplayName.asMarkdown, emojis: status.account.emojis)
           .font(.headline)
           .fontWeight(.semibold)
         Group {

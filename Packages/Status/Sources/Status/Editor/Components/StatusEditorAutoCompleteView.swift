@@ -32,7 +32,8 @@ struct StatusEditorAutoCompleteView: View {
         HStack {
           AvatarView(url: account.avatar, size: .badge)
           VStack(alignment: .leading) {
-            EmojiText(account.safeDisplayName, emojis: account.emojis)
+            EmojiTextApp(account.safeDisplayName.asMarkdown,
+                         emojis: account.emojis)
               .font(.footnote)
               .foregroundColor(theme.labelColor)
             Text("@\(account.acct)")

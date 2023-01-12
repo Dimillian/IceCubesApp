@@ -51,8 +51,9 @@ struct NotificationRowView: View {
   private func makeMainLabel(type: Models.Notification.NotificationType) -> some View {
     VStack(alignment: .leading, spacing: 0) {
       HStack(spacing: 0) {
-      EmojiText(notification.account.safeDisplayName, emojis: notification.account.emojis)
-        .append {
+        EmojiTextApp(notification.account.safeDisplayName.asMarkdown,
+                     emojis: notification.account.emojis,
+                     append: {
           Text(" ") +
           Text(type.label())
             .font(.subheadline)
@@ -65,7 +66,7 @@ struct NotificationRowView: View {
             .font(.footnote)
             .fontWeight(.regular)
             .foregroundColor(.gray)
-        }
+        })
         .font(.subheadline)
         .fontWeight(.semibold)
         Spacer()
@@ -92,7 +93,8 @@ struct NotificationRowView: View {
           .foregroundColor(.gray)
         
         if type == .follow {
-          EmojiText(notification.account.note, emojis: notification.account.emojis)
+          EmojiTextApp(notification.account.note.asMarkdown,
+                       emojis: notification.account.emojis)
             .lineLimit(3)
             .font(.callout)
             .foregroundColor(.gray)

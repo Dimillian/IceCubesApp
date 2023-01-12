@@ -21,13 +21,10 @@ For contributors and myself, here is a todo list of features that could be added
 - [ ] Editor: Support video types
 - [ ] Editor: Add photos from camera
 - [ ] Editor: Support custom emojis
-- [ ] Edit profile
-- [ ] Handle emoji in status
-- [ ] Display & Edit server side features (filter, default visibility, etc...)
-- [ ] Edit filters.
-- [ ] More context menu everywhere
+- [ ] Edit filters
 - [ ] Support IceCubesApp://any mastodon links
-- [ ] Translate button
+- [ ] Translate button / display post language / set post language
+- [ ] Widgets
 - [ ] Proper iPad support
 - [ ] macOS support
 

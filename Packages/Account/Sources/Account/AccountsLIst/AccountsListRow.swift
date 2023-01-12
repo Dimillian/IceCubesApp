@@ -33,13 +33,13 @@ public struct AccountsListRow: View {
     HStack(alignment: .top) {
       AvatarView(url: viewModel.account.avatar, size: .status)
       VStack(alignment: .leading, spacing: 2) {
-        EmojiText(viewModel.account.safeDisplayName, emojis: viewModel.account.emojis)
+        EmojiTextApp(viewModel.account.safeDisplayName.asMarkdown, emojis: viewModel.account.emojis)
           .font(.subheadline)
           .fontWeight(.semibold)
         Text("@\(viewModel.account.acct)")
           .font(.footnote)
           .foregroundColor(.gray)
-        EmojiText(viewModel.account.note, emojis: viewModel.account.emojis)
+        EmojiTextApp(viewModel.account.note.asMarkdown, emojis: viewModel.account.emojis)
           .font(.footnote)
           .lineLimit(3)
           .environment(\.openURL, OpenURLAction { url in

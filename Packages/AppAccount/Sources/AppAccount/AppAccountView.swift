@@ -26,7 +26,7 @@ public struct AppAccountView: View {
       }
       VStack(alignment: .leading) {
         if let account = viewModel.account {
-          EmojiText(account.safeDisplayName, emojis: account.emojis)
+          EmojiTextApp(account.safeDisplayName.asMarkdown, emojis: account.emojis)
           Text("\(account.username)@\(viewModel.appAccount.server)")
             .font(.subheadline)
             .foregroundColor(.gray)
