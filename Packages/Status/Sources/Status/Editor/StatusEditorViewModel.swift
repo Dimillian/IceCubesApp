@@ -150,7 +150,7 @@ public class StatusEditorViewModel: ObservableObject {
       self.visibility = visibility
       selectedRange = .init(location: statusText.string.utf16.count, length: 0)
     case let .edit(status):
-      statusText = .init(status.content.asSafeAttributedString)
+      statusText = .init(status.content.asMarkdown.asSafeAttributedString)
       selectedRange = .init(location: statusText.string.utf16.count, length: 0)
       spoilerOn = !status.spoilerText.isEmpty
       spoilerText = status.spoilerText
