@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/divadretlaw/EmojiText",
       "state" : {
-        "revision" : "f349e481499d2c832ab9d2dc28af238e53b1f9b4",
-        "version" : "1.1.0"
+        "revision" : "3d8f6196de59634352ed317cf6ab4e292eeaaf44",
+        "version" : "1.2.0"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Nuke",
       "state" : {
-        "revision" : "81f6a3dea0c8ce3b87389c241c48601be07af0b1",
-        "version" : "11.5.1"
+        "revision" : "2e9337168d08acccf72c039bf9324be24a1cf7d7",
+        "version" : "11.5.3"
       }
     },
     {
@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/scinfu/SwiftSoup.git",
       "state" : {
-        "revision" : "6778575285177365cbad3e5b8a72f2a20583cfec",
-        "version" : "2.4.3"
+        "revision" : "f707b8680cddb96dc1855632340a572ef37bbb98",
+        "version" : "2.5.3"
       }
     },
     {
@@ -69,7 +69,7 @@
       "location" : "https://github.com/Dimillian/TextView",
       "state" : {
         "branch" : "main",
-        "revision" : "52206e6bcb6de34b2ef6250c4c5111e9b845fb0b"
+        "revision" : "8bddc899350d74f36ad17efc07d35152929bab64"
       }
     }
   ],

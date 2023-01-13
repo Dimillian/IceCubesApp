@@ -23,7 +23,7 @@ public class StatusEditorViewModel: ObservableObject {
   
   @Published var statusText = NSMutableAttributedString(string: "") {
     didSet {
-      highlightMeta()
+      processText()
       checkEmbed()
     }
   }
@@ -135,7 +135,10 @@ public class StatusEditorViewModel: ObservableObject {
         mentionString = "@\(status.reblog?.account.acct ?? status.account.acct)"
       }
       for mention in status.mentions where mention.acct != currentAccount?.acct {
-        mentionString += " @\(mention.acct)"
+        if !mentionString.isEmpty {
+          mentionString += " "
+        }
+        mentionString += "@\(mention.acct)"
       }
       mentionString += " "
       replyToStatus = status
@@ -162,7 +165,7 @@ public class StatusEditorViewModel: ObservableObject {
     }
   }
   
-  private func highlightMeta() {
+  private func processText() {
     statusText.addAttributes([.foregroundColor: UIColor(Color.label)],
                                 range: NSMakeRange(0, statusText.string.utf16.count))
     let hashtagPattern = "(#+[a-zA-Z0-9(_)]{1,})"
@@ -174,16 +177,17 @@ public class StatusEditorViewModel: ObservableObject {
       let mentionRegex = try NSRegularExpression(pattern: mentionPattern, options: [])
       let urlRegex = try NSRegularExpression(pattern: urlPattern, options: [])
       
+      let range = NSMakeRange(0, statusText.string.utf16.count)
       var ranges = hashtagRegex.matches(in: statusText.string,
                                     options: [],
-                                    range: NSMakeRange(0, statusText.string.utf16.count)).map { $0.range }
+                                    range: range).map { $0.range }
       ranges.append(contentsOf: mentionRegex.matches(in: statusText.string,
                                                      options: [],
-                                                     range: NSMakeRange(0, statusText.string.utf16.count)).map {$0.range})
+                                                     range: range).map {$0.range})
       
       let urlRanges = urlRegex.matches(in: statusText.string,
                                        options: [],
-                                       range: NSMakeRange(0, statusText.string.utf16.count)).map { $0.range }
+                                       range:range).map { $0.range }
 
       var foundSuggestionRange: Bool = false
       for nsRange in ranges {
@@ -206,6 +210,20 @@ public class StatusEditorViewModel: ObservableObject {
                                      .underlineStyle: NSUnderlineStyle.single,
                                   .underlineColor: UIColor(theme?.tintColor ?? .brand)],
                                     range: NSRange(location: range.location, length: range.length))
+      }
+      
+      var attachementsToRemove: [NSRange] = []
+      statusText.enumerateAttribute(.attachment, in: range) { attachement, raneg, _ in
+        if let attachement = attachement as? NSTextAttachment, let image = attachement.image {
+          attachementsToRemove.append(range)
+          mediasImages.append(.init(image: image, mediaAttachement: nil, error: nil))
+        }
+      }
+      if !attachementsToRemove.isEmpty {
+        processMediasToUpload()
+        for range in attachementsToRemove {
+          statusText.removeAttribute(.attachment, range: range)
+        }
       }
     } catch {
       
@@ -303,12 +321,12 @@ public class StatusEditorViewModel: ObservableObject {
       }
       DispatchQueue.main.async { [weak self] in
         self?.mediasImages = medias
-        self?.processUpload()
+        self?.processMediasToUpload()
       }
     }
   }
   
-  private func processUpload() {
+  private func processMediasToUpload() {
     uploadTask?.cancel()
     let mediasCopy = mediasImages
     uploadTask = Task {
