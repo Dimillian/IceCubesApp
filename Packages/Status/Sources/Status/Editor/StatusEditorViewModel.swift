@@ -27,6 +27,7 @@ public class StatusEditorViewModel: ObservableObject {
       checkEmbed()
     }
   }
+  @Published var backupStatustext: NSAttributedString?
 
   @Published var showPoll: Bool = false
   @Published var pollVotingFrequency = PollVotingFrequency.oneVote
@@ -87,6 +88,11 @@ public class StatusEditorViewModel: ObservableObject {
     string.mutableString.insert(text, at: inRange.location)
     statusText = string
     selectedRange = NSRange(location: inRange.location + text.utf16.count, length: 0)
+  }
+  
+  func replaceTextWith(text: String) {
+    statusText = .init(string: text)
+    selectedRange = .init(location: text.utf16.count, length: 0)
   }
 
   private func getPollOptionsForAPI() -> [String] {
@@ -296,6 +302,20 @@ public class StatusEditorViewModel: ObservableObject {
     if let range = currentSuggestionRange {
       replaceTextWith(text: "#\(tag.name) ", inRange: range)
     }
+  }
+  
+  // MARK: - OpenAI Prompt
+  func runOpenAI(prompt: OpenAIClient.Prompts) async {
+    do {
+      let client = OpenAIClient()
+      let response = try await client.request(prompt)
+      if var text = response.choices.first?.text {
+        text.removeFirst()
+        text.removeFirst()
+        backupStatustext = statusText
+        replaceTextWith(text: text)
+      }
+    } catch { }
   }
   
   // MARK: - Media related function

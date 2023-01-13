@@ -20,6 +20,7 @@ public struct StatusEditorView: View {
   @FocusState private var isSpoilerTextFocused: Bool
   
   @State private var isDismissAlertPresented: Bool = false
+  @State private var isLoadingAIRequest: Bool = false
   
   public init(mode: StatusEditorViewModel.Mode) {
     _viewModel = StateObject(wrappedValue: .init(mode: mode))
@@ -77,6 +78,10 @@ public struct StatusEditorView: View {
       .navigationTitle(viewModel.mode.title)
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          AIMenu
+            .disabled(!viewModel.canPost)
+        }
         ToolbarItem(placement: .navigationBarTrailing) {
           Button {
             Task {
@@ -175,5 +180,36 @@ public struct StatusEditorView: View {
           .stroke(theme.tintColor, lineWidth: 1)
       )
     }
+  }
+  
+  private var AIMenu: some View {
+    Menu {
+      ForEach(StatusEditorAIPrompts.allCases, id: \.self) { prompt in
+        Button {
+          Task {
+            isLoadingAIRequest = true
+            await viewModel.runOpenAI(prompt: prompt.toRequestPrompt(text: viewModel.statusText.string))
+            isLoadingAIRequest = false
+          }
+        } label: {
+          prompt.label
+        }
+      }
+      if let backup = viewModel.backupStatustext {
+        Button {
+          viewModel.replaceTextWith(text: backup.string)
+          viewModel.backupStatustext = nil
+        } label: {
+          Label("Restore previous text", systemImage: "arrow.uturn.right")
+        }
+      }
+    } label: {
+      if isLoadingAIRequest {
+        ProgressView()
+      } else {
+        Image(systemName: "faxmachine")
+      }
+    }
+
   }
 }
