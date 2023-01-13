@@ -23,6 +23,7 @@ struct StatusEditorAccessoryView: View {
                      matching: .images) {
           Image(systemName: "photo.fill.on.rectangle.fill")
         }
+        .disabled(viewModel.showPoll)
         
         Button {
           viewModel.insertStatusText(text: " @")
@@ -35,6 +36,15 @@ struct StatusEditorAccessoryView: View {
         } label: {
           Image(systemName: "number")
         }
+
+        Button {
+          withAnimation {
+            viewModel.showPoll.toggle()
+          }
+        } label: {
+          Image(systemName: "chart.bar")
+        }
+        .disabled(viewModel.shouldDisablePollButton)
         
         Button {
           withAnimation {

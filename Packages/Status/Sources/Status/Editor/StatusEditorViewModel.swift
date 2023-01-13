@@ -1,5 +1,6 @@
 import SwiftUI
 import DesignSystem
+import Env
 import Models
 import Network
 import PhotosUI
@@ -26,7 +27,12 @@ public class StatusEditorViewModel: ObservableObject {
       checkEmbed()
     }
   }
-  
+
+  @Published var showPoll: Bool = false
+  @Published var pollVotingFrequency = PollVotingFrequency.oneVote
+  @Published var pollDuration = PollDuration.oneDay
+  @Published var pollOptions: [String] = ["", ""]
+
   @Published var spoilerOn: Bool = false
   @Published var spoilerText: String = ""
   
@@ -46,6 +52,10 @@ public class StatusEditorViewModel: ObservableObject {
   @Published var embededStatus: Status?
   var canPost: Bool {
     statusText.length > 0 || !selectedMedias.isEmpty
+  }
+
+  var shouldDisablePollButton: Bool {
+    showPoll || !selectedMedias.isEmpty
   }
   
   @Published var visibility: Models.Visibility = .pub
@@ -78,6 +88,10 @@ public class StatusEditorViewModel: ObservableObject {
     statusText = string
     selectedRange = NSRange(location: inRange.location + text.utf16.count, length: 0)
   }
+
+  private func getPollOptionsForAPI() -> [String] {
+    pollOptions.filter { !$0.trimmingCharacters(in: .whitespaces).isEmpty }
+  }
   
   func postStatus() async -> Status? {
     guard let client else { return nil }
@@ -90,7 +104,10 @@ public class StatusEditorViewModel: ObservableObject {
                                                                          inReplyTo: mode.replyToStatus?.id,
                                                                          mediaIds: mediasImages.compactMap{ $0.mediaAttachement?.id },
                                                                          spoilerText: spoilerOn ? spoilerText : nil,
-                                                                         visibility: visibility))
+                                                                         visibility: visibility,
+                                                                         pollOptions: getPollOptionsForAPI(),
+                                                                         pollVotingFrequency: pollVotingFrequency.canVoteMultipleTimes,
+                                                                         pollDuration: pollDuration.rawValue))
       case let .edit(status):
         postStatus = try await client.put(endpoint: Statuses.editStatus(id: status.id,
                                                                         status: statusText.string,
@@ -193,6 +210,12 @@ public class StatusEditorViewModel: ObservableObject {
     } catch {
       
     }
+  }
+
+  func resetPollDefaults() {
+    pollOptions = ["", ""]
+    pollDuration = .oneDay
+    pollVotingFrequency = .oneVote
   }
   
   private func checkEmbed() {
