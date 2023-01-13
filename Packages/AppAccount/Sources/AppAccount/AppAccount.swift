@@ -12,6 +12,14 @@ public struct AppAccount: Codable, Identifiable {
     key
   }
   
+  private static var keychain: KeychainSwift {
+    let keychain = KeychainSwift()
+    #if !DEBUG
+      keychain.accessGroup = AppInfo.keychainGroup
+    #endif
+    return keychain
+  }
+  
   public var key: String {
     if let oauthToken {
       return "\(server):\(oauthToken.createdAt)"
@@ -28,16 +36,16 @@ public struct AppAccount: Codable, Identifiable {
   public func save() throws {
     let encoder = JSONEncoder()
     let data = try encoder.encode(self)
-    let keychain = KeychainSwift()
-    keychain.set(data, forKey: key)
+    Self.keychain.set(data, forKey: key)
   }
   
   public func delete() {
-    KeychainSwift().delete(key)
+    Self.keychain.delete(key)
   }
   
   public static func retrieveAll() -> [AppAccount] {
-    let keychain = KeychainSwift()
+    migrateLegacyAccounts()
+    let keychain = Self.keychain
     let decoder = JSONDecoder()
     let keys = keychain.allKeys
     var accounts: [AppAccount] = []
@@ -51,8 +59,21 @@ public struct AppAccount: Codable, Identifiable {
     return accounts
   }
   
-  public static func deleteAll() {
+  public static func migrateLegacyAccounts() {
     let keychain = KeychainSwift()
+    let decoder = JSONDecoder()
+    let keys = keychain.allKeys
+    for key in keys {
+      if let data = keychain.getData(key) {
+        if let account = try? decoder.decode(AppAccount.self, from: data) {
+          try? account.save()
+        }
+      }
+    }
+  }
+  
+  public static func deleteAll() {
+    let keychain = Self.keychain
     let keys = keychain.allKeys
     for key in keys {
       keychain.delete(key)
