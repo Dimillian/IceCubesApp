@@ -99,7 +99,6 @@ struct StatusEditorPollView: View {
   }
 
   private func removeChoice(at index: Int) {
-    currentFocusIndex -= 1
     viewModel.pollOptions.remove(at: index)
 
     if viewModel.pollOptions.count == 1 {
@@ -108,8 +107,6 @@ struct StatusEditorPollView: View {
       withAnimation {
         showPoll = false
       }
-    } else {
-      moveFocus()
     }
   }
 
