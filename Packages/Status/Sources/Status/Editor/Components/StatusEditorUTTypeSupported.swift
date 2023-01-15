@@ -5,6 +5,7 @@ import Foundation
 enum StatusEditorUTTypeSupported: String, CaseIterable {
   case url = "public.url"
   case text = "public.text"
+  case plaintext = "public.plain-text"
   case image = "public.image"
   case jpeg = "public.jpeg"
   case png = "public.png"
