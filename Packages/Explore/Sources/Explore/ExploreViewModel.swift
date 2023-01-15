@@ -38,6 +38,10 @@ class ExploreViewModel: ObservableObject {
       }
     }
   }
+
+  var allSectionsEmpty: Bool {
+    trendingLinks.isEmpty && trendingTags.isEmpty && trendingStatuses.isEmpty && suggestedAccounts.isEmpty
+  }
   
   @Published var tokens: [Token] = []
   @Published var suggestedToken: [Token] = []
