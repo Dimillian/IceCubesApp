@@ -41,4 +41,20 @@ public struct FeaturedTag: Codable, Identifiable {
   public var statusesCountInt: Int {
     Int(statusesCount) ?? 0
   }
+  
+  private enum CodingKeys: String, CodingKey {
+    case id, name, url, statusesCount
+  }
+  
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    id = try container.decode(String.self, forKey: .id)
+    name = try container.decode(String.self, forKey: .name)
+    url = try container.decode(URL.self, forKey: .url)
+    do {
+      statusesCount = try container.decode(String.self, forKey: .statusesCount)
+    } catch DecodingError.typeMismatch {
+      statusesCount = try String(container.decode(Int.self, forKey: .statusesCount))
+    }
+  }
 }
