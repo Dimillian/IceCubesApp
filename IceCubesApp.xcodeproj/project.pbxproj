@@ -49,6 +49,10 @@
 		9FAD85982974405D00496AB1 /* Status in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD85972974405D00496AB1 /* Status */; };
 		9FAD859A297440CB00496AB1 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD8599297440CB00496AB1 /* KeychainSwift */; };
 		9FAD859C2974422700496AB1 /* AppAccount in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD859B2974422700496AB1 /* AppAccount */; };
+		9FAD859E2974569B00496AB1 /* Account in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD859D2974569B00496AB1 /* Account */; };
+		9FAD85A0297456A100496AB1 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD859F297456A100496AB1 /* Models */; };
+		9FAD85A2297456A400496AB1 /* Env in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD85A1297456A400496AB1 /* Env */; };
+		9FAD85A4297456A800496AB1 /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD85A3297456A800496AB1 /* DesignSystem */; };
 		9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE4ACA293783B000772766 /* SettingsTab.swift */; };
 		9FAE4ACE29379A5A00772766 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAE4ACD29379A5A00772766 /* KeychainSwift */; };
 		9FBFE63D292A715500C250E9 /* IceCubesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBFE63C292A715500C250E9 /* IceCubesApp.swift */; };
@@ -159,6 +163,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FAD85A2297456A400496AB1 /* Env in Frameworks */,
+				9FAD85A0297456A100496AB1 /* Models in Frameworks */,
+				9FAD85A4297456A800496AB1 /* DesignSystem in Frameworks */,
+				9FAD859E2974569B00496AB1 /* Account in Frameworks */,
 				9FAD859C2974422700496AB1 /* AppAccount in Frameworks */,
 				9FAD859A297440CB00496AB1 /* KeychainSwift in Frameworks */,
 				9FAD85982974405D00496AB1 /* Status in Frameworks */,
@@ -370,6 +378,10 @@
 				9FAD85972974405D00496AB1 /* Status */,
 				9FAD8599297440CB00496AB1 /* KeychainSwift */,
 				9FAD859B2974422700496AB1 /* AppAccount */,
+				9FAD859D2974569B00496AB1 /* Account */,
+				9FAD859F297456A100496AB1 /* Models */,
+				9FAD85A1297456A400496AB1 /* Env */,
+				9FAD85A3297456A800496AB1 /* DesignSystem */,
 			);
 			productName = IceCubesShareExtension;
 			productReference = 9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */;
@@ -1017,6 +1029,22 @@
 		9FAD859B2974422700496AB1 /* AppAccount */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppAccount;
+		};
+		9FAD859D2974569B00496AB1 /* Account */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Account;
+		};
+		9FAD859F297456A100496AB1 /* Models */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Models;
+		};
+		9FAD85A1297456A400496AB1 /* Env */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Env;
+		};
+		9FAD85A3297456A800496AB1 /* DesignSystem */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DesignSystem;
 		};
 		9FAE4ACD29379A5A00772766 /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;
