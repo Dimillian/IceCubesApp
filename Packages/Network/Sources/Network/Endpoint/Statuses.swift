@@ -2,19 +2,8 @@ import Foundation
 import Models
 
 public enum Statuses: Endpoint {
-  case postStatus(status: String,
-                  inReplyTo: String?,
-                  mediaIds: [String]?,
-                  spoilerText: String?,
-                  visibility: Visibility,
-                  pollOptions: [String],
-                  pollVotingFrequency: Bool?,
-                  pollDuration: Int?)
-  case editStatus(id: String,
-                  status: String,
-                  mediaIds: [String]?,
-                  spoilerText: String?,
-                  visibility: Visibility)
+  case postStatus(json: StatusData)
+  case editStatus(id: String, json: StatusData)
   case status(id: String)
   case context(id: String)
   case favourite(id: String)
@@ -34,7 +23,7 @@ public enum Statuses: Endpoint {
       return "statuses"
     case .status(let id):
       return "statuses/\(id)"
-    case .editStatus(let id, _, _, _, _):
+    case .editStatus(let id, _):
       return "statuses/\(id)"
     case .context(let id):
       return "statuses/\(id)/context"
@@ -63,41 +52,6 @@ public enum Statuses: Endpoint {
   
   public func queryItems() -> [URLQueryItem]? {
     switch self {
-    case let .postStatus(status, inReplyTo, mediaIds, spoilerText, visibility, pollOptions, pollVotingFrequency, pollDuration):
-      var params: [URLQueryItem] = [.init(name: "status", value: status),
-                                    .init(name: "visibility", value: visibility.rawValue)]
-      if let inReplyTo {
-        params.append(.init(name: "in_reply_to_id", value: inReplyTo))
-      }
-      if let mediaIds {
-        for mediaId in mediaIds {
-          params.append(.init(name: "media_ids[]", value: mediaId))
-        }
-      }
-      if let spoilerText {
-        params.append(.init(name: "spoiler_text", value: spoilerText))
-      }
-      if !pollOptions.isEmpty, let pollVotingFrequency, let pollDuration {
-        for option in pollOptions {
-          params.append(.init(name: "poll[options][]", value: option))
-        }
-
-        params.append(.init(name: "poll[multiple]", value: pollVotingFrequency ? "true" : "false"))
-        params.append(.init(name: "poll[expires_in]", value: "\(pollDuration)"))
-      }
-      return params
-    case let .editStatus(_, status, mediaIds, spoilerText, visibility):
-      var params: [URLQueryItem] = [.init(name: "status", value: status),
-                                    .init(name: "visibility", value: visibility.rawValue)]
-      if let mediaIds {
-        for mediaId in mediaIds {
-          params.append(.init(name: "media_ids[]", value: mediaId))
-        }
-      }
-      if let spoilerText {
-        params.append(.init(name: "spoiler_text", value: spoilerText))
-      }
-      return params
     case let .rebloggedBy(_, maxId):
       return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
     case let .favouritedBy(_, maxId):
@@ -105,5 +59,51 @@ public enum Statuses: Endpoint {
     default:
       return nil
     }
+  }
+  
+  public var jsonValue: Encodable? {
+    switch self {
+    case let .postStatus(json):
+      return json
+    case let .editStatus(_, json):
+      return json
+    default:
+      return nil
+    }
+  }
+}
+
+public struct StatusData: Encodable {
+  public let status: String
+  public let visibility: Visibility
+  public let inReplyToId: String?
+  public let spoilerText: String?
+  public let mediaIds: [String]?
+  public let poll: PollData?
+  
+  public struct PollData: Encodable {
+    public let options: [String]
+    public let multiple: Bool
+    public let expires_in: Int
+    
+    public init(options: [String], multiple: Bool, expires_in: Int) {
+      self.options = options
+      self.multiple = multiple
+      self.expires_in = expires_in
+    }
+  }
+  
+  public init(status: String,
+              visibility: Visibility,
+              inReplyToId: String? = nil,
+              spoilerText: String? = nil,
+              mediaIds: [String]? = nil,
+              poll: PollData? = nil) {
+    self.status = status
+    self.visibility = visibility
+    self.inReplyToId = inReplyToId
+    self.spoilerText = spoilerText
+    self.mediaIds = mediaIds
+    self.poll = poll
   }
 }

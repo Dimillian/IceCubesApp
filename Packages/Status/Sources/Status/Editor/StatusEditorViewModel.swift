@@ -95,8 +95,9 @@ public class StatusEditorViewModel: ObservableObject {
     selectedRange = .init(location: text.utf16.count, length: 0)
   }
 
-  private func getPollOptionsForAPI() -> [String] {
-    pollOptions.filter { !$0.trimmingCharacters(in: .whitespaces).isEmpty }
+  private func getPollOptionsForAPI() -> [String]? {
+    let options = pollOptions.filter { !$0.trimmingCharacters(in: .whitespaces).isEmpty }
+    return options.isEmpty ? nil : options
   }
   
   func postStatus() async -> Status? {
@@ -104,22 +105,23 @@ public class StatusEditorViewModel: ObservableObject {
     do {
       isPosting = true
       let postStatus: Status?
+      var pollData: StatusData.PollData?
+      if let pollOptions = getPollOptionsForAPI() {
+        pollData = .init(options: pollOptions,
+                         multiple: pollVotingFrequency.canVoteMultipleTimes,
+                         expires_in: pollDuration.rawValue)
+      }
+      let data = StatusData(status: statusText.string,
+                            visibility: visibility,
+                            inReplyToId: mode.replyToStatus?.id,
+                            spoilerText: spoilerOn ? spoilerText : nil,
+                            mediaIds: mediasImages.compactMap{ $0.mediaAttachement?.id },
+                            poll: pollData)
       switch mode {
       case .new, .replyTo, .quote, .mention:
-        postStatus = try await client.post(endpoint: Statuses.postStatus(status: statusText.string,
-                                                                         inReplyTo: mode.replyToStatus?.id,
-                                                                         mediaIds: mediasImages.compactMap{ $0.mediaAttachement?.id },
-                                                                         spoilerText: spoilerOn ? spoilerText : nil,
-                                                                         visibility: visibility,
-                                                                         pollOptions: getPollOptionsForAPI(),
-                                                                         pollVotingFrequency: pollVotingFrequency.canVoteMultipleTimes,
-                                                                         pollDuration: pollDuration.rawValue))
+        postStatus = try await client.post(endpoint: Statuses.postStatus(json: data))
       case let .edit(status):
-        postStatus = try await client.put(endpoint: Statuses.editStatus(id: status.id,
-                                                                        status: statusText.string,
-                                                                        mediaIds:  mediasImages.compactMap{ $0.mediaAttachement?.id },
-                                                                        spoilerText: spoilerOn ? spoilerText : nil,
-                                                                        visibility: visibility))
+        postStatus = try await client.put(endpoint: Statuses.editStatus(id: status.id, json: data))
       }
       generator.notificationOccurred(.success)
       isPosting = false

@@ -66,18 +66,29 @@ public class Client: ObservableObject, Equatable {
     return components.url!
   }
   
-  private func makeURLRequest(url: URL, httpMethod: String) -> URLRequest {
+  private func makeURLRequest(url: URL, endpoint: Endpoint, httpMethod: String) -> URLRequest {
     var request = URLRequest(url: url)
     request.httpMethod = httpMethod
     if let oauthToken {
       request.setValue("Bearer \(oauthToken.accessToken)", forHTTPHeaderField: "Authorization")
+    }
+    if let json = endpoint.jsonValue {
+      let encoder = JSONEncoder()
+      encoder.keyEncodingStrategy = .convertToSnakeCase
+      do {
+        let jsonData = try encoder.encode(json)
+        request.httpBody = jsonData
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+      } catch {
+        print("Client Error encoding JSON: \(error.localizedDescription)")
+      }
     }
     return request
   }
   
   private func makeGet(endpoint: Endpoint) -> URLRequest {
     let url = makeURL(endpoint: endpoint)
-    return makeURLRequest(url: url, httpMethod: "GET")
+    return makeURLRequest(url: url, endpoint: endpoint, httpMethod: "GET")
   }
     
   public func get<Entity: Decodable>(endpoint: Endpoint, forceVersion: Version? = nil) async throws -> Entity {
@@ -101,14 +112,14 @@ public class Client: ObservableObject, Equatable {
   
   public func post(endpoint: Endpoint) async throws -> HTTPURLResponse? {
     let url = makeURL(endpoint: endpoint)
-    let request = makeURLRequest(url: url, httpMethod: "POST")
+    let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: "POST")
     let (_, httpResponse) = try await urlSession.data(for: request)
     return httpResponse as? HTTPURLResponse
   }
   
   public func patch(endpoint: Endpoint) async throws -> HTTPURLResponse? {
     let url = makeURL(endpoint: endpoint)
-    let request = makeURLRequest(url: url, httpMethod: "PATCH")
+    let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: "PATCH")
     let (_, httpResponse) = try await urlSession.data(for: request)
     return httpResponse as? HTTPURLResponse
   }
@@ -119,7 +130,7 @@ public class Client: ObservableObject, Equatable {
   
   public func delete(endpoint: Endpoint) async throws -> HTTPURLResponse? {
     let url = makeURL(endpoint: endpoint)
-    let request = makeURLRequest(url: url, httpMethod: "DELETE")
+    let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: "DELETE")
     let (_, httpResponse) = try await urlSession.data(for: request)
     return httpResponse as? HTTPURLResponse
   }
@@ -128,7 +139,7 @@ public class Client: ObservableObject, Equatable {
                                                     method: String,
                                                     forceVersion: Version? = nil) async throws -> Entity {
     let url = makeURL(endpoint: endpoint, forceVersion: forceVersion)
-    let request = makeURLRequest(url: url, httpMethod: method)
+    let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: method)
     let (data, httpResponse) = try await urlSession.data(for: request)
     logResponseOnError(httpResponse: httpResponse, data: data)
     return try decoder.decode(Entity.self, from: data)
@@ -157,7 +168,7 @@ public class Client: ObservableObject, Equatable {
   
   public func makeWebSocketTask(endpoint: Endpoint) -> URLSessionWebSocketTask {
     let url = makeURL(scheme: "wss", endpoint: endpoint)
-    let request = makeURLRequest(url: url, httpMethod: "GET")
+    let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: "GET")
     return urlSession.webSocketTask(with: request)
   }
     
@@ -168,7 +179,7 @@ public class Client: ObservableObject, Equatable {
                                              filename: String,
                                              data: Data) async throws -> Entity {
     let url = makeURL(endpoint: endpoint, forceVersion: version)
-    var request = makeURLRequest(url: url, httpMethod: method)
+    var request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: method)
     let boundary = UUID().uuidString
     request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
     let httpBody = NSMutableData()
