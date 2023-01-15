@@ -5,7 +5,7 @@ import Network
 
 @MainActor
 public class UserPreferences: ObservableObject {
-  private static let sharedDefault = UserDefaults.init(suiteName: "group.icecubesapps")
+  public static let sharedDefault = UserDefaults.init(suiteName: "group.icecubesapps")
   
   private var client: Client?
   

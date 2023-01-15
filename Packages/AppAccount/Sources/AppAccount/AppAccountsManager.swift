@@ -3,8 +3,10 @@ import Network
 import Env
 import Models
 
+@MainActor
 public class AppAccountsManager: ObservableObject {
-  @AppStorage("latestCurrentAccountKey") static public var latestCurrentAccountKey: String = ""
+  @AppStorage("latestCurrentAccountKey", store: UserPreferences.sharedDefault)
+  static public var latestCurrentAccountKey: String = ""
   
   @Published public var currentAccount: AppAccount {
     didSet {
