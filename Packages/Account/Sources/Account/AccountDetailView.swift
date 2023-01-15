@@ -156,9 +156,9 @@ public struct AccountDetailView: View {
               isFieldsSheetDisplayed.toggle()
             } label: {
               VStack(alignment: .leading, spacing: 0) {
-                Text("About")
+                Text("account.detail.about")
                   .font(.scaledCallout)
-                Text("\(viewModel.fields.count) fields")
+                Text("account.detail.n-fields \(viewModel.fields.count)")
                   .font(.caption2)
               }
             }
@@ -175,7 +175,7 @@ public struct AccountDetailView: View {
                 VStack(alignment: .leading, spacing: 0) {
                   Text("#\(tag.name)")
                     .font(.scaledCallout)
-                  Text("\(tag.statusesCount) posts")
+                  Text("account.detail.posts-\(tag.statusesCount)")
                     .font(.caption2)
                 }
               }.buttonStyle(.bordered)
@@ -191,7 +191,7 @@ public struct AccountDetailView: View {
   private var familiarFollowers: some View {
     if !viewModel.familiarFollowers.isEmpty {
       VStack(alignment: .leading, spacing: 2) {
-        Text("Also followed by")
+        Text("account.detail.familiar-followers")
           .font(.scaledHeadline)
           .padding(.leading, .layoutPadding)
         ScrollView(.horizontal, showsIndicators: false) {
@@ -234,7 +234,7 @@ public struct AccountDetailView: View {
       }
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
-      .navigationTitle("About")
+      .navigationTitle("account.detail.about")
       .toolbar {
         ToolbarItem(placement: .primaryAction) {
           Button {
@@ -284,14 +284,14 @@ public struct AccountDetailView: View {
           .foregroundColor(theme.labelColor)
         }
         .contextMenu {
-          Button("Delete list", role: .destructive) {
+          Button("account.list.delete", role: .destructive) {
             Task {
               await currentAccount.deleteList(list: list)
             }
           }
         }
       }
-      Button("Create a new list") {
+      Button("account.list.create") {
         isCreateListAlertPresented = true
       }
       .padding(.horizontal, .layoutPadding)
@@ -299,13 +299,13 @@ public struct AccountDetailView: View {
     .task {
       await currentAccount.fetchLists()
     }
-    .alert("Create a new list", isPresented: $isCreateListAlertPresented) {
-      TextField("List name", text: $createListTitle)
-      Button("Cancel") {
+    .alert("account.list.create", isPresented: $isCreateListAlertPresented) {
+      TextField("account.list.name", text: $createListTitle)
+      Button("action.cancel") {
         isCreateListAlertPresented = false
         createListTitle = ""
       }
-      Button("Create List") {
+      Button("account.list.create.confirm") {
         guard !createListTitle.isEmpty else { return }
         isCreateListAlertPresented = false
         Task {
@@ -314,7 +314,7 @@ public struct AccountDetailView: View {
         }
       }
     } message: {
-      Text("Enter the name for your list")
+      Text("account.list.create.description")
     }
   }
 
@@ -323,7 +323,7 @@ public struct AccountDetailView: View {
     if !viewModel.pinned.isEmpty {
       ForEach(viewModel.pinned) { status in
         VStack(alignment: .leading) {
-          Label("Pinned post", systemImage: "pin.fill")
+          Label("account.post.pinned", systemImage: "pin.fill")
             .font(.scaledFootnote)
             .foregroundColor(.gray)
             .fontWeight(.semibold)
@@ -359,12 +359,12 @@ public struct AccountDetailView: View {
                 routerPath.presentedSheet = .mentionStatusEditor(account: account,
                                                                   visibility: preferences.serverPreferences?.postVisibility ?? .pub)
               } label: {
-                Label("Mention", systemImage: "at")
+                Label("account.action.mention", systemImage: "at")
               }
               Button {
                 routerPath.presentedSheet = .mentionStatusEditor(account: account, visibility: .direct)
               } label: {
-                Label("Message", systemImage: "tray.full")
+                Label("account.action.message", systemImage: "tray.full")
               }
               Divider()
             }
@@ -373,7 +373,7 @@ public struct AccountDetailView: View {
               Button {
                 routerPath.presentedSheet = .listAddAccount(account: account)
               } label: {
-                Label("Add/Remove from lists", systemImage: "list.bullet")
+                Label("account.action.add-remove-list", systemImage: "list.bullet")
               }
             }
 
@@ -387,7 +387,7 @@ public struct AccountDetailView: View {
               Button {
                 isEditingAccount = true
               } label: {
-                Label("Edit Info", systemImage: "pencil")
+                Label("account.action.edit-info", systemImage: "pencil")
               }
             }
           }

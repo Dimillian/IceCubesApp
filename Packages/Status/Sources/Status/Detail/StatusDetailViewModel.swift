@@ -15,8 +15,8 @@ class StatusDetailViewModel: ObservableObject {
   }
 
   @Published var state: State = .loading
-  @Published var title: String = ""
-
+  @Published var title: LocalizedStringKey = ""
+    
   init(statusId: String) {
     state = .loading
     self.statusId = statusId
@@ -65,7 +65,7 @@ class StatusDetailViewModel: ObservableObject {
     do {
       let data = try await fetchContextData(client: client, statusId: statusId)
       state = .display(status: data.status, context: data.context)
-      title = "Post from \(data.status.account.displayNameWithoutEmojis)"
+      title = "status.post-from-\(status.account.displayNameWithoutEmojis)"
     } catch {
       state = .error(error: error)
     }

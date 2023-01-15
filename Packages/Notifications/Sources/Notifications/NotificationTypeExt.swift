@@ -1,24 +1,25 @@
 import Models
+import SwiftUI
 
 extension Models.Notification.NotificationType {
-  func label() -> String {
+  func label() -> LocalizedStringKey {
     switch self {
     case .status:
-      return "posted a status"
+      return "notifications.label.status"
     case .mention:
-      return "mentioned you"
+      return "notifications.label.mention"
     case .reblog:
-      return "boosted"
+      return "notifications.label.reblog"
     case .follow:
-      return "followed you"
+      return "notifications.label.follow"
     case .follow_request:
-      return "request to follow you"
+      return "notifications.label.follow-request"
     case .favourite:
-      return "starred"
+      return "notifications.label.favorite"
     case .poll:
-      return "poll ended"
+      return "notifications.label.poll"
     case .update:
-      return "edited a post"
+      return "notifications.label.update"
     }
   }
 
@@ -40,25 +41,25 @@ extension Models.Notification.NotificationType {
       return "pencil.line"
     }
   }
-
-  func menuTitle() -> String {
+  
+  func menuTitle() -> LocalizedStringKey {
     switch self {
     case .status:
-      return "Post"
+      return "notifications.menu-title.status"
     case .mention:
-      return "Mentions"
+      return "notifications.menu-title.mention"
     case .reblog:
-      return "Boost"
+      return "notifications.menu-title.reblog"
     case .follow:
-      return "Follow"
+      return "notifications.menu-title.follow"
     case .follow_request:
-      return "Follow Request"
+      return "notifications.menu-title.follow-request"
     case .favourite:
-      return "Favorite"
+      return "notifications.menu-title.favorite"
     case .poll:
-      return "Poll"
+      return "notifications.menu-title.poll"
     case .update:
-      return "Post Edited"
+      return "notifications.menu-title.update"
     }
   }
 }

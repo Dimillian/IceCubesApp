@@ -1,12 +1,12 @@
 import SwiftUI
 
 public struct ErrorView: View {
-  public let title: String
-  public let message: String
+  public let title: LocalizedStringKey
+  public let message: LocalizedStringKey
   public let buttonTitle: String
   public let onButtonPress: () -> Void
 
-  public init(title: String, message: String, buttonTitle: String, onButtonPress: @escaping (() -> Void)) {
+  public init(title: LocalizedStringKey, message: LocalizedStringKey, buttonTitle: String, onButtonPress: @escaping (() -> Void)) {
     self.title = title
     self.message = message
     self.buttonTitle = buttonTitle

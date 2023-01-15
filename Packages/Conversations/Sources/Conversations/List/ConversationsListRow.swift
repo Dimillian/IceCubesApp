@@ -81,7 +81,7 @@ struct ConversationsListRow: View {
         await viewModel.markAsRead(conversation: conversation)
       }
     } label: {
-      Label("Mark as read", systemImage: "eye")
+      Label("conversations.action.mark-read", systemImage: "eye")
     }
 
     Button(role: .destructive) {
@@ -89,7 +89,7 @@ struct ConversationsListRow: View {
         await viewModel.delete(conversation: conversation)
       }
     } label: {
-      Label("Delete", systemImage: "trash")
+      Label("conversations.action.delete", systemImage: "trash")
     }
   }
 }

@@ -39,29 +39,29 @@ public struct ListAddAccountView: View {
           }
           .listRowBackground(theme.primaryBackgroundColor)
         }
-        Button("Create a new list") {
+        Button("lists.create") {
           isCreateListAlertPresented = true
         }
         .listRowBackground(theme.primaryBackgroundColor)
       }
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
-      .navigationTitle("Add/Remove \(viewModel.account.displayName)")
+      .navigationTitle("lists.add-remove-\(viewModel.account.displayName)")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem {
-          Button("Done") {
+          Button("action.done") {
             dismiss()
           }
         }
       }
-      .alert("Create a new list", isPresented: $isCreateListAlertPresented) {
-        TextField("List name", text: $createListTitle)
-        Button("Cancel") {
+      .alert("lists.create", isPresented: $isCreateListAlertPresented) {
+        TextField("lists.name", text: $createListTitle)
+        Button("action.cancel") {
           isCreateListAlertPresented = false
           createListTitle = ""
         }
-        Button("Create List") {
+        Button("lists.create.confirm") {
           guard !createListTitle.isEmpty else { return }
           isCreateListAlertPresented = false
           Task {
@@ -70,7 +70,7 @@ public struct ListAddAccountView: View {
           }
         }
       } message: {
-        Text("Enter the name for your list")
+        Text("lists.name.message")
       }
     }
     .task {

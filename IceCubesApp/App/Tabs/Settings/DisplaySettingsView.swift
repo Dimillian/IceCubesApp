@@ -12,32 +12,32 @@ struct DisplaySettingsView: View {
 
   var body: some View {
     Form {
-      Section("Theme") {
+      Section("settings.display.section.theme") {
         themeSelectorButton
-        ColorPicker("Tint color", selection: $theme.tintColor)
-        ColorPicker("Background color", selection: $theme.primaryBackgroundColor)
-        ColorPicker("Secondary Background color", selection: $theme.secondaryBackgroundColor)
+        ColorPicker("settings.display.theme.tint", selection: $theme.tintColor)
+        ColorPicker("settings.display.theme.background", selection: $theme.primaryBackgroundColor)
+        ColorPicker("settings.display.theme.secondary-background", selection: $theme.secondaryBackgroundColor)
       }
       .listRowBackground(theme.primaryBackgroundColor)
 
-      Section("Display") {
-        Picker("Avatar position", selection: $theme.avatarPosition) {
+      Section("settings.display.section.display") {
+        Picker("settings.display.avatar.position", selection: $theme.avatarPosition) {
           ForEach(Theme.AvatarPosition.allCases, id: \.rawValue) { position in
             Text(position.description).tag(position)
           }
         }
-        Picker("Avatar shape", selection: $theme.avatarShape) {
+        Picker("settings.display.avatar.shape", selection: $theme.avatarShape) {
           ForEach(Theme.AvatarShape.allCases, id: \.rawValue) { shape in
             Text(shape.description).tag(shape)
           }
         }
-        Picker("Status actions buttons", selection: $theme.statusActionsDisplay) {
+        Picker("settings.display.status.action-buttons", selection: $theme.statusActionsDisplay) {
           ForEach(Theme.StatusActionsDisplay.allCases, id: \.rawValue) { buttonStyle in
             Text(buttonStyle.description).tag(buttonStyle)
           }
         }
 
-        Picker("Status media style", selection: $theme.statusDisplayStyle) {
+        Picker("settings.display.status.media-style", selection: $theme.statusDisplayStyle) {
           ForEach(Theme.StatusDisplayStyle.allCases, id: \.rawValue) { buttonStyle in
             Text(buttonStyle.description).tag(buttonStyle)
           }
@@ -59,12 +59,12 @@ struct DisplaySettingsView: View {
           theme.avatarPosition = .top
           theme.statusActionsDisplay = .full
         } label: {
-          Text("Restore default")
+          Text("settings.display.restore")
         }
       }
       .listRowBackground(theme.primaryBackgroundColor)
     }
-    .navigationTitle("Display Settings")
+    .navigationTitle("settings.display.navigation-title")
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
   }
@@ -72,7 +72,7 @@ struct DisplaySettingsView: View {
   private var themeSelectorButton: some View {
     NavigationLink(destination: ThemePreviewView()) {
       HStack {
-        Text("Theme")
+        Text("settings.display.section.theme")
         Spacer()
         Text(theme.selectedSet.rawValue)
       }

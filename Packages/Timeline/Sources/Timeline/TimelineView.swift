@@ -59,7 +59,7 @@ public struct TimelineView: View {
         scrollProxy = proxy
       }
     }
-    .navigationTitle(timeline.title())
+    .navigationTitle(timeline.localizedTitle())
     .navigationBarTitleDisplayMode(.inline)
     .onAppear {
       if viewModel.client == nil {
@@ -143,7 +143,7 @@ public struct TimelineView: View {
         VStack(alignment: .leading, spacing: 4) {
           Text("#\(tag.name)")
             .font(.scaledHeadline)
-          Text("\(tag.totalUses) recent posts from \(tag.totalAccounts) participants")
+          Text("timeline.n-recent-from-n-participants \(tag.totalUses) \(tag.totalAccounts)")
             .font(.scaledFootnote)
             .foregroundColor(.gray)
         }
@@ -157,7 +157,7 @@ public struct TimelineView: View {
             }
           }
         } label: {
-          Text(tag.following ? "Following" : "Follow")
+          Text(tag.following ? "account.follow.following" : "account.follow.follow")
         }.buttonStyle(.bordered)
       }
       .padding(.horizontal, .layoutPadding)

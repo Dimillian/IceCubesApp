@@ -24,7 +24,7 @@ struct AddRemoteTimelineView: View {
   var body: some View {
     NavigationStack {
       Form {
-        TextField("Instance URL", text: $instanceName)
+        TextField("timeline.add.url", text: $instanceName)
           .listRowBackground(theme.primaryBackgroundColor)
           .keyboardType(.URL)
           .textContentType(.URL)
@@ -32,7 +32,7 @@ struct AddRemoteTimelineView: View {
           .autocorrectionDisabled()
           .focused($isInstanceURLFieldFocused)
         if let instance {
-          Label("\(instance.title) is a valid instance", systemImage: "checkmark.seal.fill")
+          Label("timeline.\(instance.title)-is-valid", systemImage: "checkmark.seal.fill")
             .foregroundColor(.green)
             .listRowBackground(theme.primaryBackgroundColor)
         }
@@ -41,21 +41,21 @@ struct AddRemoteTimelineView: View {
           preferences.remoteLocalTimelines.append(instanceName)
           dismiss()
         } label: {
-          Text("Add")
+          Text("timeline.add.action.add")
         }
         .listRowBackground(theme.primaryBackgroundColor)
 
         instancesListView
       }
       .formStyle(.grouped)
-      .navigationTitle("Add remote local timeline")
+      .navigationTitle("timeline.add-remote.title")
       .navigationBarTitleDisplayMode(.inline)
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
       .scrollDismissesKeyboard(.immediately)
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
-          Button("Cancel", action: { dismiss() })
+          Button("action.cancel", action: { dismiss() })
         }
       }
       .onChange(of: instanceName) { newValue in
@@ -78,7 +78,7 @@ struct AddRemoteTimelineView: View {
   }
 
   private var instancesListView: some View {
-    Section("Suggestions") {
+    Section("instance.suggestions") {
       if instances.isEmpty {
         ProgressView()
           .listRowBackground(theme.primaryBackgroundColor)
@@ -94,9 +94,12 @@ struct AddRemoteTimelineView: View {
               Text(instance.info?.shortDescription ?? "")
                 .font(.scaledBody)
                 .foregroundColor(.gray)
-              Text("\(instance.users) users  ⸱  \(instance.statuses) posts")
-                .font(.scaledFootnote)
-                .foregroundColor(.gray)
+              
+              (Text("instance.list.users-\(instance.users)")
+                + Text("  ⸱  ")
+                + Text("instance.list.posts-\(instance.statuses)"))
+              .font(.scaledFootnote)
+              .foregroundColor(.gray)
             }
           }
           .listRowBackground(theme.primaryBackgroundColor)

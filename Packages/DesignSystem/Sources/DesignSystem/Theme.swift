@@ -14,9 +14,9 @@ public class Theme: ObservableObject {
     public var description: LocalizedStringKey {
       switch self {
       case .leading:
-        return "Leading"
+        return "enum.avatar-position.leading"
       case .top:
-        return "Top"
+        return "enum.avatar-position.top"
       }
     }
   }
@@ -27,9 +27,9 @@ public class Theme: ObservableObject {
     public var description: LocalizedStringKey {
       switch self {
       case .circle:
-        return "Circle"
+        return "enum.avatar-shape.circle"
       case .rounded:
-        return "Rounded"
+        return "enum.avatar-shape.rounded"
       }
     }
   }
@@ -40,11 +40,11 @@ public class Theme: ObservableObject {
     public var description: LocalizedStringKey {
       switch self {
       case .full:
-        return "All"
+        return "enum.status-actions-display.all"
       case .discret:
-        return "Only buttons"
+        return "enum.status-actions-display.only-buttons"
       case .none:
-        return "No buttons"
+        return "enum.status-actions-display.no-buttons"
       }
     }
   }
@@ -55,9 +55,9 @@ public class Theme: ObservableObject {
     public var description: LocalizedStringKey {
       switch self {
       case .large:
-        return "Large"
+        return "enum.status-display-style.large"
       case .compact:
-        return "Compact"
+        return "enum.status-display-style.compact"
       }
     }
   }

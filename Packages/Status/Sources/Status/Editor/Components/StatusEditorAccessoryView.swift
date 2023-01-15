@@ -157,12 +157,12 @@ struct StatusEditorAccessoryView: View {
       }
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
-          Button("Cancel", action: { isDraftsSheetDisplayed = false })
+          Button("action.cancel", action: { isDraftsSheetDisplayed = false })
         }
       }
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
-      .navigationTitle("Drafts")
+      .navigationTitle("status.editor.drafts.navigation-title")
       .navigationBarTitleDisplayMode(.inline)
     }
     .presentationDetents([.medium])

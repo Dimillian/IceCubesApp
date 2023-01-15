@@ -12,7 +12,7 @@ struct InstanceInfoView: View {
     Form {
       InstanceInfoSection(instance: instance)
     }
-    .navigationTitle("Instance Info")
+    .navigationTitle("instance.info.navigation-title")
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
   }
@@ -24,19 +24,19 @@ public struct InstanceInfoSection: View {
   let instance: Instance
 
   public var body: some View {
-    Section("Instance info") {
-      LabeledContent("Name", value: instance.title)
+    Section("instance.info.section.info") {
+      LabeledContent("instance.info.name", value: instance.title)
       Text(instance.shortDescription)
-      LabeledContent("Email", value: instance.email)
-      LabeledContent("Version", value: instance.version)
-      LabeledContent("Users", value: "\(instance.stats.userCount)")
-      LabeledContent("Posts", value: "\(instance.stats.statusCount)")
-      LabeledContent("Domains", value: "\(instance.stats.domainCount)")
+      LabeledContent("instance.info.email", value: instance.email)
+      LabeledContent("instance.info.version", value: instance.version)
+      LabeledContent("instance.info.users", value: "\(instance.stats.userCount)")
+      LabeledContent("instance.info.posts", value: "\(instance.stats.statusCount)")
+      LabeledContent("instance.info.domains", value: "\(instance.stats.domainCount)")
     }
     .listRowBackground(theme.primaryBackgroundColor)
 
     if let rules = instance.rules {
-      Section("Instance rules") {
+      Section("instance.info.section.rules") {
         ForEach(rules) { rule in
           Text(rule.text)
         }

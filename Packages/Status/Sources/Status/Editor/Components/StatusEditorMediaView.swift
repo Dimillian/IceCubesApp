@@ -47,14 +47,14 @@ struct StatusEditorMediaView: View {
         .cornerRadius(8)
       if container.error != nil {
         VStack {
-          Text("Error uploading")
+          Text("status.editor.error.upload")
           Button {
             withAnimation {
               viewModel.mediasImages.removeAll(where: { $0.id == container.id })
             }
           } label: {
             VStack {
-              Text("Delete")
+              Text("action.delete")
             }
           }
           .buttonStyle(.bordered)
@@ -64,7 +64,7 @@ struct StatusEditorMediaView: View {
             }
           } label: {
             VStack {
-              Text("Retry")
+              Text("action.retry")
             }
           }
           .buttonStyle(.bordered)
@@ -97,7 +97,7 @@ struct StatusEditorMediaView: View {
         editingContainer = container
       } label: {
         Label(container.mediaAttachment?.description?.isEmpty == false ?
-          "Edit description" : "Add description",
+          "status.editor.description.edit" : "status.editor.description.add",
           systemImage: "pencil.line")
       }
     }
@@ -106,13 +106,13 @@ struct StatusEditorMediaView: View {
         viewModel.mediasImages.removeAll(where: { $0.id == container.id })
       }
     } label: {
-      Label("Delete", systemImage: "trash")
+      Label("action.delete", systemImage: "trash")
     }
   }
 
   private var altMarker: some View {
     Button {} label: {
-      Text("ALT")
+      Text("status.image.alt-text.abbreviation")
         .font(.caption2)
     }
     .padding(4)

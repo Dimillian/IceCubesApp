@@ -19,7 +19,7 @@ struct StatusRowContextMenu: View {
           await viewModel.favourite()
         }
       } } label: {
-        Label(viewModel.isFavourited ? "Unfavorite" : "Favorite", systemImage: "star")
+        Label(viewModel.isFavourited ? "status.action.unfavorite" : "status.action.favorite", systemImage: "star")
       }
       Button { Task {
         if viewModel.isReblogged {
@@ -28,7 +28,7 @@ struct StatusRowContextMenu: View {
           await viewModel.reblog()
         }
       } } label: {
-        Label(viewModel.isReblogged ? "Unboost" : "Boost", systemImage: "arrow.left.arrow.right.circle")
+        Label(viewModel.isReblogged ? "status.action.unboost" : "status.action.boost", systemImage: "arrow.left.arrow.right.circle")
       }
       Button { Task {
         if viewModel.isBookmarked {
@@ -37,13 +37,13 @@ struct StatusRowContextMenu: View {
           await viewModel.bookmark()
         }
       } } label: {
-        Label(viewModel.isReblogged ? "Unbookmark" : "Bookmark",
+        Label(viewModel.isReblogged ? "status.action.unbookmark" : "status.action.bookmark",
               systemImage: "bookmark")
       }
       Button {
         routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
       } label: {
-        Label("Reply", systemImage: "arrowshape.turn.up.left")
+        Label("status.action.reply", systemImage: "arrowshape.turn.up.left")
       }
     }
 
@@ -51,7 +51,7 @@ struct StatusRowContextMenu: View {
       Button {
         routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
       } label: {
-        Label("Quote this post", systemImage: "quote.bubble")
+        Label("status.action.quote", systemImage: "quote.bubble")
       }
     }
 
@@ -59,24 +59,24 @@ struct StatusRowContextMenu: View {
 
     if let url = viewModel.status.reblog?.url ?? viewModel.status.url {
       ShareLink(item: url) {
-        Label("Share this post", systemImage: "square.and.arrow.up")
+        Label("status.action.share", systemImage: "square.and.arrow.up")
       }
     }
 
     if let url = URL(string: viewModel.status.reblog?.url ?? viewModel.status.url ?? "") {
       Button { openURL(url) } label: {
-        Label("View in Browser", systemImage: "safari")
+        Label("status.action.view-in-browser", systemImage: "safari")
       }
     }
 
     Button {
       UIPasteboard.general.string = viewModel.status.content.asRawText
     } label: {
-      Label("Copy Text", systemImage: "doc.on.doc")
+      Label("status.action.copy-text", systemImage: "doc.on.doc")
     }
 
     if account.account?.id == viewModel.status.account.id {
-      Section("Your post") {
+      Section("status.action.section.your-post") {
         Button {
           Task {
             if viewModel.isPinned {
@@ -86,15 +86,15 @@ struct StatusRowContextMenu: View {
             }
           }
         } label: {
-          Label(viewModel.isPinned ? "Unpin" : "Pin", systemImage: viewModel.isPinned ? "pin.fill" : "pin")
+          Label(viewModel.isPinned ? "status.action.unpin" : "status.action.pin", systemImage: viewModel.isPinned ? "pin.fill" : "pin")
         }
         Button {
           routerPath.presentedSheet = .editStatusEditor(status: viewModel.status)
         } label: {
-          Label("Edit", systemImage: "pencil")
+          Label("status.action.edit", systemImage: "pencil")
         }
         Button(role: .destructive) { Task { await viewModel.delete() } } label: {
-          Label("Delete", systemImage: "trash")
+          Label("status.action.delete", systemImage: "trash")
         }
       }
     } else if !viewModel.isRemote {
@@ -102,12 +102,12 @@ struct StatusRowContextMenu: View {
         Button {
           routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.account, visibility: .pub)
         } label: {
-          Label("Mention", systemImage: "at")
+          Label("status.action.mention", systemImage: "at")
         }
         Button {
           routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.account, visibility: .direct)
         } label: {
-          Label("Message", systemImage: "tray.full")
+          Label("status.action.message", systemImage: "tray.full")
         }
       }
     }

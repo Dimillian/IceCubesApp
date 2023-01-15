@@ -27,7 +27,7 @@ public struct NotificationsListView: View {
       .padding(.top, .layoutPadding + 16)
       .background(theme.primaryBackgroundColor)
     }
-    .navigationTitle(lockedType?.menuTitle() ?? viewModel.selectedType?.menuTitle() ?? "All Notifications")
+    .navigationTitle(lockedType?.menuTitle() ?? viewModel.selectedType?.menuTitle() ?? "notifications.navigation-title")
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
       if lockedType == nil {
@@ -35,7 +35,7 @@ public struct NotificationsListView: View {
           Button {
             viewModel.selectedType = nil
           } label: {
-            Label("All Notifications", systemImage: "bell.fill")
+            Label("notifications.navigation-title", systemImage: "bell.fill")
           }
           Divider()
           ForEach(Notification.NotificationType.allCases, id: \.self) { type in
@@ -96,8 +96,8 @@ public struct NotificationsListView: View {
     case let .display(notifications, nextPageState):
       if notifications.isEmpty {
         EmptyView(iconName: "bell.slash",
-                  title: "No notifications",
-                  message: "Notifications? What notifications? Your notification inbox is looking so empty. Keep on being awesome! 📱😎")
+                  title: "notifications.empty.title",
+                  message: "notifications.empty.message")
       } else {
         ForEach(notifications) { notification in
           if notification.supportedType != nil {
@@ -127,9 +127,9 @@ public struct NotificationsListView: View {
       }
 
     case .error:
-      ErrorView(title: "An error occurred",
-                message: "An error occurred while loading your notifications, please retry.",
-                buttonTitle: "Retry") {
+      ErrorView(title: "notifications.error.title",
+                message: "notifications.error.message",
+                buttonTitle: "action.retry") {
         Task {
           await viewModel.fetchNotifications()
         }

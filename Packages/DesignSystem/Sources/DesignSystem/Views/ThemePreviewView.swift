@@ -30,7 +30,7 @@ public struct ThemePreviewView: View {
     .padding(4)
     .frame(maxHeight: .infinity)
     .background(theme.primaryBackgroundColor)
-    .navigationTitle("Theme Selector")
+    .navigationTitle("design.theme.navigation-title")
   }
 }
 
@@ -54,8 +54,8 @@ struct ThemeBoxView: View {
           .foregroundColor(color.tintColor)
           .font(.system(size: 20))
           .fontWeight(.bold)
-
-        Text("Toots preview")
+        
+        Text("design.theme.toots-preview")
           .foregroundColor(color.labelColor)
           .frame(maxWidth: .infinity)
           .padding()

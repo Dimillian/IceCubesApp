@@ -70,7 +70,7 @@ struct IconSelectorView: View {
         }
       }
       .padding(6)
-      .navigationTitle("Icons")
+      .navigationTitle("settings.app.icon.navigation-title")
     }
     .background(theme.primaryBackgroundColor)
   }

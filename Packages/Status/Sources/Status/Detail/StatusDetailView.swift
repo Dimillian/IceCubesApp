@@ -63,9 +63,9 @@ public struct StatusDetailView: View {
             }
 
           case .error:
-            ErrorView(title: "An error occurred",
-                      message: "An error occurred while this post context, please try again.",
-                      buttonTitle: "Retry") {
+            ErrorView(title: "status.error.title",
+                      message: "status.error.message",
+                      buttonTitle: "action.retry") {
               Task {
                 await viewModel.fetch()
               }

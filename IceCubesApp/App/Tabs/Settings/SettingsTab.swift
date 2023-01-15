@@ -30,7 +30,7 @@ struct SettingsTabs: View {
       }
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
-      .navigationTitle(Text("Settings"))
+      .navigationTitle(Text("settings.title"))
       .navigationBarTitleDisplayMode(.inline)
       .toolbarBackground(theme.primaryBackgroundColor, for: .navigationBar)
       .withAppRouter()
@@ -54,7 +54,7 @@ struct SettingsTabs: View {
   }
 
   private var accountsSection: some View {
-    Section("Accounts") {
+    Section("settings.section.accounts") {
       ForEach(appAccountsManager.availableAccounts) { account in
         AppAccountView(viewModel: .init(appAccount: account))
       }
@@ -76,33 +76,33 @@ struct SettingsTabs: View {
 
   @ViewBuilder
   private var generalSection: some View {
-    Section("General") {
+    Section("settings.section.general") {
       NavigationLink(destination: PushNotificationsView()) {
-        Label("Push notifications", systemImage: "bell.and.waves.left.and.right")
+        Label("settings.general.push-notifications", systemImage: "bell.and.waves.left.and.right")
       }
       if let instanceData = currentInstance.instance {
         NavigationLink(destination: InstanceInfoView(instance: instanceData)) {
-          Label("Instance Information", systemImage: "server.rack")
+          Label("settings.general.instance", systemImage: "server.rack")
         }
       }
       NavigationLink(destination: DisplaySettingsView()) {
-        Label("Display Settings", systemImage: "paintpalette")
+        Label("settings.general.display", systemImage: "paintpalette")
       }
       NavigationLink(destination: remoteLocalTimelinesView) {
-        Label("Remote Local Timelines", systemImage: "dot.radiowaves.right")
+        Label("settings.general.remote-timelines", systemImage: "dot.radiowaves.right")
       }
       if !ProcessInfo.processInfo.isiOSAppOnMac {
         Picker(selection: $preferences.preferredBrowser) {
           ForEach(PreferredBrowser.allCases, id: \.rawValue) { browser in
             switch browser {
             case .inAppSafari:
-              Text("In-App Safari").tag(browser)
+              Text("settings.general.browser.in-app").tag(browser)
             case .safari:
-              Text("System Safari").tag(browser)
+              Text("settings.general.browser.system").tag(browser)
             }
           }
         } label: {
-          Label("Browser", systemImage: "network")
+          Label("settings.general.browser", systemImage: "network")
         }
       }
     }
@@ -110,11 +110,11 @@ struct SettingsTabs: View {
   }
 
   private var appSection: some View {
-    Section("App") {
+    Section("settings.section.app") {
       if !ProcessInfo.processInfo.isiOSAppOnMac {
         NavigationLink(destination: IconSelectorView()) {
           Label {
-            Text("App Icon")
+            Text("settings.app.icon")
           } icon: {
             if let icon = IconSelectorView.Icon(string: UIApplication.shared.alternateIconName ?? "AppIcon") {
               Image(uiImage: .init(named: icon.iconName)!)
@@ -127,12 +127,12 @@ struct SettingsTabs: View {
       }
 
       Link(destination: URL(string: "https://github.com/Dimillian/IceCubesApp")!) {
-        Label("Source (GitHub link)", systemImage: "link")
+        Label("settings.app.source", systemImage: "link")
       }
       .tint(theme.labelColor)
 
       NavigationLink(destination: SupportAppView()) {
-        Label("Support the app", systemImage: "wand.and.stars")
+        Label("settings.app.support", systemImage: "wand.and.stars")
       }
     }
     .listRowBackground(theme.primaryBackgroundColor)
@@ -142,7 +142,7 @@ struct SettingsTabs: View {
     Button {
       addAccountSheetPresented.toggle()
     } label: {
-      Text("Add account")
+      Text("settings.account.add")
     }
     .sheet(isPresented: $addAccountSheetPresented) {
       AddAccountView()
@@ -162,11 +162,11 @@ struct SettingsTabs: View {
       Button {
         routerPath.presentedSheet = .addRemoteLocalTimeline
       } label: {
-        Label("Add a local timeline", systemImage: "badge.plus.radiowaves.right")
+        Label("settings.timeline.add", systemImage: "badge.plus.radiowaves.right")
       }
       .listRowBackground(theme.primaryBackgroundColor)
     }
-    .navigationTitle("Remote Local Timelines")
+    .navigationTitle("settings.general.remote-timelines")
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
   }
