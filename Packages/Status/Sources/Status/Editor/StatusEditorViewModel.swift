@@ -158,7 +158,11 @@ public class StatusEditorViewModel: ObservableObject {
       self.visibility = visibility
       selectedRange = .init(location: statusText.string.utf16.count, length: 0)
     case let .edit(status):
-      statusText = .init(status.content.asMarkdown.asSafeAttributedString)
+      var rawText = NSAttributedString(status.content.asMarkdown.asSafeAttributedString).string
+      for mention in status.mentions {
+        rawText = rawText.replacingOccurrences(of: "@\(mention.username)", with: "@\(mention.acct)")
+      }
+      statusText = .init(string: rawText)
       selectedRange = .init(location: statusText.string.utf16.count, length: 0)
       spoilerOn = !status.spoilerText.isEmpty
       spoilerText = status.spoilerText
