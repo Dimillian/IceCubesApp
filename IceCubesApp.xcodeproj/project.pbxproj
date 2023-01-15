@@ -43,6 +43,12 @@
 		9F7335F22967608F00AFF0BA /* AddRemoteTimelineVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7335F12967608F00AFF0BA /* AddRemoteTimelineVIew.swift */; };
 		9F7335F92968576500AFF0BA /* DisplaySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7335F82968576500AFF0BA /* DisplaySettingsView.swift */; };
 		9FAD85832971BF7200496AB1 /* Secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9FAD85822971BF7200496AB1 /* Secret.plist */; };
+		9FAD858B29743F7400496AB1 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAD858A29743F7400496AB1 /* ShareViewController.swift */; };
+		9FAD858E29743F7400496AB1 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9FAD858C29743F7400496AB1 /* MainInterface.storyboard */; };
+		9FAD859229743F7400496AB1 /* IceCubesShareExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9FAD85982974405D00496AB1 /* Status in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD85972974405D00496AB1 /* Status */; };
+		9FAD859A297440CB00496AB1 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD8599297440CB00496AB1 /* KeychainSwift */; };
+		9FAD859C2974422700496AB1 /* AppAccount in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD859B2974422700496AB1 /* AppAccount */; };
 		9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE4ACA293783B000772766 /* SettingsTab.swift */; };
 		9FAE4ACE29379A5A00772766 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAE4ACD29379A5A00772766 /* KeychainSwift */; };
 		9FBFE63D292A715500C250E9 /* IceCubesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBFE63C292A715500C250E9 /* IceCubesApp.swift */; };
@@ -61,6 +67,13 @@
 			remoteGlobalIDString = 9F2A5415296AB631009B2D7C;
 			remoteInfo = IceCubesNotifications;
 		};
+		9FAD859029743F7400496AB1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9FBFE631292A715500C250E9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9FAD858729743F7400496AB1;
+			remoteInfo = IceCubesShareExtension;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -71,6 +84,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				9F2A541D296AB631009B2D7C /* IceCubesNotifications.appex in Embed Foundation Extensions */,
+				9FAD859229743F7400496AB1 /* IceCubesShareExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -114,6 +128,11 @@
 		9F7335F12967608F00AFF0BA /* AddRemoteTimelineVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRemoteTimelineVIew.swift; sourceTree = "<group>"; };
 		9F7335F82968576500AFF0BA /* DisplaySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaySettingsView.swift; sourceTree = "<group>"; };
 		9FAD85822971BF7200496AB1 /* Secret.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Secret.plist; sourceTree = "<group>"; };
+		9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IceCubesShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		9FAD858A29743F7400496AB1 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		9FAD858D29743F7400496AB1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		9FAD858F29743F7400496AB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9FAD859629743F7E00496AB1 /* IceCubesShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IceCubesShareExtension.entitlements; sourceTree = "<group>"; };
 		9FAE4AC8293774FF00772766 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9FAE4ACA293783B000772766 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		9FBFE639292A715500C250E9 /* IceCubesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IceCubesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,6 +152,16 @@
 				9F2A5428296AB683009B2D7C /* Models in Frameworks */,
 				9F2A5426296AB67E009B2D7C /* KeychainSwift in Frameworks */,
 				9F2A5424296AB67A009B2D7C /* Env in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9FAD858529743F7400496AB1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9FAD859C2974422700496AB1 /* AppAccount in Frameworks */,
+				9FAD859A297440CB00496AB1 /* KeychainSwift in Frameworks */,
+				9FAD85982974405D00496AB1 /* Status in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +233,17 @@
 			path = Timeline;
 			sourceTree = "<group>";
 		};
+		9FAD858929743F7400496AB1 /* IceCubesShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				9FAD859629743F7E00496AB1 /* IceCubesShareExtension.entitlements */,
+				9FAD858A29743F7400496AB1 /* ShareViewController.swift */,
+				9FAD858C29743F7400496AB1 /* MainInterface.storyboard */,
+				9FAD858F29743F7400496AB1 /* Info.plist */,
+			);
+			path = IceCubesShareExtension;
+			sourceTree = "<group>";
+		};
 		9FAE4AC9293783A200772766 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,6 +262,7 @@
 			children = (
 				9FBFE63B292A715500C250E9 /* IceCubesApp */,
 				9F2A5417296AB631009B2D7C /* IceCubesNotifications */,
+				9FAD858929743F7400496AB1 /* IceCubesShareExtension */,
 				9FBFE63A292A715500C250E9 /* Products */,
 				9FBFE64C292A72BD00C250E9 /* Frameworks */,
 				9FE3DB55296FEF5800628CB0 /* AppAccount */,
@@ -244,6 +285,7 @@
 			children = (
 				9FBFE639292A715500C250E9 /* IceCubesApp.app */,
 				9F2A5416296AB631009B2D7C /* IceCubesNotifications.appex */,
+				9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -311,6 +353,28 @@
 			productReference = 9F2A5416296AB631009B2D7C /* IceCubesNotifications.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		9FAD858729743F7400496AB1 /* IceCubesShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9FAD859329743F7400496AB1 /* Build configuration list for PBXNativeTarget "IceCubesShareExtension" */;
+			buildPhases = (
+				9FAD858429743F7400496AB1 /* Sources */,
+				9FAD858529743F7400496AB1 /* Frameworks */,
+				9FAD858629743F7400496AB1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IceCubesShareExtension;
+			packageProductDependencies = (
+				9FAD85972974405D00496AB1 /* Status */,
+				9FAD8599297440CB00496AB1 /* KeychainSwift */,
+				9FAD859B2974422700496AB1 /* AppAccount */,
+			);
+			productName = IceCubesShareExtension;
+			productReference = 9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		9FBFE638292A715500C250E9 /* IceCubesApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9FBFE648292A715600C250E9 /* Build configuration list for PBXNativeTarget "IceCubesApp" */;
@@ -324,6 +388,7 @@
 			);
 			dependencies = (
 				9F2A541C296AB631009B2D7C /* PBXTargetDependency */,
+				9FAD859129743F7400496AB1 /* PBXTargetDependency */,
 			);
 			name = IceCubesApp;
 			packageProductDependencies = (
@@ -359,6 +424,9 @@
 					9F2A5415296AB631009B2D7C = {
 						CreatedOnToolsVersion = 14.2;
 					};
+					9FAD858729743F7400496AB1 = {
+						CreatedOnToolsVersion = 14.2;
+					};
 					9FBFE638292A715500C250E9 = {
 						CreatedOnToolsVersion = 14.1;
 					};
@@ -383,6 +451,7 @@
 			targets = (
 				9FBFE638292A715500C250E9 /* IceCubesApp */,
 				9F2A5415296AB631009B2D7C /* IceCubesNotifications */,
+				9FAD858729743F7400496AB1 /* IceCubesShareExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -392,6 +461,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9FAD858629743F7400496AB1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9FAD858E29743F7400496AB1 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +493,14 @@
 			files = (
 				9F2A542A296AF557009B2D7C /* NotificationServiceSupport.swift in Sources */,
 				9F2A5419296AB631009B2D7C /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9FAD858429743F7400496AB1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9FAD858B29743F7400496AB1 /* ShareViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,7 +535,23 @@
 			target = 9F2A5415296AB631009B2D7C /* IceCubesNotifications */;
 			targetProxy = 9F2A541B296AB631009B2D7C /* PBXContainerItemProxy */;
 		};
+		9FAD859129743F7400496AB1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9FAD858729743F7400496AB1 /* IceCubesShareExtension */;
+			targetProxy = 9FAD859029743F7400496AB1 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9FAD858C29743F7400496AB1 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9FAD858D29743F7400496AB1 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		9F2A541F296AB631009B2D7C /* Debug */ = {
@@ -504,6 +605,67 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thomasricouard.IceCubesApp.IceCubesNotifications;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		9FAD859429743F7400496AB1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = IceCubesShareExtension/IceCubesShareExtension.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z6P74P6T99;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = IceCubesShareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = IceCubesShareExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thomasricouard.IceCubesApp.IceCubesShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		9FAD859529743F7400496AB1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = IceCubesShareExtension/IceCubesShareExtension.entitlements;
+				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Z6P74P6T99;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = IceCubesShareExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = IceCubesShareExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thomasricouard.IceCubesApp.IceCubesShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -739,6 +901,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		9FAD859329743F7400496AB1 /* Build configuration list for PBXNativeTarget "IceCubesShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9FAD859429743F7400496AB1 /* Debug */,
+				9FAD859529743F7400496AB1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9FBFE634292A715500C250E9 /* Build configuration list for PBXProject "IceCubesApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -833,6 +1004,19 @@
 		9F7335E92966B3F800AFF0BA /* Conversations */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Conversations;
+		};
+		9FAD85972974405D00496AB1 /* Status */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Status;
+		};
+		9FAD8599297440CB00496AB1 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9FAE4ACC29379A5A00772766 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
+		};
+		9FAD859B2974422700496AB1 /* AppAccount */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppAccount;
 		};
 		9FAE4ACD29379A5A00772766 /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;

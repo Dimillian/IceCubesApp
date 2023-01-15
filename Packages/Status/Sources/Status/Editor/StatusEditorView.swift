@@ -8,6 +8,7 @@ import Network
 import PhotosUI
 import NukeUI
 import EmojiText
+import UIKit
 
 public struct StatusEditorView: View {
   @EnvironmentObject private var preferences: UserPreferences
@@ -72,6 +73,8 @@ public struct StatusEditorView: View {
         viewModel.prepareStatusText()
         if !client.isAuth {
           dismiss()
+          NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
+                                          object: nil)
         }
       }
       .background(theme.primaryBackgroundColor)
@@ -88,6 +91,8 @@ public struct StatusEditorView: View {
               let status = await viewModel.postStatus()
               if status != nil {
                 dismiss()
+                NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
+                                                object: nil)
               }
             }
           } label: {
@@ -101,10 +106,12 @@ public struct StatusEditorView: View {
         }
         ToolbarItem(placement: .navigationBarLeading) {
           Button {
-            if !viewModel.statusText.string.isEmpty {
+            if !viewModel.statusText.string.isEmpty && !viewModel.mode.isInShareExtension {
               isDismissAlertPresented = true
             } else {
               dismiss()
+              NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
+                                              object: nil)
             }
           } label: {
             Text("Cancel")
@@ -117,10 +124,14 @@ public struct StatusEditorView: View {
                         actions: {
       Button("Delete Draft", role: .destructive) {
         dismiss()
+        NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
+                                        object: nil)
       }
       Button("Save Draft") {
         preferences.draftsPosts.insert(viewModel.statusText.string, at: 0)
         dismiss()
+        NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
+                                        object: nil)
       }
       Button("Cancel", role: .cancel) { }
     })
