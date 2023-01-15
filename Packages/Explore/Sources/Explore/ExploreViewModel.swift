@@ -1,6 +1,7 @@
 import SwiftUI
 import Models
 import Network
+import Combine
 
 @MainActor
 class ExploreViewModel: ObservableObject {
@@ -40,18 +41,7 @@ class ExploreViewModel: ObservableObject {
   
   @Published var tokens: [Token] = []
   @Published var suggestedToken: [Token] = []
-  @Published var searchQuery = "" {
-    didSet {
-      if searchQuery.starts(with: "@") {
-        suggestedToken = [.user, .statuses]
-      } else if searchQuery.starts(with: "#") {
-        suggestedToken = [.tag]
-      } else {
-        suggestedToken = []
-      }
-      search()
-    }
-  }
+  @Published var searchQuery = ""
   @Published var results: [String: SearchResults] = [:]
   @Published var isLoaded = false
   @Published var suggestedAccounts: [Account] = []
@@ -61,6 +51,27 @@ class ExploreViewModel: ObservableObject {
   @Published var trendingLinks: [Card] = []
   
   private var searchTask: Task<Void, Never>?
+  private var cancellables = Set<AnyCancellable>()
+
+  init() {
+    $searchQuery
+      .removeDuplicates()
+      .debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)
+      .sink(receiveValue: { [weak self] newValue in
+        guard let self else { return }
+
+        if self.searchQuery.starts(with: "@") {
+          self.suggestedToken = [.user, .statuses]
+        } else if self.searchQuery.starts(with: "#") {
+          self.suggestedToken = [.tag]
+        } else {
+          self.suggestedToken = []
+        }
+
+        self.search()
+      })
+      .store(in: &cancellables)
+  }
   
   func fetchTrending() async {
     guard let client else { return }
