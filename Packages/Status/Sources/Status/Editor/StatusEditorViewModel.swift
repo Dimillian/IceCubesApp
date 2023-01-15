@@ -118,7 +118,7 @@ public class StatusEditorViewModel: ObservableObject {
                             mediaIds: mediasImages.compactMap{ $0.mediaAttachement?.id },
                             poll: pollData)
       switch mode {
-      case .new, .replyTo, .quote, .mention:
+      case .new, .replyTo, .quote, .mention, .shareExtension:
         postStatus = try await client.post(endpoint: Statuses.postStatus(json: data))
       case let .edit(status):
         postStatus = try await client.put(endpoint: Statuses.editStatus(id: status.id, json: data))
@@ -137,6 +137,9 @@ public class StatusEditorViewModel: ObservableObject {
     switch mode {
     case let .new(visibility):
       self.visibility = visibility
+    case let .shareExtension(items):
+      self.visibility = .pub
+      self.processItemsProvider(items: items)
     case let .replyTo(status):
       var mentionString = ""
       if (status.reblog?.account.acct ?? status.account.acct) != currentAccount?.acct {
@@ -239,6 +242,32 @@ public class StatusEditorViewModel: ObservableObject {
       }
     } catch {
       
+    }
+  }
+  
+  private func processItemsProvider(items: [NSItemProvider]) {
+    Task {
+      var initalText: String = ""
+      for item in items {
+        if let identifiter = item.registeredTypeIdentifiers.first,
+           let handledItemType = StatusEditorUTTypeSupported(rawValue: identifiter) {
+          do {
+            let content = try await handledItemType.loadItemContent(item: item)
+            if let text = content as? String {
+              initalText += "\(text) "
+            } else if let image = content as? UIImage {
+              mediasImages.append(.init(image: image, mediaAttachement: nil, error: nil))
+            }
+          } catch { }
+        }
+      }
+      if !initalText.isEmpty {
+        statusText = .init(string: initalText)
+        selectedRange = .init(location: statusText.string.utf16.count, length: 0)
+      }
+      if !mediasImages.isEmpty {
+        processMediasToUpload()
+      }
     }
   }
 
@@ -373,7 +402,9 @@ public class StatusEditorViewModel: ObservableObject {
         if let data = originalContainer.image?.jpegData(compressionQuality: 0.90) {
           let uploadedMedia = try await uploadMedia(data: data)
           if let index = indexOf(container: newContainer) {
-            mediasImages[index] = .init(image: nil, mediaAttachement: uploadedMedia, error: nil)
+            mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
+                                        mediaAttachement: uploadedMedia,
+                                        error: nil)
           }
         }
       } catch {

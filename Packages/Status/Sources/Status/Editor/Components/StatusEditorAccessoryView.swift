@@ -55,13 +55,15 @@ struct StatusEditorAccessoryView: View {
           Image(systemName: viewModel.spoilerOn ? "exclamationmark.triangle.fill": "exclamationmark.triangle")
         }
         
-        Button {
-          isDrafsSheetDisplayed = true
-        } label: {
-          Image(systemName: "archivebox")
+        if !viewModel.mode.isInShareExtension {
+          Button {
+            isDrafsSheetDisplayed = true
+          } label: {
+            Image(systemName: "archivebox")
+          }
+
         }
-
-
+    
         Spacer()
         
         characterCountView

@@ -5,6 +5,7 @@ import DesignSystem
 import NukeUI
 
 struct StatusEditorMediaView: View {
+  @EnvironmentObject private var theme: Theme
   @ObservedObject var viewModel: StatusEditorViewModel
   @State private var editingContainer: StatusEditorViewModel.ImageContainer?
   
@@ -12,17 +13,17 @@ struct StatusEditorMediaView: View {
     ScrollView(.horizontal, showsIndicators: false) {
       HStack(spacing: 8) {
         ForEach(viewModel.mediasImages) { container in
-          if container.image != nil {
-            makeLocalImage(container: container)
-          } else if let url = container.mediaAttachement?.url {
-            Menu {
-              makeImageMenu(container: container)
-            } label: {
-              ZStack(alignment: .bottomTrailing) {
+          Menu {
+            makeImageMenu(container: container)
+          } label: {
+            ZStack(alignment: .bottomTrailing) {
+              if container.image != nil {
+                makeLocalImage(container: container)
+              }  else if let url = container.mediaAttachement?.url {
                 makeLazyImage(url: url)
-                if container.mediaAttachement?.description?.isEmpty == false {
-                  altMarker
-                }
+              }
+              if container.mediaAttachement?.description?.isEmpty == false {
+                altMarker
               }
             }
           }
@@ -32,6 +33,7 @@ struct StatusEditorMediaView: View {
     }
     .sheet(item: $editingContainer) { container in
       StatusEditorMediaEditView(viewModel: viewModel, container: container)
+        .preferredColorScheme(theme.selectedScheme == .dark ? .dark : .light)
     }
   }
   
@@ -39,7 +41,7 @@ struct StatusEditorMediaView: View {
     ZStack(alignment: .center) {
       Image(uiImage: container.image!)
         .resizable()
-        .blur(radius: 20 )
+        .blur(radius: container.mediaAttachement == nil ? 20 : 0)
         .aspectRatio(contentMode: .fill)
         .frame(width: 150, height: 150)
         .cornerRadius(8)
@@ -67,7 +69,7 @@ struct StatusEditorMediaView: View {
           }
           .buttonStyle(.bordered)
         }
-      } else {
+      } else if container.mediaAttachement == nil{
         ProgressView()
       }
     }

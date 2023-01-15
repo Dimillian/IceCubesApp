@@ -1,4 +1,5 @@
 import Models
+import UIKit
 
 extension StatusEditorViewModel {
   public enum Mode {
@@ -7,6 +8,16 @@ extension StatusEditorViewModel {
     case edit(status: Status)
     case quote(status: Status)
     case mention(account: Account, visibility: Visibility)
+    case shareExtension(items: [NSItemProvider])
+    
+    var isInShareExtension: Bool {
+      switch self {
+      case .shareExtension:
+        return true
+      default:
+        return false
+      }
+    }
     
     var isEditing: Bool {
       switch self {
@@ -28,7 +39,7 @@ extension StatusEditorViewModel {
     
     var title: String {
       switch self {
-      case .new, .mention:
+      case .new, .mention, .shareExtension:
         return "New Post"
       case .edit:
         return "Editing your post"
