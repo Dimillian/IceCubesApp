@@ -18,9 +18,9 @@ class ShareViewController: UIViewController {
     let instance = CurrentInstance()
     account.setClient(client: client)
     instance.setClient(client: client)
+    let colorScheme = traitCollection.userInterfaceStyle
     let theme = Theme()
-    
-    overrideUserInterfaceStyle = theme.selectedScheme == .dark ? .dark : .light
+    theme.setColor(withName: colorScheme == .dark ? .iceCubeDark : .iceCubeLight)
     
     if let item = extensionContext?.inputItems.first as? NSExtensionItem {
       if let attachments = item.attachments {
@@ -31,7 +31,7 @@ class ShareViewController: UIViewController {
           .environmentObject(theme)
           .environmentObject(instance)
           .tint(theme.tintColor)
-          .preferredColorScheme(theme.selectedScheme == .dark ? .dark : .light)
+          .preferredColorScheme(colorScheme == .light ? .light : .dark)
         let childView = UIHostingController(rootView: view)
         self.addChild(childView)
         childView.view.frame = self.container.bounds
