@@ -59,9 +59,7 @@ struct AddRemoteTimelineView: View {
         }
       }
       .onChange(of: instanceName) { newValue in
-        if !newValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-          instanceNamePublisher.send(newValue)
-        }
+        instanceNamePublisher.send(newValue)
       }
       .onReceive(instanceNamePublisher.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)) { newValue in
         Task {
