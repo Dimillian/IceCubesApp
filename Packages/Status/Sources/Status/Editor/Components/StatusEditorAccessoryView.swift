@@ -61,8 +61,23 @@ struct StatusEditorAccessoryView: View {
           } label: {
             Image(systemName: "archivebox")
           }
-
         }
+
+        Menu {
+          Picker("status.editor.language-selection", selection: $viewModel.selectedLanguage) {
+            ForEach(self.availableLanguages, id: \.0) { (isoCode, nativeName, name) in
+              languageTextView(isoCode: isoCode, nativeName: nativeName, name: name)
+                .tag(Optional(isoCode))
+            }
+          }
+        } label: {
+          if let language = viewModel.selectedLanguage {
+            Text(language.uppercased())
+          } else {
+            Image(systemName: "globe")
+          }
+        }
+        .menuOrder(.fixed)
     
         Spacer()
         
@@ -75,6 +90,18 @@ struct StatusEditorAccessoryView: View {
     }
     .sheet(isPresented: $isDrafsSheetDisplayed) {
       draftsSheetView
+    }
+    .onAppear {
+      viewModel.setInitialLanguageSelection(preference: preferences.serverPreferences?.postLanguage)
+    }
+  }
+  
+  @ViewBuilder
+  private func languageTextView(isoCode: String, nativeName: String?, name: String?) -> some View {
+    if let nativeName = nativeName, let name = name {
+      Text("\(nativeName) (\(name))")
+    } else {
+      Text(isoCode.uppercased())
     }
   }
   
@@ -114,5 +141,18 @@ struct StatusEditorAccessoryView: View {
     Text("\((currentInstance.instance?.configuration.statuses.maxCharacters ?? 500) - viewModel.statusText.string.utf16.count)")
       .foregroundColor(.gray)
       .font(.callout)
+  }
+  
+  private var availableLanguages: [(String, String?, String?)] {
+    Locale.LanguageCode.isoLanguageCodes
+      .filter { $0.identifier.count == 2 } // Mastodon only supports ISO 639-1 (two-letter) codes
+      .map { lang in
+        let nativeLocale = Locale(languageComponents: Locale.Language.Components(languageCode: lang))
+        return (
+          lang.identifier,
+          nativeLocale.localizedString(forLanguageCode: lang.identifier),
+          Locale.current.localizedString(forLanguageCode: lang.identifier)
+        )
+      }
   }
 }
