@@ -16,15 +16,15 @@ struct SideBarView<Content: View>: View {
   var body: some View {
     HStack(spacing: 0) {
       VStack(alignment: .center) {
-        if let account = currentAccount.account {
-          Button {
-            selectedTab = .profile
-          } label: {
-            AvatarView(url: account.avatar, size: .status)
-          }
-          .frame(width: 70, height: 50)
-          .background(selectedTab == .profile ? theme.secondaryBackgroundColor : .clear)
+        Button {
+          selectedTab = .profile
+        } label: {
+          AppAccountsSelectorView(routeurPath: RouterPath(),
+                                  accountCreationEnabled: false,
+                                  avatarSize: .status)
         }
+        .frame(width: 70, height: 60)
+        .background(selectedTab == .profile ? theme.secondaryBackgroundColor : .clear)
         ForEach(tabs) { tab in
           Button {
             if tab == selectedTab {

@@ -22,10 +22,19 @@ public struct AppAccountsSelectorView: View {
   }
   
   public var body: some View {
-    Menu {
-      menuView
-    } label: {
-      labelView
+    Group {
+      if ProcessInfo.processInfo.isiOSAppOnMac {
+        labelView
+          .contextMenu {
+            menuView
+          }
+      } else {
+        Menu {
+          menuView
+        } label: {
+          labelView
+        }
+      }
     }
     .onAppear {
       refreshAccounts()
@@ -82,7 +91,9 @@ public struct AppAccountsSelectorView: View {
         let viewModel: AppAccountViewModel = .init(appAccount: account)
         Task {
           await viewModel.fetchAccount()
-          accountsViewModel.append(viewModel)
+          if !accountsViewModel.contains(where: { $0.acct == viewModel.acct }) {
+            accountsViewModel.append(viewModel)
+          }
         }
       }
     }
