@@ -138,7 +138,7 @@ struct TimelineTab: View {
       }
     }
     if client.isAuth {
-      if !ProcessInfo.processInfo.isiOSAppOnMac {
+      if UIDevice.current.userInterfaceIdiom != .pad {
         ToolbarItem(placement: .navigationBarLeading) {
           AppAccountsSelectorView(routeurPath: routeurPath)
         }

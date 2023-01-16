@@ -21,7 +21,7 @@ struct NotificationsTab: View {
         .toolbar {
           statusEditorToolbarItem(routeurPath: routeurPath,
                                   visibility: userPreferences.serverPreferences?.postVisibility ?? .pub)
-          if !ProcessInfo.processInfo.isiOSAppOnMac {
+          if UIDevice.current.userInterfaceIdiom != .pad {
             ToolbarItem(placement: .navigationBarLeading) {
               AppAccountsSelectorView(routeurPath: routeurPath)
             }

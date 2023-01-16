@@ -23,7 +23,7 @@ public struct AppAccountsSelectorView: View {
   
   public var body: some View {
     Group {
-      if ProcessInfo.processInfo.isiOSAppOnMac {
+      if UIDevice.current.userInterfaceIdiom == .pad {
         labelView
           .contextMenu {
             menuView

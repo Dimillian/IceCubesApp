@@ -21,7 +21,7 @@ struct MessagesTab: View {
         .withAppRouteur()
         .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
         .toolbar {
-          if !ProcessInfo.processInfo.isiOSAppOnMac {
+          if UIDevice.current.userInterfaceIdiom != .pad {
             ToolbarItem(placement: .navigationBarLeading) {
               AppAccountsSelectorView(routeurPath: routeurPath)
             }

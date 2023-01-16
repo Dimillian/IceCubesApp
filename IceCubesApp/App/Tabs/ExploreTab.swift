@@ -22,7 +22,7 @@ struct ExploreTab: View {
         .toolbar {
           statusEditorToolbarItem(routeurPath: routeurPath,
                                   visibility: preferences.serverPreferences?.postVisibility ?? .pub)
-          if !ProcessInfo.processInfo.isiOSAppOnMac {
+          if UIDevice.current.userInterfaceIdiom != .pad {
             ToolbarItem(placement: .navigationBarLeading) {
               AppAccountsSelectorView(routeurPath: routeurPath)
             }

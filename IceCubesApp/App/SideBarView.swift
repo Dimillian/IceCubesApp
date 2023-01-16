@@ -23,7 +23,7 @@ struct SideBarView<Content: View>: View {
                                   accountCreationEnabled: false,
                                   avatarSize: .status)
         }
-        .frame(width: 70, height: 60)
+        .frame(width: 80, height: 60)
         .background(selectedTab == .profile ? theme.secondaryBackgroundColor : .clear)
         ForEach(tabs) { tab in
           Button {
@@ -41,12 +41,12 @@ struct SideBarView<Content: View>: View {
               .frame(width: 24, height: 24)
               .foregroundColor(tab == selectedTab ? theme.tintColor : .gray)
           }
-          .frame(width: 70, height: 50)
+          .frame(width: 80, height: 50)
           .background(tab == selectedTab ? theme.secondaryBackgroundColor : .clear)
         }
         Spacer()
       }
-      .frame(width: 70)
+      .frame(width: 80)
       .background(.clear)
       Divider()
         .edgesIgnoringSafeArea(.top)
