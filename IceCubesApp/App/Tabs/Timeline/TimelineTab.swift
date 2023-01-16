@@ -16,8 +16,16 @@ struct TimelineTab: View {
   @Binding var popToRootTab: Tab
   
   @State private var didAppear: Bool = false
-  @State private var timeline: TimelineFilter = .home
+  @State private var timeline: TimelineFilter
   @State private var scrollToTopSignal: Int = 0
+  
+  private let canFilterTimeline: Bool
+  
+  init(popToRootTab: Binding<Tab>, timeline: TimelineFilter? = nil) {
+    canFilterTimeline = timeline == nil
+    self.timeline = timeline ?? .home
+    _popToRootTab = popToRootTab
+  }
     
   var body: some View {
     NavigationStack(path: $routeurPath.path) {
@@ -31,7 +39,7 @@ struct TimelineTab: View {
     }
     .onAppear {
       routeurPath.client = client
-      if !didAppear {
+      if !didAppear && canFilterTimeline {
         didAppear = true
         timeline = client.isAuth ? .home : .federated
       }
@@ -124,8 +132,10 @@ struct TimelineTab: View {
   
   @ToolbarContentBuilder
   private var toolbarView: some ToolbarContent {
-    ToolbarTitleMenu {
-      timelineFilterButton
+    if canFilterTimeline {
+      ToolbarTitleMenu {
+        timelineFilterButton
+      }
     }
     if client.isAuth {
       ToolbarItem(placement: .navigationBarLeading) {

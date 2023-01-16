@@ -5,9 +5,9 @@ import Network
 import KeychainSwift
 import Env
 import DesignSystem
-import QuickLook
 import RevenueCat
 import AppAccount
+import Account
 
 @main
 struct IceCubesApp: App {  
@@ -48,7 +48,10 @@ struct IceCubesApp: App {
       .environmentObject(theme)
       .environmentObject(watcher)
       .environmentObject(PushNotificationsService.shared)
-      .quickLookPreview($quickLook.url, in: quickLook.urls)
+      .sheet(item: $quickLook.url, content: { url in
+        QuickLookPreview(selectedURL: url, urls: quickLook.urls)
+          .edgesIgnoringSafeArea(.bottom)
+      })
     }
     .onChange(of: scenePhase) { scenePhase in
       handleScenePhase(scenePhase: scenePhase)
@@ -63,14 +66,11 @@ struct IceCubesApp: App {
   
   @ViewBuilder
   private var appView: some View {
-    /*
     if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
-      splitView
+      sidebarView
     } else {
       tabBarView
     }
-    */
-    tabBarView
   }
   
   private func badgeFor(tab: Tab) -> Int {
@@ -78,6 +78,51 @@ struct IceCubesApp: App {
       return watcher.unreadNotificationsCount + userPreferences.pushNotificationsCount
     }
     return 0
+  }
+  
+  private var sidebarView: some View {
+    HStack(spacing: 0) {
+      VStack(alignment: .center) {
+        if let account = currentAccount.account {
+          AvatarView(url: account.avatar)
+            .frame(width: 70, height: 50)
+            .background(selectedTab == .profile ? theme.secondaryBackgroundColor : .clear)
+            .onTapGesture {
+              selectedTab = .profile
+            }
+        }
+        ForEach(availableTabs) { tab in
+          Button {
+            if tab == selectedTab {
+              popToRootTab = .other
+              DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                popToRootTab = tab
+              }
+            }
+            selectedTab = tab
+          } label: {
+            Image(systemName: tab.iconName)
+              .resizable()
+              .aspectRatio(contentMode: .fit)
+              .frame(width: 24, height: 24)
+              .foregroundColor(tab == selectedTab ? theme.tintColor : .gray)
+          }
+          .frame(width: 70, height: 50)
+          .background(tab == selectedTab ? theme.secondaryBackgroundColor : .clear)
+        }
+        Spacer()
+      }
+      .frame(width: 70)
+      .background(.clear)
+      Divider()
+        .edgesIgnoringSafeArea(.top)
+      if selectedTab == .profile, let account = currentAccount.account {
+        AccountDetailView(account: account)
+      } else {
+        selectedTab.makeContentView(popToRootTab: $popToRootTab)
+      }
+    }
+    .background(.thinMaterial)
   }
   
   private var tabBarView: some View {

@@ -43,7 +43,7 @@ public enum TimelineFilter: Hashable, Equatable {
     case .federated:
       return "globe.americas"
     case .local:
-      return "person.3"
+      return "person.2"
     case .trending:
       return "chart.line.uptrend.xyaxis"
     case .home:

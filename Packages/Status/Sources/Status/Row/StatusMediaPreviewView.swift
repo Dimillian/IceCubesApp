@@ -172,14 +172,12 @@ public struct StatusMediaPreviewView: View {
                   .resizable()
                   .aspectRatio(contentMode: .fill)
                   .frame(maxHeight: imageMaxHeight)
-                  .frame(maxWidth: imageMaxHeight)
                   .cornerRadius(4)
               },
               placeholder: {
                 RoundedRectangle(cornerRadius: 4)
                   .fill(Color.gray)
                   .frame(maxHeight: imageMaxHeight)
-                  .frame(maxWidth: imageMaxHeight)
                   .shimmering()
               })
       }

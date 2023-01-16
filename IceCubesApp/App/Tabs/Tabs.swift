@@ -6,6 +6,8 @@ import SwiftUI
 
 enum Tab: Int, Identifiable, Hashable {
   case timeline, notifications, explore, messages, settings, other
+  case trending, federated, local
+  case profile
   
   var id: Int {
     rawValue
@@ -16,7 +18,11 @@ enum Tab: Int, Identifiable, Hashable {
   }
   
   static func loggedInTabs() -> [Tab] {
-    [.timeline, .notifications, .explore, .messages, .settings]
+    if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
+      return [.timeline, .trending, .federated, .local, .notifications, .explore, .messages, .settings]
+    } else {
+      return [.timeline, .notifications, .explore, .messages, .settings]
+    }
   }
   
   @ViewBuilder
@@ -24,6 +30,12 @@ enum Tab: Int, Identifiable, Hashable {
     switch self {
     case .timeline:
       TimelineTab(popToRootTab: popToRootTab)
+    case .trending:
+      TimelineTab(popToRootTab: popToRootTab, timeline: .trending)
+    case .local:
+      TimelineTab(popToRootTab: popToRootTab, timeline: .local)
+    case .federated:
+      TimelineTab(popToRootTab: popToRootTab, timeline: .federated)
     case .notifications:
       NotificationsTab(popToRootTab: popToRootTab)
     case .explore:
@@ -32,7 +44,7 @@ enum Tab: Int, Identifiable, Hashable {
       MessagesTab(popToRootTab: popToRootTab)
     case .settings:
       SettingsTabs(popToRootTab: popToRootTab)
-    case .other:
+    case .other, .profile:
       EmptyView()
     }
   }
@@ -41,17 +53,46 @@ enum Tab: Int, Identifiable, Hashable {
   var label: some View {
     switch self {
     case .timeline:
-      Label("Timeline", systemImage: "rectangle.on.rectangle")
+      Label("Timeline", systemImage: iconName)
+    case .trending:
+      Label("Trending", systemImage: iconName)
+    case .local:
+      Label("Local", systemImage: iconName)
+    case .federated:
+      Label("Federated", systemImage: iconName)
     case .notifications:
-      Label("Notifications", systemImage: "bell")
+      Label("Notifications", systemImage: iconName)
     case .explore:
-      Label("Explore", systemImage: "magnifyingglass")
+      Label("Explore", systemImage: iconName)
     case .messages:
-      Label("Messages", systemImage: "tray")
+      Label("Messages", systemImage: iconName)
     case .settings:
-      Label("Settings", systemImage: "gear")
-    case .other:
+      Label("Settings", systemImage: iconName)
+    case .other, .profile:
       EmptyView()
+    }
+  }
+  
+  var iconName: String {
+    switch self {
+    case .timeline:
+      return "rectangle.on.rectangle"
+    case .trending:
+      return "chart.line.uptrend.xyaxis"
+    case .local:
+      return "person.2"
+    case .federated:
+      return "globe.americas"
+    case .notifications:
+      return "bell"
+    case .explore:
+      return "magnifyingglass"
+    case .messages:
+      return "tray"
+    case .settings:
+      return "gear"
+    case .other, .profile:
+      return ""
     }
   }
 }

@@ -16,7 +16,7 @@
 		9F2A540E2969A0B0009B2D7C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F2A540D2969A0B0009B2D7C /* StoreKit.framework */; };
 		9F2A5411296A1429009B2D7C /* PushNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2A5410296A1429009B2D7C /* PushNotificationsView.swift */; };
 		9F2A5419296AB631009B2D7C /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2A5418296AB631009B2D7C /* NotificationService.swift */; };
-		9F2A541D296AB631009B2D7C /* IceCubesNotifications.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9F2A5416296AB631009B2D7C /* IceCubesNotifications.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9F2A541D296AB631009B2D7C /* IceCubesNotifications.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9F2A5416296AB631009B2D7C /* IceCubesNotifications.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9F2A5424296AB67A009B2D7C /* Env in Frameworks */ = {isa = PBXBuildFile; productRef = 9F2A5423296AB67A009B2D7C /* Env */; };
 		9F2A5426296AB67E009B2D7C /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9F2A5425296AB67E009B2D7C /* KeychainSwift */; };
 		9F2A5428296AB683009B2D7C /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 9F2A5427296AB683009B2D7C /* Models */; };
@@ -45,7 +45,7 @@
 		9FAD85832971BF7200496AB1 /* Secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9FAD85822971BF7200496AB1 /* Secret.plist */; };
 		9FAD858B29743F7400496AB1 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAD858A29743F7400496AB1 /* ShareViewController.swift */; };
 		9FAD858E29743F7400496AB1 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9FAD858C29743F7400496AB1 /* MainInterface.storyboard */; };
-		9FAD859229743F7400496AB1 /* IceCubesShareExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9FAD859229743F7400496AB1 /* IceCubesShareExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9FAD85982974405D00496AB1 /* Status in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD85972974405D00496AB1 /* Status */; };
 		9FAD859A297440CB00496AB1 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD8599297440CB00496AB1 /* KeychainSwift */; };
 		9FAD859C2974422700496AB1 /* AppAccount in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD859B2974422700496AB1 /* AppAccount */; };
@@ -53,6 +53,7 @@
 		9FAD85A0297456A100496AB1 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD859F297456A100496AB1 /* Models */; };
 		9FAD85A2297456A400496AB1 /* Env in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD85A1297456A400496AB1 /* Env */; };
 		9FAD85A4297456A800496AB1 /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD85A3297456A800496AB1 /* DesignSystem */; };
+		9FAD85A8297582F100496AB1 /* QuickLookRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAD85A7297582F100496AB1 /* QuickLookRepresentable.swift */; };
 		9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE4ACA293783B000772766 /* SettingsTab.swift */; };
 		9FAE4ACE29379A5A00772766 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAE4ACD29379A5A00772766 /* KeychainSwift */; };
 		9FBFE63D292A715500C250E9 /* IceCubesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBFE63C292A715500C250E9 /* IceCubesApp.swift */; };
@@ -137,6 +138,7 @@
 		9FAD858D29743F7400496AB1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		9FAD858F29743F7400496AB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9FAD859629743F7E00496AB1 /* IceCubesShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IceCubesShareExtension.entitlements; sourceTree = "<group>"; };
+		9FAD85A7297582F100496AB1 /* QuickLookRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickLookRepresentable.swift; sourceTree = "<group>"; };
 		9FAE4AC8293774FF00772766 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9FAE4ACA293783B000772766 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		9FBFE639292A715500C250E9 /* IceCubesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IceCubesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,6 +220,7 @@
 				9FBFE63C292A715500C250E9 /* IceCubesApp.swift */,
 				9F398AA52935FE8A00A889F2 /* AppRouteur.swift */,
 				639CDF9B296AC82F00C35E58 /* SafariRouteur.swift */,
+				9FAD85A7297582F100496AB1 /* QuickLookRepresentable.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -536,6 +539,7 @@
 				9F7335F22967608F00AFF0BA /* AddRemoteTimelineVIew.swift in Sources */,
 				9F55C68D2955968700F94077 /* ExploreTab.swift in Sources */,
 				9F2A5411296A1429009B2D7C /* PushNotificationsView.swift in Sources */,
+				9FAD85A8297582F100496AB1 /* QuickLookRepresentable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -544,11 +548,13 @@
 /* Begin PBXTargetDependency section */
 		9F2A541C296AB631009B2D7C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = 9F2A5415296AB631009B2D7C /* IceCubesNotifications */;
 			targetProxy = 9F2A541B296AB631009B2D7C /* PBXContainerItemProxy */;
 		};
 		9FAD859129743F7400496AB1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = 9FAD858729743F7400496AB1 /* IceCubesShareExtension */;
 			targetProxy = 9FAD859029743F7400496AB1 /* PBXContainerItemProxy */;
 		};
@@ -810,6 +816,7 @@
 				CODE_SIGN_ENTITLEMENTS = IceCubesApp/IceCubesApp.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 730;
 				DEAD_CODE_STRIPPING = YES;
@@ -861,6 +868,7 @@
 				CODE_SIGN_ENTITLEMENTS = IceCubesApp/IceCubesApp.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 730;
 				DEAD_CODE_STRIPPING = YES;
