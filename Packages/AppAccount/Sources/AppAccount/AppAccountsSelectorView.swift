@@ -10,8 +10,15 @@ public struct AppAccountsSelectorView: View {
   
   @State private var accountsViewModel: [AppAccountViewModel] = []
   
-  public init(routeurPath: RouterPath) {
+  private let accountCreationEnabled: Bool
+  private let avatarSize: AvatarView.Size
+  
+  public init(routeurPath: RouterPath,
+              accountCreationEnabled: Bool = true,
+              avatarSize: AvatarView.Size = .badge) {
     self.routeurPath = routeurPath
+    self.accountCreationEnabled = accountCreationEnabled
+    self.avatarSize = avatarSize
   }
   
   public var body: some View {
@@ -35,15 +42,17 @@ public struct AppAccountsSelectorView: View {
           }
         }
       }
-      Divider()
-      Button {
-        routeurPath.presentedSheet = .addAccount
-      } label: {
-        Label("Add Account", systemImage: "person.badge.plus")
+      if accountCreationEnabled {
+        Divider()
+        Button {
+          routeurPath.presentedSheet = .addAccount
+        } label: {
+          Label("Add Account", systemImage: "person.badge.plus")
+        }
       }
     } label: {
       if let avatar = currentAccount.account?.avatar {
-        AvatarView(url: avatar, size: .badge)
+        AvatarView(url: avatar, size: avatarSize)
       } else {
         EmptyView()
       }

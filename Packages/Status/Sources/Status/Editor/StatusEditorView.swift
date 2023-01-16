@@ -9,6 +9,7 @@ import PhotosUI
 import NukeUI
 import EmojiText
 import UIKit
+import AppAccount
 
 public struct StatusEditorView: View {
   @EnvironmentObject private var preferences: UserPreferences
@@ -156,7 +157,9 @@ public struct StatusEditorView: View {
   private var accountHeaderView: some View {
     if let account = currentAccount.account {
       HStack {
-        AvatarView(url: account.avatar, size: .status)
+        AppAccountsSelectorView(routeurPath: RouterPath(),
+                                accountCreationEnabled: false,
+                                avatarSize: .status)
         VStack(alignment: .leading, spacing: 4) {
           privacyMenu
           Text("@\(account.acct)")
