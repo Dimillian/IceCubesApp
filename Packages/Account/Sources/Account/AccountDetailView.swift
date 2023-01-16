@@ -175,7 +175,7 @@ public struct AccountDetailView: View {
                 VStack(alignment: .leading, spacing: 0) {
                   Text("#\(tag.name)")
                     .font(.scaledCallout)
-                  Text("account.detail.posts-\(tag.statusesCount)")
+                  Text("account.detail.featured-tags-n-posts \(tag.statusesCountInt)")
                     .font(.caption2)
                 }
               }.buttonStyle(.bordered)

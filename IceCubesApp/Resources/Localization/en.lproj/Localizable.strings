@@ -123,7 +123,7 @@
 "account.detail.about" = "About";
 "account.detail.familiar-followers" = "Also followed by";
 "account.detail.n-fields %lld" = "%lld fields";
-"account.detail.posts-%@" = "%@ posts";
+"account.detail.featured-tags-n-posts %lld" = "%lld posts";
 "account.edit.about" = "About";
 "account.edit.account-settings.bot" = "Bot account";
 "account.edit.account-settings.discoverable" = "Discoverable";
@@ -224,7 +224,7 @@
 "notifications.tab.mentions" = "Mentions";
 
 // MARK: Package: Timeline
-"timeline.%@-new-posts" = "%@ new posts";
+"timeline.n-new-posts %lld" = "%lld new posts";
 "timeline.federated" = "Federated";
 "timeline.home" = "Home";
 "timeline.local" = "Local";
@@ -278,7 +278,7 @@
 "status.image.alt-text.abbreviation" = "ALT";
 "status.media.content.show" = "Show content";
 "status.media.sensitive.show" = "Show sensitive content";
-"status.poll.%@-votes" = "%@ votes";
+"status.poll.n-votes %lld" = "%lld votes";
 "status.poll.closed" = "Closed";
 "status.poll.closes-in" = "Closes in ";
 "status.poll.duration" = "Poll Duration";
