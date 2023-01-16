@@ -117,25 +117,25 @@ public struct StatusEditorView: View {
           } label: {
             Text("Cancel")
           }
+          .confirmationDialog("",
+                              isPresented: $isDismissAlertPresented,
+                              actions: {
+            Button("Delete Draft", role: .destructive) {
+              dismiss()
+              NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
+                                              object: nil)
+            }
+            Button("Save Draft") {
+              preferences.draftsPosts.insert(viewModel.statusText.string, at: 0)
+              dismiss()
+              NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
+                                              object: nil)
+            }
+            Button("Cancel", role: .cancel) { }
+          })
         }
       }
     }
-    .confirmationDialog("",
-                        isPresented: $isDismissAlertPresented,
-                        actions: {
-      Button("Delete Draft", role: .destructive) {
-        dismiss()
-        NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
-                                        object: nil)
-      }
-      Button("Save Draft") {
-        preferences.draftsPosts.insert(viewModel.statusText.string, at: 0)
-        dismiss()
-        NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
-                                        object: nil)
-      }
-      Button("Cancel", role: .cancel) { }
-    })
     .interactiveDismissDisabled(!viewModel.statusText.string.isEmpty)
   }
   
