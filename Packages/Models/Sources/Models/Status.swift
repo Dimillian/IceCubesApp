@@ -50,6 +50,7 @@ public protocol AnyStatus {
   var spoilerText: String { get }
   var filtered: [Filtered]? { get }
   var sensitive: Bool { get }
+  var language: String? { get }
 }
 
 
@@ -83,6 +84,7 @@ public struct Status: AnyStatus, Codable, Identifiable {
   public let spoilerText: String
   public let filtered: [Filtered]?
   public let sensitive: Bool
+  public let language: String?
   
   public static func placeholder() -> Status {
     .init(id: UUID().uuidString,
@@ -109,7 +111,8 @@ public struct Status: AnyStatus, Codable, Identifiable {
           poll: nil,
           spoilerText: "",
           filtered: [],
-          sensitive: false)
+          sensitive: false,
+          language: nil)
   }
   
   public static func placeholders() -> [Status] {
@@ -146,4 +149,5 @@ public struct ReblogStatus: AnyStatus, Codable, Identifiable {
   public let spoilerText: String
   public let filtered: [Filtered]?
   public let sensitive: Bool
+  public let language: String?
 }

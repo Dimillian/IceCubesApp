@@ -97,7 +97,14 @@ public class StatusEditorViewModel: ObservableObject {
   }
   
   func setInitialLanguageSelection(preference: String?) {
-    selectedLanguage = preference ?? currentAccount?.source?.language
+    switch mode {
+    case .replyTo(let status), .edit(let status):
+      selectedLanguage = status.language
+    default:
+      break
+    }
+    
+    selectedLanguage = selectedLanguage ?? preference ?? currentAccount?.source?.language
   }
 
   private func getPollOptionsForAPI() -> [String]? {
