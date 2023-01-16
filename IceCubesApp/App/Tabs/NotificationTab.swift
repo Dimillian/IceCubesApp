@@ -21,8 +21,10 @@ struct NotificationsTab: View {
         .toolbar {
           statusEditorToolbarItem(routeurPath: routeurPath,
                                   visibility: userPreferences.serverPreferences?.postVisibility ?? .pub)
-          ToolbarItem(placement: .navigationBarLeading) {
-            AppAccountsSelectorView(routeurPath: routeurPath)
+          if !ProcessInfo.processInfo.isiOSAppOnMac {
+            ToolbarItem(placement: .navigationBarLeading) {
+              AppAccountsSelectorView(routeurPath: routeurPath)
+            }
           }
         }
         .id(currentAccount.account?.id)

@@ -23,45 +23,55 @@ public struct AppAccountsSelectorView: View {
   
   public var body: some View {
     Menu {
-      ForEach(accountsViewModel, id: \.appAccount.id) { viewModel in
-        Section(viewModel.acct) {
-          Button {
-            if let account = currentAccount.account,
-                viewModel.account?.id == account.id {
-              routeurPath.navigate(to: .accountDetailWithAccount(account: account))
-            } else {
-              appAccounts.currentAccount = viewModel.appAccount
-            }
-          } label: {
-            HStack {
-              if viewModel.account?.id == currentAccount.account?.id {
-                Image(systemName: "checkmark.circle.fill")
-              }
-              Text("\(viewModel.account?.displayName ?? "")")
-            }
-          }
-        }
-      }
-      if accountCreationEnabled {
-        Divider()
-        Button {
-          routeurPath.presentedSheet = .addAccount
-        } label: {
-          Label("Add Account", systemImage: "person.badge.plus")
-        }
-      }
+      menuView
     } label: {
-      if let avatar = currentAccount.account?.avatar {
-        AvatarView(url: avatar, size: avatarSize)
-      } else {
-        EmptyView()
-      }
+      labelView
     }
     .onAppear {
       refreshAccounts()
     }
     .onChange(of: currentAccount.account?.id) { _ in
       refreshAccounts()
+    }
+  }
+  
+  @ViewBuilder
+  private var labelView: some View {
+    if let avatar = currentAccount.account?.avatar {
+      AvatarView(url: avatar, size: avatarSize)
+    } else {
+      EmptyView()
+    }
+  }
+  
+  @ViewBuilder
+  private var menuView: some View {
+    ForEach(accountsViewModel, id: \.appAccount.id) { viewModel in
+      Section(viewModel.acct) {
+        Button {
+          if let account = currentAccount.account,
+              viewModel.account?.id == account.id {
+            routeurPath.navigate(to: .accountDetailWithAccount(account: account))
+          } else {
+            appAccounts.currentAccount = viewModel.appAccount
+          }
+        } label: {
+          HStack {
+            if viewModel.account?.id == currentAccount.account?.id {
+              Image(systemName: "checkmark.circle.fill")
+            }
+            Text("\(viewModel.account?.displayName ?? "")")
+          }
+        }
+      }
+    }
+    if accountCreationEnabled {
+      Divider()
+      Button {
+        routeurPath.presentedSheet = .addAccount
+      } label: {
+        Label("Add Account", systemImage: "person.badge.plus")
+      }
     }
   }
   
@@ -77,4 +87,5 @@ public struct AppAccountsSelectorView: View {
       }
     }
   }
+  
 }

@@ -22,8 +22,10 @@ struct ExploreTab: View {
         .toolbar {
           statusEditorToolbarItem(routeurPath: routeurPath,
                                   visibility: preferences.serverPreferences?.postVisibility ?? .pub)
-          ToolbarItem(placement: .navigationBarLeading) {
-            AppAccountsSelectorView(routeurPath: routeurPath)
+          if !ProcessInfo.processInfo.isiOSAppOnMac {
+            ToolbarItem(placement: .navigationBarLeading) {
+              AppAccountsSelectorView(routeurPath: routeurPath)
+            }
           }
         }
     }

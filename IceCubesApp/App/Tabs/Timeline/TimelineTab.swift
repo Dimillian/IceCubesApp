@@ -138,8 +138,10 @@ struct TimelineTab: View {
       }
     }
     if client.isAuth {
-      ToolbarItem(placement: .navigationBarLeading) {
-        AppAccountsSelectorView(routeurPath: routeurPath)
+      if !ProcessInfo.processInfo.isiOSAppOnMac {
+        ToolbarItem(placement: .navigationBarLeading) {
+          AppAccountsSelectorView(routeurPath: routeurPath)
+        }
       }
       statusEditorToolbarItem(routeurPath: routeurPath,
                               visibility: preferences.serverPreferences?.postVisibility ?? .pub)

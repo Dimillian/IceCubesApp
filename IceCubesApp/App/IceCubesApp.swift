@@ -84,14 +84,12 @@ struct IceCubesApp: App {
   private var sidebarView: some View {
     SideBarView(selectedTab: $selectedTab,
                 popToRootTab: $popToRootTab,
-                tabs: availableTabs) { selectedTab in
+                tabs: availableTabs) {
       ZStack {
+        if let account = currentAccount.account, selectedTab == .profile {
+          AccountDetailView(account: account)
+        }
         ForEach(availableTabs) { tab in
-          if let account = currentAccount.account {
-            AccountDetailView(account: account)
-              .opacity(selectedTab == .profile ? 1 : 0)
-              .id(account.id)
-          }
           if tab == selectedTab || sideBarLoadedTabs.contains(tab) {
             tab
               .makeContentView(popToRootTab: $popToRootTab)

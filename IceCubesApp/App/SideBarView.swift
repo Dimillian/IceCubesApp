@@ -2,6 +2,7 @@ import SwiftUI
 import Env
 import Account
 import DesignSystem
+import AppAccount
 
 struct SideBarView<Content: View>: View {
   @EnvironmentObject private var currentAccount: CurrentAccount
@@ -10,18 +11,19 @@ struct SideBarView<Content: View>: View {
   @Binding var selectedTab: Tab
   @Binding var popToRootTab: Tab
   var tabs: [Tab]
-  @ViewBuilder var content: (Tab) -> Content
+  @ViewBuilder var content: () -> Content
   
   var body: some View {
     HStack(spacing: 0) {
       VStack(alignment: .center) {
         if let account = currentAccount.account {
-          AvatarView(url: account.avatar)
-            .frame(width: 70, height: 50)
-            .background(selectedTab == .profile ? theme.secondaryBackgroundColor : .clear)
-            .onTapGesture {
-              selectedTab = .profile
-            }
+          Button {
+            selectedTab = .profile
+          } label: {
+            AvatarView(url: account.avatar, size: .status)
+          }
+          .frame(width: 70, height: 50)
+          .background(selectedTab == .profile ? theme.secondaryBackgroundColor : .clear)
         }
         ForEach(tabs) { tab in
           Button {
@@ -48,7 +50,7 @@ struct SideBarView<Content: View>: View {
       .background(.clear)
       Divider()
         .edgesIgnoringSafeArea(.top)
-      content(selectedTab)
+      content()
     }
     .background(.thinMaterial)
   }
