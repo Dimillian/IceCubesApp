@@ -14,6 +14,7 @@ let package = Package(
       targets: ["Status"]),
   ],
   dependencies: [
+    .package(name: "AppAccount", path: "../AppAccount"),
     .package(name: "Models", path: "../Models"),
     .package(name: "Network", path: "../Network"),
     .package(name: "Env", path: "../Env"),
@@ -24,6 +25,7 @@ let package = Package(
     .target(
       name: "Status",
       dependencies: [
+        .product(name: "AppAccount", package: "AppAccount"),
         .product(name: "Models", package: "Models"),
         .product(name: "Network", package: "Network"),
         .product(name: "Env", package: "Env"),
