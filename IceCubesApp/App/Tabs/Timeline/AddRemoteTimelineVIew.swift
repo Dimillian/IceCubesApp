@@ -5,6 +5,7 @@ import Env
 import DesignSystem
 import NukeUI
 import Shimmer
+import Combine
 
 struct AddRemoteTimelineView: View {
   @Environment(\.dismiss) private var dismiss
@@ -15,6 +16,8 @@ struct AddRemoteTimelineView: View {
   @State private var instanceName: String = ""
   @State private var instance: Instance?
   @State private var instances: [InstanceSocial] = []
+
+  private let instanceNamePublisher = PassthroughSubject<String, Never>()
   
   @FocusState private var isInstanceURLFieldFocused: Bool
     
@@ -55,12 +58,15 @@ struct AddRemoteTimelineView: View {
           Button("Cancel", action: { dismiss() })
         }
       }
-      .onChange(of: instanceName, perform: { newValue in
+      .onChange(of: instanceName) { newValue in
+        instanceNamePublisher.send(newValue)
+      }
+      .onReceive(instanceNamePublisher.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)) { newValue in
         Task {
           let client = Client(server: newValue)
           instance = try? await client.get(endpoint: Instances.instance)
         }
-      })
+      }
       .onAppear {
         isInstanceURLFieldFocused = true
         let client = InstanceSocialClient()

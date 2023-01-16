@@ -98,8 +98,12 @@ public struct StatusRowView: View {
       HStack(spacing: 2) {
         Image(systemName:"arrow.left.arrow.right.circle.fill")
         AvatarView(url: viewModel.status.account.avatar, size: .boost)
-        EmojiTextApp(viewModel.status.account.safeDisplayName.asMarkdown, emojis: viewModel.status.account.emojis)
-        Text("boosted")
+        if viewModel.status.account.username != account.account?.username {
+          EmojiTextApp(viewModel.status.account.safeDisplayName.asMarkdown, emojis: viewModel.status.account.emojis)
+          Text("boosted")
+        } else {
+          Text("You boosted")
+        }
       }
       .font(.footnote)
       .foregroundColor(.gray)

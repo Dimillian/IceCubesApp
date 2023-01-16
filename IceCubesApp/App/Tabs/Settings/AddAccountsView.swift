@@ -6,6 +6,7 @@ import DesignSystem
 import NukeUI
 import Shimmer
 import AppAccount
+import Combine
 
 struct AddAccountView: View {
   @Environment(\.dismiss) private var dismiss
@@ -23,6 +24,8 @@ struct AddAccountView: View {
   @State private var signInClient: Client?
   @State private var instances: [InstanceSocial] = []
   @State private var instanceFetchError: String?
+
+  private let instanceNamePublisher = PassthroughSubject<String, Never>()
   
   @FocusState private var isInstanceURLFieldFocused: Bool
   
@@ -68,6 +71,9 @@ struct AddAccountView: View {
         isSigninIn = false
       }
       .onChange(of: instanceName) { newValue in
+        instanceNamePublisher.send(newValue)
+      }
+      .onReceive(instanceNamePublisher.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)) { newValue in
         let client = Client(server: newValue)
         Task {
           do {
