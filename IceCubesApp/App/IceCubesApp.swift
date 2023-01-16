@@ -25,6 +25,7 @@ struct IceCubesApp: App {
   @State private var selectedTab: Tab = .timeline
   @State private var selectSidebarItem: Tab? = .timeline
   @State private var popToRootTab: Tab = .other
+  @State private var sideBarLoadedTabs: [Tab] = []
   
   private var availableTabs: [Tab] {
     appAccountsManager.currentClient.isAuth ? Tab.loggedInTabs() : Tab.loggedOutTab()
@@ -81,48 +82,31 @@ struct IceCubesApp: App {
   }
   
   private var sidebarView: some View {
-    HStack(spacing: 0) {
-      VStack(alignment: .center) {
-        if let account = currentAccount.account {
-          AvatarView(url: account.avatar)
-            .frame(width: 70, height: 50)
-            .background(selectedTab == .profile ? theme.secondaryBackgroundColor : .clear)
-            .onTapGesture {
-              selectedTab = .profile
-            }
-        }
+    SideBarView(selectedTab: $selectedTab,
+                popToRootTab: $popToRootTab,
+                tabs: availableTabs) { selectedTab in
+      ZStack {
         ForEach(availableTabs) { tab in
-          Button {
-            if tab == selectedTab {
-              popToRootTab = .other
-              DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-                popToRootTab = tab
-              }
-            }
-            selectedTab = tab
-          } label: {
-            Image(systemName: tab.iconName)
-              .resizable()
-              .aspectRatio(contentMode: .fit)
-              .frame(width: 24, height: 24)
-              .foregroundColor(tab == selectedTab ? theme.tintColor : .gray)
+          if let account = currentAccount.account {
+            AccountDetailView(account: account)
+              .opacity(selectedTab == .profile ? 1 : 0)
           }
-          .frame(width: 70, height: 50)
-          .background(tab == selectedTab ? theme.secondaryBackgroundColor : .clear)
+          if tab == selectedTab || sideBarLoadedTabs.contains(tab) {
+            tab
+              .makeContentView(popToRootTab: $popToRootTab)
+              .opacity(tab == selectedTab ? 1 : 0)
+              .id(tab)
+              .onAppear {
+                if !sideBarLoadedTabs.contains(tab) {
+                  sideBarLoadedTabs.append(tab)
+                }
+              }
+          } else {
+            EmptyView()
+          }
         }
-        Spacer()
-      }
-      .frame(width: 70)
-      .background(.clear)
-      Divider()
-        .edgesIgnoringSafeArea(.top)
-      if selectedTab == .profile, let account = currentAccount.account {
-        AccountDetailView(account: account)
-      } else {
-        selectedTab.makeContentView(popToRootTab: $popToRootTab)
       }
     }
-    .background(.thinMaterial)
   }
   
   private var tabBarView: some View {
@@ -149,22 +133,7 @@ struct IceCubesApp: App {
       }
     }
   }
-  
-  private var splitView: some View {
-    NavigationSplitView {
-      List(availableTabs, selection: $selectSidebarItem) { tab in
-        NavigationLink(value: tab) {
-          tab.label
-        }
-      }
-      .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
-      .navigationSplitViewColumnWidth(200)
-    } detail: {
-      selectSidebarItem?.makeContentView(popToRootTab: $popToRootTab)
-    }
-  }
-  
+    
   private func setNewClientsInEnv(client: Client) {
     currentAccount.setClient(client: client)
     currentInstance.setClient(client: client)
