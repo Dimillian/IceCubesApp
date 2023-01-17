@@ -22,6 +22,9 @@ public struct StatusMediaPreviewView: View {
   
   private var imageMaxHeight: CGFloat {
     if isNotifications {
+      if UIDevice.current.userInterfaceIdiom == .pad {
+        return 150
+      }
       return 50
     }
     if theme.statusDisplayStyle == .compact {

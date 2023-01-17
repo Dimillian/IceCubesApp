@@ -82,8 +82,12 @@ struct NotificationRowView: View {
   private func makeContent(type: Models.Notification.NotificationType) -> some View {
     if let status = notification.status {
       HStack {
-        StatusRowView(viewModel: .init(status: status, isCompact: true))
-          .foregroundColor(type == .mention ? theme.labelColor : .gray)
+        if type == .mention {
+          StatusRowView(viewModel: .init(status: status, isCompact: true, showActions: true))
+        } else {
+          StatusRowView(viewModel: .init(status: status, isCompact: true, showActions: false))
+            .foregroundColor(.gray)
+        }
         Spacer()
       }
     } else {
