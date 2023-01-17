@@ -6,7 +6,6 @@
 
 For contributors and myself, here is a todo list of features that could be added (while giving you a good idea of what's already done if not in this list, the app is quite complete already!)
 
-- [ ] Editor: Add / Edit polls
 - [ ] Editor: Support video types
 - [ ] Editor: Add photos from camera
 - [ ] Editor: Support custom emojis
@@ -14,8 +13,6 @@ For contributors and myself, here is a todo list of features that could be added
 - [ ] Support IceCubesApp://any mastodon links
 - [ ] Translate button / display post language / set post language
 - [ ] Widgets
-- [ ] Proper iPad support
-- [ ] macOS support
 
 
 IceCubesApp is an open source application for accessing the decentralized social network Mastodon! It's built entirely in SwiftUI, making it fast, lightweight, and easy to use.
