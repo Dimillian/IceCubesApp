@@ -8,9 +8,9 @@ public class CurrentInstance: ObservableObject {
   
   private var client: Client?
   
-  public init() {
-    
-  }
+  static public let shared = CurrentInstance()
+  
+  private init() { }
   
   public func setClient(client: Client) {
     self.client = client

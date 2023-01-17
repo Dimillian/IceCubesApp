@@ -5,7 +5,9 @@ import Env
 import Status
 import DesignSystem
 import Lists
+import AppAccount
 
+@MainActor
 extension View {
   func withAppRouteur() -> some View {
     self.navigationDestination(for: RouteurDestinations.self) { destination in
@@ -39,23 +41,41 @@ extension View {
       switch destination {
       case let .replyToStatusEditor(status):
         StatusEditorView(mode: .replyTo(status: status))
+          .withEnvironments()
       case let .newStatusEditor(visibility):
         StatusEditorView(mode: .new(vivibilty: visibility))
+          .withEnvironments()
       case let .editStatusEditor(status):
         StatusEditorView(mode: .edit(status: status))
+          .withEnvironments()
       case let .quoteStatusEditor(status):
         StatusEditorView(mode: .quote(status: status))
+          .withEnvironments()
       case let .mentionStatusEditor(account, visibility):
         StatusEditorView(mode: .mention(account: account, visibility: visibility))
+          .withEnvironments()
       case let .listEdit(list):
         ListEditView(list: list)
+          .withEnvironments()
       case let .listAddAccount(account):
         ListAddAccountView(account: account)
+          .withEnvironments()
       case .addAccount:
         AddAccountView()
+          .withEnvironments()
       case .addRemoteLocalTimeline:
         AddRemoteTimelineView()
+          .withEnvironments()
       }
     }
+  }
+  
+  func withEnvironments() -> some View {
+    self
+      .environmentObject(CurrentAccount.shared)
+      .environmentObject(UserPreferences.shared)
+      .environmentObject(CurrentInstance.shared)
+      .environmentObject(Theme.shared)
+      .environmentObject(AppAccountsManager.shared)
   }
 }

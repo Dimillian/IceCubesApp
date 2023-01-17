@@ -15,12 +15,12 @@ struct IceCubesApp: App {
   
   @Environment(\.scenePhase) private var scenePhase
   @StateObject private var appAccountsManager = AppAccountsManager.shared
-  @StateObject private var currentInstance = CurrentInstance()
-  @StateObject private var currentAccount = CurrentAccount()
-  @StateObject private var userPreferences = UserPreferences()
+  @StateObject private var currentInstance = CurrentInstance.shared
+  @StateObject private var currentAccount = CurrentAccount.shared
+  @StateObject private var userPreferences = UserPreferences.shared
   @StateObject private var watcher = StreamWatcher()
   @StateObject private var quickLook = QuickLook()
-  @StateObject private var theme = Theme()
+  @StateObject private var theme = Theme.shared
   
   @State private var selectedTab: Tab = .timeline
   @State private var selectSidebarItem: Tab? = .timeline

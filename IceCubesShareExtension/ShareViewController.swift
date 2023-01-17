@@ -14,18 +14,18 @@ class ShareViewController: UIViewController {
     super.viewDidLoad()
     
     let client = AppAccountsManager.shared.currentClient
-    let account = CurrentAccount()
-    let instance = CurrentInstance()
+    let account = CurrentAccount.shared
+    let instance = CurrentInstance.shared
     account.setClient(client: client)
     instance.setClient(client: client)
     let colorScheme = traitCollection.userInterfaceStyle
-    let theme = Theme()
+    let theme = Theme.shared
     theme.setColor(withName: colorScheme == .dark ? .iceCubeDark : .iceCubeLight)
     
     if let item = extensionContext?.inputItems.first as? NSExtensionItem {
       if let attachments = item.attachments {
         let view = StatusEditorView(mode: .shareExtension(items: attachments))
-          .environmentObject(UserPreferences())
+          .environmentObject(UserPreferences.shared)
           .environmentObject(client)
           .environmentObject(account)
           .environmentObject(theme)

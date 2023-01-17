@@ -10,7 +10,9 @@ public class CurrentAccount: ObservableObject {
   
   private var client: Client?
   
-  public init() { }
+  static public let shared = CurrentAccount()
+  
+  private init() { }
   
   public func setClient(client: Client) {
     self.client = client

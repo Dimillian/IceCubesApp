@@ -6,6 +6,7 @@ import Network
 @MainActor
 public class UserPreferences: ObservableObject {
   public static let sharedDefault = UserDefaults.init(suiteName: "group.icecubesapps")
+  public static let shared = UserPreferences()
   
   private var client: Client?
   
@@ -24,7 +25,7 @@ public class UserPreferences: ObservableObject {
   
   @Published public var serverPreferences: ServerPreferences?
   
-  public init() { }
+  private init() { }
   
   public func setClient(client: Client) {
     self.client = client

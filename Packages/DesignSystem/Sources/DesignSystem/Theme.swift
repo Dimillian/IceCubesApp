@@ -80,7 +80,9 @@ public class Theme: ObservableObject {
 
   private var cancellables = Set<AnyCancellable>()
   
-  public init() {
+  public static let shared = Theme()
+  
+  private init() {
     selectedSet = storedSet
     
     // If theme is never set before set the default store. This should only execute once after install.
