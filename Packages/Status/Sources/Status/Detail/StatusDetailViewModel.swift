@@ -55,16 +55,26 @@ class StatusDetailViewModel: ObservableObject {
     }
   }
 
+  struct ContextData {
+    let status: Status
+    let context: StatusContext
+  }
+  
   private func fetchStatusDetail() async {
     guard let client, let statusId else { return }
     do {
-      let status: Status = try await client.get(endpoint: Statuses.status(id: statusId))
-      let context: StatusContext = try await client.get(endpoint: Statuses.context(id: statusId))
-      state = .display(status: status, context: context)
-      title = "Post from \(status.account.displayNameWithoutEmojis)"
+      let data = try await fetchContextData(client: client, statusId: statusId)
+      state = .display(status: data.status, context: data.context)
+      title = "Post from \(data.status.account.displayNameWithoutEmojis)"
     } catch {
       state = .error(error: error)
     }
+  }
+  
+  private func fetchContextData(client: Client, statusId: String) async throws -> ContextData {
+    async let status: Status = client.get(endpoint: Statuses.status(id: statusId))
+    async let context: StatusContext = client.get(endpoint: Statuses.context(id: statusId))
+    return try await .init(status: status, context: context)
   }
 
   func handleEvent(event: any StreamEvent, currentAccount: Account?) {
