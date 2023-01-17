@@ -9,7 +9,7 @@ import AppAccount
 
 @MainActor
 extension View {
-  func withAppRouteur() -> some View {
+  func withAppRouter() -> some View {
     self.navigationDestination(for: RouterDestinations.self) { destination in
       switch destination {
       case let .accountDetail(id):

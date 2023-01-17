@@ -16,7 +16,7 @@ struct NotificationsTab: View {
   var body: some View {
     NavigationStack(path: $routerPath.path) {
       NotificationsListView()
-        .withAppRouteur()
+        .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbar {
           statusEditorToolbarItem(routerPath: routerPath,

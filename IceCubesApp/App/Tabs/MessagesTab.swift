@@ -18,7 +18,7 @@ struct MessagesTab: View {
   var body: some View {
     NavigationStack(path: $routerPath.path) {
       ConversationsListView()
-        .withAppRouteur()
+        .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbar {
           if UIDevice.current.userInterfaceIdiom != .pad {

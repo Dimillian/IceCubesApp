@@ -33,7 +33,7 @@ struct SettingsTabs: View {
       .navigationTitle(Text("Settings"))
       .navigationBarTitleDisplayMode(.inline)
       .toolbarBackground(theme.primaryBackgroundColor, for: .navigationBar)
-      .withAppRouteur()
+      .withAppRouter()
       .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
     }
     .onAppear {
