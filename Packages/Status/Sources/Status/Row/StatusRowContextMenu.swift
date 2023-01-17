@@ -4,7 +4,7 @@ import SwiftUI
 
 struct StatusRowContextMenu: View {
   @EnvironmentObject private var account: CurrentAccount
-  @EnvironmentObject private var routeurPath: RouterPath
+  @EnvironmentObject private var routerPath: RouterPath
 
   @Environment(\.openURL) var openURL
 
@@ -41,7 +41,7 @@ struct StatusRowContextMenu: View {
               systemImage: "bookmark")
       }
       Button {
-        routeurPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
+        routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
       } label: {
         Label("Reply", systemImage: "arrowshape.turn.up.left")
       }
@@ -49,7 +49,7 @@ struct StatusRowContextMenu: View {
 
     if viewModel.status.visibility == .pub, !viewModel.isRemote {
       Button {
-        routeurPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
+        routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
       } label: {
         Label("Quote this post", systemImage: "quote.bubble")
       }
@@ -89,7 +89,7 @@ struct StatusRowContextMenu: View {
           Label(viewModel.isPinned ? "Unpin" : "Pin", systemImage: viewModel.isPinned ? "pin.fill" : "pin")
         }
         Button {
-          routeurPath.presentedSheet = .editStatusEditor(status: viewModel.status)
+          routerPath.presentedSheet = .editStatusEditor(status: viewModel.status)
         } label: {
           Label("Edit", systemImage: "pencil")
         }
@@ -100,12 +100,12 @@ struct StatusRowContextMenu: View {
     } else if !viewModel.isRemote {
       Section(viewModel.status.account.acct) {
         Button {
-          routeurPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.account, visibility: .pub)
+          routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.account, visibility: .pub)
         } label: {
           Label("Mention", systemImage: "at")
         }
         Button {
-          routeurPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.account, visibility: .direct)
+          routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.account, visibility: .direct)
         } label: {
           Label("Message", systemImage: "tray.full")
         }

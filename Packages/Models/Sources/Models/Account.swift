@@ -71,7 +71,7 @@ public struct Account: Codable, Identifiable, Equatable, Hashable {
   }
 }
 
-public struct FamilliarAccounts: Codable {
+public struct FamiliarAccounts: Codable {
   public let id: String
   public let accounts: [Account]
 }

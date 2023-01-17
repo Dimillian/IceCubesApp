@@ -6,7 +6,7 @@ public struct SearchResults: Decodable {
   }
 
   public let accounts: [Account]
-  public var relationships: [Relationshionship] = []
+  public var relationships: [Relationship] = []
   public let statuses: [Status]
   public let hashtags: [Tag]
 }

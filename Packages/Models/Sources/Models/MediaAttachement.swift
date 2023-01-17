@@ -1,6 +1,6 @@
 import Foundation
 
-public struct MediaAttachement: Codable, Identifiable, Hashable {
+public struct MediaAttachment: Codable, Identifiable, Hashable {
   public struct MetaContainer: Codable, Equatable {
     public struct Meta: Codable, Equatable {
       public let width: Int?

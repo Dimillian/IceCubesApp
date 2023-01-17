@@ -10,19 +10,19 @@ import SwiftUI
 struct ProfileTab: View {
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var currentAccount: CurrentAccount
-  @StateObject private var routeurPath = RouterPath()
+  @StateObject private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab
 
   var body: some View {
-    NavigationStack(path: $routeurPath.path) {
+    NavigationStack(path: $routerPath.path) {
       if let account = currentAccount.account {
         AccountDetailView(account: account)
-          .withAppRouteur()
-          .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
+          .withAppRouter()
+          .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
           .toolbar {
             if UIDevice.current.userInterfaceIdiom != .pad {
               ToolbarItem(placement: .navigationBarLeading) {
-                AppAccountsSelectorView(routeurPath: routeurPath)
+                AppAccountsSelectorView(routerPath: routerPath)
               }
             }
           }
@@ -35,16 +35,16 @@ struct ProfileTab: View {
     }
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
       if popToRootTab == .messages {
-        routeurPath.path = []
+        routerPath.path = []
       }
     }
     .onChange(of: currentAccount.account?.id) { _ in
-      routeurPath.path = []
+      routerPath.path = []
     }
     .onAppear {
-      routeurPath.client = client
+      routerPath.client = client
     }
-    .withSafariRouteur()
-    .environmentObject(routeurPath)
+    .withSafariRouter()
+    .environmentObject(routerPath)
   }
 }

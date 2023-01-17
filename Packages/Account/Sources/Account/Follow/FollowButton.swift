@@ -9,10 +9,10 @@ public class FollowButtonViewModel: ObservableObject {
 
   public let accountId: String
   public let shouldDisplayNotify: Bool
-  @Published public private(set) var relationship: Relationshionship
+  @Published public private(set) var relationship: Relationship
   @Published public private(set) var isUpdating: Bool = false
 
-  public init(accountId: String, relationship: Relationshionship, shouldDisplayNotify: Bool) {
+  public init(accountId: String, relationship: Relationship, shouldDisplayNotify: Bool) {
     self.accountId = accountId
     self.relationship = relationship
     self.shouldDisplayNotify = shouldDisplayNotify

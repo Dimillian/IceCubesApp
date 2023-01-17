@@ -27,7 +27,7 @@ struct SideBarView<Content: View>: View {
     Button {
       selectedTab = .profile
     } label: {
-      AppAccountsSelectorView(routeurPath: RouterPath(),
+      AppAccountsSelectorView(routerPath: RouterPath(),
                               accountCreationEnabled: false,
                               avatarSize: .status)
     }

@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Relationshionship: Codable {
+public struct Relationship: Codable {
   public let id: String
   public let following: Bool
   public let showingReblogs: Bool
@@ -15,7 +15,7 @@ public struct Relationshionship: Codable {
   public let note: String
   public let notifying: Bool
 
-  public static func placeholder() -> Relationshionship {
+  public static func placeholder() -> Relationship {
     .init(id: UUID().uuidString,
           following: false,
           showingReblogs: false,

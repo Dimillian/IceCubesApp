@@ -10,9 +10,9 @@ public class AccountsListRowViewModel: ObservableObject {
   var client: Client?
 
   @Published var account: Account
-  @Published var relationShip: Relationshionship
+  @Published var relationShip: Relationship
 
-  public init(account: Account, relationShip: Relationshionship) {
+  public init(account: Account, relationShip: Relationship) {
     self.account = account
     self.relationShip = relationShip
   }
@@ -20,7 +20,7 @@ public class AccountsListRowViewModel: ObservableObject {
 
 public struct AccountsListRow: View {
   @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var routeurPath: RouterPath
+  @EnvironmentObject private var routerPath: RouterPath
   @EnvironmentObject private var client: Client
 
   @StateObject var viewModel: AccountsListRowViewModel
@@ -43,7 +43,7 @@ public struct AccountsListRow: View {
           .font(.footnote)
           .lineLimit(3)
           .environment(\.openURL, OpenURLAction { url in
-            routeurPath.handle(url: url)
+            routerPath.handle(url: url)
           })
       }
       Spacer()
@@ -58,7 +58,7 @@ public struct AccountsListRow: View {
     }
     .contentShape(Rectangle())
     .onTapGesture {
-      routeurPath.navigate(to: .accountDetailWithAccount(account: viewModel.account))
+      routerPath.navigate(to: .accountDetailWithAccount(account: viewModel.account))
     }
   }
 }

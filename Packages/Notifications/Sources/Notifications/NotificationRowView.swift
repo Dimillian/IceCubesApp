@@ -7,7 +7,7 @@ import SwiftUI
 
 struct NotificationRowView: View {
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var routeurPath: RouterPath
+  @EnvironmentObject private var routerPath: RouterPath
   @Environment(\.redactionReasons) private var reasons
 
   let notification: Models.Notification
@@ -44,7 +44,7 @@ struct NotificationRowView: View {
     }
     .contentShape(Rectangle())
     .onTapGesture {
-      routeurPath.navigate(to: .accountDetailWithAccount(account: notification.account))
+      routerPath.navigate(to: .accountDetailWithAccount(account: notification.account))
     }
   }
 
@@ -74,7 +74,7 @@ struct NotificationRowView: View {
     }
     .contentShape(Rectangle())
     .onTapGesture {
-      routeurPath.navigate(to: .accountDetailWithAccount(account: notification.account))
+      routerPath.navigate(to: .accountDetailWithAccount(account: notification.account))
     }
   }
 
@@ -103,13 +103,13 @@ struct NotificationRowView: View {
             .font(.callout)
             .foregroundColor(.gray)
             .environment(\.openURL, OpenURLAction { url in
-              routeurPath.handle(url: url)
+              routerPath.handle(url: url)
             })
         }
       }
       .contentShape(Rectangle())
       .onTapGesture {
-        routeurPath.navigate(to: .accountDetailWithAccount(account: notification.account))
+        routerPath.navigate(to: .accountDetailWithAccount(account: notification.account))
       }
     }
   }

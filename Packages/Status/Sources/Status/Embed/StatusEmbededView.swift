@@ -4,7 +4,7 @@ import Models
 import SwiftUI
 
 @MainActor
-public struct StatusEmbededView: View {
+public struct StatusEmbeddedView: View {
   @EnvironmentObject private var theme: Theme
 
   public let status: Status

@@ -32,7 +32,7 @@ public protocol AnyStatus {
   var account: Account { get }
   var createdAt: ServerDate { get }
   var editedAt: ServerDate? { get }
-  var mediaAttachments: [MediaAttachement] { get }
+  var mediaAttachments: [MediaAttachment] { get }
   var mentions: [Mention] { get }
   var repliesCount: Int { get }
   var reblogsCount: Int { get }
@@ -65,7 +65,7 @@ public struct Status: AnyStatus, Codable, Identifiable {
   public let createdAt: ServerDate
   public let editedAt: ServerDate?
   public let reblog: ReblogStatus?
-  public let mediaAttachments: [MediaAttachement]
+  public let mediaAttachments: [MediaAttachment]
   public let mentions: [Mention]
   public let repliesCount: Int
   public let reblogsCount: Int
@@ -130,7 +130,7 @@ public struct ReblogStatus: AnyStatus, Codable, Identifiable {
   public let account: Account
   public let createdAt: String
   public let editedAt: ServerDate?
-  public let mediaAttachments: [MediaAttachement]
+  public let mediaAttachments: [MediaAttachment]
   public let mentions: [Mention]
   public let repliesCount: Int
   public let reblogsCount: Int

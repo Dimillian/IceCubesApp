@@ -3,7 +3,7 @@ import Models
 import SwiftUI
 
 public struct TagRowView: View {
-  @EnvironmentObject private var routeurPath: RouterPath
+  @EnvironmentObject private var routerPath: RouterPath
 
   let tag: Tag
 
@@ -24,7 +24,7 @@ public struct TagRowView: View {
     }
     .contentShape(Rectangle())
     .onTapGesture {
-      routeurPath.navigate(to: .hashTag(tag: tag.name, account: nil))
+      routerPath.navigate(to: .hashTag(tag: tag.name, account: nil))
     }
   }
 }
