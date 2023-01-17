@@ -43,7 +43,7 @@ extension View {
         StatusEditorView(mode: .replyTo(status: status))
           .withEnvironments()
       case let .newStatusEditor(visibility):
-        StatusEditorView(mode: .new(visibilty: visibility))
+        StatusEditorView(mode: .new(visibility: visibility))
           .withEnvironments()
       case let .editStatusEditor(status):
         StatusEditorView(mode: .edit(status: status))

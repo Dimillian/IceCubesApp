@@ -297,7 +297,7 @@ public class StatusEditorViewModel: ObservableObject {
        !statusText.string.contains(url.absoluteString)
     {
       embeddedStatus = nil
-      mode = .new(visibilty: visibility)
+      mode = .new(visibility: visibility)
     }
   }
 
