@@ -10,7 +10,7 @@ public struct StatusMediaPreviewView: View {
   @EnvironmentObject private var quickLook: QuickLook
   @EnvironmentObject private var theme: Theme
 
-  public let attachements: [MediaAttachement]
+  public let attachments: [MediaAttachment]
   public let sensitive: Bool
   public let isNotifications: Bool
 
@@ -30,13 +30,13 @@ public struct StatusMediaPreviewView: View {
     if theme.statusDisplayStyle == .compact {
       return 100
     }
-    if attachements.count == 1 {
+    if attachments.count == 1 {
       return 300
     }
-    return attachements.count > 2 ? 100 : 200
+    return attachments.count > 2 ? 100 : 200
   }
 
-  private func size(for media: MediaAttachement) -> CGSize? {
+  private func size(for media: MediaAttachment) -> CGSize? {
     if isNotifications {
       return .init(width: 50, height: 50)
     }
@@ -62,30 +62,30 @@ public struct StatusMediaPreviewView: View {
 
   public var body: some View {
     Group {
-      if attachements.count == 1, let attachement = attachements.first {
-        makeFeaturedImagePreview(attachement: attachement)
+      if attachments.count == 1, let attachment = attachments.first {
+        makeFeaturedImagePreview(attachment: attachment)
           .onTapGesture {
             Task {
-              await quickLook.prepareFor(urls: attachements.compactMap { $0.url }, selectedURL: attachement.url!)
+              await quickLook.prepareFor(urls: attachments.compactMap { $0.url }, selectedURL: attachment.url!)
             }
           }
       } else {
         if isNotifications || theme.statusDisplayStyle == .compact {
           HStack {
-            makeAttachementView(for: 0)
-            makeAttachementView(for: 1)
-            makeAttachementView(for: 2)
-            makeAttachementView(for: 3)
+            makeAttachmentView(for: 0)
+            makeAttachmentView(for: 1)
+            makeAttachmentView(for: 2)
+            makeAttachmentView(for: 3)
           }
         } else {
           VStack {
             HStack {
-              makeAttachementView(for: 0)
-              makeAttachementView(for: 1)
+              makeAttachmentView(for: 0)
+              makeAttachmentView(for: 1)
             }
             HStack {
-              makeAttachementView(for: 2)
-              makeAttachementView(for: 3)
+              makeAttachmentView(for: 2)
+              makeAttachmentView(for: 3)
             }
           }
         }
@@ -109,9 +109,9 @@ public struct StatusMediaPreviewView: View {
       Text(altTextDisplayed ?? "")
     }
     .onAppear {
-      if sensitive && preferences.serverPreferences?.autoExpandmedia == .hideSensitive {
+      if sensitive && preferences.serverPreferences?.autoExpandMedia == .hideSensitive {
         isHidingMedia = true
-      } else if preferences.serverPreferences?.autoExpandmedia == .hideAll {
+      } else if preferences.serverPreferences?.autoExpandMedia == .hideAll {
         isHidingMedia = true
       } else {
         isHidingMedia = false
@@ -120,18 +120,18 @@ public struct StatusMediaPreviewView: View {
   }
 
   @ViewBuilder
-  private func makeAttachementView(for index: Int) -> some View {
-    if attachements.count > index {
-      makePreview(attachement: attachements[index])
+  private func makeAttachmentView(for index: Int) -> some View {
+    if attachments.count > index {
+      makePreview(attachment: attachments[index])
     }
   }
 
   @ViewBuilder
-  private func makeFeaturedImagePreview(attachement: MediaAttachement) -> some View {
-    switch attachement.supportedType {
+  private func makeFeaturedImagePreview(attachment: MediaAttachment) -> some View {
+    switch attachment.supportedType {
     case .image:
       if theme.statusDisplayStyle == .large,
-         let size = size(for: attachement),
+         let size = size(for: attachment),
          UIDevice.current.userInterfaceIdiom != .pad,
          UIDevice.current.userInterfaceIdiom != .mac
       {
@@ -140,7 +140,7 @@ public struct StatusMediaPreviewView: View {
         let newSize = imageSize(from: size,
                                 newWidth: availableWidth)
         ZStack(alignment: .bottomTrailing) {
-          LazyImage(url: attachement.url) { state in
+          LazyImage(url: attachment.url) { state in
             if let image = state.image {
               image
                 .resizingMode(.aspectFill)
@@ -156,7 +156,7 @@ public struct StatusMediaPreviewView: View {
           if sensitive {
             cornerSensitiveButton
           }
-          if let alt = attachement.description, !alt.isEmpty, !isNotifications {
+          if let alt = attachment.description, !alt.isEmpty, !isNotifications {
             Button {
               altTextDisplayed = alt
               isAltAlertDisplayed = true
@@ -170,7 +170,7 @@ public struct StatusMediaPreviewView: View {
         }
       } else {
         AsyncImage(
-          url: attachement.url,
+          url: attachment.url,
           content: { image in
             image
               .resizable()
@@ -187,7 +187,7 @@ public struct StatusMediaPreviewView: View {
         )
       }
     case .gifv, .video, .audio:
-      if let url = attachement.url {
+      if let url = attachment.url {
         VideoPlayerView(viewModel: .init(url: url))
           .frame(height: imageMaxHeight)
       }
@@ -197,14 +197,14 @@ public struct StatusMediaPreviewView: View {
   }
 
   @ViewBuilder
-  private func makePreview(attachement: MediaAttachement) -> some View {
-    if let type = attachement.supportedType {
+  private func makePreview(attachment: MediaAttachment) -> some View {
+    if let type = attachment.supportedType {
       Group {
         GeometryReader { proxy in
           switch type {
           case .image:
             ZStack(alignment: .bottomTrailing) {
-              LazyImage(url: attachement.url) { state in
+              LazyImage(url: attachment.url) { state in
                 if let image = state.image {
                   image
                     .resizingMode(.aspectFill)
@@ -222,7 +222,7 @@ public struct StatusMediaPreviewView: View {
               if sensitive {
                 cornerSensitiveButton
               }
-              if let alt = attachement.description, !alt.isEmpty, !isNotifications {
+              if let alt = attachment.description, !alt.isEmpty, !isNotifications {
                 Button {
                   altTextDisplayed = alt
                   isAltAlertDisplayed = true
@@ -236,7 +236,7 @@ public struct StatusMediaPreviewView: View {
               }
             }
           case .gifv, .video, .audio:
-            if let url = attachement.url {
+            if let url = attachment.url {
               VideoPlayerView(viewModel: .init(url: url))
                 .frame(width: isNotifications ? imageMaxHeight : proxy.frame(in: .local).width)
                 .frame(height: imageMaxHeight)
@@ -248,7 +248,7 @@ public struct StatusMediaPreviewView: View {
       }
       .onTapGesture {
         Task {
-          await quickLook.prepareFor(urls: attachements.compactMap { $0.url }, selectedURL: attachement.url!)
+          await quickLook.prepareFor(urls: attachments.compactMap { $0.url }, selectedURL: attachment.url!)
         }
       }
     }

@@ -49,7 +49,7 @@ class ExploreViewModel: ObservableObject {
   @Published var results: [String: SearchResults] = [:]
   @Published var isLoaded = false
   @Published var suggestedAccounts: [Account] = []
-  @Published var suggestedAccountsRelationShips: [Relationshionship] = []
+  @Published var suggestedAccountsRelationShips: [Relationship] = []
   @Published var trendingTags: [Tag] = []
   @Published var trendingStatuses: [Status] = []
   @Published var trendingLinks: [Card] = []
@@ -126,7 +126,7 @@ class ExploreViewModel: ObservableObject {
                                                                                   offset: nil,
                                                                                   following: nil),
                                                           forceVersion: .v2)
-        let relationships: [Relationshionship] =
+        let relationships: [Relationship] =
           try await client.get(endpoint: Accounts.relationships(ids: results.accounts.map { $0.id }))
         results.relationships = relationships
         self.results[searchQuery] = results

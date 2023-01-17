@@ -10,36 +10,36 @@ struct ExploreTab: View {
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var client: Client
-  @StateObject private var routeurPath = RouterPath()
+  @StateObject private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab
 
   var body: some View {
-    NavigationStack(path: $routeurPath.path) {
+    NavigationStack(path: $routerPath.path) {
       ExploreView()
-        .withAppRouteur()
-        .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
+        .withAppRouter()
+        .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbar {
-          statusEditorToolbarItem(routeurPath: routeurPath,
+          statusEditorToolbarItem(routerPath: routerPath,
                                   visibility: preferences.serverPreferences?.postVisibility ?? .pub)
           if UIDevice.current.userInterfaceIdiom != .pad {
             ToolbarItem(placement: .navigationBarLeading) {
-              AppAccountsSelectorView(routeurPath: routeurPath)
+              AppAccountsSelectorView(routerPath: routerPath)
             }
           }
         }
     }
-    .withSafariRouteur()
-    .environmentObject(routeurPath)
+    .withSafariRouter()
+    .environmentObject(routerPath)
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
       if popToRootTab == .explore {
-        routeurPath.path = []
+        routerPath.path = []
       }
     }
     .onChange(of: currentAccount.account?.id) { _ in
-      routeurPath.path = []
+      routerPath.path = []
     }
     .onAppear {
-      routeurPath.client = client
+      routerPath.client = client
     }
   }
 }

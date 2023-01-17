@@ -18,7 +18,7 @@ public class StatusRowViewModel: ObservableObject {
   @Published var isBookmarked: Bool
   @Published var reblogsCount: Int
   @Published var repliesCount: Int
-  @Published var embededStatus: Status?
+  @Published var embeddedStatus: Status?
   @Published var displaySpoiler: Bool = false
   @Published var isEmbedLoading: Bool = true
   @Published var isFiltered: Bool = false
@@ -59,15 +59,15 @@ public class StatusRowViewModel: ObservableObject {
     isFiltered = filter != nil
   }
 
-  func navigateToDetail(routeurPath: RouterPath) {
+  func navigateToDetail(routerPath: RouterPath) {
     if isRemote, let url = status.reblog?.url ?? status.url {
-      routeurPath.navigate(to: .remoteStatusDetail(url: url))
+      routerPath.navigate(to: .remoteStatusDetail(url: url))
     } else {
-      routeurPath.navigate(to: .statusDetail(id: status.reblog?.id ?? status.id))
+      routerPath.navigate(to: .statusDetail(id: status.reblog?.id ?? status.id))
     }
   }
 
-  func loadEmbededStatus() async {
+  func loadEmbeddedStatus() async {
     guard let client,
           let urls = status.content.findStatusesURLs(),
           !urls.isEmpty,
@@ -93,7 +93,7 @@ public class StatusRowViewModel: ObservableObject {
         embed = results.statuses.first
       }
       withAnimation {
-        embededStatus = embed
+        embeddedStatus = embed
         isEmbedLoading = false
       }
     } catch {

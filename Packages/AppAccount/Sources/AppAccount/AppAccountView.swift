@@ -4,7 +4,7 @@ import Env
 import SwiftUI
 
 public struct AppAccountView: View {
-  @EnvironmentObject private var routeurPath: RouterPath
+  @EnvironmentObject private var routerPath: RouterPath
   @EnvironmentObject var appAccounts: AppAccountsManager
   @StateObject var viewModel: AppAccountViewModel
 
@@ -45,7 +45,7 @@ public struct AppAccountView: View {
       if appAccounts.currentAccount.id == viewModel.appAccount.id,
          let account = viewModel.account
       {
-        routeurPath.navigate(to: .accountDetailWithAccount(account: account))
+        routerPath.navigate(to: .accountDetailWithAccount(account: account))
       } else {
         appAccounts.currentAccount = viewModel.appAccount
       }

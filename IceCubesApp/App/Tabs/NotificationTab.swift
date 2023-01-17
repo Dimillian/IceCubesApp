@@ -10,39 +10,39 @@ struct NotificationsTab: View {
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var userPreferences: UserPreferences
-  @StateObject private var routeurPath = RouterPath()
+  @StateObject private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab
 
   var body: some View {
-    NavigationStack(path: $routeurPath.path) {
+    NavigationStack(path: $routerPath.path) {
       NotificationsListView()
-        .withAppRouteur()
-        .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
+        .withAppRouter()
+        .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbar {
-          statusEditorToolbarItem(routeurPath: routeurPath,
+          statusEditorToolbarItem(routerPath: routerPath,
                                   visibility: userPreferences.serverPreferences?.postVisibility ?? .pub)
           if UIDevice.current.userInterfaceIdiom != .pad {
             ToolbarItem(placement: .navigationBarLeading) {
-              AppAccountsSelectorView(routeurPath: routeurPath)
+              AppAccountsSelectorView(routerPath: routerPath)
             }
           }
         }
         .id(currentAccount.account?.id)
     }
     .onAppear {
-      routeurPath.client = client
+      routerPath.client = client
       watcher.unreadNotificationsCount = 0
       userPreferences.pushNotificationsCount = 0
     }
-    .withSafariRouteur()
-    .environmentObject(routeurPath)
+    .withSafariRouter()
+    .environmentObject(routerPath)
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
       if popToRootTab == .notifications {
-        routeurPath.path = []
+        routerPath.path = []
       }
     }
     .onChange(of: currentAccount.account?.id) { _ in
-      routeurPath.path = []
+      routerPath.path = []
     }
   }
 }

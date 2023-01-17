@@ -19,10 +19,10 @@ struct StatusEditorMediaView: View {
             ZStack(alignment: .bottomTrailing) {
               if container.image != nil {
                 makeLocalImage(container: container)
-              } else if let url = container.mediaAttachement?.url ?? container.mediaAttachement?.previewUrl {
+              } else if let url = container.mediaAttachment?.url ?? container.mediaAttachment?.previewUrl {
                 makeLazyImage(url: url)
               }
-              if container.mediaAttachement?.description?.isEmpty == false {
+              if container.mediaAttachment?.description?.isEmpty == false {
                 altMarker
               }
             }
@@ -41,7 +41,7 @@ struct StatusEditorMediaView: View {
     ZStack(alignment: .center) {
       Image(uiImage: container.image!)
         .resizable()
-        .blur(radius: container.mediaAttachement == nil ? 20 : 0)
+        .blur(radius: container.mediaAttachment == nil ? 20 : 0)
         .aspectRatio(contentMode: .fill)
         .frame(width: 150, height: 150)
         .cornerRadius(8)
@@ -69,7 +69,7 @@ struct StatusEditorMediaView: View {
           }
           .buttonStyle(.bordered)
         }
-      } else if container.mediaAttachement == nil {
+      } else if container.mediaAttachment == nil {
         ProgressView()
       }
     }
@@ -96,7 +96,7 @@ struct StatusEditorMediaView: View {
       Button {
         editingContainer = container
       } label: {
-        Label(container.mediaAttachement?.description?.isEmpty == false ?
+        Label(container.mediaAttachment?.description?.isEmpty == false ?
           "Edit description" : "Add description",
           systemImage: "pencil.line")
       }

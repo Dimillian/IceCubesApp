@@ -160,7 +160,7 @@ public class PushNotificationsService: ObservableObject {
     {
       return data
     } else {
-      let key = Self.makeRandomeNotificationsAuthKey()
+      let key = Self.makeRandomNotificationsAuthKey()
       keychain.set(key.base64EncodedString(),
                    forKey: Constants.keychainAuthKey,
                    withAccess: .accessibleAfterFirstUnlock)
@@ -168,7 +168,7 @@ public class PushNotificationsService: ObservableObject {
     }
   }
 
-  private static func makeRandomeNotificationsAuthKey() -> Data {
+  private static func makeRandomNotificationsAuthKey() -> Data {
     let byteCount = 16
     var bytes = Data(count: byteCount)
     _ = bytes.withUnsafeMutableBytes { SecRandomCopyBytes(kSecRandomDefault, byteCount, $0.baseAddress!) }

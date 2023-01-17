@@ -41,14 +41,14 @@ public struct StatusEditorView: View {
               .placeholder("What's on your mind")
               .padding(.horizontal, .layoutPadding)
             StatusEditorMediaView(viewModel: viewModel)
-            if let status = viewModel.embededStatus {
-              StatusEmbededView(status: status)
+            if let status = viewModel.embeddedStatus {
+              StatusEmbeddedView(status: status)
                 .padding(.horizontal, .layoutPadding)
                 .disabled(true)
             } else if let status = viewModel.replyToStatus {
               Divider()
                 .padding(.top, 20)
-              StatusEmbededView(status: status)
+              StatusEmbeddedView(status: status)
                 .padding(.horizontal, .layoutPadding)
                 .disabled(true)
             }
@@ -158,7 +158,7 @@ public struct StatusEditorView: View {
   private var accountHeaderView: some View {
     if let account = currentAccount.account {
       HStack {
-        AppAccountsSelectorView(routeurPath: RouterPath(),
+        AppAccountsSelectorView(routerPath: RouterPath(),
                                 accountCreationEnabled: false,
                                 avatarSize: .status)
         VStack(alignment: .leading, spacing: 4) {
@@ -210,10 +210,10 @@ public struct StatusEditorView: View {
           prompt.label
         }
       }
-      if let backup = viewModel.backupStatustext {
+      if let backup = viewModel.backupStatusText {
         Button {
           viewModel.replaceTextWith(text: backup.string)
-          viewModel.backupStatustext = nil
+          viewModel.backupStatusText = nil
         } label: {
           Label("Restore previous text", systemImage: "arrow.uturn.right")
         }

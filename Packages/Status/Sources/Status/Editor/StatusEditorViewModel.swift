@@ -10,7 +10,7 @@ public class StatusEditorViewModel: ObservableObject {
   struct ImageContainer: Identifiable {
     let id = UUID().uuidString
     let image: UIImage?
-    let mediaAttachement: MediaAttachement?
+    let mediaAttachment: MediaAttachment?
     let error: Error?
   }
 
@@ -28,7 +28,7 @@ public class StatusEditorViewModel: ObservableObject {
     }
   }
 
-  @Published var backupStatustext: NSAttributedString?
+  @Published var backupStatusText: NSAttributedString?
 
   @Published var showPoll: Bool = false
   @Published var pollVotingFrequency = PollVotingFrequency.oneVote
@@ -52,7 +52,7 @@ public class StatusEditorViewModel: ObservableObject {
 
   @Published var mediasImages: [ImageContainer] = []
   @Published var replyToStatus: Status?
-  @Published var embededStatus: Status?
+  @Published var embeddedStatus: Status?
   var canPost: Bool {
     statusText.length > 0 || !mediasImages.isEmpty
   }
@@ -68,8 +68,8 @@ public class StatusEditorViewModel: ObservableObject {
   @Published var selectedLanguage: String?
   private var currentSuggestionRange: NSRange?
 
-  private var embededStatusURL: URL? {
-    return embededStatus?.reblog?.url ?? embededStatus?.url
+  private var embeddedStatusURL: URL? {
+    return embeddedStatus?.reblog?.url ?? embeddedStatus?.url
   }
 
   private var uploadTask: Task<Void, Never>?
@@ -129,7 +129,7 @@ public class StatusEditorViewModel: ObservableObject {
                             visibility: visibility,
                             inReplyToId: mode.replyToStatus?.id,
                             spoilerText: spoilerOn ? spoilerText : nil,
-                            mediaIds: mediasImages.compactMap { $0.mediaAttachement?.id },
+                            mediaIds: mediasImages.compactMap { $0.mediaAttachment?.id },
                             poll: pollData,
                             language: selectedLanguage)
       switch mode {
@@ -185,10 +185,10 @@ public class StatusEditorViewModel: ObservableObject {
       spoilerOn = !status.spoilerText.isEmpty
       spoilerText = status.spoilerText
       visibility = status.visibility
-      mediasImages = status.mediaAttachments.map { .init(image: nil, mediaAttachement: $0, error: nil) }
+      mediasImages = status.mediaAttachments.map { .init(image: nil, mediaAttachment: $0, error: nil) }
     case let .quote(status):
-      embededStatus = status
-      if let url = embededStatusURL {
+      embeddedStatus = status
+      if let url = embeddedStatusURL {
         statusText = .init(string: "\n\nFrom: @\(status.reblog?.account.acct ?? status.account.acct)\n\(url)")
         selectedRange = .init(location: 0, length: 0)
       }
@@ -243,16 +243,16 @@ public class StatusEditorViewModel: ObservableObject {
                                  range: NSRange(location: range.location, length: range.length))
       }
 
-      var attachementsToRemove: [NSRange] = []
-      statusText.enumerateAttribute(.attachment, in: range) { attachement, _, _ in
-        if let attachement = attachement as? NSTextAttachment, let image = attachement.image {
-          attachementsToRemove.append(range)
-          mediasImages.append(.init(image: image, mediaAttachement: nil, error: nil))
+      var attachmentsToRemove: [NSRange] = []
+      statusText.enumerateAttribute(.attachment, in: range) { attachment, _, _ in
+        if let attachment = attachment as? NSTextAttachment, let image = attachment.image {
+          attachmentsToRemove.append(range)
+          mediasImages.append(.init(image: image, mediaAttachment: nil, error: nil))
         }
       }
-      if !attachementsToRemove.isEmpty {
+      if !attachmentsToRemove.isEmpty {
         processMediasToUpload()
-        for range in attachementsToRemove {
+        for range in attachmentsToRemove {
           statusText.removeAttribute(.attachment, range: range)
         }
       }
@@ -261,23 +261,23 @@ public class StatusEditorViewModel: ObservableObject {
 
   private func processItemsProvider(items: [NSItemProvider]) {
     Task {
-      var initalText: String = ""
+      var initialText: String = ""
       for item in items {
-        if let identifiter = item.registeredTypeIdentifiers.first,
-           let handledItemType = StatusEditorUTTypeSupported(rawValue: identifiter)
+        if let identifier = item.registeredTypeIdentifiers.first,
+           let handledItemType = StatusEditorUTTypeSupported(rawValue: identifier)
         {
           do {
             let content = try await handledItemType.loadItemContent(item: item)
             if let text = content as? String {
-              initalText += "\(text) "
+              initialText += "\(text) "
             } else if let image = content as? UIImage {
-              mediasImages.append(.init(image: image, mediaAttachement: nil, error: nil))
+              mediasImages.append(.init(image: image, mediaAttachment: nil, error: nil))
             }
           } catch {}
         }
       }
-      if !initalText.isEmpty {
-        statusText = .init(string: initalText)
+      if !initialText.isEmpty {
+        statusText = .init(string: initialText)
         selectedRange = .init(location: statusText.string.utf16.count, length: 0)
       }
       if !mediasImages.isEmpty {
@@ -293,11 +293,11 @@ public class StatusEditorViewModel: ObservableObject {
   }
 
   private func checkEmbed() {
-    if let url = embededStatusURL,
+    if let url = embeddedStatusURL,
        !statusText.string.contains(url.absoluteString)
     {
-      embededStatus = nil
-      mode = .new(vivibilty: visibility)
+      embeddedStatus = nil
+      mode = .new(visibilty: visibility)
     }
   }
 
@@ -361,7 +361,7 @@ public class StatusEditorViewModel: ObservableObject {
       if var text = response.choices.first?.text {
         text.removeFirst()
         text.removeFirst()
-        backupStatustext = statusText
+        backupStatusText = statusText
         replaceTextWith(text: text)
       }
     } catch {}
@@ -383,10 +383,10 @@ public class StatusEditorViewModel: ObservableObject {
           if let data = try await media.loadTransferable(type: Data.self),
              let image = UIImage(data: data)
           {
-            medias.append(.init(image: image, mediaAttachement: nil, error: nil))
+            medias.append(.init(image: image, mediaAttachment: nil, error: nil))
           }
         } catch {
-          medias.append(.init(image: nil, mediaAttachement: nil, error: error))
+          medias.append(.init(image: nil, mediaAttachment: nil, error: error))
         }
       }
       DispatchQueue.main.async { [weak self] in
@@ -411,37 +411,37 @@ public class StatusEditorViewModel: ObservableObject {
   func upload(container: ImageContainer) async {
     if let index = indexOf(container: container) {
       let originalContainer = mediasImages[index]
-      let newContainer = ImageContainer(image: originalContainer.image, mediaAttachement: nil, error: nil)
+      let newContainer = ImageContainer(image: originalContainer.image, mediaAttachment: nil, error: nil)
       mediasImages[index] = newContainer
       do {
         if let data = originalContainer.image?.jpegData(compressionQuality: 0.90) {
           let uploadedMedia = try await uploadMedia(data: data)
           if let index = indexOf(container: newContainer) {
             mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
-                                        mediaAttachement: uploadedMedia,
+                                        mediaAttachment: uploadedMedia,
                                         error: nil)
           }
         }
       } catch {
         if let index = indexOf(container: newContainer) {
-          mediasImages[index] = .init(image: originalContainer.image, mediaAttachement: nil, error: error)
+          mediasImages[index] = .init(image: originalContainer.image, mediaAttachment: nil, error: error)
         }
       }
     }
   }
 
   func addDescription(container: ImageContainer, description: String) async {
-    guard let client, let attachment = container.mediaAttachement else { return }
+    guard let client, let attachment = container.mediaAttachment else { return }
     if let index = indexOf(container: container) {
       do {
-        let media: MediaAttachement = try await client.put(endpoint: Media.media(id: attachment.id,
+        let media: MediaAttachment = try await client.put(endpoint: Media.media(id: attachment.id,
                                                                                  description: description))
-        mediasImages[index] = .init(image: nil, mediaAttachement: media, error: nil)
+        mediasImages[index] = .init(image: nil, mediaAttachment: media, error: nil)
       } catch {}
     }
   }
 
-  private func uploadMedia(data: Data) async throws -> MediaAttachement? {
+  private func uploadMedia(data: Data) async throws -> MediaAttachment? {
     guard let client else { return nil }
     return try await client.mediaUpload(endpoint: Media.medias,
                                         version: .v2,

@@ -4,25 +4,25 @@ import SafariServices
 import SwiftUI
 
 extension View {
-  func withSafariRouteur() -> some View {
-    modifier(SafariRouteur())
+  func withSafariRouter() -> some View {
+    modifier(SafariRouter())
   }
 }
 
-private struct SafariRouteur: ViewModifier {
+private struct SafariRouter: ViewModifier {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var routeurPath: RouterPath
+  @EnvironmentObject private var routerPath: RouterPath
 
   @State private var safari: SFSafariViewController?
 
   func body(content: Content) -> some View {
     content
       .environment(\.openURL, OpenURLAction { url in
-        routeurPath.handle(url: url)
+        routerPath.handle(url: url)
       })
       .onAppear {
-        routeurPath.urlHandler = { url in
+        routerPath.urlHandler = { url in
           guard preferences.preferredBrowser == .inAppSafari else { return .systemAction }
           // SFSafariViewController only supports initial URLs with http:// or https:// schemes.
           guard let scheme = url.scheme, ["https", "http"].contains(scheme.lowercased()) else {

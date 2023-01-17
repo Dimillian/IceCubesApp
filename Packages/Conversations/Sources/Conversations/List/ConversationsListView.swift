@@ -6,7 +6,7 @@ import Shimmer
 import SwiftUI
 
 public struct ConversationsListView: View {
-  @EnvironmentObject private var routeurPath: RouterPath
+  @EnvironmentObject private var routerPath: RouterPath
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var theme: Theme

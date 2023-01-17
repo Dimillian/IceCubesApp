@@ -13,7 +13,7 @@ struct QuickLookPreview: UIViewControllerRepresentable {
   let urls: [URL]
 
   func makeUIViewController(context: Context) -> UINavigationController {
-    let controller = AppQLPreviewCpntroller()
+    let controller = AppQLPreviewController()
     controller.dataSource = context.coordinator
     controller.delegate = context.coordinator
     let nav = UINavigationController(rootViewController: controller)
@@ -49,7 +49,7 @@ struct QuickLookPreview: UIViewControllerRepresentable {
   }
 }
 
-class AppQLPreviewCpntroller: QLPreviewController {
+class AppQLPreviewController: QLPreviewController {
   private var closeButton: UIBarButtonItem {
     .init(title: "Done", style: .plain, target: self, action: #selector(onCloseButton))
   }

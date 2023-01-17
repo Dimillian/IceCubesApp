@@ -12,7 +12,7 @@ struct TimelineTab: View {
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var client: Client
-  @StateObject private var routeurPath = RouterPath()
+  @StateObject private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab
 
   @State private var didAppear: Bool = false
@@ -28,17 +28,17 @@ struct TimelineTab: View {
   }
 
   var body: some View {
-    NavigationStack(path: $routeurPath.path) {
+    NavigationStack(path: $routerPath.path) {
       TimelineView(timeline: $timeline, scrollToTopSignal: $scrollToTopSignal)
-        .withAppRouteur()
-        .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
+        .withAppRouter()
+        .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbar {
           toolbarView
         }
         .id(currentAccount.account?.id)
     }
     .onAppear {
-      routeurPath.client = client
+      routerPath.client = client
       if !didAppear && canFilterTimeline {
         didAppear = true
         timeline = client.isAuth ? .home : .federated
@@ -47,7 +47,7 @@ struct TimelineTab: View {
         await currentAccount.fetchLists()
       }
       if !client.isAuth {
-        routeurPath.presentedSheet = .addAccount
+        routerPath.presentedSheet = .addAccount
       }
     }
     .onChange(of: client.isAuth, perform: { isAuth in
@@ -58,18 +58,18 @@ struct TimelineTab: View {
     })
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
       if popToRootTab == .timeline {
-        if routeurPath.path.isEmpty {
+        if routerPath.path.isEmpty {
           scrollToTopSignal += 1
         } else {
-          routeurPath.path = []
+          routerPath.path = []
         }
       }
     }
     .onChange(of: currentAccount.account?.id) { _ in
-      routeurPath.path = []
+      routerPath.path = []
     }
-    .withSafariRouteur()
-    .environmentObject(routeurPath)
+    .withSafariRouter()
+    .environmentObject(routerPath)
   }
 
   @ViewBuilder
@@ -114,7 +114,7 @@ struct TimelineTab: View {
         }
       }
       Button {
-        routeurPath.presentedSheet = .addRemoteLocalTimeline
+        routerPath.presentedSheet = .addRemoteLocalTimeline
       } label: {
         Label("Add a local timeline", systemImage: "badge.plus.radiowaves.right")
       }
@@ -123,7 +123,7 @@ struct TimelineTab: View {
 
   private var addAccountButton: some View {
     Button {
-      routeurPath.presentedSheet = .addAccount
+      routerPath.presentedSheet = .addAccount
     } label: {
       Image(systemName: "person.badge.plus")
     }
@@ -139,10 +139,10 @@ struct TimelineTab: View {
     if client.isAuth {
       if UIDevice.current.userInterfaceIdiom != .pad {
         ToolbarItem(placement: .navigationBarLeading) {
-          AppAccountsSelectorView(routeurPath: routeurPath)
+          AppAccountsSelectorView(routerPath: routerPath)
         }
       }
-      statusEditorToolbarItem(routeurPath: routeurPath,
+      statusEditorToolbarItem(routerPath: routerPath,
                               visibility: preferences.serverPreferences?.postVisibility ?? .pub)
     } else {
       ToolbarItem(placement: .navigationBarTrailing) {
@@ -153,7 +153,7 @@ struct TimelineTab: View {
     case let .list(list):
       ToolbarItem {
         Button {
-          routeurPath.presentedSheet = .listEdit(list: list)
+          routerPath.presentedSheet = .listEdit(list: list)
         } label: {
           Image(systemName: "list.bullet")
         }
