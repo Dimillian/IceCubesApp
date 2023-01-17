@@ -123,7 +123,7 @@ struct SettingsTabs: View {
       }
       
       Link(destination: URL(string: "https://github.com/Dimillian/IceCubesApp")!) {
-        Label("Source (Github link)", systemImage: "link")
+        Label("Source (GitHub link)", systemImage: "link")
       }
       .tint(theme.labelColor)
       
