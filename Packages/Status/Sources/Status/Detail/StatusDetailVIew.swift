@@ -10,7 +10,7 @@ public struct StatusDetailView: View {
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
-  @EnvironmentObject private var routeurPath: RouterPath
+  @EnvironmentObject private var routerPath: RouterPath
   @Environment(\.openURL) private var openURL
   @StateObject private var viewModel: StatusDetailViewModel
   @State private var isLoaded: Bool = false
@@ -63,8 +63,8 @@ public struct StatusDetailView: View {
             }
             
           case .error:
-            ErrorView(title: "An error occured",
-                      message: "An error occured while this post context, please try again.",
+            ErrorView(title: "An error occurred",
+                      message: "An error occurred while this post context, please try again.",
                       buttonTitle: "Retry") {
               Task {
                 await viewModel.fetch()
@@ -86,7 +86,7 @@ public struct StatusDetailView: View {
             openURL(url)
           }
           DispatchQueue.main.async {
-            _ = routeurPath.path.popLast()
+            _ = routerPath.path.popLast()
           }
         }
         DispatchQueue.main.async {

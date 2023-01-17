@@ -14,7 +14,7 @@ public struct AccountDetailView: View {
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
-  @EnvironmentObject private var routeurPath: RouterPath
+  @EnvironmentObject private var routerPath: RouterPath
   
   @StateObject private var viewModel: AccountDetailViewModel
   @State private var scrollOffset: CGFloat = 0
@@ -162,7 +162,7 @@ public struct AccountDetailView: View {
           if !viewModel.featuredTags.isEmpty {
             ForEach(viewModel.featuredTags) { tag in
               Button {
-                routeurPath.navigate(to: .hashTag(tag: tag.name, account: viewModel.accountId))
+                routerPath.navigate(to: .hashTag(tag: tag.name, account: viewModel.accountId))
               } label: {
                 VStack(alignment: .leading, spacing: 0) {
                   Text("#\(tag.name)")
@@ -191,7 +191,7 @@ public struct AccountDetailView: View {
             ForEach(viewModel.familliarFollowers) { account in
               AvatarView(url: account.avatar, size: .badge)
                 .onTapGesture {
-                  routeurPath.navigate(to: .accountDetailWithAccount(account: account))
+                  routerPath.navigate(to: .accountDetailWithAccount(account: account))
                 }
                 .padding(.leading, -4)
             }
@@ -264,7 +264,7 @@ public struct AccountDetailView: View {
   private var listsListView: some View {
     Group {
       ForEach(currentAccount.lists) { list in
-        NavigationLink(value: RouteurDestinations.list(list: list)) {
+        NavigationLink(value: RouterDestinations.list(list: list)) {
           HStack {
             Text(list.title)
             Spacer()
@@ -348,13 +348,13 @@ public struct AccountDetailView: View {
           Section(account.acct) {
             if !viewModel.isCurrentUser {
               Button {
-                routeurPath.presentedSheet = .mentionStatusEditor(account: account,
+                routerPath.presentedSheet = .mentionStatusEditor(account: account,
                                                                   visibility: preferences.serverPreferences?.postVisibility ?? .pub)
               } label: {
                 Label("Mention", systemImage: "at")
               }
               Button {
-                routeurPath.presentedSheet = .mentionStatusEditor(account: account, visibility: .direct)
+                routerPath.presentedSheet = .mentionStatusEditor(account: account, visibility: .direct)
               } label: {
                 Label("Message", systemImage: "tray.full")
               }
@@ -363,7 +363,7 @@ public struct AccountDetailView: View {
             
             if viewModel.relationship?.following == true {
               Button {
-                routeurPath.presentedSheet = .listAddAccount(account: account)
+                routerPath.presentedSheet = .listAddAccount(account: account)
               } label: {
                 Label("Add/Remove from lists", systemImage: "list.bullet")
               }

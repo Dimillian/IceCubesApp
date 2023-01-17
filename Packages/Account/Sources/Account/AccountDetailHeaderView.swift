@@ -9,7 +9,7 @@ import EmojiText
 struct AccountDetailHeaderView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var quickLook: QuickLook
-  @EnvironmentObject private var routeurPath: RouterPath
+  @EnvironmentObject private var routerPath: RouterPath
   @Environment(\.redactionReasons) private var reasons
   
   @ObservedObject var viewModel: AccountDetailViewModel
@@ -93,10 +93,10 @@ struct AccountDetailHeaderView: View {
         } label: {
           makeCustomInfoLabel(title: "Posts", count: account.statusesCount)
         }
-        NavigationLink(value: RouteurDestinations.following(id: account.id)) {
+        NavigationLink(value: RouterDestinations.following(id: account.id)) {
           makeCustomInfoLabel(title: "Following", count: account.followingCount)
         }
-        NavigationLink(value: RouteurDestinations.followers(id: account.id)) {
+        NavigationLink(value: RouterDestinations.followers(id: account.id)) {
           makeCustomInfoLabel(title: "Followers", count: account.followersCount)
         }
       }.offset(y: 20)
@@ -127,7 +127,7 @@ struct AccountDetailHeaderView: View {
         .font(.body)
         .padding(.top, 8)
         .environment(\.openURL, OpenURLAction { url in
-          routeurPath.handle(url: url)
+          routerPath.handle(url: url)
         })
     }
     .padding(.horizontal, .layoutPadding)

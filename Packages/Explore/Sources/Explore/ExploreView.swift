@@ -10,7 +10,7 @@ import Account
 public struct ExploreView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
-  @EnvironmentObject private var routeurPath: RouterPath
+  @EnvironmentObject private var routerPath: RouterPath
   
   @StateObject private var viewModel = ExploreViewModel()
         

@@ -32,13 +32,13 @@ class AccountsListViewModel: ObservableObject {
     }
     case loading
     case display(accounts: [Account],
-                 relationships: [Relationshionship],
+                 relationships: [Relationship],
                  nextPageState: PagingState)
     case error(error: Error)
   }
   
   private var accounts: [Account] = []
-  private var relationships: [Relationshionship] = []
+  private var relationships: [Relationship] = []
   
   @Published var state = State.loading
   
@@ -97,7 +97,7 @@ class AccountsListViewModel: ObservableObject {
                                                                                             maxId: nextPageId))
       }
       accounts.append(contentsOf: newAccounts)
-      let newRelationships: [Relationshionship] =
+      let newRelationships: [Relationship] =
       try await client.get(endpoint: Accounts.relationships(ids: newAccounts.map{ $0.id }))
       
       relationships.append(contentsOf: newRelationships)

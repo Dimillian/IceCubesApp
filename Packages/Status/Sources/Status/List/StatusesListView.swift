@@ -25,8 +25,8 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
             .padding(.vertical, .dividerPadding)
         }
       case .error:
-        ErrorView(title: "An error occured",
-                  message: "An error occured while loading posts, please try again.",
+        ErrorView(title: "An error occurred",
+                  message: "An error occurred while loading posts, please try again.",
                   buttonTitle: "Retry") {
           Task {
             await fetcher.fetchStatuses()

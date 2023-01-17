@@ -10,7 +10,7 @@ public struct StatusMediaPreviewView: View {
   @EnvironmentObject private var quickLook: QuickLook
   @EnvironmentObject private var theme: Theme
   
-  public let attachements: [MediaAttachement]
+  public let attachments: [MediaAttachment]
   public let sensitive: Bool
   public let isNotifications: Bool
 
@@ -30,13 +30,13 @@ public struct StatusMediaPreviewView: View {
     if theme.statusDisplayStyle == .compact {
       return 100
     }
-    if attachements.count == 1 {
+    if attachments.count == 1 {
       return 300
     }
-    return attachements.count > 2 ? 100 : 200
+    return attachments.count > 2 ? 100 : 200
   }
   
-  private func size(for media: MediaAttachement) -> CGSize? {
+  private func size(for media: MediaAttachment) -> CGSize? {
     if isNotifications {
       return .init(width: 50, height: 50)
     }
@@ -61,11 +61,11 @@ public struct StatusMediaPreviewView: View {
   
   public var body: some View {
     Group {
-      if attachements.count == 1, let attachement = attachements.first {
+      if attachments.count == 1, let attachement = attachments.first {
         makeFeaturedImagePreview(attachement: attachement)
           .onTapGesture {
             Task {
-              await quickLook.prepareFor(urls: attachements.compactMap{ $0.url }, selectedURL: attachement.url!)
+              await quickLook.prepareFor(urls: attachments.compactMap{ $0.url }, selectedURL: attachement.url!)
             }
           }
       } else {
@@ -108,9 +108,9 @@ public struct StatusMediaPreviewView: View {
       Text(altTextDisplayed ?? "")
     }
     .onAppear {
-      if sensitive && preferences.serverPreferences?.autoExpandmedia == .hideSensitive {
+      if sensitive && preferences.serverPreferences?.autoExpandMedia == .hideSensitive {
         isHidingMedia = true
-      } else if preferences.serverPreferences?.autoExpandmedia == .hideAll {
+      } else if preferences.serverPreferences?.autoExpandMedia == .hideAll {
         isHidingMedia = true
       } else {
         isHidingMedia = false
@@ -121,13 +121,13 @@ public struct StatusMediaPreviewView: View {
   
   @ViewBuilder
   private func makeAttachementView(for index: Int) -> some View {
-    if attachements.count > index {
-      makePreview(attachement: attachements[index])
+    if attachments.count > index {
+      makePreview(attachement: attachments[index])
     }
   }
   
   @ViewBuilder
-  private func makeFeaturedImagePreview(attachement: MediaAttachement) -> some View {
+  private func makeFeaturedImagePreview(attachement: MediaAttachment) -> some View {
     switch attachement.supportedType {
     case .image:
       if theme.statusDisplayStyle == .large,
@@ -195,7 +195,7 @@ public struct StatusMediaPreviewView: View {
   }
   
   @ViewBuilder
-  private func makePreview(attachement: MediaAttachement) -> some View {
+  private func makePreview(attachement: MediaAttachment) -> some View {
     if let type = attachement.supportedType {
       Group {
         GeometryReader { proxy in
@@ -246,7 +246,7 @@ public struct StatusMediaPreviewView: View {
       }
       .onTapGesture {
         Task {
-          await quickLook.prepareFor(urls: attachements.compactMap{ $0.url }, selectedURL: attachement.url!)
+          await quickLook.prepareFor(urls: attachments.compactMap{ $0.url }, selectedURL: attachement.url!)
         }
       }
     }

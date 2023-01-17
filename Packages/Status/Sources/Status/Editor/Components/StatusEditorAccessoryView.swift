@@ -12,7 +12,7 @@ struct StatusEditorAccessoryView: View {
   @FocusState<Bool>.Binding var isSpoilerTextFocused: Bool
   @ObservedObject var viewModel: StatusEditorViewModel
   
-  @State private var isDrafsSheetDisplayed: Bool = false
+  @State private var isDraftsSheetDisplayed: Bool = false
   @State private var isLanguageSheetDisplayed: Bool = false
   @State private var languageSearch: String = ""
   
@@ -46,7 +46,7 @@ struct StatusEditorAccessoryView: View {
         
         if !viewModel.mode.isInShareExtension {
           Button {
-            isDrafsSheetDisplayed = true
+            isDraftsSheetDisplayed = true
           } label: {
             Image(systemName: "archivebox")
           }
@@ -71,7 +71,7 @@ struct StatusEditorAccessoryView: View {
       .padding(.vertical, 12)
       .background(.ultraThinMaterial)
     }
-    .sheet(isPresented: $isDrafsSheetDisplayed) {
+    .sheet(isPresented: $isDraftsSheetDisplayed) {
       draftsSheetView
     }
     .sheet(isPresented: $isLanguageSheetDisplayed, content: {
@@ -133,7 +133,7 @@ struct StatusEditorAccessoryView: View {
             .listRowBackground(theme.primaryBackgroundColor)
             .onTapGesture {
               viewModel.insertStatusText(text: draft)
-              isDrafsSheetDisplayed = false
+              isDraftsSheetDisplayed = false
             }
         }
         .onDelete { indexes in
@@ -144,7 +144,7 @@ struct StatusEditorAccessoryView: View {
       }
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
-          Button("Cancel", action: { isDrafsSheetDisplayed = false })
+          Button("Cancel", action: { isDraftsSheetDisplayed = false })
         }
       }
       .scrollContentBackground(.hidden)

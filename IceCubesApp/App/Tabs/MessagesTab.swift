@@ -12,18 +12,18 @@ struct MessagesTab: View {
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var currentAccount: CurrentAccount
-  @StateObject private var routeurPath = RouterPath()
+  @StateObject private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab
   
   var body: some View {
-    NavigationStack(path: $routeurPath.path) {
+    NavigationStack(path: $routerPath.path) {
       ConversationsListView()
         .withAppRouteur()
-        .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
+        .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbar {
           if UIDevice.current.userInterfaceIdiom != .pad {
             ToolbarItem(placement: .navigationBarLeading) {
-              AppAccountsSelectorView(routeurPath: routeurPath)
+              AppAccountsSelectorView(routerPath: routerPath)
             }
           }
         }
@@ -31,16 +31,16 @@ struct MessagesTab: View {
     }
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
       if popToRootTab == .messages {
-        routeurPath.path = []
+        routerPath.path = []
       }
     }
     .onChange(of: currentAccount.account?.id) { _ in
-      routeurPath.path = []
+      routerPath.path = []
     }
     .onAppear {
-      routeurPath.client = client
+      routerPath.client = client
     }
     .withSafariRouteur()
-    .environmentObject(routeurPath)
+    .environmentObject(routerPath)
   }
 }

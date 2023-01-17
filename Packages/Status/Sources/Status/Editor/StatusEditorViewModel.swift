@@ -10,7 +10,7 @@ public class StatusEditorViewModel: ObservableObject {
   struct ImageContainer: Identifiable {
     let id = UUID().uuidString
     let image: UIImage?
-    let mediaAttachement: MediaAttachement?
+    let mediaAttachement: MediaAttachment?
     let error: Error?
   }
   
@@ -27,7 +27,7 @@ public class StatusEditorViewModel: ObservableObject {
       checkEmbed()
     }
   }
-  @Published var backupStatustext: NSAttributedString?
+  @Published var backupStatusText: NSAttributedString?
 
   @Published var showPoll: Bool = false
   @Published var pollVotingFrequency = PollVotingFrequency.oneVote
@@ -50,7 +50,7 @@ public class StatusEditorViewModel: ObservableObject {
   }
   @Published var mediasImages: [ImageContainer] = []
   @Published var replyToStatus: Status?
-  @Published var embededStatus: Status?
+  @Published var embeddedStatus: Status?
   var canPost: Bool {
     statusText.length > 0 || !mediasImages.isEmpty
   }
@@ -66,8 +66,8 @@ public class StatusEditorViewModel: ObservableObject {
   @Published var selectedLanguage: String?
   private var currentSuggestionRange: NSRange?
   
-  private var embededStatusURL: URL? {
-    return embededStatus?.reblog?.url ?? embededStatus?.url
+  private var embeddedStatusURL: URL? {
+    return embeddedStatus?.reblog?.url ?? embeddedStatus?.url
   }
   
   private var uploadTask: Task<Void, Never>?
@@ -185,8 +185,8 @@ public class StatusEditorViewModel: ObservableObject {
       visibility = status.visibility
       mediasImages = status.mediaAttachments.map{ .init(image: nil, mediaAttachement: $0, error: nil )}
     case let .quote(status):
-      self.embededStatus = status
-      if let url = embededStatusURL {
+      self.embeddedStatus = status
+      if let url = embeddedStatusURL {
         statusText = .init(string: "\n\nFrom: @\(status.reblog?.account.acct ?? status.account.acct)\n\(url)")
         selectedRange = .init(location: 0, length: 0)
       }
@@ -291,10 +291,10 @@ public class StatusEditorViewModel: ObservableObject {
   }
   
   private func checkEmbed() {
-    if let url = embededStatusURL,
+    if let url = embeddedStatusURL,
         !statusText.string.contains(url.absoluteString) {
-      self.embededStatus = nil
-      self.mode = .new(vivibilty: visibility)
+      self.embeddedStatus = nil
+      self.mode = .new(visibilty: visibility)
     }
   }
   
@@ -360,7 +360,7 @@ public class StatusEditorViewModel: ObservableObject {
       if var text = response.choices.first?.text {
         text.removeFirst()
         text.removeFirst()
-        backupStatustext = statusText
+        backupStatusText = statusText
         replaceTextWith(text: text)
       }
     } catch { }
@@ -432,7 +432,7 @@ public class StatusEditorViewModel: ObservableObject {
     guard let client, let attachment = container.mediaAttachement else { return }
     if let index = indexOf(container: container) {
       do {
-        let media: MediaAttachement = try await client.put(endpoint: Media.media(id: attachment.id,
+        let media: MediaAttachment = try await client.put(endpoint: Media.media(id: attachment.id,
                                                                                  description: description))
         mediasImages[index] = .init(image: nil, mediaAttachement: media, error: nil)
       } catch {
@@ -441,7 +441,7 @@ public class StatusEditorViewModel: ObservableObject {
     }
   }
    
-  private func uploadMedia(data: Data) async throws -> MediaAttachement? {
+  private func uploadMedia(data: Data) async throws -> MediaAttachment? {
     guard let client else { return nil }
     return try await client.mediaUpload(endpoint: Media.medias,
                                         version: .v2,

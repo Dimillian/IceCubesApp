@@ -59,7 +59,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   }
   @Published var statusesState: StatusesState = .loading
   
-  @Published var relationship: Relationshionship?
+  @Published var relationship: Relationship?
   @Published var pinned: [Status] = []
   @Published var favourites: [Status] = []
   @Published var bookmarks: [Status] = []
@@ -103,8 +103,8 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   struct AccountData {
     let account: Account
     let featuredTags: [FeaturedTag]
-    let relationships: [Relationshionship]
-    let familliarFollowers: [FamilliarAccounts]
+    let relationships: [Relationship]
+    let familiarFollowers: [FamiliarAccounts]
   }
   
   func fetchAccount() async {
@@ -118,7 +118,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
       featuredTags = data.featuredTags
       featuredTags.sort { $0.statusesCountInt > $1.statusesCountInt }
       relationship = data.relationships.first
-      familliarFollowers = data.familliarFollowers.first?.accounts ?? []
+      familliarFollowers = data.familiarFollowers.first?.accounts ?? []
       
     } catch {
       if let account {
@@ -133,17 +133,17 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
     async let account: Account = client.get(endpoint: Accounts.accounts(id: accountId))
     async let featuredTags: [FeaturedTag] = client.get(endpoint: Accounts.featuredTags(id: accountId))
     if client.isAuth && !isCurrentUser {
-      async let relationships: [Relationshionship] = client.get(endpoint: Accounts.relationships(ids: [accountId]))
-      async let familliarFollowers: [FamilliarAccounts] = client.get(endpoint: Accounts.familiarFollowers(withAccount: accountId))
+      async let relationships: [Relationship] = client.get(endpoint: Accounts.relationships(ids: [accountId]))
+      async let familiarFollowers: [FamiliarAccounts] = client.get(endpoint: Accounts.familiarFollowers(withAccount: accountId))
       return try await .init(account: account,
                              featuredTags: featuredTags,
                              relationships: relationships,
-                             familliarFollowers: familliarFollowers)
+                             familiarFollowers: familiarFollowers)
     }
     return try await .init(account: account,
                            featuredTags: featuredTags,
                            relationships: [],
-                           familliarFollowers: [])
+                           familiarFollowers: [])
   }
   
   func fetchStatuses() async {

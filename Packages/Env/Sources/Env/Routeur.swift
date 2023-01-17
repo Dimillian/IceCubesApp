@@ -3,7 +3,7 @@ import SwiftUI
 import Models
 import Network
 
-public enum RouteurDestinations: Hashable {
+public enum RouterDestinations: Hashable {
   case accountDetail(id: String)
   case accountDetailWithAccount(account: Account)
   case statusDetail(id: String)
@@ -48,12 +48,12 @@ public class RouterPath: ObservableObject {
   public var client: Client?
   public var urlHandler: ((URL) -> OpenURLAction.Result)?
   
-  @Published public var path: [RouteurDestinations] = []
+  @Published public var path: [RouterDestinations] = []
   @Published public var presentedSheet: SheetDestinations?
   
   public init() {}
   
-  public func navigate(to: RouteurDestinations) {
+  public func navigate(to: RouterDestinations) {
     path.append(to)
   }
   

@@ -15,14 +15,14 @@ struct SettingsTabs: View {
   @EnvironmentObject private var appAccountsManager: AppAccountsManager
   @EnvironmentObject private var theme: Theme
   
-  @StateObject private var routeurPath = RouterPath()
+  @StateObject private var routerPath = RouterPath()
   
   @State private var addAccountSheetPresented = false
   
   @Binding var popToRootTab: Tab
   
   var body: some View {
-    NavigationStack(path: $routeurPath.path) {
+    NavigationStack(path: $routerPath.path) {
       Form {
         appSection
         accountsSection
@@ -34,10 +34,10 @@ struct SettingsTabs: View {
       .navigationBarTitleDisplayMode(.inline)
       .toolbarBackground(theme.primaryBackgroundColor, for: .navigationBar)
       .withAppRouteur()
-      .withSheetDestinations(sheetDestinations: $routeurPath.presentedSheet)
+      .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
     }
     .onAppear {
-      routeurPath.client = client
+      routerPath.client = client
     }
     .task {
       if appAccountsManager.currentAccount.oauthToken != nil {
@@ -45,10 +45,10 @@ struct SettingsTabs: View {
       }
     }
     .withSafariRouteur()
-    .environmentObject(routeurPath)
+    .environmentObject(routerPath)
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
       if popToRootTab == .notifications {
-        routeurPath.path = []
+        routerPath.path = []
       }
     }
   }
@@ -156,7 +156,7 @@ struct SettingsTabs: View {
       }
       .listRowBackground(theme.primaryBackgroundColor)
       Button {
-        routeurPath.presentedSheet = .addRemoteLocalTimeline
+        routerPath.presentedSheet = .addRemoteLocalTimeline
       } label: {
         Label("Add a local timeline", systemImage: "badge.plus.radiowaves.right")
       }

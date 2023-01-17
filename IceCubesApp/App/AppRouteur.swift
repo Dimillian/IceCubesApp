@@ -10,7 +10,7 @@ import AppAccount
 @MainActor
 extension View {
   func withAppRouteur() -> some View {
-    self.navigationDestination(for: RouteurDestinations.self) { destination in
+    self.navigationDestination(for: RouterDestinations.self) { destination in
       switch destination {
       case let .accountDetail(id):
         AccountDetailView(accountId: id)
@@ -43,7 +43,7 @@ extension View {
         StatusEditorView(mode: .replyTo(status: status))
           .withEnvironments()
       case let .newStatusEditor(visibility):
-        StatusEditorView(mode: .new(vivibilty: visibility))
+        StatusEditorView(mode: .new(visibilty: visibility))
           .withEnvironments()
       case let .editStatusEditor(status):
         StatusEditorView(mode: .edit(status: status))

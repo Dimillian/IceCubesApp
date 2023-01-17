@@ -12,7 +12,7 @@ public struct StatusRowView: View {
   @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
-  @EnvironmentObject private var routeurPath: RouterPath
+  @EnvironmentObject private var routerPath: RouterPath
   @StateObject var viewModel: StatusRowViewModel
   
   public init(viewModel: StatusRowViewModel) {
@@ -33,7 +33,7 @@ public struct StatusRowView: View {
            theme.avatarPosition == .leading,
            let status: AnyStatus = viewModel.status.reblog ?? viewModel.status {
           Button {
-            routeurPath.navigate(to: .accountDetailWithAccount(account: status.account))
+            routerPath.navigate(to: .accountDetailWithAccount(account: status.account))
           } label: {
             AvatarView(url: status.account.avatar, size: .status)
           }
@@ -50,16 +50,16 @@ public struct StatusRowView: View {
               .tint(viewModel.isFocused ? theme.tintColor : .gray)
               .contentShape(Rectangle())
               .onTapGesture {
-                viewModel.navigateToDetail(routeurPath: routeurPath)
+                viewModel.navigateToDetail(routerPath: routerPath)
               }
           }
         }
       }
       .onAppear {
         viewModel.client = client
-        if !viewModel.isCompact, viewModel.embededStatus == nil {
+        if !viewModel.isCompact, viewModel.embeddedStatus == nil {
           Task {
-            await viewModel.loadEmbededStatus()
+            await viewModel.loadEmbeddedStatus()
           }
         }
         if preferences.serverPreferences?.autoExpandSpoilers == true {
@@ -73,7 +73,7 @@ public struct StatusRowView: View {
         Color.clear
           .contentShape(Rectangle())
           .onTapGesture {
-            viewModel.navigateToDetail(routeurPath: routeurPath)
+            viewModel.navigateToDetail(routerPath: routerPath)
           }
       }
     }
@@ -111,10 +111,10 @@ public struct StatusRowView: View {
       .onTapGesture {
         if viewModel.isRemote, let url = viewModel.status.account.url {
           Task {
-            await routeurPath.navigateToAccountFrom(url: url)
+            await routerPath.navigateToAccountFrom(url: url)
           }
         } else {
-          routeurPath.navigate(to: .accountDetailWithAccount(account: viewModel.status.account))
+          routerPath.navigate(to: .accountDetailWithAccount(account: viewModel.status.account))
         }
       }
     }
@@ -135,10 +135,10 @@ public struct StatusRowView: View {
       .onTapGesture {
         if viewModel.isRemote {
           Task {
-            await routeurPath.navigateToAccountFrom(url: mention.url)
+            await routerPath.navigateToAccountFrom(url: mention.url)
           }
         } else {
-          routeurPath.navigate(to: .accountDetail(id: mention.id))
+          routerPath.navigate(to: .accountDetail(id: mention.id))
         }
       }
     }
@@ -152,10 +152,10 @@ public struct StatusRowView: View {
             Button {
               if viewModel.isRemote, let url = status.account.url {
                 Task {
-                  await routeurPath.navigateToAccountFrom(url: url)
+                  await routerPath.navigateToAccountFrom(url: url)
                 }
               } else {
-                routeurPath.navigate(to: .accountDetailWithAccount(account: status.account))
+                routerPath.navigate(to: .accountDetailWithAccount(account: status.account))
               }
             } label: {
               accountView(status: status)
@@ -167,7 +167,7 @@ public struct StatusRowView: View {
         makeStatusContentView(status: status)
           .contentShape(Rectangle())
           .onTapGesture {
-            viewModel.navigateToDetail(routeurPath: routeurPath)
+            viewModel.navigateToDetail(routerPath: routerPath)
           }
       }
     }
@@ -192,16 +192,16 @@ public struct StatusRowView: View {
           EmojiTextApp(status.content.asMarkdown, emojis: status.emojis)
             .font(.body)
             .environment(\.openURL, OpenURLAction { url in
-              routeurPath.handleStatus(status: status, url: url)
+              routerPath.handleStatus(status: status, url: url)
             })
           Spacer()
         }
         
         if !reasons.contains(.placeholder) {
-          if !viewModel.isCompact, !viewModel.isEmbedLoading, let embed = viewModel.embededStatus {
-            StatusEmbededView(status: embed)
+          if !viewModel.isCompact, !viewModel.isEmbedLoading, let embed = viewModel.embeddedStatus {
+            StatusEmbeddedView(status: embed)
           } else if viewModel.isEmbedLoading, !viewModel.isCompact {
-            StatusEmbededView(status: .placeholder())
+            StatusEmbeddedView(status: .placeholder())
               .redacted(reason: .placeholder)
               .shimmering()
           }
@@ -214,21 +214,21 @@ public struct StatusRowView: View {
         if !status.mediaAttachments.isEmpty {
           if theme.statusDisplayStyle == .compact {
             HStack {
-              StatusMediaPreviewView(attachements: status.mediaAttachments,
+              StatusMediaPreviewView(attachments: status.mediaAttachments,
                                      sensitive: status.sensitive,
                                      isNotifications: viewModel.isCompact)
               Spacer()
             }
             .padding(.vertical, 4)
           } else {
-            StatusMediaPreviewView(attachements: status.mediaAttachments,
+            StatusMediaPreviewView(attachments: status.mediaAttachments,
                                    sensitive: status.sensitive,
                                    isNotifications: viewModel.isCompact)
             .padding(.vertical, 4)
           }
         }
         if let card = status.card,
-           viewModel.embededStatus?.url != status.card?.url,
+           viewModel.embeddedStatus?.url != status.card?.url,
            status.mediaAttachments.isEmpty,
            !viewModel.isEmbedLoading,
            theme.statusDisplayStyle == .large {

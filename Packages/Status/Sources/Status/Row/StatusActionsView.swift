@@ -7,7 +7,7 @@ import DesignSystem
 struct StatusActionsView: View {
   @Environment(\.openURL) private var openURL
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var routeurPath: RouterPath
+  @EnvironmentObject private var routerPath: RouterPath
   @ObservedObject var viewModel: StatusRowViewModel
   
   let generator = UINotificationFeedbackGenerator()
@@ -119,7 +119,7 @@ struct StatusActionsView: View {
     
     if viewModel.favouritesCount > 0 {
       Divider()
-      NavigationLink(value: RouteurDestinations.favouritedBy(id: viewModel.status.id)) {
+      NavigationLink(value: RouterDestinations.favouritedBy(id: viewModel.status.id)) {
         Text("\(viewModel.favouritesCount) favorites")
           .font(.callout)
         Spacer()
@@ -128,7 +128,7 @@ struct StatusActionsView: View {
     }
     if viewModel.reblogsCount > 0 {
       Divider()
-      NavigationLink(value: RouteurDestinations.rebloggedBy(id: viewModel.status.id)) {
+      NavigationLink(value: RouterDestinations.rebloggedBy(id: viewModel.status.id)) {
         Text("\(viewModel.reblogsCount) boosts")
           .font(.callout)
         Spacer()
@@ -142,7 +142,7 @@ struct StatusActionsView: View {
       generator.notificationOccurred(.success)
       switch action {
       case .respond:
-        routeurPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
+        routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
       case .favourite:
         if viewModel.isFavourited {
           await viewModel.unFavourite()

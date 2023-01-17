@@ -114,8 +114,8 @@ public struct NotificationsListView: View {
       }
       
     case .error:
-      ErrorView(title: "An error occured",
-                message: "An error occured while loading your notifications, please retry.",
+      ErrorView(title: "An error occurred",
+                message: "An error occurred while loading your notifications, please retry.",
                 buttonTitle: "Retry") {
         Task {
           await viewModel.fetchNotifications()

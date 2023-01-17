@@ -6,17 +6,17 @@ public struct AppAccountsSelectorView: View {
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var appAccounts: AppAccountsManager
   
-  @ObservedObject var routeurPath: RouterPath
+  @ObservedObject var routerPath: RouterPath
   
   @State private var accountsViewModel: [AppAccountViewModel] = []
   
   private let accountCreationEnabled: Bool
   private let avatarSize: AvatarView.Size
   
-  public init(routeurPath: RouterPath,
+  public init(routerPath: RouterPath,
               accountCreationEnabled: Bool = true,
               avatarSize: AvatarView.Size = .badge) {
-    self.routeurPath = routeurPath
+    self.routerPath = routerPath
     self.accountCreationEnabled = accountCreationEnabled
     self.avatarSize = avatarSize
   }
@@ -60,7 +60,7 @@ public struct AppAccountsSelectorView: View {
         Button {
           if let account = currentAccount.account,
               viewModel.account?.id == account.id {
-            routeurPath.navigate(to: .accountDetailWithAccount(account: account))
+            routerPath.navigate(to: .accountDetailWithAccount(account: account))
           } else {
             appAccounts.currentAccount = viewModel.appAccount
           }
@@ -77,7 +77,7 @@ public struct AppAccountsSelectorView: View {
     if accountCreationEnabled {
       Divider()
       Button {
-        routeurPath.presentedSheet = .addAccount
+        routerPath.presentedSheet = .addAccount
       } label: {
         Label("Add Account", systemImage: "person.badge.plus")
       }
