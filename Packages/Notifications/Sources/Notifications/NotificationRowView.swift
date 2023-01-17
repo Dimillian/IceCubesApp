@@ -56,18 +56,18 @@ struct NotificationRowView: View {
                      append: {
                        Text(" ") +
                          Text(type.label())
-                         .font(.subheadline)
+                         .font(.scaledSubheadline)
                          .fontWeight(.regular) +
                          Text(" ⸱ ")
-                         .font(.footnote)
+                         .font(.scaledFootnote)
                          .fontWeight(.regular)
                          .foregroundColor(.gray) +
                          Text(notification.createdAt.formatted)
-                         .font(.footnote)
+                         .font(.scaledFootnote)
                          .fontWeight(.regular)
                          .foregroundColor(.gray)
                      })
-                     .font(.subheadline)
+                     .font(.scaledSubheadline)
                      .fontWeight(.semibold)
         Spacer()
       }
@@ -93,14 +93,14 @@ struct NotificationRowView: View {
     } else {
       Group {
         Text("@\(notification.account.acct)")
-          .font(.callout)
+          .font(.scaledCallout)
           .foregroundColor(.gray)
 
         if type == .follow {
           EmojiTextApp(notification.account.note.asMarkdown,
                        emojis: notification.account.emojis)
             .lineLimit(3)
-            .font(.callout)
+            .font(.scaledCallout)
             .foregroundColor(.gray)
             .environment(\.openURL, OpenURLAction { url in
               routerPath.handle(url: url)

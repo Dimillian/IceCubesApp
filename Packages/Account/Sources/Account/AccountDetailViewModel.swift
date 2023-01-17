@@ -105,7 +105,6 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
     let account: Account
     let featuredTags: [FeaturedTag]
     let relationships: [Relationship]
-    let familiarFollowers: [FamiliarAccounts]
   }
 
   func fetchAccount() async {
@@ -119,8 +118,6 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
       featuredTags = data.featuredTags
       featuredTags.sort { $0.statusesCountInt > $1.statusesCountInt }
       relationship = data.relationships.first
-      familiarFollowers = data.familiarFollowers.first?.accounts ?? []
-
     } catch {
       if let account {
         accountState = .data(account: account)
@@ -130,21 +127,23 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
     }
   }
 
-  func fetchAccountData(accountId: String, client: Client) async throws -> AccountData {
+  private func fetchAccountData(accountId: String, client: Client) async throws -> AccountData {
     async let account: Account = client.get(endpoint: Accounts.accounts(id: accountId))
     async let featuredTags: [FeaturedTag] = client.get(endpoint: Accounts.featuredTags(id: accountId))
     if client.isAuth && !isCurrentUser {
       async let relationships: [Relationship] = client.get(endpoint: Accounts.relationships(ids: [accountId]))
-      async let familiarFollowers: [FamiliarAccounts] = client.get(endpoint: Accounts.familiarFollowers(withAccount: accountId))
       return try await .init(account: account,
                              featuredTags: featuredTags,
-                             relationships: relationships,
-                             familiarFollowers: familiarFollowers)
+                             relationships: relationships)
     }
     return try await .init(account: account,
                            featuredTags: featuredTags,
-                           relationships: [],
-                           familiarFollowers: [])
+                           relationships: [])
+  }
+  
+  func fetchFamilliarFollowers() async {
+    let familiarFollowers: [FamiliarAccounts]? = try? await client?.get(endpoint: Accounts.familiarFollowers(withAccount: accountId))
+    self.familiarFollowers = familiarFollowers?.first?.accounts ?? []
   }
 
   func fetchStatuses() async {

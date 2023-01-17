@@ -77,15 +77,20 @@ public struct AccountDetailView: View {
       .background(theme.primaryBackgroundColor)
     }
     .onAppear {
+      guard reasons != .placeholder else { return }
+      isCurrentUser = currentAccount.account?.id == viewModel.accountId
+      viewModel.isCurrentUser = isCurrentUser
+      viewModel.client = client
       Task {
-        guard reasons != .placeholder else { return }
-        isCurrentUser = currentAccount.account?.id == viewModel.accountId
-        viewModel.isCurrentUser = isCurrentUser
-        viewModel.client = client
         await viewModel.fetchAccount()
+      }
+      Task {
         if viewModel.statuses.isEmpty {
           await viewModel.fetchStatuses()
         }
+      }
+      Task {
+        await viewModel.fetchFamilliarFollowers()
       }
     }
     .refreshable {
@@ -150,7 +155,7 @@ public struct AccountDetailView: View {
             } label: {
               VStack(alignment: .leading, spacing: 0) {
                 Text("About")
-                  .font(.callout)
+                  .font(.scaledCallout)
                 Text("\(viewModel.fields.count) fields")
                   .font(.caption2)
               }
@@ -167,7 +172,7 @@ public struct AccountDetailView: View {
               } label: {
                 VStack(alignment: .leading, spacing: 0) {
                   Text("#\(tag.name)")
-                    .font(.callout)
+                    .font(.scaledCallout)
                   Text("\(tag.statusesCount) posts")
                     .font(.caption2)
                 }
@@ -185,7 +190,7 @@ public struct AccountDetailView: View {
     if !viewModel.familiarFollowers.isEmpty {
       VStack(alignment: .leading, spacing: 2) {
         Text("Also followed by")
-          .font(.headline)
+          .font(.scaledHeadline)
           .padding(.leading, .layoutPadding)
         ScrollView(.horizontal, showsIndicators: false) {
           LazyHStack(spacing: 0) {
@@ -211,7 +216,7 @@ public struct AccountDetailView: View {
         ForEach(viewModel.fields) { field in
           VStack(alignment: .leading, spacing: 2) {
             Text(field.name)
-              .font(.headline)
+              .font(.scaledHeadline)
             HStack {
               if field.verifiedAt != nil {
                 Image(systemName: "checkmark.seal")
@@ -220,7 +225,7 @@ public struct AccountDetailView: View {
               EmojiTextApp(field.value.asMarkdown, emojis: viewModel.account?.emojis ?? [])
                 .foregroundColor(theme.tintColor)
             }
-            .font(.body)
+            .font(.scaledBody)
           }
           .listRowBackground(field.verifiedAt != nil ? Color.green.opacity(0.15) : theme.primaryBackgroundColor)
         }
@@ -273,7 +278,7 @@ public struct AccountDetailView: View {
           }
           .padding(.vertical, 8)
           .padding(.horizontal, .layoutPadding)
-          .font(.headline)
+          .font(.scaledHeadline)
           .foregroundColor(theme.labelColor)
         }
         .contextMenu {
@@ -317,7 +322,7 @@ public struct AccountDetailView: View {
       ForEach(viewModel.pinned) { status in
         VStack(alignment: .leading) {
           Label("Pinned post", systemImage: "pin.fill")
-            .font(.footnote)
+            .font(.scaledFootnote)
             .foregroundColor(.gray)
             .fontWeight(.semibold)
           StatusRowView(viewModel: .init(status: status))
@@ -336,7 +341,7 @@ public struct AccountDetailView: View {
         switch viewModel.accountState {
         case let .data(account):
           EmojiTextApp(account.safeDisplayName.asMarkdown, emojis: account.emojis)
-            .font(.headline)
+            .font(.scaledHeadline)
         default:
           EmptyView()
         }

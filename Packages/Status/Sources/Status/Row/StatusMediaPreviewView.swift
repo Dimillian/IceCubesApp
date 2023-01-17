@@ -174,14 +174,14 @@ public struct StatusMediaPreviewView: View {
           content: { image in
             image
               .resizable()
-              .aspectRatio(contentMode: .fill)
-              .frame(maxHeight: imageMaxHeight)
+              .aspectRatio(contentMode: .fit)
+              .frame(maxHeight: isNotifications ? imageMaxHeight : nil)
               .cornerRadius(4)
           },
           placeholder: {
             RoundedRectangle(cornerRadius: 4)
               .fill(Color.gray)
-              .frame(maxHeight: imageMaxHeight)
+              .frame(maxHeight: isNotifications ? imageMaxHeight : nil)
               .shimmering()
           }
         )
@@ -213,11 +213,11 @@ public struct StatusMediaPreviewView: View {
                   RoundedRectangle(cornerRadius: 4)
                     .fill(Color.gray)
                     .frame(maxHeight: imageMaxHeight)
-                    .frame(width: isNotifications ? imageMaxHeight : proxy.frame(in: .local).width)
+                    .frame(maxWidth: isNotifications ? imageMaxHeight : proxy.frame(in: .local).width)
                     .shimmering()
                 }
               }
-              .frame(width: isNotifications ? imageMaxHeight : proxy.frame(in: .local).width)
+              .frame(maxWidth: isNotifications ? imageMaxHeight : proxy.frame(in: .local).width)
               .frame(height: imageMaxHeight)
               if sensitive {
                 cornerSensitiveButton
@@ -228,7 +228,7 @@ public struct StatusMediaPreviewView: View {
                   isAltAlertDisplayed = true
                 } label: {
                   Text("ALT")
-                    .font(.footnote)
+                    .font(.scaledFootnote)
                 }
                 .padding(4)
                 .background(.thinMaterial)
@@ -243,7 +243,7 @@ public struct StatusMediaPreviewView: View {
             }
           }
         }
-        .frame(width: isNotifications ? imageMaxHeight : nil)
+        .frame(maxWidth: isNotifications ? imageMaxHeight : nil)
         .frame(height: imageMaxHeight)
       }
       .onTapGesture {

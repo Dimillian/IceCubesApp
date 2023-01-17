@@ -358,12 +358,8 @@ public class StatusEditorViewModel: ObservableObject {
     do {
       let client = OpenAIClient()
       let response = try await client.request(prompt)
-      if var text = response.choices.first?.text {
-        text.removeFirst()
-        text.removeFirst()
-        backupStatusText = statusText
-        replaceTextWith(text: text)
-      }
+      backupStatusText = statusText
+      replaceTextWith(text: response.trimmedText)
     } catch {}
   }
 

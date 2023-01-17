@@ -5,6 +5,7 @@ import Env
 import SwiftUI
 
 struct SideBarView<Content: View>: View {
+  @EnvironmentObject private var appAccounts: AppAccountsManager
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var watcher: StreamWatcher
@@ -41,14 +42,14 @@ struct SideBarView<Content: View>: View {
         .resizable()
         .aspectRatio(contentMode: .fit)
         .frame(width: 24, height: 24)
-        .foregroundColor(tab == selectedTab ? theme.tintColor : .gray)
+        .foregroundColor(tab == selectedTab ? theme.tintColor : theme.labelColor)
       if let badge = badgeFor(tab: tab), badge > 0 {
         ZStack {
           Circle()
             .fill(.red)
           Text(String(badge))
             .foregroundColor(.white)
-            .font(.footnote)
+            .font(.caption)
         }
         .frame(width: 20, height: 20)
         .offset(x: 10, y: -10)
@@ -71,28 +72,58 @@ struct SideBarView<Content: View>: View {
     .keyboardShortcut("n", modifiers: .command)
   }
   
+  private func makeAccountButton(account: AppAccount) -> some View {
+    Button {
+      if account.id == appAccounts.currentAccount.id {
+        selectedTab = .profile
+      } else {
+        withAnimation {
+          appAccounts.currentAccount = account
+        }
+      }
+    } label: {
+      AppAccountView(viewModel: .init(appAccount: account, isCompact: true))
+    }
+    .frame(width: .sidebarWidth, height: 50)
+    .padding(.vertical, 8)
+    .background(selectedTab == .profile && account.id == appAccounts.currentAccount.id ?
+                theme.secondaryBackgroundColor : .clear)
+  }
+  
+  private var tabsView: some View {
+    ForEach(tabs) { tab in
+      Button {
+        if tab == selectedTab {
+          popToRootTab = .other
+          DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+            popToRootTab = tab
+          }
+        }
+        selectedTab = tab
+        if tab == .notifications {
+          watcher.unreadNotificationsCount = 0
+          userPreferences.pushNotificationsCount = 0
+        }
+      } label: {
+        makeIconForTab(tab: tab)
+      }
+      .background(tab == selectedTab ? theme.secondaryBackgroundColor : .clear)
+    }
+  }
+  
   var body: some View {
     HStack(spacing: 0) {
       ScrollView {
         VStack(alignment: .center) {
-          profileView
-          ForEach(tabs) { tab in
-            Button {
-              if tab == selectedTab {
-                popToRootTab = .other
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-                  popToRootTab = tab
-                }
+          if appAccounts.availableAccounts.isEmpty {
+            tabsView
+          } else {
+            ForEach(appAccounts.availableAccounts) { account in
+              makeAccountButton(account: account)
+              if account.id == appAccounts.currentAccount.id {
+                tabsView
               }
-              selectedTab = tab
-              if tab == .notifications {
-                watcher.unreadNotificationsCount = 0
-                userPreferences.pushNotificationsCount = 0
-              }
-            } label: {
-              makeIconForTab(tab: tab)
             }
-            .background(tab == selectedTab ? theme.secondaryBackgroundColor : .clear)
           }
           postButton
             .padding(.top, 12)

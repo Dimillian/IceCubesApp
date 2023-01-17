@@ -60,7 +60,6 @@ struct IceCubesApp: App {
         Button("New post") {
           sidebarRouterPath.presentedSheet = .newStatusEditor(visibility: userPreferences.serverPreferences?.postVisibility ?? .pub)
         }
-        .keyboardShortcut("n", modifiers: .command)
       }
     }
     .onChange(of: scenePhase) { scenePhase in
@@ -187,10 +186,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                    didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data)
   {
     PushNotificationsService.shared.pushToken = deviceToken
-    Task {
-      await PushNotificationsService.shared.fetchSubscriptions(accounts: AppAccountsManager.shared.pushAccounts)
-      await PushNotificationsService.shared.updateSubscriptions(accounts: AppAccountsManager.shared.pushAccounts)
-    }
+    #if !DEBUG
+      Task {
+        await PushNotificationsService.shared.fetchSubscriptions(accounts: AppAccountsManager.shared.pushAccounts)
+        await PushNotificationsService.shared.updateSubscriptions(accounts: AppAccountsManager.shared.pushAccounts)
+      }
+    #endif
   }
 
   func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError _: Error) {}

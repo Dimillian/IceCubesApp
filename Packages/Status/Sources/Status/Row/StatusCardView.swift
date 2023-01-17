@@ -33,16 +33,16 @@ public struct StatusCardView: View {
         HStack {
           VStack(alignment: .leading, spacing: 6) {
             Text(title)
-              .font(.headline)
+              .font(.scaledHeadline)
               .lineLimit(3)
             if let description = card.description, !description.isEmpty {
               Text(description)
-                .font(.body)
+                .font(.scaledBody)
                 .foregroundColor(.gray)
                 .lineLimit(3)
             }
             Text(card.url.host() ?? card.url.absoluteString)
-              .font(.footnote)
+              .font(.scaledFootnote)
               .foregroundColor(theme.tintColor)
               .lineLimit(1)
           }

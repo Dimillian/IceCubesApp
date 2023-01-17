@@ -89,13 +89,13 @@ struct AddRemoteTimelineView: View {
           } label: {
             VStack(alignment: .leading, spacing: 4) {
               Text(instance.name)
-                .font(.headline)
+                .font(.scaledHeadline)
                 .foregroundColor(.primary)
               Text(instance.info?.shortDescription ?? "")
-                .font(.body)
+                .font(.scaledBody)
                 .foregroundColor(.gray)
               Text("\(instance.users) users  ⸱  \(instance.statuses) posts")
-                .font(.footnote)
+                .font(.scaledFootnote)
                 .foregroundColor(.gray)
             }
           }

@@ -36,14 +36,14 @@ public struct StatusEmbeddedView: View {
       AvatarView(url: account.avatar, size: .embed)
       VStack(alignment: .leading, spacing: 0) {
         EmojiTextApp(status.account.safeDisplayName.asMarkdown, emojis: account.emojis)
-          .font(.footnote)
+          .font(.scaledFootnote)
           .fontWeight(.semibold)
         Group {
           Text("@\(account.acct)") +
             Text(" ⸱ ") +
             Text(status.reblog?.createdAt.formatted ?? status.createdAt.formatted)
         }
-        .font(.caption)
+        .font(.scaledCaption)
         .foregroundColor(.gray)
       }
     }

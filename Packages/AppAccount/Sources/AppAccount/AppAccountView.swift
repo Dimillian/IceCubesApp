@@ -13,6 +13,30 @@ public struct AppAccountView: View {
   }
 
   public var body: some View {
+    Group {
+      if viewModel.isCompact {
+        compactView
+      } else {
+        fullView
+      }
+    }
+    .onAppear {
+      Task {
+        await viewModel.fetchAccount()
+      }
+    }
+  }
+  
+  @ViewBuilder
+  private var compactView: some View {
+    HStack {
+      if let account = viewModel.account {
+        AvatarView(url: account.avatar)
+      }
+    }
+  }
+  
+  private var fullView: some View {
     HStack {
       if let account = viewModel.account {
         ZStack(alignment: .topTrailing) {
@@ -28,18 +52,13 @@ public struct AppAccountView: View {
         if let account = viewModel.account {
           EmojiTextApp(account.safeDisplayName.asMarkdown, emojis: account.emojis)
           Text("\(account.username)@\(viewModel.appAccount.server)")
-            .font(.subheadline)
+            .font(.scaledSubheadline)
             .foregroundColor(.gray)
         }
       }
       Spacer()
       Image(systemName: "chevron.right")
         .foregroundColor(.gray)
-    }
-    .onAppear {
-      Task {
-        await viewModel.fetchAccount()
-      }
     }
     .onTapGesture {
       if appAccounts.currentAccount.id == viewModel.appAccount.id,

@@ -164,7 +164,7 @@ public struct StatusEditorView: View {
         VStack(alignment: .leading, spacing: 4) {
           privacyMenu
           Text("@\(account.acct)")
-            .font(.footnote)
+            .font(.scaledFootnote)
             .foregroundColor(.gray)
         }
         Spacer()
@@ -188,7 +188,7 @@ public struct StatusEditorView: View {
         Label(viewModel.visibility.title, systemImage: viewModel.visibility.iconName)
         Image(systemName: "chevron.down")
       }
-      .font(.footnote)
+      .font(.scaledFootnote)
       .padding(4)
       .overlay(
         RoundedRectangle(cornerRadius: 8)

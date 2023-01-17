@@ -71,9 +71,9 @@ struct SupportAppView: View {
           HStack {
             VStack(alignment: .leading) {
               Text("Loading ...")
-                .font(.subheadline)
+                .font(.scaledSubheadline)
               Text("Loading subtitle...")
-                .font(.footnote)
+                .font(.scaledFootnote)
                 .foregroundColor(.gray)
             }
             .padding(.vertical, 8)
@@ -86,9 +86,9 @@ struct SupportAppView: View {
             HStack {
               VStack(alignment: .leading) {
                 Text(tip.title)
-                  .font(.subheadline)
+                  .font(.scaledSubheadline)
                 Text(tip.subtitle)
-                  .font(.footnote)
+                  .font(.scaledFootnote)
                   .foregroundColor(.gray)
               }
               Spacer()

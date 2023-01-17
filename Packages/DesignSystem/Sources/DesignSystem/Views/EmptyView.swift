@@ -18,10 +18,10 @@ public struct EmptyView: View {
         .aspectRatio(contentMode: .fit)
         .frame(maxHeight: 50)
       Text(title)
-        .font(.title)
+        .font(.scaledTitle)
         .padding(.top, 16)
       Text(message)
-        .font(.subheadline)
+        .font(.scaledSubheadline)
         .multilineTextAlignment(.center)
         .foregroundColor(.gray)
     }

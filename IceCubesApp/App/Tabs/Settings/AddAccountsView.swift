@@ -118,7 +118,7 @@ struct AddAccountView: View {
               .tint(theme.labelColor)
           } else {
             Text("Sign in")
-              .font(.headline)
+              .font(.scaledHeadline)
           }
           Spacer()
         }
@@ -139,13 +139,13 @@ struct AddAccountView: View {
           } label: {
             VStack(alignment: .leading, spacing: 4) {
               Text(instance.name)
-                .font(.headline)
+                .font(.scaledHeadline)
                 .foregroundColor(.primary)
               Text(instance.info?.shortDescription ?? "")
-                .font(.body)
+                .font(.scaledBody)
                 .foregroundColor(.gray)
               Text("\(instance.users) users  ⸱  \(instance.statuses) posts")
-                .font(.footnote)
+                .font(.scaledFootnote)
                 .foregroundColor(.gray)
             }
           }
@@ -158,13 +158,13 @@ struct AddAccountView: View {
   private var placeholderRow: some View {
     VStack(alignment: .leading, spacing: 4) {
       Text("Loading...")
-        .font(.headline)
+        .font(.scaledHeadline)
         .foregroundColor(.primary)
       Text("Loading, loading, loading ....")
-        .font(.body)
+        .font(.scaledBody)
         .foregroundColor(.gray)
       Text("Loading ...")
-        .font(.footnote)
+        .font(.scaledFootnote)
         .foregroundColor(.gray)
     }
     .redacted(reason: .placeholder)

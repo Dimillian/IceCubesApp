@@ -106,7 +106,7 @@ public struct StatusRowView: View {
           Text("You boosted")
         }
       }
-      .font(.footnote)
+      .font(.scaledFootnote)
       .foregroundColor(.gray)
       .fontWeight(.semibold)
       .onTapGesture {
@@ -131,7 +131,7 @@ public struct StatusRowView: View {
         Text("Replied to")
         Text(mention.username)
       }
-      .font(.footnote)
+      .font(.scaledFootnote)
       .foregroundColor(.gray)
       .fontWeight(.semibold)
       .onTapGesture {
@@ -179,7 +179,7 @@ public struct StatusRowView: View {
     Group {
       if !status.spoilerText.isEmpty {
         EmojiTextApp(status.spoilerText.asMarkdown, emojis: status.emojis)
-          .font(.body)
+          .font(.scaledBody)
         Button {
           withAnimation {
             viewModel.displaySpoiler.toggle()
@@ -192,7 +192,7 @@ public struct StatusRowView: View {
       if !viewModel.displaySpoiler {
         HStack {
           EmojiTextApp(status.content.asMarkdown, emojis: status.emojis)
-            .font(.body)
+            .font(.scaledBody)
             .environment(\.openURL, OpenURLAction { url in
               routerPath.handleStatus(status: status, url: url)
             })
@@ -249,7 +249,7 @@ public struct StatusRowView: View {
       }
       VStack(alignment: .leading, spacing: 0) {
         EmojiTextApp(status.account.safeDisplayName.asMarkdown, emojis: status.account.emojis)
-          .font(.headline)
+          .font(.scaledHeadline)
           .fontWeight(.semibold)
         Group {
           Text("@\(status.account.acct)") +
@@ -258,7 +258,7 @@ public struct StatusRowView: View {
             Text(" ⸱ ") +
             Text(Image(systemName: viewModel.status.visibility.iconName))
         }
-        .font(.footnote)
+        .font(.scaledFootnote)
         .foregroundColor(.gray)
       }
     }

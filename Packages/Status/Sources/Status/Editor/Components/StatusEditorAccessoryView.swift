@@ -158,7 +158,7 @@ struct StatusEditorAccessoryView: View {
   private var characterCountView: some View {
     Text("\((currentInstance.instance?.configuration.statuses.maxCharacters ?? 500) - viewModel.statusText.string.utf16.count)")
       .foregroundColor(.gray)
-      .font(.callout)
+      .font(.scaledCallout)
   }
 
   private var availableLanguages: [(String, String?, String?)] {

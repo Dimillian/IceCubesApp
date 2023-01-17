@@ -23,7 +23,8 @@ public struct NotificationsListView: View {
         .padding(.top, 16)
         .frame(maxWidth: .maxColumnWidth)
       }
-      .padding(.horizontal, .layoutPadding)
+      .padding(.leading, .layoutPadding + 12)
+      .padding(.trailing, .layoutPadding)
       .padding(.top, .layoutPadding)
       .background(theme.primaryBackgroundColor)
     }

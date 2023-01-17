@@ -20,6 +20,14 @@ class VideoPlayerViewModel: ObservableObject {
       self?.player?.play()
     }
   }
+  
+  func pause() {
+    player?.pause()
+  }
+  
+  func play() {
+    player?.play()
+  }
 
   deinit {
     NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: self.player)
@@ -27,12 +35,24 @@ class VideoPlayerViewModel: ObservableObject {
 }
 
 struct VideoPlayerView: View {
+  @Environment(\.scenePhase) private var scenePhase
   @StateObject var viewModel: VideoPlayerViewModel
+  
   var body: some View {
     VStack {
       VideoPlayer(player: viewModel.player)
     }.onAppear {
       viewModel.preparePlayer()
     }
+    .onChange(of: scenePhase, perform: { scenePhase in
+      switch scenePhase {
+      case .background, .inactive:
+        viewModel.pause()
+      case .active:
+        viewModel.play()
+      default:
+        break
+      }
+    })
   }
 }

@@ -20,7 +20,7 @@ struct ConversationsListRow: View {
         VStack(alignment: .leading, spacing: 4) {
           HStack {
             Text(conversation.accounts.map { $0.safeDisplayName }.joined(separator: ", "))
-              .font(.headline)
+              .font(.scaledHeadline)
               .foregroundColor(theme.labelColor)
               .multilineTextAlignment(.leading)
             Spacer()
@@ -30,7 +30,7 @@ struct ConversationsListRow: View {
                 .frame(width: 10, height: 10)
             }
             Text(conversation.lastStatus.createdAt.formatted)
-              .font(.footnote)
+              .font(.scaledFootnote)
           }
           Text(conversation.lastStatus.content.asRawText)
             .multilineTextAlignment(.leading)

@@ -35,7 +35,7 @@ public struct ListEditView: View {
                                emojis: account.emojis)
                   Text("@\(account.acct)")
                     .foregroundColor(.gray)
-                    .font(.footnote)
+                    .font(.scaledFootnote)
                 }
               }
               .listRowBackground(theme.primaryBackgroundColor)

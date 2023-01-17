@@ -80,7 +80,7 @@ struct StatusActionsView: View {
                   .foregroundColor(action.tintColor(viewModel: viewModel, theme: theme))
                 if let count = action.count(viewModel: viewModel, theme: theme) {
                   Text("\(count)")
-                    .font(.footnote)
+                    .font(.scaledFootnote)
                 }
               }
             }
@@ -114,14 +114,14 @@ struct StatusActionsView: View {
           }
         }
     }
-    .font(.caption)
+    .font(.scaledCaption)
     .foregroundColor(.gray)
 
     if viewModel.favouritesCount > 0 {
       Divider()
       NavigationLink(value: RouterDestinations.favouritedBy(id: viewModel.status.id)) {
         Text("\(viewModel.favouritesCount) favorites")
-          .font(.callout)
+          .font(.scaledCallout)
         Spacer()
         Image(systemName: "chevron.right")
       }
@@ -130,7 +130,7 @@ struct StatusActionsView: View {
       Divider()
       NavigationLink(value: RouterDestinations.rebloggedBy(id: viewModel.status.id)) {
         Text("\(viewModel.reblogsCount) boosts")
-          .font(.callout)
+          .font(.scaledCallout)
         Spacer()
         Image(systemName: "chevron.right")
       }

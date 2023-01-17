@@ -141,9 +141,9 @@ public struct TimelineView: View {
       HStack {
         VStack(alignment: .leading, spacing: 4) {
           Text("#\(tag.name)")
-            .font(.headline)
+            .font(.scaledHeadline)
           Text("\(tag.totalUses) recent posts from \(tag.totalAccounts) participants")
-            .font(.footnote)
+            .font(.scaledFootnote)
             .foregroundColor(.gray)
         }
         Spacer()

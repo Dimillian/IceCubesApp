@@ -47,7 +47,7 @@ public struct StatusPollView: View {
           if !viewModel.votes.isEmpty || viewModel.poll.expired {
             Spacer()
             Text("\(percentForOption(option: option)) %")
-              .font(.subheadline)
+              .font(.scaledSubheadline)
               .frame(width: 40)
           }
         }
@@ -74,7 +74,7 @@ public struct StatusPollView: View {
         Text(viewModel.poll.expiresAt.asDate, style: .timer)
       }
     }
-    .font(.footnote)
+    .font(.scaledFootnote)
     .foregroundColor(.gray)
   }
 
@@ -120,7 +120,7 @@ public struct StatusPollView: View {
             }
             Text(option.title)
               .foregroundColor(.white)
-              .font(.body)
+              .font(.scaledBody)
           }
           .padding(.leading, 12)
         }

@@ -75,6 +75,16 @@ public struct OpenAIClient {
     public let object: String
     public let model: String
     public let choices: [Choice]
+    
+    public var trimmedText: String {
+      guard var text = choices.first?.text else {
+        return ""
+      }
+      while text.first?.isNewline == true || text.first?.isWhitespace == true {
+        text.removeFirst()
+      }
+      return text
+    }
   }
 
   public init() {}

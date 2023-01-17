@@ -56,7 +56,7 @@ struct AccountDetailHeaderView: View {
 
         if viewModel.relationship?.followedBy == true {
           Text("Follows You")
-            .font(.footnote)
+            .font(.scaledFootnote)
             .fontWeight(.semibold)
             .padding(4)
             .background(.ultraThinMaterial)
@@ -109,9 +109,9 @@ struct AccountDetailHeaderView: View {
       HStack {
         VStack(alignment: .leading, spacing: 0) {
           EmojiTextApp(account.safeDisplayName.asMarkdown, emojis: account.emojis)
-            .font(.headline)
+            .font(.scaledHeadline)
           Text("@\(account.acct)")
-            .font(.callout)
+            .font(.scaledCallout)
             .foregroundColor(.gray)
         }
         Spacer()
@@ -124,7 +124,7 @@ struct AccountDetailHeaderView: View {
         }
       }
       EmojiTextApp(account.note.asMarkdown, emojis: account.emojis)
-        .font(.body)
+        .font(.scaledBody)
         .padding(.top, 8)
         .environment(\.openURL, OpenURLAction { url in
           routerPath.handle(url: url)
@@ -137,10 +137,10 @@ struct AccountDetailHeaderView: View {
   private func makeCustomInfoLabel(title: String, count: Int) -> some View {
     VStack {
       Text("\(count)")
-        .font(.headline)
+        .font(.scaledHeadline)
         .foregroundColor(theme.tintColor)
       Text(title)
-        .font(.footnote)
+        .font(.scaledFootnote)
         .foregroundColor(.gray)
     }
   }
