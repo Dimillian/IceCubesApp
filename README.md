@@ -2,18 +2,7 @@
 
 [Public TestFlight beta](https://testflight.apple.com/join/tqI3dK1u) (A proper App Store release will come eventually)
 
-<p float="left">
-    <img src="Images/image1.png" width="300" />
-    <img src="Images/image2.png" width="300" />
-</p>
-<p float="left">
-    <img src="Images/image3.png" width="300" />
-    <img src="Images/image4.png" width="300" />
-</p>
-<p float="left">
-    <img src="Images/image5.png" width="300" />
-    <img src="Images/image6.png" width="300" />
-</p>
+<img src="Images/promo.png" />
 
 For contributors and myself, here is a todo list of features that could be added (while giving you a good idea of what's already done if not in this list, the app is quite complete already!)
 
