@@ -2,9 +2,11 @@ import DesignSystem
 import Models
 import Status
 import SwiftUI
+import Env
 
 struct DisplaySettingsView: View {
   @EnvironmentObject private var theme: Theme
+  @EnvironmentObject private var userPreferences: UserPreferences
 
   @State private var isThemeSelectorPresented = false
 
@@ -38,6 +40,13 @@ struct DisplaySettingsView: View {
         Picker("Status media style", selection: $theme.statusDisplayStyle) {
           ForEach(Theme.StatusDisplayStyle.allCases, id: \.rawValue) { buttonStyle in
             Text(buttonStyle.description).tag(buttonStyle)
+          }
+        }
+        if ProcessInfo.processInfo.isiOSAppOnMac {
+          VStack {
+            Slider(value: $userPreferences.fontSizeScale, in: 0.5...1.5, step: 0.1)
+            Text("Font scaling: \(String(format: "%.1f", userPreferences.fontSizeScale))")
+              .font(.scaledBody)
           }
         }
       }

@@ -49,7 +49,7 @@ struct SideBarView<Content: View>: View {
             .fill(.red)
           Text(String(badge))
             .foregroundColor(.white)
-            .font(.caption)
+            .font(.caption2)
         }
         .frame(width: 20, height: 20)
         .offset(x: 10, y: -10)

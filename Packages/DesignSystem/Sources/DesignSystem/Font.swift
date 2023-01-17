@@ -1,9 +1,16 @@
 import SwiftUI
+import Env
 
+@MainActor
 extension Font {
+  
+  public static func userScaledFontSize(baseSize: CGFloat) -> CGFloat {
+    UIFontMetrics.default.scaledValue(for: baseSize * UserPreferences.shared.fontSizeScale)
+  }
+  
   public static var scaledTitle: Font {
     if ProcessInfo.processInfo.isiOSAppOnMac {
-      return .system(size: UIFontMetrics.default.scaledValue(for: 28))
+      return .system(size: userScaledFontSize(baseSize: 28))
     } else {
       return .title
     }
@@ -11,7 +18,7 @@ extension Font {
   
   public static var scaledHeadline: Font {
     if ProcessInfo.processInfo.isiOSAppOnMac {
-      return .system(size: UIFontMetrics.default.scaledValue(for: 19), weight: .semibold)
+      return .system(size: userScaledFontSize(baseSize: 20), weight: .semibold)
     } else {
       return .headline
     }
@@ -19,7 +26,7 @@ extension Font {
     
   public static var scaledBody: Font {
     if ProcessInfo.processInfo.isiOSAppOnMac {
-      return .system(size: UIFontMetrics.default.scaledValue(for: 19))
+      return .system(size: userScaledFontSize(baseSize: 19))
     } else {
       return .body
     }
@@ -27,7 +34,7 @@ extension Font {
   
   public static var scaledCallout: Font {
     if ProcessInfo.processInfo.isiOSAppOnMac {
-      return .system(size: UIFontMetrics.default.scaledValue(for: 17))
+      return .system(size: userScaledFontSize(baseSize: 17))
     } else {
       return .callout
     }
@@ -35,7 +42,7 @@ extension Font {
   
   public static var scaledSubheadline: Font {
     if ProcessInfo.processInfo.isiOSAppOnMac {
-      return .system(size: UIFontMetrics.default.scaledValue(for: 16))
+      return .system(size: userScaledFontSize(baseSize: 16))
     } else {
       return .subheadline
     }
@@ -44,7 +51,7 @@ extension Font {
   
   public static var scaledFootnote: Font {
     if ProcessInfo.processInfo.isiOSAppOnMac {
-      return .system(size: UIFontMetrics.default.scaledValue(for: 15))
+      return .system(size: userScaledFontSize(baseSize: 15))
     } else {
       return .footnote
     }
@@ -52,7 +59,7 @@ extension Font {
   
   public static var scaledCaption: Font {
     if ProcessInfo.processInfo.isiOSAppOnMac {
-      return .system(size: UIFontMetrics.default.scaledValue(for: 14))
+      return .system(size: userScaledFontSize(baseSize: 14))
     } else {
       return .caption
     }

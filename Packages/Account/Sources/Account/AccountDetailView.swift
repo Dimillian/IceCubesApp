@@ -82,15 +82,15 @@ public struct AccountDetailView: View {
       viewModel.isCurrentUser = isCurrentUser
       viewModel.client = client
       Task {
-        await viewModel.fetchAccount()
-      }
-      Task {
-        if viewModel.statuses.isEmpty {
-          await viewModel.fetchStatuses()
+        await withTaskGroup(of: Void.self) { group in
+          group.addTask { await viewModel.fetchAccount() }
+          group.addTask {
+            if await viewModel.statuses.isEmpty {
+              await viewModel.fetchStatuses()
+            }
+          }
+          group.addTask { await viewModel.fetchFamilliarFollowers() }
         }
-      }
-      Task {
-        await viewModel.fetchFamilliarFollowers()
       }
     }
     .refreshable {

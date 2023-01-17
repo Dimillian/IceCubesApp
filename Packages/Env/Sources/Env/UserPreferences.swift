@@ -13,6 +13,7 @@ public class UserPreferences: ObservableObject {
   @AppStorage("remote_local_timeline") public var remoteLocalTimelines: [String] = []
   @AppStorage("preferred_browser") public var preferredBrowser: PreferredBrowser = .inAppSafari
   @AppStorage("draft_posts") public var draftsPosts: [String] = []
+  @AppStorage("font_size_scale") public var fontSizeScale: Double = 1
 
   public var pushNotificationsCount: Int {
     get {
