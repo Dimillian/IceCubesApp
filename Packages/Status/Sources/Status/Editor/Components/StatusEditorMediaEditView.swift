@@ -19,7 +19,7 @@ struct StatusEditorMediaEditView: View {
         }
         .listRowBackground(theme.primaryBackgroundColor)
         Section {
-          if let url = container.mediaAttachement?.url {
+          if let url = container.mediaAttachment?.url {
             AsyncImage(
               url: url,
               content: { image in
@@ -42,7 +42,7 @@ struct StatusEditorMediaEditView: View {
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
       .onAppear {
-        imageDescription = container.mediaAttachement?.description ?? ""
+        imageDescription = container.mediaAttachment?.description ?? ""
       }
       .navigationTitle("Edit Image")
       .navigationBarTitleDisplayMode(.inline)

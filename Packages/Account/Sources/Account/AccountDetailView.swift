@@ -41,7 +41,7 @@ public struct AccountDetailView: View {
       } content: {
         LazyVStack(alignment: .leading) {
           makeHeaderView(proxy: proxy)
-          familliarFollowers
+          familiarFollowers
             .offset(y: -36)
           featuredTagsView
             .offset(y: -36)
@@ -180,15 +180,15 @@ public struct AccountDetailView: View {
   }
   
   @ViewBuilder
-  private var familliarFollowers: some View {
-    if !viewModel.familliarFollowers.isEmpty {
+  private var familiarFollowers: some View {
+    if !viewModel.familiarFollowers.isEmpty {
       VStack(alignment: .leading, spacing: 2) {
         Text("Also followed by")
           .font(.headline)
           .padding(.leading, .layoutPadding)
         ScrollView(.horizontal, showsIndicators: false) {
           LazyHStack(spacing: 0) {
-            ForEach(viewModel.familliarFollowers) { account in
+            ForEach(viewModel.familiarFollowers) { account in
               AvatarView(url: account.avatar, size: .badge)
                 .onTapGesture {
                   routerPath.navigate(to: .accountDetailWithAccount(account: account))

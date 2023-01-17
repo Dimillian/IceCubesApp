@@ -67,7 +67,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   private var bookmarksNextPage: LinkHandler?
   @Published var featuredTags: [FeaturedTag] = []
   @Published var fields: [Account.Field] = []
-  @Published var familliarFollowers: [Account] = []
+  @Published var familiarFollowers: [Account] = []
   @Published var selectedTab = Tab.statuses {
     didSet {
       switch selectedTab {
@@ -118,7 +118,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
       featuredTags = data.featuredTags
       featuredTags.sort { $0.statusesCountInt > $1.statusesCountInt }
       relationship = data.relationships.first
-      familliarFollowers = data.familiarFollowers.first?.accounts ?? []
+      familiarFollowers = data.familiarFollowers.first?.accounts ?? []
       
     } catch {
       if let account {
