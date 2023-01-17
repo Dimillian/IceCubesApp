@@ -3,28 +3,28 @@ import Models
 import Network
 
 @MainActor
-public class StreamWatcher: ObservableObject {  
+public class StreamWatcher: ObservableObject {
   private var client: Client?
   private var task: URLSessionWebSocketTask?
   private var watchedStreams: [Stream] = []
-  
+
   private let decoder = JSONDecoder()
   private let encoder = JSONEncoder()
-  
+
   public enum Stream: String {
     case publicTimeline = "public"
     case user
     case direct
   }
-    
+
   @Published public var events: [any StreamEvent] = []
   @Published public var unreadNotificationsCount: Int = 0
   @Published public var latestEvent: (any StreamEvent)?
-  
+
   public init() {
     decoder.keyDecodingStrategy = .convertFromSnakeCase
   }
-  
+
   public func setClient(client: Client) {
     if self.client != nil {
       stopWatching()
@@ -32,13 +32,13 @@ public class StreamWatcher: ObservableObject {
     self.client = client
     connect()
   }
-  
+
   private func connect() {
     task = client?.makeWebSocketTask(endpoint: Streaming.streaming)
     task?.resume()
     receiveMessage()
   }
-  
+
   public func watch(streams: [Stream]) {
     if client?.isAuth == false {
       return
@@ -51,17 +51,17 @@ public class StreamWatcher: ObservableObject {
       sendMessage(message: StreamMessage(type: "subscribe", stream: stream.rawValue))
     }
   }
-  
+
   public func stopWatching() {
     task?.cancel()
     task = nil
   }
-  
+
   private func sendMessage(message: StreamMessage) {
     task?.send(.data(try! encoder.encode(message)),
                completionHandler: { _ in })
   }
-  
+
   private func receiveMessage() {
     task?.receive(completionHandler: { result in
       switch result {
@@ -86,13 +86,13 @@ public class StreamWatcher: ObservableObject {
           } catch {
             print("Error decoding streaming event: \(error.localizedDescription)")
           }
-          
+
         default:
           break
         }
-        
-      self.receiveMessage()
-        
+
+        self.receiveMessage()
+
       case .failure:
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(10)) { [weak self] in
           guard let self = self else { return }
@@ -103,7 +103,7 @@ public class StreamWatcher: ObservableObject {
       }
     })
   }
-  
+
   private func rawEventToEvent(rawEvent: RawStreamEvent) -> (any StreamEvent)? {
     guard let payloadData = rawEvent.payload.data(using: .utf8) else {
       return nil

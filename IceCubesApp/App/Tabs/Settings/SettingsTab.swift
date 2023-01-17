@@ -1,11 +1,11 @@
+import Account
+import AppAccount
+import DesignSystem
+import Env
+import Models
+import Network
 import SwiftUI
 import Timeline
-import Env
-import Network
-import Account
-import Models
-import DesignSystem
-import AppAccount
 
 struct SettingsTabs: View {
   @EnvironmentObject private var pushNotifications: PushNotificationsService
@@ -14,13 +14,13 @@ struct SettingsTabs: View {
   @EnvironmentObject private var currentInstance: CurrentInstance
   @EnvironmentObject private var appAccountsManager: AppAccountsManager
   @EnvironmentObject private var theme: Theme
-  
+
   @StateObject private var routeurPath = RouterPath()
-  
+
   @State private var addAccountSheetPresented = false
-  
+
   @Binding var popToRootTab: Tab
-  
+
   var body: some View {
     NavigationStack(path: $routeurPath.path) {
       Form {
@@ -52,7 +52,7 @@ struct SettingsTabs: View {
       }
     }
   }
-  
+
   private var accountsSection: some View {
     Section("Accounts") {
       ForEach(appAccountsManager.availableAccounts) { account in
@@ -73,7 +73,7 @@ struct SettingsTabs: View {
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
-  
+
   @ViewBuilder
   private var generalSection: some View {
     Section("General") {
@@ -106,7 +106,7 @@ struct SettingsTabs: View {
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
-  
+
   private var appSection: some View {
     Section("App") {
       NavigationLink(destination: IconSelectorView()) {
@@ -121,19 +121,19 @@ struct SettingsTabs: View {
           }
         }
       }
-      
+
       Link(destination: URL(string: "https://github.com/Dimillian/IceCubesApp")!) {
         Label("Source (GitHub link)", systemImage: "link")
       }
       .tint(theme.labelColor)
-      
+
       NavigationLink(destination: SupportAppView()) {
         Label("Support the app", systemImage: "wand.and.stars")
       }
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
-  
+
   private var addAccountButton: some View {
     Button {
       addAccountSheetPresented.toggle()
@@ -144,7 +144,7 @@ struct SettingsTabs: View {
       AddAccountView()
     }
   }
-  
+
   private var remoteLocalTimelinesView: some View {
     Form {
       ForEach(preferences.remoteLocalTimelines, id: \.self) { server in

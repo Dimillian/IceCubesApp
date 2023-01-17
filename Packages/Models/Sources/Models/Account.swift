@@ -1,21 +1,20 @@
 import Foundation
 
 public struct Account: Codable, Identifiable, Equatable, Hashable {
-  
   public func hash(into hasher: inout Hasher) {
     hasher.combine(id)
   }
-  
+
   public struct Field: Codable, Equatable, Identifiable {
     public var id: String {
       value + name
     }
-    
+
     public let name: String
     public let value: HTMLString
     public let verifiedAt: String?
   }
-  
+
   public struct Source: Codable, Equatable {
     public let privacy: Visibility
     public let sensitive: Bool
@@ -23,7 +22,7 @@ public struct Account: Codable, Identifiable, Equatable, Hashable {
     public let note: String
     public let fields: [Field]
   }
-  
+
   public let id: String
   public let username: String
   public let displayName: String
@@ -43,7 +42,7 @@ public struct Account: Codable, Identifiable, Equatable, Hashable {
   public let source: Source?
   public let bot: Bool
   public let discoverable: Bool?
-  
+
   public static func placeholder() -> Account {
     .init(id: UUID().uuidString,
           username: "Username",
@@ -65,7 +64,7 @@ public struct Account: Codable, Identifiable, Equatable, Hashable {
           bot: false,
           discoverable: true)
   }
-  
+
   public static func placeholders() -> [Account] {
     [.placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(),
      .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder()]

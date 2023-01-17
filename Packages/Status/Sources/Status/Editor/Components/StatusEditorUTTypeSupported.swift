@@ -1,5 +1,5 @@
-import UIKit
 import Foundation
+import UIKit
 
 @MainActor
 enum StatusEditorUTTypeSupported: String, CaseIterable {
@@ -9,14 +9,15 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
   case image = "public.image"
   case jpeg = "public.jpeg"
   case png = "public.png"
-  
+
   func loadItemContent(item: NSItemProvider) async throws -> Any? {
     let result = try await item.loadItem(forTypeIdentifier: rawValue)
     if self == .jpeg || self == .png,
-        let imageURL = result as? URL,
-        let data = try? Data(contentsOf: imageURL),
-        let image = UIImage(data: data) {
-     return image
+       let imageURL = result as? URL,
+       let data = try? Data(contentsOf: imageURL),
+       let image = UIImage(data: data)
+    {
+      return image
     }
     if let url = result as? URL {
       return url.absoluteString

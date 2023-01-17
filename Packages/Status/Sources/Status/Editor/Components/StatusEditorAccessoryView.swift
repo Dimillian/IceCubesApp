@@ -1,21 +1,21 @@
-import SwiftUI
 import DesignSystem
-import PhotosUI
-import Models
 import Env
+import Models
+import PhotosUI
+import SwiftUI
 
 struct StatusEditorAccessoryView: View {
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var currentInstance: CurrentInstance
-  
+
   @FocusState<Bool>.Binding var isSpoilerTextFocused: Bool
   @ObservedObject var viewModel: StatusEditorViewModel
-  
+
   @State private var isDrafsSheetDisplayed: Bool = false
   @State private var isLanguageSheetDisplayed: Bool = false
   @State private var languageSearch: String = ""
-  
+
   var body: some View {
     VStack(spacing: 0) {
       Divider()
@@ -25,7 +25,7 @@ struct StatusEditorAccessoryView: View {
           Image(systemName: "photo.fill.on.rectangle.fill")
         }
         .disabled(viewModel.showPoll)
-        
+
         Button {
           withAnimation {
             viewModel.showPoll.toggle()
@@ -34,16 +34,16 @@ struct StatusEditorAccessoryView: View {
           Image(systemName: "chart.bar")
         }
         .disabled(viewModel.shouldDisablePollButton)
-        
+
         Button {
           withAnimation {
             viewModel.spoilerOn.toggle()
           }
           isSpoilerTextFocused.toggle()
         } label: {
-          Image(systemName: viewModel.spoilerOn ? "exclamationmark.triangle.fill": "exclamationmark.triangle")
+          Image(systemName: viewModel.spoilerOn ? "exclamationmark.triangle.fill" : "exclamationmark.triangle")
         }
-        
+
         if !viewModel.mode.isInShareExtension {
           Button {
             isDrafsSheetDisplayed = true
@@ -61,9 +61,9 @@ struct StatusEditorAccessoryView: View {
             Image(systemName: "globe")
           }
         }
-        
+
         Spacer()
-        
+
         characterCountView
       }
       .frame(height: 20)
@@ -81,7 +81,7 @@ struct StatusEditorAccessoryView: View {
       viewModel.setInitialLanguageSelection(preference: preferences.serverPreferences?.postLanguage)
     }
   }
-  
+
   @ViewBuilder
   private func languageTextView(isoCode: String, nativeName: String?, name: String?) -> some View {
     if let nativeName = nativeName, let name = name {
@@ -90,11 +90,11 @@ struct StatusEditorAccessoryView: View {
       Text(isoCode.uppercased())
     }
   }
-  
+
   private var languageSheetView: some View {
     NavigationStack {
       List {
-        ForEach(availableLanguages, id: \.0) { (isoCode, nativeName, name) in
+        ForEach(availableLanguages, id: \.0) { isoCode, nativeName, name in
           HStack {
             languageTextView(isoCode: isoCode, nativeName: nativeName, name: name)
               .tag(isoCode)
@@ -123,7 +123,7 @@ struct StatusEditorAccessoryView: View {
       .background(theme.secondaryBackgroundColor)
     }
   }
-  
+
   private var draftsSheetView: some View {
     NavigationStack {
       List {
@@ -154,14 +154,13 @@ struct StatusEditorAccessoryView: View {
     }
     .presentationDetents([.medium])
   }
-  
-  
+
   private var characterCountView: some View {
     Text("\((currentInstance.instance?.configuration.statuses.maxCharacters ?? 500) - viewModel.statusText.string.utf16.count)")
       .foregroundColor(.gray)
       .font(.callout)
   }
-  
+
   private var availableLanguages: [(String, String?, String?)] {
     Locale.LanguageCode.isoLanguageCodes
       .filter { $0.identifier.count == 2 } // Mastodon only supports ISO 639-1 (two-letter) codes
@@ -173,7 +172,7 @@ struct StatusEditorAccessoryView: View {
           Locale.current.localizedString(forLanguageCode: lang.identifier)
         )
       }
-      .filter { (identifier, nativeLocale, locale) in
+      .filter { _, nativeLocale, _ in
         guard !languageSearch.isEmpty else {
           return true
         }

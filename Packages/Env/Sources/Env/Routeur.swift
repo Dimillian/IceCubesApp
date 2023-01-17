@@ -1,7 +1,7 @@
 import Foundation
-import SwiftUI
 import Models
 import Network
+import SwiftUI
 
 public enum RouteurDestinations: Hashable {
   case accountDetail(id: String)
@@ -26,7 +26,7 @@ public enum SheetDestinations: Identifiable {
   case listAddAccount(account: Account)
   case addAccount
   case addRemoteLocalTimeline
-  
+
   public var id: String {
     switch self {
     case .editStatusEditor, .newStatusEditor, .replyToStatusEditor, .quoteStatusEditor, .mentionStatusEditor:
@@ -47,19 +47,20 @@ public enum SheetDestinations: Identifiable {
 public class RouterPath: ObservableObject {
   public var client: Client?
   public var urlHandler: ((URL) -> OpenURLAction.Result)?
-  
+
   @Published public var path: [RouteurDestinations] = []
   @Published public var presentedSheet: SheetDestinations?
-  
+
   public init() {}
-  
+
   public func navigate(to: RouteurDestinations) {
     path.append(to)
   }
-  
+
   public func handleStatus(status: AnyStatus, url: URL) -> OpenURLAction.Result {
     if url.pathComponents.contains(where: { $0 == "tags" }),
-        let tag = url.pathComponents.last {
+       let tag = url.pathComponents.last
+    {
       navigate(to: .hashTag(tag: tag, account: nil))
       return .handled
     } else if let mention = status.mentions.first(where: { $0.url == url }) {
@@ -68,7 +69,8 @@ public class RouterPath: ObservableObject {
     } else if let client = client,
               client.isAuth,
               client.hasConnection(with: url),
-              let id = Int(url.lastPathComponent) {
+              let id = Int(url.lastPathComponent)
+    {
       if url.absoluteString.contains(client.server) {
         navigate(to: .statusDetail(id: String(id)))
       } else {
@@ -78,10 +80,11 @@ public class RouterPath: ObservableObject {
     }
     return urlHandler?(url) ?? .systemAction
   }
-  
+
   public func handle(url: URL) -> OpenURLAction.Result {
     if url.pathComponents.contains(where: { $0 == "tags" }),
-        let tag = url.pathComponents.last {
+       let tag = url.pathComponents.last
+    {
       navigate(to: .hashTag(tag: tag, account: nil))
       return .handled
     } else if url.lastPathComponent.first == "@", let host = url.host {
@@ -93,7 +96,7 @@ public class RouterPath: ObservableObject {
     }
     return urlHandler?(url) ?? .systemAction
   }
-    
+
   public func navigateToAccountFrom(acct: String, url: URL) async {
     guard let client else { return }
     Task {
@@ -109,7 +112,7 @@ public class RouterPath: ObservableObject {
       }
     }
   }
-  
+
   public func navigateToAccountFrom(url: URL) async {
     guard let client else { return }
     Task {

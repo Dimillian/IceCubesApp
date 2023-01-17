@@ -4,7 +4,7 @@ public enum Conversations: Endpoint {
   case conversations
   case delete(id: String)
   case read(id: String)
-  
+
   public func path() -> String {
     switch self {
     case .conversations:
@@ -15,7 +15,7 @@ public enum Conversations: Endpoint {
       return "conversations/\(id)/read"
     }
   }
-  
+
   public func queryItems() -> [URLQueryItem]? {
     return nil
   }

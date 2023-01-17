@@ -1,15 +1,15 @@
 import Models
 import UIKit
 
-extension StatusEditorViewModel {
-  public enum Mode {
+public extension StatusEditorViewModel {
+  enum Mode {
     case replyTo(status: Status)
     case new(vivibilty: Visibility)
     case edit(status: Status)
     case quote(status: Status)
     case mention(account: Account, visibility: Visibility)
     case shareExtension(items: [NSItemProvider])
-    
+
     var isInShareExtension: Bool {
       switch self {
       case .shareExtension:
@@ -18,7 +18,7 @@ extension StatusEditorViewModel {
         return false
       }
     }
-    
+
     var isEditing: Bool {
       switch self {
       case .edit:
@@ -27,16 +27,16 @@ extension StatusEditorViewModel {
         return false
       }
     }
-    
+
     var replyToStatus: Status? {
       switch self {
-        case let .replyTo(status):
-          return status
-        default:
-          return nil
+      case let .replyTo(status):
+        return status
+      default:
+        return nil
       }
     }
-    
+
     var title: String {
       switch self {
       case .new, .mention, .shareExtension:

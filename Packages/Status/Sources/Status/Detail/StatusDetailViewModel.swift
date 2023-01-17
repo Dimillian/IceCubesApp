@@ -1,34 +1,34 @@
 import Foundation
-import SwiftUI
 import Models
 import Network
+import SwiftUI
 
 @MainActor
 class StatusDetailViewModel: ObservableObject {
   public var statusId: String?
   public var remoteStatusURL: URL?
-  
+
   var client: Client?
-  
+
   enum State {
     case loading, display(status: Status, context: StatusContext), error(error: Error)
   }
-  
+
   @Published var state: State = .loading
   @Published var title: String = ""
-    
+
   init(statusId: String) {
     state = .loading
     self.statusId = statusId
-    self.remoteStatusURL = nil
+    remoteStatusURL = nil
   }
-  
+
   init(remoteStatusURL: URL) {
     state = .loading
     self.remoteStatusURL = remoteStatusURL
-    self.statusId = nil
+    statusId = nil
   }
-  
+
   func fetch() async -> Bool {
     if statusId != nil {
       await fetchStatusDetail()
@@ -38,11 +38,11 @@ class StatusDetailViewModel: ObservableObject {
     }
     return false
   }
-  
+
   private func fetchRemoteStatus() async -> Bool {
     guard let client, let remoteStatusURL else { return false }
     let results: SearchResults? = try? await client.get(endpoint: Search.search(query: remoteStatusURL.absoluteString,
-                                                                                 type: "statuses",
+                                                                                type: "statuses",
                                                                                 offset: nil,
                                                                                 following: nil),
                                                         forceVersion: .v2)
@@ -54,7 +54,7 @@ class StatusDetailViewModel: ObservableObject {
       return false
     }
   }
-  
+
   private func fetchStatusDetail() async {
     guard let client, let statusId else { return }
     do {
@@ -66,11 +66,11 @@ class StatusDetailViewModel: ObservableObject {
       state = .error(error: error)
     }
   }
-  
-  
+
   func handleEvent(event: any StreamEvent, currentAccount: Account?) {
     if let event = event as? StreamEventUpdate,
-       event.status.account.id == currentAccount?.id {
+       event.status.account.id == currentAccount?.id
+    {
       Task {
         await fetchStatusDetail()
       }

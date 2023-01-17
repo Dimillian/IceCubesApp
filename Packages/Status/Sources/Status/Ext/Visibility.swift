@@ -1,11 +1,11 @@
 import Models
 
-extension Visibility {
-  public static var supportDefault: [Visibility] {
+public extension Visibility {
+  static var supportDefault: [Visibility] {
     [.pub, .priv, .unlisted]
   }
-  
-  public var iconName: String {
+
+  var iconName: String {
     switch self {
     case .pub:
       return "globe.americas"
@@ -17,8 +17,8 @@ extension Visibility {
       return "tray.full"
     }
   }
-  
-  public var title: String {
+
+  var title: String {
     switch self {
     case .pub:
       return "Everyone"

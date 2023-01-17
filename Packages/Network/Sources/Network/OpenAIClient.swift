@@ -1,8 +1,8 @@
 import Foundation
 
 public struct OpenAIClient {
-  private let endpoint: URL = URL(string: "https://api.openai.com/v1/completions")!
-  
+  private let endpoint: URL = .init(string: "https://api.openai.com/v1/completions")!
+
   private var APIKey: String {
     if let path = Bundle.main.path(forResource: "Secret", ofType: "plist") {
       let secret = NSDictionary(contentsOfFile: path)
@@ -10,23 +10,23 @@ public struct OpenAIClient {
     }
     return ""
   }
-  
+
   private var authorizationHeaderValue: String {
     "Bearer \(APIKey)"
   }
-  
+
   private var encoder: JSONEncoder {
     let encoder = JSONEncoder()
     encoder.keyEncodingStrategy = .convertToSnakeCase
     return encoder
   }
-  
+
   private var decoder: JSONDecoder {
     let decoder = JSONDecoder()
     decoder.keyDecodingStrategy = .convertFromSnakeCase
     return decoder
   }
-  
+
   public struct Request: Encodable {
     let model = "text-davinci-003"
     let topP: Int = 1
@@ -35,19 +35,19 @@ public struct OpenAIClient {
     let prompt: String
     let temperature: Double
     let maxTokens: Int
-    
+
     public init(prompt: String, temperature: Double, maxTokens: Int) {
       self.prompt = prompt
       self.temperature = temperature
       self.maxTokens = maxTokens
     }
   }
-  
+
   public enum Prompts {
     case correct(input: String)
     case shorten(input: String)
     case emphasize(input: String)
-    
+
     var request: Request {
       switch self {
       case let .correct(input):
@@ -65,20 +65,20 @@ public struct OpenAIClient {
       }
     }
   }
-  
+
   public struct Response: Decodable {
     public struct Choice: Decodable {
       public let text: String
     }
-    
+
     public let id: String
     public let object: String
     public let model: String
     public let choices: [Choice]
   }
-  
-  public init() { }
-  
+
+  public init() {}
+
   public func request(_ prompt: Prompts) async throws -> Response {
     do {
       let jsonData = try encoder.encode(prompt.request)
@@ -90,7 +90,7 @@ public struct OpenAIClient {
       let (result, _) = try await URLSession.shared.data(for: request)
       let response = try decoder.decode(Response.self, from: result)
       return response
-    } catch let error {
+    } catch {
       throw error
     }
   }

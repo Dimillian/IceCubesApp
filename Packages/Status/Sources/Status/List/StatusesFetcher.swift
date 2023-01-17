@@ -1,10 +1,11 @@
-import SwiftUI
 import Models
+import SwiftUI
 
 public enum StatusesState {
   public enum PagingState {
     case hasNextPage, loadingNextPage, none
   }
+
   case loading
   case display(statuses: [Status], nextPageState: StatusesState.PagingState)
   case error(error: Error)

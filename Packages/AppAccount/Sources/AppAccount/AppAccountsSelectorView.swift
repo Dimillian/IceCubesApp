@@ -1,26 +1,27 @@
-import SwiftUI
-import Env
 import DesignSystem
+import Env
+import SwiftUI
 
 public struct AppAccountsSelectorView: View {
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var appAccounts: AppAccountsManager
-  
+
   @ObservedObject var routeurPath: RouterPath
-  
+
   @State private var accountsViewModel: [AppAccountViewModel] = []
-  
+
   private let accountCreationEnabled: Bool
   private let avatarSize: AvatarView.Size
-  
+
   public init(routeurPath: RouterPath,
               accountCreationEnabled: Bool = true,
-              avatarSize: AvatarView.Size = .badge) {
+              avatarSize: AvatarView.Size = .badge)
+  {
     self.routeurPath = routeurPath
     self.accountCreationEnabled = accountCreationEnabled
     self.avatarSize = avatarSize
   }
-  
+
   public var body: some View {
     Group {
       if UIDevice.current.userInterfaceIdiom == .pad {
@@ -43,7 +44,7 @@ public struct AppAccountsSelectorView: View {
       refreshAccounts()
     }
   }
-  
+
   @ViewBuilder
   private var labelView: some View {
     if let avatar = currentAccount.account?.avatar {
@@ -52,14 +53,15 @@ public struct AppAccountsSelectorView: View {
       EmptyView()
     }
   }
-  
+
   @ViewBuilder
   private var menuView: some View {
     ForEach(accountsViewModel, id: \.appAccount.id) { viewModel in
       Section(viewModel.acct) {
         Button {
           if let account = currentAccount.account,
-              viewModel.account?.id == account.id {
+             viewModel.account?.id == account.id
+          {
             routeurPath.navigate(to: .accountDetailWithAccount(account: account))
           } else {
             appAccounts.currentAccount = viewModel.appAccount
@@ -83,7 +85,7 @@ public struct AppAccountsSelectorView: View {
       }
     }
   }
-  
+
   private func refreshAccounts() {
     if accountsViewModel.isEmpty || appAccounts.availableAccounts.count != accountsViewModel.count {
       accountsViewModel = []
@@ -98,5 +100,4 @@ public struct AppAccountsSelectorView: View {
       }
     }
   }
-  
 }

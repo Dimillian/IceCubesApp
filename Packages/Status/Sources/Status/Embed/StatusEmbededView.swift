@@ -1,18 +1,18 @@
-import SwiftUI
-import Models
 import DesignSystem
 import EmojiText
+import Models
+import SwiftUI
 
 @MainActor
 public struct StatusEmbededView: View {
   @EnvironmentObject private var theme: Theme
-  
+
   public let status: Status
-  
+
   public init(status: Status) {
     self.status = status
   }
-  
+
   public var body: some View {
     HStack {
       VStack(alignment: .leading) {
@@ -30,7 +30,7 @@ public struct StatusEmbededView: View {
     )
     .padding(.top, 8)
   }
-  
+
   private func makeAccountView(account: Account) -> some View {
     HStack(alignment: .center) {
       AvatarView(url: account.avatar, size: .embed)
@@ -40,8 +40,8 @@ public struct StatusEmbededView: View {
           .fontWeight(.semibold)
         Group {
           Text("@\(account.acct)") +
-          Text(" ⸱ ") +
-          Text(status.reblog?.createdAt.formatted ?? status.createdAt.formatted)
+            Text(" ⸱ ") +
+            Text(status.reblog?.createdAt.formatted ?? status.createdAt.formatted)
         }
         .font(.caption)
         .foregroundColor(.gray)

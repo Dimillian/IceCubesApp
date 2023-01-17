@@ -11,14 +11,15 @@ let package = Package(
   products: [
     .library(
       name: "DesignSystem",
-      targets: ["DesignSystem"]),
+      targets: ["DesignSystem"]
+    ),
   ],
   dependencies: [
     .package(name: "Models", path: "../Models"),
     .package(name: "Env", path: "../Env"),
     .package(url: "https://github.com/markiv/SwiftUI-Shimmer", exact: "1.1.0"),
     .package(url: "https://github.com/kean/Nuke", from: "11.5.0"),
-    .package(url: "https://github.com/divadretlaw/EmojiText", from: "1.1.0")
+    .package(url: "https://github.com/divadretlaw/EmojiText", from: "1.1.0"),
   ],
   targets: [
     .target(
@@ -29,8 +30,8 @@ let package = Package(
         .product(name: "Shimmer", package: "SwiftUI-Shimmer"),
         .product(name: "NukeUI", package: "Nuke"),
         .product(name: "Nuke", package: "Nuke"),
-        .product(name: "EmojiText", package: "EmojiText")
-      ]),
+        .product(name: "EmojiText", package: "EmojiText"),
+      ]
+    ),
   ]
 )
-

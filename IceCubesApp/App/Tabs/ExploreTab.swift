@@ -1,11 +1,10 @@
-import SwiftUI
-import Env
-import Models
-import Shimmer
-import Explore
-import Env
-import Network
 import AppAccount
+import Env
+import Explore
+import Models
+import Network
+import Shimmer
+import SwiftUI
 
 struct ExploreTab: View {
   @EnvironmentObject private var preferences: UserPreferences
@@ -13,7 +12,7 @@ struct ExploreTab: View {
   @EnvironmentObject private var client: Client
   @StateObject private var routeurPath = RouterPath()
   @Binding var popToRootTab: Tab
-  
+
   var body: some View {
     NavigationStack(path: $routeurPath.path) {
       ExploreView()

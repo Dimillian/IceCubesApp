@@ -16,28 +16,28 @@ public enum Statuses: Endpoint {
   case unpin(id: String)
   case bookmark(id: String)
   case unbookmark(id: String)
-  
+
   public func path() -> String {
     switch self {
     case .postStatus:
       return "statuses"
-    case .status(let id):
+    case let .status(id):
       return "statuses/\(id)"
-    case .editStatus(let id, _):
+    case let .editStatus(id, _):
       return "statuses/\(id)"
-    case .context(let id):
+    case let .context(id):
       return "statuses/\(id)/context"
-    case .favourite(let id):
+    case let .favourite(id):
       return "statuses/\(id)/favourite"
-    case .unfavourite(let id):
+    case let .unfavourite(id):
       return "statuses/\(id)/unfavourite"
-    case .reblog(let id):
+    case let .reblog(id):
       return "statuses/\(id)/reblog"
-    case .unreblog(let id):
+    case let .unreblog(id):
       return "statuses/\(id)/unreblog"
-    case .rebloggedBy(let id, _):
+    case let .rebloggedBy(id, _):
       return "statuses/\(id)/reblogged_by"
-    case .favouritedBy(let id, _):
+    case let .favouritedBy(id, _):
       return "statuses/\(id)/favourited_by"
     case let .pin(id):
       return "statuses/\(id)/pin"
@@ -49,7 +49,7 @@ public enum Statuses: Endpoint {
       return "statuses/\(id)/unbookmark"
     }
   }
-  
+
   public func queryItems() -> [URLQueryItem]? {
     switch self {
     case let .rebloggedBy(_, maxId):
@@ -60,7 +60,7 @@ public enum Statuses: Endpoint {
       return nil
     }
   }
-  
+
   public var jsonValue: Encodable? {
     switch self {
     case let .postStatus(json):
@@ -86,21 +86,22 @@ public struct StatusData: Encodable {
     public let options: [String]
     public let multiple: Bool
     public let expires_in: Int
-    
+
     public init(options: [String], multiple: Bool, expires_in: Int) {
       self.options = options
       self.multiple = multiple
       self.expires_in = expires_in
     }
   }
-  
+
   public init(status: String,
               visibility: Visibility,
               inReplyToId: String? = nil,
               spoilerText: String? = nil,
               mediaIds: [String]? = nil,
               poll: PollData? = nil,
-              language: String? = nil) {
+              language: String? = nil)
+  {
     self.status = status
     self.visibility = visibility
     self.inReplyToId = inReplyToId

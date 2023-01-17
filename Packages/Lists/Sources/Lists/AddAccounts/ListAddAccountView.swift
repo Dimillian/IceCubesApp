@@ -1,8 +1,8 @@
-import SwiftUI
-import Network
 import DesignSystem
 import Env
 import Models
+import Network
+import SwiftUI
 
 public struct ListAddAccountView: View {
   @Environment(\.dismiss) private var dismiss
@@ -10,15 +10,14 @@ public struct ListAddAccountView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var currentAccount: CurrentAccount
   @StateObject private var viewModel: ListAddAccountViewModel
-  
+
   @State private var isCreateListAlertPresented: Bool = false
   @State private var createListTitle: String = ""
-  
-  
+
   public init(account: Account) {
     _viewModel = StateObject(wrappedValue: .init(account: account))
   }
-  
+
   public var body: some View {
     NavigationStack {
       List {

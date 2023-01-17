@@ -1,15 +1,15 @@
+import Env
 import Foundation
 import SwiftUI
-import Env
 
 struct StatusRowContextMenu: View {
   @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var routeurPath: RouterPath
-    
+
   @Environment(\.openURL) var openURL
-    
+
   @ObservedObject var viewModel: StatusRowViewModel
-  
+
   var body: some View {
     if !viewModel.isRemote {
       Button { Task {
@@ -46,7 +46,7 @@ struct StatusRowContextMenu: View {
         Label("Reply", systemImage: "arrowshape.turn.up.left")
       }
     }
-    
+
     if viewModel.status.visibility == .pub, !viewModel.isRemote {
       Button {
         routeurPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
@@ -54,21 +54,21 @@ struct StatusRowContextMenu: View {
         Label("Quote this post", systemImage: "quote.bubble")
       }
     }
-      
+
     Divider()
-    
+
     if let url = viewModel.status.reblog?.url ?? viewModel.status.url {
-        ShareLink(item: url) {
-            Label("Share this post", systemImage: "square.and.arrow.up")
-        }
+      ShareLink(item: url) {
+        Label("Share this post", systemImage: "square.and.arrow.up")
+      }
     }
-      
+
     if let url = viewModel.status.reblog?.url ?? viewModel.status.url {
       Button { openURL(url) } label: {
         Label("View in Browser", systemImage: "safari")
       }
     }
-    
+
     Button {
       UIPasteboard.general.string = viewModel.status.content.asRawText
     } label: {
@@ -86,7 +86,7 @@ struct StatusRowContextMenu: View {
             }
           }
         } label: {
-          Label(viewModel.isPinned ? "Unpin": "Pin", systemImage: viewModel.isPinned ? "pin.fill" : "pin")
+          Label(viewModel.isPinned ? "Unpin" : "Pin", systemImage: viewModel.isPinned ? "pin.fill" : "pin")
         }
         Button {
           routeurPath.presentedSheet = .editStatusEditor(status: viewModel.status)

@@ -1,6 +1,6 @@
 import Foundation
 
-public struct AppInfo {
+public enum AppInfo {
   public static let clientName = "IceCubesApp"
   public static let scheme = "icecubesapp://"
   public static let scopes = "read write follow push"

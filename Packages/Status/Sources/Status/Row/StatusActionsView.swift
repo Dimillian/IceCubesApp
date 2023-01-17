@@ -1,21 +1,21 @@
-import SwiftUI
-import Models
-import Env
-import Network
 import DesignSystem
+import Env
+import Models
+import Network
+import SwiftUI
 
 struct StatusActionsView: View {
   @Environment(\.openURL) private var openURL
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var routeurPath: RouterPath
   @ObservedObject var viewModel: StatusRowViewModel
-  
+
   let generator = UINotificationFeedbackGenerator()
-  
+
   @MainActor
   enum Actions: CaseIterable {
     case respond, boost, favourite, bookmark, share
-    
+
     func iconName(viewModel: StatusRowViewModel) -> String {
       switch self {
       case .respond:
@@ -30,7 +30,7 @@ struct StatusActionsView: View {
         return "square.and.arrow.up"
       }
     }
-    
+
     func count(viewModel: StatusRowViewModel, theme: Theme) -> Int? {
       if theme.statusActionsDisplay == .discret {
         return nil
@@ -46,7 +46,7 @@ struct StatusActionsView: View {
         return nil
       }
     }
-    
+
     func tintColor(viewModel: StatusRowViewModel, theme: Theme) -> Color? {
       switch self {
       case .respond, .share:
@@ -60,7 +60,7 @@ struct StatusActionsView: View {
       }
     }
   }
-  
+
   var body: some View {
     VStack(spacing: 12) {
       HStack {
@@ -95,15 +95,15 @@ struct StatusActionsView: View {
       }
     }
   }
-  
+
   @ViewBuilder
   private var summaryView: some View {
     Divider()
     HStack {
       Text(viewModel.status.createdAt.asDate, style: .date) +
-      Text(" at ") +
-      Text(viewModel.status.createdAt.asDate, style: .time) +
-      Text("   ·")
+        Text(" at ") +
+        Text(viewModel.status.createdAt.asDate, style: .time) +
+        Text("   ·")
       Image(systemName: viewModel.status.visibility.iconName)
       Spacer()
       Text(viewModel.status.application?.name ?? "")
@@ -116,7 +116,7 @@ struct StatusActionsView: View {
     }
     .font(.caption)
     .foregroundColor(.gray)
-    
+
     if viewModel.favouritesCount > 0 {
       Divider()
       NavigationLink(value: RouteurDestinations.favouritedBy(id: viewModel.status.id)) {
@@ -136,7 +136,7 @@ struct StatusActionsView: View {
       }
     }
   }
-  
+
   private func handleAction(action: Actions) {
     Task {
       generator.notificationOccurred(.success)

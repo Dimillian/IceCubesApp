@@ -1,9 +1,9 @@
-import SwiftUI
 import DesignSystem
 import Env
 import Models
 import Network
 import PhotosUI
+import SwiftUI
 
 @MainActor
 public class StatusEditorViewModel: ObservableObject {
@@ -13,20 +13,21 @@ public class StatusEditorViewModel: ObservableObject {
     let mediaAttachement: MediaAttachement?
     let error: Error?
   }
-  
+
   var mode: Mode
   let generator = UINotificationFeedbackGenerator()
-  
+
   var client: Client?
   var currentAccount: Account?
   var theme: Theme?
-  
+
   @Published var statusText = NSMutableAttributedString(string: "") {
     didSet {
       processText()
       checkEmbed()
     }
   }
+
   @Published var backupStatustext: NSAttributedString?
 
   @Published var showPoll: Bool = false
@@ -36,18 +37,19 @@ public class StatusEditorViewModel: ObservableObject {
 
   @Published var spoilerOn: Bool = false
   @Published var spoilerText: String = ""
-  
+
   @Published var selectedRange: NSRange = .init(location: 0, length: 0)
-  
+
   @Published var isPosting: Bool = false
   @Published var selectedMedias: [PhotosPickerItem] = [] {
     didSet {
       if selectedMedias.count > 4 {
-        selectedMedias = selectedMedias.prefix(4).map{ $0 }
+        selectedMedias = selectedMedias.prefix(4).map { $0 }
       }
       inflateSelectedMedias()
     }
   }
+
   @Published var mediasImages: [ImageContainer] = []
   @Published var replyToStatus: Status?
   @Published var embededStatus: Status?
@@ -58,31 +60,31 @@ public class StatusEditorViewModel: ObservableObject {
   var shouldDisablePollButton: Bool {
     showPoll || !selectedMedias.isEmpty
   }
-  
+
   @Published var visibility: Models.Visibility = .pub
-  
+
   @Published var mentionsSuggestions: [Account] = []
   @Published var tagsSuggestions: [Tag] = []
   @Published var selectedLanguage: String?
   private var currentSuggestionRange: NSRange?
-  
+
   private var embededStatusURL: URL? {
     return embededStatus?.reblog?.url ?? embededStatus?.url
   }
-  
+
   private var uploadTask: Task<Void, Never>?
-    
+
   init(mode: Mode) {
     self.mode = mode
   }
-  
+
   func insertStatusText(text: String) {
     let string = statusText
     string.mutableString.insert(text, at: selectedRange.location)
     statusText = string
     selectedRange = NSRange(location: selectedRange.location + text.utf16.count, length: 0)
   }
-  
+
   func replaceTextWith(text: String, inRange: NSRange) {
     let string = statusText
     string.mutableString.deleteCharacters(in: inRange)
@@ -90,20 +92,20 @@ public class StatusEditorViewModel: ObservableObject {
     statusText = string
     selectedRange = NSRange(location: inRange.location + text.utf16.count, length: 0)
   }
-  
+
   func replaceTextWith(text: String) {
     statusText = .init(string: text)
     selectedRange = .init(location: text.utf16.count, length: 0)
   }
-  
+
   func setInitialLanguageSelection(preference: String?) {
     switch mode {
-    case .replyTo(let status), .edit(let status):
+    case let .replyTo(status), let .edit(status):
       selectedLanguage = status.language
     default:
       break
     }
-    
+
     selectedLanguage = selectedLanguage ?? preference ?? currentAccount?.source?.language
   }
 
@@ -111,7 +113,7 @@ public class StatusEditorViewModel: ObservableObject {
     let options = pollOptions.filter { !$0.trimmingCharacters(in: .whitespaces).isEmpty }
     return options.isEmpty ? nil : options
   }
-  
+
   func postStatus() async -> Status? {
     guard let client else { return nil }
     do {
@@ -127,7 +129,7 @@ public class StatusEditorViewModel: ObservableObject {
                             visibility: visibility,
                             inReplyToId: mode.replyToStatus?.id,
                             spoilerText: spoilerOn ? spoilerText : nil,
-                            mediaIds: mediasImages.compactMap{ $0.mediaAttachement?.id },
+                            mediaIds: mediasImages.compactMap { $0.mediaAttachement?.id },
                             poll: pollData,
                             language: selectedLanguage)
       switch mode {
@@ -145,14 +147,14 @@ public class StatusEditorViewModel: ObservableObject {
       return nil
     }
   }
-  
+
   func prepareStatusText() {
     switch mode {
     case let .new(visibility):
       self.visibility = visibility
     case let .shareExtension(items):
-      self.visibility = .pub
-      self.processItemsProvider(items: items)
+      visibility = .pub
+      processItemsProvider(items: items)
     case let .replyTo(status):
       var mentionString = ""
       if (status.reblog?.account.acct ?? status.account.acct) != currentAccount?.acct {
@@ -183,19 +185,19 @@ public class StatusEditorViewModel: ObservableObject {
       spoilerOn = !status.spoilerText.isEmpty
       spoilerText = status.spoilerText
       visibility = status.visibility
-      mediasImages = status.mediaAttachments.map{ .init(image: nil, mediaAttachement: $0, error: nil )}
+      mediasImages = status.mediaAttachments.map { .init(image: nil, mediaAttachement: $0, error: nil) }
     case let .quote(status):
-      self.embededStatus = status
+      embededStatus = status
       if let url = embededStatusURL {
         statusText = .init(string: "\n\nFrom: @\(status.reblog?.account.acct ?? status.account.acct)\n\(url)")
         selectedRange = .init(location: 0, length: 0)
       }
     }
   }
-  
+
   private func processText() {
     statusText.addAttributes([.foregroundColor: UIColor(Color.label)],
-                                range: NSMakeRange(0, statusText.string.utf16.count))
+                             range: NSMakeRange(0, statusText.string.utf16.count))
     let hashtagPattern = "(#+[a-zA-Z0-9(_)]{1,})"
     let mentionPattern = "(@+[a-zA-Z0-9(_).-]{1,})"
     let urlPattern = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)"
@@ -204,44 +206,45 @@ public class StatusEditorViewModel: ObservableObject {
       let hashtagRegex = try NSRegularExpression(pattern: hashtagPattern, options: [])
       let mentionRegex = try NSRegularExpression(pattern: mentionPattern, options: [])
       let urlRegex = try NSRegularExpression(pattern: urlPattern, options: [])
-      
+
       let range = NSMakeRange(0, statusText.string.utf16.count)
       var ranges = hashtagRegex.matches(in: statusText.string,
-                                    options: [],
-                                    range: range).map { $0.range }
+                                        options: [],
+                                        range: range).map { $0.range }
       ranges.append(contentsOf: mentionRegex.matches(in: statusText.string,
                                                      options: [],
-                                                     range: range).map {$0.range})
-      
+                                                     range: range).map { $0.range })
+
       let urlRanges = urlRegex.matches(in: statusText.string,
                                        options: [],
-                                       range:range).map { $0.range }
+                                       range: range).map { $0.range }
 
-      var foundSuggestionRange: Bool = false
+      var foundSuggestionRange = false
       for nsRange in ranges {
         statusText.addAttributes([.foregroundColor: UIColor(theme?.tintColor ?? .brand)],
-                                   range: nsRange)
+                                 range: nsRange)
         if selectedRange.location == (nsRange.location + nsRange.length),
-           let range = Range(nsRange, in: statusText.string) {
+           let range = Range(nsRange, in: statusText.string)
+        {
           foundSuggestionRange = true
           currentSuggestionRange = nsRange
           loadAutoCompleteResults(query: String(statusText.string[range]))
         }
       }
-      
-      if !foundSuggestionRange || ranges.isEmpty{
+
+      if !foundSuggestionRange || ranges.isEmpty {
         resetAutoCompletion()
       }
-      
+
       for range in urlRanges {
         statusText.addAttributes([.foregroundColor: UIColor(theme?.tintColor ?? .brand),
-                                     .underlineStyle: NSUnderlineStyle.single,
+                                  .underlineStyle: NSUnderlineStyle.single,
                                   .underlineColor: UIColor(theme?.tintColor ?? .brand)],
-                                    range: NSRange(location: range.location, length: range.length))
+                                 range: NSRange(location: range.location, length: range.length))
       }
-      
+
       var attachementsToRemove: [NSRange] = []
-      statusText.enumerateAttribute(.attachment, in: range) { attachement, raneg, _ in
+      statusText.enumerateAttribute(.attachment, in: range) { attachement, _, _ in
         if let attachement = attachement as? NSTextAttachment, let image = attachement.image {
           attachementsToRemove.append(range)
           mediasImages.append(.init(image: image, mediaAttachement: nil, error: nil))
@@ -253,17 +256,16 @@ public class StatusEditorViewModel: ObservableObject {
           statusText.removeAttribute(.attachment, range: range)
         }
       }
-    } catch {
-      
-    }
+    } catch {}
   }
-  
+
   private func processItemsProvider(items: [NSItemProvider]) {
     Task {
       var initalText: String = ""
       for item in items {
         if let identifiter = item.registeredTypeIdentifiers.first,
-           let handledItemType = StatusEditorUTTypeSupported(rawValue: identifiter) {
+           let handledItemType = StatusEditorUTTypeSupported(rawValue: identifiter)
+        {
           do {
             let content = try await handledItemType.loadItemContent(item: item)
             if let text = content as? String {
@@ -271,7 +273,7 @@ public class StatusEditorViewModel: ObservableObject {
             } else if let image = content as? UIImage {
               mediasImages.append(.init(image: image, mediaAttachement: nil, error: nil))
             }
-          } catch { }
+          } catch {}
         }
       }
       if !initalText.isEmpty {
@@ -289,17 +291,18 @@ public class StatusEditorViewModel: ObservableObject {
     pollDuration = .oneDay
     pollVotingFrequency = .oneVote
   }
-  
+
   private func checkEmbed() {
     if let url = embededStatusURL,
-        !statusText.string.contains(url.absoluteString) {
-      self.embededStatus = nil
-      self.mode = .new(vivibilty: visibility)
+       !statusText.string.contains(url.absoluteString)
+    {
+      embededStatus = nil
+      mode = .new(vivibilty: visibility)
     }
   }
-  
+
   // MARK: - Autocomplete
-  
+
   private func loadAutoCompleteResults(query: String) {
     guard let client, query.utf8.count > 1 else { return }
     Task {
@@ -324,35 +327,33 @@ public class StatusEditorViewModel: ObservableObject {
           withAnimation {
             mentionsSuggestions = results?.accounts ?? []
           }
-          break
         default:
           break
         }
-      } catch {
-        
-      }
+      } catch {}
     }
   }
-  
+
   private func resetAutoCompletion() {
     tagsSuggestions = []
     mentionsSuggestions = []
     currentSuggestionRange = nil
   }
-  
+
   func selectMentionSuggestion(account: Account) {
     if let range = currentSuggestionRange {
       replaceTextWith(text: "@\(account.acct) ", inRange: range)
     }
   }
-  
+
   func selectHashtagSuggestion(tag: Tag) {
     if let range = currentSuggestionRange {
       replaceTextWith(text: "#\(tag.name) ", inRange: range)
     }
   }
-  
+
   // MARK: - OpenAI Prompt
+
   func runOpenAI(prompt: OpenAIClient.Prompts) async {
     do {
       let client = OpenAIClient()
@@ -363,24 +364,25 @@ public class StatusEditorViewModel: ObservableObject {
         backupStatustext = statusText
         replaceTextWith(text: text)
       }
-    } catch { }
+    } catch {}
   }
-  
+
   // MARK: - Media related function
-  
+
   private func indexOf(container: ImageContainer) -> Int? {
     mediasImages.firstIndex(where: { $0.id == container.id })
   }
-  
+
   func inflateSelectedMedias() {
-    self.mediasImages = []
-    
+    mediasImages = []
+
     Task {
       var medias: [ImageContainer] = []
       for media in selectedMedias {
         do {
           if let data = try await media.loadTransferable(type: Data.self),
-            let image = UIImage(data: data) {
+             let image = UIImage(data: data)
+          {
             medias.append(.init(image: image, mediaAttachement: nil, error: nil))
           }
         } catch {
@@ -393,7 +395,7 @@ public class StatusEditorViewModel: ObservableObject {
       }
     }
   }
-  
+
   private func processMediasToUpload() {
     uploadTask?.cancel()
     let mediasCopy = mediasImages
@@ -405,7 +407,7 @@ public class StatusEditorViewModel: ObservableObject {
       }
     }
   }
-  
+
   func upload(container: ImageContainer) async {
     if let index = indexOf(container: container) {
       let originalContainer = mediasImages[index]
@@ -427,7 +429,7 @@ public class StatusEditorViewModel: ObservableObject {
       }
     }
   }
-  
+
   func addDescription(container: ImageContainer, description: String) async {
     guard let client, let attachment = container.mediaAttachement else { return }
     if let index = indexOf(container: container) {
@@ -435,12 +437,10 @@ public class StatusEditorViewModel: ObservableObject {
         let media: MediaAttachement = try await client.put(endpoint: Media.media(id: attachment.id,
                                                                                  description: description))
         mediasImages[index] = .init(image: nil, mediaAttachement: media, error: nil)
-      } catch {
-        
-      }
+      } catch {}
     }
   }
-   
+
   private func uploadMedia(data: Data) async throws -> MediaAttachement? {
     guard let client else { return nil }
     return try await client.mediaUpload(endpoint: Media.medias,

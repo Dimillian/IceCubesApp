@@ -14,8 +14,8 @@ public struct Relationshionship: Codable {
   public let endorsed: Bool
   public let note: String
   public let notifying: Bool
-  
-  static public func placeholder() -> Relationshionship {
+
+  public static func placeholder() -> Relationshionship {
     .init(id: UUID().uuidString,
           following: false,
           showingReblogs: false,

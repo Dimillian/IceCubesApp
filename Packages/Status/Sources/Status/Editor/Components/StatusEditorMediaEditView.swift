@@ -1,16 +1,16 @@
-import SwiftUI
-import Models
 import DesignSystem
+import Models
 import Shimmer
+import SwiftUI
 
 struct StatusEditorMediaEditView: View {
   @Environment(\.dismiss) private var dismiss
   @EnvironmentObject private var theme: Theme
   @ObservedObject var viewModel: StatusEditorViewModel
   let container: StatusEditorViewModel.ImageContainer
-  
+
   @State private var imageDescription: String = ""
-  
+
   var body: some View {
     NavigationStack {
       Form {
@@ -34,7 +34,8 @@ struct StatusEditorMediaEditView: View {
                   .fill(Color.gray)
                   .frame(height: 200)
                   .shimmering()
-              })
+              }
+            )
           }
         }
         .listRowBackground(theme.primaryBackgroundColor)
@@ -57,7 +58,7 @@ struct StatusEditorMediaEditView: View {
             dismiss()
           }
         }
-        
+
         ToolbarItem(placement: .navigationBarLeading) {
           Button("Cancel") {
             dismiss()

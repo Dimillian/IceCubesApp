@@ -1,7 +1,7 @@
-import SwiftUI
+import Env
 import Models
 import Network
-import Env
+import SwiftUI
 
 @MainActor
 public class StatusRowViewModel: ObservableObject {
@@ -10,7 +10,7 @@ public class StatusRowViewModel: ObservableObject {
   let isFocused: Bool
   let isRemote: Bool
   let showActions: Bool
-  
+
   @Published var favouritesCount: Int
   @Published var isFavourited: Bool
   @Published var isReblogged: Bool
@@ -22,42 +22,43 @@ public class StatusRowViewModel: ObservableObject {
   @Published var displaySpoiler: Bool = false
   @Published var isEmbedLoading: Bool = true
   @Published var isFiltered: Bool = false
-  
+
   var filter: Filtered? {
     status.reblog?.filtered?.first ?? status.filtered?.first
   }
-  
+
   var client: Client?
-  
+
   public init(status: Status,
               isCompact: Bool = false,
               isFocused: Bool = false,
               isRemote: Bool = false,
-              showActions: Bool = true) {
+              showActions: Bool = true)
+  {
     self.status = status
     self.isCompact = isCompact
     self.isFocused = isFocused
     self.isRemote = isRemote
     self.showActions = showActions
     if let reblog = status.reblog {
-      self.isFavourited = reblog.favourited == true
-      self.isReblogged = reblog.reblogged == true
-      self.isPinned = reblog.pinned == true
-      self.isBookmarked = reblog.bookmarked == true
+      isFavourited = reblog.favourited == true
+      isReblogged = reblog.reblogged == true
+      isPinned = reblog.pinned == true
+      isBookmarked = reblog.bookmarked == true
     } else {
-      self.isFavourited = status.favourited == true
-      self.isReblogged = status.reblogged == true
-      self.isPinned = status.pinned == true
-      self.isBookmarked = status.bookmarked == true
+      isFavourited = status.favourited == true
+      isReblogged = status.reblogged == true
+      isPinned = status.pinned == true
+      isBookmarked = status.bookmarked == true
     }
-    self.favouritesCount = status.reblog?.favouritesCount ?? status.favouritesCount
-    self.reblogsCount = status.reblog?.reblogsCount ?? status.reblogsCount
-    self.repliesCount = status.reblog?.repliesCount ?? status.repliesCount
-    self.displaySpoiler = !(status.reblog?.spoilerText ?? status.spoilerText).isEmpty
-    
-    self.isFiltered = filter != nil
+    favouritesCount = status.reblog?.favouritesCount ?? status.favouritesCount
+    reblogsCount = status.reblog?.reblogsCount ?? status.reblogsCount
+    repliesCount = status.reblog?.repliesCount ?? status.repliesCount
+    displaySpoiler = !(status.reblog?.spoilerText ?? status.spoilerText).isEmpty
+
+    isFiltered = filter != nil
   }
-  
+
   func navigateToDetail(routeurPath: RouterPath) {
     if isRemote, let url = status.reblog?.url ?? status.url {
       routeurPath.navigate(to: .remoteStatusDetail(url: url))
@@ -65,13 +66,14 @@ public class StatusRowViewModel: ObservableObject {
       routeurPath.navigate(to: .statusDetail(id: status.reblog?.id ?? status.id))
     }
   }
-  
+
   func loadEmbededStatus() async {
     guard let client,
           let urls = status.content.findStatusesURLs(),
           !urls.isEmpty,
           let url = urls.first,
-          client.hasConnection(with: url) else {
+          client.hasConnection(with: url)
+    else {
       isEmbedLoading = false
       return
     }
@@ -87,7 +89,7 @@ public class StatusRowViewModel: ObservableObject {
                                                                                   type: "statuses",
                                                                                   offset: 0,
                                                                                   following: nil),
-                                                            forceVersion: .v2)
+                                                          forceVersion: .v2)
         embed = results.statuses.first
       }
       withAnimation {
@@ -98,7 +100,7 @@ public class StatusRowViewModel: ObservableObject {
       isEmbedLoading = false
     }
   }
-  
+
   func favourite() async {
     guard let client, client.isAuth else { return }
     isFavourited = true
@@ -111,7 +113,7 @@ public class StatusRowViewModel: ObservableObject {
       favouritesCount -= 1
     }
   }
-  
+
   func unFavourite() async {
     guard let client, client.isAuth else { return }
     isFavourited = false
@@ -124,7 +126,7 @@ public class StatusRowViewModel: ObservableObject {
       favouritesCount += 1
     }
   }
-  
+
   func reblog() async {
     guard let client, client.isAuth else { return }
     isReblogged = true
@@ -137,7 +139,7 @@ public class StatusRowViewModel: ObservableObject {
       reblogsCount -= 1
     }
   }
-  
+
   func unReblog() async {
     guard let client, client.isAuth else { return }
     isReblogged = false
@@ -150,7 +152,7 @@ public class StatusRowViewModel: ObservableObject {
       reblogsCount += 1
     }
   }
-  
+
   func pin() async {
     guard let client, client.isAuth else { return }
     isPinned = true
@@ -161,7 +163,7 @@ public class StatusRowViewModel: ObservableObject {
       isPinned = false
     }
   }
-  
+
   func unPin() async {
     guard let client, client.isAuth else { return }
     isPinned = false
@@ -172,7 +174,7 @@ public class StatusRowViewModel: ObservableObject {
       isPinned = true
     }
   }
-  
+
   func bookmark() async {
     guard let client, client.isAuth else { return }
     isBookmarked = true
@@ -183,7 +185,7 @@ public class StatusRowViewModel: ObservableObject {
       isBookmarked = false
     }
   }
-  
+
   func unbookmark() async {
     guard let client, client.isAuth else { return }
     isBookmarked = false
@@ -194,14 +196,14 @@ public class StatusRowViewModel: ObservableObject {
       isBookmarked = true
     }
   }
-  
+
   func delete() async {
     guard let client else { return }
     do {
       _ = try await client.delete(endpoint: Statuses.status(id: status.id))
-    } catch { }
+    } catch {}
   }
-  
+
   private func updateFromStatus(status: Status) {
     if let reblog = status.reblog {
       isFavourited = reblog.favourited == true

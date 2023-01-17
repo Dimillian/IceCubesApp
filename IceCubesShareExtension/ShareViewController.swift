@@ -1,18 +1,18 @@
+import Account
+import AppAccount
+import DesignSystem
+import Env
+import Network
+import Status
 import SwiftUI
 import UIKit
-import Status
-import DesignSystem
-import Account
-import Network
-import Env
-import AppAccount
 
 class ShareViewController: UIViewController {
   @IBOutlet var container: UIView!
-  
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     let appAccountsManager = AppAccountsManager.shared
     let client = appAccountsManager.currentClient
     let account = CurrentAccount.shared
@@ -22,7 +22,7 @@ class ShareViewController: UIViewController {
     let colorScheme = traitCollection.userInterfaceStyle
     let theme = Theme.shared
     theme.setColor(withName: colorScheme == .dark ? .iceCubeDark : .iceCubeLight)
-    
+
     if let item = extensionContext?.inputItems.first as? NSExtensionItem {
       if let attachments = item.attachments {
         let view = StatusEditorView(mode: .shareExtension(items: attachments))
@@ -35,24 +35,24 @@ class ShareViewController: UIViewController {
           .tint(theme.tintColor)
           .preferredColorScheme(colorScheme == .light ? .light : .dark)
         let childView = UIHostingController(rootView: view)
-        self.addChild(childView)
-        childView.view.frame = self.container.bounds
-        self.container.addSubview(childView.view)
+        addChild(childView)
+        childView.view.frame = container.bounds
+        container.addSubview(childView.view)
         childView.didMove(toParent: self)
       }
     }
-    
+
     NotificationCenter.default.addObserver(forName: NotificationsName.shareSheetClose,
                                            object: nil,
                                            queue: nil) { _ in
-        self.close()
+      self.close()
     }
   }
-  
+
   func close() {
     extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
   }
-  
+
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
   }

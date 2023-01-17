@@ -6,7 +6,7 @@ public enum Lists: Endpoint {
   case createList(title: String)
   case accounts(listId: String)
   case updateAccounts(listId: String, accounts: [String])
-  
+
   public func path() -> String {
     switch self {
     case .lists, .createList:
@@ -19,10 +19,10 @@ public enum Lists: Endpoint {
       return "lists/\(listId)/accounts"
     }
   }
-  
+
   public func queryItems() -> [URLQueryItem]? {
     switch self {
-    case .accounts(_):
+    case .accounts:
       return [.init(name: "limit", value: String(0))]
     case let .createList(title):
       return [.init(name: "title", value: title)]

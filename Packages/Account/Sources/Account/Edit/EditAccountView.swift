@@ -1,15 +1,15 @@
-import SwiftUI
+import DesignSystem
 import Models
 import Network
-import DesignSystem
+import SwiftUI
 
 struct EditAccountView: View {
   @Environment(\.dismiss) private var dismiss
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var theme: Theme
-  
+
   @StateObject private var viewModel = EditAccountViewModel()
-    
+
   public var body: some View {
     NavigationStack {
       Form {
@@ -31,15 +31,15 @@ struct EditAccountView: View {
       .alert("Error while saving your profile",
              isPresented: $viewModel.saveError,
              actions: {
-        Button("Ok", action: { })
-      }, message: { Text("Error while saving your profile, please try again.") })
+               Button("Ok", action: {})
+             }, message: { Text("Error while saving your profile, please try again.") })
       .task {
         viewModel.client = client
         await viewModel.fetchAccount()
       }
     }
   }
-  
+
   private var loadingSection: some View {
     Section {
       HStack {
@@ -50,7 +50,7 @@ struct EditAccountView: View {
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
-  
+
   @ViewBuilder
   private var aboutSections: some View {
     Section("Display Name") {
@@ -63,7 +63,7 @@ struct EditAccountView: View {
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
-  
+
   private var postSettingsSection: some View {
     Section("Post settings") {
       Picker(selection: $viewModel.postPrivacy) {
@@ -80,7 +80,7 @@ struct EditAccountView: View {
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
-  
+
   private var accountSection: some View {
     Section("Account settings") {
       Toggle(isOn: $viewModel.isLocked) {
@@ -95,7 +95,7 @@ struct EditAccountView: View {
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
-  
+
   @ToolbarContentBuilder
   private var toolbarContent: some ToolbarContent {
     ToolbarItem(placement: .navigationBarLeading) {
@@ -103,7 +103,7 @@ struct EditAccountView: View {
         dismiss()
       }
     }
-    
+
     ToolbarItem(placement: .navigationBarTrailing) {
       Button {
         Task {

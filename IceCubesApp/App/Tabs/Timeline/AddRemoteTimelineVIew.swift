@@ -1,26 +1,26 @@
-import SwiftUI
-import Network
-import Models
-import Env
+import Combine
 import DesignSystem
+import Env
+import Models
+import Network
 import NukeUI
 import Shimmer
-import Combine
+import SwiftUI
 
 struct AddRemoteTimelineView: View {
   @Environment(\.dismiss) private var dismiss
-  
+
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
-  
+
   @State private var instanceName: String = ""
   @State private var instance: Instance?
   @State private var instances: [InstanceSocial] = []
 
   private let instanceNamePublisher = PassthroughSubject<String, Never>()
-  
+
   @FocusState private var isInstanceURLFieldFocused: Bool
-    
+
   var body: some View {
     NavigationStack {
       Form {
@@ -44,7 +44,7 @@ struct AddRemoteTimelineView: View {
           Text("Add")
         }
         .listRowBackground(theme.primaryBackgroundColor)
-        
+
         instancesListView
       }
       .formStyle(.grouped)
@@ -76,14 +76,14 @@ struct AddRemoteTimelineView: View {
       }
     }
   }
-  
+
   private var instancesListView: some View {
     Section("Suggestions") {
       if instances.isEmpty {
         ProgressView()
           .listRowBackground(theme.primaryBackgroundColor)
       } else {
-        ForEach(instanceName.isEmpty ? instances : instances.filter{ $0.name.contains(instanceName.lowercased()) }) { instance in
+        ForEach(instanceName.isEmpty ? instances : instances.filter { $0.name.contains(instanceName.lowercased()) }) { instance in
           Button {
             self.instanceName = instance.name
           } label: {

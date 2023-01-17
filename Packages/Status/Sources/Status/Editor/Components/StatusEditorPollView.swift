@@ -1,6 +1,6 @@
-import SwiftUI
 import DesignSystem
 import Env
+import SwiftUI
 
 struct StatusEditorPollView: View {
   enum FocusField: Hashable {
@@ -22,7 +22,7 @@ struct StatusEditorPollView: View {
     let count = viewModel.pollOptions.count
 
     VStack {
-      ForEach(0..<count, id: \.self) { index in
+      ForEach(0 ..< count, id: \.self) { index in
         VStack {
           HStack(spacing: 16) {
             TextField("Option \(index + 1)", text: $viewModel.pollOptions[index])

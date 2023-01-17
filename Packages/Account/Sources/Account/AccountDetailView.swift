@@ -1,13 +1,13 @@
-import SwiftUI
+import DesignSystem
+import EmojiText
+import Env
 import Models
 import Network
-import Status
 import Shimmer
-import DesignSystem
-import Env
-import EmojiText
+import Status
+import SwiftUI
 
-public struct AccountDetailView: View {  
+public struct AccountDetailView: View {
   @Environment(\.redactionReasons) private var reasons
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var currentAccount: CurrentAccount
@@ -15,7 +15,7 @@ public struct AccountDetailView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var routeurPath: RouterPath
-  
+
   @StateObject private var viewModel: AccountDetailViewModel
   @State private var scrollOffset: CGFloat = 0
   @State private var isFieldsSheetDisplayed: Bool = false
@@ -23,17 +23,17 @@ public struct AccountDetailView: View {
   @State private var isCreateListAlertPresented: Bool = false
   @State private var createListTitle: String = ""
   @State private var isEditingAccount: Bool = false
-  
+
   /// When coming from a URL like a mention tap in a status.
   public init(accountId: String) {
     _viewModel = StateObject(wrappedValue: .init(accountId: accountId))
   }
-  
+
   /// When the account is already fetched by the parent caller.
   public init(account: Account) {
     _viewModel = StateObject(wrappedValue: .init(account: account))
   }
-  
+
   public var body: some View {
     ScrollViewReader { proxy in
       ScrollViewOffsetReader { offset in
@@ -58,7 +58,7 @@ public struct AccountDetailView: View {
             .offset(y: -20)
           }
           .id("status")
-          
+
           switch viewModel.tabState {
           case .statuses:
             if viewModel.selectedTab == .statuses {
@@ -94,9 +94,10 @@ public struct AccountDetailView: View {
         await viewModel.fetchStatuses()
       }
     }
-    .onChange(of: watcher.latestEvent?.id) { id in
+    .onChange(of: watcher.latestEvent?.id) { _ in
       if let latestEvent = watcher.latestEvent,
-          viewModel.accountId == currentAccount.account?.id {
+         viewModel.accountId == currentAccount.account?.id
+      {
         viewModel.handleEvent(event: latestEvent, currentAccount: currentAccount)
       }
     }
@@ -117,7 +118,7 @@ public struct AccountDetailView: View {
       toolbarContent
     }
   }
-  
+
   @ViewBuilder
   private func makeHeaderView(proxy: ScrollViewProxy?) -> some View {
     switch viewModel.accountState {
@@ -137,7 +138,7 @@ public struct AccountDetailView: View {
       Text("Error: \(error.localizedDescription)")
     }
   }
-    
+
   @ViewBuilder
   private var featuredTagsView: some View {
     if !viewModel.featuredTags.isEmpty || !viewModel.fields.isEmpty {
@@ -178,7 +179,7 @@ public struct AccountDetailView: View {
       }
     }
   }
-  
+
   @ViewBuilder
   private var familliarFollowers: some View {
     if !viewModel.familliarFollowers.isEmpty {
@@ -203,7 +204,7 @@ public struct AccountDetailView: View {
       .padding(.bottom, 12)
     }
   }
-  
+
   private var fieldSheetView: some View {
     NavigationStack {
       List {
@@ -244,7 +245,7 @@ public struct AccountDetailView: View {
       }
     }
   }
-  
+
   private var tagsListView: some View {
     Group {
       ForEach(currentAccount.tags) { tag in
@@ -260,7 +261,7 @@ public struct AccountDetailView: View {
       await currentAccount.fetchFollowedTags()
     }
   }
-  
+
   private var listsListView: some View {
     Group {
       ForEach(currentAccount.lists) { list in
@@ -309,7 +310,7 @@ public struct AccountDetailView: View {
       Text("Enter the name for your list")
     }
   }
-  
+
   @ViewBuilder
   private var pinnedPostsView: some View {
     if !viewModel.pinned.isEmpty {
@@ -327,7 +328,7 @@ public struct AccountDetailView: View {
       }
     }
   }
-  
+
   @ToolbarContentBuilder
   private var toolbarContent: some ToolbarContent {
     ToolbarItem(placement: .principal) {
@@ -341,7 +342,7 @@ public struct AccountDetailView: View {
         }
       }
     }
-    
+
     ToolbarItem(placement: .navigationBarTrailing) {
       Menu {
         if let account = viewModel.account {
@@ -360,7 +361,7 @@ public struct AccountDetailView: View {
               }
               Divider()
             }
-            
+
             if viewModel.relationship?.following == true {
               Button {
                 routeurPath.presentedSheet = .listAddAccount(account: account)
@@ -368,13 +369,13 @@ public struct AccountDetailView: View {
                 Label("Add/Remove from lists", systemImage: "list.bullet")
               }
             }
-            
+
             if let url = account.url {
               ShareLink(item: url)
             }
-            
+
             Divider()
-            
+
             if isCurrentUser {
               Button {
                 isEditingAccount = true
@@ -396,4 +397,3 @@ struct AccountDetailView_Previews: PreviewProvider {
     AccountDetailView(account: .placeholder())
   }
 }
-

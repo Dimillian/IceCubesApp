@@ -5,8 +5,8 @@ import SwiftUI
 
 public typealias HTMLString = String
 
-extension HTMLString {
-  public var asMarkdown: String {
+public extension HTMLString {
+  var asMarkdown: String {
     do {
       let dom = try HTMLParser().parse(html: self)
       return dom.toMarkdown()
@@ -16,8 +16,8 @@ extension HTMLString {
       return self
     }
   }
-  
-  public var asRawText: String {
+
+  var asRawText: String {
     do {
       let document: Document = try SwiftSoup.parse(self)
       return try document.text()
@@ -25,8 +25,8 @@ extension HTMLString {
       return self
     }
   }
-  
-  public func findStatusesURLs() -> [URL]? {
+
+  func findStatusesURLs() -> [URL]? {
     do {
       let document: Document = try SwiftSoup.parse(self)
       let links: Elements = try document.select("a")
@@ -34,7 +34,8 @@ extension HTMLString {
       for link in links {
         let href = try link.attr("href")
         if let url = URL(string: href),
-            let _ = Int(url.lastPathComponent) {
+           let _ = Int(url.lastPathComponent)
+        {
           URLs.append(url)
         }
       }
@@ -43,8 +44,8 @@ extension HTMLString {
       return nil
     }
   }
-  
-  public var asSafeAttributedString: AttributedString {
+
+  var asSafeAttributedString: AttributedString {
     do {
       let options = AttributedString.MarkdownParsingOptions(allowsExtendedAttributes: true,
                                                             interpretedSyntax: .inlineOnlyPreservingWhitespace)
@@ -54,4 +55,3 @@ extension HTMLString {
     }
   }
 }
-

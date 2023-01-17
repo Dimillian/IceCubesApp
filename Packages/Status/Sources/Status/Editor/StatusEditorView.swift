@@ -1,15 +1,15 @@
-import SwiftUI
 import Accounts
-import Env
+import AppAccount
 import DesignSystem
-import TextView
+import EmojiText
+import Env
 import Models
 import Network
-import PhotosUI
 import NukeUI
-import EmojiText
+import PhotosUI
+import SwiftUI
+import TextView
 import UIKit
-import AppAccount
 
 public struct StatusEditorView: View {
   @EnvironmentObject private var preferences: UserPreferences
@@ -17,17 +17,17 @@ public struct StatusEditorView: View {
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var currentAccount: CurrentAccount
   @Environment(\.dismiss) private var dismiss
-  
+
   @StateObject private var viewModel: StatusEditorViewModel
   @FocusState private var isSpoilerTextFocused: Bool
-  
+
   @State private var isDismissAlertPresented: Bool = false
   @State private var isLoadingAIRequest: Bool = false
-  
+
   public init(mode: StatusEditorViewModel.Mode) {
     _viewModel = StateObject(wrappedValue: .init(mode: mode))
   }
-  
+
   public var body: some View {
     NavigationStack {
       ZStack(alignment: .bottom) {
@@ -120,25 +120,25 @@ public struct StatusEditorView: View {
           .confirmationDialog("",
                               isPresented: $isDismissAlertPresented,
                               actions: {
-            Button("Delete Draft", role: .destructive) {
-              dismiss()
-              NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
-                                              object: nil)
-            }
-            Button("Save Draft") {
-              preferences.draftsPosts.insert(viewModel.statusText.string, at: 0)
-              dismiss()
-              NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
-                                              object: nil)
-            }
-            Button("Cancel", role: .cancel) { }
-          })
+                                Button("Delete Draft", role: .destructive) {
+                                  dismiss()
+                                  NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
+                                                                  object: nil)
+                                }
+                                Button("Save Draft") {
+                                  preferences.draftsPosts.insert(viewModel.statusText.string, at: 0)
+                                  dismiss()
+                                  NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
+                                                                  object: nil)
+                                }
+                                Button("Cancel", role: .cancel) {}
+                              })
         }
       }
     }
     .interactiveDismissDisabled(!viewModel.statusText.string.isEmpty)
   }
-  
+
   @ViewBuilder
   private var spoilerTextView: some View {
     if viewModel.spoilerOn {
@@ -152,7 +152,7 @@ public struct StatusEditorView: View {
       .offset(y: -8)
     }
   }
-  
+
   @ViewBuilder
   private var accountHeaderView: some View {
     if let account = currentAccount.account {
@@ -170,7 +170,7 @@ public struct StatusEditorView: View {
       }
     }
   }
-  
+
   private var privacyMenu: some View {
     Menu {
       Section("Post visibility") {
@@ -195,7 +195,7 @@ public struct StatusEditorView: View {
       )
     }
   }
-  
+
   private var AIMenu: some View {
     Menu {
       ForEach(StatusEditorAIPrompts.allCases, id: \.self) { prompt in
@@ -224,6 +224,5 @@ public struct StatusEditorView: View {
         Image(systemName: "faxmachine")
       }
     }
-
   }
 }

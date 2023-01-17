@@ -1,10 +1,10 @@
 import Foundation
-import SwiftUI
 import Network
+import SwiftUI
 
 enum StatusEditorAIPrompts: CaseIterable {
   case correct, fit, emphasize
-  
+
   @ViewBuilder
   var label: some View {
     switch self {
@@ -16,7 +16,7 @@ enum StatusEditorAIPrompts: CaseIterable {
       Label("Emphasize text", systemImage: "text.badge.star")
     }
   }
-  
+
   func toRequestPrompt(text: String) -> OpenAIClient.Prompts {
     switch self {
     case .correct:

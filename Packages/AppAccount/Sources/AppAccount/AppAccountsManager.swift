@@ -1,13 +1,13 @@
-import SwiftUI
-import Network
 import Env
 import Models
+import Network
+import SwiftUI
 
 @MainActor
 public class AppAccountsManager: ObservableObject {
   @AppStorage("latestCurrentAccountKey", store: UserPreferences.sharedDefault)
-  static public var latestCurrentAccountKey: String = ""
-  
+  public static var latestCurrentAccountKey: String = ""
+
   @Published public var currentAccount: AppAccount {
     didSet {
       Self.latestCurrentAccountKey = currentAccount.id
@@ -15,16 +15,17 @@ public class AppAccountsManager: ObservableObject {
                             oauthToken: currentAccount.oauthToken)
     }
   }
+
   @Published public var availableAccounts: [AppAccount]
   @Published public var currentClient: Client
-  
+
   public var pushAccounts: [PushNotificationsService.PushAccounts] {
-    availableAccounts.filter{ $0.oauthToken != nil}
-      .map{ .init(server: $0.server, token: $0.oauthToken!) }
+    availableAccounts.filter { $0.oauthToken != nil }
+      .map { .init(server: $0.server, token: $0.oauthToken!) }
   }
-  
+
   public static var shared = AppAccountsManager()
-  
+
   internal init() {
     var defaultAccount = AppAccount(server: AppInfo.defaultServer, oauthToken: nil)
     let keychainAccounts = AppAccount.retrieveAll()
@@ -37,15 +38,15 @@ public class AppAccountsManager: ObservableObject {
     currentAccount = defaultAccount
     currentClient = .init(server: defaultAccount.server, oauthToken: defaultAccount.oauthToken)
   }
-  
+
   public func add(account: AppAccount) {
     do {
       try account.save()
       availableAccounts.append(account)
       currentAccount = account
-    } catch { }
+    } catch {}
   }
-  
+
   public func delete(account: AppAccount) {
     availableAccounts.removeAll(where: { $0.id == account.id })
     account.delete()

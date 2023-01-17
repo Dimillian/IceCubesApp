@@ -1,11 +1,11 @@
-import SwiftUI
-import Timeline
-import Env
-import Network
+import AppAccount
 import Combine
 import DesignSystem
+import Env
 import Models
-import AppAccount
+import Network
+import SwiftUI
+import Timeline
 
 struct TimelineTab: View {
   @EnvironmentObject private var theme: Theme
@@ -14,19 +14,19 @@ struct TimelineTab: View {
   @EnvironmentObject private var client: Client
   @StateObject private var routeurPath = RouterPath()
   @Binding var popToRootTab: Tab
-  
+
   @State private var didAppear: Bool = false
   @State private var timeline: TimelineFilter
   @State private var scrollToTopSignal: Int = 0
-  
+
   private let canFilterTimeline: Bool
-  
+
   init(popToRootTab: Binding<Tab>, timeline: TimelineFilter? = nil) {
     canFilterTimeline = timeline == nil
     self.timeline = timeline ?? .home
     _popToRootTab = popToRootTab
   }
-    
+
   var body: some View {
     NavigationStack(path: $routeurPath.path) {
       TimelineView(timeline: $timeline, scrollToTopSignal: $scrollToTopSignal)
@@ -71,8 +71,7 @@ struct TimelineTab: View {
     .withSafariRouteur()
     .environmentObject(routeurPath)
   }
-  
-  
+
   @ViewBuilder
   private var timelineFilterButton: some View {
     ForEach(TimelineFilter.availableTimeline(client: client), id: \.self) { timeline in
@@ -93,7 +92,7 @@ struct TimelineTab: View {
         }
       }
     }
-    
+
     if !currentAccount.tags.isEmpty {
       Menu("Followed Tags") {
         ForEach(currentAccount.tags) { tag in
@@ -105,7 +104,7 @@ struct TimelineTab: View {
         }
       }
     }
-    
+
     Menu("Local Timelines") {
       ForEach(preferences.remoteLocalTimelines, id: \.self) { server in
         Button {
@@ -121,7 +120,7 @@ struct TimelineTab: View {
       }
     }
   }
-    
+
   private var addAccountButton: some View {
     Button {
       routeurPath.presentedSheet = .addAccount
@@ -129,7 +128,7 @@ struct TimelineTab: View {
       Image(systemName: "person.badge.plus")
     }
   }
-  
+
   @ToolbarContentBuilder
   private var toolbarView: some ToolbarContent {
     if canFilterTimeline {

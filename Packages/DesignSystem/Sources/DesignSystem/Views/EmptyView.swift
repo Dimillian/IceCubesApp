@@ -4,13 +4,13 @@ public struct EmptyView: View {
   public let iconName: String
   public let title: String
   public let message: String
-  
+
   public init(iconName: String, title: String, message: String) {
     self.iconName = iconName
     self.title = title
     self.message = message
   }
-  
+
   public var body: some View {
     VStack {
       Image(systemName: iconName)

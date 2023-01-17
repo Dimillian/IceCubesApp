@@ -9,7 +9,7 @@ extension Array: RawRepresentable where Element: Codable {
     }
     self = result
   }
-  
+
   public var rawValue: String {
     guard let data = try? JSONEncoder().encode(self),
           let result = String(data: data, encoding: .utf8)

@@ -1,17 +1,17 @@
-import SwiftUI
 import DesignSystem
-import Env
 import EmojiText
+import Env
+import SwiftUI
 
 public struct AppAccountView: View {
   @EnvironmentObject private var routeurPath: RouterPath
   @EnvironmentObject var appAccounts: AppAccountsManager
   @StateObject var viewModel: AppAccountViewModel
-  
+
   public init(viewModel: AppAccountViewModel) {
     _viewModel = .init(wrappedValue: viewModel)
   }
-  
+
   public var body: some View {
     HStack {
       if let account = viewModel.account {
@@ -43,7 +43,8 @@ public struct AppAccountView: View {
     }
     .onTapGesture {
       if appAccounts.currentAccount.id == viewModel.appAccount.id,
-          let account = viewModel.account {
+         let account = viewModel.account
+      {
         routeurPath.navigate(to: .accountDetailWithAccount(account: account))
       } else {
         appAccounts.currentAccount = viewModel.appAccount

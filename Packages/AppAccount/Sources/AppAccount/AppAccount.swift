@@ -1,17 +1,17 @@
-import SwiftUI
-import Network
+import CryptoKit
 import KeychainSwift
 import Models
-import CryptoKit
+import Network
+import SwiftUI
 
 public struct AppAccount: Codable, Identifiable {
   public let server: String
   public let oauthToken: OauthToken?
-  
+
   public var id: String {
     key
   }
-  
+
   private static var keychain: KeychainSwift {
     let keychain = KeychainSwift()
     #if !DEBUG
@@ -19,7 +19,7 @@ public struct AppAccount: Codable, Identifiable {
     #endif
     return keychain
   }
-  
+
   public var key: String {
     if let oauthToken {
       return "\(server):\(oauthToken.createdAt)"
@@ -27,22 +27,22 @@ public struct AppAccount: Codable, Identifiable {
       return "\(server):anonymous:\(Date().timeIntervalSince1970)"
     }
   }
-  
+
   public init(server: String, oauthToken: OauthToken? = nil) {
     self.server = server
     self.oauthToken = oauthToken
   }
-  
+
   public func save() throws {
     let encoder = JSONEncoder()
     let data = try encoder.encode(self)
     Self.keychain.set(data, forKey: key)
   }
-  
+
   public func delete() {
     Self.keychain.delete(key)
   }
-  
+
   public static func retrieveAll() -> [AppAccount] {
     migrateLegacyAccounts()
     let keychain = Self.keychain
@@ -58,7 +58,7 @@ public struct AppAccount: Codable, Identifiable {
     }
     return accounts
   }
-  
+
   public static func migrateLegacyAccounts() {
     let keychain = KeychainSwift()
     let decoder = JSONDecoder()
@@ -71,7 +71,7 @@ public struct AppAccount: Codable, Identifiable {
       }
     }
   }
-  
+
   public static func deleteAll() {
     let keychain = Self.keychain
     let keys = keychain.allKeys

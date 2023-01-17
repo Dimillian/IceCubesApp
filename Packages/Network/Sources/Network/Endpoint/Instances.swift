@@ -3,7 +3,7 @@ import Foundation
 public enum Instances: Endpoint {
   case instance
   case peers
-  
+
   public func path() -> String {
     switch self {
     case .instance:
@@ -12,7 +12,7 @@ public enum Instances: Endpoint {
       return "instance/peers"
     }
   }
-  
+
   public func queryItems() -> [URLQueryItem]? {
     nil
   }

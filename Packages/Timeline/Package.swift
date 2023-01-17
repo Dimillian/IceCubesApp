@@ -11,7 +11,8 @@ let package = Package(
   products: [
     .library(
       name: "Timeline",
-      targets: ["Timeline"]),
+      targets: ["Timeline"]
+    ),
   ],
   dependencies: [
     .package(name: "Network", path: "../Network"),
@@ -28,11 +29,12 @@ let package = Package(
         .product(name: "Models", package: "Models"),
         .product(name: "Env", package: "Env"),
         .product(name: "Status", package: "Status"),
-        .product(name: "DesignSystem", package: "DesignSystem")
-      ]),
+        .product(name: "DesignSystem", package: "DesignSystem"),
+      ]
+    ),
     .testTarget(
       name: "TimelineTests",
-      dependencies: ["Timeline"]),
+      dependencies: ["Timeline"]
+    ),
   ]
 )
-

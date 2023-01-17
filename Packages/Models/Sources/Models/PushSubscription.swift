@@ -9,7 +9,7 @@ public struct PushSubscription: Identifiable, Decodable {
     public let poll: Bool
     public let status: Bool
   }
-  
+
   public let id: Int
   public let endpoint: URL
   public let serverKey: String

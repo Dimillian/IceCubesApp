@@ -1,25 +1,25 @@
-import SwiftUI
-import Models
 import Accounts
 import DesignSystem
 import Env
+import Models
 import Network
+import SwiftUI
 
 struct ConversationsListRow: View {
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var routerPath: RouterPath
   @EnvironmentObject private var theme: Theme
-  
+
   let conversation: Conversation
   @ObservedObject var viewModel: ConversationsListViewModel
-  
+
   var body: some View {
     VStack(alignment: .leading) {
       HStack(alignment: .top, spacing: 8) {
         AvatarView(url: conversation.accounts.first!.avatar)
         VStack(alignment: .leading, spacing: 4) {
           HStack {
-            Text(conversation.accounts.map{ $0.safeDisplayName }.joined(separator: ", "))
+            Text(conversation.accounts.map { $0.safeDisplayName }.joined(separator: ", "))
               .font(.headline)
               .foregroundColor(theme.labelColor)
               .multilineTextAlignment(.leading)
@@ -52,7 +52,7 @@ struct ConversationsListRow: View {
       contextMenu
     }
   }
-  
+
   private var actionsView: some View {
     HStack(spacing: 12) {
       Button {
@@ -71,7 +71,7 @@ struct ConversationsListRow: View {
     .padding(.leading, 48)
     .foregroundColor(.gray)
   }
-  
+
   @ViewBuilder
   private var contextMenu: some View {
     Button {
@@ -81,7 +81,7 @@ struct ConversationsListRow: View {
     } label: {
       Label("Mark as read", systemImage: "eye")
     }
-    
+
     Button(role: .destructive) {
       Task {
         await viewModel.delete(conversation: conversation)

@@ -1,17 +1,16 @@
 import Foundation
 
 public struct MastodonPushNotification: Codable {
-  
   public let accessToken: String
-  
+
   public let notificationID: Int
   public let notificationType: String
-  
+
   public let preferredLocale: String?
   public let icon: String?
   public let title: String
   public let body: String
-  
+
   enum CodingKeys: String, CodingKey {
     case accessToken = "access_token"
     case notificationID = "notification_id"

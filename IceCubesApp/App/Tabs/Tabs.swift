@@ -1,22 +1,22 @@
-import Foundation
-import Status
 import Account
 import Explore
+import Foundation
+import Status
 import SwiftUI
 
 enum Tab: Int, Identifiable, Hashable {
   case timeline, notifications, explore, messages, settings, other
   case trending, federated, local
   case profile
-  
+
   var id: Int {
     rawValue
   }
-  
+
   static func loggedOutTab() -> [Tab] {
     [.timeline, .settings]
   }
-  
+
   static func loggedInTabs() -> [Tab] {
     if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
       return [.timeline, .trending, .federated, .local, .notifications, .explore, .messages, .settings]
@@ -24,7 +24,7 @@ enum Tab: Int, Identifiable, Hashable {
       return [.timeline, .notifications, .explore, .messages, .settings]
     }
   }
-  
+
   @ViewBuilder
   func makeContentView(popToRootTab: Binding<Tab>) -> some View {
     switch self {
@@ -48,7 +48,7 @@ enum Tab: Int, Identifiable, Hashable {
       EmptyView()
     }
   }
-  
+
   @ViewBuilder
   var label: some View {
     switch self {
@@ -72,7 +72,7 @@ enum Tab: Int, Identifiable, Hashable {
       EmptyView()
     }
   }
-  
+
   var iconName: String {
     switch self {
     case .timeline:
@@ -96,4 +96,3 @@ enum Tab: Int, Identifiable, Hashable {
     }
   }
 }
-

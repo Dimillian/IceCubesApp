@@ -11,14 +11,14 @@ public enum Push: Endpoint {
                  follow: Bool,
                  favourite: Bool,
                  poll: Bool)
-  
+
   public func path() -> String {
     switch self {
     case .subscription, .createSub:
       return "push/subscription"
     }
   }
-  
+
   public func queryItems() -> [URLQueryItem]? {
     switch self {
     case let .createSub(endpoint, p256dh, auth, mentions, status, reblog, follow, favourite, poll):

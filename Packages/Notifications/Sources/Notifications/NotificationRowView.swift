@@ -1,17 +1,17 @@
-import SwiftUI
-import Models
 import DesignSystem
-import Status
-import Env
 import EmojiText
+import Env
+import Models
+import Status
+import SwiftUI
 
 struct NotificationRowView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var routeurPath: RouterPath
   @Environment(\.redactionReasons) private var reasons
-    
+
   let notification: Models.Notification
-  
+
   var body: some View {
     if let type = notification.supportedType {
       HStack(alignment: .top, spacing: 8) {
@@ -25,7 +25,7 @@ struct NotificationRowView: View {
       EmptyView()
     }
   }
-  
+
   private func makeAvatarView(type: Models.Notification.NotificationType) -> some View {
     ZStack(alignment: .topLeading) {
       AvatarView(url: notification.account.avatar)
@@ -34,7 +34,7 @@ struct NotificationRowView: View {
           .strokeBorder(Color.white, lineWidth: 1)
           .background(Circle().foregroundColor(theme.tintColor))
           .frame(width: 24, height: 24)
-        
+
         Image(systemName: type.iconName())
           .resizable()
           .frame(width: 12, height: 12)
@@ -47,28 +47,28 @@ struct NotificationRowView: View {
       routeurPath.navigate(to: .accountDetailWithAccount(account: notification.account))
     }
   }
-  
+
   private func makeMainLabel(type: Models.Notification.NotificationType) -> some View {
     VStack(alignment: .leading, spacing: 0) {
       HStack(spacing: 0) {
         EmojiTextApp(notification.account.safeDisplayName.asMarkdown,
                      emojis: notification.account.emojis,
                      append: {
-          Text(" ") +
-          Text(type.label())
-            .font(.subheadline)
-            .fontWeight(.regular)  +
-          Text(" ⸱ ")
-            .font(.footnote)
-            .fontWeight(.regular)
-            .foregroundColor(.gray) +
-          Text(notification.createdAt.formatted)
-            .font(.footnote)
-            .fontWeight(.regular)
-            .foregroundColor(.gray)
-        })
-        .font(.subheadline)
-        .fontWeight(.semibold)
+                       Text(" ") +
+                         Text(type.label())
+                         .font(.subheadline)
+                         .fontWeight(.regular) +
+                         Text(" ⸱ ")
+                         .font(.footnote)
+                         .fontWeight(.regular)
+                         .foregroundColor(.gray) +
+                         Text(notification.createdAt.formatted)
+                         .font(.footnote)
+                         .fontWeight(.regular)
+                         .foregroundColor(.gray)
+                     })
+                     .font(.subheadline)
+                     .fontWeight(.semibold)
         Spacer()
       }
     }
@@ -77,7 +77,7 @@ struct NotificationRowView: View {
       routeurPath.navigate(to: .accountDetailWithAccount(account: notification.account))
     }
   }
-  
+
   @ViewBuilder
   private func makeContent(type: Models.Notification.NotificationType) -> some View {
     if let status = notification.status {
@@ -95,7 +95,7 @@ struct NotificationRowView: View {
         Text("@\(notification.account.acct)")
           .font(.callout)
           .foregroundColor(.gray)
-        
+
         if type == .follow {
           EmojiTextApp(notification.account.note.asMarkdown,
                        emojis: notification.account.emojis)

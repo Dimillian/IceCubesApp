@@ -1,11 +1,11 @@
-import SwiftUI
 import Models
 import Network
+import SwiftUI
 
 @MainActor
 class EditAccountViewModel: ObservableObject {
   public var client: Client?
-  
+
   @Published var displayName: String = ""
   @Published var note: String = ""
   @Published var postPrivacy = Models.Visibility.pub
@@ -13,13 +13,13 @@ class EditAccountViewModel: ObservableObject {
   @Published var isBot: Bool = false
   @Published var isLocked: Bool = false
   @Published var isDiscoverable: Bool = false
-  
+
   @Published var isLoading: Bool = true
   @Published var isSaving: Bool = false
   @Published var saveError: Bool = false
-  
-  init() { }
-  
+
+  init() {}
+
   func fetchAccount() async {
     guard let client else { return }
     do {
@@ -34,20 +34,20 @@ class EditAccountViewModel: ObservableObject {
       withAnimation {
         isLoading = false
       }
-    } catch { }
+    } catch {}
   }
-  
+
   func save() async {
     isSaving = true
     do {
       let response =
-      try await client?.patch(endpoint: Accounts.updateCredentials(displayName: displayName,
-                                                                   note: note,
-                                                                   privacy: postPrivacy,
-                                                                   isSensitive: isSensitive,
-                                                                   isBot: isBot,
-                                                                   isLocked: isLocked,
-                                                                   isDiscoverable: isDiscoverable))
+        try await client?.patch(endpoint: Accounts.updateCredentials(displayName: displayName,
+                                                                     note: note,
+                                                                     privacy: postPrivacy,
+                                                                     isSensitive: isSensitive,
+                                                                     isBot: isBot,
+                                                                     isLocked: isLocked,
+                                                                     isDiscoverable: isDiscoverable))
       if response?.statusCode != 200 {
         saveError = true
       }
@@ -57,5 +57,4 @@ class EditAccountViewModel: ObservableObject {
       saveError = true
     }
   }
-  
 }

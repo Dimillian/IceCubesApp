@@ -3,7 +3,7 @@ import RegexBuilder
 
 public struct LinkHandler {
   public let rawLink: String
-  
+
   public var maxId: String? {
     do {
       let regex = try Regex("max_id=[0-9]+")

@@ -1,18 +1,18 @@
-import SwiftUI
-import Env
 import Account
-import DesignSystem
 import AppAccount
+import DesignSystem
+import Env
+import SwiftUI
 
 struct SideBarView<Content: View>: View {
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var theme: Theme
-  
+
   @Binding var selectedTab: Tab
   @Binding var popToRootTab: Tab
   var tabs: [Tab]
   @ViewBuilder var content: () -> Content
-  
+
   var body: some View {
     HStack(spacing: 0) {
       VStack(alignment: .center) {

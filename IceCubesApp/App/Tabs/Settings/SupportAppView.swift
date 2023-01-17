@@ -1,21 +1,21 @@
-import SwiftUI
-import Env
 import DesignSystem
+import Env
 import RevenueCat
 import Shimmer
+import SwiftUI
 
 struct SupportAppView: View {
   enum Tips: String, CaseIterable {
     case one, two, three
-    
+
     init(productId: String) {
       self = .init(rawValue: String(productId.split(separator: ".")[2]))!
     }
-    
+
     var productId: String {
       "icecubes.tipjar.\(rawValue)"
     }
-    
+
     var title: String {
       switch self {
       case .one:
@@ -26,7 +26,7 @@ struct SupportAppView: View {
         return "🤯 Generous Tip"
       }
     }
-    
+
     var subtitle: String {
       switch self {
       case .one:
@@ -38,15 +38,15 @@ struct SupportAppView: View {
       }
     }
   }
-  
+
   @EnvironmentObject private var theme: Theme
-  
+
   @State private var loadingProducts: Bool = false
   @State private var products: [StoreProduct] = []
   @State private var isProcessingPurchase: Bool = false
   @State private var purchaseSuccessDisplayed: Bool = false
   @State private var purchaseErrorDisplayed: Bool = false
-  
+
   var body: some View {
     Form {
       Section {
@@ -65,7 +65,7 @@ struct SupportAppView: View {
         }
       }
       .listRowBackground(theme.primaryBackgroundColor)
-      
+
       Section {
         if loadingProducts {
           HStack {
@@ -133,7 +133,7 @@ struct SupportAppView: View {
     })
     .onAppear {
       loadingProducts = true
-      Purchases.shared.getProducts(Tips.allCases.map{ $0.productId }) { products in
+      Purchases.shared.getProducts(Tips.allCases.map { $0.productId }) { products in
         self.products = products.sorted(by: { $0.price < $1.price })
         withAnimation {
           loadingProducts = false

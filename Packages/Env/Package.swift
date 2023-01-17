@@ -11,11 +11,12 @@ let package = Package(
   products: [
     .library(
       name: "Env",
-      targets: ["Env"]),
+      targets: ["Env"]
+    ),
   ],
   dependencies: [
     .package(name: "Models", path: "../Models"),
-    .package(name: "Network", path: "../Network")
+    .package(name: "Network", path: "../Network"),
   ],
   targets: [
     .target(
@@ -23,6 +24,7 @@ let package = Package(
       dependencies: [
         .product(name: "Models", package: "Models"),
         .product(name: "Network", package: "Network"),
-      ]),
+      ]
+    ),
   ]
 )

@@ -1,18 +1,18 @@
-import SwiftUI
-import Models
-import Shimmer
-import NukeUI
 import DesignSystem
+import Models
+import NukeUI
+import Shimmer
+import SwiftUI
 
 public struct StatusCardView: View {
   @EnvironmentObject private var theme: Theme
   @Environment(\.openURL) private var openURL
   let card: Card
-  
+
   public init(card: Card) {
     self.card = card
   }
-  
+
   public var body: some View {
     if let title = card.title {
       VStack(alignment: .leading) {

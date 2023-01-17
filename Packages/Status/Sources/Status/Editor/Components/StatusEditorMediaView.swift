@@ -1,14 +1,14 @@
-import SwiftUI
+import DesignSystem
 import Env
 import Models
-import DesignSystem
 import NukeUI
+import SwiftUI
 
 struct StatusEditorMediaView: View {
   @EnvironmentObject private var theme: Theme
   @ObservedObject var viewModel: StatusEditorViewModel
   @State private var editingContainer: StatusEditorViewModel.ImageContainer?
-  
+
   var body: some View {
     ScrollView(.horizontal, showsIndicators: false) {
       HStack(spacing: 8) {
@@ -19,7 +19,7 @@ struct StatusEditorMediaView: View {
             ZStack(alignment: .bottomTrailing) {
               if container.image != nil {
                 makeLocalImage(container: container)
-              }  else if let url = container.mediaAttachement?.url ?? container.mediaAttachement?.previewUrl {
+              } else if let url = container.mediaAttachement?.url ?? container.mediaAttachement?.previewUrl {
                 makeLazyImage(url: url)
               }
               if container.mediaAttachement?.description?.isEmpty == false {
@@ -36,7 +36,7 @@ struct StatusEditorMediaView: View {
         .preferredColorScheme(theme.selectedScheme == .dark ? .dark : .light)
     }
   }
-  
+
   private func makeLocalImage(container: StatusEditorViewModel.ImageContainer) -> some View {
     ZStack(alignment: .center) {
       Image(uiImage: container.image!)
@@ -69,12 +69,12 @@ struct StatusEditorMediaView: View {
           }
           .buttonStyle(.bordered)
         }
-      } else if container.mediaAttachement == nil{
+      } else if container.mediaAttachement == nil {
         ProgressView()
       }
     }
   }
-  
+
   private func makeLazyImage(url: URL?) -> some View {
     LazyImage(url: url) { state in
       if let image = state.image {
@@ -89,7 +89,7 @@ struct StatusEditorMediaView: View {
     .frame(width: 150, height: 150)
     .cornerRadius(8)
   }
-  
+
   @ViewBuilder
   private func makeImageMenu(container: StatusEditorViewModel.ImageContainer) -> some View {
     if !viewModel.mode.isEditing {
@@ -97,8 +97,8 @@ struct StatusEditorMediaView: View {
         editingContainer = container
       } label: {
         Label(container.mediaAttachement?.description?.isEmpty == false ?
-              "Edit description" : "Add description",
-              systemImage: "pencil.line")
+          "Edit description" : "Add description",
+          systemImage: "pencil.line")
       }
     }
     Button(role: .destructive) {
@@ -109,10 +109,9 @@ struct StatusEditorMediaView: View {
       Label("Delete", systemImage: "trash")
     }
   }
-  
+
   private var altMarker: some View {
-    Button {
-    } label: {
+    Button {} label: {
       Text("ALT")
         .font(.caption2)
     }

@@ -1,20 +1,20 @@
-import SwiftUI
-import Models
 import DesignSystem
-import Network
 import EmojiText
+import Models
+import Network
+import SwiftUI
 
 public struct ListEditView: View {
   @Environment(\.dismiss) private var dismiss
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
-  
+
   @StateObject private var viewModel: ListEditViewModel
-  
+
   public init(list: Models.List) {
     _viewModel = StateObject(wrappedValue: .init(list: list))
   }
-  
+
   public var body: some View {
     NavigationStack {
       List {

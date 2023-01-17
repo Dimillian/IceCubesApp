@@ -15,7 +15,7 @@ public struct ScrollViewOffsetReader<Content: View>: View {
     self.onOffsetChange = onOffsetChange
     self.content = content
   }
-  
+
   public var body: some View {
     ScrollView {
       offsetReader
@@ -40,5 +40,5 @@ public struct ScrollViewOffsetReader<Content: View>: View {
 
 private struct OffsetPreferenceKey: PreferenceKey {
   static var defaultValue: CGFloat = .zero
-  static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {}
+  static func reduce(value _: inout CGFloat, nextValue _: () -> CGFloat) {}
 }

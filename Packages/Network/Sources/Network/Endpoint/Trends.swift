@@ -4,7 +4,7 @@ public enum Trends: Endpoint {
   case tags
   case statuses(offset: Int?)
   case links
-  
+
   public func path() -> String {
     switch self {
     case .tags:
@@ -15,7 +15,7 @@ public enum Trends: Endpoint {
       return "trends/links"
     }
   }
-  
+
   public func queryItems() -> [URLQueryItem]? {
     switch self {
     case let .statuses(offset):

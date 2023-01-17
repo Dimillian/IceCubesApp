@@ -5,13 +5,13 @@ import SwiftUI
 @MainActor
 class ConversationsListViewModel: ObservableObject {
   var client: Client?
-  
+
   @Published var isLoadingFirstPage: Bool = true
   @Published var conversations: [Conversation] = []
   @Published var isError: Bool = false
-  
-  public init() { }
-  
+
+  public init() {}
+
   func fetchConversations() async {
     guard let client else { return }
     if conversations.isEmpty {
@@ -25,18 +25,18 @@ class ConversationsListViewModel: ObservableObject {
       isLoadingFirstPage = false
     }
   }
-  
+
   func markAsRead(conversation: Conversation) async {
     guard let client else { return }
     _ = try? await client.post(endpoint: Conversations.read(id: conversation.id))
   }
-  
+
   func delete(conversation: Conversation) async {
     guard let client else { return }
     _ = try? await client.delete(endpoint: Conversations.delete(id: conversation.id))
     await fetchConversations()
   }
-  
+
   func handleEvent(event: any StreamEvent) {
     if let event = event as? StreamEventConversation {
       if let index = conversations.firstIndex(where: { $0.id == event.conversation.id }) {

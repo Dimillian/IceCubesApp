@@ -11,7 +11,8 @@ let package = Package(
   products: [
     .library(
       name: "Models",
-      targets: ["Models"]),
+      targets: ["Models"]
+    ),
   ],
   dependencies: [
     .package(url: "https://gitlab.com/mflint/HTML2Markdown", exact: "1.0.0"),
@@ -21,9 +22,11 @@ let package = Package(
     .target(
       name: "Models",
       dependencies: ["HTML2Markdown",
-                     "SwiftSoup"]),
+                     "SwiftSoup"]
+    ),
     .testTarget(
       name: "ModelsTests",
-      dependencies: ["Models"]),
+      dependencies: ["Models"]
+    ),
   ]
 )

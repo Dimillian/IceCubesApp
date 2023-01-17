@@ -1,29 +1,29 @@
+import DesignSystem
+import Env
 import Models
 import Network
 import SwiftUI
-import Env
-import DesignSystem
 
 public struct StatusPollView: View {
   enum Constants {
     static let barHeight: CGFloat = 30
   }
-  
+
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var currentInstance: CurrentInstance
   @StateObject private var viewModel: StatusPollViewModel
-  
+
   public init(poll: Poll) {
     _viewModel = StateObject(wrappedValue: .init(poll: poll))
   }
-  
+
   private func widthForOption(option: Poll.Option, proxy: GeometryProxy) -> CGFloat {
     let totalWidth = proxy.frame(in: .local).width
     let ratio = CGFloat(option.votesCount) / CGFloat(viewModel.poll.votesCount)
     return totalWidth * ratio
   }
-  
+
   private func percentForOption(option: Poll.Option) -> Int {
     let ratio = (Float(option.votesCount) / Float(viewModel.poll.votesCount)) * 100
     if ratio.isNaN {
@@ -31,14 +31,14 @@ public struct StatusPollView: View {
     }
     return Int(round(ratio))
   }
-  
+
   private func isSelected(option: Poll.Option) -> Bool {
     for vote in viewModel.votes {
       return viewModel.poll.options.firstIndex(where: { $0.id == option.id }) == vote
     }
     return false
   }
-  
+
   public var body: some View {
     VStack(alignment: .leading) {
       ForEach(viewModel.poll.options) { option in
@@ -62,7 +62,7 @@ public struct StatusPollView: View {
       }
     }
   }
-  
+
   private var footerView: some View {
     HStack(spacing: 0) {
       Text("\(viewModel.poll.votesCount) votes")
@@ -77,14 +77,15 @@ public struct StatusPollView: View {
     .font(.footnote)
     .foregroundColor(.gray)
   }
-  
+
   @ViewBuilder
   private func makeBarView(for option: Poll.Option) -> some View {
     let isSelected = isSelected(option: option)
     Button {
       if !viewModel.poll.expired,
          viewModel.votes.isEmpty,
-         let index = viewModel.poll.options.firstIndex(where: { $0.id == option.id }) {
+         let index = viewModel.poll.options.firstIndex(where: { $0.id == option.id })
+      {
         withAnimation {
           viewModel.votes.append(index)
           Task {
@@ -111,7 +112,7 @@ public struct StatusPollView: View {
             .foregroundColor(theme.tintColor.opacity(0.40))
             .frame(height: Constants.barHeight)
             .clipShape(RoundedRectangle(cornerRadius: 8))
-          
+
           HStack {
             if isSelected {
               Image(systemName: "checkmark.circle.fill")

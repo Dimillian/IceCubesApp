@@ -30,10 +30,10 @@ public enum Accounts: Endpoint {
   case following(id: String, maxId: String?)
   case lists(id: String)
   case preferences
-  
+
   public func path() -> String {
     switch self {
-    case .accounts(let id):
+    case let .accounts(id):
       return "accounts/\(id)"
     case .favourites:
       return "favourites"
@@ -41,38 +41,38 @@ public enum Accounts: Endpoint {
       return "bookmarks"
     case .followedTags:
       return "followed_tags"
-    case .featuredTags(let id):
+    case let .featuredTags(id):
       return "accounts/\(id)/featured_tags"
     case .verifyCredentials:
       return "accounts/verify_credentials"
     case .updateCredentials:
       return "accounts/update_credentials"
-    case .statuses(let id, _, _, _, _, _):
+    case let .statuses(id, _, _, _, _, _):
       return "accounts/\(id)/statuses"
     case .relationships:
       return "accounts/relationships"
-    case .follow(let id, _):
+    case let .follow(id, _):
       return "accounts/\(id)/follow"
-    case .unfollow(let id):
+    case let .unfollow(id):
       return "accounts/\(id)/unfollow"
     case .familiarFollowers:
       return "accounts/familiar_followers"
     case .suggestions:
       return "suggestions"
-    case .following(let id, _):
+    case let .following(id, _):
       return "accounts/\(id)/following"
-    case .followers(let id, _):
+    case let .followers(id, _):
       return "accounts/\(id)/followers"
-    case .lists(let id):
+    case let .lists(id):
       return "accounts/\(id)/lists"
     case .preferences:
       return "preferences"
     }
   }
-  
+
   public func queryItems() -> [URLQueryItem]? {
     switch self {
-    case .statuses(_, let sinceId, let tag, let onlyMedia, let excludeReplies, let pinned):
+    case let .statuses(_, sinceId, tag, onlyMedia, excludeReplies, pinned):
       var params: [URLQueryItem] = []
       if let tag {
         params.append(.init(name: "tagged", value: tag))

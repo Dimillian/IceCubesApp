@@ -1,27 +1,27 @@
-import SwiftUI
-import Network
-import Models
 import DesignSystem
-import Shimmer
 import Env
+import Models
+import Network
+import Shimmer
+import SwiftUI
 
 public struct ConversationsListView: View {
   @EnvironmentObject private var routeurPath: RouterPath
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var theme: Theme
-  
+
   @StateObject private var viewModel = ConversationsListViewModel()
-  
-  public init() { }
-  
+
+  public init() {}
+
   private var conversations: [Conversation] {
     if viewModel.isLoadingFirstPage {
       return Conversation.placeholders()
     }
     return viewModel.conversations
   }
-  
+
   public var body: some View {
     ScrollView {
       LazyVStack {
@@ -61,7 +61,7 @@ public struct ConversationsListView: View {
     .toolbar {
       StatusEditorToolbarItem(visibility: .direct)
     }
-    .onChange(of: watcher.latestEvent?.id) { id in
+    .onChange(of: watcher.latestEvent?.id) { _ in
       if let latestEvent = watcher.latestEvent {
         viewModel.handleEvent(event: latestEvent)
       }

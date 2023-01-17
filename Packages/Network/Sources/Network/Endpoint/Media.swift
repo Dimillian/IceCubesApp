@@ -3,7 +3,7 @@ import Foundation
 public enum Media: Endpoint {
   case medias
   case media(id: String, description: String?)
-  
+
   public func path() -> String {
     switch self {
     case .medias:
@@ -12,7 +12,7 @@ public enum Media: Endpoint {
       return "media/\(id)"
     }
   }
-  
+
   public func queryItems() -> [URLQueryItem]? {
     switch self {
     case let .media(_, description):

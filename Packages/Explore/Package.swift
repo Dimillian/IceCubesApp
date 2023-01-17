@@ -11,7 +11,8 @@ let package = Package(
   products: [
     .library(
       name: "Explore",
-      targets: ["Explore"]),
+      targets: ["Explore"]
+    ),
   ],
   dependencies: [
     .package(name: "Account", path: "../Account"),
@@ -30,8 +31,8 @@ let package = Package(
         .product(name: "Models", package: "Models"),
         .product(name: "Env", package: "Env"),
         .product(name: "Status", package: "Status"),
-        .product(name: "DesignSystem", package: "DesignSystem")
-      ])
+        .product(name: "DesignSystem", package: "DesignSystem"),
+      ]
+    ),
   ]
 )
-

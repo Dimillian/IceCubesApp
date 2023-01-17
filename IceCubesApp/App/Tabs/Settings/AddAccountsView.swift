@@ -1,23 +1,23 @@
-import SwiftUI
-import Network
-import Models
-import Env
-import DesignSystem
-import NukeUI
-import Shimmer
 import AppAccount
 import Combine
+import DesignSystem
+import Env
+import Models
+import Network
+import NukeUI
+import Shimmer
+import SwiftUI
 
 struct AddAccountView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(\.scenePhase) private var scenePhase
-  
+
   @EnvironmentObject private var appAccountsManager: AppAccountsManager
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var currentInstance: CurrentInstance
   @EnvironmentObject private var pushNotifications: PushNotificationsService
   @EnvironmentObject private var theme: Theme
-  
+
   @State private var instanceName: String = ""
   @State private var instance: Instance?
   @State private var isSigninIn = false
@@ -26,9 +26,9 @@ struct AddAccountView: View {
   @State private var instanceFetchError: String?
 
   private let instanceNamePublisher = PassthroughSubject<String, Never>()
-  
+
   @FocusState private var isInstanceURLFieldFocused: Bool
-  
+
   var body: some View {
     NavigationStack {
       Form {
@@ -102,7 +102,7 @@ struct AddAccountView: View {
       })
     }
   }
-  
+
   private var signInSection: some View {
     Section {
       Button {
@@ -127,13 +127,13 @@ struct AddAccountView: View {
     }
     .listRowBackground(theme.tintColor)
   }
-  
+
   private var instancesListView: some View {
     Section("Suggestions") {
       if instances.isEmpty {
         placeholderRow
       } else {
-        ForEach(instanceName.isEmpty ? instances : instances.filter{ $0.name.contains(instanceName.lowercased()) }) { instance in
+        ForEach(instanceName.isEmpty ? instances : instances.filter { $0.name.contains(instanceName.lowercased()) }) { instance in
           Button {
             self.instanceName = instance.name
           } label: {
@@ -154,7 +154,7 @@ struct AddAccountView: View {
       }
     }
   }
-  
+
   private var placeholderRow: some View {
     VStack(alignment: .leading, spacing: 4) {
       Text("Loading...")
@@ -171,7 +171,7 @@ struct AddAccountView: View {
     .shimmering()
     .listRowBackground(theme.primaryBackgroundColor)
   }
-  
+
   private func signIn() async {
     do {
       signInClient = .init(server: instanceName)
@@ -184,7 +184,7 @@ struct AddAccountView: View {
       isSigninIn = false
     }
   }
-  
+
   private func continueSignIn(url: URL) async {
     guard let client = signInClient else {
       isSigninIn = false

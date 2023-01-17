@@ -1,13 +1,13 @@
-import SwiftUI
-import Models
 import DesignSystem
+import Models
 import NukeUI
+import SwiftUI
 
 struct InstanceInfoView: View {
   @EnvironmentObject private var theme: Theme
-  
+
   let instance: Instance
-  
+
   var body: some View {
     Form {
       InstanceInfoSection(instance: instance)
@@ -20,9 +20,9 @@ struct InstanceInfoView: View {
 
 public struct InstanceInfoSection: View {
   @EnvironmentObject private var theme: Theme
-  
+
   let instance: Instance
-  
+
   public var body: some View {
     Section("Instance info") {
       LabeledContent("Name", value: instance.title)
@@ -34,7 +34,7 @@ public struct InstanceInfoSection: View {
       LabeledContent("Domains", value: "\(instance.stats.domainCount)")
     }
     .listRowBackground(theme.primaryBackgroundColor)
-    
+
     Section("Instance rules") {
       ForEach(instance.rules) { rule in
         Text(rule.text)

@@ -1,7 +1,7 @@
-import SwiftUI
+import Combine
 import Models
 import Network
-import Combine
+import SwiftUI
 
 @MainActor
 class ExploreViewModel: ObservableObject {
@@ -17,16 +17,16 @@ class ExploreViewModel: ObservableObject {
       }
     }
   }
-  
+
   enum Token: String, Identifiable {
     case user = "@user"
     case statuses = "@posts"
     case tag = "#hashtag"
-    
+
     var id: String {
       rawValue
     }
-    
+
     var apiType: String {
       switch self {
       case .user:
@@ -42,7 +42,7 @@ class ExploreViewModel: ObservableObject {
   var allSectionsEmpty: Bool {
     trendingLinks.isEmpty && trendingTags.isEmpty && trendingStatuses.isEmpty && suggestedAccounts.isEmpty
   }
-  
+
   @Published var tokens: [Token] = []
   @Published var suggestedToken: [Token] = []
   @Published var searchQuery = ""
@@ -53,7 +53,7 @@ class ExploreViewModel: ObservableObject {
   @Published var trendingTags: [Tag] = []
   @Published var trendingStatuses: [Status] = []
   @Published var trendingLinks: [Card] = []
-  
+
   private var searchTask: Task<Void, Never>?
   private var cancellables = Set<AnyCancellable>()
 
@@ -61,7 +61,7 @@ class ExploreViewModel: ObservableObject {
     $searchQuery
       .removeDuplicates()
       .debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)
-      .sink(receiveValue: { [weak self] newValue in
+      .sink(receiveValue: { [weak self] _ in
         guard let self else { return }
 
         if self.searchQuery.starts(with: "@") {
@@ -76,17 +76,17 @@ class ExploreViewModel: ObservableObject {
       })
       .store(in: &cancellables)
   }
-  
+
   func fetchTrending() async {
     guard let client else { return }
     do {
       let data = try await fetchTrendingsData(client: client)
-      self.suggestedAccounts = data.suggestedAccounts
-      self.trendingTags = data.trendingTags
-      self.trendingStatuses = data.trendingStatuses
-      self.trendingLinks = data.trendingLinks
-      
-      self.suggestedAccountsRelationShips = try await client.get(endpoint: Accounts.relationships(ids: self.suggestedAccounts.map{ $0.id }))
+      suggestedAccounts = data.suggestedAccounts
+      trendingTags = data.trendingTags
+      trendingStatuses = data.trendingStatuses
+      trendingLinks = data.trendingLinks
+
+      suggestedAccountsRelationShips = try await client.get(endpoint: Accounts.relationships(ids: suggestedAccounts.map { $0.id }))
       withAnimation {
         isLoaded = true
       }
@@ -94,14 +94,14 @@ class ExploreViewModel: ObservableObject {
       isLoaded = true
     }
   }
-  
+
   private struct TrendingData {
     let suggestedAccounts: [Account]
     let trendingTags: [Tag]
     let trendingStatuses: [Status]
     let trendingLinks: [Card]
   }
-  
+
   private func fetchTrendingsData(client: Client) async throws -> TrendingData {
     async let suggestedAccounts: [Account] = client.get(endpoint: Accounts.suggestions)
     async let trendingTags: [Tag] = client.get(endpoint: Trends.tags)
@@ -112,7 +112,7 @@ class ExploreViewModel: ObservableObject {
                            trendingStatuses: trendingStatuses,
                            trendingLinks: trendingLinks)
   }
-  
+
   func search() {
     guard !searchQuery.isEmpty else { return }
     searchTask?.cancel()
@@ -127,10 +127,10 @@ class ExploreViewModel: ObservableObject {
                                                                                   following: nil),
                                                           forceVersion: .v2)
         let relationships: [Relationshionship] =
-          try await client.get(endpoint: Accounts.relationships(ids: results.accounts.map{ $0.id }))
+          try await client.get(endpoint: Accounts.relationships(ids: results.accounts.map { $0.id }))
         results.relationships = relationships
         self.results[searchQuery] = results
-      } catch { }
+      } catch {}
     }
   }
 }

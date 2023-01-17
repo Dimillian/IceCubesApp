@@ -1,19 +1,19 @@
-import SwiftUI
-import Models
-import DesignSystem
-import NukeUI
-import Network
-import UserNotifications
-import Env
 import AppAccount
+import DesignSystem
+import Env
+import Models
+import Network
+import NukeUI
+import SwiftUI
+import UserNotifications
 
 struct PushNotificationsView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var appAccountsManager: AppAccountsManager
   @EnvironmentObject private var pushNotifications: PushNotificationsService
-  
+
   @State private var subscriptions: [PushSubscription] = []
-    
+
   var body: some View {
     Form {
       Section {
@@ -24,7 +24,7 @@ struct PushNotificationsView: View {
         Text("Receive push notifications on new activities")
       }
       .listRowBackground(theme.primaryBackgroundColor)
-      
+
       if pushNotifications.isPushEnabled {
         Section {
           Toggle(isOn: $pushNotifications.isMentionNotificationEnabled) {
@@ -87,7 +87,7 @@ struct PushNotificationsView: View {
       updateSubscriptions()
     }
   }
-  
+
   private func updateSubscriptions() {
     Task {
       await pushNotifications.updateSubscriptions(accounts: appAccountsManager.pushAccounts)

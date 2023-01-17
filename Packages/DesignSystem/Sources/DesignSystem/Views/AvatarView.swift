@@ -1,6 +1,6 @@
-import SwiftUI
-import Shimmer
 import NukeUI
+import Shimmer
+import SwiftUI
 
 public struct AvatarView: View {
   @Environment(\.redactionReasons) private var reasons
@@ -8,7 +8,7 @@ public struct AvatarView: View {
 
   public enum Size {
     case account, status, embed, badge, boost
-    
+
     public var size: CGSize {
       switch self {
       case .account:
@@ -23,7 +23,7 @@ public struct AvatarView: View {
         return .init(width: 12, height: 12)
       }
     }
-    
+
     var cornerRadius: CGFloat {
       switch self {
       case .badge, .boost:
@@ -33,36 +33,36 @@ public struct AvatarView: View {
       }
     }
   }
-  
+
   public let url: URL
   public let size: Size
-  
+
   public init(url: URL, size: Size = .status) {
     self.url = url
     self.size = size
   }
-  
+
   public var body: some View {
     Group {
       if reasons == .placeholder {
         RoundedRectangle(cornerRadius: size.cornerRadius)
           .fill(.gray)
           .frame(width: size.size.width, height: size.size.height)
-        } else {
-          LazyImage(url: url) { state in
-            if let image = state.image {
-              image
-                .resizingMode(.aspectFit)
-            } else if state.isLoading {
-              placeholderView
-                .shimmering()
-            } else {
-              placeholderView
-            }
+      } else {
+        LazyImage(url: url) { state in
+          if let image = state.image {
+            image
+              .resizingMode(.aspectFit)
+          } else if state.isLoading {
+            placeholderView
+              .shimmering()
+          } else {
+            placeholderView
           }
-          .processors([.resize(size: size.size), .roundedCorners(radius: size.cornerRadius)])
-          .frame(width: size.size.width, height: size.size.height)
         }
+        .processors([.resize(size: size.size), .roundedCorners(radius: size.cornerRadius)])
+        .frame(width: size.size.width, height: size.size.height)
+      }
     }
     .clipShape(clipShape)
     .overlay(
@@ -78,7 +78,7 @@ public struct AvatarView: View {
       return AnyShape(RoundedRectangle(cornerRadius: size.cornerRadius))
     }
   }
-  
+
   @ViewBuilder
   private var placeholderView: some View {
     if size == .badge {

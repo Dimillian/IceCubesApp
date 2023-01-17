@@ -1,16 +1,16 @@
+import Account
+import AppAccount
+import DesignSystem
+import Env
+import Lists
+import Status
 import SwiftUI
 import Timeline
-import Account
-import Env
-import Status
-import DesignSystem
-import Lists
-import AppAccount
 
 @MainActor
 extension View {
   func withAppRouteur() -> some View {
-    self.navigationDestination(for: RouteurDestinations.self) { destination in
+    navigationDestination(for: RouteurDestinations.self) { destination in
       switch destination {
       case let .accountDetail(id):
         AccountDetailView(accountId: id)
@@ -35,9 +35,9 @@ extension View {
       }
     }
   }
-  
+
   func withSheetDestinations(sheetDestinations: Binding<SheetDestinations?>) -> some View {
-    self.sheet(item: sheetDestinations) { destination in
+    sheet(item: sheetDestinations) { destination in
       switch destination {
       case let .replyToStatusEditor(status):
         StatusEditorView(mode: .replyTo(status: status))
@@ -69,10 +69,9 @@ extension View {
       }
     }
   }
-  
+
   func withEnvironments() -> some View {
-    self
-      .environmentObject(CurrentAccount.shared)
+    environmentObject(CurrentAccount.shared)
       .environmentObject(UserPreferences.shared)
       .environmentObject(CurrentInstance.shared)
       .environmentObject(Theme.shared)

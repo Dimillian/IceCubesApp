@@ -1,20 +1,20 @@
-import SwiftUI
 import Models
 import Network
+import SwiftUI
 
 @MainActor
 class ListAddAccountViewModel: ObservableObject {
   let account: Account
-  
+
   @Published var inLists: [Models.List] = []
   @Published var isLoadingInfo: Bool = true
-  
+
   var client: Client?
-  
+
   init(account: Account) {
     self.account = account
   }
-  
+
   func fetchInfo() async {
     guard let client else { return }
     isLoadingInfo = true
@@ -27,7 +27,7 @@ class ListAddAccountViewModel: ObservableObject {
       }
     }
   }
-  
+
   func addToList(list: Models.List) async {
     guard let client else { return }
     let response = try? await client.post(endpoint: Lists.updateAccounts(listId: list.id, accounts: [account.id]))
@@ -35,7 +35,7 @@ class ListAddAccountViewModel: ObservableObject {
       inLists.append(list)
     }
   }
-  
+
   func removeFromList(list: Models.List) async {
     guard let client else { return }
     let response = try? await client.delete(endpoint: Lists.updateAccounts(listId: list.id, accounts: [account.id]))

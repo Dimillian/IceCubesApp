@@ -1,9 +1,9 @@
-import SwiftUI
-import Network
-import Models
-import Shimmer
 import DesignSystem
 import Env
+import Models
+import Network
+import Shimmer
+import SwiftUI
 
 public struct NotificationsListView: View {
   @Environment(\.scenePhase) private var scenePhase
@@ -11,9 +11,9 @@ public struct NotificationsListView: View {
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
   @StateObject private var viewModel = NotificationsViewModel()
-  
-  public init() { }
-  
+
+  public init() {}
+
   public var body: some View {
     ScrollView {
       LazyVStack {
@@ -71,7 +71,7 @@ public struct NotificationsListView: View {
       }
     })
   }
-  
+
   @ViewBuilder
   private var notificationsView: some View {
     switch viewModel.state {
@@ -83,7 +83,7 @@ public struct NotificationsListView: View {
         Divider()
           .padding(.vertical, .dividerPadding)
       }
-      
+
     case let .display(notifications, nextPageState):
       if notifications.isEmpty {
         EmptyView(iconName: "bell.slash",
@@ -91,14 +91,14 @@ public struct NotificationsListView: View {
                   message: "Notifications? What notifications? Your notification inbox is looking so empty. Keep on being awesome! 📱😎")
       } else {
         ForEach(notifications) { notification in
-            if notification.supportedType != nil {
-                NotificationRowView(notification: notification)
-                Divider()
-                    .padding(.vertical, .dividerPadding)
-            }
+          if notification.supportedType != nil {
+            NotificationRowView(notification: notification)
+            Divider()
+              .padding(.vertical, .dividerPadding)
+          }
         }
       }
-      
+
       switch nextPageState {
       case .none:
         EmptyView()
@@ -112,7 +112,7 @@ public struct NotificationsListView: View {
       case .loadingNextPage:
         loadingRow
       }
-      
+
     case .error:
       ErrorView(title: "An error occured",
                 message: "An error occured while loading your notifications, please retry.",
@@ -123,7 +123,7 @@ public struct NotificationsListView: View {
       }
     }
   }
-  
+
   private var loadingRow: some View {
     HStack {
       Spacer()

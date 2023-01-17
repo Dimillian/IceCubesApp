@@ -1,15 +1,15 @@
-import SwiftUI
-import Models
-import Env
-import Shimmer
-import NukeUI
 import DesignSystem
+import Env
+import Models
+import NukeUI
+import Shimmer
+import SwiftUI
 
 public struct StatusMediaPreviewView: View {
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var quickLook: QuickLook
   @EnvironmentObject private var theme: Theme
-  
+
   public let attachements: [MediaAttachement]
   public let sensitive: Bool
   public let isNotifications: Bool
@@ -19,7 +19,7 @@ public struct StatusMediaPreviewView: View {
   @State private var altTextDisplayed: String?
   @State private var isAltAlertDisplayed: Bool = false
   @State private var isHidingMedia: Bool = false
-  
+
   private var imageMaxHeight: CGFloat {
     if isNotifications {
       if UIDevice.current.userInterfaceIdiom == .pad {
@@ -35,7 +35,7 @@ public struct StatusMediaPreviewView: View {
     }
     return attachements.count > 2 ? 100 : 200
   }
-  
+
   private func size(for media: MediaAttachement) -> CGSize? {
     if isNotifications {
       return .init(width: 50, height: 50)
@@ -44,12 +44,13 @@ public struct StatusMediaPreviewView: View {
       return .init(width: 100, height: 100)
     }
     if let width = media.meta?.original?.width,
-       let height = media.meta?.original?.height {
+       let height = media.meta?.original?.height
+    {
       return .init(width: CGFloat(width), height: CGFloat(height))
     }
     return nil
   }
-  
+
   private func imageSize(from: CGSize, newWidth: CGFloat) -> CGSize {
     if isNotifications {
       return .init(width: 50, height: 50)
@@ -58,14 +59,14 @@ public struct StatusMediaPreviewView: View {
     let newHeight = from.height * ratio
     return .init(width: newWidth, height: newHeight)
   }
-  
+
   public var body: some View {
     Group {
       if attachements.count == 1, let attachement = attachements.first {
         makeFeaturedImagePreview(attachement: attachement)
           .onTapGesture {
             Task {
-              await quickLook.prepareFor(urls: attachements.compactMap{ $0.url }, selectedURL: attachement.url!)
+              await quickLook.prepareFor(urls: attachements.compactMap { $0.url }, selectedURL: attachement.url!)
             }
           }
       } else {
@@ -95,7 +96,7 @@ public struct StatusMediaPreviewView: View {
         quickLookLoadingView
           .transition(.opacity)
       }
-      
+
       if isHidingMedia {
         sensitiveMediaOverlay
           .transition(.opacity)
@@ -103,7 +104,7 @@ public struct StatusMediaPreviewView: View {
     }
     .alert("Image description",
            isPresented: $isAltAlertDisplayed) {
-      Button("Ok", action: { })
+      Button("Ok", action: {})
     } message: {
       Text(altTextDisplayed ?? "")
     }
@@ -116,16 +117,15 @@ public struct StatusMediaPreviewView: View {
         isHidingMedia = false
       }
     }
-
   }
-  
+
   @ViewBuilder
   private func makeAttachementView(for index: Int) -> some View {
     if attachements.count > index {
       makePreview(attachement: attachements[index])
     }
   }
-  
+
   @ViewBuilder
   private func makeFeaturedImagePreview(attachement: MediaAttachement) -> some View {
     switch attachement.supportedType {
@@ -133,7 +133,8 @@ public struct StatusMediaPreviewView: View {
       if theme.statusDisplayStyle == .large,
          let size = size(for: attachement),
          UIDevice.current.userInterfaceIdiom != .pad,
-          UIDevice.current.userInterfaceIdiom != .mac {
+         UIDevice.current.userInterfaceIdiom != .mac
+      {
         let avatarColumnWidth = theme.avatarPosition == .leading ? AvatarView.Size.status.size.width + .statusColumnsSpacing : 0
         let availableWidth = UIScreen.main.bounds.width - (.layoutPadding * 2) - avatarColumnWidth
         let newSize = imageSize(from: size,
@@ -169,20 +170,21 @@ public struct StatusMediaPreviewView: View {
         }
       } else {
         AsyncImage(
-              url: attachement.url,
-              content: { image in
-                image
-                  .resizable()
-                  .aspectRatio(contentMode: .fill)
-                  .frame(maxHeight: imageMaxHeight)
-                  .cornerRadius(4)
-              },
-              placeholder: {
-                RoundedRectangle(cornerRadius: 4)
-                  .fill(Color.gray)
-                  .frame(maxHeight: imageMaxHeight)
-                  .shimmering()
-              })
+          url: attachement.url,
+          content: { image in
+            image
+              .resizable()
+              .aspectRatio(contentMode: .fill)
+              .frame(maxHeight: imageMaxHeight)
+              .cornerRadius(4)
+          },
+          placeholder: {
+            RoundedRectangle(cornerRadius: 4)
+              .fill(Color.gray)
+              .frame(maxHeight: imageMaxHeight)
+              .shimmering()
+          }
+        )
       }
     case .gifv, .video, .audio:
       if let url = attachement.url {
@@ -193,7 +195,7 @@ public struct StatusMediaPreviewView: View {
       EmptyView()
     }
   }
-  
+
   @ViewBuilder
   private func makePreview(attachement: MediaAttachement) -> some View {
     if let type = attachement.supportedType {
@@ -236,7 +238,7 @@ public struct StatusMediaPreviewView: View {
           case .gifv, .video, .audio:
             if let url = attachement.url {
               VideoPlayerView(viewModel: .init(url: url))
-                .frame(width: isNotifications ? imageMaxHeight :  proxy.frame(in: .local).width)
+                .frame(width: isNotifications ? imageMaxHeight : proxy.frame(in: .local).width)
                 .frame(height: imageMaxHeight)
             }
           }
@@ -246,12 +248,12 @@ public struct StatusMediaPreviewView: View {
       }
       .onTapGesture {
         Task {
-          await quickLook.prepareFor(urls: attachements.compactMap{ $0.url }, selectedURL: attachement.url!)
+          await quickLook.prepareFor(urls: attachements.compactMap { $0.url }, selectedURL: attachement.url!)
         }
       }
     }
   }
-  
+
   private var quickLookLoadingView: some View {
     ZStack(alignment: .center) {
       VStack {
@@ -266,7 +268,7 @@ public struct StatusMediaPreviewView: View {
     }
     .background(.ultraThinMaterial)
   }
-  
+
   private var sensitiveMediaOverlay: some View {
     Rectangle()
       .background(.ultraThinMaterial)
@@ -287,14 +289,14 @@ public struct StatusMediaPreviewView: View {
         }
       }
   }
-  
+
   private var cornerSensitiveButton: some View {
     Button {
       withAnimation {
         isHidingMedia = true
       }
     } label: {
-      Image(systemName:"eye.slash")
+      Image(systemName: "eye.slash")
     }
     .position(x: 30, y: 30)
     .buttonStyle(.borderedProminent)

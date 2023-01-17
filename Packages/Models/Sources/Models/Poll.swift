@@ -5,12 +5,12 @@ public struct Poll: Codable {
     enum CodingKeys: String, CodingKey {
       case title, votesCount
     }
-    
+
     public var id = UUID().uuidString
     public let title: String
     public let votesCount: Int
   }
-  
+
   public let id: String
   public let expiresAt: ServerDate
   public let expired: Bool

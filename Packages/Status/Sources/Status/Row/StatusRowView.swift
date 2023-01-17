@@ -1,10 +1,10 @@
-import SwiftUI
-import Models
-import Env
 import DesignSystem
+import EmojiText
+import Env
+import Models
 import Network
 import Shimmer
-import EmojiText
+import SwiftUI
 
 public struct StatusRowView: View {
   @Environment(\.redactionReasons) private var reasons
@@ -14,11 +14,11 @@ public struct StatusRowView: View {
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var routeurPath: RouterPath
   @StateObject var viewModel: StatusRowViewModel
-  
+
   public init(viewModel: StatusRowViewModel) {
     _viewModel = StateObject(wrappedValue: viewModel)
   }
-  
+
   public var body: some View {
     if viewModel.isFiltered, let filter = viewModel.filter {
       switch filter.filter.filterAction {
@@ -31,7 +31,8 @@ public struct StatusRowView: View {
       HStack(alignment: .top, spacing: .statusColumnsSpacing) {
         if !viewModel.isCompact,
            theme.avatarPosition == .leading,
-           let status: AnyStatus = viewModel.status.reblog ?? viewModel.status {
+           let status: AnyStatus = viewModel.status.reblog ?? viewModel.status
+        {
           Button {
             routeurPath.navigate(to: .accountDetailWithAccount(account: status.account))
           } label: {
@@ -78,7 +79,7 @@ public struct StatusRowView: View {
       }
     }
   }
-  
+
   private func makeFilterView(filter: Filter) -> some View {
     HStack {
       Text("Filtered by: \(filter.title)")
@@ -91,12 +92,12 @@ public struct StatusRowView: View {
       }
     }
   }
-  
+
   @ViewBuilder
   private var reblogView: some View {
     if viewModel.status.reblog != nil {
       HStack(spacing: 2) {
-        Image(systemName:"arrow.left.arrow.right.circle.fill")
+        Image(systemName: "arrow.left.arrow.right.circle.fill")
         AvatarView(url: viewModel.status.account.avatar, size: .boost)
         if viewModel.status.account.username != account.account?.username {
           EmojiTextApp(viewModel.status.account.safeDisplayName.asMarkdown, emojis: viewModel.status.account.emojis)
@@ -119,13 +120,14 @@ public struct StatusRowView: View {
       }
     }
   }
-  
+
   @ViewBuilder
   var replyView: some View {
     if let accountId = viewModel.status.inReplyToAccountId,
-       let mention = viewModel.status.mentions.first(where: { $0.id == accountId}) {
+       let mention = viewModel.status.mentions.first(where: { $0.id == accountId })
+    {
       HStack(spacing: 2) {
-        Image(systemName:"arrowshape.turn.up.left.fill")
+        Image(systemName: "arrowshape.turn.up.left.fill")
         Text("Replied to")
         Text(mention.username)
       }
@@ -143,7 +145,7 @@ public struct StatusRowView: View {
       }
     }
   }
-  
+
   private var statusView: some View {
     VStack(alignment: .leading, spacing: 8) {
       if let status: AnyStatus = viewModel.status.reblog ?? viewModel.status {
@@ -172,7 +174,7 @@ public struct StatusRowView: View {
       }
     }
   }
-  
+
   private func makeStatusContentView(status: AnyStatus) -> some View {
     Group {
       if !status.spoilerText.isEmpty {
@@ -183,7 +185,7 @@ public struct StatusRowView: View {
             viewModel.displaySpoiler.toggle()
           }
         } label: {
-            Text(viewModel.displaySpoiler ? "Show more" : "Show less")
+          Text(viewModel.displaySpoiler ? "Show more" : "Show less")
         }
         .buttonStyle(.bordered)
       }
@@ -196,7 +198,7 @@ public struct StatusRowView: View {
             })
           Spacer()
         }
-        
+
         if !reasons.contains(.placeholder) {
           if !viewModel.isCompact, !viewModel.isEmbedLoading, let embed = viewModel.embededStatus {
             StatusEmbededView(status: embed)
@@ -206,11 +208,11 @@ public struct StatusRowView: View {
               .shimmering()
           }
         }
-        
+
         if let poll = status.poll {
           StatusPollView(poll: poll)
         }
-        
+
         if !status.mediaAttachments.isEmpty {
           if theme.statusDisplayStyle == .compact {
             HStack {
@@ -224,20 +226,21 @@ public struct StatusRowView: View {
             StatusMediaPreviewView(attachements: status.mediaAttachments,
                                    sensitive: status.sensitive,
                                    isNotifications: viewModel.isCompact)
-            .padding(.vertical, 4)
+              .padding(.vertical, 4)
           }
         }
         if let card = status.card,
            viewModel.embededStatus?.url != status.card?.url,
            status.mediaAttachments.isEmpty,
            !viewModel.isEmbedLoading,
-           theme.statusDisplayStyle == .large {
+           theme.statusDisplayStyle == .large
+        {
           StatusCardView(card: card)
         }
       }
     }
   }
-  
+
   @ViewBuilder
   private func accountView(status: AnyStatus) -> some View {
     HStack(alignment: .center) {
@@ -250,17 +253,17 @@ public struct StatusRowView: View {
           .fontWeight(.semibold)
         Group {
           Text("@\(status.account.acct)") +
-          Text(" ⸱ ") +
-          Text(status.createdAt.formatted) +
-          Text(" ⸱ ") +
-          Text(Image(systemName: viewModel.status.visibility.iconName))
+            Text(" ⸱ ") +
+            Text(status.createdAt.formatted) +
+            Text(" ⸱ ") +
+            Text(Image(systemName: viewModel.status.visibility.iconName))
         }
         .font(.footnote)
         .foregroundColor(.gray)
       }
     }
   }
-  
+
   private var menuButton: some View {
     Menu {
       StatusRowContextMenu(viewModel: viewModel)

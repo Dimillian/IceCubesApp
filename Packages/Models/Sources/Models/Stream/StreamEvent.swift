@@ -6,7 +6,7 @@ public struct RawStreamEvent: Decodable {
   public let payload: String
 }
 
-public protocol StreamEvent: Identifiable{
+public protocol StreamEvent: Identifiable {
   var date: Date { get }
   var id: String { get }
 }

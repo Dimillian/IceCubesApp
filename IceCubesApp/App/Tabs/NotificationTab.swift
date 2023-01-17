@@ -1,9 +1,9 @@
-import SwiftUI
-import Timeline
+import AppAccount
 import Env
 import Network
 import Notifications
-import AppAccount
+import SwiftUI
+import Timeline
 
 struct NotificationsTab: View {
   @EnvironmentObject private var client: Client
@@ -12,7 +12,7 @@ struct NotificationsTab: View {
   @EnvironmentObject private var userPreferences: UserPreferences
   @StateObject private var routeurPath = RouterPath()
   @Binding var popToRootTab: Tab
-  
+
   var body: some View {
     NavigationStack(path: $routeurPath.path) {
       NotificationsListView()

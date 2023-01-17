@@ -1,23 +1,23 @@
-import SwiftUI
-import Models
 import DesignSystem
-import Env
-import Shimmer
-import NukeUI
 import EmojiText
+import Env
+import Models
+import NukeUI
+import Shimmer
+import SwiftUI
 
 struct AccountDetailHeaderView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var quickLook: QuickLook
   @EnvironmentObject private var routeurPath: RouterPath
   @Environment(\.redactionReasons) private var reasons
-  
+
   @ObservedObject var viewModel: AccountDetailViewModel
   let account: Account
   let scrollViewProxy: ScrollViewProxy?
-  
+
   @Binding var scrollOffset: CGFloat
-  
+
   private var bannerHeight: CGFloat {
     200 + (scrollOffset > 0 ? scrollOffset * 2 : 0)
   }
@@ -28,9 +28,9 @@ struct AccountDetailHeaderView: View {
       accountInfoView
     }
   }
-  
+
   private var headerImageView: some View {
-    GeometryReader { proxy in
+    GeometryReader { _ in
       ZStack(alignment: .bottomTrailing) {
         if reasons.contains(.placeholder) {
           Rectangle()
@@ -53,7 +53,7 @@ struct AccountDetailHeaderView: View {
           }
           .frame(height: bannerHeight)
         }
-        
+
         if viewModel.relationship?.followedBy == true {
           Text("Follows You")
             .font(.footnote)
@@ -75,15 +75,15 @@ struct AccountDetailHeaderView: View {
       }
     }
   }
-  
+
   private var accountAvatarView: some View {
     HStack {
       AvatarView(url: account.avatar, size: .account)
-      .onTapGesture {
-        Task {
-          await quickLook.prepareFor(urls: [account.avatar], selectedURL: account.avatar)
+        .onTapGesture {
+          Task {
+            await quickLook.prepareFor(urls: [account.avatar], selectedURL: account.avatar)
+          }
         }
-      }
       Spacer()
       Group {
         Button {
@@ -102,17 +102,17 @@ struct AccountDetailHeaderView: View {
       }.offset(y: 20)
     }
   }
-  
+
   private var accountInfoView: some View {
     Group {
       accountAvatarView
       HStack {
         VStack(alignment: .leading, spacing: 0) {
           EmojiTextApp(account.safeDisplayName.asMarkdown, emojis: account.emojis)
-              .font(.headline)
+            .font(.headline)
           Text("@\(account.acct)")
-              .font(.callout)
-              .foregroundColor(.gray)
+            .font(.callout)
+            .foregroundColor(.gray)
         }
         Spacer()
         if let relationship = viewModel.relationship, !viewModel.isCurrentUser {
@@ -133,7 +133,7 @@ struct AccountDetailHeaderView: View {
     .padding(.horizontal, .layoutPadding)
     .offset(y: -40)
   }
-  
+
   private func makeCustomInfoLabel(title: String, count: Int) -> some View {
     VStack {
       Text("\(count)")

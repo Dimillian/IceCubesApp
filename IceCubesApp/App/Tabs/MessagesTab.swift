@@ -1,12 +1,11 @@
-import SwiftUI
-import Env
-import Network
 import Account
-import Models
-import Shimmer
+import AppAccount
 import Conversations
 import Env
-import AppAccount
+import Models
+import Network
+import Shimmer
+import SwiftUI
 
 struct MessagesTab: View {
   @EnvironmentObject private var watcher: StreamWatcher
@@ -14,7 +13,7 @@ struct MessagesTab: View {
   @EnvironmentObject private var currentAccount: CurrentAccount
   @StateObject private var routeurPath = RouterPath()
   @Binding var popToRootTab: Tab
-  
+
   var body: some View {
     NavigationStack(path: $routeurPath.path) {
       ConversationsListView()

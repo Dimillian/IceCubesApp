@@ -4,12 +4,13 @@ public struct Application: Codable, Identifiable {
   public var id: String {
     name
   }
+
   public let name: String
   public let website: URL?
 }
 
-extension Application {
-  public init(from decoder: Decoder) throws {
+public extension Application {
+  init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)
 
     name = try values.decodeIfPresent(String.self, forKey: .name) ?? ""
@@ -53,12 +54,11 @@ public protocol AnyStatus {
   var language: String? { get }
 }
 
-
 public struct Status: AnyStatus, Codable, Identifiable {
   public var viewId: String {
     id + createdAt + (editedAt ?? "")
   }
-  
+
   public let id: String
   public let content: HTMLString
   public let account: Account
@@ -85,7 +85,7 @@ public struct Status: AnyStatus, Codable, Identifiable {
   public let filtered: [Filtered]?
   public let sensitive: Bool
   public let language: String?
-  
+
   public static func placeholder() -> Status {
     .init(id: UUID().uuidString,
           content: "This is a #toot\nWith some @content\nAnd some more content for your #eyes @only",
@@ -114,7 +114,7 @@ public struct Status: AnyStatus, Codable, Identifiable {
           sensitive: false,
           language: nil)
   }
-  
+
   public static func placeholders() -> [Status] {
     [.placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder()]
   }
@@ -124,7 +124,7 @@ public struct ReblogStatus: AnyStatus, Codable, Identifiable {
   public var viewId: String {
     id + createdAt + (editedAt ?? "")
   }
-  
+
   public let id: String
   public let content: String
   public let account: Account

@@ -3,16 +3,16 @@ import Foundation
 public enum Polls: Endpoint {
   case poll(id: String)
   case vote(id: String, votes: [Int])
-  
+
   public func path() -> String {
     switch self {
-    case .poll(let id):
+    case let .poll(id):
       return "polls/\(id)/"
-    case .vote(let id, _):
+    case let .vote(id, _):
       return "polls/\(id)/votes"
     }
   }
-  
+
   public func queryItems() -> [URLQueryItem]? {
     switch self {
     case let .vote(_, votes):
@@ -21,7 +21,7 @@ public enum Polls: Endpoint {
         params.append(.init(name: "choices[]", value: "\(vote)"))
       }
       return params
-      
+
     default:
       return nil
     }

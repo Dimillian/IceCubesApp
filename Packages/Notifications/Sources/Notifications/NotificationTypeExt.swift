@@ -21,7 +21,7 @@ extension Models.Notification.NotificationType {
       return "edited a post"
     }
   }
-  
+
   func iconName() -> String {
     switch self {
     case .status:
@@ -40,7 +40,7 @@ extension Models.Notification.NotificationType {
       return "pencil.line"
     }
   }
-  
+
   func menuTitle() -> String {
     switch self {
     case .status:

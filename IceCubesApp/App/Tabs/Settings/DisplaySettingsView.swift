@@ -1,13 +1,13 @@
-import SwiftUI
-import Models
 import DesignSystem
+import Models
 import Status
+import SwiftUI
 
 struct DisplaySettingsView: View {
   @EnvironmentObject private var theme: Theme
-  
+
   @State private var isThemeSelectorPresented = false
-  
+
   var body: some View {
     Form {
       Section("Theme") {
@@ -17,7 +17,7 @@ struct DisplaySettingsView: View {
         ColorPicker("Secondary Background color", selection: $theme.secondaryBackgroundColor)
       }
       .listRowBackground(theme.primaryBackgroundColor)
-      
+
       Section("Display") {
         Picker("Avatar position", selection: $theme.avatarPosition) {
           ForEach(Theme.AvatarPosition.allCases, id: \.rawValue) { position in
@@ -34,7 +34,7 @@ struct DisplaySettingsView: View {
             Text(buttonStyle.description).tag(buttonStyle)
           }
         }
-        
+
         Picker("Status media style", selection: $theme.statusDisplayStyle) {
           ForEach(Theme.StatusDisplayStyle.allCases, id: \.rawValue) { buttonStyle in
             Text(buttonStyle.description).tag(buttonStyle)
@@ -42,7 +42,7 @@ struct DisplaySettingsView: View {
         }
       }
       .listRowBackground(theme.primaryBackgroundColor)
-      
+
       Section {
         Button {
           theme.selectedSet = .iceCubeDark
@@ -59,7 +59,7 @@ struct DisplaySettingsView: View {
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
   }
-  
+
   private var themeSelectorButton: some View {
     NavigationLink(destination: ThemePreviewView()) {
       HStack {

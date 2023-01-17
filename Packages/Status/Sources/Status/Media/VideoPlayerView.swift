@@ -1,14 +1,14 @@
-import SwiftUI
 import AVKit
+import SwiftUI
 
 class VideoPlayerViewModel: ObservableObject {
   @Published var player: AVPlayer?
   private let url: URL
-  
+
   init(url: URL) {
     self.url = url
   }
-  
+
   func preparePlayer() {
     player = .init(url: url)
     player?.isMuted = true
@@ -16,11 +16,11 @@ class VideoPlayerViewModel: ObservableObject {
     guard let player else { return }
     NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
                                            object: player.currentItem, queue: .main) { [weak self] _ in
-        self?.player?.seek(to: CMTime.zero)
-        self?.player?.play()
+      self?.player?.seek(to: CMTime.zero)
+      self?.player?.play()
     }
   }
-  
+
   deinit {
     NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: self.player)
   }

@@ -1,22 +1,22 @@
 import Foundation
-import SwiftUI
-import NukeUI
 import Models
+import NukeUI
+import SwiftUI
 
-extension Account {
+public extension Account {
   private struct Part: Identifiable {
     let id = UUID().uuidString
     let value: Substring
   }
-  
-  public var safeDisplayName: String {
+
+  var safeDisplayName: String {
     if displayName.isEmpty {
       return username
     }
     return displayName
   }
-    
-  public var displayNameWithoutEmojis: String {
+
+  var displayNameWithoutEmojis: String {
     var name = safeDisplayName
     for emoji in emojis {
       name = name.replacingOccurrences(of: ":\(emoji.shortcode):", with: "")

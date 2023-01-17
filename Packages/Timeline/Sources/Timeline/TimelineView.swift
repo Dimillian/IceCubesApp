@@ -1,36 +1,36 @@
-import SwiftUI
-import Network
-import Models
-import Shimmer
-import Status
 import DesignSystem
 import Env
+import Models
+import Network
+import Shimmer
+import Status
+import SwiftUI
 
 public struct TimelineView: View {
   private enum Constants {
     static let scrollToTop = "top"
   }
-  
+
   @Environment(\.scenePhase) private var scenePhase
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var routerPath: RouterPath
-  
+
   @StateObject private var viewModel = TimelineViewModel()
 
   @State private var scrollProxy: ScrollViewProxy?
   @Binding var timeline: TimelineFilter
   @Binding var scrollToTopSignal: Int
-  
+
   private let feedbackGenerator = UIImpactFeedbackGenerator()
-  
+
   public init(timeline: Binding<TimelineFilter>, scrollToTopSignal: Binding<Int>) {
     _timeline = timeline
     _scrollToTopSignal = scrollToTopSignal
   }
-  
+
   public var body: some View {
     ScrollViewReader { proxy in
       ZStack(alignment: .top) {
@@ -102,7 +102,7 @@ public struct TimelineView: View {
       }
     })
   }
-  
+
   @ViewBuilder
   private func makePendingNewPostsView(proxy: ScrollViewProxy) -> some View {
     if !viewModel.pendingStatuses.isEmpty {
@@ -134,7 +134,7 @@ public struct TimelineView: View {
       .padding(.top, 6)
     }
   }
-  
+
   @ViewBuilder
   private var tagHeaderView: some View {
     if let tag = viewModel.tag {
@@ -156,7 +156,7 @@ public struct TimelineView: View {
             }
           }
         } label: {
-          Text(tag.following ? "Following": "Follow")
+          Text(tag.following ? "Following" : "Follow")
         }.buttonStyle(.bordered)
       }
       .padding(.horizontal, .layoutPadding)

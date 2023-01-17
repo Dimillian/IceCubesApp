@@ -7,11 +7,9 @@ public class QuickLook: ObservableObject {
   @Published public private(set) var urls: [URL] = []
   @Published public private(set) var isPreparing: Bool = false
   @Published public private(set) var latestError: Error?
-  
-  public init() {
-    
-  }
-  
+
+  public init() {}
+
   public func prepareFor(urls: [URL], selectedURL: URL) async {
     withAnimation {
       isPreparing = true
@@ -43,7 +41,7 @@ public class QuickLook: ObservableObject {
       latestError = error
     }
   }
-  
+
   private func localPathFor(url: URL) async throws -> URL {
     let tempDir = URL(fileURLWithPath: NSTemporaryDirectory())
     let path = tempDir.appendingPathComponent(url.lastPathComponent)

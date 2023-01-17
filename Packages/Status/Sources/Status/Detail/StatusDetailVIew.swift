@@ -1,9 +1,9 @@
-import SwiftUI
-import Models
-import Shimmer
-import Env
-import Network
 import DesignSystem
+import Env
+import Models
+import Network
+import Shimmer
+import SwiftUI
 
 public struct StatusDetailView: View {
   @EnvironmentObject private var theme: Theme
@@ -14,15 +14,15 @@ public struct StatusDetailView: View {
   @Environment(\.openURL) private var openURL
   @StateObject private var viewModel: StatusDetailViewModel
   @State private var isLoaded: Bool = false
-    
+
   public init(statusId: String) {
     _viewModel = StateObject(wrappedValue: .init(statusId: statusId))
   }
-  
+
   public init(remoteStatusURL: URL) {
     _viewModel = StateObject(wrappedValue: .init(remoteStatusURL: remoteStatusURL))
   }
-  
+
   public var body: some View {
     ScrollViewReader { proxy in
       ScrollView {
@@ -37,7 +37,7 @@ public struct StatusDetailView: View {
               Divider()
                 .padding(.vertical, .dividerPadding)
             }
-          case let.display(status, context):
+          case let .display(status, context):
             if !context.ancestors.isEmpty {
               ForEach(context.ancestors) { ancestor in
                 StatusRowView(viewModel: .init(status: ancestor, isCompact: false))
@@ -49,7 +49,7 @@ public struct StatusDetailView: View {
             StatusRowView(viewModel: .init(status: status,
                                            isCompact: false,
                                            isFocused: true))
-            .padding(.horizontal, .layoutPadding)
+              .padding(.horizontal, .layoutPadding)
               .id(status.id)
             Divider()
               .padding(.bottom, .dividerPadding * 2)
@@ -61,7 +61,7 @@ public struct StatusDetailView: View {
                   .padding(.vertical, .dividerPadding)
               }
             }
-            
+
           case .error:
             ErrorView(title: "An error occured",
                       message: "An error occured while this post context, please try again.",

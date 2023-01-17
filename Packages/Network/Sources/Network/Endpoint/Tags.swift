@@ -4,18 +4,18 @@ public enum Tags: Endpoint {
   case tag(id: String)
   case follow(id: String)
   case unfollow(id: String)
-  
+
   public func path() -> String {
     switch self {
-    case .tag(let id):
+    case let .tag(id):
       return "tags/\(id)/"
-    case .follow(let id):
+    case let .follow(id):
       return "tags/\(id)/follow"
-    case .unfollow(let id):
+    case let .unfollow(id):
       return "tags/\(id)/unfollow"
     }
   }
-  
+
   public func queryItems() -> [URLQueryItem]? {
     switch self {
     default:
