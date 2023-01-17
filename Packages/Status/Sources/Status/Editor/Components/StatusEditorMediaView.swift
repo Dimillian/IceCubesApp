@@ -19,7 +19,7 @@ struct StatusEditorMediaView: View {
             ZStack(alignment: .bottomTrailing) {
               if container.image != nil {
                 makeLocalImage(container: container)
-              }  else if let url = container.mediaAttachement?.url {
+              }  else if let url = container.mediaAttachement?.url ?? container.mediaAttachement?.previewUrl {
                 makeLazyImage(url: url)
               }
               if container.mediaAttachement?.description?.isEmpty == false {
