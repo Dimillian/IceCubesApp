@@ -63,6 +63,7 @@ public class StatusEditorViewModel: ObservableObject {
   
   @Published var mentionsSuggestions: [Account] = []
   @Published var tagsSuggestions: [Tag] = []
+  @Published var selectedLanguage: String?
   private var currentSuggestionRange: NSRange?
   
   private var embededStatusURL: URL? {
@@ -94,6 +95,17 @@ public class StatusEditorViewModel: ObservableObject {
     statusText = .init(string: text)
     selectedRange = .init(location: text.utf16.count, length: 0)
   }
+  
+  func setInitialLanguageSelection(preference: String?) {
+    switch mode {
+    case .replyTo(let status), .edit(let status):
+      selectedLanguage = status.language
+    default:
+      break
+    }
+    
+    selectedLanguage = selectedLanguage ?? preference ?? currentAccount?.source?.language
+  }
 
   private func getPollOptionsForAPI() -> [String]? {
     let options = pollOptions.filter { !$0.trimmingCharacters(in: .whitespaces).isEmpty }
@@ -116,7 +128,8 @@ public class StatusEditorViewModel: ObservableObject {
                             inReplyToId: mode.replyToStatus?.id,
                             spoilerText: spoilerOn ? spoilerText : nil,
                             mediaIds: mediasImages.compactMap{ $0.mediaAttachement?.id },
-                            poll: pollData)
+                            poll: pollData,
+                            language: selectedLanguage)
       switch mode {
       case .new, .replyTo, .quote, .mention, .shareExtension:
         postStatus = try await client.post(endpoint: Statuses.postStatus(json: data))

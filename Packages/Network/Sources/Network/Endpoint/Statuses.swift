@@ -80,7 +80,8 @@ public struct StatusData: Encodable {
   public let spoilerText: String?
   public let mediaIds: [String]?
   public let poll: PollData?
-  
+  public let language: String?
+
   public struct PollData: Encodable {
     public let options: [String]
     public let multiple: Bool
@@ -98,12 +99,14 @@ public struct StatusData: Encodable {
               inReplyToId: String? = nil,
               spoilerText: String? = nil,
               mediaIds: [String]? = nil,
-              poll: PollData? = nil) {
+              poll: PollData? = nil,
+              language: String? = nil) {
     self.status = status
     self.visibility = visibility
     self.inReplyToId = inReplyToId
     self.spoilerText = spoilerText
     self.mediaIds = mediaIds
     self.poll = poll
+    self.language = language
   }
 }

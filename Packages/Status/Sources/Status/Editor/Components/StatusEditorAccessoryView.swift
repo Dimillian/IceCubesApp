@@ -5,15 +5,16 @@ import Models
 import Env
 
 struct StatusEditorAccessoryView: View {
-  @Environment(\.dismiss) private var dismiss
-  
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var currentInstance: CurrentInstance
   
   @FocusState<Bool>.Binding var isSpoilerTextFocused: Bool
   @ObservedObject var viewModel: StatusEditorViewModel
+  
   @State private var isDrafsSheetDisplayed: Bool = false
+  @State private var isLanguageSheetDisplayed: Bool = false
+  @State private var languageSearch: String = ""
   
   var body: some View {
     VStack(spacing: 0) {
@@ -25,18 +26,6 @@ struct StatusEditorAccessoryView: View {
         }
         .disabled(viewModel.showPoll)
         
-        Button {
-          viewModel.insertStatusText(text: " @")
-        } label: {
-          Image(systemName: "at")
-        }
-        
-        Button {
-          viewModel.insertStatusText(text: " #")
-        } label: {
-          Image(systemName: "number")
-        }
-
         Button {
           withAnimation {
             viewModel.showPoll.toggle()
@@ -61,9 +50,18 @@ struct StatusEditorAccessoryView: View {
           } label: {
             Image(systemName: "archivebox")
           }
-
         }
-    
+
+        Button {
+          isLanguageSheetDisplayed.toggle()
+        } label: {
+          if let language = viewModel.selectedLanguage {
+            Text(language.uppercased())
+          } else {
+            Image(systemName: "globe")
+          }
+        }
+        
         Spacer()
         
         characterCountView
@@ -75,6 +73,54 @@ struct StatusEditorAccessoryView: View {
     }
     .sheet(isPresented: $isDrafsSheetDisplayed) {
       draftsSheetView
+    }
+    .sheet(isPresented: $isLanguageSheetDisplayed, content: {
+      languageSheetView
+    })
+    .onAppear {
+      viewModel.setInitialLanguageSelection(preference: preferences.serverPreferences?.postLanguage)
+    }
+  }
+  
+  @ViewBuilder
+  private func languageTextView(isoCode: String, nativeName: String?, name: String?) -> some View {
+    if let nativeName = nativeName, let name = name {
+      Text("\(nativeName) (\(name))")
+    } else {
+      Text(isoCode.uppercased())
+    }
+  }
+  
+  private var languageSheetView: some View {
+    NavigationStack {
+      List {
+        ForEach(availableLanguages, id: \.0) { (isoCode, nativeName, name) in
+          HStack {
+            languageTextView(isoCode: isoCode, nativeName: nativeName, name: name)
+              .tag(isoCode)
+            Spacer()
+            if isoCode == viewModel.selectedLanguage {
+              Image(systemName: "checkmark")
+            }
+          }
+          .listRowBackground(theme.primaryBackgroundColor)
+          .contentShape(Rectangle())
+          .onTapGesture {
+            viewModel.selectedLanguage = isoCode
+            isLanguageSheetDisplayed = false
+          }
+        }
+      }
+      .searchable(text: $languageSearch)
+      .toolbar {
+        ToolbarItem(placement: .navigationBarLeading) {
+          Button("Cancel", action: { isLanguageSheetDisplayed = false })
+        }
+      }
+      .navigationTitle("Select Languages")
+      .navigationBarTitleDisplayMode(.inline)
+      .scrollContentBackground(.hidden)
+      .background(theme.secondaryBackgroundColor)
     }
   }
   
@@ -98,7 +144,7 @@ struct StatusEditorAccessoryView: View {
       }
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
-          Button("Cancel", action: { dismiss() })
+          Button("Cancel", action: { isDrafsSheetDisplayed = false })
         }
       }
       .scrollContentBackground(.hidden)
@@ -114,5 +160,24 @@ struct StatusEditorAccessoryView: View {
     Text("\((currentInstance.instance?.configuration.statuses.maxCharacters ?? 500) - viewModel.statusText.string.utf16.count)")
       .foregroundColor(.gray)
       .font(.callout)
+  }
+  
+  private var availableLanguages: [(String, String?, String?)] {
+    Locale.LanguageCode.isoLanguageCodes
+      .filter { $0.identifier.count == 2 } // Mastodon only supports ISO 639-1 (two-letter) codes
+      .map { lang in
+        let nativeLocale = Locale(languageComponents: Locale.Language.Components(languageCode: lang))
+        return (
+          lang.identifier,
+          nativeLocale.localizedString(forLanguageCode: lang.identifier),
+          Locale.current.localizedString(forLanguageCode: lang.identifier)
+        )
+      }
+      .filter { (identifier, nativeLocale, locale) in
+        guard !languageSearch.isEmpty else {
+          return true
+        }
+        return nativeLocale?.lowercased().hasPrefix(languageSearch.lowercased()) == true
+      }
   }
 }
