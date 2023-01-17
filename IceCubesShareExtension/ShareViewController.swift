@@ -13,7 +13,8 @@ class ShareViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    let client = AppAccountsManager.shared.currentClient
+    let appAccountsManager = AppAccountsManager.shared
+    let client = appAccountsManager.currentClient
     let account = CurrentAccount.shared
     let instance = CurrentInstance.shared
     account.setClient(client: client)
@@ -26,6 +27,7 @@ class ShareViewController: UIViewController {
       if let attachments = item.attachments {
         let view = StatusEditorView(mode: .shareExtension(items: attachments))
           .environmentObject(UserPreferences.shared)
+          .environmentObject(appAccountsManager)
           .environmentObject(client)
           .environmentObject(account)
           .environmentObject(theme)

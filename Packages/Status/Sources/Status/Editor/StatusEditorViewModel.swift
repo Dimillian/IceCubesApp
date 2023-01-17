@@ -52,7 +52,7 @@ public class StatusEditorViewModel: ObservableObject {
   @Published var replyToStatus: Status?
   @Published var embededStatus: Status?
   var canPost: Bool {
-    statusText.length > 0 || !selectedMedias.isEmpty
+    statusText.length > 0 || !mediasImages.isEmpty
   }
 
   var shouldDisablePollButton: Bool {
