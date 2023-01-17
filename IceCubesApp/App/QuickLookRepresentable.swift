@@ -56,12 +56,9 @@ class AppQLPreviewCpntroller: QLPreviewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationItem.rightBarButtonItem = closeButton
-  }
-
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    navigationItem.rightBarButtonItem = closeButton
+    if UIDevice.current.userInterfaceIdiom != .pad {
+      navigationItem.rightBarButtonItem = closeButton
+    }
   }
 
   override func viewDidLayoutSubviews() {

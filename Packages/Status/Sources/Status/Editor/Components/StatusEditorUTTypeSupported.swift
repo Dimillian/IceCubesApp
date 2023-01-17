@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import UniformTypeIdentifiers
 
 @MainActor
 enum StatusEditorUTTypeSupported: String, CaseIterable {
@@ -9,6 +10,10 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
   case image = "public.image"
   case jpeg = "public.jpeg"
   case png = "public.png"
+  
+  static func types() -> [UTType]  {
+    [.url, .text, .plainText, .image, .jpeg, .png]
+  }
 
   func loadItemContent(item: NSItemProvider) async throws -> Any? {
     let result = try await item.loadItem(forTypeIdentifier: rawValue)

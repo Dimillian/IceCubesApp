@@ -67,6 +67,7 @@ public struct StatusEditorView: View {
                                     viewModel: viewModel)
         }
       }
+      .onDrop(of: StatusEditorUTTypeSupported.types(), delegate: viewModel)
       .onAppear {
         viewModel.client = client
         viewModel.currentAccount = currentAccount.account

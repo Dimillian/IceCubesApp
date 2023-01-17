@@ -238,7 +238,7 @@ public class StatusEditorViewModel: ObservableObject {
 
       for range in urlRanges {
         statusText.addAttributes([.foregroundColor: UIColor(theme?.tintColor ?? .brand),
-                                  .underlineStyle: NSUnderlineStyle.single,
+                                  .underlineStyle: NSUnderlineStyle.single.rawValue,
                                   .underlineColor: UIColor(theme?.tintColor ?? .brand)],
                                  range: NSRange(location: range.location, length: range.length))
       }
@@ -449,5 +449,13 @@ public class StatusEditorViewModel: ObservableObject {
                                         mimeType: "image/jpeg",
                                         filename: "file",
                                         data: data)
+  }
+}
+
+extension StatusEditorViewModel: DropDelegate {
+  public func performDrop(info: DropInfo) -> Bool {
+    let item = info.itemProviders(for: StatusEditorUTTypeSupported.types())
+    processItemsProvider(items: item)
+    return true
   }
 }

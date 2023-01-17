@@ -21,12 +21,13 @@ struct IceCubesApp: App {
   @StateObject private var watcher = StreamWatcher()
   @StateObject private var quickLook = QuickLook()
   @StateObject private var theme = Theme.shared
+  @StateObject private var sidebarRouterPath = RouterPath()
 
   @State private var selectedTab: Tab = .timeline
   @State private var selectSidebarItem: Tab? = .timeline
   @State private var popToRootTab: Tab = .other
-  @State private var sideBarLoadedTabs: [Tab] = []
-
+  @State private var sideBarLoadedTabs: Set<Tab> = Set()
+  
   private var availableTabs: [Tab] {
     appAccountsManager.currentClient.isAuth ? Tab.loggedInTabs() : Tab.loggedOutTab()
   }
@@ -53,6 +54,14 @@ struct IceCubesApp: App {
           QuickLookPreview(selectedURL: url, urls: quickLook.urls)
             .edgesIgnoringSafeArea(.bottom)
         })
+    }
+    .commands {
+      CommandGroup(replacing: CommandGroupPlacement.newItem) {
+        Button("New post") {
+          sidebarRouterPath.presentedSheet = .newStatusEditor(visibility: userPreferences.serverPreferences?.postVisibility ?? .pub)
+        }
+        .keyboardShortcut("n", modifiers: .command)
+      }
     }
     .onChange(of: scenePhase) { scenePhase in
       handleScenePhase(scenePhase: scenePhase)
@@ -84,10 +93,11 @@ struct IceCubesApp: App {
   private var sidebarView: some View {
     SideBarView(selectedTab: $selectedTab,
                 popToRootTab: $popToRootTab,
-                tabs: availableTabs) {
+                tabs: availableTabs,
+                routerPath: sidebarRouterPath) {
       ZStack {
-        if let account = currentAccount.account, selectedTab == .profile {
-          AccountDetailView(account: account)
+        if selectedTab == .profile {
+          ProfileTab(popToRootTab: $popToRootTab)
         }
         ForEach(availableTabs) { tab in
           if tab == selectedTab || sideBarLoadedTabs.contains(tab) {
@@ -96,9 +106,7 @@ struct IceCubesApp: App {
               .opacity(tab == selectedTab ? 1 : 0)
               .id(tab)
               .onAppear {
-                if !sideBarLoadedTabs.contains(tab) {
-                  sideBarLoadedTabs.append(tab)
-                }
+                sideBarLoadedTabs.insert(tab)
               }
           } else {
             EmptyView()
@@ -186,4 +194,5 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   }
 
   func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError _: Error) {}
+  
 }
