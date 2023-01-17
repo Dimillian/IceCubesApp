@@ -3,10 +3,10 @@ import SwiftUI
 public struct ErrorView: View {
   public let title: LocalizedStringKey
   public let message: LocalizedStringKey
-  public let buttonTitle: String
+  public let buttonTitle: LocalizedStringKey
   public let onButtonPress: () -> Void
 
-  public init(title: LocalizedStringKey, message: LocalizedStringKey, buttonTitle: String, onButtonPress: @escaping (() -> Void)) {
+  public init(title: LocalizedStringKey, message: LocalizedStringKey, buttonTitle: LocalizedStringKey, onButtonPress: @escaping (() -> Void)) {
     self.title = title
     self.message = message
     self.buttonTitle = buttonTitle

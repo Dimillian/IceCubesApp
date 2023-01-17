@@ -48,7 +48,7 @@
 "settings.account.add" = "Add account";
 "settings.app.icon" = "App Icon";
 "settings.app.icon.navigation-title" = "Icons";
-"settings.app.source" = "Source (Github link)";
+"settings.app.source" = "Source (GitHub link)";
 "settings.app.support" = "Support the app";
 "settings.display.avatar.position" = "Avatar position";
 "settings.display.avatar.shape" = "Avatar shape";
@@ -97,10 +97,13 @@
 
 // MARK: Tabs
 "tab.explore" = "Explore";
+"tab.federated" = "Federated";
+"tab.local" = "Local";
 "tab.messages" = "Messages";
 "tab.notifications" = "Notifications";
 "tab.settings" = "Settings";
 "tab.timeline" = "Timeline";
+"tab.trending" = "Trending";
 
 // MARK: Timeline
 "timeline.%@-is-valid" = "%@ is a valid instance";
@@ -260,6 +263,7 @@
 "status.editor.description.edit" = "Edit description";
 "status.editor.drafts.navigation-title" = "Drafts";
 "status.editor.error.upload" = "Error uploading";
+"status.editor.language-select.navigation-title" = "Select Language";
 "status.editor.media.edit-image" = "Edit Image";
 "status.editor.media.image-description" = "Image description";
 "status.editor.mode.edit" = "Editing your post";

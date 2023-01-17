@@ -65,7 +65,7 @@ class StatusDetailViewModel: ObservableObject {
     do {
       let data = try await fetchContextData(client: client, statusId: statusId)
       state = .display(status: data.status, context: data.context)
-      title = "status.post-from-\(status.account.displayNameWithoutEmojis)"
+      title = "status.post-from-\(data.status.account.displayNameWithoutEmojis)"
     } catch {
       state = .error(error: error)
     }

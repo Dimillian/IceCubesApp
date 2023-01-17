@@ -38,7 +38,7 @@ public struct StatusEditorView: View {
             accountHeaderView
               .padding(.horizontal, .layoutPadding)
             TextView($viewModel.statusText, $viewModel.selectedRange)
-              .placeholder("status.editor.text.placeholder")
+              .placeholder(String(localized: "status.editor.text.placeholder"))
               .font(Font.scaledBodyUIFont)
               .padding(.horizontal, .layoutPadding)
             StatusEditorMediaView(viewModel: viewModel)

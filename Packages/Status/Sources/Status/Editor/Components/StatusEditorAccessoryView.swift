@@ -127,10 +127,10 @@ struct StatusEditorAccessoryView: View {
       .searchable(text: $languageSearch)
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
-          Button("Cancel", action: { isLanguageSheetDisplayed = false })
+          Button("action.cancel", action: { isLanguageSheetDisplayed = false })
         }
       }
-      .navigationTitle("Select Languages")
+      .navigationTitle("status.editor.language-select.navigation-title")
       .navigationBarTitleDisplayMode(.inline)
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
