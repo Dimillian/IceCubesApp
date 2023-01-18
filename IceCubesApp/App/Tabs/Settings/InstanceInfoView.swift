@@ -35,11 +35,13 @@ public struct InstanceInfoSection: View {
     }
     .listRowBackground(theme.primaryBackgroundColor)
 
-    Section("Instance rules") {
-      ForEach(instance.rules) { rule in
-        Text(rule.text)
+    if let rules = instance.rules {
+      Section("Instance rules") {
+        ForEach(rules) { rule in
+          Text(rule.text)
+        }
       }
+      .listRowBackground(theme.primaryBackgroundColor)
     }
-    .listRowBackground(theme.primaryBackgroundColor)
   }
 }

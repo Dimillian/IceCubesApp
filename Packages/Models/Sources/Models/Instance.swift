@@ -34,9 +34,9 @@ public struct Instance: Codable {
   public let email: String
   public let version: String
   public let stats: Stats
-  public let languages: [String]
+  public let languages: [String]?
   public let registrations: Bool
   public let thumbnail: URL?
-  public let configuration: Configuration
-  public let rules: [Rule]
+  public let configuration: Configuration?
+  public let rules: [Rule]?
 }
