@@ -80,6 +80,10 @@ public struct StatusEditorView: View {
                                           object: nil)
         }
       }
+      .onChange(of: currentAccount.account?.id, perform: { _ in
+        viewModel.client = client
+        viewModel.currentAccount = currentAccount.account
+      })
       .background(theme.primaryBackgroundColor)
       .navigationTitle(viewModel.mode.title)
       .navigationBarTitleDisplayMode(.inline)
