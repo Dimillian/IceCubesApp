@@ -69,7 +69,7 @@ public class StatusEditorViewModel: ObservableObject {
   private var currentSuggestionRange: NSRange?
 
   private var embeddedStatusURL: URL? {
-    return embeddedStatus?.reblog?.url ?? embeddedStatus?.url
+    return URL(string: embeddedStatus?.reblog?.url ?? embeddedStatus?.url ?? "")
   }
 
   private var uploadTask: Task<Void, Never>?

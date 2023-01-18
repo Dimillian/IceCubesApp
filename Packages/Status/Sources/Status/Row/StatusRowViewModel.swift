@@ -61,7 +61,7 @@ public class StatusRowViewModel: ObservableObject {
 
   func navigateToDetail(routerPath: RouterPath) {
     guard !isFocused else { return }
-    if isRemote, let url = status.reblog?.url ?? status.url {
+    if isRemote, let url = URL(string: status.reblog?.url ?? status.url ?? "") {
       routerPath.navigate(to: .remoteStatusDetail(url: url))
     } else {
       routerPath.navigate(to: .statusDetail(id: status.reblog?.id ?? status.id))

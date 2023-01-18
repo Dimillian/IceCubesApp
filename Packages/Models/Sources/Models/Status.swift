@@ -43,7 +43,7 @@ public protocol AnyStatus {
   var pinned: Bool? { get }
   var bookmarked: Bool? { get }
   var emojis: [Emoji] { get }
-  var url: URL? { get }
+  var url: String? { get }
   var application: Application? { get }
   var inReplyToAccountId: String? { get }
   var visibility: Visibility { get }
@@ -76,7 +76,7 @@ public struct Status: AnyStatus, Codable, Identifiable {
   public let pinned: Bool?
   public let bookmarked: Bool?
   public let emojis: [Emoji]
-  public let url: URL?
+  public let url: String?
   public let application: Application?
   public let inReplyToAccountId: String?
   public let visibility: Visibility
@@ -141,7 +141,7 @@ public struct ReblogStatus: AnyStatus, Codable, Identifiable {
   public let pinned: Bool?
   public let bookmarked: Bool?
   public let emojis: [Emoji]
-  public let url: URL?
+  public let url: String?
   public var application: Application?
   public let inReplyToAccountId: String?
   public let visibility: Visibility

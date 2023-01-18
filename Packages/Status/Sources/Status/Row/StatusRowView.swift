@@ -230,7 +230,7 @@ public struct StatusRowView: View {
           }
         }
         if let card = status.card,
-           viewModel.embeddedStatus?.url != status.card?.url,
+           viewModel.embeddedStatus?.url != status.card?.url.absoluteString,
            status.mediaAttachments.isEmpty,
            !viewModel.isEmbedLoading,
            theme.statusDisplayStyle == .large

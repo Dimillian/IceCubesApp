@@ -63,7 +63,7 @@ struct StatusRowContextMenu: View {
       }
     }
 
-    if let url = viewModel.status.reblog?.url ?? viewModel.status.url {
+    if let url = URL(string: viewModel.status.reblog?.url ?? viewModel.status.url ?? "") {
       Button { openURL(url) } label: {
         Label("View in Browser", systemImage: "safari")
       }
