@@ -99,7 +99,8 @@ struct IceCubesApp: App {
             tab
               .makeContentView(popToRootTab: $popToRootTab)
               .opacity(tab == selectedTab ? 1 : 0)
-              .id(tab)
+              .transition(.opacity)
+              .id("\(tab)\(appAccountsManager.currentAccount.id)")
               .onAppear {
                 sideBarLoadedTabs.insert(tab)
               }
@@ -108,6 +109,8 @@ struct IceCubesApp: App {
           }
         }
       }
+    }.onChange(of: $appAccountsManager.currentAccount.id) { _ in
+      sideBarLoadedTabs.removeAll()
     }
   }
 

@@ -54,7 +54,7 @@ struct TimelineTab: View {
       timeline = isAuth ? .home : .federated
     })
     .onChange(of: currentAccount.account?.id, perform: { _ in
-      timeline = client.isAuth ? .home : .federated
+      timeline = client.isAuth && canFilterTimeline ? .home : .federated
     })
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
       if popToRootTab == .timeline {
