@@ -56,11 +56,7 @@ struct IceCubesApp: App {
         })
     }
     .commands {
-      CommandGroup(replacing: CommandGroupPlacement.newItem) {
-        Button("New post") {
-          sidebarRouterPath.presentedSheet = .newStatusEditor(visibility: userPreferences.serverPreferences?.postVisibility ?? .pub)
-        }
-      }
+      appMenu
     }
     .onChange(of: scenePhase) { scenePhase in
       handleScenePhase(scenePhase: scenePhase)
@@ -171,6 +167,29 @@ struct IceCubesApp: App {
 
   private func refreshPushSubs() {
     PushNotificationsService.shared.requestPushNotifications()
+  }
+  
+  @CommandsBuilder
+  private var appMenu: some Commands {
+    CommandGroup(replacing: .newItem) {
+      Button("New post") {
+        sidebarRouterPath.presentedSheet = .newStatusEditor(visibility: userPreferences.serverPreferences?.postVisibility ?? .pub)
+      }
+    }
+    CommandGroup(replacing: .textFormatting) {
+      Menu("Font") {
+        Button("Bigger") {
+          if userPreferences.fontSizeScale < 1.5 {
+            userPreferences.fontSizeScale += 0.1
+          }
+        }
+        Button("Smaller") {
+          if userPreferences.fontSizeScale > 0.5 {
+            userPreferences.fontSizeScale -= 0.1
+          }
+        }
+      }
+    }
   }
 }
 

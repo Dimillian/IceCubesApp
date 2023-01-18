@@ -110,6 +110,7 @@ public struct StatusEditorView: View {
             }
           }
           .disabled(!viewModel.canPost)
+          .keyboardShortcut(.return, modifiers: .command)
         }
         ToolbarItem(placement: .navigationBarLeading) {
           Button {
@@ -123,6 +124,7 @@ public struct StatusEditorView: View {
           } label: {
             Text("Cancel")
           }
+          .keyboardShortcut(.cancelAction)
           .confirmationDialog("",
                               isPresented: $isDismissAlertPresented,
                               actions: {

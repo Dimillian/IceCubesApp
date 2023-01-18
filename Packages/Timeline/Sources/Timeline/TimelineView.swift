@@ -115,6 +115,7 @@ public struct TimelineView: View {
         } label: {
           Text(viewModel.pendingStatusesButtonTitle)
         }
+        .keyboardShortcut("r", modifiers: .command)
         .buttonStyle(.bordered)
         .background(.thinMaterial)
         .cornerRadius(8)
