@@ -40,7 +40,7 @@ struct NotificationRowView: View {
           .frame(width: 12, height: 12)
           .foregroundColor(.white)
       }
-      .offset(x: -14, y: -4)
+      .offset(x: -8, y: -8)
     }
     .contentShape(Rectangle())
     .onTapGesture {

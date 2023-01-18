@@ -23,8 +23,6 @@ public struct NotificationsListView: View {
         .padding(.top, 16)
         .frame(maxWidth: .maxColumnWidth)
       }
-      .padding(.leading, .layoutPadding + 12)
-      .padding(.trailing, .layoutPadding)
       .padding(.top, .layoutPadding)
       .background(theme.primaryBackgroundColor)
     }
@@ -80,6 +78,8 @@ public struct NotificationsListView: View {
       ForEach(Models.Notification.placeholders()) { notification in
         NotificationRowView(notification: notification)
           .redacted(reason: .placeholder)
+          .padding(.leading, .layoutPadding + 6)
+          .padding(.trailing, .layoutPadding)
           .shimmering()
         Divider()
           .padding(.vertical, .dividerPadding)
@@ -94,6 +94,8 @@ public struct NotificationsListView: View {
         ForEach(notifications) { notification in
           if notification.supportedType != nil {
             NotificationRowView(notification: notification)
+              .padding(.leading, .layoutPadding + 6)
+              .padding(.trailing, .layoutPadding)
             Divider()
               .padding(.vertical, .dividerPadding)
           }
