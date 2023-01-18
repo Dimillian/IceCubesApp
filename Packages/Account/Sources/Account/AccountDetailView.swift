@@ -89,7 +89,9 @@ public struct AccountDetailView: View {
               await viewModel.fetchStatuses()
             }
           }
-          group.addTask { await viewModel.fetchFamilliarFollowers() }
+          if !viewModel.isCurrentUser {
+            group.addTask { await viewModel.fetchFamilliarFollowers() }
+          }
         }
       }
     }
