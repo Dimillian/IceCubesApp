@@ -17,13 +17,10 @@ public struct NotificationsListView: View {
   public var body: some View {
     ScrollView {
       LazyVStack {
-        Group {
-          notificationsView
-        }
-        .padding(.top, 16)
+        notificationsView
         .frame(maxWidth: .maxColumnWidth)
       }
-      .padding(.top, .layoutPadding)
+      .padding(.top, .layoutPadding + 16)
       .background(theme.primaryBackgroundColor)
     }
     .navigationTitle(viewModel.selectedType?.menuTitle() ?? "All Notifications")
@@ -78,8 +75,10 @@ public struct NotificationsListView: View {
       ForEach(Models.Notification.placeholders()) { notification in
         NotificationRowView(notification: notification)
           .redacted(reason: .placeholder)
-          .padding(.leading, .layoutPadding + 6)
+          .padding(.leading, .layoutPadding + 4)
           .padding(.trailing, .layoutPadding)
+          .padding(.top, 6)
+          .padding(.bottom, 2)
           .shimmering()
         Divider()
           .padding(.vertical, .dividerPadding)
@@ -94,8 +93,10 @@ public struct NotificationsListView: View {
         ForEach(notifications) { notification in
           if notification.supportedType != nil {
             NotificationRowView(notification: notification)
-              .padding(.leading, .layoutPadding + 6)
+              .padding(.leading, .layoutPadding + 4)
               .padding(.trailing, .layoutPadding)
+              .padding(.top, 6)
+              .padding(.bottom, 2)
             Divider()
               .padding(.vertical, .dividerPadding)
           }
