@@ -39,7 +39,7 @@ struct StatusEditorPollView: View {
                 }
               }
               .onChange(of: viewModel.pollOptions[index]) {
-                let maxCharacters: Int = currentInstance.instance?.configuration.polls.maxCharactersPerOption ?? 50
+                let maxCharacters: Int = currentInstance.instance?.configuration?.polls.maxCharactersPerOption ?? 50
                 viewModel.pollOptions[index] = String($0.prefix(maxCharacters))
               }
 
@@ -118,7 +118,7 @@ struct StatusEditorPollView: View {
 
   private func canAddMoreAt(_ index: Int) -> Bool {
     let count = viewModel.pollOptions.count
-    let maxEntries: Int = currentInstance.instance?.configuration.polls.maxOptions ?? 4
+    let maxEntries: Int = currentInstance.instance?.configuration?.polls.maxOptions ?? 4
 
     return index == count - 1 && count < maxEntries
   }

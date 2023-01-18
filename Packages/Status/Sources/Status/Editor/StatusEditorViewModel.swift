@@ -53,6 +53,9 @@ public class StatusEditorViewModel: ObservableObject {
   @Published var mediasImages: [ImageContainer] = []
   @Published var replyToStatus: Status?
   @Published var embeddedStatus: Status?
+  
+  @Published var customEmojis: [Emoji] = []
+  
   var canPost: Bool {
     statusText.length > 0 || !mediasImages.isEmpty
   }
@@ -78,26 +81,6 @@ public class StatusEditorViewModel: ObservableObject {
     self.mode = mode
   }
 
-  func insertStatusText(text: String) {
-    let string = statusText
-    string.mutableString.insert(text, at: selectedRange.location)
-    statusText = string
-    selectedRange = NSRange(location: selectedRange.location + text.utf16.count, length: 0)
-  }
-
-  func replaceTextWith(text: String, inRange: NSRange) {
-    let string = statusText
-    string.mutableString.deleteCharacters(in: inRange)
-    string.mutableString.insert(text, at: inRange.location)
-    statusText = string
-    selectedRange = NSRange(location: inRange.location + text.utf16.count, length: 0)
-  }
-
-  func replaceTextWith(text: String) {
-    statusText = .init(string: text)
-    selectedRange = .init(location: text.utf16.count, length: 0)
-  }
-
   func setInitialLanguageSelection(preference: String?) {
     switch mode {
     case let .replyTo(status), let .edit(status):
@@ -107,11 +90,6 @@ public class StatusEditorViewModel: ObservableObject {
     }
 
     selectedLanguage = selectedLanguage ?? preference ?? currentAccount?.source?.language
-  }
-
-  private func getPollOptionsForAPI() -> [String]? {
-    let options = pollOptions.filter { !$0.trimmingCharacters(in: .whitespaces).isEmpty }
-    return options.isEmpty ? nil : options
   }
 
   func postStatus() async -> Status? {
@@ -146,6 +124,29 @@ public class StatusEditorViewModel: ObservableObject {
       generator.notificationOccurred(.error)
       return nil
     }
+  }
+
+  
+  // MARK: - Status Text manipulations
+  
+  func insertStatusText(text: String) {
+    let string = statusText
+    string.mutableString.insert(text, at: selectedRange.location)
+    statusText = string
+    selectedRange = NSRange(location: selectedRange.location + text.utf16.count, length: 0)
+  }
+
+  func replaceTextWith(text: String, inRange: NSRange) {
+    let string = statusText
+    string.mutableString.deleteCharacters(in: inRange)
+    string.mutableString.insert(text, at: inRange.location)
+    statusText = string
+    selectedRange = NSRange(location: inRange.location + text.utf16.count, length: 0)
+  }
+
+  func replaceTextWith(text: String) {
+    statusText = .init(string: text)
+    selectedRange = .init(location: text.utf16.count, length: 0)
   }
 
   func prepareStatusText() {
@@ -194,7 +195,7 @@ public class StatusEditorViewModel: ObservableObject {
       }
     }
   }
-
+  
   private func processText() {
     statusText.addAttributes([.foregroundColor: UIColor(Color.label)],
                              range: NSMakeRange(0, statusText.string.utf16.count))
@@ -259,6 +260,7 @@ public class StatusEditorViewModel: ObservableObject {
     } catch {}
   }
 
+  // MARK: - Shar sheet / Item provider
   private func processItemsProvider(items: [NSItemProvider]) {
     Task {
       var initialText: String = ""
@@ -286,12 +288,22 @@ public class StatusEditorViewModel: ObservableObject {
     }
   }
 
+  // MARK: - Polls
+  
   func resetPollDefaults() {
     pollOptions = ["", ""]
     pollDuration = .oneDay
     pollVotingFrequency = .oneVote
   }
+  
+  private func getPollOptionsForAPI() -> [String]? {
+    let options = pollOptions.filter { !$0.trimmingCharacters(in: .whitespaces).isEmpty }
+    return options.isEmpty ? nil : options
+  }
 
+
+  // MARK: - Embeds
+  
   private func checkEmbed() {
     if let url = embeddedStatusURL,
        !statusText.string.contains(url.absoluteString)
@@ -445,6 +457,14 @@ public class StatusEditorViewModel: ObservableObject {
                                         mimeType: "image/jpeg",
                                         filename: "file",
                                         data: data)
+  }
+  
+  // MARK: - Custom emojis
+  func fetchCustomEmojis() async {
+    guard let client else { return }
+    do {
+      customEmojis = try await client.get(endpoint: CustomEmojis.customEmojis) ?? []
+    } catch { }
   }
 }
 

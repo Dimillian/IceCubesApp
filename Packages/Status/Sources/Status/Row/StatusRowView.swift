@@ -249,7 +249,7 @@ public struct StatusRowView: View {
       }
       VStack(alignment: .leading, spacing: 0) {
         EmojiTextApp(status.account.safeDisplayName.asMarkdown, emojis: status.account.emojis)
-          .font(.scaledHeadline)
+          .font(.scaledSubheadline)
           .fontWeight(.semibold)
         Group {
           Text("@\(status.account.acct)") +

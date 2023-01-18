@@ -3,6 +3,7 @@ import Env
 import Models
 import PhotosUI
 import SwiftUI
+import NukeUI
 
 struct StatusEditorAccessoryView: View {
   @EnvironmentObject private var preferences: UserPreferences
@@ -14,6 +15,7 @@ struct StatusEditorAccessoryView: View {
 
   @State private var isDraftsSheetDisplayed: Bool = false
   @State private var isLanguageSheetDisplayed: Bool = false
+  @State private var isCustomEmojisSheetDisplay: Bool = false
   @State private var languageSearch: String = ""
 
   var body: some View {
@@ -51,6 +53,14 @@ struct StatusEditorAccessoryView: View {
             Image(systemName: "archivebox")
           }
         }
+        
+        if !viewModel.customEmojis.isEmpty {
+          Button {
+            isCustomEmojisSheetDisplay = true
+          } label: {
+            Image(systemName: "face.smiling.inverse")
+          }
+        }
 
         Button {
           isLanguageSheetDisplayed.toggle()
@@ -74,9 +84,12 @@ struct StatusEditorAccessoryView: View {
     .sheet(isPresented: $isDraftsSheetDisplayed) {
       draftsSheetView
     }
-    .sheet(isPresented: $isLanguageSheetDisplayed, content: {
+    .sheet(isPresented: $isLanguageSheetDisplayed) {
       languageSheetView
-    })
+    }
+    .sheet(isPresented: $isCustomEmojisSheetDisplay) {
+      customEmojisSheet
+    }
     .onAppear {
       viewModel.setInitialLanguageSelection(preference: preferences.serverPreferences?.postLanguage)
     }
@@ -154,9 +167,41 @@ struct StatusEditorAccessoryView: View {
     }
     .presentationDetents([.medium])
   }
+  
+  private var customEmojisSheet: some View {
+    NavigationStack {
+      ScrollView {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 40))], spacing: 9) {
+          ForEach(viewModel.customEmojis) { emoji in
+            LazyImage(url: emoji.url) { state in
+              if let image = state.image {
+                image
+                  .resizingMode(.aspectFit)
+                  .frame(width: 40, height: 40)
+              } else if state.isLoading {
+                Rectangle()
+                  .fill(Color.gray)
+                  .frame(width: 40, height: 40)
+                  .shimmering()
+              }
+            }
+            .onTapGesture {
+              viewModel.insertStatusText(text: " :\(emoji.shortcode): ")
+              isCustomEmojisSheetDisplay = false
+            }
+          }
+        }.padding(.horizontal)
+      }
+      .scrollContentBackground(.hidden)
+      .background(theme.primaryBackgroundColor)
+      .navigationTitle("Custom Emojis")
+      .navigationBarTitleDisplayMode(.inline)
+    }
+    .presentationDetents([.medium])
+  }
 
   private var characterCountView: some View {
-    Text("\((currentInstance.instance?.configuration.statuses.maxCharacters ?? 500) - viewModel.statusText.string.utf16.count)")
+    Text("\((currentInstance.instance?.configuration?.statuses.maxCharacters ?? 500) - viewModel.statusText.string.utf16.count)")
       .foregroundColor(.gray)
       .font(.scaledCallout)
   }

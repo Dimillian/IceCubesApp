@@ -79,6 +79,10 @@ public struct StatusEditorView: View {
           NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
                                           object: nil)
         }
+        
+        Task {
+          await viewModel.fetchCustomEmojis()
+        }
       }
       .onChange(of: currentAccount.account?.id, perform: { _ in
         viewModel.client = client
