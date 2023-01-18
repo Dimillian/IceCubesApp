@@ -32,6 +32,14 @@ extension Font {
     }
   }
   
+  public static var scaledBodyUIFont: UIFont {
+    if ProcessInfo.processInfo.isiOSAppOnMac {
+      return UIFont.systemFont(ofSize: userScaledFontSize(baseSize: 19))
+    } else {
+      return UIFont.systemFont(ofSize: 17)
+    }
+  }
+  
   public static var scaledCallout: Font {
     if ProcessInfo.processInfo.isiOSAppOnMac {
       return .system(size: userScaledFontSize(baseSize: 17))

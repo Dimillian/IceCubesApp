@@ -39,6 +39,7 @@ public struct StatusEditorView: View {
               .padding(.horizontal, .layoutPadding)
             TextView($viewModel.statusText, $viewModel.selectedRange)
               .placeholder("What's on your mind")
+              .font(Font.scaledBodyUIFont)
               .padding(.horizontal, .layoutPadding)
             StatusEditorMediaView(viewModel: viewModel)
             if let status = viewModel.embeddedStatus {
