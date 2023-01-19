@@ -68,7 +68,7 @@ public struct StatusCardView: View {
         }
         Divider()
         Button {
-          UIPasteboard.general.string = card.url.absoluteString
+          UIPasteboard.general.url = card.url
         } label: {
           Label("Copy link", systemImage: "doc.on.doc")
         }

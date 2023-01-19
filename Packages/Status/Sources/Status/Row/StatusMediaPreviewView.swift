@@ -4,8 +4,11 @@ import Models
 import NukeUI
 import Shimmer
 import SwiftUI
+import Nuke
 
 public struct StatusMediaPreviewView: View {
+  @Environment(\.openURL) private var openURL
+  
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var quickLook: QuickLook
   @EnvironmentObject private var theme: Theme
@@ -68,6 +71,9 @@ public struct StatusMediaPreviewView: View {
             Task {
               await quickLook.prepareFor(urls: attachments.compactMap { $0.url }, selectedURL: attachment.url!)
             }
+          }
+          .contextMenu {
+            contextMenuForMedia(mediaAttachement: attachment)
           }
       } else {
         if isNotifications || theme.statusDisplayStyle == .compact {
@@ -251,6 +257,9 @@ public struct StatusMediaPreviewView: View {
           await quickLook.prepareFor(urls: attachments.compactMap { $0.url }, selectedURL: attachment.url!)
         }
       }
+      .contextMenu {
+        contextMenuForMedia(mediaAttachement: attachment)
+      }
     }
   }
 
@@ -300,5 +309,38 @@ public struct StatusMediaPreviewView: View {
     }
     .position(x: 30, y: 30)
     .buttonStyle(.borderedProminent)
+  }
+  
+  @ViewBuilder
+  private func contextMenuForMedia(mediaAttachement: MediaAttachment) -> some View {
+    if let url = mediaAttachement.url {
+      ShareLink(item: url) {
+        Label("Share this image", systemImage: "square.and.arrow.up")
+      }
+      Button { openURL(url) } label: {
+        Label("View in Browser", systemImage: "safari")
+      }
+      Divider()
+      Button {
+        Task {
+          do {
+            let image = try await ImagePipeline.shared.image(for: url).image
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+          } catch { }
+        }
+      } label: {
+        Label("Save image", systemImage: "square.and.arrow.down")
+      }
+      Button {
+        Task {
+          do {
+            let image = try await ImagePipeline.shared.image(for: url).image
+            UIPasteboard.general.image = image
+          } catch { }
+        }
+      } label: {
+        Label("Copy image", systemImage: "doc.on.doc")
+      }
+    }
   }
 }
