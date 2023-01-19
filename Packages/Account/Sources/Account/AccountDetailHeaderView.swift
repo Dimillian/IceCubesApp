@@ -30,42 +30,40 @@ struct AccountDetailHeaderView: View {
   }
 
   private var headerImageView: some View {
-    GeometryReader { _ in
-      ZStack(alignment: .bottomTrailing) {
-        if reasons.contains(.placeholder) {
-          Rectangle()
-            .foregroundColor(.gray)
-            .frame(height: bannerHeight)
-        } else {
-          LazyImage(url: account.header) { state in
-            if let image = state.image {
-              image
-                .resizingMode(.aspectFill)
-                .overlay(.black.opacity(0.50))
-            } else if state.isLoading {
-              Color.gray
-                .frame(height: bannerHeight)
-                .shimmering()
-            } else {
-              Color.gray
-                .frame(height: bannerHeight)
-            }
-          }
+    ZStack(alignment: .bottomTrailing) {
+      if reasons.contains(.placeholder) {
+        Rectangle()
+          .foregroundColor(.gray)
           .frame(height: bannerHeight)
+      } else {
+        LazyImage(url: account.header) { state in
+          if let image = state.image {
+            image
+              .resizingMode(.aspectFill)
+              .overlay(.black.opacity(0.50))
+          } else if state.isLoading {
+            Color.gray
+              .frame(height: bannerHeight)
+              .shimmering()
+          } else {
+            Color.gray
+              .frame(height: bannerHeight)
+          }
         }
-
-        if viewModel.relationship?.followedBy == true {
-          Text("Follows You")
-            .font(.scaledFootnote)
-            .fontWeight(.semibold)
-            .padding(4)
-            .background(.ultraThinMaterial)
-            .cornerRadius(4)
-            .padding(8)
-        }
+        .frame(height: bannerHeight)
       }
-      .background(Color.gray)
+
+      if viewModel.relationship?.followedBy == true {
+        Text("Follows You")
+          .font(.scaledFootnote)
+          .fontWeight(.semibold)
+          .padding(4)
+          .background(.ultraThinMaterial)
+          .cornerRadius(4)
+          .padding(8)
+      }
     }
+    .background(Color.gray)
     .frame(height: bannerHeight)
     .offset(y: scrollOffset > 0 ? -scrollOffset : 0)
     .contentShape(Rectangle())

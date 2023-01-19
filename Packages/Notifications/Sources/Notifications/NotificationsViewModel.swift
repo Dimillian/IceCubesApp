@@ -31,9 +31,11 @@ class NotificationsViewModel: ObservableObject {
   @Published var state: State = .loading
   @Published var selectedType: Models.Notification.NotificationType? {
     didSet {
-      notifications = []
-      Task {
-        await fetchNotifications()
+      if oldValue != selectedType {
+        notifications = []
+        Task {
+          await fetchNotifications()
+        }
       }
     }
   }
