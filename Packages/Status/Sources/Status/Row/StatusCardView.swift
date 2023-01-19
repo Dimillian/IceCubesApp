@@ -59,6 +59,20 @@ public struct StatusCardView: View {
       .onTapGesture {
         openURL(card.url)
       }
+      .contextMenu {
+        ShareLink(item: card.url) {
+          Label("Share this link", systemImage: "square.and.arrow.up")
+        }
+        Button { openURL(card.url) } label: {
+          Label("View in Browser", systemImage: "safari")
+        }
+        Divider()
+        Button {
+          UIPasteboard.general.string = card.url.absoluteString
+        } label: {
+          Label("Copy link", systemImage: "doc.on.doc")
+        }
+      }
     }
   }
 }
