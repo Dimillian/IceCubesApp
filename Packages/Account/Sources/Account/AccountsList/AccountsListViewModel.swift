@@ -5,17 +5,17 @@ import SwiftUI
 public enum AccountsListMode {
   case following(accountId: String), followers(accountId: String)
   case favouritedBy(statusId: String), rebloggedBy(statusId: String)
-
-  var title: String {
+  
+  var title: LocalizedStringKey {
     switch self {
     case .following:
-      return "Following"
+      return "account.following"
     case .followers:
-      return "Followers"
+      return "account.followers"
     case .favouritedBy:
-      return "Favourited by"
+      return "account.favorited-by"
     case .rebloggedBy:
-      return "Boosted by"
+      return "account.boosted-by"
     }
   }
 }

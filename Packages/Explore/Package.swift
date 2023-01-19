@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
   name: "Explore",
+  defaultLocalization: "en",
   platforms: [
     .iOS(.v16),
   ],

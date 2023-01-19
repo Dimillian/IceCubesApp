@@ -101,7 +101,7 @@ struct StatusActionsView: View {
     Divider()
     HStack {
       Text(viewModel.status.createdAt.asDate, style: .date) +
-        Text(" at ") +
+        Text("status.summary.at-time") +
         Text(viewModel.status.createdAt.asDate, style: .time) +
         Text("   ·")
       Image(systemName: viewModel.status.visibility.iconName)
@@ -120,7 +120,7 @@ struct StatusActionsView: View {
     if viewModel.favouritesCount > 0 {
       Divider()
       NavigationLink(value: RouterDestinations.favouritedBy(id: viewModel.status.id)) {
-        Text("\(viewModel.favouritesCount) favorites")
+        Text("status.summary.n-favorites \(viewModel.favouritesCount)")
           .font(.scaledCallout)
         Spacer()
         Image(systemName: "chevron.right")
@@ -129,7 +129,7 @@ struct StatusActionsView: View {
     if viewModel.reblogsCount > 0 {
       Divider()
       NavigationLink(value: RouterDestinations.rebloggedBy(id: viewModel.status.id)) {
-        Text("\(viewModel.reblogsCount) boosts")
+        Text("status.summary.n-boosts \(viewModel.reblogsCount)")
           .font(.scaledCallout)
         Spacer()
         Image(systemName: "chevron.right")

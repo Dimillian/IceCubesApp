@@ -15,9 +15,9 @@ class NotificationsViewModel: ObservableObject {
     case error(error: Error)
   }
 
-  public enum Tab: String, CaseIterable {
-    case all = "All"
-    case mentions = "Mentions"
+  public enum Tab: LocalizedStringKey, CaseIterable {
+    case all = "notifications.tab.all"
+    case mentions = "notifications.tab.mentions"
   }
 
   var client: Client? {

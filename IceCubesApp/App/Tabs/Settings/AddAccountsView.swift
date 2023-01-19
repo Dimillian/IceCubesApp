@@ -24,7 +24,7 @@ struct AddAccountView: View {
   @State private var isSigninIn = false
   @State private var signInClient: Client?
   @State private var instances: [InstanceSocial] = []
-  @State private var instanceFetchError: String?
+  @State private var instanceFetchError: LocalizedStringKey?
   @State private var oauthURL: URL?
 
   private let instanceNamePublisher = PassthroughSubject<String, Never>()
@@ -34,7 +34,7 @@ struct AddAccountView: View {
   var body: some View {
     NavigationStack {
       Form {
-        TextField("Instance URL", text: $instanceName)
+        TextField("instance.url", text: $instanceName)
           .listRowBackground(theme.primaryBackgroundColor)
           .keyboardType(.URL)
           .textContentType(.URL)
@@ -52,7 +52,7 @@ struct AddAccountView: View {
         }
       }
       .formStyle(.grouped)
-      .navigationTitle("Add account")
+      .navigationTitle("account.add.navigation-title")
       .navigationBarTitleDisplayMode(.inline)
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
@@ -60,7 +60,7 @@ struct AddAccountView: View {
       .toolbar {
         if !appAccountsManager.availableAccounts.isEmpty {
           ToolbarItem(placement: .navigationBarLeading) {
-            Button("Cancel", action: { dismiss() })
+            Button("action.cancel", action: { dismiss() })
           }
         }
       }
@@ -83,7 +83,7 @@ struct AddAccountView: View {
             self.instanceFetchError = nil
           } catch _ as DecodingError {
             self.instance = nil
-            self.instanceFetchError = "This instance is not currently supported."
+            self.instanceFetchError = "account.add.error.instance-not-supported"
           } catch {
             self.instance = nil
           }
@@ -122,7 +122,7 @@ struct AddAccountView: View {
             ProgressView()
               .tint(theme.labelColor)
           } else {
-            Text("Sign in")
+            Text("account.add.sign-in")
               .font(.scaledHeadline)
           }
           Spacer()
@@ -134,7 +134,7 @@ struct AddAccountView: View {
   }
 
   private var instancesListView: some View {
-    Section("Suggestions") {
+    Section("instance.suggestions") {
       if instances.isEmpty {
         placeholderRow
       } else {
@@ -149,9 +149,11 @@ struct AddAccountView: View {
               Text(instance.info?.shortDescription ?? "")
                 .font(.scaledBody)
                 .foregroundColor(.gray)
-              Text("\(instance.users) users  ⸱  \(instance.statuses) posts")
-                .font(.scaledFootnote)
-                .foregroundColor(.gray)
+              (Text("instance.list.users-\(instance.users)")
+                + Text("  ⸱  ")
+                + Text("instance.list.posts-\(instance.statuses)"))
+              .font(.scaledFootnote)
+              .foregroundColor(.gray)
             }
           }
           .listRowBackground(theme.primaryBackgroundColor)
@@ -162,13 +164,13 @@ struct AddAccountView: View {
 
   private var placeholderRow: some View {
     VStack(alignment: .leading, spacing: 4) {
-      Text("Loading...")
+      Text("placeholder.loading.short")
         .font(.scaledHeadline)
         .foregroundColor(.primary)
-      Text("Loading, loading, loading ....")
+      Text("placeholder.loading.long")
         .font(.scaledBody)
         .foregroundColor(.gray)
-      Text("Loading ...")
+      Text("placeholder.loading.short")
         .font(.scaledFootnote)
         .foregroundColor(.gray)
     }

@@ -18,7 +18,7 @@ public struct ListEditView: View {
   public var body: some View {
     NavigationStack {
       List {
-        Section("Users in this list") {
+        Section("lists.edit.users-in-list") {
           if viewModel.isLoadingAccounts {
             HStack {
               Spacer()
@@ -54,7 +54,7 @@ public struct ListEditView: View {
       .background(theme.secondaryBackgroundColor)
       .toolbar {
         ToolbarItem {
-          Button("Done") {
+          Button("action.done") {
             dismiss()
           }
         }

@@ -18,39 +18,39 @@ struct PushNotificationsView: View {
     Form {
       Section {
         Toggle(isOn: $pushNotifications.isPushEnabled) {
-          Text("Push notifications")
+          Text("settings.push.main-toggle")
         }
       } footer: {
-        Text("Receive push notifications on new activities")
+        Text("settings.push.main-toggle.description")
       }
       .listRowBackground(theme.primaryBackgroundColor)
 
       if pushNotifications.isPushEnabled {
         Section {
           Toggle(isOn: $pushNotifications.isMentionNotificationEnabled) {
-            Label("Mentions", systemImage: "at")
+            Label("settings.push.mentions", systemImage: "at")
           }
           Toggle(isOn: $pushNotifications.isFollowNotificationEnabled) {
-            Label("Follows", systemImage: "person.badge.plus")
+            Label("settings.push.follows", systemImage: "person.badge.plus")
           }
           Toggle(isOn: $pushNotifications.isFavoriteNotificationEnabled) {
-            Label("Favorites", systemImage: "star")
+            Label("settings.push.favorites", systemImage: "star")
           }
           Toggle(isOn: $pushNotifications.isReblogNotificationEnabled) {
-            Label("Boosts", systemImage: "arrow.left.arrow.right.circle")
+            Label("settings.push.boosts", systemImage: "arrow.left.arrow.right.circle")
           }
           Toggle(isOn: $pushNotifications.isPollNotificationEnabled) {
-            Label("Polls Results", systemImage: "chart.bar")
+            Label("settings.push.polls", systemImage: "chart.bar")
           }
           Toggle(isOn: $pushNotifications.isNewPostsNotificationEnabled) {
-            Label("New Posts", systemImage: "bubble.right")
+            Label("settings.push.new-posts", systemImage: "bubble.right")
           }
         }
         .listRowBackground(theme.primaryBackgroundColor)
         .transition(.move(edge: .bottom))
       }
     }
-    .navigationTitle("Push Notifications")
+    .navigationTitle("settings.push.navigation-title")
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
     .onAppear {

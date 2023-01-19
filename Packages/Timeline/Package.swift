@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
   name: "Timeline",
+  defaultLocalization: "en",
   platforms: [
     .iOS(.v16),
   ],

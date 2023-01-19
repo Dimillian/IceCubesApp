@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
   name: "Models",
+  defaultLocalization: "en",
   platforms: [
     .iOS(.v16),
   ],

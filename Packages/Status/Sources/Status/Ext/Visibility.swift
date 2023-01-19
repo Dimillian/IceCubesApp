@@ -1,7 +1,8 @@
 import Models
+import SwiftUI
 
-public extension Visibility {
-  static var supportDefault: [Visibility] {
+public extension Models.Visibility {
+  static var supportDefault: [Self] {
     [.pub, .priv, .unlisted]
   }
 
@@ -18,16 +19,16 @@ public extension Visibility {
     }
   }
 
-  var title: String {
+  var title: LocalizedStringKey {
     switch self {
     case .pub:
-      return "Everyone"
+      return "status.visibility.public"
     case .unlisted:
-      return "Unlisted"
+      return "status.visibility.unlisted"
     case .priv:
-      return "Followers"
+      return "status.visibility.follower"
     case .direct:
-      return "Private"
+      return "status.visibility.direct"
     }
   }
 }

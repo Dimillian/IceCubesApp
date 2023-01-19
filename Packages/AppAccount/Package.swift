@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
   name: "AppAccount",
+  defaultLocalization: "en",
   platforms: [
     .iOS(.v16),
   ],

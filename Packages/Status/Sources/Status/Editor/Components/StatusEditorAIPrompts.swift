@@ -9,11 +9,11 @@ enum StatusEditorAIPrompts: CaseIterable {
   var label: some View {
     switch self {
     case .correct:
-      Label("Correct text", systemImage: "text.badge.checkmark")
+      Label("status.editor.ai-prompt.correct", systemImage: "text.badge.checkmark")
     case .fit:
-      Label("Shorten text", systemImage: "text.badge.minus")
+      Label("status.editor.ai-prompt.fit", systemImage: "text.badge.minus")
     case .emphasize:
-      Label("Emphasize text", systemImage: "text.badge.star")
+      Label("status.editor.ai-prompt.emphasize", systemImage: "text.badge.star")
     }
   }
 

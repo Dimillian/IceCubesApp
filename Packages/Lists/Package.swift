@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
   name: "Lists",
+  defaultLocalization: "en",
   platforms: [
     .iOS(.v16),
   ],

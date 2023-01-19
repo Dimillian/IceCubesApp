@@ -65,12 +65,12 @@ public struct StatusPollView: View {
 
   private var footerView: some View {
     HStack(spacing: 0) {
-      Text("\(viewModel.poll.votesCount) votes")
+      Text("status.poll.n-votes \(viewModel.poll.votesCount)")
       Text(" ⸱ ")
       if viewModel.poll.expired {
-        Text("Closed")
+        Text("status.poll.closed")
       } else {
-        Text("Close in ")
+        Text("status.poll.closes-in")
         Text(viewModel.poll.expiresAt.asDate, style: .timer)
       }
     }

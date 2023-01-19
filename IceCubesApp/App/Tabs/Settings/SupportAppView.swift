@@ -15,26 +15,26 @@ struct SupportAppView: View {
     var productId: String {
       "icecubes.tipjar.\(rawValue)"
     }
-
-    var title: String {
+    
+    var title: LocalizedStringKey {
       switch self {
       case .one:
-        return "🍬 Small Tip"
+        return "settings.support.one.title"
       case .two:
-        return "☕️ Nice Tip"
+        return "settings.support.two.title"
       case .three:
-        return "🤯 Generous Tip"
+        return "settings.support.three.title"
       }
     }
-
-    var subtitle: String {
+    
+    var subtitle: LocalizedStringKey {
       switch self {
       case .one:
-        return "Small, but cute, and it taste good!"
+        return "settings.support.one.subtitle"
       case .two:
-        return "I love the taste of a fancy coffee ❤️"
+        return "settings.support.two.subtitle"
       case .three:
-        return "You're insane, thank you so much!"
+        return "settings.support.three.subtitle"
       }
     }
   }
@@ -61,7 +61,7 @@ struct SupportAppView: View {
               .frame(width: 50, height: 50)
               .cornerRadius(4)
           }
-          Text("Hi there! My name is Thomas and I absolutely love creating open source apps. Ice Cubes is definitely one of my proudest projects to date - and let's be real, it's also the one that requires the most maintenance due to the ever-changing world of Mastodon and social media. If you're having a blast using Ice Cubes, consider tossing a little tip my way. It'll make my day (and help keep the app running smoothly for you). 🚀")
+          Text("settings.support.message-from-dev")
         }
       }
       .listRowBackground(theme.primaryBackgroundColor)
@@ -70,9 +70,9 @@ struct SupportAppView: View {
         if loadingProducts {
           HStack {
             VStack(alignment: .leading) {
-              Text("Loading ...")
+              Text("placeholder.loading.short.")
                 .font(.scaledSubheadline)
-              Text("Loading subtitle...")
+              Text("settings.support.placeholder.loading-subtitle")
                 .font(.scaledFootnote)
                 .foregroundColor(.gray)
             }
@@ -118,18 +118,18 @@ struct SupportAppView: View {
       }
       .listRowBackground(theme.primaryBackgroundColor)
     }
-    .navigationTitle("Support Ice Cubes")
+    .navigationTitle("settings.support.navigation-title")
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
-    .alert("Thanks!", isPresented: $purchaseSuccessDisplayed, actions: {
-      Button { purchaseSuccessDisplayed = false } label: { Text("Ok") }
+    .alert("settings.support.alert.title", isPresented: $purchaseSuccessDisplayed, actions: {
+      Button { purchaseSuccessDisplayed = false } label: { Text("alert.button.ok") }
     }, message: {
-      Text("Thanks you so much for your tip! It's greatly appreciated!")
+      Text("settings.support.alert.message")
     })
-    .alert("Error!", isPresented: $purchaseErrorDisplayed, actions: {
-      Button { purchaseErrorDisplayed = false } label: { Text("Ok") }
+    .alert("alert.error", isPresented: $purchaseErrorDisplayed, actions: {
+      Button { purchaseErrorDisplayed = false } label: { Text("alert.button.ok") }
     }, message: {
-      Text("Error processing your in app purchase, please try again.")
+      Text("settings.support.alert.error.message")
     })
     .onAppear {
       loadingProducts = true

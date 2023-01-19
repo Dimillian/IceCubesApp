@@ -70,9 +70,9 @@ public struct FollowButton: View {
         }
       } label: {
         if viewModel.relationship.requested == true {
-          Text("Requested")
+          Text("account.follow.requested")
         } else {
-          Text(viewModel.relationship.following ? "Following" : "Follow")
+          Text(viewModel.relationship.following ? "account.follow.following" : "account.follow.follow")
         }
       }
       .buttonStyle(.bordered)

@@ -1,11 +1,12 @@
 import Foundation
 import Models
 import Network
+import SwiftUI
 
 public enum TimelineFilter: Hashable, Equatable {
   case home, local, federated, trending
   case hashtag(tag: String, accountId: String?)
-  case list(list: List)
+  case list(list: Models.List)
   case remoteLocal(server: String)
 
   public func hash(into hasher: inout Hasher) {
@@ -37,7 +38,26 @@ public enum TimelineFilter: Hashable, Equatable {
       return server
     }
   }
-
+  
+  public func localizedTitle() -> LocalizedStringKey {
+    switch self {
+    case .federated:
+      return "timeline.federated"
+    case .local:
+      return "timeline.local"
+    case .trending:
+      return "timeline.trending"
+    case .home:
+      return "timeline.home"
+    case let .hashtag(tag, _):
+      return "#\(tag)"
+    case let .list(list):
+      return LocalizedStringKey(list.title)
+    case let .remoteLocal(server):
+      return LocalizedStringKey(server)
+    }
+  }
+  
   public func iconName() -> String? {
     switch self {
     case .federated:

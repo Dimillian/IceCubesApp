@@ -54,7 +54,7 @@ struct AccountDetailHeaderView: View {
       }
 
       if viewModel.relationship?.followedBy == true {
-        Text("Follows You")
+        Text("account.relation.follows-you")
           .font(.scaledFootnote)
           .fontWeight(.semibold)
           .padding(4)
@@ -89,13 +89,13 @@ struct AccountDetailHeaderView: View {
             scrollViewProxy?.scrollTo("status", anchor: .top)
           }
         } label: {
-          makeCustomInfoLabel(title: "Posts", count: account.statusesCount)
+          makeCustomInfoLabel(title: "account.posts", count: account.statusesCount)
         }
         NavigationLink(value: RouterDestinations.following(id: account.id)) {
-          makeCustomInfoLabel(title: "Following", count: account.followingCount)
+          makeCustomInfoLabel(title: "account.following", count: account.followingCount)
         }
         NavigationLink(value: RouterDestinations.followers(id: account.id)) {
-          makeCustomInfoLabel(title: "Followers", count: account.followersCount)
+          makeCustomInfoLabel(title: "account.followers", count: account.followersCount)
         }
       }.offset(y: 20)
     }
@@ -132,7 +132,7 @@ struct AccountDetailHeaderView: View {
     .offset(y: -40)
   }
 
-  private func makeCustomInfoLabel(title: String, count: Int) -> some View {
+  private func makeCustomInfoLabel(title: LocalizedStringKey, count: Int) -> some View {
     VStack {
       Text("\(count)")
         .font(.scaledHeadline)

@@ -38,7 +38,7 @@ public struct StatusEditorView: View {
             accountHeaderView
               .padding(.horizontal, .layoutPadding)
             TextView($viewModel.statusText, $viewModel.selectedRange)
-              .placeholder("What's on your mind")
+              .placeholder(String(localized: "status.editor.text.placeholder"))
               .font(Font.scaledBodyUIFont)
               .padding(.horizontal, .layoutPadding)
             StatusEditorMediaView(viewModel: viewModel)
@@ -110,7 +110,7 @@ public struct StatusEditorView: View {
             if viewModel.isPosting {
               ProgressView()
             } else {
-              Text("Post")
+              Text("status.action.post")
             }
           }
           .disabled(!viewModel.canPost)
@@ -126,24 +126,24 @@ public struct StatusEditorView: View {
                                               object: nil)
             }
           } label: {
-            Text("Cancel")
+            Text("action.cancel")
           }
           .keyboardShortcut(.cancelAction)
           .confirmationDialog("",
                               isPresented: $isDismissAlertPresented,
                               actions: {
-                                Button("Delete Draft", role: .destructive) {
+                                Button("status.draft.delete", role: .destructive) {
                                   dismiss()
                                   NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
                                                                   object: nil)
                                 }
-                                Button("Save Draft") {
+                                Button("status.draft.save") {
                                   preferences.draftsPosts.insert(viewModel.statusText.string, at: 0)
                                   dismiss()
                                   NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
                                                                   object: nil)
                                 }
-                                Button("Cancel", role: .cancel) {}
+                                Button("action.cancel", role: .cancel) {}
                               })
         }
       }
@@ -155,7 +155,7 @@ public struct StatusEditorView: View {
   private var spoilerTextView: some View {
     if viewModel.spoilerOn {
       VStack {
-        TextField("Spoiler Text", text: $viewModel.spoilerText)
+        TextField("status.editor.spoiler", text: $viewModel.spoilerText)
           .focused($isSpoilerTextFocused)
           .padding(.horizontal, .layoutPadding)
       }
@@ -185,7 +185,7 @@ public struct StatusEditorView: View {
 
   private var privacyMenu: some View {
     Menu {
-      Section("Post visibility") {
+      Section("status.editor.visibility") {
         ForEach(Models.Visibility.allCases, id: \.self) { visibility in
           Button {
             viewModel.visibility = visibility
@@ -226,7 +226,7 @@ public struct StatusEditorView: View {
           viewModel.replaceTextWith(text: backup.string)
           viewModel.backupStatusText = nil
         } label: {
-          Label("Restore previous text", systemImage: "arrow.uturn.right")
+          Label("status.editor.restore-previous", systemImage: "arrow.uturn.right")
         }
       }
     } label: {

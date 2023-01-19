@@ -46,10 +46,10 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
   @Published var pendingStatuses: [Status] = []
   @Published var pendingStatusesState: PendingStatusesState = .stream
 
-  var pendingStatusesButtonTitle: String {
+  var pendingStatusesButtonTitle: LocalizedStringKey {
     switch pendingStatusesState {
     case .stream, .refresh:
-      return "\(pendingStatuses.count) new posts"
+      return "timeline.n-new-posts \(pendingStatuses.count)"
     }
   }
 

@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
   name: "Network",
+  defaultLocalization: "en",
   platforms: [
     .iOS(.v16),
   ],

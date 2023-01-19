@@ -15,7 +15,7 @@ struct StatusEditorMediaEditView: View {
     NavigationStack {
       Form {
         Section {
-          TextField("Image description", text: $imageDescription, axis: .horizontal)
+          TextField("status.editor.media.image-description", text: $imageDescription, axis: .horizontal)
         }
         .listRowBackground(theme.primaryBackgroundColor)
         Section {
@@ -45,11 +45,11 @@ struct StatusEditorMediaEditView: View {
       .onAppear {
         imageDescription = container.mediaAttachment?.description ?? ""
       }
-      .navigationTitle("Edit Image")
+      .navigationTitle("status.editor.media.edit-image")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
-          Button("Done") {
+          Button("action.done") {
             if !imageDescription.isEmpty {
               Task {
                 await viewModel.addDescription(container: container, description: imageDescription)
@@ -60,7 +60,7 @@ struct StatusEditorMediaEditView: View {
         }
 
         ToolbarItem(placement: .navigationBarLeading) {
-          Button("Cancel") {
+          Button("action.cancel") {
             dismiss()
           }
         }

@@ -78,11 +78,11 @@ struct TimelineTab: View {
       Button {
         self.timeline = timeline
       } label: {
-        Label(timeline.title(), systemImage: timeline.iconName() ?? "")
+        Label(timeline.localizedTitle(), systemImage: timeline.iconName() ?? "")
       }
     }
     if !currentAccount.lists.isEmpty {
-      Menu("Lists") {
+      Menu("timeline.filter.lists") {
         ForEach(currentAccount.lists) { list in
           Button {
             timeline = .list(list: list)
@@ -94,7 +94,7 @@ struct TimelineTab: View {
     }
 
     if !currentAccount.tags.isEmpty {
-      Menu("Followed Tags") {
+      Menu("timeline.filter.tags") {
         ForEach(currentAccount.tags) { tag in
           Button {
             timeline = .hashtag(tag: tag.name, accountId: nil)
@@ -104,8 +104,8 @@ struct TimelineTab: View {
         }
       }
     }
-
-    Menu("Local Timelines") {
+    
+    Menu("timeline.filter.local") {
       ForEach(preferences.remoteLocalTimelines, id: \.self) { server in
         Button {
           timeline = .remoteLocal(server: server)
@@ -116,7 +116,7 @@ struct TimelineTab: View {
       Button {
         routerPath.presentedSheet = .addRemoteLocalTimeline
       } label: {
-        Label("Add a local timeline", systemImage: "badge.plus.radiowaves.right")
+        Label("timeline.filter.add-local", systemImage: "badge.plus.radiowaves.right")
       }
     }
   }

@@ -82,13 +82,13 @@ public struct StatusRowView: View {
 
   private func makeFilterView(filter: Filter) -> some View {
     HStack {
-      Text("Filtered by: \(filter.title)")
+      Text("status.filter.filtered-by-\(filter.title)")
       Button {
         withAnimation {
           viewModel.isFiltered = false
         }
       } label: {
-        Text("Show anyway")
+        Text("status.filter.show-anyway")
       }
     }
   }
@@ -101,9 +101,9 @@ public struct StatusRowView: View {
         AvatarView(url: viewModel.status.account.avatar, size: .boost)
         if viewModel.status.account.username != account.account?.username {
           EmojiTextApp(viewModel.status.account.safeDisplayName.asMarkdown, emojis: viewModel.status.account.emojis)
-          Text("boosted")
+          Text("status.row.was-boosted")
         } else {
-          Text("You boosted")
+          Text("status.row.you-boosted")
         }
       }
       .font(.scaledFootnote)
@@ -128,7 +128,7 @@ public struct StatusRowView: View {
     {
       HStack(spacing: 2) {
         Image(systemName: "arrowshape.turn.up.left.fill")
-        Text("Replied to")
+        Text("status.row.was-reply")
         Text(mention.username)
       }
       .font(.scaledFootnote)
@@ -185,7 +185,7 @@ public struct StatusRowView: View {
             viewModel.displaySpoiler.toggle()
           }
         } label: {
-          Text(viewModel.displaySpoiler ? "Show more" : "Show less")
+          Text(viewModel.displaySpoiler ? "status.show-more" : "status.show-less")
         }
         .buttonStyle(.bordered)
       }

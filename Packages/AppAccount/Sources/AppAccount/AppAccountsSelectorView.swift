@@ -81,7 +81,7 @@ public struct AppAccountsSelectorView: View {
       Button {
         routerPath.presentedSheet = .addAccount
       } label: {
-        Label("Add Account", systemImage: "person.badge.plus")
+        Label("app-account.button.add", systemImage: "person.badge.plus")
       }
     }
   }

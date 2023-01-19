@@ -108,9 +108,9 @@ public struct StatusMediaPreviewView: View {
           .transition(.opacity)
       }
     }
-    .alert("Image description",
+    .alert("status.editor.media.image-description",
            isPresented: $isAltAlertDisplayed) {
-      Button("Ok", action: {})
+      Button("alert.button.ok", action: {})
     } message: {
       Text(altTextDisplayed ?? "")
     }
@@ -167,7 +167,7 @@ public struct StatusMediaPreviewView: View {
               altTextDisplayed = alt
               isAltAlertDisplayed = true
             } label: {
-              Text("ALT")
+              Text("status.image.alt-text.abbreviation")
             }
             .padding(8)
             .background(.thinMaterial)
@@ -233,7 +233,7 @@ public struct StatusMediaPreviewView: View {
                   altTextDisplayed = alt
                   isAltAlertDisplayed = true
                 } label: {
-                  Text("ALT")
+                  Text("status.image.alt-text.abbreviation")
                     .font(.scaledFootnote)
                 }
                 .padding(4)
@@ -289,9 +289,9 @@ public struct StatusMediaPreviewView: View {
             }
           } label: {
             if sensitive {
-              Label("Show sensitive content", systemImage: "eye")
+              Label("status.media.sensitive.show", systemImage: "eye")
             } else {
-              Label("Show content", systemImage: "eye")
+              Label("status.media.content.show", systemImage: "eye")
             }
           }
           .buttonStyle(.borderedProminent)
