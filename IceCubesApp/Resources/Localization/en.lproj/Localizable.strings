@@ -122,6 +122,10 @@
 "account.action.edit-info" = "Edit Info";
 "account.action.mention" = "Mention";
 "account.action.message" = "Message";
+"account.action.block" = "Block";
+"account.action.unblock" = "Unblock";
+"account.action.mute" = "Mute";
+"account.action.unmute" = "Unmute";
 "account.boosted-by" = "Boosted by";
 "account.detail.about" = "About";
 "account.detail.familiar-followers" = "Also followed by";
