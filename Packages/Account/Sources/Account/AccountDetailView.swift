@@ -419,6 +419,56 @@ public struct AccountDetailView: View {
                   Label("account.action.mute", systemImage: "speaker.slash")
                 }
               }
+              if viewModel.relationship?.blocking == true {
+                Button {
+                  Task {
+                    do {
+                      viewModel.relationship = try await client.post(endpoint: Accounts.unblock(id: account.id))
+                    } catch {
+                      print("Error while unblocking: \(error.localizedDescription)")
+                    }
+                  }
+                } label: {
+                  Label("Unblock", systemImage: "person.crop.circle.badge.exclamationmark")
+                }
+              } else {
+                Button {
+                  Task {
+                    do {
+                      viewModel.relationship = try await client.post(endpoint: Accounts.block(id: account.id))
+                    } catch {
+                      print("Error while blocking: \(error.localizedDescription)")
+                    }
+                  }
+                } label: {
+                  Label("Block", systemImage: "person.crop.circle.badge.xmark")
+                }
+              }
+              if viewModel.relationship?.muting == true {
+                Button {
+                  Task {
+                    do {
+                      viewModel.relationship = try await client.post(endpoint: Accounts.unmute(id: account.id))
+                    } catch {
+                      print("Error while unmuting: \(error.localizedDescription)")
+                    }
+                  }
+                } label: {
+                  Label("Unmute", systemImage: "speaker")
+                }
+              } else {
+                Button {
+                  Task {
+                    do {
+                      viewModel.relationship = try await client.post(endpoint: Accounts.mute(id: account.id))
+                    } catch {
+                      print("Error while muting: \(error.localizedDescription)")
+                    }
+                  }
+                } label: {
+                  Label("Mute", systemImage: "speaker.slash")
+                }
+              }
               Divider()
             }
 
