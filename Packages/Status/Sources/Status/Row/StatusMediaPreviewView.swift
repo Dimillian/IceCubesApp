@@ -315,10 +315,10 @@ public struct StatusMediaPreviewView: View {
   private func contextMenuForMedia(mediaAttachement: MediaAttachment) -> some View {
     if let url = mediaAttachement.url {
       ShareLink(item: url) {
-        Label("Share this image", systemImage: "square.and.arrow.up")
+        Label("status.media.contextmenu.share", systemImage: "square.and.arrow.up")
       }
       Button { openURL(url) } label: {
-        Label("View in Browser", systemImage: "safari")
+        Label("status.media.contextmenu.view-browser", systemImage: "safari")
       }
       Divider()
       Button {
@@ -329,7 +329,7 @@ public struct StatusMediaPreviewView: View {
           } catch { }
         }
       } label: {
-        Label("Save image", systemImage: "square.and.arrow.down")
+        Label("status.media.contextmenu.save", systemImage: "square.and.arrow.down")
       }
       Button {
         Task {
@@ -339,7 +339,7 @@ public struct StatusMediaPreviewView: View {
           } catch { }
         }
       } label: {
-        Label("Copy image", systemImage: "doc.on.doc")
+        Label("status.media.contextmenu.copy", systemImage: "doc.on.doc")
       }
     }
   }

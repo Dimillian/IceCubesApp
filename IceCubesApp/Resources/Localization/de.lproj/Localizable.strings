@@ -83,7 +83,7 @@
 "settings.support.alert.error.message" = "Fehler bei der Ausführung des In-App-Kaufs. Bitte versuche es erneut.";
 "settings.support.alert.message" = "Vielen Dank für dein Trinkgeld! Ich weiß es zu schätzen!";
 "settings.support.alert.title" = "Danke!";
-"settings.support.message-from-dev" = "Hi there! My name is Thomas and I absolutely love creating open source apps. Ice Cubes is definitely one of my proudest projects to date - and let's be real, it's also the one that requires the most maintenance due to the ever-changing world of Mastodon and social media. If you're having a blast using Ice Cubes, consider tossing a little tip my way. It'll make my day (and help keep the app running smoothly for you). 🚀";
+"settings.support.message-from-dev" = "Hey du! Mein Name ist Thomas und ich liebe es, Open-Source-Apps zu erschaffen. Ice Cubes ist definitiv eines meiner Projekte, auf das ich am meisten stolz bin – und seien wir ehrlich, es ist auch das mit dem größten Wartungsaufwand, dank der sich ständig ändernden Welt von Mastodon und Social Media. Wenn du Spaß beim Nutzen von Ice Cubes hast, denk darüber nach, mir eine kleine Spende dazulassen. Das würde mir den Tag versüßen (und dazu beitragen, dass die App reibungslos für dich funktioniert). 🚀";
 "settings.support.navigation-title" = "Ice Cubes unterstützen";
 "settings.support.one.subtitle" = "Klein aber fein!";
 "settings.support.one.title" = "🍬 Kleines Trinkgeld";
@@ -161,7 +161,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Löschen";
 "conversations.action.mark-read" = "Als gelesen markieren";
-"conversations.empty.message" = "Looking for some social media love? You'll find all your direct messages and private mentions right here. Happy messaging! 📱❤️";
+"conversations.empty.message" = "Suchst du etwas Liebe auf Social Media? Hier findest du alle deine direkten Nachriten und privaten Erwähnungen. Fröhliches Messaging! 📱❤️";
 "conversations.empty.title" = "Posteingang leer";
 "conversations.error.button" = "Wiederholen";
 "conversations.error.message" = "Fehler beim Laden deiner Nachrichten";
@@ -206,7 +206,7 @@
 "lists.name.message" = "Gib den Namen deiner Liste ein";
 
 // MARK: Package: Notifications
-"notifications.empty.message" = "Notifications? What notifications? Your notification inbox is looking so empty. Keep on being awesome! 📱😎";
+"notifications.empty.message" = "Benachrichtigungen? Welche Benachrichtigungen? Dein Posteingang sieht so leer aus. Bleib weiter so fantastisch! 📱😎";
 "notifications.empty.title" = "Keine Benachrichtigungen";
 "notifications.error.message" = "Beim Laden deiner Benachrichtigungen ist ein Fehler aufgetreten, bitte versuche es erneut.";
 "notifications.error.title" = "Ein Fehler ist aufgetreten";
@@ -285,6 +285,10 @@
 "status.filter.show-anyway" = "Trotzdem anzeigen";
 "status.image.alt-text.abbreviation" = "ALT";
 "status.media.content.show" = "Inhalt zeigen";
+"status.media.contextmenu.copy" = "Bild kopieren";
+"status.media.contextmenu.save" = "Bild sichern";
+"status.media.contextmenu.share" = "Dieses Bild teilen";
+"status.media.contextmenu.view-browser" = "Im Browser anzeigen";
 "status.media.sensitive.show" = "Sensiblen Inhalt zeigen";
 "status.poll.n-votes %lld" = "%lld Stimmen";
 "status.poll.closed" = "Beendet";
