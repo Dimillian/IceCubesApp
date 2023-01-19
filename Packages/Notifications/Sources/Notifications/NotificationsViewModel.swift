@@ -39,7 +39,12 @@ class NotificationsViewModel: ObservableObject {
   }
 
   private var queryTypes: [String]? {
-    selectedType != nil ? [selectedType!.rawValue] : nil
+    if let selectedType {
+      var excludedTypes = Models.Notification.NotificationType.allCases
+      excludedTypes.removeAll(where: { $0 == selectedType})
+      return excludedTypes.map{ $0.rawValue }
+    }
+    return nil
   }
 
   private var notifications: [Models.Notification] = []
@@ -98,7 +103,8 @@ class NotificationsViewModel: ObservableObject {
   }
 
   func handleEvent(event: any StreamEvent) {
-    if let event = event as? StreamEventNotification,
+    if selectedType == nil,
+       let event = event as? StreamEventNotification,
        !notifications.contains(where: { $0.id == event.notification.id })
     {
       notifications.insert(event.notification, at: 0)

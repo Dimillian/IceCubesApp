@@ -21,7 +21,7 @@ public enum Notifications: Endpoint {
       var params = makePaginationParam(sinceId: sinceId, maxId: maxId, mindId: nil) ?? []
       if let types {
         for type in types {
-          params.append(.init(name: "types[]", value: type))
+          params.append(.init(name: "exclude_types[]", value: type))
         }
       }
       return params

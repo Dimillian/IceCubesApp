@@ -4,6 +4,7 @@ import Network
 import Notifications
 import SwiftUI
 import Timeline
+import Models
 
 struct NotificationsTab: View {
   @EnvironmentObject private var client: Client
@@ -12,10 +13,12 @@ struct NotificationsTab: View {
   @EnvironmentObject private var userPreferences: UserPreferences
   @StateObject private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab
+  
+  let lockedType: Models.Notification.NotificationType?
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {
-      NotificationsListView()
+      NotificationsListView(lockedType: lockedType)
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbar {

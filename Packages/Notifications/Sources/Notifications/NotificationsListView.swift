@@ -11,8 +11,12 @@ public struct NotificationsListView: View {
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
   @StateObject private var viewModel = NotificationsViewModel()
+  
+  let lockedType: Models.Notification.NotificationType?
 
-  public init() {}
+  public init(lockedType: Models.Notification.NotificationType?) {
+    self.lockedType = lockedType
+  }
 
   public var body: some View {
     ScrollView {
@@ -23,21 +27,23 @@ public struct NotificationsListView: View {
       .padding(.top, .layoutPadding + 16)
       .background(theme.primaryBackgroundColor)
     }
-    .navigationTitle(viewModel.selectedType?.menuTitle() ?? "All Notifications")
+    .navigationTitle(lockedType?.menuTitle() ?? viewModel.selectedType?.menuTitle() ?? "All Notifications")
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
-      ToolbarTitleMenu {
-        Button {
-          viewModel.selectedType = nil
-        } label: {
-          Label("All Notifications", systemImage: "bell.fill")
-        }
-        Divider()
-        ForEach(Notification.NotificationType.allCases, id: \.self) { type in
+      if lockedType == nil {
+        ToolbarTitleMenu {
           Button {
-            viewModel.selectedType = type
+            viewModel.selectedType = nil
           } label: {
-            Label(type.menuTitle(), systemImage: type.iconName())
+            Label("All Notifications", systemImage: "bell.fill")
+          }
+          Divider()
+          ForEach(Notification.NotificationType.allCases, id: \.self) { type in
+            Button {
+              viewModel.selectedType = type
+            } label: {
+              Label(type.menuTitle(), systemImage: type.iconName())
+            }
           }
         }
       }
@@ -46,6 +52,9 @@ public struct NotificationsListView: View {
     .background(theme.primaryBackgroundColor)
     .task {
       viewModel.client = client
+      if let lockedType {
+        viewModel.selectedType = lockedType
+      }
       await viewModel.fetchNotifications()
     }
     .refreshable {

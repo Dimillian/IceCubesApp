@@ -5,7 +5,7 @@ import Status
 import SwiftUI
 
 enum Tab: Int, Identifiable, Hashable {
-  case timeline, notifications, explore, messages, settings, other
+  case timeline, notifications, mentions, explore, messages, settings, other
   case trending, federated, local
   case profile
 
@@ -19,7 +19,7 @@ enum Tab: Int, Identifiable, Hashable {
 
   static func loggedInTabs() -> [Tab] {
     if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
-      return [.timeline, .trending, .federated, .local, .notifications, .explore, .messages, .settings]
+      return [.timeline, .trending, .federated, .local, .notifications, .mentions, .explore, .messages, .settings]
     } else {
       return [.timeline, .notifications, .explore, .messages, .settings]
     }
@@ -37,7 +37,9 @@ enum Tab: Int, Identifiable, Hashable {
     case .federated:
       TimelineTab(popToRootTab: popToRootTab, timeline: .federated)
     case .notifications:
-      NotificationsTab(popToRootTab: popToRootTab)
+      NotificationsTab(popToRootTab: popToRootTab, lockedType: nil)
+    case .mentions:
+      NotificationsTab(popToRootTab: popToRootTab, lockedType: .mention)
     case .explore:
       ExploreTab(popToRootTab: popToRootTab)
     case .messages:
@@ -62,6 +64,8 @@ enum Tab: Int, Identifiable, Hashable {
       Label("Federated", systemImage: iconName)
     case .notifications:
       Label("Notifications", systemImage: iconName)
+    case .mentions:
+      Label("Notifications", systemImage: iconName)
     case .explore:
       Label("Explore", systemImage: iconName)
     case .messages:
@@ -85,6 +89,8 @@ enum Tab: Int, Identifiable, Hashable {
       return "globe.americas"
     case .notifications:
       return "bell"
+    case .mentions:
+      return "at"
     case .explore:
       return "magnifyingglass"
     case .messages:

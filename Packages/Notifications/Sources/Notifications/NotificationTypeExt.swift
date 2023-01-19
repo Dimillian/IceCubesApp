@@ -46,7 +46,7 @@ extension Models.Notification.NotificationType {
     case .status:
       return "Post"
     case .mention:
-      return "Mention"
+      return "Mentions"
     case .reblog:
       return "Boost"
     case .follow:
