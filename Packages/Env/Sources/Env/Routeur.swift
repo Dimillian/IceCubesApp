@@ -26,6 +26,7 @@ public enum SheetDestinations: Identifiable {
   case listAddAccount(account: Account)
   case addAccount
   case addRemoteLocalTimeline
+  case statusEditHistory(status: String)
 
   public var id: String {
     switch self {
@@ -39,6 +40,8 @@ public enum SheetDestinations: Identifiable {
       return "addAccount"
     case .addRemoteLocalTimeline:
       return "addRemoteLocalTimeline"
+    case .statusEditHistory:
+      return "statusEditHistory"
     }
   }
 }

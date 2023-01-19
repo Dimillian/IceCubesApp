@@ -110,7 +110,7 @@ class NotificationsViewModel: ObservableObject {
     {
       if let selectedType, event.notification.type == selectedType.rawValue {
         notifications.insert(event.notification, at: 0)
-      } else {
+      } else if selectedType == nil {
         notifications.insert(event.notification, at: 0)
       }
       state = .display(notifications: notifications, nextPageState: .hasNextPage)

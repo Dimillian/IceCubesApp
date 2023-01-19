@@ -66,6 +66,9 @@ extension View {
       case .addRemoteLocalTimeline:
         AddRemoteTimelineView()
           .withEnvironments()
+      case let .statusEditHistory(status):
+        StatusEditHistoryView(statusId: status)
+          .withEnvironments()
       }
     }
   }

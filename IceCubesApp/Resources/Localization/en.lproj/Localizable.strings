@@ -299,6 +299,7 @@
 "status.show-less" = "Show less";
 "status.show-more" = "Show more";
 "status.summary.at-time" = " at ";
+"status.summary.edited-time" = "Last edited: ";
 "status.summary.n-boosts %lld" = "%lld boosts";
 "status.summary.n-favorites %lld" = "%lld favorites";
 "status.visibility.direct" = "Private";
