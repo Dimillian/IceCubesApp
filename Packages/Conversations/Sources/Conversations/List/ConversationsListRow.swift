@@ -19,8 +19,10 @@ struct ConversationsListRow: View {
         AvatarView(url: conversation.accounts.first!.avatar)
         VStack(alignment: .leading, spacing: 4) {
           HStack {
-            Text(conversation.accounts.map { $0.safeDisplayName }.joined(separator: ", "))
-              .font(.scaledHeadline)
+            EmojiTextApp(conversation.accounts.map { $0.safeDisplayName }.joined(separator: ", "),
+                         emojis: conversation.accounts.flatMap{ $0.emojis })
+              .font(.scaledSubheadline)
+              .fontWeight(.semibold)
               .foregroundColor(theme.labelColor)
               .multilineTextAlignment(.leading)
             Spacer()

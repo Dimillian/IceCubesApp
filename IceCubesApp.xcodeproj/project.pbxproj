@@ -652,7 +652,7 @@
 				DEVELOPMENT_TEAM = Z6P74P6T99;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IceCubesShareExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = IceCubesShareExtension;
+				INFOPLIST_KEY_CFBundleDisplayName = "Ice Cubes";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -682,7 +682,7 @@
 				DEVELOPMENT_TEAM = Z6P74P6T99;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IceCubesShareExtension/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = IceCubesShareExtension;
+				INFOPLIST_KEY_CFBundleDisplayName = "Ice Cubes";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (

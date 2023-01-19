@@ -7,6 +7,7 @@ import Network
 import NukeUI
 import Shimmer
 import SwiftUI
+import SafariServices
 
 struct AddAccountView: View {
   @Environment(\.dismiss) private var dismiss
@@ -24,6 +25,7 @@ struct AddAccountView: View {
   @State private var signInClient: Client?
   @State private var instances: [InstanceSocial] = []
   @State private var instanceFetchError: String?
+  @State private var oauthURL: URL?
 
   private let instanceNamePublisher = PassthroughSubject<String, Never>()
 
@@ -99,6 +101,9 @@ struct AddAccountView: View {
         Task {
           await continueSignIn(url: url)
         }
+      })
+      .sheet(item: $oauthURL, content: { url in
+        SafariView(url: url)
       })
     }
   }
@@ -176,7 +181,7 @@ struct AddAccountView: View {
     do {
       signInClient = .init(server: instanceName)
       if let oauthURL = try await signInClient?.oauthURL() {
-        await UIApplication.shared.open(oauthURL)
+        self.oauthURL = oauthURL
       } else {
         isSigninIn = false
       }
@@ -191,6 +196,7 @@ struct AddAccountView: View {
       return
     }
     do {
+      oauthURL = nil
       let oauthToken = try await client.continueOauthFlow(url: url)
       appAccountsManager.add(account: AppAccount(server: client.server, oauthToken: oauthToken))
       Task {
@@ -199,7 +205,20 @@ struct AddAccountView: View {
       isSigninIn = false
       dismiss()
     } catch {
+      oauthURL = nil
       isSigninIn = false
     }
+  }
+}
+
+struct SafariView: UIViewControllerRepresentable {
+  let url: URL
+
+  func makeUIViewController(context: UIViewControllerRepresentableContext<SafariView>) -> SFSafariViewController {
+    SFSafariViewController(url: url)
+  }
+  
+  func updateUIViewController(_ uiViewController: SFSafariViewController, context: UIViewControllerRepresentableContext<SafariView>) {
+
   }
 }
