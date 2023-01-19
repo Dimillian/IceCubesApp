@@ -245,18 +245,18 @@ public class StatusEditorViewModel: ObservableObject {
                                  range: NSRange(location: range.location, length: range.length))
       }
 
-      var attachmentsToRemove: [NSRange] = []
-      statusText.enumerateAttribute(.attachment, in: range) { attachment, _, _ in
+      var mediaAdded: Bool = false
+      statusText.enumerateAttribute(.attachment, in: range) { attachment, range, _ in
         if let attachment = attachment as? NSTextAttachment, let image = attachment.image {
-          attachmentsToRemove.append(range)
           mediasImages.append(.init(image: image, mediaAttachment: nil, error: nil))
+          statusText.removeAttribute(.attachment, range: range)
+          statusText.mutableString.deleteCharacters(in: range)
+          mediaAdded = true
         }
       }
-      if !attachmentsToRemove.isEmpty {
+      
+      if mediaAdded {
         processMediasToUpload()
-        for range in attachmentsToRemove {
-          statusText.removeAttribute(.attachment, range: range)
-        }
       }
     } catch {}
   }
