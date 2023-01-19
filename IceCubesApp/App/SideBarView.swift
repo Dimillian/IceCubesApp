@@ -38,11 +38,8 @@ struct SideBarView<Content: View>: View {
   
   private func makeIconForTab(tab: Tab) -> some View {
     ZStack(alignment: .topTrailing) {
-      Image(systemName: tab.iconName)
-        .resizable()
-        .aspectRatio(contentMode: .fit)
-        .frame(width: 24, height: 24)
-        .foregroundColor(tab == selectedTab ? theme.tintColor : theme.labelColor)
+      SideBarIcon(systemIconName: tab.iconName,
+                  isSelected: tab == selectedTab)
       if let badge = badgeFor(tab: tab), badge > 0 {
         ZStack {
           Circle()
@@ -139,5 +136,28 @@ struct SideBarView<Content: View>: View {
     }
     .background(.thinMaterial)
     .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
+  }
+}
+
+private struct SideBarIcon: View {
+  @EnvironmentObject private var theme: Theme
+  
+  let systemIconName: String
+  let isSelected: Bool
+  
+  @State private var isHovered: Bool = false
+  
+  var body: some View {
+    Image(systemName: systemIconName)
+      .resizable()
+      .aspectRatio(contentMode: .fit)
+      .frame(width: 24, height: 24)
+      .foregroundColor(isSelected ? theme.tintColor : theme.labelColor)
+      .scaleEffect(isHovered ? 0.8 : 1.0)
+      .onHover { isHovered in
+        withAnimation(.interpolatingSpring(stiffness: 300, damping: 15)) {
+          self.isHovered = isHovered
+        }
+      }
   }
 }
