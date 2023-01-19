@@ -366,6 +366,9 @@ public struct AccountDetailView: View {
               } label: {
                 Label("account.action.message", systemImage: "tray.full")
               }
+              
+              Divider()
+              
               if viewModel.relationship?.blocking == true {
                 Button {
                   Task {
@@ -376,7 +379,7 @@ public struct AccountDetailView: View {
                     }
                   }
                 } label: {
-                  Label("Unblock", systemImage: "person.crop.circle.badge.exclamationmark")
+                  Label("account.action.unblock", systemImage: "person.crop.circle.badge.exclamationmark")
                 }
               } else {
                 Button {
@@ -388,7 +391,7 @@ public struct AccountDetailView: View {
                     }
                   }
                 } label: {
-                  Label("Block", systemImage: "person.crop.circle.badge.xmark")
+                  Label("account.action.block", systemImage: "person.crop.circle.badge.xmark")
                 }
               }
               if viewModel.relationship?.muting == true {
@@ -401,7 +404,7 @@ public struct AccountDetailView: View {
                     }
                   }
                 } label: {
-                  Label("Unmute", systemImage: "speaker")
+                  Label("account.action.unmute", systemImage: "speaker")
                 }
               } else {
                 Button {
@@ -413,7 +416,7 @@ public struct AccountDetailView: View {
                     }
                   }
                 } label: {
-                  Label("Mute", systemImage: "speaker.slash")
+                  Label("account.action.mute", systemImage: "speaker.slash")
                 }
               }
               Divider()
