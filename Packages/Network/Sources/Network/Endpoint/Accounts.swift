@@ -32,6 +32,8 @@ public enum Accounts: Endpoint {
   case preferences
   case block(id: String)
   case unblock(id: String)
+  case mute(id: String)
+  case unmute(id: String)
 
   public func path() -> String {
     switch self {
@@ -73,6 +75,10 @@ public enum Accounts: Endpoint {
       return "accounts/\(id)/block"
     case let .unblock(id):
       return "accounts/\(id)/unblock"
+    case let .mute(id):
+      return "accounts/\(id)/mute"
+    case let .unmute(id):
+      return "accounts/\(id)/unmute"
     }
   }
 
