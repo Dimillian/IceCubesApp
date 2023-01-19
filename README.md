@@ -24,7 +24,7 @@ The project is split into different Swift Packages to make it easier to manage a
 
 It's a great starting point for learning SwiftUI. The app covers many of the basic concepts of SwiftUI, such as building layouts, working with data, and handling user interaction. By exploring the code, you can gain a solid understanding of how to use SwiftUI in your daily life. Plus, the open source nature of IceCubesApp means that you can see how real-world applications are built and get a sense of best practices for using SwiftUI.
 
-The architecture is straighforward MVVM for most parts, no redux on this one ;)
+The architecture is straightforward MVVM for most parts, no redux on this one ;)
 
 Please note that IceCubesApp is currently in an early stage of development and as such, there are many features that are still missing. While the app is functional and can be used to browse and interact with Mastodon, there are still many features that are planned for the future.
 
