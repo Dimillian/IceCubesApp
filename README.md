@@ -1,6 +1,7 @@
 # IceCubesApp
 
-[Public TestFlight beta](https://testflight.apple.com/join/tqI3dK1u) (A proper App Store release will come eventually)
+[You can now download it on the App Store](https://apps.apple.com/us/app/ice-cubes-for-mastodon/id6444915884)
+
 
 <img src="Images/promo.png" />
 
