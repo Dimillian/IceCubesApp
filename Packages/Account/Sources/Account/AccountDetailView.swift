@@ -391,6 +391,31 @@ public struct AccountDetailView: View {
                   Label("Block", systemImage: "person.crop.circle.badge.xmark")
                 }
               }
+              if viewModel.relationship?.muting == true {
+                Button {
+                  Task {
+                    do {
+                      viewModel.relationship = try await client.post(endpoint: Accounts.unmute(id: account.id))
+                    } catch {
+                      print("Error while unmuting: \(error.localizedDescription)")
+                    }
+                  }
+                } label: {
+                  Label("Unmute", systemImage: "speaker")
+                }
+              } else {
+                Button {
+                  Task {
+                    do {
+                      viewModel.relationship = try await client.post(endpoint: Accounts.mute(id: account.id))
+                    } catch {
+                      print("Error while muting: \(error.localizedDescription)")
+                    }
+                  }
+                } label: {
+                  Label("Mute", systemImage: "speaker.slash")
+                }
+              }
               Divider()
             }
 
