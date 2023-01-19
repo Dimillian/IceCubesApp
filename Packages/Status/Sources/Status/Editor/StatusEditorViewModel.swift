@@ -197,7 +197,8 @@ public class StatusEditorViewModel: ObservableObject {
   }
   
   private func processText() {
-    statusText.addAttributes([.foregroundColor: UIColor(Color.label)],
+    statusText.addAttributes([.foregroundColor: UIColor(Color.label),
+                              .underlineColor: .clear],
                              range: NSMakeRange(0, statusText.string.utf16.count))
     let hashtagPattern = "(#+[a-zA-Z0-9(_)]{1,})"
     let mentionPattern = "(@+[a-zA-Z0-9(_).-]{1,})"
