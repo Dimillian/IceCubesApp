@@ -22,6 +22,10 @@ public struct ThemePreviewView: View {
         ThemeBoxView(color: NemesisDark())
         ThemeBoxView(color: NemesisLight())
       }
+      HStack(spacing: gutterSpace) {
+        ThemeBoxView(color: MediumDark())
+        ThemeBoxView(color: MediumLight())
+      }
     }
     .padding(4)
     .frame(maxHeight: .infinity)

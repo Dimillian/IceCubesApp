@@ -128,6 +128,8 @@ public class Theme: ObservableObject {
       DesertLight(),
       NemesisDark(),
       NemesisLight(),
+      MediumLight(),
+      MediumDark(),
     ]
   }
 

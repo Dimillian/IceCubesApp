@@ -19,6 +19,8 @@ public enum ColorSetName: String {
   case desertLight = "Desert - Light"
   case nemesisDark = "Nemesis - Dark"
   case nemesisLight = "Nemesis - Light"
+  case mediumLight = "Medium - Light"
+  case mediumDark = "Medium - Dark"
 }
 
 public struct IceCubeDark: ColorSet {
@@ -82,6 +84,28 @@ public struct NemesisLight: ColorSet {
   public var tintColor: Color = .init(hex: 0x17A2F2)
   public var primaryBackgroundColor: Color = .init(hex: 0xFFFFFF)
   public var secondaryBackgroundColor: Color = .init(hex: 0xE8ECEF)
+  public var labelColor: Color = .black
+
+  public init() {}
+}
+
+public struct MediumDark: ColorSet {
+  public var name: ColorSetName = .mediumDark
+  public var scheme: ColorScheme = .dark
+  public var tintColor: Color = .init(hex: 0x1A8917)
+  public var primaryBackgroundColor: Color = .init(hex: 0x121212)
+  public var secondaryBackgroundColor: Color = .init(hex: 0x191919)
+  public var labelColor: Color = .white
+
+  public init() {}
+}
+
+public struct MediumLight: ColorSet {
+  public var name: ColorSetName = .mediumLight
+  public var scheme: ColorScheme = .light
+  public var tintColor: Color = .init(hex: 0x1A8917)
+  public var primaryBackgroundColor: Color = .init(hex: 0xFFFFFF)
+  public var secondaryBackgroundColor: Color = .init(hex: 0xFAFAFA)
   public var labelColor: Color = .black
 
   public init() {}
