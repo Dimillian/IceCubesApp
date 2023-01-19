@@ -366,6 +366,31 @@ public struct AccountDetailView: View {
               } label: {
                 Label("account.action.message", systemImage: "tray.full")
               }
+              if viewModel.relationship?.blocking == true {
+                Button {
+                  Task {
+                    do {
+                      viewModel.relationship = try await client.post(endpoint: Accounts.unblock(id: account.id))
+                    } catch {
+                      print("Error while unblocking: \(error.localizedDescription)")
+                    }
+                  }
+                } label: {
+                  Label("Unblock", systemImage: "person.crop.circle.badge.exclamationmark")
+                }
+              } else {
+                Button {
+                  Task {
+                    do {
+                      viewModel.relationship = try await client.post(endpoint: Accounts.block(id: account.id))
+                    } catch {
+                      print("Error while blocking: \(error.localizedDescription)")
+                    }
+                  }
+                } label: {
+                  Label("Block", systemImage: "person.crop.circle.badge.xmark")
+                }
+              }
               Divider()
             }
 
