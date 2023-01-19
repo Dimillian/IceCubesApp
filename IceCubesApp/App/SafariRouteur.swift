@@ -23,7 +23,7 @@ private struct SafariRouter: ViewModifier {
       })
       .onAppear {
         routerPath.urlHandler = { url in
-          guard preferences.preferredBrowser == .inAppSafari else { return .systemAction }
+          guard preferences.preferredBrowser == .inAppSafari, !ProcessInfo.processInfo.isiOSAppOnMac else { return .systemAction }
           // SFSafariViewController only supports initial URLs with http:// or https:// schemes.
           guard let scheme = url.scheme, ["https", "http"].contains(scheme.lowercased()) else {
             return .systemAction
