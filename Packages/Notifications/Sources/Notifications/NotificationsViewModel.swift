@@ -103,11 +103,14 @@ class NotificationsViewModel: ObservableObject {
   }
 
   func handleEvent(event: any StreamEvent) {
-    if selectedType == nil,
-       let event = event as? StreamEventNotification,
+    if  let event = event as? StreamEventNotification,
        !notifications.contains(where: { $0.id == event.notification.id })
     {
-      notifications.insert(event.notification, at: 0)
+      if let selectedType, event.notification.type == selectedType.rawValue {
+        notifications.insert(event.notification, at: 0)
+      } else {
+        notifications.insert(event.notification, at: 0)
+      }
       state = .display(notifications: notifications, nextPageState: .hasNextPage)
     }
   }

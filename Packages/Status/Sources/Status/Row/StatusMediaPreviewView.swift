@@ -33,7 +33,7 @@ public struct StatusMediaPreviewView: View {
     if attachments.count == 1 {
       return 300
     }
-    return attachments.count > 2 ? 100 : 200
+    return attachments.count > 2 ? 150 : 200
   }
 
   private func size(for media: MediaAttachment) -> CGSize? {
@@ -181,7 +181,7 @@ public struct StatusMediaPreviewView: View {
           placeholder: {
             RoundedRectangle(cornerRadius: 4)
               .fill(Color.gray)
-              .frame(maxHeight: isNotifications ? imageMaxHeight : nil)
+              .frame(height: imageMaxHeight)
               .shimmering()
           }
         )
