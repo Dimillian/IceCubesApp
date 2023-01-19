@@ -8,8 +8,6 @@ import SwiftUI
 import UIKit
 
 class ShareViewController: UIViewController {
-  @IBOutlet var container: UIView!
-
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -36,8 +34,8 @@ class ShareViewController: UIViewController {
           .preferredColorScheme(colorScheme == .light ? .light : .dark)
         let childView = UIHostingController(rootView: view)
         addChild(childView)
-        childView.view.frame = container.bounds
-        container.addSubview(childView.view)
+        childView.view.frame = self.view.bounds
+        self.view.addSubview(childView.view)
         childView.didMove(toParent: self)
       }
     }
