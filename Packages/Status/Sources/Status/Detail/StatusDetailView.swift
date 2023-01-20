@@ -89,9 +89,6 @@ public struct StatusDetailView: View {
             _ = routerPath.path.popLast()
           }
         }
-        DispatchQueue.main.async {
-          proxy.scrollTo(viewModel.statusId, anchor: .center)
-        }
       }
       .onChange(of: watcher.latestEvent?.id) { _ in
         guard let lastEvent = watcher.latestEvent else { return }
