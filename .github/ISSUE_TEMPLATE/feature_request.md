@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Feature Request title
+about: Something you would like the app to support
 title: 'Feature request:'
 labels: enhancement
 assignees: ''
