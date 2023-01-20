@@ -285,6 +285,10 @@
 "status.filter.show-anyway" = "Show anyway";
 "status.image.alt-text.abbreviation" = "ALT";
 "status.media.content.show" = "Show content";
+"status.media.contextmenu.copy" = "Copy image";
+"status.media.contextmenu.save" = "Save image";
+"status.media.contextmenu.share" = "Share this image";
+"status.media.contextmenu.view-browser" = "View in Browser";
 "status.media.sensitive.show" = "Show sensitive content";
 "status.poll.n-votes %lld" = "%lld votes";
 "status.poll.closed" = "Closed";
