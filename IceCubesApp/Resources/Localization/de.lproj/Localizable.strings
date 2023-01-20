@@ -157,6 +157,7 @@
 "account.post.pinned" = "Angehefteter Post";
 "account.posts" = "Posts";
 "account.relation.follows-you" = "Folgt dir";
+"account.joined" = "Beigetreten";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Löschen";

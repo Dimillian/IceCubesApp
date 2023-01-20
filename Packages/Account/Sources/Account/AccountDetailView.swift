@@ -41,6 +41,8 @@ public struct AccountDetailView: View {
       } content: {
         LazyVStack(alignment: .leading) {
           makeHeaderView(proxy: proxy)
+          joinedAtView
+            .offset(y: -36)
           familiarFollowers
             .offset(y: -36)
           featuredTagsView
@@ -143,6 +145,22 @@ public struct AccountDetailView: View {
                               scrollOffset: $scrollOffset)
     case let .error(error):
       Text("Error: \(error.localizedDescription)")
+    }
+  }
+  
+  @ViewBuilder
+  private var joinedAtView: some View {
+    if let joinedAt = viewModel.account?.createdAt.asDate {
+      HStack(spacing: 4) {
+        Image(systemName: "calendar")
+        Text("account.joined")
+        Text(joinedAt, style: .date)
+      }
+      .foregroundColor(.gray)
+      .font(.footnote)
+      .padding(.horizontal, .layoutPadding)
+      .padding(.top, 2)
+      .padding(.bottom, 5)
     }
   }
 
