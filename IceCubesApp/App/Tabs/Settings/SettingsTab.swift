@@ -134,6 +134,10 @@ struct SettingsTabs: View {
       NavigationLink(destination: SupportAppView()) {
         Label("settings.app.support", systemImage: "wand.and.stars")
       }
+      
+      if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+        Label("App Version: \(appVersion)", systemImage: "app.badge.checkmark")
+      }
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
