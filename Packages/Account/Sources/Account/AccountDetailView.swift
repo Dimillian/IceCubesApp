@@ -8,7 +8,9 @@ import Status
 import SwiftUI
 
 public struct AccountDetailView: View {
+  @Environment(\.openURL) private var openURL
   @Environment(\.redactionReasons) private var reasons
+  
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var preferences: UserPreferences
@@ -500,6 +502,9 @@ public struct AccountDetailView: View {
 
             if let url = account.url {
               ShareLink(item: url)
+              Button { openURL(url) } label: {
+                Label("status.action.view-in-browser", systemImage: "safari")
+              }
             }
 
             Divider()

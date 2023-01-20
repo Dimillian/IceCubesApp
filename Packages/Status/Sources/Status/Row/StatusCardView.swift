@@ -64,7 +64,7 @@ public struct StatusCardView: View {
           Label("Share this link", systemImage: "square.and.arrow.up")
         }
         Button { openURL(card.url) } label: {
-          Label("View in Browser", systemImage: "safari")
+          Label("status.action.view-in-browser", systemImage: "safari")
         }
         Divider()
         Button {
