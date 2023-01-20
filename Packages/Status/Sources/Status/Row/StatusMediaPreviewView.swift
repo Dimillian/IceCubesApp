@@ -134,18 +134,19 @@ public struct StatusMediaPreviewView: View {
 
   @ViewBuilder
   private func makeFeaturedImagePreview(attachment: MediaAttachment) -> some View {
-    switch attachment.supportedType {
-    case .image:
-      if theme.statusDisplayStyle == .large,
-         let size = size(for: attachment),
-         UIDevice.current.userInterfaceIdiom != .pad,
-         UIDevice.current.userInterfaceIdiom != .mac
-      {
-        let avatarColumnWidth = theme.avatarPosition == .leading ? AvatarView.Size.status.size.width + .statusColumnsSpacing : 0
-        let availableWidth = UIScreen.main.bounds.width - (.layoutPadding * 2) - avatarColumnWidth
-        let newSize = imageSize(from: size,
-                                newWidth: availableWidth)
-        ZStack(alignment: .bottomTrailing) {
+    ZStack(alignment: .bottomTrailing) {
+      switch attachment.supportedType {
+      case .image:
+        if theme.statusDisplayStyle == .large,
+           let size = size(for: attachment),
+           UIDevice.current.userInterfaceIdiom != .pad,
+           UIDevice.current.userInterfaceIdiom != .mac
+        {
+          let avatarColumnWidth = theme.avatarPosition == .leading ? AvatarView.Size.status.size.width + .statusColumnsSpacing : 0
+          let availableWidth = UIScreen.main.bounds.width - (.layoutPadding * 2) - avatarColumnWidth
+          let newSize = imageSize(from: size,
+                                  newWidth: availableWidth)
+          
           LazyImage(url: attachment.url) { state in
             if let image = state.image {
               image
@@ -159,46 +160,51 @@ public struct StatusMediaPreviewView: View {
                 .shimmering()
             }
           }
-          if sensitive {
-            cornerSensitiveButton
-          }
-          if let alt = attachment.description, !alt.isEmpty, !isNotifications {
-            Button {
-              altTextDisplayed = alt
-              isAltAlertDisplayed = true
-            } label: {
-              Text("status.image.alt-text.abbreviation")
+        } else {
+          AsyncImage(
+            url: attachment.url,
+            content: { image in
+              image
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(maxHeight: isNotifications ? imageMaxHeight : nil)
+                .cornerRadius(4)
+            },
+            placeholder: {
+              RoundedRectangle(cornerRadius: 4)
+                .fill(Color.gray)
+                .frame(maxHeight: isNotifications ? imageMaxHeight : nil)
+                .shimmering()
+
             }
-            .padding(8)
-            .background(.thinMaterial)
-            .cornerRadius(4)
-          }
+          )
         }
-      } else {
-        AsyncImage(
-          url: attachment.url,
-          content: { image in
-            image
-              .resizable()
-              .aspectRatio(contentMode: .fit)
-              .frame(maxHeight: isNotifications ? imageMaxHeight : nil)
-              .cornerRadius(4)
-          },
-          placeholder: {
-            RoundedRectangle(cornerRadius: 4)
-              .fill(Color.gray)
-              .frame(height: imageMaxHeight)
-              .shimmering()
+      case .gifv, .video, .audio:
+        if let url = attachment.url {
+          VideoPlayerView(viewModel: .init(url: url))
+            .frame(height: imageMaxHeight)
+        }
+      case .none:
+        EmptyView()
+      }
+      if sensitive {
+        cornerSensitiveButton
+      }
+      if let alt = attachment.description, !alt.isEmpty, !isNotifications {
+        Group {
+          Button {
+            altTextDisplayed = alt
+            isAltAlertDisplayed = true
+          } label: {
+            Text("ALT")
+
           }
-        )
+          .padding(8)
+          .background(.thinMaterial)
+          .cornerRadius(4)
+        }
+        .padding(10)
       }
-    case .gifv, .video, .audio:
-      if let url = attachment.url {
-        VideoPlayerView(viewModel: .init(url: url))
-          .frame(height: imageMaxHeight)
-      }
-    case .none:
-      EmptyView()
     }
   }
 
@@ -279,36 +285,41 @@ public struct StatusMediaPreviewView: View {
   }
 
   private var sensitiveMediaOverlay: some View {
-    Rectangle()
-      .background(.ultraThinMaterial)
-      .overlay {
-        if !isNotifications {
-          Button {
-            withAnimation {
-              isHidingMedia = false
-            }
-          } label: {
-            if sensitive {
-              Label("status.media.sensitive.show", systemImage: "eye")
-            } else {
-              Label("status.media.content.show", systemImage: "eye")
-            }
+    ZStack {
+      Rectangle()
+        .background(.ultraThinMaterial)
+      if !isNotifications {
+        Button {
+          withAnimation {
+            isHidingMedia = false
           }
-          .buttonStyle(.borderedProminent)
+        } label: {
+          if sensitive {
+            Label("Show sensitive content", systemImage: "eye")
+          } else {
+            Label("Show content", systemImage: "eye")
+
+          }
         }
+        .buttonStyle(.borderedProminent)
       }
+    }
   }
 
   private var cornerSensitiveButton: some View {
-    Button {
-      withAnimation {
-        isHidingMedia = true
+    HStack{
+      Button {
+        withAnimation {
+          isHidingMedia = true
+        }
+      } label: {
+        Image(systemName: "eye.slash")
+          .frame(minHeight:21)  // Match the alt button in case it is also present
       }
-    } label: {
-      Image(systemName: "eye.slash")
+      .padding(10)
+      .buttonStyle(.borderedProminent)
+      Spacer()
     }
-    .position(x: 30, y: 30)
-    .buttonStyle(.borderedProminent)
   }
   
   @ViewBuilder
