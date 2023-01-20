@@ -13,10 +13,20 @@ struct DisplaySettingsView: View {
   var body: some View {
     Form {
       Section("settings.display.section.theme") {
+        Toggle("settings.display.theme.systemColor", isOn: $theme.followSystemColorScheme)
         themeSelectorButton
         ColorPicker("settings.display.theme.tint", selection: $theme.tintColor)
+          .onChange(of: theme.tintColor) { newValue in
+            theme.followSystemColorScheme = false
+          }
         ColorPicker("settings.display.theme.background", selection: $theme.primaryBackgroundColor)
+          .onChange(of: theme.primaryBackgroundColor) { newValue in
+            theme.followSystemColorScheme = false
+          }
         ColorPicker("settings.display.theme.secondary-background", selection: $theme.secondaryBackgroundColor)
+          .onChange(of: theme.primaryBackgroundColor) { newValue in
+            theme.followSystemColorScheme = false
+          }
       }
       .listRowBackground(theme.primaryBackgroundColor)
 

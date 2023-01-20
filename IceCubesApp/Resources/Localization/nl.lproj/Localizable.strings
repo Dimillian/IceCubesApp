@@ -61,6 +61,7 @@
 "settings.display.theme.background" = "Achtergrondkleur";
 "settings.display.theme.secondary-background" = "Secundaire Achtergrondkleur";
 "settings.display.theme.tint" = "Kleurtint";
+"settings.display.theme.systemColor" = "Match systeem";
 "settings.general.browser" = "Browser";
 "settings.general.browser.in-app" = "In-App Browser";
 "settings.general.browser.system" = "Systeem Browser";

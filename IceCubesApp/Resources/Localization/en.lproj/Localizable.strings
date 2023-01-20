@@ -61,6 +61,7 @@
 "settings.display.theme.background" = "Background color";
 "settings.display.theme.secondary-background" = "Secondary Background color";
 "settings.display.theme.tint" = "Tint color";
+"settings.display.theme.systemColor" = "Match System";
 "settings.general.browser" = "Browser";
 "settings.general.browser.in-app" = "In-App Browser";
 "settings.general.browser.system" = "System Browser";

@@ -7,7 +7,7 @@ import Network
 import SwiftUI
 import Timeline
 
-struct TimelineTab: View {
+struct TimelineTab: View {  
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var preferences: UserPreferences

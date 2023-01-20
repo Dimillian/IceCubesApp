@@ -6,6 +6,7 @@ public class Theme: ObservableObject {
     case colorScheme, tint, label, primaryBackground, secondaryBackground
     case avatarPosition, avatarShape, statusActionsDisplay, statusDisplayStyle
     case selectedSet, selectedScheme
+    case followSystemColorSchme
   }
 
   public enum AvatarPosition: String, CaseIterable {
@@ -62,7 +63,7 @@ public class Theme: ObservableObject {
     }
   }
 
-  @AppStorage("is_previously_set") private var isSet: Bool = false
+  @AppStorage("is_previously_set") public var isThemePreviouslySet: Bool = false
   @AppStorage(ThemeKey.selectedScheme.rawValue) public var selectedScheme: ColorScheme = .dark
   @AppStorage(ThemeKey.tint.rawValue) public var tintColor: Color = .black
   @AppStorage(ThemeKey.primaryBackground.rawValue) public var primaryBackgroundColor: Color = .white
@@ -73,6 +74,7 @@ public class Theme: ObservableObject {
   @AppStorage(ThemeKey.selectedSet.rawValue) var storedSet: ColorSetName = .iceCubeDark
   @AppStorage(ThemeKey.statusActionsDisplay.rawValue) public var statusActionsDisplay: StatusActionsDisplay = .full
   @AppStorage(ThemeKey.statusDisplayStyle.rawValue) public var statusDisplayStyle: StatusDisplayStyle = .large
+  @AppStorage(ThemeKey.followSystemColorSchme.rawValue) public var followSystemColorScheme: Bool = true
 
   @Published public var avatarPosition: AvatarPosition = .top
   @Published public var avatarShape: AvatarShape = .rounded
@@ -84,13 +86,6 @@ public class Theme: ObservableObject {
 
   private init() {
     selectedSet = storedSet
-
-    // If theme is never set before set the default store. This should only execute once after install.
-
-    if !isSet {
-      setColor(withName: .iceCubeDark)
-      isSet = true
-    }
 
     avatarPosition = AvatarPosition(rawValue: rawAvatarPosition) ?? .top
     avatarShape = AvatarShape(rawValue: rawAvatarShape) ?? .rounded

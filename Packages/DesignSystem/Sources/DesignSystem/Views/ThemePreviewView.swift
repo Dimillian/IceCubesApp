@@ -10,21 +10,11 @@ public struct ThemePreviewView: View {
 
   public var body: some View {
     ScrollView {
-      HStack(spacing: gutterSpace) {
-        ThemeBoxView(color: IceCubeDark())
-        ThemeBoxView(color: IceCubeLight())
-      }
-      HStack(spacing: gutterSpace) {
-        ThemeBoxView(color: DesertDark())
-        ThemeBoxView(color: DesertLight())
-      }
-      HStack(spacing: gutterSpace) {
-        ThemeBoxView(color: NemesisDark())
-        ThemeBoxView(color: NemesisLight())
-      }
-      HStack(spacing: gutterSpace) {
-        ThemeBoxView(color: MediumDark())
-        ThemeBoxView(color: MediumLight())
+      ForEach(availableColorsSets) { couple in
+        HStack(spacing: gutterSpace) {
+          ThemeBoxView(color: couple.light)
+          ThemeBoxView(color: couple.dark)
+        }
       }
     }
     .padding(4)
@@ -94,6 +84,10 @@ struct ThemeBoxView: View {
       isSelected = newValue.rawValue == color.name.rawValue
     }
     .onTapGesture {
+      let currentScheme = theme.selectedScheme
+      if color.scheme != currentScheme {
+        theme.followSystemColorScheme = false
+      }
       theme.selectedSet = color.name
     }
   }
