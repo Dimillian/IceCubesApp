@@ -167,13 +167,13 @@ public struct StatusMediaPreviewView: View {
               image
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(maxHeight: isNotifications ? imageMaxHeight : nil)
+                .frame(maxHeight: isNotifications || theme.statusDisplayStyle == .compact ? imageMaxHeight : nil)
                 .cornerRadius(4)
             },
             placeholder: {
               RoundedRectangle(cornerRadius: 4)
                 .fill(Color.gray)
-                .frame(maxHeight: isNotifications ? imageMaxHeight : nil)
+                .frame(maxHeight: isNotifications || theme.statusDisplayStyle == .compact ? imageMaxHeight : nil)
                 .shimmering()
 
             }
