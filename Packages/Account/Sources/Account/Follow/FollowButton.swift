@@ -9,13 +9,18 @@ public class FollowButtonViewModel: ObservableObject {
 
   public let accountId: String
   public let shouldDisplayNotify: Bool
+  public let relationshipUpdated: ((Relationship) -> Void)
   @Published public private(set) var relationship: Relationship
   @Published public private(set) var isUpdating: Bool = false
 
-  public init(accountId: String, relationship: Relationship, shouldDisplayNotify: Bool) {
+  public init(accountId: String,
+              relationship: Relationship,
+              shouldDisplayNotify: Bool,
+              relationshipUpdated: @escaping ((Relationship) -> Void)) {
     self.accountId = accountId
     self.relationship = relationship
     self.shouldDisplayNotify = shouldDisplayNotify
+    self.relationshipUpdated = relationshipUpdated
   }
 
   func follow() async {
@@ -23,6 +28,7 @@ public class FollowButtonViewModel: ObservableObject {
     isUpdating = true
     do {
       relationship = try await client.post(endpoint: Accounts.follow(id: accountId, notify: false))
+      relationshipUpdated(relationship)
     } catch {
       print("Error while following: \(error.localizedDescription)")
     }
@@ -34,6 +40,7 @@ public class FollowButtonViewModel: ObservableObject {
     isUpdating = true
     do {
       relationship = try await client.post(endpoint: Accounts.unfollow(id: accountId))
+      relationshipUpdated(relationship)
     } catch {
       print("Error while unfollowing: \(error.localizedDescription)")
     }
@@ -44,6 +51,7 @@ public class FollowButtonViewModel: ObservableObject {
     guard let client else { return }
     do {
       relationship = try await client.post(endpoint: Accounts.follow(id: accountId, notify: !relationship.notifying))
+      relationshipUpdated(relationship)
     } catch {
       print("Error while following: \(error.localizedDescription)")
     }

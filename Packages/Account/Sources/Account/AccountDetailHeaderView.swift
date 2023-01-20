@@ -117,7 +117,10 @@ struct AccountDetailHeaderView: View {
           HStack {
             FollowButton(viewModel: .init(accountId: account.id,
                                           relationship: relationship,
-                                          shouldDisplayNotify: true))
+                                          shouldDisplayNotify: true,
+                                          relationshipUpdated: { relationship in
+              viewModel.relationship = relationship
+            }))
           }
         }
       }

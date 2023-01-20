@@ -50,7 +50,8 @@ public struct AccountsListRow: View {
       if currentAccount.account?.id != viewModel.account.id {
         FollowButton(viewModel: .init(accountId: viewModel.account.id,
                                       relationship: viewModel.relationShip,
-                                      shouldDisplayNotify: false))
+                                      shouldDisplayNotify: false,
+                                      relationshipUpdated: { _ in }))
       }
     }
     .onAppear {
