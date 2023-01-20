@@ -11,7 +11,7 @@ struct IconSelectorView: View {
       if string == Icon.primary.appIconName {
         self = .primary
       } else {
-        self = .init(rawValue: Int(String(string.last!))!)!
+        self = .init(rawValue: Int(String(string.replacing("AppIconAlternate", with: "")))!)!
       }
     }
 
