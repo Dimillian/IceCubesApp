@@ -103,6 +103,7 @@
 
 /* Begin PBXFileReference section */
 		639CDF9B296AC82F00C35E58 /* SafariRouteur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariRouteur.swift; sourceTree = "<group>"; };
+		9606B7A1297AD2BB00C1FB75 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9F24EEB729360C330042359D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9F29553D292B67B600E0E81B /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Network; path = Packages/Network; sourceTree = "<group>"; };
 		9F29553E292B6AF600E0E81B /* Timeline */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Timeline; path = Packages/Timeline; sourceTree = "<group>"; };
@@ -475,6 +476,7 @@
 				Base,
 				de,
 				nl,
+				es,
 			);
 			mainGroup = 9FBFE630292A715500C250E9;
 			packageReferences = (
@@ -593,6 +595,7 @@
 				E9B576C429743F4C00BCE646 /* en */,
 				E9B576CC2974AAAF00BCE646 /* de */,
 				F355EEDA297A8BD500E362C0 /* nl */,
+				9606B7A1297AD2BB00C1FB75 /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
