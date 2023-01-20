@@ -62,8 +62,8 @@
 "settings.display.theme.secondary-background" = "Secundaire Achtergrondkleur";
 "settings.display.theme.tint" = "Kleurtint";
 "settings.general.browser" = "Browser";
-"settings.general.browser.in-app" = "In-App Safari";
-"settings.general.browser.system" = "Systeem Safari";
+"settings.general.browser.in-app" = "In-App Browser";
+"settings.general.browser.system" = "Systeem Browser";
 "settings.general.display" = "Weergave Opties";
 "settings.general.instance" = "Instantie-Informatie";
 "settings.general.push-notifications" = "Meldingen";

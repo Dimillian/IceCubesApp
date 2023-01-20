@@ -62,8 +62,8 @@
 "settings.display.theme.secondary-background" = "Sekundäre Hintergrundfarbe";
 "settings.display.theme.tint" = "Akzentfarbe";
 "settings.general.browser" = "Browser";
-"settings.general.browser.in-app" = "In-App Safari";
-"settings.general.browser.system" = "System Safari";
+"settings.general.browser.in-app" = "In-App Browser";
+"settings.general.browser.system" = "System Browser";
 "settings.general.display" = "Anzeigeeinstellungen";
 "settings.general.instance" = "Instanz-Informationen";
 "settings.general.push-notifications" = "Push-Benachrichtigungen";
