@@ -242,7 +242,7 @@ public struct AccountDetailView: View {
                 Image(systemName: "checkmark.seal")
                   .foregroundColor(Color.green.opacity(0.80))
               }
-              EmojiTextApp(field.value.asMarkdown, emojis: viewModel.account?.emojis ?? [])
+              EmojiTextApp(field.value, emojis: viewModel.account?.emojis ?? [])
                 .foregroundColor(theme.tintColor)
             }
             .font(.scaledBody)
@@ -360,7 +360,7 @@ public struct AccountDetailView: View {
       if scrollOffset < -200 {
         switch viewModel.accountState {
         case let .data(account):
-          EmojiTextApp(account.safeDisplayName.asMarkdown, emojis: account.emojis)
+          EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
             .font(.scaledHeadline)
         default:
           EmptyView()

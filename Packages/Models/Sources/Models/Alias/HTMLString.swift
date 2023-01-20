@@ -3,55 +3,58 @@ import HTML2Markdown
 import SwiftSoup
 import SwiftUI
 
-public typealias HTMLString = String
-
-public extension HTMLString {
-  var asMarkdown: String {
+public struct HTMLString: Decodable, Equatable {
+  public let htmlValue: String
+  public let asMarkdown: String
+  public let asRawText: String
+  public let statusesURLs: [URL]
+  public let asSafeMarkdownAttributedString: AttributedString
+  
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.singleValueContainer()
+    htmlValue = try container.decode(String.self)
+    
     do {
-      let dom = try HTMLParser().parse(html: self)
-      return dom.toMarkdown()
-        // Add space between hashtags and mentions that follow each other
+      asMarkdown = try HTMLParser().parse(html: htmlValue)
+        .toMarkdown()
         .replacingOccurrences(of: ")[", with: ") [")
     } catch {
-      return self
+      asMarkdown = htmlValue
     }
-  }
-
-  var asRawText: String {
+    
+    var statusesURLs: [URL] = []
     do {
-      let document: Document = try SwiftSoup.parse(self)
-      return try document.text()
-    } catch {
-      return self
-    }
-  }
-
-  func findStatusesURLs() -> [URL]? {
-    do {
-      let document: Document = try SwiftSoup.parse(self)
+      let document: Document = try SwiftSoup.parse(htmlValue)
       let links: Elements = try document.select("a")
-      var URLs: [URL] = []
       for link in links {
         let href = try link.attr("href")
         if let url = URL(string: href),
            let _ = Int(url.lastPathComponent)
         {
-          URLs.append(url)
+          statusesURLs.append(url)
         }
       }
-      return URLs
+      asRawText = try document.text()
     } catch {
-      return nil
+      asRawText = htmlValue
     }
-  }
-
-  var asSafeAttributedString: AttributedString {
+    
+    self.statusesURLs = statusesURLs
+    
     do {
       let options = AttributedString.MarkdownParsingOptions(allowsExtendedAttributes: true,
                                                             interpretedSyntax: .inlineOnlyPreservingWhitespace)
-      return try AttributedString(markdown: self, options: options)
+      asSafeMarkdownAttributedString = try AttributedString(markdown: asMarkdown, options: options)
     } catch {
-      return AttributedString(stringLiteral: self)
+      asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
     }
+  }
+  
+  public init(stringValue: String) {
+    htmlValue = stringValue
+    asMarkdown = stringValue
+    asRawText = stringValue
+    statusesURLs = []
+    asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
   }
 }

@@ -48,13 +48,13 @@ public protocol AnyStatus {
   var inReplyToAccountId: String? { get }
   var visibility: Visibility { get }
   var poll: Poll? { get }
-  var spoilerText: String { get }
+  var spoilerText: HTMLString { get }
   var filtered: [Filtered]? { get }
   var sensitive: Bool { get }
   var language: String? { get }
 }
 
-public struct Status: AnyStatus, Codable, Identifiable {
+public struct Status: AnyStatus, Decodable, Identifiable {
   public var viewId: String {
     id + createdAt + (editedAt ?? "")
   }
@@ -81,14 +81,14 @@ public struct Status: AnyStatus, Codable, Identifiable {
   public let inReplyToAccountId: String?
   public let visibility: Visibility
   public let poll: Poll?
-  public let spoilerText: String
+  public let spoilerText: HTMLString
   public let filtered: [Filtered]?
   public let sensitive: Bool
   public let language: String?
 
   public static func placeholder() -> Status {
     .init(id: UUID().uuidString,
-          content: "This is a #toot\nWith some @content\nAnd some more content for your #eyes @only",
+          content: .init(stringValue: "This is a #toot\nWith some @content\nAnd some more content for your #eyes @only"),
           account: .placeholder(),
           createdAt: "2022-12-16T10:20:54.000Z",
           editedAt: nil,
@@ -109,7 +109,7 @@ public struct Status: AnyStatus, Codable, Identifiable {
           inReplyToAccountId: nil,
           visibility: .pub,
           poll: nil,
-          spoilerText: "",
+          spoilerText: .init(stringValue: ""),
           filtered: [],
           sensitive: false,
           language: nil)
@@ -120,13 +120,13 @@ public struct Status: AnyStatus, Codable, Identifiable {
   }
 }
 
-public struct ReblogStatus: AnyStatus, Codable, Identifiable {
+public struct ReblogStatus: AnyStatus, Decodable, Identifiable {
   public var viewId: String {
     id + createdAt + (editedAt ?? "")
   }
 
   public let id: String
-  public let content: String
+  public let content: HTMLString
   public let account: Account
   public let createdAt: String
   public let editedAt: ServerDate?
@@ -146,7 +146,7 @@ public struct ReblogStatus: AnyStatus, Codable, Identifiable {
   public let inReplyToAccountId: String?
   public let visibility: Visibility
   public let poll: Poll?
-  public let spoilerText: String
+  public let spoilerText: HTMLString
   public let filtered: [Filtered]?
   public let sensitive: Bool
   public let language: String?

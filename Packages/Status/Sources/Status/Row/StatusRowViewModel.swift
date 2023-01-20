@@ -54,7 +54,7 @@ public class StatusRowViewModel: ObservableObject {
     favouritesCount = status.reblog?.favouritesCount ?? status.favouritesCount
     reblogsCount = status.reblog?.reblogsCount ?? status.reblogsCount
     repliesCount = status.reblog?.repliesCount ?? status.repliesCount
-    displaySpoiler = !(status.reblog?.spoilerText ?? status.spoilerText).isEmpty
+    displaySpoiler = !(status.reblog?.spoilerText.asRawText ?? status.spoilerText.asRawText).isEmpty
 
     isFiltered = filter != nil
   }
@@ -70,9 +70,8 @@ public class StatusRowViewModel: ObservableObject {
 
   func loadEmbeddedStatus() async {
     guard let client,
-          let urls = status.content.findStatusesURLs(),
-          !urls.isEmpty,
-          let url = urls.first,
+          !status.content.statusesURLs.isEmpty,
+          let url = status.content.statusesURLs.first,
           client.hasConnection(with: url)
     else {
       isEmbedLoading = false

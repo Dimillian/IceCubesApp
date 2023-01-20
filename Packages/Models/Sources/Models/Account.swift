@@ -1,13 +1,13 @@
 import Foundation
 
-public struct Account: Codable, Identifiable, Equatable, Hashable {
+public struct Account: Decodable, Identifiable, Equatable, Hashable {
   public func hash(into hasher: inout Hasher) {
     hasher.combine(id)
   }
 
-  public struct Field: Codable, Equatable, Identifiable {
+  public struct Field: Decodable, Equatable, Identifiable {
     public var id: String {
-      value + name
+      value.asRawText + name
     }
 
     public let name: String
@@ -15,7 +15,7 @@ public struct Account: Codable, Identifiable, Equatable, Hashable {
     public let verifiedAt: String?
   }
 
-  public struct Source: Codable, Equatable {
+  public struct Source: Decodable, Equatable {
     public let privacy: Visibility
     public let sensitive: Bool
     public let language: String?
@@ -50,7 +50,7 @@ public struct Account: Codable, Identifiable, Equatable, Hashable {
           avatar: URL(string: "https://files.mastodon.social/media_attachments/files/003/134/405/original/04060b07ddf7bb0b.png")!,
           header: URL(string: "https://files.mastodon.social/media_attachments/files/003/134/405/original/04060b07ddf7bb0b.png")!,
           acct: "account@account.com",
-          note: "Some content",
+          note: .init(stringValue: "Some content"),
           createdAt: "2022-12-16T10:20:54.000Z",
           followersCount: 10,
           followingCount: 10,
@@ -71,7 +71,7 @@ public struct Account: Codable, Identifiable, Equatable, Hashable {
   }
 }
 
-public struct FamiliarAccounts: Codable {
+public struct FamiliarAccounts: Decodable {
   public let id: String
   public let accounts: [Account]
 }

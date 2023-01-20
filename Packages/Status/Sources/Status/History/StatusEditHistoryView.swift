@@ -24,7 +24,7 @@ public struct StatusEditHistoryView: View {
           if let history {
             ForEach(history) { edit in
               VStack(alignment: .leading, spacing: 8){
-                EmojiTextApp(edit.content.asMarkdown, emojis: edit.emojis)
+                EmojiTextApp(edit.content, emojis: edit.emojis)
                   .font(.scaledBody)
                 Group {
                   Text(edit.createdAt.asDate, style: .date) +

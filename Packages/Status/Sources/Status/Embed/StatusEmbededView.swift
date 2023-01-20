@@ -35,7 +35,7 @@ public struct StatusEmbeddedView: View {
     HStack(alignment: .center) {
       AvatarView(url: account.avatar, size: .embed)
       VStack(alignment: .leading, spacing: 0) {
-        EmojiTextApp(status.account.safeDisplayName.asMarkdown, emojis: account.emojis)
+        EmojiTextApp(.init(stringValue: status.account.safeDisplayName), emojis: account.emojis)
           .font(.scaledFootnote)
           .fontWeight(.semibold)
         Group {

@@ -5,7 +5,7 @@ import Models
 import SwiftUI
 
 public struct EmojiTextApp: View {
-  private let markdown: String
+  private let markdown: HTMLString
   private let emojis: [any CustomEmoji]
   private let append: (() -> Text)?
 
@@ -17,14 +17,14 @@ public struct EmojiTextApp: View {
 
   public var body: some View {
     if let append {
-      EmojiText(markdown: markdown, emojis: emojis)
+      EmojiText(markdown: markdown.asMarkdown, emojis: emojis)
         .append {
           append()
         }
     } else if emojis.isEmpty {
-      Text(markdown.asSafeAttributedString)
+      Text(markdown.asSafeMarkdownAttributedString)
     } else {
-      EmojiText(markdown: markdown, emojis: emojis)
+      EmojiText(markdown: markdown.asMarkdown, emojis: emojis)
     }
   }
 }

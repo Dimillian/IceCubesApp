@@ -100,7 +100,7 @@ public struct StatusRowView: View {
         Image(systemName: "arrow.left.arrow.right.circle.fill")
         AvatarView(url: viewModel.status.account.avatar, size: .boost)
         if viewModel.status.account.username != account.account?.username {
-          EmojiTextApp(viewModel.status.account.safeDisplayName.asMarkdown, emojis: viewModel.status.account.emojis)
+          EmojiTextApp(.init(stringValue: viewModel.status.account.safeDisplayName), emojis: viewModel.status.account.emojis)
           Text("status.row.was-boosted")
         } else {
           Text("status.row.you-boosted")
@@ -177,8 +177,8 @@ public struct StatusRowView: View {
 
   private func makeStatusContentView(status: AnyStatus) -> some View {
     Group {
-      if !status.spoilerText.isEmpty {
-        EmojiTextApp(status.spoilerText.asMarkdown, emojis: status.emojis)
+      if !status.spoilerText.asRawText.isEmpty {
+        EmojiTextApp(status.spoilerText, emojis: status.emojis)
           .font(.scaledBody)
         Button {
           withAnimation {
@@ -189,9 +189,10 @@ public struct StatusRowView: View {
         }
         .buttonStyle(.bordered)
       }
+      
       if !viewModel.displaySpoiler {
         HStack {
-          EmojiTextApp(status.content.asMarkdown, emojis: status.emojis)
+          EmojiTextApp(status.content, emojis: status.emojis)
             .font(.scaledBody)
             .environment(\.openURL, OpenURLAction { url in
               routerPath.handleStatus(status: status, url: url)
@@ -248,7 +249,7 @@ public struct StatusRowView: View {
         AvatarView(url: status.account.avatar, size: .status)
       }
       VStack(alignment: .leading, spacing: 0) {
-        EmojiTextApp(status.account.safeDisplayName.asMarkdown, emojis: status.account.emojis)
+        EmojiTextApp(.init(stringValue: status.account.safeDisplayName), emojis: status.account.emojis)
           .font(.scaledSubheadline)
           .fontWeight(.semibold)
         Group {

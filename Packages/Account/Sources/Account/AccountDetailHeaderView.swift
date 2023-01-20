@@ -106,7 +106,7 @@ struct AccountDetailHeaderView: View {
       accountAvatarView
       HStack {
         VStack(alignment: .leading, spacing: 0) {
-          EmojiTextApp(account.safeDisplayName.asMarkdown, emojis: account.emojis)
+          EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
             .font(.scaledHeadline)
           Text("@\(account.acct)")
             .font(.scaledCallout)
@@ -121,7 +121,7 @@ struct AccountDetailHeaderView: View {
           }
         }
       }
-      EmojiTextApp(account.note.asMarkdown, emojis: account.emojis)
+      EmojiTextApp(account.note, emojis: account.emojis)
         .font(.scaledBody)
         .padding(.top, 8)
         .environment(\.openURL, OpenURLAction { url in

@@ -177,14 +177,14 @@ public class StatusEditorViewModel: ObservableObject {
       self.visibility = visibility
       selectedRange = .init(location: statusText.string.utf16.count, length: 0)
     case let .edit(status):
-      var rawText = NSAttributedString(status.content.asMarkdown.asSafeAttributedString).string
+      var rawText = NSAttributedString(status.content.asSafeMarkdownAttributedString).string
       for mention in status.mentions {
         rawText = rawText.replacingOccurrences(of: "@\(mention.username)", with: "@\(mention.acct)")
       }
       statusText = .init(string: rawText)
       selectedRange = .init(location: statusText.string.utf16.count, length: 0)
-      spoilerOn = !status.spoilerText.isEmpty
-      spoilerText = status.spoilerText
+      spoilerOn = !status.spoilerText.asRawText.isEmpty
+      spoilerText = status.spoilerText.asRawText
       visibility = status.visibility
       mediasImages = status.mediaAttachments.map { .init(image: nil, mediaAttachment: $0, error: nil) }
     case let .quote(status):
