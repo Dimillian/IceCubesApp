@@ -295,9 +295,9 @@ public struct StatusMediaPreviewView: View {
           }
         } label: {
           if sensitive {
-            Label("Show sensitive content", systemImage: "eye")
+            Label("status.media.sensitive.show", systemImage: "eye")
           } else {
-            Label("Show content", systemImage: "eye")
+            Label("status.media.content.show", systemImage: "eye")
 
           }
         }
