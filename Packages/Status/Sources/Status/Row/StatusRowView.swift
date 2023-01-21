@@ -200,11 +200,11 @@ public struct StatusRowView: View {
         makeStatusContentView(status: status)
           .contentShape(Rectangle())
           .onTapGesture {
-            viewModel.navigateToDetail(routerPath: routerPath)
-          }
-      }
-    }
-    .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
+			  viewModel.navigateToDetail(routerPath: routerPath)
+		  }
+	  }
+	}
+	.accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
 	.accessibilityAction {
 		viewModel.navigateToDetail(routerPath: routerPath)
 	}
@@ -243,7 +243,7 @@ public struct StatusRowView: View {
         }
 
         makeMediasView(status: status)
-			  .accessibilityHidden(!viewModel.isFocused)
+		  .accessibilityHidden(!viewModel.isFocused)
         makeCardView(status: status)
       }
     }
