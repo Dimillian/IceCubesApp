@@ -106,10 +106,11 @@ public struct StatusPollView: View {
                   let width = widthForOption(option: option, proxy: proxy)
                   Rectangle()
                     .foregroundColor(theme.tintColor)
-                    .frame(height: Constants.barHeight)
                     .frame(height: .pollBarHeight)
                     .frame(width: width)
-                  Spacer()
+                  if width != proxy.size.width {
+                    Spacer()
+                  }
                 }
               }
             }
