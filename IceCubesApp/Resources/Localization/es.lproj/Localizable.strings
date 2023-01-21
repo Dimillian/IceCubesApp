@@ -179,6 +179,8 @@
 "explore.search.message-%@" = "Desde esta pantalla puedes buscar cualquier cosa en %@";
 "explore.search.prompt" = "Busca usuarios, publicaciones y etiquetas";
 "explore.search.title" = "Busca en tu instancia";
+"explore.search.empty.message" = "This query returned no search results, please try another one.";
+"explore.search.empty.title" = "No search results";
 "explore.section.posts" = "Publicaciones";
 "explore.section.suggested-users" = "Sugerencias de usuarios";
 "explore.section.tags" = "Etiquetas";

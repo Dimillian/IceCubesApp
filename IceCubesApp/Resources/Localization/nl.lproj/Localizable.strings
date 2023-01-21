@@ -180,6 +180,8 @@
 "explore.search.message-%@" = "Vanaf dit scherm kan je naar alles zoeken op %@";
 "explore.search.prompt" = "Zoek gebruikers, posts en hashtags";
 "explore.search.title" = "Doorzoek je instantie";
+"explore.search.empty.message" = "This query returned no search results, please try another one.";
+"explore.search.empty.title" = "No search results";
 "explore.section.posts" = "Posts";
 "explore.section.suggested-users" = "Gesuggereerde Gebruikers";
 "explore.section.tags" = "Hashtags";

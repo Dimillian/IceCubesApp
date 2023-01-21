@@ -9,4 +9,8 @@ public struct SearchResults: Decodable {
   public var relationships: [Relationship] = []
   public let statuses: [Status]
   public let hashtags: [Tag]
+  
+  public var isEmpty: Bool {
+    accounts.isEmpty && statuses.isEmpty && hashtags.isEmpty
+  }
 }

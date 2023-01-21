@@ -18,19 +18,28 @@ public struct ExploreView: View {
 
   public var body: some View {
     List {
-      if !viewModel.searchQuery.isEmpty {
-        if let results = viewModel.results[viewModel.searchQuery] {
+      if !viewModel.isLoaded {
+        loadingView
+      } else if !viewModel.searchQuery.isEmpty {
+        if viewModel.isSearching {
+          HStack { }
+          .listRowBackground(theme.secondaryBackgroundColor)
+          .listRowSeparator(.hidden)
+        } else if let results = viewModel.results[viewModel.searchQuery], !results.isEmpty {
           makeSearchResultsView(results: results)
         } else {
-          loadingView
+          EmptyView(iconName: "magnifyingglass",
+                    title: "explore.search.empty.title",
+                    message: "explore.search.empty.message")
+            .listRowBackground(theme.secondaryBackgroundColor)
+            .listRowSeparator(.hidden)
         }
-      } else if !viewModel.isLoaded {
-        loadingView
       } else if viewModel.allSectionsEmpty {
         EmptyView(iconName: "magnifyingglass",
                   title: "explore.search.title",
                   message: "explore.search.message-\(client.server)")
           .listRowBackground(theme.secondaryBackgroundColor)
+          .listRowSeparator(.hidden)
       } else {
         if !viewModel.trendingTags.isEmpty {
           trendingTagsSection
@@ -60,12 +69,7 @@ public struct ExploreView: View {
     .background(theme.secondaryBackgroundColor)
     .navigationTitle("explore.navigation-title")
     .searchable(text: $viewModel.searchQuery,
-                tokens: $viewModel.tokens,
-                suggestedTokens: $viewModel.suggestedToken,
-                prompt: Text("explore.search.prompt"),
-                token: { token in
-                  Text(token.rawValue)
-                })
+                prompt: Text("explore.search.prompt"))
   }
 
   private var loadingView: some View {

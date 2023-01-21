@@ -18,36 +18,18 @@ class ExploreViewModel: ObservableObject {
     }
   }
 
-  enum Token: String, Identifiable {
-    case user = "@user"
-    case statuses = "@posts"
-    case tag = "#hashtag"
-
-    var id: String {
-      rawValue
-    }
-
-    var apiType: String {
-      switch self {
-      case .user:
-        return "accounts"
-      case .tag:
-        return "hashtags"
-      case .statuses:
-        return "statuses"
-      }
-    }
-  }
-
   var allSectionsEmpty: Bool {
     trendingLinks.isEmpty && trendingTags.isEmpty && trendingStatuses.isEmpty && suggestedAccounts.isEmpty
   }
 
-  @Published var tokens: [Token] = []
-  @Published var suggestedToken: [Token] = []
-  @Published var searchQuery = ""
+  @Published var searchQuery = "" {
+    didSet {
+      isSearching = true
+    }
+  }
   @Published var results: [String: SearchResults] = [:]
   @Published var isLoaded = false
+  @Published var isSearching = false
   @Published var suggestedAccounts: [Account] = []
   @Published var suggestedAccountsRelationShips: [Relationship] = []
   @Published var trendingTags: [Tag] = []
@@ -60,19 +42,9 @@ class ExploreViewModel: ObservableObject {
   init() {
     $searchQuery
       .removeDuplicates()
-      .debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)
+      .debounce(for: .milliseconds(250), scheduler: DispatchQueue.main)
       .sink(receiveValue: { [weak self] _ in
-        guard let self else { return }
-
-        if self.searchQuery.starts(with: "@") {
-          self.suggestedToken = [.user, .statuses]
-        } else if self.searchQuery.starts(with: "#") {
-          self.suggestedToken = [.tag]
-        } else {
-          self.suggestedToken = []
-        }
-
-        self.search()
+        self?.search()
       })
       .store(in: &cancellables)
   }
@@ -115,22 +87,27 @@ class ExploreViewModel: ObservableObject {
 
   func search() {
     guard !searchQuery.isEmpty else { return }
+    isSearching = true
     searchTask?.cancel()
     searchTask = nil
     searchTask = Task {
       guard let client else { return }
       do {
-        let apiType = tokens.first?.apiType
         var results: SearchResults = try await client.get(endpoint: Search.search(query: searchQuery,
-                                                                                  type: apiType,
+                                                                                  type: nil,
                                                                                   offset: nil,
                                                                                   following: nil),
                                                           forceVersion: .v2)
         let relationships: [Relationship] =
           try await client.get(endpoint: Accounts.relationships(ids: results.accounts.map { $0.id }))
         results.relationships = relationships
-        self.results[searchQuery] = results
-      } catch {}
+        withAnimation {
+          self.results[searchQuery] = results
+          isSearching = false
+        }
+      } catch {
+        isSearching = false
+      }
     }
   }
 }

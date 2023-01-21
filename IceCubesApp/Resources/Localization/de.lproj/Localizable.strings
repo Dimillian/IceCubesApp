@@ -180,6 +180,8 @@
 "explore.search.message-%@" = "Hier kannst du alles auf %@ suchen";
 "explore.search.prompt" = "Suche nach Usern, Posts und Hashtags";
 "explore.search.title" = "Durchsuche deine Instanz";
+"explore.search.empty.message" = "This query returned no search results, please try another one.";
+"explore.search.empty.title" = "No search results";
 "explore.section.posts" = "Posts";
 "explore.section.suggested-users" = "Vorgeschlagene Nutzer:innen";
 "explore.section.tags" = "Tags";

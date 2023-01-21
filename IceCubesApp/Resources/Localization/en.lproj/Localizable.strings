@@ -180,6 +180,8 @@
 "explore.search.message-%@" = "From this screen you can search anything on %@";
 "explore.search.prompt" = "Search users, posts and tags";
 "explore.search.title" = "Search your instance";
+"explore.search.empty.message" = "This query returned no search results, please try another one.";
+"explore.search.empty.title" = "No search results";
 "explore.section.posts" = "Posts";
 "explore.section.suggested-users" = "Suggested Users";
 "explore.section.tags" = "Tags";
