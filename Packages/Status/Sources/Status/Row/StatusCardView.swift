@@ -14,7 +14,7 @@ public struct StatusCardView: View {
   }
 
   public var body: some View {
-    if let title = card.title {
+    if let title = card.title, let url = URL(string: card.url) {
       VStack(alignment: .leading) {
         if let imageURL = card.image {
           LazyImage(url: imageURL) { state in
@@ -41,7 +41,7 @@ public struct StatusCardView: View {
                 .foregroundColor(.gray)
                 .lineLimit(3)
             }
-            Text(card.url.host() ?? card.url.absoluteString)
+            Text(url.host() ?? url.absoluteString)
               .font(.scaledFootnote)
               .foregroundColor(theme.tintColor)
               .lineLimit(1)
@@ -57,18 +57,18 @@ public struct StatusCardView: View {
           .stroke(.gray.opacity(0.35), lineWidth: 1)
       )
       .onTapGesture {
-        openURL(card.url)
+        openURL(url)
       }
       .contextMenu {
-        ShareLink(item: card.url) {
+        ShareLink(item: url) {
           Label("Share this link", systemImage: "square.and.arrow.up")
         }
-        Button { openURL(card.url) } label: {
+        Button { openURL(url) } label: {
           Label("status.action.view-in-browser", systemImage: "safari")
         }
         Divider()
         Button {
-          UIPasteboard.general.url = card.url
+          UIPasteboard.general.url = url
         } label: {
           Label("Copy link", systemImage: "doc.on.doc")
         }

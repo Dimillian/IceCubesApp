@@ -301,7 +301,7 @@ public struct StatusRowView: View {
   @ViewBuilder
   private func makeCardView(status: AnyStatus) -> some View {
     if let card = status.card,
-       viewModel.embeddedStatus?.url != status.card?.url.absoluteString,
+       viewModel.embeddedStatus?.url != status.card?.url,
        status.mediaAttachments.isEmpty,
        !viewModel.isEmbedLoading,
        theme.statusDisplayStyle == .large
