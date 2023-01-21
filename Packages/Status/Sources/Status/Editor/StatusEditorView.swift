@@ -118,7 +118,7 @@ public struct StatusEditorView: View {
         }
         ToolbarItem(placement: .navigationBarLeading) {
           Button {
-            if !viewModel.statusText.string.isEmpty && !viewModel.mode.isInShareExtension {
+            if viewModel.shouldDisplayDismissWarning {
               isDismissAlertPresented = true
             } else {
               dismiss()
