@@ -121,6 +121,7 @@ public struct StatusPollView: View {
             Text(option.title)
               .foregroundColor(.white)
               .font(.scaledBody)
+              .minimumScaleFactor(0.7)
           }
           .padding(.leading, 12)
         }
