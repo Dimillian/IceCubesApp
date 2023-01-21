@@ -203,7 +203,7 @@ public struct StatusRowView: View {
         makeTranslateView(status: status)
 
         if let poll = status.poll {
-          StatusPollView(poll: poll)
+          StatusPollView(poll: poll, status: status)
         }
 
         makeMediasView(status: status)

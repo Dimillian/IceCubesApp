@@ -12,13 +12,20 @@ public struct StatusPollView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var currentInstance: CurrentInstance
+  @EnvironmentObject private var currentAccount: CurrentAccount
   @StateObject private var viewModel: StatusPollViewModel
+  
+  private var status: AnyStatus
 
-  public init(poll: Poll) {
+  public init(poll: Poll, status: AnyStatus) {
     _viewModel = StateObject(wrappedValue: .init(poll: poll))
+    self.status = status
   }
 
   private func widthForOption(option: Poll.Option, proxy: GeometryProxy) -> CGFloat {
+    if viewModel.poll.votesCount == 0 {
+      return 0
+    }
     let totalWidth = proxy.frame(in: .local).width
     let ratio = CGFloat(option.votesCount) / CGFloat(viewModel.poll.votesCount)
     return totalWidth * ratio
@@ -44,7 +51,7 @@ public struct StatusPollView: View {
       ForEach(viewModel.poll.options) { option in
         HStack {
           makeBarView(for: option)
-          if !viewModel.votes.isEmpty || viewModel.poll.expired {
+          if !viewModel.votes.isEmpty || viewModel.poll.expired || status.account.id == currentAccount.account?.id {
             Spacer()
             Text("\(percentForOption(option: option)) %")
               .font(.scaledSubheadline)
@@ -98,7 +105,7 @@ public struct StatusPollView: View {
         ZStack(alignment: .leading) {
           Rectangle()
             .background {
-              if viewModel.showResults {
+              if viewModel.showResults || status.account.id == currentAccount.account?.id {
                 HStack {
                   let width = widthForOption(option: option, proxy: proxy)
                   Rectangle()
