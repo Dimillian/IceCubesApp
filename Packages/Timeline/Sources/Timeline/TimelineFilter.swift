@@ -4,7 +4,7 @@ import Network
 import SwiftUI
 
 public enum TimelineFilter: Hashable, Equatable {
-  case home, local, federated, trending
+  case home, local, federated, trending, digest
   case hashtag(tag: String, accountId: String?)
   case list(list: Models.List)
   case remoteLocal(server: String)
@@ -30,6 +30,8 @@ public enum TimelineFilter: Hashable, Equatable {
       return "Trending"
     case .home:
       return "Home"
+    case .digest:
+      return "Digest"
     case let .hashtag(tag, _):
       return "#\(tag)"
     case let .list(list):
@@ -49,6 +51,8 @@ public enum TimelineFilter: Hashable, Equatable {
       return "timeline.trending"
     case .home:
       return "timeline.home"
+    case .digest:
+      return "timeline.digest"
     case let .hashtag(tag, _):
       return "#\(tag)"
     case let .list(list):
@@ -68,6 +72,8 @@ public enum TimelineFilter: Hashable, Equatable {
       return "chart.line.uptrend.xyaxis"
     case .home:
       return "house"
+    case .digest:
+      return "newspaper"
     case .list:
       return "list.bullet"
     case .remoteLocal:
@@ -83,6 +89,7 @@ public enum TimelineFilter: Hashable, Equatable {
     case .local: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true)
     case .remoteLocal: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true)
     case .home: return Timelines.home(sinceId: sinceId, maxId: maxId, minId: minId)
+    case .digest: return Timelines.home(sinceId: sinceId, maxId: maxId, minId: minId)
     case .trending: return Trends.statuses(offset: offset)
     case let .list(list): return Timelines.list(listId: list.id, sinceId: sinceId, maxId: maxId, minId: minId)
     case let .hashtag(tag, accountId):

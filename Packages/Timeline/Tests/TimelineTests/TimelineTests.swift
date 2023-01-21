@@ -6,6 +6,7 @@ final class TimelineTests: XCTestCase {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct
     // results.
-    XCTAssertEqual(Timeline().text, "Hello, World!")
+    let tl = TimelineFilter.digest
+    XCTAssertEqual(tl.title(), "Hello, World!")
   }
 }

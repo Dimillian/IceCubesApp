@@ -67,6 +67,8 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
 
   func fetchStatuses(userIntent: Bool) async {
     guard let client else { return }
+    // TODO: Check if the timeline is TimelineFilter.digest
+    // TODO: fetch the statuses until specified time (last 24 hours) and then run the algorithm
     do {
       if statuses.isEmpty {
         pendingStatuses = []
