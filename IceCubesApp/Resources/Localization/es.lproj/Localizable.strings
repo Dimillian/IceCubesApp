@@ -234,7 +234,6 @@
 "notifications.tab.mentions" = "Menciones";
 
 // MARK: Package: Timeline
-"timeline.n-new-posts %lld" = "%lld nuevas publicaciones";
 "timeline.federated" = "Federado";
 "timeline.home" = "Inicio";
 "timeline.local" = "Local";

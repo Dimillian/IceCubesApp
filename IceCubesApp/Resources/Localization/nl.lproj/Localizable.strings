@@ -235,7 +235,6 @@
 "notifications.tab.mentions" = "Vermeldingen";
 
 // MARK: Package: Timeline
-"timeline.n-new-posts %lld" = "%lld nieuwe posts";
 "timeline.federated" = "Gefedereerd";
 "timeline.home" = "Thuis";
 "timeline.local" = "Lokaal";
