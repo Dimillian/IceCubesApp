@@ -37,7 +37,7 @@ struct StatusRowContextMenu: View {
           await viewModel.bookmark()
         }
       } } label: {
-        Label(viewModel.isReblogged ? "status.action.unbookmark" : "status.action.bookmark",
+        Label(viewModel.isBookmarked ? "status.action.unbookmark" : "status.action.bookmark",
               systemImage: "bookmark")
       }
       Button {
