@@ -49,7 +49,7 @@ public struct StatusPollView: View {
           makeBarView(for: option)
           if !viewModel.votes.isEmpty || viewModel.poll.expired || status.account.id == currentAccount.account?.id {
             Spacer()
-            Text("\(percentForOption(option: option)) %")
+            Text("\(percentForOption(option: option))%")
               .font(.scaledSubheadline)
               .frame(width: 40)
           }
