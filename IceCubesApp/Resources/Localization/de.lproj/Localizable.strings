@@ -111,7 +111,7 @@
 "timeline.add-remote.title" = "Andere lokale Timeline hinzufügen";
 "timeline.add.action.add" = "Hinzufügen";
 "timeline.filter.add-local" = "Lokale Timeline hinzufügen";
-"timeline.filter.lists" = "Listem";
+"timeline.filter.lists" = "Listen";
 "timeline.filter.local" = "Lokale Timelines";
 "timeline.filter.tags" = "Gefolgte Hashtags";
 
@@ -163,7 +163,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Löschen";
 "conversations.action.mark-read" = "Als gelesen markieren";
-"conversations.empty.message" = "Suchst du etwas Liebe auf Social Media? Hier findest du alle deine direkten Nachriten und privaten Erwähnungen. Fröhliches Messaging! 📱❤️";
+"conversations.empty.message" = "Suchst du etwas Liebe auf Social Media? Hier findest du alle deine direkten Nachrichten und privaten Erwähnungen. Fröhliches Messaging! 📱❤️";
 "conversations.empty.title" = "Posteingang leer";
 "conversations.error.button" = "Wiederholen";
 "conversations.error.message" = "Fehler beim Laden deiner Nachrichten";
