@@ -67,10 +67,31 @@ public struct StatusRowView: View {
           viewModel.displaySpoiler = false
         }
       }
-      .contextMenu {
-        StatusRowContextMenu(viewModel: viewModel)
-      }
-      .background {
+	  .contextMenu {
+		  StatusRowContextMenu(viewModel: viewModel)
+	  }
+	  .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
+	  .accessibilityActions {
+		  // Add the individual mentions as accessibility actions
+		  ForEach(viewModel.status.mentions, id: \.id) { mention in
+			  Button("@\(mention.username)") {
+				  routerPath.navigate(to: .accountDetail(id: mention.id))
+			  }
+		  }
+		  
+		  Button(viewModel.displaySpoiler ? "status.show-more" : "status.show-less") {
+			  withAnimation {
+				  viewModel.displaySpoiler.toggle()
+			  }
+		  }
+		  
+		  Button("@\(viewModel.status.account.username)") {
+			  routerPath.navigate(to: .accountDetail(id: viewModel.status.account.id))
+		  }
+		  
+		  StatusRowContextMenu(viewModel: viewModel)
+	  }
+	  .background {
         Color.clear
           .contentShape(Rectangle())
           .onTapGesture {
@@ -104,9 +125,15 @@ public struct StatusRowView: View {
           Text("status.row.was-boosted")
         } else {
           Text("status.row.you-boosted")
-        }
-      }
-      .font(.scaledFootnote)
+		}
+	  }
+	  .accessibilityElement()
+	  .accessibilityLabel(
+		Text("\(viewModel.status.account.safeDisplayName)")
+		+ Text(" ")
+		+ Text(viewModel.status.account.username != account.account?.username ? "status.row.was-boosted" : "status.row.you-boosted")
+	  )
+	  .font(.scaledFootnote)
       .foregroundColor(.gray)
       .fontWeight(.semibold)
       .onTapGesture {
@@ -161,10 +188,14 @@ public struct StatusRowView: View {
               }
             } label: {
               accountView(status: status)
-            }.buttonStyle(.plain)
+            }
+            .buttonStyle(.plain)
             Spacer()
             menuButton
+			  .accessibilityHidden(true)
           }
+          .accessibilityElement()
+		  .accessibilityLabel(Text("\(status.account.displayName), \(status.createdAt.formatted)"))
         }
         makeStatusContentView(status: status)
           .contentShape(Rectangle())
@@ -173,6 +204,10 @@ public struct StatusRowView: View {
           }
       }
     }
+    .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
+	.accessibilityAction {
+		viewModel.navigateToDetail(routerPath: routerPath)
+	}
   }
 
   private func makeStatusContentView(status: AnyStatus) -> some View {
@@ -188,6 +223,7 @@ public struct StatusRowView: View {
           Text(viewModel.displaySpoiler ? "status.show-more" : "status.show-less")
         }
         .buttonStyle(.bordered)
+        .accessibilityHidden(true)
       }
       
       if !viewModel.displaySpoiler {
@@ -207,6 +243,7 @@ public struct StatusRowView: View {
         }
 
         makeMediasView(status: status)
+			  .accessibilityHidden(!viewModel.isFocused)
         makeCardView(status: status)
       }
     }
