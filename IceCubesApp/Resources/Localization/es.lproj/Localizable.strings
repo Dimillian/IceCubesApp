@@ -242,6 +242,8 @@
 "timeline.trending" = "Tendencia";
 
 // MARK: Package: Status
+"status.action.translate" = "Traducir";
+"status.action.translated-label" = "Traducido usando DeepL.com";
 "status.action.bookmark" = "Añadir a marcadores";
 "status.action.boost" = "Boostear";
 "status.action.copy-text" = "Copiar texto";

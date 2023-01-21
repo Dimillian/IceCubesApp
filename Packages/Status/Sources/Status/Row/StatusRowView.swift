@@ -199,45 +199,15 @@ public struct StatusRowView: View {
             })
           Spacer()
         }
-
-        if !reasons.contains(.placeholder) {
-          if !viewModel.isCompact, !viewModel.isEmbedLoading, let embed = viewModel.embeddedStatus {
-            StatusEmbeddedView(status: embed)
-          } else if viewModel.isEmbedLoading, !viewModel.isCompact {
-            StatusEmbeddedView(status: .placeholder())
-              .redacted(reason: .placeholder)
-              .shimmering()
-          }
-        }
+        
+        makeTranslateView(status: status)
 
         if let poll = status.poll {
           StatusPollView(poll: poll)
         }
 
-        if !status.mediaAttachments.isEmpty {
-          if theme.statusDisplayStyle == .compact {
-            HStack {
-              StatusMediaPreviewView(attachments: status.mediaAttachments,
-                                     sensitive: status.sensitive,
-                                     isNotifications: viewModel.isCompact)
-              Spacer()
-            }
-            .padding(.vertical, 4)
-          } else {
-            StatusMediaPreviewView(attachments: status.mediaAttachments,
-                                   sensitive: status.sensitive,
-                                   isNotifications: viewModel.isCompact)
-              .padding(.vertical, 4)
-          }
-        }
-        if let card = status.card,
-           viewModel.embeddedStatus?.url != status.card?.url.absoluteString,
-           status.mediaAttachments.isEmpty,
-           !viewModel.isEmbedLoading,
-           theme.statusDisplayStyle == .large
-        {
-          StatusCardView(card: card)
-        }
+        makeMediasView(status: status)
+        makeCardView(status: status)
       }
     }
   }
@@ -274,5 +244,69 @@ public struct StatusRowView: View {
     }
     .foregroundColor(.gray)
     .contentShape(Rectangle())
+  }
+  
+  @ViewBuilder
+  private func makeTranslateView(status: AnyStatus) -> some View {
+    if let userLang = preferences.serverPreferences?.postLanguage,
+       status.language != nil,
+       userLang != status.language,
+       !status.content.asRawText.isEmpty,
+        viewModel.translation == nil {
+      Button {
+        Task {
+          await viewModel.translate(userLang: userLang)
+        }
+      } label: {
+        if viewModel.isLoadingTranslation {
+          ProgressView()
+        } else {
+          Text("status.action.translate")
+        }
+      }
+    } else if let translation = viewModel.translation {
+      GroupBox {
+        VStack(alignment: .leading, spacing: 4) {
+          Text(translation)
+            .font(.scaledBody)
+          Text("status.action.translated-label")
+            .font(.footnote)
+            .foregroundColor(.gray)
+        }
+      }
+      .fixedSize(horizontal: false, vertical: true)
+    }
+  }
+  
+  @ViewBuilder
+  private func makeMediasView(status: AnyStatus) -> some View {
+    if !status.mediaAttachments.isEmpty {
+      if theme.statusDisplayStyle == .compact {
+        HStack {
+          StatusMediaPreviewView(attachments: status.mediaAttachments,
+                                 sensitive: status.sensitive,
+                                 isNotifications: viewModel.isCompact)
+          Spacer()
+        }
+        .padding(.vertical, 4)
+      } else {
+        StatusMediaPreviewView(attachments: status.mediaAttachments,
+                               sensitive: status.sensitive,
+                               isNotifications: viewModel.isCompact)
+          .padding(.vertical, 4)
+      }
+    }
+  }
+  
+  @ViewBuilder
+  private func makeCardView(status: AnyStatus) -> some View {
+    if let card = status.card,
+       viewModel.embeddedStatus?.url != status.card?.url.absoluteString,
+       status.mediaAttachments.isEmpty,
+       !viewModel.isEmbedLoading,
+       theme.statusDisplayStyle == .large
+    {
+      StatusCardView(card: card)
+    }
   }
 }

@@ -243,6 +243,8 @@
 "timeline.trending" = "Trending";
 
 // MARK: Package: Status
+"status.action.translate" = "Vertalen";
+"status.action.translated-label" = "Vertaald met behulp van DeepL.com";
 "status.action.bookmark" = "Bladwijzer";
 "status.action.boost" = "Boosten";
 "status.action.copy-text" = "Tekst Kopiëren";
