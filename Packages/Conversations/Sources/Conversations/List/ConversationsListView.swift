@@ -51,6 +51,21 @@ public struct ConversationsListView: View {
             }
           }
         }
+        
+        if viewModel.nextPage != nil {
+          HStack {
+            Spacer()
+            ProgressView()
+            Spacer()
+          }
+          .onAppear {
+            if !viewModel.isLoadingNextPage {
+              Task {
+                await viewModel.fetchNextPage()
+              }
+            }
+          }
+        }
       }
       .padding(.top, .layoutPadding)
     }
