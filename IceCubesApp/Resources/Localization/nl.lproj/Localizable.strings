@@ -21,7 +21,7 @@
 // MARK: Enums
 "enum.avatar-position.leading" = "Leidend";
 "enum.avatar-position.top" = "Boven";
-"enum.avatar-shape.circle" = "Circel";
+"enum.avatar-shape.circle" = "Cirkel";
 "enum.avatar-shape.rounded" = "Afgerond";
 "enum.status-actions-display.all" = "Allemaal";
 "enum.status-actions-display.no-buttons" = "Geen knoppen";
@@ -237,7 +237,7 @@
 // MARK: Package: Timeline
 "timeline.n-new-posts %lld" = "%lld nieuwe posts";
 "timeline.federated" = "Gefedereerd";
-"timeline.home" = "Beging";
+"timeline.home" = "Thuis";
 "timeline.local" = "Lokaal";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld recente posts van %lld deelnemers";
 "timeline.trending" = "Trending";
