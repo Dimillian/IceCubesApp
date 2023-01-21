@@ -5,10 +5,6 @@ import Network
 import SwiftUI
 
 public struct StatusPollView: View {
-  enum Constants {
-    static let barHeight: CGFloat = 30
-  }
-
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var currentInstance: CurrentInstance
@@ -111,13 +107,14 @@ public struct StatusPollView: View {
                   Rectangle()
                     .foregroundColor(theme.tintColor)
                     .frame(height: Constants.barHeight)
+                    .frame(height: .pollBarHeight)
                     .frame(width: width)
                   Spacer()
                 }
               }
             }
             .foregroundColor(theme.tintColor.opacity(0.40))
-            .frame(height: Constants.barHeight)
+            .frame(height: .pollBarHeight)
             .clipShape(RoundedRectangle(cornerRadius: 8))
 
           HStack {
@@ -133,7 +130,7 @@ public struct StatusPollView: View {
           .padding(.leading, 12)
         }
       }
-      .frame(height: Constants.barHeight)
+      .frame(height: .pollBarHeight)
     }
   }
 }
