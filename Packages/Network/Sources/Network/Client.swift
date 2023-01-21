@@ -188,7 +188,7 @@ public class Client: ObservableObject, Equatable {
     request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
     let httpBody = NSMutableData()
     httpBody.append("--\(boundary)\r\n".data(using: .utf8)!)
-    httpBody.append("Content-Disposition: form-data; name=\"\(filename)\"; filename=\"file.jpg\"\r\n".data(using: .utf8)!)
+    httpBody.append("Content-Disposition: form-data; name=\"\(filename)\"; filename=\"\(filename)\"\r\n".data(using: .utf8)!)
     httpBody.append("Content-Type: \(mimeType)\r\n".data(using: .utf8)!)
     httpBody.append("\r\n".data(using: .utf8)!)
     httpBody.append(data)

@@ -318,11 +318,13 @@ public class StatusEditorViewModel: ObservableObject {
 
   private func loadAutoCompleteResults(query: String) {
     guard let client, query.utf8.count > 1 else { return }
+    var query = query
     Task {
       do {
         var results: SearchResults?
         switch query.first {
         case "#":
+          query.removeFirst()
           results = try await client.get(endpoint: Search.search(query: query,
                                                                  type: "hashtags",
                                                                  offset: 0,
@@ -332,6 +334,7 @@ public class StatusEditorViewModel: ObservableObject {
             tagsSuggestions = results?.hashtags ?? []
           }
         case "@":
+          query.removeFirst()
           results = try await client.get(endpoint: Search.search(query: query,
                                                                  type: "accounts",
                                                                  offset: 0,
