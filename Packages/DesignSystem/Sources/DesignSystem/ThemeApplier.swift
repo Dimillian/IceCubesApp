@@ -31,6 +31,10 @@ struct ThemeApplier: ViewModifier {
         if !theme.isThemePreviouslySet {
           theme.selectedSet = colorScheme == .dark ?  .iceCubeDark : .iceCubeLight
           theme.isThemePreviouslySet = true
+        } else if theme.followSystemColorScheme && theme.isThemePreviouslySet,
+                  let sets = availableColorsSets
+                 .first(where: { $0.light.name == theme.selectedSet || $0.dark.name == theme.selectedSet }) {
+                 theme.selectedSet = colorScheme == .dark ? sets.dark.name : sets.light.name
         }
         setWindowTint(theme.tintColor)
         setBarsColor(theme.primaryBackgroundColor)
