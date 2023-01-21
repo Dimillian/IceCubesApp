@@ -76,7 +76,7 @@
 "settings.push.main-toggle.description" = "Recibe notificaciones sobre nuevo eventos";
 "settings.push.mentions" = "Menciones";
 "settings.push.navigation-title" = "Notificaciones";
-"settings.push.new-posts" = "Nueva publicación";
+"settings.push.new-posts" = "Nuevas publicaciones";
 "settings.push.polls" = "Resultados de encuestas";
 "settings.section.accounts" = "Cuentas";
 "settings.section.app" = "App";
@@ -93,7 +93,7 @@
 "settings.support.three.title" = "🤯 Propina generosa";
 "settings.support.two.subtitle" = "Me encanta el sabor del café de lujo ❤️";
 "settings.support.two.title" = "☕️ Buena propina";
-"settings.timeline.add" = "Añadir una cronología local";
+"settings.timeline.add" = "Añadir cronología local";
 "settings.title" = "Ajustes";
 
 // MARK: Tabs
@@ -108,11 +108,11 @@
 
 // MARK: Timeline
 "timeline.%@-is-valid" = "%@ es una instancia válida";
-"timeline.add-remote.title" = "Añadir una cronología local remota";
+"timeline.add-remote.title" = "Añadir cronología local remota";
 "timeline.add.action.add" = "Añadir";
-"timeline.filter.add-local" = "Añadir una cronología local";
+"timeline.filter.add-local" = "Añadir cronología local";
 "timeline.filter.lists" = "Listas";
-"timeline.filter.local" = "Cronologías Locales";
+"timeline.filter.local" = "Cronologías locales";
 "timeline.filter.tags" = "Etiquetas que sigues";
 
 // MARK: Package: AppAccount
@@ -276,7 +276,7 @@
 "status.editor.media.edit-image" = "Editar Imagen";
 "status.editor.media.image-description" = "Descripción de la imagen";
 "status.editor.mode.edit" = "Editando tu publicación";
-"status.editor.mode.new" = "Nueva Publicación";
+"status.editor.mode.new" = "Nueva publicación";
 "status.editor.mode.quote-%@" = "Cita de %@";
 "status.editor.mode.reply-%@" = "Respondiendo a %@";
 "status.editor.restore-previous" = "Restaurar texto anterior";
@@ -301,7 +301,7 @@
 "status.poll.duration" = "Duración de la encuesta";
 "status.poll.frequency" = "Frecuencia de la encuesta";
 "status.poll.option-n %lld" = "Opción %lld";
-"status.post-from-%@" = "Publicado desde %@";
+"status.post-from-%@" = "Publicado por %@";
 "status.row.was-boosted" = "boosteó";
 "status.row.was-reply" = "Respuesta a";
 "status.row.you-boosted" = "Boosteaste";
