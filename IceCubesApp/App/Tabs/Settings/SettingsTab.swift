@@ -138,6 +138,13 @@ struct SettingsTabs: View {
       if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
         Label("App Version: \(appVersion)", systemImage: "app.badge.checkmark")
       }
+      
+      if let reviewURL = URL(string: "https://apps.apple.com/app/id\(AppInfo.appStoreAppId)?action=write-review") {
+        Link(destination: reviewURL) {
+          Label("Rate Ice Cubes", systemImage: "link")
+        }
+        .tint(theme.labelColor)
+      }
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }

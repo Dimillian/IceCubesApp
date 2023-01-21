@@ -1,6 +1,7 @@
 import Foundation
 
 public enum AppInfo {
+  public static let appStoreAppId = "6444915884"
   public static let clientName = "IceCubesApp"
   public static let scheme = "icecubesapp://"
   public static let scopes = "read write follow push"
