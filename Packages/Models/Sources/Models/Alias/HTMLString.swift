@@ -10,9 +10,13 @@ public struct HTMLString: Decodable, Equatable {
   public let statusesURLs: [URL]
   public let asSafeMarkdownAttributedString: AttributedString
   
-  public init(from decoder: Decoder) throws {
-    let container = try decoder.singleValueContainer()
-    htmlValue = try container.decode(String.self)
+  public init(from decoder: Decoder) {
+    do {
+      let container = try decoder.singleValueContainer()
+      htmlValue = try container.decode(String.self)
+    } catch {
+      htmlValue = ""
+    }
     
     do {
       asMarkdown = try HTMLParser().parse(html: htmlValue)
