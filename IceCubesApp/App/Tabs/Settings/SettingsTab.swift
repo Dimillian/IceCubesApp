@@ -110,7 +110,7 @@ struct SettingsTabs: View {
   }
 
   private var appSection: some View {
-    Section("settings.section.app") {
+    Section {
       if !ProcessInfo.processInfo.isiOSAppOnMac {
         NavigationLink(destination: IconSelectorView()) {
           Label {
@@ -135,16 +135,18 @@ struct SettingsTabs: View {
         Label("settings.app.support", systemImage: "wand.and.stars")
       }
       
-      if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-        Label("App Version: \(appVersion)", systemImage: "app.badge.checkmark")
-      }
-      
       if let reviewURL = URL(string: "https://apps.apple.com/app/id\(AppInfo.appStoreAppId)?action=write-review") {
         Link(destination: reviewURL) {
           Label("Rate Ice Cubes", systemImage: "link")
         }
         .tint(theme.labelColor)
       }
+    } header: {
+        Text("settings.section.app")
+    } footer: {
+        if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+            Text("App Version: \(appVersion)").frame(maxWidth: .infinity, alignment: .center)
+        }
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
