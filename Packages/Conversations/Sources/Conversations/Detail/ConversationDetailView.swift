@@ -108,16 +108,18 @@ public struct ConversationDetailView: View {
   }
       
   private var inputTextView: some View {
-    VStack{
-      HStack(spacing: 8) {
+    VStack {
+      HStack(alignment: .bottom, spacing: 8) {
         Button {
           routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.conversation.lastStatus)
         } label: {
           Image(systemName: "plus")
         }
-        TextField("New messge", text: $viewModel.newMessageText, axis: .horizontal)
+        .padding(.bottom, 5)
+        TextField("New messge", text: $viewModel.newMessageText, axis: .vertical)
           .textFieldStyle(.roundedBorder)
           .focused($isMessageFieldFocused)
+          .keyboardType(.default)
         if !viewModel.newMessageText.isEmpty {
           Button {
             Task {
@@ -130,6 +132,8 @@ public struct ConversationDetailView: View {
               Image(systemName: "paperplane")
             }
           }
+          .keyboardShortcut("n", modifiers: .command)
+          .padding(.bottom, 5)
         }
       }
       .padding(8)
