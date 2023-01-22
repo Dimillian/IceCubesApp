@@ -11,6 +11,7 @@ public struct StatusRowView: View {
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var theme: Theme
+  @EnvironmentObject private var userPreferences: UserPreferences
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var routerPath: RouterPath
   @StateObject var viewModel: StatusRowViewModel
@@ -229,26 +230,42 @@ public struct StatusRowView: View {
       }
 
       if !viewModel.displaySpoiler {
-        HStack {
-          EmojiTextApp(status.content, emojis: status.emojis, language: status.language)
-            .font(.scaledBody)
-            .environment(\.openURL, OpenURLAction { url in
-              routerPath.handleStatus(status: status, url: url)
-            })
-          Spacer()
-        }
-        
-        makeTranslateView(status: status)
+        if viewModel.status.reblog != nil, !userPreferences.showBoostContent, !viewModel.boostedIsExpanded {
+          Button {
+            withAnimation {
+              viewModel.boostedIsExpanded.toggle()
+            }
+          } label: {
+            Label("status.show-boost-content", systemImage: "eye")
+              .font(.footnote)
+              .foregroundColor(.white)
+              .padding(.vertical, 4)
+              .padding(.horizontal, 8)
+              .background(theme.tintColor)
+              .clipShape(RoundedRectangle(cornerRadius: 8))
+            }
+        } else {
+          HStack {
+            EmojiTextApp(status.content, emojis: status.emojis, language: status.language)
+              .font(.scaledBody)
+              .environment(\.openURL, OpenURLAction { url in
+                routerPath.handleStatus(status: status, url: url)
+              })
+            Spacer()
+          }
 
-        if let poll = status.poll {
-          StatusPollView(poll: poll, status: status)
+          makeTranslateView(status: status)
+
+          if let poll = status.poll {
+            StatusPollView(poll: poll, status: status)
+          }
+
+          embedStatusView
+
+          makeMediasView(status: status)
+            .accessibilityHidden(!viewModel.isFocused)
+          makeCardView(status: status)
         }
-        
-        embedStatusView
-  
-        makeMediasView(status: status)
-          .accessibilityHidden(!viewModel.isFocused)
-        makeCardView(status: status)
       }
     }
   }

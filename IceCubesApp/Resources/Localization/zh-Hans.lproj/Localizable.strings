@@ -56,6 +56,7 @@
 "settings.display.restore" = "恢复默认设置";
 "settings.display.section.display" = "显示";
 "settings.display.section.theme" = "主题";
+"settings.display.show-boost-content" = "Show boost content";
 "settings.display.status.action-buttons" = "状态操作选项";
 "settings.display.status.media-style" = "状态媒体样式";
 "settings.display.translate-button" = "Show translate button";
@@ -308,6 +309,7 @@
 "status.row.was-boosted" = "转发";
 "status.row.was-reply" = "回复到";
 "status.row.you-boosted" = "你转发了";
+"status.show-boost-content" = "Show boost content";
 "status.show-less" = "显示更少";
 "status.show-more" = "显示更多";
 "status.summary.at-time" = " 在 ";

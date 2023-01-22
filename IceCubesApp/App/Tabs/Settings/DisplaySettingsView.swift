@@ -51,6 +51,7 @@ struct DisplaySettingsView: View {
           }
         }
         Toggle("settings.display.translate-button", isOn: $userPreferences.showTranslateButton)
+        Toggle("settings.display.show-boost-content", isOn: $userPreferences.showBoostContent)
       }
       .listRowBackground(theme.primaryBackgroundColor)
 

@@ -22,6 +22,7 @@ public class StatusRowViewModel: ObservableObject {
   @Published var displaySpoiler: Bool = false
   @Published var isEmbedLoading: Bool = true
   @Published var isFiltered: Bool = false
+  @Published var boostedIsExpanded: Bool = false
 
   @Published var translation: String?
   @Published var isLoadingTranslation: Bool = false

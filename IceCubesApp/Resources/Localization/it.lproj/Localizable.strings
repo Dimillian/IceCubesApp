@@ -56,6 +56,7 @@
 "settings.display.restore" = "Ripristina i valori predefiniti";
 "settings.display.section.display" = "Visualizzazione";
 "settings.display.section.theme" = "Tema";
+"settings.display.show-boost-content" = "Show boost content";
 "settings.display.status.action-buttons" = "Bottoni di azione";
 "settings.display.status.media-style" = "Stile dei media";
 "settings.display.translate-button" = "Show translate button";
@@ -308,6 +309,7 @@
 "status.row.was-boosted" = "Condiviso";
 "status.row.was-reply" = "Risposta per";
 "status.row.you-boosted" = "Tu hai condiviso";
+"status.show-boost-content" = "Show boost content";
 "status.show-less" = "Mostra meno";
 "status.show-more" = "Mostra di più";
 "status.summary.at-time" = " alle ";
