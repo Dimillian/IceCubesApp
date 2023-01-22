@@ -5,6 +5,7 @@ import Status
 import SwiftUI
 
 struct DisplaySettingsView: View {
+  @Environment(\.colorScheme) private var colorScheme
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var userPreferences: UserPreferences
 
@@ -56,7 +57,8 @@ struct DisplaySettingsView: View {
 
       Section {
         Button {
-          theme.selectedSet = .iceCubeDark
+          theme.followSystemColorScheme = true
+          theme.selectedSet = colorScheme == .dark ? .iceCubeDark : .iceCubeLight
           theme.avatarShape = .rounded
           theme.avatarPosition = .top
           theme.statusActionsDisplay = .full
