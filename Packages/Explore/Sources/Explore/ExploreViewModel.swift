@@ -27,6 +27,7 @@ class ExploreViewModel: ObservableObject {
       isSearching = true
     }
   }
+
   @Published var results: [String: SearchResults] = [:]
   @Published var isLoaded = false
   @Published var isSearching = false

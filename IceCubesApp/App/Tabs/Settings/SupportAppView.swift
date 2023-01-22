@@ -15,7 +15,7 @@ struct SupportAppView: View {
     var productId: String {
       "icecubes.tipjar.\(rawValue)"
     }
-    
+
     var title: LocalizedStringKey {
       switch self {
       case .one:
@@ -26,7 +26,7 @@ struct SupportAppView: View {
         return "settings.support.three.title"
       }
     }
-    
+
     var subtitle: LocalizedStringKey {
       switch self {
       case .one:

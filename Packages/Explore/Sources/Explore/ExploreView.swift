@@ -22,9 +22,9 @@ public struct ExploreView: View {
         loadingView
       } else if !viewModel.searchQuery.isEmpty {
         if viewModel.isSearching {
-          HStack { }
-          .listRowBackground(theme.secondaryBackgroundColor)
-          .listRowSeparator(.hidden)
+          HStack {}
+            .listRowBackground(theme.secondaryBackgroundColor)
+            .listRowSeparator(.hidden)
         } else if let results = viewModel.results[viewModel.searchQuery], !results.isEmpty {
           makeSearchResultsView(results: results)
         } else {

@@ -94,12 +94,12 @@ struct AddRemoteTimelineView: View {
               Text(instance.info?.shortDescription ?? "")
                 .font(.scaledBody)
                 .foregroundColor(.gray)
-              
+
               (Text("instance.list.users-\(instance.users)")
                 + Text("  ⸱  ")
                 + Text("instance.list.posts-\(instance.statuses)"))
-              .font(.scaledFootnote)
-              .foregroundColor(.gray)
+                .font(.scaledFootnote)
+                .foregroundColor(.gray)
             }
           }
           .listRowBackground(theme.primaryBackgroundColor)

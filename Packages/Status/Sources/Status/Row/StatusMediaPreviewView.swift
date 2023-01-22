@@ -1,14 +1,14 @@
 import DesignSystem
 import Env
 import Models
+import Nuke
 import NukeUI
 import Shimmer
 import SwiftUI
-import Nuke
 
 public struct StatusMediaPreviewView: View {
   @Environment(\.openURL) private var openURL
-  
+
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var quickLook: QuickLook
   @EnvironmentObject private var theme: Theme
@@ -146,7 +146,7 @@ public struct StatusMediaPreviewView: View {
           let availableWidth = UIScreen.main.bounds.width - (.layoutPadding * 2) - avatarColumnWidth
           let newSize = imageSize(from: size,
                                   newWidth: availableWidth)
-          
+
           LazyImage(url: attachment.url) { state in
             if let image = state.image {
               image
@@ -175,7 +175,6 @@ public struct StatusMediaPreviewView: View {
                 .fill(Color.gray)
                 .frame(maxHeight: isNotifications || theme.statusDisplayStyle == .compact ? imageMaxHeight : nil)
                 .shimmering()
-
             }
           )
         }
@@ -197,7 +196,6 @@ public struct StatusMediaPreviewView: View {
             isAltAlertDisplayed = true
           } label: {
             Text("ALT")
-
           }
           .padding(8)
           .background(.thinMaterial)
@@ -298,7 +296,6 @@ public struct StatusMediaPreviewView: View {
             Label("status.media.sensitive.show", systemImage: "eye")
           } else {
             Label("status.media.content.show", systemImage: "eye")
-
           }
         }
         .buttonStyle(.borderedProminent)
@@ -307,21 +304,21 @@ public struct StatusMediaPreviewView: View {
   }
 
   private var cornerSensitiveButton: some View {
-    HStack{
+    HStack {
       Button {
         withAnimation {
           isHidingMedia = true
         }
       } label: {
         Image(systemName: "eye.slash")
-          .frame(minHeight:21)  // Match the alt button in case it is also present
+          .frame(minHeight: 21) // Match the alt button in case it is also present
       }
       .padding(10)
       .buttonStyle(.borderedProminent)
       Spacer()
     }
   }
-  
+
   @ViewBuilder
   private func contextMenuForMedia(mediaAttachement: MediaAttachment) -> some View {
     if let url = mediaAttachement.url {
@@ -337,7 +334,7 @@ public struct StatusMediaPreviewView: View {
           do {
             let image = try await ImagePipeline.shared.image(for: url).image
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-          } catch { }
+          } catch {}
         }
       } label: {
         Label("status.media.contextmenu.save", systemImage: "square.and.arrow.down")
@@ -347,7 +344,7 @@ public struct StatusMediaPreviewView: View {
           do {
             let image = try await ImagePipeline.shared.image(for: url).image
             UIPasteboard.general.image = image
-          } catch { }
+          } catch {}
         }
       } label: {
         Label("status.media.contextmenu.copy", systemImage: "doc.on.doc")

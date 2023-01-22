@@ -144,7 +144,14 @@ public class Client: ObservableObject, Equatable {
     let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: method)
     let (data, httpResponse) = try await urlSession.data(for: request)
     logResponseOnError(httpResponse: httpResponse, data: data)
-    return try decoder.decode(Entity.self, from: data)
+    do {
+      return try decoder.decode(Entity.self, from: data)
+    } catch let error {
+      if let serverError = try? decoder.decode(ServerError.self, from: data) {
+        throw serverError
+      }
+      throw error
+    }
   }
 
   public func oauthURL() async throws -> URL {

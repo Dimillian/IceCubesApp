@@ -3,6 +3,7 @@ import Foundation
 import SwiftUI
 
 struct StatusRowContextMenu: View {
+  @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var routerPath: RouterPath
 
@@ -73,6 +74,17 @@ struct StatusRowContextMenu: View {
       UIPasteboard.general.string = viewModel.status.content.asRawText
     } label: {
       Label("status.action.copy-text", systemImage: "doc.on.doc")
+    }
+    
+    if let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier,
+       viewModel.status.language != lang {
+      Button {
+        Task {
+          await viewModel.translate(userLang: lang)
+        }
+      } label: {
+        Label("status.action.translate", systemImage: "captions.bubble")
+      }
     }
 
     if account.account?.id == viewModel.status.account.id {

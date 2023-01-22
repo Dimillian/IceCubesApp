@@ -16,7 +16,7 @@ class StatusDetailViewModel: ObservableObject {
 
   @Published var state: State = .loading
   @Published var title: LocalizedStringKey = ""
-    
+
   init(statusId: String) {
     state = .loading
     self.statusId = statusId
@@ -59,7 +59,7 @@ class StatusDetailViewModel: ObservableObject {
     let status: Status
     let context: StatusContext
   }
-  
+
   private func fetchStatusDetail() async {
     guard let client, let statusId else { return }
     do {
@@ -70,7 +70,7 @@ class StatusDetailViewModel: ObservableObject {
       state = .error(error: error)
     }
   }
-  
+
   private func fetchContextData(client: Client, statusId: String) async throws -> ContextData {
     async let status: Status = client.get(endpoint: Statuses.status(id: statusId))
     async let context: StatusContext = client.get(endpoint: Statuses.context(id: statusId))

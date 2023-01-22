@@ -1,8 +1,8 @@
 import DesignSystem
+import Env
 import Models
 import Status
 import SwiftUI
-import Env
 
 struct DisplaySettingsView: View {
   @EnvironmentObject private var theme: Theme
@@ -16,17 +16,8 @@ struct DisplaySettingsView: View {
         Toggle("settings.display.theme.systemColor", isOn: $theme.followSystemColorScheme)
         themeSelectorButton
         ColorPicker("settings.display.theme.tint", selection: $theme.tintColor)
-          .onChange(of: theme.tintColor) { newValue in
-            theme.followSystemColorScheme = false
-          }
         ColorPicker("settings.display.theme.background", selection: $theme.primaryBackgroundColor)
-          .onChange(of: theme.primaryBackgroundColor) { newValue in
-            theme.followSystemColorScheme = false
-          }
         ColorPicker("settings.display.theme.secondary-background", selection: $theme.secondaryBackgroundColor)
-          .onChange(of: theme.primaryBackgroundColor) { newValue in
-            theme.followSystemColorScheme = false
-          }
       }
       .listRowBackground(theme.primaryBackgroundColor)
 
@@ -54,11 +45,12 @@ struct DisplaySettingsView: View {
         }
         if ProcessInfo.processInfo.isiOSAppOnMac {
           VStack {
-            Slider(value: $userPreferences.fontSizeScale, in: 0.5...1.5, step: 0.1)
+            Slider(value: $userPreferences.fontSizeScale, in: 0.5 ... 1.5, step: 0.1)
             Text("Font scaling: \(String(format: "%.1f", userPreferences.fontSizeScale))")
               .font(.scaledBody)
           }
         }
+        Toggle("settings.display.translate-button", isOn: $userPreferences.showTranslateButton)
       }
       .listRowBackground(theme.primaryBackgroundColor)
 

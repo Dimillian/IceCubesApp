@@ -11,7 +11,7 @@ public struct NotificationsListView: View {
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
   @StateObject private var viewModel = NotificationsViewModel()
-  
+
   let lockedType: Models.Notification.NotificationType?
 
   public init(lockedType: Models.Notification.NotificationType?) {
@@ -22,7 +22,7 @@ public struct NotificationsListView: View {
     ScrollView {
       LazyVStack {
         notificationsView
-        .frame(maxWidth: .maxColumnWidth)
+          .frame(maxWidth: .maxColumnWidth)
       }
       .padding(.top, .layoutPadding + 16)
       .background(theme.primaryBackgroundColor)

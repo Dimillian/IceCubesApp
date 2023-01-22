@@ -140,7 +140,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
                            featuredTags: featuredTags,
                            relationships: [])
   }
-  
+
   func fetchFamilliarFollowers() async {
     let familiarFollowers: [FamiliarAccounts]? = try? await client?.get(endpoint: Accounts.familiarFollowers(withAccount: accountId))
     self.familiarFollowers = familiarFollowers?.first?.accounts ?? []

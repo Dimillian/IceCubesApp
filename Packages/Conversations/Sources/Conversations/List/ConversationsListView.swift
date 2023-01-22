@@ -51,7 +51,7 @@ public struct ConversationsListView: View {
             }
           }
         }
-        
+
         if viewModel.nextPage != nil {
           HStack {
             Spacer()

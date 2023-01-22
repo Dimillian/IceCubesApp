@@ -44,7 +44,7 @@ struct ThemeBoxView: View {
           .foregroundColor(color.tintColor)
           .font(.system(size: 20))
           .fontWeight(.bold)
-        
+
         Text("design.theme.toots-preview")
           .foregroundColor(color.labelColor)
           .frame(maxWidth: .infinity)

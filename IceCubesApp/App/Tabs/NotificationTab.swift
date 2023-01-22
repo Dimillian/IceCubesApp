@@ -1,19 +1,21 @@
 import AppAccount
+import DesignSystem
 import Env
+import Models
 import Network
 import Notifications
 import SwiftUI
 import Timeline
-import Models
 
 struct NotificationsTab: View {
+  @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var userPreferences: UserPreferences
   @StateObject private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab
-  
+
   let lockedType: Models.Notification.NotificationType?
 
   var body: some View {
@@ -30,6 +32,7 @@ struct NotificationsTab: View {
             }
           }
         }
+        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
         .id(currentAccount.account?.id)
     }
     .onAppear {

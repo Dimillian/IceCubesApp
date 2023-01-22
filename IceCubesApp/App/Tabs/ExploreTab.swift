@@ -1,4 +1,5 @@
 import AppAccount
+import DesignSystem
 import Env
 import Explore
 import Models
@@ -7,6 +8,7 @@ import Shimmer
 import SwiftUI
 
 struct ExploreTab: View {
+  @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var client: Client
@@ -18,6 +20,7 @@ struct ExploreTab: View {
       ExploreView()
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
+        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
         .toolbar {
           statusEditorToolbarItem(routerPath: routerPath,
                                   visibility: preferences.serverPreferences?.postVisibility ?? .pub)

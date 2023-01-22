@@ -7,7 +7,7 @@ import Network
 import SwiftUI
 import Timeline
 
-struct TimelineTab: View {  
+struct TimelineTab: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var preferences: UserPreferences
@@ -35,6 +35,7 @@ struct TimelineTab: View {
         .toolbar {
           toolbarView
         }
+        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
         .id(currentAccount.account?.id)
     }
     .onAppear {
@@ -104,7 +105,7 @@ struct TimelineTab: View {
         }
       }
     }
-    
+
     Menu("timeline.filter.local") {
       ForEach(preferences.remoteLocalTimelines, id: \.self) { server in
         Button {

@@ -1,0 +1,320 @@
+// MARK: Common strings
+"action.cancel" = "取消";
+"action.delete" = "删除";
+"action.save"  = "保存";
+"action.done" = "完成";
+"action.retry" = "重试";
+
+"alert.button.ok" = "OK";
+"alert.error" = "错误!";
+
+"placeholder.loading.long" = "加载, 加载, 再加载 ....";
+"placeholder.loading.short" = "加载中 ...";
+
+"see-more" = "查看更多";
+
+// MARK: Add Account
+"account.add.error.instance-not-supported" = "目前没有对该服务器的支持";
+"account.add.navigation-title" = "添加账户";
+"account.add.sign-in" = "登录";
+
+// MARK: Enums
+"enum.avatar-position.leading" = "居首";
+"enum.avatar-position.top" = "顶部";
+"enum.avatar-shape.circle" = "圆形";
+"enum.avatar-shape.rounded" = "圆角";
+"enum.status-actions-display.all" = "全部";
+"enum.status-actions-display.no-buttons" = "无按钮";
+"enum.status-actions-display.only-buttons" = "仅按钮";
+"enum.status-display-style.compact" = "紧凑";
+"enum.status-display-style.large" = "宽松";
+
+// MARK: Instances
+"instance.info.domains" = "域名";
+"instance.info.email" = "邮件";
+"instance.info.name" = "名称";
+"instance.info.navigation-title" = "服务器信息";
+"instance.info.posts" = "嘟文";
+"instance.info.section.info" = "服务器信息";
+"instance.info.section.rules" = "服务器规则";
+"instance.info.users" = "用户";
+"instance.info.version" = "版本";
+"instance.list.posts-%@" = "%@ 嘟文";
+"instance.list.users-%@" = "%@ 用户";
+"instance.suggestions" = "意见";
+"instance.url" = "服务器 URL";
+
+// MARK: Settings
+"settings.account.add" = "添加账户";
+"settings.app.icon" = "应用图标";
+"settings.app.icon.navigation-title" = "图标";
+"settings.app.source" = "源代码 (GitHub 链接)";
+"settings.app.support" = "支持这个应用";
+"settings.display.avatar.position" = "头像位置";
+"settings.display.avatar.shape" = "头像形状";
+"settings.display.navigation-title" = "显示设置";
+"settings.display.restore" = "恢复默认设置";
+"settings.display.section.display" = "显示";
+"settings.display.section.theme" = "主题";
+"settings.display.status.action-buttons" = "状态操作选项";
+"settings.display.status.media-style" = "状态媒体样式";
+"settings.display.translate-button" = "Show translate button";
+"settings.display.theme.background" = "背景颜色";
+"settings.display.theme.secondary-background" = "二级背景颜色";
+"settings.display.theme.tint" = "色调";
+"settings.display.theme.systemColor" = "匹配系统";
+"settings.general.browser" = "默认浏览器";
+"settings.general.browser.in-app" = "应用内浏览器";
+"settings.general.browser.system" = "系统浏览器";
+"settings.general.display" = "显示设置";
+"settings.general.instance" = "服务器设置";
+"settings.general.push-notifications" = "推送通知";
+"settings.general.remote-timelines" = "远程本地时间线";
+"settings.push.boosts" = "转发嘟文";
+"settings.push.favorites" = "收藏";
+"settings.push.follows" = "关注";
+"settings.push.main-toggle" = "推送通知";
+"settings.push.main-toggle.description" = "在有新活动时推送通知";
+"settings.push.mentions" = "提及";
+"settings.push.navigation-title" = "推送通知";
+"settings.push.new-posts" = "新嘟文";
+"settings.push.polls" = "投票结果";
+"settings.section.accounts" = "账户";
+"settings.section.app" = "应用";
+"settings.section.general" = "通用";
+"settings.support.alert.error.message" = "应用内购买失败, 请重试。";
+"settings.support.alert.message" = "非常感谢你的捐赠!";
+"settings.support.alert.title" = "谢谢!";
+"settings.support.message-from-dev" = "Hi! 我是 Thomas, 我非常喜欢写开源应用。 Ice Cubes 绝对是目前为止我最骄傲的项目之一 - 说实话, 由于 Mastodon 和社交媒体行业的不断变化，它也是最需要维护的项目。如果你很喜欢用 Ice Cubes, 请考虑要不要给我一些捐赠。 这真的会让我很开心 (并给我鼓励帮助我完善应用). 🚀";
+"settings.support.navigation-title" = "支持 Ice Cubes";
+"settings.support.one.subtitle" = "轻量, 但是可爱, 而且它味道还不错!";
+"settings.support.one.title" = "🍬 一点小费";
+"settings.support.placeholder.loading-subtitle" = "加载中 ...";
+"settings.support.three.subtitle" = "你真棒, 非常感谢!";
+"settings.support.three.title" = "🤯 很慷慨的捐赠";
+"settings.support.two.subtitle" = "我很乐意给自己买一杯的咖啡 ❤️";
+"settings.support.two.title" = "☕️ 很不错的捐赠";
+"settings.timeline.add" = "添加一个本地时间线";
+"settings.title" = "设置";
+"settings.rate" = "Rate Ice Cubes";
+
+// MARK: Tabs
+"tab.explore" = "探索";
+"tab.federated" = "跨站";
+"tab.local" = "本地";
+"tab.messages" = "私信";
+"tab.notifications" = "通知";
+"tab.settings" = "设置";
+"tab.timeline" = "时间线";
+"tab.trending" = "当下流行";
+
+// MARK: Timeline
+"timeline.%@-is-valid" = "%@ 是一个可用的服务器";
+"timeline.add-remote.title" = "添加远程本地时间线";
+"timeline.add.action.add" = "添加";
+"timeline.filter.add-local" = "添加一个本地时间线";
+"timeline.filter.lists" = "列表";
+"timeline.filter.local" = "本地时间线";
+"timeline.filter.tags" = "关注的标签";
+
+// MARK: Package: AppAccount
+"app-account.button.add" = "添加账户";
+
+// MARK: Package: Account
+"account.action.add-remove-list" = "从列表中添加/移除";
+"account.action.edit-info" = "编辑个人资料";
+"account.action.mention" = "提及";
+"account.action.message" = "私信";
+"account.action.block" = "拉黑";
+"account.action.unblock" = "取消拉黑";
+"account.action.mute" = "免打扰";
+"account.action.unmute" = "取消免打扰";
+"account.boosted-by" = "转发";
+"account.detail.about" = "关于";
+"account.detail.familiar-followers" = "同样关注的有";
+"account.detail.n-fields %lld" = "%lld 域";
+"account.detail.featured-tags-n-posts %lld" = "%lld 嘟文";
+"account.edit.about" = "关于";
+"account.edit.account-settings.bot" = "机器人账号";
+"account.edit.account-settings.discoverable" = "公开";
+"account.edit.account-settings.private" = "私密";
+"account.edit.account-settings.section-title" = "账户设置";
+"account.edit.display-name" = "公开名称";
+"account.edit.error.save.message" = "保存个人资料时出错, 请重试。";
+"account.edit.error.save.title" = "保存个人资料时出错";
+"account.edit.navigation-title" = "编辑个人资料";
+"account.edit.post-settings.privacy" = "默认隐私设置";
+"account.edit.post-settings.section-title" = "嘟文设置";
+"account.edit.post-settings.sensitive" = "敏感内容";
+"account.favorited-by" = "同样收藏的有";
+"account.follow.follow" = "关注";
+"account.follow.following" = "正在关注";
+"account.follow.requested" = "已申请";
+"account.followers" = "粉丝";
+"account.following" = "关注中";
+"account.list.create" = "新建一个列表";
+"account.list.create.confirm" = "创建列表";
+"account.list.create.description" = "为你的列表命名";
+"account.list.delete" = "删除列表";
+"account.list.name" = "列表名称";
+"account.post.pinned" = "固定的嘟文";
+"account.posts" = "嘟文";
+"account.relation.follows-you" = "关注你的人";
+"account.joined" = "已加入";
+
+// MARK: Package: Conversations
+"conversations.action.delete" = "删除";
+"conversations.action.mark-read" = "标记为已读";
+"conversations.empty.message" = "正在社交媒体上寻找乐趣? 你所有的私信和单独提及都在这里。 聊得开心! 📱❤️";
+"conversations.empty.title" = "收件箱为空";
+"conversations.error.button" = "重试";
+"conversations.error.message" = "加载私信时出错";
+"conversations.error.title" = "出错啦";
+"conversations.navigation-title" = "私信";
+
+// MARK: Package: DesignSystem
+"design.tag.n-posts-from-n-participants %lld %lld" = "%lld 条嘟文从 %lld 个参与者中发出";
+"design.theme.navigation-title" = "主题选择器";
+"design.theme.toots-preview" = "嘟文预览";
+
+// MARK: Package: Explore
+"explore.navigation-title" = "探索";
+"explore.search.message-%@" = "在这个界面上，你可以搜索任何关于 %@";
+"explore.search.prompt" = "搜索用户, 嘟文或者标签";
+"explore.search.title" = "搜索你的服务器";
+"explore.search.empty.message" = "无搜索结果, 请尝试其它查询";
+"explore.search.empty.title" = "无结果";
+"explore.section.posts" = "嘟文";
+"explore.section.suggested-users" = "推荐的用户";
+"explore.section.tags" = "标签";
+"explore.section.trending.links" = "当下流行的链接";
+"explore.section.trending.posts" = "当下流行嘟文";
+"explore.section.trending.tags" = "当下流行标签";
+"explore.section.users" = "用户";
+
+// MARK: Package: Env
+"env.poll-duration.5m" = "5 分钟";
+"env.poll-duration.30m" = "30 分钟";
+"env.poll-duration.1h" = "1 小时";
+"env.poll-duration.6h" = "6 小时";
+"env.poll-duration.1d" = "1 天";
+"env.poll-duration.3d" = "3 天";
+"env.poll-duration.7d" = "7 天";
+"env.poll-vote-frequency.one" = "单个投票";
+"env.poll-vote-frequency.multiple" = "多个投票";
+
+// MARK: Package: Lists
+"lists.add-remove-%@" = "添加/移除 %@";
+"lists.create" = "新建一个列表";
+"lists.create.confirm" = "创建列表";
+"lists.edit.users-in-list" = "列表中的用户";
+"lists.name" = "列表名称";
+"lists.name.message" = "为你的列表命名";
+
+// MARK: Package: Notifications
+"notifications.empty.message" = "通知? 什么通知? 你的收件箱是空的。继续保持! 📱😎";
+"notifications.empty.title" = "没有更早的通知";
+"notifications.error.message" = "加载通知时出错, 请重试。";
+"notifications.error.title" = "出现了一个错误";
+"notifications.label.favorite" = "星标";
+"notifications.label.follow" = "关注了你";
+"notifications.label.follow-request" = "关注你的申请";
+"notifications.label.mention" = "提及了你";
+"notifications.label.poll" = "投票结束";
+"notifications.label.reblog" = "已转发";
+"notifications.label.status" = "嘟嘟了一个状态";
+"notifications.label.update" = "编辑了一个嘟文";
+"notifications.menu-title.favorite" = "收藏";
+"notifications.menu-title.follow" = "关注";
+"notifications.menu-title.follow-request" = "关注申请";
+"notifications.menu-title.mention" = "提及";
+"notifications.menu-title.poll" = "投票";
+"notifications.menu-title.reblog" = "转发";
+"notifications.menu-title.status" = "嘟嘟";
+"notifications.menu-title.update" = "嘟文已编辑";
+"notifications.navigation-title" = "全部通知";
+"notifications.tab.all" = "全部";
+"notifications.tab.mentions" = "提及";
+
+// MARK: Package: Timeline
+"timeline.n-new-posts %lld" = "%lld 个新嘟文";
+"timeline.federated" = "跨站";
+"timeline.home" = "主页";
+"timeline.local" = "本地";
+"timeline.n-recent-from-n-participants %lld %lld" = "%lld 个新嘟文从 %lld 个参与者";
+"timeline.trending" = "当下流行";
+
+// MARK: Package: Status
+"status.action.translate" = "翻译";
+"status.action.translated-label" = "使用 DeepL.com 翻译";
+"status.action.bookmark" = "书签";
+"status.action.boost" = "转发";
+"status.action.copy-text" = "拷贝文本";
+"status.action.delete" = "删除";
+"status.action.edit" = "编辑";
+"status.action.favorite" = "收藏";
+"status.action.mention" = "提及";
+"status.action.message" = "私信";
+"status.action.pin" = "固定";
+"status.action.post" = "嘟嘟";
+"status.action.quote" = "引用嘟文";
+"status.action.reply" = "回复";
+"status.action.section.your-post" = "你的嘟文";
+"status.action.share" = "分享这个嘟文";
+"status.action.unbookmark" = "取消书签";
+"status.action.unboost" = "取消转发";
+"status.action.unfavorite" = "取消收藏";
+"status.action.unpin" = "取消固定";
+"status.action.view-in-browser" = "在浏览器中打开";
+"status.draft.delete" = "删除草稿";
+"status.draft.save" = "保存草稿";
+"status.editor.ai-prompt.correct" = "修正文本";
+"status.editor.ai-prompt.emphasize" = "强调文字";
+"status.editor.ai-prompt.fit" = "使文本更简洁";
+"status.editor.description.add" = "添加描述";
+"status.editor.description.edit" = "编辑描述";
+"status.editor.drafts.navigation-title" = "草稿";
+"status.editor.error.upload" = "上传错误";
+"status.editor.language-select.navigation-title" = "选择语言";
+"status.editor.media.edit-image" = "编辑图片";
+"status.editor.media.image-description" = "图片描述";
+"status.editor.mode.edit" = "正在编辑你的嘟文";
+"status.editor.mode.new" = "新嘟文";
+"status.editor.mode.quote-%@" = "%@ 的引用";
+"status.editor.mode.reply-%@" = "正在回复 %@";
+"status.editor.restore-previous" = "恢复之前的文本";
+"status.editor.spoiler" = "剧透文字";
+"status.editor.text.placeholder" = "你在想什么?";
+"status.editor.visibility" = "嘟文可见度";
+"status.error.loading.message" = "加载嘟文时发生错误, 请重试。";
+"status.error.message" = "嘟文的上下文出现了错误, 请重试。";
+"status.error.title" = "发生了一个错误";
+"status.filter.filtered-by-%@" = "被 %@ 过滤";
+"status.filter.show-anyway" = "仍然显示";
+"status.image.alt-text.abbreviation" = "ALT";
+"status.media.content.show" = "显示内容";
+"status.media.contextmenu.copy" = "拷贝图片";
+"status.media.contextmenu.save" = "保存图片";
+"status.media.contextmenu.share" = "分享图片";
+"status.media.contextmenu.view-browser" = "在浏览器中打开";
+"status.media.sensitive.show" = "显示敏感内容";
+"status.poll.n-votes %lld" = "%lld 投票";
+"status.poll.closed" = "已关闭";
+"status.poll.closes-in" = "关闭于 ";
+"status.poll.duration" = "投票持续时间";
+"status.poll.frequency" = "投票频率";
+"status.poll.option-n %lld" = "%lld 选项";
+"status.post-from-%@" = "%@ 的嘟文";
+"status.row.was-boosted" = "转发";
+"status.row.was-reply" = "回复到";
+"status.row.you-boosted" = "你转发了";
+"status.show-less" = "显示更少";
+"status.show-more" = "显示更多";
+"status.summary.at-time" = " 在 ";
+"status.summary.edited-time" = "上次编辑: ";
+"status.summary.n-boosts %lld" = "%lld 转发";
+"status.summary.n-favorites %lld" = "%lld 收藏";
+"status.visibility.direct" = "私密";
+"status.visibility.follower" = "粉丝";
+"status.visibility.public" = "所有人";
+"status.visibility.unlisted" = "未列出";

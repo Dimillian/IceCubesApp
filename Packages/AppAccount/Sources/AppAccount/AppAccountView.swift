@@ -26,7 +26,7 @@ public struct AppAccountView: View {
       }
     }
   }
-  
+
   @ViewBuilder
   private var compactView: some View {
     HStack {
@@ -35,7 +35,7 @@ public struct AppAccountView: View {
       }
     }
   }
-  
+
   private var fullView: some View {
     HStack {
       if let account = viewModel.account {

@@ -1,6 +1,7 @@
 import Account
 import AppAccount
 import Conversations
+import DesignSystem
 import Env
 import Models
 import Network
@@ -8,6 +9,7 @@ import Shimmer
 import SwiftUI
 
 struct ProfileTab: View {
+  @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var currentAccount: CurrentAccount
   @StateObject private var routerPath = RouterPath()
@@ -26,6 +28,7 @@ struct ProfileTab: View {
               }
             }
           }
+          .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
           .id(currentAccount.account?.id)
       } else {
         AccountDetailView(account: .placeholder())

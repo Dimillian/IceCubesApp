@@ -58,6 +58,7 @@
 "settings.display.section.theme" = "Thema";
 "settings.display.status.action-buttons" = "Status Aktions-Buttons";
 "settings.display.status.media-style" = "Status Medien";
+"settings.display.translate-button" = "Show translate button";
 "settings.display.theme.background" = "Hintergrundfarbe";
 "settings.display.theme.secondary-background" = "Sekundäre Hintergrundfarbe";
 "settings.display.theme.tint" = "Akzentfarbe";
@@ -95,6 +96,7 @@
 "settings.support.two.title" = "☕️ Schönes Trinkgeld";
 "settings.timeline.add" = "Lokale Timeline hinzufügen";
 "settings.title" = "Einstellungen";
+"settings.rate" = "Rate Ice Cubes";
 
 // MARK: Tabs
 "tab.explore" = "Entdecken";
@@ -127,7 +129,7 @@
 "account.action.unblock" = "Block aufheben";
 "account.action.mute" = "Stummschalten";
 "account.action.unmute" = "Stummschaltung aufheben";
-"account.boosted-by" = "Geboosted von";
+"account.boosted-by" = "Geboostet von";
 "account.detail.about" = "Über";
 "account.detail.familiar-followers" = "Auch gefolgt von";
 "account.detail.n-fields %lld" = "%lld Felder";
@@ -219,7 +221,7 @@
 "notifications.label.follow-request" = "möchte dir folgen";
 "notifications.label.mention" = "hat dich erwähnt";
 "notifications.label.poll" = "Umfrage beendet";
-"notifications.label.reblog" = "hat geboosted";
+"notifications.label.reblog" = "hat geboostet";
 "notifications.label.status" = "hat einen Beitrag gepostet";
 "notifications.label.update" = "hat einen Beitrag geändert";
 "notifications.menu-title.favorite" = "Favorit";
@@ -302,9 +304,9 @@
 "status.poll.frequency" = "Auswahlmöglichkeiten";
 "status.poll.option-n %lld" = "Option %lld";
 "status.post-from-%@" = "Post von %@";
-"status.row.was-boosted" = "hat geboosted";
+"status.row.was-boosted" = "hat geboostet";
 "status.row.was-reply" = "Antwort auf";
-"status.row.you-boosted" = "Du hast geboosted";
+"status.row.you-boosted" = "Du hast geboostet";
 "status.show-less" = "Weniger anzeigen";
 "status.show-more" = "Mehr anzeigen";
 "status.summary.at-time" = " um ";

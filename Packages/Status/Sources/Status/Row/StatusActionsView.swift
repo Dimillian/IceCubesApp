@@ -101,9 +101,9 @@ struct StatusActionsView: View {
     Divider()
     HStack {
       Text(viewModel.status.createdAt.asDate, style: .date) +
-      Text("status.summary.at-time") +
-      Text(viewModel.status.createdAt.asDate, style: .time) +
-      Text("  ·")
+        Text("status.summary.at-time") +
+        Text(viewModel.status.createdAt.asDate, style: .time) +
+        Text("  ·")
       Image(systemName: viewModel.status.visibility.iconName)
       Spacer()
       Text(viewModel.status.application?.name ?? "")
@@ -116,14 +116,14 @@ struct StatusActionsView: View {
     }
     .font(.scaledCaption)
     .foregroundColor(.gray)
-    
+
     if let editedAt = viewModel.status.editedAt {
       Divider()
       HStack {
         Text("status.summary.edited-time") +
-        Text(editedAt.asDate, style: .date) +
-        Text("status.summary.at-time") +
-        Text(editedAt.asDate, style: .time)
+          Text(editedAt.asDate, style: .date) +
+          Text("status.summary.at-time") +
+          Text(editedAt.asDate, style: .time)
         Spacer()
       }
       .onTapGesture {

@@ -79,7 +79,7 @@ public struct StatusEditorView: View {
           NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
                                           object: nil)
         }
-        
+
         Task {
           await viewModel.fetchCustomEmojis()
         }
@@ -91,6 +91,13 @@ public struct StatusEditorView: View {
       .background(theme.primaryBackgroundColor)
       .navigationTitle(viewModel.mode.title)
       .navigationBarTitleDisplayMode(.inline)
+      .alert("Error while posting",
+             isPresented: $viewModel.showPostingErrorAlert,
+             actions: {
+        Button("Ok") { }
+      }, message: {
+        Text(viewModel.postingError ?? "")
+      })
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           AIMenu
@@ -118,7 +125,7 @@ public struct StatusEditorView: View {
         }
         ToolbarItem(placement: .navigationBarLeading) {
           Button {
-            if !viewModel.statusText.string.isEmpty && !viewModel.mode.isInShareExtension {
+            if viewModel.shouldDisplayDismissWarning {
               isDismissAlertPresented = true
             } else {
               dismiss()
