@@ -215,7 +215,7 @@ public struct StatusRowView: View {
   private func makeStatusContentView(status: AnyStatus) -> some View {
     Group {
       if !status.spoilerText.asRawText.isEmpty {
-        EmojiTextApp(status.spoilerText, emojis: status.emojis)
+        EmojiTextApp(status.spoilerText, emojis: status.emojis, language: status.language)
           .font(.scaledBody)
         Button {
           withAnimation {
@@ -230,7 +230,7 @@ public struct StatusRowView: View {
 
       if !viewModel.displaySpoiler {
         HStack {
-          EmojiTextApp(status.content, emojis: status.emojis)
+          EmojiTextApp(status.content, emojis: status.emojis, language: status.language)
             .font(.scaledBody)
             .environment(\.openURL, OpenURLAction { url in
               routerPath.handleStatus(status: status, url: url)
