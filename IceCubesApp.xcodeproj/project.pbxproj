@@ -126,6 +126,7 @@
 		9F35DB4629506F6600B3281A /* NotificationTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTab.swift; sourceTree = "<group>"; };
 		9F35DB4829506F7F00B3281A /* Notifications */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Notifications; path = Packages/Notifications; sourceTree = "<group>"; };
 		9F35DB4B2952005C00B3281A /* MessagesTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTab.swift; sourceTree = "<group>"; };
+		9F38C233297D03120018F11E /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9F398AA32935F90100A889F2 /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Models; path = Packages/Models; sourceTree = "<group>"; };
 		9F398AA52935FE8A00A889F2 /* AppRouteur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouteur.swift; sourceTree = "<group>"; };
 		9F398AAC2936005300A889F2 /* Account */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Account; path = Packages/Account; sourceTree = "<group>"; };
@@ -479,6 +480,7 @@
 				nl,
 				es,
 				"zh-Hans",
+				it,
 			);
 			mainGroup = 9FBFE630292A715500C250E9;
 			packageReferences = (
@@ -599,6 +601,7 @@
 				F355EEDA297A8BD500E362C0 /* nl */,
 				9606B7A1297AD2BB00C1FB75 /* es */,
 				C465A53D297C5E0C00864FB7 /* zh-Hans */,
+				9F38C233297D03120018F11E /* it */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
