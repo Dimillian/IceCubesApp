@@ -96,6 +96,7 @@
 "settings.support.two.title" = "☕️ Contributo carino";
 "settings.timeline.add" = "Aggiungi una timeline locale";
 "settings.title" = "Impostazioni";
+"settings.rate" = "Rate Ice Cubes";
 
 // MARK: Tabs
 "tab.explore" = "Esplora";

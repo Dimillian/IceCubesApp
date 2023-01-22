@@ -160,6 +160,7 @@
 "account.posts" = "Posts";
 "account.relation.follows-you" = "Volgt jou";
 "account.joined" = "Lid geworden";
+"settings.rate" = "Rate Ice Cubes";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Verwijderen";

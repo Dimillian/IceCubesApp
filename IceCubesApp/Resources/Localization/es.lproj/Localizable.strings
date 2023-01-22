@@ -49,7 +49,7 @@
 "settings.app.icon" = "Icono de la app";
 "settings.app.icon.navigation-title" = "Iconos";
 "settings.app.source" = "Código fuente (Enlace a GitHub)";
-"settings.app.support" = "Apoya a esta app";
+"settings.app.support" = "Apoya a Ice Cubes";
 "settings.display.avatar.position" = "Posición del avatar";
 "settings.display.avatar.shape" = "Forma del avatar";
 "settings.display.navigation-title" = "Ajustes de apariencia";
@@ -96,6 +96,7 @@
 "settings.support.two.title" = "☕️ Buena propina";
 "settings.timeline.add" = "Añadir cronología local";
 "settings.title" = "Ajustes";
+"settings.rate" = "Valora Ice Cubes";
 
 // MARK: Tabs
 "tab.explore" = "Explorar";
@@ -159,6 +160,7 @@
 "account.post.pinned" = "Publicación fijada";
 "account.posts" = "Publicaciones";
 "account.relation.follows-you" = "Te sigue";
+"account.joined" = "Se unió el";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Borrar";
