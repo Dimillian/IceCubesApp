@@ -16,17 +16,8 @@ struct DisplaySettingsView: View {
         Toggle("settings.display.theme.systemColor", isOn: $theme.followSystemColorScheme)
         themeSelectorButton
         ColorPicker("settings.display.theme.tint", selection: $theme.tintColor)
-          .onChange(of: theme.tintColor) { _ in
-            theme.followSystemColorScheme = false
-          }
         ColorPicker("settings.display.theme.background", selection: $theme.primaryBackgroundColor)
-          .onChange(of: theme.primaryBackgroundColor) { _ in
-            theme.followSystemColorScheme = false
-          }
         ColorPicker("settings.display.theme.secondary-background", selection: $theme.secondaryBackgroundColor)
-          .onChange(of: theme.primaryBackgroundColor) { _ in
-            theme.followSystemColorScheme = false
-          }
       }
       .listRowBackground(theme.primaryBackgroundColor)
 

@@ -35,6 +35,7 @@ struct TimelineTab: View {
         .toolbar {
           toolbarView
         }
+        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
         .id(currentAccount.account?.id)
     }
     .onAppear {

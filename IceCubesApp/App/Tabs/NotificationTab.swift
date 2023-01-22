@@ -1,4 +1,5 @@
 import AppAccount
+import DesignSystem
 import Env
 import Models
 import Network
@@ -7,6 +8,7 @@ import SwiftUI
 import Timeline
 
 struct NotificationsTab: View {
+  @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var currentAccount: CurrentAccount
@@ -30,6 +32,7 @@ struct NotificationsTab: View {
             }
           }
         }
+        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
         .id(currentAccount.account?.id)
     }
     .onAppear {
