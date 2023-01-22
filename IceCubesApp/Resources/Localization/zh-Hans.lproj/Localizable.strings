@@ -6,10 +6,10 @@
 "action.retry" = "重试";
 
 "alert.button.ok" = "OK";
-"alert.error" = "错误!";
+"alert.error" = "错误！";
 
-"placeholder.loading.long" = "加载, 加载, 再加载 ....";
-"placeholder.loading.short" = "加载中 ...";
+"placeholder.loading.long" = "加载，加载，再加载……";
+"placeholder.loading.short" = "加载中……";
 
 "see-more" = "查看更多";
 
@@ -31,7 +31,7 @@
 
 // MARK: Instances
 "instance.info.domains" = "域名";
-"instance.info.email" = "邮件";
+"instance.info.email" = "电邮";
 "instance.info.name" = "名称";
 "instance.info.navigation-title" = "服务器信息";
 "instance.info.posts" = "嘟文";
@@ -48,8 +48,8 @@
 "settings.account.add" = "添加账户";
 "settings.app.icon" = "应用图标";
 "settings.app.icon.navigation-title" = "图标";
-"settings.app.source" = "源代码 (GitHub 链接)";
-"settings.app.support" = "支持这个应用";
+"settings.app.source" = "源代码（GitHub 链接）";
+"settings.app.support" = "支持本应用";
 "settings.display.avatar.position" = "头像位置";
 "settings.display.avatar.shape" = "头像形状";
 "settings.display.navigation-title" = "显示设置";
@@ -58,7 +58,7 @@
 "settings.display.section.theme" = "主题";
 "settings.display.status.action-buttons" = "状态操作选项";
 "settings.display.status.media-style" = "状态媒体样式";
-"settings.display.translate-button" = "Show translate button";
+"settings.display.translate-button" = "显示翻译按钮";
 "settings.display.theme.background" = "背景颜色";
 "settings.display.theme.secondary-background" = "二级背景颜色";
 "settings.display.theme.tint" = "色调";
@@ -70,7 +70,7 @@
 "settings.general.instance" = "服务器设置";
 "settings.general.push-notifications" = "推送通知";
 "settings.general.remote-timelines" = "远程本地时间线";
-"settings.push.boosts" = "转发嘟文";
+"settings.push.boosts" = "转发";
 "settings.push.favorites" = "收藏";
 "settings.push.follows" = "关注";
 "settings.push.main-toggle" = "推送通知";
@@ -82,21 +82,21 @@
 "settings.section.accounts" = "账户";
 "settings.section.app" = "应用";
 "settings.section.general" = "通用";
-"settings.support.alert.error.message" = "应用内购买失败, 请重试。";
-"settings.support.alert.message" = "非常感谢你的捐赠!";
-"settings.support.alert.title" = "谢谢!";
-"settings.support.message-from-dev" = "Hi! 我是 Thomas, 我非常喜欢写开源应用。 Ice Cubes 绝对是目前为止我最骄傲的项目之一 - 说实话, 由于 Mastodon 和社交媒体行业的不断变化，它也是最需要维护的项目。如果你很喜欢用 Ice Cubes, 请考虑要不要给我一些捐赠。 这真的会让我很开心 (并给我鼓励帮助我完善应用). 🚀";
+"settings.support.alert.error.message" = "应用内购买失败，请重试。";
+"settings.support.alert.message" = "非常感谢你的捐赠！";
+"settings.support.alert.title" = "谢谢！";
+"settings.support.message-from-dev" = "Hi! 我是 Thomas，我非常喜欢写开源应用。 Ice Cubes 绝对是目前为止我最骄傲的项目之一 - 说实话，由于 Mastodon 和社交媒体行业的不断变化，它也是最需要维护的项目。如果你很喜欢用 Ice Cubes，请考虑给我一些捐赠。 这真的会让我很开心 (且能鼓励我完善它)。🚀";
 "settings.support.navigation-title" = "支持 Ice Cubes";
-"settings.support.one.subtitle" = "轻量, 但是可爱, 而且它味道还不错!";
+"settings.support.one.subtitle" = "小而可爱，而且它味道不错！";
 "settings.support.one.title" = "🍬 一点小费";
-"settings.support.placeholder.loading-subtitle" = "加载中 ...";
-"settings.support.three.subtitle" = "你真棒, 非常感谢!";
+"settings.support.placeholder.loading-subtitle" = "加载中……";
+"settings.support.three.subtitle" = "你真棒，非常感谢！";
 "settings.support.three.title" = "🤯 很慷慨的捐赠";
-"settings.support.two.subtitle" = "我很乐意给自己买一杯的咖啡 ❤️";
+"settings.support.two.subtitle" = "我很喜欢这杯美味的咖啡 ❤️";
 "settings.support.two.title" = "☕️ 很不错的捐赠";
 "settings.timeline.add" = "添加一个本地时间线";
 "settings.title" = "设置";
-"settings.rate" = "Rate Ice Cubes";
+"settings.rate" = "给 Ice Cubes 评分";
 
 // MARK: Tabs
 "tab.explore" = "探索";
@@ -179,17 +179,17 @@
 
 // MARK: Package: Explore
 "explore.navigation-title" = "探索";
-"explore.search.message-%@" = "在这个界面上，你可以搜索任何关于 %@";
-"explore.search.prompt" = "搜索用户, 嘟文或者标签";
+"explore.search.message-%@" = "在此界面上，你可以搜索 %@ 上的任何信息";
+"explore.search.prompt" = "搜索用户，嘟文或者标签";
 "explore.search.title" = "搜索你的服务器";
-"explore.search.empty.message" = "无搜索结果, 请尝试其它查询";
+"explore.search.empty.message" = "无搜索结果，请尝试其它查询";
 "explore.search.empty.title" = "无结果";
 "explore.section.posts" = "嘟文";
 "explore.section.suggested-users" = "推荐的用户";
 "explore.section.tags" = "标签";
 "explore.section.trending.links" = "当下流行的链接";
-"explore.section.trending.posts" = "当下流行嘟文";
-"explore.section.trending.tags" = "当下流行标签";
+"explore.section.trending.posts" = "当下流行的嘟文";
+"explore.section.trending.tags" = "当下流行的标签";
 "explore.section.users" = "用户";
 
 // MARK: Package: Env
@@ -212,7 +212,7 @@
 "lists.name.message" = "为你的列表命名";
 
 // MARK: Package: Notifications
-"notifications.empty.message" = "通知? 什么通知? 你的收件箱是空的。继续保持! 📱😎";
+"notifications.empty.message" = "通知？什么通知？你的收件箱是空的。继续保持！📱😎";
 "notifications.empty.title" = "没有更早的通知";
 "notifications.error.message" = "加载通知时出错, 请重试。";
 "notifications.error.title" = "出现了一个错误";
@@ -284,10 +284,10 @@
 "status.editor.mode.reply-%@" = "正在回复 %@";
 "status.editor.restore-previous" = "恢复之前的文本";
 "status.editor.spoiler" = "剧透文字";
-"status.editor.text.placeholder" = "你在想什么?";
+"status.editor.text.placeholder" = "你在想什么？";
 "status.editor.visibility" = "嘟文可见度";
-"status.error.loading.message" = "加载嘟文时发生错误, 请重试。";
-"status.error.message" = "嘟文的上下文出现了错误, 请重试。";
+"status.error.loading.message" = "加载嘟文时发生错误，请重试。";
+"status.error.message" = "嘟文的上下文出现了错误，请重试。";
 "status.error.title" = "发生了一个错误";
 "status.filter.filtered-by-%@" = "被 %@ 过滤";
 "status.filter.show-anyway" = "仍然显示";
@@ -311,7 +311,7 @@
 "status.show-less" = "显示更少";
 "status.show-more" = "显示更多";
 "status.summary.at-time" = " 在 ";
-"status.summary.edited-time" = "上次编辑: ";
+"status.summary.edited-time" = "上次编辑：";
 "status.summary.n-boosts %lld" = "%lld 转发";
 "status.summary.n-favorites %lld" = "%lld 收藏";
 "status.visibility.direct" = "私密";
