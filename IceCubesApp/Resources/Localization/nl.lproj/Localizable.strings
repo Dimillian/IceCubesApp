@@ -238,7 +238,7 @@
 
 // MARK: Package: Timeline
 "timeline.federated" = "Gefedereerd";
-"timeline.home" = "Thuis";
+"timeline.home" = "Startpagina";
 "timeline.local" = "Lokaal";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld recente posts van %lld deelnemers";
 "timeline.trending" = "Trending";
