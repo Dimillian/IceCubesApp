@@ -1,7 +1,7 @@
 import Foundation
 
 public struct DeepLClient {
-  private let endpoint = "https://api-free.deepl.com/v2/translate"
+  private let endpoint = "https://api.deepl.com/v2/translate"
 
   private var APIKey: String {
     if let path = Bundle.main.path(forResource: "Secret", ofType: "plist") {
