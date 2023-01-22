@@ -116,7 +116,7 @@ public struct ConversationDetailView: View {
           Image(systemName: "plus")
         }
         .padding(.bottom, 5)
-        TextField("New messge", text: $viewModel.newMessageText, axis: .vertical)
+        TextField("conversations.new.message.placeholder", text: $viewModel.newMessageText, axis: .vertical)
           .textFieldStyle(.roundedBorder)
           .focused($isMessageFieldFocused)
           .keyboardType(.default)
