@@ -21,6 +21,10 @@ public class StatusEditorViewModel: ObservableObject {
     }
   }
 
+  var spoilerTextCount: Int {
+    spoilerOn ? spoilerText.utf16.count : 0
+  }
+
   @Published var backupStatusText: NSAttributedString?
 
   @Published var showPoll: Bool = false

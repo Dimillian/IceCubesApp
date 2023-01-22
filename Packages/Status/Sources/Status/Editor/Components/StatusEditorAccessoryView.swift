@@ -201,7 +201,7 @@ struct StatusEditorAccessoryView: View {
   }
 
   private var characterCountView: some View {
-    Text("\((currentInstance.instance?.configuration?.statuses.maxCharacters ?? 500) - viewModel.statusText.string.utf16.count)")
+    Text("\((currentInstance.instance?.configuration?.statuses.maxCharacters ?? 500) - viewModel.statusText.string.utf16.count - viewModel.spoilerTextCount)")
       .foregroundColor(.gray)
       .font(.scaledCallout)
   }
