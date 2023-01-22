@@ -235,10 +235,8 @@ public struct StatusRowView: View {
             })
           Spacer()
         }
-
-        if preferences.showTranslateButton {
-          makeTranslateView(status: status)
-        }
+        
+        makeTranslateView(status: status)
 
         if let poll = status.poll {
           StatusPollView(poll: poll, status: status)
@@ -288,6 +286,7 @@ public struct StatusRowView: View {
   @ViewBuilder
   private func makeTranslateView(status: AnyStatus) -> some View {
     if let userLang = preferences.serverPreferences?.postLanguage,
+       preferences.showTranslateButton,
        status.language != nil,
        userLang != status.language,
        !status.content.asRawText.isEmpty,
@@ -304,7 +303,9 @@ public struct StatusRowView: View {
           Text("status.action.translate")
         }
       }
-    } else if let translation = viewModel.translation {
+    }
+    
+    if let translation = viewModel.translation {
       GroupBox {
         VStack(alignment: .leading, spacing: 4) {
           Text(translation)
