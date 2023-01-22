@@ -8,7 +8,7 @@
 "alert.button.ok" = "Ok";
 "alert.error" = "Error!";
 
-"placeholder.loading.long" = "Loading, loading, loading ....";
+"placeholder.loading.long" = "Loading, loading, loading ...";
 "placeholder.loading.short" = "Loading ...";
 
 "see-more" = "See more";
@@ -68,12 +68,12 @@
 "settings.general.browser.system" = "System Browser";
 "settings.general.display" = "Display Settings";
 "settings.general.instance" = "Instance Information";
-"settings.general.push-notifications" = "Push notification";
+"settings.general.push-notifications" = "Push Notification";
 "settings.general.remote-timelines" = "Remote Local Timelines";
 "settings.push.boosts" = "Boosts";
 "settings.push.favorites" = "Favorites";
 "settings.push.follows" = "Follows";
-"settings.push.main-toggle" = "Push notifications";
+"settings.push.main-toggle" = "Push Notifications";
 "settings.push.main-toggle.description" = "Receive push notifications on new activities";
 "settings.push.mentions" = "Mentions";
 "settings.push.navigation-title" = "Push Notifications";
