@@ -3,7 +3,7 @@ import HTML2Markdown
 import SwiftSoup
 import SwiftUI
 
-public struct HTMLString: Decodable, Equatable {
+public struct HTMLString: Decodable, Equatable, Hashable {
   public let htmlValue: String
   public let asMarkdown: String
   public let asRawText: String

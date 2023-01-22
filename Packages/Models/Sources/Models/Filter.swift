@@ -1,11 +1,11 @@
 import Foundation
 
-public struct Filtered: Codable {
+public struct Filtered: Codable, Equatable, Hashable {
   public let filter: Filter
   public let keywordMatches: [String]?
 }
 
-public struct Filter: Codable, Identifiable {
+public struct Filter: Codable, Identifiable, Equatable, Hashable {
   public enum Action: String, Codable {
     case warn, hide
   }

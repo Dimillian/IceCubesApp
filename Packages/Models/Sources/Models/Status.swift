@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Application: Codable, Identifiable {
+public struct Application: Codable, Identifiable, Hashable, Equatable {
   public var id: String {
     name
   }
@@ -18,7 +18,7 @@ public extension Application {
   }
 }
 
-public enum Visibility: String, Codable, CaseIterable {
+public enum Visibility: String, Codable, CaseIterable, Hashable, Equatable {
   case pub = "public"
   case unlisted
   case priv = "private"
@@ -54,7 +54,7 @@ public protocol AnyStatus {
   var language: String? { get }
 }
 
-public struct Status: AnyStatus, Decodable, Identifiable {
+public struct Status: AnyStatus, Decodable, Identifiable, Equatable, Hashable {
   public var viewId: String {
     id + createdAt + (editedAt ?? "")
   }
@@ -120,7 +120,7 @@ public struct Status: AnyStatus, Decodable, Identifiable {
   }
 }
 
-public struct ReblogStatus: AnyStatus, Decodable, Identifiable {
+public struct ReblogStatus: AnyStatus, Decodable, Identifiable, Equatable, Hashable {
   public var viewId: String {
     id + createdAt + (editedAt ?? "")
   }

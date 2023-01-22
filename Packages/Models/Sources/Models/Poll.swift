@@ -1,6 +1,14 @@
 import Foundation
 
-public struct Poll: Codable {
+public struct Poll: Codable, Equatable, Hashable {
+  public static func == (lhs: Poll, rhs: Poll) -> Bool {
+    lhs.id == rhs.id
+  }
+  
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(id)
+  }
+  
   public struct Option: Identifiable, Codable {
     enum CodingKeys: String, CodingKey {
       case title, votesCount

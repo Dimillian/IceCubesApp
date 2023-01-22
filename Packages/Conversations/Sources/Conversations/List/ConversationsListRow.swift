@@ -44,7 +44,7 @@ struct ConversationsListRow: View {
         Task {
           await viewModel.markAsRead(conversation: conversation)
         }
-        routerPath.navigate(to: .statusDetail(id: conversation.lastStatus.id))
+        routerPath.navigate(to: .conversationDetail(conversation: conversation))
       }
       .padding(.top, 4)
       actionsView

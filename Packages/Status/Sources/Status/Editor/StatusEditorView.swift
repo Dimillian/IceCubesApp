@@ -40,6 +40,7 @@ public struct StatusEditorView: View {
             TextView($viewModel.statusText, $viewModel.selectedRange)
               .placeholder(String(localized: "status.editor.text.placeholder"))
               .font(Font.scaledBodyUIFont)
+              .keyboardType(.twitter)
               .padding(.horizontal, .layoutPadding)
             StatusEditorMediaView(viewModel: viewModel)
             if let status = viewModel.embeddedStatus {

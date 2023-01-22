@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Card: Codable, Identifiable {
+public struct Card: Codable, Identifiable, Equatable, Hashable {
   public var id: String {
     url
   }
