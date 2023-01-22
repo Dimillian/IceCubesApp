@@ -77,6 +77,7 @@ public struct ConversationDetailView: View {
             .font(.scaledHeadline)
         } else {
           Text("Direct message with \(viewModel.conversation.accounts.count) people")
+            .font(.scaledHeadline)
         }
       }
     }
