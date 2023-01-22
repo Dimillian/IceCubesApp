@@ -57,14 +57,16 @@ public struct StatusRowView: View {
         }
       }
       .onAppear {
-        viewModel.client = client
-        if !viewModel.isCompact, viewModel.embeddedStatus == nil {
-          Task {
-            await viewModel.loadEmbeddedStatus()
+        if reasons.isEmpty {
+          viewModel.client = client
+          if !viewModel.isCompact, viewModel.embeddedStatus == nil {
+            Task {
+              await viewModel.loadEmbeddedStatus()
+            }
           }
-        }
-        if preferences.serverPreferences?.autoExpandSpoilers == true {
-          viewModel.displaySpoiler = false
+          if preferences.serverPreferences?.autoExpandSpoilers == true {
+            viewModel.displaySpoiler = false
+          }
         }
       }
       .contextMenu {
@@ -241,7 +243,9 @@ public struct StatusRowView: View {
         if let poll = status.poll {
           StatusPollView(poll: poll, status: status)
         }
-
+        
+        embedStatusView
+  
         makeMediasView(status: status)
           .accessibilityHidden(!viewModel.isFocused)
         makeCardView(status: status)
@@ -348,6 +352,20 @@ public struct StatusRowView: View {
        theme.statusDisplayStyle == .large
     {
       StatusCardView(card: card)
+    }
+  }
+  
+  @ViewBuilder
+  private var embedStatusView: some View {
+    if !reasons.contains(.placeholder) {
+      if !viewModel.isCompact, !viewModel.isEmbedLoading,
+          let embed = viewModel.embeddedStatus {
+        StatusEmbeddedView(status: embed)
+      } else if viewModel.isEmbedLoading, !viewModel.isCompact {
+        StatusEmbeddedView(status: .placeholder())
+          .redacted(reason: .placeholder)
+          .shimmering()
+      }
     }
   }
 }
