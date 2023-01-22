@@ -5,20 +5,23 @@ import Network
 import SwiftUI
 
 public struct StatusPollView: View {
-  enum Constants {
-    static let barHeight: CGFloat = 30
-  }
-
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var currentInstance: CurrentInstance
+  @EnvironmentObject private var currentAccount: CurrentAccount
   @StateObject private var viewModel: StatusPollViewModel
 
-  public init(poll: Poll) {
+  private var status: AnyStatus
+
+  public init(poll: Poll, status: AnyStatus) {
     _viewModel = StateObject(wrappedValue: .init(poll: poll))
+    self.status = status
   }
 
   private func widthForOption(option: Poll.Option, proxy: GeometryProxy) -> CGFloat {
+    if viewModel.poll.votesCount == 0 {
+      return 0
+    }
     let totalWidth = proxy.frame(in: .local).width
     let ratio = CGFloat(option.votesCount) / CGFloat(viewModel.poll.votesCount)
     return totalWidth * ratio
@@ -44,9 +47,9 @@ public struct StatusPollView: View {
       ForEach(viewModel.poll.options) { option in
         HStack {
           makeBarView(for: option)
-          if !viewModel.votes.isEmpty || viewModel.poll.expired {
+          if !viewModel.votes.isEmpty || viewModel.poll.expired || status.account.id == currentAccount.account?.id {
             Spacer()
-            Text("\(percentForOption(option: option)) %")
+            Text("\(percentForOption(option: option))%")
               .font(.scaledSubheadline)
               .frame(width: 40)
           }
@@ -98,19 +101,21 @@ public struct StatusPollView: View {
         ZStack(alignment: .leading) {
           Rectangle()
             .background {
-              if viewModel.showResults {
+              if viewModel.showResults || status.account.id == currentAccount.account?.id {
                 HStack {
                   let width = widthForOption(option: option, proxy: proxy)
                   Rectangle()
                     .foregroundColor(theme.tintColor)
-                    .frame(height: Constants.barHeight)
+                    .frame(height: .pollBarHeight)
                     .frame(width: width)
-                  Spacer()
+                  if width != proxy.size.width {
+                    Spacer()
+                  }
                 }
               }
             }
             .foregroundColor(theme.tintColor.opacity(0.40))
-            .frame(height: Constants.barHeight)
+            .frame(height: .pollBarHeight)
             .clipShape(RoundedRectangle(cornerRadius: 8))
 
           HStack {
@@ -121,11 +126,12 @@ public struct StatusPollView: View {
             Text(option.title)
               .foregroundColor(.white)
               .font(.scaledBody)
+              .minimumScaleFactor(0.7)
           }
           .padding(.leading, 12)
         }
       }
-      .frame(height: Constants.barHeight)
+      .frame(height: .pollBarHeight)
     }
   }
 }

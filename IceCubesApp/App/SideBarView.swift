@@ -10,7 +10,7 @@ struct SideBarView<Content: View>: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var userPreferences: UserPreferences
-  
+
   @Binding var selectedTab: Tab
   @Binding var popToRootTab: Tab
   var tabs: [Tab]
@@ -23,7 +23,7 @@ struct SideBarView<Content: View>: View {
     }
     return 0
   }
-  
+
   private var profileView: some View {
     Button {
       selectedTab = .profile
@@ -35,7 +35,7 @@ struct SideBarView<Content: View>: View {
     .frame(width: .sidebarWidth, height: 60)
     .background(selectedTab == .profile ? theme.secondaryBackgroundColor : .clear)
   }
-  
+
   private func makeIconForTab(tab: Tab) -> some View {
     ZStack(alignment: .topTrailing) {
       SideBarIcon(systemIconName: tab.iconName,
@@ -55,7 +55,7 @@ struct SideBarView<Content: View>: View {
     .contentShape(Rectangle())
     .frame(width: .sidebarWidth, height: 50)
   }
-  
+
   private var postButton: some View {
     Button {
       routerPath.presentedSheet = .newStatusEditor(visibility: userPreferences.serverPreferences?.postVisibility ?? .pub)
@@ -68,7 +68,7 @@ struct SideBarView<Content: View>: View {
     .buttonStyle(.borderedProminent)
     .keyboardShortcut("n", modifiers: .command)
   }
-  
+
   private func makeAccountButton(account: AppAccount) -> some View {
     Button {
       if account.id == appAccounts.currentAccount.id {
@@ -84,9 +84,9 @@ struct SideBarView<Content: View>: View {
     .frame(width: .sidebarWidth, height: 50)
     .padding(.vertical, 8)
     .background(selectedTab == .profile && account.id == appAccounts.currentAccount.id ?
-                theme.secondaryBackgroundColor : .clear)
+      theme.secondaryBackgroundColor : .clear)
   }
-  
+
   private var tabsView: some View {
     ForEach(tabs) { tab in
       Button {
@@ -107,7 +107,7 @@ struct SideBarView<Content: View>: View {
       .background(tab == selectedTab ? theme.secondaryBackgroundColor : .clear)
     }
   }
-  
+
   var body: some View {
     HStack(spacing: 0) {
       ScrollView {
@@ -141,12 +141,12 @@ struct SideBarView<Content: View>: View {
 
 private struct SideBarIcon: View {
   @EnvironmentObject private var theme: Theme
-  
+
   let systemIconName: String
   let isSelected: Bool
-  
+
   @State private var isHovered: Bool = false
-  
+
   var body: some View {
     Image(systemName: systemIconName)
       .resizable()

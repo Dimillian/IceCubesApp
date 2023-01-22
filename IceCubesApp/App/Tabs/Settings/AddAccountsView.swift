@@ -5,9 +5,9 @@ import Env
 import Models
 import Network
 import NukeUI
+import SafariServices
 import Shimmer
 import SwiftUI
-import SafariServices
 
 struct AddAccountView: View {
   @Environment(\.dismiss) private var dismiss
@@ -44,8 +44,10 @@ struct AddAccountView: View {
         if let instanceFetchError {
           Text(instanceFetchError)
         }
-        if let instance {
+        if instance != nil || !instanceName.isEmpty {
           signInSection
+        }
+        if let instance {
           InstanceInfoSection(instance: instance)
         } else {
           instancesListView
@@ -68,7 +70,10 @@ struct AddAccountView: View {
         isInstanceURLFieldFocused = true
         let client = InstanceSocialClient()
         Task {
-          self.instances = await client.fetchInstances()
+          let instances = await client.fetchInstances()
+          withAnimation {
+            self.instances = instances
+          }
         }
         isSigninIn = false
       }
@@ -76,16 +81,22 @@ struct AddAccountView: View {
         instanceNamePublisher.send(newValue)
       }
       .onReceive(instanceNamePublisher.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)) { newValue in
+        let newValue = newValue
+          .replacingOccurrences(of: "http://", with: "")
+          .replacingOccurrences(of: "https://", with: "")
         let client = Client(server: newValue)
         Task {
           do {
-            self.instance = try await client.get(endpoint: Instances.instance)
-            self.instanceFetchError = nil
+            let instance: Instance = try await client.get(endpoint: Instances.instance)
+            withAnimation {
+              self.instance = instance
+            }
+            instanceFetchError = nil
           } catch _ as DecodingError {
-            self.instance = nil
-            self.instanceFetchError = "account.add.error.instance-not-supported"
+            instance = nil
+            instanceFetchError = "account.add.error.instance-not-supported"
           } catch {
-            self.instance = nil
+            instance = nil
           }
         }
       }
@@ -102,6 +113,11 @@ struct AddAccountView: View {
           await continueSignIn(url: url)
         }
       })
+      .onChange(of: oauthURL, perform: { newValue in
+        if newValue == nil {
+          isSigninIn = false
+        }
+      })
       .sheet(item: $oauthURL, content: { url in
         SafariView(url: url)
       })
@@ -111,15 +127,18 @@ struct AddAccountView: View {
   private var signInSection: some View {
     Section {
       Button {
-        isSigninIn = true
+        withAnimation {
+          isSigninIn = true
+        }
         Task {
           await signIn()
         }
       } label: {
         HStack {
           Spacer()
-          if isSigninIn {
+          if isSigninIn || !instanceName.isEmpty && instance == nil {
             ProgressView()
+              .id(instanceName)
               .tint(theme.labelColor)
           } else {
             Text("account.add.sign-in")
@@ -152,8 +171,8 @@ struct AddAccountView: View {
               (Text("instance.list.users-\(instance.users)")
                 + Text("  ⸱  ")
                 + Text("instance.list.posts-\(instance.statuses)"))
-              .font(.scaledFootnote)
-              .foregroundColor(.gray)
+                .font(.scaledFootnote)
+                .foregroundColor(.gray)
             }
           }
           .listRowBackground(theme.primaryBackgroundColor)
@@ -216,11 +235,9 @@ struct AddAccountView: View {
 struct SafariView: UIViewControllerRepresentable {
   let url: URL
 
-  func makeUIViewController(context: UIViewControllerRepresentableContext<SafariView>) -> SFSafariViewController {
+  func makeUIViewController(context _: UIViewControllerRepresentableContext<SafariView>) -> SFSafariViewController {
     SFSafariViewController(url: url)
   }
-  
-  func updateUIViewController(_ uiViewController: SFSafariViewController, context: UIViewControllerRepresentableContext<SafariView>) {
 
-  }
+  func updateUIViewController(_: SFSafariViewController, context _: UIViewControllerRepresentableContext<SafariView>) {}
 }

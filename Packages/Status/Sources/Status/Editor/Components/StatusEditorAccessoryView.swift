@@ -1,9 +1,9 @@
 import DesignSystem
 import Env
 import Models
+import NukeUI
 import PhotosUI
 import SwiftUI
-import NukeUI
 
 struct StatusEditorAccessoryView: View {
   @EnvironmentObject private var preferences: UserPreferences
@@ -53,7 +53,7 @@ struct StatusEditorAccessoryView: View {
             Image(systemName: "archivebox")
           }
         }
-        
+
         if !viewModel.customEmojis.isEmpty {
           Button {
             isCustomEmojisSheetDisplay = true
@@ -167,7 +167,7 @@ struct StatusEditorAccessoryView: View {
     }
     .presentationDetents([.medium])
   }
-  
+
   private var customEmojisSheet: some View {
     NavigationStack {
       ScrollView {

@@ -111,7 +111,7 @@
 "timeline.add-remote.title" = "Andere lokale Timeline hinzufügen";
 "timeline.add.action.add" = "Hinzufügen";
 "timeline.filter.add-local" = "Lokale Timeline hinzufügen";
-"timeline.filter.lists" = "Listem";
+"timeline.filter.lists" = "Listen";
 "timeline.filter.local" = "Lokale Timelines";
 "timeline.filter.tags" = "Gefolgte Hashtags";
 
@@ -127,7 +127,7 @@
 "account.action.unblock" = "Block aufheben";
 "account.action.mute" = "Stummschalten";
 "account.action.unmute" = "Stummschaltung aufheben";
-"account.boosted-by" = "Geboosted von";
+"account.boosted-by" = "Geboostet von";
 "account.detail.about" = "Über";
 "account.detail.familiar-followers" = "Auch gefolgt von";
 "account.detail.n-fields %lld" = "%lld Felder";
@@ -163,7 +163,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Löschen";
 "conversations.action.mark-read" = "Als gelesen markieren";
-"conversations.empty.message" = "Suchst du etwas Liebe auf Social Media? Hier findest du alle deine direkten Nachriten und privaten Erwähnungen. Fröhliches Messaging! 📱❤️";
+"conversations.empty.message" = "Suchst du etwas Liebe auf Social Media? Hier findest du alle deine direkten Nachrichten und privaten Erwähnungen. Fröhliches Messaging! 📱❤️";
 "conversations.empty.title" = "Posteingang leer";
 "conversations.error.button" = "Wiederholen";
 "conversations.error.message" = "Fehler beim Laden deiner Nachrichten";
@@ -219,7 +219,7 @@
 "notifications.label.follow-request" = "möchte dir folgen";
 "notifications.label.mention" = "hat dich erwähnt";
 "notifications.label.poll" = "Umfrage beendet";
-"notifications.label.reblog" = "hat geboosted";
+"notifications.label.reblog" = "hat geboostet";
 "notifications.label.status" = "hat einen Beitrag gepostet";
 "notifications.label.update" = "hat einen Beitrag geändert";
 "notifications.menu-title.favorite" = "Favorit";
@@ -303,9 +303,9 @@
 "status.poll.frequency" = "Auswahlmöglichkeiten";
 "status.poll.option-n %lld" = "Option %lld";
 "status.post-from-%@" = "Post von %@";
-"status.row.was-boosted" = "hat geboosted";
+"status.row.was-boosted" = "hat geboostet";
 "status.row.was-reply" = "Antwort auf";
-"status.row.you-boosted" = "Du hast geboosted";
+"status.row.you-boosted" = "Du hast geboostet";
 "status.show-less" = "Weniger anzeigen";
 "status.show-more" = "Mehr anzeigen";
 "status.summary.at-time" = " um ";

@@ -7,8 +7,11 @@ class ConversationsListViewModel: ObservableObject {
   var client: Client?
 
   @Published var isLoadingFirstPage: Bool = true
+  @Published var isLoadingNextPage: Bool = false
   @Published var conversations: [Conversation] = []
   @Published var isError: Bool = false
+
+  var nextPage: LinkHandler?
 
   public init() {}
 
@@ -18,11 +21,29 @@ class ConversationsListViewModel: ObservableObject {
       isLoadingFirstPage = true
     }
     do {
-      conversations = try await client.get(endpoint: Conversations.conversations)
+      (conversations, nextPage) = try await client.getWithLink(endpoint: Conversations.conversations(maxId: nil))
+      if nextPage?.maxId == nil {
+        nextPage = nil
+      }
       isLoadingFirstPage = false
     } catch {
       isError = true
       isLoadingFirstPage = false
+    }
+  }
+
+  func fetchNextPage() async {
+    if let maxId = nextPage?.maxId, let client {
+      do {
+        isLoadingNextPage = true
+        var nextMessages: [Conversation] = []
+        (nextMessages, nextPage) = try await client.getWithLink(endpoint: Conversations.conversations(maxId: maxId))
+        conversations.append(contentsOf: nextMessages)
+        if nextPage?.maxId == nil {
+          nextPage = nil
+        }
+        isLoadingNextPage = false
+      } catch {}
     }
   }
 

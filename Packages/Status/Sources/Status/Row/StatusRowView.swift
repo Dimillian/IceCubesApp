@@ -70,6 +70,27 @@ public struct StatusRowView: View {
       .contextMenu {
         StatusRowContextMenu(viewModel: viewModel)
       }
+      .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
+      .accessibilityActions {
+        // Add the individual mentions as accessibility actions
+        ForEach(viewModel.status.mentions, id: \.id) { mention in
+          Button("@\(mention.username)") {
+            routerPath.navigate(to: .accountDetail(id: mention.id))
+          }
+        }
+
+        Button(viewModel.displaySpoiler ? "status.show-more" : "status.show-less") {
+          withAnimation {
+            viewModel.displaySpoiler.toggle()
+          }
+        }
+
+        Button("@\(viewModel.status.account.username)") {
+          routerPath.navigate(to: .accountDetail(id: viewModel.status.account.id))
+        }
+
+        StatusRowContextMenu(viewModel: viewModel)
+      }
       .background {
         Color.clear
           .contentShape(Rectangle())
@@ -106,6 +127,12 @@ public struct StatusRowView: View {
           Text("status.row.you-boosted")
         }
       }
+      .accessibilityElement()
+      .accessibilityLabel(
+        Text("\(viewModel.status.account.safeDisplayName)")
+          + Text(" ")
+          + Text(viewModel.status.account.username != account.account?.username ? "status.row.was-boosted" : "status.row.you-boosted")
+      )
       .font(.scaledFootnote)
       .foregroundColor(.gray)
       .fontWeight(.semibold)
@@ -161,10 +188,14 @@ public struct StatusRowView: View {
               }
             } label: {
               accountView(status: status)
-            }.buttonStyle(.plain)
+            }
+            .buttonStyle(.plain)
             Spacer()
             menuButton
+              .accessibilityHidden(true)
           }
+          .accessibilityElement()
+          .accessibilityLabel(Text("\(status.account.displayName), \(status.createdAt.formatted)"))
         }
         makeStatusContentView(status: status)
           .contentShape(Rectangle())
@@ -172,6 +203,10 @@ public struct StatusRowView: View {
             viewModel.navigateToDetail(routerPath: routerPath)
           }
       }
+    }
+    .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
+    .accessibilityAction {
+      viewModel.navigateToDetail(routerPath: routerPath)
     }
   }
 
@@ -188,8 +223,9 @@ public struct StatusRowView: View {
           Text(viewModel.displaySpoiler ? "status.show-more" : "status.show-less")
         }
         .buttonStyle(.bordered)
+        .accessibilityHidden(true)
       }
-      
+
       if !viewModel.displaySpoiler {
         HStack {
           EmojiTextApp(status.content, emojis: status.emojis, language: status.language)
@@ -199,14 +235,15 @@ public struct StatusRowView: View {
             })
           Spacer()
         }
-        
+
         makeTranslateView(status: status)
 
         if let poll = status.poll {
-          StatusPollView(poll: poll)
+          StatusPollView(poll: poll, status: status)
         }
 
         makeMediasView(status: status)
+          .accessibilityHidden(!viewModel.isFocused)
         makeCardView(status: status)
       }
     }
@@ -245,14 +282,15 @@ public struct StatusRowView: View {
     .foregroundColor(.gray)
     .contentShape(Rectangle())
   }
-  
+
   @ViewBuilder
   private func makeTranslateView(status: AnyStatus) -> some View {
     if let userLang = preferences.serverPreferences?.postLanguage,
        status.language != nil,
        userLang != status.language,
        !status.content.asRawText.isEmpty,
-        viewModel.translation == nil {
+       viewModel.translation == nil
+    {
       Button {
         Task {
           await viewModel.translate(userLang: userLang)
@@ -277,7 +315,7 @@ public struct StatusRowView: View {
       .fixedSize(horizontal: false, vertical: true)
     }
   }
-  
+
   @ViewBuilder
   private func makeMediasView(status: AnyStatus) -> some View {
     if !status.mediaAttachments.isEmpty {
@@ -297,7 +335,7 @@ public struct StatusRowView: View {
       }
     }
   }
-  
+
   @ViewBuilder
   private func makeCardView(status: AnyStatus) -> some View {
     if let card = status.card,

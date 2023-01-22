@@ -10,7 +10,7 @@ import SwiftUI
 public struct AccountDetailView: View {
   @Environment(\.openURL) private var openURL
   @Environment(\.redactionReasons) private var reasons
-  
+
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var preferences: UserPreferences
@@ -149,7 +149,7 @@ public struct AccountDetailView: View {
       Text("Error: \(error.localizedDescription)")
     }
   }
-  
+
   @ViewBuilder
   private var joinedAtView: some View {
     if let joinedAt = viewModel.account?.createdAt.asDate {
@@ -377,7 +377,7 @@ public struct AccountDetailView: View {
             if !viewModel.isCurrentUser {
               Button {
                 routerPath.presentedSheet = .mentionStatusEditor(account: account,
-                                                                  visibility: preferences.serverPreferences?.postVisibility ?? .pub)
+                                                                 visibility: preferences.serverPreferences?.postVisibility ?? .pub)
               } label: {
                 Label("account.action.mention", systemImage: "at")
               }
@@ -386,9 +386,9 @@ public struct AccountDetailView: View {
               } label: {
                 Label("account.action.message", systemImage: "tray.full")
               }
-              
+
               Divider()
-              
+
               if viewModel.relationship?.blocking == true {
                 Button {
                   Task {

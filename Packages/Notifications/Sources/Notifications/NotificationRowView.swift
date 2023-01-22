@@ -69,6 +69,16 @@ struct NotificationRowView: View {
                      })
                      .font(.scaledSubheadline)
                      .fontWeight(.semibold)
+                     .lineLimit(1)
+        if let status = notification.status, notification.supportedType == .mention {
+          Group {
+            Text(" ⸱ ")
+            Text(Image(systemName: status.visibility.iconName))
+          }
+          .font(.scaledFootnote)
+          .fontWeight(.regular)
+          .foregroundColor(.gray)
+        }
         Spacer()
       }
     }
@@ -86,6 +96,7 @@ struct NotificationRowView: View {
           StatusRowView(viewModel: .init(status: status, isCompact: true, showActions: true))
         } else {
           StatusRowView(viewModel: .init(status: status, isCompact: true, showActions: false))
+            .lineLimit(4)
             .foregroundColor(.gray)
         }
         Spacer()

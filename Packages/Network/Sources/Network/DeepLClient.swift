@@ -2,7 +2,7 @@ import Foundation
 
 public struct DeepLClient {
   private let endpoint = "https://api-free.deepl.com/v2/translate"
-  
+
   private var APIKey: String {
     if let path = Bundle.main.path(forResource: "Secret", ofType: "plist") {
       let secret = NSDictionary(contentsOfFile: path)
@@ -10,28 +10,29 @@ public struct DeepLClient {
     }
     return ""
   }
-  
+
   private var authorizationHeaderValue: String {
     "DeepL-Auth-Key \(APIKey)"
   }
-  
+
   public struct Response: Decodable {
     public struct Translation: Decodable {
       public let detectedSourceLanguage: String
       public let text: String
     }
+
     public let translations: [Translation]
   }
-  
+
   private var decoder: JSONDecoder {
     let decoder = JSONDecoder()
     decoder.keyDecodingStrategy = .convertFromSnakeCase
     return decoder
   }
-  
+
   public init() {}
-  
-  public func request(target: String, source: String?, text: String) async throws -> String {
+
+  public func request(target: String, source _: String?, text: String) async throws -> String {
     do {
       var components = URLComponents(string: endpoint)!
       var queryItems: [URLQueryItem] = []

@@ -119,8 +119,8 @@ struct AccountDetailHeaderView: View {
                                           relationship: relationship,
                                           shouldDisplayNotify: true,
                                           relationshipUpdated: { relationship in
-              viewModel.relationship = relationship
-            }))
+                                            viewModel.relationship = relationship
+                                          }))
           }
         }
       }

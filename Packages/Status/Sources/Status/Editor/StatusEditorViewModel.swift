@@ -53,9 +53,9 @@ public class StatusEditorViewModel: ObservableObject {
   @Published var mediasImages: [ImageContainer] = []
   @Published var replyToStatus: Status?
   @Published var embeddedStatus: Status?
-  
+
   @Published var customEmojis: [Emoji] = []
-  
+
   var canPost: Bool {
     statusText.length > 0 || !mediasImages.isEmpty
   }
@@ -126,9 +126,8 @@ public class StatusEditorViewModel: ObservableObject {
     }
   }
 
-  
   // MARK: - Status Text manipulations
-  
+
   func insertStatusText(text: String) {
     let string = statusText
     string.mutableString.insert(text, at: selectedRange.location)
@@ -195,7 +194,7 @@ public class StatusEditorViewModel: ObservableObject {
       }
     }
   }
-  
+
   private func processText() {
     statusText.addAttributes([.foregroundColor: UIColor(Color.label),
                               .underlineColor: .clear],
@@ -245,7 +244,7 @@ public class StatusEditorViewModel: ObservableObject {
                                  range: NSRange(location: range.location, length: range.length))
       }
 
-      var mediaAdded: Bool = false
+      var mediaAdded = false
       statusText.enumerateAttribute(.attachment, in: range) { attachment, range, _ in
         if let attachment = attachment as? NSTextAttachment, let image = attachment.image {
           mediasImages.append(.init(image: image, mediaAttachment: nil, error: nil))
@@ -254,7 +253,7 @@ public class StatusEditorViewModel: ObservableObject {
           mediaAdded = true
         }
       }
-      
+
       if mediaAdded {
         processMediasToUpload()
       }
@@ -262,6 +261,7 @@ public class StatusEditorViewModel: ObservableObject {
   }
 
   // MARK: - Shar sheet / Item provider
+
   private func processItemsProvider(items: [NSItemProvider]) {
     Task {
       var initialText: String = ""
@@ -290,21 +290,20 @@ public class StatusEditorViewModel: ObservableObject {
   }
 
   // MARK: - Polls
-  
+
   func resetPollDefaults() {
     pollOptions = ["", ""]
     pollDuration = .oneDay
     pollVotingFrequency = .oneVote
   }
-  
+
   private func getPollOptionsForAPI() -> [String]? {
     let options = pollOptions.filter { !$0.trimmingCharacters(in: .whitespaces).isEmpty }
     return options.isEmpty ? nil : options
   }
 
-
   // MARK: - Embeds
-  
+
   private func checkEmbed() {
     if let url = embeddedStatusURL,
        !statusText.string.contains(url.absoluteString)
@@ -447,7 +446,7 @@ public class StatusEditorViewModel: ObservableObject {
     if let index = indexOf(container: container) {
       do {
         let media: MediaAttachment = try await client.put(endpoint: Media.media(id: attachment.id,
-                                                                                 description: description))
+                                                                                description: description))
         mediasImages[index] = .init(image: nil, mediaAttachment: media, error: nil)
       } catch {}
     }
@@ -462,13 +461,14 @@ public class StatusEditorViewModel: ObservableObject {
                                         filename: "file",
                                         data: data)
   }
-  
+
   // MARK: - Custom emojis
+
   func fetchCustomEmojis() async {
     guard let client else { return }
     do {
       customEmojis = try await client.get(endpoint: CustomEmojis.customEmojis) ?? []
-    } catch { }
+    } catch {}
   }
 }
 

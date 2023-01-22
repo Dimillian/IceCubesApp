@@ -22,7 +22,7 @@ public class StatusRowViewModel: ObservableObject {
   @Published var displaySpoiler: Bool = false
   @Published var isEmbedLoading: Bool = true
   @Published var isFiltered: Bool = false
-  
+
   @Published var translation: String?
   @Published var isLoadingTranslation: Bool = false
 
@@ -223,7 +223,7 @@ public class StatusRowViewModel: ObservableObject {
     reblogsCount = status.reblog?.reblogsCount ?? status.reblogsCount
     repliesCount = status.reblog?.repliesCount ?? status.repliesCount
   }
-  
+
   func translate(userLang: String) async {
     let client = DeepLClient()
     do {

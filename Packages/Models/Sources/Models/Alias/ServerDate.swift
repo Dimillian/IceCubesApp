@@ -22,7 +22,7 @@ extension ServerDate {
     dateFormatter.dateStyle = .medium
     return dateFormatter
   }()
-  
+
   private static let calendar = Calendar(identifier: .gregorian)
 
   public var asDate: Date {
