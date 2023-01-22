@@ -58,6 +58,14 @@ public struct Status: AnyStatus, Decodable, Identifiable, Equatable, Hashable {
   public var viewId: String {
     id + createdAt + (editedAt ?? "")
   }
+  
+  public static func == (lhs: Status, rhs: Status) -> Bool {
+    lhs.id == rhs.id
+  }
+  
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(id)
+  }
 
   public let id: String
   public let content: HTMLString
@@ -123,6 +131,14 @@ public struct Status: AnyStatus, Decodable, Identifiable, Equatable, Hashable {
 public struct ReblogStatus: AnyStatus, Decodable, Identifiable, Equatable, Hashable {
   public var viewId: String {
     id + createdAt + (editedAt ?? "")
+  }
+  
+  public static func == (lhs: ReblogStatus, rhs: ReblogStatus) -> Bool {
+    lhs.id == rhs.id
+  }
+  
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(id)
   }
 
   public let id: String
