@@ -105,6 +105,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1AC0C84F297DF443003D69EE /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "en-AU"; path = "en-AU.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
+		1AC0C850297DF443003D69EE /* en-AU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-AU"; path = "en-AU.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		639CDF9B296AC82F00C35E58 /* SafariRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariRouter.swift; sourceTree = "<group>"; };
 		7429BCE3297C55D00069A946 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		7429BCE7297C5D010069A946 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = nl; path = nl.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
@@ -499,6 +501,7 @@
 				es,
 				"zh-Hans",
 				it,
+				"en-AU",
 			);
 			mainGroup = 9FBFE630292A715500C250E9;
 			packageReferences = (
@@ -623,6 +626,7 @@
 				7429BCE9297C5D030069A946 /* es */,
 				7429BCEB297D65380069A946 /* zh-Hans */,
 				7429BCEC297D65390069A946 /* it */,
+				1AC0C84F297DF443003D69EE /* en-AU */,
 			);
 			name = Localizable.stringsdict;
 			sourceTree = "<group>";
@@ -636,6 +640,7 @@
 				9606B7A1297AD2BB00C1FB75 /* es */,
 				C465A53D297C5E0C00864FB7 /* zh-Hans */,
 				9F38C233297D03120018F11E /* it */,
+				1AC0C850297DF443003D69EE /* en-AU */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
