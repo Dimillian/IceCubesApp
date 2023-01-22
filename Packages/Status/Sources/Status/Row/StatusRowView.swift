@@ -197,7 +197,7 @@ public struct StatusRowView: View {
               .accessibilityHidden(true)
           }
           .accessibilityElement()
-          .accessibilityLabel(Text("\(status.account.displayName), \(status.createdAt.formatted)"))
+          .accessibilityLabel(Text("\(status.account.displayName), \(status.createdAt.relativeFormatted)"))
         }
         makeStatusContentView(status: status)
           .contentShape(Rectangle())
@@ -266,7 +266,7 @@ public struct StatusRowView: View {
         Group {
           Text("@\(status.account.acct)") +
             Text(" ⸱ ") +
-            Text(status.createdAt.formatted) +
+            Text(status.createdAt.relativeFormatted) +
             Text(" ⸱ ") +
             Text(Image(systemName: viewModel.status.visibility.iconName))
         }

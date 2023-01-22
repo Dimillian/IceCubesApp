@@ -29,12 +29,8 @@ extension ServerDate {
     Self.createdAtDateFormatter.date(from: self)!
   }
 
-  public var formatted: String {
-    if Self.calendar.numberOfDaysBetween(asDate, and: Date()) > 1 {
-      return Self.createdAtShortDateFormatted.string(from: asDate)
-    } else {
-      return Self.createdAtRelativeFormatter.localizedString(for: asDate, relativeTo: Date())
-    }
+  public var relativeFormatted: String {
+    return Self.createdAtRelativeFormatter.localizedString(for: asDate, relativeTo: Date())
   }
 }
 

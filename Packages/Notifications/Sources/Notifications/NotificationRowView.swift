@@ -62,7 +62,7 @@ struct NotificationRowView: View {
                          .font(.scaledFootnote)
                          .fontWeight(.regular)
                          .foregroundColor(.gray) +
-                         Text(notification.createdAt.formatted)
+                         Text(notification.createdAt.relativeFormatted)
                          .font(.scaledFootnote)
                          .fontWeight(.regular)
                          .foregroundColor(.gray)

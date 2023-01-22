@@ -31,7 +31,7 @@ struct ConversationsListRow: View {
                 .foregroundColor(theme.tintColor)
                 .frame(width: 10, height: 10)
             }
-            Text(conversation.lastStatus.createdAt.formatted)
+            Text(conversation.lastStatus.createdAt.relativeFormatted)
               .font(.scaledFootnote)
           }
           Text(conversation.lastStatus.content.asRawText)
