@@ -73,7 +73,7 @@
 "settings.push.favorites" = "Favoritos";
 "settings.push.follows" = "Siguiendo";
 "settings.push.main-toggle" = "Notificaciones";
-"settings.push.main-toggle.description" = "Recibe notificaciones sobre nuevo eventos";
+"settings.push.main-toggle.description" = "Recibe notificaciones sobre nuevos eventos";
 "settings.push.mentions" = "Menciones";
 "settings.push.navigation-title" = "Notificaciones";
 "settings.push.new-posts" = "Nuevas publicaciones";
@@ -84,7 +84,7 @@
 "settings.support.alert.error.message" = "Ha ocurrido un error procesando tu pago dentro de la app, por favor vuelve a intentarlo.";
 "settings.support.alert.message" = "¡Muchas gracias por tu propina! ¡Se agradece enormemente!";
 "settings.support.alert.title" = "¡Gracias!";
-"settings.support.message-from-dev" = "¡Hola! Me llamo Thomas y adoro crear aplicaciones de código abierto. Ice Cubes es definitivamente una de las que más orgulloso estoy hasta la fecha - y seamos honestos, también es una de las que más mantenimiento requiere debido a los constantes cambios en el entorno de Mastodon y las redes sociales. Si te encanta usar Ice Cubes, considera dejar una pequeña propina. Me alegrará el día (y ayudará a mantener la app en perfecto funcionamiento para ti). 🚀";
+"settings.support.message-from-dev" = "¡Hola! Me llamo Thomas y adoro crear aplicaciones de código abierto. Ice Cubes es definitivamente una de las que más orgulloso estoy hasta la fecha - y siendo honestos, también es una de las que más mantenimiento requiere debido a los constantes cambios en el entorno de Mastodon y las redes sociales. Si te encanta usar Ice Cubes, considera dejar una pequeña propina. Me alegrará el día (y ayudará a mantener la app en perfecto funcionamiento para ti). 🚀";
 "settings.support.navigation-title" = "Apoya a Ice Cubes";
 "settings.support.one.subtitle" = "Pequeña, pero bonita, ¡y deliciosa!";
 "settings.support.one.title" = "🍬 Pequeña propina";
@@ -138,9 +138,9 @@
 "account.edit.account-settings.private" = "Privado";
 "account.edit.account-settings.section-title" = "Ajustes de cuenta";
 "account.edit.display-name" = "Nombre a mostrar";
-"account.edit.error.save.message" = "Ha ocurrido un error al intentar grabar tu perfil, por favor vuelve a intentarlo.";
+"account.edit.error.save.message" = "Ha ocurrido un error al intentar guardar tu perfil, por favor vuelve a intentarlo.";
 "account.edit.error.save.title" = "Error al guardar tu perfil";
-"account.edit.navigation-title" = "Editar Perfil";
+"account.edit.navigation-title" = "Editar perfil";
 "account.edit.post-settings.privacy" = "Privacidad por defecto";
 "account.edit.post-settings.section-title" = "Ajustes de publicaciones";
 "account.edit.post-settings.sensitive" = "Contenido sensible";
@@ -179,8 +179,8 @@
 "explore.search.message-%@" = "Desde esta pantalla puedes buscar cualquier cosa en %@";
 "explore.search.prompt" = "Busca usuarios, publicaciones y etiquetas";
 "explore.search.title" = "Busca en tu instancia";
-"explore.search.empty.message" = "This query returned no search results, please try another one.";
-"explore.search.empty.title" = "No search results";
+"explore.search.empty.message" = "Esta consulta no devolvió ningún resultado, inténtalo con otra.";
+"explore.search.empty.title" = "Sin resultados de búsqueda";
 "explore.section.posts" = "Publicaciones";
 "explore.section.suggested-users" = "Sugerencias de usuarios";
 "explore.section.tags" = "Etiquetas";
@@ -209,7 +209,7 @@
 "lists.name.message" = "Introduce el nombre para tu lista";
 
 // MARK: Package: Notifications
-"notifications.empty.message" = "¿Notificaciones? ¿Qué notificaciones? Tu buzón de notificaciones parece tan vacío. ¡Sigue siendo así de genial! 📱😎";
+"notifications.empty.message" = "¿Notificaciones? ¿Qué notificaciones? Tu buzón de notificaciones parece tan vacío. ¡Sigue siendo genial! 📱😎";
 "notifications.empty.title" = "No hay notificaciones";
 "notifications.error.message" = "Ha ocurrido un error al cargar tus notificaciones, por favor vuelve a intentarlo.";
 "notifications.error.title" = "Ha ocurrido un error";
@@ -283,8 +283,8 @@
 "status.editor.spoiler" = "Escribe tu advertencia aquí";
 "status.editor.text.placeholder" = "¿En qué estás pensando?";
 "status.editor.visibility" = "Visibilidad de la publicación";
-"status.error.loading.message" = "Ha ocurrido un error al cargar las publicaciones, por favor vuelve a intentarlo.";
-"status.error.message" = "Ha ocurrido un error al cargar el contexto de esta publicación, por favor vuelve a intentarlo.";
+"status.error.loading.message" = "Ha ocurrido un error al cargar las publicaciones, por favor, vuelve a intentarlo.";
+"status.error.message" = "Ha ocurrido un error al cargar el contexto de esta publicación, por favor, vuelve a intentarlo.";
 "status.error.title" = "Ha ocurrido un error";
 "status.filter.filtered-by-%@" = "Filtrado por: %@";
 "status.filter.show-anyway" = "Mostrar de todas formas";
