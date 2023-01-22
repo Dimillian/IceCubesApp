@@ -155,6 +155,7 @@
 		9FD542E52962D2CE0045321A /* Lists */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Lists; path = Packages/Lists; sourceTree = "<group>"; };
 		9FE151A5293C90F900E9683D /* IconSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSelectorView.swift; sourceTree = "<group>"; };
 		9FE3DB55296FEF5800628CB0 /* AppAccount */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppAccount; path = Packages/AppAccount; sourceTree = "<group>"; };
+		C465A53D297C5E0C00864FB7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		E9B576C429743F4C00BCE646 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E9B576CC2974AAAF00BCE646 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F355EEDA297A8BD500E362C0 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -477,6 +478,7 @@
 				de,
 				nl,
 				es,
+				"zh-Hans",
 			);
 			mainGroup = 9FBFE630292A715500C250E9;
 			packageReferences = (
@@ -596,6 +598,7 @@
 				E9B576CC2974AAAF00BCE646 /* de */,
 				F355EEDA297A8BD500E362C0 /* nl */,
 				9606B7A1297AD2BB00C1FB75 /* es */,
+				C465A53D297C5E0C00864FB7 /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
