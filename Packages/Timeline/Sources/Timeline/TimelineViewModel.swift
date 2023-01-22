@@ -25,6 +25,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
           statuses = []
           pendingStatuses = []
           tag = nil
+          digest = nil
         }
         await fetchStatuses(userIntent: false)
         switch timeline {
@@ -38,6 +39,9 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
   }
 
   @Published var tag: Tag?
+  @Published var digest: Digest?
+  
+  var acct: String?
 
   enum PendingStatusesState {
     case refresh, stream
@@ -67,21 +71,26 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
 
   func fetchStatuses(userIntent: Bool) async {
     guard let client else { return }
-    // TODO: Check if the timeline is TimelineFilter.digest
-    // TODO: fetch the statuses until specified time (last 24 hours) and then run the algorithm
     do {
       if statuses.isEmpty {
         pendingStatuses = []
         statusesState = .loading
-        statuses = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
-                                                                    maxId: nil,
-                                                                    minId: nil,
-                                                                    offset: statuses.count))
+        if timeline == TimelineFilter.digest {
+          statuses = await digestTimeline()
+        } else {
+          statuses = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
+                                                           maxId: nil,
+                                                           minId: nil,
+                                                           offset: statuses.count))
+        }
         withAnimation {
           statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
         }
       } else if let first = pendingStatuses.first ?? statuses.first {
-        var newStatuses: [Status] = await fetchNewPages(minId: first.id, maxPages: 20)
+        if timeline == TimelineFilter.digest {
+          return
+        }
+        var newStatuses: [Status] = await fetchNewPages(minId: first.id, maxPages: 20, maxStatuses: nil)
         if userIntent || !pendingStatusesEnabled {
           pendingStatuses.insert(contentsOf: newStatuses, at: 0)
           statuses.insert(contentsOf: pendingStatuses, at: 0)
@@ -102,8 +111,56 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
       print("timeline parse error: \(error)")
     }
   }
+  
+  func digestTimeline() async -> [Status] {
+    // fetch all the statuses until specified time (last 24 hours) and then run the algorithm
+    let hoursAgo = 24
+    let percentilePopularity = Double(95)
 
-  func fetchNewPages(minId: String, maxPages: Int) async -> [Status] {
+    // Get as many posts as possible
+    let earlyDate = Calendar.current.date(
+      byAdding: .hour,
+      value: -hoursAgo,
+      to: Date()
+    )!
+    let timestamp = ISO8601DateFormatter().string(from: earlyDate)
+    let allStatuses = await fetchNewPages(minId: timestamp, maxPages: nil, maxStatuses: 1000)
+
+    var uninteractedStatuses: [Status] = []
+    var allPostsScores: [Double] = []
+    var postsSeen: Set<String> = []
+    // ignore my posts or posts I interacted with
+    for status in allStatuses
+      where
+        status.isRelevant() &&
+        !status.didInteract() &&
+        !postsSeen.contains(status.reblog?.url ?? status.url ?? "") &&
+        acct?.lowercased() != status.account.acct.lowercased() {
+          allPostsScores.append(status.popularity())
+          uninteractedStatuses.append(status)
+          postsSeen.insert(status.reblog?.url ?? status.url ?? "")
+    }
+
+    // Calculate the popularity criteria (percentile) based of all statuses metric
+    let scores = allPostsScores.sorted()
+    let position = Int(ceil((Double(scores.count) * percentilePopularity) / 100)) - 1
+    let percentile_threshold = scores[position]
+
+    // Filter out the statuses that are bellow the percentile of acceptance for pupularity
+    var popularStatuses: [Status] = []
+    for status in uninteractedStatuses where status.popularity() >= percentile_threshold {
+      popularStatuses.append(status)
+    }
+    // Sort for descending popularity (most popular first)
+    popularStatuses.sort {
+      $0.popularity() > $1.popularity()
+    }
+
+    digest = Digest(generatedAt: timestamp, hoursSince: hoursAgo, totalStatuses: uninteractedStatuses.count)
+    return popularStatuses
+  }
+
+  func fetchNewPages(minId: String, maxPages: Int?, maxStatuses: Int?) async -> [Status] {
     guard let client else { return [] }
     var pagesLoaded = 0
     var allStatuses: [Status] = []
@@ -114,7 +171,8 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
                                                                                          minId: latestMinId,
                                                                                          offset: statuses.count)),
         !newStatuses.isEmpty,
-        pagesLoaded < maxPages
+        pagesLoaded < (maxPages ?? Int.max),
+        allStatuses.count < (maxStatuses ?? Int.max)
       {
         pagesLoaded += 1
         allStatuses.insert(contentsOf: newStatuses, at: 0)

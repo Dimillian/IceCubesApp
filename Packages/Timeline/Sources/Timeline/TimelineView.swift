@@ -41,6 +41,8 @@ public struct TimelineView: View {
           LazyVStack {
             tagHeaderView
               .padding(.bottom, 16)
+            digestHeaderView
+              .padding(.bottom, 16)
             switch viewModel.timeline {
             case .remoteLocal:
               StatusesListView(fetcher: viewModel, isRemote: true)
@@ -65,6 +67,7 @@ public struct TimelineView: View {
       if viewModel.client == nil {
         viewModel.client = client
         viewModel.timeline = timeline
+        viewModel.acct = account.account?.acct
       }
     }
     .refreshable {
@@ -133,6 +136,25 @@ public struct TimelineView: View {
         }
       }
       .padding(.top, 6)
+    }
+  }
+  
+  @ViewBuilder
+  private var digestHeaderView: some View {
+    if let digest = viewModel.digest {
+      HStack {
+      VStack(alignment: .leading, spacing: 4) {
+        Text("timeline.digest.title")
+          .font(.scaledHeadline)
+        Text("timeline.digest-of-n-posts-over-n-hours \(digest.totalStatuses) \(digest.hoursSince)")
+          .font(.scaledFootnote)
+          .foregroundColor(.gray)
+        }
+        Spacer()
+      }
+      .padding(.horizontal, .layoutPadding)
+      .padding(.vertical, 8)
+      .background(theme.secondaryBackgroundColor)
     }
   }
 

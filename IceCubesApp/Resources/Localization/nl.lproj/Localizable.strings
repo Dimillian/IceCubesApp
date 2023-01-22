@@ -105,6 +105,8 @@
 "tab.settings" = "Instellingen";
 "tab.timeline" = "Tijdlijn";
 "tab.trending" = "Trending";
+"timeline.digest" = "Digest";
+
 
 // MARK: Timeline
 "timeline.%@-is-valid" = "%@ is een geldige instantie";
@@ -241,6 +243,8 @@
 "timeline.local" = "Lokaal";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld recente posts van %lld deelnemers";
 "timeline.trending" = "Trending";
+"timeline.digest.title" = "Popular posts you may have missed";
+"timeline.digest-of-n-posts-over-n-hours %lld %lld" = "Analyzed %lld posts from your timeline over the last %lld hours";
 
 // MARK: Package: Status
 "status.action.translate" = "Vertalen";

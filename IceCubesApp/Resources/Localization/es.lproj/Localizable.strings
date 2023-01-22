@@ -238,8 +238,11 @@
 "timeline.federated" = "Federado";
 "timeline.home" = "Inicio";
 "timeline.local" = "Local";
+"timeline.digest" = "Digest";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld publicaciones recientes de %lld participantes";
 "timeline.trending" = "Tendencia";
+"timeline.digest.title" = "Popular posts you may have missed";
+"timeline.digest-of-n-posts-over-n-hours %lld %lld" = "Analyzed %lld posts from your timeline over the last %lld hours";
 
 // MARK: Package: Status
 "status.action.translate" = "Traducir";

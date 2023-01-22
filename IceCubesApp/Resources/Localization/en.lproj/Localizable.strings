@@ -240,7 +240,10 @@
 "timeline.home" = "Home";
 "timeline.local" = "Local";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld recent posts from %lld participants";
+"timeline.digest.title" = "Popular posts you may have missed";
+"timeline.digest-of-n-posts-over-n-hours %lld %lld" = "Analyzed %lld posts from your timeline over the last %lld hours";
 "timeline.trending" = "Trending";
+"timeline.digest" = "Digest";
 
 // MARK: Package: Status
 "status.action.translate" = "Translate";

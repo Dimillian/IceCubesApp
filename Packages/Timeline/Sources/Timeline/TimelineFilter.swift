@@ -17,7 +17,7 @@ public enum TimelineFilter: Hashable, Equatable {
     if !client.isAuth {
       return [.local, .federated, .trending]
     }
-    return [.home, .local, .federated, .trending]
+    return [.home, .local, .federated, .trending, .digest]
   }
 
   public func title() -> String {
