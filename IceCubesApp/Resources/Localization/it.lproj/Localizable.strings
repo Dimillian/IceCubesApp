@@ -98,7 +98,7 @@
 "settings.support.four.subtitle" = "It'll go a long way to keep Ice Cubes running!";
 "settings.timeline.add" = "Aggiungi una timeline locale";
 "settings.title" = "Impostazioni";
-"settings.rate" = "Rate Ice Cubes";
+"settings.rate" = "Valuta Ice Cubes";
 
 // MARK: Tabs
 "tab.explore" = "Esplora";
@@ -257,7 +257,7 @@
 "status.action.mention" = "Menziona";
 "status.action.message" = "Invia messaggio";
 "status.action.pin" = "Fissa";
-"status.action.post" = "Invia messaggio";
+"status.action.post" = "Invia";
 "status.action.quote" = "Cita il messaggio";
 "status.action.reply" = "Rispondi";
 "status.action.section.your-post" = "I tuoi messaggi";
@@ -306,7 +306,7 @@
 "status.poll.frequency" = "Frequenza di voto";
 "status.poll.option-n %lld" = "Opzione %lld";
 "status.post-from-%@" = "Messagio da %@";
-"status.row.was-boosted" = "Condiviso";
+"status.row.was-boosted" = "ha condiviso";
 "status.row.was-reply" = "Risposta per";
 "status.row.you-boosted" = "Tu hai condiviso";
 "status.show-less" = "Mostra meno";
