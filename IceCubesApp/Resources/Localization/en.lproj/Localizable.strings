@@ -216,11 +216,11 @@
 // MARK: Package: Notifications
 "notifications.empty.message" = "Notifications? What notifications? Your notification inbox is looking so empty. Keep on being awesome! 📱😎";
 "notifications.empty.title" = "No notifications";
-"notifications.error.message" = "An error occured while loading your notifications, please retry.";
-"notifications.error.title" = "An error occured";
+"notifications.error.message" = "An error occurred while loading your notifications, please try again.";
+"notifications.error.title" = "An error occurred";
 "notifications.label.favorite" = "starred";
 "notifications.label.follow" = "followed you";
-"notifications.label.follow-request" = "request to follow you";
+"notifications.label.follow-request" = "requested to follow you";
 "notifications.label.mention" = "mentioned you";
 "notifications.label.poll" = "poll ended";
 "notifications.label.reblog" = "boosted";
@@ -287,9 +287,9 @@
 "status.editor.spoiler" = "Spoiler Text";
 "status.editor.text.placeholder" = "What's on your mind?";
 "status.editor.visibility" = "Post visibility";
-"status.error.loading.message" = "An error occured while loading posts, please try again.";
-"status.error.message" = "An error occured while this post context, please try again.";
-"status.error.title" = "An error occured";
+"status.error.loading.message" = "An error occurred while loading posts, please try again.";
+"status.error.message" = "An error occurred in the context of this post, please try again.";
+"status.error.title" = "An error occurred";
 "status.filter.filtered-by-%@" = "Filtered by: %@";
 "status.filter.show-anyway" = "Show anyway";
 "status.image.alt-text.abbreviation" = "ALT";
