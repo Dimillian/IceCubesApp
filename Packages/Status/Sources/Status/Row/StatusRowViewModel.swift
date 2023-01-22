@@ -230,10 +230,12 @@ public class StatusRowViewModel: ObservableObject {
       withAnimation {
         isLoadingTranslation = true
       }
-      let translation = try await client.request(target: userLang, source: status.language, text: status.content.asRawText)
+      let translation = try await client.request(target: userLang,
+                                                 source: status.language,
+                                                 text: status.reblog?.content.asRawText ?? status.content.asRawText)
       withAnimation {
-        isLoadingTranslation = false
         self.translation = translation
+        isLoadingTranslation = false
       }
     } catch {}
   }

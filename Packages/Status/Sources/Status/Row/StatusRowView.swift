@@ -309,7 +309,7 @@ public struct StatusRowView: View {
       }
     }
     
-    if let translation = viewModel.translation {
+    if let translation = viewModel.translation, !viewModel.isLoadingTranslation {
       GroupBox {
         VStack(alignment: .leading, spacing: 4) {
           Text(translation)
