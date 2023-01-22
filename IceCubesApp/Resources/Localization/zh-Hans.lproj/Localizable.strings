@@ -237,7 +237,6 @@
 "notifications.tab.mentions" = "提及";
 
 // MARK: Package: Timeline
-"timeline.n-new-posts %lld" = "%lld 个新嘟文";
 "timeline.federated" = "跨站";
 "timeline.home" = "主页";
 "timeline.local" = "本地";
