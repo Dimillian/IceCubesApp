@@ -23,9 +23,9 @@
 "enum.avatar-position.top" = "Boven";
 "enum.avatar-shape.circle" = "Cirkel";
 "enum.avatar-shape.rounded" = "Afgerond";
-"enum.status-actions-display.all" = "Tekst en symbolen";
-"enum.status-actions-display.no-buttons" = "Alleen tekst";
-"enum.status-actions-display.only-buttons" = "Alleen symbolen";
+"enum.status-actions-display.all" = "Met tekst";
+"enum.status-actions-display.no-buttons" = "Geen knoppen";
+"enum.status-actions-display.only-buttons" = "Zonder tekst";
 "enum.status-display-style.compact" = "Compact";
 "enum.status-display-style.large" = "Groot";
 
