@@ -233,7 +233,9 @@ public struct StatusRowView: View {
           EmojiTextApp(status.content, emojis: status.emojis, language: status.language)
             .font(.scaledBody)
             .environment(\.openURL, OpenURLAction { url in
-              routerPath.handleStatus(status: status, url: url)
+              guard !url.absoluteString.hasPrefix("mailto:") else { return .discarded }
+
+              return routerPath.handleStatus(status: status, url: url)
             })
           Spacer()
         }
