@@ -110,6 +110,8 @@
 		7429BCE7297C5D010069A946 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = nl; path = nl.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		7429BCE8297C5D020069A946 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = de; path = de.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		7429BCE9297C5D030069A946 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = es; path = es.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		7429BCEB297D65380069A946 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
+		7429BCEC297D65390069A946 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = it; path = it.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		9606B7A1297AD2BB00C1FB75 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9F24EEB729360C330042359D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9F29553D292B67B600E0E81B /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Network; path = Packages/Network; sourceTree = "<group>"; };
@@ -619,6 +621,8 @@
 				7429BCE7297C5D010069A946 /* nl */,
 				7429BCE8297C5D020069A946 /* de */,
 				7429BCE9297C5D030069A946 /* es */,
+				7429BCEB297D65380069A946 /* zh-Hans */,
+				7429BCEC297D65390069A946 /* it */,
 			);
 			name = Localizable.stringsdict;
 			sourceTree = "<group>";
