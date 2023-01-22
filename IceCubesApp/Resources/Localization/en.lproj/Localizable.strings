@@ -95,6 +95,7 @@
 "settings.support.two.title" = "☕️ Nice Tip";
 "settings.timeline.add" = "Add a local timeline";
 "settings.title" = "Settings";
+"settings.rate" = "Rate Ice Cubes";
 
 // MARK: Tabs
 "tab.explore" = "Explore";

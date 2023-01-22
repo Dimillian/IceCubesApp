@@ -95,6 +95,7 @@
 "settings.support.two.title" = "☕️ Schönes Trinkgeld";
 "settings.timeline.add" = "Lokale Timeline hinzufügen";
 "settings.title" = "Einstellungen";
+"settings.rate" = "Rate Ice Cubes";
 
 // MARK: Tabs
 "tab.explore" = "Entdecken";

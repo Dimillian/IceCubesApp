@@ -95,6 +95,7 @@
 "settings.support.two.title" = "☕️ 很不错的捐赠";
 "settings.timeline.add" = "添加一个本地时间线";
 "settings.title" = "设置";
+"settings.rate" = "Rate Ice Cubes";
 
 // MARK: Tabs
 "tab.explore" = "探索";
