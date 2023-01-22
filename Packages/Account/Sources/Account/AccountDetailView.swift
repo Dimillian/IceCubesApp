@@ -452,7 +452,7 @@ public struct AccountDetailView: View {
 
             if let url = account.url {
               ShareLink(item: url)
-              Button { openURL(url) } label: {
+              Button { UIApplication.shared.open(url) } label: {
                 Label("status.action.view-in-browser", systemImage: "safari")
               }
             }
