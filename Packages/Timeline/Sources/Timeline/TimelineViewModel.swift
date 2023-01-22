@@ -115,9 +115,8 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
   func digestTimeline() async -> [Status] {
     // fetch all the statuses until specified time (last 24 hours) and then run the algorithm
     let hoursAgo = 24
-    let percentilePopularity = Double(95)
 
-    // Get as many posts as possible
+    // Get as many posts as possible (max seems to be 400 though https://github.com/mastodon/mastodon/issues/2301)
     let earlyDate = Calendar.current.date(
       byAdding: .hour,
       value: -hoursAgo,
@@ -126,8 +125,8 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
     let timestamp = ISO8601DateFormatter().string(from: earlyDate)
     let allStatuses = await fetchNewPages(minId: timestamp, maxPages: nil, maxStatuses: 1000)
 
-    var uninteractedStatuses: [Status] = []
-    var allPostsScores: [Double] = []
+    var originals: [Status] = []
+    var boosts: [Status] = []
     var postsSeen: Set<String> = []
     // ignore my posts or posts I interacted with
     for status in allStatuses
@@ -136,28 +135,19 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
         !status.didInteract() &&
         !postsSeen.contains(status.reblog?.url ?? status.url ?? "") &&
         acct?.lowercased() != status.account.acct.lowercased() {
-          allPostsScores.append(status.popularity())
-          uninteractedStatuses.append(status)
+          if status.reblog == nil {
+            originals.append(status)
+          } else {
+            boosts.append(status)
+          }
           postsSeen.insert(status.reblog?.url ?? status.url ?? "")
     }
 
-    // Calculate the popularity criteria (percentile) based of all statuses metric
-    let scores = allPostsScores.sorted()
-    let position = Int(ceil((Double(scores.count) * percentilePopularity) / 100)) - 1
-    let percentile_threshold = scores[position]
-
-    // Filter out the statuses that are bellow the percentile of acceptance for pupularity
-    var popularStatuses: [Status] = []
-    for status in uninteractedStatuses where status.popularity() >= percentile_threshold {
-      popularStatuses.append(status)
-    }
-    // Sort for descending popularity (most popular first)
-    popularStatuses.sort {
-      $0.popularity() > $1.popularity()
-    }
-
-    digest = Digest(generatedAt: timestamp, hoursSince: hoursAgo, totalStatuses: uninteractedStatuses.count)
-    return popularStatuses
+    digest = Digest(
+      generatedAt: timestamp,
+      totalStatuses: originals.count + boosts.count
+    )
+    return originals.gatherPopular(percentile: 95) + boosts.gatherPopular(percentile: 95)
   }
 
   func fetchNewPages(minId: String, maxPages: Int?, maxStatuses: Int?) async -> [Status] {

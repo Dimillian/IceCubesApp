@@ -146,7 +146,7 @@ public struct TimelineView: View {
       VStack(alignment: .leading, spacing: 4) {
         Text("timeline.digest.title")
           .font(.scaledHeadline)
-        Text("timeline.digest-of-n-posts-over-n-hours \(digest.totalStatuses) \(digest.hoursSince)")
+        Text("timeline.digest-of-n-posts \(digest.totalStatuses)")
           .font(.scaledFootnote)
           .foregroundColor(.gray)
         }

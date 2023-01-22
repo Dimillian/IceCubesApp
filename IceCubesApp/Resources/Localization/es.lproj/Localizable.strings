@@ -242,7 +242,7 @@
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld publicaciones recientes de %lld participantes";
 "timeline.trending" = "Tendencia";
 "timeline.digest.title" = "Popular posts you may have missed";
-"timeline.digest-of-n-posts-over-n-hours %lld %lld" = "Analyzed %lld posts from your timeline over the last %lld hours";
+"timeline.digest-of-n-posts %lld" = "Based on %lld posts from your timeline";
 
 // MARK: Package: Status
 "status.action.translate" = "Traducir";

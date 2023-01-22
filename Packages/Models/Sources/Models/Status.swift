@@ -118,6 +118,39 @@ public struct Status: AnyStatus, Decodable, Identifiable {
   public static func placeholders() -> [Status] {
     [.placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder()]
   }
+
+  public func didInteract() -> Bool {
+    var postInfo: AnyStatus = self
+    if let rebloggedStatus = reblog {
+      postInfo = rebloggedStatus
+    }
+    return (postInfo.reblogged ?? false) || (postInfo.favourited ?? false) || (postInfo.bookmarked ?? false)
+  }
+
+  public func isRelevant() -> Bool {
+    var postInfo: AnyStatus = self
+    if let rebloggedStatus = reblog {
+      postInfo = rebloggedStatus
+    }
+    return postInfo.repliesCount > 0 || postInfo.reblogsCount > 0 || postInfo.favouritesCount > 0
+  }
+
+  public var popularity: Double {
+    var postInfo: AnyStatus = self
+    if let rebloggedStatus = reblog {
+      postInfo = rebloggedStatus
+    }
+    let criterias = [
+      Double(postInfo.reblogsCount + 1),
+      Double(postInfo.favouritesCount + 1),
+      Double(postInfo.repliesCount + 1)
+    ]
+    var weight = Double(0)
+    if postInfo.account.followersCount > 0 {
+      weight = 1 / sqrt(Double(postInfo.account.followersCount))
+    }
+    return pow(criterias.reduce(Double(1), {x, y in x * y}), 1/Double(criterias.count)) * weight
+  }
 }
 
 public struct ReblogStatus: AnyStatus, Decodable, Identifiable {

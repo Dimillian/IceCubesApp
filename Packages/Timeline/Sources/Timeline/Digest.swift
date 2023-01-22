@@ -2,46 +2,36 @@ import Models
 import Foundation
 
 public struct Digest: Identifiable {
-  public let generatedAt: String
-  public let hoursSince: Int
-  public let totalStatuses: Int
-
   public var id: String {
-    "\(generatedAt)-\(hoursSince)"
+    "\(generatedAt)"
   }
+
+  public let generatedAt: String
+  public let totalStatuses: Int
 }
 
-public extension Status {
-  func didInteract() -> Bool {
-    var postInfo: AnyStatus = self
-    if let rebloggedStatus = reblog {
-      postInfo = rebloggedStatus
+public extension [Status] {
+  func gatherPopular(percentile: Double) -> [Status] {
+    var allStatusesScores: [Double] = [];
+    for status in self {
+      allStatusesScores.append(status.popularity)
     }
-    return (postInfo.reblogged ?? false) || (postInfo.favourited ?? false) || (postInfo.bookmarked ?? false)
-  }
 
-  func isRelevant() -> Bool {
-    var postInfo: AnyStatus = self
-    if let rebloggedStatus = reblog {
-      postInfo = rebloggedStatus
-    }
-    return postInfo.repliesCount > 0 || postInfo.reblogsCount > 0 || postInfo.favouritesCount > 0
-  }
+    // Calculate the popularity criteria (percentile) based of all statuses metric
+    let scores = allStatusesScores.sorted()
+    let position = Int(ceil((Double(scores.count) * percentile) / 100)) - 1
+    let percentileThreshold = scores[position]
 
-  func popularity() -> Double {
-    var postInfo: AnyStatus = self
-    if let rebloggedStatus = reblog {
-      postInfo = rebloggedStatus
+    // Filter out the statuses that are bellow the percentile of acceptance for pupularity
+    var popularStatuses: [Status] = []
+    for status in self where status.popularity >= percentileThreshold {
+      popularStatuses.append(status)
     }
-    let criterias = [
-      Double(postInfo.reblogsCount + 1),
-      Double(postInfo.favouritesCount + 1),
-      Double(postInfo.repliesCount + 1)
-    ]
-    var weight = Double(0)
-    if postInfo.account.followersCount > 0 {
-      weight = 1 / sqrt(Double(postInfo.account.followersCount))
+    // Sort for descending popularity (most popular first)
+    popularStatuses.sort {
+      $0.popularity > $1.popularity
     }
-    return pow(criterias.reduce(Double(1), {x, y in x * y}), 1/Double(criterias.count)) * weight
+
+    return popularStatuses
   }
 }
