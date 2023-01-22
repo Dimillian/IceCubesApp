@@ -173,6 +173,7 @@
 "conversations.error.message" = "Fout tijden het laden van je berichten";
 "conversations.error.title" = "Er heeft zich een fout voorgedaan";
 "conversations.navigation-title" = "Directe berichten";
+"conversations.new.message.placeholder" = "New Message";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld posts van %lld deelnemers";

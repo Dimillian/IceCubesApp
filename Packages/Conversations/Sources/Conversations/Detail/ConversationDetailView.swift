@@ -115,7 +115,7 @@ public struct ConversationDetailView: View {
         } label: {
           Image(systemName: "plus")
         }
-        TextField("New messge", text: $viewModel.newMessageText, axis: .horizontal)
+        TextField("conversations.new.message.placeholder", text: $viewModel.newMessageText, axis: .horizontal)
           .textFieldStyle(.roundedBorder)
           .focused($isMessageFieldFocused)
         if !viewModel.newMessageText.isEmpty {
