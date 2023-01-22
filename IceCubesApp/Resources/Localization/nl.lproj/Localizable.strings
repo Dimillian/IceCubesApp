@@ -58,6 +58,7 @@
 "settings.display.section.theme" = "Thema";
 "settings.display.status.action-buttons" = "Actieknoppen";
 "settings.display.status.media-style" = "Mediastijl";
+"settings.display.translate-button" = "Show translate button";
 "settings.display.theme.background" = "Achtergrondkleur";
 "settings.display.theme.secondary-background" = "Secundaire achtergrondkleur";
 "settings.display.theme.tint" = "Kleurtint";

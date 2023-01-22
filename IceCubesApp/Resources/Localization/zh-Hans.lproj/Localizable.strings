@@ -58,6 +58,7 @@
 "settings.display.section.theme" = "主题";
 "settings.display.status.action-buttons" = "状态操作选项";
 "settings.display.status.media-style" = "状态媒体样式";
+"settings.display.translate-button" = "Show translate button";
 "settings.display.theme.background" = "背景颜色";
 "settings.display.theme.secondary-background" = "二级背景颜色";
 "settings.display.theme.tint" = "色调";

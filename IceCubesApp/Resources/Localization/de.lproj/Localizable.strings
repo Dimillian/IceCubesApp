@@ -58,6 +58,7 @@
 "settings.display.section.theme" = "Thema";
 "settings.display.status.action-buttons" = "Status Aktions-Buttons";
 "settings.display.status.media-style" = "Status Medien";
+"settings.display.translate-button" = "Show translate button";
 "settings.display.theme.background" = "Hintergrundfarbe";
 "settings.display.theme.secondary-background" = "Sekundäre Hintergrundfarbe";
 "settings.display.theme.tint" = "Akzentfarbe";

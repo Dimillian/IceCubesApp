@@ -236,7 +236,9 @@ public struct StatusRowView: View {
           Spacer()
         }
 
-        makeTranslateView(status: status)
+        if preferences.showTranslateButton {
+          makeTranslateView(status: status)
+        }
 
         if let poll = status.poll {
           StatusPollView(poll: poll, status: status)

@@ -50,6 +50,7 @@ struct DisplaySettingsView: View {
               .font(.scaledBody)
           }
         }
+        Toggle("settings.display.translate-button", isOn: $userPreferences.showTranslateButton)
       }
       .listRowBackground(theme.primaryBackgroundColor)
 
