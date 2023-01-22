@@ -31,7 +31,7 @@
 
 // MARK: Instances
 "instance.info.domains" = "域名";
-"instance.info.email" = "电邮";
+"instance.info.email" = "邮件";
 "instance.info.name" = "名称";
 "instance.info.navigation-title" = "服务器信息";
 "instance.info.posts" = "嘟文";
