@@ -22,6 +22,7 @@ public class StatusEditorViewModel: ObservableObject {
   }
 
   private var urlLengthAdjustments: Int = 0
+  private let maxLengthOfUrl = 23
   
   private var spoilerTextCount: Int {
     spoilerOn ? spoilerText.utf16.count : 0
@@ -269,18 +270,18 @@ public class StatusEditorViewModel: ObservableObject {
       var numUrls = 0
 
       for range in urlRanges {
-        if range.length > 23 {
+        if range.length > maxLengthOfUrl {
           numUrls += 1
           totalUrlLength += range.length
         }
-        
+
         statusText.addAttributes([.foregroundColor: UIColor(theme?.tintColor ?? .brand),
                                   .underlineStyle: NSUnderlineStyle.single.rawValue,
                                   .underlineColor: UIColor(theme?.tintColor ?? .brand)],
                                  range: NSRange(location: range.location, length: range.length))
       }
 
-      urlLengthAdjustments = totalUrlLength - (23 * numUrls)
+      urlLengthAdjustments = totalUrlLength - (maxLengthOfUrl * numUrls)
 
       var mediaAdded = false
       statusText.enumerateAttribute(.attachment, in: range) { attachment, range, _ in
