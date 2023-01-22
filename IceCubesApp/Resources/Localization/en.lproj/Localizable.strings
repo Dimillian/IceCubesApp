@@ -5,7 +5,7 @@
 "action.done" = "Done";
 "action.retry" = "Retry";
 
-"alert.button.ok" = "Ok";
+"alert.button.ok" = "OK";
 "alert.error" = "Error!";
 
 "placeholder.loading.long" = "Loading, loading, loading ...";
@@ -68,7 +68,7 @@
 "settings.general.browser.system" = "System Browser";
 "settings.general.display" = "Display Settings";
 "settings.general.instance" = "Instance Information";
-"settings.general.push-notifications" = "Push Notification";
+"settings.general.push-notifications" = "Push Notifications";
 "settings.general.remote-timelines" = "Remote Local Timelines";
 "settings.push.boosts" = "Boosts";
 "settings.push.favorites" = "Favorites";
@@ -78,11 +78,11 @@
 "settings.push.mentions" = "Mentions";
 "settings.push.navigation-title" = "Push Notifications";
 "settings.push.new-posts" = "New Posts";
-"settings.push.polls" = "Polls Results";
+"settings.push.polls" = "Poll Results";
 "settings.section.accounts" = "Accounts";
 "settings.section.app" = "App";
 "settings.section.general" = "General";
-"settings.support.alert.error.message" = "Error processing your in app purchase, please try again.";
+"settings.support.alert.error.message" = "Error processing your in-app purchase, please try again.";
 "settings.support.alert.message" = "Thank you so much for your tip! It's greatly appreciated!";
 "settings.support.alert.title" = "Thanks!";
 "settings.support.message-from-dev" = "Hi there! My name is Thomas and I absolutely love creating open source apps. Ice Cubes is definitely one of my proudest projects to date - and let's be real, it's also the one that requires the most maintenance due to the ever-changing world of Mastodon and social media. If you're having a blast using Ice Cubes, consider tossing a little tip my way. It'll make my day (and help keep the app running smoothly for you). 🚀";
