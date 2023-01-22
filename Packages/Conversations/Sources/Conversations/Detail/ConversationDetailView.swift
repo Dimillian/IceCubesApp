@@ -115,11 +115,12 @@ public struct ConversationDetailView: View {
         } label: {
           Image(systemName: "plus")
         }
-        .padding(.bottom, 5)
+        .padding(.bottom, 6)
         TextField("New messge", text: $viewModel.newMessageText, axis: .vertical)
           .textFieldStyle(.roundedBorder)
           .focused($isMessageFieldFocused)
           .keyboardType(.default)
+          .font(.scaledBody)
         if !viewModel.newMessageText.isEmpty {
           Button {
             Task {
@@ -132,7 +133,7 @@ public struct ConversationDetailView: View {
               Image(systemName: "paperplane")
             }
           }
-          .keyboardShortcut("n", modifiers: .command)
+          .keyboardShortcut(.return, modifiers: .command)
           .padding(.bottom, 5)
         }
       }

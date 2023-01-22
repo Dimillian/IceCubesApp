@@ -482,6 +482,9 @@ public class StatusEditorViewModel: ObservableObject {
                                           movieTransferable: nil,
                                           mediaAttachment: uploadedMedia,
                                           error: nil)
+            if let uploadedMedia, uploadedMedia.url == nil {
+              scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
+            }
           } else if let videoURL = originalContainer.movieTransferable?.url,
                       let data = try? Data(contentsOf: videoURL) {
             let uploadedMedia = try await uploadMedia(data: data, mimeType: videoURL.mimeType())
