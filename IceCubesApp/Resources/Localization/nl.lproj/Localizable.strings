@@ -237,9 +237,8 @@
 "notifications.tab.mentions" = "Vermeldingen";
 
 // MARK: Package: Timeline
-"timeline.n-new-posts %lld" = "%lld nieuwe posts";
 "timeline.federated" = "Gefedereerd";
-"timeline.home" = "Thuis";
+"timeline.home" = "Startpagina";
 "timeline.local" = "Lokaal";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld recente posts van %lld deelnemers";
 "timeline.trending" = "Trending";
