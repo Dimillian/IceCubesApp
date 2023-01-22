@@ -91,6 +91,13 @@ public struct StatusEditorView: View {
       .background(theme.primaryBackgroundColor)
       .navigationTitle(viewModel.mode.title)
       .navigationBarTitleDisplayMode(.inline)
+      .alert("Error while posting",
+             isPresented: $viewModel.showPostingErrorAlert,
+             actions: {
+        Button("Ok") { }
+      }, message: {
+        Text(viewModel.postingError ?? "")
+      })
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           AIMenu

@@ -23,7 +23,7 @@ struct StatusEditorAccessoryView: View {
       Divider()
       HStack(alignment: .center, spacing: 16) {
         PhotosPicker(selection: $viewModel.selectedMedias,
-                     matching: .images) {
+                     matching: .any(of: [.images, .videos])) {
           Image(systemName: "photo.fill.on.rectangle.fill")
         }
         .disabled(viewModel.showPoll)

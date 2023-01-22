@@ -3,11 +3,12 @@ import Env
 import Models
 import NukeUI
 import SwiftUI
+import AVKit
 
 struct StatusEditorMediaView: View {
   @EnvironmentObject private var theme: Theme
   @ObservedObject var viewModel: StatusEditorViewModel
-  @State private var editingContainer: StatusEditorViewModel.ImageContainer?
+  @State private var editingContainer: StatusEditorMediaContainer?
 
   var body: some View {
     ScrollView(.horizontal, showsIndicators: false) {
@@ -17,10 +18,12 @@ struct StatusEditorMediaView: View {
             makeImageMenu(container: container)
           } label: {
             ZStack(alignment: .bottomTrailing) {
-              if container.image != nil {
+              if let attachement = container.mediaAttachment {
+                makeLazyImage(mediaAttachement: attachement)
+              } else if container.image != nil {
                 makeLocalImage(container: container)
-              } else if let url = container.mediaAttachment?.url ?? container.mediaAttachment?.previewUrl {
-                makeLazyImage(url: url)
+              } else if container.movieTransferable != nil {
+                makeVideoAttachement(container: container)
               }
               if container.mediaAttachment?.description?.isEmpty == false {
                 altMarker
@@ -36,8 +39,19 @@ struct StatusEditorMediaView: View {
         .preferredColorScheme(theme.selectedScheme == .dark ? .dark : .light)
     }
   }
+  
+  private func makeVideoAttachement(container: StatusEditorMediaContainer) -> some View {
+    ZStack(alignment: .center) {
+      placeholderView
+      if container.mediaAttachment == nil {
+        ProgressView()
+      }
+    }
+    .cornerRadius(8)
+    .frame(width: 150, height: 150)
+  }
 
-  private func makeLocalImage(container: StatusEditorViewModel.ImageContainer) -> some View {
+  private func makeLocalImage(container: StatusEditorMediaContainer) -> some View {
     ZStack(alignment: .center) {
       Image(uiImage: container.image!)
         .resizable()
@@ -75,15 +89,29 @@ struct StatusEditorMediaView: View {
     }
   }
 
-  private func makeLazyImage(url: URL?) -> some View {
-    LazyImage(url: url) { state in
-      if let image = state.image {
-        image
-          .resizingMode(.aspectFill)
-          .frame(width: 150, height: 150)
+  private func makeLazyImage(mediaAttachement: MediaAttachment) -> some View {
+    ZStack(alignment: .center) {
+      if let url = mediaAttachement.url ?? mediaAttachement.previewUrl {
+        LazyImage(url: url) { state in
+          if let image = state.image {
+            image
+              .resizingMode(.aspectFill)
+              .frame(width: 150, height: 150)
+          } else {
+            placeholderView
+          }
+        }
       } else {
-        Rectangle()
-          .frame(width: 150, height: 150)
+        placeholderView
+      }
+      if mediaAttachement.url == nil {
+        ProgressView()
+      }
+      if mediaAttachement.url != nil,
+          mediaAttachement.supportedType == .video || mediaAttachement.supportedType == .gifv {
+        Image(systemName: "play.fill")
+          .font(.headline)
+          .tint(.white)
       }
     }
     .frame(width: 150, height: 150)
@@ -91,7 +119,7 @@ struct StatusEditorMediaView: View {
   }
 
   @ViewBuilder
-  private func makeImageMenu(container: StatusEditorViewModel.ImageContainer) -> some View {
+  private func makeImageMenu(container: StatusEditorMediaContainer) -> some View {
     if !viewModel.mode.isEditing {
       Button {
         editingContainer = container
@@ -118,5 +146,11 @@ struct StatusEditorMediaView: View {
     .padding(4)
     .background(.thinMaterial)
     .cornerRadius(8)
+  }
+  
+  private var placeholderView: some View {
+    Rectangle()
+      .foregroundColor(theme.secondaryBackgroundColor)
+      .frame(width: 150, height: 150)
   }
 }

@@ -1,6 +1,8 @@
 import Foundation
 import UIKit
 import UniformTypeIdentifiers
+import SwiftUI
+import PhotosUI
 
 @MainActor
 enum StatusEditorUTTypeSupported: String, CaseIterable {
@@ -10,13 +12,30 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
   case image = "public.image"
   case jpeg = "public.jpeg"
   case png = "public.png"
+  
+  case video = "public.video"
+  case movie = "public.movie"
+  case mp4 = "public.mpeg-4"
+  case gif = "public.gif"
 
   static func types() -> [UTType] {
-    [.url, .text, .plainText, .image, .jpeg, .png]
+    [.url, .text, .plainText, .image, .jpeg, .png, .video, .mpeg4Movie, .gif, .movie]
+  }
+  
+  var isVideo: Bool {
+    switch self {
+    case .video, .movie, .mp4, .gif:
+      return true
+    default:
+      return false
+    }
   }
 
   func loadItemContent(item: NSItemProvider) async throws -> Any? {
     let result = try await item.loadItem(forTypeIdentifier: rawValue)
+    if isVideo, let transferable = await getVideoTransferable(item: item) {
+      return transferable
+    }
     if self == .jpeg || self == .png,
        let imageURL = result as? URL,
        let data = try? Data(contentsOf: imageURL),
@@ -32,6 +51,61 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
       return image
     } else {
       return nil
+    }
+  }
+  
+  private func getVideoTransferable(item: NSItemProvider) async -> MovieFileTranseferable? {
+    return await withCheckedContinuation { continuation in
+      _ = item.loadTransferable(type: MovieFileTranseferable.self) { result in
+        switch result {
+        case .success(let success):
+          continuation.resume(with: .success(success))
+        case .failure:
+          continuation.resume(with: .success(nil))
+        }
+      }
+    }
+  }
+}
+
+struct MovieFileTranseferable: Transferable {
+  let url: URL
+  
+  static var transferRepresentation: some TransferRepresentation {
+    FileRepresentation(contentType: .movie) { movie in
+      SentTransferredFile(movie.url)
+    } importing: { received in
+      let copy = URL.temporaryDirectory.appending(path: "\(UUID().uuidString).\(received.file.pathExtension)")
+      try FileManager.default.copyItem(at: received.file, to: copy)
+      return Self.init(url: copy)
+    }
+  }
+}
+
+struct ImageFileTranseferable: Transferable {
+  let url: URL
+  
+  lazy var data: Data? = try? Data(contentsOf: url)
+  lazy var compressedData: Data? = image?.jpegData(compressionQuality: 0.90)
+  lazy var image: UIImage? = UIImage(data: data ?? Data())
+  
+  static var transferRepresentation: some TransferRepresentation {
+    FileRepresentation(contentType: .image) { image in
+      SentTransferredFile(image.url)
+    } importing: { received in
+      let copy = URL.temporaryDirectory.appending(path: "\(UUID().uuidString).\(received.file.pathExtension)")
+      try FileManager.default.copyItem(at: received.file, to: copy)
+      return Self.init(url: copy)
+    }
+  }
+}
+
+extension URL {
+  public func mimeType() -> String {
+    if let mimeType = UTType(filenameExtension: self.pathExtension)?.preferredMIMEType {
+      return mimeType
+    } else {
+      return "application/octet-stream"
     }
   }
 }
