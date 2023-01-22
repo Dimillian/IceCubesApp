@@ -90,7 +90,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
         if timeline == TimelineFilter.digest {
           return
         }
-        var newStatuses: [Status] = await fetchNewPages(minId: first.id, maxPages: 20, maxStatuses: nil)
+        var newStatuses: [Status] = await fetchNewPages(minId: first.id, maxPages: 20)
         if userIntent || !pendingStatusesEnabled {
           pendingStatuses.insert(contentsOf: newStatuses, at: 0)
           statuses.insert(contentsOf: pendingStatuses, at: 0)
@@ -123,7 +123,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
       to: Date()
     )!
     let timestamp = ISO8601DateFormatter().string(from: earlyDate)
-    let allStatuses = await fetchNewPages(minId: timestamp, maxPages: nil, maxStatuses: 1000)
+    let allStatuses = await fetchNewPages(minId: timestamp, maxPages: 400)
 
     var originals: [Status] = []
     var boosts: [Status] = []
@@ -150,7 +150,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
     return originals.gatherPopular(percentile: 95) + boosts.gatherPopular(percentile: 95)
   }
 
-  func fetchNewPages(minId: String, maxPages: Int?, maxStatuses: Int?) async -> [Status] {
+  func fetchNewPages(minId: String, maxPages: Int) async -> [Status] {
     guard let client else { return [] }
     var pagesLoaded = 0
     var allStatuses: [Status] = []
@@ -161,8 +161,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
                                                                                          minId: latestMinId,
                                                                                          offset: statuses.count)),
         !newStatuses.isEmpty,
-        pagesLoaded < (maxPages ?? Int.max),
-        allStatuses.count < (maxStatuses ?? Int.max)
+        pagesLoaded < maxPages
       {
         pagesLoaded += 1
         allStatuses.insert(contentsOf: newStatuses, at: 0)
