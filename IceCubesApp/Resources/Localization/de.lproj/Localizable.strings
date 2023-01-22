@@ -98,6 +98,7 @@
 "settings.support.four.subtitle" = "It'll go a long way to keep Ice Cubes running!";
 "settings.timeline.add" = "Lokale Timeline hinzufügen";
 "settings.title" = "Einstellungen";
+"settings.rate" = "Bewerte Ice Cubes";
 
 // MARK: Tabs
 "tab.explore" = "Entdecken";
@@ -238,7 +239,6 @@
 "notifications.tab.mentions" = "Erwähnungen";
 
 // MARK: Package: Timeline
-"timeline.n-new-posts %lld" = "%lld neue Posts";
 "timeline.federated" = "Föderiert";
 "timeline.home" = "Startseite";
 "timeline.local" = "Lokal";

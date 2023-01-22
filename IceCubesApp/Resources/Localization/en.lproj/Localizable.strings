@@ -8,7 +8,7 @@
 "alert.button.ok" = "Ok";
 "alert.error" = "Error!";
 
-"placeholder.loading.long" = "Loading, loading, loading ....";
+"placeholder.loading.long" = "Loading, loading, loading ...";
 "placeholder.loading.short" = "Loading ...";
 
 "see-more" = "See more";
@@ -68,12 +68,12 @@
 "settings.general.browser.system" = "System Browser";
 "settings.general.display" = "Display Settings";
 "settings.general.instance" = "Instance Information";
-"settings.general.push-notifications" = "Push notification";
+"settings.general.push-notifications" = "Push Notification";
 "settings.general.remote-timelines" = "Remote Local Timelines";
 "settings.push.boosts" = "Boosts";
 "settings.push.favorites" = "Favorites";
 "settings.push.follows" = "Follows";
-"settings.push.main-toggle" = "Push notifications";
+"settings.push.main-toggle" = "Push Notifications";
 "settings.push.main-toggle.description" = "Receive push notifications on new activities";
 "settings.push.mentions" = "Mentions";
 "settings.push.navigation-title" = "Push Notifications";
@@ -98,6 +98,7 @@
 "settings.support.four.subtitle" = "It'll go a long way to keep Ice Cubes running!";
 "settings.timeline.add" = "Add a local timeline";
 "settings.title" = "Settings";
+"settings.rate" = "Rate Ice Cubes";
 
 // MARK: Tabs
 "tab.explore" = "Explore";
@@ -238,7 +239,6 @@
 "notifications.tab.mentions" = "Mentions";
 
 // MARK: Package: Timeline
-"timeline.n-new-posts %lld" = "%lld new posts";
 "timeline.federated" = "Federated";
 "timeline.home" = "Home";
 "timeline.local" = "Local";

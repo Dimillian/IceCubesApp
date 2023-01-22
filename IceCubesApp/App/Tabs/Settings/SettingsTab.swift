@@ -137,7 +137,7 @@ struct SettingsTabs: View {
 
       if let reviewURL = URL(string: "https://apps.apple.com/app/id\(AppInfo.appStoreAppId)?action=write-review") {
         Link(destination: reviewURL) {
-          Label("Rate Ice Cubes", systemImage: "link")
+          Label("settings.rate", systemImage: "link")
         }
         .tint(theme.labelColor)
       }

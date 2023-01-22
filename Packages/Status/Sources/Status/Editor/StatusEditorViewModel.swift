@@ -60,6 +60,16 @@ public class StatusEditorViewModel: ObservableObject {
     showPoll || !selectedMedias.isEmpty
   }
 
+  var shouldDisplayDismissWarning: Bool {
+    var modifiedStatusText = statusText.string.trimmingCharacters(in: .whitespaces)
+
+    if let mentionString, modifiedStatusText.hasPrefix(mentionString) {
+      modifiedStatusText = String(modifiedStatusText.dropFirst(mentionString.count))
+    }
+
+    return !modifiedStatusText.isEmpty && !mode.isInShareExtension
+  }
+
   @Published var visibility: Models.Visibility = .pub
 
   @Published var mentionsSuggestions: [Account] = []
@@ -68,9 +78,10 @@ public class StatusEditorViewModel: ObservableObject {
   private var currentSuggestionRange: NSRange?
 
   private var embeddedStatusURL: URL? {
-    return URL(string: embeddedStatus?.reblog?.url ?? embeddedStatus?.url ?? "")
+    URL(string: embeddedStatus?.reblog?.url ?? embeddedStatus?.url ?? "")
   }
 
+  private var mentionString: String?
   private var uploadTask: Task<Void, Never>?
 
   init(mode: Mode) {
@@ -171,6 +182,10 @@ public class StatusEditorViewModel: ObservableObject {
       visibility = status.visibility
       statusText = .init(string: mentionString)
       selectedRange = .init(location: mentionString.utf16.count, length: 0)
+
+      if !mentionString.isEmpty {
+        self.mentionString = mentionString.trimmingCharacters(in: .whitespaces)
+      }
     case let .mention(account, visibility):
       statusText = .init(string: "@\(account.acct) ")
       self.visibility = visibility
