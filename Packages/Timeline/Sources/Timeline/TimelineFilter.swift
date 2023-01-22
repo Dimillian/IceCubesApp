@@ -38,7 +38,7 @@ public enum TimelineFilter: Hashable, Equatable {
       return server
     }
   }
-  
+
   public func localizedTitle() -> LocalizedStringKey {
     switch self {
     case .federated:
@@ -57,7 +57,7 @@ public enum TimelineFilter: Hashable, Equatable {
       return LocalizedStringKey(server)
     }
   }
-  
+
   public func iconName() -> String? {
     switch self {
     case .federated:

@@ -134,7 +134,7 @@ struct SettingsTabs: View {
       NavigationLink(destination: SupportAppView()) {
         Label("settings.app.support", systemImage: "wand.and.stars")
       }
-      
+
       if let reviewURL = URL(string: "https://apps.apple.com/app/id\(AppInfo.appStoreAppId)?action=write-review") {
         Link(destination: reviewURL) {
           Label("Rate Ice Cubes", systemImage: "link")
@@ -142,11 +142,11 @@ struct SettingsTabs: View {
         .tint(theme.labelColor)
       }
     } header: {
-        Text("settings.section.app")
+      Text("settings.section.app")
     } footer: {
-        if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-            Text("App Version: \(appVersion)").frame(maxWidth: .infinity, alignment: .center)
-        }
+      if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+        Text("App Version: \(appVersion)").frame(maxWidth: .infinity, alignment: .center)
+      }
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }

@@ -10,8 +10,8 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
   case image = "public.image"
   case jpeg = "public.jpeg"
   case png = "public.png"
-  
-  static func types() -> [UTType]  {
+
+  static func types() -> [UTType] {
     [.url, .text, .plainText, .image, .jpeg, .png]
   }
 

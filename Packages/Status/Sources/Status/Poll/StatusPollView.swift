@@ -10,7 +10,7 @@ public struct StatusPollView: View {
   @EnvironmentObject private var currentInstance: CurrentInstance
   @EnvironmentObject private var currentAccount: CurrentAccount
   @StateObject private var viewModel: StatusPollViewModel
-  
+
   private var status: AnyStatus
 
   public init(poll: Poll, status: AnyStatus) {

@@ -34,7 +34,7 @@ public enum PollVotingFrequency: String, CaseIterable {
     case .oneVote: return false
     }
   }
-  
+
   public var displayString: LocalizedStringKey {
     switch self {
     case .oneVote: return "env.poll-vote-frequency.one"

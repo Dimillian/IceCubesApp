@@ -79,7 +79,7 @@ public struct StatusEditorView: View {
           NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
                                           object: nil)
         }
-        
+
         Task {
           await viewModel.fetchCustomEmojis()
         }

@@ -4,7 +4,7 @@ public struct EmptyView: View {
   public let iconName: String
   public let title: LocalizedStringKey
   public let message: LocalizedStringKey
-  
+
   public init(iconName: String, title: LocalizedStringKey, message: LocalizedStringKey) {
     self.iconName = iconName
     self.title = title

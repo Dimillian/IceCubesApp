@@ -10,7 +10,7 @@ class ConversationsListViewModel: ObservableObject {
   @Published var isLoadingNextPage: Bool = false
   @Published var conversations: [Conversation] = []
   @Published var isError: Bool = false
-  
+
   var nextPage: LinkHandler?
 
   public init() {}
@@ -31,7 +31,7 @@ class ConversationsListViewModel: ObservableObject {
       isLoadingFirstPage = false
     }
   }
-  
+
   func fetchNextPage() async {
     if let maxId = nextPage?.maxId, let client {
       do {
@@ -43,8 +43,7 @@ class ConversationsListViewModel: ObservableObject {
           nextPage = nil
         }
         isLoadingNextPage = false
-      } catch {
-      }
+      } catch {}
     }
   }
 

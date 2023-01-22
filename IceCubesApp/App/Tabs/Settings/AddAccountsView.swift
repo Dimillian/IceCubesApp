@@ -5,9 +5,9 @@ import Env
 import Models
 import Network
 import NukeUI
+import SafariServices
 import Shimmer
 import SwiftUI
-import SafariServices
 
 struct AddAccountView: View {
   @Environment(\.dismiss) private var dismiss
@@ -81,7 +81,7 @@ struct AddAccountView: View {
         instanceNamePublisher.send(newValue)
       }
       .onReceive(instanceNamePublisher.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)) { newValue in
-       let newValue = newValue
+        let newValue = newValue
           .replacingOccurrences(of: "http://", with: "")
           .replacingOccurrences(of: "https://", with: "")
         let client = Client(server: newValue)
@@ -171,8 +171,8 @@ struct AddAccountView: View {
               (Text("instance.list.users-\(instance.users)")
                 + Text("  ⸱  ")
                 + Text("instance.list.posts-\(instance.statuses)"))
-              .font(.scaledFootnote)
-              .foregroundColor(.gray)
+                .font(.scaledFootnote)
+                .foregroundColor(.gray)
             }
           }
           .listRowBackground(theme.primaryBackgroundColor)
@@ -235,11 +235,9 @@ struct AddAccountView: View {
 struct SafariView: UIViewControllerRepresentable {
   let url: URL
 
-  func makeUIViewController(context: UIViewControllerRepresentableContext<SafariView>) -> SFSafariViewController {
+  func makeUIViewController(context _: UIViewControllerRepresentableContext<SafariView>) -> SFSafariViewController {
     SFSafariViewController(url: url)
   }
-  
-  func updateUIViewController(_ uiViewController: SFSafariViewController, context: UIViewControllerRepresentableContext<SafariView>) {
 
-  }
+  func updateUIViewController(_: SFSafariViewController, context _: UIViewControllerRepresentableContext<SafariView>) {}
 }

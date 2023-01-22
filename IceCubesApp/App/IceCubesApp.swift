@@ -14,7 +14,7 @@ struct IceCubesApp: App {
   @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
 
   @Environment(\.scenePhase) private var scenePhase
-  
+
   @StateObject private var appAccountsManager = AppAccountsManager.shared
   @StateObject private var currentInstance = CurrentInstance.shared
   @StateObject private var currentAccount = CurrentAccount.shared
@@ -28,7 +28,7 @@ struct IceCubesApp: App {
   @State private var selectSidebarItem: Tab? = .timeline
   @State private var popToRootTab: Tab = .other
   @State private var sideBarLoadedTabs: Set<Tab> = Set()
-  
+
   private var availableTabs: [Tab] {
     appAccountsManager.currentClient.isAuth ? Tab.loggedInTabs() : Tab.loggedOutTab()
   }
@@ -172,7 +172,7 @@ struct IceCubesApp: App {
   private func refreshPushSubs() {
     PushNotificationsService.shared.requestPushNotifications()
   }
-  
+
   @CommandsBuilder
   private var appMenu: some Commands {
     CommandGroup(replacing: .newItem) {
@@ -199,7 +199,7 @@ struct IceCubesApp: App {
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   let themeObserver = ThemeObserverViewController(nibName: nil, bundle: nil)
-  
+
   func application(_: UIApplication,
                    didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool
   {
@@ -220,13 +220,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   }
 
   func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError _: Error) {}
-  
 }
 
 class ThemeObserverViewController: UIViewController {
   override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
     super.traitCollectionDidChange(previousTraitCollection)
-    
+
     print(traitCollection.userInterfaceStyle.rawValue)
   }
 }

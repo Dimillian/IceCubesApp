@@ -20,11 +20,11 @@ class VideoPlayerViewModel: ObservableObject {
       self?.player?.play()
     }
   }
-  
+
   func pause() {
     player?.pause()
   }
-  
+
   func play() {
     player?.play()
   }
@@ -37,7 +37,7 @@ class VideoPlayerViewModel: ObservableObject {
 struct VideoPlayerView: View {
   @Environment(\.scenePhase) private var scenePhase
   @StateObject var viewModel: VideoPlayerViewModel
-  
+
   var body: some View {
     VStack {
       VideoPlayer(player: viewModel.player)

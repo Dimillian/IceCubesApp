@@ -20,7 +20,7 @@ struct ConversationsListRow: View {
         VStack(alignment: .leading, spacing: 4) {
           HStack {
             EmojiTextApp(.init(stringValue: conversation.accounts.map { $0.safeDisplayName }.joined(separator: ", ")),
-                         emojis: conversation.accounts.flatMap{ $0.emojis })
+                         emojis: conversation.accounts.flatMap { $0.emojis })
               .font(.scaledSubheadline)
               .fontWeight(.semibold)
               .foregroundColor(theme.labelColor)
