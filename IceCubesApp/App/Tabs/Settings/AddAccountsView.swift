@@ -87,11 +87,14 @@ struct AddAccountView: View {
         let client = Client(server: newValue)
         Task {
           do {
-            let instance: Instance = try await client.get(endpoint: Instances.instance)
-            withAnimation {
-              self.instance = instance
+            // bare bones preflight for domain validity
+            if client.server.contains(".") && client.server.last != "." {
+              let instance: Instance = try await client.get(endpoint: Instances.instance)
+              withAnimation {
+                self.instance = instance
+              }
+              instanceFetchError = nil
             }
-            instanceFetchError = nil
           } catch _ as DecodingError {
             instance = nil
             instanceFetchError = "account.add.error.instance-not-supported"
