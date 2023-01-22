@@ -146,7 +146,7 @@
 "account.edit.post-settings.sensitive" = "敏感内容";
 "account.favorited-by" = "同样收藏的有";
 "account.follow.follow" = "关注";
-"account.follow.following" = "关注中";
+"account.follow.following" = "正在关注";
 "account.follow.requested" = "已申请";
 "account.followers" = "粉丝";
 "account.following" = "关注中";
