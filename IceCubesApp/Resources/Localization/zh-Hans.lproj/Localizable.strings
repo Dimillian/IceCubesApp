@@ -41,7 +41,7 @@
 "instance.info.version" = "版本";
 "instance.list.posts-%@" = "%@ 嘟文";
 "instance.list.users-%@" = "%@ 用户";
-"instance.suggestions" = "意见";
+"instance.suggestions" = "推荐";
 "instance.url" = "服务器 URL";
 
 // MARK: Settings
@@ -69,7 +69,7 @@
 "settings.general.display" = "显示设置";
 "settings.general.instance" = "服务器设置";
 "settings.general.push-notifications" = "通知设置";
-"settings.general.remote-timelines" = "远程本地时间线";
+"settings.general.remote-timelines" = "远程时间线";
 "settings.push.boosts" = "转发";
 "settings.push.favorites" = "收藏";
 "settings.push.follows" = "关注";
@@ -96,7 +96,7 @@
 "settings.support.two.title" = "☕️ 很不错的捐赠";
 "settings.support.four.title" = "👽 神秘人的小费";
 "settings.support.four.subtitle" = "让 Ice Cubes 持续下去还有很长的路！";
-"settings.timeline.add" = "添加一个本地时间线";
+"settings.timeline.add" = "添加远程时间线";
 "settings.title" = "设置";
 "settings.rate" = "给 Ice Cubes 评分";
 
@@ -112,11 +112,11 @@
 
 // MARK: Timeline
 "timeline.%@-is-valid" = "%@ 是一个可用的服务器";
-"timeline.add-remote.title" = "添加远程本地时间线";
+"timeline.add-remote.title" = "添加远程时间线";
 "timeline.add.action.add" = "添加";
-"timeline.filter.add-local" = "添加一个本地时间线";
+"timeline.filter.add-local" = "添加远程时间线";
 "timeline.filter.lists" = "列表";
-"timeline.filter.local" = "本地时间线";
+"timeline.filter.local" = "远程时间线";
 "timeline.filter.tags" = "关注的标签";
 
 // MARK: Package: AppAccount
