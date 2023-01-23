@@ -33,6 +33,9 @@ struct ConversationMessageView: View {
           EmojiTextApp(message.content, emojis: message.emojis)
             .font(.scaledBody)
             .padding(6)
+            .environment(\.openURL, OpenURLAction { url in
+              routerPath.handleStatus(status: message, url: url)
+            })
         }
         .background(isOwnMessage ? theme.tintColor.opacity(0.2) : theme.secondaryBackgroundColor)
         .cornerRadius(8)
