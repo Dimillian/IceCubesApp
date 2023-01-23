@@ -134,7 +134,10 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
         status.isRelevant() &&
         !status.didInteract() &&
         !postsSeen.contains(status.reblog?.url ?? status.url ?? "") &&
-        acct?.lowercased() != status.account.acct.lowercased() {
+        acct?.lowercased() != status.account.acct.lowercased() &&
+        !status.account.note.asRawText.lowercased().contains("#noindex") &&
+        !status.account.note.asRawText.lowercased().contains("#nobot")
+    {
           if status.reblog == nil {
             originals.append(status)
           } else {
