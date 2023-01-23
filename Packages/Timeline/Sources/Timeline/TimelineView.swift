@@ -34,7 +34,7 @@ public struct TimelineView: View {
   public var body: some View {
     ScrollViewReader { proxy in
       ZStack(alignment: .top) {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
           Rectangle()
             .frame(height: 0)
             .id(Constants.scrollToTop)
