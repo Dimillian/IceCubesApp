@@ -68,13 +68,13 @@
 "settings.general.browser.system" = "系统浏览器";
 "settings.general.display" = "显示设置";
 "settings.general.instance" = "服务器设置";
-"settings.general.push-notifications" = "推送通知";
+"settings.general.push-notifications" = "通知设置";
 "settings.general.remote-timelines" = "远程本地时间线";
 "settings.push.boosts" = "转发";
 "settings.push.favorites" = "收藏";
 "settings.push.follows" = "关注";
-"settings.push.main-toggle" = "推送通知";
-"settings.push.main-toggle.description" = "在有新活动时推送通知";
+"settings.push.main-toggle" = "启用通知";
+"settings.push.main-toggle.description" = "在有新活动时通知";
 "settings.push.mentions" = "提及";
 "settings.push.navigation-title" = "推送通知";
 "settings.push.new-posts" = "新嘟文";
