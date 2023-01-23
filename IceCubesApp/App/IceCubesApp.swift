@@ -12,9 +12,9 @@ import Timeline
 @main
 struct IceCubesApp: App {
   @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
-
+  
   @Environment(\.scenePhase) private var scenePhase
-
+  
   @StateObject private var appAccountsManager = AppAccountsManager.shared
   @StateObject private var currentInstance = CurrentInstance.shared
   @StateObject private var currentAccount = CurrentAccount.shared
@@ -23,16 +23,16 @@ struct IceCubesApp: App {
   @StateObject private var quickLook = QuickLook()
   @StateObject private var theme = Theme.shared
   @StateObject private var sidebarRouterPath = RouterPath()
-
+  
   @State private var selectedTab: Tab = .timeline
   @State private var selectSidebarItem: Tab? = .timeline
   @State private var popToRootTab: Tab = .other
   @State private var sideBarLoadedTabs: Set<Tab> = Set()
-
+  
   private var availableTabs: [Tab] {
     appAccountsManager.currentClient.isAuth ? Tab.loggedInTabs() : Tab.loggedOutTab()
   }
-
+  
   var body: some Scene {
     WindowGroup {
       appView
@@ -69,7 +69,7 @@ struct IceCubesApp: App {
       }
     }
   }
-
+  
   @ViewBuilder
   private var appView: some View {
     if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
@@ -78,14 +78,14 @@ struct IceCubesApp: App {
       tabBarView
     }
   }
-
+  
   private func badgeFor(tab: Tab) -> Int {
     if tab == .notifications && selectedTab != tab {
       return watcher.unreadNotificationsCount + userPreferences.pushNotificationsCount
     }
     return 0
   }
-
+  
   private var sidebarView: some View {
     SideBarView(selectedTab: $selectedTab,
                 popToRootTab: $popToRootTab,
@@ -114,7 +114,7 @@ struct IceCubesApp: App {
       sideBarLoadedTabs.removeAll()
     }
   }
-
+  
   private var tabBarView: some View {
     TabView(selection: .init(get: {
       selectedTab
@@ -139,14 +139,14 @@ struct IceCubesApp: App {
       }
     }
   }
-
+  
   private func setNewClientsInEnv(client: Client) {
     currentAccount.setClient(client: client)
     currentInstance.setClient(client: client)
     userPreferences.setClient(client: client)
     watcher.setClient(client: client)
   }
-
+  
   private func handleScenePhase(scenePhase: ScenePhase) {
     switch scenePhase {
     case .background:
@@ -163,16 +163,16 @@ struct IceCubesApp: App {
       break
     }
   }
-
+  
   private func setupRevenueCat() {
     Purchases.logLevel = .error
     Purchases.configure(withAPIKey: "appl_JXmiRckOzXXTsHKitQiicXCvMQi")
   }
-
+  
   private func refreshPushSubs() {
     PushNotificationsService.shared.requestPushNotifications()
   }
-
+  
   @CommandsBuilder
   private var appMenu: some Commands {
     CommandGroup(replacing: .newItem) {
@@ -199,33 +199,41 @@ struct IceCubesApp: App {
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   let themeObserver = ThemeObserverViewController(nibName: nil, bundle: nil)
-
+  
   func application(_: UIApplication,
                    didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool
   {
     try? AVAudioSession.sharedInstance().setCategory(.ambient, options: .mixWithOthers)
     return true
   }
-
+  
   func application(_: UIApplication,
                    didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data)
   {
     PushNotificationsService.shared.pushToken = deviceToken
-    #if !DEBUG
-      Task {
-        await PushNotificationsService.shared.fetchSubscriptions(accounts: AppAccountsManager.shared.pushAccounts)
-        await PushNotificationsService.shared.updateSubscriptions(accounts: AppAccountsManager.shared.pushAccounts)
-      }
-    #endif
+#if !DEBUG
+    Task {
+      await PushNotificationsService.shared.fetchSubscriptions(accounts: AppAccountsManager.shared.pushAccounts)
+      await PushNotificationsService.shared.updateSubscriptions(accounts: AppAccountsManager.shared.pushAccounts)
+    }
+#endif
   }
-
+  
   func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError _: Error) {}
+  
+  func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+    let configuration = UISceneConfiguration(name: nil, sessionRole: connectingSceneSession.role)
+    if connectingSceneSession.role == .windowApplication {
+      configuration.delegateClass = SceneDelegate.self
+    }
+    return configuration
+  }
 }
 
 class ThemeObserverViewController: UIViewController {
   override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
     super.traitCollectionDidChange(previousTraitCollection)
-
+    
     print(traitCollection.userInterfaceStyle.rawValue)
   }
 }
