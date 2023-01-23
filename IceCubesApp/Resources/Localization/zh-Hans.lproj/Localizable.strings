@@ -24,7 +24,7 @@
 "enum.avatar-shape.circle" = "圆形";
 "enum.avatar-shape.rounded" = "圆角";
 "enum.status-actions-display.all" = "全部";
-"enum.status-actions-display.no-buttons" = "无按钮";
+"enum.status-actions-display.no-buttons" = "隐藏按钮";
 "enum.status-actions-display.only-buttons" = "仅按钮";
 "enum.status-display-style.compact" = "紧凑";
 "enum.status-display-style.large" = "宽松";
@@ -51,7 +51,7 @@
 "settings.app.source" = "源代码（GitHub 链接）";
 "settings.app.support" = "支持本应用";
 "settings.display.avatar.position" = "头像位置";
-"settings.display.avatar.shape" = "头像形状";
+"settings.display.avatar.shape" = "头像边框";
 "settings.display.navigation-title" = "显示设置";
 "settings.display.restore" = "恢复默认设置";
 "settings.display.section.display" = "显示";
@@ -94,8 +94,8 @@
 "settings.support.three.title" = "🤯 很慷慨的捐赠";
 "settings.support.two.subtitle" = "我很喜欢这杯美味的咖啡 ❤️";
 "settings.support.two.title" = "☕️ 很不错的捐赠";
-"settings.support.four.title" = "👽 Who are you Tip";
-"settings.support.four.subtitle" = "It'll go a long way to keep Ice Cubes running!";
+"settings.support.four.title" = "👽 神秘人的小费";
+"settings.support.four.subtitle" = "让 Ice Cubes 持续下去还有很长的路！";
 "settings.timeline.add" = "添加一个本地时间线";
 "settings.title" = "设置";
 "settings.rate" = "给 Ice Cubes 评分";
@@ -132,11 +132,11 @@
 "account.action.mute" = "免打扰";
 "account.action.unmute" = "取消免打扰";
 "account.boosted-by" = "转发";
-"account.detail.about" = "关于";
-"account.detail.familiar-followers" = "同样关注的有";
-"account.detail.n-fields %lld" = "%lld 域";
-"account.detail.featured-tags-n-posts %lld" = "%lld 嘟文";
-"account.edit.about" = "关于";
+"account.detail.about" = "相关联";
+"account.detail.familiar-followers" = "同样关注此账号的有";
+"account.detail.n-fields %lld" = "%lld 个网站";
+"account.detail.featured-tags-n-posts %lld" = "%lld 篇嘟文";
+"account.edit.about" = "相关联";
 "account.edit.account-settings.bot" = "机器人账号";
 "account.edit.account-settings.discoverable" = "公开";
 "account.edit.account-settings.private" = "私密";
@@ -153,7 +153,7 @@
 "account.follow.following" = "正在关注";
 "account.follow.requested" = "已申请";
 "account.followers" = "粉丝";
-"account.following" = "关注中";
+"account.following" = "关注";
 "account.list.create" = "新建一个列表";
 "account.list.create.confirm" = "创建列表";
 "account.list.create.description" = "为你的列表命名";
@@ -162,7 +162,7 @@
 "account.post.pinned" = "固定的嘟文";
 "account.posts" = "嘟文";
 "account.relation.follows-you" = "关注你的人";
-"account.joined" = "已加入";
+"account.joined" = "加入于";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "删除";
@@ -234,7 +234,7 @@
 "notifications.menu-title.poll" = "投票";
 "notifications.menu-title.reblog" = "转发";
 "notifications.menu-title.status" = "嘟嘟";
-"notifications.menu-title.update" = "嘟文已编辑";
+"notifications.menu-title.update" = "已编辑嘟文";
 "notifications.navigation-title" = "全部通知";
 "notifications.tab.all" = "全部";
 "notifications.tab.mentions" = "提及";
@@ -270,9 +270,9 @@
 "status.action.view-in-browser" = "在浏览器中打开";
 "status.draft.delete" = "删除草稿";
 "status.draft.save" = "保存草稿";
-"status.editor.ai-prompt.correct" = "修正文本";
-"status.editor.ai-prompt.emphasize" = "强调文字";
-"status.editor.ai-prompt.fit" = "使文本更简洁";
+"status.editor.ai-prompt.correct" = "检查拼写和语法";
+"status.editor.ai-prompt.emphasize" = "使用强调语气";
+"status.editor.ai-prompt.fit" = "精简文字";
 "status.editor.description.add" = "添加描述";
 "status.editor.description.edit" = "编辑描述";
 "status.editor.drafts.navigation-title" = "草稿";
@@ -285,8 +285,8 @@
 "status.editor.mode.quote-%@" = "%@ 的引用";
 "status.editor.mode.reply-%@" = "正在回复 %@";
 "status.editor.restore-previous" = "恢复之前的文本";
-"status.editor.spoiler" = "剧透文字";
-"status.editor.text.placeholder" = "你在想什么？";
+"status.editor.spoiler" = "剧透警告";
+"status.editor.text.placeholder" = "在想些什么？";
 "status.editor.visibility" = "嘟文可见度";
 "status.error.loading.message" = "加载嘟文时发生错误，请重试。";
 "status.error.message" = "嘟文的上下文出现了错误，请重试。";
@@ -319,4 +319,4 @@
 "status.visibility.direct" = "私密";
 "status.visibility.follower" = "粉丝";
 "status.visibility.public" = "所有人";
-"status.visibility.unlisted" = "未列出";
+"status.visibility.unlisted" = "不公开";
