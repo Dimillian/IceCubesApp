@@ -23,6 +23,16 @@ private struct SafariRouter: ViewModifier {
       })
       .onAppear {
         routerPath.urlHandler = { url in
+          if url.absoluteString.contains("@twitter.com"), url.absoluteString.hasPrefix("mailto:") {
+            let username = url.absoluteString
+              .replacingOccurrences(of: "@twitter.com", with: "")
+              .replacingOccurrences(of: "mailto:", with: "")
+            let twitterLink = "https://twitter.com/\(username)"
+            if let url = URL(string: twitterLink) {
+              UIApplication.shared.open(url)
+              return .handled
+            }
+          }
           guard preferences.preferredBrowser == .inAppSafari, !ProcessInfo.processInfo.isiOSAppOnMac else { return .systemAction }
           // SFSafariViewController only supports initial URLs with http:// or https:// schemes.
           guard let scheme = url.scheme, ["https", "http"].contains(scheme.lowercased()) else {
