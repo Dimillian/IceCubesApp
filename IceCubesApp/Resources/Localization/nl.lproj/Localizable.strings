@@ -82,7 +82,7 @@
 "settings.rate" = "Ice Cubes beoordelen";
 "settings.section.accounts" = "Accounts";
 "settings.section.app" = "App";
-"settings.section.app.footer %@" = "App Version: %@";
+"settings.section.app.footer %@" = "Appversie: %@";
 "settings.section.general" = "Algemeen";
 "settings.support.alert.error.message" = "Er heeft zich een fout voorgedaan tijdens het verwerken van uw aankoop. Probeer het nogmaals.";
 "settings.support.alert.message" = "Heel erg bedankt voor de fooi! Het wordt enorm gewaardeerd!";
