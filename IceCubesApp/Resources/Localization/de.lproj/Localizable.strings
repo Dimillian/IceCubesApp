@@ -81,6 +81,7 @@
 "settings.push.polls" = "Umfrageergebnisse";
 "settings.section.accounts" = "Accounts";
 "settings.section.app" = "App";
+"settings.section.app.footer %@" = "App Version: %@";
 "settings.section.general" = "Allgemein";
 "settings.support.alert.error.message" = "Fehler bei der Ausführung des In-App-Kaufs. Bitte versuche es erneut.";
 "settings.support.alert.message" = "Vielen Dank für dein Trinkgeld! Ich weiß es zu schätzen!";

@@ -81,6 +81,7 @@
 "settings.push.polls" = "Poll Results";
 "settings.section.accounts" = "Accounts";
 "settings.section.app" = "App";
+"settings.section.app.footer %@" = "App Version: %@";
 "settings.section.general" = "General";
 "settings.support.alert.error.message" = "Error processing your in-app purchase, please try again.";
 "settings.support.alert.message" = "Thank you so much for your tip! It's greatly appreciated!";

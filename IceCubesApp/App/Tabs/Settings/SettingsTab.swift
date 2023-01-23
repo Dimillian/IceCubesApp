@@ -145,7 +145,7 @@ struct SettingsTabs: View {
       Text("settings.section.app")
     } footer: {
       if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-        Text("App Version: \(appVersion)").frame(maxWidth: .infinity, alignment: .center)
+        Text("settings.section.app.footer \(appVersion)").frame(maxWidth: .infinity, alignment: .center)
       }
     }
     .listRowBackground(theme.primaryBackgroundColor)

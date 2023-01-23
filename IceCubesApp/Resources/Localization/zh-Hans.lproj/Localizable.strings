@@ -81,6 +81,7 @@
 "settings.push.polls" = "投票结果";
 "settings.section.accounts" = "账户";
 "settings.section.app" = "应用";
+"settings.section.app.footer %@" = "App Version: %@";
 "settings.section.general" = "通用";
 "settings.support.alert.error.message" = "应用内购买失败，请重试。";
 "settings.support.alert.message" = "非常感谢你的捐赠！";
