@@ -94,6 +94,9 @@ struct AddAccountView: View {
                 self.instance = instance
               }
               instanceFetchError = nil
+            } else {
+              instance = nil
+              instanceFetchError = nil
             }
           } catch _ as DecodingError {
             instance = nil
