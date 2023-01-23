@@ -179,18 +179,18 @@ struct IceCubesApp: App {
   @CommandsBuilder
   private var appMenu: some Commands {
     CommandGroup(replacing: .newItem) {
-      Button("New post") {
+      Button("menu.new-post") {
         sidebarRouterPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
       }
     }
     CommandGroup(replacing: .textFormatting) {
-      Menu("Font") {
-        Button("Bigger") {
+      Menu("menu.font") {
+        Button("menu.font.bigger") {
           if userPreferences.fontSizeScale < 1.5 {
             userPreferences.fontSizeScale += 0.1
           }
         }
-        Button("Smaller") {
+        Button("menu.font.smaller") {
           if userPreferences.fontSizeScale > 0.5 {
             userPreferences.fontSizeScale -= 0.1
           }

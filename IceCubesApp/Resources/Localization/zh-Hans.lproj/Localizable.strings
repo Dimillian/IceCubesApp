@@ -44,6 +44,12 @@
 "instance.suggestions" = "推荐";
 "instance.url" = "服务器 URL";
 
+// MARK: Menu
+"menu.new-post" = "New post";
+"menu.font" = "Font";
+"menu.font.bigger" = "Bigger";
+"menu.font.smaller" = "Smaller";
+
 // MARK: Settings
 "settings.account.add" = "添加账户";
 "settings.app.icon" = "应用图标";

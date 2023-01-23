@@ -44,6 +44,12 @@
 "instance.suggestions" = "Sugerencias";
 "instance.url" = "URL de la instancia";
 
+// MARK: Menu
+"menu.new-post" = "New post";
+"menu.font" = "Font";
+"menu.font.bigger" = "Bigger";
+"menu.font.smaller" = "Smaller";
+
 // MARK: Settings
 "settings.account.add" = "Añadir cuenta";
 "settings.app.icon" = "Icono de la app";

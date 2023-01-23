@@ -44,6 +44,12 @@
 "instance.suggestions" = "こちらかも？";
 "instance.url" = "インスタンスのURL";
 
+// MARK: Menu
+"menu.new-post" = "New post";
+"menu.font" = "Font";
+"menu.font.bigger" = "Bigger";
+"menu.font.smaller" = "Smaller";
+
 // MARK: Settings
 "settings.account.add" = "アカウントの追加";
 "settings.app.icon" = "アプリアイコン";
