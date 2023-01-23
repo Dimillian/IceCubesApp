@@ -100,6 +100,8 @@
 "settings.timeline.add" = "添加远程时间线";
 "settings.title" = "设置";
 "settings.rate" = "给 Ice Cubes 评分";
+"settings.section.other" = "Other";
+"settings.other.hide-openai" = "Enable 🤖 helper";
 
 // MARK: Tabs
 "tab.explore" = "探索";

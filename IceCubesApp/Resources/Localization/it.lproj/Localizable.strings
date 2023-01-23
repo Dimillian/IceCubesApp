@@ -100,6 +100,8 @@
 "settings.timeline.add" = "Aggiungi una timeline locale";
 "settings.title" = "Impostazioni";
 "settings.rate" = "Valuta Ice Cubes";
+"settings.section.other" = "Other";
+"settings.other.hide-openai" = "Enable 🤖 helper";
 
 // MARK: Tabs
 "tab.explore" = "Esplora";

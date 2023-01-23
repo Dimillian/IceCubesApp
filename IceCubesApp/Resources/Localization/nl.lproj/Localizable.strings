@@ -100,6 +100,8 @@
 "settings.support.four.subtitle" = "Daarmee kan Ice Cubes nog een tijdje vooruit!";
 "settings.timeline.add" = "Een lokale tijdlijn toevoegen";
 "settings.title" = "Instellingen";
+"settings.section.other" = "Other";
+"settings.other.hide-openai" = "Enable 🤖 helper";
 
 // MARK: Tabs
 "tab.explore" = "Ontdekken";

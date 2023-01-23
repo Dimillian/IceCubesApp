@@ -100,9 +100,11 @@ public struct StatusEditorView: View {
         Text(viewModel.postingError ?? "")
       })
       .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          AIMenu
-            .disabled(!viewModel.canPost)
+        if preferences.isOpenAIEnabled {
+          ToolbarItem(placement: .navigationBarTrailing) {
+            AIMenu
+              .disabled(!viewModel.canPost)
+          }
         }
         ToolbarItem(placement: .navigationBarTrailing) {
           Button {

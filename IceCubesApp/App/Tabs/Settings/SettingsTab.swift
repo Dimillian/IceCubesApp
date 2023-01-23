@@ -27,6 +27,7 @@ struct SettingsTabs: View {
         appSection
         accountsSection
         generalSection
+        otherSections
       }
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
@@ -91,6 +92,12 @@ struct SettingsTabs: View {
       NavigationLink(destination: remoteLocalTimelinesView) {
         Label("settings.general.remote-timelines", systemImage: "dot.radiowaves.right")
       }
+    }
+    .listRowBackground(theme.primaryBackgroundColor)
+  }
+  
+  private var otherSections: some View {
+    Section("settings.section.other") {
       if !ProcessInfo.processInfo.isiOSAppOnMac {
         Picker(selection: $preferences.preferredBrowser) {
           ForEach(PreferredBrowser.allCases, id: \.rawValue) { browser in
@@ -104,6 +111,9 @@ struct SettingsTabs: View {
         } label: {
           Label("settings.general.browser", systemImage: "network")
         }
+      }
+      Toggle(isOn: $preferences.isOpenAIEnabled) {
+        Label("settings.other.hide-openai", systemImage: "faxmachine")
       }
     }
     .listRowBackground(theme.primaryBackgroundColor)

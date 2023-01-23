@@ -100,6 +100,8 @@
 "settings.timeline.add" = "Lokale Timeline hinzufügen";
 "settings.title" = "Einstellungen";
 "settings.rate" = "Bewerte Ice Cubes";
+"settings.section.other" = "Other";
+"settings.other.hide-openai" = "Enable 🤖 helper";
 
 // MARK: Tabs
 "tab.explore" = "Entdecken";

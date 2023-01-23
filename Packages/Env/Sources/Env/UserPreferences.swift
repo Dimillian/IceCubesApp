@@ -15,6 +15,7 @@ public class UserPreferences: ObservableObject {
   @AppStorage("draft_posts") public var draftsPosts: [String] = []
   @AppStorage("font_size_scale") public var fontSizeScale: Double = 1
   @AppStorage("show_translate_button_inline") public var showTranslateButton: Bool = true
+  @AppStorage("is_open_ai_enabled") public var isOpenAIEnabled: Bool = true
 
   public var pushNotificationsCount: Int {
     get {
