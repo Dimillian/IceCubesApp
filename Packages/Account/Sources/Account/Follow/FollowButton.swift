@@ -82,7 +82,7 @@ public struct FollowButton: View {
   }
 
   public var body: some View {
-    HStack {
+    VStack {
       Button {
         Task {
           if viewModel.relationship.following {
@@ -101,25 +101,27 @@ public struct FollowButton: View {
       .buttonStyle(.bordered)
       .disabled(viewModel.isUpdating)
       if viewModel.relationship.following, viewModel.shouldDisplayNotify {
-        Button {
-          Task {
-            await viewModel.toggleNotify()
+        HStack {
+          Button {
+            Task {
+              await viewModel.toggleNotify()
+            }
+          } label: {
+            Image(systemName: viewModel.relationship.notifying ? "bell.fill" : "bell")
           }
-        } label: {
-          Image(systemName: viewModel.relationship.notifying ? "bell.fill" : "bell")
-        }
-        .buttonStyle(.bordered)
-        .disabled(viewModel.isUpdating)
-
-        Button {
-          Task {
-            await viewModel.toggleReboosts()
+          .buttonStyle(.bordered)
+          .disabled(viewModel.isUpdating)
+              
+          Button {
+            Task {
+              await viewModel.toggleReboosts()
+            }
+          } label: {
+            Image(systemName: viewModel.relationship.showingReblogs ? "arrow.left.arrow.right.circle.fill" : "arrow.left.arrow.right.circle")
           }
-        } label: {
-          Image(systemName: viewModel.relationship.showingReblogs ? "arrow.left.arrow.right.circle.fill" : "arrow.left.arrow.right.circle")
+          .buttonStyle(.bordered)
+          .disabled(viewModel.isUpdating)
         }
-        .buttonStyle(.bordered)
-        .disabled(viewModel.isUpdating)
       }
     }
     .onAppear {
