@@ -157,8 +157,7 @@ struct AccountDetailHeaderView: View {
       }
       .foregroundColor(.gray)
       .font(.footnote)
-      .padding(.top, 4)
-      .padding(.bottom, 5)
+      .padding(.top, 6)
     }
   }
 }
