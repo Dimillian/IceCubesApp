@@ -58,7 +58,7 @@
 "settings.display.section.theme" = "Tema";
 "settings.display.status.action-buttons" = "Botones de acción";
 "settings.display.status.media-style" = "Estilo del contenido multimedia";
-"settings.display.translate-button" = "Show translate button";
+"settings.display.translate-button" = "Mostrar botón para traducir";
 "settings.display.theme.background" = "Color de fondo";
 "settings.display.theme.secondary-background" = "Color de fondo secundario";
 "settings.display.theme.tint" = "Color";
@@ -81,6 +81,7 @@
 "settings.push.polls" = "Resultados de encuestas";
 "settings.section.accounts" = "Cuentas";
 "settings.section.app" = "App";
+"settings.section.app.footer %@" = "Versión: %@";
 "settings.section.general" = "General";
 "settings.support.alert.error.message" = "Ha ocurrido un error procesando tu pago dentro de la app, por favor vuelve a intentarlo.";
 "settings.support.alert.message" = "¡Muchas gracias por tu propina! ¡Se agradece enormemente!";
@@ -94,8 +95,8 @@
 "settings.support.three.title" = "🤯 Propina generosa";
 "settings.support.two.subtitle" = "Me encanta el sabor del café de lujo ❤️";
 "settings.support.two.title" = "☕️ Buena propina";
-"settings.support.four.title" = "👽 Who are you Tip";
-"settings.support.four.subtitle" = "It'll go a long way to keep Ice Cubes running!";
+"settings.support.four.title" = "👽 Propina de otro mundo";
+"settings.support.four.subtitle" = "¡Será de gran ayuda para que Ice Cubes siga funcionando!";
 "settings.timeline.add" = "Añadir cronología local";
 "settings.title" = "Ajustes";
 "settings.rate" = "Valora Ice Cubes";

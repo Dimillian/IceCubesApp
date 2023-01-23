@@ -81,6 +81,7 @@
 "settings.push.polls" = "Risultati dei sondaggi";
 "settings.section.accounts" = "Accounts";
 "settings.section.app" = "Applicazione";
+"settings.section.app.footer %@" = "App Version: %@";
 "settings.section.general" = "Generale";
 "settings.support.alert.error.message" = "Si è verificato un errore mentre processavamo il tuo pagamento, per favore riprova.";
 "settings.support.alert.message" = "Grazie molto per il tuo contributo! È davvero apprezzato!";
