@@ -49,7 +49,7 @@ public class Client: ObservableObject, Equatable {
   }
 
   public func hasConnection(with url: URL) -> Bool {
-    guard let host = url.host(percentEncoded: false) else { return false }
+    guard let host = url.host else { return false }
     return connections.contains(host)
   }
 
