@@ -8,8 +8,8 @@
 "alert.button.ok" = "OK";
 "alert.error" = "Fout!";
 
-"placeholder.loading.long" = "Laden, laden, laden ...";
-"placeholder.loading.short" = "Laden ...";
+"placeholder.loading.long" = "Laden, laden, laden…";
+"placeholder.loading.short" = "Laden…";
 
 "see-more" = "Bekijk meer";
 
@@ -23,9 +23,9 @@
 "enum.avatar-position.top" = "Boven";
 "enum.avatar-shape.circle" = "Cirkel";
 "enum.avatar-shape.rounded" = "Afgerond";
-"enum.status-actions-display.all" = "Alle";
+"enum.status-actions-display.all" = "Met tekst";
 "enum.status-actions-display.no-buttons" = "Geen knoppen";
-"enum.status-actions-display.only-buttons" = "Alleen knoppen";
+"enum.status-actions-display.only-buttons" = "Zonder tekst";
 "enum.status-display-style.compact" = "Compact";
 "enum.status-display-style.large" = "Groot";
 
@@ -58,11 +58,11 @@
 "settings.display.section.theme" = "Thema";
 "settings.display.status.action-buttons" = "Actieknoppen";
 "settings.display.status.media-style" = "Mediastijl";
-"settings.display.translate-button" = "Show translate button";
+"settings.display.translate-button" = "Toon vertaalknop";
 "settings.display.theme.background" = "Achtergrondkleur";
 "settings.display.theme.secondary-background" = "Secundaire achtergrondkleur";
 "settings.display.theme.tint" = "Kleurtint";
-"settings.display.theme.systemColor" = "Systeem";
+"settings.display.theme.systemColor" = "Automatisch";
 "settings.general.browser" = "Browser";
 "settings.general.browser.in-app" = "In-app";
 "settings.general.browser.system" = "Systeem";
@@ -79,13 +79,14 @@
 "settings.push.navigation-title" = "Meldingen";
 "settings.push.new-posts" = "Nieuwe posts";
 "settings.push.polls" = "Pollresultaten";
+"settings.rate" = "Ice Cubes beoordelen";
 "settings.section.accounts" = "Accounts";
 "settings.section.app" = "App";
 "settings.section.general" = "Algemeen";
 "settings.support.alert.error.message" = "Er heeft zich een fout voorgedaan tijdens het verwerken van uw aankoop. Probeer het nogmaals.";
 "settings.support.alert.message" = "Heel erg bedankt voor de fooi! Het wordt enorm gewaardeerd!";
 "settings.support.alert.title" = "Bedankt!";
-"settings.support.message-from-dev" = "Hallo! Mijn naam is Thomas en ik ben dol op het maken van open source-apps. Ice Cubes is een van de projecten waar ik het meest trots op ben - en laten we eerlijk zijn, het is ook degene die het meeste onderhoud vergt vanwege de voortdurend veranderende wereld van Mastodon en sociale media. Als je het geweldig vindt om Ice Cubes te gebruiken, overweeg dan om me een kleine fooi te geven. Het zal mijn dag goedmaken (en helpen om de app soepel voor je te laten werken). 🚀";
+"settings.support.message-from-dev" = "Hallo! Mijn naam is Thomas en ik ben dol op het maken van opensource-apps. Ice Cubes is een van de projecten waar ik het meest trots op ben - en laten we eerlijk zijn, het is ook degene die het meeste onderhoud vergt vanwege de voortdurend veranderende wereld van Mastodon en sociale media. Als je Ice Cubes graag gebruikt, overweeg dan om een kleine fooi te geven. Daar word ik heel blij van (en het zal helpen om de app soepel voor je te laten werken). 🚀";
 "settings.support.navigation-title" = "Ondersteun Ice Cubes";
 "settings.support.one.subtitle" = "Klein maar fijn!";
 "settings.support.one.title" = "🍬 Kleine fooi";
@@ -94,8 +95,8 @@
 "settings.support.three.title" = "🤯 Royale fooi";
 "settings.support.two.subtitle" = "Ik hou van de geur van een goeie kop koffie ❤️";
 "settings.support.two.title" = "☕️ Goeie fooi";
-"settings.support.four.title" = "👽 Who are you Tip";
-"settings.support.four.subtitle" = "It'll go a long way to keep Ice Cubes running!";
+"settings.support.four.title" = "👽 Wie ben jij-fooi";
+"settings.support.four.subtitle" = "Daarmee kan Ice Cubes nog een tijdje vooruit!";
 "settings.timeline.add" = "Een lokale tijdlijn toevoegen";
 "settings.title" = "Instellingen";
 
@@ -143,7 +144,7 @@
 "account.edit.display-name" = "Weergavenaam";
 "account.edit.error.save.message" = "Er heeft zich een fout voorgedaan tijdens het opslaan van je profiel. Probeer het nogmaals";
 "account.edit.error.save.title" = "Fout tijdens het opslaan van je profiel";
-"account.edit.navigation-title" = "Profiel wijzigen";
+"account.edit.navigation-title" = "Profiel bewerken";
 "account.edit.post-settings.privacy" = "Standaardprivacy";
 "account.edit.post-settings.section-title" = "Postinstellingen";
 "account.edit.post-settings.sensitive" = "Gevoelige inhoud";
@@ -162,7 +163,6 @@
 "account.posts" = "Posts";
 "account.relation.follows-you" = "Volgt jou";
 "account.joined" = "Lid geworden";
-"settings.rate" = "Rate Ice Cubes";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Verwijderen";
@@ -170,10 +170,10 @@
 "conversations.empty.message" = "Op zoek naar wat liefde op sociale media? Hier vind je al je directe berichten en privévermeldingen. Veel plezier met het versturen van berichtjes! 📱❤️";
 "conversations.empty.title" = "Lege inbox";
 "conversations.error.button" = "Opnieuw";
-"conversations.error.message" = "Fout tijden het laden van je berichten";
+"conversations.error.message" = "Fout tijdens het laden van je berichten";
 "conversations.error.title" = "Er heeft zich een fout voorgedaan";
 "conversations.navigation-title" = "Directe berichten";
-"conversations.new.message.placeholder" = "New Message";
+"conversations.new.message.placeholder" = "Nieuw bericht";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld posts van %lld deelnemers";
@@ -247,7 +247,7 @@
 "timeline.trending" = "Trending";
 
 // MARK: Package: Status
-"status.action.translate" = "Vertalen";
+"status.action.translate" = "Vertaal";
 "status.action.translated-label" = "Vertaald met behulp van DeepL.com";
 "status.action.bookmark" = "Voeg bladwijzer toe";
 "status.action.boost" = "Boosten";
@@ -274,13 +274,13 @@
 "status.editor.ai-prompt.emphasize" = "Benadruk tekst";
 "status.editor.ai-prompt.fit" = "Kort tekst in";
 "status.editor.description.add" = "Omschrijving toevoegen";
-"status.editor.description.edit" = "Wijzig omschrijving";
+"status.editor.description.edit" = "Omschrijving bewerken";
 "status.editor.drafts.navigation-title" = "Concepten";
 "status.editor.error.upload" = "Fout tijdens uploaden";
 "status.editor.language-select.navigation-title" = "Taal selecteren";
-"status.editor.media.edit-image" = "Afbeelding wijzigen";
+"status.editor.media.edit-image" = "Afbeelding bewerken";
 "status.editor.media.image-description" = "Omschrijving";
-"status.editor.mode.edit" = "Je post wijzigen";
+"status.editor.mode.edit" = "Je post bewerken";
 "status.editor.mode.new" = "Nieuwe post";
 "status.editor.mode.quote-%@" = "Citaat van %@";
 "status.editor.mode.reply-%@" = "Antwoord aan %@";
