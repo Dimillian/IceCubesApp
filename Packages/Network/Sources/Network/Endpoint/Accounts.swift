@@ -22,7 +22,7 @@ public enum Accounts: Endpoint {
                 excludeReplies: Bool?,
                 pinned: Bool?)
   case relationships(ids: [String])
-  case follow(id: String, notify: Bool)
+  case follow(id: String, notify: Bool, reblogs: Bool)
   case unfollow(id: String)
   case familiarFollowers(withAccount: String)
   case suggestions
@@ -55,7 +55,7 @@ public enum Accounts: Endpoint {
       return "accounts/\(id)/statuses"
     case .relationships:
       return "accounts/relationships"
-    case let .follow(id, _):
+    case let .follow(id, _, _):
       return "accounts/\(id)/follow"
     case let .unfollow(id):
       return "accounts/\(id)/unfollow"
@@ -106,8 +106,11 @@ public enum Accounts: Endpoint {
       return ids.map {
         URLQueryItem(name: "id[]", value: $0)
       }
-    case let .follow(_, notify):
-      return [.init(name: "notify", value: notify ? "true" : "false")]
+    case let .follow(_, notify, reblogs):
+      return [
+        .init(name: "notify", value: notify ? "true" : "false"),
+        .init(name: "reblogs", value: reblogs ? "true" : "false")
+      ]
     case let .familiarFollowers(withAccount):
       return [.init(name: "id[]", value: withAccount)]
     case let .followers(_, maxId):
