@@ -262,7 +262,7 @@
 "status.action.quote" = "引用";
 "status.action.reply" = "回复";
 "status.action.section.your-post" = "你的嘟文";
-"status.action.share" = "共享嘟文";
+"status.action.share" = "分享嘟文";
 "status.action.unbookmark" = "取消书签";
 "status.action.unboost" = "取消转发";
 "status.action.unfavorite" = "取消收藏";
@@ -297,7 +297,7 @@
 "status.media.content.show" = "显示内容";
 "status.media.contextmenu.copy" = "拷贝图片";
 "status.media.contextmenu.save" = "保存图片";
-"status.media.contextmenu.share" = "共享图片";
+"status.media.contextmenu.share" = "分享图片";
 "status.media.contextmenu.view-browser" = "在浏览器中打开";
 "status.media.sensitive.show" = "显示敏感内容";
 "status.poll.n-votes %lld" = "%lld 投票";
