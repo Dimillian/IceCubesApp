@@ -28,7 +28,7 @@ public class FollowButtonViewModel: ObservableObject {
     guard let client else { return }
     isUpdating = true
     do {
-      relationship = try await client.post(endpoint: Accounts.follow(id: accountId, notify: false))
+      relationship = try await client.post(endpoint: Accounts.follow(id: accountId, notify: false, reblogs: true))
       relationshipUpdated(relationship)
     } catch {
       print("Error while following: \(error.localizedDescription)")
@@ -51,10 +51,24 @@ public class FollowButtonViewModel: ObservableObject {
   func toggleNotify() async {
     guard let client else { return }
     do {
-      relationship = try await client.post(endpoint: Accounts.follow(id: accountId, notify: !relationship.notifying))
+      relationship = try await client.post(endpoint: Accounts.follow(id: accountId,
+                                                                     notify: !relationship.notifying,
+                                                                     reblogs: relationship.showingReblogs))
       relationshipUpdated(relationship)
     } catch {
       print("Error while following: \(error.localizedDescription)")
+    }
+  }
+
+  func toggleReboosts() async {
+    guard let client else { return }
+    do {
+      relationship = try await client.post(endpoint: Accounts.follow(id: accountId,
+                                                                     notify: relationship.notifying,
+                                                                     reblogs: !relationship.showingReblogs))
+      relationshipUpdated(relationship)
+    } catch {
+      print("Error while switching reboosts: \(error.localizedDescription)")
     }
   }
 }
@@ -93,6 +107,16 @@ public struct FollowButton: View {
           }
         } label: {
           Image(systemName: viewModel.relationship.notifying ? "bell.fill" : "bell")
+        }
+        .buttonStyle(.bordered)
+        .disabled(viewModel.isUpdating)
+
+        Button {
+          Task {
+            await viewModel.toggleReboosts()
+          }
+        } label: {
+          Image(systemName: viewModel.relationship.showingReblogs ? "arrow.left.arrow.right.circle.fill" : "arrow.left.arrow.right.circle")
         }
         .buttonStyle(.bordered)
         .disabled(viewModel.isUpdating)
