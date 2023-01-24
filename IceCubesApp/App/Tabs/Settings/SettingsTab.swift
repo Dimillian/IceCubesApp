@@ -64,7 +64,9 @@ struct SettingsTabs: View {
           let account = appAccountsManager.availableAccounts[index]
           if let token = account.oauthToken {
             Task {
-              await pushNotifications.deleteSubscriptions(accounts: [.init(server: account.server, token: token)])
+              await pushNotifications.deleteSubscriptions(accounts: [.init(server: account.server,
+                                                                           token: token,
+                                                                           accountName: account.accountName)])
             }
           }
           appAccountsManager.delete(account: account)

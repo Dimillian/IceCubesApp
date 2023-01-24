@@ -46,6 +46,7 @@
 		9F7335EF29674F7100AFF0BA /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F7335EE29674F7100AFF0BA /* QuickLook.framework */; };
 		9F7335F22967608F00AFF0BA /* AddRemoteTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7335F12967608F00AFF0BA /* AddRemoteTimelineView.swift */; };
 		9F7335F92968576500AFF0BA /* DisplaySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7335F82968576500AFF0BA /* DisplaySettingsView.swift */; };
+		9F7D93942980063100EE6B7A /* AppAccount in Frameworks */ = {isa = PBXBuildFile; productRef = 9F7D93932980063100EE6B7A /* AppAccount */; };
 		9F8CA5972979B61100481E8E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E9B576C529743F4C00BCE646 /* Localizable.strings */; };
 		9F8CA5982979B63D00481E8E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E9B576C529743F4C00BCE646 /* Localizable.strings */; };
 		9FAD85832971BF7200496AB1 /* Secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9FAD85822971BF7200496AB1 /* Secret.plist */; };
@@ -178,6 +179,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F7D93942980063100EE6B7A /* AppAccount in Frameworks */,
 				9F2A5428296AB683009B2D7C /* Models in Frameworks */,
 				9F2A5426296AB67E009B2D7C /* KeychainSwift in Frameworks */,
 				9F2A5424296AB67A009B2D7C /* Env in Frameworks */,
@@ -401,6 +403,7 @@
 				9F2A5423296AB67A009B2D7C /* Env */,
 				9F2A5425296AB67E009B2D7C /* KeychainSwift */,
 				9F2A5427296AB683009B2D7C /* Models */,
+				9F7D93932980063100EE6B7A /* AppAccount */,
 			);
 			productName = IceCubesNotifications;
 			productReference = 9F2A5416296AB631009B2D7C /* IceCubesNotifications.appex */;
@@ -1102,6 +1105,10 @@
 		9F7335E92966B3F800AFF0BA /* Conversations */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Conversations;
+		};
+		9F7D93932980063100EE6B7A /* AppAccount */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppAccount;
 		};
 		9FAD85972974405D00496AB1 /* Status */ = {
 			isa = XCSwiftPackageProductDependency;

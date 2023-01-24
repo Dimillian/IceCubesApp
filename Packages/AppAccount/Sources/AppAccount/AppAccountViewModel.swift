@@ -4,7 +4,7 @@ import SwiftUI
 
 @MainActor
 public class AppAccountViewModel: ObservableObject {
-  let appAccount: AppAccount
+  var appAccount: AppAccount
   let client: Client
   let isCompact: Bool
 
@@ -23,6 +23,10 @@ public class AppAccountViewModel: ObservableObject {
   func fetchAccount() async {
     do {
       account = try await client.get(endpoint: Accounts.verifyCredentials)
+      if appAccount.accountName == nil, let account {
+        appAccount.accountName = "\(account.acct)@\(appAccount.server)"
+        try appAccount.save()
+      }
     } catch {
       print(error)
     }

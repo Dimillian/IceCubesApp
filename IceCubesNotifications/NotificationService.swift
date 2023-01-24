@@ -4,6 +4,7 @@ import KeychainSwift
 import Models
 import UIKit
 import UserNotifications
+import AppAccount
 
 @MainActor
 class NotificationService: UNNotificationServiceExtension {
@@ -50,9 +51,11 @@ class NotificationService: UNNotificationServiceExtension {
         contentHandler(bestAttemptContent)
         return
       }
-
+      
       bestAttemptContent.title = notification.title
-      bestAttemptContent.subtitle = ""
+      if AppAccountsManager.shared.availableAccounts.count > 1 {
+        bestAttemptContent.subtitle = bestAttemptContent.userInfo["i"] as? String ?? ""
+      }
       bestAttemptContent.body = notification.body.escape()
       bestAttemptContent.userInfo["plaintext"] = plaintextData
       bestAttemptContent.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "glass.wav"))

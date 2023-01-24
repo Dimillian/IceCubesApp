@@ -17,10 +17,12 @@ public class PushNotificationsService: ObservableObject {
   public struct PushAccounts {
     public let server: String
     public let token: OauthToken
+    public let accountName: String?
 
-    public init(server: String, token: OauthToken) {
+    public init(server: String, token: OauthToken, accountName: String?) {
       self.server = server
       self.token = token
+      self.accountName = accountName
     }
   }
 
@@ -85,7 +87,7 @@ public class PushNotificationsService: ObservableObject {
         var listenerURL = Constants.endpoint
         listenerURL += "/push/"
         listenerURL += pushToken.hexString
-        listenerURL += "/\(account.server)"
+        listenerURL += "/\(account.accountName ?? account.server)"
         #if DEBUG
           listenerURL += "?sandbox=true"
         #endif
