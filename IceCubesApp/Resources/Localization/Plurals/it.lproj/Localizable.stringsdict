@@ -13,9 +13,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string>%lld new post</string>
+			<string>%lld nuovo post</string>
 			<key>other</key>
-			<string>%lld nuovi messaggi</string>
+			<string>%lld nuovi post</string>
 		</dict>
 	</dict>
 </dict>
