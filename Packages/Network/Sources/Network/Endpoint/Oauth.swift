@@ -14,7 +14,7 @@ public enum Oauth: Endpoint {
     }
   }
 
-  public func queryItems() -> [URLQueryItem]? {
+  public func queryItems() -> [URLQueryItem] {
     switch self {
     case let .authorize(clientId):
       return [

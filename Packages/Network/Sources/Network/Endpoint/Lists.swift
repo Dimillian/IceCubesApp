@@ -20,7 +20,7 @@ public enum Lists: Endpoint {
     }
   }
 
-  public func queryItems() -> [URLQueryItem]? {
+  public func queryItems() -> [URLQueryItem] {
     switch self {
     case .accounts:
       return [.init(name: "limit", value: String(0))]
@@ -33,7 +33,7 @@ public enum Lists: Endpoint {
       }
       return params
     default:
-      return nil
+      return []
     }
   }
 }

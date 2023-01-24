@@ -13,7 +13,7 @@ public enum Instances: Endpoint {
     }
   }
 
-  public func queryItems() -> [URLQueryItem]? {
-    nil
+  public func queryItems() -> [URLQueryItem] {
+    return []
   }
 }

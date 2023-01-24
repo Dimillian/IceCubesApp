@@ -25,7 +25,7 @@ public class Client: ObservableObject, Equatable {
   private let decoder = JSONDecoder()
 
   /// Only used as a transitionary app while in the oauth flow.
-  private var oauthApp: InstanceApp?
+  private var oauthApp: InstanceApp!
 
   private var oauthToken: OauthToken?
 
@@ -53,6 +53,17 @@ public class Client: ObservableObject, Equatable {
     return connections.contains(host)
   }
 
+  private func addParams(url: URL, params: [URLQueryItem]) -> URL {
+    var u = url
+    if var comps = URLComponents(url: u, resolvingAgainstBaseURL: false) {
+      comps.queryItems = params
+      u = comps.url!
+    } else {
+      NSLog("*** Error creating URL component from URL: \(url)")
+    }
+    return u
+  }
+  
   private func makeURL(scheme: String = "https", endpoint: Endpoint, forceVersion: Version? = nil) -> URL {
     var components = URLComponents()
     components.scheme = scheme
@@ -66,29 +77,38 @@ public class Client: ObservableObject, Equatable {
     return components.url!
   }
 
-  private func makeURLRequest(url: URL, endpoint: Endpoint, httpMethod: String) -> URLRequest {
-    var request = URLRequest(url: url)
-    request.httpMethod = httpMethod
-    if let oauthToken {
-      request.setValue("Bearer \(oauthToken.accessToken)", forHTTPHeaderField: "Authorization")
+  private func makeURLRequest(url: URL, httpMethod: String, params: [URLQueryItem]?) -> URLRequest {
+    var u = url
+    // If the method is not POST, then the query items go in the URL
+    if httpMethod != "POST", let params = params {
+      u = addParams(url: u, params: params)
     }
-    if let json = endpoint.jsonValue {
-      let encoder = JSONEncoder()
-      encoder.keyEncodingStrategy = .convertToSnakeCase
+    var request = URLRequest(url: u)
+    request.httpMethod = httpMethod
+    // If the method is POST, then query items have to be transferred to the body
+    if httpMethod == "POST", let params = params {
       do {
-        let jsonData = try encoder.encode(json)
-        request.httpBody = jsonData
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        var dic = [String: String]()
+        for item in params {
+          dic[item.name] = item.value
+        }
+        let data = try JSONSerialization.data(withJSONObject: dic, options: .prettyPrinted)
+        request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        request.httpBody = data
       } catch {
-        print("Client Error encoding JSON: \(error.localizedDescription)")
+        NSLog("*** Error serializing POST body: \(error)")
       }
+    }
+    if let oauthToken = oauthToken {
+//      NSLog("*** Token: \(oauthToken.accessToken)")
+      request.setValue("Bearer \(oauthToken.accessToken)", forHTTPHeaderField: "Authorization")
     }
     return request
   }
 
   private func makeGet(endpoint: Endpoint) -> URLRequest {
     let url = makeURL(endpoint: endpoint)
-    return makeURLRequest(url: url, endpoint: endpoint, httpMethod: "GET")
+    return makeURLRequest(url: url, httpMethod: "GET", params: endpoint.queryItems())
   }
 
   public func get<Entity: Decodable>(endpoint: Endpoint, forceVersion: Version? = nil) async throws -> Entity {
@@ -113,14 +133,14 @@ public class Client: ObservableObject, Equatable {
 
   public func post(endpoint: Endpoint) async throws -> HTTPURLResponse? {
     let url = makeURL(endpoint: endpoint)
-    let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: "POST")
+    let request = makeURLRequest(url: url, httpMethod: "POST", params: endpoint.queryItems())
     let (_, httpResponse) = try await urlSession.data(for: request)
     return httpResponse as? HTTPURLResponse
   }
 
   public func patch(endpoint: Endpoint) async throws -> HTTPURLResponse? {
     let url = makeURL(endpoint: endpoint)
-    let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: "PATCH")
+    let request = makeURLRequest(url: url, httpMethod: "PATCH", params: nil)
     let (_, httpResponse) = try await urlSession.data(for: request)
     return httpResponse as? HTTPURLResponse
   }
@@ -131,7 +151,7 @@ public class Client: ObservableObject, Equatable {
 
   public func delete(endpoint: Endpoint) async throws -> HTTPURLResponse? {
     let url = makeURL(endpoint: endpoint)
-    let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: "DELETE")
+    let request = makeURLRequest(url: url, httpMethod: "DELETE", params: endpoint.queryItems())
     let (_, httpResponse) = try await urlSession.data(for: request)
     return httpResponse as? HTTPURLResponse
   }
@@ -141,7 +161,9 @@ public class Client: ObservableObject, Equatable {
                                                     forceVersion: Version? = nil) async throws -> Entity
   {
     let url = makeURL(endpoint: endpoint, forceVersion: forceVersion)
-    let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: method)
+    let params = endpoint.queryItems()
+    let request = makeURLRequest(url: url, httpMethod: method, params: params)
+    NSLog("*** Request: \(url), Params: \(params)")
     let (data, httpResponse) = try await urlSession.data(for: request)
     logResponseOnError(httpResponse: httpResponse, data: data)
     do {
@@ -150,14 +172,20 @@ public class Client: ObservableObject, Equatable {
       if let serverError = try? decoder.decode(ServerError.self, from: data) {
         throw serverError
       }
+      NSLog("*** Error decoding server response for URL: \(url) - \(error)")
       throw error
     }
   }
 
   public func oauthURL() async throws -> URL {
-    let app: InstanceApp = try await post(endpoint: Apps.registerApp)
-    oauthApp = app
-    return makeURL(endpoint: Oauth.authorize(clientId: app.clientId))
+    oauthApp = try await post(endpoint: Apps.registerApp)
+    let endpoint = Oauth.authorize(clientId: oauthApp.clientId)
+    var url = makeURL(endpoint: endpoint)
+    let params = endpoint.queryItems()
+    if params.count > 0 {
+      url = addParams(url: url, params: params)
+    }
+    return url
   }
 
   public func continueOauthFlow(url: URL) async throws -> OauthToken {
@@ -178,7 +206,7 @@ public class Client: ObservableObject, Equatable {
 
   public func makeWebSocketTask(endpoint: Endpoint) -> URLSessionWebSocketTask {
     let url = makeURL(scheme: "wss", endpoint: endpoint)
-    let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: "GET")
+    let request = makeURLRequest(url: url, httpMethod: "GET", params: endpoint.queryItems())
     return urlSession.webSocketTask(with: request)
   }
 
@@ -190,7 +218,7 @@ public class Client: ObservableObject, Equatable {
                                              data: Data) async throws -> Entity
   {
     let url = makeURL(endpoint: endpoint, forceVersion: version)
-    var request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: method)
+    var request = makeURLRequest(url: url, httpMethod: method, params: nil)
     let boundary = UUID().uuidString
     request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
     let httpBody = NSMutableData()

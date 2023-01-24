@@ -16,10 +16,10 @@ public enum Tags: Endpoint {
     }
   }
 
-  public func queryItems() -> [URLQueryItem]? {
+  public func queryItems() -> [URLQueryItem] {
     switch self {
     default:
-      return nil
+      return []
     }
   }
 }

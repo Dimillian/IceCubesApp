@@ -58,13 +58,13 @@ struct StatusRowContextMenu: View {
 
     Divider()
 
-    if let url = viewModel.status.reblog?.url ?? viewModel.status.url {
-      ShareLink(item: url) {
+	if let rb = viewModel.status.reblog {
+      ShareLink(item: rb.url.isEmpty ? viewModel.status.url : rb.url) {
         Label("status.action.share", systemImage: "square.and.arrow.up")
       }
     }
 
-    if let url = URL(string: viewModel.status.reblog?.url ?? viewModel.status.url ?? "") {
+	if let rb = viewModel.status.reblog, let url = URL(string: (rb.url.isEmpty ? viewModel.status.url : "")) {
       Button { openURL(url) } label: {
         Label("status.action.view-in-browser", systemImage: "safari")
       }

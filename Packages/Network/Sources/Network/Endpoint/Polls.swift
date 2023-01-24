@@ -13,7 +13,7 @@ public enum Polls: Endpoint {
     }
   }
 
-  public func queryItems() -> [URLQueryItem]? {
+  public func queryItems() -> [URLQueryItem] {
     switch self {
     case let .vote(_, votes):
       var params: [URLQueryItem] = []
@@ -23,7 +23,7 @@ public enum Polls: Endpoint {
       return params
 
     default:
-      return nil
+      return []
     }
   }
 }

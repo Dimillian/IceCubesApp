@@ -10,7 +10,7 @@ public enum CustomEmojis: Endpoint {
     }
   }
 
-  public func queryItems() -> [URLQueryItem]? {
-    nil
+  public func queryItems() -> [URLQueryItem] {
+    return []
   }
 }

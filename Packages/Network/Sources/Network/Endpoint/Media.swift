@@ -13,15 +13,15 @@ public enum Media: Endpoint {
     }
   }
 
-  public func queryItems() -> [URLQueryItem]? {
+  public func queryItems() -> [URLQueryItem] {
     switch self {
     case let .media(_, description):
       if let description {
         return [.init(name: "description", value: description)]
       }
-      return nil
+      return []
     default:
-      return nil
+      return []
     }
   }
 }

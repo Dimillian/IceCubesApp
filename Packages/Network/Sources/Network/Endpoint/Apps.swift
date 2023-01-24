@@ -11,7 +11,7 @@ public enum Apps: Endpoint {
     }
   }
 
-  public func queryItems() -> [URLQueryItem]? {
+  public func queryItems() -> [URLQueryItem] {
     switch self {
     case .registerApp:
       return [

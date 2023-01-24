@@ -35,9 +35,9 @@ public struct InstanceInfoSection: View {
     }
     .listRowBackground(theme.primaryBackgroundColor)
 
-    if let rules = instance.rules {
+    if instance.rules.count > 0 {
       Section("instance.info.section.rules") {
-        ForEach(rules) { rule in
+        ForEach(instance.rules) { rule in
           Text(rule.text)
         }
       }

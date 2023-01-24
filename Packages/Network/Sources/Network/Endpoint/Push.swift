@@ -19,7 +19,7 @@ public enum Push: Endpoint {
     }
   }
 
-  public func queryItems() -> [URLQueryItem]? {
+  public func queryItems() -> [URLQueryItem] {
     switch self {
     case let .createSub(endpoint, p256dh, auth, mentions, status, reblog, follow, favorite, poll):
       var params: [URLQueryItem] = []
@@ -35,7 +35,7 @@ public enum Push: Endpoint {
       params.append(.init(name: "policy", value: "all"))
       return params
     default:
-      return nil
+      return []
     }
   }
 }

@@ -10,7 +10,7 @@ public enum Search: Endpoint {
     }
   }
 
-  public func queryItems() -> [URLQueryItem]? {
+  public func queryItems() -> [URLQueryItem] {
     switch self {
     case let .search(query, type, offset, following):
       var params: [URLQueryItem] = [.init(name: "q", value: query)]

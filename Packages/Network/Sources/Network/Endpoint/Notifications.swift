@@ -15,7 +15,7 @@ public enum Notifications: Endpoint {
     }
   }
 
-  public func queryItems() -> [URLQueryItem]? {
+  public func queryItems() -> [URLQueryItem] {
     switch self {
     case let .notifications(sinceId, maxId, types):
       var params = makePaginationParam(sinceId: sinceId, maxId: maxId, mindId: nil) ?? []
@@ -26,7 +26,7 @@ public enum Notifications: Endpoint {
       }
       return params
     default:
-      return nil
+      return []
     }
   }
 }

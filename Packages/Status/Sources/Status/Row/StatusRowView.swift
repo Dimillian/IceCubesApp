@@ -152,7 +152,8 @@ public struct StatusRowView: View {
 
   @ViewBuilder
   var replyView: some View {
-    if let accountId = viewModel.status.inReplyToAccountId,
+	let accountId = viewModel.status.inReplyToAccountId
+	  if !accountId.isEmpty,
        let mention = viewModel.status.mentions.first(where: { $0.id == accountId })
     {
       HStack(spacing: 2) {

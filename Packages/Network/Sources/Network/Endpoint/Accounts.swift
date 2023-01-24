@@ -82,7 +82,7 @@ public enum Accounts: Endpoint {
     }
   }
 
-  public func queryItems() -> [URLQueryItem]? {
+  public func queryItems() -> [URLQueryItem] {
     switch self {
     case let .statuses(_, sinceId, tag, onlyMedia, excludeReplies, pinned):
       var params: [URLQueryItem] = []
@@ -118,10 +118,10 @@ public enum Accounts: Endpoint {
     case let .following(_, maxId):
       return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
     case let .favorites(sinceId):
-      guard let sinceId else { return nil }
+      guard let sinceId else { return [] }
       return [.init(name: "max_id", value: sinceId)]
     case let .bookmarks(sinceId):
-      guard let sinceId else { return nil }
+      guard let sinceId else { return [] }
       return [.init(name: "max_id", value: sinceId)]
     case let .updateCredentials(displayName, note, privacy,
                                 isSensitive, isBot, isLocked, isDiscoverable):
@@ -135,7 +135,7 @@ public enum Accounts: Endpoint {
       params.append(.init(name: "discoverable", value: isDiscoverable ? "true" : "false"))
       return params
     default:
-      return nil
+      return []
     }
   }
 }

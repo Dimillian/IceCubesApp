@@ -53,14 +53,14 @@ public enum Statuses: Endpoint {
     }
   }
 
-  public func queryItems() -> [URLQueryItem]? {
+  public func queryItems() -> [URLQueryItem] {
     switch self {
     case let .rebloggedBy(_, maxId):
       return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
     case let .favoritedBy(_, maxId):
       return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
     default:
-      return nil
+      return []
     }
   }
 

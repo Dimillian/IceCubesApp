@@ -19,7 +19,7 @@ public enum Timelines: Endpoint {
     }
   }
 
-  public func queryItems() -> [URLQueryItem]? {
+  public func queryItems() -> [URLQueryItem] {
     switch self {
     case let .pub(sinceId, maxId, minId, local):
       var params = makePaginationParam(sinceId: sinceId, maxId: maxId, mindId: minId) ?? []

@@ -16,12 +16,12 @@ public enum Conversations: Endpoint {
     }
   }
 
-  public func queryItems() -> [URLQueryItem]? {
+  public func queryItems() -> [URLQueryItem] {
     switch self {
     case let .conversations(maxId):
       return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
     default:
-      return nil
+      return []
     }
   }
 }

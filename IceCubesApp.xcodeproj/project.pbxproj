@@ -324,7 +324,10 @@
 				9F29553E292B6AF600E0E81B /* Timeline */,
 				9F35DB42294F9A2900B3281A /* Status */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
+			usesTabs = 0;
 		};
 		9FBFE63A292A715500C250E9 /* Products */ = {
 			isa = PBXGroup;

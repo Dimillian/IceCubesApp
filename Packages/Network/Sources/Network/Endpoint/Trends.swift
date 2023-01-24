@@ -16,15 +16,15 @@ public enum Trends: Endpoint {
     }
   }
 
-  public func queryItems() -> [URLQueryItem]? {
+  public func queryItems() -> [URLQueryItem] {
     switch self {
     case let .statuses(offset):
       if let offset {
         return [.init(name: "offset", value: String(offset))]
       }
-      return nil
+      return []
     default:
-      return nil
+      return []
     }
   }
 }

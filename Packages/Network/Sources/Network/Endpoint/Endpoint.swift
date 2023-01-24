@@ -2,7 +2,7 @@ import Foundation
 
 public protocol Endpoint {
   func path() -> String
-  func queryItems() -> [URLQueryItem]?
+  func queryItems() -> [URLQueryItem]
   var jsonValue: Encodable? { get }
 }
 
@@ -13,7 +13,7 @@ public extension Endpoint {
 }
 
 extension Endpoint {
-  func makePaginationParam(sinceId: String?, maxId: String?, mindId: String?) -> [URLQueryItem]? {
+  func makePaginationParam(sinceId: String?, maxId: String?, mindId: String?) -> [URLQueryItem] {
     if let sinceId {
       return [.init(name: "since_id", value: sinceId)]
     } else if let maxId {
@@ -21,6 +21,6 @@ extension Endpoint {
     } else if let mindId {
       return [.init(name: "min_id", value: mindId)]
     }
-    return nil
+    return []
   }
 }
