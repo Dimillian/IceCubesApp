@@ -16,6 +16,7 @@ public class UserPreferences: ObservableObject {
   @AppStorage("font_size_scale") public var fontSizeScale: Double = 1
   @AppStorage("show_translate_button_inline") public var showTranslateButton: Bool = true
   @AppStorage("is_open_ai_enabled") public var isOpenAIEnabled: Bool = true
+  @AppStorage("recently_used_languages") public var recentlyUsedLanguages: [String] = []
 
   public var pushNotificationsCount: Int {
     get {
@@ -40,5 +41,14 @@ public class UserPreferences: ObservableObject {
   public func refreshServerPreferences() async {
     guard let client, client.isAuth else { return }
     serverPreferences = try? await client.get(endpoint: Accounts.preferences)
+  }
+
+  public func markLanguageAsSelected(isoCode: String) {
+    var copy = recentlyUsedLanguages
+    if let index = copy.firstIndex(of: isoCode) {
+      copy.remove(at: index)
+    }
+    copy.insert(isoCode, at: 0)
+    recentlyUsedLanguages = Array(copy.prefix(3))
   }
 }
