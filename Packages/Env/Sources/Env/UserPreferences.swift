@@ -5,7 +5,7 @@ import SwiftUI
 
 @MainActor
 public class UserPreferences: ObservableObject {
-  public static let sharedDefault = UserDefaults(suiteName: "group.icecubesapps")
+  public static let sharedDefault = UserDefaults(suiteName: "group.com.thomasricouard.IceCubesApp")
   public static let shared = UserPreferences()
 
   private var client: Client?
