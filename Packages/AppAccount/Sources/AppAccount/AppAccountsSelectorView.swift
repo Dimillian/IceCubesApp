@@ -41,8 +41,10 @@ public struct AppAccountsSelectorView: View {
         }
       }
     }
-    .onAppear {
+    .onTapGesture {
       feedbackGenerator.impactOccurred(intensity: 0.3)
+    }
+    .onAppear {
       refreshAccounts()
     }
     .onChange(of: currentAccount.account?.id) { _ in
