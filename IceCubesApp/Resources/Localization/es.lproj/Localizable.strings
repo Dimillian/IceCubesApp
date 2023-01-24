@@ -281,6 +281,7 @@
 "status.editor.drafts.navigation-title" = "Borradores";
 "status.editor.error.upload" = "Error subiendo";
 "status.editor.language-select.navigation-title" = "Seleccionar idioma";
+"status.editor.language-select.recently-used" = "Recently Used";
 "status.editor.media.edit-image" = "Editar Imagen";
 "status.editor.media.image-description" = "Descripción de la imagen";
 "status.editor.mode.edit" = "Editando tu publicación";

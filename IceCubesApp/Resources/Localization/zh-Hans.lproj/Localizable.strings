@@ -281,6 +281,7 @@
 "status.editor.drafts.navigation-title" = "草稿";
 "status.editor.error.upload" = "上传错误";
 "status.editor.language-select.navigation-title" = "选择语言";
+"status.editor.language-select.recently-used" = "Recently Used";
 "status.editor.media.edit-image" = "编辑图片";
 "status.editor.media.image-description" = "图片描述";
 "status.editor.mode.edit" = "正在编辑你的嘟文";

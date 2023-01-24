@@ -281,6 +281,7 @@
 "status.editor.drafts.navigation-title" = "Bozze";
 "status.editor.error.upload" = "Errore durante il caricamento";
 "status.editor.language-select.navigation-title" = "Scegli la lingua";
+"status.editor.language-select.recently-used" = "Recently Used";
 "status.editor.media.edit-image" = "Modifica l'immagine";
 "status.editor.media.image-description" = "Descrizione dell'immagine";
 "status.editor.mode.edit" = "Messaggio in modifica";

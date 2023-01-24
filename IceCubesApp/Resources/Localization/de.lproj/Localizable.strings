@@ -281,6 +281,7 @@
 "status.editor.drafts.navigation-title" = "Entwürfe";
 "status.editor.error.upload" = "Fehler beim Hochladen";
 "status.editor.language-select.navigation-title" = "Sprache auswählen";
+"status.editor.language-select.recently-used" = "Recently Used";
 "status.editor.media.edit-image" = "Bild bearbeiten";
 "status.editor.media.image-description" = "Bildbeschreibung";
 "status.editor.mode.edit" = "Deinen Post bearbeiten";
