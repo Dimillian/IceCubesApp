@@ -37,7 +37,7 @@ public extension StatusEditorViewModel {
         return nil
       }
     }
-    
+
     var title: LocalizedStringKey {
       switch self {
       case .new, .mention, .shareExtension:

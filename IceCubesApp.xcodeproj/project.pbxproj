@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		639CDF9C296AC82F00C35E58 /* SafariRouteur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639CDF9B296AC82F00C35E58 /* SafariRouteur.swift */; };
+		639CDF9C296AC82F00C35E58 /* SafariRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639CDF9B296AC82F00C35E58 /* SafariRouter.swift */; };
+		7429BCE2297C55D00069A946 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7429BCE4297C55D00069A946 /* Localizable.stringsdict */; };
+		7429BCE5297C5A750069A946 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7429BCE4297C55D00069A946 /* Localizable.stringsdict */; };
+		7429BCE6297C5A750069A946 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7429BCE4297C55D00069A946 /* Localizable.stringsdict */; };
 		9F24EEB829360C330042359D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F24EEB729360C330042359D /* Preview Assets.xcassets */; };
 		9F295540292B6C3400E0E81B /* Timeline in Frameworks */ = {isa = PBXBuildFile; productRef = 9F29553F292B6C3400E0E81B /* Timeline */; };
 		9F2A540729699698009B2D7C /* SupportAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2A540629699698009B2D7C /* SupportAppView.swift */; };
@@ -30,7 +33,7 @@
 		9F35DB4729506F6600B3281A /* NotificationTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F35DB4629506F6600B3281A /* NotificationTab.swift */; };
 		9F35DB4A29506FA100B3281A /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 9F35DB4929506FA100B3281A /* Notifications */; };
 		9F35DB4C2952005C00B3281A /* MessagesTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F35DB4B2952005C00B3281A /* MessagesTab.swift */; };
-		9F398AA62935FE8A00A889F2 /* AppRouteur.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F398AA52935FE8A00A889F2 /* AppRouteur.swift */; };
+		9F398AA62935FE8A00A889F2 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F398AA52935FE8A00A889F2 /* AppRouter.swift */; };
 		9F398AA92935FFDB00A889F2 /* Account in Frameworks */ = {isa = PBXBuildFile; productRef = 9F398AA82935FFDB00A889F2 /* Account */; };
 		9F398AAB2935FFDB00A889F2 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 9F398AAA2935FFDB00A889F2 /* Models */; };
 		9F398AB329360A4C00A889F2 /* TimelineTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F398AB229360A4C00A889F2 /* TimelineTab.swift */; };
@@ -41,8 +44,9 @@
 		9F7335EA2966B3F800AFF0BA /* Conversations in Frameworks */ = {isa = PBXBuildFile; productRef = 9F7335E92966B3F800AFF0BA /* Conversations */; };
 		9F7335ED2967463400AFF0BA /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F7335EB2967461B00AFF0BA /* AVKit.framework */; };
 		9F7335EF29674F7100AFF0BA /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F7335EE29674F7100AFF0BA /* QuickLook.framework */; };
-		9F7335F22967608F00AFF0BA /* AddRemoteTimelineVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7335F12967608F00AFF0BA /* AddRemoteTimelineVIew.swift */; };
+		9F7335F22967608F00AFF0BA /* AddRemoteTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7335F12967608F00AFF0BA /* AddRemoteTimelineView.swift */; };
 		9F7335F92968576500AFF0BA /* DisplaySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7335F82968576500AFF0BA /* DisplaySettingsView.swift */; };
+		9F7D93942980063100EE6B7A /* AppAccount in Frameworks */ = {isa = PBXBuildFile; productRef = 9F7D93932980063100EE6B7A /* AppAccount */; };
 		9F8CA5972979B61100481E8E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E9B576C529743F4C00BCE646 /* Localizable.strings */; };
 		9F8CA5982979B63D00481E8E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E9B576C529743F4C00BCE646 /* Localizable.strings */; };
 		9FAD85832971BF7200496AB1 /* Secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9FAD85822971BF7200496AB1 /* Secret.plist */; };
@@ -102,7 +106,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		639CDF9B296AC82F00C35E58 /* SafariRouteur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariRouteur.swift; sourceTree = "<group>"; };
+		639CDF9B296AC82F00C35E58 /* SafariRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariRouter.swift; sourceTree = "<group>"; };
+		7429BCE3297C55D00069A946 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		7429BCE7297C5D010069A946 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = nl; path = nl.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		7429BCE8297C5D020069A946 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = de; path = de.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		7429BCE9297C5D030069A946 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = es; path = es.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		7429BCEB297D65380069A946 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
+		7429BCEC297D65390069A946 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = it; path = it.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		9606B7A1297AD2BB00C1FB75 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9F24EEB729360C330042359D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9F29553D292B67B600E0E81B /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Network; path = Packages/Network; sourceTree = "<group>"; };
@@ -126,8 +136,9 @@
 		9F35DB4629506F6600B3281A /* NotificationTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTab.swift; sourceTree = "<group>"; };
 		9F35DB4829506F7F00B3281A /* Notifications */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Notifications; path = Packages/Notifications; sourceTree = "<group>"; };
 		9F35DB4B2952005C00B3281A /* MessagesTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTab.swift; sourceTree = "<group>"; };
+		9F38C233297D03120018F11E /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9F398AA32935F90100A889F2 /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Models; path = Packages/Models; sourceTree = "<group>"; };
-		9F398AA52935FE8A00A889F2 /* AppRouteur.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouteur.swift; sourceTree = "<group>"; };
+		9F398AA52935FE8A00A889F2 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		9F398AAC2936005300A889F2 /* Account */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Account; path = Packages/Account; sourceTree = "<group>"; };
 		9F398AB229360A4C00A889F2 /* TimelineTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTab.swift; sourceTree = "<group>"; };
 		9F4A48182976B21900A1A038 /* ProfileTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTab.swift; sourceTree = "<group>"; };
@@ -137,8 +148,10 @@
 		9F7335E82966B3DC00AFF0BA /* Conversations */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Conversations; path = Packages/Conversations; sourceTree = "<group>"; };
 		9F7335EB2967461B00AFF0BA /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.2.sdk/System/Library/Frameworks/AVKit.framework; sourceTree = DEVELOPER_DIR; };
 		9F7335EE29674F7100AFF0BA /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.2.sdk/System/Library/Frameworks/QuickLook.framework; sourceTree = DEVELOPER_DIR; };
-		9F7335F12967608F00AFF0BA /* AddRemoteTimelineVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRemoteTimelineVIew.swift; sourceTree = "<group>"; };
+		9F7335F12967608F00AFF0BA /* AddRemoteTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRemoteTimelineView.swift; sourceTree = "<group>"; };
 		9F7335F82968576500AFF0BA /* DisplaySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaySettingsView.swift; sourceTree = "<group>"; };
+		9F7D9391297FA50400EE6B7A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ja; path = ja.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		9F7D9392297FA50400EE6B7A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9FAD85822971BF7200496AB1 /* Secret.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Secret.plist; sourceTree = "<group>"; };
 		9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IceCubesShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FAD858A29743F7400496AB1 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
@@ -155,6 +168,7 @@
 		9FD542E52962D2CE0045321A /* Lists */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Lists; path = Packages/Lists; sourceTree = "<group>"; };
 		9FE151A5293C90F900E9683D /* IconSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSelectorView.swift; sourceTree = "<group>"; };
 		9FE3DB55296FEF5800628CB0 /* AppAccount */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppAccount; path = Packages/AppAccount; sourceTree = "<group>"; };
+		C465A53D297C5E0C00864FB7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		E9B576C429743F4C00BCE646 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E9B576CC2974AAAF00BCE646 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F355EEDA297A8BD500E362C0 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -165,6 +179,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F7D93942980063100EE6B7A /* AppAccount in Frameworks */,
 				9F2A5428296AB683009B2D7C /* Models in Frameworks */,
 				9F2A5426296AB67E009B2D7C /* KeychainSwift in Frameworks */,
 				9F2A5424296AB67A009B2D7C /* Env in Frameworks */,
@@ -212,6 +227,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7429BCEA297C64CF0069A946 /* Plurals */ = {
+			isa = PBXGroup;
+			children = (
+				7429BCE4297C55D00069A946 /* Localizable.stringsdict */,
+			);
+			path = Plurals;
+			sourceTree = "<group>";
+		};
 		9F2A5417296AB631009B2D7C /* IceCubesNotifications */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,8 +251,8 @@
 			children = (
 				9FAE4AC9293783A200772766 /* Tabs */,
 				9FBFE63C292A715500C250E9 /* IceCubesApp.swift */,
-				9F398AA52935FE8A00A889F2 /* AppRouteur.swift */,
-				639CDF9B296AC82F00C35E58 /* SafariRouteur.swift */,
+				9F398AA52935FE8A00A889F2 /* AppRouter.swift */,
+				639CDF9B296AC82F00C35E58 /* SafariRouter.swift */,
 				9FAD85A7297582F100496AB1 /* QuickLookRepresentable.swift */,
 				9FAD85CE2975B68900496AB1 /* SideBarView.swift */,
 			);
@@ -251,7 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				9F398AB229360A4C00A889F2 /* TimelineTab.swift */,
-				9F7335F12967608F00AFF0BA /* AddRemoteTimelineVIew.swift */,
+				9F7335F12967608F00AFF0BA /* AddRemoteTimelineView.swift */,
 			);
 			path = Timeline;
 			sourceTree = "<group>";
@@ -354,6 +377,7 @@
 		E9B576C029743F2A00BCE646 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
+				7429BCEA297C64CF0069A946 /* Plurals */,
 				E9B576C529743F4C00BCE646 /* Localizable.strings */,
 			);
 			path = Localization;
@@ -379,6 +403,7 @@
 				9F2A5423296AB67A009B2D7C /* Env */,
 				9F2A5425296AB67E009B2D7C /* KeychainSwift */,
 				9F2A5427296AB683009B2D7C /* Models */,
+				9F7D93932980063100EE6B7A /* AppAccount */,
 			);
 			productName = IceCubesNotifications;
 			productReference = 9F2A5416296AB631009B2D7C /* IceCubesNotifications.appex */;
@@ -477,6 +502,9 @@
 				de,
 				nl,
 				es,
+				"zh-Hans",
+				it,
+				ja,
 			);
 			mainGroup = 9FBFE630292A715500C250E9;
 			packageReferences = (
@@ -499,6 +527,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7429BCE5297C5A750069A946 /* Localizable.stringsdict in Resources */,
 				9F8CA5982979B63D00481E8E /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -509,6 +538,7 @@
 			files = (
 				9FAD858E29743F7400496AB1 /* (null) in Resources */,
 				9F8CA5972979B61100481E8E /* Localizable.strings in Resources */,
+				7429BCE6297C5A750069A946 /* Localizable.stringsdict in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,6 +549,7 @@
 				9F2A542C296B1177009B2D7C /* glass.caf in Resources */,
 				E9B576C329743F4C00BCE646 /* Localizable.strings in Resources */,
 				9FD34823293D06E800DB0EE9 /* Assets.xcassets in Resources */,
+				7429BCE2297C55D00069A946 /* Localizable.stringsdict in Resources */,
 				9F24EEB829360C330042359D /* Preview Assets.xcassets in Resources */,
 				9FAD85832971BF7200496AB1 /* Secret.plist in Resources */,
 				9F2A542E296B1CC0009B2D7C /* glass.wav in Resources */,
@@ -558,13 +589,13 @@
 				9F2A540729699698009B2D7C /* SupportAppView.swift in Sources */,
 				9F2B92F6295AE04800DE16D0 /* Tabs.swift in Sources */,
 				9F398AB329360A4C00A889F2 /* TimelineTab.swift in Sources */,
-				9F398AA62935FE8A00A889F2 /* AppRouteur.swift in Sources */,
+				9F398AA62935FE8A00A889F2 /* AppRouter.swift in Sources */,
 				9FBFE63D292A715500C250E9 /* IceCubesApp.swift in Sources */,
 				9F4A48192976B21900A1A038 /* ProfileTab.swift in Sources */,
 				9F2B92FA295DA7D700DE16D0 /* AddAccountsView.swift in Sources */,
-				639CDF9C296AC82F00C35E58 /* SafariRouteur.swift in Sources */,
+				639CDF9C296AC82F00C35E58 /* SafariRouter.swift in Sources */,
 				9F35DB4729506F6600B3281A /* NotificationTab.swift in Sources */,
-				9F7335F22967608F00AFF0BA /* AddRemoteTimelineVIew.swift in Sources */,
+				9F7335F22967608F00AFF0BA /* AddRemoteTimelineView.swift in Sources */,
 				9F55C68D2955968700F94077 /* ExploreTab.swift in Sources */,
 				9F2A5411296A1429009B2D7C /* PushNotificationsView.swift in Sources */,
 				9FAD85A8297582F100496AB1 /* QuickLookRepresentable.swift in Sources */,
@@ -589,6 +620,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		7429BCE4297C55D00069A946 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7429BCE3297C55D00069A946 /* en */,
+				7429BCE7297C5D010069A946 /* nl */,
+				7429BCE8297C5D020069A946 /* de */,
+				7429BCE9297C5D030069A946 /* es */,
+				7429BCEB297D65380069A946 /* zh-Hans */,
+				7429BCEC297D65390069A946 /* it */,
+				9F7D9391297FA50400EE6B7A /* ja */,
+			);
+			name = Localizable.stringsdict;
+			sourceTree = "<group>";
+		};
 		E9B576C529743F4C00BCE646 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -596,6 +641,9 @@
 				E9B576CC2974AAAF00BCE646 /* de */,
 				F355EEDA297A8BD500E362C0 /* nl */,
 				9606B7A1297AD2BB00C1FB75 /* es */,
+				C465A53D297C5E0C00864FB7 /* zh-Hans */,
+				9F38C233297D03120018F11E /* it */,
+				9F7D9392297FA50400EE6B7A /* ja */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -622,7 +670,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.6;
+				MARKETING_VERSION = 1.0.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thomasricouard.IceCubesApp.IceCubesNotifications;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -652,7 +700,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.6;
+				MARKETING_VERSION = 1.0.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thomasricouard.IceCubesApp.IceCubesNotifications;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -683,7 +731,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.6;
+				MARKETING_VERSION = 1.0.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thomasricouard.IceCubesApp.IceCubesShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -713,7 +761,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0.6;
+				MARKETING_VERSION = 1.0.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thomasricouard.IceCubesApp.IceCubesShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -877,7 +925,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0.6;
+				MARKETING_VERSION = 1.0.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thomasricouard.IceCubesApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -929,7 +977,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.0.6;
+				MARKETING_VERSION = 1.0.10;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thomasricouard.IceCubesApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -1057,6 +1105,10 @@
 		9F7335E92966B3F800AFF0BA /* Conversations */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Conversations;
+		};
+		9F7D93932980063100EE6B7A /* AppAccount */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppAccount;
 		};
 		9FAD85972974405D00496AB1 /* Status */ = {
 			isa = XCSwiftPackageProductDependency;

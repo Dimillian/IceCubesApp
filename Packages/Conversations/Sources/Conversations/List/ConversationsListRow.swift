@@ -20,7 +20,7 @@ struct ConversationsListRow: View {
         VStack(alignment: .leading, spacing: 4) {
           HStack {
             EmojiTextApp(.init(stringValue: conversation.accounts.map { $0.safeDisplayName }.joined(separator: ", ")),
-                         emojis: conversation.accounts.flatMap{ $0.emojis })
+                         emojis: conversation.accounts.flatMap { $0.emojis })
               .font(.scaledSubheadline)
               .fontWeight(.semibold)
               .foregroundColor(theme.labelColor)
@@ -31,7 +31,7 @@ struct ConversationsListRow: View {
                 .foregroundColor(theme.tintColor)
                 .frame(width: 10, height: 10)
             }
-            Text(conversation.lastStatus.createdAt.formatted)
+            Text(conversation.lastStatus.createdAt.relativeFormatted)
               .font(.scaledFootnote)
           }
           Text(conversation.lastStatus.content.asRawText)
@@ -44,7 +44,7 @@ struct ConversationsListRow: View {
         Task {
           await viewModel.markAsRead(conversation: conversation)
         }
-        routerPath.navigate(to: .statusDetail(id: conversation.lastStatus.id))
+        routerPath.navigate(to: .conversationDetail(conversation: conversation))
       }
       .padding(.top, 4)
       actionsView

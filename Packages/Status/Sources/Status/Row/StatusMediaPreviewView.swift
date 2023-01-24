@@ -1,14 +1,15 @@
 import DesignSystem
 import Env
 import Models
+import Nuke
 import NukeUI
 import Shimmer
 import SwiftUI
-import Nuke
 
 public struct StatusMediaPreviewView: View {
   @Environment(\.openURL) private var openURL
-  
+
+  @EnvironmentObject var sceneDelegate: SceneDelegate
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var quickLook: QuickLook
   @EnvironmentObject private var theme: Theme
@@ -23,10 +24,26 @@ public struct StatusMediaPreviewView: View {
   @State private var isAltAlertDisplayed: Bool = false
   @State private var isHidingMedia: Bool = false
 
+  var availableWidth: CGFloat {
+    if sceneDelegate.windowWidth > .maxColumnWidth {
+      return .maxColumnWidth
+    }
+    return sceneDelegate.windowWidth
+  }
+  
+  var appLayoutWidth: CGFloat {
+    let avatarColumnWidth = theme.avatarPosition == .leading ? AvatarView.Size.status.size.width + .statusColumnsSpacing : 0
+    var sidebarWidth: CGFloat = 0
+    if UIDevice.current.userInterfaceIdiom == .pad && sceneDelegate.windowWidth < (.maxColumnWidth + .sidebarWidth) {
+      sidebarWidth = .sidebarWidth
+    }
+    return (.layoutPadding * 2) + avatarColumnWidth + sidebarWidth
+  }
+  
   private var imageMaxHeight: CGFloat {
     if isNotifications {
       if UIDevice.current.userInterfaceIdiom == .pad {
-        return 150
+        return 100
       }
       return 50
     }
@@ -40,12 +57,6 @@ public struct StatusMediaPreviewView: View {
   }
 
   private func size(for media: MediaAttachment) -> CGSize? {
-    if isNotifications {
-      return .init(width: 50, height: 50)
-    }
-    if theme.statusDisplayStyle == .compact {
-      return .init(width: 100, height: 100)
-    }
     if let width = media.meta?.original?.width,
        let height = media.meta?.original?.height
     {
@@ -55,8 +66,8 @@ public struct StatusMediaPreviewView: View {
   }
 
   private func imageSize(from: CGSize, newWidth: CGFloat) -> CGSize {
-    if isNotifications {
-      return .init(width: 50, height: 50)
+    if isNotifications || theme.statusDisplayStyle == .compact {
+      return .init(width: imageMaxHeight, height: imageMaxHeight)
     }
     let ratio = newWidth / from.width
     let newHeight = from.height * ratio
@@ -137,16 +148,10 @@ public struct StatusMediaPreviewView: View {
     ZStack(alignment: .bottomTrailing) {
       switch attachment.supportedType {
       case .image:
-        if theme.statusDisplayStyle == .large,
-           let size = size(for: attachment),
-           UIDevice.current.userInterfaceIdiom != .pad,
-           UIDevice.current.userInterfaceIdiom != .mac
-        {
-          let avatarColumnWidth = theme.avatarPosition == .leading ? AvatarView.Size.status.size.width + .statusColumnsSpacing : 0
-          let availableWidth = UIScreen.main.bounds.width - (.layoutPadding * 2) - avatarColumnWidth
+        if let size = size(for: attachment) {
           let newSize = imageSize(from: size,
-                                  newWidth: availableWidth)
-          
+                                  newWidth: availableWidth - appLayoutWidth)
+
           LazyImage(url: attachment.url) { state in
             if let image = state.image {
               image
@@ -161,23 +166,19 @@ public struct StatusMediaPreviewView: View {
             }
           }
         } else {
-          AsyncImage(
-            url: attachment.url,
-            content: { image in
+          LazyImage(url: attachment.url) { state in
+            if let image = state.image {
               image
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(maxHeight: isNotifications || theme.statusDisplayStyle == .compact ? imageMaxHeight : nil)
+                .resizingMode(.aspectFit)
+                .frame(maxHeight: imageMaxHeight)
                 .cornerRadius(4)
-            },
-            placeholder: {
+            } else {
               RoundedRectangle(cornerRadius: 4)
                 .fill(Color.gray)
-                .frame(maxHeight: isNotifications || theme.statusDisplayStyle == .compact ? imageMaxHeight : nil)
+                .frame(maxHeight: imageMaxHeight)
                 .shimmering()
-
             }
-          )
+          }
         }
       case .gifv, .video, .audio:
         if let url = attachment.url {
@@ -196,14 +197,14 @@ public struct StatusMediaPreviewView: View {
             altTextDisplayed = alt
             isAltAlertDisplayed = true
           } label: {
-            Text("ALT")
-
+            Text("status.image.alt-text.abbreviation")
+              .font(theme.statusDisplayStyle == .compact ? .footnote : .body)
           }
-          .padding(8)
+          .padding(4)
           .background(.thinMaterial)
           .cornerRadius(4)
         }
-        .padding(10)
+        .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
       }
     }
   }
@@ -298,7 +299,6 @@ public struct StatusMediaPreviewView: View {
             Label("status.media.sensitive.show", systemImage: "eye")
           } else {
             Label("status.media.content.show", systemImage: "eye")
-
           }
         }
         .buttonStyle(.borderedProminent)
@@ -307,21 +307,21 @@ public struct StatusMediaPreviewView: View {
   }
 
   private var cornerSensitiveButton: some View {
-    HStack{
+    HStack {
       Button {
         withAnimation {
           isHidingMedia = true
         }
       } label: {
         Image(systemName: "eye.slash")
-          .frame(minHeight:21)  // Match the alt button in case it is also present
+          .frame(minHeight: 21) // Match the alt button in case it is also present
       }
       .padding(10)
       .buttonStyle(.borderedProminent)
       Spacer()
     }
   }
-  
+
   @ViewBuilder
   private func contextMenuForMedia(mediaAttachement: MediaAttachment) -> some View {
     if let url = mediaAttachement.url {
@@ -337,7 +337,7 @@ public struct StatusMediaPreviewView: View {
           do {
             let image = try await ImagePipeline.shared.image(for: url).image
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-          } catch { }
+          } catch {}
         }
       } label: {
         Label("status.media.contextmenu.save", systemImage: "square.and.arrow.down")
@@ -347,7 +347,7 @@ public struct StatusMediaPreviewView: View {
           do {
             let image = try await ImagePipeline.shared.image(for: url).image
             UIPasteboard.general.image = image
-          } catch { }
+          } catch {}
         }
       } label: {
         Label("status.media.contextmenu.copy", systemImage: "doc.on.doc")

@@ -3,13 +3,13 @@ import HTML2Markdown
 import SwiftSoup
 import SwiftUI
 
-public struct HTMLString: Decodable, Equatable {
+public struct HTMLString: Decodable, Equatable, Hashable {
   public let htmlValue: String
   public let asMarkdown: String
   public let asRawText: String
   public let statusesURLs: [URL]
   public let asSafeMarkdownAttributedString: AttributedString
-  
+
   public init(from decoder: Decoder) {
     do {
       let container = try decoder.singleValueContainer()
@@ -17,7 +17,7 @@ public struct HTMLString: Decodable, Equatable {
     } catch {
       htmlValue = ""
     }
-    
+
     do {
       asMarkdown = try HTMLParser().parse(html: htmlValue)
         .toMarkdown()
@@ -25,7 +25,7 @@ public struct HTMLString: Decodable, Equatable {
     } catch {
       asMarkdown = htmlValue
     }
-    
+
     var statusesURLs: [URL] = []
     do {
       let document: Document = try SwiftSoup.parse(htmlValue)
@@ -42,9 +42,9 @@ public struct HTMLString: Decodable, Equatable {
     } catch {
       asRawText = htmlValue
     }
-    
+
     self.statusesURLs = statusesURLs
-    
+
     do {
       let options = AttributedString.MarkdownParsingOptions(allowsExtendedAttributes: true,
                                                             interpretedSyntax: .inlineOnlyPreservingWhitespace)
@@ -53,7 +53,7 @@ public struct HTMLString: Decodable, Equatable {
       asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
     }
   }
-  
+
   public init(stringValue: String) {
     htmlValue = stringValue
     asMarkdown = stringValue

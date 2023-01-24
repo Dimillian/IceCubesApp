@@ -40,6 +40,7 @@ public struct StatusEditorView: View {
             TextView($viewModel.statusText, $viewModel.selectedRange, $viewModel.markedTextRange)
               .placeholder(String(localized: "status.editor.text.placeholder"))
               .font(Font.scaledBodyUIFont)
+              .keyboardType(.twitter)
               .padding(.horizontal, .layoutPadding)
             StatusEditorMediaView(viewModel: viewModel)
             if let status = viewModel.embeddedStatus {
@@ -79,7 +80,7 @@ public struct StatusEditorView: View {
           NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
                                           object: nil)
         }
-        
+
         Task {
           await viewModel.fetchCustomEmojis()
         }
@@ -91,10 +92,19 @@ public struct StatusEditorView: View {
       .background(theme.primaryBackgroundColor)
       .navigationTitle(viewModel.mode.title)
       .navigationBarTitleDisplayMode(.inline)
+      .alert("Error while posting",
+             isPresented: $viewModel.showPostingErrorAlert,
+             actions: {
+        Button("Ok") { }
+      }, message: {
+        Text(viewModel.postingError ?? "")
+      })
       .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          AIMenu
-            .disabled(!viewModel.canPost)
+        if preferences.isOpenAIEnabled {
+          ToolbarItem(placement: .navigationBarTrailing) {
+            AIMenu
+              .disabled(!viewModel.canPost)
+          }
         }
         ToolbarItem(placement: .navigationBarTrailing) {
           Button {
@@ -118,7 +128,7 @@ public struct StatusEditorView: View {
         }
         ToolbarItem(placement: .navigationBarLeading) {
           Button {
-            if !viewModel.statusText.string.isEmpty && !viewModel.mode.isInShareExtension {
+            if viewModel.shouldDisplayDismissWarning {
               isDismissAlertPresented = true
             } else {
               dismiss()

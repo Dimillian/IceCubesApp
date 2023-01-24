@@ -41,7 +41,7 @@ extension Models.Notification.NotificationType {
       return "pencil.line"
     }
   }
-  
+
   func menuTitle() -> LocalizedStringKey {
     switch self {
     case .status:

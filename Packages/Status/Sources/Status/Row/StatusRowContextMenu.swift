@@ -3,6 +3,7 @@ import Foundation
 import SwiftUI
 
 struct StatusRowContextMenu: View {
+  @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var routerPath: RouterPath
 
@@ -13,13 +14,13 @@ struct StatusRowContextMenu: View {
   var body: some View {
     if !viewModel.isRemote {
       Button { Task {
-        if viewModel.isFavourited {
-          await viewModel.unFavourite()
+        if viewModel.isFavorited {
+          await viewModel.unFavorite()
         } else {
-          await viewModel.favourite()
+          await viewModel.favorite()
         }
       } } label: {
-        Label(viewModel.isFavourited ? "status.action.unfavorite" : "status.action.favorite", systemImage: "star")
+        Label(viewModel.isFavorited ? "status.action.unfavorite" : "status.action.favorite", systemImage: "star")
       }
       Button { Task {
         if viewModel.isReblogged {
@@ -73,6 +74,17 @@ struct StatusRowContextMenu: View {
       UIPasteboard.general.string = viewModel.status.content.asRawText
     } label: {
       Label("status.action.copy-text", systemImage: "doc.on.doc")
+    }
+    
+    if let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier,
+       viewModel.status.language != lang {
+      Button {
+        Task {
+          await viewModel.translate(userLang: lang)
+        }
+      } label: {
+        Label("status.action.translate", systemImage: "captions.bubble")
+      }
     }
 
     if account.account?.id == viewModel.status.account.id {

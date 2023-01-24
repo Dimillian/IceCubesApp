@@ -27,12 +27,13 @@ struct SettingsTabs: View {
         appSection
         accountsSection
         generalSection
+        otherSections
       }
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
       .navigationTitle(Text("settings.title"))
       .navigationBarTitleDisplayMode(.inline)
-      .toolbarBackground(theme.primaryBackgroundColor, for: .navigationBar)
+      .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
       .withAppRouter()
       .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
     }
@@ -63,7 +64,9 @@ struct SettingsTabs: View {
           let account = appAccountsManager.availableAccounts[index]
           if let token = account.oauthToken {
             Task {
-              await pushNotifications.deleteSubscriptions(accounts: [.init(server: account.server, token: token)])
+              await pushNotifications.deleteSubscriptions(accounts: [.init(server: account.server,
+                                                                           token: token,
+                                                                           accountName: account.accountName)])
             }
           }
           appAccountsManager.delete(account: account)
@@ -91,6 +94,12 @@ struct SettingsTabs: View {
       NavigationLink(destination: remoteLocalTimelinesView) {
         Label("settings.general.remote-timelines", systemImage: "dot.radiowaves.right")
       }
+    }
+    .listRowBackground(theme.primaryBackgroundColor)
+  }
+  
+  private var otherSections: some View {
+    Section("settings.section.other") {
       if !ProcessInfo.processInfo.isiOSAppOnMac {
         Picker(selection: $preferences.preferredBrowser) {
           ForEach(PreferredBrowser.allCases, id: \.rawValue) { browser in
@@ -104,6 +113,9 @@ struct SettingsTabs: View {
         } label: {
           Label("settings.general.browser", systemImage: "network")
         }
+      }
+      Toggle(isOn: $preferences.isOpenAIEnabled) {
+        Label("settings.other.hide-openai", systemImage: "faxmachine")
       }
     }
     .listRowBackground(theme.primaryBackgroundColor)
@@ -134,19 +146,19 @@ struct SettingsTabs: View {
       NavigationLink(destination: SupportAppView()) {
         Label("settings.app.support", systemImage: "wand.and.stars")
       }
-      
+
       if let reviewURL = URL(string: "https://apps.apple.com/app/id\(AppInfo.appStoreAppId)?action=write-review") {
         Link(destination: reviewURL) {
-          Label("Rate Ice Cubes", systemImage: "link")
+          Label("settings.rate", systemImage: "link")
         }
         .tint(theme.labelColor)
       }
     } header: {
-        Text("settings.section.app")
+      Text("settings.section.app")
     } footer: {
-        if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-            Text("App Version: \(appVersion)").frame(maxWidth: .infinity, alignment: .center)
-        }
+      if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+        Text("settings.section.app.footer \(appVersion)").frame(maxWidth: .infinity, alignment: .center)
+      }
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }

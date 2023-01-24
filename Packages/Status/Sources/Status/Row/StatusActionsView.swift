@@ -14,7 +14,7 @@ struct StatusActionsView: View {
 
   @MainActor
   enum Actions: CaseIterable {
-    case respond, boost, favourite, bookmark, share
+    case respond, boost, favorite, bookmark, share
 
     func iconName(viewModel: StatusRowViewModel) -> String {
       switch self {
@@ -22,8 +22,8 @@ struct StatusActionsView: View {
         return "arrowshape.turn.up.left"
       case .boost:
         return viewModel.isReblogged ? "arrow.left.arrow.right.circle.fill" : "arrow.left.arrow.right.circle"
-      case .favourite:
-        return viewModel.isFavourited ? "star.fill" : "star"
+      case .favorite:
+        return viewModel.isFavorited ? "star.fill" : "star"
       case .bookmark:
         return viewModel.isBookmarked ? "bookmark.fill" : "bookmark"
       case .share:
@@ -38,8 +38,8 @@ struct StatusActionsView: View {
       switch self {
       case .respond:
         return viewModel.repliesCount
-      case .favourite:
-        return viewModel.favouritesCount
+      case .favorite:
+        return viewModel.favoritesCount
       case .boost:
         return viewModel.reblogsCount
       case .share, .bookmark:
@@ -51,8 +51,8 @@ struct StatusActionsView: View {
       switch self {
       case .respond, .share:
         return nil
-      case .favourite:
-        return viewModel.isFavourited ? .yellow : nil
+      case .favorite:
+        return viewModel.isFavorited ? .yellow : nil
       case .bookmark:
         return viewModel.isBookmarked ? .pink : nil
       case .boost:
@@ -101,9 +101,9 @@ struct StatusActionsView: View {
     Divider()
     HStack {
       Text(viewModel.status.createdAt.asDate, style: .date) +
-      Text("status.summary.at-time") +
-      Text(viewModel.status.createdAt.asDate, style: .time) +
-      Text("  ·")
+        Text("status.summary.at-time") +
+        Text(viewModel.status.createdAt.asDate, style: .time) +
+        Text("  ·")
       Image(systemName: viewModel.status.visibility.iconName)
       Spacer()
       Text(viewModel.status.application?.name ?? "")
@@ -116,14 +116,14 @@ struct StatusActionsView: View {
     }
     .font(.scaledCaption)
     .foregroundColor(.gray)
-    
+
     if let editedAt = viewModel.status.editedAt {
       Divider()
       HStack {
         Text("status.summary.edited-time") +
-        Text(editedAt.asDate, style: .date) +
-        Text("status.summary.at-time") +
-        Text(editedAt.asDate, style: .time)
+          Text(editedAt.asDate, style: .date) +
+          Text("status.summary.at-time") +
+          Text(editedAt.asDate, style: .time)
         Spacer()
       }
       .onTapGesture {
@@ -134,10 +134,10 @@ struct StatusActionsView: View {
       .foregroundColor(.gray)
     }
 
-    if viewModel.favouritesCount > 0 {
+    if viewModel.favoritesCount > 0 {
       Divider()
-      NavigationLink(value: RouterDestinations.favouritedBy(id: viewModel.status.id)) {
-        Text("status.summary.n-favorites \(viewModel.favouritesCount)")
+      NavigationLink(value: RouterDestinations.favoritedBy(id: viewModel.status.id)) {
+        Text("status.summary.n-favorites \(viewModel.favoritesCount)")
           .font(.scaledCallout)
         Spacer()
         Image(systemName: "chevron.right")
@@ -160,11 +160,11 @@ struct StatusActionsView: View {
       switch action {
       case .respond:
         routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
-      case .favourite:
-        if viewModel.isFavourited {
-          await viewModel.unFavourite()
+      case .favorite:
+        if viewModel.isFavorited {
+          await viewModel.unFavorite()
         } else {
-          await viewModel.favourite()
+          await viewModel.favorite()
         }
       case .bookmark:
         if viewModel.isBookmarked {

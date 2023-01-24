@@ -6,7 +6,7 @@ import SwiftUI
 
 struct SupportAppView: View {
   enum Tips: String, CaseIterable {
-    case one, two, three
+    case one, two, three, four
 
     init(productId: String) {
       self = .init(rawValue: String(productId.split(separator: ".")[2]))!
@@ -15,7 +15,7 @@ struct SupportAppView: View {
     var productId: String {
       "icecubes.tipjar.\(rawValue)"
     }
-    
+
     var title: LocalizedStringKey {
       switch self {
       case .one:
@@ -24,9 +24,11 @@ struct SupportAppView: View {
         return "settings.support.two.title"
       case .three:
         return "settings.support.three.title"
+      case .four:
+        return "settings.support.four.title"
       }
     }
-    
+
     var subtitle: LocalizedStringKey {
       switch self {
       case .one:
@@ -35,6 +37,8 @@ struct SupportAppView: View {
         return "settings.support.two.subtitle"
       case .three:
         return "settings.support.three.subtitle"
+      case .four:
+        return "settings.support.four.subtitle"
       }
     }
   }

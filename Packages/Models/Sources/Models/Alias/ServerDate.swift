@@ -22,19 +22,15 @@ extension ServerDate {
     dateFormatter.dateStyle = .medium
     return dateFormatter
   }()
-  
+
   private static let calendar = Calendar(identifier: .gregorian)
 
   public var asDate: Date {
     Self.createdAtDateFormatter.date(from: self)!
   }
 
-  public var formatted: String {
-    if Self.calendar.numberOfDaysBetween(asDate, and: Date()) > 1 {
-      return Self.createdAtShortDateFormatted.string(from: asDate)
-    } else {
-      return Self.createdAtRelativeFormatter.localizedString(for: asDate, relativeTo: Date())
-    }
+  public var relativeFormatted: String {
+    return Self.createdAtRelativeFormatter.localizedString(for: asDate, relativeTo: Date())
   }
 }
 

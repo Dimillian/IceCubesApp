@@ -9,7 +9,7 @@ public enum Push: Endpoint {
                  status: Bool,
                  reblog: Bool,
                  follow: Bool,
-                 favourite: Bool,
+                 favorite: Bool,
                  poll: Bool)
 
   public func path() -> String {
@@ -21,7 +21,7 @@ public enum Push: Endpoint {
 
   public func queryItems() -> [URLQueryItem]? {
     switch self {
-    case let .createSub(endpoint, p256dh, auth, mentions, status, reblog, follow, favourite, poll):
+    case let .createSub(endpoint, p256dh, auth, mentions, status, reblog, follow, favorite, poll):
       var params: [URLQueryItem] = []
       params.append(.init(name: "subscription[endpoint]", value: endpoint))
       params.append(.init(name: "subscription[keys][p256dh]", value: p256dh.base64UrlEncodedString()))
@@ -30,7 +30,7 @@ public enum Push: Endpoint {
       params.append(.init(name: "data[alerts][status]", value: status ? "true" : "false"))
       params.append(.init(name: "data[alerts][follow]", value: follow ? "true" : "false"))
       params.append(.init(name: "data[alerts][reblog]", value: reblog ? "true" : "false"))
-      params.append(.init(name: "data[alerts][favourite]", value: favourite ? "true" : "false"))
+      params.append(.init(name: "data[alerts][favourite]", value: favorite ? "true" : "false"))
       params.append(.init(name: "data[alerts][poll]", value: poll ? "true" : "false"))
       params.append(.init(name: "policy", value: "all"))
       return params

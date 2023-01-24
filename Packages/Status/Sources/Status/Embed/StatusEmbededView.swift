@@ -41,7 +41,7 @@ public struct StatusEmbeddedView: View {
         Group {
           Text("@\(account.acct)") +
             Text(" ⸱ ") +
-            Text(status.reblog?.createdAt.formatted ?? status.createdAt.formatted)
+            Text(status.reblog?.createdAt.relativeFormatted ?? status.createdAt.relativeFormatted)
         }
         .font(.scaledCaption)
         .foregroundColor(.gray)

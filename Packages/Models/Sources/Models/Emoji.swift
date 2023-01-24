@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Emoji: Codable, Hashable, Identifiable {
+public struct Emoji: Codable, Hashable, Identifiable, Equatable {
   public func hash(into hasher: inout Hasher) {
     hasher.combine(shortcode)
   }

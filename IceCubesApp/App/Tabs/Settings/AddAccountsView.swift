@@ -5,9 +5,9 @@ import Env
 import Models
 import Network
 import NukeUI
+import SafariServices
 import Shimmer
 import SwiftUI
-import SafariServices
 
 struct AddAccountView: View {
   @Environment(\.dismiss) private var dismiss
@@ -81,17 +81,23 @@ struct AddAccountView: View {
         instanceNamePublisher.send(newValue)
       }
       .onReceive(instanceNamePublisher.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)) { newValue in
-       let newValue = newValue
+        let newValue = newValue
           .replacingOccurrences(of: "http://", with: "")
           .replacingOccurrences(of: "https://", with: "")
         let client = Client(server: newValue)
         Task {
           do {
-            let instance: Instance = try await client.get(endpoint: Instances.instance)
-            withAnimation {
-              self.instance = instance
+            // bare bones preflight for domain validity
+            if client.server.contains(".") && client.server.last != "." {
+              let instance: Instance = try await client.get(endpoint: Instances.instance)
+              withAnimation {
+                self.instance = instance
+              }
+              instanceFetchError = nil
+            } else {
+              instance = nil
+              instanceFetchError = nil
             }
-            instanceFetchError = nil
           } catch _ as DecodingError {
             instance = nil
             instanceFetchError = "account.add.error.instance-not-supported"
@@ -171,8 +177,8 @@ struct AddAccountView: View {
               (Text("instance.list.users-\(instance.users)")
                 + Text("  ⸱  ")
                 + Text("instance.list.posts-\(instance.statuses)"))
-              .font(.scaledFootnote)
-              .foregroundColor(.gray)
+                .font(.scaledFootnote)
+                .foregroundColor(.gray)
             }
           }
           .listRowBackground(theme.primaryBackgroundColor)
@@ -219,7 +225,11 @@ struct AddAccountView: View {
     do {
       oauthURL = nil
       let oauthToken = try await client.continueOauthFlow(url: url)
-      appAccountsManager.add(account: AppAccount(server: client.server, oauthToken: oauthToken))
+      let client = Client(server: client.server, oauthToken: oauthToken)
+      let account: Account = try await client.get(endpoint: Accounts.verifyCredentials)
+      appAccountsManager.add(account: AppAccount(server: client.server,
+                                                 accountName: "\(account.acct)@\(client.server)",
+                                                 oauthToken: oauthToken))
       Task {
         await pushNotifications.updateSubscriptions(accounts: appAccountsManager.pushAccounts)
       }
@@ -235,11 +245,9 @@ struct AddAccountView: View {
 struct SafariView: UIViewControllerRepresentable {
   let url: URL
 
-  func makeUIViewController(context: UIViewControllerRepresentableContext<SafariView>) -> SFSafariViewController {
+  func makeUIViewController(context _: UIViewControllerRepresentableContext<SafariView>) -> SFSafariViewController {
     SFSafariViewController(url: url)
   }
-  
-  func updateUIViewController(_ uiViewController: SFSafariViewController, context: UIViewControllerRepresentableContext<SafariView>) {
 
-  }
+  func updateUIViewController(_: SFSafariViewController, context _: UIViewControllerRepresentableContext<SafariView>) {}
 }

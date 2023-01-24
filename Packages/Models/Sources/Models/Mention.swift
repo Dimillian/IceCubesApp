@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Mention: Codable {
+public struct Mention: Codable, Equatable, Hashable {
   public let id: String
   public let username: String
   public let url: URL

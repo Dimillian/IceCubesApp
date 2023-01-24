@@ -21,13 +21,13 @@ public class AppAccountsManager: ObservableObject {
 
   public var pushAccounts: [PushNotificationsService.PushAccounts] {
     availableAccounts.filter { $0.oauthToken != nil }
-      .map { .init(server: $0.server, token: $0.oauthToken!) }
+      .map { .init(server: $0.server, token: $0.oauthToken!, accountName: $0.accountName) }
   }
 
   public static var shared = AppAccountsManager()
 
   internal init() {
-    var defaultAccount = AppAccount(server: AppInfo.defaultServer, oauthToken: nil)
+    var defaultAccount = AppAccount(server: AppInfo.defaultServer, accountName: nil, oauthToken: nil)
     let keychainAccounts = AppAccount.retrieveAll()
     availableAccounts = keychainAccounts
     if let currentAccount = keychainAccounts.first(where: { $0.id == Self.latestCurrentAccountKey }) {
@@ -51,7 +51,9 @@ public class AppAccountsManager: ObservableObject {
     availableAccounts.removeAll(where: { $0.id == account.id })
     account.delete()
     if currentAccount.id == account.id {
-      currentAccount = availableAccounts.first ?? AppAccount(server: AppInfo.defaultServer, oauthToken: nil)
+      currentAccount = availableAccounts.first ?? AppAccount(server: AppInfo.defaultServer,
+                                                             accountName: nil,
+                                                             oauthToken: nil)
     }
   }
 }

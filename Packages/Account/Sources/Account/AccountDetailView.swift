@@ -10,7 +10,7 @@ import SwiftUI
 public struct AccountDetailView: View {
   @Environment(\.openURL) private var openURL
   @Environment(\.redactionReasons) private var reasons
-  
+
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var preferences: UserPreferences
@@ -43,8 +43,6 @@ public struct AccountDetailView: View {
       } content: {
         LazyVStack(alignment: .leading) {
           makeHeaderView(proxy: proxy)
-          joinedAtView
-            .offset(y: -36)
           familiarFollowers
             .offset(y: -36)
           featuredTagsView
@@ -147,22 +145,6 @@ public struct AccountDetailView: View {
                               scrollOffset: $scrollOffset)
     case let .error(error):
       Text("Error: \(error.localizedDescription)")
-    }
-  }
-  
-  @ViewBuilder
-  private var joinedAtView: some View {
-    if let joinedAt = viewModel.account?.createdAt.asDate {
-      HStack(spacing: 4) {
-        Image(systemName: "calendar")
-        Text("account.joined")
-        Text(joinedAt, style: .date)
-      }
-      .foregroundColor(.gray)
-      .font(.footnote)
-      .padding(.horizontal, .layoutPadding)
-      .padding(.top, 2)
-      .padding(.bottom, 5)
     }
   }
 
@@ -377,7 +359,7 @@ public struct AccountDetailView: View {
             if !viewModel.isCurrentUser {
               Button {
                 routerPath.presentedSheet = .mentionStatusEditor(account: account,
-                                                                  visibility: preferences.serverPreferences?.postVisibility ?? .pub)
+                                                                 visibility: preferences.serverPreferences?.postVisibility ?? .pub)
               } label: {
                 Label("account.action.mention", systemImage: "at")
               }
@@ -386,9 +368,9 @@ public struct AccountDetailView: View {
               } label: {
                 Label("account.action.message", systemImage: "tray.full")
               }
-              
+
               Divider()
-              
+
               if viewModel.relationship?.blocking == true {
                 Button {
                   Task {
@@ -452,7 +434,7 @@ public struct AccountDetailView: View {
 
             if let url = account.url {
               ShareLink(item: url)
-              Button { openURL(url) } label: {
+              Button { UIApplication.shared.open(url) } label: {
                 Label("status.action.view-in-browser", systemImage: "safari")
               }
             }

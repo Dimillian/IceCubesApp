@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Conversation: Identifiable, Decodable {
+public struct Conversation: Identifiable, Decodable, Hashable, Equatable {
   public let id: String
   public let unread: Bool
   public let lastStatus: Status

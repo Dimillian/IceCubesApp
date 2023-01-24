@@ -58,6 +58,7 @@
 "settings.display.section.theme" = "Thema";
 "settings.display.status.action-buttons" = "Status Aktions-Buttons";
 "settings.display.status.media-style" = "Status Medien";
+"settings.display.translate-button" = "Show translate button";
 "settings.display.theme.background" = "Hintergrundfarbe";
 "settings.display.theme.secondary-background" = "Sekundäre Hintergrundfarbe";
 "settings.display.theme.tint" = "Akzentfarbe";
@@ -80,6 +81,7 @@
 "settings.push.polls" = "Umfrageergebnisse";
 "settings.section.accounts" = "Accounts";
 "settings.section.app" = "App";
+"settings.section.app.footer %@" = "App Version: %@";
 "settings.section.general" = "Allgemein";
 "settings.support.alert.error.message" = "Fehler bei der Ausführung des In-App-Kaufs. Bitte versuche es erneut.";
 "settings.support.alert.message" = "Vielen Dank für dein Trinkgeld! Ich weiß es zu schätzen!";
@@ -93,8 +95,13 @@
 "settings.support.three.title" = "🤯 Großzügiges Trinkgeld";
 "settings.support.two.subtitle" = "Ich liebe den Duft eines tollen Kaffees ❤️";
 "settings.support.two.title" = "☕️ Schönes Trinkgeld";
+"settings.support.four.title" = "👽 Who are you Tip";
+"settings.support.four.subtitle" = "It'll go a long way to keep Ice Cubes running!";
 "settings.timeline.add" = "Lokale Timeline hinzufügen";
 "settings.title" = "Einstellungen";
+"settings.rate" = "Bewerte Ice Cubes";
+"settings.section.other" = "Other";
+"settings.other.hide-openai" = "Enable 🤖 helper";
 
 // MARK: Tabs
 "tab.explore" = "Entdecken";
@@ -169,6 +176,7 @@
 "conversations.error.message" = "Fehler beim Laden deiner Nachrichten";
 "conversations.error.title" = "Ein Fehler ist aufgetreten";
 "conversations.navigation-title" = "Direkte Nachrichten";
+"conversations.new.message.placeholder" = "Neue Nachricht";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld Posts von %lld Teilnehmer:innen";
@@ -235,7 +243,6 @@
 "notifications.tab.mentions" = "Erwähnungen";
 
 // MARK: Package: Timeline
-"timeline.n-new-posts %lld" = "%lld neue Posts";
 "timeline.federated" = "Föderiert";
 "timeline.home" = "Startseite";
 "timeline.local" = "Lokal";
@@ -311,6 +318,7 @@
 "status.summary.at-time" = " um ";
 "status.summary.n-boosts %lld" = "%lld Boosts";
 "status.summary.n-favorites %lld" = "%lld Favoriten";
+"status.summary.edited-time" = "Last edited: ";
 "status.visibility.direct" = "Direkt";
 "status.visibility.follower" = "Follower";
 "status.visibility.public" = "Öffentlich";

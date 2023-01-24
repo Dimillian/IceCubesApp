@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Application: Codable, Identifiable {
+public struct Application: Codable, Identifiable, Hashable, Equatable {
   public var id: String {
     name
   }
@@ -18,7 +18,7 @@ public extension Application {
   }
 }
 
-public enum Visibility: String, Codable, CaseIterable {
+public enum Visibility: String, Codable, CaseIterable, Hashable, Equatable {
   case pub = "public"
   case unlisted
   case priv = "private"
@@ -54,9 +54,17 @@ public protocol AnyStatus {
   var language: String? { get }
 }
 
-public struct Status: AnyStatus, Decodable, Identifiable {
+public struct Status: AnyStatus, Decodable, Identifiable, Equatable, Hashable {
   public var viewId: String {
     id + createdAt + (editedAt ?? "")
+  }
+  
+  public static func == (lhs: Status, rhs: Status) -> Bool {
+    lhs.id == rhs.id
+  }
+  
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(id)
   }
 
   public let id: String
@@ -120,9 +128,17 @@ public struct Status: AnyStatus, Decodable, Identifiable {
   }
 }
 
-public struct ReblogStatus: AnyStatus, Decodable, Identifiable {
+public struct ReblogStatus: AnyStatus, Decodable, Identifiable, Equatable, Hashable {
   public var viewId: String {
     id + createdAt + (editedAt ?? "")
+  }
+  
+  public static func == (lhs: ReblogStatus, rhs: ReblogStatus) -> Bool {
+    lhs.id == rhs.id
+  }
+  
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(id)
   }
 
   public let id: String

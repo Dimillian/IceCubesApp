@@ -6,6 +6,7 @@ import Lists
 import Status
 import SwiftUI
 import Timeline
+import Conversations
 
 @MainActor
 extension View {
@@ -18,6 +19,8 @@ extension View {
         AccountDetailView(account: account)
       case let .statusDetail(id):
         StatusDetailView(statusId: id)
+      case let .conversationDetail(conversation):
+        ConversationDetailView(conversation: conversation)
       case let .remoteStatusDetail(url):
         StatusDetailView(remoteStatusURL: url)
       case let .hashTag(tag, accountId):
@@ -28,8 +31,8 @@ extension View {
         AccountsListView(mode: .following(accountId: id))
       case let .followers(id):
         AccountsListView(mode: .followers(accountId: id))
-      case let .favouritedBy(id):
-        AccountsListView(mode: .favouritedBy(statusId: id))
+      case let .favoritedBy(id):
+        AccountsListView(mode: .favoritedBy(statusId: id))
       case let .rebloggedBy(id):
         AccountsListView(mode: .rebloggedBy(statusId: id))
       }

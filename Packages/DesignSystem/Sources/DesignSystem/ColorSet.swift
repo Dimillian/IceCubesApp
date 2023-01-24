@@ -1,11 +1,11 @@
 import SwiftUI
 
 public let availableColorsSets: [ColorSetCouple] =
-[.init(light: IceCubeLight(), dark: IceCubeDark()),
- .init(light: IceCubeNeonLight(), dark: IceCubeNeonDark()),
- .init(light: DesertLight(), dark: DesertDark()),
- .init(light: NemesisLight(), dark: NemesisDark()),
- .init(light: MediumLight(), dark: MediumDark())]
+  [.init(light: IceCubeLight(), dark: IceCubeDark()),
+   .init(light: IceCubeNeonLight(), dark: IceCubeNeonDark()),
+   .init(light: DesertLight(), dark: DesertDark()),
+   .init(light: NemesisLight(), dark: NemesisDark()),
+   .init(light: MediumLight(), dark: MediumDark())]
 
 public protocol ColorSet {
   var name: ColorSetName { get }
@@ -37,7 +37,7 @@ public struct ColorSetCouple: Identifiable {
   public var id: String {
     dark.name.rawValue + light.name.rawValue
   }
-  
+
   public let light: ColorSet
   public let dark: ColorSet
 }

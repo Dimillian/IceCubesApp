@@ -57,17 +57,40 @@ public struct StatusRowView: View {
         }
       }
       .onAppear {
-        viewModel.client = client
-        if !viewModel.isCompact, viewModel.embeddedStatus == nil {
-          Task {
-            await viewModel.loadEmbeddedStatus()
+        if reasons.isEmpty {
+          viewModel.client = client
+          if !viewModel.isCompact, viewModel.embeddedStatus == nil {
+            Task {
+              await viewModel.loadEmbeddedStatus()
+            }
           }
-        }
-        if preferences.serverPreferences?.autoExpandSpoilers == true {
-          viewModel.displaySpoiler = false
+          if preferences.serverPreferences?.autoExpandSpoilers == true {
+            viewModel.displaySpoiler = false
+          }
         }
       }
       .contextMenu {
+        StatusRowContextMenu(viewModel: viewModel)
+      }
+      .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
+      .accessibilityActions {
+        // Add the individual mentions as accessibility actions
+        ForEach(viewModel.status.mentions, id: \.id) { mention in
+          Button("@\(mention.username)") {
+            routerPath.navigate(to: .accountDetail(id: mention.id))
+          }
+        }
+
+        Button(viewModel.displaySpoiler ? "status.show-more" : "status.show-less") {
+          withAnimation {
+            viewModel.displaySpoiler.toggle()
+          }
+        }
+
+        Button("@\(viewModel.status.account.username)") {
+          routerPath.navigate(to: .accountDetail(id: viewModel.status.account.id))
+        }
+
         StatusRowContextMenu(viewModel: viewModel)
       }
       .background {
@@ -106,6 +129,12 @@ public struct StatusRowView: View {
           Text("status.row.you-boosted")
         }
       }
+      .accessibilityElement()
+      .accessibilityLabel(
+        Text("\(viewModel.status.account.safeDisplayName)")
+          + Text(" ")
+          + Text(viewModel.status.account.username != account.account?.username ? "status.row.was-boosted" : "status.row.you-boosted")
+      )
       .font(.scaledFootnote)
       .foregroundColor(.gray)
       .fontWeight(.semibold)
@@ -161,10 +190,14 @@ public struct StatusRowView: View {
               }
             } label: {
               accountView(status: status)
-            }.buttonStyle(.plain)
+            }
+            .buttonStyle(.plain)
             Spacer()
             menuButton
+              .accessibilityHidden(true)
           }
+          .accessibilityElement()
+          .accessibilityLabel(Text("\(status.account.displayName), \(status.createdAt.relativeFormatted)"))
         }
         makeStatusContentView(status: status)
           .contentShape(Rectangle())
@@ -173,12 +206,16 @@ public struct StatusRowView: View {
           }
       }
     }
+    .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
+    .accessibilityAction {
+      viewModel.navigateToDetail(routerPath: routerPath)
+    }
   }
 
   private func makeStatusContentView(status: AnyStatus) -> some View {
     Group {
       if !status.spoilerText.asRawText.isEmpty {
-        EmojiTextApp(status.spoilerText, emojis: status.emojis)
+        EmojiTextApp(status.spoilerText, emojis: status.emojis, language: status.language)
           .font(.scaledBody)
         Button {
           withAnimation {
@@ -188,11 +225,12 @@ public struct StatusRowView: View {
           Text(viewModel.displaySpoiler ? "status.show-more" : "status.show-less")
         }
         .buttonStyle(.bordered)
+        .accessibilityHidden(true)
       }
-      
+
       if !viewModel.displaySpoiler {
         HStack {
-          EmojiTextApp(status.content, emojis: status.emojis)
+          EmojiTextApp(status.content, emojis: status.emojis, language: status.language)
             .font(.scaledBody)
             .environment(\.openURL, OpenURLAction { url in
               routerPath.handleStatus(status: status, url: url)
@@ -205,8 +243,11 @@ public struct StatusRowView: View {
         if let poll = status.poll {
           StatusPollView(poll: poll, status: status)
         }
-
+        
+        embedStatusView
+  
         makeMediasView(status: status)
+          .accessibilityHidden(!viewModel.isFocused)
         makeCardView(status: status)
       }
     }
@@ -225,7 +266,7 @@ public struct StatusRowView: View {
         Group {
           Text("@\(status.account.acct)") +
             Text(" ⸱ ") +
-            Text(status.createdAt.formatted) +
+            Text(status.createdAt.relativeFormatted) +
             Text(" ⸱ ") +
             Text(Image(systemName: viewModel.status.visibility.iconName))
         }
@@ -245,14 +286,16 @@ public struct StatusRowView: View {
     .foregroundColor(.gray)
     .contentShape(Rectangle())
   }
-  
+
   @ViewBuilder
   private func makeTranslateView(status: AnyStatus) -> some View {
     if let userLang = preferences.serverPreferences?.postLanguage,
+       preferences.showTranslateButton,
        status.language != nil,
        userLang != status.language,
        !status.content.asRawText.isEmpty,
-        viewModel.translation == nil {
+       viewModel.translation == nil
+    {
       Button {
         Task {
           await viewModel.translate(userLang: userLang)
@@ -264,7 +307,9 @@ public struct StatusRowView: View {
           Text("status.action.translate")
         }
       }
-    } else if let translation = viewModel.translation {
+    }
+    
+    if let translation = viewModel.translation, !viewModel.isLoadingTranslation {
       GroupBox {
         VStack(alignment: .leading, spacing: 4) {
           Text(translation)
@@ -277,7 +322,7 @@ public struct StatusRowView: View {
       .fixedSize(horizontal: false, vertical: true)
     }
   }
-  
+
   @ViewBuilder
   private func makeMediasView(status: AnyStatus) -> some View {
     if !status.mediaAttachments.isEmpty {
@@ -297,7 +342,7 @@ public struct StatusRowView: View {
       }
     }
   }
-  
+
   @ViewBuilder
   private func makeCardView(status: AnyStatus) -> some View {
     if let card = status.card,
@@ -307,6 +352,20 @@ public struct StatusRowView: View {
        theme.statusDisplayStyle == .large
     {
       StatusCardView(card: card)
+    }
+  }
+  
+  @ViewBuilder
+  private var embedStatusView: some View {
+    if !reasons.contains(.placeholder) {
+      if !viewModel.isCompact, !viewModel.isEmbedLoading,
+          let embed = viewModel.embeddedStatus {
+        StatusEmbeddedView(status: embed)
+      } else if viewModel.isEmbedLoading, !viewModel.isCompact {
+        StatusEmbeddedView(status: .placeholder())
+          .redacted(reason: .placeholder)
+          .shimmering()
+      }
     }
   }
 }

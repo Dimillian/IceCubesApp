@@ -3,7 +3,7 @@ import Models
 
 public enum Accounts: Endpoint {
   case accounts(id: String)
-  case favourites(sinceId: String?)
+  case favorites(sinceId: String?)
   case bookmarks(sinceId: String?)
   case followedTags
   case featuredTags(id: String)
@@ -22,7 +22,7 @@ public enum Accounts: Endpoint {
                 excludeReplies: Bool?,
                 pinned: Bool?)
   case relationships(ids: [String])
-  case follow(id: String, notify: Bool)
+  case follow(id: String, notify: Bool, reblogs: Bool)
   case unfollow(id: String)
   case familiarFollowers(withAccount: String)
   case suggestions
@@ -39,7 +39,7 @@ public enum Accounts: Endpoint {
     switch self {
     case let .accounts(id):
       return "accounts/\(id)"
-    case .favourites:
+    case .favorites:
       return "favourites"
     case .bookmarks:
       return "bookmarks"
@@ -55,7 +55,7 @@ public enum Accounts: Endpoint {
       return "accounts/\(id)/statuses"
     case .relationships:
       return "accounts/relationships"
-    case let .follow(id, _):
+    case let .follow(id, _, _):
       return "accounts/\(id)/follow"
     case let .unfollow(id):
       return "accounts/\(id)/unfollow"
@@ -106,15 +106,18 @@ public enum Accounts: Endpoint {
       return ids.map {
         URLQueryItem(name: "id[]", value: $0)
       }
-    case let .follow(_, notify):
-      return [.init(name: "notify", value: notify ? "true" : "false")]
+    case let .follow(_, notify, reblogs):
+      return [
+        .init(name: "notify", value: notify ? "true" : "false"),
+        .init(name: "reblogs", value: reblogs ? "true" : "false")
+      ]
     case let .familiarFollowers(withAccount):
       return [.init(name: "id[]", value: withAccount)]
     case let .followers(_, maxId):
       return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
     case let .following(_, maxId):
       return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
-    case let .favourites(sinceId):
+    case let .favorites(sinceId):
       guard let sinceId else { return nil }
       return [.init(name: "max_id", value: sinceId)]
     case let .bookmarks(sinceId):
