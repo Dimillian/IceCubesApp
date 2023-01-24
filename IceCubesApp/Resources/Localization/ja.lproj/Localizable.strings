@@ -277,6 +277,7 @@
 "status.editor.drafts.navigation-title" = "下書き";
 "status.editor.error.upload" = "アップロードエラー";
 "status.editor.language-select.navigation-title" = "言語設定";
+"status.editor.language-select.recently-used" = "Recently Used";
 "status.editor.media.edit-image" = "イメージの編集";
 "status.editor.media.image-description" = "イメージの説明文";
 "status.editor.mode.edit" = "投稿を編集する";

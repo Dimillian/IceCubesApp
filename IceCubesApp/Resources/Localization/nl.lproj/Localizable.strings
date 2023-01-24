@@ -281,6 +281,7 @@
 "status.editor.drafts.navigation-title" = "Concepten";
 "status.editor.error.upload" = "Fout tijdens uploaden";
 "status.editor.language-select.navigation-title" = "Taal selecteren";
+"status.editor.language-select.recently-used" = "Recently Used";
 "status.editor.media.edit-image" = "Afbeelding bewerken";
 "status.editor.media.image-description" = "Omschrijving";
 "status.editor.mode.edit" = "Je post bewerken";
