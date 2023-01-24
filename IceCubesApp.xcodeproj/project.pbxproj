@@ -168,6 +168,7 @@
 		9FE151A5293C90F900E9683D /* IconSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSelectorView.swift; sourceTree = "<group>"; };
 		9FE3DB55296FEF5800628CB0 /* AppAccount */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppAccount; path = Packages/AppAccount; sourceTree = "<group>"; };
 		C465A53D297C5E0C00864FB7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		DD31E2E5297FB68B00A4BE29 /* IceCubesApp.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = IceCubesApp.xcconfig; sourceTree = "<group>"; };
 		E9B576C429743F4C00BCE646 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E9B576CC2974AAAF00BCE646 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F355EEDA297A8BD500E362C0 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -304,6 +305,7 @@
 		9FBFE630292A715500C250E9 = {
 			isa = PBXGroup;
 			children = (
+				DD31E2E5297FB68B00A4BE29 /* IceCubesApp.xcconfig */,
 				9FBFE63B292A715500C250E9 /* IceCubesApp */,
 				9F2A5417296AB631009B2D7C /* IceCubesNotifications */,
 				9FAD858929743F7400496AB1 /* IceCubesShareExtension */,
@@ -656,7 +658,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 730;
-				DEVELOPMENT_TEAM = Z6P74P6T99;
+				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IceCubesNotifications/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = IceCubesNotifications;
@@ -668,7 +670,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.10;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thomasricouard.IceCubesApp.IceCubesNotifications;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesNotifications";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -686,7 +688,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 730;
-				DEVELOPMENT_TEAM = Z6P74P6T99;
+				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IceCubesNotifications/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = IceCubesNotifications;
@@ -698,7 +700,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.10;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thomasricouard.IceCubesApp.IceCubesNotifications;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesNotifications";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -717,7 +719,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 730;
-				DEVELOPMENT_TEAM = Z6P74P6T99;
+				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IceCubesShareExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Ice Cubes";
@@ -729,7 +731,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.10;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thomasricouard.IceCubesApp.IceCubesShareExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesShareExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -747,7 +749,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 730;
-				DEVELOPMENT_TEAM = Z6P74P6T99;
+				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IceCubesShareExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Ice Cubes";
@@ -759,7 +761,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.10;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thomasricouard.IceCubesApp.IceCubesShareExtension;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesShareExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -772,6 +774,7 @@
 		};
 		9FBFE646292A715600C250E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD31E2E5297FB68B00A4BE29 /* IceCubesApp.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -832,6 +835,7 @@
 		};
 		9FBFE647292A715600C250E9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD31E2E5297FB68B00A4BE29 /* IceCubesApp.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -899,7 +903,7 @@
 				CURRENT_PROJECT_VERSION = 730;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"IceCubesApp/Resources\"";
-				DEVELOPMENT_TEAM = Z6P74P6T99;
+				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -923,7 +927,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0.10;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thomasricouard.IceCubesApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -951,7 +955,7 @@
 				CURRENT_PROJECT_VERSION = 730;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"IceCubesApp/Resources\"";
-				DEVELOPMENT_TEAM = Z6P74P6T99;
+				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -975,7 +979,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0.10;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thomasricouard.IceCubesApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
