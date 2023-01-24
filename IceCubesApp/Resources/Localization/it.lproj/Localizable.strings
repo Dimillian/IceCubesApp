@@ -102,7 +102,7 @@
 "settings.rate" = "Valuta Ice Cubes";
 "settings.section.other" = "Altro";
 "settings.other.hide-openai" = "Abilita l'aiuto del 🤖";
-"settings.other.social-keyboard" = "Enable Social Keyboard";
+"settings.other.social-keyboard" = "Abilita social keyboard";
 
 // MARK: Tabs
 "tab.explore" = "Esplora";
@@ -282,7 +282,7 @@
 "status.editor.drafts.navigation-title" = "Bozze";
 "status.editor.error.upload" = "Errore durante il caricamento";
 "status.editor.language-select.navigation-title" = "Scegli la lingua";
-"status.editor.language-select.recently-used" = "Recently Used";
+"status.editor.language-select.recently-used" = "Usato recentemente";
 "status.editor.media.edit-image" = "Modifica l'immagine";
 "status.editor.media.image-description" = "Descrizione dell'immagine";
 "status.editor.mode.edit" = "Modifica post";
