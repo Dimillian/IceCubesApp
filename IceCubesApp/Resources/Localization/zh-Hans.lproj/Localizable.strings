@@ -180,8 +180,8 @@
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld 条嘟文从 %lld 个参与者中发出";
-"design.theme.navigation-title" = "主题选择器";
-"design.theme.toots-preview" = "嘟文预览";
+"design.theme.navigation-title" = "主题选择";
+"design.theme.toots-preview" = "预览文本";
 
 // MARK: Package: Explore
 "explore.navigation-title" = "探索";
