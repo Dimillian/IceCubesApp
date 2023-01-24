@@ -1,0 +1,321 @@
+// MARK: Common strings
+"action.cancel" = "キャンセル";
+"action.delete" = "削除";
+"action.save"  = "保存";
+"action.done" = "完了";
+"action.retry" = "リトライ";
+
+"alert.button.ok" = "OK";
+"alert.error" = "エラー！";
+
+"placeholder.loading.long" = "Loading, loading, loading ...";
+"placeholder.loading.short" = "Loading ...";
+
+"see-more" = "詳細を見る";
+
+// MARK: Add Account
+"account.add.error.instance-not-supported" = "このインスタンスは現在サポートされていません";
+"account.add.navigation-title" = "アカウントの追加";
+"account.add.sign-in" = "サインイン";
+
+// MARK: Enums
+"enum.avatar-position.leading" = "文字サイズと行の高さの差";
+"enum.avatar-position.top" = "上からの配置位置";
+"enum.avatar-shape.circle" = "丸円";
+"enum.avatar-shape.rounded" = "角丸";
+"enum.status-actions-display.all" = "全部";
+"enum.status-actions-display.no-buttons" = "ボタン無し";
+"enum.status-actions-display.only-buttons" = "ボタンのみ";
+"enum.status-display-style.compact" = "コンパクト";
+"enum.status-display-style.large" = "ラージ";
+
+// MARK: Instances
+"instance.info.domains" = "ドメイン";
+"instance.info.email" = "メールアドレス";
+"instance.info.name" = "名前";
+"instance.info.navigation-title" = "インスタンス情報";
+"instance.info.posts" = "Posts";
+"instance.info.section.info" = "インスタンス情報";
+"instance.info.section.rules" = "インスタンスのルール";
+"instance.info.users" = "ユーザー";
+"instance.info.version" = "Version";
+"instance.list.posts-%@" = "%@ posts";
+"instance.list.users-%@" = "%@ users";
+"instance.suggestions" = "こちらかも？";
+"instance.url" = "インスタンスのURL";
+
+// MARK: Settings
+"settings.account.add" = "アカウントの追加";
+"settings.app.icon" = "アプリアイコン";
+"settings.app.icon.navigation-title" = "アイコン";
+"settings.app.source" = "ソース (GitHub link)";
+"settings.app.support" = "アプリを支援する";
+"settings.display.avatar.position" = "アバターの位置";
+"settings.display.avatar.shape" = "アバターの形";
+"settings.display.navigation-title" = "表示設定";
+"settings.display.restore" = "デフォルトに戻す";
+"settings.display.section.display" = "表示";
+"settings.display.section.theme" = "テーマ";
+"settings.display.status.action-buttons" = "ステータスアクションボタン";
+"settings.display.status.media-style" = "ステータスメディアスタイル";
+"settings.display.translate-button" = "翻訳ボタンの表示";
+"settings.display.theme.background" = "背景色";
+"settings.display.theme.secondary-background" = "セカンダリー背景色";
+"settings.display.theme.tint" = "色合い";
+"settings.display.theme.systemColor" = "マッチング方式";
+"settings.general.browser" = "ブラウザ";
+"settings.general.browser.in-app" = "アプリ内ブラウザ";
+"settings.general.browser.system" = "システムブラウザ";
+"settings.general.display" = "表示設定";
+"settings.general.instance" = "インスタンス情報";
+"settings.general.push-notifications" = "プッシュ通知";
+"settings.general.remote-timelines" = "リモートローカルタイムライン";
+"settings.push.boosts" = "ブースト";
+"settings.push.favorites" = "お気に入り";
+"settings.push.follows" = "フォロー";
+"settings.push.main-toggle" = "プッシュ通知";
+"settings.push.main-toggle.description" = "新着アクティビティをプッシュ通知で受け取る";
+"settings.push.mentions" = "返信";
+"settings.push.navigation-title" = "プッシュ通知";
+"settings.push.new-posts" = "新着投稿";
+"settings.push.polls" = "投票結果";
+"settings.section.accounts" = "アカウント";
+"settings.section.app" = "アプリ";
+"settings.section.general" = "一般";
+"settings.support.alert.error.message" = "アプリ内課金の処理に失敗しました、もう一度試してください";
+"settings.support.alert.message" = "チップをありがとう、あなたに感謝します！";
+"settings.support.alert.title" = "ありがとうございます!";
+"settings.support.message-from-dev" = "こんにちは。私はオープンソースのアプリを作るのが大好きなThomasです。Ice Cubesは、私の最も得意とするプロジェクトの一つであり、また、マストドンやソーシャルメディアが常に変化しているため、最もメンテナンスが必要なプロジェクトでもあります。もし、あなたがIce Cubesを楽しんで使っているなら、私宛にちょっとしたチップを投げ入れてください。そうすれば、アプリを円滑に運営することができます。🚀";
+"settings.support.navigation-title" = "Ice Cubesを支援する";
+"settings.support.one.subtitle" = "小さいけど、かわいいし、味も美味しい！";
+"settings.support.one.title" = "🍬 心ばかりのチップ";
+"settings.support.placeholder.loading-subtitle" = "Loading subtitle ...";
+"settings.support.three.subtitle" = "おいおい正気か！本当にありがとうございます！";
+"settings.support.three.title" = "🤯 太っ腹なチップ";
+"settings.support.two.subtitle" = "おしゃれなコーヒーの味は最高です ❤️";
+"settings.support.two.title" = "☕️ ナイスチップ";
+"settings.support.four.title" = "👽 お前は一体誰なんだ";
+"settings.support.four.subtitle" = "Ice Cubesの運営に大きく貢献することでしょう！";
+"settings.timeline.add" = "ローカルタイムラインの追加";
+"settings.title" = "設定";
+"settings.rate" = "Ice Cubesを評価する";
+
+// MARK: Tabs
+"tab.explore" = "エクスプローラー";
+"tab.federated" = "連合";
+"tab.local" = "ローカル";
+"tab.messages" = "メッセージ";
+"tab.notifications" = "通知";
+"tab.settings" = "設定";
+"tab.timeline" = "タイムライン";
+"tab.trending" = "トレンド";
+
+// MARK: Timeline
+"timeline.%@-is-valid" = "%@ は有効なインスタンスです";
+"timeline.add-remote.title" = "リモートローカルタイムラインの追加";
+"timeline.add.action.add" = "追加";
+"timeline.filter.add-local" = "ローカルタイムラインの追加";
+"timeline.filter.lists" = "リスト";
+"timeline.filter.local" = "ローカルタイムライン";
+"timeline.filter.tags" = "フォローしたタグ";
+
+// MARK: Package: AppAccount
+"app-account.button.add" = "アカウントの追加";
+
+// MARK: Package: Account
+"account.action.add-remove-list" = "リストへの追加/削除";
+"account.action.edit-info" = "Edit Info";
+"account.action.mention" = "返信";
+"account.action.message" = "メッセージ";
+"account.action.block" = "ブロック";
+"account.action.unblock" = "ブロック解除";
+"account.action.mute" = "ミュート";
+"account.action.unmute" = "ミュート解除";
+"account.boosted-by" = "ブーストしました";
+"account.detail.about" = "詳細";
+"account.detail.familiar-followers" = "Also followed by";
+"account.detail.n-fields %lld" = "%lld fields";
+"account.detail.featured-tags-n-posts %lld" = "%lld posts";
+"account.edit.about" = "詳細";
+"account.edit.account-settings.bot" = "Botアカウント";
+"account.edit.account-settings.discoverable" = "誰でも見れる";
+"account.edit.account-settings.private" = "プライベート";
+"account.edit.account-settings.section-title" = "アカウント設定";
+"account.edit.display-name" = "表示名";
+"account.edit.error.save.message" = "プロフィールの保存中にエラーが発生しました、もう一度試してください";
+"account.edit.error.save.title" = "プロフィールの保存中にエラーが発生しました";
+"account.edit.navigation-title" = "プロフィールを編集";
+"account.edit.post-settings.privacy" = "デフォルトのプライバシー";
+"account.edit.post-settings.section-title" = "投稿設定";
+"account.edit.post-settings.sensitive" = "センシティブな内容";
+"account.favorited-by" = "お気に入りされた";
+"account.follow.follow" = "フォロー";
+"account.follow.following" = "フォローしている";
+"account.follow.requested" = "リクエストしました";
+"account.followers" = "フォロワー";
+"account.following" = "フォローしている";
+"account.list.create" = "新しいリストを作成";
+"account.list.create.confirm" = "リストを作成";
+"account.list.create.description" = "リストの名前を入力";
+"account.list.delete" = "リストを削除";
+"account.list.name" = "リストの名前";
+"account.post.pinned" = "固定した投稿";
+"account.posts" = "投稿";
+"account.relation.follows-you" = "あなたをフォローしている";
+"account.joined" = "追加した";
+
+// MARK: Package: Conversations
+"conversations.action.delete" = "削除";
+"conversations.action.mark-read" = "既読にする";
+"conversations.empty.message" = "ソーシャルメディアへの愛をお探しですか？ダイレクトメッセージやプライベートメッセージはすべてここにあります、ハッピーメッセージ！ 📱❤️";
+"conversations.empty.title" = "受信トレイ・ゼロ";
+"conversations.error.button" = "リトライ";
+"conversations.error.message" = "メッセージの読み込み中にエラーが発生しました";
+"conversations.error.title" = "エラーが発生しました";
+"conversations.navigation-title" = "ダイレクトメッセージ";
+
+// MARK: Package: DesignSystem
+"design.tag.n-posts-from-n-participants %lld %lld" = "%lld の最近の投稿 %lld に参加してる";
+"design.theme.navigation-title" = "テーマセレクト";
+"design.theme.toots-preview" = "トゥートプレビュー";
+
+// MARK: Package: Explore
+"explore.navigation-title" = "エクスプローラー";
+"explore.search.message-%@" = "ここからあらゆるものを検索することができます %@";
+"explore.search.prompt" = "ユーザー、投稿、タグの検索";
+"explore.search.title" = "インスタンスの検索";
+"explore.search.empty.message" = "この問い合わせは検索結果を返しませんので、別の問い合わせを実行してください";
+"explore.search.empty.title" = "検索結果無し";
+"explore.section.posts" = "投稿";
+"explore.section.suggested-users" = "オススメのユーザー";
+"explore.section.tags" = "タグ";
+"explore.section.trending.links" = "人気のリンク";
+"explore.section.trending.posts" = "人気の投稿";
+"explore.section.trending.tags" = "人気のタグ";
+"explore.section.users" = "ユーザー";
+
+// MARK: Package: Env
+"env.poll-duration.5m" = "5 分";
+"env.poll-duration.30m" = "30 分";
+"env.poll-duration.1h" = "1 時間";
+"env.poll-duration.6h" = "6 時間";
+"env.poll-duration.1d" = "1 日";
+"env.poll-duration.3d" = "3 日";
+"env.poll-duration.7d" = "7 日";
+"env.poll-vote-frequency.one" = "単投票";
+"env.poll-vote-frequency.multiple" = "複数投票";
+
+// MARK: Package: Lists
+"lists.add-remove-%@" = "追加/削除 %@";
+"lists.create" = "新しいリストを作成";
+"lists.create.confirm" = "リストを作成";
+"lists.edit.users-in-list" = "このリスト内のユーザー";
+"lists.name" = "リストの名前";
+"lists.name.message" = "リストの名前を入力";
+
+// MARK: Package: Notifications
+"notifications.empty.message" = "通知？何の通知？通知の受信箱が空っぽに見えるよ！これからもよろしく頼むぜ！ 📱😎";
+"notifications.empty.title" = "通知無し";
+"notifications.error.message" = "通知の読み込み中にエラーが発生しました、もう一度試してください";
+"notifications.error.title" = "エラーが発生しました";
+"notifications.label.favorite" = "お気に入り";
+"notifications.label.follow" = "フォローされました";
+"notifications.label.follow-request" = "フォローリクエストが届いています";
+"notifications.label.mention" = "あなたについて言及されています";
+"notifications.label.poll" = "投票終了";
+"notifications.label.reblog" = "ブーストしました";
+"notifications.label.status" = "投稿されたステータス";
+"notifications.label.update" = "編集済み";
+"notifications.menu-title.favorite" = "お気に入り";
+"notifications.menu-title.follow" = "フォロー";
+"notifications.menu-title.follow-request" = "フォローリクエスト";
+"notifications.menu-title.mention" = "返信";
+"notifications.menu-title.poll" = "投票";
+"notifications.menu-title.reblog" = "ブースト";
+"notifications.menu-title.status" = "投稿";
+"notifications.menu-title.update" = "編集済み";
+"notifications.navigation-title" = "全ての通知";
+"notifications.tab.all" = "全て";
+"notifications.tab.mentions" = "返信";
+
+// MARK: Package: Timeline
+"timeline.federated" = "連合";
+"timeline.home" = "ホーム";
+"timeline.local" = "ローカル";
+"timeline.n-recent-from-n-participants %lld %lld" = "%lld の最近の投稿 %lld に参加してる";
+"timeline.trending" = "トレンド";
+
+// MARK: Package: Status
+"status.action.translate" = "翻訳";
+"status.action.translated-label" = "DeepL.comを使用して翻訳";
+"status.action.bookmark" = "ブックマーク";
+"status.action.boost" = "ブースト";
+"status.action.copy-text" = "テキストをコピー";
+"status.action.delete" = "削除";
+"status.action.edit" = "編集";
+"status.action.favorite" = "お気に入り";
+"status.action.mention" = "返信";
+"status.action.message" = "メッセージ";
+"status.action.pin" = "固定";
+"status.action.post" = "投稿";
+"status.action.quote" = "この投稿を引用する";
+"status.action.reply" = "リプライ";
+"status.action.section.your-post" = "あなたの投稿";
+"status.action.share" = "投稿を共有する";
+"status.action.unbookmark" = "ブックマークを外す";
+"status.action.unboost" = "ブーストをやめる";
+"status.action.unfavorite" = "お気に入りから外す";
+"status.action.unpin" = "固定しない";
+"status.action.view-in-browser" = "ブラウザで見る";
+"status.draft.delete" = "下書きを削除";
+"status.draft.save" = "下書きを保存";
+"status.editor.ai-prompt.correct" = "テキストを修正する";
+"status.editor.ai-prompt.emphasize" = "テキストを強調表示する";
+"status.editor.ai-prompt.fit" = "テキストを短くする";
+"status.editor.description.add" = "説明文を追加";
+"status.editor.description.edit" = "説明文を編集";
+"status.editor.drafts.navigation-title" = "下書き";
+"status.editor.error.upload" = "アップロードエラー";
+"status.editor.language-select.navigation-title" = "言語設定";
+"status.editor.media.edit-image" = "イメージの編集";
+"status.editor.media.image-description" = "イメージの説明文";
+"status.editor.mode.edit" = "投稿を編集する";
+"status.editor.mode.new" = "新しい投稿";
+"status.editor.mode.quote-%@" = "%@ を引用する";
+"status.editor.mode.reply-%@" = "%@ に返信する";
+"status.editor.restore-previous" = "前のテキストに戻す";
+"status.editor.spoiler" = "テキストをネタバレする";
+"status.editor.text.placeholder" = "いま、何考えているの？";
+"status.editor.visibility" = "投稿の可視化";
+"status.error.loading.message" = "投稿の読み込み中にエラーが発生しました、もう一度試してください";
+"status.error.message" = "この投稿のコンテキストでエラーが発生しました、もう一度試してください";
+"status.error.title" = "エラーが発生しました";
+"status.filter.filtered-by-%@" = "%@ :によりフィルターされました";
+"status.filter.show-anyway" = "とりあえず表示";
+"status.image.alt-text.abbreviation" = "ALT";
+"status.media.content.show" = "内容を表示";
+"status.media.contextmenu.copy" = "イメージのコピー";
+"status.media.contextmenu.save" = "イメージの保存";
+"status.media.contextmenu.share" = "イメージの共有";
+"status.media.contextmenu.view-browser" = "ブラウザで見る";
+"status.media.sensitive.show" = "センシティブな内容を表示する";
+"status.poll.n-votes %lld" = "%lld votes";
+"status.poll.closed" = "投票終了";
+"status.poll.closes-in" = "まもなく投票終了 ";
+"status.poll.duration" = "投票期間";
+"status.poll.frequency" = "投票頻度";
+"status.poll.option-n %lld" = "オプション %lld";
+"status.post-from-%@" = "%@ の投稿";
+"status.row.was-boosted" = "ブーストした";
+"status.row.was-reply" = "Replied to";
+"status.row.you-boosted" = "ブーストしました";
+"status.show-less" = "表示項目を減らす";
+"status.show-more" = "表示項目を増やす";
+"status.summary.at-time" = " at ";
+"status.summary.edited-time" = "最新編集日: ";
+"status.summary.n-boosts %lld" = "%lld ブースト";
+"status.summary.n-favorites %lld" = "%lld お気に入り";
+"status.visibility.direct" = "プライベート";
+"status.visibility.follower" = "フォロワー";
+"status.visibility.public" = "全員";
+"status.visibility.unlisted" = "リスト外";

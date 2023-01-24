@@ -149,6 +149,8 @@
 		9F7335EE29674F7100AFF0BA /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.2.sdk/System/Library/Frameworks/QuickLook.framework; sourceTree = DEVELOPER_DIR; };
 		9F7335F12967608F00AFF0BA /* AddRemoteTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRemoteTimelineView.swift; sourceTree = "<group>"; };
 		9F7335F82968576500AFF0BA /* DisplaySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaySettingsView.swift; sourceTree = "<group>"; };
+		9F7D9391297FA50400EE6B7A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ja; path = ja.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		9F7D9392297FA50400EE6B7A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9FAD85822971BF7200496AB1 /* Secret.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Secret.plist; sourceTree = "<group>"; };
 		9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IceCubesShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FAD858A29743F7400496AB1 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
@@ -499,6 +501,7 @@
 				es,
 				"zh-Hans",
 				it,
+				ja,
 			);
 			mainGroup = 9FBFE630292A715500C250E9;
 			packageReferences = (
@@ -623,6 +626,7 @@
 				7429BCE9297C5D030069A946 /* es */,
 				7429BCEB297D65380069A946 /* zh-Hans */,
 				7429BCEC297D65390069A946 /* it */,
+				9F7D9391297FA50400EE6B7A /* ja */,
 			);
 			name = Localizable.stringsdict;
 			sourceTree = "<group>";
@@ -636,6 +640,7 @@
 				9606B7A1297AD2BB00C1FB75 /* es */,
 				C465A53D297C5E0C00864FB7 /* zh-Hans */,
 				9F38C233297D03120018F11E /* it */,
+				9F7D9392297FA50400EE6B7A /* ja */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
