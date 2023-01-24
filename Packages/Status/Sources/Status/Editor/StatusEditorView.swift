@@ -37,7 +37,7 @@ public struct StatusEditorView: View {
           VStack(spacing: 12) {
             accountHeaderView
               .padding(.horizontal, .layoutPadding)
-            TextView($viewModel.statusText, $viewModel.selectedRange)
+            TextView($viewModel.statusText, $viewModel.selectedRange, $viewModel.markedTextRange)
               .placeholder(String(localized: "status.editor.text.placeholder"))
               .font(Font.scaledBodyUIFont)
               .padding(.horizontal, .layoutPadding)

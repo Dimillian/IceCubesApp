@@ -39,6 +39,7 @@ public class StatusEditorViewModel: ObservableObject {
   @Published var spoilerText: String = ""
 
   @Published var selectedRange: NSRange = .init(location: 0, length: 0)
+  @Published var markedTextRange: UITextRange? = nil
 
   @Published var isPosting: Bool = false
   @Published var selectedMedias: [PhotosPickerItem] = [] {
