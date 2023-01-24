@@ -151,6 +151,7 @@
 		9F7335F82968576500AFF0BA /* DisplaySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaySettingsView.swift; sourceTree = "<group>"; };
 		9F7D9391297FA50400EE6B7A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ja; path = ja.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		9F7D9392297FA50400EE6B7A /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9F7D939529800B0300EE6B7A /* IceCubesApp-release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "IceCubesApp-release.xcconfig"; sourceTree = "<group>"; };
 		9FAD85822971BF7200496AB1 /* Secret.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Secret.plist; sourceTree = "<group>"; };
 		9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IceCubesShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FAD858A29743F7400496AB1 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
@@ -306,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				DD31E2E5297FB68B00A4BE29 /* IceCubesApp.xcconfig */,
+				9F7D939529800B0300EE6B7A /* IceCubesApp-release.xcconfig */,
 				9FBFE63B292A715500C250E9 /* IceCubesApp */,
 				9F2A5417296AB631009B2D7C /* IceCubesNotifications */,
 				9FAD858929743F7400496AB1 /* IceCubesShareExtension */,
@@ -835,7 +837,7 @@
 		};
 		9FBFE647292A715600C250E9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DD31E2E5297FB68B00A4BE29 /* IceCubesApp.xcconfig */;
+			baseConfigurationReference = 9F7D939529800B0300EE6B7A /* IceCubesApp-release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
