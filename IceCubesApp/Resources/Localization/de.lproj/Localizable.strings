@@ -318,6 +318,7 @@
 "status.summary.at-time" = " um ";
 "status.summary.n-boosts %lld" = "%lld Boosts";
 "status.summary.n-favorites %lld" = "%lld Favoriten";
+"status.summary.edited-time" = "Last edited: ";
 "status.visibility.direct" = "Direkt";
 "status.visibility.follower" = "Follower";
 "status.visibility.public" = "Öffentlich";
