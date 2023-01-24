@@ -13,7 +13,7 @@ public enum RouterDestinations: Hashable {
   case list(list: Models.List)
   case followers(id: String)
   case following(id: String)
-  case favouritedBy(id: String)
+  case favoritedBy(id: String)
   case rebloggedBy(id: String)
 }
 
@@ -62,9 +62,10 @@ public class RouterPath: ObservableObject {
   }
 
   public func handleStatus(status: AnyStatus, url: URL) -> OpenURLAction.Result {
-    if url.pathComponents.contains(where: { $0 == "tags" }),
+    if url.pathComponents.count == 3 && url.pathComponents[1] == "tags",
        let tag = url.pathComponents.last
     {
+
       navigate(to: .hashTag(tag: tag, account: nil))
       return .handled
     } else if let mention = status.mentions.first(where: { $0.url == url }) {

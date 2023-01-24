@@ -64,7 +64,9 @@ struct SettingsTabs: View {
           let account = appAccountsManager.availableAccounts[index]
           if let token = account.oauthToken {
             Task {
-              await pushNotifications.deleteSubscriptions(accounts: [.init(server: account.server, token: token)])
+              await pushNotifications.deleteSubscriptions(accounts: [.init(server: account.server,
+                                                                           token: token,
+                                                                           accountName: account.accountName)])
             }
           }
           appAccountsManager.delete(account: account)
@@ -117,6 +119,9 @@ struct SettingsTabs: View {
       }
       Toggle(isOn: $preferences.isOpenAIEnabled) {
         Label("settings.other.hide-openai", systemImage: "faxmachine")
+      }
+      Toggle(isOn: $preferences.isSocialKeyboardEnabled) {
+        Label("settings.other.social-keyboard", systemImage: "keyboard")
       }
     }
     .listRowBackground(theme.primaryBackgroundColor)

@@ -225,7 +225,11 @@ struct AddAccountView: View {
     do {
       oauthURL = nil
       let oauthToken = try await client.continueOauthFlow(url: url)
-      appAccountsManager.add(account: AppAccount(server: client.server, oauthToken: oauthToken))
+      let client = Client(server: client.server, oauthToken: oauthToken)
+      let account: Account = try await client.get(endpoint: Accounts.verifyCredentials)
+      appAccountsManager.add(account: AppAccount(server: client.server,
+                                                 accountName: "\(account.acct)@\(client.server)",
+                                                 oauthToken: oauthToken))
       Task {
         await pushNotifications.updateSubscriptions(accounts: appAccountsManager.pushAccounts)
       }

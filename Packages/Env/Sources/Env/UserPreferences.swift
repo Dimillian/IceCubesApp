@@ -5,7 +5,7 @@ import SwiftUI
 
 @MainActor
 public class UserPreferences: ObservableObject {
-  public static let sharedDefault = UserDefaults(suiteName: "group.icecubesapps")
+  public static let sharedDefault = UserDefaults(suiteName: "group.com.thomasricouard.IceCubesApp")
   public static let shared = UserPreferences()
 
   private var client: Client?
@@ -16,6 +16,9 @@ public class UserPreferences: ObservableObject {
   @AppStorage("font_size_scale") public var fontSizeScale: Double = 1
   @AppStorage("show_translate_button_inline") public var showTranslateButton: Bool = true
   @AppStorage("is_open_ai_enabled") public var isOpenAIEnabled: Bool = true
+
+  @AppStorage("recently_used_languages") public var recentlyUsedLanguages: [String] = []
+  @AppStorage("social_keyboard_composer") public var isSocialKeyboardEnabled: Bool = true
   
   @AppStorage("use_instance_content_settings") public var useInstanceContentSettings: Bool = true
   @AppStorage("app_auto_expand_spoilers") public var appAutoExpandSpoilers = false
@@ -93,5 +96,14 @@ public class UserPreferences: ObservableObject {
   public func refreshServerPreferences() async {
     guard let client, client.isAuth else { return }
     serverPreferences = try? await client.get(endpoint: Accounts.preferences)
+  }
+
+  public func markLanguageAsSelected(isoCode: String) {
+    var copy = recentlyUsedLanguages
+    if let index = copy.firstIndex(of: isoCode) {
+      copy.remove(at: index)
+    }
+    copy.insert(isoCode, at: 0)
+    recentlyUsedLanguages = Array(copy.prefix(3))
   }
 }
