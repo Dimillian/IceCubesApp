@@ -102,6 +102,7 @@
 "settings.rate" = "Valuta Ice Cubes";
 "settings.section.other" = "Other";
 "settings.other.hide-openai" = "Enable 🤖 helper";
+"settings.other.social-keyboard" = "Enable Social Keyboard";
 
 // MARK: Tabs
 "tab.explore" = "Esplora";

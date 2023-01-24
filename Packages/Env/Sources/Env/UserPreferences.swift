@@ -17,6 +17,7 @@ public class UserPreferences: ObservableObject {
   @AppStorage("show_translate_button_inline") public var showTranslateButton: Bool = true
   @AppStorage("is_open_ai_enabled") public var isOpenAIEnabled: Bool = true
   @AppStorage("recently_used_languages") public var recentlyUsedLanguages: [String] = []
+  @AppStorage("social_keyboard_composer") public var isSocialKeyboardEnabled: Bool = true
 
   public var pushNotificationsCount: Int {
     get {
