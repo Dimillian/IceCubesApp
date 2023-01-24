@@ -135,6 +135,7 @@ public class StatusEditorViewModel: ObservableObject {
     string.mutableString.insert(text, at: selectedRange.location)
     statusText = string
     selectedRange = NSRange(location: selectedRange.location + text.utf16.count, length: 0)
+    markedTextRange = nil
   }
 
   func replaceTextWith(text: String, inRange: NSRange) {
@@ -143,11 +144,13 @@ public class StatusEditorViewModel: ObservableObject {
     string.mutableString.insert(text, at: inRange.location)
     statusText = string
     selectedRange = NSRange(location: inRange.location + text.utf16.count, length: 0)
+    markedTextRange = nil
   }
 
   func replaceTextWith(text: String) {
     statusText = .init(string: text)
     selectedRange = .init(location: text.utf16.count, length: 0)
+    markedTextRange = nil
   }
 
   func prepareStatusText() {
@@ -173,10 +176,12 @@ public class StatusEditorViewModel: ObservableObject {
       visibility = status.visibility
       statusText = .init(string: mentionString)
       selectedRange = .init(location: mentionString.utf16.count, length: 0)
+      markedTextRange = nil
     case let .mention(account, visibility):
       statusText = .init(string: "@\(account.acct) ")
       self.visibility = visibility
       selectedRange = .init(location: statusText.string.utf16.count, length: 0)
+      markedTextRange = nil
     case let .edit(status):
       var rawText = NSAttributedString(status.content.asSafeMarkdownAttributedString).string
       for mention in status.mentions {
@@ -184,6 +189,7 @@ public class StatusEditorViewModel: ObservableObject {
       }
       statusText = .init(string: rawText)
       selectedRange = .init(location: statusText.string.utf16.count, length: 0)
+      markedTextRange = nil
       spoilerOn = !status.spoilerText.asRawText.isEmpty
       spoilerText = status.spoilerText.asRawText
       visibility = status.visibility
@@ -193,11 +199,13 @@ public class StatusEditorViewModel: ObservableObject {
       if let url = embeddedStatusURL {
         statusText = .init(string: "\n\nFrom: @\(status.reblog?.account.acct ?? status.account.acct)\n\(url)")
         selectedRange = .init(location: 0, length: 0)
+        markedTextRange = nil
       }
     }
   }
   
   private func processText() {
+    guard markedTextRange == nil else { return }
     statusText.addAttributes([.foregroundColor: UIColor(Color.label),
                               .underlineColor: .clear],
                              range: NSMakeRange(0, statusText.string.utf16.count))
@@ -283,6 +291,7 @@ public class StatusEditorViewModel: ObservableObject {
       if !initialText.isEmpty {
         statusText = .init(string: initialText)
         selectedRange = .init(location: statusText.string.utf16.count, length: 0)
+        markedTextRange = nil
       }
       if !mediasImages.isEmpty {
         processMediasToUpload()
