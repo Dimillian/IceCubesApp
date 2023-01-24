@@ -13,9 +13,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string>%lld new post</string>
+			<string>%lld 新しい投稿</string>
 			<key>other</key>
-			<string>%lld new posts</string>
+			<string>%lld 新しい投稿</string>
 		</dict>
 	</dict>
 </dict>
