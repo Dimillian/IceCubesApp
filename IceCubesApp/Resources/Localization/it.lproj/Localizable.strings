@@ -100,8 +100,8 @@
 "settings.timeline.add" = "Aggiungi una timeline locale";
 "settings.title" = "Impostazioni";
 "settings.rate" = "Valuta Ice Cubes";
-"settings.section.other" = "Other";
-"settings.other.hide-openai" = "Enable 🤖 helper";
+"settings.section.other" = "Altro";
+"settings.other.hide-openai" = "Abilita l'utilizzo di 🤖";
 
 // MARK: Tabs
 "tab.explore" = "Esplora";
@@ -136,17 +136,17 @@
 "account.action.unmute" = "Sblocca";
 "account.boosted-by" = "Condiviso da";
 "account.detail.about" = "Informazioni";
-"account.detail.familiar-followers" = "Anche seguito da";
+"account.detail.familiar-followers" = "Seguito da";
 "account.detail.n-fields %lld" = "%lld campi";
 "account.detail.featured-tags-n-posts %lld" = "%lld messaggi";
 "account.edit.about" = "Informazioni";
 "account.edit.account-settings.bot" = "Account gestito da un bot";
-"account.edit.account-settings.discoverable" = "Scorpibile";
+"account.edit.account-settings.discoverable" = "Scopribile";
 "account.edit.account-settings.private" = "Privato";
 "account.edit.account-settings.section-title" = "Impostazioni account";
 "account.edit.display-name" = "Nome visibile";
-"account.edit.error.save.message" = "Errore durante il savataggio del tuo profilo, prova di nuovo.";
-"account.edit.error.save.title" = "Errore durante il savataggio del tuo profilo";
+"account.edit.error.save.message" = "Errore durante il salvataggio del tuo profilo, prova di nuovo.";
+"account.edit.error.save.title" = "Errore durante il salvataggio del tuo profilo";
 "account.edit.navigation-title" = "Modifica profilo";
 "account.edit.post-settings.privacy" = "Privacy di default";
 "account.edit.post-settings.section-title" = "Impostazioni messaggi";
@@ -176,7 +176,7 @@
 "conversations.error.message" = "Errore durante il recupero dei tuoi messaggi";
 "conversations.error.title" = "Si è verificato in errore";
 "conversations.navigation-title" = "Messaggi diretti";
-"conversations.new.message.placeholder" = "New Message";
+"conversations.new.message.placeholder" = "Nuovo messaggio";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld messaggi da %lld partecipanti";
@@ -238,7 +238,7 @@
 "notifications.menu-title.reblog" = "Condivisioni";
 "notifications.menu-title.status" = "Messaggi";
 "notifications.menu-title.update" = "Messaggi modificati";
-"notifications.navigation-title" = "Tutte le norifiche";
+"notifications.navigation-title" = "Tutte le notifiche";
 "notifications.tab.all" = "Tutto";
 "notifications.tab.mentions" = "Menzioni";
 
@@ -309,7 +309,7 @@
 "status.poll.duration" = "Durata del sondaggio";
 "status.poll.frequency" = "Frequenza di voto";
 "status.poll.option-n %lld" = "Opzione %lld";
-"status.post-from-%@" = "Messagio da %@";
+"status.post-from-%@" = "Messaggio da %@";
 "status.row.was-boosted" = "ha condiviso";
 "status.row.was-reply" = "Risposta per";
 "status.row.you-boosted" = "Tu hai condiviso";
