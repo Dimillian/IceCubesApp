@@ -34,11 +34,12 @@ Thanks!
 
 ## Building the project
 
-To first build the project, you need to clone the repo and create a copy of the included xcconfig file to create your own config before you can compile the project. **Otherwise. you will get an error.**
+To build the project, you need to clone the repo and create a copy of the included `.xcconfig` file to create your config before you can compile the project. **Otherwise, you will get an error.**
 
 Here are the steps:
 
 1. Clone the repo
-2. Copy the IceCubesApp.xcconfig.template file as IceCubesApp.xcconfig (in the same folder)
-3. Fill in the `DEVELOPMENT_TEAM` and `BUNDLE_ID_PREFIX` values. The first should have your Apple Team ID (which you can find by logging into the Apple Developer Portal) and the latter would generallly be your domain in reverese notation, or whatever you use as the prefix for your own projects.
-4. Save your changes and then you should be able to compile the project without any issues.
+2. In the same folder that contains the `IceCubesApp.xcconfig.template`, run this command:
+ - cp IceCubesApp.xcconfig.template IceCubesApp.xcconfig
+3. Fill in the `DEVELOPMENT_TEAM` and `BUNDLE_ID_PREFIX` values. The first should have your Apple Team ID (which you can find by logging into the Apple Developer Portal). The latter is your domain in reverse notation or whatever you use as the prefix for your projects.
+4. Save your changes, and then you should be able to compile the project without any issues.
