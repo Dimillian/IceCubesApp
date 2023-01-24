@@ -4,7 +4,7 @@ import SwiftUI
 
 public enum AccountsListMode {
   case following(accountId: String), followers(accountId: String)
-  case favouritedBy(statusId: String), rebloggedBy(statusId: String)
+  case favoritedBy(statusId: String), rebloggedBy(statusId: String)
 
   var title: LocalizedStringKey {
     switch self {
@@ -12,7 +12,7 @@ public enum AccountsListMode {
       return "account.following"
     case .followers:
       return "account.followers"
-    case .favouritedBy:
+    case .favoritedBy:
       return "account.favorited-by"
     case .rebloggedBy:
       return "account.boosted-by"
@@ -64,8 +64,8 @@ class AccountsListViewModel: ObservableObject {
       case let .rebloggedBy(statusId):
         (accounts, link) = try await client.getWithLink(endpoint: Statuses.rebloggedBy(id: statusId,
                                                                                        maxId: nil))
-      case let .favouritedBy(statusId):
-        (accounts, link) = try await client.getWithLink(endpoint: Statuses.favouritedBy(id: statusId,
+      case let .favoritedBy(statusId):
+        (accounts, link) = try await client.getWithLink(endpoint: Statuses.favoritedBy(id: statusId,
                                                                                         maxId: nil))
       }
       nextPageId = link?.maxId
@@ -93,8 +93,8 @@ class AccountsListViewModel: ObservableObject {
       case let .rebloggedBy(statusId):
         (newAccounts, link) = try await client.getWithLink(endpoint: Statuses.rebloggedBy(id: statusId,
                                                                                           maxId: nextPageId))
-      case let .favouritedBy(statusId):
-        (newAccounts, link) = try await client.getWithLink(endpoint: Statuses.favouritedBy(id: statusId,
+      case let .favoritedBy(statusId):
+        (newAccounts, link) = try await client.getWithLink(endpoint: Statuses.favoritedBy(id: statusId,
                                                                                            maxId: nextPageId))
       }
       accounts.append(contentsOf: newAccounts)

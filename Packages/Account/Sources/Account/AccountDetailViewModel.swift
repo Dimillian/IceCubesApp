@@ -15,10 +15,10 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   }
 
   enum Tab: Int {
-    case statuses, favourites, bookmarks, followedTags, postsAndReplies, media, lists
+    case statuses, favorites, bookmarks, followedTags, postsAndReplies, media, lists
 
     static var currentAccountTabs: [Tab] {
-      [.statuses, .favourites, .bookmarks, .followedTags, .lists]
+      [.statuses, .favorites, .bookmarks, .followedTags, .lists]
     }
 
     static var accountTabs: [Tab] {
@@ -28,7 +28,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
     var iconName: String {
       switch self {
       case .statuses: return "bubble.right"
-      case .favourites: return "star"
+      case .favorites: return "star"
       case .bookmarks: return "bookmark"
       case .followedTags: return "tag"
       case .postsAndReplies: return "bubble.left.and.bubble.right"
@@ -62,9 +62,9 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
 
   @Published var relationship: Relationship?
   @Published var pinned: [Status] = []
-  @Published var favourites: [Status] = []
+  @Published var favorites: [Status] = []
   @Published var bookmarks: [Status] = []
-  private var favouritesNextPage: LinkHandler?
+  private var favoritesNextPage: LinkHandler?
   private var bookmarksNextPage: LinkHandler?
   @Published var featuredTags: [FeaturedTag] = []
   @Published var fields: [Account.Field] = []
@@ -167,7 +167,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
                                                            pinned: true))
       }
       if isCurrentUser {
-        (favourites, favouritesNextPage) = try await client.getWithLink(endpoint: Accounts.favourites(sinceId: nil))
+        (favorites, favoritesNextPage) = try await client.getWithLink(endpoint: Accounts.favorites(sinceId: nil))
         (bookmarks, bookmarksNextPage) = try await client.getWithLink(endpoint: Accounts.bookmarks(sinceId: nil))
       }
       reloadTabState()
@@ -193,12 +193,12 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
         statuses.append(contentsOf: newStatuses)
         tabState = .statuses(statusesState: .display(statuses: statuses,
                                                      nextPageState: newStatuses.count < 20 ? .none : .hasNextPage))
-      case .favourites:
-        guard let nextPageId = favouritesNextPage?.maxId else { return }
-        let newFavourites: [Status]
-        (newFavourites, favouritesNextPage) = try await client.getWithLink(endpoint: Accounts.favourites(sinceId: nextPageId))
-        favourites.append(contentsOf: newFavourites)
-        tabState = .statuses(statusesState: .display(statuses: favourites, nextPageState: .hasNextPage))
+      case .favorites:
+        guard let nextPageId = favoritesNextPage?.maxId else { return }
+        let newFavorites: [Status]
+        (newFavorites, favoritesNextPage) = try await client.getWithLink(endpoint: Accounts.favorites(sinceId: nextPageId))
+        favorites.append(contentsOf: newFavorites)
+        tabState = .statuses(statusesState: .display(statuses: favorites, nextPageState: .hasNextPage))
       case .bookmarks:
         guard let nextPageId = bookmarksNextPage?.maxId else { return }
         let newBookmarks: [Status]
@@ -217,9 +217,9 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
     switch selectedTab {
     case .statuses, .postsAndReplies, .media:
       tabState = .statuses(statusesState: .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage))
-    case .favourites:
-      tabState = .statuses(statusesState: .display(statuses: favourites,
-                                                   nextPageState: favouritesNextPage != nil ? .hasNextPage : .none))
+    case .favorites:
+      tabState = .statuses(statusesState: .display(statuses: favorites,
+                                                   nextPageState: favoritesNextPage != nil ? .hasNextPage : .none))
     case .bookmarks:
       tabState = .statuses(statusesState: .display(statuses: bookmarks,
                                                    nextPageState: bookmarksNextPage != nil ? .hasNextPage : .none))

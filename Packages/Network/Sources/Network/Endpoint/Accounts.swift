@@ -3,7 +3,7 @@ import Models
 
 public enum Accounts: Endpoint {
   case accounts(id: String)
-  case favourites(sinceId: String?)
+  case favorites(sinceId: String?)
   case bookmarks(sinceId: String?)
   case followedTags
   case featuredTags(id: String)
@@ -39,8 +39,8 @@ public enum Accounts: Endpoint {
     switch self {
     case let .accounts(id):
       return "accounts/\(id)"
-    case .favourites:
-      return "favourites"
+    case .favorites:
+      return "favorites"
     case .bookmarks:
       return "bookmarks"
     case .followedTags:
@@ -117,7 +117,7 @@ public enum Accounts: Endpoint {
       return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
     case let .following(_, maxId):
       return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
-    case let .favourites(sinceId):
+    case let .favorites(sinceId):
       guard let sinceId else { return nil }
       return [.init(name: "max_id", value: sinceId)]
     case let .bookmarks(sinceId):

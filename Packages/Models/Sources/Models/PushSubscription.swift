@@ -3,7 +3,7 @@ import Foundation
 public struct PushSubscription: Identifiable, Decodable {
   public struct Alerts: Decodable {
     public let follow: Bool
-    public let favourite: Bool
+    public let favorite: Bool
     public let reblog: Bool
     public let mention: Bool
     public let poll: Bool

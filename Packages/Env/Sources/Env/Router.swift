@@ -13,7 +13,7 @@ public enum RouterDestinations: Hashable {
   case list(list: Models.List)
   case followers(id: String)
   case following(id: String)
-  case favouritedBy(id: String)
+  case favoritedBy(id: String)
   case rebloggedBy(id: String)
 }
 
