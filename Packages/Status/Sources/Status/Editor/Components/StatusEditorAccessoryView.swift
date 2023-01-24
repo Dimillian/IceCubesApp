@@ -107,21 +107,17 @@ struct StatusEditorAccessoryView: View {
   private var languageSheetView: some View {
     NavigationStack {
       List {
-        ForEach(availableLanguages, id: \.0) { isoCode, nativeName, name in
-          HStack {
-            languageTextView(isoCode: isoCode, nativeName: nativeName, name: name)
-              .tag(isoCode)
-            Spacer()
-            if isoCode == viewModel.selectedLanguage {
-              Image(systemName: "checkmark")
+        if languageSearch.isEmpty {
+          if !recentlyUsedLanguages.isEmpty {
+            Section("Recently Used") {
+              languageSheetSection(languages: recentlyUsedLanguages)
             }
           }
-          .listRowBackground(theme.primaryBackgroundColor)
-          .contentShape(Rectangle())
-          .onTapGesture {
-            viewModel.selectedLanguage = isoCode
-            isLanguageSheetDisplayed = false
+          Section {
+            languageSheetSection(languages: otherLanguages)
           }
+        } else {
+          languageSheetSection(languages: languageSearchResult(query: languageSearch))
         }
       }
       .searchable(text: $languageSearch)
@@ -134,6 +130,29 @@ struct StatusEditorAccessoryView: View {
       .navigationBarTitleDisplayMode(.inline)
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
+    }
+  }
+
+  private func languageSheetSection(languages: [Language]) -> some View {
+    ForEach(languages) { language in
+      HStack {
+        languageTextView(
+          isoCode: language.isoCode,
+          nativeName: language.nativeName,
+          name: language.localizedName
+        ).tag(language.isoCode)
+        Spacer()
+        if language.isoCode == viewModel.selectedLanguage {
+          Image(systemName: "checkmark")
+        }
+      }
+      .listRowBackground(theme.primaryBackgroundColor)
+      .contentShape(Rectangle())
+      .onTapGesture {
+        viewModel.selectedLanguage = language.isoCode
+        viewModel.hasExplicitlySelectedLanguage = true
+        isLanguageSheetDisplayed = false
+      }
     }
   }
 
@@ -206,22 +225,43 @@ struct StatusEditorAccessoryView: View {
       .font(.scaledCallout)
   }
 
-  private var availableLanguages: [(String, String?, String?)] {
+  private struct Language: Identifiable, Equatable {
+    var id: String { isoCode }
+
+    let isoCode: String
+    let nativeName: String?
+    let localizedName: String?
+  }
+
+  private let allAvailableLanguages: [Language] =
     Locale.LanguageCode.isoLanguageCodes
       .filter { $0.identifier.count == 2 } // Mastodon only supports ISO 639-1 (two-letter) codes
       .map { lang in
         let nativeLocale = Locale(languageComponents: Locale.Language.Components(languageCode: lang))
-        return (
-          lang.identifier,
-          nativeLocale.localizedString(forLanguageCode: lang.identifier),
-          Locale.current.localizedString(forLanguageCode: lang.identifier)
+        return Language(
+          isoCode: lang.identifier,
+          nativeName: nativeLocale.localizedString(forLanguageCode: lang.identifier)?.capitalized,
+          localizedName: Locale.current.localizedString(forLanguageCode: lang.identifier)?.localizedCapitalized
         )
       }
-      .filter { _, nativeLocale, _ in
-        guard !languageSearch.isEmpty else {
-          return true
-        }
-        return nativeLocale?.lowercased().hasPrefix(languageSearch.lowercased()) == true
+
+  private var recentlyUsedLanguages: [Language] {
+    preferences.recentlyUsedLanguages.compactMap { isoCode in
+      allAvailableLanguages.first { $0.isoCode == isoCode }
+    }
+  }
+
+  private var otherLanguages: [Language] {
+    allAvailableLanguages.filter { !preferences.recentlyUsedLanguages.contains($0.isoCode) }
+  }
+
+  private func languageSearchResult(query: String) -> [Language] {
+    allAvailableLanguages.filter { language in
+      guard !languageSearch.isEmpty else {
+        return true
       }
+      return language.nativeName?.lowercased().hasPrefix(query.lowercased()) == true
+        || language.localizedName?.lowercased().hasPrefix(query.lowercased()) == true
+    }
   }
 }

@@ -117,6 +117,9 @@ struct SettingsTabs: View {
       Toggle(isOn: $preferences.isOpenAIEnabled) {
         Label("settings.other.hide-openai", systemImage: "faxmachine")
       }
+      Toggle(isOn: $preferences.isSocialKeyboardEnabled) {
+        Label("settings.other.social-keyboard", systemImage: "keyboard")
+      }
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }

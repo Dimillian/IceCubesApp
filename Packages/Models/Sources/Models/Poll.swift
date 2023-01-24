@@ -20,12 +20,24 @@ public struct Poll: Codable, Equatable, Hashable {
   }
 
   public let id: String
-  public let expiresAt: ServerDate
+  public let expiresAt: NullableString
   public let expired: Bool
   public let multiple: Bool
   public let votesCount: Int
-  public let votersCount: Int?
   public let voted: Bool?
   public let ownVotes: [Int]?
   public let options: [Option]
+}
+
+public struct NullableString: Codable, Equatable, Hashable {
+  public let value: String?
+  
+  public init(from decoder: Decoder) throws {
+    do {
+      let container = try decoder.singleValueContainer()
+      self.value = try container.decode(String.self)
+    } catch {
+      self.value = nil
+    }
+  }
 }
