@@ -101,7 +101,7 @@
 "settings.title" = "设置";
 "settings.rate" = "给 Ice Cubes 评分";
 "settings.section.other" = "其它";
-"settings.other.hide-openai" = "启用 🤖 助手";
+"settings.other.hide-openai" = "启用 🤖 写作助手";
 
 // MARK: Tabs
 "tab.explore" = "探索";
