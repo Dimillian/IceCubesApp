@@ -23,9 +23,9 @@
 "enum.avatar-position.top" = "顶部";
 "enum.avatar-shape.circle" = "圆形";
 "enum.avatar-shape.rounded" = "圆角";
-"enum.status-actions-display.all" = "全部";
-"enum.status-actions-display.no-buttons" = "隐藏按钮";
-"enum.status-actions-display.only-buttons" = "仅按钮";
+"enum.status-actions-display.all" = "图标和文本";
+"enum.status-actions-display.no-buttons" = "仅文本";
+"enum.status-actions-display.only-buttons" = "仅图标";
 "enum.status-display-style.compact" = "紧凑";
 "enum.status-display-style.large" = "宽松";
 
@@ -56,8 +56,8 @@
 "settings.display.restore" = "恢复默认设置";
 "settings.display.section.display" = "显示";
 "settings.display.section.theme" = "主题";
-"settings.display.status.action-buttons" = "状态操作选项";
-"settings.display.status.media-style" = "状态媒体样式";
+"settings.display.status.action-buttons" = "导航栏选项";
+"settings.display.status.media-style" = "导航栏排列";
 "settings.display.translate-button" = "显示翻译按钮";
 "settings.display.theme.background" = "背景颜色";
 "settings.display.theme.secondary-background" = "二级背景颜色";
@@ -95,13 +95,13 @@
 "settings.support.three.title" = "🤯 很慷慨的捐赠";
 "settings.support.two.subtitle" = "我很喜欢这杯美味的咖啡 ❤️";
 "settings.support.two.title" = "☕️ 很不错的捐赠";
-"settings.support.four.title" = "👽 神秘人的小费";
+"settings.support.four.title" = "👽 神秘人的捐赠";
 "settings.support.four.subtitle" = "这将大大有助于 Ice Cubes 的持续运行！";
 "settings.timeline.add" = "添加远程时间线";
 "settings.title" = "设置";
 "settings.rate" = "给 Ice Cubes 评分";
-"settings.section.other" = "Other";
-"settings.other.hide-openai" = "Enable 🤖 helper";
+"settings.section.other" = "其它";
+"settings.other.hide-openai" = "启用 🤖 助手";
 
 // MARK: Tabs
 "tab.explore" = "探索";
@@ -176,7 +176,7 @@
 "conversations.error.message" = "加载私信时出错";
 "conversations.error.title" = "出错啦";
 "conversations.navigation-title" = "私信";
-"conversations.new.message.placeholder" = "New Message";
+"conversations.new.message.placeholder" = "新消息";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld 条嘟文从 %lld 个参与者中发出";
