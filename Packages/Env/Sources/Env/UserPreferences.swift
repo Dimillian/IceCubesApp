@@ -20,17 +20,37 @@ public class UserPreferences: ObservableObject {
   @AppStorage("use_instance_content_settings") public var useInstanceContentSettings: Bool = true
   @AppStorage("app_auto_expand_spoilers") public var appAutoExpandSpoilers = false
   @AppStorage("app_auto_expand_media") public var appAutoExpandMedia:ServerPreferences.AutoExpandMedia = .hideSensitive
+  @AppStorage("app_default_post_visibility") public var appDefaultPostVisibility:Models.Visibility = .pub
+  @AppStorage("app_default_posts_sensitive") public var appDefaultPostsSensitive = false
 
+
+  public var postVisibility:Models.Visibility {
+    get{
+      if useInstanceContentSettings {
+        return serverPreferences?.postVisibility ?? .pub
+      }
+      else {
+        return appDefaultPostVisibility
+      }
+    }
+  }
+  
+  public var postIsSensitive:Bool {
+    get {
+      if useInstanceContentSettings {
+        return serverPreferences?.postIsSensitive ?? false
+      }
+      else {
+        return appDefaultPostsSensitive
+      }
+    }
+  }
+  
   
   public var autoExpandSpoilers: Bool {
     get {
       if useInstanceContentSettings {
-        if serverPreferences?.autoExpandSpoilers == true {
-          return true
-        }
-        else {
-          return false;
-        }
+        return serverPreferences?.autoExpandSpoilers ?? true
       }
       else {
         return appAutoExpandSpoilers
@@ -41,12 +61,7 @@ public class UserPreferences: ObservableObject {
   public var autoExpandMedia: ServerPreferences.AutoExpandMedia {
     get {
       if useInstanceContentSettings {
-        if let auto = serverPreferences?.autoExpandMedia {
-          return auto
-        }
-        else {
-          return ServerPreferences.AutoExpandMedia.hideSensitive
-        }
+        return serverPreferences?.autoExpandMedia ?? .hideSensitive
       }
       else {
         return appAutoExpandMedia
