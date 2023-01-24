@@ -88,6 +88,7 @@ public class StatusEditorViewModel: ObservableObject {
   @Published var mentionsSuggestions: [Account] = []
   @Published var tagsSuggestions: [Tag] = []
   @Published var selectedLanguage: String?
+  var hasExplicitlySelectedLanguage: Bool = false
   private var currentSuggestionRange: NSRange?
 
   private var embeddedStatusURL: URL? {
@@ -137,6 +138,9 @@ public class StatusEditorViewModel: ObservableObject {
         postStatus = try await client.put(endpoint: Statuses.editStatus(id: status.id, json: data))
       }
       generator.notificationOccurred(.success)
+      if hasExplicitlySelectedLanguage, let selectedLanguage {
+        preferences?.markLanguageAsSelected(isoCode: selectedLanguage)
+      }
       isPosting = false
       return postStatus
     } catch let error {
