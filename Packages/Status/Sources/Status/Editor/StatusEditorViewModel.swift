@@ -13,6 +13,7 @@ public class StatusEditorViewModel: ObservableObject {
   var client: Client?
   var currentAccount: Account?
   var theme: Theme?
+  var preferences: UserPreferences?
 
   @Published var statusText = NSMutableAttributedString(string: "") {
     didSet {

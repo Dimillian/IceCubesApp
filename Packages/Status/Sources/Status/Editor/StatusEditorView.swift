@@ -74,6 +74,7 @@ public struct StatusEditorView: View {
         viewModel.client = client
         viewModel.currentAccount = currentAccount.account
         viewModel.theme = theme
+        viewModel.preferences = preferences
         viewModel.prepareStatusText()
         if !client.isAuth {
           dismiss()
