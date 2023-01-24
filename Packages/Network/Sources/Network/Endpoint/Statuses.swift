@@ -29,9 +29,9 @@ public enum Statuses: Endpoint {
     case let .context(id):
       return "statuses/\(id)/context"
     case let .favorite(id):
-      return "statuses/\(id)/favorite"
+      return "statuses/\(id)/favourite"
     case let .unfavorite(id):
-      return "statuses/\(id)/unfavorite"
+      return "statuses/\(id)/unfavourite"
     case let .reblog(id):
       return "statuses/\(id)/reblog"
     case let .unreblog(id):
@@ -39,7 +39,7 @@ public enum Statuses: Endpoint {
     case let .rebloggedBy(id, _):
       return "statuses/\(id)/reblogged_by"
     case let .favoritedBy(id, _):
-      return "statuses/\(id)/favorited_by"
+      return "statuses/\(id)/favourited_by"
     case let .pin(id):
       return "statuses/\(id)/pin"
     case let .unpin(id):

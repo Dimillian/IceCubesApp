@@ -120,7 +120,7 @@ public class PushNotificationsService: ObservableObject {
     if let sub = subscriptions.first {
       isPushEnabled = true
       isFollowNotificationEnabled = sub.alerts.follow
-      isFavoriteNotificationEnabled = sub.alerts.favorite
+      isFavoriteNotificationEnabled = sub.alerts.favourite
       isReblogNotificationEnabled = sub.alerts.reblog
       isMentionNotificationEnabled = sub.alerts.mention
       isPollNotificationEnabled = sub.alerts.poll

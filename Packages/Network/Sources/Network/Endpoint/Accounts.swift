@@ -40,7 +40,7 @@ public enum Accounts: Endpoint {
     case let .accounts(id):
       return "accounts/\(id)"
     case .favorites:
-      return "favorites"
+      return "favourites"
     case .bookmarks:
       return "bookmarks"
     case .followedTags:

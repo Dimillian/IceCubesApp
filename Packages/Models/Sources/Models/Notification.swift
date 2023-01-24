@@ -2,7 +2,7 @@ import Foundation
 
 public struct Notification: Decodable, Identifiable {
   public enum NotificationType: String, CaseIterable {
-    case follow, follow_request, mention, reblog, status, favorite, poll, update
+    case follow, follow_request, mention, reblog, status, favourite, poll, update
   }
 
   public let id: String
@@ -17,7 +17,7 @@ public struct Notification: Decodable, Identifiable {
 
   public static func placeholder() -> Notification {
     .init(id: UUID().uuidString,
-          type: NotificationType.favorite.rawValue,
+          type: NotificationType.favourite.rawValue,
           createdAt: "2022-12-16T10:20:54.000Z",
           account: .placeholder(),
           status: .placeholder())

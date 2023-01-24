@@ -30,7 +30,7 @@ public enum Push: Endpoint {
       params.append(.init(name: "data[alerts][status]", value: status ? "true" : "false"))
       params.append(.init(name: "data[alerts][follow]", value: follow ? "true" : "false"))
       params.append(.init(name: "data[alerts][reblog]", value: reblog ? "true" : "false"))
-      params.append(.init(name: "data[alerts][favorite]", value: favorite ? "true" : "false"))
+      params.append(.init(name: "data[alerts][favourite]", value: favorite ? "true" : "false"))
       params.append(.init(name: "data[alerts][poll]", value: poll ? "true" : "false"))
       params.append(.init(name: "policy", value: "all"))
       return params
