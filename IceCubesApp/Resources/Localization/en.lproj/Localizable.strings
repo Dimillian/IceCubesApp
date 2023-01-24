@@ -70,6 +70,7 @@
 "settings.general.instance" = "Instance Information";
 "settings.general.push-notifications" = "Push Notifications";
 "settings.general.remote-timelines" = "Remote Local Timelines";
+"settings.general.sensitive-content" = "Sensitive Content";
 "settings.push.boosts" = "Boosts";
 "settings.push.favorites" = "Favorites";
 "settings.push.follows" = "Follows";
@@ -79,6 +80,14 @@
 "settings.push.navigation-title" = "Push Notifications";
 "settings.push.new-posts" = "New Posts";
 "settings.push.polls" = "Poll Results";
+"settings.sensitive-content.navigation-title" = "Sensitive Content";
+"settings.sensitive-content.use-instance-settings" = "Use instance settings";
+"settings.sensitive-content.main-toggle.description" = "Match the settings you have set on your Instance.";
+"settings.sensitive-content.expand-spoilers" = "Always expand posts marked with content warnings";
+"settings.sensitive-content.expand-media" = "Media display";
+"enum.expand-media.show" = "Show All";
+"enum.expand-media.hide" = "Hide All";
+"enum.expand-media.hide-sensitive" = "Hide Sensitive";
 "settings.section.accounts" = "Accounts";
 "settings.section.app" = "App";
 "settings.section.app.footer %@" = "App Version: %@";

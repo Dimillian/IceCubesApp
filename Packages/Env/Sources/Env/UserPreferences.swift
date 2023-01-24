@@ -16,6 +16,44 @@ public class UserPreferences: ObservableObject {
   @AppStorage("font_size_scale") public var fontSizeScale: Double = 1
   @AppStorage("show_translate_button_inline") public var showTranslateButton: Bool = true
   @AppStorage("is_open_ai_enabled") public var isOpenAIEnabled: Bool = true
+  
+  @AppStorage("use_instance_content_settings") public var useInstanceContentSettings: Bool = true
+  @AppStorage("app_auto_expand_spoilers") public var appAutoExpandSpoilers = false
+  @AppStorage("app_auto_expand_media") public var appAutoExpandMedia:ServerPreferences.AutoExpandMedia = .hideSensitive
+
+  
+  public var autoExpandSpoilers: Bool {
+    get {
+      if useInstanceContentSettings {
+        if serverPreferences?.autoExpandSpoilers == true {
+          return true
+        }
+        else {
+          return false;
+        }
+      }
+      else {
+        return appAutoExpandSpoilers
+      }
+    }
+  }
+  
+  public var autoExpandMedia: ServerPreferences.AutoExpandMedia {
+    get {
+      if useInstanceContentSettings {
+        if let auto = serverPreferences?.autoExpandMedia {
+          return auto
+        }
+        else {
+          return ServerPreferences.AutoExpandMedia.hideSensitive
+        }
+      }
+      else {
+        return appAutoExpandMedia
+      }
+    }
+  }
+  
 
   public var pushNotificationsCount: Int {
     get {

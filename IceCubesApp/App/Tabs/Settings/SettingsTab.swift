@@ -92,6 +92,9 @@ struct SettingsTabs: View {
       NavigationLink(destination: remoteLocalTimelinesView) {
         Label("settings.general.remote-timelines", systemImage: "dot.radiowaves.right")
       }
+      NavigationLink(destination: SensitiveContentSettingsView()) {
+        Label("settings.general.sensitive-content", systemImage: "exclamationmark.triangle")
+      }
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }

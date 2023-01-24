@@ -69,6 +69,7 @@
 		9FD542E72962D2FF0045321A /* Lists in Frameworks */ = {isa = PBXBuildFile; productRef = 9FD542E62962D2FF0045321A /* Lists */; };
 		9FE151A6293C90F900E9683D /* IconSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE151A5293C90F900E9683D /* IconSelectorView.swift */; };
 		9FE3DB57296FEFCA00628CB0 /* AppAccount in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE3DB56296FEFCA00628CB0 /* AppAccount */; };
+		C9B22677297F6C2E001F9EFE /* SensitiveContentSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B22676297F6C2E001F9EFE /* SensitiveContentSettingsView.swift */; };
 		E9B576C329743F4C00BCE646 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E9B576C529743F4C00BCE646 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
@@ -166,6 +167,7 @@
 		9FE151A5293C90F900E9683D /* IconSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSelectorView.swift; sourceTree = "<group>"; };
 		9FE3DB55296FEF5800628CB0 /* AppAccount */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppAccount; path = Packages/AppAccount; sourceTree = "<group>"; };
 		C465A53D297C5E0C00864FB7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C9B22676297F6C2E001F9EFE /* SensitiveContentSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensitiveContentSettingsView.swift; sourceTree = "<group>"; };
 		E9B576C429743F4C00BCE646 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E9B576CC2974AAAF00BCE646 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F355EEDA297A8BD500E362C0 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -366,6 +368,7 @@
 				9F7335F82968576500AFF0BA /* DisplaySettingsView.swift */,
 				9F2A540629699698009B2D7C /* SupportAppView.swift */,
 				9F2A5410296A1429009B2D7C /* PushNotificationsView.swift */,
+				C9B22676297F6C2E001F9EFE /* SensitiveContentSettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -576,6 +579,7 @@
 			files = (
 				9FE151A6293C90F900E9683D /* IconSelectorView.swift in Sources */,
 				9F2B92FC295DA94500DE16D0 /* InstanceInfoView.swift in Sources */,
+				C9B22677297F6C2E001F9EFE /* SensitiveContentSettingsView.swift in Sources */,
 				9F35DB4C2952005C00B3281A /* MessagesTab.swift in Sources */,
 				9FAD85CF2975B68900496AB1 /* SideBarView.swift in Sources */,
 				9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */,
