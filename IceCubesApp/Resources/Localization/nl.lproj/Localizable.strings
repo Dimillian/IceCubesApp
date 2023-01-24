@@ -53,7 +53,7 @@
 "settings.display.avatar.position" = "Avatarpositie";
 "settings.display.avatar.shape" = "Avatarvorm";
 "settings.display.navigation-title" = "Weergaveopties";
-"settings.display.restore" = "Standaardinstellingen herstellen";
+"settings.display.restore" = "Stel opnieuw in";
 "settings.display.section.display" = "Weergave";
 "settings.display.section.theme" = "Thema";
 "settings.display.status.action-buttons" = "Actieknoppen";
@@ -100,8 +100,8 @@
 "settings.support.four.subtitle" = "Daarmee kan Ice Cubes nog een tijdje vooruit!";
 "settings.timeline.add" = "Een lokale tijdlijn toevoegen";
 "settings.title" = "Instellingen";
-"settings.section.other" = "Other";
-"settings.other.hide-openai" = "Enable 🤖 helper";
+"settings.section.other" = "Overig";
+"settings.other.hide-openai" = "Schakel 🤖 hulp in";
 
 // MARK: Tabs
 "tab.explore" = "Ontdekken";
@@ -115,8 +115,8 @@
 
 // MARK: Timeline
 "timeline.%@-is-valid" = "%@ is een geldige instantie";
-"timeline.add-remote.title" = "Andere lokale tijdlijn toevoegen";
-"timeline.add.action.add" = "Toevoegen";
+"timeline.add-remote.title" = "Lokale tijdlijn toevoegen";
+"timeline.add.action.add" = "Voeg toe";
 "timeline.filter.add-local" = "Lokale tijdlijn toevoegen";
 "timeline.filter.lists" = "Lijsten";
 "timeline.filter.local" = "Lokale tijdlijnen";
@@ -151,7 +151,7 @@
 "account.edit.post-settings.privacy" = "Standaardprivacy";
 "account.edit.post-settings.section-title" = "Postinstellingen";
 "account.edit.post-settings.sensitive" = "Gevoelige inhoud";
-"account.favorited-by" = "Geliked door";
+"account.favorited-by" = "Gefavoriet";
 "account.follow.follow" = "Volg";
 "account.follow.following" = "Volgend";
 "account.follow.requested" = "Verzocht";
@@ -168,7 +168,7 @@
 "account.joined" = "Lid geworden";
 
 // MARK: Package: Conversations
-"conversations.action.delete" = "Verwijderen";
+"conversations.action.delete" = "Verwijder";
 "conversations.action.mark-read" = "Markeer als gelezen";
 "conversations.empty.message" = "Op zoek naar wat liefde op sociale media? Hier vind je al je directe berichten en privévermeldingen. Veel plezier met het versturen van berichtjes! 📱❤️";
 "conversations.empty.title" = "Lege inbox";
