@@ -11,8 +11,8 @@ public class StatusRowViewModel: ObservableObject {
   let isRemote: Bool
   let showActions: Bool
 
-  @Published var favouritesCount: Int
-  @Published var isFavourited: Bool
+  @Published var favoritesCount: Int
+  @Published var isFavorited: Bool
   @Published var isReblogged: Bool
   @Published var isPinned: Bool
   @Published var isBookmarked: Bool
@@ -44,17 +44,17 @@ public class StatusRowViewModel: ObservableObject {
     self.isRemote = isRemote
     self.showActions = showActions
     if let reblog = status.reblog {
-      isFavourited = reblog.favourited == true
+      isFavorited = reblog.favorited == true
       isReblogged = reblog.reblogged == true
       isPinned = reblog.pinned == true
       isBookmarked = reblog.bookmarked == true
     } else {
-      isFavourited = status.favourited == true
+      isFavorited = status.favorited == true
       isReblogged = status.reblogged == true
       isPinned = status.pinned == true
       isBookmarked = status.bookmarked == true
     }
-    favouritesCount = status.reblog?.favouritesCount ?? status.favouritesCount
+    favoritesCount = status.reblog?.favoritesCount ?? status.favoritesCount
     reblogsCount = status.reblog?.reblogsCount ?? status.reblogsCount
     repliesCount = status.reblog?.repliesCount ?? status.repliesCount
     displaySpoiler = !(status.reblog?.spoilerText.asRawText ?? status.spoilerText.asRawText).isEmpty
@@ -104,29 +104,29 @@ public class StatusRowViewModel: ObservableObject {
     }
   }
 
-  func favourite() async {
+  func favorite() async {
     guard let client, client.isAuth else { return }
-    isFavourited = true
-    favouritesCount += 1
+    isFavorited = true
+    favoritesCount += 1
     do {
-      let status: Status = try await client.post(endpoint: Statuses.favourite(id: status.reblog?.id ?? status.id))
+      let status: Status = try await client.post(endpoint: Statuses.favorite(id: status.reblog?.id ?? status.id))
       updateFromStatus(status: status)
     } catch {
-      isFavourited = false
-      favouritesCount -= 1
+      isFavorited = false
+      favoritesCount -= 1
     }
   }
 
-  func unFavourite() async {
+  func unFavorite() async {
     guard let client, client.isAuth else { return }
-    isFavourited = false
-    favouritesCount -= 1
+    isFavorited = false
+    favoritesCount -= 1
     do {
-      let status: Status = try await client.post(endpoint: Statuses.unfavourite(id: status.reblog?.id ?? status.id))
+      let status: Status = try await client.post(endpoint: Statuses.unfavorite(id: status.reblog?.id ?? status.id))
       updateFromStatus(status: status)
     } catch {
-      isFavourited = true
-      favouritesCount += 1
+      isFavorited = true
+      favoritesCount += 1
     }
   }
 
@@ -209,17 +209,17 @@ public class StatusRowViewModel: ObservableObject {
 
   private func updateFromStatus(status: Status) {
     if let reblog = status.reblog {
-      isFavourited = reblog.favourited == true
+      isFavorited = reblog.favorited == true
       isReblogged = reblog.reblogged == true
       isPinned = reblog.pinned == true
       isBookmarked = reblog.bookmarked == true
     } else {
-      isFavourited = status.favourited == true
+      isFavorited = status.favorited == true
       isReblogged = status.reblogged == true
       isPinned = status.pinned == true
       isBookmarked = status.bookmarked == true
     }
-    favouritesCount = status.reblog?.favouritesCount ?? status.favouritesCount
+    favoritesCount = status.reblog?.favoritesCount ?? status.favoritesCount
     reblogsCount = status.reblog?.reblogsCount ?? status.reblogsCount
     repliesCount = status.reblog?.repliesCount ?? status.repliesCount
   }

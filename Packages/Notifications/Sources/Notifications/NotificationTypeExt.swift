@@ -14,7 +14,7 @@ extension Models.Notification.NotificationType {
       return "notifications.label.follow"
     case .follow_request:
       return "notifications.label.follow-request"
-    case .favourite:
+    case .favorite:
       return "notifications.label.favorite"
     case .poll:
       return "notifications.label.poll"
@@ -33,7 +33,7 @@ extension Models.Notification.NotificationType {
       return "arrow.left.arrow.right.circle.fill"
     case .follow, .follow_request:
       return "person.fill.badge.plus"
-    case .favourite:
+    case .favorite:
       return "star.fill"
     case .poll:
       return "chart.bar.fill"
@@ -54,7 +54,7 @@ extension Models.Notification.NotificationType {
       return "notifications.menu-title.follow"
     case .follow_request:
       return "notifications.menu-title.follow-request"
-    case .favourite:
+    case .favorite:
       return "notifications.menu-title.favorite"
     case .poll:
       return "notifications.menu-title.poll"

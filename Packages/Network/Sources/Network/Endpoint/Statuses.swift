@@ -6,12 +6,12 @@ public enum Statuses: Endpoint {
   case editStatus(id: String, json: StatusData)
   case status(id: String)
   case context(id: String)
-  case favourite(id: String)
-  case unfavourite(id: String)
+  case favorite(id: String)
+  case unfavorite(id: String)
   case reblog(id: String)
   case unreblog(id: String)
   case rebloggedBy(id: String, maxId: String?)
-  case favouritedBy(id: String, maxId: String?)
+  case favoritedBy(id: String, maxId: String?)
   case pin(id: String)
   case unpin(id: String)
   case bookmark(id: String)
@@ -28,18 +28,18 @@ public enum Statuses: Endpoint {
       return "statuses/\(id)"
     case let .context(id):
       return "statuses/\(id)/context"
-    case let .favourite(id):
-      return "statuses/\(id)/favourite"
-    case let .unfavourite(id):
-      return "statuses/\(id)/unfavourite"
+    case let .favorite(id):
+      return "statuses/\(id)/favorite"
+    case let .unfavorite(id):
+      return "statuses/\(id)/unfavorite"
     case let .reblog(id):
       return "statuses/\(id)/reblog"
     case let .unreblog(id):
       return "statuses/\(id)/unreblog"
     case let .rebloggedBy(id, _):
       return "statuses/\(id)/reblogged_by"
-    case let .favouritedBy(id, _):
-      return "statuses/\(id)/favourited_by"
+    case let .favoritedBy(id, _):
+      return "statuses/\(id)/favorited_by"
     case let .pin(id):
       return "statuses/\(id)/pin"
     case let .unpin(id):
@@ -57,7 +57,7 @@ public enum Statuses: Endpoint {
     switch self {
     case let .rebloggedBy(_, maxId):
       return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
-    case let .favouritedBy(_, maxId):
+    case let .favoritedBy(_, maxId):
       return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
     default:
       return nil
