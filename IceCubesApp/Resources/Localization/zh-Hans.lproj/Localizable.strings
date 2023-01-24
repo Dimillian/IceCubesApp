@@ -135,11 +135,11 @@
 "account.action.mute" = "免打扰";
 "account.action.unmute" = "取消免打扰";
 "account.boosted-by" = "转发";
-"account.detail.about" = "关联";
+"account.detail.about" = "关于";
 "account.detail.familiar-followers" = "同样关注此账号的有";
 "account.detail.n-fields %lld" = "%lld 个网站";
 "account.detail.featured-tags-n-posts %lld" = "%lld 篇嘟文";
-"account.edit.about" = "关联";
+"account.edit.about" = "关于";
 "account.edit.account-settings.bot" = "机器人账号";
 "account.edit.account-settings.discoverable" = "公开";
 "account.edit.account-settings.private" = "私密";
