@@ -44,17 +44,17 @@ public class StatusRowViewModel: ObservableObject {
     self.isRemote = isRemote
     self.showActions = showActions
     if let reblog = status.reblog {
-      isFavorited = reblog.favorited == true
+      isFavorited = reblog.favourited == true
       isReblogged = reblog.reblogged == true
       isPinned = reblog.pinned == true
       isBookmarked = reblog.bookmarked == true
     } else {
-      isFavorited = status.favorited == true
+      isFavorited = status.favourited == true
       isReblogged = status.reblogged == true
       isPinned = status.pinned == true
       isBookmarked = status.bookmarked == true
     }
-    favoritesCount = status.reblog?.favoritesCount ?? status.favoritesCount
+    favoritesCount = status.reblog?.favouritesCount ?? status.favouritesCount
     reblogsCount = status.reblog?.reblogsCount ?? status.reblogsCount
     repliesCount = status.reblog?.repliesCount ?? status.repliesCount
     displaySpoiler = !(status.reblog?.spoilerText.asRawText ?? status.spoilerText.asRawText).isEmpty
@@ -209,17 +209,17 @@ public class StatusRowViewModel: ObservableObject {
 
   private func updateFromStatus(status: Status) {
     if let reblog = status.reblog {
-      isFavorited = reblog.favorited == true
+      isFavorited = reblog.favourited == true
       isReblogged = reblog.reblogged == true
       isPinned = reblog.pinned == true
       isBookmarked = reblog.bookmarked == true
     } else {
-      isFavorited = status.favorited == true
+      isFavorited = status.favourited == true
       isReblogged = status.reblogged == true
       isPinned = status.pinned == true
       isBookmarked = status.bookmarked == true
     }
-    favoritesCount = status.reblog?.favoritesCount ?? status.favoritesCount
+    favoritesCount = status.reblog?.favouritesCount ?? status.favouritesCount
     reblogsCount = status.reblog?.reblogsCount ?? status.reblogsCount
     repliesCount = status.reblog?.repliesCount ?? status.repliesCount
   }

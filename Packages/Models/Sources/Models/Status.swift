@@ -36,9 +36,9 @@ public protocol AnyStatus {
   var mentions: [Mention] { get }
   var repliesCount: Int { get }
   var reblogsCount: Int { get }
-  var favoritesCount: Int { get }
+  var favouritesCount: Int { get }
   var card: Card? { get }
-  var favorited: Bool? { get }
+  var favourited: Bool? { get }
   var reblogged: Bool? { get }
   var pinned: Bool? { get }
   var bookmarked: Bool? { get }
@@ -77,9 +77,9 @@ public struct Status: AnyStatus, Decodable, Identifiable, Equatable, Hashable {
   public let mentions: [Mention]
   public let repliesCount: Int
   public let reblogsCount: Int
-  public let favoritesCount: Int
+  public let favouritesCount: Int
   public let card: Card?
-  public let favorited: Bool?
+  public let favourited: Bool?
   public let reblogged: Bool?
   public let pinned: Bool?
   public let bookmarked: Bool?
@@ -105,9 +105,9 @@ public struct Status: AnyStatus, Decodable, Identifiable, Equatable, Hashable {
           mentions: [],
           repliesCount: 0,
           reblogsCount: 0,
-          favoritesCount: 0,
+          favouritesCount: 0,
           card: nil,
-          favorited: false,
+          favourited: false,
           reblogged: false,
           pinned: false,
           bookmarked: false,
@@ -150,9 +150,9 @@ public struct ReblogStatus: AnyStatus, Decodable, Identifiable, Equatable, Hasha
   public let mentions: [Mention]
   public let repliesCount: Int
   public let reblogsCount: Int
-  public let favoritesCount: Int
+  public let favouritesCount: Int
   public let card: Card?
-  public let favorited: Bool?
+  public let favourited: Bool?
   public let reblogged: Bool?
   public let pinned: Bool?
   public let bookmarked: Bool?

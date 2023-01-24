@@ -76,7 +76,7 @@ struct ConversationMessageView: View {
       }
     }
     .onAppear {
-      isLiked = message.favorited == true
+      isLiked = message.favourited == true
     }
   }
   
@@ -102,7 +102,7 @@ struct ConversationMessageView: View {
             status = try await client.post(endpoint: Statuses.favorite(id: message.id))
           }
           withAnimation {
-            isLiked = status.favorited == true
+            isLiked = status.favourited == true
           }
         } catch { }
       }
