@@ -58,7 +58,7 @@
 "settings.display.section.theme" = "Tema";
 "settings.display.status.action-buttons" = "Bottoni di azione";
 "settings.display.status.media-style" = "Stile dei media";
-"settings.display.translate-button" = "Show translate button";
+"settings.display.translate-button" = "Mostra bottone per la traduzione";
 "settings.display.theme.background" = "Colore di sfondo";
 "settings.display.theme.secondary-background" = "Colore di sfondo secondario";
 "settings.display.theme.tint" = "Colore";
@@ -79,14 +79,14 @@
 "settings.push.navigation-title" = "Notifiche Push";
 "settings.push.new-posts" = "Nuovi messaggi";
 "settings.push.polls" = "Risultati dei sondaggi";
-"settings.section.accounts" = "Accounts";
+"settings.section.accounts" = "Account";
 "settings.section.app" = "Applicazione";
-"settings.section.app.footer %@" = "App Version: %@";
+"settings.section.app.footer %@" = "Versione dell'app: %@";
 "settings.section.general" = "Generale";
 "settings.support.alert.error.message" = "Si è verificato un errore mentre processavamo il tuo pagamento, per favore riprova.";
 "settings.support.alert.message" = "Grazie molto per il tuo contributo! È davvero apprezzato!";
 "settings.support.alert.title" = "Grazie!";
-"settings.support.message-from-dev" = "Ciao! Mi chiamo Thomas e amo da impazzire creare applicativi open source. Ice Cubes è sicuramente uno dei miei progetti di cui sono più orgoglioso al momento  - e siamo sinceri, è quello che richiede più lavoro a causa dei continui cambiamenti di Mastodon e dei social media. Se ti stai divertendo ad usare Ice Cubes, considera di mandarmi un piccolo contributo. Mi renderà felice (e contribuirà a mantenre l'app perfetta per te). 🚀";
+"settings.support.message-from-dev" = "Ciao! Mi chiamo Thomas e amo da impazzire creare applicativi open source. Ice Cubes è sicuramente uno dei miei progetti di cui sono più orgoglioso al momento  - e siamo sinceri, è quello che richiede più lavoro a causa dei continui cambiamenti di Mastodon e dei social media. Se ti stai divertendo ad usare Ice Cubes, considera di mandarmi un piccolo contributo. Mi renderà felice (e contribuirà a mantenere l'app perfetta per te). 🚀";
 "settings.support.navigation-title" = "Supporta Ice Cubes";
 "settings.support.one.subtitle" = "Piccolo, ma bello, ed ha un buon sapore!";
 "settings.support.one.title" = "🍬 Piccolo contributo";
@@ -95,13 +95,13 @@
 "settings.support.three.title" = "🤯 Contributo generoso";
 "settings.support.two.subtitle" = "Adoro il sapore di un buon caffé ❤️";
 "settings.support.two.title" = "☕️ Contributo carino";
-"settings.support.four.title" = "👽 Who are you Tip";
-"settings.support.four.subtitle" = "It'll go a long way to keep Ice Cubes running!";
+"settings.support.four.title" = "👽 Contributo Ma che cosa sei";
+"settings.support.four.subtitle" = "Servirà a mantenere Ice Cubes in funzione per molto tempo!";
 "settings.timeline.add" = "Aggiungi una timeline locale";
 "settings.title" = "Impostazioni";
 "settings.rate" = "Valuta Ice Cubes";
-"settings.section.other" = "Other";
-"settings.other.hide-openai" = "Enable 🤖 helper";
+"settings.section.other" = "Altro";
+"settings.other.hide-openai" = "Abilita l'aiuto del 🤖";
 
 // MARK: Tabs
 "tab.explore" = "Esplora";
@@ -170,13 +170,13 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Cancella";
 "conversations.action.mark-read" = "Segna come letto";
-"conversations.empty.message" = "Stai cercanod un social media da adorare? Troverai qui tutti i tuoi messaggi diretti e privati. Buon divertimento! 📱❤️";
-"conversations.empty.title" = "Inbox Zero";
+"conversations.empty.message" = "Stai cercando un po' di amore social? Troverai qui tutti i tuoi messaggi diretti e le menzioni private. Buon divertimento! 📱❤️";
+"conversations.empty.title" = "Zero posta in arrivo";
 "conversations.error.button" = "Riprova";
 "conversations.error.message" = "Errore durante il recupero dei tuoi messaggi";
 "conversations.error.title" = "Si è verificato in errore";
 "conversations.navigation-title" = "Messaggi diretti";
-"conversations.new.message.placeholder" = "New Message";
+"conversations.new.message.placeholder" = "Nuovo messaggio";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld messaggi da %lld partecipanti";
@@ -309,7 +309,7 @@
 "status.poll.duration" = "Durata del sondaggio";
 "status.poll.frequency" = "Frequenza di voto";
 "status.poll.option-n %lld" = "Opzione %lld";
-"status.post-from-%@" = "Messagio da %@";
+"status.post-from-%@" = "Messaggio da %@";
 "status.row.was-boosted" = "ha condiviso";
 "status.row.was-reply" = "Risposta per";
 "status.row.you-boosted" = "Tu hai condiviso";
