@@ -173,7 +173,7 @@
 "account.follow-request.accept" = "Accetta";
 "account.follow-request.reject" = "Rifiuta";
 "account.follow-requests.pending-requests" = "Richieste in attesa";
-"account.follow-requests.instructions" = "Questi utenti non vedranno i tuoi post finhé non li accetterai.";
+"account.follow-requests.instructions" = "Questi utenti non vedranno i tuoi post finché non li accetterai.";
 "account.followers" = "Seguito da";
 "account.following" = "Seguiti";
 "account.list.create" = "Crea una nuova lista";
