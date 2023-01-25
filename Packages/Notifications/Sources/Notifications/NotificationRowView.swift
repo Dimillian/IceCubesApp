@@ -20,8 +20,9 @@ struct NotificationRowView: View {
         VStack(alignment: .leading, spacing: 2) {
           makeMainLabel(type: type)
           makeContent(type: type)
-            if type == .follow_request,
-               currentAccount.followRequests.map(\.id).contains(notification.account.id) {
+          if type == .follow_request,
+             currentAccount.followRequests.map(\.id).contains(notification.account.id)
+          {
             FollowRequestButtons(account: notification.account)
           }
         }

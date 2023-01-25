@@ -31,7 +31,8 @@ public struct AppAccount: Codable, Identifiable {
 
   public init(server: String,
               accountName: String?,
-              oauthToken: OauthToken? = nil) {
+              oauthToken: OauthToken? = nil)
+  {
     self.server = server
     self.accountName = accountName
     self.oauthToken = oauthToken

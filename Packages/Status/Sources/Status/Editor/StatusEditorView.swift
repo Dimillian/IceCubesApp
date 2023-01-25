@@ -95,10 +95,10 @@ public struct StatusEditorView: View {
       .alert("Error while posting",
              isPresented: $viewModel.showPostingErrorAlert,
              actions: {
-        Button("Ok") { }
-      }, message: {
-        Text(viewModel.postingError ?? "")
-      })
+               Button("Ok") {}
+             }, message: {
+               Text(viewModel.postingError ?? "")
+             })
       .toolbar {
         if preferences.isOpenAIEnabled {
           ToolbarItem(placement: .navigationBarTrailing) {

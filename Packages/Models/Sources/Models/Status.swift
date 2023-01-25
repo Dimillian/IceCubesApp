@@ -58,11 +58,11 @@ public struct Status: AnyStatus, Decodable, Identifiable, Equatable, Hashable {
   public var viewId: String {
     id + createdAt + (editedAt ?? "")
   }
-  
+
   public static func == (lhs: Status, rhs: Status) -> Bool {
     lhs.id == rhs.id
   }
-  
+
   public func hash(into hasher: inout Hasher) {
     hasher.combine(id)
   }
@@ -132,11 +132,11 @@ public struct ReblogStatus: AnyStatus, Decodable, Identifiable, Equatable, Hasha
   public var viewId: String {
     id + createdAt + (editedAt ?? "")
   }
-  
+
   public static func == (lhs: ReblogStatus, rhs: ReblogStatus) -> Bool {
     lhs.id == rhs.id
   }
-  
+
   public func hash(into hasher: inout Hasher) {
     hasher.combine(id)
   }

@@ -51,12 +51,12 @@ struct QuickLookPreview: UIViewControllerRepresentable {
 
 class AppQLPreviewController: QLPreviewController {
   private var closeButton: UIBarButtonItem {
-      .init(
-        title: NSLocalizedString("action.done", comment: ""),
-        style: .plain,
-        target: self,
-        action: #selector(onCloseButton)
-      )
+    .init(
+      title: NSLocalizedString("action.done", comment: ""),
+      style: .plain,
+      target: self,
+      action: #selector(onCloseButton)
+    )
   }
 
   override func viewDidLayoutSubviews() {

@@ -66,7 +66,7 @@ class AccountsListViewModel: ObservableObject {
                                                                                        maxId: nil))
       case let .favoritedBy(statusId):
         (accounts, link) = try await client.getWithLink(endpoint: Statuses.favoritedBy(id: statusId,
-                                                                                        maxId: nil))
+                                                                                       maxId: nil))
       }
       nextPageId = link?.maxId
       relationships = try await client.get(endpoint:
@@ -95,7 +95,7 @@ class AccountsListViewModel: ObservableObject {
                                                                                           maxId: nextPageId))
       case let .favoritedBy(statusId):
         (newAccounts, link) = try await client.getWithLink(endpoint: Statuses.favoritedBy(id: statusId,
-                                                                                           maxId: nextPageId))
+                                                                                          maxId: nextPageId))
       }
       accounts.append(contentsOf: newAccounts)
       let newRelationships: [Relationship] =

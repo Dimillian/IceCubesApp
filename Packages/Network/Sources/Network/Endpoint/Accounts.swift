@@ -109,7 +109,7 @@ public enum Accounts: Endpoint {
     case let .follow(_, notify, reblogs):
       return [
         .init(name: "notify", value: notify ? "true" : "false"),
-        .init(name: "reblogs", value: reblogs ? "true" : "false")
+        .init(name: "reblogs", value: reblogs ? "true" : "false"),
       ]
     case let .familiarFollowers(withAccount):
       return [.init(name: "id[]", value: withAccount)]

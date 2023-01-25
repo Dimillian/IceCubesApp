@@ -8,18 +8,18 @@ class ConversationDetailViewModel: ObservableObject {
   var client: Client?
 
   var conversation: Conversation
-  
+
   @Published var isLoadingMessages: Bool = true
   @Published var messages: [Status] = []
-  
+
   @Published var isSendingMessage: Bool = false
   @Published var newMessageText: String = ""
-    
+
   init(conversation: Conversation) {
     self.conversation = conversation
     messages = [conversation.lastStatus]
   }
-  
+
   func fetchMessages() async {
     guard let client, let lastMessageId = messages.last?.id else { return }
     do {
@@ -27,15 +27,13 @@ class ConversationDetailViewModel: ObservableObject {
       isLoadingMessages = false
       messages.insert(contentsOf: context.ancestors, at: 0)
       messages.append(contentsOf: context.descendants)
-    } catch {
-      
-    }
+    } catch {}
   }
-  
+
   func postMessage() async {
     guard let client else { return }
     isSendingMessage = true
-    var finalText = conversation.accounts.map{ "@\($0.acct)" }.joined(separator: " ")
+    var finalText = conversation.accounts.map { "@\($0.acct)" }.joined(separator: " ")
     finalText += " "
     finalText += newMessageText
     let data = StatusData(status: finalText,
@@ -52,21 +50,24 @@ class ConversationDetailViewModel: ObservableObject {
       isSendingMessage = false
     }
   }
-  
+
   func handleEvent(event: any StreamEvent) {
     if let event = event as? StreamEventStatusUpdate,
-       let index = messages.firstIndex(where: { $0.id == event.status.id }) {
+       let index = messages.firstIndex(where: { $0.id == event.status.id })
+    {
       messages[index] = event.status
     } else if let event = event as? StreamEventDelete,
-              let index = messages.firstIndex(where: { $0.id == event.status }) {
+              let index = messages.firstIndex(where: { $0.id == event.status })
+    {
       messages.remove(at: index)
     } else if let event = event as? StreamEventConversation,
-              event.conversation.id == conversation.id {
-      self.conversation = event.conversation
+              event.conversation.id == conversation.id
+    {
+      conversation = event.conversation
       appendNewStatus(status: conversation.lastStatus)
     }
   }
-  
+
   private func appendNewStatus(status: Status) {
     if !messages.contains(where: { $0.id == status.id }) {
       messages.append(status)

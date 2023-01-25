@@ -28,7 +28,8 @@ public struct AccountsListView: View {
         }
       case let .display(accounts, relationships, nextPageState):
         if case .followers = viewModel.mode,
-           !currentAccount.followRequests.isEmpty {
+           !currentAccount.followRequests.isEmpty
+        {
           Section(
             header: Text("account.follow-requests.pending-requests"),
             footer: Text("account.follow-requests.instructions")
@@ -42,10 +43,11 @@ public struct AccountsListView: View {
                 isFollowRequest: true,
                 requestUpdated: {
                   Task {
-                    await viewModel.fetch() }
+                    await viewModel.fetch()
                   }
-                )
-                .listRowBackground(theme.primaryBackgroundColor)
+                }
+              )
+              .listRowBackground(theme.primaryBackgroundColor)
             }
           }
         }

@@ -56,7 +56,8 @@ public struct AccountsListRow: View {
       }
       Spacer()
       if currentAccount.account?.id != viewModel.account.id,
-         let relationShip = viewModel.relationShip {
+         let relationShip = viewModel.relationShip
+      {
         FollowButton(viewModel: .init(accountId: viewModel.account.id,
                                       relationship: relationShip,
                                       shouldDisplayNotify: false,

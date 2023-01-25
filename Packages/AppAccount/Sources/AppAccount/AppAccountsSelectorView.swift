@@ -9,7 +9,7 @@ public struct AppAccountsSelectorView: View {
   @ObservedObject var routerPath: RouterPath
 
   @State private var accountsViewModel: [AppAccountViewModel] = []
-  
+
   let feedbackGenerator = UIImpactFeedbackGenerator()
 
   private let accountCreationEnabled: Bool
@@ -22,7 +22,7 @@ public struct AppAccountsSelectorView: View {
     self.routerPath = routerPath
     self.accountCreationEnabled = accountCreationEnabled
     self.avatarSize = avatarSize
-    
+
     feedbackGenerator.prepare()
   }
 
@@ -81,7 +81,7 @@ public struct AppAccountsSelectorView: View {
           } else {
             appAccounts.currentAccount = viewModel.appAccount
           }
-          
+
           feedbackGenerator.impactOccurred(intensity: 0.7)
         } label: {
           HStack {

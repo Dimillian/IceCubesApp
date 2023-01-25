@@ -65,7 +65,6 @@ public class RouterPath: ObservableObject {
     if url.pathComponents.count == 3 && url.pathComponents[1] == "tags",
        let tag = url.pathComponents.last
     {
-
       navigate(to: .hashTag(tag: tag, account: nil))
       return .handled
     } else if let mention = status.mentions.first(where: { $0.url == url }) {

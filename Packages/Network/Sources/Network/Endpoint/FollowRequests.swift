@@ -1,10 +1,3 @@
-//
-//  FollowRequests.swift
-//  
-//
-//  Created by Jérôme Danthinne on 24/01/2023.
-//
-
 import Foundation
 
 public enum FollowRequests: Endpoint {

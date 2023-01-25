@@ -111,7 +111,7 @@ public struct FollowButton: View {
           }
           .buttonStyle(.bordered)
           .disabled(viewModel.isUpdating)
-              
+
           Button {
             Task {
               await viewModel.toggleReboosts()

@@ -1,9 +1,9 @@
-import SwiftUI
-import Env
 import DesignSystem
-import Network
+import Env
 import Models
+import Network
 import NukeUI
+import SwiftUI
 
 struct ConversationMessageView: View {
   @EnvironmentObject private var quickLook: QuickLook
@@ -11,12 +11,12 @@ struct ConversationMessageView: View {
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var theme: Theme
-  
+
   let message: Status
   let conversation: Conversation
-  
+
   @State private var isLiked: Bool = false
-  
+
   var body: some View {
     let isOwnMessage = message.account.id == currentAccount.account?.id
     VStack {
@@ -49,18 +49,18 @@ struct ConversationMessageView: View {
         .contextMenu {
           contextMenu
         }
-        
+
         if !isOwnMessage {
           Spacer()
         }
       }
-      
+
       ForEach(message.mediaAttachments) { media in
         makeMediaView(media)
           .padding(.leading, isOwnMessage ? 24 : 0)
           .padding(.trailing, isOwnMessage ? 0 : 24)
       }
-      
+
       if message.id == conversation.lastStatus.id {
         HStack {
           if isOwnMessage {
@@ -79,7 +79,7 @@ struct ConversationMessageView: View {
       isLiked = message.favourited == true
     }
   }
-  
+
   @ViewBuilder
   private var contextMenu: some View {
     Button {
@@ -104,7 +104,7 @@ struct ConversationMessageView: View {
           withAnimation {
             isLiked = status.favourited == true
           }
-        } catch { }
+        } catch {}
       }
     } label: {
       Label(isLiked ? "status.action.unfavorite" : "status.action.favorite",
@@ -119,7 +119,7 @@ struct ConversationMessageView: View {
       }
     }
   }
-  
+
   private func makeMediaView(_ attachement: MediaAttachment) -> some View {
     LazyImage(url: attachement.url) { state in
       if let image = state.image {
@@ -144,7 +144,7 @@ struct ConversationMessageView: View {
       }
     }
   }
-  
+
   private var likeView: some View {
     HStack {
       Spacer()

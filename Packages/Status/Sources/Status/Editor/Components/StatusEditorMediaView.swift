@@ -1,9 +1,9 @@
+import AVKit
 import DesignSystem
 import Env
 import Models
 import NukeUI
 import SwiftUI
-import AVKit
 
 struct StatusEditorMediaView: View {
   @EnvironmentObject private var theme: Theme
@@ -39,7 +39,7 @@ struct StatusEditorMediaView: View {
         .preferredColorScheme(theme.selectedScheme == .dark ? .dark : .light)
     }
   }
-  
+
   private func makeVideoAttachement(container: StatusEditorMediaContainer) -> some View {
     ZStack(alignment: .center) {
       placeholderView
@@ -108,7 +108,8 @@ struct StatusEditorMediaView: View {
         ProgressView()
       }
       if mediaAttachement.url != nil,
-          mediaAttachement.supportedType == .video || mediaAttachement.supportedType == .gifv {
+         mediaAttachement.supportedType == .video || mediaAttachement.supportedType == .gifv
+      {
         Image(systemName: "play.fill")
           .font(.headline)
           .tint(.white)
@@ -147,7 +148,7 @@ struct StatusEditorMediaView: View {
     .background(.thinMaterial)
     .cornerRadius(8)
   }
-  
+
   private var placeholderView: some View {
     Rectangle()
       .foregroundColor(theme.secondaryBackgroundColor)

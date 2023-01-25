@@ -237,15 +237,15 @@ public struct StatusRowView: View {
             })
           Spacer()
         }
-        
+
         makeTranslateView(status: status)
 
         if let poll = status.poll {
           StatusPollView(poll: poll, status: status)
         }
-        
+
         embedStatusView
-  
+
         makeMediasView(status: status)
           .accessibilityHidden(!viewModel.isFocused)
         makeCardView(status: status)
@@ -308,7 +308,7 @@ public struct StatusRowView: View {
         }
       }
     }
-    
+
     if let translation = viewModel.translation, !viewModel.isLoadingTranslation {
       GroupBox {
         VStack(alignment: .leading, spacing: 4) {
@@ -354,12 +354,13 @@ public struct StatusRowView: View {
       StatusCardView(card: card)
     }
   }
-  
+
   @ViewBuilder
   private var embedStatusView: some View {
     if !reasons.contains(.placeholder) {
       if !viewModel.isCompact, !viewModel.isEmbedLoading,
-          let embed = viewModel.embeddedStatus {
+         let embed = viewModel.embeddedStatus
+      {
         StatusEmbeddedView(status: embed)
       } else if viewModel.isEmbedLoading, !viewModel.isCompact {
         StatusEmbeddedView(status: .placeholder())

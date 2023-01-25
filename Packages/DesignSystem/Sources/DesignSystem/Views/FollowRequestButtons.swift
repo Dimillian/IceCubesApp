@@ -1,12 +1,5 @@
-//
-//  FollowRequestButtons.swift
-//  
-//
-//  Created by Jérôme Danthinne on 25/01/2023.
-//
-
-import Models
 import Env
+import Models
 import SwiftUI
 
 public struct FollowRequestButtons: View {

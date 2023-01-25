@@ -97,7 +97,7 @@ struct SettingsTabs: View {
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
-  
+
   private var otherSections: some View {
     Section("settings.section.other") {
       if !ProcessInfo.processInfo.isiOSAppOnMac {

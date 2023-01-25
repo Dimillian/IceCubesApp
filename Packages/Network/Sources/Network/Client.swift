@@ -146,7 +146,7 @@ public class Client: ObservableObject, Equatable {
     logResponseOnError(httpResponse: httpResponse, data: data)
     do {
       return try decoder.decode(Entity.self, from: data)
-    } catch let error {
+    } catch {
       if let serverError = try? decoder.decode(ServerError.self, from: data) {
         throw serverError
       }

@@ -30,7 +30,7 @@ public struct StatusMediaPreviewView: View {
     }
     return sceneDelegate.windowWidth
   }
-  
+
   var appLayoutWidth: CGFloat {
     let avatarColumnWidth = theme.avatarPosition == .leading ? AvatarView.Size.status.size.width + .statusColumnsSpacing : 0
     var sidebarWidth: CGFloat = 0
@@ -39,7 +39,7 @@ public struct StatusMediaPreviewView: View {
     }
     return (.layoutPadding * 2) + avatarColumnWidth + sidebarWidth
   }
-  
+
   private var imageMaxHeight: CGFloat {
     if isNotifications {
       if UIDevice.current.userInterfaceIdiom == .pad {
