@@ -131,6 +131,10 @@
 "account.action.edit-info" = "Bilgiyi Düzenle";
 "account.action.mention" = "Bahset";
 "account.action.message" = "Mesaj Gönder";
+"account.action.notify-enable" = "Enable Notifications";
+"account.action.notify-disable" = "Disable Notifications";
+"account.action.reboosts-show" = "Show Boosts";
+"account.action.reboosts-hide" = "Hide Boosts";
 "account.action.block" = "Engelle";
 "account.action.unblock" = "Engeli Kaldır";
 "account.action.mute" = "Sustur";

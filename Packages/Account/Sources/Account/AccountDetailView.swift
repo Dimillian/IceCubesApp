@@ -421,6 +421,66 @@ public struct AccountDetailView: View {
                   Label("account.action.mute", systemImage: "speaker.slash")
                 }
               }
+
+              if let relationship = viewModel.relationship,
+                 relationship.following
+              {
+                if relationship.notifying {
+                  Button {
+                    Task {
+                      do {
+                        viewModel.relationship = try await client.post(endpoint: Accounts.unmute(id: account.id))
+                      } catch {
+                        print("Error while disabling notifications: \(error.localizedDescription)")
+                      }
+                    }
+                  } label: {
+                    Label("account.action.notify-disable", systemImage: "bell.fill")
+                  }
+                } else {
+                  Button {
+                    Task {
+                      do {
+                        viewModel.relationship = try await client.post(endpoint: Accounts.mute(id: account.id))
+                      } catch {
+                        print("Error while enabling notifications: \(error.localizedDescription)")
+                      }
+                    }
+                  } label: {
+                    Label("account.action.notify-enable", systemImage: "bell")
+                  }
+                }
+                if relationship.showingReblogs {
+                  Button {
+                    Task {
+                      do {
+                        viewModel.relationship = try await client.post(endpoint: Accounts.follow(id: account.id,
+                                                                                                 notify: relationship.notifying,
+                                                                                                 reblogs: false))
+                      } catch {
+                        print("Error while disabling reboosts: \(error.localizedDescription)")
+                      }
+                    }
+                  } label: {
+                    Label("account.action.reboosts-hide", systemImage: "arrow.left.arrow.right.circle.fill")
+                  }
+                } else {
+                  Button {
+                    Task {
+                      do {
+                        viewModel.relationship = try await client.post(endpoint: Accounts.follow(id: account.id,
+                                                                                                 notify: relationship.notifying,
+                                                                                                 reblogs: true))
+                      } catch {
+                        print("Error while enabling reboosts: \(error.localizedDescription)")
+                      }
+                    }
+                  } label: {
+                    Label("account.action.reboosts-show", systemImage: "arrow.left.arrow.right.circle")
+                  }
+                }
+              }
+
               Divider()
             }
 
@@ -451,7 +511,7 @@ public struct AccountDetailView: View {
           }
         }
       } label: {
-        Image(systemName: "ellipsis")
+        Image(systemName: "ellipsis.circle.fill")
       }
     }
   }

@@ -142,6 +142,10 @@
 "account.action.edit-info" = "编辑个人资料";
 "account.action.mention" = "提及";
 "account.action.message" = "私信";
+"account.action.notify-enable" = "Enable Notifications";
+"account.action.notify-disable" = "Disable Notifications";
+"account.action.reboosts-show" = "Show Boosts";
+"account.action.reboosts-hide" = "Hide Boosts";
 "account.action.block" = "拉黑";
 "account.action.unblock" = "取消拉黑";
 "account.action.mute" = "免打扰";
