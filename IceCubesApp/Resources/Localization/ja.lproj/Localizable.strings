@@ -34,13 +34,13 @@
 "instance.info.email" = "メールアドレス";
 "instance.info.name" = "名前";
 "instance.info.navigation-title" = "インスタンス情報";
-"instance.info.posts" = "Posts";
+"instance.info.posts" = "投稿";
 "instance.info.section.info" = "インスタンス情報";
 "instance.info.section.rules" = "インスタンスのルール";
 "instance.info.users" = "ユーザー";
-"instance.info.version" = "Version";
-"instance.list.posts-%@" = "%@ posts";
-"instance.list.users-%@" = "%@ users";
+"instance.info.version" = "バージョン";
+"instance.list.posts-%@" = "%@ 投稿";
+"instance.list.users-%@" = "%@ ユーザー";
 "instance.suggestions" = "こちらかも？";
 "instance.url" = "インスタンスのURL";
 
@@ -89,7 +89,7 @@
 "settings.support.navigation-title" = "Ice Cubesを支援する";
 "settings.support.one.subtitle" = "小さいけど、かわいいし、味も美味しい！";
 "settings.support.one.title" = "🍬 心ばかりのチップ";
-"settings.support.placeholder.loading-subtitle" = "Loading subtitle ...";
+"settings.support.placeholder.loading-subtitle" = "見出しを読み込み中...";
 "settings.support.three.subtitle" = "おいおい正気か！本当にありがとうございます！";
 "settings.support.three.title" = "🤯 太っ腹なチップ";
 "settings.support.two.subtitle" = "おしゃれなコーヒーの味は最高です ❤️";
@@ -124,7 +124,7 @@
 
 // MARK: Package: Account
 "account.action.add-remove-list" = "リストへの追加/削除";
-"account.action.edit-info" = "Edit Info";
+"account.action.edit-info" = "プロフィールを編集";
 "account.action.mention" = "返信";
 "account.action.message" = "メッセージ";
 "account.action.block" = "ブロック";
@@ -133,7 +133,7 @@
 "account.action.unmute" = "ミュート解除";
 "account.boosted-by" = "ブーストしました";
 "account.detail.about" = "詳細";
-"account.detail.familiar-followers" = "Also followed by";
+"account.detail.familiar-followers" = "知っているかも";
 "account.detail.n-fields %lld" = "%lld fields";
 "account.detail.featured-tags-n-posts %lld" = "%lld posts";
 "account.edit.about" = "詳細";
@@ -152,10 +152,10 @@
 "account.follow.follow" = "フォロー";
 "account.follow.following" = "フォローしている";
 "account.follow.requested" = "リクエストしました";
-"account.follow-request.accept" = "Accept";
-"account.follow-request.reject" = "Reject";
-"account.follow-requests.pending-requests" = "Pending requests";
-"account.follow-requests.instructions" = "Those users won't see your posts until you accept them.";
+"account.follow-request.accept" = "承認";
+"account.follow-request.reject" = "拒否";
+"account.follow-requests.pending-requests" = "リクエスト申請中";
+"account.follow-requests.instructions" = "これらのユーザーはあなたが承認するまで、あなたの投稿を見ることはできません";
 "account.followers" = "フォロワー";
 "account.following" = "フォローしている";
 "account.list.create" = "新しいリストを作成";
@@ -281,7 +281,7 @@
 "status.editor.drafts.navigation-title" = "下書き";
 "status.editor.error.upload" = "アップロードエラー";
 "status.editor.language-select.navigation-title" = "言語設定";
-"status.editor.language-select.recently-used" = "Recently Used";
+"status.editor.language-select.recently-used" = "最近使用した";
 "status.editor.media.edit-image" = "イメージの編集";
 "status.editor.media.image-description" = "イメージの説明文";
 "status.editor.mode.edit" = "投稿を編集する";
@@ -304,7 +304,7 @@
 "status.media.contextmenu.share" = "イメージの共有";
 "status.media.contextmenu.view-browser" = "ブラウザで見る";
 "status.media.sensitive.show" = "センシティブな内容を表示する";
-"status.poll.n-votes %lld" = "%lld votes";
+"status.poll.n-votes %lld" = "%lld 投票";
 "status.poll.closed" = "投票終了";
 "status.poll.closes-in" = "まもなく投票終了 ";
 "status.poll.duration" = "投票期間";
@@ -312,7 +312,7 @@
 "status.poll.option-n %lld" = "オプション %lld";
 "status.post-from-%@" = "%@ の投稿";
 "status.row.was-boosted" = "ブーストした";
-"status.row.was-reply" = "Replied to";
+"status.row.was-reply" = "に返信";
 "status.row.you-boosted" = "ブーストしました";
 "status.show-less" = "表示項目を減らす";
 "status.show-more" = "表示項目を増やす";
@@ -324,13 +324,13 @@
 "status.visibility.follower" = "フォロワー";
 "status.visibility.public" = "全員";
 "status.visibility.unlisted" = "リスト外";
-"settings.general.content" = "Content Settings";
-"settings.content.navigation-title" = "Content Settings";
-"settings.content.use-instance-settings" = "Use server settings";
-"settings.content.main-toggle.description" = "Use the settings from your home Instance";
-"settings.content.expand-spoilers" = "Always show sensitive posts";
-"settings.content.expand-media" = "Media display";
-"settings.content.default-sensitive" = "Always mark media as sensitive";
-"settings.content.default-visibility" = "Posting visibilty";
+"settings.general.content" = "コンテンツ設定";
+"settings.content.navigation-title" = "コンテンツ設定";
+"settings.content.use-instance-settings" = "サーバー設定を使用する";
+"settings.content.main-toggle.description" = "ホームインスタンスの設定を使用する";
+"settings.content.expand-spoilers" = "センシティブな投稿を常に表示する";
+"settings.content.expand-media" = "メディア表示";
+"settings.content.default-sensitive" = "常にメディアをセンシティブなものとしてマークする";
+"settings.content.default-visibility" = "投稿の可視化";
 "settings.content.reading" = "Reading";
 "settings.content.posting" = "Posting";
