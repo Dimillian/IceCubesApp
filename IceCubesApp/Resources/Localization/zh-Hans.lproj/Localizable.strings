@@ -104,16 +104,16 @@
 "settings.other.hide-openai" = "启用写作助手 🤖";
 "settings.other.social-keyboard" = "启用社交键盘";
 
-"settings.general.content" = "Content Settings";
-"settings.content.navigation-title" = "Content Settings";
-"settings.content.use-instance-settings" = "Use server settings";
-"settings.content.main-toggle.description" = "Use the settings from your home Instance";
-"settings.content.expand-spoilers" = "Always show sensitive posts";
-"settings.content.expand-media" = "Media display";
-"settings.content.default-sensitive" = "Always mark media as sensitive";
-"settings.content.default-visibility" = "Posting visibilty";
-"settings.content.reading" = "Reading";
-"settings.content.posting" = "Posting";
+"settings.general.content" = "内容设置";
+"settings.content.navigation-title" = "内容设置";
+"settings.content.use-instance-settings" = "使用服务器设置";
+"settings.content.main-toggle.description" = "与你主页服务器的设置保持一致";
+"settings.content.expand-spoilers" = "始终显示敏感内容";
+"settings.content.expand-media" = "媒体显示";
+"settings.content.default-sensitive" = "始终将媒体标为敏感内容";
+"settings.content.default-visibility" = "默认嘟文可见度";
+"settings.content.reading" = "阅读设置";
+"settings.content.posting" = "嘟文设置";
 
 // MARK: Tabs
 "tab.explore" = "探索";
