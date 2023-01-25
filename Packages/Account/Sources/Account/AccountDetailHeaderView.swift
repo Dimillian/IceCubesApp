@@ -109,19 +109,21 @@ struct AccountDetailHeaderView: View {
   private var accountInfoView: some View {
     Group {
       accountAvatarView
-      HStack {
+      HStack(alignment: .firstTextBaseline) {
         VStack(alignment: .leading, spacing: 0) {
           EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
             .font(.scaledHeadline)
           Text("@\(account.acct)")
             .font(.scaledCallout)
             .foregroundColor(.gray)
+          joinedAtView
         }
         Spacer()
         if let relationship = viewModel.relationship, !viewModel.isCurrentUser {
           HStack {
             FollowButton(viewModel: .init(accountId: account.id,
                                           relationship: relationship,
+                                          shouldDisplayNotify: true,
                                           relationshipUpdated: { relationship in
                                             viewModel.relationship = relationship
                                           }))
@@ -155,6 +157,20 @@ struct AccountDetailHeaderView: View {
       Text(title)
         .font(.scaledFootnote)
         .foregroundColor(.gray)
+    }
+  }
+
+  @ViewBuilder
+  private var joinedAtView: some View {
+    if let joinedAt = viewModel.account?.createdAt.asDate {
+      HStack(spacing: 4) {
+        Image(systemName: "calendar")
+        Text("account.joined")
+        Text(joinedAt, style: .date)
+      }
+      .foregroundColor(.gray)
+      .font(.footnote)
+      .padding(.top, 6)
     }
   }
 }
