@@ -70,7 +70,7 @@
 "settings.general.instance" = "Información de la instancia";
 "settings.general.push-notifications" = "Notificaciones";
 "settings.general.remote-timelines" = "Cronologías locales remotas";
-"settings.push.boosts" = "Boosts";
+"settings.push.boosts" = "Retoots";
 "settings.push.favorites" = "Favoritos";
 "settings.push.follows" = "Siguiendo";
 "settings.push.main-toggle" = "Notificaciones";
@@ -100,19 +100,22 @@
 "settings.timeline.add" = "Añadir cronología local";
 "settings.title" = "Ajustes";
 "settings.rate" = "Valora Ice Cubes";
-"settings.section.other" = "Other";
-"settings.other.hide-openai" = "Enable 🤖 helper";
-"settings.other.social-keyboard" = "Enable Social Keyboard";
-"settings.general.content" = "Content Settings";
-"settings.content.navigation-title" = "Content Settings";
-"settings.content.use-instance-settings" = "Use server settings";
-"settings.content.main-toggle.description" = "Use the settings from your home Instance";
-"settings.content.expand-spoilers" = "Always show sensitive posts";
-"settings.content.expand-media" = "Media display";
-"settings.content.default-sensitive" = "Always mark media as sensitive";
-"settings.content.default-visibility" = "Posting visibilty";
-"settings.content.reading" = "Reading";
-"settings.content.posting" = "Posting";
+"settings.section.other" = "Otras opciones";
+"settings.other.hide-openai" = "Activar ayudante 🤖";
+"settings.other.social-keyboard" = "Activar teclado social";
+"settings.general.content" = "Ajustes de contenido";
+"settings.content.navigation-title" = "Ajustes de contenido";
+"settings.content.use-instance-settings" = "Usar ajustes del servidor";
+"settings.content.main-toggle.description" = "Usar ajustes de tu instancia inicial";
+"settings.content.expand-spoilers" = "Mostrar siempre el contenido sensible";
+"settings.content.expand-media" = "Mostrar el contenido multimedia";
+"settings.content.default-sensitive" = "Marcar siempre el contenido multimedia como sensible";
+"settings.content.default-visibility" = "Publicar visibilidad";
+"settings.content.reading" = "Leyendo";
+"settings.content.posting" = "Publicando";
+"enum.expand-media.show" = "Siempre";
+"enum.expand-media.hide" = "Nunca";
+"enum.expand-media.hide-sensitive" = "Ocultar contenido sensible";
 
 // MARK: Tabs
 "tab.explore" = "Explorar";
@@ -145,7 +148,7 @@
 "account.action.unblock" = "Desbloquear";
 "account.action.mute" = "Silenciar";
 "account.action.unmute" = "Dejar de silenciar";
-"account.boosted-by" = "Boostedado por";
+"account.boosted-by" = "Retooteado por";
 "account.detail.about" = "Acerca de";
 "account.detail.familiar-followers" = "Seguido también por";
 "account.detail.n-fields %lld" = "%lld campos";
@@ -242,7 +245,7 @@
 "notifications.label.follow-request" = "solicitó seguirte";
 "notifications.label.mention" = "te mencionó";
 "notifications.label.poll" = "terminó una encuesta";
-"notifications.label.reblog" = "boosteó";
+"notifications.label.reblog" = "retooteó";
 "notifications.label.status" = "publicó un estado";
 "notifications.label.update" = "editó una publicación";
 "notifications.menu-title.favorite" = "Favoritos";
@@ -250,7 +253,7 @@
 "notifications.menu-title.follow-request" = "Solicitudes para seguirte";
 "notifications.menu-title.mention" = "Menciones";
 "notifications.menu-title.poll" = "Encuestas";
-"notifications.menu-title.reblog" = "Boosts";
+"notifications.menu-title.reblog" = "Retoots";
 "notifications.menu-title.status" = "Publicaciones";
 "notifications.menu-title.update" = "Publicaciones editadas";
 "notifications.navigation-title" = "Todas las notificationes";
@@ -268,7 +271,7 @@
 "status.action.translate" = "Traducir";
 "status.action.translated-label" = "Traducido usando DeepL.com";
 "status.action.bookmark" = "Añadir a marcadores";
-"status.action.boost" = "Boostear";
+"status.action.boost" = "Retootear";
 "status.action.copy-text" = "Copiar texto";
 "status.action.delete" = "Borrar";
 "status.action.edit" = "Editar";
@@ -282,7 +285,7 @@
 "status.action.section.your-post" = "Tus publicaciones";
 "status.action.share" = "Compartir esta publicación";
 "status.action.unbookmark" = "Quitar de marcadores";
-"status.action.unboost" = "Eliminar Boost";
+"status.action.unboost" = "Deshacer Retoot";
 "status.action.unfavorite" = "Eliminar de favoritos";
 "status.action.unpin" = "Desfijar";
 "status.action.view-in-browser" = "Ver en navegador";
@@ -326,14 +329,14 @@
 "status.poll.frequency" = "Frecuencia de la encuesta";
 "status.poll.option-n %lld" = "Opción %lld";
 "status.post-from-%@" = "Publicado por %@";
-"status.row.was-boosted" = "boosteó";
+"status.row.was-boosted" = "retooteó";
 "status.row.was-reply" = "Respuesta a";
-"status.row.you-boosted" = "Boosteaste";
+"status.row.you-boosted" = "Retooteaste";
 "status.show-less" = "Mostrar menos";
 "status.show-more" = "Mostrar más";
 "status.summary.at-time" = " a las ";
 "status.summary.edited-time" = "Última edición: ";
-"status.summary.n-boosts %lld" = "%lld boosts";
+"status.summary.n-boosts %lld" = "%lld retoots";
 "status.summary.n-favorites %lld" = "%lld favoritos";
 "status.visibility.direct" = "Privado";
 "status.visibility.follower" = "Sólo seguidores";
