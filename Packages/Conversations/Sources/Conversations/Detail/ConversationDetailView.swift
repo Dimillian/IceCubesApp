@@ -39,7 +39,8 @@ public struct ConversationDetailView: View {
             ForEach(viewModel.messages) { message in
               ConversationMessageView(message: message,
                                       conversation: viewModel.conversation)
-                .id(message.id)
+              .padding(.vertical, 4)
+              .id(message.id)
             }
             bottomAnchorView
           }
@@ -99,6 +100,7 @@ public struct ConversationDetailView: View {
       ConversationMessageView(message: message, conversation: viewModel.conversation)
         .redacted(reason: .placeholder)
         .shimmering()
+        .padding(.vertical, 4)
     }
   }
 
