@@ -103,16 +103,16 @@
 "settings.section.other" = "Altro";
 "settings.other.hide-openai" = "Abilita l'aiuto del 🤖";
 "settings.other.social-keyboard" = "Abilita social keyboard";
-"settings.general.content" = "Content Settings";
-"settings.content.navigation-title" = "Content Settings";
-"settings.content.use-instance-settings" = "Use server settings";
-"settings.content.main-toggle.description" = "Use the settings from your home Instance";
-"settings.content.expand-spoilers" = "Always show sensitive posts";
-"settings.content.expand-media" = "Media display";
-"settings.content.default-sensitive" = "Always mark media as sensitive";
-"settings.content.default-visibility" = "Posting visibilty";
-"settings.content.reading" = "Reading";
-"settings.content.posting" = "Posting";
+"settings.general.content" = "Impostazione dei contenuti";
+"settings.content.navigation-title" = "Impostazione dei contenuti";
+"settings.content.use-instance-settings" = "Utilizza le impostazioni del server";
+"settings.content.main-toggle.description" = "Utilizza le impostazioni provenienti dalla tua istanza Mastodon";
+"settings.content.expand-spoilers" = "Visualizza sempre i contenuti sensibili";
+"settings.content.expand-media" = "Visualizzazione dei Media";
+"settings.content.default-sensitive" = "Segnala sempre i contenuti come sensibili";
+"settings.content.default-visibility" = "Visibilità del post";
+"settings.content.reading" = "Lettura";
+"settings.content.posting" = "Composizione";
 
 // MARK: Tabs
 "tab.explore" = "Esplora";
@@ -147,7 +147,7 @@
 "account.action.unmute" = "Sblocca";
 "account.boosted-by" = "Condiviso da";
 "account.detail.about" = "Informazioni";
-"account.detail.familiar-followers" = "Anche seguito da";
+"account.detail.familiar-followers" = "Seguito, inoltre, da";
 "account.detail.n-fields %lld" = "%lld campi";
 "account.detail.featured-tags-n-posts %lld" = "%lld post";
 "account.edit.about" = "Informazioni";
