@@ -11,7 +11,7 @@
 "placeholder.loading.long" = "Laden, laden, laden ....";
 "placeholder.loading.short" = "Laden ...";
 
-"see-more" = "See more";
+"see-more" = "Mehr sehen";
 
 // MARK: Add Account
 "account.add.error.instance-not-supported" = "Diese Instanz wird aktuell nicht unterstützt.";
@@ -55,14 +55,14 @@
 "settings.display.navigation-title" = "Anzeigeeinstellungen";
 "settings.display.restore" = "Standard wiederherstellen";
 "settings.display.section.display" = "Anzeigen";
-"settings.display.section.theme" = "Thema";
+"settings.display.section.theme" = "Design";
 "settings.display.status.action-buttons" = "Status Aktions-Buttons";
 "settings.display.status.media-style" = "Status Medien";
-"settings.display.translate-button" = "Show translate button";
+"settings.display.translate-button" = "Übersetzen-Button anzeigen";
 "settings.display.theme.background" = "Hintergrundfarbe";
 "settings.display.theme.secondary-background" = "Sekundäre Hintergrundfarbe";
 "settings.display.theme.tint" = "Akzentfarbe";
-"settings.display.theme.systemColor" = "Match-System";
+"settings.display.theme.systemColor" = "Systemeinstellung verwenden";
 "settings.general.browser" = "Browser";
 "settings.general.browser.in-app" = "In-App Browser";
 "settings.general.browser.system" = "System Browser";
@@ -95,13 +95,13 @@
 "settings.support.three.title" = "🤯 Großzügiges Trinkgeld";
 "settings.support.two.subtitle" = "Ich liebe den Duft eines tollen Kaffees ❤️";
 "settings.support.two.title" = "☕️ Schönes Trinkgeld";
-"settings.support.four.title" = "👽 Who are you Tip";
-"settings.support.four.subtitle" = "It'll go a long way to keep Ice Cubes running!";
+"settings.support.four.title" = "👽 Wahnsinns Trinkgeld";
+"settings.support.four.subtitle" = "Das wird eine große Hilfe sein Ice Cubes am Laufen zu halten!";
 "settings.timeline.add" = "Lokale Timeline hinzufügen";
 "settings.title" = "Einstellungen";
 "settings.rate" = "Bewerte Ice Cubes";
-"settings.section.other" = "Other";
-"settings.other.hide-openai" = "Enable 🤖 helper";
+"settings.section.other" = "Anderes";
+"settings.other.hide-openai" = "Aktiviere 🤖 Helfer";
 "settings.other.social-keyboard" = "Enable Social Keyboard";
 "settings.general.content" = "Content Settings";
 "settings.content.navigation-title" = "Content Settings";
@@ -166,10 +166,10 @@
 "account.follow.follow" = "Folgen";
 "account.follow.following" = "Gefolgt";
 "account.follow.requested" = "Angefragt";
-"account.follow-request.accept" = "Accept";
-"account.follow-request.reject" = "Reject";
-"account.follow-requests.pending-requests" = "Pending requests";
-"account.follow-requests.instructions" = "Those users won't see your posts until you accept them.";
+"account.follow-request.accept" = "Akzeptieren";
+"account.follow-request.reject" = "Ablehnen";
+"account.follow-requests.pending-requests" = "Ausstehende Anfragen";
+"account.follow-requests.instructions" = "Diese Nutzer werden deine Posts nicht sehen bis du sie akzeptierst.";
 "account.followers" = "Follower";
 "account.following" = "Folgt";
 "account.list.create" = "Neue Liste erstellen";
@@ -203,8 +203,8 @@
 "explore.search.message-%@" = "Hier kannst du alles auf %@ suchen";
 "explore.search.prompt" = "Suche nach Usern, Posts und Hashtags";
 "explore.search.title" = "Durchsuche deine Instanz";
-"explore.search.empty.message" = "This query returned no search results, please try another one.";
-"explore.search.empty.title" = "No search results";
+"explore.search.empty.message" = "Diese Suche führte ins Leere, bitte versuche eine andere Anfrage.";
+"explore.search.empty.title" = "Keine Ergebnisse";
 "explore.section.posts" = "Posts";
 "explore.section.suggested-users" = "Vorgeschlagene Nutzer:innen";
 "explore.section.tags" = "Tags";
@@ -296,7 +296,7 @@
 "status.editor.drafts.navigation-title" = "Entwürfe";
 "status.editor.error.upload" = "Fehler beim Hochladen";
 "status.editor.language-select.navigation-title" = "Sprache auswählen";
-"status.editor.language-select.recently-used" = "Recently Used";
+"status.editor.language-select.recently-used" = "Kürzlich genutzt";
 "status.editor.media.edit-image" = "Bild bearbeiten";
 "status.editor.media.image-description" = "Bildbeschreibung";
 "status.editor.mode.edit" = "Deinen Post bearbeiten";
@@ -334,7 +334,7 @@
 "status.summary.at-time" = " um ";
 "status.summary.n-boosts %lld" = "%lld Boosts";
 "status.summary.n-favorites %lld" = "%lld Favoriten";
-"status.summary.edited-time" = "Last edited: ";
+"status.summary.edited-time" = "Zuletzt bearbeitet: ";
 "status.visibility.direct" = "Direkt";
 "status.visibility.follower" = "Follower";
 "status.visibility.public" = "Öffentlich";
