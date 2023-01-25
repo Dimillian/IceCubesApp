@@ -62,10 +62,16 @@ public class RouterPath: ObservableObject {
   }
 
   public func handleStatus(status: AnyStatus, url: URL) -> OpenURLAction.Result {
-    if url.pathComponents.count == 3 && url.pathComponents[1] == "tags",
+    if url.pathComponents.count == 3 && url.pathComponents[1] == "tags" &&
+        url.host() == status.account.url?.host(),
        let tag = url.pathComponents.last
     {
-
+      // OK this test looks weird but it's
+      // A 3 component path i.e. ["/", "tags", "tagname"]
+      // That is on the same host as the person that posted the tag,
+      // i.e. not a link that matches the pattern but elsewhere on the internet
+      // In those circumstances, hijack the link and goto the tags page instead
+      
       navigate(to: .hashTag(tag: tag, account: nil))
       return .handled
     } else if let mention = status.mentions.first(where: { $0.url == url }) {
