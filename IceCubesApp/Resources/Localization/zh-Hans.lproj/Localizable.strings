@@ -23,9 +23,9 @@
 "enum.avatar-position.top" = "顶部";
 "enum.avatar-shape.circle" = "圆形";
 "enum.avatar-shape.rounded" = "圆角";
-"enum.status-actions-display.all" = "全部";
-"enum.status-actions-display.no-buttons" = "隐藏按钮";
-"enum.status-actions-display.only-buttons" = "仅按钮";
+"enum.status-actions-display.all" = "图标和文本";
+"enum.status-actions-display.no-buttons" = "仅文本";
+"enum.status-actions-display.only-buttons" = "仅图标";
 "enum.status-display-style.compact" = "紧凑";
 "enum.status-display-style.large" = "宽松";
 
@@ -56,8 +56,8 @@
 "settings.display.restore" = "恢复默认设置";
 "settings.display.section.display" = "显示";
 "settings.display.section.theme" = "主题";
-"settings.display.status.action-buttons" = "状态操作选项";
-"settings.display.status.media-style" = "状态媒体样式";
+"settings.display.status.action-buttons" = "导航栏选项";
+"settings.display.status.media-style" = "导航栏排列";
 "settings.display.translate-button" = "显示翻译按钮";
 "settings.display.theme.background" = "背景颜色";
 "settings.display.theme.secondary-background" = "二级背景颜色";
@@ -81,7 +81,7 @@
 "settings.push.polls" = "投票结果";
 "settings.section.accounts" = "账户";
 "settings.section.app" = "应用";
-"settings.section.app.footer %@" = "App Version: %@";
+"settings.section.app.footer %@" = "应用版本：%@";
 "settings.section.general" = "通用";
 "settings.support.alert.error.message" = "应用内购买失败，请重试。";
 "settings.support.alert.message" = "非常感谢你的捐赠！";
@@ -95,13 +95,14 @@
 "settings.support.three.title" = "🤯 很慷慨的捐赠";
 "settings.support.two.subtitle" = "我很喜欢这杯美味的咖啡 ❤️";
 "settings.support.two.title" = "☕️ 很不错的捐赠";
-"settings.support.four.title" = "👽 神秘人的小费";
+"settings.support.four.title" = "👽 神秘人的捐赠";
 "settings.support.four.subtitle" = "这将大大有助于 Ice Cubes 的持续运行！";
 "settings.timeline.add" = "添加远程时间线";
 "settings.title" = "设置";
 "settings.rate" = "给 Ice Cubes 评分";
-"settings.section.other" = "Other";
-"settings.other.hide-openai" = "Enable 🤖 helper";
+"settings.section.other" = "其它";
+"settings.other.hide-openai" = "启用写作助手 🤖";
+"settings.other.social-keyboard" = "Enable Social Keyboard";
 
 // MARK: Tabs
 "tab.explore" = "探索";
@@ -135,11 +136,11 @@
 "account.action.mute" = "免打扰";
 "account.action.unmute" = "取消免打扰";
 "account.boosted-by" = "转发";
-"account.detail.about" = "相关联";
+"account.detail.about" = "关联网站";
 "account.detail.familiar-followers" = "同样关注此账号的有";
 "account.detail.n-fields %lld" = "%lld 个网站";
 "account.detail.featured-tags-n-posts %lld" = "%lld 篇嘟文";
-"account.edit.about" = "相关联";
+"account.edit.about" = "关于";
 "account.edit.account-settings.bot" = "机器人账号";
 "account.edit.account-settings.discoverable" = "公开";
 "account.edit.account-settings.private" = "私密";
@@ -176,12 +177,12 @@
 "conversations.error.message" = "加载私信时出错";
 "conversations.error.title" = "出错啦";
 "conversations.navigation-title" = "私信";
-"conversations.new.message.placeholder" = "New Message";
+"conversations.new.message.placeholder" = "新消息";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld 条嘟文从 %lld 个参与者中发出";
-"design.theme.navigation-title" = "主题选择器";
-"design.theme.toots-preview" = "嘟文预览";
+"design.theme.navigation-title" = "主题选择";
+"design.theme.toots-preview" = "预览文本";
 
 // MARK: Package: Explore
 "explore.navigation-title" = "探索";
@@ -193,7 +194,7 @@
 "explore.section.posts" = "嘟文";
 "explore.section.suggested-users" = "推荐的用户";
 "explore.section.tags" = "标签";
-"explore.section.trending.links" = "当下流行的链接";
+"explore.section.trending.links" = "当下流行的网页";
 "explore.section.trending.posts" = "当下流行的嘟文";
 "explore.section.trending.tags" = "当下流行的标签";
 "explore.section.users" = "用户";
@@ -281,6 +282,7 @@
 "status.editor.drafts.navigation-title" = "草稿";
 "status.editor.error.upload" = "上传错误";
 "status.editor.language-select.navigation-title" = "选择语言";
+"status.editor.language-select.recently-used" = "Recently Used";
 "status.editor.media.edit-image" = "编辑图片";
 "status.editor.media.image-description" = "图片描述";
 "status.editor.mode.edit" = "正在编辑你的嘟文";

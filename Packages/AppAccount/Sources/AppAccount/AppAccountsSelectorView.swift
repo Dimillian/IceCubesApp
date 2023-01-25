@@ -9,6 +9,8 @@ public struct AppAccountsSelectorView: View {
   @ObservedObject var routerPath: RouterPath
 
   @State private var accountsViewModel: [AppAccountViewModel] = []
+  
+  let feedbackGenerator = UIImpactFeedbackGenerator()
 
   private let accountCreationEnabled: Bool
   private let avatarSize: AvatarView.Size
@@ -20,6 +22,8 @@ public struct AppAccountsSelectorView: View {
     self.routerPath = routerPath
     self.accountCreationEnabled = accountCreationEnabled
     self.avatarSize = avatarSize
+    
+    feedbackGenerator.prepare()
   }
 
   public var body: some View {
@@ -36,6 +40,9 @@ public struct AppAccountsSelectorView: View {
           labelView
         }
       }
+    }
+    .onTapGesture {
+      feedbackGenerator.impactOccurred(intensity: 0.3)
     }
     .onAppear {
       refreshAccounts()
@@ -66,6 +73,8 @@ public struct AppAccountsSelectorView: View {
           } else {
             appAccounts.currentAccount = viewModel.appAccount
           }
+          
+          feedbackGenerator.impactOccurred(intensity: 0.7)
         } label: {
           HStack {
             if viewModel.account?.id == currentAccount.account?.id {

@@ -10,7 +10,7 @@ public enum TimelineFilter: Hashable, Equatable {
   case remoteLocal(server: String)
 
   public func hash(into hasher: inout Hasher) {
-    hasher.combine(title())
+    hasher.combine(title)
   }
 
   public static func availableTimeline(client: Client) -> [TimelineFilter] {
@@ -20,7 +20,7 @@ public enum TimelineFilter: Hashable, Equatable {
     return [.home, .local, .federated, .trending]
   }
 
-  public func title() -> String {
+  public var title: String {
     switch self {
     case .federated:
       return "Federated"
