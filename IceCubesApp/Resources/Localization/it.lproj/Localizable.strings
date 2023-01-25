@@ -141,10 +141,10 @@
 "account.action.edit-info" = "Modifica informazioni";
 "account.action.mention" = "Menziona";
 "account.action.message" = "Messaggio";
-"account.action.notify-enable" = "Enable Notifications";
-"account.action.notify-disable" = "Disable Notifications";
-"account.action.reboosts-show" = "Show Boosts";
-"account.action.reboosts-hide" = "Hide Boosts";
+"account.action.notify-enable" = "Abilita le notifiche";
+"account.action.notify-disable" = "Disabilita le notifiche";
+"account.action.reboosts-show" = "Mostra le condivisioni";
+"account.action.reboosts-hide" = "Nascondi le condivisioni";
 "account.action.block" = "Blocca";
 "account.action.unblock" = "Sblocca";
 "account.action.mute" = "Silenzia";
@@ -170,10 +170,10 @@
 "account.follow.follow" = "Segui";
 "account.follow.following" = "Segui già";
 "account.follow.requested" = "Richiesto";
-"account.follow-request.accept" = "Accept";
-"account.follow-request.reject" = "Reject";
-"account.follow-requests.pending-requests" = "Pending requests";
-"account.follow-requests.instructions" = "Those users won't see your posts until you accept them.";
+"account.follow-request.accept" = "Accetta";
+"account.follow-request.reject" = "Rifiuta";
+"account.follow-requests.pending-requests" = "Richieste in attesa";
+"account.follow-requests.instructions" = "Questi utenti non vedranno i tuoi post finhé non li accetterai.";
 "account.followers" = "Seguito da";
 "account.following" = "Seguiti";
 "account.list.create" = "Crea una nuova lista";
@@ -345,11 +345,11 @@
 "status.visibility.unlisted" = "Ai non appartenenti alle liste";
 
 // MARK: Filters
-"filter.new" = "New Filter";
-"filter.filters" = "Filters";
-"filter.edit.title" = "Filter title";
-"filter.edit.keywords" = "Filter Keywords";
-"filter.edit.keywords.add" = "Add a new keyword";
-"filter.edit.contexts" = "Filter Contexts";
-"filter.edit.action" = "Filter Action";
-"account.action.edit-filters" = "Edit Filters";
+"filter.new" = "Nuovo filtro";
+"filter.filters" = "Filtri";
+"filter.edit.title" = "Titolo del filtro";
+"filter.edit.keywords" = "Parole chiave del filtro";
+"filter.edit.keywords.add" = "Aggiungi una nuova parola chiave";
+"filter.edit.contexts" = "Dove applicare il filtro";
+"filter.edit.action" = "Azione del filtro";
+"account.action.edit-filters" = "Modifica filtri";
