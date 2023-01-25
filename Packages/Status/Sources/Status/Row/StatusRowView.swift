@@ -221,17 +221,33 @@ public struct StatusRowView: View {
   private func makeStatusContentView(status: AnyStatus) -> some View {
     Group {
       if !status.spoilerText.asRawText.isEmpty {
-        EmojiTextApp(status.spoilerText, emojis: status.emojis, language: status.language)
-          .font(.scaledBody)
-        Button {
+
+        HStack(alignment: .top) {
+          Text("⚠︎")
+            .font(.system(.subheadline , weight:.bold))
+            .foregroundColor(.secondary)
+          EmojiTextApp(status.spoilerText, emojis: status.emojis, language: status.language)
+            .font(.system(.subheadline , weight:.bold))
+            .foregroundColor(.secondary)
+            .multilineTextAlignment(.leading)
+          Spacer()
+          Button {
+            withAnimation {
+              viewModel.displaySpoiler.toggle()
+            }
+          } label: {
+            Image(systemName: "chevron.down")
+              .rotationEffect(Angle(degrees: viewModel.displaySpoiler ? 0 : 180))
+          }
+          .buttonStyle(.bordered)
+          .accessibility(label: viewModel.displaySpoiler ? Text("status.show-more") : Text("status.show-less"))
+          .accessibilityHidden(true)
+        }
+        .onTapGesture {  // make whole row tapable to make up for smaller button size
           withAnimation {
             viewModel.displaySpoiler.toggle()
           }
-        } label: {
-          Text(viewModel.displaySpoiler ? "status.show-more" : "status.show-less")
         }
-        .buttonStyle(.bordered)
-        .accessibilityHidden(true)
       }
 
       if !viewModel.displaySpoiler {
