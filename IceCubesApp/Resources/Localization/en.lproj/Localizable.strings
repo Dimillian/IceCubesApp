@@ -70,7 +70,7 @@
 "settings.general.instance" = "Instance Information";
 "settings.general.push-notifications" = "Push Notifications";
 "settings.general.remote-timelines" = "Remote Local Timelines";
-"settings.general.content" = "Content Preferences";
+"settings.general.content" = "Content Settings";
 "settings.push.boosts" = "Boosts";
 "settings.push.favorites" = "Favorites";
 "settings.push.follows" = "Follows";
