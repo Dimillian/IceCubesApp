@@ -71,7 +71,6 @@ public class RouterPath: ObservableObject {
       // That is on the same host as the person that posted the tag,
       // i.e. not a link that matches the pattern but elsewhere on the internet
       // In those circumstances, hijack the link and goto the tags page instead
-      
       navigate(to: .hashTag(tag: tag, account: nil))
       return .handled
     } else if let mention = status.mentions.first(where: { $0.url == url }) {

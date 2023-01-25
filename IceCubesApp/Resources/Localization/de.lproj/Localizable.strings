@@ -166,6 +166,10 @@
 "account.follow.follow" = "Folgen";
 "account.follow.following" = "Gefolgt";
 "account.follow.requested" = "Angefragt";
+"account.follow-request.accept" = "Accept";
+"account.follow-request.reject" = "Reject";
+"account.follow-requests.pending-requests" = "Pending requests";
+"account.follow-requests.instructions" = "Those users won't see your posts until you accept them.";
 "account.followers" = "Follower";
 "account.following" = "Folgt";
 "account.list.create" = "Neue Liste erstellen";

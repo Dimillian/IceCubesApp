@@ -31,9 +31,9 @@ public struct EmojiTextApp: View {
         .environment(\.layoutDirection, isRTL() ? .rightToLeft : .leftToRight)
     }
   }
-  
+
   private func isRTL() -> Bool {
     // Arabic, Hebrew, Persian, Urdu, Kurdish, Azeri, Dhivehi
-    return ["ar", "he", "fa", "ur", "ku", "az", "dv"].contains(self.language)
+    return ["ar", "he", "fa", "ur", "ku", "az", "dv"].contains(language)
   }
 }

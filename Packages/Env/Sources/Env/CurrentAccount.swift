@@ -7,6 +7,8 @@ public class CurrentAccount: ObservableObject {
   @Published public private(set) var account: Account?
   @Published public private(set) var lists: [List] = []
   @Published public private(set) var tags: [Tag] = []
+  @Published public private(set) var followRequests: [Account] = []
+  @Published public private(set) var isUpdating: Bool = false
 
   private var client: Client?
 
@@ -28,6 +30,7 @@ public class CurrentAccount: ObservableObject {
       group.addTask { await self.fetchCurrentAccount() }
       group.addTask { await self.fetchLists() }
       group.addTask { await self.fetchFollowedTags() }
+      group.addTask { await self.fetchFollowerRequests() }
     }
   }
 
@@ -102,5 +105,38 @@ public class CurrentAccount: ObservableObject {
     } catch {
       return nil
     }
+  }
+
+  public func fetchFollowerRequests() async {
+    guard let client else { return }
+    do {
+      followRequests = try await client.get(endpoint: FollowRequests.list)
+    } catch {
+      followRequests = []
+    }
+  }
+
+  public func acceptFollowerRequest(id: String) async {
+    guard let client else { return }
+    do {
+      isUpdating = true
+      defer {
+        isUpdating = false
+      }
+      _ = try await client.post(endpoint: FollowRequests.accept(id: id))
+      await fetchFollowerRequests()
+    } catch {}
+  }
+
+  public func rejectFollowerRequest(id: String) async {
+    guard let client else { return }
+    do {
+      isUpdating = true
+      defer {
+        isUpdating = false
+      }
+      _ = try await client.post(endpoint: FollowRequests.reject(id: id))
+      await fetchFollowerRequests()
+    } catch {}
   }
 }

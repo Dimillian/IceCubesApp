@@ -8,6 +8,7 @@ import SwiftUI
 public struct AccountsListView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
+  @EnvironmentObject private var currentAccount: CurrentAccount
   @StateObject private var viewModel: AccountsListViewModel
   @State private var didAppear: Bool = false
 
@@ -26,11 +27,37 @@ public struct AccountsListView: View {
             .listRowBackground(theme.primaryBackgroundColor)
         }
       case let .display(accounts, relationships, nextPageState):
-        ForEach(accounts) { account in
-          if let relationship = relationships.first(where: { $0.id == account.id }) {
-            AccountsListRow(viewModel: .init(account: account,
-                                             relationShip: relationship))
+        if case .followers = viewModel.mode,
+           !currentAccount.followRequests.isEmpty
+        {
+          Section(
+            header: Text("account.follow-requests.pending-requests"),
+            footer: Text("account.follow-requests.instructions")
+              .font(.scaledFootnote)
+              .foregroundColor(.secondary)
+              .offset(y: -8)
+          ) {
+            ForEach(currentAccount.followRequests) { account in
+              AccountsListRow(
+                viewModel: .init(account: account),
+                isFollowRequest: true,
+                requestUpdated: {
+                  Task {
+                    await viewModel.fetch()
+                  }
+                }
+              )
               .listRowBackground(theme.primaryBackgroundColor)
+            }
+          }
+        }
+        Section {
+          ForEach(accounts) { account in
+            if let relationship = relationships.first(where: { $0.id == account.id }) {
+              AccountsListRow(viewModel: .init(account: account,
+                                               relationShip: relationship))
+                .listRowBackground(theme.primaryBackgroundColor)
+            }
           }
         }
 

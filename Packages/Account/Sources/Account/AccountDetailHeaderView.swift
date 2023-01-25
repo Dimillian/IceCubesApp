@@ -10,6 +10,7 @@ struct AccountDetailHeaderView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var quickLook: QuickLook
   @EnvironmentObject private var routerPath: RouterPath
+  @EnvironmentObject private var currentAccount: CurrentAccount
   @Environment(\.redactionReasons) private var reasons
 
   @ObservedObject var viewModel: AccountDetailViewModel
@@ -95,7 +96,11 @@ struct AccountDetailHeaderView: View {
           makeCustomInfoLabel(title: "account.following", count: account.followingCount)
         }
         NavigationLink(value: RouterDestinations.followers(id: account.id)) {
-          makeCustomInfoLabel(title: "account.followers", count: account.followersCount)
+          makeCustomInfoLabel(
+            title: "account.followers",
+            count: account.followersCount,
+            needsBadge: currentAccount.account?.id == account.id && !currentAccount.followRequests.isEmpty
+          )
         }
       }.offset(y: 20)
     }
@@ -136,11 +141,19 @@ struct AccountDetailHeaderView: View {
     .offset(y: -40)
   }
 
-  private func makeCustomInfoLabel(title: LocalizedStringKey, count: Int) -> some View {
+  private func makeCustomInfoLabel(title: LocalizedStringKey, count: Int, needsBadge: Bool = false) -> some View {
     VStack {
       Text("\(count)")
         .font(.scaledHeadline)
         .foregroundColor(theme.tintColor)
+        .overlay(alignment: .trailing) {
+          if needsBadge {
+            Circle()
+              .fill(Color.red)
+              .frame(width: 9, height: 9)
+              .offset(x: 12)
+          }
+        }
       Text(title)
         .font(.scaledFootnote)
         .foregroundColor(.gray)

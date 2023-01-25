@@ -10,9 +10,9 @@ public class AccountsListRowViewModel: ObservableObject {
   var client: Client?
 
   @Published var account: Account
-  @Published var relationShip: Relationship
+  @Published var relationShip: Relationship?
 
-  public init(account: Account, relationShip: Relationship) {
+  public init(account: Account, relationShip: Relationship? = nil) {
     self.account = account
     self.relationShip = relationShip
   }
@@ -24,9 +24,13 @@ public struct AccountsListRow: View {
   @EnvironmentObject private var client: Client
 
   @StateObject var viewModel: AccountsListRowViewModel
+  let isFollowRequest: Bool
+  let requestUpdated: (() -> Void)?
 
-  public init(viewModel: AccountsListRowViewModel) {
+  public init(viewModel: AccountsListRowViewModel, isFollowRequest: Bool = false, requestUpdated: (() -> Void)? = nil) {
     _viewModel = StateObject(wrappedValue: viewModel)
+    self.isFollowRequest = isFollowRequest
+    self.requestUpdated = requestUpdated
   }
 
   public var body: some View {
@@ -45,11 +49,17 @@ public struct AccountsListRow: View {
           .environment(\.openURL, OpenURLAction { url in
             routerPath.handle(url: url)
           })
+        if isFollowRequest {
+          FollowRequestButtons(account: viewModel.account,
+                               requestUpdated: requestUpdated)
+        }
       }
       Spacer()
-      if currentAccount.account?.id != viewModel.account.id {
+      if currentAccount.account?.id != viewModel.account.id,
+         let relationShip = viewModel.relationShip
+      {
         FollowButton(viewModel: .init(accountId: viewModel.account.id,
-                                      relationship: viewModel.relationShip,
+                                      relationship: relationShip,
                                       shouldDisplayNotify: false,
                                       relationshipUpdated: { _ in }))
       }

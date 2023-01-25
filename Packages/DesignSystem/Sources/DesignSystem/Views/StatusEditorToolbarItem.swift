@@ -19,7 +19,7 @@ public extension View {
 
 public struct StatusEditorToolbarItem: ToolbarContent {
   @EnvironmentObject private var routerPath: RouterPath
-  
+
   let visibility: Models.Visibility
   let feedbackGenerator = UISelectionFeedbackGenerator()
 

@@ -24,7 +24,7 @@ public class StatusEditorViewModel: ObservableObject {
 
   private var urlLengthAdjustments: Int = 0
   private let maxLengthOfUrl = 23
-  
+
   private var spoilerTextCount: Int {
     spoilerOn ? spoilerText.utf16.count : 0
   }
@@ -61,7 +61,7 @@ public class StatusEditorViewModel: ObservableObject {
   @Published var embeddedStatus: Status?
 
   @Published var customEmojis: [Emoji] = []
-  
+
   @Published var postingError: String?
   @Published var showPostingErrorAlert: Bool = false
 
@@ -143,7 +143,7 @@ public class StatusEditorViewModel: ObservableObject {
       }
       isPosting = false
       return postStatus
-    } catch let error {
+    } catch {
       if let error = error as? Models.ServerError {
         postingError = error.error
         showPostingErrorAlert = true
@@ -466,9 +466,10 @@ public class StatusEditorViewModel: ObservableObject {
                               mediaAttachment: nil,
                               error: error))
         }
-        
+
         if var imageFile = file as? ImageFileTranseferable,
-           let image = imageFile.image {
+           let image = imageFile.image
+        {
           medias.append(.init(image: image,
                               movieTransferable: nil,
                               mediaAttachment: nil,
@@ -480,7 +481,7 @@ public class StatusEditorViewModel: ObservableObject {
                               error: nil))
         }
       }
-      
+
       DispatchQueue.main.async { [weak self] in
         self?.mediasImages = medias
         self?.processMediasToUpload()
@@ -511,22 +512,24 @@ public class StatusEditorViewModel: ObservableObject {
       do {
         if let index = indexOf(container: newContainer) {
           if let image = originalContainer.image,
-             let data = image.jpegData(compressionQuality: 0.90) {
+             let data = image.jpegData(compressionQuality: 0.90)
+          {
             let uploadedMedia = try await uploadMedia(data: data, mimeType: "image/jpeg")
-              mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
-                                          movieTransferable: nil,
-                                          mediaAttachment: uploadedMedia,
-                                          error: nil)
+            mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
+                                        movieTransferable: nil,
+                                        mediaAttachment: uploadedMedia,
+                                        error: nil)
             if let uploadedMedia, uploadedMedia.url == nil {
               scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
             }
           } else if let videoURL = originalContainer.movieTransferable?.url,
-                      let data = try? Data(contentsOf: videoURL) {
+                    let data = try? Data(contentsOf: videoURL)
+          {
             let uploadedMedia = try await uploadMedia(data: data, mimeType: videoURL.mimeType())
             mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
-                                          movieTransferable: originalContainer.movieTransferable,
-                                          mediaAttachment: uploadedMedia,
-                                          error: nil)
+                                        movieTransferable: originalContainer.movieTransferable,
+                                        mediaAttachment: uploadedMedia,
+                                        error: nil)
             if let uploadedMedia, uploadedMedia.url == nil {
               scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
             }
@@ -542,18 +545,19 @@ public class StatusEditorViewModel: ObservableObject {
       }
     }
   }
-  
+
   private func scheduleAsyncMediaRefresh(mediaAttachement: MediaAttachment) {
     Task {
       repeat {
         if let client,
-            let index = mediasImages.firstIndex(where: { $0.mediaAttachment?.id == mediaAttachement.id }) {
+           let index = mediasImages.firstIndex(where: { $0.mediaAttachment?.id == mediaAttachement.id })
+        {
           guard mediasImages[index].mediaAttachment?.url == nil else {
             return
           }
           do {
             let newAttachement: MediaAttachment = try await client.get(endpoint: Media.media(id: mediaAttachement.id,
-                                                                            description: nil))
+                                                                                             description: nil))
             if newAttachement.url != nil {
               let oldContainer = mediasImages[index]
               mediasImages[index] = .init(image: oldContainer.image,
@@ -561,10 +565,10 @@ public class StatusEditorViewModel: ObservableObject {
                                           mediaAttachment: newAttachement,
                                           error: nil)
             }
-          } catch { }
+          } catch {}
         }
         try? await Task.sleep(for: .seconds(5))
-      } while (!Task.isCancelled)
+      } while !Task.isCancelled
     }
   }
 

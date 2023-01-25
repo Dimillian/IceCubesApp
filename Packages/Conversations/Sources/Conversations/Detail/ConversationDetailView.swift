@@ -1,9 +1,9 @@
-import SwiftUI
-import Models
 import DesignSystem
-import Network
 import Env
+import Models
+import Network
 import NukeUI
+import SwiftUI
 
 public struct ConversationDetailView: View {
   private enum Constants {
@@ -16,18 +16,18 @@ public struct ConversationDetailView: View {
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var watcher: StreamWatcher
-  
+
   @StateObject private var viewModel: ConversationDetailViewModel
-  
+
   @FocusState private var isMessageFieldFocused: Bool
-  
+
   @State private var scrollProxy: ScrollViewProxy?
   @State private var didAppear: Bool = false
-  
+
   public init(conversation: Conversation) {
     _viewModel = StateObject(wrappedValue: .init(conversation: conversation))
   }
-  
+
   public var body: some View {
     ScrollViewReader { proxy in
       ZStack(alignment: .bottom) {
@@ -72,7 +72,8 @@ public struct ConversationDetailView: View {
     .toolbar {
       ToolbarItem(placement: .principal) {
         if viewModel.conversation.accounts.count == 1,
-           let account = viewModel.conversation.accounts.first {
+           let account = viewModel.conversation.accounts.first
+        {
           EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
             .font(.scaledHeadline)
         } else {
@@ -92,7 +93,7 @@ public struct ConversationDetailView: View {
       }
     }
   }
-  
+
   private var loadingView: some View {
     ForEach(Status.placeholders()) { message in
       ConversationMessageView(message: message, conversation: viewModel.conversation)
@@ -100,14 +101,14 @@ public struct ConversationDetailView: View {
         .shimmering()
     }
   }
-  
+
   private var bottomAnchorView: some View {
     Rectangle()
       .fill(Color.clear)
       .frame(height: 40)
       .id(Constants.bottomAnchor)
   }
-      
+
   private var inputTextView: some View {
     VStack {
       HStack(alignment: .bottom, spacing: 8) {
@@ -117,7 +118,7 @@ public struct ConversationDetailView: View {
           Image(systemName: "plus")
         }
         .padding(.bottom, 6)
-        
+
         TextField("conversations.new.message.placeholder", text: $viewModel.newMessageText, axis: .vertical)
           .textFieldStyle(.roundedBorder)
           .focused($isMessageFieldFocused)

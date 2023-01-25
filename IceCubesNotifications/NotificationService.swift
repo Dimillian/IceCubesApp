@@ -1,10 +1,10 @@
+import AppAccount
 import CryptoKit
 import Env
 import KeychainSwift
 import Models
 import UIKit
 import UserNotifications
-import AppAccount
 
 @MainActor
 class NotificationService: UNNotificationServiceExtension {
@@ -51,7 +51,7 @@ class NotificationService: UNNotificationServiceExtension {
         contentHandler(bestAttemptContent)
         return
       }
-      
+
       bestAttemptContent.title = notification.title
       if AppAccountsManager.shared.availableAccounts.count > 1 {
         bestAttemptContent.subtitle = bestAttemptContent.userInfo["i"] as? String ?? ""
