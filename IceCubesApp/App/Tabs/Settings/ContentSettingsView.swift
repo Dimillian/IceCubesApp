@@ -44,7 +44,8 @@ struct ContentSettingsView: View {
           }
         }
         .disabled(userPreferences.useInstanceContentSettings)
-      }
+      }.listRowBackground(theme.primaryBackgroundColor)
+      
       Section("settings.content.posting") {
         Picker("settings.content.default-visibility", selection: $userPreferences.appDefaultPostVisibility) {
           ForEach(Visibility.allCases, id: \.rawValue) { vis in

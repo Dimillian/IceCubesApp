@@ -70,7 +70,6 @@
 "settings.general.instance" = "Instance Information";
 "settings.general.push-notifications" = "Push Notifications";
 "settings.general.remote-timelines" = "Remote Local Timelines";
-"settings.general.content" = "Content Settings";
 "settings.push.boosts" = "Boosts";
 "settings.push.favorites" = "Favorites";
 "settings.push.follows" = "Follows";
@@ -80,6 +79,7 @@
 "settings.push.navigation-title" = "Push Notifications";
 "settings.push.new-posts" = "New Posts";
 "settings.push.polls" = "Poll Results";
+"settings.general.content" = "Content Settings";
 "settings.content.navigation-title" = "Content Settings";
 "settings.content.use-instance-settings" = "Use server settings";
 "settings.content.main-toggle.description" = "Use the settings from your home Instance";
