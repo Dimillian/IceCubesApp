@@ -107,13 +107,13 @@
 "settings.general.content" = "内容设置";
 "settings.content.navigation-title" = "内容设置";
 "settings.content.use-instance-settings" = "使用服务器设置";
-"settings.content.main-toggle.description" = "与你主页服务器的设置保持一致";
+"settings.content.main-toggle.description" = "使用你主服务器的设置";
 "settings.content.expand-spoilers" = "始终显示敏感内容";
 "settings.content.expand-media" = "媒体显示";
 "settings.content.default-sensitive" = "始终将媒体标为敏感内容";
-"settings.content.default-visibility" = "默认嘟文可见度";
+"settings.content.default-visibility" = "默认发布内容可见性";
 "settings.content.reading" = "阅读设置";
-"settings.content.posting" = "嘟文设置";
+"settings.content.posting" = "发布设置";
 
 // MARK: Tabs
 "tab.explore" = "探索";
@@ -303,7 +303,7 @@
 "status.editor.restore-previous" = "撤销更改";
 "status.editor.spoiler" = "剧透警告";
 "status.editor.text.placeholder" = "在想些什么？";
-"status.editor.visibility" = "嘟文可见度";
+"status.editor.visibility" = "嘟文可见性";
 "status.error.loading.message" = "加载嘟文时发生错误，请重试。";
 "status.error.message" = "嘟文的上下文出现了错误，请重试。";
 "status.error.title" = "发生了一个错误";
