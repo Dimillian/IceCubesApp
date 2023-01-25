@@ -152,6 +152,10 @@
 "account.follow.follow" = "フォロー";
 "account.follow.following" = "フォローしている";
 "account.follow.requested" = "リクエストしました";
+"account.follow-request.accept" = "Accept";
+"account.follow-request.reject" = "Reject";
+"account.follow-requests.pending-requests" = "Pending requests";
+"account.follow-requests.instructions" = "Those users won't see your posts until you accept them.";
 "account.followers" = "フォロワー";
 "account.following" = "フォローしている";
 "account.list.create" = "新しいリストを作成";

@@ -54,10 +54,18 @@ public struct AppAccountsSelectorView: View {
 
   @ViewBuilder
   private var labelView: some View {
-    if let avatar = currentAccount.account?.avatar {
-      AvatarView(url: avatar, size: avatarSize)
-    } else {
-      EmptyView()
+    Group {
+      if let avatar = currentAccount.account?.avatar {
+        AvatarView(url: avatar, size: avatarSize)
+      } else {
+        EmptyView()
+      }
+    }.overlay(alignment: .topTrailing) {
+      if !currentAccount.followRequests.isEmpty {
+        Circle()
+          .fill(Color.red)
+          .frame(width: 9, height: 9)
+      }
     }
   }
 

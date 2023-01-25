@@ -6,6 +6,7 @@ import Status
 import SwiftUI
 
 struct NotificationRowView: View {
+  @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var routerPath: RouterPath
   @Environment(\.redactionReasons) private var reasons
@@ -19,6 +20,10 @@ struct NotificationRowView: View {
         VStack(alignment: .leading, spacing: 2) {
           makeMainLabel(type: type)
           makeContent(type: type)
+            if type == .follow_request,
+               currentAccount.followRequests.map(\.id).contains(notification.account.id) {
+            FollowRequestButtons(account: notification.account)
+          }
         }
       }
     } else {
