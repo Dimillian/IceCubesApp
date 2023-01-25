@@ -144,7 +144,7 @@ struct TimelineTab: View {
         }
       }
       statusEditorToolbarItem(routerPath: routerPath,
-                              visibility: preferences.serverPreferences?.postVisibility ?? .pub)
+                              visibility: preferences.postVisibility)
     } else {
       ToolbarItem(placement: .navigationBarTrailing) {
         addAccountButton

@@ -126,9 +126,9 @@ public struct StatusMediaPreviewView: View {
       Text(altTextDisplayed ?? "")
     }
     .onAppear {
-      if sensitive && preferences.serverPreferences?.autoExpandMedia == .hideSensitive {
+      if sensitive && preferences.autoExpandMedia == .hideSensitive {
         isHidingMedia = true
-      } else if preferences.serverPreferences?.autoExpandMedia == .hideAll {
+      } else if preferences.autoExpandMedia == .hideAll {
         isHidingMedia = true
       } else {
         isHidingMedia = false

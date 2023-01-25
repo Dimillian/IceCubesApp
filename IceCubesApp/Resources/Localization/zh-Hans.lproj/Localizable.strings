@@ -102,7 +102,18 @@
 "settings.rate" = "给 Ice Cubes 评分";
 "settings.section.other" = "其它";
 "settings.other.hide-openai" = "启用写作助手 🤖";
-"settings.other.social-keyboard" = "Enable Social Keyboard";
+"settings.other.social-keyboard" = "启用社交键盘";
+
+"settings.general.content" = "Content Settings";
+"settings.content.navigation-title" = "Content Settings";
+"settings.content.use-instance-settings" = "Use server settings";
+"settings.content.main-toggle.description" = "Use the settings from your home Instance";
+"settings.content.expand-spoilers" = "Always show sensitive posts";
+"settings.content.expand-media" = "Media display";
+"settings.content.default-sensitive" = "Always mark media as sensitive";
+"settings.content.default-visibility" = "Posting visibilty";
+"settings.content.reading" = "Reading";
+"settings.content.posting" = "Posting";
 
 // MARK: Tabs
 "tab.explore" = "探索";
@@ -138,7 +149,7 @@
 "account.boosted-by" = "转发";
 "account.detail.about" = "关联网站";
 "account.detail.familiar-followers" = "同样关注此账号的有";
-"account.detail.n-fields %lld" = "%lld 个网站";
+"account.detail.n-fields %lld" = "%lld 个";
 "account.detail.featured-tags-n-posts %lld" = "%lld 篇嘟文";
 "account.edit.about" = "关于";
 "account.edit.account-settings.bot" = "机器人账号";
@@ -282,7 +293,7 @@
 "status.editor.drafts.navigation-title" = "草稿";
 "status.editor.error.upload" = "上传错误";
 "status.editor.language-select.navigation-title" = "选择语言";
-"status.editor.language-select.recently-used" = "Recently Used";
+"status.editor.language-select.recently-used" = "最近使用";
 "status.editor.media.edit-image" = "编辑图片";
 "status.editor.media.image-description" = "图片描述";
 "status.editor.mode.edit" = "正在编辑你的嘟文";

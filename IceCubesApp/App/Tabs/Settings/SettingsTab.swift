@@ -94,6 +94,9 @@ struct SettingsTabs: View {
       NavigationLink(destination: remoteLocalTimelinesView) {
         Label("settings.general.remote-timelines", systemImage: "dot.radiowaves.right")
       }
+      NavigationLink(destination: ContentSettingsView()) {
+        Label("settings.general.content", systemImage: "rectangle.fill.on.rectangle.fill")
+      }
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }

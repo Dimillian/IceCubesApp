@@ -16,8 +16,62 @@ public class UserPreferences: ObservableObject {
   @AppStorage("font_size_scale") public var fontSizeScale: Double = 1
   @AppStorage("show_translate_button_inline") public var showTranslateButton: Bool = true
   @AppStorage("is_open_ai_enabled") public var isOpenAIEnabled: Bool = true
+
   @AppStorage("recently_used_languages") public var recentlyUsedLanguages: [String] = []
   @AppStorage("social_keyboard_composer") public var isSocialKeyboardEnabled: Bool = true
+  
+  @AppStorage("use_instance_content_settings") public var useInstanceContentSettings: Bool = true
+  @AppStorage("app_auto_expand_spoilers") public var appAutoExpandSpoilers = false
+  @AppStorage("app_auto_expand_media") public var appAutoExpandMedia:ServerPreferences.AutoExpandMedia = .hideSensitive
+  @AppStorage("app_default_post_visibility") public var appDefaultPostVisibility:Models.Visibility = .pub
+  @AppStorage("app_default_posts_sensitive") public var appDefaultPostsSensitive = false
+
+
+  public var postVisibility:Models.Visibility {
+    get{
+      if useInstanceContentSettings {
+        return serverPreferences?.postVisibility ?? .pub
+      }
+      else {
+        return appDefaultPostVisibility
+      }
+    }
+  }
+  
+  public var postIsSensitive:Bool {
+    get {
+      if useInstanceContentSettings {
+        return serverPreferences?.postIsSensitive ?? false
+      }
+      else {
+        return appDefaultPostsSensitive
+      }
+    }
+  }
+  
+  
+  public var autoExpandSpoilers: Bool {
+    get {
+      if useInstanceContentSettings {
+        return serverPreferences?.autoExpandSpoilers ?? true
+      }
+      else {
+        return appAutoExpandSpoilers
+      }
+    }
+  }
+  
+  public var autoExpandMedia: ServerPreferences.AutoExpandMedia {
+    get {
+      if useInstanceContentSettings {
+        return serverPreferences?.autoExpandMedia ?? .hideSensitive
+      }
+      else {
+        return appAutoExpandMedia
+      }
+    }
+  }
+  
 
   public var pushNotificationsCount: Int {
     get {

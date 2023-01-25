@@ -25,7 +25,7 @@ struct NotificationsTab: View {
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbar {
           statusEditorToolbarItem(routerPath: routerPath,
-                                  visibility: userPreferences.serverPreferences?.postVisibility ?? .pub)
+                                  visibility: userPreferences.postVisibility)
           if UIDevice.current.userInterfaceIdiom != .pad {
             ToolbarItem(placement: .navigationBarLeading) {
               AppAccountsSelectorView(routerPath: routerPath)
