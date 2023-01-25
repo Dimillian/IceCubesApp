@@ -8,19 +8,16 @@ public class FollowButtonViewModel: ObservableObject {
   var client: Client?
 
   public let accountId: String
-  public let shouldDisplayNotify: Bool
   public let relationshipUpdated: (Relationship) -> Void
   @Published public private(set) var relationship: Relationship
   @Published public private(set) var isUpdating: Bool = false
 
   public init(accountId: String,
               relationship: Relationship,
-              shouldDisplayNotify: Bool,
               relationshipUpdated: @escaping ((Relationship) -> Void))
   {
     self.accountId = accountId
     self.relationship = relationship
-    self.shouldDisplayNotify = shouldDisplayNotify
     self.relationshipUpdated = relationshipUpdated
   }
 
@@ -47,30 +44,6 @@ public class FollowButtonViewModel: ObservableObject {
     }
     isUpdating = false
   }
-
-  func toggleNotify() async {
-    guard let client else { return }
-    do {
-      relationship = try await client.post(endpoint: Accounts.follow(id: accountId,
-                                                                     notify: !relationship.notifying,
-                                                                     reblogs: relationship.showingReblogs))
-      relationshipUpdated(relationship)
-    } catch {
-      print("Error while following: \(error.localizedDescription)")
-    }
-  }
-
-  func toggleReboosts() async {
-    guard let client else { return }
-    do {
-      relationship = try await client.post(endpoint: Accounts.follow(id: accountId,
-                                                                     notify: relationship.notifying,
-                                                                     reblogs: !relationship.showingReblogs))
-      relationshipUpdated(relationship)
-    } catch {
-      print("Error while switching reboosts: \(error.localizedDescription)")
-    }
-  }
 }
 
 public struct FollowButton: View {
@@ -82,48 +55,23 @@ public struct FollowButton: View {
   }
 
   public var body: some View {
-    VStack {
-      Button {
-        Task {
-          if viewModel.relationship.following {
-            await viewModel.unfollow()
-          } else {
-            await viewModel.follow()
-          }
-        }
-      } label: {
-        if viewModel.relationship.requested == true {
-          Text("account.follow.requested")
+    Button {
+      Task {
+        if viewModel.relationship.following {
+          await viewModel.unfollow()
         } else {
-          Text(viewModel.relationship.following ? "account.follow.following" : "account.follow.follow")
+          await viewModel.follow()
         }
       }
-      .buttonStyle(.bordered)
-      .disabled(viewModel.isUpdating)
-      if viewModel.relationship.following, viewModel.shouldDisplayNotify {
-        HStack {
-          Button {
-            Task {
-              await viewModel.toggleNotify()
-            }
-          } label: {
-            Image(systemName: viewModel.relationship.notifying ? "bell.fill" : "bell")
-          }
-          .buttonStyle(.bordered)
-          .disabled(viewModel.isUpdating)
-
-          Button {
-            Task {
-              await viewModel.toggleReboosts()
-            }
-          } label: {
-            Image(systemName: viewModel.relationship.showingReblogs ? "arrow.left.arrow.right.circle.fill" : "arrow.left.arrow.right.circle")
-          }
-          .buttonStyle(.bordered)
-          .disabled(viewModel.isUpdating)
-        }
+    } label: {
+      if viewModel.relationship.requested == true {
+        Text("account.follow.requested")
+      } else {
+        Text(viewModel.relationship.following ? "account.follow.following" : "account.follow.follow")
       }
     }
+    .buttonStyle(.bordered)
+    .disabled(viewModel.isUpdating)
     .onAppear {
       viewModel.client = client
     }

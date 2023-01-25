@@ -141,6 +141,10 @@
 "account.action.edit-info" = "Bewerken";
 "account.action.mention" = "Vermelden";
 "account.action.message" = "Bericht sturen";
+"account.action.notify-enable" = "Enable Notifications";
+"account.action.notify-disable" = "Disable Notifications";
+"account.action.reboosts-show" = "Show Boosts";
+"account.action.reboosts-hide" = "Hide Boosts";
 "account.action.block" = "Blokkeren";
 "account.action.unblock" = "Deblokkeren";
 "account.action.mute" = "Dempen";

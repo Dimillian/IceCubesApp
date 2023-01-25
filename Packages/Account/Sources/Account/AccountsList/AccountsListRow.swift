@@ -60,7 +60,6 @@ public struct AccountsListRow: View {
       {
         FollowButton(viewModel: .init(accountId: viewModel.account.id,
                                       relationship: relationShip,
-                                      shouldDisplayNotify: false,
                                       relationshipUpdated: { _ in }))
       }
     }

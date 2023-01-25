@@ -127,6 +127,10 @@
 "account.action.edit-info" = "Edit Info";
 "account.action.mention" = "返信";
 "account.action.message" = "メッセージ";
+"account.action.notify-enable" = "Enable Notifications";
+"account.action.notify-disable" = "Disable Notifications";
+"account.action.reboosts-show" = "Show Boosts";
+"account.action.reboosts-hide" = "Hide Boosts";
 "account.action.block" = "ブロック";
 "account.action.unblock" = "ブロック解除";
 "account.action.mute" = "ミュート";
