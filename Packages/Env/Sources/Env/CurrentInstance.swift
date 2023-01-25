@@ -9,6 +9,14 @@ public class CurrentInstance: ObservableObject {
   private var client: Client?
 
   public static let shared = CurrentInstance()
+  
+  public var isFiltersSupported: Bool {
+    instance?.version.hasPrefix("4") == true
+  }
+  
+  public var isEditSupported: Bool {
+    instance?.version.hasPrefix("4") == true
+  }
 
   private init() {}
 

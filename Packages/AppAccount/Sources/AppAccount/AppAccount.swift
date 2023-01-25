@@ -4,38 +4,13 @@ import Models
 import Network
 import SwiftUI
 
-public struct AppAccount: Codable, Identifiable {
-  public let server: String
-  public var accountName: String?
-  public let oauthToken: OauthToken?
-
-  public var id: String {
-    key
-  }
-
+extension AppAccount {
   private static var keychain: KeychainSwift {
     let keychain = KeychainSwift()
     #if !DEBUG
       keychain.accessGroup = AppInfo.keychainGroup
     #endif
     return keychain
-  }
-
-  public var key: String {
-    if let oauthToken {
-      return "\(server):\(oauthToken.createdAt)"
-    } else {
-      return "\(server):anonymous:\(Date().timeIntervalSince1970)"
-    }
-  }
-
-  public init(server: String,
-              accountName: String?,
-              oauthToken: OauthToken? = nil)
-  {
-    self.server = server
-    self.accountName = accountName
-    self.oauthToken = oauthToken
   }
 
   public func save() throws {

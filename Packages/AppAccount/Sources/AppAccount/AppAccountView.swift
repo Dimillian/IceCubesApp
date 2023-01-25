@@ -64,7 +64,7 @@ public struct AppAccountView: View {
       if appAccounts.currentAccount.id == viewModel.appAccount.id,
          let account = viewModel.account
       {
-        routerPath.navigate(to: .accountDetailWithAccount(account: account))
+        routerPath.navigate(to: .accountSettingsWithAccount(account: account, appAccount: viewModel.appAccount))
       } else {
         appAccounts.currentAccount = viewModel.appAccount
       }

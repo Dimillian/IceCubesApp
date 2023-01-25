@@ -107,12 +107,12 @@ public class Client: ObservableObject, Equatable {
     return (try decoder.decode(Entity.self, from: data), linkHandler)
   }
 
-  public func post<Entity: Decodable>(endpoint: Endpoint) async throws -> Entity {
-    try await makeEntityRequest(endpoint: endpoint, method: "POST")
+  public func post<Entity: Decodable>(endpoint: Endpoint, forceVersion: Version? = nil) async throws -> Entity {
+    try await makeEntityRequest(endpoint: endpoint, method: "POST", forceVersion: forceVersion)
   }
 
-  public func post(endpoint: Endpoint) async throws -> HTTPURLResponse? {
-    let url = makeURL(endpoint: endpoint)
+  public func post(endpoint: Endpoint, forceVersion: Version? = nil) async throws -> HTTPURLResponse? {
+    let url = makeURL(endpoint: endpoint, forceVersion: forceVersion)
     let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: "POST")
     let (_, httpResponse) = try await urlSession.data(for: request)
     return httpResponse as? HTTPURLResponse
@@ -125,12 +125,12 @@ public class Client: ObservableObject, Equatable {
     return httpResponse as? HTTPURLResponse
   }
 
-  public func put<Entity: Decodable>(endpoint: Endpoint) async throws -> Entity {
-    try await makeEntityRequest(endpoint: endpoint, method: "PUT")
+  public func put<Entity: Decodable>(endpoint: Endpoint, forceVersion: Version? = nil) async throws -> Entity {
+    try await makeEntityRequest(endpoint: endpoint, method: "PUT", forceVersion: forceVersion)
   }
 
-  public func delete(endpoint: Endpoint) async throws -> HTTPURLResponse? {
-    let url = makeURL(endpoint: endpoint)
+  public func delete(endpoint: Endpoint, forceVersion: Version? = nil) async throws -> HTTPURLResponse? {
+    let url = makeURL(endpoint: endpoint, forceVersion: forceVersion)
     let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: "DELETE")
     let (_, httpResponse) = try await urlSession.data(for: request)
     return httpResponse as? HTTPURLResponse

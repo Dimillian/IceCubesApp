@@ -13,6 +13,7 @@ public struct AccountDetailView: View {
 
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var currentAccount: CurrentAccount
+  @EnvironmentObject private var curretnInstance: CurrentInstance
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
@@ -25,6 +26,7 @@ public struct AccountDetailView: View {
   @State private var isCreateListAlertPresented: Bool = false
   @State private var createListTitle: String = ""
   @State private var isEditingAccount: Bool = false
+  @State private var isEditingFilters: Bool = false
 
   /// When coming from a URL like a mention tap in a status.
   public init(accountId: String) {
@@ -120,6 +122,9 @@ public struct AccountDetailView: View {
     })
     .sheet(isPresented: $isEditingAccount, content: {
       EditAccountView()
+    })
+    .sheet(isPresented: $isEditingFilters, content: {
+      FiltersListView()
     })
     .edgesIgnoringSafeArea(.top)
     .navigationBarTitleDisplayMode(.inline)
@@ -506,6 +511,14 @@ public struct AccountDetailView: View {
                 isEditingAccount = true
               } label: {
                 Label("account.action.edit-info", systemImage: "pencil")
+              }
+              
+              if curretnInstance.isFiltersSupported {
+                Button {
+                  isEditingFilters = true
+                } label: {
+                  Label("account.action.edit-filters", systemImage: "line.3.horizontal.decrease.circle")
+                }
               }
             }
           }

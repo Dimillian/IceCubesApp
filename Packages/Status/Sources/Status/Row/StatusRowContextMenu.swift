@@ -5,6 +5,7 @@ import SwiftUI
 struct StatusRowContextMenu: View {
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var account: CurrentAccount
+  @EnvironmentObject private var currentInstance: CurrentInstance
   @EnvironmentObject private var routerPath: RouterPath
 
   @Environment(\.openURL) var openURL
@@ -101,10 +102,12 @@ struct StatusRowContextMenu: View {
         } label: {
           Label(viewModel.isPinned ? "status.action.unpin" : "status.action.pin", systemImage: viewModel.isPinned ? "pin.fill" : "pin")
         }
-        Button {
-          routerPath.presentedSheet = .editStatusEditor(status: viewModel.status)
-        } label: {
-          Label("status.action.edit", systemImage: "pencil")
+        if currentInstance.isEditSupported {
+          Button {
+            routerPath.presentedSheet = .editStatusEditor(status: viewModel.status)
+          } label: {
+            Label("status.action.edit", systemImage: "pencil")
+          }
         }
         Button(role: .destructive) { Task { await viewModel.delete() } } label: {
           Label("status.action.delete", systemImage: "trash")

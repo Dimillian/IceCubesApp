@@ -17,6 +17,8 @@ extension View {
         AccountDetailView(accountId: id)
       case let .accountDetailWithAccount(account):
         AccountDetailView(account: account)
+      case let .accountSettingsWithAccount(account, appAccount):
+        AccountSettingsView(account: account, appAccount: appAccount)
       case let .statusDetail(id):
         StatusDetailView(statusId: id)
       case let .conversationDetail(conversation):

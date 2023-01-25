@@ -3,6 +3,7 @@ import AppAccount
 import DesignSystem
 import Env
 import SwiftUI
+import Models
 
 struct SideBarView<Content: View>: View {
   @EnvironmentObject private var appAccounts: AppAccountsManager

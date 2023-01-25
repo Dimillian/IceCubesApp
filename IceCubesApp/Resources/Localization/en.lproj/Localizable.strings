@@ -346,3 +346,13 @@
 "status.visibility.follower" = "Followers";
 "status.visibility.public" = "Everyone";
 "status.visibility.unlisted" = "Unlisted";
+
+// MARK: Filters
+"filter.new" = "New Filter";
+"filter.filters" = "Filters";
+"filter.edit.title" = "Filter title";
+"filter.edit.keywords" = "Filter Keywords";
+"filter.edit.keywords.add" = "Add a new keyword";
+"filter.edit.contexts" = "Filter Contexts";
+"filter.edit.action" = "Filter Action";
+"account.action.edit-filters" = "Edit Filters";
