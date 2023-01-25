@@ -359,7 +359,7 @@ public struct AccountDetailView: View {
             if !viewModel.isCurrentUser {
               Button {
                 routerPath.presentedSheet = .mentionStatusEditor(account: account,
-                                                                 visibility: preferences.serverPreferences?.postVisibility ?? .pub)
+                                                                 visibility: preferences.postVisibility)
               } label: {
                 Label("account.action.mention", systemImage: "at")
               }

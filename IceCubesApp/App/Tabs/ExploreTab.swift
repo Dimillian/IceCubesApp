@@ -23,7 +23,7 @@ struct ExploreTab: View {
         .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
         .toolbar {
           statusEditorToolbarItem(routerPath: routerPath,
-                                  visibility: preferences.serverPreferences?.postVisibility ?? .pub)
+                                  visibility: preferences.postVisibility)
           if UIDevice.current.userInterfaceIdiom != .pad {
             ToolbarItem(placement: .navigationBarLeading) {
               AppAccountsSelectorView(routerPath: routerPath)
