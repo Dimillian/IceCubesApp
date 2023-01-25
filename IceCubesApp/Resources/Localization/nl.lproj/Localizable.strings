@@ -101,18 +101,18 @@
 "settings.timeline.add" = "Een lokale tijdlijn toevoegen";
 "settings.title" = "Instellingen";
 "settings.section.other" = "Overig";
-"settings.other.hide-openai" = "Schakel 🤖 hulp in";
-"settings.other.social-keyboard" = "Enable Social Keyboard";
-"settings.general.content" = "Content Settings";
-"settings.content.navigation-title" = "Content Settings";
-"settings.content.use-instance-settings" = "Use server settings";
-"settings.content.main-toggle.description" = "Use the settings from your home Instance";
-"settings.content.expand-spoilers" = "Always show sensitive posts";
-"settings.content.expand-media" = "Media display";
-"settings.content.default-sensitive" = "Always mark media as sensitive";
-"settings.content.default-visibility" = "Posting visibilty";
-"settings.content.reading" = "Reading";
-"settings.content.posting" = "Posting";
+"settings.other.hide-openai" = "Schakel 🤖-hulp in";
+"settings.other.social-keyboard" = "Schakel social-toetsenbord in";
+"settings.general.content" = "Inhoud";
+"settings.content.navigation-title" = "Inhoud";
+"settings.content.use-instance-settings" = "Gebruik serverinstellingen";
+"settings.content.main-toggle.description" = "Gebruik de instellingen van jouw thuisinstantie.";
+"settings.content.expand-spoilers" = "Toon gevoelige posts altijd";
+"settings.content.expand-media" = "Mediaweergave";
+"settings.content.default-sensitive" = "Markeer media altijd als gevoelig";
+"settings.content.default-visibility" = "Standaard postzichtbaarheid";
+"settings.content.reading" = "Lezen";
+"settings.content.posting" = "Posten";
 
 // MARK: Tabs
 "tab.explore" = "Ontdekken";
@@ -170,8 +170,8 @@
 "account.following" = "Volgend";
 "account.list.create" = "Maak een nieuwe lijst";
 "account.list.create.confirm" = "Maak lijst";
-"account.list.create.description" = "Voer de naam van je lijst in";
-"account.list.delete" = "Lijst verwijderen";
+"account.list.create.description" = "Geef de lijst een naam";
+"account.list.delete" = "Verwijder lijst";
 "account.list.name" = "Lijstnaam";
 "account.post.pinned" = "Vastgezette post";
 "account.posts" = "Posts";
