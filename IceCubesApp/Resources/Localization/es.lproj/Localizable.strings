@@ -102,6 +102,17 @@
 "settings.rate" = "Valora Ice Cubes";
 "settings.section.other" = "Other";
 "settings.other.hide-openai" = "Enable 🤖 helper";
+"settings.other.social-keyboard" = "Enable Social Keyboard";
+"settings.general.content" = "Content Settings";
+"settings.content.navigation-title" = "Content Settings";
+"settings.content.use-instance-settings" = "Use server settings";
+"settings.content.main-toggle.description" = "Use the settings from your home Instance";
+"settings.content.expand-spoilers" = "Always show sensitive posts";
+"settings.content.expand-media" = "Media display";
+"settings.content.default-sensitive" = "Always mark media as sensitive";
+"settings.content.default-visibility" = "Posting visibilty";
+"settings.content.reading" = "Reading";
+"settings.content.posting" = "Posting";
 
 // MARK: Tabs
 "tab.explore" = "Explorar";
@@ -285,6 +296,7 @@
 "status.editor.drafts.navigation-title" = "Borradores";
 "status.editor.error.upload" = "Error subiendo";
 "status.editor.language-select.navigation-title" = "Seleccionar idioma";
+"status.editor.language-select.recently-used" = "Recently Used";
 "status.editor.media.edit-image" = "Editar Imagen";
 "status.editor.media.image-description" = "Descripción de la imagen";
 "status.editor.mode.edit" = "Editando tu publicación";

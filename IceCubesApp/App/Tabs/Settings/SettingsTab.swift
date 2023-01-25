@@ -94,6 +94,9 @@ struct SettingsTabs: View {
       NavigationLink(destination: remoteLocalTimelinesView) {
         Label("settings.general.remote-timelines", systemImage: "dot.radiowaves.right")
       }
+      NavigationLink(destination: ContentSettingsView()) {
+        Label("settings.general.content", systemImage: "rectangle.fill.on.rectangle.fill")
+      }
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
@@ -116,6 +119,9 @@ struct SettingsTabs: View {
       }
       Toggle(isOn: $preferences.isOpenAIEnabled) {
         Label("settings.other.hide-openai", systemImage: "faxmachine")
+      }
+      Toggle(isOn: $preferences.isSocialKeyboardEnabled) {
+        Label("settings.other.social-keyboard", systemImage: "keyboard")
       }
     }
     .listRowBackground(theme.primaryBackgroundColor)

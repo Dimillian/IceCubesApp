@@ -13,9 +13,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string>%lld nuovo post</string>
+			<string>%lld yeni gönderi</string>
 			<key>other</key>
-			<string>%lld nuovi post</string>
+			<string>%lld yeni gönderiler</string>
 		</dict>
 	</dict>
 </dict>

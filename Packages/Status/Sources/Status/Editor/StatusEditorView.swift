@@ -37,10 +37,10 @@ public struct StatusEditorView: View {
           VStack(spacing: 12) {
             accountHeaderView
               .padding(.horizontal, .layoutPadding)
-            TextView($viewModel.statusText, $viewModel.selectedRange)
+            TextView($viewModel.statusText, $viewModel.selectedRange, $viewModel.markedTextRange)
               .placeholder(String(localized: "status.editor.text.placeholder"))
               .font(Font.scaledBodyUIFont)
-              .keyboardType(.twitter)
+              .setKeyboardType(preferences.isSocialKeyboardEnabled ? .twitter : .default)
               .padding(.horizontal, .layoutPadding)
             StatusEditorMediaView(viewModel: viewModel)
             if let status = viewModel.embeddedStatus {
@@ -74,6 +74,7 @@ public struct StatusEditorView: View {
         viewModel.client = client
         viewModel.currentAccount = currentAccount.account
         viewModel.theme = theme
+        viewModel.preferences = preferences
         viewModel.prepareStatusText()
         if !client.isAuth {
           dismiss()

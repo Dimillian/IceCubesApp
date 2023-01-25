@@ -28,31 +28,37 @@ public struct StatusRowView: View {
         EmptyView()
       }
     } else {
-      HStack(alignment: .top, spacing: .statusColumnsSpacing) {
-        if !viewModel.isCompact,
-           theme.avatarPosition == .leading,
-           let status: AnyStatus = viewModel.status.reblog ?? viewModel.status
-        {
-          Button {
-            routerPath.navigate(to: .accountDetailWithAccount(account: status.account))
-          } label: {
-            AvatarView(url: status.account.avatar, size: .status)
-          }
+      VStack(alignment: .leading) {
+        if !viewModel.isCompact, theme.avatarPosition == .leading {
+          reblogView
+          replyView
         }
-        VStack(alignment: .leading) {
-          if !viewModel.isCompact {
-            reblogView
-            replyView
+        HStack(alignment: .top, spacing: .statusColumnsSpacing) {
+          if !viewModel.isCompact,
+             theme.avatarPosition == .leading,
+             let status: AnyStatus = viewModel.status.reblog ?? viewModel.status
+          {
+            Button {
+              routerPath.navigate(to: .accountDetailWithAccount(account: status.account))
+            } label: {
+              AvatarView(url: status.account.avatar, size: .status)
+            }
           }
-          statusView
-          if viewModel.showActions && !viewModel.isRemote, theme.statusActionsDisplay != .none {
-            StatusActionsView(viewModel: viewModel)
-              .padding(.top, 8)
-              .tint(viewModel.isFocused ? theme.tintColor : .gray)
-              .contentShape(Rectangle())
-              .onTapGesture {
-                viewModel.navigateToDetail(routerPath: routerPath)
-              }
+          VStack(alignment: .leading) {
+            if !viewModel.isCompact, theme.avatarPosition == .top {
+              reblogView
+              replyView
+            }
+            statusView
+            if viewModel.showActions && !viewModel.isRemote, theme.statusActionsDisplay != .none {
+              StatusActionsView(viewModel: viewModel)
+                .padding(.top, 8)
+                .tint(viewModel.isFocused ? theme.tintColor : .gray)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                  viewModel.navigateToDetail(routerPath: routerPath)
+                }
+            }
           }
         }
       }
@@ -64,7 +70,7 @@ public struct StatusRowView: View {
               await viewModel.loadEmbeddedStatus()
             }
           }
-          if preferences.serverPreferences?.autoExpandSpoilers == true {
+          if preferences.autoExpandSpoilers == true {
             viewModel.displaySpoiler = false
           }
         }

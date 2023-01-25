@@ -180,7 +180,7 @@ struct IceCubesApp: App {
   private var appMenu: some Commands {
     CommandGroup(replacing: .newItem) {
       Button("New post") {
-        sidebarRouterPath.presentedSheet = .newStatusEditor(visibility: userPreferences.serverPreferences?.postVisibility ?? .pub)
+        sidebarRouterPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
       }
     }
     CommandGroup(replacing: .textFormatting) {

@@ -281,6 +281,7 @@
 "status.editor.drafts.navigation-title" = "下書き";
 "status.editor.error.upload" = "アップロードエラー";
 "status.editor.language-select.navigation-title" = "言語設定";
+"status.editor.language-select.recently-used" = "Recently Used";
 "status.editor.media.edit-image" = "イメージの編集";
 "status.editor.media.image-description" = "イメージの説明文";
 "status.editor.mode.edit" = "投稿を編集する";
@@ -323,3 +324,13 @@
 "status.visibility.follower" = "フォロワー";
 "status.visibility.public" = "全員";
 "status.visibility.unlisted" = "リスト外";
+"settings.general.content" = "Content Settings";
+"settings.content.navigation-title" = "Content Settings";
+"settings.content.use-instance-settings" = "Use server settings";
+"settings.content.main-toggle.description" = "Use the settings from your home Instance";
+"settings.content.expand-spoilers" = "Always show sensitive posts";
+"settings.content.expand-media" = "Media display";
+"settings.content.default-sensitive" = "Always mark media as sensitive";
+"settings.content.default-visibility" = "Posting visibilty";
+"settings.content.reading" = "Reading";
+"settings.content.posting" = "Posting";

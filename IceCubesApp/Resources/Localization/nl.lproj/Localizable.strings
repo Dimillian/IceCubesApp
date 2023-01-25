@@ -53,7 +53,7 @@
 "settings.display.avatar.position" = "Avatarpositie";
 "settings.display.avatar.shape" = "Avatarvorm";
 "settings.display.navigation-title" = "Weergaveopties";
-"settings.display.restore" = "Standaardinstellingen herstellen";
+"settings.display.restore" = "Stel opnieuw in";
 "settings.display.section.display" = "Weergave";
 "settings.display.section.theme" = "Thema";
 "settings.display.status.action-buttons" = "Actieknoppen";
@@ -100,8 +100,19 @@
 "settings.support.four.subtitle" = "Daarmee kan Ice Cubes nog een tijdje vooruit!";
 "settings.timeline.add" = "Een lokale tijdlijn toevoegen";
 "settings.title" = "Instellingen";
-"settings.section.other" = "Other";
-"settings.other.hide-openai" = "Enable 🤖 helper";
+"settings.section.other" = "Overig";
+"settings.other.hide-openai" = "Schakel 🤖-hulp in";
+"settings.other.social-keyboard" = "Schakel social-toetsenbord in";
+"settings.general.content" = "Inhoud";
+"settings.content.navigation-title" = "Inhoud";
+"settings.content.use-instance-settings" = "Gebruik serverinstellingen";
+"settings.content.main-toggle.description" = "Gebruik de instellingen van jouw thuisinstantie.";
+"settings.content.expand-spoilers" = "Toon gevoelige posts altijd";
+"settings.content.expand-media" = "Mediaweergave";
+"settings.content.default-sensitive" = "Markeer media altijd als gevoelig";
+"settings.content.default-visibility" = "Standaard postzichtbaarheid";
+"settings.content.reading" = "Lezen";
+"settings.content.posting" = "Posten";
 
 // MARK: Tabs
 "tab.explore" = "Ontdekken";
@@ -115,8 +126,8 @@
 
 // MARK: Timeline
 "timeline.%@-is-valid" = "%@ is een geldige instantie";
-"timeline.add-remote.title" = "Andere lokale tijdlijn toevoegen";
-"timeline.add.action.add" = "Toevoegen";
+"timeline.add-remote.title" = "Lokale tijdlijn toevoegen";
+"timeline.add.action.add" = "Voeg toe";
 "timeline.filter.add-local" = "Lokale tijdlijn toevoegen";
 "timeline.filter.lists" = "Lijsten";
 "timeline.filter.local" = "Lokale tijdlijnen";
@@ -151,7 +162,7 @@
 "account.edit.post-settings.privacy" = "Standaardprivacy";
 "account.edit.post-settings.section-title" = "Postinstellingen";
 "account.edit.post-settings.sensitive" = "Gevoelige inhoud";
-"account.favorited-by" = "Geliked door";
+"account.favorited-by" = "Gefavoriet";
 "account.follow.follow" = "Volg";
 "account.follow.following" = "Volgend";
 "account.follow.requested" = "Verzocht";
@@ -163,8 +174,8 @@
 "account.following" = "Volgend";
 "account.list.create" = "Maak een nieuwe lijst";
 "account.list.create.confirm" = "Maak lijst";
-"account.list.create.description" = "Voer de naam van je lijst in";
-"account.list.delete" = "Lijst verwijderen";
+"account.list.create.description" = "Geef de lijst een naam";
+"account.list.delete" = "Verwijder lijst";
 "account.list.name" = "Lijstnaam";
 "account.post.pinned" = "Vastgezette post";
 "account.posts" = "Posts";
@@ -172,7 +183,7 @@
 "account.joined" = "Lid geworden";
 
 // MARK: Package: Conversations
-"conversations.action.delete" = "Verwijderen";
+"conversations.action.delete" = "Verwijder";
 "conversations.action.mark-read" = "Markeer als gelezen";
 "conversations.empty.message" = "Op zoek naar wat liefde op sociale media? Hier vind je al je directe berichten en privévermeldingen. Veel plezier met het versturen van berichtjes! 📱❤️";
 "conversations.empty.title" = "Lege inbox";
@@ -285,6 +296,7 @@
 "status.editor.drafts.navigation-title" = "Concepten";
 "status.editor.error.upload" = "Fout tijdens uploaden";
 "status.editor.language-select.navigation-title" = "Taal selecteren";
+"status.editor.language-select.recently-used" = "Onlangs gebruikt";
 "status.editor.media.edit-image" = "Afbeelding bewerken";
 "status.editor.media.image-description" = "Omschrijving";
 "status.editor.mode.edit" = "Je post bewerken";

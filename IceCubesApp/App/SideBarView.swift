@@ -58,7 +58,7 @@ struct SideBarView<Content: View>: View {
 
   private var postButton: some View {
     Button {
-      routerPath.presentedSheet = .newStatusEditor(visibility: userPreferences.serverPreferences?.postVisibility ?? .pub)
+      routerPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
     } label: {
       Image(systemName: "square.and.pencil")
         .resizable()
