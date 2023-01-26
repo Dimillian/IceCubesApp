@@ -45,10 +45,10 @@
 "instance.url" = "URL dell'istanza";
 
 // MARK: Menu
-"menu.new-post" = "New post";
+"menu.new-post" = "Nuovo post";
 "menu.font" = "Font";
-"menu.font.bigger" = "Bigger";
-"menu.font.smaller" = "Smaller";
+"menu.font.bigger" = "Aumenta";
+"menu.font.smaller" = "Diminuisci";
 
 // MARK: Settings
 "settings.account.add" = "Aggiungi un account";
@@ -109,19 +109,22 @@
 "settings.section.other" = "Altro";
 "settings.other.hide-openai" = "Abilita l'aiuto del 🤖";
 "settings.other.social-keyboard" = "Abilita social keyboard";
-"settings.general.content" = "Impostazione dei contenuti";
-"settings.content.navigation-title" = "Impostazione dei contenuti";
+"settings.general.content" = "Impostazioni dei contenuti";
+"settings.content.navigation-title" = "Impostazioni dei contenuti";
 "settings.content.use-instance-settings" = "Utilizza le impostazioni del server";
 "settings.content.main-toggle.description" = "Utilizza le impostazioni provenienti dalla tua istanza Mastodon";
 "settings.content.expand-spoilers" = "Visualizza sempre i contenuti sensibili";
-"settings.content.expand-media" = "Visualizzazione dei Media";
+"settings.content.expand-media" = "Visualizzazione dei media";
 "settings.content.default-sensitive" = "Segnala sempre i contenuti come sensibili";
 "settings.content.default-visibility" = "Visibilità del post";
 "settings.content.reading" = "Lettura";
 "settings.content.posting" = "Composizione";
-"settings.push.duplicate.title" = "Duplicate notifications fixer";
-"settings.push.duplicate.footer" = "Receiving duplicate notifications? Try this magic button in order to fix it";
-"settings.push.duplicate.button.fix" = "🪄 Fix it";
+"enum.expand-media.show" = "Mostra tutti";
+"enum.expand-media.hide" = "Nascondi tutti";
+"enum.expand-media.hide-sensitive" = "Nascondi sensibili";
+"settings.push.duplicate.title" = "Sistema le notifiche duplicate";
+"settings.push.duplicate.footer" = "Ricevi notifiche duplicate? Prova questo bottone magico per aggiustarle";
+"settings.push.duplicate.button.fix" = "🪄 Aggiusta";
 
 // MARK: Tabs
 "tab.explore" = "Esplora";
@@ -132,7 +135,7 @@
 "tab.settings" = "Impostazioni";
 "tab.timeline" = "Timeline";
 "tab.trending" = "Trending";
-"tab.profile" = "Profile";
+"tab.profile" = "Profilo";
 
 // MARK: Timeline
 "timeline.%@-is-valid" = "%@ è un'istanza valida";
@@ -194,7 +197,7 @@
 "account.post.pinned" = "Post fissato";
 "account.posts" = "Post";
 "account.relation.follows-you" = "Ti segue";
-"account.joined" = "Collegato";
+"account.joined" = "Si è unito il giorno";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Cancella";
@@ -318,7 +321,7 @@
 "status.editor.mode.quote-%@" = "Citazione di %@";
 "status.editor.mode.reply-%@" = "In risposta a %@";
 "status.editor.restore-previous" = "Ripristina il testo precedente";
-"status.editor.spoiler" = "Testo Spoiler";
+"status.editor.spoiler" = "Testo spoiler";
 "status.editor.text.placeholder" = "A cosa stai pensando?";
 "status.editor.visibility" = "Visibilità del post";
 "status.error.loading.message" = "Si è verificato un errore durante il caricamento dei post, per favore riprova.";
