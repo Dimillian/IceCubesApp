@@ -101,6 +101,15 @@ public struct AppAccountsSelectorView: View {
         Label("app-account.button.add", systemImage: "person.badge.plus")
       }
     }
+    
+    if UIDevice.current.userInterfaceIdiom == .phone {
+      Divider()
+      Button {
+        routerPath.presentedSheet = .settings
+      } label: {
+        Label("tab.settings", systemImage: "gear")
+      }
+    }
   }
 
   private func refreshAccounts() {

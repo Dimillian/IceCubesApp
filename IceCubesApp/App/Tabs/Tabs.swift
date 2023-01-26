@@ -21,7 +21,7 @@ enum Tab: Int, Identifiable, Hashable {
     if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
       return [.timeline, .trending, .federated, .local, .notifications, .mentions, .explore, .messages, .settings]
     } else {
-      return [.timeline, .notifications, .explore, .messages, .settings]
+      return [.timeline, .notifications, .explore, .messages, .profile]
     }
   }
 
@@ -46,7 +46,9 @@ enum Tab: Int, Identifiable, Hashable {
       MessagesTab(popToRootTab: popToRootTab)
     case .settings:
       SettingsTabs(popToRootTab: popToRootTab)
-    case .other, .profile:
+    case .profile:
+      ProfileTab(popToRootTab: popToRootTab)
+    case .other:
       EmptyView()
     }
   }
@@ -72,7 +74,9 @@ enum Tab: Int, Identifiable, Hashable {
       Label("tab.messages", systemImage: iconName)
     case .settings:
       Label("tab.settings", systemImage: iconName)
-    case .other, .profile:
+    case .profile:
+      Label("tab.profile", systemImage: iconName)
+    case .other:
       EmptyView()
     }
   }
@@ -97,7 +101,9 @@ enum Tab: Int, Identifiable, Hashable {
       return "tray"
     case .settings:
       return "gear"
-    case .other, .profile:
+    case .profile:
+      return "person.crop.circle"
+    case .other:
       return ""
     }
   }

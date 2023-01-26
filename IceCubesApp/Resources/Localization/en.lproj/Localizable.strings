@@ -132,6 +132,7 @@
 "tab.settings" = "Settings";
 "tab.timeline" = "Timeline";
 "tab.trending" = "Trending";
+"tab.profile" = "Profile";
 
 // MARK: Timeline
 "timeline.%@-is-valid" = "%@ is a valid instance";

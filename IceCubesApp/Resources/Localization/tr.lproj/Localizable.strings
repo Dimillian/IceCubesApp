@@ -119,6 +119,7 @@
 "tab.settings" = "Ayarlar";
 "tab.timeline" = "Zaman Dilimi";
 "tab.trending" = "Yükselişte";
+"tab.profile" = "Profile";
 
 // MARK: Timeline
 "timeline.%@-is-valid" = "%@ geçerli bir oluşum";

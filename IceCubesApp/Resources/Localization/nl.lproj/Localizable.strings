@@ -129,6 +129,7 @@
 "tab.settings" = "Instellingen";
 "tab.timeline" = "Tijdlijn";
 "tab.trending" = "Trending";
+"tab.profile" = "Profile";
 
 // MARK: Timeline
 "timeline.%@-is-valid" = "%@ is een geldige instantie";

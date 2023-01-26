@@ -8,6 +8,8 @@ import SwiftUI
 import Timeline
 
 struct SettingsTabs: View {
+  @Environment(\.dismiss) private var dismiss
+  
   @EnvironmentObject private var pushNotifications: PushNotificationsService
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var client: Client
@@ -34,6 +36,15 @@ struct SettingsTabs: View {
       .navigationTitle(Text("settings.title"))
       .navigationBarTitleDisplayMode(.inline)
       .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
+      .toolbar {
+        if UIDevice.current.userInterfaceIdiom == .phone {
+          ToolbarItem {
+            Button("action.done") {
+              dismiss()
+            }
+          }
+        }
+      }
       .withAppRouter()
       .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
     }

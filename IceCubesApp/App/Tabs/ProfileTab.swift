@@ -21,13 +21,6 @@ struct ProfileTab: View {
         AccountDetailView(account: account)
           .withAppRouter()
           .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
-          .toolbar {
-            if UIDevice.current.userInterfaceIdiom != .pad {
-              ToolbarItem(placement: .navigationBarLeading) {
-                AppAccountsSelectorView(routerPath: routerPath)
-              }
-            }
-          }
           .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
           .id(currentAccount.account?.id)
       } else {
@@ -37,7 +30,7 @@ struct ProfileTab: View {
       }
     }
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
-      if popToRootTab == .messages {
+      if popToRootTab == .profile {
         routerPath.path = []
       }
     }

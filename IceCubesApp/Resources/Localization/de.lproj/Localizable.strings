@@ -129,6 +129,7 @@
 "tab.settings" = "Einstellungen";
 "tab.timeline" = "Timeline";
 "tab.trending" = "Im Trend";
+"tab.profile" = "Profile";
 
 // MARK: Timeline
 "timeline.%@-is-valid" = "%@ ist eine gültige Instanz";

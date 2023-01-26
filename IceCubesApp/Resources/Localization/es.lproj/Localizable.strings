@@ -132,6 +132,7 @@
 "tab.settings" = "Ajustes";
 "tab.timeline" = "Cronología";
 "tab.trending" = "Tendencias";
+"tab.profile" = "Profile";
 
 // MARK: Timeline
 "timeline.%@-is-valid" = "%@ es una instancia válida";

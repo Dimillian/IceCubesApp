@@ -23,12 +23,6 @@ struct AccountSettingsView: View {
   var body: some View {
     Form {
       Section {
-        NavigationLink(value: RouterDestinations.accountDetailWithAccount(account: account)) {
-          Label("See Profile", systemImage: "person.crop.circle")
-        }
-      }
-      .listRowBackground(theme.primaryBackgroundColor)
-      Section {
         Label("Edit profile", systemImage: "pencil")
           .onTapGesture {
             isEditingAccount = true

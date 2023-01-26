@@ -524,7 +524,11 @@ public struct AccountDetailView: View {
           }
         }
       } label: {
-        Image(systemName: "ellipsis.circle.fill")
+        if scrollOffset < -40 {
+          Image(systemName: "ellipsis.circle")
+        } else {
+          Image(systemName: "ellipsis.circle.fill")
+        }
       }
     }
   }

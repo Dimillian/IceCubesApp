@@ -74,6 +74,9 @@ extension View {
       case let .statusEditHistory(status):
         StatusEditHistoryView(statusId: status)
           .withEnvironments()
+      case .settings:
+        SettingsTabs(popToRootTab: .constant(.settings))
+          .withEnvironments()
       }
     }
   }
@@ -84,5 +87,6 @@ extension View {
       .environmentObject(CurrentInstance.shared)
       .environmentObject(Theme.shared)
       .environmentObject(AppAccountsManager.shared)
+      .applyTheme(Theme.shared)
   }
 }
