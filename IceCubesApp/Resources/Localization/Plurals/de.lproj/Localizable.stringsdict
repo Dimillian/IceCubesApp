@@ -2,6 +2,38 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>account.detail.n-fields %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@accountDetailFields@</string>
+		<key>accountDetailFields</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%lld Feld</string>
+			<key>other</key>
+			<string>%lld Felder</string>
+		</dict>
+	</dict>
+	<key>account.detail.featured-tags-n-posts %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@accountDetailFeaturedTagsPosts@</string>
+		<key>accountDetailFeaturedTagsPosts</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%lld Beitrag</string>
+			<key>other</key>
+			<string>%lld Beiträge</string>
+		</dict>
+	</dict>
 	<key>timeline-new-posts %lld</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -19,20 +51,20 @@
 		</dict>
 	</dict>
 	<key>notifications-others-count %lld</key>
-    <dict>
-        <key>NSStringLocalizedFormatKey</key>
-        <string>%#@noficationsOthersCount@</string>
-        <key>noficationsOthersCount</key>
-        <dict>
-            <key>NSStringFormatSpecTypeKey</key>
-            <string>NSStringPluralRuleType</string>
-            <key>NSStringFormatValueTypeKey</key>
-            <string>lld</string>
-            <key>one</key>
-            <string> and %lld other </string>
-            <key>other</key>
-            <string> and %lld others </string>
-        </dict>
-    </dict>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@noficationsOthersCount@</string>
+		<key>noficationsOthersCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string> und %lld weiterer </string>
+			<key>other</key>
+			<string> und %lld weitere </string>
+		</dict>
+	</dict>
 </dict>
 </plist>
