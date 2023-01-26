@@ -45,10 +45,10 @@
 "instance.url" = "Instantie-URL";
 
 // MARK: Menu
-"menu.new-post" = "New post";
-"menu.font" = "Font";
-"menu.font.bigger" = "Bigger";
-"menu.font.smaller" = "Smaller";
+"menu.new-post" = "Nieuw bericht";
+"menu.font" = "Lettertype";
+"menu.font.bigger" = "Groter";
+"menu.font.smaller" = "Kleiner";
 
 // MARK: Settings
 "settings.account.add" = "Account toevoegen";
@@ -119,9 +119,9 @@
 "settings.content.default-visibility" = "Standaard postzichtbaarheid";
 "settings.content.reading" = "Lezen";
 "settings.content.posting" = "Posten";
-"settings.push.duplicate.title" = "Duplicate notifications fixer";
-"settings.push.duplicate.footer" = "Receiving duplicate notifications? Try this magic button in order to fix it";
-"settings.push.duplicate.button.fix" = "🪄 Fix it";
+"settings.push.duplicate.title" = "Dubbele meldingen oplosser";
+"settings.push.duplicate.footer" = "Ontvang je dubbele meldingen? Gebruik deze magische knop om het op te lossen";
+"settings.push.duplicate.button.fix" = "🪄 Los op";
 
 // MARK: Tabs
 "tab.explore" = "Ontdekken";
@@ -180,10 +180,10 @@
 "account.follow.follow" = "Volg";
 "account.follow.following" = "Volgend";
 "account.follow.requested" = "Verzocht";
-"account.follow-request.accept" = "Accept";
-"account.follow-request.reject" = "Reject";
+"account.follow-request.accept" = "Accepteer";
+"account.follow-request.reject" = "Weiger";
 "account.follow-requests.pending-requests" = "Pending requests";
-"account.follow-requests.instructions" = "Those users won't see your posts until you accept them.";
+"account.follow-requests.instructions" = "Deze gebruikers zie je berichten niet totdat je hun volgverzoek accepteert.";
 "account.followers" = "Volgers";
 "account.following" = "Volgend";
 "account.list.create" = "Maak een nieuwe lijst";
@@ -355,11 +355,11 @@
 "status.visibility.unlisted" = "Minder openbaar";
 
 // MARK: Filters
-"filter.new" = "New Filter";
+"filter.new" = "Nieuw Filter";
 "filter.filters" = "Filters";
-"filter.edit.title" = "Filter title";
-"filter.edit.keywords" = "Filter Keywords";
-"filter.edit.keywords.add" = "Add a new keyword";
+"filter.edit.title" = "Filter titel";
+"filter.edit.keywords" = "Filter sleutelwoorden";
+"filter.edit.keywords.add" = "Voeg een nieuw sleutelwoord toe";
 "filter.edit.contexts" = "Filter Contexts";
-"filter.edit.action" = "Filter Action";
-"account.action.edit-filters" = "Edit Filters";
+"filter.edit.action" = "Filter Actie";
+"account.action.edit-filters" = "Wijzig Filters";
