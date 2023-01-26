@@ -33,15 +33,20 @@ struct AccountSettingsView: View {
               isEditingFilters = true
             }
         }
+        if let subscription = pushNotifications.subscriptions.first(where: { $0.account.token == appAccount.oauthToken }) {
+          NavigationLink(destination: PushNotificationsView(subscription: subscription)) {
+            Label("settings.general.push-notifications", systemImage: "bell.and.waves.left.and.right")
+          }
+        }
       }
       .listRowBackground(theme.primaryBackgroundColor)
       Section {
         Button(role: .destructive) {
           if let token = appAccount.oauthToken {
             Task {
-              await pushNotifications.deleteSubscriptions(accounts: [.init(server: appAccount.server,
-                                                                           token: token,
-                                                                           accountName: appAccount.accountName)])
+              if let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token }) {
+                await sub.deleteSubscription()
+              }
               appAccountsManager.delete(account: appAccount)
               dismiss()
             }

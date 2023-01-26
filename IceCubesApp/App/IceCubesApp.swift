@@ -214,12 +214,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                    didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data)
   {
     PushNotificationsService.shared.pushToken = deviceToken
-    #if !DEBUG
-      Task {
-        await PushNotificationsService.shared.fetchSubscriptions(accounts: AppAccountsManager.shared.pushAccounts)
-        await PushNotificationsService.shared.updateSubscriptions(accounts: AppAccountsManager.shared.pushAccounts)
-      }
-    #endif
+    Task {
+      PushNotificationsService.shared.setAccounts(accounts: AppAccountsManager.shared.pushAccounts)
+      await PushNotificationsService.shared.updateSubscriptions(forceCreate: false)
+    }
   }
 
   func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError _: Error) {}

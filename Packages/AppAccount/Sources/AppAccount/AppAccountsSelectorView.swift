@@ -58,7 +58,7 @@ public struct AppAccountsSelectorView: View {
       if let avatar = currentAccount.account?.avatar {
         AvatarView(url: avatar, size: avatarSize)
       } else {
-        EmptyView()
+        ProgressView()
       }
     }.overlay(alignment: .topTrailing) {
       if !currentAccount.followRequests.isEmpty {

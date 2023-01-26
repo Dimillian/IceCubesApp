@@ -73,11 +73,10 @@ struct SettingsTabs: View {
       .onDelete { indexSet in
         if let index = indexSet.first {
           let account = appAccountsManager.availableAccounts[index]
-          if let token = account.oauthToken {
+          if let token = account.oauthToken,
+              let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token }) {
             Task {
-              await pushNotifications.deleteSubscriptions(accounts: [.init(server: account.server,
-                                                                           token: token,
-                                                                           accountName: account.accountName)])
+              await sub.deleteSubscription()
             }
           }
           appAccountsManager.delete(account: account)
@@ -91,9 +90,6 @@ struct SettingsTabs: View {
   @ViewBuilder
   private var generalSection: some View {
     Section("settings.section.general") {
-      NavigationLink(destination: PushNotificationsView()) {
-        Label("settings.general.push-notifications", systemImage: "bell.and.waves.left.and.right")
-      }
       if let instanceData = currentInstance.instance {
         NavigationLink(destination: InstanceInfoView(instance: instanceData)) {
           Label("settings.general.instance", systemImage: "server.rack")

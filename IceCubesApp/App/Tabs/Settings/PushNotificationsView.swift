@@ -12,85 +12,99 @@ struct PushNotificationsView: View {
   @EnvironmentObject private var appAccountsManager: AppAccountsManager
   @EnvironmentObject private var pushNotifications: PushNotificationsService
 
-  @State private var subscriptions: [PushSubscription] = []
+  @StateObject public var subscription: PushNotificationSubscriptionSettings
 
   var body: some View {
     Form {
       Section {
-        Toggle(isOn: $pushNotifications.isPushEnabled) {
+        Toggle(isOn: .init(get: {
+          subscription.isEnabled
+        }, set: { newValue in
+          subscription.isEnabled = newValue
+          if newValue {
+            updateSubscription()
+          } else {
+            deleteSubscription()
+          }
+        })) {
           Text("settings.push.main-toggle")
         }
       } footer: {
         Text("settings.push.main-toggle.description")
       }
       .listRowBackground(theme.primaryBackgroundColor)
-
-      if pushNotifications.isPushEnabled {
+        
+      if subscription.isEnabled {
         Section {
-          Toggle(isOn: $pushNotifications.isMentionNotificationEnabled) {
+          Toggle(isOn: .init(get: {
+            subscription.isMentionNotificationEnabled
+          }, set: { newValue in
+            subscription.isMentionNotificationEnabled = newValue
+            updateSubscription()
+          })) {
             Label("settings.push.mentions", systemImage: "at")
           }
-          Toggle(isOn: $pushNotifications.isFollowNotificationEnabled) {
+          Toggle(isOn: .init(get: {
+            subscription.isFollowNotificationEnabled
+          }, set: { newValue in
+            subscription.isFollowNotificationEnabled = newValue
+            updateSubscription()
+          })) {
             Label("settings.push.follows", systemImage: "person.badge.plus")
           }
-          Toggle(isOn: $pushNotifications.isFavoriteNotificationEnabled) {
+          Toggle(isOn: .init(get: {
+            subscription.isFavoriteNotificationEnabled
+          }, set: { newValue in
+            subscription.isFavoriteNotificationEnabled = newValue
+            updateSubscription()
+          })) {
             Label("settings.push.favorites", systemImage: "star")
           }
-          Toggle(isOn: $pushNotifications.isReblogNotificationEnabled) {
+          Toggle(isOn: .init(get: {
+            subscription.isReblogNotificationEnabled
+          }, set: { newValue in
+            subscription.isReblogNotificationEnabled = newValue
+            updateSubscription()
+          })) {
             Label("settings.push.boosts", systemImage: "arrow.left.arrow.right.circle")
           }
-          Toggle(isOn: $pushNotifications.isPollNotificationEnabled) {
+          Toggle(isOn: .init(get: {
+            subscription.isPollNotificationEnabled
+          }, set: { newValue in
+            subscription.isPollNotificationEnabled = newValue
+            updateSubscription()
+          })) {
             Label("settings.push.polls", systemImage: "chart.bar")
           }
-          Toggle(isOn: $pushNotifications.isNewPostsNotificationEnabled) {
+          Toggle(isOn: .init(get: {
+            subscription.isNewPostsNotificationEnabled
+          }, set: { newValue in
+            subscription.isNewPostsNotificationEnabled = newValue
+            updateSubscription()
+          })) {
             Label("settings.push.new-posts", systemImage: "bubble.right")
           }
         }
         .listRowBackground(theme.primaryBackgroundColor)
-        .transition(.move(edge: .bottom))
       }
     }
     .navigationTitle("settings.push.navigation-title")
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
-    .onAppear {
-      Task {
-        await pushNotifications.fetchSubscriptions(accounts: appAccountsManager.pushAccounts)
-      }
-    }
-    .onChange(of: pushNotifications.isPushEnabled) { newValue in
-      pushNotifications.isUserPushEnabled = newValue
-      if !newValue {
-        Task {
-          await pushNotifications.deleteSubscriptions(accounts: appAccountsManager.pushAccounts)
-        }
-      } else {
-        updateSubscriptions()
-      }
-    }
-    .onChange(of: pushNotifications.isFollowNotificationEnabled) { _ in
-      updateSubscriptions()
-    }
-    .onChange(of: pushNotifications.isPollNotificationEnabled) { _ in
-      updateSubscriptions()
-    }
-    .onChange(of: pushNotifications.isReblogNotificationEnabled) { _ in
-      updateSubscriptions()
-    }
-    .onChange(of: pushNotifications.isMentionNotificationEnabled) { _ in
-      updateSubscriptions()
-    }
-    .onChange(of: pushNotifications.isFavoriteNotificationEnabled) { _ in
-      updateSubscriptions()
-    }
-    .onChange(of: pushNotifications.isNewPostsNotificationEnabled) { _ in
-      updateSubscriptions()
+    .task {
+      await subscription.fetchSubscription()
     }
   }
 
-  private func updateSubscriptions() {
+  private func updateSubscription() {
     Task {
-      await pushNotifications.updateSubscriptions(accounts: appAccountsManager.pushAccounts)
+      await subscription.updateSubscription(forceCreate: true)
+    }
+  }
+  
+  private func deleteSubscription() {
+    Task {
+      await subscription.deleteSubscription()
     }
   }
 }

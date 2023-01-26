@@ -231,7 +231,8 @@ struct AddAccountView: View {
                                                  accountName: "\(account.acct)@\(client.server)",
                                                  oauthToken: oauthToken))
       Task {
-        await pushNotifications.updateSubscriptions(accounts: appAccountsManager.pushAccounts)
+        pushNotifications.setAccounts(accounts: appAccountsManager.pushAccounts)
+        await pushNotifications.updateSubscriptions(forceCreate: true)
       }
       isSigninIn = false
       dismiss()
