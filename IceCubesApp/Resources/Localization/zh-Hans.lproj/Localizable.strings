@@ -173,8 +173,8 @@
 "account.follow.requested" = "已申请";
 "account.follow-request.accept" = "接受";
 "account.follow-request.reject" = "拒绝";
-"account.follow-requests.pending-requests" = "待审批";
-"account.follow-requests.instructions" = "这些用户在你接受申请前都无法看到你的嘟文";
+"account.follow-requests.pending-requests" = "待处理的申请";
+"account.follow-requests.instructions" = "在你接受之前这些都无法看到你的嘟文";
 "account.followers" = "粉丝";
 "account.following" = "关注";
 "account.list.create" = "新建一个列表";
@@ -346,11 +346,11 @@
 "status.visibility.unlisted" = "不公开";
 
 // MARK: Filters
-"filter.new" = "新建屏蔽词";
-"filter.filters" = "屏蔽词";
-"filter.edit.title" = "屏蔽词名称";
-"filter.edit.keywords" = "屏蔽关键词";
+"filter.new" = "新建过滤器";
+"filter.filters" = "过滤器";
+"filter.edit.title" = "过滤器名称";
+"filter.edit.keywords" = "关键词";
 "filter.edit.keywords.add" = "添加关键词";
-"filter.edit.contexts" = "屏蔽范围";
-"filter.edit.action" = "屏蔽词行为";
-"account.action.edit-filters" = "编辑屏蔽词";
+"filter.edit.contexts" = "过滤范围";
+"filter.edit.action" = "过滤器行为";
+"account.action.edit-filters" = "编辑过滤器";
