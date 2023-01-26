@@ -31,15 +31,15 @@
 
 // MARK: Instances
 "instance.info.domains" = "Domains";
-"instance.info.email" = "Email";
+"instance.info.email" = "E-Mail";
 "instance.info.name" = "Name";
-"instance.info.navigation-title" = "Instanz Info";
-"instance.info.posts" = "Posts";
+"instance.info.navigation-title" = "Instanz-Info";
+"instance.info.posts" = "Beiträge";
 "instance.info.section.info" = "Instanz Info";
 "instance.info.section.rules" = "Instanz-Regeln";
 "instance.info.users" = "Nutzer:innen";
 "instance.info.version" = "Version";
-"instance.list.posts-%@" = "%@ Posts";
+"instance.list.posts-%@" = "%@ Beiträge";
 "instance.list.users-%@" = "%@ Nutzer:innen";
 "instance.suggestions" = "Vorschläge";
 "instance.url" = "Instanz-URL";
@@ -64,8 +64,8 @@
 "settings.display.theme.tint" = "Akzentfarbe";
 "settings.display.theme.systemColor" = "Systemeinstellung verwenden";
 "settings.general.browser" = "Browser";
-"settings.general.browser.in-app" = "In-App Browser";
-"settings.general.browser.system" = "System Browser";
+"settings.general.browser.in-app" = "In-App-Browser";
+"settings.general.browser.system" = "Systembrowser";
 "settings.general.display" = "Anzeigeeinstellungen";
 "settings.general.instance" = "Instanz-Informationen";
 "settings.general.push-notifications" = "Push-Benachrichtigungen";
@@ -81,7 +81,7 @@
 "settings.push.polls" = "Umfrageergebnisse";
 "settings.section.accounts" = "Accounts";
 "settings.section.app" = "App";
-"settings.section.app.footer %@" = "App Version: %@";
+"settings.section.app.footer %@" = "App-Version: %@";
 "settings.section.general" = "Allgemein";
 "settings.support.alert.error.message" = "Fehler bei der Ausführung des In-App-Kaufs. Bitte versuche es erneut.";
 "settings.support.alert.message" = "Vielen Dank für dein Trinkgeld! Ich weiß es zu schätzen!";
@@ -95,24 +95,24 @@
 "settings.support.three.title" = "🤯 Großzügiges Trinkgeld";
 "settings.support.two.subtitle" = "Ich liebe den Duft eines tollen Kaffees ❤️";
 "settings.support.two.title" = "☕️ Schönes Trinkgeld";
-"settings.support.four.title" = "👽 Wahnsinns Trinkgeld";
-"settings.support.four.subtitle" = "Das wird eine große Hilfe sein Ice Cubes am Laufen zu halten!";
+"settings.support.four.title" = "👽 Wahnsinns-Trinkgeld";
+"settings.support.four.subtitle" = "Das wird eine große Hilfe sein, Ice Cubes am Laufen zu halten!";
 "settings.timeline.add" = "Lokale Timeline hinzufügen";
 "settings.title" = "Einstellungen";
 "settings.rate" = "Bewerte Ice Cubes";
 "settings.section.other" = "Anderes";
 "settings.other.hide-openai" = "Aktiviere 🤖 Helfer";
-"settings.other.social-keyboard" = "Enable Social Keyboard";
-"settings.general.content" = "Content Settings";
-"settings.content.navigation-title" = "Content Settings";
-"settings.content.use-instance-settings" = "Use server settings";
-"settings.content.main-toggle.description" = "Use the settings from your home Instance";
-"settings.content.expand-spoilers" = "Always show sensitive posts";
-"settings.content.expand-media" = "Media display";
-"settings.content.default-sensitive" = "Always mark media as sensitive";
-"settings.content.default-visibility" = "Posting visibilty";
-"settings.content.reading" = "Reading";
-"settings.content.posting" = "Posting";
+"settings.other.social-keyboard" = "Soziale Tastatur aktivieren";
+"settings.general.content" = "Inhaltseinstellungen";
+"settings.content.navigation-title" = "Inhaltseinstellungen";
+"settings.content.use-instance-settings" = "Servereinstellungen verwenden";
+"settings.content.main-toggle.description" = "Die Einstellungen von der Heiminstanz übernehmen";
+"settings.content.expand-spoilers" = "Sensible Inhalte immer zeigen";
+"settings.content.expand-media" = "Medienansicht";
+"settings.content.default-sensitive" = "Medien immer als sensibel kennzeichnen";
+"settings.content.default-visibility" = "Sichtbarkeit Beiträge";
+"settings.content.reading" = "Lesen";
+"settings.content.posting" = "Schreiben";
 
 // MARK: Tabs
 "tab.explore" = "Entdecken";
@@ -141,19 +141,19 @@
 "account.action.edit-info" = "Info bearbeiten";
 "account.action.mention" = "Erwähnen";
 "account.action.message" = "Nachricht";
-"account.action.notify-enable" = "Enable Notifications";
-"account.action.notify-disable" = "Disable Notifications";
-"account.action.reboosts-show" = "Show Boosts";
-"account.action.reboosts-hide" = "Hide Boosts";
+"account.action.notify-enable" = "Benachrichtigungen aktivieren";
+"account.action.notify-disable" = "Benachrichtigungen deaktivieren";
+"account.action.reboosts-show" = "Boosts zeigen";
+"account.action.reboosts-hide" = "Boosts verstecken";
 "account.action.block" = "Blockieren";
-"account.action.unblock" = "Block aufheben";
+"account.action.unblock" = "Blockade aufheben";
 "account.action.mute" = "Stummschalten";
 "account.action.unmute" = "Stummschaltung aufheben";
 "account.boosted-by" = "Geboostet von";
 "account.detail.about" = "Über";
 "account.detail.familiar-followers" = "Auch gefolgt von";
 "account.detail.n-fields %lld" = "%lld Felder";
-"account.detail.featured-tags-n-posts %lld" = "%lld Posts";
+"account.detail.featured-tags-n-posts %lld" = "%lld Beiträge";
 "account.edit.about" = "Über";
 "account.edit.account-settings.bot" = "Bot-Account";
 "account.edit.account-settings.discoverable" = "In Suche finden";
@@ -173,7 +173,7 @@
 "account.follow-request.accept" = "Akzeptieren";
 "account.follow-request.reject" = "Ablehnen";
 "account.follow-requests.pending-requests" = "Ausstehende Anfragen";
-"account.follow-requests.instructions" = "Diese Nutzer werden deine Posts nicht sehen bis du sie akzeptierst.";
+"account.follow-requests.instructions" = "Diese Nutzer werden deine Posts nicht sehen, bis du sie akzeptierst.";
 "account.followers" = "Follower";
 "account.following" = "Folgt";
 "account.list.create" = "Neue Liste erstellen";
@@ -198,9 +198,9 @@
 "conversations.new.message.placeholder" = "Neue Nachricht";
 
 // MARK: Package: DesignSystem
-"design.tag.n-posts-from-n-participants %lld %lld" = "%lld Posts von %lld Teilnehmer:innen";
+"design.tag.n-posts-from-n-participants %lld %lld" = "%lld Beiträge von %lld Teilnehmer:innen";
 "design.theme.navigation-title" = "Themen-Auswahl";
-"design.theme.toots-preview" = "Post Vorschau";
+"design.theme.toots-preview" = "Beitragsvorschau";
 
 // MARK: Package: Explore
 "explore.navigation-title" = "Entdecken";
@@ -239,7 +239,7 @@
 // MARK: Package: Notifications
 "notifications.empty.message" = "Benachrichtigungen? Welche Benachrichtigungen? Dein Posteingang sieht so leer aus. Bleib weiter so fantastisch! 📱😎";
 "notifications.empty.title" = "Keine Benachrichtigungen";
-"notifications.error.message" = "Beim Laden deiner Benachrichtigungen ist ein Fehler aufgetreten, bitte versuche es erneut.";
+"notifications.error.message" = "Beim Laden deiner Benachrichtigungen ist ein Fehler aufgetreten, bitte versuch es erneut.";
 "notifications.error.title" = "Ein Fehler ist aufgetreten";
 "notifications.label.favorite" = "hat favorisiert";
 "notifications.label.follow" = "folgt dir jetzt";
@@ -280,11 +280,11 @@
 "status.action.mention" = "Erwähnen";
 "status.action.message" = "Nachricht";
 "status.action.pin" = "Anheften";
-"status.action.post" = "Posten";
-"status.action.quote" = "Diesen Post zitieren";
+"status.action.post" = "Veröffentlichen";
+"status.action.quote" = "Diesen Beitrag zitieren";
 "status.action.reply" = "Antworten";
-"status.action.section.your-post" = "Dein Post";
-"status.action.share" = "Diesen Post teilen";
+"status.action.section.your-post" = "Dein Beitrag";
+"status.action.share" = "Diesen Beitrag teilen";
 "status.action.unbookmark" = "Lesezeichen entfernen";
 "status.action.unboost" = "Boost entfernen";
 "status.action.unfavorite" = "Favorit entfernen";
@@ -303,15 +303,15 @@
 "status.editor.language-select.recently-used" = "Kürzlich genutzt";
 "status.editor.media.edit-image" = "Bild bearbeiten";
 "status.editor.media.image-description" = "Bildbeschreibung";
-"status.editor.mode.edit" = "Deinen Post bearbeiten";
-"status.editor.mode.new" = "Neuer Post";
+"status.editor.mode.edit" = "Deinen Beitrag bearbeiten";
+"status.editor.mode.new" = "Neuer Beitrag";
 "status.editor.mode.quote-%@" = "Zitat von %@";
 "status.editor.mode.reply-%@" = "Antwort auf %@";
 "status.editor.restore-previous" = "Vorherigen Text wiederherstellen";
 "status.editor.spoiler" = "Spoiler-Text";
 "status.editor.text.placeholder" = "Woran denkst du?";
-"status.editor.visibility" = "Post-Sichtbarkeit";
-"status.error.loading.message" = "Beim Laden der Posts ist ein Fehler aufgetreten. Bitte versuche es erneut.";
+"status.editor.visibility" = "Sichtbarkeit";
+"status.error.loading.message" = "Beim Laden der Beiträge ist ein Fehler aufgetreten. Bitte versuche es erneut.";
 "status.error.message" = "Es ist ein Fehler aufgetreten. Bitte versuche es erneut.";
 "status.error.title" = "Ein Fehler ist aufgetreten";
 "status.filter.filtered-by-%@" = "Gefiltert von: %@";
@@ -329,7 +329,7 @@
 "status.poll.duration" = "Umfragedauer";
 "status.poll.frequency" = "Auswahlmöglichkeiten";
 "status.poll.option-n %lld" = "Option %lld";
-"status.post-from-%@" = "Post von %@";
+"status.post-from-%@" = "Beitrag von %@";
 "status.row.was-boosted" = "hat geboostet";
 "status.row.was-reply" = "Antwort auf";
 "status.row.you-boosted" = "Du hast geboostet";
@@ -345,11 +345,11 @@
 "status.visibility.unlisted" = "Ungelistet";
 
 // MARK: Filters
-"filter.new" = "New Filter";
-"filter.filters" = "Filters";
-"filter.edit.title" = "Filter title";
-"filter.edit.keywords" = "Filter Keywords";
-"filter.edit.keywords.add" = "Add a new keyword";
-"filter.edit.contexts" = "Filter Contexts";
-"filter.edit.action" = "Filter Action";
-"account.action.edit-filters" = "Edit Filters";
+"filter.new" = "Neuer Filter";
+"filter.filters" = "Filter";
+"filter.edit.title" = "Filtertitel";
+"filter.edit.keywords" = "Schlüsselwörter filtern";
+"filter.edit.keywords.add" = "Neues Wort hinzufügen";
+"filter.edit.contexts" = "Filterkontext";
+"filter.edit.action" = "Filteraktion";
+"account.action.edit-filters" = "Filter ändern";
