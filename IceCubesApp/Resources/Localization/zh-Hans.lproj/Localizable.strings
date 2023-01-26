@@ -142,10 +142,10 @@
 "account.action.edit-info" = "编辑个人资料";
 "account.action.mention" = "提及";
 "account.action.message" = "私信";
-"account.action.notify-enable" = "Enable Notifications";
-"account.action.notify-disable" = "Disable Notifications";
-"account.action.reboosts-show" = "Show Boosts";
-"account.action.reboosts-hide" = "Hide Boosts";
+"account.action.notify-enable" = "启用通知";
+"account.action.notify-disable" = "关闭通知";
+"account.action.reboosts-show" = "显示转发";
+"account.action.reboosts-hide" = "隐藏转发";
 "account.action.block" = "拉黑";
 "account.action.unblock" = "取消拉黑";
 "account.action.mute" = "免打扰";
@@ -171,10 +171,10 @@
 "account.follow.follow" = "关注";
 "account.follow.following" = "正在关注";
 "account.follow.requested" = "已申请";
-"account.follow-request.accept" = "Accept";
-"account.follow-request.reject" = "Reject";
-"account.follow-requests.pending-requests" = "Pending requests";
-"account.follow-requests.instructions" = "Those users won't see your posts until you accept them.";
+"account.follow-request.accept" = "接受";
+"account.follow-request.reject" = "拒绝";
+"account.follow-requests.pending-requests" = "待审批";
+"account.follow-requests.instructions" = "这些用户在你接受申请前都无法看到你的嘟文";
 "account.followers" = "粉丝";
 "account.following" = "关注";
 "account.list.create" = "新建一个列表";
@@ -346,11 +346,11 @@
 "status.visibility.unlisted" = "不公开";
 
 // MARK: Filters
-"filter.new" = "New Filter";
-"filter.filters" = "Filters";
-"filter.edit.title" = "Filter title";
-"filter.edit.keywords" = "Filter Keywords";
-"filter.edit.keywords.add" = "Add a new keyword";
-"filter.edit.contexts" = "Filter Contexts";
-"filter.edit.action" = "Filter Action";
-"account.action.edit-filters" = "Edit Filters";
+"filter.new" = "新建屏蔽词";
+"filter.filters" = "屏蔽词";
+"filter.edit.title" = "屏蔽词名称";
+"filter.edit.keywords" = "屏蔽关键词";
+"filter.edit.keywords.add" = "添加关键词";
+"filter.edit.contexts" = "屏蔽范围";
+"filter.edit.action" = "屏蔽词行为";
+"account.action.edit-filters" = "编辑屏蔽词";
