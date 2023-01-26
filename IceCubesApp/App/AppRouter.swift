@@ -77,6 +77,7 @@ extension View {
       case .settings:
         SettingsTabs(popToRootTab: .constant(.settings))
           .withEnvironments()
+          .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
       }
     }
   }
