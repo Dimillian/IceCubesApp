@@ -2,6 +2,7 @@ import Account
 import AppAccount
 import DesignSystem
 import Env
+import Foundation
 import Models
 import Network
 import SwiftUI
@@ -103,6 +104,9 @@ struct SettingsTabs: View {
       }
       NavigationLink(destination: ContentSettingsView()) {
         Label("settings.general.content", systemImage: "rectangle.fill.on.rectangle.fill")
+      }
+      Link(destination: URL(string: UIApplication.openSettingsURLString)!) {
+        Label("settings.system", systemImage: "gear")
       }
     }
     .listRowBackground(theme.primaryBackgroundColor)
