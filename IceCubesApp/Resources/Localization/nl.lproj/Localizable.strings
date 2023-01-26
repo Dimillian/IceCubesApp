@@ -111,6 +111,7 @@
 "settings.other.hide-openai" = "Schakel 🤖-hulp in";
 "settings.other.social-keyboard" = "Schakel social-toetsenbord in";
 "settings.general.content" = "Inhoud";
+"settings.system" = "System Settings";
 "settings.content.navigation-title" = "Inhoud";
 "settings.content.use-instance-settings" = "Gebruik serverinstellingen";
 "settings.content.main-toggle.description" = "Gebruik de instellingen van jouw thuisinstantie.";
