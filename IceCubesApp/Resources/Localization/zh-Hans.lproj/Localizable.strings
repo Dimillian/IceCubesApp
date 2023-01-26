@@ -45,10 +45,10 @@
 "instance.url" = "服务器 URL";
 
 // MARK: Menu
-"menu.new-post" = "New post";
-"menu.font" = "Font";
-"menu.font.bigger" = "Bigger";
-"menu.font.smaller" = "Smaller";
+"menu.new-post" = "新嘟文";
+"menu.font" = "字体";
+"menu.font.bigger" = "增大";
+"menu.font.smaller" = "减小";
 
 // MARK: Settings
 "settings.account.add" = "添加账户";
@@ -87,12 +87,12 @@
 "settings.push.polls" = "投票结果";
 "settings.section.accounts" = "账户";
 "settings.section.app" = "应用";
-"settings.section.app.footer %@" = "应用版本：%@";
+"settings.section.app.footer %@" = "版本：%@";
 "settings.section.general" = "通用";
 "settings.support.alert.error.message" = "应用内购买失败，请重试。";
 "settings.support.alert.message" = "非常感谢你的捐赠！";
 "settings.support.alert.title" = "谢谢！";
-"settings.support.message-from-dev" = "Hi! 我是 Thomas，我非常喜欢写开源应用。 Ice Cubes 绝对是目前为止我最骄傲的项目之一 - 说实话，由于 Mastodon 和社交媒体行业的不断变化，它也是最需要维护的项目。如果你很喜欢用 Ice Cubes，请考虑给我一些捐赠。 这真的会让我很开心 (且能鼓励我完善它)。🚀";
+"settings.support.message-from-dev" = "你好呀！我叫 Thomas，我非常喜欢写开源应用。 Ice Cubes 绝对是目前为止我最骄傲的项目之一。而且说实话，由于 Mastodon 和社交媒体世界的不断变化，它也是最需要维护的项目。如果你喜欢使用 Ice Cubes，请考虑给我一些捐赠。这真的会让我很开心 (且能鼓励我持续为你完善它)。🚀";
 "settings.support.navigation-title" = "支持 Ice Cubes";
 "settings.support.one.subtitle" = "小而可爱，而且它味道不错！";
 "settings.support.one.title" = "🍬 一点小费";
@@ -121,9 +121,9 @@
 "settings.content.reading" = "阅读设置";
 "settings.content.posting" = "发布设置";
 
-"settings.push.duplicate.title" = "Duplicate notifications fixer";
-"settings.push.duplicate.footer" = "Receiving duplicate notifications? Try this magic button in order to fix it";
-"settings.push.duplicate.button.fix" = "🪄 Fix it";
+"settings.push.duplicate.title" = "重复推送修复器";
+"settings.push.duplicate.footer" = "有收到重复推送？试试用这个魔法按钮去修复吧";
+"settings.push.duplicate.button.fix" = "🪄 修复";
 
 // MARK: Tabs
 "tab.explore" = "探索";
@@ -134,7 +134,7 @@
 "tab.settings" = "设置";
 "tab.timeline" = "时间线";
 "tab.trending" = "当下流行";
-"tab.profile" = "Profile";
+"tab.profile" = "个人主页";
 
 // MARK: Timeline
 "timeline.%@-is-valid" = "%@ 是一个可用的服务器";
@@ -165,13 +165,13 @@
 "account.detail.about" = "关联网站";
 "account.detail.familiar-followers" = "同样关注此账号的有";
 "account.detail.n-fields %lld" = "%lld 个";
-"account.detail.featured-tags-n-posts %lld" = "%lld 篇嘟文";
+"account.detail.featured-tags-n-posts %lld" = "%lld 条嘟文";
 "account.edit.about" = "关于";
 "account.edit.account-settings.bot" = "机器人账号";
 "account.edit.account-settings.discoverable" = "公开";
 "account.edit.account-settings.private" = "私密";
 "account.edit.account-settings.section-title" = "账户设置";
-"account.edit.display-name" = "公开名称";
+"account.edit.display-name" = "显示名称";
 "account.edit.error.save.message" = "保存个人资料时出错, 请重试。";
 "account.edit.error.save.title" = "保存个人资料时出错";
 "account.edit.navigation-title" = "编辑个人资料";
@@ -210,16 +210,16 @@
 "conversations.new.message.placeholder" = "新消息";
 
 // MARK: Package: DesignSystem
-"design.tag.n-posts-from-n-participants %lld %lld" = "%lld 条嘟文从 %lld 个参与者中发出";
+"design.tag.n-posts-from-n-participants %lld %lld" = "%lld 条嘟文来自 %lld 个参与者";
 "design.theme.navigation-title" = "主题选择";
 "design.theme.toots-preview" = "预览文本";
 
 // MARK: Package: Explore
 "explore.navigation-title" = "探索";
 "explore.search.message-%@" = "在此界面上，你可以搜索 %@ 上的任何信息";
-"explore.search.prompt" = "搜索用户，嘟文或者标签";
+"explore.search.prompt" = "搜索用户、嘟文或标签";
 "explore.search.title" = "搜索你的服务器";
-"explore.search.empty.message" = "无搜索结果，请尝试其它查询";
+"explore.search.empty.message" = "搜索无结果，请尝试其它查询";
 "explore.search.empty.title" = "无结果";
 "explore.section.posts" = "嘟文";
 "explore.section.suggested-users" = "推荐的用户";
@@ -251,11 +251,11 @@
 // MARK: Package: Notifications
 "notifications.empty.message" = "通知？什么通知？你的收件箱是空的。继续保持！📱😎";
 "notifications.empty.title" = "没有更早的通知";
-"notifications.error.message" = "加载通知时出错, 请重试。";
+"notifications.error.message" = "加载通知时出错，请重试。";
 "notifications.error.title" = "出现了一个错误";
 "notifications.label.favorite" = "星标";
 "notifications.label.follow" = "关注了你";
-"notifications.label.follow-request" = "关注你的申请";
+"notifications.label.follow-request" = "关注申请";
 "notifications.label.mention" = "提及了你";
 "notifications.label.poll" = "投票结束";
 "notifications.label.reblog" = "已转发";
@@ -277,7 +277,7 @@
 "timeline.federated" = "跨站";
 "timeline.home" = "主页";
 "timeline.local" = "本地";
-"timeline.n-recent-from-n-participants %lld %lld" = "%lld 个新嘟文从 %lld 个参与者";
+"timeline.n-recent-from-n-participants %lld %lld" = "最近 %lld 条嘟文来自 %lld 个参与者";
 "timeline.trending" = "当下流行";
 
 // MARK: Package: Status
