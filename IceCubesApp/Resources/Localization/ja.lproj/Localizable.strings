@@ -115,7 +115,7 @@
 "tab.settings" = "設定";
 "tab.timeline" = "タイムライン";
 "tab.trending" = "トレンド";
-"tab.profile" = "Profile";
+"tab.profile" = "プロフィール";
 
 // MARK: Timeline
 "timeline.%@-is-valid" = "%@ は有効なインスタンスです";
@@ -134,10 +134,10 @@
 "account.action.edit-info" = "プロフィールを編集";
 "account.action.mention" = "返信";
 "account.action.message" = "メッセージ";
-"account.action.notify-enable" = "Enable Notifications";
-"account.action.notify-disable" = "Disable Notifications";
-"account.action.reboosts-show" = "Show Boosts";
-"account.action.reboosts-hide" = "Hide Boosts";
+"account.action.notify-enable" = "通知を有効にする";
+"account.action.notify-disable" = "通知を無効にする";
+"account.action.reboosts-show" = "ブーストを表示する";
+"account.action.reboosts-hide" = "ブーストを表示しない";
 "account.action.block" = "ブロック";
 "account.action.unblock" = "ブロック解除";
 "account.action.mute" = "ミュート";
@@ -347,12 +347,12 @@
 "settings.content.posting" = "Posting";
 
 // MARK: Filters
-"filter.new" = "New Filter";
-"filter.filters" = "Filters";
-"filter.edit.title" = "Filter title";
-"filter.edit.keywords" = "Filter Keywords";
-"filter.edit.keywords.add" = "Add a new keyword";
-"filter.edit.contexts" = "Filter Contexts";
-"filter.edit.action" = "Filter Action";
-"account.action.edit-filters" = "Edit Filters";
-"account.action.edit-filters" = "Edit Filters";
+"filter.new" = "新しいフィルター";
+"filter.filters" = "フィルター";
+"filter.edit.title" = "フィルタータイトル";
+"filter.edit.keywords" = "フィルターするキーワード";
+"filter.edit.keywords.add" = "新しいキーワードを追加する";
+"filter.edit.contexts" = "フィルターする文章";
+"filter.edit.action" = "フィルターする";
+"account.action.edit-filters" = "フィルターを編集する";
+"account.action.edit-filters" = "フィルターを編集する";
