@@ -13,12 +13,22 @@ struct DisplaySettingsView: View {
 
   var body: some View {
     Form {
-      Section("settings.display.section.theme") {
+      Section {
         Toggle("settings.display.theme.systemColor", isOn: $theme.followSystemColorScheme)
         themeSelectorButton
-        ColorPicker("settings.display.theme.tint", selection: $theme.tintColor)
-        ColorPicker("settings.display.theme.background", selection: $theme.primaryBackgroundColor)
-        ColorPicker("settings.display.theme.secondary-background", selection: $theme.secondaryBackgroundColor)
+        Group {
+          ColorPicker("settings.display.theme.tint", selection: $theme.tintColor)
+          ColorPicker("settings.display.theme.background", selection: $theme.primaryBackgroundColor)
+          ColorPicker("settings.display.theme.secondary-background", selection: $theme.secondaryBackgroundColor)
+        }
+        .disabled(theme.followSystemColorScheme)
+        .opacity(theme.followSystemColorScheme ? 0.5 : 1.0)
+      } header: {
+        Text("settings.display.section.theme")
+      } footer: {
+        if theme.followSystemColorScheme {
+          Text("settings.display.section.theme.footer")
+        }
       }
       .listRowBackground(theme.primaryBackgroundColor)
 

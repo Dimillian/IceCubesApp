@@ -62,6 +62,7 @@
 "settings.display.restore" = "Stel opnieuw in";
 "settings.display.section.display" = "Weergave";
 "settings.display.section.theme" = "Thema";
+"settings.display.section.theme.footer" = "Custom colors can only be set if match system color scheme is disabled";
 "settings.display.status.action-buttons" = "Actieknoppen";
 "settings.display.status.media-style" = "Mediastijl";
 "settings.display.translate-button" = "Toon vertaalknop";

@@ -62,6 +62,7 @@
 "settings.display.restore" = "恢复默认设置";
 "settings.display.section.display" = "显示";
 "settings.display.section.theme" = "主题";
+"settings.display.section.theme.footer" = "Custom colors can only be set if match system color scheme is disabled";
 "settings.display.status.action-buttons" = "导航栏选项";
 "settings.display.status.media-style" = "导航栏排列";
 "settings.display.translate-button" = "显示翻译按钮";

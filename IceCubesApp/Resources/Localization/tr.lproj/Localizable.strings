@@ -62,6 +62,7 @@
 "settings.display.restore" = "Varsayılan Ayarlara Geri Döndür";
 "settings.display.section.display" = "Gösterim";
 "settings.display.section.theme" = "Tema";
+"settings.display.section.theme.footer" = "Custom colors can only be set if match system color scheme is disabled";
 "settings.display.status.action-buttons" = "Durum Aksiyon Butonları";
 "settings.display.status.media-style" = "Durum Medya Stili";
 "settings.display.translate-button" = "Çeviri Butonunu Göster";

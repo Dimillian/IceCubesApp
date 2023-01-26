@@ -62,6 +62,7 @@
 "settings.display.restore" = "Standard wiederherstellen";
 "settings.display.section.display" = "Anzeigen";
 "settings.display.section.theme" = "Design";
+"settings.display.section.theme.footer" = "Custom colors can only be set if match system color scheme is disabled";
 "settings.display.status.action-buttons" = "Status Aktions-Buttons";
 "settings.display.status.media-style" = "Status Medien";
 "settings.display.translate-button" = "Übersetzen-Button anzeigen";

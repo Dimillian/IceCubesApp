@@ -62,6 +62,7 @@
 "settings.display.restore" = "デフォルトに戻す";
 "settings.display.section.display" = "表示";
 "settings.display.section.theme" = "テーマ";
+"settings.display.section.theme.footer" = "Custom colors can only be set if match system color scheme is disabled";
 "settings.display.status.action-buttons" = "ステータスアクションボタン";
 "settings.display.status.media-style" = "ステータスメディアスタイル";
 "settings.display.translate-button" = "翻訳ボタンの表示";

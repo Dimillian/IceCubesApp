@@ -100,6 +100,7 @@ struct PushNotificationsView: View {
       } footer: {
         Text("settings.push.duplicate.footer")
       }
+      .listRowBackground(theme.primaryBackgroundColor)
 
     }
     .navigationTitle("settings.push.navigation-title")
