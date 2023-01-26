@@ -66,9 +66,13 @@ struct ConversationMessageView: View {
           if isOwnMessage {
             Spacer()
           }
-          Text(message.createdAt.asDate, style: .time)
-            .font(.scaledFootnote)
-            .foregroundColor(.gray)
+          Group {
+            Text(message.createdAt.shortDateFormatted) +
+            Text(" ")
+            Text(message.createdAt.asDate, style: .time)
+          }
+          .font(.scaledFootnote)
+          .foregroundColor(.gray)
           if !isOwnMessage {
             Spacer()
           }

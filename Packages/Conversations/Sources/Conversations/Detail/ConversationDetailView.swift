@@ -119,12 +119,17 @@ public struct ConversationDetailView: View {
         } label: {
           Image(systemName: "plus")
         }
-        .padding(.bottom, 6)
+        .padding(.bottom, 7)
 
         TextField("conversations.new.message.placeholder", text: $viewModel.newMessageText, axis: .vertical)
-          .textFieldStyle(.roundedBorder)
           .focused($isMessageFieldFocused)
           .keyboardType(.default)
+          .backgroundStyle(.thickMaterial)
+          .padding(6)
+          .overlay(
+            RoundedRectangle(cornerRadius: 14)
+              .stroke(.gray, lineWidth: 1)
+            )
           .font(.scaledBody)
         if !viewModel.newMessageText.isEmpty {
           Button {
@@ -139,7 +144,7 @@ public struct ConversationDetailView: View {
             }
           }
           .keyboardShortcut(.return, modifiers: .command)
-          .padding(.bottom, 5)
+          .padding(.bottom, 6)
         }
       }
       .padding(8)

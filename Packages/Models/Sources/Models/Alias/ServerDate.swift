@@ -19,7 +19,8 @@ extension ServerDate {
 
   private static var createdAtShortDateFormatted: DateFormatter = {
     let dateFormatter = DateFormatter()
-    dateFormatter.dateStyle = .medium
+    dateFormatter.dateStyle = .short
+    dateFormatter.timeStyle = .none
     return dateFormatter
   }()
 
@@ -32,14 +33,8 @@ extension ServerDate {
   public var relativeFormatted: String {
     return Self.createdAtRelativeFormatter.localizedString(for: asDate, relativeTo: Date())
   }
-}
-
-extension Calendar {
-  func numberOfDaysBetween(_ from: Date, and to: Date) -> Int {
-    let fromDate = startOfDay(for: from)
-    let toDate = startOfDay(for: to)
-    let numberOfDays = dateComponents([.day], from: fromDate, to: toDate)
-
-    return numberOfDays.day!
+  
+  public var shortDateFormatted: String {
+    return Self.createdAtShortDateFormatted.string(from: asDate)
   }
 }
