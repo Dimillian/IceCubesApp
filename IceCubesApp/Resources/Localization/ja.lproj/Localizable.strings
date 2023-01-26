@@ -106,6 +106,7 @@
 "settings.timeline.add" = "ローカルタイムラインの追加";
 "settings.title" = "設定";
 "settings.rate" = "Ice Cubesを評価する";
+"settings.section.other" = "その他";
 "settings.push.duplicate.title" = "Duplicate notifications fixer";
 "settings.push.duplicate.footer" = "Receiving duplicate notifications? Try this magic button in order to fix it";
 "settings.push.duplicate.button.fix" = "🪄 Fix it";
