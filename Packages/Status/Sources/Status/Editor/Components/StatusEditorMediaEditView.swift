@@ -15,7 +15,9 @@ struct StatusEditorMediaEditView: View {
     NavigationStack {
       Form {
         Section {
-          TextField("status.editor.media.image-description", text: $imageDescription, axis: .horizontal)
+          TextField("status.editor.media.image-description",
+                    text: $imageDescription,
+                    axis: .vertical)
         }
         .listRowBackground(theme.primaryBackgroundColor)
         Section {
