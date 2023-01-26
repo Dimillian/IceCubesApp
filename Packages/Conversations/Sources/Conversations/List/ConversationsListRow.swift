@@ -34,8 +34,9 @@ struct ConversationsListRow: View {
             Text(conversation.lastStatus.createdAt.relativeFormatted)
               .font(.scaledFootnote)
           }
-          Text(conversation.lastStatus.content.asRawText)
+          EmojiTextApp(conversation.lastStatus.content, emojis: conversation.lastStatus.emojis)
             .multilineTextAlignment(.leading)
+            .font(.scaledBody)
         }
         Spacer()
       }
