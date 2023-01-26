@@ -53,9 +53,7 @@ class NotificationService: UNNotificationServiceExtension {
       }
 
       bestAttemptContent.title = notification.title
-      if AppAccountsManager.shared.availableAccounts.count > 1 {
-        bestAttemptContent.subtitle = bestAttemptContent.userInfo["i"] as? String ?? ""
-      }
+      bestAttemptContent.subtitle = bestAttemptContent.userInfo["i"] as? String ?? ""
       bestAttemptContent.body = notification.body.escape()
       bestAttemptContent.userInfo["plaintext"] = plaintextData
       bestAttemptContent.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "glass.wav"))
