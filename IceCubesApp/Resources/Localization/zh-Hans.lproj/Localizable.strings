@@ -174,7 +174,7 @@
 "account.follow-request.accept" = "接受";
 "account.follow-request.reject" = "拒绝";
 "account.follow-requests.pending-requests" = "待处理的申请";
-"account.follow-requests.instructions" = "在你接受之前这些都无法看到你的嘟文";
+"account.follow-requests.instructions" = "在你接受之前这些用户都无法看到你的嘟文";
 "account.followers" = "粉丝";
 "account.following" = "关注";
 "account.list.create" = "新建一个列表";
