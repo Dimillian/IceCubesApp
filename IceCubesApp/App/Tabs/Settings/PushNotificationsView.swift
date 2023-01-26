@@ -87,6 +87,20 @@ struct PushNotificationsView: View {
         }
         .listRowBackground(theme.primaryBackgroundColor)
       }
+      
+      Section {
+        Button("settings.push.duplicate.button.fix") {
+          Task {
+            await subscription.deleteSubscription()
+            await subscription.updateSubscription(forceCreate: true)
+          }
+        }
+      } header: {
+        Text("settings.push.duplicate.title")
+      } footer: {
+        Text("settings.push.duplicate.footer")
+      }
+
     }
     .navigationTitle("settings.push.navigation-title")
     .scrollContentBackground(.hidden)

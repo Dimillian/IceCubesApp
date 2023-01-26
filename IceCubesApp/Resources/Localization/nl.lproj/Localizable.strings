@@ -119,6 +119,9 @@
 "settings.content.default-visibility" = "Standaard postzichtbaarheid";
 "settings.content.reading" = "Lezen";
 "settings.content.posting" = "Posten";
+"settings.push.duplicate.title" = "Duplicate notifications fixer";
+"settings.push.duplicate.footer" = "Receiving duplicate notifications? Try this magic button in order to fix it";
+"settings.push.duplicate.button.fix" = "🪄 Fix it";
 
 // MARK: Tabs
 "tab.explore" = "Ontdekken";

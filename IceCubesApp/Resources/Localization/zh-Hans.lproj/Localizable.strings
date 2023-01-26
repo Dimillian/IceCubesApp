@@ -121,6 +121,10 @@
 "settings.content.reading" = "阅读设置";
 "settings.content.posting" = "发布设置";
 
+"settings.push.duplicate.title" = "Duplicate notifications fixer";
+"settings.push.duplicate.footer" = "Receiving duplicate notifications? Try this magic button in order to fix it";
+"settings.push.duplicate.button.fix" = "🪄 Fix it";
+
 // MARK: Tabs
 "tab.explore" = "探索";
 "tab.federated" = "跨站";

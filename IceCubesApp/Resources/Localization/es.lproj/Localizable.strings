@@ -119,6 +119,9 @@
 "settings.content.default-visibility" = "Publicar visibilidad";
 "settings.content.reading" = "Leyendo";
 "settings.content.posting" = "Publicando";
+"settings.push.duplicate.title" = "Duplicate notifications fixer";
+"settings.push.duplicate.footer" = "Receiving duplicate notifications? Try this magic button in order to fix it";
+"settings.push.duplicate.button.fix" = "🪄 Fix it";
 "enum.expand-media.show" = "Siempre";
 "enum.expand-media.hide" = "Nunca";
 "enum.expand-media.hide-sensitive" = "Ocultar contenido sensible";
