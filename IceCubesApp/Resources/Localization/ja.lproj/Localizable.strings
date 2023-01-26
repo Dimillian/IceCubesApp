@@ -361,3 +361,7 @@
 "filter.edit.action" = "フィルターする";
 "account.action.edit-filters" = "フィルターを編集する";
 "account.action.edit-filters" = "フィルターを編集する";
+
+"enum.expand-media.show" = "Show All";
+"enum.expand-media.hide" = "Hide All";
+"enum.expand-media.hide-sensitive" = "Hide Sensitive";

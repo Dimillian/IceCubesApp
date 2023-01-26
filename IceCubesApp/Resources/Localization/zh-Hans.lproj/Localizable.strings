@@ -366,3 +366,7 @@
 "filter.edit.contexts" = "过滤范围";
 "filter.edit.action" = "过滤器行为";
 "account.action.edit-filters" = "编辑过滤器";
+
+"enum.expand-media.show" = "Show All";
+"enum.expand-media.hide" = "Hide All";
+"enum.expand-media.hide-sensitive" = "Hide Sensitive";

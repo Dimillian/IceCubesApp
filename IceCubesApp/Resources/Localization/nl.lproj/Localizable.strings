@@ -364,3 +364,7 @@
 "filter.edit.contexts" = "Filter Contexts";
 "filter.edit.action" = "Filter Actie";
 "account.action.edit-filters" = "Wijzig Filters";
+
+"enum.expand-media.show" = "Show All";
+"enum.expand-media.hide" = "Hide All";
+"enum.expand-media.hide-sensitive" = "Hide Sensitive";

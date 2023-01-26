@@ -88,6 +88,5 @@ extension View {
       .environmentObject(CurrentInstance.shared)
       .environmentObject(Theme.shared)
       .environmentObject(AppAccountsManager.shared)
-      .applyTheme(Theme.shared)
   }
 }

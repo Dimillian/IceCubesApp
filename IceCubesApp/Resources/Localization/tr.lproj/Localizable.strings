@@ -350,3 +350,7 @@
 "filter.edit.contexts" = "Filter Contexts";
 "filter.edit.action" = "Filter Action";
 "account.action.edit-filters" = "Edit Filters";
+
+"enum.expand-media.show" = "Show All";
+"enum.expand-media.hide" = "Hide All";
+"enum.expand-media.hide-sensitive" = "Hide Sensitive";

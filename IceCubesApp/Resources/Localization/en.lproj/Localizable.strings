@@ -93,7 +93,7 @@
 "settings.content.expand-spoilers" = "Always show sensitive posts";
 "settings.content.expand-media" = "Media display";
 "settings.content.default-sensitive" = "Always mark media as sensitive";
-"settings.content.default-visibility" = "Posting visibilty";
+"settings.content.default-visibility" = "Posting visibility";
 "settings.content.reading" = "Reading";
 "settings.content.posting" = "Posting";
 "enum.expand-media.show" = "Show All";
