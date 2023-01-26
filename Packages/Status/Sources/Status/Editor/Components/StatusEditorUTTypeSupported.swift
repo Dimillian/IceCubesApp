@@ -17,14 +17,15 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
   case movie = "public.movie"
   case mp4 = "public.mpeg-4"
   case gif = "public.gif"
+  case quickTimeMovie = "com.apple.quicktime-movie"
 
   static func types() -> [UTType] {
-    [.url, .text, .plainText, .image, .jpeg, .png, .video, .mpeg4Movie, .gif, .movie]
+    [.url, .text, .plainText, .image, .jpeg, .png, .video, .mpeg4Movie, .gif, .movie, .quickTimeMovie]
   }
 
   var isVideo: Bool {
     switch self {
-    case .video, .movie, .mp4, .gif:
+    case .video, .movie, .mp4, .gif, .quickTimeMovie:
       return true
     default:
       return false
