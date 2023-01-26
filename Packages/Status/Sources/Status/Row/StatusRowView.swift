@@ -62,6 +62,7 @@ public struct StatusRowView: View {
           }
         }
       }
+      .background(theme.primaryBackgroundColor)
       .onAppear {
         if reasons.isEmpty {
           viewModel.client = client
