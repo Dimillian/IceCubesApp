@@ -47,7 +47,7 @@ struct TimelineTab: View {
       Task {
         await currentAccount.fetchLists()
       }
-      if !client.isAuth && UIDevice.current.userInterfaceIdiom == .phone {
+      if !client.isAuth {
         routerPath.presentedSheet = .addAccount
       }
     }

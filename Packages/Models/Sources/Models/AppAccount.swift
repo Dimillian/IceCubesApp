@@ -10,7 +10,7 @@ public struct AppAccount: Codable, Identifiable, Hashable {
     if let oauthToken {
       return "\(server):\(oauthToken.createdAt)"
     } else {
-      return "\(server):anonymous:\(Date().timeIntervalSince1970)"
+      return "\(server):anonymous"
     }
   }
   
