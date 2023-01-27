@@ -105,6 +105,16 @@ public class RouterPath: ObservableObject {
         await navigateToAccountFrom(acct: acct, url: url)
       }
       return .handled
+    } else if let client = client,
+              client.isAuth,
+              client.hasConnection(with: url),
+              let id = Int(url.lastPathComponent) {
+      if url.absoluteString.contains(client.server) {
+        navigate(to: .statusDetail(id: String(id)))
+      } else {
+        navigate(to: .remoteStatusDetail(url: url))
+      }
+      return .handled
     }
     return urlHandler?(url) ?? .systemAction
   }

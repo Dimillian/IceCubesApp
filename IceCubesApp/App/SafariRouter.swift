@@ -19,7 +19,12 @@ private struct SafariRouter: ViewModifier {
   func body(content: Content) -> some View {
     content
       .environment(\.openURL, OpenURLAction { url in
+        // Open internal URL.
         routerPath.handle(url: url)
+      })
+      .onOpenURL(perform: { url in
+        // Open external URL (from icecubesapp://
+        _ = routerPath.handle(url: url)
       })
       .onAppear {
         routerPath.urlHandler = { url in
