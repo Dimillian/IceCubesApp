@@ -63,7 +63,7 @@
 "settings.display.restore" = "Stel opnieuw in";
 "settings.display.section.display" = "Weergave";
 "settings.display.section.theme" = "Thema";
-"settings.display.section.theme.footer" = "Custom colors can only be set if match system color scheme is disabled";
+"settings.display.section.theme.footer" = "Kleuren kunnen alleen worden ingesteld als het kleurenschema niet automatisch het kleurenschema van het systeem volgt";
 "settings.display.status.action-buttons" = "Actieknoppen";
 "settings.display.status.media-style" = "Mediastijl";
 "settings.display.translate-button" = "Toon vertaalknop";
@@ -118,12 +118,12 @@
 "settings.content.main-toggle.description" = "Gebruik de instellingen van jouw thuisinstantie.";
 "settings.content.expand-spoilers" = "Toon gevoelige posts altijd";
 "settings.content.expand-media" = "Mediaweergave";
-"settings.content.default-sensitive" = "Markeer media altijd als gevoelig";
+"settings.content.default-sensitive" = "Markeer media standaard als gevoelig";
 "settings.content.default-visibility" = "Standaard postzichtbaarheid";
 "settings.content.reading" = "Lezen";
 "settings.content.posting" = "Posten";
-"settings.push.duplicate.title" = "Dubbele meldingen oplosser";
-"settings.push.duplicate.footer" = "Ontvang je dubbele meldingen? Gebruik deze magische knop om het op te lossen";
+"settings.push.duplicate.title" = "Dubbele meldingen";
+"settings.push.duplicate.footer" = "Ontvang je dubbele meldingen? Gebruik deze magische knop om dit probleem te verhelpen";
 "settings.push.duplicate.button.fix" = "🪄 Los op";
 
 // MARK: Tabs
@@ -185,8 +185,8 @@
 "account.follow.requested" = "Verzocht";
 "account.follow-request.accept" = "Accepteer";
 "account.follow-request.reject" = "Weiger";
-"account.follow-requests.pending-requests" = "Pending requests";
-"account.follow-requests.instructions" = "Deze gebruikers zie je berichten niet totdat je hun volgverzoek accepteert.";
+"account.follow-requests.pending-requests" = "verzoeken";
+"account.follow-requests.instructions" = "Deze gebruikers zien je berichten niet totdat je hun volgverzoek accepteert";
 "account.followers" = "Volgers";
 "account.following" = "Volgend";
 "account.list.create" = "Maak een nieuwe lijst";
@@ -198,8 +198,8 @@
 "account.posts" = "Posts";
 "account.relation.follows-you" = "Volgt jou";
 "account.joined" = "Lid geworden";
-"account.action.logout" = "Logout account";
-"account.action.edit-filters" = "Edit Filters";
+"account.action.logout" = "Log uit";
+"account.action.edit-filters" = "Bewerk filters";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Verwijder";
@@ -322,7 +322,7 @@
 "status.editor.mode.new" = "Nieuwe post";
 "status.editor.mode.quote-%@" = "Citaat van %@";
 "status.editor.mode.reply-%@" = "Antwoord aan %@";
-"status.editor.restore-previous" = "Vorige tekst herstellen";
+"status.editor.restore-previous" = "Herstel vorige tekst";
 "status.editor.spoiler" = "Spoilertekst";
 "status.editor.text.placeholder" = "Waar denk je aan?";
 "status.editor.visibility" = "Zichtbaarheid";
