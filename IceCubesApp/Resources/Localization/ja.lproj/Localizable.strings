@@ -341,6 +341,7 @@
 "status.visibility.public" = "全員";
 "status.visibility.unlisted" = "リスト外";
 "settings.general.content" = "コンテンツ設定";
+"settings.system" = "System Settings";
 "settings.content.navigation-title" = "コンテンツ設定";
 "settings.content.use-instance-settings" = "サーバー設定を使用する";
 "settings.content.main-toggle.description" = "ホームインスタンスの設定を使用する";

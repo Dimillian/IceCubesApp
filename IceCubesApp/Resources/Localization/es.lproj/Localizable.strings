@@ -111,6 +111,7 @@
 "settings.other.hide-openai" = "Activar ayudante 🤖";
 "settings.other.social-keyboard" = "Activar teclado social";
 "settings.general.content" = "Ajustes de contenido";
+"settings.system" = "System Settings";
 "settings.content.navigation-title" = "Ajustes de contenido";
 "settings.content.use-instance-settings" = "Usar ajustes del servidor";
 "settings.content.main-toggle.description" = "Usar ajustes de tu instancia inicial";

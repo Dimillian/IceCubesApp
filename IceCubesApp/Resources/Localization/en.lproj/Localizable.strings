@@ -87,6 +87,7 @@
 "settings.push.new-posts" = "New Posts";
 "settings.push.polls" = "Poll Results";
 "settings.general.content" = "Content Settings";
+"settings.system" = "System Settings";
 "settings.content.navigation-title" = "Content Settings";
 "settings.content.use-instance-settings" = "Use server settings";
 "settings.content.main-toggle.description" = "Use the settings from your home Instance";
