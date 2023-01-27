@@ -203,7 +203,14 @@ public class Client: ObservableObject, Equatable {
     request.httpBody = httpBody as Data
     let (data, httpResponse) = try await urlSession.data(for: request)
     logResponseOnError(httpResponse: httpResponse, data: data)
-    return try decoder.decode(Entity.self, from: data)
+    do {
+      return try decoder.decode(Entity.self, from: data)
+    } catch {
+      if let serverError = try? decoder.decode(ServerError.self, from: data) {
+        throw serverError
+      }
+      throw error
+    }
   }
 
   private func logResponseOnError(httpResponse: URLResponse, data: Data) {

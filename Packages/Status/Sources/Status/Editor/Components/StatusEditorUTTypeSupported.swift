@@ -3,6 +3,7 @@ import PhotosUI
 import SwiftUI
 import UIKit
 import UniformTypeIdentifiers
+import AVFoundation
 
 @MainActor
 enum StatusEditorUTTypeSupported: String, CaseIterable {
@@ -70,7 +71,25 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
 }
 
 struct MovieFileTranseferable: Transferable {
-  let url: URL
+  private let url: URL
+  var compressedVideoURL: URL? {
+    get async {
+      return await withCheckedContinuation { continuation in
+        let urlAsset = AVURLAsset(url: url, options: nil)
+        guard let exportSession = AVAssetExportSession(asset: urlAsset, presetName: AVAssetExportPresetMediumQuality) else {
+          continuation.resume(returning: nil)
+          return
+        }
+        let outputURL = URL.temporaryDirectory.appending(path: "\(UUID().uuidString).\(url.pathExtension)")
+        exportSession.outputURL = outputURL
+        exportSession.outputFileType = .mp4
+        exportSession.shouldOptimizeForNetworkUse = true
+        exportSession.exportAsynchronously { () -> Void in
+          continuation.resume(returning: outputURL)
+        }
+      }
+    }
+  }
 
   static var transferRepresentation: some TransferRepresentation {
     FileRepresentation(contentType: .movie) { movie in

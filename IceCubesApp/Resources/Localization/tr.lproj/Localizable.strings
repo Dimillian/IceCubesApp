@@ -4,6 +4,7 @@
 "action.save"  = "Kaydet";
 "action.done" = "Tamamlandı";
 "action.retry" = "Yeniden Dene";
+"action.view.error" = "View error";
 
 "alert.button.ok" = "Tamam";
 "alert.error" = "Hata!";

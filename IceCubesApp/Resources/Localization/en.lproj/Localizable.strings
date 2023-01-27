@@ -4,6 +4,7 @@
 "action.save"  = "Save";
 "action.done" = "Done";
 "action.retry" = "Retry";
+"action.view.error" = "View error";
 
 "alert.button.ok" = "OK";
 "alert.error" = "Error!";

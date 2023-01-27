@@ -52,9 +52,11 @@ public class StatusEditorViewModel: ObservableObject {
       if selectedMedias.count > 4 {
         selectedMedias = selectedMedias.prefix(4).map { $0 }
       }
+      isMediasLoading = true
       inflateSelectedMedias()
     }
   }
+  @Published var isMediasLoading: Bool = false
 
   @Published var mediasImages: [StatusEditorMediaContainer] = []
   @Published var replyToStatus: Status?
@@ -490,6 +492,7 @@ public class StatusEditorViewModel: ObservableObject {
   }
 
   private func processMediasToUpload() {
+    isMediasLoading = false
     uploadTask?.cancel()
     let mediasCopy = mediasImages
     uploadTask = Task {
@@ -522,7 +525,7 @@ public class StatusEditorViewModel: ObservableObject {
             if let uploadedMedia, uploadedMedia.url == nil {
               scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
             }
-          } else if let videoURL = originalContainer.movieTransferable?.url,
+          } else if let videoURL = await originalContainer.movieTransferable?.compressedVideoURL,
                     let data = try? Data(contentsOf: videoURL)
           {
             let uploadedMedia = try await uploadMedia(data: data, mimeType: videoURL.mimeType())

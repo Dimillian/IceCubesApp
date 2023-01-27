@@ -4,6 +4,7 @@
 "action.save"  = "保存";
 "action.done" = "完成";
 "action.retry" = "重试";
+"action.view.error" = "View error";
 
 "alert.button.ok" = "OK";
 "alert.error" = "错误！";
