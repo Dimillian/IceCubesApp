@@ -4,7 +4,7 @@
 "action.save"  = "Salva";
 "action.done" = "Fatto";
 "action.retry" = "Riprova";
-"action.view.error" = "View error";
+"action.view.error" = "Errore di visualizzazione";
 
 "alert.button.ok" = "Ok";
 "alert.error" = "Errore!";
@@ -112,7 +112,7 @@
 "settings.other.hide-openai" = "Abilita l'aiuto del 🤖";
 "settings.other.social-keyboard" = "Abilita social keyboard";
 "settings.general.content" = "Impostazioni dei contenuti";
-"settings.system" = "System Settings";
+"settings.system" = "Vai alle impostazioni di sistema";
 "settings.content.navigation-title" = "Impostazioni dei contenuti";
 "settings.content.use-instance-settings" = "Utilizza le impostazioni del server";
 "settings.content.main-toggle.description" = "Utilizza le impostazioni provenienti dalla tua istanza Mastodon";
