@@ -18,5 +18,21 @@
 			<string>%lld novas postagens</string>
 		</dict>
 	</dict>
+	<key>notifications-others-count %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@noficationsOthersCount@</string>
+		<key>noficationsOthersCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string> e %lld outro </string>
+			<key>other</key>
+			<string> e %lld outros </string>
+		</dict>
+	</dict>
 </dict>
 </plist>

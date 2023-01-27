@@ -4,6 +4,7 @@
 "action.save"  = "Salvar";
 "action.done" = "Feito";
 "action.retry" = "Tentar novamente";
+"action.view.error" = "Ver erro";
 
 "alert.button.ok" = "OK";
 "alert.error" = "Erro!";
@@ -200,6 +201,7 @@
 "account.posts" = "Postagens";
 "account.relation.follows-you" = "Seguiu Você";
 "account.joined" = "Entrou em";
+"account.action.logout" = "Sair da conta";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Excluir";
