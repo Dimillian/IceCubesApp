@@ -368,7 +368,7 @@ public struct StatusRowView: View {
   @ViewBuilder
   private func makeCardView(status: AnyStatus) -> some View {
     if let card = status.card,
-       viewModel.embeddedStatus?.url != status.card?.url,
+       status.content.statusesURLs.isEmpty,
        status.mediaAttachments.isEmpty,
        !viewModel.isEmbedLoading,
        theme.statusDisplayStyle == .large
@@ -384,6 +384,7 @@ public struct StatusRowView: View {
          let embed = viewModel.embeddedStatus
       {
         StatusEmbeddedView(status: embed)
+          .fixedSize(horizontal: false, vertical: true)
       } else if viewModel.isEmbedLoading, !viewModel.isCompact {
         StatusEmbeddedView(status: .placeholder())
           .redacted(reason: .placeholder)

@@ -183,6 +183,7 @@ public struct StatusMediaPreviewView: View {
       case .gifv, .video, .audio:
         if let url = attachment.url {
           VideoPlayerView(viewModel: .init(url: url))
+            .frame(maxWidth: isNotifications ? imageMaxHeight : nil)
             .frame(height: imageMaxHeight)
         }
       case .none:

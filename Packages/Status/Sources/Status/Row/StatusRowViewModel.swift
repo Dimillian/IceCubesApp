@@ -20,7 +20,7 @@ public class StatusRowViewModel: ObservableObject {
   @Published var repliesCount: Int
   @Published var embeddedStatus: Status?
   @Published var displaySpoiler: Bool = false
-  @Published var isEmbedLoading: Bool = true
+  @Published var isEmbedLoading: Bool = false
   @Published var isFiltered: Bool = false
 
   @Published var translation: String?
@@ -73,6 +73,7 @@ public class StatusRowViewModel: ObservableObject {
 
   func loadEmbeddedStatus() async {
     guard let client,
+          embeddedStatus == nil,
           !status.content.statusesURLs.isEmpty,
           let url = status.content.statusesURLs.first,
           client.hasConnection(with: url)
@@ -81,9 +82,7 @@ public class StatusRowViewModel: ObservableObject {
       return
     }
     do {
-      withAnimation {
-        isEmbedLoading = true
-      }
+      isEmbedLoading = true
       var embed: Status?
       if url.absoluteString.contains(client.server), let id = Int(url.lastPathComponent) {
         embed = try await client.get(endpoint: Statuses.status(id: String(id)))
