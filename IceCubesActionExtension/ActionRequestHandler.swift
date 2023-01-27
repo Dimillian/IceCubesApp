@@ -9,6 +9,9 @@ import UIKit
 import MobileCoreServices
 import UniformTypeIdentifiers
 
+import Models
+import Network
+
 // Sample code was sending this from a thread to another, let asume @Sendable for this
 extension NSExtensionContext: @unchecked Sendable { }
 
@@ -17,6 +20,7 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
         case inputProviderNotFound
         case loadedItemHasWrongType
         case urlNotFound
+        case noHost
         case notMastodonInstance
     }
 
@@ -25,11 +29,12 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
         Task {
             do {
                 let url = try await url(from: context)
-                guard try await url.isMastodonInstance() else {
+                guard await url.isMastodonInstance else {
                     throw Error.notMastodonInstance
                 }
                 await MainActor.run {
-                    let output = output(wrapping: url.iceCubesAppDeepLink)
+                    let deeplink = url.iceCubesAppDeepLink
+                    let output = output(wrapping: deeplink)
                     context.completeRequest(returningItems: output)
                 }
             } catch {
@@ -42,19 +47,24 @@ class ActionRequestHandler: NSObject, NSExtensionRequestHandling {
 }
 
 extension URL {
-    func isMastodonInstance() async throws -> Bool {
-        let host = host()!
-        let url = URL(string: "https://\(host)/api/v2/instance")!
-        let request = URLRequest(url: url)
-        let (_, response) = try await URLSession(configuration: .default).data(for: request)
-        guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-            return false
+    var isMastodonInstance: Bool {
+        get async {
+            do {
+                guard let host = host() else {
+                    throw ActionRequestHandler.Error.noHost
+                }
+                let _: Instance = try await Client(server: host).get(endpoint: Instances.instance)
+                return true
+            } catch {
+                return false
+            }
         }
-        return true
     }
 
     var iceCubesAppDeepLink: URL {
-        URL(string: absoluteString.replacing("https://", with: "icecubesapp://"))!
+        var components = URLComponents(url: self, resolvingAgainstBaseURL: false)!
+        components.scheme = AppInfo.scheme.trimmingCharacters(in: [":", "/"])
+        return components.url!
     }
 }
 
