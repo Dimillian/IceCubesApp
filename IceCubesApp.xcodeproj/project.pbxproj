@@ -126,6 +126,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		56B5BC132984206F00CF3A98 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "pt-BR"; path = "pt-BR.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
+		56B5BC142984206F00CF3A98 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		639CDF9B296AC82F00C35E58 /* SafariRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariRouter.swift; sourceTree = "<group>"; };
 		7429BCE3297C55D00069A946 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		7429BCE7297C5D010069A946 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = nl; path = nl.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
@@ -596,6 +598,7 @@
 				ja,
 				tr,
 				fr,
+				"pt-BR",
 			);
 			mainGroup = 9FBFE630292A715500C250E9;
 			packageReferences = (
@@ -751,6 +754,7 @@
 				9F7D9391297FA50400EE6B7A /* ja */,
 				9F7D939B2980F5C100EE6B7A /* tr */,
 				9FB143D329842BB200A27BB1 /* fr */,
+				56B5BC132984206F00CF3A98 /* pt-BR */,
 			);
 			name = Localizable.stringsdict;
 			sourceTree = "<group>";
@@ -775,6 +779,7 @@
 				9F7D9392297FA50400EE6B7A /* ja */,
 				9F7D939C2980F5C200EE6B7A /* tr */,
 				9FB143D429842BB200A27BB1 /* fr */,
+				56B5BC142984206F00CF3A98 /* pt-BR */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
