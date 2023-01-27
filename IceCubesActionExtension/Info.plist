@@ -21,15 +21,7 @@
 			</dict>
 			<key>NSExtensionJavaScriptPreprocessingFile</key>
 			<string>Action</string>
-			<key>NSExtensionServiceAllowsFinderPreviewItem</key>
-			<true/>
-			<key>NSExtensionServiceAllowsTouchBarItem</key>
-			<true/>
 			<key>NSExtensionServiceFinderPreviewIconName</key>
-			<string>NSActionTemplate</string>
-			<key>NSExtensionServiceTouchBarBezelColorName</key>
-			<string>TouchBarBezel</string>
-			<key>NSExtensionServiceTouchBarIconName</key>
 			<string>NSActionTemplate</string>
 		</dict>
 		<key>NSExtensionPointIdentifier</key>

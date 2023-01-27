@@ -76,7 +76,6 @@
 		E92817FC298443D600875FD1 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = E92817FB298443D600875FD1 /* Network */; };
 		E9B576C329743F4C00BCE646 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E9B576C529743F4C00BCE646 /* Localizable.strings */; };
 		E9DF41FC29830FEC0003AAD2 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9DF41FB29830FEC0003AAD2 /* UniformTypeIdentifiers.framework */; };
-		E9DF41FF29830FEC0003AAD2 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9DF41FE29830FEC0003AAD2 /* Media.xcassets */; };
 		E9DF420129830FEC0003AAD2 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DF420029830FEC0003AAD2 /* ActionRequestHandler.swift */; };
 		E9DF420329830FEC0003AAD2 /* Action.js in Resources */ = {isa = PBXBuildFile; fileRef = E9DF420229830FEC0003AAD2 /* Action.js */; };
 		E9DF420729830FEC0003AAD2 /* IceCubesActionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E9DF41FA29830FEC0003AAD2 /* IceCubesActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -196,7 +195,6 @@
 		E9B576CC2974AAAF00BCE646 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E9DF41FA29830FEC0003AAD2 /* IceCubesActionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IceCubesActionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9DF41FB29830FEC0003AAD2 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
-		E9DF41FE29830FEC0003AAD2 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		E9DF420029830FEC0003AAD2 /* ActionRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionRequestHandler.swift; sourceTree = "<group>"; };
 		E9DF420229830FEC0003AAD2 /* Action.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Action.js; sourceTree = "<group>"; };
 		E9DF420429830FEC0003AAD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -432,7 +430,6 @@
 		E9DF41FD29830FEC0003AAD2 /* IceCubesActionExtension */ = {
 			isa = PBXGroup;
 			children = (
-				E9DF41FE29830FEC0003AAD2 /* Media.xcassets */,
 				E9DF420029830FEC0003AAD2 /* ActionRequestHandler.swift */,
 				E9DF420229830FEC0003AAD2 /* Action.js */,
 				E9DF420429830FEC0003AAD2 /* Info.plist */,
@@ -645,7 +642,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9DF420329830FEC0003AAD2 /* Action.js in Resources */,
-				E9DF41FF29830FEC0003AAD2 /* Media.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
