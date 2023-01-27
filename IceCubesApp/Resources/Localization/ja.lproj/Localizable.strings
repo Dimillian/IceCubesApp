@@ -4,6 +4,7 @@
 "action.save"  = "保存";
 "action.done" = "完了";
 "action.retry" = "リトライ";
+"action.view.error" = "View error";
 
 "alert.button.ok" = "OK";
 "alert.error" = "エラー！";
@@ -183,6 +184,7 @@
 "account.posts" = "投稿";
 "account.relation.follows-you" = "あなたをフォローしている";
 "account.joined" = "追加した";
+"account.action.logout" = "Logout account";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "削除";
@@ -341,6 +343,7 @@
 "status.visibility.public" = "全員";
 "status.visibility.unlisted" = "リスト外";
 "settings.general.content" = "コンテンツ設定";
+"settings.system" = "System Settings";
 "settings.content.navigation-title" = "コンテンツ設定";
 "settings.content.use-instance-settings" = "サーバー設定を使用する";
 "settings.content.main-toggle.description" = "ホームインスタンスの設定を使用する";
@@ -367,3 +370,7 @@
 "filter.contexts.profiles" = "Profiles";
 "filter.action.warning" = "Hide with a warning";
 "filter.action.hide" = "Hide completely";
+
+"enum.expand-media.show" = "Show All";
+"enum.expand-media.hide" = "Hide All";
+"enum.expand-media.hide-sensitive" = "Hide Sensitive";

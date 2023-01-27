@@ -4,6 +4,7 @@
 "action.save"  = "Salva";
 "action.done" = "Fatto";
 "action.retry" = "Riprova";
+"action.view.error" = "View error";
 
 "alert.button.ok" = "Ok";
 "alert.error" = "Errore!";
@@ -62,7 +63,7 @@
 "settings.display.restore" = "Ripristina i valori predefiniti";
 "settings.display.section.display" = "Visualizzazione";
 "settings.display.section.theme" = "Tema";
-"settings.display.section.theme.footer" = "Custom colors can only be set if match system color scheme is disabled";
+"settings.display.section.theme.footer" = "I colori personalizzati possono essere impostati solo se i colori di sistema sono disabilitati";
 "settings.display.status.action-buttons" = "Bottoni di azione";
 "settings.display.status.media-style" = "Stile dei media";
 "settings.display.translate-button" = "Mostra bottone per la traduzione";
@@ -111,6 +112,7 @@
 "settings.other.hide-openai" = "Abilita l'aiuto del 🤖";
 "settings.other.social-keyboard" = "Abilita social keyboard";
 "settings.general.content" = "Impostazioni dei contenuti";
+"settings.system" = "System Settings";
 "settings.content.navigation-title" = "Impostazioni dei contenuti";
 "settings.content.use-instance-settings" = "Utilizza le impostazioni del server";
 "settings.content.main-toggle.description" = "Utilizza le impostazioni provenienti dalla tua istanza Mastodon";
@@ -199,6 +201,7 @@
 "account.posts" = "Post";
 "account.relation.follows-you" = "Ti segue";
 "account.joined" = "Si è unito il giorno";
+"account.action.logout" = "Logout account";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Cancella";

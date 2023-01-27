@@ -23,12 +23,12 @@ struct AccountSettingsView: View {
   var body: some View {
     Form {
       Section {
-        Label("Edit profile", systemImage: "pencil")
+        Label("account.action.edit-info", systemImage: "pencil")
           .onTapGesture {
             isEditingAccount = true
           }
         if currentInstance.isFiltersSupported {
-          Label("Edit Filters", systemImage: "line.3.horizontal.decrease.circle")
+          Label("account.action.edit-filters", systemImage: "line.3.horizontal.decrease.circle")
             .onTapGesture {
               isEditingFilters = true
             }
@@ -52,7 +52,7 @@ struct AccountSettingsView: View {
             }
           }
         } label: {
-          Text("Logout account")
+          Text("account.action.logout")
         }
 
       }

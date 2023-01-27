@@ -24,7 +24,11 @@ struct StatusEditorAccessoryView: View {
       HStack(alignment: .center, spacing: 16) {
         PhotosPicker(selection: $viewModel.selectedMedias,
                      matching: .any(of: [.images, .videos])) {
-          Image(systemName: "photo.fill.on.rectangle.fill")
+          if viewModel.isMediasLoading {
+            ProgressView()
+          } else {
+            Image(systemName: "photo.fill.on.rectangle.fill")
+          }
         }
         .disabled(viewModel.showPoll)
 

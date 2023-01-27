@@ -4,6 +4,7 @@
 "action.save"  = "Opslaan";
 "action.done" = "Gereed";
 "action.retry" = "Opnieuw";
+"action.view.error" = "View error";
 
 "alert.button.ok" = "OK";
 "alert.error" = "Fout!";
@@ -111,6 +112,7 @@
 "settings.other.hide-openai" = "Schakel 🤖-hulp in";
 "settings.other.social-keyboard" = "Schakel social-toetsenbord in";
 "settings.general.content" = "Inhoud";
+"settings.system" = "System Settings";
 "settings.content.navigation-title" = "Inhoud";
 "settings.content.use-instance-settings" = "Gebruik serverinstellingen";
 "settings.content.main-toggle.description" = "Gebruik de instellingen van jouw thuisinstantie.";
@@ -196,6 +198,7 @@
 "account.posts" = "Posts";
 "account.relation.follows-you" = "Volgt jou";
 "account.joined" = "Lid geworden";
+"account.action.logout" = "Logout account";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Verwijder";
@@ -371,3 +374,7 @@
 "filter.contexts.profiles" = "Profiles";
 "filter.action.warning" = "Hide with a warning";
 "filter.action.hide" = "Hide completely";
+
+"enum.expand-media.show" = "Show All";
+"enum.expand-media.hide" = "Hide All";
+"enum.expand-media.hide-sensitive" = "Hide Sensitive";

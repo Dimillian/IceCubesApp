@@ -4,6 +4,7 @@
 "action.save"  = "Kaydet";
 "action.done" = "Tamamlandı";
 "action.retry" = "Yeniden Dene";
+"action.view.error" = "View error";
 
 "alert.button.ok" = "Tamam";
 "alert.error" = "Hata!";
@@ -182,6 +183,7 @@
 "account.posts" = "Gönderiler";
 "account.relation.follows-you" = "Seni takip ediyor";
 "account.joined" = "Katılındı";
+"account.action.logout" = "Logout account";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Sil";
@@ -357,3 +359,7 @@
 "filter.contexts.profiles" = "Profiles";
 "filter.action.warning" = "Hide with a warning";
 "filter.action.hide" = "Hide completely";
+
+"enum.expand-media.show" = "Show All";
+"enum.expand-media.hide" = "Hide All";
+"enum.expand-media.hide-sensitive" = "Hide Sensitive";

@@ -9,6 +9,8 @@ struct StatusEditorMediaView: View {
   @EnvironmentObject private var theme: Theme
   @ObservedObject var viewModel: StatusEditorViewModel
   @State private var editingContainer: StatusEditorMediaContainer?
+  
+  @State private var isErrorDisplayed: Bool = false
 
   var body: some View {
     ScrollView(.horizontal, showsIndicators: false) {
@@ -24,6 +26,8 @@ struct StatusEditorMediaView: View {
                 makeLocalImage(container: container)
               } else if container.movieTransferable != nil {
                 makeVideoAttachement(container: container)
+              } else if let error = container.error as? ServerError {
+                makeErrorView(error: error)
               }
               if container.mediaAttachment?.description?.isEmpty == false {
                 altMarker
@@ -121,15 +125,24 @@ struct StatusEditorMediaView: View {
 
   @ViewBuilder
   private func makeImageMenu(container: StatusEditorMediaContainer) -> some View {
-    if !viewModel.mode.isEditing {
+    if container.mediaAttachment != nil {
+      if !viewModel.mode.isEditing {
+        Button {
+          editingContainer = container
+        } label: {
+          Label(container.mediaAttachment?.description?.isEmpty == false ?
+            "status.editor.description.edit" : "status.editor.description.add",
+            systemImage: "pencil.line")
+        }
+      }
+    } else if container.error != nil {
       Button {
-        editingContainer = container
+        isErrorDisplayed = true
       } label: {
-        Label(container.mediaAttachment?.description?.isEmpty == false ?
-          "status.editor.description.edit" : "status.editor.description.add",
-          systemImage: "pencil.line")
+        Label("action.view.error", systemImage: "exclamationmark.triangle")
       }
     }
+    
     Button(role: .destructive) {
       withAnimation {
         viewModel.mediasImages.removeAll(where: { $0.id == container.id })
@@ -137,6 +150,20 @@ struct StatusEditorMediaView: View {
     } label: {
       Label("action.delete", systemImage: "trash")
     }
+  }
+  
+  private func makeErrorView(error: ServerError) -> some View {
+    ZStack {
+      placeholderView
+      Text("alert.error")
+        .foregroundColor(.red)
+    }
+    .alert("alert.error", isPresented: $isErrorDisplayed) {
+      Button("Ok", action: { })
+    } message: {
+      Text(error.error ?? "")
+    }
+
   }
 
   private var altMarker: some View {

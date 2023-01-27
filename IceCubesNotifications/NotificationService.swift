@@ -56,7 +56,7 @@ class NotificationService: UNNotificationServiceExtension {
       bestAttemptContent.subtitle = bestAttemptContent.userInfo["i"] as? String ?? ""
       bestAttemptContent.body = notification.body.escape()
       bestAttemptContent.userInfo["plaintext"] = plaintextData
-      bestAttemptContent.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "glass.wav"))
+      bestAttemptContent.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "glass.caf"))
 
       let preferences = UserPreferences.shared
       preferences.pushNotificationsCount += 1

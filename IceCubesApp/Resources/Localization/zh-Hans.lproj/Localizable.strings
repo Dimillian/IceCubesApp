@@ -4,6 +4,7 @@
 "action.save"  = "保存";
 "action.done" = "完成";
 "action.retry" = "重试";
+"action.view.error" = "View error";
 
 "alert.button.ok" = "OK";
 "alert.error" = "错误！";
@@ -62,7 +63,7 @@
 "settings.display.restore" = "恢复默认设置";
 "settings.display.section.display" = "显示";
 "settings.display.section.theme" = "主题";
-"settings.display.section.theme.footer" = "Custom colors can only be set if match system color scheme is disabled";
+"settings.display.section.theme.footer" = "只有在“匹配系统”关闭时才能设置自定义颜色";
 "settings.display.status.action-buttons" = "导航栏选项";
 "settings.display.status.media-style" = "导航栏排列";
 "settings.display.translate-button" = "显示翻译按钮";
@@ -93,7 +94,7 @@
 "settings.support.alert.error.message" = "应用内购买失败，请重试。";
 "settings.support.alert.message" = "非常感谢你的捐赠！";
 "settings.support.alert.title" = "谢谢！";
-"settings.support.message-from-dev" = "你好呀！我叫 Thomas，我非常喜欢写开源应用。 Ice Cubes 绝对是目前为止我最骄傲的项目之一。而且说实话，由于 Mastodon 和社交媒体世界的不断变化，它也是最需要维护的项目。如果你喜欢使用 Ice Cubes，请考虑给我一些捐赠。这真的会让我很开心 (且能鼓励我持续为你完善它)。🚀";
+"settings.support.message-from-dev" = "你好呀！我叫 Thomas，我非常喜欢写开源应用。Ice Cubes 绝对是目前为止我最骄傲的项目之一。而且说实话，由于 Mastodon 和社交媒体世界的不断变化，它也是最需要维护的项目。如果你喜欢使用 Ice Cubes，请考虑给我一些捐赠。这真的会让我很开心 (且能鼓励我持续为你完善它)。🚀";
 "settings.support.navigation-title" = "支持 Ice Cubes";
 "settings.support.one.subtitle" = "小而可爱，而且它味道不错！";
 "settings.support.one.title" = "🍬 一点小费";
@@ -112,6 +113,7 @@
 "settings.other.social-keyboard" = "启用社交键盘";
 
 "settings.general.content" = "内容设置";
+"settings.system" = "System Settings";
 "settings.content.navigation-title" = "内容设置";
 "settings.content.use-instance-settings" = "使用服务器设置";
 "settings.content.main-toggle.description" = "使用你主服务器的设置";
@@ -122,8 +124,8 @@
 "settings.content.reading" = "阅读设置";
 "settings.content.posting" = "发布设置";
 
-"settings.push.duplicate.title" = "重复推送修复器";
-"settings.push.duplicate.footer" = "有收到重复推送？试试用这个魔法按钮去修复吧";
+"settings.push.duplicate.title" = "重复推送通知修复器";
+"settings.push.duplicate.footer" = "有收到重复的推送通知？试试用这个魔法按钮去修复吧";
 "settings.push.duplicate.button.fix" = "🪄 修复";
 
 // MARK: Tabs
@@ -158,8 +160,8 @@
 "account.action.notify-disable" = "关闭通知";
 "account.action.reboosts-show" = "显示转发";
 "account.action.reboosts-hide" = "隐藏转发";
-"account.action.block" = "拉黑";
-"account.action.unblock" = "取消拉黑";
+"account.action.block" = "屏蔽";
+"account.action.unblock" = "取消屏蔽";
 "account.action.mute" = "免打扰";
 "account.action.unmute" = "取消免打扰";
 "account.boosted-by" = "转发";
@@ -198,11 +200,12 @@
 "account.posts" = "嘟文";
 "account.relation.follows-you" = "关注你的人";
 "account.joined" = "加入于";
+"account.action.logout" = "Logout account";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "删除";
 "conversations.action.mark-read" = "标记为已读";
-"conversations.empty.message" = "正在社交媒体上寻找乐趣? 你所有的私信和单独提及都在这里。 聊得开心! 📱❤️";
+"conversations.empty.message" = "正在社交媒体上寻找乐趣？你所有的私信和单独提及都在这里。聊得开心！📱❤️";
 "conversations.empty.title" = "收件箱为空";
 "conversations.error.button" = "重试";
 "conversations.error.message" = "加载私信时出错";
@@ -373,3 +376,7 @@
 "filter.contexts.profiles" = "Profiles";
 "filter.action.warning" = "Hide with a warning";
 "filter.action.hide" = "Hide completely";
+
+"enum.expand-media.show" = "显示所有";
+"enum.expand-media.hide" = "隐藏所有";
+"enum.expand-media.hide-sensitive" = "隐藏敏感内容";

@@ -4,6 +4,7 @@
 "action.save"  = "Guardar";
 "action.done" = "Hecho";
 "action.retry" = "Reintentar";
+"action.view.error" = "Ver error";
 
 "alert.button.ok" = "Ok";
 "alert.error" = "¡Error!";
@@ -111,6 +112,7 @@
 "settings.other.hide-openai" = "Activar ayudante 🤖";
 "settings.other.social-keyboard" = "Activar teclado social";
 "settings.general.content" = "Ajustes de contenido";
+"settings.system" = "Ajustes del sistema";
 "settings.content.navigation-title" = "Ajustes de contenido";
 "settings.content.use-instance-settings" = "Usar ajustes del servidor";
 "settings.content.main-toggle.description" = "Usar ajustes de tu instancia inicial";
@@ -199,6 +201,7 @@
 "account.posts" = "Publicaciones";
 "account.relation.follows-you" = "Te sigue";
 "account.joined" = "Se unió el";
+"account.action.logout" = "Cerrar sesión";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Borrar";
