@@ -13,7 +13,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string>%lld new post</string>
+			<string>%lld 个新嘟文</string>
 			<key>other</key>
 			<string>%lld 个新嘟文</string>
 		</dict>
@@ -29,9 +29,9 @@
             <key>NSStringFormatValueTypeKey</key>
             <string>lld</string>
             <key>one</key>
-            <string> and %lld other </string>
+            <string> 和其它 %lld 个用户 </string>
             <key>other</key>
-            <string> and %lld others </string>
+            <string> 和其它 %lld 个用户 </string>
         </dict>
     </dict>
 </dict>
