@@ -201,12 +201,8 @@
 "account.posts" = "Post";
 "account.relation.follows-you" = "Ti segue";
 "account.joined" = "Si è unito il giorno";
-<<<<<<< HEAD
-"account.action.logout" = "Logout account";
-=======
 "account.action.logout" = "Esci dall'account";
 "account.action.edit-filters" = "Modifica i Filtri";
->>>>>>> main
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Cancella";
