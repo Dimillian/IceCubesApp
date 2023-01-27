@@ -14,27 +14,23 @@ struct NotificationRowView: View {
   let notification: ConsolidatedNotification
 
   var body: some View {
-    if let type = notification.type {
-      HStack(alignment: .top, spacing: 8) {
-        if notification.accounts.count == 1 {
-          makeAvatarView(type: type)
-        } else {
-          makeNotificationIconView(type: type)
-            .frame(width: AvatarView.Size.status.size.width,
-                   height: AvatarView.Size.status.size.height)
-        }
-        VStack(alignment: .leading, spacing: 2) {
-          makeMainLabel(type: type)
-          makeContent(type: type)
-          if type == .follow_request,
-             currentAccount.followRequests.map(\.id).contains(notification.accounts[0].id)
-          {
-            FollowRequestButtons(account: notification.accounts[0])
-          }
+    HStack(alignment: .top, spacing: 8) {
+      if notification.accounts.count == 1 {
+        makeAvatarView(type: notification.type)
+      } else {
+        makeNotificationIconView(type: notification.type)
+          .frame(width: AvatarView.Size.status.size.width,
+                 height: AvatarView.Size.status.size.height)
+      }
+      VStack(alignment: .leading, spacing: 2) {
+        makeMainLabel(type: notification.type)
+        makeContent(type: notification.type)
+        if notification.type == .follow_request,
+           currentAccount.followRequests.map(\.id).contains(notification.accounts[0].id)
+        {
+          FollowRequestButtons(account: notification.accounts[0])
         }
       }
-    } else {
-      EmptyView()
     }
   }
 

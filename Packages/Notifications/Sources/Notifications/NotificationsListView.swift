@@ -99,16 +99,14 @@ public struct NotificationsListView: View {
                   title: "notifications.empty.title",
                   message: "notifications.empty.message")
       } else {
-        ForEach(notifications.consolidated()) { notification in
-          if notification.type != nil {
-            NotificationRowView(notification: notification)
-              .padding(.leading, .layoutPadding + 4)
-              .padding(.trailing, .layoutPadding)
-              .padding(.top, 6)
-              .padding(.bottom, 2)
-            Divider()
-              .padding(.vertical, .dividerPadding)
-          }
+        ForEach(notifications) { notification in
+          NotificationRowView(notification: notification)
+            .padding(.leading, .layoutPadding + 4)
+            .padding(.trailing, .layoutPadding)
+            .padding(.top, 6)
+            .padding(.bottom, 2)
+          Divider()
+            .padding(.vertical, .dividerPadding)
         }
       }
 

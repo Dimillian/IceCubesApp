@@ -11,7 +11,7 @@ class NotificationsViewModel: ObservableObject {
     }
 
     case loading
-    case display(notifications: [Models.Notification], nextPageState: State.PagingState)
+    case display(notifications: [ConsolidatedNotification], nextPageState: State.PagingState)
     case error(error: Error)
   }
 
@@ -23,7 +23,7 @@ class NotificationsViewModel: ObservableObject {
   var client: Client? {
     didSet {
       if oldValue != client {
-        notifications = []
+        consolidatedNotifications = []
       }
     }
   }
@@ -32,7 +32,7 @@ class NotificationsViewModel: ObservableObject {
   @Published var selectedType: Models.Notification.NotificationType? {
     didSet {
       if oldValue != selectedType {
-        notifications = []
+        consolidatedNotifications = []
         Task {
           await fetchNotifications()
         }
@@ -49,32 +49,34 @@ class NotificationsViewModel: ObservableObject {
     return nil
   }
 
-  private var notifications: [Models.Notification] = []
+  private var consolidatedNotifications: [ConsolidatedNotification] = []
 
   func fetchNotifications() async {
     guard let client else { return }
     do {
       var nextPageState: State.PagingState = .hasNextPage
-      if notifications.isEmpty {
+      if consolidatedNotifications.isEmpty {
         state = .loading
-        notifications = try await client.get(endpoint: Notifications.notifications(sinceId: nil,
-                                                                                   maxId: nil,
-                                                                                   types: queryTypes))
+        let notifications: [Models.Notification] =
+          try await client.get(endpoint: Notifications.notifications(sinceId: nil,
+                                                                     maxId: nil,
+                                                                     types: queryTypes))
+        consolidatedNotifications = notifications.consolidated()
         nextPageState = notifications.count < 15 ? .none : .hasNextPage
-      } else if let first = notifications.first {
+      } else if let first = consolidatedNotifications.first {
         var newNotifications: [Models.Notification] =
           try await client.get(endpoint: Notifications.notifications(sinceId: first.id,
                                                                      maxId: nil,
                                                                      types: queryTypes))
-        nextPageState = notifications.count < 15 ? .none : .hasNextPage
+        nextPageState = consolidatedNotifications.notificationCount < 15 ? .none : .hasNextPage
         newNotifications = newNotifications.filter { notification in
-          !notifications.contains(where: { $0.id == notification.id })
+          !consolidatedNotifications.contains(where: { $0.id == notification.id })
         }
-        notifications.insert(contentsOf: newNotifications, at: 0)
+        consolidatedNotifications.insert(contentsOf: newNotifications.consolidated(), at: 0)
       }
       withAnimation {
-        state = .display(notifications: notifications,
-                         nextPageState: notifications.isEmpty ? .none : nextPageState)
+        state = .display(notifications: consolidatedNotifications,
+                         nextPageState: consolidatedNotifications.isEmpty ? .none : nextPageState)
       }
     } catch {
       state = .error(error: error)
@@ -84,14 +86,14 @@ class NotificationsViewModel: ObservableObject {
   func fetchNextPage() async {
     guard let client else { return }
     do {
-      guard let lastId = notifications.last?.id else { return }
-      state = .display(notifications: notifications, nextPageState: .loadingNextPage)
+      guard let lastId = consolidatedNotifications.last?.id else { return }
+      state = .display(notifications: consolidatedNotifications, nextPageState: .loadingNextPage)
       let newNotifications: [Models.Notification] =
         try await client.get(endpoint: Notifications.notifications(sinceId: nil,
                                                                    maxId: lastId,
                                                                    types: queryTypes))
-      notifications.append(contentsOf: newNotifications)
-      state = .display(notifications: notifications, nextPageState: newNotifications.count < 15 ? .none : .hasNextPage)
+      consolidatedNotifications.append(contentsOf: newNotifications.consolidated())
+      state = .display(notifications: consolidatedNotifications, nextPageState: newNotifications.count < 15 ? .none : .hasNextPage)
     } catch {
       state = .error(error: error)
     }
@@ -106,21 +108,23 @@ class NotificationsViewModel: ObservableObject {
 
   func handleEvent(event: any StreamEvent) {
     if let event = event as? StreamEventNotification,
-       !notifications.contains(where: { $0.id == event.notification.id })
+       !consolidatedNotifications.contains(where: { $0.id == event.notification.id })
     {
       if let selectedType, event.notification.type == selectedType.rawValue {
-        notifications.insert(event.notification, at: 0)
+        consolidatedNotifications.insert(contentsOf: [event.notification].consolidated(),
+                                         at: 0)
       } else if selectedType == nil {
-        notifications.insert(event.notification, at: 0)
+        consolidatedNotifications.insert(contentsOf: [event.notification].consolidated(),
+                                         at: 0)
       }
-      state = .display(notifications: notifications, nextPageState: .hasNextPage)
+      state = .display(notifications: consolidatedNotifications, nextPageState: .hasNextPage)
     }
   }
 }
 
 struct ConsolidatedNotification: Identifiable {
   let id: String
-  let type: Models.Notification.NotificationType?
+  let type: Models.Notification.NotificationType
   let createdAt: ServerDate
   let accounts: [Account]
   let status: Status?
@@ -138,23 +142,31 @@ struct ConsolidatedNotification: Identifiable {
   }
 }
 
-struct ConsolidatedNotificationGroup: Hashable {
-  let type: String
-  let uniqueId: String
-}
-
 extension Array where Element == Models.Notification {
   func consolidated() -> [ConsolidatedNotification] {
-    Dictionary(grouping: self) {
-      ConsolidatedNotificationGroup(type: $0.type,
-                                    uniqueId: $0.status?.id ?? $0.account.id)
+    Dictionary(grouping: self) { notification -> String? in
+      guard let supportedType = notification.supportedType else { return nil }
+
+      switch supportedType {
+      case .follow:
+        // Always group followers
+        return supportedType.rawValue
+      case .reblog, .favourite:
+        // Group boosts and favourites by status
+        return "\(supportedType.rawValue)-\(notification.status?.id ?? "")"
+      case .follow_request, .poll, .status, .update, .mention:
+        // Never group those
+        return notification.id
+      }
     }
     .values
     .compactMap { notifications in
-      guard let notification = notifications.first else { return nil }
+      guard let notification = notifications.first,
+            let supportedType = notification.supportedType
+      else { return nil }
 
       return ConsolidatedNotification(id: notification.id,
-                                      type: notification.supportedType,
+                                      type: supportedType,
                                       createdAt: notification.createdAt,
                                       accounts: notifications.map(\.account),
                                       status: notification.status)
@@ -162,5 +174,11 @@ extension Array where Element == Models.Notification {
     .sorted {
       $0.createdAt > $1.createdAt
     }
+  }
+}
+
+extension Array where Element == ConsolidatedNotification {
+  var notificationCount: Int {
+    reduce(0) { $0 + ($1.accounts.isEmpty ? 1 : $1.accounts.count) }
   }
 }
