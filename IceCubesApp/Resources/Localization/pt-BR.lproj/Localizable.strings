@@ -346,7 +346,7 @@
 "status.poll.option-n %lld" = "Opção %lld";
 "status.post-from-%@" = "Postar de %@";
 "status.row.was-boosted" = "deu boost";
-"status.row.was-reply" = "Responder a";
+"status.row.was-reply" = "Respondeu a";
 "status.row.you-boosted" = "Você deu boost";
 "status.show-less" = "Exibir menos";
 "status.show-more" = "Exibir mais";
