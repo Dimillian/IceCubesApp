@@ -4,7 +4,7 @@
 "action.save"  = "Opslaan";
 "action.done" = "Gereed";
 "action.retry" = "Opnieuw";
-"action.view.error" = "View error";
+"action.view.error" = "Bekijk fout";
 
 "alert.button.ok" = "OK";
 "alert.error" = "Fout!";
