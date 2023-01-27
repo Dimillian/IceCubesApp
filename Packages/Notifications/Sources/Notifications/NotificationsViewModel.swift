@@ -117,3 +117,50 @@ class NotificationsViewModel: ObservableObject {
     }
   }
 }
+
+struct ConsolidatedNotification: Identifiable {
+  let id: String
+  let type: Models.Notification.NotificationType?
+  let createdAt: ServerDate
+  let accounts: [Account]
+  let status: Status?
+
+  static func placeholder() -> ConsolidatedNotification {
+    .init(id: UUID().uuidString,
+          type: .favourite,
+          createdAt: "2022-12-16T10:20:54.000Z",
+          accounts: [.placeholder()],
+          status: .placeholder())
+  }
+
+  static func placeholders() -> [ConsolidatedNotification] {
+    [.placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder()]
+  }
+}
+
+struct ConsolidatedNotificationGroup: Hashable {
+  let type: String
+  let uniqueId: String
+}
+
+extension Array where Element == Models.Notification {
+  func consolidated() -> [ConsolidatedNotification] {
+    Dictionary(grouping: self) {
+      ConsolidatedNotificationGroup(type: $0.type,
+                                    uniqueId: $0.status?.id ?? $0.account.id)
+    }
+    .values
+    .compactMap { notifications in
+      guard let notification = notifications.first else { return nil }
+
+      return ConsolidatedNotification(id: notification.id,
+                                      type: notification.supportedType,
+                                      createdAt: notification.createdAt,
+                                      accounts: notifications.map(\.account),
+                                      status: notification.status)
+    }
+    .sorted {
+      $0.createdAt > $1.createdAt
+    }
+  }
+}

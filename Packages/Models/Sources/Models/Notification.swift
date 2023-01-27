@@ -14,16 +14,4 @@ public struct Notification: Decodable, Identifiable {
   public var supportedType: NotificationType? {
     .init(rawValue: type)
   }
-
-  public static func placeholder() -> Notification {
-    .init(id: UUID().uuidString,
-          type: NotificationType.favourite.rawValue,
-          createdAt: "2022-12-16T10:20:54.000Z",
-          account: .placeholder(),
-          status: .placeholder())
-  }
-
-  public static func placeholders() -> [Notification] {
-    [.placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder()]
-  }
 }
