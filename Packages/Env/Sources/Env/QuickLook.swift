@@ -11,7 +11,9 @@ public class QuickLook: ObservableObject {
   public init() {}
 
   public func prepareFor(urls: [URL], selectedURL: URL) async {
-    withAnimation {
+    var transaction = Transaction(animation: .default)
+    transaction.disablesAnimations = true
+    withTransaction(transaction) {
       isPreparing = true
     }
     do {
@@ -27,18 +29,18 @@ public class QuickLook: ObservableObject {
         }
         return paths
       })
-      self.urls = paths
-      url = paths.first(where: { $0.lastPathComponent == selectedURL.lastPathComponent })
-      withAnimation {
+      withTransaction(transaction) {
+        self.urls = paths
+        url = paths.first(where: { $0.lastPathComponent == selectedURL.lastPathComponent })
         isPreparing = false
       }
     } catch {
-      withAnimation {
+      withTransaction(transaction) {
         isPreparing = false
+        self.urls = []
+        url = nil
+        latestError = error
       }
-      self.urls = []
-      url = nil
-      latestError = error
     }
   }
 

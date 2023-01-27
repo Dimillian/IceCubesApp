@@ -53,9 +53,10 @@ struct IceCubesApp: App {
         .environmentObject(theme)
         .environmentObject(watcher)
         .environmentObject(PushNotificationsService.shared)
-        .sheet(item: $quickLook.url, content: { url in
+        .fullScreenCover(item: $quickLook.url, content: { url in
           QuickLookPreview(selectedURL: url, urls: quickLook.urls)
             .edgesIgnoringSafeArea(.bottom)
+            .background(TransparentBackground())
         })
     }
     .commands {

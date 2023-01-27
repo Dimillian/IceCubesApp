@@ -12,61 +12,81 @@ struct QuickLookPreview: UIViewControllerRepresentable {
   let selectedURL: URL
   let urls: [URL]
 
-  func makeUIViewController(context: Context) -> UINavigationController {
-    let controller = AppQLPreviewController()
-    controller.dataSource = context.coordinator
-    controller.delegate = context.coordinator
-    let nav = UINavigationController(rootViewController: controller)
-    return nav
+  func makeUIViewController(context: Context) -> UIViewController {
+    return AppQLPreviewController(selectedURL: selectedURL, urls: urls)
   }
 
   func updateUIViewController(
-    _: UINavigationController, context _: Context
+    _: UIViewController, context _: Context
   ) {}
+}
 
-  func makeCoordinator() -> Coordinator {
-    return Coordinator(parent: self)
+class AppQLPreviewController: UIViewController {
+  let selectedURL: URL
+  let urls: [URL]
+  
+  var qlController : QLPreviewController?
+  
+  init(selectedURL: URL, urls: [URL]) {
+    self.selectedURL = selectedURL
+    self.urls = urls
+    super.init(nibName: nil, bundle: nil)
   }
-
-  class Coordinator: NSObject, QLPreviewControllerDataSource, QLPreviewControllerDelegate {
-    let parent: QuickLookPreview
-
-    init(parent: QuickLookPreview) {
-      self.parent = parent
-    }
-
-    func numberOfPreviewItems(in _: QLPreviewController) -> Int {
-      return parent.urls.count
-    }
-
-    func previewController(_: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
-      return parent.urls[index] as QLPreviewItem
-    }
-
-    func previewController(_: QLPreviewController, editingModeFor _: QLPreviewItem) -> QLPreviewItemEditingMode {
-      .createCopy
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    if self.qlController == nil {
+      self.qlController = QLPreviewController()
+      self.qlController?.dataSource = self
+      self.qlController?.delegate = self
+      self.qlController?.currentPreviewItemIndex = urls.firstIndex(of: selectedURL) ?? 0
+      self.present(self.qlController!, animated: true)
     }
   }
 }
 
-class AppQLPreviewController: QLPreviewController {
-  private var closeButton: UIBarButtonItem {
-    .init(
-      title: NSLocalizedString("action.done", comment: ""),
-      style: .plain,
-      target: self,
-      action: #selector(onCloseButton)
-    )
+extension AppQLPreviewController : QLPreviewControllerDataSource {
+  func numberOfPreviewItems(in _: QLPreviewController) -> Int {
+    return self.urls.count
   }
 
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-    if UIDevice.current.userInterfaceIdiom != .pad {
-      navigationItem.rightBarButtonItem = closeButton
+  func previewController(_: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+    return self.urls[index] as QLPreviewItem
+  }
+}
+
+extension AppQLPreviewController : QLPreviewControllerDelegate {
+  func previewController(_: QLPreviewController, editingModeFor _: QLPreviewItem) -> QLPreviewItemEditingMode {
+    .createCopy
+  }
+
+  func previewControllerWillDismiss(_ controller: QLPreviewController) {
+    self.dismiss(animated: true)
+  }
+}
+
+struct TransparentBackground: UIViewControllerRepresentable {
+  public func makeUIViewController(context: Context) -> UIViewController {
+    return TransparentController()
+  }
+  
+  public func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+  }
+  
+  class TransparentController: UIViewController {
+    override func viewDidLoad() {
+      super.viewDidLoad()
+      view.backgroundColor = .clear
     }
-  }
-
-  @objc private func onCloseButton() {
-    dismiss(animated: true)
+    
+    override func willMove(toParent parent: UIViewController?) {
+      super.willMove(toParent: parent)
+      parent?.view?.backgroundColor = .clear
+      parent?.modalPresentationStyle = .overCurrentContext
+    }
   }
 }
