@@ -92,7 +92,7 @@ struct PushNotificationsView: View {
         Button("settings.push.duplicate.button.fix") {
           Task {
             await subscription.deleteSubscription()
-            await subscription.updateSubscription(forceCreate: true)
+            await subscription.updateSubscription()
           }
         }
       } header: {
@@ -113,7 +113,7 @@ struct PushNotificationsView: View {
 
   private func updateSubscription() {
     Task {
-      await subscription.updateSubscription(forceCreate: true)
+      await subscription.updateSubscription()
     }
   }
   

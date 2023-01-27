@@ -64,7 +64,12 @@ public class PushNotificationsService: ObservableObject {
       await withTaskGroup(of: Void.self, body: { group in
         group.addTask {
           await subscription.fetchSubscription()
-          await subscription.updateSubscription(forceCreate: forceCreate)
+          if await subscription.subscription != nil && !forceCreate {
+            await subscription.deleteSubscription()
+            await subscription.updateSubscription()
+          } else if forceCreate {
+            await subscription.updateSubscription()
+          }
         }
       })
     }
@@ -159,8 +164,8 @@ public class PushNotificationSubscriptionSettings: ObservableObject {
     }
   }
   
-  public func updateSubscription(forceCreate: Bool) async {
-    guard let pushToken = pushToken, subscription != nil || forceCreate else { return }
+  public func updateSubscription() async {
+    guard let pushToken = pushToken else { return }
     let client = Client(server: account.server, oauthToken: account.token)
     do {
       var listenerURL = PushNotificationsService.Constants.endpoint
