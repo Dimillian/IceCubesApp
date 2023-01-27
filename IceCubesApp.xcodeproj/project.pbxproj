@@ -169,6 +169,8 @@
 		9FAD85CE2975B68900496AB1 /* SideBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarView.swift; sourceTree = "<group>"; };
 		9FAE4AC8293774FF00772766 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9FAE4ACA293783B000772766 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
+		9FB143D329842BB200A27BB1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = fr; path = fr.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		9FB143D429842BB200A27BB1 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9FBFE639292A715500C250E9 /* IceCubesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IceCubesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FBFE63C292A715500C250E9 /* IceCubesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceCubesApp.swift; sourceTree = "<group>"; };
 		9FBFE642292A715600C250E9 /* IceCubesApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IceCubesApp.entitlements; sourceTree = "<group>"; };
@@ -520,6 +522,7 @@
 				it,
 				ja,
 				tr,
+				fr,
 			);
 			mainGroup = 9FBFE630292A715500C250E9;
 			packageReferences = (
@@ -650,6 +653,7 @@
 				7429BCEC297D65390069A946 /* it */,
 				9F7D9391297FA50400EE6B7A /* ja */,
 				9F7D939B2980F5C100EE6B7A /* tr */,
+				9FB143D329842BB200A27BB1 /* fr */,
 			);
 			name = Localizable.stringsdict;
 			sourceTree = "<group>";
@@ -665,6 +669,7 @@
 				9F38C233297D03120018F11E /* it */,
 				9F7D9392297FA50400EE6B7A /* ja */,
 				9F7D939C2980F5C200EE6B7A /* tr */,
+				9FB143D429842BB200A27BB1 /* fr */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
