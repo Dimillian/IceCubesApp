@@ -182,6 +182,7 @@
 "account.posts" = "Gönderiler";
 "account.relation.follows-you" = "Seni takip ediyor";
 "account.joined" = "Katılındı";
+"account.action.logout" = "Logout account";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Sil";

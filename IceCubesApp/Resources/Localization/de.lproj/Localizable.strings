@@ -201,6 +201,8 @@
 "account.posts" = "Posts";
 "account.relation.follows-you" = "Folgt dir";
 "account.joined" = "Beigetreten";
+"account.action.logout" = "Logout account";
+"account.action.edit-filters" = "Edit Filters";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Löschen";

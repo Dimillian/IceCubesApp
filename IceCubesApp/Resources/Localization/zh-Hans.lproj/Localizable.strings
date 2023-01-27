@@ -199,6 +199,8 @@
 "account.posts" = "嘟文";
 "account.relation.follows-you" = "关注你的人";
 "account.joined" = "加入于";
+"account.action.logout" = "Logout account";
+"account.action.edit-filters" = "Edit Filters";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "删除";

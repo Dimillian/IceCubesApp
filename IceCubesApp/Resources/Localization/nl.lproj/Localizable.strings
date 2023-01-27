@@ -197,6 +197,8 @@
 "account.posts" = "Posts";
 "account.relation.follows-you" = "Volgt jou";
 "account.joined" = "Lid geworden";
+"account.action.logout" = "Logout account";
+"account.action.edit-filters" = "Edit Filters";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Verwijder";

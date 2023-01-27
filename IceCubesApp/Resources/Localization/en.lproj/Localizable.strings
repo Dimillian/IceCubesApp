@@ -200,6 +200,7 @@
 "account.posts" = "Posts";
 "account.relation.follows-you" = "Follows You";
 "account.joined" = "Joined";
+"account.action.logout" = "Logout account";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Delete";
