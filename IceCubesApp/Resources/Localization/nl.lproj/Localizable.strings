@@ -154,12 +154,12 @@
 "account.action.edit-info" = "Bewerken";
 "account.action.mention" = "Vermelden";
 "account.action.message" = "Bericht sturen";
-"account.action.notify-enable" = "Enable Notifications";
-"account.action.notify-disable" = "Disable Notifications";
-"account.action.reboosts-show" = "Show Boosts";
-"account.action.reboosts-hide" = "Hide Boosts";
-"account.action.block" = "Blokkeren";
-"account.action.unblock" = "Deblokkeren";
+"account.action.notify-enable" = "Schakel meldingen in";
+"account.action.notify-disable" = "Schakel meldingen uit";
+"account.action.reboosts-show" = "Toon boosts";
+"account.action.reboosts-hide" = "Verberg boosts";
+"account.action.block" = "Blokkeer";
+"account.action.unblock" = "Deblokkeer";
 "account.action.mute" = "Dempen";
 "account.action.unmute" = "Dempen opheffen";
 "account.boosted-by" = "Geboost door";
@@ -185,7 +185,7 @@
 "account.follow.requested" = "Verzocht";
 "account.follow-request.accept" = "Accepteer";
 "account.follow-request.reject" = "Weiger";
-"account.follow-requests.pending-requests" = "verzoeken";
+"account.follow-requests.pending-requests" = "Inkomende volgverzoeken";
 "account.follow-requests.instructions" = "Deze gebruikers zien je berichten niet totdat je hun volgverzoek accepteert";
 "account.followers" = "Volgers";
 "account.following" = "Volgend";
