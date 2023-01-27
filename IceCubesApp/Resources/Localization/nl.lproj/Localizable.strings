@@ -46,7 +46,7 @@
 "instance.url" = "Instantie-URL";
 
 // MARK: Menu
-"menu.new-post" = "Nieuw bericht";
+"menu.new-post" = "Nieuwe post";
 "menu.font" = "Lettertype";
 "menu.font.bigger" = "Groter";
 "menu.font.smaller" = "Kleiner";
@@ -106,11 +106,11 @@
 "settings.support.two.title" = "☕️ Goeie fooi";
 "settings.support.four.title" = "👽 Wie ben jij-fooi";
 "settings.support.four.subtitle" = "Daarmee kan Ice Cubes nog een tijdje vooruit!";
-"settings.timeline.add" = "Een lokale tijdlijn toevoegen";
+"settings.timeline.add" = "Lokale tijdlijn toevoegen";
 "settings.title" = "Instellingen";
 "settings.section.other" = "Overig";
-"settings.other.hide-openai" = "Schakel 🤖-hulp in";
-"settings.other.social-keyboard" = "Schakel social-toetsenbord in";
+"settings.other.hide-openai" = "Gebruik 🤖-hulp";
+"settings.other.social-keyboard" = "Gebruik socialmedia-toetsenbord";
 "settings.general.content" = "Inhoud";
 "settings.system" = "System Settings";
 "settings.content.navigation-title" = "Inhoud";
@@ -261,7 +261,7 @@
 "notifications.label.follow-request" = "wil je volgen";
 "notifications.label.mention" = "heeft jou vermeld";
 "notifications.label.poll" = "poll beëindigd";
-"notifications.label.reblog" = "geboost";
+"notifications.label.reblog" = "boostte";
 "notifications.label.status" = "nieuwe status";
 "notifications.label.update" = "wijzigde een post";
 "notifications.menu-title.favorite" = "Favoriet";
