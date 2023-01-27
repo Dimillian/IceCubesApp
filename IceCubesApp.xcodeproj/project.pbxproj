@@ -75,6 +75,7 @@
 		E92817FA298443D600875FD1 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = E92817F9298443D600875FD1 /* Models */; };
 		E92817FC298443D600875FD1 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = E92817FB298443D600875FD1 /* Network */; };
 		E92817FE29844DB700875FD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E92817FD29844DB700875FD1 /* Assets.xcassets */; };
+		E970C10829845A9400E88A8C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E970C10A29845A9400E88A8C /* InfoPlist.strings */; };
 		E9B576C329743F4C00BCE646 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E9B576C529743F4C00BCE646 /* Localizable.strings */; };
 		E9DF41FC29830FEC0003AAD2 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9DF41FB29830FEC0003AAD2 /* UniformTypeIdentifiers.framework */; };
 		E9DF420129830FEC0003AAD2 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DF420029830FEC0003AAD2 /* ActionRequestHandler.swift */; };
@@ -193,6 +194,7 @@
 		C9B22676297F6C2E001F9EFE /* ContentSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSettingsView.swift; sourceTree = "<group>"; };
 		DD31E2E5297FB68B00A4BE29 /* IceCubesApp.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = IceCubesApp.xcconfig; sourceTree = "<group>"; };
 		E92817FD29844DB700875FD1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E970C10929845A9400E88A8C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E9B576C429743F4C00BCE646 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E9B576CC2974AAAF00BCE646 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E9DF41FA29830FEC0003AAD2 /* IceCubesActionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IceCubesActionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -436,6 +438,7 @@
 				E9DF420229830FEC0003AAD2 /* Action.js */,
 				E9DF420429830FEC0003AAD2 /* Info.plist */,
 				E92817FD29844DB700875FD1 /* Assets.xcassets */,
+				E970C10A29845A9400E88A8C /* InfoPlist.strings */,
 			);
 			path = IceCubesActionExtension;
 			sourceTree = "<group>";
@@ -645,6 +648,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E92817FE29844DB700875FD1 /* Assets.xcassets in Resources */,
+				E970C10829845A9400E88A8C /* InfoPlist.strings in Resources */,
 				E9DF420329830FEC0003AAD2 /* Action.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -741,6 +745,14 @@
 				9F7D939B2980F5C100EE6B7A /* tr */,
 			);
 			name = Localizable.stringsdict;
+			sourceTree = "<group>";
+		};
+		E970C10A29845A9400E88A8C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E970C10929845A9400E88A8C /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		E9B576C529743F4C00BCE646 /* Localizable.strings */ = {
