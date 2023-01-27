@@ -1,0 +1,372 @@
+// MARK: Common strings
+"action.cancel" = "Cancel";
+"action.delete" = "Delete";
+"action.save"  = "Save";
+"action.done" = "Done";
+"action.retry" = "Retry";
+"action.view.error" = "View error";
+
+"alert.button.ok" = "OK";
+"alert.error" = "Error!";
+
+"placeholder.loading.long" = "Loading, loading, loading ...";
+"placeholder.loading.short" = "Loading ...";
+
+"see-more" = "See more";
+
+// MARK: Add Account
+"account.add.error.instance-not-supported" = "This instance is not currently supported.";
+"account.add.navigation-title" = "Add account";
+"account.add.sign-in" = "Sign in";
+
+// MARK: Enums
+"enum.avatar-position.leading" = "Leading";
+"enum.avatar-position.top" = "Top";
+"enum.avatar-shape.circle" = "Circle";
+"enum.avatar-shape.rounded" = "Rounded";
+"enum.status-actions-display.all" = "All";
+"enum.status-actions-display.no-buttons" = "No buttons";
+"enum.status-actions-display.only-buttons" = "Only buttons";
+"enum.status-display-style.compact" = "Compact";
+"enum.status-display-style.large" = "Large";
+
+// MARK: Instances
+"instance.info.domains" = "Domains";
+"instance.info.email" = "Email";
+"instance.info.name" = "Name";
+"instance.info.navigation-title" = "Instance Info";
+"instance.info.posts" = "Posts";
+"instance.info.section.info" = "Instance info";
+"instance.info.section.rules" = "Instance rules";
+"instance.info.users" = "Users";
+"instance.info.version" = "Version";
+"instance.list.posts-%@" = "%@ posts";
+"instance.list.users-%@" = "%@ users";
+"instance.suggestions" = "Suggestions";
+"instance.url" = "Instance URL";
+
+// MARK: Menu
+"menu.new-post" = "New post";
+"menu.font" = "Font";
+"menu.font.bigger" = "Bigger";
+"menu.font.smaller" = "Smaller";
+
+// MARK: Settings
+"settings.account.add" = "Add account";
+"settings.app.icon" = "App Icon";
+"settings.app.icon.navigation-title" = "Icons";
+"settings.app.source" = "Source (GitHub link)";
+"settings.app.support" = "Support the app";
+"settings.display.avatar.position" = "Avatar position";
+"settings.display.avatar.shape" = "Avatar shape";
+"settings.display.navigation-title" = "Display Settings";
+"settings.display.restore" = "Restore defaults";
+"settings.display.section.display" = "Display";
+"settings.display.section.theme" = "Theme";
+"settings.display.section.theme.footer" = "Custom colors can only be set if match system color scheme is disabled";
+"settings.display.status.action-buttons" = "Status action buttons";
+"settings.display.status.media-style" = "Status media style";
+"settings.display.translate-button" = "Show translate button";
+"settings.display.theme.background" = "Background color";
+"settings.display.theme.secondary-background" = "Secondary Background color";
+"settings.display.theme.tint" = "Tint color";
+"settings.display.theme.systemColor" = "Match System";
+"settings.general.browser" = "Browser";
+"settings.general.browser.in-app" = "In-App Browser";
+"settings.general.browser.system" = "System Browser";
+"settings.general.display" = "Display Settings";
+"settings.general.instance" = "Instance Information";
+"settings.general.push-notifications" = "Push Notifications";
+"settings.general.remote-timelines" = "Remote Local Timelines";
+"settings.push.boosts" = "Boosts";
+"settings.push.favorites" = "Favorites";
+"settings.push.follows" = "Follows";
+"settings.push.main-toggle" = "Push Notifications";
+"settings.push.main-toggle.description" = "Receive push notifications on new activities";
+"settings.push.mentions" = "Mentions";
+"settings.push.navigation-title" = "Push Notifications";
+"settings.push.new-posts" = "New Posts";
+"settings.push.polls" = "Poll Results";
+"settings.general.content" = "Content Settings";
+"settings.system" = "System Settings";
+"settings.content.navigation-title" = "Content Settings";
+"settings.content.use-instance-settings" = "Use server settings";
+"settings.content.main-toggle.description" = "Use the settings from your home Instance";
+"settings.content.expand-spoilers" = "Always show sensitive posts";
+"settings.content.expand-media" = "Media display";
+"settings.content.default-sensitive" = "Always mark media as sensitive";
+"settings.content.default-visibility" = "Posting visibility";
+"settings.content.reading" = "Reading";
+"settings.content.posting" = "Posting";
+"enum.expand-media.show" = "Show All";
+"enum.expand-media.hide" = "Hide All";
+"enum.expand-media.hide-sensitive" = "Hide Sensitive";
+"settings.section.accounts" = "Accounts";
+"settings.section.app" = "App";
+"settings.section.app.footer %@" = "App Version: %@";
+"settings.section.general" = "General";
+"settings.support.alert.error.message" = "Error processing your in-app purchase, please try again.";
+"settings.support.alert.message" = "Thank you so much for your tip! It's greatly appreciated!";
+"settings.support.alert.title" = "Thanks!";
+"settings.support.message-from-dev" = "Hi there! My name is Thomas and I absolutely love creating open source apps. Ice Cubes is definitely one of my proudest projects to date - and let's be real, it's also the one that requires the most maintenance due to the ever-changing world of Mastodon and social media. If you're having a blast using Ice Cubes, consider tossing a little tip my way. It'll make my day (and help keep the app running smoothly for you). 🚀";
+"settings.support.navigation-title" = "Support Ice Cubes";
+"settings.support.one.subtitle" = "Small, but cute, and it tastes good!";
+"settings.support.one.title" = "🍬 Small Tip";
+"settings.support.placeholder.loading-subtitle" = "Loading subtitle ...";
+"settings.support.three.subtitle" = "You're insane, thank you so much!";
+"settings.support.three.title" = "🤯 Generous Tip";
+"settings.support.two.subtitle" = "I love the taste of a fancy coffee ❤️";
+"settings.support.two.title" = "☕️ Nice Tip";
+"settings.support.four.title" = "👽 Who are you Tip";
+"settings.support.four.subtitle" = "It'll go a long way to keep Ice Cubes running!";
+"settings.timeline.add" = "Add a local timeline";
+"settings.title" = "Settings";
+"settings.rate" = "Rate Ice Cubes";
+"settings.section.other" = "Other";
+"settings.other.hide-openai" = "Enable 🤖 helper";
+"settings.other.social-keyboard" = "Enable Social Keyboard";
+"settings.push.duplicate.title" = "Duplicate notifications fixer";
+"settings.push.duplicate.footer" = "Receiving duplicate notifications? Try this magic button in order to fix it";
+"settings.push.duplicate.button.fix" = "🪄 Fix it";
+
+// MARK: Tabs
+"tab.explore" = "Explore";
+"tab.federated" = "Federated";
+"tab.local" = "Local";
+"tab.messages" = "Messages";
+"tab.notifications" = "Notifications";
+"tab.settings" = "Settings";
+"tab.timeline" = "Timeline";
+"tab.trending" = "Trending";
+"tab.profile" = "Profile";
+
+// MARK: Timeline
+"timeline.%@-is-valid" = "%@ is a valid instance";
+"timeline.add-remote.title" = "Add remote local timeline";
+"timeline.add.action.add" = "Add";
+"timeline.filter.add-local" = "Add a local timeline";
+"timeline.filter.lists" = "Lists";
+"timeline.filter.local" = "Local Timelines";
+"timeline.filter.tags" = "Followed Tags";
+
+// MARK: Package: AppAccount
+"app-account.button.add" = "Add Account";
+
+// MARK: Package: Account
+"account.action.add-remove-list" = "Add/Remove from lists";
+"account.action.edit-info" = "Edit Info";
+"account.action.mention" = "Mention";
+"account.action.message" = "Message";
+"account.action.notify-enable" = "Enable Notifications";
+"account.action.notify-disable" = "Disable Notifications";
+"account.action.reboosts-show" = "Show Boosts";
+"account.action.reboosts-hide" = "Hide Boosts";
+"account.action.block" = "Block";
+"account.action.unblock" = "Unblock";
+"account.action.mute" = "Mute";
+"account.action.unmute" = "Unmute";
+"account.boosted-by" = "Boosted by";
+"account.detail.about" = "About";
+"account.detail.familiar-followers" = "Also followed by";
+"account.detail.n-fields %lld" = "%lld fields";
+"account.detail.featured-tags-n-posts %lld" = "%lld posts";
+"account.edit.about" = "About";
+"account.edit.account-settings.bot" = "Bot account";
+"account.edit.account-settings.discoverable" = "Discoverable";
+"account.edit.account-settings.private" = "Private";
+"account.edit.account-settings.section-title" = "Account settings";
+"account.edit.display-name" = "Display Name";
+"account.edit.error.save.message" = "Error while saving your profile, please try again.";
+"account.edit.error.save.title" = "Error while saving your profile";
+"account.edit.navigation-title" = "Edit Profile";
+"account.edit.post-settings.privacy" = "Default privacy";
+"account.edit.post-settings.section-title" = "Post settings";
+"account.edit.post-settings.sensitive" = "Sensitive content";
+"account.favorited-by" = "Favorited by";
+"account.follow.follow" = "Follow";
+"account.follow.following" = "Following";
+"account.follow.requested" = "Requested";
+"account.follow-request.accept" = "Accept";
+"account.follow-request.reject" = "Reject";
+"account.follow-requests.pending-requests" = "Pending requests";
+"account.follow-requests.instructions" = "Those users won't see your posts until you accept them.";
+"account.followers" = "Followers";
+"account.following" = "Following";
+"account.list.create" = "Create a new list";
+"account.list.create.confirm" = "Create list";
+"account.list.create.description" = "Enter the name for your list";
+"account.list.delete" = "Delete list";
+"account.list.name" = "List name";
+"account.post.pinned" = "Pinned post";
+"account.posts" = "Posts";
+"account.relation.follows-you" = "Follows You";
+"account.joined" = "Joined";
+"account.action.logout" = "Logout account";
+
+// MARK: Package: Conversations
+"conversations.action.delete" = "Delete";
+"conversations.action.mark-read" = "Mark as read";
+"conversations.empty.message" = "Looking for some social media love? You'll find all your direct messages and private mentions right here. Happy messaging! 📱❤️";
+"conversations.empty.title" = "Inbox Zero";
+"conversations.error.button" = "Retry";
+"conversations.error.message" = "Error while loading your messages";
+"conversations.error.title" = "An error occurred";
+"conversations.navigation-title" = "Direct Messages";
+"conversations.new.message.placeholder" = "New Message";
+
+// MARK: Package: DesignSystem
+"design.tag.n-posts-from-n-participants %lld %lld" = "%lld posts from %lld participants";
+"design.theme.navigation-title" = "Theme Selector";
+"design.theme.toots-preview" = "Toots preview";
+
+// MARK: Package: Explore
+"explore.navigation-title" = "Explore";
+"explore.search.message-%@" = "From this screen you can search anything on %@";
+"explore.search.prompt" = "Search users, posts and tags";
+"explore.search.title" = "Search your instance";
+"explore.search.empty.message" = "This query returned no search results, please try another one.";
+"explore.search.empty.title" = "No search results";
+"explore.section.posts" = "Posts";
+"explore.section.suggested-users" = "Suggested Users";
+"explore.section.tags" = "Tags";
+"explore.section.trending.links" = "Trending Links";
+"explore.section.trending.posts" = "Trending Posts";
+"explore.section.trending.tags" = "Trending Tags";
+"explore.section.users" = "Users";
+
+// MARK: Package: Env
+"env.poll-duration.5m" = "5 minutes";
+"env.poll-duration.30m" = "30 minutes";
+"env.poll-duration.1h" = "1 hour";
+"env.poll-duration.6h" = "6 hours";
+"env.poll-duration.1d" = "1 day";
+"env.poll-duration.3d" = "3 days";
+"env.poll-duration.7d" = "7 days";
+"env.poll-vote-frequency.one" = "One Vote";
+"env.poll-vote-frequency.multiple" = "Multiple Votes";
+
+// MARK: Package: Lists
+"lists.add-remove-%@" = "Add/Remove %@";
+"lists.create" = "Create a new list";
+"lists.create.confirm" = "Create list";
+"lists.edit.users-in-list" = "Users in this list";
+"lists.name" = "List name";
+"lists.name.message" = "Enter the name for your list";
+
+// MARK: Package: Notifications
+"notifications.empty.message" = "Notifications? What notifications? Your notification inbox is looking so empty. Keep on being awesome! 📱😎";
+"notifications.empty.title" = "No notifications";
+"notifications.error.message" = "An error occurred while loading your notifications, please try again.";
+"notifications.error.title" = "An error occurred";
+"notifications.label.favorite" = "starred";
+"notifications.label.follow" = "followed you";
+"notifications.label.follow-request" = "requested to follow you";
+"notifications.label.mention" = "mentioned you";
+"notifications.label.poll" = "poll ended";
+"notifications.label.reblog" = "boosted";
+"notifications.label.status" = "posted a status";
+"notifications.label.update" = "edited a post";
+"notifications.menu-title.favorite" = "Favorite";
+"notifications.menu-title.follow" = "Follow";
+"notifications.menu-title.follow-request" = "Follow Request";
+"notifications.menu-title.mention" = "Mention";
+"notifications.menu-title.poll" = "Poll";
+"notifications.menu-title.reblog" = "Boost";
+"notifications.menu-title.status" = "Post";
+"notifications.menu-title.update" = "Post Edited";
+"notifications.navigation-title" = "All Notifications";
+"notifications.tab.all" = "All";
+"notifications.tab.mentions" = "Mentions";
+
+// MARK: Package: Timeline
+"timeline.federated" = "Federated";
+"timeline.home" = "Home";
+"timeline.local" = "Local";
+"timeline.n-recent-from-n-participants %lld %lld" = "%lld recent posts from %lld participants";
+"timeline.trending" = "Trending";
+
+// MARK: Package: Status
+"status.action.translate" = "Translate";
+"status.action.translated-label" = "Translated using DeepL.com";
+"status.action.bookmark" = "Bookmark";
+"status.action.boost" = "Boost";
+"status.action.copy-text" = "Copy Text";
+"status.action.delete" = "Delete";
+"status.action.edit" = "Edit";
+"status.action.favorite" = "Favorite";
+"status.action.mention" = "Mention";
+"status.action.message" = "Message";
+"status.action.pin" = "Pin";
+"status.action.post" = "Post";
+"status.action.quote" = "Quote this post";
+"status.action.reply" = "Reply";
+"status.action.section.your-post" = "Your post";
+"status.action.share" = "Share this post";
+"status.action.unbookmark" = "Unbookmark";
+"status.action.unboost" = "Unboost";
+"status.action.unfavorite" = "Unfavorite";
+"status.action.unpin" = "Unpin";
+"status.action.view-in-browser" = "View in Browser";
+"status.draft.delete" = "Delete Draft";
+"status.draft.save" = "Save Draft";
+"status.editor.ai-prompt.correct" = "Correct text";
+"status.editor.ai-prompt.emphasize" = "Emphasize text";
+"status.editor.ai-prompt.fit" = "Shorten text";
+"status.editor.description.add" = "Add description";
+"status.editor.description.edit" = "Edit description";
+"status.editor.drafts.navigation-title" = "Drafts";
+"status.editor.error.upload" = "Error uploading";
+"status.editor.language-select.navigation-title" = "Select Language";
+"status.editor.language-select.recently-used" = "Recently Used";
+"status.editor.media.edit-image" = "Edit Image";
+"status.editor.media.image-description" = "Image description";
+"status.editor.mode.edit" = "Editing your post";
+"status.editor.mode.new" = "New Post";
+"status.editor.mode.quote-%@" = "Quote of %@";
+"status.editor.mode.reply-%@" = "Replying to %@";
+"status.editor.restore-previous" = "Restore previous text";
+"status.editor.spoiler" = "Spoiler Text";
+"status.editor.text.placeholder" = "What's on your mind?";
+"status.editor.visibility" = "Post visibility";
+"status.error.loading.message" = "An error occurred while loading posts, please try again.";
+"status.error.message" = "An error occurred in the context of this post, please try again.";
+"status.error.title" = "An error occurred";
+"status.filter.filtered-by-%@" = "Filtered by: %@";
+"status.filter.show-anyway" = "Show anyway";
+"status.image.alt-text.abbreviation" = "ALT";
+"status.media.content.show" = "Show content";
+"status.media.contextmenu.copy" = "Copy image";
+"status.media.contextmenu.save" = "Save image";
+"status.media.contextmenu.share" = "Share this image";
+"status.media.contextmenu.view-browser" = "View in Browser";
+"status.media.sensitive.show" = "Show sensitive content";
+"status.poll.n-votes %lld" = "%lld votes";
+"status.poll.closed" = "Closed";
+"status.poll.closes-in" = "Closes in ";
+"status.poll.duration" = "Poll Duration";
+"status.poll.frequency" = "Polling Frequency";
+"status.poll.option-n %lld" = "Option %lld";
+"status.post-from-%@" = "Post from %@";
+"status.row.was-boosted" = "boosted";
+"status.row.was-reply" = "Replied to";
+"status.row.you-boosted" = "You boosted";
+"status.show-less" = "Show less";
+"status.show-more" = "Show more";
+"status.summary.at-time" = " at ";
+"status.summary.edited-time" = "Last edited: ";
+"status.summary.n-boosts %lld" = "%lld boosts";
+"status.summary.n-favorites %lld" = "%lld favorites";
+"status.visibility.direct" = "Private";
+"status.visibility.follower" = "Followers";
+"status.visibility.public" = "Everyone";
+"status.visibility.unlisted" = "Unlisted";
+
+// MARK: Filters
+"filter.new" = "New Filter";
+"filter.filters" = "Filters";
+"filter.edit.title" = "Filter title";
+"filter.edit.keywords" = "Filter Keywords";
+"filter.edit.keywords.add" = "Add a new keyword";
+"filter.edit.contexts" = "Filter Contexts";
+"filter.edit.action" = "Filter Action";
+"account.action.edit-filters" = "Edit Filters";
