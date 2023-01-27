@@ -206,7 +206,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Excluir";
 "conversations.action.mark-read" = "Marcar como lida";
-"conversations.empty.message" = "Procurando por alguma amor na mídia social? Você irá encontrar todas as suas mensagens diretas e menções privadas bem aqui. Divirta-se! 📱❤️";
+"conversations.empty.message" = "Procurando por um pouco de amor nas mídias sociais? Você irá encontrar todas as suas mensagens diretas e menções privadas bem aqui. Divirta-se enviando mensagens! 📱❤️";
 "conversations.empty.title" = "Caixa de entrada vazia";
 "conversations.error.button" = "Tente novamente";
 "conversations.error.message" = "Error ao carregar suas mensagens";
