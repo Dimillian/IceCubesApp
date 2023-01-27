@@ -78,9 +78,9 @@ struct SettingsTabs: View {
               let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token }) {
             Task {
               await sub.deleteSubscription()
+              appAccountsManager.delete(account: account)
             }
           }
-          appAccountsManager.delete(account: account)
         }
       }
       addAccountButton
