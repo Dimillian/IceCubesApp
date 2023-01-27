@@ -81,7 +81,7 @@ public struct NotificationsListView: View {
   private var notificationsView: some View {
     switch viewModel.state {
     case .loading:
-      ForEach(Models.Notification.placeholders()) { notification in
+      ForEach(ConsolidatedNotification.placeholders()) { notification in
         NotificationRowView(notification: notification)
           .redacted(reason: .placeholder)
           .padding(.leading, .layoutPadding + 4)
@@ -100,15 +100,13 @@ public struct NotificationsListView: View {
                   message: "notifications.empty.message")
       } else {
         ForEach(notifications) { notification in
-          if notification.supportedType != nil {
-            NotificationRowView(notification: notification)
-              .padding(.leading, .layoutPadding + 4)
-              .padding(.trailing, .layoutPadding)
-              .padding(.top, 6)
-              .padding(.bottom, 2)
-            Divider()
-              .padding(.vertical, .dividerPadding)
-          }
+          NotificationRowView(notification: notification)
+            .padding(.leading, .layoutPadding + 4)
+            .padding(.trailing, .layoutPadding)
+            .padding(.top, 6)
+            .padding(.bottom, 2)
+          Divider()
+            .padding(.vertical, .dividerPadding)
         }
       }
 
