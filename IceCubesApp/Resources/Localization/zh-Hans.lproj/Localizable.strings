@@ -200,8 +200,8 @@
 "account.posts" = "嘟文";
 "account.relation.follows-you" = "关注你的人";
 "account.joined" = "加入于";
-"account.action.logout" = "Logout account";
-"account.action.edit-filters" = "Edit Filters";
+"account.action.logout" = "登出账户";
+"account.action.edit-filters" = "编辑过滤器";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "删除";
