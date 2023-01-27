@@ -367,3 +367,10 @@
 "filter.edit.contexts" = "Filter Contexts";
 "filter.edit.action" = "Filter Action";
 "account.action.edit-filters" = "Edit Filters";
+"filter.contexts.home" = "Home and lists";
+"filter.contexts.notifications" = "Notifications";
+"filter.contexts.public" = "Public timelines";
+"filter.contexts.conversations" = "Conversations";
+"filter.contexts.profiles" = "Profiles";
+"filter.action.warning" = "Hide with a warning";
+"filter.action.hide" = "Hide completely";

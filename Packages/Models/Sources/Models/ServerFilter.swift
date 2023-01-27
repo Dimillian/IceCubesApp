@@ -42,15 +42,15 @@ extension ServerFilter.Context {
   public var name: String {
     switch self {
     case .home:
-      return "Home and lists"
+      return NSLocalizedString("filter.contexts.home", comment: "")
     case .notifications:
-      return "Notifications"
+      return NSLocalizedString("filter.contexts.notifications", comment: "")
     case .public:
-      return "Public timelines"
+      return NSLocalizedString("filter.contexts.public", comment: "")
     case .thread:
-      return "Conversations"
+      return NSLocalizedString("filter.contexts.conversations", comment: "")
     case .account:
-      return "Profiles"
+      return NSLocalizedString("filter.contexts.profiles", comment: "")
     }
   }
 }
@@ -59,9 +59,9 @@ extension ServerFilter.Action {
   public var label: String {
     switch self {
     case .warn:
-      return "Hide with a warning"
+      return NSLocalizedString("filter.action.warning", comment: "")
     case .hide:
-      return "Hide completely"
+      return NSLocalizedString("filter.action.hide", comment: "")
     }
   }
 }

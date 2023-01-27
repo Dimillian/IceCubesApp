@@ -120,9 +120,9 @@
 "settings.content.default-visibility" = "Publicar visibilidad";
 "settings.content.reading" = "Leyendo";
 "settings.content.posting" = "Publicando";
-"settings.push.duplicate.title" = "Duplicate notifications fixer";
-"settings.push.duplicate.footer" = "Receiving duplicate notifications? Try this magic button in order to fix it";
-"settings.push.duplicate.button.fix" = "🪄 Fix it";
+"settings.push.duplicate.title" = "Arreglar notificaciones duplicadas";
+"settings.push.duplicate.footer" = "¿Recibes notificaciones por duplicado? Usa este botón mágico para arreglarlo";
+"settings.push.duplicate.button.fix" = "🪄 Arréglalo";
 "enum.expand-media.show" = "Siempre";
 "enum.expand-media.hide" = "Nunca";
 "enum.expand-media.hide-sensitive" = "Ocultar contenido sensible";
@@ -136,7 +136,7 @@
 "tab.settings" = "Ajustes";
 "tab.timeline" = "Cronología";
 "tab.trending" = "Tendencias";
-"tab.profile" = "Profile";
+"tab.profile" = "Perfil";
 
 // MARK: Timeline
 "timeline.%@-is-valid" = "%@ es una instancia válida";
@@ -359,11 +359,18 @@
 "status.visibility.unlisted" = "Sin listar";
 
 // MARK: Filters
-"filter.new" = "New Filter";
-"filter.filters" = "Filters";
-"filter.edit.title" = "Filter title";
-"filter.edit.keywords" = "Filter Keywords";
-"filter.edit.keywords.add" = "Add a new keyword";
-"filter.edit.contexts" = "Filter Contexts";
-"filter.edit.action" = "Filter Action";
-"account.action.edit-filters" = "Edit Filters";
+"filter.new" = "Nuevo filtro";
+"filter.filters" = "Filtros";
+"filter.edit.title" = "Título del filtro";
+"filter.edit.keywords" = "Palabras claves del filtro";
+"filter.edit.keywords.add" = "Añadir una nueva palabra clave";
+"filter.edit.contexts" = "Contextos del filtro";
+"filter.edit.action" = "Acción del filtro";
+"account.action.edit-filters" = "Editar filtros";
+"filter.contexts.home" = "Inicio y listas";
+"filter.contexts.notifications" = "Notificaciones";
+"filter.contexts.public" = "Cronologías públicas";
+"filter.contexts.conversations" = "Conversaciones";
+"filter.contexts.profiles" = "Perfiles";
+"filter.action.warning" = "Ocultar con una advertencia";
+"filter.action.hide" = "Ocultar completamente";
