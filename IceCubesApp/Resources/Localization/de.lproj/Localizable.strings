@@ -4,7 +4,7 @@
 "action.save"  = "Sichern";
 "action.done" = "Fertig";
 "action.retry" = "Wiederholen";
-"action.view.error" = "View error";
+"action.view.error" = "Fehler ansehen";
 
 "alert.button.ok" = "Ok";
 "alert.error" = "Fehler!";
@@ -63,7 +63,7 @@
 "settings.display.restore" = "Standard wiederherstellen";
 "settings.display.section.display" = "Anzeigen";
 "settings.display.section.theme" = "Design";
-"settings.display.section.theme.footer" = "Custom colors can only be set if match system color scheme is disabled";
+"settings.display.section.theme.footer" = "Eigene Farben können nur eingestellt werden, wenn die Systemeinstellung nicht verwendet wird.";
 "settings.display.status.action-buttons" = "Status Aktions-Buttons";
 "settings.display.status.media-style" = "Status Medien";
 "settings.display.translate-button" = "Übersetzen-Button anzeigen";
@@ -91,7 +91,7 @@
 "settings.section.app" = "App";
 "settings.section.app.footer %@" = "App-Version: %@";
 "settings.section.general" = "Allgemein";
-"settings.support.alert.error.message" = "Fehler bei der Ausführung des In-App-Kaufs. Bitte versuche es erneut.";
+"settings.support.alert.error.message" = "Fehler bei der Ausführung des In-App-Kaufs. Bitte versuch es erneut.";
 "settings.support.alert.message" = "Vielen Dank für dein Trinkgeld! Ich weiß es zu schätzen!";
 "settings.support.alert.title" = "Danke!";
 "settings.support.message-from-dev" = "Hey du! Mein Name ist Thomas und ich liebe es, Open-Source-Apps zu erschaffen. Ice Cubes ist definitiv eines meiner Projekte, auf das ich am meisten stolz bin – und seien wir ehrlich, es ist auch das mit dem größten Wartungsaufwand, dank der sich ständig ändernden Welt von Mastodon und Social Media. Wenn du Spaß beim Nutzen von Ice Cubes hast, denk darüber nach, mir eine kleine Spende dazulassen. Das würde mir den Tag versüßen (und dazu beitragen, dass die App reibungslos für dich funktioniert). 🚀";
@@ -122,13 +122,13 @@
 "settings.content.default-visibility" = "Sichtbarkeit Beiträge";
 "settings.content.reading" = "Lesen";
 "settings.content.posting" = "Schreiben";
-"settings.push.duplicate.title" = "Duplicate notifications fixer";
-"settings.push.duplicate.footer" = "Receiving duplicate notifications? Try this magic button in order to fix it";
-"settings.push.duplicate.button.fix" = "🪄 Fix it";
+"settings.push.duplicate.title" = "Doppelte-Benachrichtigungen-Korrigierer";
+"settings.push.duplicate.footer" = "Bekommst du doppelte Benachrichtigungen? Probier diesen magischen Knopf aus";
+"settings.push.duplicate.button.fix" = "🪄 Beheben";
 
-"enum.expand-media.show" = "Show All";
-"enum.expand-media.hide" = "Hide All";
-"enum.expand-media.hide-sensitive" = "Hide Sensitive";
+"enum.expand-media.show" = "Alle zeigen";
+"enum.expand-media.hide" = "Alle verstecken";
+"enum.expand-media.hide-sensitive" = "Sensible verstecken";
 
 // MARK: Tabs
 "tab.explore" = "Entdecken";
@@ -190,7 +190,7 @@
 "account.follow-request.accept" = "Akzeptieren";
 "account.follow-request.reject" = "Ablehnen";
 "account.follow-requests.pending-requests" = "Ausstehende Anfragen";
-"account.follow-requests.instructions" = "Diese Nutzer werden deine Posts nicht sehen, bis du sie akzeptierst.";
+"account.follow-requests.instructions" = "Diese Nutzer werden deine Beiträge nicht sehen, bis du sie akzeptierst.";
 "account.followers" = "Follower";
 "account.following" = "Folgt";
 "account.list.create" = "Neue Liste erstellen";
@@ -198,12 +198,12 @@
 "account.list.create.description" = "Gib den Namen deiner Liste ein";
 "account.list.delete" = "Liste löschen";
 "account.list.name" = "Name der Liste";
-"account.post.pinned" = "Angehefteter Post";
-"account.posts" = "Posts";
+"account.post.pinned" = "Angehefteter Beitrag";
+"account.posts" = "Beiträge";
 "account.relation.follows-you" = "Folgt dir";
 "account.joined" = "Beigetreten";
-"account.action.logout" = "Logout account";
-"account.action.edit-filters" = "Edit Filters";
+"account.action.logout" = "Abmelden";
+"account.action.edit-filters" = "Filter ändern";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Löschen";
@@ -224,11 +224,11 @@
 // MARK: Package: Explore
 "explore.navigation-title" = "Entdecken";
 "explore.search.message-%@" = "Hier kannst du alles auf %@ suchen";
-"explore.search.prompt" = "Suche nach Usern, Posts und Hashtags";
+"explore.search.prompt" = "Suche nach Benutzern, Beiträgen und Hashtags";
 "explore.search.title" = "Durchsuche deine Instanz";
 "explore.search.empty.message" = "Diese Suche führte ins Leere, bitte versuche eine andere Anfrage.";
 "explore.search.empty.title" = "Keine Ergebnisse";
-"explore.section.posts" = "Posts";
+"explore.section.posts" = "Beiträge";
 "explore.section.suggested-users" = "Vorgeschlagene Nutzer:innen";
 "explore.section.tags" = "Tags";
 "explore.section.trending.links" = "Links im Trend";
@@ -274,8 +274,8 @@
 "notifications.menu-title.mention" = "Erwähnung";
 "notifications.menu-title.poll" = "Umfrage";
 "notifications.menu-title.reblog" = "Boost";
-"notifications.menu-title.status" = "Post";
-"notifications.menu-title.update" = "Post bearbeitet";
+"notifications.menu-title.status" = "Beitrag";
+"notifications.menu-title.update" = "Beitrag bearbeitet";
 "notifications.navigation-title" = "Alle Benachrichtigungen";
 "notifications.tab.all" = "Alle";
 "notifications.tab.mentions" = "Erwähnungen";
@@ -371,4 +371,3 @@
 "filter.edit.keywords.add" = "Neues Wort hinzufügen";
 "filter.edit.contexts" = "Filterkontext";
 "filter.edit.action" = "Filteraktion";
-"account.action.edit-filters" = "Filter ändern";
