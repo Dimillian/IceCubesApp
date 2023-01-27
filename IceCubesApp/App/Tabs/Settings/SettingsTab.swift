@@ -107,10 +107,8 @@ struct SettingsTabs: View {
       }
       Link(destination: URL(string: UIApplication.openSettingsURLString)!) {
         Label("settings.system", systemImage: "gear")
-          // Tint our label black, so that it matches the other NavigationLink instead of
-          // defaulting to highlighted like a Link
-          .tint(.black)
       }
+      .tint(theme.labelColor)
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }

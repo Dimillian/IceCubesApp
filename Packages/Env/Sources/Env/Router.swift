@@ -30,10 +30,12 @@ public enum SheetDestinations: Identifiable {
   case addRemoteLocalTimeline
   case statusEditHistory(status: String)
   case settings
+  case accountPushNotficationsSettings
 
   public var id: String {
     switch self {
-    case .editStatusEditor, .newStatusEditor, .replyToStatusEditor, .quoteStatusEditor, .mentionStatusEditor, .settings:
+    case .editStatusEditor, .newStatusEditor, .replyToStatusEditor, .quoteStatusEditor,
+        .mentionStatusEditor, .settings, .accountPushNotficationsSettings:
       return "statusEditor"
     case .listEdit:
       return "listEdit"

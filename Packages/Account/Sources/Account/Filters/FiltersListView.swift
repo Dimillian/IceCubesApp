@@ -19,27 +19,31 @@ public struct FiltersListView: View {
   public var body: some View {
     NavigationStack {
       Form {
-        Section {
-          if isLoading && filters.isEmpty {
-            ProgressView()
-          } else {
-            ForEach(filters) { filter in
-              NavigationLink(destination: EditFilterView(filter: filter)) {
-                VStack(alignment: .leading) {
-                  Text(filter.title)
-                    .font(.scaledSubheadline)
-                  Text("\(filter.context.map{ $0.name }.joined(separator: ", "))")
-                    .font(.scaledBody)
-                    .foregroundColor(.gray)
+        if !isLoading && filters.isEmpty {
+          EmptyView()
+        } else {
+          Section {
+            if isLoading && filters.isEmpty {
+              ProgressView()
+            } else {
+              ForEach(filters) { filter in
+                NavigationLink(destination: EditFilterView(filter: filter)) {
+                  VStack(alignment: .leading) {
+                    Text(filter.title)
+                      .font(.scaledSubheadline)
+                    Text("\(filter.context.map{ $0.name }.joined(separator: ", "))")
+                      .font(.scaledBody)
+                      .foregroundColor(.gray)
+                  }
                 }
               }
-            }
-            .onDelete { indexes in
-              deleteFilter(indexes: indexes)
+              .onDelete { indexes in
+                deleteFilter(indexes: indexes)
+              }
             }
           }
+          .listRowBackground(theme.primaryBackgroundColor)
         }
-        .listRowBackground(theme.primaryBackgroundColor)
         
         Section {
           NavigationLink(destination: EditFilterView(filter: nil)) {

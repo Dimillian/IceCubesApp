@@ -78,6 +78,13 @@ extension View {
         SettingsTabs(popToRootTab: .constant(.settings))
           .withEnvironments()
           .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
+      case .accountPushNotficationsSettings:
+        if let subscription = PushNotificationsService.shared.subscriptions.first(where: { $0.account.token == AppAccountsManager.shared.currentAccount.oauthToken }) {
+          PushNotificationsView(subscription: subscription)
+            .withEnvironments()
+        } else {
+          EmptyView()
+        }
       }
     }
   }
@@ -88,5 +95,6 @@ extension View {
       .environmentObject(CurrentInstance.shared)
       .environmentObject(Theme.shared)
       .environmentObject(AppAccountsManager.shared)
+      .environmentObject(PushNotificationsService.shared)
   }
 }
