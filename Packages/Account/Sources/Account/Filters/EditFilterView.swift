@@ -1,16 +1,16 @@
-import SwiftUI
-import Models
-import Env
 import DesignSystem
+import Env
+import Models
 import Network
+import SwiftUI
 
 struct EditFilterView: View {
   @Environment(\.dismiss) private var dismiss
-  
+
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var client: Client
-    
+
   @State private var isSavingFilter: Bool = false
   @State private var filter: ServerFilter?
   @State private var title: String
@@ -18,20 +18,20 @@ struct EditFilterView: View {
   @State private var newKeyword: String = ""
   @State private var contexts: [ServerFilter.Context]
   @State private var filterAction: ServerFilter.Action
-  
+
   @FocusState private var isTitleFocused: Bool
-  
+
   private var data: ServerFilterData {
     .init(title: title,
           context: contexts,
           filterAction: filterAction,
           expireIn: nil)
   }
-  
+
   private var canSave: Bool {
     !title.isEmpty
   }
-  
+
   init(filter: ServerFilter?) {
     _filter = .init(initialValue: filter)
     _title = .init(initialValue: filter?.title ?? "")
@@ -39,7 +39,7 @@ struct EditFilterView: View {
     _contexts = .init(initialValue: filter?.context ?? [.home])
     _filterAction = .init(initialValue: filter?.filterAction ?? .warn)
   }
-  
+
   var body: some View {
     Form {
       titleSection
@@ -55,7 +55,7 @@ struct EditFilterView: View {
     .background(theme.secondaryBackgroundColor)
     .onAppear {
       if filter == nil {
-       isTitleFocused = true
+        isTitleFocused = true
       }
     }
     .toolbar {
@@ -64,7 +64,7 @@ struct EditFilterView: View {
       }
     }
   }
-  
+
   private var titleSection: some View {
     Section("filter.edit.title") {
       TextField("filter.edit.title", text: $title)
@@ -76,9 +76,8 @@ struct EditFilterView: View {
         }
     }
     .listRowBackground(theme.primaryBackgroundColor)
-    
   }
-  
+
   private var keywordsSection: some View {
     Section("filter.edit.keywords") {
       ForEach(keywords) { keyword in
@@ -113,7 +112,7 @@ struct EditFilterView: View {
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
-  
+
   private var contextsSection: some View {
     Section("filter.edit.contexts") {
       ForEach(ServerFilter.Context.allCases, id: \.self) { context in
@@ -136,7 +135,7 @@ struct EditFilterView: View {
       .listRowBackground(theme.primaryBackgroundColor)
     }
   }
-  
+
   private var filterActionView: some View {
     Section("filter.edit.action") {
       Picker(selection: $filterAction) {
@@ -156,7 +155,7 @@ struct EditFilterView: View {
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
-  
+
   private var saveButton: some View {
     Button {
       Task {
@@ -172,7 +171,7 @@ struct EditFilterView: View {
     }
     .disabled(!canSave)
   }
-  
+
   private func saveFilter() async {
     do {
       isSavingFilter = true
@@ -182,26 +181,26 @@ struct EditFilterView: View {
       } else {
         let newFilter: ServerFilter = try await client.post(endpoint: ServerFilters.createFilter(json: data),
                                                             forceVersion: .v2)
-        self.filter = newFilter
+        filter = newFilter
       }
     } catch {}
     isSavingFilter = false
   }
-  
+
   private func addKeyword(name: String) async {
     guard let filterId = filter?.id else { return }
     isSavingFilter = true
     do {
       let keyword: ServerFilter.Keyword = try await
-      client.post(endpoint: ServerFilters.addKeyword(filter: filterId,
-                                                     keyword: name,
-                                                     wholeWord: true),
-                  forceVersion: .v2)
-      self.keywords.append(keyword)
-    } catch { }
+        client.post(endpoint: ServerFilters.addKeyword(filter: filterId,
+                                                       keyword: name,
+                                                       wholeWord: true),
+                    forceVersion: .v2)
+      keywords.append(keyword)
+    } catch {}
     isSavingFilter = false
   }
-  
+
   private func deleteKeyword(keyword: ServerFilter.Keyword) async {
     isSavingFilter = true
     do {
@@ -210,7 +209,7 @@ struct EditFilterView: View {
       if response?.statusCode == 200 {
         keywords.removeAll(where: { $0.id == keyword.id })
       }
-    } catch { }
+    } catch {}
     isSavingFilter = false
   }
 }

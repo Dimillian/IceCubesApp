@@ -25,7 +25,7 @@ public struct AccountDetailView: View {
   @State private var isCurrentUser: Bool = false
   @State private var isCreateListAlertPresented: Bool = false
   @State private var createListTitle: String = ""
-  
+
   @State private var isEditingAccount: Bool = false
   @State private var isEditingFilters: Bool = false
 
@@ -513,7 +513,7 @@ public struct AccountDetailView: View {
               } label: {
                 Label("account.action.edit-info", systemImage: "pencil")
               }
-              
+
               if curretnInstance.isFiltersSupported {
                 Button {
                   isEditingFilters = true
@@ -521,7 +521,7 @@ public struct AccountDetailView: View {
                   Label("account.action.edit-filters", systemImage: "line.3.horizontal.decrease.circle")
                 }
               }
-              
+
               Button {
                 routerPath.presentedSheet = .accountPushNotficationsSettings
               } label: {

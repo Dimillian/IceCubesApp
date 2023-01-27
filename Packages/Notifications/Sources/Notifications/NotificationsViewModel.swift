@@ -76,7 +76,7 @@ class NotificationsViewModel: ObservableObject {
         newNotifications = newNotifications.filter { notification in
           !consolidatedNotifications.contains(where: { $0.id == notification.id })
         }
-        self.notifications.append(contentsOf: newNotifications)
+        notifications.append(contentsOf: newNotifications)
         consolidatedNotifications.insert(contentsOf: newNotifications.consolidated(), at: 0)
       }
       withAnimation {
@@ -98,7 +98,7 @@ class NotificationsViewModel: ObservableObject {
                                                                    maxId: lastId,
                                                                    types: queryTypes))
       consolidatedNotifications.append(contentsOf: newNotifications.consolidated())
-      self.notifications.append(contentsOf: newNotifications)
+      notifications.append(contentsOf: newNotifications)
       state = .display(notifications: consolidatedNotifications, nextPageState: newNotifications.count < 15 ? .none : .hasNextPage)
     } catch {
       state = .error(error: error)

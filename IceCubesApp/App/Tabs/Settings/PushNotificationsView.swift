@@ -33,7 +33,7 @@ struct PushNotificationsView: View {
         Text("settings.push.main-toggle.description")
       }
       .listRowBackground(theme.primaryBackgroundColor)
-        
+
       if subscription.isEnabled {
         Section {
           Toggle(isOn: .init(get: {
@@ -87,7 +87,7 @@ struct PushNotificationsView: View {
         }
         .listRowBackground(theme.primaryBackgroundColor)
       }
-      
+
       Section {
         Button("settings.push.duplicate.button.fix") {
           Task {
@@ -101,7 +101,6 @@ struct PushNotificationsView: View {
         Text("settings.push.duplicate.footer")
       }
       .listRowBackground(theme.primaryBackgroundColor)
-
     }
     .navigationTitle("settings.push.navigation-title")
     .scrollContentBackground(.hidden)
@@ -116,7 +115,7 @@ struct PushNotificationsView: View {
       await subscription.updateSubscription()
     }
   }
-  
+
   private func deleteSubscription() {
     Task {
       await subscription.deleteSubscription()

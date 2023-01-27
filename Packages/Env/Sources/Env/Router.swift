@@ -35,7 +35,7 @@ public enum SheetDestinations: Identifiable {
   public var id: String {
     switch self {
     case .editStatusEditor, .newStatusEditor, .replyToStatusEditor, .quoteStatusEditor,
-        .mentionStatusEditor, .settings, .accountPushNotficationsSettings:
+         .mentionStatusEditor, .settings, .accountPushNotficationsSettings:
       return "statusEditor"
     case .listEdit:
       return "listEdit"
@@ -67,8 +67,8 @@ public class RouterPath: ObservableObject {
 
   public func handleStatus(status: AnyStatus, url: URL) -> OpenURLAction.Result {
     if url.pathComponents.count == 3 && url.pathComponents[1] == "tags" &&
-        url.host() == status.account.url?.host(),
-       let tag = url.pathComponents.last
+      url.host() == status.account.url?.host(),
+      let tag = url.pathComponents.last
     {
       // OK this test looks weird but it's
       // A 3 component path i.e. ["/", "tags", "tagname"]
@@ -110,7 +110,8 @@ public class RouterPath: ObservableObject {
     } else if let client = client,
               client.isAuth,
               client.hasConnection(with: url),
-              let id = Int(url.lastPathComponent) {
+              let id = Int(url.lastPathComponent)
+    {
       if url.absoluteString.contains(client.server) {
         navigate(to: .statusDetail(id: String(id)))
       } else {

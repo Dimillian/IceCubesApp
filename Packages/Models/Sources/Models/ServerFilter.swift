@@ -6,15 +6,15 @@ public struct ServerFilter: Codable, Identifiable, Hashable {
     public let keyword: String
     public let wholeWord: Bool
   }
-  
+
   public enum Context: String, Codable, CaseIterable {
     case home, notifications, `public`, thread, account
   }
-  
+
   public enum Action: String, Codable, CaseIterable {
     case warn, hide
   }
-  
+
   public let id: String
   public let title: String
   public let keywords: [Keyword]
@@ -23,8 +23,8 @@ public struct ServerFilter: Codable, Identifiable, Hashable {
   public let expireIn: Int?
 }
 
-extension ServerFilter.Context {
-  public var iconName: String {
+public extension ServerFilter.Context {
+  var iconName: String {
     switch self {
     case .home:
       return "rectangle.on.rectangle"
@@ -38,8 +38,8 @@ extension ServerFilter.Context {
       return "person.crop.circle"
     }
   }
-  
-  public var name: String {
+
+  var name: String {
     switch self {
     case .home:
       return "Home and lists"
@@ -55,8 +55,8 @@ extension ServerFilter.Context {
   }
 }
 
-extension ServerFilter.Action {
-  public var label: String {
+public extension ServerFilter.Action {
+  var label: String {
     switch self {
     case .warn:
       return "Hide with a warning"

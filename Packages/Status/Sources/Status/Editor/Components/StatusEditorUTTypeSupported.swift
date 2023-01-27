@@ -1,9 +1,9 @@
+import AVFoundation
 import Foundation
 import PhotosUI
 import SwiftUI
 import UIKit
 import UniformTypeIdentifiers
-import AVFoundation
 
 @MainActor
 enum StatusEditorUTTypeSupported: String, CaseIterable {
@@ -74,7 +74,7 @@ struct MovieFileTranseferable: Transferable {
   private let url: URL
   var compressedVideoURL: URL? {
     get async {
-      return await withCheckedContinuation { continuation in
+      await withCheckedContinuation { continuation in
         let urlAsset = AVURLAsset(url: url, options: nil)
         guard let exportSession = AVAssetExportSession(asset: urlAsset, presetName: AVAssetExportPresetMediumQuality) else {
           continuation.resume(returning: nil)
@@ -84,7 +84,7 @@ struct MovieFileTranseferable: Transferable {
         exportSession.outputURL = outputURL
         exportSession.outputFileType = .mp4
         exportSession.shouldOptimizeForNetworkUse = true
-        exportSession.exportAsynchronously { () -> Void in
+        exportSession.exportAsynchronously { () in
           continuation.resume(returning: outputURL)
         }
       }

@@ -22,7 +22,7 @@ public struct StatusRowView: View {
   var contextMenu: some View {
     StatusRowContextMenu(viewModel: viewModel)
   }
-  
+
   public var body: some View {
     if viewModel.isFiltered, let filter = viewModel.filter {
       switch filter.filter.filterAction {
@@ -225,13 +225,12 @@ public struct StatusRowView: View {
   private func makeStatusContentView(status: AnyStatus) -> some View {
     Group {
       if !status.spoilerText.asRawText.isEmpty {
-
         HStack(alignment: .top) {
           Text("⚠︎")
-            .font(.system(.subheadline , weight:.bold))
+            .font(.system(.subheadline, weight: .bold))
             .foregroundColor(.secondary)
           EmojiTextApp(status.spoilerText, emojis: status.emojis, language: status.language)
-            .font(.system(.subheadline , weight:.bold))
+            .font(.system(.subheadline, weight: .bold))
             .foregroundColor(.secondary)
             .multilineTextAlignment(.leading)
           Spacer()
@@ -247,7 +246,7 @@ public struct StatusRowView: View {
           .accessibility(label: viewModel.displaySpoiler ? Text("status.show-more") : Text("status.show-less"))
           .accessibilityHidden(true)
         }
-        .onTapGesture {  // make whole row tapable to make up for smaller button size
+        .onTapGesture { // make whole row tapable to make up for smaller button size
           withAnimation {
             viewModel.displaySpoiler.toggle()
           }
@@ -376,7 +375,8 @@ public struct StatusRowView: View {
        !viewModel.isCompact,
        theme.statusDisplayStyle == .large,
        status.content.statusesURLs.isEmpty,
-       status.mediaAttachments.isEmpty {
+       status.mediaAttachments.isEmpty
+    {
       StatusCardView(card: card)
     }
   }

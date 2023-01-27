@@ -9,7 +9,7 @@ struct StatusEditorMediaView: View {
   @EnvironmentObject private var theme: Theme
   @ObservedObject var viewModel: StatusEditorViewModel
   @State private var editingContainer: StatusEditorMediaContainer?
-  
+
   @State private var isErrorDisplayed: Bool = false
 
   var body: some View {
@@ -142,7 +142,7 @@ struct StatusEditorMediaView: View {
         Label("action.view.error", systemImage: "exclamationmark.triangle")
       }
     }
-    
+
     Button(role: .destructive) {
       withAnimation {
         viewModel.mediasImages.removeAll(where: { $0.id == container.id })
@@ -151,7 +151,7 @@ struct StatusEditorMediaView: View {
       Label("action.delete", systemImage: "trash")
     }
   }
-  
+
   private func makeErrorView(error: ServerError) -> some View {
     ZStack {
       placeholderView
@@ -159,11 +159,10 @@ struct StatusEditorMediaView: View {
         .foregroundColor(.red)
     }
     .alert("alert.error", isPresented: $isErrorDisplayed) {
-      Button("Ok", action: { })
+      Button("Ok", action: {})
     } message: {
       Text(error.error ?? "")
     }
-
   }
 
   private var altMarker: some View {

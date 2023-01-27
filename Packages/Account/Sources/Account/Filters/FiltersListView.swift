@@ -1,21 +1,21 @@
-import SwiftUI
-import Env
-import Network
 import DesignSystem
+import Env
 import Models
+import Network
+import SwiftUI
 
 public struct FiltersListView: View {
   @Environment(\.dismiss) private var dismiss
-  
+
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var client: Client
-  
+
   @State private var isLoading: Bool = true
   @State private var filters: [ServerFilter] = []
-  
-  public init() { }
-  
+
+  public init() {}
+
   public var body: some View {
     NavigationStack {
       Form {
@@ -31,7 +31,7 @@ public struct FiltersListView: View {
                   VStack(alignment: .leading) {
                     Text(filter.title)
                       .font(.scaledSubheadline)
-                    Text("\(filter.context.map{ $0.name }.joined(separator: ", "))")
+                    Text("\(filter.context.map { $0.name }.joined(separator: ", "))")
                       .font(.scaledBody)
                       .foregroundColor(.gray)
                   }
@@ -44,7 +44,7 @@ public struct FiltersListView: View {
           }
           .listRowBackground(theme.primaryBackgroundColor)
         }
-        
+
         Section {
           NavigationLink(destination: EditFilterView(filter: nil)) {
             Label("filter.new", systemImage: "plus")
@@ -70,7 +70,7 @@ public struct FiltersListView: View {
       }
     }
   }
-  
+
   private func deleteFilter(indexes: IndexSet) {
     if let index = indexes.first {
       Task {
@@ -84,7 +84,7 @@ public struct FiltersListView: View {
       }
     }
   }
-  
+
   @ToolbarContentBuilder
   private var toolbarContent: some ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {

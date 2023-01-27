@@ -27,7 +27,7 @@ public class PushNotificationsService: ObservableObject {
   }
 
   public static let shared = PushNotificationsService()
-  
+
   public private(set) var subscriptions: [PushNotificationSubscriptionSettings] = []
 
   @Published public var pushToken: Data?
@@ -47,7 +47,7 @@ public class PushNotificationsService: ObservableObject {
       }
     }
   }
-  
+
   public func setAccounts(accounts: [PushAccount]) {
     subscriptions = []
     for account in accounts {
@@ -58,13 +58,13 @@ public class PushNotificationsService: ObservableObject {
       subscriptions.append(sub)
     }
   }
-  
+
   public func updateSubscriptions(forceCreate: Bool) async {
     for subscription in subscriptions {
       await withTaskGroup(of: Void.self, body: { group in
         group.addTask {
           await subscription.fetchSubscription()
-          if await subscription.subscription != nil && !forceCreate {
+          if await subscription.subscription != nil, !forceCreate {
             await subscription.deleteSubscription()
             await subscription.updateSubscription()
           } else if forceCreate {
@@ -136,23 +136,23 @@ public class PushNotificationSubscriptionSettings: ObservableObject {
   @Published public var isMentionNotificationEnabled: Bool = true
   @Published public var isPollNotificationEnabled: Bool = true
   @Published public var isNewPostsNotificationEnabled: Bool = true
-  
+
   public let account: PushAccount
 
   private let key: Data
   private let authKey: Data
-  
+
   public var pushToken: Data?
-  
+
   public private(set) var subscription: PushSubscription?
-  
+
   public init(account: PushAccount, key: Data, authKey: Data, pushToken: Data?) {
     self.account = account
     self.key = key
     self.authKey = authKey
     self.pushToken = pushToken
   }
-  
+
   private func refreshSubscriptionsUI() {
     if let subscription {
       isFollowNotificationEnabled = subscription.alerts.follow
@@ -163,7 +163,7 @@ public class PushNotificationSubscriptionSettings: ObservableObject {
       isNewPostsNotificationEnabled = subscription.alerts.status
     }
   }
-  
+
   public func updateSubscription() async {
     guard let pushToken = pushToken else { return }
     let client = Client(server: account.server, oauthToken: account.token)
@@ -176,23 +176,23 @@ public class PushNotificationSubscriptionSettings: ObservableObject {
         listenerURL += "?sandbox=true"
       #endif
       subscription =
-      try await client.post(endpoint: Push.createSub(endpoint: listenerURL,
-                                                     p256dh: key,
-                                                     auth: authKey,
-                                                     mentions: isMentionNotificationEnabled,
-                                                     status: isNewPostsNotificationEnabled,
-                                                     reblog: isReblogNotificationEnabled,
-                                                     follow: isFollowNotificationEnabled,
-                                                     favorite: isFavoriteNotificationEnabled,
-                                                     poll: isPollNotificationEnabled))
+        try await client.post(endpoint: Push.createSub(endpoint: listenerURL,
+                                                       p256dh: key,
+                                                       auth: authKey,
+                                                       mentions: isMentionNotificationEnabled,
+                                                       status: isNewPostsNotificationEnabled,
+                                                       reblog: isReblogNotificationEnabled,
+                                                       follow: isFollowNotificationEnabled,
+                                                       favorite: isFavoriteNotificationEnabled,
+                                                       poll: isPollNotificationEnabled))
       isEnabled = subscription != nil
-      
+
     } catch {
       isEnabled = false
     }
     refreshSubscriptionsUI()
   }
-  
+
   public func deleteSubscription() async {
     let client = Client(server: account.server, oauthToken: account.token)
     do {
@@ -206,7 +206,7 @@ public class PushNotificationSubscriptionSettings: ObservableObject {
       isEnabled = false
     } catch {}
   }
-  
+
   public func fetchSubscription() async {
     let client = Client(server: account.server, oauthToken: account.token)
     do {

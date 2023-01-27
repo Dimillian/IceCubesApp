@@ -33,7 +33,7 @@ extension ServerDate {
   public var relativeFormatted: String {
     return Self.createdAtRelativeFormatter.localizedString(for: asDate, relativeTo: Date())
   }
-  
+
   public var shortDateFormatted: String {
     return Self.createdAtShortDateFormatted.string(from: asDate)
   }

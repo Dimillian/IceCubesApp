@@ -1,25 +1,25 @@
-import SwiftUI
 import Account
+import AppAccount
 import DesignSystem
 import Env
 import Models
-import AppAccount
+import SwiftUI
 
 struct AccountSettingsView: View {
   @Environment(\.dismiss) private var dismiss
-  
+
   @EnvironmentObject private var pushNotifications: PushNotificationsService
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var currentInstance: CurrentInstance
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var appAccountsManager: AppAccountsManager
-  
+
   @State private var isEditingAccount: Bool = false
   @State private var isEditingFilters: Bool = false
-  
+
   let account: Account
   let appAccount: AppAccount
-  
+
   var body: some View {
     Form {
       Section {
@@ -54,7 +54,6 @@ struct AccountSettingsView: View {
         } label: {
           Text("account.action.logout")
         }
-
       }
       .listRowBackground(theme.primaryBackgroundColor)
     }
