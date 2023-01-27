@@ -353,20 +353,20 @@
 "status.show-less" = "Afficher moins";
 "status.show-more" = "Afficher plus";
 "status.summary.at-time" = " à ";
-"status.résumé.édité-temps" = "Dernière modification : ";
-"status.résumé.n-boosts %lld" = "%lld boosts";
-"status.résumé.n-favoris %lld" = "%lld favoris";
-"status.visibilité.direct" = "Privé";
-"status.visibilité.abonné" = "Abonnés";
-"status.visibilité.public" = "Tout le monde";
-"status.visibilité.non-répertorié" = "Non répertorié";
+"status.summary.edited-time" = "Dernière modification : ";
+"status.summary.n-boosts %lld" = "%lld boosts";
+"status.summary.n-favorites %lld" = "%lld favoris";
+"status.visibility.direct" = "Privé";
+"status.visibility.follower" = "Abonnés";
+"status.visibility.public" = "Tout le monde";
+"status.visibility.unlisted" = "Non répertorié";
 
 // MARK: Filtres
-"filtre.nouveau" = "Nouveau filtre";
-"filtre.filtres" = "Filtres";
-"filtre.éditer.titre" = "Titre du filtre";
-"filtre.éditer.mots-clés" = "Mots-clés du filtre";
-"filtre.éditer.mots-clés.ajouter" = "Ajouter un nouveau mot-clé";
-"filtre.éditer.contextes" = "Contextes du filtre";
-"filtre.éditer.action" = "Action du filtre";
-"compte.action.éditer-filtres" = "Éditer les filtres";
+"filter.new" = "Nouveau filtre";
+"filter.filters" = "Filtres";
+"filter.edit.title" = "Titre du filtre";
+"filter.edit.keywords" = "Mots-clés du filtre";
+"filter.edit.keywords.add" = "Ajouter un nouveau mot-clé";
+"filter.edit.contexts" = "Contextes du filtre";
+"filter.edit.action" = "Action du filtre";
+"account.action.edit-filters" = "Éditer les filtres";
