@@ -112,7 +112,7 @@
 "settings.other.hide-openai" = "Gebruik 🤖-hulp";
 "settings.other.social-keyboard" = "Gebruik socialmedia-toetsenbord";
 "settings.general.content" = "Inhoud";
-"settings.system" = "System Settings";
+"settings.system" = "Systeeminstellingen";
 "settings.content.navigation-title" = "Inhoud";
 "settings.content.use-instance-settings" = "Gebruik serverinstellingen";
 "settings.content.main-toggle.description" = "Gebruik de instellingen van jouw thuisinstantie.";
