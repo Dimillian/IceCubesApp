@@ -101,7 +101,7 @@ public struct AppAccountsSelectorView: View {
         Label("app-account.button.add", systemImage: "person.badge.plus")
       }
     }
-    
+
     if UIDevice.current.userInterfaceIdiom == .phone {
       Divider()
       Button {

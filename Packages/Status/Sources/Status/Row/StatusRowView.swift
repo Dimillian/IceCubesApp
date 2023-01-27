@@ -19,6 +19,10 @@ public struct StatusRowView: View {
     _viewModel = StateObject(wrappedValue: viewModel)
   }
 
+  var contextMenu: some View {
+    StatusRowContextMenu(viewModel: viewModel)
+  }
+
   public var body: some View {
     if viewModel.isFiltered, let filter = viewModel.filter {
       switch filter.filter.filterAction {
@@ -70,13 +74,13 @@ public struct StatusRowView: View {
               await viewModel.loadEmbeddedStatus()
             }
           }
-          if preferences.autoExpandSpoilers == true {
+          if preferences.autoExpandSpoilers == true && viewModel.displaySpoiler {
             viewModel.displaySpoiler = false
           }
         }
       }
       .contextMenu {
-        StatusRowContextMenu(viewModel: viewModel)
+        contextMenu
       }
       .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
       .accessibilityActions {
@@ -97,7 +101,7 @@ public struct StatusRowView: View {
           routerPath.navigate(to: .accountDetail(id: viewModel.status.account.id))
         }
 
-        StatusRowContextMenu(viewModel: viewModel)
+        contextMenu
       }
       .background {
         Color.clear
@@ -221,13 +225,12 @@ public struct StatusRowView: View {
   private func makeStatusContentView(status: AnyStatus) -> some View {
     Group {
       if !status.spoilerText.asRawText.isEmpty {
-
         HStack(alignment: .top) {
           Text("⚠︎")
-            .font(.system(.subheadline , weight:.bold))
+            .font(.system(.subheadline, weight: .bold))
             .foregroundColor(.secondary)
           EmojiTextApp(status.spoilerText, emojis: status.emojis, language: status.language)
-            .font(.system(.subheadline , weight:.bold))
+            .font(.system(.subheadline, weight: .bold))
             .foregroundColor(.secondary)
             .multilineTextAlignment(.leading)
           Spacer()
@@ -243,7 +246,7 @@ public struct StatusRowView: View {
           .accessibility(label: viewModel.displaySpoiler ? Text("status.show-more") : Text("status.show-less"))
           .accessibilityHidden(true)
         }
-        .onTapGesture {  // make whole row tapable to make up for smaller button size
+        .onTapGesture { // make whole row tapable to make up for smaller button size
           withAnimation {
             viewModel.displaySpoiler.toggle()
           }
@@ -368,10 +371,11 @@ public struct StatusRowView: View {
   @ViewBuilder
   private func makeCardView(status: AnyStatus) -> some View {
     if let card = status.card,
-       viewModel.embeddedStatus?.url != status.card?.url,
-       status.mediaAttachments.isEmpty,
        !viewModel.isEmbedLoading,
-       theme.statusDisplayStyle == .large
+       !viewModel.isCompact,
+       theme.statusDisplayStyle == .large,
+       status.content.statusesURLs.isEmpty,
+       status.mediaAttachments.isEmpty
     {
       StatusCardView(card: card)
     }
@@ -384,6 +388,7 @@ public struct StatusRowView: View {
          let embed = viewModel.embeddedStatus
       {
         StatusEmbeddedView(status: embed)
+          .fixedSize(horizontal: false, vertical: true)
       } else if viewModel.isEmbedLoading, !viewModel.isCompact {
         StatusEmbeddedView(status: .placeholder())
           .redacted(reason: .placeholder)

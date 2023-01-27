@@ -56,9 +56,6 @@ public struct AvatarView: View {
           if let image = state.image {
             image
               .resizingMode(.aspectFit)
-          } else if state.isLoading {
-            placeholderView
-              .shimmering()
           } else {
             placeholderView
           }

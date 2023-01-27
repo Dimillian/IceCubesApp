@@ -56,6 +56,7 @@ public class StatusEditorViewModel: ObservableObject {
       inflateSelectedMedias()
     }
   }
+
   @Published var isMediasLoading: Bool = false
 
   @Published var mediasImages: [StatusEditorMediaContainer] = []

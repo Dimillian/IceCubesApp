@@ -4,26 +4,26 @@ import Models
 import Network
 import SwiftUI
 
-extension AppAccount {
+public extension AppAccount {
   private static var keychain: KeychainSwift {
     let keychain = KeychainSwift()
-    #if !DEBUG
+    #if !DEBUG && !targetEnvironment(simulator)
       keychain.accessGroup = AppInfo.keychainGroup
     #endif
     return keychain
   }
 
-  public func save() throws {
+  func save() throws {
     let encoder = JSONEncoder()
     let data = try encoder.encode(self)
     Self.keychain.set(data, forKey: key)
   }
 
-  public func delete() {
+  func delete() {
     Self.keychain.delete(key)
   }
 
-  public static func retrieveAll() -> [AppAccount] {
+  static func retrieveAll() -> [AppAccount] {
     migrateLegacyAccounts()
     let keychain = Self.keychain
     let decoder = JSONDecoder()
@@ -39,7 +39,7 @@ extension AppAccount {
     return accounts
   }
 
-  public static func migrateLegacyAccounts() {
+  static func migrateLegacyAccounts() {
     let keychain = KeychainSwift()
     let decoder = JSONDecoder()
     let keys = keychain.allKeys
@@ -52,7 +52,7 @@ extension AppAccount {
     }
   }
 
-  public static func deleteAll() {
+  static func deleteAll() {
     let keychain = Self.keychain
     let keys = keychain.allKeys
     for key in keys {

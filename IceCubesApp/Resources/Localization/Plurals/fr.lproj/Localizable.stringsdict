@@ -13,26 +13,26 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string>%lld nuovo post</string>
+			<string>%lld nouveau post</string>
 			<key>other</key>
-			<string>%lld nuovi post</string>
+			<string>%lld nouveaux postes</string>
 		</dict>
 	</dict>
 	<key>notifications-others-count %lld</key>
-    <dict>
-        <key>NSStringLocalizedFormatKey</key>
-        <string>%#@noficationsOthersCount@</string>
-        <key>noficationsOthersCount</key>
-        <dict>
-            <key>NSStringFormatSpecTypeKey</key>
-            <string>NSStringPluralRuleType</string>
-            <key>NSStringFormatValueTypeKey</key>
-            <string>lld</string>
-            <key>one</key>
-            <string> e un altro </string>
-            <key>other</key>
-            <string> e %lld altri </string>
-        </dict>
-    </dict>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@noficationsOthersCount@</string>
+		<key>noficationsOthersCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string> et %lld autre </string>
+			<key>other</key>
+			<string> et %lld autres </string>
+		</dict>
+	</dict>
 </dict>
 </plist>

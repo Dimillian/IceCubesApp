@@ -10,7 +10,7 @@ import Timeline
 
 struct SettingsTabs: View {
   @Environment(\.dismiss) private var dismiss
-  
+
   @EnvironmentObject private var pushNotifications: PushNotificationsService
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var client: Client
@@ -75,7 +75,8 @@ struct SettingsTabs: View {
         if let index = indexSet.first {
           let account = appAccountsManager.availableAccounts[index]
           if let token = account.oauthToken,
-              let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token }) {
+             let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token })
+          {
             Task {
               await sub.deleteSubscription()
               appAccountsManager.delete(account: account)
@@ -107,10 +108,8 @@ struct SettingsTabs: View {
       }
       Link(destination: URL(string: UIApplication.openSettingsURLString)!) {
         Label("settings.system", systemImage: "gear")
-          // Tint our label black, so that it matches the other NavigationLink instead of
-          // defaulting to highlighted like a Link
-          .tint(.black)
       }
+      .tint(theme.labelColor)
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }

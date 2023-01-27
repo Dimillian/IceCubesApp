@@ -35,11 +35,14 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
 
       case let .display(statuses, nextPageState):
         ForEach(statuses, id: \.viewId) { status in
-          StatusRowView(viewModel: .init(status: status, isCompact: false, isRemote: isRemote))
-            .id(status.id)
-            .padding(.horizontal, .layoutPadding)
-          Divider()
-            .padding(.vertical, .dividerPadding)
+          let viewModel = StatusRowViewModel(status: status, isCompact: false, isRemote: isRemote)
+          if viewModel.filter?.filter.filterAction != .hide {
+            StatusRowView(viewModel: viewModel)
+              .id(status.id)
+              .padding(.horizontal, .layoutPadding)
+            Divider()
+              .padding(.vertical, .dividerPadding)
+          }
         }
 
         switch nextPageState {

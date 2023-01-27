@@ -39,8 +39,8 @@ public struct ConversationDetailView: View {
             ForEach(viewModel.messages) { message in
               ConversationMessageView(message: message,
                                       conversation: viewModel.conversation)
-              .padding(.vertical, 4)
-              .id(message.id)
+                .padding(.vertical, 4)
+                .id(message.id)
             }
             bottomAnchorView
           }
@@ -129,7 +129,7 @@ public struct ConversationDetailView: View {
           .overlay(
             RoundedRectangle(cornerRadius: 14)
               .stroke(.gray, lineWidth: 1)
-            )
+          )
           .font(.scaledBody)
         if !viewModel.newMessageText.isEmpty {
           Button {

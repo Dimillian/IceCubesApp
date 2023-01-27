@@ -46,10 +46,10 @@
 "instance.url" = "インスタンスのURL";
 
 // MARK: Menu
-"menu.new-post" = "New post";
-"menu.font" = "Font";
-"menu.font.bigger" = "Bigger";
-"menu.font.smaller" = "Smaller";
+"menu.new-post" = "新しい投稿";
+"menu.font" = "フォント";
+"menu.font.bigger" = "拡大";
+"menu.font.smaller" = "縮小";
 
 // MARK: Settings
 "settings.account.add" = "アカウントの追加";
@@ -63,7 +63,7 @@
 "settings.display.restore" = "デフォルトに戻す";
 "settings.display.section.display" = "表示";
 "settings.display.section.theme" = "テーマ";
-"settings.display.section.theme.footer" = "Custom colors can only be set if match system color scheme is disabled";
+"settings.display.section.theme.footer" = "カスタムカラーはシステム配色との一致が無効の場合のみ設定可能です";
 "settings.display.status.action-buttons" = "ステータスアクションボタン";
 "settings.display.status.media-style" = "ステータスメディアスタイル";
 "settings.display.translate-button" = "翻訳ボタンの表示";
@@ -108,9 +108,9 @@
 "settings.title" = "設定";
 "settings.rate" = "Ice Cubesを評価する";
 "settings.section.other" = "その他";
-"settings.push.duplicate.title" = "Duplicate notifications fixer";
-"settings.push.duplicate.footer" = "Receiving duplicate notifications? Try this magic button in order to fix it";
-"settings.push.duplicate.button.fix" = "🪄 Fix it";
+"settings.push.duplicate.title" = "重複通知修正ツール";
+"settings.push.duplicate.footer" = "重複して通知を受け取っていませんか？それを修正するためにこの魔法のボタンを試してみて";
+"settings.push.duplicate.button.fix" = "🪄 修正する";
 
 // MARK: Tabs
 "tab.explore" = "エクスプローラー";
@@ -151,8 +151,8 @@
 "account.boosted-by" = "ブーストしました";
 "account.detail.about" = "詳細";
 "account.detail.familiar-followers" = "知っているかも";
-"account.detail.n-fields %lld" = "%lld fields";
-"account.detail.featured-tags-n-posts %lld" = "%lld posts";
+"account.detail.n-fields %lld" = "%lld カラム";
+"account.detail.featured-tags-n-posts %lld" = "%lld 投稿";
 "account.edit.about" = "詳細";
 "account.edit.account-settings.bot" = "Botアカウント";
 "account.edit.account-settings.discoverable" = "誰でも見れる";
@@ -184,7 +184,8 @@
 "account.posts" = "投稿";
 "account.relation.follows-you" = "あなたをフォローしている";
 "account.joined" = "追加した";
-"account.action.logout" = "Logout account";
+"account.action.logout" = "アカウントをログアウトする";
+"account.action.edit-filters" = "フィルターを編集する";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "削除";
@@ -197,7 +198,7 @@
 "conversations.navigation-title" = "ダイレクトメッセージ";
 
 // MARK: Package: DesignSystem
-"design.tag.n-posts-from-n-participants %lld %lld" = "%lld の最近の投稿 %lld に参加してる";
+"design.tag.n-posts-from-n-participants %lld %lld" = "%lld トゥートの投稿 %lld 人が投稿している";
 "design.theme.navigation-title" = "テーマセレクト";
 "design.theme.toots-preview" = "トゥートプレビュー";
 
@@ -224,8 +225,8 @@
 "env.poll-duration.1d" = "1 日";
 "env.poll-duration.3d" = "3 日";
 "env.poll-duration.7d" = "7 日";
-"env.poll-vote-frequency.one" = "単投票";
-"env.poll-vote-frequency.multiple" = "複数投票";
+"env.poll-vote-frequency.one" = "単記投票";
+"env.poll-vote-frequency.multiple" = "複数投票可";
 
 // MARK: Package: Lists
 "lists.add-remove-%@" = "追加/削除 %@";
@@ -264,7 +265,7 @@
 "timeline.federated" = "連合";
 "timeline.home" = "ホーム";
 "timeline.local" = "ローカル";
-"timeline.n-recent-from-n-participants %lld %lld" = "%lld の最近の投稿 %lld に参加してる";
+"timeline.n-recent-from-n-participants %lld %lld" = "%lld トゥートの投稿 %lld 人が投稿している";
 "timeline.trending" = "トレンド";
 
 // MARK: Package: Status
@@ -351,8 +352,8 @@
 "settings.content.expand-media" = "メディア表示";
 "settings.content.default-sensitive" = "常にメディアをセンシティブなものとしてマークする";
 "settings.content.default-visibility" = "投稿の可視化";
-"settings.content.reading" = "Reading";
-"settings.content.posting" = "Posting";
+"settings.content.reading" = "リーディング";
+"settings.content.posting" = "ポスティング";
 
 // MARK: Filters
 "filter.new" = "新しいフィルター";
@@ -362,7 +363,6 @@
 "filter.edit.keywords.add" = "新しいキーワードを追加する";
 "filter.edit.contexts" = "フィルターする文章";
 "filter.edit.action" = "フィルターする";
-"account.action.edit-filters" = "フィルターを編集する";
 "filter.contexts.home" = "Home and lists";
 "filter.contexts.notifications" = "Notifications";
 "filter.contexts.public" = "Public timelines";
@@ -371,6 +371,6 @@
 "filter.action.warning" = "Hide with a warning";
 "filter.action.hide" = "Hide completely";
 
-"enum.expand-media.show" = "Show All";
-"enum.expand-media.hide" = "Hide All";
-"enum.expand-media.hide-sensitive" = "Hide Sensitive";
+"enum.expand-media.show" = "全て表示";
+"enum.expand-media.hide" = "全て隠す";
+"enum.expand-media.hide-sensitive" = "センシティブなものは隠す";

@@ -3,7 +3,6 @@ import Env
 import Models
 import Nuke
 import NukeUI
-import Shimmer
 import SwiftUI
 
 public struct StatusMediaPreviewView: View {
@@ -162,7 +161,6 @@ public struct StatusMediaPreviewView: View {
               RoundedRectangle(cornerRadius: 4)
                 .fill(Color.gray)
                 .frame(width: newSize.width, height: newSize.height)
-                .shimmering()
             }
           }
         } else {
@@ -176,13 +174,13 @@ public struct StatusMediaPreviewView: View {
               RoundedRectangle(cornerRadius: 4)
                 .fill(Color.gray)
                 .frame(maxHeight: imageMaxHeight)
-                .shimmering()
             }
           }
         }
       case .gifv, .video, .audio:
         if let url = attachment.url {
           VideoPlayerView(viewModel: .init(url: url))
+            .frame(maxWidth: isNotifications ? imageMaxHeight : nil)
             .frame(height: imageMaxHeight)
         }
       case .none:

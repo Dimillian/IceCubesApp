@@ -12,7 +12,7 @@ public struct ServerPreferences: Decodable {
     case showAll = "show_all"
     case hideAll = "hide_all"
     case hideSensitive = "default"
-    
+
     public var description: LocalizedStringKey {
       switch self {
       case .showAll:

@@ -30,12 +30,12 @@ public enum ServerFilters: Endpoint {
     switch self {
     case let .addKeyword(_, keyword, wholeWord):
       return [.init(name: "keyword", value: keyword),
-              .init(name: "whole_word", value: wholeWord ? "true": "false")]
+              .init(name: "whole_word", value: wholeWord ? "true" : "false")]
     default:
       return nil
     }
   }
-  
+
   public var jsonValue: Encodable? {
     switch self {
     case let .createFilter(json):
@@ -53,11 +53,12 @@ public struct ServerFilterData: Encodable {
   public let context: [ServerFilter.Context]
   public let filterAction: ServerFilter.Action
   public let expireIn: Int?
-  
+
   public init(title: String,
               context: [ServerFilter.Context],
               filterAction: ServerFilter.Action,
-              expireIn: Int?) {
+              expireIn: Int?)
+  {
     self.title = title
     self.context = context
     self.filterAction = filterAction

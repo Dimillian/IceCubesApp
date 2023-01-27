@@ -9,8 +9,8 @@ public struct EditAccountView: View {
   @EnvironmentObject private var theme: Theme
 
   @StateObject private var viewModel = EditAccountViewModel()
-  
-  public init() { }
+
+  public init() {}
 
   public var body: some View {
     NavigationStack {
