@@ -201,8 +201,8 @@
 "account.posts" = "Post";
 "account.relation.follows-you" = "Ti segue";
 "account.joined" = "Si è unito il giorno";
-"account.action.logout" = "Logout account";
-"account.action.edit-filters" = "Edit Filters";
+"account.action.logout" = "Esci dall'account";
+"account.action.edit-filters" = "Modifica i Filtri";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Cancella";
@@ -218,7 +218,7 @@
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld post da %lld partecipanti";
 "design.theme.navigation-title" = "Selettore del tema";
-"design.theme.toots-preview" = "Preview dei Toot";
+"design.theme.toots-preview" = "Anteprima dei Toot";
 
 // MARK: Package: Explore
 "explore.navigation-title" = "Esplora";
