@@ -360,15 +360,15 @@
 "status.visibility.unlisted" = "Minder openbaar";
 
 // MARK: Filters
-"filter.new" = "Nieuw Filter";
+"filter.new" = "Nieuw filter";
 "filter.filters" = "Filters";
-"filter.edit.title" = "Filter titel";
+"filter.edit.title" = "Filtertitel";
 "filter.edit.keywords" = "Filter sleutelwoorden";
 "filter.edit.keywords.add" = "Voeg een nieuw sleutelwoord toe";
-"filter.edit.contexts" = "Filter Contexts";
-"filter.edit.action" = "Filter Actie";
-"account.action.edit-filters" = "Wijzig Filters";
+"filter.edit.contexts" = "Filtercontext";
+"filter.edit.action" = "Filteractie";
+"account.action.edit-filters" = "Bewerk filters";
 
-"enum.expand-media.show" = "Show All";
-"enum.expand-media.hide" = "Hide All";
-"enum.expand-media.hide-sensitive" = "Hide Sensitive";
+"enum.expand-media.show" = "Toon alle";
+"enum.expand-media.hide" = "Verberg alle";
+"enum.expand-media.hide-sensitive" = "Verberg gevoelige";
