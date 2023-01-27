@@ -19,6 +19,10 @@ public struct StatusRowView: View {
     _viewModel = StateObject(wrappedValue: viewModel)
   }
 
+  var contextMenu: some View {
+    StatusRowContextMenu(viewModel: viewModel)
+  }
+  
   public var body: some View {
     if viewModel.isFiltered, let filter = viewModel.filter {
       switch filter.filter.filterAction {
@@ -70,13 +74,13 @@ public struct StatusRowView: View {
               await viewModel.loadEmbeddedStatus()
             }
           }
-          if preferences.autoExpandSpoilers == true {
+          if preferences.autoExpandSpoilers == true && viewModel.displaySpoiler {
             viewModel.displaySpoiler = false
           }
         }
       }
       .contextMenu {
-        StatusRowContextMenu(viewModel: viewModel)
+        contextMenu
       }
       .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
       .accessibilityActions {
@@ -97,7 +101,7 @@ public struct StatusRowView: View {
           routerPath.navigate(to: .accountDetail(id: viewModel.status.account.id))
         }
 
-        StatusRowContextMenu(viewModel: viewModel)
+        contextMenu
       }
       .background {
         Color.clear
@@ -368,11 +372,11 @@ public struct StatusRowView: View {
   @ViewBuilder
   private func makeCardView(status: AnyStatus) -> some View {
     if let card = status.card,
-       status.content.statusesURLs.isEmpty,
-       status.mediaAttachments.isEmpty,
        !viewModel.isEmbedLoading,
-       theme.statusDisplayStyle == .large
-    {
+       !viewModel.isCompact,
+       theme.statusDisplayStyle == .large,
+       status.content.statusesURLs.isEmpty,
+       status.mediaAttachments.isEmpty {
       StatusCardView(card: card)
     }
   }
