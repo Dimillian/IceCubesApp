@@ -165,7 +165,7 @@
 "account.action.mute" = "免打扰";
 "account.action.unmute" = "取消免打扰";
 "account.boosted-by" = "转发";
-"account.detail.about" = "关联网站";
+"account.detail.about" = "附加信息";
 "account.detail.familiar-followers" = "同样关注此账号的有";
 "account.detail.n-fields %lld" = "%lld 个";
 "account.detail.featured-tags-n-posts %lld" = "%lld 条嘟文";
