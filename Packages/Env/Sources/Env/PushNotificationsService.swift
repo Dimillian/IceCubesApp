@@ -34,7 +34,7 @@ public class PushNotificationsService: ObservableObject {
 
   private var keychain: KeychainSwift {
     let keychain = KeychainSwift()
-    #if !DEBUG
+    #if !DEBUG && !targetEnvironment(simulator)
       keychain.accessGroup = AppInfo.keychainGroup
     #endif
     return keychain

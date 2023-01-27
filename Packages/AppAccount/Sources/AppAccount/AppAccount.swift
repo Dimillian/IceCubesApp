@@ -7,7 +7,7 @@ import SwiftUI
 extension AppAccount {
   private static var keychain: KeychainSwift {
     let keychain = KeychainSwift()
-    #if !DEBUG
+    #if !DEBUG && !targetEnvironment(simulator)
       keychain.accessGroup = AppInfo.keychainGroup
     #endif
     return keychain
