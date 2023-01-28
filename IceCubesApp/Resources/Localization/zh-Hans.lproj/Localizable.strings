@@ -113,7 +113,7 @@
 "settings.other.social-keyboard" = "启用社交键盘";
 
 "settings.general.content" = "内容设置";
-"settings.system" = "System Settings";
+"settings.system" = "系统设置";
 "settings.content.navigation-title" = "内容设置";
 "settings.content.use-instance-settings" = "使用服务器设置";
 "settings.content.main-toggle.description" = "使用你主服务器的设置";
