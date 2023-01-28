@@ -97,15 +97,19 @@ struct SupportAppView: View {
               }
               Spacer()
               Button {
-                isProcessingPurchase = true
-                Task {
-                  do {
-                    _ = try await Purchases.shared.purchase(product: product)
-                    purchaseSuccessDisplayed = true
-                  } catch {
-                    purchaseErrorDisplayed = true
+                if !isProcessingPurchase {
+                  isProcessingPurchase = true
+                  Task {
+                    do {
+                      let result = try await Purchases.shared.purchase(product: product)
+                      if !result.userCancelled {
+                        purchaseSuccessDisplayed = true
+                      }
+                    } catch {
+                      purchaseErrorDisplayed = true
+                    }
+                    isProcessingPurchase = false
                   }
-                  isProcessingPurchase = false
                 }
               } label: {
                 if isProcessingPurchase {
