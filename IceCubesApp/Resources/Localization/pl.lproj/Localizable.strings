@@ -1,0 +1,372 @@
+// MARK: Common strings
+"action.cancel" = "Anuluj";
+"action.delete" = "Usuń";
+"action.save"  = "Zachowaj";
+"action.done" = "Gotowe";
+"action.retry" = "Spróbuj ponownie";
+"action.view.error" = "Zobacz błąd";
+
+"alert.button.ok" = "OK";
+"alert.error" = "Błąd!";
+
+"placeholder.loading.long" = "Ładuję, ładuję, ładuję ...";
+"placeholder.loading.short" = "Ładuję ...";
+
+"see-more" = "Zobacz więcej";
+
+// MARK: Add Account
+"account.add.error.instance-not-supported" = "Ten serwer nie jest aktualnie obsługiwany.";
+"account.add.navigation-title" = "Dodaj konto";
+"account.add.sign-in" = "Zaloguj się";
+
+// MARK: Enums
+"enum.avatar-position.leading" = "Z lewej";
+"enum.avatar-position.top" = "Na górze";
+"enum.avatar-shape.circle" = "Okrągły";
+"enum.avatar-shape.rounded" = "Zaokrąglony";
+"enum.status-actions-display.all" = "Wszystko";
+"enum.status-actions-display.no-buttons" = "Bez przycisków";
+"enum.status-actions-display.only-buttons" = "Tylko przyciski";
+"enum.status-display-style.compact" = "Pomniejszone";
+"enum.status-display-style.large" = "Duże";
+
+// MARK: Instances
+"instance.info.domains" = "Domeny";
+"instance.info.email" = "E-mail";
+"instance.info.name" = "Nazwa";
+"instance.info.navigation-title" = "Informacja o serwerze";
+"instance.info.posts" = "Posty";
+"instance.info.section.info" = "Informacje o serwerze";
+"instance.info.section.rules" = "Zasady obowiązujace na serwerze";
+"instance.info.users" = "Użytkownicy";
+"instance.info.version" = "Wersja";
+"instance.list.posts-%@" = "%@ postów";
+"instance.list.users-%@" = "%@ użytkowników";
+"instance.suggestions" = "Propozycje";
+"instance.url" = "Adres URL serwera";
+
+// MARK: Menu
+"menu.new-post" = "Nowy post";
+"menu.font" = "Czcionka";
+"menu.font.bigger" = "Większa";
+"menu.font.smaller" = "Mniejsza";
+
+// MARK: Settings
+"settings.account.add" = "Dodaj konto";
+"settings.app.icon" = "Ikona aplikacji";
+"settings.app.icon.navigation-title" = "Icons";
+"settings.app.source" = "Źródło (link do GitHub)";
+"settings.app.support" = "Wspieraj aplikację";
+"settings.display.avatar.position" = "Położenie awatara";
+"settings.display.avatar.shape" = "Kształt awatara";
+"settings.display.navigation-title" = "Ustawienia ekranu";
+"settings.display.restore" = "Przywróć ustawienia domyślne";
+"settings.display.section.display" = "Ekran";
+"settings.display.section.theme" = "Motyw";
+"settings.display.section.theme.footer" = "Kolory niestandardowe można ustawić tylko wtedy, gdy wyłączona jest opcja dopasowania schematu kolorów systemu.";
+"settings.display.status.action-buttons" = "Przyciski akcji";
+"settings.display.status.media-style" = "Treści multimedialne";
+"settings.display.translate-button" = "Pokazuj przycisk tłumaczenia";
+"settings.display.theme.background" = "Kolor tła";
+"settings.display.theme.secondary-background" = "Dodatkowy kolor tła";
+"settings.display.theme.tint" = "Kolor wiodący";
+"settings.display.theme.systemColor" = "Zgodny z systemowym";
+"settings.general.browser" = "Przeglądarka";
+"settings.general.browser.in-app" = "W aplikacji";
+"settings.general.browser.system" = "Systemowa";
+"settings.general.display" = "Ustawienia ekranu";
+"settings.general.instance" = "Informacja o serwerze";
+"settings.general.push-notifications" = "Powiadomienia Push";
+"settings.general.remote-timelines" = "Strumienie innych serwerów";
+"settings.push.boosts" = "Podbicia";
+"settings.push.favorites" = "Polubione";
+"settings.push.follows" = "Obserwacja";
+"settings.push.main-toggle" = "Powiadomienia Push";
+"settings.push.main-toggle.description" = "Otrzymuj powiadomienia push o nowych aktywnościach";
+"settings.push.mentions" = "Wzmianki";
+"settings.push.navigation-title" = "Powiadomienia Push";
+"settings.push.new-posts" = "Nowe posty";
+"settings.push.polls" = "Wyniki sondaży";
+"settings.general.content" = "Ustawienia treści";
+"settings.system" = "Ustawienia systemowe";
+"settings.content.navigation-title" = "Ustawienia treści";
+"settings.content.use-instance-settings" = "Zastosuj ustawienia serwera";
+"settings.content.main-toggle.description" = "Zastosuj ustawienia z twojego serwera macierzystego";
+"settings.content.expand-spoilers" = "Pokazuj wrażliwe posty";
+"settings.content.expand-media" = "Multimedia";
+"settings.content.default-sensitive" = "Oznaczaj media jako wrażliwe";
+"settings.content.default-visibility" = "Widoczność postów";
+"settings.content.reading" = "Czytanie postów";
+"settings.content.posting" = "Wysyłanie postów";
+"enum.expand-media.show" = "Pokazuj wszystkie";
+"enum.expand-media.hide" = "Ukryj wszystkie";
+"enum.expand-media.hide-sensitive" = "Ukryj wrażliwe";
+"settings.section.accounts" = "Konta";
+"settings.section.app" = "Aplikacja";
+"settings.section.app.footer %@" = "Wersja aplikacji: %@";
+"settings.section.general" = "Ogólne";
+"settings.support.alert.error.message" = "Błąd przetwarzania twojego zakupu w aplikacji, proszę spróbuj ponownie.";
+"settings.support.alert.message" = "Bardzo dziękuję za twój napiwek! Doceniam to bardzo!";
+"settings.support.alert.title" = "Thanks!";
+"settings.support.message-from-dev" = "Cześć! Mam na imię Thomas i uwielbiam tworzenie aplikacji open source. Ice Cubes jest zdecydowanie jednym z tych moich dotychczasowych projektów, z których jestem najbardziej dumny – i bądźmy szczerzy, jest to również ten, który wymaga najwięcej nieustannych prac utrzymaniowych ze względu na ciągle zmieniający się świat Mastodona i mediów społecznościowych. Jeśli świetnie się bawisz, używając kostek lodu, rozważ podrzucenie mi małego napiwku. Umili mi to dzień (i pomoże sprawić, że aplikacja zawsze działać będzie bezproblemowo). 🚀";
+"settings.support.navigation-title" = "Wspieraj Ice Cubes";
+"settings.support.one.subtitle" = "Mały, ale uroczy i smakuje wyśmienicie!";
+"settings.support.one.title" = "🍬 Mały napiwek";
+"settings.support.placeholder.loading-subtitle" = "Loading subtitle ...";
+"settings.support.three.subtitle" = "Jesteś niesamowity, bardzo dziękuję!";
+"settings.support.three.title" = "🤯 Hojny napiwek";
+"settings.support.two.subtitle" = "Uwielbiam smak wyszukanej kawy ❤️";
+"settings.support.two.title" = "☕️ Miły napiwek";
+"settings.support.four.title" = "👽 Kim jesteś?";
+"settings.support.four.subtitle" = "To pozwoli na utrzymywanie Ice Cubes w działaniu przez długi czas!";
+"settings.timeline.add" = "Dodaj strumień zdalny";
+"settings.title" = "Ustawienia";
+"settings.rate" = "Oceń Ice Cubes";
+"settings.section.other" = "Inne";
+"settings.other.hide-openai" = "Włącz 🤖 pomocnik";
+"settings.other.social-keyboard" = "Włącz klawiaturę społecznościową";
+"settings.push.duplicate.title" = "Korektor duplikatów powiadomień";
+"settings.push.duplicate.footer" = "Otrzymujesz zduplikowane powiadomienia? Spróbuj tego magicznego przycisku, aby to naprawić";
+"settings.push.duplicate.button.fix" = "🪄 Napraw to";
+
+// MARK: Tabs
+"tab.explore" = "Odkrywaj";
+"tab.federated" = "Globalny";
+"tab.local" = "Lokalny";
+"tab.messages" = "Wiadomości";
+"tab.notifications" = "Powiadomienia";
+"tab.settings" = "Ustawienia";
+"tab.timeline" = "Strumienie";
+"tab.trending" = "Popularne";
+"tab.profile" = "Profile";
+
+// MARK: Timeline
+"timeline.%@-is-valid" = "%@ jest poprawnym serwerem";
+"timeline.add-remote.title" = "Dodaj strumień serwera";
+"timeline.add.action.add" = "Dodaj";
+"timeline.filter.add-local" = "Dodaj strumień zdalny";
+"timeline.filter.lists" = "Listy";
+"timeline.filter.local" = "Strumienie zdalne";
+"timeline.filter.tags" = "Obserwowane hasztagi";
+
+// MARK: Package: AppAccount
+"app-account.button.add" = "Dodaj konto";
+
+// MARK: Package: Account
+"account.action.add-remove-list" = "Dodaj/Usuń z listy";
+"account.action.edit-info" = "Edytuj profil";
+"account.action.mention" = "Wymień osobę";
+"account.action.message" = "Wyślij wiadomość";
+"account.action.notify-enable" = "Włącz powiadomienia";
+"account.action.notify-disable" = "Wyłącz powiadomienia";
+"account.action.reboosts-show" = "Pokazuj podbicia";
+"account.action.reboosts-hide" = "Ukryj podbicia";
+"account.action.block" = "Zablokuj";
+"account.action.unblock" = "Odblokuj";
+"account.action.mute" = "Wycisz";
+"account.action.unmute" = "Wyłącz wyciszenie";
+"account.boosted-by" = "Podbity przez";
+"account.detail.about" = "Opis";
+"account.detail.familiar-followers" = "Obserwowany także przez";
+"account.detail.n-fields %lld" = "%lld pola";
+"account.detail.featured-tags-n-posts %lld" = "%lld postów";
+"account.edit.about" = "Opis";
+"account.edit.account-settings.bot" = "Konto bota";
+"account.edit.account-settings.discoverable" = "Wykrywalne";
+"account.edit.account-settings.private" = "Prywatne";
+"account.edit.account-settings.section-title" = "Ustawienia konta";
+"account.edit.display-name" = "Nazwa wyświetlana";
+"account.edit.error.save.message" = "Błąd podczas zapisywania profilu, proszę spróbować ponownie.";
+"account.edit.error.save.title" = "Błąd podczas zapisywania profilu";
+"account.edit.navigation-title" = "Edytuj profil";
+"account.edit.post-settings.privacy" = "Prywatność domyślna";
+"account.edit.post-settings.section-title" = "Ustawienia postów";
+"account.edit.post-settings.sensitive" = "Treści wrażliwe";
+"account.favorited-by" = "Polubione przez";
+"account.follow.follow" = "Obserwuj";
+"account.follow.following" = "Obserwowany";
+"account.follow.requested" = "Requested";
+"account.follow-request.accept" = "Zaakceptuj";
+"account.follow-request.reject" = "Odrzuć";
+"account.follow-requests.pending-requests" = "Oczekujące prośby";
+"account.follow-requests.instructions" = "Ci użytkownicy nie zobaczą twoich postów, dopóki ich nie zaakceptujesz.";
+"account.followers" = "Obserwujący";
+"account.following" = "Obserwowani";
+"account.list.create" = "Utwórz nową listę";
+"account.list.create.confirm" = "Utwórz listę";
+"account.list.create.description" = "Wprowadź nazwę twojej listy";
+"account.list.delete" = "Usuń listę";
+"account.list.name" = "Nazwa listy";
+"account.post.pinned" = "Przypięty post";
+"account.posts" = "Posty";
+"account.relation.follows-you" = "Obserwuje ciebie";
+"account.joined" = "Dołączył(a)";
+"account.action.logout" = "Wyloguj się";
+
+// MARK: Package: Conversations
+"conversations.action.delete" = "Usuń";
+"conversations.action.mark-read" = "Oznacz jako przeczytany";
+"conversations.empty.message" = "Szukasz miłości w mediach społecznościowych? Tutaj znajdziesz wszystkie swoje bezpośrednie wiadomości i prywatne wzmianki. Szczęśliwego korespondowania! 📱❤️";
+"conversations.empty.title" = "Skrzynka odbiorcza pusta";
+"conversations.error.button" = "Spróbuj ponownie";
+"conversations.error.message" = "Błąd podczas ładowania twoich wiadomości";
+"conversations.error.title" = "Wystąpił błąd";
+"conversations.navigation-title" = "Wiadomości Prywatne";
+"conversations.new.message.placeholder" = "Nowa wiadomość";
+
+// MARK: Package: DesignSystem
+"design.tag.n-posts-from-n-participants %lld %lld" = "%lld postów od %lld użytkowników";
+"design.theme.navigation-title" = "Selektor Motywu";
+"design.theme.toots-preview" = "Podgląd postów";
+
+// MARK: Package: Explore
+"explore.navigation-title" = "Odkrywaj";
+"explore.search.message-%@" = "Z tego ekranu możesz wyszukać wszystko na temat %@";
+"explore.search.prompt" = "Szukaj osób, postów i hasztagów";
+"explore.search.title" = "Wyszukaj swój serwer";
+"explore.search.empty.message" = "To zapytanie nie zwróciło żadnych wyników wyszukiwania, spróbuj proszę użyć innego.";
+"explore.search.empty.title" = "Brak wyników wyszukiwania";
+"explore.section.posts" = "Posty";
+"explore.section.suggested-users" = "Ciekawe osoby";
+"explore.section.tags" = "Hasztagi";
+"explore.section.trending.links" = "Popularne linki";
+"explore.section.trending.posts" = "Popularne posty";
+"explore.section.trending.tags" = "Popularne hasztagi";
+"explore.section.users" = "Osoby";
+
+// MARK: Package: Env
+"env.poll-duration.5m" = "5 minut";
+"env.poll-duration.30m" = "30 minut";
+"env.poll-duration.1h" = "1 godzina";
+"env.poll-duration.6h" = "6 godzin";
+"env.poll-duration.1d" = "1 dzień";
+"env.poll-duration.3d" = "3 dni";
+"env.poll-duration.7d" = "7 dni";
+"env.poll-vote-frequency.one" = "Jeden głos";
+"env.poll-vote-frequency.multiple" = "Głosowanie wielokrotne";
+
+// MARK: Package: Lists
+"lists.add-remove-%@" = "Dodaj/Usuń %@";
+"lists.create" = "Utwórz nową listę";
+"lists.create.confirm" = "Utwórz listę";
+"lists.edit.users-in-list" = "Osoby na tej liście";
+"lists.name" = "Nazwa listy";
+"lists.name.message" = "Wprowadź nazwę twojej listy";
+
+// MARK: Package: Notifications
+"notifications.empty.message" = "Powiadomienia? Jakie powiadomienia? Twoja skrzynka powiadomień wygląda tak pusto. Bądź dalej niesamowity! 📱😎";
+"notifications.empty.title" = "Brak powiadomień";
+"notifications.error.message" = "Podczas ładowania powiadomień wystąpił błąd, proszę spróbować ponownie.";
+"notifications.error.title" = "Wystąpił błąd";
+"notifications.label.favorite" = "polubiony";
+"notifications.label.follow" = "obserwuje cię";
+"notifications.label.follow-request" = "prosił(a) o obserwowanie cię";
+"notifications.label.mention" = "wymienił cię";
+"notifications.label.poll" = "sondaż zakończony";
+"notifications.label.reblog" = "podbił";
+"notifications.label.status" = "opublikował status";
+"notifications.label.update" = "edytował(a) post";
+"notifications.menu-title.favorite" = "Polubione";
+"notifications.menu-title.follow" = "Obserwacja";
+"notifications.menu-title.follow-request" = "Prośba o Obserwację";
+"notifications.menu-title.mention" = "Wzmianka";
+"notifications.menu-title.poll" = "Sondaż";
+"notifications.menu-title.reblog" = "Podbicie";
+"notifications.menu-title.status" = "Post";
+"notifications.menu-title.update" = "Post zedytowany";
+"notifications.navigation-title" = "Wszystkie Powiadomienia";
+"notifications.tab.all" = "Wszystko";
+"notifications.tab.mentions" = "Wzmianki";
+
+// MARK: Package: Timeline
+"timeline.federated" = "Strumień globalny";
+"timeline.home" = "Strona domowa";
+"timeline.local" = "Strumień lokalny";
+"timeline.n-recent-from-n-participants %lld %lld" = "%lld ostatnich postów od %lld uczestników";
+"timeline.trending" = "Teraz popularne";
+
+// MARK: Package: Status
+"status.action.translate" = "Przetłumacz";
+"status.action.translated-label" = "Tłumaczenie z DeepL.com";
+"status.action.bookmark" = "Dodaj zakładkę";
+"status.action.boost" = "Podbij";
+"status.action.copy-text" = "Kopiuj tekst";
+"status.action.delete" = "Usuń";
+"status.action.edit" = "Edytuj";
+"status.action.favorite" = "Dodaj do polubionych";
+"status.action.mention" = "Wymień osobę";
+"status.action.message" = "Wyślij wiadomość";
+"status.action.pin" = "Przypnij";
+"status.action.post" = "Wyślij";
+"status.action.quote" = "Cytuj ten post";
+"status.action.reply" = "Odpowiedz";
+"status.action.section.your-post" = "Twój post";
+"status.action.share" = "Udostępnij ten post";
+"status.action.unbookmark" = "Usuń zakładkę";
+"status.action.unboost" = "Cofnij podbicie";
+"status.action.unfavorite" = "Usuń z polubionych";
+"status.action.unpin" = "Odepnij";
+"status.action.view-in-browser" = "Otwórz w przeglądarce";
+"status.draft.delete" = "Usuń wersję roboczą";
+"status.draft.save" = "Zachowaj wersję roboczą";
+"status.editor.ai-prompt.correct" = "Popraw tekst";
+"status.editor.ai-prompt.emphasize" = "Wyróżnij tekst";
+"status.editor.ai-prompt.fit" = "Skróć tekst";
+"status.editor.description.add" = "Dodaj opis";
+"status.editor.description.edit" = "Edytuj opis";
+"status.editor.drafts.navigation-title" = "Wersje Robocze";
+"status.editor.error.upload" = "Błąd wysyłania";
+"status.editor.language-select.navigation-title" = "Wybierz Język";
+"status.editor.language-select.recently-used" = "Ostatnio użyty";
+"status.editor.media.edit-image" = "Edytuj obrazek";
+"status.editor.media.image-description" = "Opis obrazka";
+"status.editor.mode.edit" = "Edycja twojego postu";
+"status.editor.mode.new" = "Nowy Post";
+"status.editor.mode.quote-%@" = "Cytat z %@";
+"status.editor.mode.reply-%@" = "Odpowiadając na %@";
+"status.editor.restore-previous" = "Przywróć poprzedni tekst";
+"status.editor.spoiler" = "Tekst spoilera";
+"status.editor.text.placeholder" = "Co masz na myśli?";
+"status.editor.visibility" = "Widoczność postu";
+"status.error.loading.message" = "Wystąpił błąd podczas ładowania postów, spróbuj ponownie.";
+"status.error.message" = "Wystąpił błąd w kontekście tego postu, proszę spróbuj ponownie.";
+"status.error.title" = "Wystąpił błąd";
+"status.filter.filtered-by-%@" = "Filtrowany przez: %@";
+"status.filter.show-anyway" = "Pokaż mimo wszystko";
+"status.image.alt-text.abbreviation" = "ALT";
+"status.media.content.show" = "Pokaż zawartość";
+"status.media.contextmenu.copy" = "Kopiuj obrazek";
+"status.media.contextmenu.save" = "Zachowaj obrazek";
+"status.media.contextmenu.share" = "Udostępnij ten obrazek";
+"status.media.contextmenu.view-browser" = "Zobacz w przeglądarce";
+"status.media.sensitive.show" = "Pokaż wrażliwą zawartość";
+"status.poll.n-votes %lld" = "%lld głosów";
+"status.poll.closed" = "Zamknięty";
+"status.poll.closes-in" = "Zamyka się za ";
+"status.poll.duration" = "Czas trwania sondażu";
+"status.poll.frequency" = "Częstotliwość odpytywania";
+"status.poll.option-n %lld" = "Opcja %lld";
+"status.post-from-%@" = "Post od %@";
+"status.row.was-boosted" = "podbił(a)";
+"status.row.was-reply" = "Odpowiedział(a) do";
+"status.row.you-boosted" = "Podbiłeś";
+"status.show-less" = "Pokaż mniej";
+"status.show-more" = "Pokaż więcej";
+"status.summary.at-time" = " o ";
+"status.summary.edited-time" = "Ostatnia edycja: ";
+"status.summary.n-boosts %lld" = "%lld podbić";
+"status.summary.n-favorites %lld" = "%lld polubień";
+"status.visibility.direct" = "Prywatny";
+"status.visibility.follower" = "Obserwujący";
+"status.visibility.public" = "Wszyscy";
+"status.visibility.unlisted" = "Niewymienieni";
+
+// MARK: Filters
+"filter.new" = "Nowy filtr";
+"filter.filters" = "Filtry";
+"filter.edit.title" = "Nazwa filtra";
+"filter.edit.keywords" = "Słowa kluczowe filtra";
+"filter.edit.keywords.add" = "Dodaj nowe słowo kluczowe";
+"filter.edit.contexts" = "Kontekst filtra";
+"filter.edit.action" = "Działanie filtra";
+"account.action.edit-filters" = "Edytuj filtry";
