@@ -371,10 +371,10 @@
 "filter.edit.contexts" = "Dove applicare il filtro";
 "filter.edit.action" = "Azione del filtro";
 "account.action.edit-filters" = "Modifica filtri";
-"filter.contexts.home" = "Home and lists";
-"filter.contexts.notifications" = "Notifications";
-"filter.contexts.public" = "Public timelines";
-"filter.contexts.conversations" = "Conversations";
-"filter.contexts.profiles" = "Profiles";
-"filter.action.warning" = "Hide with a warning";
-"filter.action.hide" = "Hide completely";
+"filter.contexts.home" = "Nella Home e nelle liste";
+"filter.contexts.notifications" = "Nelle notifiche";
+"filter.contexts.public" = "Nelle timeline pubbliche";
+"filter.contexts.conversations" = "Nelle conversazioni";
+"filter.contexts.profiles" = "Nei profili";
+"filter.action.warning" = "Nascondi con un avviso";
+"filter.action.hide" = "Nascondi completamente";
