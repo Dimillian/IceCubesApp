@@ -22,17 +22,24 @@ public struct ExploreView: View {
         loadingView
       } else if !viewModel.searchQuery.isEmpty {
         if viewModel.isSearching {
-          HStack {}
-            .listRowBackground(theme.secondaryBackgroundColor)
-            .listRowSeparator(.hidden)
-        } else if let results = viewModel.results[viewModel.searchQuery], !results.isEmpty {
-          makeSearchResultsView(results: results)
-        } else {
-          EmptyView(iconName: "magnifyingglass",
-                    title: "explore.search.empty.title",
-                    message: "explore.search.empty.message")
-            .listRowBackground(theme.secondaryBackgroundColor)
-            .listRowSeparator(.hidden)
+          HStack {
+            Spacer()
+            ProgressView()
+            Spacer()
+          }
+          .listRowBackground(theme.secondaryBackgroundColor)
+          .listRowSeparator(.hidden)
+          .id(UUID())
+        } else if let results = viewModel.results[viewModel.searchQuery] {
+          if results.isEmpty, !viewModel.isSearching {
+            EmptyView(iconName: "magnifyingglass",
+                      title: "explore.search.empty.title",
+                      message: "explore.search.empty.message")
+              .listRowBackground(theme.secondaryBackgroundColor)
+              .listRowSeparator(.hidden)
+          } else {
+            makeSearchResultsView(results: results)
+          }
         }
       } else if viewModel.allSectionsEmpty {
         EmptyView(iconName: "magnifyingglass",
