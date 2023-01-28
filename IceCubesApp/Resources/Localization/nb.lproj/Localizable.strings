@@ -370,10 +370,10 @@
 "filter.edit.contexts" = "Filtrer kontekster";
 "filter.edit.action" = "Filterhandling";
 "account.action.edit-filters" = "Rediger filtre";
-"filter.contexts.home" = "Home and lists";
-"filter.contexts.notifications" = "Notifications";
-"filter.contexts.public" = "Public timelines";
-"filter.contexts.conversations" = "Conversations";
-"filter.contexts.profiles" = "Profiles";
-"filter.action.warning" = "Hide with a warning";
-"filter.action.hide" = "Hide completely";
+"filter.contexts.home" = "Hjem og lister";
+"filter.contexts.notifications" = "Varsler";
+"filter.contexts.public" = "Offentlige tidslinjer";
+"filter.contexts.conversations" = "Samtaler";
+"filter.contexts.profiles" = "Profiler";
+"filter.action.warning" = "Skjul med advarsel";
+"filter.action.hide" = "Skjul helt";
