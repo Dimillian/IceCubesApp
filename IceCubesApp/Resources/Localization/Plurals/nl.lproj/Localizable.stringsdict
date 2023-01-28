@@ -13,7 +13,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string>Eén nieuwe post</string>
+			<string>%lld nieuwe post</string>
 			<key>other</key>
 			<string>%lld nieuwe posts</string>
 		</dict>
@@ -29,9 +29,9 @@
             <key>NSStringFormatValueTypeKey</key>
             <string>lld</string>
             <key>one</key>
-            <string> and %lld other </string>
+            <string> en %lld andere </string>
             <key>other</key>
-            <string> and %lld others </string>
+            <string> en %lld anderen </string>
         </dict>
     </dict>
 </dict>
