@@ -60,7 +60,6 @@ public struct AvatarView: View {
             placeholderView
           }
         }
-        .processors([.resize(size: size.size), .roundedCorners(radius: size.cornerRadius)])
         .frame(width: size.size.width, height: size.size.height)
       }
     }

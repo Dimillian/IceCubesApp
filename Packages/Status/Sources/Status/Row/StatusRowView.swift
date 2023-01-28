@@ -303,7 +303,7 @@ public struct StatusRowView: View {
 
   private var menuButton: some View {
     Menu {
-      StatusRowContextMenu(viewModel: viewModel)
+      contextMenu
     } label: {
       Image(systemName: "ellipsis")
         .frame(width: 30, height: 30)
