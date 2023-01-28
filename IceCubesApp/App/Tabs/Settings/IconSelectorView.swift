@@ -63,7 +63,7 @@ struct IconSelectorView: View {
         Section {
           makeIconGridView(icons: Icon.albertKinngIcons)
         } header: {
-          Text("Icons by Alert Kinng")
+          Text("Icons by Albert Kinng")
             .font(.scaledHeadline)
         }
       }
