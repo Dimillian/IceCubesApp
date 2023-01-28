@@ -195,6 +195,9 @@
 		9FBFE639292A715500C250E9 /* IceCubesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IceCubesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FBFE63C292A715500C250E9 /* IceCubesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceCubesApp.swift; sourceTree = "<group>"; };
 		9FBFE642292A715600C250E9 /* IceCubesApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IceCubesApp.entitlements; sourceTree = "<group>"; };
+		9FCBB3D02984EFD5009B77EE /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = pl; path = pl.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		9FCBB3D12984EFD5009B77EE /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9FCBB3D22984EFD5009B77EE /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9FD34822293D06E800DB0EE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9FD542E52962D2CE0045321A /* Lists */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Lists; path = Packages/Lists; sourceTree = "<group>"; };
 		9FE151A5293C90F900E9683D /* IconSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSelectorView.swift; sourceTree = "<group>"; };
@@ -603,6 +606,7 @@
 				fr,
 				"pt-BR",
 				nb,
+				pl,
 			);
 			mainGroup = 9FBFE630292A715500C250E9;
 			packageReferences = (
@@ -760,6 +764,7 @@
 				9FB143D329842BB200A27BB1 /* fr */,
 				56B5BC132984206F00CF3A98 /* pt-BR */,
 				8C27D977298471E900CDF593 /* nb */,
+				9FCBB3D02984EFD5009B77EE /* pl */,
 			);
 			name = Localizable.stringsdict;
 			sourceTree = "<group>";
@@ -769,6 +774,7 @@
 			children = (
 				E970C10929845A9400E88A8C /* en */,
 				8C27D979298471E900CDF593 /* nb */,
+				9FCBB3D22984EFD5009B77EE /* pl */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -787,6 +793,7 @@
 				9FB143D429842BB200A27BB1 /* fr */,
 				56B5BC142984206F00CF3A98 /* pt-BR */,
 				8C27D978298471E900CDF593 /* nb */,
+				9FCBB3D12984EFD5009B77EE /* pl */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
