@@ -260,10 +260,10 @@
 "notifications.error.title" = "An error occurred";
 "notifications.label.favorite %lld" = "starred";
 "notifications.label.follow %lld" = "followed you";
-"notifications.label.follow-request" = "requested to follow you";
 "notifications.label.mention %lld" = "mentioned you";
+"notifications.label.reblog %lld" = "boosted";
 "notifications.label.poll" = "poll ended";
-"notifications.label.reblog  %lld" = "boosted";
+"notifications.label.follow-request" = "requested to follow you";
 "notifications.label.status" = "posted a status";
 "notifications.label.update" = "edited a post";
 "notifications.menu-title.favorite" = "Favorite";
