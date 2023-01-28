@@ -231,7 +231,7 @@
 "explore.section.tags" = "Tagger";
 "explore.section.trending.links" = "Trendende lenker";
 "explore.section.trending.posts" = "Trendende innlegg";
-"explore.section.trending.tags" = "Trendende lenker";
+"explore.section.trending.tags" = "Trendende tagger";
 "explore.section.users" = "Brukere";
 
 // MARK: Package: Env
