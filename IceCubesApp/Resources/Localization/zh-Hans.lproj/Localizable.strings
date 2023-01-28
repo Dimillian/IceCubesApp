@@ -4,7 +4,7 @@
 "action.save"  = "保存";
 "action.done" = "完成";
 "action.retry" = "重试";
-"action.view.error" = "View error";
+"action.view.error" = "查看错误";
 
 "alert.button.ok" = "OK";
 "alert.error" = "错误！";
@@ -113,7 +113,7 @@
 "settings.other.social-keyboard" = "启用社交键盘";
 
 "settings.general.content" = "内容设置";
-"settings.system" = "System Settings";
+"settings.system" = "系统设置";
 "settings.content.navigation-title" = "内容设置";
 "settings.content.use-instance-settings" = "使用服务器设置";
 "settings.content.main-toggle.description" = "使用你主服务器的设置";
@@ -369,13 +369,13 @@
 "filter.edit.keywords.add" = "添加关键词";
 "filter.edit.contexts" = "过滤范围";
 "filter.edit.action" = "过滤器行为";
-"filter.contexts.home" = "Home and lists";
-"filter.contexts.notifications" = "Notifications";
-"filter.contexts.public" = "Public timelines";
-"filter.contexts.conversations" = "Conversations";
-"filter.contexts.profiles" = "Profiles";
-"filter.action.warning" = "Hide with a warning";
-"filter.action.hide" = "Hide completely";
+"filter.contexts.home" = "主页和列表";
+"filter.contexts.notifications" = "通知";
+"filter.contexts.public" = "公共时间线";
+"filter.contexts.conversations" = "对话";
+"filter.contexts.profiles" = "个人主页";
+"filter.action.warning" = "隐藏并提醒";
+"filter.action.hide" = "完全隐藏";
 
 "enum.expand-media.show" = "显示所有";
 "enum.expand-media.hide" = "隐藏所有";
