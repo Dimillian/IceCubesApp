@@ -25,7 +25,11 @@ struct AccountDetailHeaderView: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      headerImageView
+      Rectangle()
+        .frame(height: 200)
+        .overlay {
+            headerImageView
+        }
       accountInfoView
     }
   }
