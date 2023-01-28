@@ -34,17 +34,17 @@ public struct StatusCardView: View {
           VStack(alignment: .leading, spacing: 6) {
             Text(title)
               .font(.scaledHeadline)
-              .lineLimit(3)
+              .lineLimit(2, reservesSpace: true)
             if let description = card.description, !description.isEmpty {
               Text(description)
                 .font(.scaledBody)
                 .foregroundColor(.gray)
-                .lineLimit(3)
+                .lineLimit(3, reservesSpace: true)
             }
             Text(url.host() ?? url.absoluteString)
               .font(.scaledFootnote)
               .foregroundColor(theme.tintColor)
-              .lineLimit(1)
+              .lineLimit(1, reservesSpace: true)
           }
           Spacer()
         }.padding(8)
