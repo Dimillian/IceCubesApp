@@ -78,7 +78,9 @@ public class StatusRowViewModel: ObservableObject {
           let url = status.content.statusesURLs.first,
           client.hasConnection(with: url)
     else {
-      isEmbedLoading = false
+      if isEmbedLoading {
+        isEmbedLoading = false
+      }
       return
     }
     do {
