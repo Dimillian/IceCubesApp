@@ -96,7 +96,7 @@ public enum Accounts: Endpoint {
         params.append(.init(name: "only_media", value: onlyMedia ? "true" : "false"))
       }
       if let excludeReplies {
-        params.append(.init(name: "exclude_replies", value: excludeReplies ? "true" : "fals"))
+        params.append(.init(name: "exclude_replies", value: excludeReplies ? "true" : "false"))
       }
       if let pinned {
         params.append(.init(name: "pinned", value: pinned ? "true" : "false"))
