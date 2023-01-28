@@ -45,6 +45,7 @@ public struct StatusEmbeddedView: View {
         }
         .font(.scaledCaption)
         .foregroundColor(.gray)
+        .drawingGroup()
       }
     }
   }

@@ -148,6 +148,7 @@ public struct StatusRowView: View {
       .font(.scaledFootnote)
       .foregroundColor(.gray)
       .fontWeight(.semibold)
+      .drawingGroup()
       .onTapGesture {
         if viewModel.isRemote, let url = viewModel.status.account.url {
           Task {
@@ -246,6 +247,7 @@ public struct StatusRowView: View {
           .accessibility(label: viewModel.displaySpoiler ? Text("status.show-more") : Text("status.show-less"))
           .accessibilityHidden(true)
         }
+        .drawingGroup()
         .onTapGesture { // make whole row tapable to make up for smaller button size
           withAnimation {
             viewModel.displaySpoiler.toggle()
@@ -262,6 +264,7 @@ public struct StatusRowView: View {
             })
           Spacer()
         }
+        .drawingGroup()
 
         makeTranslateView(status: status)
 
@@ -297,6 +300,7 @@ public struct StatusRowView: View {
         }
         .font(.scaledFootnote)
         .foregroundColor(.gray)
+        .drawingGroup()
       }
     }
   }
