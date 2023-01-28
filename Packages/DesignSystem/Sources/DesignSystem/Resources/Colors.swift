@@ -24,7 +24,7 @@ extension Color: RawRepresentable {
     let green = Double((rawValue & 0x00FF00) >> 8) / 0xFF
     let blue = Double(rawValue & 0x0000FF) / 0xFF
     let opacity = Double((rawValue & 0xFF000000) >> 24) / 0xFF
-    self = Color(red: red, green: green, blue: blue, opacity: opacity)
+    self = Color(red: red, green: green, blue: blue, opacity: opacity == 0 ? 1 : 0)
   }
 
   public var rawValue: Int {
