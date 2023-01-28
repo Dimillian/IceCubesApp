@@ -4,7 +4,7 @@
 "action.save"  = "Guardar";
 "action.done" = "Hecho";
 "action.retry" = "Reintentar";
-"action.view.error" = "View error";
+"action.view.error" = "Ver error";
 
 "alert.button.ok" = "Ok";
 "alert.error" = "¡Error!";
@@ -112,7 +112,7 @@
 "settings.other.hide-openai" = "Activar ayudante 🤖";
 "settings.other.social-keyboard" = "Activar teclado social";
 "settings.general.content" = "Ajustes de contenido";
-"settings.system" = "System Settings";
+"settings.system" = "Ajustes del sistema";
 "settings.content.navigation-title" = "Ajustes de contenido";
 "settings.content.use-instance-settings" = "Usar ajustes del servidor";
 "settings.content.main-toggle.description" = "Usar ajustes de tu instancia inicial";
@@ -122,9 +122,9 @@
 "settings.content.default-visibility" = "Publicar visibilidad";
 "settings.content.reading" = "Leyendo";
 "settings.content.posting" = "Publicando";
-"settings.push.duplicate.title" = "Duplicate notifications fixer";
-"settings.push.duplicate.footer" = "Receiving duplicate notifications? Try this magic button in order to fix it";
-"settings.push.duplicate.button.fix" = "🪄 Fix it";
+"settings.push.duplicate.title" = "Arreglar notificaciones duplicadas";
+"settings.push.duplicate.footer" = "¿Recibes notificaciones por duplicado? Usa este botón mágico para arreglarlo";
+"settings.push.duplicate.button.fix" = "🪄 Arréglalo";
 "enum.expand-media.show" = "Siempre";
 "enum.expand-media.hide" = "Nunca";
 "enum.expand-media.hide-sensitive" = "Ocultar contenido sensible";
@@ -138,7 +138,7 @@
 "tab.settings" = "Ajustes";
 "tab.timeline" = "Cronología";
 "tab.trending" = "Tendencias";
-"tab.profile" = "Profile";
+"tab.profile" = "Perfil";
 
 // MARK: Timeline
 "timeline.%@-is-valid" = "%@ es una instancia válida";
@@ -201,7 +201,7 @@
 "account.posts" = "Publicaciones";
 "account.relation.follows-you" = "Te sigue";
 "account.joined" = "Se unió el";
-"account.action.logout" = "Logout account";
+"account.action.logout" = "Cerrar sesión";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Borrar";
@@ -362,11 +362,18 @@
 "status.visibility.unlisted" = "Sin listar";
 
 // MARK: Filters
-"filter.new" = "New Filter";
-"filter.filters" = "Filters";
-"filter.edit.title" = "Filter title";
-"filter.edit.keywords" = "Filter Keywords";
-"filter.edit.keywords.add" = "Add a new keyword";
-"filter.edit.contexts" = "Filter Contexts";
-"filter.edit.action" = "Filter Action";
-"account.action.edit-filters" = "Edit Filters";
+"filter.new" = "Nuevo filtro";
+"filter.filters" = "Filtros";
+"filter.edit.title" = "Título del filtro";
+"filter.edit.keywords" = "Palabras claves del filtro";
+"filter.edit.keywords.add" = "Añadir una nueva palabra clave";
+"filter.edit.contexts" = "Contextos del filtro";
+"filter.edit.action" = "Acción del filtro";
+"account.action.edit-filters" = "Editar filtros";
+"filter.contexts.home" = "Inicio y listas";
+"filter.contexts.notifications" = "Notificaciones";
+"filter.contexts.public" = "Cronologías públicas";
+"filter.contexts.conversations" = "Conversaciones";
+"filter.contexts.profiles" = "Perfiles";
+"filter.action.warning" = "Ocultar con una advertencia";
+"filter.action.hide" = "Ocultar completamente";

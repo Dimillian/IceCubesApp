@@ -367,7 +367,13 @@
 "filter.edit.keywords.add" = "Voeg een nieuw sleutelwoord toe";
 "filter.edit.contexts" = "Filtercontext";
 "filter.edit.action" = "Filteractie";
-"account.action.edit-filters" = "Bewerk filters";
+"filter.contexts.home" = "Home and lists";
+"filter.contexts.notifications" = "Notifications";
+"filter.contexts.public" = "Public timelines";
+"filter.contexts.conversations" = "Conversations";
+"filter.contexts.profiles" = "Profiles";
+"filter.action.warning" = "Hide with a warning";
+"filter.action.hide" = "Hide completely";
 
 "enum.expand-media.show" = "Toon alle";
 "enum.expand-media.hide" = "Verberg alle";
