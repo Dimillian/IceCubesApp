@@ -363,8 +363,13 @@
 "filter.edit.keywords.add" = "新しいキーワードを追加する";
 "filter.edit.contexts" = "フィルターする文章";
 "filter.edit.action" = "フィルターする";
-"account.action.edit-filters" = "フィルターを編集する";
-"account.action.edit-filters" = "フィルターを編集する";
+"filter.contexts.home" = "Home and lists";
+"filter.contexts.notifications" = "Notifications";
+"filter.contexts.public" = "Public timelines";
+"filter.contexts.conversations" = "Conversations";
+"filter.contexts.profiles" = "Profiles";
+"filter.action.warning" = "Hide with a warning";
+"filter.action.hide" = "Hide completely";
 
 "enum.expand-media.show" = "全て表示";
 "enum.expand-media.hide" = "全て隠す";
