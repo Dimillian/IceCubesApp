@@ -256,7 +256,7 @@
 "notifications.empty.title" = "Geen notificaties";
 "notifications.error.message" = "Er heeft zich een fout voorgedaan tijdens het laden van je notificaties. Probeer het nogmaals.";
 "notifications.error.title" = "Er heeft zich een fout voorgedaan";
-"notifications.label.favorite %lld" = "gefavoriet";
+"notifications.label.favorite %lld" = "heeft jouw bericht als favoriet gemarkeerd";
 "notifications.label.follow %lld" = "volgt jou";
 "notifications.label.follow-request" = "wil je volgen";
 "notifications.label.mention %lld" = "heeft jou vermeld";
@@ -278,7 +278,7 @@
 
 // MARK: Package: Timeline
 "timeline.federated" = "Gefedereerd";
-"timeline.home" = "Startpagina";
+"timeline.home" = "Start";
 "timeline.local" = "Lokaal";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld recente posts van %lld deelnemers";
 "timeline.trending" = "Trending";
@@ -367,13 +367,13 @@
 "filter.edit.keywords.add" = "Voeg een nieuw sleutelwoord toe";
 "filter.edit.contexts" = "Filtercontext";
 "filter.edit.action" = "Filteractie";
-"filter.contexts.home" = "Home and lists";
-"filter.contexts.notifications" = "Notifications";
-"filter.contexts.public" = "Public timelines";
-"filter.contexts.conversations" = "Conversations";
-"filter.contexts.profiles" = "Profiles";
-"filter.action.warning" = "Hide with a warning";
-"filter.action.hide" = "Hide completely";
+"filter.contexts.home" = "Start en lijsten";
+"filter.contexts.notifications" = "Meldingen";
+"filter.contexts.public" = "Openbare tijdlijnen";
+"filter.contexts.conversations" = "Gesprekken";
+"filter.contexts.profiles" = "Profielen";
+"filter.action.warning" = "Verberg met waarschuwing";
+"filter.action.hide" = "Verberg volledig";
 
 "enum.expand-media.show" = "Toon alle";
 "enum.expand-media.hide" = "Verberg alle";
