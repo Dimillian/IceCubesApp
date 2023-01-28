@@ -258,12 +258,12 @@
 "notifications.empty.title" = "Brak powiadomień";
 "notifications.error.message" = "Podczas ładowania powiadomień wystąpił błąd, proszę spróbować ponownie.";
 "notifications.error.title" = "Wystąpił błąd";
-"notifications.label.favorite" = "polubiony";
-"notifications.label.follow" = "obserwuje cię";
+"notifications.label.favorite %lld" = "polubiony";
+"notifications.label.follow %lld" = "obserwuje cię";
 "notifications.label.follow-request" = "prosił(a) o obserwowanie cię";
-"notifications.label.mention" = "wymienił cię";
+"notifications.label.mention %lld" = "wymienił cię";
 "notifications.label.poll" = "sondaż zakończony";
-"notifications.label.reblog" = "podbił";
+"notifications.label.reblog %lld" = "podbił";
 "notifications.label.status" = "opublikował status";
 "notifications.label.update" = "edytował(a) post";
 "notifications.menu-title.favorite" = "Polubione";

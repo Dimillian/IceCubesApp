@@ -240,12 +240,12 @@
 "notifications.empty.title" = "Yeni bildirim yok";
 "notifications.error.message" = "Bildirimlerinizi yüklerken bir hata oluştu, lütfen tekrar deneyin.";
 "notifications.error.title" = "Bir hata oluştu";
-"notifications.label.favorite" = "favorilendi";
-"notifications.label.follow" = "seni takip etti";
+"notifications.label.favorite %lld" = "favorilendi";
+"notifications.label.follow %lld" = "seni takip etti";
 "notifications.label.follow-request" = "seni takip etmek istiyor";
-"notifications.label.mention" = "senden bahsetti";
+"notifications.label.mention %lld" = "senden bahsetti";
 "notifications.label.poll" = "anket sona erdi";
-"notifications.label.reblog" = "yükseltildi";
+"notifications.label.reblog %lld" = "yükseltildi";
 "notifications.label.status" = "bir durum paylaştı";
 "notifications.label.update" = "bir gönderiyi düzenledi";
 "notifications.menu-title.favorite" = "Favori";

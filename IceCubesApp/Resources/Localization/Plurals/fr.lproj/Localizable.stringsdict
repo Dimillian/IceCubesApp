@@ -18,21 +18,85 @@
 			<string>%lld nouveaux postes</string>
 		</dict>
 	</dict>
-	<key>notifications-others-count %lld</key>
-	<dict>
-		<key>NSStringLocalizedFormatKey</key>
-		<string>%#@noficationsOthersCount@</string>
-		<key>noficationsOthersCount</key>
-		<dict>
-			<key>NSStringFormatSpecTypeKey</key>
-			<string>NSStringPluralRuleType</string>
-			<key>NSStringFormatValueTypeKey</key>
-			<string>lld</string>
-			<key>one</key>
-			<string> et %lld autre </string>
-			<key>other</key>
-			<string> et %lld autres </string>
-		</dict>
-	</dict>
+    <key>notifications-others-count %lld</key>
+    <dict>
+        <key>NSStringLocalizedFormatKey</key>
+        <string>%#@noficationsOthersCount@</string>
+        <key>noficationsOthersCount</key>
+        <dict>
+            <key>NSStringFormatSpecTypeKey</key>
+            <string>NSStringPluralRuleType</string>
+            <key>NSStringFormatValueTypeKey</key>
+            <string>lld</string>
+            <key>one</key>
+            <string> et %lld autre </string>
+            <key>other</key>
+            <string> et %lld autres </string>
+        </dict>
+    </dict>
+    <key>notifications.label.mention %lld</key>
+    <dict>
+        <key>NSStringLocalizedFormatKey</key>
+        <string>%#@count@</string>
+        <key>count</key>
+        <dict>
+            <key>NSStringFormatSpecTypeKey</key>
+            <string>NSStringPluralRuleType</string>
+            <key>NSStringFormatValueTypeKey</key>
+            <string>lld</string>
+            <key>one</key>
+            <string>vous a mentionné</string>
+            <key>other</key>
+            <string>vous ont mentionné</string>
+        </dict>
+    </dict>
+    <key>notifications.label.follow %lld</key>
+    <dict>
+        <key>NSStringLocalizedFormatKey</key>
+        <string>%#@count@</string>
+        <key>count</key>
+        <dict>
+            <key>NSStringFormatSpecTypeKey</key>
+            <string>NSStringPluralRuleType</string>
+            <key>NSStringFormatValueTypeKey</key>
+            <string>lld</string>
+            <key>one</key>
+            <string>vous suit</string>
+            <key>other</key>
+            <string>vous suivent</string>
+        </dict>
+    </dict>
+    <key>notifications.label.reblog %lld</key>
+    <dict>
+        <key>NSStringLocalizedFormatKey</key>
+        <string>%#@count@</string>
+        <key>count</key>
+        <dict>
+            <key>NSStringFormatSpecTypeKey</key>
+            <string>NSStringPluralRuleType</string>
+            <key>NSStringFormatValueTypeKey</key>
+            <string>lld</string>
+            <key>one</key>
+            <string>a boosté</string>
+            <key>other</key>
+            <string>ont boosté</string>
+        </dict>
+    </dict>
+    <key>notifications.label.favorite %lld</key>
+    <dict>
+        <key>NSStringLocalizedFormatKey</key>
+        <string>%#@count@</string>
+        <key>count</key>
+        <dict>
+            <key>NSStringFormatSpecTypeKey</key>
+            <string>NSStringPluralRuleType</string>
+            <key>NSStringFormatValueTypeKey</key>
+            <string>lld</string>
+            <key>one</key>
+            <string>aime</string>
+            <key>other</key>
+            <string>aiment</string>
+        </dict>
+    </dict>
 </dict>
 </plist>

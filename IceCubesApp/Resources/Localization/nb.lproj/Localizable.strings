@@ -258,12 +258,12 @@
 "notifications.empty.title" = "Ingen varsler";
 "notifications.error.message" = "Det oppsto en feil under innlasting av varslene dine. Prøv på nytt.";
 "notifications.error.title" = "En feil oppstod";
-"notifications.label.favorite" = "stjernet";
-"notifications.label.follow" = "fulgte deg";
+"notifications.label.favorite %lld" = "stjernet";
+"notifications.label.follow %lld" = "fulgte deg";
 "notifications.label.follow-request" = "ba om å følge deg";
-"notifications.label.mention" = "nevnte deg";
+"notifications.label.mention %lld" = "nevnte deg";
 "notifications.label.poll" = "avstemningen avsluttet";
-"notifications.label.reblog" = "forsterket";
+"notifications.label.reblog %lld" = "forsterket";
 "notifications.label.status" = "har lagt ut en status";
 "notifications.label.update" = "redigerte et innlegg";
 "notifications.menu-title.favorite" = "Favoritt";

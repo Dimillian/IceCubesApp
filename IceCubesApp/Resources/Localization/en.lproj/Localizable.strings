@@ -258,12 +258,12 @@
 "notifications.empty.title" = "No notifications";
 "notifications.error.message" = "An error occurred while loading your notifications, please try again.";
 "notifications.error.title" = "An error occurred";
-"notifications.label.favorite" = "starred";
-"notifications.label.follow" = "followed you";
+"notifications.label.favorite %lld" = "starred";
+"notifications.label.follow %lld" = "followed you";
 "notifications.label.follow-request" = "requested to follow you";
-"notifications.label.mention" = "mentioned you";
+"notifications.label.mention %lld" = "mentioned you";
 "notifications.label.poll" = "poll ended";
-"notifications.label.reblog" = "boosted";
+"notifications.label.reblog  %lld" = "boosted";
 "notifications.label.status" = "posted a status";
 "notifications.label.update" = "edited a post";
 "notifications.menu-title.favorite" = "Favorite";
