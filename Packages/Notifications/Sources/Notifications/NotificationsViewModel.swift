@@ -91,7 +91,7 @@ class NotificationsViewModel: ObservableObject {
   func fetchNextPage() async {
     guard let client else { return }
     do {
-      guard let lastId = consolidatedNotifications.last?.id else { return }
+      guard let lastId = consolidatedNotifications.last?.notificationIds.last else { return }
       state = .display(notifications: consolidatedNotifications, nextPageState: .loadingNextPage)
       let newNotifications: [Models.Notification] =
         try await client.get(endpoint: Notifications.notifications(sinceId: nil,
@@ -129,14 +129,16 @@ class NotificationsViewModel: ObservableObject {
 }
 
 struct ConsolidatedNotification: Identifiable {
-  let id: String
+  let notificationIds: [String]
   let type: Models.Notification.NotificationType
   let createdAt: ServerDate
   let accounts: [Account]
   let status: Status?
 
+  var id: String? { notificationIds.first }
+
   static func placeholder() -> ConsolidatedNotification {
-    .init(id: UUID().uuidString,
+    .init(notificationIds: [UUID().uuidString],
           type: .favourite,
           createdAt: "2022-12-16T10:20:54.000Z",
           accounts: [.placeholder()],
@@ -171,7 +173,7 @@ extension Array where Element == Models.Notification {
             let supportedType = notification.supportedType
       else { return nil }
 
-      return ConsolidatedNotification(id: notification.id,
+      return ConsolidatedNotification(notificationIds: notifications.map(\.id),
                                       type: supportedType,
                                       createdAt: notification.createdAt,
                                       accounts: notifications.map(\.account),
