@@ -50,7 +50,13 @@ public class Client: ObservableObject, Equatable {
 
   public func hasConnection(with url: URL) -> Bool {
     guard let host = url.host else { return false }
-    return connections.contains(host)
+    if let rootHost = host.split(separator: ".", maxSplits: 1).last {
+      // Sometimes the connection is with the root host instead of a subdomain
+      // eg. Mastodon runs on mastdon.domain.com but the connection is with domain.com
+      return connections.contains(host) || connections.contains(String(rootHost))
+    } else {
+      return connections.contains(host)
+    }
   }
 
   private func makeURL(scheme: String = "https", endpoint: Endpoint, forceVersion: Version? = nil) -> URL {
