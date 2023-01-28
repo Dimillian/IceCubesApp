@@ -198,6 +198,9 @@
 		9FCBB3D02984EFD5009B77EE /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = pl; path = pl.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		9FCBB3D12984EFD5009B77EE /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9FCBB3D22984EFD5009B77EE /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9FCBB3D329859615009B77EE /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9FCBB3D429859615009B77EE /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9FCBB3D52985965D009B77EE /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ca; path = ca.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		9FD34822293D06E800DB0EE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9FD542E52962D2CE0045321A /* Lists */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Lists; path = Packages/Lists; sourceTree = "<group>"; };
 		9FE151A5293C90F900E9683D /* IconSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSelectorView.swift; sourceTree = "<group>"; };
@@ -607,6 +610,7 @@
 				"pt-BR",
 				nb,
 				pl,
+				ca,
 			);
 			mainGroup = 9FBFE630292A715500C250E9;
 			packageReferences = (
@@ -765,6 +769,7 @@
 				56B5BC132984206F00CF3A98 /* pt-BR */,
 				8C27D977298471E900CDF593 /* nb */,
 				9FCBB3D02984EFD5009B77EE /* pl */,
+				9FCBB3D52985965D009B77EE /* ca */,
 			);
 			name = Localizable.stringsdict;
 			sourceTree = "<group>";
@@ -775,6 +780,7 @@
 				E970C10929845A9400E88A8C /* en */,
 				8C27D979298471E900CDF593 /* nb */,
 				9FCBB3D22984EFD5009B77EE /* pl */,
+				9FCBB3D429859615009B77EE /* ca */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -794,6 +800,7 @@
 				56B5BC142984206F00CF3A98 /* pt-BR */,
 				8C27D978298471E900CDF593 /* nb */,
 				9FCBB3D12984EFD5009B77EE /* pl */,
+				9FCBB3D329859615009B77EE /* ca */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

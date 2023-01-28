@@ -1,4 +1,3 @@
-// MARK: Common strings
 "action.cancel" = "Cancel·la";
 "action.delete" = "Elimina";
 "action.save" = "Desa";
@@ -15,7 +14,7 @@
 "see-more" = "Mostra'n més";
 
 // MARK: Common strings
-"account.add.error.instance-not-supported" = "Aquesta instància no està suportada actualment."
+"account.add.error.instance-not-supported" = "Aquesta instància no està suportada actualment.";
 "account.add.navigation-title" = "Afegeix un compte";
 "account.add.sign-in" = "Inicia sessió";
 
@@ -40,7 +39,7 @@
 "instance.info.section.rules" = "Normes de la instància";
 "instance.info.users" = "Usuaris";
 "instance.info.version" = "Versió";
-"instance.list.posts-%@" = "%" publicacions";
+"instance.list.posts-%@" = "% publicacions";
 "instance.list.users-%@" = "%@ usuaris";
 "instance.suggestions" = "Suggeriments";
 "instance.url" = "URL de la instància";
@@ -176,7 +175,7 @@
 "account.edit.account-settings.private" = "Privat";
 "account.edit.account-settings.section-title" = "Configuració del compte";
 "account.edit.display-name" = "Nom a mostrar";
-"account.edit.error.save.message" = "Error en desar el perfil, torneu-ho a provar."
+"account.edit.error.save.message" = "Error en desar el perfil, torneu-ho a provar.";
 "account.edit.error.save.title" = "Error en desar el perfil";
 "account.edit.navigation-title" = "Edita el perfil";
 "account.edit.post-settings.privacy" = " Privadesa per defecte";
@@ -189,7 +188,7 @@
 "account.follow-request.accept" = "Accepta";
 "account.follow-request.reject" = "Rebutja";
 "account.follow-requests.pending-requests" = "Sol·licituds pendents";
-"account.follow-requests.instructions" = "Aquests usuaris no veuran les vostres entrades fins que les accepteu."
+"account.follow-requests.instructions" = "Aquests usuaris no veuran les vostres entrades fins que les accepteu.";
 "compte.followers" = "Seguidors";
 "account.following" = "Seguits";
 "account.list.create" = "Crea una llista";
@@ -206,7 +205,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Elimina";
 "conversations.action.mark-read" = "Marca com a llegit";
-"conversations.empty.message" = "Esteu buscant l'amor a les xarxes socials?" Aquí trobareu tots els vostres missatges directes i mencions privades. Bona conversa! 📱❤️";
+"conversations.empty.message" = "Esteu buscant l'amor a les xarxes socials? Aquí trobareu tots els vostres missatges directes i mencions privades. Bona conversa! 📱❤️";
 "conversations.empty.title" = "Safata d'entrada";
 "conversations.error.button" = "Reintenta";
 "conversations.error.message" = "Error en carregar els missatges";
