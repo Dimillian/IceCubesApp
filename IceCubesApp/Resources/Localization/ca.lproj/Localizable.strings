@@ -1,4 +1,4 @@
-// MARK: Cadenes comunes
+// MARK: Common strings
 "action.cancel" = "Cancel·la";
 "action.delete" = "Elimina";
 "action.save" = "Desa";
@@ -9,41 +9,41 @@
 "alert.button.ok" = "D'acord";
 "alert.error" = "Error!";
 
-"placeholder.loading.long" = "S'està carregant...";
+"placeholder.loading.long" = "S'està carregant, carregant, carregant...";
 "placeholder.loading.short" = "S'està carregant ...";
 
 "see-more" = "Mostra'n més";
 
-// MARK: Afegeix un compte
+// MARK: Common strings
 "account.add.error.instance-not-supported" = "Aquesta instància no està suportada actualment."
 "account.add.navigation-title" = "Afegeix un compte";
-"account.add.sign-in" = "Inicia sessií";
+"account.add.sign-in" = "Inicia sessió";
 
-// MARCA: enumeracions
-"enum.avatar-position.leading" = "Leading";
-"enum.avatar-position.top" = "Top";
-"enum.avatar-shape.circle" = "Circle";
-"enum.avatar-shape.rounded" = "Rounded";
-"enum.status-actions-display.all" = "All";
-"enum.status-actions-display.no-buttons" = "No botons";
-"enum.status-actions-display.only-buttons" = "Només botons";
-"enum.status-display-style.compact" = "Compact";
-"enum.status-display-style.large" = "Large";
+// MARK: Enums
+"enum.avatar-position.leading" = "Davant";
+"enum.avatar-position.top" = "Dalt";
+"enum.avatar-shape.circle" = "Cercle";
+"enum.avatar-shape.rounded" = "Arrodonida";
+"enum.status-actions-display.all" = "Tots";
+"enum.status-actions-display.no-buttons" = "Sense botons";
+"enum.status-actions-display.only-buttons" = "Només els botons";
+"enum.status-display-style.compact" = "Compacte";
+"enum.status-display-style.large" = "Gran";
 
-// MARCA: Instàncies
-"instance.info.domains" = "Domains";
-"instance.info.email" = "Email";
-"instance.info.name" = "Name";
-"instance.info.navigation-title" = "Instance Info";
-"instance.info.posts" = "Posts";
-"instance.info.section.info" = "Instance info";
-"instance.info.section.rules" = "Instance rules";
-"instance.info.users" = "Users";
+// MARK: Instances
+"instance.info.domains" = "Dominis";
+"instance.info.email" = "Correu electrònic";
+"instance.info.name" = "Nom";
+"instance.info.navigation-title" = "Informació de la instància";
+"instance.info.posts" = "Publicacions";
+"instance.info.section.info" = "Informació de la instància";
+"instance.info.section.rules" = "Normes de la instància";
+"instance.info.users" = "Usuaris";
 "instance.info.version" = "Versió";
-"instance.list.posts-%@" = "%" posts";
+"instance.list.posts-%@" = "%" publicacions";
 "instance.list.users-%@" = "%@ usuaris";
-"instància.suggestions" = "Suggesions";
-"instància.url" = "URL d'entrada";
+"instance.suggestions" = "Suggeriments";
+"instance.url" = "URL de la instància";
 
 // MARCA: menú
 "menu.new-post" = "New post";
