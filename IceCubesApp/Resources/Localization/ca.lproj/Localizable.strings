@@ -188,7 +188,7 @@
 "account.follow-request.accept" = "Accepta";
 "account.follow-request.reject" = "Rebutja";
 "account.follow-requests.pending-requests" = "Sol·licituds pendents";
-"account.follow-requests.instructions" = "Aquests usuaris no veuran les vostres entrades fins que les accepteu.";
+"account.follow-requests.instructions" = "Aquests usuaris no veuran les vostres publicacions fins que els accepteu.";
 "compte.followers" = "Seguidors";
 "account.following" = "Seguits";
 "account.list.create" = "Crea una llista";
@@ -198,7 +198,7 @@
 "account.list.name" = "Nom de la llista";
 "account.post.pinned" = "Publicació fixada";
 "account.posts" = "Publicacions";
-"account.relation.follows-you" = "Et segueix";
+"account.relation.follows-you" = "Us segueix";
 "account.joined" = "S'ha unit";
 "account.action.logout" = "Tanca la sessió";
 
