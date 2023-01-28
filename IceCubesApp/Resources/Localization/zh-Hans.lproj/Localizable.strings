@@ -258,12 +258,12 @@
 "notifications.empty.title" = "没有更早的通知";
 "notifications.error.message" = "加载通知时出错，请重试。";
 "notifications.error.title" = "出现了一个错误";
-"notifications.label.favorite" = "星标";
-"notifications.label.follow" = "关注了你";
+"notifications.label.favorite %lld" = "星标";
+"notifications.label.follow %lld" = "关注了你";
 "notifications.label.follow-request" = "关注申请";
-"notifications.label.mention" = "提及了你";
+"notifications.label.mention %lld" = "提及了你";
 "notifications.label.poll" = "投票结束";
-"notifications.label.reblog" = "已转发";
+"notifications.label.reblog %lld" = "已转发";
 "notifications.label.status" = "嘟嘟了一个状态";
 "notifications.label.update" = "编辑了一个嘟文";
 "notifications.menu-title.favorite" = "收藏";

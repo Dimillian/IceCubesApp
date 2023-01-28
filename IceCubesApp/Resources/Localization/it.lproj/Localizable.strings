@@ -259,12 +259,12 @@
 "notifications.empty.title" = "Nessuna notifica";
 "notifications.error.message" = "Si è verificato un errore durante il caricamento delle notifiche, per favore riprova.";
 "notifications.error.title" = "Si è verificato un errore";
-"notifications.label.favorite" = "ha apprezzato il tuo post";
-"notifications.label.follow" = "ti segue";
+"notifications.label.favorite %lld" = "ha apprezzato il tuo post";
+"notifications.label.follow %lld" = "ti segue";
 "notifications.label.follow-request" = "ha chiesto di seguirti";
-"notifications.label.mention" = "ti ha menzionato";
+"notifications.label.mention %lld" = "ti ha menzionato";
 "notifications.label.poll" = "votazione conclusa";
-"notifications.label.reblog" = "ha condiviso";
+"notifications.label.reblog %lld" = "ha condiviso";
 "notifications.label.status" = "ha pubblicato uno stato";
 "notifications.label.update" = "ha modificato un post";
 "notifications.menu-title.favorite" = "Preferiti";

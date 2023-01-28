@@ -260,12 +260,12 @@
 "notifications.empty.title" = "Keine Benachrichtigungen";
 "notifications.error.message" = "Beim Laden deiner Benachrichtigungen ist ein Fehler aufgetreten, bitte versuch es erneut.";
 "notifications.error.title" = "Ein Fehler ist aufgetreten";
-"notifications.label.favorite" = "hat favorisiert";
-"notifications.label.follow" = "folgt dir jetzt";
+"notifications.label.favorite %lld" = "hat favorisiert";
+"notifications.label.follow %lld" = "folgt dir jetzt";
 "notifications.label.follow-request" = "möchte dir folgen";
-"notifications.label.mention" = "hat dich erwähnt";
+"notifications.label.mention %lld" = "hat dich erwähnt";
 "notifications.label.poll" = "Umfrage beendet";
-"notifications.label.reblog" = "hat geboostet";
+"notifications.label.reblog %lld" = "hat geboostet";
 "notifications.label.status" = "hat einen Beitrag gepostet";
 "notifications.label.update" = "hat einen Beitrag geändert";
 "notifications.menu-title.favorite" = "Favorit";

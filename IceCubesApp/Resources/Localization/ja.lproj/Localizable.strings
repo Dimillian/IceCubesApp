@@ -241,12 +241,12 @@
 "notifications.empty.title" = "通知無し";
 "notifications.error.message" = "通知の読み込み中にエラーが発生しました、もう一度試してください";
 "notifications.error.title" = "エラーが発生しました";
-"notifications.label.favorite" = "お気に入り";
-"notifications.label.follow" = "フォローされました";
+"notifications.label.favorite %lld" = "お気に入り";
+"notifications.label.follow %lld" = "フォローされました";
 "notifications.label.follow-request" = "フォローリクエストが届いています";
-"notifications.label.mention" = "あなたについて言及されています";
+"notifications.label.mention %lld" = "あなたについて言及されています";
 "notifications.label.poll" = "投票終了";
-"notifications.label.reblog" = "ブーストしました";
+"notifications.label.reblog %lld" = "ブーストしました";
 "notifications.label.status" = "投稿されたステータス";
 "notifications.label.update" = "編集済み";
 "notifications.menu-title.favorite" = "お気に入り";

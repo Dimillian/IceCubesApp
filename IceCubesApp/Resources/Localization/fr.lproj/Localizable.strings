@@ -258,12 +258,8 @@
 "notifications.empty.title" = "Aucune notification";
 "notifications.error.message" = "Une erreur s'est produite lors du chargement de vos notifications, veuillez réessayer.";
 "notifications.error.title" = "Une erreur s'est produite";
-"notifications.label.favorite" = "aime";
-"notifications.label.follow" = "vous suive";
 "notifications.label.follow-request" = "a demandé à vous suivre";
-"notifications.label.mention" = "vous a mentionné";
 "notifications.label.poll" = "sondage terminé";
-"notifications.label.reblog" = "boosté";
 "notifications.label.status" = "a posté un statut";
 "notifications.label.update" = "a modifié un post";
 "notifications.menu-title.favorite" = "Favori";
@@ -347,7 +343,7 @@
 "status.poll.frequency" = "Fréquence de sondage";
 "status.poll.option-n %lld" = "Option %lld";
 "status.post-from-%@" = "Publication de %@";
-"status.row.was-boosted" = "boostée";
+"status.row.was-boosted" = "a boosté";
 "status.row.was-reply" = "Répondu à";
 "status.row.you-boosted" = "Vous avez boosté";
 "status.show-less" = "Afficher moins";

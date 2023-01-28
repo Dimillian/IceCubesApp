@@ -256,12 +256,12 @@
 "notifications.empty.title" = "Geen notificaties";
 "notifications.error.message" = "Er heeft zich een fout voorgedaan tijdens het laden van je notificaties. Probeer het nogmaals.";
 "notifications.error.title" = "Er heeft zich een fout voorgedaan";
-"notifications.label.favorite" = "gefavoriet";
-"notifications.label.follow" = "volgt jou";
+"notifications.label.favorite %lld" = "gefavoriet";
+"notifications.label.follow %lld" = "volgt jou";
 "notifications.label.follow-request" = "wil je volgen";
-"notifications.label.mention" = "heeft jou vermeld";
+"notifications.label.mention %lld" = "heeft jou vermeld";
 "notifications.label.poll" = "poll beëindigd";
-"notifications.label.reblog" = "boostte";
+"notifications.label.reblog %lld" = "boostte";
 "notifications.label.status" = "nieuwe status";
 "notifications.label.update" = "wijzigde een post";
 "notifications.menu-title.favorite" = "Favoriet";
