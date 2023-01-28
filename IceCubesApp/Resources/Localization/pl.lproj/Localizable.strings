@@ -119,7 +119,7 @@
 "settings.support.two.title" = "☕️ Miły napiwek";
 "settings.support.four.title" = "👽 Kim jesteś?";
 "settings.support.four.subtitle" = "To pozwoli na utrzymywanie Ice Cubes w działaniu przez długi czas!";
-"settings.timeline.add" = "Dodaj strumień zdalny";
+"settings.timeline.add" = "Dodaj strumień lokalny";
 "settings.title" = "Ustawienia";
 "settings.rate" = "Oceń Ice Cubes";
 "settings.section.other" = "Inne";
@@ -144,9 +144,9 @@
 "timeline.%@-is-valid" = "%@ jest poprawnym serwerem";
 "timeline.add-remote.title" = "Dodaj strumień serwera";
 "timeline.add.action.add" = "Dodaj";
-"timeline.filter.add-local" = "Dodaj strumień zdalny";
+"timeline.filter.add-local" = "Dodaj strumień lokalny";
 "timeline.filter.lists" = "Listy";
-"timeline.filter.local" = "Strumienie zdalne";
+"timeline.filter.local" = "Strumienie lokalne";
 "timeline.filter.tags" = "Obserwowane hasztagi";
 
 // MARK: Package: AppAccount
@@ -370,10 +370,10 @@
 "filter.edit.contexts" = "Kontekst filtra";
 "filter.edit.action" = "Działanie filtra";
 "account.action.edit-filters" = "Edytuj filtry";
-"filter.contexts.home" = "Home and lists";
-"filter.contexts.notifications" = "Notifications";
-"filter.contexts.public" = "Public timelines";
-"filter.contexts.conversations" = "Conversations";
-"filter.contexts.profiles" = "Profiles";
-"filter.action.warning" = "Hide with a warning";
-"filter.action.hide" = "Hide completely";
+"filter.contexts.home" = "Strona domowa i listy";
+"filter.contexts.notifications" = "Powiadomienia";
+"filter.contexts.public" = "Strumienie publiczne";
+"filter.contexts.conversations" = "Konwersacje";
+"filter.contexts.profiles" = "Profile";
+"filter.action.warning" = "Ukryj z ostrzeżeniem";
+"filter.action.hide" = "Ukryj całkowicie";
