@@ -84,7 +84,7 @@ enum Tab: Int, Identifiable, Hashable {
   var iconName: String {
     switch self {
     case .timeline:
-      return "rectangle.on.rectangle"
+      return "rectangle.stack"
     case .trending:
       return "chart.line.uptrend.xyaxis"
     case .local:

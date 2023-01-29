@@ -17,6 +17,7 @@ struct StatusEditorAccessoryView: View {
   @State private var isLanguageSheetDisplayed: Bool = false
   @State private var isCustomEmojisSheetDisplay: Bool = false
   @State private var languageSearch: String = ""
+  @State private var isLoadingAIRequest: Bool = false
 
   var body: some View {
     VStack(spacing: 0) {
@@ -77,6 +78,10 @@ struct StatusEditorAccessoryView: View {
                 Image(systemName: "globe")
               }
             }
+          
+            if preferences.isOpenAIEnabled {
+              AIMenu.disabled(!viewModel.canPost)
+            }
           }
           .padding(.horizontal, .layoutPadding)
         }
@@ -108,6 +113,36 @@ struct StatusEditorAccessoryView: View {
       Text("\(nativeName) (\(name))")
     } else {
       Text(isoCode.uppercased())
+    }
+  }
+  
+  private var AIMenu: some View {
+    Menu {
+      ForEach(StatusEditorAIPrompts.allCases, id: \.self) { prompt in
+        Button {
+          Task {
+            isLoadingAIRequest = true
+            await viewModel.runOpenAI(prompt: prompt.toRequestPrompt(text: viewModel.statusText.string))
+            isLoadingAIRequest = false
+          }
+        } label: {
+          prompt.label
+        }
+      }
+      if let backup = viewModel.backupStatusText {
+        Button {
+          viewModel.replaceTextWith(text: backup.string)
+          viewModel.backupStatusText = nil
+        } label: {
+          Label("status.editor.restore-previous", systemImage: "arrow.uturn.right")
+        }
+      }
+    } label: {
+      if isLoadingAIRequest {
+        ProgressView()
+      } else {
+        Image(systemName: "faxmachine")
+      }
     }
   }
 
