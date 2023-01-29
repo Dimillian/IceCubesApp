@@ -79,6 +79,7 @@ public struct StatusRowView: View {
           }
         }
       }
+      .background(theme.primaryBackgroundColor)
       .contextMenu {
         contextMenu
       }
