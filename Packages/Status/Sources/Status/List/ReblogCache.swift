@@ -6,7 +6,7 @@ import Env
 
 public class ReblogCache {
 
-  struct CacheEntry {
+  struct CacheEntry : Codable {
     var reblogId:String
     var postId:String
     var seen:Bool
@@ -14,21 +14,72 @@ public class ReblogCache {
 
   static public let shared = ReblogCache()
   var statusCache = LRUCache<String, CacheEntry>()
+  private var needsWrite = false
 
   init() {
-    statusCache.countLimit = 100  // can tune the cache here this is super conservative
+    statusCache.countLimit = 100  // can tune the cache here, 100 is super conservative
+
+    
+    // read any existing cache from disk
+    if FileManager.default.fileExists(atPath: self.cacheFile.path()) {
+      
+      do {
+        let data = try Data(contentsOf: self.cacheFile)
+        let cacheData = try JSONDecoder().decode([CacheEntry].self, from: data)
+        for entry in cacheData {
+          self.statusCache.setValue(entry, forKey: entry.reblogId)
+        }
+      }
+      catch {
+        print("Error reading cache from disc")
+      }
+      print("Starting cache has \(statusCache.count) items")
+    }
+    DispatchQueue.main.asyncAfter(deadline: .now() + 30.0) { [weak self] in
+        self?.saveCache()
+    }
+
+  }
+
+  private func saveCache() {
+
+    if needsWrite {
+
+      do {
+        let data = try JSONEncoder().encode(statusCache.allValues)
+        try data.write(to: self.cacheFile)
+      }
+      catch {
+        print("Error writing cache to disc")
+      }
+      needsWrite = false
+    }
+    else {
+      print("no cache change")
+    }
+    
+    DispatchQueue.main.asyncAfter(deadline: .now() + 30.0) { [weak self] in
+        self?.saveCache()
+    }
   }
   
   
+  private var cacheFile:URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    let documentsDirectory = paths[0]
 
+    return URL(fileURLWithPath: documentsDirectory.path()).appendingPathComponent("reblog.json")
+  }
+  
   @MainActor public func removeDuplicateReblogs(_ statuses: inout [Status]) {
     
-    print ("Deduping \(statuses.count) statuses")
-
     var i = statuses.count
     let ct = statuses.count
 
-    for status in statuses.reversed() { // go backwards cache the earliest reblog
+    for status in statuses.reversed() {
+      // go backwards through the status list
+      // so that we can remove items without
+      // borking the array
       
       i -= 1
       if let reblog = status.reblog {
@@ -36,42 +87,22 @@ public class ReblogCache {
         if let cached = statusCache.value(forKey: reblog.id) {
           
           // this is already cached
-          // if the reblogged post is in the cache and we have actually seen it
-          // then we will suppress it so long as the status id on
-          // this post is not the status id that we cached as seen already
-          if cached.postId != status.id && !cached.seen {
+          if cached.postId != status.id && cached.seen {
+            // This was posted by someone other than the person we have in the cache
+            // and we have seen the items at some point, so we might want to suppress it
             
-            // Unless it happens to be our user that reblogged it.  Then it
-            // would be weird if it didn't reappear
             if status.account.id != CurrentAccount.shared.account?.id {
+              // just a quick check to makes sure that this wasn't boosted by the current
+              // user.  Hiding that would be confusing
+              // But assuming it isn't then we can suppress this boost
               print("suppressing: \(reblog.id)/ \(reblog.account.displayName) by \(status.account.displayName)")
-              
               statuses.remove(at: i)
-              assert(statuses.count == (ct-1))
-              cache(status, seen:false)
-              
-            }
-            else {
-              print("keeping my reblog: \(reblog.id)/ \(reblog.account.displayName) by \(status.account.displayName)")
-              cache(status, seen:true)
+              // assert(statuses.count == (ct-1))
             }
           }
-          else {
-            print("keeping seen item: \(reblog.id)/ \(reblog.account.displayName) by \(status.account.displayName)")
-            cache(status, seen:false)
-          }
-          
         }
-        else {
-          print("caching new item: \(reblog.id)/ \(reblog.account.displayName) by \(status.account.displayName)")
-          cache(status, seen:false)
-        }
-        
+        cache(status, seen:false)
       }
-      else {
-        print("Not boost")
-      }
-      
     }
   }
 
@@ -83,9 +114,6 @@ public class ReblogCache {
     if let reblog = status.reblog {
       // only caching boosts at the moment.
       
-      if(seen) {
-        print("SEEN: \(reblog.id)/ \(reblog.account.displayName) by \(status.account.displayName)")
-      }
       
       if let cached = statusCache.value(forKey: reblog.id) {
         // every time we see it, we refresh it in the list
@@ -97,19 +125,10 @@ public class ReblogCache {
           postToCache = cached.postId
           // if we have seen a particular version of the post
           // that's the one we keep
-          print("already seen")
-
         }
-
-        print("re-up: \(reblog.id)/ \(reblog.account.displayName)")
       }
-      else {
-        print("NEW!: \(reblog.id)/ \(reblog.account.displayName)")
-      }
-
       statusCache.setValue(CacheEntry(reblogId: reblog.id, postId: postToCache, seen: seen || wasSeen), forKey: reblog.id)
-
+      needsWrite = true
     }
-    
   }
 }
