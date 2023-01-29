@@ -12,7 +12,7 @@ public struct FontPicker: UIViewControllerRepresentable {
         }
         
         public func fontPickerViewControllerDidCancel(_ viewController: UIFontPickerViewController) {
-            viewController.navigationController?.presentingViewController?.dismiss(animated: true)
+            dismiss()
         }
         
         public func fontPickerViewControllerDidPickFont(_ viewController: UIFontPickerViewController) {

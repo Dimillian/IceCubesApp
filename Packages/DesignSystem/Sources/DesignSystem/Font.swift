@@ -19,7 +19,7 @@ public extension Font {
             return .custom(chosenFont.fontName, size: size, relativeTo: textStyle)
         }
         
-        return .system(textStyle)
+        return onMac ? .system(size: size) : .system(textStyle)
     }
     
     private static func customUIFont(size: CGFloat) -> UIFont {
