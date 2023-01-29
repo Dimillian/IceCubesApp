@@ -25,6 +25,7 @@ public class UserPreferences: ObservableObject {
   @AppStorage("app_auto_expand_media") public var appAutoExpandMedia: ServerPreferences.AutoExpandMedia = .hideSensitive
   @AppStorage("app_default_post_visibility") public var appDefaultPostVisibility: Models.Visibility = .pub
   @AppStorage("app_default_posts_sensitive") public var appDefaultPostsSensitive = false
+  @AppStorage("autoplay_video") public var autoPlayVideo = true
 
   public var postVisibility: Models.Visibility {
     if useInstanceContentSettings {

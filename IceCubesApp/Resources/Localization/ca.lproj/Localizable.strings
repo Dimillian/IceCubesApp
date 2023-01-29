@@ -127,6 +127,7 @@
 "settings.push.duplicate.title" = "Solucionador de notificacions duplicades";
 "settings.push.duplicate.footer" = "Rebeu les notificacions duplicades? Proveu aquest botó màgic per a solucionar-ho";
 "settings.push.duplicate.button.fix" = "🪄 Soluciona-ho";
+"settings.other.autoplay-video" = "Auto Play Videos";
 
 // MARK: Tabs
 "tab.explore" = "Explora";

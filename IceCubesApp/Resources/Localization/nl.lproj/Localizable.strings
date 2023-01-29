@@ -125,6 +125,7 @@
 "settings.push.duplicate.title" = "Dubbele meldingen";
 "settings.push.duplicate.footer" = "Ontvang je dubbele meldingen? Gebruik deze magische knop om dit probleem te verhelpen";
 "settings.push.duplicate.button.fix" = "🪄 Los op";
+"settings.other.autoplay-video" = "Auto Play Videos";
 
 // MARK: Tabs
 "tab.explore" = "Ontdekken";

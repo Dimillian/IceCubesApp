@@ -1,5 +1,6 @@
 import AVKit
 import SwiftUI
+import Env
 
 class VideoPlayerViewModel: ObservableObject {
   @Published var player: AVPlayer?
@@ -9,10 +10,12 @@ class VideoPlayerViewModel: ObservableObject {
     self.url = url
   }
 
-  func preparePlayer() {
+  func preparePlayer(autoPlay: Bool) {
     player = .init(url: url)
     player?.isMuted = true
-    player?.play()
+    if autoPlay {
+      player?.play()
+    }
     guard let player else { return }
     NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
                                            object: player.currentItem, queue: .main) { [weak self] _ in
@@ -36,13 +39,15 @@ class VideoPlayerViewModel: ObservableObject {
 
 struct VideoPlayerView: View {
   @Environment(\.scenePhase) private var scenePhase
+  @EnvironmentObject private var preferences: UserPreferences
+  
   @StateObject var viewModel: VideoPlayerViewModel
 
   var body: some View {
     VStack {
       VideoPlayer(player: viewModel.player)
     }.onAppear {
-      viewModel.preparePlayer()
+      viewModel.preparePlayer(autoPlay: preferences.autoPlayVideo)
     }
     .onChange(of: scenePhase, perform: { scenePhase in
       switch scenePhase {
