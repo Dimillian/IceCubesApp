@@ -37,9 +37,9 @@ enum Tab: Int, Identifiable, Hashable {
     case .federated:
       TimelineTab(popToRootTab: popToRootTab, timeline: .federated)
     case .notifications:
-      NotificationsTab(popToRootTab: popToRootTab, lockedType: nil, isSecondaryColumn: false)
+      NotificationsTab(popToRootTab: popToRootTab, lockedType: nil)
     case .mentions:
-      NotificationsTab(popToRootTab: popToRootTab, lockedType: .mention, isSecondaryColumn: false)
+      NotificationsTab(popToRootTab: popToRootTab, lockedType: .mention)
     case .explore:
       ExploreTab(popToRootTab: popToRootTab)
     case .messages:
