@@ -43,6 +43,14 @@ public struct Account: Decodable, Identifiable, Equatable, Hashable {
   public let bot: Bool
   public let discoverable: Bool?
 
+  public var haveAvatar: Bool {
+    return header.lastPathComponent != "missing.png"
+  }
+
+  public var haveHeader: Bool {
+    return header.lastPathComponent != "missing.png"
+  }
+
   public static func placeholder() -> Account {
     .init(id: UUID().uuidString,
           username: "Username",

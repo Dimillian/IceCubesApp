@@ -69,6 +69,9 @@ struct AccountDetailHeaderView: View {
     .offset(y: scrollOffset > 0 ? -scrollOffset : 0)
     .contentShape(Rectangle())
     .onTapGesture {
+      guard account.haveHeader else {
+        return
+      }
       Task {
         await quickLook.prepareFor(urls: [account.header], selectedURL: account.header)
       }
@@ -79,6 +82,9 @@ struct AccountDetailHeaderView: View {
     HStack {
       AvatarView(url: account.avatar, size: .account)
         .onTapGesture {
+          guard account.haveAvatar else {
+            return
+          }
           Task {
             await quickLook.prepareFor(urls: [account.avatar], selectedURL: account.avatar)
           }
