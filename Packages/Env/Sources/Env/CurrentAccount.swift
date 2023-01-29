@@ -18,7 +18,7 @@ public class CurrentAccount: ObservableObject {
 
   public func setClient(client: Client) {
     self.client = client
-
+    guard client.isAuth else { return }
     Task(priority: .userInitiated) {
       await fetchUserData()
     }

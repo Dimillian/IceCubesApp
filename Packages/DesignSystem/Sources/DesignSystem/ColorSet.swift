@@ -69,7 +69,7 @@ public struct IceCubeNeonDark: ColorSet {
   public var scheme: ColorScheme = .dark
   public var tintColor: Color = .init(red: 213 / 255, green: 46 / 255, blue: 245 / 255)
   public var primaryBackgroundColor: Color = .black
-  public var secondaryBackgroundColor: Color = .init(red: 0 / 255, green: 0 / 255, blue: 21 / 255)
+  public var secondaryBackgroundColor: Color = .init(red: 19 / 255, green: 0 / 255, blue: 32 / 255)
   public var labelColor: Color = .white
 
   public init() {}

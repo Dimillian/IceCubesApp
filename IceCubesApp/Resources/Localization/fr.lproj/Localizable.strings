@@ -9,8 +9,8 @@
 "alert.button.ok" = "OK";
 "alert.error" = "Erreur!";
 
-"placeholder.loading.long" = "Chargement, chargement, chargement ...";
-"placeholder.loading.short" = "Chargement ...";
+"placeholder.loading.long" = "Chargement, chargement, chargement…";
+"placeholder.loading.short" = "Chargement…";
 
 "see-more" = "Voir plus";
 
@@ -22,7 +22,7 @@
 // MARK: Enums
 "enum.avatar-position.leading" = "En tête";
 "enum.avatar-position.top" = "En haut";
-"enum.avatar-shape.circle" = "Cercle";
+"enum.avatar-shape.circle" = "Rond";
 "enum.avatar-shape.rounded" = "Arrondi";
 "enum.status-actions-display.all" = "Tout";
 "enum.status-actions-display.no-buttons" = "Pas de boutons";
@@ -112,7 +112,7 @@
 "settings.support.navigation-title" = "Soutenez Ice Cubes";
 "settings.support.one.subtitle" = "Petit, mais mignon, et c'est bon !";
 "settings.support.one.title" = "🍬 Petite contribution";
-"settings.support.placeholder.loading-subtitle" = "Chargement sous-titre ...";
+"settings.support.placeholder.loading-subtitle" = "Chargement sous-titre…";
 "settings.support.three.subtitle" = "Vous êtes fou, merci beaucoup !";
 "settings.support.three.title" = "🤯 Contribution généreuse";
 "settings.support.two.subtitle" = "J'aime le goût d'un café chic ❤️";
@@ -258,12 +258,8 @@
 "notifications.empty.title" = "Aucune notification";
 "notifications.error.message" = "Une erreur s'est produite lors du chargement de vos notifications, veuillez réessayer.";
 "notifications.error.title" = "Une erreur s'est produite";
-"notifications.label.favorite" = "aime";
-"notifications.label.follow" = "vous suive";
 "notifications.label.follow-request" = "a demandé à vous suivre";
-"notifications.label.mention" = "vous a mentionné";
 "notifications.label.poll" = "sondage terminé";
-"notifications.label.reblog" = "boosté";
 "notifications.label.status" = "a posté un statut";
 "notifications.label.update" = "a modifié un post";
 "notifications.menu-title.favorite" = "Favori";
@@ -347,7 +343,7 @@
 "status.poll.frequency" = "Fréquence de sondage";
 "status.poll.option-n %lld" = "Option %lld";
 "status.post-from-%@" = "Publication de %@";
-"status.row.was-boosted" = "boostée";
+"status.row.was-boosted" = "a boosté";
 "status.row.was-reply" = "Répondu à";
 "status.row.you-boosted" = "Vous avez boosté";
 "status.show-less" = "Afficher moins";
@@ -370,11 +366,11 @@
 "filter.edit.contexts" = "Contextes du filtre";
 "filter.edit.action" = "Action du filtre";
 "account.action.edit-filters" = "Éditer les filtres";
-"filter.contexts.home" = "Home and lists";
+"filter.contexts.home" = "Accueil et listes";
 "filter.contexts.notifications" = "Notifications";
-"filter.contexts.public" = "Public timelines";
+"filter.contexts.public" = "Chronologie publique";
 "filter.contexts.conversations" = "Conversations";
-"filter.contexts.profiles" = "Profiles";
-"filter.action.warning" = "Hide with a warning";
-"filter.action.hide" = "Hide completely";
+"filter.contexts.profiles" = "Profils";
+"filter.action.warning" = "Cacher avec avertissement";
+"filter.action.hide" = "Cacher complètement";
 

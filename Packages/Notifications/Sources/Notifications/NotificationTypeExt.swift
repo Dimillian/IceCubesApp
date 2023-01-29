@@ -2,20 +2,20 @@ import Models
 import SwiftUI
 
 extension Models.Notification.NotificationType {
-  func label() -> LocalizedStringKey {
+  func label(count: Int) -> LocalizedStringKey {
     switch self {
     case .status:
       return "notifications.label.status"
     case .mention:
       return ""
     case .reblog:
-      return "notifications.label.reblog"
+      return "notifications.label.reblog \(count)"
     case .follow:
-      return "notifications.label.follow"
+      return "notifications.label.follow \(count)"
     case .follow_request:
       return "notifications.label.follow-request"
     case .favourite:
-      return "notifications.label.favorite"
+      return "notifications.label.favorite \(count)"
     case .poll:
       return "notifications.label.poll"
     case .update:

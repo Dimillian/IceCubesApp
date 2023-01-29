@@ -13,7 +13,7 @@ extension ServerDate {
 
   private static var createdAtRelativeFormatter: RelativeDateTimeFormatter = {
     let dateFormatter = RelativeDateTimeFormatter()
-    dateFormatter.unitsStyle = .abbreviated
+    dateFormatter.unitsStyle = .short
     return dateFormatter
   }()
 

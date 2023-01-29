@@ -1,0 +1,378 @@
+"action.cancel" = "Cancel·la";
+"action.delete" = "Elimina";
+"action.save" = "Desa";
+"action.done" = "Fet";
+"action.retry" = "Reintenta";
+"action.view.error" = "Mostra l'error";
+
+"alert.button.ok" = "D'acord";
+"alert.error" = "Error!";
+
+"placeholder.loading.long" = "S'està carregant, carregant, carregant...";
+"placeholder.loading.short" = "S'està carregant ...";
+
+"see-more" = "Mostra'n més";
+
+// MARK: Common strings
+"account.add.error.instance-not-supported" = "Aquesta instància no està suportada actualment.";
+"account.add.navigation-title" = "Afegeix un compte";
+"account.add.sign-in" = "Inicia sessió";
+
+// MARK: Enums
+"enum.avatar-position.leading" = "Davant";
+"enum.avatar-position.top" = "Dalt";
+"enum.avatar-shape.circle" = "Cercle";
+"enum.avatar-shape.rounded" = "Arrodonida";
+"enum.status-actions-display.all" = "Tots";
+"enum.status-actions-display.no-buttons" = "Sense botons";
+"enum.status-actions-display.only-buttons" = "Només els botons";
+"enum.status-display-style.compact" = "Compacte";
+"enum.status-display-style.large" = "Gran";
+
+// MARK: Instances
+"instance.info.domains" = "Dominis";
+"instance.info.email" = "Correu electrònic";
+"instance.info.name" = "Nom";
+"instance.info.navigation-title" = "Informació de la instància";
+"instance.info.posts" = "Publicacions";
+"instance.info.section.info" = "Informació de la instància";
+"instance.info.section.rules" = "Normes de la instància";
+"instance.info.users" = "Usuaris";
+"instance.info.version" = "Versió";
+"instance.list.posts-%@" = "% publicacions";
+"instance.list.users-%@" = "%@ usuaris";
+"instance.suggestions" = "Suggeriments";
+"instance.url" = "URL de la instància";
+
+// MARK: Menu
+"menu.new-post" = "Publicació nova";
+"menu.font" = "Font";
+"menu.font.bigger" = "Més gran";
+"menu.font.smaller" = "Més petita";
+
+// MARK: Settings
+"settings.account.add" = "Afegeix un compte";
+"settings.app.icon" = "Icona de l'aplicació";
+"settings.app.icon.navigation-title" = "Icones";
+"settings.app.source" = "Font (enllaç de GitHub)";
+"settings.app.support" = "Doneu suport a l'aplicació";
+"settings.display.avatar.position" = "Posició de les fotos de perfil";
+"settings.display.avatar.shape" = "Forma de les fotos de perfil";
+"settings.display.navigation-title" = "Configuració de l'aparença";
+"settings.display.restore" = "Restableix els valors per defecte";
+"settings.display.section.display" = "Aparença";
+"settings.display.section.theme" = "Tema";
+"settings.display.section.theme.footer" = "Els colors personalitzats només es poden establir si la sincronització amb els colors del sistema està desactivada";
+"settings.display.status.action-buttons" = "Botons d'acció";
+"settings.display.status.media-style" = "Estil del contingut multimèdia";
+"settings.display.translate-button" = "Mostra el botó de traducció";
+"settings.display.theme.background" = "Color de fons";
+"settings.display.theme.secondary-background" = "Color de fons secundari";
+"settings.display.theme.tint" = "Color del tint";
+"settings.display.theme.systemColor" = "Sincronitza amb els colors del sistema";
+"settings.general.browser" = "Navegador";
+"settings.general.browser.in-app" = "Navegador integrat";
+"settings.general.browser.system" = "Navegador del sistema";
+"settings.general.display" = "Configuració d'aparença";
+"settings.general.instance" = "Informació de la instància";
+"settings.general.push-notifications" = "Notificacions emergents";
+"settings.general.remote-timelines" = "Línies de temps locals externes";
+"settings.push.boosts" = "Impulsos";
+"settings.push.favorites" = "Favorits";
+"settings.push.follows" = "Seguiments";
+"settings.push.main-toggle" = "Notifications emergents";
+"settings.push.main-toggle.description" = "Rebeu notificacions emergents de les interaccions noves";
+"settings.push.mentions" = "Mencions";
+"settings.push.navigation-title" = "Notifications emergents";
+"settings.push.new-posts" = "Publicacions noves";
+"settings.push.polls" = "Resultats d'enquestes";
+"settings.general.content" = "Configuració del contingut";
+"settings.system" = "Configuració del sistema";
+"settings.content.navigation-title" = "Configuració del contacte";
+"settings.content.use-instance-settings" = "Utilitza la configuració del servidor";
+"settings.content.main-toggle.description" = "Utilitzeu la configuració de la vostra instància d'inici";
+"settings.content.expand-spoilers" = "Mostra'm sempre els espòilers";
+"settings.content.expand-media" = "Visibilitat del contingut multimèdia";
+"settings.content.default-sensitive" = "Marca sempre el contingut com a sensible";
+"settings.content.default-visibility" = "Visibilitat de les publicacions";
+"settings.content.reading" = "Llegint";
+"settings.content.posting" = "Publicant";
+"enum.expand-media.show" = "Mostra-ho tot";
+"enum.expand-media.hide" = "Oculta-ho tot";
+"enum.expand-media.hide-sensitive" = "Amaga el contingut sensible";
+"settings.section.accounts" = "Comptes";
+"settings.section.app" = "Aplicació";
+"settings.section.app.footer %@" = "Versió d'aplicació: %@";
+"settings.section.general" = "General";
+"settings.support.alert.error.message" = "Error en processar la compra de l'aplicació, torneu-ho a provar.";
+"settings.support.alert.message" = "Gràcies per la propina! S'agraeix molt!";
+"settings.support.alert.title" = "Gràcies!";
+"settings.support.message-from-dev" = "Hola! Em dic Thomas i m'encanta crear aplicacions de codi obert. Ice Cubes és sens dubte un dels meus projectes del qual més orgullós estic fins avui, i siguem sincers, és també el que requereix més manteniment a causa del món sempre canviant de Mastodon i les xarxes socials. Si estàs t'encisa Ice Cubes, considera fer-me una petita propina. M'alegrarà el  dia (i ajudarà a mantenir l'aplicació funcionant sense problemes). 🚀";
+"settings.support.navigation-title" = "Dona suport a Ice Cubes";
+"settings.support.one.subtitle" = "Petita, però ben bona!";
+"settings.support.one.title" = "🍬 Propina petita";
+"settings.support.placeholder.loading-subtitle" = "S'està carregant el subtítol ...";
+"settings.support.three.subtitle" = "No estàs bé... Moltes gràcies!";
+"settings.support.three.title" = "🤯 Propina generosa";
+"settings.support.two.subtitle" = "M'encanta el gust d'un bon cafè ❤️";
+"settings.support.two.title" = "☕️ Bona propina";
+"settings.support.four.title" = "👽 Propina d'un altre món";
+"settings.support.four.subtitle" = "Ajudarà molt a mantenir Ice Cubes en funcionament!";
+"settings.timeline.add" = "Afegeix una línia de temps local";
+"settings.title" = "Configuració";
+"settings.rate" = "Valora Ice Cubes";
+"settings.section.other" = "Altres opcions";
+"settings.other.hide-openai" = "Activa l'ajudant 🤖";
+"settings.other.social-keyboard" = "Activa el teclat social";
+"settings.push.duplicate.title" = "Solucionador de notificacions duplicades";
+"settings.push.duplicate.footer" = "Rebeu les notificacions duplicades? Proveu aquest botó màgic per a solucionar-ho";
+"settings.push.duplicate.button.fix" = "🪄 Soluciona-ho";
+
+// MARK: Tabs
+"tab.explore" = "Explora";
+"tab.federated" = "Federat";
+"tab.local" = "Local";
+"tab.messages" = "Missatges";
+"tab.notifications" = "Notificacions";
+"tab.settings" = "Configuració";
+"tab.timeline" = "Línia de temps";
+"tab.trending" = "Tendència";
+"tab.profile" = "Perfil";
+
+// MARK: Timeline
+"timeline.%--is-valid" = "% és una instància vàlida";
+"timeline.add-remote.title" = "Afegeix una línia de temps local externa";
+"timeline.add.action.add" = "Afegeix";
+"timeline.filter.add-local" = "Afegeix una línia de temps local";
+"timeline.filter.lists" = "Llistes";
+"timeline.filter.local" = "Línies de temps locals";
+"timeline.filter.tags" = "Etiquetes seguides";
+
+// MARK: Package: AppAccount
+"app-account.button.add" = "Afegeix un compte";
+
+// MARK: Package: Account
+"account.action.add-remove-list" = "Afegeix/elimina de les llistes";
+"account.action.edit-info" = "Edita la informació";
+"account.action.mention" = "Menciona";
+"account.action.message" = "Envia un missatge";
+"account.action.notify-enable" = "Activa les notificacions";
+"account.action.notify-disable" = "Desactiva les notificacions";
+"account.action.reboosts-show" = "Mostra els impulsos";
+"account.action.reboosts-hide" = "Amaga els impulsos";
+"account.action.block" = "Bloca";
+"account.action.unblock" = "Desbloca";
+"account.action.mute" = "Silencia";
+"account.action.unmute" = "Deixa de silenciar";
+"account.boosted-by" = "Impulsat per";
+"account.detail.about" = "Quant a";
+"account.detail.familiar-followers" = "També seguit per";
+"account.detail.n-fields %lld" = "%lld camps";
+"account.detail.featured-tags-n-posts %lld" = "%lld publicacions";
+"account.edit.about" = "Quant a";
+"account.edit.account-settings.bot" = "Compte bot";
+"account.edit.account-settings.discoverable" = "Visible";
+"account.edit.account-settings.private" = "Privat";
+"account.edit.account-settings.section-title" = "Configuració del compte";
+"account.edit.display-name" = "Nom a mostrar";
+"account.edit.error.save.message" = "Error en desar el perfil, torneu-ho a provar.";
+"account.edit.error.save.title" = "Error en desar el perfil";
+"account.edit.navigation-title" = "Edita el perfil";
+"account.edit.post-settings.privacy" = " Privadesa per defecte";
+"account.edit.post-settings.section-title" = "Configuració de les publicacions";
+"account.edit.post-settings.sensitive" = "Contingut sensible";
+"account.favorited-by" = "Marcat com a favorit per";
+"account.follow.follow" = "Segueix";
+"account.follow.following" = "Segueix";
+"account.follow.requested" = "Seguint";
+"account.follow-request.accept" = "Accepta";
+"account.follow-request.reject" = "Rebutja";
+"account.follow-requests.pending-requests" = "Sol·licituds pendents";
+"account.follow-requests.instructions" = "Aquests usuaris no veuran les vostres entrades fins que les accepteu.";
+"compte.followers" = "Seguidors";
+"account.following" = "Seguits";
+"account.list.create" = "Crea una llista";
+"account.list.create.confirm" = "Crea la llista";
+"account.list.create.description" = "Introduïu el nom de la llista";
+"account.list.delete" = "Elimina la llista";
+"account.list.name" = "Nom de la llista";
+"account.post.pinned" = "Publicació fixada";
+"account.posts" = "Publicacions";
+"account.relation.follows-you" = "Et segueix";
+"account.joined" = "S'ha unit";
+"account.action.logout" = "Tanca la sessió";
+
+// MARK: Package: Conversations
+"conversations.action.delete" = "Elimina";
+"conversations.action.mark-read" = "Marca com a llegit";
+"conversations.empty.message" = "Esteu buscant l'amor a les xarxes socials? Aquí trobareu tots els vostres missatges directes i mencions privades. Bona conversa! 📱❤️";
+"conversations.empty.title" = "Safata d'entrada";
+"conversations.error.button" = "Reintenta";
+"conversations.error.message" = "Error en carregar els missatges";
+"conversations.error.title" = "S'ha produït un error";
+"conversations.navigation-title" = "Missatges directes";
+"conversations.new.message.placeholder" = "Missatge nou";
+
+// MARK: Package: DesignSystem
+"design.tag.n-posts-from-n-participants %lld %lld" = "%lld publicacions de %lld participants";
+"design.theme.navigation-title" = "Selector de tema";
+"disseny.theme.toots-preview" = "Vista prèvia de les publicacions";
+
+// MARK: Package: Explore
+"explore.navigation-title" = "Explora";
+"explore.search.message-%@" = "Des d'aquest apartat podeu cercar qualsevol cosa a %@";
+"explore.search.prompt" = "Cerqueu usuaris, publicacions i etiquetes";
+"explore.search.title" = "Cerqueu la vostra instància";
+"explore.search.empty.message" = "La cerca no ha trobat cap resultat, proveu-ne una altra.";
+"explore.search.empty.title" = "No hi ha resultats de cerca";
+"explore.section.posts" = "Publicacions";
+"explore.section.suggested-users" = "Usuaris suggerits";
+"explore.section.tags" = "Etiquetes";
+"explore.section.trending.links" = "Enllaços populars";
+"explore.section.trending.posts" = "Publicacions populars";
+"explore.section.trending.tags" = "Etiquetes populars";
+"explore.section.users" = "Usuariss";
+
+// MARK: Package: Env
+"env.poll-duration.5m" = "5 minuts";
+"env.poll-duration.30m" = "30 minuts";
+"env.poll-duration.1h" = "1 hora";
+"env.poll-duration.6h" = "6 hores";
+"env.poll-duration.1d" = "1 dia";
+"env.poll-duration.3d" = "3 dies";
+"env.poll-duration.7d" = "7 dies";
+"env.poll-vote-frequency.one" = "Vot únic";
+"env.poll-vote-frequency.multiple" = "Vot múltiple";
+
+// MARK: Package: Lists
+"lists.add-remove-%@" = "Afegeix/elimina %@";
+"lists.create" = "Crea una llista";
+"lists.create.confirm" = "Crea la llista";
+"lists.edit.users-in-list" = "Usuaris en aquesta llista";
+"lists.name" = "Nom de la llista";
+"lists.name.message" = "Introduïu el nom de la llista";
+
+// MARK: Package: Notifications
+"notificacions.buit.message" = "Notificacions? Quines notificacions? La safata d'entrada de notificacions està molt buida. Continua sent així d'increïble! 📱😎";
+"notifications.empty.title" = "No hi ha notificacions";
+"notifications.error.message" = "S'ha produït un error en carregar les notificacions, torneu-ho a provar.";
+"notifications.error.title" = "S'ha produït un error";
+"notifications.label.favorite %lld" = "ha marcat com a favorit";
+"notifications.label.follow %lld" = "us ha seguit";
+"notifications.label.mention %lld" = "us ha mencionat";
+"notifications.label.reblog %lld" = "ha impulsat";
+"notifications.label.poll" = "l'enquesta ha finalitzat";
+"notifications.label.follow-request" = "ha sol·licitat seguir-vos";
+"notifications.label.status" = "ha fet una publicació";
+"notifications.label.update" = "ha editat una publicació";
+"notifications.menu-title.favorite" = "Preferit";
+"notifications.menu-title.follow" = "Seguiment";
+"notifications.menu-title.follow-request" = "Sol·licitud de seguiment";
+"notifications.menu-title.mention" = "Menció";
+"notifications.menu-title.poll" = "Poll";
+"notifications.menu-title.reblog" = "Impuls";
+"notifications.menu-title.status" = "Publicació";
+"notifications.menu-title.update" = "Publicació editada";
+"notifications.navigation-title" = "Totes les notificacions";
+"notifications.tab.all" = "Totes";
+"notifications.tab.mentions" = "Mencions";
+
+// MARK: Package: Timeline
+"timeline.federated" = "Federada";
+"timeline.home" = "Inici";
+"timeline.local" = "Local";
+"timeline.n-recent-from-n-participants %lld %lld" = "%lld publicació recents de %lld participants";
+"timeline.trending" = "Tendència";
+
+// MARK: Package: Status
+"status.action.translate" = "Tradueix";
+"status.action.translated-label" = "Traduït amb DeepL.com";
+"status.action.bookmark" = "Afegeix als marcadors";
+"status.action.boost" = "Impulsa";
+"status.action.copy-text" = "Copia el text";
+"status.action.delete" = "Elimina";
+"status.action.edit" = "Edita";
+"status.action.favorite" = "Marca com a preferit";
+"status.action.mention" = "Menciona";
+"status.action.message" = "Envia un missatge";
+"status.action.pin" = "Fixa";
+"status.action.post" = "Publica";
+"status.action.quote" = "Cita la publicació";
+"status.action.reply" = "Respon";
+"status.action.section.your-post" = "La vostra publicació";
+"status.action.share" = "Comparteix la publicació";
+"status.action.unbookmark" = "Elimina dels marcadors";
+"status.action.unboost" = "Desfés l'impulsa";
+"status.action.unfavorite" = "Desfés el preferit";
+"status.action.unpin" = "Deixa de fixar";
+"status.action.view-in-browser" = "Mostra al navegador";
+"status.draft.delete" = "Elimina l'esborrany";
+"status.draft.save" = "Desa l'esborrany";
+"status.editor.ai-prompt.correct" = "Corregeix el text";
+"status.editor.ai-prompt.emphasize" = "Amplia text";
+"status.editor.ai-prompt.fit" = "Acurta el text";
+"status.editor.description.add" = "Afegeix una descripció";
+"status.editor.description.edit" = "Edita la descripció";
+"status.editor.drafts.navigation-title" = "Esborranys";
+"status.editor.error.upload" = "Error en la pujada";
+"status.editor.language-select.navigation-title" = "Selecciona la llengua";
+"status.editor.language-select.recently-used" = "Recents";
+"status.editor.media.edit-image" = "Edita la imatge";
+"status.editor.media.image-description" = "Descripció de la imatge";
+"status.editor.mode.edit" = "Edita la publicació";
+"status.editor.mode.new" = "Publicació nova";
+"status.editor.mode.quote-%@" = "Cita de: %@";
+"status.editor.mode.reply-%@" = "En resposta a %@";
+"status.editor.restore-previous" = "Restaura el text anterior";
+"status.editor.spoiler" = "Escriviu l'espòiler";
+"status.editor.text.placeholder" = "Què us passa pel cap?";
+"status.editor.visibility" = "Visibilitat de la publicació";
+"status.error.loading.message" = "S'ha produït un error en carregar les publicacions, torneu-ho a provar.";
+"status.error.message" = "S'ha produït un error en el context d'aquesta publicació, torneu-ho a provar.";
+"status.error.title" = "S'ha produït un error";
+"status.filter.filtered-by-%@" = "Filtrat per: %@";
+"status.filter.show-anyway" = "Mostra de totes maneres";
+"status.image.alt-text.abbreviation" = "ALT";
+"status.media.content.show" = "Mostra el contingut";
+"status.media.contextmenu.copy" = "Copia la imatge";
+"status.media.contextmenu.save" = "Desa la imatge";
+"status.media.contextmenu.share" = "Comparteix la imatge";
+"status.media.contextmenu.view-browser" = "Mostra al navegador";
+"status.media.sensitive.show" = "Mostra el contingut sensible";
+"status.poll.n-votes %lld" = "%lld vots";
+"status.poll.closed" = "Finalitzada";
+"status.poll.closes-in" = "Finalitza en";
+"status.poll.duration" = "Durada de l'enquesta";
+"status.poll.frequency" = "Freqüència de l'enquesta";
+"status.poll.option-n %lld" = "Opció %lld";
+"status.post-from-%@" = "Publicació de: %@";
+"status.row.was-boosted" = "impulsat";
+"status.row.was-reply" = "Ha respost a";
+"status.row.you-boosted" = "Heu impulsat";
+"status.show-less" = "Mostra'n menys";
+"status.show-more" = "Mostra'n més";
+"status.summary.at-time" = " a les ";
+"status.summary.edited-time" = "Darrera edició: ";
+"status.summary.n-boosts %lld" = "%lld impulsos";
+"status.summary.n-favorites %lld" = "%lld preferits";
+"status.visibility.direct" = "Privat";
+"status.visibility.follower" = "Seguidors";
+"status.visibility.public" = "Tothom";
+"status.visibility.unlisted" = "No llistat";
+
+// MARK: Filters
+"filter.new" = "Crea un filtre";
+"filter.filters" = "Filtres";
+"filter.edit.title" = "Títol del filtre";
+"filter.edit.keywords" = "Filtra paraules clau";
+"filter.edit.keywords.add" = "Afegeix una paraula clau";
+"filter.edit.contexts" = "Filtra els contextos";
+"filter.edit.action" = "Acció del filtre";
+"account.action.edit-filters" = "Edita els filtres";
+"filter.contexts.home" = "Inici i llistes";
+"filter.contexts.notifications" = "Notificacions";
+"filter.contexts.public" = "Línies de temps públiques";
+"filter.contexts.conversations" = "Converses";
+"filter.contexts.profiles" = "Perfils";
+"filter.action.warning" = "Amaga amb un avís";
+"filter.action.hide" = "Amaga per complet";

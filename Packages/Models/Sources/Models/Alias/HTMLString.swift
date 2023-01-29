@@ -4,7 +4,7 @@ import SwiftSoup
 import SwiftUI
 
 public struct HTMLString: Decodable, Equatable, Hashable {
-  public let htmlValue: String
+  public var htmlValue: String
   public let asMarkdown: String
   public let asRawText: String
   public let statusesURLs: [URL]
@@ -18,6 +18,15 @@ public struct HTMLString: Decodable, Equatable, Hashable {
       htmlValue = ""
     }
 
+    // https://daringfireball.net/projects/markdown/syntax
+    // HTML2Markdown only auto escapes * on the way out
+    // so we pre-escape \ ` _ and [ as these are the only
+    // other characters the markdown parser used picks up
+    // when it renders to attributed text
+    if let regex = try? NSRegularExpression(pattern: "([\\_\\`\\[\\\\])", options: .caseInsensitive) {
+      htmlValue = regex.stringByReplacingMatches(in: htmlValue, options: [], range: NSRange(location: 0, length:  htmlValue.count), withTemplate: "\\\\$1")
+    }
+    
     do {
       asMarkdown = try HTMLParser().parse(html: htmlValue)
         .toMarkdown()

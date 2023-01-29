@@ -231,7 +231,7 @@
 "explore.section.tags" = "Tagger";
 "explore.section.trending.links" = "Trendende lenker";
 "explore.section.trending.posts" = "Trendende innlegg";
-"explore.section.trending.tags" = "Trendende lenker";
+"explore.section.trending.tags" = "Trendende tagger";
 "explore.section.users" = "Brukere";
 
 // MARK: Package: Env
@@ -258,12 +258,12 @@
 "notifications.empty.title" = "Ingen varsler";
 "notifications.error.message" = "Det oppsto en feil under innlasting av varslene dine. Prøv på nytt.";
 "notifications.error.title" = "En feil oppstod";
-"notifications.label.favorite" = "stjernet";
-"notifications.label.follow" = "fulgte deg";
+"notifications.label.favorite %lld" = "stjernet";
+"notifications.label.follow %lld" = "fulgte deg";
 "notifications.label.follow-request" = "ba om å følge deg";
-"notifications.label.mention" = "nevnte deg";
+"notifications.label.mention %lld" = "nevnte deg";
 "notifications.label.poll" = "avstemningen avsluttet";
-"notifications.label.reblog" = "forsterket";
+"notifications.label.reblog %lld" = "forsterket";
 "notifications.label.status" = "har lagt ut en status";
 "notifications.label.update" = "redigerte et innlegg";
 "notifications.menu-title.favorite" = "Favoritt";
@@ -370,10 +370,10 @@
 "filter.edit.contexts" = "Filtrer kontekster";
 "filter.edit.action" = "Filterhandling";
 "account.action.edit-filters" = "Rediger filtre";
-"filter.contexts.home" = "Home and lists";
-"filter.contexts.notifications" = "Notifications";
-"filter.contexts.public" = "Public timelines";
-"filter.contexts.conversations" = "Conversations";
-"filter.contexts.profiles" = "Profiles";
-"filter.action.warning" = "Hide with a warning";
-"filter.action.hide" = "Hide completely";
+"filter.contexts.home" = "Hjem og lister";
+"filter.contexts.notifications" = "Varsler";
+"filter.contexts.public" = "Offentlige tidslinjer";
+"filter.contexts.conversations" = "Samtaler";
+"filter.contexts.profiles" = "Profiler";
+"filter.action.warning" = "Skjul med advarsel";
+"filter.action.hide" = "Skjul helt";
