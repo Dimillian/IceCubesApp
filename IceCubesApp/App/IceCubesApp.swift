@@ -12,9 +12,9 @@ import Timeline
 @main
 struct IceCubesApp: App {
   @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
-
+  
   @Environment(\.scenePhase) private var scenePhase
-
+  
   @StateObject private var appAccountsManager = AppAccountsManager.shared
   @StateObject private var currentInstance = CurrentInstance.shared
   @StateObject private var currentAccount = CurrentAccount.shared
@@ -23,18 +23,18 @@ struct IceCubesApp: App {
   @StateObject private var quickLook = QuickLook()
   @StateObject private var theme = Theme.shared
   @StateObject private var sidebarRouterPath = RouterPath()
-
+  
   @State private var selectedTab: Tab = .timeline
   @State private var selectSidebarItem: Tab? = .timeline
   @State private var popToRootTab: Tab = .other
   @State private var sideBarLoadedTabs: Set<Tab> = Set()
-
+  
   private let feedbackGenerator = UISelectionFeedbackGenerator()
-
+  
   private var availableTabs: [Tab] {
     appAccountsManager.currentClient.isAuth ? Tab.loggedInTabs() : Tab.loggedOutTab()
   }
-
+  
   var body: some Scene {
     WindowGroup {
       appView
@@ -72,7 +72,7 @@ struct IceCubesApp: App {
       }
     }
   }
-
+  
   @ViewBuilder
   private var appView: some View {
     if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
@@ -81,35 +81,45 @@ struct IceCubesApp: App {
       tabBarView
     }
   }
-
+  
   private func badgeFor(tab: Tab) -> Int {
     if tab == .notifications && selectedTab != tab {
       return watcher.unreadNotificationsCount + userPreferences.pushNotificationsCount
     }
     return 0
   }
-
+  
   private var sidebarView: some View {
     SideBarView(selectedTab: $selectedTab,
                 popToRootTab: $popToRootTab,
                 tabs: availableTabs,
                 routerPath: sidebarRouterPath) {
-      ZStack {
-        if selectedTab == .profile {
-          ProfileTab(popToRootTab: $popToRootTab)
-        }
-        ForEach(availableTabs) { tab in
-          if tab == selectedTab || sideBarLoadedTabs.contains(tab) {
-            tab
-              .makeContentView(popToRootTab: $popToRootTab)
-              .opacity(tab == selectedTab ? 1 : 0)
-              .transition(.opacity)
-              .id("\(tab)\(appAccountsManager.currentAccount.id)")
-              .onAppear {
-                sideBarLoadedTabs.insert(tab)
+      GeometryReader { proxy in
+        HStack(spacing: 0) {
+          ZStack {
+            if selectedTab == .profile {
+              ProfileTab(popToRootTab: $popToRootTab)
+            }
+            ForEach(availableTabs) { tab in
+              if tab == selectedTab || sideBarLoadedTabs.contains(tab) {
+                tab
+                  .makeContentView(popToRootTab: $popToRootTab)
+                  .opacity(tab == selectedTab ? 1 : 0)
+                  .transition(.opacity)
+                  .id("\(tab)\(appAccountsManager.currentAccount.id)")
+                  .onAppear {
+                    sideBarLoadedTabs.insert(tab)
+                  }
+              } else {
+                EmptyView()
               }
-          } else {
-            EmptyView()
+            }
+          }
+          if proxy.frame(in: .global).width > (.maxColumnWidth + .secondaryColumnWidth),
+             currentAccount.account?.id != nil {
+            Divider().edgesIgnoringSafeArea(.all)
+            NotificationsTab(popToRootTab: $popToRootTab, lockedType: nil, isSecondaryColumn: true)
+              .frame(maxWidth: 360)
           }
         }
       }
@@ -117,7 +127,7 @@ struct IceCubesApp: App {
       sideBarLoadedTabs.removeAll()
     }
   }
-
+  
   private var tabBarView: some View {
     TabView(selection: .init(get: {
       selectedTab
@@ -143,14 +153,14 @@ struct IceCubesApp: App {
       }
     }
   }
-
+  
   private func setNewClientsInEnv(client: Client) {
     currentAccount.setClient(client: client)
     currentInstance.setClient(client: client)
     userPreferences.setClient(client: client)
     watcher.setClient(client: client)
   }
-
+  
   private func handleScenePhase(scenePhase: ScenePhase) {
     switch scenePhase {
     case .background:
@@ -167,16 +177,16 @@ struct IceCubesApp: App {
       break
     }
   }
-
+  
   private func setupRevenueCat() {
     Purchases.logLevel = .error
     Purchases.configure(withAPIKey: "appl_JXmiRckOzXXTsHKitQiicXCvMQi")
   }
-
+  
   private func refreshPushSubs() {
     PushNotificationsService.shared.requestPushNotifications()
   }
-
+  
   @CommandsBuilder
   private var appMenu: some Commands {
     CommandGroup(replacing: .newItem) {
@@ -203,14 +213,14 @@ struct IceCubesApp: App {
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   let themeObserver = ThemeObserverViewController(nibName: nil, bundle: nil)
-
+  
   func application(_: UIApplication,
                    didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool
   {
     try? AVAudioSession.sharedInstance().setCategory(.ambient, options: .mixWithOthers)
     return true
   }
-
+  
   func application(_: UIApplication,
                    didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data)
   {
@@ -220,9 +230,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
       await PushNotificationsService.shared.updateSubscriptions(forceCreate: false)
     }
   }
-
+  
   func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError _: Error) {}
-
+  
   func application(_: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options _: UIScene.ConnectionOptions) -> UISceneConfiguration {
     let configuration = UISceneConfiguration(name: nil, sessionRole: connectingSceneSession.role)
     if connectingSceneSession.role == .windowApplication {
@@ -235,7 +245,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 class ThemeObserverViewController: UIViewController {
   override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
     super.traitCollectionDidChange(previousTraitCollection)
-
+    
     print(traitCollection.userInterfaceStyle.rawValue)
   }
 }

@@ -18,6 +18,7 @@ struct NotificationsTab: View {
   @Binding var popToRootTab: Tab
 
   let lockedType: Models.Notification.NotificationType?
+  let isSecondaryColumn: Bool
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {
@@ -25,11 +26,13 @@ struct NotificationsTab: View {
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbar {
-          statusEditorToolbarItem(routerPath: routerPath,
-                                  visibility: userPreferences.postVisibility)
-          if UIDevice.current.userInterfaceIdiom != .pad {
-            ToolbarItem(placement: .navigationBarLeading) {
-              AppAccountsSelectorView(routerPath: routerPath)
+          if !isSecondaryColumn {
+            statusEditorToolbarItem(routerPath: routerPath,
+                                    visibility: userPreferences.postVisibility)
+            if UIDevice.current.userInterfaceIdiom != .pad {
+              ToolbarItem(placement: .navigationBarLeading) {
+                AppAccountsSelectorView(routerPath: routerPath)
+              }
             }
           }
         }

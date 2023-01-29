@@ -319,6 +319,7 @@ public struct StatusRowView: View {
           Text("status.action.translate")
         }
       }
+      .buttonStyle(.borderless)
     }
 
     if let translation = viewModel.translation, !viewModel.isLoadingTranslation {
