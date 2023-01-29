@@ -34,20 +34,20 @@ struct AccountDetailHeaderView: View {
     ZStack(alignment: .bottomTrailing) {
       if reasons.contains(.placeholder) {
         Rectangle()
-          .foregroundColor(.gray)
+          .foregroundColor(theme.secondaryBackgroundColor)
           .frame(height: bannerHeight)
       } else {
         LazyImage(url: account.header) { state in
           if let image = state.image {
             image
               .resizingMode(.aspectFill)
-              .overlay(.black.opacity(0.50))
+              .overlay(account.haveHeader ? .black.opacity(0.50) : .clear)
           } else if state.isLoading {
-            Color.gray
+            theme.secondaryBackgroundColor
               .frame(height: bannerHeight)
               .shimmering()
           } else {
-            Color.gray
+            theme.secondaryBackgroundColor
               .frame(height: bannerHeight)
           }
         }
@@ -64,7 +64,7 @@ struct AccountDetailHeaderView: View {
           .padding(8)
       }
     }
-    .background(Color.gray)
+    .background(theme.secondaryBackgroundColor)
     .frame(height: bannerHeight)
     .offset(y: scrollOffset > 0 ? -scrollOffset : 0)
     .contentShape(Rectangle())
