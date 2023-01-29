@@ -287,6 +287,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Translate";
+"status.action.translate-from-%@" = "Translate from %@";
 "status.action.translated-label" = "Translated using DeepL.com";
 "status.action.bookmark" = "Bookmark";
 "status.action.boost" = "Boost";

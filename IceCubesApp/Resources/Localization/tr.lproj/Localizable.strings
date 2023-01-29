@@ -269,6 +269,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Tercüme et";
+"status.action.translate-from-%@" = "Tercüme et %@";
 "status.action.translated-label" = "DeepL.com tarafından tercüme edildi";
 "status.action.bookmark" = "Yer İmi Ekle";
 "status.action.boost" = "Yükselt";
