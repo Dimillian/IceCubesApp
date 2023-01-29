@@ -128,7 +128,7 @@
 "settings.push.duplicate.title" = "중복 알림 해결사";
 "settings.push.duplicate.footer" = "같은 알림이 여러 번 오나요? 여기 있는 버튼을 누르면 마법처럼 해결될 거에요.";
 "settings.push.duplicate.button.fix" = "🪄 고치기";
-"settings.other.autoplay-video" = "Auto Play Videos";
+"settings.other.autoplay-video" = "동영상 자동 재생";
 
 // MARK: Tabs
 "tab.explore" = "둘러보기";
