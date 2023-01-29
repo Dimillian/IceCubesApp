@@ -74,7 +74,6 @@ public class ReblogCache {
   @MainActor public func removeDuplicateReblogs(_ statuses: inout [Status]) {
     
     var i = statuses.count
-    let ct = statuses.count
 
     for status in statuses.reversed() {
       // go backwards through the status list
