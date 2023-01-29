@@ -119,6 +119,7 @@ struct IceCubesApp: App {
              currentAccount.account?.id != nil {
             Divider().edgesIgnoringSafeArea(.all)
             NotificationsTab(popToRootTab: $popToRootTab, lockedType: nil, isSecondaryColumn: true)
+              .environment(\.isSecondaryColumn, true)
               .frame(maxWidth: 360)
           }
         }
