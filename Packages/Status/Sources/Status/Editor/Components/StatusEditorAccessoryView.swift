@@ -21,67 +21,70 @@ struct StatusEditorAccessoryView: View {
   var body: some View {
     VStack(spacing: 0) {
       Divider()
-      HStack(alignment: .center, spacing: 16) {
-        PhotosPicker(selection: $viewModel.selectedMedias,
-                     matching: .any(of: [.images, .videos])) {
-          if viewModel.isMediasLoading {
-            ProgressView()
-          } else {
-            Image(systemName: "photo.fill.on.rectangle.fill")
-          }
-        }
-        .disabled(viewModel.showPoll)
+      HStack {
+        ScrollView(.horizontal) {
+          HStack(alignment: .center, spacing: 16) {
+            PhotosPicker(selection: $viewModel.selectedMedias,
+                         matching: .any(of: [.images, .videos])) {
+              if viewModel.isMediasLoading {
+                ProgressView()
+              } else {
+                Image(systemName: "photo.fill.on.rectangle.fill")
+              }
+            }
+            .disabled(viewModel.showPoll)
 
-        Button {
-          withAnimation {
-            viewModel.showPoll.toggle()
-          }
-        } label: {
-          Image(systemName: "chart.bar")
-        }
-        .disabled(viewModel.shouldDisablePollButton)
+            Button {
+              withAnimation {
+                viewModel.showPoll.toggle()
+              }
+            } label: {
+              Image(systemName: "chart.bar")
+            }
+            .disabled(viewModel.shouldDisablePollButton)
 
-        Button {
-          withAnimation {
-            viewModel.spoilerOn.toggle()
-          }
-          isSpoilerTextFocused.toggle()
-        } label: {
-          Image(systemName: viewModel.spoilerOn ? "exclamationmark.triangle.fill" : "exclamationmark.triangle")
-        }
+            Button {
+              withAnimation {
+                viewModel.spoilerOn.toggle()
+              }
+              isSpoilerTextFocused.toggle()
+            } label: {
+              Image(systemName: viewModel.spoilerOn ? "exclamationmark.triangle.fill" : "exclamationmark.triangle")
+            }
 
-        if !viewModel.mode.isInShareExtension {
-          Button {
-            isDraftsSheetDisplayed = true
-          } label: {
-            Image(systemName: "archivebox")
-          }
-        }
+            if !viewModel.mode.isInShareExtension {
+              Button {
+                isDraftsSheetDisplayed = true
+              } label: {
+                Image(systemName: "archivebox")
+              }
+            }
 
-        if !viewModel.customEmojis.isEmpty {
-          Button {
-            isCustomEmojisSheetDisplay = true
-          } label: {
-            Image(systemName: "face.smiling.inverse")
-          }
-        }
+            if !viewModel.customEmojis.isEmpty {
+              Button {
+                isCustomEmojisSheetDisplay = true
+              } label: {
+                Image(systemName: "face.smiling.inverse")
+              }
+            }
 
-        Button {
-          isLanguageSheetDisplayed.toggle()
-        } label: {
-          if let language = viewModel.selectedLanguage {
-            Text(language.uppercased())
-          } else {
-            Image(systemName: "globe")
+            Button {
+              isLanguageSheetDisplayed.toggle()
+            } label: {
+              if let language = viewModel.selectedLanguage {
+                Text(language.uppercased())
+              } else {
+                Image(systemName: "globe")
+              }
+            }
           }
+          .padding(.horizontal, .layoutPadding)
         }
-
         Spacer()
-
         characterCountView
+          .padding(.trailing, .layoutPadding)
       }
       .frame(height: 20)
-      .padding(.horizontal, .layoutPadding)
       .padding(.vertical, 12)
       .background(.ultraThinMaterial)
     }
