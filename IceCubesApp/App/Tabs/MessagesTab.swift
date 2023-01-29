@@ -30,7 +30,7 @@ struct MessagesTab: View {
           }
         }
         .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
-        .id(appAccount.currentAccount.id)
+        .id(currentAccount.account?.id)
     }
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
       if popToRootTab == .messages {

@@ -38,7 +38,7 @@ struct NotificationsTab: View {
           }
         }
         .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
-        .id(appAccount.currentAccount.id)
+        .id(currentAccount.account?.id)
     }
     .onAppear {
       routerPath.client = client
