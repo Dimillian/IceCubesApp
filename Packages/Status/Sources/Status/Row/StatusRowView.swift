@@ -67,6 +67,7 @@ public struct StatusRowView: View {
         }
       }
       .onAppear {
+        viewModel.markSeen()
         if reasons.isEmpty {
           viewModel.client = client
           if !viewModel.isCompact, viewModel.embeddedStatus == nil {

@@ -75,11 +75,20 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
                                                                     maxId: nil,
                                                                     minId: nil,
                                                                     offset: statuses.count))
+
+
+        ReblogCache.shared.removeDuplicateReblogs(&statuses)
+
         withAnimation {
           statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
         }
       } else if let first = pendingStatuses.first ?? statuses.first {
         var newStatuses: [Status] = await fetchNewPages(minId: first.id, maxPages: 20)
+        
+        
+        ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
+
+        
         if userIntent || !pendingStatusesEnabled {
           pendingStatuses.insert(contentsOf: newStatuses, at: 0)
           statuses.insert(contentsOf: pendingStatuses, at: 0)
@@ -107,7 +116,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
     var allStatuses: [Status] = []
     var latestMinId = minId
     do {
-      while let newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
+      while var newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
                                                                                          maxId: nil,
                                                                                          minId: latestMinId,
                                                                                          offset: statuses.count)),
@@ -115,6 +124,9 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
         pagesLoaded < maxPages
       {
         pagesLoaded += 1
+
+        ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
+        
         allStatuses.insert(contentsOf: newStatuses, at: 0)
         latestMinId = newStatuses.first?.id ?? ""
       }
@@ -129,10 +141,14 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
     do {
       guard let lastId = statuses.last?.id else { return }
       statusesState = .display(statuses: statuses, nextPageState: .loadingNextPage)
-      let newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
+      var newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
                                                                                    maxId: lastId,
                                                                                    minId: nil,
                                                                                    offset: statuses.count))
+
+      ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
+
+
       statuses.append(contentsOf: newStatuses)
       statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
     } catch {

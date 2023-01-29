@@ -3,6 +3,96 @@ import Models
 import Network
 import SwiftUI
 
+
+public class ReblogCache {
+  
+  static public let shared = ReblogCache()
+
+  var seenStatuses = [CacheEntry]()
+  let MAX_STATUSES_CACHED = 100
+  
+  struct CacheEntry {
+    var postid:String
+    var username:String
+    var seen:Bool
+  }
+  
+
+  public func removeDuplicateReblogs(_ statuses: inout [Status]) {
+    
+    print ("Deduping")
+    var i = statuses.count
+    
+    let ct = statuses.count
+
+    for status in statuses.reversed() {
+      i -= 1
+      if let reblog = status.reblog {
+        let idx = seenStatuses.firstIndex(where: { $0.postid == reblog.id })
+        
+        if idx != nil && seenStatuses[idx!].seen {
+          // this is in the cache and seen , we only keep it if is boosted
+          // by the person we saw boost it
+          if seenStatuses[idx!].username != status.account.username {
+            print("suppressing: \(reblog.id)/ \(reblog.account.displayName) by \(status.account.displayName)")
+            
+            assert(statuses[i].id == status.id)
+            statuses.remove(at: i)
+            assert(statuses.count == (ct-1))
+            cache(status, seen:false)
+            break
+          }
+          else {
+            print("keeping seen item: \(reblog.id)/ \(reblog.account.displayName) by \(status.account.displayName)")
+            cache(status, seen:false)
+          }
+        }
+        else {
+          print("caching new item: \(reblog.id)/ \(reblog.account.displayName) by \(status.account.displayName)")
+          cache(status, seen:false)
+        }
+      }
+      else {
+        print("Not boost")
+      }
+    }
+  }
+
+  func cache(_ status:Status, seen:Bool) {
+
+    var wasSeen = false
+    var usernameToCache = status.account.username
+
+    if let reblog = status.reblog {
+      // only caching boosts at the moment.
+      
+      if(seen) {
+        print("SEEN: \(reblog.id)/ \(reblog.account.displayName) by \(status.account.displayName)")
+      }
+      
+      if let idx = seenStatuses.firstIndex(where: { $0.postid == reblog.id }) {
+        // every time we see it, we refresh it in the list
+        // so poplular things are kept in the cache
+        
+        wasSeen = seenStatuses[idx].seen
+        
+        if wasSeen {
+          usernameToCache = seenStatuses[idx].username
+        }
+
+        seenStatuses.remove(at: idx)
+        print("re-up: \(reblog.id)/ \(reblog.account.displayName) by \(usernameToCache)")
+      }
+      seenStatuses.append( CacheEntry(postid: reblog.id, username: usernameToCache, seen: seen || wasSeen))
+      if seenStatuses.count > MAX_STATUSES_CACHED {
+        seenStatuses.remove(at: 0)
+      }
+    }
+    
+  }
+}
+
+
 @MainActor
 public class StatusRowViewModel: ObservableObject {
   let status: Status
@@ -25,7 +115,9 @@ public class StatusRowViewModel: ObservableObject {
 
   @Published var translation: String?
   @Published var isLoadingTranslation: Bool = false
-
+  
+  @Published var seen = false
+  
   var filter: Filtered? {
     status.reblog?.filtered?.first ?? status.filtered?.first
   }
@@ -60,6 +152,14 @@ public class StatusRowViewModel: ObservableObject {
     displaySpoiler = !(status.reblog?.spoilerText.asRawText ?? status.spoilerText.asRawText).isEmpty
 
     isFiltered = filter != nil
+  }
+    
+  func markSeen() {
+    // called in on appear so we can cache that the status has been seen.
+    if !seen {
+      ReblogCache.shared.cache(status, seen: true)
+    }
+    seen = true
   }
 
   func navigateToDetail(routerPath: RouterPath) {
