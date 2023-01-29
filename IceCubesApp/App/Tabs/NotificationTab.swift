@@ -8,6 +8,8 @@ import SwiftUI
 import Timeline
 
 struct NotificationsTab: View {
+  @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
+  
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var watcher: StreamWatcher
@@ -25,16 +27,18 @@ struct NotificationsTab: View {
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbar {
-          statusEditorToolbarItem(routerPath: routerPath,
-                                  visibility: userPreferences.postVisibility)
-          if UIDevice.current.userInterfaceIdiom != .pad {
-            ToolbarItem(placement: .navigationBarLeading) {
-              AppAccountsSelectorView(routerPath: routerPath)
+          if !isSecondaryColumn {
+            statusEditorToolbarItem(routerPath: routerPath,
+                                    visibility: userPreferences.postVisibility)
+            if UIDevice.current.userInterfaceIdiom != .pad {
+              ToolbarItem(placement: .navigationBarLeading) {
+                AppAccountsSelectorView(routerPath: routerPath)
+              }
             }
           }
         }
         .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
-        .id(appAccount.currentAccount.id)
+        .id(currentAccount.account?.id)
     }
     .onAppear {
       routerPath.client = client

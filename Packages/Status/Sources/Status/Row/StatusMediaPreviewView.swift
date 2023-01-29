@@ -7,6 +7,7 @@ import SwiftUI
 
 public struct StatusMediaPreviewView: View {
   @Environment(\.openURL) private var openURL
+  @Environment(\.isSecondaryColumn) private var isSecondaryColumn
 
   @EnvironmentObject var sceneDelegate: SceneDelegate
   @EnvironmentObject private var preferences: UserPreferences
@@ -65,7 +66,7 @@ public struct StatusMediaPreviewView: View {
   }
 
   private func imageSize(from: CGSize, newWidth: CGFloat) -> CGSize {
-    if isNotifications || theme.statusDisplayStyle == .compact {
+    if isNotifications || theme.statusDisplayStyle == .compact || isSecondaryColumn {
       return .init(width: imageMaxHeight, height: imageMaxHeight)
     }
     let ratio = newWidth / from.width

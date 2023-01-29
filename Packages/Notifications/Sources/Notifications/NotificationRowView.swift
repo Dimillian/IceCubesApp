@@ -53,7 +53,7 @@ struct NotificationRowView: View {
     ZStack(alignment: .center) {
       Circle()
         .strokeBorder(Color.white, lineWidth: 1)
-        .background(Circle().foregroundColor(theme.tintColor))
+        .background(Circle().foregroundColor(type.tintColor()))
         .frame(width: 24, height: 24)
 
       Image(systemName: type.iconName())
