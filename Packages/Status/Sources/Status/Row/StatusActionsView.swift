@@ -70,6 +70,7 @@ struct StatusActionsView: View {
               ShareLink(item: url) {
                 Image(systemName: action.iconName(viewModel: viewModel))
               }
+              .buttonStyle(.borderless)
             }
           } else {
             Button {

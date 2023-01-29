@@ -19,14 +19,12 @@ public struct NotificationsListView: View {
   }
 
   public var body: some View {
-    ScrollView {
-      LazyVStack {
-        notificationsView
-          .frame(maxWidth: .maxColumnWidth)
-      }
-      .padding(.top, .layoutPadding + 16)
-      .background(theme.primaryBackgroundColor)
+    List {
+      topPaddingView
+      notificationsView
     }
+    .environment(\.defaultMinListRowHeight, 1)
+    .listStyle(.plain)
     .navigationTitle(lockedType?.menuTitle() ?? viewModel.selectedType?.menuTitle() ?? "notifications.navigation-title")
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
@@ -84,13 +82,12 @@ public struct NotificationsListView: View {
       ForEach(ConsolidatedNotification.placeholders()) { notification in
         NotificationRowView(notification: notification)
           .redacted(reason: .placeholder)
-          .padding(.leading, .layoutPadding + 4)
-          .padding(.trailing, .layoutPadding)
-          .padding(.top, 6)
-          .padding(.bottom, 2)
+          .listRowInsets(.init(top: 12,
+                               leading: .layoutPadding + 4,
+                               bottom: 12,
+                               trailing: .layoutPadding))
+          .listRowBackground(theme.primaryBackgroundColor)
           .shimmering()
-        Divider()
-          .padding(.vertical, .dividerPadding)
       }
 
     case let .display(notifications, nextPageState):
@@ -101,12 +98,12 @@ public struct NotificationsListView: View {
       } else {
         ForEach(notifications) { notification in
           NotificationRowView(notification: notification)
-            .padding(.leading, .layoutPadding + 4)
-            .padding(.trailing, .layoutPadding)
-            .padding(.top, 6)
-            .padding(.bottom, 2)
-          Divider()
-            .padding(.vertical, .dividerPadding)
+            .listRowInsets(.init(top: 12,
+                                 leading: .layoutPadding + 4,
+                                 bottom: 12,
+                                 trailing: .layoutPadding))
+            .listRowBackground(notification.type == .mention && lockedType != .mention ?
+                               theme.secondaryBackgroundColor : theme.primaryBackgroundColor)
         }
       }
 
@@ -141,5 +138,18 @@ public struct NotificationsListView: View {
       ProgressView()
       Spacer()
     }
+    .listRowInsets(.init(top: .layoutPadding,
+                         leading: .layoutPadding + 4,
+                         bottom: .layoutPadding,
+                         trailing: .layoutPadding))
+    .listRowBackground(theme.primaryBackgroundColor)
+  }
+  
+  private var topPaddingView: some View {
+    HStack { }
+      .listRowBackground(Color.clear)
+      .listRowSeparator(.hidden)
+      .listRowInsets(.init())
+      .frame(height: .layoutPadding)
   }
 }

@@ -32,6 +32,9 @@ struct NotificationRowView: View {
         }
       }
     }
+    .alignmentGuide(.listRowSeparatorLeading) { viewDimensions in
+      return -100
+    }
   }
 
   private func makeAvatarView(type: Models.Notification.NotificationType) -> some View {
