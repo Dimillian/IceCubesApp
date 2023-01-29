@@ -22,6 +22,7 @@ public class StatusRowViewModel: ObservableObject {
   @Published var displaySpoiler: Bool = false
   @Published var isEmbedLoading: Bool = false
   @Published var isFiltered: Bool = false
+  @Published var isLoadingRemoteContent: Bool = false
 
   @Published var translation: String?
   @Published var isLoadingTranslation: Bool = false
@@ -68,6 +69,34 @@ public class StatusRowViewModel: ObservableObject {
       routerPath.navigate(to: .remoteStatusDetail(url: url))
     } else {
       routerPath.navigate(to: .statusDetail(id: status.reblog?.id ?? status.id))
+    }
+  }
+  
+  func navigateToAccountDetail(account: Account, routerPath: RouterPath) {
+    if isRemote, let url = account.url {
+      withAnimation {
+        isLoadingRemoteContent = true
+      }
+      Task {
+        await routerPath.navigateToAccountFrom(url: url)
+        isLoadingRemoteContent = false
+      }
+    } else {
+      routerPath.navigate(to: .accountDetailWithAccount(account: account))
+    }
+  }
+  
+  func navigateToMention(mention: Mention, routerPath: RouterPath) {
+    if isRemote {
+      withAnimation {
+        isLoadingRemoteContent = true
+      }
+      Task {
+        await routerPath.navigateToAccountFrom(url: mention.url)
+        isLoadingRemoteContent = false
+      }
+    } else {
+      routerPath.navigate(to: .accountDetail(id: mention.id))
     }
   }
 

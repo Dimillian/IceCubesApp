@@ -110,6 +110,11 @@ public struct StatusRowView: View {
             viewModel.navigateToDetail(routerPath: routerPath)
           }
       }
+      .overlay {
+        if viewModel.isLoadingRemoteContent {
+          remoteContentLoadingView
+        }
+      }
     }
   }
 
@@ -149,13 +154,7 @@ public struct StatusRowView: View {
       .foregroundColor(.gray)
       .fontWeight(.semibold)
       .onTapGesture {
-        if viewModel.isRemote, let url = viewModel.status.account.url {
-          Task {
-            await routerPath.navigateToAccountFrom(url: url)
-          }
-        } else {
-          routerPath.navigate(to: .accountDetailWithAccount(account: viewModel.status.account))
-        }
+        viewModel.navigateToAccountDetail(account: viewModel.status.account, routerPath: routerPath)
       }
     }
   }
@@ -174,13 +173,7 @@ public struct StatusRowView: View {
       .foregroundColor(.gray)
       .fontWeight(.semibold)
       .onTapGesture {
-        if viewModel.isRemote {
-          Task {
-            await routerPath.navigateToAccountFrom(url: mention.url)
-          }
-        } else {
-          routerPath.navigate(to: .accountDetail(id: mention.id))
-        }
+        viewModel.navigateToMention(mention: mention, routerPath: routerPath)
       }
     }
   }
@@ -191,13 +184,7 @@ public struct StatusRowView: View {
         if !viewModel.isCompact {
           HStack(alignment: .top) {
             Button {
-              if viewModel.isRemote, let url = status.account.url {
-                Task {
-                  await routerPath.navigateToAccountFrom(url: url)
-                }
-              } else {
-                routerPath.navigate(to: .accountDetailWithAccount(account: status.account))
-              }
+              viewModel.navigateToAccountDetail(account: status.account, routerPath: routerPath)
             } label: {
               accountView(status: status)
             }
@@ -395,5 +382,21 @@ public struct StatusRowView: View {
           .shimmering()
       }
     }
+  }
+  
+  private var remoteContentLoadingView: some View {
+    ZStack(alignment: .center) {
+      VStack {
+        Spacer()
+        HStack {
+          Spacer()
+          ProgressView()
+          Spacer()
+        }
+        Spacer()
+      }
+    }
+    .background(Color.black.opacity(0.40))
+    .transition(.opacity)
   }
 }

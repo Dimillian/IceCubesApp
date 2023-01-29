@@ -13,6 +13,7 @@ class VideoPlayerViewModel: ObservableObject {
   func preparePlayer(autoPlay: Bool) {
     player = .init(url: url)
     player?.isMuted = true
+    player?.audiovisualBackgroundPlaybackPolicy = .pauses
     if autoPlay {
       player?.play()
     }
