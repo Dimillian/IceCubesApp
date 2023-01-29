@@ -14,68 +14,72 @@ public struct StatusDetailView: View {
   @Environment(\.openURL) private var openURL
   @StateObject private var viewModel: StatusDetailViewModel
   @State private var isLoaded: Bool = false
-
+  
   public init(statusId: String) {
     _viewModel = StateObject(wrappedValue: .init(statusId: statusId))
   }
-
+  
   public init(remoteStatusURL: URL) {
     _viewModel = StateObject(wrappedValue: .init(remoteStatusURL: remoteStatusURL))
   }
-
+  
   public var body: some View {
     ScrollViewReader { proxy in
-      ScrollView {
-        LazyVStack {
-          switch viewModel.state {
-          case .loading:
-            ForEach(Status.placeholders()) { status in
-              StatusRowView(viewModel: .init(status: status, isCompact: false))
+      ZStack {
+        ScrollView {
+          LazyVStack {
+            Group {
+              switch viewModel.state {
+              case .loading:
+                ForEach(Status.placeholders()) { status in
+                  StatusRowView(viewModel: .init(status: status, isCompact: false))
+                    .padding(.horizontal, .layoutPadding)
+                    .redacted(reason: .placeholder)
+                    .shimmering()
+                  Divider()
+                    .padding(.vertical, .dividerPadding)
+                }
+              case let .display(status, context):
+                if !context.ancestors.isEmpty {
+                  ForEach(context.ancestors) { ancestor in
+                    StatusRowView(viewModel: .init(status: ancestor, isCompact: false))
+                      .padding(.horizontal, .layoutPadding)
+                    Divider()
+                      .padding(.vertical, .dividerPadding)
+                  }
+                }
+                StatusRowView(viewModel: .init(status: status,
+                                               isCompact: false,
+                                               isFocused: true))
                 .padding(.horizontal, .layoutPadding)
-                .redacted(reason: .placeholder)
-                .shimmering()
-              Divider()
-                .padding(.vertical, .dividerPadding)
-            }
-          case let .display(status, context):
-            if !context.ancestors.isEmpty {
-              ForEach(context.ancestors) { ancestor in
-                StatusRowView(viewModel: .init(status: ancestor, isCompact: false))
-                  .padding(.horizontal, .layoutPadding)
+                .id(status.id)
                 Divider()
-                  .padding(.vertical, .dividerPadding)
+                  .padding(.bottom, .dividerPadding * 2)
+                if !context.descendants.isEmpty {
+                  ForEach(context.descendants) { descendant in
+                    StatusRowView(viewModel: .init(status: descendant, isCompact: false))
+                      .padding(.horizontal, .layoutPadding)
+                    Divider()
+                      .padding(.vertical, .dividerPadding)
+                  }
+                }
+                
+              case .error:
+                ErrorView(title: "status.error.title",
+                          message: "status.error.message",
+                          buttonTitle: "action.retry") {
+                  Task {
+                    await viewModel.fetch()
+                  }
+                }
               }
             }
-            StatusRowView(viewModel: .init(status: status,
-                                           isCompact: false,
-                                           isFocused: true))
-              .padding(.horizontal, .layoutPadding)
-              .id(status.id)
-            Divider()
-              .padding(.bottom, .dividerPadding * 2)
-            if !context.descendants.isEmpty {
-              ForEach(context.descendants) { descendant in
-                StatusRowView(viewModel: .init(status: descendant, isCompact: false))
-                  .padding(.horizontal, .layoutPadding)
-                Divider()
-                  .padding(.vertical, .dividerPadding)
-              }
-            }
-
-          case .error:
-            ErrorView(title: "status.error.title",
-                      message: "status.error.message",
-                      buttonTitle: "action.retry") {
-              Task {
-                await viewModel.fetch()
-              }
-            }
+            .frame(maxWidth: .maxColumnWidth)
           }
+          .padding(.top, .layoutPadding)
         }
-        .padding(.top, .layoutPadding)
+        .background(theme.primaryBackgroundColor)
       }
-      .scrollContentBackground(.hidden)
-      .background(theme.primaryBackgroundColor)
       .task {
         guard !isLoaded else { return }
         isLoaded = true
