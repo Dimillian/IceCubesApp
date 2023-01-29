@@ -127,7 +127,7 @@
 "settings.push.duplicate.title" = "重复推送通知修复器";
 "settings.push.duplicate.footer" = "有收到重复的推送通知？试试用这个魔法按钮去修复吧";
 "settings.push.duplicate.button.fix" = "🪄 修复";
-"settings.other.autoplay-video" = "Auto Play Videos";
+"settings.other.autoplay-video" = "自动播放视频";
 
 // MARK: Tabs
 "tab.explore" = "探索";
