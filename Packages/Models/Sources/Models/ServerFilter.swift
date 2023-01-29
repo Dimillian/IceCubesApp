@@ -27,7 +27,7 @@ public extension ServerFilter.Context {
   var iconName: String {
     switch self {
     case .home:
-      return "rectangle.on.rectangle"
+      return "rectangle.stack"
     case .notifications:
       return "bell"
     case .public:

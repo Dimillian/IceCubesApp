@@ -128,6 +128,7 @@
 "settings.push.duplicate.title" = "Korektor duplikatów powiadomień";
 "settings.push.duplicate.footer" = "Otrzymujesz zduplikowane powiadomienia? Spróbuj tego magicznego przycisku, aby to naprawić";
 "settings.push.duplicate.button.fix" = "🪄 Napraw to";
+"settings.other.autoplay-video" = "Auto Play Videos";
 
 // MARK: Tabs
 "tab.explore" = "Odkrywaj";

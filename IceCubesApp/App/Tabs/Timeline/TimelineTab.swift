@@ -8,6 +8,7 @@ import SwiftUI
 import Timeline
 
 struct TimelineTab: View {
+  @EnvironmentObject private var appAccount: AppAccountsManager
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var preferences: UserPreferences
@@ -36,7 +37,7 @@ struct TimelineTab: View {
           toolbarView
         }
         .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
-        .id(currentAccount.account?.id)
+        .id(appAccount.currentAccount.id)
     }
     .onAppear {
       routerPath.client = client
@@ -143,6 +144,7 @@ struct TimelineTab: View {
       if UIDevice.current.userInterfaceIdiom != .pad {
         ToolbarItem(placement: .navigationBarLeading) {
           AppAccountsSelectorView(routerPath: routerPath)
+            .id(currentAccount.account?.id)
         }
       }
       statusEditorToolbarItem(routerPath: routerPath,

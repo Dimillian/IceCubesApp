@@ -37,6 +37,15 @@ class ShareViewController: UIViewController {
         childView.view.frame = self.view.bounds
         self.view.addSubview(childView.view)
         childView.didMove(toParent: self)
+        
+        childView.view.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+          childView.view.topAnchor.constraint(equalTo: self.view.topAnchor),
+          childView.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+          childView.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+          childView.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
+        ])
       }
     }
 

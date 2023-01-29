@@ -32,6 +32,8 @@ public struct AppAccountView: View {
     HStack {
       if let account = viewModel.account {
         AvatarView(url: account.avatar)
+      } else {
+        ProgressView()
       }
     }
   }
@@ -47,6 +49,8 @@ public struct AppAccountView: View {
               .offset(x: 5, y: -5)
           }
         }
+      } else {
+        ProgressView()
       }
       VStack(alignment: .leading) {
         if let account = viewModel.account {

@@ -128,6 +128,7 @@
 "settings.push.duplicate.title" = "Reparasjon av dupliserte varslinger";
 "settings.push.duplicate.footer" = "Får du dupliserte varsler? Prøv denne magiske knappen for å fikse det.";
 "settings.push.duplicate.button.fix" = "🪄 Fiks det";
+"settings.other.autoplay-video" = "Auto Play Videos";
 
 // MARK: Tabs
 "tab.explore" = "Utforsk";

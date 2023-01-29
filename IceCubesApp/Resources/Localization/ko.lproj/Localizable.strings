@@ -1,0 +1,380 @@
+// MARK: Common strings
+"action.cancel" = "취소";
+"action.delete" = "삭제";
+"action.save"  = "저장";
+"action.done" = "완료";
+"action.retry" = "다시 시도";
+"action.view.error" = "View 오류";
+
+"alert.button.ok" = "확인";
+"alert.error" = "오류";
+
+"placeholder.loading.long" = "로딩, 로딩, 또 로딩...";
+"placeholder.loading.short" = "로드 중...";
+
+"see-more" = "더 보기";
+
+// MARK: Add Account
+"account.add.error.instance-not-supported" = "이 인스턴스는 현재 지원되지 않습니다.";
+"account.add.navigation-title" = "계정 추가";
+"account.add.sign-in" = "로그인";
+
+// MARK: Enums
+"enum.avatar-position.leading" = "본문 옆";
+"enum.avatar-position.top" = "본문 위";
+"enum.avatar-shape.circle" = "원";
+"enum.avatar-shape.rounded" = "둥근 사각형";
+"enum.status-actions-display.all" = "모두 표시";
+"enum.status-actions-display.no-buttons" = "표시하지 않음";
+"enum.status-actions-display.only-buttons" = "버튼만 표시";
+"enum.status-display-style.compact" = "작게";
+"enum.status-display-style.large" = "크게";
+
+// MARK: Instances
+"instance.info.domains" = "도메인";
+"instance.info.email" = "이메일";
+"instance.info.name" = "이름";
+"instance.info.navigation-title" = "인스턴스 정보";
+"instance.info.posts" = "툿";
+"instance.info.section.info" = "인스턴스 정보";
+"instance.info.section.rules" = "인스턴스 규칙";
+"instance.info.users" = "사용자";
+"instance.info.version" = "버전";
+"instance.list.posts-%@" = "툿 %@개";
+"instance.list.users-%@" = "사용자 %@명";
+"instance.suggestions" = "추천";
+"instance.url" = "인스턴스 URL";
+
+// MARK: Menu
+"menu.new-post" = "새 툿";
+"menu.font" = "글꼴";
+"menu.font.bigger" = "크게";
+"menu.font.smaller" = "작게";
+
+// MARK: Settings
+"settings.account.add" = "계정 추가";
+"settings.app.icon" = "앱 아이콘";
+"settings.app.icon.navigation-title" = "앱 아이콘";
+"settings.app.source" = "소스 코드 (GitHub)";
+"settings.app.support" = "이 앱 지원하기";
+"settings.display.avatar.position" = "프로필 사진 위치";
+"settings.display.avatar.shape" = "프로필 사진 모양";
+"settings.display.navigation-title" = "화면 설정";
+"settings.display.restore" = "초기 설정으로 되돌리기";
+"settings.display.section.display" = "화면";
+"settings.display.section.theme" = "테마";
+"settings.display.section.theme.footer" = "직접 지정한 색상은 시스템 설정에 맞추기 옵션이 꺼져 있을 때만 사용할 수 있습니다.";
+"settings.display.status.action-buttons" = "툿 동작 버튼";
+"settings.display.status.media-style" = "툿 미디어 크기";
+"settings.display.translate-button" = "번역 버튼 표시";
+"settings.display.theme.background" = "배경 색상";
+"settings.display.theme.secondary-background" = "보조 배경 색상";
+"settings.display.theme.tint" = "강조 색상";
+"settings.display.theme.systemColor" = "시스템 설정에 맞추기";
+"settings.general.browser" = "브라우저";
+"settings.general.browser.in-app" = "인 앱 브라우저";
+"settings.general.browser.system" = "시스템 기본 브라우저";
+"settings.general.display" = "화면 설정";
+"settings.general.instance" = "인스턴스 정보";
+"settings.general.push-notifications" = "푸시 알림 설정";
+"settings.general.remote-timelines" = "원격 로컬 타임라인";
+"settings.push.boosts" = "부스트";
+"settings.push.favorites" = "좋아요";
+"settings.push.follows" = "새 팔로워";
+"settings.push.main-toggle" = "푸시 알림";
+"settings.push.main-toggle.description" = "새 활동이 있을 때 푸시 알림을 받습니다.";
+"settings.push.mentions" = "나를 언급";
+"settings.push.navigation-title" = "푸시 알림";
+"settings.push.new-posts" = "새 툿";
+"settings.push.polls" = "투표 결과";
+"settings.general.content" = "콘텐츠 설정";
+"settings.system" = "시스템 설정";
+"settings.content.navigation-title" = "콘텐츠 설정";
+"settings.content.use-instance-settings" = "인스턴스 설정에 맞추기";
+"settings.content.main-toggle.description" = "기본 인스턴스의 설정을 사용합니다.";
+"settings.content.expand-spoilers" = "열람 주의 표시된 툿 항상 표시하기";
+"settings.content.expand-media" = "표시할 미디어";
+"settings.content.default-sensitive" = "항상 내 미디어 민감함으로 표시";
+"settings.content.default-visibility" = "툿 기본 공개 범위";
+"settings.content.reading" = "읽을 때";
+"settings.content.posting" = "올릴 때";
+"enum.expand-media.show" = "모두 표시하기";
+"enum.expand-media.hide" = "모두 가리기";
+"enum.expand-media.hide-sensitive" = "민감한 미디어만 가리기";
+"settings.section.accounts" = "계정";
+"settings.section.app" = "앱";
+"settings.section.app.footer %@" = "앱 버전: %@";
+"settings.section.general" = "일반";
+"settings.support.alert.error.message" = "인 앱 구매를 완료하지 못했습니다. 다시 시도해주세요.";
+"settings.support.alert.message" = "앱을 위해 기부해주셔서 감사합니다. 앱 개발에 큰 도움이 됩니다!";
+"settings.support.alert.title" = "감사합니다!";
+"settings.support.message-from-dev" = "안녕하세요! 저는 Thomas입니다. 저는 오픈 소스 앱을 만드는 걸 정말 좋아해요. Ice Cubes는 제가 가장 자랑스럽게 생각하는 프로젝트 중 하나에요. 동시에 가장 많은 유지·보수가 필요한 프로젝트이기도 하죠. 마스토돈은 끊임없이 업데이트되고, 소셜 미디어의 세계 역시 빠르게 변화하니까요. Ice Cubes를 쓰며 즐거운 시간을 보내고 있나요? 그렇다면, 작은 기부금을 한 번 보내보는 건 어때요? 제 하루가 행복해질 거에요. (그리고 이 앱이 계속 잘 작동하는 데 도움이 될 거에요.) 🚀";
+"settings.support.navigation-title" = "Ice Cubes 지원하기";
+"settings.support.one.subtitle" = "작지만, 귀엽고 달콤해요!";
+"settings.support.one.title" = "🍬 작은 기부금";
+"settings.support.placeholder.loading-subtitle" = "로드 중...";
+"settings.support.three.subtitle" = "뭘 좀 아시는 분이군요, 미리 감사드립니다!";
+"settings.support.three.title" = "🤯 통 큰 기부금";
+"settings.support.two.subtitle" = "기분이 좋아지는 맛있는 커피는 누구나 좋아하니까요 ❤️";
+"settings.support.two.title" = "☕️ 기분 좋아지는 기부금";
+"settings.support.four.title" = "👽 엄청난 기부금";
+"settings.support.four.subtitle" = "Ice Cubes가 계속 발전하는 데 정말 많은 도움이 될 거에요!";
+"settings.timeline.add" = "로컬 타임라인 추가";
+"settings.title" = "설정";
+"settings.rate" = "Ice Cubes 평가 남기기";
+"settings.section.other" = "기타";
+"settings.other.hide-openai" = "툿 작성 도우미 🤖";
+"settings.other.social-keyboard" = "SNS 키보드";
+"settings.push.duplicate.title" = "중복 알림 해결사";
+"settings.push.duplicate.footer" = "같은 알림이 여러 번 오나요? 여기 있는 버튼을 누르면 마법처럼 해결될 거에요.";
+"settings.push.duplicate.button.fix" = "🪄 고치기";
+"settings.other.autoplay-video" = "Auto Play Videos";
+
+// MARK: Tabs
+"tab.explore" = "둘러보기";
+"tab.federated" = "연합";
+"tab.local" = "로컬";
+"tab.messages" = "메시지";
+"tab.notifications" = "알림";
+"tab.settings" = "설정";
+"tab.timeline" = "타임라인";
+"tab.trending" = "뜨고 있는";
+"tab.profile" = "프로필";
+
+// MARK: Timeline
+"timeline.%@-is-valid" = "%@ 인스턴스는 사용할 수 있는 인스턴스입니다.";
+"timeline.add-remote.title" = "원격 로컬 타임라인 추가";
+"timeline.add.action.add" = "추가";
+"timeline.filter.add-local" = "원격 로컬 타임라인 추가";
+"timeline.filter.lists" = "리스트";
+"timeline.filter.local" = "로컬 타임라인";
+"timeline.filter.tags" = "팔로우한 태그";
+
+// MARK: Package: AppAccount
+"app-account.button.add" = "계정 추가";
+
+// MARK: Package: Account
+"account.action.add-remove-list" = "리스트에서 추가/제거";
+"account.action.edit-info" = "프로필 편집";
+"account.action.mention" = "언급";
+"account.action.message" = "메시지 작성";
+"account.action.notify-enable" = "툿 알림 켜기";
+"account.action.notify-disable" = "툿 알림 끄기";
+"account.action.reboosts-show" = "이 사용자가 부스트한 툿 표시하기";
+"account.action.reboosts-hide" = "이 사용자가 부스트한 툿 가리기";
+"account.action.block" = "차단";
+"account.action.unblock" = "차단 해제";
+"account.action.mute" = "뮤트";
+"account.action.unmute" = "뮤트 해제";
+"account.boosted-by" = "부스트함: ";
+"account.detail.about" = "정보";
+"account.detail.familiar-followers" = "내가 아는 팔로워";
+"account.detail.n-fields %lld" = "%lld개 항목";
+"account.detail.featured-tags-n-posts %lld" = "%lld개 툿";
+"account.edit.about" = "정보";
+"account.edit.account-settings.bot" = "봇 계정";
+"account.edit.account-settings.discoverable" = "다른 사용자들에게 이 계정 추천";
+"account.edit.account-settings.private" = "팔로우 요청 필요";
+"account.edit.account-settings.section-title" = "계정 설정";
+"account.edit.display-name" = "표시되는 이름";
+"account.edit.error.save.message" = "프로필을 저장하지 못했습니다. 다시 시도해주세요.";
+"account.edit.error.save.title" = "프로필 저장 오류";
+"account.edit.navigation-title" = "프로필 편집";
+"account.edit.post-settings.privacy" = "기본 공개 범위";
+"account.edit.post-settings.section-title" = "툿 설정";
+"account.edit.post-settings.sensitive" = "민감한 콘텐츠";
+"account.favorited-by" = "좋아요함: ";
+"account.follow.follow" = "팔로우";
+"account.follow.following" = "팔로우 중";
+"account.follow.requested" = "요청함";
+"account.follow-request.accept" = "수락";
+"account.follow-request.reject" = "거절";
+"account.follow-requests.pending-requests" = "대기 중인 요청";
+"account.follow-requests.instructions" = "당신이 수락하기 전까지 이 사용자들은 당신의 팔로워 전용 툿을 볼 수 없습니다.";
+"account.followers" = "팔로워";
+"account.following" = "팔로우 중";
+"account.list.create" = "새 리스트 만들기";
+"account.list.create.confirm" = "만들기";
+"account.list.create.description" = "리스트의 이름을 입력해주세요.";
+"account.list.delete" = "리스트 삭제";
+"account.list.name" = "리스트 이름";
+"account.post.pinned" = "고정된 툿";
+"account.posts" = "툿";
+"account.relation.follows-you" = "당신을 팔로우함";
+"account.joined" = "가입일";
+"account.action.logout" = "로그아웃";
+
+// MARK: Package: Conversations
+"conversations.action.delete" = "삭제";
+"conversations.action.mark-read" = "읽음으로 표시";
+"conversations.empty.message" = "메시지를 찾고 있나요? 여기에서 당신에게 온 다이렉트 메시지와 비공개 언급을 확인할 수 있어요. 친구에게 메시지를 먼저 보내보세요! 📱❤️";
+"conversations.empty.title" = "메시지 없음";
+"conversations.error.button" = "다시 시도";
+"conversations.error.message" = "메시지를 불러오지 못했습니다.";
+"conversations.error.title" = "오류";
+"conversations.navigation-title" = "다이렉트 메시지";
+"conversations.new.message.placeholder" = "새 메시지";
+
+// MARK: Package: DesignSystem
+"design.tag.n-posts-from-n-participants %lld %lld" = "%lld개의 툿 (%lld명의 사용자)";
+"design.theme.navigation-title" = "테마 선택";
+"design.theme.toots-preview" = "툿 미리 보기";
+
+// MARK: Package: Explore
+"explore.navigation-title" = "둘러보기";
+"explore.search.message-%@" = "이 화면에서 %@에 대한 무엇이든 검색해볼 수 있습니다.";
+"explore.search.prompt" = "사용자, 툿, 태그 검색";
+"explore.search.title" = "당신의 인스턴스를 검색해보세요";
+"explore.search.empty.message" = "검색어에 대한 결과가 없습니다. 다른 검색어로 시도해주세요.";
+"explore.search.empty.title" = "검색 결과 없음";
+"explore.section.posts" = "툿";
+"explore.section.suggested-users" = "추천 사용자";
+"explore.section.tags" = "태그";
+"explore.section.trending.links" = "뜨고 있는 링크";
+"explore.section.trending.posts" = "뜨고 있는 툿";
+"explore.section.trending.tags" = "뜨고 있는 태그";
+"explore.section.users" = "사용자";
+
+// MARK: Package: Env
+"env.poll-duration.5m" = "5분";
+"env.poll-duration.30m" = "30분";
+"env.poll-duration.1h" = "1시간";
+"env.poll-duration.6h" = "6시간";
+"env.poll-duration.1d" = "1일";
+"env.poll-duration.3d" = "3일";
+"env.poll-duration.7d" = "7일";
+"env.poll-vote-frequency.one" = "한 선택지에만 투표";
+"env.poll-vote-frequency.multiple" = "복수 선택 가능";
+
+// MARK: Package: Lists
+"lists.add-remove-%@" = "%@ 추가/제거";
+"lists.create" = "새 리스트 만들기";
+"lists.create.confirm" = "만들기";
+"lists.edit.users-in-list" = "이 리스트에 있는 사용자";
+"lists.name" = "리스트 이름";
+"lists.name.message" = "리스트의 이름을 입력해주세요.";
+
+// MARK: Package: Notifications
+"notifications.empty.message" = "알림? 무슨 알림이요? 알림 목록이 완전 비어 있어요. 지금처럼 멋지게 하면 첫 알림이 곧 올 거에요. 📱😎";
+"notifications.empty.title" = "알림 없음";
+"notifications.error.message" = "알림을 불러오지 못했습니다. 다시 시도해주세요.";
+"notifications.error.title" = "오류";
+"notifications.label.favorite %lld" = "좋아요함";
+"notifications.label.follow %lld" = "당신을 팔로우함";
+"notifications.label.mention %lld" = "당신을 언급함";
+"notifications.label.reblog %lld" = "부스트함";
+"notifications.label.poll" = "의 투표가 끝남";
+"notifications.label.follow-request" = "당신에게 팔로우 요청을 보냄";
+"notifications.label.status" = "의 새 툿";
+"notifications.label.update" = "툿을 수정함";
+"notifications.menu-title.favorite" = "좋아요";
+"notifications.menu-title.follow" = "새 팔로워";
+"notifications.menu-title.follow-request" = "팔로우 요청";
+"notifications.menu-title.mention" = "나를 언급";
+"notifications.menu-title.poll" = "투표";
+"notifications.menu-title.reblog" = "부스트";
+"notifications.menu-title.status" = "새 툿";
+"notifications.menu-title.update" = "수정된 툿";
+"notifications.navigation-title" = "모든 알림";
+"notifications.tab.all" = "모든 알림";
+"notifications.tab.mentions" = "언급";
+
+// MARK: Package: Timeline
+"timeline.federated" = "연합";
+"timeline.home" = "홈";
+"timeline.local" = "로컬";
+"timeline.n-recent-from-n-participants %lld %lld" = "%lld개의 최근 툿 (%lld명의 사용자)";
+"timeline.trending" = "뜨고 있는";
+
+// MARK: Package: Status
+"status.action.translate" = "번역";
+"status.action.translated-label" = "DeepL.com을 통해 번역됨";
+"status.action.bookmark" = "보관함에 추가";
+"status.action.boost" = "부스트";
+"status.action.copy-text" = "글 복사";
+"status.action.delete" = "삭제";
+"status.action.edit" = "수정";
+"status.action.favorite" = "좋아요";
+"status.action.mention" = "언급";
+"status.action.message" = "메시지 작성";
+"status.action.pin" = "고정";
+"status.action.post" = "툿";
+"status.action.quote" = "인용";
+"status.action.reply" = "댓글";
+"status.action.section.your-post" = "내 툿";
+"status.action.share" = "공유";
+"status.action.unbookmark" = "보관함에서 제거";
+"status.action.unboost" = "부스트 취소";
+"status.action.unfavorite" = "좋아요 취소";
+"status.action.unpin" = "고정 해제";
+"status.action.view-in-browser" = "브라우저에서 보기";
+"status.draft.delete" = "삭제";
+"status.draft.save" = "임시 보관함에 저장";
+"status.editor.ai-prompt.correct" = "맞게 고치기";
+"status.editor.ai-prompt.emphasize" = "내용 강조하기";
+"status.editor.ai-prompt.fit" = "간결하게 바꾸기";
+"status.editor.description.add" = "설명 추가";
+"status.editor.description.edit" = "설명 편집";
+"status.editor.drafts.navigation-title" = "임시 보관함";
+"status.editor.error.upload" = "전송 오류";
+"status.editor.language-select.navigation-title" = "언어 선택";
+"status.editor.language-select.recently-used" = "최근 사용";
+"status.editor.media.edit-image" = "이미지 편집";
+"status.editor.media.image-description" = "이미지 설명";
+"status.editor.mode.edit" = "툿 수정";
+"status.editor.mode.new" = "새 툿";
+"status.editor.mode.quote-%@" = "%@의 툿 인용";
+"status.editor.mode.reply-%@" = "%@의 툿에 댓글";
+"status.editor.restore-previous" = "이전 상태로 되돌리기";
+"status.editor.spoiler" = "열람 주의 문구";
+"status.editor.text.placeholder" = "무슨 생각을 하고 계신가요?";
+"status.editor.visibility" = "툿 공개 범위";
+"status.error.loading.message" = "툿을 불러오지 못했습니다. 다시 시도해주세요.";
+"status.error.message" = "툿의 상세 정보를 불러오지 못했습니다. 다시 시도해주세요.";
+"status.error.title" = "오류";
+"status.filter.filtered-by-%@" = "%@ 필터에 의해 가려짐";
+"status.filter.show-anyway" = "표시하기";
+"status.image.alt-text.abbreviation" = "설명";
+"status.media.content.show" = "내용 표시하기";
+"status.media.contextmenu.copy" = "이미지 복사";
+"status.media.contextmenu.save" = "이미지 저장";
+"status.media.contextmenu.share" = "이미지 공유";
+"status.media.contextmenu.view-browser" = "브라우저에서 보기";
+"status.media.sensitive.show" = "민감한 미디어 표시하기";
+"status.poll.n-votes %lld" = "%lld표";
+"status.poll.closed" = "종료됨";
+"status.poll.closes-in" = "종료까지 ";
+"status.poll.duration" = "투표 기간";
+"status.poll.frequency" = "투표 선택 옵션";
+"status.poll.option-n %lld" = "선택지 %lld";
+"status.post-from-%@" = "%@의 툿";
+"status.row.was-boosted" = "부스트함";
+"status.row.was-reply" = "댓글: ";
+"status.row.you-boosted" = "당신이 부스트함";
+"status.show-less" = "간략히 보기";
+"status.show-more" = "더 보기";
+"status.summary.at-time" = " ";
+"status.summary.edited-time" = "마지막 수정: ";
+"status.summary.n-boosts %lld" = "부스트 %lld회";
+"status.summary.n-favorites %lld" = "좋아요 %lld회";
+"status.visibility.direct" = "언급한 사람들만";
+"status.visibility.follower" = "팔로워 전용";
+"status.visibility.public" = "공개";
+"status.visibility.unlisted" = "공개 타임라인에서만 숨기기";
+
+// MARK: Filters
+"filter.new" = "새 필터 만들기";
+"filter.filters" = "필터";
+"filter.edit.title" = "필터 이름";
+"filter.edit.keywords" = "거를 단어";
+"filter.edit.keywords.add" = "새 단어 추가";
+"filter.edit.contexts" = "필터를 적용할 곳";
+"filter.edit.action" = "필터 ";
+"account.action.edit-filters" = "필터 편집";
+"filter.contexts.home" = "홈 및 리스트";
+"filter.contexts.notifications" = "알림";
+"filter.contexts.public" = "공개 타임라인";
+"filter.contexts.conversations" = "대화";
+"filter.contexts.profiles" = "프로필";
+"filter.action.warning" = "경고 표시하고 툿 가리기";
+"filter.action.hide" = "완전히 숨기기";

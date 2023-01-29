@@ -128,6 +128,7 @@
 "settings.push.duplicate.title" = "Correcteur de notifications en double";
 "settings.push.duplicate.footer" = "Recevez-vous des notifications en double ? Essayez ce bouton magique pour résoudre le problème";
 "settings.push.duplicate.button.fix" = "🪄 Résoudre";
+"settings.other.autoplay-video" = "Auto Play Videos";
 
 // MARK: Tabs
 "tab.explore" = "Explorer";

@@ -124,33 +124,29 @@ public class RouterPath: ObservableObject {
 
   public func navigateToAccountFrom(acct: String, url: URL) async {
     guard let client else { return }
-    Task {
-      let results: SearchResults? = try? await client.get(endpoint: Search.search(query: acct,
-                                                                                  type: "accounts",
-                                                                                  offset: nil,
-                                                                                  following: nil),
-                                                          forceVersion: .v2)
-      if let account = results?.accounts.first {
-        navigate(to: .accountDetailWithAccount(account: account))
-      } else {
-        await UIApplication.shared.open(url)
-      }
+    let results: SearchResults? = try? await client.get(endpoint: Search.search(query: acct,
+                                                                                type: "accounts",
+                                                                                offset: nil,
+                                                                                following: nil),
+                                                        forceVersion: .v2)
+    if let account = results?.accounts.first {
+      navigate(to: .accountDetailWithAccount(account: account))
+    } else {
+      await UIApplication.shared.open(url)
     }
   }
 
   public func navigateToAccountFrom(url: URL) async {
     guard let client else { return }
-    Task {
-      let results: SearchResults? = try? await client.get(endpoint: Search.search(query: url.absoluteString,
-                                                                                  type: "accounts",
-                                                                                  offset: nil,
-                                                                                  following: nil),
-                                                          forceVersion: .v2)
-      if let account = results?.accounts.first {
-        navigate(to: .accountDetailWithAccount(account: account))
-      } else {
-        await UIApplication.shared.open(url)
-      }
+    let results: SearchResults? = try? await client.get(endpoint: Search.search(query: url.absoluteString,
+                                                                                type: "accounts",
+                                                                                offset: nil,
+                                                                                following: nil),
+                                                        forceVersion: .v2)
+    if let account = results?.accounts.first {
+      navigate(to: .accountDetailWithAccount(account: account))
+    } else {
+      await UIApplication.shared.open(url)
     }
   }
 }

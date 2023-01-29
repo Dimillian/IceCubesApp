@@ -125,6 +125,8 @@
 "settings.push.duplicate.title" = "Arreglar notificaciones duplicadas";
 "settings.push.duplicate.footer" = "¿Recibes notificaciones por duplicado? Usa este botón mágico para arreglarlo";
 "settings.push.duplicate.button.fix" = "🪄 Arréglalo";
+"settings.other.autoplay-video" = "Auto Play Videos";
+
 "enum.expand-media.show" = "Siempre";
 "enum.expand-media.hide" = "Nunca";
 "enum.expand-media.hide-sensitive" = "Ocultar contenido sensible";

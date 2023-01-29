@@ -136,6 +136,9 @@ struct SettingsTabs: View {
       Toggle(isOn: $preferences.isSocialKeyboardEnabled) {
         Label("settings.other.social-keyboard", systemImage: "keyboard")
       }
+      Toggle(isOn: $preferences.autoPlayVideo) {
+        Label("settings.other.autoplay-video", systemImage: "play.square.stack")
+      }
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }

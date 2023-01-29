@@ -70,6 +70,7 @@ struct StatusActionsView: View {
               ShareLink(item: url) {
                 Image(systemName: action.iconName(viewModel: viewModel))
               }
+              .buttonStyle(.borderless)
             }
           } else {
             Button {
@@ -85,7 +86,8 @@ struct StatusActionsView: View {
               }
             }
             .buttonStyle(.borderless)
-            .disabled(action == .boost && viewModel.status.visibility == .direct)
+            .disabled(action == .boost &&
+                      (viewModel.status.visibility == .direct || viewModel.status.visibility == .priv))
             Spacer()
           }
         }

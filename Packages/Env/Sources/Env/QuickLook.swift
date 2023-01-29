@@ -17,6 +17,11 @@ public class QuickLook: ObservableObject {
       isPreparing = true
     }
     do {
+      var order = 0
+      let pathOrderMap = urls.reduce(into: [String: Int]()) { result, url in
+        result[url.lastPathComponent] = order
+        order += 1
+      }
       let paths: [URL] = try await withThrowingTaskGroup(of: URL.self, body: { group in
         var paths: [URL] = []
         for url in urls {
@@ -27,7 +32,9 @@ public class QuickLook: ObservableObject {
         for try await path in group {
           paths.append(path)
         }
-        return paths
+        return paths.sorted { url1, url2 in
+          return pathOrderMap[url1.lastPathComponent] ?? 0 < pathOrderMap[url2.lastPathComponent] ?? 0
+        }
       })
       withTransaction(transaction) {
         self.urls = paths

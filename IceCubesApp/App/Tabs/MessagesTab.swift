@@ -13,6 +13,7 @@ struct MessagesTab: View {
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var currentAccount: CurrentAccount
+  @EnvironmentObject private var appAccount: AppAccountsManager
   @StateObject private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab
 
@@ -29,7 +30,7 @@ struct MessagesTab: View {
           }
         }
         .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
-        .id(currentAccount.account?.id)
+        .id(appAccount.currentAccount.id)
     }
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
       if popToRootTab == .messages {

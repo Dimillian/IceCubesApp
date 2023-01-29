@@ -242,6 +242,7 @@ public class StatusEditorViewModel: ObservableObject {
   private func processText() {
     guard markedTextRange == nil else { return }
     statusText.addAttributes([.foregroundColor: UIColor(Color.label),
+                              .backgroundColor: .clear,
                               .underlineColor: .clear],
                              range: NSMakeRange(0, statusText.string.utf16.count))
     let hashtagPattern = "(#+[a-zA-Z0-9(_)]{1,})"
@@ -300,8 +301,8 @@ public class StatusEditorViewModel: ObservableObject {
       urlLengthAdjustments = totalUrlLength - (maxLengthOfUrl * numUrls)
 
       var mediaAdded = false
-      statusText.enumerateAttribute(.attachment, in: range) { attachment, range, _ in
-        if let attachment = attachment as? NSTextAttachment, let image = attachment.image {
+      statusText.enumerateAttributes(in: range) { attributes, range, _ in
+        if let attachment = attributes[.attachment] as? NSTextAttachment, let image = attachment.image {
           mediasImages.append(.init(image: image,
                                     movieTransferable: nil,
                                     mediaAttachment: nil,
@@ -309,6 +310,8 @@ public class StatusEditorViewModel: ObservableObject {
           statusText.removeAttribute(.attachment, range: range)
           statusText.mutableString.deleteCharacters(in: range)
           mediaAdded = true
+        } else if attributes[.link] != nil {
+          statusText.removeAttribute(.link, range: range)
         }
       }
 

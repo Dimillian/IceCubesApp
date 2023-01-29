@@ -111,6 +111,7 @@
 "settings.push.duplicate.title" = "重複通知修正ツール";
 "settings.push.duplicate.footer" = "重複して通知を受け取っていませんか？それを修正するためにこの魔法のボタンを試してみて";
 "settings.push.duplicate.button.fix" = "🪄 修正する";
+"settings.other.autoplay-video" = "Auto Play Videos";
 
 // MARK: Tabs
 "tab.explore" = "エクスプローラー";

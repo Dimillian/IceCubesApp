@@ -125,6 +125,7 @@
 "settings.push.duplicate.title" = "Doppelte-Benachrichtigungen-Korrigierer";
 "settings.push.duplicate.footer" = "Bekommst du doppelte Benachrichtigungen? Probier diesen magischen Knopf aus";
 "settings.push.duplicate.button.fix" = "🪄 Beheben";
+"settings.other.autoplay-video" = "Auto Play Videos";
 
 "enum.expand-media.show" = "Alle zeigen";
 "enum.expand-media.hide" = "Alle verstecken";

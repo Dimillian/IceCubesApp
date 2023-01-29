@@ -23,8 +23,7 @@ extension Color: RawRepresentable {
     let red = Double((rawValue & 0xFF0000) >> 16) / 0xFF
     let green = Double((rawValue & 0x00FF00) >> 8) / 0xFF
     let blue = Double(rawValue & 0x0000FF) / 0xFF
-    let opacity = Double((rawValue & 0xFF000000) >> 24) / 0xFF
-    self = Color(red: red, green: green, blue: blue, opacity: opacity == 0 ? 1 : 0)
+    self = Color(red: red, green: green, blue: blue)
   }
 
   public var rawValue: Int {
@@ -34,8 +33,7 @@ extension Color: RawRepresentable {
     let red = Int(coreImageColor.red * 255 + 0.5)
     let green = Int(coreImageColor.green * 255 + 0.5)
     let blue = Int(coreImageColor.blue * 255 + 0.5)
-    let alpha = Int(coreImageColor.alpha * 255 + 0.5)
-    return (alpha << 24) | (red << 16) | (green << 8) | blue
+    return (red << 16) | (green << 8) | blue
   }
 
   private var coreImageColor: CIColor? {
