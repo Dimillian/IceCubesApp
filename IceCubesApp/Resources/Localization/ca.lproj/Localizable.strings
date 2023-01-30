@@ -46,7 +46,7 @@
 
 // MARK: Menu
 "menu.new-post" = "Publicació nova";
-"menu.font" = "Font";
+"menu.font" = "Codi font";
 "menu.font.bigger" = "Més gran";
 "menu.font.smaller" = "Més petita";
 
@@ -54,8 +54,8 @@
 "settings.account.add" = "Afegeix un compte";
 "settings.app.icon" = "Icona de l'aplicació";
 "settings.app.icon.navigation-title" = "Icones";
-"settings.app.source" = "Font (enllaç de GitHub)";
-"settings.app.support" = "Doneu suport a l'aplicació";
+"settings.app.source" = "Font (enllaç a GitHub)";
+"settings.app.support" = "Dona suport a l'aplicació";
 "settings.display.avatar.position" = "Posició de les fotos de perfil";
 "settings.display.avatar.shape" = "Forma de les fotos de perfil";
 "settings.display.navigation-title" = "Configuració de l'aparença";
@@ -133,7 +133,7 @@
 "settings.display.font.custom" = "Custom";
 
 // MARK: Tabs
-"tab.explore" = "Explora";
+"tab.explore" = "Exploreu";
 "tab.federated" = "Federat";
 "tab.local" = "Local";
 "tab.messages" = "Missatges";
@@ -187,13 +187,13 @@
 "account.edit.post-settings.sensitive" = "Contingut sensible";
 "account.favorited-by" = "Marcat com a favorit per";
 "account.follow.follow" = "Segueix";
-"account.follow.following" = "Segueix";
+"account.follow.following" = "Seguint";
 "account.follow.requested" = "Seguint";
 "account.follow-request.accept" = "Accepta";
 "account.follow-request.reject" = "Rebutja";
 "account.follow-requests.pending-requests" = "Sol·licituds pendents";
 "account.follow-requests.instructions" = "Aquests usuaris no veuran les vostres publicacions fins que els accepteu.";
-"compte.followers" = "Seguidors";
+"account.followers" = "Seguidors";
 "account.following" = "Seguits";
 "account.list.create" = "Crea una llista";
 "account.list.create.confirm" = "Crea la llista";
