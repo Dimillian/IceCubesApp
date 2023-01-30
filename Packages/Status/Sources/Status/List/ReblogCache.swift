@@ -54,9 +54,6 @@ public class ReblogCache {
       }
       needsWrite = false
     }
-    else {
-      print("no cache change")
-    }
     
     DispatchQueue.main.asyncAfter(deadline: .now() + 30.0) { [weak self] in
         self?.saveCache()

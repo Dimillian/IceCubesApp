@@ -30,7 +30,7 @@ public class StatusRowViewModel: ObservableObject {
   @Published var translation: String?
   @Published var isLoadingTranslation: Bool = false
   
-  @Published var seen = false
+  var seen = false
   
   var filter: Filtered? {
     status.reblog?.filtered?.first ?? status.filtered?.first
