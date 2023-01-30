@@ -317,9 +317,9 @@ public struct StatusRowView: View {
           ProgressView()
         } else {
           if let statusLanguage = status.language,
-             let lanugageName = Locale.current.localizedString(forLanguageCode: statusLanguage)
+             let languageName = Locale.current.localizedString(forLanguageCode: statusLanguage)
           {
-            Text("status.action.translate-from-\(lanugageName)")
+            Text("status.action.translate-from-\(languageName)")
           } else {
             Text("status.action.translate")
           }
