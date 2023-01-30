@@ -44,7 +44,7 @@ public struct Account: Decodable, Identifiable, Equatable, Hashable {
   public let discoverable: Bool?
 
   public var haveAvatar: Bool {
-    return header.lastPathComponent != "missing.png"
+    return avatar.lastPathComponent != "missing.png"
   }
 
   public var haveHeader: Bool {
