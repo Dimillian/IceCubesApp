@@ -133,6 +133,9 @@
 "settings.display.font.system" = "System";
 "settings.display.font.custom" = "Custom";
 "settings.other.autoplay-video" = "동영상 자동 재생";
+"settings.display.font" = "타임라인 글꼴";
+"settings.display.font.system" = "시스템 글꼴 사용";
+"settings.display.font.custom" = "직접 설정";
 
 // MARK: Tabs
 "tab.explore" = "둘러보기";
@@ -295,7 +298,7 @@
 "status.action.translated-label" = "DeepL.com을 통해 번역됨";
 "status.action.bookmark" = "보관함에 추가";
 "status.action.boost" = "부스트";
-"status.action.copy-text" = "글 복사";
+"status.action.copy-text" = "복사";
 "status.action.delete" = "삭제";
 "status.action.edit" = "수정";
 "status.action.favorite" = "좋아요";
