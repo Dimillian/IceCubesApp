@@ -19,9 +19,8 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
         ForEach(Status.placeholders()) { status in
           StatusRowView(viewModel: .init(status: status, isCompact: false))
             .redacted(reason: .placeholder)
-            .shimmering()
-          
             .padding(.horizontal, .layoutPadding)
+            .shimmering()
           Divider()
             .padding(.vertical, .dividerPadding)
         }
