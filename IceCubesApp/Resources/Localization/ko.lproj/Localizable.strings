@@ -132,6 +132,7 @@
 "settings.display.font" = "Timeline Font";
 "settings.display.font.system" = "System";
 "settings.display.font.custom" = "Custom";
+"settings.other.autoplay-video" = "동영상 자동 재생";
 
 // MARK: Tabs
 "tab.explore" = "둘러보기";

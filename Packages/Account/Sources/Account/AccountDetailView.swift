@@ -347,7 +347,7 @@ public struct AccountDetailView: View {
   @ToolbarContentBuilder
   private var toolbarContent: some ToolbarContent {
     ToolbarItem(placement: .principal) {
-      if scrollOffset < -200 {
+      if scrollOffset < -170 {
         switch viewModel.accountState {
         case let .data(account):
           EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
@@ -531,7 +531,7 @@ public struct AccountDetailView: View {
           }
         }
       } label: {
-        if scrollOffset < -40 {
+        if scrollOffset < -5 {
           Image(systemName: "ellipsis.circle")
         } else {
           Image(systemName: "ellipsis.circle.fill")

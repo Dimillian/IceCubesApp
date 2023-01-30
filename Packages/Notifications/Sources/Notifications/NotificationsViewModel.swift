@@ -116,17 +116,21 @@ class NotificationsViewModel: ObservableObject {
   }
 
   func handleEvent(event: any StreamEvent) {
-    if let event = event as? StreamEventNotification,
-       !consolidatedNotifications.contains(where: { $0.id == event.notification.id })
-    {
-      if let selectedType, event.notification.type == selectedType.rawValue {
-        notifications.insert(event.notification, at: 0)
-        consolidatedNotifications = notifications.consolidated(selectedType: selectedType)
-      } else if selectedType == nil {
-        notifications.insert(event.notification, at: 0)
-        consolidatedNotifications = notifications.consolidated(selectedType: selectedType)
+    Task {
+      if let event = event as? StreamEventNotification,
+         !consolidatedNotifications.contains(where: { $0.id == event.notification.id })
+      {
+        if let selectedType, event.notification.type == selectedType.rawValue {
+          notifications.insert(event.notification, at: 0)
+          consolidatedNotifications = notifications.consolidated(selectedType: selectedType)
+        } else if selectedType == nil {
+          notifications.insert(event.notification, at: 0)
+          consolidatedNotifications = notifications.consolidated(selectedType: selectedType)
+        }
+        withAnimation {
+          state = .display(notifications: consolidatedNotifications, nextPageState: .hasNextPage)
+        }
       }
-      state = .display(notifications: consolidatedNotifications, nextPageState: .hasNextPage)
     }
   }
 }

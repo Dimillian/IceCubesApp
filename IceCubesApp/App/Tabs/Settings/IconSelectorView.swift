@@ -22,9 +22,9 @@ struct IconSelectorView: View {
     case alt22, alt23, alt24
     
     static var officialIcons: [Icon] {
-      [.alt1, .alt2, .alt3, .alt4, .alt5, .alt6, .alt7, .alt8,
-                                     .alt9, .alt10, .alt11, .alt12, .alt13, .alt14,
-                                     .alt15, .alt16, .alt17, .alt18, .alt19]
+      [.primary, .alt1, .alt2, .alt3, .alt4, .alt5, .alt6, .alt7, .alt8,
+        .alt9, .alt10, .alt11, .alt12, .alt13, .alt14,
+        .alt15, .alt16, .alt17, .alt18, .alt19]
     }
     
     static var albertKinngIcons: [Icon] {

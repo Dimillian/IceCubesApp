@@ -118,7 +118,8 @@ struct IceCubesApp: App {
           if proxy.frame(in: .global).width > (.maxColumnWidth + .secondaryColumnWidth),
              currentAccount.account?.id != nil {
             Divider().edgesIgnoringSafeArea(.all)
-            NotificationsTab(popToRootTab: $popToRootTab, lockedType: nil, isSecondaryColumn: true)
+            NotificationsTab(popToRootTab: $popToRootTab, lockedType: nil)
+              .environment(\.isSecondaryColumn, true)
               .frame(maxWidth: 360)
           }
         }

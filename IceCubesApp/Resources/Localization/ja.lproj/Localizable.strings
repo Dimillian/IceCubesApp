@@ -4,7 +4,7 @@
 "action.save"  = "保存";
 "action.done" = "完了";
 "action.retry" = "リトライ";
-"action.view.error" = "View error";
+"action.view.error" = "閲覧エラー";
 
 "alert.button.ok" = "OK";
 "alert.error" = "エラー！";
@@ -115,6 +115,7 @@
 "settings.display.font" = "Timeline Font";
 "settings.display.font.system" = "System";
 "settings.display.font.custom" = "Custom";
+"settings.other.autoplay-video" = "動画自動再生";
 
 // MARK: Tabs
 "tab.explore" = "エクスプローラー";

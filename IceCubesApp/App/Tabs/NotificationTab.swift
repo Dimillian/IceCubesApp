@@ -8,6 +8,8 @@ import SwiftUI
 import Timeline
 
 struct NotificationsTab: View {
+  @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
+  
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var watcher: StreamWatcher
@@ -18,7 +20,6 @@ struct NotificationsTab: View {
   @Binding var popToRootTab: Tab
 
   let lockedType: Models.Notification.NotificationType?
-  let isSecondaryColumn: Bool
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {
@@ -37,7 +38,7 @@ struct NotificationsTab: View {
           }
         }
         .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
-        .id(appAccount.currentAccount.id)
+        .id(currentAccount.account?.id)
     }
     .onAppear {
       routerPath.client = client
