@@ -84,7 +84,7 @@
 "settings.push.main-toggle" = "푸시 알림";
 "settings.push.main-toggle.description" = "새 활동이 있을 때 푸시 알림을 받습니다.";
 "settings.push.mentions" = "나를 언급";
-"settings.push.navigation-title" = "푸시 알림";
+"settings.push.navigation-title" = "푸시 알림 설정";
 "settings.push.new-posts" = "새 툿";
 "settings.push.polls" = "투표 결과";
 "settings.general.content" = "콘텐츠 설정";
@@ -94,7 +94,7 @@
 "settings.content.main-toggle.description" = "기본 인스턴스의 설정을 사용합니다.";
 "settings.content.expand-spoilers" = "열람 주의 표시된 툿 항상 표시하기";
 "settings.content.expand-media" = "표시할 미디어";
-"settings.content.default-sensitive" = "항상 내 미디어 민감함으로 표시";
+"settings.content.default-sensitive" = "내 미디어 항상 민감함으로 표시";
 "settings.content.default-visibility" = "툿 기본 공개 범위";
 "settings.content.reading" = "읽을 때";
 "settings.content.posting" = "올릴 때";
@@ -126,7 +126,7 @@
 "settings.other.hide-openai" = "툿 작성 도우미 🤖";
 "settings.other.social-keyboard" = "SNS 키보드";
 "settings.push.duplicate.title" = "중복 알림 해결사";
-"settings.push.duplicate.footer" = "같은 알림이 여러 번 오나요? 여기 있는 버튼을 누르면 마법처럼 해결될 거에요.";
+"settings.push.duplicate.footer" = "같은 알림이 여러 번 오나요? 위에 있는 버튼을 누르면 마법처럼 해결될 거에요.";
 "settings.push.duplicate.button.fix" = "🪄 고치기";
 "settings.other.autoplay-video" = "동영상 자동 재생";
 
@@ -166,7 +166,7 @@
 "account.action.unblock" = "차단 해제";
 "account.action.mute" = "뮤트";
 "account.action.unmute" = "뮤트 해제";
-"account.boosted-by" = "부스트함: ";
+"account.boosted-by" = "부스트한 사용자";
 "account.detail.about" = "정보";
 "account.detail.familiar-followers" = "내가 아는 팔로워";
 "account.detail.n-fields %lld" = "%lld개 항목";
@@ -183,14 +183,14 @@
 "account.edit.post-settings.privacy" = "기본 공개 범위";
 "account.edit.post-settings.section-title" = "툿 설정";
 "account.edit.post-settings.sensitive" = "민감한 콘텐츠";
-"account.favorited-by" = "좋아요함: ";
+"account.favorited-by" = "좋아요한 사용자";
 "account.follow.follow" = "팔로우";
 "account.follow.following" = "팔로우 중";
 "account.follow.requested" = "요청함";
 "account.follow-request.accept" = "수락";
 "account.follow-request.reject" = "거절";
 "account.follow-requests.pending-requests" = "대기 중인 요청";
-"account.follow-requests.instructions" = "당신이 수락하기 전까지 이 사용자들은 당신의 팔로워 전용 툿을 볼 수 없습니다.";
+"account.follow-requests.instructions" = "이 사용자들은 당신이 수락하기 전까지 당신이 쓴 팔로워 전용 툿을 볼 수 없습니다.";
 "account.followers" = "팔로워";
 "account.following" = "팔로우 중";
 "account.list.create" = "새 리스트 만들기";
@@ -201,7 +201,7 @@
 "account.post.pinned" = "고정된 툿";
 "account.posts" = "툿";
 "account.relation.follows-you" = "당신을 팔로우함";
-"account.joined" = "가입일";
+"account.joined" = "가입";
 "account.action.logout" = "로그아웃";
 
 // MARK: Package: Conversations
@@ -216,7 +216,7 @@
 "conversations.new.message.placeholder" = "새 메시지";
 
 // MARK: Package: DesignSystem
-"design.tag.n-posts-from-n-participants %lld %lld" = "%lld개의 툿 (%lld명의 사용자)";
+"design.tag.n-posts-from-n-participants %lld %lld" = "%lld개의 툿 (%lld명의 사용자가 이야기 중)";
 "design.theme.navigation-title" = "테마 선택";
 "design.theme.toots-preview" = "툿 미리 보기";
 
@@ -255,7 +255,7 @@
 "lists.name.message" = "리스트의 이름을 입력해주세요.";
 
 // MARK: Package: Notifications
-"notifications.empty.message" = "알림? 무슨 알림이요? 알림 목록이 완전 비어 있어요. 지금처럼 멋지게 하면 첫 알림이 곧 올 거에요. 📱😎";
+"notifications.empty.message" = "알림? 무슨 알림이요? 알림 목록이 비어 있어요. 지금처럼 멋지게 하면 알림이 곧 올 거에요. 📱😎";
 "notifications.empty.title" = "알림 없음";
 "notifications.error.message" = "알림을 불러오지 못했습니다. 다시 시도해주세요.";
 "notifications.error.title" = "오류";
@@ -271,7 +271,7 @@
 "notifications.menu-title.follow" = "새 팔로워";
 "notifications.menu-title.follow-request" = "팔로우 요청";
 "notifications.menu-title.mention" = "나를 언급";
-"notifications.menu-title.poll" = "투표";
+"notifications.menu-title.poll" = "투표 결과";
 "notifications.menu-title.reblog" = "부스트";
 "notifications.menu-title.status" = "새 툿";
 "notifications.menu-title.update" = "수정된 툿";
@@ -283,7 +283,7 @@
 "timeline.federated" = "연합";
 "timeline.home" = "홈";
 "timeline.local" = "로컬";
-"timeline.n-recent-from-n-participants %lld %lld" = "%lld개의 최근 툿 (%lld명의 사용자)";
+"timeline.n-recent-from-n-participants %lld %lld" = "%lld개의 최근 툿 (%lld명의 사용자가 이야기 중)";
 "timeline.trending" = "뜨고 있는";
 
 // MARK: Package: Status
@@ -348,7 +348,7 @@
 "status.poll.frequency" = "투표 선택 옵션";
 "status.poll.option-n %lld" = "선택지 %lld";
 "status.post-from-%@" = "%@의 툿";
-"status.row.was-boosted" = "부스트함";
+"status.row.was-boosted" = "님이 부스트함";
 "status.row.was-reply" = "댓글: ";
 "status.row.you-boosted" = "당신이 부스트함";
 "status.show-less" = "간략히 보기";
@@ -358,9 +358,9 @@
 "status.summary.n-boosts %lld" = "부스트 %lld회";
 "status.summary.n-favorites %lld" = "좋아요 %lld회";
 "status.visibility.direct" = "언급한 사람들만";
-"status.visibility.follower" = "팔로워 전용";
+"status.visibility.follower" = "팔로워만";
 "status.visibility.public" = "공개";
-"status.visibility.unlisted" = "공개 타임라인에서만 숨기기";
+"status.visibility.unlisted" = "공개 타임라인에서만 숨김";
 
 // MARK: Filters
 "filter.new" = "새 필터 만들기";
@@ -369,7 +369,7 @@
 "filter.edit.keywords" = "거를 단어";
 "filter.edit.keywords.add" = "새 단어 추가";
 "filter.edit.contexts" = "필터를 적용할 곳";
-"filter.edit.action" = "필터 ";
+"filter.edit.action" = "가릴 방식";
 "account.action.edit-filters" = "필터 편집";
 "filter.contexts.home" = "홈 및 리스트";
 "filter.contexts.notifications" = "알림";
