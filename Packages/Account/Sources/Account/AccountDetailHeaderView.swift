@@ -28,7 +28,7 @@ struct AccountDetailHeaderView: View {
       Rectangle()
         .frame(height: 200)
         .overlay {
-            headerImageView
+          headerImageView
         }
       accountInfoView
     }

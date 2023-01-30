@@ -10,18 +10,18 @@ public struct ConversationsListView: View {
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var theme: Theme
-  
+
   @StateObject private var viewModel = ConversationsListViewModel()
-  
+
   public init() {}
-  
+
   private var conversations: [Conversation] {
     if viewModel.isLoadingFirstPage {
       return Conversation.placeholders()
     }
     return viewModel.conversations
   }
-  
+
   public var body: some View {
     ScrollView {
       LazyVStack {
@@ -52,7 +52,7 @@ public struct ConversationsListView: View {
               }
             }
           }
-          
+
           if viewModel.nextPage != nil {
             HStack {
               Spacer()

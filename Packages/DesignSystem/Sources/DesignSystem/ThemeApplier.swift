@@ -48,7 +48,7 @@ struct ThemeApplier: ViewModifier {
         setBarsColor(newValue)
       }
       .onChange(of: theme.selectedScheme) { newValue in
-          setWindowUserInterfaceStyle(from: newValue)
+        setWindowUserInterfaceStyle(from: newValue)
       }
       .onChange(of: colorScheme) { newColorScheme in
         if theme.followSystemColorScheme,
@@ -64,8 +64,8 @@ struct ThemeApplier: ViewModifier {
   #if canImport(UIKit)
     private func setWindowUserInterfaceStyle(from colorScheme: ColorScheme) {
       guard !theme.followSystemColorScheme else {
-          setWindowUserInterfaceStyle(.unspecified)
-          return
+        setWindowUserInterfaceStyle(.unspecified)
+        return
       }
       switch colorScheme {
       case .dark:
@@ -74,14 +74,14 @@ struct ThemeApplier: ViewModifier {
         setWindowUserInterfaceStyle(.light)
       }
     }
-    
+
     private func setWindowUserInterfaceStyle(_ userInterfaceStyle: UIUserInterfaceStyle) {
       allWindows()
         .forEach {
           $0.overrideUserInterfaceStyle = userInterfaceStyle
         }
     }
-    
+
     private func setWindowTint(_ color: Color) {
       allWindows()
         .forEach {

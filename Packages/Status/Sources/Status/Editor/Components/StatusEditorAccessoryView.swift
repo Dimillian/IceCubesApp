@@ -78,7 +78,7 @@ struct StatusEditorAccessoryView: View {
                 Image(systemName: "globe")
               }
             }
-          
+
             if preferences.isOpenAIEnabled {
               AIMenu.disabled(!viewModel.canPost)
             }
@@ -115,7 +115,7 @@ struct StatusEditorAccessoryView: View {
       Text(isoCode.uppercased())
     }
   }
-  
+
   private var AIMenu: some View {
     Menu {
       ForEach(StatusEditorAIPrompts.allCases, id: \.self) { prompt in

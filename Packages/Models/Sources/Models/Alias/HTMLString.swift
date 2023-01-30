@@ -24,9 +24,9 @@ public struct HTMLString: Decodable, Equatable, Hashable {
     // other characters the markdown parser used picks up
     // when it renders to attributed text
     if let regex = try? NSRegularExpression(pattern: "([\\_\\`\\[\\\\])", options: .caseInsensitive) {
-      htmlValue = regex.stringByReplacingMatches(in: htmlValue, options: [], range: NSRange(location: 0, length:  htmlValue.count), withTemplate: "\\\\$1")
+      htmlValue = regex.stringByReplacingMatches(in: htmlValue, options: [], range: NSRange(location: 0, length: htmlValue.count), withTemplate: "\\\\$1")
     }
-    
+
     do {
       asMarkdown = try HTMLParser().parse(html: htmlValue)
         .toMarkdown()

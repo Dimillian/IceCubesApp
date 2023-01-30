@@ -13,59 +13,59 @@ public extension Font {
   private static let footnote = onMac ? 15.0 : 13.0
   private static let caption = onMac ? 14.0 : 12.0
   private static let onMac = ProcessInfo.processInfo.isiOSAppOnMac
-  
+
   private static func customFont(size: CGFloat, relativeTo textStyle: TextStyle) -> Font {
     if let chosenFont = UserPreferences.shared.chosenFont {
       return .custom(chosenFont.fontName, size: size, relativeTo: textStyle)
     }
-    
+
     return onMac ? .system(size: size) : .system(textStyle)
   }
-  
+
   private static func customUIFont(size: CGFloat) -> UIFont {
     if let chosenFont = UserPreferences.shared.chosenFont {
       return chosenFont.withSize(size)
     }
-    
+
     return .systemFont(ofSize: size)
   }
-  
+
   private static func userScaledFontSize(baseSize: CGFloat) -> CGFloat {
     if onMac {
       return UIFontMetrics.default.scaledValue(for: baseSize * UserPreferences.shared.fontSizeScale)
     }
-    
+
     return baseSize
   }
-  
+
   static var scaledTitle: Font {
     customFont(size: userScaledFontSize(baseSize: title), relativeTo: .title)
   }
-  
+
   static var scaledHeadline: Font {
     customFont(size: userScaledFontSize(baseSize: headline), relativeTo: .headline).weight(.semibold)
   }
-  
+
   static var scaledBody: Font {
     customFont(size: userScaledFontSize(baseSize: body), relativeTo: .body)
   }
-  
+
   static var scaledBodyUIFont: UIFont {
     customUIFont(size: userScaledFontSize(baseSize: body))
   }
-  
+
   static var scaledCallout: Font {
     customFont(size: userScaledFontSize(baseSize: callout), relativeTo: .callout)
   }
-  
+
   static var scaledSubheadline: Font {
     customFont(size: userScaledFontSize(baseSize: subheadline), relativeTo: .subheadline)
   }
-  
+
   static var scaledFootnote: Font {
     customFont(size: userScaledFontSize(baseSize: footnote), relativeTo: .footnote)
   }
-  
+
   static var scaledCaption: Font {
     customFont(size: userScaledFontSize(baseSize: caption), relativeTo: .caption)
   }

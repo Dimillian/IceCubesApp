@@ -1,6 +1,6 @@
+import DesignSystem
 import Models
 import SwiftUI
-import DesignSystem
 
 extension Models.Notification.NotificationType {
   func label(count: Int) -> LocalizedStringKey {
@@ -42,7 +42,7 @@ extension Models.Notification.NotificationType {
       return "pencil.line"
     }
   }
-  
+
   func tintColor() -> Color {
     switch self {
     case .status, .mention, .update, .poll:

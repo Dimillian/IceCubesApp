@@ -8,21 +8,21 @@ public class Theme: ObservableObject {
     case selectedSet, selectedScheme
     case followSystemColorSchme
   }
-    
-    public enum FontState: Int, CaseIterable {
-        case system
-        case custom
-        
-        @MainActor
-        public var title: LocalizedStringKey {
-            switch self {
-            case .system:
-                return "settings.display.font.system"
-            case .custom:
-                return "settings.display.font.custom"
-            }
-        }
+
+  public enum FontState: Int, CaseIterable {
+    case system
+    case custom
+
+    @MainActor
+    public var title: LocalizedStringKey {
+      switch self {
+      case .system:
+        return "settings.display.font.system"
+      case .custom:
+        return "settings.display.font.custom"
+      }
     }
+  }
 
   public enum AvatarPosition: String, CaseIterable {
     case leading, top

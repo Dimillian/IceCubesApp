@@ -317,7 +317,8 @@ public struct StatusRowView: View {
           ProgressView()
         } else {
           if let statusLanguage = status.language,
-             let lanugageName = Locale.current.localizedString(forLanguageCode: statusLanguage) {
+             let lanugageName = Locale.current.localizedString(forLanguageCode: statusLanguage)
+          {
             Text("status.action.translate-from-\(lanugageName)")
           } else {
             Text("status.action.translate")
@@ -389,7 +390,7 @@ public struct StatusRowView: View {
       }
     }
   }
-  
+
   private var remoteContentLoadingView: some View {
     ZStack(alignment: .center) {
       VStack {
