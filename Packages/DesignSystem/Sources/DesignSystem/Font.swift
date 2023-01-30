@@ -3,71 +3,70 @@ import SwiftUI
 
 @MainActor
 public extension Font {
-  static func userScaledFontSize(baseSize: CGFloat) -> CGFloat {
-    UIFontMetrics.default.scaledValue(for: baseSize * UserPreferences.shared.fontSizeScale)
+  // See https://gist.github.com/zacwest/916d31da5d03405809c4 for iOS values
+  // Custom values for Mac
+  private static let title = 28.0
+  private static let headline = onMac ? 20.0 : 17.0
+  private static let body = onMac ? 19.0 : 17.0
+  private static let callout = onMac ? 17.0 : 16.0
+  private static let subheadline = onMac ? 16.0 : 15.0
+  private static let footnote = onMac ? 15.0 : 13.0
+  private static let caption = onMac ? 14.0 : 12.0
+  private static let onMac = ProcessInfo.processInfo.isiOSAppOnMac
+
+  private static func customFont(size: CGFloat, relativeTo textStyle: TextStyle) -> Font {
+    if let chosenFont = UserPreferences.shared.chosenFont {
+      return .custom(chosenFont.fontName, size: size, relativeTo: textStyle)
+    }
+
+    return onMac ? .system(size: size) : .system(textStyle)
+  }
+
+  private static func customUIFont(size: CGFloat) -> UIFont {
+    if let chosenFont = UserPreferences.shared.chosenFont {
+      return chosenFont.withSize(size)
+    }
+
+    return .systemFont(ofSize: size)
+  }
+
+  private static func userScaledFontSize(baseSize: CGFloat) -> CGFloat {
+    if onMac {
+      return UIFontMetrics.default.scaledValue(for: baseSize * UserPreferences.shared.fontSizeScale)
+    }
+
+    return baseSize
   }
 
   static var scaledTitle: Font {
-    if ProcessInfo.processInfo.isiOSAppOnMac {
-      return .system(size: userScaledFontSize(baseSize: 28))
-    } else {
-      return .title
-    }
+    customFont(size: userScaledFontSize(baseSize: title), relativeTo: .title)
   }
 
   static var scaledHeadline: Font {
-    if ProcessInfo.processInfo.isiOSAppOnMac {
-      return .system(size: userScaledFontSize(baseSize: 20), weight: .semibold)
-    } else {
-      return .headline
-    }
+    customFont(size: userScaledFontSize(baseSize: headline), relativeTo: .headline).weight(.semibold)
   }
 
   static var scaledBody: Font {
-    if ProcessInfo.processInfo.isiOSAppOnMac {
-      return .system(size: userScaledFontSize(baseSize: 19))
-    } else {
-      return .body
-    }
+    customFont(size: userScaledFontSize(baseSize: body), relativeTo: .body)
   }
 
   static var scaledBodyUIFont: UIFont {
-    if ProcessInfo.processInfo.isiOSAppOnMac {
-      return UIFont.systemFont(ofSize: userScaledFontSize(baseSize: 19))
-    } else {
-      return UIFont.systemFont(ofSize: 17)
-    }
+    customUIFont(size: userScaledFontSize(baseSize: body))
   }
 
   static var scaledCallout: Font {
-    if ProcessInfo.processInfo.isiOSAppOnMac {
-      return .system(size: userScaledFontSize(baseSize: 17))
-    } else {
-      return .callout
-    }
+    customFont(size: userScaledFontSize(baseSize: callout), relativeTo: .callout)
   }
 
   static var scaledSubheadline: Font {
-    if ProcessInfo.processInfo.isiOSAppOnMac {
-      return .system(size: userScaledFontSize(baseSize: 16))
-    } else {
-      return .subheadline
-    }
+    customFont(size: userScaledFontSize(baseSize: subheadline), relativeTo: .subheadline)
   }
 
   static var scaledFootnote: Font {
-    if ProcessInfo.processInfo.isiOSAppOnMac {
-      return .system(size: userScaledFontSize(baseSize: 15))
-    } else {
-      return .footnote
-    }
+    customFont(size: userScaledFontSize(baseSize: footnote), relativeTo: .footnote)
   }
 
   static var scaledCaption: Font {
-    if ProcessInfo.processInfo.isiOSAppOnMac {
-      return .system(size: userScaledFontSize(baseSize: 14))
-    } else {
-      return .caption
-    }
+    customFont(size: userScaledFontSize(baseSize: caption), relativeTo: .caption)
   }
 }

@@ -126,6 +126,9 @@
 "settings.push.duplicate.footer" = "Bekommst du doppelte Benachrichtigungen? Probier diesen magischen Knopf aus";
 "settings.push.duplicate.button.fix" = "🪄 Beheben";
 "settings.other.autoplay-video" = "Auto Play Videos";
+"settings.display.font" = "Timeline Font";
+"settings.display.font.system" = "System";
+"settings.display.font.custom" = "Custom";
 
 "enum.expand-media.show" = "Alle zeigen";
 "enum.expand-media.hide" = "Alle verstecken";
@@ -289,6 +292,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Übersetzen";
+"status.action.translate-from-%@" = "Übersetzen aus %@";
 "status.action.translated-label" = "Übersetzt mit DeepL.com";
 "status.action.bookmark" = "Lesezeichen";
 "status.action.boost" = "Boosten";

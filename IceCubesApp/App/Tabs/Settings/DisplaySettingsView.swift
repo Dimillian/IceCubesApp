@@ -5,11 +5,13 @@ import Status
 import SwiftUI
 
 struct DisplaySettingsView: View {
+  typealias FontState = Theme.FontState
+
   @Environment(\.colorScheme) private var colorScheme
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var userPreferences: UserPreferences
 
-  @State private var isThemeSelectorPresented = false
+  @State private var isFontSelectorPresented = false
 
   var body: some View {
     Form {
@@ -33,6 +35,21 @@ struct DisplaySettingsView: View {
       .listRowBackground(theme.primaryBackgroundColor)
 
       Section("settings.display.section.display") {
+        Picker("settings.display.font", selection: .init(get: {
+          userPreferences.chosenFontData != nil ? FontState.custom : FontState.system
+        }, set: { newValue in
+          switch newValue {
+          case .system:
+            userPreferences.chosenFont = nil
+          case .custom:
+            isFontSelectorPresented = true
+          }
+        })) {
+          ForEach(FontState.allCases, id: \.rawValue) { fontState in
+            Text(fontState.title).tag(fontState)
+          }
+        }
+        .navigationDestination(isPresented: $isFontSelectorPresented, destination: { FontPicker() })
         Picker("settings.display.avatar.position", selection: $theme.avatarPosition) {
           ForEach(Theme.AvatarPosition.allCases, id: \.rawValue) { position in
             Text(position.description).tag(position)

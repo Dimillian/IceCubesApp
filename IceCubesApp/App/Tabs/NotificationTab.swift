@@ -9,7 +9,7 @@ import Timeline
 
 struct NotificationsTab: View {
   @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
-  
+
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var watcher: StreamWatcher

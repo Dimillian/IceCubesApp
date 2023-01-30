@@ -1,6 +1,6 @@
 import AVKit
-import SwiftUI
 import Env
+import SwiftUI
 
 class VideoPlayerViewModel: ObservableObject {
   @Published var player: AVPlayer?
@@ -41,7 +41,7 @@ class VideoPlayerViewModel: ObservableObject {
 struct VideoPlayerView: View {
   @Environment(\.scenePhase) private var scenePhase
   @EnvironmentObject private var preferences: UserPreferences
-  
+
   @StateObject var viewModel: VideoPlayerViewModel
 
   var body: some View {

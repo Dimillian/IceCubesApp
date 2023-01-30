@@ -33,7 +33,7 @@ public class QuickLook: ObservableObject {
           paths.append(path)
         }
         return paths.sorted { url1, url2 in
-          return pathOrderMap[url1.lastPathComponent] ?? 0 < pathOrderMap[url2.lastPathComponent] ?? 0
+          pathOrderMap[url1.lastPathComponent] ?? 0 < pathOrderMap[url2.lastPathComponent] ?? 0
         }
       })
       withTransaction(transaction) {

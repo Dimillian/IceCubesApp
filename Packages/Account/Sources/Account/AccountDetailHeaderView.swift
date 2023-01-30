@@ -25,7 +25,11 @@ struct AccountDetailHeaderView: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      headerImageView
+      Rectangle()
+        .frame(height: 200)
+        .overlay {
+          headerImageView
+        }
       accountInfoView
     }
   }
@@ -34,20 +38,20 @@ struct AccountDetailHeaderView: View {
     ZStack(alignment: .bottomTrailing) {
       if reasons.contains(.placeholder) {
         Rectangle()
-          .foregroundColor(.gray)
+          .foregroundColor(theme.secondaryBackgroundColor)
           .frame(height: bannerHeight)
       } else {
         LazyImage(url: account.header) { state in
           if let image = state.image {
             image
               .resizingMode(.aspectFill)
-              .overlay(.black.opacity(0.50))
+              .overlay(account.haveHeader ? .black.opacity(0.50) : .clear)
           } else if state.isLoading {
-            Color.gray
+            theme.secondaryBackgroundColor
               .frame(height: bannerHeight)
               .shimmering()
           } else {
-            Color.gray
+            theme.secondaryBackgroundColor
               .frame(height: bannerHeight)
           }
         }
@@ -64,11 +68,14 @@ struct AccountDetailHeaderView: View {
           .padding(8)
       }
     }
-    .background(Color.gray)
+    .background(theme.secondaryBackgroundColor)
     .frame(height: bannerHeight)
     .offset(y: scrollOffset > 0 ? -scrollOffset : 0)
     .contentShape(Rectangle())
     .onTapGesture {
+      guard account.haveHeader else {
+        return
+      }
       Task {
         await quickLook.prepareFor(urls: [account.header], selectedURL: account.header)
       }
@@ -79,6 +86,9 @@ struct AccountDetailHeaderView: View {
     HStack {
       AvatarView(url: account.avatar, size: .account)
         .onTapGesture {
+          guard account.haveAvatar else {
+            return
+          }
           Task {
             await quickLook.prepareFor(urls: [account.avatar], selectedURL: account.avatar)
           }

@@ -111,6 +111,10 @@
 "settings.push.duplicate.title" = "重複通知修正ツール";
 "settings.push.duplicate.footer" = "重複して通知を受け取っていませんか？それを修正するためにこの魔法のボタンを試してみて";
 "settings.push.duplicate.button.fix" = "🪄 修正する";
+"settings.other.autoplay-video" = "Auto Play Videos";
+"settings.display.font" = "Timeline Font";
+"settings.display.font.system" = "System";
+"settings.display.font.custom" = "Custom";
 "settings.other.autoplay-video" = "動画自動再生";
 
 // MARK: Tabs
@@ -271,6 +275,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "翻訳";
+"status.action.translate-from-%@" = "翻訳 %@";
 "status.action.translated-label" = "DeepL.comを使用して翻訳";
 "status.action.bookmark" = "ブックマーク";
 "status.action.boost" = "ブースト";

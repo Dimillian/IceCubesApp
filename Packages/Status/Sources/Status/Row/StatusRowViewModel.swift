@@ -71,7 +71,7 @@ public class StatusRowViewModel: ObservableObject {
       routerPath.navigate(to: .statusDetail(id: status.reblog?.id ?? status.id))
     }
   }
-  
+
   func navigateToAccountDetail(account: Account, routerPath: RouterPath) {
     if isRemote, let url = account.url {
       withAnimation {
@@ -85,7 +85,7 @@ public class StatusRowViewModel: ObservableObject {
       routerPath.navigate(to: .accountDetailWithAccount(account: account))
     }
   }
-  
+
   func navigateToMention(mention: Mention, routerPath: RouterPath) {
     if isRemote {
       withAnimation {

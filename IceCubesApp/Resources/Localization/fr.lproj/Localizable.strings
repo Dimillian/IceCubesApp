@@ -129,6 +129,9 @@
 "settings.push.duplicate.footer" = "Recevez-vous des notifications en double ? Essayez ce bouton magique pour résoudre le problème";
 "settings.push.duplicate.button.fix" = "🪄 Résoudre";
 "settings.other.autoplay-video" = "Auto Play Videos";
+"settings.display.font" = "Timeline Font";
+"settings.display.font.system" = "System";
+"settings.display.font.custom" = "Custom";
 
 // MARK: Tabs
 "tab.explore" = "Explorer";
@@ -284,6 +287,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Traduire";
+"status.action.translate-from-%@" = "Traduire de %@";
 "status.action.translated-label" = "Traduit avec DeepL.com";
 "status.action.bookmark" = "Marquer";
 "status.action.boost" = "Promouvoir";

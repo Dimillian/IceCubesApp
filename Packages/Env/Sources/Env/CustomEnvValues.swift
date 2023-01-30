@@ -5,8 +5,8 @@ private struct SecondaryColumnKey: EnvironmentKey {
   static let defaultValue = false
 }
 
-extension EnvironmentValues {
-  public var isSecondaryColumn: Bool {
+public extension EnvironmentValues {
+  var isSecondaryColumn: Bool {
     get { self[SecondaryColumnKey.self] }
     set { self[SecondaryColumnKey.self] = newValue }
   }
