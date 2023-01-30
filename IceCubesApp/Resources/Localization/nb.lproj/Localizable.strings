@@ -291,6 +291,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Oversett";
+"status.action.translate-from-%@" = "Translate from %@";
 "status.action.translated-label" = "Oversatt ved hjelp av DeepL.com";
 "status.action.bookmark" = "Bokmerk";
 "status.action.boost" = "Forsterk";
