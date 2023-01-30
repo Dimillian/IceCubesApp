@@ -23,7 +23,7 @@ struct ProfileTab: View {
           .withAppRouter()
           .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
           .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
-          .id(client.id)
+          .id(account.id)
       } else {
         AccountDetailView(account: .placeholder())
           .redacted(reason: .placeholder)
