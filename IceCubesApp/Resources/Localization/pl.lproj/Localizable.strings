@@ -43,7 +43,7 @@
 "instance.list.posts-%@" = "%@ postów";
 "instance.list.users-%@" = "%@ użytkowników";
 "instance.suggestions" = "Propozycje";
-"instance.url" = "Adres URL serwera";
+"instance.url" = "URL instancji";
 
 // MARK: Menu
 "menu.new-post" = "Nowy post";
@@ -288,6 +288,7 @@
 "timeline.local" = "Strumień lokalny";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld ostatnich postów od %lld uczestników";
 "timeline.trending" = "Teraz popularne";
+"timeline.add.url" = "URL instancji";
 
 // MARK: Package: Status
 "status.action.translate" = "Przetłumacz";
