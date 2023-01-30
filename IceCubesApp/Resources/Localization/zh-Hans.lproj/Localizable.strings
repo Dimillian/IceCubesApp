@@ -292,6 +292,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "翻译";
+"status.action.translate-from-%@" = "翻译 %@";
 "status.action.translated-label" = "使用 DeepL.com 翻译";
 "status.action.bookmark" = "书签";
 "status.action.boost" = "转发";
