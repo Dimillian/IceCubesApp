@@ -13,7 +13,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string>%lld nuovo post</string>
+			<string>un nuovo post</string>
 			<key>other</key>
 			<string>%lld nuovi post</string>
 		</dict>
