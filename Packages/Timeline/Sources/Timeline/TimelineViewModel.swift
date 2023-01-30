@@ -79,10 +79,10 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
           }
         } else {
           newStatuses = newStatuses.filter { status in
-            !pendingStatuses.contains(where: { $0.id == status.id })
+            !statuses.contains(where: { $0.id == status.id })
           }
           pendingStatuses.insert(contentsOf: newStatuses, at: 0)
-          statuses.insert(contentsOf: pendingStatuses, at: 0)
+          statuses.insert(contentsOf: newStatuses, at: 0)
           withAnimation {
             statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
           }
@@ -143,8 +143,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
   func handleEvent(event: any StreamEvent, currentAccount: CurrentAccount) {
     if let event = event as? StreamEventUpdate,
        pendingStatusesEnabled,
-       !statuses.contains(where: { $0.id == event.status.id }),
-       !pendingStatuses.contains(where: { $0.id == event.status.id })
+       !statuses.contains(where: { $0.id == event.status.id })
     {
       pendingStatuses.insert(event.status, at: 0)
       statuses.insert(event.status, at: 0)
