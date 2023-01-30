@@ -144,7 +144,7 @@ struct TimelineTab: View {
       if UIDevice.current.userInterfaceIdiom != .pad {
         ToolbarItem(placement: .navigationBarLeading) {
           AppAccountsSelectorView(routerPath: routerPath)
-            .id(client.id)
+            .id(currentAccount.account?.id)
         }
       }
       statusEditorToolbarItem(routerPath: routerPath,

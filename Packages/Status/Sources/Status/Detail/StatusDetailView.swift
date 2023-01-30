@@ -73,7 +73,6 @@ public struct StatusDetailView: View {
                 }
               }
             }
-            .frame(maxWidth: .maxColumnWidth)
           }
           .padding(.top, .layoutPadding)
         }

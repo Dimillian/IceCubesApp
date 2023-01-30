@@ -115,6 +115,9 @@ public struct StatusRowView: View {
           remoteContentLoadingView
         }
       }
+      .alignmentGuide(.listRowSeparatorLeading) { _ in
+        -100
+      }
     }
   }
 

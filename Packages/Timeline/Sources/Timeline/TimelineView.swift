@@ -34,22 +34,22 @@ public struct TimelineView: View {
   public var body: some View {
     ScrollViewReader { proxy in
       ZStack(alignment: .top) {
-        ScrollView {
-          Rectangle()
-            .frame(height: 0)
-            .id(Constants.scrollToTop)
-          LazyVStack {
+        List {
+          if viewModel.tag == nil {
+            scrollToTopView
+          } else {
             tagHeaderView
-              .padding(.bottom, 16)
-            switch viewModel.timeline {
-            case .remoteLocal:
-              StatusesListView(fetcher: viewModel, isRemote: true)
-            default:
-              StatusesListView(fetcher: viewModel)
-            }
           }
-          .padding(.top, .layoutPadding + (!viewModel.pendingStatuses.isEmpty ? 28 : 0))
+          switch viewModel.timeline {
+          case .remoteLocal:
+            StatusesListView(fetcher: viewModel, isRemote: true)
+          default:
+            StatusesListView(fetcher: viewModel)
+          }
         }
+        .environment(\.defaultMinListRowHeight, 1)
+        .listStyle(.plain)
+        .scrollContentBackground(.hidden)
         .background(theme.primaryBackgroundColor)
         if viewModel.pendingStatusesEnabled {
           makePendingNewPostsView(proxy: proxy)
@@ -107,62 +107,65 @@ public struct TimelineView: View {
   private func makePendingNewPostsView(proxy: ScrollViewProxy) -> some View {
     if !viewModel.pendingStatuses.isEmpty {
       HStack(spacing: 6) {
+        Spacer()
         Button {
           withAnimation {
-            proxy.scrollTo(Constants.scrollToTop)
-            viewModel.displayPendingStatuses()
+            proxy.scrollTo(viewModel.pendingStatuses.last?.id, anchor: .bottom)
           }
         } label: {
           Text(viewModel.pendingStatusesButtonTitle)
         }
-        .keyboardShortcut("r", modifiers: .command)
         .buttonStyle(.bordered)
         .background(.thinMaterial)
         .cornerRadius(8)
-        if viewModel.pendingStatuses.count > 1 {
-          Button {
-            withAnimation {
-              viewModel.dequeuePendingStatuses()
-            }
-          } label: {
-            Image(systemName: "text.insert")
-          }
-          .buttonStyle(.bordered)
-          .background(.thinMaterial)
-          .cornerRadius(8)
-        }
       }
-      .padding(.top, 6)
+      .padding(12)
     }
   }
 
   @ViewBuilder
   private var tagHeaderView: some View {
     if let tag = viewModel.tag {
-      HStack {
-        VStack(alignment: .leading, spacing: 4) {
-          Text("#\(tag.name)")
-            .font(.scaledHeadline)
-          Text("timeline.n-recent-from-n-participants \(tag.totalUses) \(tag.totalAccounts)")
-            .font(.scaledFootnote)
-            .foregroundColor(.gray)
+      VStack(alignment: .leading) {
+        Spacer()
+        HStack {
+          VStack(alignment: .leading, spacing: 4) {
+            Text("#\(tag.name)")
+              .font(.scaledHeadline)
+            Text("timeline.n-recent-from-n-participants \(tag.totalUses) \(tag.totalAccounts)")
+              .font(.scaledFootnote)
+              .foregroundColor(.gray)
+          }
+          Spacer()
+          Button {
+            Task {
+              if tag.following {
+                viewModel.tag = await account.unfollowTag(id: tag.name)
+              } else {
+                viewModel.tag = await account.followTag(id: tag.name)
+              }
+            }
+          } label: {
+            Text(tag.following ? "account.follow.following" : "account.follow.follow")
+          }.buttonStyle(.bordered)
         }
         Spacer()
-        Button {
-          Task {
-            if tag.following {
-              viewModel.tag = await account.unfollowTag(id: tag.name)
-            } else {
-              viewModel.tag = await account.followTag(id: tag.name)
-            }
-          }
-        } label: {
-          Text(tag.following ? "account.follow.following" : "account.follow.follow")
-        }.buttonStyle(.bordered)
       }
-      .padding(.horizontal, .layoutPadding)
-      .padding(.vertical, 8)
-      .background(theme.secondaryBackgroundColor)
+      .listRowBackground(theme.secondaryBackgroundColor)
+      .listRowSeparator(.hidden)
+      .listRowInsets(.init(top: 8,
+                           leading: .layoutPadding,
+                           bottom: 8,
+                           trailing: .layoutPadding))
     }
+  }
+  
+  private var scrollToTopView: some View {
+    HStack{ }
+      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowSeparator(.hidden)
+      .listRowInsets(.init())
+      .frame(height: .layoutPadding)
+      .id(Constants.scrollToTop)
   }
 }
