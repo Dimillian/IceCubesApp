@@ -14,15 +14,15 @@ public struct StatusDetailView: View {
   @Environment(\.openURL) private var openURL
   @StateObject private var viewModel: StatusDetailViewModel
   @State private var isLoaded: Bool = false
-  
+
   public init(statusId: String) {
     _viewModel = StateObject(wrappedValue: .init(statusId: statusId))
   }
-  
+
   public init(remoteStatusURL: URL) {
     _viewModel = StateObject(wrappedValue: .init(remoteStatusURL: remoteStatusURL))
   }
-  
+
   public var body: some View {
     ScrollViewReader { proxy in
       ZStack {
@@ -35,7 +35,6 @@ public struct StatusDetailView: View {
                   StatusRowView(viewModel: .init(status: status, isCompact: false))
                     .padding(.horizontal, .layoutPadding)
                     .redacted(reason: .placeholder)
-                    .shimmering()
                   Divider()
                     .padding(.vertical, .dividerPadding)
                 }
@@ -51,8 +50,8 @@ public struct StatusDetailView: View {
                 StatusRowView(viewModel: .init(status: status,
                                                isCompact: false,
                                                isFocused: true))
-                .padding(.horizontal, .layoutPadding)
-                .id(status.id)
+                  .padding(.horizontal, .layoutPadding)
+                  .id(status.id)
                 Divider()
                   .padding(.bottom, .dividerPadding * 2)
                 if !context.descendants.isEmpty {
@@ -63,7 +62,7 @@ public struct StatusDetailView: View {
                       .padding(.vertical, .dividerPadding)
                   }
                 }
-                
+
               case .error:
                 ErrorView(title: "status.error.title",
                           message: "status.error.message",
@@ -74,7 +73,6 @@ public struct StatusDetailView: View {
                 }
               }
             }
-            .frame(maxWidth: .maxColumnWidth)
           }
           .padding(.top, .layoutPadding)
         }

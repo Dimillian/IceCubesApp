@@ -131,6 +131,9 @@
 "settings.push.duplicate.footer" = "Receiving duplicate notifications? Try this magic button in order to fix it";
 "settings.push.duplicate.button.fix" = "🪄 Fix it";
 "settings.other.autoplay-video" = "Auto Play Videos";
+"settings.display.font" = "Timeline Font";
+"settings.display.font.system" = "System";
+"settings.display.font.custom" = "Custom";
 
 // MARK: Tabs
 "tab.explore" = "Keşfet";
@@ -286,6 +289,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Tercüme et";
+"status.action.translate-from-%@" = "Tercüme et %@";
 "status.action.translated-label" = "DeepL.com tarafından tercüme edildi";
 "status.action.bookmark" = "Yer İmi Ekle";
 "status.action.boost" = "Yükselt";

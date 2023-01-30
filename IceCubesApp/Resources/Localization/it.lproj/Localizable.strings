@@ -130,6 +130,10 @@
 "settings.push.duplicate.title" = "Sistema le notifiche duplicate";
 "settings.push.duplicate.footer" = "Ricevi notifiche duplicate? Prova questo bottone magico per aggiustarle";
 "settings.push.duplicate.button.fix" = "🪄 Aggiusta";
+"settings.other.autoplay-video" = "Auto Play Videos";
+"settings.display.font" = "Timeline Font";
+"settings.display.font.system" = "System";
+"settings.display.font.custom" = "Custom";
 "settings.other.autoplay-video" = "Auto Play dei video";
 
 // MARK: Tabs
@@ -291,6 +295,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Traduci";
+"status.action.translate-from-%@" = "Traduci da %@";
 "status.action.translated-label" = "Tradotto usando DeepL.com";
 "status.action.bookmark" = "Salva nei segnalibri";
 "status.action.boost" = "Condividi";

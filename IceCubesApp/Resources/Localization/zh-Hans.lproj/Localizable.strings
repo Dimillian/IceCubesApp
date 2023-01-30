@@ -131,6 +131,10 @@
 "settings.push.duplicate.button.fix" = "🪄 修复";
 "settings.other.autoplay-video" = "自动播放视频";
 
+"settings.display.font" = "Timeline Font";
+"settings.display.font.system" = "System";
+"settings.display.font.custom" = "Custom";
+
 // MARK: Tabs
 "tab.explore" = "探索";
 "tab.federated" = "跨站";
@@ -290,6 +294,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "翻译";
+"status.action.translate-from-%@" = "翻译 %@";
 "status.action.translated-label" = "使用 DeepL.com 翻译";
 "status.action.bookmark" = "书签";
 "status.action.boost" = "转发";

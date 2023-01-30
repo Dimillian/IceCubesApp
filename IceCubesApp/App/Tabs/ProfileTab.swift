@@ -9,6 +9,7 @@ import Shimmer
 import SwiftUI
 
 struct ProfileTab: View {
+  @EnvironmentObject private var appAccount: AppAccountsManager
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var currentAccount: CurrentAccount
@@ -22,11 +23,10 @@ struct ProfileTab: View {
           .withAppRouter()
           .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
           .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
-          .id(currentAccount.account?.id)
+          .id(account.id)
       } else {
         AccountDetailView(account: .placeholder())
           .redacted(reason: .placeholder)
-          .shimmering()
       }
     }
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in

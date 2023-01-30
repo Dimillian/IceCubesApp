@@ -128,6 +128,9 @@
 "settings.push.duplicate.footer" = "Ontvang je dubbele meldingen? Gebruik deze magische knop om dit probleem te verhelpen";
 "settings.push.duplicate.button.fix" = "🪄 Los op";
 "settings.other.autoplay-video" = "Auto Play Videos";
+"settings.display.font" = "Timeline Font";
+"settings.display.font.system" = "System";
+"settings.display.font.custom" = "Custom";
 
 // MARK: Tabs
 "tab.explore" = "Ontdekken";
@@ -288,6 +291,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Vertaal";
+"status.action.translate-from-%@" = "Vertaal uit %@";
 "status.action.translated-label" = "Vertaald met behulp van DeepL.com";
 "status.action.bookmark" = "Voeg bladwijzer toe";
 "status.action.boost" = "Boosten";

@@ -116,6 +116,9 @@ public struct StatusRowView: View {
           remoteContentLoadingView
         }
       }
+      .alignmentGuide(.listRowSeparatorLeading) { _ in
+        -100
+      }
     }
   }
 
@@ -317,7 +320,13 @@ public struct StatusRowView: View {
         if viewModel.isLoadingTranslation {
           ProgressView()
         } else {
-          Text("status.action.translate")
+          if let statusLanguage = status.language,
+             let lanugageName = Locale.current.localizedString(forLanguageCode: statusLanguage)
+          {
+            Text("status.action.translate-from-\(lanugageName)")
+          } else {
+            Text("status.action.translate")
+          }
         }
       }
       .buttonStyle(.borderless)
@@ -385,7 +394,7 @@ public struct StatusRowView: View {
       }
     }
   }
-  
+
   private var remoteContentLoadingView: some View {
     ZStack(alignment: .center) {
       VStack {

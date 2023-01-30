@@ -32,8 +32,8 @@ struct NotificationRowView: View {
         }
       }
     }
-    .alignmentGuide(.listRowSeparatorLeading) { viewDimensions in
-      return -100
+    .alignmentGuide(.listRowSeparatorLeading) { _ in
+      -100
     }
   }
 

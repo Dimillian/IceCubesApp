@@ -69,7 +69,7 @@ public struct AccountDetailView: View {
             if viewModel.selectedTab == .statuses {
               pinnedPostsView
             }
-            StatusesListView(fetcher: viewModel)
+            StatusesListView(fetcher: viewModel, isEmbdedInList: false)
           case .followedTags:
             tagsListView
           case .lists:
@@ -143,7 +143,6 @@ public struct AccountDetailView: View {
                               scrollViewProxy: proxy,
                               scrollOffset: $scrollOffset)
         .redacted(reason: .placeholder)
-        .shimmering()
     case let .data(account):
       AccountDetailHeaderView(viewModel: viewModel,
                               account: account,
@@ -347,7 +346,7 @@ public struct AccountDetailView: View {
   @ToolbarContentBuilder
   private var toolbarContent: some ToolbarContent {
     ToolbarItem(placement: .principal) {
-      if scrollOffset < -200 {
+      if scrollOffset < -170 {
         switch viewModel.accountState {
         case let .data(account):
           EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
@@ -531,7 +530,7 @@ public struct AccountDetailView: View {
           }
         }
       } label: {
-        if scrollOffset < -40 {
+        if scrollOffset < -5 {
           Image(systemName: "ellipsis.circle")
         } else {
           Image(systemName: "ellipsis.circle.fill")

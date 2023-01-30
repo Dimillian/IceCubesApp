@@ -38,19 +38,10 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
   }
 
   @Published var tag: Tag?
-
-  enum PendingStatusesState {
-    case refresh, stream
-  }
-
   @Published var pendingStatuses: [Status] = []
-  @Published var pendingStatusesState: PendingStatusesState = .stream
 
   var pendingStatusesButtonTitle: LocalizedStringKey {
-    switch pendingStatusesState {
-    case .stream, .refresh:
-      return "timeline-new-posts \(pendingStatuses.count)"
-    }
+    "\(pendingStatuses.count)"
   }
 
   var pendingStatusesEnabled: Bool {
@@ -90,7 +81,6 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
 
         
         if userIntent || !pendingStatusesEnabled {
-          pendingStatuses.insert(contentsOf: newStatuses, at: 0)
           statuses.insert(contentsOf: pendingStatuses, at: 0)
           pendingStatuses = []
           withAnimation {
@@ -98,10 +88,13 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
           }
         } else {
           newStatuses = newStatuses.filter { status in
-            !pendingStatuses.contains(where: { $0.id == status.id })
+            !statuses.contains(where: { $0.id == status.id })
           }
           pendingStatuses.insert(contentsOf: newStatuses, at: 0)
-          pendingStatusesState = .refresh
+          statuses.insert(contentsOf: newStatuses, at: 0)
+          withAnimation {
+            statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
+          }
         }
       }
     } catch {
@@ -166,17 +159,12 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
   func handleEvent(event: any StreamEvent, currentAccount: CurrentAccount) {
     if let event = event as? StreamEventUpdate,
        pendingStatusesEnabled,
-       !statuses.contains(where: { $0.id == event.status.id }),
-       !pendingStatuses.contains(where: { $0.id == event.status.id })
+       !statuses.contains(where: { $0.id == event.status.id })
     {
-      if event.status.account.id == currentAccount.account?.id, pendingStatuses.isEmpty {
-        withAnimation {
-          statuses.insert(event.status, at: 0)
-          statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
-        }
-      } else {
-        pendingStatuses.insert(event.status, at: 0)
-        pendingStatusesState = .stream
+      pendingStatuses.insert(event.status, at: 0)
+      statuses.insert(event.status, at: 0)
+      withAnimation {
+        statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
       }
     } else if let event = event as? StreamEventDelete {
       withAnimation {
@@ -191,22 +179,9 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
     }
   }
 
-  func displayPendingStatuses() {
-    guard timeline == .home else { return }
-    pendingStatuses = pendingStatuses.filter { status in
-      !statuses.contains(where: { $0.id == status.id })
+  func statusDidAppear(status: Status) async {
+    if let index = pendingStatuses.firstIndex(of: status) {
+      pendingStatuses.remove(at: index)
     }
-    statuses.insert(contentsOf: pendingStatuses, at: 0)
-    pendingStatuses = []
-    statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
-  }
-
-  func dequeuePendingStatuses() {
-    guard timeline == .home else { return }
-    if pendingStatuses.count > 1 {
-      let status = pendingStatuses.removeLast()
-      statuses.insert(status, at: 0)
-    }
-    statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
   }
 }

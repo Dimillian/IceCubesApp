@@ -56,6 +56,7 @@ public struct StatusCardView: View {
         RoundedRectangle(cornerRadius: 16)
           .stroke(.gray.opacity(0.35), lineWidth: 1)
       )
+      .frame(maxWidth: .maxColumnWidth)
       .onTapGesture {
         openURL(url)
       }

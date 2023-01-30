@@ -131,6 +131,9 @@
 "settings.push.duplicate.footer" = "Otrzymujesz zduplikowane powiadomienia? Spróbuj tego magicznego przycisku, aby to naprawić";
 "settings.push.duplicate.button.fix" = "🪄 Napraw to";
 "settings.other.autoplay-video" = "Auto Play Videos";
+"settings.display.font" = "Timeline Font";
+"settings.display.font.system" = "System";
+"settings.display.font.custom" = "Custom";
 
 // MARK: Tabs
 "tab.explore" = "Odkrywaj";
@@ -290,6 +293,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Przetłumacz";
+"status.action.translate-from-%@" = "Translate from %@";
 "status.action.translated-label" = "Tłumaczenie z DeepL.com";
 "status.action.bookmark" = "Dodaj zakładkę";
 "status.action.boost" = "Podbij";

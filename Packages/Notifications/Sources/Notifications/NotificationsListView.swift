@@ -87,7 +87,7 @@ public struct NotificationsListView: View {
                                bottom: 12,
                                trailing: .layoutPadding))
           .listRowBackground(theme.primaryBackgroundColor)
-          .shimmering()
+          .redacted(reason: .placeholder)
       }
 
     case let .display(notifications, nextPageState):
@@ -103,7 +103,7 @@ public struct NotificationsListView: View {
                                  bottom: 12,
                                  trailing: .layoutPadding))
             .listRowBackground(notification.type == .mention && lockedType != .mention ?
-                               theme.secondaryBackgroundColor : theme.primaryBackgroundColor)
+              theme.secondaryBackgroundColor : theme.primaryBackgroundColor)
         }
       }
 
@@ -144,9 +144,9 @@ public struct NotificationsListView: View {
                          trailing: .layoutPadding))
     .listRowBackground(theme.primaryBackgroundColor)
   }
-  
+
   private var topPaddingView: some View {
-    HStack { }
+    HStack {}
       .listRowBackground(Color.clear)
       .listRowSeparator(.hidden)
       .listRowInsets(.init())

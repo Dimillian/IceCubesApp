@@ -55,7 +55,7 @@ public struct AppAccountsSelectorView: View {
   @ViewBuilder
   private var labelView: some View {
     Group {
-      if let avatar = currentAccount.account?.avatar {
+      if let avatar = currentAccount.account?.avatar, !currentAccount.isLoadingAccount {
         AvatarView(url: avatar, size: avatarSize)
       } else {
         ProgressView()

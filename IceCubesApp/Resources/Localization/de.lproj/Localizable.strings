@@ -128,10 +128,13 @@
 "settings.push.duplicate.footer" = "Bekommst du doppelte Benachrichtigungen? Probier diesen magischen Knopf aus";
 "settings.push.duplicate.button.fix" = "🪄 Beheben";
 "settings.other.autoplay-video" = "Auto Play Videos";
+"settings.display.font" = "Timeline Font";
+"settings.display.font.system" = "System";
+"settings.display.font.custom" = "Custom";
 
 "enum.expand-media.show" = "Alle zeigen";
-"enum.expand-media.hide" = "Alle verstecken";
-"enum.expand-media.hide-sensitive" = "Sensible verstecken";
+"enum.expand-media.hide" = "Alle ausblenden";
+"enum.expand-media.hide-sensitive" = "Sensible ausblenden";
 
 // MARK: Tabs
 "tab.explore" = "Entdecken";
@@ -165,7 +168,7 @@
 "account.action.notify-enable" = "Mitteilungen aktivieren";
 "account.action.notify-disable" = "Mitteilungen deaktivieren";
 "account.action.reboosts-show" = "Boosts zeigen";
-"account.action.reboosts-hide" = "Boosts verstecken";
+"account.action.reboosts-hide" = "Boosts ausblenden";
 "account.action.block" = "Blockieren";
 "account.action.unblock" = "Blockade aufheben";
 "account.action.mute" = "Stummschalten";
@@ -291,6 +294,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Übersetzen";
+"status.action.translate-from-%@" = "Übersetzen aus %@";
 "status.action.translated-label" = "Übersetzt mit DeepL.com";
 "status.action.bookmark" = "Lesezeichen";
 "status.action.boost" = "Boosten";
@@ -373,10 +377,10 @@
 "filter.edit.keywords.add" = "Neues Wort hinzufügen";
 "filter.edit.contexts" = "Filterkontext";
 "filter.edit.action" = "Filteraktion";
-"filter.contexts.home" = "Home and lists";
-"filter.contexts.notifications" = "Notifications";
-"filter.contexts.public" = "Public timelines";
-"filter.contexts.conversations" = "Conversations";
-"filter.contexts.profiles" = "Profiles";
-"filter.action.warning" = "Hide with a warning";
-"filter.action.hide" = "Hide completely";
+"filter.contexts.home" = "Startseite und Listen";
+"filter.contexts.notifications" = "Mitteilungen";
+"filter.contexts.public" = "Öffentliche Timelines";
+"filter.contexts.conversations" = "Nachrichten";
+"filter.contexts.profiles" = "Profile";
+"filter.action.warning" = "Mit einer Warnung ausblenden";
+"filter.action.hide" = "Komplett ausblenden";

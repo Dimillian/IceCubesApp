@@ -26,6 +26,7 @@ public class UserPreferences: ObservableObject {
   @AppStorage("app_default_post_visibility") public var appDefaultPostVisibility: Models.Visibility = .pub
   @AppStorage("app_default_posts_sensitive") public var appDefaultPostsSensitive = false
   @AppStorage("autoplay_video") public var autoPlayVideo = true
+  @AppStorage("chosen_font") public private(set) var chosenFontData: Data?
 
   @AppStorage("suppress_dupe_reblogs") public var suppressDupeReblogs: Bool = true
   
@@ -67,6 +68,24 @@ public class UserPreferences: ObservableObject {
     }
     set {
       Self.sharedDefault?.set(newValue, forKey: "push_notifications_count")
+    }
+  }
+
+  public var chosenFont: UIFont? {
+    get {
+      guard let chosenFontData,
+            let font = try? NSKeyedUnarchiver.unarchivedObject(ofClass: UIFont.self, from: chosenFontData) else { return nil }
+
+      return font
+    }
+    set {
+      if let font = newValue,
+         let data = try? NSKeyedArchiver.archivedData(withRootObject: font, requiringSecureCoding: false)
+      {
+        chosenFontData = data
+      } else {
+        chosenFontData = nil
+      }
     }
   }
 
