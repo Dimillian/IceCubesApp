@@ -27,6 +27,8 @@ public class UserPreferences: ObservableObject {
   @AppStorage("app_default_posts_sensitive") public var appDefaultPostsSensitive = false
   @AppStorage("autoplay_video") public var autoPlayVideo = true
 
+  @AppStorage("suppress_dupe_reblogs") public var suppressDupeReblogs: Bool = true
+  
   public var postVisibility: Models.Visibility {
     if useInstanceContentSettings {
       return serverPreferences?.postVisibility ?? .pub

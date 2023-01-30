@@ -90,8 +90,10 @@
 "settings.general.content" = "Content Settings";
 "settings.system" = "System Settings";
 "settings.content.navigation-title" = "Content Settings";
+"settings.content.boosts" = "Boosts";
+"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
+"settings.content.instance-settings" = "Server Content Settings";
 "settings.content.use-instance-settings" = "Use server settings";
-"settings.content.main-toggle.description" = "Use the settings from your home Instance";
 "settings.content.expand-spoilers" = "Always show sensitive posts";
 "settings.content.expand-media" = "Media display";
 "settings.content.default-sensitive" = "Always mark media as sensitive";

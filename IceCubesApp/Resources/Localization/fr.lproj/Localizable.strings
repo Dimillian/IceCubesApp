@@ -90,8 +90,10 @@
 "settings.general.content" = "Paramètres de contenu";
 "settings.system" = "Paramètres système";
 "settings.content.navigation-title" = "Paramètres de contenu";
+"settings.content.boosts" = "Boosts";
+"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
+"settings.content.instance-settings" = "Server Content Settings";
 "settings.content.use-instance-settings" = "Utiliser les paramètres du serveur";
-"settings.content.main-toggle.description" = "Utiliser les paramètres de votre instance principale";
 "settings.content.expand-spoilers" = "Toujours afficher les messages sensibles";
 "settings.content.expand-media" = "Affichage des médias";
 "settings.content.default-sensitive" = "Toujours marquer les médias comme sensibles";

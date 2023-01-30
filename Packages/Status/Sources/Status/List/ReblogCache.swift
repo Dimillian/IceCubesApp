@@ -70,6 +70,10 @@ public class ReblogCache {
   
   @MainActor public func removeDuplicateReblogs(_ statuses: inout [Status]) {
     
+    if !UserPreferences.shared.suppressDupeReblogs {
+      return
+    }
+    
     var i = statuses.count
 
     for status in statuses.reversed() {
