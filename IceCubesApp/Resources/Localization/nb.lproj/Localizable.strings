@@ -57,6 +57,9 @@
 "settings.app.icon.navigation-title" = "Ikon";
 "settings.app.source" = "Kilde (GitHub-lenke)";
 "settings.app.support" = "Støtt denne appen";
+"settings.display.font" = "Tidslinjefont";
+"settings.display.font.system" = "System";
+"settings.display.font.custom" = "Tilpasset";
 "settings.display.avatar.position" = "Avatarposisjon";
 "settings.display.avatar.shape" = "Avatarform";
 "settings.display.navigation-title" = "Visningsinnstillinger";
@@ -128,10 +131,7 @@
 "settings.push.duplicate.title" = "Reparasjon av dupliserte varslinger";
 "settings.push.duplicate.footer" = "Får du dupliserte varsler? Prøv denne magiske knappen for å fikse det.";
 "settings.push.duplicate.button.fix" = "🪄 Fiks det";
-"settings.other.autoplay-video" = "Auto Play Videos";
-"settings.display.font" = "Timeline Font";
-"settings.display.font.system" = "System";
-"settings.display.font.custom" = "Custom";
+"settings.other.autoplay-video" = "Spill av videoer automatisk";
 
 // MARK: Tabs
 "tab.explore" = "Utforsk";
@@ -264,10 +264,10 @@
 "notifications.error.title" = "En feil oppstod";
 "notifications.label.favorite %lld" = "stjernet";
 "notifications.label.follow %lld" = "fulgte deg";
-"notifications.label.follow-request" = "ba om å følge deg";
 "notifications.label.mention %lld" = "nevnte deg";
-"notifications.label.poll" = "avstemningen avsluttet";
 "notifications.label.reblog %lld" = "forsterket";
+"notifications.label.poll" = "avstemningen avsluttet";
+"notifications.label.follow-request" = "ba om å følge deg";
 "notifications.label.status" = "har lagt ut en status";
 "notifications.label.update" = "redigerte et innlegg";
 "notifications.menu-title.favorite" = "Favoritt";
@@ -291,7 +291,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Oversett";
-"status.action.translate-from-%@" = "Translate from %@";
+"status.action.translate-from-%@" = "Oversett fra %@";
 "status.action.translated-label" = "Oversatt ved hjelp av DeepL.com";
 "status.action.bookmark" = "Bokmerk";
 "status.action.boost" = "Forsterk";
