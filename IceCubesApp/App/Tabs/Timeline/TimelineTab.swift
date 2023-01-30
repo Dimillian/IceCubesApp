@@ -37,7 +37,7 @@ struct TimelineTab: View {
           toolbarView
         }
         .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
-        .id(currentAccount.account?.id)
+        .id(client.id)
     }
     .onAppear {
       routerPath.client = client
@@ -144,7 +144,7 @@ struct TimelineTab: View {
       if UIDevice.current.userInterfaceIdiom != .pad {
         ToolbarItem(placement: .navigationBarLeading) {
           AppAccountsSelectorView(routerPath: routerPath)
-            .id(currentAccount.account?.id)
+            .id(client.id)
         }
       }
       statusEditorToolbarItem(routerPath: routerPath,

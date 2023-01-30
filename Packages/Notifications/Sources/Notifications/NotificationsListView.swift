@@ -87,7 +87,7 @@ public struct NotificationsListView: View {
                                bottom: 12,
                                trailing: .layoutPadding))
           .listRowBackground(theme.primaryBackgroundColor)
-          .shimmering()
+          .redacted(reason: .placeholder)
       }
 
     case let .display(notifications, nextPageState):

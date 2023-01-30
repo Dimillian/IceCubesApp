@@ -20,7 +20,6 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
           StatusRowView(viewModel: .init(status: status, isCompact: false))
             .redacted(reason: .placeholder)
             .padding(.horizontal, .layoutPadding)
-            .shimmering()
           Divider()
             .padding(.vertical, .dividerPadding)
         }

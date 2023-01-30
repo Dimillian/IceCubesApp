@@ -35,7 +35,6 @@ public struct StatusDetailView: View {
                   StatusRowView(viewModel: .init(status: status, isCompact: false))
                     .padding(.horizontal, .layoutPadding)
                     .redacted(reason: .placeholder)
-                    .shimmering()
                   Divider()
                     .padding(.vertical, .dividerPadding)
                 }

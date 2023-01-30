@@ -9,6 +9,7 @@ public class CurrentAccount: ObservableObject {
   @Published public private(set) var tags: [Tag] = []
   @Published public private(set) var followRequests: [Account] = []
   @Published public private(set) var isUpdating: Bool = false
+  @Published public private(set) var isLoadingAccount: Bool = false
 
   private var client: Client?
 
@@ -26,8 +27,8 @@ public class CurrentAccount: ObservableObject {
 
   private func fetchUserData() async {
     await withTaskGroup(of: Void.self) { group in
-      group.addTask { await self.fetchConnections() }
       group.addTask { await self.fetchCurrentAccount() }
+      group.addTask { await self.fetchConnections() }
       group.addTask { await self.fetchLists() }
       group.addTask { await self.fetchFollowedTags() }
       group.addTask { await self.fetchFollowerRequests() }
@@ -47,7 +48,9 @@ public class CurrentAccount: ObservableObject {
       account = nil
       return
     }
+    isLoadingAccount = true
     account = try? await client.get(endpoint: Accounts.verifyCredentials)
+    isLoadingAccount = false
   }
 
   public func fetchLists() async {

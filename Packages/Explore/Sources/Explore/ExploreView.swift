@@ -84,7 +84,6 @@ public struct ExploreView: View {
       StatusRowView(viewModel: .init(status: status, isCompact: false))
         .padding(.vertical, 8)
         .redacted(reason: .placeholder)
-        .shimmering()
         .listRowBackground(theme.primaryBackgroundColor)
     }
   }

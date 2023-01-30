@@ -9,6 +9,7 @@ import Timeline
 
 struct NotificationsTab: View {
   @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
+  @Environment(\.scenePhase) private var scenePhase
 
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
@@ -38,7 +39,7 @@ struct NotificationsTab: View {
           }
         }
         .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
-        .id(currentAccount.account?.id)
+        .id(client.id)
     }
     .onAppear {
       routerPath.client = client
@@ -52,6 +53,17 @@ struct NotificationsTab: View {
         routerPath.path = []
       }
     }
+    .onChange(of: scenePhase, perform: { scenePhase in
+      switch scenePhase {
+      case .active:
+        if isSecondaryColumn {
+          watcher.unreadNotificationsCount = 0
+          userPreferences.pushNotificationsCount = 0
+        }
+      default:
+        break
+      }
+    })
     .onChange(of: currentAccount.account?.id) { _ in
       routerPath.path = []
     }

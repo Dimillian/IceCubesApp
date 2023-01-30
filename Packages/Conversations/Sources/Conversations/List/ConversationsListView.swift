@@ -32,7 +32,6 @@ public struct ConversationsListView: View {
                 ConversationsListRow(conversation: conversation, viewModel: viewModel)
                   .padding(.horizontal, .layoutPadding)
                   .redacted(reason: .placeholder)
-                  .shimmering()
               } else {
                 ConversationsListRow(conversation: conversation, viewModel: viewModel)
                   .padding(.horizontal, .layoutPadding)

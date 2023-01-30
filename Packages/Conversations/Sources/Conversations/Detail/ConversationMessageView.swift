@@ -135,7 +135,6 @@ struct ConversationMessageView: View {
         RoundedRectangle(cornerRadius: 8)
           .fill(Color.gray)
           .frame(height: 200)
-          .shimmering()
       }
     }
     .frame(height: 200)
