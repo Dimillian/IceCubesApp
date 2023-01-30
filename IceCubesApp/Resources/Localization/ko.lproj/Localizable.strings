@@ -352,7 +352,7 @@
 "status.poll.option-n %lld" = "선택지 %lld";
 "status.post-from-%@" = "%@의 글";
 "status.row.was-boosted" = "님이 부스트함";
-"status.row.was-reply" = "댓글: ";
+"status.row.was-reply" = "댓글:";
 "status.row.you-boosted" = "당신이 부스트함";
 "status.show-less" = "간략히 보기";
 "status.show-more" = "더 보기";
