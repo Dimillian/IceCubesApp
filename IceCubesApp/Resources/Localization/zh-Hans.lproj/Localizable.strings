@@ -129,6 +129,10 @@
 "settings.push.duplicate.button.fix" = "🪄 修复";
 "settings.other.autoplay-video" = "自动播放视频";
 
+"settings.display.font" = "Timeline Font";
+"settings.display.font.system" = "System";
+"settings.display.font.custom" = "Custom";
+
 // MARK: Tabs
 "tab.explore" = "探索";
 "tab.federated" = "跨站";
