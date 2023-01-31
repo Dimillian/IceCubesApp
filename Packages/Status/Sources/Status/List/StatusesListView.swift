@@ -22,7 +22,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
     switch fetcher.statusesState {
     case .loading:
       ForEach(Status.placeholders()) { status in
-        StatusRowView(viewModel: .init(status: status, isCompact: false, currentUserAccountId: account.account?.id))
+        StatusRowView(viewModel: .init(status: status, isCompact: false))
           .padding(.horizontal, isEmbdedInList ? 0 : .layoutPadding)
           .redacted(reason: .placeholder)
           .listRowBackground(theme.primaryBackgroundColor)
