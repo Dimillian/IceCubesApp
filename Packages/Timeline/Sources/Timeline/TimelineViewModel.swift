@@ -61,7 +61,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
         pendingStatusesObserver?.pendingStatuses = []
         statusesState = .loading
         statuses = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
-                                                                    maxId: "109762933377057565",
+                                                                    maxId: nil,
                                                                     minId: nil,
                                                                     offset: statuses.count))
         withAnimation {
