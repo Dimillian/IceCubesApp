@@ -193,7 +193,7 @@
 "account.follow-request.accept" = "Aceito";
 "account.follow-request.reject" = "Rejeitado";
 "account.follow-requests.pending-requests" = "Pedidos pendentes";
-"account.follow-requests.instructions" = "Estes usuários não verão suas postages até que você os aceite.";
+"account.follow-requests.instructions" = "Estes usuários não verão suas postagens até que você os aceite.";
 "account.followers" = "Seguidores";
 "account.following" = "Seguindo";
 "account.list.create" = "Criar uma nova lista";
@@ -291,7 +291,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Traduzir";
-"status.action.translate-from-%@" = "Translate from %@";
+"status.action.translate-from-%@" = "Traduzir do %@";
 "status.action.translated-label" = "Traduzir usando DeepL.com";
 "status.action.bookmark" = "Salvar";
 "status.action.boost" = "Boost";
@@ -375,10 +375,10 @@
 "filter.edit.contexts" = "Filtrar Contextos";
 "filter.edit.action" = "Filtrar Ação";
 "account.action.edit-filters" = "Editar Filtros";
-"filter.contexts.home" = "Home and lists";
-"filter.contexts.notifications" = "Notifications";
-"filter.contexts.public" = "Public timelines";
-"filter.contexts.conversations" = "Conversations";
-"filter.contexts.profiles" = "Profiles";
-"filter.action.warning" = "Hide with a warning";
-"filter.action.hide" = "Hide completely";
+"filter.contexts.home" = "Início e listas";
+"filter.contexts.notifications" = "Notificações";
+"filter.contexts.public" = "Timelines públicas";
+"filter.contexts.conversations" = "Conversas";
+"filter.contexts.profiles" = "Perfis";
+"filter.action.warning" = "Ocultar com um aviso";
+"filter.action.hide" = "Ocultar completamente";
