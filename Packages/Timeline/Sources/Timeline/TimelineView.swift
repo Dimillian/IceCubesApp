@@ -21,6 +21,7 @@ public struct TimelineView: View {
   @StateObject private var viewModel = TimelineViewModel()
   
   @State private var scrollProxy: ScrollViewProxy?
+  @State private var wasBackgrounded: Bool = false
   
   @Binding var timeline: TimelineFilter
   @Binding var scrollToTopSignal: Int
@@ -99,9 +100,15 @@ public struct TimelineView: View {
     .onChange(of: scenePhase, perform: { scenePhase in
       switch scenePhase {
       case .active:
-        Task {
-          await viewModel.fetchStatuses(userIntent: false)
+        if wasBackgrounded {
+          wasBackgrounded = false
+          Task {
+            await viewModel.fetchStatuses(userIntent: false)
+          }
         }
+      case .background:
+        wasBackgrounded = true
+        
       default:
         break
       }
