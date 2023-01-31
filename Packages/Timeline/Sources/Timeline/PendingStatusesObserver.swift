@@ -1,46 +1,83 @@
 import Foundation
 import SwiftUI
 import Models
+import DesignSystem
+import Combine
 
 @MainActor
 class PendingStatusesObserver: ObservableObject {
-  @Published var pendingStatusesCount: Int = 0
   
-  var pendingStatuses: [String] = [] {
-    didSet {
-      pendingStatusesCount = pendingStatuses.count
-    }
-  }
+  @AppStorage("expanded") public var isExpanded: Bool = false
+  
+  @Published var pendingStatuses: [Status] = []
   
   func removeStatus(status: Status) {
-    if let index = pendingStatuses.firstIndex(of: status.id) {
+    if let index = pendingStatuses.firstIndex(where: {$0.id == status.id}) {
       pendingStatuses.removeSubrange(index...(pendingStatuses.count - 1))
     }
   }
   
-  init() { }
+  func getMaxAvatarCountRange() -> Int {
+    return pendingStatuses.count >= 4 ? 4 : pendingStatuses.count
+  }
+  
+  func getMoreCount() -> Int? {
+    return pendingStatuses.count > 4 ? (pendingStatuses.count - 4) : nil
+  }
+  
+  init() {}
 }
 
 struct PendingStatusesObserverView: View {
+  private let pendingStatusBoxHeight = 44.0
   @ObservedObject var observer: PendingStatusesObserver
   @State var proxy: ScrollViewProxy
   
   var body: some View {
-    if observer.pendingStatusesCount > 0 {
-      HStack(spacing: 6) {
+    if observer.pendingStatuses.count > 0 {
+      HStack {
         Spacer()
-        Button {
-          withAnimation {
-            proxy.scrollTo(observer.pendingStatuses.last, anchor: .bottom)
+        HStack {
+          Button {
+            withAnimation {
+              proxy.scrollTo(observer.pendingStatuses.last, anchor: .bottom)
+            }
+          } label: {
+            if observer.isExpanded {
+              ForEach(observer.pendingStatuses[0..<observer.getMaxAvatarCountRange()]) { status in
+                AvatarView(url: status.account.avatar, size: .badge)
+              }
+              if let moreCount = observer.getMoreCount() {
+                Text("+\(moreCount)")
+              }
+            } else {
+              Text("\(observer.pendingStatuses.count)")
+            }
           }
-        } label: {
-          Text("\(observer.pendingStatusesCount)")
+          Menu {
+            Button {
+              withAnimation {
+                observer.isExpanded.toggle()
+              }
+            } label: {
+              Label(observer.isExpanded ? "settings.pendingstatus.shrinked" : "settings.pendingstatus.expanded", systemImage: observer.isExpanded ? "number.circle" : "person.and.arrow.left.and.arrow.right")
+            }
+          } label: {
+            Image(systemName: "ellipsis")
+              .resizable()
+              .aspectRatio(contentMode: .fit)
+              .frame(width: 16, height: 16)
+              .rotationEffect(.degrees(90))
+          }
+          .foregroundColor(.gray)
+          .contentShape(Rectangle())
         }
-        .buttonStyle(.bordered)
-        .background(.thinMaterial)
-        .cornerRadius(8)
-      }
-      .padding(12)
+        .padding(8)
+        .background(.white)
+        .cornerRadius(pendingStatusBoxHeight / 2)
+        .frame(height: pendingStatusBoxHeight)
+        .shadow(radius: 5)
+      }.padding(4)
     }
   }
 }

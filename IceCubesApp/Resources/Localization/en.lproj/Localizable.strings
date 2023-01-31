@@ -132,7 +132,8 @@
 "settings.push.duplicate.footer" = "Receiving duplicate notifications? Try this magic button in order to fix it";
 "settings.push.duplicate.button.fix" = "🪄 Fix it";
 "settings.other.autoplay-video" = "Auto Play Videos";
-
+"settings.pendingstatus.expanded" = "Expanded";
+"settings.pendingstatus.shrinked" = "Shrinked";
 // MARK: Tabs
 "tab.explore" = "Explore";
 "tab.federated" = "Federated";
