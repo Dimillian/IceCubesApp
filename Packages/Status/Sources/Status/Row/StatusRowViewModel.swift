@@ -27,17 +27,28 @@ public class StatusRowViewModel: ObservableObject {
   @Published var translation: String?
   @Published var isLoadingTranslation: Bool = false
 
+  private var currentUserAccountId: String?
+
   var filter: Filtered? {
     status.reblog?.filtered?.first ?? status.filtered?.first
   }
 
   var client: Client?
 
+  var shouldHighlightRow: Bool {
+    guard let currentUserAccountId else { return false }
+
+    return status.mentions.first(where: {
+      $0.id == currentUserAccountId
+    }) != nil
+  }
+
   public init(status: Status,
               isCompact: Bool = false,
               isFocused: Bool = false,
               isRemote: Bool = false,
-              showActions: Bool = true)
+              showActions: Bool = true,
+              currentUserAccountId: String? = nil)
   {
     self.status = status
     self.isCompact = isCompact
@@ -61,6 +72,8 @@ public class StatusRowViewModel: ObservableObject {
     displaySpoiler = !(status.reblog?.spoilerText.asRawText ?? status.spoilerText.asRawText).isEmpty
 
     isFiltered = filter != nil
+
+    self.currentUserAccountId = currentUserAccountId
   }
 
   func navigateToDetail(routerPath: RouterPath) {

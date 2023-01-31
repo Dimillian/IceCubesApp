@@ -1,10 +1,12 @@
 import DesignSystem
+import Env
 import Models
 import Shimmer
 import SwiftUI
 
 public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
   @EnvironmentObject private var theme: Theme
+  @EnvironmentObject private var account: CurrentAccount
   
   @ObservedObject private var fetcher: Fetcher
   private let isRemote: Bool
@@ -20,7 +22,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
     switch fetcher.statusesState {
     case .loading:
       ForEach(Status.placeholders()) { status in
-        StatusRowView(viewModel: .init(status: status, isCompact: false))
+        StatusRowView(viewModel: .init(status: status, isCompact: false, currentUserAccountId: account.account?.id))
           .padding(.horizontal, isEmbdedInList ? 0 : .layoutPadding)
           .redacted(reason: .placeholder)
           .listRowBackground(theme.primaryBackgroundColor)
@@ -45,7 +47,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
 
     case let .display(statuses, nextPageState):
       ForEach(statuses, id: \.viewId) { status in
-        let viewModel = StatusRowViewModel(status: status, isCompact: false, isRemote: isRemote)
+        let viewModel = StatusRowViewModel(status: status, isCompact: false, isRemote: isRemote, currentUserAccountId: account.account?.id)
         if viewModel.filter?.filter.filterAction != .hide {
           StatusRowView(viewModel: viewModel)
             .padding(.horizontal, isEmbdedInList ? 0 : .layoutPadding)

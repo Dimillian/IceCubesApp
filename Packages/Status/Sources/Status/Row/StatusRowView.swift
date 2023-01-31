@@ -103,6 +103,7 @@ public struct StatusRowView: View {
 
         contextMenu
       }
+      .listRowBackground(viewModel.shouldHighlightRow ? theme.secondaryBackgroundColor : theme.primaryBackgroundColor)
       .background {
         Color.clear
           .contentShape(Rectangle())
