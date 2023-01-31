@@ -108,7 +108,7 @@
 "settings.timeline.add" = "添加远程时间线";
 "settings.title" = "设置";
 "settings.rate" = "给 Ice Cubes 评分";
-"settings.section.other" = "其它";
+"settings.section.other" = "其他";
 "settings.other.hide-openai" = "启用写作助手 🤖";
 "settings.other.social-keyboard" = "启用社交键盘";
 
@@ -229,7 +229,7 @@
 "explore.search.message-%@" = "在此界面上，你可以搜索 %@ 上的任何信息";
 "explore.search.prompt" = "搜索用户、嘟文或标签";
 "explore.search.title" = "搜索你的服务器";
-"explore.search.empty.message" = "搜索无结果，请尝试其它查询";
+"explore.search.empty.message" = "搜索无结果，请尝试其他查询";
 "explore.search.empty.title" = "无结果";
 "explore.section.posts" = "嘟文";
 "explore.section.suggested-users" = "推荐的用户";
