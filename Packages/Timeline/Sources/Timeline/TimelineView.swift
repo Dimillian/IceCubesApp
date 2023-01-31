@@ -19,8 +19,7 @@ public struct TimelineView: View {
   @EnvironmentObject private var routerPath: RouterPath
 
   @StateObject private var viewModel = TimelineViewModel()
-  @StateObject private var pendingStatusesObserver = PendingStatusesObserver()
-
+  
   @State private var scrollProxy: ScrollViewProxy?
   
   @Binding var timeline: TimelineFilter
@@ -64,7 +63,6 @@ public struct TimelineView: View {
     .navigationTitle(timeline.localizedTitle())
     .navigationBarTitleDisplayMode(.inline)
     .onAppear {
-      viewModel.pendingStatusesObserver = pendingStatusesObserver
       if viewModel.client == nil {
         viewModel.client = client
         viewModel.timeline = timeline
@@ -112,22 +110,7 @@ public struct TimelineView: View {
 
   @ViewBuilder
   private func makePendingNewPostsView(proxy: ScrollViewProxy) -> some View {
-    if pendingStatusesObserver.pendingStatusesCount > 0 {
-      HStack(spacing: 6) {
-        Spacer()
-        Button {
-          withAnimation {
-            proxy.scrollTo(pendingStatusesObserver.pendingStatuses.last, anchor: .bottom)
-          }
-        } label: {
-          Text("\(pendingStatusesObserver.pendingStatusesCount)")
-        }
-        .buttonStyle(.bordered)
-        .background(.thinMaterial)
-        .cornerRadius(8)
-      }
-      .padding(12)
-    }
+    PendingStatusesObserverView(observer: viewModel.pendingStatusesObserver, proxy: proxy)
   }
 
   @ViewBuilder
