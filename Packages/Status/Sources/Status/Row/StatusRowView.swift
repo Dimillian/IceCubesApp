@@ -140,7 +140,7 @@ public struct StatusRowView: View {
       HStack(spacing: 2) {
         Image(systemName: "arrow.left.arrow.right.circle.fill")
         AvatarView(url: viewModel.status.account.avatar, size: .boost)
-        if viewModel.status.account.username != account.account?.username {
+        if viewModel.status.account.url != account.account?.url {
           EmojiTextApp(.init(stringValue: viewModel.status.account.safeDisplayName), emojis: viewModel.status.account.emojis)
           Text("status.row.was-boosted")
         } else {
@@ -151,7 +151,7 @@ public struct StatusRowView: View {
       .accessibilityLabel(
         Text("\(viewModel.status.account.safeDisplayName)")
           + Text(" ")
-          + Text(viewModel.status.account.username != account.account?.username ? "status.row.was-boosted" : "status.row.you-boosted")
+          + Text(viewModel.status.account.url != account.account?.url ? "status.row.was-boosted" : "status.row.you-boosted")
       )
       .font(.scaledFootnote)
       .foregroundColor(.gray)
