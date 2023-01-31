@@ -1,7 +1,7 @@
 // MARK: Common strings
 "action.cancel" = "Annuleer";
 "action.delete" = "Verwijder";
-"action.save"  = "Opslaan";
+"action.save" = "Bewaar";
 "action.done" = "Gereed";
 "action.retry" = "Opnieuw";
 "action.view.error" = "Bekijk fout";
@@ -125,10 +125,10 @@
 "settings.push.duplicate.title" = "Dubbele meldingen";
 "settings.push.duplicate.footer" = "Ontvang je dubbele meldingen? Gebruik deze magische knop om dit probleem te verhelpen";
 "settings.push.duplicate.button.fix" = "🪄 Los op";
-"settings.other.autoplay-video" = "Auto Play Videos";
-"settings.display.font" = "Timeline Font";
-"settings.display.font.system" = "System";
-"settings.display.font.custom" = "Custom";
+"settings.other.autoplay-video" = "Speel video’s automatisch af";
+"settings.display.font" = "Tijdlijnlettertype";
+"settings.display.font.system" = "Systeem";
+"settings.display.font.custom" = "Aangepast";
 
 // MARK: Tabs
 "tab.explore" = "Ontdekken";
@@ -177,8 +177,8 @@
 "account.edit.account-settings.private" = "Privé";
 "account.edit.account-settings.section-title" = "Accountinstellingen";
 "account.edit.display-name" = "Weergavenaam";
-"account.edit.error.save.message" = "Er heeft zich een fout voorgedaan tijdens het opslaan van je profiel. Probeer het nogmaals";
-"account.edit.error.save.title" = "Fout tijdens het opslaan van je profiel";
+"account.edit.error.save.message" = "Er heeft zich een fout voorgedaan tijdens het bewaren van je profiel. Probeer het nogmaals";
+"account.edit.error.save.title" = "Fout tijdens het bewaren van je profiel";
 "account.edit.navigation-title" = "Profiel bewerken";
 "account.edit.post-settings.privacy" = "Standaardprivacy";
 "account.edit.post-settings.section-title" = "Postinstellingen";
@@ -260,12 +260,8 @@
 "notifications.empty.title" = "Geen notificaties";
 "notifications.error.message" = "Er heeft zich een fout voorgedaan tijdens het laden van je notificaties. Probeer het nogmaals.";
 "notifications.error.title" = "Er heeft zich een fout voorgedaan";
-"notifications.label.favorite %lld" = "heeft jouw bericht als favoriet gemarkeerd";
-"notifications.label.follow %lld" = "volgt jou";
 "notifications.label.follow-request" = "wil je volgen";
-"notifications.label.mention %lld" = "heeft jou vermeld";
 "notifications.label.poll" = "poll beëindigd";
-"notifications.label.reblog %lld" = "boostte";
 "notifications.label.status" = "nieuwe status";
 "notifications.label.update" = "wijzigde een post";
 "notifications.menu-title.favorite" = "Favoriet";
@@ -289,7 +285,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Vertaal";
-"status.action.translate-from-%@" = "Vertaal uit %@";
+"status.action.translate-from-%@" = "Vertaal uit het %@";
 "status.action.translated-label" = "Vertaald met behulp van DeepL.com";
 "status.action.bookmark" = "Voeg bladwijzer toe";
 "status.action.boost" = "Boosten";
@@ -310,8 +306,8 @@
 "status.action.unfavorite" = "Verwijder favoriet";
 "status.action.unpin" = "Maak los";
 "status.action.view-in-browser" = "Open in browser";
-"status.draft.delete" = "Concept verwijderen";
-"status.draft.save" = "Concept opslaan";
+"status.draft.delete" = "Verwijder concept";
+"status.draft.save" = "Bewaar concept";
 "status.editor.ai-prompt.correct" = "Corrigeer tekst";
 "status.editor.ai-prompt.emphasize" = "Benadruk tekst";
 "status.editor.ai-prompt.fit" = "Kort tekst in";

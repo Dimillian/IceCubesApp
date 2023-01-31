@@ -18,6 +18,7 @@
 			<string>%lld nouveaux posts</string>
 		</dict>
 	</dict>
+
 	<key>notifications-others-count %lld</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -50,6 +51,7 @@
 			<string>vous ont mentionné</string>
 		</dict>
 	</dict>
+
 	<key>notifications.label.follow %lld</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -66,6 +68,7 @@
 			<string>vous suivent</string>
 		</dict>
 	</dict>
+
 	<key>notifications.label.reblog %lld</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -82,6 +85,7 @@
 			<string>ont boosté</string>
 		</dict>
 	</dict>
+
 	<key>notifications.label.favorite %lld</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -98,5 +102,6 @@
 			<string>aiment</string>
 		</dict>
 	</dict>
+
 </dict>
 </plist>
