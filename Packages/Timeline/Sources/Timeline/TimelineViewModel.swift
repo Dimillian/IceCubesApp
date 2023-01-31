@@ -84,6 +84,9 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
           newStatuses = newStatuses.filter { status in
             !statuses.contains(where: { $0.id == status.id })
           }
+          
+          guard !newStatuses.isEmpty else { return }
+          
           pendingStatusesObserver.pendingStatuses.insert(contentsOf: newStatuses.map{ $0.id }, at: 0)
           pendingStatusesObserver.feedbackGenerator.impactOccurred()
           
