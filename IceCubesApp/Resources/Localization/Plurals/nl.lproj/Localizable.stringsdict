@@ -18,6 +18,7 @@
 			<string>%lld nieuwe posts</string>
 		</dict>
 	</dict>
+
 	<key>notifications-others-count %lld</key>
     <dict>
         <key>NSStringLocalizedFormatKey</key>
@@ -34,5 +35,73 @@
             <string> en %lld anderen </string>
         </dict>
     </dict>
+	<key>notifications.label.mention %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>heeft jou vermeld</string>
+			<key>other</key>
+			<string>hebben jou vermeld</string>
+		</dict>
+	</dict>
+
+	<key>notifications.label.follow %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>volgt jou</string>
+			<key>other</key>
+			<string>volgen jou</string>
+		</dict>
+	</dict>
+
+	<key>notifications.label.reblog %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>boostte</string>
+			<key>other</key>
+			<string>boostten</string>
+		</dict>
+	</dict>
+
+	<key>notifications.label.favorite %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>markeerde jouw bericht als favoriet</string>
+			<key>other</key>
+			<string>markeerden jouw bericht als favoriet</string>
+		</dict>
+	</dict>
+
 </dict>
 </plist>
