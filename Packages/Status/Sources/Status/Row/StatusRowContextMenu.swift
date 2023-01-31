@@ -77,7 +77,7 @@ struct StatusRowContextMenu: View {
       Label("status.action.copy-text", systemImage: "doc.on.doc")
     }
 
-    if let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier,
+    if let lang = Locale.current.language.languageCode?.identifier ?? preferences.serverPreferences?.postLanguage,
        viewModel.status.language != lang
     {
       Button {
@@ -88,7 +88,7 @@ struct StatusRowContextMenu: View {
         if let statusLanguage = viewModel.status.language,
            let languageName = Locale.current.localizedString(forLanguageCode: statusLanguage)
         {
-          Label("status.action.translate-from-\(languageName)", systemImage: "captions.bubble")
+          Label("status.action.translate-to-\(languageName)", systemImage: "captions.bubble")
         } else {
           Label("status.action.translate", systemImage: "captions.bubble")
         }

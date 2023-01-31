@@ -292,7 +292,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Przetłumacz";
-"status.action.translate-from-%@" = "Przetłumacz z %@";
+"status.action.translate-to-%@" = "Przetłumacz na %@";
 "status.action.translated-label" = "Przetłumaczono za pomocą DeepL.com";
 "status.action.bookmark" = "Dodaj zakładkę";
 "status.action.boost" = "Podbij";

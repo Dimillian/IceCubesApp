@@ -290,7 +290,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Tradueix";
-"status.action.translate-from-%@" = "Translate from %@";
+"status.action.translate-to-%@" = "Translate to %@";
 "status.action.translated-label" = "Traduït amb DeepL.com";
 "status.action.bookmark" = "Afegeix als marcadors";
 "status.action.boost" = "Impulsa";

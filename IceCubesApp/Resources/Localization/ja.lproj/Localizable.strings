@@ -291,7 +291,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "翻訳";
-"status.action.translate-from-%@" = "翻訳 %@";
+"status.action.translate-to-%@" = "翻訳 %@";
 "status.action.translated-label" = "DeepL.comを使用して翻訳";
 "status.action.bookmark" = "ブックマーク";
 "status.action.boost" = "ブースト";

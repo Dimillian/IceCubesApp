@@ -322,7 +322,7 @@ public struct StatusRowView: View {
           if let statusLanguage = status.language,
              let languageName = Locale.current.localizedString(forLanguageCode: statusLanguage)
           {
-            Text("status.action.translate-from-\(languageName)")
+            Text("status.action.translate-to-\(languageName)")
           } else {
             Text("status.action.translate")
           }
