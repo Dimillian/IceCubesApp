@@ -200,7 +200,9 @@ public class StatusEditorViewModel: ObservableObject {
         }
         mentionString += "@\(mention.acct)"
       }
-      mentionString += " "
+      if !mentionString.isEmpty {
+          mentionString += " "
+      }
       replyToStatus = status
       visibility = status.visibility
       statusText = .init(string: mentionString)

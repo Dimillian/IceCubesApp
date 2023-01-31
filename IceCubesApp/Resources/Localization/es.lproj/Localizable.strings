@@ -35,7 +35,7 @@
 "instance.info.email" = "Email";
 "instance.info.name" = "Nombre";
 "instance.info.navigation-title" = "Información de la instancia";
-"instance.info.posts" = "Posts";
+"instance.info.posts" = "Publicaciones";
 "instance.info.section.info" = "Información de la instancia";
 "instance.info.section.rules" = "Reglas de la instancia";
 "instance.info.users" = "Usuarios";
@@ -46,10 +46,10 @@
 "instance.url" = "URL de la instancia";
 
 // MARK: Menu
-"menu.new-post" = "New post";
-"menu.font" = "Font";
-"menu.font.bigger" = "Bigger";
-"menu.font.smaller" = "Smaller";
+"menu.new-post" = "Publicación nueva";
+"menu.font" = "Fuente";
+"menu.font.bigger" = "Más grande";
+"menu.font.smaller" = "Más pequña";
 
 // MARK: Settings
 "settings.account.add" = "Añadir cuenta";
@@ -63,7 +63,7 @@
 "settings.display.restore" = "Restaurar ajustes predeterminados";
 "settings.display.section.display" = "Apariencia";
 "settings.display.section.theme" = "Tema";
-"settings.display.section.theme.footer" = "Custom colors can only be set if match system color scheme is disabled";
+"settings.display.section.theme.footer" = "Solo se pueden usar los colores personalizados si la opción de 'sistema de coincidencia' está desactivada";
 "settings.display.status.action-buttons" = "Botones de acción";
 "settings.display.status.media-style" = "Estilo del contenido multimedia";
 "settings.display.translate-button" = "Mostrar botón para traducir";
@@ -127,10 +127,10 @@
 "settings.push.duplicate.title" = "Arreglar notificaciones duplicadas";
 "settings.push.duplicate.footer" = "¿Recibes notificaciones por duplicado? Usa este botón mágico para arreglarlo";
 "settings.push.duplicate.button.fix" = "🪄 Arréglalo";
-"settings.other.autoplay-video" = "Auto Play Videos";
+"settings.other.autoplay-video" = "Tocar vídeos automáticamente";
 "settings.display.font" = "Timeline Font";
-"settings.display.font.system" = "System";
-"settings.display.font.custom" = "Custom";
+"settings.display.font.system" = "De sistema";
+"settings.display.font.custom" = "Personalizada";
 
 "enum.expand-media.show" = "Siempre";
 "enum.expand-media.hide" = "Nunca";
@@ -141,7 +141,7 @@
 "tab.federated" = "Federado";
 "tab.local" = "Local";
 "tab.messages" = "Mensajes";
-"tab.notifications" = "Notificationes";
+"tab.notifications" = "Notificaciones";
 "tab.settings" = "Ajustes";
 "tab.timeline" = "Cronología";
 "tab.trending" = "Tendencias";
@@ -164,10 +164,10 @@
 "account.action.edit-info" = "Editar información";
 "account.action.mention" = "Mencionar";
 "account.action.message" = "Enviar mensaje";
-"account.action.notify-enable" = "Enable Notifications";
-"account.action.notify-disable" = "Disable Notifications";
-"account.action.reboosts-show" = "Show Boosts";
-"account.action.reboosts-hide" = "Hide Boosts";
+"account.action.notify-enable" = "Activar notificaciones";
+"account.action.notify-disable" = "Desactivar notificaiones";
+"account.action.reboosts-show" = "Mostrar retoots";
+"account.action.reboosts-hide" = "Esconder retoots";
 "account.action.block" = "Bloquear";
 "account.action.unblock" = "Desbloquear";
 "account.action.mute" = "Silenciar";
@@ -193,10 +193,10 @@
 "account.follow.follow" = "Seguir";
 "account.follow.following" = "Siguiendo";
 "account.follow.requested" = "Solicitado";
-"account.follow-request.accept" = "Accept";
-"account.follow-request.reject" = "Reject";
-"account.follow-requests.pending-requests" = "Pending requests";
-"account.follow-requests.instructions" = "Those users won't see your posts until you accept them.";
+"account.follow-request.accept" = "Aprobar";
+"account.follow-request.reject" = "Rechazar";
+"account.follow-requests.pending-requests" = "Solicitudes pendientes";
+"account.follow-requests.instructions" = "Esos usuarios no verán tus publicaciones hasta que los apruebes.";
 "account.followers" = "Seguidores";
 "account.following" = "Siguiendo";
 "account.list.create" = "Crear una lista nueva";
@@ -213,13 +213,13 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Borrar";
 "conversations.action.mark-read" = "Marcar como leído";
-"conversations.empty.message" = "¿Buscas algo de amor de redes sociales? Encontrarás todos tus mensages directos y menciones privadas justo aquí. ¡Disfruta! 📱❤️";
+"conversations.empty.message" = "¿Buscas algo de amor de redes sociales? Encontrarás todos tus mensajes directos y menciones privadas justo aquí. ¡Disfruta! 📱❤️";
 "conversations.empty.title" = "No tienes mensajes";
 "conversations.error.button" = "Reintentar";
 "conversations.error.message" = "Error cargando tus mensajes";
 "conversations.error.title" = "Ha ocurrido un error";
 "conversations.navigation-title" = "Mensajes directos";
-"conversations.new.message.placeholder" = "New Message";
+"conversations.new.message.placeholder" = "Mensajes nuevos";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld publicaciones de %lld participantes";
@@ -281,7 +281,7 @@
 "notifications.menu-title.reblog" = "Retoots";
 "notifications.menu-title.status" = "Publicaciones";
 "notifications.menu-title.update" = "Publicaciones editadas";
-"notifications.navigation-title" = "Todas las notificationes";
+"notifications.navigation-title" = "Todas las notificaciones";
 "notifications.tab.all" = "Todo";
 "notifications.tab.mentions" = "Menciones";
 
@@ -325,7 +325,7 @@
 "status.editor.drafts.navigation-title" = "Borradores";
 "status.editor.error.upload" = "Error subiendo";
 "status.editor.language-select.navigation-title" = "Seleccionar idioma";
-"status.editor.language-select.recently-used" = "Recently Used";
+"status.editor.language-select.recently-used" = "Usado recientemente";
 "status.editor.media.edit-image" = "Editar Imagen";
 "status.editor.media.image-description" = "Descripción de la imagen";
 "status.editor.mode.edit" = "Editando tu publicación";
