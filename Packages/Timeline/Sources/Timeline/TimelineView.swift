@@ -48,6 +48,7 @@ public struct TimelineView: View {
             StatusesListView(fetcher: viewModel)
           }
         }
+        .id(account.account?.id)
         .environment(\.defaultMinListRowHeight, 1)
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
