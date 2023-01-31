@@ -23,7 +23,6 @@ class NotificationsViewModel: ObservableObject {
   var client: Client? {
     didSet {
       if oldValue != client {
-        notifications = []
         consolidatedNotifications = []
       }
     }
@@ -33,7 +32,6 @@ class NotificationsViewModel: ObservableObject {
   @Published var selectedType: Models.Notification.NotificationType? {
     didSet {
       if oldValue != selectedType {
-        notifications = []
         consolidatedNotifications = []
         Task {
           await fetchNotifications()
@@ -51,7 +49,6 @@ class NotificationsViewModel: ObservableObject {
     return nil
   }
 
-  private var notifications: [Models.Notification] = []
   private var consolidatedNotifications: [ConsolidatedNotification] = []
 
   func fetchNotifications() async {
@@ -64,7 +61,6 @@ class NotificationsViewModel: ObservableObject {
           try await client.get(endpoint: Notifications.notifications(sinceId: nil,
                                                                      maxId: nil,
                                                                      types: queryTypes))
-        self.notifications = notifications
         consolidatedNotifications = notifications.consolidated(selectedType: selectedType)
         nextPageState = notifications.count < 15 ? .none : .hasNextPage
       } else if let first = consolidatedNotifications.first {
@@ -76,7 +72,6 @@ class NotificationsViewModel: ObservableObject {
         newNotifications = newNotifications.filter { notification in
           !consolidatedNotifications.contains(where: { $0.id == notification.id })
         }
-        notifications.append(contentsOf: newNotifications)
         consolidatedNotifications.insert(
           contentsOf: newNotifications.consolidated(selectedType: selectedType),
           at: 0
@@ -101,7 +96,6 @@ class NotificationsViewModel: ObservableObject {
                                                                    maxId: lastId,
                                                                    types: queryTypes))
       consolidatedNotifications.append(contentsOf: newNotifications.consolidated(selectedType: selectedType))
-      notifications.append(contentsOf: newNotifications)
       state = .display(notifications: consolidatedNotifications, nextPageState: newNotifications.count < 15 ? .none : .hasNextPage)
     } catch {
       state = .error(error: error)
@@ -117,83 +111,33 @@ class NotificationsViewModel: ObservableObject {
 
   func handleEvent(event: any StreamEvent) {
     Task {
+      // Check if the event is a notification,
+      // if it is not already in the list,
+      // and if it can be shown (no selected type or the same as the received notification type)
       if let event = event as? StreamEventNotification,
-         !consolidatedNotifications.contains(where: { $0.id == event.notification.id })
+         !consolidatedNotifications.flatMap(\.notificationIds).contains(event.notification.id),
+         selectedType == nil || selectedType?.rawValue == event.notification.type
       {
-        if let selectedType, event.notification.type == selectedType.rawValue {
-          notifications.insert(event.notification, at: 0)
-          consolidatedNotifications = notifications.consolidated(selectedType: selectedType)
-        } else if selectedType == nil {
-          notifications.insert(event.notification, at: 0)
-          consolidatedNotifications = notifications.consolidated(selectedType: selectedType)
+        if event.notification.isConsolidable(selectedType: selectedType) {
+          // If the notification type can be consolidated, try to consolidate with the latest row
+          let latestConsolidatedNotification = consolidatedNotifications.removeFirst()
+          consolidatedNotifications.insert(
+            contentsOf: ([event.notification] + latestConsolidatedNotification.notifications)
+              .consolidated(selectedType: selectedType),
+            at: 0
+          )
+        } else {
+          // Otherwise, just insert the new notification
+          consolidatedNotifications.insert(
+            contentsOf: [event.notification].consolidated(selectedType: selectedType),
+            at: 0
+          )
         }
+
         withAnimation {
           state = .display(notifications: consolidatedNotifications, nextPageState: .hasNextPage)
         }
       }
     }
-  }
-}
-
-struct ConsolidatedNotification: Identifiable {
-  let notificationIds: [String]
-  let type: Models.Notification.NotificationType
-  let createdAt: ServerDate
-  let accounts: [Account]
-  let status: Status?
-
-  var id: String? { notificationIds.first }
-
-  static func placeholder() -> ConsolidatedNotification {
-    .init(notificationIds: [UUID().uuidString],
-          type: .favourite,
-          createdAt: "2022-12-16T10:20:54.000Z",
-          accounts: [.placeholder()],
-          status: .placeholder())
-  }
-
-  static func placeholders() -> [ConsolidatedNotification] {
-    [.placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder()]
-  }
-}
-
-extension Array where Element == Models.Notification {
-  func consolidated(selectedType: Models.Notification.NotificationType?) -> [ConsolidatedNotification] {
-    Dictionary(grouping: self) { notification -> String? in
-      guard let supportedType = notification.supportedType else { return nil }
-
-      switch supportedType {
-      case .follow where selectedType != .follow:
-        // Always group followers
-        return supportedType.rawValue
-      case .reblog, .favourite:
-        // Group boosts and favourites by status
-        return "\(supportedType.rawValue)-\(notification.status?.id ?? "")"
-      default:
-        // Never group remaining ones
-        return notification.id
-      }
-    }
-    .values
-    .compactMap { notifications in
-      guard let notification = notifications.first,
-            let supportedType = notification.supportedType
-      else { return nil }
-
-      return ConsolidatedNotification(notificationIds: notifications.map(\.id),
-                                      type: supportedType,
-                                      createdAt: notification.createdAt,
-                                      accounts: notifications.map(\.account),
-                                      status: notification.status)
-    }
-    .sorted {
-      $0.createdAt > $1.createdAt
-    }
-  }
-}
-
-extension Array where Element == ConsolidatedNotification {
-  var notificationCount: Int {
-    reduce(0) { $0 + ($1.accounts.isEmpty ? 1 : $1.accounts.count) }
   }
 }
