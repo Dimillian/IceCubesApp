@@ -185,6 +185,7 @@
 "account.action.unblock" = "Unblock";
 "account.action.mute" = "Mute";
 "account.action.unmute" = "Unmute";
+"account.action.share" = "Share this account";
 "account.boosted-by" = "Boosted by";
 "account.detail.about" = "About";
 "account.detail.familiar-followers" = "Also followed by";
@@ -330,6 +331,8 @@
 "status.action.unfavorite" = "Unfavorite";
 "status.action.unpin" = "Unpin";
 "status.action.view-in-browser" = "View in Browser";
+"status.card.share" = "Share this link";
+"status.card.copy" = "Copy this link";
 "status.draft.delete" = "Delete Draft";
 "status.draft.save" = "Save Draft";
 "status.editor.ai-prompt.correct" = "Correct text";
