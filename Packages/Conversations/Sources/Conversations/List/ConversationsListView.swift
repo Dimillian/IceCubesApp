@@ -67,7 +67,6 @@ public struct ConversationsListView: View {
             }
           }
         }
-        .frame(maxWidth: .maxColumnWidth)
       }
       .padding(.top, .layoutPadding)
     }

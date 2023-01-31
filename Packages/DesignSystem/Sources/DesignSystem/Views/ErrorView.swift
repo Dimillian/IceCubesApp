@@ -14,27 +14,31 @@ public struct ErrorView: View {
   }
 
   public var body: some View {
-    VStack {
-      Image(systemName: "exclamationmark.triangle.fill")
-        .resizable()
-        .aspectRatio(contentMode: .fit)
-        .frame(maxHeight: 50)
-      Text(title)
-        .font(.scaledTitle)
+    HStack {
+      Spacer()
+      VStack {
+        Image(systemName: "exclamationmark.triangle.fill")
+          .resizable()
+          .aspectRatio(contentMode: .fit)
+          .frame(maxHeight: 50)
+        Text(title)
+          .font(.scaledTitle)
+          .padding(.top, 16)
+        Text(message)
+          .font(.scaledSubheadline)
+          .multilineTextAlignment(.center)
+          .foregroundColor(.gray)
+        Button {
+          onButtonPress()
+        } label: {
+          Text(buttonTitle)
+        }
+        .buttonStyle(.bordered)
         .padding(.top, 16)
-      Text(message)
-        .font(.scaledSubheadline)
-        .multilineTextAlignment(.center)
-        .foregroundColor(.gray)
-      Button {
-        onButtonPress()
-      } label: {
-        Text(buttonTitle)
       }
-      .buttonStyle(.bordered)
-      .padding(.top, 16)
+      .padding(.top, 100)
+      .padding(.layoutPadding)
+      Spacer()
     }
-    .padding(.top, 100)
-    .padding(.layoutPadding)
   }
 }

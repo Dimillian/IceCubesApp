@@ -42,6 +42,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
         }
       }
       .listRowBackground(theme.primaryBackgroundColor)
+      .listRowSeparator(.hidden)
 
     case let .display(statuses, nextPageState):
       ForEach(statuses, id: \.viewId) { status in
