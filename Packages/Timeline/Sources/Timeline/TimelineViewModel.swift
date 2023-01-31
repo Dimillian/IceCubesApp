@@ -16,6 +16,8 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
 
   // Internal source of truth for a timeline.
   private var statuses: [Status] = []
+  
+  var pendingStatusesObserver: PendingStatusesObserver?
 
   @Published var statusesState: StatusesState = .loading
   @Published var timeline: TimelineFilter = .federated {
@@ -23,7 +25,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
       Task {
         if oldValue != timeline {
           statuses = []
-          pendingStatuses = []
+          pendingStatusesObserver?.pendingStatuses = []
           tag = nil
         }
         await fetchStatuses(userIntent: false)
@@ -38,11 +40,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
   }
 
   @Published var tag: Tag?
-  @Published var pendingStatuses: [Status] = []
-
-  var pendingStatusesButtonTitle: LocalizedStringKey {
-    "\(pendingStatuses.count)"
-  }
+  @Published var pendingStatusesCount: Int = 0
 
   var pendingStatusesEnabled: Bool {
     timeline == .home
@@ -60,7 +58,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
     guard let client else { return }
     do {
       if statuses.isEmpty {
-        pendingStatuses = []
+        pendingStatusesObserver?.pendingStatuses = []
         statusesState = .loading
         statuses = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
                                                                     maxId: nil,
@@ -69,11 +67,11 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
         withAnimation {
           statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
         }
-      } else if let first = pendingStatuses.first ?? statuses.first {
+      } else if let first = statuses.first {
         var newStatuses: [Status] = await fetchNewPages(minId: first.id, maxPages: 20)
         if userIntent || !pendingStatusesEnabled {
-          statuses.insert(contentsOf: pendingStatuses, at: 0)
-          pendingStatuses = []
+          statuses.insert(contentsOf: newStatuses, at: 0)
+          pendingStatusesObserver?.pendingStatuses = []
           withAnimation {
             statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
           }
@@ -81,7 +79,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
           newStatuses = newStatuses.filter { status in
             !statuses.contains(where: { $0.id == status.id })
           }
-          pendingStatuses.insert(contentsOf: newStatuses, at: 0)
+          pendingStatusesObserver?.pendingStatuses.insert(contentsOf: newStatuses.map{ $0.id }, at: 0)
           statuses.insert(contentsOf: newStatuses, at: 0)
           withAnimation {
             statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
@@ -145,7 +143,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
        pendingStatusesEnabled,
        !statuses.contains(where: { $0.id == event.status.id })
     {
-      pendingStatuses.insert(event.status, at: 0)
+      pendingStatusesObserver?.pendingStatuses.insert(event.status.id, at: 0)
       statuses.insert(event.status, at: 0)
       withAnimation {
         statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
@@ -163,9 +161,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
     }
   }
 
-  func statusDidAppear(status: Status) async {
-    if let index = pendingStatuses.firstIndex(of: status) {
-      pendingStatuses.remove(at: index)
-    }
+  func statusDidAppear(status: Status) {
+    pendingStatusesObserver?.removeStatus(status: status)
   }
 }

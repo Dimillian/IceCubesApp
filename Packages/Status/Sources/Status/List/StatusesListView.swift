@@ -56,9 +56,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
                                  bottom: 12,
                                  trailing: .layoutPadding))
             .onAppear {
-              Task {
-                await fetcher.statusDidAppear(status: status)
-              }
+              fetcher.statusDidAppear(status: status)
             }
           if !isEmbdedInList {
             Divider()

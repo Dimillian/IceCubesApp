@@ -247,7 +247,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
     }
   }
   
-  func statusDidAppear(status: Models.Status) async {
+  func statusDidAppear(status: Models.Status)  {
     
   }
 }
