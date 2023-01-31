@@ -17,4 +17,5 @@ public protocol StatusesFetcher: ObservableObject {
   func fetchStatuses() async
   func fetchNextPage() async
   func statusDidAppear(status: Status)
+  func statusDidDisappear(status: Status)
 }

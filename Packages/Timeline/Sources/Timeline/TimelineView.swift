@@ -20,7 +20,6 @@ public struct TimelineView: View {
 
   @StateObject private var viewModel = TimelineViewModel()
   
-  @State private var scrollProxy: ScrollViewProxy?
   @State private var wasBackgrounded: Bool = false
   
   @Binding var timeline: TimelineFilter
@@ -58,7 +57,7 @@ public struct TimelineView: View {
         }
       }
       .onAppear {
-        scrollProxy = proxy
+        viewModel.scrollProxy = proxy
       }
     }
     .navigationTitle(timeline.localizedTitle())
@@ -85,7 +84,7 @@ public struct TimelineView: View {
     }
     .onChange(of: scrollToTopSignal, perform: { _ in
       withAnimation {
-        scrollProxy?.scrollTo(Constants.scrollToTop, anchor: .top)
+        viewModel.scrollProxy?.scrollTo(Constants.scrollToTop, anchor: .top)
       }
     })
     .onChange(of: timeline) { newTimeline in

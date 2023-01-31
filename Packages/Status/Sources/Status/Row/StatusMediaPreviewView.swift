@@ -199,6 +199,7 @@ public struct StatusMediaPreviewView: View {
             Text("status.image.alt-text.abbreviation")
               .font(theme.statusDisplayStyle == .compact ? .footnote : .body)
           }
+          .buttonStyle(.borderless)
           .padding(4)
           .background(.thinMaterial)
           .cornerRadius(4)
@@ -242,6 +243,7 @@ public struct StatusMediaPreviewView: View {
                   Text("status.image.alt-text.abbreviation")
                     .font(.scaledFootnote)
                 }
+                .buttonStyle(.borderless)
                 .padding(4)
                 .background(.thinMaterial)
                 .cornerRadius(4)
@@ -287,6 +289,7 @@ public struct StatusMediaPreviewView: View {
   private var sensitiveMediaOverlay: some View {
     ZStack {
       Rectangle()
+        .foregroundColor(.clear)
         .background(.ultraThinMaterial)
       if !isNotifications {
         Button {
@@ -294,11 +297,14 @@ public struct StatusMediaPreviewView: View {
             isHidingMedia = false
           }
         } label: {
-          if sensitive {
-            Label("status.media.sensitive.show", systemImage: "eye")
-          } else {
-            Label("status.media.content.show", systemImage: "eye")
+          Group {
+            if sensitive {
+              Label("status.media.sensitive.show", systemImage: "eye")
+            } else {
+              Label("status.media.content.show", systemImage: "eye")
+            }
           }
+          .foregroundColor(theme.labelColor)
         }
         .buttonStyle(.borderedProminent)
       }

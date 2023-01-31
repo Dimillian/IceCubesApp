@@ -4,7 +4,11 @@ import Models
 
 @MainActor
 class PendingStatusesObserver: ObservableObject {
+  let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+  
   @Published var pendingStatusesCount: Int = 0
+  
+  var disableUpdate: Bool = false
   
   var pendingStatuses: [String] = [] {
     didSet {
@@ -13,8 +17,9 @@ class PendingStatusesObserver: ObservableObject {
   }
   
   func removeStatus(status: Status) {
-    if let index = pendingStatuses.firstIndex(of: status.id) {
+    if !disableUpdate, let index = pendingStatuses.firstIndex(of: status.id) {
       pendingStatuses.removeSubrange(index...(pendingStatuses.count - 1))
+      feedbackGenerator.impactOccurred()
     }
   }
   
