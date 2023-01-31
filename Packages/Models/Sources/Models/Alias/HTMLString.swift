@@ -27,6 +27,16 @@ public struct HTMLString: Decodable, Equatable, Hashable {
       htmlValue = regex.stringByReplacingMatches(in: htmlValue, options: [], range: NSRange(location: 0, length: htmlValue.count), withTemplate: "\\\\$1")
     }
 
+    // match intended mastodon presentation
+    // strip out <span="invisible">blah</span>
+    // append ellipsis to <span="ellipsis">blah</span>
+    if let regex = try? NSRegularExpression(pattern: "(<span class=\"invisible\">.*?</span>)", options: .caseInsensitive) {
+      htmlValue = regex.stringByReplacingMatches(in: htmlValue, options: [], range: NSRange(location: 0, length: htmlValue.count), withTemplate: "")
+    }
+    if let regex = try? NSRegularExpression(pattern: "(<span class=\"ellipsis\">(.*?)</span>)", options: .caseInsensitive) {
+      htmlValue = regex.stringByReplacingMatches(in: htmlValue, options: [], range: NSRange(location: 0, length: htmlValue.count), withTemplate: "$2…")
+    }
+    
     do {
       asMarkdown = try HTMLParser().parse(html: htmlValue)
         .toMarkdown()
