@@ -42,6 +42,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
         }
       }
       .listRowBackground(theme.primaryBackgroundColor)
+      .listRowSeparator(.hidden)
 
     case let .display(statuses, nextPageState):
       ForEach(statuses, id: \.viewId) { status in
@@ -56,9 +57,10 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
                                  bottom: 12,
                                  trailing: .layoutPadding))
             .onAppear {
-              Task {
-                await fetcher.statusDidAppear(status: status)
-              }
+              fetcher.statusDidAppear(status: status)
+            }
+            .onDisappear {
+              fetcher.statusDidDisappear(status: status)
             }
           if !isEmbdedInList {
             Divider()

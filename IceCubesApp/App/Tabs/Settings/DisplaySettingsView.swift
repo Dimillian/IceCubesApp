@@ -71,12 +71,10 @@ struct DisplaySettingsView: View {
             Text(buttonStyle.description).tag(buttonStyle)
           }
         }
-        if ProcessInfo.processInfo.isiOSAppOnMac {
-          VStack {
-            Slider(value: $userPreferences.fontSizeScale, in: 0.5 ... 1.5, step: 0.1)
-            Text("Font scaling: \(String(format: "%.1f", userPreferences.fontSizeScale))")
-              .font(.scaledBody)
-          }
+        VStack {
+          Slider(value: $userPreferences.fontSizeScale, in: 0.5 ... 1.5, step: 0.1)
+          Text("Font scaling: \(String(format: "%.1f", userPreferences.fontSizeScale))")
+            .font(.scaledBody)
         }
         Toggle("settings.display.translate-button", isOn: $userPreferences.showTranslateButton)
       }

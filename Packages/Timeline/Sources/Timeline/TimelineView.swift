@@ -19,8 +19,9 @@ public struct TimelineView: View {
   @EnvironmentObject private var routerPath: RouterPath
 
   @StateObject private var viewModel = TimelineViewModel()
-
-  @State private var scrollProxy: ScrollViewProxy?
+  
+  @State private var wasBackgrounded: Bool = false
+  
   @Binding var timeline: TimelineFilter
   @Binding var scrollToTopSignal: Int
 
@@ -47,6 +48,7 @@ public struct TimelineView: View {
             StatusesListView(fetcher: viewModel)
           }
         }
+        .id(account.account?.id)
         .environment(\.defaultMinListRowHeight, 1)
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
@@ -56,7 +58,7 @@ public struct TimelineView: View {
         }
       }
       .onAppear {
-        scrollProxy = proxy
+        viewModel.scrollProxy = proxy
       }
     }
     .navigationTitle(timeline.localizedTitle())
@@ -65,11 +67,15 @@ public struct TimelineView: View {
       if viewModel.client == nil {
         viewModel.client = client
         viewModel.timeline = timeline
+      } else {
+        Task {
+          await viewModel.fetchStatuses()
+        }
       }
     }
     .refreshable {
       feedbackGenerator.impactOccurred(intensity: 0.3)
-      await viewModel.fetchStatuses(userIntent: true)
+      await viewModel.fetchStatuses()
       feedbackGenerator.impactOccurred(intensity: 0.7)
     }
     .onChange(of: watcher.latestEvent?.id) { _ in
@@ -79,7 +85,7 @@ public struct TimelineView: View {
     }
     .onChange(of: scrollToTopSignal, perform: { _ in
       withAnimation {
-        scrollProxy?.scrollTo(Constants.scrollToTop, anchor: .top)
+        viewModel.scrollProxy?.scrollTo(Constants.scrollToTop, anchor: .top)
       }
     })
     .onChange(of: timeline) { newTimeline in
@@ -94,9 +100,15 @@ public struct TimelineView: View {
     .onChange(of: scenePhase, perform: { scenePhase in
       switch scenePhase {
       case .active:
-        Task {
-          await viewModel.fetchStatuses(userIntent: false)
+        if wasBackgrounded {
+          wasBackgrounded = false
+          Task {
+            await viewModel.fetchStatuses()
+          }
         }
+      case .background:
+        wasBackgrounded = true
+        
       default:
         break
       }
@@ -105,22 +117,7 @@ public struct TimelineView: View {
 
   @ViewBuilder
   private func makePendingNewPostsView(proxy: ScrollViewProxy) -> some View {
-    if !viewModel.pendingStatuses.isEmpty {
-      HStack(spacing: 6) {
-        Spacer()
-        Button {
-          withAnimation {
-            proxy.scrollTo(viewModel.pendingStatuses.last?.id, anchor: .bottom)
-          }
-        } label: {
-          Text(viewModel.pendingStatusesButtonTitle)
-        }
-        .buttonStyle(.bordered)
-        .background(.thinMaterial)
-        .cornerRadius(8)
-      }
-      .padding(12)
-    }
+    PendingStatusesObserverView(observer: viewModel.pendingStatusesObserver, proxy: proxy)
   }
 
   @ViewBuilder

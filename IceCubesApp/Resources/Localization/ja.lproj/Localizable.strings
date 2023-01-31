@@ -20,10 +20,10 @@
 "account.add.sign-in" = "サインイン";
 
 // MARK: Enums
-"enum.avatar-position.leading" = "先頭";
-"enum.avatar-position.top" = "テキストの上";
-"enum.avatar-shape.circle" = "円";
-"enum.avatar-shape.rounded" = "角丸";
+"enum.avatar-position.leading" = "リード";
+"enum.avatar-position.top" = "トップ";
+"enum.avatar-shape.circle" = "サークル";
+"enum.avatar-shape.rounded" = "ラウンド";
 "enum.status-actions-display.all" = "すべて表示";
 "enum.status-actions-display.no-buttons" = "ボタン無し";
 "enum.status-actions-display.only-buttons" = "ボタンのみ";
@@ -67,11 +67,11 @@
 "settings.display.section.display" = "表示";
 "settings.display.section.theme" = "テーマ";
 "settings.display.section.theme.footer" = "カスタムカラーはシステム配色との一致が無効の場合のみ設定可能です";
-"settings.display.status.action-buttons" = "ステータスアクションボタン";
-"settings.display.status.media-style" = "画像のスタイル";
+"settings.display.status.action-buttons" = "アクションボタン";
+"settings.display.status.media-style" = "メディアスタイル";
 "settings.display.translate-button" = "翻訳ボタンの表示";
-"settings.display.theme.background" = "背景色";
-"settings.display.theme.secondary-background" = "セカンダリー背景色";
+"settings.display.theme.background" = "バックグラウンドカラー";
+"settings.display.theme.secondary-background" = "アクセントカラー";
 "settings.display.theme.tint" = "色合い";
 "settings.display.theme.systemColor" = "システムに合わせる";
 "settings.general.browser" = "ブラウザ";
@@ -113,7 +113,7 @@
 "settings.support.alert.error.message" = "アプリ内課金の処理に失敗しました、もう一度試してください";
 "settings.support.alert.message" = "チップをありがとう、あなたに感謝します！";
 "settings.support.alert.title" = "ありがとうございます!";
-"settings.support.message-from-dev" = "こんにちは。私はオープンソースのアプリを作るのが大好きなThomasです。Ice Cubesは、私の最も得意とするプロジェクトの一つであり、また、マストドンやソーシャルメディアが常に変化しているため、最もメンテナンスが必要なプロジェクトでもあります。もし、あなたがIce Cubesを楽しんで使っているなら、私宛にちょっとしたチップを投げ入れてください。そうすれば、アプリを円滑に運営することができます。🚀";
+"settings.support.message-from-dev" = "こんにちは。オープンソースのアプリを作るのが大好きなThomasです。Ice Cubesは、私の最も得意とするプロジェクトの1つではありますが、Mastodonやソーシャルメディアが常に変化しているため、多くのメンテナンスが必要なプロジェクトでもあります。もし、あなたがIce Cubesを楽しんでいるなら、私宛にちょっとしたチップを投げ入れてください。アプリを円滑に運営することができます。🚀";
 "settings.support.navigation-title" = "Ice Cubesを支援する";
 "settings.support.one.subtitle" = "小さいけど、かわいいし、味も美味しい！";
 "settings.support.one.title" = "🍬 心ばかりのチップ";
@@ -332,7 +332,7 @@
 "status.editor.mode.quote-%@" = "%@ を引用する";
 "status.editor.mode.reply-%@" = "%@ に返信する";
 "status.editor.restore-previous" = "前のテキストに戻す";
-"status.editor.spoiler" = "警告文";
+"status.editor.spoiler" = "ネタバレ";
 "status.editor.text.placeholder" = "いま、何考えているの？";
 "status.editor.visibility" = "投稿の公開範囲";
 "status.error.loading.message" = "投稿の読み込み中にエラーが発生しました、もう一度試してください";

@@ -19,7 +19,7 @@ public extension Font {
       return .custom(chosenFont.fontName, size: size, relativeTo: textStyle)
     }
 
-    return onMac ? .system(size: size) : .system(textStyle)
+    return .system(size: size)
   }
 
   private static func customUIFont(size: CGFloat) -> UIFont {
@@ -31,11 +31,7 @@ public extension Font {
   }
 
   private static func userScaledFontSize(baseSize: CGFloat) -> CGFloat {
-    if onMac {
-      return UIFontMetrics.default.scaledValue(for: baseSize * UserPreferences.shared.fontSizeScale)
-    }
-
-    return baseSize
+    UIFontMetrics.default.scaledValue(for: baseSize * UserPreferences.shared.fontSizeScale)
   }
 
   static var scaledTitle: Font {
