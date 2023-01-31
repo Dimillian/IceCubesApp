@@ -17,7 +17,6 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
   // Internal source of truth for a timeline.
   private var statuses: [Status] = []
   private var visibileStatusesIds = Set<String>()
-  private var isFetchingNewPages: Bool = false
   
   var scrollProxy: ScrollViewProxy?
   
@@ -59,7 +58,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
   }
 
   func fetchStatuses(userIntent: Bool) async {
-    guard let client, !isFetchingNewPages else { return }
+    guard let client else { return }
     do {
       if statuses.isEmpty {
         pendingStatusesObserver.pendingStatuses = []
@@ -72,7 +71,6 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
           statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
         }
       } else if let first = statuses.first {
-        isFetchingNewPages = true
         var newStatuses: [Status] = await fetchNewPages(minId: first.id, maxPages: 20)
         if userIntent || !pendingStatusesEnabled {
           statuses.insert(contentsOf: newStatuses, at: 0)
@@ -108,11 +106,9 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
             }
           }
         }
-        isFetchingNewPages = false
       }
     } catch {
       statusesState = .error(error: error)
-      isFetchingNewPages = false
       print("timeline parse error: \(error)")
     }
   }
@@ -166,7 +162,6 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
   func handleEvent(event: any StreamEvent, currentAccount: CurrentAccount) {
     if let event = event as? StreamEventUpdate,
        pendingStatusesEnabled,
-       !isFetchingNewPages,
        !statuses.contains(where: { $0.id == event.status.id })
     {
       pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
