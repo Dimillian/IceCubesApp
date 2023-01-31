@@ -18,6 +18,8 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
   private var statuses: [Status] = []
   private var visibileStatusesIds = Set<String>()
   
+  private var canStreamEvents: Bool = true
+  
   var scrollProxy: ScrollViewProxy?
   
   var pendingStatusesObserver: PendingStatusesObserver = .init()
@@ -31,7 +33,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
           pendingStatusesObserver.pendingStatuses = []
           tag = nil
         }
-        await fetchStatuses(userIntent: false)
+        await fetchStatuses()
         switch timeline {
         case let .hashtag(tag, _):
           await fetchTag(id: tag)
@@ -54,10 +56,6 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
   }
 
   func fetchStatuses() async {
-    await fetchStatuses(userIntent: false)
-  }
-
-  func fetchStatuses(userIntent: Bool) async {
     guard let client else { return }
     do {
       if statuses.isEmpty {
@@ -71,19 +69,24 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
           statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
         }
       } else if let first = statuses.first {
+        canStreamEvents = false
         var newStatuses: [Status] = await fetchNewPages(minId: first.id, maxPages: 20)
-        if userIntent || !pendingStatusesEnabled {
+        if !pendingStatusesEnabled {
           statuses.insert(contentsOf: newStatuses, at: 0)
           pendingStatusesObserver.pendingStatuses = []
           withAnimation {
             statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
+            canStreamEvents = true
           }
         } else {
           newStatuses = newStatuses.filter { status in
             !statuses.contains(where: { $0.id == status.id })
           }
           
-          guard !newStatuses.isEmpty else { return }
+          guard !newStatuses.isEmpty else {
+            canStreamEvents = true
+            return
+          }
           
           pendingStatusesObserver.pendingStatuses.insert(contentsOf: newStatuses.map{ $0.id }, at: 0)
           pendingStatusesObserver.feedbackGenerator.impactOccurred()
@@ -94,21 +97,24 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
             pendingStatusesObserver.disableUpdate = true
             withAnimation {
               statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
-              DispatchQueue.main.async {
+              DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
                 self.scrollProxy?.scrollTo(firstStatusId)
                 self.pendingStatusesObserver.disableUpdate = false
+                self.canStreamEvents = true
               }
             }
           } else {
             statuses.insert(contentsOf: newStatuses, at: 0)
             withAnimation {
               statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
+              canStreamEvents = true
             }
           }
         }
       }
     } catch {
       statusesState = .error(error: error)
+      canStreamEvents = true
       print("timeline parse error: \(error)")
     }
   }
@@ -161,6 +167,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
 
   func handleEvent(event: any StreamEvent, currentAccount: CurrentAccount) {
     if let event = event as? StreamEventUpdate,
+       canStreamEvents,
        pendingStatusesEnabled,
        !statuses.contains(where: { $0.id == event.status.id })
     {

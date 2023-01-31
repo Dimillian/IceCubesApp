@@ -166,7 +166,9 @@ struct IceCubesApp: App {
   private func handleScenePhase(scenePhase: ScenePhase) {
     switch scenePhase {
     case .background:
-      watcher.stopWatching()
+      if !ProcessInfo.processInfo.isiOSAppOnMac {
+        watcher.stopWatching()
+      }
     case .active:
       watcher.watch(streams: [.user, .direct])
       UIApplication.shared.applicationIconBadgeNumber = 0

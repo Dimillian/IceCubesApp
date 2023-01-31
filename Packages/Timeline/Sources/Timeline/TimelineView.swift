@@ -68,13 +68,13 @@ public struct TimelineView: View {
         viewModel.timeline = timeline
       } else {
         Task {
-          await viewModel.fetchStatuses(userIntent: false)
+          await viewModel.fetchStatuses()
         }
       }
     }
     .refreshable {
       feedbackGenerator.impactOccurred(intensity: 0.3)
-      await viewModel.fetchStatuses(userIntent: true)
+      await viewModel.fetchStatuses()
       feedbackGenerator.impactOccurred(intensity: 0.7)
     }
     .onChange(of: watcher.latestEvent?.id) { _ in
@@ -102,7 +102,7 @@ public struct TimelineView: View {
         if wasBackgrounded {
           wasBackgrounded = false
           Task {
-            await viewModel.fetchStatuses(userIntent: false)
+            await viewModel.fetchStatuses()
           }
         }
       case .background:
