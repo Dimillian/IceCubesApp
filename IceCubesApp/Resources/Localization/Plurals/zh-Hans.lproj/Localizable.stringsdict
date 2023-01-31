@@ -29,9 +29,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string> 和其他 %lld 个用户</string>
+			<string> 和其他 %lld 个用户 </string>
 			<key>other</key>
-			<string> 和其他 %lld 个用户</string>
+			<string> 和其他 %lld 个用户 </string>
 		</dict>
 	</dict>
 </dict>
