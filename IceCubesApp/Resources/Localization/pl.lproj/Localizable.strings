@@ -43,7 +43,7 @@
 "instance.list.posts-%@" = "%@ postów";
 "instance.list.users-%@" = "%@ użytkowników";
 "instance.suggestions" = "Propozycje";
-"instance.url" = "Adres URL serwera";
+"instance.url" = "URL instancji";
 
 // MARK: Menu
 "menu.new-post" = "Nowy post";
@@ -54,7 +54,7 @@
 // MARK: Settings
 "settings.account.add" = "Dodaj konto";
 "settings.app.icon" = "Ikona aplikacji";
-"settings.app.icon.navigation-title" = "Icons";
+"settings.app.icon.navigation-title" = "Icons"; // ---------
 "settings.app.source" = "Źródło (link do GitHub)";
 "settings.app.support" = "Wspieraj aplikację";
 "settings.display.avatar.position" = "Położenie awatara";
@@ -128,10 +128,10 @@
 "settings.push.duplicate.title" = "Korektor duplikatów powiadomień";
 "settings.push.duplicate.footer" = "Otrzymujesz zduplikowane powiadomienia? Spróbuj tego magicznego przycisku, aby to naprawić";
 "settings.push.duplicate.button.fix" = "🪄 Napraw to";
-"settings.other.autoplay-video" = "Auto Play Videos";
-"settings.display.font" = "Timeline Font";
-"settings.display.font.system" = "System";
-"settings.display.font.custom" = "Custom";
+"settings.other.autoplay-video" = "Odtwarzaj filmy automatycznie";
+"settings.display.font" = "Czcionka strumienia";
+"settings.display.font.system" = "Systemowa";
+"settings.display.font.custom" = "Własna";
 
 // MARK: Tabs
 "tab.explore" = "Odkrywaj";
@@ -142,7 +142,7 @@
 "tab.settings" = "Ustawienia";
 "tab.timeline" = "Strumienie";
 "tab.trending" = "Popularne";
-"tab.profile" = "Profile";
+"tab.profile" = "Profil";
 
 // MARK: Timeline
 "timeline.%@-is-valid" = "%@ jest poprawnym serwerem";
@@ -157,7 +157,7 @@
 "app-account.button.add" = "Dodaj konto";
 
 // MARK: Package: Account
-"account.action.add-remove-list" = "Dodaj/Usuń z listy";
+"account.action.add-remove-list" = "Dodaj/usuń z listy";
 "account.action.edit-info" = "Edytuj profil";
 "account.action.mention" = "Wymień osobę";
 "account.action.message" = "Wyślij wiadomość";
@@ -188,8 +188,8 @@
 "account.edit.post-settings.sensitive" = "Treści wrażliwe";
 "account.favorited-by" = "Polubione przez";
 "account.follow.follow" = "Obserwuj";
-"account.follow.following" = "Obserwowany";
-"account.follow.requested" = "Requested";
+"account.follow.following" = "Obserwuję";
+"account.follow.requested" = "Oczekuję";
 "account.follow-request.accept" = "Zaakceptuj";
 "account.follow-request.reject" = "Odrzuć";
 "account.follow-requests.pending-requests" = "Oczekujące prośby";
@@ -215,7 +215,7 @@
 "conversations.error.button" = "Spróbuj ponownie";
 "conversations.error.message" = "Błąd podczas ładowania twoich wiadomości";
 "conversations.error.title" = "Wystąpił błąd";
-"conversations.navigation-title" = "Wiadomości Prywatne";
+"conversations.navigation-title" = "Wiadomości prywatne";
 "conversations.new.message.placeholder" = "Nowa wiadomość";
 
 // MARK: Package: DesignSystem
@@ -250,7 +250,7 @@
 "env.poll-vote-frequency.multiple" = "Głosowanie wielokrotne";
 
 // MARK: Package: Lists
-"lists.add-remove-%@" = "Dodaj/Usuń %@";
+"lists.add-remove-%@" = "Dodaj/usuń %@";
 "lists.create" = "Utwórz nową listę";
 "lists.create.confirm" = "Utwórz listę";
 "lists.edit.users-in-list" = "Osoby na tej liście";
@@ -265,20 +265,20 @@
 "notifications.label.favorite %lld" = "polubiony";
 "notifications.label.follow %lld" = "obserwuje cię";
 "notifications.label.follow-request" = "prosił(a) o obserwowanie cię";
-"notifications.label.mention %lld" = "wymienił cię";
+"notifications.label.mention %lld" = "wymienił(a) cię";
 "notifications.label.poll" = "sondaż zakończony";
-"notifications.label.reblog %lld" = "podbił";
-"notifications.label.status" = "opublikował status";
+"notifications.label.reblog %lld" = "podbił(a)";
+"notifications.label.status" = "opublikował(a) status";
 "notifications.label.update" = "edytował(a) post";
 "notifications.menu-title.favorite" = "Polubione";
 "notifications.menu-title.follow" = "Obserwacja";
-"notifications.menu-title.follow-request" = "Prośba o Obserwację";
-"notifications.menu-title.mention" = "Wzmianka";
-"notifications.menu-title.poll" = "Sondaż";
-"notifications.menu-title.reblog" = "Podbicie";
-"notifications.menu-title.status" = "Post";
-"notifications.menu-title.update" = "Post zedytowany";
-"notifications.navigation-title" = "Wszystkie Powiadomienia";
+"notifications.menu-title.follow-request" = "Prośby o obserwację";
+"notifications.menu-title.mention" = "Wzmianki";
+"notifications.menu-title.poll" = "Sondaże";
+"notifications.menu-title.reblog" = "Podbicia";
+"notifications.menu-title.status" = "Posty";
+"notifications.menu-title.update" = "Posty edytowane";
+"notifications.navigation-title" = "Wszystkie powiadomienia";
 "notifications.tab.all" = "Wszystko";
 "notifications.tab.mentions" = "Wzmianki";
 
@@ -288,11 +288,12 @@
 "timeline.local" = "Strumień lokalny";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld ostatnich postów od %lld uczestników";
 "timeline.trending" = "Teraz popularne";
+"timeline.add.url" = "URL instancji";
 
 // MARK: Package: Status
 "status.action.translate" = "Przetłumacz";
-"status.action.translate-from-%@" = "Translate from %@";
-"status.action.translated-label" = "Tłumaczenie z DeepL.com";
+"status.action.translate-from-%@" = "Przetłumacz z %@";
+"status.action.translated-label" = "Przetłumaczono za pomocą DeepL.com";
 "status.action.bookmark" = "Dodaj zakładkę";
 "status.action.boost" = "Podbij";
 "status.action.copy-text" = "Kopiuj tekst";
@@ -319,19 +320,19 @@
 "status.editor.ai-prompt.fit" = "Skróć tekst";
 "status.editor.description.add" = "Dodaj opis";
 "status.editor.description.edit" = "Edytuj opis";
-"status.editor.drafts.navigation-title" = "Wersje Robocze";
+"status.editor.drafts.navigation-title" = "Wersje robocze";
 "status.editor.error.upload" = "Błąd wysyłania";
-"status.editor.language-select.navigation-title" = "Wybierz Język";
+"status.editor.language-select.navigation-title" = "Wybierz język";
 "status.editor.language-select.recently-used" = "Ostatnio użyty";
 "status.editor.media.edit-image" = "Edytuj obrazek";
 "status.editor.media.image-description" = "Opis obrazka";
 "status.editor.mode.edit" = "Edycja twojego postu";
-"status.editor.mode.new" = "Nowy Post";
+"status.editor.mode.new" = "Nowy post";
 "status.editor.mode.quote-%@" = "Cytat z %@";
 "status.editor.mode.reply-%@" = "Odpowiadając na %@";
 "status.editor.restore-previous" = "Przywróć poprzedni tekst";
 "status.editor.spoiler" = "Tekst spoilera";
-"status.editor.text.placeholder" = "Co masz na myśli?";
+"status.editor.text.placeholder" = "Co ci chodzi po głowie?";
 "status.editor.visibility" = "Widoczność postu";
 "status.error.loading.message" = "Wystąpił błąd podczas ładowania postów, spróbuj ponownie.";
 "status.error.message" = "Wystąpił błąd w kontekście tego postu, proszę spróbuj ponownie.";
@@ -347,14 +348,14 @@
 "status.media.sensitive.show" = "Pokaż wrażliwą zawartość";
 "status.poll.n-votes %lld" = "%lld głosów";
 "status.poll.closed" = "Zamknięty";
-"status.poll.closes-in" = "Zamyka się za ";
+"status.poll.closes-in" = "Zostanie zakończony za ";
 "status.poll.duration" = "Czas trwania sondażu";
 "status.poll.frequency" = "Częstotliwość odpytywania";
 "status.poll.option-n %lld" = "Opcja %lld";
 "status.post-from-%@" = "Post od %@";
 "status.row.was-boosted" = "podbił(a)";
 "status.row.was-reply" = "Odpowiedział(a) do";
-"status.row.you-boosted" = "Podbiłeś";
+"status.row.you-boosted" = "Podbiłeś(aś)";
 "status.show-less" = "Pokaż mniej";
 "status.show-more" = "Pokaż więcej";
 "status.summary.at-time" = " o ";
