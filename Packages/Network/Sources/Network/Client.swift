@@ -17,11 +17,11 @@ public class Client: ObservableObject, Equatable, Identifiable, Hashable {
     case missingApp
     case invalidRedirectURL
   }
-  
+
   public var id: String {
     "\(isAuth)\(server)\(oauthToken?.accessToken ?? "")"
   }
-  
+
   public func hash(into hasher: inout Hasher) {
     hasher.combine(id)
   }

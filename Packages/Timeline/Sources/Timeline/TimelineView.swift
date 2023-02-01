@@ -19,9 +19,9 @@ public struct TimelineView: View {
   @EnvironmentObject private var routerPath: RouterPath
 
   @StateObject private var viewModel = TimelineViewModel()
-  
+
   @State private var wasBackgrounded: Bool = false
-  
+
   @Binding var timeline: TimelineFilter
   @Binding var scrollToTopSignal: Int
 
@@ -111,7 +111,7 @@ public struct TimelineView: View {
         }
       case .background:
         wasBackgrounded = true
-        
+
       default:
         break
       }
@@ -154,9 +154,9 @@ public struct TimelineView: View {
                            trailing: .layoutPadding))
     }
   }
-  
+
   private var scrollToTopView: some View {
-    HStack{ EmptyView() }
+    HStack { EmptyView() }
       .listRowBackground(theme.primaryBackgroundColor)
       .listRowSeparator(.hidden)
       .listRowInsets(.init())

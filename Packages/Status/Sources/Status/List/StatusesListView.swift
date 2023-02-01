@@ -5,7 +5,7 @@ import SwiftUI
 
 public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
   @EnvironmentObject private var theme: Theme
-  
+
   @ObservedObject private var fetcher: Fetcher
   private let isRemote: Bool
   private let isEmbdedInList: Bool
