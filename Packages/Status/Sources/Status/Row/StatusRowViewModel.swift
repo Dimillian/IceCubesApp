@@ -70,10 +70,10 @@ public class StatusRowViewModel: ObservableObject {
     
   func markSeen() {
     // called in on appear so we can cache that the status has been seen.
-    if !seen {
+    if UserPreferences.shared.suppressDupeReblogs  && !seen {
       ReblogCache.shared.cache(status, seen: true)
+      seen = true
     }
-    seen = true
   }
 
   func navigateToDetail(routerPath: RouterPath) {

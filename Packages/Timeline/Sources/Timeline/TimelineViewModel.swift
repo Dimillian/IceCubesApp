@@ -144,7 +144,7 @@ extension TimelineViewModel: StatusesFetcher {
                                                                   minId: nil,
                                                                   offset: statuses.count))
       
-      ReblogCache.removeDuplicateReblogs(&statuses)
+      ReblogCache.shared.removeDuplicateReblogs(&statuses)
 
       if timeline == .home {
         await cache(statuses: statuses)
