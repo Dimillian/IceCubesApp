@@ -24,7 +24,7 @@ class TimelineViewModel: ObservableObject {
   var account: CurrentAccount?
 
   let pendingStatusesObserver: PendingStatusesObserver = .init()
-  let cache: TimelineCache = .shared
+  private let cache: TimelineCache = .shared
 
   @Published var scrollToStatus: String?
 
@@ -59,7 +59,7 @@ class TimelineViewModel: ObservableObject {
     client?.server ?? "Error"
   }
 
-  func fetchTag(id: String) async {
+  private func fetchTag(id: String) async {
     guard let client else { return }
     do {
       tag = try await client.get(endpoint: Tags.tag(id: id))
