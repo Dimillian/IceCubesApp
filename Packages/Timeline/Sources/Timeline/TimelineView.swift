@@ -20,7 +20,7 @@ public struct TimelineView: View {
 
   @StateObject private var viewModel = TimelineViewModel()
   
-  @State private var scrollProxy: ScrollViewProxy?
+  @State private var wasBackgrounded: Bool = false
   
   @Binding var timeline: TimelineFilter
   @Binding var scrollToTopSignal: Int
@@ -48,16 +48,17 @@ public struct TimelineView: View {
             StatusesListView(fetcher: viewModel)
           }
         }
+        .id(account.account?.id)
         .environment(\.defaultMinListRowHeight, 1)
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
         .background(theme.primaryBackgroundColor)
-        if viewModel.pendingStatusesEnabled {
+//        if viewModel.pendingStatusesEnabled {
           makePendingNewPostsView(proxy: proxy)
-        }
+//        }
       }
       .onAppear {
-        scrollProxy = proxy
+        viewModel.scrollProxy = proxy
       }
     }
     .navigationTitle(timeline.localizedTitle())
@@ -68,13 +69,13 @@ public struct TimelineView: View {
         viewModel.timeline = timeline
       } else {
         Task {
-          await viewModel.fetchStatuses(userIntent: false)
+          await viewModel.fetchStatuses()
         }
       }
     }
     .refreshable {
       feedbackGenerator.impactOccurred(intensity: 0.3)
-      await viewModel.fetchStatuses(userIntent: true)
+      await viewModel.fetchStatuses()
       feedbackGenerator.impactOccurred(intensity: 0.7)
     }
     .onChange(of: watcher.latestEvent?.id) { _ in
@@ -84,7 +85,7 @@ public struct TimelineView: View {
     }
     .onChange(of: scrollToTopSignal, perform: { _ in
       withAnimation {
-        scrollProxy?.scrollTo(Constants.scrollToTop, anchor: .top)
+        viewModel.scrollProxy?.scrollTo(Constants.scrollToTop, anchor: .top)
       }
     })
     .onChange(of: timeline) { newTimeline in
@@ -99,9 +100,15 @@ public struct TimelineView: View {
     .onChange(of: scenePhase, perform: { scenePhase in
       switch scenePhase {
       case .active:
-        Task {
-          await viewModel.fetchStatuses(userIntent: false)
+        if wasBackgrounded {
+          wasBackgrounded = false
+          Task {
+            await viewModel.fetchStatuses()
+          }
         }
+      case .background:
+        wasBackgrounded = true
+        
       default:
         break
       }

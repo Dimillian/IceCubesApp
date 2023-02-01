@@ -59,6 +59,9 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
             .onAppear {
               fetcher.statusDidAppear(status: status)
             }
+            .onDisappear {
+              fetcher.statusDidDisappear(status: status)
+            }
           if !isEmbdedInList {
             Divider()
               .padding(.vertical, .dividerPadding)

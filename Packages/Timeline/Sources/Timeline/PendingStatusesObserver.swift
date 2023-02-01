@@ -6,14 +6,17 @@ import Combine
 
 @MainActor
 class PendingStatusesObserver: ObservableObject {
-  
   @AppStorage("expanded") public var isExpanded: Bool = false
   
   @Published var pendingStatuses: [Status] = []
   
+  let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
+  var disableUpdate: Bool = false
+
   func removeStatus(status: Status) {
-    if let index = pendingStatuses.firstIndex(where: {$0.id == status.id}) {
+    if !disableUpdate, let index = pendingStatuses.firstIndex(of: status) {
       pendingStatuses.removeSubrange(index...(pendingStatuses.count - 1))
+      feedbackGenerator.impactOccurred()
     }
   }
   

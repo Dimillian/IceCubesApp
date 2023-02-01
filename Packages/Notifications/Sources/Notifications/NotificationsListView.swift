@@ -10,6 +10,7 @@ public struct NotificationsListView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
+  @EnvironmentObject private var account: CurrentAccount
   @StateObject private var viewModel = NotificationsViewModel()
 
   let lockedType: Models.Notification.NotificationType?
@@ -23,6 +24,7 @@ public struct NotificationsListView: View {
       topPaddingView
       notificationsView
     }
+    .id(account.account?.id)
     .environment(\.defaultMinListRowHeight, 1)
     .listStyle(.plain)
     .navigationTitle(lockedType?.menuTitle() ?? viewModel.selectedType?.menuTitle() ?? "notifications.navigation-title")
