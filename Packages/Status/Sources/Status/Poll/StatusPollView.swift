@@ -132,7 +132,7 @@ public struct StatusPollView: View {
         }
       }
       .frame(height: .pollBarHeight)
-      .buttonStyle(.borderless)
     }
+    .buttonStyle(.borderless)
   }
 }

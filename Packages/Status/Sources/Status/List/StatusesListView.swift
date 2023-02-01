@@ -23,6 +23,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
         StatusRowView(viewModel: .init(status: status, isCompact: false))
           .padding(.horizontal, isEmbdedInList ? 0 : .layoutPadding)
           .redacted(reason: .placeholder)
+          .id(UUID())
           .listRowBackground(theme.primaryBackgroundColor)
           .listRowInsets(.init(top: 12,
                                leading: .layoutPadding,

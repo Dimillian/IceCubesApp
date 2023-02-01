@@ -28,17 +28,11 @@ class PendingStatusesObserver: ObservableObject {
 
 struct PendingStatusesObserverView: View {
   @ObservedObject var observer: PendingStatusesObserver
-  var proxy: ScrollViewProxy
-  
   var body: some View {
     if observer.pendingStatusesCount > 0 {
       HStack(spacing: 6) {
         Spacer()
-        Button {
-          withAnimation {
-            proxy.scrollTo(observer.pendingStatuses.last, anchor: .top)
-          }
-        } label: {
+        Button { } label: {
           Text("\(observer.pendingStatusesCount)")
         }
         .buttonStyle(.bordered)
