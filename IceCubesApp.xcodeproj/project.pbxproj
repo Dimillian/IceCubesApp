@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		065FA1FE29866CD600012EA0 /* LRUCache in Frameworks */ = {isa = PBXBuildFile; productRef = 065FA1FD29866CD600012EA0 /* LRUCache */; };
+		065FA20A298675BA00012EA0 /* LRUCache in Frameworks */ = {isa = PBXBuildFile; productRef = 065FA209298675BA00012EA0 /* LRUCache */; };
 		639CDF9C296AC82F00C35E58 /* SafariRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639CDF9B296AC82F00C35E58 /* SafariRouter.swift */; };
 		7429BCE2297C55D00069A946 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7429BCE4297C55D00069A946 /* Localizable.stringsdict */; };
 		7429BCE5297C5A750069A946 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7429BCE4297C55D00069A946 /* Localizable.stringsdict */; };
@@ -249,6 +251,7 @@
 				9FAD859C2974422700496AB1 /* AppAccount in Frameworks */,
 				9FAD859A297440CB00496AB1 /* KeychainSwift in Frameworks */,
 				9FAD85982974405D00496AB1 /* Status in Frameworks */,
+				065FA20A298675BA00012EA0 /* LRUCache in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +262,7 @@
 				9F7335EF29674F7100AFF0BA /* QuickLook.framework in Frameworks */,
 				9F7335ED2967463400AFF0BA /* AVKit.framework in Frameworks */,
 				9F2A540C29699705009B2D7C /* RevenueCat in Frameworks */,
+				065FA1FE29866CD600012EA0 /* LRUCache in Frameworks */,
 				9F2A540E2969A0B0009B2D7C /* StoreKit.framework in Frameworks */,
 				9F55C6902955993C00F94077 /* Explore in Frameworks */,
 				9FAE4ACE29379A5A00772766 /* KeychainSwift in Frameworks */,
@@ -511,6 +515,7 @@
 				9FAD859F297456A100496AB1 /* Models */,
 				9FAD85A1297456A400496AB1 /* Env */,
 				9FAD85A3297456A800496AB1 /* DesignSystem */,
+				065FA209298675BA00012EA0 /* LRUCache */,
 			);
 			productName = IceCubesShareExtension;
 			productReference = 9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */;
@@ -548,6 +553,7 @@
 				9F2A540929699705009B2D7C /* ReceiptParser */,
 				9F2A540B29699705009B2D7C /* RevenueCat */,
 				9FE3DB56296FEFCA00628CB0 /* AppAccount */,
+				065FA1FD29866CD600012EA0 /* LRUCache */,
 			);
 			productName = IceCubesApp;
 			productReference = 9FBFE639292A715500C250E9 /* IceCubesApp.app */;
@@ -624,6 +630,7 @@
 			packageReferences = (
 				9FAE4ACC29379A5A00772766 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				9F2A540829699705009B2D7C /* XCRemoteSwiftPackageReference "purchases-ios" */,
+				065FA1FC29866CD600012EA0 /* XCRemoteSwiftPackageReference "LRUCache" */,
 			);
 			productRefGroup = 9FBFE63A292A715500C250E9 /* Products */;
 			projectDirPath = "";
@@ -1277,6 +1284,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		065FA1FC29866CD600012EA0 /* XCRemoteSwiftPackageReference "LRUCache" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nicklockwood/LRUCache";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		9F2A540829699705009B2D7C /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
@@ -1296,6 +1311,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		065FA1FD29866CD600012EA0 /* LRUCache */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 065FA1FC29866CD600012EA0 /* XCRemoteSwiftPackageReference "LRUCache" */;
+			productName = LRUCache;
+		};
+		065FA209298675BA00012EA0 /* LRUCache */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 065FA1FC29866CD600012EA0 /* XCRemoteSwiftPackageReference "LRUCache" */;
+			productName = LRUCache;
+		};
 		9F29553F292B6C3400E0E81B /* Timeline */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Timeline;

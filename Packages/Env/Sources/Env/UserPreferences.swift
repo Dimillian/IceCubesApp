@@ -28,6 +28,8 @@ public class UserPreferences: ObservableObject {
   @AppStorage("autoplay_video") public var autoPlayVideo = true
   @AppStorage("chosen_font") public private(set) var chosenFontData: Data?
 
+  @AppStorage("suppress_dupe_reblogs") public var suppressDupeReblogs: Bool = false
+  
   public var postVisibility: Models.Visibility {
     if useInstanceContentSettings {
       return serverPreferences?.postVisibility ?? .pub

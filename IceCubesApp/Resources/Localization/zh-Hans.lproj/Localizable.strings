@@ -115,8 +115,10 @@
 "settings.general.content" = "内容设置";
 "settings.system" = "系统设置";
 "settings.content.navigation-title" = "内容设置";
+"settings.content.boosts" = "转发";
+"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
+"settings.content.instance-settings" = "Server Content Settings";
 "settings.content.use-instance-settings" = "使用服务器设置";
-"settings.content.main-toggle.description" = "使用你主服务器的设置";
 "settings.content.expand-spoilers" = "始终显示敏感内容";
 "settings.content.expand-media" = "媒体显示";
 "settings.content.default-sensitive" = "始终将媒体标为敏感内容";

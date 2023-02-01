@@ -94,8 +94,10 @@
 "settings.general.content" = "コンテンツ設定";
 "settings.system" = "システム設定";
 "settings.content.navigation-title" = "コンテンツ設定";
+"settings.content.boosts" = "ブースト";
+"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
+"settings.content.instance-settings" = "Server Content Settings";
 "settings.content.use-instance-settings" = "サーバー設定を使用する";
-"settings.content.main-toggle.description" = "ホームインスタンスの設定を使用する";
 "settings.content.expand-spoilers" = "センシティブな投稿を常に表示する";
 "settings.content.expand-media" = "メディア表示";
 "settings.content.default-sensitive" = "常にメディアをセンシティブなものとしてマークする";

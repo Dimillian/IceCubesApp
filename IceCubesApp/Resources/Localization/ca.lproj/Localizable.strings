@@ -90,7 +90,9 @@
 "settings.system" = "Configuració del sistema";
 "settings.content.navigation-title" = "Configuració del contacte";
 "settings.content.use-instance-settings" = "Utilitza la configuració del servidor";
-"settings.content.main-toggle.description" = "Utilitzeu la configuració de la vostra instància d'inici";
+"settings.content.boosts" = "Impulsos";
+"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
+"settings.content.instance-settings" = "Server Content Settings";
 "settings.content.expand-spoilers" = "Mostra'm sempre els espòilers";
 "settings.content.expand-media" = "Visibilitat del contingut multimèdia";
 "settings.content.default-sensitive" = "Marca sempre el contingut com a sensible";

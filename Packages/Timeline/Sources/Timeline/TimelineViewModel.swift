@@ -152,6 +152,10 @@ extension TimelineViewModel: StatusesFetcher {
                                                                   maxId: nil,
                                                                   minId: nil,
                                                                   offset: statuses.count))
+
+
+      ReblogCache.shared.removeDuplicateReblogs(&statuses)
+
       await cacheHome()
       withAnimation {
         statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
@@ -168,6 +172,9 @@ extension TimelineViewModel: StatusesFetcher {
     newStatuses = newStatuses.filter { status in
       !statuses.contains(where: { $0.id == status.id })
     }
+    
+    ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
+
 
     // If no new statuses, resume streaming and exit.
     guard !newStatuses.isEmpty else {
@@ -222,7 +229,7 @@ extension TimelineViewModel: StatusesFetcher {
     var allStatuses: [Status] = []
     var latestMinId = minId
     do {
-      while let newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
+      while var newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
                                                                                          maxId: nil,
                                                                                          minId: latestMinId,
                                                                                          offset: statuses.count)),
@@ -230,6 +237,9 @@ extension TimelineViewModel: StatusesFetcher {
         pagesLoaded < maxPages
       {
         pagesLoaded += 1
+
+        ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
+        
         allStatuses.insert(contentsOf: newStatuses, at: 0)
         latestMinId = newStatuses.first?.id ?? ""
       }
@@ -244,10 +254,14 @@ extension TimelineViewModel: StatusesFetcher {
     do {
       guard let lastId = statuses.last?.id else { return }
       statusesState = .display(statuses: statuses, nextPageState: .loadingNextPage)
-      let newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
+      var newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
                                                                                    maxId: lastId,
                                                                                    minId: nil,
                                                                                    offset: statuses.count))
+
+      ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
+
+
       statuses.append(contentsOf: newStatuses)
       statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
     } catch {

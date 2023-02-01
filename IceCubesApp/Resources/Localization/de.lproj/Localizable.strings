@@ -114,8 +114,10 @@
 "settings.general.content" = "Inhaltseinstellungen";
 "settings.system" = "System Settings";
 "settings.content.navigation-title" = "Inhaltseinstellungen";
+"settings.content.boosts" = "Boosts";
+"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
+"settings.content.instance-settings" = "Server Content Settings";
 "settings.content.use-instance-settings" = "Servereinstellungen verwenden";
-"settings.content.main-toggle.description" = "Die Einstellungen von der Heiminstanz übernehmen";
 "settings.content.expand-spoilers" = "Sensible Inhalte immer zeigen";
 "settings.content.expand-media" = "Medienansicht";
 "settings.content.default-sensitive" = "Medien immer als sensibel kennzeichnen";
