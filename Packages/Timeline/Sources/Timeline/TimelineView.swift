@@ -75,6 +75,7 @@ public struct TimelineView: View {
       if viewModel.client == nil {
         viewModel.client = client
         viewModel.timeline = timeline
+        viewModel.account = account
       } else {
         Task {
           await viewModel.fetchStatuses()

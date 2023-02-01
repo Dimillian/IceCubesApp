@@ -82,6 +82,7 @@ public struct StatusRowView: View {
       .contextMenu {
         contextMenu
       }
+      .listRowBackground(viewModel.shouldHighlightRow ? theme.secondaryBackgroundColor : theme.primaryBackgroundColor)
       .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
       .accessibilityActions {
         // Add the individual mentions as accessibility actions

@@ -21,6 +21,8 @@ class TimelineViewModel: ObservableObject {
 
   private var canStreamEvents: Bool = true
 
+  var account: CurrentAccount?
+
   let pendingStatusesObserver: PendingStatusesObserver = .init()
   let cache: TimelineCache = .shared
 
@@ -143,6 +145,15 @@ extension TimelineViewModel: StatusesFetcher {
                                                                   maxId: nil,
                                                                   minId: nil,
                                                                   offset: statuses.count))
+      if let account {
+        for i in statuses.indices {
+          if statuses[i].mentions.first(where: { $0.id == account.account?.id }) != nil {
+            print("SWG: updating in fetchFirstPage")
+            statuses[i].shouldHighlight = true
+          }
+        }
+      }
+
       if timeline == .home {
         await cache(statuses: statuses)
       }
@@ -156,6 +167,15 @@ extension TimelineViewModel: StatusesFetcher {
   private func fetchNewPagesFrom(latestStatus: Status, client _: Client) async throws {
     canStreamEvents = false
     var newStatuses: [Status] = await fetchNewPages(minId: latestStatus.id, maxPages: 10)
+
+    if let account {
+      for i in newStatuses.indices {
+        if newStatuses[i].mentions.first(where: { $0.id == account.account?.id }) != nil {
+          print("SWG: updating in fetchNewPagesFrom")
+          newStatuses[i].shouldHighlight = true
+        }
+      }
+    }
 
     // Dedup statuses, a status with the same id could have been streamed in.
     newStatuses = newStatuses.filter { status in
@@ -239,10 +259,20 @@ extension TimelineViewModel: StatusesFetcher {
     do {
       guard let lastId = statuses.last?.id else { return }
       statusesState = .display(statuses: statuses, nextPageState: .loadingNextPage)
-      let newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
+      var newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
                                                                                    maxId: lastId,
                                                                                    minId: nil,
                                                                                    offset: statuses.count))
+
+      if let account {
+        for i in newStatuses.indices {
+          if newStatuses[i].mentions.first(where: { $0.id == account.account?.id }) != nil {
+            print("SWG: updating in fetchNextPage")
+            newStatuses[i].shouldHighlight = true
+          }
+        }
+      }
+
       statuses.append(contentsOf: newStatuses)
       statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
     } catch {
