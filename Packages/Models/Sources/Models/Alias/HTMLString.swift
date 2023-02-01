@@ -36,7 +36,7 @@ public struct HTMLString: Decodable, Equatable, Hashable {
     if let regex = try? NSRegularExpression(pattern: "(<span class=\"ellipsis\">(.*?)</span>)", options: .caseInsensitive) {
       htmlValue = regex.stringByReplacingMatches(in: htmlValue, options: [], range: NSRange(location: 0, length: htmlValue.count), withTemplate: "$2…")
     }
-    
+
     do {
       asMarkdown = try HTMLParser().parse(html: htmlValue)
         .toMarkdown()

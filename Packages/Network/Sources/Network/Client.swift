@@ -2,7 +2,7 @@ import Foundation
 import Models
 import SwiftUI
 
-public class Client: ObservableObject, Equatable, Identifiable {
+public class Client: ObservableObject, Equatable, Identifiable, Hashable {
   public static func == (lhs: Client, rhs: Client) -> Bool {
     lhs.isAuth == rhs.isAuth &&
       lhs.server == rhs.server &&
@@ -17,9 +17,13 @@ public class Client: ObservableObject, Equatable, Identifiable {
     case missingApp
     case invalidRedirectURL
   }
-  
+
   public var id: String {
     "\(isAuth)\(server)\(oauthToken?.accessToken ?? "")"
+  }
+
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(id)
   }
 
   public var server: String

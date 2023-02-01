@@ -201,7 +201,7 @@ public class StatusEditorViewModel: ObservableObject {
         mentionString += "@\(mention.acct)"
       }
       if !mentionString.isEmpty {
-          mentionString += " "
+        mentionString += " "
       }
       replyToStatus = status
       visibility = status.visibility
