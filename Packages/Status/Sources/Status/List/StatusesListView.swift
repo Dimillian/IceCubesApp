@@ -2,9 +2,11 @@ import DesignSystem
 import Models
 import Shimmer
 import SwiftUI
+import Env
 
 public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
   @EnvironmentObject private var theme: Theme
+  @EnvironmentObject private var routerPath: RouterPath
 
   @ObservedObject private var fetcher: Fetcher
   private let isRemote: Bool
@@ -69,7 +71,6 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
           }
         }
       }
-
       switch nextPageState {
       case .hasNextPage:
         loadingRow

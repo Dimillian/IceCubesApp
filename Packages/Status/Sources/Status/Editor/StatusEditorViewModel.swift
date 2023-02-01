@@ -6,7 +6,7 @@ import PhotosUI
 import SwiftUI
 
 @MainActor
-public class StatusEditorViewModel: ObservableObject {
+public class StatusEditorViewModel: ObservableObject {  
   var mode: Mode
   let generator = UINotificationFeedbackGenerator()
 
@@ -32,7 +32,7 @@ public class StatusEditorViewModel: ObservableObject {
   var statusTextCharacterLength: Int {
     urlLengthAdjustments - statusText.string.utf16.count - spoilerTextCount
   }
-
+  
   @Published var backupStatusText: NSAttributedString?
 
   @Published var showPoll: Bool = false
