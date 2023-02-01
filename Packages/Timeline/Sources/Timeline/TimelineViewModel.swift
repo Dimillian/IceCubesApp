@@ -21,7 +21,9 @@ class TimelineViewModel: ObservableObject {
 
   private var canStreamEvents: Bool = true
 
-  var account: CurrentAccount?
+  private var accountId: String? {
+    CurrentAccount.shared.account?.id
+  }
 
   let pendingStatusesObserver: PendingStatusesObserver = .init()
   private let cache: TimelineCache = .shared
@@ -154,9 +156,9 @@ extension TimelineViewModel: StatusesFetcher {
                                                                   maxId: nil,
                                                                   minId: nil,
                                                                   offset: statuses.count))
-      if let account {
+      if let accountId {
         for i in statuses.indices {
-          if statuses[i].mentions.first(where: { $0.id == account.account?.id }) != nil {
+          if statuses[i].mentions.first(where: { $0.id == accountId }) != nil {
             print("SWG: updating in fetchFirstPage")
             statuses[i].shouldHighlight = true
           }
@@ -175,9 +177,9 @@ extension TimelineViewModel: StatusesFetcher {
     canStreamEvents = false
     var newStatuses: [Status] = await fetchNewPages(minId: latestStatus.id, maxPages: 10)
 
-    if let account {
+    if let accountId {
       for i in newStatuses.indices {
-        if newStatuses[i].mentions.first(where: { $0.id == account.account?.id }) != nil {
+        if newStatuses[i].mentions.first(where: { $0.id == accountId }) != nil {
           print("SWG: updating in fetchNewPagesFrom")
           newStatuses[i].shouldHighlight = true
         }
@@ -269,9 +271,9 @@ extension TimelineViewModel: StatusesFetcher {
                                                                                    minId: nil,
                                                                                    offset: statuses.count))
 
-      if let account {
+      if let accountId {
         for i in newStatuses.indices {
-          if newStatuses[i].mentions.first(where: { $0.id == account.account?.id }) != nil {
+          if newStatuses[i].mentions.first(where: { $0.id == accountId }) != nil {
             print("SWG: updating in fetchNextPage")
             newStatuses[i].shouldHighlight = true
           }
