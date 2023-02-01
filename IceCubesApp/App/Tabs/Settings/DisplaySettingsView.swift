@@ -73,7 +73,7 @@ struct DisplaySettingsView: View {
         }
         VStack {
           Slider(value: $userPreferences.fontSizeScale, in: 0.5 ... 1.5, step: 0.1)
-          Text("Font scaling: \(String(format: "%.1f", userPreferences.fontSizeScale))")
+          Text("settings.display.font.scaling-\(String(format: "%.1f", userPreferences.fontSizeScale))")
             .font(.scaledBody)
         }
         Toggle("settings.display.translate-button", isOn: $userPreferences.showTranslateButton)

@@ -132,6 +132,7 @@
 "settings.display.font" = "时间线字体";
 "settings.display.font.system" = "系统";
 "settings.display.font.custom" = "自定义";
+"settings.display.font.scaling-%@" = "Font scaling: %@";
 
 // MARK: Tabs
 "tab.explore" = "探索";

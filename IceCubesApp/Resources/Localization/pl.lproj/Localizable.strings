@@ -132,6 +132,7 @@
 "settings.display.font" = "Czcionka strumienia";
 "settings.display.font.system" = "Systemowa";
 "settings.display.font.custom" = "Własna";
+"settings.display.font.scaling-%@" = "Font scaling: %@";
 
 // MARK: Tabs
 "tab.explore" = "Odkrywaj";
