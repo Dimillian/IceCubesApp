@@ -269,6 +269,23 @@ extension TimelineViewModel: StatusesFetcher {
     }
   }
 
+  private func fetchPages(sinceId: String? = nil, maxId: String? = nil, minId: String? = nil, offset: Int? = nil) async throws -> [Status] {
+    guard let client else { return [] }
+
+    var newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: sinceId, maxId: maxId, minId: minId, offset: offset))
+
+    if let accountId {
+      for i in newStatuses.indices {
+        if newStatuses[i].mentions.first(where: { $0.id == accountId }) != nil {
+          print("SWG: updating in fetchNextPage")
+          newStatuses[i].shouldHighlight = true
+        }
+      }
+    }
+
+    return newStatuses
+  }
+
   func statusDidAppear(status: Status) {
     pendingStatusesObserver.removeStatus(status: status)
     visibileStatusesIds.insert(status.id)
