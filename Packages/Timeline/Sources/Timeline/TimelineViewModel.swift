@@ -3,7 +3,6 @@ import Models
 import Network
 import Status
 import SwiftUI
-import Account
 
 @MainActor
 class TimelineViewModel: ObservableObject {
