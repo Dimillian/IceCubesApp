@@ -69,6 +69,7 @@ class TimelineViewModel: ObservableObject {
     } catch {}
   }
 
+  // SWG: Streaming crap
   func handleEvent(event: any StreamEvent, currentAccount _: CurrentAccount) {
     if let event = event as? StreamEventUpdate,
        canStreamEvents,
@@ -76,7 +77,13 @@ class TimelineViewModel: ObservableObject {
        !statuses.contains(where: { $0.id == event.status.id })
     {
       pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
-      statuses.insert(event.status, at: 0)
+      var newStatus = event.status
+      if let accountId {
+        if newStatus.mentions.first(where: { $0.id == accountId }) != nil {
+          newStatus.shouldHighlight = true
+        }
+      }
+      statuses.insert(newStatus, at: 0)
       Task {
         await cacheHome()
       }
@@ -127,7 +134,7 @@ extension TimelineViewModel: StatusesFetcher {
     guard let client else { return }
     do {
       if statuses.isEmpty {
-        try await fetchFirstPage()
+        try await fetchFirstPage(client: client)
       } else if let latest = statuses.first {
         try await fetchNewPagesFrom(latestStatus: latest, client: client)
       }
@@ -139,7 +146,7 @@ extension TimelineViewModel: StatusesFetcher {
   }
 
   // Hydrate statuses in the Timeline when statuses are empty.
-  private func fetchFirstPage() async throws {
+  private func fetchFirstPage(client: Client) async throws {
     pendingStatusesObserver.pendingStatuses = []
     statusesState = .loading
 
@@ -153,8 +160,12 @@ extension TimelineViewModel: StatusesFetcher {
       // And then we fetch statuses again toget newest statuses from there.
       await fetchStatuses()
     } else {
-      statuses = try await fetchPages(offset: statuses.count)
+      statuses = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
+                                                                  maxId: nil,
+                                                                  minId: nil,
+                                                                  offset: statuses.count))
 
+      updateMentionsToBeHighlighted(&statuses)
       ReblogCache.shared.removeDuplicateReblogs(&statuses)
 
       await cacheHome()
@@ -164,6 +175,7 @@ extension TimelineViewModel: StatusesFetcher {
     }
   }
 
+  // SWG: Issues.....
   // Fetch pages from the top most status of the tomeline.
   private func fetchNewPagesFrom(latestStatus: Status, client _: Client) async throws {
     canStreamEvents = false
@@ -225,6 +237,7 @@ extension TimelineViewModel: StatusesFetcher {
   }
 
   private func fetchNewPages(minId: String, maxPages: Int) async -> [Status] {
+    print("SWG: fetchNewPages")
     guard let client else { return [] }
     var pagesLoaded = 0
     var allStatuses: [Status] = []
@@ -239,6 +252,7 @@ extension TimelineViewModel: StatusesFetcher {
       {
         pagesLoaded += 1
 
+        updateMentionsToBeHighlighted(&newStatuses)
         ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
         
         allStatuses.insert(contentsOf: newStatuses, at: 0)
@@ -251,16 +265,20 @@ extension TimelineViewModel: StatusesFetcher {
   }
 
   func fetchNextPage() async {
+    guard let client else { return }
     do {
       guard let lastId = statuses.last?.id else { return }
       statusesState = .display(statuses: statuses, nextPageState: .loadingNextPage)
-      var newStatuses: [Status] = try await fetchPages(maxId: lastId, offset: statuses.count)
+      var newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
+                                                                                   maxId: lastId,
+                                                                                   minId: nil,
+                                                                                   offset: statuses.count))
 
-      if !newStatuses.isEmpty {
-        ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
 
-        statuses.append(contentsOf: newStatuses)
-      }
+      updateMentionsToBeHighlighted(&newStatuses)
+      ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
+
+      statuses.append(contentsOf: newStatuses)
 
       statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
     } catch {
@@ -268,21 +286,14 @@ extension TimelineViewModel: StatusesFetcher {
     }
   }
 
-  private func fetchPages(sinceId: String? = nil, maxId: String? = nil, minId: String? = nil, offset: Int? = nil) async throws -> [Status] {
-    guard let client else { return [] }
-
-    var newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: sinceId, maxId: maxId, minId: minId, offset: offset))
-
-    if let accountId {
-      for i in newStatuses.indices {
-        if newStatuses[i].mentions.first(where: { $0.id == accountId }) != nil {
-          print("SWG: updating in fetchNextPage")
-          newStatuses[i].shouldHighlight = true
+  private func updateMentionsToBeHighlighted(_ statuses: inout [Status]) {
+    if !statuses.isEmpty, let accountId {
+      for i in statuses.indices {
+        if statuses[i].mentions.first(where: { $0.id == accountId }) != nil {
+          statuses[i].shouldHighlight = true
         }
       }
     }
-
-    return newStatuses
   }
 
   func statusDidAppear(status: Status) {
