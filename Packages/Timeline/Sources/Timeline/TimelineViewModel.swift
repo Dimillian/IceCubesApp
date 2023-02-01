@@ -69,7 +69,6 @@ class TimelineViewModel: ObservableObject {
     } catch {}
   }
 
-  // SWG: Streaming crap
   func handleEvent(event: any StreamEvent, currentAccount _: CurrentAccount) {
     if let event = event as? StreamEventUpdate,
        canStreamEvents,
@@ -175,7 +174,6 @@ extension TimelineViewModel: StatusesFetcher {
     }
   }
 
-  // SWG: Issues.....
   // Fetch pages from the top most status of the tomeline.
   private func fetchNewPagesFrom(latestStatus: Status, client _: Client) async throws {
     canStreamEvents = false
@@ -237,7 +235,6 @@ extension TimelineViewModel: StatusesFetcher {
   }
 
   private func fetchNewPages(minId: String, maxPages: Int) async -> [Status] {
-    print("SWG: fetchNewPages")
     guard let client else { return [] }
     var pagesLoaded = 0
     var allStatuses: [Status] = []
