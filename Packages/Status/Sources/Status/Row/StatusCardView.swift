@@ -64,7 +64,7 @@ public struct StatusCardView: View {
         ShareLink(item: url) {
           Label("Share this link", systemImage: "square.and.arrow.up")
         }
-        Button { openURL(url) } label: {
+        Button { UIApplication.shared.open(url) } label: {
           Label("status.action.view-in-browser", systemImage: "safari")
         }
         Divider()

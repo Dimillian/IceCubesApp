@@ -8,8 +8,6 @@ struct StatusRowContextMenu: View {
   @EnvironmentObject private var currentInstance: CurrentInstance
   @EnvironmentObject private var routerPath: RouterPath
 
-  @Environment(\.openURL) var openURL
-
   @ObservedObject var viewModel: StatusRowViewModel
 
   var body: some View {

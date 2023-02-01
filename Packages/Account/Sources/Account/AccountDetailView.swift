@@ -8,7 +8,6 @@ import Status
 import SwiftUI
 
 public struct AccountDetailView: View {
-  @Environment(\.openURL) private var openURL
   @Environment(\.redactionReasons) private var reasons
 
   @EnvironmentObject private var watcher: StreamWatcher
