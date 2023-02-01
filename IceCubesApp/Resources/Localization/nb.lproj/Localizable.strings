@@ -60,6 +60,7 @@
 "settings.display.font" = "Tidslinjefont";
 "settings.display.font.system" = "System";
 "settings.display.font.custom" = "Tilpasset";
+"settings.display.font.scaling-%@" = "Font scaling: %@";
 "settings.display.avatar.position" = "Avatarposisjon";
 "settings.display.avatar.shape" = "Avatarform";
 "settings.display.navigation-title" = "Visningsinnstillinger";

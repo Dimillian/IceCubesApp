@@ -60,6 +60,7 @@
 "settings.display.font" = "タイムラインのフォント";
 "settings.display.font.system" = "システムフォント";
 "settings.display.font.custom" = "カスタム";
+"settings.display.font.scaling-%@" = "Font scaling: %@";
 "settings.display.avatar.position" = "アバターの位置";
 "settings.display.avatar.shape" = "アバターの形";
 "settings.display.navigation-title" = "表示設定";

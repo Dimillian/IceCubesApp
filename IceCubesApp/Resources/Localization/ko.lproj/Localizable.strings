@@ -132,6 +132,7 @@
 "settings.display.font" = "타임라인 글꼴";
 "settings.display.font.system" = "시스템 글꼴 사용";
 "settings.display.font.custom" = "직접 설정";
+"settings.display.font.scaling-%@" = "Font scaling: %@";
 
 // MARK: Tabs
 "tab.explore" = "둘러보기";
