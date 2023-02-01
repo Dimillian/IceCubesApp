@@ -23,15 +23,24 @@ struct AccountSettingsView: View {
   var body: some View {
     Form {
       Section {
-        Label("account.action.edit-info", systemImage: "pencil")
-          .onTapGesture {
-            isEditingAccount = true
-          }
+        Button {
+          isEditingAccount = true
+        } label: {
+          Label("account.action.edit-info", systemImage: "pencil")
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+
         if currentInstance.isFiltersSupported {
-          Label("account.action.edit-filters", systemImage: "line.3.horizontal.decrease.circle")
-            .onTapGesture {
-              isEditingFilters = true
-            }
+          Button {
+            isEditingFilters = true
+          } label: {
+            Label("account.action.edit-filters", systemImage: "line.3.horizontal.decrease.circle")
+              .frame(maxWidth: .infinity, alignment: .leading)
+              .contentShape(Rectangle())
+          }
+          .buttonStyle(.plain)
         }
         if let subscription = pushNotifications.subscriptions.first(where: { $0.account.token == appAccount.oauthToken }) {
           NavigationLink(destination: PushNotificationsView(subscription: subscription)) {
@@ -53,6 +62,7 @@ struct AccountSettingsView: View {
           }
         } label: {
           Text("account.action.logout")
+            .frame(maxWidth: .infinity)
         }
       }
       .listRowBackground(theme.primaryBackgroundColor)
