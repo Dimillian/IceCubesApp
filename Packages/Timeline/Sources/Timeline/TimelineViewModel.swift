@@ -72,17 +72,26 @@ class TimelineViewModel: ObservableObject {
     {
       pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
       statuses.insert(event.status, at: 0)
+      Task {
+        await cache(statuses: statuses)
+      }
       withAnimation {
         statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
       }
     } else if let event = event as? StreamEventDelete {
       withAnimation {
         statuses.removeAll(where: { $0.id == event.status })
+        Task {
+          await cache(statuses: statuses)
+        }
         statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
       }
     } else if let event = event as? StreamEventStatusUpdate {
       if let originalIndex = statuses.firstIndex(where: { $0.id == event.status.id }) {
         statuses[originalIndex] = event.status
+        Task {
+          await cache(statuses: statuses)
+        }
         statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
       }
     }
