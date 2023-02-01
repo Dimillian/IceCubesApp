@@ -80,7 +80,7 @@ class TimelineViewModel: ObservableObject {
       var newStatus = event.status
       if let accountId {
         if newStatus.mentions.first(where: { $0.id == accountId }) != nil {
-          newStatus.shouldHighlight = true
+          newStatus.uiShouldHighlight = true
         }
       }
       statuses.insert(newStatus, at: 0)
@@ -290,7 +290,7 @@ extension TimelineViewModel: StatusesFetcher {
     if !statuses.isEmpty, let accountId {
       for i in statuses.indices {
         if statuses[i].mentions.first(where: { $0.id == accountId }) != nil {
-          statuses[i].shouldHighlight = true
+          statuses[i].uiShouldHighlight = true
         }
       }
     }

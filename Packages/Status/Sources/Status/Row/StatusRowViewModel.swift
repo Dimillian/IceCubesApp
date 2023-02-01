@@ -37,7 +37,7 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   var shouldHighlightRow: Bool {
-    status.shouldHighlight != nil
+    status.uiShouldHighlight != nil
   }
 
   var client: Client?
