@@ -251,19 +251,17 @@ extension TimelineViewModel: StatusesFetcher {
   }
 
   func fetchNextPage() async {
-    guard let client else { return }
     do {
       guard let lastId = statuses.last?.id else { return }
       statusesState = .display(statuses: statuses, nextPageState: .loadingNextPage)
-      var newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
-                                                                                   maxId: lastId,
-                                                                                   minId: nil,
-                                                                                   offset: statuses.count))
+      var newStatuses: [Status] = try await fetchPages(maxId: lastId, offset: statuses.count)
 
-      ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
+      if !newStatuses.isEmpty {
+        ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
 
+        statuses.append(contentsOf: newStatuses)
+      }
 
-      statuses.append(contentsOf: newStatuses)
       statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
     } catch {
       statusesState = .error(error: error)
