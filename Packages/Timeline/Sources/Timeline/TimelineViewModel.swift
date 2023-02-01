@@ -152,19 +152,7 @@ extension TimelineViewModel: StatusesFetcher {
       // And then we fetch statuses again toget newest statuses from there.
       await fetchStatuses()
     } else {
-      statuses = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
-                                                                  maxId: nil,
-                                                                  minId: nil,
-                                                                  offset: statuses.count))
-      if let accountId {
-        for i in statuses.indices {
-          if statuses[i].mentions.first(where: { $0.id == accountId }) != nil {
-            print("SWG: updating in fetchFirstPage")
-            statuses[i].shouldHighlight = true
-          }
-        }
-      }
-
+      statuses = try await fetchPages(offset: statuses.count)
       await cacheHome()
       withAnimation {
         statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
@@ -176,15 +164,6 @@ extension TimelineViewModel: StatusesFetcher {
   private func fetchNewPagesFrom(latestStatus: Status, client _: Client) async throws {
     canStreamEvents = false
     var newStatuses: [Status] = await fetchNewPages(minId: latestStatus.id, maxPages: 10)
-
-    if let accountId {
-      for i in newStatuses.indices {
-        if newStatuses[i].mentions.first(where: { $0.id == accountId }) != nil {
-          print("SWG: updating in fetchNewPagesFrom")
-          newStatuses[i].shouldHighlight = true
-        }
-      }
-    }
 
     // Dedup statuses, a status with the same id could have been streamed in.
     newStatuses = newStatuses.filter { status in
@@ -239,18 +218,14 @@ extension TimelineViewModel: StatusesFetcher {
   }
 
   private func fetchNewPages(minId: String, maxPages: Int) async -> [Status] {
-    guard let client else { return [] }
+    if client == nil { return [] }
+
     var pagesLoaded = 0
     var allStatuses: [Status] = []
     var latestMinId = minId
     do {
-      while let newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
-                                                                                         maxId: nil,
-                                                                                         minId: latestMinId,
-                                                                                         offset: statuses.count)),
-        !newStatuses.isEmpty,
-        pagesLoaded < maxPages
-      {
+      let newStatuses: [Status] = try await fetchPages(minId: latestMinId, offset: statuses.count)
+      while !newStatuses.isEmpty, pagesLoaded < maxPages {
         pagesLoaded += 1
         allStatuses.insert(contentsOf: newStatuses, at: 0)
         latestMinId = newStatuses.first?.id ?? ""
@@ -262,25 +237,16 @@ extension TimelineViewModel: StatusesFetcher {
   }
 
   func fetchNextPage() async {
-    guard let client else { return }
+    if client == nil { return }
+
     do {
       guard let lastId = statuses.last?.id else { return }
       statusesState = .display(statuses: statuses, nextPageState: .loadingNextPage)
-      var newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
-                                                                                   maxId: lastId,
-                                                                                   minId: nil,
-                                                                                   offset: statuses.count))
+      let newStatuses: [Status] = try await fetchPages(maxId: lastId, offset: statuses.count)
 
-      if let accountId {
-        for i in newStatuses.indices {
-          if newStatuses[i].mentions.first(where: { $0.id == accountId }) != nil {
-            print("SWG: updating in fetchNextPage")
-            newStatuses[i].shouldHighlight = true
-          }
-        }
+      if !newStatuses.isEmpty {
+        statuses.append(contentsOf: newStatuses)
       }
-
-      statuses.append(contentsOf: newStatuses)
       statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
     } catch {
       statusesState = .error(error: error)
