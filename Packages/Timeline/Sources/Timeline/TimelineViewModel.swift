@@ -73,7 +73,7 @@ class TimelineViewModel: ObservableObject {
       pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
       statuses.insert(event.status, at: 0)
       Task {
-        await cache(statuses: statuses)
+        await cacheHome()
       }
       withAnimation {
         statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
@@ -82,7 +82,7 @@ class TimelineViewModel: ObservableObject {
       withAnimation {
         statuses.removeAll(where: { $0.id == event.status })
         Task {
-          await cache(statuses: statuses)
+          await cacheHome()
         }
         statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
       }
@@ -90,7 +90,7 @@ class TimelineViewModel: ObservableObject {
       if let originalIndex = statuses.firstIndex(where: { $0.id == event.status.id }) {
         statuses[originalIndex] = event.status
         Task {
-          await cache(statuses: statuses)
+          await cacheHome()
         }
         statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
       }
@@ -101,8 +101,8 @@ class TimelineViewModel: ObservableObject {
 // MARK: - Cache
 
 extension TimelineViewModel {
-  private func cache(statuses: [Status]) async {
-    if let client {
+  private func cacheHome() async {
+    if let client, timeline == .home {
       await cache.set(statuses: statuses, client: client)
     }
   }
@@ -152,9 +152,7 @@ extension TimelineViewModel: StatusesFetcher {
                                                                   maxId: nil,
                                                                   minId: nil,
                                                                   offset: statuses.count))
-      if timeline == .home {
-        await cache(statuses: statuses)
-      }
+      await cacheHome()
       withAnimation {
         statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
       }
@@ -184,9 +182,7 @@ extension TimelineViewModel: StatusesFetcher {
     statuses.insert(contentsOf: newStatuses, at: 0)
 
     // Cache statuses for home timeline.
-    if timeline == .home {
-      await cache(statuses: statuses)
-    }
+    await cacheHome()
 
     // If pending statuses are not enabled, we simply load status on the top regardless of the current position.
     if !pendingStatusesEnabled {
