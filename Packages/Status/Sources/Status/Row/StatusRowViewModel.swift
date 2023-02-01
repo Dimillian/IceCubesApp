@@ -36,6 +36,10 @@ public class StatusRowViewModel: ObservableObject {
     status.reblog?.filtered?.first ?? status.filtered?.first
   }
 
+  var shouldHighlightRow: Bool {
+    status.shouldHighlight != nil
+  }
+
   var client: Client?
 
   public init(status: Status,

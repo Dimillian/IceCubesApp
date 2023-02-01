@@ -59,6 +59,8 @@ public struct Status: AnyStatus, Decodable, Identifiable, Equatable, Hashable {
     id + createdAt + (editedAt ?? "")
   }
 
+  public var shouldHighlight: Bool?
+
   public static func == (lhs: Status, rhs: Status) -> Bool {
     lhs.id == rhs.id
   }
