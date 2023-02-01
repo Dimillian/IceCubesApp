@@ -20,7 +20,7 @@ struct TimelineTab: View {
   @State private var timeline: TimelineFilter
   @State private var scrollToTopSignal: Int = 0
   
-  @AppStorage("timelineFilter") public var timelineFilter: String = TimelineFilter.home.title
+  @AppStorage("last_timeline_filter") public var timelineFilter: String = TimelineFilter.home.title
 
   private let canFilterTimeline: Bool
 
