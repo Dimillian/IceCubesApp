@@ -28,7 +28,7 @@ class PendingStatusesObserver: ObservableObject {
 
 struct PendingStatusesObserverView: View {
   @ObservedObject var observer: PendingStatusesObserver
-  @State var proxy: ScrollViewProxy
+  var proxy: ScrollViewProxy
   
   var body: some View {
     if observer.pendingStatusesCount > 0 {
@@ -36,7 +36,7 @@ struct PendingStatusesObserverView: View {
         Spacer()
         Button {
           withAnimation {
-            proxy.scrollTo(observer.pendingStatuses.last, anchor: .bottom)
+            proxy.scrollTo(observer.pendingStatuses.last, anchor: .top)
           }
         } label: {
           Text("\(observer.pendingStatusesCount)")

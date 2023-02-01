@@ -70,7 +70,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
         }
       } else if let first = statuses.first {
         canStreamEvents = false
-        var newStatuses: [Status] = await fetchNewPages(minId: first.id, maxPages: 20)
+        var newStatuses: [Status] = await fetchNewPages(minId: first.id, maxPages: 10)
         if !pendingStatusesEnabled {
           statuses.insert(contentsOf: newStatuses, at: 0)
           pendingStatusesObserver.pendingStatuses = []
@@ -98,7 +98,7 @@ class TimelineViewModel: ObservableObject, StatusesFetcher {
             withAnimation {
               statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
               DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-                self.scrollProxy?.scrollTo(firstStatusId)
+                self.scrollProxy?.scrollTo(firstStatusId, anchor: .top)
                 self.pendingStatusesObserver.disableUpdate = false
                 self.canStreamEvents = true
               }
