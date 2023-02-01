@@ -22,7 +22,12 @@ class TimelineViewModel: ObservableObject {
   private var canStreamEvents: Bool = true
 
   let pendingStatusesObserver: PendingStatusesObserver = .init()
-  let cache: TimelineCache = .shared
+
+  private var accountId: String? {
+    CurrentAccount.shared.account?.id
+  }
+
+  private let cache: TimelineCache = .shared
 
   @Published var scrollToStatus: String?
 
@@ -57,7 +62,7 @@ class TimelineViewModel: ObservableObject {
     client?.server ?? "Error"
   }
 
-  func fetchTag(id: String) async {
+  private func fetchTag(id: String) async {
     guard let client else { return }
     do {
       tag = try await client.get(endpoint: Tags.tag(id: id))
@@ -122,7 +127,7 @@ extension TimelineViewModel: StatusesFetcher {
     guard let client else { return }
     do {
       if statuses.isEmpty {
-        try await fetchFirstPage(client: client)
+        try await fetchFirstPage()
       } else if let latest = statuses.first {
         try await fetchNewPagesFrom(latestStatus: latest, client: client)
       }
@@ -134,7 +139,7 @@ extension TimelineViewModel: StatusesFetcher {
   }
 
   // Hydrate statuses in the Timeline when statuses are empty.
-  private func fetchFirstPage(client: Client) async throws {
+  private func fetchFirstPage() async throws {
     pendingStatusesObserver.pendingStatuses = []
     statusesState = .loading
 
@@ -148,11 +153,7 @@ extension TimelineViewModel: StatusesFetcher {
       // And then we fetch statuses again toget newest statuses from there.
       await fetchStatuses()
     } else {
-      statuses = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
-                                                                  maxId: nil,
-                                                                  minId: nil,
-                                                                  offset: statuses.count))
-
+      statuses = try await fetchPages(offset: statuses.count)
 
       ReblogCache.shared.removeDuplicateReblogs(&statuses)
 
