@@ -19,6 +19,8 @@ struct TimelineTab: View {
   @State private var didAppear: Bool = false
   @State private var timeline: TimelineFilter
   @State private var scrollToTopSignal: Int = 0
+  
+  @AppStorage("timelineFilter") public var timelineFilter: String = TimelineFilter.home.title
 
   private let canFilterTimeline: Bool
 
@@ -43,7 +45,11 @@ struct TimelineTab: View {
       routerPath.client = client
       if !didAppear && canFilterTimeline {
         didAppear = true
-        timeline = client.isAuth ? .home : .federated
+        if(client.isAuth) {
+          timeline = TimelineFilter.toFilter(title: timelineFilter)
+        } else {
+            timeline = .federated
+        }
       }
       Task {
         await currentAccount.fetchLists()
@@ -53,10 +59,18 @@ struct TimelineTab: View {
       }
     }
     .onChange(of: client.isAuth, perform: { isAuth in
-      timeline = isAuth ? .home : .federated
+      if(client.isAuth) {
+        timeline = TimelineFilter.toFilter(title: timelineFilter)
+      } else {
+          timeline = .federated
+      }
     })
     .onChange(of: currentAccount.account?.id, perform: { _ in
-      timeline = client.isAuth && canFilterTimeline ? .home : .federated
+      if(client.isAuth && canFilterTimeline) {
+        timeline = TimelineFilter.toFilter(title: timelineFilter)
+      } else {
+          timeline = .federated
+      }
     })
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
       if popToRootTab == .timeline {
@@ -69,6 +83,9 @@ struct TimelineTab: View {
     }
     .onChange(of: currentAccount.account?.id) { _ in
       routerPath.path = []
+    }
+    .onChange(of: timeline) { timeline in
+      timelineFilter = timeline.title
     }
     .withSafariRouter()
     .environmentObject(routerPath)

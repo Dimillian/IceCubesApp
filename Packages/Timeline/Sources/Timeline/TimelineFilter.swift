@@ -19,6 +19,21 @@ public enum TimelineFilter: Hashable, Equatable {
     }
     return [.home, .local, .federated, .trending]
   }
+    
+  public static func toFilter(title: String) -> TimelineFilter {
+    switch title {
+    case "Federated":
+        return .federated
+    case "Local":
+        return .local
+    case "Trending":
+        return .trending
+    case "Home":
+        return .home
+    default:
+        return .home
+    }
+  }
 
   public var title: String {
     switch self {
