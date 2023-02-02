@@ -29,8 +29,6 @@ struct IceCubesApp: App {
   @State private var popToRootTab: Tab = .other
   @State private var sideBarLoadedTabs: Set<Tab> = Set()
 
-  private let feedbackGenerator = UISelectionFeedbackGenerator()
-
   private var availableTabs: [Tab] {
     appAccountsManager.currentClient.isAuth ? Tab.loggedInTabs() : Tab.loggedOutTab()
   }
@@ -142,7 +140,7 @@ struct IceCubesApp: App {
         }
       }
       selectedTab = newTab
-      feedbackGenerator.selectionChanged()
+      HapticManager.shared.selectionChanged()
     })) {
       ForEach(availableTabs) { tab in
         tab.makeContentView(popToRootTab: $popToRootTab)

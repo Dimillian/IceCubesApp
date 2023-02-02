@@ -212,7 +212,6 @@ extension TimelineViewModel: StatusesFetcher {
     } else {
       // Append new statuses in the timeline indicator.
       pendingStatusesObserver.pendingStatuses.insert(contentsOf: newStatuses.map { $0.id }, at: 0)
-      pendingStatusesObserver.feedbackGenerator.impactOccurred()
 
       // High chance the user is scrolled to the top.
       // We need to update the statuses state, and then scroll to the previous top most status.
