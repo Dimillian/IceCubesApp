@@ -201,6 +201,10 @@ extension TimelineViewModel: StatusesFetcher {
     } else {
       // Append new statuses in the timeline indicator.
       pendingStatusesObserver.pendingStatuses.insert(contentsOf: newStatuses.map { $0.id }, at: 0)
+      
+      // Only pass max 4 status messages for showing up avatars
+      pendingStatusesObserver.pendingStatusSubset = Array(newStatuses.prefix(4))
+      
       pendingStatusesObserver.feedbackGenerator.impactOccurred()
 
       // High chance the user is scrolled to the top.
