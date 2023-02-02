@@ -17,7 +17,13 @@ class TimelineViewModel: ObservableObject {
   // Internal source of truth for a timeline.
   private var statuses: [Status] = []
   private var visibileStatusesIds = Set<String>()
-  var scrollToTopVisible: Bool = false
+  var scrollToTopVisible: Bool = false {
+    didSet {
+      if scrollToTopVisible {
+        pendingStatusesObserver.pendingStatuses = []
+      }
+    }
+  }
 
   private var canStreamEvents: Bool = true
 
@@ -52,7 +58,6 @@ class TimelineViewModel: ObservableObject {
   }
 
   @Published var tag: Tag?
-  @Published var pendingStatusesCount: Int = 0
 
   var pendingStatusesEnabled: Bool {
     timeline == .home
