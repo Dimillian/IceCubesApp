@@ -129,11 +129,10 @@ struct SettingsTabs: View {
         } label: {
           Label("settings.general.browser", systemImage: "network")
         }
-        if(preferences.preferredBrowser == PreferredBrowser.inAppSafari) {
-          Toggle(isOn: $preferences.inAppBrowserReaderView) {
-            Label("settings.general.browser.in-app.readerview", systemImage: "doc.plaintext")
-          }
+        Toggle(isOn: $preferences.inAppBrowserReaderView) {
+          Label("settings.general.browser.in-app.readerview", systemImage: "doc.plaintext")
         }
+        .disabled(preferences.preferredBrowser != PreferredBrowser.inAppSafari)
       }
       Toggle(isOn: $preferences.isOpenAIEnabled) {
         Label("settings.other.hide-openai", systemImage: "faxmachine")
