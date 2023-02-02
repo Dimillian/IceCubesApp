@@ -80,7 +80,19 @@ public struct HTMLString: Decodable, Equatable, Hashable {
       }
       else if node.nodeName() == "br" {
         if asMarkdown.count > 0 { // ignore first opening <br>
-          asMarkdown += "\n"
+          
+          // some code to try and stop double carriage rerturns where they aren't required
+          // not perfect but effective in almost all cases
+          if !asMarkdown.hasSuffix("\n") && !asMarkdown.hasSuffix("\u{2028}") {
+            if let next = node.nextSibling() {
+              if next.nodeName() == "#text" && (next.description.hasPrefix("\n") || next.description.hasPrefix("\u{2028}")) {
+                 // do nothing
+              }
+              else {
+                asMarkdown += "\n"
+              }
+            }
+          }
         }
       }
       else if node.nodeName() == "a" {
