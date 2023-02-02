@@ -1,11 +1,10 @@
 import Foundation
 import Models
 import SwiftUI
+import Env
 
 @MainActor
 class PendingStatusesObserver: ObservableObject {
-  let feedbackGenerator = UIImpactFeedbackGenerator(style: .light)
-
   @Published var pendingStatusesCount: Int = 0
 
   var disableUpdate: Bool = false
@@ -19,7 +18,7 @@ class PendingStatusesObserver: ObservableObject {
   func removeStatus(status: Status) {
     if !disableUpdate, let index = pendingStatuses.firstIndex(of: status.id) {
       pendingStatuses.removeSubrange(index ... (pendingStatuses.count - 1))
-      feedbackGenerator.impactOccurred()
+      HapticManager.shared.selectionChanged()
     }
   }
 

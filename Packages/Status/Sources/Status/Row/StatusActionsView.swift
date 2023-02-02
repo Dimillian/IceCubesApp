@@ -10,8 +10,6 @@ struct StatusActionsView: View {
   @EnvironmentObject private var routerPath: RouterPath
   @ObservedObject var viewModel: StatusRowViewModel
 
-  let generator = UINotificationFeedbackGenerator()
-
   @MainActor
   enum Actions: CaseIterable {
     case respond, boost, favorite, bookmark, share
@@ -158,7 +156,7 @@ struct StatusActionsView: View {
 
   private func handleAction(action: Actions) {
     Task {
-      generator.notificationOccurred(.success)
+      HapticManager.shared.notification(type: .success)
       switch action {
       case .respond:
         routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)

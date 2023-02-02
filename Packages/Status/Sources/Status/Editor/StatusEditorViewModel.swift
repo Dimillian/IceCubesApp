@@ -8,7 +8,6 @@ import SwiftUI
 @MainActor
 public class StatusEditorViewModel: ObservableObject {  
   var mode: Mode
-  let generator = UINotificationFeedbackGenerator()
 
   var client: Client?
   var currentAccount: Account?
@@ -140,7 +139,7 @@ public class StatusEditorViewModel: ObservableObject {
       case let .edit(status):
         postStatus = try await client.put(endpoint: Statuses.editStatus(id: status.id, json: data))
       }
-      generator.notificationOccurred(.success)
+      HapticManager.shared.notification(type: .success)
       if hasExplicitlySelectedLanguage, let selectedLanguage {
         preferences?.markLanguageAsSelected(isoCode: selectedLanguage)
       }
@@ -152,7 +151,7 @@ public class StatusEditorViewModel: ObservableObject {
         showPostingErrorAlert = true
       }
       isPosting = false
-      generator.notificationOccurred(.error)
+      HapticManager.shared.notification(type: .error)
       return nil
     }
   }

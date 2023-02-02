@@ -17,12 +17,23 @@ class TimelineViewModel: ObservableObject {
   // Internal source of truth for a timeline.
   private var statuses: [Status] = []
   private var visibileStatusesIds = Set<String>()
-  var scrollToTopVisible: Bool = false
+  var scrollToTopVisible: Bool = false {
+    didSet {
+      if scrollToTopVisible {
+        pendingStatusesObserver.pendingStatuses = []
+      }
+    }
+  }
 
   private var canStreamEvents: Bool = true
 
   let pendingStatusesObserver: PendingStatusesObserver = .init()
-  let cache: TimelineCache = .shared
+
+  private var accountId: String? {
+    CurrentAccount.shared.account?.id
+  }
+
+  private let cache: TimelineCache = .shared
 
   @Published var scrollToStatus: String?
 
@@ -47,7 +58,6 @@ class TimelineViewModel: ObservableObject {
   }
 
   @Published var tag: Tag?
-  @Published var pendingStatusesCount: Int = 0
 
   var pendingStatusesEnabled: Bool {
     timeline == .home
@@ -57,7 +67,7 @@ class TimelineViewModel: ObservableObject {
     client?.server ?? "Error"
   }
 
-  func fetchTag(id: String) async {
+  private func fetchTag(id: String) async {
     guard let client else { return }
     do {
       tag = try await client.get(endpoint: Tags.tag(id: id))
@@ -71,7 +81,13 @@ class TimelineViewModel: ObservableObject {
        !statuses.contains(where: { $0.id == event.status.id })
     {
       pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
-      statuses.insert(event.status, at: 0)
+      var newStatus = event.status
+      if let accountId {
+        if newStatus.mentions.first(where: { $0.id == accountId }) != nil {
+          newStatus.uiShouldHighlight = true
+        }
+      }
+      statuses.insert(newStatus, at: 0)
       Task {
         await cacheHome()
       }
@@ -153,7 +169,7 @@ extension TimelineViewModel: StatusesFetcher {
                                                                   minId: nil,
                                                                   offset: statuses.count))
 
-
+      updateMentionsToBeHighlighted(&statuses)
       ReblogCache.shared.removeDuplicateReblogs(&statuses)
 
       await cacheHome()
@@ -201,14 +217,13 @@ extension TimelineViewModel: StatusesFetcher {
     } else {
       // Append new statuses in the timeline indicator.
       pendingStatusesObserver.pendingStatuses.insert(contentsOf: newStatuses.map { $0.id }, at: 0)
-      pendingStatusesObserver.feedbackGenerator.impactOccurred()
 
       // High chance the user is scrolled to the top.
       // We need to update the statuses state, and then scroll to the previous top most status.
       if let topStatusId, visibileStatusesIds.contains(topStatusId), scrollToTopVisible {
         pendingStatusesObserver.disableUpdate = true
-        statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
         scrollToStatus = topStatusId
+        statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
         DispatchQueue.main.async {
           self.pendingStatusesObserver.disableUpdate = false
           self.canStreamEvents = true
@@ -238,6 +253,7 @@ extension TimelineViewModel: StatusesFetcher {
       {
         pagesLoaded += 1
 
+        updateMentionsToBeHighlighted(&newStatuses)
         ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
         
         allStatuses.insert(contentsOf: newStatuses, at: 0)
@@ -259,13 +275,25 @@ extension TimelineViewModel: StatusesFetcher {
                                                                                    minId: nil,
                                                                                    offset: statuses.count))
 
+
+      updateMentionsToBeHighlighted(&newStatuses)
       ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
 
-
       statuses.append(contentsOf: newStatuses)
+
       statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
     } catch {
       statusesState = .error(error: error)
+    }
+  }
+
+  private func updateMentionsToBeHighlighted(_ statuses: inout [Status]) {
+    if !statuses.isEmpty, let accountId {
+      for i in statuses.indices {
+        if statuses[i].mentions.first(where: { $0.id == accountId }) != nil {
+          statuses[i].uiShouldHighlight = true
+        }
+      }
     }
   }
 

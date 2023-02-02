@@ -60,6 +60,7 @@
 "settings.display.font" = "Timeline Font";
 "settings.display.font.system" = "System";
 "settings.display.font.custom" = "Custom";
+"settings.display.font.scaling-%@" = "Font scaling: %@";
 "settings.display.avatar.position" = "Avatar position";
 "settings.display.avatar.shape" = "Avatar shape";
 "settings.display.navigation-title" = "Display Settings";
@@ -95,6 +96,7 @@
 "settings.content.navigation-title" = "Content Settings";
 "settings.content.use-instance-settings" = "Use server settings";
 "settings.content.main-toggle.description" = "Use the settings from your home Instance";
+"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
 "settings.content.expand-spoilers" = "Always show sensitive posts";
 "settings.content.expand-media" = "Media display";
 "settings.content.default-sensitive" = "Always mark media as sensitive";

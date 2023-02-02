@@ -25,8 +25,6 @@ public struct TimelineView: View {
   @Binding var timeline: TimelineFilter
   @Binding var scrollToTopSignal: Int
 
-  private let feedbackGenerator = UIImpactFeedbackGenerator()
-
   public init(timeline: Binding<TimelineFilter>, scrollToTopSignal: Binding<Int>) {
     _timeline = timeline
     _scrollToTopSignal = scrollToTopSignal
@@ -60,7 +58,7 @@ public struct TimelineView: View {
       .onChange(of: viewModel.scrollToStatus) { statusId in
         if let statusId {
           viewModel.scrollToStatus = nil
-          proxy.scrollTo(statusId, anchor: .top)
+          proxy.scrollTo(statusId, anchor: .center)
         }
       }
       .onChange(of: scrollToTopSignal, perform: { _ in
@@ -82,9 +80,9 @@ public struct TimelineView: View {
       }
     }
     .refreshable {
-      feedbackGenerator.impactOccurred(intensity: 0.3)
+      HapticManager.shared.impact(intensity: 0.3)
       await viewModel.fetchStatuses()
-      feedbackGenerator.impactOccurred(intensity: 0.7)
+      HapticManager.shared.impact(intensity: 0.7)
     }
     .onChange(of: watcher.latestEvent?.id) { _ in
       if let latestEvent = watcher.latestEvent {

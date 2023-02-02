@@ -83,6 +83,13 @@ public struct StatusRowView: View {
       .contextMenu {
         contextMenu
       }
+      .listRowBackground(viewModel.shouldHighlightRow ? theme.secondaryBackgroundColor : theme.primaryBackgroundColor)
+      .swipeActions(edge: .trailing) {
+        trailinSwipeActions
+      }
+      .swipeActions(edge: .leading) {
+        leadingSwipeActions
+      }
       .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
       .accessibilityActions {
         // Add the individual mentions as accessibility actions
@@ -409,5 +416,46 @@ public struct StatusRowView: View {
     }
     .background(Color.black.opacity(0.40))
     .transition(.opacity)
+  }
+  
+  @ViewBuilder
+  private var trailinSwipeActions: some View {
+    Button {
+      Task {
+        HapticManager.shared.notification(type: .success)
+        if viewModel.isFavorited {
+          await viewModel.unFavorite()
+        } else {
+          await viewModel.favorite()
+        }
+      }
+    } label: {
+      Image(systemName: "star")
+    }
+    .tint(.yellow)
+    Button {
+      Task {
+        HapticManager.shared.notification(type: .success)
+        if viewModel.isReblogged {
+          await viewModel.unReblog()
+        } else {
+          await viewModel.reblog()
+        }
+      }
+    } label: {
+      Image(systemName: "arrow.left.arrow.right.circle")
+    }
+    .tint(theme.tintColor)
+  }
+  
+  @ViewBuilder
+  private var leadingSwipeActions: some View {
+    Button {
+      HapticManager.shared.notification(type: .success)
+      routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
+    } label: {
+      Image(systemName: "arrowshape.turn.up.left")
+    }
+    .tint(theme.tintColor)
   }
 }
