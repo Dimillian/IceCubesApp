@@ -218,8 +218,8 @@ extension TimelineViewModel: StatusesFetcher {
       // We need to update the statuses state, and then scroll to the previous top most status.
       if let topStatusId, visibileStatusesIds.contains(topStatusId), scrollToTopVisible {
         pendingStatusesObserver.disableUpdate = true
-        statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
         scrollToStatus = topStatusId
+        statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
         DispatchQueue.main.async {
           self.pendingStatusesObserver.disableUpdate = false
           self.canStreamEvents = true

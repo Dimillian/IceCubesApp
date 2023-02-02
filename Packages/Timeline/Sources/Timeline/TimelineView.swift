@@ -60,7 +60,7 @@ public struct TimelineView: View {
       .onChange(of: viewModel.scrollToStatus) { statusId in
         if let statusId {
           viewModel.scrollToStatus = nil
-          proxy.scrollTo(statusId, anchor: .top)
+          proxy.scrollTo(statusId, anchor: .center)
         }
       }
       .onChange(of: scrollToTopSignal, perform: { _ in
