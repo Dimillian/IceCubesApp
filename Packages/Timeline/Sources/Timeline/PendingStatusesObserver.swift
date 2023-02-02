@@ -9,24 +9,24 @@ class PendingStatusesObserver: ObservableObject {
   
   @AppStorage("expanded") public var isExpanded: Bool = false
   @Published var pendingStatusesCount: Int = 0
-  @Published var pendingStatusSubset: [Status] = []
   
   var disableUpdate: Bool = false
   
-  var pendingStatuses: [String] = [] {
+  var pendingStatuses: [Status] = [] {
     didSet {
       pendingStatusesCount = pendingStatuses.count
     }
   }
   
   func removeStatus(status: Status) {
-    if !disableUpdate, let index = pendingStatuses.firstIndex(of: status.id) {
+    if !disableUpdate, let index = pendingStatuses.firstIndex(of: status) {
       pendingStatuses.removeSubrange(index ... (pendingStatuses.count - 1))
       feedbackGenerator.impactOccurred()
     }
-    if let index = pendingStatusSubset.firstIndex(of: status) {
-      pendingStatusSubset.removeSubrange(index ... (pendingStatusSubset.count - 1))
-    }
+  }
+  
+  func getMaxAvatarCountRange() -> Int {
+    return pendingStatuses.count >= 4 ? 4 : pendingStatuses.count
   }
   
   func getMoreCount() -> Int? {
@@ -48,14 +48,14 @@ struct PendingStatusesObserverView: View {
         HStack {
           Button {} label: {
             if observer.isExpanded {
-              ForEach(observer.pendingStatusSubset) { status in
+              ForEach(observer.pendingStatuses[0..<observer.getMaxAvatarCountRange()]) { status in
                 AvatarView(url: status.account.avatar, size: .badge)
               }
               if let moreCount = observer.getMoreCount() {
                 Text("+\(moreCount)")
               }
             } else {
-              Text("\(observer.pendingStatusesCount)")
+              Text("\(observer.pendingStatuses.count)")
             }
           }
           Menu {

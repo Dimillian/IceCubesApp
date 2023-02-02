@@ -70,7 +70,7 @@ class TimelineViewModel: ObservableObject {
        pendingStatusesEnabled,
        !statuses.contains(where: { $0.id == event.status.id })
     {
-      pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
+      pendingStatusesObserver.pendingStatuses.insert(event.status, at: 0)
       statuses.insert(event.status, at: 0)
       Task {
         await cacheHome()
@@ -152,8 +152,7 @@ extension TimelineViewModel: StatusesFetcher {
                                                                   maxId: nil,
                                                                   minId: nil,
                                                                   offset: statuses.count))
-
-
+      
       ReblogCache.shared.removeDuplicateReblogs(&statuses)
 
       await cacheHome()
@@ -187,7 +186,7 @@ extension TimelineViewModel: StatusesFetcher {
 
     // Insert new statuses in internal datasource.
     statuses.insert(contentsOf: newStatuses, at: 0)
-
+    
     // Cache statuses for home timeline.
     await cacheHome()
 
@@ -200,10 +199,7 @@ extension TimelineViewModel: StatusesFetcher {
       }
     } else {
       // Append new statuses in the timeline indicator.
-      pendingStatusesObserver.pendingStatuses.insert(contentsOf: newStatuses.map { $0.id }, at: 0)
-      
-      // Only pass max 4 status messages for showing up avatars
-      pendingStatusesObserver.pendingStatusSubset = Array(newStatuses.prefix(4))
+      pendingStatusesObserver.pendingStatuses.insert(contentsOf: newStatuses, at: 0)
       
       pendingStatusesObserver.feedbackGenerator.impactOccurred()
 
