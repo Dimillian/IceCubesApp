@@ -116,8 +116,8 @@
 "settings.system" = "系统设置";
 "settings.content.navigation-title" = "内容设置";
 "settings.content.boosts" = "转发";
-"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
-"settings.content.instance-settings" = "Server Content Settings";
+"settings.content.hide-repeated-boosts" = "隐藏重复的转发";
+"settings.content.instance-settings" = "服务器内容设置";
 "settings.content.use-instance-settings" = "使用服务器设置";
 "settings.content.expand-spoilers" = "始终显示敏感内容";
 "settings.content.expand-media" = "媒体显示";
@@ -134,7 +134,7 @@
 "settings.display.font" = "时间线字体";
 "settings.display.font.system" = "系统";
 "settings.display.font.custom" = "自定义";
-"settings.display.font.scaling-%@" = "Font scaling: %@";
+"settings.display.font.scaling-%@" = "字体缩放：%@";
 
 // MARK: Tabs
 "tab.explore" = "探索";
@@ -199,7 +199,7 @@
 "account.follow-requests.instructions" = "在你接受之前这些用户都无法看到你的嘟文";
 "account.followers" = "粉丝";
 "account.following" = "关注";
-"account.list.create" = "新建一个列表";
+"account.list.create" = "新建列表";
 "account.list.create.confirm" = "创建列表";
 "account.list.create.description" = "为你的列表命名";
 "account.list.delete" = "删除列表";
@@ -255,7 +255,7 @@
 
 // MARK: Package: Lists
 "lists.add-remove-%@" = "添加/移除 %@";
-"lists.create" = "新建一个列表";
+"lists.create" = "新建列表";
 "lists.create.confirm" = "创建列表";
 "lists.edit.users-in-list" = "列表中的用户";
 "lists.name" = "列表名称";
