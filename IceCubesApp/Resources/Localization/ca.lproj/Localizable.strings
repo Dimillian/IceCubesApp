@@ -129,11 +129,11 @@
 "settings.push.duplicate.title" = "Solucionador de notificacions duplicades";
 "settings.push.duplicate.footer" = "Rebeu les notificacions duplicades? Proveu aquest botó màgic per a solucionar-ho";
 "settings.push.duplicate.button.fix" = "🪄 Soluciona-ho";
-"settings.other.autoplay-video" = "Auto Play Videos";
-"settings.display.font" = "Timeline Font";
-"settings.display.font.system" = "System";
-"settings.display.font.custom" = "Custom";
-"settings.display.font.scaling-%@" = "Font scaling: %@";
+"settings.other.autoplay-video" = "Reprodueix els vídeos automàticament";
+"settings.display.font" = "Tipografia de la línia de temps";
+"settings.display.font.system" = "Sistema";
+"settings.display.font.custom" = "Personalitzada";
+"settings.display.font.scaling-%@" = "Escalat de la lletra: %@";
 
 // MARK: Tabs
 "tab.explore" = "Exploreu";
@@ -260,7 +260,7 @@
 "lists.name.message" = "Introduïu el nom de la llista";
 
 // MARK: Package: Notifications
-"notificacions.buit.message" = "Notificacions? Quines notificacions? La safata d'entrada de notificacions està molt buida. Continua sent així d'increïble! 📱😎";
+"notifications.buit.message" = "Notificacions? Quines notificacions? La safata d'entrada de notificacions està buida. Continua sent així d'increïble! 📱😎";
 "notifications.empty.title" = "No hi ha notificacions";
 "notifications.error.message" = "S'ha produït un error en carregar les notificacions, torneu-ho a provar.";
 "notifications.error.title" = "S'ha produït un error";
@@ -272,14 +272,14 @@
 "notifications.label.follow-request" = "ha sol·licitat seguir-vos";
 "notifications.label.status" = "ha fet una publicació";
 "notifications.label.update" = "ha editat una publicació";
-"notifications.menu-title.favorite" = "Preferit";
-"notifications.menu-title.follow" = "Seguiment";
-"notifications.menu-title.follow-request" = "Sol·licitud de seguiment";
-"notifications.menu-title.mention" = "Menció";
-"notifications.menu-title.poll" = "Poll";
-"notifications.menu-title.reblog" = "Impuls";
-"notifications.menu-title.status" = "Publicació";
-"notifications.menu-title.update" = "Publicació editada";
+"notifications.menu-title.favorite" = "Preferits";
+"notifications.menu-title.follow" = "Seguiments";
+"notifications.menu-title.follow-request" = "Sol·licituds de seguiment";
+"notifications.menu-title.mention" = "Mencions";
+"notifications.menu-title.poll" = "Enquestes";
+"notifications.menu-title.reblog" = "Impulsos";
+"notifications.menu-title.status" = "Publicacions";
+"notifications.menu-title.update" = "Edicions de publicacions";
 "notifications.navigation-title" = "Totes les notificacions";
 "notifications.tab.all" = "Totes";
 "notifications.tab.mentions" = "Mencions";
