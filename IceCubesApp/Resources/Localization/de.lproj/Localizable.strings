@@ -115,8 +115,8 @@
 "settings.system" = "System Settings";
 "settings.content.navigation-title" = "Inhaltseinstellungen";
 "settings.content.boosts" = "Boosts";
-"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
-"settings.content.instance-settings" = "Server Content Settings";
+"settings.content.hide-repeated-boosts" = "Wiederholte Boosts verstecken";
+"settings.content.instance-settings" = "Serverinhaltseinstellungen";
 "settings.content.use-instance-settings" = "Servereinstellungen verwenden";
 "settings.content.expand-spoilers" = "Sensible Inhalte immer zeigen";
 "settings.content.expand-media" = "Medienansicht";
@@ -127,11 +127,11 @@
 "settings.push.duplicate.title" = "Doppelte-Benachrichtigungen-Korrigierer";
 "settings.push.duplicate.footer" = "Bekommst du doppelte Benachrichtigungen? Probier diesen magischen Knopf aus";
 "settings.push.duplicate.button.fix" = "🪄 Beheben";
-"settings.other.autoplay-video" = "Auto Play Videos";
-"settings.display.font" = "Timeline Font";
+"settings.other.autoplay-video" = "Videos automatisch abspielen";
+"settings.display.font" = "Schriftart Timeline";
 "settings.display.font.system" = "System";
-"settings.display.font.custom" = "Custom";
-"settings.display.font.scaling-%@" = "Font scaling: %@";
+"settings.display.font.custom" = "Eigene";
+"settings.display.font.scaling-%@" = "Schriftskalierung: %@";
 
 "enum.expand-media.show" = "Alle zeigen";
 "enum.expand-media.hide" = "Alle ausblenden";
@@ -223,7 +223,7 @@
 "conversations.new.message.placeholder" = "Neue Nachricht";
 
 // MARK: Package: DesignSystem
-"design.tag.n-posts-from-n-participants %lld %lld" = "%lld Beiträge von %lld Teilnehmenden";
+"design.tag.n-posts-from-n-participants %lld %lld" = "%lld Beiträge von %lld Teilnehmern";
 "design.theme.navigation-title" = "Themen-Auswahl";
 "design.theme.toots-preview" = "Beitragsvorschau";
 
@@ -290,7 +290,7 @@
 "timeline.federated" = "Föderiert";
 "timeline.home" = "Startseite";
 "timeline.local" = "Lokal";
-"timeline.n-recent-from-n-participants %lld %lld" = "%lld aktuelle Beiträge von %lld Teilnehmenden";
+"timeline.n-recent-from-n-participants %lld %lld" = "%lld aktuelle Beiträge von %lld Teilnehmern";
 "timeline.trending" = "Im Trend";
 
 // MARK: Package: Status
