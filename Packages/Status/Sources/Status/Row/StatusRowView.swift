@@ -83,6 +83,7 @@ public struct StatusRowView: View {
       .contextMenu {
         contextMenu
       }
+      .listRowBackground(viewModel.shouldHighlightRow ? theme.secondaryBackgroundColor : theme.primaryBackgroundColor)
       .swipeActions(edge: .trailing) {
         trailinSwipeActions
       }
