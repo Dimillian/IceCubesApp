@@ -112,7 +112,7 @@
 "settings.other.hide-openai" = "Aktiviere 🤖 Helfer";
 "settings.other.social-keyboard" = "Soziale Tastatur aktivieren";
 "settings.general.content" = "Inhaltseinstellungen";
-"settings.system" = "System Settings";
+"settings.system" = "Systemeinstellungen";
 "settings.content.navigation-title" = "Inhaltseinstellungen";
 "settings.content.boosts" = "Boosts";
 "settings.content.hide-repeated-boosts" = "Wiederholte Boosts verstecken";
@@ -223,7 +223,7 @@
 "conversations.new.message.placeholder" = "Neue Nachricht";
 
 // MARK: Package: DesignSystem
-"design.tag.n-posts-from-n-participants %lld %lld" = "%lld Beiträge von %lld Teilnehmern";
+"design.tag.n-posts-from-n-participants %lld %lld" = "%lld Beiträge von %lld Teilnehmenden";
 "design.theme.navigation-title" = "Themen-Auswahl";
 "design.theme.toots-preview" = "Beitragsvorschau";
 
