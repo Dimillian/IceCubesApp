@@ -20,6 +20,7 @@ struct IconSelectorView: View {
     case alt9, alt10, alt11, alt12, alt13, alt14
     case alt15, alt16, alt17, alt18, alt19, alt20, alt21
     case alt22, alt23, alt24, alt25
+    case alt26, alt27, alt28
 
     static var officialIcons: [Icon] {
       [.primary, .alt1, .alt2, .alt3, .alt4, .alt5, .alt6, .alt7, .alt8,
@@ -29,6 +30,10 @@ struct IconSelectorView: View {
 
     static var albertKinngIcons: [Icon] {
       [.alt20, .alt21, .alt22, .alt23, .alt24]
+    }
+    
+    static var danIcons: [Icon] {
+      [.alt26, .alt27, .alt28]
     }
 
     var appIconName: String {
@@ -64,6 +69,13 @@ struct IconSelectorView: View {
           makeIconGridView(icons: Icon.albertKinngIcons)
         } header: {
           Text("Icons by Albert Kinng")
+            .font(.scaledHeadline)
+        }
+        
+        Section {
+          makeIconGridView(icons: Icon.danIcons)
+        } header: {
+          Text("Icons by Dan van Moll")
             .font(.scaledHeadline)
         }
       }

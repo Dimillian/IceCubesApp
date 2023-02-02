@@ -13,12 +13,17 @@ struct ContentSettingsView: View {
 
   var body: some View {
     Form {
-      Section {
+      
+      Section("settings.content.boosts") {
+        Toggle(isOn: $userPreferences.suppressDupeReblogs) {
+          Text("settings.content.hide-repeated-boosts")
+        }
+      }.listRowBackground(theme.primaryBackgroundColor)
+
+      Section("settings.content.instance-settings") {
         Toggle(isOn: $userPreferences.useInstanceContentSettings) {
           Text("settings.content.use-instance-settings")
         }
-      } footer: {
-        Text("settings.content.main-toggle.description")
       }
       .listRowBackground(theme.primaryBackgroundColor)
       .onChange(of: userPreferences.useInstanceContentSettings) { newVal in

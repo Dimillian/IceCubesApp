@@ -87,6 +87,22 @@
 "settings.push.navigation-title" = "İleti Bildirimleri";
 "settings.push.new-posts" = "Yeni Gönderiler";
 "settings.push.polls" = "Anket Sonuçları";
+"settings.general.content" = "Content Settings";
+"settings.system" = "System Settings";
+"settings.content.navigation-title" = "Content Settings";
+"settings.content.boosts" = "Yükseltmeler";
+"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
+"settings.content.instance-settings" = "Server Content Settings";
+"settings.content.use-instance-settings" = "Use server settings";
+"settings.content.expand-spoilers" = "Always show sensitive posts";
+"settings.content.expand-media" = "Media display";
+"settings.content.default-sensitive" = "Always mark media as sensitive";
+"settings.content.default-visibility" = "Posting visibility";
+"settings.content.reading" = "Reading";
+"settings.content.posting" = "Posting";
+"enum.expand-media.show" = "Show All";
+"enum.expand-media.hide" = "Hide All";
+"enum.expand-media.hide-sensitive" = "Hide Sensitive";
 "settings.section.accounts" = "Hesaplar";
 "settings.section.app" = "Uygulama";
 "settings.section.app.footer %@" = "Uygulama Versiyonu: %@";
@@ -118,6 +134,7 @@
 "settings.display.font" = "Timeline Font";
 "settings.display.font.system" = "System";
 "settings.display.font.custom" = "Custom";
+"settings.display.font.scaling-%@" = "Font scaling: %@";
 
 // MARK: Tabs
 "tab.explore" = "Keşfet";

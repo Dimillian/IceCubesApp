@@ -67,6 +67,7 @@ public struct StatusRowView: View {
         }
       }
       .onAppear {
+        viewModel.markSeen()
         if reasons.isEmpty {
           viewModel.client = client
           if !viewModel.isCompact, viewModel.embeddedStatus == nil {
@@ -81,6 +82,12 @@ public struct StatusRowView: View {
       }
       .contextMenu {
         contextMenu
+      }
+      .swipeActions(edge: .trailing) {
+        trailinSwipeActions
+      }
+      .swipeActions(edge: .leading) {
+        leadingSwipeActions
       }
       .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
       .accessibilityActions {
@@ -408,5 +415,43 @@ public struct StatusRowView: View {
     }
     .background(Color.black.opacity(0.40))
     .transition(.opacity)
+  }
+  
+  @ViewBuilder
+  private var trailinSwipeActions: some View {
+    Button {
+      Task {
+        if viewModel.isFavorited {
+          await viewModel.unFavorite()
+        } else {
+          await viewModel.favorite()
+        }
+      }
+    } label: {
+      Image(systemName: "star")
+    }
+    .tint(.yellow)
+    Button {
+      Task {
+        if viewModel.isReblogged {
+          await viewModel.unReblog()
+        } else {
+          await viewModel.reblog()
+        }
+      }
+    } label: {
+      Image(systemName: "arrow.left.arrow.right.circle")
+    }
+    .tint(theme.tintColor)
+  }
+  
+  @ViewBuilder
+  private var leadingSwipeActions: some View {
+    Button {
+      routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
+    } label: {
+      Image(systemName: "arrowshape.turn.up.left")
+    }
+    .tint(theme.tintColor)
   }
 }

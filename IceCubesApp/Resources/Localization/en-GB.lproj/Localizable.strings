@@ -60,20 +60,19 @@
 "settings.display.font" = "Timeline Font";
 "settings.display.font.system" = "System";
 "settings.display.font.custom" = "Custom";
-"settings.display.font.scaling-%@" = "Font scaling: %@";
 "settings.display.avatar.position" = "Avatar position";
 "settings.display.avatar.shape" = "Avatar shape";
 "settings.display.navigation-title" = "Display Settings";
 "settings.display.restore" = "Restore defaults";
 "settings.display.section.display" = "Display";
 "settings.display.section.theme" = "Theme";
-"settings.display.section.theme.footer" = "Custom colors can only be set if match system color scheme is disabled";
+"settings.display.section.theme.footer" = "Custom colours can only be set if match system colour scheme is disabled";
 "settings.display.status.action-buttons" = "Status action buttons";
 "settings.display.status.media-style" = "Status media style";
 "settings.display.translate-button" = "Show translate button";
-"settings.display.theme.background" = "Background color";
-"settings.display.theme.secondary-background" = "Secondary Background color";
-"settings.display.theme.tint" = "Tint color";
+"settings.display.theme.background" = "Background colour";
+"settings.display.theme.secondary-background" = "Secondary Background colour";
+"settings.display.theme.tint" = "Tint colour";
 "settings.display.theme.systemColor" = "Match System";
 "settings.general.browser" = "Browser";
 "settings.general.browser.in-app" = "In-App Browser";
@@ -83,7 +82,7 @@
 "settings.general.push-notifications" = "Push Notifications";
 "settings.general.remote-timelines" = "Remote Local Timelines";
 "settings.push.boosts" = "Boosts";
-"settings.push.favorites" = "Favorites";
+"settings.push.favorites" = "Favourites";
 "settings.push.follows" = "Follows";
 "settings.push.main-toggle" = "Push Notifications";
 "settings.push.main-toggle.description" = "Receive push notifications on new activities";
@@ -94,10 +93,9 @@
 "settings.general.content" = "Content Settings";
 "settings.system" = "System Settings";
 "settings.content.navigation-title" = "Content Settings";
-"settings.content.boosts" = "Boosts";
-"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
-"settings.content.instance-settings" = "Server Content Settings";
 "settings.content.use-instance-settings" = "Use server settings";
+"settings.content.main-toggle.description" = "Use the settings from your home Instance";
+"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
 "settings.content.expand-spoilers" = "Always show sensitive posts";
 "settings.content.expand-media" = "Media display";
 "settings.content.default-sensitive" = "Always mark media as sensitive";
@@ -135,8 +133,7 @@
 "settings.push.duplicate.footer" = "Receiving duplicate notifications? Try this magic button in order to fix it";
 "settings.push.duplicate.button.fix" = "🪄 Fix it";
 "settings.other.autoplay-video" = "Auto Play Videos";
-"settings.pendingstatus.expanded" = "Expanded";
-"settings.pendingstatus.shrinked" = "Shrinked";
+
 // MARK: Tabs
 "tab.explore" = "Explore";
 "tab.federated" = "Federated";
@@ -190,7 +187,7 @@
 "account.edit.post-settings.privacy" = "Default privacy";
 "account.edit.post-settings.section-title" = "Post settings";
 "account.edit.post-settings.sensitive" = "Sensitive content";
-"account.favorited-by" = "Favorited by";
+"account.favorited-by" = "Favourited by";
 "account.follow.follow" = "Follow";
 "account.follow.following" = "Following";
 "account.follow.requested" = "Requested";
@@ -274,7 +271,7 @@
 "notifications.label.follow-request" = "requested to follow you";
 "notifications.label.status" = "posted a status";
 "notifications.label.update" = "edited a post";
-"notifications.menu-title.favorite" = "Favorite";
+"notifications.menu-title.favorite" = "Favourite";
 "notifications.menu-title.follow" = "Follow";
 "notifications.menu-title.follow-request" = "Follow Request";
 "notifications.menu-title.mention" = "Mention";
@@ -302,7 +299,7 @@
 "status.action.copy-text" = "Copy Text";
 "status.action.delete" = "Delete";
 "status.action.edit" = "Edit";
-"status.action.favorite" = "Favorite";
+"status.action.favorite" = "Favourite";
 "status.action.mention" = "Mention";
 "status.action.message" = "Message";
 "status.action.pin" = "Pin";
@@ -313,13 +310,13 @@
 "status.action.share" = "Share this post";
 "status.action.unbookmark" = "Unbookmark";
 "status.action.unboost" = "Unboost";
-"status.action.unfavorite" = "Unfavorite";
+"status.action.unfavorite" = "Unfavourite";
 "status.action.unpin" = "Unpin";
 "status.action.view-in-browser" = "View in Browser";
 "status.draft.delete" = "Delete Draft";
 "status.draft.save" = "Save Draft";
 "status.editor.ai-prompt.correct" = "Correct text";
-"status.editor.ai-prompt.emphasize" = "Emphasize text";
+"status.editor.ai-prompt.emphasize" = "Emphasise text";
 "status.editor.ai-prompt.fit" = "Shorten text";
 "status.editor.description.add" = "Add description";
 "status.editor.description.edit" = "Edit description";
@@ -364,7 +361,7 @@
 "status.summary.at-time" = " at ";
 "status.summary.edited-time" = "Last edited: ";
 "status.summary.n-boosts %lld" = "%lld boosts";
-"status.summary.n-favorites %lld" = "%lld favorites";
+"status.summary.n-favorites %lld" = "%lld favourites";
 "status.visibility.direct" = "Private";
 "status.visibility.follower" = "Followers";
 "status.visibility.public" = "Everyone";

@@ -19,9 +19,9 @@ public struct TimelineView: View {
   @EnvironmentObject private var routerPath: RouterPath
 
   @StateObject private var viewModel = TimelineViewModel()
-  
+
   @State private var wasBackgrounded: Bool = false
-  
+
   @Binding var timeline: TimelineFilter
   @Binding var scrollToTopSignal: Int
 
@@ -48,18 +48,26 @@ public struct TimelineView: View {
             StatusesListView(fetcher: viewModel)
           }
         }
-        .id(account.account?.id)
+        .id(client.id)
         .environment(\.defaultMinListRowHeight, 1)
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
         .background(theme.primaryBackgroundColor)
-//        if viewModel.pendingStatusesEnabled {
-          makePendingNewPostsView(proxy: proxy)
-//        }
+        if viewModel.pendingStatusesEnabled {
+          PendingStatusesObserverView(observer: viewModel.pendingStatusesObserver)
+        }
       }
-      .onAppear {
-        viewModel.scrollProxy = proxy
+      .onChange(of: viewModel.scrollToStatus) { statusId in
+        if let statusId {
+          viewModel.scrollToStatus = nil
+          proxy.scrollTo(statusId, anchor: .top)
+        }
       }
+      .onChange(of: scrollToTopSignal, perform: { _ in
+        withAnimation {
+          proxy.scrollTo(Constants.scrollToTop, anchor: .top)
+        }
+      })
     }
     .navigationTitle(timeline.localizedTitle())
     .navigationBarTitleDisplayMode(.inline)
@@ -83,11 +91,6 @@ public struct TimelineView: View {
         viewModel.handleEvent(event: latestEvent, currentAccount: account)
       }
     }
-    .onChange(of: scrollToTopSignal, perform: { _ in
-      withAnimation {
-        viewModel.scrollProxy?.scrollTo(Constants.scrollToTop, anchor: .top)
-      }
-    })
     .onChange(of: timeline) { newTimeline in
       switch newTimeline {
       case let .remoteLocal(server):
@@ -108,16 +111,11 @@ public struct TimelineView: View {
         }
       case .background:
         wasBackgrounded = true
-        
+
       default:
         break
       }
     })
-  }
-
-  @ViewBuilder
-  private func makePendingNewPostsView(proxy: ScrollViewProxy) -> some View {
-    PendingStatusesObserverView(observer: viewModel.pendingStatusesObserver, proxy: proxy)
   }
 
   @ViewBuilder
@@ -156,13 +154,19 @@ public struct TimelineView: View {
                            trailing: .layoutPadding))
     }
   }
-  
+
   private var scrollToTopView: some View {
-    HStack{ }
+    HStack { EmptyView() }
       .listRowBackground(theme.primaryBackgroundColor)
       .listRowSeparator(.hidden)
       .listRowInsets(.init())
       .frame(height: .layoutPadding)
       .id(Constants.scrollToTop)
+      .onAppear {
+        viewModel.scrollToTopVisible = true
+      }
+      .onDisappear {
+        viewModel.scrollToTopVisible = false
+      }
   }
 }

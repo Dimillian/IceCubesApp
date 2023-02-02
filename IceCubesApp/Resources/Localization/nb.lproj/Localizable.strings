@@ -60,6 +60,7 @@
 "settings.display.font" = "Tidslinjefont";
 "settings.display.font.system" = "System";
 "settings.display.font.custom" = "Tilpasset";
+"settings.display.font.scaling-%@" = "Font scaling: %@";
 "settings.display.avatar.position" = "Avatarposisjon";
 "settings.display.avatar.shape" = "Avatarform";
 "settings.display.navigation-title" = "Visningsinnstillinger";
@@ -93,8 +94,10 @@
 "settings.general.content" = "Innholdsinnstillinger";
 "settings.system" = "Systeminnstillinger";
 "settings.content.navigation-title" = "Innholdsinnstillinger";
+"settings.content.boosts" = "Forsterkninger";
+"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
+"settings.content.instance-settings" = "Server Content Settings";
 "settings.content.use-instance-settings" = "Bruk serverinnstillinger";
-"settings.content.main-toggle.description" = "Bruk innstillingene fra din hjemmeinstans";
 "settings.content.expand-spoilers" = "Vis alltid sensitive innlegg";
 "settings.content.expand-media" = "Medievisning";
 "settings.content.default-sensitive" = "Marker alltid medier som sensitive";

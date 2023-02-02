@@ -90,8 +90,10 @@
 "settings.general.content" = "Ustawienia treści";
 "settings.system" = "Ustawienia systemowe";
 "settings.content.navigation-title" = "Ustawienia treści";
+"settings.content.boosts" = "Podbicia";
+"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
+"settings.content.instance-settings" = "Server Content Settings";
 "settings.content.use-instance-settings" = "Zastosuj ustawienia serwera";
-"settings.content.main-toggle.description" = "Zastosuj ustawienia z twojego serwera macierzystego";
 "settings.content.expand-spoilers" = "Pokazuj wrażliwe posty";
 "settings.content.expand-media" = "Multimedia";
 "settings.content.default-sensitive" = "Oznaczaj media jako wrażliwe";
@@ -132,6 +134,7 @@
 "settings.display.font" = "Czcionka strumienia";
 "settings.display.font.system" = "Systemowa";
 "settings.display.font.custom" = "Własna";
+"settings.display.font.scaling-%@" = "Font scaling: %@";
 
 // MARK: Tabs
 "tab.explore" = "Odkrywaj";

@@ -90,8 +90,10 @@
 "settings.general.content" = "콘텐츠 설정";
 "settings.system" = "시스템 설정";
 "settings.content.navigation-title" = "콘텐츠 설정";
+"settings.content.boosts" = "부스트";
+"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
+"settings.content.instance-settings" = "Server Content Settings";
 "settings.content.use-instance-settings" = "인스턴스 설정에 맞추기";
-"settings.content.main-toggle.description" = "기본 인스턴스의 설정을 사용합니다.";
 "settings.content.expand-spoilers" = "열람 주의 표시된 글 항상 표시하기";
 "settings.content.expand-media" = "표시할 미디어";
 "settings.content.default-sensitive" = "내 미디어 항상 민감함으로 표시";
@@ -132,6 +134,7 @@
 "settings.display.font" = "타임라인 글꼴";
 "settings.display.font.system" = "시스템 글꼴 사용";
 "settings.display.font.custom" = "직접 설정";
+"settings.display.font.scaling-%@" = "Font scaling: %@";
 
 // MARK: Tabs
 "tab.explore" = "둘러보기";

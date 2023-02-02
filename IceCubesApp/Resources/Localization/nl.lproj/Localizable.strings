@@ -114,8 +114,10 @@
 "settings.general.content" = "Inhoud";
 "settings.system" = "Systeeminstellingen";
 "settings.content.navigation-title" = "Inhoud";
+"settings.content.boosts" = "Boosts";
+"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
+"settings.content.instance-settings" = "Server Content Settings";
 "settings.content.use-instance-settings" = "Gebruik serverinstellingen";
-"settings.content.main-toggle.description" = "Gebruik de instellingen van jouw thuisinstantie.";
 "settings.content.expand-spoilers" = "Toon gevoelige posts altijd";
 "settings.content.expand-media" = "Mediaweergave";
 "settings.content.default-sensitive" = "Markeer media standaard als gevoelig";
@@ -129,6 +131,7 @@
 "settings.display.font" = "Tijdlijnlettertype";
 "settings.display.font.system" = "Systeem";
 "settings.display.font.custom" = "Aangepast";
+"settings.display.font.scaling-%@" = "Font scaling: %@";
 
 // MARK: Tabs
 "tab.explore" = "Ontdekken";
