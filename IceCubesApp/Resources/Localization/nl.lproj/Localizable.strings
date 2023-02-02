@@ -73,6 +73,7 @@
 "settings.display.theme.systemColor" = "Automatisch";
 "settings.general.browser" = "Browser";
 "settings.general.browser.in-app" = "In-app";
+"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
 "settings.general.browser.system" = "Systeem";
 "settings.general.display" = "Weergaveopties";
 "settings.general.instance" = "Instantie-informatie";

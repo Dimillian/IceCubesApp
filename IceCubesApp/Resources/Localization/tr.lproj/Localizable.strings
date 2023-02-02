@@ -74,6 +74,7 @@
 "settings.general.browser" = "Tarayıcı";
 "settings.general.browser.in-app" = "Uygulama İçi Tarayıcı";
 "settings.general.browser.system" = "Sistem Tarayıcısı";
+"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
 "settings.general.display" = "Gösterim Ayarları";
 "settings.general.instance" = "Oluşum Bilgisi";
 "settings.general.push-notifications" = "İleti Bildirimleri";

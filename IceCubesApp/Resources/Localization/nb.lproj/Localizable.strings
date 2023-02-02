@@ -77,6 +77,7 @@
 "settings.display.theme.systemColor" = "Match system";
 "settings.general.browser" = "Nettleser";
 "settings.general.browser.in-app" = "Nettleser i appen";
+"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
 "settings.general.browser.system" = "Systemnettleser";
 "settings.general.display" = "Visningsinnstillinger";
 "settings.general.instance" = "Instansinformasjon";

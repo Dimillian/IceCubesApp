@@ -73,6 +73,7 @@
 "settings.display.theme.systemColor" = "Padrão do Sistema";
 "settings.general.browser" = "Navegador";
 "settings.general.browser.in-app" = "Navegador do App";
+"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
 "settings.general.browser.system" = "Navegador do sistema";
 "settings.general.display" = "Exibir configurações";
 "settings.general.instance" = "Informação da Instância";

@@ -73,6 +73,7 @@
 "settings.display.theme.systemColor" = "시스템 설정에 맞추기";
 "settings.general.browser" = "브라우저";
 "settings.general.browser.in-app" = "인 앱 브라우저";
+"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
 "settings.general.browser.system" = "시스템 기본 브라우저";
 "settings.general.display" = "화면 설정";
 "settings.general.instance" = "인스턴스 정보";

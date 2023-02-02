@@ -73,6 +73,7 @@
 "settings.display.theme.systemColor" = "Zgodny z systemowym";
 "settings.general.browser" = "Przeglądarka";
 "settings.general.browser.in-app" = "W aplikacji";
+"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
 "settings.general.browser.system" = "Systemowa";
 "settings.general.display" = "Ustawienia ekranu";
 "settings.general.instance" = "Informacja o serwerze";
