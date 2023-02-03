@@ -201,8 +201,7 @@ public struct StatusRowView: View {
             }
             .buttonStyle(.plain)
             Spacer()
-            menuButton
-              .accessibilityHidden(true)
+            threadIcon
           }
           .accessibilityElement()
           .accessibilityLabel(Text("\(status.account.displayName), \(status.createdAt.relativeFormatted)"))
@@ -299,15 +298,15 @@ public struct StatusRowView: View {
     }
   }
 
-  private var menuButton: some View {
-    Menu {
-      contextMenu
-    } label: {
-      Image(systemName: "ellipsis")
-        .frame(width: 30, height: 30)
+  @ViewBuilder
+  private var threadIcon: some View {
+    if viewModel.status.reblog?.inReplyToAccountId != nil || viewModel.status.inReplyToAccountId != nil {
+      Image(systemName: "bubble.left.and.bubble.right")
+        .resizable()
+        .aspectRatio(contentMode: .fit)
+        .frame(width: 15)
+        .foregroundColor(.gray)
     }
-    .foregroundColor(.gray)
-    .contentShape(Rectangle())
   }
 
   @ViewBuilder
