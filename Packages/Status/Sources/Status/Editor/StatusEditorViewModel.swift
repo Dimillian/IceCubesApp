@@ -106,7 +106,7 @@ public class StatusEditorViewModel: ObservableObject {
 
   func setInitialLanguageSelection(preference: String?) {
     switch mode {
-    case let .replyTo(status), let .edit(status):
+    case let .edit(status):
       selectedLanguage = status.language
     default:
       break
