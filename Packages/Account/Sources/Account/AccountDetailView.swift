@@ -231,6 +231,10 @@ public struct AccountDetailView: View {
               }
               EmojiTextApp(field.value, emojis: viewModel.account?.emojis ?? [])
                 .foregroundColor(theme.tintColor)
+                .environment(\.openURL, OpenURLAction { url in
+                  UIApplication.shared.open(url)
+                  return .handled
+                })
             }
             .font(.scaledBody)
           }
