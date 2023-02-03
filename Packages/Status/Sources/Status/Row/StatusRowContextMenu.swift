@@ -76,16 +76,15 @@ struct StatusRowContextMenu: View {
     }
 
     if let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier,
-       viewModel.status.language != lang
+       let statusLanguage = viewModel.status.reblog?.language ?? viewModel.status.language,
+       statusLanguage != lang
     {
       Button {
         Task {
           await viewModel.translate(userLang: lang)
         }
       } label: {
-        if let statusLanguage = viewModel.status.language,
-           let languageName = Locale.current.localizedString(forLanguageCode: statusLanguage)
-        {
+        if let languageName = Locale.current.localizedString(forLanguageCode: statusLanguage) {
           Label("status.action.translate-from-\(languageName)", systemImage: "captions.bubble")
         } else {
           Label("status.action.translate", systemImage: "captions.bubble")
