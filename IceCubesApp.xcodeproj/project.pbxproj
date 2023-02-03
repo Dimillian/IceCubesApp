@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		065FA1FE29866CD600012EA0 /* LRUCache in Frameworks */ = {isa = PBXBuildFile; productRef = 065FA1FD29866CD600012EA0 /* LRUCache */; };
 		065FA20A298675BA00012EA0 /* LRUCache in Frameworks */ = {isa = PBXBuildFile; productRef = 065FA209298675BA00012EA0 /* LRUCache */; };
+		069709A5298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 069709A3298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf */; };
+		069709A8298C87B5006E4CB5 /* OpenDyslexic-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 069709A7298C87B5006E4CB5 /* OpenDyslexic-Regular.otf */; };
 		639CDF9C296AC82F00C35E58 /* SafariRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639CDF9B296AC82F00C35E58 /* SafariRouter.swift */; };
 		7429BCE2297C55D00069A946 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7429BCE4297C55D00069A946 /* Localizable.stringsdict */; };
 		7429BCE5297C5A750069A946 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7429BCE4297C55D00069A946 /* Localizable.stringsdict */; };
@@ -128,6 +130,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		069709A3298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Atkinson-Hyperlegible-Regular-102.ttf"; sourceTree = "<group>"; };
+		069709A7298C87B5006E4CB5 /* OpenDyslexic-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenDyslexic-Regular.otf"; sourceTree = "<group>"; };
 		56B5BC132984206F00CF3A98 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "pt-BR"; path = "pt-BR.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
 		56B5BC142984206F00CF3A98 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		639CDF9B296AC82F00C35E58 /* SafariRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariRouter.swift; sourceTree = "<group>"; };
@@ -328,6 +332,8 @@
 		9F398AB529360A6100A889F2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				069709A3298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf */,
+				069709A7298C87B5006E4CB5 /* OpenDyslexic-Regular.otf */,
 				9F2A542D296B1CC0009B2D7C /* glass.wav */,
 				9F2A542B296B1177009B2D7C /* glass.caf */,
 				9F24EEB729360C330042359D /* Preview Assets.xcassets */,
@@ -670,11 +676,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				069709A5298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf in Resources */,
 				9F2A542C296B1177009B2D7C /* glass.caf in Resources */,
 				E9B576C329743F4C00BCE646 /* Localizable.strings in Resources */,
 				9FD34823293D06E800DB0EE9 /* Assets.xcassets in Resources */,
 				7429BCE2297C55D00069A946 /* Localizable.stringsdict in Resources */,
 				9F24EEB829360C330042359D /* Preview Assets.xcassets in Resources */,
+				069709A8298C87B5006E4CB5 /* OpenDyslexic-Regular.otf in Resources */,
 				9FAD85832971BF7200496AB1 /* Secret.plist in Resources */,
 				9F2A542E296B1CC0009B2D7C /* glass.wav in Resources */,
 			);
