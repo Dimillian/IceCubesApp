@@ -290,7 +290,7 @@
 "timeline.federated" = "Föderiert";
 "timeline.home" = "Startseite";
 "timeline.local" = "Lokal";
-"timeline.n-recent-from-n-participants %lld %lld" = "%lld aktuelle Beiträge von %lld Teilnehmern";
+"timeline.n-recent-from-n-participants %lld %lld" = "%lld aktuelle Beiträge von %lld Teilnehmenden";
 "timeline.trending" = "Im Trend";
 
 // MARK: Package: Status
