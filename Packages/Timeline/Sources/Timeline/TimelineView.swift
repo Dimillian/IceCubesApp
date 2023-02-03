@@ -5,6 +5,7 @@ import Network
 import Shimmer
 import Status
 import SwiftUI
+import Introspect
 
 public struct TimelineView: View {
   private enum Constants {
@@ -21,7 +22,7 @@ public struct TimelineView: View {
   @StateObject private var viewModel = TimelineViewModel()
 
   @State private var wasBackgrounded: Bool = false
-  @State private var listOpacity: CGFloat = 1
+  @State private var collectionView: UICollectionView?
 
   @Binding var timeline: TimelineFilter
   @Binding var scrollToTopSignal: Int
@@ -47,24 +48,25 @@ public struct TimelineView: View {
             StatusesListView(fetcher: viewModel)
           }
         }
-        .id(client.id + (viewModel.scrollToStatus ?? ""))
-        .opacity(listOpacity)
+        .id(client.id)
         .environment(\.defaultMinListRowHeight, 1)
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
         .background(theme.primaryBackgroundColor)
+        .introspect(selector: TargetViewSelector.ancestorOrSiblingContaining,
+                    customize: { (collectionView: UICollectionView) in
+          self.collectionView = collectionView
+        })
         if viewModel.pendingStatusesEnabled {
           PendingStatusesObserverView(observer: viewModel.pendingStatusesObserver)
         }
       }
-      .onChange(of: viewModel.scrollToStatus) { statusId in
-        if let statusId {
-          viewModel.scrollToStatus = nil
-          listOpacity = 0
-          DispatchQueue.main.async {
-            proxy.scrollTo(statusId, anchor: .top)
-            listOpacity = 1
-          }
+      .onChange(of: viewModel.scrollToIndex) { index in
+        if let index {
+          viewModel.scrollToIndex = nil
+          collectionView?.scrollToItem(at: .init(row: index, section: 0),
+                                       at: .top,
+                                       animated: false)
         }
       }
       .onChange(of: scrollToTopSignal, perform: { _ in
