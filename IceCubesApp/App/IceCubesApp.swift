@@ -158,7 +158,11 @@ struct IceCubesApp: App {
     currentAccount.setClient(client: client)
     currentInstance.setClient(client: client)
     userPreferences.setClient(client: client)
-    watcher.setClient(client: client)
+    Task {
+      await currentInstance.fetchCurrentInstance()
+      watcher.setClient(client: client, instanceStreamingURL: currentInstance.instance?.urls?.streamingApi)
+      watcher.watch(streams: [.user, .direct])
+    }
   }
 
   private func handleScenePhase(scenePhase: ScenePhase) {

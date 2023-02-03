@@ -7,6 +7,7 @@ public class StreamWatcher: ObservableObject {
   private var client: Client?
   private var task: URLSessionWebSocketTask?
   private var watchedStreams: [Stream] = []
+  private var instanceStreamingURL: URL?
 
   private let decoder = JSONDecoder()
   private let encoder = JSONEncoder()
@@ -25,16 +26,18 @@ public class StreamWatcher: ObservableObject {
     decoder.keyDecodingStrategy = .convertFromSnakeCase
   }
 
-  public func setClient(client: Client) {
+  public func setClient(client: Client, instanceStreamingURL: URL?) {
     if self.client != nil {
       stopWatching()
     }
     self.client = client
+    self.instanceStreamingURL = instanceStreamingURL
     connect()
   }
 
   private func connect() {
-    task = client?.makeWebSocketTask(endpoint: Streaming.streaming)
+    guard let client else { return }
+    task = client.makeWebSocketTask(endpoint: Streaming.streaming, instanceStreamingURL: instanceStreamingURL)
     task?.resume()
     receiveMessage()
   }

@@ -17,6 +17,9 @@ class ShareViewController: UIViewController {
     let instance = CurrentInstance.shared
     account.setClient(client: client)
     instance.setClient(client: client)
+    Task {
+      await instance.fetchCurrentInstance()
+    }
     let colorScheme = traitCollection.userInterfaceStyle
     let theme = Theme.shared
     theme.setColor(withName: colorScheme == .dark ? .iceCubeDark : .iceCubeLight)
