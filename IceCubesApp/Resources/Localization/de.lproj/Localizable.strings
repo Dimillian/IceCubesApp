@@ -114,7 +114,7 @@
 "settings.other.hide-openai" = "Aktiviere 🤖 Helfer";
 "settings.other.social-keyboard" = "Soziale Tastatur aktivieren";
 "settings.general.content" = "Inhaltseinstellungen";
-"settings.system" = "System Settings";
+"settings.system" = "Systemeinstellungen";
 "settings.content.navigation-title" = "Inhaltseinstellungen";
 "settings.content.boosts" = "Boosts";
 "settings.content.hide-repeated-boosts" = "Wiederholte Boosts verstecken";
@@ -134,7 +134,7 @@
 "settings.display.font.system" = "System";
 "settings.display.font.custom" = "Eigene";
 "settings.display.font.scaling-%@" = "Schriftskalierung: %@";
-"settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
+"settings.about.built-with" = "Ice Cubes wird mit folgender Open-Source-Software erstellt:";
 "settings.about.title" = "Ice Cubes";
 
 "enum.expand-media.show" = "Alle zeigen";
@@ -227,7 +227,7 @@
 "conversations.new.message.placeholder" = "Neue Nachricht";
 
 // MARK: Package: DesignSystem
-"design.tag.n-posts-from-n-participants %lld %lld" = "%lld Beiträge von %lld Teilnehmern";
+"design.tag.n-posts-from-n-participants %lld %lld" = "%lld Beiträge von %lld Teilnehmenden";
 "design.theme.navigation-title" = "Themen-Auswahl";
 "design.theme.toots-preview" = "Beitragsvorschau";
 
@@ -294,7 +294,7 @@
 "timeline.federated" = "Föderiert";
 "timeline.home" = "Startseite";
 "timeline.local" = "Lokal";
-"timeline.n-recent-from-n-participants %lld %lld" = "%lld aktuelle Beiträge von %lld Teilnehmern";
+"timeline.n-recent-from-n-participants %lld %lld" = "%lld aktuelle Beiträge von %lld Teilnehmenden";
 "timeline.trending" = "Im Trend";
 
 // MARK: Package: Status
