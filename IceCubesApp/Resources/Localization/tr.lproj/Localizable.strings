@@ -57,6 +57,7 @@
 "settings.app.icon.navigation-title" = "İkonlar";
 "settings.app.source" = "Kaynak Kodu (GitHub link)";
 "settings.app.support" = "Uygulamayı Destekleyin";
+"settings.app.about" = "About";
 "settings.display.avatar.position" = "Avatar Pozisyonu";
 "settings.display.avatar.shape" = "Avatar Şekli";
 "settings.display.navigation-title" = "Gösterim Ayarları";
@@ -135,6 +136,8 @@
 "settings.display.font.system" = "System";
 "settings.display.font.custom" = "Custom";
 "settings.display.font.scaling-%@" = "Font scaling: %@";
+"settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
+"settings.about.title" = "Ice Cubes";
 
 // MARK: Tabs
 "tab.explore" = "Keşfet";

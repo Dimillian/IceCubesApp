@@ -57,6 +57,7 @@
 "settings.app.icon.navigation-title" = "Icone";
 "settings.app.source" = "Sorgenti (link GitHub)";
 "settings.app.support" = "Supporta l'applicazione";
+"settings.app.about" = "About";
 "settings.display.avatar.position" = "Posizione dell'avatar";
 "settings.display.avatar.shape" = "Forma dell'avatar";
 "settings.display.navigation-title" = "Impostazioni di visualizzazione";
@@ -135,6 +136,8 @@
 "settings.display.font.custom" = "Personalizzato";
 "settings.display.font.scaling-%@" = "Font scaling: %@";
 "settings.other.autoplay-video" = "Auto Play dei video";
+"settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
+"settings.about.title" = "Ice Cubes";
 
 // MARK: Tabs
 "tab.explore" = "Esplora";

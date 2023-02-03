@@ -57,6 +57,7 @@
 "settings.app.icon.navigation-title" = "Icons";
 "settings.app.source" = "Source (GitHub link)";
 "settings.app.support" = "Support the app";
+"settings.app.about" = "About";
 "settings.display.font" = "Timeline Font";
 "settings.display.font.system" = "System";
 "settings.display.font.custom" = "Custom";
@@ -134,6 +135,8 @@
 "settings.push.duplicate.footer" = "Receiving duplicate notifications? Try this magic button in order to fix it";
 "settings.push.duplicate.button.fix" = "🪄 Fix it";
 "settings.other.autoplay-video" = "Auto Play Videos";
+"settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
+"settings.about.title" = "Ice Cubes";
 
 // MARK: Tabs
 "tab.explore" = "Explore";

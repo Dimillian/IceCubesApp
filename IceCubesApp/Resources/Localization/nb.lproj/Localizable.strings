@@ -57,6 +57,7 @@
 "settings.app.icon.navigation-title" = "Ikon";
 "settings.app.source" = "Kilde (GitHub-lenke)";
 "settings.app.support" = "Støtt denne appen";
+"settings.app.about" = "About";
 "settings.display.font" = "Tidslinjefont";
 "settings.display.font.system" = "System";
 "settings.display.font.custom" = "Tilpasset";
@@ -135,6 +136,8 @@
 "settings.push.duplicate.footer" = "Får du dupliserte varsler? Prøv denne magiske knappen for å fikse det.";
 "settings.push.duplicate.button.fix" = "🪄 Fiks det";
 "settings.other.autoplay-video" = "Spill av videoer automatisk";
+"settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
+"settings.about.title" = "Ice Cubes";
 
 // MARK: Tabs
 "tab.explore" = "Utforsk";
