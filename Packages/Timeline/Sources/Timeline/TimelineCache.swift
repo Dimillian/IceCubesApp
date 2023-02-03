@@ -10,6 +10,7 @@ actor TimelineCache {
   private init() {}
 
   func set(statuses: [Status], client: Client) {
+    guard !statuses.isEmpty else { return }
     memoryCache[client] = statuses.prefix(upTo: min(100, statuses.count - 1)).map { $0 }
   }
 

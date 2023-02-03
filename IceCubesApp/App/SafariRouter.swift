@@ -46,23 +46,25 @@ private struct SafariRouter: ViewModifier {
             return .systemAction
           }
 
-
-
           presentedURL = url
           return .handled
         }
       }
       .sheet(item: $presentedURL, content: { url in
-        SafariView(url: url)
+        SafariView(url: url, inAppBrowserReaderView: preferences.inAppBrowserReaderView)
           .edgesIgnoringSafeArea(.all)
       })
   }
 
   struct SafariView: UIViewControllerRepresentable {
     let url: URL
-
+    let inAppBrowserReaderView: Bool
+         
     func makeUIViewController(context _: UIViewControllerRepresentableContext<SafariView>) -> SFSafariViewController {
-      let safari = SFSafariViewController(url: url)
+      let configuration = SFSafariViewController.Configuration()
+      configuration.entersReaderIfAvailable = inAppBrowserReaderView
+
+      let safari = SFSafariViewController(url: url, configuration: configuration)
       safari.preferredBarTintColor = UIColor(Theme.shared.primaryBackgroundColor)
       safari.preferredControlTintColor = UIColor(Theme.shared.tintColor)
       return safari

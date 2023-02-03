@@ -129,6 +129,10 @@ struct SettingsTabs: View {
         } label: {
           Label("settings.general.browser", systemImage: "network")
         }
+        Toggle(isOn: $preferences.inAppBrowserReaderView) {
+          Label("settings.general.browser.in-app.readerview", systemImage: "doc.plaintext")
+        }
+        .disabled(preferences.preferredBrowser != PreferredBrowser.inAppSafari)
       }
       Toggle(isOn: $preferences.isOpenAIEnabled) {
         Label("settings.other.hide-openai", systemImage: "faxmachine")
@@ -175,6 +179,12 @@ struct SettingsTabs: View {
         }
         .tint(theme.labelColor)
       }
+
+      NavigationLink(destination: AboutView()) {
+        Label("settings.app.about", systemImage: "info.circle")
+      }
+
+      
     } header: {
       Text("settings.section.app")
     } footer: {
