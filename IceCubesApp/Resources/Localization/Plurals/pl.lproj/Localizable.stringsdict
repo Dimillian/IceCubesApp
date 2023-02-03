@@ -38,5 +38,154 @@
 			<string> i %lld innych </string>
 		</dict>
 	</dict>
+	<key>status.summary.n-favorites %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@statusFavouritesCount@</string>
+		<key>statusFavouritesCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%lld polubienie</string>
+			<key>few</key>
+			<string>%lld polubienia</string>
+			<key>other</key>
+			<string>%lld polubień</string>
+		</dict>
+	</dict>
+	<key>status.summary.n-boosts %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@statusBoostsCount@</string>
+		<key>statusBoostsCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%lld podbicie</string>
+			<key>few</key>
+			<string>%lld podbicia</string>
+			<key>other</key>
+			<string>%lld podbić</string>
+		</dict>
+	</dict>
+	<key>status.poll.n-votes %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@statusVotesCount@</string>
+		<key>statusVotesCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%lld głos</string>
+			<key>few</key>
+			<string>%lld głosy</string>
+			<key>other</key>
+			<string>%lld głosów</string>
+		</dict>
+	</dict>
+	<key>account.detail.featured-tags-n-posts %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@accountFeaturedPostsCount@</string>
+		<key>accountFeaturedPostsCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%lld post</string>
+			<key>few</key>
+			<string>%lld posty</string>
+			<key>other</key>
+			<string>%lld postów</string>
+		</dict>
+	</dict>
+	<key>account.detail.n-fields %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@accountFieldsCount@</string>
+		<key>accountFieldsCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%lld pole</string>
+			<key>few</key>
+			<string>%lld pola</string>
+			<key>other</key>
+			<string>%lld pól</string>
+		</dict>
+	</dict>
+	<key>design.tag.n-posts-from-n-participants %lld %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@tagPostsCount@ %#@tagParticipantsCount@</string>
+		<key>tagPostsCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%lld post</string>
+			<key>few</key>
+			<string>%lld posty</string>
+			<key>other</key>
+			<string>%lld postów</string>
+		</dict>
+		<key>tagParticipantsCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>od %lld uczestnika</string>
+			<key>other</key>
+			<string>od %lld uczestników</string>
+		</dict>
+	</dict>
+	<key>timeline.n-recent-from-n-participants %lld %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@tagPostsCount@ %#@tagParticipantsCount@</string>
+		<key>tagPostsCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%lld ostatni post</string>
+			<key>few</key>
+			<string>%lld ostatnie posty</string>
+			<key>other</key>
+			<string>%lld ostatnich postów</string>
+		</dict>
+		<key>tagParticipantsCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>od %lld uczestnika</string>
+			<key>other</key>
+			<string>od %lld uczestników</string>
+		</dict>
+	</dict>	
+	
 </dict>
 </plist>

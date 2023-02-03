@@ -54,7 +54,7 @@
 // MARK: Settings
 "settings.account.add" = "Dodaj konto";
 "settings.app.icon" = "Ikona aplikacji";
-"settings.app.icon.navigation-title" = "Icons"; // ---------
+"settings.app.icon.navigation-title" = "Icons";
 "settings.app.source" = "Źródło (link do GitHub)";
 "settings.app.support" = "Wspieraj aplikację";
 "settings.app.about" = "About";
@@ -93,8 +93,8 @@
 "settings.system" = "Ustawienia systemowe";
 "settings.content.navigation-title" = "Ustawienia treści";
 "settings.content.boosts" = "Podbicia";
-"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
-"settings.content.instance-settings" = "Server Content Settings";
+"settings.content.hide-repeated-boosts" = "Ukryj powtórzone podbicia";
+"settings.content.instance-settings" = "Ustawienia treści serwera";
 "settings.content.use-instance-settings" = "Zastosuj ustawienia serwera";
 "settings.content.expand-spoilers" = "Pokazuj wrażliwe posty";
 "settings.content.expand-media" = "Multimedia";
@@ -136,7 +136,7 @@
 "settings.display.font" = "Czcionka strumienia";
 "settings.display.font.system" = "Systemowa";
 "settings.display.font.custom" = "Własna";
-"settings.display.font.scaling-%@" = "Font scaling: %@";
+"settings.display.font.scaling-%@" = "Skalowanie czcionki: %@";
 "settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
 "settings.about.title" = "Ice Cubes";
 
@@ -179,8 +179,6 @@
 "account.boosted-by" = "Podbity przez";
 "account.detail.about" = "Opis";
 "account.detail.familiar-followers" = "Obserwowany także przez";
-"account.detail.n-fields %lld" = "%lld pola";
-"account.detail.featured-tags-n-posts %lld" = "%lld postów";
 "account.edit.about" = "Opis";
 "account.edit.account-settings.bot" = "Konto bota";
 "account.edit.account-settings.discoverable" = "Wykrywalne";
@@ -226,7 +224,6 @@
 "conversations.new.message.placeholder" = "Nowa wiadomość";
 
 // MARK: Package: DesignSystem
-"design.tag.n-posts-from-n-participants %lld %lld" = "%lld postów od %lld użytkowników";
 "design.theme.navigation-title" = "Selektor Motywu";
 "design.theme.toots-preview" = "Podgląd postów";
 
@@ -278,14 +275,14 @@
 "notifications.label.status" = "opublikował(a) status";
 "notifications.label.update" = "edytował(a) post";
 "notifications.menu-title.favorite" = "Polubione";
-"notifications.menu-title.follow" = "Obserwacja";
+"notifications.menu-title.follow" = "Obserwujący";
 "notifications.menu-title.follow-request" = "Prośby o obserwację";
 "notifications.menu-title.mention" = "Wzmianki";
 "notifications.menu-title.poll" = "Sondaże";
 "notifications.menu-title.reblog" = "Podbicia";
 "notifications.menu-title.status" = "Posty";
 "notifications.menu-title.update" = "Posty edytowane";
-"notifications.navigation-title" = "Wszystkie powiadomienia";
+"notifications.navigation-title" = "Wszystkie komunikaty";
 "notifications.tab.all" = "Wszystko";
 "notifications.tab.mentions" = "Wzmianki";
 
@@ -293,13 +290,12 @@
 "timeline.federated" = "Strumień globalny";
 "timeline.home" = "Strona domowa";
 "timeline.local" = "Strumień lokalny";
-"timeline.n-recent-from-n-participants %lld %lld" = "%lld ostatnich postów od %lld uczestników";
 "timeline.trending" = "Teraz popularne";
 "timeline.add.url" = "URL instancji";
 
 // MARK: Package: Status
 "status.action.translate" = "Przetłumacz";
-"status.action.translate-from-%@" = "Przetłumacz z %@";
+"status.action.translate-from-%@" = "Przetłumacz tekst %@";
 "status.action.translated-label" = "Przetłumaczono za pomocą DeepL.com";
 "status.action.bookmark" = "Dodaj zakładkę";
 "status.action.boost" = "Podbij";
@@ -353,7 +349,6 @@
 "status.media.contextmenu.share" = "Udostępnij ten obrazek";
 "status.media.contextmenu.view-browser" = "Zobacz w przeglądarce";
 "status.media.sensitive.show" = "Pokaż wrażliwą zawartość";
-"status.poll.n-votes %lld" = "%lld głosów";
 "status.poll.closed" = "Zamknięty";
 "status.poll.closes-in" = "Zostanie zakończony za ";
 "status.poll.duration" = "Czas trwania sondażu";
@@ -367,8 +362,6 @@
 "status.show-more" = "Pokaż więcej";
 "status.summary.at-time" = " o ";
 "status.summary.edited-time" = "Ostatnia edycja: ";
-"status.summary.n-boosts %lld" = "%lld podbić";
-"status.summary.n-favorites %lld" = "%lld polubień";
 "status.visibility.direct" = "Prywatny";
 "status.visibility.follower" = "Obserwujący";
 "status.visibility.public" = "Wszyscy";
