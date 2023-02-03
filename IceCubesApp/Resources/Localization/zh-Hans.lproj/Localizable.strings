@@ -74,6 +74,7 @@
 "settings.display.theme.systemColor" = "匹配系统";
 "settings.general.browser" = "默认浏览器";
 "settings.general.browser.in-app" = "应用内浏览器";
+"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
 "settings.general.browser.system" = "系统浏览器";
 "settings.general.display" = "显示设置";
 "settings.general.instance" = "服务器设置";

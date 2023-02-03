@@ -74,6 +74,7 @@
 "settings.general.browser" = "Navegador";
 "settings.general.browser.in-app" = "Navegador integrat";
 "settings.general.browser.system" = "Navegador del sistema";
+"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
 "settings.general.display" = "Configuració d'aparença";
 "settings.general.instance" = "Informació de la instància";
 "settings.general.push-notifications" = "Notificacions emergents";

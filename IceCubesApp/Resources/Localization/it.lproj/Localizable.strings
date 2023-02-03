@@ -75,6 +75,7 @@
 "settings.general.browser" = "Browser";
 "settings.general.browser.in-app" = "In-App Browser";
 "settings.general.browser.system" = "Browser di sistema";
+"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
 "settings.general.display" = "Impostazioni di visualizzazione";
 "settings.general.instance" = "Informazioni sull'istanza";
 "settings.general.push-notifications" = "Notifiche";
