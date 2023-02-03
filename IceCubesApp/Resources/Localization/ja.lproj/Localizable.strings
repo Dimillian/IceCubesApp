@@ -57,6 +57,7 @@
 "settings.app.icon.navigation-title" = "アイコン";
 "settings.app.source" = "ソース (GitHub link)";
 "settings.app.support" = "アプリを支援する";
+"settings.app.about" = "About";
 "settings.display.font" = "タイムラインのフォント";
 "settings.display.font.system" = "システムフォント";
 "settings.display.font.custom" = "カスタム";
@@ -77,6 +78,7 @@
 "settings.display.theme.systemColor" = "システムに合わせる";
 "settings.general.browser" = "ブラウザ";
 "settings.general.browser.in-app" = "アプリ内ブラウザ";
+"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
 "settings.general.browser.system" = "システムブラウザ";
 "settings.general.display" = "表示設定";
 "settings.general.instance" = "インスタンス情報";
@@ -135,6 +137,8 @@
 "settings.push.duplicate.footer" = "重複して通知を受け取っていませんか？それを修正するためにこの魔法のボタンを試してみて";
 "settings.push.duplicate.button.fix" = "🪄 修正する";
 "settings.other.autoplay-video" = "動画を自動再生";
+"settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
+"settings.about.title" = "Ice Cubes";
 
 // MARK: Tabs
 "tab.explore" = "エクスプローラー";

@@ -57,6 +57,7 @@
 "settings.app.icon.navigation-title" = "Iconos";
 "settings.app.source" = "Código fuente (Enlace a GitHub)";
 "settings.app.support" = "Apoya a Ice Cubes";
+"settings.app.about" = "About";
 "settings.display.avatar.position" = "Posición del avatar";
 "settings.display.avatar.shape" = "Forma del avatar";
 "settings.display.navigation-title" = "Ajustes de apariencia";
@@ -73,6 +74,7 @@
 "settings.display.theme.systemColor" = "Sistema de coincidencia";
 "settings.general.browser" = "Navegador";
 "settings.general.browser.in-app" = "Interno";
+"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
 "settings.general.browser.system" = "Sistema";
 "settings.general.display" = "Ajustes de apariencia";
 "settings.general.instance" = "Información de la instancia";
@@ -132,6 +134,8 @@
 "settings.display.font.system" = "De sistema";
 "settings.display.font.custom" = "Personalizada";
 "settings.display.font.scaling-%@" = "Escalado de tipografía: %@";
+"settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
+"settings.about.title" = "Ice Cubes";
 
 "enum.expand-media.show" = "Siempre";
 "enum.expand-media.hide" = "Nunca";

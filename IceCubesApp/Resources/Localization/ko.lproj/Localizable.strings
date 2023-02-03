@@ -57,6 +57,7 @@
 "settings.app.icon.navigation-title" = "앱 아이콘";
 "settings.app.source" = "소스 코드 (GitHub)";
 "settings.app.support" = "이 앱 지원하기";
+"settings.app.about" = "About";
 "settings.display.avatar.position" = "프로필 사진 위치";
 "settings.display.avatar.shape" = "프로필 사진 모양";
 "settings.display.navigation-title" = "화면 설정";
@@ -73,6 +74,7 @@
 "settings.display.theme.systemColor" = "시스템 설정에 맞추기";
 "settings.general.browser" = "브라우저";
 "settings.general.browser.in-app" = "인 앱 브라우저";
+"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
 "settings.general.browser.system" = "시스템 기본 브라우저";
 "settings.general.display" = "화면 설정";
 "settings.general.instance" = "인스턴스 정보";
@@ -135,6 +137,8 @@
 "settings.display.font.system" = "시스템 글꼴 사용";
 "settings.display.font.custom" = "직접 설정";
 "settings.display.font.scaling-%@" = "Font scaling: %@";
+"settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
+"settings.about.title" = "Ice Cubes";
 
 // MARK: Tabs
 "tab.explore" = "둘러보기";

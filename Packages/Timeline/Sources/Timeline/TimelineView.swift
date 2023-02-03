@@ -21,6 +21,7 @@ public struct TimelineView: View {
   @StateObject private var viewModel = TimelineViewModel()
 
   @State private var wasBackgrounded: Bool = false
+  @State private var listOpacity: CGFloat = 1
 
   @Binding var timeline: TimelineFilter
   @Binding var scrollToTopSignal: Int
@@ -46,7 +47,8 @@ public struct TimelineView: View {
             StatusesListView(fetcher: viewModel)
           }
         }
-        .id(client.id)
+        .id(client.id + (viewModel.scrollToStatus ?? ""))
+        .opacity(listOpacity)
         .environment(\.defaultMinListRowHeight, 1)
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
@@ -58,7 +60,11 @@ public struct TimelineView: View {
       .onChange(of: viewModel.scrollToStatus) { statusId in
         if let statusId {
           viewModel.scrollToStatus = nil
-          proxy.scrollTo(statusId, anchor: .center)
+          listOpacity = 0
+          DispatchQueue.main.async {
+            proxy.scrollTo(statusId, anchor: .top)
+            listOpacity = 1
+          }
         }
       }
       .onChange(of: scrollToTopSignal, perform: { _ in
