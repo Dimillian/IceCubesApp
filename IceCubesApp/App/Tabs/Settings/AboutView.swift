@@ -1,10 +1,10 @@
-
-
 import SwiftUI
 import Env
+import DesignSystem
 
 struct AboutView: View {
   @EnvironmentObject private var routerPath: RouterPath
+  @EnvironmentObject private var theme: Theme
 
   let versionNumber:String
   
@@ -84,6 +84,8 @@ struct AboutView: View {
       Divider()
       Spacer()
     }
+    .scrollContentBackground(.hidden)
+    .background(theme.secondaryBackgroundColor)
     .navigationTitle(Text("settings.about.title"))
     .navigationBarTitleDisplayMode(.large)
     .environment(\.openURL, OpenURLAction { url in
