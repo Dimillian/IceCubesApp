@@ -20,7 +20,7 @@ struct TimelineTab: View {
   @State private var timeline: TimelineFilter
   @State private var scrollToTopSignal: Int = 0
   
-  @AppStorage("last_timeline_filter") public var timelineFilter: String = TimelineFilter.home.title
+  @AppStorage("last_timeline_filter") public var lastTimelineFilter: TimelineFilter = TimelineFilter.home
 
   private let canFilterTimeline: Bool
 
@@ -46,7 +46,7 @@ struct TimelineTab: View {
       if !didAppear && canFilterTimeline {
         didAppear = true
         if(client.isAuth) {
-          timeline = TimelineFilter.toFilter(title: timelineFilter)
+          timeline = lastTimelineFilter
         } else {
             timeline = .federated
         }
@@ -60,14 +60,14 @@ struct TimelineTab: View {
     }
     .onChange(of: client.isAuth, perform: { isAuth in
       if(client.isAuth) {
-        timeline = TimelineFilter.toFilter(title: timelineFilter)
+        timeline = lastTimelineFilter
       } else {
           timeline = .federated
       }
     })
     .onChange(of: currentAccount.account?.id, perform: { _ in
       if(client.isAuth && canFilterTimeline) {
-        timeline = TimelineFilter.toFilter(title: timelineFilter)
+        timeline = lastTimelineFilter
       } else {
           timeline = .federated
       }
@@ -85,7 +85,7 @@ struct TimelineTab: View {
       routerPath.path = []
     }
     .onChange(of: timeline) { timeline in
-      timelineFilter = timeline.title
+      lastTimelineFilter = timeline
     }
     .withSafariRouter()
     .environmentObject(routerPath)

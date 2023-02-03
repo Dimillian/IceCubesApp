@@ -8,33 +8,18 @@ public enum TimelineFilter: Hashable, Equatable {
   case hashtag(tag: String, accountId: String?)
   case list(list: Models.List)
   case remoteLocal(server: String)
-
+  
   public func hash(into hasher: inout Hasher) {
     hasher.combine(title)
   }
-
+  
   public static func availableTimeline(client: Client) -> [TimelineFilter] {
     if !client.isAuth {
       return [.local, .federated, .trending]
     }
     return [.home, .local, .federated, .trending]
   }
-    
-  public static func toFilter(title: String) -> TimelineFilter {
-    switch title {
-    case "Federated":
-        return .federated
-    case "Local":
-        return .local
-    case "Trending":
-        return .trending
-    case "Home":
-        return .home
-    default:
-        return .home
-    }
-  }
-
+  
   public var title: String {
     switch self {
     case .federated:
@@ -53,7 +38,7 @@ public enum TimelineFilter: Hashable, Equatable {
       return server
     }
   }
-
+  
   public func localizedTitle() -> LocalizedStringKey {
     switch self {
     case .federated:
@@ -72,7 +57,7 @@ public enum TimelineFilter: Hashable, Equatable {
       return LocalizedStringKey(server)
     }
   }
-
+  
   public func iconName() -> String? {
     switch self {
     case .federated:
@@ -91,7 +76,7 @@ public enum TimelineFilter: Hashable, Equatable {
       return nil
     }
   }
-
+  
   public func endpoint(sinceId: String?, maxId: String?, minId: String?, offset: Int?) -> Endpoint {
     switch self {
     case .federated: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: false)
@@ -107,5 +92,103 @@ public enum TimelineFilter: Hashable, Equatable {
         return Timelines.hashtag(tag: tag, maxId: maxId)
       }
     }
+  }
+}
+
+extension TimelineFilter: Codable {
+  enum CodingKeys: String, CodingKey {
+    case home
+    case local
+    case federated
+    case trending
+    case hashtag
+    case list
+    case remoteLocal
+  }
+  
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    let key = container.allKeys.first
+    
+    switch key {
+    case .home:
+      self = .home
+    case .local:
+      self = .local
+    case .federated:
+      self = .federated
+    case .trending:
+      self = .trending
+    case .hashtag:
+        var nestedContainer = try container.nestedUnkeyedContainer(forKey: .hashtag)
+      let tag = try nestedContainer.decode(String.self)
+      let accountId = try nestedContainer.decode(String?.self)
+        self = .hashtag(
+          tag: tag,
+          accountId: accountId
+        )
+    case .list:
+      let list = try container.decode(
+        Models.List.self,
+          forKey: .list
+      )
+      self = .list(list: list)
+    case .remoteLocal:
+      var nestedContainer = try container.nestedUnkeyedContainer(forKey: .remoteLocal)
+    let server = try nestedContainer.decode(String.self)
+      self = .remoteLocal(
+        server: server
+      )
+    default:
+        throw DecodingError.dataCorrupted(
+            DecodingError.Context(
+                codingPath: container.codingPath,
+                debugDescription: "Unabled to decode enum."
+            )
+        )
+    }
+  }
+  
+  public func encode(to encoder: Encoder) throws {
+      var container = encoder.container(keyedBy: CodingKeys.self)
+    
+    switch self {
+    case .home:
+      try container.encode(CodingKeys.home.rawValue, forKey: .home)
+    case .local:
+      try container.encode(CodingKeys.local.rawValue, forKey: .local)
+    case .federated:
+      try container.encode(CodingKeys.federated.rawValue, forKey: .federated)
+    case .trending:
+      try container.encode(CodingKeys.trending.rawValue, forKey: .trending)
+    case .hashtag(let tag, let accountId):
+      var nestedContainer = container.nestedUnkeyedContainer(forKey: .hashtag)
+      try nestedContainer.encode(tag)
+      try nestedContainer.encode(accountId)
+    case .list(let list):
+      try container.encode(list, forKey: .list)
+    case .remoteLocal(let server):
+      try container.encode(server, forKey: .remoteLocal)
+    }
+  }
+}
+
+extension TimelineFilter: RawRepresentable {
+  public init?(rawValue: String) {
+    guard let data = rawValue.data(using: .utf8),
+          let result = try? JSONDecoder().decode(TimelineFilter.self, from: data)
+    else {
+      return nil
+    }
+    self = result
+  }
+  
+  public var rawValue: String {
+    guard let data = try? JSONEncoder().encode(self),
+          let result = String(data: data, encoding: .utf8)
+    else {
+      return "[]"
+    }
+    return result
   }
 }
