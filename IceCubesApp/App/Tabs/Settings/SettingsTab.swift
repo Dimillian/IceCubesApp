@@ -175,6 +175,12 @@ struct SettingsTabs: View {
         }
         .tint(theme.labelColor)
       }
+
+      NavigationLink(destination: AboutView()) {
+        Label("settings.app.about", systemImage: "info.circle")
+      }
+
+      
     } header: {
       Text("settings.section.app")
     } footer: {
