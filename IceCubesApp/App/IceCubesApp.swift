@@ -154,6 +154,7 @@ struct IceCubesApp: App {
           .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .tabBar)
       }
     }
+    .id(appAccountsManager.currentClient.id)
   }
 
   private func setNewClientsInEnv(client: Client) {
