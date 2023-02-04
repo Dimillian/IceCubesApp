@@ -1,5 +1,4 @@
 import Foundation
-import HTML2Markdown
 import SwiftSoup
 import SwiftUI
 
@@ -34,7 +33,7 @@ public struct HTMLString: Decodable, Equatable, Hashable {
     } catch {
       asRawText = htmlValue
     }
-            
+    
     do {
       let options = AttributedString.MarkdownParsingOptions(allowsExtendedAttributes: true,
                                                             interpretedSyntax: .inlineOnlyPreservingWhitespace)
@@ -43,7 +42,7 @@ public struct HTMLString: Decodable, Equatable, Hashable {
       asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
     }
   }
-
+  
   public init(stringValue: String) {
     htmlValue = stringValue
     asMarkdown = stringValue
@@ -54,7 +53,7 @@ public struct HTMLString: Decodable, Equatable, Hashable {
   
   private mutating func handleNode(node: SwiftSoup.Node ) {
     
-      
+    
     do {
       if let className = try? node.attr("class") {
         if className == "invisible" {
@@ -86,7 +85,7 @@ public struct HTMLString: Decodable, Equatable, Hashable {
           if !asMarkdown.hasSuffix("\n") && !asMarkdown.hasSuffix("\u{2028}") {
             if let next = node.nextSibling() {
               if next.nodeName() == "#text" && (next.description.hasPrefix("\n") || next.description.hasPrefix("\u{2028}")) {
-                 // do nothing
+                // do nothing
               }
               else {
                 asMarkdown += "\n"
@@ -118,15 +117,15 @@ public struct HTMLString: Decodable, Equatable, Hashable {
       else if node.nodeName() == "#text" {
         
         var txt = node.description
-
+        
         if let regex {
           //  This is the markdown escaper
           txt = regex.stringByReplacingMatches(in: txt, options: [], range: NSRange(location: 0, length: txt.count), withTemplate: "\\\\$1")
         }
-
+        
         asMarkdown += txt
       }
-
+      
       for n in node.getChildNodes() {
         handleNode(node: n)
       }
@@ -135,7 +134,7 @@ public struct HTMLString: Decodable, Equatable, Hashable {
     catch {
       
     }
-
+    
   }
   
   
