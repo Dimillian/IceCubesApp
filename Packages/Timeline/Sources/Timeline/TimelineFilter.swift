@@ -8,18 +8,18 @@ public enum TimelineFilter: Hashable, Equatable {
   case hashtag(tag: String, accountId: String?)
   case list(list: Models.List)
   case remoteLocal(server: String)
-  
+
   public func hash(into hasher: inout Hasher) {
     hasher.combine(title)
   }
-  
+
   public static func availableTimeline(client: Client) -> [TimelineFilter] {
     if !client.isAuth {
       return [.local, .federated, .trending]
     }
     return [.home, .local, .federated, .trending]
   }
-  
+
   public var title: String {
     switch self {
     case .federated:
@@ -38,7 +38,7 @@ public enum TimelineFilter: Hashable, Equatable {
       return server
     }
   }
-  
+
   public func localizedTitle() -> LocalizedStringKey {
     switch self {
     case .federated:
@@ -57,7 +57,7 @@ public enum TimelineFilter: Hashable, Equatable {
       return LocalizedStringKey(server)
     }
   }
-  
+
   public func iconName() -> String? {
     switch self {
     case .federated:
@@ -76,7 +76,7 @@ public enum TimelineFilter: Hashable, Equatable {
       return nil
     }
   }
-  
+
   public func endpoint(sinceId: String?, maxId: String?, minId: String?, offset: Int?) -> Endpoint {
     switch self {
     case .federated: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: false)
