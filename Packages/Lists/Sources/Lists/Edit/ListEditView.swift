@@ -39,13 +39,6 @@ public struct ListEditView: View {
                 }
               }
               .listRowBackground(theme.primaryBackgroundColor)
-            }.onDelete { indexes in
-              if let index = indexes.first {
-                Task {
-                  let account = viewModel.accounts[index]
-                  await viewModel.delete(account: account)
-                }
-              }
             }
           }
         }
