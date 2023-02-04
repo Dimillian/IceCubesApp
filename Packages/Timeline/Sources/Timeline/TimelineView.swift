@@ -93,9 +93,13 @@ public struct TimelineView: View {
       viewModel.isTimelineVisible = false
     }
     .refreshable {
-      HapticManager.shared.impact(intensity: 0.3)
+      if UserPreferences.shared.hapticTimelineEnabled {
+        HapticManager.shared.impact(intensity: 0.3)
+      }
       await viewModel.fetchStatuses()
-      HapticManager.shared.impact(intensity: 0.7)
+      if UserPreferences.shared.hapticTimelineEnabled {
+        HapticManager.shared.impact(intensity: 0.7)
+      }
     }
     .onChange(of: watcher.latestEvent?.id) { _ in
       if let latestEvent = watcher.latestEvent {

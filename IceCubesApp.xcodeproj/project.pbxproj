@@ -16,6 +16,7 @@
 		7429BCE2297C55D00069A946 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7429BCE4297C55D00069A946 /* Localizable.stringsdict */; };
 		7429BCE5297C5A750069A946 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7429BCE4297C55D00069A946 /* Localizable.stringsdict */; };
 		7429BCE6297C5A750069A946 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7429BCE4297C55D00069A946 /* Localizable.stringsdict */; };
+		9F1E8B47298EBCBB00609F80 /* HapticSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1E8B46298EBCBB00609F80 /* HapticSettingsView.swift */; };
 		9F24EEB829360C330042359D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F24EEB729360C330042359D /* Preview Assets.xcassets */; };
 		9F295540292B6C3400E0E81B /* Timeline in Frameworks */ = {isa = PBXBuildFile; productRef = 9F29553F292B6C3400E0E81B /* Timeline */; };
 		9F2A540729699698009B2D7C /* SupportAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2A540629699698009B2D7C /* SupportAppView.swift */; };
@@ -147,6 +148,7 @@
 		8C27D978298471E900CDF593 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8C27D979298471E900CDF593 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9606B7A1297AD2BB00C1FB75 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9F1E8B46298EBCBB00609F80 /* HapticSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticSettingsView.swift; sourceTree = "<group>"; };
 		9F24EEB729360C330042359D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9F29553D292B67B600E0E81B /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Network; path = Packages/Network; sourceTree = "<group>"; };
 		9F29553E292B6AF600E0E81B /* Timeline */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Timeline; path = Packages/Timeline; sourceTree = "<group>"; };
@@ -441,16 +443,17 @@
 		9FE151A4293C90EA00E9683D /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				9FAE4ACA293783B000772766 /* SettingsTab.swift */,
-				9FE151A5293C90F900E9683D /* IconSelectorView.swift */,
-				9F2B92F9295DA7D700DE16D0 /* AddAccountsView.swift */,
-				9F2B92FB295DA94500DE16D0 /* InstanceInfoView.swift */,
-				9F7335F82968576500AFF0BA /* DisplaySettingsView.swift */,
-				9F2A540629699698009B2D7C /* SupportAppView.swift */,
-				9F2A5410296A1429009B2D7C /* PushNotificationsView.swift */,
-				C9B22676297F6C2E001F9EFE /* ContentSettingsView.swift */,
-				9F7D939929805DBD00EE6B7A /* AccountSettingView.swift */,
 				069709A9298C9AD7006E4CB5 /* AboutView.swift */,
+				9F7D939929805DBD00EE6B7A /* AccountSettingView.swift */,
+				9F2B92F9295DA7D700DE16D0 /* AddAccountsView.swift */,
+				C9B22676297F6C2E001F9EFE /* ContentSettingsView.swift */,
+				9F7335F82968576500AFF0BA /* DisplaySettingsView.swift */,
+				9F1E8B46298EBCBB00609F80 /* HapticSettingsView.swift */,
+				9FE151A5293C90F900E9683D /* IconSelectorView.swift */,
+				9F2B92FB295DA94500DE16D0 /* InstanceInfoView.swift */,
+				9F2A5410296A1429009B2D7C /* PushNotificationsView.swift */,
+				9FAE4ACA293783B000772766 /* SettingsTab.swift */,
+				9F2A540629699698009B2D7C /* SupportAppView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -744,6 +747,7 @@
 				9F35DB4729506F6600B3281A /* NotificationTab.swift in Sources */,
 				9F7335F22967608F00AFF0BA /* AddRemoteTimelineView.swift in Sources */,
 				9F55C68D2955968700F94077 /* ExploreTab.swift in Sources */,
+				9F1E8B47298EBCBB00609F80 /* HapticSettingsView.swift in Sources */,
 				9F2A5411296A1429009B2D7C /* PushNotificationsView.swift in Sources */,
 				9FAD85A8297582F100496AB1 /* QuickLookRepresentable.swift in Sources */,
 			);

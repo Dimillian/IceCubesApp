@@ -31,6 +31,10 @@ public class UserPreferences: ObservableObject {
   @AppStorage("suppress_dupe_reblogs") public var suppressDupeReblogs: Bool = false
 
   @AppStorage("inAppBrowserReaderView") public var inAppBrowserReaderView = false
+  
+  @AppStorage("haptic_tab") public var hapticTabSelectionEnabled = true
+  @AppStorage("haptic_timeline") public var hapticTimelineEnabled = true
+  @AppStorage("haptic_button_press") public var hapticButtonPressEnabled = true
 
   public var postVisibility: Models.Visibility {
     if useInstanceContentSettings {

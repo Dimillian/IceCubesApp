@@ -140,7 +140,9 @@ struct IceCubesApp: App {
         }
       }
       selectedTab = newTab
-      HapticManager.shared.selectionChanged()
+      if userPreferences.hapticTabSelectionEnabled {
+        HapticManager.shared.selectionChanged()
+      }
     })) {
       ForEach(availableTabs) { tab in
         tab.makeContentView(popToRootTab: $popToRootTab)

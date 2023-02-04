@@ -155,7 +155,9 @@ public class StatusEditorViewModel: ObservableObject {
       case let .edit(status):
         postStatus = try await client.put(endpoint: Statuses.editStatus(id: status.id, json: data))
       }
-      HapticManager.shared.notification(type: .success)
+      if UserPreferences.shared.hapticButtonPressEnabled {
+        HapticManager.shared.notification(type: .success)
+      }
       if hasExplicitlySelectedLanguage, let selectedLanguage {
         preferences?.markLanguageAsSelected(isoCode: selectedLanguage)
       }
@@ -167,7 +169,9 @@ public class StatusEditorViewModel: ObservableObject {
         showPostingErrorAlert = true
       }
       isPosting = false
-      HapticManager.shared.notification(type: .error)
+      if UserPreferences.shared.hapticButtonPressEnabled {
+        HapticManager.shared.notification(type: .error)
+      }
       return nil
     }
   }

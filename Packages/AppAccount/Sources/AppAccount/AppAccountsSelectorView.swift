@@ -38,7 +38,9 @@ public struct AppAccountsSelectorView: View {
       }
     }
     .onTapGesture {
-      HapticManager.shared.impact()
+      if UserPreferences.shared.hapticButtonPressEnabled {
+        HapticManager.shared.impact()
+      }
     }
     .onAppear {
       refreshAccounts()
@@ -78,7 +80,9 @@ public struct AppAccountsSelectorView: View {
             appAccounts.currentAccount = viewModel.appAccount
           }
 
-          HapticManager.shared.impact()
+          if UserPreferences.shared.hapticButtonPressEnabled {
+            HapticManager.shared.impact()
+          }
         } label: {
           HStack {
             if viewModel.account?.id == currentAccount.account?.id {
@@ -92,7 +96,9 @@ public struct AppAccountsSelectorView: View {
     if accountCreationEnabled {
       Divider()
       Button {
-        HapticManager.shared.impact()
+        if UserPreferences.shared.hapticButtonPressEnabled {
+          HapticManager.shared.impact()
+        }
         routerPath.presentedSheet = .addAccount
       } label: {
         Label("app-account.button.add", systemImage: "person.badge.plus")
@@ -102,7 +108,9 @@ public struct AppAccountsSelectorView: View {
     if UIDevice.current.userInterfaceIdiom == .phone {
       Divider()
       Button {
-        HapticManager.shared.impact()
+        if UserPreferences.shared.hapticButtonPressEnabled {
+          HapticManager.shared.impact()
+        }
         routerPath.presentedSheet = .settings
       } label: {
         Label("tab.settings", systemImage: "gear")
