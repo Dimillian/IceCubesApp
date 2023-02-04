@@ -79,6 +79,7 @@ public struct TimelineView: View {
     .navigationTitle(timeline.localizedTitle())
     .navigationBarTitleDisplayMode(.inline)
     .onAppear {
+      viewModel.isTimelineVisible = true
       if viewModel.client == nil {
         viewModel.client = client
         viewModel.timeline = timeline
@@ -87,6 +88,9 @@ public struct TimelineView: View {
           await viewModel.fetchStatuses()
         }
       }
+    }
+    .onDisappear {
+      viewModel.isTimelineVisible = false
     }
     .refreshable {
       HapticManager.shared.impact(intensity: 0.3)

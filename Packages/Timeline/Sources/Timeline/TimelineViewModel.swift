@@ -27,6 +27,7 @@ class TimelineViewModel: ObservableObject {
   }
 
   private var canStreamEvents: Bool = true
+  var isTimelineVisible: Bool = false
 
   let pendingStatusesObserver: PendingStatusesObserver = .init()
 
@@ -86,6 +87,7 @@ class TimelineViewModel: ObservableObject {
   func handleEvent(event: any StreamEvent, currentAccount _: CurrentAccount) {
     if let event = event as? StreamEventUpdate,
        canStreamEvents,
+       isTimelineVisible,
        pendingStatusesEnabled,
        !statuses.contains(where: { $0.id == event.status.id })
     {
@@ -212,9 +214,14 @@ extension TimelineViewModel: StatusesFetcher {
     
     ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
 
-
     // If no new statuses, resume streaming and exit.
     guard !newStatuses.isEmpty else {
+      canStreamEvents = true
+      return
+    }
+    
+    // If the timeline is not visible, we don't update it as it would mess up the user position.
+    guard isTimelineVisible else {
       canStreamEvents = true
       return
     }
