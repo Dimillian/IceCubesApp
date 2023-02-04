@@ -29,6 +29,7 @@ public struct HTMLString: Codable, Equatable, Hashable {
       
       let document: Document = try SwiftSoup.parse(htmlValue)
       handleNode(node: document)
+      
       document.outputSettings(OutputSettings().prettyPrint(pretty: false))
       try document.select("br").after("\n")
       try document.select("p").after("\n\n")
@@ -40,6 +41,11 @@ public struct HTMLString: Codable, Equatable, Hashable {
         _ = text.removeLast()
       }
       asRawText = text
+      
+      if asMarkdown.hasPrefix("\n") {
+        _ = asMarkdown.removeFirst()
+      }
+      
     } catch {
       asRawText = htmlValue
     }
