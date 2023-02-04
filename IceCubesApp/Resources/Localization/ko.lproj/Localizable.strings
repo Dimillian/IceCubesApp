@@ -57,7 +57,7 @@
 "settings.app.icon.navigation-title" = "앱 아이콘";
 "settings.app.source" = "소스 코드 (GitHub)";
 "settings.app.support" = "이 앱 지원하기";
-"settings.app.about" = "About";
+"settings.app.about" = "이 앱에 관해";
 "settings.display.avatar.position" = "프로필 사진 위치";
 "settings.display.avatar.shape" = "프로필 사진 모양";
 "settings.display.navigation-title" = "화면 설정";
@@ -73,8 +73,8 @@
 "settings.display.theme.tint" = "강조 색상";
 "settings.display.theme.systemColor" = "시스템 설정에 맞추기";
 "settings.general.browser" = "브라우저";
-"settings.general.browser.in-app" = "인 앱 브라우저";
-"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
+"settings.general.browser.in-app" = "인앱 브라우저";
+"settings.general.browser.in-app.readerview" = "인앱 브라우저에서 항상 읽기 도구 사용";
 "settings.general.browser.system" = "시스템 기본 브라우저";
 "settings.general.display" = "화면 설정";
 "settings.general.instance" = "인스턴스 정보";
@@ -93,8 +93,8 @@
 "settings.system" = "시스템 설정";
 "settings.content.navigation-title" = "콘텐츠 설정";
 "settings.content.boosts" = "부스트";
-"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
-"settings.content.instance-settings" = "Server Content Settings";
+"settings.content.hide-repeated-boosts" = "중복으로 부스트된 글 숨기기";
+"settings.content.instance-settings" = "인스턴스 콘텐츠 설정";
 "settings.content.use-instance-settings" = "인스턴스 설정에 맞추기";
 "settings.content.expand-spoilers" = "열람 주의 표시된 글 항상 표시하기";
 "settings.content.expand-media" = "표시할 미디어";
@@ -109,7 +109,7 @@
 "settings.section.app" = "앱";
 "settings.section.app.footer %@" = "앱 버전: %@";
 "settings.section.general" = "일반";
-"settings.support.alert.error.message" = "인 앱 구매를 완료하지 못했습니다. 다시 시도해주세요.";
+"settings.support.alert.error.message" = "인앱 구매를 완료하지 못했습니다. 다시 시도해주세요.";
 "settings.support.alert.message" = "앱을 위해 기부해주셔서 감사합니다. 앱 개발에 큰 도움이 됩니다!";
 "settings.support.alert.title" = "감사합니다!";
 "settings.support.message-from-dev" = "안녕하세요! 저는 Thomas입니다. 저는 오픈 소스 앱을 만드는 걸 정말 좋아해요. Ice Cubes는 제가 가장 자랑스럽게 생각하는 프로젝트 중 하나에요. 동시에 가장 많은 유지·보수가 필요한 프로젝트이기도 하죠. 마스토돈은 끊임없이 업데이트되고, 소셜 미디어의 세계 역시 빠르게 변화하니까요. Ice Cubes를 쓰며 즐거운 시간을 보내고 있나요? 그렇다면, 작은 기부금을 한 번 보내보는 건 어때요? 제 하루가 행복해질 거에요. (그리고 이 앱이 계속 잘 작동하는 데 도움이 될 거에요.) 🚀";
@@ -136,8 +136,8 @@
 "settings.display.font" = "타임라인 글꼴";
 "settings.display.font.system" = "시스템 글꼴 사용";
 "settings.display.font.custom" = "직접 설정";
-"settings.display.font.scaling-%@" = "Font scaling: %@";
-"settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
+"settings.display.font.scaling-%@" = "폰트 크기 조절: %@";
+"settings.about.built-with" = "Ice Cubes는 다음 오픈 소스 소프트웨어를 사용하여 개발되었습니다:";
 "settings.about.title" = "Ice Cubes";
 
 // MARK: Tabs
@@ -159,6 +159,7 @@
 "timeline.filter.lists" = "리스트";
 "timeline.filter.local" = "로컬 타임라인";
 "timeline.filter.tags" = "팔로우한 태그";
+"timeline-new-posts %lld" = "%lld개의 새 글";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "계정 추가";
@@ -265,18 +266,19 @@
 "lists.name.message" = "리스트의 이름을 입력해주세요.";
 
 // MARK: Package: Notifications
+"notifications-others-count %lld" = "님 외 %lld명이 ";
 "notifications.empty.message" = "알림? 무슨 알림이요? 알림 목록이 비어 있어요. 지금처럼 멋지게 하면 알림이 곧 올 거에요. 📱😎";
 "notifications.empty.title" = "알림 없음";
 "notifications.error.message" = "알림을 불러오지 못했습니다. 다시 시도해주세요.";
 "notifications.error.title" = "오류";
 "notifications.label.favorite %lld" = "좋아요함";
 "notifications.label.follow %lld" = "당신을 팔로우함";
-"notifications.label.mention %lld" = "당신을 언급함";
+"notifications.label.mention %lld" = "님이 당신을 언급함";
 "notifications.label.reblog %lld" = "부스트함";
-"notifications.label.poll" = "의 투표가 끝남";
-"notifications.label.follow-request" = "당신에게 팔로우 요청을 보냄";
-"notifications.label.status" = "의 새 글";
-"notifications.label.update" = "글을 수정함";
+"notifications.label.poll" = "님의 투표가 끝남";
+"notifications.label.follow-request" = "님이 당신에게 팔로우 요청을 보냄";
+"notifications.label.status" = "님의 새 글";
+"notifications.label.update" = "님이 글을 수정함";
 "notifications.menu-title.favorite" = "좋아요";
 "notifications.menu-title.follow" = "새 팔로워";
 "notifications.menu-title.follow-request" = "팔로우 요청";

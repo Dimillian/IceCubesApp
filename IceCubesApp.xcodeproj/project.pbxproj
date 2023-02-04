@@ -229,9 +229,8 @@
 		E9DF420229830FEC0003AAD2 /* Action.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Action.js; sourceTree = "<group>"; };
 		E9DF420429830FEC0003AAD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F355EEDA297A8BD500E362C0 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
-		FF05602829864AD800ED3D66 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ko; path = ko.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
-		FF05602929864AD800ED3D66 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
-		FF05602A29864AD800ED3D66 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FF8259FB298E42E000BEAB69 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FF8259FC298E42E000BEAB69 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -632,8 +631,8 @@
 				nb,
 				pl,
 				ca,
-				ko,
 				"en-GB",
+				ko,
 			);
 			mainGroup = 9FBFE630292A715500C250E9;
 			packageReferences = (
@@ -797,7 +796,6 @@
 				8C27D977298471E900CDF593 /* nb */,
 				9FCBB3D02984EFD5009B77EE /* pl */,
 				9FCBB3D52985965D009B77EE /* ca */,
-				FF05602829864AD800ED3D66 /* ko */,
 				C4CBB909298A0DA3007E1707 /* en-GB */,
 			);
 			name = Localizable.stringsdict;
@@ -810,8 +808,8 @@
 				8C27D979298471E900CDF593 /* nb */,
 				9FCBB3D22984EFD5009B77EE /* pl */,
 				9FCBB3D429859615009B77EE /* ca */,
-				FF05602A29864AD800ED3D66 /* ko */,
 				C4CBB90B298A0DA3007E1707 /* en-GB */,
+				FF8259FC298E42E000BEAB69 /* ko */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -832,8 +830,8 @@
 				8C27D978298471E900CDF593 /* nb */,
 				9FCBB3D12984EFD5009B77EE /* pl */,
 				9FCBB3D329859615009B77EE /* ca */,
-				FF05602929864AD800ED3D66 /* ko */,
 				C4CBB90A298A0DA3007E1707 /* en-GB */,
+				FF8259FB298E42E000BEAB69 /* ko */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
