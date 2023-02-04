@@ -93,8 +93,8 @@
 "settings.system" = "Paramètres système";
 "settings.content.navigation-title" = "Paramètres de contenu";
 "settings.content.boosts" = "Boosts";
-"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
-"settings.content.instance-settings" = "Server Content Settings";
+"settings.content.hide-repeated-boosts" = "Masquer les boosts répétés";
+"settings.content.instance-settings" = "Réglages de contenu serveur";
 "settings.content.use-instance-settings" = "Utiliser les paramètres du serveur";
 "settings.content.expand-spoilers" = "Toujours afficher les messages sensibles";
 "settings.content.expand-media" = "Affichage des médias";
@@ -132,21 +132,21 @@
 "settings.push.duplicate.title" = "Correcteur de notifications en double";
 "settings.push.duplicate.footer" = "Recevez-vous des notifications en double ? Essayez ce bouton magique pour résoudre le problème";
 "settings.push.duplicate.button.fix" = "🪄 Résoudre";
-"settings.other.autoplay-video" = "Auto Play Videos";
-"settings.display.font" = "Timeline Font";
-"settings.display.font.system" = "System";
-"settings.display.font.custom" = "Custom";
-"settings.display.font.scaling-%@" = "Font scaling: %@";
-"settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
+"settings.other.autoplay-video" = "Jouer automatiquement les vidéos";
+"settings.display.font" = "Police de la chronologie";
+"settings.display.font.system" = "Système";
+"settings.display.font.custom" = "Personnalisée";
+"settings.display.font.scaling-%@" = "Mise à l'échelle de la police: %@";
+"settings.about.built-with" = "Ice Cubes est développé avec les logiciels Open Source suivants :";
 "settings.about.title" = "Ice Cubes";
-"settings.account.cached-posts-%@" = "Cached posts: %@";
-"settings.account.action.delete-cache" = "Clear cache";
+"settings.account.cached-posts-%@" = "Publications en cache: %@";
+"settings.account.action.delete-cache" = "Effacer le cache";
 
-"settings.general.haptic" = "Haptic Feedback";
-"settings.haptic.navigation-title" = "Haptic Settings";
-"settings.haptic.timeline" = "Timeline";
-"settings.haptic.tab-selection" = "Tab Selection";
-"settings.haptic.buttons" = "Button Press";
+"settings.general.haptic" = "Retour vibrations";
+"settings.haptic.navigation-title" = "Réglages vibrations";
+"settings.haptic.timeline" = "Chronologie";
+"settings.haptic.tab-selection" = "Sélection d'onglet";
+"settings.haptic.buttons" = "Appui bouton";
 
 // MARK: Tabs
 "tab.explore" = "Explorer";
