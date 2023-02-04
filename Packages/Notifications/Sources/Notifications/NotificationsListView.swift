@@ -97,6 +97,8 @@ public struct NotificationsListView: View {
         EmptyView(iconName: "bell.slash",
                   title: "notifications.empty.title",
                   message: "notifications.empty.message")
+        .listRowBackground(theme.primaryBackgroundColor)
+        .listSectionSeparator(.hidden)
       } else {
         ForEach(notifications) { notification in
           NotificationRowView(notification: notification)
