@@ -295,6 +295,7 @@
 
 // MARK: Package: Timeline
 "timeline.federated" = "Birleştirilmiş";
+"timeline.latest" = "Jump to Latest";
 "timeline.home" = "Ana Ekran";
 "timeline.local" = "Yerel";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld katılımcılar tarafından %lld yeni gönderiler";

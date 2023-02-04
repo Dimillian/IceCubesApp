@@ -300,6 +300,7 @@
 
 // MARK: Package: Timeline
 "timeline.federated" = "Federated";
+"timeline.latest" = "Jump to Latest";
 "timeline.home" = "Home";
 "timeline.local" = "Local";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld recent posts from %lld participants";

@@ -300,6 +300,7 @@
 
 // MARK: Package: Timeline
 "timeline.federated" = "跨站";
+"timeline.latest" = "Jump to Latest";
 "timeline.home" = "主页";
 "timeline.local" = "本地";
 "timeline.n-recent-from-n-participants %lld %lld" = "最近 %lld 条嘟文来自 %lld 个参与者";

@@ -299,6 +299,7 @@
 
 // MARK: Package: Timeline
 "timeline.federated" = "連合";
+"timeline.latest" = "Jump to Latest";
 "timeline.home" = "ホーム";
 "timeline.local" = "ローカル";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld トゥートの投稿 %lld 人が投稿している";

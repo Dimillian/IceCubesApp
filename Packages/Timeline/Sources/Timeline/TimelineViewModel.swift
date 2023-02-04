@@ -11,6 +11,10 @@ class TimelineViewModel: ObservableObject {
   @Published var timeline: TimelineFilter = .federated {
     didSet {
       Task {
+        if timeline == .latest, let client {
+          await cache.clearCache(for: client)
+          timeline = .home
+        }
         if oldValue != timeline {
           statuses = []
           pendingStatusesObserver.pendingStatuses = []

@@ -76,6 +76,14 @@ struct TimelineTab: View {
 
   @ViewBuilder
   private var timelineFilterButton: some View {
+    if timeline == .home {
+      Button {
+        self.timeline = .latest
+      } label: {
+        Label(TimelineFilter.latest.localizedTitle(), systemImage: TimelineFilter.latest.iconName() ?? "")
+      }
+      Divider()
+    }
     ForEach(TimelineFilter.availableTimeline(client: client), id: \.self) { timeline in
       Button {
         self.timeline = timeline

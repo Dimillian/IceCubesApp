@@ -301,6 +301,7 @@
 
 // MARK: Package: Timeline
 "timeline.federated" = "연합";
+"timeline.latest" = "Jump to Latest";
 "timeline.home" = "홈";
 "timeline.local" = "로컬";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld개의 최근 글 (%lld명의 사용자가 이야기 중)";

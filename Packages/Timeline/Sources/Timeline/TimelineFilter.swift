@@ -8,6 +8,7 @@ public enum TimelineFilter: Hashable, Equatable {
   case hashtag(tag: String, accountId: String?)
   case list(list: Models.List)
   case remoteLocal(server: String)
+  case latest
 
   public func hash(into hasher: inout Hasher) {
     hasher.combine(title)
@@ -22,6 +23,8 @@ public enum TimelineFilter: Hashable, Equatable {
 
   public var title: String {
     switch self {
+    case .latest:
+      return "Latest"
     case .federated:
       return "Federated"
     case .local:
@@ -41,6 +44,8 @@ public enum TimelineFilter: Hashable, Equatable {
 
   public func localizedTitle() -> LocalizedStringKey {
     switch self {
+    case .latest:
+      return "timeline.latest"
     case .federated:
       return "timeline.federated"
     case .local:
@@ -60,6 +65,8 @@ public enum TimelineFilter: Hashable, Equatable {
 
   public func iconName() -> String? {
     switch self {
+    case .latest:
+      return "arrow.counterclockwise"
     case .federated:
       return "globe.americas"
     case .local:
@@ -82,6 +89,7 @@ public enum TimelineFilter: Hashable, Equatable {
     case .federated: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: false)
     case .local: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true)
     case .remoteLocal: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true)
+    case .latest: return Timelines.home(sinceId: nil, maxId: nil, minId: nil)
     case .home: return Timelines.home(sinceId: sinceId, maxId: maxId, minId: minId)
     case .trending: return Trends.statuses(offset: offset)
     case let .list(list): return Timelines.list(listId: list.id, sinceId: sinceId, maxId: maxId, minId: minId)

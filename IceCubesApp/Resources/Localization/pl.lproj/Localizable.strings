@@ -296,6 +296,7 @@
 
 // MARK: Package: Timeline
 "timeline.federated" = "Strumień globalny";
+"timeline.latest" = "Jump to Latest";
 "timeline.home" = "Strona domowa";
 "timeline.local" = "Strumień lokalny";
 "timeline.trending" = "Teraz popularne";

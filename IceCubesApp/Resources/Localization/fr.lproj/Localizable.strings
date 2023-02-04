@@ -295,6 +295,7 @@
 
 // MARK: Package: Timeline
 "timeline.federated" = "Fédéré";
+"timeline.latest" = "Jump to Latest";
 "timeline.home" = "Accueil";
 "timeline.local" = "Local";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld publications récentes de %lld participants";

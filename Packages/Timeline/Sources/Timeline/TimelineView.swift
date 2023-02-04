@@ -115,6 +115,9 @@ public struct TimelineView: View {
       }
       viewModel.timeline = newTimeline
     }
+    .onChange(of: viewModel.timeline, perform: { newValue in
+      timeline = newValue
+    })
     .onChange(of: scenePhase, perform: { scenePhase in
       switch scenePhase {
       case .active:

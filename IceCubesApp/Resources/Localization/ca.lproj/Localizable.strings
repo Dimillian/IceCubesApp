@@ -298,6 +298,7 @@
 
 // MARK: Package: Timeline
 "timeline.federated" = "Federada";
+"timeline.latest" = "Jump to Latest";
 "timeline.home" = "Inici";
 "timeline.local" = "Local";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld publicació recents de %lld participants";

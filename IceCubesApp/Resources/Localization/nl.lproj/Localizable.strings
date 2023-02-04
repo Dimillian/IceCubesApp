@@ -293,6 +293,7 @@
 
 // MARK: Package: Timeline
 "timeline.federated" = "Gefedereerd";
+"timeline.latest" = "Jump to Latest";
 "timeline.home" = "Start";
 "timeline.local" = "Lokaal";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld recente posts van %lld deelnemers";

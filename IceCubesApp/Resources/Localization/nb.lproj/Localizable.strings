@@ -299,6 +299,7 @@
 
 // MARK: Package: Timeline
 "timeline.federated" = "Federert";
+"timeline.latest" = "Jump to Latest";
 "timeline.home" = "Hjem";
 "timeline.local" = "Lokal";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld nylige innlegg fra %lld deltakere";
