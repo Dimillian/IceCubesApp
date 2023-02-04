@@ -8,6 +8,7 @@ class PendingStatusesObserver: ObservableObject {
   @Published var pendingStatusesCount: Int = 0
 
   var disableUpdate: Bool = false
+  var scrollToIndex: ((Int) -> ())?
 
   var pendingStatuses: [String] = [] {
     didSet {
@@ -27,11 +28,14 @@ class PendingStatusesObserver: ObservableObject {
 
 struct PendingStatusesObserverView: View {
   @ObservedObject var observer: PendingStatusesObserver
+  
   var body: some View {
     if observer.pendingStatusesCount > 0 {
       HStack(spacing: 6) {
         Spacer()
-        Button {} label: {
+        Button {
+          observer.scrollToIndex?(observer.pendingStatusesCount)
+        } label: {
           Text("\(observer.pendingStatusesCount)")
         }
         .buttonStyle(.bordered)

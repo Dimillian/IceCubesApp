@@ -35,6 +35,7 @@ class TimelineViewModel: ObservableObject {
 
   private let cache: TimelineCache = .shared
 
+  var scrollToIndexAnimated: Bool = false
   @Published var scrollToIndex: Int?
 
   @Published var statusesState: StatusesState = .loading
@@ -65,6 +66,13 @@ class TimelineViewModel: ObservableObject {
 
   var serverName: String {
     client?.server ?? "Error"
+  }
+  
+  init() {
+    pendingStatusesObserver.scrollToIndex = { [weak self] index in
+      self?.scrollToIndexAnimated = true
+      self?.scrollToIndex = index
+    }
   }
 
   private func fetchTag(id: String) async {
@@ -225,6 +233,7 @@ extension TimelineViewModel: StatusesFetcher {
       if let topStatusId, visibileStatusesIds.contains(topStatusId), scrollToTopVisible {
         pendingStatusesObserver.disableUpdate = true
         statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
+        scrollToIndexAnimated = false
         scrollToIndex = newStatuses.count + 1
         DispatchQueue.main.async {
           self.pendingStatusesObserver.disableUpdate = false

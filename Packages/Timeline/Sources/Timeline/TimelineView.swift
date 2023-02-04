@@ -63,10 +63,11 @@ public struct TimelineView: View {
       }
       .onChange(of: viewModel.scrollToIndex) { index in
         if let index {
-          viewModel.scrollToIndex = nil
           collectionView?.scrollToItem(at: .init(row: index, section: 0),
                                        at: .top,
-                                       animated: false)
+                                       animated: viewModel.scrollToIndexAnimated)
+          viewModel.scrollToIndexAnimated = false
+          viewModel.scrollToIndex = nil
         }
       }
       .onChange(of: scrollToTopSignal, perform: { _ in
