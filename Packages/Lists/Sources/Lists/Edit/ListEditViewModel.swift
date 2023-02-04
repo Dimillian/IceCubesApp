@@ -25,4 +25,14 @@ public class ListEditViewModel: ObservableObject {
       isLoadingAccounts = false
     }
   }
+
+  func delete(account: Account) async {
+    guard let client else { return }
+    do {
+      let response = try await client.delete(endpoint: Lists.updateAccounts(listId: list.id, accounts: [account.id]))
+      if response?.statusCode == 200 {
+        accounts.removeAll(where: { $0.id == account.id })
+      }
+    } catch {}
+  }
 }

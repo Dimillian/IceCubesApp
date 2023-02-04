@@ -5,7 +5,6 @@ import Env
 import Models
 import SwiftUI
 import Timeline
-import Network
 
 struct AccountSettingsView: View {
   @Environment(\.dismiss) private var dismiss
@@ -68,8 +67,6 @@ struct AccountSettingsView: View {
         Button(role: .destructive) {
           if let token = appAccount.oauthToken {
             Task {
-              let client = Client(server: appAccount.server, oauthToken: token)
-              await TimelineCache.shared.clearCache(for: client)
               if let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token }) {
                 await sub.deleteSubscription()
               }
