@@ -159,6 +159,7 @@
 "timeline.filter.lists" = "리스트";
 "timeline.filter.local" = "로컬 타임라인";
 "timeline.filter.tags" = "팔로우한 태그";
+"timeline-new-posts %lld" = "%lld개의 새 글";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "계정 추가";
@@ -265,18 +266,19 @@
 "lists.name.message" = "리스트의 이름을 입력해주세요.";
 
 // MARK: Package: Notifications
+"notifications-others-count %lld" = "님 외 %lld명이 ";
 "notifications.empty.message" = "알림? 무슨 알림이요? 알림 목록이 비어 있어요. 지금처럼 멋지게 하면 알림이 곧 올 거에요. 📱😎";
 "notifications.empty.title" = "알림 없음";
 "notifications.error.message" = "알림을 불러오지 못했습니다. 다시 시도해주세요.";
 "notifications.error.title" = "오류";
 "notifications.label.favorite %lld" = "좋아요함";
 "notifications.label.follow %lld" = "당신을 팔로우함";
-"notifications.label.mention %lld" = "당신을 언급함";
+"notifications.label.mention %lld" = "님이 당신을 언급함";
 "notifications.label.reblog %lld" = "부스트함";
-"notifications.label.poll" = "의 투표가 끝남";
-"notifications.label.follow-request" = "당신에게 팔로우 요청을 보냄";
-"notifications.label.status" = "의 새 글";
-"notifications.label.update" = "글을 수정함";
+"notifications.label.poll" = "님의 투표가 끝남";
+"notifications.label.follow-request" = "님이 당신에게 팔로우 요청을 보냄";
+"notifications.label.status" = "님의 새 글";
+"notifications.label.update" = "님이 글을 수정함";
 "notifications.menu-title.favorite" = "좋아요";
 "notifications.menu-title.follow" = "새 팔로워";
 "notifications.menu-title.follow-request" = "팔로우 요청";
