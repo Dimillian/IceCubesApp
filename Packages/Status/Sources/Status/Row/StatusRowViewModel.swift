@@ -3,9 +3,6 @@ import Models
 import Network
 import SwiftUI
 
-
-
-
 @MainActor
 public class StatusRowViewModel: ObservableObject {
   let status: Status
@@ -29,9 +26,9 @@ public class StatusRowViewModel: ObservableObject {
 
   @Published var translation: String?
   @Published var isLoadingTranslation: Bool = false
-  
+
   var seen = false
-  
+
   var filter: Filtered? {
     status.reblog?.filtered?.first ?? status.filtered?.first
   }
@@ -71,10 +68,10 @@ public class StatusRowViewModel: ObservableObject {
 
     isFiltered = filter != nil
   }
-    
+
   func markSeen() {
     // called in on appear so we can cache that the status has been seen.
-    if UserPreferences.shared.suppressDupeReblogs  && !seen {
+    if UserPreferences.shared.suppressDupeReblogs && !seen {
       ReblogCache.shared.cache(status, seen: true)
       seen = true
     }

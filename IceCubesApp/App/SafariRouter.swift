@@ -59,7 +59,7 @@ private struct SafariRouter: ViewModifier {
   struct SafariView: UIViewControllerRepresentable {
     let url: URL
     let inAppBrowserReaderView: Bool
-         
+
     func makeUIViewController(context _: UIViewControllerRepresentableContext<SafariView>) -> SFSafariViewController {
       let configuration = SFSafariViewController.Configuration()
       configuration.entersReaderIfAvailable = inAppBrowserReaderView

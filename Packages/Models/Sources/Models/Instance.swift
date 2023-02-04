@@ -28,7 +28,7 @@ public struct Instance: Codable {
     public let id: String
     public let text: String
   }
-  
+
   public struct URLs: Codable {
     public let streamingApi: URL?
   }

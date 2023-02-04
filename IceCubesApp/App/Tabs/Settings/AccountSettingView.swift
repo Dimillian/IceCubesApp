@@ -51,7 +51,7 @@ struct AccountSettingsView: View {
         }
       }
       .listRowBackground(theme.primaryBackgroundColor)
-      
+
       Section {
         Label("settings.account.cached-posts-\(String(cachedPostsCount))", systemImage: "internaldrive")
         Button("settings.account.action.delete-cache", role: .destructive) {
@@ -62,7 +62,7 @@ struct AccountSettingsView: View {
         }
       }
       .listRowBackground(theme.primaryBackgroundColor)
-      
+
       Section {
         Button(role: .destructive) {
           if let token = appAccount.oauthToken {

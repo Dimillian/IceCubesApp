@@ -1,24 +1,23 @@
-import SwiftUI
-import Env
 import DesignSystem
+import Env
+import SwiftUI
 
 struct AboutView: View {
   @EnvironmentObject private var routerPath: RouterPath
   @EnvironmentObject private var theme: Theme
 
-  let versionNumber:String
-  
+  let versionNumber: String
+
   init() {
     if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-        versionNumber = version + " "
-    }
-    else {
+      versionNumber = version + " "
+    } else {
       versionNumber = ""
     }
   }
-  
+
   var body: some View {
-    ScrollView{
+    ScrollView {
       VStack(alignment: .leading) {
         Divider()
         HStack {
@@ -58,24 +57,24 @@ struct AboutView: View {
           .font(.scaledSubheadline)
           .foregroundColor(.gray)
         Text("""
-• [EmojiText](https://github.com/divadretlaw/EmojiText)
+        • [EmojiText](https://github.com/divadretlaw/EmojiText)
 
-• [HTML2Markdown](https://gitlab.com/mflint/HTML2Markdown)
+        • [HTML2Markdown](https://gitlab.com/mflint/HTML2Markdown)
 
-• [KeychainSwift](https://github.com/evgenyneu/keychain-swift)
+        • [KeychainSwift](https://github.com/evgenyneu/keychain-swift)
 
-• [LRUCache](https://github.com/nicklockwood/LRUCache)
+        • [LRUCache](https://github.com/nicklockwood/LRUCache)
 
-• [Nuke](https://github.com/kean/Nuke)
+        • [Nuke](https://github.com/kean/Nuke)
 
-• [SwiftSoup](https://github.com/scinfu/SwiftSoup.git)
+        • [SwiftSoup](https://github.com/scinfu/SwiftSoup.git)
 
-• [TextView](https://github.com/Dimillian/TextView)
+        • [TextView](https://github.com/Dimillian/TextView)
 
-• [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible)
+        • [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible)
 
-• [OpenDyslexic](http://opendyslexic.org)
-""")
+        • [OpenDyslexic](http://opendyslexic.org)
+        """)
         .padding(.horizontal, 25)
         .multilineTextAlignment(.leading)
         .font(.scaledSubheadline)
@@ -91,12 +90,11 @@ struct AboutView: View {
     .environment(\.openURL, OpenURLAction { url in
       routerPath.handle(url: url)
     })
-    
   }
 }
 
 struct AboutView_Previews: PreviewProvider {
-    static var previews: some View {
-        AboutView()
-    }
+  static var previews: some View {
+    AboutView()
+  }
 }

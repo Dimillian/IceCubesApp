@@ -1,11 +1,11 @@
 import DesignSystem
 import Env
+import Introspect
 import Models
 import Network
 import Shimmer
 import Status
 import SwiftUI
-import Introspect
 
 public struct TimelineView: View {
   private enum Constants {
@@ -55,8 +55,8 @@ public struct TimelineView: View {
         .background(theme.primaryBackgroundColor)
         .introspect(selector: TargetViewSelector.ancestorOrSiblingContaining,
                     customize: { (collectionView: UICollectionView) in
-          self.collectionView = collectionView
-        })
+                      self.collectionView = collectionView
+                    })
         if viewModel.pendingStatusesEnabled {
           PendingStatusesObserverView(observer: viewModel.pendingStatusesObserver)
         }

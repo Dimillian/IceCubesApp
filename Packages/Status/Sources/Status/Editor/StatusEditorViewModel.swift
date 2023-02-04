@@ -7,7 +7,7 @@ import PhotosUI
 import SwiftUI
 
 @MainActor
-public class StatusEditorViewModel: ObservableObject {  
+public class StatusEditorViewModel: ObservableObject {
   var mode: Mode
 
   var client: Client?
@@ -32,7 +32,7 @@ public class StatusEditorViewModel: ObservableObject {
   var statusTextCharacterLength: Int {
     urlLengthAdjustments - statusText.string.utf16.count - spoilerTextCount
   }
-  
+
   @Published var backupStatusText: NSAttributedString?
 
   @Published var showPoll: Bool = false
@@ -129,17 +129,17 @@ public class StatusEditorViewModel: ObservableObject {
       }
 
       if !hasExplicitlySelectedLanguage {
-          // Attempt language resolution using Natural Language
-          let recognizer = NLLanguageRecognizer()
-          recognizer.processString(statusText.string)
-          // Use languageHypotheses to get the probability with it
-          let hypotheses = recognizer.languageHypotheses(withMaximum: 1)
-          // Assert that 85% probability is enough :)
-          // A one word toot that is en/fr compatible is only ~50% confident, for instance
-          if let (language, probability) = hypotheses.first, probability > 0.85 {
-              // rawValue return the IETF BCP 47 language tag
-              selectedLanguage = language.rawValue
-          }
+        // Attempt language resolution using Natural Language
+        let recognizer = NLLanguageRecognizer()
+        recognizer.processString(statusText.string)
+        // Use languageHypotheses to get the probability with it
+        let hypotheses = recognizer.languageHypotheses(withMaximum: 1)
+        // Assert that 85% probability is enough :)
+        // A one word toot that is en/fr compatible is only ~50% confident, for instance
+        if let (language, probability) = hypotheses.first, probability > 0.85 {
+          // rawValue return the IETF BCP 47 language tag
+          selectedLanguage = language.rawValue
+        }
       }
 
       let data = StatusData(status: statusText.string,

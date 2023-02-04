@@ -29,9 +29,9 @@ public class UserPreferences: ObservableObject {
   @AppStorage("chosen_font") public private(set) var chosenFontData: Data?
 
   @AppStorage("suppress_dupe_reblogs") public var suppressDupeReblogs: Bool = false
-  
+
   @AppStorage("inAppBrowserReaderView") public var inAppBrowserReaderView = false
-  
+
   public var postVisibility: Models.Visibility {
     if useInstanceContentSettings {
       return serverPreferences?.postVisibility ?? .pub

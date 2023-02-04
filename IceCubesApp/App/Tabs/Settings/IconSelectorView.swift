@@ -32,11 +32,11 @@ struct IconSelectorView: View {
     static var albertKinngIcons: [Icon] {
       [.alt20, .alt21, .alt22, .alt23, .alt24]
     }
-    
+
     static var danIcons: [Icon] {
       [.alt26, .alt27, .alt28]
     }
-    
+
     static var tes6Icons: [Icon] {
       [.alt29, .alt30, .alt31, .alt32]
     }
@@ -76,14 +76,14 @@ struct IconSelectorView: View {
           Text("Icons by Albert Kinng")
             .font(.scaledHeadline)
         }
-        
+
         Section {
           makeIconGridView(icons: Icon.danIcons)
         } header: {
           Text("Icons by Dan van Moll")
             .font(.scaledHeadline)
         }
-        
+
         Section {
           makeIconGridView(icons: Icon.tes6Icons)
         } header: {

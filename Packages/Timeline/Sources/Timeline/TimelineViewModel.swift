@@ -6,40 +6,7 @@ import SwiftUI
 
 @MainActor
 class TimelineViewModel: ObservableObject {
-  var client: Client? {
-    didSet {
-      if oldValue != client {
-        statuses = []
-      }
-    }
-  }
-
-  // Internal source of truth for a timeline.
-  private var statuses: [Status] = []
-  private var visibileStatusesIds = Set<String>()
-  
-  var scrollToTopVisible: Bool = false {
-    didSet {
-      if scrollToTopVisible {
-        pendingStatusesObserver.pendingStatuses = []
-      }
-    }
-  }
-
-  private var canStreamEvents: Bool = true
-  var isTimelineVisible: Bool = false
-
-  let pendingStatusesObserver: PendingStatusesObserver = .init()
-
-  private var accountId: String? {
-    CurrentAccount.shared.account?.id
-  }
-
-  private let cache: TimelineCache = .shared
-
-  var scrollToIndexAnimated: Bool = false
   @Published var scrollToIndex: Int?
-
   @Published var statusesState: StatusesState = .loading
   @Published var timeline: TimelineFilter = .federated {
     didSet {
@@ -62,6 +29,32 @@ class TimelineViewModel: ObservableObject {
 
   @Published var tag: Tag?
 
+  // Internal source of truth for a timeline.
+  private var statuses: [Status] = []
+  private let cache: TimelineCache = .shared
+  private var visibileStatusesIds = Set<String>()
+  private var canStreamEvents: Bool = true
+
+  private var accountId: String? {
+    CurrentAccount.shared.account?.id
+  }
+
+  var client: Client? {
+    didSet {
+      if oldValue != client {
+        statuses = []
+      }
+    }
+  }
+
+  var scrollToTopVisible: Bool = false {
+    didSet {
+      if scrollToTopVisible {
+        pendingStatusesObserver.pendingStatuses = []
+      }
+    }
+  }
+
   var pendingStatusesEnabled: Bool {
     timeline == .home
   }
@@ -69,7 +62,11 @@ class TimelineViewModel: ObservableObject {
   var serverName: String {
     client?.server ?? "Error"
   }
-  
+
+  var isTimelineVisible: Bool = false
+  let pendingStatusesObserver: PendingStatusesObserver = .init()
+  var scrollToIndexAnimated: Bool = false
+
   init() {
     pendingStatusesObserver.scrollToIndex = { [weak self] index in
       self?.scrollToIndexAnimated = true
@@ -168,12 +165,14 @@ extension TimelineViewModel: StatusesFetcher {
     // If we get statuses from the cache for the home timeline, we displays those.
     // Else we fetch top most page from the API.
     if let cachedStatuses = await getCachedStatuses(),
-        !cachedStatuses.isEmpty,
-       timeline == .home {
+       !cachedStatuses.isEmpty,
+       timeline == .home
+    {
       statuses = cachedStatuses
       if let latestSeenId = await cache.getLatestSeenStatus(for: client)?.last,
          let index = statuses.firstIndex(where: { $0.id == latestSeenId }),
-         index > 0 {
+         index > 0
+      {
         // Restore cache and scroll to latest seen status.
         statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
         scrollToIndexAnimated = false
@@ -211,7 +210,7 @@ extension TimelineViewModel: StatusesFetcher {
     newStatuses = newStatuses.filter { status in
       !statuses.contains(where: { $0.id == status.id })
     }
-    
+
     ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
 
     // If no new statuses, resume streaming and exit.
@@ -219,7 +218,7 @@ extension TimelineViewModel: StatusesFetcher {
       canStreamEvents = true
       return
     }
-    
+
     // If the timeline is not visible, we don't update it as it would mess up the user position.
     guard isTimelineVisible else {
       canStreamEvents = true
@@ -284,7 +283,7 @@ extension TimelineViewModel: StatusesFetcher {
 
         updateMentionsToBeHighlighted(&newStatuses)
         ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
-        
+
         allStatuses.insert(contentsOf: newStatuses, at: 0)
         latestMinId = newStatuses.first?.id ?? ""
       }
@@ -303,7 +302,6 @@ extension TimelineViewModel: StatusesFetcher {
                                                                                    maxId: lastId,
                                                                                    minId: nil,
                                                                                    offset: statuses.count))
-
 
       updateMentionsToBeHighlighted(&newStatuses)
       ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
@@ -329,10 +327,10 @@ extension TimelineViewModel: StatusesFetcher {
   func statusDidAppear(status: Status) {
     pendingStatusesObserver.removeStatus(status: status)
     visibileStatusesIds.insert(status.id)
-    
+
     if let client, timeline == .home {
       Task {
-        await cache.setLatestSeenStatuses(ids: visibileStatusesIds.map{ $0 }, for: client)
+        await cache.setLatestSeenStatuses(ids: visibileStatusesIds.map { $0 }, for: client)
       }
     }
   }

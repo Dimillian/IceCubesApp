@@ -119,7 +119,8 @@ class NotificationsViewModel: ObservableObject {
          selectedType == nil || selectedType?.rawValue == event.notification.type
       {
         if event.notification.isConsolidable(selectedType: selectedType),
-           !consolidatedNotifications.isEmpty {
+           !consolidatedNotifications.isEmpty
+        {
           // If the notification type can be consolidated, try to consolidate with the latest row
           let latestConsolidatedNotification = consolidatedNotifications.removeFirst()
           consolidatedNotifications.insert(

@@ -208,7 +208,7 @@ public struct StatusRowView: View {
             threadIcon
           }
           .accessibilityElement()
-          .accessibilityLabel(Text("\(status.account.displayName), \(status.createdAt.relativeFormatted)"))
+          .accessibilityLabel(Text("\(status.account.displayName)"))
         }
         makeStatusContentView(status: status)
           .contentShape(Rectangle())
@@ -420,7 +420,7 @@ public struct StatusRowView: View {
     .background(Color.black.opacity(0.40))
     .transition(.opacity)
   }
-  
+
   @ViewBuilder
   private var trailinSwipeActions: some View {
     Button {
@@ -450,7 +450,7 @@ public struct StatusRowView: View {
     }
     .tint(theme.tintColor)
   }
-  
+
   @ViewBuilder
   private var leadingSwipeActions: some View {
     Button {

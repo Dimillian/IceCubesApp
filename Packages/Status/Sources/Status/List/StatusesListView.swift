@@ -1,8 +1,8 @@
 import DesignSystem
+import Env
 import Models
 import Shimmer
 import SwiftUI
-import Env
 
 public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
   @EnvironmentObject private var theme: Theme

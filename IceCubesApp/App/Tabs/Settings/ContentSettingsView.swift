@@ -13,7 +13,6 @@ struct ContentSettingsView: View {
 
   var body: some View {
     Form {
-      
       Section("settings.content.boosts") {
         Toggle(isOn: $userPreferences.suppressDupeReblogs) {
           Text("settings.content.hide-repeated-boosts")

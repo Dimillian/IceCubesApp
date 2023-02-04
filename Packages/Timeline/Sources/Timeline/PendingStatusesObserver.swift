@@ -1,14 +1,14 @@
+import Env
 import Foundation
 import Models
 import SwiftUI
-import Env
 
 @MainActor
 class PendingStatusesObserver: ObservableObject {
   @Published var pendingStatusesCount: Int = 0
 
   var disableUpdate: Bool = false
-  var scrollToIndex: ((Int) -> ())?
+  var scrollToIndex: ((Int) -> Void)?
 
   var pendingStatuses: [String] = [] {
     didSet {
@@ -28,7 +28,7 @@ class PendingStatusesObserver: ObservableObject {
 
 struct PendingStatusesObserverView: View {
   @ObservedObject var observer: PendingStatusesObserver
-  
+
   var body: some View {
     if observer.pendingStatusesCount > 0 {
       HStack(spacing: 6) {

@@ -1,7 +1,7 @@
+import Boutique
 import Models
 import Network
 import SwiftUI
-import Boutique
 
 public actor TimelineCache {
   public static let shared: TimelineCache = .init()
@@ -9,7 +9,7 @@ public actor TimelineCache {
   private func storageFor(_ client: Client) -> SQLiteStorageEngine {
     SQLiteStorageEngine.default(appendingPath: client.id)
   }
-  
+
   private let decoder = JSONDecoder()
   private let encoder = JSONEncoder()
 
@@ -18,27 +18,25 @@ public actor TimelineCache {
   public func cachedPostsCount(for client: Client) async -> Int {
     await storageFor(client).allKeys().count
   }
-  
-  public func clearCache(for client: Client) async  {
+
+  public func clearCache(for client: Client) async {
     let engine = storageFor(client)
     do {
       try await engine.removeAllData()
-    } catch { }
+    } catch {}
   }
-  
+
   func set(statuses: [Status], client: Client) async {
     guard !statuses.isEmpty else { return }
     let statuses = statuses.prefix(upTo: min(400, statuses.count - 1)).map { $0 }
     do {
       let engine = storageFor(client)
       try await engine.removeAllData()
-      let itemKeys = statuses.map({ CacheKey($0[keyPath: \.id]) })
+      let itemKeys = statuses.map { CacheKey($0[keyPath: \.id]) }
       let dataAndKeys = try zip(itemKeys, statuses)
-          .map({ (key: $0, data: try encoder.encode($1)) })
+        .map { (key: $0, data: try encoder.encode($1)) }
       try await engine.write(dataAndKeys)
-    } catch {
-      
-    }
+    } catch {}
   }
 
   func getStatuses(for client: Client) async -> [Status]? {
@@ -46,18 +44,18 @@ public actor TimelineCache {
     do {
       return try await engine
         .readAllData()
-        .map({ try decoder.decode(Status.self, from: $0) })
+        .map { try decoder.decode(Status.self, from: $0) }
         .sorted(by: { $0.createdAt > $1.createdAt })
     } catch {
       return nil
     }
   }
-  
+
   func setLatestSeenStatuses(ids: [String], for client: Client) {
-    UserDefaults.standard.set(ids, forKey: client.id)
+    UserDefaults.standard.set(ids, forKey: "timeline-last-seen-\(client.id)")
   }
-  
+
   func getLatestSeenStatus(for client: Client) -> [String]? {
-    UserDefaults.standard.array(forKey: client.id) as? [String]
+    UserDefaults.standard.array(forKey: "timeline-last-seen-\(client.id)") as? [String]
   }
 }

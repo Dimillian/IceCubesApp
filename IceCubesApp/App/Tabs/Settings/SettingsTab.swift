@@ -184,7 +184,6 @@ struct SettingsTabs: View {
         Label("settings.app.about", systemImage: "info.circle")
       }
 
-      
     } header: {
       Text("settings.section.app")
     } footer: {
