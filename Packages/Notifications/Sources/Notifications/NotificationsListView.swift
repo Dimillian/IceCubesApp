@@ -133,6 +133,8 @@ public struct NotificationsListView: View {
           await viewModel.fetchNotifications()
         }
       }
+      .listRowBackground(theme.primaryBackgroundColor)
+      .listSectionSeparator(.hidden)
     }
   }
 
