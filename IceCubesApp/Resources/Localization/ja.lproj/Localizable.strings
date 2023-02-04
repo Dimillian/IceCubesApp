@@ -137,7 +137,7 @@
 "settings.other.autoplay-video" = "動画を自動再生";
 
 // MARK: Tabs
-"tab.explore" = "検索";
+"tab.explore" = "探索";
 "tab.federated" = "連合";
 "tab.local" = "ローカル";
 "tab.messages" = "メッセージ";
