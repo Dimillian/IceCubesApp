@@ -1,20 +1,44 @@
 import Models
 import Network
 import SwiftUI
+import Boutique
 
 actor TimelineCache {
   static let shared: TimelineCache = .init()
 
-  private var memoryCache: [Client: [Status]] = [:]
+  private func storageFor(_ client: Client) -> SQLiteStorageEngine {
+    SQLiteStorageEngine.default(appendingPath: client.id)
+  }
+  
+  private let decoder = JSONDecoder()
+  private let encoder = JSONEncoder()
 
   private init() {}
 
-  func set(statuses: [Status], client: Client) {
+  func set(statuses: [Status], client: Client) async {
     guard !statuses.isEmpty else { return }
-    memoryCache[client] = statuses.prefix(upTo: min(100, statuses.count - 1)).map { $0 }
+    let statuses = statuses.prefix(upTo: min(300, statuses.count - 1)).map { $0 }
+    do {
+      let engine = storageFor(client)
+      try await engine.removeAllData()
+      let itemKeys = statuses.map({ CacheKey($0[keyPath: \.id]) })
+      let dataAndKeys = try zip(itemKeys, statuses)
+          .map({ (key: $0, data: try encoder.encode($1)) })
+      try await engine.write(dataAndKeys)
+    } catch {
+      
+    }
   }
 
-  func getStatuses(for client: Client) -> [Status]? {
-    memoryCache[client]
+  func getStatuses(for client: Client) async -> [Status]? {
+    let engine = storageFor(client)
+    do {
+      return try await engine
+        .readAllData()
+        .map({ try decoder.decode(Status.self, from: $0) })
+        .sorted(by: { $0.createdAt > $1.createdAt })
+    } catch {
+      return nil
+    }
   }
 }
