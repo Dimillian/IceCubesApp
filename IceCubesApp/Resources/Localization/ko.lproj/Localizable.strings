@@ -139,6 +139,8 @@
 "settings.display.font.scaling-%@" = "폰트 크기 조절: %@";
 "settings.about.built-with" = "Ice Cubes는 다음 오픈 소스 소프트웨어를 사용하여 개발되었습니다:";
 "settings.about.title" = "Ice Cubes";
+"settings.account.cached-posts-%@" = "Cached posts: %@";
+"settings.account.action.delete-cache" = "Clear cache";
 
 // MARK: Tabs
 "tab.explore" = "둘러보기";

@@ -3,8 +3,8 @@ import Network
 import SwiftUI
 import Boutique
 
-actor TimelineCache {
-  static let shared: TimelineCache = .init()
+public actor TimelineCache {
+  public static let shared: TimelineCache = .init()
 
   private func storageFor(_ client: Client) -> SQLiteStorageEngine {
     SQLiteStorageEngine.default(appendingPath: client.id)
@@ -15,9 +15,20 @@ actor TimelineCache {
 
   private init() {}
 
+  public func cachedPostsCount(for client: Client) async -> Int {
+    await storageFor(client).allKeys().count
+  }
+  
+  public func clearCache(for client: Client) async  {
+    let engine = storageFor(client)
+    do {
+      try await engine.removeAllData()
+    } catch { }
+  }
+  
   func set(statuses: [Status], client: Client) async {
     guard !statuses.isEmpty else { return }
-    let statuses = statuses.prefix(upTo: min(300, statuses.count - 1)).map { $0 }
+    let statuses = statuses.prefix(upTo: min(400, statuses.count - 1)).map { $0 }
     do {
       let engine = storageFor(client)
       try await engine.removeAllData()

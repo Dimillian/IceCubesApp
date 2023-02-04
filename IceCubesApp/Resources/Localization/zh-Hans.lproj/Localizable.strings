@@ -134,6 +134,8 @@
 "settings.other.autoplay-video" = "自动播放视频";
 "settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
 "settings.about.title" = "Ice Cubes";
+"settings.account.cached-posts-%@" = "Cached posts: %@";
+"settings.account.action.delete-cache" = "Clear cache";
 
 "settings.display.font" = "时间线字体";
 "settings.display.font.system" = "系统";

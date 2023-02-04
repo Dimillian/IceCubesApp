@@ -139,6 +139,8 @@
 "settings.other.autoplay-video" = "Spill av videoer automatisk";
 "settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
 "settings.about.title" = "Ice Cubes";
+"settings.account.cached-posts-%@" = "Cached posts: %@";
+"settings.account.action.delete-cache" = "Clear cache";
 
 // MARK: Tabs
 "tab.explore" = "Utforsk";

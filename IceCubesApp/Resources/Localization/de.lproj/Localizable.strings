@@ -136,6 +136,8 @@
 "settings.display.font.scaling-%@" = "Schriftskalierung: %@";
 "settings.about.built-with" = "Ice Cubes wird mit folgender Open-Source-Software erstellt:";
 "settings.about.title" = "Ice Cubes";
+"settings.account.cached-posts-%@" = "Cached posts: %@";
+"settings.account.action.delete-cache" = "Clear cache";
 
 "enum.expand-media.show" = "Alle zeigen";
 "enum.expand-media.hide" = "Alle ausblenden";
