@@ -232,7 +232,7 @@ public class StatusEditorViewModel: ObservableObject {
       selectedRange = .init(location: statusText.string.utf16.count, length: 0)
       markedTextRange = nil
     case let .edit(status):
-      var rawText = NSAttributedString(status.content.asSafeMarkdownAttributedString).string
+      var rawText = status.content.asRawText
       for mention in status.mentions {
         rawText = rawText.replacingOccurrences(of: "@\(mention.username)", with: "@\(mention.acct)")
       }

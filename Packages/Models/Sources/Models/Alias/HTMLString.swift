@@ -29,7 +29,17 @@ public struct HTMLString: Decodable, Equatable, Hashable {
       
       let document: Document = try SwiftSoup.parse(htmlValue)
       handleNode(node: document)
-      asRawText = try document.text()
+      document.outputSettings(OutputSettings().prettyPrint(pretty: false))
+      try document.select("br").after("\n")
+      try document.select("p").after("\n\n")
+      let html = try document.html()
+      var text = try SwiftSoup.clean(html, "", Whitelist.none(), OutputSettings().prettyPrint(pretty: false)) ?? ""
+      // Remove the two last line break added after the last paragraph.
+      if text.hasSuffix("\n\n") {
+        _ = text.removeLast()
+        _ = text.removeLast()
+      }
+      asRawText = text
     } catch {
       asRawText = htmlValue
     }
