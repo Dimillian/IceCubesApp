@@ -17,6 +17,7 @@ class TimelineViewModel: ObservableObject {
   // Internal source of truth for a timeline.
   private var statuses: [Status] = []
   private var visibileStatusesIds = Set<String>()
+  
   var scrollToTopVisible: Bool = false {
     didSet {
       if scrollToTopVisible {
@@ -168,8 +169,18 @@ extension TimelineViewModel: StatusesFetcher {
         !cachedStatuses.isEmpty,
        timeline == .home {
       statuses = cachedStatuses
-      withAnimation {
+      if let latestSeenId = await cache.getLatestSeenStatus(for: client)?.last,
+         let index = statuses.firstIndex(where: { $0.id == latestSeenId }),
+         index > 0 {
+        // Restore cache and scroll to latest seen status.
         statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
+        scrollToIndexAnimated = false
+        scrollToIndex = index + 1
+      } else {
+        // Restore cache and scroll to top.
+        withAnimation {
+          statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
+        }
       }
       // And then we fetch statuses again toget newest statuses from there.
       await fetchStatuses()
@@ -311,6 +322,12 @@ extension TimelineViewModel: StatusesFetcher {
   func statusDidAppear(status: Status) {
     pendingStatusesObserver.removeStatus(status: status)
     visibileStatusesIds.insert(status.id)
+    
+    if let client, timeline == .home {
+      Task {
+        await cache.setLatestSeenStatuses(ids: visibileStatusesIds.map{ $0 }, for: client)
+      }
+    }
   }
 
   func statusDidDisappear(status: Status) {

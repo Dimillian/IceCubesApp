@@ -41,4 +41,12 @@ actor TimelineCache {
       return nil
     }
   }
+  
+  func setLatestSeenStatuses(ids: [String], for client: Client) {
+    UserDefaults.standard.set(ids, forKey: client.id)
+  }
+  
+  func getLatestSeenStatus(for client: Client) -> [String]? {
+    UserDefaults.standard.array(forKey: client.id) as? [String]
+  }
 }
