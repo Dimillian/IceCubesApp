@@ -85,10 +85,14 @@ public struct StatusRowView: View {
       }
       .listRowBackground(viewModel.shouldHighlightRow ? theme.secondaryBackgroundColor : theme.primaryBackgroundColor)
       .swipeActions(edge: .trailing) {
-        trailinSwipeActions
+        if !viewModel.isCompact {
+          trailinSwipeActions
+        }
       }
       .swipeActions(edge: .leading) {
-        leadingSwipeActions
+        if !viewModel.isCompact {
+          leadingSwipeActions
+        }
       }
       .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
       .accessibilityActions {
