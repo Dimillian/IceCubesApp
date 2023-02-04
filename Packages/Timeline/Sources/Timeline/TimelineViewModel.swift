@@ -35,7 +35,7 @@ class TimelineViewModel: ObservableObject {
 
   private let cache: TimelineCache = .shared
 
-  @Published var scrollToStatus: String?
+  @Published var scrollToIndex: Int?
 
   @Published var statusesState: StatusesState = .loading
   @Published var timeline: TimelineFilter = .federated {
@@ -222,8 +222,8 @@ extension TimelineViewModel: StatusesFetcher {
       // We need to update the statuses state, and then scroll to the previous top most status.
       if let topStatusId, visibileStatusesIds.contains(topStatusId), scrollToTopVisible {
         pendingStatusesObserver.disableUpdate = true
-        scrollToStatus = topStatusId
         statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
+        scrollToIndex = newStatuses.count + 1
         DispatchQueue.main.async {
           self.pendingStatusesObserver.disableUpdate = false
           self.canStreamEvents = true

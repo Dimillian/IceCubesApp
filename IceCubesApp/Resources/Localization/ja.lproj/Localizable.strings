@@ -57,10 +57,11 @@
 "settings.app.icon.navigation-title" = "アイコン";
 "settings.app.source" = "ソース (GitHub link)";
 "settings.app.support" = "アプリを支援する";
+"settings.app.about" = "About";
 "settings.display.font" = "タイムラインのフォント";
 "settings.display.font.system" = "システムフォント";
 "settings.display.font.custom" = "カスタム";
-"settings.display.font.scaling-%@" = "Font scaling: %@";
+"settings.display.font.scaling-%@" = "フォントサイズ: %@";
 "settings.display.avatar.position" = "アバターの位置";
 "settings.display.avatar.shape" = "アバターの形";
 "settings.display.navigation-title" = "表示設定";
@@ -77,6 +78,7 @@
 "settings.display.theme.systemColor" = "システムに合わせる";
 "settings.general.browser" = "ブラウザ";
 "settings.general.browser.in-app" = "アプリ内ブラウザ";
+"settings.general.browser.in-app.readerview" = "アプリ内ブラウザ リーダービュー";
 "settings.general.browser.system" = "システムブラウザ";
 "settings.general.display" = "表示設定";
 "settings.general.instance" = "インスタンス情報";
@@ -95,8 +97,8 @@
 "settings.system" = "システム設定";
 "settings.content.navigation-title" = "コンテンツ設定";
 "settings.content.boosts" = "ブースト";
-"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
-"settings.content.instance-settings" = "Server Content Settings";
+"settings.content.hide-repeated-boosts" = "度重なるブーストを隠す";
+"settings.content.instance-settings" = "サーバーコンテンツ設定";
 "settings.content.use-instance-settings" = "サーバー設定を使用する";
 "settings.content.expand-spoilers" = "センシティブな投稿を常に表示する";
 "settings.content.expand-media" = "メディア表示";
@@ -129,12 +131,14 @@
 "settings.title" = "設定";
 "settings.rate" = "Ice Cubesを評価する";
 "settings.section.other" = "その他";
-"settings.other.hide-openai" = "AI支援機能を有効化";
+"settings.other.hide-openai" = "AI支援機能の有効化";
 "settings.other.social-keyboard" = "ソーシャルメディア向けキーボードを有効化";
 "settings.push.duplicate.title" = "重複通知修正ツール";
 "settings.push.duplicate.footer" = "重複して通知を受け取っていませんか？それを修正するためにこの魔法のボタンを試してみて";
 "settings.push.duplicate.button.fix" = "🪄 修正する";
-"settings.other.autoplay-video" = "動画を自動再生";
+"settings.other.autoplay-video" = "動画の自動再生";
+"settings.about.built-with" = "Ice Cubesは以下のオープンソースソフトウェアで構築されています:";
+"settings.about.title" = "Ice Cubes";
 
 // MARK: Tabs
 "tab.explore" = "エクスプローラー";

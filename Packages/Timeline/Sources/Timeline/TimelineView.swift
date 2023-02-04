@@ -5,6 +5,7 @@ import Network
 import Shimmer
 import Status
 import SwiftUI
+import Introspect
 
 public struct TimelineView: View {
   private enum Constants {
@@ -21,6 +22,7 @@ public struct TimelineView: View {
   @StateObject private var viewModel = TimelineViewModel()
 
   @State private var wasBackgrounded: Bool = false
+  @State private var collectionView: UICollectionView?
 
   @Binding var timeline: TimelineFilter
   @Binding var scrollToTopSignal: Int
@@ -51,14 +53,20 @@ public struct TimelineView: View {
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
         .background(theme.primaryBackgroundColor)
+        .introspect(selector: TargetViewSelector.ancestorOrSiblingContaining,
+                    customize: { (collectionView: UICollectionView) in
+          self.collectionView = collectionView
+        })
         if viewModel.pendingStatusesEnabled {
           PendingStatusesObserverView(observer: viewModel.pendingStatusesObserver)
         }
       }
-      .onChange(of: viewModel.scrollToStatus) { statusId in
-        if let statusId {
-          viewModel.scrollToStatus = nil
-          proxy.scrollTo(statusId, anchor: .center)
+      .onChange(of: viewModel.scrollToIndex) { index in
+        if let index {
+          viewModel.scrollToIndex = nil
+          collectionView?.scrollToItem(at: .init(row: index, section: 0),
+                                       at: .top,
+                                       animated: false)
         }
       }
       .onChange(of: scrollToTopSignal, perform: { _ in

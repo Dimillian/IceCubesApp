@@ -57,6 +57,7 @@
 "settings.app.icon.navigation-title" = "Icone";
 "settings.app.source" = "Sorgenti (link GitHub)";
 "settings.app.support" = "Supporta l'applicazione";
+"settings.app.about" = "About";
 "settings.display.avatar.position" = "Posizione dell'avatar";
 "settings.display.avatar.shape" = "Forma dell'avatar";
 "settings.display.navigation-title" = "Impostazioni di visualizzazione";
@@ -74,6 +75,7 @@
 "settings.general.browser" = "Browser";
 "settings.general.browser.in-app" = "In-App Browser";
 "settings.general.browser.system" = "Browser di sistema";
+"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
 "settings.general.display" = "Impostazioni di visualizzazione";
 "settings.general.instance" = "Informazioni sull'istanza";
 "settings.general.push-notifications" = "Notifiche";
@@ -115,9 +117,9 @@
 "settings.system" = "Vai alle impostazioni di sistema";
 "settings.content.navigation-title" = "Impostazioni dei contenuti";
 "settings.content.use-instance-settings" = "Utilizza le impostazioni del server";
-"settings.content.boosts" = "Boosts";
-"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
-"settings.content.instance-settings" = "Server Content Settings";
+"settings.content.boosts" = "Condivisioni";
+"settings.content.hide-repeated-boosts" = "Nascondi le condivisioni ripetute";
+"settings.content.instance-settings" = "Configurazione dei contenuti del Server";
 "settings.content.expand-spoilers" = "Visualizza sempre i contenuti sensibili";
 "settings.content.expand-media" = "Visualizzazione dei media";
 "settings.content.default-sensitive" = "Segnala sempre i contenuti come sensibili";
@@ -135,6 +137,8 @@
 "settings.display.font.custom" = "Personalizzato";
 "settings.display.font.scaling-%@" = "Font scaling: %@";
 "settings.other.autoplay-video" = "Auto Play dei video";
+"settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
+"settings.about.title" = "Ice Cubes";
 
 // MARK: Tabs
 "tab.explore" = "Esplora";

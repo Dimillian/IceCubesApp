@@ -67,10 +67,13 @@ public class Client: ObservableObject, Equatable, Identifiable, Hashable {
     }
   }
 
-  private func makeURL(scheme: String = "https", endpoint: Endpoint, forceVersion: Version? = nil) -> URL {
+  private func makeURL(scheme: String = "https",
+                       endpoint: Endpoint,
+                       forceVersion: Version? = nil,
+                       forceServer: String? = nil) -> URL {
     var components = URLComponents()
     components.scheme = scheme
-    components.host = server
+    components.host = forceServer ?? server
     if type(of: endpoint) == Oauth.self {
       components.path += "/\(endpoint.path())"
     } else {
@@ -190,8 +193,8 @@ public class Client: ObservableObject, Equatable, Identifiable, Hashable {
     return token
   }
 
-  public func makeWebSocketTask(endpoint: Endpoint) -> URLSessionWebSocketTask {
-    let url = makeURL(scheme: "wss", endpoint: endpoint)
+  public func makeWebSocketTask(endpoint: Endpoint, instanceStreamingURL: URL?) -> URLSessionWebSocketTask {
+    let url = makeURL(scheme: "wss", endpoint: endpoint, forceServer: instanceStreamingURL?.host)
     let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: "GET")
     return urlSession.webSocketTask(with: request)
   }

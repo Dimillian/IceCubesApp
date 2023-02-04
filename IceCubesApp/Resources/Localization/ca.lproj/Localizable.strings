@@ -56,6 +56,7 @@
 "settings.app.icon.navigation-title" = "Icones";
 "settings.app.source" = "Font (enllaç a GitHub)";
 "settings.app.support" = "Dona suport a l'aplicació";
+"settings.app.about" = "About";
 "settings.display.avatar.position" = "Posició de les fotos de perfil";
 "settings.display.avatar.shape" = "Forma de les fotos de perfil";
 "settings.display.navigation-title" = "Configuració de l'aparença";
@@ -73,6 +74,7 @@
 "settings.general.browser" = "Navegador";
 "settings.general.browser.in-app" = "Navegador integrat";
 "settings.general.browser.system" = "Navegador del sistema";
+"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
 "settings.general.display" = "Configuració d'aparença";
 "settings.general.instance" = "Informació de la instància";
 "settings.general.push-notifications" = "Notificacions emergents";
@@ -134,6 +136,8 @@
 "settings.display.font.system" = "Sistema";
 "settings.display.font.custom" = "Personalitzada";
 "settings.display.font.scaling-%@" = "Escalat de la lletra: %@";
+"settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
+"settings.about.title" = "Ice Cubes";
 
 // MARK: Tabs
 "tab.explore" = "Exploreu";
