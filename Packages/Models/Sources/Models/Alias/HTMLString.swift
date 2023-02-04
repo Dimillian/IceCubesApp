@@ -2,7 +2,7 @@ import Foundation
 import SwiftSoup
 import SwiftUI
 
-public struct HTMLString: Decodable, Equatable, Hashable {
+public struct HTMLString: Codable, Equatable, Hashable {
   public var htmlValue: String = ""
   public var asMarkdown: String = ""
   public var asRawText: String = ""
@@ -59,6 +59,11 @@ public struct HTMLString: Decodable, Equatable, Hashable {
     asRawText = stringValue
     statusesURLs = []
     asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
+  }
+  
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.singleValueContainer()
+    try container.encode(htmlValue)
   }
   
   private mutating func handleNode(node: SwiftSoup.Node ) {
@@ -146,6 +151,4 @@ public struct HTMLString: Decodable, Equatable, Hashable {
     }
     
   }
-  
-  
 }

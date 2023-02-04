@@ -1,11 +1,11 @@
 import Foundation
 
-public struct Account: Decodable, Identifiable, Equatable, Hashable {
+public struct Account: Codable, Identifiable, Equatable, Hashable {
   public func hash(into hasher: inout Hasher) {
     hasher.combine(id)
   }
 
-  public struct Field: Decodable, Equatable, Identifiable {
+  public struct Field: Codable, Equatable, Identifiable {
     public var id: String {
       value.asRawText + name
     }
@@ -15,7 +15,7 @@ public struct Account: Decodable, Identifiable, Equatable, Hashable {
     public let verifiedAt: String?
   }
 
-  public struct Source: Decodable, Equatable {
+  public struct Source: Codable, Equatable {
     public let privacy: Visibility
     public let sensitive: Bool
     public let language: String?

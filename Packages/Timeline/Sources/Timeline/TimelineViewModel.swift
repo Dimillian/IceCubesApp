@@ -156,7 +156,9 @@ extension TimelineViewModel: StatusesFetcher {
 
     // If we get statuses from the cache for the home timeline, we displays those.
     // Else we fetch top most page from the API.
-    if let cachedStatuses = await getCachedStatuses(), timeline == .home {
+    if let cachedStatuses = await getCachedStatuses(),
+        !cachedStatuses.isEmpty,
+       timeline == .home {
       statuses = cachedStatuses
       withAnimation {
         statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)

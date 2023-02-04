@@ -5,8 +5,8 @@ import SwiftUI
 public class Client: ObservableObject, Equatable, Identifiable, Hashable {
   public static func == (lhs: Client, rhs: Client) -> Bool {
     lhs.isAuth == rhs.isAuth &&
-      lhs.server == rhs.server &&
-      lhs.oauthToken?.accessToken == rhs.oauthToken?.accessToken
+    lhs.server == rhs.server &&
+    lhs.oauthToken?.accessToken == rhs.oauthToken?.accessToken
   }
 
   public enum Version: String {
@@ -19,7 +19,7 @@ public class Client: ObservableObject, Equatable, Identifiable, Hashable {
   }
 
   public var id: String {
-    "\(isAuth)\(server)\(oauthToken?.accessToken ?? "")"
+    "\(isAuth)\(server)\(oauthToken?.createdAt ?? 0)"
   }
 
   public func hash(into hasher: inout Hasher) {
