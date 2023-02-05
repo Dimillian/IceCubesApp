@@ -134,7 +134,7 @@
 "settings.other.autoplay-video" = "自动播放视频";
 "settings.about.built-with" = "Ice Cubes 采用以下开源项目构建：";
 "settings.about.title" = "Ice Cubes";
-"settings.account.cached-posts-%@" = "已缓存嘟文 %@";
+"settings.account.cached-posts-%@" = "已缓存嘟文：%@";
 "settings.account.action.delete-cache" = "清除缓存";
 
 "settings.general.haptic" = "触感触控";
