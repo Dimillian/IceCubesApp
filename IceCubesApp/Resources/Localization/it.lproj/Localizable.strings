@@ -184,6 +184,7 @@
 "account.action.unblock" = "Sblocca";
 "account.action.mute" = "Silenzia";
 "account.action.unmute" = "Sblocca";
+"account.action.share" = "Share this account";
 "account.boosted-by" = "Condiviso da";
 "account.detail.about" = "Informazioni";
 "account.detail.familiar-followers" = "Seguito, inoltre, da";
@@ -330,6 +331,8 @@
 "status.action.unfavorite" = "Rimuovi l'apprezzamento";
 "status.action.unpin" = "Non fissare";
 "status.action.view-in-browser" = "Vedi nel Browser";
+"status.card.share" = "Share this link";
+"status.card.copy" = "Copy this link";
 "status.draft.delete" = "Cancella la bozza";
 "status.draft.save" = "Salva la bozza";
 "status.editor.ai-prompt.correct" = "Correggi il testo";

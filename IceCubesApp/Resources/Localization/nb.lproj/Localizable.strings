@@ -184,6 +184,7 @@
 "account.action.unblock" = "Opphev blokkering";
 "account.action.mute" = "Demp";
 "account.action.unmute" = "Opphev demping";
+"account.action.share" = "Share this account";
 "account.boosted-by" = "Forsterket av";
 "account.detail.about" = "Om";
 "account.detail.familiar-followers" = "Også fulgt av";
@@ -329,6 +330,8 @@
 "status.action.unfavorite" = "Ikke favoritt";
 "status.action.unpin" = "Løsne";
 "status.action.view-in-browser" = "Vis i nettleser";
+"status.card.share" = "Share this link";
+"status.card.copy" = "Copy this link";
 "status.draft.delete" = "Slett utkast";
 "status.draft.save" = "Arkiver utkast";
 "status.editor.ai-prompt.correct" = "Korrekt tekst";

@@ -183,6 +183,7 @@
 "account.action.unblock" = "Desbloca";
 "account.action.mute" = "Silencia";
 "account.action.unmute" = "Deixa de silenciar";
+"account.action.share" = "Share this account";
 "account.boosted-by" = "Impulsat per";
 "account.detail.about" = "Quant a";
 "account.detail.familiar-followers" = "També seguit per";
@@ -328,6 +329,8 @@
 "status.action.unfavorite" = "Desfés el preferit";
 "status.action.unpin" = "Deixa de fixar";
 "status.action.view-in-browser" = "Mostra al navegador";
+"status.card.share" = "Share this link";
+"status.card.copy" = "Copy this link";
 "status.draft.delete" = "Elimina l'esborrany";
 "status.draft.save" = "Desa l'esborrany";
 "status.editor.ai-prompt.correct" = "Corregeix el text";
