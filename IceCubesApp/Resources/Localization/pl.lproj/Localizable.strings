@@ -57,7 +57,7 @@
 "settings.app.icon.navigation-title" = "Icons";
 "settings.app.source" = "Źródło (link do GitHub)";
 "settings.app.support" = "Wspieraj aplikację";
-"settings.app.about" = "About";
+"settings.app.about" = "O aplikacji";
 "settings.display.avatar.position" = "Położenie awatara";
 "settings.display.avatar.shape" = "Kształt awatara";
 "settings.display.navigation-title" = "Ustawienia ekranu";
@@ -78,15 +78,15 @@
 "settings.general.browser.system" = "Systemowa";
 "settings.general.display" = "Ustawienia ekranu";
 "settings.general.instance" = "Informacja o serwerze";
-"settings.general.push-notifications" = "Powiadomienia Push";
+"settings.general.push-notifications" = "Powiadomienia push";
 "settings.general.remote-timelines" = "Strumienie innych serwerów";
 "settings.push.boosts" = "Podbicia";
 "settings.push.favorites" = "Polubione";
 "settings.push.follows" = "Obserwacja";
-"settings.push.main-toggle" = "Powiadomienia Push";
+"settings.push.main-toggle" = "Powiadomienia push";
 "settings.push.main-toggle.description" = "Otrzymuj powiadomienia push o nowych aktywnościach";
 "settings.push.mentions" = "Wzmianki";
-"settings.push.navigation-title" = "Powiadomienia Push";
+"settings.push.navigation-title" = "Powiadomienia push";
 "settings.push.new-posts" = "Nowe posty";
 "settings.push.polls" = "Wyniki sondaży";
 "settings.general.content" = "Ustawienia treści";
@@ -139,14 +139,14 @@
 "settings.display.font.scaling-%@" = "Skalowanie czcionki: %@";
 "settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
 "settings.about.title" = "Ice Cubes";
-"settings.account.cached-posts-%@" = "Cached posts: %@";
-"settings.account.action.delete-cache" = "Clear cache";
+"settings.account.cached-posts-%@" = "Liczba postów w buforze: %@";
+"settings.account.action.delete-cache" = "Wyczyść bufor";
 
-"settings.general.haptic" = "Haptic Feedback";
-"settings.haptic.navigation-title" = "Haptic Settings";
-"settings.haptic.timeline" = "Timeline";
-"settings.haptic.tab-selection" = "Tab Selection";
-"settings.haptic.buttons" = "Button Press";
+"settings.general.haptic" = "Sygnały haptyczne";
+"settings.haptic.navigation-title" = "Ustawienia haptyki";
+"settings.haptic.timeline" = "Strumień";
+"settings.haptic.tab-selection" = "Wybór zakładki";
+"settings.haptic.buttons" = "Naciśnięcie przycisku";
 
 // MARK: Tabs
 "tab.explore" = "Odkrywaj";
@@ -185,7 +185,7 @@
 "account.action.mute" = "Wycisz";
 "account.action.unmute" = "Wyłącz wyciszenie";
 "account.boosted-by" = "Podbity przez";
-"account.detail.about" = "Opis";
+"account.detail.about" = "Dane";
 "account.detail.familiar-followers" = "Obserwowany także przez";
 "account.edit.about" = "Opis";
 "account.edit.account-settings.bot" = "Konto bota";
@@ -228,7 +228,7 @@
 "conversations.error.button" = "Spróbuj ponownie";
 "conversations.error.message" = "Błąd podczas ładowania twoich wiadomości";
 "conversations.error.title" = "Wystąpił błąd";
-"conversations.navigation-title" = "Wiadomości prywatne";
+"conversations.navigation-title" = "Wiadomości bezpośrednie";
 "conversations.new.message.placeholder" = "Nowa wiadomość";
 
 // MARK: Package: DesignSystem
@@ -296,8 +296,8 @@
 
 // MARK: Package: Timeline
 "timeline.federated" = "Strumień globalny";
-"timeline.latest" = "Jump to Latest";
-"timeline.home" = "Strona domowa";
+"timeline.latest" = "Najnowsze posty";
+"timeline.home" = "Strona główna";
 "timeline.local" = "Strumień lokalny";
 "timeline.trending" = "Teraz popularne";
 "timeline.add.url" = "URL instancji";
@@ -315,7 +315,7 @@
 "status.action.mention" = "Wymień osobę";
 "status.action.message" = "Wyślij wiadomość";
 "status.action.pin" = "Przypnij";
-"status.action.post" = "Wyślij";
+"status.action.post" = "Opublikuj";
 "status.action.quote" = "Cytuj ten post";
 "status.action.reply" = "Odpowiedz";
 "status.action.section.your-post" = "Twój post";
@@ -371,10 +371,10 @@
 "status.show-more" = "Pokaż więcej";
 "status.summary.at-time" = " o ";
 "status.summary.edited-time" = "Ostatnia edycja: ";
-"status.visibility.direct" = "Prywatny";
-"status.visibility.follower" = "Obserwujący";
-"status.visibility.public" = "Wszyscy";
-"status.visibility.unlisted" = "Niewymienieni";
+"status.visibility.direct" = "Post bezpośredni";
+"status.visibility.follower" = "Tylko obserwujący";
+"status.visibility.public" = "Publiczny";
+"status.visibility.unlisted" = "Wszyscy (bez funkcji odkrywania)";
 
 // MARK: Filters
 "filter.new" = "Nowy filtr";
