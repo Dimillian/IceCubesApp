@@ -307,11 +307,11 @@
 "status.action.bookmark" = "Voeg bladwijzer toe";
 "status.action.boost" = "Boosten";
 "status.action.copy-text" = "Kopieer tekst";
-"status.action.delete" = "Verwijderen";
-"status.action.edit" = "Wijzigen";
+"status.action.delete" = "Verwijder";
+"status.action.edit" = "Bewerk";
 "status.action.favorite" = "Maak favoriet";
 "status.action.mention" = "Vermelden";
-"status.action.message" = "Bericht sturen";
+"status.action.message" = "Stuur bericht";
 "status.action.pin" = "Zet vast";
 "status.action.post" = "Post";
 "status.action.quote" = "Deze post citeren";
