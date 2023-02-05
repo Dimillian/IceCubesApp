@@ -92,6 +92,9 @@ struct StatusActionsView: View {
       }
       if viewModel.isFocused {
         summaryView
+          .task {
+            await viewModel.fetchActionsAccounts()
+          }
       }
     }
   }
@@ -137,20 +140,40 @@ struct StatusActionsView: View {
     if viewModel.favoritesCount > 0 {
       Divider()
       NavigationLink(value: RouterDestinations.favoritedBy(id: viewModel.status.id)) {
-        Text("status.summary.n-favorites \(viewModel.favoritesCount)")
-          .font(.scaledCallout)
-        Spacer()
-        Image(systemName: "chevron.right")
+        HStack {
+          Text("status.summary.n-favorites \(viewModel.favoritesCount)")
+            .font(.scaledCallout)
+          Spacer()
+          makeAccountsScrollView(accounts: viewModel.favoriters)
+          Image(systemName: "chevron.right")
+        }
+        .frame(height: 20)
       }
     }
     if viewModel.reblogsCount > 0 {
       Divider()
       NavigationLink(value: RouterDestinations.rebloggedBy(id: viewModel.status.id)) {
-        Text("status.summary.n-boosts \(viewModel.reblogsCount)")
-          .font(.scaledCallout)
-        Spacer()
-        Image(systemName: "chevron.right")
+        HStack {
+          Text("status.summary.n-boosts \(viewModel.reblogsCount)")
+            .font(.scaledCallout)
+          Spacer()
+          makeAccountsScrollView(accounts: viewModel.rebloggers)
+          Image(systemName: "chevron.right")
+        }
+        .frame(height: 20)
       }
+    }
+  }
+  
+  private func makeAccountsScrollView(accounts: [Account]) -> some View {
+    ScrollView(.horizontal, showsIndicators: false) {
+      LazyHStack(spacing: 0) {
+        ForEach(accounts) { account in
+          AvatarView(url: account.avatar, size: .list)
+            .padding(.leading, -4)
+        }
+      }
+      .padding(.leading, .layoutPadding)
     }
   }
 
