@@ -209,7 +209,7 @@
 "account.follow-request.accept" = "수락";
 "account.follow-request.reject" = "거절";
 "account.follow-requests.pending-requests" = "대기 중인 요청";
-"account.follow-requests.instructions" = "팔로우 요청을 수락하기 전까지 이들은 내가 쓴 팔로워 전용 글을 볼 수 없습니다.";
+"account.follow-requests.instructions" = "팔로우 요청을 수락하기 전까지 이 사용자들은 내가 쓴 팔로워 전용 글을 볼 수 없습니다.";
 "account.followers" = "팔로워";
 "account.following" = "팔로우 중";
 "account.list.create" = "새 리스트 만들기";
