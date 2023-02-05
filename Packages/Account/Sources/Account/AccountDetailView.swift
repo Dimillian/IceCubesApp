@@ -436,7 +436,9 @@ public struct AccountDetailView: View {
                   Button {
                     Task {
                       do {
-                        viewModel.relationship = try await client.post(endpoint: Accounts.unmute(id: account.id))
+                        viewModel.relationship = try await client.post(endpoint: Accounts.follow(id: account.id,
+                                                                                                 notify: false,
+                                                                                                 reblogs: relationship.showingReblogs))
                       } catch {
                         print("Error while disabling notifications: \(error.localizedDescription)")
                       }
@@ -448,7 +450,9 @@ public struct AccountDetailView: View {
                   Button {
                     Task {
                       do {
-                        viewModel.relationship = try await client.post(endpoint: Accounts.mute(id: account.id))
+                        viewModel.relationship = try await client.post(endpoint: Accounts.follow(id: account.id,
+                                                                                                 notify: true,
+                                                                                                 reblogs: relationship.showingReblogs))
                       } catch {
                         print("Error while enabling notifications: \(error.localizedDescription)")
                       }
