@@ -57,7 +57,7 @@
 "settings.app.icon.navigation-title" = "アイコン";
 "settings.app.source" = "ソース (GitHub link)";
 "settings.app.support" = "アプリを支援する";
-"settings.app.about" = "About";
+"settings.app.about" = "アプリについて";
 "settings.display.font" = "タイムラインのフォント";
 "settings.display.font.system" = "システムフォント";
 "settings.display.font.custom" = "カスタム";
@@ -139,14 +139,14 @@
 "settings.other.autoplay-video" = "動画の自動再生";
 "settings.about.built-with" = "Ice Cubesは以下のオープンソースソフトウェアで構築されています:";
 "settings.about.title" = "Ice Cubes";
-"settings.account.cached-posts-%@" = "Cached posts: %@";
-"settings.account.action.delete-cache" = "Clear cache";
+"settings.account.cached-posts-%@" = "キャッシュしているポスト: %@";
+"settings.account.action.delete-cache" = "キャッシュをクリア";
 
-"settings.general.haptic" = "Haptic Feedback";
-"settings.haptic.navigation-title" = "Haptic Settings";
-"settings.haptic.timeline" = "Timeline";
-"settings.haptic.tab-selection" = "Tab Selection";
-"settings.haptic.buttons" = "Button Press";
+"settings.general.haptic" = "触覚フィードバック";
+"settings.haptic.navigation-title" = "触覚設定";
+"settings.haptic.timeline" = "タイムライン";
+"settings.haptic.tab-selection" = "タブセレクト";
+"settings.haptic.buttons" = "ボタン操作時";
 
 // MARK: Tabs
 "tab.explore" = "エクスプローラー";
@@ -299,10 +299,12 @@
 
 // MARK: Package: Timeline
 "timeline.federated" = "連合";
+"timeline.latest" = "最新情報までジャンプ";
 "timeline.home" = "ホーム";
 "timeline.local" = "ローカル";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld トゥートの投稿 %lld 人が投稿している";
 "timeline.trending" = "トレンド";
+"timeline.add.url" = "インスタンスURL";
 
 // MARK: Package: Status
 "status.action.translate" = "翻訳";

@@ -7,7 +7,7 @@ public struct AvatarView: View {
   @EnvironmentObject private var theme: Theme
 
   public enum Size {
-    case account, status, embed, badge, boost
+    case account, status, embed, badge, list, boost
 
     public var size: CGSize {
       switch self {
@@ -22,6 +22,8 @@ public struct AvatarView: View {
         return .init(width: 34, height: 34)
       case .badge:
         return .init(width: 28, height: 28)
+      case .list:
+        return .init(width: 20, height: 20)
       case .boost:
         return .init(width: 12, height: 12)
       }
@@ -29,7 +31,7 @@ public struct AvatarView: View {
 
     var cornerRadius: CGFloat {
       switch self {
-      case .badge, .boost:
+      case .badge, .boost, .list:
         return size.width / 2
       default:
         return 4

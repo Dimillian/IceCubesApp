@@ -299,10 +299,12 @@
 
 // MARK: Package: Timeline
 "timeline.federated" = "Linha global";
+"timeline.latest" = "Jump to Latest";
 "timeline.home" = "Início";
 "timeline.local" = "Linha local";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld postagens recentes de %lld participantes";
 "timeline.trending" = "Tendência";
+"timeline.add.url" = "Instance URL";
 
 // MARK: Package: Status
 "status.action.translate" = "Traduzir";

@@ -62,10 +62,13 @@ public struct TimelineView: View {
         }
       }
       .onChange(of: viewModel.scrollToIndex) { index in
-        if let index {
-          collectionView?.scrollToItem(at: .init(row: index, section: 0),
-                                       at: .top,
-                                       animated: viewModel.scrollToIndexAnimated)
+        if let collectionView,
+           let index,
+           let rows = collectionView.dataSource?.collectionView(collectionView, numberOfItemsInSection: 0),
+           rows > index {
+          collectionView.scrollToItem(at: .init(row: index, section: 0),
+                                      at: .top,
+                                      animated: viewModel.scrollToIndexAnimated)
           viewModel.scrollToIndexAnimated = false
           viewModel.scrollToIndex = nil
         }
@@ -115,6 +118,9 @@ public struct TimelineView: View {
       }
       viewModel.timeline = newTimeline
     }
+    .onChange(of: viewModel.timeline, perform: { newValue in
+      timeline = newValue
+    })
     .onChange(of: scenePhase, perform: { scenePhase in
       switch scenePhase {
       case .active:

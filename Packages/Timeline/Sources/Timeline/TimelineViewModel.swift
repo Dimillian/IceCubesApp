@@ -11,6 +11,10 @@ class TimelineViewModel: ObservableObject {
   @Published var timeline: TimelineFilter = .federated {
     didSet {
       Task {
+        if timeline == .latest, let client {
+          await cache.clearCache(for: client)
+          timeline = .home
+        }
         if oldValue != timeline {
           statuses = []
           pendingStatusesObserver.pendingStatuses = []
@@ -174,13 +178,13 @@ extension TimelineViewModel: StatusesFetcher {
          index > 0
       {
         // Restore cache and scroll to latest seen status.
-        statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
+        statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
         scrollToIndexAnimated = false
         scrollToIndex = index + 1
       } else {
         // Restore cache and scroll to top.
         withAnimation {
-          statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
+          statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
         }
       }
       // And then we fetch statuses again toget newest statuses from there.
@@ -263,6 +267,12 @@ extension TimelineViewModel: StatusesFetcher {
           canStreamEvents = true
         }
       }
+      
+      // We trigger a new fetch so we can get the next new statuses if any.
+      // If none, it'll stop there.
+      if let latest = statuses.first, let client {
+        try await fetchNewPagesFrom(latestStatus: latest, client: client)
+      }
     }
   }
 
@@ -308,7 +318,7 @@ extension TimelineViewModel: StatusesFetcher {
 
       statuses.append(contentsOf: newStatuses)
 
-      statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+      statusesState = .display(statuses: statuses, nextPageState: newStatuses.count < 20 ? .none : .hasNextPage)
     } catch {
       statusesState = .error(error: error)
     }

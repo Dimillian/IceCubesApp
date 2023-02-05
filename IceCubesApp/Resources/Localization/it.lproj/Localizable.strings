@@ -57,7 +57,7 @@
 "settings.app.icon.navigation-title" = "Icone";
 "settings.app.source" = "Sorgenti (link GitHub)";
 "settings.app.support" = "Supporta l'applicazione";
-"settings.app.about" = "About";
+"settings.app.about" = "Informazioni";
 "settings.display.avatar.position" = "Posizione dell'avatar";
 "settings.display.avatar.shape" = "Forma dell'avatar";
 "settings.display.navigation-title" = "Impostazioni di visualizzazione";
@@ -75,7 +75,7 @@
 "settings.general.browser" = "Browser";
 "settings.general.browser.in-app" = "In-App Browser";
 "settings.general.browser.system" = "Browser di sistema";
-"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
+"settings.general.browser.in-app.readerview" = "Utilizza la modalità lettura del Browser di sistema";
 "settings.general.display" = "Impostazioni di visualizzazione";
 "settings.general.instance" = "Informazioni sull'istanza";
 "settings.general.push-notifications" = "Notifiche";
@@ -137,16 +137,16 @@
 "settings.display.font.custom" = "Personalizzato";
 "settings.display.font.scaling-%@" = "Font scaling: %@";
 "settings.other.autoplay-video" = "Auto Play dei video";
-"settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
+"settings.about.built-with" = "Ice Cubes utilizza i seguenti software Open Source:";
 "settings.about.title" = "Ice Cubes";
-"settings.account.cached-posts-%@" = "Cached posts: %@";
-"settings.account.action.delete-cache" = "Clear cache";
+"settings.account.cached-posts-%@" = "Post in cache: %@";
+"settings.account.action.delete-cache" = "Cancella la cache";
 
-"settings.general.haptic" = "Haptic Feedback";
-"settings.haptic.navigation-title" = "Haptic Settings";
+"settings.general.haptic" = "Feedback aptico";
+"settings.haptic.navigation-title" = "Impostazioni feedback aptico";
 "settings.haptic.timeline" = "Timeline";
-"settings.haptic.tab-selection" = "Tab Selection";
-"settings.haptic.buttons" = "Button Press";
+"settings.haptic.tab-selection" = "Selezione Tab";
+"settings.haptic.buttons" = "Pressione dei bottoni";
 
 // MARK: Tabs
 "tab.explore" = "Esplora";
@@ -300,10 +300,12 @@
 
 // MARK: Package: Timeline
 "timeline.federated" = "Federazione";
+"timeline.latest" = "Vai all'ultimo post";
 "timeline.home" = "Home";
 "timeline.local" = "Locale";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld post recenti da %lld partecipanti";
 "timeline.trending" = "Trending";
+"timeline.add.url" = "Instance URL";
 
 // MARK: Package: Status
 "status.action.translate" = "Traduci";
