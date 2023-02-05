@@ -305,6 +305,7 @@
 "timeline.local" = "本地";
 "timeline.n-recent-from-n-participants %lld %lld" = "最近 %lld 条嘟文来自 %lld 个参与者";
 "timeline.trending" = "当下流行";
+"timeline.add.url" = "Instance URL";
 
 // MARK: Package: Status
 "status.action.translate" = "翻译";
