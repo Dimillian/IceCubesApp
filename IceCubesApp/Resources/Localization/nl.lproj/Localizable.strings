@@ -137,7 +137,7 @@
 "settings.about.built-with" = "Ice Cubes is gebouwd met de volgende opensourcesoftware:";
 "settings.about.title" = "Ice Cubes";
 "settings.account.cached-posts-%@" = "Posts in cache: %@";
-"settings.account.action.delete-cache" = "Maak cache leeg";
+"settings.account.action.delete-cache" = "Leeg cache";
 
 "settings.general.haptic" = "Haptische feedback";
 "settings.haptic.navigation-title" = "Haptische instellingen";
