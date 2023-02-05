@@ -148,6 +148,8 @@
 "settings.haptic.tab-selection" = "タブセレクト";
 "settings.haptic.buttons" = "ボタン操作時";
 
+"settings.display.fonts.install" = "Install OpenDyslexic and Hyper Legible fonts";
+
 // MARK: Tabs
 "tab.explore" = "エクスプローラー";
 "tab.federated" = "連合";

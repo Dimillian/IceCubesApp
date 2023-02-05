@@ -145,6 +145,8 @@
 "settings.haptic.tab-selection" = "Tab Selection";
 "settings.haptic.buttons" = "Button Press";
 
+"settings.display.fonts.install" = "Install OpenDyslexic and Hyper Legible fonts";
+
 "enum.expand-media.show" = "Alle zeigen";
 "enum.expand-media.hide" = "Alle ausblenden";
 "enum.expand-media.hide-sensitive" = "Sensible ausblenden";
