@@ -139,14 +139,14 @@
 "settings.other.autoplay-video" = "Auto Play dei video";
 "settings.about.built-with" = "Ice Cubes utilizza i seguenti software Open Source:";
 "settings.about.title" = "Ice Cubes";
-"settings.account.cached-posts-%@" = "Cached posts: %@";
-"settings.account.action.delete-cache" = "Clear cache";
+"settings.account.cached-posts-%@" = "Post in cache: %@";
+"settings.account.action.delete-cache" = "Cancella la cache";
 
-"settings.general.haptic" = "Haptic Feedback";
-"settings.haptic.navigation-title" = "Haptic Settings";
+"settings.general.haptic" = "Feedback aptico";
+"settings.haptic.navigation-title" = "Impostazioni feedback aptico";
 "settings.haptic.timeline" = "Timeline";
-"settings.haptic.tab-selection" = "Tab Selection";
-"settings.haptic.buttons" = "Button Press";
+"settings.haptic.tab-selection" = "Selezione Tab";
+"settings.haptic.buttons" = "Pressione dei bottoni";
 
 // MARK: Tabs
 "tab.explore" = "Esplora";
@@ -300,7 +300,7 @@
 
 // MARK: Package: Timeline
 "timeline.federated" = "Federazione";
-"timeline.latest" = "Jump to Latest";
+"timeline.latest" = "Vai all'ultimo post";
 "timeline.home" = "Home";
 "timeline.local" = "Locale";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld post recenti da %lld partecipanti";
