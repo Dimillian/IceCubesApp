@@ -89,7 +89,7 @@
 "settings.push.navigation-title" = "Meldingen";
 "settings.push.new-posts" = "Nieuwe posts";
 "settings.push.polls" = "Pollresultaten";
-"settings.rate" = "Ice Cubes beoordelen";
+"settings.rate" = "Beoordeel Ice Cubes";
 "settings.section.accounts" = "Accounts";
 "settings.section.app" = "App";
 "settings.section.app.footer %@" = "Appversie: %@";
@@ -328,15 +328,15 @@
 "status.editor.ai-prompt.correct" = "Corrigeer tekst";
 "status.editor.ai-prompt.emphasize" = "Benadruk tekst";
 "status.editor.ai-prompt.fit" = "Kort tekst in";
-"status.editor.description.add" = "Omschrijving toevoegen";
-"status.editor.description.edit" = "Omschrijving bewerken";
+"status.editor.description.add" = "Voeg omschrijving toe";
+"status.editor.description.edit" = "Bewerk omschrijving";
 "status.editor.drafts.navigation-title" = "Concepten";
 "status.editor.error.upload" = "Fout tijdens uploaden";
 "status.editor.language-select.navigation-title" = "Taal selecteren";
 "status.editor.language-select.recently-used" = "Onlangs gebruikt";
 "status.editor.media.edit-image" = "Afbeelding bewerken";
 "status.editor.media.image-description" = "Omschrijving";
-"status.editor.mode.edit" = "Je post bewerken";
+"status.editor.mode.edit" = "Post bewerken";
 "status.editor.mode.new" = "Nieuwe post";
 "status.editor.mode.quote-%@" = "Citaat van %@";
 "status.editor.mode.reply-%@" = "Antwoord aan %@";
@@ -353,7 +353,7 @@
 "status.media.content.show" = "Toon inhoud";
 "status.media.contextmenu.copy" = "Kopieer";
 "status.media.contextmenu.save" = "Bewaar";
-"status.media.contextmenu.share" = "Delen";
+"status.media.contextmenu.share" = "Deel";
 "status.media.contextmenu.view-browser" = "Open in browser";
 "status.media.sensitive.show" = "Toon gevoelige inhoud";
 "status.poll.n-votes %lld" = "%lld stemmen";
