@@ -267,6 +267,12 @@ extension TimelineViewModel: StatusesFetcher {
           canStreamEvents = true
         }
       }
+      
+      // We trigger a new fetch so we can get the next new statuses if any.
+      // If none, it'll stop there.
+      if let latest = statuses.first, let client {
+        try await fetchNewPagesFrom(latestStatus: latest, client: client)
+      }
     }
   }
 
