@@ -148,8 +148,6 @@
 "settings.haptic.tab-selection" = "Selezione Tab";
 "settings.haptic.buttons" = "Pressione dei bottoni";
 
-"settings.display.fonts.install" = "Install OpenDyslexic and Hyper Legible fonts";
-
 // MARK: Tabs
 "tab.explore" = "Esplora";
 "tab.federated" = "Federazione";

@@ -81,19 +81,6 @@ struct DisplaySettingsView: View {
       .listRowBackground(theme.primaryBackgroundColor)
 
       Section {
-        if !UIFont.familyNames.contains("OpenDyslexic") {
-          Button("settings.display.fonts.install") {
-            print(UIFont.familyNames)
-            let hyperLegibleURL = Bundle.main.url(forResource: "Atkinson-Hyperlegible-Regular-102", withExtension: "ttf")
-            let openDyslexicURL = Bundle.main.url(forResource: "OpenDyslexic-Regular", withExtension: "otf")
-            let fontsURLs = [hyperLegibleURL, openDyslexicURL]
-            CTFontManagerRegisterFontURLs(fontsURLs as CFArray, .persistent, true)
-            { (errors, done) -> Bool in
-              return true
-            }
-          }
-        }
-        
         Button {
           theme.followSystemColorScheme = true
           theme.selectedSet = colorScheme == .dark ? .iceCubeDark : .iceCubeLight

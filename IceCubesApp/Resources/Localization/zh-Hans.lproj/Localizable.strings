@@ -143,8 +143,6 @@
 "settings.haptic.tab-selection" = "导航栏";
 "settings.haptic.buttons" = "按钮";
 
-"settings.display.fonts.install" = "Install OpenDyslexic and Hyper Legible fonts";
-
 "settings.display.font" = "时间线字体";
 "settings.display.font.system" = "系统";
 "settings.display.font.custom" = "自定义";
