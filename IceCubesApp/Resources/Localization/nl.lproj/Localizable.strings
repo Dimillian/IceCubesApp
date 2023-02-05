@@ -117,8 +117,8 @@
 "settings.system" = "Systeeminstellingen";
 "settings.content.navigation-title" = "Inhoud";
 "settings.content.boosts" = "Boosts";
-"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
-"settings.content.instance-settings" = "Server Content Settings";
+"settings.content.hide-repeated-boosts" = "Verberg herhaalde boosts";
+"settings.content.instance-settings" = "Serverinstellingen voor inhoud";
 "settings.content.use-instance-settings" = "Gebruik serverinstellingen";
 "settings.content.expand-spoilers" = "Toon gevoelige posts altijd";
 "settings.content.expand-media" = "Mediaweergave";
