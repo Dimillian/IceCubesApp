@@ -298,7 +298,7 @@
 "timeline.local" = "Lokaal";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld recente posts van %lld deelnemers";
 "timeline.trending" = "Trending";
-"timeline.add.url" = "Instance URL";
+"timeline.add.url" = "Instantie-URL";
 
 // MARK: Package: Status
 "status.action.translate" = "Vertaal";
