@@ -19,9 +19,7 @@ class PendingStatusesObserver: ObservableObject {
   func removeStatus(status: Status) {
     if !disableUpdate, let index = pendingStatuses.firstIndex(of: status.id) {
       pendingStatuses.removeSubrange(index ... (pendingStatuses.count - 1))
-      if UserPreferences.shared.hapticTimelineEnabled {
-        HapticManager.shared.selectionChanged()
-      }
+      HapticManager.shared.fireHaptic(of: .timeline)
     }
   }
 

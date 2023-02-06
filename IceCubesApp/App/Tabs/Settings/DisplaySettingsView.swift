@@ -35,12 +35,21 @@ struct DisplaySettingsView: View {
       .listRowBackground(theme.primaryBackgroundColor)
 
       Section("settings.display.section.display") {
-        Picker("settings.display.font", selection: .init(get: {
-          userPreferences.chosenFontData != nil ? FontState.custom : FontState.system
+        Picker("settings.display.font", selection: .init(get: { () -> FontState in
+          if userPreferences.chosenFont?.fontName == "OpenDyslexic-Regular" {
+            return FontState.openDyslexic
+          } else if  userPreferences.chosenFont?.fontName == "AtkinsonHyperlegible-Regular" {
+            return FontState.hyperLegible
+          }
+          return userPreferences.chosenFontData != nil ? FontState.custom : FontState.system
         }, set: { newValue in
           switch newValue {
           case .system:
             userPreferences.chosenFont = nil
+          case .openDyslexic:
+            userPreferences.chosenFont = UIFont(name: "OpenDyslexic", size: 1)
+          case .hyperLegible:
+            userPreferences.chosenFont = UIFont(name: "Atkinson Hyperlegible", size: 1)
           case .custom:
             isFontSelectorPresented = true
           }
@@ -76,9 +85,18 @@ struct DisplaySettingsView: View {
           Text("settings.display.font.scaling-\(String(format: "%.1f", userPreferences.fontSizeScale))")
             .font(.scaledBody)
         }
+        .alignmentGuide(.listRowSeparatorLeading) { d in
+          d[.leading]
+        }
         Toggle("settings.display.translate-button", isOn: $userPreferences.showTranslateButton)
       }
       .listRowBackground(theme.primaryBackgroundColor)
+      
+      if UIDevice.current.userInterfaceIdiom == .pad {
+        Section("settings.display.section.ipad") {
+          Toggle("settings.display.show-ipad-column", isOn: $userPreferences.showiPadSecondaryColumn)
+        }
+      }
 
       Section {
         Button {

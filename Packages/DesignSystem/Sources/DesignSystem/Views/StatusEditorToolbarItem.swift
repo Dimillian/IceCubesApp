@@ -8,9 +8,7 @@ public extension View {
     ToolbarItem(placement: .navigationBarTrailing) {
       Button {
         routerPath.presentedSheet = .newStatusEditor(visibility: visibility)
-        if UserPreferences.shared.hapticButtonPressEnabled {
-          HapticManager.shared.impact()
-        }
+        HapticManager.shared.fireHaptic(of: .buttonPress)
       } label: {
         Image(systemName: "square.and.pencil")
       }
@@ -31,9 +29,7 @@ public struct StatusEditorToolbarItem: ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
       Button {
         routerPath.presentedSheet = .newStatusEditor(visibility: visibility)
-        if UserPreferences.shared.hapticButtonPressEnabled {
-          HapticManager.shared.impact()
-        }
+        HapticManager.shared.fireHaptic(of: .buttonPress)
       } label: {
         Image(systemName: "square.and.pencil")
       }

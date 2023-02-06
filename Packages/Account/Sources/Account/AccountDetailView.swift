@@ -37,7 +37,7 @@ public struct AccountDetailView: View {
   public init(account: Account) {
     _viewModel = StateObject(wrappedValue: .init(account: account))
   }
-
+    
   public var body: some View {
     ScrollViewReader { proxy in
       ScrollViewOffsetReader { offset in
@@ -403,6 +403,7 @@ public struct AccountDetailView: View {
                   Label("account.action.block", systemImage: "person.crop.circle.badge.xmark")
                 }
               }
+              
               if viewModel.relationship?.muting == true {
                 Button {
                   Task {
@@ -416,12 +417,16 @@ public struct AccountDetailView: View {
                   Label("account.action.unmute", systemImage: "speaker")
                 }
               } else {
-                Button {
-                  Task {
-                    do {
-                      viewModel.relationship = try await client.post(endpoint: Accounts.mute(id: account.id))
-                    } catch {
-                      print("Error while muting: \(error.localizedDescription)")
+                Menu {
+                  ForEach(MutingDurations.allCases, id: \.rawValue) { duration in
+                    Button (duration.description) {
+                      Task {
+                        do {
+                          viewModel.relationship = try await client.post(endpoint: Accounts.mute(id: account.id, json: MuteData(duration: duration.rawValue)))
+                        } catch {
+                          print("Error while muting: \(error.localizedDescription)")
+                        }
+                      }
                     }
                   }
                 } label: {
@@ -436,7 +441,9 @@ public struct AccountDetailView: View {
                   Button {
                     Task {
                       do {
-                        viewModel.relationship = try await client.post(endpoint: Accounts.unmute(id: account.id))
+                        viewModel.relationship = try await client.post(endpoint: Accounts.follow(id: account.id,
+                                                                                                 notify: false,
+                                                                                                 reblogs: relationship.showingReblogs))
                       } catch {
                         print("Error while disabling notifications: \(error.localizedDescription)")
                       }
@@ -448,7 +455,9 @@ public struct AccountDetailView: View {
                   Button {
                     Task {
                       do {
-                        viewModel.relationship = try await client.post(endpoint: Accounts.mute(id: account.id))
+                        viewModel.relationship = try await client.post(endpoint: Accounts.follow(id: account.id,
+                                                                                                 notify: true,
+                                                                                                 reblogs: relationship.showingReblogs))
                       } catch {
                         print("Error while enabling notifications: \(error.localizedDescription)")
                       }
@@ -500,7 +509,9 @@ public struct AccountDetailView: View {
             }
 
             if let url = account.url {
-              ShareLink(item: url)
+              ShareLink(item: url) {
+                Label("account.action.share", systemImage: "square.and.arrow.up")
+              }
               Button { UIApplication.shared.open(url) } label: {
                 Label("status.action.view-in-browser", systemImage: "safari")
               }

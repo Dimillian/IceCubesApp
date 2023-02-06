@@ -3,11 +3,37 @@ import Models
 import Network
 import SwiftUI
 
+public enum RemoteTimelineFilter: String, CaseIterable, Hashable, Equatable {
+  case local, federated, trending
+  
+  public func localizedTitle() -> LocalizedStringKey {
+    switch self {
+    case .federated:
+      return "timeline.federated"
+    case .local:
+      return "timeline.local"
+    case .trending:
+      return "timeline.trending"
+    }
+  }
+  
+  public func iconName() -> String {
+    switch self {
+    case .federated:
+      return "globe.americas"
+    case .local:
+      return "person.2"
+    case .trending:
+      return "chart.line.uptrend.xyaxis"
+    }
+  }
+}
+
 public enum TimelineFilter: Hashable, Equatable {
   case home, local, federated, trending
   case hashtag(tag: String, accountId: String?)
   case list(list: Models.List)
-  case remoteLocal(server: String)
+  case remoteLocal(server: String, filter: RemoteTimelineFilter)
   case latest
 
   public func hash(into hasher: inout Hasher) {
@@ -37,7 +63,7 @@ public enum TimelineFilter: Hashable, Equatable {
       return "#\(tag)"
     case let .list(list):
       return list.title
-    case let .remoteLocal(server):
+    case let .remoteLocal(server, _):
       return server
     }
   }
@@ -58,7 +84,7 @@ public enum TimelineFilter: Hashable, Equatable {
       return "#\(tag)"
     case let .list(list):
       return LocalizedStringKey(list.title)
-    case let .remoteLocal(server):
+    case let .remoteLocal(server, _):
       return LocalizedStringKey(server)
     }
   }
@@ -88,7 +114,15 @@ public enum TimelineFilter: Hashable, Equatable {
     switch self {
     case .federated: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: false)
     case .local: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true)
-    case .remoteLocal: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true)
+    case let .remoteLocal(_, filter):
+      switch filter {
+      case .local:
+        return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true)
+      case .federated:
+        return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: false)
+      case .trending:
+        return Trends.statuses(offset: offset)
+      }
     case .latest: return Timelines.home(sinceId: nil, maxId: nil, minId: nil)
     case .home: return Timelines.home(sinceId: sinceId, maxId: maxId, minId: minId)
     case .trending: return Trends.statuses(offset: offset)

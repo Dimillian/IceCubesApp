@@ -24,6 +24,14 @@
 "enum.avatar-position.top" = "Boven";
 "enum.avatar-shape.circle" = "Cirkel";
 "enum.avatar-shape.rounded" = "Afgerond";
+"enum.durations.infinite" = "Onbepaald";
+"enum.durations.fiveMinutes" = "5 minuten";
+"enum.durations.thirtyMinutes" = "30 minuten";
+"enum.durations.oneHour" = "1 uur";
+"enum.durations.sixHours" = "6 uur";
+"enum.durations.oneDay" = "1 dag";
+"enum.durations.threeDays" = "3 dagen";
+"enum.durations.sevenDays" = "7 dagen";
 "enum.status-actions-display.all" = "Met tekst";
 "enum.status-actions-display.no-buttons" = "Geen knoppen";
 "enum.status-actions-display.only-buttons" = "Zonder tekst";
@@ -57,7 +65,7 @@
 "settings.app.icon.navigation-title" = "Iconen";
 "settings.app.source" = "Broncode (GitHub-link)";
 "settings.app.support" = "De app steunen";
-"settings.app.about" = "About";
+"settings.app.about" = "Info";
 "settings.display.avatar.position" = "Avatarpositie";
 "settings.display.avatar.shape" = "Avatarvorm";
 "settings.display.navigation-title" = "Weergaveopties";
@@ -74,7 +82,7 @@
 "settings.display.theme.systemColor" = "Automatisch";
 "settings.general.browser" = "Browser";
 "settings.general.browser.in-app" = "In-app";
-"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
+"settings.general.browser.in-app.readerview" = "Gebruik Reader van in-appbrowser";
 "settings.general.browser.system" = "Systeem";
 "settings.general.display" = "Weergaveopties";
 "settings.general.instance" = "Instantie-informatie";
@@ -89,7 +97,7 @@
 "settings.push.navigation-title" = "Meldingen";
 "settings.push.new-posts" = "Nieuwe posts";
 "settings.push.polls" = "Pollresultaten";
-"settings.rate" = "Ice Cubes beoordelen";
+"settings.rate" = "Beoordeel Ice Cubes";
 "settings.section.accounts" = "Accounts";
 "settings.section.app" = "App";
 "settings.section.app.footer %@" = "Appversie: %@";
@@ -117,8 +125,8 @@
 "settings.system" = "Systeeminstellingen";
 "settings.content.navigation-title" = "Inhoud";
 "settings.content.boosts" = "Boosts";
-"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
-"settings.content.instance-settings" = "Server Content Settings";
+"settings.content.hide-repeated-boosts" = "Verberg herhaalde boosts";
+"settings.content.instance-settings" = "Serverinstellingen voor inhoud";
 "settings.content.use-instance-settings" = "Gebruik serverinstellingen";
 "settings.content.expand-spoilers" = "Toon gevoelige posts altijd";
 "settings.content.expand-media" = "Mediaweergave";
@@ -133,17 +141,20 @@
 "settings.display.font" = "Tijdlijnlettertype";
 "settings.display.font.system" = "Systeem";
 "settings.display.font.custom" = "Aangepast";
-"settings.display.font.scaling-%@" = "Font scaling: %@";
-"settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
+"settings.display.font.scaling-%@" = "Lettertype vergroten/verkleinen: %@";
+"settings.about.built-with" = "Ice Cubes is gebouwd met de volgende opensourcesoftware:";
 "settings.about.title" = "Ice Cubes";
-"settings.account.cached-posts-%@" = "Cached posts: %@";
-"settings.account.action.delete-cache" = "Clear cache";
+"settings.account.cached-posts-%@" = "Posts in cache: %@";
+"settings.account.action.delete-cache" = "Leeg cache";
 
-"settings.general.haptic" = "Haptic Feedback";
-"settings.haptic.navigation-title" = "Haptic Settings";
-"settings.haptic.timeline" = "Timeline";
-"settings.haptic.tab-selection" = "Tab Selection";
-"settings.haptic.buttons" = "Button Press";
+"settings.general.haptic" = "Haptische feedback";
+"settings.haptic.navigation-title" = "Haptische instellingen";
+"settings.haptic.timeline" = "Tijdlijn";
+"settings.haptic.tab-selection" = "Tabselectie";
+"settings.haptic.buttons" = "Knoppen";
+
+"settings.display.section.ipad" = "iPad";
+"settings.display.show-ipad-column" = "Enable secondary column";
 
 // MARK: Tabs
 "tab.explore" = "Ontdekken";
@@ -154,7 +165,7 @@
 "tab.settings" = "Instellingen";
 "tab.timeline" = "Tijdlijn";
 "tab.trending" = "Trending";
-"tab.profile" = "Profile";
+"tab.profile" = "Profiel";
 
 // MARK: Timeline
 "timeline.%@-is-valid" = "%@ is een geldige instantie";
@@ -181,6 +192,7 @@
 "account.action.unblock" = "Deblokkeer";
 "account.action.mute" = "Dempen";
 "account.action.unmute" = "Dempen opheffen";
+"account.action.share" = "Deel dit account";
 "account.boosted-by" = "Geboost door";
 "account.detail.about" = "Over";
 "account.detail.familiar-followers" = "Ook gevolgd door";
@@ -293,12 +305,12 @@
 
 // MARK: Package: Timeline
 "timeline.federated" = "Gefedereerd";
-"timeline.latest" = "Jump to Latest";
+"timeline.latest" = "Spring naar meest recent";
 "timeline.home" = "Start";
 "timeline.local" = "Lokaal";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld recente posts van %lld deelnemers";
 "timeline.trending" = "Trending";
-"timeline.add.url" = "Instance URL";
+"timeline.add.url" = "Instantie-URL";
 
 // MARK: Package: Status
 "status.action.translate" = "Vertaal";
@@ -307,11 +319,11 @@
 "status.action.bookmark" = "Voeg bladwijzer toe";
 "status.action.boost" = "Boosten";
 "status.action.copy-text" = "Kopieer tekst";
-"status.action.delete" = "Verwijderen";
-"status.action.edit" = "Wijzigen";
+"status.action.delete" = "Verwijder";
+"status.action.edit" = "Bewerk";
 "status.action.favorite" = "Maak favoriet";
 "status.action.mention" = "Vermelden";
-"status.action.message" = "Bericht sturen";
+"status.action.message" = "Stuur bericht";
 "status.action.pin" = "Zet vast";
 "status.action.post" = "Post";
 "status.action.quote" = "Deze post citeren";
@@ -323,20 +335,22 @@
 "status.action.unfavorite" = "Verwijder favoriet";
 "status.action.unpin" = "Maak los";
 "status.action.view-in-browser" = "Open in browser";
+"status.card.share" = "Deel deze link";
+"status.card.copy" = "Kopieer deze link";
 "status.draft.delete" = "Verwijder concept";
 "status.draft.save" = "Bewaar concept";
 "status.editor.ai-prompt.correct" = "Corrigeer tekst";
 "status.editor.ai-prompt.emphasize" = "Benadruk tekst";
 "status.editor.ai-prompt.fit" = "Kort tekst in";
-"status.editor.description.add" = "Omschrijving toevoegen";
-"status.editor.description.edit" = "Omschrijving bewerken";
+"status.editor.description.add" = "Voeg omschrijving toe";
+"status.editor.description.edit" = "Bewerk omschrijving";
 "status.editor.drafts.navigation-title" = "Concepten";
 "status.editor.error.upload" = "Fout tijdens uploaden";
 "status.editor.language-select.navigation-title" = "Taal selecteren";
 "status.editor.language-select.recently-used" = "Onlangs gebruikt";
 "status.editor.media.edit-image" = "Afbeelding bewerken";
 "status.editor.media.image-description" = "Omschrijving";
-"status.editor.mode.edit" = "Je post bewerken";
+"status.editor.mode.edit" = "Post bewerken";
 "status.editor.mode.new" = "Nieuwe post";
 "status.editor.mode.quote-%@" = "Citaat van %@";
 "status.editor.mode.reply-%@" = "Antwoord aan %@";
@@ -353,7 +367,7 @@
 "status.media.content.show" = "Toon inhoud";
 "status.media.contextmenu.copy" = "Kopieer";
 "status.media.contextmenu.save" = "Bewaar";
-"status.media.contextmenu.share" = "Delen";
+"status.media.contextmenu.share" = "Deel";
 "status.media.contextmenu.view-browser" = "Open in browser";
 "status.media.sensitive.show" = "Toon gevoelige inhoud";
 "status.poll.n-votes %lld" = "%lld stemmen";

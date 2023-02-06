@@ -24,6 +24,14 @@
 "enum.avatar-position.top" = "Top";
 "enum.avatar-shape.circle" = "Circle";
 "enum.avatar-shape.rounded" = "Rounded";
+"enum.durations.infinite" = "infinite";
+"enum.durations.fiveMinutes" = "5 minutes";
+"enum.durations.thirtyMinutes" = "30 minutes";
+"enum.durations.oneHour" = "1 hour";
+"enum.durations.sixHours" = "6 hours";
+"enum.durations.oneDay" = "1 day";
+"enum.durations.threeDays" = "3 days";
+"enum.durations.sevenDays" = "7 days";
 "enum.status-actions-display.all" = "All";
 "enum.status-actions-display.no-buttons" = "No buttons";
 "enum.status-actions-display.only-buttons" = "Only buttons";
@@ -148,6 +156,9 @@
 "settings.haptic.timeline" = "Timeline";
 "settings.haptic.tab-selection" = "Tab Selection";
 "settings.haptic.buttons" = "Button Press";
+
+"settings.display.section.ipad" = "iPad";
+"settings.display.show-ipad-column" = "Enable secondary column";
 
 // MARK: Tabs
 "tab.explore" = "Explore";
