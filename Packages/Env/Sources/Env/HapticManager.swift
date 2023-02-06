@@ -27,4 +27,8 @@ public class HapticManager {
   public func notification(type: UINotificationFeedbackGenerator.FeedbackType) {
     notificationGenerator.notificationOccurred(type)
   }
+
+    public var supportsHaptics: Bool {
+        CHHapticEngine.capabilitiesForHardware().supportsHaptics
+    }
 }
