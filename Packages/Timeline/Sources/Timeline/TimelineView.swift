@@ -112,9 +112,9 @@ public struct TimelineView: View {
       viewModel.isTimelineVisible = false
     }
     .refreshable {
-      HapticManager.shared.fireHaptic(of: .dataRefersh(intensity: 0.3))
+      HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
       await viewModel.fetchStatuses()
-      HapticManager.shared.fireHaptic(of: .dataRefersh(intensity: 0.7))
+      HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
     }
     .onChange(of: watcher.latestEvent?.id) { _ in
       if let latestEvent = watcher.latestEvent {

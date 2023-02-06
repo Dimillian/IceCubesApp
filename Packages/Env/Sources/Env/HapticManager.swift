@@ -6,7 +6,7 @@ public class HapticManager {
 
   public enum HapticType {
     case buttonPress
-    case dataRefersh(intensity: CGFloat)
+    case dataRefresh(intensity: CGFloat)
     case notification(_ type: UINotificationFeedbackGenerator.FeedbackType)
     case tabSelection
     case timeline
@@ -32,7 +32,7 @@ public class HapticManager {
       if userPreferences.hapticButtonPressEnabled {
         impact()
       }
-    case let .dataRefersh(intensity):
+    case let .dataRefresh(intensity):
       if userPreferences.hapticTimelineEnabled {
         impact(intensity: intensity)
       }
