@@ -1,3 +1,4 @@
+import Env
 import Foundation
 import Models
 import Network
@@ -27,6 +28,7 @@ class NotificationsViewModel: ObservableObject {
       }
     }
   }
+  var currentAccount: CurrentAccount?
 
   @Published var state: State = .loading
   @Published var selectedType: Models.Notification.NotificationType? {
@@ -52,7 +54,7 @@ class NotificationsViewModel: ObservableObject {
   private var consolidatedNotifications: [ConsolidatedNotification] = []
 
   func fetchNotifications() async {
-    guard let client else { return }
+    guard let client, let currentAccount else { return }
     do {
       var nextPageState: State.PagingState = .hasNextPage
       if consolidatedNotifications.isEmpty {
@@ -77,6 +79,9 @@ class NotificationsViewModel: ObservableObject {
           at: 0
         )
       }
+
+      await currentAccount.fetchFollowerRequests()
+
       withAnimation {
         state = .display(notifications: consolidatedNotifications,
                          nextPageState: consolidatedNotifications.isEmpty ? .none : nextPageState)
@@ -96,6 +101,7 @@ class NotificationsViewModel: ObservableObject {
                                                                    maxId: lastId,
                                                                    types: queryTypes))
       consolidatedNotifications.append(contentsOf: newNotifications.consolidated(selectedType: selectedType))
+      await currentAccount?.fetchFollowerRequests()
       state = .display(notifications: consolidatedNotifications, nextPageState: newNotifications.count < 15 ? .none : .hasNextPage)
     } catch {
       state = .error(error: error)
@@ -134,6 +140,10 @@ class NotificationsViewModel: ObservableObject {
             contentsOf: [event.notification].consolidated(selectedType: selectedType),
             at: 0
           )
+        }
+
+        if event.notification.supportedType == .follow_request, let currentAccount {
+          await currentAccount.fetchFollowerRequests()
         }
 
         withAnimation {

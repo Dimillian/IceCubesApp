@@ -179,9 +179,7 @@ struct StatusActionsView: View {
 
   private func handleAction(action: Actions) {
     Task {
-      if UserPreferences.shared.hapticButtonPressEnabled {
-        HapticManager.shared.notification(type: .success)
-      }
+      HapticManager.shared.fireHaptic(of: .notification(.success))
       switch action {
       case .respond:
         routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)

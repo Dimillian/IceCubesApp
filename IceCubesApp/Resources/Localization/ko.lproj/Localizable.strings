@@ -24,14 +24,14 @@
 "enum.avatar-position.top" = "본문 위";
 "enum.avatar-shape.circle" = "원";
 "enum.avatar-shape.rounded" = "둥근 사각형";
-"enum.durations.infinite" = "infinite";
-"enum.durations.fiveMinutes" = "5 minutes";
-"enum.durations.thirtyMinutes" = "30 minutes";
-"enum.durations.oneHour" = "1 hour";
-"enum.durations.sixHours" = "6 hours";
-"enum.durations.oneDay" = "1 day";
-"enum.durations.threeDays" = "3 days";
-"enum.durations.sevenDays" = "7 days";
+"enum.durations.infinite" = "해제할 때까지";
+"enum.durations.fiveMinutes" = "5분";
+"enum.durations.thirtyMinutes" = "30분";
+"enum.durations.oneHour" = "1시간";
+"enum.durations.sixHours" = "6시간";
+"enum.durations.oneDay" = "1일";
+"enum.durations.threeDays" = "3일";
+"enum.durations.sevenDays" = "7일";
 "enum.status-actions-display.all" = "모두 표시";
 "enum.status-actions-display.no-buttons" = "표시하지 않음";
 "enum.status-actions-display.only-buttons" = "버튼만 표시";
@@ -193,7 +193,7 @@
 "account.action.unblock" = "차단 해제";
 "account.action.mute" = "뮤트";
 "account.action.unmute" = "뮤트 해제";
-"account.action.share" = "Share this account";
+"account.action.share" = "공유";
 "account.boosted-by" = "부스트한 사용자";
 "account.detail.about" = "정보";
 "account.detail.familiar-followers" = "내가 아는 팔로워";
@@ -315,7 +315,7 @@
 "timeline.local" = "로컬";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld개의 최근 글 (%lld명의 사용자가 이야기 중)";
 "timeline.trending" = "뜨고 있는";
-"timeline.add.url" = "Instance URL";
+"timeline.add.url" = "인스턴스 URL";
 
 // MARK: Package: Status
 "status.action.translate" = "번역";
@@ -340,8 +340,8 @@
 "status.action.unfavorite" = "좋아요 취소";
 "status.action.unpin" = "고정 해제";
 "status.action.view-in-browser" = "브라우저에서 보기";
-"status.card.share" = "Share this link";
-"status.card.copy" = "Copy this link";
+"status.card.share" = "링크 공유";
+"status.card.copy" = "링크 복사";
 "status.draft.delete" = "삭제";
 "status.draft.save" = "임시 보관함에 저장";
 "status.editor.ai-prompt.correct" = "맞게 고치기";
