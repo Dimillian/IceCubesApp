@@ -241,6 +241,10 @@ public class StatusEditorViewModel: ObservableObject {
       if !mentionString.isEmpty {
         self.mentionString = mentionString.trimmingCharacters(in: .whitespaces)
       }
+      if !status.spoilerText.asRawText.isEmpty {
+        spoilerOn = true
+        spoilerText = status.spoilerText.asRawText
+      }
     case let .mention(account, visibility):
       statusText = .init(string: "@\(account.acct) ")
       self.visibility = visibility
