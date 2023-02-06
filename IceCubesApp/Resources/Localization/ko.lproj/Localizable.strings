@@ -24,7 +24,7 @@
 "enum.avatar-position.top" = "본문 위";
 "enum.avatar-shape.circle" = "원";
 "enum.avatar-shape.rounded" = "둥근 사각형";
-"enum.durations.infinite" = "무기한";
+"enum.durations.infinite" = "해제할 때까지";
 "enum.durations.fiveMinutes" = "5분";
 "enum.durations.thirtyMinutes" = "30분";
 "enum.durations.oneHour" = "1시간";
