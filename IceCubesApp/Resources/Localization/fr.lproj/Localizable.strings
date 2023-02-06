@@ -24,6 +24,14 @@
 "enum.avatar-position.top" = "En haut";
 "enum.avatar-shape.circle" = "Rond";
 "enum.avatar-shape.rounded" = "Arrondi";
+"enum.durations.infinite" = "infinite";
+"enum.durations.fiveMinutes" = "5 minutes";
+"enum.durations.thirtyMinutes" = "30 minutes";
+"enum.durations.oneHour" = "1 hour";
+"enum.durations.sixHours" = "6 hours";
+"enum.durations.oneDay" = "1 day";
+"enum.durations.threeDays" = "3 days";
+"enum.durations.sevenDays" = "7 days";
 "enum.status-actions-display.all" = "Tout";
 "enum.status-actions-display.no-buttons" = "Pas de boutons";
 "enum.status-actions-display.only-buttons" = "Seulement les boutons";
