@@ -24,6 +24,14 @@
 "enum.avatar-position.top" = "Üstte";
 "enum.avatar-shape.circle" = "Çember";
 "enum.avatar-shape.rounded" = "Yuvarlak";
+"enum.durations.infinite" = "infinite";
+"enum.durations.fiveMinutes" = "5 minutes";
+"enum.durations.thirtyMinutes" = "30 minutes";
+"enum.durations.oneHour" = "1 hour";
+"enum.durations.sixHours" = "6 hours";
+"enum.durations.oneDay" = "1 day";
+"enum.durations.threeDays" = "3 days";
+"enum.durations.sevenDays" = "7 days";
 "enum.status-actions-display.all" = "Hepsi";
 "enum.status-actions-display.no-buttons" = "Butonsuz";
 "enum.status-actions-display.only-buttons" = "Sadece Butonlar";
@@ -110,7 +118,7 @@
 "settings.section.app.footer %@" = "Uygulama Versiyonu: %@";
 "settings.section.general" = "Genel";
 "settings.support.alert.error.message" = "Uygulama içi satın alımınızda hata oluştu, lütfen tekrar deneyin.";
-"settings.support.alert.message" = "Bağışınızdan dolayı teşekkür ederiz! Minnettarız!";   
+"settings.support.alert.message" = "Bağışınızdan dolayı teşekkür ederiz! Minnettarız!";
 "settings.support.alert.title" = "Teşekkürler!";
 "settings.support.message-from-dev" = "Merhaba! Benim adım Thomas ve açık kaynak kodlu uygulamalar oluşturmayı seviyorum. Ice Cubes benim şu ana kadarki en çok gurur duyduğum projelerden biri - ve doğrusu, Mastodon ve sosyal medyanın durmadan değişen yapısı nedeniyle en çok bakım gerektireni. Eğer Ice Cubes'u kullanmaktan memnunsanız, ufak bir bağış göndermeyi düşünebilirsiniz. Bu gerçekten günümü güzelleştirir (ve uygulamanın senin için daha da düzgün çalışmasına yardımcı olur). 🚀";
 "settings.support.navigation-title" = "Ice Cubes'u destekleyin";
@@ -148,6 +156,9 @@
 "settings.haptic.tab-selection" = "Tab Selection";
 "settings.haptic.buttons" = "Button Press";
 
+"settings.display.section.ipad" = "iPad";
+"settings.display.show-ipad-column" = "Enable secondary column";
+
 // MARK: Tabs
 "tab.explore" = "Keşfet";
 "tab.federated" = "Birleştirilmiş";
@@ -184,6 +195,7 @@
 "account.action.unblock" = "Engeli Kaldır";
 "account.action.mute" = "Sustur";
 "account.action.unmute" = "Susturmayı Kaldır";
+"account.action.share" = "Share this account";
 "account.boosted-by" = "Tarafından Geliştirildi";
 "account.detail.about" = "Hakkında";
 "account.detail.familiar-followers" = "Şunlar tarafından da takip edilir";
@@ -325,6 +337,8 @@
 "status.action.unfavorite" = "Favoriyi Kaldır";
 "status.action.unpin" = "Sabitlemeyi Kaldır";
 "status.action.view-in-browser" = "Tarayıcıda Göster";
+"status.card.share" = "Share this link";
+"status.card.copy" = "Copy this link";
 "status.draft.delete" = "Taslağı Sil";
 "status.draft.save" = "Taslağı Kaydet";
 "status.editor.ai-prompt.correct" = "Yazıyı Düzelt";

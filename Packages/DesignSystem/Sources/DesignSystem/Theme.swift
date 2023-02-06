@@ -11,6 +11,8 @@ public class Theme: ObservableObject {
 
   public enum FontState: Int, CaseIterable {
     case system
+    case openDyslexic
+    case hyperLegible
     case custom
 
     @MainActor
@@ -18,6 +20,10 @@ public class Theme: ObservableObject {
       switch self {
       case .system:
         return "settings.display.font.system"
+      case .openDyslexic:
+        return "Open Dyslexic"
+      case .hyperLegible:
+        return "Hyper Legible"
       case .custom:
         return "settings.display.font.custom"
       }

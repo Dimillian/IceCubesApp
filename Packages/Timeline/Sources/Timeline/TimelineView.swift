@@ -79,7 +79,23 @@ public struct TimelineView: View {
         }
       })
     }
-    .navigationTitle(timeline.localizedTitle())
+    .toolbar {
+      ToolbarItem(placement: .principal) {
+        VStack(alignment: .center) {
+          switch timeline {
+          case let .remoteLocal(_, filter):
+            Text(filter.localizedTitle())
+              .font(.headline)
+            Text(timeline.localizedTitle())
+              .font(.caption)
+              .foregroundColor(.gray)
+          default:
+            Text(timeline.localizedTitle())
+              .font(.headline)
+          }
+        }
+      }
+    }
     .navigationBarTitleDisplayMode(.inline)
     .onAppear {
       viewModel.isTimelineVisible = true
@@ -96,13 +112,9 @@ public struct TimelineView: View {
       viewModel.isTimelineVisible = false
     }
     .refreshable {
-      if UserPreferences.shared.hapticTimelineEnabled {
-        HapticManager.shared.impact(intensity: 0.3)
-      }
+      HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
       await viewModel.fetchStatuses()
-      if UserPreferences.shared.hapticTimelineEnabled {
-        HapticManager.shared.impact(intensity: 0.7)
-      }
+      HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
     }
     .onChange(of: watcher.latestEvent?.id) { _ in
       if let latestEvent = watcher.latestEvent {
@@ -111,7 +123,7 @@ public struct TimelineView: View {
     }
     .onChange(of: timeline) { newTimeline in
       switch newTimeline {
-      case let .remoteLocal(server):
+      case let .remoteLocal(server, _):
         viewModel.client = Client(server: server)
       default:
         viewModel.client = client

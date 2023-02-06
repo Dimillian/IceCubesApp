@@ -15,6 +15,28 @@ public class StatusEditorViewModel: ObservableObject {
   var theme: Theme?
   var preferences: UserPreferences?
 
+  var textView: UITextView?
+  var selectedRange: NSRange {
+    get {
+      guard let textView else {
+        return .init(location: 0, length: 0)
+      }
+      return textView.selectedRange
+    }
+    set {
+      textView?.selectedRange = newValue
+    }
+  }
+  
+  var markedTextRange: UITextRange? {
+    get {
+      guard let textView else {
+        return nil
+      }
+      return textView.markedTextRange
+    }
+  }
+  
   @Published var statusText = NSMutableAttributedString(string: "") {
     didSet {
       processText()
@@ -42,9 +64,6 @@ public class StatusEditorViewModel: ObservableObject {
 
   @Published var spoilerOn: Bool = false
   @Published var spoilerText: String = ""
-
-  @Published var selectedRange: NSRange = .init(location: 0, length: 0)
-  @Published var markedTextRange: UITextRange? = nil
 
   @Published var isPosting: Bool = false
   @Published var selectedMedias: [PhotosPickerItem] = [] {
@@ -155,9 +174,7 @@ public class StatusEditorViewModel: ObservableObject {
       case let .edit(status):
         postStatus = try await client.put(endpoint: Statuses.editStatus(id: status.id, json: data))
       }
-      if UserPreferences.shared.hapticButtonPressEnabled {
-        HapticManager.shared.notification(type: .success)
-      }
+      HapticManager.shared.fireHaptic(of: .notification(.success))
       if hasExplicitlySelectedLanguage, let selectedLanguage {
         preferences?.markLanguageAsSelected(isoCode: selectedLanguage)
       }
@@ -169,9 +186,7 @@ public class StatusEditorViewModel: ObservableObject {
         showPostingErrorAlert = true
       }
       isPosting = false
-      if UserPreferences.shared.hapticButtonPressEnabled {
-        HapticManager.shared.notification(type: .error)
-      }
+      HapticManager.shared.fireHaptic(of: .notification(.error))
       return nil
     }
   }
@@ -183,7 +198,6 @@ public class StatusEditorViewModel: ObservableObject {
     string.mutableString.insert(text, at: selectedRange.location)
     statusText = string
     selectedRange = NSRange(location: selectedRange.location + text.utf16.count, length: 0)
-    markedTextRange = nil
   }
 
   func replaceTextWith(text: String, inRange: NSRange) {
@@ -192,13 +206,11 @@ public class StatusEditorViewModel: ObservableObject {
     string.mutableString.insert(text, at: inRange.location)
     statusText = string
     selectedRange = NSRange(location: inRange.location + text.utf16.count, length: 0)
-    markedTextRange = nil
   }
 
   func replaceTextWith(text: String) {
     statusText = .init(string: text)
     selectedRange = .init(location: text.utf16.count, length: 0)
-    markedTextRange = nil
   }
 
   func prepareStatusText() {
@@ -226,15 +238,17 @@ public class StatusEditorViewModel: ObservableObject {
       visibility = status.visibility
       statusText = .init(string: mentionString)
       selectedRange = .init(location: mentionString.utf16.count, length: 0)
-      markedTextRange = nil
       if !mentionString.isEmpty {
         self.mentionString = mentionString.trimmingCharacters(in: .whitespaces)
+      }
+      if !status.spoilerText.asRawText.isEmpty {
+        spoilerOn = true
+        spoilerText = status.spoilerText.asRawText
       }
     case let .mention(account, visibility):
       statusText = .init(string: "@\(account.acct) ")
       self.visibility = visibility
       selectedRange = .init(location: statusText.string.utf16.count, length: 0)
-      markedTextRange = nil
     case let .edit(status):
       var rawText = status.content.asRawText
       for mention in status.mentions {
@@ -242,7 +256,6 @@ public class StatusEditorViewModel: ObservableObject {
       }
       statusText = .init(string: rawText)
       selectedRange = .init(location: statusText.string.utf16.count, length: 0)
-      markedTextRange = nil
       spoilerOn = !status.spoilerText.asRawText.isEmpty
       spoilerText = status.spoilerText.asRawText
       visibility = status.visibility
@@ -255,7 +268,6 @@ public class StatusEditorViewModel: ObservableObject {
       if let url = embeddedStatusURL {
         statusText = .init(string: "\n\nFrom: @\(status.reblog?.account.acct ?? status.account.acct)\n\(url)")
         selectedRange = .init(location: 0, length: 0)
-        markedTextRange = nil
       }
     }
   }
@@ -372,7 +384,6 @@ public class StatusEditorViewModel: ObservableObject {
       if !initialText.isEmpty {
         statusText = .init(string: initialText)
         selectedRange = .init(location: statusText.string.utf16.count, length: 0)
-        markedTextRange = nil
       }
       if !mediasImages.isEmpty {
         processMediasToUpload()

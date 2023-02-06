@@ -52,6 +52,7 @@ public struct NotificationsListView: View {
     .background(theme.primaryBackgroundColor)
     .task {
       viewModel.client = client
+      viewModel.currentAccount = account
       if let lockedType {
         viewModel.selectedType = lockedType
       }

@@ -24,6 +24,14 @@
 "enum.avatar-position.top" = "顶部";
 "enum.avatar-shape.circle" = "圆形";
 "enum.avatar-shape.rounded" = "圆角";
+"enum.durations.infinite" = "infinite";
+"enum.durations.fiveMinutes" = "5 minutes";
+"enum.durations.thirtyMinutes" = "30 minutes";
+"enum.durations.oneHour" = "1 hour";
+"enum.durations.sixHours" = "6 hours";
+"enum.durations.oneDay" = "1 day";
+"enum.durations.threeDays" = "3 days";
+"enum.durations.sevenDays" = "7 days";
 "enum.status-actions-display.all" = "图标和文本";
 "enum.status-actions-display.no-buttons" = "仅文本";
 "enum.status-actions-display.only-buttons" = "仅图标";
@@ -148,6 +156,9 @@
 "settings.display.font.custom" = "自定义";
 "settings.display.font.scaling-%@" = "字体缩放：%@";
 
+"settings.display.section.ipad" = "iPad";
+"settings.display.show-ipad-column" = "Enable secondary column";
+
 // MARK: Tabs
 "tab.explore" = "探索";
 "tab.federated" = "跨站";
@@ -184,6 +195,7 @@
 "account.action.unblock" = "取消屏蔽";
 "account.action.mute" = "免打扰";
 "account.action.unmute" = "取消免打扰";
+"account.action.share" = "Share this account";
 "account.boosted-by" = "转发";
 "account.detail.about" = "附加信息";
 "account.detail.familiar-followers" = "同样关注此账号的有";
@@ -330,6 +342,8 @@
 "status.action.unfavorite" = "取消收藏";
 "status.action.unpin" = "取消固定";
 "status.action.view-in-browser" = "在浏览器中打开";
+"status.card.share" = "Share this link";
+"status.card.copy" = "Copy this link";
 "status.draft.delete" = "删除草稿";
 "status.draft.save" = "保存草稿";
 "status.editor.ai-prompt.correct" = "检查拼写和语法";

@@ -24,6 +24,14 @@
 "enum.avatar-position.top" = "En haut";
 "enum.avatar-shape.circle" = "Rond";
 "enum.avatar-shape.rounded" = "Arrondi";
+"enum.durations.infinite" = "infinite";
+"enum.durations.fiveMinutes" = "5 minutes";
+"enum.durations.thirtyMinutes" = "30 minutes";
+"enum.durations.oneHour" = "1 hour";
+"enum.durations.sixHours" = "6 hours";
+"enum.durations.oneDay" = "1 day";
+"enum.durations.threeDays" = "3 days";
+"enum.durations.sevenDays" = "7 days";
 "enum.status-actions-display.all" = "Tout";
 "enum.status-actions-display.no-buttons" = "Pas de boutons";
 "enum.status-actions-display.only-buttons" = "Seulement les boutons";
@@ -57,7 +65,7 @@
 "settings.app.icon.navigation-title" = "Icônes";
 "settings.app.source" = "Source (lien GitHub)";
 "settings.app.support" = "Soutenir l'application";
-"settings.app.about" = "About";
+"settings.app.about" = "À propos";
 "settings.display.avatar.position" = "Position de l'avatar";
 "settings.display.avatar.shape" = "Forme de l'avatar";
 "settings.display.navigation-title" = "Paramètres d'affichage";
@@ -148,6 +156,9 @@
 "settings.haptic.tab-selection" = "Sélection d'onglet";
 "settings.haptic.buttons" = "Appui bouton";
 
+"settings.display.section.ipad" = "iPad";
+"settings.display.show-ipad-column" = "Enable secondary column";
+
 // MARK: Tabs
 "tab.explore" = "Explorer";
 "tab.federated" = "Fédéré";
@@ -184,6 +195,7 @@
 "account.action.unblock" = "Débloquer";
 "account.action.mute" = "Rendre muet";
 "account.action.unmute" = "Annuler le mode muet";
+"account.action.share" = "Share this account";
 "account.boosted-by" = "Boosté par";
 "account.detail.about" = "À propos";
 "account.detail.familiar-followers" = "Aussi suivi par";
@@ -295,12 +307,12 @@
 
 // MARK: Package: Timeline
 "timeline.federated" = "Fédéré";
-"timeline.latest" = "Jump to Latest";
+"timeline.latest" = "Aller au plus récent";
 "timeline.home" = "Accueil";
 "timeline.local" = "Local";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld publications récentes de %lld participants";
 "timeline.trending" = "Tendances";
-"timeline.add.url" = "Instance URL";
+"timeline.add.url" = "URL de l'instance";
 
 // MARK: Package: Status
 "status.action.translate" = "Traduire";
@@ -325,6 +337,8 @@
 "status.action.unfavorite" = "Retirer des favoris";
 "status.action.unpin" = "Dépingler";
 "status.action.view-in-browser" = "Afficher dans le navigateur";
+"status.card.share" = "Share this link";
+"status.card.copy" = "Copy this link";
 "status.draft.delete" = "Supprimer le brouillon";
 "status.draft.save" = "Enregistrer le brouillon";
 "status.editor.ai-prompt.correct" = "Corriger le texte";

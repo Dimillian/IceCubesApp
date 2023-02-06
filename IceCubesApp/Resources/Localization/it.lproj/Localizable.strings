@@ -24,6 +24,14 @@
 "enum.avatar-position.top" = "In alto";
 "enum.avatar-shape.circle" = "Cerchio";
 "enum.avatar-shape.rounded" = "Arrotondata";
+"enum.durations.infinite" = "infinite";
+"enum.durations.fiveMinutes" = "5 minutes";
+"enum.durations.thirtyMinutes" = "30 minutes";
+"enum.durations.oneHour" = "1 hour";
+"enum.durations.sixHours" = "6 hours";
+"enum.durations.oneDay" = "1 day";
+"enum.durations.threeDays" = "3 days";
+"enum.durations.sevenDays" = "7 days";
 "enum.status-actions-display.all" = "Tutti";
 "enum.status-actions-display.no-buttons" = "Nessun bottone";
 "enum.status-actions-display.only-buttons" = "Solo bottoni";
@@ -148,6 +156,9 @@
 "settings.haptic.tab-selection" = "Selezione Tab";
 "settings.haptic.buttons" = "Pressione dei bottoni";
 
+"settings.display.section.ipad" = "iPad";
+"settings.display.show-ipad-column" = "Enable secondary column";
+
 // MARK: Tabs
 "tab.explore" = "Esplora";
 "tab.federated" = "Federazione";
@@ -184,6 +195,7 @@
 "account.action.unblock" = "Sblocca";
 "account.action.mute" = "Silenzia";
 "account.action.unmute" = "Sblocca";
+"account.action.share" = "Share this account";
 "account.boosted-by" = "Condiviso da";
 "account.detail.about" = "Informazioni";
 "account.detail.familiar-followers" = "Seguito, inoltre, da";
@@ -330,6 +342,8 @@
 "status.action.unfavorite" = "Rimuovi l'apprezzamento";
 "status.action.unpin" = "Non fissare";
 "status.action.view-in-browser" = "Vedi nel Browser";
+"status.card.share" = "Share this link";
+"status.card.copy" = "Copy this link";
 "status.draft.delete" = "Cancella la bozza";
 "status.draft.save" = "Salva la bozza";
 "status.editor.ai-prompt.correct" = "Correggi il testo";

@@ -70,7 +70,7 @@ struct StatusRowContextMenu: View {
     }
 
     Button {
-      UIPasteboard.general.string = viewModel.status.content.asRawText
+      UIPasteboard.general.string = viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText
     } label: {
       Label("status.action.copy-text", systemImage: "doc.on.doc")
     }

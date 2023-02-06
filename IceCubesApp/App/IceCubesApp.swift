@@ -114,7 +114,8 @@ struct IceCubesApp: App {
             }
           }
           if proxy.frame(in: .global).width > (.maxColumnWidth + .secondaryColumnWidth),
-             appAccountsManager.currentClient.isAuth
+             appAccountsManager.currentClient.isAuth,
+             userPreferences.showiPadSecondaryColumn
           {
             Divider().edgesIgnoringSafeArea(.all)
             NotificationsTab(popToRootTab: $popToRootTab, lockedType: nil)
@@ -140,9 +141,7 @@ struct IceCubesApp: App {
         }
       }
       selectedTab = newTab
-      if userPreferences.hapticTabSelectionEnabled {
-        HapticManager.shared.selectionChanged()
-      }
+      HapticManager.shared.fireHaptic(of: .tabSelection)
     })) {
       ForEach(availableTabs) { tab in
         tab.makeContentView(popToRootTab: $popToRootTab)
@@ -171,17 +170,13 @@ struct IceCubesApp: App {
   private func handleScenePhase(scenePhase: ScenePhase) {
     switch scenePhase {
     case .background:
-      if !ProcessInfo.processInfo.isiOSAppOnMac {
-        watcher.stopWatching()
-      }
+      watcher.stopWatching()
     case .active:
       watcher.watch(streams: [.user, .direct])
       UIApplication.shared.applicationIconBadgeNumber = 0
       Task {
         await userPreferences.refreshServerPreferences()
       }
-    case .inactive:
-      break
     default:
       break
     }

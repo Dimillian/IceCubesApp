@@ -71,8 +71,6 @@ struct AboutView: View {
 
         • [SwiftSoup](https://github.com/scinfu/SwiftSoup.git)
 
-        • [TextView](https://github.com/Dimillian/TextView)
-
         • [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible)
 
         • [OpenDyslexic](http://opendyslexic.org)
