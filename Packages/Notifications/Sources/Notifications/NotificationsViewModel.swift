@@ -15,6 +15,10 @@ class NotificationsViewModel: ObservableObject {
     case display(notifications: [ConsolidatedNotification], nextPageState: State.PagingState)
     case error(error: Error)
   }
+  
+  enum Constants {
+    static let notificationLimit: Int = 30
+  }
 
   public enum Tab: LocalizedStringKey, CaseIterable {
     case all = "notifications.tab.all"
@@ -60,17 +64,15 @@ class NotificationsViewModel: ObservableObject {
       if consolidatedNotifications.isEmpty {
         state = .loading
         let notifications: [Models.Notification] =
-          try await client.get(endpoint: Notifications.notifications(sinceId: nil,
+          try await client.get(endpoint: Notifications.notifications(minId: nil,
                                                                      maxId: nil,
-                                                                     types: queryTypes))
+                                                                     types: queryTypes,
+                                                                     limit: Constants.notificationLimit))
         consolidatedNotifications = notifications.consolidated(selectedType: selectedType)
-        nextPageState = notifications.count < 15 ? .none : .hasNextPage
-      } else if let first = consolidatedNotifications.first {
-        var newNotifications: [Models.Notification] =
-          try await client.get(endpoint: Notifications.notifications(sinceId: first.id,
-                                                                     maxId: nil,
-                                                                     types: queryTypes))
-        nextPageState = consolidatedNotifications.notificationCount < 15 ? .none : .hasNextPage
+        nextPageState = notifications.count < Constants.notificationLimit ? .none : .hasNextPage
+      } else if let firstId = consolidatedNotifications.first?.id {
+        var newNotifications: [Models.Notification] = await fetchNewPages(minId: firstId, maxPages: 10)
+        nextPageState = consolidatedNotifications.notificationCount < Constants.notificationLimit ? .none : .hasNextPage
         newNotifications = newNotifications.filter { notification in
           !consolidatedNotifications.contains(where: { $0.id == notification.id })
         }
@@ -90,6 +92,31 @@ class NotificationsViewModel: ObservableObject {
       state = .error(error: error)
     }
   }
+  
+  private func fetchNewPages(minId: String, maxPages: Int) async -> [Models.Notification] {
+    guard let client else { return [] }
+    var pagesLoaded = 0
+    var allNotifications: [Models.Notification] = []
+    var latestMinId = minId
+    do {
+      while let newNotifications: [Models.Notification] =
+              try await client.get(endpoint: Notifications.notifications(minId: latestMinId,
+                                                                         maxId: nil,
+                                                                         types: queryTypes,
+                                                                         limit: Constants.notificationLimit)),
+        !newNotifications.isEmpty,
+        pagesLoaded < maxPages
+      {
+        pagesLoaded += 1
+
+        allNotifications.insert(contentsOf: newNotifications, at: 0)
+        latestMinId = newNotifications.first?.id ?? ""
+      }
+    } catch {
+      return allNotifications
+    }
+    return allNotifications
+  }
 
   func fetchNextPage() async {
     guard let client else { return }
@@ -97,12 +124,14 @@ class NotificationsViewModel: ObservableObject {
       guard let lastId = consolidatedNotifications.last?.notificationIds.last else { return }
       state = .display(notifications: consolidatedNotifications, nextPageState: .loadingNextPage)
       let newNotifications: [Models.Notification] =
-        try await client.get(endpoint: Notifications.notifications(sinceId: nil,
+        try await client.get(endpoint: Notifications.notifications(minId: nil,
                                                                    maxId: lastId,
-                                                                   types: queryTypes))
+                                                                   types: queryTypes,
+                                                                   limit: Constants.notificationLimit))
       consolidatedNotifications.append(contentsOf: newNotifications.consolidated(selectedType: selectedType))
       await currentAccount?.fetchFollowerRequests()
-      state = .display(notifications: consolidatedNotifications, nextPageState: newNotifications.count < 15 ? .none : .hasNextPage)
+      state = .display(notifications: consolidatedNotifications,
+                       nextPageState: newNotifications.count < Constants.notificationLimit ? .none : .hasNextPage)
     } catch {
       state = .error(error: error)
     }
