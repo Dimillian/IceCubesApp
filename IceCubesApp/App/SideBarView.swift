@@ -132,7 +132,7 @@ struct SideBarView<Content: View>: View {
       .scrollContentBackground(.hidden)
       .background(.thinMaterial)
       Divider()
-        .edgesIgnoringSafeArea(.top)
+        .ignoresSafeArea(edges: .bottom)
       content()
     }
     .background(.thinMaterial)
