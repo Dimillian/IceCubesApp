@@ -24,6 +24,14 @@
 "enum.avatar-position.top" = "Üstte";
 "enum.avatar-shape.circle" = "Çember";
 "enum.avatar-shape.rounded" = "Yuvarlak";
+"enum.durations.infinite" = "infinite";
+"enum.durations.fiveMinutes" = "5 minutes";
+"enum.durations.thirtyMinutes" = "30 minutes";
+"enum.durations.oneHour" = "1 hour";
+"enum.durations.sixHours" = "6 hours";
+"enum.durations.oneDay" = "1 day";
+"enum.durations.threeDays" = "3 days";
+"enum.durations.sevenDays" = "7 days";
 "enum.status-actions-display.all" = "Hepsi";
 "enum.status-actions-display.no-buttons" = "Butonsuz";
 "enum.status-actions-display.only-buttons" = "Sadece Butonlar";

@@ -24,6 +24,14 @@
 "enum.avatar-position.top" = "본문 위";
 "enum.avatar-shape.circle" = "원";
 "enum.avatar-shape.rounded" = "둥근 사각형";
+"enum.durations.infinite" = "infinite";
+"enum.durations.fiveMinutes" = "5 minutes";
+"enum.durations.thirtyMinutes" = "30 minutes";
+"enum.durations.oneHour" = "1 hour";
+"enum.durations.sixHours" = "6 hours";
+"enum.durations.oneDay" = "1 day";
+"enum.durations.threeDays" = "3 days";
+"enum.durations.sevenDays" = "7 days";
 "enum.status-actions-display.all" = "모두 표시";
 "enum.status-actions-display.no-buttons" = "표시하지 않음";
 "enum.status-actions-display.only-buttons" = "버튼만 표시";

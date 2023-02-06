@@ -37,7 +37,7 @@ public struct AccountDetailView: View {
   public init(account: Account) {
     _viewModel = StateObject(wrappedValue: .init(account: account))
   }
-
+    
   public var body: some View {
     ScrollViewReader { proxy in
       ScrollViewOffsetReader { offset in
@@ -403,6 +403,7 @@ public struct AccountDetailView: View {
                   Label("account.action.block", systemImage: "person.crop.circle.badge.xmark")
                 }
               }
+              
               if viewModel.relationship?.muting == true {
                 Button {
                   Task {
@@ -416,12 +417,16 @@ public struct AccountDetailView: View {
                   Label("account.action.unmute", systemImage: "speaker")
                 }
               } else {
-                Button {
-                  Task {
-                    do {
-                      viewModel.relationship = try await client.post(endpoint: Accounts.mute(id: account.id))
-                    } catch {
-                      print("Error while muting: \(error.localizedDescription)")
+                Menu {
+                  ForEach(MutingDurations.allCases, id: \.rawValue) { duration in
+                    Button (duration.description) {
+                      Task {
+                        do {
+                          viewModel.relationship = try await client.post(endpoint: Accounts.mute(id: account.id, json: MuteData(duration: duration.rawValue)))
+                        } catch {
+                          print("Error while muting: \(error.localizedDescription)")
+                        }
+                      }
                     }
                   }
                 } label: {
