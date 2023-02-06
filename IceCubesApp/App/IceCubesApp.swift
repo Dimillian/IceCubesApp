@@ -180,8 +180,6 @@ struct IceCubesApp: App {
       Task {
         await userPreferences.refreshServerPreferences()
       }
-    case .inactive:
-      break
     default:
       break
     }
