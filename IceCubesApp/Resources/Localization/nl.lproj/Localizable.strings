@@ -153,6 +153,9 @@
 "settings.haptic.tab-selection" = "Tabselectie";
 "settings.haptic.buttons" = "Knoppen";
 
+"settings.display.section.ipad" = "iPad";
+"settings.display.show-ipad-column" = "Enable secondary column";
+
 // MARK: Tabs
 "tab.explore" = "Ontdekken";
 "tab.federated" = "Gefedereerd";

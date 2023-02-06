@@ -153,6 +153,9 @@
 "settings.haptic.tab-selection" = "Tab Selection";
 "settings.haptic.buttons" = "Button Press";
 
+"settings.display.section.ipad" = "iPad";
+"settings.display.show-ipad-column" = "Enable secondary column";
+
 "enum.expand-media.show" = "Siempre";
 "enum.expand-media.hide" = "Nunca";
 "enum.expand-media.hide-sensitive" = "Ocultar contenido sensible";

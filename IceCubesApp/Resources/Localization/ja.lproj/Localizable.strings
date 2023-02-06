@@ -156,6 +156,9 @@
 "settings.haptic.tab-selection" = "タブセレクト";
 "settings.haptic.buttons" = "ボタン操作時";
 
+"settings.display.section.ipad" = "iPad";
+"settings.display.show-ipad-column" = "Enable secondary column";
+
 // MARK: Tabs
 "tab.explore" = "エクスプローラー";
 "tab.federated" = "連合";

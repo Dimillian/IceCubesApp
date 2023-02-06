@@ -156,6 +156,9 @@
 "settings.display.font.custom" = "自定义";
 "settings.display.font.scaling-%@" = "字体缩放：%@";
 
+"settings.display.section.ipad" = "iPad";
+"settings.display.show-ipad-column" = "Enable secondary column";
+
 // MARK: Tabs
 "tab.explore" = "探索";
 "tab.federated" = "跨站";

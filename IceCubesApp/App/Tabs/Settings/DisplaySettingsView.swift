@@ -85,9 +85,18 @@ struct DisplaySettingsView: View {
           Text("settings.display.font.scaling-\(String(format: "%.1f", userPreferences.fontSizeScale))")
             .font(.scaledBody)
         }
+        .alignmentGuide(.listRowSeparatorLeading) { d in
+          d[.leading]
+        }
         Toggle("settings.display.translate-button", isOn: $userPreferences.showTranslateButton)
       }
       .listRowBackground(theme.primaryBackgroundColor)
+      
+      if UIDevice.current.userInterfaceIdiom == .pad {
+        Section("settings.display.section.ipad") {
+          Toggle("settings.display.show-ipad-column", isOn: $userPreferences.showiPadSecondaryColumn)
+        }
+      }
 
       Section {
         Button {

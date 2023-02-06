@@ -114,7 +114,8 @@ struct IceCubesApp: App {
             }
           }
           if proxy.frame(in: .global).width > (.maxColumnWidth + .secondaryColumnWidth),
-             appAccountsManager.currentClient.isAuth
+             appAccountsManager.currentClient.isAuth,
+             userPreferences.showiPadSecondaryColumn
           {
             Divider().edgesIgnoringSafeArea(.all)
             NotificationsTab(popToRootTab: $popToRootTab, lockedType: nil)
