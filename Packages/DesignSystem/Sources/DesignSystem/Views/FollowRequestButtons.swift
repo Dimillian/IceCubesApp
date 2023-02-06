@@ -35,7 +35,7 @@ public struct FollowRequestButtons: View {
       }
     }
     .buttonStyle(.bordered)
-    .disabled(currentAccount.isUpdating)
+    .disabled(currentAccount.updatingFollowRequestAccountIds.contains(account.id))
     .padding(.top, 4)
   }
 }
