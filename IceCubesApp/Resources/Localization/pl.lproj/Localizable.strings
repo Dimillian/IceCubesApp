@@ -145,7 +145,7 @@
 "settings.display.font.system" = "Systemowa";
 "settings.display.font.custom" = "Własna";
 "settings.display.font.scaling-%@" = "Skalowanie czcionki: %@";
-"settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
+"settings.about.built-with" = "Ice Cubes zbudowano z wykorzystaniem następującego oprogramowania Open Source:";
 "settings.about.title" = "Ice Cubes";
 "settings.account.cached-posts-%@" = "Liczba postów w buforze: %@";
 "settings.account.action.delete-cache" = "Wyczyść bufor";
