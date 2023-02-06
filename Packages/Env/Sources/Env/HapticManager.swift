@@ -30,41 +30,25 @@ public class HapticManager {
     switch type {
     case .buttonPress:
       if userPreferences.hapticButtonPressEnabled {
-        impact()
+        impactGenerator.impactOccurred()
       }
     case let .dataRefresh(intensity):
       if userPreferences.hapticTimelineEnabled {
-        impact(intensity: intensity)
+        impactGenerator.impactOccurred(intensity: intensity)
       }
     case let .notification(type):
       if userPreferences.hapticButtonPressEnabled {
-        notification(type)
+        notificationGenerator.notificationOccurred(type)
       }
     case .tabSelection:
       if userPreferences.hapticTabSelectionEnabled {
-        selectionChanged()
+        selectionGenerator.selectionChanged()
       }
     case .timeline:
       if userPreferences.hapticTimelineEnabled {
-        selectionChanged()
+        selectionGenerator.selectionChanged()
       }
     }
-  }
-
-  private func selectionChanged() {
-    selectionGenerator.selectionChanged()
-  }
-
-  private func impact() {
-    impactGenerator.impactOccurred()
-  }
-
-  private func impact(intensity: CGFloat) {
-    impactGenerator.impactOccurred(intensity: intensity)
-  }
-
-  private func notification(_ type: UINotificationFeedbackGenerator.FeedbackType) {
-    notificationGenerator.notificationOccurred(type)
   }
 
   public var supportsHaptics: Bool {
