@@ -148,6 +148,7 @@ struct IceCubesApp: App {
         tab.makeContentView(popToRootTab: $popToRootTab)
           .tabItem {
             tab.label
+              .labelStyle(IconOnlyLabelStyle())
           }
           .tag(tab)
           .badge(badgeFor(tab: tab))
