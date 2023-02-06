@@ -425,9 +425,7 @@ public struct StatusRowView: View {
   private var trailinSwipeActions: some View {
     Button {
       Task {
-        if UserPreferences.shared.hapticButtonPressEnabled {
-          HapticManager.shared.notification(type: .success)
-        }
+        HapticManager.shared.fireHaptic(of: .notification(.success))
         if viewModel.isFavorited {
           await viewModel.unFavorite()
         } else {
@@ -440,9 +438,7 @@ public struct StatusRowView: View {
     .tint(.yellow)
     Button {
       Task {
-        if UserPreferences.shared.hapticButtonPressEnabled {
-          HapticManager.shared.notification(type: .success)
-        }
+        HapticManager.shared.fireHaptic(of: .notification(.success))
         if viewModel.isReblogged {
           await viewModel.unReblog()
         } else {
@@ -458,9 +454,7 @@ public struct StatusRowView: View {
   @ViewBuilder
   private var leadingSwipeActions: some View {
     Button {
-      if UserPreferences.shared.hapticButtonPressEnabled {
-        HapticManager.shared.notification(type: .success)
-      }
+      HapticManager.shared.fireHaptic(of: .notification(.success))
       routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
     } label: {
       Image(systemName: "arrowshape.turn.up.left")
