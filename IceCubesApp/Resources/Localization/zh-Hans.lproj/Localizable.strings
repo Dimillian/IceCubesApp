@@ -192,6 +192,7 @@
 "account.action.unblock" = "取消屏蔽";
 "account.action.mute" = "免打扰";
 "account.action.unmute" = "取消免打扰";
+"account.action.share" = "Share this account";
 "account.boosted-by" = "转发";
 "account.detail.about" = "附加信息";
 "account.detail.familiar-followers" = "同样关注此账号的有";
@@ -338,6 +339,8 @@
 "status.action.unfavorite" = "取消收藏";
 "status.action.unpin" = "取消固定";
 "status.action.view-in-browser" = "在浏览器中打开";
+"status.card.share" = "Share this link";
+"status.card.copy" = "Copy this link";
 "status.draft.delete" = "删除草稿";
 "status.draft.save" = "保存草稿";
 "status.editor.ai-prompt.correct" = "检查拼写和语法";

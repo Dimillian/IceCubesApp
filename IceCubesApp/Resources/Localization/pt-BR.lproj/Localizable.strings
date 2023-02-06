@@ -192,6 +192,7 @@
 "account.action.unblock" = "Desbloquear";
 "account.action.mute" = "Mutar";
 "account.action.unmute" = "Reativar";
+"account.action.share" = "Share this account";
 "account.boosted-by" = "Boosted por";
 "account.detail.about" = "Sobre";
 "account.detail.familiar-followers" = "Também seguido por";
@@ -337,6 +338,8 @@
 "status.action.unfavorite" = "Desfavoritar";
 "status.action.unpin" = "Unpin";
 "status.action.view-in-browser" = "Abrir no Navegador";
+"status.card.share" = "Share this link";
+"status.card.copy" = "Copy this link";
 "status.draft.delete" = "Excluir Rascunho";
 "status.draft.save" = "Salvar Rascunho";
 "status.editor.ai-prompt.correct" = "Corrigir texto";

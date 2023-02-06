@@ -192,6 +192,7 @@
 "account.action.unblock" = "ブロック解除";
 "account.action.mute" = "ミュート";
 "account.action.unmute" = "ミュート解除";
+"account.action.share" = "Share this account";
 "account.boosted-by" = "ブーストしました";
 "account.detail.about" = "詳細";
 "account.detail.familiar-followers" = "知っているかも";
@@ -337,6 +338,8 @@
 "status.action.unfavorite" = "お気に入りから外す";
 "status.action.unpin" = "固定しない";
 "status.action.view-in-browser" = "ブラウザで見る";
+"status.card.share" = "Share this link";
+"status.card.copy" = "Copy this link";
 "status.draft.delete" = "下書きを削除";
 "status.draft.save" = "下書きを保存";
 "status.editor.ai-prompt.correct" = "テキストを修正する";

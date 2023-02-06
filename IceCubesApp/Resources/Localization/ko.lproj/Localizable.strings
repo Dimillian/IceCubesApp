@@ -193,6 +193,7 @@
 "account.action.unblock" = "차단 해제";
 "account.action.mute" = "뮤트";
 "account.action.unmute" = "뮤트 해제";
+"account.action.share" = "Share this account";
 "account.boosted-by" = "부스트한 사용자";
 "account.detail.about" = "정보";
 "account.detail.familiar-followers" = "내가 아는 팔로워";
@@ -339,6 +340,8 @@
 "status.action.unfavorite" = "좋아요 취소";
 "status.action.unpin" = "고정 해제";
 "status.action.view-in-browser" = "브라우저에서 보기";
+"status.card.share" = "Share this link";
+"status.card.copy" = "Copy this link";
 "status.draft.delete" = "삭제";
 "status.draft.save" = "임시 보관함에 저장";
 "status.editor.ai-prompt.correct" = "맞게 고치기";
