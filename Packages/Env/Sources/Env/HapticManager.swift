@@ -6,8 +6,8 @@ public class HapticManager {
 
   public enum HapticType {
     case buttonPress
-    case notification(_ type: UINotificationFeedbackGenerator.FeedbackType)
     case dataRefersh(intensity: CGFloat)
+    case notification(_ type: UINotificationFeedbackGenerator.FeedbackType)
     case tabSelection
     case timeline
   }
@@ -28,25 +28,25 @@ public class HapticManager {
     guard supportsHaptics else { return }
 
     switch type {
+    case .buttonPress:
+      if userPreferences.hapticButtonPressEnabled {
+        impact()
+      }
     case let .dataRefersh(intensity):
       if userPreferences.hapticTimelineEnabled {
         impact(intensity: intensity)
       }
-    case .timeline:
-      if userPreferences.hapticTimelineEnabled {
-        selectionChanged()
+    case let .notification(type):
+      if userPreferences.hapticButtonPressEnabled {
+        notification(type)
       }
     case .tabSelection:
       if userPreferences.hapticTabSelectionEnabled {
         selectionChanged()
       }
-    case .buttonPress:
-      if userPreferences.hapticButtonPressEnabled {
-        impact()
-      }
-    case let .notification(type):
-      if userPreferences.hapticButtonPressEnabled {
-        notification(type)
+    case .timeline:
+      if userPreferences.hapticTimelineEnabled {
+        selectionChanged()
       }
     }
   }
