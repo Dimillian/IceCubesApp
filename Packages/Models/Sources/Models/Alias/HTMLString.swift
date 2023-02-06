@@ -8,7 +8,8 @@ public struct HTMLString: Codable, Equatable, Hashable {
   public var asRawText: String = ""
   public var statusesURLs = [URL]()
   public var asSafeMarkdownAttributedString: AttributedString = .init()
-  private var regex: NSRegularExpression?
+  private var main_regex: NSRegularExpression?
+  private var underscore_regex: NSRegularExpression?
 
   public init(from decoder: Decoder) {
     do {
@@ -22,8 +23,9 @@ public struct HTMLString: Codable, Equatable, Hashable {
     // Pre-escape \ ` _ * and [ as these are the only
     // characters the markdown parser used picks up
     // when it renders to attributed text
-    regex = try? NSRegularExpression(pattern: "([\\_\\*\\`\\[\\\\])", options: .caseInsensitive)
-
+    main_regex = try? NSRegularExpression(pattern: "([\\*\\`\\[\\\\])", options: .caseInsensitive)
+    underscore_regex = try? NSRegularExpression(pattern: "(?!\\B:[^:]*)(_)(?![^:]*:\\B)", options: .caseInsensitive)
+      
     asMarkdown = ""
     do {
       let document: Document = try SwiftSoup.parse(htmlValue)
@@ -130,9 +132,10 @@ public struct HTMLString: Codable, Equatable, Hashable {
       } else if node.nodeName() == "#text" {
         var txt = node.description
 
-        if let regex {
+        if let underscore_regex, let main_regex {
           //  This is the markdown escaper
-          txt = regex.stringByReplacingMatches(in: txt, options: [], range: NSRange(location: 0, length: txt.count), withTemplate: "\\\\$1")
+          txt = main_regex.stringByReplacingMatches(in: txt, options: [], range: NSRange(location: 0, length: txt.count), withTemplate: "\\\\$1")
+          txt = underscore_regex.stringByReplacingMatches(in: txt, options: [], range: NSRange(location: 0, length: txt.count), withTemplate: "\\\\$1")
         }
 
         asMarkdown += txt
