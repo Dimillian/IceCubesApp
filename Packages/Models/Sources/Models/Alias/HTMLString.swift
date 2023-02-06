@@ -24,6 +24,7 @@ public struct HTMLString: Codable, Equatable, Hashable {
     // characters the markdown parser used picks up
     // when it renders to attributed text
     main_regex = try? NSRegularExpression(pattern: "([\\*\\`\\[\\\\])", options: .caseInsensitive)
+    // don't escape underscores that are between colons, they are most likely custom emoji
     underscore_regex = try? NSRegularExpression(pattern: "(?!\\B:[^:]*)(_)(?![^:]*:\\B)", options: .caseInsensitive)
       
     asMarkdown = ""
