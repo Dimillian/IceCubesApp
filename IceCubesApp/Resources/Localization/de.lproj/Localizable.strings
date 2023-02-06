@@ -136,14 +136,14 @@
 "settings.display.font.scaling-%@" = "Schriftskalierung: %@";
 "settings.about.built-with" = "Ice Cubes wird mit folgender Open-Source-Software erstellt:";
 "settings.about.title" = "Ice Cubes";
-"settings.account.cached-posts-%@" = "Cached posts: %@";
-"settings.account.action.delete-cache" = "Clear cache";
+"settings.account.cached-posts-%@" = "Gecachete Beiträge: %@";
+"settings.account.action.delete-cache" = "Cache leeren";
 
-"settings.general.haptic" = "Haptic Feedback";
-"settings.haptic.navigation-title" = "Haptic Settings";
+"settings.general.haptic" = "Haptisches Feedback";
+"settings.haptic.navigation-title" = "Haptikeinstellungen";
 "settings.haptic.timeline" = "Timeline";
-"settings.haptic.tab-selection" = "Tab Selection";
-"settings.haptic.buttons" = "Button Press";
+"settings.haptic.tab-selection" = "Tabauswahl";
+"settings.haptic.buttons" = "Knopfdruck";
 
 "enum.expand-media.show" = "Alle zeigen";
 "enum.expand-media.hide" = "Alle ausblenden";
@@ -300,7 +300,7 @@
 
 // MARK: Package: Timeline
 "timeline.federated" = "Föderiert";
-"timeline.latest" = "Jump to Latest";
+"timeline.latest" = "Zum Neuesten springen";
 "timeline.home" = "Startseite";
 "timeline.local" = "Lokal";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld aktuelle Beiträge von %lld Teilnehmenden";
