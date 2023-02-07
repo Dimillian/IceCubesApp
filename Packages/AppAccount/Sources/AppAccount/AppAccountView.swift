@@ -51,6 +51,10 @@ public struct AppAccountView: View {
         }
       } else {
         ProgressView()
+        Text(viewModel.appAccount.accountName ?? viewModel.acct)
+          .font(.scaledSubheadline)
+          .foregroundColor(.gray)
+          .padding(.leading, 6)
       }
       VStack(alignment: .leading) {
         if let account = viewModel.account {

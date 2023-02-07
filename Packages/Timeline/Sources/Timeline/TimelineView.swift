@@ -1,5 +1,6 @@
 import DesignSystem
 import Env
+import Introspect
 import Models
 import Network
 import Shimmer
@@ -19,13 +20,12 @@ public struct TimelineView: View {
   @EnvironmentObject private var routerPath: RouterPath
 
   @StateObject private var viewModel = TimelineViewModel()
-  
+
   @State private var wasBackgrounded: Bool = false
-  
+  @State private var collectionView: UICollectionView?
+
   @Binding var timeline: TimelineFilter
   @Binding var scrollToTopSignal: Int
-
-  private let feedbackGenerator = UIImpactFeedbackGenerator()
 
   public init(timeline: Binding<TimelineFilter>, scrollToTopSignal: Binding<Int>) {
     _timeline = timeline
@@ -48,22 +48,57 @@ public struct TimelineView: View {
             StatusesListView(fetcher: viewModel)
           }
         }
-        .id(account.account?.id)
+        .id(client.id)
         .environment(\.defaultMinListRowHeight, 1)
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
         .background(theme.primaryBackgroundColor)
+        .introspect(selector: TargetViewSelector.ancestorOrSiblingContaining,
+                    customize: { (collectionView: UICollectionView) in
+                      self.collectionView = collectionView
+                    })
         if viewModel.pendingStatusesEnabled {
-          makePendingNewPostsView(proxy: proxy)
+          PendingStatusesObserverView(observer: viewModel.pendingStatusesObserver)
         }
       }
-      .onAppear {
-        viewModel.scrollProxy = proxy
+      .onChange(of: viewModel.scrollToIndex) { index in
+        if let collectionView,
+           let index,
+           let rows = collectionView.dataSource?.collectionView(collectionView, numberOfItemsInSection: 0),
+           rows > index {
+          collectionView.scrollToItem(at: .init(row: index, section: 0),
+                                      at: .top,
+                                      animated: viewModel.scrollToIndexAnimated)
+          viewModel.scrollToIndexAnimated = false
+          viewModel.scrollToIndex = nil
+        }
+      }
+      .onChange(of: scrollToTopSignal, perform: { _ in
+        withAnimation {
+          proxy.scrollTo(Constants.scrollToTop, anchor: .top)
+        }
+      })
+    }
+    .toolbar {
+      ToolbarItem(placement: .principal) {
+        VStack(alignment: .center) {
+          switch timeline {
+          case let .remoteLocal(_, filter):
+            Text(filter.localizedTitle())
+              .font(.headline)
+            Text(timeline.localizedTitle())
+              .font(.caption)
+              .foregroundColor(.gray)
+          default:
+            Text(timeline.localizedTitle())
+              .font(.headline)
+          }
+        }
       }
     }
-    .navigationTitle(timeline.localizedTitle())
     .navigationBarTitleDisplayMode(.inline)
     .onAppear {
+      viewModel.isTimelineVisible = true
       if viewModel.client == nil {
         viewModel.client = client
         viewModel.timeline = timeline
@@ -73,30 +108,31 @@ public struct TimelineView: View {
         }
       }
     }
+    .onDisappear {
+      viewModel.isTimelineVisible = false
+    }
     .refreshable {
-      feedbackGenerator.impactOccurred(intensity: 0.3)
+      HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
       await viewModel.fetchStatuses()
-      feedbackGenerator.impactOccurred(intensity: 0.7)
+      HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
     }
     .onChange(of: watcher.latestEvent?.id) { _ in
       if let latestEvent = watcher.latestEvent {
         viewModel.handleEvent(event: latestEvent, currentAccount: account)
       }
     }
-    .onChange(of: scrollToTopSignal, perform: { _ in
-      withAnimation {
-        viewModel.scrollProxy?.scrollTo(Constants.scrollToTop, anchor: .top)
-      }
-    })
     .onChange(of: timeline) { newTimeline in
       switch newTimeline {
-      case let .remoteLocal(server):
+      case let .remoteLocal(server, _):
         viewModel.client = Client(server: server)
       default:
         viewModel.client = client
       }
       viewModel.timeline = newTimeline
     }
+    .onChange(of: viewModel.timeline, perform: { newValue in
+      timeline = newValue
+    })
     .onChange(of: scenePhase, perform: { scenePhase in
       switch scenePhase {
       case .active:
@@ -108,16 +144,11 @@ public struct TimelineView: View {
         }
       case .background:
         wasBackgrounded = true
-        
+
       default:
         break
       }
     })
-  }
-
-  @ViewBuilder
-  private func makePendingNewPostsView(proxy: ScrollViewProxy) -> some View {
-    PendingStatusesObserverView(observer: viewModel.pendingStatusesObserver, proxy: proxy)
   }
 
   @ViewBuilder
@@ -156,13 +187,19 @@ public struct TimelineView: View {
                            trailing: .layoutPadding))
     }
   }
-  
+
   private var scrollToTopView: some View {
-    HStack{ }
+    HStack { EmptyView() }
       .listRowBackground(theme.primaryBackgroundColor)
       .listRowSeparator(.hidden)
       .listRowInsets(.init())
       .frame(height: .layoutPadding)
       .id(Constants.scrollToTop)
+      .onAppear {
+        viewModel.scrollToTopVisible = true
+      }
+      .onDisappear {
+        viewModel.scrollToTopVisible = false
+      }
   }
 }

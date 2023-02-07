@@ -22,15 +22,10 @@ public class CurrentInstance: ObservableObject {
 
   public func setClient(client: Client) {
     self.client = client
-    Task {
-      await fetchCurrentInstance()
-    }
   }
 
   public func fetchCurrentInstance() async {
     guard let client = client else { return }
-    Task {
-      instance = try? await client.get(endpoint: Instances.instance)
-    }
+    instance = try? await client.get(endpoint: Instances.instance)
   }
 }

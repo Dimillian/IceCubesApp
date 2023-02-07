@@ -24,6 +24,14 @@
 "enum.avatar-position.top" = "Arriba";
 "enum.avatar-shape.circle" = "Círculo";
 "enum.avatar-shape.rounded" = "Redondeado";
+"enum.durations.infinite" = "infinite";
+"enum.durations.fiveMinutes" = "5 minutes";
+"enum.durations.thirtyMinutes" = "30 minutes";
+"enum.durations.oneHour" = "1 hour";
+"enum.durations.sixHours" = "6 hours";
+"enum.durations.oneDay" = "1 day";
+"enum.durations.threeDays" = "3 days";
+"enum.durations.sevenDays" = "7 days";
 "enum.status-actions-display.all" = "Todo";
 "enum.status-actions-display.no-buttons" = "Sin botones";
 "enum.status-actions-display.only-buttons" = "Sólo botones";
@@ -57,6 +65,7 @@
 "settings.app.icon.navigation-title" = "Iconos";
 "settings.app.source" = "Código fuente (Enlace a GitHub)";
 "settings.app.support" = "Apoya a Ice Cubes";
+"settings.app.about" = "About";
 "settings.display.avatar.position" = "Posición del avatar";
 "settings.display.avatar.shape" = "Forma del avatar";
 "settings.display.navigation-title" = "Ajustes de apariencia";
@@ -73,6 +82,7 @@
 "settings.display.theme.systemColor" = "Sistema de coincidencia";
 "settings.general.browser" = "Navegador";
 "settings.general.browser.in-app" = "Interno";
+"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
 "settings.general.browser.system" = "Sistema";
 "settings.general.display" = "Ajustes de apariencia";
 "settings.general.instance" = "Información de la instancia";
@@ -114,8 +124,10 @@
 "settings.general.content" = "Ajustes de contenido";
 "settings.system" = "Ajustes del sistema";
 "settings.content.navigation-title" = "Ajustes de contenido";
+"settings.content.boosts" = "Boosts";
+"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
+"settings.content.instance-settings" = "Server Content Settings";
 "settings.content.use-instance-settings" = "Usar ajustes del servidor";
-"settings.content.main-toggle.description" = "Usar ajustes de tu instancia inicial";
 "settings.content.expand-spoilers" = "Mostrar siempre el contenido sensible";
 "settings.content.expand-media" = "Mostrar el contenido multimedia";
 "settings.content.default-sensitive" = "Marcar siempre el contenido multimedia como sensible";
@@ -125,10 +137,24 @@
 "settings.push.duplicate.title" = "Arreglar notificaciones duplicadas";
 "settings.push.duplicate.footer" = "¿Recibes notificaciones por duplicado? Usa este botón mágico para arreglarlo";
 "settings.push.duplicate.button.fix" = "🪄 Arréglalo";
-"settings.other.autoplay-video" = "Tocar vídeos automáticamente";
-"settings.display.font" = "Timeline Font";
+"settings.other.autoplay-video" = "Reproducir vídeos automáticamente";
+"settings.display.font" = "Tipografía";
 "settings.display.font.system" = "De sistema";
 "settings.display.font.custom" = "Personalizada";
+"settings.display.font.scaling-%@" = "Escalado de tipografía: %@";
+"settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
+"settings.about.title" = "Ice Cubes";
+"settings.account.cached-posts-%@" = "Cached posts: %@";
+"settings.account.action.delete-cache" = "Clear cache";
+
+"settings.general.haptic" = "Haptic Feedback";
+"settings.haptic.navigation-title" = "Haptic Settings";
+"settings.haptic.timeline" = "Timeline";
+"settings.haptic.tab-selection" = "Tab Selection";
+"settings.haptic.buttons" = "Button Press";
+
+"settings.display.section.ipad" = "iPad";
+"settings.display.show-ipad-column" = "Enable secondary column";
 
 "enum.expand-media.show" = "Siempre";
 "enum.expand-media.hide" = "Nunca";
@@ -170,6 +196,7 @@
 "account.action.unblock" = "Desbloquear";
 "account.action.mute" = "Silenciar";
 "account.action.unmute" = "Dejar de silenciar";
+"account.action.share" = "Compartir esta cuenta";
 "account.boosted-by" = "Retooteado por";
 "account.detail.about" = "Acerca de";
 "account.detail.familiar-followers" = "Seguido también por";
@@ -285,10 +312,12 @@
 
 // MARK: Package: Timeline
 "timeline.federated" = "Federado";
+"timeline.latest" = "Jump to Latest";
 "timeline.home" = "Inicio";
 "timeline.local" = "Local";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld publicaciones recientes de %lld participantes";
 "timeline.trending" = "Tendencia";
+"timeline.add.url" = "Instance URL";
 
 // MARK: Package: Status
 "status.action.translate" = "Traducir";
@@ -313,6 +342,8 @@
 "status.action.unfavorite" = "Eliminar de favoritos";
 "status.action.unpin" = "Desfijar";
 "status.action.view-in-browser" = "Ver en navegador";
+"status.card.share" = "Compartir este enlace";
+"status.card.copy" = "Copiar este enlace";
 "status.draft.delete" = "Eliminar borrador";
 "status.draft.save" = "Guardar borrador";
 "status.editor.ai-prompt.correct" = "Corregir texto";

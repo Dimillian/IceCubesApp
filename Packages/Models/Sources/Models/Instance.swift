@@ -29,6 +29,10 @@ public struct Instance: Codable {
     public let text: String
   }
 
+  public struct URLs: Codable {
+    public let streamingApi: URL?
+  }
+
   public let title: String
   public let shortDescription: String
   public let email: String
@@ -39,4 +43,5 @@ public struct Instance: Codable {
   public let thumbnail: URL?
   public let configuration: Configuration?
   public let rules: [Rule]?
+  public let urls: URLs?
 }

@@ -21,6 +21,8 @@ let package = Package(
     .package(name: "Env", path: "../Env"),
     .package(name: "Status", path: "../Status"),
     .package(name: "DesignSystem", path: "../DesignSystem"),
+    .package(url: "https://github.com/siteline/SwiftUI-Introspect.git", from: "0.1.4"),
+    .package(url: "https://github.com/mergesort/Boutique", from: "2.1.1"),
   ],
   targets: [
     .target(
@@ -31,6 +33,8 @@ let package = Package(
         .product(name: "Env", package: "Env"),
         .product(name: "Status", package: "Status"),
         .product(name: "DesignSystem", package: "DesignSystem"),
+        .product(name: "Introspect", package: "SwiftUI-Introspect"),
+        .product(name: "Boutique", package: "Boutique"),
       ]
     ),
     .testTarget(

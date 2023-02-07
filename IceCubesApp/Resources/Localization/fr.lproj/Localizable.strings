@@ -24,6 +24,14 @@
 "enum.avatar-position.top" = "En haut";
 "enum.avatar-shape.circle" = "Rond";
 "enum.avatar-shape.rounded" = "Arrondi";
+"enum.durations.infinite" = "infinite";
+"enum.durations.fiveMinutes" = "5 minutes";
+"enum.durations.thirtyMinutes" = "30 minutes";
+"enum.durations.oneHour" = "1 hour";
+"enum.durations.sixHours" = "6 hours";
+"enum.durations.oneDay" = "1 day";
+"enum.durations.threeDays" = "3 days";
+"enum.durations.sevenDays" = "7 days";
 "enum.status-actions-display.all" = "Tout";
 "enum.status-actions-display.no-buttons" = "Pas de boutons";
 "enum.status-actions-display.only-buttons" = "Seulement les boutons";
@@ -57,6 +65,7 @@
 "settings.app.icon.navigation-title" = "Icônes";
 "settings.app.source" = "Source (lien GitHub)";
 "settings.app.support" = "Soutenir l'application";
+"settings.app.about" = "À propos";
 "settings.display.avatar.position" = "Position de l'avatar";
 "settings.display.avatar.shape" = "Forme de l'avatar";
 "settings.display.navigation-title" = "Paramètres d'affichage";
@@ -73,6 +82,7 @@
 "settings.display.theme.systemColor" = "Correspondre au système";
 "settings.general.browser" = "Navigateur";
 "settings.general.browser.in-app" = "Navigateur intégré";
+"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
 "settings.general.browser.system" = "Navigateur système";
 "settings.general.display" = "Paramètres d'affichage";
 "settings.general.instance" = "Information sur l'instance";
@@ -90,8 +100,10 @@
 "settings.general.content" = "Paramètres de contenu";
 "settings.system" = "Paramètres système";
 "settings.content.navigation-title" = "Paramètres de contenu";
+"settings.content.boosts" = "Boosts";
+"settings.content.hide-repeated-boosts" = "Masquer les boosts répétés";
+"settings.content.instance-settings" = "Réglages de contenu serveur";
 "settings.content.use-instance-settings" = "Utiliser les paramètres du serveur";
-"settings.content.main-toggle.description" = "Utiliser les paramètres de votre instance principale";
 "settings.content.expand-spoilers" = "Toujours afficher les messages sensibles";
 "settings.content.expand-media" = "Affichage des médias";
 "settings.content.default-sensitive" = "Toujours marquer les médias comme sensibles";
@@ -128,10 +140,24 @@
 "settings.push.duplicate.title" = "Correcteur de notifications en double";
 "settings.push.duplicate.footer" = "Recevez-vous des notifications en double ? Essayez ce bouton magique pour résoudre le problème";
 "settings.push.duplicate.button.fix" = "🪄 Résoudre";
-"settings.other.autoplay-video" = "Auto Play Videos";
-"settings.display.font" = "Timeline Font";
-"settings.display.font.system" = "System";
-"settings.display.font.custom" = "Custom";
+"settings.other.autoplay-video" = "Jouer automatiquement les vidéos";
+"settings.display.font" = "Police de la chronologie";
+"settings.display.font.system" = "Système";
+"settings.display.font.custom" = "Personnalisée";
+"settings.display.font.scaling-%@" = "Mise à l'échelle de la police: %@";
+"settings.about.built-with" = "Ice Cubes est développé avec les logiciels Open Source suivants :";
+"settings.about.title" = "Ice Cubes";
+"settings.account.cached-posts-%@" = "Publications en cache: %@";
+"settings.account.action.delete-cache" = "Effacer le cache";
+
+"settings.general.haptic" = "Retour vibrations";
+"settings.haptic.navigation-title" = "Réglages vibrations";
+"settings.haptic.timeline" = "Chronologie";
+"settings.haptic.tab-selection" = "Sélection d'onglet";
+"settings.haptic.buttons" = "Appui bouton";
+
+"settings.display.section.ipad" = "iPad";
+"settings.display.show-ipad-column" = "Enable secondary column";
 
 // MARK: Tabs
 "tab.explore" = "Explorer";
@@ -169,6 +195,7 @@
 "account.action.unblock" = "Débloquer";
 "account.action.mute" = "Rendre muet";
 "account.action.unmute" = "Annuler le mode muet";
+"account.action.share" = "Share this account";
 "account.boosted-by" = "Boosté par";
 "account.detail.about" = "À propos";
 "account.detail.familiar-followers" = "Aussi suivi par";
@@ -280,10 +307,12 @@
 
 // MARK: Package: Timeline
 "timeline.federated" = "Fédéré";
+"timeline.latest" = "Aller au plus récent";
 "timeline.home" = "Accueil";
 "timeline.local" = "Local";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld publications récentes de %lld participants";
 "timeline.trending" = "Tendances";
+"timeline.add.url" = "URL de l'instance";
 
 // MARK: Package: Status
 "status.action.translate" = "Traduire";
@@ -308,6 +337,8 @@
 "status.action.unfavorite" = "Retirer des favoris";
 "status.action.unpin" = "Dépingler";
 "status.action.view-in-browser" = "Afficher dans le navigateur";
+"status.card.share" = "Share this link";
+"status.card.copy" = "Copy this link";
 "status.draft.delete" = "Supprimer le brouillon";
 "status.draft.save" = "Enregistrer le brouillon";
 "status.editor.ai-prompt.correct" = "Corriger le texte";

@@ -27,8 +27,17 @@ public class StatusRowViewModel: ObservableObject {
   @Published var translation: String?
   @Published var isLoadingTranslation: Bool = false
 
+  @Published var favoriters: [Account] = []
+  @Published var rebloggers: [Account] = []
+  
+  var seen = false
+
   var filter: Filtered? {
     status.reblog?.filtered?.first ?? status.filtered?.first
+  }
+
+  var shouldHighlightRow: Bool {
+    status.uiShouldHighlight != nil
   }
 
   var client: Client?
@@ -61,6 +70,14 @@ public class StatusRowViewModel: ObservableObject {
     displaySpoiler = !(status.reblog?.spoilerText.asRawText ?? status.spoilerText.asRawText).isEmpty
 
     isFiltered = filter != nil
+  }
+
+  func markSeen() {
+    // called in on appear so we can cache that the status has been seen.
+    if UserPreferences.shared.suppressDupeReblogs && !seen {
+      ReblogCache.shared.cache(status, seen: true)
+      seen = true
+    }
   }
 
   func navigateToDetail(routerPath: RouterPath) {
@@ -235,6 +252,14 @@ public class StatusRowViewModel: ObservableObject {
     do {
       _ = try await client.delete(endpoint: Statuses.status(id: status.id))
     } catch {}
+  }
+  
+  func fetchActionsAccounts() async {
+    guard let client else { return }
+    do {
+      favoriters = try await client.get(endpoint: Statuses.favoritedBy(id: status.id, maxId: nil))
+      rebloggers = try await client.get(endpoint: Statuses.rebloggedBy(id: status.id, maxId: nil))
+    } catch { }
   }
 
   private func updateFromStatus(status: Status) {

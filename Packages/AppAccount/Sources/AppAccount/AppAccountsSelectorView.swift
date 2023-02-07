@@ -10,8 +10,6 @@ public struct AppAccountsSelectorView: View {
 
   @State private var accountsViewModel: [AppAccountViewModel] = []
 
-  let feedbackGenerator = UIImpactFeedbackGenerator()
-
   private let accountCreationEnabled: Bool
   private let avatarSize: AvatarView.Size
 
@@ -22,8 +20,6 @@ public struct AppAccountsSelectorView: View {
     self.routerPath = routerPath
     self.accountCreationEnabled = accountCreationEnabled
     self.avatarSize = avatarSize
-
-    feedbackGenerator.prepare()
   }
 
   public var body: some View {
@@ -42,7 +38,7 @@ public struct AppAccountsSelectorView: View {
       }
     }
     .onTapGesture {
-      feedbackGenerator.impactOccurred(intensity: 0.3)
+      HapticManager.shared.fireHaptic(of: .buttonPress)
     }
     .onAppear {
       refreshAccounts()
@@ -82,7 +78,7 @@ public struct AppAccountsSelectorView: View {
             appAccounts.currentAccount = viewModel.appAccount
           }
 
-          feedbackGenerator.impactOccurred(intensity: 0.7)
+          HapticManager.shared.fireHaptic(of: .buttonPress)
         } label: {
           HStack {
             if viewModel.account?.id == currentAccount.account?.id {
@@ -96,6 +92,7 @@ public struct AppAccountsSelectorView: View {
     if accountCreationEnabled {
       Divider()
       Button {
+        HapticManager.shared.fireHaptic(of: .buttonPress)
         routerPath.presentedSheet = .addAccount
       } label: {
         Label("app-account.button.add", systemImage: "person.badge.plus")
@@ -105,6 +102,7 @@ public struct AppAccountsSelectorView: View {
     if UIDevice.current.userInterfaceIdiom == .phone {
       Divider()
       Button {
+        HapticManager.shared.fireHaptic(of: .buttonPress)
         routerPath.presentedSheet = .settings
       } label: {
         Label("tab.settings", systemImage: "gear")

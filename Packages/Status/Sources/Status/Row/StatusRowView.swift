@@ -67,6 +67,7 @@ public struct StatusRowView: View {
         }
       }
       .onAppear {
+        viewModel.markSeen()
         if reasons.isEmpty {
           viewModel.client = client
           if !viewModel.isCompact, viewModel.embeddedStatus == nil {
@@ -81,6 +82,17 @@ public struct StatusRowView: View {
       }
       .contextMenu {
         contextMenu
+      }
+      .listRowBackground(viewModel.shouldHighlightRow ? theme.secondaryBackgroundColor : theme.primaryBackgroundColor)
+      .swipeActions(edge: .trailing) {
+        if !viewModel.isCompact {
+          trailinSwipeActions
+        }
+      }
+      .swipeActions(edge: .leading) {
+        if !viewModel.isCompact {
+          leadingSwipeActions
+        }
       }
       .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
       .accessibilityActions {
@@ -193,11 +205,10 @@ public struct StatusRowView: View {
             }
             .buttonStyle(.plain)
             Spacer()
-            menuButton
-              .accessibilityHidden(true)
+            threadIcon
           }
           .accessibilityElement()
-          .accessibilityLabel(Text("\(status.account.displayName), \(status.createdAt.relativeFormatted)"))
+          .accessibilityLabel(Text("\(status.account.displayName)"))
         }
         makeStatusContentView(status: status)
           .contentShape(Rectangle())
@@ -291,15 +302,15 @@ public struct StatusRowView: View {
     }
   }
 
-  private var menuButton: some View {
-    Menu {
-      contextMenu
-    } label: {
-      Image(systemName: "ellipsis")
-        .frame(width: 30, height: 30)
+  @ViewBuilder
+  private var threadIcon: some View {
+    if viewModel.status.reblog?.inReplyToAccountId != nil || viewModel.status.inReplyToAccountId != nil {
+      Image(systemName: "bubble.left.and.bubble.right")
+        .resizable()
+        .aspectRatio(contentMode: .fit)
+        .frame(width: 15)
+        .foregroundColor(.gray)
     }
-    .foregroundColor(.gray)
-    .contentShape(Rectangle())
   }
 
   @ViewBuilder
@@ -408,5 +419,46 @@ public struct StatusRowView: View {
     }
     .background(Color.black.opacity(0.40))
     .transition(.opacity)
+  }
+
+  @ViewBuilder
+  private var trailinSwipeActions: some View {
+    Button {
+      Task {
+        HapticManager.shared.fireHaptic(of: .notification(.success))
+        if viewModel.isFavorited {
+          await viewModel.unFavorite()
+        } else {
+          await viewModel.favorite()
+        }
+      }
+    } label: {
+      Image(systemName: "star")
+    }
+    .tint(.yellow)
+    Button {
+      Task {
+        HapticManager.shared.fireHaptic(of: .notification(.success))
+        if viewModel.isReblogged {
+          await viewModel.unReblog()
+        } else {
+          await viewModel.reblog()
+        }
+      }
+    } label: {
+      Image(systemName: "arrow.left.arrow.right.circle")
+    }
+    .tint(theme.tintColor)
+  }
+
+  @ViewBuilder
+  private var leadingSwipeActions: some View {
+    Button {
+      HapticManager.shared.fireHaptic(of: .notification(.success))
+      routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
+    } label: {
+      Image(systemName: "arrowshape.turn.up.left")
+    }
+    .tint(theme.tintColor)
   }
 }

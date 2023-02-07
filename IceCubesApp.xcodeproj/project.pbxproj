@@ -7,10 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		065FA1FE29866CD600012EA0 /* LRUCache in Frameworks */ = {isa = PBXBuildFile; productRef = 065FA1FD29866CD600012EA0 /* LRUCache */; };
+		065FA20A298675BA00012EA0 /* LRUCache in Frameworks */ = {isa = PBXBuildFile; productRef = 065FA209298675BA00012EA0 /* LRUCache */; };
+		069709A5298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 069709A3298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf */; };
+		069709A8298C87B5006E4CB5 /* OpenDyslexic-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 069709A7298C87B5006E4CB5 /* OpenDyslexic-Regular.otf */; };
+		069709AA298C9AD7006E4CB5 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069709A9298C9AD7006E4CB5 /* AboutView.swift */; };
 		639CDF9C296AC82F00C35E58 /* SafariRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639CDF9B296AC82F00C35E58 /* SafariRouter.swift */; };
 		7429BCE2297C55D00069A946 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7429BCE4297C55D00069A946 /* Localizable.stringsdict */; };
 		7429BCE5297C5A750069A946 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7429BCE4297C55D00069A946 /* Localizable.stringsdict */; };
 		7429BCE6297C5A750069A946 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7429BCE4297C55D00069A946 /* Localizable.stringsdict */; };
+		9F1E8B47298EBCBB00609F80 /* HapticSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1E8B46298EBCBB00609F80 /* HapticSettingsView.swift */; };
 		9F24EEB829360C330042359D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F24EEB729360C330042359D /* Preview Assets.xcassets */; };
 		9F295540292B6C3400E0E81B /* Timeline in Frameworks */ = {isa = PBXBuildFile; productRef = 9F29553F292B6C3400E0E81B /* Timeline */; };
 		9F2A540729699698009B2D7C /* SupportAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2A540629699698009B2D7C /* SupportAppView.swift */; };
@@ -126,6 +132,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		069709A3298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Atkinson-Hyperlegible-Regular-102.ttf"; sourceTree = "<group>"; };
+		069709A7298C87B5006E4CB5 /* OpenDyslexic-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenDyslexic-Regular.otf"; sourceTree = "<group>"; };
+		069709A9298C9AD7006E4CB5 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		56B5BC132984206F00CF3A98 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "pt-BR"; path = "pt-BR.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
 		56B5BC142984206F00CF3A98 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		639CDF9B296AC82F00C35E58 /* SafariRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariRouter.swift; sourceTree = "<group>"; };
@@ -139,6 +148,7 @@
 		8C27D978298471E900CDF593 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8C27D979298471E900CDF593 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9606B7A1297AD2BB00C1FB75 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9F1E8B46298EBCBB00609F80 /* HapticSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticSettingsView.swift; sourceTree = "<group>"; };
 		9F24EEB729360C330042359D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9F29553D292B67B600E0E81B /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Network; path = Packages/Network; sourceTree = "<group>"; };
 		9F29553E292B6AF600E0E81B /* Timeline */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Timeline; path = Packages/Timeline; sourceTree = "<group>"; };
@@ -206,6 +216,10 @@
 		9FE151A5293C90F900E9683D /* IconSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSelectorView.swift; sourceTree = "<group>"; };
 		9FE3DB55296FEF5800628CB0 /* AppAccount */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppAccount; path = Packages/AppAccount; sourceTree = "<group>"; };
 		C465A53D297C5E0C00864FB7 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C4CBB909298A0DA3007E1707 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "en-GB"; path = "en-GB.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
+		C4CBB90A298A0DA3007E1707 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C4CBB90B298A0DA3007E1707 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		C4FBCF6F298FD88A0015DF22 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C9B22676297F6C2E001F9EFE /* ContentSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSettingsView.swift; sourceTree = "<group>"; };
 		DD31E2E5297FB68B00A4BE29 /* IceCubesApp.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = IceCubesApp.xcconfig; sourceTree = "<group>"; };
 		E92817FD29844DB700875FD1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -218,9 +232,8 @@
 		E9DF420229830FEC0003AAD2 /* Action.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Action.js; sourceTree = "<group>"; };
 		E9DF420429830FEC0003AAD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F355EEDA297A8BD500E362C0 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
-		FF05602829864AD800ED3D66 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ko; path = ko.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
-		FF05602929864AD800ED3D66 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
-		FF05602A29864AD800ED3D66 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FF8259FB298E42E000BEAB69 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FF8259FC298E42E000BEAB69 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +259,7 @@
 				9FAD859C2974422700496AB1 /* AppAccount in Frameworks */,
 				9FAD859A297440CB00496AB1 /* KeychainSwift in Frameworks */,
 				9FAD85982974405D00496AB1 /* Status in Frameworks */,
+				065FA20A298675BA00012EA0 /* LRUCache in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +270,7 @@
 				9F7335EF29674F7100AFF0BA /* QuickLook.framework in Frameworks */,
 				9F7335ED2967463400AFF0BA /* AVKit.framework in Frameworks */,
 				9F2A540C29699705009B2D7C /* RevenueCat in Frameworks */,
+				065FA1FE29866CD600012EA0 /* LRUCache in Frameworks */,
 				9F2A540E2969A0B0009B2D7C /* StoreKit.framework in Frameworks */,
 				9F55C6902955993C00F94077 /* Explore in Frameworks */,
 				9FAE4ACE29379A5A00772766 /* KeychainSwift in Frameworks */,
@@ -321,6 +336,8 @@
 		9F398AB529360A6100A889F2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				069709A3298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf */,
+				069709A7298C87B5006E4CB5 /* OpenDyslexic-Regular.otf */,
 				9F2A542D296B1CC0009B2D7C /* glass.wav */,
 				9F2A542B296B1177009B2D7C /* glass.caf */,
 				9F24EEB729360C330042359D /* Preview Assets.xcassets */,
@@ -427,15 +444,17 @@
 		9FE151A4293C90EA00E9683D /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				9FAE4ACA293783B000772766 /* SettingsTab.swift */,
-				9FE151A5293C90F900E9683D /* IconSelectorView.swift */,
-				9F2B92F9295DA7D700DE16D0 /* AddAccountsView.swift */,
-				9F2B92FB295DA94500DE16D0 /* InstanceInfoView.swift */,
-				9F7335F82968576500AFF0BA /* DisplaySettingsView.swift */,
-				9F2A540629699698009B2D7C /* SupportAppView.swift */,
-				9F2A5410296A1429009B2D7C /* PushNotificationsView.swift */,
-				C9B22676297F6C2E001F9EFE /* ContentSettingsView.swift */,
+				069709A9298C9AD7006E4CB5 /* AboutView.swift */,
 				9F7D939929805DBD00EE6B7A /* AccountSettingView.swift */,
+				9F2B92F9295DA7D700DE16D0 /* AddAccountsView.swift */,
+				C9B22676297F6C2E001F9EFE /* ContentSettingsView.swift */,
+				9F7335F82968576500AFF0BA /* DisplaySettingsView.swift */,
+				9F1E8B46298EBCBB00609F80 /* HapticSettingsView.swift */,
+				9FE151A5293C90F900E9683D /* IconSelectorView.swift */,
+				9F2B92FB295DA94500DE16D0 /* InstanceInfoView.swift */,
+				9F2A5410296A1429009B2D7C /* PushNotificationsView.swift */,
+				9FAE4ACA293783B000772766 /* SettingsTab.swift */,
+				9F2A540629699698009B2D7C /* SupportAppView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -508,6 +527,7 @@
 				9FAD859F297456A100496AB1 /* Models */,
 				9FAD85A1297456A400496AB1 /* Env */,
 				9FAD85A3297456A800496AB1 /* DesignSystem */,
+				065FA209298675BA00012EA0 /* LRUCache */,
 			);
 			productName = IceCubesShareExtension;
 			productReference = 9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */;
@@ -545,6 +565,7 @@
 				9F2A540929699705009B2D7C /* ReceiptParser */,
 				9F2A540B29699705009B2D7C /* RevenueCat */,
 				9FE3DB56296FEFCA00628CB0 /* AppAccount */,
+				065FA1FD29866CD600012EA0 /* LRUCache */,
 			);
 			productName = IceCubesApp;
 			productReference = 9FBFE639292A715500C250E9 /* IceCubesApp.app */;
@@ -614,12 +635,14 @@
 				nb,
 				pl,
 				ca,
+				"en-GB",
 				ko,
 			);
 			mainGroup = 9FBFE630292A715500C250E9;
 			packageReferences = (
 				9FAE4ACC29379A5A00772766 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				9F2A540829699705009B2D7C /* XCRemoteSwiftPackageReference "purchases-ios" */,
+				065FA1FC29866CD600012EA0 /* XCRemoteSwiftPackageReference "LRUCache" */,
 			);
 			productRefGroup = 9FBFE63A292A715500C250E9 /* Products */;
 			projectDirPath = "";
@@ -659,11 +682,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				069709A5298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf in Resources */,
 				9F2A542C296B1177009B2D7C /* glass.caf in Resources */,
 				E9B576C329743F4C00BCE646 /* Localizable.strings in Resources */,
 				9FD34823293D06E800DB0EE9 /* Assets.xcassets in Resources */,
 				7429BCE2297C55D00069A946 /* Localizable.stringsdict in Resources */,
 				9F24EEB829360C330042359D /* Preview Assets.xcassets in Resources */,
+				069709A8298C87B5006E4CB5 /* OpenDyslexic-Regular.otf in Resources */,
 				9FAD85832971BF7200496AB1 /* Secret.plist in Resources */,
 				9F2A542E296B1CC0009B2D7C /* glass.wav in Resources */,
 			);
@@ -705,6 +730,7 @@
 			files = (
 				9FE151A6293C90F900E9683D /* IconSelectorView.swift in Sources */,
 				9F7D939A29805DBD00EE6B7A /* AccountSettingView.swift in Sources */,
+				069709AA298C9AD7006E4CB5 /* AboutView.swift in Sources */,
 				9F2B92FC295DA94500DE16D0 /* InstanceInfoView.swift in Sources */,
 				C9B22677297F6C2E001F9EFE /* ContentSettingsView.swift in Sources */,
 				9F35DB4C2952005C00B3281A /* MessagesTab.swift in Sources */,
@@ -722,6 +748,7 @@
 				9F35DB4729506F6600B3281A /* NotificationTab.swift in Sources */,
 				9F7335F22967608F00AFF0BA /* AddRemoteTimelineView.swift in Sources */,
 				9F55C68D2955968700F94077 /* ExploreTab.swift in Sources */,
+				9F1E8B47298EBCBB00609F80 /* HapticSettingsView.swift in Sources */,
 				9F2A5411296A1429009B2D7C /* PushNotificationsView.swift in Sources */,
 				9FAD85A8297582F100496AB1 /* QuickLookRepresentable.swift in Sources */,
 			);
@@ -774,7 +801,7 @@
 				8C27D977298471E900CDF593 /* nb */,
 				9FCBB3D02984EFD5009B77EE /* pl */,
 				9FCBB3D52985965D009B77EE /* ca */,
-				FF05602829864AD800ED3D66 /* ko */,
+				C4CBB909298A0DA3007E1707 /* en-GB */,
 			);
 			name = Localizable.stringsdict;
 			sourceTree = "<group>";
@@ -786,7 +813,9 @@
 				8C27D979298471E900CDF593 /* nb */,
 				9FCBB3D22984EFD5009B77EE /* pl */,
 				9FCBB3D429859615009B77EE /* ca */,
-				FF05602A29864AD800ED3D66 /* ko */,
+				C4CBB90B298A0DA3007E1707 /* en-GB */,
+				FF8259FC298E42E000BEAB69 /* ko */,
+				C4FBCF6F298FD88A0015DF22 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -807,7 +836,8 @@
 				8C27D978298471E900CDF593 /* nb */,
 				9FCBB3D12984EFD5009B77EE /* pl */,
 				9FCBB3D329859615009B77EE /* ca */,
-				FF05602929864AD800ED3D66 /* ko */,
+				C4CBB90A298A0DA3007E1707 /* en-GB */,
+				FF8259FB298E42E000BEAB69 /* ko */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -834,7 +864,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3.3;
+				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesNotifications";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -864,7 +894,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3.3;
+				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesNotifications";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -895,7 +925,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3.3;
+				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesShareExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -925,7 +955,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3.3;
+				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesShareExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1056,7 +1086,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconAlternate1 AppIconAlternate2 AppIconAlternate3 AppIconAlternate4 AppIconAlternate5 AppIconAlternate6 AppIconAlternate7 AppIconAlternate8 AppIconAlternate9 AppIconAlternate10 AppIconAlternate11 AppIconAlternate12 AppIconAlternate13 AppIconAlternate14 AppIconAlternate15 AppIconAlternate16 AppIconAlternate17 AppIconAlternate19 AppIconAlternate18 AppIconAlternate20 AppIconAlternate21 AppIconAlternate22 AppIconAlternate23 AppIconAlternate24 AppIconAlternate25";
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconAlternate1 AppIconAlternate2 AppIconAlternate3 AppIconAlternate4 AppIconAlternate5 AppIconAlternate6 AppIconAlternate7 AppIconAlternate8 AppIconAlternate9 AppIconAlternate10 AppIconAlternate11 AppIconAlternate12 AppIconAlternate13 AppIconAlternate14 AppIconAlternate15 AppIconAlternate16 AppIconAlternate17 AppIconAlternate19 AppIconAlternate18 AppIconAlternate20 AppIconAlternate21 AppIconAlternate22 AppIconAlternate23 AppIconAlternate24 AppIconAlternate25 AppIconAlternate26 AppIconAlternate27 AppIconAlternate28 AppIconAlternate29 AppIconAlternate30 AppIconAlternate31 AppIconAlternate32";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -1091,7 +1121,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.3.3;
+				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -1108,7 +1138,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconAlternate1 AppIconAlternate2 AppIconAlternate3 AppIconAlternate4 AppIconAlternate5 AppIconAlternate6 AppIconAlternate7 AppIconAlternate8 AppIconAlternate9 AppIconAlternate10 AppIconAlternate11 AppIconAlternate12 AppIconAlternate13 AppIconAlternate14 AppIconAlternate15 AppIconAlternate16 AppIconAlternate17 AppIconAlternate19 AppIconAlternate18 AppIconAlternate20 AppIconAlternate21 AppIconAlternate22 AppIconAlternate23 AppIconAlternate24 AppIconAlternate25";
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconAlternate1 AppIconAlternate2 AppIconAlternate3 AppIconAlternate4 AppIconAlternate5 AppIconAlternate6 AppIconAlternate7 AppIconAlternate8 AppIconAlternate9 AppIconAlternate10 AppIconAlternate11 AppIconAlternate12 AppIconAlternate13 AppIconAlternate14 AppIconAlternate15 AppIconAlternate16 AppIconAlternate17 AppIconAlternate19 AppIconAlternate18 AppIconAlternate20 AppIconAlternate21 AppIconAlternate22 AppIconAlternate23 AppIconAlternate24 AppIconAlternate25 AppIconAlternate26 AppIconAlternate27 AppIconAlternate28 AppIconAlternate29 AppIconAlternate30 AppIconAlternate31 AppIconAlternate32";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -1143,7 +1173,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.3.3;
+				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -1176,7 +1206,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3.3;
+				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesActionExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1207,7 +1237,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3.3;
+				MARKETING_VERSION = 1.4.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesActionExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1270,6 +1300,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		065FA1FC29866CD600012EA0 /* XCRemoteSwiftPackageReference "LRUCache" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/nicklockwood/LRUCache";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		9F2A540829699705009B2D7C /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
@@ -1289,6 +1327,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		065FA1FD29866CD600012EA0 /* LRUCache */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 065FA1FC29866CD600012EA0 /* XCRemoteSwiftPackageReference "LRUCache" */;
+			productName = LRUCache;
+		};
+		065FA209298675BA00012EA0 /* LRUCache */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 065FA1FC29866CD600012EA0 /* XCRemoteSwiftPackageReference "LRUCache" */;
+			productName = LRUCache;
+		};
 		9F29553F292B6C3400E0E81B /* Timeline */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Timeline;

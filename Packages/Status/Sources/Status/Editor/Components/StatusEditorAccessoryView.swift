@@ -175,7 +175,7 @@ struct StatusEditorAccessoryView: View {
     }
   }
 
-  private func languageSheetSection(languages: [Language]) -> some View {
+  private func languageSheetSection(languages: [StatusEditorLanguage]) -> some View {
     ForEach(languages) { language in
       HStack {
         languageTextView(
@@ -267,38 +267,18 @@ struct StatusEditorAccessoryView: View {
       .font(.scaledCallout)
   }
 
-  private struct Language: Identifiable, Equatable {
-    var id: String { isoCode }
-
-    let isoCode: String
-    let nativeName: String?
-    let localizedName: String?
-  }
-
-  private let allAvailableLanguages: [Language] =
-    Locale.LanguageCode.isoLanguageCodes
-      .filter { $0.identifier.count == 2 } // Mastodon only supports ISO 639-1 (two-letter) codes
-      .map { lang in
-        let nativeLocale = Locale(languageComponents: Locale.Language.Components(languageCode: lang))
-        return Language(
-          isoCode: lang.identifier,
-          nativeName: nativeLocale.localizedString(forLanguageCode: lang.identifier)?.capitalized,
-          localizedName: Locale.current.localizedString(forLanguageCode: lang.identifier)?.localizedCapitalized
-        )
-      }
-
-  private var recentlyUsedLanguages: [Language] {
+  private var recentlyUsedLanguages: [StatusEditorLanguage] {
     preferences.recentlyUsedLanguages.compactMap { isoCode in
-      allAvailableLanguages.first { $0.isoCode == isoCode }
+      StatusEditorLanguage.allAvailableLanguages.first { $0.isoCode == isoCode }
     }
   }
 
-  private var otherLanguages: [Language] {
-    allAvailableLanguages.filter { !preferences.recentlyUsedLanguages.contains($0.isoCode) }
+  private var otherLanguages: [StatusEditorLanguage] {
+    StatusEditorLanguage.allAvailableLanguages.filter { !preferences.recentlyUsedLanguages.contains($0.isoCode) }
   }
 
-  private func languageSearchResult(query: String) -> [Language] {
-    allAvailableLanguages.filter { language in
+  private func languageSearchResult(query: String) -> [StatusEditorLanguage] {
+    StatusEditorLanguage.allAvailableLanguages.filter { language in
       guard !languageSearch.isEmpty else {
         return true
       }

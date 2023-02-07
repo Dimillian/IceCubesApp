@@ -29,8 +29,6 @@ struct IceCubesApp: App {
   @State private var popToRootTab: Tab = .other
   @State private var sideBarLoadedTabs: Set<Tab> = Set()
 
-  private let feedbackGenerator = UISelectionFeedbackGenerator()
-
   private var availableTabs: [Tab] {
     appAccountsManager.currentClient.isAuth ? Tab.loggedInTabs() : Tab.loggedOutTab()
   }
@@ -116,7 +114,8 @@ struct IceCubesApp: App {
             }
           }
           if proxy.frame(in: .global).width > (.maxColumnWidth + .secondaryColumnWidth),
-             appAccountsManager.currentClient.isAuth
+             appAccountsManager.currentClient.isAuth,
+             userPreferences.showiPadSecondaryColumn
           {
             Divider().edgesIgnoringSafeArea(.all)
             NotificationsTab(popToRootTab: $popToRootTab, lockedType: nil)
@@ -142,7 +141,7 @@ struct IceCubesApp: App {
         }
       }
       selectedTab = newTab
-      feedbackGenerator.selectionChanged()
+      HapticManager.shared.fireHaptic(of: .tabSelection)
     })) {
       ForEach(availableTabs) { tab in
         tab.makeContentView(popToRootTab: $popToRootTab)
@@ -154,29 +153,30 @@ struct IceCubesApp: App {
           .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .tabBar)
       }
     }
+    .id(appAccountsManager.currentClient.id)
   }
 
   private func setNewClientsInEnv(client: Client) {
     currentAccount.setClient(client: client)
     currentInstance.setClient(client: client)
     userPreferences.setClient(client: client)
-    watcher.setClient(client: client)
+    Task {
+      await currentInstance.fetchCurrentInstance()
+      watcher.setClient(client: client, instanceStreamingURL: currentInstance.instance?.urls?.streamingApi)
+      watcher.watch(streams: [.user, .direct])
+    }
   }
 
   private func handleScenePhase(scenePhase: ScenePhase) {
     switch scenePhase {
     case .background:
-      if !ProcessInfo.processInfo.isiOSAppOnMac {
-        watcher.stopWatching()
-      }
+      watcher.stopWatching()
     case .active:
       watcher.watch(streams: [.user, .direct])
       UIApplication.shared.applicationIconBadgeNumber = 0
       Task {
         await userPreferences.refreshServerPreferences()
       }
-    case .inactive:
-      break
     default:
       break
     }

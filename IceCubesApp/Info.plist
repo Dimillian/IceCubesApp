@@ -21,5 +21,10 @@
 	<array>
 		<string>remote-notification</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Atkinson-Hyperlegible-Regular-102.ttf</string>
+		<string>OpenDyslexic-Regular.otf</string>
+	</array>
 </dict>
 </plist>

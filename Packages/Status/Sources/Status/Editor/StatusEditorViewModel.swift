@@ -1,6 +1,7 @@
 import DesignSystem
 import Env
 import Models
+import NaturalLanguage
 import Network
 import PhotosUI
 import SwiftUI
@@ -8,13 +9,34 @@ import SwiftUI
 @MainActor
 public class StatusEditorViewModel: ObservableObject {
   var mode: Mode
-  let generator = UINotificationFeedbackGenerator()
 
   var client: Client?
   var currentAccount: Account?
   var theme: Theme?
   var preferences: UserPreferences?
 
+  var textView: UITextView?
+  var selectedRange: NSRange {
+    get {
+      guard let textView else {
+        return .init(location: 0, length: 0)
+      }
+      return textView.selectedRange
+    }
+    set {
+      textView?.selectedRange = newValue
+    }
+  }
+  
+  var markedTextRange: UITextRange? {
+    get {
+      guard let textView else {
+        return nil
+      }
+      return textView.markedTextRange
+    }
+  }
+  
   @Published var statusText = NSMutableAttributedString(string: "") {
     didSet {
       processText()
@@ -42,9 +64,6 @@ public class StatusEditorViewModel: ObservableObject {
 
   @Published var spoilerOn: Bool = false
   @Published var spoilerText: String = ""
-
-  @Published var selectedRange: NSRange = .init(location: 0, length: 0)
-  @Published var markedTextRange: UITextRange? = nil
 
   @Published var isPosting: Bool = false
   @Published var selectedMedias: [PhotosPickerItem] = [] {
@@ -107,7 +126,7 @@ public class StatusEditorViewModel: ObservableObject {
 
   func setInitialLanguageSelection(preference: String?) {
     switch mode {
-    case let .replyTo(status), let .edit(status):
+    case let .edit(status):
       selectedLanguage = status.language
     default:
       break
@@ -127,6 +146,21 @@ public class StatusEditorViewModel: ObservableObject {
                          multiple: pollVotingFrequency.canVoteMultipleTimes,
                          expires_in: pollDuration.rawValue)
       }
+
+      if !hasExplicitlySelectedLanguage {
+        // Attempt language resolution using Natural Language
+        let recognizer = NLLanguageRecognizer()
+        recognizer.processString(statusText.string)
+        // Use languageHypotheses to get the probability with it
+        let hypotheses = recognizer.languageHypotheses(withMaximum: 1)
+        // Assert that 85% probability is enough :)
+        // A one word toot that is en/fr compatible is only ~50% confident, for instance
+        if let (language, probability) = hypotheses.first, probability > 0.85 {
+          // rawValue return the IETF BCP 47 language tag
+          selectedLanguage = language.rawValue
+        }
+      }
+
       let data = StatusData(status: statusText.string,
                             visibility: visibility,
                             inReplyToId: mode.replyToStatus?.id,
@@ -140,7 +174,7 @@ public class StatusEditorViewModel: ObservableObject {
       case let .edit(status):
         postStatus = try await client.put(endpoint: Statuses.editStatus(id: status.id, json: data))
       }
-      generator.notificationOccurred(.success)
+      HapticManager.shared.fireHaptic(of: .notification(.success))
       if hasExplicitlySelectedLanguage, let selectedLanguage {
         preferences?.markLanguageAsSelected(isoCode: selectedLanguage)
       }
@@ -152,7 +186,7 @@ public class StatusEditorViewModel: ObservableObject {
         showPostingErrorAlert = true
       }
       isPosting = false
-      generator.notificationOccurred(.error)
+      HapticManager.shared.fireHaptic(of: .notification(.error))
       return nil
     }
   }
@@ -164,7 +198,6 @@ public class StatusEditorViewModel: ObservableObject {
     string.mutableString.insert(text, at: selectedRange.location)
     statusText = string
     selectedRange = NSRange(location: selectedRange.location + text.utf16.count, length: 0)
-    markedTextRange = nil
   }
 
   func replaceTextWith(text: String, inRange: NSRange) {
@@ -173,13 +206,11 @@ public class StatusEditorViewModel: ObservableObject {
     string.mutableString.insert(text, at: inRange.location)
     statusText = string
     selectedRange = NSRange(location: inRange.location + text.utf16.count, length: 0)
-    markedTextRange = nil
   }
 
   func replaceTextWith(text: String) {
     statusText = .init(string: text)
     selectedRange = .init(location: text.utf16.count, length: 0)
-    markedTextRange = nil
   }
 
   func prepareStatusText() {
@@ -201,29 +232,30 @@ public class StatusEditorViewModel: ObservableObject {
         mentionString += "@\(mention.acct)"
       }
       if !mentionString.isEmpty {
-          mentionString += " "
+        mentionString += " "
       }
       replyToStatus = status
       visibility = status.visibility
       statusText = .init(string: mentionString)
       selectedRange = .init(location: mentionString.utf16.count, length: 0)
-      markedTextRange = nil
       if !mentionString.isEmpty {
         self.mentionString = mentionString.trimmingCharacters(in: .whitespaces)
+      }
+      if !status.spoilerText.asRawText.isEmpty {
+        spoilerOn = true
+        spoilerText = status.spoilerText.asRawText
       }
     case let .mention(account, visibility):
       statusText = .init(string: "@\(account.acct) ")
       self.visibility = visibility
       selectedRange = .init(location: statusText.string.utf16.count, length: 0)
-      markedTextRange = nil
     case let .edit(status):
-      var rawText = NSAttributedString(status.content.asSafeMarkdownAttributedString).string
+      var rawText = status.content.asRawText
       for mention in status.mentions {
         rawText = rawText.replacingOccurrences(of: "@\(mention.username)", with: "@\(mention.acct)")
       }
       statusText = .init(string: rawText)
       selectedRange = .init(location: statusText.string.utf16.count, length: 0)
-      markedTextRange = nil
       spoilerOn = !status.spoilerText.asRawText.isEmpty
       spoilerText = status.spoilerText.asRawText
       visibility = status.visibility
@@ -236,7 +268,6 @@ public class StatusEditorViewModel: ObservableObject {
       if let url = embeddedStatusURL {
         statusText = .init(string: "\n\nFrom: @\(status.reblog?.account.acct ?? status.account.acct)\n\(url)")
         selectedRange = .init(location: 0, length: 0)
-        markedTextRange = nil
       }
     }
   }
@@ -353,7 +384,6 @@ public class StatusEditorViewModel: ObservableObject {
       if !initialText.isEmpty {
         statusText = .init(string: initialText)
         selectedRange = .init(location: statusText.string.utf16.count, length: 0)
-        markedTextRange = nil
       }
       if !mediasImages.isEmpty {
         processMediasToUpload()

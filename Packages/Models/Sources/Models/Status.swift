@@ -54,10 +54,16 @@ public protocol AnyStatus {
   var language: String? { get }
 }
 
-public struct Status: AnyStatus, Decodable, Identifiable, Equatable, Hashable {
+protocol StatusUI {
+  var uiShouldHighlight: Bool? { get set }
+}
+
+public struct Status: AnyStatus, Codable, Identifiable, Equatable, Hashable, StatusUI {
   public var viewId: String {
     id + createdAt + (editedAt ?? "")
   }
+
+  public var uiShouldHighlight: Bool?
 
   public static func == (lhs: Status, rhs: Status) -> Bool {
     lhs.id == rhs.id
@@ -128,7 +134,7 @@ public struct Status: AnyStatus, Decodable, Identifiable, Equatable, Hashable {
   }
 }
 
-public struct ReblogStatus: AnyStatus, Decodable, Identifiable, Equatable, Hashable {
+public struct ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Hashable {
   public var viewId: String {
     id + createdAt + (editedAt ?? "")
   }

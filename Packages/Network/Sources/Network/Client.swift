@@ -2,7 +2,7 @@ import Foundation
 import Models
 import SwiftUI
 
-public class Client: ObservableObject, Equatable, Identifiable {
+public class Client: ObservableObject, Equatable, Identifiable, Hashable {
   public static func == (lhs: Client, rhs: Client) -> Bool {
     lhs.isAuth == rhs.isAuth &&
       lhs.server == rhs.server &&
@@ -17,9 +17,13 @@ public class Client: ObservableObject, Equatable, Identifiable {
     case missingApp
     case invalidRedirectURL
   }
-  
+
   public var id: String {
-    "\(isAuth)\(server)\(oauthToken?.accessToken ?? "")"
+    "\(isAuth)\(server)\(oauthToken?.createdAt ?? 0)"
+  }
+
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(id)
   }
 
   public var server: String
@@ -63,10 +67,14 @@ public class Client: ObservableObject, Equatable, Identifiable {
     }
   }
 
-  private func makeURL(scheme: String = "https", endpoint: Endpoint, forceVersion: Version? = nil) -> URL {
+  private func makeURL(scheme: String = "https",
+                       endpoint: Endpoint,
+                       forceVersion: Version? = nil,
+                       forceServer: String? = nil) -> URL
+  {
     var components = URLComponents()
     components.scheme = scheme
-    components.host = server
+    components.host = forceServer ?? server
     if type(of: endpoint) == Oauth.self {
       components.path += "/\(endpoint.path())"
     } else {
@@ -186,8 +194,8 @@ public class Client: ObservableObject, Equatable, Identifiable {
     return token
   }
 
-  public func makeWebSocketTask(endpoint: Endpoint) -> URLSessionWebSocketTask {
-    let url = makeURL(scheme: "wss", endpoint: endpoint)
+  public func makeWebSocketTask(endpoint: Endpoint, instanceStreamingURL: URL?) -> URLSessionWebSocketTask {
+    let url = makeURL(scheme: "wss", endpoint: endpoint, forceServer: instanceStreamingURL?.host)
     let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: "GET")
     return urlSession.webSocketTask(with: request)
   }

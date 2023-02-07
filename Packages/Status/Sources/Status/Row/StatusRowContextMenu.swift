@@ -8,8 +8,6 @@ struct StatusRowContextMenu: View {
   @EnvironmentObject private var currentInstance: CurrentInstance
   @EnvironmentObject private var routerPath: RouterPath
 
-  @Environment(\.openURL) var openURL
-
   @ObservedObject var viewModel: StatusRowViewModel
 
   var body: some View {
@@ -72,22 +70,21 @@ struct StatusRowContextMenu: View {
     }
 
     Button {
-      UIPasteboard.general.string = viewModel.status.content.asRawText
+      UIPasteboard.general.string = viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText
     } label: {
       Label("status.action.copy-text", systemImage: "doc.on.doc")
     }
 
     if let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier,
-       viewModel.status.language != lang
+       let statusLanguage = viewModel.status.reblog?.language ?? viewModel.status.language,
+       statusLanguage != lang
     {
       Button {
         Task {
           await viewModel.translate(userLang: lang)
         }
       } label: {
-        if let statusLanguage = viewModel.status.language,
-           let languageName = Locale.current.localizedString(forLanguageCode: statusLanguage)
-        {
+        if let languageName = Locale.current.localizedString(forLanguageCode: statusLanguage) {
           Label("status.action.translate-from-\(languageName)", systemImage: "captions.bubble")
         } else {
           Label("status.action.translate", systemImage: "captions.bubble")

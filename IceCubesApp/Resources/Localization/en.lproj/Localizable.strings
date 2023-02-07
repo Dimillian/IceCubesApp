@@ -24,6 +24,14 @@
 "enum.avatar-position.top" = "Top";
 "enum.avatar-shape.circle" = "Circle";
 "enum.avatar-shape.rounded" = "Rounded";
+"enum.durations.infinite" = "infinite";
+"enum.durations.fiveMinutes" = "5 minutes";
+"enum.durations.thirtyMinutes" = "30 minutes";
+"enum.durations.oneHour" = "1 hour";
+"enum.durations.sixHours" = "6 hours";
+"enum.durations.oneDay" = "1 day";
+"enum.durations.threeDays" = "3 days";
+"enum.durations.sevenDays" = "7 days";
 "enum.status-actions-display.all" = "All";
 "enum.status-actions-display.no-buttons" = "No buttons";
 "enum.status-actions-display.only-buttons" = "Only buttons";
@@ -57,9 +65,11 @@
 "settings.app.icon.navigation-title" = "Icons";
 "settings.app.source" = "Source (GitHub link)";
 "settings.app.support" = "Support the app";
+"settings.app.about" = "About";
 "settings.display.font" = "Timeline Font";
 "settings.display.font.system" = "System";
 "settings.display.font.custom" = "Custom";
+"settings.display.font.scaling-%@" = "Font scaling: %@";
 "settings.display.avatar.position" = "Avatar position";
 "settings.display.avatar.shape" = "Avatar shape";
 "settings.display.navigation-title" = "Display Settings";
@@ -76,6 +86,7 @@
 "settings.display.theme.systemColor" = "Match System";
 "settings.general.browser" = "Browser";
 "settings.general.browser.in-app" = "In-App Browser";
+"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
 "settings.general.browser.system" = "System Browser";
 "settings.general.display" = "Display Settings";
 "settings.general.instance" = "Instance Information";
@@ -93,8 +104,10 @@
 "settings.general.content" = "Content Settings";
 "settings.system" = "System Settings";
 "settings.content.navigation-title" = "Content Settings";
+"settings.content.boosts" = "Boosts";
+"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
+"settings.content.instance-settings" = "Server Content Settings";
 "settings.content.use-instance-settings" = "Use server settings";
-"settings.content.main-toggle.description" = "Use the settings from your home Instance";
 "settings.content.expand-spoilers" = "Always show sensitive posts";
 "settings.content.expand-media" = "Media display";
 "settings.content.default-sensitive" = "Always mark media as sensitive";
@@ -132,6 +145,20 @@
 "settings.push.duplicate.footer" = "Receiving duplicate notifications? Try this magic button in order to fix it";
 "settings.push.duplicate.button.fix" = "🪄 Fix it";
 "settings.other.autoplay-video" = "Auto Play Videos";
+"settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
+"settings.about.title" = "Ice Cubes";
+
+"settings.account.cached-posts-%@" = "Cached posts: %@";
+"settings.account.action.delete-cache" = "Clear cache";
+
+"settings.general.haptic" = "Haptic Feedback";
+"settings.haptic.navigation-title" = "Haptic Settings";
+"settings.haptic.timeline" = "Timeline";
+"settings.haptic.tab-selection" = "Tab Selection";
+"settings.haptic.buttons" = "Button Press";
+
+"settings.display.section.ipad" = "iPad";
+"settings.display.show-ipad-column" = "Enable secondary column";
 
 // MARK: Tabs
 "tab.explore" = "Explore";
@@ -169,6 +196,7 @@
 "account.action.unblock" = "Unblock";
 "account.action.mute" = "Mute";
 "account.action.unmute" = "Unmute";
+"account.action.share" = "Share this account";
 "account.boosted-by" = "Boosted by";
 "account.detail.about" = "About";
 "account.detail.familiar-followers" = "Also followed by";
@@ -205,7 +233,7 @@
 "account.posts" = "Posts";
 "account.relation.follows-you" = "Follows You";
 "account.joined" = "Joined";
-"account.action.logout" = "Logout account";
+"account.action.logout" = "Log out account";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Delete";
@@ -284,10 +312,12 @@
 
 // MARK: Package: Timeline
 "timeline.federated" = "Federated";
+"timeline.latest" = "Jump to Latest";
 "timeline.home" = "Home";
 "timeline.local" = "Local";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld recent posts from %lld participants";
 "timeline.trending" = "Trending";
+"timeline.add.url" = "Instance URL";
 
 // MARK: Package: Status
 "status.action.translate" = "Translate";
@@ -312,6 +342,8 @@
 "status.action.unfavorite" = "Unfavorite";
 "status.action.unpin" = "Unpin";
 "status.action.view-in-browser" = "View in Browser";
+"status.card.share" = "Share this link";
+"status.card.copy" = "Copy this link";
 "status.draft.delete" = "Delete Draft";
 "status.draft.save" = "Save Draft";
 "status.editor.ai-prompt.correct" = "Correct text";

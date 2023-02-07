@@ -23,6 +23,14 @@
 "enum.avatar-position.top" = "Dalt";
 "enum.avatar-shape.circle" = "Cercle";
 "enum.avatar-shape.rounded" = "Arrodonida";
+"enum.durations.infinite" = "infinite";
+"enum.durations.fiveMinutes" = "5 minutes";
+"enum.durations.thirtyMinutes" = "30 minutes";
+"enum.durations.oneHour" = "1 hour";
+"enum.durations.sixHours" = "6 hours";
+"enum.durations.oneDay" = "1 day";
+"enum.durations.threeDays" = "3 days";
+"enum.durations.sevenDays" = "7 days";
 "enum.status-actions-display.all" = "Tots";
 "enum.status-actions-display.no-buttons" = "Sense botons";
 "enum.status-actions-display.only-buttons" = "Només els botons";
@@ -56,6 +64,7 @@
 "settings.app.icon.navigation-title" = "Icones";
 "settings.app.source" = "Font (enllaç a GitHub)";
 "settings.app.support" = "Dona suport a l'aplicació";
+"settings.app.about" = "About";
 "settings.display.avatar.position" = "Posició de les fotos de perfil";
 "settings.display.avatar.shape" = "Forma de les fotos de perfil";
 "settings.display.navigation-title" = "Configuració de l'aparença";
@@ -73,6 +82,7 @@
 "settings.general.browser" = "Navegador";
 "settings.general.browser.in-app" = "Navegador integrat";
 "settings.general.browser.system" = "Navegador del sistema";
+"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
 "settings.general.display" = "Configuració d'aparença";
 "settings.general.instance" = "Informació de la instància";
 "settings.general.push-notifications" = "Notificacions emergents";
@@ -90,7 +100,9 @@
 "settings.system" = "Configuració del sistema";
 "settings.content.navigation-title" = "Configuració del contacte";
 "settings.content.use-instance-settings" = "Utilitza la configuració del servidor";
-"settings.content.main-toggle.description" = "Utilitzeu la configuració de la vostra instància d'inici";
+"settings.content.boosts" = "Impulsos";
+"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
+"settings.content.instance-settings" = "Server Content Settings";
 "settings.content.expand-spoilers" = "Mostra'm sempre els espòilers";
 "settings.content.expand-media" = "Visibilitat del contingut multimèdia";
 "settings.content.default-sensitive" = "Marca sempre el contingut com a sensible";
@@ -127,10 +139,24 @@
 "settings.push.duplicate.title" = "Solucionador de notificacions duplicades";
 "settings.push.duplicate.footer" = "Rebeu les notificacions duplicades? Proveu aquest botó màgic per a solucionar-ho";
 "settings.push.duplicate.button.fix" = "🪄 Soluciona-ho";
-"settings.other.autoplay-video" = "Auto Play Videos";
-"settings.display.font" = "Timeline Font";
-"settings.display.font.system" = "System";
-"settings.display.font.custom" = "Custom";
+"settings.other.autoplay-video" = "Reprodueix els vídeos automàticament";
+"settings.display.font" = "Tipografia de la línia de temps";
+"settings.display.font.system" = "Sistema";
+"settings.display.font.custom" = "Personalitzada";
+"settings.display.font.scaling-%@" = "Escalat de la lletra: %@";
+"settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
+"settings.about.title" = "Ice Cubes";
+"settings.account.cached-posts-%@" = "Cached posts: %@";
+"settings.account.action.delete-cache" = "Clear cache";
+
+"settings.general.haptic" = "Haptic Feedback";
+"settings.haptic.navigation-title" = "Haptic Settings";
+"settings.haptic.timeline" = "Timeline";
+"settings.haptic.tab-selection" = "Tab Selection";
+"settings.haptic.buttons" = "Button Press";
+
+"settings.display.section.ipad" = "iPad";
+"settings.display.show-ipad-column" = "Enable secondary column";
 
 // MARK: Tabs
 "tab.explore" = "Exploreu";
@@ -168,6 +194,7 @@
 "account.action.unblock" = "Desbloca";
 "account.action.mute" = "Silencia";
 "account.action.unmute" = "Deixa de silenciar";
+"account.action.share" = "Share this account";
 "account.boosted-by" = "Impulsat per";
 "account.detail.about" = "Quant a";
 "account.detail.familiar-followers" = "També seguit per";
@@ -257,7 +284,7 @@
 "lists.name.message" = "Introduïu el nom de la llista";
 
 // MARK: Package: Notifications
-"notificacions.buit.message" = "Notificacions? Quines notificacions? La safata d'entrada de notificacions està molt buida. Continua sent així d'increïble! 📱😎";
+"notifications.buit.message" = "Notificacions? Quines notificacions? La safata d'entrada de notificacions està buida. Continua sent així d'increïble! 📱😎";
 "notifications.empty.title" = "No hi ha notificacions";
 "notifications.error.message" = "S'ha produït un error en carregar les notificacions, torneu-ho a provar.";
 "notifications.error.title" = "S'ha produït un error";
@@ -269,24 +296,26 @@
 "notifications.label.follow-request" = "ha sol·licitat seguir-vos";
 "notifications.label.status" = "ha fet una publicació";
 "notifications.label.update" = "ha editat una publicació";
-"notifications.menu-title.favorite" = "Preferit";
-"notifications.menu-title.follow" = "Seguiment";
-"notifications.menu-title.follow-request" = "Sol·licitud de seguiment";
-"notifications.menu-title.mention" = "Menció";
-"notifications.menu-title.poll" = "Poll";
-"notifications.menu-title.reblog" = "Impuls";
-"notifications.menu-title.status" = "Publicació";
-"notifications.menu-title.update" = "Publicació editada";
+"notifications.menu-title.favorite" = "Preferits";
+"notifications.menu-title.follow" = "Seguiments";
+"notifications.menu-title.follow-request" = "Sol·licituds de seguiment";
+"notifications.menu-title.mention" = "Mencions";
+"notifications.menu-title.poll" = "Enquestes";
+"notifications.menu-title.reblog" = "Impulsos";
+"notifications.menu-title.status" = "Publicacions";
+"notifications.menu-title.update" = "Edicions de publicacions";
 "notifications.navigation-title" = "Totes les notificacions";
 "notifications.tab.all" = "Totes";
 "notifications.tab.mentions" = "Mencions";
 
 // MARK: Package: Timeline
 "timeline.federated" = "Federada";
+"timeline.latest" = "Jump to Latest";
 "timeline.home" = "Inici";
 "timeline.local" = "Local";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld publicació recents de %lld participants";
 "timeline.trending" = "Tendència";
+"timeline.add.url" = "Instance URL";
 
 // MARK: Package: Status
 "status.action.translate" = "Tradueix";
@@ -311,6 +340,8 @@
 "status.action.unfavorite" = "Desfés el preferit";
 "status.action.unpin" = "Deixa de fixar";
 "status.action.view-in-browser" = "Mostra al navegador";
+"status.card.share" = "Share this link";
+"status.card.copy" = "Copy this link";
 "status.draft.delete" = "Elimina l'esborrany";
 "status.draft.save" = "Desa l'esborrany";
 "status.editor.ai-prompt.correct" = "Corregeix el text";

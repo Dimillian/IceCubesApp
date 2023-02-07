@@ -28,6 +28,16 @@ public class UserPreferences: ObservableObject {
   @AppStorage("autoplay_video") public var autoPlayVideo = true
   @AppStorage("chosen_font") public private(set) var chosenFontData: Data?
 
+  @AppStorage("suppress_dupe_reblogs") public var suppressDupeReblogs: Bool = false
+
+  @AppStorage("inAppBrowserReaderView") public var inAppBrowserReaderView = false
+  
+  @AppStorage("haptic_tab") public var hapticTabSelectionEnabled = true
+  @AppStorage("haptic_timeline") public var hapticTimelineEnabled = true
+  @AppStorage("haptic_button_press") public var hapticButtonPressEnabled = true
+  
+  @AppStorage("show_second_column_ipad") public var showiPadSecondaryColumn = true
+
   public var postVisibility: Models.Visibility {
     if useInstanceContentSettings {
       return serverPreferences?.postVisibility ?? .pub

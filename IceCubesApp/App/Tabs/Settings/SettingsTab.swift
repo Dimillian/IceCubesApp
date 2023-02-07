@@ -78,6 +78,8 @@ struct SettingsTabs: View {
              let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token })
           {
             Task {
+              let client = Client(server: account.server, oauthToken: token)
+              await TimelineCache.shared.clearCache(for: client)
               await sub.deleteSubscription()
               appAccountsManager.delete(account: account)
             }
@@ -100,6 +102,11 @@ struct SettingsTabs: View {
       NavigationLink(destination: DisplaySettingsView()) {
         Label("settings.general.display", systemImage: "paintpalette")
       }
+        if HapticManager.shared.supportsHaptics {
+            NavigationLink(destination: HapticSettingsView()) {
+                Label("settings.general.haptic", systemImage: "waveform.path")
+            }
+        }
       NavigationLink(destination: remoteLocalTimelinesView) {
         Label("settings.general.remote-timelines", systemImage: "dot.radiowaves.right")
       }
@@ -129,6 +136,10 @@ struct SettingsTabs: View {
         } label: {
           Label("settings.general.browser", systemImage: "network")
         }
+        Toggle(isOn: $preferences.inAppBrowserReaderView) {
+          Label("settings.general.browser.in-app.readerview", systemImage: "doc.plaintext")
+        }
+        .disabled(preferences.preferredBrowser != PreferredBrowser.inAppSafari)
       }
       Toggle(isOn: $preferences.isOpenAIEnabled) {
         Label("settings.other.hide-openai", systemImage: "faxmachine")
@@ -175,6 +186,11 @@ struct SettingsTabs: View {
         }
         .tint(theme.labelColor)
       }
+
+      NavigationLink(destination: AboutView()) {
+        Label("settings.app.about", systemImage: "info.circle")
+      }
+
     } header: {
       Text("settings.section.app")
     } footer: {

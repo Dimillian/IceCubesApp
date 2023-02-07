@@ -93,6 +93,15 @@ struct TimelineTab: View {
 
   @ViewBuilder
   private var timelineFilterButton: some View {
+    if timeline == .home {
+      Button {
+        self.timeline = .latest
+      } label: {
+        Label(TimelineFilter.latest.localizedTitle(), systemImage: TimelineFilter.latest.iconName() ?? "")
+      }
+      .keyboardShortcut("r", modifiers: .command)
+      Divider()
+    }
     ForEach(TimelineFilter.availableTimeline(client: client), id: \.self) { timeline in
       Button {
         self.timeline = timeline
@@ -129,9 +138,11 @@ struct TimelineTab: View {
     Menu("timeline.filter.local") {
       ForEach(preferences.remoteLocalTimelines, id: \.self) { server in
         Button {
-          timeline = .remoteLocal(server: server)
+          timeline = .remoteLocal(server: server, filter: .local)
         } label: {
-          Label(server, systemImage: "dot.radiowaves.right")
+          VStack {
+            Label(server, systemImage: "dot.radiowaves.right")
+          }
         }
       }
       Button {
@@ -180,13 +191,18 @@ struct TimelineTab: View {
           Image(systemName: "list.bullet")
         }
       }
-    case let .remoteLocal(server):
+    case let .remoteLocal(server, _):
       ToolbarItem {
-        Button {
-          preferences.remoteLocalTimelines.removeAll(where: { $0 == server })
-          timeline = client.isAuth ? .home : .federated
+        Menu {
+          ForEach(RemoteTimelineFilter.allCases, id: \.self) { filter in
+            Button {
+              timeline = .remoteLocal(server: server, filter: filter)
+            } label: {
+              Label(filter.localizedTitle(), systemImage: filter.iconName())
+            }
+          }
         } label: {
-          Image(systemName: "pin.slash")
+          Image(systemName: "line.3.horizontal.decrease.circle")
         }
       }
     default:

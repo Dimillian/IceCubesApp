@@ -16,12 +16,16 @@ class VideoPlayerViewModel: ObservableObject {
     player?.audiovisualBackgroundPlaybackPolicy = .pauses
     if autoPlay {
       player?.play()
+    } else {
+      player?.pause()
     }
     guard let player else { return }
     NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
                                            object: player.currentItem, queue: .main) { [weak self] _ in
-      self?.player?.seek(to: CMTime.zero)
-      self?.player?.play()
+      if autoPlay {
+        self?.player?.seek(to: CMTime.zero)
+        self?.player?.play()
+      }
     }
   }
 
@@ -55,7 +59,9 @@ struct VideoPlayerView: View {
       case .background, .inactive:
         viewModel.pause()
       case .active:
-        viewModel.play()
+        if preferences.autoPlayVideo {
+          viewModel.play()
+        }
       default:
         break
       }
