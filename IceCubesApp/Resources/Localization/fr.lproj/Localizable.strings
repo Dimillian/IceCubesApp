@@ -157,7 +157,7 @@
 "settings.haptic.buttons" = "Appui bouton";
 
 "settings.display.section.ipad" = "iPad";
-"settings.display.show-ipad-column" = "Enable secondary column";
+"settings.display.show-ipad-column" = "Activer la colonne secondaire";
 
 // MARK: Tabs
 "tab.explore" = "Explorer";
