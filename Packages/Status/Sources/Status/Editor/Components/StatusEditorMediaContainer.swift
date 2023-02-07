@@ -8,6 +8,7 @@ struct StatusEditorMediaContainer: Identifiable {
   let id = UUID().uuidString
   let image: UIImage?
   let movieTransferable: MovieFileTranseferable?
+  let gifTransferable: GifFileTranseferable?
   let mediaAttachment: MediaAttachment?
   let error: Error?
 }

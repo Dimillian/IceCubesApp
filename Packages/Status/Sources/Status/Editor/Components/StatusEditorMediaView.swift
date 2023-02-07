@@ -24,7 +24,7 @@ struct StatusEditorMediaView: View {
                 makeLazyImage(mediaAttachement: attachement)
               } else if container.image != nil {
                 makeLocalImage(container: container)
-              } else if container.movieTransferable != nil {
+              } else if container.movieTransferable != nil || container.gifTransferable != nil {
                 makeVideoAttachement(container: container)
               } else if let error = container.error as? ServerError {
                 makeErrorView(error: error)

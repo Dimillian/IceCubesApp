@@ -7,7 +7,7 @@ import PhotosUI
 import SwiftUI
 
 @MainActor
-public class StatusEditorViewModel: ObservableObject {
+public class StatusEditorViewModel: NSObject, ObservableObject {
   var mode: Mode
 
   var client: Client?
@@ -15,7 +15,11 @@ public class StatusEditorViewModel: ObservableObject {
   var theme: Theme?
   var preferences: UserPreferences?
 
-  var textView: UITextView?
+  var textView: UITextView? {
+    didSet {
+      textView?.pasteDelegate = self
+    }
+  }
   var selectedRange: NSRange {
     get {
       guard let textView else {
@@ -261,6 +265,7 @@ public class StatusEditorViewModel: ObservableObject {
       visibility = status.visibility
       mediasImages = status.mediaAttachments.map { .init(image: nil,
                                                          movieTransferable: nil,
+                                                         gifTransferable: nil,
                                                          mediaAttachment: $0,
                                                          error: nil) }
     case let .quote(status):
@@ -333,23 +338,10 @@ public class StatusEditorViewModel: ObservableObject {
 
       urlLengthAdjustments = totalUrlLength - (maxLengthOfUrl * numUrls)
 
-      var mediaAdded = false
       statusText.enumerateAttributes(in: range) { attributes, range, _ in
-        if let attachment = attributes[.attachment] as? NSTextAttachment, let image = attachment.image {
-          mediasImages.append(.init(image: image,
-                                    movieTransferable: nil,
-                                    mediaAttachment: nil,
-                                    error: nil))
-          statusText.removeAttribute(.attachment, range: range)
-          statusText.mutableString.deleteCharacters(in: range)
-          mediaAdded = true
-        } else if attributes[.link] != nil {
+        if attributes[.link] != nil {
           statusText.removeAttribute(.link, range: range)
         }
-      }
-
-      if mediaAdded {
-        processMediasToUpload()
       }
     } catch {}
   }
@@ -370,11 +362,19 @@ public class StatusEditorViewModel: ObservableObject {
             } else if let image = content as? UIImage {
               mediasImages.append(.init(image: image,
                                         movieTransferable: nil,
+                                        gifTransferable: nil,
                                         mediaAttachment: nil,
                                         error: nil))
             } else if let video = content as? MovieFileTranseferable {
               mediasImages.append(.init(image: nil,
                                         movieTransferable: video,
+                                        gifTransferable: nil,
+                                        mediaAttachment: nil,
+                                        error: nil))
+            } else if let gif = content as? GifFileTranseferable {
+              mediasImages.append(.init(image: nil,
+                                        movieTransferable: nil,
+                                        gifTransferable: gif,
                                         mediaAttachment: nil,
                                         error: nil))
             }
@@ -492,17 +492,17 @@ public class StatusEditorViewModel: ObservableObject {
     Task {
       var medias: [StatusEditorMediaContainer] = []
       for media in selectedMedias {
+        print(media.supportedContentTypes)
         var file: (any Transferable)?
-        do {
-          file = try await media.loadTransferable(type: ImageFileTranseferable.self)
-          if file == nil {
-            file = try await media.loadTransferable(type: MovieFileTranseferable.self)
-          }
-        } catch {
-          medias.append(.init(image: nil,
-                              movieTransferable: nil,
-                              mediaAttachment: nil,
-                              error: error))
+        
+        if file == nil {
+          file = try? await media.loadTransferable(type: GifFileTranseferable.self)
+        }
+        if file == nil {
+          file = try? await media.loadTransferable(type: MovieFileTranseferable.self)
+        }
+        if file == nil {
+          file = try? await media.loadTransferable(type: ImageFileTranseferable.self)
         }
 
         if var imageFile = file as? ImageFileTranseferable,
@@ -510,11 +510,19 @@ public class StatusEditorViewModel: ObservableObject {
         {
           medias.append(.init(image: image,
                               movieTransferable: nil,
+                              gifTransferable: nil,
                               mediaAttachment: nil,
                               error: nil))
         } else if let videoFile = file as? MovieFileTranseferable {
           medias.append(.init(image: nil,
                               movieTransferable: videoFile,
+                              gifTransferable: nil,
+                              mediaAttachment: nil,
+                              error: nil))
+        } else if let gifFile = file as? GifFileTranseferable {
+          medias.append(.init(image: nil,
+                              movieTransferable: nil,
+                              gifTransferable: gifFile,
                               mediaAttachment: nil,
                               error: nil))
         }
@@ -543,8 +551,10 @@ public class StatusEditorViewModel: ObservableObject {
   func upload(container: StatusEditorMediaContainer) async {
     if let index = indexOf(container: container) {
       let originalContainer = mediasImages[index]
+      guard originalContainer.mediaAttachment == nil else { return }
       let newContainer = StatusEditorMediaContainer(image: originalContainer.image,
                                                     movieTransferable: originalContainer.movieTransferable,
+                                                    gifTransferable: nil,
                                                     mediaAttachment: nil,
                                                     error: nil)
       mediasImages[index] = newContainer
@@ -556,6 +566,7 @@ public class StatusEditorViewModel: ObservableObject {
             let uploadedMedia = try await uploadMedia(data: data, mimeType: "image/jpeg")
             mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
                                         movieTransferable: nil,
+                                        gifTransferable: nil,
                                         mediaAttachment: uploadedMedia,
                                         error: nil)
             if let uploadedMedia, uploadedMedia.url == nil {
@@ -567,6 +578,17 @@ public class StatusEditorViewModel: ObservableObject {
             let uploadedMedia = try await uploadMedia(data: data, mimeType: videoURL.mimeType())
             mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
                                         movieTransferable: originalContainer.movieTransferable,
+                                        gifTransferable: nil,
+                                        mediaAttachment: uploadedMedia,
+                                        error: nil)
+            if let uploadedMedia, uploadedMedia.url == nil {
+              scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
+            }
+          } else if let gifData = originalContainer.gifTransferable?.data {
+            let uploadedMedia = try await uploadMedia(data: gifData, mimeType: "image/gif")
+            mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
+                                        movieTransferable: nil,
+                                        gifTransferable: originalContainer.gifTransferable,
                                         mediaAttachment: uploadedMedia,
                                         error: nil)
             if let uploadedMedia, uploadedMedia.url == nil {
@@ -578,6 +600,7 @@ public class StatusEditorViewModel: ObservableObject {
         if let index = indexOf(container: newContainer) {
           mediasImages[index] = .init(image: originalContainer.image,
                                       movieTransferable: nil,
+                                      gifTransferable: nil,
                                       mediaAttachment: nil,
                                       error: error)
         }
@@ -601,6 +624,7 @@ public class StatusEditorViewModel: ObservableObject {
               let oldContainer = mediasImages[index]
               mediasImages[index] = .init(image: oldContainer.image,
                                           movieTransferable: oldContainer.movieTransferable,
+                                          gifTransferable: oldContainer.gifTransferable,
                                           mediaAttachment: newAttachement,
                                           error: nil)
             }
@@ -619,6 +643,7 @@ public class StatusEditorViewModel: ObservableObject {
                                                                                 description: description))
         mediasImages[index] = .init(image: nil,
                                     movieTransferable: nil,
+                                    gifTransferable: nil,
                                     mediaAttachment: media,
                                     error: nil)
       } catch {}
@@ -636,7 +661,6 @@ public class StatusEditorViewModel: ObservableObject {
   }
 
   // MARK: - Custom emojis
-
   func fetchCustomEmojis() async {
     guard let client else { return }
     do {
@@ -645,10 +669,27 @@ public class StatusEditorViewModel: ObservableObject {
   }
 }
 
+//MARK: - DropDelegate
 extension StatusEditorViewModel: DropDelegate {
   public func performDrop(info: DropInfo) -> Bool {
     let item = info.itemProviders(for: StatusEditorUTTypeSupported.types())
     processItemsProvider(items: item)
     return true
   }
+}
+
+// MARK: - UITextPasteDelegate
+extension StatusEditorViewModel: UITextPasteDelegate {
+  public func textPasteConfigurationSupporting(
+    _ textPasteConfigurationSupporting: UITextPasteConfigurationSupporting,
+    transform item: UITextPasteItem) {
+      if !item.itemProvider.registeredContentTypes(conformingTo: .image).isEmpty ||
+         !item.itemProvider.registeredContentTypes(conformingTo: .video).isEmpty ||
+         !item.itemProvider.registeredContentTypes(conformingTo: .gif).isEmpty {
+        processItemsProvider(items: [item.itemProvider])
+        item.setNoResult()
+      } else {
+        item.setDefaultResult()
+      }
+    }
 }
