@@ -113,12 +113,14 @@ public struct ConversationDetailView: View {
   private var inputTextView: some View {
     VStack {
       HStack(alignment: .bottom, spacing: 8) {
-        Button {
-          routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.conversation.lastStatus)
-        } label: {
-          Image(systemName: "plus")
+        if viewModel.conversation.lastStatus != nil {
+          Button {
+            routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.conversation.lastStatus!)
+          } label: {
+            Image(systemName: "plus")
+          }
+          .padding(.bottom, 7)
         }
-        .padding(.bottom, 7)
 
         TextField("conversations.new.message.placeholder", text: $viewModel.newMessageText, axis: .vertical)
           .focused($isMessageFieldFocused)

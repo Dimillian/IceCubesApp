@@ -31,10 +31,12 @@ struct ConversationsListRow: View {
                 .foregroundColor(theme.tintColor)
                 .frame(width: 10, height: 10)
             }
-            Text(conversation.lastStatus.createdAt.relativeFormatted)
-              .font(.scaledFootnote)
+            if conversation.lastStatus != nil {
+              Text(conversation.lastStatus!.createdAt.relativeFormatted)
+                .font(.scaledFootnote)
+            }
           }
-          EmojiTextApp(conversation.lastStatus.content, emojis: conversation.lastStatus.emojis)
+          EmojiTextApp(conversation.lastStatus?.content ?? HTMLString(stringValue: ""), emojis: conversation.lastStatus?.emojis ?? [])
             .multilineTextAlignment(.leading)
             .font(.scaledBody)
         }
@@ -48,8 +50,10 @@ struct ConversationsListRow: View {
         routerPath.navigate(to: .conversationDetail(conversation: conversation))
       }
       .padding(.top, 4)
-      actionsView
-        .padding(.bottom, 4)
+      if conversation.lastStatus != nil {
+        actionsView
+          .padding(.bottom, 4)
+      }
     }
     .contextMenu {
       contextMenu
@@ -59,7 +63,7 @@ struct ConversationsListRow: View {
   private var actionsView: some View {
     HStack(spacing: 12) {
       Button {
-        routerPath.presentedSheet = .replyToStatusEditor(status: conversation.lastStatus)
+        routerPath.presentedSheet = .replyToStatusEditor(status: conversation.lastStatus!)
       } label: {
         Image(systemName: "arrowshape.turn.up.left.fill")
       }
@@ -71,8 +75,6 @@ struct ConversationsListRow: View {
           .contentShape(Rectangle())
       }
     }
-    .padding(.leading, 48)
-    .foregroundColor(.gray)
   }
 
   @ViewBuilder
