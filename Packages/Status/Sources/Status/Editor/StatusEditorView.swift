@@ -40,7 +40,6 @@ public struct StatusEditorView: View {
                 viewModel.textView = textView
               })
               .placeholder(String(localized: "status.editor.text.placeholder"))
-              .font(Font.scaledBodyUIFont)
               .setKeyboardType(preferences.isSocialKeyboardEnabled ? .twitter : .default)
               .padding(.horizontal, .layoutPadding)
             StatusEditorMediaView(viewModel: viewModel)

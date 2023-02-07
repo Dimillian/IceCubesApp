@@ -45,6 +45,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
     didSet {
       processText()
       checkEmbed()
+      textView?.attributedText = statusText
     }
   }
 
@@ -280,8 +281,9 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
   private func processText() {
     guard markedTextRange == nil else { return }
     statusText.addAttributes([.foregroundColor: UIColor(Color.label),
-                              .backgroundColor: .clear,
-                              .underlineColor: .clear],
+                              .font: Font.scaledBodyUIFont,
+                              .backgroundColor: UIColor.clear,
+                              .underlineColor: UIColor.clear],
                              range: NSMakeRange(0, statusText.string.utf16.count))
     let hashtagPattern = "(#+[a-zA-Z0-9(_)]{1,})"
     let mentionPattern = "(@+[a-zA-Z0-9(_).-]{1,})"
