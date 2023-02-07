@@ -24,14 +24,14 @@
 "enum.avatar-position.top" = "顶部";
 "enum.avatar-shape.circle" = "圆形";
 "enum.avatar-shape.rounded" = "圆角";
-"enum.durations.infinite" = "infinite";
-"enum.durations.fiveMinutes" = "5 minutes";
-"enum.durations.thirtyMinutes" = "30 minutes";
-"enum.durations.oneHour" = "1 hour";
-"enum.durations.sixHours" = "6 hours";
-"enum.durations.oneDay" = "1 day";
-"enum.durations.threeDays" = "3 days";
-"enum.durations.sevenDays" = "7 days";
+"enum.durations.infinite" = "永久";
+"enum.durations.fiveMinutes" = "5 分钟";
+"enum.durations.thirtyMinutes" = "30 分钟";
+"enum.durations.oneHour" = "1 小时";
+"enum.durations.sixHours" = "6 小时";
+"enum.durations.oneDay" = "1 天";
+"enum.durations.threeDays" = "3 天";
+"enum.durations.sevenDays" = "7 天";
 "enum.status-actions-display.all" = "图标和文本";
 "enum.status-actions-display.no-buttons" = "仅文本";
 "enum.status-actions-display.only-buttons" = "仅图标";
@@ -157,7 +157,7 @@
 "settings.display.font.scaling-%@" = "字体缩放：%@";
 
 "settings.display.section.ipad" = "iPad";
-"settings.display.show-ipad-column" = "Enable secondary column";
+"settings.display.show-ipad-column" = "启用边栏";
 
 // MARK: Tabs
 "tab.explore" = "探索";
@@ -195,7 +195,7 @@
 "account.action.unblock" = "取消屏蔽";
 "account.action.mute" = "免打扰";
 "account.action.unmute" = "取消免打扰";
-"account.action.share" = "Share this account";
+"account.action.share" = "分享该账户";
 "account.boosted-by" = "转发";
 "account.detail.about" = "附加信息";
 "account.detail.familiar-followers" = "同样关注此账号的有";
@@ -317,7 +317,7 @@
 "timeline.local" = "本地";
 "timeline.n-recent-from-n-participants %lld %lld" = "最近 %lld 条嘟文来自 %lld 个参与者";
 "timeline.trending" = "当下流行";
-"timeline.add.url" = "Instance URL";
+"timeline.add.url" = "服务器 URL";
 
 // MARK: Package: Status
 "status.action.translate" = "翻译";
@@ -342,8 +342,8 @@
 "status.action.unfavorite" = "取消收藏";
 "status.action.unpin" = "取消固定";
 "status.action.view-in-browser" = "在浏览器中打开";
-"status.card.share" = "Share this link";
-"status.card.copy" = "Copy this link";
+"status.card.share" = "分享链接";
+"status.card.copy" = "拷贝链接";
 "status.draft.delete" = "删除草稿";
 "status.draft.save" = "保存草稿";
 "status.editor.ai-prompt.correct" = "检查拼写和语法";
