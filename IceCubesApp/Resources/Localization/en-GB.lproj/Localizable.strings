@@ -151,6 +151,8 @@
 "settings.account.cached-posts-%@" = "Cached posts: %@";
 "settings.account.action.delete-cache" = "Clear cache";
 
+"account.action.share" = "Share this account";
+
 "settings.general.haptic" = "Haptic Feedback";
 "settings.haptic.navigation-title" = "Haptic Settings";
 "settings.haptic.timeline" = "Timeline";
