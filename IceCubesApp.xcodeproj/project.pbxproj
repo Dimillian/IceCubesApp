@@ -336,10 +336,6 @@
 		9F398AB529360A6100A889F2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				069709A3298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf */,
-				069709A7298C87B5006E4CB5 /* OpenDyslexic-Regular.otf */,
-				9F2A542D296B1CC0009B2D7C /* glass.wav */,
-				9F2A542B296B1177009B2D7C /* glass.caf */,
 				9F24EEB729360C330042359D /* Preview Assets.xcassets */,
 				E9B576C029743F2A00BCE646 /* Localization */,
 			);
@@ -353,6 +349,17 @@
 				9F7335F12967608F00AFF0BA /* AddRemoteTimelineView.swift */,
 			);
 			path = Timeline;
+			sourceTree = "<group>";
+		};
+		9FA0D2AC29921C1F008A143B /* Embeds */ = {
+			isa = PBXGroup;
+			children = (
+				069709A3298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf */,
+				069709A7298C87B5006E4CB5 /* OpenDyslexic-Regular.otf */,
+				9F2A542D296B1CC0009B2D7C /* glass.wav */,
+				9F2A542B296B1177009B2D7C /* glass.caf */,
+			);
+			path = Embeds;
 			sourceTree = "<group>";
 		};
 		9FAD858929743F7400496AB1 /* IceCubesShareExtension */ = {
@@ -419,6 +426,7 @@
 		9FBFE63B292A715500C250E9 /* IceCubesApp */ = {
 			isa = PBXGroup;
 			children = (
+				9FA0D2AC29921C1F008A143B /* Embeds */,
 				9FD34822293D06E800DB0EE9 /* Assets.xcassets */,
 				9FAE4AC8293774FF00772766 /* Info.plist */,
 				9F398AB429360A5800A889F2 /* App */,
