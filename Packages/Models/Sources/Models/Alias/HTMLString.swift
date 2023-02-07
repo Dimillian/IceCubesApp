@@ -11,10 +11,10 @@ public struct HTMLString: Codable, Equatable, Hashable {
   public var asMarkdown: String = ""
   public var asRawText: String = ""
   public var statusesURLs = [URL]()
-  
+
   public var asSafeMarkdownAttributedString: AttributedString = .init()
-  private var main_regex: NSRegularExpression?
-  private var underscore_regex: NSRegularExpression?
+  private var regex: NSRegularExpression?
+
   public init(from decoder: Decoder) {
     var alreadyDecoded: Bool = false
     do {
@@ -38,9 +38,7 @@ public struct HTMLString: Codable, Equatable, Hashable {
       // Pre-escape \ ` _ * and [ as these are the only
       // characters the markdown parser used picks up
       // when it renders to attributed text
-      main_regex = try? NSRegularExpression(pattern: "([\\*\\`\\[\\\\])", options: .caseInsensitive)
-      // don't escape underscores that are between colons, they are most likely custom emoji
-      underscore_regex = try? NSRegularExpression(pattern: "(?!\\B:[^:]*)(_)(?![^:]*:\\B)", options: .caseInsensitive)
+      regex = try? NSRegularExpression(pattern: "([\\_\\*\\`\\[\\\\])", options: .caseInsensitive)
 
       asMarkdown = ""
       do {
@@ -67,7 +65,7 @@ public struct HTMLString: Codable, Equatable, Hashable {
         asRawText = htmlValue
       }
     }
-    
+
     do {
       let options = AttributedString.MarkdownParsingOptions(allowsExtendedAttributes: true,
                                                             interpretedSyntax: .inlineOnlyPreservingWhitespace)
@@ -152,10 +150,9 @@ public struct HTMLString: Codable, Equatable, Hashable {
       } else if node.nodeName() == "#text" {
         var txt = node.description
 
-        if let underscore_regex, let main_regex {
+        if let regex {
           //  This is the markdown escaper
-          txt = main_regex.stringByReplacingMatches(in: txt, options: [], range: NSRange(location: 0, length: txt.count), withTemplate: "\\\\$1")
-          txt = underscore_regex.stringByReplacingMatches(in: txt, options: [], range: NSRange(location: 0, length: txt.count), withTemplate: "\\\\$1")
+          txt = regex.stringByReplacingMatches(in: txt, options: [], range: NSRange(location: 0, length: txt.count), withTemplate: "\\\\$1")
         }
 
         asMarkdown += txt
