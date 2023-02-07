@@ -65,7 +65,7 @@
 "settings.app.icon.navigation-title" = "Iconos";
 "settings.app.source" = "Código fuente (Enlace a GitHub)";
 "settings.app.support" = "Apoya a Ice Cubes";
-"settings.app.about" = "About";
+"settings.app.about" = "Acerca de";
 "settings.display.avatar.position" = "Posición del avatar";
 "settings.display.avatar.shape" = "Forma del avatar";
 "settings.display.navigation-title" = "Ajustes de apariencia";
@@ -82,7 +82,7 @@
 "settings.display.theme.systemColor" = "Sistema de coincidencia";
 "settings.general.browser" = "Navegador";
 "settings.general.browser.in-app" = "Interno";
-"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
+"settings.general.browser.in-app.readerview" = "Vista de lectura en navegador interno";
 "settings.general.browser.system" = "Sistema";
 "settings.general.display" = "Ajustes de apariencia";
 "settings.general.instance" = "Información de la instancia";
@@ -124,9 +124,9 @@
 "settings.general.content" = "Ajustes de contenido";
 "settings.system" = "Ajustes del sistema";
 "settings.content.navigation-title" = "Ajustes de contenido";
-"settings.content.boosts" = "Boosts";
-"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
-"settings.content.instance-settings" = "Server Content Settings";
+"settings.content.boosts" = "Retoots";
+"settings.content.hide-repeated-boosts" = "Ocultar retoots repetidos";
+"settings.content.instance-settings" = "Ajustes de contenido del servidor";
 "settings.content.use-instance-settings" = "Usar ajustes del servidor";
 "settings.content.expand-spoilers" = "Mostrar siempre el contenido sensible";
 "settings.content.expand-media" = "Mostrar el contenido multimedia";
