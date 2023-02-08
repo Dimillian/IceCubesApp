@@ -24,10 +24,10 @@ public struct StatusRowView: View {
       .overlay(
         EmptyView().alert(isPresented: $viewModel.showingAlert, content: {
           Alert(
-            title: Text("Delete Toot"),
-            message: Text("Are you sure you want to Delete Toot?"),
+            title: Text("status.action.delete.confirm.title"),
+            message: Text("status.action.delete.confirm.message"),
             primaryButton: .destructive(
-              Text("Delete")) {
+              Text("status.action.delete")) {
                 Task {
                   await viewModel.delete()
                 }

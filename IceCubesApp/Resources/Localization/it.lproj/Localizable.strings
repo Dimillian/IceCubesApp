@@ -327,6 +327,8 @@
 "status.action.boost" = "Condividi";
 "status.action.copy-text" = "Copia il testo";
 "status.action.delete" = "Elimina";
+"status.action.delete.confirm.title" = "Confirm";
+"status.action.delete.confirm.message" = "Are you sure you want to Delete Toot?";
 "status.action.edit" = "Modifica";
 "status.action.favorite" = "Apprezza";
 "status.action.mention" = "Menziona";

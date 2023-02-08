@@ -327,6 +327,8 @@
 "status.action.boost" = "Boost";
 "status.action.copy-text" = "Copy Text";
 "status.action.delete" = "Delete";
+"status.action.delete.confirm.title" = "Confirm";
+"status.action.delete.confirm.message" = "Are you sure you want to Delete Toot?";
 "status.action.edit" = "Edit";
 "status.action.favorite" = "Favorite";
 "status.action.mention" = "Mention";

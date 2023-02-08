@@ -327,6 +327,8 @@
 "status.action.boost" = "Retootear";
 "status.action.copy-text" = "Copiar texto";
 "status.action.delete" = "Borrar";
+"status.action.delete.confirm.title" = "Confirm";
+"status.action.delete.confirm.message" = "Are you sure you want to Delete Toot?";
 "status.action.edit" = "Editar";
 "status.action.favorite" = "Marcar como favorito";
 "status.action.mention" = "Mencionar";

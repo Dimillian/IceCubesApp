@@ -327,6 +327,8 @@
 "status.action.boost" = "转发";
 "status.action.copy-text" = "拷贝文本";
 "status.action.delete" = "删除";
+"status.action.delete.confirm.title" = "Confirm";
+"status.action.delete.confirm.message" = "Are you sure you want to Delete Toot?";
 "status.action.edit" = "编辑";
 "status.action.favorite" = "收藏";
 "status.action.mention" = "提及";

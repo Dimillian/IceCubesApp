@@ -322,6 +322,8 @@
 "status.action.boost" = "Podbij";
 "status.action.copy-text" = "Kopiuj tekst";
 "status.action.delete" = "Usuń";
+"status.action.delete.confirm.title" = "Confirm";
+"status.action.delete.confirm.message" = "Are you sure you want to Delete Toot?";
 "status.action.edit" = "Edytuj";
 "status.action.favorite" = "Dodaj do polubionych";
 "status.action.mention" = "Wymień osobę";

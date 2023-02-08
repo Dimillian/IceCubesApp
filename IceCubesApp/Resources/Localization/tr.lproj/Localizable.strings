@@ -322,6 +322,8 @@
 "status.action.boost" = "Yükselt";
 "status.action.copy-text" = "Yazıyı Kopyala";
 "status.action.delete" = "Sil";
+"status.action.delete.confirm.title" = "Confirm";
+"status.action.delete.confirm.message" = "Are you sure you want to Delete Toot?";
 "status.action.edit" = "Düzenle";
 "status.action.favorite" = "Favori";
 "status.action.mention" = "Bahset";
