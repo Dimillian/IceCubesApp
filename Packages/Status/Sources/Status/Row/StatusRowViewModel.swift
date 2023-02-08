@@ -3,6 +3,8 @@ import Models
 import Network
 import SwiftUI
 
+import DesignSystem
+
 @MainActor
 public class StatusRowViewModel: ObservableObject {
   let status: Status
@@ -30,6 +32,8 @@ public class StatusRowViewModel: ObservableObject {
 
   @Published var favoriters: [Account] = []
   @Published var rebloggers: [Account] = []
+
+  private let theme = Theme.shared
   
   var seen = false
 
@@ -37,8 +41,15 @@ public class StatusRowViewModel: ObservableObject {
     status.reblog?.filtered?.first ?? status.filtered?.first
   }
 
-  var shouldHighlightRow: Bool {
-    status.uiShouldHighlight != nil
+  var highlightRowColor: Color {
+
+    if status.visibility == .direct {
+      return theme.tintColor.opacity(0.15)
+    } else if status.userMentioned != nil {
+      return theme.secondaryBackgroundColor
+    } else {
+      return theme.primaryBackgroundColor
+    }
   }
 
   var client: Client?

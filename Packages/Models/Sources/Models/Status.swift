@@ -55,7 +55,7 @@ public protocol AnyStatus {
 }
 
 protocol StatusUI {
-  var uiShouldHighlight: Bool? { get set }
+  var userMentioned: Bool? { get set }
 }
 
 public struct Status: AnyStatus, Codable, Identifiable, Equatable, Hashable, StatusUI {
@@ -63,7 +63,7 @@ public struct Status: AnyStatus, Codable, Identifiable, Equatable, Hashable, Sta
     id + createdAt + (editedAt ?? "")
   }
 
-  public var uiShouldHighlight: Bool?
+  public var userMentioned: Bool?
 
   public static func == (lhs: Status, rhs: Status) -> Bool {
     lhs.id == rhs.id
