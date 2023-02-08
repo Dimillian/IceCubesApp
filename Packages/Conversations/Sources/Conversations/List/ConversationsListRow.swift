@@ -75,6 +75,8 @@ struct ConversationsListRow: View {
           .contentShape(Rectangle())
       }
     }
+    .padding(.leading, 48)
+    .foregroundColor(.gray)
   }
 
   @ViewBuilder
