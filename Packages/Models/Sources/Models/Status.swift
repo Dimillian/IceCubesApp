@@ -119,7 +119,7 @@ public struct Status: AnyStatus, Codable, Identifiable, Equatable, Hashable, Sta
        pinned: false,
        bookmarked: false,
        emojis: [],
-       url: nil,
+       url: "https://example.com",
        application: nil,
        inReplyToAccountId: nil,
        visibility: .pub,
