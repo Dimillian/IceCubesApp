@@ -127,6 +127,18 @@ public struct StatusRowView: View {
           remoteContentLoadingView
         }
       }
+      .alert(isPresented: $viewModel.showDeleteAlert, content: {
+        Alert(
+          title: Text("status.action.delete.confirm.title"),
+          message: Text("status.action.delete.confirm.message"),
+          primaryButton: .destructive(
+            Text("status.action.delete")) {
+              Task {
+                await viewModel.delete()
+              }
+            },
+          secondaryButton: .cancel())
+      })
       .alignmentGuide(.listRowSeparatorLeading) { _ in
         -100
       }

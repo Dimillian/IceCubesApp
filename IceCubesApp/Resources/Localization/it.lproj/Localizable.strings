@@ -327,6 +327,8 @@
 "status.action.boost" = "Condividi";
 "status.action.copy-text" = "Copia il testo";
 "status.action.delete" = "Elimina";
+"status.action.delete.confirm.title" = "Confirm";
+"status.action.delete.confirm.message" = "are you sure you want to delete this post?";
 "status.action.edit" = "Modifica";
 "status.action.favorite" = "Apprezza";
 "status.action.mention" = "Menziona";

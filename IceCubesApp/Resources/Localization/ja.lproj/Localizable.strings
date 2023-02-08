@@ -326,6 +326,8 @@
 "status.action.boost" = "ブースト";
 "status.action.copy-text" = "テキストをコピー";
 "status.action.delete" = "削除";
+"status.action.delete.confirm.title" = "確認";
+"status.action.delete.confirm.message" = "本当に投稿を削除しますか？";
 "status.action.edit" = "編集";
 "status.action.favorite" = "お気に入り";
 "status.action.mention" = "返信";

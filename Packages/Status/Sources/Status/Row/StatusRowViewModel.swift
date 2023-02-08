@@ -26,6 +26,7 @@ public class StatusRowViewModel: ObservableObject {
 
   @Published var translation: String?
   @Published var isLoadingTranslation: Bool = false
+  @Published var showDeleteAlert: Bool = false
 
   @Published var favoriters: [Account] = []
   @Published var rebloggers: [Account] = []
