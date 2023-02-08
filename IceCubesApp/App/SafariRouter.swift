@@ -50,7 +50,7 @@ private struct SafariRouter: ViewModifier {
           return .handled
         }
       }
-      .sheet(item: $presentedURL, content: { url in
+      .fullScreenCover(item: $presentedURL, content: { url in
         SafariView(url: url, inAppBrowserReaderView: preferences.inAppBrowserReaderView)
           .edgesIgnoringSafeArea(.all)
       })
