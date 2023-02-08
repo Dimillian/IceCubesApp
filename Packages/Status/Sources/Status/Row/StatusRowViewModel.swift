@@ -23,6 +23,7 @@ public class StatusRowViewModel: ObservableObject {
   @Published var isEmbedLoading: Bool = false
   @Published var isFiltered: Bool = false
   @Published var isLoadingRemoteContent: Bool = false
+  @Published var showingAlert: Bool = false
 
   @Published var translation: String?
   @Published var isLoadingTranslation: Bool = false
@@ -46,13 +47,15 @@ public class StatusRowViewModel: ObservableObject {
               isCompact: Bool = false,
               isFocused: Bool = false,
               isRemote: Bool = false,
-              showActions: Bool = true)
+              showActions: Bool = true,
+              showingAlert: Bool = false)
   {
     self.status = status
     self.isCompact = isCompact
     self.isFocused = isFocused
     self.isRemote = isRemote
     self.showActions = showActions
+    self.showingAlert = showingAlert
     if let reblog = status.reblog {
       isFavorited = reblog.favourited == true
       isReblogged = reblog.reblogged == true

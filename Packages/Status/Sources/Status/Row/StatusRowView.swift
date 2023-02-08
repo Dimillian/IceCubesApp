@@ -21,6 +21,20 @@ public struct StatusRowView: View {
 
   var contextMenu: some View {
     StatusRowContextMenu(viewModel: viewModel)
+      .overlay(
+        EmptyView().alert(isPresented: $viewModel.showingAlert, content: {
+          Alert(
+            title: Text("Delete Toot"),
+            message: Text("Are you sure you want to Delete Toot?"),
+            primaryButton: .destructive(
+              Text("Delete")) {
+                Task {
+                  await viewModel.delete()
+                }
+              },
+            secondaryButton: .cancel())}),
+        alignment: .bottomTrailing
+      )
   }
 
   public var body: some View {
