@@ -10,7 +10,8 @@ class TimelineViewModel: ObservableObject {
   @Published var statusesState: StatusesState = .loading
   @Published var timeline: TimelineFilter = .federated {
     didSet {
-      Task {
+      timelineTask?.cancel()
+      timelineTask = Task {
         if timeline == .latest, let client {
           await cache.clearCache(for: client)
           timeline = .home
@@ -19,6 +20,9 @@ class TimelineViewModel: ObservableObject {
           statuses = []
           pendingStatusesObserver.pendingStatuses = []
           tag = nil
+        }
+        guard !Task.isCancelled else {
+          return
         }
         await fetchStatuses()
         switch timeline {
@@ -30,6 +34,8 @@ class TimelineViewModel: ObservableObject {
       }
     }
   }
+  
+  private var timelineTask: Task<Void, Never>?
 
   @Published var tag: Tag?
 
@@ -164,7 +170,10 @@ extension TimelineViewModel: StatusesFetcher {
   // Hydrate statuses in the Timeline when statuses are empty.
   private func fetchFirstPage(client: Client) async throws {
     pendingStatusesObserver.pendingStatuses = []
-    statusesState = .loading
+    
+    if statuses.isEmpty {
+      statusesState = .loading
+    }
 
     // If we get statuses from the cache for the home timeline, we displays those.
     // Else we fetch top most page from the API.
@@ -229,6 +238,12 @@ extension TimelineViewModel: StatusesFetcher {
       canStreamEvents = true
       return
     }
+    
+    // Return if task has been cancelled.
+    guard !Task.isCancelled else {
+      canStreamEvents = true
+      return
+    }
 
     // Keep track of the top most status, so we can scroll back to it after view update.
     let topStatusId = statuses.first?.id
@@ -271,7 +286,7 @@ extension TimelineViewModel: StatusesFetcher {
       
       // We trigger a new fetch so we can get the next new statuses if any.
       // If none, it'll stop there.
-      if let latest = statuses.first, let client {
+      if !Task.isCancelled, let latest = statuses.first, let client {
         try await fetchNewPagesFrom(latestStatus: latest, client: client)
       }
     }
