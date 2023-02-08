@@ -384,6 +384,7 @@
 "status.poll.duration" = "Durada de l'enquesta";
 "status.poll.frequency" = "Freqüència de l'enquesta";
 "status.poll.option-n %lld" = "Opció %lld";
+"status.poll.send" = "Send Vote";
 "status.post-from-%@" = "Publicació de: %@";
 "status.row.was-boosted" = "impulsat";
 "status.row.was-reply" = "Ha respost a";

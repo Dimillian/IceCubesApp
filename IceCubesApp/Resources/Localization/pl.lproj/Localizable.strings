@@ -380,6 +380,7 @@
 "status.poll.duration" = "Czas trwania sondażu";
 "status.poll.frequency" = "Częstotliwość odpytywania";
 "status.poll.option-n %lld" = "Opcja %lld";
+"status.poll.send" = "Send Vote";
 "status.post-from-%@" = "Post od %@";
 "status.row.was-boosted" = "podbił(a)";
 "status.row.was-reply" = "Odpowiedział(a) do";

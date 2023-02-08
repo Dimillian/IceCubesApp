@@ -36,17 +36,39 @@ public struct StatusPollView: View {
   }
 
   private func isSelected(option: Poll.Option) -> Bool {
-    for vote in viewModel.votes {
-      return viewModel.poll.options.firstIndex(where: { $0.id == option.id }) == vote
+    if let optionIndex = viewModel.poll.options.firstIndex(where: { $0.id == option.id }),
+       let _ = viewModel.votes.firstIndex(of: optionIndex) {
+      return true
     }
     return false
   }
 
+  private func buttonImage(option: Poll.Option) -> some View {
+    let isSelected = isSelected(option: option)
+    var imageName = ""
+    if viewModel.poll.multiple {
+      if isSelected {
+        imageName = "checkmark.square"
+      } else {
+        imageName = "square"
+      }
+    } else {
+      if isSelected {
+        imageName = "record.circle"
+      } else {
+        imageName = "circle"
+      }
+    }
+    return Image(systemName: imageName)
+      .foregroundColor(theme.labelColor)
+  }
+  
   public var body: some View {
     VStack(alignment: .leading) {
       ForEach(viewModel.poll.options) { option in
         HStack {
-          makeBarView(for: option)
+          makeBarView(for: option, buttonImage: buttonImage(option: option))
+            .disabled(viewModel.poll.expired || (viewModel.poll.voted ?? false))
           if !viewModel.votes.isEmpty || viewModel.poll.expired || status.account.id == currentAccount.account?.id {
             Spacer()
             Text("\(percentForOption(option: option))%")
@@ -54,6 +76,16 @@ public struct StatusPollView: View {
               .frame(width: 40)
           }
         }
+      }
+      if !viewModel.poll.expired, !(viewModel.poll.voted ?? false) {
+        Button("status.poll.send") {
+          Task {
+            do {
+              await viewModel.postVotes()
+            }
+          }
+        }
+        .buttonStyle(.bordered)
       }
       footerView
 
@@ -82,18 +114,13 @@ public struct StatusPollView: View {
   }
 
   @ViewBuilder
-  private func makeBarView(for option: Poll.Option) -> some View {
-    let isSelected = isSelected(option: option)
+  private func makeBarView(for option: Poll.Option, buttonImage: some View) -> some View {
     Button {
       if !viewModel.poll.expired,
-         viewModel.votes.isEmpty,
          let index = viewModel.poll.options.firstIndex(where: { $0.id == option.id })
       {
         withAnimation {
-          viewModel.votes.append(index)
-          Task {
-            await viewModel.postVotes()
-          }
+          viewModel.handleSelection(index)
         }
       }
     } label: {
@@ -119,12 +146,9 @@ public struct StatusPollView: View {
             .clipShape(RoundedRectangle(cornerRadius: 8))
 
           HStack {
-            if isSelected {
-              Image(systemName: "checkmark.circle.fill")
-                .foregroundColor(.mint)
-            }
+            buttonImage
             Text(option.title)
-              .foregroundColor(.white)
+              .foregroundColor(theme.labelColor)
               .font(.scaledBody)
               .minimumScaleFactor(0.7)
           }

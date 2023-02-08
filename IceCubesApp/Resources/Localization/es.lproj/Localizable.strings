@@ -386,6 +386,7 @@
 "status.poll.duration" = "Duración de la encuesta";
 "status.poll.frequency" = "Frecuencia de la encuesta";
 "status.poll.option-n %lld" = "Opción %lld";
+"status.poll.send" = "Send Vote";
 "status.post-from-%@" = "Publicado por %@";
 "status.row.was-boosted" = "retooteó";
 "status.row.was-reply" = "Respuesta a";

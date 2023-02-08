@@ -387,6 +387,7 @@
 "status.poll.duration" = "투표 기간";
 "status.poll.frequency" = "투표 선택 옵션";
 "status.poll.option-n %lld" = "선택지 %lld";
+"status.poll.send" = "Send Vote";
 "status.post-from-%@" = "%@님의 글";
 "status.row.was-boosted" = "님이 부스트함";
 "status.row.was-reply" = "댓글:";

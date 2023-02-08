@@ -381,6 +381,7 @@
 "status.poll.duration" = "Anket Süresi";
 "status.poll.frequency" = "Anket Sıklığı";
 "status.poll.option-n %lld" = "Seçenek %lld";
+"status.poll.send" = "Send Vote";
 "status.post-from-%@" = "Gönderi tarafından %@";
 "status.row.was-boosted" = "yükseltildi";
 "status.row.was-reply" = "Şuna cevap verildi";
