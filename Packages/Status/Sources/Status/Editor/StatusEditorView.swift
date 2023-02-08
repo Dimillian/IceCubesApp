@@ -8,7 +8,6 @@ import Network
 import NukeUI
 import PhotosUI
 import SwiftUI
-import TextView
 import UIKit
 
 public struct StatusEditorView: View {
@@ -36,9 +35,11 @@ public struct StatusEditorView: View {
           VStack(spacing: 12) {
             accountHeaderView
               .padding(.horizontal, .layoutPadding)
-            TextView($viewModel.statusText, $viewModel.selectedRange, $viewModel.markedTextRange)
+            TextView($viewModel.statusText,
+                     getTextView: { textView in
+                viewModel.textView = textView
+              })
               .placeholder(String(localized: "status.editor.text.placeholder"))
-              .font(Font.scaledBodyUIFont)
               .setKeyboardType(preferences.isSocialKeyboardEnabled ? .twitter : .default)
               .padding(.horizontal, .layoutPadding)
             StatusEditorMediaView(viewModel: viewModel)

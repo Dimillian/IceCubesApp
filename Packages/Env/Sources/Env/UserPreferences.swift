@@ -35,6 +35,8 @@ public class UserPreferences: ObservableObject {
   @AppStorage("haptic_tab") public var hapticTabSelectionEnabled = true
   @AppStorage("haptic_timeline") public var hapticTimelineEnabled = true
   @AppStorage("haptic_button_press") public var hapticButtonPressEnabled = true
+  
+  @AppStorage("show_second_column_ipad") public var showiPadSecondaryColumn = true
 
   public var postVisibility: Models.Visibility {
     if useInstanceContentSettings {

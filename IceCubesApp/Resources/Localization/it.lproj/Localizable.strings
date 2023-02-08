@@ -24,6 +24,14 @@
 "enum.avatar-position.top" = "In alto";
 "enum.avatar-shape.circle" = "Cerchio";
 "enum.avatar-shape.rounded" = "Arrotondata";
+"enum.durations.infinite" = "infinite";
+"enum.durations.fiveMinutes" = "5 minutes";
+"enum.durations.thirtyMinutes" = "30 minutes";
+"enum.durations.oneHour" = "1 hour";
+"enum.durations.sixHours" = "6 hours";
+"enum.durations.oneDay" = "1 day";
+"enum.durations.threeDays" = "3 days";
+"enum.durations.sevenDays" = "7 days";
 "enum.status-actions-display.all" = "Tutti";
 "enum.status-actions-display.no-buttons" = "Nessun bottone";
 "enum.status-actions-display.only-buttons" = "Solo bottoni";
@@ -139,14 +147,17 @@
 "settings.other.autoplay-video" = "Auto Play dei video";
 "settings.about.built-with" = "Ice Cubes utilizza i seguenti software Open Source:";
 "settings.about.title" = "Ice Cubes";
-"settings.account.cached-posts-%@" = "Cached posts: %@";
-"settings.account.action.delete-cache" = "Clear cache";
+"settings.account.cached-posts-%@" = "Post in cache: %@";
+"settings.account.action.delete-cache" = "Cancella la cache";
 
-"settings.general.haptic" = "Haptic Feedback";
-"settings.haptic.navigation-title" = "Haptic Settings";
+"settings.general.haptic" = "Feedback aptico";
+"settings.haptic.navigation-title" = "Impostazioni feedback aptico";
 "settings.haptic.timeline" = "Timeline";
-"settings.haptic.tab-selection" = "Tab Selection";
-"settings.haptic.buttons" = "Button Press";
+"settings.haptic.tab-selection" = "Selezione Tab";
+"settings.haptic.buttons" = "Pressione dei bottoni";
+
+"settings.display.section.ipad" = "iPad";
+"settings.display.show-ipad-column" = "Enable secondary column";
 
 // MARK: Tabs
 "tab.explore" = "Esplora";
@@ -184,6 +195,7 @@
 "account.action.unblock" = "Sblocca";
 "account.action.mute" = "Silenzia";
 "account.action.unmute" = "Sblocca";
+"account.action.share" = "Share this account";
 "account.boosted-by" = "Condiviso da";
 "account.detail.about" = "Informazioni";
 "account.detail.familiar-followers" = "Seguito, inoltre, da";
@@ -300,11 +312,12 @@
 
 // MARK: Package: Timeline
 "timeline.federated" = "Federazione";
-"timeline.latest" = "Jump to Latest";
+"timeline.latest" = "Vai all'ultimo post";
 "timeline.home" = "Home";
 "timeline.local" = "Locale";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld post recenti da %lld partecipanti";
 "timeline.trending" = "Trending";
+"timeline.add.url" = "Instance URL";
 
 // MARK: Package: Status
 "status.action.translate" = "Traduci";
@@ -329,6 +342,8 @@
 "status.action.unfavorite" = "Rimuovi l'apprezzamento";
 "status.action.unpin" = "Non fissare";
 "status.action.view-in-browser" = "Vedi nel Browser";
+"status.card.share" = "Share this link";
+"status.card.copy" = "Copy this link";
 "status.draft.delete" = "Cancella la bozza";
 "status.draft.save" = "Salva la bozza";
 "status.editor.ai-prompt.correct" = "Correggi il testo";

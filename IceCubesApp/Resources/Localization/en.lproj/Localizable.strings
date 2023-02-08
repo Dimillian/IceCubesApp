@@ -24,6 +24,14 @@
 "enum.avatar-position.top" = "Top";
 "enum.avatar-shape.circle" = "Circle";
 "enum.avatar-shape.rounded" = "Rounded";
+"enum.durations.infinite" = "infinite";
+"enum.durations.fiveMinutes" = "5 minutes";
+"enum.durations.thirtyMinutes" = "30 minutes";
+"enum.durations.oneHour" = "1 hour";
+"enum.durations.sixHours" = "6 hours";
+"enum.durations.oneDay" = "1 day";
+"enum.durations.threeDays" = "3 days";
+"enum.durations.sevenDays" = "7 days";
 "enum.status-actions-display.all" = "All";
 "enum.status-actions-display.no-buttons" = "No buttons";
 "enum.status-actions-display.only-buttons" = "Only buttons";
@@ -149,6 +157,9 @@
 "settings.haptic.tab-selection" = "Tab Selection";
 "settings.haptic.buttons" = "Button Press";
 
+"settings.display.section.ipad" = "iPad";
+"settings.display.show-ipad-column" = "Enable secondary column";
+
 // MARK: Tabs
 "tab.explore" = "Explore";
 "tab.federated" = "Federated";
@@ -185,6 +196,7 @@
 "account.action.unblock" = "Unblock";
 "account.action.mute" = "Mute";
 "account.action.unmute" = "Unmute";
+"account.action.share" = "Share this account";
 "account.boosted-by" = "Boosted by";
 "account.detail.about" = "About";
 "account.detail.familiar-followers" = "Also followed by";
@@ -305,6 +317,7 @@
 "timeline.local" = "Local";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld recent posts from %lld participants";
 "timeline.trending" = "Trending";
+"timeline.add.url" = "Instance URL";
 
 // MARK: Package: Status
 "status.action.translate" = "Translate";
@@ -329,6 +342,8 @@
 "status.action.unfavorite" = "Unfavorite";
 "status.action.unpin" = "Unpin";
 "status.action.view-in-browser" = "View in Browser";
+"status.card.share" = "Share this link";
+"status.card.copy" = "Copy this link";
 "status.draft.delete" = "Delete Draft";
 "status.draft.save" = "Save Draft";
 "status.editor.ai-prompt.correct" = "Correct text";

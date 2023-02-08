@@ -24,6 +24,14 @@
 "enum.avatar-position.top" = "Top";
 "enum.avatar-shape.circle" = "Circle";
 "enum.avatar-shape.rounded" = "Rounded";
+"enum.durations.infinite" = "infinite";
+"enum.durations.fiveMinutes" = "5 minutes";
+"enum.durations.thirtyMinutes" = "30 minutes";
+"enum.durations.oneHour" = "1 hour";
+"enum.durations.sixHours" = "6 hours";
+"enum.durations.oneDay" = "1 day";
+"enum.durations.threeDays" = "3 days";
+"enum.durations.sevenDays" = "7 days";
 "enum.status-actions-display.all" = "All";
 "enum.status-actions-display.no-buttons" = "No buttons";
 "enum.status-actions-display.only-buttons" = "Only buttons";
@@ -143,11 +151,16 @@
 "settings.account.cached-posts-%@" = "Cached posts: %@";
 "settings.account.action.delete-cache" = "Clear cache";
 
+"account.action.share" = "Share this account";
+
 "settings.general.haptic" = "Haptic Feedback";
 "settings.haptic.navigation-title" = "Haptic Settings";
 "settings.haptic.timeline" = "Timeline";
 "settings.haptic.tab-selection" = "Tab Selection";
 "settings.haptic.buttons" = "Button Press";
+
+"settings.display.section.ipad" = "iPad";
+"settings.display.show-ipad-column" = "Enable secondary column";
 
 // MARK: Tabs
 "tab.explore" = "Explore";
@@ -221,7 +234,7 @@
 "account.posts" = "Posts";
 "account.relation.follows-you" = "Follows You";
 "account.joined" = "Joined";
-"account.action.logout" = "Logout account";
+"account.action.logout" = "Log out account";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Delete";
@@ -305,6 +318,7 @@
 "timeline.local" = "Local";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld recent posts from %lld participants";
 "timeline.trending" = "Trending";
+"timeline.add.url" = "Instance URL";
 
 // MARK: Package: Status
 "status.action.translate" = "Translate";

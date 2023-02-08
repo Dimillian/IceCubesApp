@@ -9,6 +9,7 @@ public class CurrentAccount: ObservableObject {
   @Published public private(set) var tags: [Tag] = []
   @Published public private(set) var followRequests: [Account] = []
   @Published public private(set) var isUpdating: Bool = false
+  @Published public private(set) var updatingFollowRequestAccountIds = Set<String>()
   @Published public private(set) var isLoadingAccount: Bool = false
 
   private var client: Client?
@@ -122,9 +123,9 @@ public class CurrentAccount: ObservableObject {
   public func acceptFollowerRequest(id: String) async {
     guard let client else { return }
     do {
-      isUpdating = true
+      updatingFollowRequestAccountIds.insert(id)
       defer {
-        isUpdating = false
+        updatingFollowRequestAccountIds.remove(id)
       }
       _ = try await client.post(endpoint: FollowRequests.accept(id: id))
       await fetchFollowerRequests()
@@ -134,9 +135,9 @@ public class CurrentAccount: ObservableObject {
   public func rejectFollowerRequest(id: String) async {
     guard let client else { return }
     do {
-      isUpdating = true
+      updatingFollowRequestAccountIds.insert(id)
       defer {
-        isUpdating = false
+        updatingFollowRequestAccountIds.remove(id)
       }
       _ = try await client.post(endpoint: FollowRequests.reject(id: id))
       await fetchFollowerRequests()

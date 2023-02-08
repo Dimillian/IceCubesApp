@@ -62,7 +62,7 @@ public struct StatusCardView: View {
       }
       .contextMenu {
         ShareLink(item: url) {
-          Label("Share this link", systemImage: "square.and.arrow.up")
+          Label("status.card.share", systemImage: "square.and.arrow.up")
         }
         Button { openURL(url) } label: {
           Label("status.action.view-in-browser", systemImage: "safari")
@@ -71,7 +71,7 @@ public struct StatusCardView: View {
         Button {
           UIPasteboard.general.url = url
         } label: {
-          Label("Copy link", systemImage: "doc.on.doc")
+          Label("status.card.copy", systemImage: "doc.on.doc")
         }
       }
     }

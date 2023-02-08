@@ -219,6 +219,7 @@
 		C4CBB909298A0DA3007E1707 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "en-GB"; path = "en-GB.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
 		C4CBB90A298A0DA3007E1707 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		C4CBB90B298A0DA3007E1707 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		C4FBCF6F298FD88A0015DF22 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C9B22676297F6C2E001F9EFE /* ContentSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSettingsView.swift; sourceTree = "<group>"; };
 		DD31E2E5297FB68B00A4BE29 /* IceCubesApp.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = IceCubesApp.xcconfig; sourceTree = "<group>"; };
 		E92817FD29844DB700875FD1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -335,10 +336,6 @@
 		9F398AB529360A6100A889F2 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				069709A3298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf */,
-				069709A7298C87B5006E4CB5 /* OpenDyslexic-Regular.otf */,
-				9F2A542D296B1CC0009B2D7C /* glass.wav */,
-				9F2A542B296B1177009B2D7C /* glass.caf */,
 				9F24EEB729360C330042359D /* Preview Assets.xcassets */,
 				E9B576C029743F2A00BCE646 /* Localization */,
 			);
@@ -352,6 +349,17 @@
 				9F7335F12967608F00AFF0BA /* AddRemoteTimelineView.swift */,
 			);
 			path = Timeline;
+			sourceTree = "<group>";
+		};
+		9FA0D2AC29921C1F008A143B /* Embeds */ = {
+			isa = PBXGroup;
+			children = (
+				069709A3298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf */,
+				069709A7298C87B5006E4CB5 /* OpenDyslexic-Regular.otf */,
+				9F2A542D296B1CC0009B2D7C /* glass.wav */,
+				9F2A542B296B1177009B2D7C /* glass.caf */,
+			);
+			path = Embeds;
 			sourceTree = "<group>";
 		};
 		9FAD858929743F7400496AB1 /* IceCubesShareExtension */ = {
@@ -418,6 +426,7 @@
 		9FBFE63B292A715500C250E9 /* IceCubesApp */ = {
 			isa = PBXGroup;
 			children = (
+				9FA0D2AC29921C1F008A143B /* Embeds */,
 				9FD34822293D06E800DB0EE9 /* Assets.xcassets */,
 				9FAE4AC8293774FF00772766 /* Info.plist */,
 				9F398AB429360A5800A889F2 /* App */,
@@ -814,6 +823,7 @@
 				9FCBB3D429859615009B77EE /* ca */,
 				C4CBB90B298A0DA3007E1707 /* en-GB */,
 				FF8259FC298E42E000BEAB69 /* ko */,
+				C4FBCF6F298FD88A0015DF22 /* zh-Hans */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -862,7 +872,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesNotifications";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -892,7 +902,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesNotifications";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -923,7 +933,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesShareExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -953,7 +963,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesShareExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1119,7 +1129,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -1171,7 +1181,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -1204,7 +1214,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesActionExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1235,7 +1245,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesActionExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;

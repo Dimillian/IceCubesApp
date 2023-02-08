@@ -11,7 +11,11 @@ public class AppAccountViewModel: ObservableObject {
   @Published var account: Account?
 
   var acct: String {
-    "@\(account?.acct ?? "...")@\(appAccount.server)"
+    if let acct = appAccount.accountName {
+      return acct
+    } else {
+      return "@\(account?.acct ?? "...")@\(appAccount.server)"
+    }
   }
 
   public init(appAccount: AppAccount, isCompact: Bool = false) {

@@ -2,53 +2,72 @@ import Foundation
 import SwiftSoup
 import SwiftUI
 
+fileprivate enum CodingKeys: CodingKey {
+  case htmlValue, asMarkdown, asRawText, statusesURLs
+}
+
 public struct HTMLString: Codable, Equatable, Hashable {
   public var htmlValue: String = ""
   public var asMarkdown: String = ""
   public var asRawText: String = ""
   public var statusesURLs = [URL]()
+  
   public var asSafeMarkdownAttributedString: AttributedString = .init()
-  private var regex: NSRegularExpression?
-
+  private var main_regex: NSRegularExpression?
+  private var underscore_regex: NSRegularExpression?
   public init(from decoder: Decoder) {
+    var alreadyDecoded: Bool = false
     do {
       let container = try decoder.singleValueContainer()
       htmlValue = try container.decode(String.self)
     } catch {
-      htmlValue = ""
+      do {
+        alreadyDecoded = true
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        htmlValue = try container.decode(String.self, forKey: .htmlValue)
+        asMarkdown = try container.decode(String.self, forKey: .asMarkdown)
+        asRawText = try container.decode(String.self, forKey: .asRawText)
+        statusesURLs = try container.decode([URL].self, forKey: .statusesURLs)
+      } catch {
+        htmlValue = ""
+      }
     }
 
-    // https://daringfireball.net/projects/markdown/syntax
-    // Pre-escape \ ` _ * and [ as these are the only
-    // characters the markdown parser used picks up
-    // when it renders to attributed text
-    regex = try? NSRegularExpression(pattern: "([\\_\\*\\`\\[\\\\])", options: .caseInsensitive)
+    if !alreadyDecoded {
+      // https://daringfireball.net/projects/markdown/syntax
+      // Pre-escape \ ` _ * and [ as these are the only
+      // characters the markdown parser used picks up
+      // when it renders to attributed text
+      main_regex = try? NSRegularExpression(pattern: "([\\*\\`\\[\\\\])", options: .caseInsensitive)
+      // don't escape underscores that are between colons, they are most likely custom emoji
+      underscore_regex = try? NSRegularExpression(pattern: "(?!\\B:[^:]*)(_)(?![^:]*:\\B)", options: .caseInsensitive)
 
-    asMarkdown = ""
-    do {
-      let document: Document = try SwiftSoup.parse(htmlValue)
-      handleNode(node: document)
+      asMarkdown = ""
+      do {
+        let document: Document = try SwiftSoup.parse(htmlValue)
+        handleNode(node: document)
 
-      document.outputSettings(OutputSettings().prettyPrint(pretty: false))
-      try document.select("br").after("\n")
-      try document.select("p").after("\n\n")
-      let html = try document.html()
-      var text = try SwiftSoup.clean(html, "", Whitelist.none(), OutputSettings().prettyPrint(pretty: false)) ?? ""
-      // Remove the two last line break added after the last paragraph.
-      if text.hasSuffix("\n\n") {
-        _ = text.removeLast()
-        _ = text.removeLast()
+        document.outputSettings(OutputSettings().prettyPrint(pretty: false))
+        try document.select("br").after("\n")
+        try document.select("p").after("\n\n")
+        let html = try document.html()
+        var text = try SwiftSoup.clean(html, "", Whitelist.none(), OutputSettings().prettyPrint(pretty: false)) ?? ""
+        // Remove the two last line break added after the last paragraph.
+        if text.hasSuffix("\n\n") {
+          _ = text.removeLast()
+          _ = text.removeLast()
+        }
+        asRawText = text
+
+        if asMarkdown.hasPrefix("\n") {
+          _ = asMarkdown.removeFirst()
+        }
+
+      } catch {
+        asRawText = htmlValue
       }
-      asRawText = text
-
-      if asMarkdown.hasPrefix("\n") {
-        _ = asMarkdown.removeFirst()
-      }
-
-    } catch {
-      asRawText = htmlValue
     }
-
+    
     do {
       let options = AttributedString.MarkdownParsingOptions(allowsExtendedAttributes: true,
                                                             interpretedSyntax: .inlineOnlyPreservingWhitespace)
@@ -67,8 +86,11 @@ public struct HTMLString: Codable, Equatable, Hashable {
   }
 
   public func encode(to encoder: Encoder) throws {
-    var container = encoder.singleValueContainer()
-    try container.encode(htmlValue)
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    try container.encode(htmlValue, forKey: .htmlValue)
+    try container.encode(asMarkdown, forKey: .asMarkdown)
+    try container.encode(asRawText, forKey: .asRawText)
+    try container.encode(statusesURLs, forKey: .statusesURLs)
   }
 
   private mutating func handleNode(node: SwiftSoup.Node) {
@@ -130,9 +152,10 @@ public struct HTMLString: Codable, Equatable, Hashable {
       } else if node.nodeName() == "#text" {
         var txt = node.description
 
-        if let regex {
+        if let underscore_regex, let main_regex {
           //  This is the markdown escaper
-          txt = regex.stringByReplacingMatches(in: txt, options: [], range: NSRange(location: 0, length: txt.count), withTemplate: "\\\\$1")
+          txt = main_regex.stringByReplacingMatches(in: txt, options: [], range: NSRange(location: 0, length: txt.count), withTemplate: "\\\\$1")
+          txt = underscore_regex.stringByReplacingMatches(in: txt, options: [], range: NSRange(location: 0, length: txt.count), withTemplate: "\\\\$1")
         }
 
         asMarkdown += txt

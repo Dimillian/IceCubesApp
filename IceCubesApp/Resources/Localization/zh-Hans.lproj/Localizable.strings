@@ -24,6 +24,14 @@
 "enum.avatar-position.top" = "顶部";
 "enum.avatar-shape.circle" = "圆形";
 "enum.avatar-shape.rounded" = "圆角";
+"enum.durations.infinite" = "永久";
+"enum.durations.fiveMinutes" = "5 分钟";
+"enum.durations.thirtyMinutes" = "30 分钟";
+"enum.durations.oneHour" = "1 小时";
+"enum.durations.sixHours" = "6 小时";
+"enum.durations.oneDay" = "1 天";
+"enum.durations.threeDays" = "3 天";
+"enum.durations.sevenDays" = "7 天";
 "enum.status-actions-display.all" = "图标和文本";
 "enum.status-actions-display.no-buttons" = "仅文本";
 "enum.status-actions-display.only-buttons" = "仅图标";
@@ -57,7 +65,7 @@
 "settings.app.icon.navigation-title" = "图标";
 "settings.app.source" = "源代码（GitHub 链接）";
 "settings.app.support" = "支持本应用";
-"settings.app.about" = "About";
+"settings.app.about" = "关于";
 "settings.display.avatar.position" = "头像位置";
 "settings.display.avatar.shape" = "头像边框";
 "settings.display.navigation-title" = "显示设置";
@@ -74,7 +82,7 @@
 "settings.display.theme.systemColor" = "匹配系统";
 "settings.general.browser" = "默认浏览器";
 "settings.general.browser.in-app" = "应用内浏览器";
-"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
+"settings.general.browser.in-app.readerview" = "应用内浏览器阅读器视图";
 "settings.general.browser.system" = "系统浏览器";
 "settings.general.display" = "显示设置";
 "settings.general.instance" = "服务器设置";
@@ -132,21 +140,24 @@
 "settings.push.duplicate.footer" = "有收到重复的推送通知？试试用这个魔法按钮去修复吧";
 "settings.push.duplicate.button.fix" = "🪄 修复";
 "settings.other.autoplay-video" = "自动播放视频";
-"settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
+"settings.about.built-with" = "Ice Cubes 采用以下开源项目构建：";
 "settings.about.title" = "Ice Cubes";
-"settings.account.cached-posts-%@" = "Cached posts: %@";
-"settings.account.action.delete-cache" = "Clear cache";
+"settings.account.cached-posts-%@" = "已缓存嘟文：%@";
+"settings.account.action.delete-cache" = "清除缓存";
 
-"settings.general.haptic" = "Haptic Feedback";
-"settings.haptic.navigation-title" = "Haptic Settings";
-"settings.haptic.timeline" = "Timeline";
-"settings.haptic.tab-selection" = "Tab Selection";
-"settings.haptic.buttons" = "Button Press";
+"settings.general.haptic" = "触感触控";
+"settings.haptic.navigation-title" = "触感触控设置";
+"settings.haptic.timeline" = "时间线";
+"settings.haptic.tab-selection" = "导航栏";
+"settings.haptic.buttons" = "按钮";
 
 "settings.display.font" = "时间线字体";
 "settings.display.font.system" = "系统";
 "settings.display.font.custom" = "自定义";
 "settings.display.font.scaling-%@" = "字体缩放：%@";
+
+"settings.display.section.ipad" = "iPad";
+"settings.display.show-ipad-column" = "启用边栏";
 
 // MARK: Tabs
 "tab.explore" = "探索";
@@ -184,6 +195,7 @@
 "account.action.unblock" = "取消屏蔽";
 "account.action.mute" = "免打扰";
 "account.action.unmute" = "取消免打扰";
+"account.action.share" = "分享该账户";
 "account.boosted-by" = "转发";
 "account.detail.about" = "附加信息";
 "account.detail.familiar-followers" = "同样关注此账号的有";
@@ -300,11 +312,12 @@
 
 // MARK: Package: Timeline
 "timeline.federated" = "跨站";
-"timeline.latest" = "Jump to Latest";
+"timeline.latest" = "跳转到最新";
 "timeline.home" = "主页";
 "timeline.local" = "本地";
 "timeline.n-recent-from-n-participants %lld %lld" = "最近 %lld 条嘟文来自 %lld 个参与者";
 "timeline.trending" = "当下流行";
+"timeline.add.url" = "服务器 URL";
 
 // MARK: Package: Status
 "status.action.translate" = "翻译";
@@ -329,6 +342,8 @@
 "status.action.unfavorite" = "取消收藏";
 "status.action.unpin" = "取消固定";
 "status.action.view-in-browser" = "在浏览器中打开";
+"status.card.share" = "分享链接";
+"status.card.copy" = "拷贝链接";
 "status.draft.delete" = "删除草稿";
 "status.draft.save" = "保存草稿";
 "status.editor.ai-prompt.correct" = "检查拼写和语法";

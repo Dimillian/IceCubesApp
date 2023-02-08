@@ -64,12 +64,12 @@ struct AboutView: View {
         • [KeychainSwift](https://github.com/evgenyneu/keychain-swift)
 
         • [LRUCache](https://github.com/nicklockwood/LRUCache)
+        
+        • [Boutique](https://github.com/mergesort/Boutique)
 
         • [Nuke](https://github.com/kean/Nuke)
 
         • [SwiftSoup](https://github.com/scinfu/SwiftSoup.git)
-
-        • [TextView](https://github.com/Dimillian/TextView)
 
         • [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible)
 

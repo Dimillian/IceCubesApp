@@ -32,9 +32,9 @@ public enum Accounts: Endpoint {
   case preferences
   case block(id: String)
   case unblock(id: String)
-  case mute(id: String)
+  case mute(id: String, json: MuteData)
   case unmute(id: String)
-
+  
   public func path() -> String {
     switch self {
     case let .accounts(id):
@@ -75,13 +75,13 @@ public enum Accounts: Endpoint {
       return "accounts/\(id)/block"
     case let .unblock(id):
       return "accounts/\(id)/unblock"
-    case let .mute(id):
+    case let .mute(id, _):
       return "accounts/\(id)/mute"
     case let .unmute(id):
       return "accounts/\(id)/unmute"
     }
   }
-
+  
   public func queryItems() -> [URLQueryItem]? {
     switch self {
     case let .statuses(_, sinceId, tag, onlyMedia, excludeReplies, pinned):
@@ -137,5 +137,22 @@ public enum Accounts: Endpoint {
     default:
       return nil
     }
+  }
+  
+  public var jsonValue: Encodable? {
+    switch self {
+    case let .mute(_, json):
+      return json
+    default:
+      return nil
+    }
+  }
+}
+
+public struct MuteData: Encodable {
+  public let duration: Int
+  
+  public init(duration: Int) {
+    self.duration = duration
   }
 }

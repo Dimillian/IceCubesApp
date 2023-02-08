@@ -23,6 +23,14 @@
 "enum.avatar-position.top" = "Dalt";
 "enum.avatar-shape.circle" = "Cercle";
 "enum.avatar-shape.rounded" = "Arrodonida";
+"enum.durations.infinite" = "infinite";
+"enum.durations.fiveMinutes" = "5 minutes";
+"enum.durations.thirtyMinutes" = "30 minutes";
+"enum.durations.oneHour" = "1 hour";
+"enum.durations.sixHours" = "6 hours";
+"enum.durations.oneDay" = "1 day";
+"enum.durations.threeDays" = "3 days";
+"enum.durations.sevenDays" = "7 days";
 "enum.status-actions-display.all" = "Tots";
 "enum.status-actions-display.no-buttons" = "Sense botons";
 "enum.status-actions-display.only-buttons" = "Només els botons";
@@ -147,6 +155,9 @@
 "settings.haptic.tab-selection" = "Tab Selection";
 "settings.haptic.buttons" = "Button Press";
 
+"settings.display.section.ipad" = "iPad";
+"settings.display.show-ipad-column" = "Enable secondary column";
+
 // MARK: Tabs
 "tab.explore" = "Exploreu";
 "tab.federated" = "Federat";
@@ -183,6 +194,7 @@
 "account.action.unblock" = "Desbloca";
 "account.action.mute" = "Silencia";
 "account.action.unmute" = "Deixa de silenciar";
+"account.action.share" = "Share this account";
 "account.boosted-by" = "Impulsat per";
 "account.detail.about" = "Quant a";
 "account.detail.familiar-followers" = "També seguit per";
@@ -303,6 +315,7 @@
 "timeline.local" = "Local";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld publicació recents de %lld participants";
 "timeline.trending" = "Tendència";
+"timeline.add.url" = "Instance URL";
 
 // MARK: Package: Status
 "status.action.translate" = "Tradueix";
@@ -327,6 +340,8 @@
 "status.action.unfavorite" = "Desfés el preferit";
 "status.action.unpin" = "Deixa de fixar";
 "status.action.view-in-browser" = "Mostra al navegador";
+"status.card.share" = "Share this link";
+"status.card.copy" = "Copy this link";
 "status.draft.delete" = "Elimina l'esborrany";
 "status.draft.save" = "Desa l'esborrany";
 "status.editor.ai-prompt.correct" = "Corregeix el text";
