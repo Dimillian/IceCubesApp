@@ -149,7 +149,7 @@ extension TimelineViewModel: StatusesFetcher {
   func fetchStatuses() async {
     guard let client else { return }
     do {
-      if statuses.isEmpty {
+      if statuses.isEmpty || timeline == .trending {
         try await fetchFirstPage(client: client)
       } else if let latest = statuses.first {
         try await fetchNewPagesFrom(latestStatus: latest, client: client)
@@ -193,12 +193,13 @@ extension TimelineViewModel: StatusesFetcher {
       statuses = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
                                                                   maxId: nil,
                                                                   minId: nil,
-                                                                  offset: statuses.count))
+                                                                  offset: 0))
 
       updateMentionsToBeHighlighted(&statuses)
       ReblogCache.shared.removeDuplicateReblogs(&statuses)
 
       await cacheHome()
+      
       withAnimation {
         statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
       }

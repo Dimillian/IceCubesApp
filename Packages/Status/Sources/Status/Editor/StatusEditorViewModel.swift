@@ -20,6 +20,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
       textView?.pasteDelegate = self
     }
   }
+  
   var selectedRange: NSRange {
     get {
       guard let textView else {
