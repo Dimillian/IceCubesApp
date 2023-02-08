@@ -43,9 +43,11 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
   
   @Published var statusText = NSMutableAttributedString(string: "") {
     didSet {
+      let range = selectedRange
       processText()
       checkEmbed()
       textView?.attributedText = statusText
+      selectedRange = range
     }
   }
 
