@@ -13,7 +13,7 @@ struct DisplaySettingsView: View {
 
   @State private var isFontSelectorPresented = false
   
-  @State private var previewStatusViewModel = StatusRowViewModel(status: Status.placeholder(parseMarkdown: true))
+  private var previewStatusViewModel = StatusRowViewModel(status: Status.placeholder(parseMarkdown: true))
 
   var body: some View {
 
