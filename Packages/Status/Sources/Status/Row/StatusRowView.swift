@@ -21,20 +21,6 @@ public struct StatusRowView: View {
 
   var contextMenu: some View {
     StatusRowContextMenu(viewModel: viewModel)
-      .overlay(
-        EmptyView().alert(isPresented: $viewModel.showingAlert, content: {
-          Alert(
-            title: Text("status.action.delete.confirm.title"),
-            message: Text("status.action.delete.confirm.message"),
-            primaryButton: .destructive(
-              Text("status.action.delete")) {
-                Task {
-                  await viewModel.delete()
-                }
-              },
-            secondaryButton: .cancel())}),
-        alignment: .bottomTrailing
-      )
   }
 
   public var body: some View {
@@ -141,6 +127,18 @@ public struct StatusRowView: View {
           remoteContentLoadingView
         }
       }
+      .alert(isPresented: $viewModel.showDeleteAlert, content: {
+        Alert(
+          title: Text("status.action.delete.confirm.title"),
+          message: Text("status.action.delete.confirm.message"),
+          primaryButton: .destructive(
+            Text("status.action.delete")) {
+              Task {
+                await viewModel.delete()
+              }
+            },
+          secondaryButton: .cancel())
+      })
       .alignmentGuide(.listRowSeparatorLeading) { _ in
         -100
       }

@@ -327,7 +327,7 @@
 "status.action.copy-text" = "Copiar Texto";
 "status.action.delete" = "Deletar";
 "status.action.delete.confirm.title" = "Confirm";
-"status.action.delete.confirm.message" = "Are you sure you want to Delete Toot?";
+"status.action.delete.confirm.message" = "are you sure you want to delete this post?";
 "status.action.edit" = "Editar";
 "status.action.favorite" = "Favoritar";
 "status.action.mention" = "Menção";

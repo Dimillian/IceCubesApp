@@ -323,7 +323,7 @@
 "status.action.copy-text" = "Copier le texte";
 "status.action.delete" = "Supprimer";
 "status.action.delete.confirm.title" = "Confirm";
-"status.action.delete.confirm.message" = "Are you sure you want to Delete Toot?";
+"status.action.delete.confirm.message" = "are you sure you want to delete this post?";
 "status.action.edit" = "Modifier";
 "status.action.favorite" = "Favori";
 "status.action.mention" = "Mentionner";
