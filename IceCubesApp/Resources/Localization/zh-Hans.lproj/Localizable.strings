@@ -66,6 +66,7 @@
 "settings.app.source" = "源代码（GitHub 链接）";
 "settings.app.support" = "支持本应用";
 "settings.app.about" = "关于";
+"settings.display.example-toot" = "Example Toot";
 "settings.display.avatar.position" = "头像位置";
 "settings.display.avatar.shape" = "头像边框";
 "settings.display.navigation-title" = "显示设置";

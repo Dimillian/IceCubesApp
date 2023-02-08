@@ -3,6 +3,11 @@ import Foundation
 public typealias ServerDate = String
 
 extension ServerDate {
+  
+  public static var sampleDate: ServerDate {
+    createdAtDateFormatter.string(from: Date()-100)
+  }
+  
   private static var createdAtDateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
     dateFormatter.calendar = .init(identifier: .iso8601)

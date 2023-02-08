@@ -66,6 +66,7 @@
 "settings.app.source" = "소스 코드 (GitHub)";
 "settings.app.support" = "이 앱 지원하기";
 "settings.app.about" = "이 앱에 관해";
+"settings.display.example-toot" = "Example Toot";
 "settings.display.avatar.position" = "프로필 사진 위치";
 "settings.display.avatar.shape" = "프로필 사진 모양";
 "settings.display.navigation-title" = "화면 설정";

@@ -12,9 +12,18 @@ struct DisplaySettingsView: View {
   @EnvironmentObject private var userPreferences: UserPreferences
 
   @State private var isFontSelectorPresented = false
+  
+  @State private var previewStatusViewModel = StatusRowViewModel(status: Status.placeholder(parseMarkdown: true))
 
   var body: some View {
+
+ 
     Form {
+      
+      Section("settings.display.example-toot") {
+        StatusRowView(viewModel: previewStatusViewModel)
+      }
+
       Section {
         Toggle("settings.display.theme.systemColor", isOn: $theme.followSystemColorScheme)
         themeSelectorButton

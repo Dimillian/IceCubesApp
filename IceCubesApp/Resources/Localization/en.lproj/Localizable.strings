@@ -66,6 +66,7 @@
 "settings.app.source" = "Source (GitHub link)";
 "settings.app.support" = "Support the app";
 "settings.app.about" = "About";
+"settings.display.example-toot" = "Example Toot";
 "settings.display.font" = "Timeline Font";
 "settings.display.font.system" = "System";
 "settings.display.font.custom" = "Custom";

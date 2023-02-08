@@ -77,12 +77,24 @@ public struct HTMLString: Codable, Equatable, Hashable {
     }
   }
 
-  public init(stringValue: String) {
+  public init(stringValue: String, parseMarkdown:Bool = false) {
     htmlValue = stringValue
     asMarkdown = stringValue
     asRawText = stringValue
     statusesURLs = []
-    asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
+    
+    if parseMarkdown {
+      do {
+        let options = AttributedString.MarkdownParsingOptions(allowsExtendedAttributes: true,
+                                                              interpretedSyntax: .inlineOnlyPreservingWhitespace)
+        asSafeMarkdownAttributedString = try AttributedString(markdown: asMarkdown, options: options)
+      } catch {
+        asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
+      }
+    }
+    else {
+      asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
+    }
   }
 
   public func encode(to encoder: Encoder) throws {

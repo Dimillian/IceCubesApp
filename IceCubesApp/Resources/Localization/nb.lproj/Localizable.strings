@@ -66,6 +66,7 @@
 "settings.app.source" = "Kilde (GitHub-lenke)";
 "settings.app.support" = "Støtt denne appen";
 "settings.app.about" = "About";
+"settings.display.example-toot" = "Example Toot";
 "settings.display.font" = "Tidslinjefont";
 "settings.display.font.system" = "System";
 "settings.display.font.custom" = "Tilpasset";

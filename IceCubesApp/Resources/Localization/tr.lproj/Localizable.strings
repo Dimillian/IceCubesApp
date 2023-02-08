@@ -66,6 +66,7 @@
 "settings.app.source" = "Kaynak Kodu (GitHub link)";
 "settings.app.support" = "Uygulamayı Destekleyin";
 "settings.app.about" = "About";
+"settings.display.example-toot" = "Example Toot";
 "settings.display.avatar.position" = "Avatar Pozisyonu";
 "settings.display.avatar.shape" = "Avatar Şekli";
 "settings.display.navigation-title" = "Gösterim Ayarları";
