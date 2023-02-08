@@ -156,6 +156,9 @@
 "settings.haptic.tab-selection" = "Wybór zakładki";
 "settings.haptic.buttons" = "Naciśnięcie przycisku";
 
+"settings.display.section.phone" = "iPhone";
+"settings.display.show-tab-label" = "Show tab name";
+
 "settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Włącz dodatkową kolumnę";
 

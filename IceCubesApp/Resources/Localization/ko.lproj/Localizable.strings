@@ -156,6 +156,9 @@
 "settings.haptic.tab-selection" = "하단 탭 바를 누를 때";
 "settings.haptic.buttons" = "버튼을 누를 때";
 
+"settings.display.section.phone" = "iPhone";
+"settings.display.show-tab-label" = "Show tab name";
+
 "settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Enable secondary column";
 

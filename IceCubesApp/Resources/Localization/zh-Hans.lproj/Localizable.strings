@@ -156,6 +156,9 @@
 "settings.display.font.custom" = "自定义";
 "settings.display.font.scaling-%@" = "字体缩放：%@";
 
+"settings.display.section.phone" = "iPhone";
+"settings.display.show-tab-label" = "Show tab label";
+
 "settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "启用边栏";
 
