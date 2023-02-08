@@ -17,7 +17,7 @@ class ConversationDetailViewModel: ObservableObject {
 
   init(conversation: Conversation) {
     self.conversation = conversation
-    messages = [conversation.lastStatus]
+    messages = conversation.lastStatus != nil ?  [conversation.lastStatus!] : []
   }
 
   func fetchMessages() async {
@@ -64,7 +64,9 @@ class ConversationDetailViewModel: ObservableObject {
               event.conversation.id == conversation.id
     {
       conversation = event.conversation
-      appendNewStatus(status: conversation.lastStatus)
+      if conversation.lastStatus != nil {
+        appendNewStatus(status: conversation.lastStatus!)
+      }
     }
   }
 
