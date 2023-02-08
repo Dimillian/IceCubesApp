@@ -82,7 +82,7 @@
 "settings.display.theme.systemColor" = "Systemeinstellung verwenden";
 "settings.general.browser" = "Browser";
 "settings.general.browser.in-app" = "In-App-Browser";
-"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
+"settings.general.browser.in-app.readerview" = "In-App-Browser-Lesemodus";
 "settings.general.browser.system" = "Systembrowser";
 "settings.general.display" = "Anzeigeeinstellungen";
 "settings.general.instance" = "Instanz-Informationen";
@@ -197,7 +197,7 @@
 "account.action.unblock" = "Blockade aufheben";
 "account.action.mute" = "Stummschalten";
 "account.action.unmute" = "Stummschaltung aufheben";
-"account.action.share" = "Share this account";
+"account.action.share" = "Diesen Account teilen";
 "account.boosted-by" = "Geboostet von";
 "account.detail.about" = "Über";
 "account.detail.familiar-followers" = "Auch gefolgt von";
@@ -326,8 +326,8 @@
 "status.action.boost" = "Boosten";
 "status.action.copy-text" = "Text kopieren";
 "status.action.delete" = "Löschen";
-"status.action.delete.confirm.title" = "Confirm";
-"status.action.delete.confirm.message" = "are you sure you want to delete this post?";
+"status.action.delete.confirm.title" = "Bestätigen";
+"status.action.delete.confirm.message" = "bist du dir sicher, dass du diesen Beitrag löschen möchtest?";
 "status.action.edit" = "Bearbeiten";
 "status.action.favorite" = "Favorisieren";
 "status.action.mention" = "Erwähnen";
