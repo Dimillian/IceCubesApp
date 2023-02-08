@@ -66,6 +66,7 @@
 "settings.app.source" = "Código fuente (Enlace a GitHub)";
 "settings.app.support" = "Apoya a Ice Cubes";
 "settings.app.about" = "Acerca de";
+"settings.display.example-toot" = "Example Post";
 "settings.display.avatar.position" = "Posición del avatar";
 "settings.display.avatar.shape" = "Forma del avatar";
 "settings.display.navigation-title" = "Ajustes de apariencia";

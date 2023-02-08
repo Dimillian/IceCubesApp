@@ -65,6 +65,7 @@
 "settings.app.source" = "Font (enllaç a GitHub)";
 "settings.app.support" = "Dona suport a l'aplicació";
 "settings.app.about" = "About";
+"settings.display.example-toot" = "Example Post";
 "settings.display.avatar.position" = "Posició de les fotos de perfil";
 "settings.display.avatar.shape" = "Forma de les fotos de perfil";
 "settings.display.navigation-title" = "Configuració de l'aparença";

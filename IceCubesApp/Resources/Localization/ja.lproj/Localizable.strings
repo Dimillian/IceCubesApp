@@ -66,6 +66,7 @@
 "settings.app.source" = "ソース (GitHub link)";
 "settings.app.support" = "アプリを支援する";
 "settings.app.about" = "アプリについて";
+"settings.display.example-toot" = "Example Post";
 "settings.display.font" = "タイムラインのフォント";
 "settings.display.font.system" = "システムフォント";
 "settings.display.font.custom" = "カスタム";

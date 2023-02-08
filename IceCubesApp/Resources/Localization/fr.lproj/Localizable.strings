@@ -66,6 +66,7 @@
 "settings.app.source" = "Source (lien GitHub)";
 "settings.app.support" = "Soutenir l'application";
 "settings.app.about" = "À propos";
+"settings.display.example-toot" = "Example Post";
 "settings.display.avatar.position" = "Position de l'avatar";
 "settings.display.avatar.shape" = "Forme de l'avatar";
 "settings.display.navigation-title" = "Paramètres d'affichage";

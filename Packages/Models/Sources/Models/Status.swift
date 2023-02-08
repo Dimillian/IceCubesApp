@@ -100,11 +100,12 @@ public struct Status: AnyStatus, Codable, Identifiable, Equatable, Hashable, Sta
   public let sensitive: Bool
   public let language: String?
 
-  public static func placeholder() -> Status {
+  public static func placeholder(parseMarkdown:Bool = false) -> Status {
     .init(id: UUID().uuidString,
-          content: .init(stringValue: "This is a #toot\nWith some @content\nAnd some more content for your #eyes @only"),
+          content: .init(stringValue: "Lorem ipsum [#dolor](#) sit amet\nconsectetur [@adipiscing](#) elit\nAsed do eiusmod tempor incididunt ut labore.", parseMarkdown: parseMarkdown),
+
           account: .placeholder(),
-          createdAt: "2022-12-16T10:20:54.000Z",
+          createdAt: ServerDate.sampleDate,
           editedAt: nil,
           reblog: nil,
           mediaAttachments: [],

@@ -66,6 +66,7 @@
 "settings.app.source" = "Broncode (GitHub-link)";
 "settings.app.support" = "De app steunen";
 "settings.app.about" = "Info";
+"settings.display.example-toot" = "Example Post";
 "settings.display.avatar.position" = "Avatarpositie";
 "settings.display.avatar.shape" = "Avatarvorm";
 "settings.display.navigation-title" = "Weergaveopties";
