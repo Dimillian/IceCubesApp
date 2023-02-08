@@ -100,35 +100,36 @@ public struct Status: AnyStatus, Codable, Identifiable, Equatable, Hashable, Sta
   public let sensitive: Bool
   public let language: String?
 
-  public static func placeholder(parseMarkdown:Bool = false) -> Status {
+  public static func placeholder(forSettings:Bool = false, language:String? = nil) -> Status {
     .init(id: UUID().uuidString,
-          content: .init(stringValue: "Lorem ipsum [#dolor](#) sit amet\nconsectetur [@adipiscing](#) elit\nAsed do eiusmod tempor incididunt ut labore.", parseMarkdown: parseMarkdown),
+     content: .init(stringValue: "Lorem ipsum [#dolor](#) sit amet\nconsectetur [@adipiscing](#) elit\nAsed do eiusmod tempor incididunt ut labore.", parseMarkdown: forSettings),
 
-          account: .placeholder(),
-          createdAt: ServerDate.sampleDate,
-          editedAt: nil,
-          reblog: nil,
-          mediaAttachments: [],
-          mentions: [],
-          repliesCount: 0,
-          reblogsCount: 0,
-          favouritesCount: 0,
-          card: nil,
-          favourited: false,
-          reblogged: false,
-          pinned: false,
-          bookmarked: false,
-          emojis: [],
-          url: nil,
-          application: nil,
-          inReplyToAccountId: nil,
-          visibility: .pub,
-          poll: nil,
-          spoilerText: .init(stringValue: ""),
-          filtered: [],
-          sensitive: false,
-          language: nil)
+     account: .placeholder(),
+     createdAt: ServerDate.sampleDate,
+     editedAt: nil,
+     reblog: nil,
+     mediaAttachments: [],
+     mentions: [],
+     repliesCount: 0,
+     reblogsCount: 0,
+     favouritesCount: 0,
+     card: nil,
+     favourited: false,
+     reblogged: false,
+     pinned: false,
+     bookmarked: false,
+     emojis: [],
+     url: nil,
+     application: nil,
+     inReplyToAccountId: nil,
+     visibility: .pub,
+     poll: nil,
+     spoilerText: .init(stringValue: ""),
+     filtered: [],
+     sensitive: false,
+     language: language)
   }
+
 
   public static func placeholders() -> [Status] {
     [.placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder()]

@@ -13,13 +13,18 @@ struct DisplaySettingsView: View {
   
   @State private var isFontSelectorPresented = false
   
-  private var previewStatusViewModel = StatusRowViewModel(status: Status.placeholder(parseMarkdown: true))
+  @State private var previewStatusViewModel:StatusRowViewModel?
   
   var body: some View {
     Form {
       Section("settings.display.example-toot") {
-        StatusRowView(viewModel: previewStatusViewModel)
-          .allowsHitTesting(false)
+        if let previewStatusViewModel {
+          StatusRowView(viewModel: previewStatusViewModel)
+            .allowsHitTesting(false)
+        }
+      }
+      .onAppear() {
+        self.previewStatusViewModel = StatusRowViewModel(status: Status.placeholder(forSettings: true, language: "la")) // translate from latin button
       }
       
       Section {
