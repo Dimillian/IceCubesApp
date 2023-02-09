@@ -157,6 +157,9 @@
 "settings.haptic.tab-selection" = "하단 탭 바를 누를 때";
 "settings.haptic.buttons" = "버튼을 누를 때";
 
+"settings.display.section.phone" = "iPhone";
+"settings.display.show-tab-label" = "Show tab name";
+
 "settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Enable secondary column";
 
@@ -387,6 +390,7 @@
 "status.poll.duration" = "투표 기간";
 "status.poll.frequency" = "투표 선택 옵션";
 "status.poll.option-n %lld" = "선택지 %lld";
+"status.poll.send" = "Send Vote";
 "status.post-from-%@" = "%@님의 글";
 "status.row.was-boosted" = "님이 부스트함";
 "status.row.was-reply" = "댓글:";

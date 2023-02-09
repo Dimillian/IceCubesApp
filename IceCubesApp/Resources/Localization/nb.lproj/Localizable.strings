@@ -157,6 +157,9 @@
 "settings.haptic.tab-selection" = "Tab Selection";
 "settings.haptic.buttons" = "Button Press";
 
+"settings.display.section.phone" = "iPhone";
+"settings.display.show-tab-label" = "Show tab name";
+
 "settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Enable secondary column";
 
@@ -385,6 +388,7 @@
 "status.poll.duration" = "Avstemningens varighet";
 "status.poll.frequency" = "Avstemningsfrekvens";
 "status.poll.option-n %lld" = "Valg %lld";
+"status.poll.send" = "Send Vote";
 "status.post-from-%@" = "Innlegg fra %@";
 "status.row.was-boosted" = "forsterket";
 "status.row.was-reply" = "Svar til";

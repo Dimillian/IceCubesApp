@@ -158,6 +158,9 @@
 "settings.haptic.tab-selection" = "Tab Selection";
 "settings.haptic.buttons" = "Button Press";
 
+"settings.display.section.phone" = "iPhone";
+"settings.display.show-tab-label" = "Show tab name";
+
 "settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Enable secondary column";
 
@@ -386,6 +389,7 @@
 "status.poll.duration" = "Poll Duration";
 "status.poll.frequency" = "Polling Frequency";
 "status.poll.option-n %lld" = "Option %lld";
+"status.poll.send" = "Send Vote";
 "status.post-from-%@" = "Post from %@";
 "status.row.was-boosted" = "boosted";
 "status.row.was-reply" = "Replied to";

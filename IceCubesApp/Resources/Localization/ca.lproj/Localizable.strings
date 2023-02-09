@@ -156,6 +156,9 @@
 "settings.haptic.tab-selection" = "Tab Selection";
 "settings.haptic.buttons" = "Button Press";
 
+"settings.display.section.phone" = "iPhone";
+"settings.display.show-tab-label" = "Show tab name";
+
 "settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Enable secondary column";
 
@@ -384,6 +387,7 @@
 "status.poll.duration" = "Durada de l'enquesta";
 "status.poll.frequency" = "Freqüència de l'enquesta";
 "status.poll.option-n %lld" = "Opció %lld";
+"status.poll.send" = "Send Vote";
 "status.post-from-%@" = "Publicació de: %@";
 "status.row.was-boosted" = "impulsat";
 "status.row.was-reply" = "Ha respost a";

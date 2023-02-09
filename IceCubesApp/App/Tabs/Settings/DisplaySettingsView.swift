@@ -6,27 +6,20 @@ import SwiftUI
 
 struct DisplaySettingsView: View {
   typealias FontState = Theme.FontState
-  
+
   @Environment(\.colorScheme) private var colorScheme
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var userPreferences: UserPreferences
-  
+
   @State private var isFontSelectorPresented = false
-  
-  @State private var previewStatusViewModel:StatusRowViewModel?
-  
+  private var previewStatusViewModel = StatusRowViewModel(status: Status.placeholder(forSettings: true, language: "la")) // translate from latin button
   var body: some View {
     Form {
       Section("settings.display.example-toot") {
-        if let previewStatusViewModel {
-          StatusRowView(viewModel: previewStatusViewModel)
-            .allowsHitTesting(false)
-        }
+        StatusRowView(viewModel: previewStatusViewModel)
+          .allowsHitTesting(false)
       }
-      .onAppear() {
-        self.previewStatusViewModel = StatusRowViewModel(status: Status.placeholder(forSettings: true, language: "la")) // translate from latin button
-      }
-      
+
       Section {
         Toggle("settings.display.theme.systemColor", isOn: $theme.followSystemColorScheme)
         themeSelectorButton
@@ -103,13 +96,20 @@ struct DisplaySettingsView: View {
         Toggle("settings.display.translate-button", isOn: $userPreferences.showTranslateButton)
       }
       .listRowBackground(theme.primaryBackgroundColor)
-      
+
+      if UIDevice.current.userInterfaceIdiom == .phone {
+        Section("settings.display.section.phone") {
+          Toggle("settings.display.show-tab-label", isOn: $userPreferences.showiPhoneTabLabel)
+        }
+        .listRowBackground(theme.primaryBackgroundColor)
+      }
+
       if UIDevice.current.userInterfaceIdiom == .pad {
         Section("settings.display.section.ipad") {
           Toggle("settings.display.show-ipad-column", isOn: $userPreferences.showiPadSecondaryColumn)
         }
       }
-      
+
       Section {
         Button {
           theme.followSystemColorScheme = true
@@ -127,7 +127,7 @@ struct DisplaySettingsView: View {
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
   }
-  
+
   private var themeSelectorButton: some View {
     NavigationLink(destination: ThemePreviewView()) {
       HStack {
