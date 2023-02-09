@@ -50,7 +50,7 @@ struct IconSelectorView: View {
       IconSelector(title: "Icons by Albert Kinng", icons: [.alt20, .alt21, .alt22, .alt23, .alt24]),
       IconSelector(title: "Icons by Dan van Moll", icons: [.alt26, .alt27, .alt28]),
       IconSelector(title: "Icons by @te6-in (GitHub)", icons: [.alt29, .alt30, .alt31, .alt32]),
-      IconSelector(title: "Icon by W. Kovács Ágnes (@wildgica)", icons: [.alt23]),
+      IconSelector(title: "Icon by W. Kovács Ágnes (@wildgica)", icons: [.alt33]),
     ]
   }
 
