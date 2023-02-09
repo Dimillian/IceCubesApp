@@ -24,28 +24,6 @@ struct IconSelectorView: View {
     case alt29, alt30, alt31, alt32
     case alt33
 
-    static var officialIcons: [Icon] {
-      [.primary, .alt1, .alt2, .alt3, .alt4, .alt5, .alt6, .alt7, .alt8,
-       .alt9, .alt10, .alt11, .alt12, .alt13, .alt14,
-       .alt15, .alt16, .alt17, .alt18, .alt19, .alt25]
-    }
-
-    static var albertKinngIcons: [Icon] {
-      [.alt20, .alt21, .alt22, .alt23, .alt24]
-    }
-
-    static var danIcons: [Icon] {
-      [.alt26, .alt27, .alt28]
-    }
-
-    static var tes6Icons: [Icon] {
-      [.alt29, .alt30, .alt31, .alt32]
-    }
-    
-    static var agnesIcons: [Icon] {
-      [.alt33]
-    }
-
     var appIconName: String {
       switch self {
       case .primary:
@@ -60,6 +38,22 @@ struct IconSelectorView: View {
     }
   }
 
+  struct IconSelector: Identifiable {
+    var id = UUID()
+    let title: String
+    let icons: [Icon]
+
+    static let items = [
+      IconSelector(title: "Official icons", icons: [.primary, .alt1, .alt2, .alt3, .alt4, .alt5, .alt6, .alt7, .alt8,
+                                                     .alt9, .alt10, .alt11, .alt12, .alt13, .alt14,
+                                                     .alt15, .alt16, .alt17, .alt18, .alt19, .alt25]),
+      IconSelector(title: "Icons by Albert Kinng", icons: [.alt20, .alt21, .alt22, .alt23, .alt24]),
+      IconSelector(title: "Icons by Dan van Moll", icons: [.alt26, .alt27, .alt28]),
+      IconSelector(title: "Icons by @te6-in (GitHub)", icons: [.alt29, .alt30, .alt31, .alt32]),
+      IconSelector(title: "Icon by W. Kovács Ágnes (@wildgica)", icons: [.alt23]),
+    ]
+  }
+
   @EnvironmentObject private var theme: Theme
   @State private var currentIcon = UIApplication.shared.alternateIconName ?? Icon.primary.appIconName
 
@@ -68,39 +62,13 @@ struct IconSelectorView: View {
   var body: some View {
     ScrollView {
       VStack(alignment: .leading) {
-        Section {
-          makeIconGridView(icons: Icon.officialIcons)
-        } header: {
-          Text("Official icons")
-            .font(.scaledHeadline)
-        }
-
-        Section {
-          makeIconGridView(icons: Icon.albertKinngIcons)
-        } header: {
-          Text("Icons by Albert Kinng")
-            .font(.scaledHeadline)
-        }
-
-        Section {
-          makeIconGridView(icons: Icon.danIcons)
-        } header: {
-          Text("Icons by Dan van Moll")
-            .font(.scaledHeadline)
-        }
-
-        Section {
-          makeIconGridView(icons: Icon.tes6Icons)
-        } header: {
-          Text("Icons by @te6-in (GitHub)")
-            .font(.scaledHeadline)
-        }
-        
-        Section {
-          makeIconGridView(icons: Icon.agnesIcons)
-        } header: {
-          Text("Icon by W. Kovács Ágnes (@wildgica)")
-            .font(.scaledHeadline)
+        ForEach(IconSelector.items) { item in
+          Section {
+            makeIconGridView(icons: item.icons)
+          } header: {
+            Text(item.title)
+              .font(.scaledHeadline)
+          }
         }
       }
       .padding(6)
