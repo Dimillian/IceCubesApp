@@ -9,7 +9,6 @@ import SwiftUI
 public struct StatusRowView: View {
   @Environment(\.redactionReasons) private var reasons
   @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var routerPath: RouterPath
@@ -169,18 +168,14 @@ public struct StatusRowView: View {
       HStack(spacing: 2) {
         Image(systemName: "arrow.left.arrow.right.circle.fill")
         AvatarView(url: viewModel.status.account.avatar, size: .boost)
-        if viewModel.status.account.url != account.account?.url {
-          EmojiTextApp(.init(stringValue: viewModel.status.account.safeDisplayName), emojis: viewModel.status.account.emojis)
-          Text("status.row.was-boosted")
-        } else {
-          Text("status.row.you-boosted")
-        }
+        EmojiTextApp(.init(stringValue: viewModel.status.account.safeDisplayName), emojis: viewModel.status.account.emojis)
+        Text("status.row.was-boosted")
       }
       .accessibilityElement()
       .accessibilityLabel(
         Text("\(viewModel.status.account.safeDisplayName)")
           + Text(" ")
-          + Text(viewModel.status.account.url != account.account?.url ? "status.row.was-boosted" : "status.row.you-boosted")
+          + Text("status.row.was-boosted")
       )
       .font(.scaledFootnote)
       .foregroundColor(.gray)
