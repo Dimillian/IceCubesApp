@@ -75,7 +75,11 @@ public struct AppAccountsSelectorView: View {
           {
             routerPath.navigate(to: .accountDetailWithAccount(account: account))
           } else {
-            appAccounts.currentAccount = viewModel.appAccount
+            var transation = Transaction()
+            transation.disablesAnimations = true
+            withTransaction(transation) {
+              appAccounts.currentAccount = viewModel.appAccount
+            }
           }
 
           HapticManager.shared.fireHaptic(of: .buttonPress)

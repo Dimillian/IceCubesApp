@@ -75,7 +75,9 @@ struct SideBarView<Content: View>: View {
       if account.id == appAccounts.currentAccount.id {
         selectedTab = .profile
       } else {
-        withAnimation {
+        var transation = Transaction()
+        transation.disablesAnimations = true
+        withTransaction(transation) {
           appAccounts.currentAccount = account
         }
       }
