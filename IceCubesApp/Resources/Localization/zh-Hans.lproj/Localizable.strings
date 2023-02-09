@@ -389,7 +389,7 @@
 "status.poll.duration" = "投票持续时间";
 "status.poll.frequency" = "投票频率";
 "status.poll.option-n %lld" = "%lld 选项";
-"status.poll.send" = "Send Vote";
+"status.poll.send" = "发送投票";
 "status.post-from-%@" = "%@ 的嘟文";
 "status.row.was-boosted" = "转发";
 "status.row.was-reply" = "回复到";
