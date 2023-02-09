@@ -24,14 +24,14 @@
 "enum.avatar-position.top" = "Na górze";
 "enum.avatar-shape.circle" = "Okrągły";
 "enum.avatar-shape.rounded" = "Zaokrąglony";
-"enum.durations.infinite" = "infinite";
-"enum.durations.fiveMinutes" = "5 minutes";
-"enum.durations.thirtyMinutes" = "30 minutes";
-"enum.durations.oneHour" = "1 hour";
-"enum.durations.sixHours" = "6 hours";
-"enum.durations.oneDay" = "1 day";
-"enum.durations.threeDays" = "3 days";
-"enum.durations.sevenDays" = "7 days";
+"enum.durations.infinite" = "czas nieokreślony";
+"enum.durations.fiveMinutes" = "5 minut";
+"enum.durations.thirtyMinutes" = "30 minut";
+"enum.durations.oneHour" = "1 godzina";
+"enum.durations.sixHours" = "6 godzin";
+"enum.durations.oneDay" = "1 dzień";
+"enum.durations.threeDays" = "3 dni";
+"enum.durations.sevenDays" = "7 dni";
 "enum.status-actions-display.all" = "Wszystko";
 "enum.status-actions-display.no-buttons" = "Bez przycisków";
 "enum.status-actions-display.only-buttons" = "Tylko przyciski";
@@ -119,12 +119,12 @@
 "settings.section.general" = "Ogólne";
 "settings.support.alert.error.message" = "Błąd przetwarzania twojego zakupu w aplikacji, proszę spróbuj ponownie.";
 "settings.support.alert.message" = "Bardzo dziękuję za twój napiwek! Doceniam to bardzo!";
-"settings.support.alert.title" = "Thanks!";
+"settings.support.alert.title" = "Dzięki!";
 "settings.support.message-from-dev" = "Cześć! Mam na imię Thomas i uwielbiam tworzenie aplikacji open source. Ice Cubes jest zdecydowanie jednym z tych moich dotychczasowych projektów, z których jestem najbardziej dumny – i bądźmy szczerzy, jest to również ten, który wymaga najwięcej nieustannych prac utrzymaniowych ze względu na ciągle zmieniający się świat Mastodona i mediów społecznościowych. Jeśli świetnie się bawisz, używając kostek lodu, rozważ podrzucenie mi małego napiwku. Umili mi to dzień (i pomoże sprawić, że aplikacja zawsze działać będzie bezproblemowo). 🚀";
 "settings.support.navigation-title" = "Wspieraj Ice Cubes";
 "settings.support.one.subtitle" = "Mały, ale uroczy i smakuje wyśmienicie!";
 "settings.support.one.title" = "🍬 Mały napiwek";
-"settings.support.placeholder.loading-subtitle" = "Loading subtitle ...";
+"settings.support.placeholder.loading-subtitle" = "Ładowanie napisów ...";
 "settings.support.three.subtitle" = "Jesteś niesamowity, bardzo dziękuję!";
 "settings.support.three.title" = "🤯 Hojny napiwek";
 "settings.support.two.subtitle" = "Uwielbiam smak wyszukanej kawy ❤️";
@@ -157,7 +157,7 @@
 "settings.haptic.buttons" = "Naciśnięcie przycisku";
 
 "settings.display.section.ipad" = "iPad";
-"settings.display.show-ipad-column" = "Enable secondary column";
+"settings.display.show-ipad-column" = "Włącz dodatkową kolumnę";
 
 // MARK: Tabs
 "tab.explore" = "Odkrywaj";
@@ -195,7 +195,7 @@
 "account.action.unblock" = "Odblokuj";
 "account.action.mute" = "Wycisz";
 "account.action.unmute" = "Wyłącz wyciszenie";
-"account.action.share" = "Share this account";
+"account.action.share" = "Udostępnij to konto";
 "account.boosted-by" = "Podbity przez";
 "account.detail.about" = "Dane";
 "account.detail.familiar-followers" = "Obserwowany także przez";
@@ -337,8 +337,8 @@
 "status.action.unfavorite" = "Usuń z polubionych";
 "status.action.unpin" = "Odepnij";
 "status.action.view-in-browser" = "Otwórz w przeglądarce";
-"status.card.share" = "Share this link";
-"status.card.copy" = "Copy this link";
+"status.card.share" = "Udostępnij ten link";
+"status.card.copy" = "Kopiuj ten link";
 "status.draft.delete" = "Usuń wersję roboczą";
 "status.draft.save" = "Zachowaj wersję roboczą";
 "status.editor.ai-prompt.correct" = "Popraw tekst";

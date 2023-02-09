@@ -154,7 +154,7 @@
 "settings.haptic.buttons" = "Knoppen";
 
 "settings.display.section.ipad" = "iPad";
-"settings.display.show-ipad-column" = "Enable secondary column";
+"settings.display.show-ipad-column" = "Toon tweede kolom";
 
 // MARK: Tabs
 "tab.explore" = "Ontdekken";

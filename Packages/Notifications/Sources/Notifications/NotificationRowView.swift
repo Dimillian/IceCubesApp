@@ -103,6 +103,8 @@ struct NotificationRowView: View {
                      })
                      .font(.scaledSubheadline)
                      .fontWeight(.semibold)
+                     .lineLimit(3)
+                     .fixedSize(horizontal: false, vertical: true)
         if let status = notification.status, notification.type == .mention {
           Group {
             Text(" ⸱ ")

@@ -101,7 +101,7 @@
 "settings.section.app" = "App";
 "settings.section.app.footer %@" = "App-Version: %@";
 "settings.section.general" = "Allgemein";
-"settings.support.alert.error.message" = "Fehler bei der Ausführung des In-App-Kaufs. Bitte versuch es erneut.";
+"settings.support.alert.error.message" = "Fehler bei der Ausführung des In-App-Kaufs. Bitte versuche es erneut.";
 "settings.support.alert.message" = "Vielen Dank für dein Trinkgeld! Ich weiß es zu schätzen!";
 "settings.support.alert.title" = "Danke!";
 "settings.support.message-from-dev" = "Hey du! Mein Name ist Thomas und ich liebe es, Open-Source-Apps zu erschaffen. Ice Cubes ist definitiv eines meiner Projekte, auf das ich am meisten stolz bin – und seien wir ehrlich, es ist auch das mit dem größten Wartungsaufwand, dank der sich ständig ändernden Welt von Mastodon und Social Media. Wenn du Spaß beim Nutzen von Ice Cubes hast, denk darüber nach, mir eine kleine Spende dazulassen. Das würde mir den Tag versüßen (und dazu beitragen, dass die App reibungslos für dich funktioniert). 🚀";
@@ -154,7 +154,7 @@
 "settings.haptic.buttons" = "Knopfdruck";
 
 "settings.display.section.ipad" = "iPad";
-"settings.display.show-ipad-column" = "Enable secondary column";
+"settings.display.show-ipad-column" = "Zweite Spalte aktivieren";
 
 "enum.expand-media.show" = "Alle zeigen";
 "enum.expand-media.hide" = "Alle ausblenden";
@@ -248,7 +248,7 @@
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld Beiträge von %lld Teilnehmenden";
-"design.theme.navigation-title" = "Themen-Auswahl";
+"design.theme.navigation-title" = "Design-Auswahl";
 "design.theme.toots-preview" = "Beitragsvorschau";
 
 // MARK: Package: Explore
@@ -320,7 +320,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Übersetzen";
-"status.action.translate-from-%@" = "Übersetzen aus %@";
+"status.action.translate-from-%@" = "Aus %@ übersetzen";
 "status.action.translated-label" = "Übersetzt mit DeepL.com";
 "status.action.bookmark" = "Lesezeichen";
 "status.action.boost" = "Boosten";
