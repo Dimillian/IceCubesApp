@@ -154,6 +154,9 @@
 "settings.haptic.tab-selection" = "Tab Selection";
 "settings.haptic.buttons" = "Button Press";
 
+"settings.display.section.phone" = "iPhone";
+"settings.display.show-tab-label" = "Show tab name";
+
 "settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Enable secondary column";
 

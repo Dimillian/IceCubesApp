@@ -146,7 +146,13 @@ struct IceCubesApp: App {
       ForEach(availableTabs) { tab in
         tab.makeContentView(popToRootTab: $popToRootTab)
           .tabItem {
-            tab.label
+            if userPreferences.showiPhoneTabLabel {
+              tab.label
+                .labelStyle(TitleAndIconLabelStyle())
+            } else {
+              tab.label
+                .labelStyle(IconOnlyLabelStyle())
+            }
           }
           .tag(tab)
           .badge(badgeFor(tab: tab))
