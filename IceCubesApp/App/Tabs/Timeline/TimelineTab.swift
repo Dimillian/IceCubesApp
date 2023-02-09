@@ -85,7 +85,9 @@ struct TimelineTab: View {
       routerPath.path = []
     }
     .onChange(of: timeline) { timeline in
-      lastTimelineFilter = timeline
+      if(timeline == .home || timeline == .federated || timeline == .local) {
+        lastTimelineFilter = timeline
+      }
     }
     .withSafariRouter()
     .environmentObject(routerPath)
