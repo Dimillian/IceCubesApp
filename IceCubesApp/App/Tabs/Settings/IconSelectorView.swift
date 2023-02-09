@@ -22,6 +22,7 @@ struct IconSelectorView: View {
     case alt22, alt23, alt24, alt25
     case alt26, alt27, alt28
     case alt29, alt30, alt31, alt32
+    case alt33
 
     static var officialIcons: [Icon] {
       [.primary, .alt1, .alt2, .alt3, .alt4, .alt5, .alt6, .alt7, .alt8,
@@ -39,6 +40,10 @@ struct IconSelectorView: View {
 
     static var tes6Icons: [Icon] {
       [.alt29, .alt30, .alt31, .alt32]
+    }
+    
+    static var agnesIcons: [Icon] {
+      [.alt33]
     }
 
     var appIconName: String {
@@ -88,6 +93,13 @@ struct IconSelectorView: View {
           makeIconGridView(icons: Icon.tes6Icons)
         } header: {
           Text("Icons by @te6-in (GitHub)")
+            .font(.scaledHeadline)
+        }
+        
+        Section {
+          makeIconGridView(icons: Icon.agnesIcons)
+        } header: {
+          Text("Icon by W. Kovács Ágnes (@wildgica)")
             .font(.scaledHeadline)
         }
       }
