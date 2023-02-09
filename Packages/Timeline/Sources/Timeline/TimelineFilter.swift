@@ -162,34 +162,36 @@ extension TimelineFilter: Codable {
     case .trending:
       self = .trending
     case .hashtag:
-        var nestedContainer = try container.nestedUnkeyedContainer(forKey: .hashtag)
+      var nestedContainer = try container.nestedUnkeyedContainer(forKey: .hashtag)
       let tag = try nestedContainer.decode(String.self)
       let accountId = try nestedContainer.decode(String?.self)
-        self = .hashtag(
-          tag: tag,
-          accountId: accountId
-        )
+      self = .hashtag(
+        tag: tag,
+        accountId: accountId
+      )
     case .list:
       let list = try container.decode(
         Models.List.self,
-          forKey: .list
+        forKey: .list
       )
       self = .list(list: list)
     case .remoteLocal:
       var nestedContainer = try container.nestedUnkeyedContainer(forKey: .remoteLocal)
-    let server = try nestedContainer.decode(String.self)
+      let server = try nestedContainer.decode(String.self)
+      let filter = try nestedContainer.decode(RemoteTimelineFilter.self)
       self = .remoteLocal(
-        server: server
+        server: server,
+        filter: filter
       )
     case .latest:
       self = .latest
     default:
-        throw DecodingError.dataCorrupted(
-            DecodingError.Context(
-                codingPath: container.codingPath,
-                debugDescription: "Unabled to decode enum."
-            )
+      throw DecodingError.dataCorrupted(
+        DecodingError.Context(
+          codingPath: container.codingPath,
+          debugDescription: "Unabled to decode enum."
         )
+      )
     }
   }
 
