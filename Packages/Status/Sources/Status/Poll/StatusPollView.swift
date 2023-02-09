@@ -69,7 +69,7 @@ public struct StatusPollView: View {
         HStack {
           makeBarView(for: option, buttonImage: buttonImage(option: option))
             .disabled(viewModel.poll.expired || (viewModel.poll.voted ?? false))
-          if !viewModel.votes.isEmpty || viewModel.poll.expired || status.account.id == currentAccount.account?.id {
+          if viewModel.showResults || status.account.id == currentAccount.account?.id {
             Spacer()
             Text("\(percentForOption(option: option))%")
               .font(.scaledSubheadline)
@@ -77,7 +77,7 @@ public struct StatusPollView: View {
           }
         }
       }
-      if !viewModel.poll.expired, !(viewModel.poll.voted ?? false) {
+      if !viewModel.poll.expired, !(viewModel.poll.voted ?? false), !viewModel.votes.isEmpty {
         Button("status.poll.send") {
           Task {
             do {

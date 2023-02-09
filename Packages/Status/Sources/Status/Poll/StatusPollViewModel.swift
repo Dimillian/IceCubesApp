@@ -11,7 +11,7 @@ public class StatusPollViewModel: ObservableObject {
   @Published var votes: [Int] = []
 
   var showResults: Bool {
-    !votes.isEmpty || poll.expired
+    poll.ownVotes?.isEmpty == false || poll.expired
   }
 
   public init(poll: Poll) {
