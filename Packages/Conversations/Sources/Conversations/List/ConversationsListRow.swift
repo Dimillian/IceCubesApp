@@ -21,10 +21,13 @@ struct ConversationsListRow: View {
           HStack {
             EmojiTextApp(.init(stringValue: conversation.accounts.map { $0.safeDisplayName }.joined(separator: ", ")),
                          emojis: conversation.accounts.flatMap { $0.emojis })
-              .font(.scaledSubheadline)
-              .fontWeight(.semibold)
-              .foregroundColor(theme.labelColor)
-              .multilineTextAlignment(.leading)
+            .font(.scaledSubheadline)
+            .fontWeight(.semibold)
+            .foregroundColor(theme.labelColor)
+            .multilineTextAlignment(.leading)
+            Text("@\(conversation.accounts.first!.username)")
+              .font(.scaledFootnote)
+              .foregroundColor(.gray)
             Spacer()
             if conversation.unread {
               Circle()
