@@ -6,22 +6,22 @@ import SwiftUI
 
 struct DisplaySettingsView: View {
   typealias FontState = Theme.FontState
-  
+
   @Environment(\.colorScheme) private var colorScheme
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var userPreferences: UserPreferences
-  
+
   @State private var isFontSelectorPresented = false
-  
+
   private var previewStatusViewModel = StatusRowViewModel(status: Status.placeholder(parseMarkdown: true))
-  
+
   var body: some View {
     Form {
       Section("settings.display.example-toot") {
         StatusRowView(viewModel: previewStatusViewModel)
           .allowsHitTesting(false)
       }
-      
+
       Section {
         Toggle("settings.display.theme.systemColor", isOn: $theme.followSystemColorScheme)
         themeSelectorButton
@@ -104,7 +104,7 @@ struct DisplaySettingsView: View {
           Toggle("settings.display.show-ipad-column", isOn: $userPreferences.showiPadSecondaryColumn)
         }
       }
-      
+
       Section {
         Button {
           theme.followSystemColorScheme = true
@@ -122,7 +122,7 @@ struct DisplaySettingsView: View {
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
   }
-  
+
   private var themeSelectorButton: some View {
     NavigationLink(destination: ThemePreviewView()) {
       HStack {
