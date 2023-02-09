@@ -158,7 +158,7 @@
 "settings.haptic.buttons" = "Naciśnięcie przycisku";
 
 "settings.display.section.phone" = "iPhone";
-"settings.display.show-tab-label" = "Show tab name";
+"settings.display.show-tab-label" = "Pokazuj nazwy zakładek";
 
 "settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Włącz dodatkową kolumnę";
@@ -383,7 +383,7 @@
 "status.poll.duration" = "Czas trwania sondażu";
 "status.poll.frequency" = "Częstotliwość odpytywania";
 "status.poll.option-n %lld" = "Opcja %lld";
-"status.poll.send" = "Send Vote";
+"status.poll.send" = "Wyślij głos";
 "status.post-from-%@" = "Post od %@";
 "status.row.was-boosted" = "podbił(a)";
 "status.row.was-reply" = "Odpowiedział(a) do";
