@@ -24,14 +24,14 @@
 "enum.avatar-position.top" = "In alto";
 "enum.avatar-shape.circle" = "Cerchio";
 "enum.avatar-shape.rounded" = "Arrotondata";
-"enum.durations.infinite" = "infinite";
-"enum.durations.fiveMinutes" = "5 minutes";
-"enum.durations.thirtyMinutes" = "30 minutes";
-"enum.durations.oneHour" = "1 hour";
-"enum.durations.sixHours" = "6 hours";
-"enum.durations.oneDay" = "1 day";
-"enum.durations.threeDays" = "3 days";
-"enum.durations.sevenDays" = "7 days";
+"enum.durations.infinite" = "Infinito";
+"enum.durations.fiveMinutes" = "5 minuti";
+"enum.durations.thirtyMinutes" = "30 minuti";
+"enum.durations.oneHour" = "1 ora";
+"enum.durations.sixHours" = "6 ore";
+"enum.durations.oneDay" = "1 giorno";
+"enum.durations.threeDays" = "3 giorni";
+"enum.durations.sevenDays" = "7 giorni";
 "enum.status-actions-display.all" = "Tutti";
 "enum.status-actions-display.no-buttons" = "Nessun bottone";
 "enum.status-actions-display.only-buttons" = "Solo bottoni";
@@ -66,7 +66,7 @@
 "settings.app.source" = "Sorgenti (link GitHub)";
 "settings.app.support" = "Supporta l'applicazione";
 "settings.app.about" = "Informazioni";
-"settings.display.example-toot" = "Example Post";
+"settings.display.example-toot" = "Post di esempio";
 "settings.display.avatar.position" = "Posizione dell'avatar";
 "settings.display.avatar.shape" = "Forma dell'avatar";
 "settings.display.navigation-title" = "Impostazioni di visualizzazione";
@@ -107,12 +107,12 @@
 "settings.support.alert.title" = "Grazie!";
 "settings.support.message-from-dev" = "Ciao! Mi chiamo Thomas e amo da impazzire creare applicativi open source. Ice Cubes è sicuramente uno dei miei progetti di cui sono più orgoglioso al momento  - e siamo sinceri, è quello che richiede più lavoro a causa dei continui cambiamenti di Mastodon e dei social media. Se ti stai divertendo ad usare Ice Cubes, considera di mandarmi un piccolo contributo. Mi renderà felice (e contribuirà a mantenere l'app perfetta per te). 🚀";
 "settings.support.navigation-title" = "Supporta Ice Cubes";
-"settings.support.one.subtitle" = "Piccolo, ma bello, ed ha un buon sapore!";
+"settings.support.one.subtitle" = "Piccolo, ma bello, ed è pure buono!";
 "settings.support.one.title" = "🍬 Piccolo contributo";
 "settings.support.placeholder.loading-subtitle" = "Caricamento sottotitoli ...";
 "settings.support.three.subtitle" = "Sei pazzo, grazie mille!";
 "settings.support.three.title" = "🤯 Contributo generoso";
-"settings.support.two.subtitle" = "Adoro il sapore di un buon caffé ❤️";
+"settings.support.two.subtitle" = "Adoro il gusto di un buon caffé ❤️";
 "settings.support.two.title" = "☕️ Contributo carino";
 "settings.support.four.title" = "👽 Contributo fuori dal mondo";
 "settings.support.four.subtitle" = "Sarà di grande aiuto per mantenere Ice Cubes in funzione!";
@@ -158,7 +158,7 @@
 "settings.haptic.buttons" = "Pressione dei bottoni";
 
 "settings.display.section.ipad" = "iPad";
-"settings.display.show-ipad-column" = "Enable secondary column";
+"settings.display.show-ipad-column" = "Attiva la seconda colonna";
 
 // MARK: Tabs
 "tab.explore" = "Esplora";
@@ -196,7 +196,7 @@
 "account.action.unblock" = "Sblocca";
 "account.action.mute" = "Silenzia";
 "account.action.unmute" = "Sblocca";
-"account.action.share" = "Share this account";
+"account.action.share" = "Condividi questo account";
 "account.boosted-by" = "Condiviso da";
 "account.detail.about" = "Informazioni";
 "account.detail.familiar-followers" = "Seguito, inoltre, da";
@@ -318,7 +318,7 @@
 "timeline.local" = "Locale";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld post recenti da %lld partecipanti";
 "timeline.trending" = "Trending";
-"timeline.add.url" = "Instance URL";
+"timeline.add.url" = "URL dell'istanza";
 
 // MARK: Package: Status
 "status.action.translate" = "Traduci";
@@ -328,8 +328,8 @@
 "status.action.boost" = "Condividi";
 "status.action.copy-text" = "Copia il testo";
 "status.action.delete" = "Elimina";
-"status.action.delete.confirm.title" = "Confirm";
-"status.action.delete.confirm.message" = "are you sure you want to delete this post?";
+"status.action.delete.confirm.title" = "Richiesta di conferma";
+"status.action.delete.confirm.message" = "Sei sicuro di voler cancellare questo post?";
 "status.action.edit" = "Modifica";
 "status.action.favorite" = "Apprezza";
 "status.action.mention" = "Menziona";
@@ -345,8 +345,8 @@
 "status.action.unfavorite" = "Rimuovi l'apprezzamento";
 "status.action.unpin" = "Non fissare";
 "status.action.view-in-browser" = "Vedi nel Browser";
-"status.card.share" = "Share this link";
-"status.card.copy" = "Copy this link";
+"status.card.share" = "Condividi questo link";
+"status.card.copy" = "Copia questo link";
 "status.draft.delete" = "Cancella la bozza";
 "status.draft.save" = "Salva la bozza";
 "status.editor.ai-prompt.correct" = "Correggi il testo";
