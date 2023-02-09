@@ -89,12 +89,6 @@ struct DisplaySettingsView: View {
           d[.leading]
         }
         Toggle("settings.display.translate-button", isOn: $userPreferences.showTranslateButton)
-
-        if UIDevice.current.userInterfaceIdiom == .phone {
-          Section("settings.display.section.phone") {
-            Toggle("settings.display.show-tab-label", isOn: $userPreferences.showiPhoneTabLabel)
-          }
-        }
       }
       .listRowBackground(theme.primaryBackgroundColor)
 
