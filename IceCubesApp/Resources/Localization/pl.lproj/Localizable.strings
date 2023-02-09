@@ -66,7 +66,7 @@
 "settings.app.source" = "Źródło (link do GitHub)";
 "settings.app.support" = "Wspieraj aplikację";
 "settings.app.about" = "O aplikacji";
-"settings.display.example-toot" = "Example Post";
+"settings.display.example-toot" = "Przykładowy post";
 "settings.display.avatar.position" = "Położenie awatara";
 "settings.display.avatar.shape" = "Kształt awatara";
 "settings.display.navigation-title" = "Ustawienia ekranu";
@@ -323,8 +323,8 @@
 "status.action.boost" = "Podbij";
 "status.action.copy-text" = "Kopiuj tekst";
 "status.action.delete" = "Usuń";
-"status.action.delete.confirm.title" = "Confirm";
-"status.action.delete.confirm.message" = "are you sure you want to delete this post?";
+"status.action.delete.confirm.title" = "Potwierdź";
+"status.action.delete.confirm.message" = "czy na pewno chcesz usunąć ten post?";
 "status.action.edit" = "Edytuj";
 "status.action.favorite" = "Dodaj do polubionych";
 "status.action.mention" = "Wymień osobę";
