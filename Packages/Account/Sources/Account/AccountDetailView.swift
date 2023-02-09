@@ -339,8 +339,9 @@ public struct AccountDetailView: View {
           StatusRowView(viewModel: .init(status: status))
         }
         .padding(.horizontal, .layoutPadding)
-        Divider()
-          .padding(.vertical, .dividerPadding)
+        Rectangle()
+          .frame(height: 12)
+          .foregroundColor(theme.secondaryBackgroundColor)
       }
     }
   }
