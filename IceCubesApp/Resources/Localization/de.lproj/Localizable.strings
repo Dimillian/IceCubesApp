@@ -388,6 +388,7 @@
 "status.poll.duration" = "Umfragedauer";
 "status.poll.frequency" = "Auswahlmöglichkeiten";
 "status.poll.option-n %lld" = "Option %lld";
+"status.poll.send" = "Auswahl absenden";
 "status.post-from-%@" = "Beitrag von %@";
 "status.row.was-boosted" = "hat geboostet";
 "status.row.was-reply" = "Antwort auf";

@@ -389,6 +389,7 @@
 "status.poll.duration" = "Poll Duration";
 "status.poll.frequency" = "Polling Frequency";
 "status.poll.option-n %lld" = "Option %lld";
+"status.poll.send" = "Send Vote";
 "status.post-from-%@" = "Post from %@";
 "status.row.was-boosted" = "boosted";
 "status.row.was-reply" = "Replied to";

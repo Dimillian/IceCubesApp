@@ -382,6 +382,7 @@
 "status.poll.duration" = "Pollduur";
 "status.poll.frequency" = "Pollingfrequentie";
 "status.poll.option-n %lld" = "Optie %lld";
+"status.poll.send" = "Send Vote";
 "status.post-from-%@" = "Post van %@";
 "status.row.was-boosted" = "geboost";
 "status.row.was-reply" = "Geantwoord op";

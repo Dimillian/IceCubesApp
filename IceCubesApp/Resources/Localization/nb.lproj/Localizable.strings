@@ -388,6 +388,7 @@
 "status.poll.duration" = "Avstemningens varighet";
 "status.poll.frequency" = "Avstemningsfrekvens";
 "status.poll.option-n %lld" = "Valg %lld";
+"status.poll.send" = "Send Vote";
 "status.post-from-%@" = "Innlegg fra %@";
 "status.row.was-boosted" = "forsterket";
 "status.row.was-reply" = "Svar til";

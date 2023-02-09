@@ -389,6 +389,7 @@
 "status.poll.frequency" = "投票頻度";
 "status.poll.option-n %lld" = "オプション %lld";
 "status.post-from-%@" = "%@ の投稿";
+"status.poll.send" = "Send Vote";
 "status.row.was-boosted" = "ブーストした";
 "status.row.was-reply" = "返信";
 "status.row.you-boosted" = "ブーストしました";
