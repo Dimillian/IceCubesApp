@@ -1,13 +1,19 @@
 import Foundation
 
 fileprivate enum CodingKeys: CodingKey {
-  case asDate, relativeFormatted, shortDateFormatted
+  case asDate
 }
 
 public struct ServerDate: Codable, Hashable, Equatable {
   public let asDate: Date
-  public let relativeFormatted: String
-  public let shortDateFormatted: String
+  
+  public var relativeFormatted: String {
+    Self.createdAtRelativeFormatter.localizedString(for: asDate, relativeTo: Date())
+  }
+
+  public var shortDateFormatted: String {
+    Self.createdAtShortDateFormatted.string(from: asDate)
+  }
   
   private static let calendar = Calendar(identifier: .gregorian)
     
@@ -34,8 +40,6 @@ public struct ServerDate: Codable, Hashable, Equatable {
   
   public init() {
     asDate = Date()-100
-    relativeFormatted = Self.createdAtRelativeFormatter.localizedString(for: asDate, relativeTo: Date())
-    shortDateFormatted = Self.createdAtShortDateFormatted.string(from: asDate)
   }
   
   public init(from decoder: Decoder) throws {
@@ -44,21 +48,15 @@ public struct ServerDate: Codable, Hashable, Equatable {
       let container = try decoder.singleValueContainer()
       let stringDate = try container.decode(String.self)
       asDate = Self.createdAtDateFormatter.date(from: stringDate)!
-      relativeFormatted = Self.createdAtRelativeFormatter.localizedString(for: asDate, relativeTo: Date())
-      shortDateFormatted = Self.createdAtShortDateFormatted.string(from: asDate)
     } catch {
       // Decode from cache
       let container = try decoder.container(keyedBy: CodingKeys.self)
       asDate = try container.decode(Date.self, forKey: .asDate)
-      relativeFormatted = try container.decode(String.self, forKey: .relativeFormatted)
-      shortDateFormatted = try container.decode(String.self, forKey: .shortDateFormatted)
     }
   }
   
   public func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(asDate, forKey: .asDate)
-    try container.encode(relativeFormatted, forKey: .relativeFormatted)
-    try container.encode(shortDateFormatted, forKey: .shortDateFormatted)
   }
 }
