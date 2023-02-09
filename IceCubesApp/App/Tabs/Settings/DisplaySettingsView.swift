@@ -12,9 +12,7 @@ struct DisplaySettingsView: View {
   @EnvironmentObject private var userPreferences: UserPreferences
 
   @State private var isFontSelectorPresented = false
-
-  private var previewStatusViewModel = StatusRowViewModel(status: Status.placeholder(parseMarkdown: true))
-
+  private var previewStatusViewModel = StatusRowViewModel(status: Status.placeholder(forSettings: true, language: "la")) // translate from latin button
   var body: some View {
     Form {
       Section("settings.display.example-toot") {
