@@ -81,8 +81,8 @@ public struct AppAccountsSelectorView: View {
           HapticManager.shared.fireHaptic(of: .buttonPress)
         } label: {
           HStack {
-            if viewModel.account?.id == currentAccount.account?.id {
-              Image(systemName: "checkmark.circle.fill")
+            if let image = viewModel.roundedAvatar {
+              Image(uiImage: image)
             }
             Text("\(viewModel.account?.displayName ?? "")")
           }
