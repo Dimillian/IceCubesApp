@@ -110,6 +110,7 @@ struct DisplaySettingsView: View {
         Section("settings.display.section.ipad") {
           Toggle("settings.display.show-ipad-column", isOn: $userPreferences.showiPadSecondaryColumn)
         }
+        .listRowBackground(theme.primaryBackgroundColor)
       }
 
       Section {
