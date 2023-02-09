@@ -20,8 +20,8 @@
 "account.add.sign-in" = "サインイン";
 
 // MARK: Enums
-"enum.avatar-position.leading" = "リード";
-"enum.avatar-position.top" = "トップ";
+"enum.avatar-position.leading" = "水平方向に先頭";
+"enum.avatar-position.top" = "垂直方向に先頭";
 "enum.avatar-shape.circle" = "円形";
 "enum.avatar-shape.rounded" = "角丸";
 "enum.durations.infinite" = "無期限";
@@ -389,7 +389,7 @@
 "status.poll.frequency" = "投票頻度";
 "status.poll.option-n %lld" = "オプション %lld";
 "status.post-from-%@" = "%@ の投稿";
-"status.poll.send" = "Send Vote";
+"status.poll.send" = "投票する";
 "status.row.was-boosted" = "ブーストした";
 "status.row.was-reply" = "返信";
 "status.row.you-boosted" = "ブーストしました";

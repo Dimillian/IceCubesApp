@@ -1,15 +1,19 @@
 import Models
 import Network
 import SwiftUI
+import DesignSystem
 
 @MainActor
 public class AppAccountViewModel: ObservableObject {
+  private static var avatarsCache: [String: UIImage] = [:]
+  
   var appAccount: AppAccount
   let client: Client
   let isCompact: Bool
 
   @Published var account: Account?
-
+  @Published var roundedAvatar: UIImage?
+  
   var acct: String {
     if let acct = appAccount.accountName {
       return acct
@@ -31,8 +35,17 @@ public class AppAccountViewModel: ObservableObject {
         appAccount.accountName = "\(account.acct)@\(appAccount.server)"
         try appAccount.save()
       }
-    } catch {
-      print(error)
-    }
+      
+      if let account {
+        if let image = Self.avatarsCache[account.id] {
+          self.roundedAvatar = image
+        } else if let (data, _) = try? await URLSession.shared.data(from: account.avatar),
+          let image = UIImage(data: data)?.roundedImage {
+          self.roundedAvatar = image
+          Self.avatarsCache[account.id] = image
+        }
+      }
+         
+    } catch { }
   }
 }
