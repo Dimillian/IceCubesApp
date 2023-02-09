@@ -65,8 +65,8 @@
 "settings.app.icon.navigation-title" = "Icons";
 "settings.app.source" = "Quellcode (auf GitHub)";
 "settings.app.support" = "Unterstütze die App";
-"settings.app.about" = "About";
-"settings.display.example-toot" = "Example Post";
+"settings.app.about" = "Über";
+"settings.display.example-toot" = "Beispielbeitrag";
 "settings.display.avatar.position" = "Profilbild-Position";
 "settings.display.avatar.shape" = "Profilbild-Form";
 "settings.display.navigation-title" = "Anzeigeeinstellungen";
@@ -102,7 +102,7 @@
 "settings.section.app" = "App";
 "settings.section.app.footer %@" = "App-Version: %@";
 "settings.section.general" = "Allgemein";
-"settings.support.alert.error.message" = "Fehler bei der Ausführung des In-App-Kaufs. Bitte versuche es erneut.";
+"settings.support.alert.error.message" = "Fehler bei der Ausführung des In-App-Kaufs. Bitte versuch es erneut.";
 "settings.support.alert.message" = "Vielen Dank für dein Trinkgeld! Ich weiß es zu schätzen!";
 "settings.support.alert.title" = "Danke!";
 "settings.support.message-from-dev" = "Hey du! Mein Name ist Thomas und ich liebe es, Open-Source-Apps zu erschaffen. Ice Cubes ist definitiv eines meiner Projekte, auf das ich am meisten stolz bin – und seien wir ehrlich, es ist auch das mit dem größten Wartungsaufwand, dank der sich ständig ändernden Welt von Mastodon und Social Media. Wenn du Spaß beim Nutzen von Ice Cubes hast, denk darüber nach, mir eine kleine Spende dazulassen. Das würde mir den Tag versüßen (und dazu beitragen, dass die App reibungslos für dich funktioniert). 🚀";
@@ -120,7 +120,7 @@
 "settings.title" = "Einstellungen";
 "settings.rate" = "Bewerte Ice Cubes";
 "settings.section.other" = "Anderes";
-"settings.other.hide-openai" = "Aktiviere 🤖 Helfer";
+"settings.other.hide-openai" = "Aktiviere 🤖-Helfer";
 "settings.other.social-keyboard" = "Soziale Tastatur aktivieren";
 "settings.general.content" = "Inhaltseinstellungen";
 "settings.system" = "Systemeinstellungen";
@@ -155,7 +155,7 @@
 "settings.haptic.buttons" = "Knopfdruck";
 
 "settings.display.section.phone" = "iPhone";
-"settings.display.show-tab-label" = "Show tab name";
+"settings.display.show-tab-label" = "Tabtitel anzeigen";
 
 "settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Zweite Spalte aktivieren";
@@ -347,8 +347,8 @@
 "status.action.unfavorite" = "Favorit entfernen";
 "status.action.unpin" = "Nicht mehr anheften";
 "status.action.view-in-browser" = "Im Browser öffnen";
-"status.card.share" = "Share this link";
-"status.card.copy" = "Copy this link";
+"status.card.share" = "Diesen Link teilen";
+"status.card.copy" = "Diesen Link kopieren";
 "status.draft.delete" = "Entwurf löschen";
 "status.draft.save" = "Entwurf sichern";
 "status.editor.ai-prompt.correct" = "Text korrigieren";
