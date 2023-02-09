@@ -173,7 +173,7 @@
 
 // MARK: Timeline
 "timeline.%@-is-valid" = "%@ baliozko instantzia da";
-"timeline.add-remote.title" = "Add remote local timeline"; Gehitu >								fgds
+"timeline.add-remote.title" = "Add remote local timeline";
 "timeline.add.action.add" = "Gehitu";
 "timeline.filter.add-local" = "Gehitu denbora-lerro lokal bat";
 "timeline.filter.lists" = "Zerrendak";
