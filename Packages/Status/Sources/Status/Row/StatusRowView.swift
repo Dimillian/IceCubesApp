@@ -96,24 +96,7 @@ public struct StatusRowView: View {
       }
       .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
       .accessibilityActions {
-        // Add the individual mentions as accessibility actions
-        ForEach(viewModel.status.mentions, id: \.id) { mention in
-          Button("@\(mention.username)") {
-            routerPath.navigate(to: .accountDetail(id: mention.id))
-          }
-        }
-
-        Button(viewModel.displaySpoiler ? "status.show-more" : "status.show-less") {
-          withAnimation {
-            viewModel.displaySpoiler.toggle()
-          }
-        }
-
-        Button("@\(viewModel.status.account.username)") {
-          routerPath.navigate(to: .accountDetail(id: viewModel.status.account.id))
-        }
-
-        contextMenu
+        accesibilityActions
       }
       .background {
         Color.clear
@@ -143,6 +126,28 @@ public struct StatusRowView: View {
         -100
       }
     }
+  }
+  
+  @ViewBuilder
+  private var accesibilityActions: some View {
+    // Add the individual mentions as accessibility actions
+    ForEach(viewModel.status.mentions, id: \.id) { mention in
+      Button("@\(mention.username)") {
+        routerPath.navigate(to: .accountDetail(id: mention.id))
+      }
+    }
+    
+    Button(viewModel.displaySpoiler ? "status.show-more" : "status.show-less") {
+      withAnimation {
+        viewModel.displaySpoiler.toggle()
+      }
+    }
+    
+    Button("@\(viewModel.status.account.username)") {
+      routerPath.navigate(to: .accountDetail(id: viewModel.status.account.id))
+    }
+    
+    contextMenu
   }
 
   private func makeFilterView(filter: Filter) -> some View {

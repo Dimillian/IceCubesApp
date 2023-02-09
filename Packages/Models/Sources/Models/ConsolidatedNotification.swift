@@ -32,7 +32,7 @@ public struct ConsolidatedNotification: Identifiable {
   public static func placeholder() -> ConsolidatedNotification {
     .init(notifications: [Notification.placeholder()],
           type: .favourite,
-          createdAt: "2022-12-16T10:20:54.000Z",
+          createdAt: ServerDate(),
           accounts: [.placeholder()],
           status: .placeholder())
   }

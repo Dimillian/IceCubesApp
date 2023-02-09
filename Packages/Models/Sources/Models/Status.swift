@@ -54,15 +54,19 @@ public protocol AnyStatus {
   var language: String? { get }
 }
 
+extension AnyStatus {
+  public var viewId: String {
+    get {
+      "\(id)\(createdAt.asDate.description)\(editedAt?.asDate.description ?? "")"
+    }
+  }
+}
+
 protocol StatusUI {
   var userMentioned: Bool? { get set }
 }
 
 public struct Status: AnyStatus, Codable, Identifiable, Equatable, Hashable, StatusUI {
-  public var viewId: String {
-    id + createdAt + (editedAt ?? "")
-  }
-
   public var userMentioned: Bool?
 
   public static func == (lhs: Status, rhs: Status) -> Bool {
@@ -105,7 +109,7 @@ public struct Status: AnyStatus, Codable, Identifiable, Equatable, Hashable, Sta
        content: .init(stringValue: "Lorem ipsum [#dolor](#) sit amet\nconsectetur [@adipiscing](#) elit\nAsed do eiusmod tempor incididunt ut labore.", parseMarkdown: forSettings),
 
        account: .placeholder(),
-       createdAt: ServerDate.sampleDate,
+       createdAt: ServerDate(),
        editedAt: nil,
        reblog: nil,
        mediaAttachments: [],
@@ -137,10 +141,6 @@ public struct Status: AnyStatus, Codable, Identifiable, Equatable, Hashable, Sta
 }
 
 public struct ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Hashable {
-  public var viewId: String {
-    id + createdAt + (editedAt ?? "")
-  }
-
   public static func == (lhs: ReblogStatus, rhs: ReblogStatus) -> Bool {
     lhs.id == rhs.id
   }
@@ -152,7 +152,7 @@ public struct ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Hashabl
   public let id: String
   public let content: HTMLString
   public let account: Account
-  public let createdAt: String
+  public let createdAt: ServerDate
   public let editedAt: ServerDate?
   public let mediaAttachments: [MediaAttachment]
   public let mentions: [Mention]

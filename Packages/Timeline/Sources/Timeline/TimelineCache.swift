@@ -45,7 +45,7 @@ public actor TimelineCache {
       return try await engine
         .readAllData()
         .map { try decoder.decode(Status.self, from: $0) }
-        .sorted(by: { $0.createdAt > $1.createdAt })
+        .sorted(by: { $0.createdAt.asDate > $1.createdAt.asDate })
     } catch {
       return nil
     }

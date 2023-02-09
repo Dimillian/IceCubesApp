@@ -59,7 +59,7 @@ public struct Account: Codable, Identifiable, Equatable, Hashable {
           header: URL(string: "https://files.mastodon.social/media_attachments/files/003/134/405/original/04060b07ddf7bb0b.png")!,
           acct: "johnm@example.com",
           note: .init(stringValue: "Some content"),
-          createdAt: "2022-12-16T10:20:54.000Z",
+          createdAt: ServerDate(),
           followersCount: 10,
           followingCount: 10,
           statusesCount: 10,

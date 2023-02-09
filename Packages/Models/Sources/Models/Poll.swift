@@ -30,12 +30,12 @@ public struct Poll: Codable, Equatable, Hashable {
 }
 
 public struct NullableString: Codable, Equatable, Hashable {
-  public let value: String?
+  public let value: ServerDate?
 
   public init(from decoder: Decoder) throws {
     do {
       let container = try decoder.singleValueContainer()
-      value = try container.decode(String.self)
+      value = try container.decode(ServerDate.self)
     } catch {
       value = nil
     }
