@@ -20,6 +20,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
       textView?.pasteDelegate = self
     }
   }
+  
   var selectedRange: NSRange {
     get {
       guard let textView else {
@@ -43,9 +44,11 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
   
   @Published var statusText = NSMutableAttributedString(string: "") {
     didSet {
+      let range = selectedRange
       processText()
       checkEmbed()
       textView?.attributedText = statusText
+      selectedRange = range
     }
   }
 

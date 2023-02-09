@@ -112,9 +112,10 @@ struct StatusRowContextMenu: View {
             Label("status.action.edit", systemImage: "pencil")
           }
         }
-        Button(role: .destructive) { Task { await viewModel.delete() } } label: {
-          Label("status.action.delete", systemImage: "trash")
-        }
+        Button(role: .destructive,
+               action: { viewModel.showDeleteAlert = true },
+               label: { Label("status.action.delete", systemImage: "trash") }
+        )
       }
     } else if !viewModel.isRemote {
       Section(viewModel.status.account.acct) {

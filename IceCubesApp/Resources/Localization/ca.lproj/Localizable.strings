@@ -65,6 +65,7 @@
 "settings.app.source" = "Font (enllaç a GitHub)";
 "settings.app.support" = "Dona suport a l'aplicació";
 "settings.app.about" = "About";
+"settings.display.example-toot" = "Example Post";
 "settings.display.avatar.position" = "Posició de les fotos de perfil";
 "settings.display.avatar.shape" = "Forma de les fotos de perfil";
 "settings.display.navigation-title" = "Configuració de l'aparença";
@@ -154,6 +155,9 @@
 "settings.haptic.timeline" = "Timeline";
 "settings.haptic.tab-selection" = "Tab Selection";
 "settings.haptic.buttons" = "Button Press";
+
+"settings.display.section.phone" = "iPhone";
+"settings.display.show-tab-label" = "Show tab name";
 
 "settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Enable secondary column";
@@ -325,6 +329,8 @@
 "status.action.boost" = "Impulsa";
 "status.action.copy-text" = "Copia el text";
 "status.action.delete" = "Elimina";
+"status.action.delete.confirm.title" = "Confirm";
+"status.action.delete.confirm.message" = "are you sure you want to delete this post?";
 "status.action.edit" = "Edita";
 "status.action.favorite" = "Marca com a preferit";
 "status.action.mention" = "Menciona";
@@ -381,6 +387,7 @@
 "status.poll.duration" = "Durada de l'enquesta";
 "status.poll.frequency" = "Freqüència de l'enquesta";
 "status.poll.option-n %lld" = "Opció %lld";
+"status.poll.send" = "Send Vote";
 "status.post-from-%@" = "Publicació de: %@";
 "status.row.was-boosted" = "impulsat";
 "status.row.was-reply" = "Ha respost a";

@@ -66,6 +66,7 @@
 "settings.app.source" = "Źródło (link do GitHub)";
 "settings.app.support" = "Wspieraj aplikację";
 "settings.app.about" = "O aplikacji";
+"settings.display.example-toot" = "Przykładowy post";
 "settings.display.avatar.position" = "Położenie awatara";
 "settings.display.avatar.shape" = "Kształt awatara";
 "settings.display.navigation-title" = "Ustawienia ekranu";
@@ -155,6 +156,9 @@
 "settings.haptic.timeline" = "Strumień";
 "settings.haptic.tab-selection" = "Wybór zakładki";
 "settings.haptic.buttons" = "Naciśnięcie przycisku";
+
+"settings.display.section.phone" = "iPhone";
+"settings.display.show-tab-label" = "Show tab name";
 
 "settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Włącz dodatkową kolumnę";
@@ -322,6 +326,8 @@
 "status.action.boost" = "Podbij";
 "status.action.copy-text" = "Kopiuj tekst";
 "status.action.delete" = "Usuń";
+"status.action.delete.confirm.title" = "Potwierdź";
+"status.action.delete.confirm.message" = "czy na pewno chcesz usunąć ten post?";
 "status.action.edit" = "Edytuj";
 "status.action.favorite" = "Dodaj do polubionych";
 "status.action.mention" = "Wymień osobę";
@@ -377,6 +383,7 @@
 "status.poll.duration" = "Czas trwania sondażu";
 "status.poll.frequency" = "Częstotliwość odpytywania";
 "status.poll.option-n %lld" = "Opcja %lld";
+"status.poll.send" = "Send Vote";
 "status.post-from-%@" = "Post od %@";
 "status.row.was-boosted" = "podbił(a)";
 "status.row.was-reply" = "Odpowiedział(a) do";

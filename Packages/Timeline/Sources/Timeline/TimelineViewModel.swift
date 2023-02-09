@@ -10,7 +10,8 @@ class TimelineViewModel: ObservableObject {
   @Published var statusesState: StatusesState = .loading
   @Published var timeline: TimelineFilter = .federated {
     didSet {
-      Task {
+      timelineTask?.cancel()
+      timelineTask = Task {
         if timeline == .latest, let client {
           await cache.clearCache(for: client)
           timeline = .home
@@ -19,6 +20,9 @@ class TimelineViewModel: ObservableObject {
           statuses = []
           pendingStatusesObserver.pendingStatuses = []
           tag = nil
+        }
+        guard !Task.isCancelled else {
+          return
         }
         await fetchStatuses()
         switch timeline {
@@ -30,6 +34,8 @@ class TimelineViewModel: ObservableObject {
       }
     }
   }
+  
+  private var timelineTask: Task<Void, Never>?
 
   @Published var tag: Tag?
 
@@ -96,7 +102,7 @@ class TimelineViewModel: ObservableObject {
       var newStatus = event.status
       if let accountId {
         if newStatus.mentions.first(where: { $0.id == accountId }) != nil {
-          newStatus.uiShouldHighlight = true
+          newStatus.userMentioned = true
         }
       }
       statuses.insert(newStatus, at: 0)
@@ -149,7 +155,7 @@ extension TimelineViewModel: StatusesFetcher {
   func fetchStatuses() async {
     guard let client else { return }
     do {
-      if statuses.isEmpty {
+      if statuses.isEmpty || timeline == .trending {
         try await fetchFirstPage(client: client)
       } else if let latest = statuses.first {
         try await fetchNewPagesFrom(latestStatus: latest, client: client)
@@ -164,7 +170,10 @@ extension TimelineViewModel: StatusesFetcher {
   // Hydrate statuses in the Timeline when statuses are empty.
   private func fetchFirstPage(client: Client) async throws {
     pendingStatusesObserver.pendingStatuses = []
-    statusesState = .loading
+    
+    if statuses.isEmpty {
+      statusesState = .loading
+    }
 
     // If we get statuses from the cache for the home timeline, we displays those.
     // Else we fetch top most page from the API.
@@ -193,12 +202,13 @@ extension TimelineViewModel: StatusesFetcher {
       statuses = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
                                                                   maxId: nil,
                                                                   minId: nil,
-                                                                  offset: statuses.count))
+                                                                  offset: 0))
 
       updateMentionsToBeHighlighted(&statuses)
       ReblogCache.shared.removeDuplicateReblogs(&statuses)
 
       await cacheHome()
+      
       withAnimation {
         statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
       }
@@ -225,6 +235,12 @@ extension TimelineViewModel: StatusesFetcher {
 
     // If the timeline is not visible, we don't update it as it would mess up the user position.
     guard isTimelineVisible else {
+      canStreamEvents = true
+      return
+    }
+    
+    // Return if task has been cancelled.
+    guard !Task.isCancelled else {
       canStreamEvents = true
       return
     }
@@ -270,7 +286,7 @@ extension TimelineViewModel: StatusesFetcher {
       
       // We trigger a new fetch so we can get the next new statuses if any.
       // If none, it'll stop there.
-      if let latest = statuses.first, let client {
+      if !Task.isCancelled, let latest = statuses.first, let client {
         try await fetchNewPagesFrom(latestStatus: latest, client: client)
       }
     }
@@ -328,7 +344,7 @@ extension TimelineViewModel: StatusesFetcher {
     if !statuses.isEmpty, let accountId {
       for i in statuses.indices {
         if statuses[i].mentions.first(where: { $0.id == accountId }) != nil {
-          statuses[i].uiShouldHighlight = true
+          statuses[i].userMentioned = true
         }
       }
     }

@@ -66,6 +66,7 @@
 "settings.app.source" = "Quellcode (auf GitHub)";
 "settings.app.support" = "Unterstütze die App";
 "settings.app.about" = "About";
+"settings.display.example-toot" = "Example Post";
 "settings.display.avatar.position" = "Profilbild-Position";
 "settings.display.avatar.shape" = "Profilbild-Form";
 "settings.display.navigation-title" = "Anzeigeeinstellungen";
@@ -82,7 +83,7 @@
 "settings.display.theme.systemColor" = "Systemeinstellung verwenden";
 "settings.general.browser" = "Browser";
 "settings.general.browser.in-app" = "In-App-Browser";
-"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
+"settings.general.browser.in-app.readerview" = "In-App-Browser-Lesemodus";
 "settings.general.browser.system" = "Systembrowser";
 "settings.general.display" = "Anzeigeeinstellungen";
 "settings.general.instance" = "Instanz-Informationen";
@@ -153,6 +154,9 @@
 "settings.haptic.tab-selection" = "Tabauswahl";
 "settings.haptic.buttons" = "Knopfdruck";
 
+"settings.display.section.phone" = "iPhone";
+"settings.display.show-tab-label" = "Show tab name";
+
 "settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Zweite Spalte aktivieren";
 
@@ -197,7 +201,7 @@
 "account.action.unblock" = "Blockade aufheben";
 "account.action.mute" = "Stummschalten";
 "account.action.unmute" = "Stummschaltung aufheben";
-"account.action.share" = "Share this account";
+"account.action.share" = "Diesen Account teilen";
 "account.boosted-by" = "Geboostet von";
 "account.detail.about" = "Über";
 "account.detail.familiar-followers" = "Auch gefolgt von";
@@ -326,6 +330,8 @@
 "status.action.boost" = "Boosten";
 "status.action.copy-text" = "Text kopieren";
 "status.action.delete" = "Löschen";
+"status.action.delete.confirm.title" = "Bestätigen";
+"status.action.delete.confirm.message" = "bist du dir sicher, dass du diesen Beitrag löschen möchtest?";
 "status.action.edit" = "Bearbeiten";
 "status.action.favorite" = "Favorisieren";
 "status.action.mention" = "Erwähnen";
@@ -382,6 +388,7 @@
 "status.poll.duration" = "Umfragedauer";
 "status.poll.frequency" = "Auswahlmöglichkeiten";
 "status.poll.option-n %lld" = "Option %lld";
+"status.poll.send" = "Auswahl absenden";
 "status.post-from-%@" = "Beitrag von %@";
 "status.row.was-boosted" = "hat geboostet";
 "status.row.was-reply" = "Antwort auf";

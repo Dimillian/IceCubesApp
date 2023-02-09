@@ -66,6 +66,7 @@
 "settings.app.source" = "Broncode (GitHub-link)";
 "settings.app.support" = "De app steunen";
 "settings.app.about" = "Info";
+"settings.display.example-toot" = "Example Post";
 "settings.display.avatar.position" = "Avatarpositie";
 "settings.display.avatar.shape" = "Avatarvorm";
 "settings.display.navigation-title" = "Weergaveopties";
@@ -152,6 +153,9 @@
 "settings.haptic.timeline" = "Tijdlijn";
 "settings.haptic.tab-selection" = "Tabselectie";
 "settings.haptic.buttons" = "Knoppen";
+
+"settings.display.section.phone" = "iPhone";
+"settings.display.show-tab-label" = "Show tab name";
 
 "settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Toon tweede kolom";
@@ -320,6 +324,8 @@
 "status.action.boost" = "Boosten";
 "status.action.copy-text" = "Kopieer tekst";
 "status.action.delete" = "Verwijder";
+"status.action.delete.confirm.title" = "Bevestigen";
+"status.action.delete.confirm.message" = "Weet je zeker dat je deze post wilt verwijderen?";
 "status.action.edit" = "Bewerk";
 "status.action.favorite" = "Maak favoriet";
 "status.action.mention" = "Vermelden";
@@ -376,6 +382,7 @@
 "status.poll.duration" = "Pollduur";
 "status.poll.frequency" = "Pollingfrequentie";
 "status.poll.option-n %lld" = "Optie %lld";
+"status.poll.send" = "Send Vote";
 "status.post-from-%@" = "Post van %@";
 "status.row.was-boosted" = "geboost";
 "status.row.was-reply" = "Geantwoord op";

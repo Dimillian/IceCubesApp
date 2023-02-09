@@ -20,10 +20,10 @@
 "account.add.sign-in" = "サインイン";
 
 // MARK: Enums
-"enum.avatar-position.leading" = "リード";
-"enum.avatar-position.top" = "トップ";
-"enum.avatar-shape.circle" = "サークル";
-"enum.avatar-shape.rounded" = "ラウンド";
+"enum.avatar-position.leading" = "水平方向に先頭";
+"enum.avatar-position.top" = "垂直方向に先頭";
+"enum.avatar-shape.circle" = "円形";
+"enum.avatar-shape.rounded" = "角丸";
 "enum.durations.infinite" = "無期限";
 "enum.durations.fiveMinutes" = "5分間";
 "enum.durations.thirtyMinutes" = "30分間";
@@ -66,6 +66,7 @@
 "settings.app.source" = "ソース (GitHub link)";
 "settings.app.support" = "アプリを支援する";
 "settings.app.about" = "アプリについて";
+"settings.display.example-toot" = "投稿の例文";
 "settings.display.font" = "タイムラインのフォント";
 "settings.display.font.system" = "システムフォント";
 "settings.display.font.custom" = "カスタム";
@@ -155,6 +156,9 @@
 "settings.haptic.timeline" = "タイムライン";
 "settings.haptic.tab-selection" = "タブセレクト";
 "settings.haptic.buttons" = "ボタン操作時";
+
+"settings.display.section.phone" = "iPhone";
+"settings.display.show-tab-label" = "タブ名を表示";
 
 "settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "セカンドカラムを有効にする";
@@ -266,14 +270,14 @@
 "explore.section.users" = "ユーザー";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5 分";
-"env.poll-duration.30m" = "30 分";
-"env.poll-duration.1h" = "1 時間";
-"env.poll-duration.6h" = "6 時間";
-"env.poll-duration.1d" = "1 日";
-"env.poll-duration.3d" = "3 日";
-"env.poll-duration.7d" = "7 日";
-"env.poll-vote-frequency.one" = "単記投票";
+"env.poll-duration.5m" = "5分間";
+"env.poll-duration.30m" = "30分間";
+"env.poll-duration.1h" = "1時間";
+"env.poll-duration.6h" = "6時間";
+"env.poll-duration.1d" = "1日間";
+"env.poll-duration.3d" = "3日間";
+"env.poll-duration.7d" = "7日間";
+"env.poll-vote-frequency.one" = "単一投票";
 "env.poll-vote-frequency.multiple" = "複数投票可";
 
 // MARK: Package: Lists
@@ -326,6 +330,8 @@
 "status.action.boost" = "ブースト";
 "status.action.copy-text" = "テキストをコピー";
 "status.action.delete" = "削除";
+"status.action.delete.confirm.title" = "確認";
+"status.action.delete.confirm.message" = "本当に投稿を削除しますか？";
 "status.action.edit" = "編集";
 "status.action.favorite" = "お気に入り";
 "status.action.mention" = "返信";
@@ -383,6 +389,7 @@
 "status.poll.frequency" = "投票頻度";
 "status.poll.option-n %lld" = "オプション %lld";
 "status.post-from-%@" = "%@ の投稿";
+"status.poll.send" = "投票する";
 "status.row.was-boosted" = "ブーストした";
 "status.row.was-reply" = "返信";
 "status.row.you-boosted" = "ブーストしました";

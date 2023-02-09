@@ -54,16 +54,20 @@ public protocol AnyStatus {
   var language: String? { get }
 }
 
+extension AnyStatus {
+  public var viewId: String {
+    get {
+      "\(id)\(createdAt.asDate.description)\(editedAt?.asDate.description ?? "")"
+    }
+  }
+}
+
 protocol StatusUI {
-  var uiShouldHighlight: Bool? { get set }
+  var userMentioned: Bool? { get set }
 }
 
 public struct Status: AnyStatus, Codable, Identifiable, Equatable, Hashable, StatusUI {
-  public var viewId: String {
-    id + createdAt + (editedAt ?? "")
-  }
-
-  public var uiShouldHighlight: Bool?
+  public var userMentioned: Bool?
 
   public static func == (lhs: Status, rhs: Status) -> Bool {
     lhs.id == rhs.id
@@ -100,34 +104,36 @@ public struct Status: AnyStatus, Codable, Identifiable, Equatable, Hashable, Sta
   public let sensitive: Bool
   public let language: String?
 
-  public static func placeholder() -> Status {
+  public static func placeholder(forSettings:Bool = false, language:String? = nil) -> Status {
     .init(id: UUID().uuidString,
-          content: .init(stringValue: "This is a #toot\nWith some @content\nAnd some more content for your #eyes @only"),
-          account: .placeholder(),
-          createdAt: "2022-12-16T10:20:54.000Z",
-          editedAt: nil,
-          reblog: nil,
-          mediaAttachments: [],
-          mentions: [],
-          repliesCount: 0,
-          reblogsCount: 0,
-          favouritesCount: 0,
-          card: nil,
-          favourited: false,
-          reblogged: false,
-          pinned: false,
-          bookmarked: false,
-          emojis: [],
-          url: nil,
-          application: nil,
-          inReplyToAccountId: nil,
-          visibility: .pub,
-          poll: nil,
-          spoilerText: .init(stringValue: ""),
-          filtered: [],
-          sensitive: false,
-          language: nil)
+       content: .init(stringValue: "Lorem ipsum [#dolor](#) sit amet\nconsectetur [@adipiscing](#) elit\nAsed do eiusmod tempor incididunt ut labore.", parseMarkdown: forSettings),
+
+       account: .placeholder(),
+       createdAt: ServerDate(),
+       editedAt: nil,
+       reblog: nil,
+       mediaAttachments: [],
+       mentions: [],
+       repliesCount: 0,
+       reblogsCount: 0,
+       favouritesCount: 0,
+       card: nil,
+       favourited: false,
+       reblogged: false,
+       pinned: false,
+       bookmarked: false,
+       emojis: [],
+       url: "https://example.com",
+       application: nil,
+       inReplyToAccountId: nil,
+       visibility: .pub,
+       poll: nil,
+       spoilerText: .init(stringValue: ""),
+       filtered: [],
+       sensitive: false,
+       language: language)
   }
+
 
   public static func placeholders() -> [Status] {
     [.placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder()]
@@ -135,10 +141,6 @@ public struct Status: AnyStatus, Codable, Identifiable, Equatable, Hashable, Sta
 }
 
 public struct ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Hashable {
-  public var viewId: String {
-    id + createdAt + (editedAt ?? "")
-  }
-
   public static func == (lhs: ReblogStatus, rhs: ReblogStatus) -> Bool {
     lhs.id == rhs.id
   }
@@ -150,7 +152,7 @@ public struct ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Hashabl
   public let id: String
   public let content: HTMLString
   public let account: Account
-  public let createdAt: String
+  public let createdAt: ServerDate
   public let editedAt: ServerDate?
   public let mediaAttachments: [MediaAttachment]
   public let mentions: [Mention]

@@ -23,7 +23,7 @@ extension Array where Element == Notification {
                                         status: notification.status)
       }
       .sorted {
-        $0.createdAt > $1.createdAt
+        $0.createdAt.asDate > $1.createdAt.asDate
       }
   }
 }

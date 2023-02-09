@@ -83,7 +83,7 @@ public struct StatusRowView: View {
       .contextMenu {
         contextMenu
       }
-      .listRowBackground(viewModel.shouldHighlightRow ? theme.secondaryBackgroundColor : theme.primaryBackgroundColor)
+      .listRowBackground(viewModel.highlightRowColor)
       .swipeActions(edge: .trailing) {
         if !viewModel.isCompact {
           trailinSwipeActions
@@ -96,24 +96,7 @@ public struct StatusRowView: View {
       }
       .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
       .accessibilityActions {
-        // Add the individual mentions as accessibility actions
-        ForEach(viewModel.status.mentions, id: \.id) { mention in
-          Button("@\(mention.username)") {
-            routerPath.navigate(to: .accountDetail(id: mention.id))
-          }
-        }
-
-        Button(viewModel.displaySpoiler ? "status.show-more" : "status.show-less") {
-          withAnimation {
-            viewModel.displaySpoiler.toggle()
-          }
-        }
-
-        Button("@\(viewModel.status.account.username)") {
-          routerPath.navigate(to: .accountDetail(id: viewModel.status.account.id))
-        }
-
-        contextMenu
+        accesibilityActions
       }
       .background {
         Color.clear
@@ -127,10 +110,44 @@ public struct StatusRowView: View {
           remoteContentLoadingView
         }
       }
+      .alert(isPresented: $viewModel.showDeleteAlert, content: {
+        Alert(
+          title: Text("status.action.delete.confirm.title"),
+          message: Text("status.action.delete.confirm.message"),
+          primaryButton: .destructive(
+            Text("status.action.delete")) {
+              Task {
+                await viewModel.delete()
+              }
+            },
+          secondaryButton: .cancel())
+      })
       .alignmentGuide(.listRowSeparatorLeading) { _ in
         -100
       }
     }
+  }
+  
+  @ViewBuilder
+  private var accesibilityActions: some View {
+    // Add the individual mentions as accessibility actions
+    ForEach(viewModel.status.mentions, id: \.id) { mention in
+      Button("@\(mention.username)") {
+        routerPath.navigate(to: .accountDetail(id: mention.id))
+      }
+    }
+    
+    Button(viewModel.displaySpoiler ? "status.show-more" : "status.show-less") {
+      withAnimation {
+        viewModel.displaySpoiler.toggle()
+      }
+    }
+    
+    Button("@\(viewModel.status.account.username)") {
+      routerPath.navigate(to: .accountDetail(id: viewModel.status.account.id))
+    }
+    
+    contextMenu
   }
 
   private func makeFilterView(filter: Filter) -> some View {
