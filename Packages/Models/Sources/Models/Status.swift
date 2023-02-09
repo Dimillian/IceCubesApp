@@ -108,7 +108,7 @@ public struct Status: AnyStatus, Codable, Identifiable, Equatable, Hashable, Sta
        createdAt: ServerDate.sampleDate,
        editedAt: nil,
        reblog: nil,
-       mediaAttachments: [],
+       mediaAttachments: forSettings ? MediaAttachment.placeholders() : [],
        mentions: [],
        repliesCount: 0,
        reblogsCount: 0,

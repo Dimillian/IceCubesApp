@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0642ACC42994C5DD0084C761 /* public-domain-ice-cubes.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0642ACC22994C5DD0084C761 /* public-domain-ice-cubes.jpg */; };
+		0642ACC52994C5DD0084C761 /* public-domain-whiskey.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0642ACC32994C5DD0084C761 /* public-domain-whiskey.jpg */; };
 		065FA1FE29866CD600012EA0 /* LRUCache in Frameworks */ = {isa = PBXBuildFile; productRef = 065FA1FD29866CD600012EA0 /* LRUCache */; };
 		065FA20A298675BA00012EA0 /* LRUCache in Frameworks */ = {isa = PBXBuildFile; productRef = 065FA209298675BA00012EA0 /* LRUCache */; };
 		069709A5298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 069709A3298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf */; };
@@ -132,6 +134,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0642ACC22994C5DD0084C761 /* public-domain-ice-cubes.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "public-domain-ice-cubes.jpg"; sourceTree = "<group>"; };
+		0642ACC32994C5DD0084C761 /* public-domain-whiskey.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "public-domain-whiskey.jpg"; sourceTree = "<group>"; };
 		069709A3298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Atkinson-Hyperlegible-Regular-102.ttf"; sourceTree = "<group>"; };
 		069709A7298C87B5006E4CB5 /* OpenDyslexic-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenDyslexic-Regular.otf"; sourceTree = "<group>"; };
 		069709A9298C9AD7006E4CB5 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
@@ -357,6 +361,8 @@
 		9FA0D2AC29921C1F008A143B /* Embeds */ = {
 			isa = PBXGroup;
 			children = (
+				0642ACC22994C5DD0084C761 /* public-domain-ice-cubes.jpg */,
+				0642ACC32994C5DD0084C761 /* public-domain-whiskey.jpg */,
 				069709A3298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf */,
 				069709A7298C87B5006E4CB5 /* OpenDyslexic-Regular.otf */,
 				9F2A542D296B1CC0009B2D7C /* glass.wav */,
@@ -697,12 +703,14 @@
 				069709A5298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf in Resources */,
 				9F2A542C296B1177009B2D7C /* glass.caf in Resources */,
 				E9B576C329743F4C00BCE646 /* Localizable.strings in Resources */,
+				0642ACC42994C5DD0084C761 /* public-domain-ice-cubes.jpg in Resources */,
 				9FD34823293D06E800DB0EE9 /* Assets.xcassets in Resources */,
 				7429BCE2297C55D00069A946 /* Localizable.stringsdict in Resources */,
 				9F24EEB829360C330042359D /* Preview Assets.xcassets in Resources */,
 				069709A8298C87B5006E4CB5 /* OpenDyslexic-Regular.otf in Resources */,
 				9FAD85832971BF7200496AB1 /* Secret.plist in Resources */,
 				9F2A542E296B1CC0009B2D7C /* glass.wav in Resources */,
+				0642ACC52994C5DD0084C761 /* public-domain-whiskey.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

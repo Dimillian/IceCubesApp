@@ -28,4 +28,19 @@ public struct MediaAttachment: Codable, Identifiable, Hashable, Equatable {
   public let previewUrl: URL?
   public let description: String?
   public let meta: MetaContainer?
+  
+  public static func placeholders() -> [MediaAttachment] {
+    var array = [MediaAttachment]()
+    if let fileURL = Bundle.main.url(forResource: "public-domain-ice-cubes", withExtension: "jpg") {
+      let picture1 = MediaAttachment(id: "pic1", type: "image", url: fileURL, previewUrl: nil, description: nil, meta: MetaContainer(original: MetaContainer.Meta(width: 850, height: 567)))
+      array.append(picture1)
+    }
+    if let fileURL = Bundle.main.url(forResource: "public-domain-whiskey", withExtension: "jpg") {
+      let picture2 = MediaAttachment(id: "pic1", type: "image", url: fileURL, previewUrl: nil, description: nil, meta: MetaContainer(original: MetaContainer.Meta(width: 850, height: 567)))
+      array.append(picture2)
+    }
+
+    
+    return array
+  }
 }
