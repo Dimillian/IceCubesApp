@@ -105,7 +105,7 @@ struct MovieFileTranseferable: Transferable {
     get async {
       await withCheckedContinuation { continuation in
         let urlAsset = AVURLAsset(url: url, options: nil)
-        guard let exportSession = AVAssetExportSession(asset: urlAsset, presetName: AVAssetExportPresetMediumQuality) else {
+        guard let exportSession = AVAssetExportSession(asset: urlAsset, presetName: AVAssetExportPreset1920x1080) else {
           continuation.resume(returning: nil)
           return
         }
