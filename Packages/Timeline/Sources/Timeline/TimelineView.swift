@@ -107,6 +107,13 @@ public struct TimelineView: View {
           await viewModel.fetchStatuses()
         }
       }
+      
+      Task {
+        while true {
+          try await Task.sleep(for: .seconds(1.5))
+          viewModel.handleEvent(event: StreamEventUpdate(status: .placeholder()), currentAccount: account)
+        }
+      }
     }
     .onDisappear {
       viewModel.isTimelineVisible = false
