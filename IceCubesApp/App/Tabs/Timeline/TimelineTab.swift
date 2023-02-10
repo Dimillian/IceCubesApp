@@ -112,9 +112,8 @@ struct TimelineTab: View {
       }
     }
     if !currentAccount.lists.isEmpty {
-      let sortedLists = currentAccount.lists.sorted { $0.title.lowercased() < $1.title.lowercased() }
       Menu("timeline.filter.lists") {
-        ForEach(sortedLists) { list in
+        ForEach(currentAccount.sortedLists) { list in
           Button {
             timeline = .list(list: list)
           } label: {
@@ -125,9 +124,8 @@ struct TimelineTab: View {
     }
 
     if !currentAccount.tags.isEmpty {
-      let sortedTags = currentAccount.tags.sorted { $0.name.lowercased() < $1.name.lowercased() }
       Menu("timeline.filter.tags") {
-        ForEach(sortedTags) { tag in
+        ForEach(currentAccount.sortedTags) { tag in
           Button {
             timeline = .hashtag(tag: tag.name, accountId: nil)
           } label: {

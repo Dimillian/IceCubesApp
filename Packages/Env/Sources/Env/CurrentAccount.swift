@@ -16,6 +16,14 @@ public class CurrentAccount: ObservableObject {
 
   public static let shared = CurrentAccount()
 
+  public var sortedLists: [List] {
+    lists.sorted { $0.title.lowercased() < $1.title.lowercased() }
+  }
+
+  public var sortedTags: [Tag] {
+    tags.sorted { $0.name.lowercased() < $1.name.lowercased() }
+  }
+
   private init() {}
 
   public func setClient(client: Client) {

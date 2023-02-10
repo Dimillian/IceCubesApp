@@ -264,7 +264,7 @@ public struct AccountDetailView: View {
 
   private var tagsListView: some View {
     Group {
-      ForEach(currentAccount.tags) { tag in
+      ForEach(currentAccount.sortedTags) { tag in
         HStack {
           TagRowView(tag: tag)
           Spacer()
@@ -280,7 +280,7 @@ public struct AccountDetailView: View {
 
   private var listsListView: some View {
     Group {
-      ForEach(currentAccount.lists) { list in
+      ForEach(currentAccount.sortedLists) { list in
         NavigationLink(value: RouterDestinations.list(list: list)) {
           HStack {
             Text(list.title)
