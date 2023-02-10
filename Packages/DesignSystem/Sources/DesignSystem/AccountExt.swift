@@ -10,7 +10,7 @@ public extension Account {
   }
 
   var safeDisplayName: String {
-    if displayName.isEmpty {
+    if displayName.isEmpty || displayName == "" {
       return username
     }
     return displayName
