@@ -66,7 +66,7 @@
 "settings.app.source" = "ソース (GitHub link)";
 "settings.app.support" = "アプリを支援する";
 "settings.app.about" = "アプリについて";
-"settings.display.example-toot" = "投稿の例文";
+"settings.display.example-toot" = "投稿の例";
 "settings.display.font" = "タイムラインのフォント";
 "settings.display.font.system" = "システムフォント";
 "settings.display.font.custom" = "カスタム";
@@ -235,7 +235,7 @@
 "account.post.pinned" = "固定した投稿";
 "account.posts" = "投稿";
 "account.relation.follows-you" = "あなたをフォローしている";
-"account.joined" = "追加した";
+"account.joined" = "登録日";
 "account.action.logout" = "アカウントをログアウトする";
 
 // MARK: Package: Conversations
