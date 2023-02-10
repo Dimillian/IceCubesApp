@@ -75,14 +75,18 @@ public struct AppAccountsSelectorView: View {
           {
             routerPath.navigate(to: .accountDetailWithAccount(account: account))
           } else {
-            appAccounts.currentAccount = viewModel.appAccount
+            var transation = Transaction()
+            transation.disablesAnimations = true
+            withTransaction(transation) {
+              appAccounts.currentAccount = viewModel.appAccount
+            }
           }
 
           HapticManager.shared.fireHaptic(of: .buttonPress)
         } label: {
           HStack {
-            if viewModel.account?.id == currentAccount.account?.id {
-              Image(systemName: "checkmark.circle.fill")
+            if let image = viewModel.roundedAvatar {
+              Image(uiImage: image)
             }
             Text("\(viewModel.account?.displayName ?? "")")
           }

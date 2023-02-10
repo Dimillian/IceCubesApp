@@ -60,8 +60,8 @@ struct ConversationMessageView: View {
           .padding(.leading, isOwnMessage ? 24 : 0)
           .padding(.trailing, isOwnMessage ? 0 : 24)
       }
-
-      if message.id == conversation.lastStatus.id {
+      
+      if message.id == String(conversation.lastStatus?.id ?? "")  {
         HStack {
           if isOwnMessage {
             Spacer()

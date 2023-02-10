@@ -26,11 +26,11 @@
 "enum.durations.infinite" = "infinite";
 "enum.durations.fiveMinutes" = "5 minutes";
 "enum.durations.thirtyMinutes" = "30 minutes";
-"enum.durations.oneHour" = "1 hour";
-"enum.durations.sixHours" = "6 hours";
-"enum.durations.oneDay" = "1 day";
-"enum.durations.threeDays" = "3 days";
-"enum.durations.sevenDays" = "7 days";
+"enum.durations.oneHour" = "1 hora";
+"enum.durations.sixHours" = "6 hores";
+"enum.durations.oneDay" = "1 dia";
+"enum.durations.threeDays" = "3 dies";
+"enum.durations.sevenDays" = "7 dies";
 "enum.status-actions-display.all" = "Tots";
 "enum.status-actions-display.no-buttons" = "Sense botons";
 "enum.status-actions-display.only-buttons" = "Només els botons";
@@ -64,7 +64,8 @@
 "settings.app.icon.navigation-title" = "Icones";
 "settings.app.source" = "Font (enllaç a GitHub)";
 "settings.app.support" = "Dona suport a l'aplicació";
-"settings.app.about" = "About";
+"settings.app.about" = "Quant a";
+"settings.display.example-toot" = "Publicació d'exemple";
 "settings.display.avatar.position" = "Posició de les fotos de perfil";
 "settings.display.avatar.shape" = "Forma de les fotos de perfil";
 "settings.display.navigation-title" = "Configuració de l'aparença";
@@ -146,17 +147,20 @@
 "settings.display.font.scaling-%@" = "Escalat de la lletra: %@";
 "settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
 "settings.about.title" = "Ice Cubes";
-"settings.account.cached-posts-%@" = "Cached posts: %@";
-"settings.account.action.delete-cache" = "Clear cache";
+"settings.account.cached-posts-%@" = "Publicacions en la memòria cau: %@";
+"settings.account.action.delete-cache" = "Neteja la memòria cau";
 
-"settings.general.haptic" = "Haptic Feedback";
-"settings.haptic.navigation-title" = "Haptic Settings";
-"settings.haptic.timeline" = "Timeline";
-"settings.haptic.tab-selection" = "Tab Selection";
-"settings.haptic.buttons" = "Button Press";
+"settings.general.haptic" = "Retroacció tàctil";
+"settings.haptic.navigation-title" = "Configuració tàctil";
+"settings.haptic.timeline" = "Línia de temps";
+"settings.haptic.tab-selection" = "Selecció de pestanyes";
+"settings.haptic.buttons" = "Pressió de botó";
+
+"settings.display.section.phone" = "iPhone";
+"settings.display.show-tab-label" = "Mostra el nom de la pestanya";
 
 "settings.display.section.ipad" = "iPad";
-"settings.display.show-ipad-column" = "Enable secondary column";
+"settings.display.show-ipad-column" = "Habilitar columna secondària";
 
 // MARK: Tabs
 "tab.explore" = "Exploreu";
@@ -262,7 +266,7 @@
 "explore.section.trending.links" = "Enllaços populars";
 "explore.section.trending.posts" = "Publicacions populars";
 "explore.section.trending.tags" = "Etiquetes populars";
-"explore.section.users" = "Usuariss";
+"explore.section.users" = "Usuaris";
 
 // MARK: Package: Env
 "env.poll-duration.5m" = "5 minuts";
@@ -319,12 +323,14 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Tradueix";
-"status.action.translate-from-%@" = "Translate from %@";
+"status.action.translate-from-%@" = "Tradueix del %@";
 "status.action.translated-label" = "Traduït amb DeepL.com";
 "status.action.bookmark" = "Afegeix als marcadors";
 "status.action.boost" = "Impulsa";
 "status.action.copy-text" = "Copia el text";
 "status.action.delete" = "Elimina";
+"status.action.delete.confirm.title" = "Confirm";
+"status.action.delete.confirm.message" = "are you sure you want to delete this post?";
 "status.action.edit" = "Edita";
 "status.action.favorite" = "Marca com a preferit";
 "status.action.mention" = "Menciona";
@@ -340,8 +346,8 @@
 "status.action.unfavorite" = "Desfés el preferit";
 "status.action.unpin" = "Deixa de fixar";
 "status.action.view-in-browser" = "Mostra al navegador";
-"status.card.share" = "Share this link";
-"status.card.copy" = "Copy this link";
+"status.card.share" = "Comparteix aquest enllaç";
+"status.card.copy" = "Copia aquest enllaç";
 "status.draft.delete" = "Elimina l'esborrany";
 "status.draft.save" = "Desa l'esborrany";
 "status.editor.ai-prompt.correct" = "Corregeix el text";
@@ -381,6 +387,7 @@
 "status.poll.duration" = "Durada de l'enquesta";
 "status.poll.frequency" = "Freqüència de l'enquesta";
 "status.poll.option-n %lld" = "Opció %lld";
+"status.poll.send" = "Envia el vot";
 "status.post-from-%@" = "Publicació de: %@";
 "status.row.was-boosted" = "impulsat";
 "status.row.was-reply" = "Ha respost a";

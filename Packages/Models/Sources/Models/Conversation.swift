@@ -3,7 +3,7 @@ import Foundation
 public struct Conversation: Identifiable, Decodable, Hashable, Equatable {
   public let id: String
   public let unread: Bool
-  public let lastStatus: Status
+  public let lastStatus: Status?
   public let accounts: [Account]
 
   public static func placeholder() -> Conversation {

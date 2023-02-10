@@ -74,7 +74,11 @@ public struct AppAccountView: View {
       {
         routerPath.navigate(to: .accountSettingsWithAccount(account: account, appAccount: viewModel.appAccount))
       } else {
-        appAccounts.currentAccount = viewModel.appAccount
+        var transation = Transaction()
+        transation.disablesAnimations = true
+        withTransaction(transation) {
+          appAccounts.currentAccount = viewModel.appAccount
+        }
       }
     }
   }

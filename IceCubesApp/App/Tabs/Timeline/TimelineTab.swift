@@ -19,6 +19,8 @@ struct TimelineTab: View {
   @State private var didAppear: Bool = false
   @State private var timeline: TimelineFilter
   @State private var scrollToTopSignal: Int = 0
+  
+  @AppStorage("last_timeline_filter") public var lastTimelineFilter: TimelineFilter = TimelineFilter.home
 
   private let canFilterTimeline: Bool
 
@@ -43,7 +45,11 @@ struct TimelineTab: View {
       routerPath.client = client
       if !didAppear && canFilterTimeline {
         didAppear = true
-        timeline = client.isAuth ? .home : .federated
+        if(client.isAuth) {
+          timeline = lastTimelineFilter
+        } else {
+            timeline = .federated
+        }
       }
       Task {
         await currentAccount.fetchLists()
@@ -53,10 +59,18 @@ struct TimelineTab: View {
       }
     }
     .onChange(of: client.isAuth, perform: { isAuth in
-      timeline = isAuth ? .home : .federated
+      if(client.isAuth) {
+        timeline = lastTimelineFilter
+      } else {
+          timeline = .federated
+      }
     })
     .onChange(of: currentAccount.account?.id, perform: { _ in
-      timeline = client.isAuth && canFilterTimeline ? .home : .federated
+      if(client.isAuth && canFilterTimeline) {
+        timeline = lastTimelineFilter
+      } else {
+          timeline = .federated
+      }
     })
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
       if popToRootTab == .timeline {
@@ -69,6 +83,11 @@ struct TimelineTab: View {
     }
     .onChange(of: currentAccount.account?.id) { _ in
       routerPath.path = []
+    }
+    .onChange(of: timeline) { timeline in
+      if(timeline == .home || timeline == .federated || timeline == .local) {
+        lastTimelineFilter = timeline
+      }
     }
     .withSafariRouter()
     .environmentObject(routerPath)
@@ -93,9 +112,8 @@ struct TimelineTab: View {
       }
     }
     if !currentAccount.lists.isEmpty {
-      let sortedLists = currentAccount.lists.sorted { $0.title.lowercased() < $1.title.lowercased() }
       Menu("timeline.filter.lists") {
-        ForEach(sortedLists) { list in
+        ForEach(currentAccount.sortedLists) { list in
           Button {
             timeline = .list(list: list)
           } label: {
@@ -106,9 +124,8 @@ struct TimelineTab: View {
     }
 
     if !currentAccount.tags.isEmpty {
-      let sortedTags = currentAccount.tags.sorted { $0.name.lowercased() < $1.name.lowercased() }
       Menu("timeline.filter.tags") {
-        ForEach(sortedTags) { tag in
+        ForEach(currentAccount.sortedTags) { tag in
           Button {
             timeline = .hashtag(tag: tag.name, accountId: nil)
           } label: {

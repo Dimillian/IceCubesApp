@@ -66,6 +66,7 @@
 "settings.app.source" = "Source (GitHub link)";
 "settings.app.support" = "Support the app";
 "settings.app.about" = "About";
+"settings.display.example-toot" = "Example Post";
 "settings.display.font" = "Timeline Font";
 "settings.display.font.system" = "System";
 "settings.display.font.custom" = "Custom";
@@ -151,11 +152,16 @@
 "settings.account.cached-posts-%@" = "Cached posts: %@";
 "settings.account.action.delete-cache" = "Clear cache";
 
+"account.action.share" = "Share this account";
+
 "settings.general.haptic" = "Haptic Feedback";
 "settings.haptic.navigation-title" = "Haptic Settings";
 "settings.haptic.timeline" = "Timeline";
 "settings.haptic.tab-selection" = "Tab Selection";
 "settings.haptic.buttons" = "Button Press";
+
+"settings.display.section.phone" = "iPhone";
+"settings.display.show-tab-label" = "Show tab name";
 
 "settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Enable secondary column";
@@ -326,6 +332,8 @@
 "status.action.boost" = "Boost";
 "status.action.copy-text" = "Copy Text";
 "status.action.delete" = "Delete";
+"status.action.delete.confirm.title" = "Confirm";
+"status.action.delete.confirm.message" = "are you sure you want to delete this post?";
 "status.action.edit" = "Edit";
 "status.action.favorite" = "Favourite";
 "status.action.mention" = "Mention";
@@ -380,6 +388,7 @@
 "status.poll.duration" = "Poll Duration";
 "status.poll.frequency" = "Polling Frequency";
 "status.poll.option-n %lld" = "Option %lld";
+"status.poll.send" = "Send Vote";
 "status.post-from-%@" = "Post from %@";
 "status.row.was-boosted" = "boosted";
 "status.row.was-reply" = "Replied to";

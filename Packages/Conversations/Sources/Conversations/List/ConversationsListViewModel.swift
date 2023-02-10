@@ -64,7 +64,7 @@ class ConversationsListViewModel: ObservableObject {
         conversations.remove(at: index)
       }
       conversations.insert(event.conversation, at: 0)
-      conversations = conversations.sorted(by: { $0.lastStatus.createdAt.asDate > $1.lastStatus.createdAt.asDate })
+      conversations = conversations.sorted(by: { ($0.lastStatus?.createdAt.asDate ?? Date.now) > ($1.lastStatus?.createdAt.asDate ?? Date.now) })
     }
   }
 }

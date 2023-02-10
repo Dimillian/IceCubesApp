@@ -16,10 +16,18 @@ class StatusDetailViewModel: ObservableObject {
 
   @Published var state: State = .loading
   @Published var title: LocalizedStringKey = ""
+  @Published var scrollToId: String?
 
   init(statusId: String) {
     state = .loading
     self.statusId = statusId
+    remoteStatusURL = nil
+  }
+  
+  init(status: Status) {
+    state = .display(status: status, context: .empty())
+    title = "status.post-from-\(status.account.displayNameWithoutEmojis)"
+    statusId = status.id
     remoteStatusURL = nil
   }
 
@@ -31,7 +39,7 @@ class StatusDetailViewModel: ObservableObject {
 
   func fetch() async -> Bool {
     if statusId != nil {
-      await fetchStatusDetail()
+      await fetchStatusDetail(animate: false)
       return true
     } else if remoteStatusURL != nil {
       return await fetchRemoteStatus()
@@ -48,7 +56,7 @@ class StatusDetailViewModel: ObservableObject {
                                                         forceVersion: .v2)
     if let statusId = results?.statuses.first?.id {
       self.statusId = statusId
-      await fetchStatusDetail()
+      await fetchStatusDetail(animate: false)
       return true
     } else {
       return false
@@ -60,12 +68,19 @@ class StatusDetailViewModel: ObservableObject {
     let context: StatusContext
   }
 
-  private func fetchStatusDetail() async {
+  private func fetchStatusDetail(animate: Bool) async {
     guard let client, let statusId else { return }
     do {
       let data = try await fetchContextData(client: client, statusId: statusId)
-      state = .display(status: data.status, context: data.context)
       title = "status.post-from-\(data.status.account.displayNameWithoutEmojis)"
+      if animate {
+        withAnimation {
+          state = .display(status: data.status, context: data.context)
+        }
+      } else {
+        state = .display(status: data.status, context: data.context)
+        scrollToId = statusId
+      }
     } catch {
       state = .error(error: error)
     }
@@ -82,11 +97,11 @@ class StatusDetailViewModel: ObservableObject {
        event.status.account.id == currentAccount?.id
     {
       Task {
-        await fetchStatusDetail()
+        await fetchStatusDetail(animate: true)
       }
     } else if event is StreamEventDelete {
       Task {
-        await fetchStatusDetail()
+        await fetchStatusDetail(animate: true)
       }
     }
   }

@@ -13,8 +13,8 @@ public struct HTMLString: Codable, Equatable, Hashable {
   public var statusesURLs = [URL]()
   
   public var asSafeMarkdownAttributedString: AttributedString = .init()
-  private var regex: NSRegularExpression?
-  
+  private var main_regex: NSRegularExpression?
+  private var underscore_regex: NSRegularExpression?
   public init(from decoder: Decoder) {
     var alreadyDecoded: Bool = false
     do {
@@ -38,7 +38,9 @@ public struct HTMLString: Codable, Equatable, Hashable {
       // Pre-escape \ ` _ * and [ as these are the only
       // characters the markdown parser used picks up
       // when it renders to attributed text
-      regex = try? NSRegularExpression(pattern: "([\\_\\*\\`\\[\\\\])", options: .caseInsensitive)
+      main_regex = try? NSRegularExpression(pattern: "([\\*\\`\\[\\\\])", options: .caseInsensitive)
+      // don't escape underscores that are between colons, they are most likely custom emoji
+      underscore_regex = try? NSRegularExpression(pattern: "(?!\\B:[^:]*)(_)(?![^:]*:\\B)", options: .caseInsensitive)
 
       asMarkdown = ""
       do {
@@ -75,12 +77,24 @@ public struct HTMLString: Codable, Equatable, Hashable {
     }
   }
 
-  public init(stringValue: String) {
+  public init(stringValue: String, parseMarkdown:Bool = false) {
     htmlValue = stringValue
     asMarkdown = stringValue
     asRawText = stringValue
     statusesURLs = []
-    asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
+    
+    if parseMarkdown {
+      do {
+        let options = AttributedString.MarkdownParsingOptions(allowsExtendedAttributes: true,
+                                                              interpretedSyntax: .inlineOnlyPreservingWhitespace)
+        asSafeMarkdownAttributedString = try AttributedString(markdown: asMarkdown, options: options)
+      } catch {
+        asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
+      }
+    }
+    else {
+      asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
+    }
   }
 
   public func encode(to encoder: Encoder) throws {
@@ -150,9 +164,10 @@ public struct HTMLString: Codable, Equatable, Hashable {
       } else if node.nodeName() == "#text" {
         var txt = node.description
 
-        if let regex {
+        if let underscore_regex, let main_regex {
           //  This is the markdown escaper
-          txt = regex.stringByReplacingMatches(in: txt, options: [], range: NSRange(location: 0, length: txt.count), withTemplate: "\\\\$1")
+          txt = main_regex.stringByReplacingMatches(in: txt, options: [], range: NSRange(location: 0, length: txt.count), withTemplate: "\\\\$1")
+          txt = underscore_regex.stringByReplacingMatches(in: txt, options: [], range: NSRange(location: 0, length: txt.count), withTemplate: "\\\\$1")
         }
 
         asMarkdown += txt

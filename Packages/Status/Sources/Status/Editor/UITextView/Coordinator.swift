@@ -1,4 +1,5 @@
 import SwiftUI
+import DesignSystem
 
 extension TextView.Representable {
   final class Coordinator: NSObject, UITextViewDelegate {
@@ -10,7 +11,7 @@ extension TextView.Representable {
     private var calculatedHeight: Binding<CGFloat>
     
     var didBecomeFirstResponder = false
-    
+        
     var getTextView: ((UITextView) -> Void)?
     
     init(text: Binding<NSMutableAttributedString>,
@@ -29,7 +30,19 @@ extension TextView.Representable {
       self.getTextView = getTextView
       
       super.init()
+      
       textView.delegate = self
+      
+      textView.font = Font.scaledBodyUIFont
+      textView.adjustsFontForContentSizeCategory = true
+      textView.autocapitalizationType = .sentences
+      textView.autocorrectionType = .yes
+      textView.isEditable = true
+      textView.isSelectable = true
+      textView.dataDetectorTypes = []
+      textView.allowsEditingTextAttributes = false
+      textView.returnKeyType = .default
+      textView.allowsEditingTextAttributes = true
       
       self.getTextView?(textView)
     }
@@ -58,38 +71,7 @@ extension TextView.Representable {
 extension TextView.Representable.Coordinator {
   
   func update(representable: TextView.Representable) {
-    textView.attributedText = representable.text
-    textView.font = representable.font
-    textView.adjustsFontForContentSizeCategory = true
-    textView.autocapitalizationType = representable.autocapitalization
-    textView.autocorrectionType = representable.autocorrection
-    textView.isEditable = representable.isEditable
-    textView.isSelectable = representable.isSelectable
-    textView.dataDetectorTypes = representable.autoDetectionTypes
-    textView.allowsEditingTextAttributes = representable.allowsRichText
     textView.keyboardType = representable.keyboard
-    
-    switch representable.multilineTextAlignment {
-    case .leading:
-      textView.textAlignment = textView.traitCollection.layoutDirection ~= .leftToRight ? .left : .right
-    case .trailing:
-      textView.textAlignment = textView.traitCollection.layoutDirection ~= .leftToRight ? .right : .left
-    case .center:
-      textView.textAlignment = .center
-    }
-    
-    if let value = representable.enablesReturnKeyAutomatically {
-      textView.enablesReturnKeyAutomatically = value
-    } else {
-      textView.enablesReturnKeyAutomatically = false
-    }
-    
-    if let returnKeyType = representable.returnKeyType {
-      textView.returnKeyType = returnKeyType
-    } else {
-      textView.returnKeyType = .default
-    }
-    
     recalculateHeight()
     textView.setNeedsDisplay()
   }

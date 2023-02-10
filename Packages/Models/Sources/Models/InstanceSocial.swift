@@ -2,7 +2,7 @@ import Foundation
 
 public struct InstanceSocial: Decodable, Identifiable {
   public struct Info: Decodable {
-    public let shortDescription: String
+    public let shortDescription: String?
   }
 
   public let id: String

@@ -1,4 +1,5 @@
 import SwiftUI
+import DesignSystem
 
 /// A SwiftUI TextView implementation that supports both scrolling and auto-sizing layouts
 public struct TextView: View {
@@ -13,20 +14,7 @@ public struct TextView: View {
   private var getTextView: ((UITextView) -> Void)?
   
   var placeholderView: AnyView?
-  var foregroundColor: UIColor = .label
-  var autocapitalization: UITextAutocapitalizationType = .sentences
-  var multilineTextAlignment: TextAlignment = .leading
-  var font: UIFont = .preferredFont(forTextStyle: .body)
-  var returnKeyType: UIReturnKeyType?
-  var clearsOnInsertion: Bool = false
-  var autocorrection: UITextAutocorrectionType = .default
-  var truncationMode: NSLineBreakMode = .byTruncatingTail
   var keyboard: UIKeyboardType = .default
-  var isEditable: Bool = true
-  var isSelectable: Bool = true
-  var enablesReturnKeyAutomatically: Bool?
-  var autoDetectionTypes: UIDataDetectorTypes = []
-  var allowRichText: Bool
   
   /// Makes a new TextView that supports `NSAttributedString`
   /// - Parameters:
@@ -41,28 +29,13 @@ public struct TextView: View {
     )
     
     self.getTextView = getTextView
-    
-    allowRichText = true
   }
   
   public var body: some View {
     Representable(
       text: $text,
       calculatedHeight: $calculatedHeight,
-      foregroundColor: foregroundColor,
-      autocapitalization: autocapitalization,
-      multilineTextAlignment: multilineTextAlignment,
-      font: font,
-      returnKeyType: returnKeyType,
-      clearsOnInsertion: clearsOnInsertion,
-      autocorrection: autocorrection,
-      truncationMode: truncationMode,
-      isEditable: isEditable,
       keyboard: keyboard,
-      isSelectable: isSelectable,
-      enablesReturnKeyAutomatically: enablesReturnKeyAutomatically,
-      autoDetectionTypes: autoDetectionTypes,
-      allowsRichText: allowRichText,
       getTextView: getTextView
     )
     .frame(
@@ -72,8 +45,8 @@ public struct TextView: View {
     .background(
       placeholderView?
         .foregroundColor(Color(.placeholderText))
-        .multilineTextAlignment(multilineTextAlignment)
-        .font(Font(font))
+        .multilineTextAlignment(.leading)
+        .font(.scaledBody)
         .padding(.horizontal, 0)
         .padding(.vertical, 0)
         .opacity(isEmpty ? 1 : 0),

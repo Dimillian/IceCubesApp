@@ -6,7 +6,6 @@ import SwiftUI
 
 public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var routerPath: RouterPath
 
   @ObservedObject private var fetcher: Fetcher
   private let isRemote: Bool
@@ -25,12 +24,6 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
         StatusRowView(viewModel: .init(status: status, isCompact: false))
           .padding(.horizontal, isEmbdedInList ? 0 : .layoutPadding)
           .redacted(reason: .placeholder)
-          .id(UUID())
-          .listRowBackground(theme.primaryBackgroundColor)
-          .listRowInsets(.init(top: 12,
-                               leading: .layoutPadding,
-                               bottom: 12,
-                               trailing: .layoutPadding))
         if !isEmbdedInList {
           Divider()
             .padding(.vertical, .dividerPadding)
@@ -54,11 +47,6 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
           StatusRowView(viewModel: viewModel)
             .padding(.horizontal, isEmbdedInList ? 0 : .layoutPadding)
             .id(status.id)
-            .listRowBackground(theme.primaryBackgroundColor)
-            .listRowInsets(.init(top: 12,
-                                 leading: .layoutPadding,
-                                 bottom: 12,
-                                 trailing: .layoutPadding))
             .onAppear {
               fetcher.statusDidAppear(status: status)
             }

@@ -12,9 +12,14 @@ struct DisplaySettingsView: View {
   @EnvironmentObject private var userPreferences: UserPreferences
 
   @State private var isFontSelectorPresented = false
-
+  private var previewStatusViewModel = StatusRowViewModel(status: Status.placeholder(forSettings: true, language: "la")) // translate from latin button
   var body: some View {
     Form {
+      Section("settings.display.example-toot") {
+        StatusRowView(viewModel: previewStatusViewModel)
+          .allowsHitTesting(false)
+      }
+
       Section {
         Toggle("settings.display.theme.systemColor", isOn: $theme.followSystemColorScheme)
         themeSelectorButton
@@ -33,7 +38,7 @@ struct DisplaySettingsView: View {
         }
       }
       .listRowBackground(theme.primaryBackgroundColor)
-
+      
       Section("settings.display.section.display") {
         Picker("settings.display.font", selection: .init(get: { () -> FontState in
           if userPreferences.chosenFont?.fontName == "OpenDyslexic-Regular" {
@@ -74,7 +79,7 @@ struct DisplaySettingsView: View {
             Text(buttonStyle.description).tag(buttonStyle)
           }
         }
-
+        
         Picker("settings.display.status.media-style", selection: $theme.statusDisplayStyle) {
           ForEach(Theme.StatusDisplayStyle.allCases, id: \.rawValue) { buttonStyle in
             Text(buttonStyle.description).tag(buttonStyle)
@@ -91,11 +96,19 @@ struct DisplaySettingsView: View {
         Toggle("settings.display.translate-button", isOn: $userPreferences.showTranslateButton)
       }
       .listRowBackground(theme.primaryBackgroundColor)
-      
+
+      if UIDevice.current.userInterfaceIdiom == .phone {
+        Section("settings.display.section.phone") {
+          Toggle("settings.display.show-tab-label", isOn: $userPreferences.showiPhoneTabLabel)
+        }
+        .listRowBackground(theme.primaryBackgroundColor)
+      }
+
       if UIDevice.current.userInterfaceIdiom == .pad {
         Section("settings.display.section.ipad") {
           Toggle("settings.display.show-ipad-column", isOn: $userPreferences.showiPadSecondaryColumn)
         }
+        .listRowBackground(theme.primaryBackgroundColor)
       }
 
       Section {

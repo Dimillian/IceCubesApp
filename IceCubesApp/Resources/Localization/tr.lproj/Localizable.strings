@@ -66,6 +66,7 @@
 "settings.app.source" = "Kaynak Kodu (GitHub link)";
 "settings.app.support" = "Uygulamayı Destekleyin";
 "settings.app.about" = "About";
+"settings.display.example-toot" = "Example Post";
 "settings.display.avatar.position" = "Avatar Pozisyonu";
 "settings.display.avatar.shape" = "Avatar Şekli";
 "settings.display.navigation-title" = "Gösterim Ayarları";
@@ -155,6 +156,9 @@
 "settings.haptic.timeline" = "Timeline";
 "settings.haptic.tab-selection" = "Tab Selection";
 "settings.haptic.buttons" = "Button Press";
+
+"settings.display.section.phone" = "iPhone";
+"settings.display.show-tab-label" = "Show tab name";
 
 "settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Enable secondary column";
@@ -322,6 +326,8 @@
 "status.action.boost" = "Yükselt";
 "status.action.copy-text" = "Yazıyı Kopyala";
 "status.action.delete" = "Sil";
+"status.action.delete.confirm.title" = "Confirm";
+"status.action.delete.confirm.message" = "are you sure you want to delete this post?";
 "status.action.edit" = "Düzenle";
 "status.action.favorite" = "Favori";
 "status.action.mention" = "Bahset";
@@ -378,6 +384,7 @@
 "status.poll.duration" = "Anket Süresi";
 "status.poll.frequency" = "Anket Sıklığı";
 "status.poll.option-n %lld" = "Seçenek %lld";
+"status.poll.send" = "Send Vote";
 "status.post-from-%@" = "Gönderi tarafından %@";
 "status.row.was-boosted" = "yükseltildi";
 "status.row.was-reply" = "Şuna cevap verildi";

@@ -65,7 +65,8 @@
 "settings.app.icon.navigation-title" = "Icons";
 "settings.app.source" = "Quellcode (auf GitHub)";
 "settings.app.support" = "Unterstütze die App";
-"settings.app.about" = "About";
+"settings.app.about" = "Über";
+"settings.display.example-toot" = "Beispielbeitrag";
 "settings.display.avatar.position" = "Profilbild-Position";
 "settings.display.avatar.shape" = "Profilbild-Form";
 "settings.display.navigation-title" = "Anzeigeeinstellungen";
@@ -82,7 +83,7 @@
 "settings.display.theme.systemColor" = "Systemeinstellung verwenden";
 "settings.general.browser" = "Browser";
 "settings.general.browser.in-app" = "In-App-Browser";
-"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
+"settings.general.browser.in-app.readerview" = "In-App-Browser-Lesemodus";
 "settings.general.browser.system" = "Systembrowser";
 "settings.general.display" = "Anzeigeeinstellungen";
 "settings.general.instance" = "Instanz-Informationen";
@@ -119,7 +120,7 @@
 "settings.title" = "Einstellungen";
 "settings.rate" = "Bewerte Ice Cubes";
 "settings.section.other" = "Anderes";
-"settings.other.hide-openai" = "Aktiviere 🤖 Helfer";
+"settings.other.hide-openai" = "Aktiviere 🤖-Helfer";
 "settings.other.social-keyboard" = "Soziale Tastatur aktivieren";
 "settings.general.content" = "Inhaltseinstellungen";
 "settings.system" = "Systemeinstellungen";
@@ -153,8 +154,11 @@
 "settings.haptic.tab-selection" = "Tabauswahl";
 "settings.haptic.buttons" = "Knopfdruck";
 
+"settings.display.section.phone" = "iPhone";
+"settings.display.show-tab-label" = "Tabtitel anzeigen";
+
 "settings.display.section.ipad" = "iPad";
-"settings.display.show-ipad-column" = "Enable secondary column";
+"settings.display.show-ipad-column" = "Zweite Spalte aktivieren";
 
 "enum.expand-media.show" = "Alle zeigen";
 "enum.expand-media.hide" = "Alle ausblenden";
@@ -197,7 +201,7 @@
 "account.action.unblock" = "Blockade aufheben";
 "account.action.mute" = "Stummschalten";
 "account.action.unmute" = "Stummschaltung aufheben";
-"account.action.share" = "Share this account";
+"account.action.share" = "Diesen Account teilen";
 "account.boosted-by" = "Geboostet von";
 "account.detail.about" = "Über";
 "account.detail.familiar-followers" = "Auch gefolgt von";
@@ -248,7 +252,7 @@
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld Beiträge von %lld Teilnehmenden";
-"design.theme.navigation-title" = "Themen-Auswahl";
+"design.theme.navigation-title" = "Design-Auswahl";
 "design.theme.toots-preview" = "Beitragsvorschau";
 
 // MARK: Package: Explore
@@ -320,12 +324,14 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Übersetzen";
-"status.action.translate-from-%@" = "Übersetzen aus %@";
+"status.action.translate-from-%@" = "Aus %@ übersetzen";
 "status.action.translated-label" = "Übersetzt mit DeepL.com";
 "status.action.bookmark" = "Lesezeichen";
 "status.action.boost" = "Boosten";
 "status.action.copy-text" = "Text kopieren";
 "status.action.delete" = "Löschen";
+"status.action.delete.confirm.title" = "Bestätigen";
+"status.action.delete.confirm.message" = "bist du dir sicher, dass du diesen Beitrag löschen möchtest?";
 "status.action.edit" = "Bearbeiten";
 "status.action.favorite" = "Favorisieren";
 "status.action.mention" = "Erwähnen";
@@ -341,8 +347,8 @@
 "status.action.unfavorite" = "Favorit entfernen";
 "status.action.unpin" = "Nicht mehr anheften";
 "status.action.view-in-browser" = "Im Browser öffnen";
-"status.card.share" = "Share this link";
-"status.card.copy" = "Copy this link";
+"status.card.share" = "Diesen Link teilen";
+"status.card.copy" = "Diesen Link kopieren";
 "status.draft.delete" = "Entwurf löschen";
 "status.draft.save" = "Entwurf sichern";
 "status.editor.ai-prompt.correct" = "Text korrigieren";
@@ -382,6 +388,7 @@
 "status.poll.duration" = "Umfragedauer";
 "status.poll.frequency" = "Auswahlmöglichkeiten";
 "status.poll.option-n %lld" = "Option %lld";
+"status.poll.send" = "Auswahl absenden";
 "status.post-from-%@" = "Beitrag von %@";
 "status.row.was-boosted" = "hat geboostet";
 "status.row.was-reply" = "Antwort auf";

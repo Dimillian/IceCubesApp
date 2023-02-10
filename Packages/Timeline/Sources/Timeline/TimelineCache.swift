@@ -28,7 +28,7 @@ public actor TimelineCache {
 
   func set(statuses: [Status], client: Client) async {
     guard !statuses.isEmpty else { return }
-    let statuses = statuses.prefix(upTo: min(400, statuses.count - 1)).map { $0 }
+    let statuses = statuses.prefix(upTo: min(600, statuses.count - 1)).map { $0 }
     do {
       let engine = storageFor(client)
       try await engine.removeAllData()
@@ -45,7 +45,7 @@ public actor TimelineCache {
       return try await engine
         .readAllData()
         .map { try decoder.decode(Status.self, from: $0) }
-        .sorted(by: { $0.createdAt > $1.createdAt })
+        .sorted(by: { $0.createdAt.asDate > $1.createdAt.asDate })
     } catch {
       return nil
     }

@@ -9,7 +9,6 @@ import SwiftUI
 public struct StatusRowView: View {
   @Environment(\.redactionReasons) private var reasons
   @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var routerPath: RouterPath
@@ -83,7 +82,7 @@ public struct StatusRowView: View {
       .contextMenu {
         contextMenu
       }
-      .listRowBackground(viewModel.shouldHighlightRow ? theme.secondaryBackgroundColor : theme.primaryBackgroundColor)
+      .listRowBackground(viewModel.highlightRowColor)
       .swipeActions(edge: .trailing) {
         if !viewModel.isCompact {
           trailinSwipeActions
@@ -94,26 +93,14 @@ public struct StatusRowView: View {
           leadingSwipeActions
         }
       }
+      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowInsets(.init(top: 12,
+                           leading: .layoutPadding,
+                           bottom: 12,
+                           trailing: .layoutPadding))
       .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
       .accessibilityActions {
-        // Add the individual mentions as accessibility actions
-        ForEach(viewModel.status.mentions, id: \.id) { mention in
-          Button("@\(mention.username)") {
-            routerPath.navigate(to: .accountDetail(id: mention.id))
-          }
-        }
-
-        Button(viewModel.displaySpoiler ? "status.show-more" : "status.show-less") {
-          withAnimation {
-            viewModel.displaySpoiler.toggle()
-          }
-        }
-
-        Button("@\(viewModel.status.account.username)") {
-          routerPath.navigate(to: .accountDetail(id: viewModel.status.account.id))
-        }
-
-        contextMenu
+        accesibilityActions
       }
       .background {
         Color.clear
@@ -127,10 +114,44 @@ public struct StatusRowView: View {
           remoteContentLoadingView
         }
       }
+      .alert(isPresented: $viewModel.showDeleteAlert, content: {
+        Alert(
+          title: Text("status.action.delete.confirm.title"),
+          message: Text("status.action.delete.confirm.message"),
+          primaryButton: .destructive(
+            Text("status.action.delete")) {
+              Task {
+                await viewModel.delete()
+              }
+            },
+          secondaryButton: .cancel())
+      })
       .alignmentGuide(.listRowSeparatorLeading) { _ in
         -100
       }
     }
+  }
+  
+  @ViewBuilder
+  private var accesibilityActions: some View {
+    // Add the individual mentions as accessibility actions
+    ForEach(viewModel.status.mentions, id: \.id) { mention in
+      Button("@\(mention.username)") {
+        routerPath.navigate(to: .accountDetail(id: mention.id))
+      }
+    }
+    
+    Button(viewModel.displaySpoiler ? "status.show-more" : "status.show-less") {
+      withAnimation {
+        viewModel.displaySpoiler.toggle()
+      }
+    }
+    
+    Button("@\(viewModel.status.account.username)") {
+      routerPath.navigate(to: .accountDetail(id: viewModel.status.account.id))
+    }
+    
+    contextMenu
   }
 
   private func makeFilterView(filter: Filter) -> some View {
@@ -152,18 +173,14 @@ public struct StatusRowView: View {
       HStack(spacing: 2) {
         Image(systemName: "arrow.left.arrow.right.circle.fill")
         AvatarView(url: viewModel.status.account.avatar, size: .boost)
-        if viewModel.status.account.url != account.account?.url {
-          EmojiTextApp(.init(stringValue: viewModel.status.account.safeDisplayName), emojis: viewModel.status.account.emojis)
-          Text("status.row.was-boosted")
-        } else {
-          Text("status.row.you-boosted")
-        }
+        EmojiTextApp(.init(stringValue: viewModel.status.account.safeDisplayName), emojis: viewModel.status.account.emojis)
+        Text("status.row.was-boosted")
       }
       .accessibilityElement()
       .accessibilityLabel(
         Text("\(viewModel.status.account.safeDisplayName)")
           + Text(" ")
-          + Text(viewModel.status.account.url != account.account?.url ? "status.row.was-boosted" : "status.row.you-boosted")
+          + Text("status.row.was-boosted")
       )
       .font(.scaledFootnote)
       .foregroundColor(.gray)
@@ -197,7 +214,7 @@ public struct StatusRowView: View {
     VStack(alignment: .leading, spacing: 8) {
       if let status: AnyStatus = viewModel.status.reblog ?? viewModel.status {
         if !viewModel.isCompact {
-          HStack(alignment: .top) {
+          HStack(alignment: .center) {
             Button {
               viewModel.navigateToAccountDetail(account: status.account, routerPath: routerPath)
             } label: {
@@ -206,6 +223,7 @@ public struct StatusRowView: View {
             .buttonStyle(.plain)
             Spacer()
             threadIcon
+            contextMenuButton
           }
           .accessibilityElement()
           .accessibilityLabel(Text("\(status.account.displayName)"))
@@ -311,6 +329,19 @@ public struct StatusRowView: View {
         .frame(width: 15)
         .foregroundColor(.gray)
     }
+  }
+  
+  private var contextMenuButton: some View {
+    Menu {
+      contextMenu
+    } label: {
+      Image(systemName: "ellipsis")
+        .frame(width: 20, height: 30)
+    }
+    .menuStyle(.borderlessButton)
+    .foregroundColor(.gray)
+    .contentShape(Rectangle())
+    .accessibilityHidden(true)
   }
 
   @ViewBuilder

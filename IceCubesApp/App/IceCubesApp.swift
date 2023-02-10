@@ -133,20 +133,30 @@ struct IceCubesApp: App {
     TabView(selection: .init(get: {
       selectedTab
     }, set: { newTab in
-      if newTab == selectedTab {
-        /// Stupid hack to trigger onChange binding in tab views.
-        popToRootTab = .other
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-          popToRootTab = selectedTab
+      var transaction = Transaction()
+      transaction.disablesAnimations = true
+      withTransaction(transaction) {
+        if newTab == selectedTab {
+          /// Stupid hack to trigger onChange binding in tab views.
+          popToRootTab = .other
+          DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+            popToRootTab = selectedTab
+          }
         }
+        selectedTab = newTab
       }
-      selectedTab = newTab
       HapticManager.shared.fireHaptic(of: .tabSelection)
     })) {
       ForEach(availableTabs) { tab in
         tab.makeContentView(popToRootTab: $popToRootTab)
           .tabItem {
-            tab.label
+            if userPreferences.showiPhoneTabLabel {
+              tab.label
+                .labelStyle(TitleAndIconLabelStyle())
+            } else {
+              tab.label
+                .labelStyle(IconOnlyLabelStyle())
+            }
           }
           .tag(tab)
           .badge(badgeFor(tab: tab))

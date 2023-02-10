@@ -24,14 +24,14 @@
 "enum.avatar-position.top" = "顶部";
 "enum.avatar-shape.circle" = "圆形";
 "enum.avatar-shape.rounded" = "圆角";
-"enum.durations.infinite" = "infinite";
-"enum.durations.fiveMinutes" = "5 minutes";
-"enum.durations.thirtyMinutes" = "30 minutes";
-"enum.durations.oneHour" = "1 hour";
-"enum.durations.sixHours" = "6 hours";
-"enum.durations.oneDay" = "1 day";
-"enum.durations.threeDays" = "3 days";
-"enum.durations.sevenDays" = "7 days";
+"enum.durations.infinite" = "永久";
+"enum.durations.fiveMinutes" = "5 分钟";
+"enum.durations.thirtyMinutes" = "30 分钟";
+"enum.durations.oneHour" = "1 小时";
+"enum.durations.sixHours" = "6 小时";
+"enum.durations.oneDay" = "1 天";
+"enum.durations.threeDays" = "3 天";
+"enum.durations.sevenDays" = "7 天";
 "enum.status-actions-display.all" = "图标和文本";
 "enum.status-actions-display.no-buttons" = "仅文本";
 "enum.status-actions-display.only-buttons" = "仅图标";
@@ -66,6 +66,7 @@
 "settings.app.source" = "源代码（GitHub 链接）";
 "settings.app.support" = "支持本应用";
 "settings.app.about" = "关于";
+"settings.display.example-toot" = "样例嘟文";
 "settings.display.avatar.position" = "头像位置";
 "settings.display.avatar.shape" = "头像边框";
 "settings.display.navigation-title" = "显示设置";
@@ -82,7 +83,7 @@
 "settings.display.theme.systemColor" = "匹配系统";
 "settings.general.browser" = "默认浏览器";
 "settings.general.browser.in-app" = "应用内浏览器";
-"settings.general.browser.in-app.readerview" = "应用内浏览器阅读器视图";
+"settings.general.browser.in-app.readerview" = "应用内浏览器启用阅读器视图";
 "settings.general.browser.system" = "系统浏览器";
 "settings.general.display" = "显示设置";
 "settings.general.instance" = "服务器设置";
@@ -107,7 +108,7 @@
 "settings.support.message-from-dev" = "你好呀！我叫 Thomas，我非常喜欢写开源应用。Ice Cubes 绝对是目前为止我最骄傲的项目之一。而且说实话，由于 Mastodon 和社交媒体世界的不断变化，它也是最需要维护的项目。如果你喜欢使用 Ice Cubes，请考虑给我一些捐赠。这真的会让我很开心 (且能鼓励我持续为你完善它)。🚀";
 "settings.support.navigation-title" = "支持 Ice Cubes";
 "settings.support.one.subtitle" = "小而可爱，而且它味道不错！";
-"settings.support.one.title" = "🍬 一点小费";
+"settings.support.one.title" = "🍬 迷你捐赠";
 "settings.support.placeholder.loading-subtitle" = "加载中……";
 "settings.support.three.subtitle" = "你真棒，非常感谢！";
 "settings.support.three.title" = "🤯 很慷慨的捐赠";
@@ -140,7 +141,7 @@
 "settings.push.duplicate.footer" = "有收到重复的推送通知？试试用这个魔法按钮去修复吧";
 "settings.push.duplicate.button.fix" = "🪄 修复";
 "settings.other.autoplay-video" = "自动播放视频";
-"settings.about.built-with" = "Ice Cubes 采用以下开源项目构建：";
+"settings.about.built-with" = "Ice Cubes 的构建使用了以下开源项目：";
 "settings.about.title" = "Ice Cubes";
 "settings.account.cached-posts-%@" = "已缓存嘟文：%@";
 "settings.account.action.delete-cache" = "清除缓存";
@@ -156,8 +157,11 @@
 "settings.display.font.custom" = "自定义";
 "settings.display.font.scaling-%@" = "字体缩放：%@";
 
+"settings.display.section.phone" = "iPhone";
+"settings.display.show-tab-label" = "显示 Tab 标签";
+
 "settings.display.section.ipad" = "iPad";
-"settings.display.show-ipad-column" = "Enable secondary column";
+"settings.display.show-ipad-column" = "启用边栏";
 
 // MARK: Tabs
 "tab.explore" = "探索";
@@ -195,7 +199,7 @@
 "account.action.unblock" = "取消屏蔽";
 "account.action.mute" = "免打扰";
 "account.action.unmute" = "取消免打扰";
-"account.action.share" = "Share this account";
+"account.action.share" = "分享此账户";
 "account.boosted-by" = "转发";
 "account.detail.about" = "附加信息";
 "account.detail.familiar-followers" = "同样关注此账号的有";
@@ -317,7 +321,7 @@
 "timeline.local" = "本地";
 "timeline.n-recent-from-n-participants %lld %lld" = "最近 %lld 条嘟文来自 %lld 个参与者";
 "timeline.trending" = "当下流行";
-"timeline.add.url" = "Instance URL";
+"timeline.add.url" = "服务器 URL";
 
 // MARK: Package: Status
 "status.action.translate" = "翻译";
@@ -327,6 +331,8 @@
 "status.action.boost" = "转发";
 "status.action.copy-text" = "拷贝文本";
 "status.action.delete" = "删除";
+"status.action.delete.confirm.title" = "确定";
+"status.action.delete.confirm.message" = "你确定要删除此嘟文吗？";
 "status.action.edit" = "编辑";
 "status.action.favorite" = "收藏";
 "status.action.mention" = "提及";
@@ -342,8 +348,8 @@
 "status.action.unfavorite" = "取消收藏";
 "status.action.unpin" = "取消固定";
 "status.action.view-in-browser" = "在浏览器中打开";
-"status.card.share" = "Share this link";
-"status.card.copy" = "Copy this link";
+"status.card.share" = "分享此链接";
+"status.card.copy" = "拷贝此链接";
 "status.draft.delete" = "删除草稿";
 "status.draft.save" = "保存草稿";
 "status.editor.ai-prompt.correct" = "检查拼写和语法";
@@ -383,6 +389,7 @@
 "status.poll.duration" = "投票持续时间";
 "status.poll.frequency" = "投票频率";
 "status.poll.option-n %lld" = "%lld 选项";
+"status.poll.send" = "发送投票";
 "status.post-from-%@" = "%@ 的嘟文";
 "status.row.was-boosted" = "转发";
 "status.row.was-reply" = "回复到";
