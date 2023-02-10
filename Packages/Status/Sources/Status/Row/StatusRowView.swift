@@ -209,7 +209,7 @@ public struct StatusRowView: View {
     VStack(alignment: .leading, spacing: 8) {
       if let status: AnyStatus = viewModel.status.reblog ?? viewModel.status {
         if !viewModel.isCompact {
-          HStack(alignment: .top) {
+          HStack(alignment: .center) {
             Button {
               viewModel.navigateToAccountDetail(account: status.account, routerPath: routerPath)
             } label: {
@@ -218,6 +218,7 @@ public struct StatusRowView: View {
             .buttonStyle(.plain)
             Spacer()
             threadIcon
+            contextMenuButton
           }
           .accessibilityElement()
           .accessibilityLabel(Text("\(status.account.displayName)"))
@@ -321,6 +322,15 @@ public struct StatusRowView: View {
         .resizable()
         .aspectRatio(contentMode: .fit)
         .frame(width: 15)
+        .foregroundColor(.gray)
+    }
+  }
+  
+  private var contextMenuButton: some View {
+    Menu {
+      contextMenu
+    } label: {
+      Image(systemName: "ellipsis")
         .foregroundColor(.gray)
     }
   }
