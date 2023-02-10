@@ -11,7 +11,7 @@ public extension Account {
 
   var safeDisplayName: String {
     if displayName.isEmpty || displayName == "" {
-      return username
+      return "@\(username)"
     }
     return displayName
   }
