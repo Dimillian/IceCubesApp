@@ -57,7 +57,10 @@ public protocol AnyStatus {
 extension AnyStatus {
   public var viewId: String {
     get {
-      "\(id)\(createdAt.asDate.description)\(editedAt?.asDate.description ?? "")"
+      if let editedAt {
+        return "\(id)\(editedAt.asDate.description)"
+      }
+      return id
     }
   }
 }
