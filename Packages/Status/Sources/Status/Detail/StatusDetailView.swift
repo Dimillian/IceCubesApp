@@ -4,6 +4,7 @@ import Models
 import Network
 import Shimmer
 import SwiftUI
+import DesignSystem
 
 public struct StatusDetailView: View {
   @EnvironmentObject private var theme: Theme
@@ -14,85 +15,86 @@ public struct StatusDetailView: View {
   @Environment(\.openURL) private var openURL
   @StateObject private var viewModel: StatusDetailViewModel
   @State private var isLoaded: Bool = false
-
+  @State private var statusHeight: CGFloat = 0
+  
   public init(statusId: String) {
     _viewModel = StateObject(wrappedValue: .init(statusId: statusId))
   }
-
+  
+  public init(status: Status) {
+    _viewModel = StateObject(wrappedValue: .init(status: status))
+  }
+  
   public init(remoteStatusURL: URL) {
     _viewModel = StateObject(wrappedValue: .init(remoteStatusURL: remoteStatusURL))
   }
-
+  
   public var body: some View {
-    ScrollViewReader { proxy in
-      ZStack {
-        ScrollView {
-          LazyVStack {
-            Group {
-              switch viewModel.state {
-              case .loading:
-                ForEach(Status.placeholders()) { status in
-                  StatusRowView(viewModel: .init(status: status, isCompact: false))
-                    .padding(.horizontal, .layoutPadding)
-                    .redacted(reason: .placeholder)
-                  Divider()
-                    .padding(.vertical, .dividerPadding)
-                }
-              case let .display(status, context):
-                if !context.ancestors.isEmpty {
-                  ForEach(context.ancestors) { ancestor in
-                    StatusRowView(viewModel: .init(status: ancestor, isCompact: false))
-                      .padding(.horizontal, .layoutPadding)
-                    Divider()
-                      .padding(.vertical, .dividerPadding)
-                  }
-                }
-                StatusRowView(viewModel: .init(status: status,
-                                               isCompact: false,
-                                               isFocused: true))
-                  .padding(.horizontal, .layoutPadding)
-                  .id(status.id)
-                Divider()
-                  .padding(.bottom, .dividerPadding * 2)
-                if !context.descendants.isEmpty {
-                  ForEach(context.descendants) { descendant in
-                    StatusRowView(viewModel: .init(status: descendant, isCompact: false))
-                      .padding(.horizontal, .layoutPadding)
-                    Divider()
-                      .padding(.vertical, .dividerPadding)
-                  }
-                }
-
-              case .error:
-                ErrorView(title: "status.error.title",
-                          message: "status.error.message",
-                          buttonTitle: "action.retry") {
-                  Task {
-                    await viewModel.fetch()
-                  }
-                }
+    GeometryReader { reader in
+      ScrollViewReader { proxy in
+        List {
+          if isLoaded {
+            topPaddingView
+          }
+          
+          switch viewModel.state {
+          case .loading:
+            loadingDetailView
+            
+          case let .display(status, context):
+            if !context.ancestors.isEmpty {
+              ForEach(context.ancestors) { ancestor in
+                StatusRowView(viewModel: .init(status: ancestor, isCompact: false))
               }
             }
+            
+            makeCurrentStatusView(status: status)
+            
+            if !context.descendants.isEmpty {
+              ForEach(context.descendants) { descendant in
+                StatusRowView(viewModel: .init(status: descendant, isCompact: false))
+              }
+            }
+            
+            if !isLoaded {
+              loadingContextView
+            }
+            
+            Rectangle()
+              .foregroundColor(theme.secondaryBackgroundColor)
+              .frame(minHeight: reader.frame(in: .local).size.height - statusHeight)
+              .listRowSeparator(.hidden)
+              .listRowBackground(theme.secondaryBackgroundColor)
+              .listRowInsets(.init())
+            
+          case .error:
+            errorView
           }
-          .padding(.top, .layoutPadding)
         }
+        .environment(\.defaultMinListRowHeight, 1)
+        .listStyle(.plain)
+        .scrollContentBackground(.hidden)
         .background(theme.primaryBackgroundColor)
-      }
-      .task {
-        guard !isLoaded else { return }
-        isLoaded = true
-        viewModel.client = client
-        let result = await viewModel.fetch()
-        if !result {
-          if let url = viewModel.remoteStatusURL {
-            openURL(url)
+        .onChange(of: viewModel.scrollToId, perform: { scrollToId in
+          if let scrollToId {
+            viewModel.scrollToId = nil
+            proxy.scrollTo(scrollToId, anchor: .top)
           }
-          DispatchQueue.main.async {
-            _ = routerPath.path.popLast()
+        })
+        .task {
+          guard !isLoaded else { return }
+          viewModel.client = client
+          let result = await viewModel.fetch()
+          isLoaded = true
+          
+          if !result {
+            if let url = viewModel.remoteStatusURL {
+              openURL(url)
+            }
+            DispatchQueue.main.async {
+              _ = routerPath.path.popLast()
+            }
           }
-        }
-        DispatchQueue.main.async {
-          proxy.scrollTo(viewModel.statusId, anchor: .center)
         }
       }
       .onChange(of: watcher.latestEvent?.id) { _ in
@@ -102,5 +104,59 @@ public struct StatusDetailView: View {
     }
     .navigationTitle(viewModel.title)
     .navigationBarTitleDisplayMode(.inline)
+  }
+  
+  private func makeCurrentStatusView(status: Status) -> some View {
+    StatusRowView(viewModel: .init(status: status,
+                                   isCompact: false,
+                                   isFocused: true))
+    .overlay {
+      GeometryReader { reader in
+        VStack{}
+          .onAppear {
+          statusHeight = reader.size.height
+        }
+      }
+    }
+    .id(status.id)
+  }
+  
+  private var errorView: some View {
+    ErrorView(title: "status.error.title",
+              message: "status.error.message",
+              buttonTitle: "action.retry") {
+      Task {
+        await viewModel.fetch()
+      }
+    }
+    .listRowBackground(theme.primaryBackgroundColor)
+    .listRowSeparator(.hidden)
+  }
+  
+  private var loadingDetailView: some View {
+    ForEach(Status.placeholders()) { status in
+      StatusRowView(viewModel: .init(status: status, isCompact: false))
+        .redacted(reason: .placeholder)
+    }
+  }
+  
+  private var loadingContextView: some View {
+    HStack {
+      Spacer()
+      ProgressView()
+      Spacer()
+    }
+    .frame(height: 50)
+    .listRowSeparator(.hidden)
+    .listRowBackground(theme.secondaryBackgroundColor)
+    .listRowInsets(.init())
+  }
+  
+  private var topPaddingView: some View {
+    HStack { EmptyView() }
+      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowSeparator(.hidden)
+      .listRowInsets(.init())
+      .frame(height: .layoutPadding)
   }
 }

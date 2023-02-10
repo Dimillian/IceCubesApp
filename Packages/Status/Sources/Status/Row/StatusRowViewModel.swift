@@ -97,7 +97,11 @@ public class StatusRowViewModel: ObservableObject {
     if isRemote, let url = URL(string: status.reblog?.url ?? status.url ?? "") {
       routerPath.navigate(to: .remoteStatusDetail(url: url))
     } else {
-      routerPath.navigate(to: .statusDetail(id: status.reblog?.id ?? status.id))
+      if let id = status.reblog?.id {
+        routerPath.navigate(to: .statusDetail(id: id))
+      } else {
+        routerPath.navigate(to: .statusDetailWithStatus(status: status))
+      }
     }
   }
 

@@ -21,10 +21,12 @@ extension View {
         AccountSettingsView(account: account, appAccount: appAccount)
       case let .statusDetail(id):
         StatusDetailView(statusId: id)
-      case let .conversationDetail(conversation):
-        ConversationDetailView(conversation: conversation)
+      case let .statusDetailWithStatus(status):
+        StatusDetailView(status: status)
       case let .remoteStatusDetail(url):
         StatusDetailView(remoteStatusURL: url)
+      case let .conversationDetail(conversation):
+        ConversationDetailView(conversation: conversation)
       case let .hashTag(tag, accountId):
         TimelineView(timeline: .constant(.hashtag(tag: tag, accountId: accountId)), scrollToTopSignal: .constant(0))
       case let .list(list):
