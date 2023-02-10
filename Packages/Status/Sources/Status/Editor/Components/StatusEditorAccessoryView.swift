@@ -33,6 +33,7 @@ struct StatusEditorAccessoryView: View {
                 Image(systemName: "photo.fill.on.rectangle.fill")
               }
             }
+                         .accessibilityLabel("Attach photo")
             .disabled(viewModel.showPoll)
 
             Button {
@@ -42,6 +43,7 @@ struct StatusEditorAccessoryView: View {
             } label: {
               Image(systemName: "chart.bar")
             }
+            .accessibilityLabel("Poll")
             .disabled(viewModel.shouldDisablePollButton)
 
             Button {
@@ -52,6 +54,7 @@ struct StatusEditorAccessoryView: View {
             } label: {
               Image(systemName: viewModel.spoilerOn ? "exclamationmark.triangle.fill" : "exclamationmark.triangle")
             }
+            .accessibilityLabel("Spoiler warning")
 
             if !viewModel.mode.isInShareExtension {
               Button {
@@ -59,6 +62,7 @@ struct StatusEditorAccessoryView: View {
               } label: {
                 Image(systemName: "archivebox")
               }
+              .accessibilityLabel("Drafts")
             }
 
             if !viewModel.customEmojis.isEmpty {
@@ -67,6 +71,7 @@ struct StatusEditorAccessoryView: View {
               } label: {
                 Image(systemName: "face.smiling.inverse")
               }
+              .accessibilityLabel("Custom Emojis")
             }
 
             Button {
@@ -78,8 +83,9 @@ struct StatusEditorAccessoryView: View {
                 Image(systemName: "globe")
               }
             }
+            .accessibilityLabel("Language")
 
-            if preferences.isOpenAIEnabled {
+              if preferences.isOpenAIEnabled {
               AIMenu.disabled(!viewModel.canPost)
             }
           }
