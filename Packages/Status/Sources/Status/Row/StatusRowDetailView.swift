@@ -49,7 +49,9 @@ struct StatusRowDetailView: View {
 
       if viewModel.favoritesCount > 0 {
         Divider()
-        NavigationLink(value: RouterDestinations.favoritedBy(id: viewModel.status.id)) {
+        Button {
+          routerPath.navigate(to: .favoritedBy(id: viewModel.status.id))
+        } label: {
           HStack {
             Text("status.summary.n-favorites \(viewModel.favoritesCount)")
               .font(.scaledCallout)
@@ -59,10 +61,13 @@ struct StatusRowDetailView: View {
           }
           .frame(height: 20)
         }
+        .buttonStyle(.borderless)
       }
       if viewModel.reblogsCount > 0 {
         Divider()
-        NavigationLink(value: RouterDestinations.rebloggedBy(id: viewModel.status.id)) {
+        Button {
+          routerPath.navigate(to: .rebloggedBy(id: viewModel.status.id))
+        } label: {
           HStack {
             Text("status.summary.n-boosts \(viewModel.reblogsCount)")
               .font(.scaledCallout)
@@ -72,6 +77,7 @@ struct StatusRowDetailView: View {
           }
           .frame(height: 20)
         }
+        .buttonStyle(.borderless)
       }
     }
     .task {

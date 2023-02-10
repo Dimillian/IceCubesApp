@@ -93,6 +93,11 @@ public struct StatusRowView: View {
           leadingSwipeActions
         }
       }
+      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowInsets(.init(top: 12,
+                           leading: .layoutPadding,
+                           bottom: 12,
+                           trailing: .layoutPadding))
       .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
       .accessibilityActions {
         accesibilityActions
@@ -331,8 +336,12 @@ public struct StatusRowView: View {
       contextMenu
     } label: {
       Image(systemName: "ellipsis")
-        .foregroundColor(.gray)
+        .frame(width: 20, height: 30)
     }
+    .menuStyle(.borderlessButton)
+    .foregroundColor(.gray)
+    .contentShape(Rectangle())
+    .accessibilityHidden(true)
   }
 
   @ViewBuilder

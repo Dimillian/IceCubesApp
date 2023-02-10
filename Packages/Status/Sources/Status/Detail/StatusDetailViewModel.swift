@@ -16,10 +16,18 @@ class StatusDetailViewModel: ObservableObject {
 
   @Published var state: State = .loading
   @Published var title: LocalizedStringKey = ""
+  @Published var scrollToId: String?
 
   init(statusId: String) {
     state = .loading
     self.statusId = statusId
+    remoteStatusURL = nil
+  }
+  
+  init(status: Status) {
+    state = .display(status: status, context: .empty())
+    title = "status.post-from-\(status.account.displayNameWithoutEmojis)"
+    statusId = status.id
     remoteStatusURL = nil
   }
 
@@ -64,8 +72,9 @@ class StatusDetailViewModel: ObservableObject {
     guard let client, let statusId else { return }
     do {
       let data = try await fetchContextData(client: client, statusId: statusId)
-      state = .display(status: data.status, context: data.context)
       title = "status.post-from-\(data.status.account.displayNameWithoutEmojis)"
+      state = .display(status: data.status, context: data.context)
+      scrollToId = statusId
     } catch {
       state = .error(error: error)
     }

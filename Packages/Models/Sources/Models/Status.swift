@@ -141,6 +141,38 @@ public struct Status: AnyStatus, Codable, Identifiable, Equatable, Hashable, Sta
   public static func placeholders() -> [Status] {
     [.placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder()]
   }
+  
+  public var reblogAsAsStatus: Status? {
+    if let reblog {
+      return .init(id: reblog.id,
+                   content: reblog.content,
+                   account: reblog.account,
+                   createdAt: reblog.createdAt,
+                   editedAt: reblog.editedAt,
+                   reblog: nil,
+                   mediaAttachments: reblog.mediaAttachments,
+                   mentions: reblog.mentions,
+                   repliesCount: reblog.repliesCount,
+                   reblogsCount: reblog.reblogsCount,
+                   favouritesCount: reblog.favouritesCount,
+                   card: reblog.card,
+                   favourited: reblog.favourited,
+                   reblogged: reblog.reblogged,
+                   pinned: reblog.pinned,
+                   bookmarked: reblog.bookmarked,
+                   emojis: reblog.emojis,
+                   url: reblog.url,
+                   application: reblog.application,
+                   inReplyToAccountId: reblog.inReplyToAccountId,
+                   visibility: reblog.visibility,
+                   poll: reblog.poll,
+                   spoilerText: reblog.spoilerText,
+                   filtered: reblog.filtered,
+                   sensitive: reblog.sensitive,
+                   language: reblog.language)
+    }
+    return nil
+  }
 }
 
 public struct ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Hashable {
