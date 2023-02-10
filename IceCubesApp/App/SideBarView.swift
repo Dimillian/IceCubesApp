@@ -152,9 +152,8 @@ private struct SideBarIcon: View {
 
   var body: some View {
     Image(systemName: systemIconName)
-      .resizable()
-      .aspectRatio(contentMode: .fit)
-      .frame(width: 24, height: 24)
+      .font(.title2)
+      .fontWeight(.medium)
       .foregroundColor(isSelected ? theme.tintColor : theme.labelColor)
       .scaleEffect(isHovered ? 0.8 : 1.0)
       .onHover { isHovered in
