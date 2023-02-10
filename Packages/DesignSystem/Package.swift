@@ -19,7 +19,7 @@ let package = Package(
     .package(name: "Models", path: "../Models"),
     .package(name: "Env", path: "../Env"),
     .package(url: "https://github.com/markiv/SwiftUI-Shimmer", exact: "1.1.0"),
-    .package(url: "https://github.com/kean/Nuke", from: "11.5.0"),
+    .package(url: "https://github.com/kean/Nuke", from: "11.6.0"),
     .package(url: "https://github.com/divadretlaw/EmojiText", from: "1.1.0"),
   ],
   targets: [

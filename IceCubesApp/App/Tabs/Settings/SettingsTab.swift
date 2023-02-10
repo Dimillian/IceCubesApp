@@ -111,7 +111,7 @@ struct SettingsTabs: View {
         Label("settings.general.remote-timelines", systemImage: "dot.radiowaves.right")
       }
       NavigationLink(destination: ContentSettingsView()) {
-        Label("settings.general.content", systemImage: "rectangle.fill.on.rectangle.fill")
+        Label("settings.general.content", systemImage: "rectangle.on.rectangle")
       }
       Link(destination: URL(string: UIApplication.openSettingsURLString)!) {
         Label("settings.system", systemImage: "gear")
