@@ -357,6 +357,7 @@
 "status.editor.description.add" = "Adicionar descrição";
 "status.editor.description.edit" = "Editar descrição";
 "status.editor.drafts.navigation-title" = "Rascunhos";
+"status.editor.emojis.navigation-title" = "Custom Emojis";
 "status.editor.error.upload" = "Erro ao fazer upload";
 "status.editor.language-select.navigation-title" = "Selecionar Idioma";
 "status.editor.language-select.recently-used" = "Usado recentemente";

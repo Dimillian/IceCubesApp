@@ -353,6 +353,7 @@
 "status.editor.description.add" = "Ajouter une description";
 "status.editor.description.edit" = "Modifier la description";
 "status.editor.drafts.navigation-title" = "Brouillons";
+"status.editor.emojis.navigation-title" = "Custom Emojis";
 "status.editor.error.upload" = "Erreur de téléchargement";
 "status.editor.language-select.navigation-title" = "Sélectionner la langue";
 "status.editor.language-select.recently-used" = "Utilisé récemment";

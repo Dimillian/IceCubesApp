@@ -353,6 +353,7 @@
 "status.editor.description.add" = "Açıklama Ekle";
 "status.editor.description.edit" = "Açıklamayı Düzenle";
 "status.editor.drafts.navigation-title" = "Taslaklar";
+"status.editor.emojis.navigation-title" = "Custom Emojis";
 "status.editor.error.upload" = "Yüklerken Hata Oluştu";
 "status.editor.language-select.navigation-title" = "Dil Seç";
 "status.editor.language-select.recently-used" = "Son Kullanılanlar";

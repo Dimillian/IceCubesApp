@@ -351,6 +351,7 @@
 "status.editor.description.add" = "Voeg omschrijving toe";
 "status.editor.description.edit" = "Bewerk omschrijving";
 "status.editor.drafts.navigation-title" = "Concepten";
+"status.editor.emojis.navigation-title" = "Custom Emojis";
 "status.editor.error.upload" = "Fout tijdens uploaden";
 "status.editor.language-select.navigation-title" = "Taal selecteren";
 "status.editor.language-select.recently-used" = "Onlangs gebruikt";

@@ -358,6 +358,7 @@
 "status.editor.description.add" = "添加描述";
 "status.editor.description.edit" = "编辑描述";
 "status.editor.drafts.navigation-title" = "草稿";
+"status.editor.emojis.navigation-title" = "Custom Emojis";
 "status.editor.error.upload" = "上传错误";
 "status.editor.language-select.navigation-title" = "选择语言";
 "status.editor.language-select.recently-used" = "最近使用";

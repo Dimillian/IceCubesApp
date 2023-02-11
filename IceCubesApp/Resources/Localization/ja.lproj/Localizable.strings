@@ -357,6 +357,7 @@
 "status.editor.description.add" = "説明文を追加";
 "status.editor.description.edit" = "説明文を編集";
 "status.editor.drafts.navigation-title" = "下書き";
+"status.editor.emojis.navigation-title" = "Custom Emojis";
 "status.editor.error.upload" = "アップロードエラー";
 "status.editor.language-select.navigation-title" = "言語設定";
 "status.editor.language-select.recently-used" = "最近使用した";
