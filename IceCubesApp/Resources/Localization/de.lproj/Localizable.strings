@@ -154,10 +154,8 @@
 "settings.haptic.tab-selection" = "Tabauswahl";
 "settings.haptic.buttons" = "Knopfdruck";
 
-"settings.display.section.phone" = "iPhone";
 "settings.display.show-tab-label" = "Tabtitel anzeigen";
 
-"settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Zweite Spalte aktivieren";
 
 "enum.expand-media.show" = "Alle zeigen";
@@ -357,6 +355,7 @@
 "status.editor.description.add" = "Beschreibung hinzufügen";
 "status.editor.description.edit" = "Beschreibung bearbeiten";
 "status.editor.drafts.navigation-title" = "Entwürfe";
+"status.editor.emojis.navigation-title" = "Custom Emojis";
 "status.editor.error.upload" = "Fehler beim Hochladen";
 "status.editor.language-select.navigation-title" = "Sprache auswählen";
 "status.editor.language-select.recently-used" = "Kürzlich genutzt";
@@ -421,9 +420,9 @@
 "filter.action.hide" = "Komplett ausblenden";
 
 // MARK: Accessibility
-"accessibility.editor.button.attach-photo" = "Attach photo";
-"accessibility.editor.button.poll" = "Poll";
-"accessibility.editor.button.spoiler" = "Spoiler warning";
-"accessibility.editor.button.drafts" = "Drafts";
-"accessibility.editor.button.custom-emojis" = "Custom emojis";
-"accessibility.editor.button.language" = "Language";
+"accessibility.editor.button.attach-photo" = "Foto anhängen";
+"accessibility.editor.button.poll" = "Umfrage";
+"accessibility.editor.button.spoiler" = "Inhaltswarnung";
+"accessibility.editor.button.drafts" = "Entwürfe";
+"accessibility.editor.button.custom-emojis" = "Eigene Emojis";
+"accessibility.editor.button.language" = "Sprache";

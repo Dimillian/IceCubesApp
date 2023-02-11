@@ -157,10 +157,8 @@
 "settings.haptic.tab-selection" = "Wybór zakładki";
 "settings.haptic.buttons" = "Naciśnięcie przycisku";
 
-"settings.display.section.phone" = "iPhone";
 "settings.display.show-tab-label" = "Pokazuj nazwy zakładek";
 
-"settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Włącz dodatkową kolumnę";
 
 // MARK: Tabs
@@ -353,6 +351,7 @@
 "status.editor.description.add" = "Dodaj opis";
 "status.editor.description.edit" = "Edytuj opis";
 "status.editor.drafts.navigation-title" = "Wersje robocze";
+"status.editor.emojis.navigation-title" = "Custom Emojis";
 "status.editor.error.upload" = "Błąd wysyłania";
 "status.editor.language-select.navigation-title" = "Wybierz język";
 "status.editor.language-select.recently-used" = "Ostatnio użyty";

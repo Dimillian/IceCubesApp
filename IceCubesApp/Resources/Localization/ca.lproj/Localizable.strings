@@ -156,10 +156,8 @@
 "settings.haptic.tab-selection" = "Selecció de pestanyes";
 "settings.haptic.buttons" = "Pressió de botó";
 
-"settings.display.section.phone" = "iPhone";
 "settings.display.show-tab-label" = "Mostra el nom de la pestanya";
 
-"settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Habilitar columna secondària";
 
 // MARK: Tabs
@@ -356,6 +354,7 @@
 "status.editor.description.add" = "Afegeix una descripció";
 "status.editor.description.edit" = "Edita la descripció";
 "status.editor.drafts.navigation-title" = "Esborranys";
+"status.editor.emojis.navigation-title" = "Custom Emojis";
 "status.editor.error.upload" = "Error en la pujada";
 "status.editor.language-select.navigation-title" = "Selecciona la llengua";
 "status.editor.language-select.recently-used" = "Recents";

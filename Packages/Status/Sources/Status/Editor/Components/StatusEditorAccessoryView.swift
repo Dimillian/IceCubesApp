@@ -261,7 +261,7 @@ struct StatusEditorAccessoryView: View {
       }
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
-      .navigationTitle("Custom Emojis")
+      .navigationTitle("status.editor.emojis.navigation-title")
       .navigationBarTitleDisplayMode(.inline)
     }
     .presentationDetents([.medium])

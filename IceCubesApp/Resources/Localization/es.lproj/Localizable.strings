@@ -154,10 +154,8 @@
 "settings.haptic.tab-selection" = "Tab Selection";
 "settings.haptic.buttons" = "Button Press";
 
-"settings.display.section.phone" = "iPhone";
 "settings.display.show-tab-label" = "Show tab name";
 
-"settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Enable secondary column";
 
 "enum.expand-media.show" = "Siempre";
@@ -358,6 +356,7 @@
 "status.editor.description.add" = "Añadir descripción";
 "status.editor.description.edit" = "Editar descripción";
 "status.editor.drafts.navigation-title" = "Borradores";
+"status.editor.emojis.navigation-title" = "Custom Emojis";
 "status.editor.error.upload" = "Error subiendo";
 "status.editor.language-select.navigation-title" = "Seleccionar idioma";
 "status.editor.language-select.recently-used" = "Usado recientemente";

@@ -157,10 +157,7 @@
 "settings.haptic.tab-selection" = "하단 탭 바를 누를 때";
 "settings.haptic.buttons" = "버튼을 누를 때";
 
-"settings.display.section.phone" = "iPhone";
 "settings.display.show-tab-label" = "하단 탭 바에 제목 표시";
-
-"settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "보조 열 사용";
 
 // MARK: Tabs
@@ -359,6 +356,7 @@
 "status.editor.description.add" = "설명 추가";
 "status.editor.description.edit" = "설명 편집";
 "status.editor.drafts.navigation-title" = "임시 보관함";
+"status.editor.emojis.navigation-title" = "Custom Emojis";
 "status.editor.error.upload" = "전송 오류";
 "status.editor.language-select.navigation-title" = "언어 선택";
 "status.editor.language-select.recently-used" = "최근 사용";

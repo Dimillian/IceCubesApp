@@ -157,10 +157,8 @@
 "settings.haptic.tab-selection" = "Tab Selection";
 "settings.haptic.buttons" = "Button Press";
 
-"settings.display.section.phone" = "iPhone";
 "settings.display.show-tab-label" = "Show tab name";
 
-"settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Enable secondary column";
 
 // MARK: Tabs
@@ -357,6 +355,7 @@
 "status.editor.description.add" = "Legg til beskrivelse";
 "status.editor.description.edit" = "Rediger beskrivelse";
 "status.editor.drafts.navigation-title" = "Utkast";
+"status.editor.emojis.navigation-title" = "Custom Emojis";
 "status.editor.error.upload" = "Feil ved opplasting";
 "status.editor.language-select.navigation-title" = "Velg språk";
 "status.editor.language-select.recently-used" = "Nylig brukt";

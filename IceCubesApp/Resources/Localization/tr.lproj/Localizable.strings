@@ -157,10 +157,8 @@
 "settings.haptic.tab-selection" = "Tab Selection";
 "settings.haptic.buttons" = "Button Press";
 
-"settings.display.section.phone" = "iPhone";
 "settings.display.show-tab-label" = "Show tab name";
 
-"settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Enable secondary column";
 
 // MARK: Tabs
@@ -353,6 +351,7 @@
 "status.editor.description.add" = "Açıklama Ekle";
 "status.editor.description.edit" = "Açıklamayı Düzenle";
 "status.editor.drafts.navigation-title" = "Taslaklar";
+"status.editor.emojis.navigation-title" = "Custom Emojis";
 "status.editor.error.upload" = "Yüklerken Hata Oluştu";
 "status.editor.language-select.navigation-title" = "Dil Seç";
 "status.editor.language-select.recently-used" = "Son Kullanılanlar";

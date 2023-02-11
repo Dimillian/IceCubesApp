@@ -154,10 +154,8 @@
 "settings.haptic.tab-selection" = "Tabselectie";
 "settings.haptic.buttons" = "Knoppen";
 
-"settings.display.section.phone" = "iPhone";
 "settings.display.show-tab-label" = "Toon label bij tab";
 
-"settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Toon tweede kolom";
 
 // MARK: Tabs
@@ -351,6 +349,7 @@
 "status.editor.description.add" = "Voeg omschrijving toe";
 "status.editor.description.edit" = "Bewerk omschrijving";
 "status.editor.drafts.navigation-title" = "Concepten";
+"status.editor.emojis.navigation-title" = "Custom Emojis";
 "status.editor.error.upload" = "Fout tijdens uploaden";
 "status.editor.language-select.navigation-title" = "Taal selecteren";
 "status.editor.language-select.recently-used" = "Onlangs gebruikt";

@@ -41,7 +41,7 @@ public struct StatusDetailView: View {
           case .loading:
             loadingDetailView
             
-          case let .display(status, context):
+          case let .display(status, context, date):
             if !context.ancestors.isEmpty {
               ForEach(context.ancestors) { ancestor in
                 StatusRowView(viewModel: .init(status: ancestor, isCompact: false))
@@ -49,6 +49,7 @@ public struct StatusDetailView: View {
             }
             
             makeCurrentStatusView(status: status)
+              .id(date)
             
             if !context.descendants.isEmpty {
               ForEach(context.descendants) { descendant in
