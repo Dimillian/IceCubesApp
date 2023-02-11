@@ -113,6 +113,9 @@ struct SettingsTabs: View {
       NavigationLink(destination: ContentSettingsView()) {
         Label("settings.general.content", systemImage: "rectangle.on.rectangle")
       }
+      NavigationLink(destination: SwipeActionsSettingsView()) {
+        Label("settings.general.swipeactions", systemImage: "hand.draw")
+      }
       Link(destination: URL(string: UIApplication.openSettingsURLString)!) {
         Label("settings.system", systemImage: "gear")
       }

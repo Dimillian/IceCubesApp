@@ -40,6 +40,43 @@ public class UserPreferences: ObservableObject {
   
   @AppStorage("show_second_column_ipad") public var showiPadSecondaryColumn = true
 
+  @AppStorage("swipeactions.status.trailing.right") var _swipeActionsStatusTrailingRight = StatusAction.favorite.rawValue
+  public var swipeActionsStatusTrailingRight: StatusAction {
+    get {
+      StatusAction(rawValue: _swipeActionsStatusTrailingRight) ?? StatusAction.none
+    }
+    set {
+      _swipeActionsStatusTrailingRight = newValue.rawValue
+    }
+  }
+  @AppStorage("swipeactions.status.trailing.left") var _swipeActionsStatusTrailingLeft = StatusAction.boost.rawValue
+  public var swipeActionsStatusTrailingLeft: StatusAction {
+    get {
+      StatusAction(rawValue: _swipeActionsStatusTrailingLeft) ?? StatusAction.none
+    }
+    set {
+      _swipeActionsStatusTrailingLeft = newValue.rawValue
+    }
+  }
+  @AppStorage("swipeactions.status.leading.left") var _swipeActionsStatusLeadingLeft = StatusAction.reply.rawValue
+  public var swipeActionsStatusLeadingLeft: StatusAction {
+    get {
+      StatusAction(rawValue: _swipeActionsStatusLeadingLeft) ?? StatusAction.none
+    }
+    set {
+      _swipeActionsStatusLeadingLeft = newValue.rawValue
+    }
+  }
+  @AppStorage("swipeactions.status.leading.right") var _swipeActionsStatusLeadingRight = StatusAction.none.rawValue
+  public var swipeActionsStatusLeadingRight: StatusAction {
+    get {
+      StatusAction(rawValue: _swipeActionsStatusLeadingRight) ?? StatusAction.none
+    }
+    set {
+      _swipeActionsStatusLeadingRight = newValue.rawValue
+    }
+  }
+
   public var postVisibility: Models.Visibility {
     if useInstanceContentSettings {
       return serverPreferences?.postVisibility ?? .pub
