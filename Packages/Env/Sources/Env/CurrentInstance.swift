@@ -17,6 +17,10 @@ public class CurrentInstance: ObservableObject {
   public var isEditSupported: Bool {
     instance?.version.hasPrefix("4") == true
   }
+    
+  public var isEditAltTextSupported: Bool {
+    instance?.version.hasPrefix("4.1") == true
+  }
 
   private init() {}
 
