@@ -154,10 +154,8 @@
 "settings.haptic.tab-selection" = "Fitxak hautatzean";
 "settings.haptic.buttons" = "Botoiak sakatzean";
 
-"settings.display.section.phone" = "iPhone";
 "settings.display.show-tab-label" = "Erakutsi fitxen izena";
 
-"settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Gaitu bigarren zutabea";
 
 "enum.expand-media.show" = "Erakutsi guztia";

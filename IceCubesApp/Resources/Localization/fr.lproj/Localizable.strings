@@ -157,10 +157,8 @@
 "settings.haptic.tab-selection" = "Sélection d'onglet";
 "settings.haptic.buttons" = "Appui bouton";
 
-"settings.display.section.phone" = "iPhone";
 "settings.display.show-tab-label" = "Montrer le nom de l'onglet";
 
-"settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Activer la colonne secondaire";
 
 // MARK: Tabs
