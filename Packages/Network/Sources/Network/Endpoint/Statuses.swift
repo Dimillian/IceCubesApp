@@ -84,6 +84,7 @@ public struct StatusData: Encodable {
   public let mediaIds: [String]?
   public let poll: PollData?
   public let language: String?
+  public let mediaAttributes: [MediaAttribute]?
 
   public struct PollData: Encodable {
     public let options: [String]
@@ -96,6 +97,20 @@ public struct StatusData: Encodable {
       self.expires_in = expires_in
     }
   }
+    
+  public struct MediaAttribute: Encodable {
+    public let id: String
+    public let description: String?
+    public let thumbnail: String?
+    public let focus: String?
+    
+      public init(id: String, description: String?, thumbnail: String?, focus: String?) {
+      self.id = id
+      self.description = description
+      self.thumbnail = thumbnail
+      self.focus = focus
+    }
+  }
 
   public init(status: String,
               visibility: Visibility,
@@ -103,7 +118,8 @@ public struct StatusData: Encodable {
               spoilerText: String? = nil,
               mediaIds: [String]? = nil,
               poll: PollData? = nil,
-              language: String? = nil)
+              language: String? = nil,
+              mediaAttributes: [MediaAttribute]? = nil)
   {
     self.status = status
     self.visibility = visibility
@@ -112,5 +128,6 @@ public struct StatusData: Encodable {
     self.mediaIds = mediaIds
     self.poll = poll
     self.language = language
+    self.mediaAttributes = mediaAttributes
   }
 }

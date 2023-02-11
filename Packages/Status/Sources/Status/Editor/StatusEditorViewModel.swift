@@ -175,7 +175,8 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
                             spoilerText: spoilerOn ? spoilerText : nil,
                             mediaIds: mediasImages.compactMap { $0.mediaAttachment?.id },
                             poll: pollData,
-                            language: selectedLanguage)
+                            language: selectedLanguage,
+                            mediaAttributes: mediaAttributes)
       switch mode {
       case .new, .replyTo, .quote, .mention, .shareExtension:
         postStatus = try await client.post(endpoint: Statuses.postStatus(json: data))
@@ -658,7 +659,15 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
                                     gifTransferable: nil,
                                     mediaAttachment: media,
                                     error: nil)
-      } catch {}
+      } catch { print(error) }
+    }
+  }
+
+  private var mediaAttributes: [StatusData.MediaAttribute] = []
+  func editDescription(container: StatusEditorMediaContainer, description: String) async {
+    guard let attachment = container.mediaAttachment else { return }
+    if indexOf(container: container) != nil {
+      mediaAttributes.append(StatusData.MediaAttribute(id: attachment.id, description: description, thumbnail: nil, focus: nil))
     }
   }
 
