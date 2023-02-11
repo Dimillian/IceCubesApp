@@ -362,6 +362,8 @@
 "status.editor.error.upload" = "Error uploading";
 "status.editor.language-select.navigation-title" = "Select Language";
 "status.editor.language-select.recently-used" = "Recently Used";
+"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
+"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
 "status.editor.media.edit-image" = "Edit Image";
 "status.editor.media.image-description" = "Image description";
 "status.editor.mode.edit" = "Editing your post";

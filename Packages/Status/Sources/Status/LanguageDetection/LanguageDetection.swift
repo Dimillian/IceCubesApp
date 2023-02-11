@@ -13,7 +13,7 @@ private func stripToPureLanguage(inText: String) -> String {
         resultStr = splitArray.joined() as String
     }
     
-    return resultStr
+    return resultStr.trimmingCharacters(in: .whitespacesAndNewlines)
 }
 
 func detectLanguage(text: String) -> String? {
