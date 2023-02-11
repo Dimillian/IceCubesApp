@@ -55,7 +55,7 @@ struct StatusEditorMediaEditView: View {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button("action.done") {
             if !imageDescription.isEmpty {
-              if currentInstance.isEditAltTextSupported && !(container.mediaAttachment?.description ?? "").isEmpty {
+              if currentInstance.isEditAltTextSupported && viewModel.mode.isEditing {
                 Task {
                   await viewModel.editDescription(container: container, description: imageDescription)
                 }
