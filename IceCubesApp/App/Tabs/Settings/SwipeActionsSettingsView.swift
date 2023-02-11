@@ -39,6 +39,7 @@ struct SwipeActionsSettingsView: View {
           }
         }
       }
+      .listRowBackground(theme.primaryBackgroundColor)
     }
     .navigationTitle("settings.swipeactions.navigation-title")
     .scrollContentBackground(.hidden)
