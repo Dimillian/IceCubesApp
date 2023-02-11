@@ -158,21 +158,21 @@
 
 "settings.display.show-ipad-column" = "Zweite Spalte aktivieren";
 
-"settings.general.swipeactions" = "Swipe Actions";
-"settings.swipeactions.navigation-title" = "Swipe Actions";
-"settings.swipeactions.status.action.bookmark" = "Bookmark";
-"settings.swipeactions.status.action.boost" = "Boost";
-"settings.swipeactions.status.action.favorite" = "Favorite";
-"settings.swipeactions.status.action.none" = "None";
-"settings.swipeactions.status.action.quote" = "Quote";
-"settings.swipeactions.status.action.reply" = "Reply";
-"settings.swipeactions.status.leading" = "Swipe right";
-"settings.swipeactions.status.leading.left" = "left";
-"settings.swipeactions.status.leading.right" = "right";
-"settings.swipeactions.status.trailing" = " Swipe left";
-"settings.swipeactions.status.trailing.left" = "left";
-"settings.swipeactions.status.trailing.right" = "right";
-"settings.swipeactions.status" = "Post";
+"settings.general.swipeactions" = "Wischaktionen";
+"settings.swipeactions.navigation-title" = "Wischaktionen";
+"settings.swipeactions.status.action.bookmark" = "Lesezeichen setzen";
+"settings.swipeactions.status.action.boost" = "Boosten";
+"settings.swipeactions.status.action.favorite" = "Favorisieren";
+"settings.swipeactions.status.action.none" = "keine";
+"settings.swipeactions.status.action.quote" = "Zitieren";
+"settings.swipeactions.status.action.reply" = "Antworten";
+"settings.swipeactions.status.leading" = "Nach rechts wischen";
+"settings.swipeactions.status.leading.left" = "links";
+"settings.swipeactions.status.leading.right" = "links";
+"settings.swipeactions.status.trailing" = " Nach links wischen";
+"settings.swipeactions.status.trailing.left" = "links";
+"settings.swipeactions.status.trailing.right" = "rechts";
+"settings.swipeactions.status" = "Beitrag";
 
 "enum.expand-media.show" = "Alle zeigen";
 "enum.expand-media.hide" = "Alle ausblenden";
