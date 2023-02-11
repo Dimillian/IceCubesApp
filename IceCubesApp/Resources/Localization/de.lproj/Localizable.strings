@@ -154,10 +154,8 @@
 "settings.haptic.tab-selection" = "Tabauswahl";
 "settings.haptic.buttons" = "Knopfdruck";
 
-"settings.display.section.phone" = "iPhone";
 "settings.display.show-tab-label" = "Tabtitel anzeigen";
 
-"settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Zweite Spalte aktivieren";
 
 "enum.expand-media.show" = "Alle zeigen";

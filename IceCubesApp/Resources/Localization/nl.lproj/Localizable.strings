@@ -154,10 +154,8 @@
 "settings.haptic.tab-selection" = "Tabselectie";
 "settings.haptic.buttons" = "Knoppen";
 
-"settings.display.section.phone" = "iPhone";
 "settings.display.show-tab-label" = "Toon label bij tab";
 
-"settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Toon tweede kolom";
 
 // MARK: Tabs

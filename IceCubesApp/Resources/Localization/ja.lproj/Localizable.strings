@@ -157,10 +157,8 @@
 "settings.haptic.tab-selection" = "タブセレクト";
 "settings.haptic.buttons" = "ボタン操作時";
 
-"settings.display.section.phone" = "iPhone";
 "settings.display.show-tab-label" = "タブ名を表示";
 
-"settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "セカンドカラムを有効にする";
 
 // MARK: Tabs

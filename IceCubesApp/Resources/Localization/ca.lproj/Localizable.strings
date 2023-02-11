@@ -156,10 +156,8 @@
 "settings.haptic.tab-selection" = "Selecció de pestanyes";
 "settings.haptic.buttons" = "Pressió de botó";
 
-"settings.display.section.phone" = "iPhone";
 "settings.display.show-tab-label" = "Mostra el nom de la pestanya";
 
-"settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Habilitar columna secondària";
 
 // MARK: Tabs
