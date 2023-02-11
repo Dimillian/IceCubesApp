@@ -83,7 +83,7 @@
 "settings.display.theme.systemColor" = "匹配系统";
 "settings.general.browser" = "默认浏览器";
 "settings.general.browser.in-app" = "应用内浏览器";
-"settings.general.browser.in-app.readerview" = "应用内浏览器启用阅读器视图";
+"settings.general.browser.in-app.readerview" = "启用应用内浏览器阅读器";
 "settings.general.browser.system" = "系统浏览器";
 "settings.general.display" = "显示设置";
 "settings.general.instance" = "服务器设置";
@@ -392,7 +392,7 @@
 "status.poll.send" = "发送投票";
 "status.post-from-%@" = "%@ 的嘟文";
 "status.row.was-boosted" = "转发";
-"status.row.was-reply" = "回复到";
+"status.row.was-reply" = "回复给";
 "status.row.you-boosted" = "你转发了";
 "status.show-less" = "显示更少";
 "status.show-more" = "显示更多";
