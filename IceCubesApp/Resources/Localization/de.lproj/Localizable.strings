@@ -361,6 +361,8 @@
 "status.editor.error.upload" = "Fehler beim Hochladen";
 "status.editor.language-select.navigation-title" = "Sprache auswählen";
 "status.editor.language-select.recently-used" = "Kürzlich genutzt";
+"status.editor.language-select.confirmation.detected-%@" = "Auf %@ posten (Erkannte Sprache)";
+"status.editor.language-select.confirmation.selected-%@" = "Auf %@ posten (Ausgewählte Sprache)";
 "status.editor.media.edit-image" = "Bild bearbeiten";
 "status.editor.media.image-description" = "Bildbeschreibung";
 "status.editor.mode.edit" = "Deinen Beitrag bearbeiten";

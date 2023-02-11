@@ -361,6 +361,8 @@
 "status.editor.error.upload" = "Errorea igotzerakoan";
 "status.editor.language-select.navigation-title" = "Hautatu hizkuntza";
 "status.editor.language-select.recently-used" = "Duela gutxi erabilitakoak";
+"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
+"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
 "status.editor.media.edit-image" = "Editatu irudiak";
 "status.editor.media.image-description" = "Irudiaren deskribapena";
 "status.editor.mode.edit" = "Bidalketa editatzen";

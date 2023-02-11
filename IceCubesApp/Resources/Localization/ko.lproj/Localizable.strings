@@ -362,6 +362,8 @@
 "status.editor.error.upload" = "전송 오류";
 "status.editor.language-select.navigation-title" = "언어 선택";
 "status.editor.language-select.recently-used" = "최근 사용";
+"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
+"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
 "status.editor.media.edit-image" = "이미지 편집";
 "status.editor.media.image-description" = "이미지 설명";
 "status.editor.mode.edit" = "글 수정";

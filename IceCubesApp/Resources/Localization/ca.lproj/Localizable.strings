@@ -360,6 +360,8 @@
 "status.editor.error.upload" = "Error en la pujada";
 "status.editor.language-select.navigation-title" = "Selecciona la llengua";
 "status.editor.language-select.recently-used" = "Recents";
+"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
+"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
 "status.editor.media.edit-image" = "Edita la imatge";
 "status.editor.media.image-description" = "Descripció de la imatge";
 "status.editor.mode.edit" = "Edita la publicació";

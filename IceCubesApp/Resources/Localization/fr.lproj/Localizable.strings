@@ -357,6 +357,8 @@
 "status.editor.error.upload" = "Erreur de téléchargement";
 "status.editor.language-select.navigation-title" = "Sélectionner la langue";
 "status.editor.language-select.recently-used" = "Utilisé récemment";
+"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
+"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
 "status.editor.media.edit-image" = "Modifier l'image";
 "status.editor.media.image-description" = "Description de l'image";
 "status.editor.mode.edit" = "Modification de votre publication";
