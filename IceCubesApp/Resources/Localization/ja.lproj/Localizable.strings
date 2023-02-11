@@ -420,3 +420,11 @@
 "filter.contexts.profiles" = "プロフィール";
 "filter.action.warning" = "警告して非表示";
 "filter.action.hide" = "完全に非表示";
+
+// MARK: Accessibility
+"accessibility.editor.button.attach-photo" = "Attach photo";
+"accessibility.editor.button.poll" = "Poll";
+"accessibility.editor.button.spoiler" = "Spoiler warning";
+"accessibility.editor.button.drafts" = "Drafts";
+"accessibility.editor.button.custom-emojis" = "Custom emojis";
+"accessibility.editor.button.language" = "Language";

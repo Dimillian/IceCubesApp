@@ -417,3 +417,10 @@
 "filter.action.warning" = "Cacher avec avertissement";
 "filter.action.hide" = "Cacher complètement";
 
+// MARK: Accessibility
+"accessibility.editor.button.attach-photo" = "Attach photo";
+"accessibility.editor.button.poll" = "Poll";
+"accessibility.editor.button.spoiler" = "Spoiler warning";
+"accessibility.editor.button.drafts" = "Drafts";
+"accessibility.editor.button.custom-emojis" = "Custom emojis";
+"accessibility.editor.button.language" = "Language";
