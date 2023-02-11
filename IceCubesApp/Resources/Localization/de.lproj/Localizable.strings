@@ -322,8 +322,10 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Übersetzen";
+"status.action.translate-secondary" = "Aus Sekundärsprache übersetzen";
 "status.action.translate-from-%@" = "Aus %@ übersetzen";
 "status.action.translated-label" = "Übersetzt mit DeepL.com";
+"status.action.translated-label-from-%@" = "Übersetzt aus %@ mit DeepL.com";
 "status.action.bookmark" = "Lesezeichen";
 "status.action.boost" = "Boosten";
 "status.action.copy-text" = "Text kopieren";

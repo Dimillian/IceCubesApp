@@ -76,7 +76,7 @@ struct StatusRowContextMenu: View {
     }
 
     if let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier,
-       let statusLanguage = viewModel.status.reblog?.language ?? viewModel.status.language,
+       let statusLanguage = viewModel.getStatusLang(),
        statusLanguage != lang
     {
       Button {
@@ -91,6 +91,22 @@ struct StatusRowContextMenu: View {
         }
       }
     }
+
+      if let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier,
+         let statusLanguage = viewModel.getSecondaryStatusLang(),
+         statusLanguage != lang {
+          Button {
+              Task {
+                  await viewModel.translateFromSecondaryLang(userLang: lang)
+              }
+          } label: {
+              if let languageName = Locale.current.localizedString(forLanguageCode: statusLanguage) {
+                  Label("status.action.translate-from-\(languageName)", systemImage: "captions.bubble")
+              } else {
+                  Label("status.action.translate-secondary", systemImage: "captions.bubble")
+              }
+          }
+      }
 
     if account.account?.id == viewModel.status.account.id {
       Section("status.action.section.your-post") {

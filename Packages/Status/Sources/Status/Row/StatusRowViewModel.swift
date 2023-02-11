@@ -2,6 +2,7 @@ import Env
 import Models
 import Network
 import SwiftUI
+import NaturalLanguage
 
 import DesignSystem
 
@@ -27,6 +28,7 @@ public class StatusRowViewModel: ObservableObject {
   @Published var isLoadingRemoteContent: Bool = false
 
   @Published var translation: String?
+    @Published var translationSourceLang: String?
   @Published var isLoadingTranslation: Bool = false
   @Published var showDeleteAlert: Bool = false
 
@@ -34,6 +36,7 @@ public class StatusRowViewModel: ObservableObject {
   @Published var rebloggers: [Account] = []
 
   private let theme = Theme.shared
+  private lazy var detectedLang = firstDetectLanguage()
   
   var seen = false
 
@@ -291,19 +294,47 @@ public class StatusRowViewModel: ObservableObject {
     repliesCount = status.reblog?.repliesCount ?? status.repliesCount
   }
 
+    private func firstDetectLanguage() -> String? {
+        let text = status.reblog?.content.asRawText ?? status.content.asRawText
+        return detectLanguage(text: text)
+    }
+    
+    func getStatusLang() -> String? {
+        detectedLang ?? status.language
+    }
+    
+    func getSecondaryStatusLang() -> String? {
+        status.language != getStatusLang() ? status.language : nil
+    }
+    
   func translate(userLang: String) async {
-    let client = DeepLClient()
+      await translate(userLang: userLang, sourceLang: getStatusLang())
+  }
+    
+    func translateFromSecondaryLang(userLang: String) async {
+        if let secondaryLang = getSecondaryStatusLang() {
+            await translate(userLang: userLang, sourceLang: secondaryLang)
+        }
+    }
+    
+    private func translate(userLang: String, sourceLang: String?) async {
+     let client = DeepLClient()
     do {
       withAnimation {
         isLoadingTranslation = true
       }
       let translation = try await client.request(target: userLang,
-                                                 source: status.language,
+                                                 source: sourceLang,
                                                  text: status.reblog?.content.asRawText ?? status.content.asRawText)
       withAnimation {
         self.translation = translation
+          if let sourceLang = sourceLang {
+              translationSourceLang = sourceLang
+          } else {
+              translationSourceLang = ""
+          }
         isLoadingTranslation = false
       }
     } catch {}
-  }
+    }
 }

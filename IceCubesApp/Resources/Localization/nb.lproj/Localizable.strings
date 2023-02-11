@@ -322,8 +322,10 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Oversett";
+"status.action.translate-secondary" = "Translate from secondary language";
 "status.action.translate-from-%@" = "Oversett fra %@";
 "status.action.translated-label" = "Oversatt ved hjelp av DeepL.com";
+"status.action.translated-label-from-%@" = "Translated from %@ using DeepL.com";
 "status.action.bookmark" = "Bokmerk";
 "status.action.boost" = "Forsterk";
 "status.action.copy-text" = "Kopier tekst";

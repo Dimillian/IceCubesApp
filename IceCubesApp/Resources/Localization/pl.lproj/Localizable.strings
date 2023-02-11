@@ -318,8 +318,10 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Przetłumacz";
+"status.action.translate-secondary" = "Translate from secondary language";
 "status.action.translate-from-%@" = "Przetłumacz tekst %@";
 "status.action.translated-label" = "Przetłumaczono za pomocą DeepL.com";
+"status.action.translated-label-from-%@" = "Translated from %@ using DeepL.com";
 "status.action.bookmark" = "Dodaj zakładkę";
 "status.action.boost" = "Podbij";
 "status.action.copy-text" = "Kopiuj tekst";

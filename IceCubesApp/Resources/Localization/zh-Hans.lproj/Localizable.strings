@@ -323,8 +323,10 @@
 
 // MARK: Package: Status
 "status.action.translate" = "翻译";
+"status.action.translate-secondary" = "Translate from secondary language";
 "status.action.translate-from-%@" = "翻译 %@";
 "status.action.translated-label" = "由 DeepL.com 翻译";
+"status.action.translated-label-from-%@" = "Translated from %@ using DeepL.com";
 "status.action.bookmark" = "书签";
 "status.action.boost" = "转发";
 "status.action.copy-text" = "拷贝文本";
