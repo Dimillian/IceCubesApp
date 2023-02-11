@@ -93,7 +93,6 @@ public struct StatusRowView: View {
           leadingSwipeActions
         }
       }
-      .listRowBackground(theme.primaryBackgroundColor)
       .listRowInsets(.init(top: 12,
                            leading: .layoutPadding,
                            bottom: 12,
