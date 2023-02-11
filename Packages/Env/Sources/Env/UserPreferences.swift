@@ -40,7 +40,7 @@ public class UserPreferences: ObservableObject {
   
   @AppStorage("show_second_column_ipad") public var showiPadSecondaryColumn = true
 
-  @AppStorage("swipeactions.status.left1") var _swipeActionsStatusLeft1 = "none"
+  @AppStorage("swipeactions.status.left1") var _swipeActionsStatusLeft1 = StatusAction.reply.rawValue
   public var swipeActionsStatusLeft1: StatusAction {
     get {
       StatusAction(rawValue: _swipeActionsStatusLeft1) ?? StatusAction.none
@@ -49,7 +49,7 @@ public class UserPreferences: ObservableObject {
       _swipeActionsStatusLeft1 = newValue.rawValue
     }
   }
-  @AppStorage("swipeactions.status.left2") var _swipeActionsStatusLeft2 = "none"
+  @AppStorage("swipeactions.status.left2") var _swipeActionsStatusLeft2 = StatusAction.none.rawValue
   public var swipeActionsStatusLeft2: StatusAction {
     get {
       StatusAction(rawValue: _swipeActionsStatusLeft2) ?? StatusAction.none
@@ -58,7 +58,7 @@ public class UserPreferences: ObservableObject {
       _swipeActionsStatusLeft2 = newValue.rawValue
     }
   }
-  @AppStorage("swipeactions.status.right1") var _swipeActionsStatusRight1 = "none"
+  @AppStorage("swipeactions.status.right1") var _swipeActionsStatusRight1 = StatusAction.favorite.rawValue
   public var swipeActionsStatusRight1: StatusAction {
     get {
       StatusAction(rawValue: _swipeActionsStatusRight1) ?? StatusAction.none
@@ -67,7 +67,7 @@ public class UserPreferences: ObservableObject {
       _swipeActionsStatusRight1 = newValue.rawValue
     }
   }
-  @AppStorage("swipeactions.status.right2") var _swipeActionsStatusRight2 = "none"
+  @AppStorage("swipeactions.status.right2") var _swipeActionsStatusRight2 = StatusAction.boost.rawValue
   public var swipeActionsStatusRight2: StatusAction {
     get {
       StatusAction(rawValue: _swipeActionsStatusRight2) ?? StatusAction.none
