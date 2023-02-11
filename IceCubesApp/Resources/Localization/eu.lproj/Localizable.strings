@@ -328,8 +328,8 @@
 "status.action.boost" = "Bultzatu";
 "status.action.copy-text" = "Kopiatu testua";
 "status.action.delete" = "Ezabatu";
-"status.action.delete.confirm.title" = "Confirm";
-"status.action.delete.confirm.message" = "are you sure you want to delete this post?";
+"status.action.delete.confirm.title" = "Baieztatu";
+"status.action.delete.confirm.message" = "Ziur zaude bidalketa ezabatu nahi duzula?";
 "status.action.edit" = "Editatu";
 "status.action.favorite" = "Egin gogoko";
 "status.action.mention" = "Aipatu";
@@ -345,8 +345,8 @@
 "status.action.unfavorite" = "Kendu gogokoa";
 "status.action.unpin" = "Utzi finkatzeari";
 "status.action.view-in-browser" = "Ikusi nabigatzailean";
-"status.card.share" = "Share this link";
-"status.card.copy" = "Copy this link";
+"status.card.share" = "Partekatu esteka";
+"status.card.copy" = "Kopiatu esteka";
 "status.draft.delete" = "Ezabatu zirriborroa";
 "status.draft.save" = "Gorde zirriborroa";
 "status.editor.ai-prompt.correct" = "Zuzendu testua";
@@ -361,12 +361,12 @@
 "status.editor.language-select.recently-used" = "Duela gutxi erabilitakoak";
 "status.editor.media.edit-image" = "Editatu irudiak";
 "status.editor.media.image-description" = "Irudiaren deskribapena";
-"status.editor.mode.edit" = "Zure bidalketa editatzen";
+"status.editor.mode.edit" = "Bidalketa editatzen";
 "status.editor.mode.new" = "Bidalketa berria";
 "status.editor.mode.quote-%@" = "%@(r)en aipamena";
 "status.editor.mode.reply-%@" = "%@(e)ri erantzunez";
 "status.editor.restore-previous" = "Berreskuratu lehengo testua";
-"status.editor.spoiler" = "Abisu testua";
+"status.editor.spoiler" = "Edukiari buruzko oharra";
 "status.editor.text.placeholder" = "Zer duzu buruan?";
 "status.editor.visibility" = "Bidalketaren irismena";
 "status.error.loading.message" = "Errorea bidalketak kargatzean; saiatu berriro.";
@@ -388,7 +388,7 @@
 "status.poll.frequency" = "Bozketaren maiztasuna";
 "status.poll.option-n %lld" = "%lld. aukera";
 "status.poll.send" = "Bidali";
-"status.post-from-%@" = "Bidali %@ kontutik";
+"status.post-from-%@" = "%@(r)en bidalketa";
 "status.row.was-boosted" = "(e)k bultzatua";
 "status.row.was-reply" = "Honi erantzunez:";
 "status.row.you-boosted" = "Zuk bultzatua";
@@ -420,9 +420,9 @@
 "filter.action.hide" = "Ezkutatu guztiz";
 
 // MARK: Accessibility
-"accessibility.editor.button.attach-photo" = "Attach photo";
-"accessibility.editor.button.poll" = "Poll";
-"accessibility.editor.button.spoiler" = "Spoiler warning";
-"accessibility.editor.button.drafts" = "Drafts";
-"accessibility.editor.button.custom-emojis" = "Custom emojis";
-"accessibility.editor.button.language" = "Language";
+"accessibility.editor.button.attach-photo" = "Erantsi irudia";
+"accessibility.editor.button.poll" = "Bozketa";
+"accessibility.editor.button.spoiler" = "Edukiari buruzko oharra";
+"accessibility.editor.button.drafts" = "Zirriborroak";
+"accessibility.editor.button.custom-emojis" = "Instantziaren emojiak";
+"accessibility.editor.button.language" = "Hizkuntza";
