@@ -40,6 +40,43 @@ public class UserPreferences: ObservableObject {
   
   @AppStorage("show_second_column_ipad") public var showiPadSecondaryColumn = true
 
+  @AppStorage("swipeactions.status.left1") var _swipeActionsStatusLeft1 = "none"
+  public var swipeActionsStatusLeft1: StatusAction {
+    get {
+      StatusAction(rawValue: _swipeActionsStatusLeft1) ?? StatusAction.none
+    }
+    set {
+      _swipeActionsStatusLeft1 = newValue.rawValue
+    }
+  }
+  @AppStorage("swipeactions.status.left2") var _swipeActionsStatusLeft2 = "none"
+  public var swipeActionsStatusLeft2: StatusAction {
+    get {
+      StatusAction(rawValue: _swipeActionsStatusLeft2) ?? StatusAction.none
+    }
+    set {
+      _swipeActionsStatusLeft2 = newValue.rawValue
+    }
+  }
+  @AppStorage("swipeactions.status.right1") var _swipeActionsStatusRight1 = "none"
+  public var swipeActionsStatusRight1: StatusAction {
+    get {
+      StatusAction(rawValue: _swipeActionsStatusRight1) ?? StatusAction.none
+    }
+    set {
+      _swipeActionsStatusRight1 = newValue.rawValue
+    }
+  }
+  @AppStorage("swipeactions.status.right2") var _swipeActionsStatusRight2 = "none"
+  public var swipeActionsStatusRight2: StatusAction {
+    get {
+      StatusAction(rawValue: _swipeActionsStatusRight2) ?? StatusAction.none
+    }
+    set {
+      _swipeActionsStatusRight2 = newValue.rawValue
+    }
+  }
+
   public var postVisibility: Models.Visibility {
     if useInstanceContentSettings {
       return serverPreferences?.postVisibility ?? .pub

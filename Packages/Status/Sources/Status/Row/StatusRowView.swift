@@ -85,7 +85,7 @@ public struct StatusRowView: View {
       .listRowBackground(viewModel.highlightRowColor)
       .swipeActions(edge: .trailing) {
         if !viewModel.isCompact {
-          trailinSwipeActions
+          trailingSwipeActions
         }
       }
       .swipeActions(edge: .leading) {
@@ -453,43 +453,88 @@ public struct StatusRowView: View {
   }
 
   @ViewBuilder
-  private var trailinSwipeActions: some View {
-    Button {
-      Task {
-        HapticManager.shared.fireHaptic(of: .notification(.success))
+  private var trailingSwipeActions: some View {
+    if preferences.swipeActionsStatusRight1 != StatusAction.none {
+      makeSwipeButton(action: preferences.swipeActionsStatusRight1)
+        .tint(theme.tintColor)
+    }
+    if preferences.swipeActionsStatusRight2 != StatusAction.none {
+      makeSwipeButton(action: preferences.swipeActionsStatusRight2)
+        .tint(.gray)
+    }
+  }
+
+  @ViewBuilder
+  private var leadingSwipeActions: some View {
+    if preferences.swipeActionsStatusLeft1 != StatusAction.none {
+      makeSwipeButton(action: preferences.swipeActionsStatusLeft1)
+        .tint(theme.tintColor)
+    }
+    if preferences.swipeActionsStatusLeft2 != StatusAction.none {
+      makeSwipeButton(action: preferences.swipeActionsStatusLeft2)
+        .tint(.gray)
+    }
+  }
+  
+  @ViewBuilder
+  private func makeSwipeButton(action: StatusAction) -> some View {
+    switch action {
+    case .reply:
+      makeSwipeButtonForRouterPath(action: action, destination: .replyToStatusEditor(status: viewModel.status))
+    case .quote:
+      makeSwipeButtonForRouterPath(action: action, destination: .quoteStatusEditor(status: viewModel.status))
+    case .favorite:
+      makeSwipeButtonForTask(action: action) {
         if viewModel.isFavorited {
           await viewModel.unFavorite()
         } else {
           await viewModel.favorite()
         }
       }
-    } label: {
-      Image(systemName: "star")
-    }
-    .tint(.yellow)
-    Button {
-      Task {
-        HapticManager.shared.fireHaptic(of: .notification(.success))
+    case .boost:
+      makeSwipeButtonForTask(action: action) {
         if viewModel.isReblogged {
           await viewModel.unReblog()
         } else {
           await viewModel.reblog()
         }
       }
-    } label: {
-      Image(systemName: "arrow.left.arrow.right.circle")
+    case .bookmark:
+      makeSwipeButtonForTask(action: action) {
+        if viewModel.isBookmarked {
+          await viewModel.unbookmark()
+        } else {
+          await
+          viewModel.bookmark()
+        }
+      }
+    case .none:
+      EmptyView()
     }
-    .tint(theme.tintColor)
   }
-
+  
   @ViewBuilder
-  private var leadingSwipeActions: some View {
+  private func makeSwipeButtonForRouterPath(action: StatusAction, destination: SheetDestinations) -> some View {
     Button {
       HapticManager.shared.fireHaptic(of: .notification(.success))
-      routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
+      routerPath.presentedSheet = destination
     } label: {
-      Image(systemName: "arrowshape.turn.up.left")
+      Text(action.displayName)
+      Image(systemName: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
+        .foregroundColor(.red)
     }
-    .tint(theme.tintColor)
+  }
+  
+  @ViewBuilder
+  private func makeSwipeButtonForTask(action: StatusAction, task: @escaping () async -> Void ) -> some View {
+    Button {
+      Task {
+        HapticManager.shared.fireHaptic(of: .notification(.success))
+        await task()
+      }
+    } label: {
+      Text(action.displayName)
+      Image(systemName: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
+    }
   }
 }
