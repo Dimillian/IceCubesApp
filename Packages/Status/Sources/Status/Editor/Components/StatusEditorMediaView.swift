@@ -7,6 +7,7 @@ import SwiftUI
 
 struct StatusEditorMediaView: View {
   @EnvironmentObject private var theme: Theme
+  @EnvironmentObject private var currentInstance: CurrentInstance
   @ObservedObject var viewModel: StatusEditorViewModel
   @State private var editingContainer: StatusEditorMediaContainer?
 
@@ -126,7 +127,7 @@ struct StatusEditorMediaView: View {
   @ViewBuilder
   private func makeImageMenu(container: StatusEditorMediaContainer) -> some View {
     if container.mediaAttachment != nil {
-      if !viewModel.mode.isEditing {
+      if currentInstance.isEditAltTextSupported || !viewModel.mode.isEditing {
         Button {
           editingContainer = container
         } label: {

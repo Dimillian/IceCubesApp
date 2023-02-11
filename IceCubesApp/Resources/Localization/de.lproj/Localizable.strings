@@ -158,6 +158,22 @@
 
 "settings.display.show-ipad-column" = "Zweite Spalte aktivieren";
 
+"settings.general.swipeactions" = "Swipe Actions";
+"settings.swipeactions.navigation-title" = "Swipe Actions";
+"settings.swipeactions.status.action.bookmark" = "Bookmark";
+"settings.swipeactions.status.action.boost" = "Boost";
+"settings.swipeactions.status.action.favorite" = "Favorite";
+"settings.swipeactions.status.action.none" = "None";
+"settings.swipeactions.status.action.quote" = "Quote";
+"settings.swipeactions.status.action.reply" = "Reply";
+"settings.swipeactions.status.leading" = "Swipe right";
+"settings.swipeactions.status.leading.left" = "left";
+"settings.swipeactions.status.leading.right" = "right";
+"settings.swipeactions.status.trailing" = " Swipe left";
+"settings.swipeactions.status.trailing.left" = "left";
+"settings.swipeactions.status.trailing.right" = "right";
+"settings.swipeactions.status" = "Post";
+
 "enum.expand-media.show" = "Alle zeigen";
 "enum.expand-media.hide" = "Alle ausblenden";
 "enum.expand-media.hide-sensitive" = "Sensible ausblenden";
@@ -357,7 +373,7 @@
 "status.editor.description.add" = "Beschreibung hinzufügen";
 "status.editor.description.edit" = "Beschreibung bearbeiten";
 "status.editor.drafts.navigation-title" = "Entwürfe";
-"status.editor.emojis.navigation-title" = "Custom Emojis";
+"status.editor.emojis.navigation-title" = "Eigene Emojis";
 "status.editor.error.upload" = "Fehler beim Hochladen";
 "status.editor.language-select.navigation-title" = "Sprache auswählen";
 "status.editor.language-select.recently-used" = "Kürzlich genutzt";
