@@ -161,21 +161,21 @@
 
 "settings.display.show-ipad-column" = "セカンドカラムを有効にする";
 
-"settings.general.swipeactions" = "Swipe Actions";
-"settings.swipeactions.navigation-title" = "Swipe Actions";
-"settings.swipeactions.status.action.bookmark" = "Bookmark";
-"settings.swipeactions.status.action.boost" = "Boost";
-"settings.swipeactions.status.action.favorite" = "Favorite";
-"settings.swipeactions.status.action.none" = "None";
-"settings.swipeactions.status.action.quote" = "Quote";
-"settings.swipeactions.status.action.reply" = "Reply";
-"settings.swipeactions.status.leading" = "Swipe right";
-"settings.swipeactions.status.leading.left" = "left";
-"settings.swipeactions.status.leading.right" = "right";
-"settings.swipeactions.status.trailing" = " Swipe left";
-"settings.swipeactions.status.trailing.left" = "left";
-"settings.swipeactions.status.trailing.right" = "right";
-"settings.swipeactions.status" = "Post";
+"settings.general.swipeactions" = "スワイプ操作";
+"settings.swipeactions.navigation-title" = "スワイプ操作";
+"settings.swipeactions.status.action.bookmark" = "ブックマーク";
+"settings.swipeactions.status.action.boost" = "ブースト";
+"settings.swipeactions.status.action.favorite" = "お気に入り";
+"settings.swipeactions.status.action.none" = "何もしない";
+"settings.swipeactions.status.action.quote" = "引用";
+"settings.swipeactions.status.action.reply" = "返信";
+"settings.swipeactions.status.leading" = "右にスワイプ";
+"settings.swipeactions.status.leading.left" = "左";
+"settings.swipeactions.status.leading.right" = "右";
+"settings.swipeactions.status.trailing" = " 左にスワイプ";
+"settings.swipeactions.status.trailing.left" = "左";
+"settings.swipeactions.status.trailing.right" = "右";
+"settings.swipeactions.status" = "投稿";
 
 // MARK: Tabs
 "tab.explore" = "エクスプローラー";
