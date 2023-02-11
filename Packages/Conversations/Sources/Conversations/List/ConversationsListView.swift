@@ -83,7 +83,11 @@ public struct ConversationsListView: View {
       }
     }
     .refreshable {
-      await viewModel.fetchConversations()
+      // note: this Task wrapper should not be necessary, but it reportedly crashes without it
+      // when refreshing on an empty list
+      Task {
+        await viewModel.fetchConversations()
+      }
     }
     .onAppear {
       viewModel.client = client
