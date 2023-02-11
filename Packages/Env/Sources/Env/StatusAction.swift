@@ -1,9 +1,11 @@
 import SwiftUI
 
-public enum StatusAction : String, CaseIterable {
-  case none, reply, quote, boost, favorite, bookmark
+public enum StatusAction : String, CaseIterable, Identifiable {
+  public var id: String {
+    "\(rawValue)"
+  }
+  case none, boost, reply, quote, favorite, bookmark
   
-  @MainActor
   public var displayName: LocalizedStringKey {
     switch self {
     case .none:
@@ -20,8 +22,8 @@ public enum StatusAction : String, CaseIterable {
       return "settings.swipeactions.status.action.bookmark"
     }
   }
-  
-  public func iconName(isReblogged: Bool = false, isFavorited: Bool = false, isBookmarked: Bool = false)-> String {
+    
+  public func iconName(isReblogged: Bool = false, isFavorited: Bool = false, isBookmarked: Bool = false) -> String {
     switch self {
     case .none:
       return "slash.circle"

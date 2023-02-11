@@ -163,6 +163,22 @@
 "settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Attiva la seconda colonna";
 
+"settings.general.swipeactions" = "Swipe Actions";
+"settings.swipeactions.navigation-title" = "Swipe Actions";
+"settings.swipeactions.status.action.bookmark" = "Bookmark";
+"settings.swipeactions.status.action.boost" = "Boost";
+"settings.swipeactions.status.action.favorite" = "Favorite";
+"settings.swipeactions.status.action.none" = "None";
+"settings.swipeactions.status.action.quote" = "Quote";
+"settings.swipeactions.status.action.reply" = "Reply";
+"settings.swipeactions.status.leading" = "Swipe right";
+"settings.swipeactions.status.leading.left" = "left";
+"settings.swipeactions.status.leading.right" = "right";
+"settings.swipeactions.status.trailing" = " Swipe left";
+"settings.swipeactions.status.trailing.left" = "left";
+"settings.swipeactions.status.trailing.right" = "right";
+"settings.swipeactions.status" = "Post";
+
 // MARK: Tabs
 "tab.explore" = "Esplora";
 "tab.federated" = "Federazione";

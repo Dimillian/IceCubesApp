@@ -93,7 +93,6 @@
 "settings.general.instance" = "Instance Information";
 "settings.general.push-notifications" = "Push Notifications";
 "settings.general.remote-timelines" = "Remote Local Timelines";
-"settings.general.swipeactions" = "Swipe Actions";
 "settings.push.boosts" = "Boosts";
 "settings.push.favorites" = "Favorites";
 "settings.push.follows" = "Follows";
@@ -116,18 +115,6 @@
 "settings.content.default-visibility" = "Posting visibility";
 "settings.content.reading" = "Reading";
 "settings.content.posting" = "Posting";
-"settings.swipeactions.navigation-title" = "Swipe Actions";
-"settings.swipeactions.status.action.bookmark" = "Bookmark";
-"settings.swipeactions.status.action.boost" = "Boost";
-"settings.swipeactions.status.action.favorite" = "Favorite";
-"settings.swipeactions.status.action.none" = "None";
-"settings.swipeactions.status.action.quote" = "Quote";
-"settings.swipeactions.status.action.reply" = "Reply";
-"settings.swipeactions.status.left.1" = "swipe left outer";
-"settings.swipeactions.status.left.2" = "swipe left inner";
-"settings.swipeactions.status.right.1" = "swipe right outer";
-"settings.swipeactions.status.right.2" = "swipe right inner";
-"settings.swipeactions.status" = "Post";
 "enum.expand-media.show" = "Show All";
 "enum.expand-media.hide" = "Hide All";
 "enum.expand-media.hide-sensitive" = "Hide Sensitive";
@@ -176,6 +163,22 @@
 
 "settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Enable secondary column";
+
+"settings.general.swipeactions" = "Swipe Actions";
+"settings.swipeactions.navigation-title" = "Swipe Actions";
+"settings.swipeactions.status.action.bookmark" = "Bookmark";
+"settings.swipeactions.status.action.boost" = "Boost";
+"settings.swipeactions.status.action.favorite" = "Favorite";
+"settings.swipeactions.status.action.none" = "None";
+"settings.swipeactions.status.action.quote" = "Quote";
+"settings.swipeactions.status.action.reply" = "Reply";
+"settings.swipeactions.status.leading" = "Swipe right";
+"settings.swipeactions.status.leading.left" = "left";
+"settings.swipeactions.status.leading.right" = "right";
+"settings.swipeactions.status.trailing" = " Swipe left";
+"settings.swipeactions.status.trailing.left" = "left";
+"settings.swipeactions.status.trailing.right" = "right";
+"settings.swipeactions.status" = "Post";
 
 // MARK: Tabs
 "tab.explore" = "Explore";

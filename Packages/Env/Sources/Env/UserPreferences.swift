@@ -40,40 +40,40 @@ public class UserPreferences: ObservableObject {
   
   @AppStorage("show_second_column_ipad") public var showiPadSecondaryColumn = true
 
-  @AppStorage("swipeactions.status.left1") var _swipeActionsStatusLeft1 = StatusAction.reply.rawValue
-  public var swipeActionsStatusLeft1: StatusAction {
+  @AppStorage("swipeactions.status.trailing.right") var _swipeActionsStatusTrailingRight = StatusAction.favorite.rawValue
+  public var swipeActionsStatusTrailingRight: StatusAction {
     get {
-      StatusAction(rawValue: _swipeActionsStatusLeft1) ?? StatusAction.none
+      StatusAction(rawValue: _swipeActionsStatusTrailingRight) ?? StatusAction.none
     }
     set {
-      _swipeActionsStatusLeft1 = newValue.rawValue
+      _swipeActionsStatusTrailingRight = newValue.rawValue
     }
   }
-  @AppStorage("swipeactions.status.left2") var _swipeActionsStatusLeft2 = StatusAction.none.rawValue
-  public var swipeActionsStatusLeft2: StatusAction {
+  @AppStorage("swipeactions.status.trailing.left") var _swipeActionsStatusTrailingLeft = StatusAction.boost.rawValue
+  public var swipeActionsStatusTrailingLeft: StatusAction {
     get {
-      StatusAction(rawValue: _swipeActionsStatusLeft2) ?? StatusAction.none
+      StatusAction(rawValue: _swipeActionsStatusTrailingLeft) ?? StatusAction.none
     }
     set {
-      _swipeActionsStatusLeft2 = newValue.rawValue
+      _swipeActionsStatusTrailingLeft = newValue.rawValue
     }
   }
-  @AppStorage("swipeactions.status.right1") var _swipeActionsStatusRight1 = StatusAction.favorite.rawValue
-  public var swipeActionsStatusRight1: StatusAction {
+  @AppStorage("swipeactions.status.leading.left") var _swipeActionsStatusLeadingLeft = StatusAction.reply.rawValue
+  public var swipeActionsStatusLeadingLeft: StatusAction {
     get {
-      StatusAction(rawValue: _swipeActionsStatusRight1) ?? StatusAction.none
+      StatusAction(rawValue: _swipeActionsStatusLeadingLeft) ?? StatusAction.none
     }
     set {
-      _swipeActionsStatusRight1 = newValue.rawValue
+      _swipeActionsStatusLeadingLeft = newValue.rawValue
     }
   }
-  @AppStorage("swipeactions.status.right2") var _swipeActionsStatusRight2 = StatusAction.boost.rawValue
-  public var swipeActionsStatusRight2: StatusAction {
+  @AppStorage("swipeactions.status.leading.right") var _swipeActionsStatusLeadingRight = StatusAction.none.rawValue
+  public var swipeActionsStatusLeadingRight: StatusAction {
     get {
-      StatusAction(rawValue: _swipeActionsStatusRight2) ?? StatusAction.none
+      StatusAction(rawValue: _swipeActionsStatusLeadingRight) ?? StatusAction.none
     }
     set {
-      _swipeActionsStatusRight2 = newValue.rawValue
+      _swipeActionsStatusLeadingRight = newValue.rawValue
     }
   }
 

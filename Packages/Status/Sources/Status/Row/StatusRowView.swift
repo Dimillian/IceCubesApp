@@ -454,24 +454,24 @@ public struct StatusRowView: View {
 
   @ViewBuilder
   private var trailingSwipeActions: some View {
-    if preferences.swipeActionsStatusRight1 != StatusAction.none {
-      makeSwipeButton(action: preferences.swipeActionsStatusRight1)
+    if preferences.swipeActionsStatusTrailingRight != StatusAction.none {
+      makeSwipeButton(action: preferences.swipeActionsStatusTrailingRight)
         .tint(theme.tintColor)
     }
-    if preferences.swipeActionsStatusRight2 != StatusAction.none {
-      makeSwipeButton(action: preferences.swipeActionsStatusRight2)
+    if preferences.swipeActionsStatusTrailingLeft != StatusAction.none {
+      makeSwipeButton(action: preferences.swipeActionsStatusTrailingLeft)
         .tint(.gray)
     }
   }
 
   @ViewBuilder
   private var leadingSwipeActions: some View {
-    if preferences.swipeActionsStatusLeft1 != StatusAction.none {
-      makeSwipeButton(action: preferences.swipeActionsStatusLeft1)
+    if preferences.swipeActionsStatusLeadingLeft != StatusAction.none {
+      makeSwipeButton(action: preferences.swipeActionsStatusLeadingLeft)
         .tint(theme.tintColor)
     }
-    if preferences.swipeActionsStatusLeft2 != StatusAction.none {
-      makeSwipeButton(action: preferences.swipeActionsStatusLeft2)
+    if preferences.swipeActionsStatusLeadingRight != StatusAction.none {
+      makeSwipeButton(action: preferences.swipeActionsStatusLeadingRight)
         .tint(.gray)
     }
   }
