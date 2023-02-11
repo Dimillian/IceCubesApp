@@ -353,6 +353,7 @@
 "status.editor.description.add" = "Dodaj opis";
 "status.editor.description.edit" = "Edytuj opis";
 "status.editor.drafts.navigation-title" = "Wersje robocze";
+"status.editor.emojis.navigation-title" = "Custom Emojis";
 "status.editor.error.upload" = "Błąd wysyłania";
 "status.editor.language-select.navigation-title" = "Wybierz język";
 "status.editor.language-select.recently-used" = "Ostatnio użyty";

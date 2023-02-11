@@ -357,6 +357,7 @@
 "status.editor.description.add" = "Gehitu deskribapena";
 "status.editor.description.edit" = "Editatu deskribapena";
 "status.editor.drafts.navigation-title" = "Zirriborroak";
+"status.editor.emojis.navigation-title" = "Custom Emojis";
 "status.editor.error.upload" = "Errorea igotzerakoan";
 "status.editor.language-select.navigation-title" = "Hautatu hizkuntza";
 "status.editor.language-select.recently-used" = "Duela gutxi erabilitakoak";
