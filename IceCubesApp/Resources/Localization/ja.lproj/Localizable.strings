@@ -421,9 +421,9 @@
 "filter.action.hide" = "完全に非表示";
 
 // MARK: Accessibility
-"accessibility.editor.button.attach-photo" = "Attach photo";
-"accessibility.editor.button.poll" = "Poll";
-"accessibility.editor.button.spoiler" = "Spoiler warning";
-"accessibility.editor.button.drafts" = "Drafts";
-"accessibility.editor.button.custom-emojis" = "Custom emojis";
-"accessibility.editor.button.language" = "Language";
+"accessibility.editor.button.attach-photo" = "画像を添付";
+"accessibility.editor.button.poll" = "投票";
+"accessibility.editor.button.spoiler" = "ネタバレを警告";
+"accessibility.editor.button.drafts" = "下書き";
+"accessibility.editor.button.custom-emojis" = "カスタム絵文字";
+"accessibility.editor.button.language" = "言語";
