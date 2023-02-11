@@ -161,7 +161,7 @@
 
 "settings.display.show-ipad-column" = "Włącz dodatkową kolumnę";
 
-"settings.general.swipeactions" = "Przeciąganie pacem";
+"settings.general.swipeactions" = "Przeciąganie palcem";
 "settings.swipeactions.navigation-title" = "Przeciąganie palcem";
 "settings.swipeactions.status.action.bookmark" = "Dodaj zakładkę";
 "settings.swipeactions.status.action.boost" = "Podbij";
