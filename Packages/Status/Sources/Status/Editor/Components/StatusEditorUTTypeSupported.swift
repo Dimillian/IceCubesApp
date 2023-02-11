@@ -59,6 +59,8 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
       } else if let data = result as? Data,
                 let image = UIImage(data: data) {
         return image
+      } else if let transferable = await getImageTansferable(item: item){
+        return transferable
       }
     }
     if let url = result as? URL {
@@ -88,6 +90,19 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
   private func getGifTransferable(item: NSItemProvider) async -> GifFileTranseferable? {
     return await withCheckedContinuation { continuation in
       _ = item.loadTransferable(type: GifFileTranseferable.self) { result in
+        switch result {
+        case let .success(success):
+          continuation.resume(with: .success(success))
+        case .failure:
+          continuation.resume(with: .success(nil))
+        }
+      }
+    }
+  }
+  
+  private func getImageTansferable(item: NSItemProvider) async -> ImageFileTranseferable? {
+    return await withCheckedContinuation { continuation in
+      _ = item.loadTransferable(type: ImageFileTranseferable.self) { result in
         switch result {
         case let .success(success):
           continuation.resume(with: .success(success))
@@ -133,7 +148,7 @@ struct ImageFileTranseferable: Transferable {
   let url: URL
 
   lazy var data: Data? = try? Data(contentsOf: url)
-  lazy var compressedData: Data? = image?.jpegData(compressionQuality: 0.90)
+  lazy var compressedData: Data? = image?.jpegData(compressionQuality: 0.80)
   lazy var image: UIImage? = UIImage(data: data ?? Data())
 
   static var transferRepresentation: some TransferRepresentation {

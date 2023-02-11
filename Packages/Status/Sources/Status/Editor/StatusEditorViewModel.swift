@@ -370,6 +370,13 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
                                         gifTransferable: nil,
                                         mediaAttachment: nil,
                                         error: nil))
+            } else if var content = content as? ImageFileTranseferable,
+                      let image = content.image {
+              mediasImages.append(.init(image: image,
+                                        movieTransferable: nil,
+                                        gifTransferable: nil,
+                                        mediaAttachment: nil,
+                                        error: nil))
             } else if let video = content as? MovieFileTranseferable {
               mediasImages.append(.init(image: nil,
                                         movieTransferable: video,
