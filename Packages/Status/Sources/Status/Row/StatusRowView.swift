@@ -455,11 +455,17 @@ public struct StatusRowView: View {
   private var trailingSwipeActions: some View {
     if preferences.swipeActionsStatusTrailingRight != StatusAction.none {
       makeSwipeButton(action: preferences.swipeActionsStatusTrailingRight)
-        .tint(theme.tintColor)
+        .tint(
+          preferences.swipeActionsStatusTrailingRight == .boost ? theme.tintColor :
+            preferences.swipeActionsStatusTrailingRight == .favorite ? .yellow : preferences.swipeActionsStatusTrailingRight == .bookmark ? .pink : .gray
+        )
     }
     if preferences.swipeActionsStatusTrailingLeft != StatusAction.none {
       makeSwipeButton(action: preferences.swipeActionsStatusTrailingLeft)
-        .tint(.gray)
+        .tint(
+          preferences.swipeActionsStatusTrailingLeft == .boost ? theme.tintColor :
+            preferences.swipeActionsStatusTrailingLeft == .favorite ? .yellow : preferences.swipeActionsStatusTrailingLeft == .bookmark ? .pink : .gray
+        )
     }
   }
 
@@ -467,11 +473,17 @@ public struct StatusRowView: View {
   private var leadingSwipeActions: some View {
     if preferences.swipeActionsStatusLeadingLeft != StatusAction.none {
       makeSwipeButton(action: preferences.swipeActionsStatusLeadingLeft)
-        .tint(theme.tintColor)
+        .tint(
+          preferences.swipeActionsStatusLeadingLeft == .boost ? theme.tintColor :
+            preferences.swipeActionsStatusLeadingLeft == .favorite ? .yellow : preferences.swipeActionsStatusLeadingLeft == .bookmark ? .pink : .gray
+        )
     }
     if preferences.swipeActionsStatusLeadingRight != StatusAction.none {
       makeSwipeButton(action: preferences.swipeActionsStatusLeadingRight)
-        .tint(.gray)
+        .tint(
+          preferences.swipeActionsStatusLeadingRight == .boost ? theme.tintColor :
+            preferences.swipeActionsStatusLeadingRight == .favorite ? .yellow : preferences.swipeActionsStatusLeadingRight == .bookmark ? .pink : .gray
+        )
     }
   }
   
