@@ -10,10 +10,7 @@ struct SwipeActionsSettingsView: View {
     
     Form {
       Section("settings.swipeactions.status") {
-        HStack {
-          Text("settings.swipeactions.status.leading")
-          Image(systemName: "arrow.right")
-        }
+        Label("settings.swipeactions.status.leading", systemImage: "arrow.left.circle")
         Picker(selection: $userPreferences.swipeActionsStatusLeadingLeft, label: makeSwipeLabel(left: true, text: "settings.swipeactions.status.leading.left")) {
           ForEach(StatusAction.allCases) { action in
             Text(action.displayName).tag(action)
@@ -24,10 +21,7 @@ struct SwipeActionsSettingsView: View {
             Text(action.displayName).tag(action)
           }
         }
-        HStack {
-          Text("settings.swipeactions.status.trailing")
-          Image(systemName: "arrow.left")
-        }
+        Label("settings.swipeactions.status.trailing", systemImage: "arrow.right.circle")
         Picker(selection: $userPreferences.swipeActionsStatusTrailingLeft, label: makeSwipeLabel(left: true, text: "settings.swipeactions.status.trailing.left"))  {
           ForEach(StatusAction.allCases) { action in
             Text(action.displayName).tag(action)
@@ -47,9 +41,7 @@ struct SwipeActionsSettingsView: View {
   }
   
   private func makeSwipeLabel(left: Bool, text: LocalizedStringKey) -> some View {
-    return HStack {
-      Image(systemName: left ? "rectangle.lefthalf.filled" : "rectangle.righthalf.filled")
-      Text(text)
-    }.padding(.leading, 16)
+    return Label(text, systemImage: left ? "rectangle.lefthalf.filled" : "rectangle.righthalf.filled")
+           .padding(.leading, 16)
   }
 }
