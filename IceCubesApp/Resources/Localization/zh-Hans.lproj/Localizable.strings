@@ -172,7 +172,7 @@
 "settings.swipeactions.status.leading" = "Swipe right";
 "settings.swipeactions.status.leading.left" = "left";
 "settings.swipeactions.status.leading.right" = "right";
-"settings.swipeactions.status.trailing" = " Swipe left";
+"settings.swipeactions.status.trailing" = "Swipe left";
 "settings.swipeactions.status.trailing.left" = "left";
 "settings.swipeactions.status.trailing.right" = "right";
 "settings.swipeactions.status" = "Post";
