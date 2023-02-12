@@ -161,21 +161,21 @@
 
 "settings.display.show-ipad-column" = "启用边栏";
 
-"settings.general.swipeactions" = "Swipe Actions";
-"settings.swipeactions.navigation-title" = "Swipe Actions";
-"settings.swipeactions.status.action.bookmark" = "Bookmark";
-"settings.swipeactions.status.action.boost" = "Boost";
-"settings.swipeactions.status.action.favorite" = "Favorite";
-"settings.swipeactions.status.action.none" = "None";
-"settings.swipeactions.status.action.quote" = "Quote";
-"settings.swipeactions.status.action.reply" = "Reply";
-"settings.swipeactions.status.leading" = "Swipe right";
-"settings.swipeactions.status.leading.left" = "left";
-"settings.swipeactions.status.leading.right" = "right";
-"settings.swipeactions.status.trailing" = " Swipe left";
-"settings.swipeactions.status.trailing.left" = "left";
-"settings.swipeactions.status.trailing.right" = "right";
-"settings.swipeactions.status" = "Post";
+"settings.general.swipeactions" = "轻扫操作";
+"settings.swipeactions.navigation-title" = "轻扫操作设置";
+"settings.swipeactions.status.action.bookmark" = "书签";
+"settings.swipeactions.status.action.boost" = "转发";
+"settings.swipeactions.status.action.favorite" = "收藏";
+"settings.swipeactions.status.action.none" = "无";
+"settings.swipeactions.status.action.quote" = "引用";
+"settings.swipeactions.status.action.reply" = "回复";
+"settings.swipeactions.status.leading" = "向右轻扫";
+"settings.swipeactions.status.leading.left" = "左";
+"settings.swipeactions.status.leading.right" = "右";
+"settings.swipeactions.status.trailing" = "向左轻扫";
+"settings.swipeactions.status.trailing.left" = "左";
+"settings.swipeactions.status.trailing.right" = "右";
+"settings.swipeactions.status" = "嘟文";
 
 // MARK: Tabs
 "tab.explore" = "探索";
@@ -372,7 +372,7 @@
 "status.editor.description.add" = "添加描述";
 "status.editor.description.edit" = "编辑描述";
 "status.editor.drafts.navigation-title" = "草稿";
-"status.editor.emojis.navigation-title" = "Custom Emojis";
+"status.editor.emojis.navigation-title" = "自定义表情";
 "status.editor.error.upload" = "上传错误";
 "status.editor.language-select.navigation-title" = "选择语言";
 "status.editor.language-select.recently-used" = "最近使用";
