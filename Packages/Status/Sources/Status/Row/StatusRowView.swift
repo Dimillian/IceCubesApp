@@ -520,7 +520,7 @@ public struct StatusRowView: View {
     } label: {
       Text(action.displayName)
       Image(systemName: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
-        .foregroundColor(.red)
+        .environment(\.symbolVariants, .none)
     }
   }
   
@@ -534,6 +534,7 @@ public struct StatusRowView: View {
     } label: {
       Text(action.displayName)
       Image(systemName: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
+        .environment(\.symbolVariants, .none)
     }
   }
 }
