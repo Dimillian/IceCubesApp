@@ -9,12 +9,10 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
 
   @ObservedObject private var fetcher: Fetcher
   private let isRemote: Bool
-  private let isEmbdedInList: Bool
 
-  public init(fetcher: Fetcher, isRemote: Bool = false, isEmbdedInList: Bool = true) {
+  public init(fetcher: Fetcher, isRemote: Bool = false) {
     self.fetcher = fetcher
     self.isRemote = isRemote
-    self.isEmbdedInList = isEmbdedInList
   }
 
   public var body: some View {
@@ -22,12 +20,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
     case .loading:
       ForEach(Status.placeholders()) { status in
         StatusRowView(viewModel: .init(status: status, isCompact: false))
-          .padding(.horizontal, isEmbdedInList ? 0 : .layoutPadding)
           .redacted(reason: .placeholder)
-        if !isEmbdedInList {
-          Divider()
-            .padding(.vertical, .dividerPadding)
-        }
       }
     case .error:
       ErrorView(title: "status.error.title",
@@ -45,7 +38,6 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
         let viewModel = StatusRowViewModel(status: status, isCompact: false, isRemote: isRemote)
         if viewModel.filter?.filter.filterAction != .hide {
           StatusRowView(viewModel: viewModel)
-            .padding(.horizontal, isEmbdedInList ? 0 : .layoutPadding)
             .id(status.id)
             .onAppear {
               fetcher.statusDidAppear(status: status)
@@ -53,10 +45,6 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
             .onDisappear {
               fetcher.statusDidDisappear(status: status)
             }
-          if !isEmbdedInList {
-            Divider()
-              .padding(.vertical, .dividerPadding)
-          }
         }
       }
       switch nextPageState {

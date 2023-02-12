@@ -7,6 +7,10 @@ import Shimmer
 import SwiftUI
 
 struct AccountDetailHeaderView: View {
+  enum Constants {
+    static let headerHeight: CGFloat = 200
+  }
+  
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var quickLook: QuickLook
   @EnvironmentObject private var routerPath: RouterPath
@@ -17,16 +21,10 @@ struct AccountDetailHeaderView: View {
   let account: Account
   let scrollViewProxy: ScrollViewProxy?
 
-  @Binding var scrollOffset: CGFloat
-
-  private var bannerHeight: CGFloat {
-    200 + (scrollOffset > 0 ? scrollOffset * 2 : 0)
-  }
-
   var body: some View {
     VStack(alignment: .leading) {
       Rectangle()
-        .frame(height: 200)
+        .frame(height: Constants.headerHeight)
         .overlay {
           headerImageView
         }
@@ -39,7 +37,7 @@ struct AccountDetailHeaderView: View {
       if reasons.contains(.placeholder) {
         Rectangle()
           .foregroundColor(theme.secondaryBackgroundColor)
-          .frame(height: bannerHeight)
+          .frame(height: Constants.headerHeight)
       } else {
         LazyImage(url: account.header) { state in
           if let image = state.image {
@@ -48,14 +46,14 @@ struct AccountDetailHeaderView: View {
               .overlay(account.haveHeader ? .black.opacity(0.50) : .clear)
           } else if state.isLoading {
             theme.secondaryBackgroundColor
-              .frame(height: bannerHeight)
+              .frame(height: Constants.headerHeight)
               .shimmering()
           } else {
             theme.secondaryBackgroundColor
-              .frame(height: bannerHeight)
+              .frame(height: Constants.headerHeight)
           }
         }
-        .frame(height: bannerHeight)
+        .frame(height: Constants.headerHeight)
       }
 
       if viewModel.relationship?.followedBy == true {
@@ -69,8 +67,7 @@ struct AccountDetailHeaderView: View {
       }
     }
     .background(theme.secondaryBackgroundColor)
-    .frame(height: bannerHeight)
-    .offset(y: scrollOffset > 0 ? -scrollOffset : 0)
+    .frame(height: Constants.headerHeight)
     .contentShape(Rectangle())
     .onTapGesture {
       guard account.haveHeader else {
@@ -102,16 +99,26 @@ struct AccountDetailHeaderView: View {
         } label: {
           makeCustomInfoLabel(title: "account.posts", count: account.statusesCount)
         }
-        NavigationLink(value: RouterDestinations.following(id: account.id)) {
+        .buttonStyle(.borderless)
+        
+        Button {
+          routerPath.navigate(to: .following(id: account.id))
+        } label: {
           makeCustomInfoLabel(title: "account.following", count: account.followingCount)
         }
-        NavigationLink(value: RouterDestinations.followers(id: account.id)) {
+        .buttonStyle(.borderless)
+
+        Button {
+          routerPath.navigate(to: .followers(id: account.id))
+        } label: {
           makeCustomInfoLabel(
             title: "account.followers",
             count: account.followersCount,
             needsBadge: currentAccount.account?.id == account.id && !currentAccount.followRequests.isEmpty
           )
         }
+        .buttonStyle(.borderless)
+        
       }.offset(y: 20)
     }
   }
@@ -123,6 +130,12 @@ struct AccountDetailHeaderView: View {
         VStack(alignment: .leading, spacing: 0) {
           EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
             .font(.scaledHeadline)
+            .onDisappear {
+              print("DISPEAR")
+            }
+            .onAppear {
+              print("APPEAR")
+            }
           Text("@\(account.acct)")
             .font(.scaledCallout)
             .foregroundColor(.gray)
@@ -189,7 +202,6 @@ struct AccountDetailHeaderView_Previews: PreviewProvider {
   static var previews: some View {
     AccountDetailHeaderView(viewModel: .init(account: .placeholder()),
                             account: .placeholder(),
-                            scrollViewProxy: nil,
-                            scrollOffset: .constant(0))
+                            scrollViewProxy: nil)
   }
 }
