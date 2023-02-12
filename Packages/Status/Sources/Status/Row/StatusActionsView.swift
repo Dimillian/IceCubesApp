@@ -94,7 +94,7 @@ struct StatusActionsView: View {
       }
     }
   }
-  
+
   private func handleAction(action: Actions) {
     Task {
       HapticManager.shared.fireHaptic(of: .notification(.success))

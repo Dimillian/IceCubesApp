@@ -10,7 +10,7 @@ struct AccountDetailHeaderView: View {
   enum Constants {
     static let headerHeight: CGFloat = 200
   }
-  
+
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var quickLook: QuickLook
   @EnvironmentObject private var routerPath: RouterPath
@@ -100,7 +100,7 @@ struct AccountDetailHeaderView: View {
           makeCustomInfoLabel(title: "account.posts", count: account.statusesCount)
         }
         .buttonStyle(.borderless)
-        
+
         Button {
           routerPath.navigate(to: .following(id: account.id))
         } label: {
@@ -118,7 +118,7 @@ struct AccountDetailHeaderView: View {
           )
         }
         .buttonStyle(.borderless)
-        
+
       }.offset(y: 20)
     }
   }

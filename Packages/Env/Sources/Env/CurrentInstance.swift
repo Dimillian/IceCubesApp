@@ -9,7 +9,7 @@ public class CurrentInstance: ObservableObject {
   private var client: Client?
 
   public static let shared = CurrentInstance()
-  
+
   private var version: Float {
     if let stringVersion = instance?.version {
       if stringVersion.utf8.count > 2 {
@@ -20,7 +20,6 @@ public class CurrentInstance: ObservableObject {
     }
     return 0
   }
-  
 
   public var isFiltersSupported: Bool {
     version >= 4
@@ -29,7 +28,7 @@ public class CurrentInstance: ObservableObject {
   public var isEditSupported: Bool {
     version >= 4
   }
-    
+
   public var isEditAltTextSupported: Bool {
     version >= 4.1
   }

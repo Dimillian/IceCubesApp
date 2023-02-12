@@ -23,7 +23,7 @@ class StatusDetailViewModel: ObservableObject {
     self.statusId = statusId
     remoteStatusURL = nil
   }
-  
+
   init(status: Status) {
     state = .display(status: status, context: .empty(), date: Date())
     title = "status.post-from-\(status.account.displayNameWithoutEmojis)"
@@ -78,7 +78,7 @@ class StatusDetailViewModel: ObservableObject {
           state = .display(status: data.status, context: data.context, date: Date())
         }
       } else {
-        state = .display(status: data.status, context: data.context,date: Date())
+        state = .display(status: data.status, context: data.context, date: Date())
         scrollToId = statusId
       }
     } catch {

@@ -36,7 +36,7 @@ public struct AccountDetailView: View {
   public init(account: Account) {
     _viewModel = StateObject(wrappedValue: .init(account: account))
   }
-    
+
   public var body: some View {
     ScrollViewReader { proxy in
       List {
@@ -48,7 +48,7 @@ public struct AccountDetailView: View {
         .listRowInsets(.init())
         .listRowSeparator(.hidden)
         .listRowBackground(theme.primaryBackgroundColor)
-        
+
         Picker("", selection: $viewModel.selectedTab) {
           ForEach(isCurrentUser ? AccountDetailViewModel.Tab.currentAccountTabs : AccountDetailViewModel.Tab.accountTabs,
                   id: \.self) { tab in
@@ -283,8 +283,8 @@ public struct AccountDetailView: View {
       ForEach(currentAccount.sortedLists) { list in
         NavigationLink(value: RouterDestinations.list(list: list)) {
           Text(list.title)
-          .font(.scaledHeadline)
-          .foregroundColor(theme.labelColor)
+            .font(.scaledHeadline)
+            .foregroundColor(theme.labelColor)
         }
         .listRowBackground(theme.primaryBackgroundColor)
         .contextMenu {
@@ -389,7 +389,7 @@ public struct AccountDetailView: View {
                   Label("account.action.block", systemImage: "person.crop.circle.badge.xmark")
                 }
               }
-              
+
               if viewModel.relationship?.muting == true {
                 Button {
                   Task {
@@ -405,7 +405,7 @@ public struct AccountDetailView: View {
               } else {
                 Menu {
                   ForEach(MutingDurations.allCases, id: \.rawValue) { duration in
-                    Button (duration.description) {
+                    Button(duration.description) {
                       Task {
                         do {
                           viewModel.relationship = try await client.post(endpoint: Accounts.mute(id: account.id, json: MuteData(duration: duration.rawValue)))

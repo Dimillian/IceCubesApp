@@ -3,13 +3,13 @@ import SwiftUI
 enum MutingDurations: Int, CaseIterable {
   case infinite = 0
   case fiveMinutes = 300
-  case thirtyMinutes = 1_800
-  case oneHour = 3_600
-  case sixHours = 21_600
-  case oneDay = 86_400
+  case thirtyMinutes = 1800
+  case oneHour = 3600
+  case sixHours = 21600
+  case oneDay = 86400
   case threeDays = 259_200
   case sevenDays = 604_800
-  
+
   public var description: LocalizedStringKey {
     switch self {
     case .infinite:

@@ -38,7 +38,7 @@ public class StatusPollViewModel: ObservableObject {
       print(error)
     }
   }
-  
+
   public func handleSelection(_ pollIndex: Int) {
     if poll.multiple {
       if let voterIndex = votes.firstIndex(of: pollIndex) {

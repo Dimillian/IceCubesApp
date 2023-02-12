@@ -33,7 +33,7 @@ struct StatusEditorAccessoryView: View {
                 Image(systemName: "photo.fill.on.rectangle.fill")
               }
             }
-                         .accessibilityLabel("accessibility.editor.button.attach-photo")
+            .accessibilityLabel("accessibility.editor.button.attach-photo")
             .disabled(viewModel.showPoll)
 
             Button {
@@ -85,7 +85,7 @@ struct StatusEditorAccessoryView: View {
             }
             .accessibilityLabel("accessibility.editor.button.language")
 
-              if preferences.isOpenAIEnabled {
+            if preferences.isOpenAIEnabled {
               AIMenu.disabled(!viewModel.canPost)
             }
           }
