@@ -24,7 +24,7 @@
 "enum.avatar-position.top" = "Corpusean";
 "enum.avatar-shape.circle" = "Biribila";
 "enum.avatar-shape.rounded" = "Biribildutako ertzak";
-"enum.durations.infinite" = "betiko";
+"enum.durations.infinite" = "Betiko";
 "enum.durations.fiveMinutes" = "5 minutuz";
 "enum.durations.thirtyMinutes" = "30 minutuz";
 "enum.durations.oneHour" = "Ordubetez";
@@ -44,7 +44,7 @@
 "instance.info.name" = "Izena";
 "instance.info.navigation-title" = "Instantziaren informazioa";
 "instance.info.posts" = "Bidalketak";
-"instance.info.section.info" = "Instantziaren informazioa";
+"instance.info.section.info" = "Instantziari buruz";
 "instance.info.section.rules" = "Instantziaren arauak";
 "instance.info.users" = "Erabiltzaileak";
 "instance.info.version" = "Bertsioa";
@@ -63,7 +63,7 @@
 "settings.account.add" = "Gehitu kontua";
 "settings.app.icon" = "Aplikazioaren ikonoa";
 "settings.app.icon.navigation-title" = "Ikonoak";
-"settings.app.source" = "Iturburu kodea (GitHub-en)";
+"settings.app.source" = "Iturburu kodea (GitHub)";
 "settings.app.support" = "Eman babesa aplikazioari";
 "settings.app.about" = "Honi buruz";
 "settings.display.example-toot" = "Adibidea";
@@ -73,7 +73,7 @@
 "settings.display.restore" = "Berrezarri defektuzkoa";
 "settings.display.section.display" = "Pantaila";
 "settings.display.section.theme" = "Itxura";
-"settings.display.section.theme.footer" = "Sistemak darabiltzan koloreen aukera desgaitzean soilik ezar daitezke norberaren koloreak";
+"settings.display.section.theme.footer" = "Norberaren koloreak aukeratzeko sistemak darabiltzan koloreen aukera desgaitu behar da ";
 "settings.display.status.action-buttons" = "Bidalketen ekintza botoiak";
 "settings.display.status.media-style" = "Bidalketen multimediaren itxura";
 "settings.display.translate-button" = "Erakutsi itzultzeko botoia";
@@ -127,7 +127,7 @@
 "settings.content.navigation-title" = "Edukiaren ezarpenak";
 "settings.content.boosts" = "Bultzadak";
 "settings.content.hide-repeated-boosts" = "Ezkutatu errepikatutako bultzadak";
-"settings.content.instance-settings" = "Zerbitzariko edukiaren ezarpenak";
+"settings.content.instance-settings" = "Zerbitzariko edukiari buruzko ezarpenak";
 "settings.content.use-instance-settings" = "Erabili zerbitzariko ezarpenak";
 "settings.content.expand-spoilers" = "Erakutsi beti eduki hunkigarria";
 "settings.content.expand-media" = "Multimedia erakusteko hobespenak";
@@ -136,7 +136,7 @@
 "settings.content.reading" = "Irakurtzean";
 "settings.content.posting" = "Bidaltzean";
 "settings.push.duplicate.title" = "Bikoiztutako jakinarazpenen konpontzailea";
-"settings.push.duplicate.footer" = "Jakinarazpen bikoitzak jasotzen al dituzu? Sakatu botoi magikoa arazoa konpontzeko";
+"settings.push.duplicate.footer" = "Jakinarazpenak birritan jasotzen al dituzu? Sakatu botoi magikoa arazoa konpontzeko";
 "settings.push.duplicate.button.fix" = "🪄 Konpondu";
 "settings.other.autoplay-video" = "Abiarazi bideoak automatikoki";
 "settings.display.font" = "Denbora-lerroaren letra tipoa";
@@ -243,14 +243,14 @@
 "account.following" = "Jarraitzen";
 "account.list.create" = "Sortu zerrenda berria";
 "account.list.create.confirm" = "Sortu zerrenda";
-"account.list.create.description" = "Sartu zerrendaren izena";
+"account.list.create.description" = "Idatzi zerrendaren izena";
 "account.list.delete" = "Ezabatu zerrenda";
 "account.list.name" = "Zerrendaren izena";
 "account.post.pinned" = "Finkatutako bidalketa";
 "account.posts" = "Bidalketa";
 "account.relation.follows-you" = "Jarraitzen dizu";
-"account.joined" = "Bat egin zuen";
-"account.action.logout" = "Itxi kontuko saioa";
+"account.joined" = "Batze-data:";
+"account.action.logout" = "Amaitu saioa";
 "account.action.edit-filters" = "Editatu iragazkiak";
 
 // MARK: Package: Conversations
@@ -312,13 +312,13 @@
 "notifications.label.follow %lld" = "(e)k jarraitu dizu";
 "notifications.label.mention %lld" = "(e)k aipatu zaitu";
 "notifications.label.reblog %lld" = "(e)k bultzada eman dio";
-"notifications.label.poll" = "bozketa amaitu da";
+"notifications.label.poll" = "Bozketa amaitu da";
 "notifications.label.follow-request" = "(e)k jarraitzeko eskaera egin dizu";
 "notifications.label.status" = "(e)k bidalketa egin du";
 "notifications.label.update" = "(e)k bidalketa editatu du";
 "notifications.menu-title.favorite" = "Gogokoak";
 "notifications.menu-title.follow" = "Jarraipenak";
-"notifications.menu-title.follow-request" = "Jarraipen eskaerak";
+"notifications.menu-title.follow-request" = "Jarraipen-eskaerak";
 "notifications.menu-title.mention" = "Aipamenak";
 "notifications.menu-title.poll" = "Bozketak";
 "notifications.menu-title.reblog" = "Bultzadak";
@@ -338,7 +338,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Itzuli";
-"status.action.translate-from-%@" = "Egin %@(a)ren itzulpena";
+"status.action.translate-from-%@" = "Itzuli %@(e)tik";
 "status.action.translated-label-%@" = "%@ erabiliz itzulia";
 "status.action.bookmark" = "Jarri laster-marka";
 "status.action.boost" = "Bultzatu";
@@ -351,7 +351,7 @@
 "status.action.mention" = "Aipatu";
 "status.action.message" = "Bidali mezua";
 "status.action.pin" = "Finkatu";
-"status.action.post" = "Bidali";
+"status.action.post" = "Argitaratu";
 "status.action.quote" = "Aipatu bidalketa";
 "status.action.reply" = "Erantzun";
 "status.action.section.your-post" = "Zure bidalketa";
@@ -371,7 +371,7 @@
 "status.editor.description.add" = "Gehitu deskribapena";
 "status.editor.description.edit" = "Editatu deskribapena";
 "status.editor.drafts.navigation-title" = "Zirriborroak";
-"status.editor.emojis.navigation-title" = "Custom Emojis";
+"status.editor.emojis.navigation-title" = "Zerbitzariko emojiak";
 "status.editor.error.upload" = "Errorea igotzerakoan";
 "status.editor.language-select.navigation-title" = "Hautatu hizkuntza";
 "status.editor.language-select.recently-used" = "Duela gutxi erabilitakoak";
@@ -403,14 +403,14 @@
 "status.poll.duration" = "Bozketaren iraupena";
 "status.poll.frequency" = "Bozketaren maiztasuna";
 "status.poll.option-n %lld" = "%lld. aukera";
-"status.poll.send" = "Bidali";
+"status.poll.send" = "Eman botoa";
 "status.post-from-%@" = "%@(r)en bidalketa";
 "status.row.was-boosted" = "(e)k bultzatua";
 "status.row.was-reply" = "Honi erantzunez:";
 "status.row.you-boosted" = "Zuk bultzatua";
 "status.show-less" = "Ikusi gutxiago";
 "status.show-more" = "Ikusi gehiago";
-"status.summary.at-time" = " • ";
+"status.summary.at-time" = " · ";
 "status.summary.edited-time" = "Azkenekoz editatua: ";
 "status.summary.n-boosts %lld" = "%lld bultzada";
 "status.summary.n-favorites %lld" = "%lld(e)k gogoko";
