@@ -1,6 +1,11 @@
 import Foundation
+import Models
 
 public struct DeepLClient {
+  public enum DeepLError: Error {
+    case notFound
+  }
+  
   private let endpoint = "https://api.deepl.com/v2/translate"
 
   private var APIKey: String {
@@ -32,7 +37,7 @@ public struct DeepLClient {
 
   public init() {}
 
-  public func request(target: String, source _: String?, text: String) async throws -> String {
+  public func request(target: String, source _: String?, text: String) async throws -> StatusTranslation {
     do {
       var components = URLComponents(string: endpoint)!
       var queryItems: [URLQueryItem] = []
@@ -45,7 +50,12 @@ public struct DeepLClient {
       request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
       let (result, _) = try await URLSession.shared.data(for: request)
       let response = try decoder.decode(Response.self, from: result)
-      return response.translations.first?.text.removingPercentEncoding ?? ""
+      if let translation = response.translations.first {
+        return .init(content: translation.text.removingPercentEncoding ?? "",
+                     detectedSourceLanguage: translation.detectedSourceLanguage,
+                     provider: "DeepL.com")
+      }
+      throw DeepLError.notFound
     } catch {
       throw error
     }

@@ -375,9 +375,9 @@ public struct StatusRowView: View {
     if let translation = viewModel.translation, !viewModel.isLoadingTranslation {
       GroupBox {
         VStack(alignment: .leading, spacing: 4) {
-          Text(translation)
+          Text(translation.content.asSafeMarkdownAttributedString)
             .font(.scaledBody)
-          Text("status.action.translated-label")
+          Text("status.action.translated-label-\(translation.provider)")
             .font(.footnote)
             .foregroundColor(.gray)
         }

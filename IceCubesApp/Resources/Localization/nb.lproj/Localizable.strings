@@ -339,7 +339,7 @@
 // MARK: Package: Status
 "status.action.translate" = "Oversett";
 "status.action.translate-from-%@" = "Oversett fra %@";
-"status.action.translated-label" = "Oversatt ved hjelp av DeepL.com";
+"status.action.translated-label-%@" = "Oversatt ved hjelp av %@";
 "status.action.bookmark" = "Bokmerk";
 "status.action.boost" = "Forsterk";
 "status.action.copy-text" = "Kopier tekst";

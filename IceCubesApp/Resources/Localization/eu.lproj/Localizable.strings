@@ -339,7 +339,7 @@
 // MARK: Package: Status
 "status.action.translate" = "Itzuli";
 "status.action.translate-from-%@" = "Egin %@(a)ren itzulpena";
-"status.action.translated-label" = "DeepL.com erabiliz itzulia";
+"status.action.translated-label-%@" = "%@ erabiliz itzulia";
 "status.action.bookmark" = "Jarri laster-marka";
 "status.action.boost" = "Bultzatu";
 "status.action.copy-text" = "Kopiatu testua";

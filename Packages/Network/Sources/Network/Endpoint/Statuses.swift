@@ -17,6 +17,7 @@ public enum Statuses: Endpoint {
   case bookmark(id: String)
   case unbookmark(id: String)
   case history(id: String)
+  case translate(id: String, lang: String?)
 
   public func path() -> String {
     switch self {
@@ -50,6 +51,8 @@ public enum Statuses: Endpoint {
       return "statuses/\(id)/unbookmark"
     case let .history(id):
       return "statuses/\(id)/history"
+    case let .translate(id, _):
+      return "statuses/\(id)/translate"
     }
   }
 
@@ -59,6 +62,11 @@ public enum Statuses: Endpoint {
       return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
     case let .favoritedBy(_, maxId):
       return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
+    case let .translate(_, lang):
+      if let lang {
+        return [.init(name: "lang", value: lang)]
+      }
+      return nil
     default:
       return nil
     }

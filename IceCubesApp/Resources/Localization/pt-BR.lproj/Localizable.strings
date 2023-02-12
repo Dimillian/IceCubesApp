@@ -339,7 +339,7 @@
 // MARK: Package: Status
 "status.action.translate" = "Traduzir";
 "status.action.translate-from-%@" = "Traduzir do %@";
-"status.action.translated-label" = "Traduzir usando DeepL.com";
+"status.action.translated-label-%@" = "Traduzir usando %@";
 "status.action.bookmark" = "Salvar";
 "status.action.boost" = "Boost";
 "status.action.copy-text" = "Copiar Texto";
