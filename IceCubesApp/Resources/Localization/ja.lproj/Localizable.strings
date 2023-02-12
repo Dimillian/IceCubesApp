@@ -161,14 +161,14 @@
 
 "settings.display.show-ipad-column" = "セカンドカラムを有効にする";
 
-"settings.general.swipeactions" = "スワイプアクション";
-"settings.swipeactions.navigation-title" = "スワイプアクション";
+"settings.general.swipeactions" = "スワイプ操作";
+"settings.swipeactions.navigation-title" = "スワイプ操作";
 "settings.swipeactions.status.action.bookmark" = "ブックマーク";
 "settings.swipeactions.status.action.boost" = "ブースト";
 "settings.swipeactions.status.action.favorite" = "お気に入り";
-"settings.swipeactions.status.action.none" = "何もない";
+"settings.swipeactions.status.action.none" = "未定義";
 "settings.swipeactions.status.action.quote" = "引用";
-"settings.swipeactions.status.action.reply" = "リプライ";
+"settings.swipeactions.status.action.reply" = "返信";
 "settings.swipeactions.status.leading" = "右にスワイプ";
 "settings.swipeactions.status.leading.left" = "左";
 "settings.swipeactions.status.leading.right" = "右";
@@ -338,7 +338,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "翻訳";
-"status.action.translate-from-%@" = "翻訳 %@";
+"status.action.translate-from-%@" = "%@ から翻訳";
 "status.action.translated-label" = "DeepL.comを使用して翻訳";
 "status.action.bookmark" = "ブックマーク";
 "status.action.boost" = "ブースト";
@@ -390,7 +390,7 @@
 "status.error.title" = "エラーが発生しました";
 "status.filter.filtered-by-%@" = "%@ :によりフィルターされました";
 "status.filter.show-anyway" = "とりあえず表示";
-"status.image.alt-text.abbreviation" = "ALT";
+"status.image.alt-text.abbreviation" = "注釈";
 "status.media.content.show" = "内容を表示";
 "status.media.contextmenu.copy" = "イメージのコピー";
 "status.media.contextmenu.save" = "イメージの保存";
