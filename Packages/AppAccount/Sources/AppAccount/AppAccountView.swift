@@ -68,6 +68,7 @@ public struct AppAccountView: View {
       Image(systemName: "chevron.right")
         .foregroundColor(.gray)
     }
+    .contentShape(Rectangle())
     .onTapGesture {
       if appAccounts.currentAccount.id == viewModel.appAccount.id,
          let account = viewModel.account

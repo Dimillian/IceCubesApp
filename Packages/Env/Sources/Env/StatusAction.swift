@@ -4,9 +4,10 @@ public enum StatusAction : String, CaseIterable, Identifiable {
   public var id: String {
     "\(rawValue)"
   }
-  case none, boost, reply, quote, favorite, bookmark
   
-  public var displayName: LocalizedStringKey {
+  case none, reply, boost, favorite, bookmark, quote
+  
+  public func displayName(isReblogged: Bool = false, isFavorited: Bool = false, isBookmarked: Bool = false) -> LocalizedStringKey {
     switch self {
     case .none:
       return "settings.swipeactions.status.action.none"
@@ -15,11 +16,11 @@ public enum StatusAction : String, CaseIterable, Identifiable {
     case .quote:
       return "settings.swipeactions.status.action.quote"
     case .boost:
-      return "settings.swipeactions.status.action.boost"
+      return isReblogged ? "status.action.unboost" : "settings.swipeactions.status.action.boost"
     case .favorite:
-      return "settings.swipeactions.status.action.favorite"
+      return isFavorited ? "status.action.unfavorite" : "settings.swipeactions.status.action.favorite"
     case .bookmark:
-      return "settings.swipeactions.status.action.bookmark"
+      return isBookmarked ? "status.action.unbookmark" : "settings.swipeactions.status.action.bookmark"
     }
   }
     
@@ -37,6 +38,23 @@ public enum StatusAction : String, CaseIterable, Identifiable {
       return isFavorited ? "star.fill" : "star"
     case .bookmark:
       return isBookmarked ? "bookmark.fill" : "bookmark"
+    }
+  }
+  
+  public func color(themeTintColor: Color) -> Color {
+    switch self {
+    case .none:
+      return .gray
+    case .reply:
+      return .gray
+    case .quote:
+      return .gray
+    case .boost:
+      return themeTintColor
+    case .favorite:
+      return .yellow
+    case .bookmark:
+      return .pink
     }
   }
 }

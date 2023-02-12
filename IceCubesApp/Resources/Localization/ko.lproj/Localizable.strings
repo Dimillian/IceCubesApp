@@ -158,23 +158,24 @@
 "settings.haptic.buttons" = "버튼을 누를 때";
 
 "settings.display.show-tab-label" = "하단 탭 바에 제목 표시";
+
 "settings.display.show-ipad-column" = "보조 열 사용";
 
-"settings.general.swipeactions" = "Swipe Actions";
-"settings.swipeactions.navigation-title" = "Swipe Actions";
-"settings.swipeactions.status.action.bookmark" = "Bookmark";
-"settings.swipeactions.status.action.boost" = "Boost";
-"settings.swipeactions.status.action.favorite" = "Favorite";
-"settings.swipeactions.status.action.none" = "None";
-"settings.swipeactions.status.action.quote" = "Quote";
-"settings.swipeactions.status.action.reply" = "Reply";
-"settings.swipeactions.status.leading" = "Swipe right";
-"settings.swipeactions.status.leading.left" = "left";
-"settings.swipeactions.status.leading.right" = "right";
-"settings.swipeactions.status.trailing" = " Swipe left";
-"settings.swipeactions.status.trailing.left" = "left";
-"settings.swipeactions.status.trailing.right" = "right";
-"settings.swipeactions.status" = "Post";
+"settings.general.swipeactions" = "쓸어넘기기 동작 설정";
+"settings.swipeactions.navigation-title" = "쓸어넘기기 동작 설정";
+"settings.swipeactions.status.action.bookmark" = "보관함에 추가";
+"settings.swipeactions.status.action.boost" = "부스트";
+"settings.swipeactions.status.action.favorite" = "좋아요";
+"settings.swipeactions.status.action.none" = "설정 안 함";
+"settings.swipeactions.status.action.quote" = "인용";
+"settings.swipeactions.status.action.reply" = "댓글";
+"settings.swipeactions.status.leading" = "오른쪽으로 쓸어넘길 때";
+"settings.swipeactions.status.leading.left" = "왼쪽 버튼";
+"settings.swipeactions.status.leading.right" = "오른쪽 버튼";
+"settings.swipeactions.status.trailing" = "왼쪽으로 쓸어넘길 때";
+"settings.swipeactions.status.trailing.left" = "왼쪽 버튼";
+"settings.swipeactions.status.trailing.right" = "오른쪽 버튼";
+"settings.swipeactions.status" = "글을";
 
 // MARK: Tabs
 "tab.explore" = "둘러보기";
@@ -340,7 +341,7 @@
 // MARK: Package: Status
 "status.action.translate" = "번역";
 "status.action.translate-from-%@" = "%@에서 번역";
-"status.action.translated-label" = "DeepL.com을 통해 번역됨";
+"status.action.translated-label-%@" = "%@을 통해 번역됨";
 "status.action.bookmark" = "보관함에 추가";
 "status.action.boost" = "부스트";
 "status.action.copy-text" = "복사";
@@ -372,7 +373,7 @@
 "status.editor.description.add" = "설명 추가";
 "status.editor.description.edit" = "설명 편집";
 "status.editor.drafts.navigation-title" = "임시 보관함";
-"status.editor.emojis.navigation-title" = "Custom Emojis";
+"status.editor.emojis.navigation-title" = "커스텀 이모지";
 "status.editor.error.upload" = "전송 오류";
 "status.editor.language-select.navigation-title" = "언어 선택";
 "status.editor.language-select.recently-used" = "최근 사용";

@@ -169,7 +169,7 @@
 "settings.swipeactions.status.leading" = "Swipe right";
 "settings.swipeactions.status.leading.left" = "left";
 "settings.swipeactions.status.leading.right" = "right";
-"settings.swipeactions.status.trailing" = " Swipe left";
+"settings.swipeactions.status.trailing" = "Swipe left";
 "settings.swipeactions.status.trailing.left" = "left";
 "settings.swipeactions.status.trailing.right" = "right";
 "settings.swipeactions.status" = "Post";
@@ -333,7 +333,7 @@
 // MARK: Package: Status
 "status.action.translate" = "Vertaal";
 "status.action.translate-from-%@" = "Vertaal uit het %@";
-"status.action.translated-label" = "Vertaald met behulp van DeepL.com";
+"status.action.translated-label-%@" = "Vertaald met behulp van %@";
 "status.action.bookmark" = "Voeg bladwijzer toe";
 "status.action.boost" = "Boosten";
 "status.action.copy-text" = "Kopieer tekst";

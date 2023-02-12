@@ -161,21 +161,21 @@
 
 "settings.display.show-ipad-column" = "セカンドカラムを有効にする";
 
-"settings.general.swipeactions" = "Swipe Actions";
-"settings.swipeactions.navigation-title" = "Swipe Actions";
-"settings.swipeactions.status.action.bookmark" = "Bookmark";
-"settings.swipeactions.status.action.boost" = "Boost";
-"settings.swipeactions.status.action.favorite" = "Favorite";
-"settings.swipeactions.status.action.none" = "None";
-"settings.swipeactions.status.action.quote" = "Quote";
-"settings.swipeactions.status.action.reply" = "Reply";
-"settings.swipeactions.status.leading" = "Swipe right";
-"settings.swipeactions.status.leading.left" = "left";
-"settings.swipeactions.status.leading.right" = "right";
-"settings.swipeactions.status.trailing" = " Swipe left";
-"settings.swipeactions.status.trailing.left" = "left";
-"settings.swipeactions.status.trailing.right" = "right";
-"settings.swipeactions.status" = "Post";
+"settings.general.swipeactions" = "スワイプ操作";
+"settings.swipeactions.navigation-title" = "スワイプ操作";
+"settings.swipeactions.status.action.bookmark" = "ブックマーク";
+"settings.swipeactions.status.action.boost" = "ブースト";
+"settings.swipeactions.status.action.favorite" = "お気に入り";
+"settings.swipeactions.status.action.none" = "未定義";
+"settings.swipeactions.status.action.quote" = "引用";
+"settings.swipeactions.status.action.reply" = "返信";
+"settings.swipeactions.status.leading" = "右にスワイプ";
+"settings.swipeactions.status.leading.left" = "左";
+"settings.swipeactions.status.leading.right" = "右";
+"settings.swipeactions.status.trailing" = "左にスワイプ";
+"settings.swipeactions.status.trailing.left" = "左";
+"settings.swipeactions.status.trailing.right" = "右";
+"settings.swipeactions.status" = "投稿";
 
 // MARK: Tabs
 "tab.explore" = "エクスプローラー";
@@ -338,8 +338,8 @@
 
 // MARK: Package: Status
 "status.action.translate" = "翻訳";
-"status.action.translate-from-%@" = "翻訳 %@";
-"status.action.translated-label" = "DeepL.comを使用して翻訳";
+"status.action.translate-from-%@" = "%@ から翻訳";
+"status.action.translated-label-%@" = "%@ を使用して翻訳";
 "status.action.bookmark" = "ブックマーク";
 "status.action.boost" = "ブースト";
 "status.action.copy-text" = "テキストをコピー";
@@ -371,7 +371,7 @@
 "status.editor.description.add" = "説明文を追加";
 "status.editor.description.edit" = "説明文を編集";
 "status.editor.drafts.navigation-title" = "下書き";
-"status.editor.emojis.navigation-title" = "Custom Emojis";
+"status.editor.emojis.navigation-title" = "カスタム絵文字";
 "status.editor.error.upload" = "アップロードエラー";
 "status.editor.language-select.navigation-title" = "言語設定";
 "status.editor.language-select.recently-used" = "最近使用した";
@@ -392,7 +392,7 @@
 "status.error.title" = "エラーが発生しました";
 "status.filter.filtered-by-%@" = "%@ :によりフィルターされました";
 "status.filter.show-anyway" = "とりあえず表示";
-"status.image.alt-text.abbreviation" = "ALT";
+"status.image.alt-text.abbreviation" = "注釈";
 "status.media.content.show" = "内容を表示";
 "status.media.contextmenu.copy" = "イメージのコピー";
 "status.media.contextmenu.save" = "イメージの保存";

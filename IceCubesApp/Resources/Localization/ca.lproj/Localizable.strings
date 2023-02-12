@@ -171,7 +171,7 @@
 "settings.swipeactions.status.leading" = "Swipe right";
 "settings.swipeactions.status.leading.left" = "left";
 "settings.swipeactions.status.leading.right" = "right";
-"settings.swipeactions.status.trailing" = " Swipe left";
+"settings.swipeactions.status.trailing" = "Swipe left";
 "settings.swipeactions.status.trailing.left" = "left";
 "settings.swipeactions.status.trailing.right" = "right";
 "settings.swipeactions.status" = "Post";
@@ -338,7 +338,7 @@
 // MARK: Package: Status
 "status.action.translate" = "Tradueix";
 "status.action.translate-from-%@" = "Tradueix del %@";
-"status.action.translated-label" = "Traduït amb DeepL.com";
+"status.action.translated-label-%@" = "Traduït amb %@";
 "status.action.bookmark" = "Afegeix als marcadors";
 "status.action.boost" = "Impulsa";
 "status.action.copy-text" = "Copia el text";

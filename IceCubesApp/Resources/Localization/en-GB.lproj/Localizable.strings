@@ -175,7 +175,7 @@
 "settings.swipeactions.status.leading" = "Swipe right";
 "settings.swipeactions.status.leading.left" = "left";
 "settings.swipeactions.status.leading.right" = "right";
-"settings.swipeactions.status.trailing" = " Swipe left";
+"settings.swipeactions.status.trailing" = "Swipe left";
 "settings.swipeactions.status.trailing.left" = "left";
 "settings.swipeactions.status.trailing.right" = "right";
 "settings.swipeactions.status" = "Post";
@@ -341,7 +341,7 @@
 // MARK: Package: Status
 "status.action.translate" = "Translate";
 "status.action.translate-from-%@" = "Translate from %@";
-"status.action.translated-label" = "Translated using DeepL.com";
+"status.action.translated-label-%@" = "Translated using %@";
 "status.action.bookmark" = "Bookmark";
 "status.action.boost" = "Boost";
 "status.action.copy-text" = "Copy Text";

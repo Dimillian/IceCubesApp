@@ -146,43 +146,28 @@ public struct StatusMediaPreviewView: View {
   @ViewBuilder
   private func makeFeaturedImagePreview(attachment: MediaAttachment) -> some View {
     ZStack(alignment: .bottomTrailing) {
+      let size: CGSize = size(for: attachment) ?? .init(width: imageMaxHeight, height: imageMaxHeight)
+      let newSize = imageSize(from: size,
+                              newWidth: availableWidth - appLayoutWidth)
       switch attachment.supportedType {
       case .image:
-        if let size = size(for: attachment) {
-          let newSize = imageSize(from: size,
-                                  newWidth: availableWidth - appLayoutWidth)
-
-          LazyImage(url: attachment.url) { state in
-            if let image = state.image {
-              image
-                .resizingMode(.aspectFill)
-                .cornerRadius(4)
-                .frame(width: newSize.width, height: newSize.height)
-            } else {
-              RoundedRectangle(cornerRadius: 4)
-                .fill(Color.gray)
-                .frame(width: newSize.width, height: newSize.height)
-            }
-          }
-        } else {
-          LazyImage(url: attachment.url) { state in
-            if let image = state.image {
-              image
-                .resizingMode(.aspectFit)
-                .frame(maxHeight: imageMaxHeight)
-                .cornerRadius(4)
-            } else {
-              RoundedRectangle(cornerRadius: 4)
-                .fill(Color.gray)
-                .frame(maxHeight: imageMaxHeight)
-            }
+        LazyImage(url: attachment.url) { state in
+          if let image = state.image {
+            image
+              .resizingMode(.aspectFill)
+              .cornerRadius(4)
+              .frame(width: newSize.width, height: newSize.height)
+          } else {
+            RoundedRectangle(cornerRadius: 4)
+              .fill(Color.gray)
+              .frame(width: newSize.width, height: newSize.height)
           }
         }
+        
       case .gifv, .video, .audio:
         if let url = attachment.url {
           VideoPlayerView(viewModel: .init(url: url))
-            .frame(maxWidth: isNotifications ? imageMaxHeight : nil)
-            .frame(height: imageMaxHeight)
+            .frame(width: newSize.width, height: newSize.height)
         }
       case .none:
         EmptyView()

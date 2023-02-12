@@ -158,21 +158,21 @@
 
 "settings.display.show-ipad-column" = "Gaitu bigarren zutabea";
 
-"settings.general.swipeactions" = "Swipe Actions";
-"settings.swipeactions.navigation-title" = "Swipe Actions";
-"settings.swipeactions.status.action.bookmark" = "Bookmark";
-"settings.swipeactions.status.action.boost" = "Boost";
-"settings.swipeactions.status.action.favorite" = "Favorite";
-"settings.swipeactions.status.action.none" = "None";
-"settings.swipeactions.status.action.quote" = "Quote";
-"settings.swipeactions.status.action.reply" = "Reply";
-"settings.swipeactions.status.leading" = "Swipe right";
-"settings.swipeactions.status.leading.left" = "left";
-"settings.swipeactions.status.leading.right" = "right";
-"settings.swipeactions.status.trailing" = " Swipe left";
-"settings.swipeactions.status.trailing.left" = "left";
-"settings.swipeactions.status.trailing.right" = "right";
-"settings.swipeactions.status" = "Post";
+"settings.general.swipeactions" = "Atzamar-mugimenduen ekintzak";
+"settings.swipeactions.navigation-title" = "Atzamar-mugimenduen ekintzak";
+"settings.swipeactions.status.action.bookmark" = "Jarri laster-marka";
+"settings.swipeactions.status.action.boost" = "Bultzatu";
+"settings.swipeactions.status.action.favorite" = "Egin gogoko";
+"settings.swipeactions.status.action.none" = "Bat ere ez";
+"settings.swipeactions.status.action.quote" = "Aipatu bidalketa";
+"settings.swipeactions.status.action.reply" = "Erantzun";
+"settings.swipeactions.status.leading" = "Eskumarantz";
+"settings.swipeactions.status.leading.left" = "ezker";
+"settings.swipeactions.status.leading.right" = "eskuma";
+"settings.swipeactions.status.trailing" = "Ezkerrerantz";
+"settings.swipeactions.status.trailing.left" = "ezker";
+"settings.swipeactions.status.trailing.right" = "eskuma";
+"settings.swipeactions.status" = "Argitaratu";
 
 "enum.expand-media.show" = "Erakutsi guztia";
 "enum.expand-media.hide" = "Ezkutatu guztia";
@@ -339,7 +339,7 @@
 // MARK: Package: Status
 "status.action.translate" = "Itzuli";
 "status.action.translate-from-%@" = "Egin %@(a)ren itzulpena";
-"status.action.translated-label" = "DeepL.com erabiliz itzulia";
+"status.action.translated-label-%@" = "%@ erabiliz itzulia";
 "status.action.bookmark" = "Jarri laster-marka";
 "status.action.boost" = "Bultzatu";
 "status.action.copy-text" = "Kopiatu testua";

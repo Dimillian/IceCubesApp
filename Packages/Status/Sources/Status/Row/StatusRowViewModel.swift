@@ -27,7 +27,7 @@ public class StatusRowViewModel: ObservableObject {
   @Published var isFiltered: Bool = false
   @Published var isLoadingRemoteContent: Bool = false
 
-  @Published var translation: String?
+  @Published var translation: StatusTranslation?
   @Published var isLoadingTranslation: Bool = false
   @Published var showDeleteAlert: Bool = false
 
@@ -297,22 +297,32 @@ public class StatusRowViewModel: ObservableObject {
     }
     
   func translate(userLang: String) async {
-      await translate(userLang: userLang, sourceLang: getStatusLang())
+    await translate(userLang: userLang, sourceLang: getStatusLang())
   }
     
-    private func translate(userLang: String, sourceLang: String?) async {
-     let client = DeepLClient()
+  private func translate(userLang: String, sourceLang: String?) async {
+    guard let client else { return }
     do {
       withAnimation {
         isLoadingTranslation = true
       }
-      let translation = try await client.request(target: userLang,
-                                                 source: sourceLang,
-                                                 text: status.reblog?.content.asRawText ?? status.content.asRawText)
+      // We first use instance translation API if available.
+      let translation: StatusTranslation = try await client.post(endpoint: Statuses.translate(id: status.reblog?.id ?? status.id,
+                                                                                              lang: userLang))
       withAnimation {
         self.translation = translation
         isLoadingTranslation = false
       }
-    } catch {}
+    } catch {
+      // If not or fail we use Ice Cubes own DeepL client.
+      let deepLClient = DeepLClient()
+      let translation = try? await deepLClient.request(target: userLang,
+                                                       source: status.language,
+                                                       text: status.reblog?.content.asRawText ?? status.content.asRawText)
+      withAnimation {
+        self.translation = translation
+        isLoadingTranslation = false
+      }
     }
+  }
 }
