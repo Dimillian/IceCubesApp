@@ -341,7 +341,7 @@
 // MARK: Package: Status
 "status.action.translate" = "번역";
 "status.action.translate-from-%@" = "%@에서 번역";
-"status.action.translated-label-%@" = "%@을 통해 번역됨";
+"status.action.translated-label-%@" = "번역 제공: $@";
 "status.action.bookmark" = "보관함에 추가";
 "status.action.boost" = "부스트";
 "status.action.copy-text" = "복사";
