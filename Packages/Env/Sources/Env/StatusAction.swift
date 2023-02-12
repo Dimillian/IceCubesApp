@@ -40,4 +40,21 @@ public enum StatusAction : String, CaseIterable, Identifiable {
       return isBookmarked ? "bookmark.fill" : "bookmark"
     }
   }
+  
+  public func color(themeTintColor: Color) -> Color {
+    switch self {
+    case .none:
+      return .gray
+    case .reply:
+      return .gray
+    case .quote:
+      return .gray
+    case .boost:
+      return themeTintColor
+    case .favorite:
+      return .yellow
+    case .bookmark:
+      return .pink
+    }
+  }
 }

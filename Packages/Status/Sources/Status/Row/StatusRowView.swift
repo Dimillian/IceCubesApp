@@ -455,17 +455,9 @@ public struct StatusRowView: View {
   private var trailingSwipeActions: some View {
     if preferences.swipeActionsStatusTrailingRight != StatusAction.none {
       makeSwipeButton(action: preferences.swipeActionsStatusTrailingRight)
-        .tint(
-          preferences.swipeActionsStatusTrailingRight == .boost ? theme.tintColor :
-            preferences.swipeActionsStatusTrailingRight == .favorite ? .yellow : preferences.swipeActionsStatusTrailingRight == .bookmark ? .pink : .gray
-        )
     }
     if preferences.swipeActionsStatusTrailingLeft != StatusAction.none {
       makeSwipeButton(action: preferences.swipeActionsStatusTrailingLeft)
-        .tint(
-          preferences.swipeActionsStatusTrailingLeft == .boost ? theme.tintColor :
-            preferences.swipeActionsStatusTrailingLeft == .favorite ? .yellow : preferences.swipeActionsStatusTrailingLeft == .bookmark ? .pink : .gray
-        )
     }
   }
 
@@ -473,17 +465,9 @@ public struct StatusRowView: View {
   private var leadingSwipeActions: some View {
     if preferences.swipeActionsStatusLeadingLeft != StatusAction.none {
       makeSwipeButton(action: preferences.swipeActionsStatusLeadingLeft)
-        .tint(
-          preferences.swipeActionsStatusLeadingLeft == .boost ? theme.tintColor :
-            preferences.swipeActionsStatusLeadingLeft == .favorite ? .yellow : preferences.swipeActionsStatusLeadingLeft == .bookmark ? .pink : .gray
-        )
     }
     if preferences.swipeActionsStatusLeadingRight != StatusAction.none {
       makeSwipeButton(action: preferences.swipeActionsStatusLeadingRight)
-        .tint(
-          preferences.swipeActionsStatusLeadingRight == .boost ? theme.tintColor :
-            preferences.swipeActionsStatusLeadingRight == .favorite ? .yellow : preferences.swipeActionsStatusLeadingRight == .bookmark ? .pink : .gray
-        )
     }
   }
   
@@ -534,6 +518,7 @@ public struct StatusRowView: View {
       Image(systemName: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
         .environment(\.symbolVariants, .none)
     }
+    .tint(action.color(themeTintColor: theme.tintColor))
   }
   
   @ViewBuilder
@@ -548,5 +533,6 @@ public struct StatusRowView: View {
       Image(systemName: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
         .environment(\.symbolVariants, .none)
     }
+    .tint(action.color(themeTintColor: theme.tintColor))
   }
 }
