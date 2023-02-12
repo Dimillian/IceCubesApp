@@ -142,16 +142,17 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
     selectedLanguage = selectedLanguage ?? preference ?? currentAccount?.source?.language
   }
 
-    func evaluateLanguages(){
-        if let detectedLang = detectLanguage(text: statusText.string),
-           let selectedLanguage = selectedLanguage,
-           selectedLanguage != detectedLang {
-            languageConfirmationDialogLanguages = ["detected": detectedLang,
-                                                   "selected": selectedLanguage]
-        } else {
-            languageConfirmationDialogLanguages = nil;
-        }
+  func evaluateLanguages() {
+    if let detectedLang = detectLanguage(text: statusText.string),
+       let selectedLanguage = selectedLanguage,
+       selectedLanguage != detectedLang
+    {
+      languageConfirmationDialogLanguages = ["detected": detectedLang,
+                                             "selected": selectedLanguage]
+    } else {
+      languageConfirmationDialogLanguages = nil
     }
+  }
 
   func postStatus() async -> Status? {
     guard let client else { return nil }

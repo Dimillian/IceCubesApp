@@ -83,7 +83,8 @@ struct StatusRowContextMenu: View {
         }
       } label: {
         if let statusLang = viewModel.getStatusLang(),
-           let languageName = Locale.current.localizedString(forLanguageCode: statusLang) {
+           let languageName = Locale.current.localizedString(forLanguageCode: statusLang)
+        {
           Label("status.action.translate-from-\(languageName)", systemImage: "captions.bubble")
         } else {
           Label("status.action.translate", systemImage: "captions.bubble")
