@@ -455,11 +455,9 @@ public struct StatusRowView: View {
   private var trailingSwipeActions: some View {
     if preferences.swipeActionsStatusTrailingRight != StatusAction.none {
       makeSwipeButton(action: preferences.swipeActionsStatusTrailingRight)
-        .tint(theme.tintColor)
     }
     if preferences.swipeActionsStatusTrailingLeft != StatusAction.none {
       makeSwipeButton(action: preferences.swipeActionsStatusTrailingLeft)
-        .tint(.gray)
     }
   }
 
@@ -467,11 +465,9 @@ public struct StatusRowView: View {
   private var leadingSwipeActions: some View {
     if preferences.swipeActionsStatusLeadingLeft != StatusAction.none {
       makeSwipeButton(action: preferences.swipeActionsStatusLeadingLeft)
-        .tint(theme.tintColor)
     }
     if preferences.swipeActionsStatusLeadingRight != StatusAction.none {
       makeSwipeButton(action: preferences.swipeActionsStatusLeadingRight)
-        .tint(.gray)
     }
   }
   
@@ -518,10 +514,11 @@ public struct StatusRowView: View {
       HapticManager.shared.fireHaptic(of: .notification(.success))
       routerPath.presentedSheet = destination
     } label: {
-      Text(action.displayName)
+      Text(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
       Image(systemName: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
-        .foregroundColor(.red)
+        .environment(\.symbolVariants, .none)
     }
+    .tint(action.color(themeTintColor: theme.tintColor))
   }
   
   @ViewBuilder
@@ -532,8 +529,10 @@ public struct StatusRowView: View {
         await task()
       }
     } label: {
-      Text(action.displayName)
+      Text(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
       Image(systemName: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
+        .environment(\.symbolVariants, .none)
     }
+    .tint(action.color(themeTintColor: theme.tintColor))
   }
 }

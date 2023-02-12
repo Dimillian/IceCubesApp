@@ -9,17 +9,29 @@ public class CurrentInstance: ObservableObject {
   private var client: Client?
 
   public static let shared = CurrentInstance()
+  
+  private var version: Float {
+    if let stringVersion = instance?.version {
+      if stringVersion.utf8.count > 2 {
+        return Float(stringVersion.prefix(3)) ?? 0
+      } else {
+        return Float(stringVersion.prefix(1)) ?? 0
+      }
+    }
+    return 0
+  }
+  
 
   public var isFiltersSupported: Bool {
-    instance?.version.hasPrefix("4") == true
+    version >= 4
   }
 
   public var isEditSupported: Bool {
-    instance?.version.hasPrefix("4") == true
+    version >= 4
   }
     
   public var isEditAltTextSupported: Bool {
-    instance?.version.hasPrefix("4.1") == true
+    version >= 4.1
   }
 
   private init() {}
