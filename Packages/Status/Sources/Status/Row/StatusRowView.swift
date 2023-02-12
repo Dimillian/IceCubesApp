@@ -349,7 +349,7 @@ public struct StatusRowView: View {
         if let userLang = preferences.serverPreferences?.postLanguage,
            preferences.showTranslateButton,
            !status.content.asRawText.isEmpty,
-           viewModel.translation?.isEmpty ?? true
+           viewModel.translation == nil
         {
             return userLang != statusLang
         } else {

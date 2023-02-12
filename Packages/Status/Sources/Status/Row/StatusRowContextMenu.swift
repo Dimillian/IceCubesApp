@@ -75,8 +75,7 @@ struct StatusRowContextMenu: View {
       Label("status.action.copy-text", systemImage: "doc.on.doc")
     }
 
-    if let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier,
-       viewModel.getStatusLang() != lang
+    if let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier
     {
       Button {
         Task {
