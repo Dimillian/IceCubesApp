@@ -67,9 +67,6 @@ public struct AccountDetailView: View {
         case .statuses:
           if viewModel.selectedTab == .statuses {
             pinnedPostsView
-              .listRowInsets(.init())
-              .listRowSeparator(.hidden)
-              .listRowBackground(theme.primaryBackgroundColor)
           }
           StatusesListView(fetcher: viewModel)
         case .followedTags:
@@ -78,6 +75,7 @@ public struct AccountDetailView: View {
           listsListView
         }
       }
+      .environment(\.defaultMinListRowHeight, 1)
       .listStyle(.plain)
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
@@ -327,19 +325,24 @@ public struct AccountDetailView: View {
   @ViewBuilder
   private var pinnedPostsView: some View {
     if !viewModel.pinned.isEmpty {
+      Label("account.post.pinned", systemImage: "pin.fill")
+        .font(.scaledFootnote)
+        .foregroundColor(.gray)
+        .fontWeight(.semibold)
+        .listRowInsets(.init(top: 0,
+                             leading: 12,
+                             bottom: 0,
+                             trailing: .layoutPadding))
+        .listRowSeparator(.hidden)
+        .listRowBackground(theme.primaryBackgroundColor)
       ForEach(viewModel.pinned) { status in
-        VStack(alignment: .leading) {
-          Label("account.post.pinned", systemImage: "pin.fill")
-            .font(.scaledFootnote)
-            .foregroundColor(.gray)
-            .fontWeight(.semibold)
-          StatusRowView(viewModel: .init(status: status))
-        }
-        .padding(.horizontal, .layoutPadding)
-        Rectangle()
-          .frame(height: 12)
-          .foregroundColor(theme.secondaryBackgroundColor)
+        StatusRowView(viewModel: .init(status: status))
       }
+      Rectangle()
+        .fill(theme.secondaryBackgroundColor)
+        .frame(height: 12)
+        .listRowInsets(.init())
+        .listRowSeparator(.hidden)
     }
   }
 
