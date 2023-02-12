@@ -3,9 +3,9 @@ import AppAccount
 import DesignSystem
 import Env
 import Models
+import Network
 import SwiftUI
 import Timeline
-import Network
 
 struct AccountSettingsView: View {
   @Environment(\.dismiss) private var dismiss

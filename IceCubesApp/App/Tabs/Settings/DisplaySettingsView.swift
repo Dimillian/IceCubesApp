@@ -38,12 +38,12 @@ struct DisplaySettingsView: View {
         }
       }
       .listRowBackground(theme.primaryBackgroundColor)
-      
+
       Section("settings.display.section.display") {
         Picker("settings.display.font", selection: .init(get: { () -> FontState in
           if userPreferences.chosenFont?.fontName == "OpenDyslexic-Regular" {
             return FontState.openDyslexic
-          } else if  userPreferences.chosenFont?.fontName == "AtkinsonHyperlegible-Regular" {
+          } else if userPreferences.chosenFont?.fontName == "AtkinsonHyperlegible-Regular" {
             return FontState.hyperLegible
           }
           return userPreferences.chosenFontData != nil ? FontState.custom : FontState.system
@@ -79,7 +79,7 @@ struct DisplaySettingsView: View {
             Text(buttonStyle.description).tag(buttonStyle)
           }
         }
-        
+
         Picker("settings.display.status.media-style", selection: $theme.statusDisplayStyle) {
           ForEach(Theme.StatusDisplayStyle.allCases, id: \.rawValue) { buttonStyle in
             Text(buttonStyle.description).tag(buttonStyle)

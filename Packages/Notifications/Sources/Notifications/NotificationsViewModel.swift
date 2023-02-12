@@ -15,7 +15,7 @@ class NotificationsViewModel: ObservableObject {
     case display(notifications: [ConsolidatedNotification], nextPageState: State.PagingState)
     case error(error: Error)
   }
-  
+
   enum Constants {
     static let notificationLimit: Int = 30
   }
@@ -32,6 +32,7 @@ class NotificationsViewModel: ObservableObject {
       }
     }
   }
+
   var currentAccount: CurrentAccount?
 
   @Published var state: State = .loading
@@ -92,7 +93,7 @@ class NotificationsViewModel: ObservableObject {
       state = .error(error: error)
     }
   }
-  
+
   private func fetchNewPages(minId: String, maxPages: Int) async -> [Models.Notification] {
     guard let client else { return [] }
     var pagesLoaded = 0
@@ -100,10 +101,10 @@ class NotificationsViewModel: ObservableObject {
     var latestMinId = minId
     do {
       while let newNotifications: [Models.Notification] =
-              try await client.get(endpoint: Notifications.notifications(minId: latestMinId,
-                                                                         maxId: nil,
-                                                                         types: queryTypes,
-                                                                         limit: Constants.notificationLimit)),
+        try await client.get(endpoint: Notifications.notifications(minId: latestMinId,
+                                                                   maxId: nil,
+                                                                   types: queryTypes,
+                                                                   limit: Constants.notificationLimit)),
         !newNotifications.isEmpty,
         pagesLoaded < maxPages
       {

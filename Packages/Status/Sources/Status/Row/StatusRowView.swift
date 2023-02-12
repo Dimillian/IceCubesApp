@@ -118,19 +118,21 @@ public struct StatusRowView: View {
           title: Text("status.action.delete.confirm.title"),
           message: Text("status.action.delete.confirm.message"),
           primaryButton: .destructive(
-            Text("status.action.delete")) {
-              Task {
-                await viewModel.delete()
-              }
-            },
-          secondaryButton: .cancel())
+            Text("status.action.delete"))
+          {
+            Task {
+              await viewModel.delete()
+            }
+          },
+          secondaryButton: .cancel()
+        )
       })
       .alignmentGuide(.listRowSeparatorLeading) { _ in
         -100
       }
     }
   }
-  
+
   @ViewBuilder
   private var accesibilityActions: some View {
     // Add the individual mentions as accessibility actions
@@ -139,17 +141,17 @@ public struct StatusRowView: View {
         routerPath.navigate(to: .accountDetail(id: mention.id))
       }
     }
-    
+
     Button(viewModel.displaySpoiler ? "status.show-more" : "status.show-less") {
       withAnimation {
         viewModel.displaySpoiler.toggle()
       }
     }
-    
+
     Button("@\(viewModel.status.account.username)") {
       routerPath.navigate(to: .accountDetail(id: viewModel.status.account.id))
     }
-    
+
     contextMenu
   }
 
@@ -329,7 +331,7 @@ public struct StatusRowView: View {
         .foregroundColor(.gray)
     }
   }
-  
+
   private var contextMenuButton: some View {
     Menu {
       contextMenu
@@ -480,7 +482,7 @@ public struct StatusRowView: View {
       makeSwipeButton(action: preferences.swipeActionsStatusLeadingRight)
     }
   }
-  
+
   @ViewBuilder
   private func makeSwipeButton(action: StatusAction) -> some View {
     switch action {
@@ -510,14 +512,14 @@ public struct StatusRowView: View {
           await viewModel.unbookmark()
         } else {
           await
-          viewModel.bookmark()
+            viewModel.bookmark()
         }
       }
     case .none:
       EmptyView()
     }
   }
-  
+
   @ViewBuilder
   private func makeSwipeButtonForRouterPath(action: StatusAction, destination: SheetDestinations) -> some View {
     Button {
@@ -530,9 +532,9 @@ public struct StatusRowView: View {
     }
     .tint(action.color(themeTintColor: theme.tintColor))
   }
-  
+
   @ViewBuilder
-  private func makeSwipeButtonForTask(action: StatusAction, task: @escaping () async -> Void ) -> some View {
+  private func makeSwipeButtonForTask(action: StatusAction, task: @escaping () async -> Void) -> some View {
     Button {
       Task {
         HapticManager.shared.fireHaptic(of: .notification(.success))

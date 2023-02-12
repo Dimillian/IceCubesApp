@@ -35,7 +35,7 @@ public class StatusRowViewModel: ObservableObject {
   @Published var rebloggers: [Account] = []
 
   private let theme = Theme.shared
-  
+
   var seen = false
 
   var filter: Filtered? {
@@ -43,7 +43,6 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   var highlightRowColor: Color {
-
     if status.visibility == .direct {
       return theme.tintColor.opacity(0.15)
     } else if status.userMentioned != nil {
@@ -266,13 +265,13 @@ public class StatusRowViewModel: ObservableObject {
       _ = try await client.delete(endpoint: Statuses.status(id: status.id))
     } catch {}
   }
-  
+
   func fetchActionsAccounts() async {
     guard let client else { return }
     do {
       favoriters = try await client.get(endpoint: Statuses.favoritedBy(id: status.id, maxId: nil))
       rebloggers = try await client.get(endpoint: Statuses.rebloggedBy(id: status.id, maxId: nil))
-    } catch { }
+    } catch {}
   }
 
   private func updateFromStatus(status: Status) {

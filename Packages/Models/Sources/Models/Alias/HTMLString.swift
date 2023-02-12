@@ -2,7 +2,7 @@ import Foundation
 import SwiftSoup
 import SwiftUI
 
-fileprivate enum CodingKeys: CodingKey {
+private enum CodingKeys: CodingKey {
   case htmlValue, asMarkdown, asRawText, statusesURLs
 }
 
@@ -11,12 +11,12 @@ public struct HTMLString: Codable, Equatable, Hashable {
   public var asMarkdown: String = ""
   public var asRawText: String = ""
   public var statusesURLs = [URL]()
-  
+
   public var asSafeMarkdownAttributedString: AttributedString = .init()
   private var main_regex: NSRegularExpression?
   private var underscore_regex: NSRegularExpression?
   public init(from decoder: Decoder) {
-    var alreadyDecoded: Bool = false
+    var alreadyDecoded = false
     do {
       let container = try decoder.singleValueContainer()
       htmlValue = try container.decode(String.self)
@@ -67,7 +67,7 @@ public struct HTMLString: Codable, Equatable, Hashable {
         asRawText = htmlValue
       }
     }
-    
+
     do {
       let options = AttributedString.MarkdownParsingOptions(allowsExtendedAttributes: true,
                                                             interpretedSyntax: .inlineOnlyPreservingWhitespace)
@@ -77,12 +77,12 @@ public struct HTMLString: Codable, Equatable, Hashable {
     }
   }
 
-  public init(stringValue: String, parseMarkdown:Bool = false) {
+  public init(stringValue: String, parseMarkdown: Bool = false) {
     htmlValue = stringValue
     asMarkdown = stringValue
     asRawText = stringValue
     statusesURLs = []
-    
+
     if parseMarkdown {
       do {
         let options = AttributedString.MarkdownParsingOptions(allowsExtendedAttributes: true,
@@ -91,8 +91,7 @@ public struct HTMLString: Codable, Equatable, Hashable {
       } catch {
         asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
       }
-    }
-    else {
+    } else {
       asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
     }
   }

@@ -5,7 +5,7 @@ import SwiftUI
 struct SwipeActionsSettingsView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var userPreferences: UserPreferences
-  
+
   var body: some View {
     Form {
       Section("settings.swipeactions.status") {
@@ -16,7 +16,7 @@ struct SwipeActionsSettingsView: View {
           }
           Section {
             ForEach(StatusAction.allCases) { action in
-              if (action != .none) {
+              if action != .none {
                 Label(action.displayName(), systemImage: action.iconName()).tag(action)
               }
             }
@@ -28,20 +28,20 @@ struct SwipeActionsSettingsView: View {
           }
           Section {
             ForEach(StatusAction.allCases) { action in
-              if (action != .none) {
+              if action != .none {
                 Label(action.displayName(), systemImage: action.iconName()).tag(action)
               }
             }
           }
         }
         Label("settings.swipeactions.status.trailing", systemImage: "arrow.left.circle")
-        Picker(selection: $userPreferences.swipeActionsStatusTrailingLeft, label: makeSwipeLabel(left: true, text: "settings.swipeactions.status.trailing.left"))  {
+        Picker(selection: $userPreferences.swipeActionsStatusTrailingLeft, label: makeSwipeLabel(left: true, text: "settings.swipeactions.status.trailing.left")) {
           Section {
             Label(StatusAction.none.displayName(), systemImage: StatusAction.none.iconName()).tag(StatusAction.none)
           }
           Section {
             ForEach(StatusAction.allCases) { action in
-              if (action != .none) {
+              if action != .none {
                 Label(action.displayName(), systemImage: action.iconName()).tag(action)
               }
             }
@@ -53,7 +53,7 @@ struct SwipeActionsSettingsView: View {
           }
           Section {
             ForEach(StatusAction.allCases) { action in
-              if (action != .none) {
+              if action != .none {
                 Label(action.displayName(), systemImage: action.iconName()).tag(action)
               }
             }
@@ -66,9 +66,9 @@ struct SwipeActionsSettingsView: View {
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
   }
-  
+
   private func makeSwipeLabel(left: Bool, text: LocalizedStringKey) -> some View {
     return Label(text, systemImage: left ? "rectangle.lefthalf.filled" : "rectangle.righthalf.filled")
-           .padding(.leading, 16)
+      .padding(.leading, 16)
   }
 }

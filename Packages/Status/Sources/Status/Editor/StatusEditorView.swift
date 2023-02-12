@@ -38,11 +38,11 @@ public struct StatusEditorView: View {
               .padding(.horizontal, .layoutPadding)
             TextView($viewModel.statusText,
                      getTextView: { textView in
-                viewModel.textView = textView
-              })
-              .placeholder(String(localized: "status.editor.text.placeholder"))
-              .setKeyboardType(preferences.isSocialKeyboardEnabled ? .twitter : .default)
-              .padding(.horizontal, .layoutPadding)
+                       viewModel.textView = textView
+                     })
+                     .placeholder(String(localized: "status.editor.text.placeholder"))
+                     .setKeyboardType(preferences.isSocialKeyboardEnabled ? .twitter : .default)
+                     .padding(.horizontal, .layoutPadding)
             StatusEditorMediaView(viewModel: viewModel)
             if let status = viewModel.embeddedStatus {
               StatusEmbeddedView(status: status)

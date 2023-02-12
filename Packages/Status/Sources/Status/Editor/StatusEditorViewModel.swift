@@ -21,7 +21,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
       textView?.pasteDelegate = self
     }
   }
-  
+
   var selectedRange: NSRange {
     get {
       guard let textView else {
@@ -33,16 +33,14 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
       textView?.selectedRange = newValue
     }
   }
-  
+
   var markedTextRange: UITextRange? {
-    get {
-      guard let textView else {
-        return nil
-      }
-      return textView.markedTextRange
+    guard let textView else {
+      return nil
     }
+    return textView.markedTextRange
   }
-  
+
   @Published var statusText = NSMutableAttributedString(string: "") {
     didSet {
       let range = selectedRange
@@ -370,7 +368,8 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
                                         mediaAttachment: nil,
                                         error: nil))
             } else if var content = content as? ImageFileTranseferable,
-                      let image = content.image {
+                      let image = content.image
+            {
               mediasImages.append(.init(image: image,
                                         movieTransferable: nil,
                                         gifTransferable: nil,
@@ -505,7 +504,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
       for media in selectedMedias {
         print(media.supportedContentTypes)
         var file: (any Transferable)?
-        
+
         if file == nil {
           file = try? await media.loadTransferable(type: GifFileTranseferable.self)
         }
@@ -680,6 +679,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
   }
 
   // MARK: - Custom emojis
+
   func fetchCustomEmojis() async {
     guard let client else { return }
     do {
@@ -688,7 +688,8 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
   }
 }
 
-//MARK: - DropDelegate
+// MARK: - DropDelegate
+
 extension StatusEditorViewModel: DropDelegate {
   public func performDrop(info: DropInfo) -> Bool {
     let item = info.itemProviders(for: StatusEditorUTTypeSupported.types())
@@ -698,17 +699,20 @@ extension StatusEditorViewModel: DropDelegate {
 }
 
 // MARK: - UITextPasteDelegate
+
 extension StatusEditorViewModel: UITextPasteDelegate {
   public func textPasteConfigurationSupporting(
-    _ textPasteConfigurationSupporting: UITextPasteConfigurationSupporting,
-    transform item: UITextPasteItem) {
-      if !item.itemProvider.registeredContentTypes(conformingTo: .image).isEmpty ||
-         !item.itemProvider.registeredContentTypes(conformingTo: .video).isEmpty ||
-         !item.itemProvider.registeredContentTypes(conformingTo: .gif).isEmpty {
-        processItemsProvider(items: [item.itemProvider])
-        item.setNoResult()
-      } else {
-        item.setDefaultResult()
-      }
+    _: UITextPasteConfigurationSupporting,
+    transform item: UITextPasteItem
+  ) {
+    if !item.itemProvider.registeredContentTypes(conformingTo: .image).isEmpty ||
+      !item.itemProvider.registeredContentTypes(conformingTo: .video).isEmpty ||
+      !item.itemProvider.registeredContentTypes(conformingTo: .gif).isEmpty
+    {
+      processItemsProvider(items: [item.itemProvider])
+      item.setNoResult()
+    } else {
+      item.setDefaultResult()
     }
+  }
 }

@@ -34,7 +34,7 @@ class TimelineViewModel: ObservableObject {
       }
     }
   }
-  
+
   private var timelineTask: Task<Void, Never>?
 
   @Published var tag: Tag?
@@ -170,7 +170,7 @@ extension TimelineViewModel: StatusesFetcher {
   // Hydrate statuses in the Timeline when statuses are empty.
   private func fetchFirstPage(client: Client) async throws {
     pendingStatusesObserver.pendingStatuses = []
-    
+
     if statuses.isEmpty {
       statusesState = .loading
     }
@@ -208,7 +208,7 @@ extension TimelineViewModel: StatusesFetcher {
       ReblogCache.shared.removeDuplicateReblogs(&statuses)
 
       await cacheHome()
-      
+
       withAnimation {
         statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
       }
@@ -238,7 +238,7 @@ extension TimelineViewModel: StatusesFetcher {
       canStreamEvents = true
       return
     }
-    
+
     // Return if task has been cancelled.
     guard !Task.isCancelled else {
       canStreamEvents = true
@@ -283,7 +283,7 @@ extension TimelineViewModel: StatusesFetcher {
           canStreamEvents = true
         }
       }
-      
+
       // We trigger a new fetch so we can get the next new statuses if any.
       // If none, it'll stop there.
       if !Task.isCancelled, let latest = statuses.first, let client {
