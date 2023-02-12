@@ -130,12 +130,6 @@ struct AccountDetailHeaderView: View {
         VStack(alignment: .leading, spacing: 0) {
           EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
             .font(.scaledHeadline)
-            .onDisappear {
-              print("DISPEAR")
-            }
-            .onAppear {
-              print("APPEAR")
-            }
           Text("@\(account.acct)")
             .font(.scaledCallout)
             .foregroundColor(.gray)
