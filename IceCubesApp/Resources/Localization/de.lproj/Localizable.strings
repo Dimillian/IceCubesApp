@@ -169,7 +169,7 @@
 "settings.swipeactions.status.leading" = "Nach rechts wischen";
 "settings.swipeactions.status.leading.left" = "links";
 "settings.swipeactions.status.leading.right" = "links";
-"settings.swipeactions.status.trailing" = " Nach links wischen";
+"settings.swipeactions.status.trailing" = "Nach links wischen";
 "settings.swipeactions.status.trailing.left" = "links";
 "settings.swipeactions.status.trailing.right" = "rechts";
 "settings.swipeactions.status" = "Beitrag";
