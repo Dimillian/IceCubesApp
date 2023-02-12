@@ -14,6 +14,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
   var currentAccount: Account?
   var theme: Theme?
   var preferences: UserPreferences?
+  var languageConfirmationDialogLanguages: [String: String]?
 
   var textView: UITextView? {
     didSet {
@@ -141,6 +142,17 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
     selectedLanguage = selectedLanguage ?? preference ?? currentAccount?.source?.language
   }
 
+    func evaluateLanguages(){
+        if let detectedLang = detectLanguage(text: statusText.string),
+           let selectedLanguage = selectedLanguage,
+           selectedLanguage != detectedLang {
+            languageConfirmationDialogLanguages = ["detected": detectedLang,
+                                                   "selected": selectedLanguage]
+        } else {
+            languageConfirmationDialogLanguages = nil;
+        }
+    }
+
   func postStatus() async -> Status? {
     guard let client else { return nil }
     do {
@@ -151,20 +163,6 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
         pollData = .init(options: pollOptions,
                          multiple: pollVotingFrequency.canVoteMultipleTimes,
                          expires_in: pollDuration.rawValue)
-      }
-
-      if !hasExplicitlySelectedLanguage {
-        // Attempt language resolution using Natural Language
-        let recognizer = NLLanguageRecognizer()
-        recognizer.processString(statusText.string)
-        // Use languageHypotheses to get the probability with it
-        let hypotheses = recognizer.languageHypotheses(withMaximum: 1)
-        // Assert that 85% probability is enough :)
-        // A one word toot that is en/fr compatible is only ~50% confident, for instance
-        if let (language, probability) = hypotheses.first, probability > 0.85 {
-          // rawValue return the IETF BCP 47 language tag
-          selectedLanguage = language.rawValue
-        }
       }
 
       let data = StatusData(status: statusText.string,

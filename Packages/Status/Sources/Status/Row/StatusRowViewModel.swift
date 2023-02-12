@@ -2,6 +2,7 @@ import Env
 import Models
 import Network
 import SwiftUI
+import NaturalLanguage
 
 import DesignSystem
 
@@ -289,8 +290,16 @@ public class StatusRowViewModel: ObservableObject {
     reblogsCount = status.reblog?.reblogsCount ?? status.reblogsCount
     repliesCount = status.reblog?.repliesCount ?? status.repliesCount
   }
-
+    
+    func getStatusLang() -> String? {
+        status.language
+    }
+    
   func translate(userLang: String) async {
+    await translate(userLang: userLang, sourceLang: getStatusLang())
+  }
+    
+  private func translate(userLang: String, sourceLang: String?) async {
     guard let client else { return }
     do {
       withAnimation {

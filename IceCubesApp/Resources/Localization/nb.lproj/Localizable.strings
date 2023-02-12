@@ -375,6 +375,8 @@
 "status.editor.error.upload" = "Feil ved opplasting";
 "status.editor.language-select.navigation-title" = "Velg språk";
 "status.editor.language-select.recently-used" = "Nylig brukt";
+"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
+"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
 "status.editor.media.edit-image" = "Rediger bilde";
 "status.editor.media.image-description" = "Bildebeskrivelse";
 "status.editor.mode.edit" = "Redigerer innlegget ditt";

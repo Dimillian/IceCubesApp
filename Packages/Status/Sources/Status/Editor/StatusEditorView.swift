@@ -21,6 +21,7 @@ public struct StatusEditorView: View {
   @FocusState private var isSpoilerTextFocused: Bool
 
   @State private var isDismissAlertPresented: Bool = false
+    @State private var isLanguageConfirmPresented = false
 
   public init(mode: StatusEditorViewModel.Mode) {
     _viewModel = StateObject(wrappedValue: .init(mode: mode))
@@ -104,12 +105,12 @@ public struct StatusEditorView: View {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button {
             Task {
-              let status = await viewModel.postStatus()
-              if status != nil {
-                dismiss()
-                NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
-                                                object: nil)
-              }
+                viewModel.evaluateLanguages()
+                if let _ = viewModel.languageConfirmationDialogLanguages {
+                    isLanguageConfirmPresented = true
+                } else {
+                    await postStatus()
+                }
             }
           } label: {
             if viewModel.isPosting {
@@ -120,6 +121,9 @@ public struct StatusEditorView: View {
           }
           .disabled(!viewModel.canPost)
           .keyboardShortcut(.return, modifiers: .command)
+          .confirmationDialog("", isPresented: $isLanguageConfirmPresented, actions: {
+              languageConfirmationDialog
+          })
         }
         ToolbarItem(placement: .navigationBarLeading) {
           Button {
@@ -155,6 +159,42 @@ public struct StatusEditorView: View {
     }
     .interactiveDismissDisabled(!viewModel.statusText.string.isEmpty)
   }
+
+    @ViewBuilder
+    private var languageConfirmationDialog: some View {
+        if let dialogVals = viewModel.languageConfirmationDialogLanguages,
+           let detected = dialogVals["detected"],
+           let detectedLong = Locale.current.localizedString(forLanguageCode: detected),
+           let selected = dialogVals["selected"],
+           let selectedLong = Locale.current.localizedString(forLanguageCode: selected){
+            Button("status.editor.language-select.confirmation.detected-\(detectedLong)") {
+                viewModel.selectedLanguage = detected
+                Task {
+                    await postStatus()
+                }
+            }
+            Button("status.editor.language-select.confirmation.selected-\(selectedLong)") {
+                viewModel.selectedLanguage = selected
+                Task {
+                    await postStatus()
+                }
+            }
+            Button("action.cancel", role: .cancel) {
+                viewModel.languageConfirmationDialogLanguages = nil
+            }
+        } else {
+            EmptyView()
+        }
+    }
+    
+    private func postStatus() async {
+        let status = await viewModel.postStatus()
+        if status != nil {
+            dismiss()
+            NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
+                                            object: nil)
+        }
+    }
 
   @ViewBuilder
   private var spoilerTextView: some View {

@@ -376,6 +376,8 @@
 "status.editor.error.upload" = "Errore durante il caricamento";
 "status.editor.language-select.navigation-title" = "Scegli la lingua";
 "status.editor.language-select.recently-used" = "Usato recentemente";
+"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
+"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
 "status.editor.media.edit-image" = "Modifica l'immagine";
 "status.editor.media.image-description" = "Descrizione dell'immagine";
 "status.editor.mode.edit" = "Modifica post";

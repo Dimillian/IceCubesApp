@@ -371,6 +371,8 @@
 "status.editor.error.upload" = "Yüklerken Hata Oluştu";
 "status.editor.language-select.navigation-title" = "Dil Seç";
 "status.editor.language-select.recently-used" = "Son Kullanılanlar";
+"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
+"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
 "status.editor.media.edit-image" = "Görüntüyü Düzenle";
 "status.editor.media.image-description" = "Görüntü Açıklaması";
 "status.editor.mode.edit" = "Gönderin Düzenleniyor";

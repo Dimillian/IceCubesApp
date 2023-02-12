@@ -345,14 +345,24 @@ public struct StatusRowView: View {
     .accessibilityHidden(true)
   }
 
+    private func shouldShowTranslateButton(status: AnyStatus) -> Bool {
+        let statusLang = viewModel.getStatusLang()
+        
+        if let userLang = preferences.serverPreferences?.postLanguage,
+           preferences.showTranslateButton,
+           !status.content.asRawText.isEmpty,
+           viewModel.translation == nil
+        {
+            return userLang != statusLang
+        } else {
+            return false
+        }
+    }
+
   @ViewBuilder
   private func makeTranslateView(status: AnyStatus) -> some View {
-    if let userLang = preferences.serverPreferences?.postLanguage,
-       preferences.showTranslateButton,
-       status.language != nil,
-       userLang != status.language,
-       !status.content.asRawText.isEmpty,
-       viewModel.translation == nil
+      if let userLang = preferences.serverPreferences?.postLanguage,
+       shouldShowTranslateButton(status: status)
     {
       Button {
         Task {
@@ -362,13 +372,13 @@ public struct StatusRowView: View {
         if viewModel.isLoadingTranslation {
           ProgressView()
         } else {
-          if let statusLanguage = status.language,
-             let languageName = Locale.current.localizedString(forLanguageCode: statusLanguage)
-          {
-            Text("status.action.translate-from-\(languageName)")
-          } else {
-            Text("status.action.translate")
-          }
+            if let statusLanguage = viewModel.getStatusLang(),
+               let languageName = Locale.current.localizedString(forLanguageCode: statusLanguage)
+            {
+                Text("status.action.translate-from-\(languageName)")
+            } else {
+                Text("status.action.translate")
+            }
         }
       }
       .buttonStyle(.borderless)

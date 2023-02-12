@@ -371,6 +371,8 @@
 "status.editor.error.upload" = "Błąd wysyłania";
 "status.editor.language-select.navigation-title" = "Wybierz język";
 "status.editor.language-select.recently-used" = "Ostatnio użyty";
+"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
+"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
 "status.editor.media.edit-image" = "Edytuj obrazek";
 "status.editor.media.image-description" = "Opis obrazka";
 "status.editor.mode.edit" = "Edycja twojego postu";
