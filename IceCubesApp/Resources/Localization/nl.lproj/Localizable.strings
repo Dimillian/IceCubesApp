@@ -158,20 +158,20 @@
 
 "settings.display.show-ipad-column" = "Toon tweede kolom";
 
-"settings.general.swipeactions" = "Swipe Actions";
-"settings.swipeactions.navigation-title" = "Swipe Actions";
+"settings.general.swipeactions" = "Veegacties";
+"settings.swipeactions.navigation-title" = "Veegacties";
 "settings.swipeactions.status.action.bookmark" = "Bookmark";
 "settings.swipeactions.status.action.boost" = "Boost";
-"settings.swipeactions.status.action.favorite" = "Favorite";
-"settings.swipeactions.status.action.none" = "None";
-"settings.swipeactions.status.action.quote" = "Quote";
-"settings.swipeactions.status.action.reply" = "Reply";
-"settings.swipeactions.status.leading" = "Swipe right";
-"settings.swipeactions.status.leading.left" = "left";
-"settings.swipeactions.status.leading.right" = "right";
-"settings.swipeactions.status.trailing" = "Swipe left";
-"settings.swipeactions.status.trailing.left" = "left";
-"settings.swipeactions.status.trailing.right" = "right";
+"settings.swipeactions.status.action.favorite" = "Favoriet";
+"settings.swipeactions.status.action.none" = "Geen";
+"settings.swipeactions.status.action.quote" = "Citaat";
+"settings.swipeactions.status.action.reply" = "Antwoord";
+"settings.swipeactions.status.leading" = "Veeg naar rechts";
+"settings.swipeactions.status.leading.left" = "links";
+"settings.swipeactions.status.leading.right" = "rechts";
+"settings.swipeactions.status.trailing" = "Veeg naar links";
+"settings.swipeactions.status.trailing.left" = "links";
+"settings.swipeactions.status.trailing.right" = "rechts";
 "settings.swipeactions.status" = "Post";
 
 // MARK: Tabs
@@ -365,12 +365,12 @@
 "status.editor.description.add" = "Voeg omschrijving toe";
 "status.editor.description.edit" = "Bewerk omschrijving";
 "status.editor.drafts.navigation-title" = "Concepten";
-"status.editor.emojis.navigation-title" = "Custom Emojis";
+"status.editor.emojis.navigation-title" = "Aangepaste emoji’s";
 "status.editor.error.upload" = "Fout tijdens uploaden";
 "status.editor.language-select.navigation-title" = "Taal selecteren";
 "status.editor.language-select.recently-used" = "Onlangs gebruikt";
-"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
-"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
+"status.editor.language-select.confirmation.detected-%@" = "Post in het %@ (gedetecteerde taal)";
+"status.editor.language-select.confirmation.selected-%@" = "Post in het %@ (selecteerde taal)";
 "status.editor.media.edit-image" = "Afbeelding bewerken";
 "status.editor.media.image-description" = "Omschrijving";
 "status.editor.mode.edit" = "Post bewerken";
@@ -436,9 +436,9 @@
 "enum.expand-media.hide-sensitive" = "Verberg gevoelige";
 
 // MARK: Accessibility
-"accessibility.editor.button.attach-photo" = "Attach photo";
+"accessibility.editor.button.attach-photo" = "Voeg foto toe";
 "accessibility.editor.button.poll" = "Poll";
-"accessibility.editor.button.spoiler" = "Spoiler warning";
-"accessibility.editor.button.drafts" = "Drafts";
-"accessibility.editor.button.custom-emojis" = "Custom emojis";
-"accessibility.editor.button.language" = "Language";
+"accessibility.editor.button.spoiler" = "Spoilerwaarschuwing";
+"accessibility.editor.button.drafts" = "Concepten";
+"accessibility.editor.button.custom-emojis" = "Aangepaste emoji’s";
+"accessibility.editor.button.language" = "Taal";
