@@ -337,10 +337,8 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Tradueix";
-"status.action.translate-secondary" = "Translate from secondary language";
 "status.action.translate-from-%@" = "Tradueix del %@";
 "status.action.translated-label" = "Traduït amb DeepL.com";
-"status.action.translated-label-from-%@" = "Translated from %@ using DeepL.com";
 "status.action.bookmark" = "Afegeix als marcadors";
 "status.action.boost" = "Impulsa";
 "status.action.copy-text" = "Copia el text";

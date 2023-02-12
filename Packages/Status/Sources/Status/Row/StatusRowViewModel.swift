@@ -28,7 +28,6 @@ public class StatusRowViewModel: ObservableObject {
   @Published var isLoadingRemoteContent: Bool = false
 
   @Published var translation: String?
-    @Published var translationSourceLang: String?
   @Published var isLoadingTranslation: Bool = false
   @Published var showDeleteAlert: Bool = false
 
@@ -36,7 +35,6 @@ public class StatusRowViewModel: ObservableObject {
   @Published var rebloggers: [Account] = []
 
   private let theme = Theme.shared
-  private lazy var detectedLang = firstDetectLanguage()
   
   var seen = false
 
@@ -293,29 +291,14 @@ public class StatusRowViewModel: ObservableObject {
     reblogsCount = status.reblog?.reblogsCount ?? status.reblogsCount
     repliesCount = status.reblog?.repliesCount ?? status.repliesCount
   }
-
-    private func firstDetectLanguage() -> String? {
-        let text = status.reblog?.content.asRawText ?? status.content.asRawText
-        return detectLanguage(text: text)
-    }
     
     func getStatusLang() -> String? {
-        detectedLang ?? status.language
-    }
-    
-    func getSecondaryStatusLang() -> String? {
-        status.language != getStatusLang() ? status.language : nil
+        status.language
     }
     
   func translate(userLang: String) async {
       await translate(userLang: userLang, sourceLang: getStatusLang())
   }
-    
-    func translateFromSecondaryLang(userLang: String) async {
-        if let secondaryLang = getSecondaryStatusLang() {
-            await translate(userLang: userLang, sourceLang: secondaryLang)
-        }
-    }
     
     private func translate(userLang: String, sourceLang: String?) async {
      let client = DeepLClient()
@@ -328,11 +311,6 @@ public class StatusRowViewModel: ObservableObject {
                                                  text: status.reblog?.content.asRawText ?? status.content.asRawText)
       withAnimation {
         self.translation = translation
-          if let sourceLang = sourceLang {
-              translationSourceLang = sourceLang
-          } else {
-              translationSourceLang = ""
-          }
         isLoadingTranslation = false
       }
     } catch {}

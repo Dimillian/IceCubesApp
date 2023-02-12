@@ -332,10 +332,8 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Vertaal";
-"status.action.translate-secondary" = "Translate from secondary language";
 "status.action.translate-from-%@" = "Vertaal uit het %@";
 "status.action.translated-label" = "Vertaald met behulp van DeepL.com";
-"status.action.translated-label-from-%@" = "Translated from %@ using DeepL.com";
 "status.action.bookmark" = "Voeg bladwijzer toe";
 "status.action.boost" = "Boosten";
 "status.action.copy-text" = "Kopieer tekst";

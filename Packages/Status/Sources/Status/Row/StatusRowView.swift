@@ -349,9 +349,9 @@ public struct StatusRowView: View {
         if let userLang = preferences.serverPreferences?.postLanguage,
            preferences.showTranslateButton,
            !status.content.asRawText.isEmpty,
-           viewModel.translationSourceLang != (statusLang ?? "")
+           viewModel.translation?.isEmpty ?? true
         {
-            return statusLang != nil && userLang != statusLang
+            return userLang != statusLang
         } else {
             return false
         }
@@ -387,13 +387,7 @@ public struct StatusRowView: View {
         VStack(alignment: .leading, spacing: 4) {
           Text(translation)
             .font(.scaledBody)
-            Group{
-                if let sourceLang =  Locale.current.localizedString(forLanguageCode: viewModel.translationSourceLang ?? "") {
-                    Text("status.action.translated-label-from-\(sourceLang)")
-                } else {
-                    Text("status.action.translated-label")
-                }
-            }
+          Text("status.action.translated-label")
             .font(.footnote)
             .foregroundColor(.gray)
         }

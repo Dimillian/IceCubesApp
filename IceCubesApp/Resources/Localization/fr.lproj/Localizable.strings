@@ -334,10 +334,8 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Traduire";
-"status.action.translate-secondary" = "Translate from secondary language";
 "status.action.translate-from-%@" = "Traduire de %@";
 "status.action.translated-label" = "Traduit avec DeepL.com";
-"status.action.translated-label-from-%@" = "Translated from %@ using DeepL.com";
 "status.action.bookmark" = "Marquer";
 "status.action.boost" = "Promouvoir";
 "status.action.copy-text" = "Copier le texte";
