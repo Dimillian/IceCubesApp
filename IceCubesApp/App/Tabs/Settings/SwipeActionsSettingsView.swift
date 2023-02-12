@@ -9,7 +9,7 @@ struct SwipeActionsSettingsView: View {
   var body: some View {
     Form {
       Section("settings.swipeactions.status") {
-        Label("settings.swipeactions.status.leading", systemImage: "arrow.left.circle")
+        Label("settings.swipeactions.status.leading", systemImage: "arrow.right.circle")
         Picker(selection: $userPreferences.swipeActionsStatusLeadingLeft, label: makeSwipeLabel(left: true, text: "settings.swipeactions.status.leading.left")) {
           Section {
             Label(StatusAction.none.displayName(), systemImage: StatusAction.none.iconName()).tag(StatusAction.none)
@@ -34,7 +34,7 @@ struct SwipeActionsSettingsView: View {
             }
           }
         }
-        Label("settings.swipeactions.status.trailing", systemImage: "arrow.right.circle")
+        Label("settings.swipeactions.status.trailing", systemImage: "arrow.left.circle")
         Picker(selection: $userPreferences.swipeActionsStatusTrailingLeft, label: makeSwipeLabel(left: true, text: "settings.swipeactions.status.trailing.left"))  {
           Section {
             Label(StatusAction.none.displayName(), systemImage: StatusAction.none.iconName()).tag(StatusAction.none)
