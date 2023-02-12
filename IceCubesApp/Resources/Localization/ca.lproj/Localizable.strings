@@ -156,11 +156,25 @@
 "settings.haptic.tab-selection" = "Selecció de pestanyes";
 "settings.haptic.buttons" = "Pressió de botó";
 
-"settings.display.section.phone" = "iPhone";
 "settings.display.show-tab-label" = "Mostra el nom de la pestanya";
 
-"settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Habilitar columna secondària";
+
+"settings.general.swipeactions" = "Swipe Actions";
+"settings.swipeactions.navigation-title" = "Swipe Actions";
+"settings.swipeactions.status.action.bookmark" = "Bookmark";
+"settings.swipeactions.status.action.boost" = "Boost";
+"settings.swipeactions.status.action.favorite" = "Favorite";
+"settings.swipeactions.status.action.none" = "None";
+"settings.swipeactions.status.action.quote" = "Quote";
+"settings.swipeactions.status.action.reply" = "Reply";
+"settings.swipeactions.status.leading" = "Swipe right";
+"settings.swipeactions.status.leading.left" = "left";
+"settings.swipeactions.status.leading.right" = "right";
+"settings.swipeactions.status.trailing" = "Swipe left";
+"settings.swipeactions.status.trailing.left" = "left";
+"settings.swipeactions.status.trailing.right" = "right";
+"settings.swipeactions.status" = "Post";
 
 // MARK: Tabs
 "tab.explore" = "Exploreu";
@@ -324,7 +338,7 @@
 // MARK: Package: Status
 "status.action.translate" = "Tradueix";
 "status.action.translate-from-%@" = "Tradueix del %@";
-"status.action.translated-label" = "Traduït amb DeepL.com";
+"status.action.translated-label-%@" = "Traduït amb %@";
 "status.action.bookmark" = "Afegeix als marcadors";
 "status.action.boost" = "Impulsa";
 "status.action.copy-text" = "Copia el text";
@@ -356,9 +370,12 @@
 "status.editor.description.add" = "Afegeix una descripció";
 "status.editor.description.edit" = "Edita la descripció";
 "status.editor.drafts.navigation-title" = "Esborranys";
+"status.editor.emojis.navigation-title" = "Custom Emojis";
 "status.editor.error.upload" = "Error en la pujada";
 "status.editor.language-select.navigation-title" = "Selecciona la llengua";
 "status.editor.language-select.recently-used" = "Recents";
+"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
+"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
 "status.editor.media.edit-image" = "Edita la imatge";
 "status.editor.media.image-description" = "Descripció de la imatge";
 "status.editor.mode.edit" = "Edita la publicació";
@@ -419,3 +436,11 @@
 "filter.contexts.profiles" = "Perfils";
 "filter.action.warning" = "Amaga amb un avís";
 "filter.action.hide" = "Amaga per complet";
+
+// MARK: Accessibility
+"accessibility.editor.button.attach-photo" = "Attach photo";
+"accessibility.editor.button.poll" = "Poll";
+"accessibility.editor.button.spoiler" = "Spoiler warning";
+"accessibility.editor.button.drafts" = "Drafts";
+"accessibility.editor.button.custom-emojis" = "Custom emojis";
+"accessibility.editor.button.language" = "Language";

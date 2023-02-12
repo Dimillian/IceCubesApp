@@ -154,11 +154,25 @@
 "settings.haptic.tab-selection" = "Tabselectie";
 "settings.haptic.buttons" = "Knoppen";
 
-"settings.display.section.phone" = "iPhone";
 "settings.display.show-tab-label" = "Toon label bij tab";
 
-"settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Toon tweede kolom";
+
+"settings.general.swipeactions" = "Swipe Actions";
+"settings.swipeactions.navigation-title" = "Swipe Actions";
+"settings.swipeactions.status.action.bookmark" = "Bookmark";
+"settings.swipeactions.status.action.boost" = "Boost";
+"settings.swipeactions.status.action.favorite" = "Favorite";
+"settings.swipeactions.status.action.none" = "None";
+"settings.swipeactions.status.action.quote" = "Quote";
+"settings.swipeactions.status.action.reply" = "Reply";
+"settings.swipeactions.status.leading" = "Swipe right";
+"settings.swipeactions.status.leading.left" = "left";
+"settings.swipeactions.status.leading.right" = "right";
+"settings.swipeactions.status.trailing" = "Swipe left";
+"settings.swipeactions.status.trailing.left" = "left";
+"settings.swipeactions.status.trailing.right" = "right";
+"settings.swipeactions.status" = "Post";
 
 // MARK: Tabs
 "tab.explore" = "Ontdekken";
@@ -319,7 +333,7 @@
 // MARK: Package: Status
 "status.action.translate" = "Vertaal";
 "status.action.translate-from-%@" = "Vertaal uit het %@";
-"status.action.translated-label" = "Vertaald met behulp van DeepL.com";
+"status.action.translated-label-%@" = "Vertaald met behulp van %@";
 "status.action.bookmark" = "Voeg bladwijzer toe";
 "status.action.boost" = "Boosten";
 "status.action.copy-text" = "Kopieer tekst";
@@ -351,9 +365,12 @@
 "status.editor.description.add" = "Voeg omschrijving toe";
 "status.editor.description.edit" = "Bewerk omschrijving";
 "status.editor.drafts.navigation-title" = "Concepten";
+"status.editor.emojis.navigation-title" = "Custom Emojis";
 "status.editor.error.upload" = "Fout tijdens uploaden";
 "status.editor.language-select.navigation-title" = "Taal selecteren";
 "status.editor.language-select.recently-used" = "Onlangs gebruikt";
+"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
+"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
 "status.editor.media.edit-image" = "Afbeelding bewerken";
 "status.editor.media.image-description" = "Omschrijving";
 "status.editor.mode.edit" = "Post bewerken";
@@ -417,3 +434,11 @@
 "enum.expand-media.show" = "Toon alle";
 "enum.expand-media.hide" = "Verberg alle";
 "enum.expand-media.hide-sensitive" = "Verberg gevoelige";
+
+// MARK: Accessibility
+"accessibility.editor.button.attach-photo" = "Attach photo";
+"accessibility.editor.button.poll" = "Poll";
+"accessibility.editor.button.spoiler" = "Spoiler warning";
+"accessibility.editor.button.drafts" = "Drafts";
+"accessibility.editor.button.custom-emojis" = "Custom emojis";
+"accessibility.editor.button.language" = "Language";

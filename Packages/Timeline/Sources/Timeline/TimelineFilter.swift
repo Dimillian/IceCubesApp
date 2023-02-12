@@ -5,7 +5,7 @@ import SwiftUI
 
 public enum RemoteTimelineFilter: String, CaseIterable, Hashable, Equatable {
   case local, federated, trending
-  
+
   public func localizedTitle() -> LocalizedStringKey {
     switch self {
     case .federated:
@@ -16,7 +16,7 @@ public enum RemoteTimelineFilter: String, CaseIterable, Hashable, Equatable {
       return "timeline.trending"
     }
   }
-  
+
   public func iconName() -> String {
     switch self {
     case .federated:
@@ -196,7 +196,7 @@ extension TimelineFilter: Codable {
   }
 
   public func encode(to encoder: Encoder) throws {
-      var container = encoder.container(keyedBy: CodingKeys.self)
+    var container = encoder.container(keyedBy: CodingKeys.self)
     switch self {
     case .home:
       try container.encode(CodingKeys.home.rawValue, forKey: .home)
@@ -206,13 +206,13 @@ extension TimelineFilter: Codable {
       try container.encode(CodingKeys.federated.rawValue, forKey: .federated)
     case .trending:
       try container.encode(CodingKeys.trending.rawValue, forKey: .trending)
-    case .hashtag(let tag, let accountId):
+    case let .hashtag(tag, accountId):
       var nestedContainer = container.nestedUnkeyedContainer(forKey: .hashtag)
       try nestedContainer.encode(tag)
       try nestedContainer.encode(accountId)
-    case .list(let list):
+    case let .list(list):
       try container.encode(list, forKey: .list)
-    case .remoteLocal(let server, let filter):
+    case let .remoteLocal(server, filter):
       var nestedContainer = container.nestedUnkeyedContainer(forKey: .hashtag)
       try nestedContainer.encode(server)
       try nestedContainer.encode(filter)
@@ -260,17 +260,17 @@ extension RemoteTimelineFilter: Codable {
     case .trending:
       self = .trending
     default:
-        throw DecodingError.dataCorrupted(
-            DecodingError.Context(
-                codingPath: container.codingPath,
-                debugDescription: "Unabled to decode enum."
-            )
+      throw DecodingError.dataCorrupted(
+        DecodingError.Context(
+          codingPath: container.codingPath,
+          debugDescription: "Unabled to decode enum."
         )
+      )
     }
   }
 
   public func encode(to encoder: Encoder) throws {
-      var container = encoder.container(keyedBy: CodingKeys.self)
+    var container = encoder.container(keyedBy: CodingKeys.self)
     switch self {
     case .local:
       try container.encode(CodingKeys.local.rawValue, forKey: .local)

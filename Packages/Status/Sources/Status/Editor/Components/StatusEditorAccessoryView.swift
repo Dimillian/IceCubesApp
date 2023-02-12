@@ -33,6 +33,7 @@ struct StatusEditorAccessoryView: View {
                 Image(systemName: "photo.fill.on.rectangle.fill")
               }
             }
+            .accessibilityLabel("accessibility.editor.button.attach-photo")
             .disabled(viewModel.showPoll)
 
             Button {
@@ -42,6 +43,7 @@ struct StatusEditorAccessoryView: View {
             } label: {
               Image(systemName: "chart.bar")
             }
+            .accessibilityLabel("accessibility.editor.button.poll")
             .disabled(viewModel.shouldDisablePollButton)
 
             Button {
@@ -52,6 +54,7 @@ struct StatusEditorAccessoryView: View {
             } label: {
               Image(systemName: viewModel.spoilerOn ? "exclamationmark.triangle.fill" : "exclamationmark.triangle")
             }
+            .accessibilityLabel("accessibility.editor.button.spoiler")
 
             if !viewModel.mode.isInShareExtension {
               Button {
@@ -59,6 +62,7 @@ struct StatusEditorAccessoryView: View {
               } label: {
                 Image(systemName: "archivebox")
               }
+              .accessibilityLabel("accessibility.editor.button.drafts")
             }
 
             if !viewModel.customEmojis.isEmpty {
@@ -67,6 +71,7 @@ struct StatusEditorAccessoryView: View {
               } label: {
                 Image(systemName: "face.smiling.inverse")
               }
+              .accessibilityLabel("accessibility.editor.button.custom-emojis")
             }
 
             Button {
@@ -78,6 +83,7 @@ struct StatusEditorAccessoryView: View {
                 Image(systemName: "globe")
               }
             }
+            .accessibilityLabel("accessibility.editor.button.language")
 
             if preferences.isOpenAIEnabled {
               AIMenu.disabled(!viewModel.canPost)
@@ -255,7 +261,7 @@ struct StatusEditorAccessoryView: View {
       }
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
-      .navigationTitle("Custom Emojis")
+      .navigationTitle("status.editor.emojis.navigation-title")
       .navigationBarTitleDisplayMode(.inline)
     }
     .presentationDetents([.medium])

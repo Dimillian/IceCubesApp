@@ -65,7 +65,8 @@ public struct TimelineView: View {
         if let collectionView,
            let index,
            let rows = collectionView.dataSource?.collectionView(collectionView, numberOfItemsInSection: 0),
-           rows > index {
+           rows > index
+        {
           collectionView.scrollToItem(at: .init(row: index, section: 0),
                                       at: .top,
                                       animated: viewModel.scrollToIndexAnimated)

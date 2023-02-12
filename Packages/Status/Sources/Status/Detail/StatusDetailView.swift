@@ -4,7 +4,6 @@ import Models
 import Network
 import Shimmer
 import SwiftUI
-import DesignSystem
 
 public struct StatusDetailView: View {
   @EnvironmentObject private var theme: Theme
@@ -16,19 +15,19 @@ public struct StatusDetailView: View {
   @StateObject private var viewModel: StatusDetailViewModel
   @State private var isLoaded: Bool = false
   @State private var statusHeight: CGFloat = 0
-  
+
   public init(statusId: String) {
     _viewModel = StateObject(wrappedValue: .init(statusId: statusId))
   }
-  
+
   public init(status: Status) {
     _viewModel = StateObject(wrappedValue: .init(status: status))
   }
-  
+
   public init(remoteStatusURL: URL) {
     _viewModel = StateObject(wrappedValue: .init(remoteStatusURL: remoteStatusURL))
   }
-  
+
   public var body: some View {
     GeometryReader { reader in
       ScrollViewReader { proxy in
@@ -36,37 +35,38 @@ public struct StatusDetailView: View {
           if isLoaded {
             topPaddingView
           }
-          
+
           switch viewModel.state {
           case .loading:
             loadingDetailView
-            
-          case let .display(status, context):
+
+          case let .display(status, context, date):
             if !context.ancestors.isEmpty {
               ForEach(context.ancestors) { ancestor in
                 StatusRowView(viewModel: .init(status: ancestor, isCompact: false))
               }
             }
-            
+
             makeCurrentStatusView(status: status)
-            
+              .id(date)
+
             if !context.descendants.isEmpty {
               ForEach(context.descendants) { descendant in
                 StatusRowView(viewModel: .init(status: descendant, isCompact: false))
               }
             }
-            
+
             if !isLoaded {
               loadingContextView
             }
-            
+
             Rectangle()
               .foregroundColor(theme.secondaryBackgroundColor)
               .frame(minHeight: reader.frame(in: .local).size.height - statusHeight)
               .listRowSeparator(.hidden)
               .listRowBackground(theme.secondaryBackgroundColor)
               .listRowInsets(.init())
-            
+
           case .error:
             errorView
           }
@@ -86,7 +86,7 @@ public struct StatusDetailView: View {
           viewModel.client = client
           let result = await viewModel.fetch()
           isLoaded = true
-          
+
           if !result {
             if let url = viewModel.remoteStatusURL {
               openURL(url)
@@ -105,22 +105,22 @@ public struct StatusDetailView: View {
     .navigationTitle(viewModel.title)
     .navigationBarTitleDisplayMode(.inline)
   }
-  
+
   private func makeCurrentStatusView(status: Status) -> some View {
     StatusRowView(viewModel: .init(status: status,
                                    isCompact: false,
                                    isFocused: true))
-    .overlay {
-      GeometryReader { reader in
-        VStack{}
-          .onAppear {
-          statusHeight = reader.size.height
+      .overlay {
+        GeometryReader { reader in
+          VStack {}
+            .onAppear {
+              statusHeight = reader.size.height
+            }
         }
       }
-    }
-    .id(status.id)
+      .id(status.id)
   }
-  
+
   private var errorView: some View {
     ErrorView(title: "status.error.title",
               message: "status.error.message",
@@ -132,14 +132,14 @@ public struct StatusDetailView: View {
     .listRowBackground(theme.primaryBackgroundColor)
     .listRowSeparator(.hidden)
   }
-  
+
   private var loadingDetailView: some View {
     ForEach(Status.placeholders()) { status in
       StatusRowView(viewModel: .init(status: status, isCompact: false))
         .redacted(reason: .placeholder)
     }
   }
-  
+
   private var loadingContextView: some View {
     HStack {
       Spacer()
@@ -151,7 +151,7 @@ public struct StatusDetailView: View {
     .listRowBackground(theme.secondaryBackgroundColor)
     .listRowInsets(.init())
   }
-  
+
   private var topPaddingView: some View {
     HStack { EmptyView() }
       .listRowBackground(theme.primaryBackgroundColor)

@@ -19,7 +19,6 @@ public struct AccountDetailView: View {
   @EnvironmentObject private var routerPath: RouterPath
 
   @StateObject private var viewModel: AccountDetailViewModel
-  @State private var scrollOffset: CGFloat = 0
   @State private var isFieldsSheetDisplayed: Bool = false
   @State private var isCurrentUser: Bool = false
   @State private var isCreateListAlertPresented: Bool = false
@@ -37,45 +36,47 @@ public struct AccountDetailView: View {
   public init(account: Account) {
     _viewModel = StateObject(wrappedValue: .init(account: account))
   }
-    
+
   public var body: some View {
     ScrollViewReader { proxy in
-      ScrollViewOffsetReader { offset in
-        self.scrollOffset = offset
-      } content: {
-        LazyVStack(alignment: .leading) {
+      List {
+        Group {
           makeHeaderView(proxy: proxy)
           familiarFollowers
-            .offset(y: -36)
           featuredTagsView
-            .offset(y: -36)
-          Group {
-            Picker("", selection: $viewModel.selectedTab) {
-              ForEach(isCurrentUser ? AccountDetailViewModel.Tab.currentAccountTabs : AccountDetailViewModel.Tab.accountTabs,
-                      id: \.self) { tab in
-                Image(systemName: tab.iconName)
-                  .tag(tab)
-              }
-            }
-            .pickerStyle(.segmented)
-            .padding(.horizontal, .layoutPadding)
-            .offset(y: -20)
-          }
-          .id("status")
+        }
+        .listRowInsets(.init())
+        .listRowSeparator(.hidden)
+        .listRowBackground(theme.primaryBackgroundColor)
 
-          switch viewModel.tabState {
-          case .statuses:
-            if viewModel.selectedTab == .statuses {
-              pinnedPostsView
-            }
-            StatusesListView(fetcher: viewModel, isEmbdedInList: false)
-          case .followedTags:
-            tagsListView
-          case .lists:
-            listsListView
+        Picker("", selection: $viewModel.selectedTab) {
+          ForEach(isCurrentUser ? AccountDetailViewModel.Tab.currentAccountTabs : AccountDetailViewModel.Tab.accountTabs,
+                  id: \.self) { tab in
+            Image(systemName: tab.iconName)
+              .tag(tab)
           }
         }
+        .pickerStyle(.segmented)
+        .padding(.layoutPadding)
+        .listRowSeparator(.hidden)
+        .listRowBackground(theme.primaryBackgroundColor)
+        .listRowInsets(.init())
+        .id("status")
+
+        switch viewModel.tabState {
+        case .statuses:
+          if viewModel.selectedTab == .statuses {
+            pinnedPostsView
+          }
+          StatusesListView(fetcher: viewModel)
+        case .followedTags:
+          tagsListView
+        case .lists:
+          listsListView
+        }
       }
+      .environment(\.defaultMinListRowHeight, 1)
+      .listStyle(.plain)
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
     }
@@ -138,14 +139,12 @@ public struct AccountDetailView: View {
     case .loading:
       AccountDetailHeaderView(viewModel: viewModel,
                               account: .placeholder(),
-                              scrollViewProxy: proxy,
-                              scrollOffset: $scrollOffset)
+                              scrollViewProxy: proxy)
         .redacted(reason: .placeholder)
     case let .data(account):
       AccountDetailHeaderView(viewModel: viewModel,
                               account: account,
-                              scrollViewProxy: proxy,
-                              scrollOffset: $scrollOffset)
+                              scrollViewProxy: proxy)
     case let .error(error):
       Text("Error: \(error.localizedDescription)")
     }
@@ -270,8 +269,7 @@ public struct AccountDetailView: View {
           Spacer()
           Image(systemName: "chevron.right")
         }
-        .padding(.horizontal, .layoutPadding)
-        .padding(.vertical, 8)
+        .listRowBackground(theme.primaryBackgroundColor)
       }
     }.task {
       await currentAccount.fetchFollowedTags()
@@ -282,16 +280,11 @@ public struct AccountDetailView: View {
     Group {
       ForEach(currentAccount.sortedLists) { list in
         NavigationLink(value: RouterDestinations.list(list: list)) {
-          HStack {
-            Text(list.title)
-            Spacer()
-            Image(systemName: "chevron.right")
-          }
-          .padding(.vertical, 8)
-          .padding(.horizontal, .layoutPadding)
-          .font(.scaledHeadline)
-          .foregroundColor(theme.labelColor)
+          Text(list.title)
+            .font(.scaledHeadline)
+            .foregroundColor(theme.labelColor)
         }
+        .listRowBackground(theme.primaryBackgroundColor)
         .contextMenu {
           Button("account.list.delete", role: .destructive) {
             Task {
@@ -303,7 +296,9 @@ public struct AccountDetailView: View {
       Button("account.list.create") {
         isCreateListAlertPresented = true
       }
-      .padding(.horizontal, .layoutPadding)
+      .tint(theme.tintColor)
+      .buttonStyle(.borderless)
+      .listRowBackground(theme.primaryBackgroundColor)
     }
     .task {
       await currentAccount.fetchLists()
@@ -330,36 +325,29 @@ public struct AccountDetailView: View {
   @ViewBuilder
   private var pinnedPostsView: some View {
     if !viewModel.pinned.isEmpty {
+      Label("account.post.pinned", systemImage: "pin.fill")
+        .font(.scaledFootnote)
+        .foregroundColor(.gray)
+        .fontWeight(.semibold)
+        .listRowInsets(.init(top: 0,
+                             leading: 12,
+                             bottom: 0,
+                             trailing: .layoutPadding))
+        .listRowSeparator(.hidden)
+        .listRowBackground(theme.primaryBackgroundColor)
       ForEach(viewModel.pinned) { status in
-        VStack(alignment: .leading) {
-          Label("account.post.pinned", systemImage: "pin.fill")
-            .font(.scaledFootnote)
-            .foregroundColor(.gray)
-            .fontWeight(.semibold)
-          StatusRowView(viewModel: .init(status: status))
-        }
-        .padding(.horizontal, .layoutPadding)
-        Rectangle()
-          .frame(height: 12)
-          .foregroundColor(theme.secondaryBackgroundColor)
+        StatusRowView(viewModel: .init(status: status))
       }
+      Rectangle()
+        .fill(theme.secondaryBackgroundColor)
+        .frame(height: 12)
+        .listRowInsets(.init())
+        .listRowSeparator(.hidden)
     }
   }
 
   @ToolbarContentBuilder
   private var toolbarContent: some ToolbarContent {
-    ToolbarItem(placement: .principal) {
-      if scrollOffset < -170 {
-        switch viewModel.accountState {
-        case let .data(account):
-          EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
-            .font(.scaledHeadline)
-        default:
-          EmptyView()
-        }
-      }
-    }
-
     ToolbarItem(placement: .navigationBarTrailing) {
       Menu {
         if let account = viewModel.account {
@@ -404,7 +392,7 @@ public struct AccountDetailView: View {
                   Label("account.action.block", systemImage: "person.crop.circle.badge.xmark")
                 }
               }
-              
+
               if viewModel.relationship?.muting == true {
                 Button {
                   Task {
@@ -420,7 +408,7 @@ public struct AccountDetailView: View {
               } else {
                 Menu {
                   ForEach(MutingDurations.allCases, id: \.rawValue) { duration in
-                    Button (duration.description) {
+                    Button(duration.description) {
                       Task {
                         do {
                           viewModel.relationship = try await client.post(endpoint: Accounts.mute(id: account.id, json: MuteData(duration: duration.rawValue)))
@@ -544,11 +532,7 @@ public struct AccountDetailView: View {
           }
         }
       } label: {
-        if scrollOffset < -5 {
-          Image(systemName: "ellipsis.circle")
-        } else {
-          Image(systemName: "ellipsis.circle.fill")
-        }
+        Image(systemName: "ellipsis.circle")
       }
     }
   }

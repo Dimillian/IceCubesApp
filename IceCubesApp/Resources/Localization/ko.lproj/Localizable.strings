@@ -66,7 +66,7 @@
 "settings.app.source" = "소스 코드 (GitHub)";
 "settings.app.support" = "이 앱 지원하기";
 "settings.app.about" = "이 앱에 관해";
-"settings.display.example-toot" = "Example Post";
+"settings.display.example-toot" = "글 미리 보기";
 "settings.display.avatar.position" = "프로필 사진 위치";
 "settings.display.avatar.shape" = "프로필 사진 모양";
 "settings.display.navigation-title" = "화면 설정";
@@ -157,11 +157,25 @@
 "settings.haptic.tab-selection" = "하단 탭 바를 누를 때";
 "settings.haptic.buttons" = "버튼을 누를 때";
 
-"settings.display.section.phone" = "iPhone";
-"settings.display.show-tab-label" = "Show tab name";
+"settings.display.show-tab-label" = "하단 탭 바에 제목 표시";
 
-"settings.display.section.ipad" = "iPad";
-"settings.display.show-ipad-column" = "Enable secondary column";
+"settings.display.show-ipad-column" = "보조 열 사용";
+
+"settings.general.swipeactions" = "쓸어넘기기 동작 설정";
+"settings.swipeactions.navigation-title" = "쓸어넘기기 동작 설정";
+"settings.swipeactions.status.action.bookmark" = "보관함에 추가";
+"settings.swipeactions.status.action.boost" = "부스트";
+"settings.swipeactions.status.action.favorite" = "좋아요";
+"settings.swipeactions.status.action.none" = "설정 안 함";
+"settings.swipeactions.status.action.quote" = "인용";
+"settings.swipeactions.status.action.reply" = "댓글";
+"settings.swipeactions.status.leading" = "오른쪽으로 쓸어넘길 때";
+"settings.swipeactions.status.leading.left" = "왼쪽 버튼";
+"settings.swipeactions.status.leading.right" = "오른쪽 버튼";
+"settings.swipeactions.status.trailing" = "왼쪽으로 쓸어넘길 때";
+"settings.swipeactions.status.trailing.left" = "왼쪽 버튼";
+"settings.swipeactions.status.trailing.right" = "오른쪽 버튼";
+"settings.swipeactions.status" = "글을";
 
 // MARK: Tabs
 "tab.explore" = "둘러보기";
@@ -327,13 +341,13 @@
 // MARK: Package: Status
 "status.action.translate" = "번역";
 "status.action.translate-from-%@" = "%@에서 번역";
-"status.action.translated-label" = "DeepL.com을 통해 번역됨";
+"status.action.translated-label-%@" = "%@을 통해 번역됨";
 "status.action.bookmark" = "보관함에 추가";
 "status.action.boost" = "부스트";
 "status.action.copy-text" = "복사";
 "status.action.delete" = "삭제";
-"status.action.delete.confirm.title" = "Confirm";
-"status.action.delete.confirm.message" = "are you sure you want to delete this post?";
+"status.action.delete.confirm.title" = "삭제 확인";
+"status.action.delete.confirm.message" = "이 글을 정말 삭제하시겠습니까?";
 "status.action.edit" = "수정";
 "status.action.favorite" = "좋아요";
 "status.action.mention" = "언급";
@@ -359,9 +373,12 @@
 "status.editor.description.add" = "설명 추가";
 "status.editor.description.edit" = "설명 편집";
 "status.editor.drafts.navigation-title" = "임시 보관함";
+"status.editor.emojis.navigation-title" = "커스텀 이모지";
 "status.editor.error.upload" = "전송 오류";
 "status.editor.language-select.navigation-title" = "언어 선택";
 "status.editor.language-select.recently-used" = "최근 사용";
+"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
+"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
 "status.editor.media.edit-image" = "이미지 편집";
 "status.editor.media.image-description" = "이미지 설명";
 "status.editor.mode.edit" = "글 수정";
@@ -390,7 +407,7 @@
 "status.poll.duration" = "투표 기간";
 "status.poll.frequency" = "투표 선택 옵션";
 "status.poll.option-n %lld" = "선택지 %lld";
-"status.poll.send" = "Send Vote";
+"status.poll.send" = "투표";
 "status.post-from-%@" = "%@님의 글";
 "status.row.was-boosted" = "님이 부스트함";
 "status.row.was-reply" = "댓글:";
@@ -422,3 +439,11 @@
 "filter.contexts.profiles" = "프로필";
 "filter.action.warning" = "경고 표시하고 글 가리기";
 "filter.action.hide" = "완전히 숨기기";
+
+// MARK: Accessibility
+"accessibility.editor.button.attach-photo" = "이미지 첨부";
+"accessibility.editor.button.poll" = "투표";
+"accessibility.editor.button.spoiler" = "열람 주의 문구";
+"accessibility.editor.button.drafts" = "임시 보관함";
+"accessibility.editor.button.custom-emojis" = "커스텀 이모지";
+"accessibility.editor.button.language" = "언어";

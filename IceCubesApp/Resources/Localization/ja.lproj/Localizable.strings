@@ -141,9 +141,9 @@
 "settings.rate" = "Ice Cubesを評価する";
 "settings.section.other" = "その他";
 "settings.other.hide-openai" = "AI支援機能の有効化";
-"settings.other.social-keyboard" = "ソーシャルメディア向けキーボードを有効化";
+"settings.other.social-keyboard" = "ソーシャルメディア向けキーボードの有効化";
 "settings.push.duplicate.title" = "重複通知修正ツール";
-"settings.push.duplicate.footer" = "重複して通知を受け取っていませんか？それを修正するためにこの魔法のボタンを試してみて";
+"settings.push.duplicate.footer" = "重複して通知を受け取っていませんか？修正するためにこの魔法のボタンを試してみて";
 "settings.push.duplicate.button.fix" = "🪄 修正する";
 "settings.other.autoplay-video" = "動画の自動再生";
 "settings.about.built-with" = "Ice Cubesは以下のオープンソースソフトウェアで構築されています:";
@@ -157,11 +157,25 @@
 "settings.haptic.tab-selection" = "タブセレクト";
 "settings.haptic.buttons" = "ボタン操作時";
 
-"settings.display.section.phone" = "iPhone";
 "settings.display.show-tab-label" = "タブ名を表示";
 
-"settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "セカンドカラムを有効にする";
+
+"settings.general.swipeactions" = "スワイプ操作";
+"settings.swipeactions.navigation-title" = "スワイプ操作";
+"settings.swipeactions.status.action.bookmark" = "ブックマーク";
+"settings.swipeactions.status.action.boost" = "ブースト";
+"settings.swipeactions.status.action.favorite" = "お気に入り";
+"settings.swipeactions.status.action.none" = "未定義";
+"settings.swipeactions.status.action.quote" = "引用";
+"settings.swipeactions.status.action.reply" = "返信";
+"settings.swipeactions.status.leading" = "右にスワイプ";
+"settings.swipeactions.status.leading.left" = "左";
+"settings.swipeactions.status.leading.right" = "右";
+"settings.swipeactions.status.trailing" = "左にスワイプ";
+"settings.swipeactions.status.trailing.left" = "左";
+"settings.swipeactions.status.trailing.right" = "右";
+"settings.swipeactions.status" = "投稿";
 
 // MARK: Tabs
 "tab.explore" = "エクスプローラー";
@@ -324,8 +338,8 @@
 
 // MARK: Package: Status
 "status.action.translate" = "翻訳";
-"status.action.translate-from-%@" = "翻訳 %@";
-"status.action.translated-label" = "DeepL.comを使用して翻訳";
+"status.action.translate-from-%@" = "%@ から翻訳";
+"status.action.translated-label-%@" = "%@ を使用して翻訳";
 "status.action.bookmark" = "ブックマーク";
 "status.action.boost" = "ブースト";
 "status.action.copy-text" = "テキストをコピー";
@@ -357,9 +371,12 @@
 "status.editor.description.add" = "説明文を追加";
 "status.editor.description.edit" = "説明文を編集";
 "status.editor.drafts.navigation-title" = "下書き";
+"status.editor.emojis.navigation-title" = "カスタム絵文字";
 "status.editor.error.upload" = "アップロードエラー";
 "status.editor.language-select.navigation-title" = "言語設定";
 "status.editor.language-select.recently-used" = "最近使用した";
+"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
+"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
 "status.editor.media.edit-image" = "イメージの編集";
 "status.editor.media.image-description" = "イメージの説明文";
 "status.editor.mode.edit" = "投稿を編集する";
@@ -375,7 +392,7 @@
 "status.error.title" = "エラーが発生しました";
 "status.filter.filtered-by-%@" = "%@ :によりフィルターされました";
 "status.filter.show-anyway" = "とりあえず表示";
-"status.image.alt-text.abbreviation" = "ALT";
+"status.image.alt-text.abbreviation" = "注釈";
 "status.media.content.show" = "内容を表示";
 "status.media.contextmenu.copy" = "イメージのコピー";
 "status.media.contextmenu.save" = "イメージの保存";
@@ -420,3 +437,11 @@
 "filter.contexts.profiles" = "プロフィール";
 "filter.action.warning" = "警告して非表示";
 "filter.action.hide" = "完全に非表示";
+
+// MARK: Accessibility
+"accessibility.editor.button.attach-photo" = "画像を添付";
+"accessibility.editor.button.poll" = "投票";
+"accessibility.editor.button.spoiler" = "ネタバレを警告";
+"accessibility.editor.button.drafts" = "下書き";
+"accessibility.editor.button.custom-emojis" = "カスタム絵文字";
+"accessibility.editor.button.language" = "言語";

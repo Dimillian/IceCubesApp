@@ -157,11 +157,25 @@
 "settings.haptic.tab-selection" = "Wybór zakładki";
 "settings.haptic.buttons" = "Naciśnięcie przycisku";
 
-"settings.display.section.phone" = "iPhone";
 "settings.display.show-tab-label" = "Pokazuj nazwy zakładek";
 
-"settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Włącz dodatkową kolumnę";
+
+"settings.general.swipeactions" = "Przeciąganie palcem";
+"settings.swipeactions.navigation-title" = "Przeciąganie palcem";
+"settings.swipeactions.status.action.bookmark" = "Dodaj zakładkę";
+"settings.swipeactions.status.action.boost" = "Podbij";
+"settings.swipeactions.status.action.favorite" = "Polub";
+"settings.swipeactions.status.action.none" = "Bez akcji";
+"settings.swipeactions.status.action.quote" = "Zacytuj";
+"settings.swipeactions.status.action.reply" = "Odpowiedz";
+"settings.swipeactions.status.leading" = "Przeciągnij w prawo";
+"settings.swipeactions.status.leading.left" = "lewa";
+"settings.swipeactions.status.leading.right" = "prawa";
+"settings.swipeactions.status.trailing" = "Przeciągnij w lewo";
+"settings.swipeactions.status.trailing.left" = "lewa";
+"settings.swipeactions.status.trailing.right" = "prawa";
+"settings.swipeactions.status" = "Post";
 
 // MARK: Tabs
 "tab.explore" = "Odkrywaj";
@@ -321,7 +335,7 @@
 // MARK: Package: Status
 "status.action.translate" = "Przetłumacz";
 "status.action.translate-from-%@" = "Przetłumacz tekst %@";
-"status.action.translated-label" = "Przetłumaczono za pomocą DeepL.com";
+"status.action.translated-label-%@" = "Przetłumaczono za pomocą %@";
 "status.action.bookmark" = "Dodaj zakładkę";
 "status.action.boost" = "Podbij";
 "status.action.copy-text" = "Kopiuj tekst";
@@ -353,9 +367,12 @@
 "status.editor.description.add" = "Dodaj opis";
 "status.editor.description.edit" = "Edytuj opis";
 "status.editor.drafts.navigation-title" = "Wersje robocze";
+"status.editor.emojis.navigation-title" = "Emotikony własne";
 "status.editor.error.upload" = "Błąd wysyłania";
 "status.editor.language-select.navigation-title" = "Wybierz język";
 "status.editor.language-select.recently-used" = "Ostatnio użyty";
+"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
+"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
 "status.editor.media.edit-image" = "Edytuj obrazek";
 "status.editor.media.image-description" = "Opis obrazka";
 "status.editor.mode.edit" = "Edycja twojego postu";
@@ -413,3 +430,11 @@
 "filter.contexts.profiles" = "Profile";
 "filter.action.warning" = "Ukryj z ostrzeżeniem";
 "filter.action.hide" = "Ukryj całkowicie";
+
+// MARK: Accessibility
+"accessibility.editor.button.attach-photo" = "Dołącz zdjęcie";
+"accessibility.editor.button.poll" = "Sondaż";
+"accessibility.editor.button.spoiler" = "Ostrzeżenie o spoilerze";
+"accessibility.editor.button.drafts" = "Wersje robocze";
+"accessibility.editor.button.custom-emojis" = "Emotikony własne";
+"accessibility.editor.button.language" = "Język";

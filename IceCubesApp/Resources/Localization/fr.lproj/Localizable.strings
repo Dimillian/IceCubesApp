@@ -157,11 +157,25 @@
 "settings.haptic.tab-selection" = "Sélection d'onglet";
 "settings.haptic.buttons" = "Appui bouton";
 
-"settings.display.section.phone" = "iPhone";
 "settings.display.show-tab-label" = "Montrer le nom de l'onglet";
 
-"settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Activer la colonne secondaire";
+
+"settings.general.swipeactions" = "Swipe Actions";
+"settings.swipeactions.navigation-title" = "Swipe Actions";
+"settings.swipeactions.status.action.bookmark" = "Bookmark";
+"settings.swipeactions.status.action.boost" = "Boost";
+"settings.swipeactions.status.action.favorite" = "Favorite";
+"settings.swipeactions.status.action.none" = "None";
+"settings.swipeactions.status.action.quote" = "Quote";
+"settings.swipeactions.status.action.reply" = "Reply";
+"settings.swipeactions.status.leading" = "Swipe right";
+"settings.swipeactions.status.leading.left" = "left";
+"settings.swipeactions.status.leading.right" = "right";
+"settings.swipeactions.status.trailing" = "Swipe left";
+"settings.swipeactions.status.trailing.left" = "left";
+"settings.swipeactions.status.trailing.right" = "right";
+"settings.swipeactions.status" = "Post";
 
 // MARK: Tabs
 "tab.explore" = "Explorer";
@@ -321,7 +335,7 @@
 // MARK: Package: Status
 "status.action.translate" = "Traduire";
 "status.action.translate-from-%@" = "Traduire de %@";
-"status.action.translated-label" = "Traduit avec DeepL.com";
+"status.action.translated-label-%@" = "Traduit avec %@";
 "status.action.bookmark" = "Marquer";
 "status.action.boost" = "Promouvoir";
 "status.action.copy-text" = "Copier le texte";
@@ -353,9 +367,12 @@
 "status.editor.description.add" = "Ajouter une description";
 "status.editor.description.edit" = "Modifier la description";
 "status.editor.drafts.navigation-title" = "Brouillons";
+"status.editor.emojis.navigation-title" = "Custom Emojis";
 "status.editor.error.upload" = "Erreur de téléchargement";
 "status.editor.language-select.navigation-title" = "Sélectionner la langue";
 "status.editor.language-select.recently-used" = "Utilisé récemment";
+"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
+"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
 "status.editor.media.edit-image" = "Modifier l'image";
 "status.editor.media.image-description" = "Description de l'image";
 "status.editor.mode.edit" = "Modification de votre publication";
@@ -417,3 +434,10 @@
 "filter.action.warning" = "Cacher avec avertissement";
 "filter.action.hide" = "Cacher complètement";
 
+// MARK: Accessibility
+"accessibility.editor.button.attach-photo" = "Attach photo";
+"accessibility.editor.button.poll" = "Poll";
+"accessibility.editor.button.spoiler" = "Spoiler warning";
+"accessibility.editor.button.drafts" = "Drafts";
+"accessibility.editor.button.custom-emojis" = "Custom emojis";
+"accessibility.editor.button.language" = "Language";

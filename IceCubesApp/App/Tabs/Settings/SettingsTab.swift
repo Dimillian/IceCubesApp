@@ -102,16 +102,19 @@ struct SettingsTabs: View {
       NavigationLink(destination: DisplaySettingsView()) {
         Label("settings.general.display", systemImage: "paintpalette")
       }
-        if HapticManager.shared.supportsHaptics {
-            NavigationLink(destination: HapticSettingsView()) {
-                Label("settings.general.haptic", systemImage: "waveform.path")
-            }
+      if HapticManager.shared.supportsHaptics {
+        NavigationLink(destination: HapticSettingsView()) {
+          Label("settings.general.haptic", systemImage: "waveform.path")
         }
+      }
       NavigationLink(destination: remoteLocalTimelinesView) {
         Label("settings.general.remote-timelines", systemImage: "dot.radiowaves.right")
       }
       NavigationLink(destination: ContentSettingsView()) {
         Label("settings.general.content", systemImage: "rectangle.on.rectangle")
+      }
+      NavigationLink(destination: SwipeActionsSettingsView()) {
+        Label("settings.general.swipeactions", systemImage: "hand.draw")
       }
       Link(destination: URL(string: UIApplication.openSettingsURLString)!) {
         Label("settings.system", systemImage: "gear")

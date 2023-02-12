@@ -1,5 +1,6 @@
 import Env
 import Models
+import NaturalLanguage
 import Network
 import SwiftUI
 
@@ -26,7 +27,7 @@ public class StatusRowViewModel: ObservableObject {
   @Published var isFiltered: Bool = false
   @Published var isLoadingRemoteContent: Bool = false
 
-  @Published var translation: String?
+  @Published var translation: StatusTranslation?
   @Published var isLoadingTranslation: Bool = false
   @Published var showDeleteAlert: Bool = false
 
@@ -34,7 +35,7 @@ public class StatusRowViewModel: ObservableObject {
   @Published var rebloggers: [Account] = []
 
   private let theme = Theme.shared
-  
+
   var seen = false
 
   var filter: Filtered? {
@@ -42,7 +43,6 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   var highlightRowColor: Color {
-
     if status.visibility == .direct {
       return theme.tintColor.opacity(0.15)
     } else if status.userMentioned != nil {
@@ -265,13 +265,13 @@ public class StatusRowViewModel: ObservableObject {
       _ = try await client.delete(endpoint: Statuses.status(id: status.id))
     } catch {}
   }
-  
+
   func fetchActionsAccounts() async {
     guard let client else { return }
     do {
       favoriters = try await client.get(endpoint: Statuses.favoritedBy(id: status.id, maxId: nil))
       rebloggers = try await client.get(endpoint: Statuses.rebloggedBy(id: status.id, maxId: nil))
-    } catch { }
+    } catch {}
   }
 
   private func updateFromStatus(status: Status) {
@@ -291,19 +291,37 @@ public class StatusRowViewModel: ObservableObject {
     repliesCount = status.reblog?.repliesCount ?? status.repliesCount
   }
 
+  func getStatusLang() -> String? {
+    status.language
+  }
+
   func translate(userLang: String) async {
-    let client = DeepLClient()
+    await translate(userLang: userLang, sourceLang: getStatusLang())
+  }
+
+  private func translate(userLang: String, sourceLang _: String?) async {
+    guard let client else { return }
     do {
       withAnimation {
         isLoadingTranslation = true
       }
-      let translation = try await client.request(target: userLang,
-                                                 source: status.language,
-                                                 text: status.reblog?.content.asRawText ?? status.content.asRawText)
+      // We first use instance translation API if available.
+      let translation: StatusTranslation = try await client.post(endpoint: Statuses.translate(id: status.reblog?.id ?? status.id,
+                                                                                              lang: userLang))
       withAnimation {
         self.translation = translation
         isLoadingTranslation = false
       }
-    } catch {}
+    } catch {
+      // If not or fail we use Ice Cubes own DeepL client.
+      let deepLClient = DeepLClient()
+      let translation = try? await deepLClient.request(target: userLang,
+                                                       source: status.language,
+                                                       text: status.reblog?.content.asRawText ?? status.content.asRawText)
+      withAnimation {
+        self.translation = translation
+        isLoadingTranslation = false
+      }
+    }
   }
 }

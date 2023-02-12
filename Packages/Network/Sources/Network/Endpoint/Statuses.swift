@@ -17,6 +17,7 @@ public enum Statuses: Endpoint {
   case bookmark(id: String)
   case unbookmark(id: String)
   case history(id: String)
+  case translate(id: String, lang: String?)
 
   public func path() -> String {
     switch self {
@@ -50,6 +51,8 @@ public enum Statuses: Endpoint {
       return "statuses/\(id)/unbookmark"
     case let .history(id):
       return "statuses/\(id)/history"
+    case let .translate(id, _):
+      return "statuses/\(id)/translate"
     }
   }
 
@@ -59,6 +62,11 @@ public enum Statuses: Endpoint {
       return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
     case let .favoritedBy(_, maxId):
       return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
+    case let .translate(_, lang):
+      if let lang {
+        return [.init(name: "lang", value: lang)]
+      }
+      return nil
     default:
       return nil
     }
@@ -84,6 +92,7 @@ public struct StatusData: Encodable {
   public let mediaIds: [String]?
   public let poll: PollData?
   public let language: String?
+  public let mediaAttributes: [MediaAttribute]?
 
   public struct PollData: Encodable {
     public let options: [String]
@@ -97,13 +106,28 @@ public struct StatusData: Encodable {
     }
   }
 
+  public struct MediaAttribute: Encodable {
+    public let id: String
+    public let description: String?
+    public let thumbnail: String?
+    public let focus: String?
+
+    public init(id: String, description: String?, thumbnail: String?, focus: String?) {
+      self.id = id
+      self.description = description
+      self.thumbnail = thumbnail
+      self.focus = focus
+    }
+  }
+
   public init(status: String,
               visibility: Visibility,
               inReplyToId: String? = nil,
               spoilerText: String? = nil,
               mediaIds: [String]? = nil,
               poll: PollData? = nil,
-              language: String? = nil)
+              language: String? = nil,
+              mediaAttributes: [MediaAttribute]? = nil)
   {
     self.status = status
     self.visibility = visibility
@@ -112,5 +136,6 @@ public struct StatusData: Encodable {
     self.mediaIds = mediaIds
     self.poll = poll
     self.language = language
+    self.mediaAttributes = mediaAttributes
   }
 }

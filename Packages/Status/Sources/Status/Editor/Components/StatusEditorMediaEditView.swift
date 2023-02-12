@@ -1,4 +1,5 @@
 import DesignSystem
+import Env
 import Models
 import Shimmer
 import SwiftUI
@@ -6,6 +7,7 @@ import SwiftUI
 struct StatusEditorMediaEditView: View {
   @Environment(\.dismiss) private var dismiss
   @EnvironmentObject private var theme: Theme
+  @EnvironmentObject private var currentInstance: CurrentInstance
   @ObservedObject var viewModel: StatusEditorViewModel
   let container: StatusEditorMediaContainer
 
@@ -53,8 +55,14 @@ struct StatusEditorMediaEditView: View {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button("action.done") {
             if !imageDescription.isEmpty {
-              Task {
-                await viewModel.addDescription(container: container, description: imageDescription)
+              if currentInstance.isEditAltTextSupported && viewModel.mode.isEditing {
+                Task {
+                  await viewModel.editDescription(container: container, description: imageDescription)
+                }
+              } else {
+                Task {
+                  await viewModel.addDescription(container: container, description: imageDescription)
+                }
               }
             }
             dismiss()

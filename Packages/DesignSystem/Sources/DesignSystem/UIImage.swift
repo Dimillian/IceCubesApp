@@ -1,16 +1,15 @@
 import UIKit
 
-extension UIImage{
-  public var roundedImage: UIImage? {
-    let rect = CGRect(origin:CGPoint(x: 0, y: 0), size: self.size)
-    UIGraphicsBeginImageContextWithOptions(self.size, false, 1)
+public extension UIImage {
+  var roundedImage: UIImage? {
+    let rect = CGRect(origin: CGPoint(x: 0, y: 0), size: size)
+    UIGraphicsBeginImageContextWithOptions(size, false, 1)
     defer { UIGraphicsEndImageContext() }
     UIBezierPath(
       roundedRect: rect,
-      cornerRadius: self.size.height
+      cornerRadius: size.height
     ).addClip()
-    self.draw(in: rect)
+    draw(in: rect)
     return UIGraphicsGetImageFromCurrentImageContext()
   }
 }
-

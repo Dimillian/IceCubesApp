@@ -54,14 +54,12 @@ public protocol AnyStatus {
   var language: String? { get }
 }
 
-extension AnyStatus {
-  public var viewId: String {
-    get {
-      if let editedAt {
-        return "\(id)\(editedAt.asDate.description)"
-      }
-      return id
+public extension AnyStatus {
+  var viewId: String {
+    if let editedAt {
+      return "\(id)\(editedAt.asDate.description)"
     }
+    return id
   }
 }
 
@@ -107,41 +105,40 @@ public struct Status: AnyStatus, Codable, Identifiable, Equatable, Hashable, Sta
   public let sensitive: Bool
   public let language: String?
 
-  public static func placeholder(forSettings:Bool = false, language:String? = nil) -> Status {
+  public static func placeholder(forSettings: Bool = false, language: String? = nil) -> Status {
     .init(id: UUID().uuidString,
-       content: .init(stringValue: "Lorem ipsum [#dolor](#) sit amet\nconsectetur [@adipiscing](#) elit\nAsed do eiusmod tempor incididunt ut labore.", parseMarkdown: forSettings),
+          content: .init(stringValue: "Lorem ipsum [#dolor](#) sit amet\nconsectetur [@adipiscing](#) elit\nAsed do eiusmod tempor incididunt ut labore.", parseMarkdown: forSettings),
 
-       account: .placeholder(),
-       createdAt: ServerDate(),
-       editedAt: nil,
-       reblog: nil,
-       mediaAttachments: [],
-       mentions: [],
-       repliesCount: 0,
-       reblogsCount: 0,
-       favouritesCount: 0,
-       card: nil,
-       favourited: false,
-       reblogged: false,
-       pinned: false,
-       bookmarked: false,
-       emojis: [],
-       url: "https://example.com",
-       application: nil,
-       inReplyToAccountId: nil,
-       visibility: .pub,
-       poll: nil,
-       spoilerText: .init(stringValue: ""),
-       filtered: [],
-       sensitive: false,
-       language: language)
+          account: .placeholder(),
+          createdAt: ServerDate(),
+          editedAt: nil,
+          reblog: nil,
+          mediaAttachments: [],
+          mentions: [],
+          repliesCount: 0,
+          reblogsCount: 0,
+          favouritesCount: 0,
+          card: nil,
+          favourited: false,
+          reblogged: false,
+          pinned: false,
+          bookmarked: false,
+          emojis: [],
+          url: "https://example.com",
+          application: nil,
+          inReplyToAccountId: nil,
+          visibility: .pub,
+          poll: nil,
+          spoilerText: .init(stringValue: ""),
+          filtered: [],
+          sensitive: false,
+          language: language)
   }
-
 
   public static func placeholders() -> [Status] {
     [.placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder()]
   }
-  
+
   public var reblogAsAsStatus: Status? {
     if let reblog {
       return .init(id: reblog.id,

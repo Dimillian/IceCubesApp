@@ -85,7 +85,7 @@ public struct StatusRowView: View {
       .listRowBackground(viewModel.highlightRowColor)
       .swipeActions(edge: .trailing) {
         if !viewModel.isCompact {
-          trailinSwipeActions
+          trailingSwipeActions
         }
       }
       .swipeActions(edge: .leading) {
@@ -93,7 +93,6 @@ public struct StatusRowView: View {
           leadingSwipeActions
         }
       }
-      .listRowBackground(theme.primaryBackgroundColor)
       .listRowInsets(.init(top: 12,
                            leading: .layoutPadding,
                            bottom: 12,
@@ -119,19 +118,21 @@ public struct StatusRowView: View {
           title: Text("status.action.delete.confirm.title"),
           message: Text("status.action.delete.confirm.message"),
           primaryButton: .destructive(
-            Text("status.action.delete")) {
-              Task {
-                await viewModel.delete()
-              }
-            },
-          secondaryButton: .cancel())
+            Text("status.action.delete"))
+          {
+            Task {
+              await viewModel.delete()
+            }
+          },
+          secondaryButton: .cancel()
+        )
       })
       .alignmentGuide(.listRowSeparatorLeading) { _ in
         -100
       }
     }
   }
-  
+
   @ViewBuilder
   private var accesibilityActions: some View {
     // Add the individual mentions as accessibility actions
@@ -140,17 +141,17 @@ public struct StatusRowView: View {
         routerPath.navigate(to: .accountDetail(id: mention.id))
       }
     }
-    
+
     Button(viewModel.displaySpoiler ? "status.show-more" : "status.show-less") {
       withAnimation {
         viewModel.displaySpoiler.toggle()
       }
     }
-    
+
     Button("@\(viewModel.status.account.username)") {
       routerPath.navigate(to: .accountDetail(id: viewModel.status.account.id))
     }
-    
+
     contextMenu
   }
 
@@ -330,7 +331,7 @@ public struct StatusRowView: View {
         .foregroundColor(.gray)
     }
   }
-  
+
   private var contextMenuButton: some View {
     Menu {
       contextMenu
@@ -344,14 +345,24 @@ public struct StatusRowView: View {
     .accessibilityHidden(true)
   }
 
+  private func shouldShowTranslateButton(status: AnyStatus) -> Bool {
+    let statusLang = viewModel.getStatusLang()
+
+    if let userLang = preferences.serverPreferences?.postLanguage,
+       preferences.showTranslateButton,
+       !status.content.asRawText.isEmpty,
+       viewModel.translation == nil
+    {
+      return userLang != statusLang
+    } else {
+      return false
+    }
+  }
+
   @ViewBuilder
   private func makeTranslateView(status: AnyStatus) -> some View {
     if let userLang = preferences.serverPreferences?.postLanguage,
-       preferences.showTranslateButton,
-       status.language != nil,
-       userLang != status.language,
-       !status.content.asRawText.isEmpty,
-       viewModel.translation == nil
+       shouldShowTranslateButton(status: status)
     {
       Button {
         Task {
@@ -361,7 +372,7 @@ public struct StatusRowView: View {
         if viewModel.isLoadingTranslation {
           ProgressView()
         } else {
-          if let statusLanguage = status.language,
+          if let statusLanguage = viewModel.getStatusLang(),
              let languageName = Locale.current.localizedString(forLanguageCode: statusLanguage)
           {
             Text("status.action.translate-from-\(languageName)")
@@ -376,9 +387,9 @@ public struct StatusRowView: View {
     if let translation = viewModel.translation, !viewModel.isLoadingTranslation {
       GroupBox {
         VStack(alignment: .leading, spacing: 4) {
-          Text(translation)
+          Text(translation.content.asSafeMarkdownAttributedString)
             .font(.scaledBody)
-          Text("status.action.translated-label")
+          Text("status.action.translated-label-\(translation.provider)")
             .font(.footnote)
             .foregroundColor(.gray)
         }
@@ -453,43 +464,87 @@ public struct StatusRowView: View {
   }
 
   @ViewBuilder
-  private var trailinSwipeActions: some View {
-    Button {
-      Task {
-        HapticManager.shared.fireHaptic(of: .notification(.success))
+  private var trailingSwipeActions: some View {
+    if preferences.swipeActionsStatusTrailingRight != StatusAction.none {
+      makeSwipeButton(action: preferences.swipeActionsStatusTrailingRight)
+    }
+    if preferences.swipeActionsStatusTrailingLeft != StatusAction.none {
+      makeSwipeButton(action: preferences.swipeActionsStatusTrailingLeft)
+    }
+  }
+
+  @ViewBuilder
+  private var leadingSwipeActions: some View {
+    if preferences.swipeActionsStatusLeadingLeft != StatusAction.none {
+      makeSwipeButton(action: preferences.swipeActionsStatusLeadingLeft)
+    }
+    if preferences.swipeActionsStatusLeadingRight != StatusAction.none {
+      makeSwipeButton(action: preferences.swipeActionsStatusLeadingRight)
+    }
+  }
+
+  @ViewBuilder
+  private func makeSwipeButton(action: StatusAction) -> some View {
+    switch action {
+    case .reply:
+      makeSwipeButtonForRouterPath(action: action, destination: .replyToStatusEditor(status: viewModel.status))
+    case .quote:
+      makeSwipeButtonForRouterPath(action: action, destination: .quoteStatusEditor(status: viewModel.status))
+    case .favorite:
+      makeSwipeButtonForTask(action: action) {
         if viewModel.isFavorited {
           await viewModel.unFavorite()
         } else {
           await viewModel.favorite()
         }
       }
-    } label: {
-      Image(systemName: "star")
-    }
-    .tint(.yellow)
-    Button {
-      Task {
-        HapticManager.shared.fireHaptic(of: .notification(.success))
+    case .boost:
+      makeSwipeButtonForTask(action: action) {
         if viewModel.isReblogged {
           await viewModel.unReblog()
         } else {
           await viewModel.reblog()
         }
       }
-    } label: {
-      Image(systemName: "arrow.left.arrow.right.circle")
+    case .bookmark:
+      makeSwipeButtonForTask(action: action) {
+        if viewModel.isBookmarked {
+          await viewModel.unbookmark()
+        } else {
+          await
+            viewModel.bookmark()
+        }
+      }
+    case .none:
+      EmptyView()
     }
-    .tint(theme.tintColor)
   }
 
   @ViewBuilder
-  private var leadingSwipeActions: some View {
+  private func makeSwipeButtonForRouterPath(action: StatusAction, destination: SheetDestinations) -> some View {
     Button {
       HapticManager.shared.fireHaptic(of: .notification(.success))
-      routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
+      routerPath.presentedSheet = destination
     } label: {
-      Image(systemName: "arrowshape.turn.up.left")
+      Text(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
+      Image(systemName: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
+        .environment(\.symbolVariants, .none)
     }
-    .tint(theme.tintColor)
+    .tint(action.color(themeTintColor: theme.tintColor))
+  }
+
+  @ViewBuilder
+  private func makeSwipeButtonForTask(action: StatusAction, task: @escaping () async -> Void) -> some View {
+    Button {
+      Task {
+        HapticManager.shared.fireHaptic(of: .notification(.success))
+        await task()
+      }
+    } label: {
+      Text(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
+      Image(systemName: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
+        .environment(\.symbolVariants, .none)
+    }
+    .tint(action.color(themeTintColor: theme.tintColor))
   }
 }

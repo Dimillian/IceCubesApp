@@ -157,11 +157,25 @@
 "settings.haptic.tab-selection" = "Tab Selection";
 "settings.haptic.buttons" = "Button Press";
 
-"settings.display.section.phone" = "iPhone";
 "settings.display.show-tab-label" = "Show tab name";
 
-"settings.display.section.ipad" = "iPad";
 "settings.display.show-ipad-column" = "Enable secondary column";
+
+"settings.general.swipeactions" = "Swipe Actions";
+"settings.swipeactions.navigation-title" = "Swipe Actions";
+"settings.swipeactions.status.action.bookmark" = "Bookmark";
+"settings.swipeactions.status.action.boost" = "Boost";
+"settings.swipeactions.status.action.favorite" = "Favorite";
+"settings.swipeactions.status.action.none" = "None";
+"settings.swipeactions.status.action.quote" = "Quote";
+"settings.swipeactions.status.action.reply" = "Reply";
+"settings.swipeactions.status.leading" = "Swipe right";
+"settings.swipeactions.status.leading.left" = "left";
+"settings.swipeactions.status.leading.right" = "right";
+"settings.swipeactions.status.trailing" = "Swipe left";
+"settings.swipeactions.status.trailing.left" = "left";
+"settings.swipeactions.status.trailing.right" = "right";
+"settings.swipeactions.status" = "Post";
 
 // MARK: Tabs
 "tab.explore" = "Keşfet";
@@ -321,7 +335,7 @@
 // MARK: Package: Status
 "status.action.translate" = "Tercüme et";
 "status.action.translate-from-%@" = "Tercüme et %@";
-"status.action.translated-label" = "DeepL.com tarafından tercüme edildi";
+"status.action.translated-label-%@" = "%@ tarafından tercüme edildi";
 "status.action.bookmark" = "Yer İmi Ekle";
 "status.action.boost" = "Yükselt";
 "status.action.copy-text" = "Yazıyı Kopyala";
@@ -353,9 +367,12 @@
 "status.editor.description.add" = "Açıklama Ekle";
 "status.editor.description.edit" = "Açıklamayı Düzenle";
 "status.editor.drafts.navigation-title" = "Taslaklar";
+"status.editor.emojis.navigation-title" = "Custom Emojis";
 "status.editor.error.upload" = "Yüklerken Hata Oluştu";
 "status.editor.language-select.navigation-title" = "Dil Seç";
 "status.editor.language-select.recently-used" = "Son Kullanılanlar";
+"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
+"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
 "status.editor.media.edit-image" = "Görüntüyü Düzenle";
 "status.editor.media.image-description" = "Görüntü Açıklaması";
 "status.editor.mode.edit" = "Gönderin Düzenleniyor";
@@ -420,3 +437,11 @@
 "enum.expand-media.show" = "Show All";
 "enum.expand-media.hide" = "Hide All";
 "enum.expand-media.hide-sensitive" = "Hide Sensitive";
+
+// MARK: Accessibility
+"accessibility.editor.button.attach-photo" = "Attach photo";
+"accessibility.editor.button.poll" = "Poll";
+"accessibility.editor.button.spoiler" = "Spoiler warning";
+"accessibility.editor.button.drafts" = "Drafts";
+"accessibility.editor.button.custom-emojis" = "Custom emojis";
+"accessibility.editor.button.language" = "Language";

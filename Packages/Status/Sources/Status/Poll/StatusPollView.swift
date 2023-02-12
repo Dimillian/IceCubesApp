@@ -37,7 +37,8 @@ public struct StatusPollView: View {
 
   private func isSelected(option: Poll.Option) -> Bool {
     if let optionIndex = viewModel.poll.options.firstIndex(where: { $0.id == option.id }),
-       let _ = viewModel.votes.firstIndex(of: optionIndex) {
+       let _ = viewModel.votes.firstIndex(of: optionIndex)
+    {
       return true
     }
     return false
@@ -62,7 +63,7 @@ public struct StatusPollView: View {
     return Image(systemName: imageName)
       .foregroundColor(theme.labelColor)
   }
-  
+
   public var body: some View {
     VStack(alignment: .leading) {
       ForEach(viewModel.poll.options) { option in
