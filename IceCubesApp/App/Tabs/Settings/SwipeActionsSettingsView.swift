@@ -7,30 +7,29 @@ struct SwipeActionsSettingsView: View {
   @EnvironmentObject private var userPreferences: UserPreferences
   
   var body: some View {
-    
     Form {
       Section("settings.swipeactions.status") {
         Label("settings.swipeactions.status.leading", systemImage: "arrow.left.circle")
         Picker(selection: $userPreferences.swipeActionsStatusLeadingLeft, label: makeSwipeLabel(left: true, text: "settings.swipeactions.status.leading.left")) {
           Section {
-            Text(StatusAction.none.displayName).tag(StatusAction.none)
+            Label(StatusAction.none.displayName, systemImage: StatusAction.none.iconName()).tag(StatusAction.none)
           }
           Section {
             ForEach(StatusAction.allCases) { action in
               if (action != .none) {
-                Text(action.displayName).tag(action)
+                Label(action.displayName, systemImage: action.iconName()).tag(action)
               }
             }
           }
         }
         Picker(selection: $userPreferences.swipeActionsStatusLeadingRight, label: makeSwipeLabel(left: false, text: "settings.swipeactions.status.leading.right")) {
           Section {
-            Text(StatusAction.none.displayName).tag(StatusAction.none)
+            Label(StatusAction.none.displayName, systemImage: StatusAction.none.iconName()).tag(StatusAction.none)
           }
           Section {
             ForEach(StatusAction.allCases) { action in
               if (action != .none) {
-                Text(action.displayName).tag(action)
+                Label(action.displayName, systemImage: action.iconName()).tag(action)
               }
             }
           }
@@ -38,24 +37,24 @@ struct SwipeActionsSettingsView: View {
         Label("settings.swipeactions.status.trailing", systemImage: "arrow.right.circle")
         Picker(selection: $userPreferences.swipeActionsStatusTrailingLeft, label: makeSwipeLabel(left: true, text: "settings.swipeactions.status.trailing.left"))  {
           Section {
-            Text(StatusAction.none.displayName).tag(StatusAction.none)
+            Label(StatusAction.none.displayName, systemImage: StatusAction.none.iconName()).tag(StatusAction.none)
           }
           Section {
             ForEach(StatusAction.allCases) { action in
               if (action != .none) {
-                Text(action.displayName).tag(action)
+                Label(action.displayName, systemImage: action.iconName()).tag(action)
               }
             }
           }
         }
         Picker(selection: $userPreferences.swipeActionsStatusTrailingRight, label: makeSwipeLabel(left: false, text: "settings.swipeactions.status.trailing.right")) {
           Section {
-            Text(StatusAction.none.displayName).tag(StatusAction.none)
+            Label(StatusAction.none.displayName, systemImage: StatusAction.none.iconName()).tag(StatusAction.none)
           }
           Section {
             ForEach(StatusAction.allCases) { action in
               if (action != .none) {
-                Text(action.displayName).tag(action)
+                Label(action.displayName, systemImage: action.iconName()).tag(action)
               }
             }
           }
