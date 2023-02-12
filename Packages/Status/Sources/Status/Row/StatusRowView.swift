@@ -518,7 +518,7 @@ public struct StatusRowView: View {
       HapticManager.shared.fireHaptic(of: .notification(.success))
       routerPath.presentedSheet = destination
     } label: {
-      Text(action.displayName)
+      Text(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
       Image(systemName: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
         .environment(\.symbolVariants, .none)
     }
@@ -532,7 +532,7 @@ public struct StatusRowView: View {
         await task()
       }
     } label: {
-      Text(action.displayName)
+      Text(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
       Image(systemName: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
         .environment(\.symbolVariants, .none)
     }
