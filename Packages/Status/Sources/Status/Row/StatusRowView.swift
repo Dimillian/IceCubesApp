@@ -467,9 +467,11 @@ public struct StatusRowView: View {
   private var trailingSwipeActions: some View {
     if preferences.swipeActionsStatusTrailingRight != StatusAction.none {
       makeSwipeButton(action: preferences.swipeActionsStatusTrailingRight)
+        .tint(preferences.swipeActionsStatusTrailingRight.color(themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor, outside: true))
     }
     if preferences.swipeActionsStatusTrailingLeft != StatusAction.none {
       makeSwipeButton(action: preferences.swipeActionsStatusTrailingLeft)
+        .tint(preferences.swipeActionsStatusTrailingLeft.color(themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor, outside: false))
     }
   }
 
@@ -477,9 +479,11 @@ public struct StatusRowView: View {
   private var leadingSwipeActions: some View {
     if preferences.swipeActionsStatusLeadingLeft != StatusAction.none {
       makeSwipeButton(action: preferences.swipeActionsStatusLeadingLeft)
+        .tint(preferences.swipeActionsStatusLeadingLeft.color(themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor, outside: true))
     }
     if preferences.swipeActionsStatusLeadingRight != StatusAction.none {
       makeSwipeButton(action: preferences.swipeActionsStatusLeadingRight)
+        .tint(preferences.swipeActionsStatusLeadingRight.color(themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor, outside: false))
     }
   }
 
@@ -530,7 +534,6 @@ public struct StatusRowView: View {
       Image(systemName: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
         .environment(\.symbolVariants, .none)
     }
-    .tint(action.color(themeTintColor: theme.tintColor))
   }
 
   @ViewBuilder
@@ -545,6 +548,5 @@ public struct StatusRowView: View {
       Image(systemName: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
         .environment(\.symbolVariants, .none)
     }
-    .tint(action.color(themeTintColor: theme.tintColor))
   }
 }
