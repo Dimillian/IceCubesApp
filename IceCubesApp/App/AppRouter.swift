@@ -39,6 +39,8 @@ extension View {
         AccountsListView(mode: .favoritedBy(statusId: id))
       case let .rebloggedBy(id):
         AccountsListView(mode: .rebloggedBy(statusId: id))
+      case let .accountsList(accounts):
+        AccountsListView(mode: .accountsList(accounts: accounts))
       }
     }
   }
