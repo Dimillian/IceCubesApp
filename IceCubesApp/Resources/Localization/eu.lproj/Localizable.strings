@@ -42,7 +42,7 @@
 "instance.info.domains" = "Domeinuak";
 "instance.info.email" = "ePosta";
 "instance.info.name" = "Izena";
-"instance.info.navigation-title" = "Instantziaren informazioa";
+"instance.info.navigation-title" = "Instantziari buruzko informazioa";
 "instance.info.posts" = "Bidalketak";
 "instance.info.section.info" = "Instantziari buruz";
 "instance.info.section.rules" = "Instantziaren arauak";
@@ -65,7 +65,7 @@
 "settings.app.icon.navigation-title" = "Ikonoak";
 "settings.app.source" = "Iturburu kodea (GitHub)";
 "settings.app.support" = "Eman babesa aplikazioari";
-"settings.app.about" = "Honi buruz";
+"settings.app.about" = "Aplikazio honi buruz";
 "settings.display.example-toot" = "Adibidea";
 "settings.display.avatar.position" = "Avatarearen kokapena";
 "settings.display.avatar.shape" = "Avatarearen itxura";
@@ -73,7 +73,7 @@
 "settings.display.restore" = "Berrezarri defektuzkoa";
 "settings.display.section.display" = "Pantaila";
 "settings.display.section.theme" = "Itxura";
-"settings.display.section.theme.footer" = "Norberaren koloreak aukeratzeko sistemak darabiltzan koloreen aukera desgaitu behar da ";
+"settings.display.section.theme.footer" = "Norberaren koloreak aukeratzeko sistemak darabiltzan koloreen aukera ezgaitu behar da";
 "settings.display.status.action-buttons" = "Bidalketen ekintza botoiak";
 "settings.display.status.media-style" = "Bidalketen multimediaren itxura";
 "settings.display.translate-button" = "Erakutsi itzultzeko botoia";
@@ -159,7 +159,7 @@
 "settings.display.show-ipad-column" = "Gaitu bigarren zutabea";
 
 "settings.general.swipeactions" = "Atzamar-mugimenduen ekintzak";
-"settings.swipeactions.navigation-title" = "Atzamar-mugimenduen ekintzak";
+"settings.swipeactions.navigation-title" = "Mugimenduen ekintzak";
 "settings.swipeactions.status.action.bookmark" = "Jarri laster-marka";
 "settings.swipeactions.status.action.boost" = "Bultzatu";
 "settings.swipeactions.status.action.favorite" = "Egin gogoko";
@@ -220,6 +220,8 @@
 "account.boosted-by" = "Hauek bultzatua:";
 "account.detail.about" = "Honi buruz";
 "account.detail.familiar-followers" = "Hauek ere jarraitzen dute:";
+"account.detail.n-fields %lld" = "%lld eremu";
+"account.detail.featured-tags-n-posts %lld" = "%lld bidalketa";
 "account.edit.about" = "Zure buruari buruz";
 "account.edit.account-settings.bot" = "Bot kontua";
 "account.edit.account-settings.discoverable" = "Aurki zaitzakete";
@@ -257,6 +259,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Ezabatu";
 "conversations.action.mark-read" = "Markatu irakurritzat";
+"conversations.action.view-detail" = "View detail";
 "conversations.empty.message" = "Gizarte-sareko maitasun apur baten bila? Zure mezu zuzen eta aipamen pribatu guztiak hemen topatuko dituzu. Ondo pasa! 📱❤️";
 "conversations.empty.title" = "Inbox Zero";
 "conversations.error.button" = "Saiatu berriro";
@@ -435,7 +438,7 @@
 "filter.contexts.public" = "Denbora-lerro lokalak";
 "filter.contexts.conversations" = "Elkarrizketak";
 "filter.contexts.profiles" = "Profilak";
-"filter.action.warning" = "Ezkutatu abisu batekin";
+"filter.action.warning" = "Ezkutatu oharpen batekin";
 "filter.action.hide" = "Ezkutatu guztiz";
 
 // MARK: Accessibility
@@ -445,3 +448,9 @@
 "accessibility.editor.button.drafts" = "Zirriborroak";
 "accessibility.editor.button.custom-emojis" = "Instantziaren emojiak";
 "accessibility.editor.button.language" = "Hizkuntza";
+
+// MARK: Report
+"report.comment.placeholder" = "Additional Info";
+"report.title" = "Report Post";
+"report.action.send" = "Send";
+"status.action.report" = "Report Post";

@@ -19,11 +19,17 @@ public struct PushAccount {
 }
 
 @MainActor
-public class PushNotificationsService: ObservableObject {
+public class PushNotificationsService: NSObject, ObservableObject {
   enum Constants {
     static let endpoint = "https://icecubesrelay.fly.dev"
     static let keychainAuthKey = "notifications_auth_key"
     static let keychainPrivateKey = "notifications_private_key"
+  }
+  
+  public struct RoutedNotification: Equatable {
+    public let accessToken: String
+    public let statusId: String?
+    public let accountId: String?
   }
 
   public static let shared = PushNotificationsService()
@@ -31,7 +37,14 @@ public class PushNotificationsService: ObservableObject {
   public private(set) var subscriptions: [PushNotificationSubscriptionSettings] = []
 
   @Published public var pushToken: Data?
-
+  @Published public var routedNotification: RoutedNotification?
+  
+  override init() {
+    super.init()
+    
+    UNUserNotificationCenter.current().delegate = self
+  }
+  
   private var keychain: KeychainSwift {
     let keychain = KeychainSwift()
     #if !DEBUG && !targetEnvironment(simulator)
@@ -118,6 +131,27 @@ public class PushNotificationsService: ObservableObject {
     var bytes = Data(count: byteCount)
     _ = bytes.withUnsafeMutableBytes { SecRandomCopyBytes(kSecRandomDefault, byteCount, $0.baseAddress!) }
     return bytes
+  }
+}
+
+extension PushNotificationsService: UNUserNotificationCenterDelegate {
+  public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
+    guard let plaintext = response.notification.request.content.userInfo["plaintext"] as? Data,
+          let mastodonPushNotification = try? JSONDecoder().decode(MastodonPushNotification.self, from: plaintext) else {
+        return
+    }
+    if let type = Models.Notification.NotificationType(rawValue: mastodonPushNotification.notificationType) {
+      switch type {
+      case .follow, .follow_request:
+        self.routedNotification = .init(accessToken: mastodonPushNotification.accessToken,
+                                        statusId: nil,
+                                        accountId: String(mastodonPushNotification.notificationID))
+      default:
+        self.routedNotification = .init(accessToken: mastodonPushNotification.accessToken,
+                                        statusId: String(mastodonPushNotification.notificationID),
+                                        accountId: nil)
+      }
+    }
   }
 }
 

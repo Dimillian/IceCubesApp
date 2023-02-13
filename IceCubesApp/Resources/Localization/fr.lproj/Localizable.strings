@@ -256,6 +256,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Supprimer";
 "conversations.action.mark-read" = "Marquer comme lu";
+"conversations.action.view-detail" = "View detail";
 "conversations.empty.message" = "Vous cherchez de l'amour sur les réseaux sociaux? Vous trouverez tous vos messages directs et vos mentions privées ici. Bon messaging ! 📱❤️";
 "conversations.empty.title" = "Boîte de réception vide";
 "conversations.error.button" = "Réessayer";
@@ -442,3 +443,9 @@
 "accessibility.editor.button.drafts" = "Drafts";
 "accessibility.editor.button.custom-emojis" = "Custom emojis";
 "accessibility.editor.button.language" = "Language";
+
+// MARK: Report
+"report.comment.placeholder" = "Additional Info";
+"report.title" = "Report Post";
+"report.action.send" = "Send";
+"status.action.report" = "Report Post";

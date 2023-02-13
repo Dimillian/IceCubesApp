@@ -252,6 +252,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Sil";
 "conversations.action.mark-read" = "Okundu olarak işaretle";
+"conversations.action.view-detail" = "View detail";
 "conversations.empty.message" = "Sosyal medyada fark edilmek mi istiyorsunuz? Burada tüm direkt mesajlarınızı ve gizli bahsetmelerinizi bulabilirsiniz. Mutlu mesajlaşmalar! 📱❤️";
 "conversations.empty.title" = "Gelen Kutusu Boş";
 "conversations.error.button" = "Tekrar Dene";
@@ -446,3 +447,9 @@
 "accessibility.editor.button.drafts" = "Drafts";
 "accessibility.editor.button.custom-emojis" = "Custom emojis";
 "accessibility.editor.button.language" = "Language";
+
+// MARK: Report
+"report.comment.placeholder" = "Additional Info";
+"report.title" = "Report Post";
+"report.action.send" = "Send";
+"status.action.report" = "Report Post";
