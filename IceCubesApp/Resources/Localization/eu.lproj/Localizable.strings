@@ -447,3 +447,9 @@
 "accessibility.editor.button.drafts" = "Zirriborroak";
 "accessibility.editor.button.custom-emojis" = "Instantziaren emojiak";
 "accessibility.editor.button.language" = "Hizkuntza";
+
+// MARK: Report
+"report.comment.placeholder" = "Additional Info";
+"report.title" = "Report Post";
+"report.action.send" = "Send";
+"status.action.report" = "Report Post";

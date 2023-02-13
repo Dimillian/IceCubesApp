@@ -446,3 +446,9 @@
 "accessibility.editor.button.drafts" = "下書き";
 "accessibility.editor.button.custom-emojis" = "カスタム絵文字";
 "accessibility.editor.button.language" = "言語";
+
+// MARK: Report
+"report.comment.placeholder" = "Additional Info";
+"report.title" = "Report Post";
+"report.action.send" = "Send";
+"status.action.report" = "Report Post";

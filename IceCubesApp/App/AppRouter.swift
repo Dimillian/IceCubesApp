@@ -89,6 +89,9 @@ extension View {
         } else {
           EmptyView()
         }
+      case let .report(status):
+        ReportView(status: status)
+          .withEnvironments()
       }
     }
   }

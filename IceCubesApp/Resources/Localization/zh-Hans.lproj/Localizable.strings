@@ -450,3 +450,9 @@
 "accessibility.editor.button.drafts" = "草稿";
 "accessibility.editor.button.custom-emojis" = "自定义表情";
 "accessibility.editor.button.language" = "选择语言";
+
+// MARK: Report
+"report.comment.placeholder" = "Additional Info";
+"report.title" = "Report Post";
+"report.action.send" = "Send";
+"status.action.report" = "Report Post";
