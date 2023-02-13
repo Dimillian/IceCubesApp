@@ -24,7 +24,7 @@
 "enum.avatar-position.top" = "Oben";
 "enum.avatar-shape.circle" = "Kreis";
 "enum.avatar-shape.rounded" = "Abgerundet";
-"enum.durations.infinite" = "unbegrenzt";
+"enum.durations.infinite" = "Unbegrenzt";
 "enum.durations.fiveMinutes" = "5 Minuten";
 "enum.durations.thirtyMinutes" = "30 Minuten";
 "enum.durations.oneHour" = "1 Stunde";
@@ -65,7 +65,7 @@
 "settings.app.icon.navigation-title" = "Icons";
 "settings.app.source" = "Quellcode (auf GitHub)";
 "settings.app.support" = "Unterstütze die App";
-"settings.app.about" = "Über";
+"settings.app.about" = "Über Ice Cubes";
 "settings.display.example-toot" = "Beispielbeitrag";
 "settings.display.avatar.position" = "Profilbild-Position";
 "settings.display.avatar.shape" = "Profilbild-Form";
@@ -135,8 +135,8 @@
 "settings.content.default-visibility" = "Sichtbarkeit Beiträge";
 "settings.content.reading" = "Lesen";
 "settings.content.posting" = "Schreiben";
-"settings.push.duplicate.title" = "Doppelte-Benachrichtigungen-Korrigierer";
-"settings.push.duplicate.footer" = "Bekommst du doppelte Benachrichtigungen? Probier diesen magischen Knopf aus";
+"settings.push.duplicate.title" = "Doppelte-Mitteilungen-Korrigierer";
+"settings.push.duplicate.footer" = "Bekommst du doppelte Mitteilungen? Probier diesen magischen Knopf aus";
 "settings.push.duplicate.button.fix" = "🪄 Beheben";
 "settings.other.autoplay-video" = "Videos automatisch abspielen";
 "settings.display.font" = "Schriftart Timeline";
@@ -145,7 +145,7 @@
 "settings.display.font.scaling-%@" = "Schriftskalierung: %@";
 "settings.about.built-with" = "Ice Cubes wird mit folgender Open-Source-Software erstellt:";
 "settings.about.title" = "Ice Cubes";
-"settings.account.cached-posts-%@" = "Gecachete Beiträge: %@";
+"settings.account.cached-posts-%@" = "Beiträge im Cache: %@";
 "settings.account.action.delete-cache" = "Cache leeren";
 
 "settings.general.haptic" = "Haptisches Feedback";
@@ -163,12 +163,12 @@
 "settings.swipeactions.status.action.bookmark" = "Lesezeichen setzen";
 "settings.swipeactions.status.action.boost" = "Boosten";
 "settings.swipeactions.status.action.favorite" = "Favorisieren";
-"settings.swipeactions.status.action.none" = "keine";
+"settings.swipeactions.status.action.none" = "Keine";
 "settings.swipeactions.status.action.quote" = "Zitieren";
 "settings.swipeactions.status.action.reply" = "Antworten";
 "settings.swipeactions.status.leading" = "Nach rechts wischen";
 "settings.swipeactions.status.leading.left" = "links";
-"settings.swipeactions.status.leading.right" = "links";
+"settings.swipeactions.status.leading.right" = "rechts";
 "settings.swipeactions.status.trailing" = "Nach links wischen";
 "settings.swipeactions.status.trailing.left" = "links";
 "settings.swipeactions.status.trailing.right" = "rechts";
@@ -309,12 +309,8 @@
 "notifications.empty.title" = "Keine Mitteilungen";
 "notifications.error.message" = "Beim Laden deiner Mitteilungen ist ein Fehler aufgetreten, bitte versuch es erneut.";
 "notifications.error.title" = "Ein Fehler ist aufgetreten";
-"notifications.label.favorite %lld" = "hat favorisiert";
-"notifications.label.follow %lld" = "folgt dir jetzt";
 "notifications.label.follow-request" = "möchte dir folgen";
-"notifications.label.mention %lld" = "hat dich erwähnt";
 "notifications.label.poll" = "Umfrage beendet";
-"notifications.label.reblog %lld" = "hat geboostet";
 "notifications.label.status" = "hat einen Beitrag gepostet";
 "notifications.label.update" = "hat einen Beitrag geändert";
 "notifications.menu-title.favorite" = "Favorit";
@@ -341,12 +337,12 @@
 "status.action.translate" = "Übersetzen";
 "status.action.translate-from-%@" = "Aus %@ übersetzen";
 "status.action.translated-label-%@" = "Übersetzt mit %@";
-"status.action.bookmark" = "Lesezeichen";
+"status.action.bookmark" = "Lesezeichen setzen";
 "status.action.boost" = "Boosten";
 "status.action.copy-text" = "Text kopieren";
 "status.action.delete" = "Löschen";
 "status.action.delete.confirm.title" = "Bestätigen";
-"status.action.delete.confirm.message" = "bist du dir sicher, dass du diesen Beitrag löschen möchtest?";
+"status.action.delete.confirm.message" = "Bist du dir sicher, dass du diesen Beitrag löschen möchtest?";
 "status.action.edit" = "Bearbeiten";
 "status.action.favorite" = "Favorisieren";
 "status.action.mention" = "Erwähnen";
@@ -372,7 +368,7 @@
 "status.editor.description.add" = "Beschreibung hinzufügen";
 "status.editor.description.edit" = "Beschreibung bearbeiten";
 "status.editor.drafts.navigation-title" = "Entwürfe";
-"status.editor.emojis.navigation-title" = "Eigene Emojis";
+"status.editor.emojis.navigation-title" = "Instanz-Emojis";
 "status.editor.error.upload" = "Fehler beim Hochladen";
 "status.editor.language-select.navigation-title" = "Sprache auswählen";
 "status.editor.language-select.recently-used" = "Kürzlich genutzt";

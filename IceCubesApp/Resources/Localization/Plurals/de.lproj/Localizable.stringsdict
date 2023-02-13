@@ -66,5 +66,69 @@
 			<string> und %lld weitere </string>
 		</dict>
 	</dict>
+	<key>notifications.label.favorite %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>hat favorisiert</string>
+			<key>other</key>
+			<string>haben favorisiert</string>
+		</dict>
+	</dict>
+	<key>notifications.label.follow %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>folgt dir jetzt</string>
+			<key>other</key>
+			<string>folgen dir jetzt</string>
+		</dict>
+	</dict>
+	<key>notifications.label.mention %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>hat dich erwähnt</string>
+			<key>other</key>
+			<string>haben dich erwähnt</string>
+		</dict>
+	</dict>
+	<key>notifications.label.reblog %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>hat geboostet</string>
+			<key>other</key>
+			<string>haben geboostet</string>
+		</dict>
+	</dict>
 </dict>
 </plist>
