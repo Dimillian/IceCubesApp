@@ -258,6 +258,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Ezabatu";
 "conversations.action.mark-read" = "Markatu irakurritzat";
+"conversations.action.view-detail" = "View detail";
 "conversations.empty.message" = "Gizarte-sareko maitasun apur baten bila? Zure mezu zuzen eta aipamen pribatu guztiak hemen topatuko dituzu. Ondo pasa! 📱❤️";
 "conversations.empty.title" = "Inbox Zero";
 "conversations.error.button" = "Saiatu berriro";

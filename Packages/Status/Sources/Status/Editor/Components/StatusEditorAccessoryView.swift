@@ -157,7 +157,7 @@ struct StatusEditorAccessoryView: View {
       List {
         if languageSearch.isEmpty {
           if !recentlyUsedLanguages.isEmpty {
-            Section("Recently Used") {
+            Section("status.editor.language-select.recently-used") {
               languageSheetSection(languages: recentlyUsedLanguages)
             }
           }

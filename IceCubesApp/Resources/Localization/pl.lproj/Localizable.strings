@@ -253,6 +253,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Usuń";
 "conversations.action.mark-read" = "Oznacz jako przeczytany";
+"conversations.action.view-detail" = "View detail";
 "conversations.empty.message" = "Szukasz miłości w mediach społecznościowych? Tutaj znajdziesz wszystkie swoje bezpośrednie wiadomości i prywatne wzmianki. Szczęśliwego korespondowania! 📱❤️";
 "conversations.empty.title" = "Skrzynka odbiorcza pusta";
 "conversations.error.button" = "Spróbuj ponownie";
