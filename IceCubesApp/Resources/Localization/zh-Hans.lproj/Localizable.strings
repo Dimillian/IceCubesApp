@@ -176,6 +176,7 @@
 "settings.swipeactions.status.trailing.left" = "左";
 "settings.swipeactions.status.trailing.right" = "右";
 "settings.swipeactions.status" = "嘟文";
+"settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
 
 // MARK: Tabs
 "tab.explore" = "探索";

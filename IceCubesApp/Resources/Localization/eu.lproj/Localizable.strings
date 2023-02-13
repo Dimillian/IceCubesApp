@@ -173,6 +173,7 @@
 "settings.swipeactions.status.trailing.left" = "ezker";
 "settings.swipeactions.status.trailing.right" = "eskuma";
 "settings.swipeactions.status" = "Argitaratu";
+"settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
 
 "enum.expand-media.show" = "Erakutsi guztia";
 "enum.expand-media.hide" = "Ezkutatu guztia";
@@ -238,7 +239,7 @@
 "account.follow-request.accept" = "Onartu";
 "account.follow-request.reject" = "Baztertu";
 "account.follow-requests.pending-requests" = "Erabakitzeko eskaerak";
-"account.follow-requests.instructions" = "Erabiltzaile horiek ez dituzte zure bidalketak ikusiko onartzen ez dituzun arte."; 
+"account.follow-requests.instructions" = "Erabiltzaile horiek ez dituzte zure bidalketak ikusiko onartzen ez dituzun arte.";
 "account.followers" = "Jarraitzaile";
 "account.following" = "Jarraitzen";
 "account.list.create" = "Sortu zerrenda berria";

@@ -173,6 +173,7 @@
 "settings.swipeactions.status.trailing.left" = "links";
 "settings.swipeactions.status.trailing.right" = "rechts";
 "settings.swipeactions.status" = "Beitrag";
+"settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
 
 "enum.expand-media.show" = "Alle zeigen";
 "enum.expand-media.hide" = "Alle ausblenden";

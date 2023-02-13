@@ -176,6 +176,7 @@
 "settings.swipeactions.status.trailing.left" = "lewa";
 "settings.swipeactions.status.trailing.right" = "prawa";
 "settings.swipeactions.status" = "Post";
+"settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
 
 // MARK: Tabs
 "tab.explore" = "Odkrywaj";

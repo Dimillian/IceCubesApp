@@ -60,7 +60,7 @@ struct SwipeActionsSettingsView: View {
           }
         }
         Toggle(isOn: $userPreferences.swipeActionsUseThemeColor) {
-          Label("Use theme colors instead of default colors", systemImage: "paintbrush.pointed")
+          Label("settings.swipeactions.status.use-theme-colors", systemImage: "paintbrush.pointed")
         }
       }
       .listRowBackground(theme.primaryBackgroundColor)

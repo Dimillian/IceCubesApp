@@ -176,6 +176,7 @@
 "settings.swipeactions.status.trailing.left" = "left";
 "settings.swipeactions.status.trailing.right" = "right";
 "settings.swipeactions.status" = "Post";
+"settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
 
 // MARK: Tabs
 "tab.explore" = "Keşfet";
