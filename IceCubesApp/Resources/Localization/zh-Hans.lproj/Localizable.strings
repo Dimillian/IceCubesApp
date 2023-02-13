@@ -256,6 +256,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "删除";
 "conversations.action.mark-read" = "标记为已读";
+"conversations.action.view-detail" = "View detail";
 "conversations.empty.message" = "正在社交媒体上寻找乐趣？你所有的私信和单独提及都在这里。聊得开心！📱❤️";
 "conversations.empty.title" = "收件箱为空";
 "conversations.error.button" = "重试";
