@@ -256,7 +256,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Выдаліць";
 "conversations.action.mark-read" = "Адзначыць як прачытанае";
-"conversations.empty.message" = "Looking for some social media love? You'll find all your direct messages and private mentions right here. Happy messaging! 📱❤️";
+"conversations.empty.message" = "Шукаеце каханне ў сацыяльных сетках? Тут вы знойдзеце ўсе вашы прамыя паведамленні і асабістыя згадкі. Прыемнай перапіскі! 📱❤️";
 "conversations.empty.title" = "Уваходная скрыня парожняя";
 "conversations.error.button" = "Паўтарыць";
 "conversations.error.message" = "Памылка падчас загрузкі вашых паведамленняў";
