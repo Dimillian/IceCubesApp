@@ -45,8 +45,8 @@ struct IconSelectorView: View {
 
     static let items = [
       IconSelector(title: "Official icons", icons: [.primary, .alt1, .alt2, .alt3, .alt4, .alt5, .alt6, .alt7, .alt8,
-                                                     .alt9, .alt10, .alt11, .alt12, .alt13, .alt14,
-                                                     .alt15, .alt16, .alt17, .alt18, .alt19, .alt25]),
+                                                    .alt9, .alt10, .alt11, .alt12, .alt13, .alt14,
+                                                    .alt15, .alt16, .alt17, .alt18, .alt19, .alt25]),
       IconSelector(title: "Icons by Albert Kinng", icons: [.alt20, .alt21, .alt22, .alt23, .alt24]),
       IconSelector(title: "Icons by Dan van Moll", icons: [.alt26, .alt27, .alt28]),
       IconSelector(title: "Icons by @te6-in (GitHub)", icons: [.alt29, .alt30, .alt31, .alt32]),

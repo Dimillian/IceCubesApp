@@ -5,7 +5,7 @@ public struct DeepLClient {
   public enum DeepLError: Error {
     case notFound
   }
-  
+
   private let endpoint = "https://api.deepl.com/v2/translate"
 
   private var APIKey: String {

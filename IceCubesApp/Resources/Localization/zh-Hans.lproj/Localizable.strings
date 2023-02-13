@@ -376,6 +376,8 @@
 "status.editor.error.upload" = "上传错误";
 "status.editor.language-select.navigation-title" = "选择语言";
 "status.editor.language-select.recently-used" = "最近使用";
+"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
+"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
 "status.editor.media.edit-image" = "编辑图片";
 "status.editor.media.image-description" = "图片描述";
 "status.editor.mode.edit" = "正在编辑你的嘟文";

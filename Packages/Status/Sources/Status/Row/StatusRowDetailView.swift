@@ -1,14 +1,14 @@
-import SwiftUI
-import Env
 import DesignSystem
+import Env
 import Models
+import SwiftUI
 
 struct StatusRowDetailView: View {
   @Environment(\.openURL) private var openURL
   @EnvironmentObject private var routerPath: RouterPath
-  
+
   @ObservedObject var viewModel: StatusRowViewModel
-  
+
   var body: some View {
     Group {
       Divider()
@@ -84,7 +84,7 @@ struct StatusRowDetailView: View {
       await viewModel.fetchActionsAccounts()
     }
   }
-  
+
   private func makeAccountsScrollView(accounts: [Account]) -> some View {
     ScrollView(.horizontal, showsIndicators: false) {
       LazyHStack(spacing: 0) {
@@ -96,5 +96,4 @@ struct StatusRowDetailView: View {
       .padding(.leading, .layoutPadding)
     }
   }
-
 }

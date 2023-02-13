@@ -14,13 +14,14 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
   var currentAccount: Account?
   var theme: Theme?
   var preferences: UserPreferences?
+  var languageConfirmationDialogLanguages: [String: String]?
 
   var textView: UITextView? {
     didSet {
       textView?.pasteDelegate = self
     }
   }
-  
+
   var selectedRange: NSRange {
     get {
       guard let textView else {
@@ -32,16 +33,14 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
       textView?.selectedRange = newValue
     }
   }
-  
+
   var markedTextRange: UITextRange? {
-    get {
-      guard let textView else {
-        return nil
-      }
-      return textView.markedTextRange
+    guard let textView else {
+      return nil
     }
+    return textView.markedTextRange
   }
-  
+
   @Published var statusText = NSMutableAttributedString(string: "") {
     didSet {
       let range = selectedRange
@@ -143,6 +142,18 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
     selectedLanguage = selectedLanguage ?? preference ?? currentAccount?.source?.language
   }
 
+  func evaluateLanguages() {
+    if let detectedLang = detectLanguage(text: statusText.string),
+       let selectedLanguage = selectedLanguage,
+       selectedLanguage != detectedLang
+    {
+      languageConfirmationDialogLanguages = ["detected": detectedLang,
+                                             "selected": selectedLanguage]
+    } else {
+      languageConfirmationDialogLanguages = nil
+    }
+  }
+
   func postStatus() async -> Status? {
     guard let client else { return nil }
     do {
@@ -153,20 +164,6 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
         pollData = .init(options: pollOptions,
                          multiple: pollVotingFrequency.canVoteMultipleTimes,
                          expires_in: pollDuration.rawValue)
-      }
-
-      if !hasExplicitlySelectedLanguage {
-        // Attempt language resolution using Natural Language
-        let recognizer = NLLanguageRecognizer()
-        recognizer.processString(statusText.string)
-        // Use languageHypotheses to get the probability with it
-        let hypotheses = recognizer.languageHypotheses(withMaximum: 1)
-        // Assert that 85% probability is enough :)
-        // A one word toot that is en/fr compatible is only ~50% confident, for instance
-        if let (language, probability) = hypotheses.first, probability > 0.85 {
-          // rawValue return the IETF BCP 47 language tag
-          selectedLanguage = language.rawValue
-        }
       }
 
       let data = StatusData(status: statusText.string,
@@ -372,7 +369,8 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
                                         mediaAttachment: nil,
                                         error: nil))
             } else if var content = content as? ImageFileTranseferable,
-                      let image = content.image {
+                      let image = content.image
+            {
               mediasImages.append(.init(image: image,
                                         movieTransferable: nil,
                                         gifTransferable: nil,
@@ -507,7 +505,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
       for media in selectedMedias {
         print(media.supportedContentTypes)
         var file: (any Transferable)?
-        
+
         if file == nil {
           file = try? await media.loadTransferable(type: GifFileTranseferable.self)
         }
@@ -682,6 +680,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
   }
 
   // MARK: - Custom emojis
+
   func fetchCustomEmojis() async {
     guard let client else { return }
     do {
@@ -690,7 +689,8 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
   }
 }
 
-//MARK: - DropDelegate
+// MARK: - DropDelegate
+
 extension StatusEditorViewModel: DropDelegate {
   public func performDrop(info: DropInfo) -> Bool {
     let item = info.itemProviders(for: StatusEditorUTTypeSupported.types())
@@ -700,17 +700,20 @@ extension StatusEditorViewModel: DropDelegate {
 }
 
 // MARK: - UITextPasteDelegate
+
 extension StatusEditorViewModel: UITextPasteDelegate {
   public func textPasteConfigurationSupporting(
-    _ textPasteConfigurationSupporting: UITextPasteConfigurationSupporting,
-    transform item: UITextPasteItem) {
-      if !item.itemProvider.registeredContentTypes(conformingTo: .image).isEmpty ||
-         !item.itemProvider.registeredContentTypes(conformingTo: .video).isEmpty ||
-         !item.itemProvider.registeredContentTypes(conformingTo: .gif).isEmpty {
-        processItemsProvider(items: [item.itemProvider])
-        item.setNoResult()
-      } else {
-        item.setDefaultResult()
-      }
+    _: UITextPasteConfigurationSupporting,
+    transform item: UITextPasteItem
+  ) {
+    if !item.itemProvider.registeredContentTypes(conformingTo: .image).isEmpty ||
+      !item.itemProvider.registeredContentTypes(conformingTo: .video).isEmpty ||
+      !item.itemProvider.registeredContentTypes(conformingTo: .gif).isEmpty
+    {
+      processItemsProvider(items: [item.itemProvider])
+      item.setNoResult()
+    } else {
+      item.setDefaultResult()
     }
+  }
 }

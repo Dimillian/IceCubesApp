@@ -82,8 +82,9 @@ struct StatusRowContextMenu: View {
           await viewModel.translate(userLang: lang)
         }
       } label: {
-        if let statusLang = viewModel.status.language,
-            let languageName = Locale.current.localizedString(forLanguageCode: statusLang) {
+        if let statusLang = viewModel.getStatusLang(),
+           let languageName = Locale.current.localizedString(forLanguageCode: statusLang)
+        {
           Label("status.action.translate-from-\(languageName)", systemImage: "captions.bubble")
         } else {
           Label("status.action.translate", systemImage: "captions.bubble")
@@ -113,8 +114,7 @@ struct StatusRowContextMenu: View {
         }
         Button(role: .destructive,
                action: { viewModel.showDeleteAlert = true },
-               label: { Label("status.action.delete", systemImage: "trash") }
-        )
+               label: { Label("status.action.delete", systemImage: "trash") })
       }
     } else if !viewModel.isRemote {
       Section(viewModel.status.account.acct) {

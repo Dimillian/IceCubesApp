@@ -19,8 +19,8 @@ struct TimelineTab: View {
   @State private var didAppear: Bool = false
   @State private var timeline: TimelineFilter
   @State private var scrollToTopSignal: Int = 0
-  
-  @AppStorage("last_timeline_filter") public var lastTimelineFilter: TimelineFilter = TimelineFilter.home
+
+  @AppStorage("last_timeline_filter") public var lastTimelineFilter: TimelineFilter = .home
 
   private let canFilterTimeline: Bool
 
@@ -45,10 +45,10 @@ struct TimelineTab: View {
       routerPath.client = client
       if !didAppear && canFilterTimeline {
         didAppear = true
-        if(client.isAuth) {
+        if client.isAuth {
           timeline = lastTimelineFilter
         } else {
-            timeline = .federated
+          timeline = .federated
         }
       }
       Task {
@@ -58,18 +58,18 @@ struct TimelineTab: View {
         routerPath.presentedSheet = .addAccount
       }
     }
-    .onChange(of: client.isAuth, perform: { isAuth in
-      if(client.isAuth) {
+    .onChange(of: client.isAuth, perform: { _ in
+      if client.isAuth {
         timeline = lastTimelineFilter
       } else {
-          timeline = .federated
+        timeline = .federated
       }
     })
     .onChange(of: currentAccount.account?.id, perform: { _ in
-      if(client.isAuth && canFilterTimeline) {
+      if client.isAuth, canFilterTimeline {
         timeline = lastTimelineFilter
       } else {
-          timeline = .federated
+        timeline = .federated
       }
     })
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
@@ -85,7 +85,7 @@ struct TimelineTab: View {
       routerPath.path = []
     }
     .onChange(of: timeline) { timeline in
-      if(timeline == .home || timeline == .federated || timeline == .local) {
+      if timeline == .home || timeline == .federated || timeline == .local {
         lastTimelineFilter = timeline
       }
     }

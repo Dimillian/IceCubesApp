@@ -1,12 +1,12 @@
 import Foundation
 
-fileprivate enum CodingKeys: CodingKey {
+private enum CodingKeys: CodingKey {
   case asDate
 }
 
 public struct ServerDate: Codable, Hashable, Equatable {
   public let asDate: Date
-  
+
   public var relativeFormatted: String {
     Self.createdAtRelativeFormatter.localizedString(for: asDate, relativeTo: Date())
   }
@@ -14,9 +14,9 @@ public struct ServerDate: Codable, Hashable, Equatable {
   public var shortDateFormatted: String {
     Self.createdAtShortDateFormatted.string(from: asDate)
   }
-  
+
   private static let calendar = Calendar(identifier: .gregorian)
-    
+
   private static var createdAtDateFormatter: DateFormatter = {
     let dateFormatter = DateFormatter()
     dateFormatter.calendar = .init(identifier: .iso8601)
@@ -24,24 +24,24 @@ public struct ServerDate: Codable, Hashable, Equatable {
     dateFormatter.timeZone = .init(abbreviation: "UTC")
     return dateFormatter
   }()
-  
+
   private static var createdAtRelativeFormatter: RelativeDateTimeFormatter = {
     let dateFormatter = RelativeDateTimeFormatter()
     dateFormatter.unitsStyle = .short
     return dateFormatter
   }()
-  
+
   private static var createdAtShortDateFormatted: DateFormatter = {
     let dateFormatter = DateFormatter()
     dateFormatter.dateStyle = .short
     dateFormatter.timeStyle = .none
     return dateFormatter
   }()
-  
+
   public init() {
-    asDate = Date()-100
+    asDate = Date() - 100
   }
-  
+
   public init(from decoder: Decoder) throws {
     do {
       // Decode from server
@@ -54,7 +54,7 @@ public struct ServerDate: Codable, Hashable, Equatable {
       asDate = try container.decode(Date.self, forKey: .asDate)
     }
   }
-  
+
   public func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     try container.encode(asDate, forKey: .asDate)

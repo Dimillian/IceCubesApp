@@ -1,12 +1,12 @@
 import SwiftUI
 
-public enum StatusAction : String, CaseIterable, Identifiable {
+public enum StatusAction: String, CaseIterable, Identifiable {
   public var id: String {
     "\(rawValue)"
   }
-  
+
   case none, reply, boost, favorite, bookmark, quote
-  
+
   public func displayName(isReblogged: Bool = false, isFavorited: Bool = false, isBookmarked: Bool = false) -> LocalizedStringKey {
     switch self {
     case .none:
@@ -23,7 +23,7 @@ public enum StatusAction : String, CaseIterable, Identifiable {
       return isBookmarked ? "status.action.unbookmark" : "settings.swipeactions.status.action.bookmark"
     }
   }
-    
+
   public func iconName(isReblogged: Bool = false, isFavorited: Bool = false, isBookmarked: Bool = false) -> String {
     switch self {
     case .none:
@@ -40,7 +40,7 @@ public enum StatusAction : String, CaseIterable, Identifiable {
       return isBookmarked ? "bookmark.fill" : "bookmark"
     }
   }
-  
+
   public func color(themeTintColor: Color) -> Color {
     switch self {
     case .none:

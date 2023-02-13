@@ -119,7 +119,11 @@ struct NotificationRowView: View {
     }
     .contentShape(Rectangle())
     .onTapGesture {
-      routerPath.navigate(to: .accountDetailWithAccount(account: notification.accounts[0]))
+      if notification.accounts.count == 1 {
+        routerPath.navigate(to: .accountDetailWithAccount(account: notification.accounts[0]))
+      } else {
+        routerPath.navigate(to: .accountsList(accounts: notification.accounts))
+      }
     }
   }
 
@@ -155,7 +159,11 @@ struct NotificationRowView: View {
       }
       .contentShape(Rectangle())
       .onTapGesture {
-        routerPath.navigate(to: .accountDetailWithAccount(account: notification.accounts[0]))
+        if notification.accounts.count == 1 {
+          routerPath.navigate(to: .accountDetailWithAccount(account: notification.accounts[0]))
+        } else {
+          routerPath.navigate(to: .accountsList(accounts: notification.accounts))
+        }
       }
     }
   }

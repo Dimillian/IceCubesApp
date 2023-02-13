@@ -163,7 +163,7 @@ public struct StatusMediaPreviewView: View {
               .frame(width: newSize.width, height: newSize.height)
           }
         }
-        
+
       case .gifv, .video, .audio:
         if let url = attachment.url {
           VideoPlayerView(viewModel: .init(url: url))

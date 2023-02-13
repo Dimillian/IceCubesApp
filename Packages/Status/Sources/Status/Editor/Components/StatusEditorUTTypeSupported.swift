@@ -34,7 +34,7 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
       return false
     }
   }
-  
+
   var isGif: Bool {
     switch self {
     case .gif, .gif2:
@@ -54,12 +54,14 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
     if self == .jpeg || self == .png || self == .tiff || self == .image {
       if let imageURL = result as? URL,
          let data = try? Data(contentsOf: imageURL),
-         let image = UIImage(data: data) {
+         let image = UIImage(data: data)
+      {
         return image
       } else if let data = result as? Data,
-                let image = UIImage(data: data) {
+                let image = UIImage(data: data)
+      {
         return image
-      } else if let transferable = await getImageTansferable(item: item){
+      } else if let transferable = await getImageTansferable(item: item) {
         return transferable
       }
     }
@@ -86,7 +88,7 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
       }
     }
   }
-  
+
   private func getGifTransferable(item: NSItemProvider) async -> GifFileTranseferable? {
     return await withCheckedContinuation { continuation in
       _ = item.loadTransferable(type: GifFileTranseferable.self) { result in
@@ -99,7 +101,7 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
       }
     }
   }
-  
+
   private func getImageTansferable(item: NSItemProvider) async -> ImageFileTranseferable? {
     return await withCheckedContinuation { continuation in
       _ = item.loadTransferable(type: ImageFileTranseferable.self) { result in
@@ -139,7 +141,7 @@ struct MovieFileTranseferable: Transferable {
     FileRepresentation(contentType: .movie) { movie in
       SentTransferredFile(movie.url)
     } importing: { received in
-      return Self(url: localURLFor(received: received))
+      Self(url: localURLFor(received: received))
     }
   }
 }
@@ -155,7 +157,7 @@ struct ImageFileTranseferable: Transferable {
     FileRepresentation(contentType: .image) { image in
       SentTransferredFile(image.url)
     } importing: { received in
-      return Self(url: localURLFor(received: received))
+      Self(url: localURLFor(received: received))
     }
   }
 }
@@ -171,12 +173,12 @@ struct GifFileTranseferable: Transferable {
     FileRepresentation(contentType: .gif) { gif in
       SentTransferredFile(gif.url)
     } importing: { received in
-      return Self(url: localURLFor(received: received))
+      Self(url: localURLFor(received: received))
     }
   }
 }
 
-fileprivate func localURLFor(received: ReceivedTransferredFile) -> URL {
+private func localURLFor(received: ReceivedTransferredFile) -> URL {
   let copy = URL.temporaryDirectory.appending(path: "\(UUID().uuidString).\(received.file.pathExtension)")
   try? FileManager.default.copyItem(at: received.file, to: copy)
   return copy

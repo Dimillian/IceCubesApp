@@ -105,14 +105,14 @@ public struct StatusData: Encodable {
       self.expires_in = expires_in
     }
   }
-    
+
   public struct MediaAttribute: Encodable {
     public let id: String
     public let description: String?
     public let thumbnail: String?
     public let focus: String?
-    
-      public init(id: String, description: String?, thumbnail: String?, focus: String?) {
+
+    public init(id: String, description: String?, thumbnail: String?, focus: String?) {
       self.id = id
       self.description = description
       self.thumbnail = thumbnail
