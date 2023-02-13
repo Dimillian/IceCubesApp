@@ -251,6 +251,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Sil";
 "conversations.action.mark-read" = "Okundu olarak işaretle";
+"conversations.action.view-detail" = "View detail";
 "conversations.empty.message" = "Sosyal medyada fark edilmek mi istiyorsunuz? Burada tüm direkt mesajlarınızı ve gizli bahsetmelerinizi bulabilirsiniz. Mutlu mesajlaşmalar! 📱❤️";
 "conversations.empty.title" = "Gelen Kutusu Boş";
 "conversations.error.button" = "Tekrar Dene";

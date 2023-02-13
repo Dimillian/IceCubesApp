@@ -256,6 +256,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Borrar";
 "conversations.action.mark-read" = "Marcar como leído";
+"conversations.action.view-detail" = "View detail";
 "conversations.empty.message" = "¿Buscas algo de amor de redes sociales? Encontrarás todos tus mensajes directos y menciones privadas justo aquí. ¡Disfruta! 📱❤️";
 "conversations.empty.title" = "No tienes mensajes";
 "conversations.error.button" = "Reintentar";

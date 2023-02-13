@@ -238,7 +238,7 @@
 "account.follow-request.accept" = "Onartu";
 "account.follow-request.reject" = "Baztertu";
 "account.follow-requests.pending-requests" = "Erabakitzeko eskaerak";
-"account.follow-requests.instructions" = "Erabiltzaile horiek ez dituzte zure bidalketak ikusiko onartzen ez dituzun arte."; 
+"account.follow-requests.instructions" = "Erabiltzaile horiek ez dituzte zure bidalketak ikusiko onartzen ez dituzun arte.";
 "account.followers" = "Jarraitzaile";
 "account.following" = "Jarraitzen";
 "account.list.create" = "Sortu zerrenda berria";
@@ -256,6 +256,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Ezabatu";
 "conversations.action.mark-read" = "Markatu irakurritzat";
+"conversations.action.view-detail" = "View detail";
 "conversations.empty.message" = "Gizarte-sareko maitasun apur baten bila? Zure mezu zuzen eta aipamen pribatu guztiak hemen topatuko dituzu. Ondo pasa! 📱❤️";
 "conversations.empty.title" = "Inbox Zero";
 "conversations.error.button" = "Saiatu berriro";

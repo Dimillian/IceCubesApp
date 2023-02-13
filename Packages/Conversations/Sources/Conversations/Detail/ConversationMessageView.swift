@@ -89,7 +89,7 @@ struct ConversationMessageView: View {
     Button {
       routerPath.navigate(to: .statusDetail(id: message.id))
     } label: {
-      Label("View detail", systemImage: "arrow.forward")
+      Label("conversations.action.view-detail", systemImage: "arrow.forward")
     }
     Button {
       UIPasteboard.general.string = message.content.asRawText
