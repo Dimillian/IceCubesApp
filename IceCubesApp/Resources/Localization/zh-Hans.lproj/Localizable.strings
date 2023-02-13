@@ -63,6 +63,8 @@
 "settings.account.add" = "添加账户";
 "settings.app.icon" = "应用图标";
 "settings.app.icon.navigation-title" = "图标";
+"settings.app.icon.official" = "Official icons";
+"settings.app.icon.designed-by" = "Icons by";
 "settings.app.source" = "源代码（GitHub 链接）";
 "settings.app.support" = "支持本应用";
 "settings.app.about" = "关于";

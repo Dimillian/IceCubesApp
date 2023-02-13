@@ -63,6 +63,8 @@
 "settings.account.add" = "Gehitu kontua";
 "settings.app.icon" = "Aplikazioaren ikonoa";
 "settings.app.icon.navigation-title" = "Ikonoak";
+"settings.app.icon.official" = "Official icons";
+"settings.app.icon.designed-by" = "Icons by";
 "settings.app.source" = "Iturburu kodea (GitHub)";
 "settings.app.support" = "Eman babesa aplikazioari";
 "settings.app.about" = "Aplikazio honi buruz";

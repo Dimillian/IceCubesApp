@@ -63,6 +63,8 @@
 "settings.account.add" = "Dodaj konto";
 "settings.app.icon" = "Ikona aplikacji";
 "settings.app.icon.navigation-title" = "Icons";
+"settings.app.icon.official" = "Official icons";
+"settings.app.icon.designed-by" = "Icons by";
 "settings.app.source" = "Źródło (link do GitHub)";
 "settings.app.support" = "Wspieraj aplikację";
 "settings.app.about" = "O aplikacji";

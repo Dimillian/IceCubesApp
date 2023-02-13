@@ -63,6 +63,8 @@
 "settings.account.add" = "계정 추가";
 "settings.app.icon" = "앱 아이콘";
 "settings.app.icon.navigation-title" = "앱 아이콘";
+"settings.app.icon.official" = "Official icons";
+"settings.app.icon.designed-by" = "Icons by";
 "settings.app.source" = "소스 코드 (GitHub)";
 "settings.app.support" = "이 앱 지원하기";
 "settings.app.about" = "이 앱에 관해";

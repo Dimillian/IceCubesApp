@@ -63,6 +63,8 @@
 "settings.account.add" = "Account hinzufügen";
 "settings.app.icon" = "App-Icon";
 "settings.app.icon.navigation-title" = "Icons";
+"settings.app.icon.official" = "Official icons";
+"settings.app.icon.designed-by" = "Icons by";
 "settings.app.source" = "Quellcode (auf GitHub)";
 "settings.app.support" = "Unterstütze die App";
 "settings.app.about" = "Über Ice Cubes";
