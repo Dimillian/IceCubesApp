@@ -376,8 +376,8 @@
 "status.editor.error.upload" = "アップロードエラー";
 "status.editor.language-select.navigation-title" = "言語設定";
 "status.editor.language-select.recently-used" = "最近使用した";
-"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
-"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
+"status.editor.language-select.confirmation.detected-%@" = "%@ で投稿(検出された言語)";
+"status.editor.language-select.confirmation.selected-%@" = "%@ で投稿(選択された言語)";
 "status.editor.media.edit-image" = "イメージの編集";
 "status.editor.media.image-description" = "イメージの説明文";
 "status.editor.mode.edit" = "投稿を編集する";

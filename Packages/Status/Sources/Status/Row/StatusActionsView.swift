@@ -76,7 +76,7 @@ struct StatusActionsView: View {
               HStack(spacing: 2) {
                 Image(systemName: action.iconName(viewModel: viewModel))
                   .foregroundColor(action.tintColor(viewModel: viewModel, theme: theme))
-                if let count = action.count(viewModel: viewModel, theme: theme) {
+                if let count = action.count(viewModel: viewModel, theme: theme), !viewModel.isRemote {
                   Text("\(count)")
                     .font(.scaledFootnote)
                 }
@@ -97,10 +97,15 @@ struct StatusActionsView: View {
 
   private func handleAction(action: Actions) {
     Task {
+      if viewModel.isRemote, viewModel.localStatusId == nil || viewModel.localStatus == nil {
+        guard await viewModel.fetchRemoteStatus() else {
+          return
+        }
+      }
       HapticManager.shared.fireHaptic(of: .notification(.success))
       switch action {
       case .respond:
-        routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
+        routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)
       case .favorite:
         if viewModel.isFavorited {
           await viewModel.unFavorite()
