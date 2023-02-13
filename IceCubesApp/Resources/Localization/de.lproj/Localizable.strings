@@ -443,7 +443,7 @@
 "accessibility.editor.button.language" = "Sprache";
 
 // MARK: Report
-"report.comment.placeholder" = "Additional Info";
-"report.title" = "Report Post";
-"report.action.send" = "Send";
-"status.action.report" = "Report Post";
+"report.comment.placeholder" = "Zusätzliche Informationen";
+"report.title" = "Beitrag melden";
+"report.action.send" = "Absenden";
+"status.action.report" = "Beitrag melden";
