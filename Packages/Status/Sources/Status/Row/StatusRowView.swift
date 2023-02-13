@@ -53,7 +53,7 @@ public struct StatusRowView: View {
               replyView
             }
             statusView
-            if viewModel.showActions && !viewModel.isRemote, theme.statusActionsDisplay != .none {
+            if viewModel.showActions, theme.statusActionsDisplay != .none {
               StatusActionsView(viewModel: viewModel)
                 .padding(.top, 8)
                 .tint(viewModel.isFocused ? theme.tintColor : .gray)
@@ -465,20 +465,20 @@ public struct StatusRowView: View {
 
   @ViewBuilder
   private var trailingSwipeActions: some View {
-    if preferences.swipeActionsStatusTrailingRight != StatusAction.none {
+    if preferences.swipeActionsStatusTrailingRight != StatusAction.none, !viewModel.isRemote {
       makeSwipeButton(action: preferences.swipeActionsStatusTrailingRight)
     }
-    if preferences.swipeActionsStatusTrailingLeft != StatusAction.none {
+    if preferences.swipeActionsStatusTrailingLeft != StatusAction.none, !viewModel.isRemote {
       makeSwipeButton(action: preferences.swipeActionsStatusTrailingLeft)
     }
   }
 
   @ViewBuilder
   private var leadingSwipeActions: some View {
-    if preferences.swipeActionsStatusLeadingLeft != StatusAction.none {
+    if preferences.swipeActionsStatusLeadingLeft != StatusAction.none, !viewModel.isRemote {
       makeSwipeButton(action: preferences.swipeActionsStatusLeadingLeft)
     }
-    if preferences.swipeActionsStatusLeadingRight != StatusAction.none {
+    if preferences.swipeActionsStatusLeadingRight != StatusAction.none, !viewModel.isRemote {
       makeSwipeButton(action: preferences.swipeActionsStatusLeadingRight)
     }
   }
