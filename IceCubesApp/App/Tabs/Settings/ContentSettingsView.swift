@@ -23,7 +23,7 @@ struct ContentSettingsView: View {
         Toggle(isOn: $userPreferences.showAltTextForMedia) {
          Text("settings.content.media.show.alt")
         }
-      }
+      }.listRowBackground(theme.primaryBackgroundColor)
 
       Section("settings.content.instance-settings") {
         Toggle(isOn: $userPreferences.useInstanceContentSettings) {
