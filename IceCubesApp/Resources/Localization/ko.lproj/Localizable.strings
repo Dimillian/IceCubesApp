@@ -342,7 +342,7 @@
 // MARK: Package: Status
 "status.action.translate" = "번역";
 "status.action.translate-from-%@" = "%@에서 번역";
-"status.action.translated-label-%@" = "번역 제공: $@";
+"status.action.translated-label-%@" = "번역 제공: %@";
 "status.action.bookmark" = "보관함에 추가";
 "status.action.boost" = "부스트";
 "status.action.copy-text" = "복사";
@@ -378,8 +378,8 @@
 "status.editor.error.upload" = "전송 오류";
 "status.editor.language-select.navigation-title" = "언어 선택";
 "status.editor.language-select.recently-used" = "최근 사용";
-"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
-"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
+"status.editor.language-select.confirmation.detected-%@" = "%@ 글 (인식된 언어)";
+"status.editor.language-select.confirmation.selected-%@" = "%@ 글 (선택한 언어)";
 "status.editor.media.edit-image" = "이미지 편집";
 "status.editor.media.image-description" = "이미지 설명";
 "status.editor.mode.edit" = "글 수정";
@@ -450,7 +450,7 @@
 "accessibility.editor.button.language" = "언어";
 
 // MARK: Report
-"report.comment.placeholder" = "Additional Info";
-"report.title" = "Report Post";
-"report.action.send" = "Send";
-"status.action.report" = "Report Post";
+"report.comment.placeholder" = "추가 정보";
+"report.title" = "신고";
+"report.action.send" = "제출";
+"status.action.report" = "글 신고";
