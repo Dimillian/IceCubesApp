@@ -33,7 +33,7 @@ public extension AppAccount {
       if let data = keychain.getData(key) {
         if let account = try? decoder.decode(AppAccount.self, from: data) {
           accounts.append(account)
-          account.save()
+          try? account.save()
         }
       }
     }
