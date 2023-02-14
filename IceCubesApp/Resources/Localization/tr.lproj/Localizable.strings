@@ -63,6 +63,8 @@
 "settings.account.add" = "Hesap Ekle";
 "settings.app.icon" = "Uygulama İkonu";
 "settings.app.icon.navigation-title" = "İkonlar";
+"settings.app.icon.official" = "Official icons";
+"settings.app.icon.designed-by" = "Icons by";
 "settings.app.source" = "Kaynak Kodu (GitHub link)";
 "settings.app.support" = "Uygulamayı Destekleyin";
 "settings.app.about" = "About";

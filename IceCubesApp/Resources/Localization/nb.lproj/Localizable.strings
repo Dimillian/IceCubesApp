@@ -63,6 +63,8 @@
 "settings.account.add" = "Legg til konto";
 "settings.app.icon" = "Appikon";
 "settings.app.icon.navigation-title" = "Ikon";
+"settings.app.icon.official" = "Official icons";
+"settings.app.icon.designed-by" = "Icons by";
 "settings.app.source" = "Kilde (GitHub-lenke)";
 "settings.app.support" = "Støtt denne appen";
 "settings.app.about" = "About";

@@ -63,6 +63,8 @@
 "settings.account.add" = "アカウントの追加";
 "settings.app.icon" = "アプリアイコン";
 "settings.app.icon.navigation-title" = "アイコン";
+"settings.app.icon.official" = "Official icons";
+"settings.app.icon.designed-by" = "Icons by";
 "settings.app.source" = "ソース (GitHub link)";
 "settings.app.support" = "アプリを支援する";
 "settings.app.about" = "アプリについて";
