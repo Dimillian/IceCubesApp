@@ -37,6 +37,8 @@
 "enum.status-actions-display.only-buttons" = "仅图标";
 "enum.status-display-style.compact" = "紧凑";
 "enum.status-display-style.large" = "宽松";
+"enum.swipeactions.icon-with-text" = "Icon with text";
+"enum.swipeactions.icon-only" = "Icon only";
 
 // MARK: Instances
 "instance.info.domains" = "域名";
@@ -177,6 +179,7 @@
 "settings.swipeactions.status.trailing.right" = "右";
 "settings.swipeactions.status" = "嘟文";
 "settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
+"settings.swipeactions.status.icon-style" = "Icon style";
 
 // MARK: Tabs
 "tab.explore" = "探索";

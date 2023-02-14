@@ -549,11 +549,11 @@ public struct StatusRowView: View {
   @ViewBuilder
   private func makeSwipeLabel(action: StatusAction, style: UserPreferences.SwipeActionsIconStyle) -> some View {
     switch (style) {
-    case .iconsOnly:
+    case .iconOnly:
       Label(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked), systemImage: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
         .labelStyle(.iconOnly)
         .environment(\.symbolVariants, .none)
-    case .iconsWithText:
+    case .iconWithText:
       Label(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked), systemImage: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
         .labelStyle(.titleAndIcon)
         .environment(\.symbolVariants, .none)

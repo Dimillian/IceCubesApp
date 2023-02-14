@@ -37,6 +37,8 @@
 "enum.status-actions-display.only-buttons" = "Botoiak bakarrik";
 "enum.status-display-style.compact" = "Trinkoa";
 "enum.status-display-style.large" = "Handia";
+"enum.swipeactions.icon-with-text" = "Icon with text";
+"enum.swipeactions.icon-only" = "Icon only";
 
 // MARK: Instances
 "instance.info.domains" = "Domeinuak";
@@ -174,6 +176,7 @@
 "settings.swipeactions.status.trailing.right" = "eskuma";
 "settings.swipeactions.status" = "Argitaratu";
 "settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
+"settings.swipeactions.status.icon-style" = "Icon style";
 
 "enum.expand-media.show" = "Erakutsi guztia";
 "enum.expand-media.hide" = "Ezkutatu guztia";

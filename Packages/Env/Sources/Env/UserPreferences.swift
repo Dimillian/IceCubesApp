@@ -45,17 +45,17 @@ public class UserPreferences: ObservableObject {
   @AppStorage("swipeactions-status-leading-left") public var swipeActionsStatusLeadingLeft = StatusAction.reply
   @AppStorage("swipeactions-status-leading-right") public var swipeActionsStatusLeadingRight = StatusAction.none
   @AppStorage("swipeactions-use-theme-color") public var swipeActionsUseThemeColor = false
-  @AppStorage("swipeactions-icon-style") public var swipeActionsIconStyle: SwipeActionsIconStyle = .iconsWithText
-  
+  @AppStorage("swipeactions-icon-style") public var swipeActionsIconStyle: SwipeActionsIconStyle = .iconWithText
+
   public enum SwipeActionsIconStyle: String, CaseIterable {
-    case iconsWithText, iconsOnly
-    
+    case iconWithText, iconOnly
+
     public var description: LocalizedStringKey {
       switch self {
-      case .iconsWithText:
-        return "icons with text"
-      case .iconsOnly:
-        return "icons only"
+      case .iconWithText:
+        return "enum.swipeactions.icon-with-text"
+      case .iconOnly:
+        return "enum.swipeactions.icon-only"
       }
     }
   }
