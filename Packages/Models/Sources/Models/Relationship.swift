@@ -31,3 +31,22 @@ public struct Relationship: Codable {
           notifying: false)
   }
 }
+  
+public extension Relationship {
+  init(from decoder: Decoder) throws {
+    let values = try decoder.container(keyedBy: CodingKeys.self)
+    id = try values.decodeIfPresent(String.self, forKey: .id) ?? ""
+    following = try values.decodeIfPresent(Bool.self, forKey: .following) ?? false
+    showingReblogs = try values.decodeIfPresent(Bool.self, forKey: .showingReblogs) ?? false
+    followedBy = try values.decodeIfPresent(Bool.self, forKey: .followedBy) ?? false
+    blocking = try values.decodeIfPresent(Bool.self, forKey: .blocking) ?? false
+    blockedBy = try values.decodeIfPresent(Bool.self, forKey: .blockedBy) ?? false
+    muting = try values.decodeIfPresent(Bool.self, forKey: .muting) ?? false
+    mutingNotifications = try values.decodeIfPresent(Bool.self, forKey: .mutingNotifications) ?? false
+    requested = try values.decodeIfPresent(Bool.self, forKey: .requested) ?? false
+    domainBlocking = try values.decodeIfPresent(Bool.self, forKey: .domainBlocking) ?? false
+    endorsed = try values.decodeIfPresent(Bool.self, forKey: .endorsed) ?? false
+    note = try values.decodeIfPresent(String.self, forKey: .note) ?? ""
+    notifying = try values.decodeIfPresent(Bool.self, forKey: .notifying) ?? false
+  }
+}
