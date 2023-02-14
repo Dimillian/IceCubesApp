@@ -70,7 +70,7 @@
 "settings.app.source" = "Código fuente (Enlace a GitHub)";
 "settings.app.support" = "Apoya a Ice Cubes";
 "settings.app.about" = "Acerca de";
-"settings.display.example-toot" = "Example Post";
+"settings.display.example-toot" = "Publicación de ejemplo";
 "settings.display.avatar.position" = "Posición del avatar";
 "settings.display.avatar.shape" = "Forma del avatar";
 "settings.display.navigation-title" = "Ajustes de apariencia";
@@ -147,38 +147,38 @@
 "settings.display.font.system" = "De sistema";
 "settings.display.font.custom" = "Personalizada";
 "settings.display.font.scaling-%@" = "Escalado de tipografía: %@";
-"settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
+"settings.about.built-with" = "Ice Cubes utiliza estas librerías de código abierto:";
 "settings.about.title" = "Ice Cubes";
-"settings.account.cached-posts-%@" = "Cached posts: %@";
-"settings.account.action.delete-cache" = "Clear cache";
+"settings.account.cached-posts-%@" = "Publicaciones cacheadas: %@";
+"settings.account.action.delete-cache" = "Vaciar caché";
 
-"settings.general.haptic" = "Haptic Feedback";
-"settings.haptic.navigation-title" = "Haptic Settings";
-"settings.haptic.timeline" = "Timeline";
-"settings.haptic.tab-selection" = "Tab Selection";
-"settings.haptic.buttons" = "Button Press";
+"settings.general.haptic" = "Respuesta háptica";
+"settings.haptic.navigation-title" = "Ajustes hápticos";
+"settings.haptic.timeline" = "Cronología";
+"settings.haptic.tab-selection" = "Selección de pestaña";
+"settings.haptic.buttons" = "Interacción con botones";
 
-"settings.display.show-tab-label" = "Show tab name";
+"settings.display.show-tab-label" = "Mostrar nombre de pestaña";
 
-"settings.display.show-ipad-column" = "Enable secondary column";
+"settings.display.show-ipad-column" = "Activar segunda columna";
 
-"settings.general.swipeactions" = "Swipe Actions";
-"settings.swipeactions.navigation-title" = "Swipe Actions";
-"settings.swipeactions.status.action.bookmark" = "Bookmark";
-"settings.swipeactions.status.action.boost" = "Boost";
-"settings.swipeactions.status.action.favorite" = "Favorite";
-"settings.swipeactions.status.action.none" = "None";
-"settings.swipeactions.status.action.quote" = "Quote";
-"settings.swipeactions.status.action.reply" = "Reply";
-"settings.swipeactions.status.leading" = "Swipe right";
-"settings.swipeactions.status.leading.left" = "left";
-"settings.swipeactions.status.leading.right" = "right";
-"settings.swipeactions.status.trailing" = "Swipe left";
-"settings.swipeactions.status.trailing.left" = "left";
-"settings.swipeactions.status.trailing.right" = "right";
-"settings.swipeactions.status" = "Post";
-"settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
-"settings.swipeactions.status.icon-style" = "Icon style";
+"settings.general.swipeactions" = "Acciones al deslizar";
+"settings.swipeactions.navigation-title" = "Acciones al deslizar";
+"settings.swipeactions.status.action.bookmark" = "Marcadores";
+"settings.swipeactions.status.action.boost" = "Retootear";
+"settings.swipeactions.status.action.favorite" = "Favorito";
+"settings.swipeactions.status.action.none" = "Ninguna";
+"settings.swipeactions.status.action.quote" = "Citar";
+"settings.swipeactions.status.action.reply" = "Responder";
+"settings.swipeactions.status.leading" = "Deslizar a la derecha";
+"settings.swipeactions.status.leading.left" = "izquierda";
+"settings.swipeactions.status.leading.right" = "derecha";
+"settings.swipeactions.status.trailing" = "Deslizar a la izquierda";
+"settings.swipeactions.status.trailing.left" = "izquierda";
+"settings.swipeactions.status.trailing.right" = "derecha";
+"settings.swipeactions.status" = "Publicación";
+"settings.swipeactions.status.use-theme-colors" = "Usar colores del tema en lugar de los colores por defecto";
+"settings.swipeactions.status.icon-style" = "Estilo de icono";
 
 "enum.expand-media.show" = "Siempre";
 "enum.expand-media.hide" = "Nunca";
@@ -447,15 +447,15 @@
 "filter.action.hide" = "Ocultar completamente";
 
 // MARK: Accessibility
-"accessibility.editor.button.attach-photo" = "Attach photo";
-"accessibility.editor.button.poll" = "Poll";
-"accessibility.editor.button.spoiler" = "Spoiler warning";
-"accessibility.editor.button.drafts" = "Drafts";
-"accessibility.editor.button.custom-emojis" = "Custom emojis";
-"accessibility.editor.button.language" = "Language";
+"accessibility.editor.button.attach-photo" = "Añadir foto";
+"accessibility.editor.button.poll" = "Encuesta";
+"accessibility.editor.button.spoiler" = "Advertencia";
+"accessibility.editor.button.drafts" = "Borradores";
+"accessibility.editor.button.custom-emojis" = "Emojis personalizados";
+"accessibility.editor.button.language" = "Idioma";
 
 // MARK: Report
-"report.comment.placeholder" = "Additional Info";
-"report.title" = "Report Post";
-"report.action.send" = "Send";
-"status.action.report" = "Report Post";
+"report.comment.placeholder" = "Información adicional";
+"report.title" = "Denunciar publicación";
+"report.action.send" = "Enviar";
+"status.action.report" = "Denunciar publicación";
