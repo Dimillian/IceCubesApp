@@ -54,13 +54,16 @@ struct NotificationsTab: View {
         routerPath.path = []
       }
     }
-    .onChange(of: pushNotificationsService.routedNotification) { notification in
-      if let notification {
+    .onChange(of: pushNotificationsService.handleNotification) { notification in
+      if let notification, let type = notification.supportedType {
         DispatchQueue.main.async {
-          if let account = notification.accountId {
-            routerPath.navigate(to: .accountDetail(id: account))
-          } else if let status = notification.statusId {
-            routerPath.navigate(to: .statusDetail(id: status))
+          switch type {
+          case .follow, .follow_request:
+            routerPath.navigate(to: .accountDetailWithAccount(account: notification.account))
+          default:
+            if let status = notification.status {
+              routerPath.navigate(to: .statusDetailWithStatus(status: status))
+            }
           }
         }
       }

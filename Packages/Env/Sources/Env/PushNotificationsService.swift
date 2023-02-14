@@ -26,18 +26,12 @@ public class PushNotificationsService: NSObject, ObservableObject {
     static let keychainPrivateKey = "notifications_private_key"
   }
   
-  public struct RoutedNotification: Equatable {
-    public let accessToken: String
-    public let statusId: String?
-    public let accountId: String?
-  }
-
   public static let shared = PushNotificationsService()
 
   public private(set) var subscriptions: [PushNotificationSubscriptionSettings] = []
 
   @Published public var pushToken: Data?
-  @Published public var routedNotification: RoutedNotification?
+  @Published public var handleNotification: Models.Notification?
   
   override init() {
     super.init()
@@ -137,21 +131,16 @@ public class PushNotificationsService: NSObject, ObservableObject {
 extension PushNotificationsService: UNUserNotificationCenterDelegate {
   public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
     guard let plaintext = response.notification.request.content.userInfo["plaintext"] as? Data,
-          let mastodonPushNotification = try? JSONDecoder().decode(MastodonPushNotification.self, from: plaintext) else {
+          let mastodonPushNotification = try? JSONDecoder().decode(MastodonPushNotification.self, from: plaintext),
+           let account = subscriptions.first(where: { $0.account.token.accessToken == mastodonPushNotification.accessToken }) else {
         return
     }
-    if let type = Models.Notification.NotificationType(rawValue: mastodonPushNotification.notificationType) {
-      switch type {
-      case .follow, .follow_request:
-        self.routedNotification = .init(accessToken: mastodonPushNotification.accessToken,
-                                        statusId: nil,
-                                        accountId: String(mastodonPushNotification.notificationID))
-      default:
-        self.routedNotification = .init(accessToken: mastodonPushNotification.accessToken,
-                                        statusId: String(mastodonPushNotification.notificationID),
-                                        accountId: nil)
-      }
-    }
+    do {
+      let client = Client(server: account.account.server, oauthToken: account.account.token)
+      let notification: Models.Notification =
+      try await client.get(endpoint: Notifications.notification(id:String(mastodonPushNotification.notificationID)))
+      self.handleNotification = notification
+    } catch { }
   }
 }
 

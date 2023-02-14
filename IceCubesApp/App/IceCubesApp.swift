@@ -57,9 +57,9 @@ struct IceCubesApp: App {
             .edgesIgnoringSafeArea(.bottom)
             .background(TransparentBackground())
         })
-        .onChange(of: pushNotificationsService.routedNotification) { notification in
+        .onChange(of: pushNotificationsService.handleNotification) { notification in
           if notification != nil {
-            pushNotificationsService.routedNotification = nil
+            pushNotificationsService.handleNotification = nil
             selectedTab = .notifications
           }
         }
