@@ -76,7 +76,7 @@
 "settings.display.section.theme.footer" = "Norberaren koloreak aukeratzeko sistemak darabiltzan koloreen aukera ezgaitu behar da";
 "settings.display.status.action-buttons" = "Bidalketen ekintza botoiak";
 "settings.display.status.media-style" = "Bidalketen multimediaren itxura";
-"settings.display.translate-button" = "Erakutsi itzultzeko botoia";
+"settings.display.translate-button" = "Erakutsi itzulpen botoia";
 "settings.display.theme.background" = "Hondoaren kolorea";
 "settings.display.theme.secondary-background" = "Bigarren mailako hondoaren kolorea";
 "settings.display.theme.tint" = "Tonua";
@@ -449,7 +449,7 @@
 "accessibility.editor.button.language" = "Hizkuntza";
 
 // MARK: Report
-"report.comment.placeholder" = "Additional Info";
-"report.title" = "Report Post";
-"report.action.send" = "Send";
-"status.action.report" = "Report Post";
+"report.comment.placeholder" = "Informazio gehigarria";
+"report.title" = "Salaketa";
+"report.action.send" = "Bidali";
+"status.action.report" = "Salatu edukia";
