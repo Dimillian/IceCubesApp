@@ -37,8 +37,8 @@
 "enum.status-actions-display.only-buttons" = "Botoiak bakarrik";
 "enum.status-display-style.compact" = "Trinkoa";
 "enum.status-display-style.large" = "Handia";
-"enum.swipeactions.icon-with-text" = "Icon with text";
-"enum.swipeactions.icon-only" = "Icon only";
+"enum.swipeactions.icon-with-text" = "Ikonoa eta testua";
+"enum.swipeactions.icon-only" = "Ikonoa soilik";
 
 // MARK: Instances
 "instance.info.domains" = "Domeinuak";
@@ -65,8 +65,8 @@
 "settings.account.add" = "Gehitu kontua";
 "settings.app.icon" = "Aplikazioaren ikonoa";
 "settings.app.icon.navigation-title" = "Ikonoak";
-"settings.app.icon.official" = "Official icons";
-"settings.app.icon.designed-by" = "Icons by";
+"settings.app.icon.official" = "Ikono ofizialak";
+"settings.app.icon.designed-by" = "Ikonoen sortzailea:";
 "settings.app.source" = "Iturburu kodea (GitHub)";
 "settings.app.support" = "Eman babesa aplikazioari";
 "settings.app.about" = "Aplikazio honi buruz";
@@ -162,23 +162,23 @@
 
 "settings.display.show-ipad-column" = "Gaitu bigarren zutabea";
 
-"settings.general.swipeactions" = "Atzamar-mugimenduen ekintzak";
-"settings.swipeactions.navigation-title" = "Mugimenduen ekintzak";
-"settings.swipeactions.status.action.bookmark" = "Jarri laster-marka";
-"settings.swipeactions.status.action.boost" = "Bultzatu";
-"settings.swipeactions.status.action.favorite" = "Egin gogoko";
-"settings.swipeactions.status.action.none" = "Bat ere ez";
+"settings.general.swipeactions" = "Mugimenduen ekintzak";
+"settings.swipeactions.navigation-title" = "Atzamar-mugimenduen ekintzak";
+"settings.swipeactions.status.action.bookmark" = "Laster-marka";
+"settings.swipeactions.status.action.boost" = "Bultzada";
+"settings.swipeactions.status.action.favorite" = "Gogokoa";
+"settings.swipeactions.status.action.none" = "Ezer ez";
 "settings.swipeactions.status.action.quote" = "Aipatu bidalketa";
 "settings.swipeactions.status.action.reply" = "Erantzun";
 "settings.swipeactions.status.leading" = "Eskumarantz";
-"settings.swipeactions.status.leading.left" = "ezker";
+"settings.swipeactions.status.leading.left" = "ezkerra";
 "settings.swipeactions.status.leading.right" = "eskuma";
 "settings.swipeactions.status.trailing" = "Ezkerrerantz";
-"settings.swipeactions.status.trailing.left" = "ezker";
+"settings.swipeactions.status.trailing.left" = "ezkerra";
 "settings.swipeactions.status.trailing.right" = "eskuma";
-"settings.swipeactions.status" = "Argitaratu";
-"settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
-"settings.swipeactions.status.icon-style" = "Icon style";
+"settings.swipeactions.status" = "Bidalketa";
+"settings.swipeactions.status.use-theme-colors" = "Erabili hautatutako kolorea defektuzko koloreen ordez";
+"settings.swipeactions.status.icon-style" = "Ikonoen itxura";
 
 "enum.expand-media.show" = "Erakutsi guztia";
 "enum.expand-media.hide" = "Ezkutatu guztia";
@@ -337,13 +337,13 @@
 "notifications.tab.all" = "Guztia";
 "notifications.tab.mentions" = "Aipamenak";
 
-"notifications.label.status.push" = "🖊️ Posted: ";
-"notifications.label.reblog.push" = "🚀 Boosted: ";
-"notifications.label.follow.push" = "👋 Followed you: ";
-"notifications.label.follow-request.push" = "🔒 Requested to follow you: ";
-"notifications.label.favorite.push" = "⭐️ Starred: ";
-"notifications.label.poll.push" = "📈 Poll ended: ";
-"notifications.label.update.push" = "Updated: ";
+"notifications.label.status.push" = "🖊️ Argitaratu du: ";
+"notifications.label.reblog.push" = "🚀 Bultzatu du: ";
+"notifications.label.follow.push" = "👋 Jarraitu dizu: ";
+"notifications.label.follow-request.push" = "🔒 Jarraipen-eskaera bidali dizu: ";
+"notifications.label.favorite.push" = "⭐️ Gogoko egin du: ";
+"notifications.label.poll.push" = "📈 Bozketa amaitu da: ";
+"notifications.label.update.push" = "Eguneratu du: ";
 
 // MARK: Package: Timeline
 "timeline.federated" = "Federatua";
@@ -392,8 +392,8 @@
 "status.editor.error.upload" = "Errorea igotzerakoan";
 "status.editor.language-select.navigation-title" = "Hautatu hizkuntza";
 "status.editor.language-select.recently-used" = "Duela gutxi erabilitakoak";
-"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
-"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
+"status.editor.language-select.confirmation.detected-%@" = "Argitaratu %@(e)z (Antzemandako hizkuntza)";
+"status.editor.language-select.confirmation.selected-%@" = "Argitaratu %@(e)z (Hautatutako hizkuntza)";
 "status.editor.media.edit-image" = "Editatu irudiak";
 "status.editor.media.image-description" = "Irudiaren deskribapena";
 "status.editor.mode.edit" = "Bidalketa editatzen";
