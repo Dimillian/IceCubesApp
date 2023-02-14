@@ -37,8 +37,8 @@
 "enum.status-actions-display.only-buttons" = "仅图标";
 "enum.status-display-style.compact" = "紧凑";
 "enum.status-display-style.large" = "宽松";
-"enum.swipeactions.icon-with-text" = "Icon with text";
-"enum.swipeactions.icon-only" = "Icon only";
+"enum.swipeactions.icon-with-text" = "图标和文本";
+"enum.swipeactions.icon-only" = "仅图标";
 
 // MARK: Instances
 "instance.info.domains" = "域名";
@@ -65,8 +65,8 @@
 "settings.account.add" = "添加账户";
 "settings.app.icon" = "应用图标";
 "settings.app.icon.navigation-title" = "图标";
-"settings.app.icon.official" = "Official icons";
-"settings.app.icon.designed-by" = "Icons by";
+"settings.app.icon.official" = "官方图标";
+"settings.app.icon.designed-by" = "图标作者";
 "settings.app.source" = "源代码（GitHub 链接）";
 "settings.app.support" = "支持本应用";
 "settings.app.about" = "关于";
@@ -180,8 +180,8 @@
 "settings.swipeactions.status.trailing.left" = "左";
 "settings.swipeactions.status.trailing.right" = "右";
 "settings.swipeactions.status" = "嘟文";
-"settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
-"settings.swipeactions.status.icon-style" = "Icon style";
+"settings.swipeactions.status.use-theme-colors" = "使用主题色而不是默认色";
+"settings.swipeactions.status.icon-style" = "图标样式";
 
 // MARK: Tabs
 "tab.explore" = "探索";
@@ -262,7 +262,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "删除";
 "conversations.action.mark-read" = "标记为已读";
-"conversations.action.view-detail" = "View detail";
+"conversations.action.view-detail" = "查看详情";
 "conversations.empty.message" = "正在社交媒体上寻找乐趣？你所有的私信和单独提及都在这里。聊得开心！📱❤️";
 "conversations.empty.title" = "收件箱为空";
 "conversations.error.button" = "重试";
@@ -391,8 +391,8 @@
 "status.editor.error.upload" = "上传错误";
 "status.editor.language-select.navigation-title" = "选择语言";
 "status.editor.language-select.recently-used" = "最近使用";
-"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
-"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
+"status.editor.language-select.confirmation.detected-%@" = "嘟文检测为 %@";
+"status.editor.language-select.confirmation.selected-%@" = "使用 %@ 发送";
 "status.editor.media.edit-image" = "编辑图片";
 "status.editor.media.image-description" = "图片描述";
 "status.editor.mode.edit" = "正在编辑你的嘟文";
@@ -466,7 +466,7 @@
 "accessibility.editor.button.language" = "选择语言";
 
 // MARK: Report
-"report.comment.placeholder" = "Additional Info";
-"report.title" = "Report Post";
-"report.action.send" = "Send";
-"status.action.report" = "Report Post";
+"report.comment.placeholder" = "附加信息";
+"report.title" = "举报嘟文";
+"report.action.send" = "发送";
+"status.action.report" = "举报嘟文";
