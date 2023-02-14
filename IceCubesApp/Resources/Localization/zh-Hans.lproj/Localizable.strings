@@ -180,7 +180,7 @@
 "settings.swipeactions.status.trailing.left" = "左";
 "settings.swipeactions.status.trailing.right" = "右";
 "settings.swipeactions.status" = "嘟文";
-"settings.swipeactions.status.use-theme-colors" = "使用应用主题色";
+"settings.swipeactions.status.use-theme-colors" = "使用主题色而不是默认色";
 "settings.swipeactions.status.icon-style" = "图标样式";
 
 // MARK: Tabs
@@ -383,8 +383,8 @@
 "status.editor.error.upload" = "上传错误";
 "status.editor.language-select.navigation-title" = "选择语言";
 "status.editor.language-select.recently-used" = "最近使用";
-"status.editor.language-select.confirmation.detected-%@" = "嘟文检测为%@";
-"status.editor.language-select.confirmation.selected-%@" = "使用用%@发送";
+"status.editor.language-select.confirmation.detected-%@" = "嘟文检测为 %@";
+"status.editor.language-select.confirmation.selected-%@" = "使用 %@ 发送";
 "status.editor.media.edit-image" = "编辑图片";
 "status.editor.media.image-description" = "图片描述";
 "status.editor.mode.edit" = "正在编辑你的嘟文";
