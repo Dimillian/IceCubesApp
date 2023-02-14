@@ -56,7 +56,7 @@ struct NotificationsTab: View {
     }
     .onChange(of: pushNotificationsService.handleNotification) { notification in
       if let notification, let type = notification.supportedType {
-        DispatchQueue.main.async {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
           switch type {
           case .follow, .follow_request:
             routerPath.navigate(to: .accountDetailWithAccount(account: notification.account))
