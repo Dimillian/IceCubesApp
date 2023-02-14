@@ -336,6 +336,14 @@
 "notifications.tab.all" = "All";
 "notifications.tab.mentions" = "Mentions";
 
+"notifications.label.status.push" = "🖊️ Posted: ";
+"notifications.label.reblog.push" = "🚀 Boosted: ";
+"notifications.label.follow.push" = "👋 Followed you: ";
+"notifications.label.follow-request.push" = "🔒 Requested to follow you: ";
+"notifications.label.favorite.push" = "⭐️ Starred: ";
+"notifications.label.poll.push" = "📈 Poll ended: ";
+"notifications.label.update.push" = "Updated: ";
+
 // MARK: Package: Timeline
 "timeline.federated" = "Federated";
 "timeline.latest" = "Jump to Latest";

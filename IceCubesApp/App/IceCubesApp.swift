@@ -57,10 +57,20 @@ struct IceCubesApp: App {
             .edgesIgnoringSafeArea(.bottom)
             .background(TransparentBackground())
         })
-        .onChange(of: pushNotificationsService.handleNotification) { notification in
+        .onChange(of: pushNotificationsService.handledNotification) { notification in
           if notification != nil {
-            pushNotificationsService.handleNotification = nil
-            selectedTab = .notifications
+            pushNotificationsService.handledNotification = nil
+            if appAccountsManager.currentAccount.oauthToken?.accessToken != notification?.account.token.accessToken,
+               let account = appAccountsManager.availableAccounts.first(where:
+                  { $0.oauthToken?.accessToken == notification?.account.token.accessToken })  {
+              appAccountsManager.currentAccount = account
+              DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                selectedTab = .notifications
+                pushNotificationsService.handledNotification = notification
+              }
+            } else {
+              selectedTab = .notifications
+            }
           }
         }
     }

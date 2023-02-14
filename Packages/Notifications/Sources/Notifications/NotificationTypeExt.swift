@@ -3,7 +3,7 @@ import Models
 import SwiftUI
 
 extension Models.Notification.NotificationType {
-  func label(count: Int) -> LocalizedStringKey {
+  public func label(count: Int) -> LocalizedStringKey {
     switch self {
     case .status:
       return "notifications.label.status"
@@ -21,6 +21,27 @@ extension Models.Notification.NotificationType {
       return "notifications.label.poll"
     case .update:
       return "notifications.label.update"
+    }
+  }
+  
+  public func notificationKey() -> String {
+    switch self {
+    case .status:
+      return "notifications.label.status.push"
+    case .mention:
+      return ""
+    case .reblog:
+      return "notifications.label.reblog.push"
+    case .follow:
+      return "notifications.label.follow.push"
+    case .follow_request:
+      return "notifications.label.follow-request.push"
+    case .favourite:
+      return "notifications.label.favorite.push"
+    case .poll:
+      return "notifications.label.poll.push"
+    case .update:
+      return "notifications.label.update.push"
     }
   }
 

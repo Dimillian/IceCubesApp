@@ -7,6 +7,7 @@ import UIKit
 import UserNotifications
 import Intents
 import Network
+import Notifications
 
 @MainActor
 class NotificationService: UNNotificationServiceExtension {
@@ -81,14 +82,16 @@ class NotificationService: UNNotificationServiceExtension {
             if let image = UIImage(data: data) {
               try? image.pngData()?.write(to: fileURL)
   
-              if let remoteNotification = await toRemoteNotification(localNotification: notification) {
-                let intent = buildMessageIntent(remoteNotification: remoteNotification, avatarURL: fileURL)
+              if let remoteNotification = await toRemoteNotification(localNotification: notification),
+                  let type = remoteNotification.supportedType {
+                let intent = buildMessageIntent(remoteNotification: remoteNotification,
+                                                currentUser: bestAttemptContent.userInfo["i"] as? String ?? "",
+                                                avatarURL: fileURL)
                 bestAttemptContent = try bestAttemptContent.updating(from: intent) as! UNMutableNotificationContent
-                if AppAccountsManager.shared.availableAccounts.count > 1 {
-                  let newBody = "\(bestAttemptContent.userInfo["i"] as? String ?? "") \n\(notification.title)\n\(notification.body.escape())"
-                  bestAttemptContent.body = newBody
+                if type == .mention {
+                  bestAttemptContent.body = notification.body.escape()
                 } else {
-                  let newBody = "\(notification.title)\n\(notification.body.escape())"
+                  let newBody = "\(NSLocalizedString(type.notificationKey(), bundle: .main, comment: ""))\(notification.body.escape())"
                   bestAttemptContent.body = newBody
                 }
               } else {
@@ -121,7 +124,9 @@ class NotificationService: UNNotificationServiceExtension {
     return nil
   }
   
-  private func buildMessageIntent(remoteNotification: Models.Notification, avatarURL: URL) -> INSendMessageIntent {
+  private func buildMessageIntent(remoteNotification: Models.Notification,
+                                  currentUser: String,
+                                  avatarURL: URL) -> INSendMessageIntent {
     let handle = INPersonHandle(value: remoteNotification.account.id, type: .unknown)
     let avatar = INImage(url: avatarURL)
     let sender = INPerson(personHandle: handle,
@@ -130,14 +135,29 @@ class NotificationService: UNNotificationServiceExtension {
                           image: avatar,
                           contactIdentifier: nil,
                           customIdentifier: nil)
-    let intent = INSendMessageIntent(recipients: nil,
+    var recipents: [INPerson]?
+    var groupName: INSpeakableString?
+    if AppAccountsManager.shared.availableAccounts.count > 1 {
+      let me = INPerson(personHandle: .init(value: currentUser, type: .unknown),
+                        nameComponents: nil,
+                        displayName: currentUser,
+                        image: nil,
+                        contactIdentifier: nil,
+                        customIdentifier: nil)
+      recipents = [me, sender]
+      groupName = .init(spokenPhrase: currentUser)
+    }
+    let intent = INSendMessageIntent(recipients: recipents,
                                      outgoingMessageType: .outgoingMessageText,
                                      content: nil,
-                                     speakableGroupName: nil,
+                                     speakableGroupName: groupName,
                                      conversationIdentifier: remoteNotification.account.id,
                                      serviceName: nil,
                                      sender: sender,
                                      attachments: nil)
+    if groupName != nil {
+      intent.setImage(avatar, forParameterNamed: \.speakableGroupName)
+    }
     return intent
   }
 }

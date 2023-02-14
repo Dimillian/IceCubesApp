@@ -6,7 +6,7 @@ import Network
 import SwiftUI
 import UserNotifications
 
-public struct PushAccount {
+public struct PushAccount: Equatable {
   public let server: String
   public let token: OauthToken
   public let accountName: String?
@@ -16,6 +16,11 @@ public struct PushAccount {
     self.token = token
     self.accountName = accountName
   }
+}
+
+public struct HandledNotification: Equatable {
+  public let account: PushAccount
+  public let notification: Models.Notification
 }
 
 @MainActor
@@ -31,7 +36,8 @@ public class PushNotificationsService: NSObject, ObservableObject {
   public private(set) var subscriptions: [PushNotificationSubscriptionSettings] = []
 
   @Published public var pushToken: Data?
-  @Published public var handleNotification: Models.Notification?
+  
+  @Published public var handledNotification: HandledNotification?
   
   override init() {
     super.init()
@@ -139,7 +145,7 @@ extension PushNotificationsService: UNUserNotificationCenterDelegate {
       let client = Client(server: account.account.server, oauthToken: account.account.token)
       let notification: Models.Notification =
       try await client.get(endpoint: Notifications.notification(id:String(mastodonPushNotification.notificationID)))
-      self.handleNotification = notification
+      self.handledNotification = .init(account: account.account, notification: notification)
     } catch { }
   }
 }
