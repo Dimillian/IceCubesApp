@@ -63,8 +63,11 @@ struct StatusActionsView: View {
       HStack {
         ForEach(Actions.allCases, id: \.self) { action in
           if action == .share {
-            if let url = viewModel.status.reblog?.url ?? viewModel.status.url {
-              ShareLink(item: url) {
+            if let urlString = viewModel.status.reblog?.url ?? viewModel.status.url,
+               let url = URL(string: urlString) {
+              ShareLink(item: url,
+                        subject: Text(viewModel.status.reblog?.account.safeDisplayName ?? viewModel.status.account.safeDisplayName),
+                        message: Text(viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText)) {
                 Image(systemName: action.iconName(viewModel: viewModel))
               }
               .buttonStyle(.borderless)

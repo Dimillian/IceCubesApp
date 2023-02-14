@@ -498,7 +498,7 @@ public struct AccountDetailView: View {
             }
 
             if let url = account.url {
-              ShareLink(item: url) {
+              ShareLink(item: url, subject: Text(account.safeDisplayName)) {
                 Label("account.action.share", systemImage: "square.and.arrow.up")
               }
               Button { UIApplication.shared.open(url) } label: {
