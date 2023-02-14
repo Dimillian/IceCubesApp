@@ -37,8 +37,8 @@
 "enum.status-actions-display.only-buttons" = "Tylko przyciski";
 "enum.status-display-style.compact" = "Pomniejszone";
 "enum.status-display-style.large" = "Duże";
-"enum.swipeactions.icon-with-text" = "Icon with text";
-"enum.swipeactions.icon-only" = "Icon only";
+"enum.swipeactions.icon-with-text" = "Ikona z tekstem";
+"enum.swipeactions.icon-only" = "Tylko ikona";
 
 // MARK: Instances
 "instance.info.domains" = "Domeny";
@@ -64,8 +64,8 @@
 // MARK: Settings
 "settings.account.add" = "Dodaj konto";
 "settings.app.icon" = "Ikona aplikacji";
-"settings.app.icon.official" = "Official icons";
-"settings.app.icon.designed-by" = "Icons by";
+"settings.app.icon.official" = "Oficjalne ikony aplikacji";
+"settings.app.icon.designed-by" = "Ikony zaprojektowane przez";
 "settings.app.icon.navigation-title" = "Ikony";
 "settings.app.source" = "Źródło (link do GitHub)";
 "settings.app.support" = "Wspieraj aplikację";
@@ -180,8 +180,8 @@
 "settings.swipeactions.status.trailing.left" = "lewa";
 "settings.swipeactions.status.trailing.right" = "prawa";
 "settings.swipeactions.status" = "Post";
-"settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
-"settings.swipeactions.status.icon-style" = "Icon style";
+"settings.swipeactions.status.use-theme-colors" = "Używaj kolorów motywu zamiast kolorów domyślnych";
+"settings.swipeactions.status.icon-style" = "Styl ikony";
 
 // MARK: Tabs
 "tab.explore" = "Odkrywaj";
@@ -455,7 +455,7 @@
 "accessibility.editor.button.language" = "Język";
 
 // MARK: Report
-"report.comment.placeholder" = "Additional Info";
-"report.title" = "Report Post";
-"report.action.send" = "Send";
-"status.action.report" = "Report Post";
+"report.comment.placeholder" = "Informacja dodatkowa";
+"report.title" = "Zgłoszenie postu";
+"report.action.send" = "Wyślij";
+"status.action.report" = "Zgłoś post";
