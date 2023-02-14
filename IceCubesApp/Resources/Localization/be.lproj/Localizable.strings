@@ -78,8 +78,8 @@
 "settings.display.section.display" = "Дысплэй";
 "settings.display.section.theme" = "Тэма";
 "settings.display.section.theme.footer" = "Уласныя колеры можна ўсталяваць толькі ў тым выпадку, калі адключана сістэмная каляровая схема";
-"settings.display.status.action-buttons" = "Status action buttons";
-"settings.display.status.media-style" = "Status media style";
+"settings.display.status.action-buttons" = "Кнопкі дзеянняў стану";
+"settings.display.status.media-style" = "Медыястыль статусу";
 "settings.display.translate-button" = "Паказаць кнопку перакладу";
 "settings.display.theme.background" = "Колер фону";
 "settings.display.theme.secondary-background" = "Другасны колер фону";
@@ -222,7 +222,7 @@
 "account.detail.featured-tags-n-posts %lld" = "%lld допісаў";
 "account.edit.about" = "Апісанне";
 "account.edit.account-settings.bot" = "Уліковы запіс бота";
-"account.edit.account-settings.discoverable" = "Discoverable";
+"account.edit.account-settings.discoverable" = "Выяўляны";
 "account.edit.account-settings.private" = "Асабістыя";
 "account.edit.account-settings.section-title" = "Налады уліковага запісу";
 "account.edit.display-name" = "Імя для адлюстравання";
