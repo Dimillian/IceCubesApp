@@ -117,6 +117,8 @@
 "settings.content.expand-media" = "Medievisning";
 "settings.content.default-sensitive" = "Marker alltid medier som sensitive";
 "settings.content.default-visibility" = "Innleggssynlighet";
+"settings.content.media" = "Media";
+"settings.content.media.show.alt" = "Show ALT texts";
 "settings.content.reading" = "Lesing";
 "settings.content.posting" = "Innlegg";
 "enum.expand-media.show" = "Vis alle";

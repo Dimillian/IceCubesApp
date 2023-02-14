@@ -37,7 +37,8 @@ public class UserPreferences: ObservableObject {
   @AppStorage("haptic_button_press") public var hapticButtonPressEnabled = true
 
   @AppStorage("show_tab_label_iphone") public var showiPhoneTabLabel = true
-
+  @AppStorage("show_alt_text_for_media") public var showAltTextForMedia = true
+  
   @AppStorage("show_second_column_ipad") public var showiPadSecondaryColumn = true
 
   @AppStorage("swipeactions-status-trailing-right") public var swipeActionsStatusTrailingRight = StatusAction.favorite

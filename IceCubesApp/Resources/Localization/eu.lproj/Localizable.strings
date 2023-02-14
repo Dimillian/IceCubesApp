@@ -137,6 +137,8 @@
 "settings.content.expand-media" = "Multimedia erakusteko hobespenak";
 "settings.content.default-sensitive" = "Markatu eduki guztia hunkigarri gisa";
 "settings.content.default-visibility" = "Edukiaren irismena";
+"settings.content.media" = "Media";
+"settings.content.media.show.alt" = "Show ALT texts";
 "settings.content.reading" = "Irakurtzean";
 "settings.content.posting" = "Bidaltzean";
 "settings.push.duplicate.title" = "Bikoiztutako jakinarazpenen konpontzailea";

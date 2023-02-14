@@ -137,6 +137,8 @@
 "settings.content.expand-media" = "Visualizzazione dei media";
 "settings.content.default-sensitive" = "Segnala sempre i contenuti come sensibili";
 "settings.content.default-visibility" = "Visibilità del post";
+"settings.content.media" = "Media";
+"settings.content.media.show.alt" = "Show ALT texts";
 "settings.content.reading" = "Lettura";
 "settings.content.posting" = "Composizione";
 "enum.expand-media.show" = "Mostra tutti";
