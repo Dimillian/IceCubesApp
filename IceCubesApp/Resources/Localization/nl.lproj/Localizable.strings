@@ -37,6 +37,8 @@
 "enum.status-actions-display.only-buttons" = "Zonder tekst";
 "enum.status-display-style.compact" = "Compact";
 "enum.status-display-style.large" = "Groot";
+"enum.swipeactions.icon-with-text" = "Icon with text";
+"enum.swipeactions.icon-only" = "Icon only";
 
 // MARK: Instances
 "instance.info.domains" = "Domeinen";
@@ -175,6 +177,8 @@
 "settings.swipeactions.status.trailing.left" = "links";
 "settings.swipeactions.status.trailing.right" = "rechts";
 "settings.swipeactions.status" = "Post";
+"settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
+"settings.swipeactions.status.icon-style" = "Icon style";
 
 // MARK: Tabs
 "tab.explore" = "Ontdekken";

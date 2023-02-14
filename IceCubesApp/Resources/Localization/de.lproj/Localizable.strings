@@ -37,6 +37,8 @@
 "enum.status-actions-display.only-buttons" = "Nur Buttons";
 "enum.status-display-style.compact" = "Kompakt";
 "enum.status-display-style.large" = "Groß";
+"enum.swipeactions.icon-with-text" = "Icon with text";
+"enum.swipeactions.icon-only" = "Icon only";
 
 // MARK: Instances
 "instance.info.domains" = "Domains";
@@ -175,6 +177,8 @@
 "settings.swipeactions.status.trailing.left" = "links";
 "settings.swipeactions.status.trailing.right" = "rechts";
 "settings.swipeactions.status" = "Beitrag";
+"settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
+"settings.swipeactions.status.icon-style" = "Icon style";
 
 "enum.expand-media.show" = "Alle zeigen";
 "enum.expand-media.hide" = "Alle ausblenden";

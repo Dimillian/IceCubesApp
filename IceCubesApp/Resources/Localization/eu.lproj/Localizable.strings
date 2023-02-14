@@ -37,6 +37,8 @@
 "enum.status-actions-display.only-buttons" = "Botoiak bakarrik";
 "enum.status-display-style.compact" = "Trinkoa";
 "enum.status-display-style.large" = "Handia";
+"enum.swipeactions.icon-with-text" = "Icon with text";
+"enum.swipeactions.icon-only" = "Icon only";
 
 // MARK: Instances
 "instance.info.domains" = "Domeinuak";
@@ -175,6 +177,8 @@
 "settings.swipeactions.status.trailing.left" = "ezker";
 "settings.swipeactions.status.trailing.right" = "eskuma";
 "settings.swipeactions.status" = "Argitaratu";
+"settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
+"settings.swipeactions.status.icon-style" = "Icon style";
 
 "enum.expand-media.show" = "Erakutsi guztia";
 "enum.expand-media.hide" = "Ezkutatu guztia";
@@ -241,8 +245,8 @@
 "account.follow.requested" = "Eskaera eginda";
 "account.follow-request.accept" = "Onartu";
 "account.follow-request.reject" = "Baztertu";
-"account.follow-requests.pending-requests" = "Erabakitzeke eskaerak";
-"account.follow-requests.instructions" = "Erabiltzaile horiek ez dituzte zure bidalketak ikusiko onartzen ez dituzun arte."; 
+"account.follow-requests.pending-requests" = "Erabakitzeko eskaerak";
+"account.follow-requests.instructions" = "Erabiltzaile horiek ez dituzte zure bidalketak ikusiko onartzen ez dituzun arte.";
 "account.followers" = "Jarraitzaile";
 "account.following" = "Jarraitzen";
 "account.list.create" = "Sortu zerrenda berria";

@@ -467,9 +467,11 @@ public struct StatusRowView: View {
   private var trailingSwipeActions: some View {
     if preferences.swipeActionsStatusTrailingRight != StatusAction.none, !viewModel.isRemote {
       makeSwipeButton(action: preferences.swipeActionsStatusTrailingRight)
+        .tint(preferences.swipeActionsStatusTrailingRight.color(themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor, outside: true))
     }
     if preferences.swipeActionsStatusTrailingLeft != StatusAction.none, !viewModel.isRemote {
       makeSwipeButton(action: preferences.swipeActionsStatusTrailingLeft)
+        .tint(preferences.swipeActionsStatusTrailingLeft.color(themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor, outside: false))
     }
   }
 
@@ -477,9 +479,11 @@ public struct StatusRowView: View {
   private var leadingSwipeActions: some View {
     if preferences.swipeActionsStatusLeadingLeft != StatusAction.none, !viewModel.isRemote {
       makeSwipeButton(action: preferences.swipeActionsStatusLeadingLeft)
+        .tint(preferences.swipeActionsStatusLeadingLeft.color(themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor, outside: true))
     }
     if preferences.swipeActionsStatusLeadingRight != StatusAction.none, !viewModel.isRemote {
       makeSwipeButton(action: preferences.swipeActionsStatusLeadingRight)
+        .tint(preferences.swipeActionsStatusLeadingRight.color(themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor, outside: false))
     }
   }
 
@@ -526,11 +530,8 @@ public struct StatusRowView: View {
       HapticManager.shared.fireHaptic(of: .notification(.success))
       routerPath.presentedSheet = destination
     } label: {
-      Text(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
-      Image(systemName: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
-        .environment(\.symbolVariants, .none)
+      makeSwipeLabel(action: action, style: preferences.swipeActionsIconStyle)
     }
-    .tint(action.color(themeTintColor: theme.tintColor))
   }
 
   @ViewBuilder
@@ -541,10 +542,21 @@ public struct StatusRowView: View {
         await task()
       }
     } label: {
-      Text(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
-      Image(systemName: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
+      makeSwipeLabel(action: action, style: preferences.swipeActionsIconStyle)
+    }
+  }
+  
+  @ViewBuilder
+  private func makeSwipeLabel(action: StatusAction, style: UserPreferences.SwipeActionsIconStyle) -> some View {
+    switch (style) {
+    case .iconOnly:
+      Label(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked), systemImage: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
+        .labelStyle(.iconOnly)
+        .environment(\.symbolVariants, .none)
+    case .iconWithText:
+      Label(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked), systemImage: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
+        .labelStyle(.titleAndIcon)
         .environment(\.symbolVariants, .none)
     }
-    .tint(action.color(themeTintColor: theme.tintColor))
   }
 }

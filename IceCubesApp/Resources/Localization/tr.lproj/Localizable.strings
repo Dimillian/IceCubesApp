@@ -37,6 +37,8 @@
 "enum.status-actions-display.only-buttons" = "Sadece Butonlar";
 "enum.status-display-style.compact" = "Kompakt";
 "enum.status-display-style.large" = "Geniş";
+"enum.swipeactions.icon-with-text" = "Icon with text";
+"enum.swipeactions.icon-only" = "Icon only";
 
 // MARK: Instances
 "instance.info.domains" = "Domainler";
@@ -178,6 +180,8 @@
 "settings.swipeactions.status.trailing.left" = "left";
 "settings.swipeactions.status.trailing.right" = "right";
 "settings.swipeactions.status" = "Post";
+"settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
+"settings.swipeactions.status.icon-style" = "Icon style";
 
 // MARK: Tabs
 "tab.explore" = "Keşfet";

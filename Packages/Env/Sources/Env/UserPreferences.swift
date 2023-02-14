@@ -44,6 +44,21 @@ public class UserPreferences: ObservableObject {
   @AppStorage("swipeactions-status-trailing-left") public var swipeActionsStatusTrailingLeft = StatusAction.boost
   @AppStorage("swipeactions-status-leading-left") public var swipeActionsStatusLeadingLeft = StatusAction.reply
   @AppStorage("swipeactions-status-leading-right") public var swipeActionsStatusLeadingRight = StatusAction.none
+  @AppStorage("swipeactions-use-theme-color") public var swipeActionsUseThemeColor = false
+  @AppStorage("swipeactions-icon-style") public var swipeActionsIconStyle: SwipeActionsIconStyle = .iconWithText
+
+  public enum SwipeActionsIconStyle: String, CaseIterable {
+    case iconWithText, iconOnly
+
+    public var description: LocalizedStringKey {
+      switch self {
+      case .iconWithText:
+        return "enum.swipeactions.icon-with-text"
+      case .iconOnly:
+        return "enum.swipeactions.icon-only"
+      }
+    }
+  }
 
   public var postVisibility: Models.Visibility {
     if useInstanceContentSettings {

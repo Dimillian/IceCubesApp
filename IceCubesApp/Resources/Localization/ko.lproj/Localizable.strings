@@ -37,6 +37,8 @@
 "enum.status-actions-display.only-buttons" = "버튼만 표시";
 "enum.status-display-style.compact" = "작게";
 "enum.status-display-style.large" = "크게";
+"enum.swipeactions.icon-with-text" = "아이콘과 텍스트";
+"enum.swipeactions.icon-only" = "아이콘만";
 
 // MARK: Instances
 "instance.info.domains" = "도메인";
@@ -177,7 +179,9 @@
 "settings.swipeactions.status.trailing" = "왼쪽으로 쓸어넘길 때";
 "settings.swipeactions.status.trailing.left" = "왼쪽 버튼";
 "settings.swipeactions.status.trailing.right" = "오른쪽 버튼";
-"settings.swipeactions.status" = "글을";
+"settings.swipeactions.status" = "글";
+"settings.swipeactions.status.use-theme-colors" = "기본 색상 대신 테마 색상 사용";
+"settings.swipeactions.status.icon-style" = "아이콘 모양";
 
 // MARK: Tabs
 "tab.explore" = "둘러보기";

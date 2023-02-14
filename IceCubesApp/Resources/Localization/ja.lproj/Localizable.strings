@@ -37,6 +37,8 @@
 "enum.status-actions-display.only-buttons" = "ボタンのみ";
 "enum.status-display-style.compact" = "コンパクト";
 "enum.status-display-style.large" = "ラージ";
+"enum.swipeactions.icon-with-text" = "Icon with text";
+"enum.swipeactions.icon-only" = "Icon only";
 
 // MARK: Instances
 "instance.info.domains" = "ドメイン";
@@ -178,6 +180,8 @@
 "settings.swipeactions.status.trailing.left" = "左";
 "settings.swipeactions.status.trailing.right" = "右";
 "settings.swipeactions.status" = "投稿";
+"settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
+"settings.swipeactions.status.icon-style" = "Icon style";
 
 // MARK: Tabs
 "tab.explore" = "エクスプローラー";

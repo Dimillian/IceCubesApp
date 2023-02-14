@@ -37,6 +37,8 @@
 "enum.status-actions-display.only-buttons" = "Solo bottoni";
 "enum.status-display-style.compact" = "Compatto";
 "enum.status-display-style.large" = "Completo";
+"enum.swipeactions.icon-with-text" = "Icon with text";
+"enum.swipeactions.icon-only" = "Icon only";
 
 // MARK: Instances
 "instance.info.domains" = "Domini";
@@ -178,6 +180,8 @@
 "settings.swipeactions.status.trailing.left" = "sinistra";
 "settings.swipeactions.status.trailing.right" = "destra";
 "settings.swipeactions.status" = "Post";
+"settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
+"settings.swipeactions.status.icon-style" = "Icon style";
 
 // MARK: Tabs
 "tab.explore" = "Esplora";
