@@ -119,20 +119,21 @@ struct StatusRowContextMenu: View {
                action: { viewModel.showDeleteAlert = true },
                label: { Label("status.action.delete", systemImage: "trash") })
       }
-    } else if !viewModel.isRemote {
-      Section(viewModel.status.account.acct) {
-        Button {
-          routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.account, visibility: .pub)
-        } label: {
-          Label("status.action.mention", systemImage: "at")
-        }
-        Button {
-          routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.account, visibility: .direct)
-        } label: {
-          Label("status.action.message", systemImage: "tray.full")
+    } else {
+      if !viewModel.isRemote {
+        Section(viewModel.status.account.acct) {
+          Button {
+            routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.account, visibility: .pub)
+          } label: {
+            Label("status.action.mention", systemImage: "at")
+          }
+          Button {
+            routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.account, visibility: .direct)
+          } label: {
+            Label("status.action.message", systemImage: "tray.full")
+          }
         }
       }
-      
       Section {
         Button(role: .destructive) {
           routerPath.presentedSheet = .report(status: viewModel.status.reblogAsAsStatus ?? viewModel.status)
