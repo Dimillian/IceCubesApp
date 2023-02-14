@@ -62,7 +62,7 @@
 // MARK: Settings
 "settings.account.add" = "Dodaj konto";
 "settings.app.icon" = "Ikona aplikacji";
-"settings.app.icon.navigation-title" = "Icons";
+"settings.app.icon.navigation-title" = "Ikony";
 "settings.app.source" = "Źródło (link do GitHub)";
 "settings.app.support" = "Wspieraj aplikację";
 "settings.app.about" = "O aplikacji";
@@ -83,7 +83,7 @@
 "settings.display.theme.systemColor" = "Zgodny z systemowym";
 "settings.general.browser" = "Przeglądarka";
 "settings.general.browser.in-app" = "W aplikacji";
-"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
+"settings.general.browser.in-app.readerview" = "Widok czytnika w przeglądarce w aplikacji";
 "settings.general.browser.system" = "Systemowa";
 "settings.general.display" = "Ustawienia ekranu";
 "settings.general.instance" = "Informacja o serwerze";
@@ -253,7 +253,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Usuń";
 "conversations.action.mark-read" = "Oznacz jako przeczytany";
-"conversations.action.view-detail" = "View detail";
+"conversations.action.view-detail" = "Zobacz szczegóły";
 "conversations.empty.message" = "Szukasz miłości w mediach społecznościowych? Tutaj znajdziesz wszystkie swoje bezpośrednie wiadomości i prywatne wzmianki. Szczęśliwego korespondowania! 📱❤️";
 "conversations.empty.title" = "Skrzynka odbiorcza pusta";
 "conversations.error.button" = "Spróbuj ponownie";
@@ -263,7 +263,7 @@
 "conversations.new.message.placeholder" = "Nowa wiadomość";
 
 // MARK: Package: DesignSystem
-"design.theme.navigation-title" = "Selektor Motywu";
+"design.theme.navigation-title" = "Wybór motywu";
 "design.theme.toots-preview" = "Podgląd postów";
 
 // MARK: Package: Explore
@@ -385,7 +385,7 @@
 "status.editor.text.placeholder" = "Co ci chodzi po głowie?";
 "status.editor.visibility" = "Widoczność postu";
 "status.error.loading.message" = "Wystąpił błąd podczas ładowania postów, spróbuj ponownie.";
-"status.error.message" = "Wystąpił błąd w kontekście tego postu, proszę spróbuj ponownie.";
+"status.error.message" = "Wystąpił błąd dotyczący tego postu, proszę spróbuj ponownie.";
 "status.error.title" = "Wystąpił błąd";
 "status.filter.filtered-by-%@" = "Filtrowany przez: %@";
 "status.filter.show-anyway" = "Pokaż mimo wszystko";
