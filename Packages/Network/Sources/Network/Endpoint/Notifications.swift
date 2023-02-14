@@ -5,12 +5,15 @@ public enum Notifications: Endpoint {
                      maxId: String?,
                      types: [String]?,
                      limit: Int)
+  case notification(id: String)
   case clear
 
   public func path() -> String {
     switch self {
     case .notifications:
       return "notifications"
+    case let .notification(id):
+      return "notifications/\(id)"
     case .clear:
       return "notifications/clear"
     }

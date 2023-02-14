@@ -257,7 +257,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "削除";
 "conversations.action.mark-read" = "既読にする";
-"conversations.action.view-detail" = "View detail";
+"conversations.action.view-detail" = "詳細を見る";
 "conversations.empty.message" = "ソーシャルメディアへの愛をお探しですか？ダイレクトメッセージやプライベートメッセージはすべてここにあります、ハッピーメッセージ！ 📱❤️";
 "conversations.empty.title" = "受信トレイ・ゼロ";
 "conversations.error.button" = "リトライ";
@@ -448,3 +448,9 @@
 "accessibility.editor.button.drafts" = "下書き";
 "accessibility.editor.button.custom-emojis" = "カスタム絵文字";
 "accessibility.editor.button.language" = "言語";
+
+// MARK: Report
+"report.comment.placeholder" = "追加情報";
+"report.title" = "投稿を報告";
+"report.action.send" = "送信";
+"status.action.report" = "投稿を報告";

@@ -255,7 +255,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Verwijder";
 "conversations.action.mark-read" = "Markeer als gelezen";
-"conversations.action.view-detail" = "View detail";
+"conversations.action.view-detail" = "Toon details";
 "conversations.empty.message" = "Op zoek naar wat liefde op sociale media? Hier vind je al je directe berichten en privévermeldingen. Veel plezier met het versturen van berichtjes! 📱❤️";
 "conversations.empty.title" = "Lege inbox";
 "conversations.error.button" = "Opnieuw";
@@ -445,3 +445,9 @@
 "accessibility.editor.button.drafts" = "Concepten";
 "accessibility.editor.button.custom-emojis" = "Aangepaste emoji’s";
 "accessibility.editor.button.language" = "Taal";
+
+// MARK: Report
+"report.comment.placeholder" = "Additional Info";
+"report.title" = "Report Post";
+"report.action.send" = "Send";
+"status.action.report" = "Report Post";

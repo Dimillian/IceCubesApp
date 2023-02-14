@@ -129,6 +129,14 @@ struct StatusRowContextMenu: View {
           Label("status.action.message", systemImage: "tray.full")
         }
       }
+      
+      Section {
+        Button(role: .destructive) {
+          routerPath.presentedSheet = .report(status: viewModel.status.reblogAsAsStatus ?? viewModel.status)
+        } label: {
+          Label("status.action.report", systemImage: "exclamationmark.bubble")
+        }
+      }
     }
   }
 }

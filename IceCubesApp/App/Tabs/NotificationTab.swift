@@ -17,6 +17,7 @@ struct NotificationsTab: View {
   @EnvironmentObject private var appAccount: AppAccountsManager
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var userPreferences: UserPreferences
+  @EnvironmentObject private var pushNotificationsService: PushNotificationsService
   @StateObject private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab
 
@@ -51,6 +52,20 @@ struct NotificationsTab: View {
     .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
       if popToRootTab == .notifications {
         routerPath.path = []
+      }
+    }
+    .onChange(of: pushNotificationsService.handleNotification) { notification in
+      if let notification, let type = notification.supportedType {
+        DispatchQueue.main.async {
+          switch type {
+          case .follow, .follow_request:
+            routerPath.navigate(to: .accountDetailWithAccount(account: notification.account))
+          default:
+            if let status = notification.status {
+              routerPath.navigate(to: .statusDetailWithStatus(status: status))
+            }
+          }
+        }
       }
     }
     .onChange(of: scenePhase, perform: { scenePhase in

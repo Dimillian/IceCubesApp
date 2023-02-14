@@ -443,3 +443,9 @@
 "accessibility.editor.button.drafts" = "Entwürfe";
 "accessibility.editor.button.custom-emojis" = "Eigene Emojis";
 "accessibility.editor.button.language" = "Sprache";
+
+// MARK: Report
+"report.comment.placeholder" = "Zusätzliche Informationen";
+"report.title" = "Beitrag melden";
+"report.action.send" = "Absenden";
+"status.action.report" = "Beitrag melden";
