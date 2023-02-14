@@ -79,7 +79,7 @@ struct NotificationsTab: View {
         break
       }
     })
-    .onChange(of: currentAccount.account?.id) { _ in
+    .onChange(of: client.id) { _ in
       routerPath.path = []
     }
   }
