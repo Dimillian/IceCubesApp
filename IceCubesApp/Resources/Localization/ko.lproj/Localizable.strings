@@ -256,6 +256,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "삭제";
 "conversations.action.mark-read" = "읽음으로 표시";
+"conversations.action.view-detail" = "상세 정보 보기";
 "conversations.empty.message" = "메시지를 찾고 있나요? 여기에서 다이렉트 메시지와 비공개 언급을 확인할 수 있어요. 친구에게 메시지를 먼저 보내보세요! 📱❤️";
 "conversations.empty.title" = "메시지 없음";
 "conversations.error.button" = "다시 시도";
@@ -341,7 +342,7 @@
 // MARK: Package: Status
 "status.action.translate" = "번역";
 "status.action.translate-from-%@" = "%@에서 번역";
-"status.action.translated-label-%@" = "%@을 통해 번역됨";
+"status.action.translated-label-%@" = "번역 제공: $@";
 "status.action.bookmark" = "보관함에 추가";
 "status.action.boost" = "부스트";
 "status.action.copy-text" = "복사";
@@ -447,3 +448,9 @@
 "accessibility.editor.button.drafts" = "임시 보관함";
 "accessibility.editor.button.custom-emojis" = "커스텀 이모지";
 "accessibility.editor.button.language" = "언어";
+
+// MARK: Report
+"report.comment.placeholder" = "Additional Info";
+"report.title" = "Report Post";
+"report.action.send" = "Send";
+"status.action.report" = "Report Post";

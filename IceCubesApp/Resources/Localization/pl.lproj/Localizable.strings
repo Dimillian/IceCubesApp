@@ -253,6 +253,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Usuń";
 "conversations.action.mark-read" = "Oznacz jako przeczytany";
+"conversations.action.view-detail" = "View detail";
 "conversations.empty.message" = "Szukasz miłości w mediach społecznościowych? Tutaj znajdziesz wszystkie swoje bezpośrednie wiadomości i prywatne wzmianki. Szczęśliwego korespondowania! 📱❤️";
 "conversations.empty.title" = "Skrzynka odbiorcza pusta";
 "conversations.error.button" = "Spróbuj ponownie";
@@ -371,14 +372,14 @@
 "status.editor.error.upload" = "Błąd wysyłania";
 "status.editor.language-select.navigation-title" = "Wybierz język";
 "status.editor.language-select.recently-used" = "Ostatnio użyty";
-"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
-"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
+"status.editor.language-select.confirmation.detected-%@" = "Publikuj jako %@ (wykryty język)";
+"status.editor.language-select.confirmation.selected-%@" = "Publikuj jako %@ (wybrany język)";
 "status.editor.media.edit-image" = "Edytuj obrazek";
 "status.editor.media.image-description" = "Opis obrazka";
 "status.editor.mode.edit" = "Edycja twojego postu";
 "status.editor.mode.new" = "Nowy post";
-"status.editor.mode.quote-%@" = "Cytat z %@";
-"status.editor.mode.reply-%@" = "Odpowiadając na %@";
+"status.editor.mode.quote-%@" = "Cytując %@";
+"status.editor.mode.reply-%@" = "Odpowiadając %@";
 "status.editor.restore-previous" = "Przywróć poprzedni tekst";
 "status.editor.spoiler" = "Tekst spoilera";
 "status.editor.text.placeholder" = "Co ci chodzi po głowie?";
@@ -423,7 +424,7 @@
 "filter.edit.contexts" = "Kontekst filtra";
 "filter.edit.action" = "Działanie filtra";
 "account.action.edit-filters" = "Edytuj filtry";
-"filter.contexts.home" = "Strona domowa i listy";
+"filter.contexts.home" = "Strona główna i listy";
 "filter.contexts.notifications" = "Powiadomienia";
 "filter.contexts.public" = "Strumienie publiczne";
 "filter.contexts.conversations" = "Konwersacje";
@@ -438,3 +439,9 @@
 "accessibility.editor.button.drafts" = "Wersje robocze";
 "accessibility.editor.button.custom-emojis" = "Emotikony własne";
 "accessibility.editor.button.language" = "Język";
+
+// MARK: Report
+"report.comment.placeholder" = "Additional Info";
+"report.title" = "Report Post";
+"report.action.send" = "Send";
+"status.action.report" = "Report Post";

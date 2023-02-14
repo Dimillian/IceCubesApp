@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Notification: Decodable, Identifiable {
+public struct Notification: Decodable, Identifiable, Equatable {
   public enum NotificationType: String, CaseIterable {
     case follow, follow_request, mention, reblog, status, favourite, poll, update
   }

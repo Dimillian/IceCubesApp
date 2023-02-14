@@ -161,20 +161,20 @@
 
 "settings.display.show-ipad-column" = "Attiva la seconda colonna";
 
-"settings.general.swipeactions" = "Swipe Actions";
-"settings.swipeactions.navigation-title" = "Swipe Actions";
-"settings.swipeactions.status.action.bookmark" = "Bookmark";
-"settings.swipeactions.status.action.boost" = "Boost";
-"settings.swipeactions.status.action.favorite" = "Favorite";
-"settings.swipeactions.status.action.none" = "None";
-"settings.swipeactions.status.action.quote" = "Quote";
-"settings.swipeactions.status.action.reply" = "Reply";
-"settings.swipeactions.status.leading" = "Swipe right";
-"settings.swipeactions.status.leading.left" = "left";
-"settings.swipeactions.status.leading.right" = "right";
-"settings.swipeactions.status.trailing" = "Swipe left";
-"settings.swipeactions.status.trailing.left" = "left";
-"settings.swipeactions.status.trailing.right" = "right";
+"settings.general.swipeactions" = "Azioni di scorrimento";
+"settings.swipeactions.navigation-title" = "Azioni di scorrimento";
+"settings.swipeactions.status.action.bookmark" = "Segnalibro";
+"settings.swipeactions.status.action.boost" = "Condividi";
+"settings.swipeactions.status.action.favorite" = "Preferito";
+"settings.swipeactions.status.action.none" = "Niente";
+"settings.swipeactions.status.action.quote" = "Cita";
+"settings.swipeactions.status.action.reply" = "Rispondi";
+"settings.swipeactions.status.leading" = "Scorrimento a destra";
+"settings.swipeactions.status.leading.left" = "sinistra";
+"settings.swipeactions.status.leading.right" = "destra";
+"settings.swipeactions.status.trailing" = "Scorrimento a sinistra";
+"settings.swipeactions.status.trailing.left" = "sinistra";
+"settings.swipeactions.status.trailing.right" = "destra";
 "settings.swipeactions.status" = "Post";
 
 // MARK: Tabs
@@ -256,6 +256,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Cancella";
 "conversations.action.mark-read" = "Segna come letto";
+"conversations.action.view-detail" = "View detail";
 "conversations.empty.message" = "Stai cercando un po' di amore social? Troverai qui tutti i tuoi messaggi diretti e le menzioni private. Buon divertimento! 📱❤️";
 "conversations.empty.title" = "Zero posta in arrivo";
 "conversations.error.button" = "Riprova";
@@ -372,12 +373,12 @@
 "status.editor.description.add" = "Aggiungi la descrizione";
 "status.editor.description.edit" = "Modifica la descrizione";
 "status.editor.drafts.navigation-title" = "Bozze";
-"status.editor.emojis.navigation-title" = "Custom Emojis";
+"status.editor.emojis.navigation-title" = "Emoji Personalizzate";
 "status.editor.error.upload" = "Errore durante il caricamento";
 "status.editor.language-select.navigation-title" = "Scegli la lingua";
 "status.editor.language-select.recently-used" = "Usato recentemente";
-"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
-"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
+"status.editor.language-select.confirmation.detected-%@" = "Pubblica in %@ (Lingua rilevata)";
+"status.editor.language-select.confirmation.selected-%@" = "Pubblica in %@ (Lingua selezionata)";
 "status.editor.media.edit-image" = "Modifica l'immagine";
 "status.editor.media.image-description" = "Descrizione dell'immagine";
 "status.editor.mode.edit" = "Modifica post";
@@ -406,7 +407,7 @@
 "status.poll.duration" = "Durata del sondaggio";
 "status.poll.frequency" = "Frequenza di voto";
 "status.poll.option-n %lld" = "Opzione %lld";
-"status.poll.send" = "Send Vote";
+"status.poll.send" = "Invia il voto";
 "status.post-from-%@" = "Post da %@";
 "status.row.was-boosted" = "ha condiviso";
 "status.row.was-reply" = "Risposta per";
@@ -440,9 +441,15 @@
 "filter.action.hide" = "Nascondi completamente";
 
 // MARK: Accessibility
-"accessibility.editor.button.attach-photo" = "Attach photo";
-"accessibility.editor.button.poll" = "Poll";
-"accessibility.editor.button.spoiler" = "Spoiler warning";
-"accessibility.editor.button.drafts" = "Drafts";
-"accessibility.editor.button.custom-emojis" = "Custom emojis";
-"accessibility.editor.button.language" = "Language";
+"accessibility.editor.button.attach-photo" = "Allega foto";
+"accessibility.editor.button.poll" = "Sondaggio";
+"accessibility.editor.button.spoiler" = "Avviso di Spoiler";
+"accessibility.editor.button.drafts" = "Bozze";
+"accessibility.editor.button.custom-emojis" = "Emoji personalizzate";
+"accessibility.editor.button.language" = "Lingua";
+
+// MARK: Report
+"report.comment.placeholder" = "Additional Info";
+"report.title" = "Report Post";
+"report.action.send" = "Send";
+"status.action.report" = "Report Post";

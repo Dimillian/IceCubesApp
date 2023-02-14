@@ -255,6 +255,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Slett";
 "conversations.action.mark-read" = "Merk som lest";
+"conversations.action.view-detail" = "View detail";
 "conversations.empty.message" = "Leter du etter kjærlighet til sosiale medier? Du finner alle dine direktemeldinger og private omtaler her. God melding! 📱❤️";
 "conversations.empty.title" = "Innboks null";
 "conversations.error.button" = "Prøv på nytt";
@@ -445,3 +446,9 @@
 "accessibility.editor.button.drafts" = "Drafts";
 "accessibility.editor.button.custom-emojis" = "Custom emojis";
 "accessibility.editor.button.language" = "Language";
+
+// MARK: Report
+"report.comment.placeholder" = "Additional Info";
+"report.title" = "Report Post";
+"report.action.send" = "Send";
+"status.action.report" = "Report Post";

@@ -19,19 +19,26 @@ public struct PushAccount {
 }
 
 @MainActor
-public class PushNotificationsService: ObservableObject {
+public class PushNotificationsService: NSObject, ObservableObject {
   enum Constants {
     static let endpoint = "https://icecubesrelay.fly.dev"
     static let keychainAuthKey = "notifications_auth_key"
     static let keychainPrivateKey = "notifications_private_key"
   }
-
+  
   public static let shared = PushNotificationsService()
 
   public private(set) var subscriptions: [PushNotificationSubscriptionSettings] = []
 
   @Published public var pushToken: Data?
-
+  @Published public var handleNotification: Models.Notification?
+  
+  override init() {
+    super.init()
+    
+    UNUserNotificationCenter.current().delegate = self
+  }
+  
   private var keychain: KeychainSwift {
     let keychain = KeychainSwift()
     #if !DEBUG && !targetEnvironment(simulator)
@@ -118,6 +125,22 @@ public class PushNotificationsService: ObservableObject {
     var bytes = Data(count: byteCount)
     _ = bytes.withUnsafeMutableBytes { SecRandomCopyBytes(kSecRandomDefault, byteCount, $0.baseAddress!) }
     return bytes
+  }
+}
+
+extension PushNotificationsService: UNUserNotificationCenterDelegate {
+  public func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
+    guard let plaintext = response.notification.request.content.userInfo["plaintext"] as? Data,
+          let mastodonPushNotification = try? JSONDecoder().decode(MastodonPushNotification.self, from: plaintext),
+           let account = subscriptions.first(where: { $0.account.token.accessToken == mastodonPushNotification.accessToken }) else {
+        return
+    }
+    do {
+      let client = Client(server: account.account.server, oauthToken: account.account.token)
+      let notification: Models.Notification =
+      try await client.get(endpoint: Notifications.notification(id:String(mastodonPushNotification.notificationID)))
+      self.handleNotification = notification
+    } catch { }
   }
 }
 

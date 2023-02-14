@@ -19,6 +19,7 @@ let package = Package(
     .package(name: "Models", path: "../Models"),
     .package(name: "Network", path: "../Network"),
     .package(url: "https://github.com/sersoft-gmbh/semver", from: "3.4.0"),
+    .package(url: "https://github.com/evgenyneu/keychain-swift", branch: "master"),
   ],
   targets: [
     .target(
@@ -27,6 +28,7 @@ let package = Package(
         .product(name: "Models", package: "Models"),
         .product(name: "Network", package: "Network"),
         .product(name: "SemVer", package: "semver"),
+        .product(name: "KeychainSwift", package: "keychain-swift"),
       ]
     ),
   ]

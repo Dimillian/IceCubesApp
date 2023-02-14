@@ -254,6 +254,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Elimina";
 "conversations.action.mark-read" = "Marca com a llegit";
+"conversations.action.view-detail" = "View detail";
 "conversations.empty.message" = "Esteu buscant l'amor a les xarxes socials? Aquí trobareu tots els vostres missatges directes i mencions privades. Bona conversa! 📱❤️";
 "conversations.empty.title" = "Safata d'entrada";
 "conversations.error.button" = "Reintenta";
@@ -444,3 +445,9 @@
 "accessibility.editor.button.drafts" = "Drafts";
 "accessibility.editor.button.custom-emojis" = "Custom emojis";
 "accessibility.editor.button.language" = "Language";
+
+// MARK: Report
+"report.comment.placeholder" = "Additional Info";
+"report.title" = "Report Post";
+"report.action.send" = "Send";
+"status.action.report" = "Report Post";

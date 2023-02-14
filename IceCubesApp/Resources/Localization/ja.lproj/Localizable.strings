@@ -255,6 +255,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "削除";
 "conversations.action.mark-read" = "既読にする";
+"conversations.action.view-detail" = "詳細を見る";
 "conversations.empty.message" = "ソーシャルメディアへの愛をお探しですか？ダイレクトメッセージやプライベートメッセージはすべてここにあります、ハッピーメッセージ！ 📱❤️";
 "conversations.empty.title" = "受信トレイ・ゼロ";
 "conversations.error.button" = "リトライ";
@@ -375,8 +376,8 @@
 "status.editor.error.upload" = "アップロードエラー";
 "status.editor.language-select.navigation-title" = "言語設定";
 "status.editor.language-select.recently-used" = "最近使用した";
-"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
-"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
+"status.editor.language-select.confirmation.detected-%@" = "%@ で投稿(検出された言語)";
+"status.editor.language-select.confirmation.selected-%@" = "%@ で投稿(選択された言語)";
 "status.editor.media.edit-image" = "イメージの編集";
 "status.editor.media.image-description" = "イメージの説明文";
 "status.editor.mode.edit" = "投稿を編集する";
@@ -445,3 +446,9 @@
 "accessibility.editor.button.drafts" = "下書き";
 "accessibility.editor.button.custom-emojis" = "カスタム絵文字";
 "accessibility.editor.button.language" = "言語";
+
+// MARK: Report
+"report.comment.placeholder" = "追加情報";
+"report.title" = "投稿を報告";
+"report.action.send" = "送信";
+"status.action.report" = "投稿を報告";
