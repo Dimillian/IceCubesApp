@@ -19,6 +19,12 @@ struct ContentSettingsView: View {
         }
       }.listRowBackground(theme.primaryBackgroundColor)
 
+      Section("settings.content.media") {
+        Toggle(isOn: $userPreferences.showAltTextForMedia) {
+         Text("settings.content.media.show.alt")
+        }
+      }.listRowBackground(theme.primaryBackgroundColor)
+
       Section("settings.content.instance-settings") {
         Toggle(isOn: $userPreferences.useInstanceContentSettings) {
           Text("settings.content.use-instance-settings")
@@ -61,7 +67,9 @@ struct ContentSettingsView: View {
         }
         .disabled(userPreferences.useInstanceContentSettings)
       }
+
       .listRowBackground(theme.primaryBackgroundColor)
+      
     }
     .navigationTitle("settings.content.navigation-title")
     .scrollContentBackground(.hidden)

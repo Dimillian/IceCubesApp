@@ -138,6 +138,8 @@
 "settings.content.expand-media" = "媒体显示";
 "settings.content.default-sensitive" = "始终将媒体标为敏感内容";
 "settings.content.default-visibility" = "默认发布内容可见性";
+"settings.content.media" = "Media";
+"settings.content.media.show.alt" = "Show ALT texts";
 "settings.content.reading" = "阅读设置";
 "settings.content.posting" = "发布设置";
 
