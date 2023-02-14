@@ -16,7 +16,7 @@ public extension AppAccount {
   func save() throws {
     let encoder = JSONEncoder()
     let data = try encoder.encode(self)
-    Self.keychain.set(data, forKey: key)
+    Self.keychain.set(data, forKey: key, withAccess: .accessibleAfterFirstUnlock)
   }
 
   func delete() {
@@ -33,6 +33,7 @@ public extension AppAccount {
       if let data = keychain.getData(key) {
         if let account = try? decoder.decode(AppAccount.self, from: data) {
           accounts.append(account)
+          account.save()
         }
       }
     }
