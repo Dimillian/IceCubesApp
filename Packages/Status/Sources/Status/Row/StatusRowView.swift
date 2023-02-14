@@ -530,9 +530,7 @@ public struct StatusRowView: View {
       HapticManager.shared.fireHaptic(of: .notification(.success))
       routerPath.presentedSheet = destination
     } label: {
-      Text(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
-      Image(systemName: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
-        .environment(\.symbolVariants, .none)
+      makeSwipeLabel(action: action, style: preferences.swipeActionsIconStyle)
     }
   }
 
@@ -544,8 +542,20 @@ public struct StatusRowView: View {
         await task()
       }
     } label: {
-      Text(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
-      Image(systemName: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
+      makeSwipeLabel(action: action, style: preferences.swipeActionsIconStyle)
+    }
+  }
+  
+  @ViewBuilder
+  private func makeSwipeLabel(action: StatusAction, style: UserPreferences.SwipeActionsIconStyle) -> some View {
+    switch (style) {
+    case .iconsOnly:
+      Label(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked), systemImage: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
+        .labelStyle(.iconOnly)
+        .environment(\.symbolVariants, .none)
+    case .iconsWithText:
+      Label(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked), systemImage: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
+        .labelStyle(.titleAndIcon)
         .environment(\.symbolVariants, .none)
     }
   }

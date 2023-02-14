@@ -62,6 +62,11 @@ struct SwipeActionsSettingsView: View {
         Toggle(isOn: $userPreferences.swipeActionsUseThemeColor) {
           Label("settings.swipeactions.status.use-theme-colors", systemImage: "paintbrush.pointed")
         }
+        Picker(selection: $userPreferences.swipeActionsIconStyle, label: Label("Icon style", systemImage: "text.below.photo")) {
+          ForEach(UserPreferences.SwipeActionsIconStyle.allCases, id: \.rawValue) { style in
+            Text(style.description).tag(style)
+          }
+        }
       }
       .listRowBackground(theme.primaryBackgroundColor)
     }
