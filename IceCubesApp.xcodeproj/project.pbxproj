@@ -82,6 +82,7 @@
 		9FE3DB57296FEFCA00628CB0 /* AppAccount in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE3DB56296FEFCA00628CB0 /* AppAccount */; };
 		C9B22677297F6C2E001F9EFE /* ContentSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B22676297F6C2E001F9EFE /* ContentSettingsView.swift */; };
 		D08A9C3529956CFA00204A4A /* SwipeActionsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08A9C3429956CFA00204A4A /* SwipeActionsSettingsView.swift */; };
+		D8A16D0B299B4ACD00840104 /* SemVer in Frameworks */ = {isa = PBXBuildFile; productRef = D8A16D0A299B4ACD00840104 /* SemVer */; };
 		E92817FA298443D600875FD1 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = E92817F9298443D600875FD1 /* Models */; };
 		E92817FC298443D600875FD1 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = E92817FB298443D600875FD1 /* Network */; };
 		E92817FE29844DB700875FD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E92817FD29844DB700875FD1 /* Assets.xcassets */; };
@@ -275,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F7335EF29674F7100AFF0BA /* QuickLook.framework in Frameworks */,
+				D8A16D0B299B4ACD00840104 /* SemVer in Frameworks */,
 				9F7335ED2967463400AFF0BA /* AVKit.framework in Frameworks */,
 				9F2A540C29699705009B2D7C /* RevenueCat in Frameworks */,
 				065FA1FE29866CD600012EA0 /* LRUCache in Frameworks */,
@@ -591,6 +593,7 @@
 				9F2A540B29699705009B2D7C /* RevenueCat */,
 				9FE3DB56296FEFCA00628CB0 /* AppAccount */,
 				065FA1FD29866CD600012EA0 /* LRUCache */,
+				D8A16D0A299B4ACD00840104 /* SemVer */,
 			);
 			productName = IceCubesApp;
 			productReference = 9FBFE639292A715500C250E9 /* IceCubesApp.app */;
@@ -669,6 +672,7 @@
 				9FAE4ACC29379A5A00772766 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				9F2A540829699705009B2D7C /* XCRemoteSwiftPackageReference "purchases-ios" */,
 				065FA1FC29866CD600012EA0 /* XCRemoteSwiftPackageReference "LRUCache" */,
+				D8A16D09299B4ACD00840104 /* XCRemoteSwiftPackageReference "semver" */,
 			);
 			productRefGroup = 9FBFE63A292A715500C250E9 /* Products */;
 			projectDirPath = "";
@@ -1355,6 +1359,14 @@
 				kind = branch;
 			};
 		};
+		D8A16D09299B4ACD00840104 /* XCRemoteSwiftPackageReference "semver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sersoft-gmbh/semver";
+			requirement = {
+				kind = exactVersion;
+				version = 3.4.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1472,6 +1484,11 @@
 		9FE3DB56296FEFCA00628CB0 /* AppAccount */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppAccount;
+		};
+		D8A16D0A299B4ACD00840104 /* SemVer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8A16D09299B4ACD00840104 /* XCRemoteSwiftPackageReference "semver" */;
+			productName = SemVer;
 		};
 		E92817F9298443D600875FD1 /* Models */ = {
 			isa = XCSwiftPackageProductDependency;

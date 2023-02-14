@@ -1,6 +1,7 @@
 import Foundation
 import Models
 import Network
+import SemVer
 
 @MainActor
 public class CurrentInstance: ObservableObject {
@@ -10,27 +11,21 @@ public class CurrentInstance: ObservableObject {
 
   public static let shared = CurrentInstance()
 
-  private var version: Float {
-    if let stringVersion = instance?.version {
-      if stringVersion.utf8.count > 2 {
-        return Float(stringVersion.prefix(3)) ?? 0
-      } else {
-        return Float(stringVersion.prefix(1)) ?? 0
-      }
-    }
-    return 0
+  private var version: Version {
+    let stringVersion = instance?.version ?? "0"
+    return Version(stringVersion)!
   }
 
   public var isFiltersSupported: Bool {
-    version >= 4
+    version >= Version("4")!
   }
 
   public var isEditSupported: Bool {
-    version >= 4
+    version >= Version("4")!
   }
 
   public var isEditAltTextSupported: Bool {
-    version >= 4.1
+    version >= Version("4.1")!
   }
 
   private init() {}
