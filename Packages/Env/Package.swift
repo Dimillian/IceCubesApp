@@ -18,6 +18,7 @@ let package = Package(
   dependencies: [
     .package(name: "Models", path: "../Models"),
     .package(name: "Network", path: "../Network"),
+    .package(url: "https://github.com/sersoft-gmbh/semver", from: "3.4.0"),
   ],
   targets: [
     .target(
@@ -25,6 +26,7 @@ let package = Package(
       dependencies: [
         .product(name: "Models", package: "Models"),
         .product(name: "Network", package: "Network"),
+        .product(name: "SemVer", package: "semver"),
       ]
     ),
   ]
