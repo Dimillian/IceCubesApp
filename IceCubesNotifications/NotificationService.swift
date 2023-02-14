@@ -55,7 +55,9 @@ class NotificationService: UNNotificationServiceExtension {
       }
 
       bestAttemptContent.title = notification.title
-      bestAttemptContent.subtitle = bestAttemptContent.userInfo["i"] as? String ?? ""
+      if AppAccountsManager.shared.availableAccounts.count > 1 {
+        bestAttemptContent.subtitle = bestAttemptContent.userInfo["i"] as? String ?? ""
+      }
       bestAttemptContent.body = notification.body.escape()
       bestAttemptContent.userInfo["plaintext"] = plaintextData
       bestAttemptContent.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "glass.caf"))
@@ -82,8 +84,13 @@ class NotificationService: UNNotificationServiceExtension {
               if let remoteNotification = await toRemoteNotification(localNotification: notification) {
                 let intent = buildMessageIntent(remoteNotification: remoteNotification, avatarURL: fileURL)
                 bestAttemptContent = try bestAttemptContent.updating(from: intent) as! UNMutableNotificationContent
-                let newBody = "\(bestAttemptContent.userInfo["i"] as? String ?? "") \n\(notification.title)\n\(notification.body.escape())"
-                bestAttemptContent.body = newBody
+                if AppAccountsManager.shared.availableAccounts.count > 1 {
+                  let newBody = "\(bestAttemptContent.userInfo["i"] as? String ?? "") \n\(notification.title)\n\(notification.body.escape())"
+                  bestAttemptContent.body = newBody
+                } else {
+                  let newBody = "\(notification.title)\n\(notification.body.escape())"
+                  bestAttemptContent.body = newBody
+                }
               } else {
                 if let attachment = try? UNNotificationAttachment(identifier: filename, url: fileURL, options: nil) {
                   bestAttemptContent.attachments = [attachment]
