@@ -256,7 +256,7 @@
 "account.list.name" = "リストの名前";
 "account.post.pinned" = "固定した投稿";
 "account.posts" = "投稿";
-"account.relation.follows-you" = "あなたをフォローしている";
+"account.relation.follows-you" = "フォローされています";
 "account.joined" = "登録日";
 "account.action.logout" = "アカウントをログアウトする";
 
