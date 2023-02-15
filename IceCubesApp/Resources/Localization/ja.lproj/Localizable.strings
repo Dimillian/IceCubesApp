@@ -336,13 +336,13 @@
 "notifications.tab.all" = "全て";
 "notifications.tab.mentions" = "返信";
 
-"notifications.label.status.push" = "🖊️ Posted: ";
-"notifications.label.reblog.push" = "🚀 Boosted: ";
-"notifications.label.follow.push" = "👋 Followed you: ";
-"notifications.label.follow-request.push" = "🔒 Requested to follow you: ";
-"notifications.label.favorite.push" = "⭐️ Starred: ";
-"notifications.label.poll.push" = "📈 Poll ended: ";
-"notifications.label.update.push" = "Updated: ";
+"notifications.label.status.push" = "🖊️ 投稿：";
+"notifications.label.reblog.push" = "🚀 ブースト：";
+"notifications.label.follow.push" = "👋 あなたをフォロー：";
+"notifications.label.follow-request.push" = "🔒 フォローリクエスト：";
+"notifications.label.favorite.push" = "⭐️ お気に入りに追加：";
+"notifications.label.poll.push" = "📈 投票終了：";
+"notifications.label.update.push" = "更新：";
 
 // MARK: Package: Timeline
 "timeline.federated" = "連合";
