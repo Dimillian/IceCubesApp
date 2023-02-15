@@ -141,7 +141,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string>batek gogoko</string>
+			<string>Batek gogoko</string>
 			<key>other</key>
 			<string>%lld(e)k gogoko</string>
 		</dict>
@@ -182,9 +182,9 @@
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@tagParticipantsCount@ %#@tagPostsCount@</string>
-		<key>tagPostsCount</key>
+		<key>tagParticipantsCount</key>
 		<dict>
-            <key>NSStringFormatSpecTypeKey</key>
+            	<key>NSStringFormatSpecTypeKey</key>
 			<string>NSStringPluralRuleType</string>
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
@@ -193,7 +193,7 @@
 			<key>other</key>
 			<string>%lld partaidek egindako</string>
 		</dict>
-		<key>tagParticipantsCount</key>
+		<key>tagPostsCount</key>
 		<dict>
 			<key>NSStringFormatSpecTypeKey</key>
 			<string>NSStringPluralRuleType</string>
@@ -209,9 +209,9 @@
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
 		<string>%#@tagParticipantsCount@ %#@tagPostsCount@</string>
-		<key>tagPostsCount</key>
+		<key>tagParticipantsCount</key>
 		<dict>
-            <key>NSStringFormatSpecTypeKey</key>
+            	<key>NSStringFormatSpecTypeKey</key>
 			<string>NSStringPluralRuleType</string>
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
@@ -220,7 +220,7 @@
 			<key>other</key>
 			<string>%lld partaidek egindako</string>
 		</dict>
-		<key>tagParticipantsCount</key>
+		<key>tagPostsCount</key>
 		<dict>
 			<key>NSStringFormatSpecTypeKey</key>
 			<string>NSStringPluralRuleType</string>
