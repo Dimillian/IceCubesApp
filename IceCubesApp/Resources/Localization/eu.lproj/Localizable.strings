@@ -137,8 +137,8 @@
 "settings.content.expand-media" = "Multimedia erakusteko hobespenak";
 "settings.content.default-sensitive" = "Markatu eduki guztia hunkigarri gisa";
 "settings.content.default-visibility" = "Edukiaren irismena";
-"settings.content.media" = "Media";
-"settings.content.media.show.alt" = "Show ALT texts";
+"settings.content.media" = "Multimedia";
+"settings.content.media.show.alt" = "Erakutsi deskribapenak";
 "settings.content.reading" = "Irakurtzean";
 "settings.content.posting" = "Bidaltzean";
 "settings.push.duplicate.title" = "Bikoiztutako jakinarazpenen konpontzailea";
@@ -167,7 +167,7 @@
 "settings.general.swipeactions" = "Mugimenduen ekintzak";
 "settings.swipeactions.navigation-title" = "Atzamar-mugimenduen ekintzak";
 "settings.swipeactions.status.action.bookmark" = "Laster-marka";
-"settings.swipeactions.status.action.boost" = "Bultzada";
+"settings.swipeactions.status.action.boost" = "Bultzatu";
 "settings.swipeactions.status.action.favorite" = "Gogokoa";
 "settings.swipeactions.status.action.none" = "Ezer ez";
 "settings.swipeactions.status.action.quote" = "Aipatu bidalketa";
@@ -227,8 +227,6 @@
 "account.boosted-by" = "Hauek bultzatua:";
 "account.detail.about" = "Honi buruz";
 "account.detail.familiar-followers" = "Hauek ere jarraitzen dute:";
-"account.detail.n-fields %lld" = "%lld eremu";
-"account.detail.featured-tags-n-posts %lld" = "%lld bidalketa";
 "account.edit.about" = "Zure buruari buruz";
 "account.edit.account-settings.bot" = "Bot kontua";
 "account.edit.account-settings.discoverable" = "Aurki zaitzakete";
@@ -276,7 +274,6 @@
 "conversations.new.message.placeholder" = "Mezu berria";
 
 // MARK: Package: DesignSystem
-"design.tag.n-posts-from-n-participants %lld %lld" = "%lld bidalketa %lld partaidek eginak";
 "design.theme.navigation-title" = "Itxuraren hautatzailea";
 "design.theme.toots-preview" = "Tuten aurreikuspena";
 
@@ -319,10 +316,6 @@
 "notifications.empty.title" = "Jakinarazpenik ez";
 "notifications.error.message" = "Errorea gertatu da jakinarazpenak kargatzean, saiatu berriro.";
 "notifications.error.title" = "Errorea gertatu da";
-"notifications.label.favorite %lld" = "(e)k gogoko egin du";
-"notifications.label.follow %lld" = "(e)k jarraitu dizu";
-"notifications.label.mention %lld" = "(e)k aipatu zaitu";
-"notifications.label.reblog %lld" = "(e)k bultzada eman dio";
 "notifications.label.poll" = "Bozketa amaitu da";
 "notifications.label.follow-request" = "(e)k jarraitzeko eskaera egin dizu";
 "notifications.label.status" = "(e)k bidalketa egin du";
@@ -352,7 +345,6 @@
 "timeline.latest" = "Egin salto berrienera";
 "timeline.home" = "Hasiera";
 "timeline.local" = "Lokala";
-"timeline.n-recent-from-n-participants %lld %lld" = "%lld bidalketa berri %lld erabiltzailek eginak";
 "timeline.trending" = "Joerak";
 
 // MARK: Package: Status
@@ -418,7 +410,6 @@
 "status.media.contextmenu.share" = "Partekatu irudia";
 "status.media.contextmenu.view-browser" = "Ikusi nabigatzailean";
 "status.media.sensitive.show" = "Erakutsi eduki hunkigarria";
-"status.poll.n-votes %lld" = "%lld boto";
 "status.poll.closed" = "Amaituta";
 "status.poll.closes-in" = "Epemuga: ";
 "status.poll.duration" = "Bozketaren iraupena";
@@ -433,8 +424,6 @@
 "status.show-more" = "Ikusi gehiago";
 "status.summary.at-time" = " · ";
 "status.summary.edited-time" = "Azkenekoz editatua: ";
-"status.summary.n-boosts %lld" = "%lld bultzada";
-"status.summary.n-favorites %lld" = "%lld(e)k gogoko";
 "status.visibility.direct" = "Aipatutakoak";
 "status.visibility.follower" = "Jarraitzaileak";
 "status.visibility.public" = "Publikoa";
