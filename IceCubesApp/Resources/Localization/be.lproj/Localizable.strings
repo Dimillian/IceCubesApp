@@ -1,0 +1,448 @@
+// MARK: Common strings
+"action.cancel" = "Скасаваць";
+"action.delete" = "Выдаліць";
+"action.save"  = "Захаваць";
+"action.done" = "Гатова";
+"action.retry" = "Паўтарыць спробу";
+"action.view.error" = "Праглядзець памылку";
+
+"alert.button.ok" = "OK";
+"alert.error" = "Памылка!";
+
+"placeholder.loading.long" = "Загрузка, загрузка, загрузка ...";
+"placeholder.loading.short" = "Ідзе загрузка ...";
+
+"see-more" = "Глядзець больш";
+
+// MARK: Add Account
+"account.add.error.instance-not-supported" = "Гэты асобнік зараз не падтрымліваецца.";
+"account.add.navigation-title" = "Дадаць уліковы запіс";
+"account.add.sign-in" = "Увайсці";
+
+// MARK: Enums
+"enum.avatar-position.leading" = "Вядучы";
+"enum.avatar-position.top" = "Наверсе";
+"enum.avatar-shape.circle" = "Кола";
+"enum.avatar-shape.rounded" = "Акруглены";
+"enum.durations.infinite" = "бясконцасць";
+"enum.durations.fiveMinutes" = "5 хвілін";
+"enum.durations.thirtyMinutes" = "30 хвілін";
+"enum.durations.oneHour" = "1 гадзіна";
+"enum.durations.sixHours" = "6 гадзін";
+"enum.durations.oneDay" = "1 дзень";
+"enum.durations.threeDays" = "3 дні";
+"enum.durations.sevenDays" = "7 дзён";
+"enum.status-actions-display.all" = "Усе";
+"enum.status-actions-display.no-buttons" = "Бяз кнопак";
+"enum.status-actions-display.only-buttons" = "Толькі кнопкі";
+"enum.status-display-style.compact" = "Кампактны";
+"enum.status-display-style.large" = "Вялікі";
+
+// MARK: Instances
+"instance.info.domains" = "Дамены";
+"instance.info.email" = "Электронная пошта";
+"instance.info.name" = "Імя";
+"instance.info.navigation-title" = "Інфармацыя аб серверы";
+"instance.info.posts" = "Допісы";
+"instance.info.section.info" = "Інфармацыя аб серверы";
+"instance.info.section.rules" = "Правілы серверу";
+"instance.info.users" = "Карыстальнікі";
+"instance.info.version" = "Вэрсія";
+"instance.list.posts-%@" = "%@ допісаў";
+"instance.list.users-%@" = "%@ карыстальнікаў";
+"instance.suggestions" = "Прапановы";
+"instance.url" = "URL асобніку";
+
+// MARK: Menu
+"menu.new-post" = "Новы допіс";
+"menu.font" = "Шрыфт";
+"menu.font.bigger" = "Больш";
+"menu.font.smaller" = "Менш";
+
+// MARK: Settings
+"settings.account.add" = "Дадаць уліковы запіс";
+"settings.app.icon" = "Значок дадатка";
+"settings.app.icon.navigation-title" = "Значкі";
+"settings.app.source" = "Крыніца (спасылка на GitHub)";
+"settings.app.support" = "Падтрымаць дадатак";
+"settings.app.about" = "Аб дадатку";
+"settings.display.example-toot" = "Прыклад допісу";
+"settings.display.font" = "Шрыфт шкалы часу";
+"settings.display.font.system" = "Сістэмны";
+"settings.display.font.custom" = "Уласны";
+"settings.display.font.scaling-%@" = "Маштаб шрыфту: %@";
+"settings.display.avatar.position" = "Пазіцыя аватару";
+"settings.display.avatar.shape" = "Форма аватару";
+"settings.display.navigation-title" = "Налады дысплэю";
+"settings.display.restore" = "Аднавіць па змаўчанні";
+"settings.display.section.display" = "Дысплэй";
+"settings.display.section.theme" = "Тэма";
+"settings.display.section.theme.footer" = "Уласныя колеры можна ўсталяваць толькі ў тым выпадку, калі адключана сістэмная каляровая схема";
+"settings.display.status.action-buttons" = "Кнопкі дзеянняў стану";
+"settings.display.status.media-style" = "Медыястыль статусу";
+"settings.display.translate-button" = "Паказаць кнопку перакладу";
+"settings.display.theme.background" = "Колер фону";
+"settings.display.theme.secondary-background" = "Другасны колер фону";
+"settings.display.theme.tint" = "Колер адцення";
+"settings.display.theme.systemColor" = "Згодна з сістэмай";
+"settings.general.browser" = "Браўзэр";
+"settings.general.browser.in-app" = "Убудаваны браўзэр";
+"settings.general.browser.in-app.readerview" = "Выгляд для чытання ўбудаванага браўзэра";
+"settings.general.browser.system" = "Сістэмны браўзер";
+"settings.general.display" = "Налады дысплэя";
+"settings.general.instance" = "Інфармацыя аб серверы";
+"settings.general.push-notifications" = "Push апавяшчэнні";
+"settings.general.remote-timelines" = "Аддалены мясцовы час";
+"settings.push.boosts" = "Павышае";
+"settings.push.favorites" = "Улюбёныя";
+"settings.push.follows" = "Cочыць";
+"settings.push.main-toggle" = "Push апавяшчэнні";
+"settings.push.main-toggle.description" = "Атрымлівайце push апавяшчэнні аб новых дзеяннях";
+"settings.push.mentions" = "Згадвае";
+"settings.push.navigation-title" = "Push апавяшчэнні";
+"settings.push.new-posts" = "Новыя допісы";
+"settings.push.polls" = "Вынікі апытання";
+"settings.general.content" = "Налады змесціву";
+"settings.system" = "Сістэмныя налады";
+"settings.content.navigation-title" = "Налады змесціву";
+"settings.content.boosts" = "Павышэння";
+"settings.content.hide-repeated-boosts" = "Схаваць паўторныя павышэння";
+"settings.content.instance-settings" = "Налады змесціва серверу";
+"settings.content.use-instance-settings" = "Ужыць налады серверу";
+"settings.content.expand-spoilers" = "Заўсёды паказваць уражлівыя допісы";
+"settings.content.expand-media" = "Паказ медыя";
+"settings.content.default-sensitive" = "Заўсёды адзначаць медыя як уражлівыя";
+"settings.content.default-visibility" = "Бачнасць допісаў";
+"settings.content.reading" = "Чытанне";
+"settings.content.posting" = "Размяшчэнне допісаў";
+"enum.expand-media.show" = "Паказаць усе";
+"enum.expand-media.hide" = "Схаваць усе";
+"enum.expand-media.hide-sensitive" = "Хаваць уражлівыя допісы";
+"settings.section.accounts" = "Уліковыя запісы";
+"settings.section.app" = "Дадатак";
+"settings.section.app.footer %@" = "Версія дадатку: %@";
+"settings.section.general" = "Агульныя";
+"settings.support.alert.error.message" = "Памылка апрацоўкі вашай пакупкі ў дадатку, паўтарыце спробу.";
+"settings.support.alert.message" = "Шчыры дзякуй за ваш гасцінец! Гэта вельмі ўдзячна!";
+"settings.support.alert.title" = "Дзякуй!";
+"settings.support.message-from-dev" = "Прывітанне! Мяне завуць Томас і я вельмі люблю ствараць праграмы з адкрытым зыходным кодам. Ice Cubesбезумоўна, адзін з праектаў, якімі я найбольш ганаруся на сённяшні дзень. Давайце будзем шчырымі, ён таксама патрабуе надзвычайнага догляду з-за пастаянна зменлівага сусвету Mastodon і сацыяльныя медыя. Калі вы атрымліваеце задавальненне ад карыстання Ice Cubes, падкіньце мне невялікі гасцінец. Гэта зробіць мой дзень (і дапаможа праграме працаваць бесперабойна). 🚀";
+"settings.support.navigation-title" = "Падтрымаць Ice Cubes";
+"settings.support.one.subtitle" = "Маленькі, але мілы і смак добры!";
+"settings.support.one.title" = "🍬 Маленькі Гасцінец";
+"settings.support.placeholder.loading-subtitle" = "Загрузка падзагалоўку ...";
+"settings.support.three.subtitle" = "Ты звар'яцеў, шчыры дзякуй!";
+"settings.support.three.title" = "🤯 Шчодры Гасцінец";
+"settings.support.two.subtitle" = "Я люблю смак вытанчанай кавы ❤️";
+"settings.support.two.title" = "☕️ Прыемны Гасцінец";
+"settings.support.four.title" = "👽 Хто ты Гасцінец";
+"settings.support.four.subtitle" = "Гэта вельмі дапаможа Ice Cubes працаваць!";
+"settings.timeline.add" = "Дадайце мясцовую шкалу часу";
+"settings.title" = "Налады";
+"settings.rate" = "Ацаніце Ice Cubes";
+"settings.section.other" = "Іншае";
+"settings.other.hide-openai" = "Уключыць 🤖 памочніка";
+"settings.other.social-keyboard" = "Уключыць сацыяльную клавіятуру";
+"settings.push.duplicate.title" = "Выпраўляльнік дублікатаў апавяшчэнняў";
+"settings.push.duplicate.footer" = "Атрымліваеш падвоеныя апавяшчэнні? Паспрабуй гэтую чароўную кнопку каб выправіць";
+"settings.push.duplicate.button.fix" = "🪄 Выправіць";
+"settings.other.autoplay-video" = "Аўто прайграванне відэа";
+"settings.about.built-with" = "Ice Cubes створаны з наступным праграмным забеспячэннем з адкрытым зыходным кодам:";
+"settings.about.title" = "Ice Cubes";
+
+"settings.account.cached-posts-%@" = "Кэшаваныя допісы: %@";
+"settings.account.action.delete-cache" = "Ачысціць кэш";
+
+"settings.general.haptic" = "Тактыльная зваротная сувязь";
+"settings.haptic.navigation-title" = "Тактыльныя налады";
+"settings.haptic.timeline" = "Шкала часу";
+"settings.haptic.tab-selection" = "Выбар укладкі";
+"settings.haptic.buttons" = "Націск кнопкі";
+
+"settings.display.show-tab-label" = "Паказаць назву ўкладкі";
+
+"settings.display.show-ipad-column" = "Уключыць дадатковы слупок";
+
+"settings.general.swipeactions" = "Дзеянні правядзення пальцам";
+"settings.swipeactions.navigation-title" = "Дзеянні правядзення пальцам";
+"settings.swipeactions.status.action.bookmark" = "Закладка";
+"settings.swipeactions.status.action.boost" = "Павышэнне";
+"settings.swipeactions.status.action.favorite" = "У ўлюбёныя";
+"settings.swipeactions.status.action.none" = "Нічога";
+"settings.swipeactions.status.action.quote" = "Цытаваць";
+"settings.swipeactions.status.action.reply" = "Адказаць";
+"settings.swipeactions.status.leading" = "Правядзіце ўправа";
+"settings.swipeactions.status.leading.left" = "злева";
+"settings.swipeactions.status.leading.right" = "справа";
+"settings.swipeactions.status.trailing" = "Правядзіце ўлева";
+"settings.swipeactions.status.trailing.left" = "злева";
+"settings.swipeactions.status.trailing.right" = "справа";
+"settings.swipeactions.status" = "Допіс";
+
+// MARK: Tabs
+"tab.explore" = "Аглядзець";
+"tab.federated" = "Аб'яднаны";
+"tab.local" = "Мясцовы";
+"tab.messages" = "Паведамленні";
+"tab.notifications" = "Апавяшчэнні";
+"tab.settings" = "Налады";
+"tab.timeline" = "Шкала часу";
+"tab.trending" = "У трэндзе";
+"tab.profile" = "Профіль";
+
+// MARK: Timeline
+"timeline.%@-is-valid" = "%@ сапраўдны асобнік";
+"timeline.add-remote.title" = "Дадайце аддаленую мясцовую шкалу часу";
+"timeline.add.action.add" = "Дадаць";
+"timeline.filter.add-local" = "Дадайце мясцовую часовую шкалу";
+"timeline.filter.lists" = "Спісы";
+"timeline.filter.local" = "Мясцовыя шкалы часу";
+"timeline.filter.tags" = "Адсочваемыя тэгі";
+
+// MARK: Package: AppAccount
+"app-account.button.add" = "Дадаць уліковы запіс";
+
+// MARK: Package: Account
+"account.action.add-remove-list" = "Дадаць/Выдаліць са спісаў";
+"account.action.edit-info" = "Рэдагаваць звесткі";
+"account.action.mention" = "Згадванне";
+"account.action.message" = "Паведамленне";
+"account.action.notify-enable" = "Уключыць апавяшчэнні";
+"account.action.notify-disable" = "Адключыць апавяшчэнні";
+"account.action.reboosts-show" = "Паказаць павышэнні";
+"account.action.reboosts-hide" = "Схаваць павышэнні";
+"account.action.block" = "Блакаваць";
+"account.action.unblock" = "Разблакаваць";
+"account.action.mute" = "Адключыць гук";
+"account.action.unmute" = "Уключыць гук";
+"account.action.share" = "Падзяліцца гэтым уліковым запісам";
+"account.boosted-by" = "Павялічана";
+"account.detail.about" = "Дадзеныя"
+"account.detail.familiar-followers" = "Таксама адсочваецца";
+"account.detail.n-fields %lld" = "%lld палёў";
+"account.detail.featured-tags-n-posts %lld" = "%lld допісаў";
+"account.edit.about" = "Апісанне";
+"account.edit.account-settings.bot" = "Уліковы запіс бота";
+"account.edit.account-settings.discoverable" = "Выяўляны";
+"account.edit.account-settings.private" = "Асабістыя";
+"account.edit.account-settings.section-title" = "Налады уліковага запісу";
+"account.edit.display-name" = "Імя для адлюстравання";
+"account.edit.error.save.message" = "Памылка пры захаванні профілю, паўтарыце спробу.";
+"account.edit.error.save.title" = "Памылка пры захаванні профілю";
+"account.edit.navigation-title" = "Рэдагаваць профіль";
+"account.edit.post-settings.privacy" = "Прыватнасць па змаўчанні";
+"account.edit.post-settings.section-title" = "Налады допісу";
+"account.edit.post-settings.sensitive" = "Адчувальны змест";
+"account.favorited-by" = "Улюбёны";
+"account.follow.follow" = "Сачыць";
+"account.follow.following" = "Адсочваю";
+"account.follow.requested" = "Запытаны";
+"account.follow-request.accept" = "Прыняць";
+"account.follow-request.reject" = "Адхіліць";
+"account.follow-requests.pending-requests" = "Чакаючыя запыты";
+"account.follow-requests.instructions" = "Those users won't see your posts until you accept them.";
+"account.followers" = "Паслядоўнікі";
+"account.following" = "Адсочваю";
+"account.list.create" = "Стварыць новы спіс";
+"account.list.create.confirm" = "Стварыць спіс";
+"account.list.create.description" = "Увядзіце назву вашага спісу";
+"account.list.delete" = "Выдаліць спіс";
+"account.list.name" = "Назва спісу";
+"account.post.pinned" = "Замацаваны допіс";
+"account.posts" = "Допісы";
+"account.relation.follows-you" = "Сочыць за табой";
+"account.joined" = "Далучыліся";
+"account.action.logout" = "Выйсці з уліковага запісу";
+
+// MARK: Package: Conversations
+"conversations.action.delete" = "Выдаліць";
+"conversations.action.mark-read" = "Адзначыць як прачытанае";
+"conversations.empty.message" = "Шукаеце каханне ў сацыяльных сетках? Тут вы знойдзеце ўсе вашы прамыя паведамленні і асабістыя згадкі. Прыемнай перапіскі! 📱❤️";
+"conversations.empty.title" = "Уваходная скрыня парожняя";
+"conversations.error.button" = "Паўтарыць";
+"conversations.error.message" = "Памылка падчас загрузкі вашых паведамленняў";
+"conversations.error.title" = "Памылка падчас загрузкі вашых паведамленняў";
+"conversations.navigation-title" = "Непасрэдныя паведамленні";
+"conversations.new.message.placeholder" = "Новае паведамленне";
+
+// MARK: Package: DesignSystem
+"design.tag.n-posts-from-n-participants %lld %lld" = "%lld допісы ад %lld удзельнікаў";
+"design.theme.navigation-title" = "Выбар тэмы";
+"design.theme.toots-preview" = "Папярэдні прагляд";
+
+// MARK: Package: Explore
+"explore.navigation-title" = "Агляд";
+"explore.search.message-%@" = "З гэтага экрана вы можаце шукаць што заўгодна на %@";
+"explore.search.prompt" = "Шукаць карыстальнікаў, допісы і тэгі";
+"explore.search.title" = "Пошук у вашым серверу";
+"explore.search.empty.message" = "Гэты запыт не даў вынікаў пошуку, паспрабуйце іншы.";
+"explore.search.empty.title" = "Няма вынікаў пошуку";
+"explore.section.posts" = "Допісы";
+"explore.section.suggested-users" = "Прапанаваныя карыстальнікі";
+"explore.section.tags" = "Тэгі";
+"explore.section.trending.links" = "Трэндавыя спасылкі";
+"explore.section.trending.posts" = "Трэндавыя допісы";
+"explore.section.trending.tags" = "Трэндавыя тэгі";
+"explore.section.users" = "Карыстальнікі";
+
+// MARK: Package: Env
+"env.poll-duration.5m" = "5 хвілін";
+"env.poll-duration.30m" = "30 хвілін";
+"env.poll-duration.1h" = "1 гадзіна";
+"env.poll-duration.6h" = "6 гадзін";
+"env.poll-duration.1d" = "1 дзень";
+"env.poll-duration.3d" = "3 дні";
+"env.poll-duration.7d" = "7 дзён";
+"env.poll-vote-frequency.one" = "Адзін голас";
+"env.poll-vote-frequency.multiple" = "Некалькі галасоў";
+
+// MARK: Package: Lists
+"lists.add-remove-%@" = "Дадаць/Выдаліць %@";
+"lists.create" = "Стварыць новы спіс";
+"lists.create.confirm" = "Стварыць спіс";
+"lists.edit.users-in-list" = "Карыстальнікі ў гэтым спісе";
+"lists.name" = "Назва спісу";
+"lists.name.message" = "Увядзіце назву вашага спісу";
+
+// MARK: Package: Notifications
+"notifications.empty.message" = "Апавяшчэнні? Якія апавяшчэнні? Ваша скрыня апавяшчэнняў выглядае такой пустой. Працягвайце заставацца цудоўным! 📱😎";
+"notifications.empty.title" = "Няма апавяшчэнняў";
+"notifications.error.message" = "Пры загрузцы вашых апавяшчэнняў адбылася памылка, паспрабуйце яшчэ раз.";
+"notifications.error.title" = "Узнікла памылка";
+"notifications.label.favorite %lld" = "пазначана";
+"notifications.label.follow %lld" = "пачаў адсочваць вас";
+"notifications.label.mention %lld" = "згадаў вас";
+"notifications.label.reblog %lld" = "павышае вас";
+"notifications.label.poll" = "апытанне скончана";
+"notifications.label.follow-request" = "адпраўлены запыт на тое, каб сачыць за вамі";
+"notifications.label.status" = "апублікаваў статус";
+"notifications.label.update" = "адрэдагаваў допіс";
+"notifications.menu-title.favorite" = "Абранае";
+"notifications.menu-title.follow" = "Сачыць";
+"notifications.menu-title.follow-request" = "Запыт на падпіску";
+"notifications.menu-title.mention" = "Згадка";
+"notifications.menu-title.poll" = "Апытанне";
+"notifications.menu-title.reblog" = "Павышэнне";
+"notifications.menu-title.status" = "Допіс";
+"notifications.menu-title.update" = "Допіс адрэдагавана";
+"notifications.navigation-title" = "Усе апавяшчэнні";
+"notifications.tab.all" = "Усе";
+"notifications.tab.mentions" = "Згадванні";
+
+// MARK: Package: Timeline
+"timeline.federated" = "Аб'яднаны";
+"timeline.latest" = "Перайсці да апошняга";
+"timeline.home" = "Галоўная";
+"timeline.local" = "Мясцовы";
+"timeline.n-recent-from-n-participants %lld %lld" = "%lld нядаўніх допісаў ад %lld удзельнікаў";
+"timeline.trending" = "Трэндавыя";
+"timeline.add.url" = "URL асобніка";
+
+// MARK: Package: Status
+"status.action.translate" = "Перакласці";
+"status.action.translate-from-%@" = "Перакласці з %@";
+"status.action.translated-label-%@" = "Пераклад з дапамогай %@";
+"status.action.bookmark" = "Закладка";
+"status.action.boost" = "Павышэнне";
+"status.action.copy-text" = "Капіяваць тэкст";
+"status.action.delete" = "Выдаліць";
+"status.action.delete.confirm.title" = "Пацвердзіць";
+"status.action.delete.confirm.message" = "вы ўпэўнены, што жадаеце выдаліць гэты допіс?";
+"status.action.edit" = "Рэдагаваць";
+"status.action.favorite" = "У ўлюбёныя";
+"status.action.mention" = "Згадаць";
+"status.action.message" = "Паведамленне";
+"status.action.pin" = "Замацаваць";
+"status.action.post" = "Апублікаваць";
+"status.action.quote" = "Цытаваць гэты допіс";
+"status.action.reply" = "Адказаць";
+"status.action.section.your-post" = "Ваш допіс";
+"status.action.share" = "Падзяліцца гэтым допісам";
+"status.action.unbookmark" = "Скасаваць закладку";
+"status.action.unboost" = "Адмяніць павышэнне";
+"status.action.unfavorite" = "Выдаліць з улюбенага";
+"status.action.unpin" = "Адмацаваць";
+"status.action.view-in-browser" = "Прагляд у браўзеры";
+"status.card.share" = "Падзяліцца гэтай спасылкай";
+"status.card.copy" = "Скапіяваць гэтую спасылку";
+"status.draft.delete" = "Выдаліць чарнавік";
+"status.draft.save" = "Захаваць чарнавік";
+"status.editor.ai-prompt.correct" = "Выправіць тэкст";
+"status.editor.ai-prompt.emphasize" = "Вылучыць тэкст";
+"status.editor.ai-prompt.fit" = "Скараціць тэкст";
+"status.editor.description.add" = "Дадаць апісанне";
+"status.editor.description.edit" = "Рэдагаваць апісанне";
+"status.editor.drafts.navigation-title" = "Чарнавікі";
+"status.editor.emojis.navigation-title" = "Карыстальніцкія эмодзі";
+"status.editor.error.upload" = "Памылка пры запампоўцы";
+"status.editor.language-select.navigation-title" = "Абярыце мову";
+"status.editor.language-select.recently-used" = "Нядаўна выкарыстаны";
+"status.editor.language-select.confirmation.detected-%@" = "Апублікаваць на %@ (выяўленая мова)";
+"status.editor.language-select.confirmation.selected-%@" = "Апублікаваць на %@ (Выбраная мова)";
+"status.editor.media.edit-image" = "Рэдагаваць выяву";
+"status.editor.media.image-description" = "Апісанне выявы";
+"status.editor.mode.edit" = "Рэдагаванне вашай публікацыі";
+"status.editor.mode.new" = "Новы допіс";
+"status.editor.mode.quote-%@" = "Цытата ад %@";
+"status.editor.mode.reply-%@" = "Адказаць %@";
+"status.editor.restore-previous" = "Аднавіць папярэдні тэкст";
+"status.editor.spoiler" = "Тэкст спойлера";
+"status.editor.text.placeholder" = "Пра што вы думаеце?";
+"status.editor.visibility" = "Бачнасць допісу";
+"status.error.loading.message" = "Пры загрузцы паведамленняў адбылася памылка, паўтарыце спробу.";
+"status.error.message" = "Адбылася памылка ў кантэксце гэтай публікацыі, паспрабуйце яшчэ раз.";
+"status.error.title" = "Узнікла памылка";
+"status.filter.filtered-by-%@" = "Адфільтравана па: %@";
+"status.filter.show-anyway" = "Паказваць у любым выпадку";
+"status.image.alt-text.abbreviation" = "ALT";
+"status.media.content.show" = "Паказаць змест";
+"status.media.contextmenu.copy" = "Капіяваць выяву";
+"status.media.contextmenu.save" = "Захаваць выяву";
+"status.media.contextmenu.share" = "Падзяліцца гэтай выявай";
+"status.media.contextmenu.view-browser" = "Праглядзець у браўзэры";
+"status.media.sensitive.show" = "Паказаць адчувальны кантэнт";
+"status.poll.n-votes %lld" = "%lld галасоў";
+"status.poll.closed" = "Зачынены";
+"status.poll.closes-in" = "Зачыніцца праз ";
+"status.poll.duration" = "Працягласць апытання";
+"status.poll.frequency" = "Частата апытання";
+"status.poll.option-n %lld" = "Варыянт %lld";
+"status.poll.send" = "Адправіць голас";
+"status.post-from-%@" = "Паведамленне ад %@";
+"status.row.was-boosted" = "павышаны";
+"status.row.was-reply" = "Адказаў";
+"status.row.you-boosted" = "Вы ўзмацнілі";
+"status.show-less" = "Паказваць менш";
+"status.show-more" = "Паказаць больш";
+"status.summary.at-time" = " а ";
+"status.summary.edited-time" = "Апошняе рэдагаванне:";
+"status.summary.n-boosts %lld" = "%lld павышаных";
+"status.summary.n-favorites %lld" = "%lld улюбёных";
+"status.visibility.direct" = "Прыватны";
+"status.visibility.follower" = "Паслядоўнікі";
+"status.visibility.public" = "Усе";
+"status.visibility.unlisted" = "Прыбраць з спісу";
+
+// MARK: Filters
+"filter.new" = "Новы фільтр";
+"filter.filters" = "Фільтры";
+"filter.edit.title" = "Фільтр загалоўка";
+"filter.edit.keywords" = "Фільтраваць ключавыя словы";
+"filter.edit.keywords.add" = "Дадаць новае ключавое слова";
+"filter.edit.contexts" = "Кантэксты фільтра";
+"filter.edit.action" = "Дзеянне фільтра";
+"account.action.edit-filters" = "Рэдагаваць фільтры";
+"filter.contexts.home" = "Галоўная старонка і спісы";
+"filter.contexts.notifications" = "Апавяшчэнні";
+"filter.contexts.public" = "Публічныя графікі";
+"filter.contexts.conversations" = "Размовы";
+"filter.contexts.profiles" = "Профілі";
+"filter.action.warning" = "Схаваць з папярэджаннем";
+"filter.action.hide" = "Схаваць цалкам";
+
+// MARK: Accessibility
+"accessibility.editor.button.attach-photo" = "Далучыць фота";
+"accessibility.editor.button.poll" = "Апытанне";
+"accessibility.editor.button.spoiler" = "Папярэджанне пра спойлер";
+"accessibility.editor.button.drafts" = "Чарнавікі";
+"accessibility.editor.button.custom-emojis" = "Уласныя эмодзі";
+"accessibility.editor.button.language" = "Мова";

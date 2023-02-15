@@ -142,6 +142,9 @@
 		069709A3298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Atkinson-Hyperlegible-Regular-102.ttf"; sourceTree = "<group>"; };
 		069709A7298C87B5006E4CB5 /* OpenDyslexic-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenDyslexic-Regular.otf"; sourceTree = "<group>"; };
 		069709A9298C9AD7006E4CB5 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		364A57842999B12500D68321 /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = be; path = be.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		364A57852999B12500D68321 /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = be.lproj/Localizable.strings; sourceTree = "<group>"; };
+		364A57862999B12500D68321 /* be */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = be; path = be.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		56B5BC132984206F00CF3A98 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = "pt-BR"; path = "pt-BR.lproj/Localizable.stringsdict"; sourceTree = "<group>"; };
 		56B5BC142984206F00CF3A98 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		639CDF9B296AC82F00C35E58 /* SafariRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariRouter.swift; sourceTree = "<group>"; };
@@ -679,6 +682,7 @@
 				"en-GB",
 				ko,
 				eu,
+				be,
 			);
 			mainGroup = 9FBFE630292A715500C250E9;
 			packageReferences = (
@@ -847,6 +851,7 @@
 				9FCBB3D52985965D009B77EE /* ca */,
 				C4CBB909298A0DA3007E1707 /* en-GB */,
 				74D6453629945F6200B47B92 /* eu */,
+				364A57842999B12500D68321 /* be */,
 			);
 			name = Localizable.stringsdict;
 			sourceTree = "<group>";
@@ -862,6 +867,7 @@
 				FF8259FC298E42E000BEAB69 /* ko */,
 				C4FBCF6F298FD88A0015DF22 /* zh-Hans */,
 				74D6453829945F6200B47B92 /* eu */,
+				364A57862999B12500D68321 /* be */,
 				9664F1A8299BA5F700CBE70E /* es */,
 			);
 			name = InfoPlist.strings;
@@ -886,6 +892,7 @@
 				C4CBB90A298A0DA3007E1707 /* en-GB */,
 				FF8259FB298E42E000BEAB69 /* ko */,
 				74D6453729945F6200B47B92 /* eu */,
+				364A57852999B12500D68321 /* be */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
