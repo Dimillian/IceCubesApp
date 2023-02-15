@@ -6,7 +6,6 @@ import SwiftUI
 
 struct StatusActionsView: View {
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var routerPath: RouterPath
   @ObservedObject var viewModel: StatusRowViewModel
 
   @MainActor
@@ -63,8 +62,11 @@ struct StatusActionsView: View {
       HStack {
         ForEach(Actions.allCases, id: \.self) { action in
           if action == .share {
-            if let url = viewModel.status.reblog?.url ?? viewModel.status.url {
-              ShareLink(item: url) {
+            if let urlString = viewModel.status.reblog?.url ?? viewModel.status.url,
+               let url = URL(string: urlString) {
+              ShareLink(item: url,
+                        subject: Text(viewModel.status.reblog?.account.safeDisplayName ?? viewModel.status.account.safeDisplayName),
+                        message: Text(viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText)) {
                 Image(systemName: action.iconName(viewModel: viewModel))
               }
               .buttonStyle(.borderless)
@@ -76,7 +78,7 @@ struct StatusActionsView: View {
               HStack(spacing: 2) {
                 Image(systemName: action.iconName(viewModel: viewModel))
                   .foregroundColor(action.tintColor(viewModel: viewModel, theme: theme))
-                if let count = action.count(viewModel: viewModel, theme: theme) {
+                if let count = action.count(viewModel: viewModel, theme: theme), !viewModel.isRemote {
                   Text("\(count)")
                     .font(.scaledFootnote)
                 }
@@ -97,10 +99,15 @@ struct StatusActionsView: View {
 
   private func handleAction(action: Actions) {
     Task {
+      if viewModel.isRemote, viewModel.localStatusId == nil || viewModel.localStatus == nil {
+        guard await viewModel.fetchRemoteStatus() else {
+          return
+        }
+      }
       HapticManager.shared.fireHaptic(of: .notification(.success))
       switch action {
       case .respond:
-        routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
+        viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)
       case .favorite:
         if viewModel.isFavorited {
           await viewModel.unFavorite()

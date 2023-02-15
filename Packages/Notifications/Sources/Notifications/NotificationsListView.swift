@@ -10,6 +10,7 @@ public struct NotificationsListView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
+  @EnvironmentObject private var routerPath: RouterPath
   @EnvironmentObject private var account: CurrentAccount
   @StateObject private var viewModel = NotificationsViewModel()
 
@@ -83,7 +84,7 @@ public struct NotificationsListView: View {
     switch viewModel.state {
     case .loading:
       ForEach(ConsolidatedNotification.placeholders()) { notification in
-        NotificationRowView(notification: notification)
+        NotificationRowView(notification: notification, client: client, routerPath: routerPath)
           .redacted(reason: .placeholder)
           .listRowInsets(.init(top: 12,
                                leading: .layoutPadding + 4,
@@ -102,7 +103,7 @@ public struct NotificationsListView: View {
           .listSectionSeparator(.hidden)
       } else {
         ForEach(notifications) { notification in
-          NotificationRowView(notification: notification)
+          NotificationRowView(notification: notification, client: client, routerPath: routerPath)
             .listRowInsets(.init(top: 12,
                                  leading: .layoutPadding + 4,
                                  bottom: 12,

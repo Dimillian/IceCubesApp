@@ -13,7 +13,7 @@ public class StatusRowViewModel: ObservableObject {
   let isFocused: Bool
   let isRemote: Bool
   let showActions: Bool
-
+  
   @Published var favoritesCount: Int
   @Published var isFavorited: Bool
   @Published var isReblogged: Bool
@@ -25,7 +25,6 @@ public class StatusRowViewModel: ObservableObject {
   @Published var displaySpoiler: Bool = false
   @Published var isEmbedLoading: Bool = false
   @Published var isFiltered: Bool = false
-  @Published var isLoadingRemoteContent: Bool = false
 
   @Published var translation: StatusTranslation?
   @Published var isLoadingTranslation: Bool = false
@@ -33,6 +32,10 @@ public class StatusRowViewModel: ObservableObject {
 
   @Published var favoriters: [Account] = []
   @Published var rebloggers: [Account] = []
+  
+  @Published var isLoadingRemoteContent: Bool = false
+  @Published var localStatusId: String?
+  @Published var localStatus: Status?
 
   private let theme = Theme.shared
 
@@ -52,15 +55,20 @@ public class StatusRowViewModel: ObservableObject {
     }
   }
 
-  var client: Client?
+  let client: Client
+  let routerPath: RouterPath
 
   public init(status: Status,
+              client: Client,
+              routerPath: RouterPath,
               isCompact: Bool = false,
               isFocused: Bool = false,
               isRemote: Bool = false,
               showActions: Bool = true)
   {
     self.status = status
+    self.client = client
+    self.routerPath = routerPath
     self.isCompact = isCompact
     self.isFocused = isFocused
     self.isRemote = isRemote
@@ -92,7 +100,7 @@ public class StatusRowViewModel: ObservableObject {
     }
   }
 
-  func navigateToDetail(routerPath: RouterPath) {
+  func navigateToDetail() {
     guard !isFocused else { return }
     if isRemote, let url = URL(string: status.reblog?.url ?? status.url ?? "") {
       routerPath.navigate(to: .remoteStatusDetail(url: url))
@@ -101,7 +109,7 @@ public class StatusRowViewModel: ObservableObject {
     }
   }
 
-  func navigateToAccountDetail(account: Account, routerPath: RouterPath) {
+  func navigateToAccountDetail(account: Account) {
     if isRemote, let url = account.url {
       withAnimation {
         isLoadingRemoteContent = true
@@ -115,7 +123,7 @@ public class StatusRowViewModel: ObservableObject {
     }
   }
 
-  func navigateToMention(mention: Mention, routerPath: RouterPath) {
+  func navigateToMention(mention: Mention) {
     if isRemote {
       withAnimation {
         isLoadingRemoteContent = true
@@ -130,8 +138,7 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   func loadEmbeddedStatus() async {
-    guard let client,
-          embeddedStatus == nil,
+    guard embeddedStatus == nil,
           !status.content.statusesURLs.isEmpty,
           let url = status.content.statusesURLs.first,
           client.hasConnection(with: url)
@@ -164,11 +171,11 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   func favorite() async {
-    guard let client, client.isAuth else { return }
+    guard client.isAuth else { return }
     isFavorited = true
     favoritesCount += 1
     do {
-      let status: Status = try await client.post(endpoint: Statuses.favorite(id: status.reblog?.id ?? status.id))
+      let status: Status = try await client.post(endpoint: Statuses.favorite(id: localStatusId ?? status.reblog?.id ?? status.id))
       updateFromStatus(status: status)
     } catch {
       isFavorited = false
@@ -177,11 +184,11 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   func unFavorite() async {
-    guard let client, client.isAuth else { return }
+    guard client.isAuth else { return }
     isFavorited = false
     favoritesCount -= 1
     do {
-      let status: Status = try await client.post(endpoint: Statuses.unfavorite(id: status.reblog?.id ?? status.id))
+      let status: Status = try await client.post(endpoint: Statuses.unfavorite(id: localStatusId ?? status.reblog?.id ?? status.id))
       updateFromStatus(status: status)
     } catch {
       isFavorited = true
@@ -190,11 +197,11 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   func reblog() async {
-    guard let client, client.isAuth else { return }
+    guard client.isAuth else { return }
     isReblogged = true
     reblogsCount += 1
     do {
-      let status: Status = try await client.post(endpoint: Statuses.reblog(id: status.reblog?.id ?? status.id))
+      let status: Status = try await client.post(endpoint: Statuses.reblog(id: localStatusId ?? status.reblog?.id ?? status.id))
       updateFromStatus(status: status)
     } catch {
       isReblogged = false
@@ -203,11 +210,11 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   func unReblog() async {
-    guard let client, client.isAuth else { return }
+    guard client.isAuth else { return }
     isReblogged = false
     reblogsCount -= 1
     do {
-      let status: Status = try await client.post(endpoint: Statuses.unreblog(id: status.reblog?.id ?? status.id))
+      let status: Status = try await client.post(endpoint: Statuses.unreblog(id: localStatusId ?? status.reblog?.id ?? status.id))
       updateFromStatus(status: status)
     } catch {
       isReblogged = true
@@ -216,7 +223,7 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   func pin() async {
-    guard let client, client.isAuth else { return }
+    guard client.isAuth else { return }
     isPinned = true
     do {
       let status: Status = try await client.post(endpoint: Statuses.pin(id: status.reblog?.id ?? status.id))
@@ -227,7 +234,7 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   func unPin() async {
-    guard let client, client.isAuth else { return }
+    guard client.isAuth else { return }
     isPinned = false
     do {
       let status: Status = try await client.post(endpoint: Statuses.unpin(id: status.reblog?.id ?? status.id))
@@ -238,10 +245,10 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   func bookmark() async {
-    guard let client, client.isAuth else { return }
+    guard client.isAuth else { return }
     isBookmarked = true
     do {
-      let status: Status = try await client.post(endpoint: Statuses.bookmark(id: status.reblog?.id ?? status.id))
+      let status: Status = try await client.post(endpoint: Statuses.bookmark(id: localStatusId ?? status.reblog?.id ?? status.id))
       updateFromStatus(status: status)
     } catch {
       isBookmarked = false
@@ -249,10 +256,10 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   func unbookmark() async {
-    guard let client, client.isAuth else { return }
+    guard client.isAuth else { return }
     isBookmarked = false
     do {
-      let status: Status = try await client.post(endpoint: Statuses.unbookmark(id: status.reblog?.id ?? status.id))
+      let status: Status = try await client.post(endpoint: Statuses.unbookmark(id: localStatusId ?? status.reblog?.id ?? status.id))
       updateFromStatus(status: status)
     } catch {
       isBookmarked = true
@@ -260,14 +267,12 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   func delete() async {
-    guard let client else { return }
     do {
       _ = try await client.delete(endpoint: Statuses.status(id: status.id))
     } catch {}
   }
 
   func fetchActionsAccounts() async {
-    guard let client else { return }
     do {
       favoriters = try await client.get(endpoint: Statuses.favoritedBy(id: status.id, maxId: nil))
       rebloggers = try await client.get(endpoint: Statuses.rebloggedBy(id: status.id, maxId: nil))
@@ -300,7 +305,6 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   private func translate(userLang: String, sourceLang _: String?) async {
-    guard let client else { return }
     do {
       withAnimation {
         isLoadingTranslation = true
@@ -322,6 +326,25 @@ public class StatusRowViewModel: ObservableObject {
         self.translation = translation
         isLoadingTranslation = false
       }
+    }
+  }
+  
+  func fetchRemoteStatus() async -> Bool {
+    guard isRemote, let remoteStatusURL = URL(string: status.reblog?.url ?? status.url ?? "") else { return false }
+    isLoadingRemoteContent = true
+    let results: SearchResults? = try? await client.get(endpoint: Search.search(query: remoteStatusURL.absoluteString,
+                                                                                type: "statuses",
+                                                                                offset: nil,
+                                                                                following: nil),
+                                                        forceVersion: .v2)
+    if let status = results?.statuses.first {
+      self.localStatusId = status.id
+      self.localStatus = status
+      isLoadingRemoteContent = false
+      return true
+    } else {
+      isLoadingRemoteContent = false
+      return false
     }
   }
 }

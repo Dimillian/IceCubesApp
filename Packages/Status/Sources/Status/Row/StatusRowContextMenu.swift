@@ -6,7 +6,6 @@ struct StatusRowContextMenu: View {
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var currentInstance: CurrentInstance
-  @EnvironmentObject private var routerPath: RouterPath
 
   @ObservedObject var viewModel: StatusRowViewModel
 
@@ -41,7 +40,7 @@ struct StatusRowContextMenu: View {
               systemImage: "bookmark")
       }
       Button {
-        routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
+        viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
       } label: {
         Label("status.action.reply", systemImage: "arrowshape.turn.up.left")
       }
@@ -49,7 +48,7 @@ struct StatusRowContextMenu: View {
 
     if viewModel.status.visibility == .pub, !viewModel.isRemote {
       Button {
-        routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
+        viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
       } label: {
         Label("status.action.quote", systemImage: "quote.bubble")
       }
@@ -57,8 +56,11 @@ struct StatusRowContextMenu: View {
 
     Divider()
 
-    if let url = viewModel.status.reblog?.url ?? viewModel.status.url {
-      ShareLink(item: url) {
+    if let urlString = viewModel.status.reblog?.url ?? viewModel.status.url,
+       let url = URL(string: urlString) {
+      ShareLink(item: url,
+                subject: Text(viewModel.status.reblog?.account.safeDisplayName ?? viewModel.status.account.safeDisplayName),
+                message: Text(viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText)) {
         Label("status.action.share", systemImage: "square.and.arrow.up")
       }
     }
@@ -107,7 +109,7 @@ struct StatusRowContextMenu: View {
         }
         if currentInstance.isEditSupported {
           Button {
-            routerPath.presentedSheet = .editStatusEditor(status: viewModel.status)
+            viewModel.routerPath.presentedSheet = .editStatusEditor(status: viewModel.status)
           } label: {
             Label("status.action.edit", systemImage: "pencil")
           }
@@ -116,17 +118,26 @@ struct StatusRowContextMenu: View {
                action: { viewModel.showDeleteAlert = true },
                label: { Label("status.action.delete", systemImage: "trash") })
       }
-    } else if !viewModel.isRemote {
-      Section(viewModel.status.account.acct) {
-        Button {
-          routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.account, visibility: .pub)
-        } label: {
-          Label("status.action.mention", systemImage: "at")
+    } else {
+      if !viewModel.isRemote {
+        Section(viewModel.status.account.acct) {
+          Button {
+            viewModel.routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.account, visibility: .pub)
+          } label: {
+            Label("status.action.mention", systemImage: "at")
+          }
+          Button {
+            viewModel.routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.account, visibility: .direct)
+          } label: {
+            Label("status.action.message", systemImage: "tray.full")
+          }
         }
-        Button {
-          routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.account, visibility: .direct)
+      }
+      Section {
+        Button(role: .destructive) {
+          viewModel.routerPath.presentedSheet = .report(status: viewModel.status.reblogAsAsStatus ?? viewModel.status)
         } label: {
-          Label("status.action.message", systemImage: "tray.full")
+          Label("status.action.report", systemImage: "exclamationmark.bubble")
         }
       }
     }

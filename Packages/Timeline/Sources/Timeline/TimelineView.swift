@@ -43,9 +43,9 @@ public struct TimelineView: View {
           }
           switch viewModel.timeline {
           case .remoteLocal:
-            StatusesListView(fetcher: viewModel, isRemote: true)
+            StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath, isRemote: true)
           default:
-            StatusesListView(fetcher: viewModel)
+            StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath)
           }
         }
         .id(client.id)

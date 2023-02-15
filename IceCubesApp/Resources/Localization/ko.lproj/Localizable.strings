@@ -37,6 +37,8 @@
 "enum.status-actions-display.only-buttons" = "버튼만 표시";
 "enum.status-display-style.compact" = "작게";
 "enum.status-display-style.large" = "크게";
+"enum.swipeactions.icon-with-text" = "아이콘과 텍스트";
+"enum.swipeactions.icon-only" = "아이콘만";
 
 // MARK: Instances
 "instance.info.domains" = "도메인";
@@ -63,6 +65,8 @@
 "settings.account.add" = "계정 추가";
 "settings.app.icon" = "앱 아이콘";
 "settings.app.icon.navigation-title" = "앱 아이콘";
+"settings.app.icon.official" = "공식 앱 아이콘";
+"settings.app.icon.designed-by" = "커뮤니티 앱 아이콘 | 제작:";
 "settings.app.source" = "소스 코드 (GitHub)";
 "settings.app.support" = "이 앱 지원하기";
 "settings.app.about" = "이 앱에 관해";
@@ -109,6 +113,8 @@
 "settings.content.expand-media" = "표시할 미디어";
 "settings.content.default-sensitive" = "내 미디어 항상 민감함으로 표시";
 "settings.content.default-visibility" = "글 기본 공개 범위";
+"settings.content.media" = "미디어";
+"settings.content.media.show.alt" = "이미지 설명 버튼 표시";
 "settings.content.reading" = "읽을 때";
 "settings.content.posting" = "올릴 때";
 "enum.expand-media.show" = "모두 표시하기";
@@ -175,7 +181,9 @@
 "settings.swipeactions.status.trailing" = "왼쪽으로 쓸어넘길 때";
 "settings.swipeactions.status.trailing.left" = "왼쪽 버튼";
 "settings.swipeactions.status.trailing.right" = "오른쪽 버튼";
-"settings.swipeactions.status" = "글을";
+"settings.swipeactions.status" = "글";
+"settings.swipeactions.status.use-theme-colors" = "기본 색상 대신 테마 색상 사용";
+"settings.swipeactions.status.icon-style" = "아이콘 모양";
 
 // MARK: Tabs
 "tab.explore" = "둘러보기";
@@ -256,6 +264,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "삭제";
 "conversations.action.mark-read" = "읽음으로 표시";
+"conversations.action.view-detail" = "상세 정보 보기";
 "conversations.empty.message" = "메시지를 찾고 있나요? 여기에서 다이렉트 메시지와 비공개 언급을 확인할 수 있어요. 친구에게 메시지를 먼저 보내보세요! 📱❤️";
 "conversations.empty.title" = "메시지 없음";
 "conversations.error.button" = "다시 시도";
@@ -329,6 +338,14 @@
 "notifications.tab.all" = "모든 알림";
 "notifications.tab.mentions" = "언급";
 
+"notifications.label.status.push" = "🖊️ 새 글: ";
+"notifications.label.reblog.push" = "🚀 부스트함: ";
+"notifications.label.follow.push" = "👋 나를 팔로우함: ";
+"notifications.label.follow-request.push" = "🔒 나에게 팔로우 요청을 보냄: ";
+"notifications.label.favorite.push" = "⭐️ 좋아요함: ";
+"notifications.label.poll.push" = "📈 투표가 끝남: ";
+"notifications.label.update.push" = "글을 수정함: ";
+
 // MARK: Package: Timeline
 "timeline.federated" = "연합";
 "timeline.latest" = "최신 타임라인 다시 불러오기";
@@ -341,7 +358,7 @@
 // MARK: Package: Status
 "status.action.translate" = "번역";
 "status.action.translate-from-%@" = "%@에서 번역";
-"status.action.translated-label-%@" = "%@을 통해 번역됨";
+"status.action.translated-label-%@" = "번역 제공: %@";
 "status.action.bookmark" = "보관함에 추가";
 "status.action.boost" = "부스트";
 "status.action.copy-text" = "복사";
@@ -377,8 +394,8 @@
 "status.editor.error.upload" = "전송 오류";
 "status.editor.language-select.navigation-title" = "언어 선택";
 "status.editor.language-select.recently-used" = "최근 사용";
-"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
-"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
+"status.editor.language-select.confirmation.detected-%@" = "%@로 표시하여 게시 (인식된 언어)";
+"status.editor.language-select.confirmation.selected-%@" = "%@로 표시하여 게시 (선택한 언어)";
 "status.editor.media.edit-image" = "이미지 편집";
 "status.editor.media.image-description" = "이미지 설명";
 "status.editor.mode.edit" = "글 수정";
@@ -447,3 +464,9 @@
 "accessibility.editor.button.drafts" = "임시 보관함";
 "accessibility.editor.button.custom-emojis" = "커스텀 이모지";
 "accessibility.editor.button.language" = "언어";
+
+// MARK: Report
+"report.comment.placeholder" = "추가 정보";
+"report.title" = "신고";
+"report.action.send" = "제출";
+"status.action.report" = "글 신고";

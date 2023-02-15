@@ -44,13 +44,13 @@ struct IconSelectorView: View {
     let icons: [Icon]
 
     static let items = [
-      IconSelector(title: "Official icons", icons: [.primary, .alt1, .alt2, .alt3, .alt4, .alt5, .alt6, .alt7, .alt8,
+      IconSelector(title:"settings.app.icon.official".localized, icons: [.primary, .alt1, .alt2, .alt3, .alt4, .alt5, .alt6, .alt7, .alt8,
                                                     .alt9, .alt10, .alt11, .alt12, .alt13, .alt14,
                                                     .alt15, .alt16, .alt17, .alt18, .alt19, .alt25]),
-      IconSelector(title: "Icons by Albert Kinng", icons: [.alt20, .alt21, .alt22, .alt23, .alt24]),
-      IconSelector(title: "Icons by Dan van Moll", icons: [.alt26, .alt27, .alt28]),
-      IconSelector(title: "Icons by @te6-in (GitHub)", icons: [.alt29, .alt30, .alt31, .alt32]),
-      IconSelector(title: "Icon by W. Kovács Ágnes (@wildgica)", icons: [.alt33]),
+      IconSelector(title: "\("settings.app.icon.designed-by".localized) Albert Kinng", icons: [.alt20, .alt21, .alt22, .alt23, .alt24]),
+      IconSelector(title: "\("settings.app.icon.designed-by".localized) Dan van Moll", icons: [.alt26, .alt27, .alt28]),
+      IconSelector(title: "\("settings.app.icon.designed-by".localized) @te6-in (GitHub)", icons: [.alt29, .alt30, .alt31, .alt32]),
+      IconSelector(title: "\("settings.app.icon.designed-by".localized) W. Kovács Ágnes (@wildgica)", icons: [.alt33]),
     ]
   }
 
@@ -105,4 +105,10 @@ struct IconSelectorView: View {
       }
     }
   }
+}
+
+extension String {
+    var localized: String {
+        return NSLocalizedString(self, comment:"")
+    }
 }

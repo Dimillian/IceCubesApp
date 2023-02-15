@@ -37,6 +37,8 @@
 "enum.status-actions-display.only-buttons" = "Bare knapper";
 "enum.status-display-style.compact" = "Kompakt";
 "enum.status-display-style.large" = "Stor";
+"enum.swipeactions.icon-with-text" = "Icon with text";
+"enum.swipeactions.icon-only" = "Icon only";
 
 // MARK: Instances
 "instance.info.domains" = "Domener";
@@ -63,6 +65,8 @@
 "settings.account.add" = "Legg til konto";
 "settings.app.icon" = "Appikon";
 "settings.app.icon.navigation-title" = "Ikon";
+"settings.app.icon.official" = "Official icons";
+"settings.app.icon.designed-by" = "Icons by";
 "settings.app.source" = "Kilde (GitHub-lenke)";
 "settings.app.support" = "Støtt denne appen";
 "settings.app.about" = "About";
@@ -113,6 +117,8 @@
 "settings.content.expand-media" = "Medievisning";
 "settings.content.default-sensitive" = "Marker alltid medier som sensitive";
 "settings.content.default-visibility" = "Innleggssynlighet";
+"settings.content.media" = "Media";
+"settings.content.media.show.alt" = "Show ALT texts";
 "settings.content.reading" = "Lesing";
 "settings.content.posting" = "Innlegg";
 "enum.expand-media.show" = "Vis alle";
@@ -176,6 +182,8 @@
 "settings.swipeactions.status.trailing.left" = "left";
 "settings.swipeactions.status.trailing.right" = "right";
 "settings.swipeactions.status" = "Post";
+"settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
+"settings.swipeactions.status.icon-style" = "Icon style";
 
 // MARK: Tabs
 "tab.explore" = "Utforsk";
@@ -255,6 +263,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Slett";
 "conversations.action.mark-read" = "Merk som lest";
+"conversations.action.view-detail" = "View detail";
 "conversations.empty.message" = "Leter du etter kjærlighet til sosiale medier? Du finner alle dine direktemeldinger og private omtaler her. God melding! 📱❤️";
 "conversations.empty.title" = "Innboks null";
 "conversations.error.button" = "Prøv på nytt";
@@ -326,6 +335,14 @@
 "notifications.navigation-title" = "Alle varsler";
 "notifications.tab.all" = "Alle";
 "notifications.tab.mentions" = "Omtaler";
+
+"notifications.label.status.push" = "🖊️ Posted: ";
+"notifications.label.reblog.push" = "🚀 Boosted: ";
+"notifications.label.follow.push" = "👋 Followed you: ";
+"notifications.label.follow-request.push" = "🔒 Requested to follow you: ";
+"notifications.label.favorite.push" = "⭐️ Starred: ";
+"notifications.label.poll.push" = "📈 Poll ended: ";
+"notifications.label.update.push" = "Updated: ";
 
 // MARK: Package: Timeline
 "timeline.federated" = "Federert";
@@ -445,3 +462,9 @@
 "accessibility.editor.button.drafts" = "Drafts";
 "accessibility.editor.button.custom-emojis" = "Custom emojis";
 "accessibility.editor.button.language" = "Language";
+
+// MARK: Report
+"report.comment.placeholder" = "Additional Info";
+"report.title" = "Report Post";
+"report.action.send" = "Send";
+"status.action.report" = "Report Post";

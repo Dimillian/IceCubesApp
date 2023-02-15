@@ -81,7 +81,7 @@ struct TimelineTab: View {
         }
       }
     }
-    .onChange(of: currentAccount.account?.id) { _ in
+    .onChange(of: client.id) { _ in
       routerPath.path = []
     }
     .onChange(of: timeline) { timeline in

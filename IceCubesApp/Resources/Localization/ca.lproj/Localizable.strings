@@ -36,6 +36,8 @@
 "enum.status-actions-display.only-buttons" = "Només els botons";
 "enum.status-display-style.compact" = "Compacte";
 "enum.status-display-style.large" = "Gran";
+"enum.swipeactions.icon-with-text" = "Icon with text";
+"enum.swipeactions.icon-only" = "Icon only";
 
 // MARK: Instances
 "instance.info.domains" = "Dominis";
@@ -62,6 +64,8 @@
 "settings.account.add" = "Afegeix un compte";
 "settings.app.icon" = "Icona de l'aplicació";
 "settings.app.icon.navigation-title" = "Icones";
+"settings.app.icon.official" = "Official icons";
+"settings.app.icon.designed-by" = "Icons by";
 "settings.app.source" = "Font (enllaç a GitHub)";
 "settings.app.support" = "Dona suport a l'aplicació";
 "settings.app.about" = "Quant a";
@@ -108,6 +112,8 @@
 "settings.content.expand-media" = "Visibilitat del contingut multimèdia";
 "settings.content.default-sensitive" = "Marca sempre el contingut com a sensible";
 "settings.content.default-visibility" = "Visibilitat de les publicacions";
+"settings.content.media" = "Media";
+"settings.content.media.show.alt" = "Show ALT texts";
 "settings.content.reading" = "Llegint";
 "settings.content.posting" = "Publicant";
 "enum.expand-media.show" = "Mostra-ho tot";
@@ -175,6 +181,8 @@
 "settings.swipeactions.status.trailing.left" = "left";
 "settings.swipeactions.status.trailing.right" = "right";
 "settings.swipeactions.status" = "Post";
+"settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
+"settings.swipeactions.status.icon-style" = "Icon style";
 
 // MARK: Tabs
 "tab.explore" = "Exploreu";
@@ -254,6 +262,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Elimina";
 "conversations.action.mark-read" = "Marca com a llegit";
+"conversations.action.view-detail" = "View detail";
 "conversations.empty.message" = "Esteu buscant l'amor a les xarxes socials? Aquí trobareu tots els vostres missatges directes i mencions privades. Bona conversa! 📱❤️";
 "conversations.empty.title" = "Safata d'entrada";
 "conversations.error.button" = "Reintenta";
@@ -325,6 +334,14 @@
 "notifications.navigation-title" = "Totes les notificacions";
 "notifications.tab.all" = "Totes";
 "notifications.tab.mentions" = "Mencions";
+
+"notifications.label.status.push" = "🖊️ Posted: ";
+"notifications.label.reblog.push" = "🚀 Boosted: ";
+"notifications.label.follow.push" = "👋 Followed you: ";
+"notifications.label.follow-request.push" = "🔒 Requested to follow you: ";
+"notifications.label.favorite.push" = "⭐️ Starred: ";
+"notifications.label.poll.push" = "📈 Poll ended: ";
+"notifications.label.update.push" = "Updated: ";
 
 // MARK: Package: Timeline
 "timeline.federated" = "Federada";
@@ -444,3 +461,9 @@
 "accessibility.editor.button.drafts" = "Drafts";
 "accessibility.editor.button.custom-emojis" = "Custom emojis";
 "accessibility.editor.button.language" = "Language";
+
+// MARK: Report
+"report.comment.placeholder" = "Additional Info";
+"report.title" = "Report Post";
+"report.action.send" = "Send";
+"status.action.report" = "Report Post";

@@ -15,6 +15,7 @@ public struct StatusEditorView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var currentAccount: CurrentAccount
+  @EnvironmentObject private var routerPath: RouterPath
   @Environment(\.dismiss) private var dismiss
 
   @StateObject private var viewModel: StatusEditorViewModel
@@ -45,13 +46,13 @@ public struct StatusEditorView: View {
                      .padding(.horizontal, .layoutPadding)
             StatusEditorMediaView(viewModel: viewModel)
             if let status = viewModel.embeddedStatus {
-              StatusEmbeddedView(status: status)
+              StatusEmbeddedView(status: status, client: client, routerPath: routerPath)
                 .padding(.horizontal, .layoutPadding)
                 .disabled(true)
             } else if let status = viewModel.replyToStatus {
               Divider()
                 .padding(.top, 20)
-              StatusEmbeddedView(status: status)
+              StatusEmbeddedView(status: status, client: client, routerPath: routerPath)
                 .padding(.horizontal, .layoutPadding)
                 .disabled(true)
             }
@@ -213,7 +214,7 @@ public struct StatusEditorView: View {
 
   @ViewBuilder
   private var accountHeaderView: some View {
-    if let account = currentAccount.account {
+    if let account = currentAccount.account, !viewModel.mode.isEditing {
       HStack {
         AppAccountsSelectorView(routerPath: RouterPath(),
                                 accountCreationEnabled: false,

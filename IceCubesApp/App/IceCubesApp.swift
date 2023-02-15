@@ -19,6 +19,7 @@ struct IceCubesApp: App {
   @StateObject private var currentInstance = CurrentInstance.shared
   @StateObject private var currentAccount = CurrentAccount.shared
   @StateObject private var userPreferences = UserPreferences.shared
+  @StateObject private var pushNotificationsService = PushNotificationsService.shared
   @StateObject private var watcher = StreamWatcher()
   @StateObject private var quickLook = QuickLook()
   @StateObject private var theme = Theme.shared
@@ -50,12 +51,28 @@ struct IceCubesApp: App {
         .environmentObject(userPreferences)
         .environmentObject(theme)
         .environmentObject(watcher)
-        .environmentObject(PushNotificationsService.shared)
+        .environmentObject(pushNotificationsService)
         .fullScreenCover(item: $quickLook.url, content: { url in
           QuickLookPreview(selectedURL: url, urls: quickLook.urls)
             .edgesIgnoringSafeArea(.bottom)
             .background(TransparentBackground())
         })
+        .onChange(of: pushNotificationsService.handledNotification) { notification in
+          if notification != nil {
+            pushNotificationsService.handledNotification = nil
+            if appAccountsManager.currentAccount.oauthToken?.accessToken != notification?.account.token.accessToken,
+               let account = appAccountsManager.availableAccounts.first(where:
+                  { $0.oauthToken?.accessToken == notification?.account.token.accessToken })  {
+              appAccountsManager.currentAccount = account
+              DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                selectedTab = .notifications
+                pushNotificationsService.handledNotification = notification
+              }
+            } else {
+              selectedTab = .notifications
+            }
+          }
+        }
     }
     .commands {
       appMenu
@@ -232,6 +249,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
                    didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool
   {
     try? AVAudioSession.sharedInstance().setCategory(.ambient, options: .mixWithOthers)
+    PushNotificationsService.shared.setAccounts(accounts: AppAccountsManager.shared.pushAccounts)
     return true
   }
 

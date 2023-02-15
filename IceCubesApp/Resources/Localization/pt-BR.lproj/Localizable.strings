@@ -37,6 +37,8 @@
 "enum.status-actions-display.only-buttons" = "Somente botões";
 "enum.status-display-style.compact" = "Compacto";
 "enum.status-display-style.large" = "Largo";
+"enum.swipeactions.icon-with-text" = "Icon with text";
+"enum.swipeactions.icon-only" = "Icon only";
 
 // MARK: Instances
 "instance.info.domains" = "Domínios";
@@ -63,6 +65,8 @@
 "settings.account.add" = "Adicionar conta";
 "settings.app.icon" = "Ícone do App";
 "settings.app.icon.navigation-title" = "Ícones";
+"settings.app.icon.official" = "Official icons";
+"settings.app.icon.designed-by" = "Icons by";
 "settings.app.source" = "Código fonte (link GitHub)";
 "settings.app.support" = "Apoie o app";
 "settings.app.about" = "About";
@@ -109,6 +113,8 @@
 "settings.content.expand-media" = "Exibição de mídia";
 "settings.content.default-sensitive" = "Sempre marcar mídias como sensíveis";
 "settings.content.default-visibility" = "Visibilidade da postagem";
+"settings.content.media" = "Media";
+"settings.content.media.show.alt" = "Show ALT texts";
 "settings.content.reading" = "Lendo";
 "settings.content.posting" = "Postagem";
 "enum.expand-media.show" = "Exibir Todas";
@@ -176,6 +182,8 @@
 "settings.swipeactions.status.trailing.left" = "left";
 "settings.swipeactions.status.trailing.right" = "right";
 "settings.swipeactions.status" = "Post";
+"settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
+"settings.swipeactions.status.icon-style" = "Icon style";
 
 // MARK: Tabs
 "tab.explore" = "Explorar";
@@ -255,6 +263,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Excluir";
 "conversations.action.mark-read" = "Marcar como lida";
+"conversations.action.view-detail" = "View detail";
 "conversations.empty.message" = "Procurando por um pouco de amor nas mídias sociais? Você irá encontrar todas as suas mensagens diretas e menções privadas bem aqui. Divirta-se enviando mensagens! 📱❤️";
 "conversations.empty.title" = "Caixa de entrada vazia";
 "conversations.error.button" = "Tente novamente";
@@ -326,6 +335,14 @@
 "notifications.navigation-title" = "Todas as Notificações";
 "notifications.tab.all" = "Todos";
 "notifications.tab.mentions" = "Menções";
+
+"notifications.label.status.push" = "🖊️ Posted: ";
+"notifications.label.reblog.push" = "🚀 Boosted: ";
+"notifications.label.follow.push" = "👋 Followed you: ";
+"notifications.label.follow-request.push" = "🔒 Requested to follow you: ";
+"notifications.label.favorite.push" = "⭐️ Starred: ";
+"notifications.label.poll.push" = "📈 Poll ended: ";
+"notifications.label.update.push" = "Updated: ";
 
 // MARK: Package: Timeline
 "timeline.federated" = "Linha global";
@@ -445,3 +462,9 @@
 "accessibility.editor.button.drafts" = "Drafts";
 "accessibility.editor.button.custom-emojis" = "Custom emojis";
 "accessibility.editor.button.language" = "Language";
+
+// MARK: Report
+"report.comment.placeholder" = "Additional Info";
+"report.title" = "Report Post";
+"report.action.send" = "Send";
+"status.action.report" = "Report Post";

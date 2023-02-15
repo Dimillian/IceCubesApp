@@ -18,6 +18,7 @@ public enum Statuses: Endpoint {
   case unbookmark(id: String)
   case history(id: String)
   case translate(id: String, lang: String?)
+  case report(accountId: String, statusId: String, comment: String)
 
   public func path() -> String {
     switch self {
@@ -53,6 +54,8 @@ public enum Statuses: Endpoint {
       return "statuses/\(id)/history"
     case let .translate(id, _):
       return "statuses/\(id)/translate"
+    case .report:
+      return "reports"
     }
   }
 
@@ -67,6 +70,10 @@ public enum Statuses: Endpoint {
         return [.init(name: "lang", value: lang)]
       }
       return nil
+    case let .report(accountId, statusId, comment):
+      return [.init(name: "account_id", value: accountId),
+              .init(name: "status_ids[]", value: statusId),
+              .init(name: "comment", value: comment)]
     default:
       return nil
     }

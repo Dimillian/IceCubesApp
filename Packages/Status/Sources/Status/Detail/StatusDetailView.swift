@@ -43,7 +43,7 @@ public struct StatusDetailView: View {
           case let .display(status, context, date):
             if !context.ancestors.isEmpty {
               ForEach(context.ancestors) { ancestor in
-                StatusRowView(viewModel: .init(status: ancestor, isCompact: false))
+                StatusRowView(viewModel: .init(status: ancestor, client: client, routerPath: routerPath, isCompact: false))
               }
             }
 
@@ -52,7 +52,7 @@ public struct StatusDetailView: View {
 
             if !context.descendants.isEmpty {
               ForEach(context.descendants) { descendant in
-                StatusRowView(viewModel: .init(status: descendant, isCompact: false))
+                StatusRowView(viewModel: .init(status: descendant, client: client, routerPath: routerPath, isCompact: false))
               }
             }
 
@@ -108,6 +108,8 @@ public struct StatusDetailView: View {
 
   private func makeCurrentStatusView(status: Status) -> some View {
     StatusRowView(viewModel: .init(status: status,
+                                   client: client,
+                                   routerPath: routerPath,
                                    isCompact: false,
                                    isFocused: true))
       .overlay {
@@ -135,7 +137,7 @@ public struct StatusDetailView: View {
 
   private var loadingDetailView: some View {
     ForEach(Status.placeholders()) { status in
-      StatusRowView(viewModel: .init(status: status, isCompact: false))
+      StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath, isCompact: false))
         .redacted(reason: .placeholder)
     }
   }

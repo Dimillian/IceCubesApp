@@ -37,6 +37,8 @@
 "enum.status-actions-display.only-buttons" = "ボタンのみ";
 "enum.status-display-style.compact" = "コンパクト";
 "enum.status-display-style.large" = "ラージ";
+"enum.swipeactions.icon-with-text" = "アイコンと文字";
+"enum.swipeactions.icon-only" = "アイコンのみ";
 
 // MARK: Instances
 "instance.info.domains" = "ドメイン";
@@ -63,6 +65,8 @@
 "settings.account.add" = "アカウントの追加";
 "settings.app.icon" = "アプリアイコン";
 "settings.app.icon.navigation-title" = "アイコン";
+"settings.app.icon.official" = "公式アイコン";
+"settings.app.icon.designed-by" = "アイコンの作者：";
 "settings.app.source" = "ソース (GitHub link)";
 "settings.app.support" = "アプリを支援する";
 "settings.app.about" = "アプリについて";
@@ -113,6 +117,8 @@
 "settings.content.expand-media" = "メディア表示";
 "settings.content.default-sensitive" = "常にメディアをセンシティブなものとしてマークする";
 "settings.content.default-visibility" = "投稿の可視化";
+"settings.content.media" = "メディア";
+"settings.content.media.show.alt" = "注釈を表示";
 "settings.content.reading" = "リーディング";
 "settings.content.posting" = "ポスティング";
 "enum.expand-media.show" = "全て表示";
@@ -176,6 +182,8 @@
 "settings.swipeactions.status.trailing.left" = "左";
 "settings.swipeactions.status.trailing.right" = "右";
 "settings.swipeactions.status" = "投稿";
+"settings.swipeactions.status.use-theme-colors" = "デフォルトの色の代わりにテーマの色を使用する";
+"settings.swipeactions.status.icon-style" = "アイコンスタイル";
 
 // MARK: Tabs
 "tab.explore" = "エクスプローラー";
@@ -255,6 +263,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "削除";
 "conversations.action.mark-read" = "既読にする";
+"conversations.action.view-detail" = "詳細を見る";
 "conversations.empty.message" = "ソーシャルメディアへの愛をお探しですか？ダイレクトメッセージやプライベートメッセージはすべてここにあります、ハッピーメッセージ！ 📱❤️";
 "conversations.empty.title" = "受信トレイ・ゼロ";
 "conversations.error.button" = "リトライ";
@@ -327,6 +336,14 @@
 "notifications.tab.all" = "全て";
 "notifications.tab.mentions" = "返信";
 
+"notifications.label.status.push" = "🖊️ 投稿：";
+"notifications.label.reblog.push" = "🚀 ブースト：";
+"notifications.label.follow.push" = "👋 あなたをフォロー：";
+"notifications.label.follow-request.push" = "🔒 フォローリクエスト：";
+"notifications.label.favorite.push" = "⭐️ お気に入りに追加：";
+"notifications.label.poll.push" = "📈 投票終了：";
+"notifications.label.update.push" = "更新：";
+
 // MARK: Package: Timeline
 "timeline.federated" = "連合";
 "timeline.latest" = "最新情報までジャンプ";
@@ -375,8 +392,8 @@
 "status.editor.error.upload" = "アップロードエラー";
 "status.editor.language-select.navigation-title" = "言語設定";
 "status.editor.language-select.recently-used" = "最近使用した";
-"status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
-"status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
+"status.editor.language-select.confirmation.detected-%@" = "%@ で投稿(検出された言語)";
+"status.editor.language-select.confirmation.selected-%@" = "%@ で投稿(選択された言語)";
 "status.editor.media.edit-image" = "イメージの編集";
 "status.editor.media.image-description" = "イメージの説明文";
 "status.editor.mode.edit" = "投稿を編集する";
@@ -445,3 +462,9 @@
 "accessibility.editor.button.drafts" = "下書き";
 "accessibility.editor.button.custom-emojis" = "カスタム絵文字";
 "accessibility.editor.button.language" = "言語";
+
+// MARK: Report
+"report.comment.placeholder" = "追加情報";
+"report.title" = "投稿を報告";
+"report.action.send" = "送信";
+"status.action.report" = "投稿を報告";
