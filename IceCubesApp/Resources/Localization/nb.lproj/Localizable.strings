@@ -462,6 +462,8 @@
 "accessibility.editor.button.drafts" = "Drafts";
 "accessibility.editor.button.custom-emojis" = "Custom emojis";
 "accessibility.editor.button.language" = "Language";
+"accessibility.tabs.timeline.add-account" = "Add account";
+"accessibility.app-account.selector.accounts" = "Accounts";
 
 // MARK: Report
 "report.comment.placeholder" = "Additional Info";

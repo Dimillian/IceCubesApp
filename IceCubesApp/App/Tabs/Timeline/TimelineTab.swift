@@ -159,6 +159,7 @@ struct TimelineTab: View {
     } label: {
       Image(systemName: "person.badge.plus")
     }
+    .accessibilityLabel("accessibility.tabs.timeline.add-account")
   }
 
   @ToolbarContentBuilder

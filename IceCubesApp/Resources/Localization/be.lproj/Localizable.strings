@@ -454,3 +454,5 @@
 "accessibility.editor.button.drafts" = "Чарнавікі";
 "accessibility.editor.button.custom-emojis" = "Уласныя эмодзі";
 "accessibility.editor.button.language" = "Мова";
+"accessibility.tabs.timeline.add-account" = "Add account";
+"accessibility.app-account.selector.accounts" = "Accounts";

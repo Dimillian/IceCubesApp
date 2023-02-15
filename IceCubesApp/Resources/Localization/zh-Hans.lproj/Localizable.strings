@@ -466,6 +466,8 @@
 "accessibility.editor.button.drafts" = "草稿";
 "accessibility.editor.button.custom-emojis" = "自定义表情";
 "accessibility.editor.button.language" = "选择语言";
+"accessibility.tabs.timeline.add-account" = "Add account";
+"accessibility.app-account.selector.accounts" = "Accounts";
 
 // MARK: Report
 "report.comment.placeholder" = "附加信息";

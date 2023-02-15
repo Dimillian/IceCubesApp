@@ -464,6 +464,8 @@
 "accessibility.editor.button.drafts" = "임시 보관함";
 "accessibility.editor.button.custom-emojis" = "커스텀 이모지";
 "accessibility.editor.button.language" = "언어";
+"accessibility.tabs.timeline.add-account" = "Add account";
+"accessibility.app-account.selector.accounts" = "Accounts";
 
 // MARK: Report
 "report.comment.placeholder" = "추가 정보";
