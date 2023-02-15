@@ -127,6 +127,7 @@ public struct AccountDetailView: View {
       FiltersListView()
     })
     .edgesIgnoringSafeArea(.top)
+    .navigationTitle(viewModel.account?.displayName ?? "")
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
       toolbarContent
