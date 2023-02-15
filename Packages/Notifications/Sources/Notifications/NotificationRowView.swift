@@ -7,13 +7,13 @@ import SwiftUI
 import Network
 
 struct NotificationRowView: View {
-  @EnvironmentObject private var client: Client
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var routerPath: RouterPath
   @Environment(\.redactionReasons) private var reasons
 
   let notification: ConsolidatedNotification
+  let client: Client
+  let routerPath: RouterPath
 
   var body: some View {
     HStack(alignment: .top, spacing: 8) {
@@ -176,11 +176,5 @@ struct NotificationRowView: View {
         }
       }
     }
-  }
-}
-
-struct NotificationRowView_Previews: PreviewProvider {
-  static var previews: some View {
-    NotificationRowView(notification: .placeholder())
   }
 }
