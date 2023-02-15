@@ -88,6 +88,7 @@ class NotificationService: UNNotificationServiceExtension {
                                                 currentUser: bestAttemptContent.userInfo["i"] as? String ?? "",
                                                 avatarURL: fileURL)
                 bestAttemptContent = try bestAttemptContent.updating(from: intent) as! UNMutableNotificationContent
+                bestAttemptContent.threadIdentifier = remoteNotification.type
                 if type == .mention {
                   bestAttemptContent.body = notification.body.escape()
                 } else {

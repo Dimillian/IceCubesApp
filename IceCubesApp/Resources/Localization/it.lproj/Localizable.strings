@@ -37,8 +37,8 @@
 "enum.status-actions-display.only-buttons" = "Solo bottoni";
 "enum.status-display-style.compact" = "Compatto";
 "enum.status-display-style.large" = "Completo";
-"enum.swipeactions.icon-with-text" = "Icon with text";
-"enum.swipeactions.icon-only" = "Icon only";
+"enum.swipeactions.icon-with-text" = "Icon e testo";
+"enum.swipeactions.icon-only" = "Solo icone";
 
 // MARK: Instances
 "instance.info.domains" = "Domini";
@@ -65,8 +65,8 @@
 "settings.account.add" = "Aggiungi un account";
 "settings.app.icon" = "Icona dell'applicazione";
 "settings.app.icon.navigation-title" = "Icone";
-"settings.app.icon.official" = "Official icons";
-"settings.app.icon.designed-by" = "Icons by";
+"settings.app.icon.official" = "Icone ufficiali";
+"settings.app.icon.designed-by" = "Icone create da";
 "settings.app.source" = "Sorgenti (link GitHub)";
 "settings.app.support" = "Supporta l'applicazione";
 "settings.app.about" = "Informazioni";
@@ -137,6 +137,8 @@
 "settings.content.expand-media" = "Visualizzazione dei media";
 "settings.content.default-sensitive" = "Segnala sempre i contenuti come sensibili";
 "settings.content.default-visibility" = "Visibilità del post";
+"settings.content.media" = "Media";
+"settings.content.media.show.alt" = "Show ALT texts";
 "settings.content.reading" = "Lettura";
 "settings.content.posting" = "Composizione";
 "enum.expand-media.show" = "Mostra tutti";
@@ -180,8 +182,8 @@
 "settings.swipeactions.status.trailing.left" = "sinistra";
 "settings.swipeactions.status.trailing.right" = "destra";
 "settings.swipeactions.status" = "Post";
-"settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
-"settings.swipeactions.status.icon-style" = "Icon style";
+"settings.swipeactions.status.use-theme-colors" = "Usa i colori del tema al posto dei colori di default";
+"settings.swipeactions.status.icon-style" = "Stile delle icone";
 
 // MARK: Tabs
 "tab.explore" = "Esplora";
@@ -262,7 +264,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Cancella";
 "conversations.action.mark-read" = "Segna come letto";
-"conversations.action.view-detail" = "View detail";
+"conversations.action.view-detail" = "Vedi i dettagli";
 "conversations.empty.message" = "Stai cercando un po' di amore social? Troverai qui tutti i tuoi messaggi diretti e le menzioni private. Buon divertimento! 📱❤️";
 "conversations.empty.title" = "Zero posta in arrivo";
 "conversations.error.button" = "Riprova";
@@ -335,13 +337,13 @@
 "notifications.tab.all" = "Tutto";
 "notifications.tab.mentions" = "Menzioni";
 
-"notifications.label.status.push" = "🖊️ Posted: ";
-"notifications.label.reblog.push" = "🚀 Boosted: ";
-"notifications.label.follow.push" = "👋 Followed you: ";
-"notifications.label.follow-request.push" = "🔒 Requested to follow you: ";
-"notifications.label.favorite.push" = "⭐️ Starred: ";
-"notifications.label.poll.push" = "📈 Poll ended: ";
-"notifications.label.update.push" = "Updated: ";
+"notifications.label.status.push" = "🖊️ ha inviato: ";
+"notifications.label.reblog.push" = "🚀 ha condiviso: ";
+"notifications.label.follow.push" = "👋 ti segue: ";
+"notifications.label.follow-request.push" = "🔒 ha richiesto di seguirti: ";
+"notifications.label.favorite.push" = "⭐️ ha inserito nei preferiti: ";
+"notifications.label.poll.push" = "📈 Sondaggio chiuso: ";
+"notifications.label.update.push" = "ha aggiornato: ";
 
 // MARK: Package: Timeline
 "timeline.federated" = "Federazione";
@@ -463,7 +465,7 @@
 "accessibility.editor.button.language" = "Lingua";
 
 // MARK: Report
-"report.comment.placeholder" = "Additional Info";
-"report.title" = "Report Post";
-"report.action.send" = "Send";
-"status.action.report" = "Report Post";
+"report.comment.placeholder" = "Informazioni aggiuntive";
+"report.title" = "Segnala il messaggio";
+"report.action.send" = "Invia";
+"status.action.report" = "Segnala il messaggio";

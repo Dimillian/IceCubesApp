@@ -113,6 +113,8 @@
 "settings.content.expand-media" = "Multimedia";
 "settings.content.default-sensitive" = "Oznaczaj media jako wrażliwe";
 "settings.content.default-visibility" = "Widoczność postów";
+"settings.content.media" = "Media";
+"settings.content.media.show.alt" = "Show ALT texts";
 "settings.content.reading" = "Czytanie postów";
 "settings.content.posting" = "Wysyłanie postów";
 "enum.expand-media.show" = "Pokazuj wszystkie";

@@ -37,8 +37,8 @@
 "enum.status-actions-display.only-buttons" = "Nur Buttons";
 "enum.status-display-style.compact" = "Kompakt";
 "enum.status-display-style.large" = "Groß";
-"enum.swipeactions.icon-with-text" = "Icon with text";
-"enum.swipeactions.icon-only" = "Icon only";
+"enum.swipeactions.icon-with-text" = "Symbol mit Text";
+"enum.swipeactions.icon-only" = "Nur Symbol";
 
 // MARK: Instances
 "instance.info.domains" = "Domains";
@@ -64,9 +64,9 @@
 // MARK: Settings
 "settings.account.add" = "Account hinzufügen";
 "settings.app.icon" = "App-Icon";
-"settings.app.icon.navigation-title" = "Icons";
-"settings.app.icon.official" = "Official icons";
-"settings.app.icon.designed-by" = "Icons by";
+"settings.app.icon.navigation-title" = "Symbole";
+"settings.app.icon.official" = "Offizielle Symbole";
+"settings.app.icon.designed-by" = "Symbole von";
 "settings.app.source" = "Quellcode (auf GitHub)";
 "settings.app.support" = "Unterstütze die App";
 "settings.app.about" = "Über Ice Cubes";
@@ -137,6 +137,8 @@
 "settings.content.expand-media" = "Medienansicht";
 "settings.content.default-sensitive" = "Medien immer als sensibel kennzeichnen";
 "settings.content.default-visibility" = "Sichtbarkeit Beiträge";
+"settings.content.media" = "Media";
+"settings.content.media.show.alt" = "Show ALT texts";
 "settings.content.reading" = "Lesen";
 "settings.content.posting" = "Schreiben";
 "settings.push.duplicate.title" = "Doppelte-Mitteilungen-Korrigierer";
@@ -177,8 +179,8 @@
 "settings.swipeactions.status.trailing.left" = "links";
 "settings.swipeactions.status.trailing.right" = "rechts";
 "settings.swipeactions.status" = "Beitrag";
-"settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
-"settings.swipeactions.status.icon-style" = "Icon style";
+"settings.swipeactions.status.use-theme-colors" = "Farbschema anstelle der Standardfarben verwenden";
+"settings.swipeactions.status.icon-style" = "Symbolstil";
 
 "enum.expand-media.show" = "Alle zeigen";
 "enum.expand-media.hide" = "Alle ausblenden";
@@ -331,13 +333,13 @@
 "notifications.tab.all" = "Alle";
 "notifications.tab.mentions" = "Erwähnungen";
 
-"notifications.label.status.push" = "🖊️ Posted: ";
-"notifications.label.reblog.push" = "🚀 Boosted: ";
-"notifications.label.follow.push" = "👋 Followed you: ";
-"notifications.label.follow-request.push" = "🔒 Requested to follow you: ";
-"notifications.label.favorite.push" = "⭐️ Starred: ";
-"notifications.label.poll.push" = "📈 Poll ended: ";
-"notifications.label.update.push" = "Updated: ";
+"notifications.label.status.push" = "🖊️ Neuer Beitrag: ";
+"notifications.label.reblog.push" = "🚀 Geboostet: ";
+"notifications.label.follow.push" = "👋 Folgt dir: ";
+"notifications.label.follow-request.push" = "🔒 Möchte dir folgen: ";
+"notifications.label.favorite.push" = "⭐️ Favorisiert: ";
+"notifications.label.poll.push" = "📈 Umfrage beendet: ";
+"notifications.label.update.push" = "Aktualisiert: ";
 
 // MARK: Package: Timeline
 "timeline.federated" = "Föderiert";

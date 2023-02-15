@@ -117,6 +117,8 @@
 "settings.content.expand-media" = "メディア表示";
 "settings.content.default-sensitive" = "常にメディアをセンシティブなものとしてマークする";
 "settings.content.default-visibility" = "投稿の可視化";
+"settings.content.media" = "Media";
+"settings.content.media.show.alt" = "Show ALT texts";
 "settings.content.reading" = "リーディング";
 "settings.content.posting" = "ポスティング";
 "enum.expand-media.show" = "全て表示";

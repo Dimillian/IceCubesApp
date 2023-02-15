@@ -2,6 +2,38 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>account.detail.n-fields %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@accountDetailFields@</string>
+		<key>accountDetailFields</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Eremu %lld</string>
+			<key>other</key>
+			<string>%lld eremu</string>
+		</dict>
+	</dict>
+    <key>account.detail.featured-tags-n-posts %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@accountDetailFeaturedTagsPosts@</string>
+		<key>accountDetailFeaturedTagsPosts</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Bidalketa %lld</string>
+			<key>other</key>
+			<string>%lld bidalketa</string>
+		</dict>
+	</dict>
     <key>timeline-new-posts %lld</key>
     <dict>
         <key>NSStringLocalizedFormatKey</key>
@@ -13,7 +45,7 @@
             <key>NSStringFormatValueTypeKey</key>
             <string>lld</string>
             <key>one</key>
-            <string>%bidalketa berri lld</string>
+            <string>Bidalketa berri %lld</string>
             <key>other</key>
             <string>%lld bidalketa berri</string>
         </dict>
@@ -34,5 +66,171 @@
             <string> eta beste %lld </string>
         </dict>
     </dict>
+    <key>notifications.label.favorite %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Batek gogoko egin du</string>
+			<key>other</key>
+			<string>%lld(e)k egin dute gogoko</string>
+		</dict>
+	</dict>
+    <key>notifications.label.follow %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Jarraitzaile %lld duzu</string>
+			<key>other</key>
+			<string>%lld jarraitzaile dituzu</string>
+		</dict>
+	</dict>
+    <key>notifications.label.mention %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Aipamen %lld duzu</string>
+			<key>other</key>
+			<string>%lld aipamen dituzu</string>
+		</dict>
+	</dict>
+    <key>notifications.label.reblog %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@count@</string>
+		<key>count</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Bultzada %lld jaso duzu</string>
+			<key>other</key>
+			<string>%lld bultzada jaso dituzu</string>
+		</dict>
+	</dict>
+    <key>status.summary.n-favorites %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@statusFavouritesCount@</string>
+		<key>statusFavouritesCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>batek gogoko</string>
+			<key>other</key>
+			<string>%lld(e)k gogoko</string>
+		</dict>
+	</dict>
+    <key>status.summary.n-boosts %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@statusBoostsCount@</string>
+		<key>statusBoostsCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Bultzada %lld</string>
+			<key>other</key>
+			<string>%lld bultzada</string>
+		</dict>
+	</dict>
+    <key>status.poll.n-votes %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@statusVotesCount@</string>
+		<key>statusVotesCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Boto %lld</string>
+			<key>other</key>
+			<string>%lld boto</string>
+		</dict>
+	</dict>
+    <key>design.tag.n-posts-from-n-participants %lld %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@tagParticipantsCount@ %#@tagPostsCount@</string>
+		<key>tagPostsCount</key>
+		<dict>
+            <key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Partaide batek egindako</string>
+			<key>other</key>
+			<string>%lld partaidek egindako</string>
+		</dict>
+		<key>tagParticipantsCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>bidalketa %lld</string>
+			<key>other</key>
+			<string>%lld bidalketa</string>
+		</dict>
+	</dict>
+    <key>timeline.n-recent-from-n-participants %lld %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@tagParticipantsCount@ %#@tagPostsCount@</string>
+		<key>tagPostsCount</key>
+		<dict>
+            <key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Partaide batek egindako</string>
+			<key>other</key>
+			<string>%lld partaidek egindako</string>
+		</dict>
+		<key>tagParticipantsCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>bidalketa %lld</string>
+			<key>other</key>
+			<string>%lld bidalketa</string>
+		</dict>
+	</dict>
 </dict>
 </plist>

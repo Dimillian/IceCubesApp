@@ -137,6 +137,8 @@
 "settings.content.expand-media" = "Mostrar el contenido multimedia";
 "settings.content.default-sensitive" = "Marcar siempre el contenido multimedia como sensible";
 "settings.content.default-visibility" = "Publicar visibilidad";
+"settings.content.media" = "Media";
+"settings.content.media.show.alt" = "Show ALT texts";
 "settings.content.reading" = "Leyendo";
 "settings.content.posting" = "Publicando";
 "settings.push.duplicate.title" = "Arreglar notificaciones duplicadas";

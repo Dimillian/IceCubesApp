@@ -113,6 +113,8 @@
 "settings.content.expand-media" = "Exibição de mídia";
 "settings.content.default-sensitive" = "Sempre marcar mídias como sensíveis";
 "settings.content.default-visibility" = "Visibilidade da postagem";
+"settings.content.media" = "Media";
+"settings.content.media.show.alt" = "Show ALT texts";
 "settings.content.reading" = "Lendo";
 "settings.content.posting" = "Postagem";
 "enum.expand-media.show" = "Exibir Todas";
