@@ -462,6 +462,8 @@
 "accessibility.editor.button.drafts" = "下書き";
 "accessibility.editor.button.custom-emojis" = "カスタム絵文字";
 "accessibility.editor.button.language" = "言語";
+"accessibility.tabs.timeline.add-account" = "Add account";
+"accessibility.app-account.selector.accounts" = "Accounts";
 
 // MARK: Report
 "report.comment.placeholder" = "追加情報";

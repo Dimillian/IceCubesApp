@@ -463,6 +463,8 @@
 "accessibility.editor.button.drafts" = "Bozze";
 "accessibility.editor.button.custom-emojis" = "Emoji personalizzate";
 "accessibility.editor.button.language" = "Lingua";
+"accessibility.tabs.timeline.add-account" = "Add account";
+"accessibility.app-account.selector.accounts" = "Accounts";
 
 // MARK: Report
 "report.comment.placeholder" = "Informazioni aggiuntive";
