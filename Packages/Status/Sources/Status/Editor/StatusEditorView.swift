@@ -213,7 +213,7 @@ public struct StatusEditorView: View {
 
   @ViewBuilder
   private var accountHeaderView: some View {
-    if let account = currentAccount.account {
+    if let account = currentAccount.account, !viewModel.mode.isEditing {
       HStack {
         AppAccountsSelectorView(routerPath: RouterPath(),
                                 accountCreationEnabled: false,

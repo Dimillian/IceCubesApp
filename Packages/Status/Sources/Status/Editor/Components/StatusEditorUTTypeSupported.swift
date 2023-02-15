@@ -21,6 +21,8 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
   case gif = "public.gif"
   case gif2 = "com.compuserve.gif"
   case quickTimeMovie = "com.apple.quicktime-movie"
+  
+  case uiimage = "com.apple.uikit.image"
 
   static func types() -> [UTType] {
     [.url, .text, .plainText, .image, .jpeg, .png, .tiff, .video, .mpeg4Movie, .gif, .movie, .quickTimeMovie]
@@ -51,7 +53,7 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
     } else if isGif, let transferable = await getGifTransferable(item: item) {
       return transferable
     }
-    if self == .jpeg || self == .png || self == .tiff || self == .image {
+    if self == .jpeg || self == .png || self == .tiff || self == .image || self == .uiimage {
       if let imageURL = result as? URL,
          let data = try? Data(contentsOf: imageURL),
          let image = UIImage(data: data)
