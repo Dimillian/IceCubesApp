@@ -186,7 +186,7 @@
 "settings.swipeactions.status.icon-style" = "アイコンスタイル";
 
 // MARK: Tabs
-"tab.explore" = "エクスプローラー";
+"tab.explore" = "検索";
 "tab.federated" = "連合";
 "tab.local" = "ローカル";
 "tab.messages" = "メッセージ";
@@ -278,7 +278,7 @@
 "design.theme.toots-preview" = "トゥートプレビュー";
 
 // MARK: Package: Explore
-"explore.navigation-title" = "エクスプローラー";
+"explore.navigation-title" = "検索";
 "explore.search.message-%@" = "ここからあらゆるものを検索することができます %@";
 "explore.search.prompt" = "ユーザー、投稿、タグの検索";
 "explore.search.title" = "インスタンスの検索";
