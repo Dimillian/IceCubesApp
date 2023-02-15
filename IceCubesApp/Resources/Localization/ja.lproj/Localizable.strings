@@ -185,6 +185,9 @@
 "settings.swipeactions.status.use-theme-colors" = "デフォルトの色の代わりにテーマの色を使用する";
 "settings.swipeactions.status.icon-style" = "アイコンスタイル";
 
+"settings.display.section.font" = "Font";
+"settings.display.font.rounded" = "Use SF Rounded";
+
 // MARK: Tabs
 "tab.explore" = "エクスプローラー";
 "tab.federated" = "連合";

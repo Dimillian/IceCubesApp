@@ -182,6 +182,9 @@
 "settings.swipeactions.status.use-theme-colors" = "Usar colores del tema en lugar de los colores por defecto";
 "settings.swipeactions.status.icon-style" = "Estilo de icono";
 
+"settings.display.section.font" = "Font";
+"settings.display.font.rounded" = "Use SF Rounded";
+
 "enum.expand-media.show" = "Siempre";
 "enum.expand-media.hide" = "Nunca";
 "enum.expand-media.hide-sensitive" = "Ocultar contenido sensible";

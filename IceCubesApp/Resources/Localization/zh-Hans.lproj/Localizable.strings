@@ -185,6 +185,9 @@
 "settings.swipeactions.status.use-theme-colors" = "使用主题色而不是默认色";
 "settings.swipeactions.status.icon-style" = "图标样式";
 
+"settings.display.section.font" = "Font";
+"settings.display.font.rounded" = "Use SF Rounded";
+
 // MARK: Tabs
 "tab.explore" = "探索";
 "tab.federated" = "跨站";

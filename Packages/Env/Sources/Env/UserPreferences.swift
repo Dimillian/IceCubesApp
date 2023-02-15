@@ -47,6 +47,8 @@ public class UserPreferences: ObservableObject {
   @AppStorage("swipeactions-status-leading-right") public var swipeActionsStatusLeadingRight = StatusAction.none
   @AppStorage("swipeactions-use-theme-color") public var swipeActionsUseThemeColor = false
   @AppStorage("swipeactions-icon-style") public var swipeActionsIconStyle: SwipeActionsIconStyle = .iconWithText
+  
+  @AppStorage("font_use_sf_rounded") public var useSFRoundedFont = false
 
   public enum SwipeActionsIconStyle: String, CaseIterable {
     case iconWithText, iconOnly

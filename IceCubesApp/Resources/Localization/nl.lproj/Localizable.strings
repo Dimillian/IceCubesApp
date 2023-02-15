@@ -182,6 +182,9 @@
 "settings.swipeactions.status.use-theme-colors" = "Gebruik themakleuren in plaats van standaardkleuren";
 "settings.swipeactions.status.icon-style" = "Symboolstijl";
 
+"settings.display.section.font" = "Font";
+"settings.display.font.rounded" = "Use SF Rounded";
+
 // MARK: Tabs
 "tab.explore" = "Ontdekken";
 "tab.federated" = "Gefedereerd";
