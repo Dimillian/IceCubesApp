@@ -294,6 +294,7 @@
 "env.poll-duration.30m" = "30 minut";
 "env.poll-duration.1h" = "1 godzina";
 "env.poll-duration.6h" = "6 godzin";
+"env.poll-duration.12h" = "12 godzin";
 "env.poll-duration.1d" = "1 dzień";
 "env.poll-duration.3d" = "3 dni";
 "env.poll-duration.7d" = "7 dni";

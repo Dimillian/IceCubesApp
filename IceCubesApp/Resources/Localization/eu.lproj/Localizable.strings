@@ -297,6 +297,7 @@
 "env.poll-duration.30m" = "30 minutu";
 "env.poll-duration.1h" = "Ordubete";
 "env.poll-duration.6h" = "6 ordu";
+"env.poll-duration.12h" = "12 ordu";
 "env.poll-duration.1d" = "Egun 1";
 "env.poll-duration.3d" = "3 egun";
 "env.poll-duration.7d" = "7 egun";

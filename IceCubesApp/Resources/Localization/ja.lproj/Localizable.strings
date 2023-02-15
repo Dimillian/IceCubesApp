@@ -297,6 +297,7 @@
 "env.poll-duration.30m" = "30分間";
 "env.poll-duration.1h" = "1時間";
 "env.poll-duration.6h" = "6時間";
+"env.poll-duration.12h" = "12時間";
 "env.poll-duration.1d" = "1日間";
 "env.poll-duration.3d" = "3日間";
 "env.poll-duration.7d" = "7日間";
