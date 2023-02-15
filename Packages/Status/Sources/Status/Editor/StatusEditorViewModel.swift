@@ -256,7 +256,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
       self.visibility = visibility
       selectedRange = .init(location: statusText.string.utf16.count, length: 0)
     case let .edit(status):
-      var rawText = status.content.asRawText
+      var rawText = status.content.asRawText.escape()
       for mention in status.mentions {
         rawText = rawText.replacingOccurrences(of: "@\(mention.username)", with: "@\(mention.acct)")
       }
