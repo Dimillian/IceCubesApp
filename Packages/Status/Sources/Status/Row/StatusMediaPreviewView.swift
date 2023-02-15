@@ -212,7 +212,6 @@ public struct StatusMediaPreviewView: View {
                     .fill(Color.gray)
                     .frame(maxHeight: imageMaxHeight)
                     .frame(maxWidth: isNotifications ? imageMaxHeight : proxy.frame(in: .local).width)
-                    .shimmering()
                 }
               }
               .frame(maxWidth: isNotifications ? imageMaxHeight : proxy.frame(in: .local).width)

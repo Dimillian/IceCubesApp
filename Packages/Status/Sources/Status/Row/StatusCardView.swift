@@ -25,7 +25,6 @@ public struct StatusCardView: View {
               Rectangle()
                 .fill(Color.gray)
                 .frame(height: 200)
-                .shimmering()
             }
           }
           .frame(height: 200)

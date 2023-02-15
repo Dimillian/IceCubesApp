@@ -99,7 +99,9 @@ public struct StatusRowView: View {
                            trailing: .layoutPadding))
       .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
       .accessibilityActions {
-        accesibilityActions
+        if UIAccessibility.isVoiceOverRunning {
+          accesibilityActions
+        }
       }
       .background {
         Color.clear
