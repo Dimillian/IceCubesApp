@@ -145,6 +145,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
   func evaluateLanguages() {
     if let detectedLang = detectLanguage(text: statusText.string),
        let selectedLanguage = selectedLanguage,
+       selectedLanguage != "",
        selectedLanguage != detectedLang
     {
       languageConfirmationDialogLanguages = ["detected": detectedLang,
