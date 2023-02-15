@@ -241,14 +241,14 @@
 "account.edit.post-settings.sensitive" = "センシティブな内容";
 "account.favorited-by" = "お気に入りされた";
 "account.follow.follow" = "フォロー";
-"account.follow.following" = "フォローしている";
+"account.follow.following" = "フォロー中";
 "account.follow.requested" = "リクエストしました";
 "account.follow-request.accept" = "承認";
 "account.follow-request.reject" = "拒否";
 "account.follow-requests.pending-requests" = "リクエスト申請中";
 "account.follow-requests.instructions" = "これらのユーザーはあなたが承認するまで、あなたの投稿を見ることはできません";
 "account.followers" = "フォロワー";
-"account.following" = "フォローしている";
+"account.following" = "フォロー中";
 "account.list.create" = "新しいリストを作成";
 "account.list.create.confirm" = "リストを作成";
 "account.list.create.description" = "リストの名前を入力";
@@ -256,7 +256,7 @@
 "account.list.name" = "リストの名前";
 "account.post.pinned" = "固定した投稿";
 "account.posts" = "投稿";
-"account.relation.follows-you" = "あなたをフォローしている";
+"account.relation.follows-you" = "フォローされています";
 "account.joined" = "登録日";
 "account.action.logout" = "アカウントをログアウトする";
 
