@@ -25,8 +25,10 @@ public struct StatusRowView: View {
       switch filter.filter.filterAction {
       case .warn:
         makeFilterView(filter: filter.filter)
+          .listRowBackground(viewModel.highlightRowColor)
       case .hide:
         EmptyView()
+          .listRowSeparator(.hidden)
       }
     } else {
       VStack(alignment: .leading) {
@@ -79,7 +81,7 @@ public struct StatusRowView: View {
       .contextMenu {
         contextMenu
       }
-      .listRowBackground(viewModel.highlightRowColor)
+      
       .swipeActions(edge: .trailing) {
         if !viewModel.isCompact {
           trailingSwipeActions
@@ -90,6 +92,7 @@ public struct StatusRowView: View {
           leadingSwipeActions
         }
       }
+      .listRowBackground(viewModel.highlightRowColor)
       .listRowInsets(.init(top: 12,
                            leading: .layoutPadding,
                            bottom: 12,
