@@ -138,7 +138,7 @@
 "settings.content.default-sensitive" = "Markeer media standaard als gevoelig";
 "settings.content.default-visibility" = "Standaard postzichtbaarheid";
 "settings.content.media" = "Media";
-"settings.content.media.show.alt" = "Show ALT texts";
+"settings.content.media.show.alt" = "Toon ALT-teksten";
 "settings.content.reading" = "Lezen";
 "settings.content.posting" = "Posten";
 "settings.push.duplicate.title" = "Dubbele meldingen";
@@ -330,13 +330,13 @@
 "notifications.tab.all" = "Alle";
 "notifications.tab.mentions" = "Vermeldingen";
 
-"notifications.label.status.push" = "🖊️ Posted: ";
-"notifications.label.reblog.push" = "🚀 Boosted: ";
-"notifications.label.follow.push" = "👋 Followed you: ";
-"notifications.label.follow-request.push" = "🔒 Requested to follow you: ";
-"notifications.label.favorite.push" = "⭐️ Starred: ";
-"notifications.label.poll.push" = "📈 Poll ended: ";
-"notifications.label.update.push" = "Updated: ";
+"notifications.label.status.push" = "🖊️ Heeft gepost: ";
+"notifications.label.reblog.push" = "🚀 Heeft geboost: ";
+"notifications.label.follow.push" = "👋 Volgt jou: ";
+"notifications.label.follow-request.push" = "🔒 Wil je volgen: ";
+"notifications.label.favorite.push" = "⭐️ Heeft als favoriet gemarkeerd: ";
+"notifications.label.poll.push" = "📈 Poll is beëindigd: ";
+"notifications.label.update.push" = "Bijgewerkt: ";
 
 // MARK: Package: Timeline
 "timeline.federated" = "Gefedereerd";
