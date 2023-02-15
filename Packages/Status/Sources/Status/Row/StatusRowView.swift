@@ -10,8 +10,6 @@ public struct StatusRowView: View {
   @Environment(\.redactionReasons) private var reasons
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var routerPath: RouterPath
   @StateObject var viewModel: StatusRowViewModel
 
   public init(viewModel: StatusRowViewModel) {
@@ -42,7 +40,7 @@ public struct StatusRowView: View {
              let status: AnyStatus = viewModel.status.reblog ?? viewModel.status
           {
             Button {
-              routerPath.navigate(to: .accountDetailWithAccount(account: status.account))
+              viewModel.routerPath.navigate(to: .accountDetailWithAccount(account: status.account))
             } label: {
               AvatarView(url: status.account.avatar, size: .status)
             }
@@ -59,7 +57,7 @@ public struct StatusRowView: View {
                 .tint(viewModel.isFocused ? theme.tintColor : .gray)
                 .contentShape(Rectangle())
                 .onTapGesture {
-                  viewModel.navigateToDetail(routerPath: routerPath)
+                  viewModel.navigateToDetail()
                 }
             }
           }
@@ -68,7 +66,6 @@ public struct StatusRowView: View {
       .onAppear {
         viewModel.markSeen()
         if reasons.isEmpty {
-          viewModel.client = client
           if !viewModel.isCompact, viewModel.embeddedStatus == nil {
             Task {
               await viewModel.loadEmbeddedStatus()
@@ -105,7 +102,7 @@ public struct StatusRowView: View {
         Color.clear
           .contentShape(Rectangle())
           .onTapGesture {
-            viewModel.navigateToDetail(routerPath: routerPath)
+            viewModel.navigateToDetail()
           }
       }
       .overlay {
@@ -138,7 +135,7 @@ public struct StatusRowView: View {
     // Add the individual mentions as accessibility actions
     ForEach(viewModel.status.mentions, id: \.id) { mention in
       Button("@\(mention.username)") {
-        routerPath.navigate(to: .accountDetail(id: mention.id))
+        viewModel.routerPath.navigate(to: .accountDetail(id: mention.id))
       }
     }
 
@@ -149,7 +146,7 @@ public struct StatusRowView: View {
     }
 
     Button("@\(viewModel.status.account.username)") {
-      routerPath.navigate(to: .accountDetail(id: viewModel.status.account.id))
+      viewModel.routerPath.navigate(to: .accountDetail(id: viewModel.status.account.id))
     }
 
     contextMenu
@@ -187,7 +184,7 @@ public struct StatusRowView: View {
       .foregroundColor(.gray)
       .fontWeight(.semibold)
       .onTapGesture {
-        viewModel.navigateToAccountDetail(account: viewModel.status.account, routerPath: routerPath)
+        viewModel.navigateToAccountDetail(account: viewModel.status.account)
       }
     }
   }
@@ -206,7 +203,7 @@ public struct StatusRowView: View {
       .foregroundColor(.gray)
       .fontWeight(.semibold)
       .onTapGesture {
-        viewModel.navigateToMention(mention: mention, routerPath: routerPath)
+        viewModel.navigateToMention(mention: mention)
       }
     }
   }
@@ -217,7 +214,7 @@ public struct StatusRowView: View {
         if !viewModel.isCompact {
           HStack(alignment: .center) {
             Button {
-              viewModel.navigateToAccountDetail(account: status.account, routerPath: routerPath)
+              viewModel.navigateToAccountDetail(account: status.account)
             } label: {
               accountView(status: status)
             }
@@ -232,13 +229,13 @@ public struct StatusRowView: View {
         makeStatusContentView(status: status)
           .contentShape(Rectangle())
           .onTapGesture {
-            viewModel.navigateToDetail(routerPath: routerPath)
+            viewModel.navigateToDetail()
           }
       }
     }
     .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
     .accessibilityAction {
-      viewModel.navigateToDetail(routerPath: routerPath)
+      viewModel.navigateToDetail()
     }
   }
 
@@ -278,7 +275,7 @@ public struct StatusRowView: View {
           EmojiTextApp(status.content, emojis: status.emojis, language: status.language)
             .font(.scaledBody)
             .environment(\.openURL, OpenURLAction { url in
-              routerPath.handleStatus(status: status, url: url)
+              viewModel.routerPath.handleStatus(status: status, url: url)
             })
           Spacer()
         }
@@ -437,10 +434,10 @@ public struct StatusRowView: View {
       if !viewModel.isCompact, !viewModel.isEmbedLoading,
          let embed = viewModel.embeddedStatus
       {
-        StatusEmbeddedView(status: embed)
+        StatusEmbeddedView(status: embed, client: viewModel.client, routerPath: viewModel.routerPath)
           .fixedSize(horizontal: false, vertical: true)
       } else if viewModel.isEmbedLoading, !viewModel.isCompact {
-        StatusEmbeddedView(status: .placeholder())
+        StatusEmbeddedView(status: .placeholder(), client: viewModel.client, routerPath: viewModel.routerPath)
           .redacted(reason: .placeholder)
           .shimmering()
       }
@@ -528,7 +525,7 @@ public struct StatusRowView: View {
   private func makeSwipeButtonForRouterPath(action: StatusAction, destination: SheetDestinations) -> some View {
     Button {
       HapticManager.shared.fireHaptic(of: .notification(.success))
-      routerPath.presentedSheet = destination
+      viewModel.routerPath.presentedSheet = destination
     } label: {
       makeSwipeLabel(action: action, style: preferences.swipeActionsIconStyle)
     }

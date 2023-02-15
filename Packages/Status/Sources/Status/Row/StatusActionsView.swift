@@ -6,7 +6,6 @@ import SwiftUI
 
 struct StatusActionsView: View {
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var routerPath: RouterPath
   @ObservedObject var viewModel: StatusRowViewModel
 
   @MainActor
@@ -108,7 +107,7 @@ struct StatusActionsView: View {
       HapticManager.shared.fireHaptic(of: .notification(.success))
       switch action {
       case .respond:
-        routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)
+        viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)
       case .favorite:
         if viewModel.isFavorited {
           await viewModel.unFavorite()

@@ -5,7 +5,6 @@ import SwiftUI
 
 struct StatusRowDetailView: View {
   @Environment(\.openURL) private var openURL
-  @EnvironmentObject private var routerPath: RouterPath
 
   @ObservedObject var viewModel: StatusRowViewModel
 
@@ -40,7 +39,7 @@ struct StatusRowDetailView: View {
           Spacer()
         }
         .onTapGesture {
-          routerPath.presentedSheet = .statusEditHistory(status: viewModel.status.id)
+          viewModel.routerPath.presentedSheet = .statusEditHistory(status: viewModel.status.id)
         }
         .underline()
         .font(.scaledCaption)
@@ -50,7 +49,7 @@ struct StatusRowDetailView: View {
       if viewModel.favoritesCount > 0 {
         Divider()
         Button {
-          routerPath.navigate(to: .favoritedBy(id: viewModel.status.id))
+          viewModel.routerPath.navigate(to: .favoritedBy(id: viewModel.status.id))
         } label: {
           HStack {
             Text("status.summary.n-favorites \(viewModel.favoritesCount)")
@@ -66,7 +65,7 @@ struct StatusRowDetailView: View {
       if viewModel.reblogsCount > 0 {
         Divider()
         Button {
-          routerPath.navigate(to: .rebloggedBy(id: viewModel.status.id))
+          viewModel.routerPath.navigate(to: .rebloggedBy(id: viewModel.status.id))
         } label: {
           HStack {
             Text("status.summary.n-boosts \(viewModel.reblogsCount)")

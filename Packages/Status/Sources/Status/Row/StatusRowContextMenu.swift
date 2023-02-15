@@ -6,7 +6,6 @@ struct StatusRowContextMenu: View {
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var currentInstance: CurrentInstance
-  @EnvironmentObject private var routerPath: RouterPath
 
   @ObservedObject var viewModel: StatusRowViewModel
 
@@ -41,7 +40,7 @@ struct StatusRowContextMenu: View {
               systemImage: "bookmark")
       }
       Button {
-        routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
+        viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
       } label: {
         Label("status.action.reply", systemImage: "arrowshape.turn.up.left")
       }
@@ -49,7 +48,7 @@ struct StatusRowContextMenu: View {
 
     if viewModel.status.visibility == .pub, !viewModel.isRemote {
       Button {
-        routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
+        viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
       } label: {
         Label("status.action.quote", systemImage: "quote.bubble")
       }
@@ -110,7 +109,7 @@ struct StatusRowContextMenu: View {
         }
         if currentInstance.isEditSupported {
           Button {
-            routerPath.presentedSheet = .editStatusEditor(status: viewModel.status)
+            viewModel.routerPath.presentedSheet = .editStatusEditor(status: viewModel.status)
           } label: {
             Label("status.action.edit", systemImage: "pencil")
           }
@@ -123,12 +122,12 @@ struct StatusRowContextMenu: View {
       if !viewModel.isRemote {
         Section(viewModel.status.account.acct) {
           Button {
-            routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.account, visibility: .pub)
+            viewModel.routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.account, visibility: .pub)
           } label: {
             Label("status.action.mention", systemImage: "at")
           }
           Button {
-            routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.account, visibility: .direct)
+            viewModel.routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.account, visibility: .direct)
           } label: {
             Label("status.action.message", systemImage: "tray.full")
           }
@@ -136,7 +135,7 @@ struct StatusRowContextMenu: View {
       }
       Section {
         Button(role: .destructive) {
-          routerPath.presentedSheet = .report(status: viewModel.status.reblogAsAsStatus ?? viewModel.status)
+          viewModel.routerPath.presentedSheet = .report(status: viewModel.status.reblogAsAsStatus ?? viewModel.status)
         } label: {
           Label("status.action.report", systemImage: "exclamationmark.bubble")
         }

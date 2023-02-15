@@ -4,8 +4,10 @@ import Env
 import Models
 import Status
 import SwiftUI
+import Network
 
 struct NotificationRowView: View {
+  @EnvironmentObject private var client: Client
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var routerPath: RouterPath
@@ -132,9 +134,17 @@ struct NotificationRowView: View {
     if let status = notification.status {
       HStack {
         if type == .mention {
-          StatusRowView(viewModel: .init(status: status, isCompact: true, showActions: true))
+          StatusRowView(viewModel: .init(status: status,
+                                         client: client,
+                                         routerPath: routerPath,
+                                         isCompact: true,
+                                         showActions: true))
         } else {
-          StatusRowView(viewModel: .init(status: status, isCompact: true, showActions: false))
+          StatusRowView(viewModel: .init(status: status,
+                                         client: client,
+                                         routerPath: routerPath,
+                                         isCompact: true,
+                                         showActions: false))
             .lineLimit(4)
             .foregroundColor(.gray)
         }

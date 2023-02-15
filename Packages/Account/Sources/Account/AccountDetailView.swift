@@ -68,7 +68,7 @@ public struct AccountDetailView: View {
           if viewModel.selectedTab == .statuses {
             pinnedPostsView
           }
-          StatusesListView(fetcher: viewModel)
+          StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath)
         case .followedTags:
           tagsListView
         case .lists:
@@ -336,7 +336,7 @@ public struct AccountDetailView: View {
         .listRowSeparator(.hidden)
         .listRowBackground(theme.primaryBackgroundColor)
       ForEach(viewModel.pinned) { status in
-        StatusRowView(viewModel: .init(status: status))
+        StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
       }
       Rectangle()
         .fill(theme.secondaryBackgroundColor)

@@ -3,6 +3,7 @@ import Env
 import Models
 import Status
 import SwiftUI
+import Network
 
 struct DisplaySettingsView: View {
   typealias FontState = Theme.FontState
@@ -12,7 +13,9 @@ struct DisplaySettingsView: View {
   @EnvironmentObject private var userPreferences: UserPreferences
 
   @State private var isFontSelectorPresented = false
-  private var previewStatusViewModel = StatusRowViewModel(status: Status.placeholder(forSettings: true, language: "la")) // translate from latin button
+  private var previewStatusViewModel = StatusRowViewModel(status: Status.placeholder(forSettings: true, language: "la"),
+                                                          client: Client(server: ""),
+                                                          routerPath: RouterPath()) // translate from latin button
   var body: some View {
     Form {
       Section("settings.display.example-toot") {

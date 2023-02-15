@@ -29,7 +29,7 @@ public struct ReportView: View {
         }
         .listRowBackground(theme.primaryBackgroundColor)
         
-        StatusEmbeddedView(status: status)
+        StatusEmbeddedView(status: status, client: .init(server: ""), routerPath: RouterPath())
           .allowsHitTesting(false)
           .listRowBackground(theme.primaryBackgroundColor)
       }
