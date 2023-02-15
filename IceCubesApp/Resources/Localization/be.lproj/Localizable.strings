@@ -216,7 +216,7 @@
 "account.action.unmute" = "Уключыць гук";
 "account.action.share" = "Падзяліцца гэтым уліковым запісам";
 "account.boosted-by" = "Павялічана";
-"account.detail.about" = "Дадзеныя"
+"account.detail.about" = "Дадзеныя";
 "account.detail.familiar-followers" = "Таксама адсочваецца";
 "account.detail.n-fields %lld" = "%lld палёў";
 "account.detail.featured-tags-n-posts %lld" = "%lld допісаў";
