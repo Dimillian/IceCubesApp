@@ -45,6 +45,7 @@ public protocol AnyStatus {
   var emojis: [Emoji] { get }
   var url: String? { get }
   var application: Application? { get }
+  var inReplyToId: String? { get }
   var inReplyToAccountId: String? { get }
   var visibility: Visibility { get }
   var poll: Poll? { get }
@@ -97,6 +98,7 @@ public struct Status: AnyStatus, Codable, Identifiable, Equatable, Hashable, Sta
   public let emojis: [Emoji]
   public let url: String?
   public let application: Application?
+  public let inReplyToId: String?
   public let inReplyToAccountId: String?
   public let visibility: Visibility
   public let poll: Poll?
@@ -126,6 +128,7 @@ public struct Status: AnyStatus, Codable, Identifiable, Equatable, Hashable, Sta
           emojis: [],
           url: "https://example.com",
           application: nil,
+          inReplyToId: nil,
           inReplyToAccountId: nil,
           visibility: .pub,
           poll: nil,
@@ -160,6 +163,7 @@ public struct Status: AnyStatus, Codable, Identifiable, Equatable, Hashable, Sta
                    emojis: reblog.emojis,
                    url: reblog.url,
                    application: reblog.application,
+                   inReplyToId: reblog.inReplyToId,
                    inReplyToAccountId: reblog.inReplyToAccountId,
                    visibility: reblog.visibility,
                    poll: reblog.poll,
@@ -199,6 +203,7 @@ public struct ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Hashabl
   public let emojis: [Emoji]
   public let url: String?
   public var application: Application?
+  public let inReplyToId: String?
   public let inReplyToAccountId: String?
   public let visibility: Visibility
   public let poll: Poll?

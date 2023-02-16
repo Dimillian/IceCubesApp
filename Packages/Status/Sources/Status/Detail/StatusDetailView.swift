@@ -40,17 +40,8 @@ public struct StatusDetailView: View {
           case .loading:
             loadingDetailView
 
-          case let .display(status, context, date):
-            if !context.ancestors.isEmpty {
-              makeStatusesListView(statuses: context.ancestors)
-            }
-
-            makeCurrentStatusView(status: status)
-              .id(date)
-
-            if !context.descendants.isEmpty {
-              makeStatusesListView(statuses: context.descendants)
-            }
+          case let .display(statuses):
+            makeStatusesListView(statuses: statuses)
 
             if !isLoaded {
               loadingContextView
@@ -107,7 +98,7 @@ public struct StatusDetailView: View {
       var isReplyToPrevious: Bool = false
       if let index = statuses.firstIndex(where: { $0.id == status.id }),
          index > 0,
-         statuses[index - 1].inReplyToAccountId == status.account.id {
+         statuses[index - 1].id == status.inReplyToId {
         isReplyToPrevious = true
       }
       let viewModel: StatusRowViewModel = .init(status: status,
@@ -120,7 +111,12 @@ public struct StatusDetailView: View {
             .fill(theme.tintColor)
             .frame(width: 2)
         }
-        StatusRowView(viewModel: viewModel)
+        if self.viewModel.statusId == status.id {
+          makeCurrentStatusView(status: status)
+            .id(Date())
+        } else {
+          StatusRowView(viewModel: viewModel)
+        }
       }
       .listRowBackground(viewModel.highlightRowColor)
       .listRowInsets(.init(top: 12,
@@ -135,7 +131,7 @@ public struct StatusDetailView: View {
                                    client: client,
                                    routerPath: routerPath,
                                    isCompact: false,
-                                   isFocused: true))
+                                   isFocused: !viewModel.isLoadingContext))
       .overlay {
         GeometryReader { reader in
           VStack {}
