@@ -15,7 +15,7 @@ class StatusDetailViewModel: ObservableObject {
   }
 
   @Published var state: State = .loading
-  @Published var isLoadingContext = false
+  @Published var isLoadingContext = true
   @Published var title: LocalizedStringKey = ""
   @Published var scrollToId: String?
 

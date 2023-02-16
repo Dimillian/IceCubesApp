@@ -42,6 +42,7 @@ public struct StatusDetailView: View {
 
           case let .display(statuses, date):
             makeStatusesListView(statuses: statuses, date: date)
+              .id(date)
 
             if !isLoaded {
               loadingContextView
@@ -113,7 +114,6 @@ public struct StatusDetailView: View {
         }
         if self.viewModel.statusId == status.id {
           makeCurrentStatusView(status: status)
-            .id(date.description)
         } else {
           StatusRowView(viewModel: viewModel)
         }
