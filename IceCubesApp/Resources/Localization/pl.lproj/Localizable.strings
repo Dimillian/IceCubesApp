@@ -97,7 +97,7 @@
 "settings.push.favorites" = "Polubione";
 "settings.push.follows" = "Obserwacja";
 "settings.push.main-toggle" = "Powiadomienia push";
-"settings.push.main-toggle.description" = "Otrzymuj powiadomienia push o nowych aktywnościach";
+"settings.push.main-toggle.description" = "Otrzymuj powiadomienia push o nowej aktywności";
 "settings.push.mentions" = "Wzmianki";
 "settings.push.navigation-title" = "Powiadomienia push";
 "settings.push.new-posts" = "Nowe posty";
@@ -114,7 +114,7 @@
 "settings.content.default-sensitive" = "Oznaczaj media jako wrażliwe";
 "settings.content.default-visibility" = "Widoczność postów";
 "settings.content.media" = "Media";
-"settings.content.media.show.alt" = "Show ALT texts";
+"settings.content.media.show.alt" = "Pokazuj alternatywny tekst";
 "settings.content.reading" = "Czytanie postów";
 "settings.content.posting" = "Wysyłanie postów";
 "enum.expand-media.show" = "Pokazuj wszystkie";
@@ -185,8 +185,8 @@
 "settings.swipeactions.status.use-theme-colors" = "Używaj kolorów motywu zamiast kolorów domyślnych";
 "settings.swipeactions.status.icon-style" = "Styl ikony";
 
-"settings.display.section.font" = "Font";
-"settings.display.font.rounded" = "Use SF Rounded";
+"settings.display.section.font" = "Czcionka";
+"settings.display.font.rounded" = "Użyj czcionkę SF Rounded";
 
 // MARK: Tabs
 "tab.explore" = "Odkrywaj";
@@ -336,13 +336,13 @@
 "notifications.tab.all" = "Wszystko";
 "notifications.tab.mentions" = "Wzmianki";
 
-"notifications.label.status.push" = "🖊️ Posted: ";
-"notifications.label.reblog.push" = "🚀 Boosted: ";
-"notifications.label.follow.push" = "👋 Followed you: ";
-"notifications.label.follow-request.push" = "🔒 Requested to follow you: ";
-"notifications.label.favorite.push" = "⭐️ Starred: ";
-"notifications.label.poll.push" = "📈 Poll ended: ";
-"notifications.label.update.push" = "Updated: ";
+"notifications.label.status.push" = "🖊️ Opublikował(a): ";
+"notifications.label.reblog.push" = "🚀 Podbił(a): ";
+"notifications.label.follow.push" = "👋 Obserwuje cię: ";
+"notifications.label.follow-request.push" = "🔒 Prosi o obserwację: ";
+"notifications.label.favorite.push" = "⭐️ Polubił(a): ";
+"notifications.label.poll.push" = "📈 Sondaż zakończony: ";
+"notifications.label.update.push" = "Zaktualizował(a): ";
 
 // MARK: Package: Timeline
 "timeline.federated" = "Strumień globalny";
@@ -458,8 +458,8 @@
 "accessibility.editor.button.drafts" = "Wersje robocze";
 "accessibility.editor.button.custom-emojis" = "Emotikony własne";
 "accessibility.editor.button.language" = "Język";
-"accessibility.tabs.timeline.add-account" = "Add account";
-"accessibility.app-account.selector.accounts" = "Accounts";
+"accessibility.tabs.timeline.add-account" = "Dodaj konto";
+"accessibility.app-account.selector.accounts" = "Konta";
 
 // MARK: Report
 "report.comment.placeholder" = "Informacja dodatkowa";
