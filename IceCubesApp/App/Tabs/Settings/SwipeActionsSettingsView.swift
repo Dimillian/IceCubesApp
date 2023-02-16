@@ -8,65 +8,43 @@ struct SwipeActionsSettingsView: View {
 
   var body: some View {
     Form {
-      Section("settings.swipeactions.status") {
-        Label("settings.swipeactions.status.leading", systemImage: "arrow.right.circle")
-        Picker(selection: $userPreferences.swipeActionsStatusLeadingLeft, label: makeSwipeLabel(left: true, text: "settings.swipeactions.status.leading.left")) {
-          Section {
-            Text(StatusAction.none.displayName()).tag(StatusAction.none)
-          }
-          Section {
-            ForEach(StatusAction.allCases) { action in
-              if action != .none {
-                Text(action.displayName()).tag(action)
-              }
-            }
-          }
+      Section {
+        makePostActionPicker(selection: $userPreferences.swipeActionsStatusLeadingLeft,
+                             label: "settings.swipeactions.status.leading.left")
+        
+        if userPreferences.swipeActionsStatusLeadingLeft != .none {
+          makePostActionPicker(selection: $userPreferences.swipeActionsStatusLeadingRight,
+                               label: "settings.swipeactions.status.leading.right")
         }
-        Picker(selection: $userPreferences.swipeActionsStatusLeadingRight, label: makeSwipeLabel(left: false, text: "settings.swipeactions.status.leading.right")) {
-          Section {
-            Text(StatusAction.none.displayName()).tag(StatusAction.none)
-          }
-          Section {
-            ForEach(StatusAction.allCases) { action in
-              if action != .none {
-                Text(action.displayName()).tag(action)
-              }
-            }
-          }
+      } header: {
+        Label("settings.swipeactions.status.leading", systemImage: "arrow.right")
+      }
+      
+      Section {
+        makePostActionPicker(selection: $userPreferences.swipeActionsStatusTrailingLeft,
+                             label: "settings.swipeactions.status.trailing.left")
+        
+        if userPreferences.swipeActionsStatusTrailingLeft != .none {
+          makePostActionPicker(selection: $userPreferences.swipeActionsStatusTrailingRight,
+                               label: "settings.swipeactions.status.trailing.right")
         }
-        Label("settings.swipeactions.status.trailing", systemImage: "arrow.left.circle")
-        Picker(selection: $userPreferences.swipeActionsStatusTrailingLeft, label: makeSwipeLabel(left: true, text: "settings.swipeactions.status.trailing.left")) {
-          Section {
-            Text(StatusAction.none.displayName()).tag(StatusAction.none)
-          }
-          Section {
-            ForEach(StatusAction.allCases) { action in
-              if action != .none {
-                Text(action.displayName()).tag(action)
-              }
-            }
-          }
-        }
-        Picker(selection: $userPreferences.swipeActionsStatusTrailingRight, label: makeSwipeLabel(left: false, text: "settings.swipeactions.status.trailing.right")) {
-          Section {
-            Text(StatusAction.none.displayName()).tag(StatusAction.none)
-          }
-          Section {
-            ForEach(StatusAction.allCases) { action in
-              if action != .none {
-                Text(action.displayName()).tag(action)
-              }
-            }
-          }
-        }
-        Toggle(isOn: $userPreferences.swipeActionsUseThemeColor) {
-          Label("settings.swipeactions.status.use-theme-colors", systemImage: "paintbrush.pointed")
-        }
-        Picker(selection: $userPreferences.swipeActionsIconStyle, label: Label("settings.swipeactions.status.icon-style", systemImage: "text.below.photo")) {
+      } header: {
+        Label("settings.swipeactions.status.trailing", systemImage: "arrow.left")
+      }
+
+      Section {
+        Picker(selection: $userPreferences.swipeActionsIconStyle, label: Text("settings.swipeactions.status.icon-style")) {
           ForEach(UserPreferences.SwipeActionsIconStyle.allCases, id: \.rawValue) { style in
             Text(style.description).tag(style)
           }
         }
+        Toggle(isOn: $userPreferences.swipeActionsUseThemeColor) {
+          Text("Use Theme Colors")
+        }
+      } header: {
+        Text("Action Display Settings")
+      } footer: {
+        Text("settings.swipeactions.status.use-theme-colors")
       }
       .listRowBackground(theme.primaryBackgroundColor)
     }
@@ -77,6 +55,21 @@ struct SwipeActionsSettingsView: View {
 
   private func makeSwipeLabel(left: Bool, text: LocalizedStringKey) -> some View {
     return Label(text, systemImage: left ? "rectangle.lefthalf.filled" : "rectangle.righthalf.filled")
-      .padding(.leading, 16)
   }
+  
+  private func makePostActionPicker(selection: Binding<StatusAction>, label: LocalizedStringKey) -> some View {
+    return Picker(selection: selection, label: Text(label)) {
+      Section {
+        Text(StatusAction.none.displayName()).tag(StatusAction.none)
+      }
+      Section {
+        ForEach(StatusAction.allCases) { action in
+          if action != .none {
+            Text(action.displayName()).tag(action)
+          }
+        }
+      }
+    }
+  }
+  
 }
