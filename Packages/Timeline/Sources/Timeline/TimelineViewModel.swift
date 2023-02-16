@@ -156,6 +156,9 @@ extension TimelineViewModel: StatusesFetcher {
     guard let client else { return }
     do {
       if statuses.isEmpty || timeline == .trending {
+        if !statuses.isEmpty && timeline == .trending {
+          return
+        }
         try await fetchFirstPage(client: client)
       } else if let latest = statuses.first {
         try await fetchNewPagesFrom(latestStatus: latest, client: client)
