@@ -40,8 +40,8 @@ public struct StatusDetailView: View {
           case .loading:
             loadingDetailView
 
-          case let .display(statuses):
-            makeStatusesListView(statuses: statuses)
+          case let .display(statuses, date):
+            makeStatusesListView(statuses: statuses, date: date)
 
             if !isLoaded {
               loadingContextView
@@ -93,7 +93,7 @@ public struct StatusDetailView: View {
     .navigationBarTitleDisplayMode(.inline)
   }
   
-  private func makeStatusesListView(statuses: [Status]) -> some View {
+  private func makeStatusesListView(statuses: [Status], date: Date) -> some View {
     ForEach(statuses) { status in
       var isReplyToPrevious: Bool = false
       if let index = statuses.firstIndex(where: { $0.id == status.id }),
@@ -113,7 +113,7 @@ public struct StatusDetailView: View {
         }
         if self.viewModel.statusId == status.id {
           makeCurrentStatusView(status: status)
-            .id(Date())
+            .id(date.description)
         } else {
           StatusRowView(viewModel: viewModel)
         }

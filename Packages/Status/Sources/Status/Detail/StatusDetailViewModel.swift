@@ -11,7 +11,7 @@ class StatusDetailViewModel: ObservableObject {
   var client: Client?
 
   enum State {
-    case loading, display(statuses: [Status]), error(error: Error)
+    case loading, display(statuses: [Status], date: Date), error(error: Error)
   }
 
   @Published var state: State = .loading
@@ -26,7 +26,7 @@ class StatusDetailViewModel: ObservableObject {
   }
 
   init(status: Status) {
-    state = .display(statuses: [status])
+    state = .display(statuses: [status], date: Date())
     title = "status.post-from-\(status.account.displayNameWithoutEmojis)"
     statusId = status.id
     remoteStatusURL = nil
@@ -81,11 +81,11 @@ class StatusDetailViewModel: ObservableObject {
       if animate {
         withAnimation {
           isLoadingContext = false
-          state = .display(statuses: statuses)
+          state = .display(statuses: statuses, date: Date())
         }
       } else {
         isLoadingContext = false
-        state = .display(statuses: statuses)
+        state = .display(statuses: statuses, date: Date())
         scrollToId = statusId
       }
     } catch {
