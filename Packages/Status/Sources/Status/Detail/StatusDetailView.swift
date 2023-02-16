@@ -42,18 +42,14 @@ public struct StatusDetailView: View {
 
           case let .display(status, context, date):
             if !context.ancestors.isEmpty {
-              ForEach(context.ancestors) { ancestor in
-                StatusRowView(viewModel: .init(status: ancestor, client: client, routerPath: routerPath, isCompact: false))
-              }
+              makeStatusesListView(statuses: context.ancestors)
             }
 
             makeCurrentStatusView(status: status)
               .id(date)
 
             if !context.descendants.isEmpty {
-              ForEach(context.descendants) { descendant in
-                StatusRowView(viewModel: .init(status: descendant, client: client, routerPath: routerPath, isCompact: false))
-              }
+              makeStatusesListView(statuses: context.descendants)
             }
 
             if !isLoaded {
@@ -104,6 +100,34 @@ public struct StatusDetailView: View {
     }
     .navigationTitle(viewModel.title)
     .navigationBarTitleDisplayMode(.inline)
+  }
+  
+  private func makeStatusesListView(statuses: [Status]) -> some View {
+    ForEach(statuses) { status in
+      var isReplyToPrevious: Bool = false
+      if let index = statuses.firstIndex(where: { $0.id == status.id }),
+         index > 0,
+         statuses[index - 1].inReplyToAccountId == status.account.id {
+        isReplyToPrevious = true
+      }
+      let viewModel: StatusRowViewModel = .init(status: status,
+                                                client: client,
+                                                routerPath: routerPath,
+                                                isCompact: false)
+      return HStack {
+        if isReplyToPrevious {
+          Rectangle()
+            .fill(theme.tintColor)
+            .frame(width: 2)
+        }
+        StatusRowView(viewModel: viewModel)
+      }
+      .listRowBackground(viewModel.highlightRowColor)
+      .listRowInsets(.init(top: 12,
+                           leading: .layoutPadding,
+                           bottom: 12,
+                           trailing: .layoutPadding))
+    }
   }
 
   private func makeCurrentStatusView(status: Status) -> some View {
