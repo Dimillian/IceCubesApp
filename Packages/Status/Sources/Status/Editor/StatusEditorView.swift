@@ -12,8 +12,6 @@ import UIKit
 import StoreKit
 
 public struct StatusEditorView: View {
-  @Environment(\.requestReview) var requestReview
-  
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
@@ -199,7 +197,9 @@ public struct StatusEditorView: View {
       NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
                                       object: nil)
       if !viewModel.mode.isInShareExtension && !preferences.requestedReview {
-        requestReview()
+        if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                SKStoreReviewController.requestReview(in: scene)
+              }
         preferences.requestedReview = true
       }
     }
