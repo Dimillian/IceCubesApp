@@ -52,16 +52,25 @@ struct StatusRowActionsView: View {
       }
     }
 
-    func tintColor(viewModel: StatusRowViewModel, theme: Theme) -> Color? {
+    func tintColor(theme: Theme) -> Color? {
       switch self {
       case .respond, .share:
         return nil
       case .favorite:
-        return viewModel.isFavorited ? .yellow : nil
+        return .yellow
       case .bookmark:
-        return viewModel.isBookmarked ? .pink : nil
+        return .pink
       case .boost:
-        return viewModel.isReblogged ? theme.tintColor : nil
+        return theme.tintColor
+      }
+    }
+
+    func isOn(viewModel: StatusRowViewModel) -> Bool {
+      switch self {
+      case .respond, .share: return false
+      case .favorite: return viewModel.isFavorited
+      case .bookmark: return viewModel.isBookmarked
+      case .boost: return viewModel.isReblogged
       }
     }
   }
@@ -79,30 +88,39 @@ struct StatusRowActionsView: View {
                         message: Text(viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText)) {
                 Image(systemName: action.iconName(viewModel: viewModel))
               }
-              .buttonStyle(.borderless)
+              .buttonStyle(.statusAction())
             }
           } else {
-            Button {
-              handleAction(action: action)
-            } label: {
-              HStack(spacing: 2) {
-                Image(systemName: action.iconName(viewModel: viewModel, privateBoost: privateBoost()))
-                  .foregroundColor(action.tintColor(viewModel: viewModel, theme: theme))
-                if let count = action.count(viewModel: viewModel, theme: theme), !viewModel.isRemote {
-                  Text("\(count)")
-                    .font(.scaledFootnote)
-                }
-              }
-            }
-            .buttonStyle(.borderless)
-            .disabled(action == .boost &&
-              (viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id))
+            actionButton(action: action)
             Spacer()
           }
         }
       }
       if viewModel.isFocused {
         StatusRowDetailView(viewModel: viewModel)
+      }
+    }
+  }
+
+  private func actionButton(action: Action) -> some View {
+    HStack(spacing: 2) {
+      Button {
+        handleAction(action: action)
+      } label: {
+        Image(systemName: action.iconName(viewModel: viewModel))
+      }
+      .buttonStyle(
+        .statusAction(
+          isOn: action.isOn(viewModel: viewModel),
+          tintColor: action.tintColor(theme: theme)
+        )
+      )
+      .disabled(action == .boost &&
+                (viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id))
+      if let count = action.count(viewModel: viewModel, theme: theme), !viewModel.isRemote {
+        Text("\(count)")
+          .foregroundColor(Color(UIColor.secondaryLabel))
+          .font(.scaledFootnote)
       }
     }
   }
