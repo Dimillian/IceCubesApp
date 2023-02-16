@@ -73,9 +73,6 @@ public struct StatusRowView: View {
               await viewModel.loadEmbeddedStatus()
             }
           }
-          if preferences.autoExpandSpoilers == true && viewModel.displaySpoiler {
-            viewModel.displaySpoiler = false
-          }
         }
       }
       .contextMenu {

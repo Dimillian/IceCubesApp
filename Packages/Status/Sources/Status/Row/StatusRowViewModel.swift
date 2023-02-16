@@ -39,7 +39,7 @@ public class StatusRowViewModel: ObservableObject {
 
   private let theme = Theme.shared
 
-  var seen = false
+  private var seen = false
 
   var filter: Filtered? {
     status.reblog?.filtered?.first ?? status.filtered?.first
@@ -87,7 +87,11 @@ public class StatusRowViewModel: ObservableObject {
     favoritesCount = status.reblog?.favouritesCount ?? status.favouritesCount
     reblogsCount = status.reblog?.reblogsCount ?? status.reblogsCount
     repliesCount = status.reblog?.repliesCount ?? status.repliesCount
-    displaySpoiler = !(status.reblog?.spoilerText.asRawText ?? status.spoilerText.asRawText).isEmpty
+    if UserPreferences.shared.autoExpandSpoilers {
+      displaySpoiler = false
+    } else {
+      displaySpoiler = !(status.reblog?.spoilerText.asRawText ?? status.spoilerText.asRawText).isEmpty
+    }
 
     isFiltered = filter != nil
   }
@@ -95,8 +99,13 @@ public class StatusRowViewModel: ObservableObject {
   func markSeen() {
     // called in on appear so we can cache that the status has been seen.
     if UserPreferences.shared.suppressDupeReblogs && !seen {
-      ReblogCache.shared.cache(status, seen: true)
-      seen = true
+      DispatchQueue.global().async { [weak self] in
+        guard let self else { return }
+        ReblogCache.shared.cache(self.status, seen: true)
+        Task { @MainActor in
+          self.seen = true
+        }
+      }
     }
   }
 
