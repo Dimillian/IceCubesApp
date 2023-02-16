@@ -41,14 +41,18 @@ public enum StatusAction: String, CaseIterable, Identifiable {
     }
   }
 
-  public func color(themeTintColor: Color) -> Color {
+  public func color(themeTintColor: Color, useThemeColor: Bool, outside: Bool) -> Color {
+    if (useThemeColor) {
+      return outside ? themeTintColor : .gray
+    }
+    
     switch self {
     case .none:
       return .gray
     case .reply:
-      return .gray
+      return outside ? .gray : Color(white: 0.45)
     case .quote:
-      return .gray
+      return outside ? .gray : Color(white: 0.45)
     case .boost:
       return themeTintColor
     case .favorite:

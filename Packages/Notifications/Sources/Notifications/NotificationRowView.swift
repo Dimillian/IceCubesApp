@@ -4,14 +4,16 @@ import Env
 import Models
 import Status
 import SwiftUI
+import Network
 
 struct NotificationRowView: View {
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var routerPath: RouterPath
   @Environment(\.redactionReasons) private var reasons
 
   let notification: ConsolidatedNotification
+  let client: Client
+  let routerPath: RouterPath
 
   var body: some View {
     HStack(alignment: .top, spacing: 8) {
@@ -119,7 +121,11 @@ struct NotificationRowView: View {
     }
     .contentShape(Rectangle())
     .onTapGesture {
-      routerPath.navigate(to: .accountDetailWithAccount(account: notification.accounts[0]))
+      if notification.accounts.count == 1 {
+        routerPath.navigate(to: .accountDetailWithAccount(account: notification.accounts[0]))
+      } else {
+        routerPath.navigate(to: .accountsList(accounts: notification.accounts))
+      }
     }
   }
 
@@ -128,9 +134,17 @@ struct NotificationRowView: View {
     if let status = notification.status {
       HStack {
         if type == .mention {
-          StatusRowView(viewModel: .init(status: status, isCompact: true, showActions: true))
+          StatusRowView(viewModel: .init(status: status,
+                                         client: client,
+                                         routerPath: routerPath,
+                                         isCompact: true,
+                                         showActions: true))
         } else {
-          StatusRowView(viewModel: .init(status: status, isCompact: true, showActions: false))
+          StatusRowView(viewModel: .init(status: status,
+                                         client: client,
+                                         routerPath: routerPath,
+                                         isCompact: true,
+                                         showActions: false))
             .lineLimit(4)
             .foregroundColor(.gray)
         }
@@ -155,14 +169,12 @@ struct NotificationRowView: View {
       }
       .contentShape(Rectangle())
       .onTapGesture {
-        routerPath.navigate(to: .accountDetailWithAccount(account: notification.accounts[0]))
+        if notification.accounts.count == 1 {
+          routerPath.navigate(to: .accountDetailWithAccount(account: notification.accounts[0]))
+        } else {
+          routerPath.navigate(to: .accountsList(accounts: notification.accounts))
+        }
       }
     }
-  }
-}
-
-struct NotificationRowView_Previews: PreviewProvider {
-  static var previews: some View {
-    NotificationRowView(notification: .placeholder())
   }
 }

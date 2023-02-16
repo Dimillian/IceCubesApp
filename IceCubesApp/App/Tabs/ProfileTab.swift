@@ -34,7 +34,7 @@ struct ProfileTab: View {
         routerPath.path = []
       }
     }
-    .onChange(of: currentAccount.account?.id) { _ in
+    .onChange(of: client.id) { _ in
       routerPath.path = []
     }
     .onAppear {

@@ -2,22 +2,32 @@ import DesignSystem
 import EmojiText
 import Models
 import SwiftUI
+import Env
+import Network
 
 @MainActor
 public struct StatusEmbeddedView: View {
   @EnvironmentObject private var theme: Theme
 
   public let status: Status
+  public let client: Client
+  public let routerPath: RouterPath
 
-  public init(status: Status) {
+  public init(status: Status, client: Client, routerPath: RouterPath) {
     self.status = status
+    self.client = client
+    self.routerPath = routerPath
   }
 
   public var body: some View {
     HStack {
       VStack(alignment: .leading) {
         makeAccountView(account: status.reblog?.account ?? status.account)
-        StatusRowView(viewModel: .init(status: status, isCompact: true, showActions: false))
+        StatusRowView(viewModel: .init(status: status,
+                                       client: client,
+                                       routerPath: routerPath,
+                                       isCompact: true,
+                                       showActions: false))
       }
       Spacer()
     }

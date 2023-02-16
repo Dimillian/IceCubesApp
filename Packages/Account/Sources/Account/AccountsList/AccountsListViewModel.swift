@@ -5,6 +5,7 @@ import SwiftUI
 public enum AccountsListMode {
   case following(accountId: String), followers(accountId: String)
   case favoritedBy(statusId: String), rebloggedBy(statusId: String)
+  case accountsList(accounts: [Account])
 
   var title: LocalizedStringKey {
     switch self {
@@ -16,6 +17,8 @@ public enum AccountsListMode {
       return "account.favorited-by"
     case .rebloggedBy:
       return "account.boosted-by"
+    case .accountsList:
+      return ""
     }
   }
 }
@@ -67,6 +70,9 @@ class AccountsListViewModel: ObservableObject {
       case let .favoritedBy(statusId):
         (accounts, link) = try await client.getWithLink(endpoint: Statuses.favoritedBy(id: statusId,
                                                                                        maxId: nil))
+      case let .accountsList(accounts):
+        self.accounts = accounts
+        link = nil
       }
       nextPageId = link?.maxId
       relationships = try await client.get(endpoint:
@@ -96,6 +102,9 @@ class AccountsListViewModel: ObservableObject {
       case let .favoritedBy(statusId):
         (newAccounts, link) = try await client.getWithLink(endpoint: Statuses.favoritedBy(id: statusId,
                                                                                           maxId: nextPageId))
+      case .accountsList:
+        newAccounts = []
+        link = nil
       }
       accounts.append(contentsOf: newAccounts)
       let newRelationships: [Relationship] =

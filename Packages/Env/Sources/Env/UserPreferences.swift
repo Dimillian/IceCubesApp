@@ -37,13 +37,31 @@ public class UserPreferences: ObservableObject {
   @AppStorage("haptic_button_press") public var hapticButtonPressEnabled = true
 
   @AppStorage("show_tab_label_iphone") public var showiPhoneTabLabel = true
-
+  @AppStorage("show_alt_text_for_media") public var showAltTextForMedia = true
+  
   @AppStorage("show_second_column_ipad") public var showiPadSecondaryColumn = true
 
   @AppStorage("swipeactions-status-trailing-right") public var swipeActionsStatusTrailingRight = StatusAction.favorite
   @AppStorage("swipeactions-status-trailing-left") public var swipeActionsStatusTrailingLeft = StatusAction.boost
   @AppStorage("swipeactions-status-leading-left") public var swipeActionsStatusLeadingLeft = StatusAction.reply
   @AppStorage("swipeactions-status-leading-right") public var swipeActionsStatusLeadingRight = StatusAction.none
+  @AppStorage("swipeactions-use-theme-color") public var swipeActionsUseThemeColor = false
+  @AppStorage("swipeactions-icon-style") public var swipeActionsIconStyle: SwipeActionsIconStyle = .iconWithText
+  
+  @AppStorage("font_use_sf_rounded") public var useSFRoundedFont = false
+
+  public enum SwipeActionsIconStyle: String, CaseIterable {
+    case iconWithText, iconOnly
+
+    public var description: LocalizedStringKey {
+      switch self {
+      case .iconWithText:
+        return "enum.swipeactions.icon-with-text"
+      case .iconOnly:
+        return "enum.swipeactions.icon-only"
+      }
+    }
+  }
 
   public var postVisibility: Models.Visibility {
     if useInstanceContentSettings {

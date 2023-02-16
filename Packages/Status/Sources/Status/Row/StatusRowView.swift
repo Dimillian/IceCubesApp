@@ -10,8 +10,6 @@ public struct StatusRowView: View {
   @Environment(\.redactionReasons) private var reasons
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var routerPath: RouterPath
   @StateObject var viewModel: StatusRowViewModel
 
   public init(viewModel: StatusRowViewModel) {
@@ -27,8 +25,10 @@ public struct StatusRowView: View {
       switch filter.filter.filterAction {
       case .warn:
         makeFilterView(filter: filter.filter)
+          .listRowBackground(viewModel.highlightRowColor)
       case .hide:
         EmptyView()
+          .listRowSeparator(.hidden)
       }
     } else {
       VStack(alignment: .leading) {
@@ -42,7 +42,7 @@ public struct StatusRowView: View {
              let status: AnyStatus = viewModel.status.reblog ?? viewModel.status
           {
             Button {
-              routerPath.navigate(to: .accountDetailWithAccount(account: status.account))
+              viewModel.routerPath.navigate(to: .accountDetailWithAccount(account: status.account))
             } label: {
               AvatarView(url: status.account.avatar, size: .status)
             }
@@ -53,13 +53,13 @@ public struct StatusRowView: View {
               replyView
             }
             statusView
-            if viewModel.showActions && !viewModel.isRemote, theme.statusActionsDisplay != .none {
+            if viewModel.showActions, theme.statusActionsDisplay != .none {
               StatusActionsView(viewModel: viewModel)
                 .padding(.top, 8)
                 .tint(viewModel.isFocused ? theme.tintColor : .gray)
                 .contentShape(Rectangle())
                 .onTapGesture {
-                  viewModel.navigateToDetail(routerPath: routerPath)
+                  viewModel.navigateToDetail()
                 }
             }
           }
@@ -68,21 +68,17 @@ public struct StatusRowView: View {
       .onAppear {
         viewModel.markSeen()
         if reasons.isEmpty {
-          viewModel.client = client
           if !viewModel.isCompact, viewModel.embeddedStatus == nil {
             Task {
               await viewModel.loadEmbeddedStatus()
             }
-          }
-          if preferences.autoExpandSpoilers == true && viewModel.displaySpoiler {
-            viewModel.displaySpoiler = false
           }
         }
       }
       .contextMenu {
         contextMenu
       }
-      .listRowBackground(viewModel.highlightRowColor)
+      
       .swipeActions(edge: .trailing) {
         if !viewModel.isCompact {
           trailingSwipeActions
@@ -93,19 +89,22 @@ public struct StatusRowView: View {
           leadingSwipeActions
         }
       }
+      .listRowBackground(viewModel.highlightRowColor)
       .listRowInsets(.init(top: 12,
                            leading: .layoutPadding,
                            bottom: 12,
                            trailing: .layoutPadding))
       .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
       .accessibilityActions {
-        accesibilityActions
+        if UIAccessibility.isVoiceOverRunning {
+          accesibilityActions
+        }
       }
       .background {
         Color.clear
           .contentShape(Rectangle())
           .onTapGesture {
-            viewModel.navigateToDetail(routerPath: routerPath)
+            viewModel.navigateToDetail()
           }
       }
       .overlay {
@@ -138,7 +137,7 @@ public struct StatusRowView: View {
     // Add the individual mentions as accessibility actions
     ForEach(viewModel.status.mentions, id: \.id) { mention in
       Button("@\(mention.username)") {
-        routerPath.navigate(to: .accountDetail(id: mention.id))
+        viewModel.routerPath.navigate(to: .accountDetail(id: mention.id))
       }
     }
 
@@ -149,7 +148,7 @@ public struct StatusRowView: View {
     }
 
     Button("@\(viewModel.status.account.username)") {
-      routerPath.navigate(to: .accountDetail(id: viewModel.status.account.id))
+      viewModel.routerPath.navigate(to: .accountDetail(id: viewModel.status.account.id))
     }
 
     contextMenu
@@ -187,7 +186,7 @@ public struct StatusRowView: View {
       .foregroundColor(.gray)
       .fontWeight(.semibold)
       .onTapGesture {
-        viewModel.navigateToAccountDetail(account: viewModel.status.account, routerPath: routerPath)
+        viewModel.navigateToAccountDetail(account: viewModel.status.account)
       }
     }
   }
@@ -206,7 +205,7 @@ public struct StatusRowView: View {
       .foregroundColor(.gray)
       .fontWeight(.semibold)
       .onTapGesture {
-        viewModel.navigateToMention(mention: mention, routerPath: routerPath)
+        viewModel.navigateToMention(mention: mention)
       }
     }
   }
@@ -217,7 +216,7 @@ public struct StatusRowView: View {
         if !viewModel.isCompact {
           HStack(alignment: .center) {
             Button {
-              viewModel.navigateToAccountDetail(account: status.account, routerPath: routerPath)
+              viewModel.navigateToAccountDetail(account: status.account)
             } label: {
               accountView(status: status)
             }
@@ -232,13 +231,13 @@ public struct StatusRowView: View {
         makeStatusContentView(status: status)
           .contentShape(Rectangle())
           .onTapGesture {
-            viewModel.navigateToDetail(routerPath: routerPath)
+            viewModel.navigateToDetail()
           }
       }
     }
     .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
     .accessibilityAction {
-      viewModel.navigateToDetail(routerPath: routerPath)
+      viewModel.navigateToDetail()
     }
   }
 
@@ -278,7 +277,7 @@ public struct StatusRowView: View {
           EmojiTextApp(status.content, emojis: status.emojis, language: status.language)
             .font(.scaledBody)
             .environment(\.openURL, OpenURLAction { url in
-              routerPath.handleStatus(status: status, url: url)
+              viewModel.routerPath.handleStatus(status: status, url: url)
             })
           Spacer()
         }
@@ -437,10 +436,10 @@ public struct StatusRowView: View {
       if !viewModel.isCompact, !viewModel.isEmbedLoading,
          let embed = viewModel.embeddedStatus
       {
-        StatusEmbeddedView(status: embed)
+        StatusEmbeddedView(status: embed, client: viewModel.client, routerPath: viewModel.routerPath)
           .fixedSize(horizontal: false, vertical: true)
       } else if viewModel.isEmbedLoading, !viewModel.isCompact {
-        StatusEmbeddedView(status: .placeholder())
+        StatusEmbeddedView(status: .placeholder(), client: viewModel.client, routerPath: viewModel.routerPath)
           .redacted(reason: .placeholder)
           .shimmering()
       }
@@ -465,21 +464,25 @@ public struct StatusRowView: View {
 
   @ViewBuilder
   private var trailingSwipeActions: some View {
-    if preferences.swipeActionsStatusTrailingRight != StatusAction.none {
+    if preferences.swipeActionsStatusTrailingRight != StatusAction.none, !viewModel.isRemote {
       makeSwipeButton(action: preferences.swipeActionsStatusTrailingRight)
+        .tint(preferences.swipeActionsStatusTrailingRight.color(themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor, outside: true))
     }
-    if preferences.swipeActionsStatusTrailingLeft != StatusAction.none {
+    if preferences.swipeActionsStatusTrailingLeft != StatusAction.none, !viewModel.isRemote {
       makeSwipeButton(action: preferences.swipeActionsStatusTrailingLeft)
+        .tint(preferences.swipeActionsStatusTrailingLeft.color(themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor, outside: false))
     }
   }
 
   @ViewBuilder
   private var leadingSwipeActions: some View {
-    if preferences.swipeActionsStatusLeadingLeft != StatusAction.none {
+    if preferences.swipeActionsStatusLeadingLeft != StatusAction.none, !viewModel.isRemote {
       makeSwipeButton(action: preferences.swipeActionsStatusLeadingLeft)
+        .tint(preferences.swipeActionsStatusLeadingLeft.color(themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor, outside: true))
     }
-    if preferences.swipeActionsStatusLeadingRight != StatusAction.none {
+    if preferences.swipeActionsStatusLeadingRight != StatusAction.none, !viewModel.isRemote {
       makeSwipeButton(action: preferences.swipeActionsStatusLeadingRight)
+        .tint(preferences.swipeActionsStatusLeadingRight.color(themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor, outside: false))
     }
   }
 
@@ -524,13 +527,10 @@ public struct StatusRowView: View {
   private func makeSwipeButtonForRouterPath(action: StatusAction, destination: SheetDestinations) -> some View {
     Button {
       HapticManager.shared.fireHaptic(of: .notification(.success))
-      routerPath.presentedSheet = destination
+      viewModel.routerPath.presentedSheet = destination
     } label: {
-      Text(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
-      Image(systemName: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
-        .environment(\.symbolVariants, .none)
+      makeSwipeLabel(action: action, style: preferences.swipeActionsIconStyle)
     }
-    .tint(action.color(themeTintColor: theme.tintColor))
   }
 
   @ViewBuilder
@@ -541,10 +541,21 @@ public struct StatusRowView: View {
         await task()
       }
     } label: {
-      Text(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
-      Image(systemName: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
+      makeSwipeLabel(action: action, style: preferences.swipeActionsIconStyle)
+    }
+  }
+  
+  @ViewBuilder
+  private func makeSwipeLabel(action: StatusAction, style: UserPreferences.SwipeActionsIconStyle) -> some View {
+    switch (style) {
+    case .iconOnly:
+      Label(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked), systemImage: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
+        .labelStyle(.iconOnly)
+        .environment(\.symbolVariants, .none)
+    case .iconWithText:
+      Label(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked), systemImage: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
+        .labelStyle(.titleAndIcon)
         .environment(\.symbolVariants, .none)
     }
-    .tint(action.color(themeTintColor: theme.tintColor))
   }
 }

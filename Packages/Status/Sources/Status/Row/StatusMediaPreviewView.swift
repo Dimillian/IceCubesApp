@@ -175,7 +175,7 @@ public struct StatusMediaPreviewView: View {
       if sensitive {
         cornerSensitiveButton
       }
-      if let alt = attachment.description, !alt.isEmpty, !isNotifications {
+      if let alt = attachment.description, !alt.isEmpty, !isNotifications, preferences.showAltTextForMedia {
         Group {
           Button {
             altTextDisplayed = alt
@@ -212,7 +212,6 @@ public struct StatusMediaPreviewView: View {
                     .fill(Color.gray)
                     .frame(maxHeight: imageMaxHeight)
                     .frame(maxWidth: isNotifications ? imageMaxHeight : proxy.frame(in: .local).width)
-                    .shimmering()
                 }
               }
               .frame(maxWidth: isNotifications ? imageMaxHeight : proxy.frame(in: .local).width)
@@ -220,7 +219,7 @@ public struct StatusMediaPreviewView: View {
               if sensitive {
                 cornerSensitiveButton
               }
-              if let alt = attachment.description, !alt.isEmpty, !isNotifications {
+              if let alt = attachment.description, !alt.isEmpty, !isNotifications, preferences.showAltTextForMedia {
                 Button {
                   altTextDisplayed = alt
                   isAltAlertDisplayed = true

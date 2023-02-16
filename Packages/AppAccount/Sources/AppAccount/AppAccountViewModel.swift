@@ -6,12 +6,19 @@ import SwiftUI
 @MainActor
 public class AppAccountViewModel: ObservableObject {
   private static var avatarsCache: [String: UIImage] = [:]
+  private static var accountsCache: [String: Account] = [:]
 
   var appAccount: AppAccount
   let client: Client
   let isCompact: Bool
 
-  @Published var account: Account?
+  @Published var account: Account? {
+    didSet {
+      if let account {
+        refreshAcct(account: account)
+      }
+    }
+  }
   @Published var roundedAvatar: UIImage?
 
   var acct: String {
@@ -30,23 +37,33 @@ public class AppAccountViewModel: ObservableObject {
 
   func fetchAccount() async {
     do {
+      account = Self.accountsCache[appAccount.id]
+      roundedAvatar = Self.avatarsCache[appAccount.id]
+      
       account = try await client.get(endpoint: Accounts.verifyCredentials)
-      if appAccount.accountName == nil, let account {
+      Self.accountsCache[appAccount.id] = account
+      
+      if let account {
+        await refreshAvatar(account: account)
+      }
+      
+    } catch {}
+  }
+  
+  private func refreshAcct(account: Account) {
+    do {
+      if appAccount.accountName == nil {
         appAccount.accountName = "\(account.acct)@\(appAccount.server)"
         try appAccount.save()
       }
-
-      if let account {
-        if let image = Self.avatarsCache[account.id] {
-          roundedAvatar = image
-        } else if let (data, _) = try? await URLSession.shared.data(from: account.avatar),
-                  let image = UIImage(data: data)?.roundedImage
-        {
-          roundedAvatar = image
-          Self.avatarsCache[account.id] = image
-        }
-      }
-
-    } catch {}
+    } catch { }
+  }
+  
+  private func refreshAvatar(account: Account) async {
+    if let (data, _) = try? await URLSession.shared.data(from: account.avatar),
+       let image = UIImage(data: data)?.roundedImage {
+        roundedAvatar = image
+        Self.avatarsCache[account.id] = image
+    }
   }
 }

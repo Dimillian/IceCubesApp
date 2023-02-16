@@ -3,6 +3,7 @@ import Env
 import Models
 import Status
 import SwiftUI
+import Network
 
 struct DisplaySettingsView: View {
   typealias FontState = Theme.FontState
@@ -12,7 +13,9 @@ struct DisplaySettingsView: View {
   @EnvironmentObject private var userPreferences: UserPreferences
 
   @State private var isFontSelectorPresented = false
-  private var previewStatusViewModel = StatusRowViewModel(status: Status.placeholder(forSettings: true, language: "la")) // translate from latin button
+  private var previewStatusViewModel = StatusRowViewModel(status: Status.placeholder(forSettings: true, language: "la"),
+                                                          client: Client(server: ""),
+                                                          routerPath: RouterPath()) // translate from latin button
   var body: some View {
     Form {
       Section("settings.display.example-toot") {
@@ -39,7 +42,7 @@ struct DisplaySettingsView: View {
       }
       .listRowBackground(theme.primaryBackgroundColor)
 
-      Section("settings.display.section.display") {
+      Section("settings.display.section.font") {
         Picker("settings.display.font", selection: .init(get: { () -> FontState in
           if userPreferences.chosenFont?.fontName == "OpenDyslexic-Regular" {
             return FontState.openDyslexic
@@ -64,6 +67,22 @@ struct DisplaySettingsView: View {
           }
         }
         .navigationDestination(isPresented: $isFontSelectorPresented, destination: { FontPicker() })
+        
+        Toggle("settings.display.font.rounded", isOn: $userPreferences.useSFRoundedFont)
+          .disabled(userPreferences.chosenFont != nil)
+        
+        VStack {
+          Slider(value: $userPreferences.fontSizeScale, in: 0.5 ... 1.5, step: 0.1)
+          Text("settings.display.font.scaling-\(String(format: "%.1f", userPreferences.fontSizeScale))")
+            .font(.scaledBody)
+        }
+        .alignmentGuide(.listRowSeparatorLeading) { d in
+          d[.leading]
+        }
+      }
+      .listRowBackground(theme.primaryBackgroundColor)
+        
+      Section("settings.display.section.display") {
         Picker("settings.display.avatar.position", selection: $theme.avatarPosition) {
           ForEach(Theme.AvatarPosition.allCases, id: \.rawValue) { position in
             Text(position.description).tag(position)
@@ -84,14 +103,6 @@ struct DisplaySettingsView: View {
           ForEach(Theme.StatusDisplayStyle.allCases, id: \.rawValue) { buttonStyle in
             Text(buttonStyle.description).tag(buttonStyle)
           }
-        }
-        VStack {
-          Slider(value: $userPreferences.fontSizeScale, in: 0.5 ... 1.5, step: 0.1)
-          Text("settings.display.font.scaling-\(String(format: "%.1f", userPreferences.fontSizeScale))")
-            .font(.scaledBody)
-        }
-        .alignmentGuide(.listRowSeparatorLeading) { d in
-          d[.leading]
         }
         Toggle("settings.display.translate-button", isOn: $userPreferences.showTranslateButton)
       }

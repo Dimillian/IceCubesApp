@@ -21,6 +21,7 @@ struct SettingsTabs: View {
   @StateObject private var routerPath = RouterPath()
 
   @State private var addAccountSheetPresented = false
+  @State private var isEditingAccount = false
 
   @Binding var popToRootTab: Tab
 
@@ -69,26 +70,46 @@ struct SettingsTabs: View {
   private var accountsSection: some View {
     Section("settings.section.accounts") {
       ForEach(appAccountsManager.availableAccounts) { account in
-        AppAccountView(viewModel: .init(appAccount: account))
+        HStack {
+          if isEditingAccount {
+            Button {
+              Task {
+                await logoutAccount(account: account)
+              }
+            } label: {
+              Image(systemName: "trash")
+                .renderingMode(.template)
+                .tint(.red)
+            }
+          }
+          AppAccountView(viewModel: .init(appAccount: account))
+        }
       }
       .onDelete { indexSet in
         if let index = indexSet.first {
           let account = appAccountsManager.availableAccounts[index]
-          if let token = account.oauthToken,
-             let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token })
-          {
-            Task {
-              let client = Client(server: account.server, oauthToken: token)
-              await TimelineCache.shared.clearCache(for: client)
-              await sub.deleteSubscription()
-              appAccountsManager.delete(account: account)
-            }
+          Task {
+            await logoutAccount(account: account)
           }
         }
+      }
+      if !appAccountsManager.availableAccounts.isEmpty {
+        editAccountButton
       }
       addAccountButton
     }
     .listRowBackground(theme.primaryBackgroundColor)
+  }
+  
+  private func logoutAccount(account: AppAccount) async {
+    if let token = account.oauthToken,
+       let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token })
+    {
+      let client = Client(server: account.server, oauthToken: token)
+      await TimelineCache.shared.clearCache(for: client)
+      await sub.deleteSubscription()
+      appAccountsManager.delete(account: account)
+    }
   }
 
   @ViewBuilder
@@ -212,6 +233,20 @@ struct SettingsTabs: View {
     }
     .sheet(isPresented: $addAccountSheetPresented) {
       AddAccountView()
+    }
+  }
+  
+  private var editAccountButton: some View {
+    Button(role: isEditingAccount ? .none : .destructive) {
+      withAnimation {
+        isEditingAccount.toggle()
+      }
+    } label: {
+      if isEditingAccount {
+        Text("action.done")
+      } else {
+        Text("account.action.logout")
+      }
     }
   }
 

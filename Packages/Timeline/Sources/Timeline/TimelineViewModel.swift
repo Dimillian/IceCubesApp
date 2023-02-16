@@ -156,6 +156,9 @@ extension TimelineViewModel: StatusesFetcher {
     guard let client else { return }
     do {
       if statuses.isEmpty || timeline == .trending {
+        if !statuses.isEmpty && timeline == .trending {
+          return
+        }
         try await fetchFirstPage(client: client)
       } else if let latest = statuses.first {
         try await fetchNewPagesFrom(latestStatus: latest, client: client)
@@ -218,6 +221,7 @@ extension TimelineViewModel: StatusesFetcher {
   // Fetch pages from the top most status of the tomeline.
   private func fetchNewPagesFrom(latestStatus: Status, client _: Client) async throws {
     canStreamEvents = false
+    let initialTimeline = timeline
     var newStatuses: [Status] = await fetchNewPages(minId: latestStatus.id, maxPages: 10)
 
     // Dedup statuses, a status with the same id could have been streamed in.
@@ -241,6 +245,12 @@ extension TimelineViewModel: StatusesFetcher {
 
     // Return if task has been cancelled.
     guard !Task.isCancelled else {
+      canStreamEvents = true
+      return
+    }
+    
+    // As this is a long runnign task we need to ensure that the user didn't changed the timeline filter.
+    guard initialTimeline == timeline else {
       canStreamEvents = true
       return
     }

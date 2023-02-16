@@ -37,6 +37,8 @@
 "enum.status-actions-display.only-buttons" = "Only buttons";
 "enum.status-display-style.compact" = "Compact";
 "enum.status-display-style.large" = "Large";
+"enum.swipeactions.icon-with-text" = "Icon with text";
+"enum.swipeactions.icon-only" = "Icon only";
 
 // MARK: Instances
 "instance.info.domains" = "Domains";
@@ -63,6 +65,8 @@
 "settings.account.add" = "Add account";
 "settings.app.icon" = "App Icon";
 "settings.app.icon.navigation-title" = "Icons";
+"settings.app.icon.official" = "Official icons";
+"settings.app.icon.designed-by" = "Icons by";
 "settings.app.source" = "Source (GitHub link)";
 "settings.app.support" = "Support the app";
 "settings.app.about" = "About";
@@ -113,6 +117,8 @@
 "settings.content.expand-media" = "Media display";
 "settings.content.default-sensitive" = "Always mark media as sensitive";
 "settings.content.default-visibility" = "Posting visibility";
+"settings.content.media" = "Media";
+"settings.content.media.show.alt" = "Show ALT texts";
 "settings.content.reading" = "Reading";
 "settings.content.posting" = "Posting";
 "enum.expand-media.show" = "Show All";
@@ -177,6 +183,11 @@
 "settings.swipeactions.status.trailing.left" = "left";
 "settings.swipeactions.status.trailing.right" = "right";
 "settings.swipeactions.status" = "Post";
+"settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
+"settings.swipeactions.status.icon-style" = "Icon style";
+
+"settings.display.section.font" = "Font";
+"settings.display.font.rounded" = "Use SF Rounded";
 
 // MARK: Tabs
 "tab.explore" = "Explore";
@@ -256,6 +267,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Delete";
 "conversations.action.mark-read" = "Mark as read";
+"conversations.action.view-detail" = "View detail";
 "conversations.empty.message" = "Looking for some social media love? You'll find all your direct messages and private mentions right here. Happy messaging! 📱❤️";
 "conversations.empty.title" = "Inbox Zero";
 "conversations.error.button" = "Retry";
@@ -327,6 +339,14 @@
 "notifications.navigation-title" = "All Notifications";
 "notifications.tab.all" = "All";
 "notifications.tab.mentions" = "Mentions";
+
+"notifications.label.status.push" = "🖊️ Posted: ";
+"notifications.label.reblog.push" = "🚀 Boosted: ";
+"notifications.label.follow.push" = "👋 Followed you: ";
+"notifications.label.follow-request.push" = "🔒 Requested to follow you: ";
+"notifications.label.favorite.push" = "⭐️ Starred: ";
+"notifications.label.poll.push" = "📈 Poll ended: ";
+"notifications.label.update.push" = "Updated: ";
 
 // MARK: Package: Timeline
 "timeline.federated" = "Federated";
@@ -446,3 +466,12 @@
 "accessibility.editor.button.drafts" = "Drafts";
 "accessibility.editor.button.custom-emojis" = "Custom emojis";
 "accessibility.editor.button.language" = "Language";
+"accessibility.tabs.timeline.add-account" = "Add account";
+"accessibility.app-account.selector.accounts" = "Accounts";
+
+// MARK: Report
+"report.comment.placeholder" = "Additional Info";
+"report.title" = "Report Post";
+"report.action.send" = "Send";
+"status.action.report" = "Report Post";
+

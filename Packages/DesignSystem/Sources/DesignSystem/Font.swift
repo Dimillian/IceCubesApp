@@ -19,7 +19,7 @@ public extension Font {
       return .custom(chosenFont.fontName, size: size, relativeTo: textStyle)
     }
 
-    return .system(size: size)
+    return .system(size: size, design: UserPreferences.shared.useSFRoundedFont ? .rounded : .default)
   }
 
   private static func customUIFont(size: CGFloat) -> UIFont {

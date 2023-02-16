@@ -37,6 +37,8 @@
 "enum.status-actions-display.only-buttons" = "Sólo botones";
 "enum.status-display-style.compact" = "Compacto";
 "enum.status-display-style.large" = "Grande";
+"enum.swipeactions.icon-with-text" = "Icon with text";
+"enum.swipeactions.icon-only" = "Icon only";
 
 // MARK: Instances
 "instance.info.domains" = "Dominios";
@@ -63,10 +65,12 @@
 "settings.account.add" = "Añadir cuenta";
 "settings.app.icon" = "Icono de la app";
 "settings.app.icon.navigation-title" = "Iconos";
+"settings.app.icon.official" = "Official icons";
+"settings.app.icon.designed-by" = "Icons by";
 "settings.app.source" = "Código fuente (Enlace a GitHub)";
 "settings.app.support" = "Apoya a Ice Cubes";
 "settings.app.about" = "Acerca de";
-"settings.display.example-toot" = "Example Post";
+"settings.display.example-toot" = "Publicación de ejemplo";
 "settings.display.avatar.position" = "Posición del avatar";
 "settings.display.avatar.shape" = "Forma del avatar";
 "settings.display.navigation-title" = "Ajustes de apariencia";
@@ -133,6 +137,8 @@
 "settings.content.expand-media" = "Mostrar el contenido multimedia";
 "settings.content.default-sensitive" = "Marcar siempre el contenido multimedia como sensible";
 "settings.content.default-visibility" = "Publicar visibilidad";
+"settings.content.media" = "Media";
+"settings.content.media.show.alt" = "Show ALT texts";
 "settings.content.reading" = "Leyendo";
 "settings.content.posting" = "Publicando";
 "settings.push.duplicate.title" = "Arreglar notificaciones duplicadas";
@@ -143,36 +149,41 @@
 "settings.display.font.system" = "De sistema";
 "settings.display.font.custom" = "Personalizada";
 "settings.display.font.scaling-%@" = "Escalado de tipografía: %@";
-"settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
+"settings.about.built-with" = "Ice Cubes utiliza estas librerías de código abierto:";
 "settings.about.title" = "Ice Cubes";
-"settings.account.cached-posts-%@" = "Cached posts: %@";
-"settings.account.action.delete-cache" = "Clear cache";
+"settings.account.cached-posts-%@" = "Publicaciones cacheadas: %@";
+"settings.account.action.delete-cache" = "Vaciar caché";
 
-"settings.general.haptic" = "Haptic Feedback";
-"settings.haptic.navigation-title" = "Haptic Settings";
-"settings.haptic.timeline" = "Timeline";
-"settings.haptic.tab-selection" = "Tab Selection";
-"settings.haptic.buttons" = "Button Press";
+"settings.general.haptic" = "Respuesta háptica";
+"settings.haptic.navigation-title" = "Ajustes hápticos";
+"settings.haptic.timeline" = "Cronología";
+"settings.haptic.tab-selection" = "Selección de pestaña";
+"settings.haptic.buttons" = "Interacción con botones";
 
-"settings.display.show-tab-label" = "Show tab name";
+"settings.display.show-tab-label" = "Mostrar nombre de pestaña";
 
-"settings.display.show-ipad-column" = "Enable secondary column";
+"settings.display.show-ipad-column" = "Activar segunda columna";
 
-"settings.general.swipeactions" = "Swipe Actions";
-"settings.swipeactions.navigation-title" = "Swipe Actions";
-"settings.swipeactions.status.action.bookmark" = "Bookmark";
-"settings.swipeactions.status.action.boost" = "Boost";
-"settings.swipeactions.status.action.favorite" = "Favorite";
-"settings.swipeactions.status.action.none" = "None";
-"settings.swipeactions.status.action.quote" = "Quote";
-"settings.swipeactions.status.action.reply" = "Reply";
-"settings.swipeactions.status.leading" = "Swipe right";
-"settings.swipeactions.status.leading.left" = "left";
-"settings.swipeactions.status.leading.right" = "right";
-"settings.swipeactions.status.trailing" = "Swipe left";
-"settings.swipeactions.status.trailing.left" = "left";
-"settings.swipeactions.status.trailing.right" = "right";
-"settings.swipeactions.status" = "Post";
+"settings.general.swipeactions" = "Acciones al deslizar";
+"settings.swipeactions.navigation-title" = "Acciones al deslizar";
+"settings.swipeactions.status.action.bookmark" = "Marcadores";
+"settings.swipeactions.status.action.boost" = "Retootear";
+"settings.swipeactions.status.action.favorite" = "Favorito";
+"settings.swipeactions.status.action.none" = "Ninguna";
+"settings.swipeactions.status.action.quote" = "Citar";
+"settings.swipeactions.status.action.reply" = "Responder";
+"settings.swipeactions.status.leading" = "Deslizar a la derecha";
+"settings.swipeactions.status.leading.left" = "izquierda";
+"settings.swipeactions.status.leading.right" = "derecha";
+"settings.swipeactions.status.trailing" = "Deslizar a la izquierda";
+"settings.swipeactions.status.trailing.left" = "izquierda";
+"settings.swipeactions.status.trailing.right" = "derecha";
+"settings.swipeactions.status" = "Publicación";
+"settings.swipeactions.status.use-theme-colors" = "Usar colores del tema en lugar de los colores por defecto";
+"settings.swipeactions.status.icon-style" = "Estilo de icono";
+
+"settings.display.section.font" = "Font";
+"settings.display.font.rounded" = "Use SF Rounded";
 
 "enum.expand-media.show" = "Siempre";
 "enum.expand-media.hide" = "Nunca";
@@ -256,6 +267,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Borrar";
 "conversations.action.mark-read" = "Marcar como leído";
+"conversations.action.view-detail" = "View detail";
 "conversations.empty.message" = "¿Buscas algo de amor de redes sociales? Encontrarás todos tus mensajes directos y menciones privadas justo aquí. ¡Disfruta! 📱❤️";
 "conversations.empty.title" = "No tienes mensajes";
 "conversations.error.button" = "Reintentar";
@@ -327,6 +339,14 @@
 "notifications.navigation-title" = "Todas las notificaciones";
 "notifications.tab.all" = "Todo";
 "notifications.tab.mentions" = "Menciones";
+
+"notifications.label.status.push" = "🖊️ Posted: ";
+"notifications.label.reblog.push" = "🚀 Boosted: ";
+"notifications.label.follow.push" = "👋 Followed you: ";
+"notifications.label.follow-request.push" = "🔒 Requested to follow you: ";
+"notifications.label.favorite.push" = "⭐️ Starred: ";
+"notifications.label.poll.push" = "📈 Poll ended: ";
+"notifications.label.update.push" = "Updated: ";
 
 // MARK: Package: Timeline
 "timeline.federated" = "Federado";
@@ -440,9 +460,17 @@
 "filter.action.hide" = "Ocultar completamente";
 
 // MARK: Accessibility
-"accessibility.editor.button.attach-photo" = "Attach photo";
-"accessibility.editor.button.poll" = "Poll";
-"accessibility.editor.button.spoiler" = "Spoiler warning";
-"accessibility.editor.button.drafts" = "Drafts";
-"accessibility.editor.button.custom-emojis" = "Custom emojis";
-"accessibility.editor.button.language" = "Language";
+"accessibility.editor.button.attach-photo" = "Añadir foto";
+"accessibility.editor.button.poll" = "Encuesta";
+"accessibility.editor.button.spoiler" = "Advertencia";
+"accessibility.editor.button.drafts" = "Borradores";
+"accessibility.editor.button.custom-emojis" = "Emojis personalizados";
+"accessibility.editor.button.language" = "Idioma";
+"accessibility.tabs.timeline.add-account" = "Add account";
+"accessibility.app-account.selector.accounts" = "Accounts";
+
+// MARK: Report
+"report.comment.placeholder" = "Información adicional";
+"report.title" = "Denunciar publicación";
+"report.action.send" = "Enviar";
+"status.action.report" = "Denunciar publicación";

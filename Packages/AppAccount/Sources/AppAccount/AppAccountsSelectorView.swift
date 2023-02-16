@@ -54,7 +54,8 @@ public struct AppAccountsSelectorView: View {
       if let avatar = currentAccount.account?.avatar, !currentAccount.isLoadingAccount {
         AvatarView(url: avatar, size: avatarSize)
       } else {
-        ProgressView()
+        AvatarView(url: nil, size: avatarSize)
+          .redacted(reason: .placeholder)
       }
     }.overlay(alignment: .topTrailing) {
       if !currentAccount.followRequests.isEmpty {
@@ -63,6 +64,7 @@ public struct AppAccountsSelectorView: View {
           .frame(width: 9, height: 9)
       }
     }
+      .accessibilityLabel("accessibility.app-account.selector.accounts")
   }
 
   @ViewBuilder

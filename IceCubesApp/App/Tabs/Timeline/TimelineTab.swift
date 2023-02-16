@@ -81,7 +81,7 @@ struct TimelineTab: View {
         }
       }
     }
-    .onChange(of: currentAccount.account?.id) { _ in
+    .onChange(of: client.id) { _ in
       routerPath.path = []
     }
     .onChange(of: timeline) { timeline in
@@ -159,6 +159,7 @@ struct TimelineTab: View {
     } label: {
       Image(systemName: "person.badge.plus")
     }
+    .accessibilityLabel("accessibility.tabs.timeline.add-account")
   }
 
   @ToolbarContentBuilder
