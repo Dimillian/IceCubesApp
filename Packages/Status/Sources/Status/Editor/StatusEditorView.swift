@@ -9,8 +9,11 @@ import NukeUI
 import PhotosUI
 import SwiftUI
 import UIKit
+import StoreKit
 
 public struct StatusEditorView: View {
+  @Environment(\.requestReview) var requestReview
+  
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
@@ -195,6 +198,10 @@ public struct StatusEditorView: View {
       dismiss()
       NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
                                       object: nil)
+      if !viewModel.mode.isInShareExtension && !preferences.requestedReview {
+        requestReview()
+        preferences.requestedReview = true
+      }
     }
   }
 
