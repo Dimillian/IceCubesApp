@@ -341,13 +341,13 @@
 "notifications.tab.all" = "全部";
 "notifications.tab.mentions" = "提及";
 
-"notifications.label.status.push" = "🖊️ Posted: ";
-"notifications.label.reblog.push" = "🚀 Boosted: ";
-"notifications.label.follow.push" = "👋 Followed you: ";
-"notifications.label.follow-request.push" = "🔒 Requested to follow you: ";
-"notifications.label.favorite.push" = "⭐️ Starred: ";
-"notifications.label.poll.push" = "📈 Poll ended: ";
-"notifications.label.update.push" = "Updated: ";
+"notifications.label.status.push" = "🖊️ 发表了：";
+"notifications.label.reblog.push" = "🚀 转发了：";
+"notifications.label.follow.push" = "👋 新增关注：";
+"notifications.label.follow-request.push" = "🔒 请求关注你：";
+"notifications.label.favorite.push" = "⭐️ 收藏了：";
+"notifications.label.poll.push" = "📈 投票结束：";
+"notifications.label.update.push" = "更新了：";
 
 // MARK: Package: Timeline
 "timeline.federated" = "跨站";
@@ -427,7 +427,7 @@
 "status.poll.duration" = "投票持续时间";
 "status.poll.frequency" = "投票频率";
 "status.poll.option-n %lld" = "%lld 选项";
-"status.poll.send" = "发送投票";
+"status.poll.send" = "投票";
 "status.post-from-%@" = "%@ 的嘟文";
 "status.row.was-boosted" = "转发";
 "status.row.was-reply" = "回复给";
