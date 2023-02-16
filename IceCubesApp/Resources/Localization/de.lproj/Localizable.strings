@@ -16,7 +16,7 @@
 
 // MARK: Add Account
 "account.add.error.instance-not-supported" = "Diese Instanz wird aktuell nicht unterstützt.";
-"account.add.navigation-title" = "Account hinzufügen";
+"account.add.navigation-title" = "Konto hinzufügen";
 "account.add.sign-in" = "Anmelden";
 
 // MARK: Enums
@@ -62,7 +62,7 @@
 "menu.font.smaller" = "Kleiner";
 
 // MARK: Settings
-"settings.account.add" = "Account hinzufügen";
+"settings.account.add" = "Konto hinzufügen";
 "settings.app.icon" = "App-Icon";
 "settings.app.icon.navigation-title" = "Symbole";
 "settings.app.icon.official" = "Offizielle Symbole";
@@ -102,7 +102,7 @@
 "settings.push.navigation-title" = "Push-Mitteilungen";
 "settings.push.new-posts" = "Neue Beiträge";
 "settings.push.polls" = "Umfrageergebnisse";
-"settings.section.accounts" = "Accounts";
+"settings.section.accounts" = "Konten";
 "settings.section.app" = "App";
 "settings.section.app.footer %@" = "App-Version: %@";
 "settings.section.general" = "Allgemein";
@@ -211,7 +211,7 @@
 "timeline.filter.tags" = "Gefolgte Hashtags";
 
 // MARK: Package: AppAccount
-"app-account.button.add" = "Account hinzufügen";
+"app-account.button.add" = "Konto hinzufügen";
 
 // MARK: Package: Account
 "account.action.add-remove-list" = "Hinzufügen/entfernen von Listen";
@@ -226,7 +226,7 @@
 "account.action.unblock" = "Blockade aufheben";
 "account.action.mute" = "Stummschalten";
 "account.action.unmute" = "Stummschaltung aufheben";
-"account.action.share" = "Diesen Account teilen";
+"account.action.share" = "Dieses Konto teilen";
 "account.boosted-by" = "Geboostet von";
 "account.detail.about" = "Über";
 "account.detail.familiar-followers" = "Auch gefolgt von";
@@ -234,7 +234,7 @@
 "account.edit.account-settings.bot" = "Bot-Account";
 "account.edit.account-settings.discoverable" = "In Suche finden";
 "account.edit.account-settings.private" = "Geschützt";
-"account.edit.account-settings.section-title" = "Accounteinstellungen";
+"account.edit.account-settings.section-title" = "Kontoeinstellungen";
 "account.edit.display-name" = "Anzeigename";
 "account.edit.error.save.message" = "Fehler beim Sichern deines Profils. Bitte versuche es erneut.";
 "account.edit.error.save.title" = "Fehler beim Sichern deines Profils";
@@ -267,8 +267,8 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Löschen";
 "conversations.action.mark-read" = "Als gelesen markieren";
-"conversations.action.view-detail" = "Detailansicht";
-"conversations.empty.message" = "Suchst du etwas Liebe in sozialen Medien? Hier findest du alle deine direkten Nachrichten und privaten Erwähnungen. Fröhliches Messaging! 📱❤️";
+"conversations.action.view-detail" = "View detail";
+"conversations.empty.message" = "Suchst du etwas Liebe auf Social Media? Hier findest du alle deine direkten Nachrichten und privaten Erwähnungen. Fröhliches Messaging! 📱❤️";
 "conversations.empty.title" = "Posteingang leer";
 "conversations.error.button" = "Wiederholen";
 "conversations.error.message" = "Fehler beim Laden deiner Nachrichten";
@@ -460,8 +460,8 @@
 "accessibility.editor.button.drafts" = "Entwürfe";
 "accessibility.editor.button.custom-emojis" = "Eigene Emojis";
 "accessibility.editor.button.language" = "Sprache";
-"accessibility.tabs.timeline.add-account" = "Add account";
-"accessibility.app-account.selector.accounts" = "Accounts";
+"accessibility.tabs.timeline.add-account" = "Konto hinzufügen";
+"accessibility.app-account.selector.accounts" = "Konten";
 
 // MARK: Report
 "report.comment.placeholder" = "Zusätzliche Informationen";
