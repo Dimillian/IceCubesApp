@@ -16,9 +16,6 @@ public class AppAccountViewModel: ObservableObject {
     didSet {
       if let account {
         refreshAcct(account: account)
-        Task {
-          await refreshAvatar(account: account)
-        }
       }
     }
   }
@@ -44,8 +41,11 @@ public class AppAccountViewModel: ObservableObject {
       roundedAvatar = Self.avatarsCache[appAccount.id]
       
       account = try await client.get(endpoint: Accounts.verifyCredentials)
-      
       Self.accountsCache[appAccount.id] = account
+      
+      if let account {
+        await refreshAvatar(account: account)
+      }
       
     } catch {}
   }
@@ -60,8 +60,7 @@ public class AppAccountViewModel: ObservableObject {
   }
   
   private func refreshAvatar(account: Account) async {
-    if roundedAvatar == nil,
-       let (data, _) = try? await URLSession.shared.data(from: account.avatar),
+    if let (data, _) = try? await URLSession.shared.data(from: account.avatar),
        let image = UIImage(data: data)?.roundedImage {
         roundedAvatar = image
         Self.avatarsCache[account.id] = image
