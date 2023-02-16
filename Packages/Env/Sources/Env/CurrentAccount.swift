@@ -4,6 +4,8 @@ import Network
 
 @MainActor
 public class CurrentAccount: ObservableObject {
+  static private var accountsCache: [String: Account] = [:]
+  
   @Published public private(set) var account: Account?
   @Published public private(set) var lists: [List] = []
   @Published public private(set) var tags: [Tag] = []
@@ -57,9 +59,13 @@ public class CurrentAccount: ObservableObject {
       account = nil
       return
     }
-    isLoadingAccount = true
+    account = Self.accountsCache[client.id]
+    if account == nil {
+      isLoadingAccount = true
+    }
     account = try? await client.get(endpoint: Accounts.verifyCredentials)
     isLoadingAccount = false
+    Self.accountsCache[client.id] = account
   }
 
   public func fetchLists() async {

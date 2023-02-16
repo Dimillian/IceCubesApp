@@ -39,10 +39,10 @@ public struct AvatarView: View {
     }
   }
 
-  public let url: URL
+  public let url: URL?
   public let size: Size
 
-  public init(url: URL, size: Size = .status) {
+  public init(url: URL?, size: Size = .status) {
     self.url = url
     self.size = size
   }
