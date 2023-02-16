@@ -64,7 +64,7 @@
 // MARK: Settings
 "settings.account.add" = "添加账户";
 "settings.app.icon" = "应用图标";
-"settings.app.icon.navigation-title" = "图标";
+"settings.app.icon.navigation-title" = "应用图标";
 "settings.app.icon.official" = "官方图标";
 "settings.app.icon.designed-by" = "图标作者";
 "settings.app.source" = "源代码（GitHub 链接）";
@@ -78,7 +78,7 @@
 "settings.display.section.display" = "显示";
 "settings.display.section.theme" = "主题";
 "settings.display.section.theme.footer" = "只有在“匹配系统”关闭时才能设置自定义颜色";
-"settings.display.status.action-buttons" = "导航栏选项";
+"settings.display.status.action-buttons" = "导航栏样式";
 "settings.display.status.media-style" = "导航栏排列";
 "settings.display.translate-button" = "显示翻译按钮";
 "settings.display.theme.background" = "背景颜色";
@@ -99,7 +99,7 @@
 "settings.push.main-toggle" = "启用通知";
 "settings.push.main-toggle.description" = "在有新活动时通知";
 "settings.push.mentions" = "提及";
-"settings.push.navigation-title" = "推送通知";
+"settings.push.navigation-title" = "通知设置";
 "settings.push.new-posts" = "新嘟文";
 "settings.push.polls" = "投票结果";
 "settings.section.accounts" = "账户";
@@ -158,7 +158,7 @@
 "settings.haptic.tab-selection" = "导航栏";
 "settings.haptic.buttons" = "按钮";
 
-"settings.display.font" = "时间线字体";
+"settings.display.font" = "应用字体";
 "settings.display.font.system" = "系统";
 "settings.display.font.custom" = "自定义";
 "settings.display.font.scaling-%@" = "字体缩放：%@";
@@ -261,7 +261,7 @@
 "account.posts" = "嘟文";
 "account.relation.follows-you" = "关注你的人";
 "account.joined" = "加入于";
-"account.action.logout" = "登出账户";
+"account.action.logout" = "退出登录";
 "account.action.edit-filters" = "编辑过滤器";
 
 // MARK: Package: Conversations
@@ -327,7 +327,7 @@
 "notifications.label.mention %lld" = "提及了你";
 "notifications.label.poll" = "投票结束";
 "notifications.label.reblog %lld" = "已转发";
-"notifications.label.status" = "嘟嘟了一个状态";
+"notifications.label.status" = "发表了一条嘟文";
 "notifications.label.update" = "编辑了一条嘟文";
 "notifications.menu-title.favorite" = "收藏";
 "notifications.menu-title.follow" = "关注";
@@ -366,8 +366,8 @@
 "status.action.boost" = "转发";
 "status.action.copy-text" = "拷贝文本";
 "status.action.delete" = "删除";
-"status.action.delete.confirm.title" = "确定";
-"status.action.delete.confirm.message" = "你确定要删除此嘟文吗？";
+"status.action.delete.confirm.title" = "确认删除";
+"status.action.delete.confirm.message" = "你确认要删除此嘟文吗？";
 "status.action.edit" = "编辑";
 "status.action.favorite" = "收藏";
 "status.action.mention" = "提及";
@@ -397,8 +397,8 @@
 "status.editor.error.upload" = "上传错误";
 "status.editor.language-select.navigation-title" = "选择语言";
 "status.editor.language-select.recently-used" = "最近使用";
-"status.editor.language-select.confirmation.detected-%@" = "嘟文检测为 %@";
-"status.editor.language-select.confirmation.selected-%@" = "使用 %@ 发送";
+"status.editor.language-select.confirmation.detected-%@" = "直接使用 %@ 发送 ";
+"status.editor.language-select.confirmation.selected-%@" = "选择使用 %@ 发送";
 "status.editor.media.edit-image" = "编辑图片";
 "status.editor.media.image-description" = "图片描述";
 "status.editor.mode.edit" = "正在编辑你的嘟文";
