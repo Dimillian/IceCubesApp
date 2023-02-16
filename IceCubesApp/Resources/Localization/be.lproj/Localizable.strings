@@ -289,6 +289,7 @@
 "env.poll-duration.30m" = "30 хвілін";
 "env.poll-duration.1h" = "1 гадзіна";
 "env.poll-duration.6h" = "6 гадзін";
+"env.poll-duration.12h" = "12 гадзін";
 "env.poll-duration.1d" = "1 дзень";
 "env.poll-duration.3d" = "3 дні";
 "env.poll-duration.7d" = "7 дзён";

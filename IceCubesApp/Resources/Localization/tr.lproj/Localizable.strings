@@ -296,6 +296,7 @@
 "env.poll-duration.30m" = "30 dakika";
 "env.poll-duration.1h" = "1 saat";
 "env.poll-duration.6h" = "6 saat";
+"env.poll-duration.12h" = "12 saat";
 "env.poll-duration.1d" = "1 gün";
 "env.poll-duration.3d" = "3 gün";
 "env.poll-duration.7d" = "7 gün";

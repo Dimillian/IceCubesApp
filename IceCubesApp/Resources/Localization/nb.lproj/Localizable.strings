@@ -300,6 +300,7 @@
 "env.poll-duration.30m" = "30 minutter";
 "env.poll-duration.1h" = "1 time";
 "env.poll-duration.6h" = "6 timer";
+"env.poll-duration.12h" = "12 timer";
 "env.poll-duration.1d" = "1 dag";
 "env.poll-duration.3d" = "3 dager";
 "env.poll-duration.7d" = "7 dager";

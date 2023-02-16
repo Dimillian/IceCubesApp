@@ -301,6 +301,7 @@
 "env.poll-duration.30m" = "30 Minuten";
 "env.poll-duration.1h" = "1 Stunde";
 "env.poll-duration.6h" = "6 Stunden";
+"env.poll-duration.12h" = "12 Stunden";
 "env.poll-duration.1d" = "1 Tag";
 "env.poll-duration.3d" = "3 Tage";
 "env.poll-duration.7d" = "7 Tage";
