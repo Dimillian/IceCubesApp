@@ -185,8 +185,8 @@
 "settings.swipeactions.status.use-theme-colors" = "デフォルトの色の代わりにテーマの色を使用する";
 "settings.swipeactions.status.icon-style" = "アイコンスタイル";
 
-"settings.display.section.font" = "Font";
-"settings.display.font.rounded" = "Use SF Rounded";
+"settings.display.section.font" = "フォント";
+"settings.display.font.rounded" = "角丸SFを使用する";
 
 // MARK: Tabs
 "tab.explore" = "エクスプローラー";
@@ -465,8 +465,8 @@
 "accessibility.editor.button.drafts" = "下書き";
 "accessibility.editor.button.custom-emojis" = "カスタム絵文字";
 "accessibility.editor.button.language" = "言語";
-"accessibility.tabs.timeline.add-account" = "Add account";
-"accessibility.app-account.selector.accounts" = "Accounts";
+"accessibility.tabs.timeline.add-account" = "アカウントを追加";
+"accessibility.app-account.selector.accounts" = "アカウント";
 
 // MARK: Report
 "report.comment.placeholder" = "追加情報";
