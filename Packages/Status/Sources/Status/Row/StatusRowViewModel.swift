@@ -303,7 +303,7 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   func getStatusLang() -> String? {
-    status.language
+    status.reblog?.language ?? status.language
   }
 
   func translate(userLang: String) async {
