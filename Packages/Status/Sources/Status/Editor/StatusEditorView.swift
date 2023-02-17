@@ -12,6 +12,7 @@ import UIKit
 import StoreKit
 
 public struct StatusEditorView: View {
+  @EnvironmentObject private var appAccounnt: AppAccountsManager
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
@@ -159,7 +160,12 @@ public struct StatusEditorView: View {
         }
       }
     }
-    .interactiveDismissDisabled(!viewModel.statusText.string.isEmpty)
+    .interactiveDismissDisabled(!viewModel.shouldDisplayDismissWarning)
+    .onChange(of: appAccounnt.currentClient) { newClient in
+      if viewModel.mode.isInShareExtension {
+        currentAccount.setClient(client: newClient)
+      }
+    }
   }
 
   @ViewBuilder
@@ -228,7 +234,7 @@ public struct StatusEditorView: View {
                                 avatarSize: .status)
         VStack(alignment: .leading, spacing: 4) {
           privacyMenu
-          Text("@\(account.acct)")
+          Text("@\(account.acct)@\(client.server)")
             .font(.scaledFootnote)
             .foregroundColor(.gray)
         }

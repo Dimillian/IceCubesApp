@@ -105,7 +105,7 @@ public struct AppAccountsSelectorView: View {
       }
     }
 
-    if UIDevice.current.userInterfaceIdiom == .phone {
+    if UIDevice.current.userInterfaceIdiom == .phone && accountCreationEnabled {
       Divider()
       Button {
         HapticManager.shared.fireHaptic(of: .buttonPress)
