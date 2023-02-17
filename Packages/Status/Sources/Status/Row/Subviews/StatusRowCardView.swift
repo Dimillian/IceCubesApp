@@ -17,17 +17,20 @@ public struct StatusRowCardView: View {
     if let title = card.title, let url = URL(string: card.url) {
       VStack(alignment: .leading) {
         if let imageURL = card.image {
-          LazyImage(url: imageURL) { state in
-            if let image = state.imageContainer?.image {
-              SwiftUI.Image(uiImage: image)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(height: 200)
-                .clipped()
-            } else if state.isLoading {
-              Rectangle()
-                .fill(Color.gray)
-                .frame(height: 200)
+          GeometryReader { proxy in
+            LazyImage(url: imageURL) { state in
+              if let image = state.imageContainer?.image {
+                SwiftUI.Image(uiImage: image)
+                  .resizable()
+                  .aspectRatio(contentMode: .fill)
+                  .frame(height: 200)
+                  .frame(maxWidth: proxy.frame(in: .local).width)
+                  .clipped()
+              } else if state.isLoading {
+                Rectangle()
+                  .fill(Color.gray)
+                  .frame(height: 200)
+              }
             }
           }
           .frame(height: 200)
