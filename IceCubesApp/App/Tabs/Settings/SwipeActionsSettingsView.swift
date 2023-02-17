@@ -33,17 +33,21 @@ struct SwipeActionsSettingsView: View {
       }
 
       Section {
-        Picker(selection: $userPreferences.swipeActionsIconStyle, label: Text("settings.swipeactions.status.icon-style")) {
+        // TODO: Localization
+        Picker(selection: $userPreferences.swipeActionsIconStyle, label: Text("Show")) {
           ForEach(UserPreferences.SwipeActionsIconStyle.allCases, id: \.rawValue) { style in
             Text(style.description).tag(style)
           }
         }
         Toggle(isOn: $userPreferences.swipeActionsUseThemeColor) {
+          // TODO: Localization
           Text("Use Theme Colors")
         }
       } header: {
+        // TODO: Localization
         Text("Action Display Settings")
       } footer: {
+        // TODO: Localization
         Text("settings.swipeactions.status.use-theme-colors")
       }
       .listRowBackground(theme.primaryBackgroundColor)
@@ -51,10 +55,6 @@ struct SwipeActionsSettingsView: View {
     .navigationTitle("settings.swipeactions.navigation-title")
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
-  }
-
-  private func makeSwipeLabel(left: Bool, text: LocalizedStringKey) -> some View {
-    return Label(text, systemImage: left ? "rectangle.lefthalf.filled" : "rectangle.righthalf.filled")
   }
   
   private func makePostActionPicker(selection: Binding<StatusAction>, label: LocalizedStringKey) -> some View {
