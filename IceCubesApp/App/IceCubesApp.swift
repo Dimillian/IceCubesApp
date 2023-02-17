@@ -135,15 +135,20 @@ struct IceCubesApp: App {
              userPreferences.showiPadSecondaryColumn
           {
             Divider().edgesIgnoringSafeArea(.all)
-            NotificationsTab(popToRootTab: $popToRootTab, lockedType: nil)
-              .environment(\.isSecondaryColumn, true)
-              .frame(maxWidth: 360)
+            notificationsSecondaryColumn
           }
         }
       }
     }.onChange(of: $appAccountsManager.currentAccount.id) { _ in
       sideBarLoadedTabs.removeAll()
     }
+  }
+  
+  private var notificationsSecondaryColumn: some View {
+    NotificationsTab(popToRootTab: $popToRootTab, lockedType: nil)
+      .environment(\.isSecondaryColumn, true)
+      .frame(maxWidth: 360)
+      .id(appAccountsManager.currentAccount.id)
   }
 
   private var tabBarView: some View {

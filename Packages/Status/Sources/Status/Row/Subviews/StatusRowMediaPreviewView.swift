@@ -8,6 +8,7 @@ import SwiftUI
 public struct StatusRowMediaPreviewView: View {
   @Environment(\.openURL) private var openURL
   @Environment(\.isSecondaryColumn) private var isSecondaryColumn
+  @Environment(\.extraLeadingInset) private var extraLeadingInset: CGFloat
 
   @EnvironmentObject var sceneDelegate: SceneDelegate
   @EnvironmentObject private var preferences: UserPreferences
@@ -37,7 +38,7 @@ public struct StatusRowMediaPreviewView: View {
     if UIDevice.current.userInterfaceIdiom == .pad && sceneDelegate.windowWidth < (.maxColumnWidth + .sidebarWidth) {
       sidebarWidth = .sidebarWidth
     }
-    return (.layoutPadding * 2) + avatarColumnWidth + sidebarWidth
+    return (.layoutPadding * 2) + avatarColumnWidth + sidebarWidth + extraLeadingInset
   }
 
   private var imageMaxHeight: CGFloat {
@@ -152,11 +153,13 @@ public struct StatusRowMediaPreviewView: View {
       switch attachment.supportedType {
       case .image:
         LazyImage(url: attachment.url) { state in
-          if let image = state.image {
-            image
-              .resizingMode(.aspectFill)
-              .cornerRadius(4)
+          if let image = state.imageContainer?.image {
+            SwiftUI.Image(uiImage: image)
+              .resizable()
+              .aspectRatio(contentMode: .fill)
               .frame(width: newSize.width, height: newSize.height)
+              .clipped()
+              .cornerRadius(4)
           } else {
             RoundedRectangle(cornerRadius: 4)
               .fill(Color.gray)
@@ -204,9 +207,13 @@ public struct StatusRowMediaPreviewView: View {
           case .image:
             ZStack(alignment: .bottomTrailing) {
               LazyImage(url: attachment.url) { state in
-                if let image = state.image {
-                  image
-                    .resizingMode(.aspectFill)
+                if let image = state.imageContainer?.image {
+                  SwiftUI.Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(maxWidth: isNotifications ? imageMaxHeight : proxy.frame(in: .local).width)
+                    .frame(maxHeight: imageMaxHeight)
+                    .clipped()
                     .cornerRadius(4)
                 } else if state.isLoading {
                   RoundedRectangle(cornerRadius: 4)
@@ -215,8 +222,6 @@ public struct StatusRowMediaPreviewView: View {
                     .frame(maxWidth: isNotifications ? imageMaxHeight : proxy.frame(in: .local).width)
                 }
               }
-              .frame(maxWidth: isNotifications ? imageMaxHeight : proxy.frame(in: .local).width)
-              .frame(height: imageMaxHeight)
               if sensitive {
                 cornerSensitiveButton
               }

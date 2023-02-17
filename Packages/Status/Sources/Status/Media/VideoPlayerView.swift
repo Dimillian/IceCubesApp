@@ -54,6 +54,7 @@ struct VideoPlayerView: View {
     }.onAppear {
       viewModel.preparePlayer(autoPlay: preferences.autoPlayVideo)
     }
+    .cornerRadius(4)
     .onChange(of: scenePhase, perform: { scenePhase in
       switch scenePhase {
       case .background, .inactive:

@@ -26,8 +26,8 @@ public struct StatusEmbeddedView: View {
         StatusRowView(viewModel: .init(status: status,
                                        client: client,
                                        routerPath: routerPath,
-                                       isCompact: true,
                                        showActions: false))
+        .environment(\.isCompact, true)
       }
       Spacer()
     }

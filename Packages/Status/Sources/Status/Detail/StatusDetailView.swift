@@ -104,18 +104,20 @@ public struct StatusDetailView: View {
       }
       let viewModel: StatusRowViewModel = .init(status: status,
                                                 client: client,
-                                                routerPath: routerPath,
-                                                isCompact: false)
-      return HStack {
+                                                routerPath: routerPath)
+      return HStack(spacing: 0) {
         if isReplyToPrevious {
           Rectangle()
             .fill(theme.tintColor)
             .frame(width: 2)
+          Spacer(minLength: 8)
         }
         if self.viewModel.statusId == status.id {
           makeCurrentStatusView(status: status)
+            .environment(\.extraLeadingInset, isReplyToPrevious ? 10 : 0)
         } else {
           StatusRowView(viewModel: viewModel)
+            .environment(\.extraLeadingInset, isReplyToPrevious ? 10 : 0)
         }
       }
       .listRowBackground(viewModel.highlightRowColor)
@@ -130,7 +132,6 @@ public struct StatusDetailView: View {
     StatusRowView(viewModel: .init(status: status,
                                    client: client,
                                    routerPath: routerPath,
-                                   isCompact: false,
                                    isFocused: !viewModel.isLoadingContext))
       .overlay {
         GeometryReader { reader in
@@ -157,7 +158,7 @@ public struct StatusDetailView: View {
 
   private var loadingDetailView: some View {
     ForEach(Status.placeholders()) { status in
-      StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath, isCompact: false))
+      StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
         .redacted(reason: .placeholder)
     }
   }

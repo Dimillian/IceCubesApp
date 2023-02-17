@@ -5,6 +5,8 @@ import Env
 
 struct StatusRowContentView: View {
   @Environment(\.redactionReasons) private var reasons
+  @Environment(\.isCompact) private var isCompact
+  
   @EnvironmentObject private var theme: Theme
   
   let status: AnyStatus
@@ -23,7 +25,7 @@ struct StatusRowContentView: View {
       }
 
       if !reasons.contains(.placeholder),
-         !viewModel.isCompact,
+         !isCompact,
           (viewModel.isEmbedLoading || viewModel.embeddedStatus != nil) {
         StatusEmbeddedView(status: viewModel.embeddedStatus ?? Status.placeholder(),
                            client: viewModel.client,
@@ -31,13 +33,14 @@ struct StatusRowContentView: View {
           .fixedSize(horizontal: false, vertical: true)
           .redacted(reason: viewModel.isEmbedLoading ? .placeholder : [])
           .shimmering(active: viewModel.isEmbedLoading)
+          .transition(.opacity)
       }
       
       if !status.mediaAttachments.isEmpty {
         HStack {
           StatusRowMediaPreviewView(attachments: status.mediaAttachments,
                                     sensitive: status.sensitive,
-                                    isNotifications: viewModel.isCompact)
+                                    isNotifications: isCompact)
           if theme.statusDisplayStyle == .compact {
             Spacer()
           }
@@ -47,7 +50,7 @@ struct StatusRowContentView: View {
       
       if let card = status.card,
          !viewModel.isEmbedLoading,
-         !viewModel.isCompact,
+         !isCompact,
          theme.statusDisplayStyle == .large,
          status.content.statusesURLs.isEmpty,
          status.mediaAttachments.isEmpty

@@ -18,9 +18,12 @@ public struct StatusRowCardView: View {
       VStack(alignment: .leading) {
         if let imageURL = card.image {
           LazyImage(url: imageURL) { state in
-            if let image = state.image {
-              image
-                .resizingMode(.aspectFill)
+            if let image = state.imageContainer?.image {
+              SwiftUI.Image(uiImage: image)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(height: 200)
+                .clipped()
             } else if state.isLoading {
               Rectangle()
                 .fill(Color.gray)

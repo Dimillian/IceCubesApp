@@ -9,7 +9,6 @@ import DesignSystem
 @MainActor
 public class StatusRowViewModel: ObservableObject {
   let status: Status
-  let isCompact: Bool
   let isFocused: Bool
   let isRemote: Bool
   let showActions: Bool
@@ -61,7 +60,6 @@ public class StatusRowViewModel: ObservableObject {
   public init(status: Status,
               client: Client,
               routerPath: RouterPath,
-              isCompact: Bool = false,
               isFocused: Bool = false,
               isRemote: Bool = false,
               showActions: Bool = true)
@@ -69,7 +67,6 @@ public class StatusRowViewModel: ObservableObject {
     self.status = status
     self.client = client
     self.routerPath = routerPath
-    self.isCompact = isCompact
     self.isFocused = isFocused
     self.isRemote = isRemote
     self.showActions = showActions

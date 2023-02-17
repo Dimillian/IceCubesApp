@@ -8,6 +8,7 @@ import SwiftUI
 
 public struct StatusRowView: View {
   @Environment(\.redactionReasons) private var reasons
+  @Environment(\.isCompact) private var isCompact: Bool
 
   @EnvironmentObject private var theme: Theme
   
@@ -34,12 +35,12 @@ public struct StatusRowView: View {
     } else {
       let status: AnyStatus = viewModel.status.reblog ?? viewModel.status
       VStack(alignment: .leading) {
-        if !viewModel.isCompact, theme.avatarPosition == .leading {
+        if !isCompact, theme.avatarPosition == .leading {
           StatusRowReblogView(viewModel: viewModel)
           StatusRowReplyView(viewModel: viewModel)
         }
         HStack(alignment: .top, spacing: .statusColumnsSpacing) {
-          if !viewModel.isCompact,
+          if !isCompact,
              theme.avatarPosition == .leading {
             Button {
               viewModel.routerPath.navigate(to: .accountDetailWithAccount(account: status.account))
@@ -48,13 +49,13 @@ public struct StatusRowView: View {
             }
           }
           VStack(alignment: .leading) {
-            if !viewModel.isCompact, theme.avatarPosition == .top {
+            if !isCompact, theme.avatarPosition == .top {
               StatusRowReblogView(viewModel: viewModel)
               StatusRowReplyView(viewModel: viewModel)
             }
             VStack(alignment: .leading, spacing: 8) {
               let status: AnyStatus = viewModel.status.reblog ?? viewModel.status
-              if !viewModel.isCompact {
+              if !isCompact {
                 StatusRowHeaderView(status: status, viewModel: viewModel)
               }
               StatusRowContentView(status: status, viewModel: viewModel)
@@ -82,7 +83,7 @@ public struct StatusRowView: View {
       .onAppear {
         viewModel.markSeen()
         if reasons.isEmpty {
-          if !viewModel.isCompact, viewModel.embeddedStatus == nil {
+          if !isCompact, viewModel.embeddedStatus == nil {
             Task {
               await viewModel.loadEmbeddedStatus()
             }
@@ -93,12 +94,12 @@ public struct StatusRowView: View {
         contextMenu
       }
       .swipeActions(edge: .trailing) {
-        if !viewModel.isCompact {
+        if !isCompact {
           StatusRowSwipeView(viewModel: viewModel, mode: .trailing)
         }
       }
       .swipeActions(edge: .leading) {
-        if !viewModel.isCompact {
+        if !isCompact {
           StatusRowSwipeView(viewModel: viewModel, mode: .leading)
         }
       }

@@ -7,13 +7,13 @@ import SwiftUI
 import Network
 
 struct NotificationRowView: View {
-  @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var theme: Theme
   @Environment(\.redactionReasons) private var reasons
 
   let notification: ConsolidatedNotification
   let client: Client
   let routerPath: RouterPath
+  let followRequests: [Account]
 
   var body: some View {
     HStack(alignment: .top, spacing: 8) {
@@ -28,8 +28,7 @@ struct NotificationRowView: View {
         makeMainLabel(type: notification.type)
         makeContent(type: notification.type)
         if notification.type == .follow_request,
-           currentAccount.followRequests.map(\.id).contains(notification.accounts[0].id)
-        {
+           followRequests.map(\.id).contains(notification.accounts[0].id) {
           FollowRequestButtons(account: notification.accounts[0])
         }
       }
@@ -137,19 +136,18 @@ struct NotificationRowView: View {
           StatusRowView(viewModel: .init(status: status,
                                          client: client,
                                          routerPath: routerPath,
-                                         isCompact: true,
                                          showActions: true))
         } else {
           StatusRowView(viewModel: .init(status: status,
                                          client: client,
                                          routerPath: routerPath,
-                                         isCompact: true,
                                          showActions: false))
             .lineLimit(4)
             .foregroundColor(.gray)
         }
         Spacer()
       }
+      .environment(\.isCompact, true)
     } else {
       Group {
         Text("@\(notification.accounts[0].acct)")
