@@ -182,8 +182,8 @@
 "settings.swipeactions.status.use-theme-colors" = "Gebruik themakleuren in plaats van standaardkleuren";
 "settings.swipeactions.status.icon-style" = "Symboolstijl";
 
-"settings.display.section.font" = "Font";
-"settings.display.font.rounded" = "Use SF Rounded";
+"settings.display.section.font" = "Lettertype";
+"settings.display.font.rounded" = "Gebruik SF Rounded";
 
 // MARK: Tabs
 "tab.explore" = "Ontdekken";
@@ -463,7 +463,7 @@
 "accessibility.editor.button.drafts" = "Concepten";
 "accessibility.editor.button.custom-emojis" = "Aangepaste emoji’s";
 "accessibility.editor.button.language" = "Taal";
-"accessibility.tabs.timeline.add-account" = "Add account";
+"accessibility.tabs.timeline.add-account" = "Voeg account toe";
 "accessibility.app-account.selector.accounts" = "Accounts";
 
 // MARK: Report
