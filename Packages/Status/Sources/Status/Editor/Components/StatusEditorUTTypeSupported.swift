@@ -54,7 +54,9 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
       return transferable
     }
     if self == .jpeg || self == .png || self == .tiff || self == .image || self == .uiimage {
-      if let imageURL = result as? URL,
+      if let image = result as? UIImage {
+        return image
+      } else if let imageURL = result as? URL,
          let data = try? Data(contentsOf: imageURL),
          let image = UIImage(data: data)
       {
