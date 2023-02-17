@@ -4,7 +4,7 @@ import NukeUI
 import Shimmer
 import SwiftUI
 
-public struct StatusCardView: View {
+public struct StatusRowCardView: View {
   @EnvironmentObject private var theme: Theme
   @Environment(\.openURL) private var openURL
   let card: Card

@@ -5,7 +5,7 @@ import Nuke
 import NukeUI
 import SwiftUI
 
-public struct StatusMediaPreviewView: View {
+public struct StatusRowMediaPreviewView: View {
   @Environment(\.openURL) private var openURL
   @Environment(\.isSecondaryColumn) private var isSecondaryColumn
 

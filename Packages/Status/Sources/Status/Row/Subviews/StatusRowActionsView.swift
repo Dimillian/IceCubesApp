@@ -4,7 +4,7 @@ import Models
 import Network
 import SwiftUI
 
-struct StatusActionsView: View {
+struct StatusRowActionsView: View {
   @EnvironmentObject private var theme: Theme
   @ObservedObject var viewModel: StatusRowViewModel
 

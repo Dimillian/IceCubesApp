@@ -214,14 +214,14 @@ public struct ExploreView: View {
     Section("explore.section.trending.links") {
       ForEach(viewModel.trendingLinks
         .prefix(upTo: viewModel.trendingLinks.count > 3 ? 3 : viewModel.trendingLinks.count)) { card in
-          StatusCardView(card: card)
+          StatusRowCardView(card: card)
             .listRowBackground(theme.primaryBackgroundColor)
             .padding(.vertical, 8)
         }
       NavigationLink {
         List {
           ForEach(viewModel.trendingLinks) { card in
-            StatusCardView(card: card)
+            StatusRowCardView(card: card)
               .listRowBackground(theme.primaryBackgroundColor)
               .padding(.vertical, 8)
           }
