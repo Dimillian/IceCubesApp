@@ -91,7 +91,6 @@ public struct StatusEditorView: View {
         }
       }
       .onChange(of: currentAccount.account?.id, perform: { _ in
-        viewModel.client = client
         viewModel.currentAccount = currentAccount.account
       })
       .background(theme.primaryBackgroundColor)
@@ -230,12 +229,16 @@ public struct StatusEditorView: View {
   private var accountHeaderView: some View {
     if let account = currentAccount.account, !viewModel.mode.isEditing {
       HStack {
-        AppAccountsSelectorView(routerPath: RouterPath(),
-                                accountCreationEnabled: false,
-                                avatarSize: .status)
+        if viewModel.mode.isInShareExtension {
+          AppAccountsSelectorView(routerPath: RouterPath(),
+                                  accountCreationEnabled: false,
+                                  avatarSize: .status)
+        } else {
+          AvatarView(url: account.avatar, size: .status)
+        }
         VStack(alignment: .leading, spacing: 4) {
           privacyMenu
-          Text("@\(account.acct)@\(client.server)")
+          Text("@\(account.acct)@\(appAccounts.currentClient.server)")
             .font(.scaledFootnote)
             .foregroundColor(.gray)
         }
