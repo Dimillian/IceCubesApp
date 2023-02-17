@@ -103,5 +103,6 @@ extension View {
       .environmentObject(Theme.shared)
       .environmentObject(AppAccountsManager.shared)
       .environmentObject(PushNotificationsService.shared)
+      .environmentObject(AppAccountsManager.shared.currentClient)
   }
 }

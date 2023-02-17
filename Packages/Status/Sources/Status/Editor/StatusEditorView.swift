@@ -12,7 +12,7 @@ import UIKit
 import StoreKit
 
 public struct StatusEditorView: View {
-  @EnvironmentObject private var appAccounnt: AppAccountsManager
+  @EnvironmentObject private var appAccounts: AppAccountsManager
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
@@ -161,9 +161,10 @@ public struct StatusEditorView: View {
       }
     }
     .interactiveDismissDisabled(!viewModel.shouldDisplayDismissWarning)
-    .onChange(of: appAccounnt.currentClient) { newClient in
+    .onChange(of: appAccounts.currentClient) { newClient in
       if viewModel.mode.isInShareExtension {
         currentAccount.setClient(client: newClient)
+        viewModel.client = newClient
       }
     }
   }
