@@ -206,7 +206,7 @@ struct AccountDetailHeaderView: View {
       Text("account.relation.note.label")
         .foregroundColor(.gray)
       Text(note)
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(8)
         .background(theme.secondaryBackgroundColor)
         .cornerRadius(4)
