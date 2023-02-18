@@ -11,11 +11,16 @@ struct SwipeActionsSettingsView: View {
       Section {
         makePostActionPicker(selection: $userPreferences.swipeActionsStatusLeadingLeft,
                              label: "settings.swipeactions.status.leading.left")
+          .onChange(of: userPreferences.swipeActionsStatusLeadingLeft) { action in
+            if action == .none {
+              userPreferences.swipeActionsStatusLeadingRight = .none;
+            }
+          }
         
-        if userPreferences.swipeActionsStatusLeadingLeft != .none {
-          makePostActionPicker(selection: $userPreferences.swipeActionsStatusLeadingRight,
+        makePostActionPicker(selection: $userPreferences.swipeActionsStatusLeadingRight,
                                label: "settings.swipeactions.status.leading.right")
-        }
+        .disabled(userPreferences.swipeActionsStatusLeadingLeft == .none)
+        
       } header: {
         Label("settings.swipeactions.status.leading", systemImage: "arrow.right")
       }
@@ -23,13 +28,19 @@ struct SwipeActionsSettingsView: View {
       Section {
         makePostActionPicker(selection: $userPreferences.swipeActionsStatusTrailingLeft,
                              label: "settings.swipeactions.status.trailing.left")
-        
-        if userPreferences.swipeActionsStatusTrailingLeft != .none {
-          makePostActionPicker(selection: $userPreferences.swipeActionsStatusTrailingRight,
+          .onChange(of: userPreferences.swipeActionsStatusTrailingLeft) { action in
+            if action == .none {
+              userPreferences.swipeActionsStatusTrailingRight = .none;
+            }
+          }
+
+        makePostActionPicker(selection: $userPreferences.swipeActionsStatusTrailingRight,
                                label: "settings.swipeactions.status.trailing.right")
-        }
+        .disabled(userPreferences.swipeActionsStatusTrailingLeft == .none)
+        
       } header: {
         Label("settings.swipeactions.status.trailing", systemImage: "arrow.left")
+
       }
 
       Section {
