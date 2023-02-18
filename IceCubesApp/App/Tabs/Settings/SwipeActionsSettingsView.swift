@@ -10,7 +10,7 @@ struct SwipeActionsSettingsView: View {
     Form {
       Section {
         makePostActionPicker(selection: $userPreferences.swipeActionsStatusLeadingLeft,
-                             label: "settings.swipeactions.status.leading.left")
+                             label: "settings.swipeactions.status.primary")
           .onChange(of: userPreferences.swipeActionsStatusLeadingLeft) { action in
             if action == .none {
               userPreferences.swipeActionsStatusLeadingRight = .none;
@@ -18,7 +18,7 @@ struct SwipeActionsSettingsView: View {
           }
         
         makePostActionPicker(selection: $userPreferences.swipeActionsStatusLeadingRight,
-                               label: "settings.swipeactions.status.leading.right")
+                               label: "settings.swipeactions.status.secondary")
         .disabled(userPreferences.swipeActionsStatusLeadingLeft == .none)
         
       } header: {
@@ -26,17 +26,17 @@ struct SwipeActionsSettingsView: View {
       }
       
       Section {
-        makePostActionPicker(selection: $userPreferences.swipeActionsStatusTrailingLeft,
-                             label: "settings.swipeactions.status.trailing.left")
-          .onChange(of: userPreferences.swipeActionsStatusTrailingLeft) { action in
+        makePostActionPicker(selection: $userPreferences.swipeActionsStatusTrailingRight,
+                             label: "settings.swipeactions.status.primary")
+          .onChange(of: userPreferences.swipeActionsStatusTrailingRight) { action in
             if action == .none {
-              userPreferences.swipeActionsStatusTrailingRight = .none;
+              userPreferences.swipeActionsStatusTrailingLeft = .none;
             }
           }
 
-        makePostActionPicker(selection: $userPreferences.swipeActionsStatusTrailingRight,
-                               label: "settings.swipeactions.status.trailing.right")
-        .disabled(userPreferences.swipeActionsStatusTrailingLeft == .none)
+        makePostActionPicker(selection: $userPreferences.swipeActionsStatusTrailingLeft,
+                               label: "settings.swipeactions.status.secondary")
+          .disabled(userPreferences.swipeActionsStatusTrailingRight == .none)
         
       } header: {
         Label("settings.swipeactions.status.trailing", systemImage: "arrow.left")
@@ -44,8 +44,7 @@ struct SwipeActionsSettingsView: View {
       }
 
       Section {
-        // TODO: Localization
-        Picker(selection: $userPreferences.swipeActionsIconStyle, label: Text("Show")) {
+        Picker(selection: $userPreferences.swipeActionsIconStyle, label: Text("settings.swipeactions.status.icon-style")) {
           ForEach(UserPreferences.SwipeActionsIconStyle.allCases, id: \.rawValue) { style in
             Text(style.description).tag(style)
           }
@@ -56,7 +55,7 @@ struct SwipeActionsSettingsView: View {
         }
       } header: {
         // TODO: Localization
-        Text("Action Display Settings")
+        Text("Appearance")
       } footer: {
         // TODO: Localization
         Text("settings.swipeactions.status.use-theme-colors")
