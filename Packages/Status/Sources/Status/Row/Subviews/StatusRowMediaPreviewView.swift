@@ -206,7 +206,7 @@ public struct StatusRowMediaPreviewView: View {
           switch type {
           case .image:
             ZStack(alignment: .bottomTrailing) {
-              LazyImage(url: attachment.url) { state in
+              LazyImage(url: attachment.previewUrl ?? attachment.url) { state in
                 if let image = state.imageContainer?.image {
                   SwiftUI.Image(uiImage: image)
                     .resizable()
