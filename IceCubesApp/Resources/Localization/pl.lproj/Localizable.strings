@@ -261,11 +261,11 @@
 "account.joined" = "Dołączył(a)";
 "account.action.logout" = "Wyloguj się";
 
-"account.relation.note.edit" = "Edit Note";
-"account.relation.note.edit.placeholder" = "Enter Note text";
-"account.relation.note.edit.error.save.message" = "Error while saving your note, please try again.";
-"account.relation.note.edit.error.save.title" = "Error while saving your note";
-"account.relation.note.label" = "Note:";
+"account.relation.note.edit" = "Edytuj notatkę";
+"account.relation.note.edit.placeholder" = "Wprowadź treść notatki";
+"account.relation.note.edit.error.save.message" = "Błąd podczas zapisywania notatki, spróbuj ponownie.";
+"account.relation.note.edit.error.save.title" = "Błąd podczas zapisywania notatki";
+"account.relation.note.label" = "Notatka:";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Usuń";
