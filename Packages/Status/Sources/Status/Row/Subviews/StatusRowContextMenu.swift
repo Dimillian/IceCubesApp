@@ -121,14 +121,14 @@ struct StatusRowContextMenu: View {
       }
     } else {
       if !viewModel.isRemote {
-        Section(viewModel.status.account.acct) {
+        Section(viewModel.status.reblog?.account.acct ?? viewModel.status.account.acct) {
           Button {
-            viewModel.routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.account, visibility: .pub)
+            viewModel.routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .pub)
           } label: {
             Label("status.action.mention", systemImage: "at")
           }
           Button {
-            viewModel.routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.account, visibility: .direct)
+            viewModel.routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .direct)
           } label: {
             Label("status.action.message", systemImage: "tray.full")
           }
