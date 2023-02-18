@@ -235,7 +235,7 @@ private extension CharacterSet {
         var set = CharacterSet(charactersIn: "0"..."9")
         set.insert(charactersIn: "a"..."z")
         set.insert(charactersIn: "A"..."Z")
-        //set.insert("-")
+        set.insert("-")
         return set
     }()
     
