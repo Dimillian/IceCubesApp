@@ -263,11 +263,11 @@
 "account.joined" = "登録日";
 "account.action.logout" = "アカウントをログアウトする";
 
-"account.relation.note.edit" = "Edit Note";
-"account.relation.note.edit.placeholder" = "Enter Note text";
-"account.relation.note.edit.error.save.message" = "Error while saving your note, please try again.";
-"account.relation.note.edit.error.save.title" = "Error while saving your note";
-"account.relation.note.label" = "Note:";
+"account.relation.note.edit" = "ノートを編集";
+"account.relation.note.edit.placeholder" = "ノートを入力";
+"account.relation.note.edit.error.save.message" = "ノートの保存中にエラーが発生しました、もう一度お試しください。";
+"account.relation.note.edit.error.save.title" = "ノートの保存中にエラーが発生しました";
+"account.relation.note.label" = "ノート：";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "削除";
