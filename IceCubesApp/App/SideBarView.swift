@@ -19,42 +19,35 @@ struct SideBarView<Content: View>: View {
   @ViewBuilder var content: () -> Content
 
   private func badgeFor(tab: Tab) -> Int {
-    if tab == .notifications && selectedTab != tab {
-      return watcher.unreadNotificationsCount + userPreferences.pushNotificationsCount
+    if tab == .notifications && selectedTab != tab,
+       let token = appAccounts.currentAccount.oauthToken {
+      return watcher.unreadNotificationsCount + userPreferences.getNotificationsCount(for: token)
     }
     return 0
   }
-
-  private var profileView: some View {
-    Button {
-      selectedTab = .profile
-    } label: {
-      AppAccountsSelectorView(routerPath: RouterPath(),
-                              accountCreationEnabled: false,
-                              avatarSize: .status)
-    }
-    .frame(width: .sidebarWidth, height: 60)
-    .background(selectedTab == .profile ? theme.secondaryBackgroundColor : .clear)
-  }
-
+  
   private func makeIconForTab(tab: Tab) -> some View {
     ZStack(alignment: .topTrailing) {
       SideBarIcon(systemIconName: tab.iconName,
                   isSelected: tab == selectedTab)
       if let badge = badgeFor(tab: tab), badge > 0 {
-        ZStack {
-          Circle()
-            .fill(.red)
-          Text(String(badge))
-            .foregroundColor(.white)
-            .font(.caption2)
-        }
-        .frame(width: 20, height: 20)
-        .offset(x: 10, y: -10)
+        makeBadgeView(count: badge)
       }
     }
     .contentShape(Rectangle())
     .frame(width: .sidebarWidth, height: 50)
+  }
+  
+  private func makeBadgeView(count: Int) -> some View {
+    ZStack {
+      Circle()
+        .fill(.red)
+      Text(String(count))
+        .foregroundColor(.white)
+        .font(.caption2)
+    }
+    .frame(width: 20, height: 20)
+    .offset(x: 10, y: -10)
   }
 
   private var postButton: some View {
@@ -70,7 +63,7 @@ struct SideBarView<Content: View>: View {
     .keyboardShortcut("n", modifiers: .command)
   }
 
-  private func makeAccountButton(account: AppAccount) -> some View {
+  private func makeAccountButton(account: AppAccount, showBadge: Bool) -> some View {
     Button {
       if account.id == appAccounts.currentAccount.id {
         selectedTab = .profile
@@ -82,7 +75,14 @@ struct SideBarView<Content: View>: View {
         }
       }
     } label: {
-      AppAccountView(viewModel: .init(appAccount: account, isCompact: true))
+      ZStack(alignment: .topTrailing) {
+        AppAccountView(viewModel: .init(appAccount: account, isCompact: true))
+        if showBadge,
+            let token = account.oauthToken,
+            userPreferences.getNotificationsCount(for: token) > 0 {
+          makeBadgeView(count: userPreferences.getNotificationsCount(for: token))
+        }
+      }
     }
     .frame(width: .sidebarWidth, height: 50)
     .padding(.vertical, 8)
@@ -101,8 +101,10 @@ struct SideBarView<Content: View>: View {
         }
         selectedTab = tab
         if tab == .notifications {
+          if let token = appAccounts.currentAccount.oauthToken {
+            userPreferences.setNotification(count: 0, token: token)
+          }
           watcher.unreadNotificationsCount = 0
-          userPreferences.pushNotificationsCount = 0
         }
       } label: {
         makeIconForTab(tab: tab)
@@ -119,7 +121,8 @@ struct SideBarView<Content: View>: View {
             tabsView
           } else {
             ForEach(appAccounts.availableAccounts) { account in
-              makeAccountButton(account: account)
+              makeAccountButton(account: account,
+                                showBadge: account.id != appAccounts.currentAccount.id)
               if account.id == appAccounts.currentAccount.id {
                 tabsView
               }

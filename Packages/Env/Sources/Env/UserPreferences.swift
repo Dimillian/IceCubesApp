@@ -97,13 +97,20 @@ public class UserPreferences: ObservableObject {
     }
   }
 
-  public var pushNotificationsCount: Int {
-    get {
-      Self.sharedDefault?.integer(forKey: "push_notifications_count") ?? 0
+  public func setNotification(count: Int, token: OauthToken) {
+    Self.sharedDefault?.set(count, forKey: "push_notifications_count_\(token.createdAt)")
+  }
+  
+  public func getNotificationsCount(for token: OauthToken) -> Int {
+    Self.sharedDefault?.integer(forKey: "push_notifications_count_\(token.createdAt)") ?? 0
+  }
+  
+  public func getNotificationsTotalCount(for tokens: [OauthToken]) -> Int {
+    var count: Int = 0
+    for token in tokens {
+      count += getNotificationsCount(for: token)
     }
-    set {
-      Self.sharedDefault?.set(newValue, forKey: "push_notifications_count")
-    }
+    return count
   }
 
   public var chosenFont: UIFont? {

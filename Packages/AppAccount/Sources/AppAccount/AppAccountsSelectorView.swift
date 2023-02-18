@@ -3,6 +3,7 @@ import Env
 import SwiftUI
 
 public struct AppAccountsSelectorView: View {
+  @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var appAccounts: AppAccountsManager
 
@@ -90,7 +91,12 @@ public struct AppAccountsSelectorView: View {
             if let image = viewModel.roundedAvatar {
               Image(uiImage: image)
             }
-            Text("\(viewModel.account?.displayName ?? "")")
+            if let token = viewModel.appAccount.oauthToken,
+               preferences.getNotificationsCount(for: token) > 0 {
+              Text("\(viewModel.account?.displayName ?? "") (\(preferences.getNotificationsCount(for: token)))")
+            } else {
+              Text("\(viewModel.account?.displayName ?? "")")
+            }
           }
         }
       }

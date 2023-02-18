@@ -44,8 +44,6 @@ struct NotificationsTab: View {
     }
     .onAppear {
       routerPath.client = client
-      watcher.unreadNotificationsCount = 0
-      userPreferences.pushNotificationsCount = 0
     }
     .withSafariRouter()
     .environmentObject(routerPath)
@@ -72,8 +70,10 @@ struct NotificationsTab: View {
       switch scenePhase {
       case .active:
         if isSecondaryColumn {
+          if let token = appAccount.currentAccount.oauthToken {
+            userPreferences.setNotification(count: 0, token: token)
+          }
           watcher.unreadNotificationsCount = 0
-          userPreferences.pushNotificationsCount = 0
         }
       default:
         break
