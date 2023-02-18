@@ -29,10 +29,14 @@ final class TimelinePrefetcher: NSObject, ObservableObject, UICollectionViewData
 }
 
 private func getImages(for status: Status) -> [URL] {
-  status.mediaAttachments.compactMap {
+  var urls = status.mediaAttachments.compactMap {
     if $0.supportedType == .image {
       return status.mediaAttachments.count > 1 ? $0.previewUrl ?? $0.url : $0.url
     }
     return nil
   }
+  if let url = status.card?.image {
+    urls.append(url)
+  }
+  return urls
 }
