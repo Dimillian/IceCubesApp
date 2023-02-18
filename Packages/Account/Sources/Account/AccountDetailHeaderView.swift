@@ -45,6 +45,8 @@ struct AccountDetailHeaderView: View {
               .resizable()
               .aspectRatio(contentMode: .fill)
               .overlay(account.haveHeader ? .black.opacity(0.50) : .clear)
+              .frame(height: Constants.headerHeight)
+              .clipped()
           } else if state.isLoading {
             theme.secondaryBackgroundColor
               .frame(height: Constants.headerHeight)
