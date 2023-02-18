@@ -153,8 +153,8 @@ public struct StatusRowMediaPreviewView: View {
       switch attachment.supportedType {
       case .image:
         LazyImage(url: attachment.url) { state in
-          if let image = state.imageContainer?.image {
-            SwiftUI.Image(uiImage: image)
+          if let image = state.image {
+            image
               .resizable()
               .aspectRatio(contentMode: .fill)
               .frame(width: newSize.width, height: newSize.height)
@@ -166,7 +166,7 @@ public struct StatusRowMediaPreviewView: View {
               .frame(width: newSize.width, height: newSize.height)
           }
         }
-        .processors([ImageProcessors.Resize(size: .init(width: newSize.width, height: newSize.height))])
+        .processors([.resize(size: .init(width: newSize.width, height: newSize.height))])
         .frame(width: newSize.width, height: newSize.height)
 
       case .gifv, .video, .audio:
@@ -209,8 +209,8 @@ public struct StatusRowMediaPreviewView: View {
             let width = isNotifications ? imageMaxHeight : proxy.frame(in: .local).width
             ZStack(alignment: .bottomTrailing) {
               LazyImage(url: attachment.previewUrl ?? attachment.url) { state in
-                if let image = state.imageContainer?.image {
-                  SwiftUI.Image(uiImage: image)
+                if let image = state.image {
+                  image
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(maxWidth: width)
@@ -224,7 +224,7 @@ public struct StatusRowMediaPreviewView: View {
                     .frame(maxWidth: width)
                 }
               }
-              .processors([ImageProcessors.Resize(size: .init(width: width, height: imageMaxHeight))])
+              .processors([.resize(size: .init(width: width, height: imageMaxHeight))])
               if sensitive {
                 cornerSensitiveButton
               }
