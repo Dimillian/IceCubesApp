@@ -125,16 +125,22 @@ struct ConversationMessageView: View {
   }
 
   private func makeMediaView(_ attachement: MediaAttachment) -> some View {
-    LazyImage(url: attachement.url) { state in
-      if let image = state.image {
-        image
-          .resizingMode(.aspectFill)
-          .cornerRadius(8)
-          .padding(8)
-      } else if state.isLoading {
-        RoundedRectangle(cornerRadius: 8)
-          .fill(Color.gray)
-          .frame(height: 200)
+    GeometryReader { proxy in
+      LazyImage(url: attachement.url) { state in
+        if let image = state.image {
+          image
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(height: 200)
+            .frame(maxWidth: proxy.frame(in: .local).width)
+            .clipped()
+            .cornerRadius(8)
+            .padding(8)
+        } else if state.isLoading {
+          RoundedRectangle(cornerRadius: 8)
+            .fill(Color.gray)
+            .frame(height: 200)
+        }
       }
     }
     .frame(height: 200)

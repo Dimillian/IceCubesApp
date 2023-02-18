@@ -42,8 +42,11 @@ struct AccountDetailHeaderView: View {
         LazyImage(url: account.header) { state in
           if let image = state.image {
             image
-              .resizingMode(.aspectFill)
+              .resizable()
+              .aspectRatio(contentMode: .fill)
               .overlay(account.haveHeader ? .black.opacity(0.50) : .clear)
+              .frame(height: Constants.headerHeight)
+              .clipped()
           } else if state.isLoading {
             theme.secondaryBackgroundColor
               .frame(height: Constants.headerHeight)
