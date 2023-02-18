@@ -243,7 +243,8 @@ struct StatusEditorAccessoryView: View {
             LazyImage(url: emoji.url) { state in
               if let image = state.image {
                 image
-                  .resizingMode(.aspectFit)
+                  .resizable()
+                  .aspectRatio(contentMode: .fill)
                   .frame(width: 40, height: 40)
               } else if state.isLoading {
                 Rectangle()

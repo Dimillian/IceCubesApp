@@ -128,7 +128,8 @@ struct ConversationMessageView: View {
     LazyImage(url: attachement.url) { state in
       if let image = state.image {
         image
-          .resizingMode(.aspectFill)
+          .resizable()
+          .aspectRatio(contentMode: .fill)
           .cornerRadius(8)
           .padding(8)
       } else if state.isLoading {
