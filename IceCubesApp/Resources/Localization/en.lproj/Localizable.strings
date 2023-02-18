@@ -182,9 +182,12 @@
 "settings.swipeactions.status.trailing" = "Swipe left";
 "settings.swipeactions.status.trailing.left" = "left";
 "settings.swipeactions.status.trailing.right" = "right";
+"settings.swipeactions.status.primary" = "Primary";
+"settings.swipeactions.status.secondary" = "Secondary";
+
 "settings.swipeactions.status" = "Post";
 "settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
-"settings.swipeactions.status.icon-style" = "Icon style";
+"settings.swipeactions.status.icon-style" = "Icon Style";
 
 "settings.display.section.font" = "Font";
 "settings.display.font.rounded" = "Use SF Rounded";
