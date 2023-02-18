@@ -4,7 +4,7 @@ private enum CodingKeys: CodingKey {
   case asDate
 }
 
-public struct ServerDate: Codable, Hashable, Equatable {
+public struct ServerDate: Codable, Hashable, Equatable, Sendable {
   public let asDate: Date
 
   public var relativeFormatted: String {

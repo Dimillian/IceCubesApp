@@ -48,7 +48,7 @@ public enum ServerFilters: Endpoint {
   }
 }
 
-public struct ServerFilterData: Encodable {
+public struct ServerFilterData: Encodable, Sendable {
   public let title: String
   public let context: [ServerFilter.Context]
   public let filterAction: ServerFilter.Action

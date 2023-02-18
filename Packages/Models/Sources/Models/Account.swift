@@ -1,6 +1,6 @@
 import Foundation
 
-public final class Account: Codable, Identifiable, Equatable, Hashable {
+public final class Account: Codable, Identifiable, Equatable, Hashable, Sendable {
   public static func == (lhs: Account, rhs: Account) -> Bool {
     lhs.id == rhs.id
   }
@@ -9,7 +9,7 @@ public final class Account: Codable, Identifiable, Equatable, Hashable {
     hasher.combine(id)
   }
 
-  public struct Field: Codable, Equatable, Identifiable {
+  public struct Field: Codable, Equatable, Identifiable, Sendable {
     public var id: String {
       value.asRawText + name
     }
@@ -19,7 +19,7 @@ public final class Account: Codable, Identifiable, Equatable, Hashable {
     public let verifiedAt: String?
   }
 
-  public struct Source: Codable, Equatable {
+  public struct Source: Codable, Equatable, Sendable {
     public let privacy: Visibility
     public let sensitive: Bool
     public let language: String?

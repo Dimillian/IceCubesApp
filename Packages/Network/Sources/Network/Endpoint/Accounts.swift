@@ -154,7 +154,7 @@ public enum Accounts: Endpoint {
   }
 }
 
-public struct MuteData: Encodable {
+public struct MuteData: Encodable, Sendable {
   public let duration: Int
 
   public init(duration: Int) {
@@ -162,7 +162,7 @@ public struct MuteData: Encodable {
   }
 }
 
-public struct RelationshipNoteData: Encodable {
+public struct RelationshipNoteData: Encodable, Sendable {
   public let comment: String
   
   public init(note comment: String) {

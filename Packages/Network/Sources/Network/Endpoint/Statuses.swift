@@ -91,7 +91,7 @@ public enum Statuses: Endpoint {
   }
 }
 
-public struct StatusData: Encodable {
+public struct StatusData: Encodable, Sendable {
   public let status: String
   public let visibility: Visibility
   public let inReplyToId: String?
@@ -101,7 +101,7 @@ public struct StatusData: Encodable {
   public let language: String?
   public let mediaAttributes: [MediaAttribute]?
 
-  public struct PollData: Encodable {
+  public struct PollData: Encodable, Sendable {
     public let options: [String]
     public let multiple: Bool
     public let expires_in: Int
@@ -113,7 +113,7 @@ public struct StatusData: Encodable {
     }
   }
 
-  public struct MediaAttribute: Encodable {
+  public struct MediaAttribute: Encodable, Sendable {
     public let id: String
     public let description: String?
     public let thumbnail: String?
