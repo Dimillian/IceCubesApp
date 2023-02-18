@@ -235,6 +235,7 @@ public struct StatusEditorView: View {
                                   avatarSize: .status)
         } else {
           AvatarView(url: account.avatar, size: .status)
+            .environmentObject(theme)
         }
         VStack(alignment: .leading, spacing: 4) {
           privacyMenu

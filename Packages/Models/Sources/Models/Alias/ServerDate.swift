@@ -47,7 +47,7 @@ public struct ServerDate: Codable, Hashable, Equatable {
       // Decode from server
       let container = try decoder.singleValueContainer()
       let stringDate = try container.decode(String.self)
-      asDate = Self.createdAtDateFormatter.date(from: stringDate)!
+      asDate = Self.createdAtDateFormatter.date(from: stringDate) ?? Date()
     } catch {
       // Decode from cache
       let container = try decoder.container(keyedBy: CodingKeys.self)
