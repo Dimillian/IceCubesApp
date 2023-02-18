@@ -1,17 +1,17 @@
 import Foundation
 
-public struct ServerFilter: Codable, Identifiable, Hashable {
-  public struct Keyword: Codable, Identifiable, Hashable {
+public struct ServerFilter: Codable, Identifiable, Hashable, Sendable {
+  public struct Keyword: Codable, Identifiable, Hashable, Sendable {
     public let id: String
     public let keyword: String
     public let wholeWord: Bool
   }
 
-  public enum Context: String, Codable, CaseIterable {
+  public enum Context: String, Codable, CaseIterable, Sendable {
     case home, notifications, `public`, thread, account
   }
 
-  public enum Action: String, Codable, CaseIterable {
+  public enum Action: String, Codable, CaseIterable, Sendable {
     case warn, hide
   }
 

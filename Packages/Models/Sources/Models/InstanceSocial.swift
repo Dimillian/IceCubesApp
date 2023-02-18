@@ -1,7 +1,7 @@
 import Foundation
 
-public struct InstanceSocial: Decodable, Identifiable {
-  public struct Info: Decodable {
+public struct InstanceSocial: Decodable, Identifiable, Sendable {
+  public struct Info: Decodable, Sendable {
     public let shortDescription: String?
   }
 

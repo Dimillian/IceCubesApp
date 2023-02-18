@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol Endpoint {
+public protocol Endpoint: Sendable {
   func path() -> String
   func queryItems() -> [URLQueryItem]?
   var jsonValue: Encodable? { get }

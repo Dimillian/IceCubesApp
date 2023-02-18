@@ -6,7 +6,7 @@ private enum CodingKeys: CodingKey {
   case htmlValue, asMarkdown, asRawText, statusesURLs
 }
 
-public struct HTMLString: Codable, Equatable, Hashable {
+public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
   public var htmlValue: String = ""
   public var asMarkdown: String = ""
   public var asRawText: String = ""

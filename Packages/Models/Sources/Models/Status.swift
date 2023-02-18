@@ -18,7 +18,7 @@ public extension Application {
   }
 }
 
-public enum Visibility: String, Codable, CaseIterable, Hashable, Equatable {
+public enum Visibility: String, Codable, CaseIterable, Hashable, Equatable, Sendable {
   case pub = "public"
   case unlisted
   case priv = "private"
