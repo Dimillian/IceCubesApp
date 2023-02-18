@@ -150,6 +150,12 @@ struct AccountDetailHeaderView: View {
           }
         }
       }
+      
+      if let note = viewModel.relationship?.note, !note.isEmpty,
+          !viewModel.isCurrentUser {
+        makeNoteView(note)
+      }
+
       EmojiTextApp(account.note, emojis: account.emojis)
         .font(.scaledBody)
         .padding(.top, 8)
@@ -191,6 +197,23 @@ struct AccountDetailHeaderView: View {
       .foregroundColor(.gray)
       .font(.footnote)
       .padding(.top, 6)
+    }
+  }
+  
+  @ViewBuilder
+  private func makeNoteView(_ note: String) -> some View {
+    VStack(alignment: .leading, spacing: 4) {
+      Text("account.relation.note.label")
+        .foregroundColor(.gray)
+      Text(note)
+        .frame(maxWidth: .infinity)
+        .padding(8)
+        .background(theme.secondaryBackgroundColor)
+        .cornerRadius(4)
+        .overlay(
+          RoundedRectangle(cornerRadius: 4)
+            .stroke(.gray.opacity(0.35), lineWidth: 1)
+        )
     }
   }
 }

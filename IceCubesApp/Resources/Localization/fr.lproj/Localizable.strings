@@ -263,6 +263,12 @@
 "account.joined" = "Inscrit";
 "account.action.logout" = "Déconnexion";
 
+"account.relation.note.edit" = "Edit Note";
+"account.relation.note.edit.placeholder" = "Enter Note text";
+"account.relation.note.edit.error.save.message" = "Error while saving your note, please try again.";
+"account.relation.note.edit.error.save.title" = "Error while saving your note";
+"account.relation.note.label" = "Note:";
+
 // MARK: Package: Conversations
 "conversations.action.delete" = "Supprimer";
 "conversations.action.mark-read" = "Marquer comme lu";

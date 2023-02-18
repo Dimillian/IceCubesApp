@@ -26,6 +26,7 @@ public struct AccountDetailView: View {
 
   @State private var isEditingAccount: Bool = false
   @State private var isEditingFilters: Bool = false
+  @State private var isEditingRelationshipNote: Bool = false
 
   /// When coming from a URL like a mention tap in a status.
   public init(accountId: String) {
@@ -125,6 +126,9 @@ public struct AccountDetailView: View {
     })
     .sheet(isPresented: $isEditingFilters, content: {
       FiltersListView()
+    })
+    .sheet(isPresented: $isEditingRelationshipNote, content: {
+      EditRelationshipNoteView(accountDetailViewModel: viewModel)
     })
     .edgesIgnoringSafeArea(.top)
     .navigationBarTitleDisplayMode(.inline)
@@ -487,6 +491,12 @@ public struct AccountDetailView: View {
               }
 
               Divider()
+
+              Button {
+                isEditingRelationshipNote = true
+              } label: {
+                Label("account.relation.note.edit", systemImage: "pencil")
+              }
             }
 
             if viewModel.relationship?.following == true {
