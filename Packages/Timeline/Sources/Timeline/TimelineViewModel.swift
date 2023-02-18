@@ -99,7 +99,7 @@ class TimelineViewModel: ObservableObject {
        !statuses.contains(where: { $0.id == event.status.id })
     {
       pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
-      var newStatus = event.status
+      let newStatus = event.status
       if let accountId {
         if newStatus.mentions.first(where: { $0.id == accountId }) != nil {
           newStatus.userMentioned = true
