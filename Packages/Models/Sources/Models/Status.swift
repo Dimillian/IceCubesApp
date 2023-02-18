@@ -68,7 +68,7 @@ protocol StatusUI {
   var userMentioned: Bool? { get set }
 }
 
-public struct Status: AnyStatus, Codable, Identifiable, Equatable, Hashable, StatusUI {
+public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable, StatusUI {
   public var userMentioned: Bool?
 
   public static func == (lhs: Status, rhs: Status) -> Bool {
@@ -106,6 +106,37 @@ public struct Status: AnyStatus, Codable, Identifiable, Equatable, Hashable, Sta
   public let filtered: [Filtered]?
   public let sensitive: Bool
   public let language: String?
+
+  public init(userMentioned: Bool? = nil, id: String, content: HTMLString, account: Account, createdAt: ServerDate, editedAt: ServerDate?, reblog: ReblogStatus?, mediaAttachments: [MediaAttachment], mentions: [Mention], repliesCount: Int, reblogsCount: Int, favouritesCount: Int, card: Card?, favourited: Bool?, reblogged: Bool?, pinned: Bool?, bookmarked: Bool?, emojis: [Emoji], url: String?, application: Application?, inReplyToId: String?, inReplyToAccountId: String?, visibility: Visibility, poll: Poll?, spoilerText: HTMLString, filtered: [Filtered]?, sensitive: Bool, language: String?) {
+    self.userMentioned = userMentioned
+    self.id = id
+    self.content = content
+    self.account = account
+    self.createdAt = createdAt
+    self.editedAt = editedAt
+    self.reblog = reblog
+    self.mediaAttachments = mediaAttachments
+    self.mentions = mentions
+    self.repliesCount = repliesCount
+    self.reblogsCount = reblogsCount
+    self.favouritesCount = favouritesCount
+    self.card = card
+    self.favourited = favourited
+    self.reblogged = reblogged
+    self.pinned = pinned
+    self.bookmarked = bookmarked
+    self.emojis = emojis
+    self.url = url
+    self.application = application
+    self.inReplyToId = inReplyToId
+    self.inReplyToAccountId = inReplyToAccountId
+    self.visibility = visibility
+    self.poll = poll
+    self.spoilerText = spoilerText
+    self.filtered = filtered
+    self.sensitive = sensitive
+    self.language = language
+  }
 
   public static func placeholder(forSettings: Bool = false, language: String? = nil) -> Status {
     .init(id: UUID().uuidString,
@@ -176,7 +207,7 @@ public struct Status: AnyStatus, Codable, Identifiable, Equatable, Hashable, Sta
   }
 }
 
-public struct ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Hashable {
+public final class ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Hashable {
   public static func == (lhs: ReblogStatus, rhs: ReblogStatus) -> Bool {
     lhs.id == rhs.id
   }
@@ -211,4 +242,33 @@ public struct ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Hashabl
   public let filtered: [Filtered]?
   public let sensitive: Bool
   public let language: String?
+
+  public init(id: String, content: HTMLString, account: Account, createdAt: ServerDate, editedAt: ServerDate?, mediaAttachments: [MediaAttachment], mentions: [Mention], repliesCount: Int, reblogsCount: Int, favouritesCount: Int, card: Card?, favourited: Bool?, reblogged: Bool?, pinned: Bool?, bookmarked: Bool?, emojis: [Emoji], url: String?, application: Application? = nil, inReplyToId: String?, inReplyToAccountId: String?, visibility: Visibility, poll: Poll?, spoilerText: HTMLString, filtered: [Filtered]?, sensitive: Bool, language: String?) {
+    self.id = id
+    self.content = content
+    self.account = account
+    self.createdAt = createdAt
+    self.editedAt = editedAt
+    self.mediaAttachments = mediaAttachments
+    self.mentions = mentions
+    self.repliesCount = repliesCount
+    self.reblogsCount = reblogsCount
+    self.favouritesCount = favouritesCount
+    self.card = card
+    self.favourited = favourited
+    self.reblogged = reblogged
+    self.pinned = pinned
+    self.bookmarked = bookmarked
+    self.emojis = emojis
+    self.url = url
+    self.application = application
+    self.inReplyToId = inReplyToId
+    self.inReplyToAccountId = inReplyToAccountId
+    self.visibility = visibility
+    self.poll = poll
+    self.spoilerText = spoilerText
+    self.filtered = filtered
+    self.sensitive = sensitive
+    self.language = language
+  }
 }

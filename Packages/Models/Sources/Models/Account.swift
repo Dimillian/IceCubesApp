@@ -1,6 +1,10 @@
 import Foundation
 
-public struct Account: Codable, Identifiable, Equatable, Hashable {
+public final class Account: Codable, Identifiable, Equatable, Hashable {
+  public static func == (lhs: Account, rhs: Account) -> Bool {
+    lhs.id == rhs.id
+  }
+  
   public func hash(into hasher: inout Hasher) {
     hasher.combine(id)
   }
@@ -51,6 +55,29 @@ public struct Account: Codable, Identifiable, Equatable, Hashable {
     return header.lastPathComponent != "missing.png"
   }
 
+  
+  public init(id: String, username: String, displayName: String, avatar: URL, header: URL, acct: String, note: HTMLString, createdAt: ServerDate, followersCount: Int, followingCount: Int, statusesCount: Int, lastStatusAt: String? = nil, fields: [Account.Field], locked: Bool, emojis: [Emoji], url: URL? = nil, source: Account.Source? = nil, bot: Bool, discoverable: Bool? = nil) {
+    self.id = id
+    self.username = username
+    self.displayName = displayName
+    self.avatar = avatar
+    self.header = header
+    self.acct = acct
+    self.note = note
+    self.createdAt = createdAt
+    self.followersCount = followersCount
+    self.followingCount = followingCount
+    self.statusesCount = statusesCount
+    self.lastStatusAt = lastStatusAt
+    self.fields = fields
+    self.locked = locked
+    self.emojis = emojis
+    self.url = url
+    self.source = source
+    self.bot = bot
+    self.discoverable = discoverable
+  }
+  
   public static func placeholder() -> Account {
     .init(id: UUID().uuidString,
           username: "Username",
