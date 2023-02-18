@@ -166,6 +166,7 @@ public struct StatusRowMediaPreviewView: View {
               .frame(width: newSize.width, height: newSize.height)
           }
         }
+        .processors([ImageProcessors.Resize(size: .init(width: newSize.width, height: newSize.height))])
         .frame(width: newSize.width, height: newSize.height)
 
       case .gifv, .video, .audio:
@@ -205,13 +206,14 @@ public struct StatusRowMediaPreviewView: View {
         GeometryReader { proxy in
           switch type {
           case .image:
+            let width = isNotifications ? imageMaxHeight : proxy.frame(in: .local).width
             ZStack(alignment: .bottomTrailing) {
-              LazyImage(url: attachment.url) { state in
+              LazyImage(url: attachment.previewUrl ?? attachment.url) { state in
                 if let image = state.imageContainer?.image {
                   SwiftUI.Image(uiImage: image)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(maxWidth: isNotifications ? imageMaxHeight : proxy.frame(in: .local).width)
+                    .frame(maxWidth: width)
                     .frame(maxHeight: imageMaxHeight)
                     .clipped()
                     .cornerRadius(4)
@@ -219,9 +221,10 @@ public struct StatusRowMediaPreviewView: View {
                   RoundedRectangle(cornerRadius: 4)
                     .fill(Color.gray)
                     .frame(maxHeight: imageMaxHeight)
-                    .frame(maxWidth: isNotifications ? imageMaxHeight : proxy.frame(in: .local).width)
+                    .frame(maxWidth: width)
                 }
               }
+              .processors([ImageProcessors.Resize(size: .init(width: width, height: imageMaxHeight))])
               if sensitive {
                 cornerSensitiveButton
               }
