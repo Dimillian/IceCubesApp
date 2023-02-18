@@ -26,7 +26,7 @@ public enum Visibility: String, Codable, CaseIterable, Hashable, Equatable {
 }
 
 public protocol AnyStatus {
-  var viewId: String { get }
+  var viewId: StatusViewId { get }
   var id: String { get }
   var content: HTMLString { get }
   var account: Account { get }
@@ -55,12 +55,14 @@ public protocol AnyStatus {
   var language: String? { get }
 }
 
+public struct StatusViewId: Hashable {
+    let id: String
+    let editedAt: ServerDate?
+}
+
 public extension AnyStatus {
-  var viewId: String {
-    if let editedAt {
-      return "\(id)\(editedAt.asDate.description)"
-    }
-    return id
+  var viewId: StatusViewId {
+    StatusViewId(id: id, editedAt: editedAt)
   }
 }
 
