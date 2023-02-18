@@ -1,4 +1,5 @@
 import AVKit
+import DesignSystem
 import Env
 import SwiftUI
 
@@ -45,12 +46,22 @@ class VideoPlayerViewModel: ObservableObject {
 struct VideoPlayerView: View {
   @Environment(\.scenePhase) private var scenePhase
   @EnvironmentObject private var preferences: UserPreferences
+  @EnvironmentObject private var theme: Theme
 
   @StateObject var viewModel: VideoPlayerViewModel
 
   var body: some View {
-    VStack {
+    ZStack(alignment: .bottomLeading) {
       VideoPlayer(player: viewModel.player)
+
+      if !preferences.autoPlayVideo {
+        Image(systemName: "play.fill")
+          .foregroundColor(theme.tintColor)
+          .padding(4)
+          .background(.thinMaterial)
+          .cornerRadius(4)
+          .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
+      }
     }.onAppear {
       viewModel.preparePlayer(autoPlay: preferences.autoPlayVideo)
     }
