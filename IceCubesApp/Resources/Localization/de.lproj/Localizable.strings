@@ -264,11 +264,11 @@
 "account.action.logout" = "Abmelden";
 "account.action.edit-filters" = "Filter bearbeiten";
 
-"account.relation.note.edit" = "Edit Note";
-"account.relation.note.edit.placeholder" = "Enter Note text";
-"account.relation.note.edit.error.save.message" = "Error while saving your note, please try again.";
-"account.relation.note.edit.error.save.title" = "Error while saving your note";
-"account.relation.note.label" = "Note:";
+"account.relation.note.edit" = "Notiz bearbeiten";
+"account.relation.note.edit.placeholder" = "Gib den Notiztext ein";
+"account.relation.note.edit.error.save.message" = "Fehler beim Speichern der Notiz, versuch es bitte erneut.";
+"account.relation.note.edit.error.save.title" = "Fehler beim Speichern der Notiz";
+"account.relation.note.label" = "Notiz:";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Löschen";
