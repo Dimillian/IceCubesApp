@@ -29,5 +29,9 @@ let package = Package(
         .product(name: "KeychainSwift", package: "keychain-swift"),
       ]
     ),
+    .testTarget(
+      name: "EnvTests",
+      dependencies: ["Env"]
+    ),
   ]
 )
