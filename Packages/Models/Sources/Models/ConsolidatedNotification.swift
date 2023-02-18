@@ -26,7 +26,7 @@ public struct ConsolidatedNotification: Identifiable {
     self.type = type
     self.createdAt = createdAt
     self.accounts = accounts
-    self.status = status
+    self.status = status ?? nil
   }
 
   public static func placeholder() -> ConsolidatedNotification {
