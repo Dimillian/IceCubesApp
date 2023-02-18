@@ -261,11 +261,11 @@
 "account.action.logout" = "Log uit";
 "account.action.edit-filters" = "Bewerk filters";
 
-"account.relation.note.edit" = "Edit Note";
-"account.relation.note.edit.placeholder" = "Enter Note text";
-"account.relation.note.edit.error.save.message" = "Error while saving your note, please try again.";
-"account.relation.note.edit.error.save.title" = "Error while saving your note";
-"account.relation.note.label" = "Note:";
+"account.relation.note.edit" = "Bewerk notitie";
+"account.relation.note.edit.placeholder" = "Voer notitietekst in";
+"account.relation.note.edit.error.save.message" = "Er is een fout opgetreden tijdens het bewaren van de notitie, probeer het nogmaals.";
+"account.relation.note.edit.error.save.title" = "Fout tijdens bewaren notitie";
+"account.relation.note.label" = "Notitie:";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Verwijder";
