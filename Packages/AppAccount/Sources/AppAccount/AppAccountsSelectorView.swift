@@ -64,7 +64,7 @@ public struct AppAccountsSelectorView: View {
           .frame(width: 9, height: 9)
       }
     }
-      .accessibilityLabel("accessibility.app-account.selector.accounts")
+    .accessibilityLabel("accessibility.app-account.selector.accounts")
   }
 
   @ViewBuilder

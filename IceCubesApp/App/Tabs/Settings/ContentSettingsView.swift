@@ -21,7 +21,7 @@ struct ContentSettingsView: View {
 
       Section("settings.content.media") {
         Toggle(isOn: $userPreferences.showAltTextForMedia) {
-         Text("settings.content.media.show.alt")
+          Text("settings.content.media.show.alt")
         }
       }.listRowBackground(theme.primaryBackgroundColor)
 
@@ -69,7 +69,6 @@ struct ContentSettingsView: View {
       }
 
       .listRowBackground(theme.primaryBackgroundColor)
-      
     }
     .navigationTitle("settings.content.navigation-title")
     .scrollContentBackground(.hidden)

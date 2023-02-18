@@ -248,7 +248,7 @@ extension TimelineViewModel: StatusesFetcher {
       canStreamEvents = true
       return
     }
-    
+
     // As this is a long runnign task we need to ensure that the user didn't changed the timeline filter.
     guard initialTimeline == timeline else {
       canStreamEvents = true

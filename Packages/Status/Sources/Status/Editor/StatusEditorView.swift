@@ -7,9 +7,9 @@ import Models
 import Network
 import NukeUI
 import PhotosUI
+import StoreKit
 import SwiftUI
 import UIKit
-import StoreKit
 
 public struct StatusEditorView: View {
   @EnvironmentObject private var appAccounts: AppAccountsManager
@@ -204,8 +204,8 @@ public struct StatusEditorView: View {
                                       object: nil)
       if !viewModel.mode.isInShareExtension && !preferences.requestedReview {
         if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
-                SKStoreReviewController.requestReview(in: scene)
-              }
+          SKStoreReviewController.requestReview(in: scene)
+        }
         preferences.requestedReview = true
       }
     }

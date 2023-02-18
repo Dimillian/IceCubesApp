@@ -12,7 +12,7 @@ public class StatusRowViewModel: ObservableObject {
   let isFocused: Bool
   let isRemote: Bool
   let showActions: Bool
-  
+
   @Published var favoritesCount: Int
   @Published var isFavorited: Bool
   @Published var isReblogged: Bool
@@ -31,7 +31,7 @@ public class StatusRowViewModel: ObservableObject {
 
   @Published var favoriters: [Account] = []
   @Published var rebloggers: [Account] = []
-  
+
   @Published var isLoadingRemoteContent: Bool = false
   @Published var localStatusId: String?
   @Published var localStatus: Status?
@@ -334,7 +334,7 @@ public class StatusRowViewModel: ObservableObject {
       }
     }
   }
-  
+
   func fetchRemoteStatus() async -> Bool {
     guard isRemote, let remoteStatusURL = URL(string: status.reblog?.url ?? status.url ?? "") else { return false }
     isLoadingRemoteContent = true
@@ -344,8 +344,8 @@ public class StatusRowViewModel: ObservableObject {
                                                                                 following: nil),
                                                         forceVersion: .v2)
     if let status = results?.statuses.first {
-      self.localStatusId = status.id
-      self.localStatus = status
+      localStatusId = status.id
+      localStatus = status
       isLoadingRemoteContent = false
       return true
     } else {

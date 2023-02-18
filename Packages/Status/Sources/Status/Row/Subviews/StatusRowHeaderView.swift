@@ -1,13 +1,13 @@
-import SwiftUI
 import DesignSystem
 import Models
+import SwiftUI
 
 struct StatusRowHeaderView: View {
   @EnvironmentObject private var theme: Theme
-  
+
   let status: AnyStatus
   let viewModel: StatusRowViewModel
-  
+
   var body: some View {
     HStack(alignment: .center) {
       Button {
@@ -23,7 +23,7 @@ struct StatusRowHeaderView: View {
     .accessibilityElement()
     .accessibilityLabel(Text("\(status.account.displayName)"))
   }
-  
+
   @ViewBuilder
   private func accountView(status: AnyStatus) -> some View {
     HStack(alignment: .center) {
@@ -46,7 +46,7 @@ struct StatusRowHeaderView: View {
       }
     }
   }
-  
+
   @ViewBuilder
   private var threadIcon: some View {
     if viewModel.status.reblog?.inReplyToAccountId != nil || viewModel.status.inReplyToAccountId != nil {
@@ -57,7 +57,7 @@ struct StatusRowHeaderView: View {
         .foregroundColor(.gray)
     }
   }
-  
+
   private var contextMenuButton: some View {
     Menu {
       StatusRowContextMenu(viewModel: viewModel)

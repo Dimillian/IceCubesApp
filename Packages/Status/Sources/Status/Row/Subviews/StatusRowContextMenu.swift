@@ -57,7 +57,8 @@ struct StatusRowContextMenu: View {
     Divider()
 
     if let urlString = viewModel.status.reblog?.url ?? viewModel.status.url,
-       let url = URL(string: urlString) {
+       let url = URL(string: urlString)
+    {
       ShareLink(item: url,
                 subject: Text(viewModel.status.reblog?.account.safeDisplayName ?? viewModel.status.account.safeDisplayName),
                 message: Text(viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText)) {

@@ -1,9 +1,9 @@
 import DesignSystem
 import Env
 import Models
+import Network
 import Status
 import SwiftUI
-import Network
 
 struct DisplaySettingsView: View {
   typealias FontState = Theme.FontState
@@ -67,10 +67,10 @@ struct DisplaySettingsView: View {
           }
         }
         .navigationDestination(isPresented: $isFontSelectorPresented, destination: { FontPicker() })
-        
+
         Toggle("settings.display.font.rounded", isOn: $userPreferences.useSFRoundedFont)
           .disabled(userPreferences.chosenFont != nil)
-        
+
         VStack {
           Slider(value: $userPreferences.fontSizeScale, in: 0.5 ... 1.5, step: 0.1)
           Text("settings.display.font.scaling-\(String(format: "%.1f", userPreferences.fontSizeScale))")
@@ -81,7 +81,7 @@ struct DisplaySettingsView: View {
         }
       }
       .listRowBackground(theme.primaryBackgroundColor)
-        
+
       Section("settings.display.section.display") {
         Picker("settings.display.avatar.position", selection: $theme.avatarPosition) {
           ForEach(Theme.AvatarPosition.allCases, id: \.rawValue) { position in

@@ -1,9 +1,9 @@
 import DesignSystem
 import EmojiText
-import Models
-import SwiftUI
 import Env
+import Models
 import Network
+import SwiftUI
 
 @MainActor
 public struct StatusEmbeddedView: View {
@@ -27,7 +27,7 @@ public struct StatusEmbeddedView: View {
                                        client: client,
                                        routerPath: routerPath,
                                        showActions: false))
-        .environment(\.isCompact, true)
+          .environment(\.isCompact, true)
       }
       Spacer()
     }

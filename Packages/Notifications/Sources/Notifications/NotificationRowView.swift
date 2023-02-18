@@ -2,9 +2,9 @@ import DesignSystem
 import EmojiText
 import Env
 import Models
+import Network
 import Status
 import SwiftUI
-import Network
 
 struct NotificationRowView: View {
   @EnvironmentObject private var theme: Theme
@@ -28,7 +28,8 @@ struct NotificationRowView: View {
         makeMainLabel(type: notification.type)
         makeContent(type: notification.type)
         if notification.type == .follow_request,
-           followRequests.map(\.id).contains(notification.accounts[0].id) {
+           followRequests.map(\.id).contains(notification.accounts[0].id)
+        {
           FollowRequestButtons(account: notification.accounts[0])
         }
       }

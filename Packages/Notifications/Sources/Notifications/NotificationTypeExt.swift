@@ -23,7 +23,7 @@ extension Models.Notification.NotificationType {
       return "notifications.label.update"
     }
   }
-  
+
   public func notificationKey() -> String {
     switch self {
     case .status:

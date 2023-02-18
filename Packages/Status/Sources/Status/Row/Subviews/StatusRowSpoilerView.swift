@@ -1,11 +1,11 @@
-import SwiftUI
 import DesignSystem
 import Models
+import SwiftUI
 
 struct StatusRowSpoilerView: View {
   let status: AnyStatus
   @Binding var displaySpoiler: Bool
-  
+
   var body: some View {
     HStack(alignment: .top) {
       Text("⚠︎")

@@ -1,9 +1,9 @@
 import DesignSystem
 import Env
 import Models
+import Network
 import Shimmer
 import SwiftUI
-import Network
 
 public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
   @EnvironmentObject private var theme: Theme

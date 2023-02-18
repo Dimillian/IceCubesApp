@@ -1,9 +1,9 @@
-import SwiftUI
 import DesignSystem
+import SwiftUI
 
 struct StatusRowReplyView: View {
   let viewModel: StatusRowViewModel
-  
+
   var body: some View {
     if let accountId = viewModel.status.inReplyToAccountId,
        let mention = viewModel.status.mentions.first(where: { $0.id == accountId })

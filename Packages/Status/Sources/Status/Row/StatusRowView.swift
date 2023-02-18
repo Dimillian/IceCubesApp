@@ -11,7 +11,7 @@ public struct StatusRowView: View {
   @Environment(\.isCompact) private var isCompact: Bool
 
   @EnvironmentObject private var theme: Theme
-  
+
   @StateObject var viewModel: StatusRowViewModel
 
   public init(viewModel: StatusRowViewModel) {
@@ -41,7 +41,8 @@ public struct StatusRowView: View {
         }
         HStack(alignment: .top, spacing: .statusColumnsSpacing) {
           if !isCompact,
-             theme.avatarPosition == .leading {
+             theme.avatarPosition == .leading
+          {
             Button {
               viewModel.routerPath.navigate(to: .accountDetailWithAccount(account: status.account))
             } label: {
@@ -180,7 +181,7 @@ public struct StatusRowView: View {
       }
     }
   }
-  
+
   private var remoteContentLoadingView: some View {
     ZStack(alignment: .center) {
       VStack {

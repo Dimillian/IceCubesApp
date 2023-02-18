@@ -62,7 +62,8 @@ struct IceCubesApp: App {
             pushNotificationsService.handledNotification = nil
             if appAccountsManager.currentAccount.oauthToken?.accessToken != notification?.account.token.accessToken,
                let account = appAccountsManager.availableAccounts.first(where:
-                  { $0.oauthToken?.accessToken == notification?.account.token.accessToken })  {
+                 { $0.oauthToken?.accessToken == notification?.account.token.accessToken })
+            {
               appAccountsManager.currentAccount = account
               DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 selectedTab = .notifications
@@ -143,7 +144,7 @@ struct IceCubesApp: App {
       sideBarLoadedTabs.removeAll()
     }
   }
-  
+
   private var notificationsSecondaryColumn: some View {
     NotificationsTab(popToRootTab: $popToRootTab, lockedType: nil)
       .environment(\.isSecondaryColumn, true)

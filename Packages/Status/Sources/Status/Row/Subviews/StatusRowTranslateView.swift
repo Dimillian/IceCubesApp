@@ -1,14 +1,14 @@
-import SwiftUI
-import Models
 import DesignSystem
 import Env
+import Models
+import SwiftUI
 
 struct StatusRowTranslateView: View {
   @EnvironmentObject private var preferences: UserPreferences
-  
+
   let status: AnyStatus
   @ObservedObject var viewModel: StatusRowViewModel
-  
+
   private var shouldShowTranslateButton: Bool {
     let statusLang = viewModel.getStatusLang()
 
@@ -22,10 +22,10 @@ struct StatusRowTranslateView: View {
       return false
     }
   }
-  
+
   var body: some View {
     if let userLang = preferences.serverPreferences?.postLanguage,
-        shouldShowTranslateButton
+       shouldShowTranslateButton
     {
       Button {
         Task {

@@ -4,7 +4,7 @@ public final class Account: Codable, Identifiable, Equatable, Hashable {
   public static func == (lhs: Account, rhs: Account) -> Bool {
     lhs.id == rhs.id
   }
-  
+
   public func hash(into hasher: inout Hasher) {
     hasher.combine(id)
   }
@@ -55,7 +55,6 @@ public final class Account: Codable, Identifiable, Equatable, Hashable {
     return header.lastPathComponent != "missing.png"
   }
 
-  
   public init(id: String, username: String, displayName: String, avatar: URL, header: URL, acct: String, note: HTMLString, createdAt: ServerDate, followersCount: Int, followingCount: Int, statusesCount: Int, lastStatusAt: String? = nil, fields: [Account.Field], locked: Bool, emojis: [Emoji], url: URL? = nil, source: Account.Source? = nil, bot: Bool, discoverable: Bool? = nil) {
     self.id = id
     self.username = username
@@ -77,7 +76,7 @@ public final class Account: Codable, Identifiable, Equatable, Hashable {
     self.bot = bot
     self.discoverable = discoverable
   }
-  
+
   public static func placeholder() -> Account {
     .init(id: UUID().uuidString,
           username: "Username",

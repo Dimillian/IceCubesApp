@@ -1,11 +1,11 @@
-import SwiftUI
 import DesignSystem
 import Models
+import SwiftUI
 
 struct StatusRowTextView: View {
   let status: AnyStatus
   let viewModel: StatusRowViewModel
-  
+
   var body: some View {
     HStack {
       EmojiTextApp(status.content, emojis: status.emojis, language: status.language)

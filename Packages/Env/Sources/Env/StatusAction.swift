@@ -42,10 +42,10 @@ public enum StatusAction: String, CaseIterable, Identifiable {
   }
 
   public func color(themeTintColor: Color, useThemeColor: Bool, outside: Bool) -> Color {
-    if (useThemeColor) {
+    if useThemeColor {
       return outside ? themeTintColor : .gray
     }
-    
+
     switch self {
     case .none:
       return .gray

@@ -93,13 +93,14 @@ public struct StatusDetailView: View {
     .navigationTitle(viewModel.title)
     .navigationBarTitleDisplayMode(.inline)
   }
-  
-  private func makeStatusesListView(statuses: [Status], date: Date) -> some View {
+
+  private func makeStatusesListView(statuses: [Status], date _: Date) -> some View {
     ForEach(statuses) { status in
       var isReplyToPrevious: Bool = false
       if let index = statuses.firstIndex(where: { $0.id == status.id }),
          index > 0,
-         statuses[index - 1].id == status.inReplyToId {
+         statuses[index - 1].id == status.inReplyToId
+      {
         isReplyToPrevious = true
       }
       let viewModel: StatusRowViewModel = .init(status: status,

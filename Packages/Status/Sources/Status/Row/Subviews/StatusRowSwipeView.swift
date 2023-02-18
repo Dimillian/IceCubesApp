@@ -1,19 +1,19 @@
-import SwiftUI
+import DesignSystem
 import Env
 import Models
-import DesignSystem
+import SwiftUI
 
 struct StatusRowSwipeView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var preferences: UserPreferences
-  
+
   enum Mode {
     case leading, trailing
   }
-  
+
   let viewModel: StatusRowViewModel
   let mode: Mode
-  
+
   var body: some View {
     switch mode {
     case .leading:
@@ -22,7 +22,7 @@ struct StatusRowSwipeView: View {
       trailingSwipeActions
     }
   }
-  
+
   @ViewBuilder
   private var trailingSwipeActions: some View {
     if preferences.swipeActionsStatusTrailingRight != StatusAction.none, !viewModel.isRemote {
@@ -105,10 +105,10 @@ struct StatusRowSwipeView: View {
       makeSwipeLabel(action: action, style: preferences.swipeActionsIconStyle)
     }
   }
-  
+
   @ViewBuilder
   private func makeSwipeLabel(action: StatusAction, style: UserPreferences.SwipeActionsIconStyle) -> some View {
-    switch (style) {
+    switch style {
     case .iconOnly:
       Label(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked), systemImage: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
         .labelStyle(.iconOnly)

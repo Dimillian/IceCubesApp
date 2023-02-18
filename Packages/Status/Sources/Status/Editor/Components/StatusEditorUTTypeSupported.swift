@@ -21,7 +21,7 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
   case gif = "public.gif"
   case gif2 = "com.compuserve.gif"
   case quickTimeMovie = "com.apple.quicktime-movie"
-  
+
   case uiimage = "com.apple.uikit.image"
 
   static func types() -> [UTType] {
@@ -57,8 +57,8 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
       if let image = result as? UIImage {
         return image
       } else if let imageURL = result as? URL,
-         let data = try? Data(contentsOf: imageURL),
-         let image = UIImage(data: data)
+                let data = try? Data(contentsOf: imageURL),
+                let image = UIImage(data: data)
       {
         return image
       } else if let data = result as? Data,

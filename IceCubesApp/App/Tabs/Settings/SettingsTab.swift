@@ -100,7 +100,7 @@ struct SettingsTabs: View {
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
-  
+
   private func logoutAccount(account: AppAccount) async {
     if let token = account.oauthToken,
        let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token })
@@ -235,7 +235,7 @@ struct SettingsTabs: View {
       AddAccountView()
     }
   }
-  
+
   private var editAccountButton: some View {
     Button(role: isEditingAccount ? .none : .destructive) {
       withAnimation {

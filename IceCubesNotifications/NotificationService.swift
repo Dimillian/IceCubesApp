@@ -1,13 +1,13 @@
 import AppAccount
 import CryptoKit
 import Env
+import Intents
 import KeychainSwift
 import Models
-import UIKit
-import UserNotifications
-import Intents
 import Network
 import Notifications
+import UIKit
+import UserNotifications
 
 @MainActor
 class NotificationService: UNNotificationServiceExtension {
@@ -62,13 +62,12 @@ class NotificationService: UNNotificationServiceExtension {
       bestAttemptContent.body = notification.body.escape()
       bestAttemptContent.userInfo["plaintext"] = plaintextData
       bestAttemptContent.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "glass.caf"))
-      
 
       let preferences = UserPreferences.shared
       preferences.pushNotificationsCount += 1
 
       bestAttemptContent.badge = .init(integerLiteral: preferences.pushNotificationsCount)
-      
+
       if let urlString = notification.icon,
          let url = URL(string: urlString)
       {
@@ -81,9 +80,10 @@ class NotificationService: UNNotificationServiceExtension {
           if let (data, _) = try? await URLSession.shared.data(for: .init(url: url)) {
             if let image = UIImage(data: data) {
               try? image.pngData()?.write(to: fileURL)
-  
+
               if let remoteNotification = await toRemoteNotification(localNotification: notification),
-                  let type = remoteNotification.supportedType {
+                 let type = remoteNotification.supportedType
+              {
                 let intent = buildMessageIntent(remoteNotification: remoteNotification,
                                                 currentUser: bestAttemptContent.userInfo["i"] as? String ?? "",
                                                 avatarURL: fileURL)
@@ -111,7 +111,7 @@ class NotificationService: UNNotificationServiceExtension {
       }
     }
   }
-  
+
   private func toRemoteNotification(localNotification: MastodonPushNotification) async -> Models.Notification? {
     do {
       if let account = AppAccountsManager.shared.availableAccounts.first(where: { $0.oauthToken?.accessToken == localNotification.accessToken }) {
@@ -124,10 +124,11 @@ class NotificationService: UNNotificationServiceExtension {
     }
     return nil
   }
-  
+
   private func buildMessageIntent(remoteNotification: Models.Notification,
                                   currentUser: String,
-                                  avatarURL: URL) -> INSendMessageIntent {
+                                  avatarURL: URL) -> INSendMessageIntent
+  {
     let handle = INPersonHandle(value: remoteNotification.account.id, type: .unknown)
     let avatar = INImage(url: avatarURL)
     let sender = INPerson(personHandle: handle,

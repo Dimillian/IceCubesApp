@@ -1,9 +1,9 @@
-import SwiftUI
 import DesignSystem
+import SwiftUI
 
 struct StatusRowReblogView: View {
   let viewModel: StatusRowViewModel
-  
+
   var body: some View {
     if viewModel.status.reblog != nil {
       HStack(spacing: 2) {
@@ -27,4 +27,3 @@ struct StatusRowReblogView: View {
     }
   }
 }
-
