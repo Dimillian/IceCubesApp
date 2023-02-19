@@ -19,7 +19,6 @@ public struct AccountDetailView: View {
   @EnvironmentObject private var routerPath: RouterPath
 
   @StateObject private var viewModel: AccountDetailViewModel
-  @State private var isFieldsSheetDisplayed: Bool = false
   @State private var isCurrentUser: Bool = false
   @State private var isCreateListAlertPresented: Bool = false
   @State private var createListTitle: String = ""
@@ -43,6 +42,7 @@ public struct AccountDetailView: View {
       List {
         Group {
           makeHeaderView(proxy: proxy)
+            .padding(.bottom, -20)
           familiarFollowers
           featuredTagsView
         }
@@ -156,25 +156,9 @@ public struct AccountDetailView: View {
 
   @ViewBuilder
   private var featuredTagsView: some View {
-    if !viewModel.featuredTags.isEmpty || !viewModel.fields.isEmpty {
+    if !viewModel.featuredTags.isEmpty {
       ScrollView(.horizontal, showsIndicators: false) {
         HStack(spacing: 4) {
-          if !viewModel.fields.isEmpty {
-            Button {
-              isFieldsSheetDisplayed.toggle()
-            } label: {
-              VStack(alignment: .leading, spacing: 0) {
-                Text("account.detail.about")
-                  .font(.scaledCallout)
-                Text("account.detail.n-fields \(viewModel.fields.count)")
-                  .font(.caption2)
-              }
-            }
-            .buttonStyle(.bordered)
-            .sheet(isPresented: $isFieldsSheetDisplayed) {
-              fieldSheetView
-            }
-          }
           if !viewModel.featuredTags.isEmpty {
             ForEach(viewModel.featuredTags) { tag in
               Button {
@@ -217,51 +201,6 @@ public struct AccountDetailView: View {
       }
       .padding(.top, 2)
       .padding(.bottom, 12)
-    }
-  }
-
-  private var fieldSheetView: some View {
-    NavigationStack {
-      List {
-        ForEach(viewModel.fields) { field in
-          VStack(alignment: .leading, spacing: 2) {
-            Text(field.name)
-              .font(.scaledHeadline)
-            HStack {
-              if field.verifiedAt != nil {
-                Image(systemName: "checkmark.seal")
-                  .foregroundColor(Color.green.opacity(0.80))
-              }
-              EmojiTextApp(field.value, emojis: viewModel.account?.emojis ?? [])
-                .foregroundColor(theme.tintColor)
-                .environment(\.openURL, OpenURLAction { url in
-                  UIApplication.shared.open(url)
-                  return .handled
-                })
-            }
-            .font(.scaledBody)
-          }
-          .listRowBackground(field.verifiedAt != nil ? Color.green.opacity(0.15) : theme.primaryBackgroundColor)
-        }
-      }
-      .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
-      .navigationTitle("account.detail.about")
-      .toolbar {
-        ToolbarItem(placement: .primaryAction) {
-          Button {
-            isFieldsSheetDisplayed = false
-          } label: {
-            Image(systemName: "xmark")
-              .imageScale(.small)
-              .font(.body.weight(.semibold))
-              .frame(width: 30, height: 30)
-              .background(theme.primaryBackgroundColor.opacity(0.5))
-              .clipShape(Circle())
-          }
-          .foregroundColor(theme.tintColor)
-        }
-      }
     }
   }
 

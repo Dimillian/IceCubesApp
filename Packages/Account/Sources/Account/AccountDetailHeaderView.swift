@@ -162,6 +162,8 @@ struct AccountDetailHeaderView: View {
         .environment(\.openURL, OpenURLAction { url in
           routerPath.handle(url: url)
         })
+      
+      fieldsView
     }
     .padding(.horizontal, .layoutPadding)
     .offset(y: -40)
@@ -214,6 +216,47 @@ struct AccountDetailHeaderView: View {
           RoundedRectangle(cornerRadius: 4)
             .stroke(.gray.opacity(0.35), lineWidth: 1)
         )
+    }
+  }
+  
+  @ViewBuilder
+  private var fieldsView: some View {
+    if !viewModel.fields.isEmpty {
+      VStack(alignment: .leading) {
+        ForEach(viewModel.fields) { field in
+          HStack {
+            VStack(alignment: .leading, spacing: 2) {
+              Text(field.name)
+                .font(.scaledHeadline)
+              HStack {
+                if field.verifiedAt != nil {
+                  Image(systemName: "checkmark.seal")
+                    .foregroundColor(Color.green.opacity(0.80))
+                }
+                EmojiTextApp(field.value, emojis: viewModel.account?.emojis ?? [])
+                  .foregroundColor(theme.tintColor)
+                  .environment(\.openURL, OpenURLAction { url in
+                    UIApplication.shared.open(url)
+                    return .handled
+                  })
+              }
+              .font(.scaledBody)
+              if viewModel.fields.last != field {
+                Divider()
+                  .padding(.vertical, 4)
+              }
+            }
+            Spacer()
+          }
+        }
+      }
+      .padding(8)
+      .background(theme.secondaryBackgroundColor)
+      .cornerRadius(4)
+      .overlay(
+        RoundedRectangle(cornerRadius: 4)
+          .stroke(.gray.opacity(0.35), lineWidth: 1)
+      )
     }
   }
 }
