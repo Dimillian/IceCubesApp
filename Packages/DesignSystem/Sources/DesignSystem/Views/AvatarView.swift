@@ -68,7 +68,7 @@ public struct AvatarView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
             } else {
-              placeholderView
+                AvatarPlaceholderView(size: size)
             }
           }
           .animation(nil)
@@ -90,17 +90,20 @@ public struct AvatarView: View {
       return AnyShape(RoundedRectangle(cornerRadius: size.cornerRadius))
     }
   }
+}
 
-  @ViewBuilder
-  private var placeholderView: some View {
-    if size == .badge {
-      Circle()
-        .fill(.gray)
-        .frame(width: size.size.width, height: size.size.height)
-    } else {
-      RoundedRectangle(cornerRadius: size.cornerRadius)
-        .fill(.gray)
-        .frame(width: size.size.width, height: size.size.height)
+private struct AvatarPlaceholderView: View {
+    let size: AvatarView.Size
+
+    var body: some View {
+        if size == .badge {
+          Circle()
+            .fill(.gray)
+            .frame(width: size.size.width, height: size.size.height)
+        } else {
+          RoundedRectangle(cornerRadius: size.cornerRadius)
+            .fill(.gray)
+            .frame(width: size.size.width, height: size.size.height)
+        }
     }
-  }
 }
