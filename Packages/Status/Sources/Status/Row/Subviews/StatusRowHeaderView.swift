@@ -34,7 +34,7 @@ struct StatusRowHeaderView: View {
       if theme.avatarPosition == .top {
         AvatarView(url: status.account.avatar, size: .status)
       }
-      VStack(alignment: .leading, spacing: 4) {
+      VStack(alignment: .leading, spacing: 2) {
         HStack(alignment: .center, spacing: 4) {
           EmojiTextApp(.init(stringValue: status.account.safeDisplayName), emojis: status.account.emojis)
             .font(.scaledSubheadline)
