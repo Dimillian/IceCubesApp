@@ -35,8 +35,8 @@
 "enum.status-actions-display.all" = "すべて表示";
 "enum.status-actions-display.no-buttons" = "ボタン無し";
 "enum.status-actions-display.only-buttons" = "ボタンのみ";
-"enum.status-display-style.compact" = "コンパクト";
-"enum.status-display-style.large" = "ラージ";
+"enum.status-display-style.compact" = "縮小";
+"enum.status-display-style.large" = "拡大";
 "enum.swipeactions.icon-with-text" = "アイコンと文字";
 "enum.swipeactions.icon-only" = "アイコンのみ";
 
@@ -45,10 +45,10 @@
 "instance.info.email" = "メールアドレス";
 "instance.info.name" = "名前";
 "instance.info.navigation-title" = "インスタンス情報";
-"instance.info.posts" = "投稿";
+"instance.info.posts" = "投稿数";
 "instance.info.section.info" = "インスタンス情報";
 "instance.info.section.rules" = "インスタンスのルール";
-"instance.info.users" = "ユーザー";
+"instance.info.users" = "ユーザー数";
 "instance.info.version" = "バージョン";
 "instance.list.posts-%@" = "%@ 投稿";
 "instance.list.users-%@" = "%@ ユーザー";
@@ -77,7 +77,7 @@
 "settings.display.font.scaling-%@" = "フォントサイズ: %@";
 "settings.display.avatar.position" = "アバターの位置";
 "settings.display.avatar.shape" = "アバターの形";
-"settings.display.full-username" = "Display full username";
+"settings.display.full-username" = "完全なユーザー名を表示";
 "settings.display.navigation-title" = "表示設定";
 "settings.display.restore" = "デフォルトに戻す";
 "settings.display.section.display" = "表示";
@@ -93,7 +93,7 @@
 "settings.general.browser" = "ブラウザ";
 "settings.general.browser.in-app" = "アプリ内ブラウザ";
 "settings.general.browser.in-app.readerview" = "アプリ内ブラウザ リーダービュー";
-"settings.general.browser.system" = "システムブラウザ";
+"settings.general.browser.system" = "システム既定のブラウザ";
 "settings.general.display" = "表示設定";
 "settings.general.instance" = "インスタンス情報";
 "settings.general.push-notifications" = "プッシュ通知";
@@ -190,7 +190,7 @@
 "settings.display.font.rounded" = "角丸SFを使用する";
 
 // MARK: Tabs
-"tab.explore" = "エクスプローラー";
+"tab.explore" = "探索";
 "tab.federated" = "連合";
 "tab.local" = "ローカル";
 "tab.messages" = "メッセージ";
@@ -288,7 +288,7 @@
 "design.theme.toots-preview" = "トゥートプレビュー";
 
 // MARK: Package: Explore
-"explore.navigation-title" = "エクスプローラー";
+"explore.navigation-title" = "探索";
 "explore.search.message-%@" = "ここからあらゆるものを検索することができます %@";
 "explore.search.prompt" = "ユーザー、投稿、タグの検索";
 "explore.search.title" = "インスタンスの検索";
@@ -351,7 +351,7 @@
 "notifications.label.reblog.push" = "🚀 ブースト：";
 "notifications.label.follow.push" = "👋 あなたをフォロー：";
 "notifications.label.follow-request.push" = "🔒 フォローリクエスト：";
-"notifications.label.favorite.push" = "⭐️ お気に入りに追加：";
+"notifications.label.favorite.push" = "⭐️ お気に入り：";
 "notifications.label.poll.push" = "📈 投票終了：";
 "notifications.label.update.push" = "更新：";
 
@@ -416,7 +416,7 @@
 "status.editor.mode.reply-%@" = "%@ に返信する";
 "status.editor.restore-previous" = "前のテキストに戻す";
 "status.editor.spoiler" = "ネタバレ";
-"status.editor.text.placeholder" = "いま、何考えているの？";
+"status.editor.text.placeholder" = "いま、何を考えているの？";
 "status.editor.visibility" = "投稿の公開範囲";
 "status.error.loading.message" = "投稿の読み込み中にエラーが発生しました、もう一度試してください";
 "status.error.message" = "この投稿のコンテキストでエラーが発生しました、もう一度試してください";
