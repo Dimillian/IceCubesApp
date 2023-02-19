@@ -92,6 +92,10 @@ class TimelineViewModel: ObservableObject {
       tag = try await client.get(endpoint: Tags.tag(id: id))
     } catch {}
   }
+  
+  func reset() async {
+    await datasource.reset()
+  }
 
   func handleEvent(event: any StreamEvent, currentAccount _: CurrentAccount) {
     Task {
