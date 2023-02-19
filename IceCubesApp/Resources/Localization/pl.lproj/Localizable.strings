@@ -73,7 +73,7 @@
 "settings.display.example-toot" = "Przykładowy post";
 "settings.display.avatar.position" = "Położenie awatara";
 "settings.display.avatar.shape" = "Kształt awatara";
-"settings.display.full-username" = "Display full username";
+"settings.display.full-username" = "Wyświetlaj pełną nazwę użytkownika";
 "settings.display.navigation-title" = "Ustawienia ekranu";
 "settings.display.restore" = "Przywróć ustawienia domyślne";
 "settings.display.section.display" = "Ekran";
