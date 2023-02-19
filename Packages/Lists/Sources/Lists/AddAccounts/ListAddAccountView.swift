@@ -21,7 +21,7 @@ public struct ListAddAccountView: View {
   public var body: some View {
     NavigationStack {
       List {
-        ForEach(currentAccount.lists) { list in
+        ForEach(currentAccount.sortedLists) { list in
           HStack {
             Toggle(list.title, isOn: .init(get: {
               viewModel.inLists.contains(where: { $0.id == list.id })
