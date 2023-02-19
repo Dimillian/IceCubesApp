@@ -383,9 +383,9 @@
 "status.action.reply" = "リプライ";
 "status.action.section.your-post" = "あなたの投稿";
 "status.action.share" = "投稿を共有する";
-"status.action.share-link" = "Share post link";
-"status.action.share-image" = "Share post as image";
-"status.action.share-title" = "Share";
+"status.action.share-link" = "リンクを共有する";
+"status.action.share-image" = "画像を共有する";
+"status.action.share-title" = "共有";
 "status.action.unbookmark" = "ブックマークを外す";
 "status.action.unboost" = "ブーストをやめる";
 "status.action.unfavorite" = "お気に入りから外す";
