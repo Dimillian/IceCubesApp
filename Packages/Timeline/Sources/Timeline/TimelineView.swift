@@ -116,6 +116,9 @@ public struct TimelineView: View {
       viewModel.isTimelineVisible = false
     }
     .refreshable {
+      if timeline == .trending {
+        await viewModel.reset()
+      }
       HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
       await viewModel.fetchStatuses()
       HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
