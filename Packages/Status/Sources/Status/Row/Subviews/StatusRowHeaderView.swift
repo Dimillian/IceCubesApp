@@ -42,16 +42,20 @@ struct StatusRowHeaderView: View {
             .lineLimit(1)
           if theme.avatarPosition == .leading {
             dateView
-              .offset(y: 1)
+              .font(.scaledFootnote)
+              .foregroundColor(.gray)
               .lineLimit(1)
+              .offset(y: 1)
+          } else {
+            Text("@\(theme.displayFullUsername ? status.account.acct : status.account.username)")
+              .font(.scaledFootnote)
+              .foregroundColor(.gray)
+              .lineLimit(1)
+              .offset(y: 1)
           }
         }
         if theme.avatarPosition == .top {
-          HStack(spacing: 0) {
-            Text("@\(theme.displayFullUsername ? status.account.acct : status.account.username)") +
-            Text(" ⸱ ") +
-            dateView
-          }
+          dateView
           .font(.scaledFootnote)
           .foregroundColor(.gray)
           .lineLimit(1)
@@ -64,8 +68,6 @@ struct StatusRowHeaderView: View {
     Text(status.createdAt.relativeFormatted) +
     Text(" ⸱ ") +
     Text(Image(systemName: viewModel.status.visibility.iconName))
-      .font(.scaledFootnote)
-      .foregroundColor(.gray)
   }
 
   @ViewBuilder
