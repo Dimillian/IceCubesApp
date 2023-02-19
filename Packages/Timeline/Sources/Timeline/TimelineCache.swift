@@ -6,8 +6,8 @@ import SwiftUI
 public actor TimelineCache {
   public static let shared: TimelineCache = .init()
 
-  private func storageFor(_ client: Client) -> SQLiteStorageEngine {
-    SQLiteStorageEngine.default(appendingPath: client.id)
+  private func storageFor(_ client: String) -> SQLiteStorageEngine {
+    SQLiteStorageEngine.default(appendingPath: client)
   }
 
   private let decoder = JSONDecoder()
@@ -15,18 +15,18 @@ public actor TimelineCache {
 
   private init() {}
 
-  public func cachedPostsCount(for client: Client) async -> Int {
+  public func cachedPostsCount(for client: String) async -> Int {
     await storageFor(client).allKeys().count
   }
 
-  public func clearCache(for client: Client) async {
+  public func clearCache(for client: String) async {
     let engine = storageFor(client)
     do {
       try await engine.removeAllData()
     } catch {}
   }
 
-  func set(statuses: [Status], client: Client) async {
+  func set(statuses: [Status], client: String) async {
     guard !statuses.isEmpty else { return }
     let statuses = statuses.prefix(upTo: min(600, statuses.count - 1)).map { $0 }
     do {
@@ -39,7 +39,7 @@ public actor TimelineCache {
     } catch {}
   }
 
-  func getStatuses(for client: Client) async -> [Status]? {
+  func getStatuses(for client: String) async -> [Status]? {
     let engine = storageFor(client)
     do {
       return try await engine

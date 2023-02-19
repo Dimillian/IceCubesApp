@@ -13,7 +13,7 @@ class TimelineViewModel: ObservableObject {
       timelineTask?.cancel()
       timelineTask = Task {
         if timeline == .latest, let client {
-          await cache.clearCache(for: client)
+          await cache.clearCache(for: client.id)
           timeline = .home
         }
         if oldValue != timeline {
@@ -137,13 +137,13 @@ class TimelineViewModel: ObservableObject {
 extension TimelineViewModel {
   private func cacheHome() async {
     if let client, timeline == .home {
-      await cache.set(statuses: datasource.get(), client: client)
+      await cache.set(statuses: datasource.get(), client: client.id)
     }
   }
 
   private func getCachedStatuses() async -> [Status]? {
     if let client {
-      return await cache.getStatuses(for: client)
+      return await cache.getStatuses(for: client.id)
     }
     return nil
   }

@@ -106,7 +106,7 @@ struct SettingsTabs: View {
        let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token })
     {
       let client = Client(server: account.server, oauthToken: token)
-      await TimelineCache.shared.clearCache(for: client)
+      await TimelineCache.shared.clearCache(for: client.id)
       await sub.deleteSubscription()
       appAccountsManager.delete(account: account)
     }
