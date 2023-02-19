@@ -383,6 +383,9 @@
 "status.action.reply" = "Svar";
 "status.action.section.your-post" = "Ditt innlegg";
 "status.action.share" = "Del dette innlegget";
+"status.action.share-link" = "Share post link";
+"status.action.share-image" = "Share post as image";
+"status.action.share-title" = "Share";
 "status.action.unbookmark" = "Fjern bokmerke";
 "status.action.unboost" = "Opphev forsterkningen";
 "status.action.unfavorite" = "Ikke favoritt";

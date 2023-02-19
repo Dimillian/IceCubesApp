@@ -34,6 +34,7 @@ public enum SheetDestinations: Identifiable {
   case settings
   case accountPushNotficationsSettings
   case report(status: Status)
+  case shareImage(image: UIImage, status: Status)
 
   public var id: String {
     switch self {
@@ -52,6 +53,8 @@ public enum SheetDestinations: Identifiable {
       return "statusEditHistory"
     case .report:
       return "report"
+    case .shareImage:
+      return "shareImage"
     }
   }
 }

@@ -379,6 +379,9 @@
 "status.action.reply" = "Antworten";
 "status.action.section.your-post" = "Dein Beitrag";
 "status.action.share" = "Diesen Beitrag teilen";
+"status.action.share-link" = "Share post link";
+"status.action.share-image" = "Share post as image";
+"status.action.share-title" = "Share";
 "status.action.unbookmark" = "Lesezeichen entfernen";
 "status.action.unboost" = "Boost entfernen";
 "status.action.unfavorite" = "Favorit entfernen";

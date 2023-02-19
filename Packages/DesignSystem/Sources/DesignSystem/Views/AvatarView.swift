@@ -1,8 +1,10 @@
 import NukeUI
+import Nuke
 import Shimmer
 import SwiftUI
 
 public struct AvatarView: View {
+  @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
   @Environment(\.redactionReasons) private var reasons
   @EnvironmentObject private var theme: Theme
 
@@ -54,16 +56,24 @@ public struct AvatarView: View {
           .fill(.gray)
           .frame(width: size.size.width, height: size.size.height)
       } else {
-        LazyImage(url: url) { state in
-          if let image = state.image {
-            image
-              .resizable()
-              .aspectRatio(contentMode: .fit)
-          } else {
-            placeholderView
+        if isInCaptureMode, let image = Nuke.ImagePipeline.shared.cache.cachedImage(for: .init(url: url))?.image {
+          Image(uiImage: image)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: size.size.width, height: size.size.height)
+        } else {
+          LazyImage(url: url) { state in
+            if let image = state.image {
+              image
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+            } else {
+              placeholderView
+            }
           }
+          .animation(nil)
+          .frame(width: size.size.width, height: size.size.height)
         }
-        .frame(width: size.size.width, height: size.size.height)
       }
     }
     .clipShape(clipShape)

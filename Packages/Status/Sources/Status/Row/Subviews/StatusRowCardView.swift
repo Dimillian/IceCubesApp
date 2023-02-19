@@ -1,12 +1,15 @@
 import DesignSystem
 import Models
+import Nuke
 import NukeUI
 import Shimmer
 import SwiftUI
 
 public struct StatusRowCardView: View {
-  @EnvironmentObject private var theme: Theme
   @Environment(\.openURL) private var openURL
+  @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
+  
+  @EnvironmentObject private var theme: Theme
   let card: Card
 
   public init(card: Card) {
@@ -16,8 +19,10 @@ public struct StatusRowCardView: View {
   public var body: some View {
     if let title = card.title, let url = URL(string: card.url) {
       VStack(alignment: .leading) {
-        if let imageURL = card.image {
+        if let imageURL = card.image, !isInCaptureMode {
           GeometryReader { proxy in
+            let processors: [ImageProcessing] = [.resize(size: .init(width: proxy.frame(in: .local).width,
+                                                                     height: 200))]
             LazyImage(url: imageURL) { state in
               if let image = state.image {
                 image
@@ -32,6 +37,7 @@ public struct StatusRowCardView: View {
                   .frame(height: 200)
               }
             }
+            .processors(processors)
           }
           .frame(height: 200)
         }

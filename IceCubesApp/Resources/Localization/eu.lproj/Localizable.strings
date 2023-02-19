@@ -377,6 +377,9 @@
 "status.action.reply" = "Erantzun";
 "status.action.section.your-post" = "Zure bidalketa";
 "status.action.share" = "Partekatu bidalketa";
+"status.action.share-link" = "Share post link";
+"status.action.share-image" = "Share post as image";
+"status.action.share-title" = "Share";
 "status.action.unbookmark" = "Kendu laster-marka";
 "status.action.unboost" = "Kendu bultzada";
 "status.action.unfavorite" = "Kendu gogokoa";

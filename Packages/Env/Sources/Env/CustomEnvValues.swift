@@ -13,6 +13,10 @@ private struct IsCompact: EnvironmentKey {
   static let defaultValue: Bool = false
 }
 
+private struct IsInCaptureMode: EnvironmentKey {
+  static let defaultValue: Bool = false
+}
+
 public extension EnvironmentValues {
   var isSecondaryColumn: Bool {
     get { self[SecondaryColumnKey.self] }
@@ -27,5 +31,10 @@ public extension EnvironmentValues {
   var isCompact: Bool {
     get { self[IsCompact.self] }
     set { self[IsCompact.self] = newValue }
+  }
+  
+  var isInCaptureMode: Bool {
+    get { self[IsInCaptureMode.self] }
+    set { self[IsInCaptureMode.self] = newValue }
   }
 }

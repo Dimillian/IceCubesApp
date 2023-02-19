@@ -384,6 +384,9 @@
 "status.action.reply" = "回复";
 "status.action.section.your-post" = "你的嘟文";
 "status.action.share" = "分享嘟文";
+"status.action.share-link" = "Share post link";
+"status.action.share-image" = "Share post as image";
+"status.action.share-title" = "Share";
 "status.action.unbookmark" = "取消书签";
 "status.action.unboost" = "取消转发";
 "status.action.unfavorite" = "取消收藏";
