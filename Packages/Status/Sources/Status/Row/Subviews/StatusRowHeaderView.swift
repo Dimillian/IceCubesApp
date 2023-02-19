@@ -72,7 +72,7 @@ struct StatusRowHeaderView: View {
 
   @ViewBuilder
   private var threadIcon: some View {
-    if viewModel.status.reblog?.inReplyToAccountId != nil || viewModel.status.inReplyToAccountId != nil {
+    if viewModel.isThread {
       Image(systemName: "bubble.left.and.bubble.right")
         .resizable()
         .aspectRatio(contentMode: .fit)
