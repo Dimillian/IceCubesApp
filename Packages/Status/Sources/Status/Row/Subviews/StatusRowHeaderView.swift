@@ -40,6 +40,7 @@ struct StatusRowHeaderView: View {
             .font(.scaledSubheadline)
             .fontWeight(.semibold)
             .lineLimit(1)
+            .layoutPriority(1)
           if theme.avatarPosition == .leading {
             dateView
               .font(.scaledFootnote)
