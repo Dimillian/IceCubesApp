@@ -2,7 +2,7 @@ import Foundation
 import Models
 import SwiftUI
 
-public final class Client: ObservableObject, Equatable, Identifiable, Hashable, @unchecked Sendable {
+public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
   public static func == (lhs: Client, rhs: Client) -> Bool {
     lhs.isAuth == rhs.isAuth &&
       lhs.server == rhs.server &&
