@@ -73,6 +73,7 @@
 "settings.display.font.scaling-%@" = "Маштаб шрыфту: %@";
 "settings.display.avatar.position" = "Пазіцыя аватару";
 "settings.display.avatar.shape" = "Форма аватару";
+"settings.display.full-username" = "Display full username";
 "settings.display.navigation-title" = "Налады дысплэю";
 "settings.display.restore" = "Аднавіць па змаўчанні";
 "settings.display.section.display" = "Дысплэй";
@@ -372,6 +373,9 @@
 "status.action.reply" = "Адказаць";
 "status.action.section.your-post" = "Ваш допіс";
 "status.action.share" = "Падзяліцца гэтым допісам";
+"status.action.share-link" = "Share post link";
+"status.action.share-image" = "Share post as image";
+"status.action.share-title" = "Share";
 "status.action.unbookmark" = "Скасаваць закладку";
 "status.action.unboost" = "Адмяніць павышэнне";
 "status.action.unfavorite" = "Выдаліць з улюбенага";

@@ -73,6 +73,7 @@
 "settings.display.example-toot" = "Example Post";
 "settings.display.avatar.position" = "Avatar Pozisyonu";
 "settings.display.avatar.shape" = "Avatar Şekli";
+"settings.display.full-username" = "Display full username";
 "settings.display.navigation-title" = "Gösterim Ayarları";
 "settings.display.restore" = "Varsayılan Ayarlara Geri Döndür";
 "settings.display.section.display" = "Gösterim";
@@ -379,6 +380,9 @@
 "status.action.reply" = "Cevapla";
 "status.action.section.your-post" = "Senin gönderin";
 "status.action.share" = "Bu gönderiyi paylaş";
+"status.action.share-link" = "Share post link";
+"status.action.share-image" = "Share post as image";
+"status.action.share-title" = "Share";
 "status.action.unbookmark" = "Yer İmini Kaldır";
 "status.action.unboost" = "Yükseltmeyi Kaldır";
 "status.action.unfavorite" = "Favoriyi Kaldır";

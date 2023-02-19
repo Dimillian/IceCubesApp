@@ -7,8 +7,9 @@ import SwiftUI
 
 public struct StatusRowMediaPreviewView: View {
   @Environment(\.openURL) private var openURL
-  @Environment(\.isSecondaryColumn) private var isSecondaryColumn
+  @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
   @Environment(\.extraLeadingInset) private var extraLeadingInset: CGFloat
+  @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
 
   @EnvironmentObject var sceneDelegate: SceneDelegate
   @EnvironmentObject private var preferences: UserPreferences
@@ -150,24 +151,36 @@ public struct StatusRowMediaPreviewView: View {
       let size: CGSize = size(for: attachment) ?? .init(width: imageMaxHeight, height: imageMaxHeight)
       let newSize = imageSize(from: size,
                               newWidth: availableWidth - appLayoutWidth)
+      let processors: [ImageProcessing] = [.resize(size: .init(width: newSize.width, height: newSize.height))]
       switch attachment.supportedType {
       case .image:
-        LazyImage(url: attachment.url) { state in
-          if let image = state.image {
-            image
-              .resizable()
-              .aspectRatio(contentMode: .fill)
-              .frame(width: newSize.width, height: newSize.height)
-              .clipped()
-              .cornerRadius(4)
-          } else {
-            RoundedRectangle(cornerRadius: 4)
-              .fill(Color.gray)
-              .frame(width: newSize.width, height: newSize.height)
+        if isInCaptureMode,
+           let image = Nuke.ImagePipeline.shared.cache.cachedImage(for: .init(url: attachment.url,
+                                                                              processors: processors))?.image {
+          Image(uiImage: image)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(width: newSize.width, height: newSize.height)
+            .clipped()
+            .cornerRadius(4)
+        } else {
+          LazyImage(url: attachment.url) { state in
+            if let image = state.image {
+              image
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: newSize.width, height: newSize.height)
+                .clipped()
+                .cornerRadius(4)
+            } else {
+              RoundedRectangle(cornerRadius: 4)
+                .fill(Color.gray)
+                .frame(width: newSize.width, height: newSize.height)
+            }
           }
+          .processors([.resize(size: .init(width: newSize.width, height: newSize.height))])
+          .frame(width: newSize.width, height: newSize.height)
         }
-        .processors([.resize(size: .init(width: newSize.width, height: newSize.height))])
-        .frame(width: newSize.width, height: newSize.height)
 
       case .gifv, .video, .audio:
         if let url = attachment.url {
@@ -177,10 +190,10 @@ public struct StatusRowMediaPreviewView: View {
       case .none:
         EmptyView()
       }
-      if sensitive {
+      if !isInCaptureMode, sensitive {
         cornerSensitiveButton
       }
-      if let alt = attachment.description, !alt.isEmpty, !isNotifications, preferences.showAltTextForMedia {
+      if !isInCaptureMode, let alt = attachment.description, !alt.isEmpty, !isNotifications, preferences.showAltTextForMedia {
         Group {
           Button {
             altTextDisplayed = alt
@@ -201,12 +214,13 @@ public struct StatusRowMediaPreviewView: View {
 
   @ViewBuilder
   private func makePreview(attachment: MediaAttachment) -> some View {
-    if let type = attachment.supportedType {
+    if let type = attachment.supportedType, !isInCaptureMode {
       Group {
         GeometryReader { proxy in
           switch type {
           case .image:
             let width = isNotifications ? imageMaxHeight : proxy.frame(in: .local).width
+            let processors: [ImageProcessing] = [.resize(size: .init(width: width, height: imageMaxHeight))]
             ZStack(alignment: .bottomTrailing) {
               LazyImage(url: attachment.previewUrl ?? attachment.url) { state in
                 if let image = state.image {
@@ -224,11 +238,15 @@ public struct StatusRowMediaPreviewView: View {
                     .frame(maxWidth: width)
                 }
               }
-              .processors([.resize(size: .init(width: width, height: imageMaxHeight))])
-              if sensitive {
+              .processors(processors)
+              if sensitive, !isInCaptureMode {
                 cornerSensitiveButton
               }
-              if let alt = attachment.description, !alt.isEmpty, !isNotifications, preferences.showAltTextForMedia {
+              if !isInCaptureMode,
+                  let alt = attachment.description,
+                 !alt.isEmpty,
+                 !isNotifications,
+                  preferences.showAltTextForMedia {
                 Button {
                   altTextDisplayed = alt
                   isAltAlertDisplayed = true

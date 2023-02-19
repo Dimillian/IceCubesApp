@@ -1,8 +1,10 @@
 import NukeUI
+import Nuke
 import Shimmer
 import SwiftUI
 
 public struct AvatarView: View {
+  @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
   @Environment(\.redactionReasons) private var reasons
   @EnvironmentObject private var theme: Theme
 
@@ -54,22 +56,34 @@ public struct AvatarView: View {
           .fill(.gray)
           .frame(width: size.size.width, height: size.size.height)
       } else {
-        LazyImage(url: url) { state in
-          if let image = state.image {
-            image
-              .resizable()
-              .aspectRatio(contentMode: .fit)
-          } else {
-            placeholderView
+        if isInCaptureMode, let url = url, let image = Nuke.ImagePipeline.shared.cache.cachedImage(for: makeImageRequest(for: url))?.image {
+          Image(uiImage: image)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: size.size.width, height: size.size.height)
+        } else {
+          LazyImage(request: url.map(makeImageRequest)) { state in
+            if let image = state.image {
+              image
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+            } else {
+              AvatarPlaceholderView(size: size)
+            }
           }
+          .animation(nil)
+          .frame(width: size.size.width, height: size.size.height)
         }
-        .frame(width: size.size.width, height: size.size.height)
       }
     }
     .clipShape(clipShape)
     .overlay(
       clipShape.stroke(Color.primary.opacity(0.25), lineWidth: 1)
     )
+  }
+
+  private func makeImageRequest(for url: URL) -> ImageRequest {
+    ImageRequest(url: url, processors: [.resize(size: size.size)])
   }
 
   private var clipShape: some Shape {
@@ -80,17 +94,20 @@ public struct AvatarView: View {
       return AnyShape(RoundedRectangle(cornerRadius: size.cornerRadius))
     }
   }
+}
 
-  @ViewBuilder
-  private var placeholderView: some View {
-    if size == .badge {
-      Circle()
-        .fill(.gray)
-        .frame(width: size.size.width, height: size.size.height)
-    } else {
-      RoundedRectangle(cornerRadius: size.cornerRadius)
-        .fill(.gray)
-        .frame(width: size.size.width, height: size.size.height)
+private struct AvatarPlaceholderView: View {
+    let size: AvatarView.Size
+
+    var body: some View {
+        if size == .badge {
+          Circle()
+            .fill(.gray)
+            .frame(width: size.size.width, height: size.size.height)
+        } else {
+          RoundedRectangle(cornerRadius: size.cornerRadius)
+            .fill(.gray)
+            .frame(width: size.size.width, height: size.size.height)
+        }
     }
-  }
 }

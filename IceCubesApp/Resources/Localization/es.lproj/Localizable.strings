@@ -73,6 +73,7 @@
 "settings.display.example-toot" = "Publicación de ejemplo";
 "settings.display.avatar.position" = "Posición del avatar";
 "settings.display.avatar.shape" = "Forma del avatar";
+"settings.display.full-username" = "Display full username";
 "settings.display.navigation-title" = "Ajustes de apariencia";
 "settings.display.restore" = "Restaurar ajustes predeterminados";
 "settings.display.section.display" = "Apariencia";
@@ -384,6 +385,9 @@
 "status.action.reply" = "Responder";
 "status.action.section.your-post" = "Tus publicaciones";
 "status.action.share" = "Compartir esta publicación";
+"status.action.share-link" = "Share post link";
+"status.action.share-image" = "Share post as image";
+"status.action.share-title" = "Share";
 "status.action.unbookmark" = "Quitar de marcadores";
 "status.action.unboost" = "Deshacer Retoot";
 "status.action.unfavorite" = "Eliminar de favoritos";

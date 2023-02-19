@@ -73,6 +73,7 @@
 "settings.display.example-toot" = "Postvoorbeeld";
 "settings.display.avatar.position" = "Avatarpositie";
 "settings.display.avatar.shape" = "Avatarvorm";
+"settings.display.full-username" = "Display full username";
 "settings.display.navigation-title" = "Weergaveopties";
 "settings.display.restore" = "Stel opnieuw in";
 "settings.display.section.display" = "Weergave";
@@ -377,6 +378,9 @@
 "status.action.reply" = "Antwoord";
 "status.action.section.your-post" = "Jouw post";
 "status.action.share" = "Deel deze post";
+"status.action.share-link" = "Share post link";
+"status.action.share-image" = "Share post as image";
+"status.action.share-title" = "Share";
 "status.action.unbookmark" = "Verwijder bladwijzer";
 "status.action.unboost" = "Maak boost ongedaan";
 "status.action.unfavorite" = "Verwijder favoriet";

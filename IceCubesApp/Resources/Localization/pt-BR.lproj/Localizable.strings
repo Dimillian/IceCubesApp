@@ -73,6 +73,7 @@
 "settings.display.example-toot" = "Example Post";
 "settings.display.avatar.position" = "Posição do avatar";
 "settings.display.avatar.shape" = "Formato do avatar";
+"settings.display.full-username" = "Display full username";
 "settings.display.navigation-title" = "Ver Configurações";
 "settings.display.restore" = "Restaurar padrões";
 "settings.display.section.display" = "Exibir";
@@ -383,6 +384,9 @@
 "status.action.reply" = "Responder";
 "status.action.section.your-post" = "Sua postagem";
 "status.action.share" = "Compartilhe esta postagem";
+"status.action.share-link" = "Share post link";
+"status.action.share-image" = "Share post as image";
+"status.action.share-title" = "Share";
 "status.action.unbookmark" = "Remover dos salvos";
 "status.action.unboost" = "Unboost";
 "status.action.unfavorite" = "Desfavoritar";

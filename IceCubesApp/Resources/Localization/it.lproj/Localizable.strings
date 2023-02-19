@@ -73,6 +73,7 @@
 "settings.display.example-toot" = "Post di esempio";
 "settings.display.avatar.position" = "Posizione dell'avatar";
 "settings.display.avatar.shape" = "Forma dell'avatar";
+"settings.display.full-username" = "Display full username";
 "settings.display.navigation-title" = "Impostazioni di visualizzazione";
 "settings.display.restore" = "Ripristina i valori predefiniti";
 "settings.display.section.display" = "Visualizzazione";
@@ -384,6 +385,9 @@
 "status.action.reply" = "Rispondi";
 "status.action.section.your-post" = "I tuoi post";
 "status.action.share" = "Condividi questo post";
+"status.action.share-link" = "Share post link";
+"status.action.share-image" = "Share post as image";
+"status.action.share-title" = "Share";
 "status.action.unbookmark" = "Rimuovi il segnalibro";
 "status.action.unboost" = "Rimuovi la condivisione";
 "status.action.unfavorite" = "Rimuovi l'apprezzamento";

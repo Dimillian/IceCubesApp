@@ -73,6 +73,7 @@
 "settings.display.example-toot" = "글 미리 보기";
 "settings.display.avatar.position" = "프로필 사진 위치";
 "settings.display.avatar.shape" = "프로필 사진 모양";
+"settings.display.full-username" = "Display full username";
 "settings.display.navigation-title" = "화면 설정";
 "settings.display.restore" = "초기 설정으로 되돌리기";
 "settings.display.section.display" = "화면";
@@ -385,6 +386,9 @@
 "status.action.reply" = "댓글";
 "status.action.section.your-post" = "내 글";
 "status.action.share" = "공유";
+"status.action.share-link" = "Share post link";
+"status.action.share-image" = "Share post as image";
+"status.action.share-title" = "Share";
 "status.action.unbookmark" = "보관함에서 제거";
 "status.action.unboost" = "부스트 취소";
 "status.action.unfavorite" = "좋아요 취소";

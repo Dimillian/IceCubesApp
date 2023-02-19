@@ -77,6 +77,7 @@
 "settings.display.font.scaling-%@" = "フォントサイズ: %@";
 "settings.display.avatar.position" = "アバターの位置";
 "settings.display.avatar.shape" = "アバターの形";
+"settings.display.full-username" = "Display full username";
 "settings.display.navigation-title" = "表示設定";
 "settings.display.restore" = "デフォルトに戻す";
 "settings.display.section.display" = "表示";
@@ -383,6 +384,9 @@
 "status.action.reply" = "リプライ";
 "status.action.section.your-post" = "あなたの投稿";
 "status.action.share" = "投稿を共有する";
+"status.action.share-link" = "リンクを共有する";
+"status.action.share-image" = "画像を共有する";
+"status.action.share-title" = "共有";
 "status.action.unbookmark" = "ブックマークを外す";
 "status.action.unboost" = "ブーストをやめる";
 "status.action.unfavorite" = "お気に入りから外す";

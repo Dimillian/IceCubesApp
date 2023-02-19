@@ -1,8 +1,10 @@
 import DesignSystem
 import Models
 import SwiftUI
+import Env
 
 struct StatusRowHeaderView: View {
+  @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
   @EnvironmentObject private var theme: Theme
 
   let status: AnyStatus
@@ -17,8 +19,10 @@ struct StatusRowHeaderView: View {
       }
       .buttonStyle(.plain)
       Spacer()
-      threadIcon
-      contextMenuButton
+      if !isInCaptureMode {
+        threadIcon
+        contextMenuButton
+      }
     }
     .accessibilityElement()
     .accessibilityLabel(Text("\(status.account.displayName)"))
@@ -30,21 +34,38 @@ struct StatusRowHeaderView: View {
       if theme.avatarPosition == .top {
         AvatarView(url: status.account.avatar, size: .status)
       }
-      VStack(alignment: .leading, spacing: 0) {
-        EmojiTextApp(.init(stringValue: status.account.safeDisplayName), emojis: status.account.emojis)
-          .font(.scaledSubheadline)
-          .fontWeight(.semibold)
-        Group {
-          Text("@\(status.account.acct)") +
-            Text(" ⸱ ") +
-            Text(status.createdAt.relativeFormatted) +
-            Text(" ⸱ ") +
-            Text(Image(systemName: viewModel.status.visibility.iconName))
+      VStack(alignment: .leading, spacing: 4) {
+        HStack(alignment: .center, spacing: 4) {
+          EmojiTextApp(.init(stringValue: status.account.safeDisplayName), emojis: status.account.emojis)
+            .font(.scaledSubheadline)
+            .fontWeight(.semibold)
+            .lineLimit(1)
+          if theme.avatarPosition == .leading {
+            dateView
+              .offset(y: 1)
+              .lineLimit(1)
+          }
         }
-        .font(.scaledFootnote)
-        .foregroundColor(.gray)
+        if theme.avatarPosition == .top {
+          HStack(spacing: 0) {
+            Text("@\(theme.displayFullUsername ? status.account.acct : status.account.username)") +
+            Text(" ⸱ ") +
+            dateView
+          }
+          .font(.scaledFootnote)
+          .foregroundColor(.gray)
+          .lineLimit(1)
+        }
       }
     }
+  }
+  
+  private var dateView: Text {
+    Text(status.createdAt.relativeFormatted) +
+    Text(" ⸱ ") +
+    Text(Image(systemName: viewModel.status.visibility.iconName))
+      .font(.scaledFootnote)
+      .foregroundColor(.gray)
   }
 
   @ViewBuilder
@@ -63,7 +84,7 @@ struct StatusRowHeaderView: View {
       StatusRowContextMenu(viewModel: viewModel)
     } label: {
       Image(systemName: "ellipsis")
-        .frame(width: 20, height: 30)
+        .frame(width: 20)
     }
     .menuStyle(.borderlessButton)
     .foregroundColor(.gray)

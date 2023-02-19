@@ -77,6 +77,7 @@
 "settings.display.font.scaling-%@" = "Font scaling: %@";
 "settings.display.avatar.position" = "Avatar position";
 "settings.display.avatar.shape" = "Avatar shape";
+"settings.display.full-username" = "Display full username";
 "settings.display.navigation-title" = "Display Settings";
 "settings.display.restore" = "Restore defaults";
 "settings.display.section.display" = "Display";
@@ -385,6 +386,9 @@
 "status.action.reply" = "Reply";
 "status.action.section.your-post" = "Your post";
 "status.action.share" = "Share this post";
+"status.action.share-link" = "Share post link";
+"status.action.share-image" = "Share post as image";
+"status.action.share-title" = "Share";
 "status.action.unbookmark" = "Unbookmark";
 "status.action.unboost" = "Unboost";
 "status.action.unfavorite" = "Unfavourite";

@@ -1,14 +1,19 @@
 import Env
 import Foundation
 import SwiftUI
+import DesignSystem
+import Network
 
 struct StatusRowContextMenu: View {
+  @Environment(\.displayScale) var displayScale
+  
+  @EnvironmentObject private var sceneDelegate: SceneDelegate
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var currentInstance: CurrentInstance
 
   @ObservedObject var viewModel: StatusRowViewModel
-
+  
   var body: some View {
     if !viewModel.isRemote {
       Button { Task {
@@ -56,13 +61,46 @@ struct StatusRowContextMenu: View {
 
     Divider()
 
-    if let urlString = viewModel.status.reblog?.url ?? viewModel.status.url,
-       let url = URL(string: urlString)
-    {
-      ShareLink(item: url,
-                subject: Text(viewModel.status.reblog?.account.safeDisplayName ?? viewModel.status.account.safeDisplayName),
-                message: Text(viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText)) {
-        Label("status.action.share", systemImage: "square.and.arrow.up")
+    Menu("status.action.share-title") {
+      if let urlString = viewModel.status.reblog?.url ?? viewModel.status.url,
+         let url = URL(string: urlString)
+      {
+        ShareLink(item: url,
+                  subject: Text(viewModel.status.reblog?.account.safeDisplayName ?? viewModel.status.account.safeDisplayName),
+                  message: Text(viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText)) {
+          Label("status.action.share", systemImage: "square.and.arrow.up")
+        }
+        
+        ShareLink(item: url) {
+          Label("status.action.share-link", systemImage: "link")
+        }
+        
+        Button {
+          let view = HStack {
+            StatusRowView(viewModel: viewModel)
+              .padding(16)
+          }
+          .environment(\.isInCaptureMode, true)
+          .environmentObject(Theme.shared)
+          .environmentObject(preferences)
+          .environmentObject(account)
+          .environmentObject(currentInstance)
+          .environmentObject(SceneDelegate())
+          .environmentObject(QuickLook())
+          .environmentObject(viewModel.client)
+          .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
+          .foregroundColor(Theme.shared.labelColor)
+          .background(Theme.shared.primaryBackgroundColor)
+          .frame(width: sceneDelegate.windowWidth - 12)
+          let renderer = ImageRenderer(content: view)
+          renderer.scale = displayScale
+          renderer.isOpaque = false
+          if let image = renderer.uiImage {
+            viewModel.routerPath.presentedSheet = .shareImage(image: image, status: viewModel.status)
+          }
+        } label: {
+          Label("status.action.share-image", systemImage: "photo")
+        }
       }
     }
 
@@ -143,4 +181,14 @@ struct StatusRowContextMenu: View {
       }
     }
   }
+}
+
+struct ActivityView: UIViewControllerRepresentable {
+  let image: Image
+  
+  func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityView>) -> UIActivityViewController {
+    return UIActivityViewController(activityItems: [image], applicationActivities: nil)
+  }
+  
+  func updateUIViewController(_ uiViewController: UIActivityViewController, context: UIViewControllerRepresentableContext<ActivityView>) {}
 }
