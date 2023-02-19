@@ -214,7 +214,7 @@ public struct StatusRowMediaPreviewView: View {
 
   @ViewBuilder
   private func makePreview(attachment: MediaAttachment) -> some View {
-    if let type = attachment.supportedType {
+    if let type = attachment.supportedType, !isInCaptureMode {
       Group {
         GeometryReader { proxy in
           switch type {
@@ -222,34 +222,23 @@ public struct StatusRowMediaPreviewView: View {
             let width = isNotifications ? imageMaxHeight : proxy.frame(in: .local).width
             let processors: [ImageProcessing] = [.resize(size: .init(width: width, height: imageMaxHeight))]
             ZStack(alignment: .bottomTrailing) {
-              if isInCaptureMode,
-                  let image = Nuke.ImagePipeline.shared.cache.cachedImage(for: .init(url: attachment.previewUrl ?? attachment.url, processors: processors))?.image {
-                Image(uiImage: image)
-                  .resizable()
-                  .aspectRatio(contentMode: .fill)
-                  .frame(maxWidth: width)
-                  .frame(maxHeight: imageMaxHeight)
-                  .clipped()
-                  .cornerRadius(4)
-              } else {
-                LazyImage(url: attachment.previewUrl ?? attachment.url) { state in
-                  if let image = state.image {
-                    image
-                      .resizable()
-                      .aspectRatio(contentMode: .fill)
-                      .frame(maxWidth: width)
-                      .frame(maxHeight: imageMaxHeight)
-                      .clipped()
-                      .cornerRadius(4)
-                  } else if state.isLoading {
-                    RoundedRectangle(cornerRadius: 4)
-                      .fill(Color.gray)
-                      .frame(maxHeight: imageMaxHeight)
-                      .frame(maxWidth: width)
-                  }
+              LazyImage(url: attachment.previewUrl ?? attachment.url) { state in
+                if let image = state.image {
+                  image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(maxWidth: width)
+                    .frame(maxHeight: imageMaxHeight)
+                    .clipped()
+                    .cornerRadius(4)
+                } else if state.isLoading {
+                  RoundedRectangle(cornerRadius: 4)
+                    .fill(Color.gray)
+                    .frame(maxHeight: imageMaxHeight)
+                    .frame(maxWidth: width)
                 }
-                .processors(processors)
               }
+              .processors(processors)
               if sensitive, !isInCaptureMode {
                 cornerSensitiveButton
               }

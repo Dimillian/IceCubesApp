@@ -89,11 +89,12 @@ struct StatusRowContextMenu: View {
           .environmentObject(QuickLook())
           .environmentObject(viewModel.client)
           .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
+          .foregroundColor(Theme.shared.labelColor)
           .background(Theme.shared.primaryBackgroundColor)
-          .cornerRadius(4)
-          .frame(width: sceneDelegate.windowWidth)
+          .frame(width: sceneDelegate.windowWidth - 12)
           let renderer = ImageRenderer(content: view)
           renderer.scale = displayScale
+          renderer.isOpaque = false
           if let image = renderer.uiImage {
             viewModel.routerPath.presentedSheet = .shareImage(image: image, status: viewModel.status)
           }
