@@ -77,6 +77,7 @@
 "settings.display.font.scaling-%@" = "フォントサイズ: %@";
 "settings.display.avatar.position" = "アバターの位置";
 "settings.display.avatar.shape" = "アバターの形";
+"settings.display.full-username" = "Display full username";
 "settings.display.navigation-title" = "表示設定";
 "settings.display.restore" = "デフォルトに戻す";
 "settings.display.section.display" = "表示";

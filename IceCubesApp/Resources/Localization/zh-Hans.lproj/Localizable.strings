@@ -73,6 +73,7 @@
 "settings.display.example-toot" = "样例嘟文";
 "settings.display.avatar.position" = "头像位置";
 "settings.display.avatar.shape" = "头像边框";
+"settings.display.full-username" = "Display full username";
 "settings.display.navigation-title" = "显示设置";
 "settings.display.restore" = "恢复默认设置";
 "settings.display.section.display" = "显示";
