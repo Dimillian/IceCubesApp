@@ -42,7 +42,6 @@ struct TimelineTab: View {
         .id(client.id)
     }
     .onAppear {
-      guard !routerPath.isSafariPresented else { return }
       routerPath.client = client
       if !didAppear && canFilterTimeline {
         didAppear = true
