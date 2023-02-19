@@ -372,6 +372,9 @@
 "status.action.reply" = "Адказаць";
 "status.action.section.your-post" = "Ваш допіс";
 "status.action.share" = "Падзяліцца гэтым допісам";
+"status.action.share-link" = "Share post link";
+"status.action.share-image" = "Share post as image";
+"status.action.share-title" = "Share";
 "status.action.unbookmark" = "Скасаваць закладку";
 "status.action.unboost" = "Адмяніць павышэнне";
 "status.action.unfavorite" = "Выдаліць з улюбенага";

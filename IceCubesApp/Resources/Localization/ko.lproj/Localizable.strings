@@ -385,6 +385,9 @@
 "status.action.reply" = "댓글";
 "status.action.section.your-post" = "내 글";
 "status.action.share" = "공유";
+"status.action.share-link" = "Share post link";
+"status.action.share-image" = "Share post as image";
+"status.action.share-title" = "Share";
 "status.action.unbookmark" = "보관함에서 제거";
 "status.action.unboost" = "부스트 취소";
 "status.action.unfavorite" = "좋아요 취소";

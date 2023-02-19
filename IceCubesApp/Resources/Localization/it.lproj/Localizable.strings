@@ -384,6 +384,9 @@
 "status.action.reply" = "Rispondi";
 "status.action.section.your-post" = "I tuoi post";
 "status.action.share" = "Condividi questo post";
+"status.action.share-link" = "Share post link";
+"status.action.share-image" = "Share post as image";
+"status.action.share-title" = "Share";
 "status.action.unbookmark" = "Rimuovi il segnalibro";
 "status.action.unboost" = "Rimuovi la condivisione";
 "status.action.unfavorite" = "Rimuovi l'apprezzamento";

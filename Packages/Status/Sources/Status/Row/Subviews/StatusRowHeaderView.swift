@@ -3,6 +3,7 @@ import Models
 import SwiftUI
 
 struct StatusRowHeaderView: View {
+  @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
   @EnvironmentObject private var theme: Theme
 
   let status: AnyStatus
@@ -17,8 +18,10 @@ struct StatusRowHeaderView: View {
       }
       .buttonStyle(.plain)
       Spacer()
-      threadIcon
-      contextMenuButton
+      if !isInCaptureMode {
+        threadIcon
+        contextMenuButton
+      }
     }
     .accessibilityElement()
     .accessibilityLabel(Text("\(status.account.displayName)"))
