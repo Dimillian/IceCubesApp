@@ -55,8 +55,8 @@ public struct AvatarView: View {
           .frame(width: size.size.width, height: size.size.height)
       } else {
         LazyImage(url: url) { state in
-          if let image = state.imageContainer?.image {
-            SwiftUI.Image(uiImage: image)
+          if let image = state.image {
+            image
               .resizable()
               .aspectRatio(contentMode: .fit)
           } else {

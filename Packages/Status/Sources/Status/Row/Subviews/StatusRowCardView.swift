@@ -19,8 +19,8 @@ public struct StatusRowCardView: View {
         if let imageURL = card.image {
           GeometryReader { proxy in
             LazyImage(url: imageURL) { state in
-              if let image = state.imageContainer?.image {
-                SwiftUI.Image(uiImage: image)
+              if let image = state.image {
+                image
                   .resizable()
                   .aspectRatio(contentMode: .fill)
                   .frame(height: 200)
