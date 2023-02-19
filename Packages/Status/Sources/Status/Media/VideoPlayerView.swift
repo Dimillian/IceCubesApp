@@ -51,15 +51,15 @@ struct VideoPlayerView: View {
   @StateObject var viewModel: VideoPlayerViewModel
 
   var body: some View {
-    ZStack(alignment: .bottomLeading) {
+    ZStack {
       VideoPlayer(player: viewModel.player)
 
       if !preferences.autoPlayVideo {
         Image(systemName: "play.fill")
+          .font(.largeTitle)
           .foregroundColor(theme.tintColor)
-          .padding(4)
-          .background(.thinMaterial)
-          .cornerRadius(4)
+          .padding()
+          .background(Circle().fill(.thinMaterial))
           .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
       }
     }.onAppear {
