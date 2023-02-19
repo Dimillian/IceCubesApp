@@ -99,9 +99,16 @@ public struct StatusDetailView: View {
       var isReplyToPrevious: Bool = false
       if let index = statuses.firstIndex(where: { $0.id == status.id }),
          index > 0,
-         statuses[index - 1].id == status.inReplyToId && status.inReplyToId != statuses.first?.id
+         statuses[index - 1].id == status.inReplyToId
       {
-        isReplyToPrevious = true
+        if index == 1, statuses.count > 2 {
+          let nextStatus = statuses[2]
+          isReplyToPrevious = nextStatus.inReplyToId == status.id
+        } else if statuses.count == 2 {
+          isReplyToPrevious = false
+        } else {
+          isReplyToPrevious = true
+        }
       }
       let viewModel: StatusRowViewModel = .init(status: status,
                                                 client: client,
