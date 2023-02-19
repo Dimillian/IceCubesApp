@@ -73,6 +73,7 @@
 "settings.display.example-toot" = "Postvoorbeeld";
 "settings.display.avatar.position" = "Avatarpositie";
 "settings.display.avatar.shape" = "Avatarvorm";
+"settings.display.full-username" = "Display full username";
 "settings.display.navigation-title" = "Weergaveopties";
 "settings.display.restore" = "Stel opnieuw in";
 "settings.display.section.display" = "Weergave";

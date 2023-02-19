@@ -93,6 +93,7 @@ struct DisplaySettingsView: View {
             Text(shape.description).tag(shape)
           }
         }
+        Toggle("settings.display.full-username", isOn: $theme.displayFullUsername)
         Picker("settings.display.status.action-buttons", selection: $theme.statusActionsDisplay) {
           ForEach(Theme.StatusActionsDisplay.allCases, id: \.rawValue) { buttonStyle in
             Text(buttonStyle.description).tag(buttonStyle)

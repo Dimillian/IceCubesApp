@@ -73,6 +73,7 @@
 "settings.display.example-toot" = "Adibidea";
 "settings.display.avatar.position" = "Avatarearen kokapena";
 "settings.display.avatar.shape" = "Avatarearen itxura";
+"settings.display.full-username" = "Display full username";
 "settings.display.navigation-title" = "Pantaila ezarpenak";
 "settings.display.restore" = "Berrezarri defektuzkoa";
 "settings.display.section.display" = "Pantaila";

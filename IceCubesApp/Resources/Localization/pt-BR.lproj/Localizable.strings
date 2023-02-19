@@ -73,6 +73,7 @@
 "settings.display.example-toot" = "Example Post";
 "settings.display.avatar.position" = "Posição do avatar";
 "settings.display.avatar.shape" = "Formato do avatar";
+"settings.display.full-username" = "Display full username";
 "settings.display.navigation-title" = "Ver Configurações";
 "settings.display.restore" = "Restaurar padrões";
 "settings.display.section.display" = "Exibir";

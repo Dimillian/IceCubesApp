@@ -72,6 +72,7 @@
 "settings.display.example-toot" = "Publicació d'exemple";
 "settings.display.avatar.position" = "Posició de les fotos de perfil";
 "settings.display.avatar.shape" = "Forma de les fotos de perfil";
+"settings.display.full-username" = "Display full username";
 "settings.display.navigation-title" = "Configuració de l'aparença";
 "settings.display.restore" = "Restableix els valors per defecte";
 "settings.display.section.display" = "Aparença";

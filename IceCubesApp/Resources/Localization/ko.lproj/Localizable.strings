@@ -73,6 +73,7 @@
 "settings.display.example-toot" = "글 미리 보기";
 "settings.display.avatar.position" = "프로필 사진 위치";
 "settings.display.avatar.shape" = "프로필 사진 모양";
+"settings.display.full-username" = "Display full username";
 "settings.display.navigation-title" = "화면 설정";
 "settings.display.restore" = "초기 설정으로 되돌리기";
 "settings.display.section.display" = "화면";
