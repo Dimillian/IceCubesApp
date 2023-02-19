@@ -379,9 +379,9 @@
 "status.action.reply" = "Odpowiedz";
 "status.action.section.your-post" = "Twój post";
 "status.action.share" = "Udostępnij ten post";
-"status.action.share-link" = "Share post link";
-"status.action.share-image" = "Share post as image";
-"status.action.share-title" = "Share";
+"status.action.share-link" = "Udostępnij link do tego postu";
+"status.action.share-image" = "Udostępnij ten post jako obrazek";
+"status.action.share-title" = "Udostępnij";
 "status.action.unbookmark" = "Usuń zakładkę";
 "status.action.unboost" = "Cofnij podbicie";
 "status.action.unfavorite" = "Usuń z polubionych";
