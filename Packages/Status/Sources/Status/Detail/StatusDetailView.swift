@@ -99,7 +99,7 @@ public struct StatusDetailView: View {
       var isReplyToPrevious: Bool = false
       if let index = statuses.firstIndex(where: { $0.id == status.id }),
          index > 0,
-         statuses[index - 1].id == status.inReplyToId
+         statuses[index - 1].id == status.inReplyToId && status.inReplyToId != statuses.first?.id
       {
         isReplyToPrevious = true
       }
