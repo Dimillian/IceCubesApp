@@ -22,12 +22,12 @@ private struct SafariRouter: ViewModifier {
         // Open internal URL.
         routerPath.handle(url: url)
       })
-      .onOpenURL(perform: { url in
+      .onOpenURL { url in
         // Open external URL (from icecubesapp://)
         let urlString = url.absoluteString.replacingOccurrences(of: "icecubesapp://", with: "https://")
         guard let url = URL(string: urlString), url.host != nil else { return }
         _ = routerPath.handle(url: url)
-      })
+      }
       .onAppear {
         routerPath.urlHandler = { url in
           if url.absoluteString.contains("@twitter.com"), url.absoluteString.hasPrefix("mailto:") {
@@ -50,26 +50,70 @@ private struct SafariRouter: ViewModifier {
           return .handled
         }
       }
-      .fullScreenCover(item: $presentedURL, content: { url in
-        SafariView(url: url, inAppBrowserReaderView: preferences.inAppBrowserReaderView)
-          .edgesIgnoringSafeArea(.all)
-      })
+      .background {
+        SafariPresenter(url: $presentedURL)
+          .frame(width: 0, height: 0)
+      }
+  }
+}
+
+struct SafariPresenter: UIViewControllerRepresentable {
+  @EnvironmentObject private var theme: Theme
+  @EnvironmentObject private var preferences: UserPreferences
+  @EnvironmentObject private var routerPath: RouterPath
+  @Binding var url: URL?
+
+  func makeUIViewController(context _: Context) -> UIViewController {
+    let view = UIView(frame: .zero)
+    view.isHidden = true
+    view.isUserInteractionEnabled = false
+    let viewController = UIViewController()
+    viewController.view = view
+    return viewController
   }
 
-  struct SafariView: UIViewControllerRepresentable {
-    let url: URL
-    let inAppBrowserReaderView: Bool
+  func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+    defer { url = nil }
+    guard let url = url, let viewController = uiViewController.topViewController() else { return }
+    let configuration = SFSafariViewController.Configuration()
+    configuration.entersReaderIfAvailable = preferences.inAppBrowserReaderView
 
-    func makeUIViewController(context _: UIViewControllerRepresentableContext<SafariView>) -> SFSafariViewController {
-      let configuration = SFSafariViewController.Configuration()
-      configuration.entersReaderIfAvailable = inAppBrowserReaderView
+    let safari = SFSafariViewController(url: url, configuration: configuration)
+    safari.preferredBarTintColor = UIColor(theme.primaryBackgroundColor)
+    safari.preferredControlTintColor = UIColor(theme.tintColor)
+    safari.delegate = context.coordinator
+    viewController.present(safari, animated: true) {
+      routerPath.isSafariPresented = true
+    }
+  }
+    
+  func makeCoordinator() -> Coordinator {
+    Coordinator(routerPath: routerPath)
+  }
 
-      let safari = SFSafariViewController(url: url, configuration: configuration)
-      safari.preferredBarTintColor = UIColor(Theme.shared.primaryBackgroundColor)
-      safari.preferredControlTintColor = UIColor(Theme.shared.tintColor)
-      return safari
+  class Coordinator: NSObject, SFSafariViewControllerDelegate {
+    weak var routerPath: RouterPath?
+      
+    init(routerPath: RouterPath?) {
+      self.routerPath = routerPath
     }
 
-    func updateUIViewController(_: SFSafariViewController, context _: UIViewControllerRepresentableContext<SafariView>) {}
+    @MainActor
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+      routerPath?.isSafariPresented = false
+    }
+  }
+}
+
+private extension UIViewController {
+  func topViewController() -> UIViewController? {
+    if let nvc = self as? UINavigationController {
+      return nvc.visibleViewController?.topViewController()
+    } else if let tbc = self as? UITabBarController, let selected = tbc.selectedViewController {
+      return selected.topViewController()
+    } else if let presented = presentedViewController {
+      return presented.topViewController()
+    }
+    return self
   }
 }

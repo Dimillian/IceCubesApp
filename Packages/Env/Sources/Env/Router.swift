@@ -60,6 +60,7 @@ public enum SheetDestinations: Identifiable {
 public class RouterPath: ObservableObject {
   public var client: Client?
   public var urlHandler: ((URL) -> OpenURLAction.Result)?
+  public var isSafariPresented: Bool = false
 
   @Published public var path: [RouterDestinations] = []
   @Published public var presentedSheet: SheetDestinations?

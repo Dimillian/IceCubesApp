@@ -29,6 +29,7 @@ struct IceCubesApp: App {
   @State private var selectSidebarItem: Tab? = .timeline
   @State private var popToRootTab: Tab = .other
   @State private var sideBarLoadedTabs: Set<Tab> = Set()
+  @State private var didAppear: Bool = false
 
   private var availableTabs: [Tab] {
     appAccountsManager.currentClient.isAuth ? Tab.loggedInTabs() : Tab.loggedOutTab()
@@ -39,6 +40,8 @@ struct IceCubesApp: App {
       appView
         .applyTheme(theme)
         .onAppear {
+          guard !didAppear else { return }
+          didAppear = true
           setNewClientsInEnv(client: appAccountsManager.currentClient)
           setupRevenueCat()
           refreshPushSubs()
