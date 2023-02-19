@@ -56,19 +56,19 @@ public struct AvatarView: View {
           .fill(.gray)
           .frame(width: size.size.width, height: size.size.height)
       } else {
-        if isInCaptureMode, let image = Nuke.ImagePipeline.shared.cache.cachedImage(for: .init(url: url))?.image {
+        if isInCaptureMode, let url = url, let image = Nuke.ImagePipeline.shared.cache.cachedImage(for: makeImageRequest(for: url))?.image {
           Image(uiImage: image)
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(width: size.size.width, height: size.size.height)
         } else {
-          LazyImage(url: url) { state in
+          LazyImage(request: url.map(makeImageRequest)) { state in
             if let image = state.image {
               image
                 .resizable()
                 .aspectRatio(contentMode: .fit)
             } else {
-                AvatarPlaceholderView(size: size)
+              AvatarPlaceholderView(size: size)
             }
           }
           .animation(nil)
@@ -80,6 +80,10 @@ public struct AvatarView: View {
     .overlay(
       clipShape.stroke(Color.primary.opacity(0.25), lineWidth: 1)
     )
+  }
+
+  private func makeImageRequest(for url: URL) -> ImageRequest {
+    ImageRequest(url: url, processors: [.resize(size: size.size)])
   }
 
   private var clipShape: some Shape {
