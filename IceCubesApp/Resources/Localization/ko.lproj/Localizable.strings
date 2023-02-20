@@ -73,7 +73,7 @@
 "settings.display.example-toot" = "글 미리 보기";
 "settings.display.avatar.position" = "프로필 사진 위치";
 "settings.display.avatar.shape" = "프로필 사진 모양";
-"settings.display.full-username" = "Display full username";
+"settings.display.full-username" = "아이디에 인스턴스 URL 표시";
 "settings.display.navigation-title" = "화면 설정";
 "settings.display.restore" = "초기 설정으로 되돌리기";
 "settings.display.section.display" = "화면";
@@ -186,8 +186,8 @@
 "settings.swipeactions.status.use-theme-colors" = "기본 색상 대신 테마 색상 사용";
 "settings.swipeactions.status.icon-style" = "아이콘 모양";
 
-"settings.display.section.font" = "Font";
-"settings.display.font.rounded" = "Use SF Rounded";
+"settings.display.section.font" = "글꼴";
+"settings.display.font.rounded" = "SF Rounded 글꼴 사용";
 
 // MARK: Tabs
 "tab.explore" = "둘러보기";
@@ -265,11 +265,11 @@
 "account.joined" = "가입";
 "account.action.logout" = "로그아웃";
 
-"account.relation.note.edit" = "Edit Note";
-"account.relation.note.edit.placeholder" = "Enter Note text";
-"account.relation.note.edit.error.save.message" = "Error while saving your note, please try again.";
-"account.relation.note.edit.error.save.title" = "Error while saving your note";
-"account.relation.note.label" = "Note:";
+"account.relation.note.edit" = "노트 편집";
+"account.relation.note.edit.placeholder" = "나만 볼 수 있는 노트";
+"account.relation.note.edit.error.save.message" = "노트를 저장하지 못했습니다. 다시 시도해주세요.";
+"account.relation.note.edit.error.save.title" = "노트 저장 오류";
+"account.relation.note.label" = "노트";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "삭제";
@@ -385,10 +385,10 @@
 "status.action.quote" = "인용";
 "status.action.reply" = "댓글";
 "status.action.section.your-post" = "내 글";
-"status.action.share" = "공유";
-"status.action.share-link" = "Share post link";
-"status.action.share-image" = "Share post as image";
-"status.action.share-title" = "Share";
+"status.action.share" = "링크 및 본문 공유";
+"status.action.share-link" = "링크 공유";
+"status.action.share-image" = "이미지로 공유";
+"status.action.share-title" = "공유";
 "status.action.unbookmark" = "보관함에서 제거";
 "status.action.unboost" = "부스트 취소";
 "status.action.unfavorite" = "좋아요 취소";
@@ -478,8 +478,8 @@
 "accessibility.editor.button.drafts" = "임시 보관함";
 "accessibility.editor.button.custom-emojis" = "커스텀 이모지";
 "accessibility.editor.button.language" = "언어";
-"accessibility.tabs.timeline.add-account" = "Add account";
-"accessibility.app-account.selector.accounts" = "Accounts";
+"accessibility.tabs.timeline.add-account" = "계정 추가";
+"accessibility.app-account.selector.accounts" = "계정";
 
 // MARK: Report
 "report.comment.placeholder" = "추가 정보";
