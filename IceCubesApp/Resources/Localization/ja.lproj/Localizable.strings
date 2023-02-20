@@ -187,7 +187,6 @@
 "settings.swipeactions.status.icon-style" = "アイコンスタイル";
 
 "settings.display.section.font" = "フォント";
-"settings.display.font.rounded" = "角丸SFを使用する";
 
 // MARK: Tabs
 "tab.explore" = "探索";

@@ -184,7 +184,6 @@
 "settings.swipeactions.status.icon-style" = "Symboolstijl";
 
 "settings.display.section.font" = "Lettertype";
-"settings.display.font.rounded" = "Gebruik SF Rounded";
 
 // MARK: Tabs
 "tab.explore" = "Ontdekken";

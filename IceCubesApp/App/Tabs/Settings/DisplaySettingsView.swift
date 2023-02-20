@@ -73,9 +73,6 @@ struct DisplaySettingsView: View {
 
         .navigationDestination(isPresented: $isFontSelectorPresented, destination: { FontPicker() })
 
-        Toggle("settings.display.font.rounded", isOn: $userPreferences.useSFRoundedFont)
-          .disabled(userPreferences.chosenFont != nil)
-
         VStack {
           Slider(value: $userPreferences.fontSizeScale, in: 0.5 ... 1.5, step: 0.1)
           Text("settings.display.font.scaling-\(String(format: "%.1f", userPreferences.fontSizeScale))")

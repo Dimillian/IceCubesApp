@@ -187,7 +187,6 @@
 "settings.swipeactions.status.icon-style" = "Icon style";
 
 "settings.display.section.font" = "Font";
-"settings.display.font.rounded" = "Use SF Rounded";
 
 // MARK: Tabs
 "tab.explore" = "Explorar";

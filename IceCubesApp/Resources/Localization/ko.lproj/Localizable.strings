@@ -187,7 +187,6 @@
 "settings.swipeactions.status.icon-style" = "아이콘 모양";
 
 "settings.display.section.font" = "글꼴";
-"settings.display.font.rounded" = "SF Rounded 글꼴 사용";
 
 // MARK: Tabs
 "tab.explore" = "둘러보기";

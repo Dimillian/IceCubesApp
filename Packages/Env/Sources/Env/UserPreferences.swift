@@ -48,8 +48,6 @@ public class UserPreferences: ObservableObject {
   @AppStorage("swipeactions-use-theme-color") public var swipeActionsUseThemeColor = false
   @AppStorage("swipeactions-icon-style") public var swipeActionsIconStyle: SwipeActionsIconStyle = .iconWithText
 
-  @AppStorage("font_use_sf_rounded") public var useSFRoundedFont = false
-
   @AppStorage("requested_review") public var requestedReview = false
 
   public enum SwipeActionsIconStyle: String, CaseIterable {
