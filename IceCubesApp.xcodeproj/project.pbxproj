@@ -1369,8 +1369,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
+				branch = main;
+				kind = branch;
 			};
 		};
 		9FAE4ACC29379A5A00772766 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {

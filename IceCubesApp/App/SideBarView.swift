@@ -27,10 +27,11 @@ struct SideBarView<Content: View>: View {
   }
   
   private func makeIconForTab(tab: Tab) -> some View {
-    ZStack(alignment: .topTrailing) {
+    let badge = badgeFor(tab: tab)
+    return ZStack(alignment: .topTrailing) {
       SideBarIcon(systemIconName: tab.iconName,
                   isSelected: tab == selectedTab)
-      if let badge = badgeFor(tab: tab), badge > 0 {
+      if badge > 0 {
         makeBadgeView(count: badge)
       }
     }
