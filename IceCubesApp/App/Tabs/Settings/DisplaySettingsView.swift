@@ -48,6 +48,8 @@ struct DisplaySettingsView: View {
             return FontState.openDyslexic
           } else if userPreferences.chosenFont?.fontName == "AtkinsonHyperlegible-Regular" {
             return FontState.hyperLegible
+          } else if userPreferences.chosenFont?.fontName == ".AppleSystemUIFontRounded-Regular" {
+            return FontState.SFRounded
           }
           return userPreferences.chosenFontData != nil ? FontState.custom : FontState.system
         }, set: { newValue in
@@ -58,6 +60,8 @@ struct DisplaySettingsView: View {
             userPreferences.chosenFont = UIFont(name: "OpenDyslexic", size: 1)
           case .hyperLegible:
             userPreferences.chosenFont = UIFont(name: "Atkinson Hyperlegible", size: 1)
+          case.SFRounded:
+            userPreferences.chosenFont = UIFont.systemFont(ofSize: 1).rounded()
           case .custom:
             isFontSelectorPresented = true
           }
@@ -66,6 +70,7 @@ struct DisplaySettingsView: View {
             Text(fontState.title).tag(fontState)
           }
         }
+
         .navigationDestination(isPresented: $isFontSelectorPresented, destination: { FontPicker() })
 
         Toggle("settings.display.font.rounded", isOn: $userPreferences.useSFRoundedFont)

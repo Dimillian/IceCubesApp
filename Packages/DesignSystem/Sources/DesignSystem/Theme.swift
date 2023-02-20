@@ -14,6 +14,7 @@ public class Theme: ObservableObject {
     case system
     case openDyslexic
     case hyperLegible
+    case SFRounded
     case custom
 
     @MainActor
@@ -25,6 +26,8 @@ public class Theme: ObservableObject {
         return "Open Dyslexic"
       case .hyperLegible:
         return "Hyper Legible"
+      case .SFRounded:
+          return "SF Rounded"
       case .custom:
         return "settings.display.font.custom"
       }

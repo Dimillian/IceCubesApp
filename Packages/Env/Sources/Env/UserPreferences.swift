@@ -117,7 +117,6 @@ public class UserPreferences: ObservableObject {
     get {
       guard let chosenFontData,
             let font = try? NSKeyedUnarchiver.unarchivedObject(ofClass: UIFont.self, from: chosenFontData) else { return nil }
-
       return font
     }
     set {
@@ -155,4 +154,17 @@ public class UserPreferences: ObservableObject {
     copy.insert(isoCode, at: 0)
     recentlyUsedLanguages = Array(copy.prefix(3))
   }
+}
+
+
+
+// https://stackoverflow.com/a/67305343
+extension UIFont {
+    public func rounded() -> UIFont {
+        guard let descriptor = fontDescriptor.withDesign(.rounded) else {
+            return self
+        }
+
+        return UIFont(descriptor: descriptor, size: pointSize)
+    }
 }
