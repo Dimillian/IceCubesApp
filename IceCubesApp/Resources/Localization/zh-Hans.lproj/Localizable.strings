@@ -73,7 +73,7 @@
 "settings.display.example-toot" = "样例嘟文";
 "settings.display.avatar.position" = "头像位置";
 "settings.display.avatar.shape" = "头像边框";
-"settings.display.full-username" = "Display full username";
+"settings.display.full-username" = "显示完整用户名";
 "settings.display.navigation-title" = "显示设置";
 "settings.display.restore" = "恢复默认设置";
 "settings.display.section.display" = "显示";
@@ -163,9 +163,7 @@
 "settings.display.font.system" = "系统";
 "settings.display.font.custom" = "自定义";
 "settings.display.font.scaling-%@" = "字体缩放：%@";
-
 "settings.display.show-tab-label" = "显示 Tab 标签";
-
 "settings.display.show-ipad-column" = "启用边栏";
 
 "settings.general.swipeactions" = "轻扫操作";
@@ -265,11 +263,11 @@
 "account.action.logout" = "退出登录";
 "account.action.edit-filters" = "编辑过滤器";
 
-"account.relation.note.edit" = "Edit Note";
-"account.relation.note.edit.placeholder" = "Enter Note text";
-"account.relation.note.edit.error.save.message" = "Error while saving your note, please try again.";
-"account.relation.note.edit.error.save.title" = "Error while saving your note";
-"account.relation.note.label" = "Note:";
+"account.relation.note.edit" = "编辑备注";
+"account.relation.note.edit.placeholder" = "输入备注文本";
+"account.relation.note.edit.error.save.message" = "保存备注时报错，请重试。";
+"account.relation.note.edit.error.save.title" = "保存报错";
+"account.relation.note.label" = "备注：";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "删除";
@@ -385,9 +383,9 @@
 "status.action.reply" = "回复";
 "status.action.section.your-post" = "你的嘟文";
 "status.action.share" = "分享嘟文";
-"status.action.share-link" = "Share post link";
-"status.action.share-image" = "Share post as image";
-"status.action.share-title" = "Share";
+"status.action.share-link" = "分享嘟文链接";
+"status.action.share-image" = "分享嘟文为图片";
+"status.action.share-title" = "分享";
 "status.action.unbookmark" = "取消书签";
 "status.action.unboost" = "取消转发";
 "status.action.unfavorite" = "取消喜欢";
