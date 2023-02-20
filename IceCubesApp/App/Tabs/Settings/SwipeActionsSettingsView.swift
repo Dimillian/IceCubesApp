@@ -9,42 +9,46 @@ struct SwipeActionsSettingsView: View {
   var body: some View {
     Form {
       Section {
-        makePostActionPicker(selection: $userPreferences.swipeActionsStatusLeadingLeft,
-                             label: "settings.swipeactions.status.primary")
+                
+        Label("settings.swipeactions.status.leading", systemImage: "arrow.right")
+          .foregroundColor(.secondary)
+        
+        createStatusActionPicker(selection: $userPreferences.swipeActionsStatusLeadingLeft,
+                             label: "settings.swipeactions.primary")
           .onChange(of: userPreferences.swipeActionsStatusLeadingLeft) { action in
             if action == .none {
               userPreferences.swipeActionsStatusLeadingRight = .none;
             }
           }
         
-        makePostActionPicker(selection: $userPreferences.swipeActionsStatusLeadingRight,
-                               label: "settings.swipeactions.status.secondary")
+        createStatusActionPicker(selection: $userPreferences.swipeActionsStatusLeadingRight,
+                               label: "settings.swipeactions.secondary")
         .disabled(userPreferences.swipeActionsStatusLeadingLeft == .none)
         
-      } header: {
-        Label("settings.swipeactions.status.leading", systemImage: "arrow.right")
-      }
-      
-      Section {
-        makePostActionPicker(selection: $userPreferences.swipeActionsStatusTrailingRight,
-                             label: "settings.swipeactions.status.primary")
+        Label("settings.swipeactions.status.trailing", systemImage: "arrow.left")
+          .foregroundColor(.secondary)
+        
+        createStatusActionPicker(selection: $userPreferences.swipeActionsStatusTrailingRight,
+                             label: "settings.swipeactions.primary")
           .onChange(of: userPreferences.swipeActionsStatusTrailingRight) { action in
             if action == .none {
               userPreferences.swipeActionsStatusTrailingLeft = .none;
             }
           }
 
-        makePostActionPicker(selection: $userPreferences.swipeActionsStatusTrailingLeft,
-                               label: "settings.swipeactions.status.secondary")
+        createStatusActionPicker(selection: $userPreferences.swipeActionsStatusTrailingLeft,
+                               label: "settings.swipeactions.secondary")
           .disabled(userPreferences.swipeActionsStatusTrailingRight == .none)
         
       } header: {
-        Label("settings.swipeactions.status.trailing", systemImage: "arrow.left")
-
+        Text("settings.swipeactions.status")
+      } footer: {
+        Text("settings.swipeactions.explanation")
       }
+      .listRowBackground(theme.primaryBackgroundColor)
 
       Section {
-        Picker(selection: $userPreferences.swipeActionsIconStyle, label: Text("settings.swipeactions.status.icon-style")) {
+        Picker(selection: $userPreferences.swipeActionsIconStyle, label: Text("settings.swipeactions.icon-style")) {
           ForEach(UserPreferences.SwipeActionsIconStyle.allCases, id: \.rawValue) { style in
             Text(style.description).tag(style)
           }
@@ -58,7 +62,7 @@ struct SwipeActionsSettingsView: View {
         Text("Appearance")
       } footer: {
         // TODO: Localization
-        Text("settings.swipeactions.status.use-theme-colors")
+        Text("settings.swipeactions.use-theme-colors")
       }
       .listRowBackground(theme.primaryBackgroundColor)
     }
@@ -66,9 +70,9 @@ struct SwipeActionsSettingsView: View {
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
   }
-  
-  private func makePostActionPicker(selection: Binding<StatusAction>, label: LocalizedStringKey) -> some View {
-    return Picker(selection: selection, label: Text(label)) {
+
+  private func createStatusActionPicker(selection: Binding<StatusAction>, label: LocalizedStringKey) -> some View {
+    return Picker(selection: selection, label: Text(label).padding(.leading, 16)) {
       Section {
         Text(StatusAction.none.displayName()).tag(StatusAction.none)
       }
