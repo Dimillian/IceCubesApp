@@ -432,6 +432,7 @@
 "status.media.contextmenu.view-browser" = "Visualizza nel browser";
 "status.media.sensitive.show" = "Mostra i contenuti sensibili";
 "status.poll.n-votes %lld" = "%lld voti";
+"status.poll.n-votes-voters %lld %lld" = "%lld votes from %lld voters";
 "status.poll.closed" = "Chiuso";
 "status.poll.closes-in" = "Si chiude in ";
 "status.poll.duration" = "Durata del sondaggio";

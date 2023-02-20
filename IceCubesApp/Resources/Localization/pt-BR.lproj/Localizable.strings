@@ -431,6 +431,7 @@
 "status.media.contextmenu.view-browser" = "Exibir no Navegador";
 "status.media.sensitive.show" = "Exibir conteúdo sensível";
 "status.poll.n-votes %lld" = "%lld votos";
+"status.poll.n-votes-voters %lld %lld" = "%lld votes from %lld voters";
 "status.poll.closed" = "Encerrado";
 "status.poll.closes-in" = "Encerrado em ";
 "status.poll.duration" = "Duração da votação";

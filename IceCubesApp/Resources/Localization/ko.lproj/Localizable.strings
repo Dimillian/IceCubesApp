@@ -433,6 +433,7 @@
 "status.media.contextmenu.view-browser" = "브라우저에서 보기";
 "status.media.sensitive.show" = "민감한 미디어 표시하기";
 "status.poll.n-votes %lld" = "%lld표";
+"status.poll.n-votes-voters %lld %lld" = "%lld votes from %lld voters";
 "status.poll.closed" = "종료됨";
 "status.poll.closes-in" = "종료까지 ";
 "status.poll.duration" = "투표 기간";

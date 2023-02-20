@@ -430,6 +430,7 @@
 "status.media.contextmenu.view-browser" = "在浏览器中打开";
 "status.media.sensitive.show" = "显示敏感内容";
 "status.poll.n-votes %lld" = "%lld 投票";
+"status.poll.n-votes-voters %lld %lld" = "%lld votes from %lld voters";
 "status.poll.closed" = "已关闭";
 "status.poll.closes-in" = "关闭于 ";
 "status.poll.duration" = "投票持续时间";

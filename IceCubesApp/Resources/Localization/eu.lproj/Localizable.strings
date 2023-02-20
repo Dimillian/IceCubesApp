@@ -424,6 +424,8 @@
 "status.media.contextmenu.share" = "Partekatu irudia";
 "status.media.contextmenu.view-browser" = "Ikusi nabigatzailean";
 "status.media.sensitive.show" = "Erakutsi eduki hunkigarria";
+"status.poll.n-votes %lld" = "%lld votes";
+"status.poll.n-votes-voters %lld %lld" = "%lld votes from %lld voters";
 "status.poll.closed" = "Amaituta";
 "status.poll.closes-in" = "Epemuga: ";
 "status.poll.duration" = "Bozketaren iraupena";
