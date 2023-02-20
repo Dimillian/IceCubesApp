@@ -95,7 +95,7 @@
 "settings.general.push-notifications" = "通知设置";
 "settings.general.remote-timelines" = "远程时间线";
 "settings.push.boosts" = "转发";
-"settings.push.favorites" = "收藏";
+"settings.push.favorites" = "喜欢";
 "settings.push.follows" = "关注";
 "settings.push.main-toggle" = "启用通知";
 "settings.push.main-toggle.description" = "在有新活动时通知";
@@ -172,7 +172,7 @@
 "settings.swipeactions.navigation-title" = "轻扫操作设置";
 "settings.swipeactions.status.action.bookmark" = "书签";
 "settings.swipeactions.status.action.boost" = "转发";
-"settings.swipeactions.status.action.favorite" = "收藏";
+"settings.swipeactions.status.action.favorite" = "喜欢";
 "settings.swipeactions.status.action.none" = "无";
 "settings.swipeactions.status.action.quote" = "引用";
 "settings.swipeactions.status.action.reply" = "回复";
@@ -243,7 +243,7 @@
 "account.edit.post-settings.privacy" = "默认隐私设置";
 "account.edit.post-settings.section-title" = "嘟文设置";
 "account.edit.post-settings.sensitive" = "敏感内容";
-"account.favorited-by" = "同样收藏的有";
+"account.favorited-by" = "同样喜欢的有";
 "account.follow.follow" = "关注";
 "account.follow.following" = "正在关注";
 "account.follow.requested" = "已申请";
@@ -336,7 +336,7 @@
 "notifications.label.reblog %lld" = "已转发";
 "notifications.label.status" = "发表了一条嘟文";
 "notifications.label.update" = "编辑了一条嘟文";
-"notifications.menu-title.favorite" = "收藏";
+"notifications.menu-title.favorite" = "喜欢";
 "notifications.menu-title.follow" = "关注";
 "notifications.menu-title.follow-request" = "关注申请";
 "notifications.menu-title.mention" = "提及";
@@ -352,7 +352,7 @@
 "notifications.label.reblog.push" = "🚀 转发了：";
 "notifications.label.follow.push" = "👋 新增关注：";
 "notifications.label.follow-request.push" = "🔒 请求关注你：";
-"notifications.label.favorite.push" = "⭐️ 收藏了：";
+"notifications.label.favorite.push" = "⭐️ 喜欢了：";
 "notifications.label.poll.push" = "📈 投票结束：";
 "notifications.label.update.push" = "更新了：";
 
@@ -376,7 +376,7 @@
 "status.action.delete.confirm.title" = "确认删除";
 "status.action.delete.confirm.message" = "你确认要删除此嘟文吗？";
 "status.action.edit" = "编辑";
-"status.action.favorite" = "收藏";
+"status.action.favorite" = "喜欢";
 "status.action.mention" = "提及";
 "status.action.message" = "私信";
 "status.action.pin" = "固定";
@@ -390,7 +390,7 @@
 "status.action.share-title" = "Share";
 "status.action.unbookmark" = "取消书签";
 "status.action.unboost" = "取消转发";
-"status.action.unfavorite" = "取消收藏";
+"status.action.unfavorite" = "取消喜欢";
 "status.action.unpin" = "取消固定";
 "status.action.view-in-browser" = "在浏览器中打开";
 "status.card.share" = "分享此链接";
@@ -447,7 +447,7 @@
 "status.summary.at-time" = " 在 ";
 "status.summary.edited-time" = "上次编辑：";
 "status.summary.n-boosts %lld" = "%lld 转发";
-"status.summary.n-favorites %lld" = "%lld 收藏";
+"status.summary.n-favorites %lld" = "%lld 喜欢";
 "status.visibility.direct" = "私密";
 "status.visibility.follower" = "粉丝";
 "status.visibility.public" = "所有人";
