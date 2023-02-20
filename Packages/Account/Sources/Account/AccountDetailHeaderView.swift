@@ -192,6 +192,9 @@ struct AccountDetailHeaderView: View {
   private var joinedAtView: some View {
     if let joinedAt = viewModel.account?.createdAt.asDate {
       HStack(spacing: 4) {
+        if account.bot {
+          Text("🤖")
+        }
         Image(systemName: "calendar")
         Text("account.joined")
         Text(joinedAt, style: .date)
