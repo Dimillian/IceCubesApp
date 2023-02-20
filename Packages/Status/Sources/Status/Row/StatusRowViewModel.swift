@@ -312,10 +312,6 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   func translate(userLang: String) async {
-    await translate(userLang: userLang, sourceLang: getStatusLang())
-  }
-
-  private func translate(userLang: String, sourceLang _: String?) async {
     do {
       withAnimation {
         isLoadingTranslation = true

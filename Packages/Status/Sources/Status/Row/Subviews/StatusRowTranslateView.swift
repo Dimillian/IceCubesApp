@@ -38,13 +38,7 @@ struct StatusRowTranslateView: View {
         if viewModel.isLoadingTranslation {
           ProgressView()
         } else {
-          if let statusLanguage = viewModel.getStatusLang(),
-             let languageName = Locale.current.localizedString(forLanguageCode: statusLanguage)
-          {
-            Text("status.action.translate-from-\(languageName)")
-          } else {
             Text("status.action.translate")
-          }
         }
       }
       .buttonStyle(.borderless)
