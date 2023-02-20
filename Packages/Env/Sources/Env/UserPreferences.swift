@@ -13,7 +13,6 @@ public class UserPreferences: ObservableObject {
   @AppStorage("remote_local_timeline") public var remoteLocalTimelines: [String] = []
   @AppStorage("preferred_browser") public var preferredBrowser: PreferredBrowser = .inAppSafari
   @AppStorage("draft_posts") public var draftsPosts: [String] = []
-  @AppStorage("font_size_scale") public var fontSizeScale: Double = 1
   @AppStorage("show_translate_button_inline") public var showTranslateButton: Bool = true
   @AppStorage("is_open_ai_enabled") public var isOpenAIEnabled: Bool = true
 
@@ -26,7 +25,6 @@ public class UserPreferences: ObservableObject {
   @AppStorage("app_default_post_visibility") public var appDefaultPostVisibility: Models.Visibility = .pub
   @AppStorage("app_default_posts_sensitive") public var appDefaultPostsSensitive = false
   @AppStorage("autoplay_video") public var autoPlayVideo = true
-  @AppStorage("chosen_font") public private(set) var chosenFontData: Data?
 
   @AppStorage("suppress_dupe_reblogs") public var suppressDupeReblogs: Bool = false
 
@@ -47,8 +45,6 @@ public class UserPreferences: ObservableObject {
   @AppStorage("swipeactions-status-leading-right") public var swipeActionsStatusLeadingRight = StatusAction.none
   @AppStorage("swipeactions-use-theme-color") public var swipeActionsUseThemeColor = false
   @AppStorage("swipeactions-icon-style") public var swipeActionsIconStyle: SwipeActionsIconStyle = .iconWithText
-
-  @AppStorage("font_use_sf_rounded") public var useSFRoundedFont = false
 
   @AppStorage("requested_review") public var requestedReview = false
 
@@ -112,25 +108,7 @@ public class UserPreferences: ObservableObject {
     }
     return count
   }
-
-  public var chosenFont: UIFont? {
-    get {
-      guard let chosenFontData,
-            let font = try? NSKeyedUnarchiver.unarchivedObject(ofClass: UIFont.self, from: chosenFontData) else { return nil }
-
-      return font
-    }
-    set {
-      if let font = newValue,
-         let data = try? NSKeyedArchiver.archivedData(withRootObject: font, requiringSecureCoding: false)
-      {
-        chosenFontData = data
-      } else {
-        chosenFontData = nil
-      }
-    }
-  }
-
+  
   @Published public var serverPreferences: ServerPreferences?
 
   private init() {}

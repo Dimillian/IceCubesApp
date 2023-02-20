@@ -44,20 +44,20 @@ struct DisplaySettingsView: View {
 
       Section("settings.display.section.font") {
         Picker("settings.display.font", selection: .init(get: { () -> FontState in
-          if userPreferences.chosenFont?.fontName == "OpenDyslexic-Regular" {
+          if theme.chosenFont?.fontName == "OpenDyslexic-Regular" {
             return FontState.openDyslexic
-          } else if userPreferences.chosenFont?.fontName == "AtkinsonHyperlegible-Regular" {
+          } else if theme.chosenFont?.fontName == "AtkinsonHyperlegible-Regular" {
             return FontState.hyperLegible
           }
-          return userPreferences.chosenFontData != nil ? FontState.custom : FontState.system
+          return theme.chosenFontData != nil ? FontState.custom : FontState.system
         }, set: { newValue in
           switch newValue {
           case .system:
-            userPreferences.chosenFont = nil
+            theme.chosenFont = nil
           case .openDyslexic:
-            userPreferences.chosenFont = UIFont(name: "OpenDyslexic", size: 1)
+            theme.chosenFont = UIFont(name: "OpenDyslexic", size: 1)
           case .hyperLegible:
-            userPreferences.chosenFont = UIFont(name: "Atkinson Hyperlegible", size: 1)
+            theme.chosenFont = UIFont(name: "Atkinson Hyperlegible", size: 1)
           case .custom:
             isFontSelectorPresented = true
           }
@@ -68,12 +68,12 @@ struct DisplaySettingsView: View {
         }
         .navigationDestination(isPresented: $isFontSelectorPresented, destination: { FontPicker() })
 
-        Toggle("settings.display.font.rounded", isOn: $userPreferences.useSFRoundedFont)
-          .disabled(userPreferences.chosenFont != nil)
+        Toggle("settings.display.font.rounded", isOn: $theme.useSFRoundedFont)
+          .disabled(theme.chosenFont != nil)
 
         VStack {
-          Slider(value: $userPreferences.fontSizeScale, in: 0.5 ... 1.5, step: 0.1)
-          Text("settings.display.font.scaling-\(String(format: "%.1f", userPreferences.fontSizeScale))")
+          Slider(value: $theme.fontSizeScale, in: 0.5 ... 1.5, step: 0.1)
+          Text("settings.display.font.scaling-\(String(format: "%.1f", theme.fontSizeScale))")
             .font(.scaledBody)
         }
         .alignmentGuide(.listRowSeparatorLeading) { d in

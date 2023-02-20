@@ -84,6 +84,24 @@ public class Theme: ObservableObject {
       }
     }
   }
+  
+  public var chosenFont: UIFont? {
+    get {
+      guard let chosenFontData,
+            let font = try? NSKeyedUnarchiver.unarchivedObject(ofClass: UIFont.self, from: chosenFontData) else { return nil }
+
+      return font
+    }
+    set {
+      if let font = newValue,
+         let data = try? NSKeyedArchiver.archivedData(withRootObject: font, requiringSecureCoding: false)
+      {
+        chosenFontData = data
+      } else {
+        chosenFontData = nil
+      }
+    }
+  }
 
   @AppStorage("is_previously_set") public var isThemePreviouslySet: Bool = false
   @AppStorage(ThemeKey.selectedScheme.rawValue) public var selectedScheme: ColorScheme = .dark
@@ -98,6 +116,9 @@ public class Theme: ObservableObject {
   @AppStorage(ThemeKey.statusDisplayStyle.rawValue) public var statusDisplayStyle: StatusDisplayStyle = .large
   @AppStorage(ThemeKey.followSystemColorSchme.rawValue) public var followSystemColorScheme: Bool = true
   @AppStorage(ThemeKey.displayFullUsernameTimeline.rawValue) public var displayFullUsername: Bool = true
+  @AppStorage("font_size_scale") public var fontSizeScale: Double = 1
+  @AppStorage("chosen_font") public private(set) var chosenFontData: Data?
+  @AppStorage("font_use_sf_rounded") public var useSFRoundedFont = false
 
   @Published public var avatarPosition: AvatarPosition = .top
   @Published public var avatarShape: AvatarShape = .rounded
