@@ -38,7 +38,7 @@ public struct InstanceInfoSection: View {
     if let rules = instance.rules {
       Section("instance.info.section.rules") {
         ForEach(rules) { rule in
-          Text(rule.text)
+          Text(rule.text.trimmingCharacters(in: .whitespacesAndNewlines))
         }
       }
       .listRowBackground(theme.primaryBackgroundColor)
