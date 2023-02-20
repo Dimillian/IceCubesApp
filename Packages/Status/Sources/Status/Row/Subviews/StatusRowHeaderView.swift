@@ -66,6 +66,7 @@ struct StatusRowHeaderView: View {
   }
   
   private var dateView: Text {
+    Text(viewModel.status.account.bot ? "🤖 " : "") +
     Text(status.createdAt.relativeFormatted) +
     Text(" ⸱ ") +
     Text(Image(systemName: viewModel.status.visibility.iconName))
