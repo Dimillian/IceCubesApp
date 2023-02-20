@@ -240,13 +240,13 @@ struct IceCubesApp: App {
     CommandGroup(replacing: .textFormatting) {
       Menu("menu.font") {
         Button("menu.font.bigger") {
-          if userPreferences.fontSizeScale < 1.5 {
-            userPreferences.fontSizeScale += 0.1
+          if theme.fontSizeScale < 1.5 {
+            theme.fontSizeScale += 0.1
           }
         }
         Button("menu.font.smaller") {
-          if userPreferences.fontSizeScale > 0.5 {
-            userPreferences.fontSizeScale -= 0.1
+          if theme.fontSizeScale > 0.5 {
+            theme.fontSizeScale -= 0.1
           }
         }
       }

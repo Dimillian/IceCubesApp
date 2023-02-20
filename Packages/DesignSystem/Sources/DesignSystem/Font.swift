@@ -15,15 +15,15 @@ public extension Font {
   private static let onMac = ProcessInfo.processInfo.isiOSAppOnMac
 
   private static func customFont(size: CGFloat, relativeTo textStyle: TextStyle) -> Font {
-    if let chosenFont = UserPreferences.shared.chosenFont {
+    if let chosenFont = Theme.shared.chosenFont {
       return .custom(chosenFont.fontName, size: size, relativeTo: textStyle)
     }
 
-    return .system(size: size, design: UserPreferences.shared.useSFRoundedFont ? .rounded : .default)
+    return .system(size: size, design: Theme.shared.useSFRoundedFont ? .rounded : .default)
   }
 
   private static func customUIFont(size: CGFloat) -> UIFont {
-    if let chosenFont = UserPreferences.shared.chosenFont {
+    if let chosenFont = Theme.shared.chosenFont {
       return chosenFont.withSize(size)
     }
 
@@ -31,7 +31,7 @@ public extension Font {
   }
 
   private static func userScaledFontSize(baseSize: CGFloat) -> CGFloat {
-    UIFontMetrics.default.scaledValue(for: baseSize * UserPreferences.shared.fontSizeScale)
+    UIFontMetrics.default.scaledValue(for: baseSize * Theme.shared.fontSizeScale)
   }
 
   static var scaledTitle: Font {
