@@ -370,6 +370,7 @@
 "status.action.translated-label-%@" = "%@ を使用して翻訳";
 "status.action.bookmark" = "ブックマーク";
 "status.action.boost" = "ブースト";
+"status.action.boost-to-followers" = "Boost to Followers";
 "status.action.copy-text" = "テキストをコピー";
 "status.action.delete" = "削除";
 "status.action.delete.confirm.title" = "確認";

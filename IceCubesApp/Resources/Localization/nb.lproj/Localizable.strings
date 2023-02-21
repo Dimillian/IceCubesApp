@@ -370,6 +370,7 @@
 "status.action.translated-label-%@" = "Oversatt ved hjelp av %@";
 "status.action.bookmark" = "Bokmerk";
 "status.action.boost" = "Forsterk";
+"status.action.boost-to-followers" = "Boost to Followers";
 "status.action.copy-text" = "Kopier tekst";
 "status.action.delete" = "Slett";
 "status.action.delete.confirm.title" = "Confirm";

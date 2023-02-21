@@ -364,6 +364,7 @@
 "status.action.translated-label-%@" = "Vertaald met behulp van %@";
 "status.action.bookmark" = "Voeg bladwijzer toe";
 "status.action.boost" = "Boosten";
+"status.action.boost-to-followers" = "Boost to Followers";
 "status.action.copy-text" = "Kopieer tekst";
 "status.action.delete" = "Verwijder";
 "status.action.delete.confirm.title" = "Bevestigen";

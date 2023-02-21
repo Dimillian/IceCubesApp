@@ -372,6 +372,7 @@
 "status.action.translated-label-%@" = "번역 제공: %@";
 "status.action.bookmark" = "보관함에 추가";
 "status.action.boost" = "부스트";
+"status.action.boost-to-followers" = "팔로워에게 부스트";
 "status.action.copy-text" = "복사";
 "status.action.delete" = "삭제";
 "status.action.delete.confirm.title" = "삭제 확인";
