@@ -124,7 +124,7 @@ struct StatusEditorAccessoryView: View {
 
   private var AIMenu: some View {
     Menu {
-      ForEach(StatusEditorAIPrompts.allCases, id: \.self) { prompt in
+      ForEach(StatusEditorAIPrompt.allCases, id: \.self) { prompt in
         Button {
           Task {
             isLoadingAIRequest = true
