@@ -88,11 +88,16 @@ public class Theme: ObservableObject {
     }
   }
 
+  private var _cachedChoosenFont: UIFont?
   public var chosenFont: UIFont? {
     get {
+      if let _cachedChoosenFont {
+        return _cachedChoosenFont
+      }
       guard let chosenFontData,
             let font = try? NSKeyedUnarchiver.unarchivedObject(ofClass: UIFont.self, from: chosenFontData) else { return nil }
 
+      _cachedChoosenFont = font
       return font
     }
     set {
@@ -103,6 +108,7 @@ public class Theme: ObservableObject {
       } else {
         chosenFontData = nil
       }
+      _cachedChoosenFont = nil
     }
   }
 
