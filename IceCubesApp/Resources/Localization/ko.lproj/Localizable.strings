@@ -184,7 +184,7 @@
 "settings.swipeactions.status.trailing.right" = "오른쪽 버튼";
 "settings.swipeactions.status" = "글";
 "settings.swipeactions.status.use-theme-colors" = "기본 색상 대신 테마 색상 사용";
-"settings.swipeactions.status.icon-style" = "아이콘 모양";
+"settings.swipeactions.icon-style" = "아이콘 모양";
 
 "settings.display.section.font" = "글꼴";
 

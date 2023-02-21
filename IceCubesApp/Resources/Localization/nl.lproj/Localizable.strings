@@ -181,7 +181,7 @@
 "settings.swipeactions.status.trailing.right" = "rechts";
 "settings.swipeactions.status" = "Post";
 "settings.swipeactions.status.use-theme-colors" = "Gebruik themakleuren in plaats van standaardkleuren";
-"settings.swipeactions.status.icon-style" = "Symboolstijl";
+"settings.swipeactions.icon-style" = "Symboolstijl";
 
 "settings.display.section.font" = "Lettertype";
 

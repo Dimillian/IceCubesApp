@@ -181,7 +181,7 @@
 "settings.swipeactions.status.trailing.right" = "eskuma";
 "settings.swipeactions.status" = "Bidalketa";
 "settings.swipeactions.status.use-theme-colors" = "Erabili hautatutako kolorea defektuzko koloreen ordez";
-"settings.swipeactions.status.icon-style" = "Ikonoen itxura";
+"settings.swipeactions.icon-style" = "Ikonoen itxura";
 
 "settings.display.section.font" = "Letra-tipoa";
 

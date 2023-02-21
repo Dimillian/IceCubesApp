@@ -184,7 +184,7 @@
 "settings.swipeactions.status.trailing.right" = "prawa";
 "settings.swipeactions.status" = "Post";
 "settings.swipeactions.status.use-theme-colors" = "Używaj kolorów motywu zamiast kolorów domyślnych";
-"settings.swipeactions.status.icon-style" = "Styl ikony";
+"settings.swipeactions.icon-style" = "Styl ikony";
 
 "settings.display.section.font" = "Czcionka";
 

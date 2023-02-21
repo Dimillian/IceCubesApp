@@ -184,7 +184,7 @@
 "settings.swipeactions.status.trailing.right" = "右欄";
 "settings.swipeactions.status" = "投稿";
 "settings.swipeactions.status.use-theme-colors" = "デフォルトの色の代わりにテーマの色を使用する";
-"settings.swipeactions.status.icon-style" = "アイコンスタイル";
+"settings.swipeactions.icon-style" = "アイコンスタイル";
 
 "settings.display.section.font" = "フォント";
 

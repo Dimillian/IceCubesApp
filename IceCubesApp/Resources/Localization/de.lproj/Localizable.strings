@@ -181,7 +181,7 @@
 "settings.swipeactions.status.trailing.right" = "rechts";
 "settings.swipeactions.status" = "Beitrag";
 "settings.swipeactions.status.use-theme-colors" = "Farbschema anstelle der Standardfarben verwenden";
-"settings.swipeactions.status.icon-style" = "Symbolstil";
+"settings.swipeactions.icon-style" = "Symbolstil";
 
 "settings.display.section.font" = "Schriftart";
 

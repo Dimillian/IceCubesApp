@@ -181,7 +181,7 @@
 "settings.swipeactions.status.trailing.right" = "derecha";
 "settings.swipeactions.status" = "Publicación";
 "settings.swipeactions.status.use-theme-colors" = "Usar colores del tema en lugar de los colores por defecto";
-"settings.swipeactions.status.icon-style" = "Estilo de icono";
+"settings.swipeactions.icon-style" = "Estilo de icono";
 
 "settings.display.section.font" = "Fuente";
 

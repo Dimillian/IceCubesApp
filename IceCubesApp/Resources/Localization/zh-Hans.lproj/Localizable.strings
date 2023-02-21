@@ -182,7 +182,7 @@
 "settings.swipeactions.status.trailing.right" = "右";
 "settings.swipeactions.status" = "嘟文";
 "settings.swipeactions.status.use-theme-colors" = "使用主题色而不是默认色";
-"settings.swipeactions.status.icon-style" = "图标样式";
+"settings.swipeactions.icon-style" = "图标样式";
 
 "settings.display.section.font" = "字体";
 

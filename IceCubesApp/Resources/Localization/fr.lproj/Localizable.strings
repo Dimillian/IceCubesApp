@@ -184,7 +184,7 @@
 "settings.swipeactions.status.trailing.right" = "droite";
 "settings.swipeactions.status" = "Publier";
 "settings.swipeactions.status.use-theme-colors" = "Utiliser les couleurs du thème au lieu des couleurs par défaut";
-"settings.swipeactions.status.icon-style" = "Style de l'icône";
+"settings.swipeactions.icon-style" = "Style de l'icône";
 
 "settings.display.section.font" = "Police";
 
