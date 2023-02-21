@@ -13,7 +13,7 @@ import Timeline
 @MainActor
 extension View {
   func withAppRouter() -> some View {
-    navigationDestination(for: RouterDestinations.self) { destination in
+    navigationDestination(for: RouterDestination.self) { destination in
       switch destination {
       case let .accountDetail(id):
         AccountDetailView(accountId: id)
@@ -47,7 +47,7 @@ extension View {
     }
   }
 
-  func withSheetDestinations(sheetDestinations: Binding<SheetDestinations?>) -> some View {
+  func withSheetDestinations(sheetDestinations: Binding<SheetDestination?>) -> some View {
     sheet(item: sheetDestinations) { destination in
       switch destination {
       case let .replyToStatusEditor(status):

@@ -1,6 +1,6 @@
 import SwiftUI
 
-enum MutingDurations: Int, CaseIterable {
+enum MutingDuration: Int, CaseIterable {
   case infinite = 0
   case fiveMinutes = 300
   case thirtyMinutes = 1800

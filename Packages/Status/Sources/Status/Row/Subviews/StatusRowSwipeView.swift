@@ -85,7 +85,7 @@ struct StatusRowSwipeView: View {
   }
 
   @ViewBuilder
-  private func makeSwipeButtonForRouterPath(action: StatusAction, destination: SheetDestinations) -> some View {
+  private func makeSwipeButtonForRouterPath(action: StatusAction, destination: SheetDestination) -> some View {
     Button {
       HapticManager.shared.fireHaptic(of: .notification(.success))
       viewModel.routerPath.presentedSheet = destination

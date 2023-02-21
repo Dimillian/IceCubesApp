@@ -5,7 +5,7 @@ import Shimmer
 import SwiftUI
 
 struct SupportAppView: View {
-  enum Tips: String, CaseIterable {
+  enum Tip: String, CaseIterable {
     case one, two, three, four
 
     init(productId: String) {
@@ -86,7 +86,7 @@ struct SupportAppView: View {
           .shimmering()
         } else {
           ForEach(products, id: \.productIdentifier) { product in
-            let tip = Tips(productId: product.productIdentifier)
+            let tip = Tip(productId: product.productIdentifier)
             HStack {
               VStack(alignment: .leading) {
                 Text(tip.title)
@@ -141,7 +141,7 @@ struct SupportAppView: View {
     })
     .onAppear {
       loadingProducts = true
-      Purchases.shared.getProducts(Tips.allCases.map { $0.productId }) { products in
+      Purchases.shared.getProducts(Tip.allCases.map { $0.productId }) { products in
         self.products = products.sorted(by: { $0.price < $1.price })
         withAnimation {
           loadingProducts = false
