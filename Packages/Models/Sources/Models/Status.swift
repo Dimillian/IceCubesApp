@@ -74,7 +74,7 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
   public var userMentioned: Bool?
 
   public static func == (lhs: Status, rhs: Status) -> Bool {
-    lhs.id == rhs.id
+    lhs.id == rhs.id && lhs.viewId == rhs.viewId
   }
 
   public func hash(into hasher: inout Hasher) {
