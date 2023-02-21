@@ -178,6 +178,10 @@
 "settings.swipeactions.status.trailing" = "Правядзіце ўлева";
 "settings.swipeactions.status" = "Допіс";
 "settings.swipeactions.appearance" = "Appearance";
+"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors-explanation" = "Use theme colors instead of default colors";
+"settings.swipeactions.icon-style" = "Icon Style";
+
 
 // MARK: Tabs
 "tab.explore" = "Аглядзець";

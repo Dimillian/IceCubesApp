@@ -180,7 +180,8 @@
 "settings.swipeactions.status.trailing" = "Ezkerrerantz";
 "settings.swipeactions.status" = "Bidalketa";
 "settings.swipeactions.appearance" = "Appearance";
-"settings.swipeactions.status.use-theme-colors" = "Erabili hautatutako kolorea defektuzko koloreen ordez";
+"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors-explanation" = "Erabili hautatutako kolorea defektuzko koloreen ordez";
 "settings.swipeactions.icon-style" = "Ikonoen itxura";
 
 "settings.display.section.font" = "Letra-tipoa";

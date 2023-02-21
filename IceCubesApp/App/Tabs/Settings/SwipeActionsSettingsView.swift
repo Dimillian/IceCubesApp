@@ -54,14 +54,12 @@ struct SwipeActionsSettingsView: View {
           }
         }
         Toggle(isOn: $userPreferences.swipeActionsUseThemeColor) {
-          // TODO: Localization
-          Text("Use Theme Colors")
+          Text("settings.swipeactions.use-theme-colors")
         }
       } header: {
         Text("settings.swipeactions.appearance")
       } footer: {
-        // TODO: Localization
-        Text("settings.swipeactions.use-theme-colors")
+        Text("settings.swipeactions.use-theme-colors-explanation")
       }
       .listRowBackground(theme.primaryBackgroundColor)
     }

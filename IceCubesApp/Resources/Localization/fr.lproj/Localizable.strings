@@ -183,7 +183,8 @@
 "settings.swipeactions.status.trailing" = "Balayer vers la gauche";
 "settings.swipeactions.status" = "Publier";
 "settings.swipeactions.appearance" = "Appearance";
-"settings.swipeactions.status.use-theme-colors" = "Utiliser les couleurs du thème au lieu des couleurs par défaut";
+"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors-explanation" = "Utiliser les couleurs du thème au lieu des couleurs par défaut";
 "settings.swipeactions.icon-style" = "Style de l'icône";
 
 "settings.display.section.font" = "Police";

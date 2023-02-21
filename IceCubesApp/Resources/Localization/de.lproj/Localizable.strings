@@ -180,7 +180,8 @@
 "settings.swipeactions.status.leading" = "Nach rechts wischen";
 "settings.swipeactions.status.trailing" = "Nach links wischen";
 "settings.swipeactions.status" = "Beitrag";
-"settings.swipeactions.status.use-theme-colors" = "Farbschema anstelle der Standardfarben verwenden";
+"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors-explanation" = "Farbschema anstelle der Standardfarben verwenden";
 "settings.swipeactions.icon-style" = "Symbolstil";
 
 "settings.display.section.font" = "Schriftart";

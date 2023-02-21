@@ -180,7 +180,8 @@
 "settings.swipeactions.status.trailing" = "Deslizar a la izquierda";
 "settings.swipeactions.status" = "Publicación";
 "settings.swipeactions.appearance" = "Appearance";
-"settings.swipeactions.status.use-theme-colors" = "Usar colores del tema en lugar de los colores por defecto";
+"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors-explanation" = "Usar colores del tema en lugar de los colores por defecto";
 "settings.swipeactions.icon-style" = "Estilo de icono";
 
 "settings.display.section.font" = "Fuente";

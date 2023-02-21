@@ -183,7 +183,8 @@
 "settings.swipeactions.status.trailing" = "왼쪽으로 쓸어넘길 때";
 "settings.swipeactions.status" = "글";
 "settings.swipeactions.appearance" = "Appearance";
-"settings.swipeactions.status.use-theme-colors" = "기본 색상 대신 테마 색상 사용";
+"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors-explanation" = "기본 색상 대신 테마 색상 사용";
 "settings.swipeactions.icon-style" = "아이콘 모양";
 
 "settings.display.section.font" = "글꼴";

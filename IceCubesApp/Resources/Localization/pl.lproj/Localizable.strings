@@ -183,7 +183,8 @@
 "settings.swipeactions.status.trailing" = "Przeciągnij w lewo";
 "settings.swipeactions.status" = "Post";
 "settings.swipeactions.appearance" = "Appearance";
-"settings.swipeactions.status.use-theme-colors" = "Używaj kolorów motywu zamiast kolorów domyślnych";
+"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors-explanation" = "Używaj kolorów motywu zamiast kolorów domyślnych";
 "settings.swipeactions.icon-style" = "Styl ikony";
 
 "settings.display.section.font" = "Czcionka";

@@ -183,7 +183,8 @@
 "settings.swipeactions.status.leading" = "右にスワイプ";
 "settings.swipeactions.status.trailing" = "左にスワイプ";
 "settings.swipeactions.status" = "投稿";
-"settings.swipeactions.status.use-theme-colors" = "デフォルトの色の代わりにテーマの色を使用する";
+"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors-explanation" = "デフォルトの色の代わりにテーマの色を使用する";
 "settings.swipeactions.icon-style" = "アイコンスタイル";
 
 "settings.display.section.font" = "フォント";

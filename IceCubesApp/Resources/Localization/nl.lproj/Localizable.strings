@@ -181,7 +181,8 @@
 "settings.swipeactions.status.trailing" = "Veeg naar links";
 "settings.swipeactions.status" = "Post";
 "settings.swipeactions.appearance" = "Uiterlijk";
-"settings.swipeactions.status.use-theme-colors" = "Gebruik themakleuren in plaats van standaardkleuren";
+"settings.swipeactions.use-theme-colors" = "Gebruik themakleuren";
+"settings.swipeactions.use-theme-colors-explanation" = "Gebruik themakleuren in plaats van standaardkleuren";
 "settings.swipeactions.icon-style" = "Symboolstijl";
 
 "settings.display.section.font" = "Lettertype";

@@ -181,7 +181,8 @@
 "settings.swipeactions.status.leading" = "向右轻扫";
 "settings.swipeactions.status.trailing" = "向左轻扫";
 "settings.swipeactions.status" = "嘟文";
-"settings.swipeactions.status.use-theme-colors" = "使用主题色而不是默认色";
+"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors-explanation" = "使用主题色而不是默认色";
 "settings.swipeactions.icon-style" = "图标样式";
 
 "settings.display.section.font" = "字体";
