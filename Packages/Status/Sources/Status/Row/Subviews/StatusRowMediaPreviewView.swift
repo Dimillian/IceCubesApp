@@ -38,12 +38,11 @@ public struct StatusRowMediaPreviewView: View {
     let avatarColumnWidth = theme.avatarPosition == .leading ? AvatarView.Size.status.size.width + .statusColumnsSpacing : 0
     var sidebarWidth: CGFloat = 0
     var secondaryColumnWidth: CGFloat = 0
-    var layoutPading: CGFloat = .layoutPadding * 2
+    let layoutPading: CGFloat = .layoutPadding * 2
     if UIDevice.current.userInterfaceIdiom == .pad  {
       sidebarWidth = .sidebarWidth
       if preferences.showiPadSecondaryColumn {
         secondaryColumnWidth = .secondaryColumnWidth
-        layoutPading = 0
       }
     }
     return layoutPading + avatarColumnWidth + sidebarWidth + extraLeadingInset + secondaryColumnWidth
