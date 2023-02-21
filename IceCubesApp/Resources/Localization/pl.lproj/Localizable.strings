@@ -179,6 +179,7 @@
 "settings.swipeactions.status.leading" = "Przeciągnij w prawo";
 "settings.swipeactions.status.trailing" = "Przeciągnij w lewo";
 "settings.swipeactions.status" = "Post";
+"settings.swipeactions.appearance" = "Appearance";
 "settings.swipeactions.status.use-theme-colors" = "Używaj kolorów motywu zamiast kolorów domyślnych";
 "settings.swipeactions.icon-style" = "Styl ikony";
 

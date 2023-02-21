@@ -182,7 +182,9 @@
 "settings.swipeactions.status.action.reply" = "Reply";
 "settings.swipeactions.status.leading" = "Swipe Right";
 "settings.swipeactions.status.trailing" = "Swipe Left";
-"settings.swipeactions.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
+"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
+
+"settings.swipeactions.appearance" = "Appearance";
 "settings.swipeactions.use-theme-colors" = "Use theme colors instead of default colors";
 "settings.swipeactions.icon-style" = "Icon Style";
 

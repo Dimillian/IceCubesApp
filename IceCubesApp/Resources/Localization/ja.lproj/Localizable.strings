@@ -169,6 +169,7 @@
 "settings.display.show-ipad-column" = "セカンドカラムを有効にする";
 
 "settings.general.swipeactions" = "スワイプ操作";
+"settings.swipeactions.appearance" = "Appearance";
 "settings.swipeactions.navigation-title" = "スワイプ操作";
 "settings.swipeactions.status.action.bookmark" = "ブックマーク";
 "settings.swipeactions.status.action.boost" = "ブースト";

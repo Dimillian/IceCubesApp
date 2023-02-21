@@ -179,6 +179,7 @@
 "settings.swipeactions.status.leading" = "Scorrimento a destra";
 "settings.swipeactions.status.trailing" = "Scorrimento a sinistra";
 "settings.swipeactions.status" = "Post";
+"settings.swipeactions.appearance" = "Appearance";
 "settings.swipeactions.status.use-theme-colors" = "Usa i colori del tema al posto dei colori di default";
 "settings.swipeactions.icon-style" = "Stile delle icone";
 

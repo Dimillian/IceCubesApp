@@ -58,8 +58,7 @@ struct SwipeActionsSettingsView: View {
           Text("Use Theme Colors")
         }
       } header: {
-        // TODO: Localization
-        Text("Appearance")
+        Text("settings.swipeactions.appearance")
       } footer: {
         // TODO: Localization
         Text("settings.swipeactions.use-theme-colors")

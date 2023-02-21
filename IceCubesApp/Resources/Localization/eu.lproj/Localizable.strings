@@ -176,6 +176,7 @@
 "settings.swipeactions.status.leading" = "Eskumarantz";
 "settings.swipeactions.status.trailing" = "Ezkerrerantz";
 "settings.swipeactions.status" = "Bidalketa";
+"settings.swipeactions.appearance" = "Appearance";
 "settings.swipeactions.status.use-theme-colors" = "Erabili hautatutako kolorea defektuzko koloreen ordez";
 "settings.swipeactions.icon-style" = "Ikonoen itxura";
 

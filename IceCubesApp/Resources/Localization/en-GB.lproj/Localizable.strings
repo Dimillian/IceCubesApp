@@ -182,6 +182,7 @@
 "settings.swipeactions.status.leading" = "Swipe Right";
 "settings.swipeactions.status.trailing" = "Swipe Left";
 "settings.swipeactions.status" = "Post";
+"settings.swipeactions.appearance" = "Appearance";
 "settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
 "settings.swipeactions.icon-style" = "Icon Style";
 
