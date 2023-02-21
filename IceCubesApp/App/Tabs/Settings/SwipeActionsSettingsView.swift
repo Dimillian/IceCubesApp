@@ -72,7 +72,7 @@ struct SwipeActionsSettingsView: View {
   }
 
   private func createStatusActionPicker(selection: Binding<StatusAction>, label: LocalizedStringKey) -> some View {
-    return Picker(selection: selection, label: Text(label).padding(.leading, 16)) {
+    return Picker(selection: selection, label: Text(label)) {
       Section {
         Text(StatusAction.none.displayName()).tag(StatusAction.none)
       }
