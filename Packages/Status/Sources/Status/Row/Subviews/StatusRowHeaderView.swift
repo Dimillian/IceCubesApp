@@ -88,7 +88,7 @@ struct StatusRowHeaderView: View {
       StatusRowContextMenu(viewModel: viewModel)
     } label: {
       Image(systemName: "ellipsis")
-        .frame(width: 20)
+        .frame(width: 20, height: 20)
     }
     .menuStyle(.borderlessButton)
     .foregroundColor(.gray)
