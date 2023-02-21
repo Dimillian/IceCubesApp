@@ -172,11 +172,7 @@
 "settings.swipeactions.status.action.quote" = "Цытаваць";
 "settings.swipeactions.status.action.reply" = "Адказаць";
 "settings.swipeactions.status.leading" = "Правядзіце ўправа";
-"settings.swipeactions.status.leading.left" = "злева";
-"settings.swipeactions.status.leading.right" = "справа";
 "settings.swipeactions.status.trailing" = "Правядзіце ўлева";
-"settings.swipeactions.status.trailing.left" = "злева";
-"settings.swipeactions.status.trailing.right" = "справа";
 "settings.swipeactions.status" = "Допіс";
 
 // MARK: Tabs

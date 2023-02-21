@@ -174,11 +174,7 @@
 "settings.swipeactions.status.action.quote" = "Aipatu bidalketa";
 "settings.swipeactions.status.action.reply" = "Erantzun";
 "settings.swipeactions.status.leading" = "Eskumarantz";
-"settings.swipeactions.status.leading.left" = "ezkerra";
-"settings.swipeactions.status.leading.right" = "eskuma";
 "settings.swipeactions.status.trailing" = "Ezkerrerantz";
-"settings.swipeactions.status.trailing.left" = "ezkerra";
-"settings.swipeactions.status.trailing.right" = "eskuma";
 "settings.swipeactions.status" = "Bidalketa";
 "settings.swipeactions.status.use-theme-colors" = "Erabili hautatutako kolorea defektuzko koloreen ordez";
 "settings.swipeactions.icon-style" = "Ikonoen itxura";

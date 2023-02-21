@@ -174,11 +174,7 @@
 "settings.swipeactions.status.action.quote" = "Citaat";
 "settings.swipeactions.status.action.reply" = "Antwoord";
 "settings.swipeactions.status.leading" = "Veeg naar rechts";
-"settings.swipeactions.status.leading.left" = "links";
-"settings.swipeactions.status.leading.right" = "rechts";
 "settings.swipeactions.status.trailing" = "Veeg naar links";
-"settings.swipeactions.status.trailing.left" = "links";
-"settings.swipeactions.status.trailing.right" = "rechts";
 "settings.swipeactions.status" = "Post";
 "settings.swipeactions.status.use-theme-colors" = "Gebruik themakleuren in plaats van standaardkleuren";
 "settings.swipeactions.icon-style" = "Symboolstijl";

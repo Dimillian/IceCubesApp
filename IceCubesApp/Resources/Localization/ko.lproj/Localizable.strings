@@ -177,11 +177,7 @@
 "settings.swipeactions.status.action.quote" = "인용";
 "settings.swipeactions.status.action.reply" = "댓글";
 "settings.swipeactions.status.leading" = "오른쪽으로 쓸어넘길 때";
-"settings.swipeactions.status.leading.left" = "왼쪽 버튼";
-"settings.swipeactions.status.leading.right" = "오른쪽 버튼";
 "settings.swipeactions.status.trailing" = "왼쪽으로 쓸어넘길 때";
-"settings.swipeactions.status.trailing.left" = "왼쪽 버튼";
-"settings.swipeactions.status.trailing.right" = "오른쪽 버튼";
 "settings.swipeactions.status" = "글";
 "settings.swipeactions.status.use-theme-colors" = "기본 색상 대신 테마 색상 사용";
 "settings.swipeactions.icon-style" = "아이콘 모양";

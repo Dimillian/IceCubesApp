@@ -174,11 +174,7 @@
 "settings.swipeactions.status.action.quote" = "Citar";
 "settings.swipeactions.status.action.reply" = "Responder";
 "settings.swipeactions.status.leading" = "Deslizar a la derecha";
-"settings.swipeactions.status.leading.left" = "izquierda";
-"settings.swipeactions.status.leading.right" = "derecha";
 "settings.swipeactions.status.trailing" = "Deslizar a la izquierda";
-"settings.swipeactions.status.trailing.left" = "izquierda";
-"settings.swipeactions.status.trailing.right" = "derecha";
 "settings.swipeactions.status" = "Publicación";
 "settings.swipeactions.status.use-theme-colors" = "Usar colores del tema en lugar de los colores por defecto";
 "settings.swipeactions.icon-style" = "Estilo de icono";
