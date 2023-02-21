@@ -367,6 +367,7 @@
 "status.action.translate" = "翻訳";
 "status.action.translate-from-%@" = "%@ から翻訳";
 "status.action.translated-label-%@" = "%@ を使用して翻訳";
+"status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "ブックマーク";
 "status.action.boost" = "ブースト";
 "status.action.boost-to-followers" = "フォロワーにブースト";

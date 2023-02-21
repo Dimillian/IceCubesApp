@@ -363,6 +363,7 @@
 "status.action.translate" = "Traduire";
 "status.action.translate-from-%@" = "Traduire de %@";
 "status.action.translated-label-%@" = "Traduit avec %@";
+"status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Marquer";
 "status.action.boost" = "Promouvoir";
 "status.action.boost-to-followers" = "Boost to Followers";

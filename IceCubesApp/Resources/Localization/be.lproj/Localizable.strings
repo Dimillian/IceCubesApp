@@ -357,6 +357,7 @@
 "status.action.translate" = "Перакласці";
 "status.action.translate-from-%@" = "Перакласці з %@";
 "status.action.translated-label-%@" = "Пераклад з дапамогай %@";
+"status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Закладка";
 "status.action.boost" = "Павышэнне";
 "status.action.boost-to-followers" = "Boost to Followers";
