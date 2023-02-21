@@ -371,6 +371,7 @@
 "status.action.translated-label-%@" = "Traducido usando %@";
 "status.action.bookmark" = "Añadir a marcadores";
 "status.action.boost" = "Retootear";
+"status.action.boost-to-followers" = "Boost to Followers";
 "status.action.copy-text" = "Copiar texto";
 "status.action.delete" = "Borrar";
 "status.action.delete.confirm.title" = "Confirm";

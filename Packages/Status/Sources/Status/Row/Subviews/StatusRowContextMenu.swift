@@ -20,7 +20,7 @@ struct StatusRowContextMenu: View {
         return Label("status.action.unboost", systemImage: "lock.rotation")
       }
       
-      return Label("Boost to followers", systemImage: "lock.rotation")
+      return Label("status.action.boost-to-followers", systemImage: "lock.rotation")
     }
     
     if (self.viewModel.isReblogged) {

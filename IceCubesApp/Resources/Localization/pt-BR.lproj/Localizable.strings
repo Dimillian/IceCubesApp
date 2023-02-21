@@ -370,6 +370,7 @@
 "status.action.translated-label-%@" = "Traduzir usando %@";
 "status.action.bookmark" = "Salvar";
 "status.action.boost" = "Boost";
+"status.action.boost-to-followers" = "Boost to Followers";
 "status.action.copy-text" = "Copiar Texto";
 "status.action.delete" = "Deletar";
 "status.action.delete.confirm.title" = "Confirm";

@@ -369,6 +369,7 @@
 "status.action.translated-label-%@" = "由 %@ 翻译";
 "status.action.bookmark" = "书签";
 "status.action.boost" = "转发";
+"status.action.boost-to-followers" = "Boost to Followers";
 "status.action.copy-text" = "拷贝文本";
 "status.action.delete" = "删除";
 "status.action.delete.confirm.title" = "确认删除";

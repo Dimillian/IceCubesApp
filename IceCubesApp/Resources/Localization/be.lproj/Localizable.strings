@@ -359,6 +359,7 @@
 "status.action.translated-label-%@" = "Пераклад з дапамогай %@";
 "status.action.bookmark" = "Закладка";
 "status.action.boost" = "Павышэнне";
+"status.action.boost-to-followers" = "Boost to Followers";
 "status.action.copy-text" = "Капіяваць тэкст";
 "status.action.delete" = "Выдаліць";
 "status.action.delete.confirm.title" = "Пацвердзіць";
