@@ -149,7 +149,7 @@ struct IceCubesApp: App {
   private var notificationsSecondaryColumn: some View {
     NotificationsTab(popToRootTab: $popToRootTab, lockedType: nil)
       .environment(\.isSecondaryColumn, true)
-      .frame(maxWidth: 360)
+      .frame(maxWidth: .secondaryColumnWidth)
       .id(appAccountsManager.currentAccount.id)
   }
 
