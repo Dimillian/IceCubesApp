@@ -32,7 +32,7 @@ public extension EnvironmentValues {
     get { self[IsCompact.self] }
     set { self[IsCompact.self] = newValue }
   }
-  
+
   var isInCaptureMode: Bool {
     get { self[IsInCaptureMode.self] }
     set { self[IsInCaptureMode.self] = newValue }

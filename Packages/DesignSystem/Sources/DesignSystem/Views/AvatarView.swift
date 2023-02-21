@@ -1,5 +1,5 @@
-import NukeUI
 import Nuke
+import NukeUI
 import Shimmer
 import SwiftUI
 
@@ -97,17 +97,17 @@ public struct AvatarView: View {
 }
 
 private struct AvatarPlaceholderView: View {
-    let size: AvatarView.Size
+  let size: AvatarView.Size
 
-    var body: some View {
-        if size == .badge {
-          Circle()
-            .fill(.gray)
-            .frame(width: size.size.width, height: size.size.height)
-        } else {
-          RoundedRectangle(cornerRadius: size.cornerRadius)
-            .fill(.gray)
-            .frame(width: size.size.width, height: size.size.height)
-        }
+  var body: some View {
+    if size == .badge {
+      Circle()
+        .fill(.gray)
+        .frame(width: size.size.width, height: size.size.height)
+    } else {
+      RoundedRectangle(cornerRadius: size.cornerRadius)
+        .fill(.gray)
+        .frame(width: size.size.width, height: size.size.height)
     }
+  }
 }

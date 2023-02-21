@@ -92,7 +92,7 @@ class TimelineViewModel: ObservableObject {
       tag = try await client.get(endpoint: Tags.tag(id: id))
     } catch {}
   }
-  
+
   func reset() async {
     await datasource.reset()
   }
@@ -214,7 +214,7 @@ extension TimelineViewModel: StatusesFetcher {
 
       updateMentionsToBeHighlighted(&statuses)
       ReblogCache.shared.removeDuplicateReblogs(&statuses)
-      
+
       await datasource.set(statuses)
       await cacheHome()
 
@@ -231,7 +231,7 @@ extension TimelineViewModel: StatusesFetcher {
     var newStatuses: [Status] = await fetchNewPages(minId: latestStatus.id, maxPages: 10)
 
     // Dedup statuses, a status with the same id could have been streamed in.
-    let ids = await datasource.get().map{ $0.id }
+    let ids = await datasource.get().map { $0.id }
     newStatuses = newStatuses.filter { status in
       !ids.contains(where: { $0 == status.id })
     }
@@ -322,10 +322,10 @@ extension TimelineViewModel: StatusesFetcher {
     var latestMinId = minId
     do {
       while var newStatuses: [Status] =
-              try await client.get(endpoint: timeline.endpoint(sinceId: nil,
-                                                               maxId: nil,
-                                                               minId: latestMinId,
-                                                               offset: datasource.get().count)),
+        try await client.get(endpoint: timeline.endpoint(sinceId: nil,
+                                                         maxId: nil,
+                                                         minId: latestMinId,
+                                                         offset: datasource.get().count)),
         !newStatuses.isEmpty,
         pagesLoaded < maxPages
       {

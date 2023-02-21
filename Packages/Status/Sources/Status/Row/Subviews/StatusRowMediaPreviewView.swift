@@ -156,7 +156,8 @@ public struct StatusRowMediaPreviewView: View {
       case .image:
         if isInCaptureMode,
            let image = Nuke.ImagePipeline.shared.cache.cachedImage(for: .init(url: attachment.url,
-                                                                              processors: processors))?.image {
+                                                                              processors: processors))?.image
+        {
           Image(uiImage: image)
             .resizable()
             .aspectRatio(contentMode: .fill)
@@ -243,10 +244,11 @@ public struct StatusRowMediaPreviewView: View {
                 cornerSensitiveButton
               }
               if !isInCaptureMode,
-                  let alt = attachment.description,
+                 let alt = attachment.description,
                  !alt.isEmpty,
                  !isNotifications,
-                  preferences.showAltTextForMedia {
+                 preferences.showAltTextForMedia
+              {
                 Button {
                   altTextDisplayed = alt
                   isAltAlertDisplayed = true
