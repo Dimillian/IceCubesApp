@@ -133,7 +133,7 @@ struct StatusRowContextMenu: View {
       }
     }
 
-    if account.account?.id == viewModel.status.account.id {
+    if account.account?.id == viewModel.status.reblog?.account.id ?? viewModel.status.account.id {
       Section("status.action.section.your-post") {
         Button {
           Task {
