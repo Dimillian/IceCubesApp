@@ -36,3 +36,22 @@ public struct StatusEditorToolbarItem: ToolbarContent {
     }
   }
 }
+
+public struct SecondaryColumnToolbarItem: ToolbarContent {
+  @Environment(\.isSecondaryColumn) private var isSecondaryColumn
+  @EnvironmentObject private var preferences: UserPreferences
+
+  public init() {}
+  
+  public var body: some ToolbarContent {
+    ToolbarItem(placement: isSecondaryColumn ? .navigationBarLeading : .navigationBarTrailing) {
+      Button {
+        withAnimation {
+          preferences.showiPadSecondaryColumn.toggle()
+        }
+      } label: {
+        Image(systemName: "sidebar.right")
+      }
+    }
+  }
+}

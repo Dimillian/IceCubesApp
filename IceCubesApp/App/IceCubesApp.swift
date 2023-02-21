@@ -133,8 +133,7 @@ struct IceCubesApp: App {
               }
             }
           }
-          if proxy.frame(in: .global).width > (.maxColumnWidth + .secondaryColumnWidth),
-             appAccountsManager.currentClient.isAuth,
+          if appAccountsManager.currentClient.isAuth,
              userPreferences.showiPadSecondaryColumn
           {
             Divider().edgesIgnoringSafeArea(.all)
