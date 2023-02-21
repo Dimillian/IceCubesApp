@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mergesort/Boutique",
       "state" : {
-        "revision" : "b5b697de67100edc4b2d5c74724f3c1068b49d4e",
-        "version" : "2.1.1"
+        "revision" : "ad47507dc0e1c4cf1693fd08567457d9caf664b7",
+        "version" : "2.2.0"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/divadretlaw/EmojiText",
       "state" : {
-        "revision" : "b52cfb8278425c28771bee4cc9e87453a52f3f4d",
-        "version" : "2.0.2"
+        "revision" : "100661c947a2fa6b68c768ccae737a04476125fe",
+        "version" : "2.1.0"
       }
     },
     {
@@ -33,7 +33,7 @@
       "location" : "https://github.com/evgenyneu/keychain-swift",
       "state" : {
         "branch" : "master",
-        "revision" : "e43f9b99b172ae6a7253047f8ba95c7a0b05b99f"
+        "revision" : "c1fde55798b164cad44b5e23cfa2f0f1ebcd76af"
       }
     },
     {
@@ -51,7 +51,7 @@
       "location" : "https://github.com/kean/Nuke",
       "state" : {
         "branch" : "nuke-12",
-        "revision" : "baccf1b00f458a77a9f9615e415bc4463029cf5e"
+        "revision" : "27bdce663543c72fd3339226ff0dd5c70a8a1c3c"
       }
     },
     {
@@ -60,7 +60,7 @@
       "location" : "https://github.com/RevenueCat/purchases-ios.git",
       "state" : {
         "branch" : "main",
-        "revision" : "3cc302bc83e0e33ad8f3d12b84cec225a865f1eb"
+        "revision" : "e86cbecfde58f2dc0210cb769234cb86a8383fd4"
       }
     },
     {
@@ -77,8 +77,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-collections",
       "state" : {
-        "revision" : "48254824bb4248676bf7ce56014ff57b142b77eb",
-        "version" : "1.0.2"
+        "revision" : "937e904258d22af6e447a0b72c0bc67583ef64a2",
+        "version" : "1.0.4"
       }
     },
     {
@@ -95,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/siteline/SwiftUI-Introspect.git",
       "state" : {
-        "revision" : "f2616860a41f9d9932da412a8978fec79c06fe24",
-        "version" : "0.1.4"
+        "revision" : "c18951c747ab62af7c15e17a81bd37d4fd5a9979",
+        "version" : "0.2.3"
       }
     },
     {
