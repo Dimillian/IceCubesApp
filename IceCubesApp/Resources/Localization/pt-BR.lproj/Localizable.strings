@@ -368,6 +368,7 @@
 "status.action.translate" = "Traduzir";
 "status.action.translate-from-%@" = "Traduzir do %@";
 "status.action.translated-label-%@" = "Traduzir usando %@";
+"status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Salvar";
 "status.action.boost" = "Boost";
 "status.action.copy-text" = "Copiar Texto";
