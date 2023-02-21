@@ -167,6 +167,8 @@
 
 "settings.general.swipeactions" = "Mugimenduen ekintzak";
 "settings.swipeactions.navigation-title" = "Atzamar-mugimenduen ekintzak";
+"settings.swipeactions.primary" = "Primary Action";
+"settings.swipeactions.secondary" = "Secondary Action";
 "settings.swipeactions.status.action.bookmark" = "Laster-marka";
 "settings.swipeactions.status.action.boost" = "Bultzatu";
 "settings.swipeactions.status.action.favorite" = "Gogokoa";

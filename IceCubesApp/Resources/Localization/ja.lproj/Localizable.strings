@@ -171,6 +171,8 @@
 "settings.general.swipeactions" = "スワイプ操作";
 "settings.swipeactions.appearance" = "Appearance";
 "settings.swipeactions.navigation-title" = "スワイプ操作";
+"settings.swipeactions.primary" = "Primary Action";
+"settings.swipeactions.secondary" = "Secondary Action";
 "settings.swipeactions.status.action.bookmark" = "ブックマーク";
 "settings.swipeactions.status.action.boost" = "ブースト";
 "settings.swipeactions.status.action.favorite" = "お気に入り";

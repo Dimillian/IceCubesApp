@@ -167,6 +167,8 @@
 
 "settings.general.swipeactions" = "Acciones al deslizar";
 "settings.swipeactions.navigation-title" = "Acciones al deslizar";
+"settings.swipeactions.primary" = "Primary Action";
+"settings.swipeactions.secondary" = "Secondary Action";
 "settings.swipeactions.status.action.bookmark" = "Marcadores";
 "settings.swipeactions.status.action.boost" = "Retootear";
 "settings.swipeactions.status.action.favorite" = "Favorito";

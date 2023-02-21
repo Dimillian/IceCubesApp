@@ -170,6 +170,8 @@
 
 "settings.general.swipeactions" = "Przeciąganie palcem";
 "settings.swipeactions.navigation-title" = "Przeciąganie palcem";
+"settings.swipeactions.primary" = "Primary Action";
+"settings.swipeactions.secondary" = "Secondary Action";
 "settings.swipeactions.status.action.bookmark" = "Dodaj zakładkę";
 "settings.swipeactions.status.action.boost" = "Podbij";
 "settings.swipeactions.status.action.favorite" = "Polub";

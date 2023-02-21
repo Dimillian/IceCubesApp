@@ -170,6 +170,8 @@
 
 "settings.general.swipeactions" = "쓸어넘기기 동작 설정";
 "settings.swipeactions.navigation-title" = "쓸어넘기기 동작 설정";
+"settings.swipeactions.primary" = "Primary Action";
+"settings.swipeactions.secondary" = "Secondary Action";
 "settings.swipeactions.status.action.bookmark" = "보관함에 추가";
 "settings.swipeactions.status.action.boost" = "부스트";
 "settings.swipeactions.status.action.favorite" = "좋아요";

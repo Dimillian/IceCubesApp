@@ -170,6 +170,8 @@
 
 "settings.general.swipeactions" = "Swipe Actions";
 "settings.swipeactions.navigation-title" = "Swipe Actions";
+"settings.swipeactions.primary" = "Primary Action";
+"settings.swipeactions.secondary" = "Secondary Action";
 "settings.swipeactions.status.action.bookmark" = "Bookmark";
 "settings.swipeactions.status.action.boost" = "Boost";
 "settings.swipeactions.status.action.favorite" = "Favorite";

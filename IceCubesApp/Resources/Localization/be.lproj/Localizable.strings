@@ -165,6 +165,8 @@
 
 "settings.general.swipeactions" = "Дзеянні правядзення пальцам";
 "settings.swipeactions.navigation-title" = "Дзеянні правядзення пальцам";
+"settings.swipeactions.primary" = "Primary Action";
+"settings.swipeactions.secondary" = "Secondary Action";
 "settings.swipeactions.status.action.bookmark" = "Закладка";
 "settings.swipeactions.status.action.boost" = "Павышэнне";
 "settings.swipeactions.status.action.favorite" = "У ўлюбёныя";

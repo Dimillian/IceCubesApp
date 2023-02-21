@@ -168,6 +168,8 @@
 "settings.general.swipeactions" = "Wischaktionen";
 "settings.swipeactions.appearance" = "Appearance";
 "settings.swipeactions.navigation-title" = "Wischaktionen";
+"settings.swipeactions.primary" = "Primary Action";
+"settings.swipeactions.secondary" = "Secondary Action";
 "settings.swipeactions.status.action.bookmark" = "Lesezeichen setzen";
 "settings.swipeactions.status.action.boost" = "Boosten";
 "settings.swipeactions.status.action.favorite" = "Favorisieren";

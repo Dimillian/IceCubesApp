@@ -170,6 +170,8 @@
 
 "settings.general.swipeactions" = "Azioni di scorrimento";
 "settings.swipeactions.navigation-title" = "Azioni di scorrimento";
+"settings.swipeactions.primary" = "Primary Action";
+"settings.swipeactions.secondary" = "Secondary Action";
 "settings.swipeactions.status.action.bookmark" = "Segnalibro";
 "settings.swipeactions.status.action.boost" = "Condividi";
 "settings.swipeactions.status.action.favorite" = "Preferito";

@@ -170,6 +170,8 @@
 
 "settings.general.swipeactions" = "Actions de balayage";
 "settings.swipeactions.navigation-title" = "Actions de balayage";
+"settings.swipeactions.primary" = "Primary Action";
+"settings.swipeactions.secondary" = "Secondary Action";
 "settings.swipeactions.status.action.bookmark" = "Signet";
 "settings.swipeactions.status.action.boost" = "Boost";
 "settings.swipeactions.status.action.favorite" = "Favori";

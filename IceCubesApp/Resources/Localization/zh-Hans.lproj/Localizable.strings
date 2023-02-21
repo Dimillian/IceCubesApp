@@ -169,6 +169,8 @@
 "settings.general.swipeactions" = "轻扫操作";
 "settings.swipeactions.appearance" = "Appearance";
 "settings.swipeactions.navigation-title" = "轻扫操作设置";
+"settings.swipeactions.primary" = "Primary Action";
+"settings.swipeactions.secondary" = "Secondary Action";
 "settings.swipeactions.status.action.bookmark" = "书签";
 "settings.swipeactions.status.action.boost" = "转发";
 "settings.swipeactions.status.action.favorite" = "喜欢";
