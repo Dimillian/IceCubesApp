@@ -112,7 +112,7 @@
 "settings.section.app" = "App";
 "settings.section.app.footer %@" = "App-Version: %@";
 "settings.section.general" = "Allgemein";
-"settings.support.alert.error.message" = "Fehler bei der Ausführung des In-App-Kaufs. Bitte versuch es erneut.";
+"settings.support.alert.error.message" = "Fehler bei der Ausführung des In-App-Kaufs. Bitte versuche es erneut.";
 "settings.support.alert.message" = "Vielen Dank für dein Trinkgeld! Ich weiß es zu schätzen!";
 "settings.support.alert.title" = "Danke!";
 "settings.support.message-from-dev" = "Hey du! Mein Name ist Thomas und ich liebe es, Open-Source-Apps zu erschaffen. Ice Cubes ist definitiv eines meiner Projekte, auf das ich am meisten stolz bin – und seien wir ehrlich, es ist auch das mit dem größten Wartungsaufwand, dank der sich ständig ändernden Welt von Mastodon und Social Media. Wenn du Spaß beim Nutzen von Ice Cubes hast, denk darüber nach, mir eine kleine Spende dazulassen. Das würde mir den Tag versüßen (und dazu beitragen, dass die App reibungslos für dich funktioniert). 🚀";
@@ -131,7 +131,7 @@
 "settings.support.supporter.subscribed" = "Danke, dass du Ice Cubes unterstützst!";
 "settings.support.supporter.subscription-info"= "Abonnements werden automatisch verlängert, sofern du sie nicht bis zu einem Tag vor der nächsten Verlängerung kündigst.";
 "settings.support.restore-purchase.button" = "Kauf wiederherstellen";
-"settings.support.restore-purchase.explanation" = "Stell dein Abonnement wieder her, falls es nicht automatisch abgeglichen worden ist.";
+"settings.support.restore-purchase.explanation" = "Stelle dein Abonnement wieder her, falls es nicht automatisch abgeglichen worden ist.";
 "settings.support.privacy-policy" = "Datenschutzerklärung";
 "settings.support.terms-of-use" = "Nutzungsbedingungen";
 "settings.timeline.add" = "Lokale Timeline hinzufügen";
@@ -240,7 +240,7 @@
 "app-account.button.add" = "Konto hinzufügen";
 
 // MARK: Package: Account
-"account.action.add-remove-list" = "Hinzufügen/entfernen von Listen";
+"account.action.add-remove-list" = "Hinzufügen/Entfernen von Listen";
 "account.action.edit-info" = "Info bearbeiten";
 "account.action.mention" = "Erwähnen";
 "account.action.message" = "Nachricht";
@@ -299,25 +299,24 @@
 
 "account.relation.note.edit" = "Notiz bearbeiten";
 "account.relation.note.edit.placeholder" = "Gib den Notiztext ein";
-"account.relation.note.edit.error.save.message" = "Fehler beim Speichern der Notiz, versuch es bitte erneut.";
-"account.relation.note.edit.error.save.title" = "Fehler beim Speichern der Notiz";
-"account.relation.note.label" = "Notiz:";
+"account.relation.note.edit.error.save.message" = "Fehler beim Sichern der Notiz, bitte versuche es erneut.";
+"account.relation.note.edit.error.save.title" = "Fehler beim Sichern der Notiz";
+"account.relation.note.label" = "Notiz";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Löschen";
 "conversations.action.mark-read" = "Als gelesen markieren";
 "conversations.action.view-detail" = "Detailansicht";
-"conversations.empty.message" = "Suchst du etwas Liebe auf Social Media? Hier findest du alle deine direkten Nachrichten und privaten Erwähnungen. Fröhliches Messaging! 📱❤️";
+"conversations.empty.message" = "Suchst du etwas Liebe auf Social Media? Hier findest du alle deine Direktnachrichten und privaten Erwähnungen. Fröhliches Messaging! 📱❤️";
 "conversations.empty.title" = "Posteingang leer";
 "conversations.error.button" = "Wiederholen";
 "conversations.error.message" = "Fehler beim Laden deiner Nachrichten";
 "conversations.error.title" = "Ein Fehler ist aufgetreten";
-"conversations.navigation-title" = "Direkte Nachrichten";
+"conversations.navigation-title" = "Direktnachrichten";
 "conversations.new.message.placeholder" = "Neue Nachricht";
 "conversations.latest.message" = "Letzte Nachricht";
 
 // MARK: Package: DesignSystem
-"design.tag.n-posts-from-n-participants %lld %lld" = "%lld Beiträge von %lld Teilnehmenden";
 "design.theme.navigation-title" = "Design-Auswahl";
 "design.theme.toots-preview" = "Beitragsvorschau";
 
@@ -351,7 +350,7 @@
 // MARK: Package: Notifications
 "notifications.empty.message" = "Mitteilungen? Welche Mitteilungen? Dein Posteingang sieht so leer aus. Bleib weiter so fantastisch! 📱😎";
 "notifications.empty.title" = "Keine Mitteilungen";
-"notifications.error.message" = "Beim Laden deiner Mitteilungen ist ein Fehler aufgetreten, bitte versuch es erneut.";
+"notifications.error.message" = "Beim Laden deiner Mitteilungen ist ein Fehler aufgetreten, bitte versuche es erneut.";
 "notifications.error.title" = "Ein Fehler ist aufgetreten";
 "notifications.label.follow-request" = "möchte dir folgen";
 "notifications.label.poll" = "Umfrage beendet";
@@ -382,7 +381,6 @@
 "timeline.latest" = "Zum Neuesten springen";
 "timeline.home" = "Startseite";
 "timeline.local" = "Lokal";
-"timeline.n-recent-from-n-participants %lld %lld" = "%lld aktuelle Beiträge von %lld Teilnehmenden";
 "timeline.trending" = "Im Trend";
 
 // MARK: Package: Status
@@ -458,8 +456,6 @@
 "status.media.contextmenu.share" = "Dieses Bild teilen";
 "status.media.contextmenu.view-browser" = "Im Browser anzeigen";
 "status.media.sensitive.show" = "Sensiblen Inhalt zeigen";
-"status.poll.n-votes %lld" = "%lld Stimmen";
-"status.poll.n-votes-voters %lld %lld" = "%lld Stimmen von %lld Teilnehmern";
 "status.poll.closed" = "Beendet";
 "status.poll.closes-in" = "Endet in ";
 "status.poll.duration" = "Umfragedauer";
@@ -474,9 +470,6 @@
 "status.show-more" = "Mehr anzeigen";
 "status.show-full-post" = "Ganzen Beitrag anzeigen";
 "status.summary.at-time" = " um ";
-"status.summary.n-replies %lld" = "%lld Antworten";
-"status.summary.n-boosts %lld" = "%lld Boosts";
-"status.summary.n-favorites %lld" = "%lld Favoriten";
 "status.summary.edited-time" = "Zuletzt bearbeitet: ";
 "status.visibility.direct" = "Direkt";
 "status.visibility.follower" = "Follower";
@@ -517,7 +510,6 @@
 "accessibility.tabs.timeline.new-post.label" = "Erstellen";
 "accessibility.tabs.timeline.new-post.inputLabel1" = "Neu";
 "accessibility.tabs.timeline.new-post.inputLabel2" = "Erzeugen";
-"accessibility.tabs.timeline.unread-posts.label-%lld" = "%lld neue Beiträge";
 "accessibility.tabs.timeline.unread-posts.hint" = "Bewegt durch die Timeline.";
 "accessibility.app-account.selector.accounts" = "Konten";
 "accessibility.app-account.selector.accounts.hint" = "Öffnet die Optionen.";
@@ -558,5 +550,3 @@
 "report.title" = "Beitrag melden";
 "report.action.send" = "Absenden";
 "status.action.report" = "Beitrag melden";
-
-"tag.suggested.mentions-%lld" = "%lld Erwähnungen";
