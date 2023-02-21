@@ -184,7 +184,6 @@
 "settings.swipeactions.status.icon-style" = "Ikonoen itxura";
 
 "settings.display.section.font" = "Font";
-"settings.display.font.rounded" = "Use SF Rounded";
 
 "enum.expand-media.show" = "Erakutsi guztia";
 "enum.expand-media.hide" = "Ezkutatu guztia";

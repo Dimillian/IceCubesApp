@@ -48,6 +48,8 @@ struct DisplaySettingsView: View {
             return FontState.openDyslexic
           } else if theme.chosenFont?.fontName == "AtkinsonHyperlegible-Regular" {
             return FontState.hyperLegible
+          } else if theme.chosenFont?.fontName == ".AppleSystemUIFontRounded-Regular" {
+            return FontState.SFRounded
           }
           return theme.chosenFontData != nil ? FontState.custom : FontState.system
         }, set: { newValue in
@@ -58,6 +60,8 @@ struct DisplaySettingsView: View {
             theme.chosenFont = UIFont(name: "OpenDyslexic", size: 1)
           case .hyperLegible:
             theme.chosenFont = UIFont(name: "Atkinson Hyperlegible", size: 1)
+          case.SFRounded:
+            theme.chosenFont = UIFont.systemFont(ofSize: 1).rounded()
           case .custom:
             isFontSelectorPresented = true
           }
@@ -67,9 +71,6 @@ struct DisplaySettingsView: View {
           }
         }
         .navigationDestination(isPresented: $isFontSelectorPresented, destination: { FontPicker() })
-
-        Toggle("settings.display.font.rounded", isOn: $theme.useSFRoundedFont)
-          .disabled(theme.chosenFont != nil)
 
         VStack {
           Slider(value: $theme.fontSizeScale, in: 0.5 ... 1.5, step: 0.1)

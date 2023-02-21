@@ -108,7 +108,7 @@ public class UserPreferences: ObservableObject {
     }
     return count
   }
-  
+
   @Published public var serverPreferences: ServerPreferences?
 
   private init() {}
@@ -134,3 +134,6 @@ public class UserPreferences: ObservableObject {
     recentlyUsedLanguages = Array(copy.prefix(3))
   }
 }
+
+
+

@@ -14,6 +14,7 @@ public class Theme: ObservableObject {
     case system
     case openDyslexic
     case hyperLegible
+    case SFRounded
     case custom
 
     @MainActor
@@ -25,6 +26,8 @@ public class Theme: ObservableObject {
         return "Open Dyslexic"
       case .hyperLegible:
         return "Hyper Legible"
+      case .SFRounded:
+          return "SF Rounded"
       case .custom:
         return "settings.display.font.custom"
       }
@@ -118,7 +121,6 @@ public class Theme: ObservableObject {
   @AppStorage(ThemeKey.displayFullUsernameTimeline.rawValue) public var displayFullUsername: Bool = true
   @AppStorage("font_size_scale") public var fontSizeScale: Double = 1
   @AppStorage("chosen_font") public private(set) var chosenFontData: Data?
-  @AppStorage("font_use_sf_rounded") public var useSFRoundedFont = false
 
   @Published public var avatarPosition: AvatarPosition = .top
   @Published public var avatarShape: AvatarShape = .rounded
