@@ -159,7 +159,7 @@ public struct StatusEditorView: View {
         }
       }
     }
-    .interactiveDismissDisabled(!viewModel.shouldDisplayDismissWarning)
+    .interactiveDismissDisabled(viewModel.shouldDisplayDismissWarning)
     .onChange(of: appAccounts.currentClient) { newClient in
       if viewModel.mode.isInShareExtension {
         currentAccount.setClient(client: newClient)
