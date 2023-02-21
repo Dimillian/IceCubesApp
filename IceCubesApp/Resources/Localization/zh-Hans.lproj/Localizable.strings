@@ -185,7 +185,6 @@
 "settings.swipeactions.status.icon-style" = "图标样式";
 
 "settings.display.section.font" = "字体";
-"settings.display.font.rounded" = "使用 SF Rounded 字体";
 
 // MARK: Tabs
 "tab.explore" = "探索";

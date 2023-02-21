@@ -184,7 +184,6 @@
 "settings.swipeactions.status.icon-style" = "Estilo de icono";
 
 "settings.display.section.font" = "Font";
-"settings.display.font.rounded" = "Use SF Rounded";
 
 "enum.expand-media.show" = "Siempre";
 "enum.expand-media.hide" = "Nunca";
