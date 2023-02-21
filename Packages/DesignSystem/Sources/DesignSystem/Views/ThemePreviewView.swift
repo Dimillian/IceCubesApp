@@ -47,7 +47,7 @@ struct ThemeBoxView: View {
 
         Text("design.theme.toots-preview")
           .foregroundColor(color.labelColor)
-          .frame(maxWidth: .infinity)
+          .frame(maxWidth: .infinity, maxHeight: .infinity)
           .padding()
           .background(color.primaryBackgroundColor)
 
