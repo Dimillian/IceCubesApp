@@ -30,24 +30,23 @@ public struct ConversationDetailView: View {
 
   public var body: some View {
     ScrollViewReader { proxy in
-      ZStack(alignment: .bottom) {
-        ScrollView {
-          LazyVStack {
-            if viewModel.isLoadingMessages {
-              loadingView
-            }
-            ForEach(viewModel.messages) { message in
-              ConversationMessageView(message: message,
-                                      conversation: viewModel.conversation)
-                .padding(.vertical, 4)
-                .id(message.id)
-            }
-            bottomAnchorView
+      ScrollView {
+        LazyVStack {
+          if viewModel.isLoadingMessages {
+            loadingView
           }
-          .padding(.horizontal, .layoutPadding)
-          .padding(.bottom, 30)
+          ForEach(viewModel.messages) { message in
+            ConversationMessageView(message: message,
+                                    conversation: viewModel.conversation)
+              .padding(.vertical, 4)
+              .id(message.id)
+          }
+          bottomAnchorView
         }
-        .scrollDismissesKeyboard(.interactively)
+        .padding(.horizontal, .layoutPadding)
+      }
+      .scrollDismissesKeyboard(.interactively)
+      .safeAreaInset(edge: .bottom) {
         inputTextView
       }
       .onAppear {
