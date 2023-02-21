@@ -427,6 +427,8 @@
 "status.media.contextmenu.share" = "Udostępnij ten obrazek";
 "status.media.contextmenu.view-browser" = "Zobacz w przeglądarce";
 "status.media.sensitive.show" = "Pokaż wrażliwą zawartość";
+"status.poll.n-votes %lld" = "%lld votes";
+"status.poll.n-votes-voters %lld %lld" = "%lld votes from %lld voters";
 "status.poll.closed" = "Zamknięty";
 "status.poll.closes-in" = "Zostanie zakończony za ";
 "status.poll.duration" = "Czas trwania sondażu";

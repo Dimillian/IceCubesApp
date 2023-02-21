@@ -432,6 +432,7 @@
 "status.media.contextmenu.view-browser" = "ブラウザで見る";
 "status.media.sensitive.show" = "センシティブな内容を表示する";
 "status.poll.n-votes %lld" = "%lld 投票";
+"status.poll.n-votes-voters %lld %lld" = "%lld votes from %lld voters";
 "status.poll.closed" = "投票終了";
 "status.poll.closes-in" = "投票終了まで ";
 "status.poll.duration" = "投票期間";
