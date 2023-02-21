@@ -132,7 +132,7 @@ struct SettingsTabs: View {
         Label("settings.general.remote-timelines", systemImage: "dot.radiowaves.right")
       }
       NavigationLink(destination: ContentSettingsView()) {
-        Label("settings.general.content", systemImage: "rectangle.on.rectangle")
+        Label("settings.general.content", systemImage: "rectangle.stack")
       }
       NavigationLink(destination: SwipeActionsSettingsView()) {
         Label("settings.general.swipeactions", systemImage: "hand.draw")
