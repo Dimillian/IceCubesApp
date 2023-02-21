@@ -218,7 +218,7 @@ public struct AccountDetailView: View {
   private var listsListView: some View {
     Group {
       ForEach(currentAccount.sortedLists) { list in
-        NavigationLink(value: RouterDestinations.list(list: list)) {
+        NavigationLink(value: RouterDestination.list(list: list)) {
           Text(list.title)
             .font(.scaledHeadline)
             .foregroundColor(theme.labelColor)
@@ -346,7 +346,7 @@ public struct AccountDetailView: View {
                 }
               } else {
                 Menu {
-                  ForEach(MutingDurations.allCases, id: \.rawValue) { duration in
+                  ForEach(MutingDuration.allCases, id: \.rawValue) { duration in
                     Button(duration.description) {
                       Task {
                         do {

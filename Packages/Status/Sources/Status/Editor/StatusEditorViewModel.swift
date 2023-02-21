@@ -483,7 +483,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
 
   // MARK: - OpenAI Prompt
 
-  func runOpenAI(prompt: OpenAIClient.Prompts) async {
+  func runOpenAI(prompt: OpenAIClient.Prompt) async {
     do {
       let client = OpenAIClient()
       let response = try await client.request(prompt)

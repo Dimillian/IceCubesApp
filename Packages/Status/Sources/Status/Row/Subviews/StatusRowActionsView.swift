@@ -14,7 +14,7 @@ struct StatusRowActionsView: View {
   }
 
   @MainActor
-  enum Actions: CaseIterable {
+  enum Action: CaseIterable {
     case respond, boost, favorite, bookmark, share
 
     func iconName(viewModel: StatusRowViewModel, privateBoost: Bool = false) -> String {
@@ -69,7 +69,7 @@ struct StatusRowActionsView: View {
   var body: some View {
     VStack(spacing: 12) {
       HStack {
-        ForEach(Actions.allCases, id: \.self) { action in
+        ForEach(Action.allCases, id: \.self) { action in
           if action == .share {
             if let urlString = viewModel.status.reblog?.url ?? viewModel.status.url,
                let url = URL(string: urlString)
@@ -107,7 +107,7 @@ struct StatusRowActionsView: View {
     }
   }
 
-  private func handleAction(action: Actions) {
+  private func handleAction(action: Action) {
     Task {
       if viewModel.isRemote, viewModel.localStatusId == nil || viewModel.localStatus == nil {
         guard await viewModel.fetchRemoteStatus() else {
