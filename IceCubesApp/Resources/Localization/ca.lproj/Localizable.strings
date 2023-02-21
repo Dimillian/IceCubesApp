@@ -369,6 +369,7 @@
 "status.action.translated-label-%@" = "Traduït amb %@";
 "status.action.bookmark" = "Afegeix als marcadors";
 "status.action.boost" = "Impulsa";
+"status.action.boost-to-followers" = "Boost to Followers";
 "status.action.copy-text" = "Copia el text";
 "status.action.delete" = "Elimina";
 "status.action.delete.confirm.title" = "Confirm";

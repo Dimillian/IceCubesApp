@@ -14,6 +14,20 @@ struct StatusRowContextMenu: View {
 
   @ObservedObject var viewModel: StatusRowViewModel
   
+  var boostLabel: some View {
+    if self.viewModel.status.visibility == .priv && self.viewModel.status.account.id == self.account.account?.id {
+      if self.viewModel.isReblogged {
+        return Label("status.action.unboost", systemImage: "lock.rotation")
+      }
+      return Label("status.action.boost-to-followers", systemImage: "lock.rotation")
+    }
+    
+    if self.viewModel.isReblogged {
+      return Label("status.action.unboost", systemImage: "arrow.left.arrow.right.circle")
+    }
+    return Label("status.action.boost", systemImage: "arrow.left.arrow.right.circle")
+  }
+  
   var body: some View {
     if !viewModel.isRemote {
       Button { Task {
@@ -32,8 +46,9 @@ struct StatusRowContextMenu: View {
           await viewModel.reblog()
         }
       } } label: {
-        Label(viewModel.isReblogged ? "status.action.unboost" : "status.action.boost", systemImage: "arrow.left.arrow.right.circle")
+        boostLabel
       }
+      .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != account.account?.id)
       Button { Task {
         if viewModel.isBookmarked {
           await viewModel.unbookmark()
@@ -133,7 +148,7 @@ struct StatusRowContextMenu: View {
       }
     }
 
-    if account.account?.id == viewModel.status.account.id {
+    if account.account?.id == viewModel.status.reblog?.account.id ?? viewModel.status.account.id {
       Section("status.action.section.your-post") {
         Button {
           Task {

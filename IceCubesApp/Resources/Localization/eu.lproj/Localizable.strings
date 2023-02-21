@@ -364,6 +364,7 @@
 "status.action.translated-label-%@" = "%@ erabiliz itzulia";
 "status.action.bookmark" = "Jarri laster-marka";
 "status.action.boost" = "Bultzatu";
+"status.action.boost-to-followers" = "Boost to Followers";
 "status.action.copy-text" = "Kopiatu testua";
 "status.action.delete" = "Ezabatu";
 "status.action.delete.confirm.title" = "Baieztatu";

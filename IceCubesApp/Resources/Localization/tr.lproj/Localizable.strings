@@ -366,6 +366,7 @@
 "status.action.translated-label-%@" = "%@ tarafından tercüme edildi";
 "status.action.bookmark" = "Yer İmi Ekle";
 "status.action.boost" = "Yükselt";
+"status.action.boost-to-followers" = "Boost to Followers";
 "status.action.copy-text" = "Yazıyı Kopyala";
 "status.action.delete" = "Sil";
 "status.action.delete.confirm.title" = "Confirm";

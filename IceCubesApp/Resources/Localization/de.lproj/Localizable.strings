@@ -366,6 +366,7 @@
 "status.action.translated-label-%@" = "Übersetzt mit %@";
 "status.action.bookmark" = "Lesezeichen setzen";
 "status.action.boost" = "Boosten";
+"status.action.boost-to-followers" = "Boost to Followers";
 "status.action.copy-text" = "Text kopieren";
 "status.action.delete" = "Löschen";
 "status.action.delete.confirm.title" = "Bestätigen";
