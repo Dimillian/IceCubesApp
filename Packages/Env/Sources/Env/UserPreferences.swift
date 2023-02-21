@@ -96,13 +96,13 @@ public class UserPreferences: ObservableObject {
   public func setNotification(count: Int, token: OauthToken) {
     Self.sharedDefault?.set(count, forKey: "push_notifications_count_\(token.createdAt)")
   }
-  
+
   public func getNotificationsCount(for token: OauthToken) -> Int {
     Self.sharedDefault?.integer(forKey: "push_notifications_count_\(token.createdAt)") ?? 0
   }
-  
+
   public func getNotificationsTotalCount(for tokens: [OauthToken]) -> Int {
-    var count: Int = 0
+    var count = 0
     for token in tokens {
       count += getNotificationsCount(for: token)
     }
@@ -134,6 +134,3 @@ public class UserPreferences: ObservableObject {
     recentlyUsedLanguages = Array(copy.prefix(3))
   }
 }
-
-
-

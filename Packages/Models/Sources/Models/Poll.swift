@@ -28,13 +28,11 @@ public struct Poll: Codable, Equatable, Hashable {
   public let voted: Bool?
   public let ownVotes: [Int]?
   public let options: [Option]
-  
+
   // the votersCount can be null according to the docs when multiple is false.
   // Didn't find that to be true, but we make sure
-  public var safeVotersCount:  Int {
-    get {
-      return votersCount ?? votesCount
-    }
+  public var safeVotersCount: Int {
+    return votersCount ?? votesCount
   }
 }
 

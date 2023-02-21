@@ -8,11 +8,11 @@ struct StatusRowActionsView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var currentAccount: CurrentAccount
   @ObservedObject var viewModel: StatusRowViewModel
-    
+
   func privateBoost() -> Bool {
-    return self.viewModel.status.visibility == .priv && self.viewModel.status.account.id == self.currentAccount.account?.id
+    return viewModel.status.visibility == .priv && viewModel.status.account.id == currentAccount.account?.id
   }
-  
+
   @MainActor
   enum Actions: CaseIterable {
     case respond, boost, favorite, bookmark, share
@@ -22,10 +22,10 @@ struct StatusRowActionsView: View {
       case .respond:
         return "arrowshape.turn.up.left"
       case .boost:
-        if (privateBoost) {
+        if privateBoost {
           return viewModel.isReblogged ? "arrow.left.arrow.right.circle.fill" : "lock.rotation"
         }
-        
+
         return viewModel.isReblogged ? "arrow.left.arrow.right.circle.fill" : "arrow.left.arrow.right.circle"
       case .favorite:
         return viewModel.isFavorited ? "star.fill" : "star"
@@ -96,7 +96,7 @@ struct StatusRowActionsView: View {
             }
             .buttonStyle(.borderless)
             .disabled(action == .boost &&
-                      (viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id))
+              (viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id))
             Spacer()
           }
         }

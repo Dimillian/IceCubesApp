@@ -26,7 +26,7 @@ public struct StatusPollView: View {
       return 0
     }
   }
-  
+
   private func percentForOption(option: Poll.Option) -> Int {
     let percent = ratioForOption(option: option) * 100
     return Int(round(percent))

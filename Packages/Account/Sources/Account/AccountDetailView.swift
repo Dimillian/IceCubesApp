@@ -485,8 +485,7 @@ public struct AccountDetailView: View {
 
 private extension View {
   func applyAccountDetailsRowStyle(theme: Theme) -> some View {
-    self
-      .listRowInsets(.init())
+    listRowInsets(.init())
       .listRowSeparator(.hidden)
       .listRowBackground(theme.primaryBackgroundColor)
   }

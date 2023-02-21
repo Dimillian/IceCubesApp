@@ -15,7 +15,7 @@ private struct SafariRouter: ViewModifier {
   @EnvironmentObject private var routerPath: RouterPath
 
   @StateObject private var safariManager = InAppSafariManager()
-  
+
   func body(content: Content) -> some View {
     content
       .environment(\.openURL, OpenURLAction { url in
@@ -58,48 +58,48 @@ private struct SafariRouter: ViewModifier {
 
 private class InAppSafariManager: NSObject, ObservableObject, SFSafariViewControllerDelegate {
   var windowScene: UIWindowScene?
-  let viewController: UIViewController = UIViewController()
+  let viewController: UIViewController = .init()
   var window: UIWindow?
 
   @MainActor
   func open(_ url: URL) -> OpenURLAction.Result {
     guard let windowScene = windowScene else { return .systemAction }
-    
-    self.window = setupWindow(windowScene: windowScene)
-    
+
+    window = setupWindow(windowScene: windowScene)
+
     let configuration = SFSafariViewController.Configuration()
     configuration.entersReaderIfAvailable = UserPreferences.shared.inAppBrowserReaderView
-    
+
     let safari = SFSafariViewController(url: url, configuration: configuration)
     safari.preferredBarTintColor = UIColor(Theme.shared.primaryBackgroundColor)
     safari.preferredControlTintColor = UIColor(Theme.shared.tintColor)
     safari.delegate = self
-    
+
     DispatchQueue.main.async { [weak self] in
       self?.viewController.present(safari, animated: true)
     }
-    
+
     return .handled
   }
 
   func setupWindow(windowScene: UIWindowScene) -> UIWindow {
     let window = self.window ?? UIWindow(windowScene: windowScene)
-    
+
     window.rootViewController = viewController
     window.makeKeyAndVisible()
-    
+
     switch Theme.shared.selectedScheme {
     case .dark:
       window.overrideUserInterfaceStyle = .dark
     case .light:
       window.overrideUserInterfaceStyle = .light
     }
-    
+
     self.window = window
     return window
   }
 
-  func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+  func safariViewControllerDidFinish(_: SFSafariViewController) {
     window?.resignKey()
     window?.isHidden = false
     window = nil
@@ -109,31 +109,30 @@ private class InAppSafariManager: NSObject, ObservableObject, SFSafariViewContro
 private struct WindowReader: UIViewRepresentable {
   var onUpdate: (UIWindow) -> Void
 
-  func makeUIView(context: Context) -> InjectView {
+  func makeUIView(context _: Context) -> InjectView {
     InjectView(onUpdate: onUpdate)
   }
 
-  func updateUIView(_ uiView: InjectView, context: Context) {
-  }
+  func updateUIView(_: InjectView, context _: Context) {}
 
   class InjectView: UIView {
     var onUpdate: (UIWindow) -> Void
-    
+
     init(onUpdate: @escaping (UIWindow) -> Void) {
       self.onUpdate = onUpdate
       super.init(frame: .zero)
       isHidden = true
       isUserInteractionEnabled = false
     }
-    
+
     @available(*, unavailable)
-    required init?(coder: NSCoder) {
+    required init?(coder _: NSCoder) {
       fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func willMove(toWindow newWindow: UIWindow?) {
       super.willMove(toWindow: newWindow)
-        
+
       if let window = newWindow {
         onUpdate(window)
       } else {

@@ -8,7 +8,7 @@ import SwiftUI
 public struct StatusRowCardView: View {
   @Environment(\.openURL) private var openURL
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
-  
+
   @EnvironmentObject private var theme: Theme
   let card: Card
 

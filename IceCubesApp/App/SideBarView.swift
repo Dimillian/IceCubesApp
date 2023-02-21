@@ -20,12 +20,13 @@ struct SideBarView<Content: View>: View {
 
   private func badgeFor(tab: Tab) -> Int {
     if tab == .notifications && selectedTab != tab,
-       let token = appAccounts.currentAccount.oauthToken {
+       let token = appAccounts.currentAccount.oauthToken
+    {
       return watcher.unreadNotificationsCount + userPreferences.getNotificationsCount(for: token)
     }
     return 0
   }
-  
+
   private func makeIconForTab(tab: Tab) -> some View {
     ZStack(alignment: .topTrailing) {
       SideBarIcon(systemIconName: tab.iconName,
@@ -37,7 +38,7 @@ struct SideBarView<Content: View>: View {
     .contentShape(Rectangle())
     .frame(width: .sidebarWidth, height: 50)
   }
-  
+
   private func makeBadgeView(count: Int) -> some View {
     ZStack {
       Circle()
@@ -78,8 +79,9 @@ struct SideBarView<Content: View>: View {
       ZStack(alignment: .topTrailing) {
         AppAccountView(viewModel: .init(appAccount: account, isCompact: true))
         if showBadge,
-            let token = account.oauthToken,
-            userPreferences.getNotificationsCount(for: token) > 0 {
+           let token = account.oauthToken,
+           userPreferences.getNotificationsCount(for: token) > 0
+        {
           makeBadgeView(count: userPreferences.getNotificationsCount(for: token))
         }
       }

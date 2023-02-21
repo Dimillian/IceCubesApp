@@ -6,12 +6,12 @@ public struct EditRelationshipNoteView: View {
   @Environment(\.dismiss) private var dismiss
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
-  
+
   // need this model to refresh after storing the new note on mastodon
   var accountDetailViewModel: AccountDetailViewModel
-  
+
   @StateObject private var viewModel = EditRelationshipNoteViewModel()
-  
+
   public var body: some View {
     NavigationStack {
       Form {
@@ -31,8 +31,8 @@ public struct EditRelationshipNoteView: View {
       .alert("account.relation.note.edit.error.save.title",
              isPresented: $viewModel.saveError,
              actions: {
-        Button("alert.button.ok", action: {})
-      }, message: { Text("account.relation.note.edit.error.save.message") })
+               Button("alert.button.ok", action: {})
+             }, message: { Text("account.relation.note.edit.error.save.message") })
       .task {
         viewModel.client = client
         viewModel.relatedAccountId = accountDetailViewModel.accountId
@@ -40,7 +40,7 @@ public struct EditRelationshipNoteView: View {
       }
     }
   }
-  
+
   @ToolbarContentBuilder
   private var toolbarContent: some ToolbarContent {
     ToolbarItem(placement: .navigationBarLeading) {
@@ -48,7 +48,7 @@ public struct EditRelationshipNoteView: View {
         dismiss()
       }
     }
-    
+
     ToolbarItem(placement: .navigationBarTrailing) {
       Button {
         Task {

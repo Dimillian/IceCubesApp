@@ -60,7 +60,7 @@ struct DisplaySettingsView: View {
             theme.chosenFont = UIFont(name: "OpenDyslexic", size: 1)
           case .hyperLegible:
             theme.chosenFont = UIFont(name: "Atkinson Hyperlegible", size: 1)
-          case.SFRounded:
+          case .SFRounded:
             theme.chosenFont = UIFont.systemFont(ofSize: 1).rounded()
           case .custom:
             isFontSelectorPresented = true

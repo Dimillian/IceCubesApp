@@ -27,7 +27,7 @@ public class Theme: ObservableObject {
       case .hyperLegible:
         return "Hyper Legible"
       case .SFRounded:
-          return "SF Rounded"
+        return "SF Rounded"
       case .custom:
         return "settings.display.font.custom"
       }
@@ -87,7 +87,7 @@ public class Theme: ObservableObject {
       }
     }
   }
-  
+
   public var chosenFont: UIFont? {
     get {
       guard let chosenFontData,

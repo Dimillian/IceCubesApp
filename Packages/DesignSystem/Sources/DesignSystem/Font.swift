@@ -15,12 +15,10 @@ public extension Font {
   private static let onMac = ProcessInfo.processInfo.isiOSAppOnMac
 
   private static func customFont(size: CGFloat, relativeTo textStyle: TextStyle) -> Font {
-    
     if let chosenFont = Theme.shared.chosenFont {
       if chosenFont.fontName == ".AppleSystemUIFontRounded-Regular" {
         return .system(size: size, design: .rounded)
-      }
-      else {
+      } else {
         return .custom(chosenFont.fontName, size: size, relativeTo: textStyle)
       }
     }
@@ -72,13 +70,11 @@ public extension Font {
   }
 }
 
-
-
-extension UIFont {
-    public func rounded() -> UIFont {
-        guard let descriptor = fontDescriptor.withDesign(.rounded) else {
-            return self
-        }
-        return UIFont(descriptor: descriptor, size: pointSize)
+public extension UIFont {
+  func rounded() -> UIFont {
+    guard let descriptor = fontDescriptor.withDesign(.rounded) else {
+      return self
     }
+    return UIFont(descriptor: descriptor, size: pointSize)
+  }
 }

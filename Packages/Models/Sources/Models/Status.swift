@@ -56,8 +56,8 @@ public protocol AnyStatus {
 }
 
 public struct StatusViewId: Hashable {
-    let id: String
-    let editedAt: ServerDate?
+  let id: String
+  let editedAt: ServerDate?
 }
 
 public extension AnyStatus {
