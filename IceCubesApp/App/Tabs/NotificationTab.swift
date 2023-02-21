@@ -38,6 +38,11 @@ struct NotificationsTab: View {
               }
             }
           }
+          if UIDevice.current.userInterfaceIdiom == .pad {
+            if (!isSecondaryColumn && !userPreferences.showiPadSecondaryColumn) || isSecondaryColumn {
+              SecondaryColumnToolbarItem()
+            }
+          }
         }
         .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
         .id(client.id)

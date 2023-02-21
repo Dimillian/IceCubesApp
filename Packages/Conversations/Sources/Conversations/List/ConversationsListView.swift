@@ -6,6 +6,7 @@ import Shimmer
 import SwiftUI
 
 public struct ConversationsListView: View {
+  @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var routerPath: RouterPath
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
@@ -76,6 +77,9 @@ public struct ConversationsListView: View {
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
       StatusEditorToolbarItem(visibility: .direct)
+      if UIDevice.current.userInterfaceIdiom == .pad && !preferences.showiPadSecondaryColumn {
+        SecondaryColumnToolbarItem()
+      }
     }
     .onChange(of: watcher.latestEvent?.id) { _ in
       if let latestEvent = watcher.latestEvent {

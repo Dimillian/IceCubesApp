@@ -159,7 +159,7 @@ public struct StatusEditorView: View {
         }
       }
     }
-    .interactiveDismissDisabled(!viewModel.shouldDisplayDismissWarning)
+    .interactiveDismissDisabled(viewModel.shouldDisplayDismissWarning)
     .onChange(of: appAccounts.currentClient) { newClient in
       if viewModel.mode.isInShareExtension {
         currentAccount.setClient(client: newClient)
@@ -202,7 +202,7 @@ public struct StatusEditorView: View {
       dismiss()
       NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
                                       object: nil)
-      if !viewModel.mode.isInShareExtension && !preferences.requestedReview {
+      if !viewModel.mode.isInShareExtension, !preferences.requestedReview, !ProcessInfo.processInfo.isiOSAppOnMac {
         if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
           SKStoreReviewController.requestReview(in: scene)
         }

@@ -46,6 +46,9 @@ struct SettingsTabs: View {
             }
           }
         }
+        if UIDevice.current.userInterfaceIdiom == .pad && !preferences.showiPadSecondaryColumn {
+          SecondaryColumnToolbarItem()
+        }
       }
       .withAppRouter()
       .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)

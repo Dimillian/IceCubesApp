@@ -27,8 +27,9 @@ public struct StatusRowMediaPreviewView: View {
   @State private var isHidingMedia: Bool = false
 
   var availableWidth: CGFloat {
-    if sceneDelegate.windowWidth > .maxColumnWidth {
-      return .maxColumnWidth
+    if UIDevice.current.userInterfaceIdiom == .phone &&
+        (UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight) {
+      return sceneDelegate.windowWidth * 0.80
     }
     return sceneDelegate.windowWidth
   }
@@ -36,10 +37,15 @@ public struct StatusRowMediaPreviewView: View {
   var appLayoutWidth: CGFloat {
     let avatarColumnWidth = theme.avatarPosition == .leading ? AvatarView.Size.status.size.width + .statusColumnsSpacing : 0
     var sidebarWidth: CGFloat = 0
-    if UIDevice.current.userInterfaceIdiom == .pad && sceneDelegate.windowWidth < (.maxColumnWidth + .sidebarWidth) {
+    var secondaryColumnWidth: CGFloat = 0
+    let layoutPading: CGFloat = .layoutPadding * 2
+    if UIDevice.current.userInterfaceIdiom == .pad  {
       sidebarWidth = .sidebarWidth
+      if preferences.showiPadSecondaryColumn {
+        secondaryColumnWidth = .secondaryColumnWidth
+      }
     }
-    return (.layoutPadding * 2) + avatarColumnWidth + sidebarWidth + extraLeadingInset
+    return layoutPading + avatarColumnWidth + sidebarWidth + extraLeadingInset + secondaryColumnWidth
   }
 
   private var imageMaxHeight: CGFloat {

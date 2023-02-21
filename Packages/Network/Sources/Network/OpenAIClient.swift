@@ -43,7 +43,7 @@ public struct OpenAIClient {
     }
   }
 
-  public enum Prompts {
+  public enum Prompt {
     case correct(input: String)
     case shorten(input: String)
     case emphasize(input: String)
@@ -89,7 +89,7 @@ public struct OpenAIClient {
 
   public init() {}
 
-  public func request(_ prompt: Prompts) async throws -> Response {
+  public func request(_ prompt: Prompt) async throws -> Response {
     do {
       let jsonData = try encoder.encode(prompt.request)
       var request = URLRequest(url: endpoint)
