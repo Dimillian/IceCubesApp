@@ -14,19 +14,17 @@ struct StatusRowContextMenu: View {
 
   @ObservedObject var viewModel: StatusRowViewModel
   
-  func getBoostLabel() -> some View {
-    if (self.viewModel.status.visibility == .priv && self.viewModel.status.account.id == self.account.account?.id) {
-      if (self.viewModel.isReblogged) {
+  var boostLabel: some View {
+    if self.viewModel.status.visibility == .priv && self.viewModel.status.account.id == self.account.account?.id {
+      if self.viewModel.isReblogged {
         return Label("status.action.unboost", systemImage: "lock.rotation")
       }
-      
       return Label("status.action.boost-to-followers", systemImage: "lock.rotation")
     }
     
-    if (self.viewModel.isReblogged) {
+    if self.viewModel.isReblogged {
       return Label("status.action.unboost", systemImage: "arrow.left.arrow.right.circle")
     }
-    
     return Label("status.action.boost", systemImage: "arrow.left.arrow.right.circle")
   }
   
@@ -48,7 +46,7 @@ struct StatusRowContextMenu: View {
           await viewModel.reblog()
         }
       } } label: {
-        getBoostLabel()
+        boostLabel
       }
       .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != account.account?.id)
       Button { Task {
