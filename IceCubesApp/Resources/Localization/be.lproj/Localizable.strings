@@ -171,6 +171,7 @@
 "settings.swipeactions.status.action.none" = "Нічога";
 "settings.swipeactions.status.action.quote" = "Цытаваць";
 "settings.swipeactions.status.action.reply" = "Адказаць";
+"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
 "settings.swipeactions.status.leading" = "Правядзіце ўправа";
 "settings.swipeactions.status.trailing" = "Правядзіце ўлева";
 "settings.swipeactions.status" = "Допіс";

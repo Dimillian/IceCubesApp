@@ -43,7 +43,7 @@ struct SwipeActionsSettingsView: View {
       } header: {
         Text("settings.swipeactions.status")
       } footer: {
-        Text("settings.swipeactions.explanation")
+        Text("settings.swipeactions.status.explanation")
       }
       .listRowBackground(theme.primaryBackgroundColor)
 

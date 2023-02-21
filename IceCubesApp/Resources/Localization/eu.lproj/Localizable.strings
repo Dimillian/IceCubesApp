@@ -173,6 +173,7 @@
 "settings.swipeactions.status.action.none" = "Ezer ez";
 "settings.swipeactions.status.action.quote" = "Aipatu bidalketa";
 "settings.swipeactions.status.action.reply" = "Erantzun";
+"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
 "settings.swipeactions.status.leading" = "Eskumarantz";
 "settings.swipeactions.status.trailing" = "Ezkerrerantz";
 "settings.swipeactions.status" = "Bidalketa";

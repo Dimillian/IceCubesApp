@@ -170,6 +170,7 @@
 "settings.display.show-ipad-column" = "Enable secondary column";
 
 "settings.general.swipeactions" = "Swipe Actions";
+"settings.swipeactions.appearance" = "Appearance";
 "settings.swipeactions.navigation-title" = "Swipe Actions";
 "settings.swipeactions.primary" = "Primary Action";
 "settings.swipeactions.secondary" = "Secondary Action";
@@ -180,11 +181,9 @@
 "settings.swipeactions.status.action.none" = "None";
 "settings.swipeactions.status.action.quote" = "Quote";
 "settings.swipeactions.status.action.reply" = "Reply";
+"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
 "settings.swipeactions.status.leading" = "Swipe Right";
 "settings.swipeactions.status.trailing" = "Swipe Left";
-"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
-
-"settings.swipeactions.appearance" = "Appearance";
 "settings.swipeactions.use-theme-colors" = "Use theme colors instead of default colors";
 "settings.swipeactions.icon-style" = "Icon Style";
 

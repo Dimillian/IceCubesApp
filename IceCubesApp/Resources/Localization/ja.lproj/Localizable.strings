@@ -177,6 +177,7 @@
 "settings.swipeactions.status.action.none" = "未定義";
 "settings.swipeactions.status.action.quote" = "引用";
 "settings.swipeactions.status.action.reply" = "返信";
+"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
 "settings.swipeactions.status.leading" = "右にスワイプ";
 "settings.swipeactions.status.trailing" = "左にスワイプ";
 "settings.swipeactions.status" = "投稿";

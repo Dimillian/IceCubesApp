@@ -175,6 +175,7 @@
 "settings.swipeactions.status.action.none" = "无";
 "settings.swipeactions.status.action.quote" = "引用";
 "settings.swipeactions.status.action.reply" = "回复";
+"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
 "settings.swipeactions.status.leading" = "向右轻扫";
 "settings.swipeactions.status.trailing" = "向左轻扫";
 "settings.swipeactions.status" = "嘟文";

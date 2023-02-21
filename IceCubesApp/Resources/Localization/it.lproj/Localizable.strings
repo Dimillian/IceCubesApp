@@ -176,6 +176,7 @@
 "settings.swipeactions.status.action.none" = "Niente";
 "settings.swipeactions.status.action.quote" = "Cita";
 "settings.swipeactions.status.action.reply" = "Rispondi";
+"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
 "settings.swipeactions.status.leading" = "Scorrimento a destra";
 "settings.swipeactions.status.trailing" = "Scorrimento a sinistra";
 "settings.swipeactions.status" = "Post";

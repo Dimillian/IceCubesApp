@@ -176,6 +176,7 @@
 "settings.swipeactions.status.action.none" = "설정 안 함";
 "settings.swipeactions.status.action.quote" = "인용";
 "settings.swipeactions.status.action.reply" = "댓글";
+"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
 "settings.swipeactions.status.leading" = "오른쪽으로 쓸어넘길 때";
 "settings.swipeactions.status.trailing" = "왼쪽으로 쓸어넘길 때";
 "settings.swipeactions.status" = "글";

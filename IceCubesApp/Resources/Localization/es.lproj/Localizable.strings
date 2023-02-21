@@ -173,6 +173,7 @@
 "settings.swipeactions.status.action.none" = "Ninguna";
 "settings.swipeactions.status.action.quote" = "Citar";
 "settings.swipeactions.status.action.reply" = "Responder";
+"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
 "settings.swipeactions.status.leading" = "Deslizar a la derecha";
 "settings.swipeactions.status.trailing" = "Deslizar a la izquierda";
 "settings.swipeactions.status" = "Publicación";
