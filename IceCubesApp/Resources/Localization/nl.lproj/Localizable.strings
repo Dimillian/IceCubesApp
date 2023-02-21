@@ -426,6 +426,7 @@
 "status.media.contextmenu.view-browser" = "Open in browser";
 "status.media.sensitive.show" = "Toon gevoelige inhoud";
 "status.poll.n-votes %lld" = "%lld stemmen";
+"status.poll.n-votes-voters %lld %lld" = "%lld votes from %lld voters";
 "status.poll.closed" = "Beëindigd";
 "status.poll.closes-in" = "Eindigt over ";
 "status.poll.duration" = "Pollduur";
