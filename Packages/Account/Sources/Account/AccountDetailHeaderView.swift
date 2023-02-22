@@ -197,6 +197,9 @@ struct AccountDetailHeaderView: View {
         if account.bot {
           Text("🤖")
         }
+        if account.locked{
+          Text("🔒")
+        }
         Image(systemName: "calendar")
         Text("account.joined")
         Text(joinedAt, style: .date)
