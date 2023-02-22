@@ -43,7 +43,7 @@
 
 // MARK: Instances
 "instance.info.domains" = "Домени";
-"instance.info.email" = "Email";
+"instance.info.email" = "Електронна пошта";
 "instance.info.name" = "Імʼя";
 "instance.info.navigation-title" = "Статистика сервера";
 "instance.info.posts" = "Дописи";
@@ -186,7 +186,7 @@
 "settings.swipeactions.status.leading" = "Рух праворуч";
 "settings.swipeactions.status.trailing" = "Рух ліворуч";
 "settings.swipeactions.use-theme-colors" = "Використовувати колір тему";
-"settings.swipeactions.use-theme-colors-explanation" = "Використовувати колір теми замість кольорві за замовчуванням";
+"settings.swipeactions.use-theme-colors-explanation" = "Використовувати колір теми замість стандартних кольорів";
 "settings.swipeactions.icon-style" = "Стиль іконки";
 
 "settings.display.section.font" = "Шрифти";
@@ -206,7 +206,7 @@
 "timeline.%@-is-valid" = "%@ коректний сервер";
 "timeline.add-remote.title" = "Додати віддалену локальну стручку";
 "timeline.add.action.add" = "Додати";
-"timeline.filter.add-local" = "Додати локальну стручку";
+"timeline.filter.add-local" = "Додати локальну стрічку";
 "timeline.filter.lists" = "Списки";
 "timeline.filter.local" = "Локальна стрічка";
 "timeline.filter.tags" = "Хештеґи";
