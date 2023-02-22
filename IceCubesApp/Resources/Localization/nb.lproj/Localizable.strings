@@ -367,8 +367,8 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Oversett";
-"status.action.translate-from-%@" = "Oversett fra %@";
 "status.action.translated-label-%@" = "Oversatt ved hjelp av %@";
+"status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Bokmerk";
 "status.action.boost" = "Forsterk";
 "status.action.boost-to-followers" = "Boost to Followers";

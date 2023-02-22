@@ -361,8 +361,8 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Itzuli";
-"status.action.translate-from-%@" = "Itzuli %@(e)tik";
 "status.action.translated-label-%@" = "%@ erabiliz itzulia";
+"status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Jarri laster-marka";
 "status.action.boost" = "Bultzatu";
 "status.action.boost-to-followers" = "Bultzatu jarraitzaileek ikus dezaten";

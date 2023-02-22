@@ -363,8 +363,8 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Übersetzen";
-"status.action.translate-from-%@" = "Aus %@ übersetzen";
 "status.action.translated-label-%@" = "Übersetzt mit %@";
+"status.action.translated-label-from-%@-%@" = "Aus %@ mit %@ übersetzt";
 "status.action.bookmark" = "Lesezeichen setzen";
 "status.action.boost" = "Boosten";
 "status.action.boost-to-followers" = "An Follower boosten";

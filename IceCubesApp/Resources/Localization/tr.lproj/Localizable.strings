@@ -363,8 +363,8 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Tercüme et";
-"status.action.translate-from-%@" = "Tercüme et %@";
 "status.action.translated-label-%@" = "%@ tarafından tercüme edildi";
+"status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Yer İmi Ekle";
 "status.action.boost" = "Yükselt";
 "status.action.boost-to-followers" = "Boost to Followers";
