@@ -107,7 +107,7 @@ struct StatusRowActionsView: View {
       Button {
         handleAction(action: action)
       } label: {
-        Image(systemName: action.iconName(viewModel: viewModel))
+        Image(systemName: action.iconName(viewModel: viewModel, privateBoost: privateBoost()))
       }
       .buttonStyle(
         .statusAction(
