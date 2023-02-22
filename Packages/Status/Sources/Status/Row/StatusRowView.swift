@@ -69,7 +69,7 @@ public struct StatusRowView: View {
             .accessibilityAction {
               viewModel.navigateToDetail()
             }
-            if viewModel.showActions, theme.statusActionsDisplay != .none {
+           if viewModel.showActions, (viewModel.isFocused || theme.statusActionsDisplay != .none) {
               StatusRowActionsView(viewModel: viewModel)
                 .padding(.top, 8)
                 .tint(viewModel.isFocused ? theme.tintColor : .gray)
