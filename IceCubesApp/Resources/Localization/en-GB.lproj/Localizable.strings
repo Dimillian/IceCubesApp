@@ -68,28 +68,28 @@
 "settings.app.icon.navigation-title" = "Icons";
 "settings.app.icon.official" = "Official icons";
 "settings.app.icon.designed-by" = "Icons by";
-"settings.app.source" = "Source (GitHub link)";
-"settings.app.support" = "Support the app";
+"settings.app.source" = "Source (GitHub)";
+"settings.app.support" = "Support the App";
 "settings.app.about" = "About";
 "settings.display.example-toot" = "Example Post";
 "settings.display.font" = "Timeline Font";
 "settings.display.font.system" = "System";
 "settings.display.font.custom" = "Custom";
-"settings.display.font.scaling-%@" = "Font scaling: %@";
-"settings.display.avatar.position" = "Avatar position";
-"settings.display.avatar.shape" = "Avatar shape";
-"settings.display.full-username" = "Display full username";
+"settings.display.font.scaling-%@" = "Font Scaling: %@";
+"settings.display.avatar.position" = "Avatar Position";
+"settings.display.avatar.shape" = "Avatar Shape";
+"settings.display.full-username" = "Display Full Username";
 "settings.display.navigation-title" = "Display Settings";
-"settings.display.restore" = "Restore defaults";
+"settings.display.restore" = "Restore Defaults";
 "settings.display.section.display" = "Display";
 "settings.display.section.theme" = "Theme";
 "settings.display.section.theme.footer" = "Custom colours can only be set if match system colour scheme is disabled";
-"settings.display.status.action-buttons" = "Status action buttons";
-"settings.display.status.media-style" = "Status media style";
-"settings.display.translate-button" = "Show translate button";
-"settings.display.theme.background" = "Background colour";
-"settings.display.theme.secondary-background" = "Secondary Background colour";
-"settings.display.theme.tint" = "Tint colour";
+"settings.display.status.action-buttons" = "Status Action Buttons";
+"settings.display.status.media-style" = "Status Media Style";
+"settings.display.translate-button" = "Show Translate Button";
+"settings.display.theme.background" = "Background Colour";
+"settings.display.theme.secondary-background" = "Secondary Background Colour";
+"settings.display.theme.tint" = "Tint Colour";
 "settings.display.theme.systemColor" = "Match System";
 "settings.general.browser" = "Browser";
 "settings.general.browser.in-app" = "In-App Browser";
@@ -112,16 +112,16 @@
 "settings.system" = "System Settings";
 "settings.content.boosts" = "Boosts";
 "settings.content.navigation-title" = "Content Settings";
-"settings.content.use-instance-settings" = "Use server settings";
+"settings.content.use-instance-settings" = "Use Server Settings";
 "settings.content.instance-settings" = "Server Content Settings";
 "settings.content.main-toggle.description" = "Use the settings from your home Instance";
-"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
-"settings.content.expand-spoilers" = "Always show sensitive posts";
-"settings.content.expand-media" = "Media display";
-"settings.content.default-sensitive" = "Always mark media as sensitive";
-"settings.content.default-visibility" = "Posting visibility";
+"settings.content.hide-repeated-boosts" = "Hide Repeated Boosts";
+"settings.content.expand-spoilers" = "Always Show Sensitive Posts";
+"settings.content.expand-media" = "Media Display";
+"settings.content.default-sensitive" = "Always Mark Media as Sensitive";
+"settings.content.default-visibility" = "Posting Visibility";
 "settings.content.media" = "Media";
-"settings.content.media.show.alt" = "Show ALT texts";
+"settings.content.media.show.alt" = "Show ALT Texts";
 "settings.content.reading" = "Reading";
 "settings.content.posting" = "Posting";
 "enum.expand-media.show" = "Show All";
@@ -145,20 +145,20 @@
 "settings.support.two.title" = "☕️ Nice Tip";
 "settings.support.four.title" = "👽 Who are you Tip";
 "settings.support.four.subtitle" = "It'll go a long way to keep Ice Cubes running!";
-"settings.timeline.add" = "Add a local timeline";
+"settings.timeline.add" = "Add a Local Timeline";
 "settings.title" = "Settings";
 "settings.rate" = "Rate Ice Cubes";
 "settings.section.other" = "Other";
-"settings.other.hide-openai" = "Enable 🤖 helper";
+"settings.other.hide-openai" = "Enable 🤖 Helper";
 "settings.other.social-keyboard" = "Enable Social Keyboard";
-"settings.push.duplicate.title" = "Duplicate notifications fixer";
+"settings.push.duplicate.title" = "Duplicate Notifications Fixer";
 "settings.push.duplicate.footer" = "Receiving duplicate notifications? Try this magic button in order to fix it";
-"settings.push.duplicate.button.fix" = "🪄 Fix it";
+"settings.push.duplicate.button.fix" = "🪄 Fix It";
 "settings.other.autoplay-video" = "Auto Play Videos";
 "settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
 "settings.about.title" = "Ice Cubes";
-"settings.account.cached-posts-%@" = "Cached posts: %@";
-"settings.account.action.delete-cache" = "Clear cache";
+"settings.account.cached-posts-%@" = "Cached Posts: %@";
+"settings.account.action.delete-cache" = "Clear Cache";
 
 "account.action.share" = "Share this account";
 
@@ -168,9 +168,9 @@
 "settings.haptic.tab-selection" = "Tab Selection";
 "settings.haptic.buttons" = "Button Press";
 
-"settings.display.show-tab-label" = "Show tab name";
+"settings.display.show-tab-label" = "Show Tab Name";
 
-"settings.display.show-ipad-column" = "Enable secondary column";
+"settings.display.show-ipad-column" = "Enable Secondary Column";
 
 "settings.general.swipeactions" = "Swipe Actions";
 "settings.swipeactions.navigation-title" = "Swipe Actions";
@@ -265,7 +265,7 @@
 "account.posts" = "Posts";
 "account.relation.follows-you" = "Follows You";
 "account.joined" = "Joined";
-"account.action.logout" = "Log out account";
+"account.action.logout" = "Log Out Account";
 
 "account.relation.note.edit" = "Edit Note";
 "account.relation.note.edit.placeholder" = "Enter Note text";
@@ -480,7 +480,7 @@
 "accessibility.editor.button.drafts" = "Drafts";
 "accessibility.editor.button.custom-emojis" = "Custom emojis";
 "accessibility.editor.button.language" = "Language";
-"accessibility.tabs.timeline.add-account" = "Add account";
+"accessibility.tabs.timeline.add-account" = "Add Account";
 "accessibility.app-account.selector.accounts" = "Accounts";
 
 // MARK: Report
