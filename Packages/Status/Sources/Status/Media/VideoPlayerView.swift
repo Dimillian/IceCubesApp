@@ -45,6 +45,7 @@ class VideoPlayerViewModel: ObservableObject {
 
 struct VideoPlayerView: View {
   @Environment(\.scenePhase) private var scenePhase
+  @Environment(\.isCompact) private var isCompact
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
 
@@ -56,9 +57,9 @@ struct VideoPlayerView: View {
 
       if !preferences.autoPlayVideo {
         Image(systemName: "play.fill")
-          .font(.largeTitle)
+          .font(isCompact ? .body : .largeTitle)
           .foregroundColor(theme.tintColor)
-          .padding()
+          .padding(.all, isCompact ? 6 : nil)
           .background(Circle().fill(.thinMaterial))
           .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
       }

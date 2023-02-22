@@ -369,7 +369,7 @@
 "status.action.translated-label-%@" = "由 %@ 翻译";
 "status.action.bookmark" = "书签";
 "status.action.boost" = "转发";
-"status.action.boost-to-followers" = "Boost to Followers";
+"status.action.boost-to-followers" = "转发给粉丝";
 "status.action.copy-text" = "拷贝文本";
 "status.action.delete" = "删除";
 "status.action.delete.confirm.title" = "确认删除";
@@ -430,8 +430,8 @@
 "status.media.contextmenu.share" = "分享图片";
 "status.media.contextmenu.view-browser" = "在浏览器中打开";
 "status.media.sensitive.show" = "显示敏感内容";
-"status.poll.n-votes %lld" = "%lld 投票";
-"status.poll.n-votes-voters %lld %lld" = "%lld votes from %lld voters";
+"status.poll.n-votes %lld" = "%lld 票";
+"status.poll.n-votes-voters %lld %lld" = "%lld 票来自 %lld 个投票者";
 "status.poll.closed" = "已关闭";
 "status.poll.closes-in" = "关闭于 ";
 "status.poll.duration" = "投票持续时间";
