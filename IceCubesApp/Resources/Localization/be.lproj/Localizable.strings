@@ -37,6 +37,9 @@
 "enum.status-actions-display.only-buttons" = "Толькі кнопкі";
 "enum.status-display-style.compact" = "Кампактны";
 "enum.status-display-style.large" = "Вялікі";
+"enum.status-display-style.medium" = "Medium";
+"enum.swipeactions.icon-with-text" = "Значкі з тэкстам";
+"enum.swipeactions.icon-only" = "Толькі значкі";
 
 // MARK: Instances
 "instance.info.domains" = "Дамены";
@@ -63,6 +66,8 @@
 "settings.account.add" = "Дадаць уліковы запіс";
 "settings.app.icon" = "Значок дадатка";
 "settings.app.icon.navigation-title" = "Значкі";
+"settings.app.icon.official" = "Афіцыйныя значкі";
+"settings.app.icon.designed-by" = "Значкі ад";
 "settings.app.source" = "Крыніца (спасылка на GitHub)";
 "settings.app.support" = "Падтрымаць дадатак";
 "settings.app.about" = "Аб дадатку";
@@ -73,6 +78,7 @@
 "settings.display.font.scaling-%@" = "Маштаб шрыфту: %@";
 "settings.display.avatar.position" = "Пазіцыя аватару";
 "settings.display.avatar.shape" = "Форма аватару";
+"settings.display.full-username" = "Паказваць поўнае імя";
 "settings.display.navigation-title" = "Налады дысплэю";
 "settings.display.restore" = "Аднавіць па змаўчанні";
 "settings.display.section.display" = "Дысплэй";
@@ -113,6 +119,8 @@
 "settings.content.expand-media" = "Паказ медыя";
 "settings.content.default-sensitive" = "Заўсёды адзначаць медыя як уражлівыя";
 "settings.content.default-visibility" = "Бачнасць допісаў";
+"settings.content.media" = "Медыя";
+"settings.content.media.show.alt" = "Паказваць альт. тэкст";
 "settings.content.reading" = "Чытанне";
 "settings.content.posting" = "Размяшчэнне допісаў";
 "enum.expand-media.show" = "Паказаць усе";
@@ -164,19 +172,28 @@
 
 "settings.general.swipeactions" = "Дзеянні правядзення пальцам";
 "settings.swipeactions.navigation-title" = "Дзеянні правядзення пальцам";
+"settings.swipeactions.primary" = "Primary Action";
+"settings.swipeactions.secondary" = "Secondary Action";
 "settings.swipeactions.status.action.bookmark" = "Закладка";
 "settings.swipeactions.status.action.boost" = "Павышэнне";
 "settings.swipeactions.status.action.favorite" = "У ўлюбёныя";
 "settings.swipeactions.status.action.none" = "Нічога";
 "settings.swipeactions.status.action.quote" = "Цытаваць";
 "settings.swipeactions.status.action.reply" = "Адказаць";
+"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
 "settings.swipeactions.status.leading" = "Правядзіце ўправа";
-"settings.swipeactions.status.leading.left" = "злева";
-"settings.swipeactions.status.leading.right" = "справа";
 "settings.swipeactions.status.trailing" = "Правядзіце ўлева";
-"settings.swipeactions.status.trailing.left" = "злева";
-"settings.swipeactions.status.trailing.right" = "справа";
 "settings.swipeactions.status" = "Допіс";
+
+"settings.swipeactions.appearance" = "Appearance";
+"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors-explanation" = "Use theme colors instead of default colors";
+"settings.swipeactions.icon-style" = "Icon Style";
+
+"settings.swipeactions.status.use-theme-colors" = "Выкарыстоўваць колеры тэмы замест колераў па змаўчанні";
+"settings.swipeactions.status.icon-style" = "Стылі значкоў";
+
+"settings.display.section.font" = "Шрыфт";
 
 // MARK: Tabs
 "tab.explore" = "Аглядзець";
@@ -239,7 +256,7 @@
 "account.follow-request.accept" = "Прыняць";
 "account.follow-request.reject" = "Адхіліць";
 "account.follow-requests.pending-requests" = "Чакаючыя запыты";
-"account.follow-requests.instructions" = "Those users won't see your posts until you accept them.";
+"account.follow-requests.instructions" = "Гэтыя карыстальнікі не ўбачаць вашых допісаў, пакуль вы іх не прымеце.";
 "account.followers" = "Паслядоўнікі";
 "account.following" = "Адсочваю";
 "account.list.create" = "Стварыць новы спіс";
@@ -253,9 +270,16 @@
 "account.joined" = "Далучыліся";
 "account.action.logout" = "Выйсці з уліковага запісу";
 
+"account.relation.note.edit" = "Рэдагаваць нататку";
+"account.relation.note.edit.placeholder" = "Увядзіце тэкст нататкі";
+"account.relation.note.edit.error.save.message" = "Памылка пры захаванні нататкі, паўтарыце спробу.";
+"account.relation.note.edit.error.save.title" = "Памылка пры захаванні нататкі";
+"account.relation.note.label" = "Нататка:";
+
 // MARK: Package: Conversations
 "conversations.action.delete" = "Выдаліць";
 "conversations.action.mark-read" = "Адзначыць як прачытанае";
+"conversations.action.view-detail" = "Паглядзець дэталі";
 "conversations.empty.message" = "Шукаеце каханне ў сацыяльных сетках? Тут вы знойдзеце ўсе вашы прамыя паведамленні і асабістыя згадкі. Прыемнай перапіскі! 📱❤️";
 "conversations.empty.title" = "Уваходная скрыня парожняя";
 "conversations.error.button" = "Паўтарыць";
@@ -289,6 +313,7 @@
 "env.poll-duration.30m" = "30 хвілін";
 "env.poll-duration.1h" = "1 гадзіна";
 "env.poll-duration.6h" = "6 гадзін";
+"env.poll-duration.12h" = "12 гадзін";
 "env.poll-duration.1d" = "1 дзень";
 "env.poll-duration.3d" = "3 дні";
 "env.poll-duration.7d" = "7 дзён";
@@ -328,13 +353,13 @@
 "notifications.tab.all" = "Усе";
 "notifications.tab.mentions" = "Згадванні";
 
-"notifications.label.status.push" = "🖊️ Posted: ";
-"notifications.label.reblog.push" = "🚀 Boosted: ";
-"notifications.label.follow.push" = "👋 Followed you: ";
-"notifications.label.follow-request.push" = "🔒 Requested to follow you: ";
-"notifications.label.favorite.push" = "⭐️ Starred: ";
-"notifications.label.poll.push" = "📈 Poll ended: ";
-"notifications.label.update.push" = "Updated: ";
+"notifications.label.status.push" = "🖊️ Апублікавана: ";
+"notifications.label.reblog.push" = "🚀 Павышана: ";
+"notifications.label.follow.push" = "👋 Сочыць за вамі: ";
+"notifications.label.follow-request.push" = "🔒 Запрасіў сачыць за вамі: ";
+"notifications.label.favorite.push" = "⭐️ Пазначана зоркай: ";
+"notifications.label.poll.push" = "📈 Апытанне скончана: ";
+"notifications.label.update.push" = "Абноўлена: ";
 
 // MARK: Package: Timeline
 "timeline.federated" = "Аб'яднаны";
@@ -351,6 +376,7 @@
 "status.action.translated-label-%@" = "Пераклад з дапамогай %@";
 "status.action.bookmark" = "Закладка";
 "status.action.boost" = "Павышэнне";
+"status.action.boost-to-followers" = "Павысіць для падпісчыкаў";
 "status.action.copy-text" = "Капіяваць тэкст";
 "status.action.delete" = "Выдаліць";
 "status.action.delete.confirm.title" = "Пацвердзіць";
@@ -365,6 +391,9 @@
 "status.action.reply" = "Адказаць";
 "status.action.section.your-post" = "Ваш допіс";
 "status.action.share" = "Падзяліцца гэтым допісам";
+"status.action.share-link" = "Падзяліцца спасылкай на допіс";
+"status.action.share-image" = "Падзяліцца допісам як выявай";
+"status.action.share-title" = "Падзяліцца";
 "status.action.unbookmark" = "Скасаваць закладку";
 "status.action.unboost" = "Адмяніць павышэнне";
 "status.action.unfavorite" = "Выдаліць з улюбенага";
@@ -401,7 +430,7 @@
 "status.error.title" = "Узнікла памылка";
 "status.filter.filtered-by-%@" = "Адфільтравана па: %@";
 "status.filter.show-anyway" = "Паказваць у любым выпадку";
-"status.image.alt-text.abbreviation" = "ALT";
+"status.image.alt-text.abbreviation" = "Альт.";
 "status.media.content.show" = "Паказаць змест";
 "status.media.contextmenu.copy" = "Капіяваць выяву";
 "status.media.contextmenu.save" = "Захаваць выяву";
@@ -409,6 +438,7 @@
 "status.media.contextmenu.view-browser" = "Праглядзець у браўзэры";
 "status.media.sensitive.show" = "Паказаць адчувальны кантэнт";
 "status.poll.n-votes %lld" = "%lld галасоў";
+"status.poll.n-votes-voters %lld %lld" = "%lld галасоў ад %lld удзельнікаў";
 "status.poll.closed" = "Зачынены";
 "status.poll.closes-in" = "Зачыніцца праз ";
 "status.poll.duration" = "Працягласць апытання";
@@ -454,5 +484,12 @@
 "accessibility.editor.button.drafts" = "Чарнавікі";
 "accessibility.editor.button.custom-emojis" = "Уласныя эмодзі";
 "accessibility.editor.button.language" = "Мова";
-"accessibility.tabs.timeline.add-account" = "Add account";
-"accessibility.app-account.selector.accounts" = "Accounts";
+"accessibility.tabs.timeline.add-account" = "Дадаць уліковы запіс";
+"accessibility.app-account.selector.accounts" = "Уліковыя запісы";
+
+// MARK: Report
+"report.comment.placeholder" = "Дадатковая інфармацыя";
+"report.title" = "Паскардзіцца";
+"report.action.send" = "Адправіць";
+"status.action.report" = "Паскардзіцца";
+

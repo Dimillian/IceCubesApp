@@ -3,7 +3,7 @@ import Models
 import Network
 import SwiftUI
 
-public enum RouterDestinations: Hashable {
+public enum RouterDestination: Hashable {
   case accountDetail(id: String)
   case accountDetailWithAccount(account: Account)
   case accountSettingsWithAccount(account: Account, appAccount: AppAccount)
@@ -20,7 +20,7 @@ public enum RouterDestinations: Hashable {
   case accountsList(accounts: [Account])
 }
 
-public enum SheetDestinations: Identifiable {
+public enum SheetDestination: Identifiable {
   case newStatusEditor(visibility: Models.Visibility)
   case editStatusEditor(status: Status)
   case replyToStatusEditor(status: Status)
@@ -34,6 +34,7 @@ public enum SheetDestinations: Identifiable {
   case settings
   case accountPushNotficationsSettings
   case report(status: Status)
+  case shareImage(image: UIImage, status: Status)
 
   public var id: String {
     switch self {
@@ -52,6 +53,8 @@ public enum SheetDestinations: Identifiable {
       return "statusEditHistory"
     case .report:
       return "report"
+    case .shareImage:
+      return "shareImage"
     }
   }
 }
@@ -61,12 +64,12 @@ public class RouterPath: ObservableObject {
   public var client: Client?
   public var urlHandler: ((URL) -> OpenURLAction.Result)?
 
-  @Published public var path: [RouterDestinations] = []
-  @Published public var presentedSheet: SheetDestinations?
+  @Published public var path: [RouterDestination] = []
+  @Published public var presentedSheet: SheetDestination?
 
   public init() {}
 
-  public func navigate(to: RouterDestinations) {
+  public func navigate(to: RouterDestination) {
     path.append(to)
   }
 

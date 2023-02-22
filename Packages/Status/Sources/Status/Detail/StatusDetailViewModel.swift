@@ -11,10 +11,11 @@ class StatusDetailViewModel: ObservableObject {
   var client: Client?
 
   enum State {
-    case loading, display(status: Status, context: StatusContext, date: Date), error(error: Error)
+    case loading, display(statuses: [Status], date: Date), error(error: Error)
   }
 
   @Published var state: State = .loading
+  @Published var isLoadingContext = true
   @Published var title: LocalizedStringKey = ""
   @Published var scrollToId: String?
 
@@ -25,7 +26,7 @@ class StatusDetailViewModel: ObservableObject {
   }
 
   init(status: Status) {
-    state = .display(status: status, context: .empty(), date: Date())
+    state = .display(statuses: [status], date: Date())
     title = "status.post-from-\(status.account.displayNameWithoutEmojis)"
     statusId = status.id
     remoteStatusURL = nil
@@ -71,14 +72,20 @@ class StatusDetailViewModel: ObservableObject {
   private func fetchStatusDetail(animate: Bool) async {
     guard let client, let statusId else { return }
     do {
+      isLoadingContext = true
       let data = try await fetchContextData(client: client, statusId: statusId)
       title = "status.post-from-\(data.status.account.displayNameWithoutEmojis)"
+      var statuses = data.context.ancestors
+      statuses.append(data.status)
+      statuses.append(contentsOf: data.context.descendants)
       if animate {
         withAnimation {
-          state = .display(status: data.status, context: data.context, date: Date())
+          isLoadingContext = false
+          state = .display(statuses: statuses, date: Date())
         }
       } else {
-        state = .display(status: data.status, context: data.context, date: Date())
+        isLoadingContext = false
+        state = .display(statuses: statuses, date: Date())
         scrollToId = statusId
       }
     } catch {

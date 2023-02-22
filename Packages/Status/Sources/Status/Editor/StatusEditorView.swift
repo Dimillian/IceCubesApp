@@ -7,10 +7,12 @@ import Models
 import Network
 import NukeUI
 import PhotosUI
+import StoreKit
 import SwiftUI
 import UIKit
 
 public struct StatusEditorView: View {
+  @EnvironmentObject private var appAccounts: AppAccountsManager
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
@@ -89,7 +91,6 @@ public struct StatusEditorView: View {
         }
       }
       .onChange(of: currentAccount.account?.id, perform: { _ in
-        viewModel.client = client
         viewModel.currentAccount = currentAccount.account
       })
       .background(theme.primaryBackgroundColor)
@@ -158,7 +159,13 @@ public struct StatusEditorView: View {
         }
       }
     }
-    .interactiveDismissDisabled(!viewModel.statusText.string.isEmpty)
+    .interactiveDismissDisabled(viewModel.shouldDisplayDismissWarning)
+    .onChange(of: appAccounts.currentClient) { newClient in
+      if viewModel.mode.isInShareExtension {
+        currentAccount.setClient(client: newClient)
+        viewModel.client = newClient
+      }
+    }
   }
 
   @ViewBuilder
@@ -195,6 +202,12 @@ public struct StatusEditorView: View {
       dismiss()
       NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
                                       object: nil)
+      if !viewModel.mode.isInShareExtension, !preferences.requestedReview, !ProcessInfo.processInfo.isiOSAppOnMac {
+        if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+          SKStoreReviewController.requestReview(in: scene)
+        }
+        preferences.requestedReview = true
+      }
     }
   }
 
@@ -216,12 +229,17 @@ public struct StatusEditorView: View {
   private var accountHeaderView: some View {
     if let account = currentAccount.account, !viewModel.mode.isEditing {
       HStack {
-        AppAccountsSelectorView(routerPath: RouterPath(),
-                                accountCreationEnabled: false,
-                                avatarSize: .status)
+        if viewModel.mode.isInShareExtension {
+          AppAccountsSelectorView(routerPath: RouterPath(),
+                                  accountCreationEnabled: false,
+                                  avatarSize: .status)
+        } else {
+          AvatarView(url: account.avatar, size: .status)
+            .environmentObject(theme)
+        }
         VStack(alignment: .leading, spacing: 4) {
           privacyMenu
-          Text("@\(account.acct)")
+          Text("@\(account.acct)@\(appAccounts.currentClient.server)")
             .font(.scaledFootnote)
             .foregroundColor(.gray)
         }

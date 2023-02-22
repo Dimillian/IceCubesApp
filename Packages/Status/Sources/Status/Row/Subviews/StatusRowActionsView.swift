@@ -4,19 +4,28 @@ import Models
 import Network
 import SwiftUI
 
-struct StatusActionsView: View {
+struct StatusRowActionsView: View {
   @EnvironmentObject private var theme: Theme
+  @EnvironmentObject private var currentAccount: CurrentAccount
   @ObservedObject var viewModel: StatusRowViewModel
 
+  func privateBoost() -> Bool {
+    return viewModel.status.visibility == .priv && viewModel.status.account.id == currentAccount.account?.id
+  }
+
   @MainActor
-  enum Actions: CaseIterable {
+  enum Action: CaseIterable {
     case respond, boost, favorite, bookmark, share
 
-    func iconName(viewModel: StatusRowViewModel) -> String {
+    func iconName(viewModel: StatusRowViewModel, privateBoost: Bool = false) -> String {
       switch self {
       case .respond:
         return "arrowshape.turn.up.left"
       case .boost:
+        if privateBoost {
+          return viewModel.isReblogged ? "arrow.left.arrow.right.circle.fill" : "lock.rotation"
+        }
+
         return viewModel.isReblogged ? "arrow.left.arrow.right.circle.fill" : "arrow.left.arrow.right.circle"
       case .favorite:
         return viewModel.isFavorited ? "star.fill" : "star"
@@ -43,16 +52,25 @@ struct StatusActionsView: View {
       }
     }
 
-    func tintColor(viewModel: StatusRowViewModel, theme: Theme) -> Color? {
+    func tintColor(theme: Theme) -> Color? {
       switch self {
       case .respond, .share:
         return nil
       case .favorite:
-        return viewModel.isFavorited ? .yellow : nil
+        return .yellow
       case .bookmark:
-        return viewModel.isBookmarked ? .pink : nil
+        return .pink
       case .boost:
-        return viewModel.isReblogged ? theme.tintColor : nil
+        return theme.tintColor
+      }
+    }
+
+    func isOn(viewModel: StatusRowViewModel) -> Bool {
+      switch self {
+      case .respond, .share: return false
+      case .favorite: return viewModel.isFavorited
+      case .bookmark: return viewModel.isBookmarked
+      case .boost: return viewModel.isReblogged
       }
     }
   }
@@ -60,33 +78,20 @@ struct StatusActionsView: View {
   var body: some View {
     VStack(spacing: 12) {
       HStack {
-        ForEach(Actions.allCases, id: \.self) { action in
+        ForEach(Action.allCases, id: \.self) { action in
           if action == .share {
             if let urlString = viewModel.status.reblog?.url ?? viewModel.status.url,
-               let url = URL(string: urlString) {
+               let url = URL(string: urlString)
+            {
               ShareLink(item: url,
                         subject: Text(viewModel.status.reblog?.account.safeDisplayName ?? viewModel.status.account.safeDisplayName),
                         message: Text(viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText)) {
                 Image(systemName: action.iconName(viewModel: viewModel))
               }
-              .buttonStyle(.borderless)
+              .buttonStyle(.statusAction())
             }
           } else {
-            Button {
-              handleAction(action: action)
-            } label: {
-              HStack(spacing: 2) {
-                Image(systemName: action.iconName(viewModel: viewModel))
-                  .foregroundColor(action.tintColor(viewModel: viewModel, theme: theme))
-                if let count = action.count(viewModel: viewModel, theme: theme), !viewModel.isRemote {
-                  Text("\(count)")
-                    .font(.scaledFootnote)
-                }
-              }
-            }
-            .buttonStyle(.borderless)
-            .disabled(action == .boost &&
-              (viewModel.status.visibility == .direct || viewModel.status.visibility == .priv))
+            actionButton(action: action)
             Spacer()
           }
         }
@@ -97,7 +102,30 @@ struct StatusActionsView: View {
     }
   }
 
-  private func handleAction(action: Actions) {
+  private func actionButton(action: Action) -> some View {
+    HStack(spacing: 2) {
+      Button {
+        handleAction(action: action)
+      } label: {
+        Image(systemName: action.iconName(viewModel: viewModel, privateBoost: privateBoost()))
+      }
+      .buttonStyle(
+        .statusAction(
+          isOn: action.isOn(viewModel: viewModel),
+          tintColor: action.tintColor(theme: theme)
+        )
+      )
+      .disabled(action == .boost &&
+                (viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id))
+      if let count = action.count(viewModel: viewModel, theme: theme), !viewModel.isRemote {
+        Text("\(count)")
+          .foregroundColor(Color(UIColor.secondaryLabel))
+          .font(.scaledFootnote)
+      }
+    }
+  }
+
+  private func handleAction(action: Action) {
     Task {
       if viewModel.isRemote, viewModel.localStatusId == nil || viewModel.localStatus == nil {
         guard await viewModel.fetchRemoteStatus() else {

@@ -36,6 +36,7 @@
 "enum.status-actions-display.no-buttons" = "No buttons";
 "enum.status-actions-display.only-buttons" = "Only buttons";
 "enum.status-display-style.compact" = "Compact";
+"enum.status-display-style.medium" = "Medium";
 "enum.status-display-style.large" = "Large";
 "enum.swipeactions.icon-with-text" = "Icon with text";
 "enum.swipeactions.icon-only" = "Icon only";
@@ -67,27 +68,28 @@
 "settings.app.icon.navigation-title" = "Icons";
 "settings.app.icon.official" = "Official icons";
 "settings.app.icon.designed-by" = "Icons by";
-"settings.app.source" = "Source (GitHub link)";
-"settings.app.support" = "Support the app";
+"settings.app.source" = "Source (GitHub)";
+"settings.app.support" = "Support the App";
 "settings.app.about" = "About";
 "settings.display.example-toot" = "Example Post";
 "settings.display.font" = "Timeline Font";
 "settings.display.font.system" = "System";
 "settings.display.font.custom" = "Custom";
-"settings.display.font.scaling-%@" = "Font scaling: %@";
-"settings.display.avatar.position" = "Avatar position";
-"settings.display.avatar.shape" = "Avatar shape";
+"settings.display.font.scaling-%@" = "Font Scaling: %@";
+"settings.display.avatar.position" = "Avatar Position";
+"settings.display.avatar.shape" = "Avatar Shape";
+"settings.display.full-username" = "Display Full Username";
 "settings.display.navigation-title" = "Display Settings";
-"settings.display.restore" = "Restore defaults";
+"settings.display.restore" = "Restore Defaults";
 "settings.display.section.display" = "Display";
 "settings.display.section.theme" = "Theme";
 "settings.display.section.theme.footer" = "Custom colors can only be set if match system color scheme is disabled";
-"settings.display.status.action-buttons" = "Status action buttons";
-"settings.display.status.media-style" = "Status media style";
-"settings.display.translate-button" = "Show translate button";
-"settings.display.theme.background" = "Background color";
-"settings.display.theme.secondary-background" = "Secondary Background color";
-"settings.display.theme.tint" = "Tint color";
+"settings.display.status.action-buttons" = "Status Action Buttons";
+"settings.display.status.media-style" = "Status Media Style";
+"settings.display.translate-button" = "Show Translate Button";
+"settings.display.theme.background" = "Background Color";
+"settings.display.theme.secondary-background" = "Secondary Background Color";
+"settings.display.theme.tint" = "Tint Color";
 "settings.display.theme.systemColor" = "Match System";
 "settings.general.browser" = "Browser";
 "settings.general.browser.in-app" = "In-App Browser";
@@ -110,15 +112,15 @@
 "settings.system" = "System Settings";
 "settings.content.navigation-title" = "Content Settings";
 "settings.content.boosts" = "Boosts";
-"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
+"settings.content.hide-repeated-boosts" = "Hide Repeated Boosts";
 "settings.content.instance-settings" = "Server Content Settings";
-"settings.content.use-instance-settings" = "Use server settings";
-"settings.content.expand-spoilers" = "Always show sensitive posts";
-"settings.content.expand-media" = "Media display";
-"settings.content.default-sensitive" = "Always mark media as sensitive";
-"settings.content.default-visibility" = "Posting visibility";
+"settings.content.use-instance-settings" = "Use Server Settings";
+"settings.content.expand-spoilers" = "Always Show Sensitive Posts";
+"settings.content.expand-media" = "Media Display";
+"settings.content.default-sensitive" = "Always Mark Media as Sensitive";
+"settings.content.default-visibility" = "Posting Visibility";
 "settings.content.media" = "Media";
-"settings.content.media.show.alt" = "Show ALT texts";
+"settings.content.media.show.alt" = "Show ALT Texts";
 "settings.content.reading" = "Reading";
 "settings.content.posting" = "Posting";
 "enum.expand-media.show" = "Show All";
@@ -142,21 +144,21 @@
 "settings.support.two.title" = "☕️ Nice Tip";
 "settings.support.four.title" = "👽 Who are you Tip";
 "settings.support.four.subtitle" = "It'll go a long way to keep Ice Cubes running!";
-"settings.timeline.add" = "Add a local timeline";
+"settings.timeline.add" = "Add a Local Timeline";
 "settings.title" = "Settings";
 "settings.rate" = "Rate Ice Cubes";
 "settings.section.other" = "Other";
-"settings.other.hide-openai" = "Enable 🤖 helper";
+"settings.other.hide-openai" = "Enable 🤖 Helper";
 "settings.other.social-keyboard" = "Enable Social Keyboard";
-"settings.push.duplicate.title" = "Duplicate notifications fixer";
+"settings.push.duplicate.title" = "Duplicate Notifications Fixer";
 "settings.push.duplicate.footer" = "Receiving duplicate notifications? Try this magic button in order to fix it";
-"settings.push.duplicate.button.fix" = "🪄 Fix it";
+"settings.push.duplicate.button.fix" = "🪄 Fix It";
 "settings.other.autoplay-video" = "Auto Play Videos";
 "settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
 "settings.about.title" = "Ice Cubes";
 
-"settings.account.cached-posts-%@" = "Cached posts: %@";
-"settings.account.action.delete-cache" = "Clear cache";
+"settings.account.cached-posts-%@" = "Cached Posts: %@";
+"settings.account.action.delete-cache" = "Clear Cache";
 
 "settings.general.haptic" = "Haptic Feedback";
 "settings.haptic.navigation-title" = "Haptic Settings";
@@ -164,30 +166,30 @@
 "settings.haptic.tab-selection" = "Tab Selection";
 "settings.haptic.buttons" = "Button Press";
 
-"settings.display.show-tab-label" = "Show tab name";
+"settings.display.show-tab-label" = "Show Tab Name";
 
-"settings.display.show-ipad-column" = "Enable secondary column";
+"settings.display.show-ipad-column" = "Enable Secondary Column";
 
 "settings.general.swipeactions" = "Swipe Actions";
+"settings.swipeactions.appearance" = "Appearance";
 "settings.swipeactions.navigation-title" = "Swipe Actions";
+"settings.swipeactions.primary" = "Primary Action";
+"settings.swipeactions.secondary" = "Secondary Action";
+"settings.swipeactions.status" = "Post";
 "settings.swipeactions.status.action.bookmark" = "Bookmark";
 "settings.swipeactions.status.action.boost" = "Boost";
 "settings.swipeactions.status.action.favorite" = "Favorite";
 "settings.swipeactions.status.action.none" = "None";
 "settings.swipeactions.status.action.quote" = "Quote";
 "settings.swipeactions.status.action.reply" = "Reply";
-"settings.swipeactions.status.leading" = "Swipe right";
-"settings.swipeactions.status.leading.left" = "left";
-"settings.swipeactions.status.leading.right" = "right";
-"settings.swipeactions.status.trailing" = "Swipe left";
-"settings.swipeactions.status.trailing.left" = "left";
-"settings.swipeactions.status.trailing.right" = "right";
-"settings.swipeactions.status" = "Post";
-"settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
-"settings.swipeactions.status.icon-style" = "Icon style";
+"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
+"settings.swipeactions.status.leading" = "Swipe Right";
+"settings.swipeactions.status.trailing" = "Swipe Left";
+"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors-explanation" = "Use Theme Colors Instead of Default Colors";
+"settings.swipeactions.icon-style" = "Icon Style";
 
 "settings.display.section.font" = "Font";
-"settings.display.font.rounded" = "Use SF Rounded";
 
 // MARK: Tabs
 "tab.explore" = "Explore";
@@ -262,7 +264,13 @@
 "account.posts" = "Posts";
 "account.relation.follows-you" = "Follows You";
 "account.joined" = "Joined";
-"account.action.logout" = "Log out account";
+"account.action.logout" = "Log Out Account";
+
+"account.relation.note.edit" = "Edit Note";
+"account.relation.note.edit.placeholder" = "Enter Note text";
+"account.relation.note.edit.error.save.message" = "Error while saving your note, please try again.";
+"account.relation.note.edit.error.save.title" = "Error while saving your note";
+"account.relation.note.label" = "Note:";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Delete";
@@ -301,6 +309,7 @@
 "env.poll-duration.30m" = "30 minutes";
 "env.poll-duration.1h" = "1 hour";
 "env.poll-duration.6h" = "6 hours";
+"env.poll-duration.12h" = "12 hours";
 "env.poll-duration.1d" = "1 day";
 "env.poll-duration.3d" = "3 days";
 "env.poll-duration.7d" = "7 days";
@@ -363,6 +372,7 @@
 "status.action.translated-label-%@" = "Translated using %@";
 "status.action.bookmark" = "Bookmark";
 "status.action.boost" = "Boost";
+"status.action.boost-to-followers" = "Boost to Followers";
 "status.action.copy-text" = "Copy Text";
 "status.action.delete" = "Delete";
 "status.action.delete.confirm.title" = "Confirm";
@@ -377,6 +387,9 @@
 "status.action.reply" = "Reply";
 "status.action.section.your-post" = "Your post";
 "status.action.share" = "Share this post";
+"status.action.share-link" = "Share post link";
+"status.action.share-image" = "Share post as image";
+"status.action.share-title" = "Share";
 "status.action.unbookmark" = "Unbookmark";
 "status.action.unboost" = "Unboost";
 "status.action.unfavorite" = "Unfavorite";
@@ -398,8 +411,8 @@
 "status.editor.language-select.recently-used" = "Recently Used";
 "status.editor.language-select.confirmation.detected-%@" = "Post in %@ (Detected language)";
 "status.editor.language-select.confirmation.selected-%@" = "Post in %@ (Selected language)";
-"status.editor.media.edit-image" = "Edit Image";
-"status.editor.media.image-description" = "Image description";
+"status.editor.media.edit-image" = "Edit Media";
+"status.editor.media.image-description" = "Media description";
 "status.editor.mode.edit" = "Editing your post";
 "status.editor.mode.new" = "New Post";
 "status.editor.mode.quote-%@" = "Quote of %@";
@@ -421,6 +434,7 @@
 "status.media.contextmenu.view-browser" = "View in Browser";
 "status.media.sensitive.show" = "Show sensitive content";
 "status.poll.n-votes %lld" = "%lld votes";
+"status.poll.n-votes-voters %lld %lld" = "%lld votes from %lld voters";
 "status.poll.closed" = "Closed";
 "status.poll.closes-in" = "Closes in ";
 "status.poll.duration" = "Poll Duration";
@@ -466,7 +480,7 @@
 "accessibility.editor.button.drafts" = "Drafts";
 "accessibility.editor.button.custom-emojis" = "Custom emojis";
 "accessibility.editor.button.language" = "Language";
-"accessibility.tabs.timeline.add-account" = "Add account";
+"accessibility.tabs.timeline.add-account" = "Add Account";
 "accessibility.app-account.selector.accounts" = "Accounts";
 
 // MARK: Report

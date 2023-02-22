@@ -19,6 +19,7 @@ public class AppAccountViewModel: ObservableObject {
       }
     }
   }
+
   @Published var roundedAvatar: UIImage?
 
   var acct: String {
@@ -39,31 +40,32 @@ public class AppAccountViewModel: ObservableObject {
     do {
       account = Self.accountsCache[appAccount.id]
       roundedAvatar = Self.avatarsCache[appAccount.id]
-      
+
       account = try await client.get(endpoint: Accounts.verifyCredentials)
       Self.accountsCache[appAccount.id] = account
-      
+
       if let account {
         await refreshAvatar(account: account)
       }
-      
+
     } catch {}
   }
-  
+
   private func refreshAcct(account: Account) {
     do {
       if appAccount.accountName == nil {
         appAccount.accountName = "\(account.acct)@\(appAccount.server)"
         try appAccount.save()
       }
-    } catch { }
+    } catch {}
   }
-  
+
   private func refreshAvatar(account: Account) async {
     if let (data, _) = try? await URLSession.shared.data(from: account.avatar),
-       let image = UIImage(data: data)?.roundedImage {
-        roundedAvatar = image
-        Self.avatarsCache[account.id] = image
+       let image = UIImage(data: data)?.roundedImage
+    {
+      roundedAvatar = image
+      Self.avatarsCache[account.id] = image
     }
   }
 }

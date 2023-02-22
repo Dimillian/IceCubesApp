@@ -35,8 +35,9 @@
 "enum.status-actions-display.all" = "すべて表示";
 "enum.status-actions-display.no-buttons" = "ボタン無し";
 "enum.status-actions-display.only-buttons" = "ボタンのみ";
-"enum.status-display-style.compact" = "コンパクト";
-"enum.status-display-style.large" = "ラージ";
+"enum.status-display-style.compact" = "縮小";
+"enum.status-display-style.large" = "拡大";
+"enum.status-display-style.medium" = "標準";
 "enum.swipeactions.icon-with-text" = "アイコンと文字";
 "enum.swipeactions.icon-only" = "アイコンのみ";
 
@@ -45,10 +46,10 @@
 "instance.info.email" = "メールアドレス";
 "instance.info.name" = "名前";
 "instance.info.navigation-title" = "インスタンス情報";
-"instance.info.posts" = "投稿";
+"instance.info.posts" = "投稿数";
 "instance.info.section.info" = "インスタンス情報";
 "instance.info.section.rules" = "インスタンスのルール";
-"instance.info.users" = "ユーザー";
+"instance.info.users" = "ユーザー数";
 "instance.info.version" = "バージョン";
 "instance.list.posts-%@" = "%@ 投稿";
 "instance.list.users-%@" = "%@ ユーザー";
@@ -77,6 +78,7 @@
 "settings.display.font.scaling-%@" = "フォントサイズ: %@";
 "settings.display.avatar.position" = "アバターの位置";
 "settings.display.avatar.shape" = "アバターの形";
+"settings.display.full-username" = "完全なユーザー名を表示";
 "settings.display.navigation-title" = "表示設定";
 "settings.display.restore" = "デフォルトに戻す";
 "settings.display.section.display" = "表示";
@@ -92,7 +94,7 @@
 "settings.general.browser" = "ブラウザ";
 "settings.general.browser.in-app" = "アプリ内ブラウザ";
 "settings.general.browser.in-app.readerview" = "アプリ内ブラウザ リーダービュー";
-"settings.general.browser.system" = "システムブラウザ";
+"settings.general.browser.system" = "システム既定のブラウザ";
 "settings.general.display" = "表示設定";
 "settings.general.instance" = "インスタンス情報";
 "settings.general.push-notifications" = "プッシュ通知";
@@ -168,28 +170,28 @@
 "settings.display.show-ipad-column" = "セカンドカラムを有効にする";
 
 "settings.general.swipeactions" = "スワイプ操作";
+"settings.swipeactions.appearance" = "外観";
 "settings.swipeactions.navigation-title" = "スワイプ操作";
+"settings.swipeactions.primary" = "メイン操作";
+"settings.swipeactions.secondary" = "サブ操作";
 "settings.swipeactions.status.action.bookmark" = "ブックマーク";
 "settings.swipeactions.status.action.boost" = "ブースト";
 "settings.swipeactions.status.action.favorite" = "お気に入り";
 "settings.swipeactions.status.action.none" = "未定義";
 "settings.swipeactions.status.action.quote" = "引用";
 "settings.swipeactions.status.action.reply" = "返信";
+"settings.swipeactions.status.explanation" = "スワイプ操作は、投稿を左右にスワイプすると使用できます。サブ操作は、メイン操作が設定されている場合にのみ使用できます。";
 "settings.swipeactions.status.leading" = "右にスワイプ";
-"settings.swipeactions.status.leading.left" = "左";
-"settings.swipeactions.status.leading.right" = "右";
 "settings.swipeactions.status.trailing" = "左にスワイプ";
-"settings.swipeactions.status.trailing.left" = "左";
-"settings.swipeactions.status.trailing.right" = "右";
 "settings.swipeactions.status" = "投稿";
-"settings.swipeactions.status.use-theme-colors" = "デフォルトの色の代わりにテーマの色を使用する";
-"settings.swipeactions.status.icon-style" = "アイコンスタイル";
+"settings.swipeactions.use-theme-colors" = "テーマ色を使う";
+"settings.swipeactions.use-theme-colors-explanation" = "デフォルトの色の代わりにテーマの色を使用する";
+"settings.swipeactions.icon-style" = "アイコンスタイル";
 
-"settings.display.section.font" = "Font";
-"settings.display.font.rounded" = "Use SF Rounded";
+"settings.display.section.font" = "フォント";
 
 // MARK: Tabs
-"tab.explore" = "エクスプローラー";
+"tab.explore" = "探索";
 "tab.federated" = "連合";
 "tab.local" = "ローカル";
 "tab.messages" = "メッセージ";
@@ -263,6 +265,12 @@
 "account.joined" = "登録日";
 "account.action.logout" = "アカウントをログアウトする";
 
+"account.relation.note.edit" = "ノートを編集";
+"account.relation.note.edit.placeholder" = "ノートを入力";
+"account.relation.note.edit.error.save.message" = "ノートの保存中にエラーが発生しました、もう一度お試しください。";
+"account.relation.note.edit.error.save.title" = "ノートの保存中にエラーが発生しました";
+"account.relation.note.label" = "ノート：";
+
 // MARK: Package: Conversations
 "conversations.action.delete" = "削除";
 "conversations.action.mark-read" = "既読にする";
@@ -281,7 +289,7 @@
 "design.theme.toots-preview" = "トゥートプレビュー";
 
 // MARK: Package: Explore
-"explore.navigation-title" = "エクスプローラー";
+"explore.navigation-title" = "探索";
 "explore.search.message-%@" = "ここからあらゆるものを検索することができます %@";
 "explore.search.prompt" = "ユーザー、投稿、タグの検索";
 "explore.search.title" = "インスタンスの検索";
@@ -300,6 +308,7 @@
 "env.poll-duration.30m" = "30分間";
 "env.poll-duration.1h" = "1時間";
 "env.poll-duration.6h" = "6時間";
+"env.poll-duration.12h" = "12時間";
 "env.poll-duration.1d" = "1日間";
 "env.poll-duration.3d" = "3日間";
 "env.poll-duration.7d" = "7日間";
@@ -343,7 +352,7 @@
 "notifications.label.reblog.push" = "🚀 ブースト：";
 "notifications.label.follow.push" = "👋 あなたをフォロー：";
 "notifications.label.follow-request.push" = "🔒 フォローリクエスト：";
-"notifications.label.favorite.push" = "⭐️ お気に入りに追加：";
+"notifications.label.favorite.push" = "⭐️ お気に入り：";
 "notifications.label.poll.push" = "📈 投票終了：";
 "notifications.label.update.push" = "更新：";
 
@@ -362,6 +371,7 @@
 "status.action.translated-label-%@" = "%@ を使用して翻訳";
 "status.action.bookmark" = "ブックマーク";
 "status.action.boost" = "ブースト";
+"status.action.boost-to-followers" = "フォロワーにブースト";
 "status.action.copy-text" = "テキストをコピー";
 "status.action.delete" = "削除";
 "status.action.delete.confirm.title" = "確認";
@@ -376,6 +386,9 @@
 "status.action.reply" = "リプライ";
 "status.action.section.your-post" = "あなたの投稿";
 "status.action.share" = "投稿を共有する";
+"status.action.share-link" = "リンクを共有する";
+"status.action.share-image" = "画像を共有する";
+"status.action.share-title" = "共有";
 "status.action.unbookmark" = "ブックマークを外す";
 "status.action.unboost" = "ブーストをやめる";
 "status.action.unfavorite" = "お気に入りから外す";
@@ -405,7 +418,7 @@
 "status.editor.mode.reply-%@" = "%@ に返信する";
 "status.editor.restore-previous" = "前のテキストに戻す";
 "status.editor.spoiler" = "ネタバレ";
-"status.editor.text.placeholder" = "いま、何考えているの？";
+"status.editor.text.placeholder" = "いま、何を考えているの？";
 "status.editor.visibility" = "投稿の公開範囲";
 "status.error.loading.message" = "投稿の読み込み中にエラーが発生しました、もう一度試してください";
 "status.error.message" = "この投稿のコンテキストでエラーが発生しました、もう一度試してください";
@@ -420,6 +433,7 @@
 "status.media.contextmenu.view-browser" = "ブラウザで見る";
 "status.media.sensitive.show" = "センシティブな内容を表示する";
 "status.poll.n-votes %lld" = "%lld 投票";
+"status.poll.n-votes-voters %lld %lld" = "%lld 票 %lld からの投票";
 "status.poll.closed" = "投票終了";
 "status.poll.closes-in" = "投票終了まで ";
 "status.poll.duration" = "投票期間";
@@ -465,8 +479,8 @@
 "accessibility.editor.button.drafts" = "下書き";
 "accessibility.editor.button.custom-emojis" = "カスタム絵文字";
 "accessibility.editor.button.language" = "言語";
-"accessibility.tabs.timeline.add-account" = "Add account";
-"accessibility.app-account.selector.accounts" = "Accounts";
+"accessibility.tabs.timeline.add-account" = "アカウントを追加";
+"accessibility.app-account.selector.accounts" = "アカウント";
 
 // MARK: Report
 "report.comment.placeholder" = "追加情報";

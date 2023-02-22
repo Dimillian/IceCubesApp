@@ -1,3 +1,4 @@
+import Nuke
 import NukeUI
 import Shimmer
 import SwiftUI
@@ -54,14 +55,16 @@ public struct AvatarView: View {
           .fill(.gray)
           .frame(width: size.size.width, height: size.size.height)
       } else {
-        LazyImage(url: url) { state in
+        LazyImage(request: url.map(makeImageRequest)) { state in
           if let image = state.image {
             image
-              .resizingMode(.aspectFit)
+              .resizable()
+              .aspectRatio(contentMode: .fit)
           } else {
-            placeholderView
+            AvatarPlaceholderView(size: size)
           }
         }
+        .animation(nil)
         .frame(width: size.size.width, height: size.size.height)
       }
     }
@@ -69,6 +72,10 @@ public struct AvatarView: View {
     .overlay(
       clipShape.stroke(Color.primary.opacity(0.25), lineWidth: 1)
     )
+  }
+
+  private func makeImageRequest(for url: URL) -> ImageRequest {
+    ImageRequest(url: url, processors: [.resize(size: size.size)])
   }
 
   private var clipShape: some Shape {
@@ -79,9 +86,12 @@ public struct AvatarView: View {
       return AnyShape(RoundedRectangle(cornerRadius: size.cornerRadius))
     }
   }
+}
 
-  @ViewBuilder
-  private var placeholderView: some View {
+private struct AvatarPlaceholderView: View {
+  let size: AvatarView.Size
+
+  var body: some View {
     if size == .badge {
       Circle()
         .fill(.gray)

@@ -6,7 +6,7 @@ private enum CodingKeys: CodingKey {
   case htmlValue, asMarkdown, asRawText, statusesURLs
 }
 
-public struct HTMLString: Codable, Equatable, Hashable {
+public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
   public var htmlValue: String = ""
   public var asMarkdown: String = ""
   public var asRawText: String = ""
@@ -129,17 +129,7 @@ public struct HTMLString: Codable, Equatable, Hashable {
         }
       } else if node.nodeName() == "br" {
         if asMarkdown.count > 0 { // ignore first opening <br>
-          // some code to try and stop double carriage rerturns where they aren't required
-          // not perfect but effective in almost all cases
-          if !asMarkdown.hasSuffix("\n") && !asMarkdown.hasSuffix("\u{2028}") {
-            if let next = node.nextSibling() {
-              if next.nodeName() == "#text" && (next.description.hasPrefix("\n") || next.description.hasPrefix("\u{2028}")) {
-                // do nothing
-              } else {
-                asMarkdown += "\n"
-              }
-            }
-          }
+          asMarkdown += "\n"
         }
       } else if node.nodeName() == "a" {
         let href = try node.attr("href")
@@ -168,8 +158,8 @@ public struct HTMLString: Codable, Equatable, Hashable {
           txt = main_regex.stringByReplacingMatches(in: txt, options: [], range: NSRange(location: 0, length: txt.count), withTemplate: "\\\\$1")
           txt = underscore_regex.stringByReplacingMatches(in: txt, options: [], range: NSRange(location: 0, length: txt.count), withTemplate: "\\\\$1")
         }
-
-        asMarkdown += txt
+        // Strip newlines and line separators - they should be being sent as <br>s
+        asMarkdown += txt.replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: "\u{2028}", with: "")
       }
 
       for n in node.getChildNodes() {

@@ -1,12 +1,15 @@
 import DesignSystem
 import Models
+import Nuke
 import NukeUI
 import Shimmer
 import SwiftUI
 
-public struct StatusCardView: View {
-  @EnvironmentObject private var theme: Theme
+public struct StatusRowCardView: View {
   @Environment(\.openURL) private var openURL
+  @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
+
+  @EnvironmentObject private var theme: Theme
   let card: Card
 
   public init(card: Card) {
@@ -16,16 +19,25 @@ public struct StatusCardView: View {
   public var body: some View {
     if let title = card.title, let url = URL(string: card.url) {
       VStack(alignment: .leading) {
-        if let imageURL = card.image {
-          LazyImage(url: imageURL) { state in
-            if let image = state.image {
-              image
-                .resizingMode(.aspectFill)
-            } else if state.isLoading {
-              Rectangle()
-                .fill(Color.gray)
-                .frame(height: 200)
+        if let imageURL = card.image, !isInCaptureMode {
+          GeometryReader { proxy in
+            let processors: [ImageProcessing] = [.resize(size: .init(width: proxy.frame(in: .local).width,
+                                                                     height: 200))]
+            LazyImage(url: imageURL) { state in
+              if let image = state.image {
+                image
+                  .resizable()
+                  .aspectRatio(contentMode: .fill)
+                  .frame(height: 200)
+                  .frame(maxWidth: proxy.frame(in: .local).width)
+                  .clipped()
+              } else if state.isLoading {
+                Rectangle()
+                  .fill(Color.gray)
+                  .frame(height: 200)
+              }
             }
+            .processors(processors)
           }
           .frame(height: 200)
         }
@@ -55,7 +67,6 @@ public struct StatusCardView: View {
         RoundedRectangle(cornerRadius: 16)
           .stroke(.gray.opacity(0.35), lineWidth: 1)
       )
-      .frame(maxWidth: .maxColumnWidth)
       .onTapGesture {
         openURL(url)
       }

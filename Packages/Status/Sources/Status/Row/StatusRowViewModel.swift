@@ -9,11 +9,10 @@ import DesignSystem
 @MainActor
 public class StatusRowViewModel: ObservableObject {
   let status: Status
-  let isCompact: Bool
   let isFocused: Bool
   let isRemote: Bool
   let showActions: Bool
-  
+
   @Published var favoritesCount: Int
   @Published var isFavorited: Bool
   @Published var isReblogged: Bool
@@ -32,7 +31,7 @@ public class StatusRowViewModel: ObservableObject {
 
   @Published var favoriters: [Account] = []
   @Published var rebloggers: [Account] = []
-  
+
   @Published var isLoadingRemoteContent: Bool = false
   @Published var localStatusId: String?
   @Published var localStatus: Status?
@@ -43,6 +42,11 @@ public class StatusRowViewModel: ObservableObject {
 
   var filter: Filtered? {
     status.reblog?.filtered?.first ?? status.filtered?.first
+  }
+
+  var isThread: Bool {
+    status.reblog?.inReplyToId != nil || status.reblog?.inReplyToAccountId != nil ||
+      status.inReplyToId != nil || status.inReplyToAccountId != nil
   }
 
   var highlightRowColor: Color {
@@ -61,7 +65,6 @@ public class StatusRowViewModel: ObservableObject {
   public init(status: Status,
               client: Client,
               routerPath: RouterPath,
-              isCompact: Bool = false,
               isFocused: Bool = false,
               isRemote: Bool = false,
               showActions: Bool = true)
@@ -69,7 +72,6 @@ public class StatusRowViewModel: ObservableObject {
     self.status = status
     self.client = client
     self.routerPath = routerPath
-    self.isCompact = isCompact
     self.isFocused = isFocused
     self.isRemote = isRemote
     self.showActions = showActions
@@ -306,7 +308,7 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   func getStatusLang() -> String? {
-    status.language
+    status.reblog?.language ?? status.language
   }
 
   func translate(userLang: String) async {
@@ -337,7 +339,7 @@ public class StatusRowViewModel: ObservableObject {
       }
     }
   }
-  
+
   func fetchRemoteStatus() async -> Bool {
     guard isRemote, let remoteStatusURL = URL(string: status.reblog?.url ?? status.url ?? "") else { return false }
     isLoadingRemoteContent = true
@@ -347,8 +349,8 @@ public class StatusRowViewModel: ObservableObject {
                                                                                 following: nil),
                                                         forceVersion: .v2)
     if let status = results?.statuses.first {
-      self.localStatusId = status.id
-      self.localStatus = status
+      localStatusId = status.id
+      localStatus = status
       isLoadingRemoteContent = false
       return true
     } else {

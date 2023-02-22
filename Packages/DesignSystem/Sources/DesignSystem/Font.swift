@@ -15,23 +15,26 @@ public extension Font {
   private static let onMac = ProcessInfo.processInfo.isiOSAppOnMac
 
   private static func customFont(size: CGFloat, relativeTo textStyle: TextStyle) -> Font {
-    if let chosenFont = UserPreferences.shared.chosenFont {
-      return .custom(chosenFont.fontName, size: size, relativeTo: textStyle)
+    if let chosenFont = Theme.shared.chosenFont {
+      if chosenFont.fontName == ".AppleSystemUIFontRounded-Regular" {
+        return .system(size: size, design: .rounded)
+      } else {
+        return .custom(chosenFont.fontName, size: size, relativeTo: textStyle)
+      }
     }
 
-    return .system(size: size, design: UserPreferences.shared.useSFRoundedFont ? .rounded : .default)
+    return .system(size: size, design: .default)
   }
 
   private static func customUIFont(size: CGFloat) -> UIFont {
-    if let chosenFont = UserPreferences.shared.chosenFont {
+    if let chosenFont = Theme.shared.chosenFont {
       return chosenFont.withSize(size)
     }
-
     return .systemFont(ofSize: size)
   }
 
   private static func userScaledFontSize(baseSize: CGFloat) -> CGFloat {
-    UIFontMetrics.default.scaledValue(for: baseSize * UserPreferences.shared.fontSizeScale)
+    UIFontMetrics.default.scaledValue(for: baseSize * Theme.shared.fontSizeScale)
   }
 
   static var scaledTitle: Font {
@@ -64,5 +67,14 @@ public extension Font {
 
   static var scaledCaption: Font {
     customFont(size: userScaledFontSize(baseSize: caption), relativeTo: .caption)
+  }
+}
+
+public extension UIFont {
+  func rounded() -> UIFont {
+    guard let descriptor = fontDescriptor.withDesign(.rounded) else {
+      return self
+    }
+    return UIFont(descriptor: descriptor, size: pointSize)
   }
 }

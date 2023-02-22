@@ -7,6 +7,7 @@ public enum PollDuration: Int, CaseIterable {
   case halfAnHour = 1800
   case oneHour = 3600
   case sixHours = 21600
+  case twelveHours = 43200
   case oneDay = 86400
   case threeDays = 259_200
   case sevenDays = 604_800
@@ -17,6 +18,7 @@ public enum PollDuration: Int, CaseIterable {
     case .halfAnHour: return "env.poll-duration.30m"
     case .oneHour: return "env.poll-duration.1h"
     case .sixHours: return "env.poll-duration.6h"
+    case .twelveHours: return "env.poll-duration.12h"
     case .oneDay: return "env.poll-duration.1d"
     case .threeDays: return "env.poll-duration.3d"
     case .sevenDays: return "env.poll-duration.7d"

@@ -5,9 +5,11 @@ import Nuke
 import NukeUI
 import SwiftUI
 
-public struct StatusMediaPreviewView: View {
+public struct StatusRowMediaPreviewView: View {
   @Environment(\.openURL) private var openURL
-  @Environment(\.isSecondaryColumn) private var isSecondaryColumn
+  @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
+  @Environment(\.extraLeadingInset) private var extraLeadingInset: CGFloat
+  @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
 
   @EnvironmentObject var sceneDelegate: SceneDelegate
   @EnvironmentObject private var preferences: UserPreferences
@@ -19,14 +21,14 @@ public struct StatusMediaPreviewView: View {
   public let isNotifications: Bool
 
   @State private var isQuickLookLoading: Bool = false
-  @State private var width: CGFloat = 0
   @State private var altTextDisplayed: String?
   @State private var isAltAlertDisplayed: Bool = false
   @State private var isHidingMedia: Bool = false
 
   var availableWidth: CGFloat {
-    if sceneDelegate.windowWidth > .maxColumnWidth {
-      return .maxColumnWidth
+    if UIDevice.current.userInterfaceIdiom == .phone &&
+        (UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight) || theme.statusDisplayStyle == .medium {
+      return sceneDelegate.windowWidth * 0.80
     }
     return sceneDelegate.windowWidth
   }
@@ -34,10 +36,15 @@ public struct StatusMediaPreviewView: View {
   var appLayoutWidth: CGFloat {
     let avatarColumnWidth = theme.avatarPosition == .leading ? AvatarView.Size.status.size.width + .statusColumnsSpacing : 0
     var sidebarWidth: CGFloat = 0
-    if UIDevice.current.userInterfaceIdiom == .pad && sceneDelegate.windowWidth < (.maxColumnWidth + .sidebarWidth) {
+    var secondaryColumnWidth: CGFloat = 0
+    let layoutPading: CGFloat = .layoutPadding * 2
+    if UIDevice.current.userInterfaceIdiom == .pad  {
       sidebarWidth = .sidebarWidth
+      if preferences.showiPadSecondaryColumn {
+        secondaryColumnWidth = .secondaryColumnWidth
+      }
     }
-    return (.layoutPadding * 2) + avatarColumnWidth + sidebarWidth
+    return layoutPading + avatarColumnWidth + sidebarWidth + extraLeadingInset + secondaryColumnWidth
   }
 
   private var imageMaxHeight: CGFloat {
@@ -48,6 +55,9 @@ public struct StatusMediaPreviewView: View {
       return 50
     }
     if theme.statusDisplayStyle == .compact {
+      if attachments.count == 1 {
+        return 200
+      }
       return 100
     }
     if attachments.count == 1 {
@@ -147,22 +157,25 @@ public struct StatusMediaPreviewView: View {
   private func makeFeaturedImagePreview(attachment: MediaAttachment) -> some View {
     ZStack(alignment: .bottomTrailing) {
       let size: CGSize = size(for: attachment) ?? .init(width: imageMaxHeight, height: imageMaxHeight)
-      let newSize = imageSize(from: size,
-                              newWidth: availableWidth - appLayoutWidth)
+      let newSize = imageSize(from: size, newWidth: availableWidth - appLayoutWidth)
       switch attachment.supportedType {
       case .image:
         LazyImage(url: attachment.url) { state in
           if let image = state.image {
             image
-              .resizingMode(.aspectFill)
-              .cornerRadius(4)
+              .resizable()
+              .aspectRatio(contentMode: .fill)
               .frame(width: newSize.width, height: newSize.height)
+              .clipped()
+              .cornerRadius(4)
           } else {
             RoundedRectangle(cornerRadius: 4)
               .fill(Color.gray)
               .frame(width: newSize.width, height: newSize.height)
           }
         }
+        .processors([.resize(size: newSize)])
+        .frame(width: newSize.width, height: newSize.height)
 
       case .gifv, .video, .audio:
         if let url = attachment.url {
@@ -172,10 +185,10 @@ public struct StatusMediaPreviewView: View {
       case .none:
         EmptyView()
       }
-      if sensitive {
+      if !isInCaptureMode, sensitive {
         cornerSensitiveButton
       }
-      if let alt = attachment.description, !alt.isEmpty, !isNotifications, preferences.showAltTextForMedia {
+      if !isInCaptureMode, let alt = attachment.description, !alt.isEmpty, !isNotifications, preferences.showAltTextForMedia {
         Group {
           Button {
             altTextDisplayed = alt
@@ -196,30 +209,40 @@ public struct StatusMediaPreviewView: View {
 
   @ViewBuilder
   private func makePreview(attachment: MediaAttachment) -> some View {
-    if let type = attachment.supportedType {
+    if let type = attachment.supportedType, !isInCaptureMode {
       Group {
         GeometryReader { proxy in
           switch type {
           case .image:
+            let width = isNotifications ? imageMaxHeight : proxy.frame(in: .local).width
+            let processors: [ImageProcessing] = [.resize(size: .init(width: width, height: imageMaxHeight))]
             ZStack(alignment: .bottomTrailing) {
-              LazyImage(url: attachment.url) { state in
+              LazyImage(url: attachment.previewUrl ?? attachment.url) { state in
                 if let image = state.image {
                   image
-                    .resizingMode(.aspectFill)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(maxWidth: width)
+                    .frame(maxHeight: imageMaxHeight)
+                    .clipped()
                     .cornerRadius(4)
                 } else if state.isLoading {
                   RoundedRectangle(cornerRadius: 4)
                     .fill(Color.gray)
                     .frame(maxHeight: imageMaxHeight)
-                    .frame(maxWidth: isNotifications ? imageMaxHeight : proxy.frame(in: .local).width)
+                    .frame(maxWidth: width)
                 }
               }
-              .frame(maxWidth: isNotifications ? imageMaxHeight : proxy.frame(in: .local).width)
-              .frame(height: imageMaxHeight)
-              if sensitive {
+              .processors(processors)
+              if sensitive, !isInCaptureMode {
                 cornerSensitiveButton
               }
-              if let alt = attachment.description, !alt.isEmpty, !isNotifications, preferences.showAltTextForMedia {
+              if !isInCaptureMode,
+                 let alt = attachment.description,
+                 !alt.isEmpty,
+                 !isNotifications,
+                 preferences.showAltTextForMedia
+              {
                 Button {
                   altTextDisplayed = alt
                   isAltAlertDisplayed = true
@@ -244,6 +267,8 @@ public struct StatusMediaPreviewView: View {
         .frame(maxWidth: isNotifications ? imageMaxHeight : nil)
         .frame(height: imageMaxHeight)
       }
+      // #965: do not create overlapping tappable areas, when multiple images are shown
+      .contentShape(Rectangle())
       .onTapGesture {
         Task {
           await quickLook.prepareFor(urls: attachments.compactMap { $0.url }, selectedURL: attachment.url!)

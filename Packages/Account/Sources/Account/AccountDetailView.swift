@@ -19,13 +19,13 @@ public struct AccountDetailView: View {
   @EnvironmentObject private var routerPath: RouterPath
 
   @StateObject private var viewModel: AccountDetailViewModel
-  @State private var isFieldsSheetDisplayed: Bool = false
   @State private var isCurrentUser: Bool = false
   @State private var isCreateListAlertPresented: Bool = false
   @State private var createListTitle: String = ""
 
   @State private var isEditingAccount: Bool = false
   @State private var isEditingFilters: Bool = false
+  @State private var isEditingRelationshipNote: Bool = false
 
   /// When coming from a URL like a mention tap in a status.
   public init(accountId: String) {
@@ -40,14 +40,13 @@ public struct AccountDetailView: View {
   public var body: some View {
     ScrollViewReader { proxy in
       List {
-        Group {
-          makeHeaderView(proxy: proxy)
-          familiarFollowers
-          featuredTagsView
-        }
-        .listRowInsets(.init())
-        .listRowSeparator(.hidden)
-        .listRowBackground(theme.primaryBackgroundColor)
+        makeHeaderView(proxy: proxy)
+          .applyAccountDetailsRowStyle(theme: theme)
+          .padding(.bottom, -20)
+        familiarFollowers
+          .applyAccountDetailsRowStyle(theme: theme)
+        featuredTagsView
+          .applyAccountDetailsRowStyle(theme: theme)
 
         Picker("", selection: $viewModel.selectedTab) {
           ForEach(isCurrentUser ? AccountDetailViewModel.Tab.currentAccountTabs : AccountDetailViewModel.Tab.accountTabs,
@@ -58,9 +57,7 @@ public struct AccountDetailView: View {
         }
         .pickerStyle(.segmented)
         .padding(.layoutPadding)
-        .listRowSeparator(.hidden)
-        .listRowBackground(theme.primaryBackgroundColor)
-        .listRowInsets(.init())
+        .applyAccountDetailsRowStyle(theme: theme)
         .id("status")
 
         switch viewModel.tabState {
@@ -126,6 +123,9 @@ public struct AccountDetailView: View {
     .sheet(isPresented: $isEditingFilters, content: {
       FiltersListView()
     })
+    .sheet(isPresented: $isEditingRelationshipNote, content: {
+      EditRelationshipNoteView(accountDetailViewModel: viewModel)
+    })
     .edgesIgnoringSafeArea(.top)
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
@@ -152,25 +152,9 @@ public struct AccountDetailView: View {
 
   @ViewBuilder
   private var featuredTagsView: some View {
-    if !viewModel.featuredTags.isEmpty || !viewModel.fields.isEmpty {
+    if !viewModel.featuredTags.isEmpty {
       ScrollView(.horizontal, showsIndicators: false) {
         HStack(spacing: 4) {
-          if !viewModel.fields.isEmpty {
-            Button {
-              isFieldsSheetDisplayed.toggle()
-            } label: {
-              VStack(alignment: .leading, spacing: 0) {
-                Text("account.detail.about")
-                  .font(.scaledCallout)
-                Text("account.detail.n-fields \(viewModel.fields.count)")
-                  .font(.caption2)
-              }
-            }
-            .buttonStyle(.bordered)
-            .sheet(isPresented: $isFieldsSheetDisplayed) {
-              fieldSheetView
-            }
-          }
           if !viewModel.featuredTags.isEmpty {
             ForEach(viewModel.featuredTags) { tag in
               Button {
@@ -216,51 +200,6 @@ public struct AccountDetailView: View {
     }
   }
 
-  private var fieldSheetView: some View {
-    NavigationStack {
-      List {
-        ForEach(viewModel.fields) { field in
-          VStack(alignment: .leading, spacing: 2) {
-            Text(field.name)
-              .font(.scaledHeadline)
-            HStack {
-              if field.verifiedAt != nil {
-                Image(systemName: "checkmark.seal")
-                  .foregroundColor(Color.green.opacity(0.80))
-              }
-              EmojiTextApp(field.value, emojis: viewModel.account?.emojis ?? [])
-                .foregroundColor(theme.tintColor)
-                .environment(\.openURL, OpenURLAction { url in
-                  UIApplication.shared.open(url)
-                  return .handled
-                })
-            }
-            .font(.scaledBody)
-          }
-          .listRowBackground(field.verifiedAt != nil ? Color.green.opacity(0.15) : theme.primaryBackgroundColor)
-        }
-      }
-      .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
-      .navigationTitle("account.detail.about")
-      .toolbar {
-        ToolbarItem(placement: .primaryAction) {
-          Button {
-            isFieldsSheetDisplayed = false
-          } label: {
-            Image(systemName: "xmark")
-              .imageScale(.small)
-              .font(.body.weight(.semibold))
-              .frame(width: 30, height: 30)
-              .background(theme.primaryBackgroundColor.opacity(0.5))
-              .clipShape(Circle())
-          }
-          .foregroundColor(theme.tintColor)
-        }
-      }
-    }
-  }
-
   private var tagsListView: some View {
     Group {
       ForEach(currentAccount.sortedTags) { tag in
@@ -279,7 +218,7 @@ public struct AccountDetailView: View {
   private var listsListView: some View {
     Group {
       ForEach(currentAccount.sortedLists) { list in
-        NavigationLink(value: RouterDestinations.list(list: list)) {
+        NavigationLink(value: RouterDestination.list(list: list)) {
           Text(list.title)
             .font(.scaledHeadline)
             .foregroundColor(theme.labelColor)
@@ -407,7 +346,7 @@ public struct AccountDetailView: View {
                 }
               } else {
                 Menu {
-                  ForEach(MutingDurations.allCases, id: \.rawValue) { duration in
+                  ForEach(MutingDuration.allCases, id: \.rawValue) { duration in
                     Button(duration.description) {
                       Task {
                         do {
@@ -487,6 +426,12 @@ public struct AccountDetailView: View {
               }
 
               Divider()
+
+              Button {
+                isEditingRelationshipNote = true
+              } label: {
+                Label("account.relation.note.edit", systemImage: "pencil")
+              }
             }
 
             if viewModel.relationship?.following == true {
@@ -535,6 +480,14 @@ public struct AccountDetailView: View {
         Image(systemName: "ellipsis.circle")
       }
     }
+  }
+}
+
+private extension View {
+  func applyAccountDetailsRowStyle(theme: Theme) -> some View {
+    listRowInsets(.init())
+      .listRowSeparator(.hidden)
+      .listRowBackground(theme.primaryBackgroundColor)
   }
 }
 

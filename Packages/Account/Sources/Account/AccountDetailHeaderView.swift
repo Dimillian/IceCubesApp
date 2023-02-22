@@ -23,11 +23,22 @@ struct AccountDetailHeaderView: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      Rectangle()
-        .frame(height: Constants.headerHeight)
-        .overlay {
-          headerImageView
+      ZStack(alignment: .bottomTrailing) {
+        Rectangle()
+          .frame(height: Constants.headerHeight)
+          .overlay {
+            headerImageView
+          }
+        if viewModel.relationship?.followedBy == true {
+          Text("account.relation.follows-you")
+            .font(.scaledFootnote)
+            .fontWeight(.semibold)
+            .padding(4)
+            .background(.ultraThinMaterial)
+            .cornerRadius(4)
+            .padding(8)
         }
+      }
       accountInfoView
     }
   }
@@ -42,8 +53,11 @@ struct AccountDetailHeaderView: View {
         LazyImage(url: account.header) { state in
           if let image = state.image {
             image
-              .resizingMode(.aspectFill)
+              .resizable()
+              .aspectRatio(contentMode: .fill)
               .overlay(account.haveHeader ? .black.opacity(0.50) : .clear)
+              .frame(height: Constants.headerHeight)
+              .clipped()
           } else if state.isLoading {
             theme.secondaryBackgroundColor
               .frame(height: Constants.headerHeight)
@@ -54,16 +68,6 @@ struct AccountDetailHeaderView: View {
           }
         }
         .frame(height: Constants.headerHeight)
-      }
-
-      if viewModel.relationship?.followedBy == true {
-        Text("account.relation.follows-you")
-          .font(.scaledFootnote)
-          .fontWeight(.semibold)
-          .padding(4)
-          .background(.ultraThinMaterial)
-          .cornerRadius(4)
-          .padding(8)
       }
     }
     .background(theme.secondaryBackgroundColor)
@@ -147,12 +151,21 @@ struct AccountDetailHeaderView: View {
           }
         }
       }
+
+      if let note = viewModel.relationship?.note, !note.isEmpty,
+         !viewModel.isCurrentUser
+      {
+        makeNoteView(note)
+      }
+
       EmojiTextApp(account.note, emojis: account.emojis)
         .font(.scaledBody)
         .padding(.top, 8)
         .environment(\.openURL, OpenURLAction { url in
           routerPath.handle(url: url)
         })
+
+      fieldsView
     }
     .padding(.horizontal, .layoutPadding)
     .offset(y: -40)
@@ -181,6 +194,9 @@ struct AccountDetailHeaderView: View {
   private var joinedAtView: some View {
     if let joinedAt = viewModel.account?.createdAt.asDate {
       HStack(spacing: 4) {
+        if account.bot {
+          Text("🤖")
+        }
         Image(systemName: "calendar")
         Text("account.joined")
         Text(joinedAt, style: .date)
@@ -188,6 +204,63 @@ struct AccountDetailHeaderView: View {
       .foregroundColor(.gray)
       .font(.footnote)
       .padding(.top, 6)
+    }
+  }
+
+  @ViewBuilder
+  private func makeNoteView(_ note: String) -> some View {
+    VStack(alignment: .leading, spacing: 4) {
+      Text("account.relation.note.label")
+        .foregroundColor(.gray)
+      Text(note)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(8)
+        .background(theme.secondaryBackgroundColor)
+        .cornerRadius(4)
+        .overlay(
+          RoundedRectangle(cornerRadius: 4)
+            .stroke(.gray.opacity(0.35), lineWidth: 1)
+        )
+    }
+  }
+
+  @ViewBuilder
+  private var fieldsView: some View {
+    if !viewModel.fields.isEmpty {
+      VStack(alignment: .leading) {
+        ForEach(viewModel.fields) { field in
+          HStack {
+            VStack(alignment: .leading, spacing: 2) {
+              Text(field.name)
+                .font(.scaledHeadline)
+              HStack {
+                if field.verifiedAt != nil {
+                  Image(systemName: "checkmark.seal")
+                    .foregroundColor(Color.green.opacity(0.80))
+                }
+                EmojiTextApp(field.value, emojis: viewModel.account?.emojis ?? [])
+                  .foregroundColor(theme.tintColor)
+                  .environment(\.openURL, OpenURLAction { url in
+                    routerPath.handle(url: url)
+                  })
+              }
+              .font(.scaledBody)
+              if viewModel.fields.last != field {
+                Divider()
+                  .padding(.vertical, 4)
+              }
+            }
+            Spacer()
+          }
+        }
+      }
+      .padding(8)
+      .background(theme.secondaryBackgroundColor)
+      .cornerRadius(4)
+      .overlay(
+        RoundedRectangle(cornerRadius: 4)
+          .stroke(.gray.opacity(0.35), lineWidth: 1)
+      )
     }
   }
 }

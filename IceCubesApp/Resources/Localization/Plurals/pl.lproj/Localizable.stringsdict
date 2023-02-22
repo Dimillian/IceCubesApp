@@ -92,6 +92,35 @@
 			<string>%lld głosów</string>
 		</dict>
 	</dict>
+	<key>status.poll.n-votes-voters %lld %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@tagVotesCount@ %#@tagVotersCount@</string>
+		<key>tagVotesCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%lld głos</string>
+			<key>few</key>
+			<string>%lld głosy</string>
+			<key>other</key>
+			<string>%lld głosów</string>
+		</dict>
+		<key>tagVotersCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>od %lld głosującego</string>
+			<key>other</key>
+			<string>od %lld głosujących</string>
+		</dict>
+	</dict>	
 	<key>account.detail.featured-tags-n-posts %lld</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

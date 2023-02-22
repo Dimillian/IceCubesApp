@@ -3,6 +3,7 @@ import Env
 import SwiftUI
 
 public struct AppAccountsSelectorView: View {
+  @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var appAccounts: AppAccountsManager
 
@@ -64,7 +65,7 @@ public struct AppAccountsSelectorView: View {
           .frame(width: 9, height: 9)
       }
     }
-      .accessibilityLabel("accessibility.app-account.selector.accounts")
+    .accessibilityLabel("accessibility.app-account.selector.accounts")
   }
 
   @ViewBuilder
@@ -90,7 +91,13 @@ public struct AppAccountsSelectorView: View {
             if let image = viewModel.roundedAvatar {
               Image(uiImage: image)
             }
-            Text("\(viewModel.account?.displayName ?? "")")
+            if let token = viewModel.appAccount.oauthToken,
+               preferences.getNotificationsCount(for: token) > 0
+            {
+              Text("\(viewModel.account?.displayName ?? "") (\(preferences.getNotificationsCount(for: token)))")
+            } else {
+              Text("\(viewModel.account?.displayName ?? "")")
+            }
           }
         }
       }
@@ -105,7 +112,7 @@ public struct AppAccountsSelectorView: View {
       }
     }
 
-    if UIDevice.current.userInterfaceIdiom == .phone {
+    if UIDevice.current.userInterfaceIdiom == .phone && accountCreationEnabled {
       Divider()
       Button {
         HapticManager.shared.fireHaptic(of: .buttonPress)

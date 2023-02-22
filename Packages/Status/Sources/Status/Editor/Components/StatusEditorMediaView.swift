@@ -100,7 +100,8 @@ struct StatusEditorMediaView: View {
         LazyImage(url: url) { state in
           if let image = state.image {
             image
-              .resizingMode(.aspectFill)
+              .resizable()
+              .aspectRatio(contentMode: .fill)
               .frame(width: 150, height: 150)
           } else {
             placeholderView

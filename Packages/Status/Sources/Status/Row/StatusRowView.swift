@@ -8,8 +8,10 @@ import SwiftUI
 
 public struct StatusRowView: View {
   @Environment(\.redactionReasons) private var reasons
-  @EnvironmentObject private var preferences: UserPreferences
+  @Environment(\.isCompact) private var isCompact: Bool
+
   @EnvironmentObject private var theme: Theme
+
   @StateObject var viewModel: StatusRowViewModel
 
   public init(viewModel: StatusRowViewModel) {
@@ -31,15 +33,15 @@ public struct StatusRowView: View {
           .listRowSeparator(.hidden)
       }
     } else {
+      let status: AnyStatus = viewModel.status.reblog ?? viewModel.status
       VStack(alignment: .leading) {
-        if !viewModel.isCompact, theme.avatarPosition == .leading {
-          reblogView
-          replyView
+        if !isCompact, theme.avatarPosition == .leading {
+          StatusRowReblogView(viewModel: viewModel)
+          StatusRowReplyView(viewModel: viewModel)
         }
         HStack(alignment: .top, spacing: .statusColumnsSpacing) {
-          if !viewModel.isCompact,
-             theme.avatarPosition == .leading,
-             let status: AnyStatus = viewModel.status.reblog ?? viewModel.status
+          if !isCompact,
+             theme.avatarPosition == .leading
           {
             Button {
               viewModel.routerPath.navigate(to: .accountDetailWithAccount(account: status.account))
@@ -48,13 +50,27 @@ public struct StatusRowView: View {
             }
           }
           VStack(alignment: .leading) {
-            if !viewModel.isCompact, theme.avatarPosition == .top {
-              reblogView
-              replyView
+            if !isCompact, theme.avatarPosition == .top {
+              StatusRowReblogView(viewModel: viewModel)
+              StatusRowReplyView(viewModel: viewModel)
             }
-            statusView
+            VStack(alignment: .leading, spacing: 8) {
+              let status: AnyStatus = viewModel.status.reblog ?? viewModel.status
+              if !isCompact {
+                StatusRowHeaderView(status: status, viewModel: viewModel)
+              }
+              StatusRowContentView(status: status, viewModel: viewModel)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                  viewModel.navigateToDetail()
+                }
+            }
+            .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
+            .accessibilityAction {
+              viewModel.navigateToDetail()
+            }
             if viewModel.showActions, theme.statusActionsDisplay != .none {
-              StatusActionsView(viewModel: viewModel)
+              StatusRowActionsView(viewModel: viewModel)
                 .padding(.top, 8)
                 .tint(viewModel.isFocused ? theme.tintColor : .gray)
                 .contentShape(Rectangle())
@@ -68,7 +84,7 @@ public struct StatusRowView: View {
       .onAppear {
         viewModel.markSeen()
         if reasons.isEmpty {
-          if !viewModel.isCompact, viewModel.embeddedStatus == nil {
+          if !isCompact, viewModel.embeddedStatus == nil {
             Task {
               await viewModel.loadEmbeddedStatus()
             }
@@ -78,15 +94,14 @@ public struct StatusRowView: View {
       .contextMenu {
         contextMenu
       }
-      
       .swipeActions(edge: .trailing) {
-        if !viewModel.isCompact {
-          trailingSwipeActions
+        if !isCompact {
+          StatusRowSwipeView(viewModel: viewModel, mode: .trailing)
         }
       }
       .swipeActions(edge: .leading) {
-        if !viewModel.isCompact {
-          leadingSwipeActions
+        if !isCompact {
+          StatusRowSwipeView(viewModel: viewModel, mode: .leading)
         }
       }
       .listRowBackground(viewModel.highlightRowColor)
@@ -167,285 +182,6 @@ public struct StatusRowView: View {
     }
   }
 
-  @ViewBuilder
-  private var reblogView: some View {
-    if viewModel.status.reblog != nil {
-      HStack(spacing: 2) {
-        Image(systemName: "arrow.left.arrow.right.circle.fill")
-        AvatarView(url: viewModel.status.account.avatar, size: .boost)
-        EmojiTextApp(.init(stringValue: viewModel.status.account.safeDisplayName), emojis: viewModel.status.account.emojis)
-        Text("status.row.was-boosted")
-      }
-      .accessibilityElement()
-      .accessibilityLabel(
-        Text("\(viewModel.status.account.safeDisplayName)")
-          + Text(" ")
-          + Text("status.row.was-boosted")
-      )
-      .font(.scaledFootnote)
-      .foregroundColor(.gray)
-      .fontWeight(.semibold)
-      .onTapGesture {
-        viewModel.navigateToAccountDetail(account: viewModel.status.account)
-      }
-    }
-  }
-
-  @ViewBuilder
-  var replyView: some View {
-    if let accountId = viewModel.status.inReplyToAccountId,
-       let mention = viewModel.status.mentions.first(where: { $0.id == accountId })
-    {
-      HStack(spacing: 2) {
-        Image(systemName: "arrowshape.turn.up.left.fill")
-        Text("status.row.was-reply")
-        Text(mention.username)
-      }
-      .font(.scaledFootnote)
-      .foregroundColor(.gray)
-      .fontWeight(.semibold)
-      .onTapGesture {
-        viewModel.navigateToMention(mention: mention)
-      }
-    }
-  }
-
-  private var statusView: some View {
-    VStack(alignment: .leading, spacing: 8) {
-      if let status: AnyStatus = viewModel.status.reblog ?? viewModel.status {
-        if !viewModel.isCompact {
-          HStack(alignment: .center) {
-            Button {
-              viewModel.navigateToAccountDetail(account: status.account)
-            } label: {
-              accountView(status: status)
-            }
-            .buttonStyle(.plain)
-            Spacer()
-            threadIcon
-            contextMenuButton
-          }
-          .accessibilityElement()
-          .accessibilityLabel(Text("\(status.account.displayName)"))
-        }
-        makeStatusContentView(status: status)
-          .contentShape(Rectangle())
-          .onTapGesture {
-            viewModel.navigateToDetail()
-          }
-      }
-    }
-    .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
-    .accessibilityAction {
-      viewModel.navigateToDetail()
-    }
-  }
-
-  private func makeStatusContentView(status: AnyStatus) -> some View {
-    Group {
-      if !status.spoilerText.asRawText.isEmpty {
-        HStack(alignment: .top) {
-          Text("⚠︎")
-            .font(.system(.subheadline, weight: .bold))
-            .foregroundColor(.secondary)
-          EmojiTextApp(status.spoilerText, emojis: status.emojis, language: status.language)
-            .font(.system(.subheadline, weight: .bold))
-            .foregroundColor(.secondary)
-            .multilineTextAlignment(.leading)
-          Spacer()
-          Button {
-            withAnimation {
-              viewModel.displaySpoiler.toggle()
-            }
-          } label: {
-            Image(systemName: "chevron.down")
-              .rotationEffect(Angle(degrees: viewModel.displaySpoiler ? 0 : 180))
-          }
-          .buttonStyle(.bordered)
-          .accessibility(label: viewModel.displaySpoiler ? Text("status.show-more") : Text("status.show-less"))
-          .accessibilityHidden(true)
-        }
-        .onTapGesture { // make whole row tapable to make up for smaller button size
-          withAnimation {
-            viewModel.displaySpoiler.toggle()
-          }
-        }
-      }
-
-      if !viewModel.displaySpoiler {
-        HStack {
-          EmojiTextApp(status.content, emojis: status.emojis, language: status.language)
-            .font(.scaledBody)
-            .environment(\.openURL, OpenURLAction { url in
-              viewModel.routerPath.handleStatus(status: status, url: url)
-            })
-          Spacer()
-        }
-
-        makeTranslateView(status: status)
-
-        if let poll = status.poll {
-          StatusPollView(poll: poll, status: status)
-        }
-
-        embedStatusView
-
-        makeMediasView(status: status)
-          .accessibilityHidden(!viewModel.isFocused)
-        makeCardView(status: status)
-      }
-    }
-  }
-
-  @ViewBuilder
-  private func accountView(status: AnyStatus) -> some View {
-    HStack(alignment: .center) {
-      if theme.avatarPosition == .top {
-        AvatarView(url: status.account.avatar, size: .status)
-      }
-      VStack(alignment: .leading, spacing: 0) {
-        EmojiTextApp(.init(stringValue: status.account.safeDisplayName), emojis: status.account.emojis)
-          .font(.scaledSubheadline)
-          .fontWeight(.semibold)
-        Group {
-          Text("@\(status.account.acct)") +
-            Text(" ⸱ ") +
-            Text(status.createdAt.relativeFormatted) +
-            Text(" ⸱ ") +
-            Text(Image(systemName: viewModel.status.visibility.iconName))
-        }
-        .font(.scaledFootnote)
-        .foregroundColor(.gray)
-      }
-    }
-  }
-
-  @ViewBuilder
-  private var threadIcon: some View {
-    if viewModel.status.reblog?.inReplyToAccountId != nil || viewModel.status.inReplyToAccountId != nil {
-      Image(systemName: "bubble.left.and.bubble.right")
-        .resizable()
-        .aspectRatio(contentMode: .fit)
-        .frame(width: 15)
-        .foregroundColor(.gray)
-    }
-  }
-
-  private var contextMenuButton: some View {
-    Menu {
-      contextMenu
-    } label: {
-      Image(systemName: "ellipsis")
-        .frame(width: 20, height: 30)
-    }
-    .menuStyle(.borderlessButton)
-    .foregroundColor(.gray)
-    .contentShape(Rectangle())
-    .accessibilityHidden(true)
-  }
-
-  private func shouldShowTranslateButton(status: AnyStatus) -> Bool {
-    let statusLang = viewModel.getStatusLang()
-
-    if let userLang = preferences.serverPreferences?.postLanguage,
-       preferences.showTranslateButton,
-       !status.content.asRawText.isEmpty,
-       viewModel.translation == nil
-    {
-      return userLang != statusLang
-    } else {
-      return false
-    }
-  }
-
-  @ViewBuilder
-  private func makeTranslateView(status: AnyStatus) -> some View {
-    if let userLang = preferences.serverPreferences?.postLanguage,
-       shouldShowTranslateButton(status: status)
-    {
-      Button {
-        Task {
-          await viewModel.translate(userLang: userLang)
-        }
-      } label: {
-        if viewModel.isLoadingTranslation {
-          ProgressView()
-        } else {
-          if let statusLanguage = viewModel.getStatusLang(),
-             let languageName = Locale.current.localizedString(forLanguageCode: statusLanguage)
-          {
-            Text("status.action.translate-from-\(languageName)")
-          } else {
-            Text("status.action.translate")
-          }
-        }
-      }
-      .buttonStyle(.borderless)
-    }
-
-    if let translation = viewModel.translation, !viewModel.isLoadingTranslation {
-      GroupBox {
-        VStack(alignment: .leading, spacing: 4) {
-          Text(translation.content.asSafeMarkdownAttributedString)
-            .font(.scaledBody)
-          Text("status.action.translated-label-\(translation.provider)")
-            .font(.footnote)
-            .foregroundColor(.gray)
-        }
-      }
-      .fixedSize(horizontal: false, vertical: true)
-    }
-  }
-
-  @ViewBuilder
-  private func makeMediasView(status: AnyStatus) -> some View {
-    if !status.mediaAttachments.isEmpty {
-      if theme.statusDisplayStyle == .compact {
-        HStack {
-          StatusMediaPreviewView(attachments: status.mediaAttachments,
-                                 sensitive: status.sensitive,
-                                 isNotifications: viewModel.isCompact)
-          Spacer()
-        }
-        .padding(.vertical, 4)
-      } else {
-        StatusMediaPreviewView(attachments: status.mediaAttachments,
-                               sensitive: status.sensitive,
-                               isNotifications: viewModel.isCompact)
-          .padding(.vertical, 4)
-      }
-    }
-  }
-
-  @ViewBuilder
-  private func makeCardView(status: AnyStatus) -> some View {
-    if let card = status.card,
-       !viewModel.isEmbedLoading,
-       !viewModel.isCompact,
-       theme.statusDisplayStyle == .large,
-       status.content.statusesURLs.isEmpty,
-       status.mediaAttachments.isEmpty
-    {
-      StatusCardView(card: card)
-    }
-  }
-
-  @ViewBuilder
-  private var embedStatusView: some View {
-    if !reasons.contains(.placeholder) {
-      if !viewModel.isCompact, !viewModel.isEmbedLoading,
-         let embed = viewModel.embeddedStatus
-      {
-        StatusEmbeddedView(status: embed, client: viewModel.client, routerPath: viewModel.routerPath)
-          .fixedSize(horizontal: false, vertical: true)
-      } else if viewModel.isEmbedLoading, !viewModel.isCompact {
-        StatusEmbeddedView(status: .placeholder(), client: viewModel.client, routerPath: viewModel.routerPath)
-          .redacted(reason: .placeholder)
-          .shimmering()
-      }
-    }
-  }
-
   private var remoteContentLoadingView: some View {
     ZStack(alignment: .center) {
       VStack {
@@ -460,102 +196,5 @@ public struct StatusRowView: View {
     }
     .background(Color.black.opacity(0.40))
     .transition(.opacity)
-  }
-
-  @ViewBuilder
-  private var trailingSwipeActions: some View {
-    if preferences.swipeActionsStatusTrailingRight != StatusAction.none, !viewModel.isRemote {
-      makeSwipeButton(action: preferences.swipeActionsStatusTrailingRight)
-        .tint(preferences.swipeActionsStatusTrailingRight.color(themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor, outside: true))
-    }
-    if preferences.swipeActionsStatusTrailingLeft != StatusAction.none, !viewModel.isRemote {
-      makeSwipeButton(action: preferences.swipeActionsStatusTrailingLeft)
-        .tint(preferences.swipeActionsStatusTrailingLeft.color(themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor, outside: false))
-    }
-  }
-
-  @ViewBuilder
-  private var leadingSwipeActions: some View {
-    if preferences.swipeActionsStatusLeadingLeft != StatusAction.none, !viewModel.isRemote {
-      makeSwipeButton(action: preferences.swipeActionsStatusLeadingLeft)
-        .tint(preferences.swipeActionsStatusLeadingLeft.color(themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor, outside: true))
-    }
-    if preferences.swipeActionsStatusLeadingRight != StatusAction.none, !viewModel.isRemote {
-      makeSwipeButton(action: preferences.swipeActionsStatusLeadingRight)
-        .tint(preferences.swipeActionsStatusLeadingRight.color(themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor, outside: false))
-    }
-  }
-
-  @ViewBuilder
-  private func makeSwipeButton(action: StatusAction) -> some View {
-    switch action {
-    case .reply:
-      makeSwipeButtonForRouterPath(action: action, destination: .replyToStatusEditor(status: viewModel.status))
-    case .quote:
-      makeSwipeButtonForRouterPath(action: action, destination: .quoteStatusEditor(status: viewModel.status))
-    case .favorite:
-      makeSwipeButtonForTask(action: action) {
-        if viewModel.isFavorited {
-          await viewModel.unFavorite()
-        } else {
-          await viewModel.favorite()
-        }
-      }
-    case .boost:
-      makeSwipeButtonForTask(action: action) {
-        if viewModel.isReblogged {
-          await viewModel.unReblog()
-        } else {
-          await viewModel.reblog()
-        }
-      }
-    case .bookmark:
-      makeSwipeButtonForTask(action: action) {
-        if viewModel.isBookmarked {
-          await viewModel.unbookmark()
-        } else {
-          await
-            viewModel.bookmark()
-        }
-      }
-    case .none:
-      EmptyView()
-    }
-  }
-
-  @ViewBuilder
-  private func makeSwipeButtonForRouterPath(action: StatusAction, destination: SheetDestinations) -> some View {
-    Button {
-      HapticManager.shared.fireHaptic(of: .notification(.success))
-      viewModel.routerPath.presentedSheet = destination
-    } label: {
-      makeSwipeLabel(action: action, style: preferences.swipeActionsIconStyle)
-    }
-  }
-
-  @ViewBuilder
-  private func makeSwipeButtonForTask(action: StatusAction, task: @escaping () async -> Void) -> some View {
-    Button {
-      Task {
-        HapticManager.shared.fireHaptic(of: .notification(.success))
-        await task()
-      }
-    } label: {
-      makeSwipeLabel(action: action, style: preferences.swipeActionsIconStyle)
-    }
-  }
-  
-  @ViewBuilder
-  private func makeSwipeLabel(action: StatusAction, style: UserPreferences.SwipeActionsIconStyle) -> some View {
-    switch (style) {
-    case .iconOnly:
-      Label(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked), systemImage: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
-        .labelStyle(.iconOnly)
-        .environment(\.symbolVariants, .none)
-    case .iconWithText:
-      Label(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked), systemImage: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
-        .labelStyle(.titleAndIcon)
-        .environment(\.symbolVariants, .none)
-    }
   }
 }

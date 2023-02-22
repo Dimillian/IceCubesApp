@@ -16,7 +16,7 @@
 
 // MARK: Add Account
 "account.add.error.instance-not-supported" = "Diese Instanz wird aktuell nicht unterstützt.";
-"account.add.navigation-title" = "Account hinzufügen";
+"account.add.navigation-title" = "Konto hinzufügen";
 "account.add.sign-in" = "Anmelden";
 
 // MARK: Enums
@@ -36,6 +36,7 @@
 "enum.status-actions-display.no-buttons" = "Keine Buttons";
 "enum.status-actions-display.only-buttons" = "Nur Buttons";
 "enum.status-display-style.compact" = "Kompakt";
+"enum.status-display-style.medium" = "Medium";
 "enum.status-display-style.large" = "Groß";
 "enum.swipeactions.icon-with-text" = "Symbol mit Text";
 "enum.swipeactions.icon-only" = "Nur Symbol";
@@ -62,7 +63,7 @@
 "menu.font.smaller" = "Kleiner";
 
 // MARK: Settings
-"settings.account.add" = "Account hinzufügen";
+"settings.account.add" = "Konto hinzufügen";
 "settings.app.icon" = "App-Icon";
 "settings.app.icon.navigation-title" = "Symbole";
 "settings.app.icon.official" = "Offizielle Symbole";
@@ -73,6 +74,7 @@
 "settings.display.example-toot" = "Beispielbeitrag";
 "settings.display.avatar.position" = "Profilbild-Position";
 "settings.display.avatar.shape" = "Profilbild-Form";
+"settings.display.full-username" = "Vollständigen Benutzernamen zeigen";
 "settings.display.navigation-title" = "Anzeigeeinstellungen";
 "settings.display.restore" = "Standard wiederherstellen";
 "settings.display.section.display" = "Anzeigen";
@@ -102,7 +104,7 @@
 "settings.push.navigation-title" = "Push-Mitteilungen";
 "settings.push.new-posts" = "Neue Beiträge";
 "settings.push.polls" = "Umfrageergebnisse";
-"settings.section.accounts" = "Accounts";
+"settings.section.accounts" = "Konten";
 "settings.section.app" = "App";
 "settings.section.app.footer %@" = "App-Version: %@";
 "settings.section.general" = "Allgemein";
@@ -165,25 +167,25 @@
 "settings.display.show-ipad-column" = "Zweite Spalte aktivieren";
 
 "settings.general.swipeactions" = "Wischaktionen";
+"settings.swipeactions.appearance" = "Appearance";
 "settings.swipeactions.navigation-title" = "Wischaktionen";
+"settings.swipeactions.primary" = "Primary Action";
+"settings.swipeactions.secondary" = "Secondary Action";
 "settings.swipeactions.status.action.bookmark" = "Lesezeichen setzen";
 "settings.swipeactions.status.action.boost" = "Boosten";
 "settings.swipeactions.status.action.favorite" = "Favorisieren";
 "settings.swipeactions.status.action.none" = "Keine";
 "settings.swipeactions.status.action.quote" = "Zitieren";
 "settings.swipeactions.status.action.reply" = "Antworten";
+"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
 "settings.swipeactions.status.leading" = "Nach rechts wischen";
-"settings.swipeactions.status.leading.left" = "links";
-"settings.swipeactions.status.leading.right" = "rechts";
 "settings.swipeactions.status.trailing" = "Nach links wischen";
-"settings.swipeactions.status.trailing.left" = "links";
-"settings.swipeactions.status.trailing.right" = "rechts";
 "settings.swipeactions.status" = "Beitrag";
-"settings.swipeactions.status.use-theme-colors" = "Farbschema anstelle der Standardfarben verwenden";
-"settings.swipeactions.status.icon-style" = "Symbolstil";
+"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors-explanation" = "Farbschema anstelle der Standardfarben verwenden";
+"settings.swipeactions.icon-style" = "Symbolstil";
 
-"settings.display.section.font" = "Font";
-"settings.display.font.rounded" = "Use SF Rounded";
+"settings.display.section.font" = "Schriftart";
 
 "enum.expand-media.show" = "Alle zeigen";
 "enum.expand-media.hide" = "Alle ausblenden";
@@ -211,7 +213,7 @@
 "timeline.filter.tags" = "Gefolgte Hashtags";
 
 // MARK: Package: AppAccount
-"app-account.button.add" = "Account hinzufügen";
+"app-account.button.add" = "Konto hinzufügen";
 
 // MARK: Package: Account
 "account.action.add-remove-list" = "Hinzufügen/entfernen von Listen";
@@ -226,7 +228,7 @@
 "account.action.unblock" = "Blockade aufheben";
 "account.action.mute" = "Stummschalten";
 "account.action.unmute" = "Stummschaltung aufheben";
-"account.action.share" = "Diesen Account teilen";
+"account.action.share" = "Dieses Konto teilen";
 "account.boosted-by" = "Geboostet von";
 "account.detail.about" = "Über";
 "account.detail.familiar-followers" = "Auch gefolgt von";
@@ -234,7 +236,7 @@
 "account.edit.account-settings.bot" = "Bot-Account";
 "account.edit.account-settings.discoverable" = "In Suche finden";
 "account.edit.account-settings.private" = "Geschützt";
-"account.edit.account-settings.section-title" = "Accounteinstellungen";
+"account.edit.account-settings.section-title" = "Kontoeinstellungen";
 "account.edit.display-name" = "Anzeigename";
 "account.edit.error.save.message" = "Fehler beim Sichern deines Profils. Bitte versuche es erneut.";
 "account.edit.error.save.title" = "Fehler beim Sichern deines Profils";
@@ -264,10 +266,16 @@
 "account.action.logout" = "Abmelden";
 "account.action.edit-filters" = "Filter bearbeiten";
 
+"account.relation.note.edit" = "Notiz bearbeiten";
+"account.relation.note.edit.placeholder" = "Gib den Notiztext ein";
+"account.relation.note.edit.error.save.message" = "Fehler beim Speichern der Notiz, versuch es bitte erneut.";
+"account.relation.note.edit.error.save.title" = "Fehler beim Speichern der Notiz";
+"account.relation.note.label" = "Notiz:";
+
 // MARK: Package: Conversations
 "conversations.action.delete" = "Löschen";
 "conversations.action.mark-read" = "Als gelesen markieren";
-"conversations.action.view-detail" = "View detail";
+"conversations.action.view-detail" = "Detailansicht";
 "conversations.empty.message" = "Suchst du etwas Liebe auf Social Media? Hier findest du alle deine direkten Nachrichten und privaten Erwähnungen. Fröhliches Messaging! 📱❤️";
 "conversations.empty.title" = "Posteingang leer";
 "conversations.error.button" = "Wiederholen";
@@ -301,6 +309,7 @@
 "env.poll-duration.30m" = "30 Minuten";
 "env.poll-duration.1h" = "1 Stunde";
 "env.poll-duration.6h" = "6 Stunden";
+"env.poll-duration.12h" = "12 Stunden";
 "env.poll-duration.1d" = "1 Tag";
 "env.poll-duration.3d" = "3 Tage";
 "env.poll-duration.7d" = "7 Tage";
@@ -358,6 +367,7 @@
 "status.action.translated-label-%@" = "Übersetzt mit %@";
 "status.action.bookmark" = "Lesezeichen setzen";
 "status.action.boost" = "Boosten";
+"status.action.boost-to-followers" = "An Follower boosten";
 "status.action.copy-text" = "Text kopieren";
 "status.action.delete" = "Löschen";
 "status.action.delete.confirm.title" = "Bestätigen";
@@ -372,6 +382,9 @@
 "status.action.reply" = "Antworten";
 "status.action.section.your-post" = "Dein Beitrag";
 "status.action.share" = "Diesen Beitrag teilen";
+"status.action.share-link" = "Link zum Beitrag teilen";
+"status.action.share-image" = "Beitrag als Bild teilen";
+"status.action.share-title" = "Teilen";
 "status.action.unbookmark" = "Lesezeichen entfernen";
 "status.action.unboost" = "Boost entfernen";
 "status.action.unfavorite" = "Favorit entfernen";
@@ -416,6 +429,7 @@
 "status.media.contextmenu.view-browser" = "Im Browser anzeigen";
 "status.media.sensitive.show" = "Sensiblen Inhalt zeigen";
 "status.poll.n-votes %lld" = "%lld Stimmen";
+"status.poll.n-votes-voters %lld %lld" = "%lld Stimmen von %lld Teilnehmern";
 "status.poll.closed" = "Beendet";
 "status.poll.closes-in" = "Endet in ";
 "status.poll.duration" = "Umfragedauer";
@@ -460,8 +474,8 @@
 "accessibility.editor.button.drafts" = "Entwürfe";
 "accessibility.editor.button.custom-emojis" = "Eigene Emojis";
 "accessibility.editor.button.language" = "Sprache";
-"accessibility.tabs.timeline.add-account" = "Add account";
-"accessibility.app-account.selector.accounts" = "Accounts";
+"accessibility.tabs.timeline.add-account" = "Konto hinzufügen";
+"accessibility.app-account.selector.accounts" = "Konten";
 
 // MARK: Report
 "report.comment.placeholder" = "Zusätzliche Informationen";

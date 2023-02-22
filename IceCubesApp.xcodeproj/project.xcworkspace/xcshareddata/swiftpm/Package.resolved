@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/divadretlaw/EmojiText",
       "state" : {
-        "revision" : "3d8f6196de59634352ed317cf6ab4e292eeaaf44",
-        "version" : "1.2.0"
+        "revision" : "b52cfb8278425c28771bee4cc9e87453a52f3f4d",
+        "version" : "2.0.2"
       }
     },
     {
@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Nuke",
       "state" : {
-        "revision" : "67bd45931180f652159e3342575277a7f197b3ab",
-        "version" : "11.6.2"
+        "branch" : "nuke-12",
+        "revision" : "baccf1b00f458a77a9f9615e415bc4463029cf5e"
       }
     },
     {
@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RevenueCat/purchases-ios.git",
       "state" : {
-        "revision" : "9cfb6adb41dc40d80c104b2ef6e9a84bca03ea48",
-        "version" : "4.16.0"
+        "revision" : "b5562ed1409c47b20c74da3f2a1c2d603ca37508",
+        "version" : "4.17.7"
       }
     },
     {

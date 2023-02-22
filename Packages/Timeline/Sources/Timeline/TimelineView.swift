@@ -20,6 +20,7 @@ public struct TimelineView: View {
   @EnvironmentObject private var routerPath: RouterPath
 
   @StateObject private var viewModel = TimelineViewModel()
+  @StateObject private var prefetcher = TimelinePrefetcher()
 
   @State private var wasBackgrounded: Bool = false
   @State private var collectionView: UICollectionView?
@@ -53,10 +54,12 @@ public struct TimelineView: View {
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
         .background(theme.primaryBackgroundColor)
-        .introspect(selector: TargetViewSelector.ancestorOrSiblingContaining,
-                    customize: { (collectionView: UICollectionView) in
-                      self.collectionView = collectionView
-                    })
+        .introspect(selector: TargetViewSelector.ancestorOrSiblingContaining) { (collectionView: UICollectionView) in
+          self.collectionView = collectionView
+          self.prefetcher.viewModel = viewModel
+          collectionView.isPrefetchingEnabled = true
+          collectionView.prefetchDataSource = self.prefetcher
+        }
         if viewModel.pendingStatusesEnabled {
           PendingStatusesObserverView(observer: viewModel.pendingStatusesObserver)
         }
@@ -113,6 +116,9 @@ public struct TimelineView: View {
       viewModel.isTimelineVisible = false
     }
     .refreshable {
+      if timeline == .trending {
+        await viewModel.reset()
+      }
       HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
       await viewModel.fetchStatuses()
       HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))

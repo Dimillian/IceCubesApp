@@ -1,13 +1,32 @@
+import DesignSystem
 import Env
 import Foundation
+import Network
 import SwiftUI
 
 struct StatusRowContextMenu: View {
+  @Environment(\.displayScale) var displayScale
+
+  @EnvironmentObject private var sceneDelegate: SceneDelegate
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var currentInstance: CurrentInstance
 
   @ObservedObject var viewModel: StatusRowViewModel
+
+  var boostLabel: some View {
+    if self.viewModel.status.visibility == .priv && self.viewModel.status.account.id == self.account.account?.id {
+      if self.viewModel.isReblogged {
+        return Label("status.action.unboost", systemImage: "lock.rotation")
+      }
+      return Label("status.action.boost-to-followers", systemImage: "lock.rotation")
+    }
+
+    if self.viewModel.isReblogged {
+      return Label("status.action.unboost", systemImage: "arrow.left.arrow.right.circle")
+    }
+    return Label("status.action.boost", systemImage: "arrow.left.arrow.right.circle")
+  }
 
   var body: some View {
     if !viewModel.isRemote {
@@ -27,8 +46,9 @@ struct StatusRowContextMenu: View {
           await viewModel.reblog()
         }
       } } label: {
-        Label(viewModel.isReblogged ? "status.action.unboost" : "status.action.boost", systemImage: "arrow.left.arrow.right.circle")
+        boostLabel
       }
+      .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != account.account?.id)
       Button { Task {
         if viewModel.isBookmarked {
           await viewModel.unbookmark()
@@ -56,12 +76,46 @@ struct StatusRowContextMenu: View {
 
     Divider()
 
-    if let urlString = viewModel.status.reblog?.url ?? viewModel.status.url,
-       let url = URL(string: urlString) {
-      ShareLink(item: url,
-                subject: Text(viewModel.status.reblog?.account.safeDisplayName ?? viewModel.status.account.safeDisplayName),
-                message: Text(viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText)) {
-        Label("status.action.share", systemImage: "square.and.arrow.up")
+    Menu("status.action.share-title") {
+      if let urlString = viewModel.status.reblog?.url ?? viewModel.status.url,
+         let url = URL(string: urlString)
+      {
+        ShareLink(item: url,
+                  subject: Text(viewModel.status.reblog?.account.safeDisplayName ?? viewModel.status.account.safeDisplayName),
+                  message: Text(viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText)) {
+          Label("status.action.share", systemImage: "square.and.arrow.up")
+        }
+
+        ShareLink(item: url) {
+          Label("status.action.share-link", systemImage: "link")
+        }
+
+        Button {
+          let view = HStack {
+            StatusRowView(viewModel: viewModel)
+              .padding(16)
+          }
+          .environment(\.isInCaptureMode, true)
+          .environmentObject(Theme.shared)
+          .environmentObject(preferences)
+          .environmentObject(account)
+          .environmentObject(currentInstance)
+          .environmentObject(SceneDelegate())
+          .environmentObject(QuickLook())
+          .environmentObject(viewModel.client)
+          .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
+          .foregroundColor(Theme.shared.labelColor)
+          .background(Theme.shared.primaryBackgroundColor)
+          .frame(width: sceneDelegate.windowWidth - 12)
+          let renderer = ImageRenderer(content: view)
+          renderer.scale = displayScale
+          renderer.isOpaque = false
+          if let image = renderer.uiImage {
+            viewModel.routerPath.presentedSheet = .shareImage(image: image, status: viewModel.status)
+          }
+        } label: {
+          Label("status.action.share-image", systemImage: "photo")
+        }
       }
     }
 
@@ -94,7 +148,7 @@ struct StatusRowContextMenu: View {
       }
     }
 
-    if account.account?.id == viewModel.status.account.id {
+    if account.account?.id == viewModel.status.reblog?.account.id ?? viewModel.status.account.id {
       Section("status.action.section.your-post") {
         Button {
           Task {
@@ -120,14 +174,14 @@ struct StatusRowContextMenu: View {
       }
     } else {
       if !viewModel.isRemote {
-        Section(viewModel.status.account.acct) {
+        Section(viewModel.status.reblog?.account.acct ?? viewModel.status.account.acct) {
           Button {
-            viewModel.routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.account, visibility: .pub)
+            viewModel.routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .pub)
           } label: {
             Label("status.action.mention", systemImage: "at")
           }
           Button {
-            viewModel.routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.account, visibility: .direct)
+            viewModel.routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .direct)
           } label: {
             Label("status.action.message", systemImage: "tray.full")
           }
@@ -142,4 +196,14 @@ struct StatusRowContextMenu: View {
       }
     }
   }
+}
+
+struct ActivityView: UIViewControllerRepresentable {
+  let image: Image
+
+  func makeUIViewController(context _: UIViewControllerRepresentableContext<ActivityView>) -> UIActivityViewController {
+    return UIActivityViewController(activityItems: [image], applicationActivities: nil)
+  }
+
+  func updateUIViewController(_: UIActivityViewController, context _: UIViewControllerRepresentableContext<ActivityView>) {}
 }

@@ -1,9 +1,9 @@
 import DesignSystem
 import Env
 import Models
+import Network
 import Shimmer
 import SwiftUI
-import Network
 
 public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
   @EnvironmentObject private var theme: Theme
@@ -24,7 +24,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
     switch fetcher.statusesState {
     case .loading:
       ForEach(Status.placeholders()) { status in
-        StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath, isCompact: false))
+        StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
           .redacted(reason: .placeholder)
       }
     case .error:
@@ -40,7 +40,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
 
     case let .display(statuses, nextPageState):
       ForEach(statuses, id: \.viewId) { status in
-        let viewModel = StatusRowViewModel(status: status, client: client, routerPath: routerPath, isCompact: false, isRemote: isRemote)
+        let viewModel = StatusRowViewModel(status: status, client: client, routerPath: routerPath, isRemote: isRemote)
         if viewModel.filter?.filter.filterAction != .hide {
           StatusRowView(viewModel: viewModel)
             .id(status.id)

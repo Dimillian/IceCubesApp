@@ -1,11 +1,26 @@
 import Foundation
 
-public struct Account: Codable, Identifiable, Equatable, Hashable {
+public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable {
+  public static func == (lhs: Account, rhs: Account) -> Bool {
+    lhs.id == rhs.id &&
+    lhs.username == rhs.username &&
+    lhs.note.asRawText == rhs.note.asRawText &&
+    lhs.statusesCount == rhs.statusesCount &&
+    lhs.followersCount == rhs.followersCount &&
+    lhs.followingCount == rhs.followingCount &&
+    lhs.acct == rhs.acct &&
+    lhs.displayName == rhs.displayName &&
+    lhs.fields == rhs.fields &&
+    lhs.lastStatusAt == rhs.lastStatusAt &&
+    lhs.discoverable == rhs.discoverable &&
+    lhs.bot == rhs.bot
+  }
+
   public func hash(into hasher: inout Hasher) {
     hasher.combine(id)
   }
 
-  public struct Field: Codable, Equatable, Identifiable {
+  public struct Field: Codable, Equatable, Identifiable, Sendable {
     public var id: String {
       value.asRawText + name
     }
@@ -15,7 +30,7 @@ public struct Account: Codable, Identifiable, Equatable, Hashable {
     public let verifiedAt: String?
   }
 
-  public struct Source: Codable, Equatable {
+  public struct Source: Codable, Equatable, Sendable {
     public let privacy: Visibility
     public let sensitive: Bool
     public let language: String?
@@ -49,6 +64,28 @@ public struct Account: Codable, Identifiable, Equatable, Hashable {
 
   public var haveHeader: Bool {
     return header.lastPathComponent != "missing.png"
+  }
+
+  public init(id: String, username: String, displayName: String, avatar: URL, header: URL, acct: String, note: HTMLString, createdAt: ServerDate, followersCount: Int, followingCount: Int, statusesCount: Int, lastStatusAt: String? = nil, fields: [Account.Field], locked: Bool, emojis: [Emoji], url: URL? = nil, source: Account.Source? = nil, bot: Bool, discoverable: Bool? = nil) {
+    self.id = id
+    self.username = username
+    self.displayName = displayName
+    self.avatar = avatar
+    self.header = header
+    self.acct = acct
+    self.note = note
+    self.createdAt = createdAt
+    self.followersCount = followersCount
+    self.followingCount = followingCount
+    self.statusesCount = statusesCount
+    self.lastStatusAt = lastStatusAt
+    self.fields = fields
+    self.locked = locked
+    self.emojis = emojis
+    self.url = url
+    self.source = source
+    self.bot = bot
+    self.discoverable = discoverable
   }
 
   public static func placeholder() -> Account {

@@ -16,7 +16,7 @@ public struct FontPicker: UIViewControllerRepresentable {
     }
 
     public func fontPickerViewControllerDidPickFont(_ viewController: UIFontPickerViewController) {
-      UserPreferences.shared.chosenFont = UIFont(descriptor: viewController.selectedFontDescriptor!, size: 0)
+      Theme.shared.chosenFont = UIFont(descriptor: viewController.selectedFontDescriptor!, size: 0)
       dismiss()
     }
   }

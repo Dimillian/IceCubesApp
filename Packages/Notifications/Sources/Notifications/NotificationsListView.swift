@@ -84,7 +84,10 @@ public struct NotificationsListView: View {
     switch viewModel.state {
     case .loading:
       ForEach(ConsolidatedNotification.placeholders()) { notification in
-        NotificationRowView(notification: notification, client: client, routerPath: routerPath)
+        NotificationRowView(notification: notification,
+                            client: client,
+                            routerPath: routerPath,
+                            followRequests: account.followRequests)
           .redacted(reason: .placeholder)
           .listRowInsets(.init(top: 12,
                                leading: .layoutPadding + 4,
@@ -103,13 +106,17 @@ public struct NotificationsListView: View {
           .listSectionSeparator(.hidden)
       } else {
         ForEach(notifications) { notification in
-          NotificationRowView(notification: notification, client: client, routerPath: routerPath)
+          NotificationRowView(notification: notification,
+                              client: client,
+                              routerPath: routerPath,
+                              followRequests: account.followRequests)
             .listRowInsets(.init(top: 12,
                                  leading: .layoutPadding + 4,
                                  bottom: 12,
                                  trailing: .layoutPadding))
             .listRowBackground(notification.type == .mention && lockedType != .mention ?
               theme.secondaryBackgroundColor : theme.primaryBackgroundColor)
+            .id(notification.id)
         }
       }
 

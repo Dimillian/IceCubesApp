@@ -2,7 +2,7 @@ import Foundation
 import Network
 import SwiftUI
 
-enum StatusEditorAIPrompts: CaseIterable {
+enum StatusEditorAIPrompt: CaseIterable {
   case correct, fit, emphasize
 
   @ViewBuilder
@@ -17,7 +17,7 @@ enum StatusEditorAIPrompts: CaseIterable {
     }
   }
 
-  func toRequestPrompt(text: String) -> OpenAIClient.Prompts {
+  func toRequestPrompt(text: String) -> OpenAIClient.Prompt {
     switch self {
     case .correct:
       return .correct(input: text)

@@ -62,7 +62,8 @@ struct IceCubesApp: App {
             pushNotificationsService.handledNotification = nil
             if appAccountsManager.currentAccount.oauthToken?.accessToken != notification?.account.token.accessToken,
                let account = appAccountsManager.availableAccounts.first(where:
-                  { $0.oauthToken?.accessToken == notification?.account.token.accessToken })  {
+                 { $0.oauthToken?.accessToken == notification?.account.token.accessToken })
+            {
               appAccountsManager.currentAccount = account
               DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 selectedTab = .notifications
@@ -98,8 +99,10 @@ struct IceCubesApp: App {
   }
 
   private func badgeFor(tab: Tab) -> Int {
-    if tab == .notifications && selectedTab != tab {
-      return watcher.unreadNotificationsCount + userPreferences.pushNotificationsCount
+    if tab == .notifications && selectedTab != tab,
+       let token = appAccountsManager.currentAccount.oauthToken
+    {
+      return watcher.unreadNotificationsCount + userPreferences.getNotificationsCount(for: token)
     }
     return 0
   }
@@ -130,20 +133,24 @@ struct IceCubesApp: App {
               }
             }
           }
-          if proxy.frame(in: .global).width > (.maxColumnWidth + .secondaryColumnWidth),
-             appAccountsManager.currentClient.isAuth,
+          if appAccountsManager.currentClient.isAuth,
              userPreferences.showiPadSecondaryColumn
           {
             Divider().edgesIgnoringSafeArea(.all)
-            NotificationsTab(popToRootTab: $popToRootTab, lockedType: nil)
-              .environment(\.isSecondaryColumn, true)
-              .frame(maxWidth: 360)
+            notificationsSecondaryColumn
           }
         }
       }
     }.onChange(of: $appAccountsManager.currentAccount.id) { _ in
       sideBarLoadedTabs.removeAll()
     }
+  }
+
+  private var notificationsSecondaryColumn: some View {
+    NotificationsTab(popToRootTab: $popToRootTab, lockedType: nil)
+      .environment(\.isSecondaryColumn, true)
+      .frame(maxWidth: .secondaryColumnWidth)
+      .id(appAccountsManager.currentAccount.id)
   }
 
   private var tabBarView: some View {
@@ -161,6 +168,12 @@ struct IceCubesApp: App {
           }
         }
         selectedTab = newTab
+        if selectedTab == .notifications,
+           let token = appAccountsManager.currentAccount.oauthToken
+        {
+          userPreferences.setNotification(count: 0, token: token)
+          watcher.unreadNotificationsCount = 0
+        }
       }
       HapticManager.shared.fireHaptic(of: .tabSelection)
     })) {
@@ -228,13 +241,13 @@ struct IceCubesApp: App {
     CommandGroup(replacing: .textFormatting) {
       Menu("menu.font") {
         Button("menu.font.bigger") {
-          if userPreferences.fontSizeScale < 1.5 {
-            userPreferences.fontSizeScale += 0.1
+          if theme.fontSizeScale < 1.5 {
+            theme.fontSizeScale += 0.1
           }
         }
         Button("menu.font.smaller") {
-          if userPreferences.fontSizeScale > 0.5 {
-            userPreferences.fontSizeScale -= 0.1
+          if theme.fontSizeScale > 0.5 {
+            theme.fontSizeScale -= 0.1
           }
         }
       }

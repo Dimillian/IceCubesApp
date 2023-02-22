@@ -34,6 +34,7 @@ public enum Accounts: Endpoint {
   case unblock(id: String)
   case mute(id: String, json: MuteData)
   case unmute(id: String)
+  case relationshipNote(id: String, json: RelationshipNoteData)
 
   public func path() -> String {
     switch self {
@@ -79,6 +80,8 @@ public enum Accounts: Endpoint {
       return "accounts/\(id)/mute"
     case let .unmute(id):
       return "accounts/\(id)/unmute"
+    case let .relationshipNote(id, _):
+      return "accounts/\(id)/note"
     }
   }
 
@@ -143,16 +146,26 @@ public enum Accounts: Endpoint {
     switch self {
     case let .mute(_, json):
       return json
+    case let .relationshipNote(_, json):
+      return json
     default:
       return nil
     }
   }
 }
 
-public struct MuteData: Encodable {
+public struct MuteData: Encodable, Sendable {
   public let duration: Int
 
   public init(duration: Int) {
     self.duration = duration
+  }
+}
+
+public struct RelationshipNoteData: Encodable, Sendable {
+  public let comment: String
+
+  public init(note comment: String) {
+    self.comment = comment
   }
 }

@@ -4,8 +4,8 @@ import Network
 
 @MainActor
 public class CurrentAccount: ObservableObject {
-  static private var accountsCache: [String: Account] = [:]
-  
+  private static var accountsCache: [String: Account] = [:]
+
   @Published public private(set) var account: Account?
   @Published public private(set) var lists: [List] = []
   @Published public private(set) var tags: [Tag] = []

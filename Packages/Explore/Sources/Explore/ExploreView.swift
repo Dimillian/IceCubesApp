@@ -81,7 +81,7 @@ public struct ExploreView: View {
 
   private var loadingView: some View {
     ForEach(Status.placeholders()) { status in
-      StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath, isCompact: false))
+      StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
         .padding(.vertical, 8)
         .redacted(reason: .placeholder)
         .listRowBackground(theme.primaryBackgroundColor)
@@ -184,7 +184,7 @@ public struct ExploreView: View {
     Section("explore.section.trending.posts") {
       ForEach(viewModel.trendingStatuses
         .prefix(upTo: viewModel.trendingStatuses.count > 3 ? 3 : viewModel.trendingStatuses.count)) { status in
-          StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath, isCompact: false))
+          StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
             .listRowBackground(theme.primaryBackgroundColor)
             .padding(.vertical, 8)
         }
@@ -192,7 +192,7 @@ public struct ExploreView: View {
       NavigationLink {
         List {
           ForEach(viewModel.trendingStatuses) { status in
-            StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath, isCompact: false))
+            StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
               .listRowBackground(theme.primaryBackgroundColor)
               .padding(.vertical, 8)
           }
@@ -214,14 +214,14 @@ public struct ExploreView: View {
     Section("explore.section.trending.links") {
       ForEach(viewModel.trendingLinks
         .prefix(upTo: viewModel.trendingLinks.count > 3 ? 3 : viewModel.trendingLinks.count)) { card in
-          StatusCardView(card: card)
+          StatusRowCardView(card: card)
             .listRowBackground(theme.primaryBackgroundColor)
             .padding(.vertical, 8)
         }
       NavigationLink {
         List {
           ForEach(viewModel.trendingLinks) { card in
-            StatusCardView(card: card)
+            StatusRowCardView(card: card)
               .listRowBackground(theme.primaryBackgroundColor)
               .padding(.vertical, 8)
           }

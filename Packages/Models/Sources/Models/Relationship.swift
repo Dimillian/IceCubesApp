@@ -31,7 +31,7 @@ public struct Relationship: Codable {
           notifying: false)
   }
 }
-  
+
 public extension Relationship {
   init(from decoder: Decoder) throws {
     let values = try decoder.container(keyedBy: CodingKeys.self)

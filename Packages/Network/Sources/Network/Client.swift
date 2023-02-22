@@ -2,14 +2,14 @@ import Foundation
 import Models
 import SwiftUI
 
-public class Client: ObservableObject, Equatable, Identifiable, Hashable {
+public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
   public static func == (lhs: Client, rhs: Client) -> Bool {
     lhs.isAuth == rhs.isAuth &&
       lhs.server == rhs.server &&
       lhs.oauthToken?.accessToken == rhs.oauthToken?.accessToken
   }
 
-  public enum Version: String {
+  public enum Version: String, Sendable {
     case v1, v2
   }
 
@@ -26,7 +26,7 @@ public class Client: ObservableObject, Equatable, Identifiable, Hashable {
     hasher.combine(id)
   }
 
-  public var server: String
+  public let server: String
   public let version: Version
   public private(set) var connections: Set<String>
   private let urlSession: URLSession

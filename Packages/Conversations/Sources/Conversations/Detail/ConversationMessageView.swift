@@ -124,17 +124,39 @@ struct ConversationMessageView: View {
     }
   }
 
+  private func makeImageRequest(for url: URL, size: CGSize) -> ImageRequest {
+    ImageRequest(url: url, processors: [.resize(size: size)])
+  }
+  
+  private func mediaWidth(proxy: GeometryProxy) -> CGFloat {
+    var width = proxy.frame(in: .local).width
+    if UIDevice.current.userInterfaceIdiom == .pad {
+      width = width * 0.60
+    }
+    return width
+  }
+  
   private func makeMediaView(_ attachement: MediaAttachment) -> some View {
-    LazyImage(url: attachement.url) { state in
-      if let image = state.image {
-        image
-          .resizingMode(.aspectFill)
-          .cornerRadius(8)
-          .padding(8)
-      } else if state.isLoading {
-        RoundedRectangle(cornerRadius: 8)
-          .fill(Color.gray)
-          .frame(height: 200)
+    GeometryReader { proxy in
+      let width = mediaWidth(proxy: proxy)
+      if let url = attachement.url {
+        LazyImage(request: makeImageRequest(for: url,
+                                            size: .init(width: width, height: 200))) { state in
+          if let image = state.image {
+            image
+              .resizable()
+              .aspectRatio(contentMode: .fill)
+              .frame(height: 200)
+              .frame(maxWidth: width)
+              .clipped()
+              .cornerRadius(8)
+              .padding(8)
+          } else if state.isLoading {
+            RoundedRectangle(cornerRadius: 8)
+              .fill(Color.gray)
+              .frame(height: 200)
+          }
+        }
       }
     }
     .frame(height: 200)

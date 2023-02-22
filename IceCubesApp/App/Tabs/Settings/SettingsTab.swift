@@ -46,6 +46,9 @@ struct SettingsTabs: View {
             }
           }
         }
+        if UIDevice.current.userInterfaceIdiom == .pad && !preferences.showiPadSecondaryColumn {
+          SecondaryColumnToolbarItem()
+        }
       }
       .withAppRouter()
       .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
@@ -100,13 +103,13 @@ struct SettingsTabs: View {
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
-  
+
   private func logoutAccount(account: AppAccount) async {
     if let token = account.oauthToken,
        let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token })
     {
       let client = Client(server: account.server, oauthToken: token)
-      await TimelineCache.shared.clearCache(for: client)
+      await TimelineCache.shared.clearCache(for: client.id)
       await sub.deleteSubscription()
       appAccountsManager.delete(account: account)
     }
@@ -132,7 +135,7 @@ struct SettingsTabs: View {
         Label("settings.general.remote-timelines", systemImage: "dot.radiowaves.right")
       }
       NavigationLink(destination: ContentSettingsView()) {
-        Label("settings.general.content", systemImage: "rectangle.on.rectangle")
+        Label("settings.general.content", systemImage: "rectangle.stack")
       }
       NavigationLink(destination: SwipeActionsSettingsView()) {
         Label("settings.general.swipeactions", systemImage: "hand.draw")
@@ -185,12 +188,11 @@ struct SettingsTabs: View {
           Label {
             Text("settings.app.icon")
           } icon: {
-            if let icon = IconSelectorView.Icon(string: UIApplication.shared.alternateIconName ?? "AppIcon") {
-              Image(uiImage: .init(named: icon.iconName)!)
-                .resizable()
-                .frame(width: 25, height: 25)
-                .cornerRadius(4)
-            }
+            let icon = IconSelectorView.Icon(string: UIApplication.shared.alternateIconName ?? "AppIcon")
+            Image(uiImage: .init(named: icon.iconName)!)
+              .resizable()
+              .frame(width: 25, height: 25)
+              .cornerRadius(4)
           }
         }
       }
@@ -235,7 +237,7 @@ struct SettingsTabs: View {
       AddAccountView()
     }
   }
-  
+
   private var editAccountButton: some View {
     Button(role: isEditingAccount ? .none : .destructive) {
       withAnimation {

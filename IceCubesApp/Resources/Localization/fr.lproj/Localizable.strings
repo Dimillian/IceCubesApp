@@ -37,6 +37,7 @@
 "enum.status-actions-display.only-buttons" = "Seulement les boutons";
 "enum.status-display-style.compact" = "Compact";
 "enum.status-display-style.large" = "Grand";
+"enum.status-display-style.medium" = "Moyen";
 "enum.swipeactions.icon-with-text" = "Icon with text";
 "enum.swipeactions.icon-only" = "Icon only";
 
@@ -73,6 +74,7 @@
 "settings.display.example-toot" = "Toot d'exemple";
 "settings.display.avatar.position" = "Position de l'avatar";
 "settings.display.avatar.shape" = "Forme de l'avatar";
+"settings.display.full-username" = "Afficher le nom d'utilisateur complet";
 "settings.display.navigation-title" = "Paramètres d'affichage";
 "settings.display.restore" = "Restaurer les valeurs par défaut";
 "settings.display.section.display" = "Affichage";
@@ -169,24 +171,24 @@
 
 "settings.general.swipeactions" = "Actions de balayage";
 "settings.swipeactions.navigation-title" = "Actions de balayage";
+"settings.swipeactions.primary" = "Primary Action";
+"settings.swipeactions.secondary" = "Secondary Action";
 "settings.swipeactions.status.action.bookmark" = "Signet";
 "settings.swipeactions.status.action.boost" = "Boost";
 "settings.swipeactions.status.action.favorite" = "Favori";
 "settings.swipeactions.status.action.none" = "Aucun";
 "settings.swipeactions.status.action.quote" = "Citer";
 "settings.swipeactions.status.action.reply" = "Répondre";
+"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
 "settings.swipeactions.status.leading" = "Balayer vers la droite";
-"settings.swipeactions.status.leading.left" = "gauche";
-"settings.swipeactions.status.leading.right" = "droite";
 "settings.swipeactions.status.trailing" = "Balayer vers la gauche";
-"settings.swipeactions.status.trailing.left" = "gauche";
-"settings.swipeactions.status.trailing.right" = "droite";
 "settings.swipeactions.status" = "Publier";
-"settings.swipeactions.status.use-theme-colors" = "Utiliser les couleurs du thème au lieu des couleurs par défaut";
-"settings.swipeactions.status.icon-style" = "Style de l'icône";
+"settings.swipeactions.appearance" = "Appearance";
+"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors-explanation" = "Utiliser les couleurs du thème au lieu des couleurs par défaut";
+"settings.swipeactions.icon-style" = "Style de l'icône";
 
 "settings.display.section.font" = "Police";
-"settings.display.font.rounded" = "Utiliser SF Rounded";
 
 // MARK: Tabs
 "tab.explore" = "Explorer";
@@ -263,6 +265,12 @@
 "account.joined" = "Inscrit";
 "account.action.logout" = "Déconnexion";
 
+"account.relation.note.edit" = "Edit Note";
+"account.relation.note.edit.placeholder" = "Enter Note text";
+"account.relation.note.edit.error.save.message" = "Error while saving your note, please try again.";
+"account.relation.note.edit.error.save.title" = "Error while saving your note";
+"account.relation.note.label" = "Note:";
+
 // MARK: Package: Conversations
 "conversations.action.delete" = "Supprimer";
 "conversations.action.mark-read" = "Marquer comme lu";
@@ -300,6 +308,7 @@
 "env.poll-duration.30m" = "30 minutes";
 "env.poll-duration.1h" = "1 heure";
 "env.poll-duration.6h" = "6 heures";
+"env.poll-duration.12h" = "12 heures";
 "env.poll-duration.1d" = "1 jour";
 "env.poll-duration.3d" = "3 jours";
 "env.poll-duration.7d" = "7 jours";
@@ -358,6 +367,7 @@
 "status.action.translated-label-%@" = "Traduit avec %@";
 "status.action.bookmark" = "Marquer";
 "status.action.boost" = "Promouvoir";
+"status.action.boost-to-followers" = "Boost to Followers";
 "status.action.copy-text" = "Copier le texte";
 "status.action.delete" = "Supprimer";
 "status.action.delete.confirm.title" = "Confirmer";
@@ -372,6 +382,9 @@
 "status.action.reply" = "Répondre";
 "status.action.section.your-post" = "Votre publication";
 "status.action.share" = "Partager cette publication";
+"status.action.share-link" = "Partager le lien";
+"status.action.share-image" = "Partager comme image";
+"status.action.share-title" = "Partager";
 "status.action.unbookmark" = "Démarquer";
 "status.action.unboost" = "Annuler la promotion";
 "status.action.unfavorite" = "Retirer des favoris";
@@ -416,6 +429,7 @@
 "status.media.contextmenu.view-browser" = "Afficher dans le navigateur";
 "status.media.sensitive.show" = "Afficher le contenu sensible";
 "status.poll.n-votes %lld" = "%lld votes";
+"status.poll.n-votes-voters %lld %lld" = "%lld votes from %lld voters";
 "status.poll.closed" = "Fermé";
 "status.poll.closes-in" = "Ferme dans";
 "status.poll.duration" = "Durée du sondage";

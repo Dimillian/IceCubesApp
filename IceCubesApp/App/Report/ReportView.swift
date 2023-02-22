@@ -1,24 +1,24 @@
-import SwiftUI
-import Models
-import Env
 import DesignSystem
-import Status
+import Env
+import Models
 import Network
+import Status
+import SwiftUI
 
 public struct ReportView: View {
   @Environment(\.dismiss) private var dismiss
-  
+
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
-  
+
   let status: Status
   @State private var commentText: String = ""
   @State private var isSendingReport: Bool = false
-  
+
   struct ReportSent: Decodable {
-    let id : String
+    let id: String
   }
-  
+
   public var body: some View {
     NavigationStack {
       Form {
@@ -28,7 +28,7 @@ public struct ReportView: View {
                     axis: .vertical)
         }
         .listRowBackground(theme.primaryBackgroundColor)
-        
+
         StatusEmbeddedView(status: status, client: .init(server: ""), routerPath: RouterPath())
           .allowsHitTesting(false)
           .listRowBackground(theme.primaryBackgroundColor)
@@ -45,9 +45,9 @@ public struct ReportView: View {
             Task {
               do {
                 let _: ReportSent =
-                try await client.post(endpoint: Statuses.report(accountId: status.account.id,
-                                                                statusId: status.id,
-                                                                comment: commentText))
+                  try await client.post(endpoint: Statuses.report(accountId: status.account.id,
+                                                                  statusId: status.id,
+                                                                  comment: commentText))
                 dismiss()
                 isSendingReport = false
               } catch {
@@ -62,7 +62,7 @@ public struct ReportView: View {
             }
           }
         }
-        
+
         ToolbarItem(placement: .navigationBarLeading) {
           Button {
             dismiss()

@@ -69,7 +69,7 @@ class NotificationsViewModel: ObservableObject {
                                                                      maxId: nil,
                                                                      types: queryTypes,
                                                                      limit: Constants.notificationLimit))
-        consolidatedNotifications = notifications.consolidated(selectedType: selectedType)
+        consolidatedNotifications = await notifications.consolidated(selectedType: selectedType)
         nextPageState = notifications.count < Constants.notificationLimit ? .none : .hasNextPage
       } else if let firstId = consolidatedNotifications.first?.id {
         var newNotifications: [Models.Notification] = await fetchNewPages(minId: firstId, maxPages: 10)
@@ -77,13 +77,15 @@ class NotificationsViewModel: ObservableObject {
         newNotifications = newNotifications.filter { notification in
           !consolidatedNotifications.contains(where: { $0.id == notification.id })
         }
-        consolidatedNotifications.insert(
+        await consolidatedNotifications.insert(
           contentsOf: newNotifications.consolidated(selectedType: selectedType),
           at: 0
         )
       }
 
-      await currentAccount.fetchFollowerRequests()
+      if consolidatedNotifications.contains(where: { $0.type == .follow_request }) {
+        await currentAccount.fetchFollowerRequests()
+      }
 
       withAnimation {
         state = .display(notifications: consolidatedNotifications,
@@ -129,8 +131,10 @@ class NotificationsViewModel: ObservableObject {
                                                                    maxId: lastId,
                                                                    types: queryTypes,
                                                                    limit: Constants.notificationLimit))
-      consolidatedNotifications.append(contentsOf: newNotifications.consolidated(selectedType: selectedType))
-      await currentAccount?.fetchFollowerRequests()
+      await consolidatedNotifications.append(contentsOf: newNotifications.consolidated(selectedType: selectedType))
+      if consolidatedNotifications.contains(where: { $0.type == .follow_request }) {
+        await currentAccount?.fetchFollowerRequests()
+      }
       state = .display(notifications: consolidatedNotifications,
                        nextPageState: newNotifications.count < Constants.notificationLimit ? .none : .hasNextPage)
     } catch {
@@ -159,14 +163,14 @@ class NotificationsViewModel: ObservableObject {
         {
           // If the notification type can be consolidated, try to consolidate with the latest row
           let latestConsolidatedNotification = consolidatedNotifications.removeFirst()
-          consolidatedNotifications.insert(
+          await consolidatedNotifications.insert(
             contentsOf: ([event.notification] + latestConsolidatedNotification.notifications)
               .consolidated(selectedType: selectedType),
             at: 0
           )
         } else {
           // Otherwise, just insert the new notification
-          consolidatedNotifications.insert(
+          await consolidatedNotifications.insert(
             contentsOf: [event.notification].consolidated(selectedType: selectedType),
             at: 0
           )

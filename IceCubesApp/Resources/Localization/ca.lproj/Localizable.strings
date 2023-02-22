@@ -36,6 +36,7 @@
 "enum.status-actions-display.only-buttons" = "Només els botons";
 "enum.status-display-style.compact" = "Compacte";
 "enum.status-display-style.large" = "Gran";
+"enum.status-display-style.medium" = "Medium";
 "enum.swipeactions.icon-with-text" = "Icon with text";
 "enum.swipeactions.icon-only" = "Icon only";
 
@@ -72,6 +73,7 @@
 "settings.display.example-toot" = "Publicació d'exemple";
 "settings.display.avatar.position" = "Posició de les fotos de perfil";
 "settings.display.avatar.shape" = "Forma de les fotos de perfil";
+"settings.display.full-username" = "Display full username";
 "settings.display.navigation-title" = "Configuració de l'aparença";
 "settings.display.restore" = "Restableix els valors per defecte";
 "settings.display.section.display" = "Aparença";
@@ -168,24 +170,24 @@
 
 "settings.general.swipeactions" = "Swipe Actions";
 "settings.swipeactions.navigation-title" = "Swipe Actions";
+"settings.swipeactions.primary" = "Primary Action";
+"settings.swipeactions.secondary" = "Secondary Action";
 "settings.swipeactions.status.action.bookmark" = "Bookmark";
 "settings.swipeactions.status.action.boost" = "Boost";
 "settings.swipeactions.status.action.favorite" = "Favorite";
 "settings.swipeactions.status.action.none" = "None";
 "settings.swipeactions.status.action.quote" = "Quote";
 "settings.swipeactions.status.action.reply" = "Reply";
+"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
 "settings.swipeactions.status.leading" = "Swipe right";
-"settings.swipeactions.status.leading.left" = "left";
-"settings.swipeactions.status.leading.right" = "right";
 "settings.swipeactions.status.trailing" = "Swipe left";
-"settings.swipeactions.status.trailing.left" = "left";
-"settings.swipeactions.status.trailing.right" = "right";
 "settings.swipeactions.status" = "Post";
-"settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
-"settings.swipeactions.status.icon-style" = "Icon style";
+"settings.swipeactions.appearance" = "Appearance";
+"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors-explanation" = "Use theme colors instead of default colors";
+"settings.swipeactions.icon-style" = "Icon style";
 
 "settings.display.section.font" = "Font";
-"settings.display.font.rounded" = "Use SF Rounded";
 
 // MARK: Tabs
 "tab.explore" = "Exploreu";
@@ -262,6 +264,12 @@
 "account.joined" = "S'ha unit";
 "account.action.logout" = "Tanca la sessió";
 
+"account.relation.note.edit" = "Edit Note";
+"account.relation.note.edit.placeholder" = "Enter Note text";
+"account.relation.note.edit.error.save.message" = "Error while saving your note, please try again.";
+"account.relation.note.edit.error.save.title" = "Error while saving your note";
+"account.relation.note.label" = "Note:";
+
 // MARK: Package: Conversations
 "conversations.action.delete" = "Elimina";
 "conversations.action.mark-read" = "Marca com a llegit";
@@ -299,6 +307,7 @@
 "env.poll-duration.30m" = "30 minuts";
 "env.poll-duration.1h" = "1 hora";
 "env.poll-duration.6h" = "6 hores";
+"env.poll-duration.12h" = "12 hores";
 "env.poll-duration.1d" = "1 dia";
 "env.poll-duration.3d" = "3 dies";
 "env.poll-duration.7d" = "7 dies";
@@ -361,6 +370,7 @@
 "status.action.translated-label-%@" = "Traduït amb %@";
 "status.action.bookmark" = "Afegeix als marcadors";
 "status.action.boost" = "Impulsa";
+"status.action.boost-to-followers" = "Boost to Followers";
 "status.action.copy-text" = "Copia el text";
 "status.action.delete" = "Elimina";
 "status.action.delete.confirm.title" = "Confirm";
@@ -375,6 +385,9 @@
 "status.action.reply" = "Respon";
 "status.action.section.your-post" = "La vostra publicació";
 "status.action.share" = "Comparteix la publicació";
+"status.action.share-link" = "Share post link";
+"status.action.share-image" = "Share post as image";
+"status.action.share-title" = "Share";
 "status.action.unbookmark" = "Elimina dels marcadors";
 "status.action.unboost" = "Desfés l'impulsa";
 "status.action.unfavorite" = "Desfés el preferit";
@@ -419,6 +432,7 @@
 "status.media.contextmenu.view-browser" = "Mostra al navegador";
 "status.media.sensitive.show" = "Mostra el contingut sensible";
 "status.poll.n-votes %lld" = "%lld vots";
+"status.poll.n-votes-voters %lld %lld" = "%lld votes from %lld voters";
 "status.poll.closed" = "Finalitzada";
 "status.poll.closes-in" = "Finalitza en";
 "status.poll.duration" = "Durada de l'enquesta";

@@ -37,6 +37,7 @@
 "enum.status-actions-display.only-buttons" = "Bare knapper";
 "enum.status-display-style.compact" = "Kompakt";
 "enum.status-display-style.large" = "Stor";
+"enum.status-display-style.medium" = "Medium";
 "enum.swipeactions.icon-with-text" = "Icon with text";
 "enum.swipeactions.icon-only" = "Icon only";
 
@@ -77,6 +78,7 @@
 "settings.display.font.scaling-%@" = "Font scaling: %@";
 "settings.display.avatar.position" = "Avatarposisjon";
 "settings.display.avatar.shape" = "Avatarform";
+"settings.display.full-username" = "Display full username";
 "settings.display.navigation-title" = "Visningsinnstillinger";
 "settings.display.restore" = "Gjenopprett standardinnstillinger";
 "settings.display.section.display" = "Visning";
@@ -169,24 +171,24 @@
 
 "settings.general.swipeactions" = "Swipe Actions";
 "settings.swipeactions.navigation-title" = "Swipe Actions";
+"settings.swipeactions.primary" = "Primary Action";
+"settings.swipeactions.secondary" = "Secondary Action";
 "settings.swipeactions.status.action.bookmark" = "Bookmark";
 "settings.swipeactions.status.action.boost" = "Boost";
 "settings.swipeactions.status.action.favorite" = "Favorite";
 "settings.swipeactions.status.action.none" = "None";
 "settings.swipeactions.status.action.quote" = "Quote";
 "settings.swipeactions.status.action.reply" = "Reply";
-"settings.swipeactions.status.leading" = "Swipe right";
-"settings.swipeactions.status.leading.left" = "left";
-"settings.swipeactions.status.leading.right" = "right";
-"settings.swipeactions.status.trailing" = "Swipe left";
-"settings.swipeactions.status.trailing.left" = "left";
-"settings.swipeactions.status.trailing.right" = "right";
+"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
+"settings.swipeactions.status.leading" = "Swipe Right";
+"settings.swipeactions.status.trailing" = "Swipe Left";
 "settings.swipeactions.status" = "Post";
-"settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
-"settings.swipeactions.status.icon-style" = "Icon style";
+"settings.swipeactions.appearance" = "Appearance";
+"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors-explanation" = "Use theme colors instead of default colors";
+"settings.swipeactions.icon-style" = "Icon Style";
 
 "settings.display.section.font" = "Font";
-"settings.display.font.rounded" = "Use SF Rounded";
 
 // MARK: Tabs
 "tab.explore" = "Utforsk";
@@ -263,6 +265,12 @@
 "account.joined" = "Ble med";
 "account.action.logout" = "Logg ut konto";
 
+"account.relation.note.edit" = "Edit Note";
+"account.relation.note.edit.placeholder" = "Enter Note text";
+"account.relation.note.edit.error.save.message" = "Error while saving your note, please try again.";
+"account.relation.note.edit.error.save.title" = "Error while saving your note";
+"account.relation.note.label" = "Note:";
+
 // MARK: Package: Conversations
 "conversations.action.delete" = "Slett";
 "conversations.action.mark-read" = "Merk som lest";
@@ -300,6 +308,7 @@
 "env.poll-duration.30m" = "30 minutter";
 "env.poll-duration.1h" = "1 time";
 "env.poll-duration.6h" = "6 timer";
+"env.poll-duration.12h" = "12 timer";
 "env.poll-duration.1d" = "1 dag";
 "env.poll-duration.3d" = "3 dager";
 "env.poll-duration.7d" = "7 dager";
@@ -362,6 +371,7 @@
 "status.action.translated-label-%@" = "Oversatt ved hjelp av %@";
 "status.action.bookmark" = "Bokmerk";
 "status.action.boost" = "Forsterk";
+"status.action.boost-to-followers" = "Boost to Followers";
 "status.action.copy-text" = "Kopier tekst";
 "status.action.delete" = "Slett";
 "status.action.delete.confirm.title" = "Confirm";
@@ -376,6 +386,9 @@
 "status.action.reply" = "Svar";
 "status.action.section.your-post" = "Ditt innlegg";
 "status.action.share" = "Del dette innlegget";
+"status.action.share-link" = "Share post link";
+"status.action.share-image" = "Share post as image";
+"status.action.share-title" = "Share";
 "status.action.unbookmark" = "Fjern bokmerke";
 "status.action.unboost" = "Opphev forsterkningen";
 "status.action.unfavorite" = "Ikke favoritt";
@@ -420,6 +433,7 @@
 "status.media.contextmenu.view-browser" = "Vis i nettleser";
 "status.media.sensitive.show" = "Vis sensitivt innhold";
 "status.poll.n-votes %lld" = "%lld stemmer";
+"status.poll.n-votes-voters %lld %lld" = "%lld votes from %lld voters";
 "status.poll.closed" = "Lukket";
 "status.poll.closes-in" = "Lukkes om ";
 "status.poll.duration" = "Avstemningens varighet";

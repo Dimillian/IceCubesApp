@@ -37,6 +37,7 @@
 "enum.status-actions-display.only-buttons" = "Tylko przyciski";
 "enum.status-display-style.compact" = "Pomniejszone";
 "enum.status-display-style.large" = "Duże";
+"enum.status-display-style.medium" = "Medium";
 "enum.swipeactions.icon-with-text" = "Ikona z tekstem";
 "enum.swipeactions.icon-only" = "Tylko ikona";
 
@@ -73,6 +74,7 @@
 "settings.display.example-toot" = "Przykładowy post";
 "settings.display.avatar.position" = "Położenie awatara";
 "settings.display.avatar.shape" = "Kształt awatara";
+"settings.display.full-username" = "Wyświetlaj pełną nazwę użytkownika";
 "settings.display.navigation-title" = "Ustawienia ekranu";
 "settings.display.restore" = "Przywróć ustawienia domyślne";
 "settings.display.section.display" = "Ekran";
@@ -97,7 +99,7 @@
 "settings.push.favorites" = "Polubione";
 "settings.push.follows" = "Obserwacja";
 "settings.push.main-toggle" = "Powiadomienia push";
-"settings.push.main-toggle.description" = "Otrzymuj powiadomienia push o nowych aktywnościach";
+"settings.push.main-toggle.description" = "Otrzymuj powiadomienia push o nowej aktywności";
 "settings.push.mentions" = "Wzmianki";
 "settings.push.navigation-title" = "Powiadomienia push";
 "settings.push.new-posts" = "Nowe posty";
@@ -114,7 +116,7 @@
 "settings.content.default-sensitive" = "Oznaczaj media jako wrażliwe";
 "settings.content.default-visibility" = "Widoczność postów";
 "settings.content.media" = "Media";
-"settings.content.media.show.alt" = "Show ALT texts";
+"settings.content.media.show.alt" = "Pokazuj alternatywny tekst";
 "settings.content.reading" = "Czytanie postów";
 "settings.content.posting" = "Wysyłanie postów";
 "enum.expand-media.show" = "Pokazuj wszystkie";
@@ -169,24 +171,24 @@
 
 "settings.general.swipeactions" = "Przeciąganie palcem";
 "settings.swipeactions.navigation-title" = "Przeciąganie palcem";
+"settings.swipeactions.primary" = "Primary Action";
+"settings.swipeactions.secondary" = "Secondary Action";
 "settings.swipeactions.status.action.bookmark" = "Dodaj zakładkę";
 "settings.swipeactions.status.action.boost" = "Podbij";
 "settings.swipeactions.status.action.favorite" = "Polub";
 "settings.swipeactions.status.action.none" = "Bez akcji";
 "settings.swipeactions.status.action.quote" = "Zacytuj";
 "settings.swipeactions.status.action.reply" = "Odpowiedz";
+"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
 "settings.swipeactions.status.leading" = "Przeciągnij w prawo";
-"settings.swipeactions.status.leading.left" = "lewa";
-"settings.swipeactions.status.leading.right" = "prawa";
 "settings.swipeactions.status.trailing" = "Przeciągnij w lewo";
-"settings.swipeactions.status.trailing.left" = "lewa";
-"settings.swipeactions.status.trailing.right" = "prawa";
 "settings.swipeactions.status" = "Post";
-"settings.swipeactions.status.use-theme-colors" = "Używaj kolorów motywu zamiast kolorów domyślnych";
-"settings.swipeactions.status.icon-style" = "Styl ikony";
+"settings.swipeactions.appearance" = "Appearance";
+"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors-explanation" = "Używaj kolorów motywu zamiast kolorów domyślnych";
+"settings.swipeactions.icon-style" = "Styl ikony";
 
-"settings.display.section.font" = "Font";
-"settings.display.font.rounded" = "Use SF Rounded";
+"settings.display.section.font" = "Czcionka";
 
 // MARK: Tabs
 "tab.explore" = "Odkrywaj";
@@ -261,6 +263,12 @@
 "account.joined" = "Dołączył(a)";
 "account.action.logout" = "Wyloguj się";
 
+"account.relation.note.edit" = "Edytuj notatkę";
+"account.relation.note.edit.placeholder" = "Wprowadź treść notatki";
+"account.relation.note.edit.error.save.message" = "Błąd podczas zapisywania notatki, spróbuj ponownie.";
+"account.relation.note.edit.error.save.title" = "Błąd podczas zapisywania notatki";
+"account.relation.note.label" = "Notatka:";
+
 // MARK: Package: Conversations
 "conversations.action.delete" = "Usuń";
 "conversations.action.mark-read" = "Oznacz jako przeczytany";
@@ -297,6 +305,7 @@
 "env.poll-duration.30m" = "30 minut";
 "env.poll-duration.1h" = "1 godzina";
 "env.poll-duration.6h" = "6 godzin";
+"env.poll-duration.12h" = "12 godzin";
 "env.poll-duration.1d" = "1 dzień";
 "env.poll-duration.3d" = "3 dni";
 "env.poll-duration.7d" = "7 dni";
@@ -336,13 +345,13 @@
 "notifications.tab.all" = "Wszystko";
 "notifications.tab.mentions" = "Wzmianki";
 
-"notifications.label.status.push" = "🖊️ Posted: ";
-"notifications.label.reblog.push" = "🚀 Boosted: ";
-"notifications.label.follow.push" = "👋 Followed you: ";
-"notifications.label.follow-request.push" = "🔒 Requested to follow you: ";
-"notifications.label.favorite.push" = "⭐️ Starred: ";
-"notifications.label.poll.push" = "📈 Poll ended: ";
-"notifications.label.update.push" = "Updated: ";
+"notifications.label.status.push" = "🖊️ Opublikował(a): ";
+"notifications.label.reblog.push" = "🚀 Podbił(a): ";
+"notifications.label.follow.push" = "👋 Obserwuje cię: ";
+"notifications.label.follow-request.push" = "🔒 Prosi o obserwację: ";
+"notifications.label.favorite.push" = "⭐️ Polubił(a): ";
+"notifications.label.poll.push" = "📈 Sondaż zakończony: ";
+"notifications.label.update.push" = "Zaktualizował(a): ";
 
 // MARK: Package: Timeline
 "timeline.federated" = "Strumień globalny";
@@ -358,6 +367,7 @@
 "status.action.translated-label-%@" = "Przetłumaczono za pomocą %@";
 "status.action.bookmark" = "Dodaj zakładkę";
 "status.action.boost" = "Podbij";
+"status.action.boost-to-followers" = "Podbij do obserwujących";
 "status.action.copy-text" = "Kopiuj tekst";
 "status.action.delete" = "Usuń";
 "status.action.delete.confirm.title" = "Potwierdź";
@@ -372,6 +382,9 @@
 "status.action.reply" = "Odpowiedz";
 "status.action.section.your-post" = "Twój post";
 "status.action.share" = "Udostępnij ten post";
+"status.action.share-link" = "Udostępnij link do tego postu";
+"status.action.share-image" = "Udostępnij ten post jako obrazek";
+"status.action.share-title" = "Udostępnij";
 "status.action.unbookmark" = "Usuń zakładkę";
 "status.action.unboost" = "Cofnij podbicie";
 "status.action.unfavorite" = "Usuń z polubionych";
@@ -458,8 +471,8 @@
 "accessibility.editor.button.drafts" = "Wersje robocze";
 "accessibility.editor.button.custom-emojis" = "Emotikony własne";
 "accessibility.editor.button.language" = "Język";
-"accessibility.tabs.timeline.add-account" = "Add account";
-"accessibility.app-account.selector.accounts" = "Accounts";
+"accessibility.tabs.timeline.add-account" = "Dodaj konto";
+"accessibility.app-account.selector.accounts" = "Konta";
 
 // MARK: Report
 "report.comment.placeholder" = "Informacja dodatkowa";

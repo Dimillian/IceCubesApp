@@ -7,12 +7,14 @@ public class Theme: ObservableObject {
     case avatarPosition, avatarShape, statusActionsDisplay, statusDisplayStyle
     case selectedSet, selectedScheme
     case followSystemColorSchme
+    case displayFullUsernameTimeline
   }
 
   public enum FontState: Int, CaseIterable {
     case system
     case openDyslexic
     case hyperLegible
+    case SFRounded
     case custom
 
     @MainActor
@@ -24,6 +26,8 @@ public class Theme: ObservableObject {
         return "Open Dyslexic"
       case .hyperLegible:
         return "Hyper Legible"
+      case .SFRounded:
+        return "SF Rounded"
       case .custom:
         return "settings.display.font.custom"
       }
@@ -72,15 +76,41 @@ public class Theme: ObservableObject {
   }
 
   public enum StatusDisplayStyle: String, CaseIterable {
-    case large, compact
+    case large, medium, compact
 
     public var description: LocalizedStringKey {
       switch self {
       case .large:
         return "enum.status-display-style.large"
+      case .medium:
+        return "enum.status-display-style.medium"
       case .compact:
         return "enum.status-display-style.compact"
       }
+    }
+  }
+
+  private var _cachedChoosenFont: UIFont?
+  public var chosenFont: UIFont? {
+    get {
+      if let _cachedChoosenFont {
+        return _cachedChoosenFont
+      }
+      guard let chosenFontData,
+            let font = try? NSKeyedUnarchiver.unarchivedObject(ofClass: UIFont.self, from: chosenFontData) else { return nil }
+
+      _cachedChoosenFont = font
+      return font
+    }
+    set {
+      if let font = newValue,
+         let data = try? NSKeyedArchiver.archivedData(withRootObject: font, requiringSecureCoding: false)
+      {
+        chosenFontData = data
+      } else {
+        chosenFontData = nil
+      }
+      _cachedChoosenFont = nil
     }
   }
 
@@ -96,6 +126,9 @@ public class Theme: ObservableObject {
   @AppStorage(ThemeKey.statusActionsDisplay.rawValue) public var statusActionsDisplay: StatusActionsDisplay = .full
   @AppStorage(ThemeKey.statusDisplayStyle.rawValue) public var statusDisplayStyle: StatusDisplayStyle = .large
   @AppStorage(ThemeKey.followSystemColorSchme.rawValue) public var followSystemColorScheme: Bool = true
+  @AppStorage(ThemeKey.displayFullUsernameTimeline.rawValue) public var displayFullUsername: Bool = true
+  @AppStorage("font_size_scale") public var fontSizeScale: Double = 1
+  @AppStorage("chosen_font") public private(set) var chosenFontData: Data?
 
   @Published public var avatarPosition: AvatarPosition = .top
   @Published public var avatarShape: AvatarShape = .rounded

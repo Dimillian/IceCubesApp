@@ -40,21 +40,9 @@ public struct StatusDetailView: View {
           case .loading:
             loadingDetailView
 
-          case let .display(status, context, date):
-            if !context.ancestors.isEmpty {
-              ForEach(context.ancestors) { ancestor in
-                StatusRowView(viewModel: .init(status: ancestor, client: client, routerPath: routerPath, isCompact: false))
-              }
-            }
-
-            makeCurrentStatusView(status: status)
+          case let .display(statuses, date):
+            makeStatusesListView(statuses: statuses, date: date)
               .id(date)
-
-            if !context.descendants.isEmpty {
-              ForEach(context.descendants) { descendant in
-                StatusRowView(viewModel: .init(status: descendant, client: client, routerPath: routerPath, isCompact: false))
-              }
-            }
 
             if !isLoaded {
               loadingContextView
@@ -106,12 +94,53 @@ public struct StatusDetailView: View {
     .navigationBarTitleDisplayMode(.inline)
   }
 
+  private func makeStatusesListView(statuses: [Status], date _: Date) -> some View {
+    ForEach(statuses) { status in
+      var isReplyToPrevious: Bool = false
+      if let index = statuses.firstIndex(where: { $0.id == status.id }),
+         index > 0,
+         statuses[index - 1].id == status.inReplyToId
+      {
+        if index == 1, statuses.count > 2 {
+          let nextStatus = statuses[2]
+          isReplyToPrevious = nextStatus.inReplyToId == status.id
+        } else if statuses.count == 2 {
+          isReplyToPrevious = false
+        } else {
+          isReplyToPrevious = true
+        }
+      }
+      let viewModel: StatusRowViewModel = .init(status: status,
+                                                client: client,
+                                                routerPath: routerPath)
+      return HStack(spacing: 0) {
+        if isReplyToPrevious {
+          Rectangle()
+            .fill(theme.tintColor)
+            .frame(width: 2)
+          Spacer(minLength: 8)
+        }
+        if self.viewModel.statusId == status.id {
+          makeCurrentStatusView(status: status)
+            .environment(\.extraLeadingInset, isReplyToPrevious ? 10 : 0)
+        } else {
+          StatusRowView(viewModel: viewModel)
+            .environment(\.extraLeadingInset, isReplyToPrevious ? 10 : 0)
+        }
+      }
+      .listRowBackground(viewModel.highlightRowColor)
+      .listRowInsets(.init(top: 12,
+                           leading: .layoutPadding,
+                           bottom: 12,
+                           trailing: .layoutPadding))
+    }
+  }
+
   private func makeCurrentStatusView(status: Status) -> some View {
     StatusRowView(viewModel: .init(status: status,
                                    client: client,
                                    routerPath: routerPath,
-                                   isCompact: false,
-                                   isFocused: true))
+                                   isFocused: !viewModel.isLoadingContext))
       .overlay {
         GeometryReader { reader in
           VStack {}
@@ -137,7 +166,7 @@ public struct StatusDetailView: View {
 
   private var loadingDetailView: some View {
     ForEach(Status.placeholders()) { status in
-      StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath, isCompact: false))
+      StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
         .redacted(reason: .placeholder)
     }
   }
