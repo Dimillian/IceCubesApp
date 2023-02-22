@@ -37,7 +37,7 @@ struct StatusRowActionsView: View {
     }
 
     func count(viewModel: StatusRowViewModel, theme: Theme) -> Int? {
-      if theme.statusActionsDisplay == .discret {
+        if theme.statusActionsDisplay == .discret && !viewModel.isFocused {
         return nil
       }
       switch self {
