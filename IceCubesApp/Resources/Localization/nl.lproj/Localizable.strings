@@ -36,7 +36,7 @@
 "enum.status-actions-display.no-buttons" = "Geen knoppen";
 "enum.status-actions-display.only-buttons" = "Zonder tekst";
 "enum.status-display-style.compact" = "Compact";
-"enum.status-display-style.medium" = "Medium";
+"enum.status-display-style.medium" = "Middel";
 "enum.status-display-style.large" = "Groot";
 "enum.swipeactions.icon-with-text" = "Symbolen en tekst";
 "enum.swipeactions.icon-only" = "Alleen symbolen";
@@ -365,8 +365,8 @@
 "status.action.translate-from-%@" = "Vertaal uit het %@";
 "status.action.translated-label-%@" = "Vertaald met behulp van %@";
 "status.action.bookmark" = "Voeg bladwijzer toe";
-"status.action.boost" = "Boosten";
-"status.action.boost-to-followers" = "Boost to Followers";
+"status.action.boost" = "Boost";
+"status.action.boost-to-followers" = "Boost aan volgers";
 "status.action.copy-text" = "Kopieer tekst";
 "status.action.delete" = "Verwijder";
 "status.action.delete.confirm.title" = "Bevestigen";
@@ -428,7 +428,7 @@
 "status.media.contextmenu.view-browser" = "Open in browser";
 "status.media.sensitive.show" = "Toon gevoelige inhoud";
 "status.poll.n-votes %lld" = "%lld stemmen";
-"status.poll.n-votes-voters %lld %lld" = "%lld votes from %lld voters";
+"status.poll.n-votes-voters %lld %lld" = "%lld stemmen van %lld personen";
 "status.poll.closed" = "Beëindigd";
 "status.poll.closes-in" = "Eindigt over ";
 "status.poll.duration" = "Pollduur";
