@@ -368,7 +368,6 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Translate";
-"status.action.translate-from-%@" = "Translate from %@";
 "status.action.translated-label-%@" = "Translated using %@";
 "status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Bookmark";

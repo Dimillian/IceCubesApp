@@ -361,7 +361,6 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Itzuli";
-"status.action.translate-from-%@" = "Itzuli %@(e)tik";
 "status.action.translated-label-%@" = "%@ erabiliz itzulia";
 "status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Jarri laster-marka";
