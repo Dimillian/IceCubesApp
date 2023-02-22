@@ -279,6 +279,8 @@ public struct StatusRowMediaPreviewView: View {
         .frame(maxWidth: isNotifications ? imageMaxHeight : nil)
         .frame(height: imageMaxHeight)
       }
+      // #965: do not create overlapping tappable areas, when multiple images are shown
+      .contentShape(Rectangle())
       .onTapGesture {
         Task {
           await quickLook.prepareFor(urls: attachments.compactMap { $0.url }, selectedURL: attachment.url!)
