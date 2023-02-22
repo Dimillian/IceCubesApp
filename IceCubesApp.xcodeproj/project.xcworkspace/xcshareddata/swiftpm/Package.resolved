@@ -10,15 +10,6 @@
       }
     },
     {
-      "identity" : "boutique",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/mergesort/Boutique",
-      "state" : {
-        "revision" : "b5b697de67100edc4b2d5c74724f3c1068b49d4e",
-        "version" : "2.1.1"
-      }
-    },
-    {
       "identity" : "emojitext",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/divadretlaw/EmojiText",
@@ -70,15 +61,6 @@
       "state" : {
         "revision" : "4d543d811ee644fa4cc4bfa0be996b4dd6ba0f54",
         "version" : "0.13.3"
-      }
-    },
-    {
-      "identity" : "swift-collections",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-collections",
-      "state" : {
-        "revision" : "48254824bb4248676bf7ce56014ff57b142b77eb",
-        "version" : "1.0.2"
       }
     },
     {
