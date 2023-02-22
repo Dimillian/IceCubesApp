@@ -28,10 +28,12 @@ public struct InstanceInfoSection: View {
       LabeledContent("instance.info.name", value: instance.title)
       Text(instance.shortDescription)
       LabeledContent("instance.info.email", value: instance.email)
-      LabeledContent("instance.info.version", value: instance.version)
-      LabeledContent("instance.info.users", value: "\(instance.stats.userCount)")
-      LabeledContent("instance.info.posts", value: "\(instance.stats.statusCount)")
-      LabeledContent("instance.info.domains", value: "\(instance.stats.domainCount)")
+      LabeledContent("instance.info.version") {
+        Text(instance.version).monospaced()
+      }
+      LabeledContent("instance.info.users", value: format(instance.stats.userCount))
+      LabeledContent("instance.info.posts", value: format(instance.stats.statusCount))
+      LabeledContent("instance.info.domains", value: format(instance.stats.domainCount))
     }
     .listRowBackground(theme.primaryBackgroundColor)
 
@@ -43,5 +45,11 @@ public struct InstanceInfoSection: View {
       }
       .listRowBackground(theme.primaryBackgroundColor)
     }
+  }
+  
+  private func format(_ int: Int) -> String {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .decimal
+    return formatter.string(from: NSNumber(value: int))!
   }
 }
