@@ -60,6 +60,12 @@ struct StatusRowHeaderView: View {
             .font(.scaledFootnote)
             .foregroundColor(.gray)
             .lineLimit(1)
+        } else if theme.displayFullUsername, theme.avatarPosition == .leading {
+          Text("@\(status.account.acct)")
+            .font(.scaledFootnote)
+            .foregroundColor(.gray)
+            .lineLimit(1)
+            .offset(y: 1)
         }
       }
     }
