@@ -37,7 +37,7 @@
 "enum.status-actions-display.only-buttons" = "ボタンのみ";
 "enum.status-display-style.compact" = "縮小";
 "enum.status-display-style.large" = "拡大";
-"enum.status-display-style.medium" = "Medium";
+"enum.status-display-style.medium" = "標準";
 "enum.swipeactions.icon-with-text" = "アイコンと文字";
 "enum.swipeactions.icon-only" = "アイコンのみ";
 
@@ -170,21 +170,21 @@
 "settings.display.show-ipad-column" = "セカンドカラムを有効にする";
 
 "settings.general.swipeactions" = "スワイプ操作";
-"settings.swipeactions.appearance" = "Appearance";
+"settings.swipeactions.appearance" = "外観";
 "settings.swipeactions.navigation-title" = "スワイプ操作";
-"settings.swipeactions.primary" = "Primary Action";
-"settings.swipeactions.secondary" = "Secondary Action";
+"settings.swipeactions.primary" = "メイン操作";
+"settings.swipeactions.secondary" = "サブ操作";
 "settings.swipeactions.status.action.bookmark" = "ブックマーク";
 "settings.swipeactions.status.action.boost" = "ブースト";
 "settings.swipeactions.status.action.favorite" = "お気に入り";
 "settings.swipeactions.status.action.none" = "未定義";
 "settings.swipeactions.status.action.quote" = "引用";
 "settings.swipeactions.status.action.reply" = "返信";
-"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
+"settings.swipeactions.status.explanation" = "スワイプ操作は、投稿を左右にスワイプすると使用できます。サブ操作は、メイン操作が設定されている場合にのみ使用できます。";
 "settings.swipeactions.status.leading" = "右にスワイプ";
 "settings.swipeactions.status.trailing" = "左にスワイプ";
 "settings.swipeactions.status" = "投稿";
-"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors" = "テーマ色を使う";
 "settings.swipeactions.use-theme-colors-explanation" = "デフォルトの色の代わりにテーマの色を使用する";
 "settings.swipeactions.icon-style" = "アイコンスタイル";
 
@@ -433,7 +433,7 @@
 "status.media.contextmenu.view-browser" = "ブラウザで見る";
 "status.media.sensitive.show" = "センシティブな内容を表示する";
 "status.poll.n-votes %lld" = "%lld 投票";
-"status.poll.n-votes-voters %lld %lld" = "%lld から投票 %lld 票";
+"status.poll.n-votes-voters %lld %lld" = "%lld 票 %lld からの投票";
 "status.poll.closed" = "投票終了";
 "status.poll.closes-in" = "投票終了まで ";
 "status.poll.duration" = "投票期間";
