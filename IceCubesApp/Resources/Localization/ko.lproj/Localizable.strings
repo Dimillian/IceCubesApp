@@ -375,6 +375,7 @@
 "status.action.boost" = "부스트";
 "status.action.boost-to-followers" = "팔로워에게만 부스트";
 "status.action.copy-text" = "복사";
+"status.action.copy-link" = "Copy Link";
 "status.action.delete" = "삭제";
 "status.action.delete.confirm.title" = "삭제 확인";
 "status.action.delete.confirm.message" = "이 글을 정말 삭제하시겠습니까?";

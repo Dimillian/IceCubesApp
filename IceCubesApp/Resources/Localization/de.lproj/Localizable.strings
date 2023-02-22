@@ -369,6 +369,7 @@
 "status.action.boost" = "Boosten";
 "status.action.boost-to-followers" = "An Follower boosten";
 "status.action.copy-text" = "Text kopieren";
+"status.action.copy-link" = "Copy Link";
 "status.action.delete" = "Löschen";
 "status.action.delete.confirm.title" = "Bestätigen";
 "status.action.delete.confirm.message" = "Bist du dir sicher, dass du diesen Beitrag löschen möchtest?";
