@@ -374,6 +374,7 @@
 "status.action.boost" = "Retootear";
 "status.action.boost-to-followers" = "Retootear a tus seguidores";
 "status.action.copy-text" = "Copiar texto";
+"status.action.copy-link" = "Copy Link";
 "status.action.delete" = "Borrar";
 "status.action.delete.confirm.title" = "Confirmar";
 "status.action.delete.confirm.message" = "¿Estás seguro de querer borrar esta publicación?";

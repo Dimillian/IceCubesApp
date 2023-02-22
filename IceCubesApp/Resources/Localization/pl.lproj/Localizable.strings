@@ -369,6 +369,7 @@
 "status.action.boost" = "Podbij";
 "status.action.boost-to-followers" = "Podbij do obserwujących";
 "status.action.copy-text" = "Kopiuj tekst";
+"status.action.copy-link" = "Copy Link";
 "status.action.delete" = "Usuń";
 "status.action.delete.confirm.title" = "Potwierdź";
 "status.action.delete.confirm.message" = "czy na pewno chcesz usunąć ten post?";

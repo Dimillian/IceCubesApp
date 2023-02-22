@@ -10,10 +10,32 @@ public struct StatusRowCardView: View {
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
 
   @EnvironmentObject private var theme: Theme
+  
   let card: Card
 
   public init(card: Card) {
     self.card = card
+  }
+  
+  private var maxWidth: CGFloat? {
+    if theme.statusDisplayStyle == .medium {
+      return 300
+    }
+    return nil
+  }
+  
+  private func imageWidthFor(proxy: GeometryProxy) -> CGFloat {
+    if theme.statusDisplayStyle == .medium, let maxWidth {
+      return maxWidth
+    }
+    return proxy.frame(in: .local).width
+  }
+  
+  private var imageHeight: CGFloat {
+    if theme.statusDisplayStyle == .medium {
+      return 100
+    }
+    return 200
   }
 
   public var body: some View {
@@ -21,25 +43,25 @@ public struct StatusRowCardView: View {
       VStack(alignment: .leading) {
         if let imageURL = card.image, !isInCaptureMode {
           GeometryReader { proxy in
-            let processors: [ImageProcessing] = [.resize(size: .init(width: proxy.frame(in: .local).width,
-                                                                     height: 200))]
+            let width = imageWidthFor(proxy: proxy)
+            let processors: [ImageProcessing] = [.resize(size: .init(width: width, height: imageHeight))]
             LazyImage(url: imageURL) { state in
               if let image = state.image {
                 image
                   .resizable()
                   .aspectRatio(contentMode: .fill)
-                  .frame(height: 200)
-                  .frame(maxWidth: proxy.frame(in: .local).width)
+                  .frame(height: imageHeight)
+                  .frame(maxWidth: width)
                   .clipped()
               } else if state.isLoading {
                 Rectangle()
                   .fill(Color.gray)
-                  .frame(height: 200)
+                  .frame(height: imageHeight)
               }
             }
             .processors(processors)
           }
-          .frame(height: 200)
+          .frame(height: imageHeight)
         }
         HStack {
           VStack(alignment: .leading, spacing: 6) {
@@ -60,6 +82,7 @@ public struct StatusRowCardView: View {
           Spacer()
         }.padding(8)
       }
+      .frame(maxWidth: maxWidth)
       .fixedSize(horizontal: false, vertical: true)
       .background(theme.secondaryBackgroundColor)
       .cornerRadius(16)

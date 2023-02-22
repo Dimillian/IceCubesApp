@@ -373,6 +373,7 @@
 "status.action.boost" = "ブースト";
 "status.action.boost-to-followers" = "フォロワーにブースト";
 "status.action.copy-text" = "テキストをコピー";
+"status.action.copy-link" = "Copy Link";
 "status.action.delete" = "削除";
 "status.action.delete.confirm.title" = "確認";
 "status.action.delete.confirm.message" = "本当に投稿を削除しますか？";
