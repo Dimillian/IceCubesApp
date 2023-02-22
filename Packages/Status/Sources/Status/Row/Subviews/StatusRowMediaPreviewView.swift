@@ -171,7 +171,7 @@ public struct StatusRowMediaPreviewView: View {
               .frame(width: newSize.width, height: newSize.height)
           }
         }
-        .processors([.resize(size: .init(width: newSize.width, height: newSize.height))])
+        .processors([.resize(size: newSize)])
         .frame(width: newSize.width, height: newSize.height)
 
       case .gifv, .video, .audio:
