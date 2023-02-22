@@ -37,7 +37,7 @@
 "enum.status-actions-display.only-buttons" = "Tylko przyciski";
 "enum.status-display-style.compact" = "Pomniejszone";
 "enum.status-display-style.large" = "Duże";
-"enum.status-display-style.medium" = "Medium";
+"enum.status-display-style.medium" = "Średnie";
 "enum.swipeactions.icon-with-text" = "Ikona z tekstem";
 "enum.swipeactions.icon-only" = "Tylko ikona";
 
@@ -171,21 +171,21 @@
 
 "settings.general.swipeactions" = "Przeciąganie palcem";
 "settings.swipeactions.navigation-title" = "Przeciąganie palcem";
-"settings.swipeactions.primary" = "Primary Action";
-"settings.swipeactions.secondary" = "Secondary Action";
+"settings.swipeactions.primary" = "Akcja podstawowa";
+"settings.swipeactions.secondary" = "Akcja dodatkowa";
 "settings.swipeactions.status.action.bookmark" = "Dodaj zakładkę";
 "settings.swipeactions.status.action.boost" = "Podbij";
 "settings.swipeactions.status.action.favorite" = "Polub";
 "settings.swipeactions.status.action.none" = "Bez akcji";
 "settings.swipeactions.status.action.quote" = "Zacytuj";
 "settings.swipeactions.status.action.reply" = "Odpowiedz";
-"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
+"settings.swipeactions.status.explanation" = "Akcje przeciągania palcem są dostępne po przesunięciu posta w lewo lub w prawo. Akcja dodatkowa jest dostępna tylko wtedy, gdy ustawiona jest akcja podstawowa.";
 "settings.swipeactions.status.leading" = "Przeciągnij w prawo";
 "settings.swipeactions.status.trailing" = "Przeciągnij w lewo";
 "settings.swipeactions.status" = "Post";
-"settings.swipeactions.appearance" = "Appearance";
-"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
-"settings.swipeactions.use-theme-colors-explanation" = "Używaj kolorów motywu zamiast kolorów domyślnych";
+"settings.swipeactions.appearance" = "Wygląd";
+"settings.swipeactions.use-theme-colors" = "Użyj kolorów motywu";
+"settings.swipeactions.use-theme-colors-explanation" = "Użyj kolorów motywu zamiast kolorów domyślnych";
 "settings.swipeactions.icon-style" = "Styl ikony";
 
 "settings.display.section.font" = "Czcionka";
@@ -364,12 +364,12 @@
 // MARK: Package: Status
 "status.action.translate" = "Przetłumacz";
 "status.action.translated-label-%@" = "Przetłumaczono za pomocą %@";
-"status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
+"status.action.translated-label-from-%@-%@" = "Tekst %@ przetłumaczono za pomocą %@";
 "status.action.bookmark" = "Dodaj zakładkę";
 "status.action.boost" = "Podbij";
 "status.action.boost-to-followers" = "Podbij do obserwujących";
 "status.action.copy-text" = "Kopiuj tekst";
-"status.action.copy-link" = "Copy Link";
+"status.action.copy-link" = "Kopiuj link";
 "status.action.delete" = "Usuń";
 "status.action.delete.confirm.title" = "Potwierdź";
 "status.action.delete.confirm.message" = "czy na pewno chcesz usunąć ten post?";
