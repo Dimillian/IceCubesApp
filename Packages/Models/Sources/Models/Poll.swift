@@ -24,9 +24,16 @@ public struct Poll: Codable, Equatable, Hashable {
   public let expired: Bool
   public let multiple: Bool
   public let votesCount: Int
+  public let votersCount: Int?
   public let voted: Bool?
   public let ownVotes: [Int]?
   public let options: [Option]
+
+  // the votersCount can be null according to the docs when multiple is false.
+  // Didn't find that to be true, but we make sure
+  public var safeVotersCount: Int {
+    return votersCount ?? votesCount
+  }
 }
 
 public struct NullableString: Codable, Equatable, Hashable {

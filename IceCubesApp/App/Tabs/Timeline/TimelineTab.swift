@@ -178,6 +178,9 @@ struct TimelineTab: View {
       }
       statusEditorToolbarItem(routerPath: routerPath,
                               visibility: preferences.postVisibility)
+      if UIDevice.current.userInterfaceIdiom == .pad && !preferences.showiPadSecondaryColumn {
+        SecondaryColumnToolbarItem()
+      }
     } else {
       ToolbarItem(placement: .navigationBarTrailing) {
         addAccountButton

@@ -36,6 +36,7 @@
 "enum.status-actions-display.no-buttons" = "Geen knoppen";
 "enum.status-actions-display.only-buttons" = "Zonder tekst";
 "enum.status-display-style.compact" = "Compact";
+"enum.status-display-style.medium" = "Medium";
 "enum.status-display-style.large" = "Groot";
 "enum.swipeactions.icon-with-text" = "Symbolen en tekst";
 "enum.swipeactions.icon-only" = "Alleen symbolen";
@@ -73,7 +74,7 @@
 "settings.display.example-toot" = "Postvoorbeeld";
 "settings.display.avatar.position" = "Avatarpositie";
 "settings.display.avatar.shape" = "Avatarvorm";
-"settings.display.full-username" = "Display full username";
+"settings.display.full-username" = "Toon volledige gebruikersnaam";
 "settings.display.navigation-title" = "Weergaveopties";
 "settings.display.restore" = "Stel opnieuw in";
 "settings.display.section.display" = "Weergave";
@@ -166,25 +167,26 @@
 "settings.display.show-ipad-column" = "Toon tweede kolom";
 
 "settings.general.swipeactions" = "Veegacties";
+"settings.swipeactions.appearance" = "Appearance";
 "settings.swipeactions.navigation-title" = "Veegacties";
-"settings.swipeactions.status.action.bookmark" = "Bookmark";
+"settings.swipeactions.primary" = "Primaire actie";
+"settings.swipeactions.secondary" = "Secundaire actie";
+"settings.swipeactions.status.action.bookmark" = "Bladwijzer";
 "settings.swipeactions.status.action.boost" = "Boost";
 "settings.swipeactions.status.action.favorite" = "Favoriet";
 "settings.swipeactions.status.action.none" = "Geen";
 "settings.swipeactions.status.action.quote" = "Citaat";
 "settings.swipeactions.status.action.reply" = "Antwoord";
+"settings.swipeactions.status.explanation" = "Veeg naar links of rechts op een post om de veegacties zichtbaar te maken. De secundaire actie is alleen beschikbaar indien de primaire actie is ingesteld.";
 "settings.swipeactions.status.leading" = "Veeg naar rechts";
-"settings.swipeactions.status.leading.left" = "links";
-"settings.swipeactions.status.leading.right" = "rechts";
 "settings.swipeactions.status.trailing" = "Veeg naar links";
-"settings.swipeactions.status.trailing.left" = "links";
-"settings.swipeactions.status.trailing.right" = "rechts";
 "settings.swipeactions.status" = "Post";
-"settings.swipeactions.status.use-theme-colors" = "Gebruik themakleuren in plaats van standaardkleuren";
-"settings.swipeactions.status.icon-style" = "Symboolstijl";
+"settings.swipeactions.appearance" = "Uiterlijk";
+"settings.swipeactions.use-theme-colors" = "Gebruik themakleuren";
+"settings.swipeactions.use-theme-colors-explanation" = "Gebruik themakleuren in plaats van standaardkleuren";
+"settings.swipeactions.icon-style" = "Symboolstijl";
 
 "settings.display.section.font" = "Lettertype";
-"settings.display.font.rounded" = "Gebruik SF Rounded";
 
 // MARK: Tabs
 "tab.explore" = "Ontdekken";
@@ -365,6 +367,7 @@
 "status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Voeg bladwijzer toe";
 "status.action.boost" = "Boosten";
+"status.action.boost-to-followers" = "Boost to Followers";
 "status.action.copy-text" = "Kopieer tekst";
 "status.action.delete" = "Verwijder";
 "status.action.delete.confirm.title" = "Bevestigen";
@@ -379,9 +382,9 @@
 "status.action.reply" = "Antwoord";
 "status.action.section.your-post" = "Jouw post";
 "status.action.share" = "Deel deze post";
-"status.action.share-link" = "Share post link";
-"status.action.share-image" = "Share post as image";
-"status.action.share-title" = "Share";
+"status.action.share-link" = "Deel link naar post";
+"status.action.share-image" = "Deel post als afbeelding";
+"status.action.share-title" = "Delen";
 "status.action.unbookmark" = "Verwijder bladwijzer";
 "status.action.unboost" = "Maak boost ongedaan";
 "status.action.unfavorite" = "Verwijder favoriet";
@@ -426,6 +429,7 @@
 "status.media.contextmenu.view-browser" = "Open in browser";
 "status.media.sensitive.show" = "Toon gevoelige inhoud";
 "status.poll.n-votes %lld" = "%lld stemmen";
+"status.poll.n-votes-voters %lld %lld" = "%lld votes from %lld voters";
 "status.poll.closed" = "Beëindigd";
 "status.poll.closes-in" = "Eindigt over ";
 "status.poll.duration" = "Pollduur";

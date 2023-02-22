@@ -40,15 +40,13 @@ public struct AccountDetailView: View {
   public var body: some View {
     ScrollViewReader { proxy in
       List {
-        Group {
-          makeHeaderView(proxy: proxy)
-            .padding(.bottom, -20)
-          familiarFollowers
-          featuredTagsView
-        }
-        .listRowInsets(.init())
-        .listRowSeparator(.hidden)
-        .listRowBackground(theme.primaryBackgroundColor)
+        makeHeaderView(proxy: proxy)
+          .applyAccountDetailsRowStyle(theme: theme)
+          .padding(.bottom, -20)
+        familiarFollowers
+          .applyAccountDetailsRowStyle(theme: theme)
+        featuredTagsView
+          .applyAccountDetailsRowStyle(theme: theme)
 
         Picker("", selection: $viewModel.selectedTab) {
           ForEach(isCurrentUser ? AccountDetailViewModel.Tab.currentAccountTabs : AccountDetailViewModel.Tab.accountTabs,
@@ -59,9 +57,7 @@ public struct AccountDetailView: View {
         }
         .pickerStyle(.segmented)
         .padding(.layoutPadding)
-        .listRowSeparator(.hidden)
-        .listRowBackground(theme.primaryBackgroundColor)
-        .listRowInsets(.init())
+        .applyAccountDetailsRowStyle(theme: theme)
         .id("status")
 
         switch viewModel.tabState {
@@ -222,7 +218,7 @@ public struct AccountDetailView: View {
   private var listsListView: some View {
     Group {
       ForEach(currentAccount.sortedLists) { list in
-        NavigationLink(value: RouterDestinations.list(list: list)) {
+        NavigationLink(value: RouterDestination.list(list: list)) {
           Text(list.title)
             .font(.scaledHeadline)
             .foregroundColor(theme.labelColor)
@@ -350,7 +346,7 @@ public struct AccountDetailView: View {
                 }
               } else {
                 Menu {
-                  ForEach(MutingDurations.allCases, id: \.rawValue) { duration in
+                  ForEach(MutingDuration.allCases, id: \.rawValue) { duration in
                     Button(duration.description) {
                       Task {
                         do {
@@ -484,6 +480,14 @@ public struct AccountDetailView: View {
         Image(systemName: "ellipsis.circle")
       }
     }
+  }
+}
+
+private extension View {
+  func applyAccountDetailsRowStyle(theme: Theme) -> some View {
+    listRowInsets(.init())
+      .listRowSeparator(.hidden)
+      .listRowBackground(theme.primaryBackgroundColor)
   }
 }
 

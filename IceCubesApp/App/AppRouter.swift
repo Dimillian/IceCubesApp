@@ -3,17 +3,17 @@ import AppAccount
 import Conversations
 import DesignSystem
 import Env
+import LinkPresentation
 import Lists
+import Models
 import Status
 import SwiftUI
 import Timeline
-import LinkPresentation
-import Models
 
 @MainActor
 extension View {
   func withAppRouter() -> some View {
-    navigationDestination(for: RouterDestinations.self) { destination in
+    navigationDestination(for: RouterDestination.self) { destination in
       switch destination {
       case let .accountDetail(id):
         AccountDetailView(accountId: id)
@@ -46,8 +46,8 @@ extension View {
       }
     }
   }
-  
-  func withSheetDestinations(sheetDestinations: Binding<SheetDestinations?>) -> some View {
+
+  func withSheetDestinations(sheetDestinations: Binding<SheetDestination?>) -> some View {
     sheet(item: sheetDestinations) { destination in
       switch destination {
       case let .replyToStatusEditor(status):
@@ -99,7 +99,7 @@ extension View {
       }
     }
   }
-  
+
   func withEnvironments() -> some View {
     environmentObject(CurrentAccount.shared)
       .environmentObject(UserPreferences.shared)
@@ -114,38 +114,39 @@ extension View {
 struct ActivityView: UIViewControllerRepresentable {
   let image: UIImage
   let status: Status
-  
+
   class LinkDelegate: NSObject, UIActivityItemSource {
     let image: UIImage
     let status: Status
-    
+
     init(image: UIImage, status: Status) {
       self.image = image
       self.status = status
     }
-    
-    func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
+
+    func activityViewControllerLinkMetadata(_: UIActivityViewController) -> LPLinkMetadata? {
       let imageProvider = NSItemProvider(object: image)
       let metadata = LPLinkMetadata()
       metadata.imageProvider = imageProvider
       metadata.title = status.reblog?.content.asRawText ?? status.content.asRawText
       return metadata
     }
-    
-    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+
+    func activityViewControllerPlaceholderItem(_: UIActivityViewController) -> Any {
       image
     }
-    
-    func activityViewController(_ activityViewController: UIActivityViewController,
-                                itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+
+    func activityViewController(_: UIActivityViewController,
+                                itemForActivityType _: UIActivity.ActivityType?) -> Any?
+    {
       nil
     }
   }
-  
-  func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityView>) -> UIActivityViewController {
+
+  func makeUIViewController(context _: UIViewControllerRepresentableContext<ActivityView>) -> UIActivityViewController {
     return UIActivityViewController(activityItems: [image, LinkDelegate(image: image, status: status)],
                                     applicationActivities: nil)
   }
-  
-  func updateUIViewController(_ uiViewController: UIActivityViewController, context: UIViewControllerRepresentableContext<ActivityView>) {}
+
+  func updateUIViewController(_: UIActivityViewController, context _: UIViewControllerRepresentableContext<ActivityView>) {}
 }

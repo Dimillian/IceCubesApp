@@ -37,6 +37,7 @@
 "enum.status-actions-display.only-buttons" = "Solo bottoni";
 "enum.status-display-style.compact" = "Compatto";
 "enum.status-display-style.large" = "Completo";
+"enum.status-display-style.medium" = "Medium";
 "enum.swipeactions.icon-with-text" = "Icon e testo";
 "enum.swipeactions.icon-only" = "Solo icone";
 
@@ -73,7 +74,7 @@
 "settings.display.example-toot" = "Post di esempio";
 "settings.display.avatar.position" = "Posizione dell'avatar";
 "settings.display.avatar.shape" = "Forma dell'avatar";
-"settings.display.full-username" = "Display full username";
+"settings.display.full-username" = "Visualizza il nome completo";
 "settings.display.navigation-title" = "Impostazioni di visualizzazione";
 "settings.display.restore" = "Ripristina i valori predefiniti";
 "settings.display.section.display" = "Visualizzazione";
@@ -139,7 +140,7 @@
 "settings.content.default-sensitive" = "Segnala sempre i contenuti come sensibili";
 "settings.content.default-visibility" = "Visibilità del post";
 "settings.content.media" = "Media";
-"settings.content.media.show.alt" = "Show ALT texts";
+"settings.content.media.show.alt" = "Mostra i testi alternativi";
 "settings.content.reading" = "Lettura";
 "settings.content.posting" = "Composizione";
 "enum.expand-media.show" = "Mostra tutti";
@@ -164,30 +165,30 @@
 "settings.haptic.tab-selection" = "Selezione Tab";
 "settings.haptic.buttons" = "Pressione dei bottoni";
 
-"settings.display.show-tab-label" = "Show tab name";
+"settings.display.show-tab-label" = "Visualizza il nome della tab";
 
 "settings.display.show-ipad-column" = "Attiva la seconda colonna";
 
 "settings.general.swipeactions" = "Azioni di scorrimento";
 "settings.swipeactions.navigation-title" = "Azioni di scorrimento";
+"settings.swipeactions.primary" = "Primary Action";
+"settings.swipeactions.secondary" = "Secondary Action";
 "settings.swipeactions.status.action.bookmark" = "Segnalibro";
 "settings.swipeactions.status.action.boost" = "Condividi";
 "settings.swipeactions.status.action.favorite" = "Preferito";
 "settings.swipeactions.status.action.none" = "Niente";
 "settings.swipeactions.status.action.quote" = "Cita";
 "settings.swipeactions.status.action.reply" = "Rispondi";
+"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
 "settings.swipeactions.status.leading" = "Scorrimento a destra";
-"settings.swipeactions.status.leading.left" = "sinistra";
-"settings.swipeactions.status.leading.right" = "destra";
 "settings.swipeactions.status.trailing" = "Scorrimento a sinistra";
-"settings.swipeactions.status.trailing.left" = "sinistra";
-"settings.swipeactions.status.trailing.right" = "destra";
 "settings.swipeactions.status" = "Post";
-"settings.swipeactions.status.use-theme-colors" = "Usa i colori del tema al posto dei colori di default";
-"settings.swipeactions.status.icon-style" = "Stile delle icone";
+"settings.swipeactions.appearance" = "Appearance";
+"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors-explanation" = "Usa i colori del tema al posto dei colori di default";
+"settings.swipeactions.icon-style" = "Stile delle icone";
 
 "settings.display.section.font" = "Font";
-"settings.display.font.rounded" = "Use SF Rounded";
 
 // MARK: Tabs
 "tab.explore" = "Esplora";
@@ -261,15 +262,15 @@
 "account.post.pinned" = "Post fissato";
 "account.posts" = "Post";
 "account.relation.follows-you" = "Ti segue";
-"account.joined" = "Si è unito il giorno";
+"account.joined" = "utente dal";
 "account.action.logout" = "Esci dall'account";
 "account.action.edit-filters" = "Modifica i Filtri";
 
-"account.relation.note.edit" = "Edit Note";
-"account.relation.note.edit.placeholder" = "Enter Note text";
-"account.relation.note.edit.error.save.message" = "Error while saving your note, please try again.";
-"account.relation.note.edit.error.save.title" = "Error while saving your note";
-"account.relation.note.label" = "Note:";
+"account.relation.note.edit" = "Modifica nota";
+"account.relation.note.edit.placeholder" = "Inserisci il testo della nota";
+"account.relation.note.edit.error.save.message" = "Errore durante il salvataggio della nota. Riprova, per favore.";
+"account.relation.note.edit.error.save.title" = "Errore durante il salvataggio della nota";
+"account.relation.note.label" = "Nota:";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Cancella";
@@ -372,6 +373,7 @@
 "status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Salva nei segnalibri";
 "status.action.boost" = "Condividi";
+"status.action.boost-to-followers" = "Condividi con i follower";
 "status.action.copy-text" = "Copia il testo";
 "status.action.delete" = "Elimina";
 "status.action.delete.confirm.title" = "Richiesta di conferma";
@@ -386,9 +388,9 @@
 "status.action.reply" = "Rispondi";
 "status.action.section.your-post" = "I tuoi post";
 "status.action.share" = "Condividi questo post";
-"status.action.share-link" = "Share post link";
-"status.action.share-image" = "Share post as image";
-"status.action.share-title" = "Share";
+"status.action.share-link" = "Condividi il link del post";
+"status.action.share-image" = "Condividi il post come immagine";
+"status.action.share-title" = "Condividi";
 "status.action.unbookmark" = "Rimuovi il segnalibro";
 "status.action.unboost" = "Rimuovi la condivisione";
 "status.action.unfavorite" = "Rimuovi l'apprezzamento";
@@ -433,6 +435,7 @@
 "status.media.contextmenu.view-browser" = "Visualizza nel browser";
 "status.media.sensitive.show" = "Mostra i contenuti sensibili";
 "status.poll.n-votes %lld" = "%lld voti";
+"status.poll.n-votes-voters %lld %lld" = "%lld voti da %lld votanti";
 "status.poll.closed" = "Chiuso";
 "status.poll.closes-in" = "Si chiude in ";
 "status.poll.duration" = "Durata del sondaggio";
@@ -478,8 +481,8 @@
 "accessibility.editor.button.drafts" = "Bozze";
 "accessibility.editor.button.custom-emojis" = "Emoji personalizzate";
 "accessibility.editor.button.language" = "Lingua";
-"accessibility.tabs.timeline.add-account" = "Add account";
-"accessibility.app-account.selector.accounts" = "Accounts";
+"accessibility.tabs.timeline.add-account" = "Aggiungi account";
+"accessibility.app-account.selector.accounts" = "Account";
 
 // MARK: Report
 "report.comment.placeholder" = "Informazioni aggiuntive";

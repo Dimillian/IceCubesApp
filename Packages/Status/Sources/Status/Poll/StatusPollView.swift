@@ -19,20 +19,25 @@ public struct StatusPollView: View {
   }
 
   private func widthForOption(option: Poll.Option, proxy: GeometryProxy) -> CGFloat {
-    if viewModel.poll.votesCount == 0 {
+    if viewModel.poll.safeVotersCount != 0 {
+      let totalWidth = proxy.frame(in: .local).width
+      return totalWidth * ratioForOption(option: option)
+    } else {
       return 0
     }
-    let totalWidth = proxy.frame(in: .local).width
-    let ratio = CGFloat(option.votesCount) / CGFloat(viewModel.poll.votesCount)
-    return totalWidth * ratio
   }
 
   private func percentForOption(option: Poll.Option) -> Int {
-    let ratio = (Float(option.votesCount) / Float(viewModel.poll.votesCount)) * 100
-    if ratio.isNaN {
-      return 0
+    let percent = ratioForOption(option: option) * 100
+    return Int(round(percent))
+  }
+
+  private func ratioForOption(option: Poll.Option) -> CGFloat {
+    if viewModel.poll.safeVotersCount != 0 {
+      return CGFloat(option.votesCount) / CGFloat(viewModel.poll.safeVotersCount)
+    } else {
+      return 0.0
     }
-    return Int(round(ratio))
   }
 
   private func isSelected(option: Poll.Option) -> Bool {
@@ -101,7 +106,11 @@ public struct StatusPollView: View {
 
   private var footerView: some View {
     HStack(spacing: 0) {
-      Text("status.poll.n-votes \(viewModel.poll.votesCount)")
+      if viewModel.poll.multiple {
+        Text("status.poll.n-votes-voters \(viewModel.poll.votesCount) \(viewModel.poll.safeVotersCount)")
+      } else {
+        Text("status.poll.n-votes \(viewModel.poll.votesCount)")
+      }
       Text(" ⸱ ")
       if viewModel.poll.expired {
         Text("status.poll.closed")

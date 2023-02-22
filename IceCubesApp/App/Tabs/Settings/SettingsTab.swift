@@ -46,6 +46,9 @@ struct SettingsTabs: View {
             }
           }
         }
+        if UIDevice.current.userInterfaceIdiom == .pad && !preferences.showiPadSecondaryColumn {
+          SecondaryColumnToolbarItem()
+        }
       }
       .withAppRouter()
       .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
@@ -132,7 +135,7 @@ struct SettingsTabs: View {
         Label("settings.general.remote-timelines", systemImage: "dot.radiowaves.right")
       }
       NavigationLink(destination: ContentSettingsView()) {
-        Label("settings.general.content", systemImage: "rectangle.on.rectangle")
+        Label("settings.general.content", systemImage: "rectangle.stack")
       }
       NavigationLink(destination: SwipeActionsSettingsView()) {
         Label("settings.general.swipeactions", systemImage: "hand.draw")
@@ -185,12 +188,11 @@ struct SettingsTabs: View {
           Label {
             Text("settings.app.icon")
           } icon: {
-            if let icon = IconSelectorView.Icon(string: UIApplication.shared.alternateIconName ?? "AppIcon") {
-              Image(uiImage: .init(named: icon.iconName)!)
-                .resizable()
-                .frame(width: 25, height: 25)
-                .cornerRadius(4)
-            }
+            let icon = IconSelectorView.Icon(string: UIApplication.shared.alternateIconName ?? "AppIcon")
+            Image(uiImage: .init(named: icon.iconName)!)
+              .resizable()
+              .frame(width: 25, height: 25)
+              .cornerRadius(4)
           }
         }
       }

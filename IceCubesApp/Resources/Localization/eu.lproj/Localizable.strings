@@ -37,6 +37,7 @@
 "enum.status-actions-display.only-buttons" = "Botoiak bakarrik";
 "enum.status-display-style.compact" = "Trinkoa";
 "enum.status-display-style.large" = "Handia";
+"enum.status-display-style.medium" = "Medium";
 "enum.swipeactions.icon-with-text" = "Ikonoa eta testua";
 "enum.swipeactions.icon-only" = "Ikonoa soilik";
 
@@ -66,14 +67,14 @@
 "settings.app.icon" = "Aplikazioaren ikonoa";
 "settings.app.icon.navigation-title" = "Ikonoak";
 "settings.app.icon.official" = "Ikono ofizialak";
-"settings.app.icon.designed-by" = "Ikonoen sortzailea:";
+"settings.app.icon.designed-by" = "Ondorengo ikonoen sortzailea:";
 "settings.app.source" = "Iturburu kodea (GitHub)";
 "settings.app.support" = "Eman babesa aplikazioari";
 "settings.app.about" = "Aplikazio honi buruz";
 "settings.display.example-toot" = "Adibidea";
 "settings.display.avatar.position" = "Avatarearen kokapena";
 "settings.display.avatar.shape" = "Avatarearen itxura";
-"settings.display.full-username" = "Display full username";
+"settings.display.full-username" = "Erakutsi erabiltzaile izen osoa";
 "settings.display.navigation-title" = "Pantaila ezarpenak";
 "settings.display.restore" = "Berrezarri defektuzkoa";
 "settings.display.section.display" = "Pantaila";
@@ -167,24 +168,24 @@
 
 "settings.general.swipeactions" = "Mugimenduen ekintzak";
 "settings.swipeactions.navigation-title" = "Atzamar-mugimenduen ekintzak";
+"settings.swipeactions.primary" = "Primary Action";
+"settings.swipeactions.secondary" = "Secondary Action";
 "settings.swipeactions.status.action.bookmark" = "Laster-marka";
 "settings.swipeactions.status.action.boost" = "Bultzatu";
 "settings.swipeactions.status.action.favorite" = "Gogokoa";
 "settings.swipeactions.status.action.none" = "Ezer ez";
 "settings.swipeactions.status.action.quote" = "Aipatu bidalketa";
 "settings.swipeactions.status.action.reply" = "Erantzun";
+"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
 "settings.swipeactions.status.leading" = "Eskumarantz";
-"settings.swipeactions.status.leading.left" = "ezkerra";
-"settings.swipeactions.status.leading.right" = "eskuma";
 "settings.swipeactions.status.trailing" = "Ezkerrerantz";
-"settings.swipeactions.status.trailing.left" = "ezkerra";
-"settings.swipeactions.status.trailing.right" = "eskuma";
 "settings.swipeactions.status" = "Bidalketa";
-"settings.swipeactions.status.use-theme-colors" = "Erabili hautatutako kolorea defektuzko koloreen ordez";
-"settings.swipeactions.status.icon-style" = "Ikonoen itxura";
+"settings.swipeactions.appearance" = "Appearance";
+"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors-explanation" = "Erabili hautatutako kolorea defektuzko koloreen ordez";
+"settings.swipeactions.icon-style" = "Ikonoen itxura";
 
-"settings.display.section.font" = "Font";
-"settings.display.font.rounded" = "Use SF Rounded";
+"settings.display.section.font" = "Letra-tipoa";
 
 "enum.expand-media.show" = "Erakutsi guztia";
 "enum.expand-media.hide" = "Ezkutatu guztia";
@@ -251,30 +252,30 @@
 "account.follow-request.reject" = "Baztertu";
 "account.follow-requests.pending-requests" = "Erabakitzeko eskaerak";
 "account.follow-requests.instructions" = "Erabiltzaile horiek ez dituzte zure bidalketak ikusiko onartzen ez dituzun arte.";
-"account.followers" = "Jarraitzaile";
-"account.following" = "Jarraitzen";
+"account.followers" = "jarraitzaile";
+"account.following" = "jarraitzen";
 "account.list.create" = "Sortu zerrenda berria";
 "account.list.create.confirm" = "Sortu zerrenda";
 "account.list.create.description" = "Idatzi zerrendaren izena";
 "account.list.delete" = "Ezabatu zerrenda";
 "account.list.name" = "Zerrendaren izena";
 "account.post.pinned" = "Finkatutako bidalketa";
-"account.posts" = "Bidalketa";
+"account.posts" = "bidalketa";
 "account.relation.follows-you" = "Jarraitzen dizu";
 "account.joined" = "Batze-data:";
 "account.action.logout" = "Amaitu saioa";
 "account.action.edit-filters" = "Editatu iragazkiak";
 
-"account.relation.note.edit" = "Edit Note";
-"account.relation.note.edit.placeholder" = "Enter Note text";
-"account.relation.note.edit.error.save.message" = "Error while saving your note, please try again.";
-"account.relation.note.edit.error.save.title" = "Error while saving your note";
-"account.relation.note.label" = "Note:";
+"account.relation.note.edit" = "Editatu oharra";
+"account.relation.note.edit.placeholder" = "Idatzi oharra hemen";
+"account.relation.note.edit.error.save.message" = "Errorea oharra gordetzerakoan, saiatu berriro geroago.";
+"account.relation.note.edit.error.save.title" = "Errorea oharra gordetzerakoan";
+"account.relation.note.label" = "Oharra:";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Ezabatu";
 "conversations.action.mark-read" = "Markatu irakurritzat";
-"conversations.action.view-detail" = "View detail";
+"conversations.action.view-detail" = "Ikusi xehetasunak";
 "conversations.empty.message" = "Gizarte-sareko maitasun apur baten bila? Zure mezu zuzen eta aipamen pribatu guztiak hemen topatuko dituzu. Ondo pasa! 📱❤️";
 "conversations.empty.title" = "Inbox Zero";
 "conversations.error.button" = "Saiatu berriro";
@@ -290,15 +291,15 @@
 // MARK: Package: Explore
 "explore.navigation-title" = "Arakatu";
 "explore.search.message-%@" = "Pantaila honetan %@(e)ko edozer bila dezakezu";
-"explore.search.prompt" = "Bilatu erabiltzaileak, bidalketak eta traolak";
+"explore.search.prompt" = "erabiltzaileak, bidalketak eta traolak";
 "explore.search.title" = "Bilatu zure instantzian";
 "explore.search.empty.message" = "Bilaketa honek ez du emaitzarik lortu, saiatu berriro.";
 "explore.search.empty.title" = "Ez dago emaitzarik";
 "explore.section.posts" = "Bidalketak";
 "explore.section.suggested-users" = "Gomendatutako erabiltzaileak";
 "explore.section.tags" = "Traolak";
-"explore.section.trending.links" = "Pil-pilean dauden estekak";
-"explore.section.trending.posts" = "Pil-pilean dauden bidalketak";
+"explore.section.trending.links" = "Gori-gorian dauden estekak";
+"explore.section.trending.posts" = "Bogan dauden bidalketak";
 "explore.section.trending.tags" = "Pil-pilean dauden traolak";
 "explore.section.users" = "Erabiltzaileak";
 
@@ -365,6 +366,7 @@
 "status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Jarri laster-marka";
 "status.action.boost" = "Bultzatu";
+"status.action.boost-to-followers" = "Bultzatu jarraitzaileek ikus dezaten";
 "status.action.copy-text" = "Kopiatu testua";
 "status.action.delete" = "Ezabatu";
 "status.action.delete.confirm.title" = "Baieztatu";
@@ -379,9 +381,9 @@
 "status.action.reply" = "Erantzun";
 "status.action.section.your-post" = "Zure bidalketa";
 "status.action.share" = "Partekatu bidalketa";
-"status.action.share-link" = "Share post link";
-"status.action.share-image" = "Share post as image";
-"status.action.share-title" = "Share";
+"status.action.share-link" = "Partekatu bidalketaren esteka";
+"status.action.share-image" = "Partekatu bidalketa irudi gisa";
+"status.action.share-title" = "Partekatu";
 "status.action.unbookmark" = "Kendu laster-marka";
 "status.action.unboost" = "Kendu bultzada";
 "status.action.unfavorite" = "Kendu gogokoa";
@@ -425,6 +427,8 @@
 "status.media.contextmenu.share" = "Partekatu irudia";
 "status.media.contextmenu.view-browser" = "Ikusi nabigatzailean";
 "status.media.sensitive.show" = "Erakutsi eduki hunkigarria";
+"status.poll.n-votes %lld" = "%lld boto";
+"status.poll.n-votes-voters %lld %lld" = "%lld boto, %lld boto-emaile";
 "status.poll.closed" = "Amaituta";
 "status.poll.closes-in" = "Epemuga: ";
 "status.poll.duration" = "Bozketaren iraupena";
@@ -467,8 +471,8 @@
 "accessibility.editor.button.drafts" = "Zirriborroak";
 "accessibility.editor.button.custom-emojis" = "Instantziaren emojiak";
 "accessibility.editor.button.language" = "Hizkuntza";
-"accessibility.tabs.timeline.add-account" = "Add account";
-"accessibility.app-account.selector.accounts" = "Accounts";
+"accessibility.tabs.timeline.add-account" = "Gehitu kontua";
+"accessibility.app-account.selector.accounts" = "Kontuak";
 
 // MARK: Report
 "report.comment.placeholder" = "Informazio gehigarria";

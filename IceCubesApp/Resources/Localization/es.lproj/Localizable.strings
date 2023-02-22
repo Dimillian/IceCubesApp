@@ -36,6 +36,7 @@
 "enum.status-actions-display.no-buttons" = "Sin botones";
 "enum.status-actions-display.only-buttons" = "Sólo botones";
 "enum.status-display-style.compact" = "Compacto";
+"enum.status-display-style.medium" = "Medium";
 "enum.status-display-style.large" = "Grande";
 "enum.swipeactions.icon-with-text" = "Icon with text";
 "enum.swipeactions.icon-only" = "Icon only";
@@ -138,8 +139,8 @@
 "settings.content.expand-media" = "Mostrar el contenido multimedia";
 "settings.content.default-sensitive" = "Marcar siempre el contenido multimedia como sensible";
 "settings.content.default-visibility" = "Publicar visibilidad";
-"settings.content.media" = "Media";
-"settings.content.media.show.alt" = "Show ALT texts";
+"settings.content.media" = "Multimedia";
+"settings.content.media.show.alt" = "Mostrar textos ALT";
 "settings.content.reading" = "Leyendo";
 "settings.content.posting" = "Publicando";
 "settings.push.duplicate.title" = "Arreglar notificaciones duplicadas";
@@ -156,7 +157,7 @@
 "settings.account.action.delete-cache" = "Vaciar caché";
 
 "settings.general.haptic" = "Respuesta háptica";
-"settings.haptic.navigation-title" = "Ajustes hápticos";
+"settings.haptic.navigation-title" = "Respuesta háptica";
 "settings.haptic.timeline" = "Cronología";
 "settings.haptic.tab-selection" = "Selección de pestaña";
 "settings.haptic.buttons" = "Interacción con botones";
@@ -167,24 +168,24 @@
 
 "settings.general.swipeactions" = "Acciones al deslizar";
 "settings.swipeactions.navigation-title" = "Acciones al deslizar";
+"settings.swipeactions.primary" = "Primary Action";
+"settings.swipeactions.secondary" = "Secondary Action";
 "settings.swipeactions.status.action.bookmark" = "Marcadores";
 "settings.swipeactions.status.action.boost" = "Retootear";
 "settings.swipeactions.status.action.favorite" = "Favorito";
 "settings.swipeactions.status.action.none" = "Ninguna";
 "settings.swipeactions.status.action.quote" = "Citar";
 "settings.swipeactions.status.action.reply" = "Responder";
+"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
 "settings.swipeactions.status.leading" = "Deslizar a la derecha";
-"settings.swipeactions.status.leading.left" = "izquierda";
-"settings.swipeactions.status.leading.right" = "derecha";
 "settings.swipeactions.status.trailing" = "Deslizar a la izquierda";
-"settings.swipeactions.status.trailing.left" = "izquierda";
-"settings.swipeactions.status.trailing.right" = "derecha";
 "settings.swipeactions.status" = "Publicación";
-"settings.swipeactions.status.use-theme-colors" = "Usar colores del tema en lugar de los colores por defecto";
-"settings.swipeactions.status.icon-style" = "Estilo de icono";
+"settings.swipeactions.appearance" = "Appearance";
+"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors-explanation" = "Usar colores del tema en lugar de los colores por defecto";
+"settings.swipeactions.icon-style" = "Estilo de icono";
 
-"settings.display.section.font" = "Font";
-"settings.display.font.rounded" = "Use SF Rounded";
+"settings.display.section.font" = "Fuente";
 
 "enum.expand-media.show" = "Siempre";
 "enum.expand-media.hide" = "Nunca";
@@ -372,6 +373,7 @@
 "status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Añadir a marcadores";
 "status.action.boost" = "Retootear";
+"status.action.boost-to-followers" = "Boost to Followers";
 "status.action.copy-text" = "Copiar texto";
 "status.action.delete" = "Borrar";
 "status.action.delete.confirm.title" = "Confirm";
@@ -433,6 +435,7 @@
 "status.media.contextmenu.view-browser" = "Ver en navegador";
 "status.media.sensitive.show" = "Mostrar contenido sensible";
 "status.poll.n-votes %lld" = "%lld votos";
+"status.poll.n-votes-voters %lld %lld" = "%lld votes from %lld voters";
 "status.poll.closed" = "Cerrada";
 "status.poll.closes-in" = "Acaba en ";
 "status.poll.duration" = "Duración de la encuesta";

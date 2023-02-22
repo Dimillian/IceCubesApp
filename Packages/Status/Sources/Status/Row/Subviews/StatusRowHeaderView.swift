@@ -1,7 +1,7 @@
 import DesignSystem
+import Env
 import Models
 import SwiftUI
-import Env
 
 struct StatusRowHeaderView: View {
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
@@ -57,19 +57,25 @@ struct StatusRowHeaderView: View {
         }
         if theme.avatarPosition == .top {
           dateView
-          .font(.scaledFootnote)
-          .foregroundColor(.gray)
-          .lineLimit(1)
+            .font(.scaledFootnote)
+            .foregroundColor(.gray)
+            .lineLimit(1)
+        } else if theme.displayFullUsername, theme.avatarPosition == .leading {
+          Text("@\(status.account.acct)")
+            .font(.scaledFootnote)
+            .foregroundColor(.gray)
+            .lineLimit(1)
+            .offset(y: 1)
         }
       }
     }
   }
-  
+
   private var dateView: Text {
     Text(viewModel.status.account.bot ? "🤖 " : "") +
-    Text(status.createdAt.relativeFormatted) +
-    Text(" ⸱ ") +
-    Text(Image(systemName: viewModel.status.visibility.iconName))
+      Text(status.createdAt.relativeFormatted) +
+      Text(" ⸱ ") +
+      Text(Image(systemName: viewModel.status.visibility.iconName))
   }
 
   @ViewBuilder
@@ -88,7 +94,7 @@ struct StatusRowHeaderView: View {
       StatusRowContextMenu(viewModel: viewModel)
     } label: {
       Image(systemName: "ellipsis")
-        .frame(width: 20)
+        .frame(width: 20, height: 20)
     }
     .menuStyle(.borderlessButton)
     .foregroundColor(.gray)

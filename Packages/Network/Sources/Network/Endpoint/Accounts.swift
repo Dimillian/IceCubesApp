@@ -164,7 +164,7 @@ public struct MuteData: Encodable, Sendable {
 
 public struct RelationshipNoteData: Encodable, Sendable {
   public let comment: String
-  
+
   public init(note comment: String) {
     self.comment = comment
   }

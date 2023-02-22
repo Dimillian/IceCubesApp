@@ -12,6 +12,9 @@ struct StatusEditorMediaEditView: View {
   let container: StatusEditorMediaContainer
 
   @State private var imageDescription: String = ""
+  @FocusState private var isFieldFocused: Bool
+  
+  @State private var isUpdating: Bool = false
 
   var body: some View {
     NavigationStack {
@@ -20,6 +23,7 @@ struct StatusEditorMediaEditView: View {
           TextField("status.editor.media.image-description",
                     text: $imageDescription,
                     axis: .vertical)
+          .focused($isFieldFocused)
         }
         .listRowBackground(theme.primaryBackgroundColor)
         Section {
@@ -48,24 +52,35 @@ struct StatusEditorMediaEditView: View {
       .background(theme.secondaryBackgroundColor)
       .onAppear {
         imageDescription = container.mediaAttachment?.description ?? ""
+        isFieldFocused = true
       }
       .navigationTitle("status.editor.media.edit-image")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
-          Button("action.done") {
+          Button {
             if !imageDescription.isEmpty {
+              isUpdating = true
               if currentInstance.isEditAltTextSupported && viewModel.mode.isEditing {
                 Task {
                   await viewModel.editDescription(container: container, description: imageDescription)
+                  dismiss()
+                  isUpdating = false
                 }
               } else {
                 Task {
                   await viewModel.addDescription(container: container, description: imageDescription)
+                  dismiss()
+                  isUpdating = false
                 }
               }
             }
-            dismiss()
+          } label: {
+            if isUpdating {
+              ProgressView()
+            } else {
+              Text("action.done")
+            }
           }
         }
 

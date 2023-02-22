@@ -56,13 +56,13 @@ public protocol AnyStatus {
 }
 
 public struct StatusViewId: Hashable {
-    let id: String
-    let editedAt: ServerDate?
+  let id: String
+  let editedAt: Date?
 }
 
 public extension AnyStatus {
   var viewId: StatusViewId {
-    StatusViewId(id: id, editedAt: editedAt)
+    StatusViewId(id: id, editedAt: editedAt?.asDate)
   }
 }
 
@@ -74,7 +74,7 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
   public var userMentioned: Bool?
 
   public static func == (lhs: Status, rhs: Status) -> Bool {
-    lhs.id == rhs.id
+    lhs.id == rhs.id && lhs.viewId == rhs.viewId
   }
 
   public func hash(into hasher: inout Hasher) {

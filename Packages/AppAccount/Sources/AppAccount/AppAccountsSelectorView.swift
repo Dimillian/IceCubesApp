@@ -92,7 +92,8 @@ public struct AppAccountsSelectorView: View {
               Image(uiImage: image)
             }
             if let token = viewModel.appAccount.oauthToken,
-               preferences.getNotificationsCount(for: token) > 0 {
+               preferences.getNotificationsCount(for: token) > 0
+            {
               Text("\(viewModel.account?.displayName ?? "") (\(preferences.getNotificationsCount(for: token)))")
             } else {
               Text("\(viewModel.account?.displayName ?? "")")

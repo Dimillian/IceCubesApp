@@ -38,12 +38,20 @@ struct NotificationsTab: View {
               }
             }
           }
+          if UIDevice.current.userInterfaceIdiom == .pad {
+            if (!isSecondaryColumn && !userPreferences.showiPadSecondaryColumn) || isSecondaryColumn {
+              SecondaryColumnToolbarItem()
+            }
+          }
         }
         .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
         .id(client.id)
     }
     .onAppear {
       routerPath.client = client
+      if isSecondaryColumn {
+        clearNotifications()
+      }
     }
     .withSafariRouter()
     .environmentObject(routerPath)
@@ -69,18 +77,22 @@ struct NotificationsTab: View {
     .onChange(of: scenePhase, perform: { scenePhase in
       switch scenePhase {
       case .active:
-        if isSecondaryColumn {
-          if let token = appAccount.currentAccount.oauthToken {
-            userPreferences.setNotification(count: 0, token: token)
-          }
-          watcher.unreadNotificationsCount = 0
-        }
+        clearNotifications()
       default:
         break
       }
     })
     .onChange(of: client.id) { _ in
       routerPath.path = []
+    }
+  }
+  
+  private func clearNotifications() {
+    if isSecondaryColumn {
+      if let token = appAccount.currentAccount.oauthToken {
+        userPreferences.setNotification(count: 0, token: token)
+      }
+      watcher.unreadNotificationsCount = 0
     }
   }
 }

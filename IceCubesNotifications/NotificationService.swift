@@ -64,7 +64,7 @@ class NotificationService: UNNotificationServiceExtension {
       bestAttemptContent.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "glass.caf"))
 
       let preferences = UserPreferences.shared
-      if let token = AppAccountsManager.shared.availableAccounts.first(where: { $0.oauthToken?.accessToken == notification.accessToken})?.oauthToken {
+      if let token = AppAccountsManager.shared.availableAccounts.first(where: { $0.oauthToken?.accessToken == notification.accessToken })?.oauthToken {
         var currentCount = preferences.getNotificationsCount(for: token)
         currentCount += 1
         preferences.setNotification(count: currentCount, token: token)

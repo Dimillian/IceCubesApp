@@ -1,10 +1,9 @@
-import NukeUI
 import Nuke
+import NukeUI
 import Shimmer
 import SwiftUI
 
 public struct AvatarView: View {
-  @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
   @Environment(\.redactionReasons) private var reasons
   @EnvironmentObject private var theme: Theme
 
@@ -56,24 +55,17 @@ public struct AvatarView: View {
           .fill(.gray)
           .frame(width: size.size.width, height: size.size.height)
       } else {
-        if isInCaptureMode, let url = url, let image = Nuke.ImagePipeline.shared.cache.cachedImage(for: makeImageRequest(for: url))?.image {
-          Image(uiImage: image)
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: size.size.width, height: size.size.height)
-        } else {
-          LazyImage(request: url.map(makeImageRequest)) { state in
-            if let image = state.image {
-              image
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-            } else {
-              AvatarPlaceholderView(size: size)
-            }
+        LazyImage(request: url.map(makeImageRequest)) { state in
+          if let image = state.image {
+            image
+              .resizable()
+              .aspectRatio(contentMode: .fit)
+          } else {
+            AvatarPlaceholderView(size: size)
           }
-          .animation(nil)
-          .frame(width: size.size.width, height: size.size.height)
         }
+        .animation(nil)
+        .frame(width: size.size.width, height: size.size.height)
       }
     }
     .clipShape(clipShape)
@@ -97,17 +89,17 @@ public struct AvatarView: View {
 }
 
 private struct AvatarPlaceholderView: View {
-    let size: AvatarView.Size
+  let size: AvatarView.Size
 
-    var body: some View {
-        if size == .badge {
-          Circle()
-            .fill(.gray)
-            .frame(width: size.size.width, height: size.size.height)
-        } else {
-          RoundedRectangle(cornerRadius: size.cornerRadius)
-            .fill(.gray)
-            .frame(width: size.size.width, height: size.size.height)
-        }
+  var body: some View {
+    if size == .badge {
+      Circle()
+        .fill(.gray)
+        .frame(width: size.size.width, height: size.size.height)
+    } else {
+      RoundedRectangle(cornerRadius: size.cornerRadius)
+        .fill(.gray)
+        .frame(width: size.size.width, height: size.size.height)
     }
+  }
 }

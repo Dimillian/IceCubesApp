@@ -8,7 +8,7 @@ import SwiftUI
 public struct StatusRowCardView: View {
   @Environment(\.openURL) private var openURL
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
-  
+
   @EnvironmentObject private var theme: Theme
   let card: Card
 
@@ -67,7 +67,6 @@ public struct StatusRowCardView: View {
         RoundedRectangle(cornerRadius: 16)
           .stroke(.gray.opacity(0.35), lineWidth: 1)
       )
-      .frame(maxWidth: .maxColumnWidth)
       .onTapGesture {
         openURL(url)
       }

@@ -4,7 +4,7 @@ import SwiftUI
 
 struct StatusRowTextView: View {
   @EnvironmentObject private var theme: Theme
-  
+
   let status: AnyStatus
   let viewModel: StatusRowViewModel
 

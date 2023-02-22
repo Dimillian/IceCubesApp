@@ -43,10 +43,10 @@ public class StatusRowViewModel: ObservableObject {
   var filter: Filtered? {
     status.reblog?.filtered?.first ?? status.filtered?.first
   }
-  
+
   var isThread: Bool {
     status.reblog?.inReplyToId != nil || status.reblog?.inReplyToAccountId != nil ||
-    status.inReplyToId != nil || status.inReplyToAccountId != nil 
+      status.inReplyToId != nil || status.inReplyToAccountId != nil
   }
 
   var highlightRowColor: Color {

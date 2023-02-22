@@ -100,7 +100,8 @@ struct IceCubesApp: App {
 
   private func badgeFor(tab: Tab) -> Int {
     if tab == .notifications && selectedTab != tab,
-        let token = appAccountsManager.currentAccount.oauthToken {
+       let token = appAccountsManager.currentAccount.oauthToken
+    {
       return watcher.unreadNotificationsCount + userPreferences.getNotificationsCount(for: token)
     }
     return 0
@@ -132,8 +133,7 @@ struct IceCubesApp: App {
               }
             }
           }
-          if proxy.frame(in: .global).width > (.maxColumnWidth + .secondaryColumnWidth),
-             appAccountsManager.currentClient.isAuth,
+          if appAccountsManager.currentClient.isAuth,
              userPreferences.showiPadSecondaryColumn
           {
             Divider().edgesIgnoringSafeArea(.all)
@@ -149,7 +149,7 @@ struct IceCubesApp: App {
   private var notificationsSecondaryColumn: some View {
     NotificationsTab(popToRootTab: $popToRootTab, lockedType: nil)
       .environment(\.isSecondaryColumn, true)
-      .frame(maxWidth: 360)
+      .frame(maxWidth: .secondaryColumnWidth)
       .id(appAccountsManager.currentAccount.id)
   }
 
@@ -169,7 +169,8 @@ struct IceCubesApp: App {
         }
         selectedTab = newTab
         if selectedTab == .notifications,
-           let token = appAccountsManager.currentAccount.oauthToken {
+           let token = appAccountsManager.currentAccount.oauthToken
+        {
           userPreferences.setNotification(count: 0, token: token)
           watcher.unreadNotificationsCount = 0
         }

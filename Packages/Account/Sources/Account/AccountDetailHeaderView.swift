@@ -23,11 +23,22 @@ struct AccountDetailHeaderView: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      Rectangle()
-        .frame(height: Constants.headerHeight)
-        .overlay {
-          headerImageView
+      ZStack(alignment: .bottomTrailing) {
+        Rectangle()
+          .frame(height: Constants.headerHeight)
+          .overlay {
+            headerImageView
+          }
+        if viewModel.relationship?.followedBy == true {
+          Text("account.relation.follows-you")
+            .font(.scaledFootnote)
+            .fontWeight(.semibold)
+            .padding(4)
+            .background(.ultraThinMaterial)
+            .cornerRadius(4)
+            .padding(8)
         }
+      }
       accountInfoView
     }
   }
@@ -57,16 +68,6 @@ struct AccountDetailHeaderView: View {
           }
         }
         .frame(height: Constants.headerHeight)
-      }
-
-      if viewModel.relationship?.followedBy == true {
-        Text("account.relation.follows-you")
-          .font(.scaledFootnote)
-          .fontWeight(.semibold)
-          .padding(4)
-          .background(.ultraThinMaterial)
-          .cornerRadius(4)
-          .padding(8)
       }
     }
     .background(theme.secondaryBackgroundColor)
@@ -150,9 +151,10 @@ struct AccountDetailHeaderView: View {
           }
         }
       }
-      
+
       if let note = viewModel.relationship?.note, !note.isEmpty,
-          !viewModel.isCurrentUser {
+         !viewModel.isCurrentUser
+      {
         makeNoteView(note)
       }
 
@@ -162,7 +164,7 @@ struct AccountDetailHeaderView: View {
         .environment(\.openURL, OpenURLAction { url in
           routerPath.handle(url: url)
         })
-      
+
       fieldsView
     }
     .padding(.horizontal, .layoutPadding)
@@ -204,7 +206,7 @@ struct AccountDetailHeaderView: View {
       .padding(.top, 6)
     }
   }
-  
+
   @ViewBuilder
   private func makeNoteView(_ note: String) -> some View {
     VStack(alignment: .leading, spacing: 4) {
@@ -221,7 +223,7 @@ struct AccountDetailHeaderView: View {
         )
     }
   }
-  
+
   @ViewBuilder
   private var fieldsView: some View {
     if !viewModel.fields.isEmpty {
