@@ -37,6 +37,7 @@
 "enum.status-actions-display.only-buttons" = "버튼만 표시";
 "enum.status-display-style.compact" = "작게";
 "enum.status-display-style.large" = "크게";
+"enum.status-display-style.medium" = "Medium";
 "enum.swipeactions.icon-with-text" = "아이콘과 텍스트";
 "enum.swipeactions.icon-only" = "아이콘만";
 
@@ -170,21 +171,22 @@
 
 "settings.general.swipeactions" = "쓸어넘기기 동작 설정";
 "settings.swipeactions.navigation-title" = "쓸어넘기기 동작 설정";
+"settings.swipeactions.primary" = "Primary Action";
+"settings.swipeactions.secondary" = "Secondary Action";
 "settings.swipeactions.status.action.bookmark" = "보관함에 추가";
 "settings.swipeactions.status.action.boost" = "부스트";
 "settings.swipeactions.status.action.favorite" = "좋아요";
 "settings.swipeactions.status.action.none" = "설정 안 함";
 "settings.swipeactions.status.action.quote" = "인용";
 "settings.swipeactions.status.action.reply" = "댓글";
+"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
 "settings.swipeactions.status.leading" = "오른쪽으로 쓸어넘길 때";
-"settings.swipeactions.status.leading.left" = "왼쪽 버튼";
-"settings.swipeactions.status.leading.right" = "오른쪽 버튼";
 "settings.swipeactions.status.trailing" = "왼쪽으로 쓸어넘길 때";
-"settings.swipeactions.status.trailing.left" = "왼쪽 버튼";
-"settings.swipeactions.status.trailing.right" = "오른쪽 버튼";
 "settings.swipeactions.status" = "글";
-"settings.swipeactions.status.use-theme-colors" = "기본 색상 대신 테마 색상 사용";
-"settings.swipeactions.status.icon-style" = "아이콘 모양";
+"settings.swipeactions.appearance" = "Appearance";
+"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors-explanation" = "기본 색상 대신 테마 색상 사용";
+"settings.swipeactions.icon-style" = "아이콘 모양";
 
 "settings.display.section.font" = "글꼴";
 

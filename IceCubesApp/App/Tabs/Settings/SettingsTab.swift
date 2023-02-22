@@ -189,10 +189,11 @@ struct SettingsTabs: View {
           Label {
             Text("settings.app.icon")
           } icon: {
+            let icon = IconSelectorView.Icon(string: UIApplication.shared.alternateIconName ?? "AppIcon")
             Image(uiImage: .init(named: icon.iconName)!)
-                          .resizable()
-                          .frame(width: 25, height: 25)
-                          .cornerRadius(4)
+              .resizable()
+              .frame(width: 25, height: 25)
+              .cornerRadius(4)
           }
         }
       }

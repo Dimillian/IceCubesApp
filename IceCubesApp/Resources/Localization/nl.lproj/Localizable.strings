@@ -36,6 +36,7 @@
 "enum.status-actions-display.no-buttons" = "Geen knoppen";
 "enum.status-actions-display.only-buttons" = "Zonder tekst";
 "enum.status-display-style.compact" = "Compact";
+"enum.status-display-style.medium" = "Medium";
 "enum.status-display-style.large" = "Groot";
 "enum.swipeactions.icon-with-text" = "Symbolen en tekst";
 "enum.swipeactions.icon-only" = "Alleen symbolen";
@@ -166,22 +167,24 @@
 "settings.display.show-ipad-column" = "Toon tweede kolom";
 
 "settings.general.swipeactions" = "Veegacties";
+"settings.swipeactions.appearance" = "Appearance";
 "settings.swipeactions.navigation-title" = "Veegacties";
-"settings.swipeactions.status.action.bookmark" = "Bookmark";
+"settings.swipeactions.primary" = "Primaire actie";
+"settings.swipeactions.secondary" = "Secundaire actie";
+"settings.swipeactions.status.action.bookmark" = "Bladwijzer";
 "settings.swipeactions.status.action.boost" = "Boost";
 "settings.swipeactions.status.action.favorite" = "Favoriet";
 "settings.swipeactions.status.action.none" = "Geen";
 "settings.swipeactions.status.action.quote" = "Citaat";
 "settings.swipeactions.status.action.reply" = "Antwoord";
+"settings.swipeactions.status.explanation" = "Veeg naar links of rechts op een post om de veegacties zichtbaar te maken. De secundaire actie is alleen beschikbaar indien de primaire actie is ingesteld.";
 "settings.swipeactions.status.leading" = "Veeg naar rechts";
-"settings.swipeactions.status.leading.left" = "links";
-"settings.swipeactions.status.leading.right" = "rechts";
 "settings.swipeactions.status.trailing" = "Veeg naar links";
-"settings.swipeactions.status.trailing.left" = "links";
-"settings.swipeactions.status.trailing.right" = "rechts";
 "settings.swipeactions.status" = "Post";
-"settings.swipeactions.status.use-theme-colors" = "Gebruik themakleuren in plaats van standaardkleuren";
-"settings.swipeactions.status.icon-style" = "Symboolstijl";
+"settings.swipeactions.appearance" = "Uiterlijk";
+"settings.swipeactions.use-theme-colors" = "Gebruik themakleuren";
+"settings.swipeactions.use-theme-colors-explanation" = "Gebruik themakleuren in plaats van standaardkleuren";
+"settings.swipeactions.icon-style" = "Symboolstijl";
 
 "settings.display.section.font" = "Lettertype";
 

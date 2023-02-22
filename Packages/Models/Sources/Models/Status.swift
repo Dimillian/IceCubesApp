@@ -57,12 +57,12 @@ public protocol AnyStatus {
 
 public struct StatusViewId: Hashable {
   let id: String
-  let editedAt: ServerDate?
+  let editedAt: Date?
 }
 
 public extension AnyStatus {
   var viewId: StatusViewId {
-    StatusViewId(id: id, editedAt: editedAt)
+    StatusViewId(id: id, editedAt: editedAt?.asDate)
   }
 }
 

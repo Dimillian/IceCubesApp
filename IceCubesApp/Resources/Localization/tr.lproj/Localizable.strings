@@ -37,6 +37,7 @@
 "enum.status-actions-display.only-buttons" = "Sadece Butonlar";
 "enum.status-display-style.compact" = "Kompakt";
 "enum.status-display-style.large" = "Geniş";
+"enum.status-display-style.medium" = "Medium";
 "enum.swipeactions.icon-with-text" = "Icon with text";
 "enum.swipeactions.icon-only" = "Icon only";
 
@@ -170,21 +171,22 @@
 
 "settings.general.swipeactions" = "Swipe Actions";
 "settings.swipeactions.navigation-title" = "Swipe Actions";
+"settings.swipeactions.primary" = "Primary Action";
+"settings.swipeactions.secondary" = "Secondary Action";
 "settings.swipeactions.status.action.bookmark" = "Bookmark";
 "settings.swipeactions.status.action.boost" = "Boost";
 "settings.swipeactions.status.action.favorite" = "Favorite";
 "settings.swipeactions.status.action.none" = "None";
 "settings.swipeactions.status.action.quote" = "Quote";
 "settings.swipeactions.status.action.reply" = "Reply";
-"settings.swipeactions.status.leading" = "Swipe right";
-"settings.swipeactions.status.leading.left" = "left";
-"settings.swipeactions.status.leading.right" = "right";
-"settings.swipeactions.status.trailing" = "Swipe left";
-"settings.swipeactions.status.trailing.left" = "left";
-"settings.swipeactions.status.trailing.right" = "right";
+"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
+"settings.swipeactions.status.leading" = "Swipe Right";
+"settings.swipeactions.status.trailing" = "Swipe Left";
 "settings.swipeactions.status" = "Post";
-"settings.swipeactions.status.use-theme-colors" = "Use theme colors instead of default colors";
-"settings.swipeactions.status.icon-style" = "Icon style";
+"settings.swipeactions.appearance" = "Appearance";
+"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors-explanation" = "Use theme colors instead of default colors";
+"settings.swipeactions.icon-style" = "Icon Style";
 
 "settings.display.section.font" = "Font";
 
