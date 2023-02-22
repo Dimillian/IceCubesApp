@@ -170,21 +170,22 @@
 
 "settings.general.swipeactions" = "Azioni di scorrimento";
 "settings.swipeactions.navigation-title" = "Azioni di scorrimento";
+"settings.swipeactions.primary" = "Primary Action";
+"settings.swipeactions.secondary" = "Secondary Action";
 "settings.swipeactions.status.action.bookmark" = "Segnalibro";
 "settings.swipeactions.status.action.boost" = "Condividi";
 "settings.swipeactions.status.action.favorite" = "Preferito";
 "settings.swipeactions.status.action.none" = "Niente";
 "settings.swipeactions.status.action.quote" = "Cita";
 "settings.swipeactions.status.action.reply" = "Rispondi";
+"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
 "settings.swipeactions.status.leading" = "Scorrimento a destra";
-"settings.swipeactions.status.leading.left" = "sinistra";
-"settings.swipeactions.status.leading.right" = "destra";
 "settings.swipeactions.status.trailing" = "Scorrimento a sinistra";
-"settings.swipeactions.status.trailing.left" = "sinistra";
-"settings.swipeactions.status.trailing.right" = "destra";
 "settings.swipeactions.status" = "Post";
-"settings.swipeactions.status.use-theme-colors" = "Usa i colori del tema al posto dei colori di default";
-"settings.swipeactions.status.icon-style" = "Stile delle icone";
+"settings.swipeactions.appearance" = "Appearance";
+"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors-explanation" = "Usa i colori del tema al posto dei colori di default";
+"settings.swipeactions.icon-style" = "Stile delle icone";
 
 "settings.display.section.font" = "Font";
 

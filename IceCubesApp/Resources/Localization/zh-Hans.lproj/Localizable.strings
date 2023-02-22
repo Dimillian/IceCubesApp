@@ -167,22 +167,23 @@
 "settings.display.show-ipad-column" = "启用边栏";
 
 "settings.general.swipeactions" = "轻扫操作";
+"settings.swipeactions.appearance" = "Appearance";
 "settings.swipeactions.navigation-title" = "轻扫操作设置";
+"settings.swipeactions.primary" = "Primary Action";
+"settings.swipeactions.secondary" = "Secondary Action";
 "settings.swipeactions.status.action.bookmark" = "书签";
 "settings.swipeactions.status.action.boost" = "转发";
 "settings.swipeactions.status.action.favorite" = "喜欢";
 "settings.swipeactions.status.action.none" = "无";
 "settings.swipeactions.status.action.quote" = "引用";
 "settings.swipeactions.status.action.reply" = "回复";
+"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
 "settings.swipeactions.status.leading" = "向右轻扫";
-"settings.swipeactions.status.leading.left" = "左";
-"settings.swipeactions.status.leading.right" = "右";
 "settings.swipeactions.status.trailing" = "向左轻扫";
-"settings.swipeactions.status.trailing.left" = "左";
-"settings.swipeactions.status.trailing.right" = "右";
 "settings.swipeactions.status" = "嘟文";
-"settings.swipeactions.status.use-theme-colors" = "使用主题色而不是默认色";
-"settings.swipeactions.status.icon-style" = "图标样式";
+"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors-explanation" = "使用主题色而不是默认色";
+"settings.swipeactions.icon-style" = "图标样式";
 
 "settings.display.section.font" = "字体";
 
