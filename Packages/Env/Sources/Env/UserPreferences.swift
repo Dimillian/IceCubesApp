@@ -95,6 +95,7 @@ public class UserPreferences: ObservableObject {
 
   public func setNotification(count: Int, token: OauthToken) {
     Self.sharedDefault?.set(count, forKey: "push_notifications_count_\(token.createdAt)")
+    objectWillChange.send()
   }
 
   public func getNotificationsCount(for token: OauthToken) -> Int {
