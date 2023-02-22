@@ -107,6 +107,7 @@ struct StatusRowContextMenu: View {
           .foregroundColor(Theme.shared.labelColor)
           .background(Theme.shared.primaryBackgroundColor)
           .frame(width: sceneDelegate.windowWidth - 12)
+          .tint(Theme.shared.tintColor)
           let renderer = ImageRenderer(content: view)
           renderer.scale = displayScale
           renderer.isOpaque = false
@@ -131,6 +132,12 @@ struct StatusRowContextMenu: View {
       Label("status.action.copy-text", systemImage: "doc.on.doc")
     }
 
+    Button {
+      UIPasteboard.general.string = viewModel.status.reblog?.url ?? viewModel.status.url
+    } label: {
+      Label("status.action.copy-link", systemImage: "link")
+    }
+
     if let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier
     {
       Button {
@@ -138,7 +145,7 @@ struct StatusRowContextMenu: View {
           await viewModel.translate(userLang: lang)
         }
       } label: {
-          Label("status.action.translate", systemImage: "captions.bubble")
+        Label("status.action.translate", systemImage: "captions.bubble")
       }
     }
 

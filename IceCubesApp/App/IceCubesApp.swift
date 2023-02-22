@@ -112,7 +112,7 @@ struct IceCubesApp: App {
                 popToRootTab: $popToRootTab,
                 tabs: availableTabs,
                 routerPath: sidebarRouterPath) {
-      GeometryReader { proxy in
+      GeometryReader { _ in
         HStack(spacing: 0) {
           ZStack {
             if selectedTab == .profile {

@@ -9,37 +9,36 @@ struct SwipeActionsSettingsView: View {
   var body: some View {
     Form {
       Section {
-                
         Label("settings.swipeactions.status.leading", systemImage: "arrow.right")
           .foregroundColor(.secondary)
-        
+
         createStatusActionPicker(selection: $userPreferences.swipeActionsStatusLeadingLeft,
-                             label: "settings.swipeactions.primary")
+                                 label: "settings.swipeactions.primary")
           .onChange(of: userPreferences.swipeActionsStatusLeadingLeft) { action in
             if action == .none {
-              userPreferences.swipeActionsStatusLeadingRight = .none;
+              userPreferences.swipeActionsStatusLeadingRight = .none
             }
           }
-        
+
         createStatusActionPicker(selection: $userPreferences.swipeActionsStatusLeadingRight,
-                               label: "settings.swipeactions.secondary")
-        .disabled(userPreferences.swipeActionsStatusLeadingLeft == .none)
-        
+                                 label: "settings.swipeactions.secondary")
+          .disabled(userPreferences.swipeActionsStatusLeadingLeft == .none)
+
         Label("settings.swipeactions.status.trailing", systemImage: "arrow.left")
           .foregroundColor(.secondary)
-        
+
         createStatusActionPicker(selection: $userPreferences.swipeActionsStatusTrailingRight,
-                             label: "settings.swipeactions.primary")
+                                 label: "settings.swipeactions.primary")
           .onChange(of: userPreferences.swipeActionsStatusTrailingRight) { action in
             if action == .none {
-              userPreferences.swipeActionsStatusTrailingLeft = .none;
+              userPreferences.swipeActionsStatusTrailingLeft = .none
             }
           }
 
         createStatusActionPicker(selection: $userPreferences.swipeActionsStatusTrailingLeft,
-                               label: "settings.swipeactions.secondary")
+                                 label: "settings.swipeactions.secondary")
           .disabled(userPreferences.swipeActionsStatusTrailingRight == .none)
-        
+
       } header: {
         Text("settings.swipeactions.status")
       } footer: {
@@ -82,5 +81,4 @@ struct SwipeActionsSettingsView: View {
       }
     }
   }
-  
 }

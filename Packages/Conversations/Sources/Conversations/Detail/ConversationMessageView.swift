@@ -127,7 +127,7 @@ struct ConversationMessageView: View {
   private func makeImageRequest(for url: URL, size: CGSize) -> ImageRequest {
     ImageRequest(url: url, processors: [.resize(size: size)])
   }
-  
+
   private func mediaWidth(proxy: GeometryProxy) -> CGFloat {
     var width = proxy.frame(in: .local).width
     if UIDevice.current.userInterfaceIdiom == .pad {
@@ -135,7 +135,7 @@ struct ConversationMessageView: View {
     }
     return width
   }
-  
+
   private func makeMediaView(_ attachement: MediaAttachment) -> some View {
     GeometryReader { proxy in
       let width = mediaWidth(proxy: proxy)

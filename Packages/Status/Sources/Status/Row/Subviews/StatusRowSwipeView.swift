@@ -11,7 +11,7 @@ struct StatusRowSwipeView: View {
   enum Mode {
     case leading, trailing
   }
-  
+
   func privateBoost() -> Bool {
     return viewModel.status.visibility == .priv && viewModel.status.account.id == currentAccount.account?.id
   }

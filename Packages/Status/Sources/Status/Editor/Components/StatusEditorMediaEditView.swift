@@ -13,7 +13,7 @@ struct StatusEditorMediaEditView: View {
 
   @State private var imageDescription: String = ""
   @FocusState private var isFieldFocused: Bool
-  
+
   @State private var isUpdating: Bool = false
 
   var body: some View {
@@ -23,7 +23,7 @@ struct StatusEditorMediaEditView: View {
           TextField("status.editor.media.image-description",
                     text: $imageDescription,
                     axis: .vertical)
-          .focused($isFieldFocused)
+            .focused($isFieldFocused)
         }
         .listRowBackground(theme.primaryBackgroundColor)
         Section {

@@ -22,7 +22,7 @@ let package = Package(
     .package(name: "Status", path: "../Status"),
     .package(name: "DesignSystem", path: "../DesignSystem"),
     .package(url: "https://github.com/siteline/SwiftUI-Introspect.git", from: "0.1.4"),
-    .package(url: "https://github.com/mergesort/Boutique", from: "2.1.1"),
+    .package(url: "https://github.com/mergesort/Bodega", from: "2.0.2"),
   ],
   targets: [
     .target(
@@ -34,7 +34,7 @@ let package = Package(
         .product(name: "Status", package: "Status"),
         .product(name: "DesignSystem", package: "DesignSystem"),
         .product(name: "Introspect", package: "SwiftUI-Introspect"),
-        .product(name: "Boutique", package: "Boutique"),
+        .product(name: "Bodega", package: "Bodega"),
       ]
     ),
     .testTarget(
