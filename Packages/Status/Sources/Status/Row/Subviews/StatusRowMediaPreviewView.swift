@@ -21,7 +21,6 @@ public struct StatusRowMediaPreviewView: View {
   public let isNotifications: Bool
 
   @State private var isQuickLookLoading: Bool = false
-  @State private var width: CGFloat = 0
   @State private var altTextDisplayed: String?
   @State private var isAltAlertDisplayed: Bool = false
   @State private var isHidingMedia: Bool = false
@@ -155,39 +154,25 @@ public struct StatusRowMediaPreviewView: View {
   private func makeFeaturedImagePreview(attachment: MediaAttachment) -> some View {
     ZStack(alignment: .bottomTrailing) {
       let size: CGSize = size(for: attachment) ?? .init(width: imageMaxHeight, height: imageMaxHeight)
-      let newSize = imageSize(from: size,
-                              newWidth: availableWidth - appLayoutWidth)
-      let processors: [ImageProcessing] = [.resize(size: .init(width: newSize.width, height: newSize.height))]
+      let newSize = imageSize(from: size, newWidth: availableWidth - appLayoutWidth)
       switch attachment.supportedType {
       case .image:
-        if isInCaptureMode,
-           let image = Nuke.ImagePipeline.shared.cache.cachedImage(for: .init(url: attachment.url,
-                                                                              processors: processors))?.image
-        {
-          Image(uiImage: image)
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: newSize.width, height: newSize.height)
-            .clipped()
-            .cornerRadius(4)
-        } else {
-          LazyImage(url: attachment.url) { state in
-            if let image = state.image {
-              image
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: newSize.width, height: newSize.height)
-                .clipped()
-                .cornerRadius(4)
-            } else {
-              RoundedRectangle(cornerRadius: 4)
-                .fill(Color.gray)
-                .frame(width: newSize.width, height: newSize.height)
-            }
+        LazyImage(url: attachment.url) { state in
+          if let image = state.image {
+            image
+              .resizable()
+              .aspectRatio(contentMode: .fill)
+              .frame(width: newSize.width, height: newSize.height)
+              .clipped()
+              .cornerRadius(4)
+          } else {
+            RoundedRectangle(cornerRadius: 4)
+              .fill(Color.gray)
+              .frame(width: newSize.width, height: newSize.height)
           }
-          .processors([.resize(size: .init(width: newSize.width, height: newSize.height))])
-          .frame(width: newSize.width, height: newSize.height)
         }
+        .processors([.resize(size: newSize)])
+        .frame(width: newSize.width, height: newSize.height)
 
       case .gifv, .video, .audio:
         if let url = attachment.url {
