@@ -167,7 +167,6 @@
 "settings.display.show-ipad-column" = "Toon tweede kolom";
 
 "settings.general.swipeactions" = "Veegacties";
-"settings.swipeactions.appearance" = "Appearance";
 "settings.swipeactions.navigation-title" = "Veegacties";
 "settings.swipeactions.primary" = "Primaire actie";
 "settings.swipeactions.secondary" = "Secundaire actie";
@@ -363,12 +362,12 @@
 // MARK: Package: Status
 "status.action.translate" = "Vertaal";
 "status.action.translated-label-%@" = "Vertaald met behulp van %@";
-"status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
+"status.action.translated-label-from-%@-%@" = "Vertaald uit het %@ met behulp van %@";
 "status.action.bookmark" = "Voeg bladwijzer toe";
 "status.action.boost" = "Boost";
 "status.action.boost-to-followers" = "Boost aan volgers";
 "status.action.copy-text" = "Kopieer tekst";
-"status.action.copy-link" = "Copy Link";
+"status.action.copy-link" = "Kopieer link";
 "status.action.delete" = "Verwijder";
 "status.action.delete.confirm.title" = "Bevestigen";
 "status.action.delete.confirm.message" = "Weet je zeker dat je deze post wilt verwijderen?";
