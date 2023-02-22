@@ -44,9 +44,17 @@ public extension Font {
   static var scaledHeadline: Font {
     customFont(size: userScaledFontSize(baseSize: headline), relativeTo: .headline).weight(.semibold)
   }
+    
+  static var scaledHeadlinePointSize: CGFloat {
+    customUIFont(size: userScaledFontSize(baseSize: headline)).pointSize
+  }
 
   static var scaledBody: Font {
     customFont(size: userScaledFontSize(baseSize: body), relativeTo: .body)
+  }
+    
+  static var scaledBodyPointSize: CGFloat {
+    customUIFont(size: userScaledFontSize(baseSize: body)).pointSize
   }
 
   static var scaledBodyUIFont: UIFont {
@@ -56,17 +64,33 @@ public extension Font {
   static var scaledCallout: Font {
     customFont(size: userScaledFontSize(baseSize: callout), relativeTo: .callout)
   }
+    
+  static var scaledCalloutPointSize: CGFloat {
+    customUIFont(size: userScaledFontSize(baseSize: body)).pointSize
+  }
 
   static var scaledSubheadline: Font {
     customFont(size: userScaledFontSize(baseSize: subheadline), relativeTo: .subheadline)
   }
-
+    
+  static var scaledSubheadlinePointSize: CGFloat {
+    customUIFont(size: userScaledFontSize(baseSize: subheadline)).pointSize
+  }
+    
   static var scaledFootnote: Font {
     customFont(size: userScaledFontSize(baseSize: footnote), relativeTo: .footnote)
+  }
+    
+  static var scaledFootnotePointSize: CGFloat {
+    customUIFont(size: userScaledFontSize(baseSize: footnote)).pointSize
   }
 
   static var scaledCaption: Font {
     customFont(size: userScaledFontSize(baseSize: caption), relativeTo: .caption)
+  }
+    
+  static var scaledCaptionPointSize: CGFloat {
+    customUIFont(size: userScaledFontSize(baseSize: caption)).pointSize
   }
 }
 
