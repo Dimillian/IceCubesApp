@@ -23,11 +23,22 @@ struct AccountDetailHeaderView: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      Rectangle()
-        .frame(height: Constants.headerHeight)
-        .overlay {
-          headerImageView
+      ZStack(alignment: .bottomTrailing) {
+        Rectangle()
+          .frame(height: Constants.headerHeight)
+          .overlay {
+            headerImageView
+          }
+        if viewModel.relationship?.followedBy == true {
+          Text("account.relation.follows-you")
+            .font(.scaledFootnote)
+            .fontWeight(.semibold)
+            .padding(4)
+            .background(.ultraThinMaterial)
+            .cornerRadius(4)
+            .padding(8)
         }
+      }
       accountInfoView
     }
   }
@@ -57,16 +68,6 @@ struct AccountDetailHeaderView: View {
           }
         }
         .frame(height: Constants.headerHeight)
-      }
-
-      if viewModel.relationship?.followedBy == true {
-        Text("account.relation.follows-you")
-          .font(.scaledFootnote)
-          .fontWeight(.semibold)
-          .padding(4)
-          .background(.ultraThinMaterial)
-          .cornerRadius(4)
-          .padding(8)
       }
     }
     .background(theme.secondaryBackgroundColor)
