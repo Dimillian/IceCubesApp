@@ -368,6 +368,7 @@
 "status.action.boost" = "Boost";
 "status.action.boost-to-followers" = "Boost aan volgers";
 "status.action.copy-text" = "Kopieer tekst";
+"status.action.copy-link" = "Copy Link";
 "status.action.delete" = "Verwijder";
 "status.action.delete.confirm.title" = "Bevestigen";
 "status.action.delete.confirm.message" = "Weet je zeker dat je deze post wilt verwijderen?";

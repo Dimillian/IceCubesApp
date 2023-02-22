@@ -7,6 +7,7 @@ import Shimmer
 import SwiftUI
 
 public struct StatusRowView: View {
+  @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
   @Environment(\.redactionReasons) private var reasons
   @Environment(\.isCompact) private var isCompact: Bool
 
@@ -69,7 +70,7 @@ public struct StatusRowView: View {
             .accessibilityAction {
               viewModel.navigateToDetail()
             }
-           if viewModel.showActions, (viewModel.isFocused || theme.statusActionsDisplay != .none) {
+           if viewModel.showActions, (viewModel.isFocused || theme.statusActionsDisplay != .none), !isInCaptureMode {
               StatusRowActionsView(viewModel: viewModel)
                 .padding(.top, 8)
                 .tint(viewModel.isFocused ? theme.tintColor : .gray)

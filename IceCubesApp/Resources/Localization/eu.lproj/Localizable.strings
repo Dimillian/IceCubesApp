@@ -367,6 +367,7 @@
 "status.action.boost" = "Bultzatu";
 "status.action.boost-to-followers" = "Bultzatu jarraitzaileek ikus dezaten";
 "status.action.copy-text" = "Kopiatu testua";
+"status.action.copy-link" = "Copy Link";
 "status.action.delete" = "Ezabatu";
 "status.action.delete.confirm.title" = "Baieztatu";
 "status.action.delete.confirm.message" = "Ziur zaude bidalketa ezabatu nahi duzula?";

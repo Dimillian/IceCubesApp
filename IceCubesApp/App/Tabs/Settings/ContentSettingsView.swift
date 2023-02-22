@@ -20,6 +20,9 @@ struct ContentSettingsView: View {
       }.listRowBackground(theme.primaryBackgroundColor)
 
       Section("settings.content.media") {
+        Toggle(isOn: $userPreferences.autoPlayVideo) {
+          Text("settings.other.autoplay-video")
+        }
         Toggle(isOn: $userPreferences.showAltTextForMedia) {
           Text("settings.content.media.show.alt")
         }

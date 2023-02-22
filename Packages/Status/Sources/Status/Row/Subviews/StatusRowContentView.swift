@@ -52,7 +52,7 @@ struct StatusRowContentView: View {
       if let card = status.card,
          !viewModel.isEmbedLoading,
          !isCompact,
-         theme.statusDisplayStyle == .large,
+         theme.statusDisplayStyle != .compact,
          status.content.statusesURLs.isEmpty,
          status.mediaAttachments.isEmpty
       {

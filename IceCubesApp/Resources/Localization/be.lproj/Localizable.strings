@@ -378,6 +378,7 @@
 "status.action.boost" = "Павышэнне";
 "status.action.boost-to-followers" = "Павысіць для падпісчыкаў";
 "status.action.copy-text" = "Капіяваць тэкст";
+"status.action.copy-link" = "Copy Link";
 "status.action.delete" = "Выдаліць";
 "status.action.delete.confirm.title" = "Пацвердзіць";
 "status.action.delete.confirm.message" = "вы ўпэўнены, што жадаеце выдаліць гэты допіс?";

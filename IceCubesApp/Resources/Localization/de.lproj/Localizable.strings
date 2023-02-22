@@ -36,7 +36,7 @@
 "enum.status-actions-display.no-buttons" = "Keine Buttons";
 "enum.status-actions-display.only-buttons" = "Nur Buttons";
 "enum.status-display-style.compact" = "Kompakt";
-"enum.status-display-style.medium" = "Medium";
+"enum.status-display-style.medium" = "Mittel";
 "enum.status-display-style.large" = "Groß";
 "enum.swipeactions.icon-with-text" = "Symbol mit Text";
 "enum.swipeactions.icon-only" = "Nur Symbol";
@@ -169,19 +169,19 @@
 "settings.general.swipeactions" = "Wischaktionen";
 "settings.swipeactions.appearance" = "Appearance";
 "settings.swipeactions.navigation-title" = "Wischaktionen";
-"settings.swipeactions.primary" = "Primary Action";
-"settings.swipeactions.secondary" = "Secondary Action";
+"settings.swipeactions.primary" = "Primäre Aktion";
+"settings.swipeactions.secondary" = "Sekundäre Aktion";
 "settings.swipeactions.status.action.bookmark" = "Lesezeichen setzen";
 "settings.swipeactions.status.action.boost" = "Boosten";
 "settings.swipeactions.status.action.favorite" = "Favorisieren";
 "settings.swipeactions.status.action.none" = "Keine";
 "settings.swipeactions.status.action.quote" = "Zitieren";
 "settings.swipeactions.status.action.reply" = "Antworten";
-"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
+"settings.swipeactions.status.explanation" = "Wischaktionen sind verfügbar, indem du einen Beitrag nach links oder nach rechts wischst. Die sekundäre Aktion ist nur verfügbar, wenn die primäre Aktion gesetzt ist.";
 "settings.swipeactions.status.leading" = "Nach rechts wischen";
 "settings.swipeactions.status.trailing" = "Nach links wischen";
 "settings.swipeactions.status" = "Beitrag";
-"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors" = "Farbschema verwenden";
 "settings.swipeactions.use-theme-colors-explanation" = "Farbschema anstelle der Standardfarben verwenden";
 "settings.swipeactions.icon-style" = "Symbolstil";
 
@@ -369,6 +369,7 @@
 "status.action.boost" = "Boosten";
 "status.action.boost-to-followers" = "An Follower boosten";
 "status.action.copy-text" = "Text kopieren";
+"status.action.copy-link" = "Copy Link";
 "status.action.delete" = "Löschen";
 "status.action.delete.confirm.title" = "Bestätigen";
 "status.action.delete.confirm.message" = "Bist du dir sicher, dass du diesen Beitrag löschen möchtest?";

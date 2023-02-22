@@ -121,6 +121,7 @@ struct StatusRowActionsView: View {
         Text("\(count)")
           .foregroundColor(Color(UIColor.secondaryLabel))
           .font(.scaledFootnote)
+          .monospacedDigit()
       }
     }
   }

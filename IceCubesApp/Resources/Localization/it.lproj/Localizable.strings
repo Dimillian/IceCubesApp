@@ -374,6 +374,7 @@
 "status.action.boost" = "Condividi";
 "status.action.boost-to-followers" = "Condividi con i follower";
 "status.action.copy-text" = "Copia il testo";
+"status.action.copy-link" = "Copy Link";
 "status.action.delete" = "Elimina";
 "status.action.delete.confirm.title" = "Richiesta di conferma";
 "status.action.delete.confirm.message" = "Sei sicuro di voler cancellare questo post?";
