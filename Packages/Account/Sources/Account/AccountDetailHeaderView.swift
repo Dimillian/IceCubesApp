@@ -197,7 +197,7 @@ struct AccountDetailHeaderView: View {
         if account.bot {
           Text("🤖")
         }
-        if account.locked{
+        if account.locked {
           Text("🔒")
         }
         Image(systemName: "calendar")

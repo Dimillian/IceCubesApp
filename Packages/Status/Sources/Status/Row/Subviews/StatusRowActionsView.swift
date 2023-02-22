@@ -37,7 +37,7 @@ struct StatusRowActionsView: View {
     }
 
     func count(viewModel: StatusRowViewModel, theme: Theme) -> Int? {
-        if theme.statusActionsDisplay == .discret && !viewModel.isFocused {
+      if theme.statusActionsDisplay == .discret && !viewModel.isFocused {
         return nil
       }
       switch self {
@@ -116,7 +116,7 @@ struct StatusRowActionsView: View {
         )
       )
       .disabled(action == .boost &&
-                (viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id))
+        (viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id))
       if let count = action.count(viewModel: viewModel, theme: theme), !viewModel.isRemote {
         Text("\(count)")
           .foregroundColor(Color(UIColor.secondaryLabel))

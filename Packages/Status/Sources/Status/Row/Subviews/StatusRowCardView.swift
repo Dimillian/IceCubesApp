@@ -10,27 +10,27 @@ public struct StatusRowCardView: View {
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
 
   @EnvironmentObject private var theme: Theme
-  
+
   let card: Card
 
   public init(card: Card) {
     self.card = card
   }
-  
+
   private var maxWidth: CGFloat? {
     if theme.statusDisplayStyle == .medium {
       return 300
     }
     return nil
   }
-  
+
   private func imageWidthFor(proxy: GeometryProxy) -> CGFloat {
     if theme.statusDisplayStyle == .medium, let maxWidth {
       return maxWidth
     }
     return proxy.frame(in: .local).width
   }
-  
+
   private var imageHeight: CGFloat {
     if theme.statusDisplayStyle == .medium {
       return 100

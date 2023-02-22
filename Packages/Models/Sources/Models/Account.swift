@@ -3,17 +3,17 @@ import Foundation
 public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable {
   public static func == (lhs: Account, rhs: Account) -> Bool {
     lhs.id == rhs.id &&
-    lhs.username == rhs.username &&
-    lhs.note.asRawText == rhs.note.asRawText &&
-    lhs.statusesCount == rhs.statusesCount &&
-    lhs.followersCount == rhs.followersCount &&
-    lhs.followingCount == rhs.followingCount &&
-    lhs.acct == rhs.acct &&
-    lhs.displayName == rhs.displayName &&
-    lhs.fields == rhs.fields &&
-    lhs.lastStatusAt == rhs.lastStatusAt &&
-    lhs.discoverable == rhs.discoverable &&
-    lhs.bot == rhs.bot
+      lhs.username == rhs.username &&
+      lhs.note.asRawText == rhs.note.asRawText &&
+      lhs.statusesCount == rhs.statusesCount &&
+      lhs.followersCount == rhs.followersCount &&
+      lhs.followingCount == rhs.followingCount &&
+      lhs.acct == rhs.acct &&
+      lhs.displayName == rhs.displayName &&
+      lhs.fields == rhs.fields &&
+      lhs.lastStatusAt == rhs.lastStatusAt &&
+      lhs.discoverable == rhs.discoverable &&
+      lhs.bot == rhs.bot
   }
 
   public func hash(into hasher: inout Hasher) {

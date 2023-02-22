@@ -145,7 +145,7 @@ struct StatusRowContextMenu: View {
           await viewModel.translate(userLang: lang)
         }
       } label: {
-          Label("status.action.translate", systemImage: "captions.bubble")
+        Label("status.action.translate", systemImage: "captions.bubble")
       }
     }
 

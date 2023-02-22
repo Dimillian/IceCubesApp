@@ -42,7 +42,7 @@ public struct SecondaryColumnToolbarItem: ToolbarContent {
   @EnvironmentObject private var preferences: UserPreferences
 
   public init() {}
-  
+
   public var body: some ToolbarContent {
     ToolbarItem(placement: isSecondaryColumn ? .navigationBarLeading : .navigationBarTrailing) {
       Button {

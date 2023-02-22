@@ -27,7 +27,8 @@ public struct StatusRowMediaPreviewView: View {
 
   var availableWidth: CGFloat {
     if UIDevice.current.userInterfaceIdiom == .phone &&
-        (UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight) || theme.statusDisplayStyle == .medium {
+      (UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight) || theme.statusDisplayStyle == .medium
+    {
       return sceneDelegate.windowWidth * 0.80
     }
     return sceneDelegate.windowWidth
@@ -38,7 +39,7 @@ public struct StatusRowMediaPreviewView: View {
     var sidebarWidth: CGFloat = 0
     var secondaryColumnWidth: CGFloat = 0
     let layoutPading: CGFloat = .layoutPadding * 2
-    if UIDevice.current.userInterfaceIdiom == .pad  {
+    if UIDevice.current.userInterfaceIdiom == .pad {
       sidebarWidth = .sidebarWidth
       if preferences.showiPadSecondaryColumn {
         secondaryColumnWidth = .secondaryColumnWidth

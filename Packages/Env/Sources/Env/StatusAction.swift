@@ -19,7 +19,7 @@ public enum StatusAction: String, CaseIterable, Identifiable {
       if privateBoost {
         return isReblogged ? "status.action.unboost" : "status.action.boost-to-followers"
       }
-      
+
       return isReblogged ? "status.action.unboost" : "settings.swipeactions.status.action.boost"
     case .favorite:
       return isFavorited ? "status.action.unfavorite" : "settings.swipeactions.status.action.favorite"
@@ -40,7 +40,7 @@ public enum StatusAction: String, CaseIterable, Identifiable {
       if privateBoost {
         return isReblogged ? "arrow.left.arrow.right.circle.fill" : "lock.rotation"
       }
-      
+
       return isReblogged ? "arrow.left.arrow.right.circle.fill" : "arrow.left.arrow.right.circle"
     case .favorite:
       return isFavorited ? "star.fill" : "star"
