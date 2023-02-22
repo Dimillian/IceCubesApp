@@ -37,7 +37,7 @@
 "enum.status-actions-display.only-buttons" = "버튼만 표시";
 "enum.status-display-style.compact" = "작게";
 "enum.status-display-style.large" = "크게";
-"enum.status-display-style.medium" = "Medium";
+"enum.status-display-style.medium" = "중간";
 "enum.swipeactions.icon-with-text" = "아이콘과 텍스트";
 "enum.swipeactions.icon-only" = "아이콘만";
 
@@ -171,21 +171,21 @@
 
 "settings.general.swipeactions" = "쓸어넘기기 동작 설정";
 "settings.swipeactions.navigation-title" = "쓸어넘기기 동작 설정";
-"settings.swipeactions.primary" = "Primary Action";
-"settings.swipeactions.secondary" = "Secondary Action";
+"settings.swipeactions.primary" = "주 동작";
+"settings.swipeactions.secondary" = "보조 동작";
 "settings.swipeactions.status.action.bookmark" = "보관함에 추가";
 "settings.swipeactions.status.action.boost" = "부스트";
 "settings.swipeactions.status.action.favorite" = "좋아요";
 "settings.swipeactions.status.action.none" = "설정 안 함";
 "settings.swipeactions.status.action.quote" = "인용";
 "settings.swipeactions.status.action.reply" = "댓글";
-"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
+"settings.swipeactions.status.explanation" = "글을 오른쪽 혹은 왼쪽으로 쓸어넘겨 원하는 동작을 실행할 수 있습니다. 보조 동작은 주 동작이 설정되어 있을 때만 추가할 수 있습니다.";
 "settings.swipeactions.status.leading" = "오른쪽으로 쓸어넘길 때";
 "settings.swipeactions.status.trailing" = "왼쪽으로 쓸어넘길 때";
 "settings.swipeactions.status" = "글";
-"settings.swipeactions.appearance" = "Appearance";
-"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
-"settings.swipeactions.use-theme-colors-explanation" = "기본 색상 대신 테마 색상 사용";
+"settings.swipeactions.appearance" = "모양";
+"settings.swipeactions.use-theme-colors" = "테마 색상 사용";
+"settings.swipeactions.use-theme-colors-explanation" = "동작의 기본 색상 대신 테마 색상을 사용합니다.";
 "settings.swipeactions.icon-style" = "아이콘 모양";
 
 "settings.display.section.font" = "글꼴";
@@ -209,7 +209,7 @@
 "timeline.filter.lists" = "리스트";
 "timeline.filter.local" = "원격 로컬 타임라인";
 "timeline.filter.tags" = "팔로우한 태그";
-"timeline-new-posts %lld" = "%lld개의 새 글";
+"timeline-new-posts %lld" = "%lld개 새 글";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "계정 추가";
@@ -285,7 +285,7 @@
 "conversations.new.message.placeholder" = "새 메시지";
 
 // MARK: Package: DesignSystem
-"design.tag.n-posts-from-n-participants %lld %lld" = "%lld개의 글 (%lld명의 사용자가 이야기 중)";
+"design.tag.n-posts-from-n-participants %lld %lld" = "%lld개 글 (%lld명이 이야기 중)";
 "design.theme.navigation-title" = "테마 선택";
 "design.theme.toots-preview" = "글 미리 보기";
 
@@ -363,7 +363,7 @@
 "timeline.latest" = "최신 타임라인 다시 불러오기";
 "timeline.home" = "홈";
 "timeline.local" = "로컬";
-"timeline.n-recent-from-n-participants %lld %lld" = "%lld개의 최근 글 (%lld명의 사용자가 이야기 중)";
+"timeline.n-recent-from-n-participants %lld %lld" = "%lld개 최근 글 (%lld명이 이야기 중)";
 "timeline.trending" = "뜨고 있는";
 "timeline.add.url" = "인스턴스 URL";
 
@@ -373,7 +373,7 @@
 "status.action.translated-label-%@" = "번역 제공: %@";
 "status.action.bookmark" = "보관함에 추가";
 "status.action.boost" = "부스트";
-"status.action.boost-to-followers" = "팔로워에게 부스트";
+"status.action.boost-to-followers" = "팔로워에게만 부스트";
 "status.action.copy-text" = "복사";
 "status.action.delete" = "삭제";
 "status.action.delete.confirm.title" = "삭제 확인";
@@ -435,7 +435,7 @@
 "status.media.contextmenu.view-browser" = "브라우저에서 보기";
 "status.media.sensitive.show" = "민감한 미디어 표시하기";
 "status.poll.n-votes %lld" = "%lld표";
-"status.poll.n-votes-voters %lld %lld" = "%lld votes from %lld voters";
+"status.poll.n-votes-voters %lld %lld" = "%lld표 (%lld명)";
 "status.poll.closed" = "종료됨";
 "status.poll.closes-in" = "종료까지 ";
 "status.poll.duration" = "투표 기간";
