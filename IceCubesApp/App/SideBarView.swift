@@ -31,7 +31,8 @@ struct SideBarView<Content: View>: View {
     ZStack(alignment: .topTrailing) {
       SideBarIcon(systemIconName: tab.iconName,
                   isSelected: tab == selectedTab)
-      if let badge = badgeFor(tab: tab), badge > 0 {
+      let badge = badgeFor(tab: tab)
+      if badge > 0 {
         makeBadgeView(count: badge)
       }
     }
