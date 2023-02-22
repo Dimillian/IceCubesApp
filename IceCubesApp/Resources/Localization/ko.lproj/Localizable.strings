@@ -37,6 +37,7 @@
 "enum.status-actions-display.only-buttons" = "버튼만 표시";
 "enum.status-display-style.compact" = "작게";
 "enum.status-display-style.large" = "크게";
+"enum.status-display-style.medium" = "Medium";
 "enum.swipeactions.icon-with-text" = "아이콘과 텍스트";
 "enum.swipeactions.icon-only" = "아이콘만";
 

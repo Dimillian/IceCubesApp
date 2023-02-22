@@ -37,6 +37,7 @@
 "enum.status-actions-display.only-buttons" = "ボタンのみ";
 "enum.status-display-style.compact" = "縮小";
 "enum.status-display-style.large" = "拡大";
+"enum.status-display-style.medium" = "Medium";
 "enum.swipeactions.icon-with-text" = "アイコンと文字";
 "enum.swipeactions.icon-only" = "アイコンのみ";
 

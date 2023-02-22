@@ -37,6 +37,7 @@
 "enum.status-actions-display.only-buttons" = "Толькі кнопкі";
 "enum.status-display-style.compact" = "Кампактны";
 "enum.status-display-style.large" = "Вялікі";
+"enum.status-display-style.medium" = "Medium";
 "enum.swipeactions.icon-with-text" = "Значкі з тэкстам";
 "enum.swipeactions.icon-only" = "Толькі значкі";
 

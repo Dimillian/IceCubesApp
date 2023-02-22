@@ -27,7 +27,7 @@ public struct StatusRowMediaPreviewView: View {
 
   var availableWidth: CGFloat {
     if UIDevice.current.userInterfaceIdiom == .phone &&
-        (UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight) {
+        (UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight) || theme.statusDisplayStyle == .medium {
       return sceneDelegate.windowWidth * 0.80
     }
     return sceneDelegate.windowWidth
@@ -55,6 +55,9 @@ public struct StatusRowMediaPreviewView: View {
       return 50
     }
     if theme.statusDisplayStyle == .compact {
+      if attachments.count == 1 {
+        return 200
+      }
       return 100
     }
     if attachments.count == 1 {

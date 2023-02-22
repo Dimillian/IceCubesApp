@@ -37,6 +37,7 @@
 "enum.status-actions-display.only-buttons" = "Botoiak bakarrik";
 "enum.status-display-style.compact" = "Trinkoa";
 "enum.status-display-style.large" = "Handia";
+"enum.status-display-style.medium" = "Medium";
 "enum.swipeactions.icon-with-text" = "Ikonoa eta testua";
 "enum.swipeactions.icon-only" = "Ikonoa soilik";
 

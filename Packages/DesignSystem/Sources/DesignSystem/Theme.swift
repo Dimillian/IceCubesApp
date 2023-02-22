@@ -76,12 +76,14 @@ public class Theme: ObservableObject {
   }
 
   public enum StatusDisplayStyle: String, CaseIterable {
-    case large, compact
+    case large, medium, compact
 
     public var description: LocalizedStringKey {
       switch self {
       case .large:
         return "enum.status-display-style.large"
+      case .medium:
+        return "enum.status-display-style.medium"
       case .compact:
         return "enum.status-display-style.compact"
       }

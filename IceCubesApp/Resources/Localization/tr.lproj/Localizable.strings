@@ -37,6 +37,7 @@
 "enum.status-actions-display.only-buttons" = "Sadece Butonlar";
 "enum.status-display-style.compact" = "Kompakt";
 "enum.status-display-style.large" = "Geniş";
+"enum.status-display-style.medium" = "Medium";
 "enum.swipeactions.icon-with-text" = "Icon with text";
 "enum.swipeactions.icon-only" = "Icon only";
 

@@ -37,6 +37,7 @@
 "enum.status-actions-display.only-buttons" = "Seulement les boutons";
 "enum.status-display-style.compact" = "Compact";
 "enum.status-display-style.large" = "Grand";
+"enum.status-display-style.medium" = "Moyen";
 "enum.swipeactions.icon-with-text" = "Icon with text";
 "enum.swipeactions.icon-only" = "Icon only";
 
