@@ -38,8 +38,8 @@
 "enum.status-display-style.compact" = "Compact";
 "enum.status-display-style.large" = "Grand";
 "enum.status-display-style.medium" = "Moyen";
-"enum.swipeactions.icon-with-text" = "Icon with text";
-"enum.swipeactions.icon-only" = "Icon only";
+"enum.swipeactions.icon-with-text" = "Icône avec texte";
+"enum.swipeactions.icon-only" = "Icône seulement";
 
 // MARK: Instances
 "instance.info.domains" = "Domaines";
@@ -66,8 +66,8 @@
 "settings.account.add" = "Ajouter un compte";
 "settings.app.icon" = "Icône de l'application";
 "settings.app.icon.navigation-title" = "Icônes";
-"settings.app.icon.official" = "Official icons";
-"settings.app.icon.designed-by" = "Icons by";
+"settings.app.icon.official" = "Icônes officielles";
+"settings.app.icon.designed-by" = "Icônes par";
 "settings.app.source" = "Source (lien GitHub)";
 "settings.app.support" = "Soutenir l'application";
 "settings.app.about" = "À propos";
@@ -89,7 +89,7 @@
 "settings.display.theme.systemColor" = "Correspondre au système";
 "settings.general.browser" = "Navigateur";
 "settings.general.browser.in-app" = "Navigateur intégré";
-"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
+"settings.general.browser.in-app.readerview" = "Vue lecteur du navigateur intégré";
 "settings.general.browser.system" = "Navigateur système";
 "settings.general.display" = "Paramètres d'affichage";
 "settings.general.instance" = "Information sur l'instance";
@@ -115,8 +115,8 @@
 "settings.content.expand-media" = "Affichage des médias";
 "settings.content.default-sensitive" = "Toujours marquer les médias comme sensibles";
 "settings.content.default-visibility" = "Visibilité des publications";
-"settings.content.media" = "Media";
-"settings.content.media.show.alt" = "Show ALT texts";
+"settings.content.media" = "Média";
+"settings.content.media.show.alt" = "Montrer les textes ALT";
 "settings.content.reading" = "Lecture";
 "settings.content.posting" = "Publication";
 "enum.expand-media.show" = "Afficher tout";
@@ -127,8 +127,8 @@
 "settings.section.app.footer %@" = "Version de l'application: %@";
 "settings.section.general" = "Général";
 "settings.support.alert.error.message" = "Erreur lors du traitement de votre achat intégré, veuillez réessayer.";
-"settings.support.alert.message" = "Merci beaucoup pour votre conseil! C'est grandement apprécié!";
-"settings.support.alert.title" = "Merci!";
+"settings.support.alert.message" = "Merci beaucoup pour votre conseil ! C'est grandement apprécié !";
+"settings.support.alert.title" = "Merci !";
 "settings.support.message-from-dev" = "Bonjour ! Mon nom est Thomas et j'adore créer des applications open-source. Ice Cubes est certainement l'un de mes projets dont je suis le plus fier à ce jour - et soyons honnêtes, c'est aussi celui qui nécessite le plus d'entretien en raison de l'évolution constante de Mastodon et des réseaux sociaux. Si vous vous amusez avec Ice Cubes, envisagez de me faire une petite contribution. Cela me fera plaisir (et aidera à maintenir l'application en bon état pour vous). 🚀";
 "settings.support.navigation-title" = "Soutenez Ice Cubes";
 "settings.support.one.subtitle" = "Petit, mais mignon, et c'est bon !";
@@ -179,12 +179,12 @@
 "settings.swipeactions.status.action.none" = "Aucun";
 "settings.swipeactions.status.action.quote" = "Citer";
 "settings.swipeactions.status.action.reply" = "Répondre";
-"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
+"settings.swipeactions.status.explanation" = "Les actions de balayage sont disponibles en balayant à gauche ou à droite sur un post. L'action secondaire n'est disponible que si l'action primaire est définie.";
 "settings.swipeactions.status.leading" = "Balayer vers la droite";
 "settings.swipeactions.status.trailing" = "Balayer vers la gauche";
 "settings.swipeactions.status" = "Publier";
-"settings.swipeactions.appearance" = "Appearance";
-"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.appearance" = "Apparence";
+"settings.swipeactions.use-theme-colors" = "Utiliser les couleurs du thème";
 "settings.swipeactions.use-theme-colors-explanation" = "Utiliser les couleurs du thème au lieu des couleurs par défaut";
 "settings.swipeactions.icon-style" = "Style de l'icône";
 
@@ -226,7 +226,7 @@
 "account.action.unblock" = "Débloquer";
 "account.action.mute" = "Rendre muet";
 "account.action.unmute" = "Annuler le mode muet";
-"account.action.share" = "Share this account";
+"account.action.share" = "ärtager ce compte";
 "account.boosted-by" = "Boosté par";
 "account.detail.about" = "À propos";
 "account.detail.familiar-followers" = "Aussi suivi par";
@@ -265,11 +265,11 @@
 "account.joined" = "Inscrit";
 "account.action.logout" = "Déconnexion";
 
-"account.relation.note.edit" = "Edit Note";
-"account.relation.note.edit.placeholder" = "Enter Note text";
-"account.relation.note.edit.error.save.message" = "Error while saving your note, please try again.";
-"account.relation.note.edit.error.save.title" = "Error while saving your note";
-"account.relation.note.label" = "Note:";
+"account.relation.note.edit" = "Modifier la note";
+"account.relation.note.edit.placeholder" = "Saisissez le texte de la note";
+"account.relation.note.edit.error.save.message" = "Erreur pendant la sauvegarde de votre note, essayez de nouveau s'il vous plait.";
+"account.relation.note.edit.error.save.title" = "Erreur pendant la sauvegarde de votre note";
+"account.relation.note.label" = "Note :";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Supprimer";
@@ -324,7 +324,7 @@
 "lists.name.message" = "Entrez le nom de votre liste";
 
 // MARK: Package: Notifications
-"notifications.empty.message" = "Notifications? Quelles notifications? Votre boîte de réception de notifications est si vide. Continuez à être génial! 📱😎";
+"notifications.empty.message" = "Notifications ? Quelles notifications ? Votre boîte de réception de notifications est si vide. Continuez à être génial ! 📱😎";
 "notifications.empty.title" = "Aucune notification";
 "notifications.error.message" = "Une erreur s'est produite lors du chargement de vos notifications, veuillez réessayer.";
 "notifications.error.title" = "Une erreur s'est produite";
@@ -344,13 +344,13 @@
 "notifications.tab.all" = "Tout";
 "notifications.tab.mentions" = "Mentions";
 
-"notifications.label.status.push" = "🖊️ Posted: ";
-"notifications.label.reblog.push" = "🚀 Boosted: ";
-"notifications.label.follow.push" = "👋 Followed you: ";
-"notifications.label.follow-request.push" = "🔒 Requested to follow you: ";
-"notifications.label.favorite.push" = "⭐️ Starred: ";
-"notifications.label.poll.push" = "📈 Poll ended: ";
-"notifications.label.update.push" = "Updated: ";
+"notifications.label.status.push" = "🖊️ Publié: ";
+"notifications.label.reblog.push" = "🚀 Boosté: ";
+"notifications.label.follow.push" = "👋 Vous ont suivi: ";
+"notifications.label.follow-request.push" = "🔒 Ont demandé à vous suivre: ";
+"notifications.label.favorite.push" = "⭐️ Favori: ";
+"notifications.label.poll.push" = "📈 Sondage terminé: ";
+"notifications.label.update.push" = "Mis à jour: ";
 
 // MARK: Package: Timeline
 "timeline.federated" = "Fédéré";
@@ -429,7 +429,7 @@
 "status.media.contextmenu.view-browser" = "Afficher dans le navigateur";
 "status.media.sensitive.show" = "Afficher le contenu sensible";
 "status.poll.n-votes %lld" = "%lld votes";
-"status.poll.n-votes-voters %lld %lld" = "%lld votes from %lld voters";
+"status.poll.n-votes-voters %lld %lld" = "%lld votes de %lld voteurs";
 "status.poll.closed" = "Fermé";
 "status.poll.closes-in" = "Ferme dans";
 "status.poll.duration" = "Durée du sondage";
