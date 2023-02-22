@@ -6,9 +6,14 @@ import SwiftUI
 struct StatusRowSwipeView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var preferences: UserPreferences
+  @EnvironmentObject private var currentAccount: CurrentAccount
 
   enum Mode {
     case leading, trailing
+  }
+  
+  func privateBoost() -> Bool {
+    return viewModel.status.visibility == .priv && viewModel.status.account.id == currentAccount.account?.id
   }
 
   let viewModel: StatusRowViewModel
@@ -110,11 +115,11 @@ struct StatusRowSwipeView: View {
   private func makeSwipeLabel(action: StatusAction, style: UserPreferences.SwipeActionsIconStyle) -> some View {
     switch style {
     case .iconOnly:
-      Label(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked), systemImage: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
+      Label(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked, privateBoost: privateBoost()), systemImage: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked, privateBoost: privateBoost()))
         .labelStyle(.iconOnly)
         .environment(\.symbolVariants, .none)
     case .iconWithText:
-      Label(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked), systemImage: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked))
+      Label(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked, privateBoost: privateBoost()), systemImage: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked, privateBoost: privateBoost()))
         .labelStyle(.titleAndIcon)
         .environment(\.symbolVariants, .none)
     }
