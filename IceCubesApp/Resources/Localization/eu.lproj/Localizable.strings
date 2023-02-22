@@ -37,7 +37,7 @@
 "enum.status-actions-display.only-buttons" = "Botoiak bakarrik";
 "enum.status-display-style.compact" = "Trinkoa";
 "enum.status-display-style.large" = "Handia";
-"enum.status-display-style.medium" = "Medium";
+"enum.status-display-style.medium" = "Ertaina";
 "enum.swipeactions.icon-with-text" = "Ikonoa eta testua";
 "enum.swipeactions.icon-only" = "Ikonoa soilik";
 
@@ -72,8 +72,8 @@
 "settings.app.support" = "Eman babesa aplikazioari";
 "settings.app.about" = "Aplikazio honi buruz";
 "settings.display.example-toot" = "Adibidea";
-"settings.display.avatar.position" = "Avatarearen kokapena";
-"settings.display.avatar.shape" = "Avatarearen itxura";
+"settings.display.avatar.position" = "Abatarraren kokapena";
+"settings.display.avatar.shape" = "Abatarraren itxura";
 "settings.display.full-username" = "Erakutsi erabiltzaile izen osoa";
 "settings.display.navigation-title" = "Pantaila ezarpenak";
 "settings.display.restore" = "Berrezarri defektuzkoa";
@@ -133,7 +133,7 @@
 "settings.content.navigation-title" = "Edukiaren ezarpenak";
 "settings.content.boosts" = "Bultzadak";
 "settings.content.hide-repeated-boosts" = "Ezkutatu errepikatutako bultzadak";
-"settings.content.instance-settings" = "Zerbitzariko edukiari buruzko ezarpenak";
+"settings.content.instance-settings" = "Edukiari buruzko ezarpenak";
 "settings.content.use-instance-settings" = "Erabili zerbitzariko ezarpenak";
 "settings.content.expand-spoilers" = "Erakutsi beti eduki hunkigarria";
 "settings.content.expand-media" = "Multimedia erakusteko hobespenak";
@@ -168,20 +168,20 @@
 
 "settings.general.swipeactions" = "Mugimenduen ekintzak";
 "settings.swipeactions.navigation-title" = "Atzamar-mugimenduen ekintzak";
-"settings.swipeactions.primary" = "Primary Action";
-"settings.swipeactions.secondary" = "Secondary Action";
+"settings.swipeactions.primary" = "Ekintza nagusia";
+"settings.swipeactions.secondary" = "Bigarren ekintza";
 "settings.swipeactions.status.action.bookmark" = "Laster-marka";
 "settings.swipeactions.status.action.boost" = "Bultzatu";
 "settings.swipeactions.status.action.favorite" = "Gogokoa";
 "settings.swipeactions.status.action.none" = "Ezer ez";
 "settings.swipeactions.status.action.quote" = "Aipatu bidalketa";
 "settings.swipeactions.status.action.reply" = "Erantzun";
-"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
+"settings.swipeactions.status.explanation" = "Mugimenduen ekintzak bidalketa batean atzamarra ezkerrera edo eskumara mugitzean daude erabilgai. Ekintza nagusia ezarri ezean ezingo da bigarren ekintza zehaztu.";
 "settings.swipeactions.status.leading" = "Eskumarantz";
 "settings.swipeactions.status.trailing" = "Ezkerrerantz";
 "settings.swipeactions.status" = "Bidalketa";
-"settings.swipeactions.appearance" = "Appearance";
-"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.appearance" = "Itxura";
+"settings.swipeactions.use-theme-colors" = "Erabili gaiaren koloreak";
 "settings.swipeactions.use-theme-colors-explanation" = "Erabili hautatutako kolorea defektuzko koloreen ordez";
 "settings.swipeactions.icon-style" = "Ikonoen itxura";
 
@@ -285,7 +285,7 @@
 "conversations.new.message.placeholder" = "Mezu berria";
 
 // MARK: Package: DesignSystem
-"design.theme.navigation-title" = "Itxuraren hautatzailea";
+"design.theme.navigation-title" = "Gai hautatzailea";
 "design.theme.toots-preview" = "Tuten aurreikuspena";
 
 // MARK: Package: Explore
@@ -361,8 +361,8 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Itzuli";
+"status.action.translate-from-%@" = "Itzuli %@(e)tik";
 "status.action.translated-label-%@" = "%@ erabiliz itzulia";
-"status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Jarri laster-marka";
 "status.action.boost" = "Bultzatu";
 "status.action.boost-to-followers" = "Bultzatu jarraitzaileek ikus dezaten";
@@ -428,7 +428,6 @@
 "status.media.contextmenu.view-browser" = "Ikusi nabigatzailean";
 "status.media.sensitive.show" = "Erakutsi eduki hunkigarria";
 "status.poll.n-votes %lld" = "%lld boto";
-"status.poll.n-votes-voters %lld %lld" = "%lld boto, %lld boto-emaile";
 "status.poll.closed" = "Amaituta";
 "status.poll.closes-in" = "Epemuga: ";
 "status.poll.duration" = "Bozketaren iraupena";
