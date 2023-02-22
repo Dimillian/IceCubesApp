@@ -38,6 +38,7 @@ struct StatusRowHeaderView: View {
         HStack(alignment: .center, spacing: 4) {
           EmojiTextApp(.init(stringValue: status.account.safeDisplayName), emojis: status.account.emojis)
             .font(.scaledSubheadline)
+            .emojiSize(Font.scaledSubheadlinePointSize)
             .fontWeight(.semibold)
             .lineLimit(1)
             .layoutPriority(1)

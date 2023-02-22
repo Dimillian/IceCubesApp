@@ -13,6 +13,7 @@ struct StatusRowSpoilerView: View {
         .foregroundColor(.secondary)
       EmojiTextApp(status.spoilerText, emojis: status.emojis, language: status.language)
         .font(.system(.subheadline, weight: .bold))
+        .emojiSize(Font.scaledSubheadlinePointSize)
         .foregroundColor(.secondary)
         .multilineTextAlignment(.leading)
       Spacer()

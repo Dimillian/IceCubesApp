@@ -39,12 +39,14 @@ public struct AccountsListRow: View {
       VStack(alignment: .leading, spacing: 2) {
         EmojiTextApp(.init(stringValue: viewModel.account.safeDisplayName), emojis: viewModel.account.emojis)
           .font(.scaledSubheadline)
+          .emojiSize(Font.scaledSubheadlinePointSize)
           .fontWeight(.semibold)
         Text("@\(viewModel.account.acct)")
           .font(.scaledFootnote)
           .foregroundColor(.gray)
         EmojiTextApp(viewModel.account.note, emojis: viewModel.account.emojis)
           .font(.scaledFootnote)
+          .emojiSize(Font.scaledFootnotePointSize)
           .lineLimit(3)
           .environment(\.openURL, OpenURLAction { url in
             routerPath.handle(url: url)

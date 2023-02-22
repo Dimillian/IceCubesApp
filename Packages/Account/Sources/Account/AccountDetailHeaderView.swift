@@ -134,6 +134,7 @@ struct AccountDetailHeaderView: View {
         VStack(alignment: .leading, spacing: 0) {
           EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
             .font(.scaledHeadline)
+            .emojiSize(Font.scaledHeadlinePointSize)
           Text("@\(account.acct)")
             .font(.scaledCallout)
             .foregroundColor(.gray)
@@ -160,6 +161,7 @@ struct AccountDetailHeaderView: View {
 
       EmojiTextApp(account.note, emojis: account.emojis)
         .font(.scaledBody)
+        .emojiSize(Font.scaledBodyPointSize)
         .padding(.top, 8)
         .environment(\.openURL, OpenURLAction { url in
           routerPath.handle(url: url)
@@ -242,6 +244,7 @@ struct AccountDetailHeaderView: View {
                     .foregroundColor(Color.green.opacity(0.80))
                 }
                 EmojiTextApp(field.value, emojis: viewModel.account?.emojis ?? [])
+                  .emojiSize(Font.scaledBodyPointSize)
                   .foregroundColor(theme.tintColor)
                   .environment(\.openURL, OpenURLAction { url in
                     routerPath.handle(url: url)

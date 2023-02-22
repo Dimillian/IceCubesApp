@@ -47,6 +47,7 @@ public struct StatusEmbeddedView: View {
       VStack(alignment: .leading, spacing: 0) {
         EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
           .font(.scaledFootnote)
+          .emojiSize(Font.scaledFootnotePointSize)
           .fontWeight(.semibold)
         Group {
           Text("@\(account.acct)") +

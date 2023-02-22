@@ -32,6 +32,7 @@ struct ConversationMessageView: View {
         VStack(alignment: .leading) {
           EmojiTextApp(message.content, emojis: message.emojis)
             .font(.scaledBody)
+            .emojiSize(Font.scaledBodyPointSize)
             .padding(6)
             .environment(\.openURL, OpenURLAction { url in
               routerPath.handleStatus(status: message, url: url)
