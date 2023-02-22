@@ -75,6 +75,7 @@ struct StatusRowSwipeView: View {
           await viewModel.reblog()
         }
       }
+      .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id)
     case .bookmark:
       makeSwipeButtonForTask(action: action) {
         if viewModel.isBookmarked {
