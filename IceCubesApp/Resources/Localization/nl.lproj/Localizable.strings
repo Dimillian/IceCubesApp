@@ -362,7 +362,6 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Vertaal";
-"status.action.translate-from-%@" = "Vertaal uit het %@";
 "status.action.translated-label-%@" = "Vertaald met behulp van %@";
 "status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Voeg bladwijzer toe";

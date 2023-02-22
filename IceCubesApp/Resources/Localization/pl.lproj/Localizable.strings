@@ -363,7 +363,6 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Przetłumacz";
-"status.action.translate-from-%@" = "Przetłumacz tekst %@";
 "status.action.translated-label-%@" = "Przetłumaczono za pomocą %@";
 "status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Dodaj zakładkę";
