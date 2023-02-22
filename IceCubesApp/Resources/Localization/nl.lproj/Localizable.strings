@@ -436,7 +436,7 @@
 "status.poll.option-n %lld" = "Optie %lld";
 "status.poll.send" = "Breng stem uit";
 "status.post-from-%@" = "Post van %@";
-"status.row.was-boosted" = "geboost";
+"status.row.was-boosted" = "boostte";
 "status.row.was-reply" = "Geantwoord op";
 "status.row.you-boosted" = "Je boostte";
 "status.show-less" = "Toon minder";
