@@ -1,897 +1,492 @@
-/* MARK: Common strings */
+// MARK: Common strings
 "action.cancel" = "Відміна";
-
 "action.delete" = "Видалено";
-
 "action.save" = "Збережено";
-
 "action.done" = "Виконано";
-
 "action.retry" = "Повторити";
-
 "action.view.error" = "Переглянути помилки";
 
 "alert.button.ok" = "Гаразд";
-
 "alert.error" = "Халепа!";
 
 "placeholder.loading.long" = "Завантаження, завантаження, все ще завантаження ...";
-
 "placeholder.loading.short" = "Завантаження ...";
 
 "see-more" = "Переглянути більше";
 
-/* MARK: Add Account */
+// MARK: Add Account
 "account.add.error.instance-not-supported" = "Цей сервер наразі не підтримується.";
-
 "account.add.navigation-title" = "Додати підключення";
-
 "account.add.sign-in" = "Зареєструватися";
 
-/* MARK: Enums */
-"enum.avatar-position.leading" = "Leading";
-
-"enum.avatar-position.top" = "Верх";
-
+// MARK: Enums
+"enum.avatar-position.leading" = "Поряд";
+"enum.avatar-position.top" = "Зверху";
 "enum.avatar-shape.circle" = "Круг";
-
 "enum.avatar-shape.rounded" = "Закруглені";
-
 "enum.durations.infinite" = "без обмеження";
-
 "enum.durations.fiveMinutes" = "5 хвилин";
-
 "enum.durations.thirtyMinutes" = "30 хвилин";
-
 "enum.durations.oneHour" = "1 година";
-
 "enum.durations.sixHours" = "6 годин";
-
 "enum.durations.oneDay" = "1 день";
-
 "enum.durations.threeDays" = "3 дні";
-
 "enum.durations.sevenDays" = "7 днів";
-
 "enum.status-actions-display.all" = "Усе";
-
 "enum.status-actions-display.no-buttons" = "Без кнопок";
-
 "enum.status-actions-display.only-buttons" = "Лише кнопки";
-
 "enum.status-display-style.compact" = "Компактно";
-
 "enum.status-display-style.medium" = "Середнє";
-
 "enum.status-display-style.large" = "Велике";
-
 "enum.swipeactions.icon-with-text" = "Іконки з текстом";
-
 "enum.swipeactions.icon-only" = "Лише іконки";
 
-/* MARK: Instances */
+// MARK: Instances
 "instance.info.domains" = "Домени";
-
 "instance.info.email" = "Електронна пошта";
-
 "instance.info.name" = "Імʼя";
-
 "instance.info.navigation-title" = "Статистика сервера";
-
 "instance.info.posts" = "Дописи";
-
 "instance.info.section.info" = "Інформація про сервер";
-
 "instance.info.section.rules" = "Правила сервера";
-
 "instance.info.users" = "Користувачів";
-
 "instance.info.version" = "Версія";
-
 "instance.list.posts-%@" = "%@ дописів";
-
 "instance.list.users-%@" = "%@ користувачів";
-
 "instance.suggestions" = "Пропозиції";
-
 "instance.url" = "URL Сервера";
 
-/* MARK: Menu */
+// MARK: Menu
 "menu.new-post" = "Новий допис";
-
 "menu.font" = "Шрифт";
-
 "menu.font.bigger" = "Більше";
-
 "menu.font.smaller" = "Менше";
 
-/* MARK: Settings */
+// MARK: Settings
 "settings.account.add" = "Додати обліковий запис";
-
 "settings.app.icon" = "Іконка додатку";
-
 "settings.app.icon.navigation-title" = "Іконки";
-
 "settings.app.icon.official" = "Офіційні іконки";
-
 "settings.app.icon.designed-by" = "Розроблено";
-
 "settings.app.source" = "Посилання (GitHub)";
-
 "settings.app.support" = "Підтримати додаток";
-
 "settings.app.about" = "Опис";
-
 "settings.display.example-toot" = "Приклад допису";
-
 "settings.display.font" = "Шрифт стрічки";
-
 "settings.display.font.system" = "Системний";
-
 "settings.display.font.custom" = "Власний";
-
 "settings.display.font.scaling-%@" = "Масштабування шкрифта: %@";
-
 "settings.display.avatar.position" = "Розташування Аватара";
-
 "settings.display.avatar.shape" = "Форма Аватара";
-
 "settings.display.full-username" = "Відображати повне імʼя користувача";
-
 "settings.display.navigation-title" = "Налаштування відображення";
-
 "settings.display.restore" = "Відновити налаштування";
-
 "settings.display.section.display" = "Відображення";
-
 "settings.display.section.theme" = "Тема";
-
 "settings.display.section.theme.footer" = "Власна кольорова схема може бути встановлена лише якщо відключено Відповідати системній темі";
-
 "settings.display.status.action-buttons" = "Кнопки дій статуса";
-
 "settings.display.status.media-style" = "Стиль медія статуса";
-
 "settings.display.translate-button" = "Відображати кнопку перекладу";
-
 "settings.display.theme.background" = "Колір фону";
-
 "settings.display.theme.secondary-background" = "Додатковий колір фону";
-
 "settings.display.theme.tint" = "Відтінок кольору";
-
 "settings.display.theme.systemColor" = "Відповідати системній темі";
-
 "settings.general.browser" = "Браузер";
-
 "settings.general.browser.in-app" = "Вбудований браузер";
-
 "settings.general.browser.in-app.readerview" = "Режим читання для вбудованого браузера";
-
 "settings.general.browser.system" = "Системний браузер";
-
 "settings.general.display" = "Налаштування відображення";
-
 "settings.general.instance" = "Інформація про сервер";
-
 "settings.general.push-notifications" = "Push сповіщення";
-
 "settings.general.remote-timelines" = "Віддалена локальна стрічка";
-
 "settings.push.boosts" = "Поширення";
-
 "settings.push.favorites" = "Вподобане";
-
 "settings.push.follows" = "Підписки";
-
 "settings.push.main-toggle" = "Push сповіщення";
-
 "settings.push.main-toggle.description" = "Отримувати push сповіщення на нову активність";
-
 "settings.push.mentions" = "Згадування";
-
 "settings.push.navigation-title" = "Push сповіщення";
-
 "settings.push.new-posts" = "Новий допис";
-
 "settings.push.polls" = "Результат опитування";
-
 "settings.general.content" = "Налаштування вмісту";
-
 "settings.system" = "Системні налаштування";
-
 "settings.content.navigation-title" = "Налаштування вмісту";
-
 "settings.content.boosts" = "Поширення";
-
 "settings.content.hide-repeated-boosts" = "Не відображати повторні поширення";
-
 "settings.content.instance-settings" = "Налаштування відображення сервера";
-
 "settings.content.use-instance-settings" = "Використовувати налаштування сервера";
-
 "settings.content.expand-spoilers" = "Дозволити відображати делікатний вміст";
-
 "settings.content.expand-media" = "Відображення медіа";
-
 "settings.content.default-sensitive" = "Завжди позначати медія як делікатні";
-
 "settings.content.default-visibility" = "Видимість допису";
-
 "settings.content.media" = "Медіа";
-
 "settings.content.media.show.alt" = "Показати ALT тексти";
-
 "settings.content.reading" = "Читання";
-
 "settings.content.posting" = "Публікація";
-
 "enum.expand-media.show" = "Відобразити все";
-
 "enum.expand-media.hide" = "Приховати все";
-
 "enum.expand-media.hide-sensitive" = "Приховувати вміст, позначений як делікатний";
-
 "settings.section.accounts" = "Профілі";
-
 "settings.section.app" = "Додаток";
-
 "settings.section.app.footer %@" = "Версія додатку: %@";
-
 "settings.section.general" = "Загальне";
-
 "settings.support.alert.error.message" = "Error processing your in-app purchase, please try again.";
-
 "settings.support.alert.message" = "Thank you so much for your tip! It's greatly appreciated!";
-
 "settings.support.alert.title" = "Thanks!";
-
 "settings.support.message-from-dev" = "Hi there! My name is Thomas and I absolutely love creating open source apps. Ice Cubes is definitely one of my proudest projects to date - and let's be real, it's also the one that requires the most maintenance due to the ever-changing world of Mastodon and social media. If you're having a blast using Ice Cubes, consider tossing a little tip my way. It'll make my day (and help keep the app running smoothly for you). 🚀";
-
 "settings.support.navigation-title" = "Підтримка Ice Cubes";
-
 "settings.support.one.subtitle" = "Small, but cute, and it tastes good!";
-
 "settings.support.one.title" = "🍬 Small Tip";
-
 "settings.support.placeholder.loading-subtitle" = "Loading subtitle ...";
-
 "settings.support.three.subtitle" = "You're insane, thank you so much!";
-
 "settings.support.three.title" = "🤯 Generous Tip";
-
 "settings.support.two.subtitle" = "I love the taste of a fancy coffee ❤️";
-
 "settings.support.two.title" = "☕️ Nice Tip";
-
 "settings.support.four.title" = "👽 Who are you Tip";
-
 "settings.support.four.subtitle" = "It'll go a long way to keep Ice Cubes running!";
-
 "settings.timeline.add" = "Додати локальну стрічку";
-
 "settings.title" = "Налаштування";
-
 "settings.rate" = "Оцінити Ice Cubes";
-
 "settings.section.other" = "Інше";
-
 "settings.other.hide-openai" = "Увімкнути 🤖 помічника";
-
 "settings.other.social-keyboard" = "Увімкнути Social Keyboard";
-
 "settings.push.duplicate.title" = "Виправити задвоєння сповіщень";
-
 "settings.push.duplicate.footer" = "Отримуєте сповіщення двічі? Спробуйте цю чарівну кнопку, щоб виправити це!";
-
 "settings.push.duplicate.button.fix" = "🪄 Виправити!";
-
 "settings.other.autoplay-video" = "Автоматичне програвання відео";
-
 "settings.about.built-with" = "Ice Cubes створено з Open Source продуктами та любовʼю:";
-
 "settings.about.title" = "Ice Cubes";
 
 "settings.account.cached-posts-%@" = "Кешовано дописів: %@";
-
 "settings.account.action.delete-cache" = "Очистити кеш";
 
-"settings.general.haptic" = "Haptic Feedback";
-
-"settings.haptic.navigation-title" = "Haptic Settings";
-
-"settings.haptic.timeline" = "Timeline";
-
-"settings.haptic.tab-selection" = "Tab Selection";
-
-"settings.haptic.buttons" = "Button Press";
+"settings.general.haptic" = "Гаптика";
+"settings.haptic.navigation-title" = "Налаштування гаптики";
+"settings.haptic.timeline" = "Стрічка";
+"settings.haptic.tab-selection" = "Вибір вкладки";
+"settings.haptic.buttons" = "Натиснення кнопки";
 
 "settings.display.show-tab-label" = "Відображати назву вкладки";
 
 "settings.display.show-ipad-column" = "Увімкнути додаткову колонку";
 
 "settings.general.swipeactions" = "Дії для рухів";
-
 "settings.swipeactions.appearance" = "Вигляд";
-
 "settings.swipeactions.navigation-title" = "Дії для рухів";
-
 "settings.swipeactions.primary" = "Основна дія";
-
 "settings.swipeactions.secondary" = "Додаткова дія";
-
 "settings.swipeactions.status" = "Публікація";
-
 "settings.swipeactions.status.action.bookmark" = "У закладки";
-
 "settings.swipeactions.status.action.boost" = "Поширити";
-
 "settings.swipeactions.status.action.favorite" = "Вподобати";
-
 "settings.swipeactions.status.action.none" = "Нічого";
-
 "settings.swipeactions.status.action.quote" = "Цитувати";
-
 "settings.swipeactions.status.action.reply" = "Відповісти";
-
 "settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
-
 "settings.swipeactions.status.leading" = "Рух праворуч";
-
 "settings.swipeactions.status.trailing" = "Рух ліворуч";
-
 "settings.swipeactions.use-theme-colors" = "Використовувати колір тему";
-
 "settings.swipeactions.use-theme-colors-explanation" = "Використовувати колір теми замість стандартних кольорів";
-
 "settings.swipeactions.icon-style" = "Стиль іконки";
 
 "settings.display.section.font" = "Шрифти";
 
-/* MARK: Tabs */
+// MARK: Tabs
 "tab.explore" = "Огляд";
-
 "tab.federated" = "Глобальна";
-
 "tab.local" = "Локальна";
-
 "tab.messages" = "Повідомлення";
-
 "tab.notifications" = "Сповіщення";
-
 "tab.settings" = "Налаштування";
-
 "tab.timeline" = "Стрічка";
-
 "tab.trending" = "Популярне";
-
 "tab.profile" = "Профіль";
 
-/* MARK: Timeline */
+// MARK: Timeline
 "timeline.%@-is-valid" = "%@ коректний сервер";
-
 "timeline.add-remote.title" = "Додати віддалену локальну стручку";
-
 "timeline.add.action.add" = "Додати";
-
 "timeline.filter.add-local" = "Додати локальну стрічку";
-
 "timeline.filter.lists" = "Списки";
-
 "timeline.filter.local" = "Локальна стрічка";
-
 "timeline.filter.tags" = "Хештеґи";
 
-/* MARK: Package: AppAccount */
+// MARK: Package: AppAccount
 "app-account.button.add" = "Додати обліковий запис";
 
-/* MARK: Package: Account */
+// MARK: Package: Account
 "account.action.add-remove-list" = "Додати/Видалити зі списку";
-
 "account.action.edit-info" = "Редагувати інформацію";
-
 "account.action.mention" = "Згадати";
-
 "account.action.message" = "Повідомлення";
-
 "account.action.notify-enable" = "Увімкнути сповіщення";
-
 "account.action.notify-disable" = "Вимкнути сповіщення";
-
 "account.action.reboosts-show" = "Відображати поширення";
-
 "account.action.reboosts-hide" = "Приховувати поширення";
-
 "account.action.block" = "Заблокувати";
-
 "account.action.unblock" = "Розблокувати";
-
 "account.action.mute" = "Приховати";
-
 "account.action.unmute" = "Відновити";
-
 "account.action.share" = "Поширити цей профіль";
-
 "account.boosted-by" = "Поширено";
-
 "account.detail.about" = "Про";
-
 "account.detail.familiar-followers" = "Також відслідковується";
-
 "account.detail.n-fields %lld" = "%lld полів";
-
 "account.detail.featured-tags-n-posts %lld" = "%lld дописів";
-
 "account.edit.about" = "Про";
-
 "account.edit.account-settings.bot" = "Це обліковий запис бота";
-
 "account.edit.account-settings.discoverable" = "Оприлюднити обліковий запис у каталозі";
-
 "account.edit.account-settings.private" = "Зробити обліковий запис приватним";
-
 "account.edit.account-settings.section-title" = "Налаштування облікового запису";
-
 "account.edit.display-name" = "Імʼя для відображення";
-
 "account.edit.error.save.message" = "Помилка збереження вашого облікового запису, спробуйте ще раз.";
-
 "account.edit.error.save.title" = "Помилка збереження облікового запису";
-
 "account.edit.navigation-title" = "Редагувати обліковий запис";
-
 "account.edit.post-settings.privacy" = "Приватність за замовчуванням";
-
 "account.edit.post-settings.section-title" = "Налаштування допису";
-
 "account.edit.post-settings.sensitive" = "Делікатний вміст";
-
 "account.favorited-by" = "Вподобали";
-
 "account.follow.follow" = "Підписатися";
-
 "account.follow.following" = "Підписаний";
-
 "account.follow.requested" = "Запит надіслано";
-
 "account.follow-request.accept" = "Прийняти";
-
 "account.follow-request.reject" = "Відхилити";
-
 "account.follow-requests.pending-requests" = "Черга запитів";
-
-"account.follow-requests.instructions" = "Користувачі, які не бачитемуть ваші дописи допоки ви їх не затвердите.";
-
+"account.follow-requests.instructions" = "Користувачі, які не бачитимуть ваші дописи допоки ви їх не затвердите.";
 "account.followers" = "Підписники";
-
 "account.following" = "Підписки";
-
 "account.list.create" = "Створити новий список";
-
 "account.list.create.confirm" = "Створити список";
-
 "account.list.create.description" = "Введіть назву для списку";
-
 "account.list.delete" = "Видалити список";
-
 "account.list.name" = "Назва списку";
-
 "account.post.pinned" = "Закріплений допис";
-
 "account.posts" = "Дописи";
-
-"account.relation.follows-you" = "Підписані на вас";
-
+"account.relation.follows-you" = "Підписується на вас";
 "account.joined" = "Доєднався";
-
 "account.action.logout" = "Вийти з облікового запису";
 
 "account.relation.note.edit" = "Редагувати нотатку";
-
 "account.relation.note.edit.placeholder" = "Додати нотатку";
-
 "account.relation.note.edit.error.save.message" = "Помилка збереження вашої нотатки, pспробуйте ще раз.";
-
 "account.relation.note.edit.error.save.title" = "Помилка збереження нотатки";
-
 "account.relation.note.label" = "Нотатка:";
 
-/* MARK: Package: Conversations */
+// MARK: Package: Conversations
 "conversations.action.delete" = "Видалити";
-
 "conversations.action.mark-read" = "Позначити прочитаним";
-
 "conversations.action.view-detail" = "Переглянути деталі";
-
 "conversations.empty.message" = "Looking for some social media love? You'll find all your direct messages and private mentions right here. Happy messaging! 📱❤️";
-
 "conversations.empty.title" = "Inbox Zero";
-
 "conversations.error.button" = "Спробувати знову";
-
 "conversations.error.message" = "Помилка завантаження вашого повідомлення";
-
 "conversations.error.title" = "Виникла халепа";
-
-"conversations.navigation-title" = "Особисти повідомлення";
-
+"conversations.navigation-title" = "Особисті повідомлення";
 "conversations.new.message.placeholder" = "Нове повідомлення";
 
-/* MARK: Package: DesignSystem */
+// MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld дописів від %lld учасників";
-
 "design.theme.navigation-title" = "Обрати тему";
-
 "design.theme.toots-preview" = "Перегляд допису";
 
-/* MARK: Package: Explore */
+// MARK: Package: Explore
 "explore.navigation-title" = "Огляд";
-
 "explore.search.message-%@" = "Ви можете шукати все, що вас цікавить на %@";
-
-"explore.search.prompt" = "Пошук користувачів, тописів та хештеґів";
-
+"explore.search.prompt" = "Пошук користувачів, дописів та хештеґів";
 "explore.search.title" = "Пошук на сервері";
-
 "explore.search.empty.message" = "На цей запит нічого не знайдено, спробуйте інший.";
-
 "explore.search.empty.title" = "Нічого не знайдено";
-
 "explore.section.posts" = "Дописи";
-
 "explore.section.suggested-users" = "Запропоновані користувачі";
-
 "explore.section.tags" = "Хештеґи";
-
 "explore.section.trending.links" = "Популярні посилання";
-
 "explore.section.trending.posts" = "Популярні дописи";
-
 "explore.section.trending.tags" = "Популярні хештеґи";
-
 "explore.section.users" = "Користувачі";
 
-/* MARK: Package: Env */
+// MARK: Package: Env
 "env.poll-duration.5m" = "5 хвилин";
-
 "env.poll-duration.30m" = "30 хвилин";
-
 "env.poll-duration.1h" = "1 година";
-
 "env.poll-duration.6h" = "6 годин";
-
 "env.poll-duration.12h" = "12 годин";
-
 "env.poll-duration.1d" = "1 день";
-
 "env.poll-duration.3d" = "3 дні";
-
 "env.poll-duration.7d" = "7 днів";
-
 "env.poll-vote-frequency.one" = "Один голос";
-
 "env.poll-vote-frequency.multiple" = "Кілька голосів";
 
-/* MARK: Package: Lists */
+// MARK: Package: Lists
 "lists.add-remove-%@" = "Додати/Видалити %@";
-
 "lists.create" = "Створити новий список";
-
 "lists.create.confirm" = "Створити список";
-
 "lists.edit.users-in-list" = "Користувачі у списку";
-
 "lists.name" = "Назва списку";
-
 "lists.name.message" = "Введіть назву для списку";
 
-/* MARK: Package: Notifications */
+// MARK: Package: Notifications
 "notifications.empty.message" = "Notifications? What notifications? Your notification inbox is looking so empty. Keep on being awesome! 📱😎";
-
 "notifications.empty.title" = "Немає сповіщень";
-
 "notifications.error.message" = "Халепа з завантаженням ваших сповіщень, спробуйте ще раз.";
-
 "notifications.error.title" = "Сталася халепа";
-
 "notifications.label.favorite %lld" = "уподобано";
-
 "notifications.label.follow %lld" = "підписка на вас";
-
 "notifications.label.mention %lld" = "загадано вас";
-
 "notifications.label.reblog %lld" = "поширено";
-
 "notifications.label.poll" = "завершення опитування";
-
 "notifications.label.follow-request" = "запит на підписку";
-
 "notifications.label.status" = "публікація допису";
-
 "notifications.label.update" = "зміна допису";
-
 "notifications.menu-title.favorite" = "Уподобання";
-
 "notifications.menu-title.follow" = "Підписка";
-
 "notifications.menu-title.follow-request" = "Запит на підписку";
-
 "notifications.menu-title.mention" = "Згадування";
-
 "notifications.menu-title.poll" = "Опитування";
-
 "notifications.menu-title.reblog" = "Поширення";
-
 "notifications.menu-title.status" = "Дописи";
-
 "notifications.menu-title.update" = "Редагування дописів";
-
 "notifications.navigation-title" = "Усі сповіщення";
-
 "notifications.tab.all" = "Усі";
-
 "notifications.tab.mentions" = "Згадування";
 
 "notifications.label.status.push" = "🖊️ Опубліковано: ";
-
 "notifications.label.reblog.push" = "🚀 Поширено: ";
-
 "notifications.label.follow.push" = "👋 Підписався: ";
-
 "notifications.label.follow-request.push" = "🔒 Запит на підписку: ";
-
 "notifications.label.favorite.push" = "⭐️ Вподобано: ";
-
 "notifications.label.poll.push" = "📈 Опитування завершено: ";
-
 "notifications.label.update.push" = "Оновлено: ";
 
-/* MARK: Package: Timeline */
+// MARK: Package: Timeline
 "timeline.federated" = "Глобальна";
-
 "timeline.latest" = "Перейти до нових";
-
 "timeline.home" = "Домівка";
-
 "timeline.local" = "Локальна";
-
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld нових дописів від %lld учасників";
-
 "timeline.trending" = "Популярне";
-
 "timeline.add.url" = "URL сервера";
 
-/* MARK: Package: Status */
+// MARK: Package: Status
 "status.action.translate" = "Перекласти";
-
-"status.action.translate-from-%@" = "Переклад від %@";
-
 "status.action.translated-label-%@" = "Переклад з допомогою %@";
-
+"status.action.translated-label-from-%@-%@" = "Переклад з %@ з допомогою %@";
 "status.action.bookmark" = "У закладки";
-
 "status.action.boost" = "Поширити";
-
 "status.action.boost-to-followers" = "Boost to Followers";
-
 "status.action.copy-text" = "Копіювати текст";
-
+"status.action.copy-link" = "Копіювати посилання";
 "status.action.delete" = "Видалити";
-
 "status.action.delete.confirm.title" = "Підтвердження";
-
 "status.action.delete.confirm.message" = "ви впевнені, що хочете видалити цей допис?";
-
 "status.action.edit" = "Редагувати";
-
 "status.action.favorite" = "Вподобане";
-
 "status.action.mention" = "Згадки";
-
 "status.action.message" = "Повідомлення";
-
 "status.action.pin" = "Закріпити";
-
 "status.action.post" = "Допис";
-
 "status.action.quote" = "Цитувати цей допис";
-
 "status.action.reply" = "Відповісти";
-
 "status.action.section.your-post" = "Ваш допис";
-
 "status.action.share" = "Поширити цей допис";
-
 "status.action.share-link" = "Поширити посилання на допис";
-
 "status.action.share-image" = "Поширити як зображення";
-
 "status.action.share-title" = "Поширення";
-
 "status.action.unbookmark" = "Вилучити із закладок";
-
 "status.action.unboost" = "Відмінити поширення";
-
 "status.action.unfavorite" = "Вилучити із вподобаного";
-
 "status.action.unpin" = "Відкріпити";
-
 "status.action.view-in-browser" = "Переглянути у браузері";
-
 "status.card.share" = "Поширити це посилання";
-
 "status.card.copy" = "Скопіювати це посилання";
-
 "status.draft.delete" = "Видалити чернетку";
-
 "status.draft.save" = "Зберегти чернетку";
-
 "status.editor.ai-prompt.correct" = "Виправити текст";
-
 "status.editor.ai-prompt.emphasize" = "Підкреслити текст";
-
 "status.editor.ai-prompt.fit" = "Короткий текст";
-
 "status.editor.description.add" = "Додати опис";
-
 "status.editor.description.edit" = "Виправити опис";
-
 "status.editor.drafts.navigation-title" = "Чернетки";
-
 "status.editor.emojis.navigation-title" = "Власні Emojis";
-
 "status.editor.error.upload" = "Помилка завантаження";
-
 "status.editor.language-select.navigation-title" = "Обрати мову";
-
 "status.editor.language-select.recently-used" = "Остання обрана";
-
 "status.editor.language-select.confirmation.detected-%@" = "Опубліковано на %@ (Detected language)";
-
 "status.editor.language-select.confirmation.selected-%@" = "Опубліковано на %@ (Selected language)";
-
 "status.editor.media.edit-image" = "Змінити медіа";
-
 "status.editor.media.image-description" = "Опис медіа";
-
 "status.editor.mode.edit" = "Змінити ваш допис";
-
 "status.editor.mode.new" = "Новий допис";
-
 "status.editor.mode.quote-%@" = "Цитування %@";
-
 "status.editor.mode.reply-%@" = "У відповідь на %@";
-
 "status.editor.restore-previous" = "Відновити попередній текст";
-
 "status.editor.spoiler" = "Спойлер";
-
 "status.editor.text.placeholder" = "Що у вас на думці?";
-
 "status.editor.visibility" = "Видимість допису";
-
 "status.error.loading.message" = "An error occurred while loading posts, please try again.";
-
 "status.error.message" = "An error occurred in the context of this post, please try again.";
-
 "status.error.title" = "An error occurred";
-
 "status.filter.filtered-by-%@" = "Відфільровано: %@";
-
 "status.filter.show-anyway" = "Всерівно показати";
-
 "status.image.alt-text.abbreviation" = "ALT";
-
 "status.media.content.show" = "Показати вміст";
-
 "status.media.contextmenu.copy" = "Копіювати зображення";
-
 "status.media.contextmenu.save" = "Зберегти зображення";
-
 "status.media.contextmenu.share" = "Поділитися цим зображенням";
-
 "status.media.contextmenu.view-browser" = "Переглянути у браузері";
-
 "status.media.sensitive.show" = "Показати делікатний вміст";
-
 "status.poll.n-votes %lld" = "%lld голосів";
-
 "status.poll.n-votes-voters %lld %lld" = "%lld голосів від %lld опитаних";
-
 "status.poll.closed" = "Закрито";
-
-"status.poll.closes-in" = "Закривається в ";
-
+"status.poll.closes-in" = "Завершується в ";
 "status.poll.duration" = "Тривалість опитування";
-
 "status.poll.frequency" = "Частота опитування";
-
 "status.poll.option-n %lld" = "Варіант %lld";
-
 "status.poll.send" = "Проголосувати";
-
 "status.post-from-%@" = "Допис від %@";
-
-"status.row.was-boosted" = "поширено";
-
-"status.row.was-reply" = "Відповідь на";
-
+"status.row.was-boosted" = "поширює";
+"status.row.was-reply" = "Відповідь для";
 "status.row.you-boosted" = "Ви поширили";
-
 "status.show-less" = "Показати менше";
-
 "status.show-more" = "Показати більше";
-
 "status.summary.at-time" = " о ";
-
 "status.summary.edited-time" = "Востаннє змінено: ";
-
 "status.summary.n-boosts %lld" = "%lld поширень";
-
 "status.summary.n-favorites %lld" = "%lld вподобань";
-
 "status.visibility.direct" = "Особисте";
-
 "status.visibility.follower" = "Підписникам";
-
 "status.visibility.public" = "Усім";
-
 "status.visibility.unlisted" = "Не зі списку";
 
-/* MARK: Filters */
+// MARK: Filters
 "filter.new" = "Новий фільтр";
-
 "filter.filters" = "Фільтри";
-
-"filter.edit.title" = "Filter title";
-
-"filter.edit.keywords" = "Filter Keywords";
-
-"filter.edit.keywords.add" = "Add a new keyword";
-
-"filter.edit.contexts" = "Filter Contexts";
-
-"filter.edit.action" = "Filter Action";
-
+"filter.edit.title" = "Назва фільтру";
+"filter.edit.keywords" = "Ключові слова";
+"filter.edit.keywords.add" = "Додати нове слово";
+"filter.edit.contexts" = "Фільтрувати вміст";
+"filter.edit.action" = "Виконати";
 "account.action.edit-filters" = "Редагувати фільтри";
-
 "filter.contexts.home" = "Домівка та список";
-
 "filter.contexts.notifications" = "Сповіщення";
-
 "filter.contexts.public" = "Публічна стрічка";
-
 "filter.contexts.conversations" = "Розмови";
-
 "filter.contexts.profiles" = "Профілі";
-
 "filter.action.warning" = "Приховати з попередженням";
-
 "filter.action.hide" = "Повністю приховати";
 
-/* MARK: Accessibility */
+// MARK: Accessibility
 "accessibility.editor.button.attach-photo" = "Додати світлину";
-
 "accessibility.editor.button.poll" = "Опитування";
-
-"accessibility.editor.button.spoiler" = "Увага! Спойлер";
-
+"accessibility.editor.button.spoiler" = "Увага! Спойлер.";
 "accessibility.editor.button.drafts" = "Чернетка";
-
 "accessibility.editor.button.custom-emojis" = "Власні emojis";
-
 "accessibility.editor.button.language" = "Мова";
-
 "accessibility.tabs.timeline.add-account" = "Додати профіль";
-
 "accessibility.app-account.selector.accounts" = "Профілі";
 
-/* MARK: Report */
+// MARK: Report
 "report.comment.placeholder" = "Додаткова інформація";
-
 "report.title" = "Скарга на допис";
-
 "report.action.send" = "Надіслати";
-
 "status.action.report" = "Поскаржитися на допис";
 
