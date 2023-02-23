@@ -572,17 +572,26 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
       mediasImages[index] = newContainer
       do {
         if let index = indexOf(container: newContainer) {
-          if let image = originalContainer.image,
-             let data = image.jpegData(compressionQuality: 0.90)
-          {
-            let uploadedMedia = try await uploadMedia(data: data, mimeType: "image/jpeg")
-            mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
-                                        movieTransferable: nil,
-                                        gifTransferable: nil,
-                                        mediaAttachment: uploadedMedia,
-                                        error: nil)
-            if let uploadedMedia, uploadedMedia.url == nil {
-              scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
+          if let image = originalContainer.image {
+            let data: Data?
+            // Mastodon API don't support images over 5K
+            if image.size.height > 5000 || image.size.width > 5000 {
+              data = image.resized(to: .init(width: image.size.width / 4,
+                                             height: image.size.height / 4))
+                .jpegData(compressionQuality: 0.80)
+            } else {
+              data = image.jpegData(compressionQuality: 0.80)
+            }
+            if let data {
+              let uploadedMedia = try await uploadMedia(data: data, mimeType: "image/jpeg")
+              mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
+                                          movieTransferable: nil,
+                                          gifTransferable: nil,
+                                          mediaAttachment: uploadedMedia,
+                                          error: nil)
+              if let uploadedMedia, uploadedMedia.url == nil {
+                scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
+              }
             }
           } else if let videoURL = await originalContainer.movieTransferable?.compressedVideoURL,
                     let data = try? Data(contentsOf: videoURL)
