@@ -37,7 +37,7 @@
 "enum.status-actions-display.only-buttons" = "仅图标";
 "enum.status-display-style.compact" = "紧凑";
 "enum.status-display-style.large" = "宽松";
-"enum.status-display-style.medium" = "Medium";
+"enum.status-display-style.medium" = "中等";
 "enum.swipeactions.icon-with-text" = "图标和文本";
 "enum.swipeactions.icon-only" = "仅图标";
 
@@ -168,21 +168,21 @@
 "settings.display.show-ipad-column" = "启用边栏";
 
 "settings.general.swipeactions" = "轻扫操作";
-"settings.swipeactions.appearance" = "Appearance";
+"settings.swipeactions.appearance" = "外观";
 "settings.swipeactions.navigation-title" = "轻扫操作设置";
-"settings.swipeactions.primary" = "Primary Action";
-"settings.swipeactions.secondary" = "Secondary Action";
+"settings.swipeactions.primary" = "主要操作";
+"settings.swipeactions.secondary" = "次要操作";
 "settings.swipeactions.status.action.bookmark" = "书签";
 "settings.swipeactions.status.action.boost" = "转发";
 "settings.swipeactions.status.action.favorite" = "喜欢";
 "settings.swipeactions.status.action.none" = "无";
 "settings.swipeactions.status.action.quote" = "引用";
 "settings.swipeactions.status.action.reply" = "回复";
-"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
+"settings.swipeactions.status.explanation" = "可在嘟文上进行向左轻扫或向右轻扫操作。仅当设置了主要操作时，次要操作才可用。";
 "settings.swipeactions.status.leading" = "向右轻扫";
 "settings.swipeactions.status.trailing" = "向左轻扫";
 "settings.swipeactions.status" = "嘟文";
-"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors" = "使用主题色";
 "settings.swipeactions.use-theme-colors-explanation" = "使用主题色而不是默认色";
 "settings.swipeactions.icon-style" = "图标样式";
 
@@ -370,12 +370,12 @@
 // MARK: Package: Status
 "status.action.translate" = "翻译";
 "status.action.translated-label-%@" = "由 %@ 翻译";
-"status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
+"status.action.translated-label-from-%@-%@" = "翻译自 %@，使用 %@";
 "status.action.bookmark" = "书签";
 "status.action.boost" = "转发";
 "status.action.boost-to-followers" = "转发给粉丝";
 "status.action.copy-text" = "拷贝文本";
-"status.action.copy-link" = "Copy Link";
+"status.action.copy-link" = "拷贝链接";
 "status.action.delete" = "删除";
 "status.action.delete.confirm.title" = "确认删除";
 "status.action.delete.confirm.message" = "你确认要删除此嘟文吗？";
