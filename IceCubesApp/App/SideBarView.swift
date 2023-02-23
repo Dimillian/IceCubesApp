@@ -44,12 +44,12 @@ struct SideBarView<Content: View>: View {
     ZStack {
       Circle()
         .fill(.red)
-      Text(String(count))
+      Text(count > 99 ? "99+" : String(count))
         .foregroundColor(.white)
         .font(.caption2)
     }
-    .frame(width: 20, height: 20)
-    .offset(x: 10, y: -10)
+    .frame(width: 24, height: 24)
+    .offset(x: 14, y: -14)
   }
 
   private var postButton: some View {
