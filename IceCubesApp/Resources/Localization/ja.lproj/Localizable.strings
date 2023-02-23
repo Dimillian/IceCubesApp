@@ -368,12 +368,12 @@
 // MARK: Package: Status
 "status.action.translate" = "翻訳";
 "status.action.translated-label-%@" = "%@ を使用して翻訳";
-"status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
+"status.action.translated-label-from-%@-%@" = "%@ を使用して %@ から翻訳";
 "status.action.bookmark" = "ブックマーク";
 "status.action.boost" = "ブースト";
 "status.action.boost-to-followers" = "フォロワーにブースト";
 "status.action.copy-text" = "テキストをコピー";
-"status.action.copy-link" = "Copy Link";
+"status.action.copy-link" = "リンクをコピー";
 "status.action.delete" = "削除";
 "status.action.delete.confirm.title" = "確認";
 "status.action.delete.confirm.message" = "本当に投稿を削除しますか？";
