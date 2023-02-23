@@ -39,7 +39,6 @@
 "enum.status-actions-display.only-buttons" = "Solo bottoni";
 "enum.status-display-style.compact" = "Compatto";
 "enum.status-display-style.large" = "Completo";
-"enum.status-display-style.medium" = "Medio";
 "enum.swipeactions.icon-with-text" = "Icon e testo";
 "enum.swipeactions.icon-only" = "Solo icone";
 
@@ -141,6 +140,7 @@
 "settings.other.hide-openai" = "Abilita l'aiuto del 🤖";
 "settings.other.social-keyboard" = "Abilita social keyboard";
 "settings.other.sound-effect" = "Attiva gli effetti sonori";
+"settings.other.always-deepl" = "Always Translate using DeepL";
 "settings.general.content" = "Impostazioni dei contenuti";
 "settings.system" = "Vai alle impostazioni di sistema";
 "settings.content.navigation-title" = "Impostazioni dei contenuti";
@@ -386,6 +386,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Traduci";
+"status.action.translate-with-deepl" = "Translate with DeepL";
 "status.action.translated-label-%@" = "Tradotto usando %@";
 "status.action.translated-label-from-%@-%@" = "Tradotto da %@ usando %@";
 "status.action.bookmark" = "Salva nei segnalibri";

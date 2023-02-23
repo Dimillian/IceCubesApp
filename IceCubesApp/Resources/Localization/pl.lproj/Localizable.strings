@@ -162,6 +162,7 @@
 "settings.other.social-keyboard" = "Włącz klawiaturę społecznościową";
 "settings.other.sound-effect" = "Włącz efekty dźwiękowe";
 "settings.push.duplicate.title" = "Korektor duplikatów powiadomień";
+"settings.other.always-deepl" = "Always Translate using DeepL";
 "settings.push.duplicate.footer" = "Otrzymujesz zduplikowane powiadomienia? Spróbuj tego magicznego przycisku, aby to naprawić";
 "settings.push.duplicate.button.fix" = "🪄 Napraw to";
 "settings.other.autoplay-video" = "Odtwarzaj filmy automatycznie";
@@ -381,6 +382,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Przetłumacz";
+"status.action.translate-with-deepl" = "Translate with DeepL";
 "status.action.translated-label-%@" = "Przetłumaczono za pomocą %@";
 "status.action.translated-label-from-%@-%@" = "Tekst %@ przetłumaczono za pomocą %@";
 "status.action.bookmark" = "Dodaj zakładkę";

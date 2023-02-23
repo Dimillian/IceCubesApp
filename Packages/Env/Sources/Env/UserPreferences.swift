@@ -26,6 +26,7 @@ public class UserPreferences: ObservableObject {
   @AppStorage("app_default_post_visibility") public var appDefaultPostVisibility: Models.Visibility = .pub
   @AppStorage("app_default_posts_sensitive") public var appDefaultPostsSensitive = false
   @AppStorage("autoplay_video") public var autoPlayVideo = true
+  @AppStorage("translate_with_deepl") public var translateWithDeepl = false
 
   @AppStorage("suppress_dupe_reblogs") public var suppressDupeReblogs: Bool = false
 

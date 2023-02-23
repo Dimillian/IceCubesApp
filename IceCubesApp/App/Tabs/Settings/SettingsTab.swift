@@ -182,6 +182,9 @@ struct SettingsTabs: View {
       Toggle(isOn: $preferences.soundEffectEnabled) {
         Label("settings.other.sound-effect", systemImage: "hifispeaker")
       }
+        Toggle(isOn: $preferences.translateWithDeepl) {
+            Label("settings.other.always-deepl", systemImage: "captions.bubble")
+        }
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }

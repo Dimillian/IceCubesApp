@@ -161,6 +161,7 @@
 "settings.other.hide-openai" = "Activer 🤖 aide";
 "settings.other.social-keyboard" = "Activer le clavier social";
 "settings.other.sound-effect" = "Enable Sound Effects";
+"settings.other.always-deepl" = "Always Translate using DeepL";
 "settings.push.duplicate.title" = "Correcteur de notifications en double";
 "settings.push.duplicate.footer" = "Recevez-vous des notifications en double ? Essayez ce bouton magique pour résoudre le problème";
 "settings.push.duplicate.button.fix" = "🪄 Résoudre";
@@ -381,6 +382,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Traduire";
+"status.action.translate-with-deepl" = "Translate with DeepL";
 "status.action.translated-label-%@" = "Traduit avec %@";
 "status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Marquer";

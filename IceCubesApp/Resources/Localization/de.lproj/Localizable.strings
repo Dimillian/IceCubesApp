@@ -141,6 +141,7 @@
 "settings.other.hide-openai" = "Aktiviere 🤖-Helfer";
 "settings.other.social-keyboard" = "Soziale Tastatur aktivieren";
 "settings.other.sound-effect" = "Klänge aktivieren";
+"settings.other.always-deepl" = "Immer mit DeepL übersetzen";
 "settings.general.content" = "Inhaltseinstellungen";
 "settings.system" = "Systemeinstellungen";
 "settings.content.navigation-title" = "Inhaltseinstellungen";
@@ -381,6 +382,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Übersetzen";
+"status.action.translate-with-deepl" = "Mit DeepL übersetzen";
 "status.action.translated-label-%@" = "Übersetzt mit %@";
 "status.action.translated-label-from-%@-%@" = "Aus %@ mit %@ übersetzt";
 "status.action.bookmark" = "Lesezeichen setzen";

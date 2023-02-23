@@ -32,6 +32,9 @@ public class StatusRowViewModel: ObservableObject {
   @Published var isLoadingRemoteContent: Bool = false
   @Published var localStatusId: String?
   @Published var localStatus: Status?
+    
+  private var preferences: UserPreferences?
+
 
   // used by the button to expand a collapsed post
   @Published var isCollapsed: Bool = true {
@@ -287,30 +290,41 @@ public class StatusRowViewModel: ObservableObject {
     finalStatus.language
   }
 
+    func setPreferences(preferences: UserPreferences) {
+        self.preferences = preferences
+    }
+    
   func translate(userLang: String) async {
-    do {
-      withAnimation {
-        isLoadingTranslation = true
+      if !(preferences?.translateWithDeepl ?? false) {
+          do {
+              withAnimation {
+                  isLoadingTranslation = true
+              }
+              // We first use instance translation API if available.
+              let translation: StatusTranslation = try await client.post(endpoint: Statuses.translate(id: finalStatus.id,
+                                                                                                      lang: userLang))
+              withAnimation {
+                  self.translation = translation
+                  isLoadingTranslation = false
+              }
+              
+              return
+          } catch {}
       }
-      // We first use instance translation API if available.
-      let translation: StatusTranslation = try await client.post(endpoint: Statuses.translate(id: finalStatus.id,
-                                                                                              lang: userLang))
-      withAnimation {
-        self.translation = translation
-        isLoadingTranslation = false
-      }
-    } catch {
-      // If not or fail we use Ice Cubes own DeepL client.
+      
+    // If not or fail we use Ice Cubes own DeepL client.
+    await translateWithDeepL(userLang: userLang)
+  }
+
+    func translateWithDeepL(userLang: String) async {
       let deepLClient = DeepLClient()
       let translation = try? await deepLClient.request(target: userLang,
-                                                       source: finalStatus.language,
                                                        text: finalStatus.content.asRawText)
       withAnimation {
         self.translation = translation
         isLoadingTranslation = false
       }
     }
-  }
 
   func fetchRemoteStatus() async -> Bool {
     guard isRemote, let remoteStatusURL = URL(string: finalStatus.url ?? "") else { return false }

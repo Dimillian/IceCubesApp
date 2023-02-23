@@ -160,6 +160,7 @@
 "settings.other.hide-openai" = "Activa l'ajudant 🤖";
 "settings.other.social-keyboard" = "Activa el teclat social";
 "settings.other.sound-effect" = "Enable Sound Effects";
+"settings.other.always-deepl" = "Always Translate using DeepL";
 "settings.push.duplicate.title" = "Solucionador de notificacions duplicades";
 "settings.push.duplicate.footer" = "Rebeu les notificacions duplicades? Proveu aquest botó màgic per a solucionar-ho";
 "settings.push.duplicate.button.fix" = "🪄 Soluciona-ho";
@@ -384,6 +385,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Tradueix";
+"status.action.translate-with-deepl" = "Translate with DeepL";
 "status.action.translated-label-%@" = "Traduït amb %@";
 "status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Afegeix als marcadors";

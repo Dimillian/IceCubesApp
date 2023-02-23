@@ -137,6 +137,18 @@ struct StatusRowContextMenu: View {
       } label: {
         Label("status.action.translate", systemImage: "captions.bubble")
       }
+      .onAppear {
+          viewModel.setPreferences(preferences: preferences)
+      }
+        if !preferences.translateWithDeepl {
+            Button {
+                Task {
+                    await viewModel.translateWithDeepL(userLang: lang)
+                }
+            } label: {
+                Label("status.action.translate-with-deepl", systemImage: "captions.bubble")
+            }
+        }
     }
 
     if account.account?.id == viewModel.status.reblog?.account.id ?? viewModel.status.account.id {

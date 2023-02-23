@@ -161,6 +161,7 @@
 "settings.other.hide-openai" = "글 작성 도우미 🤖";
 "settings.other.social-keyboard" = "SNS 키보드";
 "settings.other.sound-effect" = "효과음";
+"settings.other.always-deepl" = "Always Translate using DeepL";
 "settings.push.duplicate.title" = "중복 알림 해결사";
 "settings.push.duplicate.footer" = "같은 알림이 여러 번 오나요? 위에 있는 버튼을 누르면 마법처럼 해결될 거에요.";
 "settings.push.duplicate.button.fix" = "🪄 고치기";
@@ -387,6 +388,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "번역";
+"status.action.translate-with-deepl" = "Translate with DeepL";
 "status.action.translated-label-%@" = "%@ 서비스를 통해 번역됨";
 "status.action.translated-label-from-%@-%@" = "%2$@ 서비스를 통해 %1$@에서 번역됨";
 "status.action.bookmark" = "보관함에 추가";

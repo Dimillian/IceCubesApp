@@ -165,6 +165,7 @@
 "settings.other.hide-openai" = "Enable 🤖 Helper";
 "settings.other.social-keyboard" = "Enable Social Keyboard";
 "settings.other.sound-effect" = "Enable Sound Effects";
+"settings.other.always-deepl" = "Always Translate using DeepL";
 "settings.push.duplicate.title" = "Duplicate Notifications Fixer";
 "settings.push.duplicate.footer" = "Receiving duplicate notifications? Try this magic button in order to fix it";
 "settings.push.duplicate.button.fix" = "🪄 Fix It";
@@ -386,6 +387,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Translate";
+"status.action.translate-with-deepl" = "Translate with DeepL";
 "status.action.translated-label-%@" = "Translated using %@";
 "status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Bookmark";

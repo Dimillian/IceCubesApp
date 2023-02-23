@@ -52,6 +52,9 @@ struct StatusRowTranslateView: View {
         }
       }
       .buttonStyle(.borderless)
+      .onAppear {
+          viewModel.setPreferences(preferences: preferences)
+      }
     }
 
     if let translation = viewModel.translation, !viewModel.isLoadingTranslation {
