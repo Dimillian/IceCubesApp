@@ -29,6 +29,7 @@ public class StatusRowViewModel: ObservableObject {
   @Published var isLoadingTranslation: Bool = false
   @Published var showDeleteAlert: Bool = false
 
+  private var actionsAccountsFetched: Bool = false
   @Published var favoriters: [Account] = []
   @Published var rebloggers: [Account] = []
 
@@ -307,9 +308,11 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   func fetchActionsAccounts() async {
+    guard !actionsAccountsFetched else { return }
     do {
       favoriters = try await client.get(endpoint: Statuses.favoritedBy(id: status.id, maxId: nil))
       rebloggers = try await client.get(endpoint: Statuses.rebloggedBy(id: status.id, maxId: nil))
+      actionsAccountsFetched = true
     } catch {}
   }
 
