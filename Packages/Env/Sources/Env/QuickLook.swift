@@ -3,7 +3,13 @@ import SwiftUI
 
 @MainActor
 public class QuickLook: ObservableObject {
-  @Published public var url: URL?
+  @Published public var url: URL? {
+    didSet {
+      if url == nil {
+        cleanup(urls: urls)
+      }
+    }
+  }
   @Published public private(set) var urls: [URL] = []
   @Published public private(set) var isPreparing: Bool = false
   @Published public private(set) var latestError: Error?
@@ -50,12 +56,24 @@ public class QuickLook: ObservableObject {
       }
     }
   }
+  
+  private var quickLookDir: URL {
+    try! FileManager.default.url(for: .cachesDirectory,
+                                 in: .userDomainMask,
+                                 appropriateFor: nil,
+                                 create: false)
+      .appending(component: "quicklook")
+  }
 
   private func localPathFor(url: URL) async throws -> URL {
-    let tempDir = URL(fileURLWithPath: NSTemporaryDirectory())
-    let path = tempDir.appendingPathComponent(url.lastPathComponent)
+    try? FileManager.default.createDirectory(at: quickLookDir, withIntermediateDirectories: true)
+    let path = quickLookDir.appendingPathComponent(url.lastPathComponent)
     let data = try await URLSession.shared.data(from: url).0
     try data.write(to: path)
     return path
+  }
+  
+  private func cleanup(urls: [URL]) {
+    try? FileManager.default.removeItem(at: quickLookDir)
   }
 }
