@@ -132,9 +132,19 @@ struct AccountDetailHeaderView: View {
       accountAvatarView
       HStack(alignment: .firstTextBaseline) {
         VStack(alignment: .leading, spacing: 0) {
-          EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
-            .font(.scaledHeadline)
-            .emojiSize(Font.scaledHeadlinePointSize)
+          HStack(alignment: .center, spacing: 2) {
+            EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
+              .font(.scaledHeadline)
+              .emojiSize(Font.scaledHeadlinePointSize)
+            if account.bot {
+              Text(Image(systemName: "gearshape.fill"))
+                .font(.footnote)
+            }
+            if account.locked {
+              Text(Image(systemName: "lock.fill"))
+                .font(.footnote)
+            }
+          }
           Text("@\(account.acct)")
             .font(.scaledCallout)
             .foregroundColor(.gray)
@@ -196,12 +206,6 @@ struct AccountDetailHeaderView: View {
   private var joinedAtView: some View {
     if let joinedAt = viewModel.account?.createdAt.asDate {
       HStack(spacing: 4) {
-        if account.bot {
-          Text("🤖")
-        }
-        if account.locked {
-          Text("🔒")
-        }
         Image(systemName: "calendar")
         Text("account.joined")
         Text(joinedAt, style: .date)

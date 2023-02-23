@@ -35,25 +35,27 @@ struct StatusRowHeaderView: View {
         AvatarView(url: status.account.avatar, size: .status)
       }
       VStack(alignment: .leading, spacing: 2) {
-        HStack(alignment: .center, spacing: 4) {
-          EmojiTextApp(.init(stringValue: status.account.safeDisplayName), emojis: status.account.emojis)
-            .font(.scaledSubheadline)
-            .emojiSize(Font.scaledSubheadlinePointSize)
-            .fontWeight(.semibold)
-            .lineLimit(1)
-            .layoutPriority(1)
+        HStack(alignment: .firstTextBaseline, spacing: 2) {
+          Group {
+            EmojiTextApp(.init(stringValue: status.account.safeDisplayName), emojis: status.account.emojis)
+              .font(.scaledSubheadline)
+              .emojiSize(Font.scaledSubheadlinePointSize)
+              .fontWeight(.semibold)
+              .lineLimit(1)
+            accountBadgeView
+              .font(.footnote)
+          }
+          .layoutPriority(1)
           if theme.avatarPosition == .leading {
             dateView
               .font(.scaledFootnote)
               .foregroundColor(.gray)
               .lineLimit(1)
-              .offset(y: 1)
           } else {
             Text("@\(theme.displayFullUsername ? status.account.acct : status.account.username)")
               .font(.scaledFootnote)
               .foregroundColor(.gray)
               .lineLimit(1)
-              .offset(y: 1)
           }
         }
         if theme.avatarPosition == .top {
@@ -71,13 +73,20 @@ struct StatusRowHeaderView: View {
       }
     }
   }
+  
+  private var accountBadgeView: Text {
+    if viewModel.status.account.bot {
+      return Text(Image(systemName: "gearshape.fill")) + Text(" ")
+    } else if viewModel.status.account.locked {
+      return Text(Image(systemName: "lock.fill")) + Text(" ")
+    }
+    return Text("")
+  }
 
   private var dateView: Text {
-    Text(viewModel.status.account.bot ? "🤖 " : "") +
-      Text(viewModel.status.account.locked ? "🔒 " : "") +
-      Text(status.createdAt.relativeFormatted) +
-      Text(" ⸱ ") +
-      Text(Image(systemName: viewModel.status.visibility.iconName))
+    Text(status.createdAt.relativeFormatted) +
+    Text(" ⸱ ") +
+    Text(Image(systemName: viewModel.status.visibility.iconName))
   }
 
   @ViewBuilder
