@@ -181,7 +181,7 @@
     <key>design.tag.n-posts-from-n-participants %lld %lld</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
-		<string>%#@tagParticipantsCount@ %#@tagPostsCount@</string>
+		<string>%2$#@tagParticipantsCount@ %1$#@tagPostsCount@</string>
 		<key>tagParticipantsCount</key>
 		<dict>
             	<key>NSStringFormatSpecTypeKey</key>
@@ -208,7 +208,7 @@
     <key>timeline.n-recent-from-n-participants %lld %lld</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
-		<string>%#@tagParticipantsCount@ %#@tagPostsCount@</string>
+		<string>%2$#@tagParticipantsCount@ %1$#@tagPostsCount@</string>
 		<key>tagParticipantsCount</key>
 		<dict>
             	<key>NSStringFormatSpecTypeKey</key>
@@ -230,6 +230,33 @@
 			<string>bidalketa %lld</string>
 			<key>other</key>
 			<string>%lld bidalketa</string>
+		</dict>
+	</dict>
+    <key>status.poll.n-votes-voters %lld %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%2$#@tagVotersCount@ %1$#@tagVotesCount@</string>
+		<key>tagVotesCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>boto %lld</string>
+			<key>other</key>
+			<string>%lld boto</string>
+		</dict>
+		<key>tagVotersCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Boto-emaile baten</string>
+			<key>other</key>
+			<string>%lld boto-emaileren</string>
 		</dict>
 	</dict>
 </dict>

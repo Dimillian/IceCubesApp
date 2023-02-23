@@ -104,6 +104,7 @@ struct NotificationRowView: View {
                          .foregroundColor(.gray)
                      })
                      .font(.scaledSubheadline)
+                     .emojiSize(Font.scaledSubheadlinePointSize)
                      .fontWeight(.semibold)
                      .lineLimit(3)
                      .fixedSize(horizontal: false, vertical: true)
@@ -160,6 +161,7 @@ struct NotificationRowView: View {
                        emojis: notification.accounts[0].emojis)
             .lineLimit(3)
             .font(.scaledCallout)
+            .emojiSize(Font.scaledCalloutPointSize)
             .foregroundColor(.gray)
             .environment(\.openURL, OpenURLAction { url in
               routerPath.handle(url: url)

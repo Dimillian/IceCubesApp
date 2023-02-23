@@ -60,7 +60,7 @@ public struct EditRelationshipNoteView: View {
         if viewModel.isSaving {
           ProgressView()
         } else {
-          Text("action.save")
+          Text("action.save").bold()
         }
       }
     }

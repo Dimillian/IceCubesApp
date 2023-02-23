@@ -41,8 +41,10 @@ struct SettingsTabs: View {
       .toolbar {
         if UIDevice.current.userInterfaceIdiom == .phone {
           ToolbarItem {
-            Button("action.done") {
+            Button {
               dismiss()
+            } label: {
+              Text("action.done").bold()
             }
           }
         }

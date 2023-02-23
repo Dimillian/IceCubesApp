@@ -12,6 +12,7 @@ struct StatusRowTextView: View {
     HStack {
       EmojiTextApp(status.content, emojis: status.emojis, language: status.language)
         .font(.scaledBody)
+        .emojiSize(Font.scaledBodyPointSize)
         .environment(\.openURL, OpenURLAction { url in
           viewModel.routerPath.handleStatus(status: status, url: url)
         })

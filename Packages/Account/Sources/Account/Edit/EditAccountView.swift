@@ -116,7 +116,7 @@ public struct EditAccountView: View {
         if viewModel.isSaving {
           ProgressView()
         } else {
-          Text("action.save")
+          Text("action.save").bold()
         }
       }
     }

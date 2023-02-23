@@ -118,7 +118,7 @@ public struct StatusEditorView: View {
             if viewModel.isPosting {
               ProgressView()
             } else {
-              Text("status.action.post")
+              Text("status.action.post").bold()
             }
           }
           .disabled(!viewModel.canPost)
