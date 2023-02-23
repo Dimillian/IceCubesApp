@@ -46,8 +46,9 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   var isThread: Bool {
+    (status.reblog?.repliesCount ?? status.repliesCount) > 0 ||
     status.reblog?.inReplyToId != nil || status.reblog?.inReplyToAccountId != nil ||
-      status.inReplyToId != nil || status.inReplyToAccountId != nil
+    status.inReplyToId != nil || status.inReplyToAccountId != nil
   }
 
   var highlightRowColor: Color {
