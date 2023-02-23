@@ -37,21 +37,21 @@
 "enum.status-actions-display.only-buttons" = "Somente botões";
 "enum.status-display-style.compact" = "Compacto";
 "enum.status-display-style.large" = "Largo";
-"enum.status-display-style.medium" = "Medium";
-"enum.swipeactions.icon-with-text" = "Icon with text";
-"enum.swipeactions.icon-only" = "Icon only";
+"enum.status-display-style.medium" = "Médio";
+"enum.swipeactions.icon-with-text" = "Ícone com texto";
+"enum.swipeactions.icon-only" = "Apenas ícone";
 
 // MARK: Instances
 "instance.info.domains" = "Domínios";
 "instance.info.email" = "Email";
 "instance.info.name" = "Nome";
 "instance.info.navigation-title" = "Informação da Instância";
-"instance.info.posts" = "Posts";
+"instance.info.posts" = "Postagens";
 "instance.info.section.info" = "Informação da instância";
 "instance.info.section.rules" = "Regras da instância";
 "instance.info.users" = "Usuários";
 "instance.info.version" = "Versões";
-"instance.list.posts-%@" = "%@ posts";
+"instance.list.posts-%@" = "%@ postagens";
 "instance.list.users-%@" = "%@ usuários";
 "instance.suggestions" = "Sugestões";
 "instance.url" = "URL da Instância";
@@ -71,7 +71,7 @@
 "settings.app.source" = "Código fonte (link GitHub)";
 "settings.app.support" = "Apoie o app";
 "settings.app.about" = "About";
-"settings.display.example-toot" = "Example Post";
+"settings.display.example-toot" = "Examplo de postagem";
 "settings.display.avatar.position" = "Posição do avatar";
 "settings.display.avatar.shape" = "Formato do avatar";
 "settings.display.full-username" = "Display full username";
@@ -111,7 +111,7 @@
 "settings.content.hide-repeated-boosts" = "Hide repeated boosts";
 "settings.content.instance-settings" = "Server Content Settings";
 "settings.content.use-instance-settings" = "Usar configurações do servidor";
-"settings.content.expand-spoilers" = "Sempre exibir posts sensíveis";
+"settings.content.expand-spoilers" = "Sempre exibir postagens sensíveis";
 "settings.content.expand-media" = "Exibição de mídia";
 "settings.content.default-sensitive" = "Sempre marcar mídias como sensíveis";
 "settings.content.default-visibility" = "Visibilidade da postagem";
@@ -182,7 +182,7 @@
 "settings.swipeactions.status.explanation" = "As ações de deslizar estão disponíveis ao deslizar para a esquerda ou para a direita em uma postagem. A ação secundária só estará disponível se a ação primária estiver definida.";
 "settings.swipeactions.status.leading" = "Deslizar para direita";
 "settings.swipeactions.status.trailing" = "Deslizar para esquerda";
-"settings.swipeactions.status" = "Post";
+"settings.swipeactions.status" = "Postar";
 "settings.swipeactions.appearance" = "Aparência";
 "settings.swipeactions.use-theme-colors" = "Usar cores do tema";
 "settings.swipeactions.use-theme-colors-explanation" = "Use as cores do tema em vez das cores padrão";
@@ -226,7 +226,7 @@
 "account.action.unblock" = "Desbloquear";
 "account.action.mute" = "Mutar";
 "account.action.unmute" = "Reativar";
-"account.action.share" = "Share this account";
+"account.action.share" = "Compartilhar essa conta";
 "account.boosted-by" = "Boosted por";
 "account.detail.about" = "Sobre";
 "account.detail.familiar-followers" = "Também seguido por";
@@ -242,7 +242,7 @@
 "account.edit.error.save.title" = "Erro salvando seu perfil";
 "account.edit.navigation-title" = "Editar Perfil";
 "account.edit.post-settings.privacy" = "Privacidade padrão";
-"account.edit.post-settings.section-title" = "Configuração do Post";
+"account.edit.post-settings.section-title" = "Configuração de postagem";
 "account.edit.post-settings.sensitive" = "Conteúdo Sensível";
 "account.favorited-by" = "Favoritado por";
 "account.follow.follow" = "Seguir";
@@ -343,7 +343,7 @@
 "notifications.menu-title.poll" = "Votação";
 "notifications.menu-title.reblog" = "Boost";
 "notifications.menu-title.status" = "Postagem";
-"notifications.menu-title.update" = "Postagem Editada";
+"notifications.menu-title.update" = "Postagem editada";
 "notifications.navigation-title" = "Todas as Notificações";
 "notifications.tab.all" = "Todos";
 "notifications.tab.mentions" = "Menções";
@@ -368,12 +368,12 @@
 // MARK: Package: Status
 "status.action.translate" = "Traduzir";
 "status.action.translated-label-%@" = "Traduzir usando %@";
-"status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
+"status.action.translated-label-from-%@-%@" = "Traduzido de %@ usando %@";
 "status.action.bookmark" = "Salvar";
 "status.action.boost" = "Boost";
-"status.action.boost-to-followers" = "Boost to Followers";
-"status.action.copy-text" = "Copiar Texto";
-"status.action.copy-link" = "Copy Link";
+"status.action.boost-to-followers" = "Boost para seguidores";
+"status.action.copy-text" = "Copiar texto";
+"status.action.copy-link" = "Copiar link";
 "status.action.delete" = "Deletar";
 "status.action.delete.confirm.title" = "Confirmar";
 "status.action.delete.confirm.message" = "tem certeza que deseja excluir esta postagem?";
@@ -387,16 +387,16 @@
 "status.action.reply" = "Responder";
 "status.action.section.your-post" = "Sua postagem";
 "status.action.share" = "Compartilhe esta postagem";
-"status.action.share-link" = "Share post link";
-"status.action.share-image" = "Share post as image";
-"status.action.share-title" = "Share";
+"status.action.share-link" = "Compartilhar link da postagem";
+"status.action.share-image" = "Compartilhar postagem como imagem";
+"status.action.share-title" = "Compartilhar";
 "status.action.unbookmark" = "Remover dos salvos";
 "status.action.unboost" = "Unboost";
 "status.action.unfavorite" = "Desfavoritar";
 "status.action.unpin" = "Unpin";
 "status.action.view-in-browser" = "Abrir no Navegador";
-"status.card.share" = "Share this link";
-"status.card.copy" = "Copy this link";
+"status.card.share" = "Compartilhar esse link";
+"status.card.copy" = "Copiar esse link";
 "status.draft.delete" = "Excluir Rascunho";
 "status.draft.save" = "Salvar Rascunho";
 "status.editor.ai-prompt.correct" = "Corrigir texto";
@@ -440,8 +440,8 @@
 "status.poll.duration" = "Duração da votação";
 "status.poll.frequency" = "Frequência da votação";
 "status.poll.option-n %lld" = "Opção %lld";
-"status.poll.send" = "Send Vote";
-"status.post-from-%@" = "Postar de %@";
+"status.poll.send" = "Enviar voto";
+"status.post-from-%@" = "Postagem de %@";
 "status.row.was-boosted" = "deu boost";
 "status.row.was-reply" = "Respondeu a";
 "status.row.you-boosted" = "Você deu boost";
