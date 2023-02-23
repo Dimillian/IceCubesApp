@@ -7,6 +7,7 @@ import Models
 import Network
 import SwiftUI
 import Timeline
+import Nuke
 
 struct SettingsTabs: View {
   @Environment(\.dismiss) private var dismiss
@@ -22,6 +23,7 @@ struct SettingsTabs: View {
 
   @State private var addAccountSheetPresented = false
   @State private var isEditingAccount = false
+  @State private var cachedRemoved = false
 
   @Binding var popToRootTab: Tab
 
@@ -32,6 +34,7 @@ struct SettingsTabs: View {
         accountsSection
         generalSection
         otherSections
+        cacheSection
       }
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
@@ -271,5 +274,22 @@ struct SettingsTabs: View {
     .navigationTitle("settings.general.remote-timelines")
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
+  }
+  
+  private var cacheSection: some View {
+    Section("settings.section.cache") {
+      if cachedRemoved {
+        Text("action.done")
+          .transition(.move(edge: .leading))
+      } else {
+        Button("settings.cache-media.clear", role: .destructive) {
+          ImagePipeline.shared.cache.removeAll()
+          withAnimation {
+            cachedRemoved = true
+          }
+        }
+      }
+    }
+    .listRowBackground(theme.primaryBackgroundColor)
   }
 }

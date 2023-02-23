@@ -190,6 +190,9 @@
 
 "settings.display.section.font" = "글꼴";
 
+"settings.section.cache" = "Cache";
+"settings.cache-media.clear" = "Clear Media Cache";
+
 // MARK: Tabs
 "tab.explore" = "둘러보기";
 "tab.federated" = "연합";

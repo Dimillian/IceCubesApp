@@ -187,6 +187,9 @@
 
 "settings.display.section.font" = "Lettertype";
 
+"settings.section.cache" = "Cache";
+"settings.cache-media.clear" = "Clear Media Cache";
+
 // MARK: Tabs
 "tab.explore" = "Ontdekken";
 "tab.federated" = "Gefedereerd";

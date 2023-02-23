@@ -190,6 +190,9 @@
 
 "settings.display.section.font" = "Czcionka";
 
+"settings.section.cache" = "Cache";
+"settings.cache-media.clear" = "Clear Media Cache";
+
 // MARK: Tabs
 "tab.explore" = "Odkrywaj";
 "tab.federated" = "Globalny";

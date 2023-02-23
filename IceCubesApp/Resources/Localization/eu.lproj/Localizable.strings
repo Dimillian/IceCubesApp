@@ -187,6 +187,9 @@
 
 "settings.display.section.font" = "Letra-tipoa";
 
+"settings.section.cache" = "Cache";
+"settings.cache-media.clear" = "Clear Media Cache";
+
 "enum.expand-media.show" = "Erakutsi guztia";
 "enum.expand-media.hide" = "Ezkutatu guztia";
 "enum.expand-media.hide-sensitive" = "Ezkutatu hunkigarria";

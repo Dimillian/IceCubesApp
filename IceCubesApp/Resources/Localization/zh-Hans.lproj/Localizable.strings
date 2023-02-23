@@ -188,6 +188,9 @@
 
 "settings.display.section.font" = "字体";
 
+"settings.section.cache" = "Cache";
+"settings.cache-media.clear" = "Clear Media Cache";
+
 // MARK: Tabs
 "tab.explore" = "探索";
 "tab.federated" = "跨站";

@@ -190,6 +190,9 @@
 
 "settings.display.section.font" = "Font";
 
+"settings.section.cache" = "Cache";
+"settings.cache-media.clear" = "Clear Media Cache";
+
 // MARK: Tabs
 "tab.explore" = "Esplora";
 "tab.federated" = "Federazione";

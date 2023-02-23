@@ -187,6 +187,9 @@
 
 "settings.display.section.font" = "Fuente";
 
+"settings.section.cache" = "Cache";
+"settings.cache-media.clear" = "Clear Media Cache";
+
 "enum.expand-media.show" = "Siempre";
 "enum.expand-media.hide" = "Nunca";
 "enum.expand-media.hide-sensitive" = "Ocultar contenido sensible";

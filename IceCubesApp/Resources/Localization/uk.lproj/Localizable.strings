@@ -191,6 +191,9 @@
 
 "settings.display.section.font" = "Шрифти";
 
+"settings.section.cache" = "Cache";
+"settings.cache-media.clear" = "Clear Media Cache";
+
 // MARK: Tabs
 "tab.explore" = "Огляд";
 "tab.federated" = "Глобальна";
