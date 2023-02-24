@@ -93,6 +93,7 @@ public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
     if let json = endpoint.jsonValue {
       let encoder = JSONEncoder()
       encoder.keyEncodingStrategy = .convertToSnakeCase
+      encoder.outputFormatting = .sortedKeys
       do {
         let jsonData = try encoder.encode(json)
         request.httpBody = jsonData

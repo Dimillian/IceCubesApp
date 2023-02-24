@@ -199,10 +199,8 @@ public struct UpdateCredentialsData: Encodable, Sendable {
     self.discoverable = discoverable
     
     var fieldAttributes: [String: FieldData] = [:]
-    var index: Int = 0
-    for fieldsAttribute in fieldsAttributes {
-      fieldAttributes[String(index)] = fieldsAttribute
-      index += 1
+    for (index, field) in fieldsAttributes.enumerated() {
+      fieldAttributes[String(index)] = field
     }
     self.fieldsAttributes = fieldAttributes
   }

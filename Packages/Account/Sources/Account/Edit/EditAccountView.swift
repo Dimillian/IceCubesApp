@@ -24,6 +24,7 @@ public struct EditAccountView: View {
           accountSection
         }
       }
+      .environment(\.editMode, .constant(.active))
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
       .scrollDismissesKeyboard(.immediately)
@@ -108,6 +109,9 @@ public struct EditAccountView: View {
           TextField("account.edit.metadata-value-placeholder", text: $field.value)
         }
       }
+      .onMove(perform: { indexSet, newOffset in
+        viewModel.fields.move(fromOffsets: indexSet, toOffset: newOffset)
+      })
       .onDelete { indexes in
         if let index = indexes.first {
           viewModel.fields.remove(at: index)
