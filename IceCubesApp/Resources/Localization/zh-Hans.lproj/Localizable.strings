@@ -188,8 +188,8 @@
 
 "settings.display.section.font" = "字体";
 
-"settings.section.cache" = "Cache";
-"settings.cache-media.clear" = "Clear Media Cache";
+"settings.section.cache" = "缓存";
+"settings.cache-media.clear" = "清除媒体缓存";
 
 // MARK: Tabs
 "tab.explore" = "探索";
