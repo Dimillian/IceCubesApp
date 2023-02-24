@@ -190,8 +190,8 @@
 
 "settings.display.section.font" = "フォント";
 
-"settings.section.cache" = "Cache";
-"settings.cache-media.clear" = "Clear Media Cache";
+"settings.section.cache" = "キャッシュ";
+"settings.cache-media.clear" = "メディアキャッシュをクリア";
 
 // MARK: Tabs
 "tab.explore" = "探索";
@@ -371,7 +371,7 @@
 // MARK: Package: Status
 "status.action.translate" = "翻訳";
 "status.action.translated-label-%@" = "%@ を使用して翻訳";
-"status.action.translated-label-from-%@-%@" = "%@ を使用して %@ から翻訳";
+"status.action.translated-label-from-%@-%@" = "%@ から %@ を使用して翻訳";
 "status.action.bookmark" = "ブックマーク";
 "status.action.boost" = "ブースト";
 "status.action.boost-to-followers" = "フォロワーにブースト";
