@@ -167,7 +167,7 @@
 "settings.display.show-ipad-column" = "Zweite Spalte aktivieren";
 
 "settings.general.swipeactions" = "Wischaktionen";
-"settings.swipeactions.appearance" = "Appearance";
+"settings.swipeactions.appearance" = "Erscheinungsbild";
 "settings.swipeactions.navigation-title" = "Wischaktionen";
 "settings.swipeactions.primary" = "Primäre Aktion";
 "settings.swipeactions.secondary" = "Sekundäre Aktion";
@@ -188,7 +188,7 @@
 "settings.display.section.font" = "Schriftart";
 
 "settings.section.cache" = "Cache";
-"settings.cache-media.clear" = "Clear Media Cache";
+"settings.cache-media.clear" = "Mediencache leeren";
 
 "enum.expand-media.show" = "Alle zeigen";
 "enum.expand-media.hide" = "Alle ausblenden";
@@ -248,10 +248,10 @@
 "account.edit.post-settings.section-title" = "Beitragseinstellungen";
 "account.edit.post-settings.sensitive" = "Sensibler Inhalt";
 
-"account.edit.metadata-section-title" = "Profile Metadata";
-"account.edit.metadata-name-placeholder" = "Label";
-"account.edit.metadata-value-placeholder" = "Content";
-"account.edit.add-metadata-button" = "Add a new metadata";
+"account.edit.metadata-section-title" = "Profilmetadaten";
+"account.edit.metadata-name-placeholder" = "Titel";
+"account.edit.metadata-value-placeholder" = "Inhalt";
+"account.edit.add-metadata-button" = "Neuen Eintrag hinzufügen";
 
 "account.favorited-by" = "Favorisiert von";
 "account.follow.follow" = "Folgen";
