@@ -34,7 +34,7 @@ public struct AccountsListRow: View {
   }
 
   public var body: some View {
-    HStack(alignment: .top) {
+    HStack {
       AvatarView(url: viewModel.account.avatar, size: .status)
       VStack(alignment: .leading, spacing: 2) {
         EmojiTextApp(.init(stringValue: viewModel.account.safeDisplayName), emojis: viewModel.account.emojis)
@@ -60,10 +60,12 @@ public struct AccountsListRow: View {
       if currentAccount.account?.id != viewModel.account.id,
          let relationShip = viewModel.relationShip
       {
-        FollowButton(viewModel: .init(accountId: viewModel.account.id,
+        VStack(alignment: .center) {
+            FollowButton(viewModel: .init(accountId: viewModel.account.id,
                                       relationship: relationShip,
                                       shouldDisplayNotify: false,
                                       relationshipUpdated: { _ in }))
+        }
       }
     }
     .onAppear {
