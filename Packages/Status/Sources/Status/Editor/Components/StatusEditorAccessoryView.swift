@@ -181,7 +181,7 @@ struct StatusEditorAccessoryView: View {
     }
   }
 
-  private func languageSheetSection(languages: [StatusEditorLanguage]) -> some View {
+  private func languageSheetSection(languages: [Language]) -> some View {
     ForEach(languages) { language in
       HStack {
         languageTextView(
@@ -274,18 +274,18 @@ struct StatusEditorAccessoryView: View {
       .font(.scaledCallout)
   }
 
-  private var recentlyUsedLanguages: [StatusEditorLanguage] {
+  private var recentlyUsedLanguages: [Language] {
     preferences.recentlyUsedLanguages.compactMap { isoCode in
-      StatusEditorLanguage.allAvailableLanguages.first { $0.isoCode == isoCode }
+      Language.allAvailableLanguages.first { $0.isoCode == isoCode }
     }
   }
 
-  private var otherLanguages: [StatusEditorLanguage] {
-    StatusEditorLanguage.allAvailableLanguages.filter { !preferences.recentlyUsedLanguages.contains($0.isoCode) }
+  private var otherLanguages: [Language] {
+    Language.allAvailableLanguages.filter { !preferences.recentlyUsedLanguages.contains($0.isoCode) }
   }
 
-  private func languageSearchResult(query: String) -> [StatusEditorLanguage] {
-    StatusEditorLanguage.allAvailableLanguages.filter { language in
+  private func languageSearchResult(query: String) -> [Language] {
+    Language.allAvailableLanguages.filter { language in
       guard !languageSearch.isEmpty else {
         return true
       }

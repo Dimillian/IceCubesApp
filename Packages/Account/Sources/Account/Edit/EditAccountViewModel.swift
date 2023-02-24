@@ -44,7 +44,7 @@ class EditAccountViewModel: ObservableObject {
       isBot = account.bot
       isLocked = account.locked
       isDiscoverable = account.discoverable ?? false
-      fields = account.fields.map{ .init(name: $0.name, value: $0.value.asRawText )}
+      fields = account.source?.fields.map{ .init(name: $0.name, value: $0.value.asRawText) } ?? []
       withAnimation {
         isLoading = false
       }
