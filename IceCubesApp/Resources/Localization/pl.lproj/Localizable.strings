@@ -157,7 +157,7 @@
 "settings.about.built-with" = "Ice Cubes zbudowano z wykorzystaniem następującego oprogramowania Open Source:";
 "settings.about.title" = "Ice Cubes";
 "settings.account.cached-posts-%@" = "Liczba postów w buforze: %@";
-"settings.account.action.delete-cache" = "Wyczyść bufor";
+"settings.account.action.delete-cache" = "Wyczyść bufor postów";
 
 "settings.general.haptic" = "Sygnały haptyczne";
 "settings.haptic.navigation-title" = "Ustawienia haptyki";
@@ -190,8 +190,8 @@
 
 "settings.display.section.font" = "Czcionka";
 
-"settings.section.cache" = "Cache";
-"settings.cache-media.clear" = "Clear Media Cache";
+"settings.section.cache" = "Bufor";
+"settings.cache-media.clear" = "Wyczyść bufor treści multimedialnych";
 
 // MARK: Tabs
 "tab.explore" = "Odkrywaj";
@@ -246,10 +246,10 @@
 "account.edit.post-settings.section-title" = "Ustawienia postów";
 "account.edit.post-settings.sensitive" = "Treści wrażliwe";
 
-"account.edit.metadata-section-title" = "Profile Metadata";
-"account.edit.metadata-name-placeholder" = "Label";
-"account.edit.metadata-value-placeholder" = "Content";
-"account.edit.add-metadata-button" = "Add a new metadata";
+"account.edit.metadata-section-title" = "Metadane profilu";
+"account.edit.metadata-name-placeholder" = "Nazwa";
+"account.edit.metadata-value-placeholder" = "Zawartość";
+"account.edit.add-metadata-button" = "Dodaj nowe pole";
 
 "account.favorited-by" = "Polubione przez";
 "account.follow.follow" = "Obserwuj";
