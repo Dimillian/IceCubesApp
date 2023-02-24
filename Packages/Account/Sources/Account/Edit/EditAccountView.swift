@@ -106,7 +106,10 @@ public struct EditAccountView: View {
       ForEach($viewModel.fields) { $field in
         VStack(alignment: .leading) {
           TextField("account.edit.metadata-name-placeholder", text: $field.name)
+            .font(.scaledHeadline)
           TextField("account.edit.metadata-value-placeholder", text: $field.value)
+            .emojiSize(Font.scaledBodyPointSize)
+            .foregroundColor(theme.tintColor)
         }
       }
       .onMove(perform: { indexSet, newOffset in
