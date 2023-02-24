@@ -248,10 +248,10 @@
 "account.edit.post-settings.section-title" = "投稿設定";
 "account.edit.post-settings.sensitive" = "センシティブな内容";
 
-"account.edit.metadata-section-title" = "Profile Metadata";
-"account.edit.metadata-name-placeholder" = "Label";
-"account.edit.metadata-value-placeholder" = "Content";
-"account.edit.add-metadata-button" = "Add a new metadata";
+"account.edit.metadata-section-title" = "プロフィール情報";
+"account.edit.metadata-name-placeholder" = "ラベル";
+"account.edit.metadata-value-placeholder" = "内容";
+"account.edit.add-metadata-button" = "情報を追加";
 
 "account.favorited-by" = "お気に入りされた";
 "account.follow.follow" = "フォロー";
