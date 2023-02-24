@@ -229,7 +229,7 @@
 "account.action.unblock" = "Débloquer";
 "account.action.mute" = "Rendre muet";
 "account.action.unmute" = "Annuler le mode muet";
-"account.action.share" = "ärtager ce compte";
+"account.action.share" = "Partager ce compte";
 "account.boosted-by" = "Boosté par";
 "account.detail.about" = "À propos";
 "account.detail.familiar-followers" = "Aussi suivi par";
