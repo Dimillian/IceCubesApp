@@ -247,6 +247,12 @@
 "account.edit.post-settings.privacy" = "Defektuzko pribatutasuna";
 "account.edit.post-settings.section-title" = "Bidalketen ezarpenak";
 "account.edit.post-settings.sensitive" = "Eduki hunkigarria";
+
+"account.edit.metadata-section-title" = "Profile Metadata";
+"account.edit.metadata-name-placeholder" = "Label";
+"account.edit.metadata-value-placeholder" = "Content";
+"account.edit.add-metadata-button" = "Add a new metadata";
+
 "account.favorited-by" = "Hauek gogoko egin dute:";
 "account.follow.follow" = "Jarraitu";
 "account.follow.following" = "Jarraitzen";

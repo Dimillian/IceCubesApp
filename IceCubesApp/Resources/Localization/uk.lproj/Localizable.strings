@@ -248,6 +248,12 @@
 "account.edit.post-settings.privacy" = "Приватність за замовчуванням";
 "account.edit.post-settings.section-title" = "Налаштування допису";
 "account.edit.post-settings.sensitive" = "Делікатний вміст";
+
+"account.edit.metadata-section-title" = "Profile Metadata";
+"account.edit.metadata-name-placeholder" = "Label";
+"account.edit.metadata-value-placeholder" = "Content";
+"account.edit.add-metadata-button" = "Add a new metadata";
+
 "account.favorited-by" = "Вподобали";
 "account.follow.follow" = "Підписатися";
 "account.follow.following" = "Підписаний";

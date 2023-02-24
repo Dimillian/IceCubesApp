@@ -249,6 +249,12 @@
 "account.edit.post-settings.privacy" = "Default privacy";
 "account.edit.post-settings.section-title" = "Post settings";
 "account.edit.post-settings.sensitive" = "Sensitive content";
+
+"account.edit.metadata-section-title" = "Profile Metadata";
+"account.edit.metadata-name-placeholder" = "Label";
+"account.edit.metadata-value-placeholder" = "Content";
+"account.edit.add-metadata-button" = "Add a new metadata";
+
 "account.favorited-by" = "Favourited by";
 "account.follow.follow" = "Follow";
 "account.follow.following" = "Following";

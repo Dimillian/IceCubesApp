@@ -244,6 +244,12 @@
 "account.edit.post-settings.privacy" = "Standaardprivacy";
 "account.edit.post-settings.section-title" = "Postinstellingen";
 "account.edit.post-settings.sensitive" = "Gevoelige inhoud";
+
+"account.edit.metadata-section-title" = "Profile Metadata";
+"account.edit.metadata-name-placeholder" = "Label";
+"account.edit.metadata-value-placeholder" = "Content";
+"account.edit.add-metadata-button" = "Add a new metadata";
+
 "account.favorited-by" = "Gefavoriet";
 "account.follow.follow" = "Volg";
 "account.follow.following" = "Volgend";

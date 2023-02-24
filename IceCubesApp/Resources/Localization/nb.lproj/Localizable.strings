@@ -247,6 +247,12 @@
 "account.edit.post-settings.privacy" = "Standard personvern";
 "account.edit.post-settings.section-title" = "Innstillinger for innlegg";
 "account.edit.post-settings.sensitive" = "Sensitivt innhold";
+
+"account.edit.metadata-section-title" = "Profile Metadata";
+"account.edit.metadata-name-placeholder" = "Label";
+"account.edit.metadata-value-placeholder" = "Content";
+"account.edit.add-metadata-button" = "Add a new metadata";
+
 "account.favorited-by" = "Favoritt av";
 "account.follow.follow" = "Følg";
 "account.follow.following" = "Følger";

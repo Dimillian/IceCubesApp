@@ -252,6 +252,12 @@
 "account.edit.post-settings.privacy" = "Прыватнасць па змаўчанні";
 "account.edit.post-settings.section-title" = "Налады допісу";
 "account.edit.post-settings.sensitive" = "Адчувальны змест";
+
+"account.edit.metadata-section-title" = "Profile Metadata";
+"account.edit.metadata-name-placeholder" = "Label";
+"account.edit.metadata-value-placeholder" = "Content";
+"account.edit.add-metadata-button" = "Add a new metadata";
+
 "account.favorited-by" = "Улюбёны";
 "account.follow.follow" = "Сачыць";
 "account.follow.following" = "Адсочваю";

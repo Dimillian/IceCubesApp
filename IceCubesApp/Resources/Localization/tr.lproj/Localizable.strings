@@ -247,6 +247,12 @@
 "account.edit.post-settings.privacy" = "Varsayılan gizlilik";
 "account.edit.post-settings.section-title" = "Gönderi ayarları";
 "account.edit.post-settings.sensitive" = "Hassas içerik";
+
+"account.edit.metadata-section-title" = "Profile Metadata";
+"account.edit.metadata-name-placeholder" = "Label";
+"account.edit.metadata-value-placeholder" = "Content";
+"account.edit.add-metadata-button" = "Add a new metadata";
+
 "account.favorited-by" = "Şunlar tarafından favorilendi";
 "account.follow.follow" = "Takip Et";
 "account.follow.following" = "Takip Edilen";

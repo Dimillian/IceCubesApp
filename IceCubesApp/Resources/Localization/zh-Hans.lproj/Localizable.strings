@@ -245,6 +245,12 @@
 "account.edit.post-settings.privacy" = "默认隐私设置";
 "account.edit.post-settings.section-title" = "嘟文设置";
 "account.edit.post-settings.sensitive" = "敏感内容";
+
+"account.edit.metadata-section-title" = "Profile Metadata";
+"account.edit.metadata-name-placeholder" = "Label";
+"account.edit.metadata-value-placeholder" = "Content";
+"account.edit.add-metadata-button" = "Add a new metadata";
+
 "account.favorited-by" = "同样喜欢的有";
 "account.follow.follow" = "关注";
 "account.follow.following" = "正在关注";

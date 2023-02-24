@@ -13,7 +13,8 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
       lhs.fields == rhs.fields &&
       lhs.lastStatusAt == rhs.lastStatusAt &&
       lhs.discoverable == rhs.discoverable &&
-      lhs.bot == rhs.bot
+      lhs.bot == rhs.bot &&
+      lhs.locked == rhs.locked
   }
 
   public func hash(into hasher: inout Hasher) {

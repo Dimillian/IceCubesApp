@@ -248,6 +248,12 @@
 "account.edit.post-settings.privacy" = "기본 공개 범위";
 "account.edit.post-settings.section-title" = "글 설정";
 "account.edit.post-settings.sensitive" = "민감한 콘텐츠";
+
+"account.edit.metadata-section-title" = "Profile Metadata";
+"account.edit.metadata-name-placeholder" = "Label";
+"account.edit.metadata-value-placeholder" = "Content";
+"account.edit.add-metadata-button" = "Add a new metadata";
+
 "account.favorited-by" = "좋아요한 사용자";
 "account.follow.follow" = "팔로우";
 "account.follow.following" = "팔로우 중";

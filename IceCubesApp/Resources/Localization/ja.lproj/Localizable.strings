@@ -247,6 +247,12 @@
 "account.edit.post-settings.privacy" = "デフォルトのプライバシー";
 "account.edit.post-settings.section-title" = "投稿設定";
 "account.edit.post-settings.sensitive" = "センシティブな内容";
+
+"account.edit.metadata-section-title" = "Profile Metadata";
+"account.edit.metadata-name-placeholder" = "Label";
+"account.edit.metadata-value-placeholder" = "Content";
+"account.edit.add-metadata-button" = "Add a new metadata";
+
 "account.favorited-by" = "お気に入りされた";
 "account.follow.follow" = "フォロー";
 "account.follow.following" = "フォロー中";

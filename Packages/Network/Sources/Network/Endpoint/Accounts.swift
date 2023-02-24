@@ -8,13 +8,7 @@ public enum Accounts: Endpoint {
   case followedTags
   case featuredTags(id: String)
   case verifyCredentials
-  case updateCredentials(displayName: String,
-                         note: String,
-                         privacy: Visibility,
-                         isSensitive: Bool,
-                         isBot: Bool,
-                         isLocked: Bool,
-                         isDiscoverable: Bool)
+  case updateCredentials(json: UpdateCredentialsData)
   case statuses(id: String,
                 sinceId: String?,
                 tag: String?,
@@ -126,17 +120,6 @@ public enum Accounts: Endpoint {
     case let .bookmarks(sinceId):
       guard let sinceId else { return nil }
       return [.init(name: "max_id", value: sinceId)]
-    case let .updateCredentials(displayName, note, privacy,
-                                isSensitive, isBot, isLocked, isDiscoverable):
-      var params: [URLQueryItem] = []
-      params.append(.init(name: "display_name", value: displayName))
-      params.append(.init(name: "note", value: note))
-      params.append(.init(name: "source[privacy]", value: privacy.rawValue))
-      params.append(.init(name: "source[sensitive]", value: isSensitive ? "true" : "false"))
-      params.append(.init(name: "bot", value: isBot ? "true" : "false"))
-      params.append(.init(name: "locked", value: isLocked ? "true" : "false"))
-      params.append(.init(name: "discoverable", value: isDiscoverable ? "true" : "false"))
-      return params
     default:
       return nil
     }
@@ -147,6 +130,8 @@ public enum Accounts: Endpoint {
     case let .mute(_, json):
       return json
     case let .relationshipNote(_, json):
+      return json
+    case let .updateCredentials(json):
       return json
     default:
       return nil
@@ -168,4 +153,58 @@ public struct RelationshipNoteData: Encodable, Sendable {
   public init(note comment: String) {
     self.comment = comment
   }
+}
+
+public struct UpdateCredentialsData: Encodable, Sendable {
+  public struct SourceData: Encodable, Sendable {
+    public let privacy: Visibility
+    public let sensitive: Bool
+    
+    public init(privacy: Visibility, sensitive: Bool) {
+      self.privacy = privacy
+      self.sensitive = sensitive
+    }
+  }
+  
+  public struct FieldData: Encodable, Sendable {
+    public let name: String
+    public let value: String
+    
+    public init(name: String, value: String) {
+      self.name = name
+      self.value = value
+    }
+  }
+  
+  public let displayName: String
+  public let note: String
+  public let source: SourceData
+  public let bot: Bool
+  public let locked: Bool
+  public let discoverable: Bool
+  public let fieldsAttributes: [String: FieldData]
+  
+  public init(displayName: String,
+              note: String,
+              source: UpdateCredentialsData.SourceData,
+              bot: Bool,
+              locked: Bool,
+              discoverable: Bool,
+              fieldsAttributes: [FieldData]) {
+    self.displayName = displayName
+    self.note = note
+    self.source = source
+    self.bot = bot
+    self.locked = locked
+    self.discoverable = discoverable
+    
+    var fieldAttributes: [String: FieldData] = [:]
+    var index: Int = 0
+    for fieldsAttribute in fieldsAttributes {
+      fieldAttributes[String(index)] = fieldsAttribute
+      index += 1
+    }
+    self.fieldsAttributes = fieldAttributes
+  }
+  
 }

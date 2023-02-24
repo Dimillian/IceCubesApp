@@ -19,12 +19,14 @@ public struct EditAccountView: View {
           loadingSection
         } else {
           aboutSections
+          fieldsSection
           postSettingsSection
           accountSection
         }
       }
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
+      .scrollDismissesKeyboard(.immediately)
       .navigationTitle("account.edit.navigation-title")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
@@ -93,6 +95,33 @@ public struct EditAccountView: View {
       }
       Toggle(isOn: $viewModel.isDiscoverable) {
         Label("account.edit.account-settings.discoverable", systemImage: "magnifyingglass")
+      }
+    }
+    .listRowBackground(theme.primaryBackgroundColor)
+  }
+  
+  private var fieldsSection: some View {
+    Section("account.edit.metadata-section-title") {
+      ForEach($viewModel.fields) { $field in
+        VStack(alignment: .leading) {
+          TextField("account.edit.metadata-name-placeholder", text: $field.name)
+          TextField("account.edit.metadata-value-placeholder", text: $field.value)
+        }
+      }
+      .onDelete { indexes in
+        if let index = indexes.first {
+          viewModel.fields.remove(at: index)
+        }
+      }
+      if viewModel.fields.count < 4 {
+        Button {
+          withAnimation {
+            viewModel.fields.append(.init(name: "", value: ""))
+          }
+        } label: {
+          Text("account.edit.add-metadata-button")
+            .foregroundColor(theme.tintColor)
+        }
       }
     }
     .listRowBackground(theme.primaryBackgroundColor)
