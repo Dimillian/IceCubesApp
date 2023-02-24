@@ -135,15 +135,15 @@ struct NotificationRowView: View {
     if let status = notification.status {
       HStack {
         if type == .mention {
-          StatusRowView(viewModel: .init(status: status,
-                                         client: client,
-                                         routerPath: routerPath,
-                                         showActions: true))
+          StatusRowView(viewModel: { .init(status: status,
+                                           client: client,
+                                           routerPath: routerPath,
+                                           showActions: true) })
         } else {
-          StatusRowView(viewModel: .init(status: status,
-                                         client: client,
-                                         routerPath: routerPath,
-                                         showActions: false))
+          StatusRowView(viewModel: { .init(status: status,
+                                           client: client,
+                                           routerPath: routerPath,
+                                           showActions: false) })
             .lineLimit(4)
             .foregroundColor(.gray)
         }

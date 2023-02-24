@@ -124,7 +124,7 @@ public struct StatusDetailView: View {
           makeCurrentStatusView(status: status)
             .environment(\.extraLeadingInset, isReplyToPrevious ? 10 : 0)
         } else {
-          StatusRowView(viewModel: viewModel)
+          StatusRowView(viewModel: { viewModel })
             .environment(\.extraLeadingInset, isReplyToPrevious ? 10 : 0)
         }
       }
@@ -137,10 +137,10 @@ public struct StatusDetailView: View {
   }
 
   private func makeCurrentStatusView(status: Status) -> some View {
-    StatusRowView(viewModel: .init(status: status,
-                                   client: client,
-                                   routerPath: routerPath,
-                                   isFocused: !viewModel.isLoadingContext))
+    StatusRowView(viewModel: { .init(status: status,
+                                     client: client,
+                                     routerPath: routerPath,
+                                     isFocused: !viewModel.isLoadingContext) })
       .overlay {
         GeometryReader { reader in
           VStack {}
@@ -166,7 +166,7 @@ public struct StatusDetailView: View {
 
   private var loadingDetailView: some View {
     ForEach(Status.placeholders()) { status in
-      StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
+      StatusRowView(viewModel: { .init(status: status, client: client, routerPath: routerPath) })
         .redacted(reason: .placeholder)
     }
   }

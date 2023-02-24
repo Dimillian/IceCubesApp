@@ -15,8 +15,9 @@ public struct StatusRowView: View {
 
   @StateObject var viewModel: StatusRowViewModel
 
-  public init(viewModel: StatusRowViewModel) {
-    _viewModel = StateObject(wrappedValue: viewModel)
+  // StateObject accepts an @autoclosure which only allocates the view model once when the view gets on screen.
+  public init(viewModel: @escaping () -> StatusRowViewModel) {
+    _viewModel = StateObject(wrappedValue: viewModel())
   }
 
   var contextMenu: some View {
@@ -32,6 +33,7 @@ public struct StatusRowView: View {
       case .hide:
         EmptyView()
           .listRowSeparator(.hidden)
+          .listRowInsets(.init())
       }
     } else {
       let status: AnyStatus = viewModel.status.reblog ?? viewModel.status

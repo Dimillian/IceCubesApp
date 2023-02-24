@@ -275,7 +275,7 @@ public struct AccountDetailView: View {
         .listRowSeparator(.hidden)
         .listRowBackground(theme.primaryBackgroundColor)
       ForEach(viewModel.pinned) { status in
-        StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
+        StatusRowView(viewModel: { .init(status: status, client: client, routerPath: routerPath) })
       }
       Rectangle()
         .fill(theme.secondaryBackgroundColor)

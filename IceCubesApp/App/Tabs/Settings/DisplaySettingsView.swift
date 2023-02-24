@@ -19,7 +19,7 @@ struct DisplaySettingsView: View {
   var body: some View {
     Form {
       Section("settings.display.example-toot") {
-        StatusRowView(viewModel: previewStatusViewModel)
+        StatusRowView(viewModel: { previewStatusViewModel })
           .allowsHitTesting(false)
       }
 

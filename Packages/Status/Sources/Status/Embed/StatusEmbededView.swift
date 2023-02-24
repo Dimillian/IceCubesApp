@@ -23,10 +23,10 @@ public struct StatusEmbeddedView: View {
     HStack {
       VStack(alignment: .leading) {
         makeAccountView(account: status.reblog?.account ?? status.account)
-        StatusRowView(viewModel: .init(status: status,
-                                       client: client,
-                                       routerPath: routerPath,
-                                       showActions: false))
+        StatusRowView(viewModel: { .init(status: status,
+                                         client: client,
+                                         routerPath: routerPath,
+                                         showActions: false) })
           .environment(\.isCompact, true)
       }
       Spacer()

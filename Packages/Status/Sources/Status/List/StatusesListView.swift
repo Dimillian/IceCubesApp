@@ -24,7 +24,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
     switch fetcher.statusesState {
     case .loading:
       ForEach(Status.placeholders()) { status in
-        StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
+        StatusRowView(viewModel: { .init(status: status, client: client, routerPath: routerPath) })
           .redacted(reason: .placeholder)
       }
     case .error:
@@ -40,17 +40,19 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
 
     case let .display(statuses, nextPageState):
       ForEach(statuses, id: \.viewId) { status in
-        let viewModel = StatusRowViewModel(status: status, client: client, routerPath: routerPath, isRemote: isRemote)
-        if viewModel.filter?.filter.filterAction != .hide {
-          StatusRowView(viewModel: viewModel)
-            .id(status.id)
-            .onAppear {
-              fetcher.statusDidAppear(status: status)
-            }
-            .onDisappear {
-              fetcher.statusDidDisappear(status: status)
-            }
-        }
+        StatusRowView(viewModel: { StatusRowViewModel(status: status,
+                                                      client: client,
+                                                      routerPath: routerPath,
+                                                      isRemote: isRemote)
+          
+        })
+          .id(status.id)
+          .onAppear {
+            fetcher.statusDidAppear(status: status)
+          }
+          .onDisappear {
+            fetcher.statusDidDisappear(status: status)
+          }
       }
       switch nextPageState {
       case .hasNextPage:
