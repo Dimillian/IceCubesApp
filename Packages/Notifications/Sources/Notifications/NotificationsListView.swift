@@ -43,7 +43,7 @@ public struct NotificationsListView: View {
             Button {
               viewModel.selectedType = type
             } label: {
-              Label(type.menuTitle(), systemImage: type.iconName())
+              Label(type.menuTitle(), systemImage: type.iconName(isPrivate: false))
             }
           }
         }

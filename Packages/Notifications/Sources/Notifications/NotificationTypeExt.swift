@@ -45,7 +45,10 @@ extension Models.Notification.NotificationType {
     }
   }
 
-  func iconName() -> String {
+  func iconName(isPrivate: Bool) -> String {
+    if isPrivate {
+      return "tray.fill"
+    }
     switch self {
     case .status:
       return "pencil"
@@ -64,7 +67,10 @@ extension Models.Notification.NotificationType {
     }
   }
 
-  func tintColor() -> Color {
+  func tintColor(isPrivate: Bool) -> Color {
+    if isPrivate {
+      return Color.orange.opacity(0.80)
+    }
     switch self {
     case .status, .mention, .update, .poll:
       return Theme.shared.tintColor.opacity(0.80)

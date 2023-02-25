@@ -184,7 +184,7 @@ public struct ExploreView: View {
     Section("explore.section.trending.posts") {
       ForEach(viewModel.trendingStatuses
         .prefix(upTo: viewModel.trendingStatuses.count > 3 ? 3 : viewModel.trendingStatuses.count)) { status in
-          StatusRowView(viewModel: { .init(status: status, client: client, routerPath: routerPath) })
+          StatusRowView(viewModel: { .init(status: status, client: client, routerPath: routerPath) })
             .listRowBackground(theme.primaryBackgroundColor)
             .padding(.vertical, 8)
         }
