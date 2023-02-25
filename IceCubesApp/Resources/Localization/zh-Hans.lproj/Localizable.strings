@@ -290,6 +290,7 @@
 "conversations.error.title" = "出错啦";
 "conversations.navigation-title" = "私信";
 "conversations.new.message.placeholder" = "新消息";
+"conversations.latest.message" = "Latest Message";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld 条嘟文来自 %lld 个参与者";

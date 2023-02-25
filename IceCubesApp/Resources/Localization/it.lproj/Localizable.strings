@@ -292,6 +292,7 @@
 "conversations.error.title" = "Si è verificato in errore";
 "conversations.navigation-title" = "Messaggi diretti";
 "conversations.new.message.placeholder" = "Nuovo messaggio";
+"conversations.latest.message" = "Latest Message";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld post da %lld partecipanti";

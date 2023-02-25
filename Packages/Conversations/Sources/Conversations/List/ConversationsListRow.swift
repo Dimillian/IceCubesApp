@@ -9,9 +9,12 @@ struct ConversationsListRow: View {
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var routerPath: RouterPath
   @EnvironmentObject private var theme: Theme
+  @EnvironmentObject private var currentAccount: CurrentAccount
 
-  let conversation: Conversation
-  @ObservedObject var viewModel: ConversationsListViewModel
+  var conversation: Conversation {
+        viewModel.conversation
+    }
+  @ObservedObject var viewModel: ConversationsListRowModel
 
   var body: some View {
     VStack(alignment: .leading) {
@@ -32,8 +35,8 @@ struct ConversationsListRow: View {
                 .foregroundColor(theme.tintColor)
                 .frame(width: 10, height: 10)
             }
-            if conversation.lastStatus != nil {
-              Text(conversation.lastStatus!.createdAt.relativeFormatted)
+            if let message = conversation.lastStatus {
+              Text(message.createdAt.relativeFormatted)
                 .font(.scaledFootnote)
             }
           }
@@ -47,7 +50,7 @@ struct ConversationsListRow: View {
       .contentShape(Rectangle())
       .onTapGesture {
         Task {
-          await viewModel.markAsRead(conversation: conversation)
+          await viewModel.markAsRead()
         }
         routerPath.navigate(to: .conversationDetail(conversation: conversation))
       }
@@ -85,15 +88,59 @@ struct ConversationsListRow: View {
   private var contextMenu: some View {
     Button {
       Task {
-        await viewModel.markAsRead(conversation: conversation)
+        await viewModel.markAsRead()
       }
     } label: {
       Label("conversations.action.mark-read", systemImage: "eye")
     }
 
+      if let message = conversation.lastStatus {
+          Section("conversations.latest.message") {
+              Button {
+                  UIPasteboard.general.string = message.content.asRawText
+              } label: {
+                  Label("status.action.copy-text", systemImage: "doc.on.doc")
+              }
+              Button {
+                  Task {
+                      await viewModel.favorite()
+                  }
+              } label: {
+                  Label(viewModel.isLiked ? "status.action.unfavorite" : "status.action.favorite",
+                        systemImage: viewModel.isLiked ? "star.fill" : "star")
+              }
+              Button {
+                  Task {
+                      await viewModel.bookmark()
+                      print("Bookmarked: \(viewModel.isBookmarked)")
+                  }
+              } label: {
+                  Label(viewModel.isBookmarked ? "status.action.unbookmark" : "status.action.bookmark",
+                        systemImage: viewModel.isBookmarked ? "bookmark.fill" : "bookmark")
+              }
+          }
+          Divider()
+          if message.account.id != currentAccount.account?.id {
+              Section(message.reblog?.account.acct ?? message.account.acct) {
+                  Button {
+                      routerPath.presentedSheet = .mentionStatusEditor(account: message.reblog?.account ?? message.account, visibility: .pub)
+                  } label: {
+                      Label("status.action.mention", systemImage: "at")
+                  }
+              }
+              Section {
+                  Button(role: .destructive) {
+                      routerPath.presentedSheet = .report(status: message.reblogAsAsStatus ?? message)
+                  } label: {
+                      Label("status.action.report", systemImage: "exclamationmark.bubble")
+                  }
+              }
+          }
+      }
+
     Button(role: .destructive) {
       Task {
-        await viewModel.delete(conversation: conversation)
+        await viewModel.delete()
       }
     } label: {
       Label("conversations.action.delete", systemImage: "trash")

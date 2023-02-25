@@ -16,9 +16,11 @@ public struct ConversationsListView: View {
 
   public init() {}
 
-  private var conversations: [Conversation] {
+  private var conversations: [ConversationsListRowModel] {
     if viewModel.isLoadingFirstPage {
-      return Conversation.placeholders()
+        return Conversation.placeholders().map { obj in
+            ConversationsListRowModel(conversation: obj, client: viewModel.client, superViewModel: viewModel)
+        }
     }
     return viewModel.conversations
   }
@@ -28,17 +30,17 @@ public struct ConversationsListView: View {
       LazyVStack {
         Group {
           if !conversations.isEmpty || viewModel.isLoadingFirstPage {
-            ForEach(conversations) { conversation in
-              if viewModel.isLoadingFirstPage {
-                ConversationsListRow(conversation: conversation, viewModel: viewModel)
-                  .padding(.horizontal, .layoutPadding)
-                  .redacted(reason: .placeholder)
-              } else {
-                ConversationsListRow(conversation: conversation, viewModel: viewModel)
-                  .padding(.horizontal, .layoutPadding)
+              ForEach(conversations) { conversation in
+                if viewModel.isLoadingFirstPage {
+                  ConversationsListRow(viewModel: conversation)
+                    .padding(.horizontal, .layoutPadding)
+                    .redacted(reason: .placeholder)
+                } else {
+                    ConversationsListRow(viewModel: conversation)
+                    .padding(.horizontal, .layoutPadding)
+                }
+                Divider()
               }
-              Divider()
-            }
           } else if conversations.isEmpty && !viewModel.isLoadingFirstPage && !viewModel.isError {
             EmptyView(iconName: "tray",
                       title: "conversations.empty.title",
