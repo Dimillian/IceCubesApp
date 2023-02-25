@@ -188,7 +188,7 @@
 "settings.display.section.font" = "Lettertype";
 
 "settings.section.cache" = "Cache";
-"settings.cache-media.clear" = "Clear Media Cache";
+"settings.cache-media.clear" = "Leeg mediacache";
 
 // MARK: Tabs
 "tab.explore" = "Ontdekken";
@@ -245,10 +245,10 @@
 "account.edit.post-settings.section-title" = "Postinstellingen";
 "account.edit.post-settings.sensitive" = "Gevoelige inhoud";
 
-"account.edit.metadata-section-title" = "Profile Metadata";
+"account.edit.metadata-section-title" = "Profielmetagegevens";
 "account.edit.metadata-name-placeholder" = "Label";
-"account.edit.metadata-value-placeholder" = "Content";
-"account.edit.add-metadata-button" = "Add a new metadata";
+"account.edit.metadata-value-placeholder" = "Inhoud";
+"account.edit.add-metadata-button" = "Voeg metagegevens toe";
 
 "account.favorited-by" = "Gefavoriet";
 "account.follow.follow" = "Volg";
