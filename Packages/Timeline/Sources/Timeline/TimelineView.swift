@@ -103,7 +103,11 @@ public struct TimelineView: View {
     .navigationBarTitleDisplayMode(.inline)
     .onAppear {
       viewModel.isTimelineVisible = true
-      viewModel.client = client
+      
+      if viewModel.client == nil {
+        viewModel.client = client
+      }
+      
       viewModel.timeline = timeline
     }
     .onDisappear {

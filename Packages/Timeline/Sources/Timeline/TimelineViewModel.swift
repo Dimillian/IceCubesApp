@@ -12,9 +12,9 @@ class TimelineViewModel: ObservableObject {
     didSet {
       timelineTask?.cancel()
       timelineTask = Task {
-        if timeline == .latest, let client {
-          await cache.clearCache(for: client.id)
-          timeline = .home
+        if timeline == .latest {
+          await clearHomeCache()
+          timeline = oldValue
         }
         if oldValue != timeline {
           await datasource.reset()
@@ -68,7 +68,7 @@ class TimelineViewModel: ObservableObject {
   }
 
   var pendingStatusesEnabled: Bool {
-    timeline == .home
+    timeline.supportNewestPagination
   }
 
   var serverName: String {
@@ -100,6 +100,7 @@ class TimelineViewModel: ObservableObject {
   func handleEvent(event: any StreamEvent, currentAccount _: CurrentAccount) {
     Task {
       if let event = event as? StreamEventUpdate,
+         timeline == .home,
          canStreamEvents,
          isTimelineVisible,
          pendingStatusesEnabled,
@@ -150,6 +151,12 @@ extension TimelineViewModel {
       return await cache.getStatuses(for: client.id)
     }
     return nil
+  }
+  
+  private func clearHomeCache() async {
+    if let client, timeline == .home {
+      await cache.clearCache(for: client.id)
+    }
   }
 }
 

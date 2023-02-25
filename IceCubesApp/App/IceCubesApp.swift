@@ -26,7 +26,6 @@ struct IceCubesApp: App {
   @StateObject private var sidebarRouterPath = RouterPath()
 
   @State private var selectedTab: Tab = .timeline
-  @State private var selectSidebarItem: Tab? = .timeline
   @State private var popToRootTab: Tab = .other
   @State private var sideBarLoadedTabs: Set<Tab> = Set()
 
