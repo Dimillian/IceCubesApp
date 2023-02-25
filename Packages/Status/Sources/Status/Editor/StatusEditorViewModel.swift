@@ -99,7 +99,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
   }
 
   var shouldDisablePollButton: Bool {
-    showPoll || !selectedMedias.isEmpty
+    !selectedMedias.isEmpty
   }
 
   var shouldDisplayDismissWarning: Bool {

@@ -39,6 +39,7 @@ struct StatusEditorAccessoryView: View {
             Button {
               withAnimation {
                 viewModel.showPoll.toggle()
+                viewModel.resetPollDefaults()
               }
             } label: {
               Image(systemName: "chart.bar")
