@@ -60,7 +60,7 @@ public struct TimelineView: View {
           collectionView.isPrefetchingEnabled = true
           collectionView.prefetchDataSource = self.prefetcher
         }
-        if viewModel.pendingStatusesEnabled {
+        if viewModel.timeline.supportNewestPagination {
           PendingStatusesObserverView(observer: viewModel.pendingStatusesObserver)
         }
       }

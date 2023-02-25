@@ -17,7 +17,7 @@ class TimelineViewModel: ObservableObject {
           timeline = oldValue
         }
         if oldValue != timeline {
-          await datasource.reset()
+          await reset()
           pendingStatusesObserver.pendingStatuses = []
           tag = nil
         }
@@ -53,7 +53,7 @@ class TimelineViewModel: ObservableObject {
     didSet {
       if oldValue != client {
         Task {
-          await datasource.reset()
+          await reset()
         }
       }
     }
@@ -65,10 +65,6 @@ class TimelineViewModel: ObservableObject {
         pendingStatusesObserver.pendingStatuses = []
       }
     }
-  }
-
-  var pendingStatusesEnabled: Bool {
-    timeline.supportNewestPagination
   }
 
   var serverName: String {
@@ -103,7 +99,6 @@ class TimelineViewModel: ObservableObject {
          timeline == .home,
          canStreamEvents,
          isTimelineVisible,
-         pendingStatusesEnabled,
          await !datasource.contains(statusId: event.status.id)
       {
         pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
@@ -167,7 +162,7 @@ extension TimelineViewModel: StatusesFetcher {
     guard let client else { return }
     do {
       if await datasource.isEmpty || !timeline.supportNewestPagination {
-        await datasource.reset()
+        await reset()
         try await fetchFirstPage(client: client)
       } else if let latest = await datasource.get().first {
         try await fetchNewPagesFrom(latestStatus: latest, client: client)
@@ -276,47 +271,36 @@ extension TimelineViewModel: StatusesFetcher {
     // Cache statuses for home timeline.
     await cacheHome()
 
-    // If pending statuses are not enabled, we simply load status on the top regardless of the current position.
-    if !pendingStatusesEnabled {
-      pendingStatusesObserver.pendingStatuses = []
+    // Append new statuses in the timeline indicator.
+    pendingStatusesObserver.pendingStatuses.insert(contentsOf: newStatuses.map { $0.id }, at: 0)
+
+    // High chance the user is scrolled to the top.
+    // We need to update the statuses state, and then scroll to the previous top most status.
+    if let topStatusId, visibileStatusesIds.contains(topStatusId), scrollToTopVisible {
+      pendingStatusesObserver.disableUpdate = true
+      let statuses = await datasource.get()
+      statusesState = .display(statuses: statuses,
+                               nextPageState: statuses.count < 20 ? .none : .hasNextPage)
+      scrollToIndexAnimated = false
+      scrollToIndex = newStatuses.count + 1
+      DispatchQueue.main.async {
+        self.pendingStatusesObserver.disableUpdate = false
+        self.canStreamEvents = true
+      }
+    } else {
+      // This will keep the scroll position (if the list is scrolled) and prepend statuses on the top.
       let statuses = await datasource.get()
       withAnimation {
         statusesState = .display(statuses: statuses,
                                  nextPageState: statuses.count < 20 ? .none : .hasNextPage)
         canStreamEvents = true
       }
-    } else {
-      // Append new statuses in the timeline indicator.
-      pendingStatusesObserver.pendingStatuses.insert(contentsOf: newStatuses.map { $0.id }, at: 0)
+    }
 
-      // High chance the user is scrolled to the top.
-      // We need to update the statuses state, and then scroll to the previous top most status.
-      if let topStatusId, visibileStatusesIds.contains(topStatusId), scrollToTopVisible {
-        pendingStatusesObserver.disableUpdate = true
-        let statuses = await datasource.get()
-        statusesState = .display(statuses: statuses,
-                                 nextPageState: statuses.count < 20 ? .none : .hasNextPage)
-        scrollToIndexAnimated = false
-        scrollToIndex = newStatuses.count + 1
-        DispatchQueue.main.async {
-          self.pendingStatusesObserver.disableUpdate = false
-          self.canStreamEvents = true
-        }
-      } else {
-        // This will keep the scroll position (if the list is scrolled) and prepend statuses on the top.
-        let statuses = await datasource.get()
-        withAnimation {
-          statusesState = .display(statuses: statuses,
-                                   nextPageState: statuses.count < 20 ? .none : .hasNextPage)
-          canStreamEvents = true
-        }
-      }
-
-      // We trigger a new fetch so we can get the next new statuses if any.
-      // If none, it'll stop there.
-      if !Task.isCancelled, let latest = await datasource.get().first, let client {
-        try await fetchNewPagesFrom(latestStatus: latest, client: client)
-      }
+    // We trigger a new fetch so we can get the next new statuses if any.
+    // If none, it'll stop there.
+    if !Task.isCancelled, let latest = await datasource.get().first, let client {
+      try await fetchNewPagesFrom(latestStatus: latest, client: client)
     }
   }
 
