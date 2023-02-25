@@ -55,10 +55,10 @@ struct NotificationRowView: View {
     ZStack(alignment: .center) {
       Circle()
         .strokeBorder(Color.white, lineWidth: 1)
-        .background(Circle().foregroundColor(type.tintColor(isPrivate: notification.status?.visibility == .priv)))
+        .background(Circle().foregroundColor(type.tintColor(isPrivate: notification.status?.visibility == .direct)))
         .frame(width: 24, height: 24)
 
-      Image(systemName: type.iconName(isPrivate: notification.status?.visibility == .priv))
+      Image(systemName: type.iconName(isPrivate: notification.status?.visibility == .direct))
         .resizable()
         .scaledToFit()
         .frame(width: 12, height: 12)
