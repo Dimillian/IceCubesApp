@@ -58,7 +58,7 @@
 
 // MARK: Menu
 "menu.new-post" = "Bidalketa berria";
-"menu.font" = "Letra tipoa";
+"menu.font" = "Letra-tipoa";
 "menu.font.bigger" = "Handiagoa";
 "menu.font.smaller" = "Txikiagoa";
 
@@ -187,8 +187,8 @@
 
 "settings.display.section.font" = "Letra-tipoa";
 
-"settings.section.cache" = "Cache";
-"settings.cache-media.clear" = "Clear Media Cache";
+"settings.section.cache" = "Katxea";
+"settings.cache-media.clear" = "Garbitu multimedia katxea";
 
 "enum.expand-media.show" = "Erakutsi guztia";
 "enum.expand-media.hide" = "Ezkutatu guztia";
@@ -248,10 +248,10 @@
 "account.edit.post-settings.section-title" = "Bidalketen ezarpenak";
 "account.edit.post-settings.sensitive" = "Eduki hunkigarria";
 
-"account.edit.metadata-section-title" = "Profile Metadata";
-"account.edit.metadata-name-placeholder" = "Label";
-"account.edit.metadata-value-placeholder" = "Content";
-"account.edit.add-metadata-button" = "Add a new metadata";
+"account.edit.metadata-section-title" = "Profilaren metadatuak";
+"account.edit.metadata-name-placeholder" = "Etiketa";
+"account.edit.metadata-value-placeholder" = "Edukia";
+"account.edit.add-metadata-button" = "Gehitu metadatu berria";
 
 "account.favorited-by" = "Hauek gogoko egin dute:";
 "account.follow.follow" = "Jarraitu";
@@ -370,13 +370,13 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Itzuli";
-"status.action.translate-from-%@" = "Itzuli %@(e)tik";
 "status.action.translated-label-%@" = "%@ erabiliz itzulia";
+"status.action.translated-label-from-%@-%@" = "%@(e)tik %@ erabiliz itzulia";
 "status.action.bookmark" = "Jarri laster-marka";
 "status.action.boost" = "Bultzatu";
 "status.action.boost-to-followers" = "Bultzatu jarraitzaileek ikus dezaten";
 "status.action.copy-text" = "Kopiatu testua";
-"status.action.copy-link" = "Copy Link";
+"status.action.copy-link" = "Kopiatu esteka";
 "status.action.delete" = "Ezabatu";
 "status.action.delete.confirm.title" = "Baieztatu";
 "status.action.delete.confirm.message" = "Ziur zaude bidalketa ezabatu nahi duzula?";
