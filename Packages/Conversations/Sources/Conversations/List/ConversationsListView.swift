@@ -16,31 +16,30 @@ public struct ConversationsListView: View {
 
   public init() {}
 
-  private var conversations: [ConversationsListRowModel] {
-    if viewModel.isLoadingFirstPage {
-        return Conversation.placeholders().map { obj in
-            ConversationsListRowModel(conversation: obj, client: viewModel.client, superViewModel: viewModel)
+    private var conversations: Binding<[Conversation]> {
+        if viewModel.isLoadingFirstPage {
+            return Binding.constant(Conversation.placeholders())
+        } else {
+            return $viewModel.conversations
         }
     }
-    return viewModel.conversations
-  }
-
+    
   public var body: some View {
     ScrollView {
       LazyVStack {
         Group {
           if !conversations.isEmpty || viewModel.isLoadingFirstPage {
-              ForEach(conversations) { conversation in
-                if viewModel.isLoadingFirstPage {
-                  ConversationsListRow(viewModel: conversation)
-                    .padding(.horizontal, .layoutPadding)
-                    .redacted(reason: .placeholder)
-                } else {
-                    ConversationsListRow(viewModel: conversation)
-                    .padding(.horizontal, .layoutPadding)
+              ForEach(conversations) { $conversation in
+                  if viewModel.isLoadingFirstPage {
+                      ConversationsListRow(conversation: $conversation, viewModel: viewModel)
+                      .padding(.horizontal, .layoutPadding)
+                      .redacted(reason: .placeholder)
+                  } else {
+                      ConversationsListRow(conversation: $conversation, viewModel: viewModel)
+                      .padding(.horizontal, .layoutPadding)
+                  }
+                  Divider()
                 }
-                Divider()
-              }
           } else if conversations.isEmpty && !viewModel.isLoadingFirstPage && !viewModel.isError {
             EmptyView(iconName: "tray",
                       title: "conversations.empty.title",

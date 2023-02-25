@@ -10,11 +10,9 @@ struct ConversationsListRow: View {
   @EnvironmentObject private var routerPath: RouterPath
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var currentAccount: CurrentAccount
-
-  var conversation: Conversation {
-        viewModel.conversation
-    }
-  @ObservedObject var viewModel: ConversationsListRowModel
+    
+  @Binding var conversation: Conversation
+  @ObservedObject var viewModel: ConversationsListViewModel
 
   var body: some View {
     VStack(alignment: .leading) {
@@ -50,7 +48,7 @@ struct ConversationsListRow: View {
       .contentShape(Rectangle())
       .onTapGesture {
         Task {
-          await viewModel.markAsRead()
+          await viewModel.markAsRead(conversation: conversation)
         }
         routerPath.navigate(to: .conversationDetail(conversation: conversation))
       }
@@ -88,7 +86,7 @@ struct ConversationsListRow: View {
   private var contextMenu: some View {
     Button {
       Task {
-        await viewModel.markAsRead()
+        await viewModel.markAsRead(conversation: conversation)
       }
     } label: {
       Label("conversations.action.mark-read", systemImage: "eye")
@@ -96,28 +94,12 @@ struct ConversationsListRow: View {
 
       if let message = conversation.lastStatus {
           Section("conversations.latest.message") {
-              Button {
-                  UIPasteboard.general.string = message.content.asRawText
-              } label: {
-                  Label("status.action.copy-text", systemImage: "doc.on.doc")
-              }
-              Button {
-                  Task {
-                      await viewModel.favorite()
-                  }
-              } label: {
-                  Label(viewModel.isLiked ? "status.action.unfavorite" : "status.action.favorite",
-                        systemImage: viewModel.isLiked ? "star.fill" : "star")
-              }
-              Button {
-                  Task {
-                      await viewModel.bookmark()
-                      print("Bookmarked: \(viewModel.isBookmarked)")
-                  }
-              } label: {
-                  Label(viewModel.isBookmarked ? "status.action.unbookmark" : "status.action.bookmark",
-                        systemImage: viewModel.isBookmarked ? "bookmark.fill" : "bookmark")
-              }
+            Button {
+                UIPasteboard.general.string = message.content.asRawText
+            } label: {
+                Label("status.action.copy-text", systemImage: "doc.on.doc")
+            }
+            likeAndBookmark
           }
           Divider()
           if message.account.id != currentAccount.account?.id {
@@ -137,13 +119,33 @@ struct ConversationsListRow: View {
               }
           }
       }
-
+    
     Button(role: .destructive) {
       Task {
-        await viewModel.delete()
+        await viewModel.delete(conversation: conversation)
       }
     } label: {
       Label("conversations.action.delete", systemImage: "trash")
+    }
+  }
+
+  @ViewBuilder
+  private var likeAndBookmark: some View {
+    Button {
+        Task {
+            await viewModel.favorite(conversation: conversation)
+        }
+    } label: {
+      Label(conversation.lastStatus?.favourited ?? false ? "status.action.unfavorite" : "status.action.favorite",
+              systemImage: conversation.lastStatus?.favourited ?? false ? "star.fill" : "star")
+    }
+    Button {
+        Task {
+            await viewModel.bookmark(conversation: conversation)
+        }
+    } label: {
+        Label(conversation.lastStatus?.bookmarked ?? false ? "status.action.unbookmark" : "status.action.bookmark",
+              systemImage: conversation.lastStatus?.bookmarked ?? false ? "bookmark.fill" : "bookmark")
     }
   }
 }

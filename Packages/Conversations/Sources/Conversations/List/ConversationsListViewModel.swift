@@ -8,7 +8,7 @@ class ConversationsListViewModel: ObservableObject {
 
   @Published var isLoadingFirstPage: Bool = true
   @Published var isLoadingNextPage: Bool = false
-  @Published var conversations: [ConversationsListRowModel] = []
+  @Published var conversations: [Conversation] = []
   @Published var isError: Bool = false
 
   var nextPage: LinkHandler?
@@ -16,15 +16,13 @@ class ConversationsListViewModel: ObservableObject {
   public init() {}
 
   func fetchConversations() async {
-      let conversationObjects: [Conversation]
     guard let client else { return }
     if conversations.isEmpty {
       isLoadingFirstPage = true
     }
     do {
-      (conversationObjects, nextPage) = try await client.getWithLink(endpoint: Conversations.conversations(maxId: nil))
-        updateChildModels(conversationObjects: conversationObjects)
-        if nextPage?.maxId == nil {
+      (conversations, nextPage) = try await client.getWithLink(endpoint: Conversations.conversations(maxId: nil))
+      if nextPage?.maxId == nil {
         nextPage = nil
       }
       isLoadingFirstPage = false
@@ -34,37 +32,13 @@ class ConversationsListViewModel: ObservableObject {
     }
   }
 
-  private func updateChildModels(conversationObjects:  [Conversation]) {
-    var objs = conversationObjects
-    var modelsToDelete: [Int] = []
-    
-    for (modelIndex, model) in conversations.enumerated() {
-      if let index = objs.firstIndex(where: { $0.id == model.conversation.id }) {
-        model.conversation = objs[index]
-        objs.remove(at: index)
-      } else {
-        modelsToDelete.append(modelIndex)
-      }
-    }
-    
-    for index in modelsToDelete {
-      conversations.remove(at: index)
-    }
-    
-    conversations.append(contentsOf: objs.map {
-      ConversationsListRowModel(conversation: $0, client: client, superViewModel: self)
-    })
-  }
-  
   func fetchNextPage() async {
     if let maxId = nextPage?.maxId, let client {
       do {
         isLoadingNextPage = true
         var nextMessages: [Conversation] = []
         (nextMessages, nextPage) = try await client.getWithLink(endpoint: Conversations.conversations(maxId: maxId))
-          conversations.append(contentsOf: nextMessages.map { obj in
-              ConversationsListRowModel(conversation: obj, client: client, superViewModel: self)
-          })
+        conversations.append(contentsOf: nextMessages)
         if nextPage?.maxId == nil {
           nextPage = nil
         }
@@ -73,15 +47,61 @@ class ConversationsListViewModel: ObservableObject {
     }
   }
 
+  func markAsRead(conversation: Conversation) async {
+    guard let client else { return }
+    _ = try? await client.post(endpoint: Conversations.read(id: conversation.id))
+  }
+
+  func delete(conversation: Conversation) async {
+    guard let client else { return }
+    _ = try? await client.delete(endpoint: Conversations.delete(id: conversation.id))
+    await fetchConversations()
+  }
+
+  func favorite(conversation: Conversation) async {
+    guard let client, let message = conversation.lastStatus else { return }
+    let endpoint: Endpoint
+    if message.favourited ?? false {
+      endpoint = Statuses.unfavorite(id: message.id)
+    } else {
+      endpoint = Statuses.favorite(id: message.id)
+    }
+    do {
+      let status: Status = try await client.post(endpoint: endpoint)
+      updateConversationWithNewLastStatus(conversation: conversation, newLastStatus: status)
+    } catch {}
+  }
+
+  func bookmark(conversation: Conversation) async {
+    guard let client, let message = conversation.lastStatus else { return }
+    let endpoint: Endpoint
+    if message.bookmarked ?? false {
+      endpoint = Statuses.unbookmark(id: message.id)
+    } else {
+      endpoint = Statuses.bookmark(id: message.id)
+    }
+    do {
+      let status: Status = try await client.post(endpoint: endpoint)
+      updateConversationWithNewLastStatus(conversation: conversation, newLastStatus: status)
+    } catch {}
+  }
+    
+    private func updateConversationWithNewLastStatus(conversation: Conversation, newLastStatus: Status) {
+        let newConversation = Conversation(id: conversation.id, unread: conversation.unread, lastStatus: newLastStatus, accounts: conversation.accounts)
+        updateConversations(conversation: newConversation)
+    }
+
+    private func updateConversations(conversation: Conversation) {
+        if let index = conversations.firstIndex(where: { $0.id == conversation.id }) {
+            conversations.remove(at: index)
+          }
+          conversations.insert(conversation, at: 0)
+          conversations = conversations.sorted(by: { ($0.lastStatus?.createdAt.asDate ?? Date.now) > ($1.lastStatus?.createdAt.asDate ?? Date.now) })
+    }
+
   func handleEvent(event: any StreamEvent) {
     if let event = event as? StreamEventConversation {
-      if let index = conversations.firstIndex(where: { $0.conversation.id == event.conversation.id }) {
-        conversations[index].conversation = event.conversation
-      } else {
-        let conversation = ConversationsListRowModel(conversation: event.conversation, client: client, superViewModel: self)
-        conversations.insert(conversation, at: 0)
-      }
-      conversations = conversations.sorted(by: { ($0.conversation.lastStatus?.createdAt.asDate ?? Date.now) > ($1.conversation.lastStatus?.createdAt.asDate ?? Date.now) })
+        updateConversations(conversation: event.conversation)
     }
   }
 }
