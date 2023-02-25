@@ -75,7 +75,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
       case .statuses, .postsAndReplies, .media:
         tabTask?.cancel()
         tabTask = Task {
-          await fetchStatuses()
+          await fetchNewestStatuses()
         }
       default:
         reloadTabState()
@@ -146,7 +146,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
     self.familiarFollowers = familiarFollowers?.first?.accounts ?? []
   }
 
-  func fetchStatuses() async {
+  func fetchNewestStatuses() async {
     guard let client else { return }
     do {
       tabState = .statuses(statusesState: .loading)

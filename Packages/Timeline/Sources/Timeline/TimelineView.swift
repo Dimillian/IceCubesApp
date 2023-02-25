@@ -103,24 +103,15 @@ public struct TimelineView: View {
     .navigationBarTitleDisplayMode(.inline)
     .onAppear {
       viewModel.isTimelineVisible = true
-      if viewModel.client == nil {
-        viewModel.client = client
-        viewModel.timeline = timeline
-      } else {
-        Task {
-          await viewModel.fetchStatuses()
-        }
-      }
+      viewModel.client = client
+      viewModel.timeline = timeline
     }
     .onDisappear {
       viewModel.isTimelineVisible = false
     }
     .refreshable {
-      if timeline == .trending {
-        await viewModel.reset()
-      }
       HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
-      await viewModel.fetchStatuses()
+      await viewModel.fetchNewestStatuses()
       HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
     }
     .onChange(of: watcher.latestEvent?.id) { _ in
@@ -146,7 +137,7 @@ public struct TimelineView: View {
         if wasBackgrounded {
           wasBackgrounded = false
           Task {
-            await viewModel.fetchStatuses()
+            await viewModel.fetchNewestStatuses()
           }
         }
       case .background:

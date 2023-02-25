@@ -24,7 +24,7 @@ class TimelineViewModel: ObservableObject {
         guard !Task.isCancelled else {
           return
         }
-        await fetchStatuses()
+        await fetchNewestStatuses()
         switch timeline {
         case let .hashtag(tag, _):
           await fetchTag(id: tag)
@@ -156,13 +156,11 @@ extension TimelineViewModel {
 // MARK: - StatusesFetcher
 
 extension TimelineViewModel: StatusesFetcher {
-  func fetchStatuses() async {
+  func fetchNewestStatuses() async {
     guard let client else { return }
     do {
-      if await datasource.isEmpty || timeline == .trending {
-        if await !datasource.isEmpty && timeline == .trending {
-          return
-        }
+      if await datasource.isEmpty || !timeline.supportNewestPagination {
+        await datasource.reset()
         try await fetchFirstPage(client: client)
       } else if let latest = await datasource.get().first {
         try await fetchNewPagesFrom(latestStatus: latest, client: client)
@@ -205,7 +203,7 @@ extension TimelineViewModel: StatusesFetcher {
         }
       }
       // And then we fetch statuses again toget newest statuses from there.
-      await fetchStatuses()
+      await fetchNewestStatuses()
     } else {
       var statuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
                                                                                 maxId: nil,

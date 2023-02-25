@@ -87,7 +87,7 @@ public struct AccountDetailView: View {
           group.addTask { await viewModel.fetchAccount() }
           group.addTask {
             if await viewModel.statuses.isEmpty {
-              await viewModel.fetchStatuses()
+              await viewModel.fetchNewestStatuses()
             }
           }
           if !viewModel.isCurrentUser {
@@ -99,7 +99,7 @@ public struct AccountDetailView: View {
     .refreshable {
       Task {
         await viewModel.fetchAccount()
-        await viewModel.fetchStatuses()
+        await viewModel.fetchNewestStatuses()
       }
     }
     .onChange(of: watcher.latestEvent?.id) { _ in

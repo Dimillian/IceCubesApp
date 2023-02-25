@@ -32,7 +32,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
                 message: "status.error.loading.message",
                 buttonTitle: "action.retry") {
         Task {
-          await fetcher.fetchStatuses()
+          await fetcher.fetchNewestStatuses()
         }
       }
       .listRowBackground(theme.primaryBackgroundColor)
