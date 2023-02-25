@@ -19,6 +19,8 @@
 "account.add.navigation-title" = "Gehitu kontua";
 "account.add.sign-in" = "Hasi saioa";
 
+"account.active" = "Active Account";
+
 // MARK: Enums
 "enum.avatar-position.leading" = "Alboan";
 "enum.avatar-position.top" = "Corpusean";

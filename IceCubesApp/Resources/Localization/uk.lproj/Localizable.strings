@@ -19,6 +19,8 @@
 "account.add.navigation-title" = "Додати підключення";
 "account.add.sign-in" = "Зареєструватися";
 
+"account.active" = "Active Account";
+
 // MARK: Enums
 "enum.avatar-position.leading" = "Поряд";
 "enum.avatar-position.top" = "Зверху";

@@ -19,6 +19,8 @@
 "account.add.navigation-title" = "계정 추가";
 "account.add.sign-in" = "로그인";
 
+"account.active" = "Active Account";
+
 // MARK: Enums
 "enum.avatar-position.leading" = "본문 옆";
 "enum.avatar-position.top" = "본문 위";

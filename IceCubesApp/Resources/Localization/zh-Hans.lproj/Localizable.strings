@@ -19,6 +19,8 @@
 "account.add.navigation-title" = "添加账户";
 "account.add.sign-in" = "登录";
 
+"account.active" = "Active Account";
+
 // MARK: Enums
 "enum.avatar-position.leading" = "居首";
 "enum.avatar-position.top" = "顶部";

@@ -19,6 +19,8 @@
 "account.add.navigation-title" = "Hesap Ekle";
 "account.add.sign-in" = "Giriş Yap";
 
+"account.active" = "Active Account";
+
 // MARK: Enums
 "enum.avatar-position.leading" = "Önde";
 "enum.avatar-position.top" = "Üstte";

@@ -76,10 +76,20 @@ public struct AppAccountsSelectorView: View {
     .accessibilityLabel("accessibility.app-account.selector.accounts")
   }
 
+    private func getCurrentAccountStr(viewModel: AppAccountViewModel) -> String {
+        if let current = currentAccount.account?.id,
+           let object = viewModel.account?.id,
+           current == object {
+            return "\(String(localized: "account.active"))\n"
+        } else {
+            return ""
+        }
+    }
+
   @ViewBuilder
   private var menuView: some View {
     ForEach(accountsViewModel, id: \.appAccount.id) { viewModel in
-      Section(viewModel.acct) {
+      Section("\(getCurrentAccountStr(viewModel: viewModel))\(viewModel.acct)") {
         Button {
           if let account = currentAccount.account,
              viewModel.account?.id == account.id

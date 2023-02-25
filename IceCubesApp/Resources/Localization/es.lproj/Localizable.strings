@@ -19,6 +19,8 @@
 "account.add.navigation-title" = "Añadir cuenta";
 "account.add.sign-in" = "Iniciar sesión";
 
+"account.active" = "Active Account";
+
 // MARK: Enums
 "enum.avatar-position.leading" = "Delante";
 "enum.avatar-position.top" = "Arriba";

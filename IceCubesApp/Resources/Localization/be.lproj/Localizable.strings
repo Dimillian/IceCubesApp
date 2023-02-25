@@ -19,6 +19,8 @@
 "account.add.navigation-title" = "Дадаць уліковы запіс";
 "account.add.sign-in" = "Увайсці";
 
+"account.active" = "Active Account";
+
 // MARK: Enums
 "enum.avatar-position.leading" = "Вядучы";
 "enum.avatar-position.top" = "Наверсе";

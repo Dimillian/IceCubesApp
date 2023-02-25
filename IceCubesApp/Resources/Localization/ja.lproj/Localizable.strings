@@ -19,6 +19,8 @@
 "account.add.navigation-title" = "アカウントの追加";
 "account.add.sign-in" = "サインイン";
 
+"account.active" = "Active Account";
+
 // MARK: Enums
 "enum.avatar-position.leading" = "水平方向に先頭";
 "enum.avatar-position.top" = "垂直方向に先頭";
