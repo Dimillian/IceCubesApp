@@ -185,7 +185,7 @@ struct AccountDetailHeaderView: View {
 
   private func makeCustomInfoLabel(title: LocalizedStringKey, count: Int, needsBadge: Bool = false) -> some View {
     VStack {
-      Text("\(count)")
+      Text(count, format: .number.notation(.compactName))
         .font(.scaledHeadline)
         .foregroundColor(theme.tintColor)
         .overlay(alignment: .trailing) {
