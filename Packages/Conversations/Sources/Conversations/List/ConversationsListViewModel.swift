@@ -58,13 +58,50 @@ class ConversationsListViewModel: ObservableObject {
     await fetchConversations()
   }
 
+  func favorite(conversation: Conversation) async {
+    guard let client, let message = conversation.lastStatus else { return }
+    let endpoint: Endpoint
+    if message.favourited ?? false {
+      endpoint = Statuses.unfavorite(id: message.id)
+    } else {
+      endpoint = Statuses.favorite(id: message.id)
+    }
+    do {
+      let status: Status = try await client.post(endpoint: endpoint)
+      updateConversationWithNewLastStatus(conversation: conversation, newLastStatus: status)
+    } catch {}
+  }
+
+  func bookmark(conversation: Conversation) async {
+    guard let client, let message = conversation.lastStatus else { return }
+    let endpoint: Endpoint
+    if message.bookmarked ?? false {
+      endpoint = Statuses.unbookmark(id: message.id)
+    } else {
+      endpoint = Statuses.bookmark(id: message.id)
+    }
+    do {
+      let status: Status = try await client.post(endpoint: endpoint)
+      updateConversationWithNewLastStatus(conversation: conversation, newLastStatus: status)
+    } catch {}
+  }
+    
+    private func updateConversationWithNewLastStatus(conversation: Conversation, newLastStatus: Status) {
+        let newConversation = Conversation(id: conversation.id, unread: conversation.unread, lastStatus: newLastStatus, accounts: conversation.accounts)
+        updateConversations(conversation: newConversation)
+    }
+
+    private func updateConversations(conversation: Conversation) {
+        if let index = conversations.firstIndex(where: { $0.id == conversation.id }) {
+            conversations.remove(at: index)
+          }
+          conversations.insert(conversation, at: 0)
+          conversations = conversations.sorted(by: { ($0.lastStatus?.createdAt.asDate ?? Date.now) > ($1.lastStatus?.createdAt.asDate ?? Date.now) })
+    }
+
   func handleEvent(event: any StreamEvent) {
     if let event = event as? StreamEventConversation {
-      if let index = conversations.firstIndex(where: { $0.id == event.conversation.id }) {
-        conversations.remove(at: index)
-      }
-      conversations.insert(event.conversation, at: 0)
-      conversations = conversations.sorted(by: { ($0.lastStatus?.createdAt.asDate ?? Date.now) > ($1.lastStatus?.createdAt.asDate ?? Date.now) })
+        updateConversations(conversation: event.conversation)
     }
   }
 }

@@ -290,6 +290,7 @@
 "conversations.error.title" = "S'ha produït un error";
 "conversations.navigation-title" = "Missatges directes";
 "conversations.new.message.placeholder" = "Missatge nou";
+"conversations.latest.message" = "Latest Message";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld publicacions de %lld participants";

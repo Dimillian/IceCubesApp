@@ -292,6 +292,7 @@
 "conversations.error.title" = "오류";
 "conversations.navigation-title" = "다이렉트 메시지";
 "conversations.new.message.placeholder" = "새 메시지";
+"conversations.latest.message" = "Latest Message";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld개 글 (%lld명이 이야기 중)";

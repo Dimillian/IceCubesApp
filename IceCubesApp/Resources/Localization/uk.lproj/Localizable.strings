@@ -292,6 +292,7 @@
 "conversations.error.title" = "Виникла халепа";
 "conversations.navigation-title" = "Особисті повідомлення";
 "conversations.new.message.placeholder" = "Нове повідомлення";
+"conversations.latest.message" = "Latest Message";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld дописів від %lld учасників";
