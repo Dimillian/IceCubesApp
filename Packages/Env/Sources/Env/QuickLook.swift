@@ -10,6 +10,7 @@ public class QuickLook: ObservableObject {
       }
     }
   }
+
   @Published public private(set) var urls: [URL] = []
   @Published public private(set) var isPreparing: Bool = false
   @Published public private(set) var latestError: Error?
@@ -56,7 +57,7 @@ public class QuickLook: ObservableObject {
       }
     }
   }
-  
+
   private var quickLookDir: URL {
     try! FileManager.default.url(for: .cachesDirectory,
                                  in: .userDomainMask,
@@ -72,8 +73,8 @@ public class QuickLook: ObservableObject {
     try data.write(to: path)
     return path
   }
-  
-  private func cleanup(urls: [URL]) {
+
+  private func cleanup(urls _: [URL]) {
     try? FileManager.default.removeItem(at: quickLookDir)
   }
 }

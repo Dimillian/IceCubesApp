@@ -44,8 +44,8 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
                                                       client: client,
                                                       routerPath: routerPath,
                                                       isRemote: isRemote)
-          
-        })
+
+          })
           .id(status.id)
           .onAppear {
             fetcher.statusDidAppear(status: status)

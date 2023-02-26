@@ -47,7 +47,7 @@ public class StatusRowViewModel: ObservableObject {
 
   var isThread: Bool {
     status.reblog?.inReplyToId != nil || status.reblog?.inReplyToAccountId != nil ||
-    status.inReplyToId != nil || status.inReplyToAccountId != nil
+      status.inReplyToId != nil || status.inReplyToAccountId != nil
   }
 
   var highlightRowColor: Color {
@@ -97,14 +97,15 @@ public class StatusRowViewModel: ObservableObject {
     }
 
     isFiltered = filter != nil
-    
+
     if let url = embededStatusURL(),
-       let embed = StatusEmbedCache.shared.get(url: url) {
+       let embed = StatusEmbedCache.shared.get(url: url)
+    {
       isEmbedLoading = false
       embeddedStatus = embed
     }
   }
-  
+
   func markSeen() {
     // called in on appear so we can cache that the status has been seen.
     if UserPreferences.shared.suppressDupeReblogs && !seen {
@@ -154,12 +155,13 @@ public class StatusRowViewModel: ObservableObject {
       routerPath.navigate(to: .accountDetail(id: mention.id))
     }
   }
-  
+
   private func embededStatusURL() -> URL? {
     let content = status.reblog?.content ?? status.content
     if !content.statusesURLs.isEmpty,
        let url = content.statusesURLs.first,
-       client.hasConnection(with: url) {
+       client.hasConnection(with: url)
+    {
       return url
     }
     return nil
@@ -167,19 +169,20 @@ public class StatusRowViewModel: ObservableObject {
 
   func loadEmbeddedStatus() async {
     guard embeddedStatus == nil,
-          let url = embededStatusURL() else {
+          let url = embededStatusURL()
+    else {
       if isEmbedLoading {
         isEmbedLoading = false
       }
       return
     }
-    
+
     if let embed = StatusEmbedCache.shared.get(url: url) {
       isEmbedLoading = false
       embeddedStatus = embed
       return
     }
-        
+
     do {
       isEmbedLoading = true
       var embed: Status?

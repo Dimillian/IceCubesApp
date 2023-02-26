@@ -85,23 +85,23 @@ class ConversationsListViewModel: ObservableObject {
       updateConversationWithNewLastStatus(conversation: conversation, newLastStatus: status)
     } catch {}
   }
-    
-    private func updateConversationWithNewLastStatus(conversation: Conversation, newLastStatus: Status) {
-        let newConversation = Conversation(id: conversation.id, unread: conversation.unread, lastStatus: newLastStatus, accounts: conversation.accounts)
-        updateConversations(conversation: newConversation)
-    }
 
-    private func updateConversations(conversation: Conversation) {
-        if let index = conversations.firstIndex(where: { $0.id == conversation.id }) {
-            conversations.remove(at: index)
-          }
-          conversations.insert(conversation, at: 0)
-          conversations = conversations.sorted(by: { ($0.lastStatus?.createdAt.asDate ?? Date.now) > ($1.lastStatus?.createdAt.asDate ?? Date.now) })
+  private func updateConversationWithNewLastStatus(conversation: Conversation, newLastStatus: Status) {
+    let newConversation = Conversation(id: conversation.id, unread: conversation.unread, lastStatus: newLastStatus, accounts: conversation.accounts)
+    updateConversations(conversation: newConversation)
+  }
+
+  private func updateConversations(conversation: Conversation) {
+    if let index = conversations.firstIndex(where: { $0.id == conversation.id }) {
+      conversations.remove(at: index)
     }
+    conversations.insert(conversation, at: 0)
+    conversations = conversations.sorted(by: { ($0.lastStatus?.createdAt.asDate ?? Date.now) > ($1.lastStatus?.createdAt.asDate ?? Date.now) })
+  }
 
   func handleEvent(event: any StreamEvent) {
     if let event = event as? StreamEventConversation {
-        updateConversations(conversation: event.conversation)
+      updateConversations(conversation: event.conversation)
     }
   }
 }

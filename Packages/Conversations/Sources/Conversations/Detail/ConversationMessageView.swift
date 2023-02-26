@@ -117,22 +117,22 @@ struct ConversationMessageView: View {
       Label(isLiked ? "status.action.unfavorite" : "status.action.favorite",
             systemImage: isLiked ? "star.fill" : "star")
     }
-      Button { Task {
-          do {
-              let status: Status
-              if isBookmarked {
-                  status = try await client.post(endpoint: Statuses.unbookmark(id: message.id))
-              } else {
-                  status = try await client.post(endpoint: Statuses.bookmark(id: message.id))
-              }
-              withAnimation {
-                  isBookmarked = status.bookmarked == true
-              }
-          } catch {}
-        } } label: {
-          Label(isBookmarked ? "status.action.unbookmark" : "status.action.bookmark",
-                systemImage: isBookmarked ? "bookmark.fill" : "bookmark")
+    Button { Task {
+      do {
+        let status: Status
+        if isBookmarked {
+          status = try await client.post(endpoint: Statuses.unbookmark(id: message.id))
+        } else {
+          status = try await client.post(endpoint: Statuses.bookmark(id: message.id))
         }
+        withAnimation {
+          isBookmarked = status.bookmarked == true
+        }
+      } catch {}
+    } } label: {
+      Label(isBookmarked ? "status.action.unbookmark" : "status.action.bookmark",
+            systemImage: isBookmarked ? "bookmark.fill" : "bookmark")
+    }
     Divider()
     if message.account.id == currentAccount.account?.id {
       Button("status.action.delete", role: .destructive) {
@@ -141,13 +141,13 @@ struct ConversationMessageView: View {
         }
       }
     } else {
-        Section(message.reblog?.account.acct ?? message.account.acct) {
-          Button {
-            routerPath.presentedSheet = .mentionStatusEditor(account: message.reblog?.account ?? message.account, visibility: .pub)
-          } label: {
-            Label("status.action.mention", systemImage: "at")
-          }
+      Section(message.reblog?.account.acct ?? message.account.acct) {
+        Button {
+          routerPath.presentedSheet = .mentionStatusEditor(account: message.reblog?.account ?? message.account, visibility: .pub)
+        } label: {
+          Label("status.action.mention", systemImage: "at")
         }
+      }
       Section {
         Button(role: .destructive) {
           routerPath.presentedSheet = .report(status: message.reblogAsAsStatus ?? message)

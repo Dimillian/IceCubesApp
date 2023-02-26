@@ -46,7 +46,7 @@ public struct InstanceInfoSection: View {
       .listRowBackground(theme.primaryBackgroundColor)
     }
   }
-  
+
   private func format(_ int: Int) -> String {
     let formatter = NumberFormatter()
     formatter.numberStyle = .decimal

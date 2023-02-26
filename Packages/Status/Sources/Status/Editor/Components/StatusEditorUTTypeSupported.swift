@@ -14,20 +14,20 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
   case jpeg = "public.jpeg"
   case png = "public.png"
   case tiff = "public.tiff"
-  
+
   case video = "public.video"
   case movie = "public.movie"
   case mp4 = "public.mpeg-4"
   case gif = "public.gif"
   case gif2 = "com.compuserve.gif"
   case quickTimeMovie = "com.apple.quicktime-movie"
-  
+
   case uiimage = "com.apple.uikit.image"
-  
+
   static func types() -> [UTType] {
     [.url, .text, .plainText, .image, .jpeg, .png, .tiff, .video, .mpeg4Movie, .gif, .movie, .quickTimeMovie]
   }
-  
+
   var isVideo: Bool {
     switch self {
     case .video, .movie, .mp4, .quickTimeMovie:
@@ -36,7 +36,7 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
       return false
     }
   }
-  
+
   var isGif: Bool {
     switch self {
     case .gif, .gif2:
@@ -45,7 +45,7 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
       return false
     }
   }
-  
+
   func loadItemContent(item: NSItemProvider) async throws -> Any? {
     let result = try await item.loadItem(forTypeIdentifier: rawValue)
     if isVideo, let transferable = await getVideoTransferable(item: item) {
@@ -79,7 +79,7 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
       return nil
     }
   }
-  
+
   private func getVideoTransferable(item: NSItemProvider) async -> MovieFileTranseferable? {
     return await withCheckedContinuation { continuation in
       _ = item.loadTransferable(type: MovieFileTranseferable.self) { result in
@@ -92,7 +92,7 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
       }
     }
   }
-  
+
   private func getGifTransferable(item: NSItemProvider) async -> GifFileTranseferable? {
     return await withCheckedContinuation { continuation in
       _ = item.loadTransferable(type: GifFileTranseferable.self) { result in
@@ -105,7 +105,7 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
       }
     }
   }
-  
+
   private func getImageTansferable(item: NSItemProvider) async -> ImageFileTranseferable? {
     return await withCheckedContinuation { continuation in
       _ = item.loadTransferable(type: ImageFileTranseferable.self) { result in
@@ -140,7 +140,7 @@ struct MovieFileTranseferable: Transferable {
       }
     }
   }
-  
+
   static var transferRepresentation: some TransferRepresentation {
     FileRepresentation(contentType: .movie) { movie in
       SentTransferredFile(movie.url)
@@ -152,10 +152,10 @@ struct MovieFileTranseferable: Transferable {
 
 struct ImageFileTranseferable: Transferable {
   let url: URL
-  
+
   lazy var data: Data? = try? Data(contentsOf: url)
   lazy var image: UIImage? = UIImage(data: data ?? Data())
-  
+
   static var transferRepresentation: some TransferRepresentation {
     FileRepresentation(contentType: .image) { image in
       SentTransferredFile(image.url)
@@ -167,11 +167,11 @@ struct ImageFileTranseferable: Transferable {
 
 struct GifFileTranseferable: Transferable {
   let url: URL
-  
+
   var data: Data? {
     try? Data(contentsOf: url)
   }
-  
+
   static var transferRepresentation: some TransferRepresentation {
     FileRepresentation(contentType: .gif) { gif in
       SentTransferredFile(gif.url)
@@ -196,7 +196,6 @@ public extension URL {
     }
   }
 }
-
 
 extension UIImage {
   func resized(to size: CGSize) -> UIImage {
