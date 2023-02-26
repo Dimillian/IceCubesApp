@@ -289,7 +289,7 @@
 "conversations.error.title" = "Wystąpił błąd";
 "conversations.navigation-title" = "Wiadomości bezpośrednie";
 "conversations.new.message.placeholder" = "Nowa wiadomość";
-"conversations.latest.message" = "Latest Message";
+"conversations.latest.message" = "Najnowsza wiadomość";
 
 // MARK: Package: DesignSystem
 "design.theme.navigation-title" = "Wybór motywu";
