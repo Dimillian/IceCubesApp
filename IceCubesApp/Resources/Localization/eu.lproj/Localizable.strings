@@ -58,7 +58,7 @@
 
 // MARK: Menu
 "menu.new-post" = "Bidalketa berria";
-"menu.font" = "Letra-tipoa";
+"menu.font" = "Letra tipoa";
 "menu.font.bigger" = "Handiagoa";
 "menu.font.smaller" = "Txikiagoa";
 
@@ -185,7 +185,7 @@
 "settings.swipeactions.use-theme-colors-explanation" = "Erabili hautatutako kolorea defektuzko koloreen ordez";
 "settings.swipeactions.icon-style" = "Ikonoen itxura";
 
-"settings.display.section.font" = "Letra-tipoa";
+"settings.display.section.font" = "Letra tipoa";
 
 "settings.section.cache" = "Katxea";
 "settings.cache-media.clear" = "Garbitu multimedia katxea";
@@ -234,7 +234,7 @@
 "account.action.share" = "Partekatu kontua";
 "account.boosted-by" = "Hauek bultzatua:";
 "account.detail.about" = "Honi buruz";
-"account.detail.familiar-followers" = "Hauek ere jarraitzen dute:";
+"account.detail.familiar-followers" = "Hauek ere jarraitzen diote:";
 "account.edit.about" = "Zure buruari buruz";
 "account.edit.account-settings.bot" = "Bot kontua";
 "account.edit.account-settings.discoverable" = "Aurki zaitzakete";
@@ -292,7 +292,7 @@
 "conversations.error.title" = "Errorea gertatu da";
 "conversations.navigation-title" = "Mezu zuzenak";
 "conversations.new.message.placeholder" = "Mezu berria";
-"conversations.latest.message" = "Latest Message";
+"conversations.latest.message" = "Mezu berriena";
 
 // MARK: Package: DesignSystem
 "design.theme.navigation-title" = "Gai hautatzailea";
@@ -380,7 +380,7 @@
 "status.action.copy-link" = "Kopiatu esteka";
 "status.action.delete" = "Ezabatu";
 "status.action.delete.confirm.title" = "Baieztatu";
-"status.action.delete.confirm.message" = "Ziur zaude bidalketa ezabatu nahi duzula?";
+"status.action.delete.confirm.message" = "Ziur bidalketa ezabatu nahi duzula?";
 "status.action.edit" = "Editatu";
 "status.action.favorite" = "Egin gogoko";
 "status.action.mention" = "Aipatu";
