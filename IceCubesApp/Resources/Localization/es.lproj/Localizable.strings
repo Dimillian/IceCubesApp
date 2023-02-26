@@ -132,6 +132,8 @@
 "settings.system" = "Ajustes del sistema";
 "settings.content.navigation-title" = "Ajustes de contenido";
 "settings.content.boosts" = "Retoots";
+"settings.content.collapse-long-posts" = "Collapse long posts";
+"settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
 "settings.content.hide-repeated-boosts" = "Ocultar retoots repetidos";
 "settings.content.instance-settings" = "Ajustes de contenido del servidor";
 "settings.content.use-instance-settings" = "Usar ajustes del servidor";
@@ -458,6 +460,7 @@
 "status.row.you-boosted" = "Retooteaste";
 "status.show-less" = "Mostrar menos";
 "status.show-more" = "Mostrar más";
+"status.show-full-post" = "Show full post";
 "status.summary.at-time" = " a las ";
 "status.summary.edited-time" = "Última edición: ";
 "status.summary.n-boosts %lld" = "%lld retoots";

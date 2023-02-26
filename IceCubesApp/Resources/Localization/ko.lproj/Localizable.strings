@@ -108,6 +108,8 @@
 "settings.system" = "시스템 설정";
 "settings.content.navigation-title" = "콘텐츠 설정";
 "settings.content.boosts" = "부스트";
+"settings.content.collapse-long-posts" = "Collapse long posts";
+"settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
 "settings.content.hide-repeated-boosts" = "중복으로 부스트된 글 숨기기";
 "settings.content.instance-settings" = "인스턴스 콘텐츠 설정";
 "settings.content.use-instance-settings" = "인스턴스 설정에 맞추기";
@@ -459,6 +461,7 @@
 "status.row.you-boosted" = "내가 부스트함";
 "status.show-less" = "간략히 보기";
 "status.show-more" = "더 보기";
+"status.show-full-post" = "Show full post";
 "status.summary.at-time" = " ";
 "status.summary.edited-time" = "마지막 수정: ";
 "status.summary.n-boosts %lld" = "부스트 %lld회";

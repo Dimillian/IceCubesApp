@@ -132,6 +132,8 @@
 "settings.system" = "Systeeminstellingen";
 "settings.content.navigation-title" = "Inhoud";
 "settings.content.boosts" = "Boosts";
+"settings.content.collapse-long-posts" = "Collapse long posts";
+"settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
 "settings.content.hide-repeated-boosts" = "Verberg herhaalde boosts";
 "settings.content.instance-settings" = "Serverinstellingen voor inhoud";
 "settings.content.use-instance-settings" = "Gebruik serverinstellingen";
@@ -451,6 +453,7 @@
 "status.row.you-boosted" = "Je boostte";
 "status.show-less" = "Toon minder";
 "status.show-more" = "Toon meer";
+"status.show-full-post" = "Show full post";
 "status.summary.at-time" = " om ";
 "status.summary.edited-time" = "Laatst gewijzigd: ";
 "status.summary.n-boosts %lld" = "%lld boosts";

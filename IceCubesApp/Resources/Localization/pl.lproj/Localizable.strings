@@ -108,6 +108,8 @@
 "settings.system" = "Ustawienia systemowe";
 "settings.content.navigation-title" = "Ustawienia treści";
 "settings.content.boosts" = "Podbicia";
+"settings.content.collapse-long-posts" = "Collapse long posts";
+"settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
 "settings.content.hide-repeated-boosts" = "Ukryj powtórzone podbicia";
 "settings.content.instance-settings" = "Ustawienia treści serwera";
 "settings.content.use-instance-settings" = "Zastosuj ustawienia serwera";
@@ -451,6 +453,7 @@
 "status.row.you-boosted" = "Podbiłeś(aś)";
 "status.show-less" = "Pokaż mniej";
 "status.show-more" = "Pokaż więcej";
+"status.show-full-post" = "Show full post";
 "status.summary.at-time" = " o ";
 "status.summary.edited-time" = "Ostatnia edycja: ";
 "status.visibility.direct" = "Post bezpośredni";

@@ -37,6 +37,36 @@ public class StatusRowViewModel: ObservableObject {
   @Published var localStatusId: String?
   @Published var localStatus: Status?
 
+  // used by the button to expand a collapsed post
+  @Published var isCollapsed: Bool = true {
+    didSet {
+      recalcCollapse()
+    }
+  }
+  // number of lines to show, nil means show the whole post
+  @Published var lineLimit: Int? = nil
+  // post length determining if the post should be collapsed
+  let collapseThresholdLength : Int = 750
+  // number of text lines to show on a collpased post
+  let collapsedLines: Int = 8
+  var _collapseLongPosts: Bool = false
+  var collapseLongPosts: Bool {
+    get {
+      _collapseLongPosts
+    }
+    set {
+      _collapseLongPosts = newValue
+      recalcCollapse()
+    }
+  }
+  
+  private func recalcCollapse() {
+    let hasContentWarning = !status.spoilerText.asRawText.isEmpty
+    let showCollapseButton = collapseLongPosts && isCollapsed && !hasContentWarning
+      && (status.reblog?.content ?? status.content).asRawText.unicodeScalars.count > collapseThresholdLength
+    lineLimit = showCollapseButton && isCollapsed ? collapsedLines : nil
+  }
+  
   private let theme = Theme.shared
   private let userMentionned: Bool
 

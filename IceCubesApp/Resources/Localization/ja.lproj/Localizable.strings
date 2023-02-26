@@ -112,6 +112,8 @@
 "settings.system" = "システム設定";
 "settings.content.navigation-title" = "コンテンツ設定";
 "settings.content.boosts" = "ブースト";
+"settings.content.collapse-long-posts" = "Collapse long posts";
+"settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
 "settings.content.hide-repeated-boosts" = "度重なるブーストを隠す";
 "settings.content.instance-settings" = "サーバーコンテンツ設定";
 "settings.content.use-instance-settings" = "サーバー設定を使用する";
@@ -457,6 +459,7 @@
 "status.row.you-boosted" = "ブーストしました";
 "status.show-less" = "表示項目を減らす";
 "status.show-more" = "表示項目を増やす";
+"status.show-full-post" = "Show full post";
 "status.summary.at-time" = " at ";
 "status.summary.edited-time" = "最新編集日: ";
 "status.summary.n-boosts %lld" = "%lld ブースト";

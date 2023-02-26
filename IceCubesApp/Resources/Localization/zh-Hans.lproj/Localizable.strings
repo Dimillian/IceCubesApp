@@ -133,6 +133,8 @@
 "settings.system" = "系统设置";
 "settings.content.navigation-title" = "内容设置";
 "settings.content.boosts" = "转发";
+"settings.content.collapse-long-posts" = "Collapse long posts";
+"settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
 "settings.content.hide-repeated-boosts" = "隐藏重复的转发";
 "settings.content.instance-settings" = "服务器内容设置";
 "settings.content.use-instance-settings" = "使用服务器设置";
@@ -456,6 +458,7 @@
 "status.row.you-boosted" = "你转发了";
 "status.show-less" = "显示更少";
 "status.show-more" = "显示更多";
+"status.show-full-post" = "Show full post";
 "status.summary.at-time" = " 在 ";
 "status.summary.edited-time" = "上次编辑：";
 "status.summary.n-boosts %lld" = "%lld 转发";
