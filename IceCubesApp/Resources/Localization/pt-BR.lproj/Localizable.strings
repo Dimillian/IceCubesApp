@@ -24,14 +24,14 @@
 "enum.avatar-position.top" = "Topo";
 "enum.avatar-shape.circle" = "Círculo";
 "enum.avatar-shape.rounded" = "Arredondado";
-"enum.durations.infinite" = "infinite";
-"enum.durations.fiveMinutes" = "5 minutes";
-"enum.durations.thirtyMinutes" = "30 minutes";
-"enum.durations.oneHour" = "1 hour";
-"enum.durations.sixHours" = "6 hours";
-"enum.durations.oneDay" = "1 day";
-"enum.durations.threeDays" = "3 days";
-"enum.durations.sevenDays" = "7 days";
+"enum.durations.infinite" = "infinito";
+"enum.durations.fiveMinutes" = "5 minutos";
+"enum.durations.thirtyMinutes" = "30 minutos";
+"enum.durations.oneHour" = "1 hora";
+"enum.durations.sixHours" = "6 horas";
+"enum.durations.oneDay" = "1 dia";
+"enum.durations.threeDays" = "3 dias";
+"enum.durations.sevenDays" = "7 dias";
 "enum.status-actions-display.all" = "Todos";
 "enum.status-actions-display.no-buttons" = "Sem botões";
 "enum.status-actions-display.only-buttons" = "Somente botões";
@@ -57,7 +57,7 @@
 "instance.url" = "URL da Instância";
 
 // MARK: Menu
-"menu.new-post" = "Novo post";
+"menu.new-post" = "Nova postagem";
 "menu.font" = "Fonte";
 "menu.font.bigger" = "Maior";
 "menu.font.smaller" = "Menor";
@@ -66,15 +66,15 @@
 "settings.account.add" = "Adicionar conta";
 "settings.app.icon" = "Ícone do App";
 "settings.app.icon.navigation-title" = "Ícones";
-"settings.app.icon.official" = "Official icons";
-"settings.app.icon.designed-by" = "Icons by";
+"settings.app.icon.official" = "Ícones oficiais";
+"settings.app.icon.designed-by" = "Ícones por";
 "settings.app.source" = "Código fonte (link GitHub)";
 "settings.app.support" = "Apoie o app";
-"settings.app.about" = "About";
+"settings.app.about" = "Sobre";
 "settings.display.example-toot" = "Examplo de postagem";
 "settings.display.avatar.position" = "Posição do avatar";
 "settings.display.avatar.shape" = "Formato do avatar";
-"settings.display.full-username" = "Display full username";
+"settings.display.full-username" = "Mostrar nome de usuário completo";
 "settings.display.navigation-title" = "Ver Configurações";
 "settings.display.restore" = "Restaurar padrões";
 "settings.display.section.display" = "Exibir";
@@ -110,15 +110,15 @@
 "settings.content.boosts" = "Boosts";
 "settings.content.collapse-long-posts" = "Collapse long posts";
 "settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
-"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
-"settings.content.instance-settings" = "Server Content Settings";
+"settings.content.hide-repeated-boosts" = "Ocultar boosts repetidos";
+"settings.content.instance-settings" = "Configurações de conteúdo do servidor";
 "settings.content.use-instance-settings" = "Usar configurações do servidor";
 "settings.content.expand-spoilers" = "Sempre exibir postagens sensíveis";
 "settings.content.expand-media" = "Exibição de mídia";
 "settings.content.default-sensitive" = "Sempre marcar mídias como sensíveis";
 "settings.content.default-visibility" = "Visibilidade da postagem";
-"settings.content.media" = "Media";
-"settings.content.media.show.alt" = "Show ALT texts";
+"settings.content.media" = "Mídia";
+"settings.content.media.show.alt" = "Mostrar textos ALT";
 "settings.content.reading" = "Lendo";
 "settings.content.posting" = "Postagem";
 "enum.expand-media.show" = "Exibir Todas";
@@ -193,7 +193,7 @@
 "settings.display.section.font" = "Fonte";
 
 "settings.section.cache" = "Cache";
-"settings.cache-media.clear" = "Clear Media Cache";
+"settings.cache-media.clear" = "Limpar Cache de Mídia";
 
 // MARK: Tabs
 "tab.explore" = "Explorar";
