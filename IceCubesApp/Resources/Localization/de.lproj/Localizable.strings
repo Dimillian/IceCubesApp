@@ -132,8 +132,8 @@
 "settings.system" = "Systemeinstellungen";
 "settings.content.navigation-title" = "Inhaltseinstellungen";
 "settings.content.boosts" = "Boosts";
-"settings.content.collapse-long-posts" = "Collapse long posts";
-"settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
+"settings.content.collapse-long-posts" = "Lange Beiträge einklappen";
+"settings.content.collapse-long-posts-hint" = "Eingeklappte Beiträge zeigen nur eine begrenzte Anzahl an Zeilen sowie eine Schaltfläche an, mit der der komplette Beitrag angezeigt werden kann";
 "settings.content.hide-repeated-boosts" = "Wiederholte Boosts verstecken";
 "settings.content.instance-settings" = "Serverinhaltseinstellungen";
 "settings.content.use-instance-settings" = "Servereinstellungen verwenden";
@@ -381,7 +381,7 @@
 "status.action.boost" = "Boosten";
 "status.action.boost-to-followers" = "An Follower boosten";
 "status.action.copy-text" = "Text kopieren";
-"status.action.copy-link" = "Copy Link";
+"status.action.copy-link" = "Link kopieren";
 "status.action.delete" = "Löschen";
 "status.action.delete.confirm.title" = "Bestätigen";
 "status.action.delete.confirm.message" = "Bist du dir sicher, dass du diesen Beitrag löschen möchtest?";
