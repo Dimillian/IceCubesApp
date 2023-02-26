@@ -107,6 +107,8 @@
 "settings.general.content" = "Content Settings";
 "settings.system" = "System Settings";
 "settings.content.navigation-title" = "Content Settings";
+"settings.content.collapse-long-posts" = "Collapse long posts";
+"settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
 "settings.content.boosts" = "Yükseltmeler";
 "settings.content.hide-repeated-boosts" = "Hide repeated boosts";
 "settings.content.instance-settings" = "Server Content Settings";
@@ -453,6 +455,7 @@
 "status.row.you-boosted" = "Yükselttin";
 "status.show-less" = "Daha az göster";
 "status.show-more" = "Daha fazla göster";
+"status.show-full-post" = "Show full post";
 "status.summary.at-time" = " de ";
 "status.summary.edited-time" = "Son düzenleme: ";
 "status.summary.n-boosts %lld" = "%lld yükseltmeler";

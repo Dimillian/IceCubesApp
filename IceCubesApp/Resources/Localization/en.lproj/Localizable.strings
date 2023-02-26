@@ -112,6 +112,8 @@
 "settings.system" = "System Settings";
 "settings.content.navigation-title" = "Content Settings";
 "settings.content.boosts" = "Boosts";
+"settings.content.collapse-long-posts" = "Collapse long posts";
+"settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
 "settings.content.hide-repeated-boosts" = "Hide Repeated Boosts";
 "settings.content.instance-settings" = "Server Content Settings";
 "settings.content.use-instance-settings" = "Use Server Settings";
@@ -458,6 +460,7 @@
 "status.row.you-boosted" = "You boosted";
 "status.show-less" = "Show less";
 "status.show-more" = "Show more";
+"status.show-full-post" = "Show full post";
 "status.summary.at-time" = " at ";
 "status.summary.edited-time" = "Last edited: ";
 "status.summary.n-boosts %lld" = "%lld boosts";

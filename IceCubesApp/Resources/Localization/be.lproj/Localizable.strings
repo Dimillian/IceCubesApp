@@ -112,6 +112,8 @@
 "settings.system" = "Сістэмныя налады";
 "settings.content.navigation-title" = "Налады змесціву";
 "settings.content.boosts" = "Павышэння";
+"settings.content.collapse-long-posts" = "Collapse long posts";
+"settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
 "settings.content.hide-repeated-boosts" = "Схаваць паўторныя павышэння";
 "settings.content.instance-settings" = "Налады змесціва серверу";
 "settings.content.use-instance-settings" = "Ужыць налады серверу";
@@ -462,6 +464,7 @@
 "status.row.you-boosted" = "Вы ўзмацнілі";
 "status.show-less" = "Паказваць менш";
 "status.show-more" = "Паказаць больш";
+"status.show-full-post" = "Show full post";
 "status.summary.at-time" = " а ";
 "status.summary.edited-time" = "Апошняе рэдагаванне:";
 "status.summary.n-boosts %lld" = "%lld павышаных";

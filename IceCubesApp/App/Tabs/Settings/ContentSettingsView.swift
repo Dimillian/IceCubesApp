@@ -43,19 +43,28 @@ struct ContentSettingsView: View {
         }
       }
 
-      Section("settings.content.reading") {
+      Section {
         Toggle(isOn: $userPreferences.appAutoExpandSpoilers) {
           Text("settings.content.expand-spoilers")
         }
         .disabled(userPreferences.useInstanceContentSettings)
-
+        
         Picker("settings.content.expand-media", selection: $userPreferences.appAutoExpandMedia) {
           ForEach(ServerPreferences.AutoExpandMedia.allCases, id: \.rawValue) { media in
             Text(media.description).tag(media)
           }
         }
         .disabled(userPreferences.useInstanceContentSettings)
-      }.listRowBackground(theme.primaryBackgroundColor)
+        
+        Toggle(isOn: $userPreferences.collapseLongPosts) {
+          Text("settings.content.collapse-long-posts")
+        }
+      } header: {
+        Text("settings.content.reading")
+      } footer: {
+        Text("settings.content.collapse-long-posts-hint")
+      }
+      .listRowBackground(theme.primaryBackgroundColor)
 
       Section("settings.content.posting") {
         Picker("settings.content.default-visibility", selection: $userPreferences.appDefaultPostVisibility) {

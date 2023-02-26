@@ -111,6 +111,8 @@
 "settings.general.content" = "Налаштування вмісту";
 "settings.system" = "Системні налаштування";
 "settings.content.navigation-title" = "Налаштування вмісту";
+"settings.content.collapse-long-posts" = "Collapse long posts";
+"settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
 "settings.content.boosts" = "Поширення";
 "settings.content.hide-repeated-boosts" = "Не відображати повторні поширення";
 "settings.content.instance-settings" = "Налаштування відображення сервера";
@@ -458,6 +460,7 @@
 "status.row.you-boosted" = "Ви поширили";
 "status.show-less" = "Показати менше";
 "status.show-more" = "Показати більше";
+"status.show-full-post" = "Show full post";
 "status.summary.at-time" = " о ";
 "status.summary.edited-time" = "Востаннє змінено: ";
 "status.summary.n-boosts %lld" = "%lld поширень";

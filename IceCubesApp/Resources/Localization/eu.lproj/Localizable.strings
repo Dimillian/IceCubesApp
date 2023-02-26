@@ -132,6 +132,8 @@
 "settings.system" = "Sistemaren ezarpenak";
 "settings.content.navigation-title" = "Edukiaren ezarpenak";
 "settings.content.boosts" = "Bultzadak";
+"settings.content.collapse-long-posts" = "Collapse long posts";
+"settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
 "settings.content.hide-repeated-boosts" = "Ezkutatu errepikatutako bultzadak";
 "settings.content.instance-settings" = "Edukiari buruzko ezarpenak";
 "settings.content.use-instance-settings" = "Erabili zerbitzariko ezarpenak";
@@ -450,6 +452,7 @@
 "status.row.you-boosted" = "Zuk bultzatua";
 "status.show-less" = "Ikusi gutxiago";
 "status.show-more" = "Ikusi gehiago";
+"status.show-full-post" = "Show full post";
 "status.summary.at-time" = " · ";
 "status.summary.edited-time" = "Azkenekoz editatua: ";
 "status.visibility.direct" = "Aipatutakoak";
