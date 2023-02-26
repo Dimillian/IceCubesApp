@@ -304,7 +304,9 @@ extension TimelineViewModel: StatusesFetcher {
     var allStatuses: [Status] = []
     var latestMinId = minId
     do {
-      while var newStatuses: [Status] =
+      while
+        !Task.isCancelled,
+        var newStatuses: [Status] =
         try await client.get(endpoint: timeline.endpoint(sinceId: nil,
                                                          maxId: nil,
                                                          minId: latestMinId,
