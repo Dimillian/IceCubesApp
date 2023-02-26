@@ -103,11 +103,6 @@ class TimelineViewModel: ObservableObject {
       {
         pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
         let newStatus = event.status
-        if let accountId {
-          if newStatus.mentions.first(where: { $0.id == accountId }) != nil {
-            newStatus.userMentioned = true
-          }
-        }
         await datasource.insert(newStatus, at: 0)
         await cacheHome()
         let statuses = await datasource.get()
@@ -212,7 +207,6 @@ extension TimelineViewModel: StatusesFetcher {
                                                                                 minId: nil,
                                                                                 offset: 0))
 
-      updateMentionsToBeHighlighted(&statuses)
       ReblogCache.shared.removeDuplicateReblogs(&statuses)
 
       await datasource.set(statuses)
@@ -320,7 +314,6 @@ extension TimelineViewModel: StatusesFetcher {
       {
         pagesLoaded += 1
 
-        updateMentionsToBeHighlighted(&newStatuses)
         ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
 
         allStatuses.insert(contentsOf: newStatuses, at: 0)
@@ -342,7 +335,6 @@ extension TimelineViewModel: StatusesFetcher {
                                                                                    minId: nil,
                                                                                    offset: datasource.get().count))
 
-      updateMentionsToBeHighlighted(&newStatuses)
       ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
 
       await datasource.append(contentOf: newStatuses)
@@ -351,16 +343,6 @@ extension TimelineViewModel: StatusesFetcher {
                                      nextPageState: newStatuses.count < 20 ? .none : .hasNextPage)
     } catch {
       statusesState = .error(error: error)
-    }
-  }
-
-  private func updateMentionsToBeHighlighted(_ statuses: inout [Status]) {
-    if !statuses.isEmpty, let accountId {
-      for i in statuses.indices {
-        if statuses[i].mentions.first(where: { $0.id == accountId }) != nil {
-          statuses[i].userMentioned = true
-        }
-      }
     }
   }
 

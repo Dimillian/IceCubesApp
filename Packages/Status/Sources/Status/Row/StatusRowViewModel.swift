@@ -38,6 +38,7 @@ public class StatusRowViewModel: ObservableObject {
   @Published var localStatus: Status?
 
   private let theme = Theme.shared
+  private let userMentionned: Bool
 
   private var seen = false
 
@@ -53,7 +54,7 @@ public class StatusRowViewModel: ObservableObject {
   var highlightRowColor: Color {
     if status.visibility == .direct {
       return theme.tintColor.opacity(0.15)
-    } else if status.userMentioned != nil {
+    } else if userMentionned {
       return theme.secondaryBackgroundColor
     } else {
       return theme.primaryBackgroundColor
@@ -96,6 +97,13 @@ public class StatusRowViewModel: ObservableObject {
       displaySpoiler = !(status.reblog?.spoilerText.asRawText ?? status.spoilerText.asRawText).isEmpty
     }
 
+    
+    if status.mentions.first(where: { $0.id == CurrentAccount.shared.account?.id }) != nil {
+      userMentionned = true
+    } else {
+      userMentionned = false
+    }
+    
     isFiltered = filter != nil
 
     if let url = embededStatusURL(),
