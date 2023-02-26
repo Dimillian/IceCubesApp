@@ -76,7 +76,7 @@ struct StatusRowHeaderView: View {
 
   private var accountBadgeView: Text {
     if (viewModel.status.reblogAsAsStatus ?? viewModel.status).account.bot {
-      return Text(Image(systemName: "gearshape.fill")) + Text(" ")
+      return Text(Image(systemName: "poweroutlet.type.b.fill")) + Text(" ")
     } else if (viewModel.status.reblogAsAsStatus ?? viewModel.status).account.locked {
       return Text(Image(systemName: "lock.fill")) + Text(" ")
     }
