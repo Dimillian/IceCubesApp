@@ -100,7 +100,7 @@ public struct EditAccountView: View {
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
-  
+
   private var fieldsSection: some View {
     Section("account.edit.metadata-section-title") {
       ForEach($viewModel.fields) { $field in

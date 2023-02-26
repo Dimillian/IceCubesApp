@@ -62,10 +62,10 @@ public struct AccountsListRow: View {
          let relationShip = viewModel.relationShip
       {
         VStack(alignment: .center) {
-            FollowButton(viewModel: .init(accountId: viewModel.account.id,
-                                      relationship: relationShip,
-                                      shouldDisplayNotify: false,
-                                      relationshipUpdated: { _ in }))
+          FollowButton(viewModel: .init(accountId: viewModel.account.id,
+                                        relationship: relationShip,
+                                        shouldDisplayNotify: false,
+                                        relationshipUpdated: { _ in }))
         }
       }
     }

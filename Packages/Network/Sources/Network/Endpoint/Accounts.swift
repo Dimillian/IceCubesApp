@@ -159,23 +159,23 @@ public struct UpdateCredentialsData: Encodable, Sendable {
   public struct SourceData: Encodable, Sendable {
     public let privacy: Visibility
     public let sensitive: Bool
-    
+
     public init(privacy: Visibility, sensitive: Bool) {
       self.privacy = privacy
       self.sensitive = sensitive
     }
   }
-  
+
   public struct FieldData: Encodable, Sendable {
     public let name: String
     public let value: String
-    
+
     public init(name: String, value: String) {
       self.name = name
       self.value = value
     }
   }
-  
+
   public let displayName: String
   public let note: String
   public let source: SourceData
@@ -183,26 +183,26 @@ public struct UpdateCredentialsData: Encodable, Sendable {
   public let locked: Bool
   public let discoverable: Bool
   public let fieldsAttributes: [String: FieldData]
-  
+
   public init(displayName: String,
               note: String,
               source: UpdateCredentialsData.SourceData,
               bot: Bool,
               locked: Bool,
               discoverable: Bool,
-              fieldsAttributes: [FieldData]) {
+              fieldsAttributes: [FieldData])
+  {
     self.displayName = displayName
     self.note = note
     self.source = source
     self.bot = bot
     self.locked = locked
     self.discoverable = discoverable
-    
+
     var fieldAttributes: [String: FieldData] = [:]
     for (index, field) in fieldsAttributes.enumerated() {
       fieldAttributes[String(index)] = field
     }
     self.fieldsAttributes = fieldAttributes
   }
-  
 }

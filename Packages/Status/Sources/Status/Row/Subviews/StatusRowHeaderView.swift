@@ -73,7 +73,7 @@ struct StatusRowHeaderView: View {
       }
     }
   }
-  
+
   private var accountBadgeView: Text {
     if (viewModel.status.reblogAsAsStatus ?? viewModel.status).account.bot {
       return Text(Image(systemName: "gearshape.fill")) + Text(" ")
@@ -85,8 +85,8 @@ struct StatusRowHeaderView: View {
 
   private var dateView: Text {
     Text(status.createdAt.relativeFormatted) +
-    Text(" ⸱ ") +
-    Text(Image(systemName: viewModel.status.visibility.iconName))
+      Text(" ⸱ ") +
+      Text(Image(systemName: viewModel.status.visibility.iconName))
   }
 
   @ViewBuilder

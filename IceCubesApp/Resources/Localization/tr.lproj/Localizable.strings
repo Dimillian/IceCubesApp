@@ -287,6 +287,7 @@
 "conversations.error.title" = "Bir hata oluştu";
 "conversations.navigation-title" = "Direkt Mesajlar";
 "conversations.new.message.placeholder" = "Yeni Mesaj";
+"conversations.latest.message" = "Latest Message";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld katılımcılar tarafından %lld gönderi";

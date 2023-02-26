@@ -4,18 +4,17 @@ import SwiftUI
 
 @MainActor
 class EditAccountViewModel: ObservableObject {
-  
   class FieldEditViewModel: ObservableObject, Identifiable {
     let id = UUID().uuidString
     @Published var name: String = ""
     @Published var value: String = ""
-    
+
     init(name: String, value: String) {
       self.name = name
       self.value = value
     }
   }
-  
+
   public var client: Client?
 
   @Published var displayName: String = ""
@@ -44,7 +43,7 @@ class EditAccountViewModel: ObservableObject {
       isBot = account.bot
       isLocked = account.locked
       isDiscoverable = account.discoverable ?? false
-      fields = account.source?.fields.map{ .init(name: $0.name, value: $0.value.asRawText) } ?? []
+      fields = account.source?.fields.map { .init(name: $0.name, value: $0.value.asRawText) } ?? []
       withAnimation {
         isLoading = false
       }
@@ -60,7 +59,7 @@ class EditAccountViewModel: ObservableObject {
                                        bot: isBot,
                                        locked: isLocked,
                                        discoverable: isDiscoverable,
-                                       fieldsAttributes: fields.map{ .init(name: $0.name, value: $0.value)})
+                                       fieldsAttributes: fields.map { .init(name: $0.name, value: $0.value) })
       let response = try await client?.patch(endpoint: Accounts.updateCredentials(json: data))
       if response?.statusCode != 200 {
         saveError = true

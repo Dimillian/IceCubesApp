@@ -46,7 +46,7 @@ public enum TimelineFilter: Hashable, Equatable {
     }
     return [.home, .local, .federated, .trending]
   }
-  
+
   public var supportNewestPagination: Bool {
     switch self {
     case .trending:

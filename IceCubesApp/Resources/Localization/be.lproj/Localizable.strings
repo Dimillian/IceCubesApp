@@ -296,6 +296,7 @@
 "conversations.error.title" = "Памылка падчас загрузкі вашых паведамленняў";
 "conversations.navigation-title" = "Непасрэдныя паведамленні";
 "conversations.new.message.placeholder" = "Новае паведамленне";
+"conversations.latest.message" = "Latest Message";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld допісы ад %lld удзельнікаў";

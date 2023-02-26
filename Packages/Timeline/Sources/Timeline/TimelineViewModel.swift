@@ -147,7 +147,7 @@ extension TimelineViewModel {
     }
     return nil
   }
-  
+
   private func clearHomeCache() async {
     if let client, timeline == .home {
       await cache.clearCache(for: client.id)

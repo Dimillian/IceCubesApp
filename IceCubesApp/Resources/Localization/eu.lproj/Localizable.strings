@@ -292,6 +292,7 @@
 "conversations.error.title" = "Errorea gertatu da";
 "conversations.navigation-title" = "Mezu zuzenak";
 "conversations.new.message.placeholder" = "Mezu berria";
+"conversations.latest.message" = "Latest Message";
 
 // MARK: Package: DesignSystem
 "design.theme.navigation-title" = "Gai hautatzailea";

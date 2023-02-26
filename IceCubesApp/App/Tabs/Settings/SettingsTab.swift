@@ -5,9 +5,9 @@ import Env
 import Foundation
 import Models
 import Network
+import Nuke
 import SwiftUI
 import Timeline
-import Nuke
 
 struct SettingsTabs: View {
   @Environment(\.dismiss) private var dismiss
@@ -275,7 +275,7 @@ struct SettingsTabs: View {
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
   }
-  
+
   private var cacheSection: some View {
     Section("settings.section.cache") {
       if cachedRemoved {

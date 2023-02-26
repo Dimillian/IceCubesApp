@@ -291,6 +291,7 @@
 "conversations.error.title" = "En feil oppstod";
 "conversations.navigation-title" = "Direktemeldinger";
 "conversations.new.message.placeholder" = "Ny melding";
+"conversations.latest.message" = "Latest Message";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld innlegg fra %lld deltakere";

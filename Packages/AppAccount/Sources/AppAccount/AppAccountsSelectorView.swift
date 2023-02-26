@@ -13,13 +13,13 @@ public struct AppAccountsSelectorView: View {
 
   private let accountCreationEnabled: Bool
   private let avatarSize: AvatarView.Size
-  
+
   var showNotificationBadge: Bool {
     accountsViewModel
-     .filter { $0.account?.id != currentAccount.account?.id }
-     .compactMap{ $0.appAccount.oauthToken }
-     .map{ preferences.getNotificationsCount(for: $0) }
-     .reduce(0, +) > 0
+      .filter { $0.account?.id != currentAccount.account?.id }
+      .compactMap { $0.appAccount.oauthToken }
+      .map { preferences.getNotificationsCount(for: $0) }
+      .reduce(0, +) > 0
   }
 
   public init(routerPath: RouterPath,
