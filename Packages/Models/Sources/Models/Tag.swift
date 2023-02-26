@@ -58,3 +58,7 @@ public struct FeaturedTag: Codable, Identifiable {
     }
   }
 }
+
+extension Tag: Sendable {}
+extension Tag.History: Sendable {}
+extension FeaturedTag: Sendable {}

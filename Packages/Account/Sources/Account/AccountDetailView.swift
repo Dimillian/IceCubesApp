@@ -82,6 +82,9 @@ public struct AccountDetailView: View {
       isCurrentUser = currentAccount.account?.id == viewModel.accountId
       viewModel.isCurrentUser = isCurrentUser
       viewModel.client = client
+
+      // Avoid capturing non-Sendable `self` just to access the view model.
+      let viewModel = self.viewModel
       Task {
         await withTaskGroup(of: Void.self) { group in
           group.addTask { await viewModel.fetchAccount() }

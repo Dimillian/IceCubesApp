@@ -17,6 +17,16 @@ struct StatusRowActionsView: View {
   enum Action: CaseIterable {
     case respond, boost, favorite, bookmark, share
 
+    // Have to implement this manually here due to compiler not implicitly
+    // inserting `nonisolated`, which leads to a warning:
+    //
+    //     Main actor-isolated static property 'allCases' cannot be used to
+    //     satisfy nonisolated protocol requirement
+    //
+    nonisolated public static var allCases: [StatusRowActionsView.Action] {
+      [.respond, .boost, .favorite, .bookmark, .share]
+    }
+
     func iconName(viewModel: StatusRowViewModel, privateBoost: Bool = false) -> String {
       switch self {
       case .respond:

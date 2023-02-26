@@ -9,3 +9,5 @@ public struct StatusHistory: Decodable, Identifiable {
   public let createdAt: ServerDate
   public let emojis: [Emoji]
 }
+
+extension StatusHistory: Sendable {}

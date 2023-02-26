@@ -15,3 +15,5 @@ public struct Conversation: Identifiable, Decodable, Hashable, Equatable {
      .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder()]
   }
 }
+
+extension Conversation: Sendable {}

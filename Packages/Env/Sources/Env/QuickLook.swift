@@ -1,3 +1,4 @@
+import Combine
 import QuickLook
 import SwiftUI
 
@@ -68,6 +69,12 @@ public class QuickLook: ObservableObject {
   private func localPathFor(url: URL) async throws -> URL {
     try? FileManager.default.createDirectory(at: quickLookDir, withIntermediateDirectories: true)
     let path = quickLookDir.appendingPathComponent(url.lastPathComponent)
+
+    // Warning: Non-sendable type '(any URLSessionTaskDelegate)?' exiting main actor-isolated
+    // context in call to non-isolated instance method 'data(for:delegate:)' cannot cross actor
+    // boundary.
+    // This is on the defaulted-to-nil second parameter of `.data(from:delegate:)`.
+    // There is a Radar tracking this & others like it.
     let data = try await URLSession.shared.data(from: url).0
     try data.write(to: path)
     return path
