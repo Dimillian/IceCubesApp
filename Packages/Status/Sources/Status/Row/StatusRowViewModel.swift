@@ -49,22 +49,17 @@ public class StatusRowViewModel: ObservableObject {
   let collapseThresholdLength : Int = 750
   // number of text lines to show on a collpased post
   let collapsedLines: Int = 8
-  var _collapseLongPosts: Bool = false
-  var collapseLongPosts: Bool {
-    get {
-      _collapseLongPosts
-    }
-    set {
-      _collapseLongPosts = newValue
-      recalcCollapse()
-    }
-  }
+  // user preference, set in init
+  var collapseLongPosts: Bool = false
   
   private func recalcCollapse() {
     let hasContentWarning = !status.spoilerText.asRawText.isEmpty
     let showCollapseButton = collapseLongPosts && isCollapsed && !hasContentWarning
       && (status.reblog?.content ?? status.content).asRawText.unicodeScalars.count > collapseThresholdLength
-    lineLimit = showCollapseButton && isCollapsed ? collapsedLines : nil
+    let newlineLimit = showCollapseButton && isCollapsed ? collapsedLines : nil
+    if newlineLimit != lineLimit {
+      lineLimit = newlineLimit
+    }
   }
   
   private let theme = Theme.shared
@@ -142,6 +137,9 @@ public class StatusRowViewModel: ObservableObject {
       isEmbedLoading = false
       embeddedStatus = embed
     }
+    
+    collapseLongPosts = UserPreferences.shared.collapseLongPosts
+    recalcCollapse()
   }
 
   func markSeen() {

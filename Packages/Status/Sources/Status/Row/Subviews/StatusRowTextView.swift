@@ -23,12 +23,6 @@ struct StatusRowTextView: View {
       }
       makeCollapseButton()
     }
-    .onAppear {
-      viewModel.collapseLongPosts = preferences.collapseLongPosts
-    }
-    .onChange(of: preferences.collapseLongPosts) { newValue in
-      viewModel.collapseLongPosts = newValue
-    }
   }
 
   @ViewBuilder
