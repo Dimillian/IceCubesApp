@@ -50,9 +50,6 @@ public struct StatusRowMediaPreviewView: View {
 
   private var imageMaxHeight: CGFloat {
     if isNotifications {
-      if UIDevice.current.userInterfaceIdiom == .pad {
-        return 100
-      }
       return 50
     }
     if theme.statusDisplayStyle == .compact {
