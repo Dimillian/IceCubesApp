@@ -156,13 +156,19 @@ extension TimelineViewModel {
 // MARK: - StatusesFetcher
 
 extension TimelineViewModel: StatusesFetcher {
+  func pullToRefresh() async {
+    if !timeline.supportNewestPagination {
+      await reset()
+    }
+    await fetchNewestStatuses()
+  }
+  
   func fetchNewestStatuses() async {
     guard let client else { return }
     do {
-      if await datasource.isEmpty || !timeline.supportNewestPagination {
-        await reset()
+      if await datasource.isEmpty {
         try await fetchFirstPage(client: client)
-      } else if let latest = await datasource.get().first {
+      } else if let latest = await datasource.get().first, timeline.supportNewestPagination {
         try await fetchNewPagesFrom(latestStatus: latest, client: client)
       }
     } catch {
