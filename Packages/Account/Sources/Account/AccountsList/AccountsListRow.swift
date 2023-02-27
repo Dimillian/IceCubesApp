@@ -20,11 +20,15 @@ public class AccountsListRowViewModel: ObservableObject {
 }
 
 public struct AccountsListRow: View {
+  @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var routerPath: RouterPath
   @EnvironmentObject private var client: Client
 
   @StateObject var viewModel: AccountsListRowViewModel
+  
+  @State private var isEditingRelationshipNote: Bool = false
+  
   let isFollowRequest: Bool
   let requestUpdated: (() -> Void)?
 
@@ -76,5 +80,22 @@ public struct AccountsListRow: View {
     .onTapGesture {
       routerPath.navigate(to: .accountDetailWithAccount(account: viewModel.account))
     }
+    .contextMenu {
+      AccountDetailContextMenu(viewModel: .init(account: viewModel.account))
+    } preview: {
+      List {
+        AccountDetailHeaderView(viewModel: .init(account: viewModel.account),
+                                account: viewModel.account,
+                                scrollViewProxy: nil)
+        .applyAccountDetailsRowStyle(theme: theme)
+      }
+      .listStyle(.plain)
+      .scrollContentBackground(.hidden)
+      .background(theme.primaryBackgroundColor)
+      .environmentObject(theme)
+      .environmentObject(currentAccount)
+      .environmentObject(client)
+    }
+
   }
 }

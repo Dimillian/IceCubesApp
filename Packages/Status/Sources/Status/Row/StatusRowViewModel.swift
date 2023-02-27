@@ -38,7 +38,33 @@ public class StatusRowViewModel: ObservableObject {
   @Published var localStatusId: String?
   @Published var localStatus: Status?
 
+  // used by the button to expand a collapsed post
+  @Published var isCollapsed: Bool = true {
+    didSet {
+      recalcCollapse()
+    }
+  }
+  // number of lines to show, nil means show the whole post
+  @Published var lineLimit: Int? = nil
+  // post length determining if the post should be collapsed
+  let collapseThresholdLength : Int = 750
+  // number of text lines to show on a collpased post
+  let collapsedLines: Int = 8
+  // user preference, set in init
+  var collapseLongPosts: Bool = false
+  
+  private func recalcCollapse() {
+    let hasContentWarning = !status.spoilerText.asRawText.isEmpty
+    let showCollapseButton = collapseLongPosts && isCollapsed && !hasContentWarning
+      && (status.reblog?.content ?? status.content).asRawText.unicodeScalars.count > collapseThresholdLength
+    let newlineLimit = showCollapseButton && isCollapsed ? collapsedLines : nil
+    if newlineLimit != lineLimit {
+      lineLimit = newlineLimit
+    }
+  }
+  
   private let theme = Theme.shared
+  private let userMentionned: Bool
 
   private var seen = false
 
@@ -54,7 +80,7 @@ public class StatusRowViewModel: ObservableObject {
   var highlightRowColor: Color {
     if status.visibility == .direct {
       return theme.tintColor.opacity(0.15)
-    } else if status.userMentioned != nil {
+    } else if userMentionned {
       return theme.secondaryBackgroundColor
     } else {
       return theme.primaryBackgroundColor
@@ -97,6 +123,13 @@ public class StatusRowViewModel: ObservableObject {
       displaySpoiler = !(status.reblog?.spoilerText.asRawText ?? status.spoilerText.asRawText).isEmpty
     }
 
+    
+    if status.mentions.first(where: { $0.id == CurrentAccount.shared.account?.id }) != nil {
+      userMentionned = true
+    } else {
+      userMentionned = false
+    }
+    
     isFiltered = filter != nil
 
     if let url = embededStatusURL(),
@@ -105,6 +138,9 @@ public class StatusRowViewModel: ObservableObject {
       isEmbedLoading = false
       embeddedStatus = embed
     }
+    
+    collapseLongPosts = UserPreferences.shared.collapseLongPosts
+    recalcCollapse()
   }
 
   func markSeen() {

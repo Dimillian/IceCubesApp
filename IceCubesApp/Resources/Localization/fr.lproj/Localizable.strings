@@ -108,6 +108,8 @@
 "settings.system" = "Paramètres système";
 "settings.content.navigation-title" = "Paramètres de contenu";
 "settings.content.boosts" = "Boosts";
+"settings.content.collapse-long-posts" = "Collapse long posts";
+"settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
 "settings.content.hide-repeated-boosts" = "Masquer les boosts répétés";
 "settings.content.instance-settings" = "Réglages de contenu serveur";
 "settings.content.use-instance-settings" = "Utiliser les paramètres du serveur";
@@ -453,6 +455,7 @@
 "status.row.you-boosted" = "Vous avez boosté";
 "status.show-less" = "Afficher moins";
 "status.show-more" = "Afficher plus";
+"status.show-full-post" = "Show full post";
 "status.summary.at-time" = " à ";
 "status.summary.edited-time" = "Dernière modification : ";
 "status.summary.n-boosts %lld" = "%lld boosts";

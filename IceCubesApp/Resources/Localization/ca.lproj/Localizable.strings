@@ -108,6 +108,8 @@
 "settings.content.navigation-title" = "Configuració del contacte";
 "settings.content.use-instance-settings" = "Utilitza la configuració del servidor";
 "settings.content.boosts" = "Impulsos";
+"settings.content.collapse-long-posts" = "Collapse long posts";
+"settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
 "settings.content.hide-repeated-boosts" = "Hide repeated boosts";
 "settings.content.instance-settings" = "Server Content Settings";
 "settings.content.expand-spoilers" = "Mostra'm sempre els espòilers";
@@ -456,6 +458,7 @@
 "status.row.you-boosted" = "Heu impulsat";
 "status.show-less" = "Mostra'n menys";
 "status.show-more" = "Mostra'n més";
+"status.show-full-post" = "Show full post";
 "status.summary.at-time" = " a les ";
 "status.summary.edited-time" = "Darrera edició: ";
 "status.summary.n-boosts %lld" = "%lld impulsos";

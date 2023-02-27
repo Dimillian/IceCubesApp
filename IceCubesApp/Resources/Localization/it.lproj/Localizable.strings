@@ -133,6 +133,8 @@
 "settings.content.navigation-title" = "Impostazioni dei contenuti";
 "settings.content.use-instance-settings" = "Utilizza le impostazioni del server";
 "settings.content.boosts" = "Condivisioni";
+"settings.content.collapse-long-posts" = "Collapse long posts";
+"settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
 "settings.content.hide-repeated-boosts" = "Nascondi le condivisioni ripetute";
 "settings.content.instance-settings" = "Configurazione dei contenuti del Server";
 "settings.content.expand-spoilers" = "Visualizza sempre i contenuti sensibili";
@@ -458,6 +460,7 @@
 "status.row.you-boosted" = "Tu hai condiviso";
 "status.show-less" = "Mostra meno";
 "status.show-more" = "Mostra di più";
+"status.show-full-post" = "Show full post";
 "status.summary.at-time" = " alle ";
 "status.summary.edited-time" = "Ultima modifica: ";
 "status.summary.n-boosts %lld" = "%lld condivisioni";

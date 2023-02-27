@@ -137,7 +137,7 @@ struct AccountDetailHeaderView: View {
               .font(.scaledHeadline)
               .emojiSize(Font.scaledHeadlinePointSize)
             if account.bot {
-              Text(Image(systemName: "gearshape.fill"))
+              Text(Image(systemName: "poweroutlet.type.b.fill"))
                 .font(.footnote)
             }
             if account.locked {

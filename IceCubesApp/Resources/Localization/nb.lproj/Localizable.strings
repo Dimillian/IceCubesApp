@@ -112,6 +112,8 @@
 "settings.system" = "Systeminnstillinger";
 "settings.content.navigation-title" = "Innholdsinnstillinger";
 "settings.content.boosts" = "Forsterkninger";
+"settings.content.collapse-long-posts" = "Collapse long posts";
+"settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
 "settings.content.hide-repeated-boosts" = "Hide repeated boosts";
 "settings.content.instance-settings" = "Server Content Settings";
 "settings.content.use-instance-settings" = "Bruk serverinnstillinger";
@@ -457,6 +459,7 @@
 "status.row.you-boosted" = "Du forsterket";
 "status.show-less" = "Vis mindre";
 "status.show-more" = "Vis mer";
+"status.show-full-post" = "Show full post";
 "status.summary.at-time" = "kl ";
 "status.summary.edited-time" = "Sist redigert: ";
 "status.summary.n-boosts %lld" = "%lld forsterkninger";
