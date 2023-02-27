@@ -144,6 +144,14 @@ struct AccountDetailHeaderView: View {
               Text(Image(systemName: "lock.fill"))
                 .font(.footnote)
             }
+            if viewModel.relationship?.blocking == true {
+              Text(Image(systemName: "person.crop.circle.badge.xmark.fill"))
+                .font(.footnote)
+            }
+            if viewModel.relationship?.muting == true {
+              Text(Image(systemName: "speaker.slash.fill"))
+                .font(.footnote)
+            }
           }
           Text("@\(account.acct)")
             .font(.scaledCallout)
