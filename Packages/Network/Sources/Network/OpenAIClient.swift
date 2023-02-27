@@ -105,3 +105,9 @@ public struct OpenAIClient {
     }
   }
 }
+
+extension OpenAIClient: Sendable {}
+extension OpenAIClient.Prompt: Sendable {}
+extension OpenAIClient.Request: Sendable {}
+extension OpenAIClient.Response: Sendable {}
+extension OpenAIClient.Response.Choice: Sendable {}

@@ -64,6 +64,15 @@
       }
     },
     {
+      "identity" : "swift-atomics",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-atomics.git",
+      "state" : {
+        "revision" : "ff3d2212b6b093db7f177d0855adbc4ef9c5f036",
+        "version" : "1.0.3"
+      }
+    },
+    {
       "identity" : "swiftsoup",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/scinfu/SwiftSoup.git",

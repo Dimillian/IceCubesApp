@@ -23,3 +23,6 @@ public struct Notification: Decodable, Identifiable, Equatable {
           status: .placeholder())
   }
 }
+
+extension Notification: Sendable {}
+extension Notification.NotificationType: Sendable {}

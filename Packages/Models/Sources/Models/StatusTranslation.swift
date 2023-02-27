@@ -11,3 +11,5 @@ public struct StatusTranslation: Decodable {
     self.provider = provider
   }
 }
+
+extension StatusTranslation: Sendable {}

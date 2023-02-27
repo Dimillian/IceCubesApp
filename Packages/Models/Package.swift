@@ -17,11 +17,15 @@ let package = Package(
   ],
   dependencies: [
     .package(url: "https://github.com/scinfu/SwiftSoup.git", from: "2.4.3"),
+    .package(url: "https://github.com/apple/swift-atomics.git", from: "1.0.3"),
   ],
   targets: [
     .target(
       name: "Models",
-      dependencies: ["SwiftSoup"]
+      dependencies: [
+        "SwiftSoup",
+        .product(name: "Atomics", package: "swift-atomics")
+      ]
     ),
     .testTarget(
       name: "ModelsTests",

@@ -14,3 +14,5 @@ public struct SearchResults: Decodable {
     accounts.isEmpty && statuses.isEmpty && hashtags.isEmpty
   }
 }
+
+extension SearchResults: Sendable {}

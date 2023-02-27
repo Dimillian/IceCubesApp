@@ -50,3 +50,5 @@ public extension Relationship {
     notifying = try values.decodeIfPresent(Bool.self, forKey: .notifying) ?? false
   }
 }
+
+extension Relationship: Sendable {}

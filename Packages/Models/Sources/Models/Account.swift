@@ -121,3 +121,5 @@ public struct FamiliarAccounts: Decodable {
   public let id: String
   public let accounts: [Account]
 }
+
+extension FamiliarAccounts: Sendable {}
