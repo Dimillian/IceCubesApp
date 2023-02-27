@@ -128,7 +128,7 @@ public struct AccountDetailContextMenu: View {
                   }
                 }
               } label: {
-                Label("account.action.reboosts-hide", systemImage: "arrow.left.arrow.right.circle.fill")
+                Label("account.action.reboosts-hide", image: "Rocket.Fill")
               }
             } else {
               Button {
@@ -142,7 +142,7 @@ public struct AccountDetailContextMenu: View {
                   }
                 }
               } label: {
-                Label("account.action.reboosts-show", systemImage: "arrow.left.arrow.right.circle")
+                Label("account.action.reboosts-show", image: "Rocket")
               }
             }
           }

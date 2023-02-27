@@ -116,11 +116,11 @@ struct StatusRowSwipeView: View {
   private func makeSwipeLabel(action: StatusAction, style: UserPreferences.SwipeActionsIconStyle, privateBoost: Bool = false) -> some View {
     switch style {
     case .iconOnly:
-      Label(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked, privateBoost: privateBoost), systemImage: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked, privateBoost: privateBoost))
+      Label(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked, privateBoost: privateBoost), imageNamed: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked, privateBoost: privateBoost))
         .labelStyle(.iconOnly)
         .environment(\.symbolVariants, .none)
     case .iconWithText:
-      Label(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked, privateBoost: privateBoost), systemImage: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked, privateBoost: privateBoost))
+      Label(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked, privateBoost: privateBoost), imageNamed: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked, privateBoost: privateBoost))
         .labelStyle(.titleAndIcon)
         .environment(\.symbolVariants, .none)
     }

@@ -23,9 +23,9 @@ struct StatusRowContextMenu: View {
     }
 
     if self.viewModel.isReblogged {
-      return Label("status.action.unboost", systemImage: "arrow.left.arrow.right.circle")
+      return Label("status.action.unboost", image: "Rocket")
     }
-    return Label("status.action.boost", systemImage: "arrow.left.arrow.right.circle")
+    return Label("status.action.boost", image: "Rocket")
   }
 
   var body: some View {

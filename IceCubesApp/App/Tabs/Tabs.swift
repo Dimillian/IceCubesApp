@@ -3,6 +3,7 @@ import Explore
 import Foundation
 import Status
 import SwiftUI
+import DesignSystem
 
 enum Tab: Int, Identifiable, Hashable {
   case timeline, notifications, mentions, explore, messages, settings, other
@@ -57,25 +58,25 @@ enum Tab: Int, Identifiable, Hashable {
   var label: some View {
     switch self {
     case .timeline:
-      Label("tab.timeline", systemImage: iconName)
+      Label("tab.timeline", imageNamed: iconName)
     case .trending:
-      Label("tab.trending", systemImage: iconName)
+      Label("tab.trending", imageNamed: iconName)
     case .local:
-      Label("tab.local", systemImage: iconName)
+      Label("tab.local", imageNamed: iconName)
     case .federated:
-      Label("tab.federated", systemImage: iconName)
+      Label("tab.federated", imageNamed: iconName)
     case .notifications:
-      Label("tab.notifications", systemImage: iconName)
+      Label("tab.notifications", imageNamed: iconName)
     case .mentions:
-      Label("tab.notifications", systemImage: iconName)
+      Label("tab.notifications", imageNamed: iconName)
     case .explore:
-      Label("tab.explore", systemImage: iconName)
+      Label("tab.explore", imageNamed: iconName)
     case .messages:
-      Label("tab.messages", systemImage: iconName)
+      Label("tab.messages", imageNamed: iconName)
     case .settings:
-      Label("tab.settings", systemImage: iconName)
+      Label("tab.settings", imageNamed: iconName)
     case .profile:
-      Label("tab.profile", systemImage: iconName)
+      Label("tab.profile", imageNamed: iconName)
     case .other:
       EmptyView()
     }

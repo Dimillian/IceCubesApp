@@ -23,10 +23,10 @@ struct StatusRowActionsView: View {
         return "arrowshape.turn.up.left"
       case .boost:
         if privateBoost {
-          return viewModel.isReblogged ? "arrow.left.arrow.right.circle.fill" : "lock.rotation"
+          return viewModel.isReblogged ? "Rocket.Fill" : "lock.rotation"
         }
 
-        return viewModel.isReblogged ? "arrow.left.arrow.right.circle.fill" : "arrow.left.arrow.right.circle"
+        return viewModel.isReblogged ? "Rocket.Fill" : "Rocket"
       case .favorite:
         return viewModel.isFavorited ? "star.fill" : "star"
       case .bookmark:
@@ -86,7 +86,7 @@ struct StatusRowActionsView: View {
               ShareLink(item: url,
                         subject: Text(viewModel.status.reblog?.account.safeDisplayName ?? viewModel.status.account.safeDisplayName),
                         message: Text(viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText)) {
-                Image(systemName: action.iconName(viewModel: viewModel))
+                  Image(imageNamed: action.iconName(viewModel: viewModel))
               }
               .buttonStyle(.statusAction())
             }
@@ -107,7 +107,7 @@ struct StatusRowActionsView: View {
       Button {
         handleAction(action: action)
       } label: {
-        Image(systemName: action.iconName(viewModel: viewModel, privateBoost: privateBoost()))
+        Image(imageNamed: action.iconName(viewModel: viewModel, privateBoost: privateBoost()))
       }
       .buttonStyle(
         .statusAction(
@@ -125,6 +125,7 @@ struct StatusRowActionsView: View {
       }
     }
   }
+    
 
   private func handleAction(action: Action) {
     Task {

@@ -99,7 +99,7 @@ struct TimelineTab: View {
       Button {
         self.timeline = .latest
       } label: {
-        Label(TimelineFilter.latest.localizedTitle(), systemImage: TimelineFilter.latest.iconName() ?? "")
+        Label(TimelineFilter.latest.localizedTitle(), imageNamed: TimelineFilter.latest.iconName() ?? "")
       }
       .keyboardShortcut("r", modifiers: .command)
       Divider()
@@ -108,7 +108,7 @@ struct TimelineTab: View {
       Button {
         self.timeline = timeline
       } label: {
-        Label(timeline.localizedTitle(), systemImage: timeline.iconName() ?? "")
+        Label(timeline.localizedTitle(), imageNamed: timeline.iconName() ?? "")
       }
     }
     if !currentAccount.lists.isEmpty {
@@ -202,7 +202,7 @@ struct TimelineTab: View {
             Button {
               timeline = .remoteLocal(server: server, filter: filter)
             } label: {
-              Label(filter.localizedTitle(), systemImage: filter.iconName())
+              Label(filter.localizedTitle(), imageNamed: filter.iconName())
             }
           }
         } label: {

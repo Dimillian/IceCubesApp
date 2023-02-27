@@ -38,10 +38,10 @@ public enum StatusAction: String, CaseIterable, Identifiable {
       return "quote.bubble"
     case .boost:
       if privateBoost {
-        return isReblogged ? "arrow.left.arrow.right.circle.fill" : "lock.rotation"
+        return isReblogged ? "Rocket.Fill" : "lock.rotation"
       }
 
-      return isReblogged ? "arrow.left.arrow.right.circle.fill" : "arrow.left.arrow.right.circle"
+      return isReblogged ? "Rocket.Fill" : "Rocket"
     case .favorite:
       return isFavorited ? "star.fill" : "star"
     case .bookmark:
