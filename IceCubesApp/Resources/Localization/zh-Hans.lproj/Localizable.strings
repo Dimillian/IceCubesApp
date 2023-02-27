@@ -133,8 +133,8 @@
 "settings.system" = "系统设置";
 "settings.content.navigation-title" = "内容设置";
 "settings.content.boosts" = "转发";
-"settings.content.collapse-long-posts" = "Collapse long posts";
-"settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
+"settings.content.collapse-long-posts" = "折叠长嘟文";
+"settings.content.collapse-long-posts-hint" = "被折叠的嘟文只显示有限的内容但会提供一个查看全文的选项";
 "settings.content.hide-repeated-boosts" = "隐藏重复的转发";
 "settings.content.instance-settings" = "服务器内容设置";
 "settings.content.use-instance-settings" = "使用服务器设置";
@@ -292,7 +292,7 @@
 "conversations.error.title" = "出错啦";
 "conversations.navigation-title" = "私信";
 "conversations.new.message.placeholder" = "新消息";
-"conversations.latest.message" = "Latest Message";
+"conversations.latest.message" = "最新消息";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld 条嘟文来自 %lld 个参与者";
