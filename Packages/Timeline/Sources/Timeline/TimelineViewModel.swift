@@ -13,7 +13,9 @@ class TimelineViewModel: ObservableObject {
       timelineTask?.cancel()
       timelineTask = Task {
         if timeline == .latest {
-          await clearHomeCache()
+          if oldValue == .home {
+            await clearHomeCache()
+          }
           timeline = oldValue
         }
         if oldValue != timeline {
