@@ -1,5 +1,4 @@
 import Foundation
-import Atomics
 
 public struct Application: Codable, Identifiable, Hashable, Equatable {
   public var id: String {
