@@ -134,7 +134,7 @@
 "settings.content.navigation-title" = "内容设置";
 "settings.content.boosts" = "转发";
 "settings.content.collapse-long-posts" = "折叠长嘟文";
-"settings.content.collapse-long-posts-hint" = "被折叠的嘟文只显示有限的内容但会提供一个查看全文的选项";
+"settings.content.collapse-long-posts-hint" = "被折叠嘟文只会显示前几行但会提供查看全文的按钮";
 "settings.content.hide-repeated-boosts" = "隐藏重复的转发";
 "settings.content.instance-settings" = "服务器内容设置";
 "settings.content.use-instance-settings" = "使用服务器设置";
