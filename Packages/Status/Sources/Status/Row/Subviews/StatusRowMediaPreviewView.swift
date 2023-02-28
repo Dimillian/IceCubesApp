@@ -6,7 +6,6 @@ import NukeUI
 import SwiftUI
 
 public struct StatusRowMediaPreviewView: View {
-  @Environment(\.openURL) private var openURL
   @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
   @Environment(\.extraLeadingInset) private var extraLeadingInset: CGFloat
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
@@ -90,9 +89,6 @@ public struct StatusRowMediaPreviewView: View {
             Task {
               await quickLook.prepareFor(urls: attachments.compactMap { $0.url }, selectedURL: attachment.url!)
             }
-          }
-          .contextMenu {
-            contextMenuForMedia(mediaAttachement: attachment)
           }
       } else {
         if isNotifications || theme.statusDisplayStyle == .compact {
@@ -272,9 +268,6 @@ public struct StatusRowMediaPreviewView: View {
           await quickLook.prepareFor(urls: attachments.compactMap { $0.url }, selectedURL: attachment.url!)
         }
       }
-      .contextMenu {
-        contextMenuForMedia(mediaAttachement: attachment)
-      }
     }
   }
 
@@ -331,39 +324,6 @@ public struct StatusRowMediaPreviewView: View {
       .padding(10)
       .buttonStyle(.borderedProminent)
       Spacer()
-    }
-  }
-
-  @ViewBuilder
-  private func contextMenuForMedia(mediaAttachement: MediaAttachment) -> some View {
-    if let url = mediaAttachement.url {
-      ShareLink(item: url) {
-        Label("status.media.contextmenu.share", systemImage: "square.and.arrow.up")
-      }
-      Button { openURL(url) } label: {
-        Label("status.media.contextmenu.view-browser", systemImage: "safari")
-      }
-      Divider()
-      Button {
-        Task {
-          do {
-            let image = try await ImagePipeline.shared.image(for: url).image
-            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-          } catch {}
-        }
-      } label: {
-        Label("status.media.contextmenu.save", systemImage: "square.and.arrow.down")
-      }
-      Button {
-        Task {
-          do {
-            let image = try await ImagePipeline.shared.image(for: url).image
-            UIPasteboard.general.image = image
-          } catch {}
-        }
-      } label: {
-        Label("status.media.contextmenu.copy", systemImage: "doc.on.doc")
-      }
     }
   }
 }
