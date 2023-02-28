@@ -34,7 +34,7 @@ struct StatusRowActionsView: View {
         return "arrowshape.turn.up.left"
       case .boost:
         if privateBoost {
-          return dataController.isReblogged ? "Rocket.Fill" : "Rocket"
+          return dataController.isReblogged ? "Rocket.Fill" : "lock.rotation"
         }
         return dataController.isReblogged ? "Rocket.Fill" : "Rocket"
       case .favorite:
