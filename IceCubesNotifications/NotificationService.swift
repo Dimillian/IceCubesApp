@@ -82,6 +82,11 @@ class NotificationService: UNNotificationServiceExtension {
         let fileURL = temporaryDirectoryURL.appendingPathComponent(filename)
 
         Task {
+          // Warning: Non-sendable type '(any URLSessionTaskDelegate)?' exiting main actor-isolated
+          // context in call to non-isolated instance method 'data(for:delegate:)' cannot cross actor
+          // boundary.
+          // This is on the defaulted-to-nil second parameter of `.data(from:delegate:)`.
+          // There is a Radar tracking this & others like it.
           if let (data, _) = try? await URLSession.shared.data(for: .init(url: url)) {
             if let image = UIImage(data: data) {
               try? image.pngData()?.write(to: fileURL)

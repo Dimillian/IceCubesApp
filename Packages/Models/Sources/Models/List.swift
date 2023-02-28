@@ -5,3 +5,5 @@ public struct List: Codable, Identifiable, Equatable, Hashable {
   public let title: String
   public let repliesPolicy: String
 }
+
+extension List: Sendable {}

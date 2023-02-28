@@ -132,8 +132,8 @@
 "settings.system" = "Systeeminstellingen";
 "settings.content.navigation-title" = "Inhoud";
 "settings.content.boosts" = "Boosts";
-"settings.content.collapse-long-posts" = "Collapse long posts";
-"settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
+"settings.content.collapse-long-posts" = "Klap lange posts in";
+"settings.content.collapse-long-posts-hint" = "Alleen een beperkt aantal regels van ingeklapte posts wordt getoond, samen met een knop om de volledige post te tonen";
 "settings.content.hide-repeated-boosts" = "Verberg herhaalde boosts";
 "settings.content.instance-settings" = "Serverinstellingen voor inhoud";
 "settings.content.use-instance-settings" = "Gebruik serverinstellingen";
@@ -291,7 +291,7 @@
 "conversations.error.title" = "Er heeft zich een fout voorgedaan";
 "conversations.navigation-title" = "Directe berichten";
 "conversations.new.message.placeholder" = "Nieuw bericht";
-"conversations.latest.message" = "Latest Message";
+"conversations.latest.message" = "Meest recente bericht";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld posts van %lld deelnemers";
@@ -453,7 +453,7 @@
 "status.row.you-boosted" = "Je boostte";
 "status.show-less" = "Toon minder";
 "status.show-more" = "Toon meer";
-"status.show-full-post" = "Show full post";
+"status.show-full-post" = "Toon volledige post";
 "status.summary.at-time" = " om ";
 "status.summary.edited-time" = "Laatst gewijzigd: ";
 "status.summary.n-boosts %lld" = "%lld boosts";

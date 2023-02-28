@@ -18,3 +18,5 @@ public struct Language: Identifiable, Equatable, Hashable {
       )
     }
 }
+
+extension Language: Sendable {}

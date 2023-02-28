@@ -29,3 +29,8 @@ public struct MediaAttachment: Codable, Identifiable, Hashable, Equatable {
   public let description: String?
   public let meta: MetaContainer?
 }
+
+extension MediaAttachment: Sendable {}
+extension MediaAttachment.MetaContainer: Sendable {}
+extension MediaAttachment.MetaContainer.Meta: Sendable {}
+extension MediaAttachment.SupportedType: Sendable {}

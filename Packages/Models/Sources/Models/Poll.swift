@@ -48,3 +48,7 @@ public struct NullableString: Codable, Equatable, Hashable {
     }
   }
 }
+
+extension Poll: Sendable {}
+extension Poll.Option: Sendable {}
+extension NullableString: Sendable {}

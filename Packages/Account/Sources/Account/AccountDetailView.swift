@@ -12,7 +12,7 @@ public struct AccountDetailView: View {
 
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var curretnInstance: CurrentInstance
+  @EnvironmentObject private var currentInstance: CurrentInstance
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
@@ -82,6 +82,9 @@ public struct AccountDetailView: View {
       isCurrentUser = currentAccount.account?.id == viewModel.accountId
       viewModel.isCurrentUser = isCurrentUser
       viewModel.client = client
+
+      // Avoid capturing non-Sendable `self` just to access the view model.
+      let viewModel = self.viewModel
       Task {
         await withTaskGroup(of: Void.self) { group in
           group.addTask { await viewModel.fetchAccount() }
@@ -291,7 +294,7 @@ public struct AccountDetailView: View {
       Menu {
         AccountDetailContextMenu(viewModel: viewModel)
         
-        if viewModel.relationship?.following == true, !viewModel.isCurrentUser {
+        if !viewModel.isCurrentUser {
           Button {
             isEditingRelationshipNote = true
           } label: {
@@ -306,7 +309,7 @@ public struct AccountDetailView: View {
             Label("account.action.edit-info", systemImage: "pencil")
           }
 
-          if curretnInstance.isFiltersSupported {
+          if currentInstance.isFiltersSupported {
             Button {
               isEditingFilters = true
             } label: {

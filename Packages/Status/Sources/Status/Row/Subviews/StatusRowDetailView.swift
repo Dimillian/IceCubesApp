@@ -5,6 +5,8 @@ import SwiftUI
 
 struct StatusRowDetailView: View {
   @Environment(\.openURL) private var openURL
+  
+  @EnvironmentObject private var statusDataController: StatusDataController
 
   @ObservedObject var viewModel: StatusRowViewModel
 
@@ -46,13 +48,13 @@ struct StatusRowDetailView: View {
         .foregroundColor(.gray)
       }
 
-      if viewModel.favoritesCount > 0 {
+      if statusDataController.favoritesCount > 0 {
         Divider()
         Button {
           viewModel.routerPath.navigate(to: .favoritedBy(id: viewModel.status.id))
         } label: {
           HStack {
-            Text("status.summary.n-favorites \(viewModel.favoritesCount)")
+            Text("status.summary.n-favorites \(statusDataController.favoritesCount)")
               .font(.scaledCallout)
             Spacer()
             makeAccountsScrollView(accounts: viewModel.favoriters)
@@ -62,13 +64,13 @@ struct StatusRowDetailView: View {
         }
         .buttonStyle(.borderless)
       }
-      if viewModel.reblogsCount > 0 {
+      if statusDataController.reblogsCount > 0 {
         Divider()
         Button {
           viewModel.routerPath.navigate(to: .rebloggedBy(id: viewModel.status.id))
         } label: {
           HStack {
-            Text("status.summary.n-boosts \(viewModel.reblogsCount)")
+            Text("status.summary.n-boosts \(statusDataController.reblogsCount)")
               .font(.scaledCallout)
             Spacer()
             makeAccountsScrollView(accounts: viewModel.rebloggers)

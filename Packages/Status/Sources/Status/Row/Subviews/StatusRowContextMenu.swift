@@ -11,18 +11,19 @@ struct StatusRowContextMenu: View {
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var currentInstance: CurrentInstance
+  @EnvironmentObject private var statusDataController: StatusDataController
 
   @ObservedObject var viewModel: StatusRowViewModel
 
   var boostLabel: some View {
     if self.viewModel.status.visibility == .priv && self.viewModel.status.account.id == self.account.account?.id {
-      if self.viewModel.isReblogged {
+      if self.statusDataController.isReblogged {
         return Label("status.action.unboost", systemImage: "lock.rotation")
       }
       return Label("status.action.boost-to-followers", systemImage: "lock.rotation")
     }
 
-    if self.viewModel.isReblogged {
+    if self.statusDataController.isReblogged {
       return Label("status.action.unboost", image: "Rocket")
     }
     return Label("status.action.boost", image: "Rocket")
@@ -31,32 +32,20 @@ struct StatusRowContextMenu: View {
   var body: some View {
     if !viewModel.isRemote {
       Button { Task {
-        if viewModel.isFavorited {
-          await viewModel.unFavorite()
-        } else {
-          await viewModel.favorite()
-        }
+        await statusDataController.toggleFavorite()
       } } label: {
-        Label(viewModel.isFavorited ? "status.action.unfavorite" : "status.action.favorite", systemImage: "star")
+        Label(statusDataController.isFavorited ? "status.action.unfavorite" : "status.action.favorite", systemImage: "star")
       }
       Button { Task {
-        if viewModel.isReblogged {
-          await viewModel.unReblog()
-        } else {
-          await viewModel.reblog()
-        }
+        await statusDataController.toggleReblog()
       } } label: {
         boostLabel
       }
       .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != account.account?.id)
       Button { Task {
-        if viewModel.isBookmarked {
-          await viewModel.unbookmark()
-        } else {
-          await viewModel.bookmark()
-        }
+        await statusDataController.toggleBookmark()
       } } label: {
-        Label(viewModel.isBookmarked ? "status.action.unbookmark" : "status.action.bookmark",
+        Label(statusDataController.isBookmarked ? "status.action.unbookmark" : "status.action.bookmark",
               systemImage: "bookmark")
       }
       Button {

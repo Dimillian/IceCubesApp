@@ -15,3 +15,6 @@ public struct PushSubscription: Identifiable, Decodable {
   public let serverKey: String
   public let alerts: Alerts
 }
+
+extension PushSubscription: Sendable {}
+extension PushSubscription.Alerts: Sendable {}

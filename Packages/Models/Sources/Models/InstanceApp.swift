@@ -9,3 +9,5 @@ public struct InstanceApp: Codable, Identifiable {
   public let clientSecret: String
   public let vapidKey: String?
 }
+
+extension InstanceApp: Sendable {}

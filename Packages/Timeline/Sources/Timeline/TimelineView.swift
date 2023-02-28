@@ -115,7 +115,7 @@ public struct TimelineView: View {
     }
     .refreshable {
       HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
-      await viewModel.fetchNewestStatuses()
+      await viewModel.pullToRefresh()
       HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
     }
     .onChange(of: watcher.latestEvent?.id) { _ in

@@ -1,3 +1,4 @@
+import Combine
 import Foundation
 import Models
 import Network
@@ -140,7 +141,7 @@ public class RouterPath: ObservableObject {
     if let account = results?.accounts.first {
       navigate(to: .accountDetailWithAccount(account: account))
     } else {
-      await UIApplication.shared.open(url)
+      _ = await UIApplication.shared.open(url)
     }
   }
 
@@ -154,7 +155,7 @@ public class RouterPath: ObservableObject {
     if let account = results?.accounts.first {
       navigate(to: .accountDetailWithAccount(account: account))
     } else {
-      await UIApplication.shared.open(url)
+      _ = await UIApplication.shared.open(url)
     }
   }
 }

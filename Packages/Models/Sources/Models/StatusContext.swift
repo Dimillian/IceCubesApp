@@ -8,3 +8,5 @@ public struct StatusContext: Decodable {
     .init(ancestors: [], descendants: [])
   }
 }
+
+extension StatusContext: Sendable {}

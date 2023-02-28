@@ -11,3 +11,5 @@ public struct Card: Codable, Identifiable, Equatable, Hashable {
   public let type: String
   public let image: URL?
 }
+
+extension Card: Sendable {}
