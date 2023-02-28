@@ -111,9 +111,9 @@
 "settings.general.content" = "Налаштування вмісту";
 "settings.system" = "Системні налаштування";
 "settings.content.navigation-title" = "Налаштування вмісту";
-"settings.content.collapse-long-posts" = "Collapse long posts";
-"settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
 "settings.content.boosts" = "Поширення";
+"settings.content.collapse-long-posts" = "Згортати довгі дописи";
+"settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
 "settings.content.hide-repeated-boosts" = "Не відображати повторні поширення";
 "settings.content.instance-settings" = "Налаштування відображення сервера";
 "settings.content.use-instance-settings" = "Використовувати налаштування сервера";
@@ -194,7 +194,7 @@
 "settings.display.section.font" = "Шрифти";
 
 "settings.section.cache" = "Cache";
-"settings.cache-media.clear" = "Clear Media Cache";
+"settings.cache-media.clear" = "Очистити Media Cache";
 
 // MARK: Tabs
 "tab.explore" = "Огляд";
@@ -288,13 +288,13 @@
 "conversations.action.mark-read" = "Позначити прочитаним";
 "conversations.action.view-detail" = "Переглянути деталі";
 "conversations.empty.message" = "Looking for some social media love? You'll find all your direct messages and private mentions right here. Happy messaging! 📱❤️";
-"conversations.empty.title" = "Inbox Zero";
+"conversations.empty.title" = "Порожня скринька";
 "conversations.error.button" = "Спробувати знову";
 "conversations.error.message" = "Помилка завантаження вашого повідомлення";
 "conversations.error.title" = "Виникла халепа";
 "conversations.navigation-title" = "Особисті повідомлення";
 "conversations.new.message.placeholder" = "Нове повідомлення";
-"conversations.latest.message" = "Latest Message";
+"conversations.latest.message" = "Останні повідомлення";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld дописів від %lld учасників";
@@ -325,8 +325,8 @@
 "env.poll-duration.1d" = "1 день";
 "env.poll-duration.3d" = "3 дні";
 "env.poll-duration.7d" = "7 днів";
-"env.poll-vote-frequency.one" = "Один голос";
-"env.poll-vote-frequency.multiple" = "Кілька голосів";
+"env.poll-vote-frequency.one" = "Лише один варіант";
+"env.poll-vote-frequency.multiple" = "Вибір декількох варіантів";
 
 // MARK: Package: Lists
 "lists.add-remove-%@" = "Додати/Видалити %@";
@@ -384,7 +384,7 @@
 "status.action.translated-label-from-%@-%@" = "Переклад з %@ з допомогою %@";
 "status.action.bookmark" = "У закладки";
 "status.action.boost" = "Поширити";
-"status.action.boost-to-followers" = "Boost to Followers";
+"status.action.boost-to-followers" = "Поширити Підписникам";
 "status.action.copy-text" = "Копіювати текст";
 "status.action.copy-link" = "Копіювати посилання";
 "status.action.delete" = "Видалити";
@@ -460,7 +460,7 @@
 "status.row.you-boosted" = "Ви поширили";
 "status.show-less" = "Показати менше";
 "status.show-more" = "Показати більше";
-"status.show-full-post" = "Show full post";
+"status.show-full-post" = "Показати весь допис";
 "status.summary.at-time" = " о ";
 "status.summary.edited-time" = "Востаннє змінено: ";
 "status.summary.n-boosts %lld" = "%lld поширень";
