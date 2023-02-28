@@ -31,8 +31,8 @@ public final class StatusDataControllerProvider {
   
   public func dataController(for status: any AnyStatus, client: Client) -> StatusDataController {
     let key = CacheKey(statusId: status.id, client: client)
-    if let controller = cache[key] {
-      return controller as! StatusDataController
+    if let controller = cache[key] as? StatusDataController {
+      return controller
     }
     let controller = StatusDataController(status: status, client: client)
     cache[key] = controller
@@ -66,7 +66,7 @@ public final class StatusDataController: StatusDataControlling {
     self.favoritesCount = status.favouritesCount
   }
   
-  private func updateFrom(status: Status) {
+  public func updateFrom(status: Status) {
     self.isReblogged = status.reblogged == true
     self.isBookmarked = status.bookmarked == true
     self.isFavorited = status.favourited == true
