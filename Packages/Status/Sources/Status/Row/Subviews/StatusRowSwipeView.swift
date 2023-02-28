@@ -108,7 +108,7 @@ struct StatusRowSwipeView: View {
                                isFavorited: statusDataController.isFavorited,
                                isBookmarked: statusDataController.isBookmarked,
                                privateBoost: privateBoost),
-            systemImage: action.iconName(isReblogged: statusDataController.isReblogged,
+            imageNamed: action.iconName(isReblogged: statusDataController.isReblogged,
                                          isFavorited: statusDataController.isFavorited,
                                          isBookmarked: statusDataController.isBookmarked,
                                          privateBoost: privateBoost))
@@ -119,7 +119,7 @@ struct StatusRowSwipeView: View {
                                isFavorited: statusDataController.isFavorited,
                                isBookmarked: statusDataController.isBookmarked,
                                privateBoost: privateBoost),
-            systemImage: action.iconName(isReblogged: statusDataController.isReblogged,
+            imageNamed: action.iconName(isReblogged: statusDataController.isReblogged,
                                            isFavorited: statusDataController.isFavorited,
                                            isBookmarked: statusDataController.isBookmarked,
                                            privateBoost: privateBoost))

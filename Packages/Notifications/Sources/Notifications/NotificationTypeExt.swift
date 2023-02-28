@@ -55,7 +55,7 @@ extension Models.Notification.NotificationType {
     case .mention:
       return "at"
     case .reblog:
-      return "arrow.left.arrow.right.circle.fill"
+      return "Rocket.Fill"
     case .follow, .follow_request:
       return "person.fill.badge.plus"
     case .favourite:

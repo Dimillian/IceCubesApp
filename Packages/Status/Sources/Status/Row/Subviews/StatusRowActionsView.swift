@@ -28,22 +28,25 @@ struct StatusRowActionsView: View {
       [.respond, .boost, .favorite, .bookmark, .share]
     }
 
-    func iconName(dataController: StatusDataController, privateBoost: Bool = false) -> String {
+    func image(dataController: StatusDataController, privateBoost: Bool = false) -> Image {
       switch self {
       case .respond:
-        return "arrowshape.turn.up.left"
+        return Image(systemName: "arrowshape.turn.up.left")
       case .boost:
         if privateBoost {
-          return dataController.isReblogged ? "arrow.left.arrow.right.circle.fill" : "lock.rotation"
+          if dataController.isReblogged {
+            return Image("Rocket.Fill")
+          } else {
+           return Image(systemName: "lock.rotation")
+          }
         }
-
-        return dataController.isReblogged ? "arrow.left.arrow.right.circle.fill" : "arrow.left.arrow.right.circle"
+        return Image(dataController.isReblogged ? "Rocket.Fill" : "Rocket")
       case .favorite:
-        return dataController.isFavorited ? "star.fill" : "star"
+        return Image(systemName: dataController.isFavorited ? "star.fill" : "star")
       case .bookmark:
-        return dataController.isBookmarked ? "bookmark.fill" : "bookmark"
+        return Image(systemName: dataController.isBookmarked ? "bookmark.fill" : "bookmark")
       case .share:
-        return "square.and.arrow.up"
+        return Image(systemName: "square.and.arrow.up")
       }
     }
 
@@ -97,7 +100,7 @@ struct StatusRowActionsView: View {
               ShareLink(item: url,
                         subject: Text(viewModel.status.reblog?.account.safeDisplayName ?? viewModel.status.account.safeDisplayName),
                         message: Text(viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText)) {
-                Image(systemName: action.iconName(dataController: statusDataController))
+                action.image(dataController: statusDataController)
               }
               .buttonStyle(.statusAction())
             }
@@ -118,7 +121,7 @@ struct StatusRowActionsView: View {
       Button {
         handleAction(action: action)
       } label: {
-        Image(systemName: action.iconName(dataController: statusDataController, privateBoost: privateBoost()))
+        action.image(dataController: statusDataController, privateBoost: privateBoost())
       }
       .buttonStyle(
         .statusAction(
@@ -138,6 +141,7 @@ struct StatusRowActionsView: View {
       }
     }
   }
+    
 
   private func handleAction(action: Action) {
     Task {
