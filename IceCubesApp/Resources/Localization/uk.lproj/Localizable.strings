@@ -113,7 +113,7 @@
 "settings.content.navigation-title" = "Налаштування вмісту";
 "settings.content.boosts" = "Поширення";
 "settings.content.collapse-long-posts" = "Згортати довгі дописи";
-"settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
+"settings.content.collapse-long-posts-hint" = "У згорнутих публікаціях відображається лише обмежена кількість рядків разом із кнопкою, щоб показати повну публікацію";
 "settings.content.hide-repeated-boosts" = "Не відображати повторні поширення";
 "settings.content.instance-settings" = "Налаштування відображення сервера";
 "settings.content.use-instance-settings" = "Використовувати налаштування сервера";
@@ -413,8 +413,8 @@
 "status.draft.delete" = "Видалити чернетку";
 "status.draft.save" = "Зберегти чернетку";
 "status.editor.ai-prompt.correct" = "Виправити текст";
-"status.editor.ai-prompt.emphasize" = "Підкреслити текст";
-"status.editor.ai-prompt.fit" = "Короткий текст";
+"status.editor.ai-prompt.emphasize" = "Надавати виразності";
+"status.editor.ai-prompt.fit" = "Підігнати текст";
 "status.editor.description.add" = "Додати опис";
 "status.editor.description.edit" = "Виправити опис";
 "status.editor.drafts.navigation-title" = "Чернетки";
