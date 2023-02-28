@@ -152,7 +152,7 @@
 "settings.section.other" = "Інше";
 "settings.other.hide-openai" = "Увімкнути 🤖 помічника";
 "settings.other.social-keyboard" = "Увімкнути Social Keyboard";
-"settings.other.sound-effect" = "Enable Sound Effects";
+"settings.other.sound-effect" = "Увімкнути звукові ефекти";
 "settings.push.duplicate.title" = "Виправити задвоєння сповіщень";
 "settings.push.duplicate.footer" = "Отримуєте сповіщення двічі? Спробуйте цю чарівну кнопку, щоб виправити це!";
 "settings.push.duplicate.button.fix" = "🪄 Виправити!";
@@ -173,9 +173,9 @@
 
 "settings.display.show-ipad-column" = "Увімкнути додаткову колонку";
 
-"settings.general.swipeactions" = "Дії для рухів";
+"settings.general.swipeactions" = "Дії гортання";
 "settings.swipeactions.appearance" = "Вигляд";
-"settings.swipeactions.navigation-title" = "Дії для рухів";
+"settings.swipeactions.navigation-title" = "Дії гортання";
 "settings.swipeactions.primary" = "Основна дія";
 "settings.swipeactions.secondary" = "Додаткова дія";
 "settings.swipeactions.status" = "Публікація";
@@ -185,7 +185,7 @@
 "settings.swipeactions.status.action.none" = "Нічого";
 "settings.swipeactions.status.action.quote" = "Цитувати";
 "settings.swipeactions.status.action.reply" = "Відповісти";
-"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
+"settings.swipeactions.status.explanation" = "Дії гортання доступні, якщо провести пальцем ліворуч або праворуч по публікації. Додаткова дія доступна, лише якщо встановлено основну дію.";
 "settings.swipeactions.status.leading" = "Рух праворуч";
 "settings.swipeactions.status.trailing" = "Рух ліворуч";
 "settings.swipeactions.use-theme-colors" = "Використовувати колір тему";
@@ -194,8 +194,8 @@
 
 "settings.display.section.font" = "Шрифти";
 
-"settings.section.cache" = "Cache";
-"settings.cache-media.clear" = "Очистити Media Cache";
+"settings.section.cache" = "Кеш";
+"settings.cache-media.clear" = "Очистити кеш файлів";
 
 // MARK: Tabs
 "tab.explore" = "Огляд";
@@ -252,10 +252,10 @@
 "account.edit.post-settings.section-title" = "Налаштування допису";
 "account.edit.post-settings.sensitive" = "Делікатний вміст";
 
-"account.edit.metadata-section-title" = "Profile Metadata";
-"account.edit.metadata-name-placeholder" = "Label";
-"account.edit.metadata-value-placeholder" = "Content";
-"account.edit.add-metadata-button" = "Add a new metadata";
+"account.edit.metadata-section-title" = "Метадані профілю";
+"account.edit.metadata-name-placeholder" = "Мітка";
+"account.edit.metadata-value-placeholder" = "Вміст";
+"account.edit.add-metadata-button" = "Додати нові метадані";
 
 "account.favorited-by" = "Вподобали";
 "account.follow.follow" = "Підписатися";
@@ -288,7 +288,7 @@
 "conversations.action.delete" = "Видалити";
 "conversations.action.mark-read" = "Позначити прочитаним";
 "conversations.action.view-detail" = "Переглянути деталі";
-"conversations.empty.message" = "Looking for some social media love? You'll find all your direct messages and private mentions right here. Happy messaging! 📱❤️";
+"conversations.empty.message" = "Ви знайдете всі свої прямі повідомлення та приватні згадки прямо тут. Приємного обміну повідомленнями! 📱❤️";
 "conversations.empty.title" = "Порожня скринька";
 "conversations.error.button" = "Спробувати знову";
 "conversations.error.message" = "Помилка завантаження вашого повідомлення";
@@ -338,7 +338,7 @@
 "lists.name.message" = "Введіть назву для списку";
 
 // MARK: Package: Notifications
-"notifications.empty.message" = "Notifications? What notifications? Your notification inbox is looking so empty. Keep on being awesome! 📱😎";
+"notifications.empty.message" = "Сповіщення? Які сповіщення? Я не бачив тут жодних сповіщень... 📱😎";
 "notifications.empty.title" = "Немає сповіщень";
 "notifications.error.message" = "Халепа з завантаженням ваших сповіщень, спробуйте ще раз.";
 "notifications.error.title" = "Сталася халепа";
@@ -469,7 +469,7 @@
 "status.visibility.direct" = "Особисте";
 "status.visibility.follower" = "Підписникам";
 "status.visibility.public" = "Усім";
-"status.visibility.unlisted" = "Не зі списку";
+"status.visibility.unlisted" = "Прихований";
 
 // MARK: Filters
 "filter.new" = "Новий фільтр";
