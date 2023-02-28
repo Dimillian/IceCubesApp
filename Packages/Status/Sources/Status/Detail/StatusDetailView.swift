@@ -153,7 +153,7 @@ public struct StatusDetailView: View {
       .onAppear {
         StatusDataControllerProvider.shared.dataController(for: status.reblog ?? status,
                                                            client: client)
-        .updateFrom(status: status)
+        .updateFrom(status: status, publishUpdate: true)
       }
   }
 
