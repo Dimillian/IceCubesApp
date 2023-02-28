@@ -4,7 +4,6 @@ import Models
 import NaturalLanguage
 import Network
 import SwiftUI
-
 import DesignSystem
 
 @MainActor
@@ -14,13 +13,7 @@ public class StatusRowViewModel: ObservableObject {
   let isRemote: Bool
   let showActions: Bool
 
-  @Published var favoritesCount: Int
-  @Published var isFavorited: Bool
-  @Published var isReblogged: Bool
   @Published var isPinned: Bool
-  @Published var isBookmarked: Bool
-  @Published var reblogsCount: Int
-  @Published var repliesCount: Int
   @Published var embeddedStatus: Status?
   @Published var displaySpoiler: Bool = false
   @Published var isEmbedLoading: Bool = false
@@ -104,19 +97,10 @@ public class StatusRowViewModel: ObservableObject {
     self.isRemote = isRemote
     self.showActions = showActions
     if let reblog = status.reblog {
-      isFavorited = reblog.favourited == true
-      isReblogged = reblog.reblogged == true
       isPinned = reblog.pinned == true
-      isBookmarked = reblog.bookmarked == true
     } else {
-      isFavorited = status.favourited == true
-      isReblogged = status.reblogged == true
       isPinned = status.pinned == true
-      isBookmarked = status.bookmarked == true
     }
-    favoritesCount = status.reblog?.favouritesCount ?? status.favouritesCount
-    reblogsCount = status.reblog?.reblogsCount ?? status.reblogsCount
-    repliesCount = status.reblog?.repliesCount ?? status.repliesCount
     if UserPreferences.shared.autoExpandSpoilers {
       displaySpoiler = false
     } else {
@@ -245,58 +229,6 @@ public class StatusRowViewModel: ObservableObject {
     }
   }
 
-  func favorite() async {
-    guard client.isAuth else { return }
-    isFavorited = true
-    favoritesCount += 1
-    do {
-      let status: Status = try await client.post(endpoint: Statuses.favorite(id: localStatusId ?? status.reblog?.id ?? status.id))
-      updateFromStatus(status: status)
-    } catch {
-      isFavorited = false
-      favoritesCount -= 1
-    }
-  }
-
-  func unFavorite() async {
-    guard client.isAuth else { return }
-    isFavorited = false
-    favoritesCount -= 1
-    do {
-      let status: Status = try await client.post(endpoint: Statuses.unfavorite(id: localStatusId ?? status.reblog?.id ?? status.id))
-      updateFromStatus(status: status)
-    } catch {
-      isFavorited = true
-      favoritesCount += 1
-    }
-  }
-
-  func reblog() async {
-    guard client.isAuth else { return }
-    isReblogged = true
-    reblogsCount += 1
-    do {
-      let status: Status = try await client.post(endpoint: Statuses.reblog(id: localStatusId ?? status.reblog?.id ?? status.id))
-      updateFromStatus(status: status)
-    } catch {
-      isReblogged = false
-      reblogsCount -= 1
-    }
-  }
-
-  func unReblog() async {
-    guard client.isAuth else { return }
-    isReblogged = false
-    reblogsCount -= 1
-    do {
-      let status: Status = try await client.post(endpoint: Statuses.unreblog(id: localStatusId ?? status.reblog?.id ?? status.id))
-      updateFromStatus(status: status)
-    } catch {
-      isReblogged = true
-      reblogsCount += 1
-    }
-  }
-
   func pin() async {
     guard client.isAuth else { return }
     isPinned = true
@@ -319,28 +251,6 @@ public class StatusRowViewModel: ObservableObject {
     }
   }
 
-  func bookmark() async {
-    guard client.isAuth else { return }
-    isBookmarked = true
-    do {
-      let status: Status = try await client.post(endpoint: Statuses.bookmark(id: localStatusId ?? status.reblog?.id ?? status.id))
-      updateFromStatus(status: status)
-    } catch {
-      isBookmarked = false
-    }
-  }
-
-  func unbookmark() async {
-    guard client.isAuth else { return }
-    isBookmarked = false
-    do {
-      let status: Status = try await client.post(endpoint: Statuses.unbookmark(id: localStatusId ?? status.reblog?.id ?? status.id))
-      updateFromStatus(status: status)
-    } catch {
-      isBookmarked = true
-    }
-  }
-
   func delete() async {
     do {
       _ = try await client.delete(endpoint: Statuses.status(id: status.id))
@@ -358,19 +268,10 @@ public class StatusRowViewModel: ObservableObject {
 
   private func updateFromStatus(status: Status) {
     if let reblog = status.reblog {
-      isFavorited = reblog.favourited == true
-      isReblogged = reblog.reblogged == true
       isPinned = reblog.pinned == true
-      isBookmarked = reblog.bookmarked == true
     } else {
-      isFavorited = status.favourited == true
-      isReblogged = status.reblogged == true
       isPinned = status.pinned == true
-      isBookmarked = status.bookmarked == true
     }
-    favoritesCount = status.reblog?.favouritesCount ?? status.favouritesCount
-    reblogsCount = status.reblog?.reblogsCount ?? status.reblogsCount
-    repliesCount = status.reblog?.repliesCount ?? status.repliesCount
   }
 
   func getStatusLang() -> String? {
