@@ -156,6 +156,7 @@ struct AccountDetailHeaderView: View {
           Text("@\(account.acct)")
             .font(.scaledCallout)
             .foregroundColor(.gray)
+            .textSelection(.enabled)
           joinedAtView
         }
         Spacer()
@@ -181,6 +182,7 @@ struct AccountDetailHeaderView: View {
         .font(.scaledBody)
         .emojiSize(Font.scaledBodyPointSize)
         .padding(.top, 8)
+        .textSelection(.enabled)
         .environment(\.openURL, OpenURLAction { url in
           routerPath.handle(url: url)
         })
