@@ -36,7 +36,7 @@ struct StatusRowActionsView: View {
         if privateBoost {
           return dataController.isReblogged ? "Rocket.Fill" : "Rocket"
         }
-        return dataController.isReblogged ? "arrow.left.arrow.right.circle.fill" : "arrow.left.arrow.right.circle"
+        return dataController.isReblogged ? "Rocket.Fill" : "Rocket"
       case .favorite:
         return dataController.isFavorited ? "star.fill" : "star"
       case .bookmark:
@@ -96,11 +96,7 @@ struct StatusRowActionsView: View {
               ShareLink(item: url,
                         subject: Text(viewModel.status.reblog?.account.safeDisplayName ?? viewModel.status.account.safeDisplayName),
                         message: Text(viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText)) {
-<<<<<<< HEAD
-                  Image(imageNamed: action.iconName(viewModel: viewModel))
-=======
-                Image(systemName: action.iconName(dataController: statusDataController))
->>>>>>> main
+                Image(imageNamed: action.iconName(dataController: statusDataController))
               }
               .buttonStyle(.statusAction())
             }
@@ -121,11 +117,7 @@ struct StatusRowActionsView: View {
       Button {
         handleAction(action: action)
       } label: {
-<<<<<<< HEAD
-        Image(imageNamed: action.iconName(viewModel: viewModel, privateBoost: privateBoost()))
-=======
-        Image(systemName: action.iconName(dataController: statusDataController, privateBoost: privateBoost()))
->>>>>>> main
+        Image(imageNamed: action.iconName(dataController: statusDataController, privateBoost: privateBoost()))
       }
       .buttonStyle(
         .statusAction(
