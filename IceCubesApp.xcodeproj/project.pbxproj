@@ -612,6 +612,7 @@
 				9FBFE636292A715500C250E9 /* Frameworks */,
 				9FBFE637292A715500C250E9 /* Resources */,
 				9F2A5421296AB631009B2D7C /* Embed Foundation Extensions */,
+				B9EBEFAF29AEA81500C7246E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -787,6 +788,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B9EBEFAF29AEA81500C7246E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\nset -e\n\n# if [ \"Release\" = \"${CONFIGURATION}\" ]; then # Only do this for release builds\n    \n    # Path to the app directory\n    APP_DIR_PATH=${BUILT_PRODUCTS_DIR}/${EXECUTABLE_FOLDER_PATH}\n    # Strip main binary\n    strip -rSTx ${APP_DIR_PATH}/${EXECUTABLE_NAME}\n    # Path to the Frameworks directory\n    APP_FRAMEWORKS_DIR=${APP_DIR_PATH}/\"Frameworks\"\n    \n    # Strip symbols from frameworks, if Frameworks/ exists at all\n    # ... as long as the framework is NOT signed by Apple\n    if [ -d $APP_FRAMEWORKS_DIR ]\n    then\n        find $APP_FRAMEWORKS_DIR -type f -perm +111 -maxdepth 2 -mindepth 2 -exec bash -c \"codesign -v -R='anchor apple' {} &> /dev/null || (echo {} && strip -rSTx {})\" \\;\n    fi\n# fi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9F2A5412296AB631009B2D7C /* Sources */ = {
