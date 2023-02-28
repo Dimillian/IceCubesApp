@@ -58,7 +58,7 @@ struct NotificationRowView: View {
         .background(Circle().foregroundColor(type.tintColor(isPrivate: notification.status?.visibility == .direct)))
         .frame(width: 24, height: 24)
 
-      Image(systemName: type.iconName(isPrivate: notification.status?.visibility == .direct))
+      type.icon(isPrivate: notification.status?.visibility == .direct)
         .resizable()
         .scaledToFit()
         .frame(width: 12, height: 12)
