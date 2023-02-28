@@ -58,25 +58,25 @@ enum Tab: Int, Identifiable, Hashable {
   var label: some View {
     switch self {
     case .timeline:
-      Label("tab.timeline", imageNamed: iconName)
+      Label("tab.timeline", systemImage: iconName)
     case .trending:
-      Label("tab.trending", imageNamed: iconName)
+      Label("tab.trending", systemImage: iconName)
     case .local:
-      Label("tab.local", imageNamed: iconName)
+      Label("tab.local", systemImage: iconName)
     case .federated:
-      Label("tab.federated", imageNamed: iconName)
+      Label("tab.federated", systemImage: iconName)
     case .notifications:
-      Label("tab.notifications", imageNamed: iconName)
+      Label("tab.notifications", systemImage: iconName)
     case .mentions:
-      Label("tab.notifications", imageNamed: iconName)
+      Label("tab.notifications", systemImage: iconName)
     case .explore:
-      Label("tab.explore", imageNamed: iconName)
+      Label("tab.explore", systemImage: iconName)
     case .messages:
-      Label("tab.messages", imageNamed: iconName)
+      Label("tab.messages", systemImage: iconName)
     case .settings:
-      Label("tab.settings", imageNamed: iconName)
+      Label("tab.settings", systemImage: iconName)
     case .profile:
-      Label("tab.profile", imageNamed: iconName)
+      Label("tab.profile", systemImage: iconName)
     case .other:
       EmptyView()
     }
