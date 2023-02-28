@@ -175,6 +175,7 @@ struct IceCubesApp: App {
         }
       }
       HapticManager.shared.fireHaptic(of: .tabSelection)
+      SoundEffectManager.shared.playSound(of: .tabSelection)
     })) {
       ForEach(availableTabs) { tab in
         tab.makeContentView(popToRootTab: $popToRootTab)

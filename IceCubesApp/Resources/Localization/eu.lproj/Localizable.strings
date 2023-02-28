@@ -128,6 +128,7 @@
 "settings.section.other" = "Besteak";
 "settings.other.hide-openai" = "Gaitu 🤖 laguntzailea";
 "settings.other.social-keyboard" = "Gaitu teklatu soziala";
+"settings.other.sound-effect" = "Enable Sound Effects";
 "settings.general.content" = "Edukiaren ezarpenak";
 "settings.system" = "Sistemaren ezarpenak";
 "settings.content.navigation-title" = "Edukiaren ezarpenak";

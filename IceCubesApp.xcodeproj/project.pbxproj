@@ -16,6 +16,14 @@
 		7429BCE2297C55D00069A946 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7429BCE4297C55D00069A946 /* Localizable.stringsdict */; };
 		7429BCE5297C5A750069A946 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7429BCE4297C55D00069A946 /* Localizable.stringsdict */; };
 		7429BCE6297C5A750069A946 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 7429BCE4297C55D00069A946 /* Localizable.stringsdict */; };
+		9F18801229AE477F00D85459 /* tabSelection.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9F18800A29AE477E00D85459 /* tabSelection.wav */; };
+		9F18801329AE477F00D85459 /* share.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9F18800B29AE477E00D85459 /* share.wav */; };
+		9F18801429AE477F00D85459 /* bookmark.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9F18800C29AE477E00D85459 /* bookmark.wav */; };
+		9F18801529AE477F00D85459 /* pull.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9F18800D29AE477E00D85459 /* pull.wav */; };
+		9F18801629AE477F00D85459 /* refresh.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9F18800E29AE477E00D85459 /* refresh.wav */; };
+		9F18801729AE477F00D85459 /* boost.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9F18800F29AE477E00D85459 /* boost.wav */; };
+		9F18801829AE477F00D85459 /* favorite.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9F18801029AE477F00D85459 /* favorite.wav */; };
+		9F18801929AE477F00D85459 /* tootSent.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9F18801129AE477F00D85459 /* tootSent.wav */; };
 		9F1E8B47298EBCBB00609F80 /* HapticSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1E8B46298EBCBB00609F80 /* HapticSettingsView.swift */; };
 		9F24EEB829360C330042359D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F24EEB729360C330042359D /* Preview Assets.xcassets */; };
 		9F295540292B6C3400E0E81B /* Timeline in Frameworks */ = {isa = PBXBuildFile; productRef = 9F29553F292B6C3400E0E81B /* Timeline */; };
@@ -162,6 +170,14 @@
 		8C27D979298471E900CDF593 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9606B7A1297AD2BB00C1FB75 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		9664F1A8299BA5F700CBE70E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9F18800A29AE477E00D85459 /* tabSelection.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tabSelection.wav; sourceTree = "<group>"; };
+		9F18800B29AE477E00D85459 /* share.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = share.wav; sourceTree = "<group>"; };
+		9F18800C29AE477E00D85459 /* bookmark.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bookmark.wav; sourceTree = "<group>"; };
+		9F18800D29AE477E00D85459 /* pull.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pull.wav; sourceTree = "<group>"; };
+		9F18800E29AE477E00D85459 /* refresh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = refresh.wav; sourceTree = "<group>"; };
+		9F18800F29AE477E00D85459 /* boost.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = boost.wav; sourceTree = "<group>"; };
+		9F18801029AE477F00D85459 /* favorite.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = favorite.wav; sourceTree = "<group>"; };
+		9F18801129AE477F00D85459 /* tootSent.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tootSent.wav; sourceTree = "<group>"; };
 		9F1E8B46298EBCBB00609F80 /* HapticSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticSettingsView.swift; sourceTree = "<group>"; };
 		9F24EEB729360C330042359D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9F29553D292B67B600E0E81B /* Network */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Network; path = Packages/Network; sourceTree = "<group>"; };
@@ -387,6 +403,14 @@
 		9FA0D2AC29921C1F008A143B /* Embeds */ = {
 			isa = PBXGroup;
 			children = (
+				9F18800C29AE477E00D85459 /* bookmark.wav */,
+				9F18800F29AE477E00D85459 /* boost.wav */,
+				9F18801029AE477F00D85459 /* favorite.wav */,
+				9F18800D29AE477E00D85459 /* pull.wav */,
+				9F18800E29AE477E00D85459 /* refresh.wav */,
+				9F18800A29AE477E00D85459 /* tabSelection.wav */,
+				9F18800B29AE477E00D85459 /* share.wav */,
+				9F18801129AE477F00D85459 /* tootSent.wav */,
 				069709A3298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf */,
 				069709A7298C87B5006E4CB5 /* OpenDyslexic-Regular.otf */,
 				9F2A542D296B1CC0009B2D7C /* glass.wav */,
@@ -733,13 +757,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				069709A5298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf in Resources */,
+				9F18801329AE477F00D85459 /* share.wav in Resources */,
+				9F18801729AE477F00D85459 /* boost.wav in Resources */,
 				9F2A542C296B1177009B2D7C /* glass.caf in Resources */,
 				E9B576C329743F4C00BCE646 /* Localizable.strings in Resources */,
+				9F18801529AE477F00D85459 /* pull.wav in Resources */,
 				9FD34823293D06E800DB0EE9 /* Assets.xcassets in Resources */,
 				7429BCE2297C55D00069A946 /* Localizable.stringsdict in Resources */,
+				9F18801829AE477F00D85459 /* favorite.wav in Resources */,
 				9F24EEB829360C330042359D /* Preview Assets.xcassets in Resources */,
 				069709A8298C87B5006E4CB5 /* OpenDyslexic-Regular.otf in Resources */,
 				9FAD85832971BF7200496AB1 /* Secret.plist in Resources */,
+				9F18801229AE477F00D85459 /* tabSelection.wav in Resources */,
+				9F18801429AE477F00D85459 /* bookmark.wav in Resources */,
+				9F18801629AE477F00D85459 /* refresh.wav in Resources */,
+				9F18801929AE477F00D85459 /* tootSent.wav in Resources */,
 				9F2A542E296B1CC0009B2D7C /* glass.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

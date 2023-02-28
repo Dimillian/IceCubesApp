@@ -128,6 +128,7 @@
 "settings.section.other" = "Overig";
 "settings.other.hide-openai" = "Gebruik 🤖-hulp";
 "settings.other.social-keyboard" = "Gebruik socialmedia-toetsenbord";
+"settings.other.sound-effect" = "Enable Sound Effects";
 "settings.general.content" = "Inhoud";
 "settings.system" = "Systeeminstellingen";
 "settings.content.navigation-title" = "Inhoud";

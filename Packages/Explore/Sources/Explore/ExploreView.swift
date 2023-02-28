@@ -68,7 +68,11 @@ public struct ExploreView: View {
     }
     .refreshable {
       Task {
+        SoundEffectManager.shared.playSound(of: .pull)
+        HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
         await viewModel.fetchTrending()
+        HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
+        SoundEffectManager.shared.playSound(of: .refresh)
       }
     }
     .listStyle(.grouped)

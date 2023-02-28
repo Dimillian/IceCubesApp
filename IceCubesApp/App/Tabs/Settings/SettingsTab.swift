@@ -179,6 +179,9 @@ struct SettingsTabs: View {
       Toggle(isOn: $preferences.isSocialKeyboardEnabled) {
         Label("settings.other.social-keyboard", systemImage: "keyboard")
       }
+      Toggle(isOn: $preferences.soundEffectEnabled) {
+        Label("settings.other.sound-effect", systemImage: "hifispeaker")
+      }
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }

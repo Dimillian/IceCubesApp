@@ -148,6 +148,7 @@
 "settings.section.other" = "기타";
 "settings.other.hide-openai" = "글 작성 도우미 🤖";
 "settings.other.social-keyboard" = "SNS 키보드";
+"settings.other.sound-effect" = "Enable Sound Effects";
 "settings.push.duplicate.title" = "중복 알림 해결사";
 "settings.push.duplicate.footer" = "같은 알림이 여러 번 오나요? 위에 있는 버튼을 누르면 마법처럼 해결될 거에요.";
 "settings.push.duplicate.button.fix" = "🪄 고치기";

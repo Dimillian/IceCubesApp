@@ -128,6 +128,7 @@
 "settings.section.other" = "其他";
 "settings.other.hide-openai" = "启用写作助手 🤖";
 "settings.other.social-keyboard" = "启用社交键盘";
+"settings.other.sound-effect" = "Enable Sound Effects";
 
 "settings.general.content" = "内容设置";
 "settings.system" = "系统设置";

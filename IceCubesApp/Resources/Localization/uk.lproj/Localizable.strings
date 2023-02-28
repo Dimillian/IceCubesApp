@@ -152,6 +152,7 @@
 "settings.section.other" = "Інше";
 "settings.other.hide-openai" = "Увімкнути 🤖 помічника";
 "settings.other.social-keyboard" = "Увімкнути Social Keyboard";
+"settings.other.sound-effect" = "Enable Sound Effects";
 "settings.push.duplicate.title" = "Виправити задвоєння сповіщень";
 "settings.push.duplicate.footer" = "Отримуєте сповіщення двічі? Спробуйте цю чарівну кнопку, щоб виправити це!";
 "settings.push.duplicate.button.fix" = "🪄 Виправити!";

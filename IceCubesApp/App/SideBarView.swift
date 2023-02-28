@@ -69,6 +69,7 @@ struct SideBarView<Content: View>: View {
     Button {
       if account.id == appAccounts.currentAccount.id {
         selectedTab = .profile
+        SoundEffectManager.shared.playSound(of: .tabSelection)
       } else {
         var transation = Transaction()
         transation.disablesAnimations = true
@@ -103,6 +104,7 @@ struct SideBarView<Content: View>: View {
           }
         }
         selectedTab = tab
+        SoundEffectManager.shared.playSound(of: .tabSelection)
         if tab == .notifications {
           if let token = appAccounts.currentAccount.oauthToken {
             userPreferences.setNotification(count: 0, token: token)

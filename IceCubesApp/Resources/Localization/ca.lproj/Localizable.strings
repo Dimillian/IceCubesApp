@@ -147,6 +147,7 @@
 "settings.section.other" = "Altres opcions";
 "settings.other.hide-openai" = "Activa l'ajudant 🤖";
 "settings.other.social-keyboard" = "Activa el teclat social";
+"settings.other.sound-effect" = "Enable Sound Effects";
 "settings.push.duplicate.title" = "Solucionador de notificacions duplicades";
 "settings.push.duplicate.footer" = "Rebeu les notificacions duplicades? Proveu aquest botó màgic per a solucionar-ho";
 "settings.push.duplicate.button.fix" = "🪄 Soluciona-ho";

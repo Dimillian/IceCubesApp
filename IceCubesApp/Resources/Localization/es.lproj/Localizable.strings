@@ -128,6 +128,7 @@
 "settings.section.other" = "Otras opciones";
 "settings.other.hide-openai" = "Activar ayudante 🤖";
 "settings.other.social-keyboard" = "Activar teclado social";
+"settings.other.sound-effect" = "Enable Sound Effects";
 "settings.general.content" = "Ajustes de contenido";
 "settings.system" = "Ajustes del sistema";
 "settings.content.navigation-title" = "Ajustes de contenido";

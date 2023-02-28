@@ -148,6 +148,7 @@
 "settings.section.other" = "Inne";
 "settings.other.hide-openai" = "Włącz 🤖 pomocnik";
 "settings.other.social-keyboard" = "Włącz klawiaturę społecznościową";
+"settings.other.sound-effect" = "Enable Sound Effects";
 "settings.push.duplicate.title" = "Korektor duplikatów powiadomień";
 "settings.push.duplicate.footer" = "Otrzymujesz zduplikowane powiadomienia? Spróbuj tego magicznego przycisku, aby to naprawić";
 "settings.push.duplicate.button.fix" = "🪄 Napraw to";

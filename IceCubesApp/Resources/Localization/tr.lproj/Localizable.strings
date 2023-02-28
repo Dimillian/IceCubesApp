@@ -148,6 +148,7 @@
 "settings.section.other" = "Diğer";
 "settings.other.hide-openai" = "Yardımcıyı 🤖 Aktive Et";
 "settings.other.social-keyboard" = "Sosyal Klavyeyi Aktive Et";
+"settings.other.sound-effect" = "Enable Sound Effects";
 "settings.push.duplicate.title" = "Duplicate notifications fixer";
 "settings.push.duplicate.footer" = "Receiving duplicate notifications? Try this magic button in order to fix it";
 "settings.push.duplicate.button.fix" = "🪄 Fix it";

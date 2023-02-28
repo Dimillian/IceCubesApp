@@ -154,12 +154,16 @@ struct StatusRowActionsView: View {
       switch action {
       case .respond:
         viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)
+        SoundEffectManager.shared.playSound(of: .share)
       case .favorite:
         await statusDataController.toggleFavorite()
+        SoundEffectManager.shared.playSound(of: .favorite)
       case .bookmark:
         await statusDataController.toggleBookmark()
+        SoundEffectManager.shared.playSound(of: .bookmark)
       case .boost:
         await statusDataController.toggleReblog()
+        SoundEffectManager.shared.playSound(of: .boost)
       default:
         break
       }

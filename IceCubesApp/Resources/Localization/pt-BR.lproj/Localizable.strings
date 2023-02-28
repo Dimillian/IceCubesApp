@@ -148,6 +148,7 @@
 "settings.section.other" = "Outros";
 "settings.other.hide-openai" = "Habilitar 🤖 ajudante";
 "settings.other.social-keyboard" = "Habilitar Teclado Social";
+"settings.other.sound-effect" = "Enable Sound Effects";
 "settings.push.duplicate.title" = "Corretor de notificações duplicadas";
 "settings.push.duplicate.footer" = "Recebendo notificações duplicadas? Tente este botão mágico para tentar corrigir";
 "settings.push.duplicate.button.fix" = "🪄 Corrigir";
