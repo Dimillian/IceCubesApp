@@ -79,14 +79,14 @@
 "settings.display.restore" = "초기 설정으로 되돌리기";
 "settings.display.section.display" = "화면";
 "settings.display.section.theme" = "테마";
-"settings.display.section.theme.footer" = "시스템 설정에 맞추기 옵션이 꺼져 있을 때만 색상을 직접 고를 수 있습니다.";
+"settings.display.section.theme.footer" = "시스템 설정에 맞춤 옵션이 꺼져 있을 때만 색상을 직접 고를 수 있습니다.";
 "settings.display.status.action-buttons" = "글 동작 버튼";
 "settings.display.status.media-style" = "글 미디어 크기";
 "settings.display.translate-button" = "번역 버튼 표시";
 "settings.display.theme.background" = "배경 색상";
 "settings.display.theme.secondary-background" = "보조 배경 색상";
 "settings.display.theme.tint" = "강조 색상";
-"settings.display.theme.systemColor" = "시스템 설정에 맞추기";
+"settings.display.theme.systemColor" = "시스템 설정에 맞춤";
 "settings.general.browser" = "브라우저";
 "settings.general.browser.in-app" = "인앱 브라우저";
 "settings.general.browser.in-app.readerview" = "인앱 브라우저에서 항상 읽기 도구 사용";
@@ -108,12 +108,12 @@
 "settings.system" = "시스템 설정";
 "settings.content.navigation-title" = "콘텐츠 설정";
 "settings.content.boosts" = "부스트";
-"settings.content.collapse-long-posts" = "Collapse long posts";
-"settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
-"settings.content.hide-repeated-boosts" = "중복으로 부스트된 글 숨기기";
+"settings.content.collapse-long-posts" = "긴 글을 접힌 상태로 표시";
+"settings.content.collapse-long-posts-hint" = "접힌 글은 일정 줄까지만 내용이 표시됩니다. 함께 표시되는 버튼을 누르면 전체 내용을 볼 수 있습니다.";
+"settings.content.hide-repeated-boosts" = "중복으로 부스트된 글 숨김";
 "settings.content.instance-settings" = "인스턴스 콘텐츠 설정";
-"settings.content.use-instance-settings" = "인스턴스 설정에 맞추기";
-"settings.content.expand-spoilers" = "열람 주의 표시된 글 항상 표시하기";
+"settings.content.use-instance-settings" = "인스턴스 설정에 맞춤";
+"settings.content.expand-spoilers" = "열람 주의 표시된 글 항상 가리지 않음";
 "settings.content.expand-media" = "표시할 미디어";
 "settings.content.default-sensitive" = "내 미디어 항상 민감함으로 표시";
 "settings.content.default-visibility" = "글 기본 공개 범위";
@@ -153,7 +153,7 @@
 "settings.push.duplicate.button.fix" = "🪄 고치기";
 "settings.other.autoplay-video" = "동영상 자동 재생";
 "settings.display.font" = "타임라인 글꼴";
-"settings.display.font.system" = "시스템 글꼴 사용";
+"settings.display.font.system" = "시스템 글꼴";
 "settings.display.font.custom" = "직접 설정";
 "settings.display.font.scaling-%@" = "폰트 크기 조절: %@";
 "settings.about.built-with" = "Ice Cubes는 다음 오픈 소스 소프트웨어를 사용하여 개발되었습니다:";
@@ -184,7 +184,7 @@
 "settings.swipeactions.status.explanation" = "글을 오른쪽 혹은 왼쪽으로 쓸어넘겨 원하는 동작을 실행할 수 있습니다. 보조 동작은 주 동작이 설정되어 있을 때만 추가할 수 있습니다.";
 "settings.swipeactions.status.leading" = "오른쪽으로 쓸어넘길 때";
 "settings.swipeactions.status.trailing" = "왼쪽으로 쓸어넘길 때";
-"settings.swipeactions.status" = "글";
+"settings.swipeactions.status" = "글을";
 "settings.swipeactions.appearance" = "모양";
 "settings.swipeactions.use-theme-colors" = "테마 색상 사용";
 "settings.swipeactions.use-theme-colors-explanation" = "동작의 기본 색상 대신 테마 색상을 사용합니다.";
@@ -294,7 +294,7 @@
 "conversations.error.title" = "오류";
 "conversations.navigation-title" = "다이렉트 메시지";
 "conversations.new.message.placeholder" = "새 메시지";
-"conversations.latest.message" = "최신 메시지";
+"conversations.latest.message" = "가장 최근 메시지를";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld개 글 (%lld명이 이야기 중)";
@@ -399,7 +399,7 @@
 "status.action.post" = "게시";
 "status.action.quote" = "인용";
 "status.action.reply" = "댓글";
-"status.action.section.your-post" = "내 글";
+"status.action.section.your-post" = "내 글을";
 "status.action.share" = "링크 및 본문 공유";
 "status.action.share-link" = "링크 공유";
 "status.action.share-image" = "이미지로 공유";
@@ -461,7 +461,7 @@
 "status.row.you-boosted" = "내가 부스트함";
 "status.show-less" = "간략히 보기";
 "status.show-more" = "더 보기";
-"status.show-full-post" = "Show full post";
+"status.show-full-post" = "전체 내용 보기";
 "status.summary.at-time" = " ";
 "status.summary.edited-time" = "마지막 수정: ";
 "status.summary.n-boosts %lld" = "부스트 %lld회";
@@ -485,8 +485,8 @@
 "filter.contexts.public" = "공개 타임라인";
 "filter.contexts.conversations" = "대화";
 "filter.contexts.profiles" = "프로필";
-"filter.action.warning" = "경고 표시하고 글 가리기";
-"filter.action.hide" = "완전히 숨기기";
+"filter.action.warning" = "경고 표시하고 글 가림";
+"filter.action.hide" = "완전히 숨김";
 
 // MARK: Accessibility
 "accessibility.editor.button.attach-photo" = "이미지 첨부";
