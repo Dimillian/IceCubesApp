@@ -53,7 +53,7 @@ struct IconSelectorView: View {
       IconSelector(title: "\("settings.app.icon.designed-by".localized) Dan van Moll", icons: [.alt26, .alt27, .alt28]),
       IconSelector(title: "\("settings.app.icon.designed-by".localized) Chanhwi Joo (GitHub @te6-in)", icons: [.alt29, .alt34, .alt31, .alt35, .alt30, .alt32]),
       IconSelector(title: "\("settings.app.icon.designed-by".localized) W. Kovács Ágnes (@wildgica)", icons: [.alt33]),
-      IconSelector(title: "\("settings.app.icon.designed-by".localized) Duncan Horne (@wildgica)", icons: [.alt36]),
+      IconSelector(title: "\("settings.app.icon.designed-by".localized) Duncan Horne", icons: [.alt36]),
     ]
   }
 
