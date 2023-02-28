@@ -261,6 +261,11 @@ struct StatusEditorAccessoryView: View {
           }
         }.padding(.horizontal)
       }
+      .toolbar {
+        ToolbarItem(placement: .navigationBarLeading) {
+          Button("action.cancel", action: { isCustomEmojisSheetDisplay = false })
+        }
+      }
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
       .navigationTitle("status.editor.emojis.navigation-title")
