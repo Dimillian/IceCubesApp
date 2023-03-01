@@ -18,7 +18,6 @@
 "account.add.error.instance-not-supported" = "This instance is not currently supported.";
 "account.add.navigation-title" = "Add account";
 "account.add.sign-in" = "Sign in";
-"account.add.link-account" = "Click below to login with your Mastodon account";
 
 // MARK: Enums
 "enum.avatar-position.leading" = "Leading";
