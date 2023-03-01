@@ -16,7 +16,7 @@ public class ReblogCache {
   private var needsWrite = false
 
   init() {
-    statusCache.countLimit = 100 // can tune the cache here, 100 is super conservative
+    statusCache.countLimit = 300 // can tune the cache here, 100 is super conservative
 
     // read any existing cache from disk
     if FileManager.default.fileExists(atPath: cacheFile.path()) {
