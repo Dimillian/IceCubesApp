@@ -95,12 +95,14 @@ public class RouterPath: ObservableObject {
               client.hasConnection(with: url),
               let id = Int(url.lastPathComponent)
     {
-      if url.absoluteString.contains(client.server) {
-        navigate(to: .statusDetail(id: String(id)))
-      } else {
-        navigate(to: .remoteStatusDetail(url: url))
+      if !StatusEmbedCache.shared.badStatusesURLs.contains(url) {
+        if url.absoluteString.contains(client.server) {
+          navigate(to: .statusDetail(id: String(id)))
+        } else {
+          navigate(to: .remoteStatusDetail(url: url))
+        }
+        return .handled
       }
-      return .handled
     }
     return urlHandler?(url) ?? .systemAction
   }
