@@ -65,7 +65,9 @@ public struct AccountDetailView: View {
           if viewModel.selectedTab == .statuses {
             pinnedPostsView
           }
-          StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath)
+          StatusesListView(fetcher: viewModel,
+                           client: client,
+                           routerPath: routerPath)
         case .followedTags:
           tagsListView
         case .lists:

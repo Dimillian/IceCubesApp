@@ -38,6 +38,14 @@ public final class StatusDataControllerProvider {
     cache[key] = controller
     return controller
   }
+  
+  public func updateDataControllers(for statuses: [Status], client: Client) {
+    for status in statuses {
+      let realStatus: AnyStatus = status.reblog ?? status
+      let controller = dataController(for: realStatus, client: client)
+      controller.updateFrom(status: realStatus, publishUpdate: false)
+    }
+  }
 }
 
 @MainActor
