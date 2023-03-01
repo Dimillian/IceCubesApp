@@ -12,6 +12,7 @@ import SwiftUI
 struct AddAccountView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(\.scenePhase) private var scenePhase
+  @Environment(\.openURL) var openURL
 
   @EnvironmentObject private var appAccountsManager: AppAccountsManager
   @EnvironmentObject private var currentAccount: CurrentAccount
@@ -125,7 +126,30 @@ struct AddAccountView: View {
         }
       })
       .sheet(item: $oauthURL, content: { url in
-        SafariView(url: url)
+        		  if ProcessInfo.processInfo.isiOSAppOnMac && ProcessInfo.processInfo.isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 13, minorVersion: 3, patchVersion: 0)) {  // Workaround for macOS 13.3 seemingly breaking SFSafariViewController, can be removed if this issue is resolved
+			  NavigationView {
+			  VStack {
+				  Text("Click below to login with your Mastodon account")
+				  Button {
+					  withAnimation {
+						  openURL(url)
+					  }
+				  } label: {
+					  HStack {
+						  Text("account.add.sign-in")
+							  .font(.scaledHeadline)
+					  }
+				  }
+				  .buttonStyle(.borderedProminent)
+			  }
+			  .toolbar {
+				  ToolbarItem(placement: .navigationBarLeading) {
+					  Button("action.cancel", action: { dismiss() })
+				  }}
+		  }
+		  } else {
+			  SafariView(url: url)
+		  }
       })
     }
   }
