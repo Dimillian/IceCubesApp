@@ -146,6 +146,14 @@
 "settings.support.two.title" = "☕️ ナイスチップ";
 "settings.support.four.title" = "👽 お前は一体誰なんだ";
 "settings.support.four.subtitle" = "Ice Cubesの運営に大きく貢献することでしょう！";
+"settings.support.supporter.title" = " Become a supporter!";
+"settings.support.supporter.subtitle" = "By giving a monthly tip to Ice Cubes, you become a supporter, you'll even get verified badge on your profile. For your 👀 only.";
+"settings.support.supporter.subscribed" = " Thanks for being an Ice Cubes supporter!";
+"settings.support.supporter.subscription-info"= "Subscription are automatically renewed unless you cancel them a day before the next renewal cycle.";
+"settings.support.restore-purchase.button" = "Restore purchase";
+"settings.support.restore-purchase.explanation" = "Restore your supporter subscription if it's haven't been automatically synced.";
+"settings.support.privacy-policy" = "Privacy Policy";
+"settings.support.terms-of-use" = "Terms";
 "settings.timeline.add" = "ローカルタイムラインの追加";
 "settings.title" = "設定";
 "settings.rate" = "Ice Cubesを評価する";

@@ -28,6 +28,7 @@ struct IceCubesApp: App {
   @State private var selectedTab: Tab = .timeline
   @State private var popToRootTab: Tab = .other
   @State private var sideBarLoadedTabs: Set<Tab> = Set()
+  @State private var isSupporter: Bool = false
 
   private var availableTabs: [Tab] {
     appAccountsManager.currentClient.isAuth ? Tab.loggedInTabs() : Tab.loggedOutTab()
@@ -51,6 +52,7 @@ struct IceCubesApp: App {
         .environmentObject(theme)
         .environmentObject(watcher)
         .environmentObject(pushNotificationsService)
+        .environment(\.isSupporter, isSupporter)
         .fullScreenCover(item: $quickLook.url, content: { url in
           QuickLookPreview(selectedURL: url, urls: quickLook.urls)
             .edgesIgnoringSafeArea(.bottom)
@@ -225,6 +227,11 @@ struct IceCubesApp: App {
   private func setupRevenueCat() {
     Purchases.logLevel = .error
     Purchases.configure(withAPIKey: "appl_JXmiRckOzXXTsHKitQiicXCvMQi")
+    Purchases.shared.getCustomerInfo { info, _ in
+      if info?.entitlements.active.isEmpty == false {
+        isSupporter = true
+      }
+    }
   }
 
   private func refreshPushSubs() {

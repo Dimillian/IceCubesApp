@@ -16,6 +16,7 @@ struct AccountDetailHeaderView: View {
   @EnvironmentObject private var routerPath: RouterPath
   @EnvironmentObject private var currentAccount: CurrentAccount
   @Environment(\.redactionReasons) private var reasons
+  @Environment(\.isSupporter) private var isSupporter: Bool
 
   @ObservedObject var viewModel: AccountDetailViewModel
   let account: Account
@@ -85,15 +86,24 @@ struct AccountDetailHeaderView: View {
 
   private var accountAvatarView: some View {
     HStack {
-      AvatarView(url: account.avatar, size: .account)
-        .onTapGesture {
-          guard account.haveAvatar else {
-            return
+      ZStack(alignment: .topTrailing) {
+        AvatarView(url: account.avatar, size: .account)
+          .onTapGesture {
+            guard account.haveAvatar else {
+              return
+            }
+            Task {
+              await quickLook.prepareFor(urls: [account.avatar], selectedURL: account.avatar)
+            }
           }
-          Task {
-            await quickLook.prepareFor(urls: [account.avatar], selectedURL: account.avatar)
-          }
+        if viewModel.isCurrentUser, isSupporter {
+          Image(systemName: "checkmark.seal.fill")
+            .resizable()
+            .frame(width: 25, height: 25)
+            .foregroundColor(theme.tintColor)
+            .offset(x: 10, y: -10)
         }
+      }
       Spacer()
       Group {
         Button {
