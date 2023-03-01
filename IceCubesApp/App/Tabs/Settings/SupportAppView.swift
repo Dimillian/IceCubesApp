@@ -159,7 +159,7 @@ struct SupportAppView: View {
         loadingPlaceholder
       } else if let subscription {
         HStack {
-          if customerInfo?.entitlements["Supporter"]?.isActive == false {
+          if customerInfo?.entitlements["Supporter"]?.isActive == true {
             Text(Image(systemName: "checkmark.seal.fill"))
               .foregroundColor(theme.tintColor)
               .baselineOffset(-1) +

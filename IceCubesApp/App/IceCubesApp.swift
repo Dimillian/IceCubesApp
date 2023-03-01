@@ -228,7 +228,7 @@ struct IceCubesApp: App {
     Purchases.logLevel = .error
     Purchases.configure(withAPIKey: "appl_JXmiRckOzXXTsHKitQiicXCvMQi")
     Purchases.shared.getCustomerInfo { info, _ in
-      if info?.entitlements["Supporter"]?.isActive == false {
+      if info?.entitlements["Supporter"]?.isActive == true {
         isSupporter = true
       }
     }
