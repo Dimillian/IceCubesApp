@@ -2,6 +2,7 @@ import Foundation
 import Models
 import Network
 import SwiftUI
+import Env
 
 @MainActor
 class StatusDetailViewModel: ObservableObject {
@@ -78,6 +79,11 @@ class StatusDetailViewModel: ObservableObject {
       var statuses = data.context.ancestors
       statuses.append(data.status)
       statuses.append(contentsOf: data.context.descendants)
+      
+      StatusDataControllerProvider.shared.dataController(for: data.status,
+                                                         client: client)
+      .updateFrom(status: data.status, publishUpdate: true)
+      
       if animate {
         withAnimation {
           isLoadingContext = false

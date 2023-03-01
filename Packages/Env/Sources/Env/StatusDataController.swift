@@ -32,7 +32,6 @@ public final class StatusDataControllerProvider {
   public func dataController(for status: any AnyStatus, client: Client) -> StatusDataController {
     let key = CacheKey(statusId: status.id, client: client)
     if let controller = cache[key] as? StatusDataController {
-      controller.updateFrom(status: status, publishUpdate: false)
       return controller
     }
     let controller = StatusDataController(status: status, client: client)

@@ -150,11 +150,6 @@ public struct StatusDetailView: View {
         }
       }
       .id(status.id)
-      .onAppear {
-        StatusDataControllerProvider.shared.dataController(for: status.reblog ?? status,
-                                                           client: client)
-        .updateFrom(status: status, publishUpdate: true)
-      }
   }
 
   private var errorView: some View {
