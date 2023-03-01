@@ -197,6 +197,13 @@ public class StatusRowViewModel: ObservableObject {
       }
       return
     }
+    
+    if routerPath.badStatuses.contains(url) {
+      if isEmbedLoading {
+        isEmbedLoading = false
+      }
+      return
+    }
 
     if let embed = StatusEmbedCache.shared.get(url: url) {
       isEmbedLoading = false
@@ -219,6 +226,9 @@ public class StatusRowViewModel: ObservableObject {
       }
       if let embed {
         StatusEmbedCache.shared.set(url: url, status: embed)
+      }
+      else {
+        routerPath.badStatuses.insert(url)
       }
       withAnimation {
         embeddedStatus = embed

@@ -68,6 +68,9 @@ public class RouterPath: ObservableObject {
   @Published public var path: [RouterDestination] = []
   @Published public var presentedSheet: SheetDestination?
 
+  
+  public var badStatuses = Set<URL>()
+  
   public init() {}
 
   public func navigate(to: RouterDestination) {
@@ -94,12 +97,14 @@ public class RouterPath: ObservableObject {
               client.hasConnection(with: url),
               let id = Int(url.lastPathComponent)
     {
-      if url.absoluteString.contains(client.server) {
-        navigate(to: .statusDetail(id: String(id)))
-      } else {
-        navigate(to: .remoteStatusDetail(url: url))
+      if !badStatuses.contains(url) {
+        if url.absoluteString.contains(client.server) {
+          navigate(to: .statusDetail(id: String(id)))
+        } else {
+          navigate(to: .remoteStatusDetail(url: url))
+        }
+        return .handled
       }
-      return .handled
     }
     return urlHandler?(url) ?? .systemAction
   }
