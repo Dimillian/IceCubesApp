@@ -13,9 +13,9 @@ public protocol StatusDataControlling: ObservableObject {
   var reblogsCount: Int { get set }
   var repliesCount: Int { get set }
   
-  func toggleBookmark() async
-  func toggleReblog() async
-  func toggleFavorite() async
+  func toggleBookmark(remoteStatus: String?) async
+  func toggleReblog(remoteStatus: String?) async
+  func toggleFavorite(remoteStatus: String?) async
 }
 
 @MainActor
@@ -80,10 +80,11 @@ public final class StatusDataController: StatusDataControlling {
     }
   }
   
-  public func toggleFavorite() async {
+  public func toggleFavorite(remoteStatus: String?) async {
     guard client.isAuth else { return }
     isFavorited.toggle()
-    let endpoint = isFavorited ? Statuses.favorite(id: status.id) : Statuses.unfavorite(id: status.id)
+    let id = remoteStatus ?? status.id
+    let endpoint = isFavorited ? Statuses.favorite(id: id) : Statuses.unfavorite(id: id)
     favoritesCount += isFavorited ? 1 : -1
     objectWillChange.send()
     do {
@@ -97,10 +98,11 @@ public final class StatusDataController: StatusDataControlling {
   }
   
   
-  public func toggleReblog() async {
+  public func toggleReblog(remoteStatus: String?) async {
     guard client.isAuth else { return }
     isReblogged.toggle()
-    let endpoint = isReblogged ? Statuses.reblog(id: status.id) : Statuses.unreblog(id: status.id)
+    let id = remoteStatus ?? status.id
+    let endpoint = isReblogged ? Statuses.reblog(id: id) : Statuses.unreblog(id: id)
     reblogsCount += isReblogged ? 1 : -1
     objectWillChange.send()
     do {
@@ -113,10 +115,11 @@ public final class StatusDataController: StatusDataControlling {
     }
   }
   
-  public func toggleBookmark() async {
+  public func toggleBookmark(remoteStatus: String?) async {
     guard client.isAuth else { return }
     isBookmarked.toggle()
-    let endpoint = isBookmarked ? Statuses.bookmark(id: status.id) : Statuses.unbookmark(id: status.id)
+    let id = remoteStatus ?? status.id
+    let endpoint = isBookmarked ? Statuses.bookmark(id: id) : Statuses.unbookmark(id: id)
     do {
       let status: Status = try await client.post(endpoint: endpoint)
       updateFrom(status: status, publishUpdate: true)

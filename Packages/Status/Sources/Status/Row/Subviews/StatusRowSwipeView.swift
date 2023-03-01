@@ -62,16 +62,16 @@ struct StatusRowSwipeView: View {
       makeSwipeButtonForRouterPath(action: action, destination: .quoteStatusEditor(status: viewModel.status))
     case .favorite:
       makeSwipeButtonForTask(action: action) {
-        await statusDataController.toggleFavorite()
+        await statusDataController.toggleFavorite(remoteStatus: nil)
       }
     case .boost:
       makeSwipeButtonForTask(action: action, privateBoost: privateBoost()) {
-        await statusDataController.toggleReblog()
+        await statusDataController.toggleReblog(remoteStatus: nil)
       }
       .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id)
     case .bookmark:
       makeSwipeButtonForTask(action: action) {
-        await statusDataController.toggleBookmark()
+        await statusDataController.toggleBookmark(remoteStatus: nil)
       }
     case .none:
       EmptyView()

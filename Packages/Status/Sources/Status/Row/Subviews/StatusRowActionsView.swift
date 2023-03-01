@@ -156,13 +156,13 @@ struct StatusRowActionsView: View {
         viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)
         SoundEffectManager.shared.playSound(of: .share)
       case .favorite:
-        await statusDataController.toggleFavorite()
+        await statusDataController.toggleFavorite(remoteStatus: viewModel.localStatusId)
         SoundEffectManager.shared.playSound(of: .favorite)
       case .bookmark:
-        await statusDataController.toggleBookmark()
+        await statusDataController.toggleBookmark(remoteStatus: viewModel.localStatusId)
         SoundEffectManager.shared.playSound(of: .bookmark)
       case .boost:
-        await statusDataController.toggleReblog()
+        await statusDataController.toggleReblog(remoteStatus: viewModel.localStatusId)
         SoundEffectManager.shared.playSound(of: .boost)
       default:
         break

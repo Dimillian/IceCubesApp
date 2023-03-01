@@ -32,18 +32,18 @@ struct StatusRowContextMenu: View {
   var body: some View {
     if !viewModel.isRemote {
       Button { Task {
-        await statusDataController.toggleFavorite()
+        await statusDataController.toggleFavorite(remoteStatus: nil)
       } } label: {
         Label(statusDataController.isFavorited ? "status.action.unfavorite" : "status.action.favorite", systemImage: "star")
       }
       Button { Task {
-        await statusDataController.toggleReblog()
+        await statusDataController.toggleReblog(remoteStatus: nil)
       } } label: {
         boostLabel
       }
       .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != account.account?.id)
       Button { Task {
-        await statusDataController.toggleBookmark()
+        await statusDataController.toggleBookmark(remoteStatus: nil)
       } } label: {
         Label(statusDataController.isBookmarked ? "status.action.unbookmark" : "status.action.bookmark",
               systemImage: "bookmark")
