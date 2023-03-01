@@ -2,10 +2,8 @@ import Account
 import AppAccount
 import DesignSystem
 import Env
-import Network
 import Status
 import SwiftUI
-import UIKit
 
 class ShareViewController: UIViewController {
   override func viewDidLoad() {

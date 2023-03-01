@@ -2,12 +2,10 @@ import AppAccount
 import CryptoKit
 import Env
 import Intents
-import KeychainSwift
 import Models
 import Network
 import Notifications
 import UIKit
-import UserNotifications
 
 @MainActor
 class NotificationService: UNNotificationServiceExtension {
