@@ -181,8 +181,8 @@ public class StatusRowViewModel: ObservableObject {
     let content = status.reblog?.content ?? status.content
     if !content.statusesURLs.isEmpty,
        let url = content.statusesURLs.first,
-       client.hasConnection(with: url)
-    {
+       !StatusEmbedCache.shared.badStatusesURLs.contains(url),
+       client.hasConnection(with: url) {
       return url
     }
     return nil
@@ -198,13 +198,6 @@ public class StatusRowViewModel: ObservableObject {
       return
     }
     
-    if routerPath.badStatuses.contains(url) {
-      if isEmbedLoading {
-        isEmbedLoading = false
-      }
-      return
-    }
-
     if let embed = StatusEmbedCache.shared.get(url: url) {
       isEmbedLoading = false
       embeddedStatus = embed
@@ -228,7 +221,7 @@ public class StatusRowViewModel: ObservableObject {
         StatusEmbedCache.shared.set(url: url, status: embed)
       }
       else {
-        routerPath.badStatuses.insert(url)
+        StatusEmbedCache.shared.badStatusesURLs.insert(url)
       }
       withAnimation {
         embeddedStatus = embed
@@ -236,6 +229,7 @@ public class StatusRowViewModel: ObservableObject {
       }
     } catch {
       isEmbedLoading = false
+      StatusEmbedCache.shared.badStatusesURLs.insert(url)
     }
   }
 

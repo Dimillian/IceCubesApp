@@ -7,6 +7,8 @@ class StatusEmbedCache {
   static let shared = StatusEmbedCache()
 
   private var cache: [URL: Status] = [:]
+  
+  public var badStatusesURLs = Set<URL>()
 
   private init() {}
 
