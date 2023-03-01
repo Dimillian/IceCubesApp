@@ -126,10 +126,10 @@ struct AddAccountView: View {
         }
       })
       .sheet(item: $oauthURL, content: { url in
-		  if ProcessInfo.processInfo.isiOSAppOnMac && ProcessInfo.processInfo.isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 13, minorVersion: 3, patchVersion: 0)) {  // Workaround for macOS 13.3 seemingly breaking SFSafariViewController, can be removed if this issue is resolved
+        		  if ProcessInfo.processInfo.isiOSAppOnMac && ProcessInfo.processInfo.isOperatingSystemAtLeast(OperatingSystemVersion(majorVersion: 13, minorVersion: 3, patchVersion: 0)) {  // Workaround for macOS 13.3 seemingly breaking SFSafariViewController, can be removed if this issue is resolved
 			  NavigationView {
 			  VStack {
-				  Text("Clicl on the button below to link your Mastodon account to Ice Cubes")
+				  Text("Click below to login with your Mastodon account")
 				  Button {
 					  withAnimation {
 						  openURL(url)
