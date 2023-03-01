@@ -110,7 +110,7 @@ struct StatusEditorAccessoryView: View {
       customEmojisSheet
     }
     .onAppear {
-      viewModel.setInitialLanguageSelection(preference: preferences.serverPreferences?.postLanguage)
+      viewModel.setInitialLanguageSelection(preference: preferences.recentlyUsedLanguages.first ?? preferences.serverPreferences?.postLanguage)
     }
   }
 
