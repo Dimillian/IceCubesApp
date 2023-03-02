@@ -106,7 +106,7 @@ struct AddAccountView: View {
               let instance: Instance = try await client.get(endpoint: Instances.instance)
               withAnimation {
                 self.instance = instance
-                self.instanceName = instance.title  // clean up the text box, principally to chop off the username if present so it's clear that you might not wind up siging in as the thing in the box
+                self.instanceName = sanitizedName  // clean up the text box, principally to chop off the username if present so it's clear that you might not wind up siging in as the thing in the box
               }
               instanceFetchError = nil
             } else {
