@@ -12,7 +12,6 @@ public struct StatusRowView: View {
   @Environment(\.isCompact) private var isCompact: Bool
   
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var client: Client
   
   @StateObject var viewModel: StatusRowViewModel
   
@@ -146,7 +145,7 @@ public struct StatusRowView: View {
     }
     .environmentObject(
       StatusDataControllerProvider.shared.dataController(for: viewModel.finalStatus,
-                                                         client: client)
+                                                         client: viewModel.client)
     )
   }
   
