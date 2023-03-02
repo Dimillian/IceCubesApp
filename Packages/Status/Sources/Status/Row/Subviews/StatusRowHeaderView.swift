@@ -24,7 +24,7 @@ struct StatusRowHeaderView: View {
       }
     }
     .accessibilityElement()
-    .accessibilityLabel(Text("\(viewModel.finalStatus.account.displayName)"))
+    .accessibilityLabel(Text("\(viewModel.finalStatus.account.safeDisplayName)"))
   }
 
   @ViewBuilder

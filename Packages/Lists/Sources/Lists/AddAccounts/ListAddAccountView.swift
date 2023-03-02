@@ -46,7 +46,7 @@ public struct ListAddAccountView: View {
       }
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
-      .navigationTitle("lists.add-remove-\(viewModel.account.displayName)")
+      .navigationTitle("lists.add-remove-\(viewModel.account.safeDisplayName)")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem {

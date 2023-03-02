@@ -10,10 +10,10 @@ public extension Account {
   }
 
   var safeDisplayName: String {
-    if displayName.isEmpty || displayName == "" {
-      return "@\(username)"
+    if let displayName, !displayName.isEmpty {
+      return displayName
     }
-    return displayName
+    return "@\(username)"
   }
 
   var displayNameWithoutEmojis: String {

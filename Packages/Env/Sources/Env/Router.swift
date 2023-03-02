@@ -19,6 +19,8 @@ public enum RouterDestination: Hashable {
   case favoritedBy(id: String)
   case rebloggedBy(id: String)
   case accountsList(accounts: [Account])
+  case trendingTimeline
+  case tagsList(tags: [Tag])
 }
 
 public enum SheetDestination: Identifiable {

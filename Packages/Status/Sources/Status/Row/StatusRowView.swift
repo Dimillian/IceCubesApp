@@ -145,7 +145,7 @@ public struct StatusRowView: View {
       -100
     }
     .environmentObject(
-      StatusDataControllerProvider.shared.dataController(for: viewModel.status.reblog ?? viewModel.status,
+      StatusDataControllerProvider.shared.dataController(for: viewModel.finalStatus,
                                                          client: client)
     )
   }

@@ -36,7 +36,7 @@ class EditAccountViewModel: ObservableObject {
     guard let client else { return }
     do {
       let account: Account = try await client.get(endpoint: Accounts.verifyCredentials)
-      displayName = account.displayName
+      displayName = account.displayName ?? ""
       note = account.source?.note ?? ""
       postPrivacy = account.source?.privacy ?? .pub
       isSensitive = account.source?.sensitive ?? false
