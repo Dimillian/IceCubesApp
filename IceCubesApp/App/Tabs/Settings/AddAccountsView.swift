@@ -28,6 +28,20 @@ struct AddAccountView: View {
   @State private var oauthURL: URL?
 
   private let instanceNamePublisher = PassthroughSubject<String, Never>()
+  
+  private var sanitizedName: String {
+    get {
+      var name = instanceName
+        .replacingOccurrences(of: "http://", with: "")
+        .replacingOccurrences(of: "https://", with: "")
+      
+      if name.contains("@") {
+        let parts = name.components(separatedBy: "@")
+        name = parts[parts.count-1] // [@]username@server.address.com
+      }
+      return name
+    }
+  }
 
   @FocusState private var isInstanceURLFieldFocused: Bool
 
@@ -81,10 +95,10 @@ struct AddAccountView: View {
         instanceNamePublisher.send(newValue)
       }
       .onReceive(instanceNamePublisher.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)) { newValue in
-        let newValue = newValue
-          .replacingOccurrences(of: "http://", with: "")
-          .replacingOccurrences(of: "https://", with: "")
-        let client = Client(server: newValue)
+        //let newValue = newValue
+        //  .replacingOccurrences(of: "http://", with: "")
+        //  .replacingOccurrences(of: "https://", with: "")
+        let client = Client(server: sanitizedName)
         Task {
           do {
             // bare bones preflight for domain validity
@@ -92,6 +106,7 @@ struct AddAccountView: View {
               let instance: Instance = try await client.get(endpoint: Instances.instance)
               withAnimation {
                 self.instance = instance
+                self.instanceName = sanitizedName  // clean up the text box, principally to chop off the username if present so it's clear that you might not wind up siging in as the thing in the box
               }
               instanceFetchError = nil
             } else {
@@ -142,9 +157,9 @@ struct AddAccountView: View {
       } label: {
         HStack {
           Spacer()
-          if isSigninIn || !instanceName.isEmpty && instance == nil {
+          if isSigninIn || !sanitizedName.isEmpty && instance == nil {
             ProgressView()
-              .id(instanceName)
+              .id(sanitizedName)
               .tint(theme.labelColor)
           } else {
             Text("account.add.sign-in")
@@ -163,7 +178,7 @@ struct AddAccountView: View {
       if instances.isEmpty {
         placeholderRow
       } else {
-        ForEach(instanceName.isEmpty ? instances : instances.filter { $0.name.contains(instanceName.lowercased()) }) { instance in
+        ForEach(sanitizedName.isEmpty ? instances : instances.filter { $0.name.contains(sanitizedName.lowercased()) }) { instance in
           Button {
             self.instanceName = instance.name
           } label: {
@@ -206,7 +221,7 @@ struct AddAccountView: View {
 
   private func signIn() async {
     do {
-      signInClient = .init(server: instanceName)
+      signInClient = .init(server: sanitizedName)
       if let oauthURL = try await signInClient?.oauthURL() {
         self.oauthURL = oauthURL
       } else {
