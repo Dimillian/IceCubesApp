@@ -94,12 +94,12 @@ struct StatusRowActionsView: View {
       HStack {
         ForEach(Action.allCases, id: \.self) { action in
           if action == .share {
-            if let urlString = viewModel.status.reblog?.url ?? viewModel.status.url,
+            if let urlString = viewModel.finalStatus.url,
                let url = URL(string: urlString)
             {
               ShareLink(item: url,
-                        subject: Text(viewModel.status.reblog?.account.safeDisplayName ?? viewModel.status.account.safeDisplayName),
-                        message: Text(viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText)) {
+                        subject: Text(viewModel.finalStatus.account.safeDisplayName),
+                        message: Text(viewModel.finalStatus.content.asRawText)) {
                 action.image(dataController: statusDataController)
               }
               .buttonStyle(.statusAction())

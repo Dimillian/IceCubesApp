@@ -128,11 +128,13 @@ public final class StatusDataController: StatusDataControlling {
     isBookmarked.toggle()
     let id = remoteStatus ?? status.id
     let endpoint = isBookmarked ? Statuses.bookmark(id: id) : Statuses.unbookmark(id: id)
+    objectWillChange.send()
     do {
       let status: Status = try await client.post(endpoint: endpoint)
       updateFrom(status: status, publishUpdate: true)
     } catch {
       isBookmarked.toggle()
+      objectWillChange.send()
     }
   }
 }

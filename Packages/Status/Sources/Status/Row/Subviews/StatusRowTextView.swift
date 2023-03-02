@@ -7,17 +7,19 @@ struct StatusRowTextView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var preferences: UserPreferences
 
-  let status: AnyStatus
   @ObservedObject var viewModel: StatusRowViewModel
   
   var body: some View {
     VStack {
       HStack {
-        EmojiTextApp(status.content, emojis: status.emojis, language: status.language, lineLimit: viewModel.lineLimit)
+        EmojiTextApp(viewModel.finalStatus.content,
+                     emojis: viewModel.finalStatus.emojis,
+                     language: viewModel.finalStatus.language,
+                     lineLimit: viewModel.lineLimit)
           .font(.scaledBody)
           .emojiSize(Font.scaledBodyPointSize)
           .environment(\.openURL, OpenURLAction { url in
-            viewModel.routerPath.handleStatus(status: status, url: url)
+            viewModel.routerPath.handleStatus(status: viewModel.finalStatus, url: url)
           })
         Spacer()
       }

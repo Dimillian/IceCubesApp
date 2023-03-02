@@ -12,6 +12,7 @@ public class StatusRowViewModel: ObservableObject {
   let isFocused: Bool
   let isRemote: Bool
   let showActions: Bool
+  let finalStatus: AnyStatus
 
   @Published var isPinned: Bool
   @Published var embeddedStatus: Status?
@@ -49,7 +50,7 @@ public class StatusRowViewModel: ObservableObject {
   private func recalcCollapse() {
     let hasContentWarning = !status.spoilerText.asRawText.isEmpty
     let showCollapseButton = collapseLongPosts && isCollapsed && !hasContentWarning
-      && (status.reblog?.content ?? status.content).asRawText.unicodeScalars.count > collapseThresholdLength
+    && finalStatus.content.asRawText.unicodeScalars.count > collapseThresholdLength
     let newlineLimit = showCollapseButton && isCollapsed ? collapsedLines : nil
     if newlineLimit != lineLimit {
       lineLimit = newlineLimit
@@ -62,7 +63,7 @@ public class StatusRowViewModel: ObservableObject {
   private var seen = false
 
   var filter: Filtered? {
-    status.reblog?.filtered?.first ?? status.filtered?.first
+    finalStatus.filtered?.first
   }
 
   var isThread: Bool {
@@ -91,6 +92,7 @@ public class StatusRowViewModel: ObservableObject {
               showActions: Bool = true)
   {
     self.status = status
+    self.finalStatus = status.reblog ?? status
     self.client = client
     self.routerPath = routerPath
     self.isFocused = isFocused
@@ -104,7 +106,7 @@ public class StatusRowViewModel: ObservableObject {
     if UserPreferences.shared.autoExpandSpoilers {
       displaySpoiler = false
     } else {
-      displaySpoiler = !(status.reblog?.spoilerText.asRawText ?? status.spoilerText.asRawText).isEmpty
+      displaySpoiler = !finalStatus.spoilerText.asRawText.isEmpty
     }
 
     
@@ -142,7 +144,7 @@ public class StatusRowViewModel: ObservableObject {
 
   func navigateToDetail() {
     guard !isFocused else { return }
-    if isRemote, let url = URL(string: status.reblog?.url ?? status.url ?? "") {
+    if isRemote, let url = URL(string: finalStatus.url ?? "") {
       routerPath.navigate(to: .remoteStatusDetail(url: url))
     } else {
       routerPath.navigate(to: .statusDetailWithStatus(status: status.reblogAsAsStatus ?? status))
@@ -178,7 +180,7 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   private func embededStatusURL() -> URL? {
-    let content = status.reblog?.content ?? status.content
+    let content = finalStatus.content
     if !content.statusesURLs.isEmpty,
        let url = content.statusesURLs.first,
        !StatusEmbedCache.shared.badStatusesURLs.contains(url),
@@ -237,7 +239,7 @@ public class StatusRowViewModel: ObservableObject {
     guard client.isAuth else { return }
     isPinned = true
     do {
-      let status: Status = try await client.post(endpoint: Statuses.pin(id: status.reblog?.id ?? status.id))
+      let status: Status = try await client.post(endpoint: Statuses.pin(id: finalStatus.id))
       updateFromStatus(status: status)
     } catch {
       isPinned = false
@@ -248,7 +250,7 @@ public class StatusRowViewModel: ObservableObject {
     guard client.isAuth else { return }
     isPinned = false
     do {
-      let status: Status = try await client.post(endpoint: Statuses.unpin(id: status.reblog?.id ?? status.id))
+      let status: Status = try await client.post(endpoint: Statuses.unpin(id: finalStatus.id))
       updateFromStatus(status: status)
     } catch {
       isPinned = true
@@ -279,7 +281,7 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   func getStatusLang() -> String? {
-    status.reblog?.language ?? status.language
+    finalStatus.language
   }
 
   func translate(userLang: String) async {
@@ -288,7 +290,7 @@ public class StatusRowViewModel: ObservableObject {
         isLoadingTranslation = true
       }
       // We first use instance translation API if available.
-      let translation: StatusTranslation = try await client.post(endpoint: Statuses.translate(id: status.reblog?.id ?? status.id,
+      let translation: StatusTranslation = try await client.post(endpoint: Statuses.translate(id: finalStatus.id,
                                                                                               lang: userLang))
       withAnimation {
         self.translation = translation
@@ -298,8 +300,8 @@ public class StatusRowViewModel: ObservableObject {
       // If not or fail we use Ice Cubes own DeepL client.
       let deepLClient = DeepLClient()
       let translation = try? await deepLClient.request(target: userLang,
-                                                       source: status.language,
-                                                       text: status.reblog?.content.asRawText ?? status.content.asRawText)
+                                                       source: finalStatus.language,
+                                                       text: finalStatus.content.asRawText)
       withAnimation {
         self.translation = translation
         isLoadingTranslation = false
@@ -308,7 +310,7 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   func fetchRemoteStatus() async -> Bool {
-    guard isRemote, let remoteStatusURL = URL(string: status.reblog?.url ?? status.url ?? "") else { return false }
+    guard isRemote, let remoteStatusURL = URL(string: finalStatus.url ?? "") else { return false }
     isLoadingRemoteContent = true
     let results: SearchResults? = try? await client.get(endpoint: Search.search(query: remoteStatusURL.absoluteString,
                                                                                 type: "statuses",

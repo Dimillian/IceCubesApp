@@ -27,7 +27,6 @@ public struct StatusRowView: View {
   
   public var body: some View {
     VStack(alignment: .leading) {
-      let status: AnyStatus = viewModel.status.reblog ?? viewModel.status
       if viewModel.isFiltered, let filter = viewModel.filter {
         switch filter.filter.filterAction {
         case .warn:
@@ -45,9 +44,9 @@ public struct StatusRowView: View {
              theme.avatarPosition == .leading
           {
             Button {
-              viewModel.routerPath.navigate(to: .accountDetailWithAccount(account: status.account))
+              viewModel.routerPath.navigate(to: .accountDetailWithAccount(account: viewModel.finalStatus.account))
             } label: {
-              AvatarView(url: status.account.avatar, size: .status)
+              AvatarView(url: viewModel.finalStatus.account.avatar, size: .status)
             }
           }
           VStack(alignment: .leading) {
@@ -56,11 +55,10 @@ public struct StatusRowView: View {
               StatusRowReplyView(viewModel: viewModel)
             }
             VStack(alignment: .leading, spacing: 8) {
-              let status: AnyStatus = viewModel.status.reblog ?? viewModel.status
               if !isCompact {
-                StatusRowHeaderView(status: status, viewModel: viewModel)
+                StatusRowHeaderView(viewModel: viewModel)
               }
-              StatusRowContentView(status: status, viewModel: viewModel)
+              StatusRowContentView(viewModel: viewModel)
                 .contentShape(Rectangle())
                 .onTapGesture {
                   viewModel.navigateToDetail()

@@ -8,7 +8,6 @@ struct StatusRowTranslateView: View {
 
   @EnvironmentObject private var preferences: UserPreferences
 
-  let status: AnyStatus
   @ObservedObject var viewModel: StatusRowViewModel
 
   private var shouldShowTranslateButton: Bool {
@@ -16,7 +15,7 @@ struct StatusRowTranslateView: View {
 
     if let userLang = preferences.serverPreferences?.postLanguage,
        preferences.showTranslateButton,
-       !status.content.asRawText.isEmpty,
+       !viewModel.finalStatus.content.asRawText.isEmpty,
        viewModel.translation == nil
     {
       return userLang != statusLang
