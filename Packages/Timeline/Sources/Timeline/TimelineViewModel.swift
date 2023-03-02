@@ -217,6 +217,7 @@ extension TimelineViewModel: StatusesFetcher {
                                                                                 offset: 0))
 
       ReblogCache.shared.removeDuplicateReblogs(&statuses)
+      StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
 
       await datasource.set(statuses)
       await cacheHome()
@@ -228,7 +229,7 @@ extension TimelineViewModel: StatusesFetcher {
   }
 
   // Fetch pages from the top most status of the tomeline.
-  private func fetchNewPagesFrom(latestStatus: Status, client _: Client) async throws {
+  private func fetchNewPagesFrom(latestStatus: Status, client: Client) async throws {
     canStreamEvents = false
     let initialTimeline = timeline
     var newStatuses: [Status] = await fetchNewPages(minId: latestStatus.id, maxPages: 10)
@@ -240,6 +241,7 @@ extension TimelineViewModel: StatusesFetcher {
     }
 
     ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
+    StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
 
     // If no new statuses, resume streaming and exit.
     guard !newStatuses.isEmpty else {
@@ -302,7 +304,7 @@ extension TimelineViewModel: StatusesFetcher {
 
     // We trigger a new fetch so we can get the next new statuses if any.
     // If none, it'll stop there.
-    if !Task.isCancelled, let latest = await datasource.get().first, let client {
+    if !Task.isCancelled, let latest = await datasource.get().first {
       try await fetchNewPagesFrom(latestStatus: latest, client: client)
     }
   }
@@ -326,6 +328,7 @@ extension TimelineViewModel: StatusesFetcher {
         pagesLoaded += 1
 
         ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
+        StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
 
         allStatuses.insert(contentsOf: newStatuses, at: 0)
         latestMinId = newStatuses.first?.id ?? ""
@@ -349,6 +352,7 @@ extension TimelineViewModel: StatusesFetcher {
       ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
 
       await datasource.append(contentOf: newStatuses)
+      StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
 
       statusesState = await .display(statuses: datasource.get(),
                                      nextPageState: newStatuses.count < 20 ? .none : .hasNextPage)
