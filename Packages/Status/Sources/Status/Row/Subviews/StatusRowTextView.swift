@@ -5,7 +5,6 @@ import SwiftUI
 
 struct StatusRowTextView: View {
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var preferences: UserPreferences
 
   @ObservedObject var viewModel: StatusRowViewModel
   
@@ -17,7 +16,7 @@ struct StatusRowTextView: View {
                      language: viewModel.finalStatus.language,
                      lineLimit: viewModel.lineLimit)
           .font(.scaledBody)
-          .foregroundColor(theme.labelColor)
+          .foregroundColor(viewModel.textDisabled ? .gray : theme.labelColor)
           .emojiSize(Font.scaledBodyPointSize)
           .environment(\.openURL, OpenURLAction { url in
             viewModel.routerPath.handleStatus(status: viewModel.finalStatus, url: url)

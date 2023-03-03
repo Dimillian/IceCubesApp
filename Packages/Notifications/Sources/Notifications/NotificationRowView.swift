@@ -144,9 +144,9 @@ struct NotificationRowView: View {
           StatusRowView(viewModel: { .init(status: status,
                                            client: client,
                                            routerPath: routerPath,
-                                           showActions: false) })
+                                           showActions: false,
+                                           textDisabled: true) })
             .lineLimit(4)
-            .foregroundColor(.gray)
         }
         Spacer()
       }

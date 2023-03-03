@@ -12,6 +12,7 @@ public class StatusRowViewModel: ObservableObject {
   let isFocused: Bool
   let isRemote: Bool
   let showActions: Bool
+  let textDisabled: Bool
   let finalStatus: AnyStatus
 
   @Published var isPinned: Bool
@@ -89,7 +90,8 @@ public class StatusRowViewModel: ObservableObject {
               routerPath: RouterPath,
               isFocused: Bool = false,
               isRemote: Bool = false,
-              showActions: Bool = true)
+              showActions: Bool = true,
+              textDisabled: Bool = false)
   {
     self.status = status
     self.finalStatus = status.reblog ?? status
@@ -98,6 +100,7 @@ public class StatusRowViewModel: ObservableObject {
     self.isFocused = isFocused
     self.isRemote = isRemote
     self.showActions = showActions
+    self.textDisabled = textDisabled
     if let reblog = status.reblog {
       isPinned = reblog.pinned == true
     } else {
