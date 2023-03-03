@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "Cirkel";
 "enum.avatar-shape.rounded" = "Afgerond";
 "enum.durations.infinite" = "Onbepaald";
+"enum.durations.custom" = "custom";
 "enum.durations.fiveMinutes" = "5 minuten";
 "enum.durations.thirtyMinutes" = "30 minuten";
 "enum.durations.oneHour" = "1 uur";
 "enum.durations.sixHours" = "6 uur";
+"enum.durations.twelveHours" = "12 uur";
 "enum.durations.oneDay" = "1 dag";
 "enum.durations.threeDays" = "3 dagen";
 "enum.durations.sevenDays" = "7 dagen";
@@ -325,14 +327,6 @@
 "explore.section.users" = "Gebruikers";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5 minuten";
-"env.poll-duration.30m" = "30 minuten";
-"env.poll-duration.1h" = "1 uur";
-"env.poll-duration.6h" = "6 uur";
-"env.poll-duration.12h" = "12 uur";
-"env.poll-duration.1d" = "1 dag";
-"env.poll-duration.3d" = "3 dagen";
-"env.poll-duration.7d" = "7 dagen";
 "env.poll-vote-frequency.one" = "Eén stem";
 "env.poll-vote-frequency.multiple" = "Meerdere stemmen";
 
@@ -482,6 +476,9 @@
 "filter.edit.keywords.add" = "Voeg een nieuw sleutelwoord toe";
 "filter.edit.contexts" = "Filtercontext";
 "filter.edit.action" = "Filteractie";
+"filter.edit.expiry" = "Expiry";
+"filter.edit.expiry.date-time" = "Date/Time";
+"filter.edit.expiry.duration" = "Duration";
 "filter.contexts.home" = "Start en lijsten";
 "filter.contexts.notifications" = "Meldingen";
 "filter.contexts.public" = "Openbare tijdlijnen";

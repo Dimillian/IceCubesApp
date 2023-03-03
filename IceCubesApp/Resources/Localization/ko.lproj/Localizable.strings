@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "원";
 "enum.avatar-shape.rounded" = "둥근 사각형";
 "enum.durations.infinite" = "해제할 때까지";
+"enum.durations.custom" = "custom";
 "enum.durations.fiveMinutes" = "5분";
 "enum.durations.thirtyMinutes" = "30분";
 "enum.durations.oneHour" = "1시간";
 "enum.durations.sixHours" = "6시간";
+"enum.durations.twelveHours" = "12시간";
 "enum.durations.oneDay" = "1일";
 "enum.durations.threeDays" = "3일";
 "enum.durations.sevenDays" = "7일";
@@ -328,14 +330,6 @@
 "explore.section.users" = "사용자";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5분";
-"env.poll-duration.30m" = "30분";
-"env.poll-duration.1h" = "1시간";
-"env.poll-duration.6h" = "6시간";
-"env.poll-duration.12h" = "12시간";
-"env.poll-duration.1d" = "1일";
-"env.poll-duration.3d" = "3일";
-"env.poll-duration.7d" = "7일";
 "env.poll-vote-frequency.one" = "하나만 선택 가능";
 "env.poll-vote-frequency.multiple" = "여러 개 선택 가능";
 
@@ -490,6 +484,9 @@
 "filter.edit.keywords.add" = "새 단어 추가";
 "filter.edit.contexts" = "필터를 적용할 곳";
 "filter.edit.action" = "가릴 방식";
+"filter.edit.expiry" = "Expiry";
+"filter.edit.expiry.date-time" = "Date/Time";
+"filter.edit.expiry.duration" = "Duration";
 "account.action.edit-filters" = "필터 편집";
 "filter.contexts.home" = "홈 및 리스트";
 "filter.contexts.notifications" = "알림";

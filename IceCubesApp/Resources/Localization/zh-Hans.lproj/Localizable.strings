@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "圆形";
 "enum.avatar-shape.rounded" = "圆角";
 "enum.durations.infinite" = "永久";
+"enum.durations.custom" = "custom";
 "enum.durations.fiveMinutes" = "5 分钟";
 "enum.durations.thirtyMinutes" = "30 分钟";
 "enum.durations.oneHour" = "1 小时";
 "enum.durations.sixHours" = "6 小时";
+"enum.durations.twelveHours" = "12 小时";
 "enum.durations.oneDay" = "1 天";
 "enum.durations.threeDays" = "3 天";
 "enum.durations.sevenDays" = "7 天";
@@ -326,14 +328,6 @@
 "explore.section.users" = "用户";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5 分钟";
-"env.poll-duration.30m" = "30 分钟";
-"env.poll-duration.1h" = "1 小时";
-"env.poll-duration.6h" = "6 小时";
-"env.poll-duration.12h" = "12 小时";
-"env.poll-duration.1d" = "1 天";
-"env.poll-duration.3d" = "3 天";
-"env.poll-duration.7d" = "7 天";
 "env.poll-vote-frequency.one" = "单个投票";
 "env.poll-vote-frequency.multiple" = "多个投票";
 
@@ -487,6 +481,9 @@
 "filter.edit.keywords.add" = "添加关键词";
 "filter.edit.contexts" = "过滤范围";
 "filter.edit.action" = "过滤器行为";
+"filter.edit.expiry" = "Expiry";
+"filter.edit.expiry.date-time" = "Date/Time";
+"filter.edit.expiry.duration" = "Duration";
 "filter.contexts.home" = "主页和列表";
 "filter.contexts.notifications" = "通知";
 "filter.contexts.public" = "公共时间线";

@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "Biribila";
 "enum.avatar-shape.rounded" = "Biribildutako ertzak";
 "enum.durations.infinite" = "Betiko";
+"enum.durations.custom" = "custom";
 "enum.durations.fiveMinutes" = "5 minutuz";
 "enum.durations.thirtyMinutes" = "30 minutuz";
 "enum.durations.oneHour" = "Ordubetez";
 "enum.durations.sixHours" = "6 orduz";
+"enum.durations.twelveHours" = "12 orduz";
 "enum.durations.oneDay" = "Egun batez";
 "enum.durations.threeDays" = "3 egunez";
 "enum.durations.sevenDays" = "7 egunez";
@@ -327,14 +329,6 @@
 "explore.section.users" = "Erabiltzaileak";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5 minutu";
-"env.poll-duration.30m" = "30 minutu";
-"env.poll-duration.1h" = "Ordubete";
-"env.poll-duration.6h" = "6 ordu";
-"env.poll-duration.12h" = "12 ordu";
-"env.poll-duration.1d" = "Egun 1";
-"env.poll-duration.3d" = "3 egun";
-"env.poll-duration.7d" = "7 egun";
 "env.poll-vote-frequency.one" = "Boto bakarra";
 "env.poll-vote-frequency.multiple" = "Boto bat baino gehiago";
 
@@ -479,6 +473,9 @@
 "filter.edit.keywords.add" = "Gehitu hitz gako berria";
 "filter.edit.contexts" = "Iragazkiaren testuinguruak";
 "filter.edit.action" = "Iragazkiaren ekintzak";
+"filter.edit.expiry" = "Expiry";
+"filter.edit.expiry.date-time" = "Date/Time";
+"filter.edit.expiry.duration" = "Duration";
 "filter.contexts.home" = "Hasiera eta zerrendak";
 "filter.contexts.notifications" = "Jakinarazpenak";
 "filter.contexts.public" = "Denbora-lerro lokalak";

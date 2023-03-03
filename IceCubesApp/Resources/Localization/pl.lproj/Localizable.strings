@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "Okrągły";
 "enum.avatar-shape.rounded" = "Zaokrąglony";
 "enum.durations.infinite" = "czas nieokreślony";
+"enum.durations.custom" = "custom";
 "enum.durations.fiveMinutes" = "5 minut";
 "enum.durations.thirtyMinutes" = "30 minut";
 "enum.durations.oneHour" = "1 godzina";
 "enum.durations.sixHours" = "6 godzin";
+"enum.durations.twelveHours" = "12 godzin";
 "enum.durations.oneDay" = "1 dzień";
 "enum.durations.threeDays" = "3 dni";
 "enum.durations.sevenDays" = "7 dni";
@@ -324,14 +326,6 @@
 "explore.section.users" = "Osoby";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5 minut";
-"env.poll-duration.30m" = "30 minut";
-"env.poll-duration.1h" = "1 godzina";
-"env.poll-duration.6h" = "6 godzin";
-"env.poll-duration.12h" = "12 godzin";
-"env.poll-duration.1d" = "1 dzień";
-"env.poll-duration.3d" = "3 dni";
-"env.poll-duration.7d" = "7 dni";
 "env.poll-vote-frequency.one" = "Jeden głos";
 "env.poll-vote-frequency.multiple" = "Głosowanie wielokrotne";
 
@@ -480,6 +474,9 @@
 "filter.edit.keywords.add" = "Dodaj nowe słowo kluczowe";
 "filter.edit.contexts" = "Kontekst filtra";
 "filter.edit.action" = "Działanie filtra";
+"filter.edit.expiry" = "Expiry";
+"filter.edit.expiry.date-time" = "Date/Time";
+"filter.edit.expiry.duration" = "Duration";
 "account.action.edit-filters" = "Edytuj filtry";
 "filter.contexts.home" = "Strona główna i listy";
 "filter.contexts.notifications" = "Powiadomienia";

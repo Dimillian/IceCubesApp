@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "Кола";
 "enum.avatar-shape.rounded" = "Акруглены";
 "enum.durations.infinite" = "бясконцасць";
+"enum.durations.custom" = "custom";
 "enum.durations.fiveMinutes" = "5 хвілін";
 "enum.durations.thirtyMinutes" = "30 хвілін";
 "enum.durations.oneHour" = "1 гадзіна";
 "enum.durations.sixHours" = "6 гадзін";
+"enum.durations.twelveHours" = "12 гадзін";
 "enum.durations.oneDay" = "1 дзень";
 "enum.durations.threeDays" = "3 дні";
 "enum.durations.sevenDays" = "7 дзён";
@@ -332,14 +334,6 @@
 "explore.section.users" = "Карыстальнікі";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5 хвілін";
-"env.poll-duration.30m" = "30 хвілін";
-"env.poll-duration.1h" = "1 гадзіна";
-"env.poll-duration.6h" = "6 гадзін";
-"env.poll-duration.12h" = "12 гадзін";
-"env.poll-duration.1d" = "1 дзень";
-"env.poll-duration.3d" = "3 дні";
-"env.poll-duration.7d" = "7 дзён";
 "env.poll-vote-frequency.one" = "Адзін голас";
 "env.poll-vote-frequency.multiple" = "Некалькі галасоў";
 
@@ -493,6 +487,9 @@
 "filter.edit.keywords.add" = "Дадаць новае ключавое слова";
 "filter.edit.contexts" = "Кантэксты фільтра";
 "filter.edit.action" = "Дзеянне фільтра";
+"filter.edit.expiry" = "Expiry";
+"filter.edit.expiry.date-time" = "Date/Time";
+"filter.edit.expiry.duration" = "Duration";
 "account.action.edit-filters" = "Рэдагаваць фільтры";
 "filter.contexts.home" = "Галоўная старонка і спісы";
 "filter.contexts.notifications" = "Апавяшчэнні";

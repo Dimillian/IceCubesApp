@@ -34,6 +34,17 @@ public struct FiltersListView: View {
                     Text("\(filter.context.map { $0.name }.joined(separator: ", "))")
                       .font(.scaledBody)
                       .foregroundColor(.gray)
+                    if filter.hasExpiry() {
+                      if filter.isExpired() {
+                        Text("filter.expired")
+                          .font(.footnote)
+                          .foregroundColor(.gray)
+                      } else {
+                        Text("filter.expiry-\(filter.expiresAt!.relativeFormatted)")
+                          .font(.footnote)
+                          .foregroundColor(.gray)
+                      }
+                    }
                   }
                 }
               }

@@ -68,7 +68,7 @@ public struct AccountDetailContextMenu: View {
             }
           } else {
             Menu {
-              ForEach(MutingDuration.allCases, id: \.rawValue) { duration in
+              ForEach(Duration.mutingDurations(), id: \.rawValue) { duration in
                 Button(duration.description) {
                   Task {
                     do {

@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "Çember";
 "enum.avatar-shape.rounded" = "Yuvarlak";
 "enum.durations.infinite" = "infinite";
+"enum.durations.custom" = "custom";
 "enum.durations.fiveMinutes" = "5 minutes";
 "enum.durations.thirtyMinutes" = "30 minutes";
 "enum.durations.oneHour" = "1 hour";
 "enum.durations.sixHours" = "6 hours";
+"enum.durations.twelveHours" = "12 saat";
 "enum.durations.oneDay" = "1 day";
 "enum.durations.threeDays" = "3 days";
 "enum.durations.sevenDays" = "7 days";
@@ -323,14 +325,6 @@
 "explore.section.users" = "Kullanıcılar";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5 dakika";
-"env.poll-duration.30m" = "30 dakika";
-"env.poll-duration.1h" = "1 saat";
-"env.poll-duration.6h" = "6 saat";
-"env.poll-duration.12h" = "12 saat";
-"env.poll-duration.1d" = "1 gün";
-"env.poll-duration.3d" = "3 gün";
-"env.poll-duration.7d" = "7 gün";
 "env.poll-vote-frequency.one" = "Bir oy";
 "env.poll-vote-frequency.multiple" = "Birden fazla oy";
 
@@ -484,6 +478,9 @@
 "filter.edit.keywords.add" = "Add a new keyword";
 "filter.edit.contexts" = "Filter Contexts";
 "filter.edit.action" = "Filter Action";
+"filter.edit.expiry" = "Expiry";
+"filter.edit.expiry.date-time" = "Date/Time";
+"filter.edit.expiry.duration" = "Duration";
 "account.action.edit-filters" = "Edit Filters";
 "filter.contexts.home" = "Home and lists";
 "filter.contexts.notifications" = "Notifications";
