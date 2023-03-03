@@ -142,21 +142,21 @@
 "settings.support.two.title" = "☕️ 기분 좋아지는 기부금";
 "settings.support.four.title" = "👽 엄청난 기부금";
 "settings.support.four.subtitle" = "Ice Cubes가 계속 발전하는 데 정말 많은 도움이 될 거에요!";
-"settings.support.supporter.title" = " Become a supporter!";
-"settings.support.supporter.subtitle" = "By giving a monthly tip to Ice Cubes, you become a supporter, you'll even get verified badge on your profile. For your 👀 only.";
-"settings.support.supporter.subscribed" = " Thanks for being an Ice Cubes supporter!";
-"settings.support.supporter.subscription-info"= "Subscription are automatically renewed unless you cancel them a day before the next renewal cycle.";
-"settings.support.restore-purchase.button" = "Restore purchase";
-"settings.support.restore-purchase.explanation" = "Restore your supporter subscription if it's haven't been automatically synced.";
-"settings.support.privacy-policy" = "Privacy Policy";
-"settings.support.terms-of-use" = "Terms";
+"settings.support.supporter.title" = " 후원자가 되어 보세요!";
+"settings.support.supporter.subtitle" = "기부금을 매달 보내는 구독을 신청하면, 후원자가 될 수 있습니다. 프로필에 나만 볼 수 있는 자기만족용 인증 마크도 생겨요. 👀";
+"settings.support.supporter.subscribed" = " Ice Cubes의 후원자가 되어 주셔서 감사합니다!";
+"settings.support.supporter.subscription-info"= "정기 결제일 전 날까지 구독을 취소하지 않는 한 구독은 자동으로 갱신됩니다.";
+"settings.support.restore-purchase.button" = "구매 내역 불러오기";
+"settings.support.restore-purchase.explanation" = "구매 내역이 자동으로 동기화되지 않았다면 위의 버튼을 눌러 구매 내역을 불러올 수 있습니다.";
+"settings.support.privacy-policy" = "개인정보 처리방침";
+"settings.support.terms-of-use" = "이용 약관";
 "settings.timeline.add" = "원격 로컬 타임라인 추가";
 "settings.title" = "설정";
 "settings.rate" = "Ice Cubes 평가 남기기";
 "settings.section.other" = "기타";
 "settings.other.hide-openai" = "글 작성 도우미 🤖";
 "settings.other.social-keyboard" = "SNS 키보드";
-"settings.other.sound-effect" = "Enable Sound Effects";
+"settings.other.sound-effect" = "효과음";
 "settings.push.duplicate.title" = "중복 알림 해결사";
 "settings.push.duplicate.footer" = "같은 알림이 여러 번 오나요? 위에 있는 버튼을 누르면 마법처럼 해결될 거에요.";
 "settings.push.duplicate.button.fix" = "🪄 고치기";
@@ -178,7 +178,7 @@
 
 "settings.display.show-tab-label" = "하단 탭 바에 제목 표시";
 
-"settings.display.show-ipad-column" = "보조 열 사용";
+"settings.display.show-ipad-column" = "보조 열 표시";
 
 "settings.general.swipeactions" = "쓸어넘기기 동작 설정";
 "settings.swipeactions.navigation-title" = "쓸어넘기기 동작 설정";
