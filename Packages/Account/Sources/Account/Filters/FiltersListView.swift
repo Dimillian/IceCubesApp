@@ -99,8 +99,10 @@ public struct FiltersListView: View {
   @ToolbarContentBuilder
   private var toolbarContent: some ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
-      Button("action.done") {
+      Button {
         dismiss()
+      } label: {
+        Text("action.done").bold()
       }
     }
   }

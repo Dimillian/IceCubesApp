@@ -204,7 +204,7 @@ struct EditFilterView: View {
       if isSavingFilter {
         ProgressView()
       } else {
-        Text("action.done")
+        Text("action.save").bold()
       }
     }
     .disabled(!canSave)
