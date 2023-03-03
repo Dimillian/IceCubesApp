@@ -1,3 +1,4 @@
+import Combine
 import DesignSystem
 import Env
 import Models
@@ -66,7 +67,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
 
   @Published var showPoll: Bool = false
   @Published var pollVotingFrequency = PollVotingFrequency.oneVote
-  @Published var pollDuration = PollDuration.oneDay
+  @Published var pollDuration = Duration.oneDay
   @Published var pollOptions: [String] = ["", ""]
 
   @Published var spoilerOn: Bool = false
@@ -99,7 +100,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
   }
 
   var shouldDisablePollButton: Bool {
-    showPoll || !selectedMedias.isEmpty
+    !selectedMedias.isEmpty
   }
 
   var shouldDisplayDismissWarning: Bool {
@@ -133,7 +134,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
 
   func setInitialLanguageSelection(preference: String?) {
     switch mode {
-    case let .edit(status):
+    case let .edit(status), let .quote(status):
       selectedLanguage = status.language
     default:
       break
@@ -282,7 +283,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
 
   private func processText() {
     guard markedTextRange == nil else { return }
-    statusText.addAttributes([.foregroundColor: UIColor(Color.label),
+    statusText.addAttributes([.foregroundColor: UIColor(Theme.shared.labelColor),
                               .font: Font.scaledBodyUIFont,
                               .backgroundColor: UIColor.clear,
                               .underlineColor: UIColor.clear],
@@ -572,17 +573,26 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
       mediasImages[index] = newContainer
       do {
         if let index = indexOf(container: newContainer) {
-          if let image = originalContainer.image,
-             let data = image.jpegData(compressionQuality: 0.90)
-          {
-            let uploadedMedia = try await uploadMedia(data: data, mimeType: "image/jpeg")
-            mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
-                                        movieTransferable: nil,
-                                        gifTransferable: nil,
-                                        mediaAttachment: uploadedMedia,
-                                        error: nil)
-            if let uploadedMedia, uploadedMedia.url == nil {
-              scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
+          if let image = originalContainer.image {
+            let data: Data?
+            // Mastodon API don't support images over 5K
+            if image.size.height > 5000 || image.size.width > 5000 {
+              data = image.resized(to: .init(width: image.size.width / 4,
+                                             height: image.size.height / 4))
+                .jpegData(compressionQuality: 0.80)
+            } else {
+              data = image.jpegData(compressionQuality: 0.80)
+            }
+            if let data {
+              let uploadedMedia = try await uploadMedia(data: data, mimeType: "image/jpeg")
+              mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
+                                          movieTransferable: nil,
+                                          gifTransferable: nil,
+                                          mediaAttachment: uploadedMedia,
+                                          error: nil)
+              if let uploadedMedia, uploadedMedia.url == nil {
+                scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
+              }
             }
           } else if let videoURL = await originalContainer.movieTransferable?.compressedVideoURL,
                     let data = try? Data(contentsOf: videoURL)

@@ -1,3 +1,4 @@
+import Combine
 import Foundation
 import Models
 import Network
@@ -114,7 +115,7 @@ public struct FollowButton: View {
               await viewModel.toggleReboosts()
             }
           } label: {
-            Image(systemName: viewModel.relationship.showingReblogs ? "arrow.left.arrow.right.circle.fill" : "arrow.left.arrow.right.circle")
+            Image(viewModel.relationship.showingReblogs ? "Rocket.Fill" : "Rocket")
           }
         }
       }

@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "圆形";
 "enum.avatar-shape.rounded" = "圆角";
 "enum.durations.infinite" = "永久";
+"enum.durations.custom" = "custom";
 "enum.durations.fiveMinutes" = "5 分钟";
 "enum.durations.thirtyMinutes" = "30 分钟";
 "enum.durations.oneHour" = "1 小时";
 "enum.durations.sixHours" = "6 小时";
+"enum.durations.twelveHours" = "12 小时";
 "enum.durations.oneDay" = "1 天";
 "enum.durations.threeDays" = "3 天";
 "enum.durations.sevenDays" = "7 天";
@@ -37,7 +39,7 @@
 "enum.status-actions-display.only-buttons" = "仅图标";
 "enum.status-display-style.compact" = "紧凑";
 "enum.status-display-style.large" = "宽松";
-"enum.status-display-style.medium" = "Medium";
+"enum.status-display-style.medium" = "中等";
 "enum.swipeactions.icon-with-text" = "图标和文本";
 "enum.swipeactions.icon-only" = "仅图标";
 
@@ -79,12 +81,14 @@
 "settings.display.restore" = "恢复默认设置";
 "settings.display.section.display" = "显示";
 "settings.display.section.theme" = "主题";
+"settings.display.colors.apply" = "Apply custom colors";
 "settings.display.section.theme.footer" = "只有在“匹配系统”关闭时才能设置自定义颜色";
 "settings.display.status.action-buttons" = "导航栏样式";
 "settings.display.status.media-style" = "导航栏排列";
 "settings.display.translate-button" = "显示翻译按钮";
 "settings.display.theme.background" = "背景颜色";
 "settings.display.theme.secondary-background" = "二级背景颜色";
+"settings.display.theme.text-color" = "Text Color";
 "settings.display.theme.tint" = "色调";
 "settings.display.theme.systemColor" = "匹配系统";
 "settings.general.browser" = "默认浏览器";
@@ -122,17 +126,28 @@
 "settings.support.two.title" = "☕️ 很不错的捐赠";
 "settings.support.four.title" = "👽 神秘人的捐赠";
 "settings.support.four.subtitle" = "这将大大有助于 Ice Cubes 的持续运行！";
+"settings.support.supporter.title" = "成为支持者！";
+"settings.support.supporter.subtitle" = "你可以通过每月给 Ice Cubes 捐赠成为支持者，你还能在个人资料上得到一个认证徽章，仅你可见 👀";
+"settings.support.supporter.subscribed" = "感谢你成为 Ice Cubes 的支持者！";
+"settings.support.supporter.subscription-info"= "此订阅将自动续订，除非在当前订阅期至少提前一天取消自动续订。";
+"settings.support.restore-purchase.button" = "恢复购买";
+"settings.support.restore-purchase.explanation" = "恢复你的支持者订阅，如果其尚未自动续订。";
+"settings.support.privacy-policy" = "隐私政策";
+"settings.support.terms-of-use" = "使用条款";
 "settings.timeline.add" = "添加远程时间线";
 "settings.title" = "设置";
 "settings.rate" = "给 Ice Cubes 评分";
 "settings.section.other" = "其他";
 "settings.other.hide-openai" = "启用写作助手 🤖";
 "settings.other.social-keyboard" = "启用社交键盘";
+"settings.other.sound-effect" = "启用声音效果";
 
 "settings.general.content" = "内容设置";
 "settings.system" = "系统设置";
 "settings.content.navigation-title" = "内容设置";
 "settings.content.boosts" = "转发";
+"settings.content.collapse-long-posts" = "折叠长嘟文";
+"settings.content.collapse-long-posts-hint" = "被折叠嘟文只会显示前几行但会提供查看全文的按钮";
 "settings.content.hide-repeated-boosts" = "隐藏重复的转发";
 "settings.content.instance-settings" = "服务器内容设置";
 "settings.content.use-instance-settings" = "使用服务器设置";
@@ -168,25 +183,28 @@
 "settings.display.show-ipad-column" = "启用边栏";
 
 "settings.general.swipeactions" = "轻扫操作";
-"settings.swipeactions.appearance" = "Appearance";
+"settings.swipeactions.appearance" = "外观";
 "settings.swipeactions.navigation-title" = "轻扫操作设置";
-"settings.swipeactions.primary" = "Primary Action";
-"settings.swipeactions.secondary" = "Secondary Action";
+"settings.swipeactions.primary" = "主要操作";
+"settings.swipeactions.secondary" = "次要操作";
 "settings.swipeactions.status.action.bookmark" = "书签";
 "settings.swipeactions.status.action.boost" = "转发";
 "settings.swipeactions.status.action.favorite" = "喜欢";
 "settings.swipeactions.status.action.none" = "无";
 "settings.swipeactions.status.action.quote" = "引用";
 "settings.swipeactions.status.action.reply" = "回复";
-"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
+"settings.swipeactions.status.explanation" = "可在嘟文上进行向左轻扫或向右轻扫操作。仅当设置了主要操作时，次要操作才可用。";
 "settings.swipeactions.status.leading" = "向右轻扫";
 "settings.swipeactions.status.trailing" = "向左轻扫";
 "settings.swipeactions.status" = "嘟文";
-"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors" = "使用主题色";
 "settings.swipeactions.use-theme-colors-explanation" = "使用主题色而不是默认色";
 "settings.swipeactions.icon-style" = "图标样式";
 
 "settings.display.section.font" = "字体";
+
+"settings.section.cache" = "缓存";
+"settings.cache-media.clear" = "清除媒体缓存";
 
 // MARK: Tabs
 "tab.explore" = "探索";
@@ -242,6 +260,12 @@
 "account.edit.post-settings.privacy" = "默认隐私设置";
 "account.edit.post-settings.section-title" = "嘟文设置";
 "account.edit.post-settings.sensitive" = "敏感内容";
+
+"account.edit.metadata-section-title" = "Profile Metadata";
+"account.edit.metadata-name-placeholder" = "Label";
+"account.edit.metadata-value-placeholder" = "Content";
+"account.edit.add-metadata-button" = "Add a new metadata";
+
 "account.favorited-by" = "同样喜欢的有";
 "account.follow.follow" = "关注";
 "account.follow.following" = "正在关注";
@@ -263,6 +287,7 @@
 "account.joined" = "加入于";
 "account.action.logout" = "退出登录";
 "account.action.edit-filters" = "编辑过滤器";
+"account.action.more" = "More Settings";
 
 "account.relation.note.edit" = "编辑备注";
 "account.relation.note.edit.placeholder" = "输入备注文本";
@@ -281,6 +306,7 @@
 "conversations.error.title" = "出错啦";
 "conversations.navigation-title" = "私信";
 "conversations.new.message.placeholder" = "新消息";
+"conversations.latest.message" = "最新消息";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld 条嘟文来自 %lld 个参与者";
@@ -303,14 +329,6 @@
 "explore.section.users" = "用户";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5 分钟";
-"env.poll-duration.30m" = "30 分钟";
-"env.poll-duration.1h" = "1 小时";
-"env.poll-duration.6h" = "6 小时";
-"env.poll-duration.12h" = "12 小时";
-"env.poll-duration.1d" = "1 天";
-"env.poll-duration.3d" = "3 天";
-"env.poll-duration.7d" = "7 天";
 "env.poll-vote-frequency.one" = "单个投票";
 "env.poll-vote-frequency.multiple" = "多个投票";
 
@@ -366,12 +384,13 @@
 
 // MARK: Package: Status
 "status.action.translate" = "翻译";
-"status.action.translate-from-%@" = "翻译 %@";
 "status.action.translated-label-%@" = "由 %@ 翻译";
+"status.action.translated-label-from-%@-%@" = "翻译自 %@，使用 %@";
 "status.action.bookmark" = "书签";
 "status.action.boost" = "转发";
 "status.action.boost-to-followers" = "转发给粉丝";
 "status.action.copy-text" = "拷贝文本";
+"status.action.copy-link" = "拷贝链接";
 "status.action.delete" = "删除";
 "status.action.delete.confirm.title" = "确认删除";
 "status.action.delete.confirm.message" = "你确认要删除此嘟文吗？";
@@ -445,6 +464,7 @@
 "status.row.you-boosted" = "你转发了";
 "status.show-less" = "显示更少";
 "status.show-more" = "显示更多";
+"status.show-full-post" = "Show full post";
 "status.summary.at-time" = " 在 ";
 "status.summary.edited-time" = "上次编辑：";
 "status.summary.n-boosts %lld" = "%lld 转发";
@@ -462,6 +482,9 @@
 "filter.edit.keywords.add" = "添加关键词";
 "filter.edit.contexts" = "过滤范围";
 "filter.edit.action" = "过滤器行为";
+"filter.edit.expiry" = "Expiry";
+"filter.edit.expiry.date-time" = "Date/Time";
+"filter.edit.expiry.duration" = "Duration";
 "filter.contexts.home" = "主页和列表";
 "filter.contexts.notifications" = "通知";
 "filter.contexts.public" = "公共时间线";

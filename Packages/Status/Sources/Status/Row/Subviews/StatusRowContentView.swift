@@ -9,19 +9,18 @@ struct StatusRowContentView: View {
 
   @EnvironmentObject private var theme: Theme
 
-  let status: AnyStatus
   @ObservedObject var viewModel: StatusRowViewModel
 
   var body: some View {
-    if !status.spoilerText.asRawText.isEmpty {
-      StatusRowSpoilerView(status: status, displaySpoiler: $viewModel.displaySpoiler)
+    if !viewModel.finalStatus.spoilerText.asRawText.isEmpty {
+      StatusRowSpoilerView(status: viewModel.finalStatus, displaySpoiler: $viewModel.displaySpoiler)
     }
 
     if !viewModel.displaySpoiler {
-      StatusRowTextView(status: status, viewModel: viewModel)
-      StatusRowTranslateView(status: status, viewModel: viewModel)
-      if let poll = status.poll {
-        StatusPollView(poll: poll, status: status)
+      StatusRowTextView(viewModel: viewModel)
+      StatusRowTranslateView(viewModel: viewModel)
+      if let poll = viewModel.finalStatus.poll {
+        StatusPollView(poll: poll, status: viewModel.finalStatus)
       }
 
       if !reasons.contains(.placeholder),
@@ -37,11 +36,10 @@ struct StatusRowContentView: View {
           .transition(.opacity)
       }
 
-      if !status.mediaAttachments.isEmpty {
+      if !viewModel.finalStatus.mediaAttachments.isEmpty {
         HStack {
-          StatusRowMediaPreviewView(attachments: status.mediaAttachments,
-                                    sensitive: status.sensitive,
-                                    isNotifications: isCompact)
+          StatusRowMediaPreviewView(attachments: viewModel.finalStatus.mediaAttachments,
+                                    sensitive: viewModel.finalStatus.sensitive)
           if theme.statusDisplayStyle == .compact {
             Spacer()
           }
@@ -49,12 +47,12 @@ struct StatusRowContentView: View {
         .padding(.vertical, 4)
       }
 
-      if let card = status.card,
+      if let card = viewModel.finalStatus.card,
          !viewModel.isEmbedLoading,
          !isCompact,
-         theme.statusDisplayStyle == .large,
-         status.content.statusesURLs.isEmpty,
-         status.mediaAttachments.isEmpty
+         theme.statusDisplayStyle != .compact,
+         viewModel.finalStatus.content.statusesURLs.isEmpty,
+         viewModel.finalStatus.mediaAttachments.isEmpty
       {
         StatusRowCardView(card: card)
       }

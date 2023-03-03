@@ -12,19 +12,21 @@ class TimelineViewModel: ObservableObject {
     didSet {
       timelineTask?.cancel()
       timelineTask = Task {
-        if timeline == .latest, let client {
-          await cache.clearCache(for: client.id)
-          timeline = .home
+        if timeline == .latest {
+          if oldValue == .home {
+            await clearHomeCache()
+          }
+          timeline = oldValue
         }
         if oldValue != timeline {
-          await datasource.reset()
+          await reset()
           pendingStatusesObserver.pendingStatuses = []
           tag = nil
         }
         guard !Task.isCancelled else {
           return
         }
-        await fetchStatuses()
+        await fetchNewestStatuses()
         switch timeline {
         case let .hashtag(tag, _):
           await fetchTag(id: tag)
@@ -53,7 +55,7 @@ class TimelineViewModel: ObservableObject {
     didSet {
       if oldValue != client {
         Task {
-          await datasource.reset()
+          await reset()
         }
       }
     }
@@ -65,10 +67,6 @@ class TimelineViewModel: ObservableObject {
         pendingStatusesObserver.pendingStatuses = []
       }
     }
-  }
-
-  var pendingStatusesEnabled: Bool {
-    timeline == .home
   }
 
   var serverName: String {
@@ -100,18 +98,13 @@ class TimelineViewModel: ObservableObject {
   func handleEvent(event: any StreamEvent, currentAccount _: CurrentAccount) {
     Task {
       if let event = event as? StreamEventUpdate,
+         timeline == .home,
          canStreamEvents,
          isTimelineVisible,
-         pendingStatusesEnabled,
          await !datasource.contains(statusId: event.status.id)
       {
         pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
         let newStatus = event.status
-        if let accountId {
-          if newStatus.mentions.first(where: { $0.id == accountId }) != nil {
-            newStatus.userMentioned = true
-          }
-        }
         await datasource.insert(newStatus, at: 0)
         await cacheHome()
         let statuses = await datasource.get()
@@ -151,20 +144,31 @@ extension TimelineViewModel {
     }
     return nil
   }
+
+  private func clearHomeCache() async {
+    if let client {
+      await cache.clearCache(for: client.id)
+      await cache.setLatestSeenStatuses(ids: [], for: client)
+    }
+  }
 }
 
 // MARK: - StatusesFetcher
 
 extension TimelineViewModel: StatusesFetcher {
-  func fetchStatuses() async {
+  func pullToRefresh() async {
+    if !timeline.supportNewestPagination {
+      await reset()
+    }
+    await fetchNewestStatuses()
+  }
+  
+  func fetchNewestStatuses() async {
     guard let client else { return }
     do {
-      if await datasource.isEmpty || timeline == .trending {
-        if await !datasource.isEmpty && timeline == .trending {
-          return
-        }
+      if await datasource.isEmpty {
         try await fetchFirstPage(client: client)
-      } else if let latest = await datasource.get().first {
+      } else if let latest = await datasource.get().first, timeline.supportNewestPagination {
         try await fetchNewPagesFrom(latestStatus: latest, client: client)
       }
     } catch {
@@ -205,15 +209,15 @@ extension TimelineViewModel: StatusesFetcher {
         }
       }
       // And then we fetch statuses again toget newest statuses from there.
-      await fetchStatuses()
+      await fetchNewestStatuses()
     } else {
       var statuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
                                                                                 maxId: nil,
                                                                                 minId: nil,
                                                                                 offset: 0))
 
-      updateMentionsToBeHighlighted(&statuses)
       ReblogCache.shared.removeDuplicateReblogs(&statuses)
+      StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
 
       await datasource.set(statuses)
       await cacheHome()
@@ -225,7 +229,7 @@ extension TimelineViewModel: StatusesFetcher {
   }
 
   // Fetch pages from the top most status of the tomeline.
-  private func fetchNewPagesFrom(latestStatus: Status, client _: Client) async throws {
+  private func fetchNewPagesFrom(latestStatus: Status, client: Client) async throws {
     canStreamEvents = false
     let initialTimeline = timeline
     var newStatuses: [Status] = await fetchNewPages(minId: latestStatus.id, maxPages: 10)
@@ -237,6 +241,7 @@ extension TimelineViewModel: StatusesFetcher {
     }
 
     ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
+    StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
 
     // If no new statuses, resume streaming and exit.
     guard !newStatuses.isEmpty else {
@@ -271,47 +276,36 @@ extension TimelineViewModel: StatusesFetcher {
     // Cache statuses for home timeline.
     await cacheHome()
 
-    // If pending statuses are not enabled, we simply load status on the top regardless of the current position.
-    if !pendingStatusesEnabled {
-      pendingStatusesObserver.pendingStatuses = []
+    // Append new statuses in the timeline indicator.
+    pendingStatusesObserver.pendingStatuses.insert(contentsOf: newStatuses.map { $0.id }, at: 0)
+
+    // High chance the user is scrolled to the top.
+    // We need to update the statuses state, and then scroll to the previous top most status.
+    if let topStatusId, visibileStatusesIds.contains(topStatusId), scrollToTopVisible {
+      pendingStatusesObserver.disableUpdate = true
+      let statuses = await datasource.get()
+      statusesState = .display(statuses: statuses,
+                               nextPageState: statuses.count < 20 ? .none : .hasNextPage)
+      scrollToIndexAnimated = false
+      scrollToIndex = newStatuses.count + 1
+      DispatchQueue.main.async {
+        self.pendingStatusesObserver.disableUpdate = false
+        self.canStreamEvents = true
+      }
+    } else {
+      // This will keep the scroll position (if the list is scrolled) and prepend statuses on the top.
       let statuses = await datasource.get()
       withAnimation {
         statusesState = .display(statuses: statuses,
                                  nextPageState: statuses.count < 20 ? .none : .hasNextPage)
         canStreamEvents = true
       }
-    } else {
-      // Append new statuses in the timeline indicator.
-      pendingStatusesObserver.pendingStatuses.insert(contentsOf: newStatuses.map { $0.id }, at: 0)
+    }
 
-      // High chance the user is scrolled to the top.
-      // We need to update the statuses state, and then scroll to the previous top most status.
-      if let topStatusId, visibileStatusesIds.contains(topStatusId), scrollToTopVisible {
-        pendingStatusesObserver.disableUpdate = true
-        let statuses = await datasource.get()
-        statusesState = .display(statuses: statuses,
-                                 nextPageState: statuses.count < 20 ? .none : .hasNextPage)
-        scrollToIndexAnimated = false
-        scrollToIndex = newStatuses.count + 1
-        DispatchQueue.main.async {
-          self.pendingStatusesObserver.disableUpdate = false
-          self.canStreamEvents = true
-        }
-      } else {
-        // This will keep the scroll position (if the list is scrolled) and prepend statuses on the top.
-        let statuses = await datasource.get()
-        withAnimation {
-          statusesState = .display(statuses: statuses,
-                                   nextPageState: statuses.count < 20 ? .none : .hasNextPage)
-          canStreamEvents = true
-        }
-      }
-
-      // We trigger a new fetch so we can get the next new statuses if any.
-      // If none, it'll stop there.
-      if !Task.isCancelled, let latest = await datasource.get().first, let client {
-        try await fetchNewPagesFrom(latestStatus: latest, client: client)
-      }
+    // We trigger a new fetch so we can get the next new statuses if any.
+    // If none, it'll stop there.
+    if !Task.isCancelled, let latest = await datasource.get().first {
+      try await fetchNewPagesFrom(latestStatus: latest, client: client)
     }
   }
 
@@ -321,7 +315,9 @@ extension TimelineViewModel: StatusesFetcher {
     var allStatuses: [Status] = []
     var latestMinId = minId
     do {
-      while var newStatuses: [Status] =
+      while
+        !Task.isCancelled,
+        var newStatuses: [Status] =
         try await client.get(endpoint: timeline.endpoint(sinceId: nil,
                                                          maxId: nil,
                                                          minId: latestMinId,
@@ -331,8 +327,8 @@ extension TimelineViewModel: StatusesFetcher {
       {
         pagesLoaded += 1
 
-        updateMentionsToBeHighlighted(&newStatuses)
         ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
+        StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
 
         allStatuses.insert(contentsOf: newStatuses, at: 0)
         latestMinId = newStatuses.first?.id ?? ""
@@ -353,25 +349,15 @@ extension TimelineViewModel: StatusesFetcher {
                                                                                    minId: nil,
                                                                                    offset: datasource.get().count))
 
-      updateMentionsToBeHighlighted(&newStatuses)
       ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
 
       await datasource.append(contentOf: newStatuses)
+      StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
 
       statusesState = await .display(statuses: datasource.get(),
                                      nextPageState: newStatuses.count < 20 ? .none : .hasNextPage)
     } catch {
       statusesState = .error(error: error)
-    }
-  }
-
-  private func updateMentionsToBeHighlighted(_ statuses: inout [Status]) {
-    if !statuses.isEmpty, let accountId {
-      for i in statuses.indices {
-        if statuses[i].mentions.first(where: { $0.id == accountId }) != nil {
-          statuses[i].userMentioned = true
-        }
-      }
     }
   }
 

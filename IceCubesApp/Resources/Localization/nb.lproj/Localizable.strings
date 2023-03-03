@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "Sirkel";
 "enum.avatar-shape.rounded" = "Avrundet";
 "enum.durations.infinite" = "infinite";
+"enum.durations.custom" = "custom";
 "enum.durations.fiveMinutes" = "5 minutes";
 "enum.durations.thirtyMinutes" = "30 minutes";
 "enum.durations.oneHour" = "1 hour";
 "enum.durations.sixHours" = "6 hours";
+"enum.durations.twelveHours" = "12 hours";
 "enum.durations.oneDay" = "1 day";
 "enum.durations.threeDays" = "3 days";
 "enum.durations.sevenDays" = "7 days";
@@ -83,12 +85,14 @@
 "settings.display.restore" = "Gjenopprett standardinnstillinger";
 "settings.display.section.display" = "Visning";
 "settings.display.section.theme" = "Tema";
+"settings.display.colors.apply" = "Apply custom colors";
 "settings.display.section.theme.footer" = "Egendefinerte farger kan bare angis hvis «Match system» er deaktivert";
 "settings.display.status.action-buttons" = "Status handlingsknapper";
 "settings.display.status.media-style" = "Status mediestil";
 "settings.display.translate-button" = "Vis oversettelsesknapp";
 "settings.display.theme.background" = "Bakgrunnsfarge";
 "settings.display.theme.secondary-background" = "Sekundær bakgrunnsfarge";
+"settings.display.theme.text-color" = "Text Color";
 "settings.display.theme.tint" = "Temafarge";
 "settings.display.theme.systemColor" = "Match system";
 "settings.general.browser" = "Nettleser";
@@ -112,6 +116,8 @@
 "settings.system" = "Systeminnstillinger";
 "settings.content.navigation-title" = "Innholdsinnstillinger";
 "settings.content.boosts" = "Forsterkninger";
+"settings.content.collapse-long-posts" = "Collapse long posts";
+"settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
 "settings.content.hide-repeated-boosts" = "Hide repeated boosts";
 "settings.content.instance-settings" = "Server Content Settings";
 "settings.content.use-instance-settings" = "Bruk serverinnstillinger";
@@ -144,12 +150,21 @@
 "settings.support.two.title" = "☕️ Godt tips";
 "settings.support.four.title" = "👽 Hvem er du tips";
 "settings.support.four.subtitle" = "Det vil gå en lang vei å holde Ice Cubes i gang!";
+"settings.support.supporter.title" = " Become a supporter!";
+"settings.support.supporter.subtitle" = "By giving a monthly tip to Ice Cubes, you become a supporter, you'll even get verified badge on your profile. For your 👀 only.";
+"settings.support.supporter.subscribed" = " Thanks for being an Ice Cubes supporter!";
+"settings.support.supporter.subscription-info"= "Subscription are automatically renewed unless you cancel them a day before the next renewal cycle.";
+"settings.support.restore-purchase.button" = "Restore purchase";
+"settings.support.restore-purchase.explanation" = "Restore your supporter subscription if it's haven't been automatically synced.";
+"settings.support.privacy-policy" = "Privacy Policy";
+"settings.support.terms-of-use" = "Terms";
 "settings.timeline.add" = "Legg til en lokal tidslinje";
 "settings.title" = "Innstillinger";
 "settings.rate" = "Vurder Ice Cubes";
 "settings.section.other" = "Annet";
 "settings.other.hide-openai" = "Aktiver 🤖-hjelper";
 "settings.other.social-keyboard" = "Aktiver sosialt tastatur";
+"settings.other.sound-effect" = "Enable Sound Effects";
 "settings.push.duplicate.title" = "Reparasjon av dupliserte varslinger";
 "settings.push.duplicate.footer" = "Får du dupliserte varsler? Prøv denne magiske knappen for å fikse det.";
 "settings.push.duplicate.button.fix" = "🪄 Fiks det";
@@ -189,6 +204,9 @@
 "settings.swipeactions.icon-style" = "Icon Style";
 
 "settings.display.section.font" = "Font";
+
+"settings.section.cache" = "Cache";
+"settings.cache-media.clear" = "Clear Media Cache";
 
 // MARK: Tabs
 "tab.explore" = "Utforsk";
@@ -244,6 +262,12 @@
 "account.edit.post-settings.privacy" = "Standard personvern";
 "account.edit.post-settings.section-title" = "Innstillinger for innlegg";
 "account.edit.post-settings.sensitive" = "Sensitivt innhold";
+
+"account.edit.metadata-section-title" = "Profile Metadata";
+"account.edit.metadata-name-placeholder" = "Label";
+"account.edit.metadata-value-placeholder" = "Content";
+"account.edit.add-metadata-button" = "Add a new metadata";
+
 "account.favorited-by" = "Favoritt av";
 "account.follow.follow" = "Følg";
 "account.follow.following" = "Følger";
@@ -264,6 +288,7 @@
 "account.relation.follows-you" = "Følger deg";
 "account.joined" = "Ble med";
 "account.action.logout" = "Logg ut konto";
+"account.action.more" = "More Settings";
 
 "account.relation.note.edit" = "Edit Note";
 "account.relation.note.edit.placeholder" = "Enter Note text";
@@ -282,6 +307,7 @@
 "conversations.error.title" = "En feil oppstod";
 "conversations.navigation-title" = "Direktemeldinger";
 "conversations.new.message.placeholder" = "Ny melding";
+"conversations.latest.message" = "Latest Message";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld innlegg fra %lld deltakere";
@@ -304,14 +330,6 @@
 "explore.section.users" = "Brukere";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5 minutter";
-"env.poll-duration.30m" = "30 minutter";
-"env.poll-duration.1h" = "1 time";
-"env.poll-duration.6h" = "6 timer";
-"env.poll-duration.12h" = "12 timer";
-"env.poll-duration.1d" = "1 dag";
-"env.poll-duration.3d" = "3 dager";
-"env.poll-duration.7d" = "7 dager";
 "env.poll-vote-frequency.one" = "Én stemme";
 "env.poll-vote-frequency.multiple" = "Flere stemmer";
 
@@ -367,12 +385,13 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Oversett";
-"status.action.translate-from-%@" = "Oversett fra %@";
 "status.action.translated-label-%@" = "Oversatt ved hjelp av %@";
+"status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Bokmerk";
 "status.action.boost" = "Forsterk";
 "status.action.boost-to-followers" = "Boost to Followers";
 "status.action.copy-text" = "Kopier tekst";
+"status.action.copy-link" = "Copy Link";
 "status.action.delete" = "Slett";
 "status.action.delete.confirm.title" = "Confirm";
 "status.action.delete.confirm.message" = "are you sure you want to delete this post?";
@@ -446,6 +465,7 @@
 "status.row.you-boosted" = "Du forsterket";
 "status.show-less" = "Vis mindre";
 "status.show-more" = "Vis mer";
+"status.show-full-post" = "Show full post";
 "status.summary.at-time" = "kl ";
 "status.summary.edited-time" = "Sist redigert: ";
 "status.summary.n-boosts %lld" = "%lld forsterkninger";
@@ -463,6 +483,9 @@
 "filter.edit.keywords.add" = "Legg til nytt nøkkelord";
 "filter.edit.contexts" = "Filtrer kontekster";
 "filter.edit.action" = "Filterhandling";
+"filter.edit.expiry" = "Expiry";
+"filter.edit.expiry.date-time" = "Date/Time";
+"filter.edit.expiry.duration" = "Duration";
 "account.action.edit-filters" = "Rediger filtre";
 "filter.contexts.home" = "Hjem og lister";
 "filter.contexts.notifications" = "Varsler";

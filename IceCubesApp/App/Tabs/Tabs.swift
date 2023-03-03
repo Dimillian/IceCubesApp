@@ -3,6 +3,7 @@ import Explore
 import Foundation
 import Status
 import SwiftUI
+import DesignSystem
 
 enum Tab: Int, Identifiable, Hashable {
   case timeline, notifications, mentions, explore, messages, settings, other

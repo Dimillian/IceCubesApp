@@ -41,3 +41,5 @@ public struct ConsolidatedNotification: Identifiable {
     [.placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder()]
   }
 }
+
+extension ConsolidatedNotification: Sendable {}

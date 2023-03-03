@@ -21,3 +21,5 @@ public struct MastodonPushNotification: Codable {
     case body
   }
 }
+
+extension MastodonPushNotification: Sendable {}

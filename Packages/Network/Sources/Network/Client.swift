@@ -1,12 +1,17 @@
+import Combine
 import Foundation
 import Models
 import SwiftUI
+import os
 
 public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
   public static func == (lhs: Client, rhs: Client) -> Bool {
-    lhs.isAuth == rhs.isAuth &&
+    let lhsToken = lhs.critical.withLock { $0.oauthToken }
+    let rhsToken = rhs.critical.withLock { $0.oauthToken }
+
+    return (lhsToken != nil) == (rhsToken != nil) &&
       lhs.server == rhs.server &&
-      lhs.oauthToken?.accessToken == rhs.oauthToken?.accessToken
+      lhsToken?.accessToken == rhsToken?.accessToken
   }
 
   public enum Version: String, Sendable {
@@ -19,7 +24,10 @@ public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
   }
 
   public var id: String {
-    "\(isAuth)\(server)\(oauthToken?.createdAt ?? 0)"
+    critical.withLock {
+      let isAuth = $0.oauthToken != nil
+      return "\(isAuth)\(server)\($0.oauthToken?.createdAt ?? 0)"
+    }
   }
 
   public func hash(into hasher: inout Hasher) {
@@ -28,42 +36,52 @@ public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
 
   public let server: String
   public let version: Version
-  public private(set) var connections: Set<String>
   private let urlSession: URLSession
   private let decoder = JSONDecoder()
 
-  /// Only used as a transitionary app while in the oauth flow.
-  private var oauthApp: InstanceApp?
-
-  private var oauthToken: OauthToken?
+  // Putting all mutable state inside an `OSAllocatedUnfairLock` makes `Client`
+  // provably `Sendable`. The lock is a struct, but it uses a `ManagedBuffer`
+  // reference type to hold its associated state.
+  private let critical: OSAllocatedUnfairLock<Critical>
+  private struct Critical: Sendable {
+    /// Only used as a transitionary app while in the oauth flow.
+    var oauthApp: InstanceApp?
+    var oauthToken: OauthToken?
+    var connections: Set<String> = []
+  }
 
   public var isAuth: Bool {
-    oauthToken != nil
+    critical.withLock { $0.oauthToken != nil }
+  }
+
+  public var connections: Set<String> {
+    critical.withLock { $0.connections }
   }
 
   public init(server: String, version: Version = .v1, oauthToken: OauthToken? = nil) {
     self.server = server
     self.version = version
+    self.critical = .init(initialState: Critical(oauthToken: oauthToken, connections: [server]))
     urlSession = URLSession.shared
     decoder.keyDecodingStrategy = .convertFromSnakeCase
-    self.oauthToken = oauthToken
-    connections = Set([server])
   }
 
   public func addConnections(_ connections: [String]) {
-    connections.forEach {
-      self.connections.insert($0)
+    critical.withLock {
+      $0.connections.formUnion(connections)
     }
   }
 
   public func hasConnection(with url: URL) -> Bool {
     guard let host = url.host else { return false }
-    if let rootHost = host.split(separator: ".", maxSplits: 1).last {
-      // Sometimes the connection is with the root host instead of a subdomain
-      // eg. Mastodon runs on mastdon.domain.com but the connection is with domain.com
-      return connections.contains(host) || connections.contains(String(rootHost))
-    } else {
-      return connections.contains(host)
+    return critical.withLock {
+      if let rootHost = host.split(separator: ".", maxSplits: 1).last {
+        // Sometimes the connection is with the root host instead of a subdomain
+        // eg. Mastodon runs on mastdon.domain.com but the connection is with domain.com
+        return $0.connections.contains(host) || $0.connections.contains(String(rootHost))
+      } else {
+        return $0.connections.contains(host)
+      }
     }
   }
 
@@ -87,12 +105,13 @@ public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
   private func makeURLRequest(url: URL, endpoint: Endpoint, httpMethod: String) -> URLRequest {
     var request = URLRequest(url: url)
     request.httpMethod = httpMethod
-    if let oauthToken {
+    if let oauthToken = critical.withLock({ $0.oauthToken }) {
       request.setValue("Bearer \(oauthToken.accessToken)", forHTTPHeaderField: "Authorization")
     }
     if let json = endpoint.jsonValue {
       let encoder = JSONEncoder()
       encoder.keyEncodingStrategy = .convertToSnakeCase
+      encoder.outputFormatting = .sortedKeys
       do {
         let jsonData = try encoder.encode(json)
         request.httpBody = jsonData
@@ -174,12 +193,12 @@ public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
 
   public func oauthURL() async throws -> URL {
     let app: InstanceApp = try await post(endpoint: Apps.registerApp)
-    oauthApp = app
+    critical.withLock { $0.oauthApp = app }
     return makeURL(endpoint: Oauth.authorize(clientId: app.clientId))
   }
 
   public func continueOauthFlow(url: URL) async throws -> OauthToken {
-    guard let app = oauthApp else {
+    guard let app = critical.withLock({ $0.oauthApp }) else {
       throw OauthError.missingApp
     }
     guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
@@ -190,7 +209,7 @@ public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
     let token: OauthToken = try await post(endpoint: Oauth.token(code: code,
                                                                  clientId: app.clientId,
                                                                  clientSecret: app.clientSecret))
-    oauthToken = token
+    critical.withLock { $0.oauthToken = token }
     return token
   }
 
@@ -238,3 +257,5 @@ public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
     }
   }
 }
+
+extension Client: Sendable {}

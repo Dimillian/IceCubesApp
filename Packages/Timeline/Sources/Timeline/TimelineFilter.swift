@@ -47,6 +47,17 @@ public enum TimelineFilter: Hashable, Equatable {
     return [.home, .local, .federated, .trending]
   }
 
+  public var supportNewestPagination: Bool {
+    switch self {
+    case .trending:
+      return false
+    case let .remoteLocal(_, filter):
+      return filter != .trending
+    default:
+      return true
+    }
+  }
+
   public var title: String {
     switch self {
     case .latest:

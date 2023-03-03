@@ -7,7 +7,7 @@ struct StatusRowReblogView: View {
   var body: some View {
     if viewModel.status.reblog != nil {
       HStack(spacing: 2) {
-        Image(systemName: "arrow.left.arrow.right.circle.fill")
+        Image("Rocket.Fill")
         AvatarView(url: viewModel.status.account.avatar, size: .boost)
         EmojiTextApp(.init(stringValue: viewModel.status.account.safeDisplayName), emojis: viewModel.status.account.emojis)
         Text("status.row.was-boosted")
@@ -19,6 +19,7 @@ struct StatusRowReblogView: View {
           + Text("status.row.was-boosted")
       )
       .font(.scaledFootnote)
+      .emojiSize(Font.scaledFootnotePointSize)
       .foregroundColor(.gray)
       .fontWeight(.semibold)
       .onTapGesture {

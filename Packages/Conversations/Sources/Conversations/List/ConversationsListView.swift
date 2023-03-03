@@ -16,11 +16,12 @@ public struct ConversationsListView: View {
 
   public init() {}
 
-  private var conversations: [Conversation] {
+  private var conversations: Binding<[Conversation]> {
     if viewModel.isLoadingFirstPage {
-      return Conversation.placeholders()
+      return Binding.constant(Conversation.placeholders())
+    } else {
+      return $viewModel.conversations
     }
-    return viewModel.conversations
   }
 
   public var body: some View {
@@ -28,13 +29,13 @@ public struct ConversationsListView: View {
       LazyVStack {
         Group {
           if !conversations.isEmpty || viewModel.isLoadingFirstPage {
-            ForEach(conversations) { conversation in
+            ForEach(conversations) { $conversation in
               if viewModel.isLoadingFirstPage {
-                ConversationsListRow(conversation: conversation, viewModel: viewModel)
+                ConversationsListRow(conversation: $conversation, viewModel: viewModel)
                   .padding(.horizontal, .layoutPadding)
                   .redacted(reason: .placeholder)
               } else {
-                ConversationsListRow(conversation: conversation, viewModel: viewModel)
+                ConversationsListRow(conversation: $conversation, viewModel: viewModel)
                   .padding(.horizontal, .layoutPadding)
               }
               Divider()
@@ -90,7 +91,11 @@ public struct ConversationsListView: View {
       // note: this Task wrapper should not be necessary, but it reportedly crashes without it
       // when refreshing on an empty list
       Task {
+        SoundEffectManager.shared.playSound(of: .pull)
+        HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
         await viewModel.fetchConversations()
+        HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
+        SoundEffectManager.shared.playSound(of: .refresh)
       }
     }
     .onAppear {

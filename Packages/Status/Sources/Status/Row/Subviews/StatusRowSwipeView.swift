@@ -7,16 +7,17 @@ struct StatusRowSwipeView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var currentAccount: CurrentAccount
+  @EnvironmentObject private var statusDataController: StatusDataController
 
   enum Mode {
     case leading, trailing
   }
-  
+
   func privateBoost() -> Bool {
     return viewModel.status.visibility == .priv && viewModel.status.account.id == currentAccount.account?.id
   }
 
-  let viewModel: StatusRowViewModel
+  @ObservedObject var viewModel: StatusRowViewModel
   let mode: Mode
 
   var body: some View {
@@ -61,29 +62,16 @@ struct StatusRowSwipeView: View {
       makeSwipeButtonForRouterPath(action: action, destination: .quoteStatusEditor(status: viewModel.status))
     case .favorite:
       makeSwipeButtonForTask(action: action) {
-        if viewModel.isFavorited {
-          await viewModel.unFavorite()
-        } else {
-          await viewModel.favorite()
-        }
+        await statusDataController.toggleFavorite(remoteStatus: nil)
       }
     case .boost:
       makeSwipeButtonForTask(action: action, privateBoost: privateBoost()) {
-        if viewModel.isReblogged {
-          await viewModel.unReblog()
-        } else {
-          await viewModel.reblog()
-        }
+        await statusDataController.toggleReblog(remoteStatus: nil)
       }
       .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id)
     case .bookmark:
       makeSwipeButtonForTask(action: action) {
-        if viewModel.isBookmarked {
-          await viewModel.unbookmark()
-        } else {
-          await
-            viewModel.bookmark()
-        }
+        await statusDataController.toggleBookmark(remoteStatus: nil)
       }
     case .none:
       EmptyView()
@@ -116,11 +104,25 @@ struct StatusRowSwipeView: View {
   private func makeSwipeLabel(action: StatusAction, style: UserPreferences.SwipeActionsIconStyle, privateBoost: Bool = false) -> some View {
     switch style {
     case .iconOnly:
-      Label(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked, privateBoost: privateBoost), systemImage: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked, privateBoost: privateBoost))
+      Label(action.displayName(isReblogged: statusDataController.isReblogged,
+                               isFavorited: statusDataController.isFavorited,
+                               isBookmarked: statusDataController.isBookmarked,
+                               privateBoost: privateBoost),
+            imageNamed: action.iconName(isReblogged: statusDataController.isReblogged,
+                                         isFavorited: statusDataController.isFavorited,
+                                         isBookmarked: statusDataController.isBookmarked,
+                                         privateBoost: privateBoost))
         .labelStyle(.iconOnly)
         .environment(\.symbolVariants, .none)
     case .iconWithText:
-      Label(action.displayName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked, privateBoost: privateBoost), systemImage: action.iconName(isReblogged: viewModel.isReblogged, isFavorited: viewModel.isFavorited, isBookmarked: viewModel.isBookmarked, privateBoost: privateBoost))
+      Label(action.displayName(isReblogged: statusDataController.isReblogged,
+                               isFavorited: statusDataController.isFavorited,
+                               isBookmarked: statusDataController.isBookmarked,
+                               privateBoost: privateBoost),
+            imageNamed: action.iconName(isReblogged: statusDataController.isReblogged,
+                                           isFavorited: statusDataController.isFavorited,
+                                           isBookmarked: statusDataController.isBookmarked,
+                                           privateBoost: privateBoost))
         .labelStyle(.titleAndIcon)
         .environment(\.symbolVariants, .none)
     }

@@ -1,4 +1,4 @@
-import Boutique
+import Bodega
 import Models
 import Network
 import SwiftUI
@@ -59,3 +59,9 @@ public actor TimelineCache {
     UserDefaults.standard.array(forKey: "timeline-last-seen-\(client.id)") as? [String]
   }
 }
+
+// Quiets down the warnings from this one. Bodega is nicely async so we don't
+// want to just use `@preconcurrency`, but the CacheKey type is (incorrectly)
+// not marked as `Sendable`---it's a value type containing two `String`
+// properties.
+extension Bodega.CacheKey: @unchecked Sendable {}

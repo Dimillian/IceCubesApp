@@ -66,13 +66,7 @@ public extension AnyStatus {
   }
 }
 
-protocol StatusUI {
-  var userMentioned: Bool? { get set }
-}
-
-public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable, StatusUI {
-  public var userMentioned: Bool?
-
+public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable {
   public static func == (lhs: Status, rhs: Status) -> Bool {
     lhs.id == rhs.id && lhs.viewId == rhs.viewId
   }
@@ -109,8 +103,8 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
   public let sensitive: Bool
   public let language: String?
 
-  public init(userMentioned: Bool? = nil, id: String, content: HTMLString, account: Account, createdAt: ServerDate, editedAt: ServerDate?, reblog: ReblogStatus?, mediaAttachments: [MediaAttachment], mentions: [Mention], repliesCount: Int, reblogsCount: Int, favouritesCount: Int, card: Card?, favourited: Bool?, reblogged: Bool?, pinned: Bool?, bookmarked: Bool?, emojis: [Emoji], url: String?, application: Application?, inReplyToId: String?, inReplyToAccountId: String?, visibility: Visibility, poll: Poll?, spoilerText: HTMLString, filtered: [Filtered]?, sensitive: Bool, language: String?) {
-    self.userMentioned = userMentioned
+
+  public init(id: String, content: HTMLString, account: Account, createdAt: ServerDate, editedAt: ServerDate?, reblog: ReblogStatus?, mediaAttachments: [MediaAttachment], mentions: [Mention], repliesCount: Int, reblogsCount: Int, favouritesCount: Int, card: Card?, favourited: Bool?, reblogged: Bool?, pinned: Bool?, bookmarked: Bool?, emojis: [Emoji], url: String?, application: Application?, inReplyToId: String?, inReplyToAccountId: String?, visibility: Visibility, poll: Poll?, spoilerText: HTMLString, filtered: [Filtered]?, sensitive: Bool, language: String?) {
     self.id = id
     self.content = content
     self.account = account
@@ -235,7 +229,7 @@ public final class ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Ha
   public let bookmarked: Bool?
   public let emojis: [Emoji]
   public let url: String?
-  public var application: Application?
+  public let application: Application?
   public let inReplyToId: String?
   public let inReplyToAccountId: String?
   public let visibility: Visibility
@@ -274,3 +268,14 @@ public final class ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Ha
     self.language = language
   }
 }
+
+extension Application: Sendable {}
+extension StatusViewId: Sendable {}
+
+// Every property in Status is immutable.
+extension Status: Sendable {}
+
+// Every property in ReblogStatus is immutable.
+extension ReblogStatus: Sendable {}
+
+

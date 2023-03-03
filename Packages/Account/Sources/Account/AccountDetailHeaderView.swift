@@ -16,6 +16,7 @@ struct AccountDetailHeaderView: View {
   @EnvironmentObject private var routerPath: RouterPath
   @EnvironmentObject private var currentAccount: CurrentAccount
   @Environment(\.redactionReasons) private var reasons
+  @Environment(\.isSupporter) private var isSupporter: Bool
 
   @ObservedObject var viewModel: AccountDetailViewModel
   let account: Account
@@ -85,15 +86,24 @@ struct AccountDetailHeaderView: View {
 
   private var accountAvatarView: some View {
     HStack {
-      AvatarView(url: account.avatar, size: .account)
-        .onTapGesture {
-          guard account.haveAvatar else {
-            return
+      ZStack(alignment: .topTrailing) {
+        AvatarView(url: account.avatar, size: .account)
+          .onTapGesture {
+            guard account.haveAvatar else {
+              return
+            }
+            Task {
+              await quickLook.prepareFor(urls: [account.avatar], selectedURL: account.avatar)
+            }
           }
-          Task {
-            await quickLook.prepareFor(urls: [account.avatar], selectedURL: account.avatar)
-          }
+        if viewModel.isCurrentUser, isSupporter {
+          Image(systemName: "checkmark.seal.fill")
+            .resizable()
+            .frame(width: 25, height: 25)
+            .foregroundColor(theme.tintColor)
+            .offset(x: 10, y: -10)
         }
+      }
       Spacer()
       Group {
         Button {
@@ -132,11 +142,32 @@ struct AccountDetailHeaderView: View {
       accountAvatarView
       HStack(alignment: .firstTextBaseline) {
         VStack(alignment: .leading, spacing: 0) {
-          EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
-            .font(.scaledHeadline)
+          HStack(alignment: .center, spacing: 2) {
+            EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
+              .font(.scaledHeadline)
+              .foregroundColor(theme.labelColor)
+              .emojiSize(Font.scaledHeadlinePointSize)
+            if account.bot {
+              Text(Image(systemName: "poweroutlet.type.b.fill"))
+                .font(.footnote)
+            }
+            if account.locked {
+              Text(Image(systemName: "lock.fill"))
+                .font(.footnote)
+            }
+            if viewModel.relationship?.blocking == true {
+              Text(Image(systemName: "person.crop.circle.badge.xmark.fill"))
+                .font(.footnote)
+            }
+            if viewModel.relationship?.muting == true {
+              Text(Image(systemName: "speaker.slash.fill"))
+                .font(.footnote)
+            }
+          }
           Text("@\(account.acct)")
             .font(.scaledCallout)
             .foregroundColor(.gray)
+            .textSelection(.enabled)
           joinedAtView
         }
         Spacer()
@@ -160,7 +191,10 @@ struct AccountDetailHeaderView: View {
 
       EmojiTextApp(account.note, emojis: account.emojis)
         .font(.scaledBody)
+        .foregroundColor(theme.labelColor)
+        .emojiSize(Font.scaledBodyPointSize)
         .padding(.top, 8)
+        .textSelection(.enabled)
         .environment(\.openURL, OpenURLAction { url in
           routerPath.handle(url: url)
         })
@@ -173,7 +207,7 @@ struct AccountDetailHeaderView: View {
 
   private func makeCustomInfoLabel(title: LocalizedStringKey, count: Int, needsBadge: Bool = false) -> some View {
     VStack {
-      Text("\(count)")
+      Text(count, format: .number.notation(.compactName))
         .font(.scaledHeadline)
         .foregroundColor(theme.tintColor)
         .overlay(alignment: .trailing) {
@@ -194,9 +228,6 @@ struct AccountDetailHeaderView: View {
   private var joinedAtView: some View {
     if let joinedAt = viewModel.account?.createdAt.asDate {
       HStack(spacing: 4) {
-        if account.bot {
-          Text("🤖")
-        }
         Image(systemName: "calendar")
         Text("account.joined")
         Text(joinedAt, style: .date)
@@ -239,6 +270,7 @@ struct AccountDetailHeaderView: View {
                     .foregroundColor(Color.green.opacity(0.80))
                 }
                 EmojiTextApp(field.value, emojis: viewModel.account?.emojis ?? [])
+                  .emojiSize(Font.scaledBodyPointSize)
                   .foregroundColor(theme.tintColor)
                   .environment(\.openURL, OpenURLAction { url in
                     routerPath.handle(url: url)

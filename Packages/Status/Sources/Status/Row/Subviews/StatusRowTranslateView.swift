@@ -5,10 +5,10 @@ import SwiftUI
 
 struct StatusRowTranslateView: View {
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
+  @Environment(\.isCompact) private var isCompact: Bool
 
   @EnvironmentObject private var preferences: UserPreferences
 
-  let status: AnyStatus
   @ObservedObject var viewModel: StatusRowViewModel
 
   private var shouldShowTranslateButton: Bool {
@@ -16,7 +16,7 @@ struct StatusRowTranslateView: View {
 
     if let userLang = preferences.serverPreferences?.postLanguage,
        preferences.showTranslateButton,
-       !status.content.asRawText.isEmpty,
+       !viewModel.finalStatus.content.asRawText.isEmpty,
        viewModel.translation == nil
     {
       return userLang != statusLang
@@ -25,8 +25,18 @@ struct StatusRowTranslateView: View {
     }
   }
 
+  private func getLocalizedString(langCode: String, provider: String) -> String {
+    if let localizedLanguage = Locale.current.localizedString(forLanguageCode: langCode) {
+      let format = NSLocalizedString("status.action.translated-label-from-%@-%@", comment: "")
+      return String.localizedStringWithFormat(format, localizedLanguage, provider)
+    } else {
+      return "status.action.translated-label-\(provider)"
+    }
+  }
+
   var body: some View {
     if !isInCaptureMode,
+       !isCompact,
        let userLang = preferences.serverPreferences?.postLanguage,
        shouldShowTranslateButton
     {
@@ -38,13 +48,7 @@ struct StatusRowTranslateView: View {
         if viewModel.isLoadingTranslation {
           ProgressView()
         } else {
-          if let statusLanguage = viewModel.getStatusLang(),
-             let languageName = Locale.current.localizedString(forLanguageCode: statusLanguage)
-          {
-            Text("status.action.translate-from-\(languageName)")
-          } else {
-            Text("status.action.translate")
-          }
+          Text("status.action.translate")
         }
       }
       .buttonStyle(.borderless)
@@ -55,7 +59,7 @@ struct StatusRowTranslateView: View {
         VStack(alignment: .leading, spacing: 4) {
           Text(translation.content.asSafeMarkdownAttributedString)
             .font(.scaledBody)
-          Text("status.action.translated-label-\(translation.provider)")
+          Text(getLocalizedString(langCode: translation.detectedSourceLanguage, provider: translation.provider))
             .font(.footnote)
             .foregroundColor(.gray)
         }

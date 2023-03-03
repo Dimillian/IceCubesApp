@@ -9,6 +9,7 @@ import Models
 import Status
 import SwiftUI
 import Timeline
+import Explore
 
 @MainActor
 extension View {
@@ -43,6 +44,10 @@ extension View {
         AccountsListView(mode: .rebloggedBy(statusId: id))
       case let .accountsList(accounts):
         AccountsListView(mode: .accountsList(accounts: accounts))
+      case .trendingTimeline:
+        TimelineView(timeline: .constant(.trending), scrollToTopSignal: .constant(0))
+      case let .tagsList(tags):
+        TagsListView(tags: tags)
       }
     }
   }

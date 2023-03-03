@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "Kreis";
 "enum.avatar-shape.rounded" = "Abgerundet";
 "enum.durations.infinite" = "Unbegrenzt";
+"enum.durations.custom" = "Individuelle Einstellung";
 "enum.durations.fiveMinutes" = "5 Minuten";
 "enum.durations.thirtyMinutes" = "30 Minuten";
 "enum.durations.oneHour" = "1 Stunde";
 "enum.durations.sixHours" = "6 Stunden";
+"enum.durations.twelveHours" = "12 Stunden";
 "enum.durations.oneDay" = "1 Tag";
 "enum.durations.threeDays" = "3 Tage";
 "enum.durations.sevenDays" = "7 Tage";
@@ -36,7 +38,7 @@
 "enum.status-actions-display.no-buttons" = "Keine Buttons";
 "enum.status-actions-display.only-buttons" = "Nur Buttons";
 "enum.status-display-style.compact" = "Kompakt";
-"enum.status-display-style.medium" = "Medium";
+"enum.status-display-style.medium" = "Mittel";
 "enum.status-display-style.large" = "Groß";
 "enum.swipeactions.icon-with-text" = "Symbol mit Text";
 "enum.swipeactions.icon-only" = "Nur Symbol";
@@ -79,12 +81,14 @@
 "settings.display.restore" = "Standard wiederherstellen";
 "settings.display.section.display" = "Anzeigen";
 "settings.display.section.theme" = "Design";
+"settings.display.colors.apply" = "Eigene Farben anwenden";
 "settings.display.section.theme.footer" = "Eigene Farben können nur eingestellt werden, wenn die Systemeinstellung nicht verwendet wird.";
 "settings.display.status.action-buttons" = "Status Aktions-Buttons";
 "settings.display.status.media-style" = "Status Medien";
 "settings.display.translate-button" = "Übersetzen-Button anzeigen";
 "settings.display.theme.background" = "Hintergrundfarbe";
 "settings.display.theme.secondary-background" = "Sekundäre Hintergrundfarbe";
+"settings.display.theme.text-color" = "Textfarbe";
 "settings.display.theme.tint" = "Akzentfarbe";
 "settings.display.theme.systemColor" = "Systemeinstellung verwenden";
 "settings.general.browser" = "Browser";
@@ -122,16 +126,27 @@
 "settings.support.two.title" = "☕️ Schönes Trinkgeld";
 "settings.support.four.title" = "👽 Wahnsinns-Trinkgeld";
 "settings.support.four.subtitle" = "Das wird eine große Hilfe sein, Ice Cubes am Laufen zu halten!";
+"settings.support.supporter.title" = "Werde Unterstützer!";
+"settings.support.supporter.subtitle" = "Indem du Ice Cubes ein monatliches Trinkgeld gibst, wirst du Unterstützer und bekommst sogar einen Verifiziert-Haken in deinem Profil. Nur für deine 👀.";
+"settings.support.supporter.subscribed" = "Danke, dass du Ice Cubes unterstützst!";
+"settings.support.supporter.subscription-info"= "Abonnements werden automatisch verlängert, sofern du sie nicht bis zu einem Tag vor der nächsten Verlängerung kündigst.";
+"settings.support.restore-purchase.button" = "Kauf wiederherstellen";
+"settings.support.restore-purchase.explanation" = "Stell dein Abonnement wieder her, falls es nicht automatisch abgeglichen worden ist.";
+"settings.support.privacy-policy" = "Datenschutzerklärung";
+"settings.support.terms-of-use" = "Nutzungsbedingungen";
 "settings.timeline.add" = "Lokale Timeline hinzufügen";
 "settings.title" = "Einstellungen";
 "settings.rate" = "Bewerte Ice Cubes";
 "settings.section.other" = "Anderes";
 "settings.other.hide-openai" = "Aktiviere 🤖-Helfer";
 "settings.other.social-keyboard" = "Soziale Tastatur aktivieren";
+"settings.other.sound-effect" = "Klänge aktivieren";
 "settings.general.content" = "Inhaltseinstellungen";
 "settings.system" = "Systemeinstellungen";
 "settings.content.navigation-title" = "Inhaltseinstellungen";
 "settings.content.boosts" = "Boosts";
+"settings.content.collapse-long-posts" = "Lange Beiträge einklappen";
+"settings.content.collapse-long-posts-hint" = "Eingeklappte Beiträge zeigen nur eine begrenzte Anzahl an Zeilen sowie eine Schaltfläche an, mit der der komplette Beitrag angezeigt werden kann";
 "settings.content.hide-repeated-boosts" = "Wiederholte Boosts verstecken";
 "settings.content.instance-settings" = "Serverinhaltseinstellungen";
 "settings.content.use-instance-settings" = "Servereinstellungen verwenden";
@@ -167,25 +182,28 @@
 "settings.display.show-ipad-column" = "Zweite Spalte aktivieren";
 
 "settings.general.swipeactions" = "Wischaktionen";
-"settings.swipeactions.appearance" = "Appearance";
+"settings.swipeactions.appearance" = "Erscheinungsbild";
 "settings.swipeactions.navigation-title" = "Wischaktionen";
-"settings.swipeactions.primary" = "Primary Action";
-"settings.swipeactions.secondary" = "Secondary Action";
+"settings.swipeactions.primary" = "Primäre Aktion";
+"settings.swipeactions.secondary" = "Sekundäre Aktion";
 "settings.swipeactions.status.action.bookmark" = "Lesezeichen setzen";
 "settings.swipeactions.status.action.boost" = "Boosten";
 "settings.swipeactions.status.action.favorite" = "Favorisieren";
 "settings.swipeactions.status.action.none" = "Keine";
 "settings.swipeactions.status.action.quote" = "Zitieren";
 "settings.swipeactions.status.action.reply" = "Antworten";
-"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
+"settings.swipeactions.status.explanation" = "Wischaktionen sind verfügbar, indem du einen Beitrag nach links oder nach rechts wischst. Die sekundäre Aktion ist nur verfügbar, wenn die primäre Aktion gesetzt ist.";
 "settings.swipeactions.status.leading" = "Nach rechts wischen";
 "settings.swipeactions.status.trailing" = "Nach links wischen";
 "settings.swipeactions.status" = "Beitrag";
-"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
+"settings.swipeactions.use-theme-colors" = "Farbschema verwenden";
 "settings.swipeactions.use-theme-colors-explanation" = "Farbschema anstelle der Standardfarben verwenden";
 "settings.swipeactions.icon-style" = "Symbolstil";
 
 "settings.display.section.font" = "Schriftart";
+
+"settings.section.cache" = "Cache";
+"settings.cache-media.clear" = "Mediencache leeren";
 
 "enum.expand-media.show" = "Alle zeigen";
 "enum.expand-media.hide" = "Alle ausblenden";
@@ -244,6 +262,12 @@
 "account.edit.post-settings.privacy" = "Standard-Sichtbarkeit";
 "account.edit.post-settings.section-title" = "Beitragseinstellungen";
 "account.edit.post-settings.sensitive" = "Sensibler Inhalt";
+
+"account.edit.metadata-section-title" = "Profilmetadaten";
+"account.edit.metadata-name-placeholder" = "Titel";
+"account.edit.metadata-value-placeholder" = "Inhalt";
+"account.edit.add-metadata-button" = "Neuen Eintrag hinzufügen";
+
 "account.favorited-by" = "Favorisiert von";
 "account.follow.follow" = "Folgen";
 "account.follow.following" = "Entfolgen";
@@ -265,6 +289,7 @@
 "account.joined" = "Beigetreten am";
 "account.action.logout" = "Abmelden";
 "account.action.edit-filters" = "Filter bearbeiten";
+"account.action.more" = "More Settings";
 
 "account.relation.note.edit" = "Notiz bearbeiten";
 "account.relation.note.edit.placeholder" = "Gib den Notiztext ein";
@@ -283,6 +308,7 @@
 "conversations.error.title" = "Ein Fehler ist aufgetreten";
 "conversations.navigation-title" = "Direkte Nachrichten";
 "conversations.new.message.placeholder" = "Neue Nachricht";
+"conversations.latest.message" = "Letzte Nachricht";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld Beiträge von %lld Teilnehmenden";
@@ -305,14 +331,6 @@
 "explore.section.users" = "Profile";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5 Minuten";
-"env.poll-duration.30m" = "30 Minuten";
-"env.poll-duration.1h" = "1 Stunde";
-"env.poll-duration.6h" = "6 Stunden";
-"env.poll-duration.12h" = "12 Stunden";
-"env.poll-duration.1d" = "1 Tag";
-"env.poll-duration.3d" = "3 Tage";
-"env.poll-duration.7d" = "7 Tage";
 "env.poll-vote-frequency.one" = "Einfache Auswahl";
 "env.poll-vote-frequency.multiple" = "Mehrfachauswahl";
 
@@ -363,12 +381,13 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Übersetzen";
-"status.action.translate-from-%@" = "Aus %@ übersetzen";
 "status.action.translated-label-%@" = "Übersetzt mit %@";
+"status.action.translated-label-from-%@-%@" = "Aus %@ mit %@ übersetzt";
 "status.action.bookmark" = "Lesezeichen setzen";
 "status.action.boost" = "Boosten";
 "status.action.boost-to-followers" = "An Follower boosten";
 "status.action.copy-text" = "Text kopieren";
+"status.action.copy-link" = "Link kopieren";
 "status.action.delete" = "Löschen";
 "status.action.delete.confirm.title" = "Bestätigen";
 "status.action.delete.confirm.message" = "Bist du dir sicher, dass du diesen Beitrag löschen möchtest?";
@@ -442,6 +461,7 @@
 "status.row.you-boosted" = "Du hast geboostet";
 "status.show-less" = "Weniger anzeigen";
 "status.show-more" = "Mehr anzeigen";
+"status.show-full-post" = "Ganzen Beitrag anzeigen";
 "status.summary.at-time" = " um ";
 "status.summary.n-boosts %lld" = "%lld Boosts";
 "status.summary.n-favorites %lld" = "%lld Favoriten";
@@ -459,6 +479,9 @@
 "filter.edit.keywords.add" = "Neues Wort hinzufügen";
 "filter.edit.contexts" = "Filterkontext";
 "filter.edit.action" = "Filteraktion";
+"filter.edit.expiry" = "Expiry";
+"filter.edit.expiry.date-time" = "Date/Time";
+"filter.edit.expiry.duration" = "Duration";
 "filter.contexts.home" = "Startseite und Listen";
 "filter.contexts.notifications" = "Mitteilungen";
 "filter.contexts.public" = "Öffentliche Timelines";

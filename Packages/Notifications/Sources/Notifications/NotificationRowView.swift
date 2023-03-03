@@ -55,11 +55,12 @@ struct NotificationRowView: View {
     ZStack(alignment: .center) {
       Circle()
         .strokeBorder(Color.white, lineWidth: 1)
-        .background(Circle().foregroundColor(type.tintColor()))
+        .background(Circle().foregroundColor(type.tintColor(isPrivate: notification.status?.visibility == .direct)))
         .frame(width: 24, height: 24)
 
-      Image(systemName: type.iconName())
+      type.icon(isPrivate: notification.status?.visibility == .direct)
         .resizable()
+        .scaledToFit()
         .frame(width: 12, height: 12)
         .foregroundColor(.white)
     }
@@ -104,6 +105,7 @@ struct NotificationRowView: View {
                          .foregroundColor(.gray)
                      })
                      .font(.scaledSubheadline)
+                     .emojiSize(Font.scaledSubheadlinePointSize)
                      .fontWeight(.semibold)
                      .lineLimit(3)
                      .fixedSize(horizontal: false, vertical: true)
@@ -134,17 +136,17 @@ struct NotificationRowView: View {
     if let status = notification.status {
       HStack {
         if type == .mention {
-          StatusRowView(viewModel: .init(status: status,
-                                         client: client,
-                                         routerPath: routerPath,
-                                         showActions: true))
+          StatusRowView(viewModel: { .init(status: status,
+                                           client: client,
+                                           routerPath: routerPath,
+                                           showActions: true) })
         } else {
-          StatusRowView(viewModel: .init(status: status,
-                                         client: client,
-                                         routerPath: routerPath,
-                                         showActions: false))
+          StatusRowView(viewModel: { .init(status: status,
+                                           client: client,
+                                           routerPath: routerPath,
+                                           showActions: false,
+                                           textDisabled: true) })
             .lineLimit(4)
-            .foregroundColor(.gray)
         }
         Spacer()
       }
@@ -160,6 +162,7 @@ struct NotificationRowView: View {
                        emojis: notification.accounts[0].emojis)
             .lineLimit(3)
             .font(.scaledCallout)
+            .emojiSize(Font.scaledCalloutPointSize)
             .foregroundColor(.gray)
             .environment(\.openURL, OpenURLAction { url in
               routerPath.handle(url: url)

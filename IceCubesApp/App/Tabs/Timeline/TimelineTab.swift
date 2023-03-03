@@ -95,7 +95,7 @@ struct TimelineTab: View {
 
   @ViewBuilder
   private var timelineFilterButton: some View {
-    if timeline == .home {
+    if timeline.supportNewestPagination {
       Button {
         self.timeline = .latest
       } label: {

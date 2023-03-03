@@ -16,6 +16,7 @@ struct ConversationMessageView: View {
   let conversation: Conversation
 
   @State private var isLiked: Bool = false
+  @State private var isBookmarked: Bool = false
 
   var body: some View {
     let isOwnMessage = message.account.id == currentAccount.account?.id
@@ -32,6 +33,8 @@ struct ConversationMessageView: View {
         VStack(alignment: .leading) {
           EmojiTextApp(message.content, emojis: message.emojis)
             .font(.scaledBody)
+            .foregroundColor(theme.labelColor)
+            .emojiSize(Font.scaledBodyPointSize)
             .padding(6)
             .environment(\.openURL, OpenURLAction { url in
               routerPath.handleStatus(status: message, url: url)
@@ -81,6 +84,7 @@ struct ConversationMessageView: View {
     }
     .onAppear {
       isLiked = message.favourited == true
+      isBookmarked = message.bookmarked == true
     }
   }
 
@@ -114,11 +118,42 @@ struct ConversationMessageView: View {
       Label(isLiked ? "status.action.unfavorite" : "status.action.favorite",
             systemImage: isLiked ? "star.fill" : "star")
     }
+    Button { Task {
+      do {
+        let status: Status
+        if isBookmarked {
+          status = try await client.post(endpoint: Statuses.unbookmark(id: message.id))
+        } else {
+          status = try await client.post(endpoint: Statuses.bookmark(id: message.id))
+        }
+        withAnimation {
+          isBookmarked = status.bookmarked == true
+        }
+      } catch {}
+    } } label: {
+      Label(isBookmarked ? "status.action.unbookmark" : "status.action.bookmark",
+            systemImage: isBookmarked ? "bookmark.fill" : "bookmark")
+    }
     Divider()
     if message.account.id == currentAccount.account?.id {
       Button("status.action.delete", role: .destructive) {
         Task {
           _ = try await client.delete(endpoint: Statuses.status(id: message.id))
+        }
+      }
+    } else {
+      Section(message.reblog?.account.acct ?? message.account.acct) {
+        Button {
+          routerPath.presentedSheet = .mentionStatusEditor(account: message.reblog?.account ?? message.account, visibility: .pub)
+        } label: {
+          Label("status.action.mention", systemImage: "at")
+        }
+      }
+      Section {
+        Button(role: .destructive) {
+          routerPath.presentedSheet = .report(status: message.reblogAsAsStatus ?? message)
+        } label: {
+          Label("status.action.report", systemImage: "exclamationmark.bubble")
         }
       }
     }
@@ -127,7 +162,7 @@ struct ConversationMessageView: View {
   private func makeImageRequest(for url: URL, size: CGSize) -> ImageRequest {
     ImageRequest(url: url, processors: [.resize(size: size)])
   }
-  
+
   private func mediaWidth(proxy: GeometryProxy) -> CGFloat {
     var width = proxy.frame(in: .local).width
     if UIDevice.current.userInterfaceIdiom == .pad {
@@ -135,7 +170,7 @@ struct ConversationMessageView: View {
     }
     return width
   }
-  
+
   private func makeMediaView(_ attachement: MediaAttachment) -> some View {
     GeometryReader { proxy in
       let width = mediaWidth(proxy: proxy)

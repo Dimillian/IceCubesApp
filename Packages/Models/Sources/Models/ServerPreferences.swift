@@ -33,3 +33,6 @@ public struct ServerPreferences: Decodable {
     case autoExpandSpoilers = "reading:expand:spoilers"
   }
 }
+
+extension ServerPreferences: Sendable {}
+extension ServerPreferences.AutoExpandMedia: Sendable {}

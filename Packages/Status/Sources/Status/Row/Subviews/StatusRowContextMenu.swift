@@ -11,52 +11,41 @@ struct StatusRowContextMenu: View {
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var currentInstance: CurrentInstance
+  @EnvironmentObject private var statusDataController: StatusDataController
 
   @ObservedObject var viewModel: StatusRowViewModel
 
   var boostLabel: some View {
     if self.viewModel.status.visibility == .priv && self.viewModel.status.account.id == self.account.account?.id {
-      if self.viewModel.isReblogged {
+      if self.statusDataController.isReblogged {
         return Label("status.action.unboost", systemImage: "lock.rotation")
       }
       return Label("status.action.boost-to-followers", systemImage: "lock.rotation")
     }
 
-    if self.viewModel.isReblogged {
-      return Label("status.action.unboost", systemImage: "arrow.left.arrow.right.circle")
+    if self.statusDataController.isReblogged {
+      return Label("status.action.unboost", image: "Rocket")
     }
-    return Label("status.action.boost", systemImage: "arrow.left.arrow.right.circle")
+    return Label("status.action.boost", image: "Rocket")
   }
 
   var body: some View {
     if !viewModel.isRemote {
       Button { Task {
-        if viewModel.isFavorited {
-          await viewModel.unFavorite()
-        } else {
-          await viewModel.favorite()
-        }
+        await statusDataController.toggleFavorite(remoteStatus: nil)
       } } label: {
-        Label(viewModel.isFavorited ? "status.action.unfavorite" : "status.action.favorite", systemImage: "star")
+        Label(statusDataController.isFavorited ? "status.action.unfavorite" : "status.action.favorite", systemImage: "star")
       }
       Button { Task {
-        if viewModel.isReblogged {
-          await viewModel.unReblog()
-        } else {
-          await viewModel.reblog()
-        }
+        await statusDataController.toggleReblog(remoteStatus: nil)
       } } label: {
         boostLabel
       }
       .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != account.account?.id)
       Button { Task {
-        if viewModel.isBookmarked {
-          await viewModel.unbookmark()
-        } else {
-          await viewModel.bookmark()
-        }
+        await statusDataController.toggleBookmark(remoteStatus: nil)
       } } label: {
-        Label(viewModel.isBookmarked ? "status.action.unbookmark" : "status.action.bookmark",
+        Label(statusDataController.isBookmarked ? "status.action.unbookmark" : "status.action.bookmark",
               systemImage: "bookmark")
       }
       Button {
@@ -92,7 +81,7 @@ struct StatusRowContextMenu: View {
 
         Button {
           let view = HStack {
-            StatusRowView(viewModel: viewModel)
+            StatusRowView(viewModel: { viewModel })
               .padding(16)
           }
           .environment(\.isInCaptureMode, true)
@@ -107,6 +96,7 @@ struct StatusRowContextMenu: View {
           .foregroundColor(Theme.shared.labelColor)
           .background(Theme.shared.primaryBackgroundColor)
           .frame(width: sceneDelegate.windowWidth - 12)
+          .tint(Theme.shared.tintColor)
           let renderer = ImageRenderer(content: view)
           renderer.scale = displayScale
           renderer.isOpaque = false
@@ -131,6 +121,12 @@ struct StatusRowContextMenu: View {
       Label("status.action.copy-text", systemImage: "doc.on.doc")
     }
 
+    Button {
+      UIPasteboard.general.string = viewModel.status.reblog?.url ?? viewModel.status.url
+    } label: {
+      Label("status.action.copy-link", systemImage: "link")
+    }
+
     if let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier
     {
       Button {
@@ -138,13 +134,7 @@ struct StatusRowContextMenu: View {
           await viewModel.translate(userLang: lang)
         }
       } label: {
-        if let statusLang = viewModel.getStatusLang(),
-           let languageName = Locale.current.localizedString(forLanguageCode: statusLang)
-        {
-          Label("status.action.translate-from-\(languageName)", systemImage: "captions.bubble")
-        } else {
-          Label("status.action.translate", systemImage: "captions.bubble")
-        }
+        Label("status.action.translate", systemImage: "captions.bubble")
       }
     }
 

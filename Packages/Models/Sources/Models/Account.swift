@@ -3,17 +3,18 @@ import Foundation
 public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable {
   public static func == (lhs: Account, rhs: Account) -> Bool {
     lhs.id == rhs.id &&
-    lhs.username == rhs.username &&
-    lhs.note.asRawText == rhs.note.asRawText &&
-    lhs.statusesCount == rhs.statusesCount &&
-    lhs.followersCount == rhs.followersCount &&
-    lhs.followingCount == rhs.followingCount &&
-    lhs.acct == rhs.acct &&
-    lhs.displayName == rhs.displayName &&
-    lhs.fields == rhs.fields &&
-    lhs.lastStatusAt == rhs.lastStatusAt &&
-    lhs.discoverable == rhs.discoverable &&
-    lhs.bot == rhs.bot
+      lhs.username == rhs.username &&
+      lhs.note.asRawText == rhs.note.asRawText &&
+      lhs.statusesCount == rhs.statusesCount &&
+      lhs.followersCount == rhs.followersCount &&
+      lhs.followingCount == rhs.followingCount &&
+      lhs.acct == rhs.acct &&
+      lhs.displayName == rhs.displayName &&
+      lhs.fields == rhs.fields &&
+      lhs.lastStatusAt == rhs.lastStatusAt &&
+      lhs.discoverable == rhs.discoverable &&
+      lhs.bot == rhs.bot &&
+      lhs.locked == rhs.locked
   }
 
   public func hash(into hasher: inout Hasher) {
@@ -40,7 +41,7 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
 
   public let id: String
   public let username: String
-  public let displayName: String
+  public let displayName: String?
   public let avatar: URL
   public let header: URL
   public let acct: String
@@ -66,7 +67,7 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
     return header.lastPathComponent != "missing.png"
   }
 
-  public init(id: String, username: String, displayName: String, avatar: URL, header: URL, acct: String, note: HTMLString, createdAt: ServerDate, followersCount: Int, followingCount: Int, statusesCount: Int, lastStatusAt: String? = nil, fields: [Account.Field], locked: Bool, emojis: [Emoji], url: URL? = nil, source: Account.Source? = nil, bot: Bool, discoverable: Bool? = nil) {
+  public init(id: String, username: String, displayName: String?, avatar: URL, header: URL, acct: String, note: HTMLString, createdAt: ServerDate, followersCount: Int, followingCount: Int, statusesCount: Int, lastStatusAt: String? = nil, fields: [Account.Field], locked: Bool, emojis: [Emoji], url: URL? = nil, source: Account.Source? = nil, bot: Bool, discoverable: Bool? = nil) {
     self.id = id
     self.username = username
     self.displayName = displayName
@@ -120,3 +121,5 @@ public struct FamiliarAccounts: Decodable {
   public let id: String
   public let accounts: [Account]
 }
+
+extension FamiliarAccounts: Sendable {}

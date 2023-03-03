@@ -24,6 +24,17 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
 
   case uiimage = "com.apple.uikit.image"
 
+  // Have to implement this manually here due to compiler not implicitly
+  // inserting `nonisolated`, which leads to a warning:
+  //
+  //     Main actor-isolated static property 'allCases' cannot be used to
+  //     satisfy nonisolated protocol requirement
+  //
+  nonisolated public static var allCases: [StatusEditorUTTypeSupported] {
+    [.url, .text, .plaintext, .image, .jpeg, .png, .tiff, .video,
+     .movie, .mp4, .gif, .gif2, .quickTimeMovie, .uiimage]
+  }
+  
   static func types() -> [UTType] {
     [.url, .text, .plainText, .image, .jpeg, .png, .tiff, .video, .mpeg4Movie, .gif, .movie, .quickTimeMovie]
   }
@@ -47,6 +58,8 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
   }
 
   func loadItemContent(item: NSItemProvider) async throws -> Any? {
+    // Many warnings here about non-sendable type `[AnyHashable: Any]?` crossing
+    // actor boundaries. Many Radars have been filed.
     let result = try await item.loadItem(forTypeIdentifier: rawValue)
     if isVideo, let transferable = await getVideoTransferable(item: item) {
       return transferable
@@ -154,7 +167,6 @@ struct ImageFileTranseferable: Transferable {
   let url: URL
 
   lazy var data: Data? = try? Data(contentsOf: url)
-  lazy var compressedData: Data? = image?.jpegData(compressionQuality: 0.80)
   lazy var image: UIImage? = UIImage(data: data ?? Data())
 
   static var transferRepresentation: some TransferRepresentation {
@@ -194,6 +206,14 @@ public extension URL {
       return mimeType
     } else {
       return "application/octet-stream"
+    }
+  }
+}
+
+extension UIImage {
+  func resized(to size: CGSize) -> UIImage {
+    UIGraphicsImageRenderer(size: size).image { _ in
+      draw(in: CGRect(origin: .zero, size: size))
     }
   }
 }

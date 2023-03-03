@@ -60,7 +60,7 @@ public struct TimelineView: View {
           collectionView.isPrefetchingEnabled = true
           collectionView.prefetchDataSource = self.prefetcher
         }
-        if viewModel.pendingStatusesEnabled {
+        if viewModel.timeline.supportNewestPagination {
           PendingStatusesObserverView(observer: viewModel.pendingStatusesObserver)
         }
       }
@@ -103,25 +103,22 @@ public struct TimelineView: View {
     .navigationBarTitleDisplayMode(.inline)
     .onAppear {
       viewModel.isTimelineVisible = true
+
       if viewModel.client == nil {
         viewModel.client = client
-        viewModel.timeline = timeline
-      } else {
-        Task {
-          await viewModel.fetchStatuses()
-        }
       }
+
+      viewModel.timeline = timeline
     }
     .onDisappear {
       viewModel.isTimelineVisible = false
     }
     .refreshable {
-      if timeline == .trending {
-        await viewModel.reset()
-      }
+      SoundEffectManager.shared.playSound(of: .pull)
       HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
-      await viewModel.fetchStatuses()
+      await viewModel.pullToRefresh()
       HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
+      SoundEffectManager.shared.playSound(of: .refresh)
     }
     .onChange(of: watcher.latestEvent?.id) { _ in
       if let latestEvent = watcher.latestEvent {
@@ -146,7 +143,7 @@ public struct TimelineView: View {
         if wasBackgrounded {
           wasBackgrounded = false
           Task {
-            await viewModel.fetchStatuses()
+            await viewModel.fetchNewestStatuses()
           }
         }
       case .background:

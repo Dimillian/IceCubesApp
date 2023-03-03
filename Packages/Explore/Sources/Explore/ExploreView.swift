@@ -68,7 +68,11 @@ public struct ExploreView: View {
     }
     .refreshable {
       Task {
+        SoundEffectManager.shared.playSound(of: .pull)
+        HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
         await viewModel.fetchTrending()
+        HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
+        SoundEffectManager.shared.playSound(of: .refresh)
       }
     }
     .listStyle(.grouped)
@@ -81,7 +85,7 @@ public struct ExploreView: View {
 
   private var loadingView: some View {
     ForEach(Status.placeholders()) { status in
-      StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
+      StatusRowView(viewModel: { .init(status: status, client: client, routerPath: routerPath) })
         .padding(.vertical, 8)
         .redacted(reason: .placeholder)
         .listRowBackground(theme.primaryBackgroundColor)
@@ -112,7 +116,7 @@ public struct ExploreView: View {
     if !results.statuses.isEmpty {
       Section("explore.section.posts") {
         ForEach(results.statuses) { status in
-          StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
+          StatusRowView(viewModel: { .init(status: status, client: client, routerPath: routerPath) })
             .listRowBackground(theme.primaryBackgroundColor)
             .padding(.vertical, 8)
         }
@@ -129,21 +133,7 @@ public struct ExploreView: View {
               .listRowBackground(theme.primaryBackgroundColor)
           }
         }
-      NavigationLink {
-        List {
-          ForEach(viewModel.suggestedAccounts) { account in
-            if let relationship = viewModel.suggestedAccountsRelationShips.first(where: { $0.id == account.id }) {
-              AccountsListRow(viewModel: .init(account: account, relationShip: relationship))
-                .listRowBackground(theme.primaryBackgroundColor)
-            }
-          }
-        }
-        .scrollContentBackground(.hidden)
-        .background(theme.primaryBackgroundColor)
-        .listStyle(.plain)
-        .navigationTitle("explore.section.suggested-users")
-        .navigationBarTitleDisplayMode(.inline)
-      } label: {
+      NavigationLink(value: RouterDestination.accountsList(accounts: viewModel.suggestedAccounts)) {
         Text("see-more")
           .foregroundColor(theme.tintColor)
       }
@@ -159,20 +149,7 @@ public struct ExploreView: View {
             .listRowBackground(theme.primaryBackgroundColor)
             .padding(.vertical, 4)
         }
-      NavigationLink {
-        List {
-          ForEach(viewModel.trendingTags) { tag in
-            TagRowView(tag: tag)
-              .listRowBackground(theme.primaryBackgroundColor)
-              .padding(.vertical, 4)
-          }
-        }
-        .scrollContentBackground(.hidden)
-        .background(theme.primaryBackgroundColor)
-        .listStyle(.plain)
-        .navigationTitle("explore.section.trending.tags")
-        .navigationBarTitleDisplayMode(.inline)
-      } label: {
+      NavigationLink(value: RouterDestination.tagsList(tags: viewModel.trendingTags)) {
         Text("see-more")
           .foregroundColor(theme.tintColor)
       }
@@ -184,25 +161,12 @@ public struct ExploreView: View {
     Section("explore.section.trending.posts") {
       ForEach(viewModel.trendingStatuses
         .prefix(upTo: viewModel.trendingStatuses.count > 3 ? 3 : viewModel.trendingStatuses.count)) { status in
-          StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
+          StatusRowView(viewModel: { .init(status: status, client: client, routerPath: routerPath) })
             .listRowBackground(theme.primaryBackgroundColor)
             .padding(.vertical, 8)
         }
 
-      NavigationLink {
-        List {
-          ForEach(viewModel.trendingStatuses) { status in
-            StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
-              .listRowBackground(theme.primaryBackgroundColor)
-              .padding(.vertical, 8)
-          }
-        }
-        .scrollContentBackground(.hidden)
-        .background(theme.primaryBackgroundColor)
-        .listStyle(.plain)
-        .navigationTitle("explore.section.trending.posts")
-        .navigationBarTitleDisplayMode(.inline)
-      } label: {
+      NavigationLink(value: RouterDestination.trendingTimeline) {
         Text("see-more")
           .foregroundColor(theme.tintColor)
       }

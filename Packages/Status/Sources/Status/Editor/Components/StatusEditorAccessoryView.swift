@@ -39,6 +39,7 @@ struct StatusEditorAccessoryView: View {
             Button {
               withAnimation {
                 viewModel.showPoll.toggle()
+                viewModel.resetPollDefaults()
               }
             } label: {
               Image(systemName: "chart.bar")
@@ -109,7 +110,7 @@ struct StatusEditorAccessoryView: View {
       customEmojisSheet
     }
     .onAppear {
-      viewModel.setInitialLanguageSelection(preference: preferences.serverPreferences?.postLanguage)
+      viewModel.setInitialLanguageSelection(preference: preferences.recentlyUsedLanguages.first ?? preferences.serverPreferences?.postLanguage)
     }
   }
 
@@ -181,7 +182,7 @@ struct StatusEditorAccessoryView: View {
     }
   }
 
-  private func languageSheetSection(languages: [StatusEditorLanguage]) -> some View {
+  private func languageSheetSection(languages: [Language]) -> some View {
     ForEach(languages) { language in
       HStack {
         languageTextView(
@@ -260,6 +261,11 @@ struct StatusEditorAccessoryView: View {
           }
         }.padding(.horizontal)
       }
+      .toolbar {
+        ToolbarItem(placement: .navigationBarLeading) {
+          Button("action.cancel", action: { isCustomEmojisSheetDisplay = false })
+        }
+      }
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
       .navigationTitle("status.editor.emojis.navigation-title")
@@ -274,18 +280,18 @@ struct StatusEditorAccessoryView: View {
       .font(.scaledCallout)
   }
 
-  private var recentlyUsedLanguages: [StatusEditorLanguage] {
+  private var recentlyUsedLanguages: [Language] {
     preferences.recentlyUsedLanguages.compactMap { isoCode in
-      StatusEditorLanguage.allAvailableLanguages.first { $0.isoCode == isoCode }
+      Language.allAvailableLanguages.first { $0.isoCode == isoCode }
     }
   }
 
-  private var otherLanguages: [StatusEditorLanguage] {
-    StatusEditorLanguage.allAvailableLanguages.filter { !preferences.recentlyUsedLanguages.contains($0.isoCode) }
+  private var otherLanguages: [Language] {
+    Language.allAvailableLanguages.filter { !preferences.recentlyUsedLanguages.contains($0.isoCode) }
   }
 
-  private func languageSearchResult(query: String) -> [StatusEditorLanguage] {
-    StatusEditorLanguage.allAvailableLanguages.filter { language in
+  private func languageSearchResult(query: String) -> [Language] {
+    Language.allAvailableLanguages.filter { language in
       guard !languageSearch.isEmpty else {
         return true
       }

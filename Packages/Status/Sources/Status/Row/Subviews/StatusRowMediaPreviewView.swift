@@ -6,10 +6,10 @@ import NukeUI
 import SwiftUI
 
 public struct StatusRowMediaPreviewView: View {
-  @Environment(\.openURL) private var openURL
   @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
   @Environment(\.extraLeadingInset) private var extraLeadingInset: CGFloat
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
+  @Environment(\.isCompact) private var isCompact: Bool
 
   @EnvironmentObject var sceneDelegate: SceneDelegate
   @EnvironmentObject private var preferences: UserPreferences
@@ -18,7 +18,6 @@ public struct StatusRowMediaPreviewView: View {
 
   public let attachments: [MediaAttachment]
   public let sensitive: Bool
-  public let isNotifications: Bool
 
   @State private var isQuickLookLoading: Bool = false
   @State private var altTextDisplayed: String?
@@ -27,7 +26,8 @@ public struct StatusRowMediaPreviewView: View {
 
   var availableWidth: CGFloat {
     if UIDevice.current.userInterfaceIdiom == .phone &&
-        (UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight) || theme.statusDisplayStyle == .medium {
+      (UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight) || theme.statusDisplayStyle == .medium
+    {
       return sceneDelegate.windowWidth * 0.80
     }
     return sceneDelegate.windowWidth
@@ -38,7 +38,7 @@ public struct StatusRowMediaPreviewView: View {
     var sidebarWidth: CGFloat = 0
     var secondaryColumnWidth: CGFloat = 0
     let layoutPading: CGFloat = .layoutPadding * 2
-    if UIDevice.current.userInterfaceIdiom == .pad  {
+    if UIDevice.current.userInterfaceIdiom == .pad {
       sidebarWidth = .sidebarWidth
       if preferences.showiPadSecondaryColumn {
         secondaryColumnWidth = .secondaryColumnWidth
@@ -48,10 +48,7 @@ public struct StatusRowMediaPreviewView: View {
   }
 
   private var imageMaxHeight: CGFloat {
-    if isNotifications {
-      if UIDevice.current.userInterfaceIdiom == .pad {
-        return 100
-      }
+    if isCompact {
       return 50
     }
     if theme.statusDisplayStyle == .compact {
@@ -76,7 +73,7 @@ public struct StatusRowMediaPreviewView: View {
   }
 
   private func imageSize(from: CGSize, newWidth: CGFloat) -> CGSize {
-    if isNotifications || theme.statusDisplayStyle == .compact || isSecondaryColumn {
+    if isCompact || theme.statusDisplayStyle == .compact || isSecondaryColumn {
       return .init(width: imageMaxHeight, height: imageMaxHeight)
     }
     let ratio = newWidth / from.width
@@ -93,11 +90,8 @@ public struct StatusRowMediaPreviewView: View {
               await quickLook.prepareFor(urls: attachments.compactMap { $0.url }, selectedURL: attachment.url!)
             }
           }
-          .contextMenu {
-            contextMenuForMedia(mediaAttachement: attachment)
-          }
       } else {
-        if isNotifications || theme.statusDisplayStyle == .compact {
+        if isCompact || theme.statusDisplayStyle == .compact {
           HStack {
             makeAttachmentView(for: 0)
             makeAttachmentView(for: 1)
@@ -188,7 +182,7 @@ public struct StatusRowMediaPreviewView: View {
       if !isInCaptureMode, sensitive {
         cornerSensitiveButton
       }
-      if !isInCaptureMode, let alt = attachment.description, !alt.isEmpty, !isNotifications, preferences.showAltTextForMedia {
+      if !isInCaptureMode, let alt = attachment.description, !alt.isEmpty, !isCompact, preferences.showAltTextForMedia {
         Group {
           Button {
             altTextDisplayed = alt
@@ -214,7 +208,7 @@ public struct StatusRowMediaPreviewView: View {
         GeometryReader { proxy in
           switch type {
           case .image:
-            let width = isNotifications ? imageMaxHeight : proxy.frame(in: .local).width
+            let width = isCompact ? imageMaxHeight : proxy.frame(in: .local).width
             let processors: [ImageProcessing] = [.resize(size: .init(width: width, height: imageMaxHeight))]
             ZStack(alignment: .bottomTrailing) {
               LazyImage(url: attachment.previewUrl ?? attachment.url) { state in
@@ -240,7 +234,7 @@ public struct StatusRowMediaPreviewView: View {
               if !isInCaptureMode,
                  let alt = attachment.description,
                  !alt.isEmpty,
-                 !isNotifications,
+                 !isCompact,
                  preferences.showAltTextForMedia
               {
                 Button {
@@ -259,12 +253,12 @@ public struct StatusRowMediaPreviewView: View {
           case .gifv, .video, .audio:
             if let url = attachment.url {
               VideoPlayerView(viewModel: .init(url: url))
-                .frame(width: isNotifications ? imageMaxHeight : proxy.frame(in: .local).width)
+                .frame(width: isCompact ? imageMaxHeight : proxy.frame(in: .local).width)
                 .frame(height: imageMaxHeight)
             }
           }
         }
-        .frame(maxWidth: isNotifications ? imageMaxHeight : nil)
+        .frame(maxWidth: isCompact ? imageMaxHeight : nil)
         .frame(height: imageMaxHeight)
       }
       // #965: do not create overlapping tappable areas, when multiple images are shown
@@ -273,9 +267,6 @@ public struct StatusRowMediaPreviewView: View {
         Task {
           await quickLook.prepareFor(urls: attachments.compactMap { $0.url }, selectedURL: attachment.url!)
         }
-      }
-      .contextMenu {
-        contextMenuForMedia(mediaAttachement: attachment)
       }
     }
   }
@@ -300,7 +291,7 @@ public struct StatusRowMediaPreviewView: View {
       Rectangle()
         .foregroundColor(.clear)
         .background(.ultraThinMaterial)
-      if !isNotifications {
+      if !isCompact {
         Button {
           withAnimation {
             isHidingMedia = false
@@ -333,39 +324,6 @@ public struct StatusRowMediaPreviewView: View {
       .padding(10)
       .buttonStyle(.borderedProminent)
       Spacer()
-    }
-  }
-
-  @ViewBuilder
-  private func contextMenuForMedia(mediaAttachement: MediaAttachment) -> some View {
-    if let url = mediaAttachement.url {
-      ShareLink(item: url) {
-        Label("status.media.contextmenu.share", systemImage: "square.and.arrow.up")
-      }
-      Button { openURL(url) } label: {
-        Label("status.media.contextmenu.view-browser", systemImage: "safari")
-      }
-      Divider()
-      Button {
-        Task {
-          do {
-            let image = try await ImagePipeline.shared.image(for: url).image
-            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-          } catch {}
-        }
-      } label: {
-        Label("status.media.contextmenu.save", systemImage: "square.and.arrow.down")
-      }
-      Button {
-        Task {
-          do {
-            let image = try await ImagePipeline.shared.image(for: url).image
-            UIPasteboard.general.image = image
-          } catch {}
-        }
-      } label: {
-        Label("status.media.contextmenu.copy", systemImage: "doc.on.doc")
-      }
     }
   }
 }

@@ -19,12 +19,15 @@ public struct EditAccountView: View {
           loadingSection
         } else {
           aboutSections
+          fieldsSection
           postSettingsSection
           accountSection
         }
       }
+      .environment(\.editMode, .constant(.active))
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
+      .scrollDismissesKeyboard(.immediately)
       .navigationTitle("account.edit.navigation-title")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
@@ -98,6 +101,39 @@ public struct EditAccountView: View {
     .listRowBackground(theme.primaryBackgroundColor)
   }
 
+  private var fieldsSection: some View {
+    Section("account.edit.metadata-section-title") {
+      ForEach($viewModel.fields) { $field in
+        VStack(alignment: .leading) {
+          TextField("account.edit.metadata-name-placeholder", text: $field.name)
+            .font(.scaledHeadline)
+          TextField("account.edit.metadata-value-placeholder", text: $field.value)
+            .emojiSize(Font.scaledBodyPointSize)
+            .foregroundColor(theme.tintColor)
+        }
+      }
+      .onMove(perform: { indexSet, newOffset in
+        viewModel.fields.move(fromOffsets: indexSet, toOffset: newOffset)
+      })
+      .onDelete { indexes in
+        if let index = indexes.first {
+          viewModel.fields.remove(at: index)
+        }
+      }
+      if viewModel.fields.count < 4 {
+        Button {
+          withAnimation {
+            viewModel.fields.append(.init(name: "", value: ""))
+          }
+        } label: {
+          Text("account.edit.add-metadata-button")
+            .foregroundColor(theme.tintColor)
+        }
+      }
+    }
+    .listRowBackground(theme.primaryBackgroundColor)
+  }
+
   @ToolbarContentBuilder
   private var toolbarContent: some ToolbarContent {
     ToolbarItem(placement: .navigationBarLeading) {
@@ -116,7 +152,7 @@ public struct EditAccountView: View {
         if viewModel.isSaving {
           ProgressView()
         } else {
-          Text("action.save")
+          Text("action.save").bold()
         }
       }
     }

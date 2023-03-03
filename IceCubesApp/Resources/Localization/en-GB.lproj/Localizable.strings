@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "Circle";
 "enum.avatar-shape.rounded" = "Rounded";
 "enum.durations.infinite" = "infinite";
+"enum.durations.custom" = "custom";
 "enum.durations.fiveMinutes" = "5 minutes";
 "enum.durations.thirtyMinutes" = "30 minutes";
 "enum.durations.oneHour" = "1 hour";
 "enum.durations.sixHours" = "6 hours";
+"enum.durations.twelveHours" = "12 hours";
 "enum.durations.oneDay" = "1 day";
 "enum.durations.threeDays" = "3 days";
 "enum.durations.sevenDays" = "7 days";
@@ -68,28 +70,30 @@
 "settings.app.icon.navigation-title" = "Icons";
 "settings.app.icon.official" = "Official icons";
 "settings.app.icon.designed-by" = "Icons by";
-"settings.app.source" = "Source (GitHub link)";
-"settings.app.support" = "Support the app";
+"settings.app.source" = "Source (GitHub)";
+"settings.app.support" = "Support the App";
 "settings.app.about" = "About";
 "settings.display.example-toot" = "Example Post";
 "settings.display.font" = "Timeline Font";
 "settings.display.font.system" = "System";
 "settings.display.font.custom" = "Custom";
-"settings.display.font.scaling-%@" = "Font scaling: %@";
-"settings.display.avatar.position" = "Avatar position";
-"settings.display.avatar.shape" = "Avatar shape";
-"settings.display.full-username" = "Display full username";
+"settings.display.font.scaling-%@" = "Font Scaling: %@";
+"settings.display.avatar.position" = "Avatar Position";
+"settings.display.avatar.shape" = "Avatar Shape";
+"settings.display.full-username" = "Display Full Username";
 "settings.display.navigation-title" = "Display Settings";
-"settings.display.restore" = "Restore defaults";
+"settings.display.restore" = "Restore Defaults";
 "settings.display.section.display" = "Display";
 "settings.display.section.theme" = "Theme";
+"settings.display.colors.apply" = "Apply custom colors";
 "settings.display.section.theme.footer" = "Custom colours can only be set if match system colour scheme is disabled";
-"settings.display.status.action-buttons" = "Status action buttons";
-"settings.display.status.media-style" = "Status media style";
-"settings.display.translate-button" = "Show translate button";
-"settings.display.theme.background" = "Background colour";
-"settings.display.theme.secondary-background" = "Secondary Background colour";
-"settings.display.theme.tint" = "Tint colour";
+"settings.display.status.action-buttons" = "Status Action Buttons";
+"settings.display.status.media-style" = "Status Media Style";
+"settings.display.translate-button" = "Show Translate Button";
+"settings.display.theme.background" = "Background Colour";
+"settings.display.theme.secondary-background" = "Secondary Background Colour";
+"settings.display.theme.text-color" = "Text Color";
+"settings.display.theme.tint" = "Tint Colour";
 "settings.display.theme.systemColor" = "Match System";
 "settings.general.browser" = "Browser";
 "settings.general.browser.in-app" = "In-App Browser";
@@ -111,17 +115,19 @@
 "settings.general.content" = "Content Settings";
 "settings.system" = "System Settings";
 "settings.content.boosts" = "Boosts";
+"settings.content.collapse-long-posts" = "Collapse long posts";
+"settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
 "settings.content.navigation-title" = "Content Settings";
-"settings.content.use-instance-settings" = "Use server settings";
+"settings.content.use-instance-settings" = "Use Server Settings";
 "settings.content.instance-settings" = "Server Content Settings";
 "settings.content.main-toggle.description" = "Use the settings from your home Instance";
-"settings.content.hide-repeated-boosts" = "Hide repeated boosts";
-"settings.content.expand-spoilers" = "Always show sensitive posts";
-"settings.content.expand-media" = "Media display";
-"settings.content.default-sensitive" = "Always mark media as sensitive";
-"settings.content.default-visibility" = "Posting visibility";
+"settings.content.hide-repeated-boosts" = "Hide Repeated Boosts";
+"settings.content.expand-spoilers" = "Always Show Sensitive Posts";
+"settings.content.expand-media" = "Media Display";
+"settings.content.default-sensitive" = "Always Mark Media as Sensitive";
+"settings.content.default-visibility" = "Posting Visibility";
 "settings.content.media" = "Media";
-"settings.content.media.show.alt" = "Show ALT texts";
+"settings.content.media.show.alt" = "Show ALT Texts";
 "settings.content.reading" = "Reading";
 "settings.content.posting" = "Posting";
 "enum.expand-media.show" = "Show All";
@@ -145,20 +151,29 @@
 "settings.support.two.title" = "☕️ Nice Tip";
 "settings.support.four.title" = "👽 Who are you Tip";
 "settings.support.four.subtitle" = "It'll go a long way to keep Ice Cubes running!";
-"settings.timeline.add" = "Add a local timeline";
+"settings.support.supporter.title" = " Become a supporter!";
+"settings.support.supporter.subtitle" = "By giving a monthly tip to Ice Cubes, you become a supporter, you'll even get verified badge on your profile. For your 👀 only.";
+"settings.support.supporter.subscribed" = " Thanks for being an Ice Cubes supporter!";
+"settings.support.supporter.subscription-info"= "Subscription are automatically renewed unless you cancel them a day before the next renewal cycle.";
+"settings.support.restore-purchase.button" = "Restore purchase";
+"settings.support.restore-purchase.explanation" = "Restore your supporter subscription if it's haven't been automatically synced.";
+"settings.support.privacy-policy" = "Privacy Policy";
+"settings.support.terms-of-use" = "Terms";
+"settings.timeline.add" = "Add a Local Timeline";
 "settings.title" = "Settings";
 "settings.rate" = "Rate Ice Cubes";
 "settings.section.other" = "Other";
-"settings.other.hide-openai" = "Enable 🤖 helper";
+"settings.other.hide-openai" = "Enable 🤖 Helper";
 "settings.other.social-keyboard" = "Enable Social Keyboard";
-"settings.push.duplicate.title" = "Duplicate notifications fixer";
+"settings.other.sound-effect" = "Enable Sound Effects";
+"settings.push.duplicate.title" = "Duplicate Notifications Fixer";
 "settings.push.duplicate.footer" = "Receiving duplicate notifications? Try this magic button in order to fix it";
-"settings.push.duplicate.button.fix" = "🪄 Fix it";
+"settings.push.duplicate.button.fix" = "🪄 Fix It";
 "settings.other.autoplay-video" = "Auto Play Videos";
 "settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
 "settings.about.title" = "Ice Cubes";
-"settings.account.cached-posts-%@" = "Cached posts: %@";
-"settings.account.action.delete-cache" = "Clear cache";
+"settings.account.cached-posts-%@" = "Cached Posts: %@";
+"settings.account.action.delete-cache" = "Clear Cache";
 
 "account.action.share" = "Share this account";
 
@@ -168,9 +183,9 @@
 "settings.haptic.tab-selection" = "Tab Selection";
 "settings.haptic.buttons" = "Button Press";
 
-"settings.display.show-tab-label" = "Show tab name";
+"settings.display.show-tab-label" = "Show Tab Name";
 
-"settings.display.show-ipad-column" = "Enable secondary column";
+"settings.display.show-ipad-column" = "Enable Secondary Column";
 
 "settings.general.swipeactions" = "Swipe Actions";
 "settings.swipeactions.navigation-title" = "Swipe Actions";
@@ -192,6 +207,9 @@
 "settings.swipeactions.icon-style" = "Icon Style";
 
 "settings.display.section.font" = "Font";
+
+"settings.section.cache" = "Cache";
+"settings.cache-media.clear" = "Clear Media Cache";
 
 // MARK: Tabs
 "tab.explore" = "Explore";
@@ -246,6 +264,12 @@
 "account.edit.post-settings.privacy" = "Default privacy";
 "account.edit.post-settings.section-title" = "Post settings";
 "account.edit.post-settings.sensitive" = "Sensitive content";
+
+"account.edit.metadata-section-title" = "Profile Metadata";
+"account.edit.metadata-name-placeholder" = "Label";
+"account.edit.metadata-value-placeholder" = "Content";
+"account.edit.add-metadata-button" = "Add a new metadata";
+
 "account.favorited-by" = "Favourited by";
 "account.follow.follow" = "Follow";
 "account.follow.following" = "Following";
@@ -265,7 +289,8 @@
 "account.posts" = "Posts";
 "account.relation.follows-you" = "Follows You";
 "account.joined" = "Joined";
-"account.action.logout" = "Log out account";
+"account.action.logout" = "Log Out Account";
+"account.action.more" = "More Settings";
 
 "account.relation.note.edit" = "Edit Note";
 "account.relation.note.edit.placeholder" = "Enter Note text";
@@ -284,6 +309,7 @@
 "conversations.error.title" = "An error occurred";
 "conversations.navigation-title" = "Direct Messages";
 "conversations.new.message.placeholder" = "New Message";
+"conversations.latest.message" = "Latest Message";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld posts from %lld participants";
@@ -306,14 +332,6 @@
 "explore.section.users" = "Users";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5 minutes";
-"env.poll-duration.30m" = "30 minutes";
-"env.poll-duration.1h" = "1 hour";
-"env.poll-duration.6h" = "6 hours";
-"env.poll-duration.12h" = "12 hours";
-"env.poll-duration.1d" = "1 day";
-"env.poll-duration.3d" = "3 days";
-"env.poll-duration.7d" = "7 days";
 "env.poll-vote-frequency.one" = "One Vote";
 "env.poll-vote-frequency.multiple" = "Multiple Votes";
 
@@ -369,12 +387,13 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Translate";
-"status.action.translate-from-%@" = "Translate from %@";
 "status.action.translated-label-%@" = "Translated using %@";
+"status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Bookmark";
 "status.action.boost" = "Boost";
 "status.action.boost-to-followers" = "Boost to Followers";
 "status.action.copy-text" = "Copy Text";
+"status.action.copy-link" = "Copy Link";
 "status.action.delete" = "Delete";
 "status.action.delete.confirm.title" = "Confirm";
 "status.action.delete.confirm.message" = "are you sure you want to delete this post?";
@@ -446,6 +465,7 @@
 "status.row.you-boosted" = "You boosted";
 "status.show-less" = "Show less";
 "status.show-more" = "Show more";
+"status.show-full-post" = "Show full post";
 "status.summary.at-time" = " at ";
 "status.summary.edited-time" = "Last edited: ";
 "status.summary.n-boosts %lld" = "%lld boosts";
@@ -463,6 +483,9 @@
 "filter.edit.keywords.add" = "Add a new keyword";
 "filter.edit.contexts" = "Filter Contexts";
 "filter.edit.action" = "Filter Action";
+"filter.edit.expiry" = "Expiry";
+"filter.edit.expiry.date-time" = "Date/Time";
+"filter.edit.expiry.duration" = "Duration";
 "account.action.edit-filters" = "Edit Filters";
 "filter.contexts.home" = "Home and lists";
 "filter.contexts.notifications" = "Notifications";
@@ -471,6 +494,8 @@
 "filter.contexts.profiles" = "Profiles";
 "filter.action.warning" = "Hide with a warning";
 "filter.action.hide" = "Hide completely";
+"filter.expired" = "Expired";
+"filter.expiry-%@" = "Expiry: %@";
 
 // MARK: Accessibility
 "accessibility.editor.button.attach-photo" = "Attach photo";
@@ -479,7 +504,7 @@
 "accessibility.editor.button.drafts" = "Drafts";
 "accessibility.editor.button.custom-emojis" = "Custom emojis";
 "accessibility.editor.button.language" = "Language";
-"accessibility.tabs.timeline.add-account" = "Add account";
+"accessibility.tabs.timeline.add-account" = "Add Account";
 "accessibility.app-account.selector.accounts" = "Accounts";
 
 // MARK: Report

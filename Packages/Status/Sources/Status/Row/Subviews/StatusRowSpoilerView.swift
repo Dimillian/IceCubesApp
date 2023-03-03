@@ -13,6 +13,7 @@ struct StatusRowSpoilerView: View {
         .foregroundColor(.secondary)
       EmojiTextApp(status.spoilerText, emojis: status.emojis, language: status.language)
         .font(.system(.subheadline, weight: .bold))
+        .emojiSize(Font.scaledSubheadlinePointSize)
         .foregroundColor(.secondary)
         .multilineTextAlignment(.leading)
       Spacer()
@@ -28,6 +29,7 @@ struct StatusRowSpoilerView: View {
       .accessibility(label: displaySpoiler ? Text("status.show-more") : Text("status.show-less"))
       .accessibilityHidden(true)
     }
+    .contentShape(Rectangle())
     .onTapGesture { // make whole row tapable to make up for smaller button size
       withAnimation {
         displaySpoiler.toggle()

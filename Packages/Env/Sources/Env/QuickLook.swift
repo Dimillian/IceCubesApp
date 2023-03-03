@@ -1,9 +1,17 @@
+import Combine
 import QuickLook
 import SwiftUI
 
 @MainActor
 public class QuickLook: ObservableObject {
-  @Published public var url: URL?
+  @Published public var url: URL? {
+    didSet {
+      if url == nil {
+        cleanup(urls: urls)
+      }
+    }
+  }
+
   @Published public private(set) var urls: [URL] = []
   @Published public private(set) var isPreparing: Bool = false
   @Published public private(set) var latestError: Error?
@@ -51,11 +59,29 @@ public class QuickLook: ObservableObject {
     }
   }
 
+  private var quickLookDir: URL {
+    try! FileManager.default.url(for: .cachesDirectory,
+                                 in: .userDomainMask,
+                                 appropriateFor: nil,
+                                 create: false)
+      .appending(component: "quicklook")
+  }
+
   private func localPathFor(url: URL) async throws -> URL {
-    let tempDir = URL(fileURLWithPath: NSTemporaryDirectory())
-    let path = tempDir.appendingPathComponent(url.lastPathComponent)
+    try? FileManager.default.createDirectory(at: quickLookDir, withIntermediateDirectories: true)
+    let path = quickLookDir.appendingPathComponent(url.lastPathComponent)
+
+    // Warning: Non-sendable type '(any URLSessionTaskDelegate)?' exiting main actor-isolated
+    // context in call to non-isolated instance method 'data(for:delegate:)' cannot cross actor
+    // boundary.
+    // This is on the defaulted-to-nil second parameter of `.data(from:delegate:)`.
+    // There is a Radar tracking this & others like it.
     let data = try await URLSession.shared.data(from: url).0
     try data.write(to: path)
     return path
+  }
+
+  private func cleanup(urls _: [URL]) {
+    try? FileManager.default.removeItem(at: quickLookDir)
   }
 }

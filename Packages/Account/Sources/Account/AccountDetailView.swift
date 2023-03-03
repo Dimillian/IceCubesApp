@@ -12,7 +12,7 @@ public struct AccountDetailView: View {
 
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var curretnInstance: CurrentInstance
+  @EnvironmentObject private var currentInstance: CurrentInstance
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var client: Client
@@ -65,7 +65,9 @@ public struct AccountDetailView: View {
           if viewModel.selectedTab == .statuses {
             pinnedPostsView
           }
-          StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath)
+          StatusesListView(fetcher: viewModel,
+                           client: client,
+                           routerPath: routerPath)
         case .followedTags:
           tagsListView
         case .lists:
@@ -82,12 +84,15 @@ public struct AccountDetailView: View {
       isCurrentUser = currentAccount.account?.id == viewModel.accountId
       viewModel.isCurrentUser = isCurrentUser
       viewModel.client = client
+
+      // Avoid capturing non-Sendable `self` just to access the view model.
+      let viewModel = self.viewModel
       Task {
         await withTaskGroup(of: Void.self) { group in
           group.addTask { await viewModel.fetchAccount() }
           group.addTask {
             if await viewModel.statuses.isEmpty {
-              await viewModel.fetchStatuses()
+              await viewModel.fetchNewestStatuses()
             }
           }
           if !viewModel.isCurrentUser {
@@ -98,8 +103,12 @@ public struct AccountDetailView: View {
     }
     .refreshable {
       Task {
+        SoundEffectManager.shared.playSound(of: .pull)
+        HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
         await viewModel.fetchAccount()
-        await viewModel.fetchStatuses()
+        await viewModel.fetchNewestStatuses()
+        HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
+        SoundEffectManager.shared.playSound(of: .refresh)
       }
     }
     .onChange(of: watcher.latestEvent?.id) { _ in
@@ -275,7 +284,7 @@ public struct AccountDetailView: View {
         .listRowSeparator(.hidden)
         .listRowBackground(theme.primaryBackgroundColor)
       ForEach(viewModel.pinned) { status in
-        StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
+        StatusRowView(viewModel: { .init(status: status, client: client, routerPath: routerPath) })
       }
       Rectangle()
         .fill(theme.secondaryBackgroundColor)
@@ -289,191 +298,35 @@ public struct AccountDetailView: View {
   private var toolbarContent: some ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
       Menu {
-        if let account = viewModel.account {
-          Section(account.acct) {
-            if !viewModel.isCurrentUser {
-              Button {
-                routerPath.presentedSheet = .mentionStatusEditor(account: account,
-                                                                 visibility: preferences.postVisibility)
-              } label: {
-                Label("account.action.mention", systemImage: "at")
-              }
-              Button {
-                routerPath.presentedSheet = .mentionStatusEditor(account: account, visibility: .direct)
-              } label: {
-                Label("account.action.message", systemImage: "tray.full")
-              }
+        AccountDetailContextMenu(viewModel: viewModel)
+        
+        if !viewModel.isCurrentUser {
+          Button {
+            isEditingRelationshipNote = true
+          } label: {
+            Label("account.relation.note.edit", systemImage: "pencil")
+          }
+        }
+        
+        if isCurrentUser {
+          Button {
+            isEditingAccount = true
+          } label: {
+            Label("account.action.edit-info", systemImage: "pencil")
+          }
 
-              Divider()
-
-              if viewModel.relationship?.blocking == true {
-                Button {
-                  Task {
-                    do {
-                      viewModel.relationship = try await client.post(endpoint: Accounts.unblock(id: account.id))
-                    } catch {
-                      print("Error while unblocking: \(error.localizedDescription)")
-                    }
-                  }
-                } label: {
-                  Label("account.action.unblock", systemImage: "person.crop.circle.badge.exclamationmark")
-                }
-              } else {
-                Button {
-                  Task {
-                    do {
-                      viewModel.relationship = try await client.post(endpoint: Accounts.block(id: account.id))
-                    } catch {
-                      print("Error while blocking: \(error.localizedDescription)")
-                    }
-                  }
-                } label: {
-                  Label("account.action.block", systemImage: "person.crop.circle.badge.xmark")
-                }
-              }
-
-              if viewModel.relationship?.muting == true {
-                Button {
-                  Task {
-                    do {
-                      viewModel.relationship = try await client.post(endpoint: Accounts.unmute(id: account.id))
-                    } catch {
-                      print("Error while unmuting: \(error.localizedDescription)")
-                    }
-                  }
-                } label: {
-                  Label("account.action.unmute", systemImage: "speaker")
-                }
-              } else {
-                Menu {
-                  ForEach(MutingDuration.allCases, id: \.rawValue) { duration in
-                    Button(duration.description) {
-                      Task {
-                        do {
-                          viewModel.relationship = try await client.post(endpoint: Accounts.mute(id: account.id, json: MuteData(duration: duration.rawValue)))
-                        } catch {
-                          print("Error while muting: \(error.localizedDescription)")
-                        }
-                      }
-                    }
-                  }
-                } label: {
-                  Label("account.action.mute", systemImage: "speaker.slash")
-                }
-              }
-
-              if let relationship = viewModel.relationship,
-                 relationship.following
-              {
-                if relationship.notifying {
-                  Button {
-                    Task {
-                      do {
-                        viewModel.relationship = try await client.post(endpoint: Accounts.follow(id: account.id,
-                                                                                                 notify: false,
-                                                                                                 reblogs: relationship.showingReblogs))
-                      } catch {
-                        print("Error while disabling notifications: \(error.localizedDescription)")
-                      }
-                    }
-                  } label: {
-                    Label("account.action.notify-disable", systemImage: "bell.fill")
-                  }
-                } else {
-                  Button {
-                    Task {
-                      do {
-                        viewModel.relationship = try await client.post(endpoint: Accounts.follow(id: account.id,
-                                                                                                 notify: true,
-                                                                                                 reblogs: relationship.showingReblogs))
-                      } catch {
-                        print("Error while enabling notifications: \(error.localizedDescription)")
-                      }
-                    }
-                  } label: {
-                    Label("account.action.notify-enable", systemImage: "bell")
-                  }
-                }
-                if relationship.showingReblogs {
-                  Button {
-                    Task {
-                      do {
-                        viewModel.relationship = try await client.post(endpoint: Accounts.follow(id: account.id,
-                                                                                                 notify: relationship.notifying,
-                                                                                                 reblogs: false))
-                      } catch {
-                        print("Error while disabling reboosts: \(error.localizedDescription)")
-                      }
-                    }
-                  } label: {
-                    Label("account.action.reboosts-hide", systemImage: "arrow.left.arrow.right.circle.fill")
-                  }
-                } else {
-                  Button {
-                    Task {
-                      do {
-                        viewModel.relationship = try await client.post(endpoint: Accounts.follow(id: account.id,
-                                                                                                 notify: relationship.notifying,
-                                                                                                 reblogs: true))
-                      } catch {
-                        print("Error while enabling reboosts: \(error.localizedDescription)")
-                      }
-                    }
-                  } label: {
-                    Label("account.action.reboosts-show", systemImage: "arrow.left.arrow.right.circle")
-                  }
-                }
-              }
-
-              Divider()
-
-              Button {
-                isEditingRelationshipNote = true
-              } label: {
-                Label("account.relation.note.edit", systemImage: "pencil")
-              }
+          if currentInstance.isFiltersSupported {
+            Button {
+              isEditingFilters = true
+            } label: {
+              Label("account.action.edit-filters", systemImage: "line.3.horizontal.decrease.circle")
             }
+          }
 
-            if viewModel.relationship?.following == true {
-              Button {
-                routerPath.presentedSheet = .listAddAccount(account: account)
-              } label: {
-                Label("account.action.add-remove-list", systemImage: "list.bullet")
-              }
-            }
-
-            if let url = account.url {
-              ShareLink(item: url, subject: Text(account.safeDisplayName)) {
-                Label("account.action.share", systemImage: "square.and.arrow.up")
-              }
-              Button { UIApplication.shared.open(url) } label: {
-                Label("status.action.view-in-browser", systemImage: "safari")
-              }
-            }
-
-            Divider()
-
-            if isCurrentUser {
-              Button {
-                isEditingAccount = true
-              } label: {
-                Label("account.action.edit-info", systemImage: "pencil")
-              }
-
-              if curretnInstance.isFiltersSupported {
-                Button {
-                  isEditingFilters = true
-                } label: {
-                  Label("account.action.edit-filters", systemImage: "line.3.horizontal.decrease.circle")
-                }
-              }
-
-              Button {
-                routerPath.presentedSheet = .accountPushNotficationsSettings
-              } label: {
-                Label("settings.push.navigation-title", systemImage: "bell")
-              }
-            }
+          Button {
+            routerPath.presentedSheet = .accountPushNotficationsSettings
+          } label: {
+            Label("settings.push.navigation-title", systemImage: "bell")
           }
         }
       } label: {
@@ -483,7 +336,7 @@ public struct AccountDetailView: View {
   }
 }
 
-private extension View {
+extension View {
   func applyAccountDetailsRowStyle(theme: Theme) -> some View {
     listRowInsets(.init())
       .listRowSeparator(.hidden)

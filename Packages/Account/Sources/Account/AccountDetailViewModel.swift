@@ -75,7 +75,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
       case .statuses, .postsAndReplies, .media:
         tabTask?.cancel()
         tabTask = Task {
-          await fetchStatuses()
+          await fetchNewestStatuses()
         }
       default:
         reloadTabState()
@@ -146,7 +146,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
     self.familiarFollowers = familiarFollowers?.first?.accounts ?? []
   }
 
-  func fetchStatuses() async {
+  func fetchNewestStatuses() async {
     guard let client else { return }
     do {
       tabState = .statuses(statusesState: .loading)
@@ -157,6 +157,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
                                                          onlyMedia: selectedTab == .media ? true : nil,
                                                          excludeReplies: selectedTab == .statuses && !isCurrentUser ? true : nil,
                                                          pinned: nil))
+      StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
       if selectedTab == .statuses {
         pinned =
           try await client.get(endpoint: Accounts.statuses(id: accountId,
@@ -165,10 +166,13 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
                                                            onlyMedia: nil,
                                                            excludeReplies: nil,
                                                            pinned: true))
+        StatusDataControllerProvider.shared.updateDataControllers(for: pinned, client: client)
       }
       if isCurrentUser {
         (favorites, favoritesNextPage) = try await client.getWithLink(endpoint: Accounts.favorites(sinceId: nil))
         (bookmarks, bookmarksNextPage) = try await client.getWithLink(endpoint: Accounts.bookmarks(sinceId: nil))
+        StatusDataControllerProvider.shared.updateDataControllers(for: favorites, client: client)
+        StatusDataControllerProvider.shared.updateDataControllers(for: bookmarks, client: client)
       }
       reloadTabState()
     } catch {
@@ -191,6 +195,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
                                                            excludeReplies: selectedTab == .statuses && !isCurrentUser ? true : nil,
                                                            pinned: nil))
         statuses.append(contentsOf: newStatuses)
+        StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
         tabState = .statuses(statusesState: .display(statuses: statuses,
                                                      nextPageState: newStatuses.count < 20 ? .none : .hasNextPage))
       case .favorites:
@@ -198,11 +203,13 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
         let newFavorites: [Status]
         (newFavorites, favoritesNextPage) = try await client.getWithLink(endpoint: Accounts.favorites(sinceId: nextPageId))
         favorites.append(contentsOf: newFavorites)
+        StatusDataControllerProvider.shared.updateDataControllers(for: newFavorites, client: client)
         tabState = .statuses(statusesState: .display(statuses: favorites, nextPageState: .hasNextPage))
       case .bookmarks:
         guard let nextPageId = bookmarksNextPage?.maxId else { return }
         let newBookmarks: [Status]
         (newBookmarks, bookmarksNextPage) = try await client.getWithLink(endpoint: Accounts.bookmarks(sinceId: nextPageId))
+        StatusDataControllerProvider.shared.updateDataControllers(for: newBookmarks, client: client)
         bookmarks.append(contentsOf: newBookmarks)
         tabState = .statuses(statusesState: .display(statuses: bookmarks, nextPageState: .hasNextPage))
       case .followedTags, .lists:

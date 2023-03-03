@@ -77,8 +77,8 @@ struct StatusEditorPollView: View {
         Spacer()
 
         Picker("status.poll.duration", selection: $viewModel.pollDuration) {
-          ForEach(PollDuration.allCases, id: \.rawValue) {
-            Text($0.displayString)
+          ForEach(Duration.pollDurations(), id: \.rawValue) {
+            Text($0.description)
               .tag($0)
           }
         }

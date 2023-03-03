@@ -76,6 +76,8 @@ public struct ConversationDetailView: View {
         {
           EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
             .font(.scaledHeadline)
+            .foregroundColor(theme.labelColor)
+            .emojiSize(Font.scaledHeadlinePointSize)
         } else {
           Text("Direct message with \(viewModel.conversation.accounts.count) people")
             .font(.scaledHeadline)

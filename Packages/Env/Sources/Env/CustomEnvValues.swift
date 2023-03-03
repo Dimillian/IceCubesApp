@@ -17,6 +17,10 @@ private struct IsInCaptureMode: EnvironmentKey {
   static let defaultValue: Bool = false
 }
 
+private struct IsSupporter: EnvironmentKey {
+  static let defaultValue: Bool = false
+}
+
 public extension EnvironmentValues {
   var isSecondaryColumn: Bool {
     get { self[SecondaryColumnKey.self] }
@@ -36,5 +40,10 @@ public extension EnvironmentValues {
   var isInCaptureMode: Bool {
     get { self[IsInCaptureMode.self] }
     set { self[IsInCaptureMode.self] = newValue }
+  }
+  
+  var isSupporter: Bool {
+    get { self[IsSupporter.self] }
+    set { self[IsSupporter.self] = newValue }
   }
 }

@@ -44,12 +44,12 @@ struct SideBarView<Content: View>: View {
     ZStack {
       Circle()
         .fill(.red)
-      Text(String(count))
+      Text(count > 99 ? "99+" : String(count))
         .foregroundColor(.white)
         .font(.caption2)
     }
-    .frame(width: 20, height: 20)
-    .offset(x: 10, y: -10)
+    .frame(width: 24, height: 24)
+    .offset(x: 14, y: -14)
   }
 
   private var postButton: some View {
@@ -69,6 +69,7 @@ struct SideBarView<Content: View>: View {
     Button {
       if account.id == appAccounts.currentAccount.id {
         selectedTab = .profile
+        SoundEffectManager.shared.playSound(of: .tabSelection)
       } else {
         var transation = Transaction()
         transation.disablesAnimations = true
@@ -103,6 +104,7 @@ struct SideBarView<Content: View>: View {
           }
         }
         selectedTab = tab
+        SoundEffectManager.shared.playSound(of: .tabSelection)
         if tab == .notifications {
           if let token = appAccounts.currentAccount.oauthToken {
             userPreferences.setNotification(count: 0, token: token)

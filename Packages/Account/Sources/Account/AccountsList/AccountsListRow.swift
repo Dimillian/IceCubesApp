@@ -1,3 +1,4 @@
+import Combine
 import DesignSystem
 import EmojiText
 import Env
@@ -19,11 +20,15 @@ public class AccountsListRowViewModel: ObservableObject {
 }
 
 public struct AccountsListRow: View {
+  @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var routerPath: RouterPath
   @EnvironmentObject private var client: Client
 
   @StateObject var viewModel: AccountsListRowViewModel
+  
+  @State private var isEditingRelationshipNote: Bool = false
+  
   let isFollowRequest: Bool
   let requestUpdated: (() -> Void)?
 
@@ -39,12 +44,14 @@ public struct AccountsListRow: View {
       VStack(alignment: .leading, spacing: 2) {
         EmojiTextApp(.init(stringValue: viewModel.account.safeDisplayName), emojis: viewModel.account.emojis)
           .font(.scaledSubheadline)
+          .emojiSize(Font.scaledSubheadlinePointSize)
           .fontWeight(.semibold)
         Text("@\(viewModel.account.acct)")
           .font(.scaledFootnote)
           .foregroundColor(.gray)
         EmojiTextApp(viewModel.account.note, emojis: viewModel.account.emojis)
           .font(.scaledFootnote)
+          .emojiSize(Font.scaledFootnotePointSize)
           .lineLimit(3)
           .environment(\.openURL, OpenURLAction { url in
             routerPath.handle(url: url)
@@ -58,10 +65,12 @@ public struct AccountsListRow: View {
       if currentAccount.account?.id != viewModel.account.id,
          let relationShip = viewModel.relationShip
       {
-        FollowButton(viewModel: .init(accountId: viewModel.account.id,
-                                      relationship: relationShip,
-                                      shouldDisplayNotify: false,
-                                      relationshipUpdated: { _ in }))
+        VStack(alignment: .center) {
+          FollowButton(viewModel: .init(accountId: viewModel.account.id,
+                                        relationship: relationShip,
+                                        shouldDisplayNotify: false,
+                                        relationshipUpdated: { _ in }))
+        }
       }
     }
     .onAppear {
@@ -71,5 +80,22 @@ public struct AccountsListRow: View {
     .onTapGesture {
       routerPath.navigate(to: .accountDetailWithAccount(account: viewModel.account))
     }
+    .contextMenu {
+      AccountDetailContextMenu(viewModel: .init(account: viewModel.account))
+    } preview: {
+      List {
+        AccountDetailHeaderView(viewModel: .init(account: viewModel.account),
+                                account: viewModel.account,
+                                scrollViewProxy: nil)
+        .applyAccountDetailsRowStyle(theme: theme)
+      }
+      .listStyle(.plain)
+      .scrollContentBackground(.hidden)
+      .background(theme.primaryBackgroundColor)
+      .environmentObject(theme)
+      .environmentObject(currentAccount)
+      .environmentObject(client)
+    }
+
   }
 }

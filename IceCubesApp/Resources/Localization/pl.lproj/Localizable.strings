@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "Okrągły";
 "enum.avatar-shape.rounded" = "Zaokrąglony";
 "enum.durations.infinite" = "czas nieokreślony";
+"enum.durations.custom" = "custom";
 "enum.durations.fiveMinutes" = "5 minut";
 "enum.durations.thirtyMinutes" = "30 minut";
 "enum.durations.oneHour" = "1 godzina";
 "enum.durations.sixHours" = "6 godzin";
+"enum.durations.twelveHours" = "12 godzin";
 "enum.durations.oneDay" = "1 dzień";
 "enum.durations.threeDays" = "3 dni";
 "enum.durations.sevenDays" = "7 dni";
@@ -37,7 +39,7 @@
 "enum.status-actions-display.only-buttons" = "Tylko przyciski";
 "enum.status-display-style.compact" = "Pomniejszone";
 "enum.status-display-style.large" = "Duże";
-"enum.status-display-style.medium" = "Medium";
+"enum.status-display-style.medium" = "Średnie";
 "enum.swipeactions.icon-with-text" = "Ikona z tekstem";
 "enum.swipeactions.icon-only" = "Tylko ikona";
 
@@ -79,12 +81,14 @@
 "settings.display.restore" = "Przywróć ustawienia domyślne";
 "settings.display.section.display" = "Ekran";
 "settings.display.section.theme" = "Motyw";
+"settings.display.colors.apply" = "Apply custom colors";
 "settings.display.section.theme.footer" = "Kolory niestandardowe można ustawić tylko wtedy, gdy wyłączona jest opcja dopasowania schematu kolorów systemu.";
 "settings.display.status.action-buttons" = "Przyciski akcji";
 "settings.display.status.media-style" = "Treści multimedialne";
 "settings.display.translate-button" = "Pokazuj przycisk tłumaczenia";
 "settings.display.theme.background" = "Kolor tła";
 "settings.display.theme.secondary-background" = "Dodatkowy kolor tła";
+"settings.display.theme.text-color" = "Text Color";
 "settings.display.theme.tint" = "Kolor wiodący";
 "settings.display.theme.systemColor" = "Zgodny z systemowym";
 "settings.general.browser" = "Przeglądarka";
@@ -108,6 +112,8 @@
 "settings.system" = "Ustawienia systemowe";
 "settings.content.navigation-title" = "Ustawienia treści";
 "settings.content.boosts" = "Podbicia";
+"settings.content.collapse-long-posts" = "Zwijaj długie posty";
+"settings.content.collapse-long-posts-hint" = "Zwinięte posty wyświetlają tylko ograniczoną liczbę wierszy wraz z przyciskiem do wyświetlenia pełnego postu";
 "settings.content.hide-repeated-boosts" = "Ukryj powtórzone podbicia";
 "settings.content.instance-settings" = "Ustawienia treści serwera";
 "settings.content.use-instance-settings" = "Zastosuj ustawienia serwera";
@@ -139,13 +145,22 @@
 "settings.support.two.subtitle" = "Uwielbiam smak wyszukanej kawy ❤️";
 "settings.support.two.title" = "☕️ Miły napiwek";
 "settings.support.four.title" = "👽 Kim jesteś?";
-"settings.support.four.subtitle" = "To pozwoli na utrzymywanie Ice Cubes w działaniu przez długi czas!";
+"settings.support.four.subtitle" = "To bardzo pomoże w utrzymaniu Ice Cubes w działaniu!";
+"settings.support.supporter.title" = " Zostań osobą wspierającą!";
+"settings.support.supporter.subtitle" = "Przekazując Ice Cubes comiesięczny napiwek, stajesz się osobą wspierającą, a nawet otrzymasz na swoim profilu znaczek weryfikacji. Tylko dla twoich 👀.";
+"settings.support.supporter.subscribed" = " Dziękuję, że wspierasz Ice Cubes!";
+"settings.support.supporter.subscription-info"= "Subskrypcja jest odnawiana automatycznie, chyba że anulujesz ją na dzień przed kolejnym cyklem odnawiania.";
+"settings.support.restore-purchase.button" = "Przywróć zakup";
+"settings.support.restore-purchase.explanation" = "Przywróć swoją subskrypcję osoby wspierającej, jeśli nie została ona automatycznie zsynchronizowana.";
+"settings.support.privacy-policy" = "Polityka prywatności";
+"settings.support.terms-of-use" = "Warunki korzystania";
 "settings.timeline.add" = "Dodaj strumień lokalny";
 "settings.title" = "Ustawienia";
 "settings.rate" = "Oceń Ice Cubes";
 "settings.section.other" = "Inne";
 "settings.other.hide-openai" = "Włącz 🤖 pomocnik";
 "settings.other.social-keyboard" = "Włącz klawiaturę społecznościową";
+"settings.other.sound-effect" = "Włącz efekty dźwiękowe";
 "settings.push.duplicate.title" = "Korektor duplikatów powiadomień";
 "settings.push.duplicate.footer" = "Otrzymujesz zduplikowane powiadomienia? Spróbuj tego magicznego przycisku, aby to naprawić";
 "settings.push.duplicate.button.fix" = "🪄 Napraw to";
@@ -157,7 +172,7 @@
 "settings.about.built-with" = "Ice Cubes zbudowano z wykorzystaniem następującego oprogramowania Open Source:";
 "settings.about.title" = "Ice Cubes";
 "settings.account.cached-posts-%@" = "Liczba postów w buforze: %@";
-"settings.account.action.delete-cache" = "Wyczyść bufor";
+"settings.account.action.delete-cache" = "Wyczyść bufor postów";
 
 "settings.general.haptic" = "Sygnały haptyczne";
 "settings.haptic.navigation-title" = "Ustawienia haptyki";
@@ -171,24 +186,27 @@
 
 "settings.general.swipeactions" = "Przeciąganie palcem";
 "settings.swipeactions.navigation-title" = "Przeciąganie palcem";
-"settings.swipeactions.primary" = "Primary Action";
-"settings.swipeactions.secondary" = "Secondary Action";
+"settings.swipeactions.primary" = "Akcja podstawowa";
+"settings.swipeactions.secondary" = "Akcja dodatkowa";
 "settings.swipeactions.status.action.bookmark" = "Dodaj zakładkę";
 "settings.swipeactions.status.action.boost" = "Podbij";
 "settings.swipeactions.status.action.favorite" = "Polub";
 "settings.swipeactions.status.action.none" = "Bez akcji";
 "settings.swipeactions.status.action.quote" = "Zacytuj";
 "settings.swipeactions.status.action.reply" = "Odpowiedz";
-"settings.swipeactions.status.explanation" = "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set.";
+"settings.swipeactions.status.explanation" = "Akcje przeciągania palcem są dostępne po przesunięciu posta w lewo lub w prawo. Akcja dodatkowa jest dostępna tylko wtedy, gdy ustawiona jest akcja podstawowa.";
 "settings.swipeactions.status.leading" = "Przeciągnij w prawo";
 "settings.swipeactions.status.trailing" = "Przeciągnij w lewo";
 "settings.swipeactions.status" = "Post";
-"settings.swipeactions.appearance" = "Appearance";
-"settings.swipeactions.use-theme-colors" = "Use Theme Colors";
-"settings.swipeactions.use-theme-colors-explanation" = "Używaj kolorów motywu zamiast kolorów domyślnych";
+"settings.swipeactions.appearance" = "Wygląd";
+"settings.swipeactions.use-theme-colors" = "Użyj kolorów motywu";
+"settings.swipeactions.use-theme-colors-explanation" = "Użyj kolorów motywu zamiast kolorów domyślnych";
 "settings.swipeactions.icon-style" = "Styl ikony";
 
 "settings.display.section.font" = "Czcionka";
+
+"settings.section.cache" = "Bufor";
+"settings.cache-media.clear" = "Wyczyść bufor treści multimedialnych";
 
 // MARK: Tabs
 "tab.explore" = "Odkrywaj";
@@ -242,6 +260,12 @@
 "account.edit.post-settings.privacy" = "Prywatność domyślna";
 "account.edit.post-settings.section-title" = "Ustawienia postów";
 "account.edit.post-settings.sensitive" = "Treści wrażliwe";
+
+"account.edit.metadata-section-title" = "Metadane profilu";
+"account.edit.metadata-name-placeholder" = "Nazwa";
+"account.edit.metadata-value-placeholder" = "Zawartość";
+"account.edit.add-metadata-button" = "Dodaj nowe pole";
+
 "account.favorited-by" = "Polubione przez";
 "account.follow.follow" = "Obserwuj";
 "account.follow.following" = "Obserwuję";
@@ -262,6 +286,7 @@
 "account.relation.follows-you" = "Obserwuje ciebie";
 "account.joined" = "Dołączył(a)";
 "account.action.logout" = "Wyloguj się";
+"account.action.more" = "More Settings";
 
 "account.relation.note.edit" = "Edytuj notatkę";
 "account.relation.note.edit.placeholder" = "Wprowadź treść notatki";
@@ -280,6 +305,7 @@
 "conversations.error.title" = "Wystąpił błąd";
 "conversations.navigation-title" = "Wiadomości bezpośrednie";
 "conversations.new.message.placeholder" = "Nowa wiadomość";
+"conversations.latest.message" = "Najnowsza wiadomość";
 
 // MARK: Package: DesignSystem
 "design.theme.navigation-title" = "Wybór motywu";
@@ -301,14 +327,6 @@
 "explore.section.users" = "Osoby";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5 minut";
-"env.poll-duration.30m" = "30 minut";
-"env.poll-duration.1h" = "1 godzina";
-"env.poll-duration.6h" = "6 godzin";
-"env.poll-duration.12h" = "12 godzin";
-"env.poll-duration.1d" = "1 dzień";
-"env.poll-duration.3d" = "3 dni";
-"env.poll-duration.7d" = "7 dni";
 "env.poll-vote-frequency.one" = "Jeden głos";
 "env.poll-vote-frequency.multiple" = "Głosowanie wielokrotne";
 
@@ -363,12 +381,13 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Przetłumacz";
-"status.action.translate-from-%@" = "Przetłumacz tekst %@";
 "status.action.translated-label-%@" = "Przetłumaczono za pomocą %@";
+"status.action.translated-label-from-%@-%@" = "Tekst %@ przetłumaczono za pomocą %@";
 "status.action.bookmark" = "Dodaj zakładkę";
 "status.action.boost" = "Podbij";
 "status.action.boost-to-followers" = "Podbij do obserwujących";
 "status.action.copy-text" = "Kopiuj tekst";
+"status.action.copy-link" = "Kopiuj link";
 "status.action.delete" = "Usuń";
 "status.action.delete.confirm.title" = "Potwierdź";
 "status.action.delete.confirm.message" = "czy na pewno chcesz usunąć ten post?";
@@ -440,6 +459,7 @@
 "status.row.you-boosted" = "Podbiłeś(aś)";
 "status.show-less" = "Pokaż mniej";
 "status.show-more" = "Pokaż więcej";
+"status.show-full-post" = "Pokaż cały post";
 "status.summary.at-time" = " o ";
 "status.summary.edited-time" = "Ostatnia edycja: ";
 "status.visibility.direct" = "Post bezpośredni";
@@ -455,6 +475,9 @@
 "filter.edit.keywords.add" = "Dodaj nowe słowo kluczowe";
 "filter.edit.contexts" = "Kontekst filtra";
 "filter.edit.action" = "Działanie filtra";
+"filter.edit.expiry" = "Expiry";
+"filter.edit.expiry.date-time" = "Date/Time";
+"filter.edit.expiry.duration" = "Duration";
 "account.action.edit-filters" = "Edytuj filtry";
 "filter.contexts.home" = "Strona główna i listy";
 "filter.contexts.notifications" = "Powiadomienia";

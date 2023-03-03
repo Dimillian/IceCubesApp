@@ -118,7 +118,7 @@ public struct StatusEditorView: View {
             if viewModel.isPosting {
               ProgressView()
             } else {
-              Text("status.action.post")
+              Text("status.action.post").bold()
             }
           }
           .disabled(!viewModel.canPost)
@@ -200,6 +200,7 @@ public struct StatusEditorView: View {
     let status = await viewModel.postStatus()
     if status != nil {
       dismiss()
+      SoundEffectManager.shared.playSound(of: .tootSent)
       NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
                                       object: nil)
       if !viewModel.mode.isInShareExtension, !preferences.requestedReview, !ProcessInfo.processInfo.isiOSAppOnMac {

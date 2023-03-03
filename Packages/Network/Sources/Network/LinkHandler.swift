@@ -16,3 +16,5 @@ public struct LinkHandler {
     return nil
   }
 }
+
+extension LinkHandler: Sendable {}

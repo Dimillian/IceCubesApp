@@ -1,3 +1,4 @@
+import Combine
 import DesignSystem
 import Models
 import Network
@@ -61,6 +62,11 @@ public class AppAccountViewModel: ObservableObject {
   }
 
   private func refreshAvatar(account: Account) async {
+    // Warning: Non-sendable type '(any URLSessionTaskDelegate)?' exiting main actor-isolated
+    // context in call to non-isolated instance method 'data(for:delegate:)' cannot cross actor
+    // boundary.
+    // This is on the defaulted-to-nil second parameter of `.data(from:delegate:)`.
+    // There is a Radar tracking this & others like it.
     if let (data, _) = try? await URLSession.shared.data(from: account.avatar),
        let image = UIImage(data: data)?.roundedImage
     {

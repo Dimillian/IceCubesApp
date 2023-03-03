@@ -7,15 +7,14 @@ struct StatusRowHeaderView: View {
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
   @EnvironmentObject private var theme: Theme
 
-  let status: AnyStatus
   let viewModel: StatusRowViewModel
 
   var body: some View {
     HStack(alignment: .center) {
       Button {
-        viewModel.navigateToAccountDetail(account: status.account)
+        viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
       } label: {
-        accountView(status: status)
+        accountView
       }
       .buttonStyle(.plain)
       Spacer()
@@ -25,34 +24,39 @@ struct StatusRowHeaderView: View {
       }
     }
     .accessibilityElement()
-    .accessibilityLabel(Text("\(status.account.displayName)"))
+    .accessibilityLabel(Text("\(viewModel.finalStatus.account.safeDisplayName)"))
   }
 
   @ViewBuilder
-  private func accountView(status: AnyStatus) -> some View {
+  private var accountView: some View {
     HStack(alignment: .center) {
       if theme.avatarPosition == .top {
-        AvatarView(url: status.account.avatar, size: .status)
+        AvatarView(url: viewModel.finalStatus.account.avatar, size: .status)
       }
       VStack(alignment: .leading, spacing: 2) {
-        HStack(alignment: .center, spacing: 4) {
-          EmojiTextApp(.init(stringValue: status.account.safeDisplayName), emojis: status.account.emojis)
-            .font(.scaledSubheadline)
-            .fontWeight(.semibold)
-            .lineLimit(1)
-            .layoutPriority(1)
+        HStack(alignment: .firstTextBaseline, spacing: 2) {
+          Group {
+            EmojiTextApp(.init(stringValue: viewModel.finalStatus.account.safeDisplayName),
+                         emojis: viewModel.finalStatus.account.emojis)
+              .font(.scaledSubheadline)
+              .foregroundColor(theme.labelColor)
+              .emojiSize(Font.scaledSubheadlinePointSize)
+              .fontWeight(.semibold)
+              .lineLimit(1)
+            accountBadgeView
+              .font(.footnote)
+          }
+          .layoutPriority(1)
           if theme.avatarPosition == .leading {
             dateView
               .font(.scaledFootnote)
               .foregroundColor(.gray)
               .lineLimit(1)
-              .offset(y: 1)
           } else {
-            Text("@\(theme.displayFullUsername ? status.account.acct : status.account.username)")
+            Text("@\(theme.displayFullUsername ? viewModel.finalStatus.account.acct : viewModel.finalStatus.account.username)")
               .font(.scaledFootnote)
               .foregroundColor(.gray)
               .lineLimit(1)
-              .offset(y: 1)
           }
         }
         if theme.avatarPosition == .top {
@@ -61,7 +65,7 @@ struct StatusRowHeaderView: View {
             .foregroundColor(.gray)
             .lineLimit(1)
         } else if theme.displayFullUsername, theme.avatarPosition == .leading {
-          Text("@\(status.account.acct)")
+          Text("@\(viewModel.finalStatus.account.acct)")
             .font(.scaledFootnote)
             .foregroundColor(.gray)
             .lineLimit(1)
@@ -71,11 +75,19 @@ struct StatusRowHeaderView: View {
     }
   }
 
+  private var accountBadgeView: Text {
+    if (viewModel.status.reblogAsAsStatus ?? viewModel.status).account.bot {
+      return Text(Image(systemName: "poweroutlet.type.b.fill")) + Text(" ")
+    } else if (viewModel.status.reblogAsAsStatus ?? viewModel.status).account.locked {
+      return Text(Image(systemName: "lock.fill")) + Text(" ")
+    }
+    return Text("")
+  }
+
   private var dateView: Text {
-    Text(viewModel.status.account.bot ? "🤖 " : "") +
-      Text(status.createdAt.relativeFormatted) +
+    Text(viewModel.finalStatus.createdAt.relativeFormatted) +
       Text(" ⸱ ") +
-      Text(Image(systemName: viewModel.status.visibility.iconName))
+      Text(Image(systemName: viewModel.finalStatus.visibility.iconName))
   }
 
   @ViewBuilder

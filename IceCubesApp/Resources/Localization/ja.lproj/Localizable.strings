@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "円形";
 "enum.avatar-shape.rounded" = "角丸";
 "enum.durations.infinite" = "無期限";
+"enum.durations.custom" = "カスタム";
 "enum.durations.fiveMinutes" = "5分間";
 "enum.durations.thirtyMinutes" = "30分間";
 "enum.durations.oneHour" = "1時間";
 "enum.durations.sixHours" = "6時間";
+"enum.durations.twelveHours" = "12時間";
 "enum.durations.oneDay" = "1日間";
 "enum.durations.threeDays" = "3日間";
 "enum.durations.sevenDays" = "7日間";
@@ -83,12 +85,14 @@
 "settings.display.restore" = "デフォルトに戻す";
 "settings.display.section.display" = "表示";
 "settings.display.section.theme" = "テーマ";
+"settings.display.colors.apply" = "カスタムカラーを適用";
 "settings.display.section.theme.footer" = "カスタムカラーはシステム配色との一致が無効の場合のみ設定可能です";
 "settings.display.status.action-buttons" = "アクションボタン";
 "settings.display.status.media-style" = "メディアスタイル";
 "settings.display.translate-button" = "翻訳ボタンの表示";
 "settings.display.theme.background" = "バックグラウンドカラー";
 "settings.display.theme.secondary-background" = "アクセントカラー";
+"settings.display.theme.text-color" = "テキストカラー";
 "settings.display.theme.tint" = "色合い";
 "settings.display.theme.systemColor" = "システムに合わせる";
 "settings.general.browser" = "ブラウザ";
@@ -112,6 +116,8 @@
 "settings.system" = "システム設定";
 "settings.content.navigation-title" = "コンテンツ設定";
 "settings.content.boosts" = "ブースト";
+"settings.content.collapse-long-posts" = "長い投稿を折りたたむ";
+"settings.content.collapse-long-posts-hint" = "折りたたまれた投稿には、限られた数の行のみが表示され、投稿全体を表示するボタンが表示されます";
 "settings.content.hide-repeated-boosts" = "度重なるブーストを隠す";
 "settings.content.instance-settings" = "サーバーコンテンツ設定";
 "settings.content.use-instance-settings" = "サーバー設定を使用する";
@@ -144,12 +150,21 @@
 "settings.support.two.title" = "☕️ ナイスチップ";
 "settings.support.four.title" = "👽 お前は一体誰なんだ";
 "settings.support.four.subtitle" = "Ice Cubesの運営に大きく貢献することでしょう！";
+"settings.support.supporter.title" = "サポーターになろう！";
+"settings.support.supporter.subtitle" = "Ice Cubesに毎月のヒントを提供することで、あなたはサポーターになり、プロフィールに認証済みのバッジを取得することもできます。👀 あなた専用です。";
+"settings.support.supporter.subscribed" = "Ice Cubesサポーターになってくれてありがとう！";
+"settings.support.supporter.subscription-info"= "サブスクリプションは、次の更新サイクルの前日にキャンセルしない限り、自動的に更新されます。";
+"settings.support.restore-purchase.button" = "購入を復元";
+"settings.support.restore-purchase.explanation" = "自動的に同期されていない場合は、サポーターサブスクリプションを復元します。";
+"settings.support.privacy-policy" = "プライバシーポリシー";
+"settings.support.terms-of-use" = "利用規約";
 "settings.timeline.add" = "ローカルタイムラインの追加";
 "settings.title" = "設定";
 "settings.rate" = "Ice Cubesを評価する";
 "settings.section.other" = "その他";
 "settings.other.hide-openai" = "AI支援機能の有効化";
 "settings.other.social-keyboard" = "ソーシャルメディア向けキーボードの有効化";
+"settings.other.sound-effect" = "サウンドエフェクトを有効化";
 "settings.push.duplicate.title" = "重複通知修正ツール";
 "settings.push.duplicate.footer" = "重複して通知を受け取っていませんか？修正するためにこの魔法のボタンを試してみて";
 "settings.push.duplicate.button.fix" = "🪄 修正する";
@@ -189,6 +204,9 @@
 "settings.swipeactions.icon-style" = "アイコンスタイル";
 
 "settings.display.section.font" = "フォント";
+
+"settings.section.cache" = "キャッシュ";
+"settings.cache-media.clear" = "メディアキャッシュをクリア";
 
 // MARK: Tabs
 "tab.explore" = "探索";
@@ -244,6 +262,12 @@
 "account.edit.post-settings.privacy" = "デフォルトのプライバシー";
 "account.edit.post-settings.section-title" = "投稿設定";
 "account.edit.post-settings.sensitive" = "センシティブな内容";
+
+"account.edit.metadata-section-title" = "プロフィール情報";
+"account.edit.metadata-name-placeholder" = "ラベル";
+"account.edit.metadata-value-placeholder" = "内容";
+"account.edit.add-metadata-button" = "情報を追加";
+
 "account.favorited-by" = "お気に入りされた";
 "account.follow.follow" = "フォロー";
 "account.follow.following" = "フォロー中";
@@ -264,6 +288,7 @@
 "account.relation.follows-you" = "フォローされています";
 "account.joined" = "登録日";
 "account.action.logout" = "アカウントをログアウトする";
+"account.action.more" = "More Settings";
 
 "account.relation.note.edit" = "ノートを編集";
 "account.relation.note.edit.placeholder" = "ノートを入力";
@@ -282,6 +307,7 @@
 "conversations.error.title" = "エラーが発生しました";
 "conversations.navigation-title" = "ダイレクトメッセージ";
 "conversations.new.message.placeholder" = "新しいメッセージ";
+"conversations.latest.message" = "最新のメッセージ";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld トゥートの投稿 %lld 人が投稿している";
@@ -304,14 +330,6 @@
 "explore.section.users" = "ユーザー";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5分間";
-"env.poll-duration.30m" = "30分間";
-"env.poll-duration.1h" = "1時間";
-"env.poll-duration.6h" = "6時間";
-"env.poll-duration.12h" = "12時間";
-"env.poll-duration.1d" = "1日間";
-"env.poll-duration.3d" = "3日間";
-"env.poll-duration.7d" = "7日間";
 "env.poll-vote-frequency.one" = "単一投票";
 "env.poll-vote-frequency.multiple" = "複数投票可";
 
@@ -367,12 +385,13 @@
 
 // MARK: Package: Status
 "status.action.translate" = "翻訳";
-"status.action.translate-from-%@" = "%@ から翻訳";
 "status.action.translated-label-%@" = "%@ を使用して翻訳";
+"status.action.translated-label-from-%@-%@" = "%@ から %@ を使用して翻訳";
 "status.action.bookmark" = "ブックマーク";
 "status.action.boost" = "ブースト";
 "status.action.boost-to-followers" = "フォロワーにブースト";
 "status.action.copy-text" = "テキストをコピー";
+"status.action.copy-link" = "リンクをコピー";
 "status.action.delete" = "削除";
 "status.action.delete.confirm.title" = "確認";
 "status.action.delete.confirm.message" = "本当に投稿を削除しますか？";
@@ -446,7 +465,8 @@
 "status.row.you-boosted" = "ブーストしました";
 "status.show-less" = "表示項目を減らす";
 "status.show-more" = "表示項目を増やす";
-"status.summary.at-time" = " at ";
+"status.show-full-post" = "投稿をすべて表示";
+"status.summary.at-time" = " ";
 "status.summary.edited-time" = "最新編集日: ";
 "status.summary.n-boosts %lld" = "%lld ブースト";
 "status.summary.n-favorites %lld" = "%lld お気に入り";
@@ -463,6 +483,9 @@
 "filter.edit.keywords.add" = "新しいキーワードを追加する";
 "filter.edit.contexts" = "フィルターする文章";
 "filter.edit.action" = "フィルターする";
+"filter.edit.expiry" = "期限";
+"filter.edit.expiry.date-time" = "日付/時間";
+"filter.edit.expiry.duration" = "期間";
 "account.action.edit-filters" = "フィルターを編集する";
 "filter.contexts.home" = "ホームとリスト";
 "filter.contexts.notifications" = "通知";

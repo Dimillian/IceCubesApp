@@ -27,3 +27,5 @@ public struct AppAccount: Codable, Identifiable, Hashable {
     self.oauthToken = oauthToken
   }
 }
+
+extension AppAccount: Sendable {}

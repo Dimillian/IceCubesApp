@@ -14,6 +14,14 @@ public struct AppAccountsSelectorView: View {
   private let accountCreationEnabled: Bool
   private let avatarSize: AvatarView.Size
 
+  var showNotificationBadge: Bool {
+    accountsViewModel
+      .filter { $0.account?.id != currentAccount.account?.id }
+      .compactMap { $0.appAccount.oauthToken }
+      .map { preferences.getNotificationsCount(for: $0) }
+      .reduce(0, +) > 0
+  }
+
   public init(routerPath: RouterPath,
               accountCreationEnabled: Bool = true,
               avatarSize: AvatarView.Size = .badge)
@@ -59,7 +67,7 @@ public struct AppAccountsSelectorView: View {
           .redacted(reason: .placeholder)
       }
     }.overlay(alignment: .topTrailing) {
-      if !currentAccount.followRequests.isEmpty {
+      if !currentAccount.followRequests.isEmpty || showNotificationBadge {
         Circle()
           .fill(Color.red)
           .frame(width: 9, height: 9)

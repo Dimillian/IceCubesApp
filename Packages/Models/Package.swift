@@ -21,7 +21,9 @@ let package = Package(
   targets: [
     .target(
       name: "Models",
-      dependencies: ["SwiftSoup"]
+      dependencies: [
+        "SwiftSoup",
+      ]
     ),
     .testTarget(
       name: "ModelsTests",

@@ -23,10 +23,10 @@ public struct StatusEmbeddedView: View {
     HStack {
       VStack(alignment: .leading) {
         makeAccountView(account: status.reblog?.account ?? status.account)
-        StatusRowView(viewModel: .init(status: status,
-                                       client: client,
-                                       routerPath: routerPath,
-                                       showActions: false))
+        StatusRowView(viewModel: { .init(status: status,
+                                         client: client,
+                                         routerPath: routerPath,
+                                         showActions: false) })
           .environment(\.isCompact, true)
       }
       Spacer()
@@ -47,6 +47,7 @@ public struct StatusEmbeddedView: View {
       VStack(alignment: .leading, spacing: 0) {
         EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
           .font(.scaledFootnote)
+          .emojiSize(Font.scaledFootnotePointSize)
           .fontWeight(.semibold)
         Group {
           Text("@\(account.acct)") +

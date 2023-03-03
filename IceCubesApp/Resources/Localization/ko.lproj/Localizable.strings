@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "원";
 "enum.avatar-shape.rounded" = "둥근 사각형";
 "enum.durations.infinite" = "해제할 때까지";
+"enum.durations.custom" = "custom";
 "enum.durations.fiveMinutes" = "5분";
 "enum.durations.thirtyMinutes" = "30분";
 "enum.durations.oneHour" = "1시간";
 "enum.durations.sixHours" = "6시간";
+"enum.durations.twelveHours" = "12시간";
 "enum.durations.oneDay" = "1일";
 "enum.durations.threeDays" = "3일";
 "enum.durations.sevenDays" = "7일";
@@ -79,14 +81,16 @@
 "settings.display.restore" = "초기 설정으로 되돌리기";
 "settings.display.section.display" = "화면";
 "settings.display.section.theme" = "테마";
-"settings.display.section.theme.footer" = "시스템 설정에 맞추기 옵션이 꺼져 있을 때만 색상을 직접 고를 수 있습니다.";
+"settings.display.colors.apply" = "Apply custom colors";
+"settings.display.section.theme.footer" = "시스템 설정에 맞춤 옵션이 꺼져 있을 때만 색상을 직접 고를 수 있습니다.";
 "settings.display.status.action-buttons" = "글 동작 버튼";
 "settings.display.status.media-style" = "글 미디어 크기";
 "settings.display.translate-button" = "번역 버튼 표시";
 "settings.display.theme.background" = "배경 색상";
 "settings.display.theme.secondary-background" = "보조 배경 색상";
+"settings.display.theme.text-color" = "Text Color";
 "settings.display.theme.tint" = "강조 색상";
-"settings.display.theme.systemColor" = "시스템 설정에 맞추기";
+"settings.display.theme.systemColor" = "시스템 설정에 맞춤";
 "settings.general.browser" = "브라우저";
 "settings.general.browser.in-app" = "인앱 브라우저";
 "settings.general.browser.in-app.readerview" = "인앱 브라우저에서 항상 읽기 도구 사용";
@@ -108,10 +112,12 @@
 "settings.system" = "시스템 설정";
 "settings.content.navigation-title" = "콘텐츠 설정";
 "settings.content.boosts" = "부스트";
-"settings.content.hide-repeated-boosts" = "중복으로 부스트된 글 숨기기";
+"settings.content.collapse-long-posts" = "긴 글을 접힌 상태로 표시";
+"settings.content.collapse-long-posts-hint" = "접힌 글은 일정 줄까지만 내용이 표시됩니다. 함께 표시되는 버튼을 누르면 전체 내용을 볼 수 있습니다.";
+"settings.content.hide-repeated-boosts" = "중복으로 부스트된 글 숨김";
 "settings.content.instance-settings" = "인스턴스 콘텐츠 설정";
-"settings.content.use-instance-settings" = "인스턴스 설정에 맞추기";
-"settings.content.expand-spoilers" = "열람 주의 표시된 글 항상 표시하기";
+"settings.content.use-instance-settings" = "인스턴스 설정에 맞춤";
+"settings.content.expand-spoilers" = "열람 주의 표시된 글 항상 가리지 않음";
 "settings.content.expand-media" = "표시할 미디어";
 "settings.content.default-sensitive" = "내 미디어 항상 민감함으로 표시";
 "settings.content.default-visibility" = "글 기본 공개 범위";
@@ -140,18 +146,27 @@
 "settings.support.two.title" = "☕️ 기분 좋아지는 기부금";
 "settings.support.four.title" = "👽 엄청난 기부금";
 "settings.support.four.subtitle" = "Ice Cubes가 계속 발전하는 데 정말 많은 도움이 될 거에요!";
+"settings.support.supporter.title" = " 후원자가 되어 보세요!";
+"settings.support.supporter.subtitle" = "기부금을 매달 보내는 구독을 신청하면, 후원자가 될 수 있습니다. 프로필에 나만 볼 수 있는 자기만족용 인증 마크도 생겨요. 👀";
+"settings.support.supporter.subscribed" = " Ice Cubes의 후원자가 되어 주셔서 감사합니다!";
+"settings.support.supporter.subscription-info"= "정기 결제일 전 날까지 구독을 취소하지 않는 한 구독은 자동으로 갱신됩니다.";
+"settings.support.restore-purchase.button" = "구매 내역 불러오기";
+"settings.support.restore-purchase.explanation" = "구매 내역이 자동으로 동기화되지 않았다면 위의 버튼을 눌러 구매 내역을 불러올 수 있습니다.";
+"settings.support.privacy-policy" = "개인정보 처리방침";
+"settings.support.terms-of-use" = "이용 약관";
 "settings.timeline.add" = "원격 로컬 타임라인 추가";
 "settings.title" = "설정";
 "settings.rate" = "Ice Cubes 평가 남기기";
 "settings.section.other" = "기타";
 "settings.other.hide-openai" = "글 작성 도우미 🤖";
 "settings.other.social-keyboard" = "SNS 키보드";
+"settings.other.sound-effect" = "효과음";
 "settings.push.duplicate.title" = "중복 알림 해결사";
 "settings.push.duplicate.footer" = "같은 알림이 여러 번 오나요? 위에 있는 버튼을 누르면 마법처럼 해결될 거에요.";
 "settings.push.duplicate.button.fix" = "🪄 고치기";
 "settings.other.autoplay-video" = "동영상 자동 재생";
 "settings.display.font" = "타임라인 글꼴";
-"settings.display.font.system" = "시스템 글꼴 사용";
+"settings.display.font.system" = "시스템 글꼴";
 "settings.display.font.custom" = "직접 설정";
 "settings.display.font.scaling-%@" = "폰트 크기 조절: %@";
 "settings.about.built-with" = "Ice Cubes는 다음 오픈 소스 소프트웨어를 사용하여 개발되었습니다:";
@@ -167,7 +182,7 @@
 
 "settings.display.show-tab-label" = "하단 탭 바에 제목 표시";
 
-"settings.display.show-ipad-column" = "보조 열 사용";
+"settings.display.show-ipad-column" = "보조 열 표시";
 
 "settings.general.swipeactions" = "쓸어넘기기 동작 설정";
 "settings.swipeactions.navigation-title" = "쓸어넘기기 동작 설정";
@@ -182,13 +197,16 @@
 "settings.swipeactions.status.explanation" = "글을 오른쪽 혹은 왼쪽으로 쓸어넘겨 원하는 동작을 실행할 수 있습니다. 보조 동작은 주 동작이 설정되어 있을 때만 추가할 수 있습니다.";
 "settings.swipeactions.status.leading" = "오른쪽으로 쓸어넘길 때";
 "settings.swipeactions.status.trailing" = "왼쪽으로 쓸어넘길 때";
-"settings.swipeactions.status" = "글";
+"settings.swipeactions.status" = "글을";
 "settings.swipeactions.appearance" = "모양";
 "settings.swipeactions.use-theme-colors" = "테마 색상 사용";
 "settings.swipeactions.use-theme-colors-explanation" = "동작의 기본 색상 대신 테마 색상을 사용합니다.";
 "settings.swipeactions.icon-style" = "아이콘 모양";
 
 "settings.display.section.font" = "글꼴";
+
+"settings.section.cache" = "캐시 데이터";
+"settings.cache-media.clear" = "미디어 캐시 데이터 지우기";
 
 // MARK: Tabs
 "tab.explore" = "둘러보기";
@@ -245,6 +263,12 @@
 "account.edit.post-settings.privacy" = "기본 공개 범위";
 "account.edit.post-settings.section-title" = "글 설정";
 "account.edit.post-settings.sensitive" = "민감한 콘텐츠";
+
+"account.edit.metadata-section-title" = "프로필 메타데이터";
+"account.edit.metadata-name-placeholder" = "제목";
+"account.edit.metadata-value-placeholder" = "내용";
+"account.edit.add-metadata-button" = "새 메타데이터 추가";
+
 "account.favorited-by" = "좋아요한 사용자";
 "account.follow.follow" = "팔로우";
 "account.follow.following" = "팔로우 중";
@@ -265,6 +289,7 @@
 "account.relation.follows-you" = "나를 팔로우함";
 "account.joined" = "가입";
 "account.action.logout" = "로그아웃";
+"account.action.more" = "More Settings";
 
 "account.relation.note.edit" = "노트 편집";
 "account.relation.note.edit.placeholder" = "나만 볼 수 있는 노트";
@@ -283,6 +308,7 @@
 "conversations.error.title" = "오류";
 "conversations.navigation-title" = "다이렉트 메시지";
 "conversations.new.message.placeholder" = "새 메시지";
+"conversations.latest.message" = "가장 최근 메시지를";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld개 글 (%lld명이 이야기 중)";
@@ -305,14 +331,6 @@
 "explore.section.users" = "사용자";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5분";
-"env.poll-duration.30m" = "30분";
-"env.poll-duration.1h" = "1시간";
-"env.poll-duration.6h" = "6시간";
-"env.poll-duration.12h" = "12시간";
-"env.poll-duration.1d" = "1일";
-"env.poll-duration.3d" = "3일";
-"env.poll-duration.7d" = "7일";
 "env.poll-vote-frequency.one" = "하나만 선택 가능";
 "env.poll-vote-frequency.multiple" = "여러 개 선택 가능";
 
@@ -369,12 +387,13 @@
 
 // MARK: Package: Status
 "status.action.translate" = "번역";
-"status.action.translate-from-%@" = "%@에서 번역";
-"status.action.translated-label-%@" = "번역 제공: %@";
+"status.action.translated-label-%@" = "%@ 서비스를 통해 번역됨";
+"status.action.translated-label-from-%@-%@" = "%2$@ 서비스를 통해 %1$@에서 번역됨";
 "status.action.bookmark" = "보관함에 추가";
 "status.action.boost" = "부스트";
 "status.action.boost-to-followers" = "팔로워에게만 부스트";
 "status.action.copy-text" = "복사";
+"status.action.copy-link" = "링크 복사";
 "status.action.delete" = "삭제";
 "status.action.delete.confirm.title" = "삭제 확인";
 "status.action.delete.confirm.message" = "이 글을 정말 삭제하시겠습니까?";
@@ -386,7 +405,7 @@
 "status.action.post" = "게시";
 "status.action.quote" = "인용";
 "status.action.reply" = "댓글";
-"status.action.section.your-post" = "내 글";
+"status.action.section.your-post" = "내 글을";
 "status.action.share" = "링크 및 본문 공유";
 "status.action.share-link" = "링크 공유";
 "status.action.share-image" = "이미지로 공유";
@@ -448,6 +467,7 @@
 "status.row.you-boosted" = "내가 부스트함";
 "status.show-less" = "간략히 보기";
 "status.show-more" = "더 보기";
+"status.show-full-post" = "전체 내용 보기";
 "status.summary.at-time" = " ";
 "status.summary.edited-time" = "마지막 수정: ";
 "status.summary.n-boosts %lld" = "부스트 %lld회";
@@ -465,14 +485,17 @@
 "filter.edit.keywords.add" = "새 단어 추가";
 "filter.edit.contexts" = "필터를 적용할 곳";
 "filter.edit.action" = "가릴 방식";
+"filter.edit.expiry" = "Expiry";
+"filter.edit.expiry.date-time" = "Date/Time";
+"filter.edit.expiry.duration" = "Duration";
 "account.action.edit-filters" = "필터 편집";
 "filter.contexts.home" = "홈 및 리스트";
 "filter.contexts.notifications" = "알림";
 "filter.contexts.public" = "공개 타임라인";
 "filter.contexts.conversations" = "대화";
 "filter.contexts.profiles" = "프로필";
-"filter.action.warning" = "경고 표시하고 글 가리기";
-"filter.action.hide" = "완전히 숨기기";
+"filter.action.warning" = "경고 표시하고 글 가림";
+"filter.action.hide" = "완전히 숨김";
 
 // MARK: Accessibility
 "accessibility.editor.button.attach-photo" = "이미지 첨부";

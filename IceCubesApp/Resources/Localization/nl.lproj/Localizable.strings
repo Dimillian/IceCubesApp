@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "Cirkel";
 "enum.avatar-shape.rounded" = "Afgerond";
 "enum.durations.infinite" = "Onbepaald";
+"enum.durations.custom" = "Aangepast";
 "enum.durations.fiveMinutes" = "5 minuten";
 "enum.durations.thirtyMinutes" = "30 minuten";
 "enum.durations.oneHour" = "1 uur";
 "enum.durations.sixHours" = "6 uur";
+"enum.durations.twelveHours" = "12 uur";
 "enum.durations.oneDay" = "1 dag";
 "enum.durations.threeDays" = "3 dagen";
 "enum.durations.sevenDays" = "7 dagen";
@@ -79,12 +81,14 @@
 "settings.display.restore" = "Stel opnieuw in";
 "settings.display.section.display" = "Weergave";
 "settings.display.section.theme" = "Thema";
+"settings.display.colors.apply" = "Pas aangepaste kleuren toe";
 "settings.display.section.theme.footer" = "Kleuren kunnen alleen worden ingesteld als het kleurenschema niet automatisch het kleurenschema van het systeem volgt";
 "settings.display.status.action-buttons" = "Actieknoppen";
 "settings.display.status.media-style" = "Mediastijl";
 "settings.display.translate-button" = "Toon vertaalknop";
 "settings.display.theme.background" = "Achtergrondkleur";
 "settings.display.theme.secondary-background" = "Secundaire achtergrondkleur";
+"settings.display.theme.text-color" = "Tekstkleur";
 "settings.display.theme.tint" = "Kleurtint";
 "settings.display.theme.systemColor" = "Automatisch";
 "settings.general.browser" = "Browser";
@@ -123,15 +127,26 @@
 "settings.support.two.title" = "☕️ Goeie fooi";
 "settings.support.four.title" = "👽 Wie ben jij-fooi";
 "settings.support.four.subtitle" = "Daarmee kan Ice Cubes nog een tijdje vooruit!";
+"settings.support.supporter.title" = "Word supporter!";
+"settings.support.supporter.subtitle" = "Door maandelijks een fooi te geven aan Ice Cubes word je supporter. Je krijgt dan zelfs een verificatievinkje op je profiel. Alleen voor jou zichtbaar 👀";
+"settings.support.supporter.subscribed" = "Bedankt dat je supporter van Ice Cubes bent!";
+"settings.support.supporter.subscription-info"= "Abonnementen worden automatisch verlengd, tenzij je ze een dag voor de volgende verlengingsperiode opzegt.";
+"settings.support.restore-purchase.button" = "Aankoop herstellen";
+"settings.support.restore-purchase.explanation" = "Herstel je supporter-abonnement, als dat nog niet automatisch gesynchroniseerd is.";
+"settings.support.privacy-policy" = "Privacybeleid";
+"settings.support.terms-of-use" = "Gebruiksvoorwaarden";
 "settings.timeline.add" = "Lokale tijdlijn toevoegen";
 "settings.title" = "Instellingen";
 "settings.section.other" = "Overig";
 "settings.other.hide-openai" = "Gebruik 🤖-hulp";
 "settings.other.social-keyboard" = "Gebruik socialmedia-toetsenbord";
+"settings.other.sound-effect" = "Geluidseffecten";
 "settings.general.content" = "Inhoud";
 "settings.system" = "Systeeminstellingen";
 "settings.content.navigation-title" = "Inhoud";
 "settings.content.boosts" = "Boosts";
+"settings.content.collapse-long-posts" = "Klap lange posts in";
+"settings.content.collapse-long-posts-hint" = "Alleen een beperkt aantal regels van ingeklapte posts wordt getoond, samen met een knop om de volledige post te tonen";
 "settings.content.hide-repeated-boosts" = "Verberg herhaalde boosts";
 "settings.content.instance-settings" = "Serverinstellingen voor inhoud";
 "settings.content.use-instance-settings" = "Gebruik serverinstellingen";
@@ -167,7 +182,6 @@
 "settings.display.show-ipad-column" = "Toon tweede kolom";
 
 "settings.general.swipeactions" = "Veegacties";
-"settings.swipeactions.appearance" = "Appearance";
 "settings.swipeactions.navigation-title" = "Veegacties";
 "settings.swipeactions.primary" = "Primaire actie";
 "settings.swipeactions.secondary" = "Secundaire actie";
@@ -187,6 +201,9 @@
 "settings.swipeactions.icon-style" = "Symboolstijl";
 
 "settings.display.section.font" = "Lettertype";
+
+"settings.section.cache" = "Cache";
+"settings.cache-media.clear" = "Leeg mediacache";
 
 // MARK: Tabs
 "tab.explore" = "Ontdekken";
@@ -242,6 +259,12 @@
 "account.edit.post-settings.privacy" = "Standaardprivacy";
 "account.edit.post-settings.section-title" = "Postinstellingen";
 "account.edit.post-settings.sensitive" = "Gevoelige inhoud";
+
+"account.edit.metadata-section-title" = "Profielmetagegevens";
+"account.edit.metadata-name-placeholder" = "Label";
+"account.edit.metadata-value-placeholder" = "Inhoud";
+"account.edit.add-metadata-button" = "Voeg metagegevens toe";
+
 "account.favorited-by" = "Gefavoriet";
 "account.follow.follow" = "Volg";
 "account.follow.following" = "Volgend";
@@ -263,6 +286,7 @@
 "account.joined" = "Lid geworden";
 "account.action.logout" = "Log uit";
 "account.action.edit-filters" = "Bewerk filters";
+"account.action.more" = "Meer instellingen";
 
 "account.relation.note.edit" = "Bewerk notitie";
 "account.relation.note.edit.placeholder" = "Voer notitietekst in";
@@ -281,6 +305,7 @@
 "conversations.error.title" = "Er heeft zich een fout voorgedaan";
 "conversations.navigation-title" = "Directe berichten";
 "conversations.new.message.placeholder" = "Nieuw bericht";
+"conversations.latest.message" = "Meest recente bericht";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld posts van %lld deelnemers";
@@ -303,14 +328,6 @@
 "explore.section.users" = "Gebruikers";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5 minuten";
-"env.poll-duration.30m" = "30 minuten";
-"env.poll-duration.1h" = "1 uur";
-"env.poll-duration.6h" = "6 uur";
-"env.poll-duration.12h" = "12 uur";
-"env.poll-duration.1d" = "1 dag";
-"env.poll-duration.3d" = "3 dagen";
-"env.poll-duration.7d" = "7 dagen";
 "env.poll-vote-frequency.one" = "Eén stem";
 "env.poll-vote-frequency.multiple" = "Meerdere stemmen";
 
@@ -362,12 +379,13 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Vertaal";
-"status.action.translate-from-%@" = "Vertaal uit het %@";
 "status.action.translated-label-%@" = "Vertaald met behulp van %@";
+"status.action.translated-label-from-%@-%@" = "Vertaald uit het %@ met behulp van %@";
 "status.action.bookmark" = "Voeg bladwijzer toe";
 "status.action.boost" = "Boost";
 "status.action.boost-to-followers" = "Boost aan volgers";
 "status.action.copy-text" = "Kopieer tekst";
+"status.action.copy-link" = "Kopieer link";
 "status.action.delete" = "Verwijder";
 "status.action.delete.confirm.title" = "Bevestigen";
 "status.action.delete.confirm.message" = "Weet je zeker dat je deze post wilt verwijderen?";
@@ -441,6 +459,7 @@
 "status.row.you-boosted" = "Je boostte";
 "status.show-less" = "Toon minder";
 "status.show-more" = "Toon meer";
+"status.show-full-post" = "Toon volledige post";
 "status.summary.at-time" = " om ";
 "status.summary.edited-time" = "Laatst gewijzigd: ";
 "status.summary.n-boosts %lld" = "%lld boosts";
@@ -458,6 +477,9 @@
 "filter.edit.keywords.add" = "Voeg een nieuw sleutelwoord toe";
 "filter.edit.contexts" = "Filtercontext";
 "filter.edit.action" = "Filteractie";
+"filter.edit.expiry" = "Vervaldatum";
+"filter.edit.expiry.date-time" = "Datum/tijd";
+"filter.edit.expiry.duration" = "Duur";
 "filter.contexts.home" = "Start en lijsten";
 "filter.contexts.notifications" = "Meldingen";
 "filter.contexts.public" = "Openbare tijdlijnen";

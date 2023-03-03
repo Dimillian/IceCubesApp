@@ -65,29 +65,7 @@ struct StatusEditorMediaView: View {
         .frame(width: 150, height: 150)
         .cornerRadius(8)
       if container.error != nil {
-        VStack {
-          Text("status.editor.error.upload")
-          Button {
-            withAnimation {
-              viewModel.mediasImages.removeAll(where: { $0.id == container.id })
-            }
-          } label: {
-            VStack {
-              Text("action.delete")
-            }
-          }
-          .buttonStyle(.bordered)
-          Button {
-            Task {
-              await viewModel.upload(container: container)
-            }
-          } label: {
-            VStack {
-              Text("action.retry")
-            }
-          }
-          .buttonStyle(.bordered)
-        }
+        Text("status.editor.error.upload")
       } else if container.mediaAttachment == nil {
         ProgressView()
       }
@@ -127,7 +105,7 @@ struct StatusEditorMediaView: View {
 
   @ViewBuilder
   private func makeImageMenu(container: StatusEditorMediaContainer) -> some View {
-    if container.mediaAttachment != nil {
+    if container.mediaAttachment?.url != nil {
       if currentInstance.isEditAltTextSupported || !viewModel.mode.isEditing {
         Button {
           editingContainer = container
@@ -157,8 +135,7 @@ struct StatusEditorMediaView: View {
   private func makeErrorView(error: ServerError) -> some View {
     ZStack {
       placeholderView
-      Text("alert.error")
-        .foregroundColor(.red)
+      Text("status.editor.error.upload")
     }
     .alert("alert.error", isPresented: $isErrorDisplayed) {
       Button("Ok", action: {})

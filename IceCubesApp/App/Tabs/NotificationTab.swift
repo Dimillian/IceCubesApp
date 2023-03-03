@@ -86,7 +86,7 @@ struct NotificationsTab: View {
       routerPath.path = []
     }
   }
-  
+
   private func clearNotifications() {
     if isSecondaryColumn {
       if let token = appAccount.currentAccount.oauthToken {

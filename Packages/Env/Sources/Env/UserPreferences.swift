@@ -1,3 +1,4 @@
+import Combine
 import Foundation
 import Models
 import Network
@@ -33,6 +34,7 @@ public class UserPreferences: ObservableObject {
   @AppStorage("haptic_tab") public var hapticTabSelectionEnabled = true
   @AppStorage("haptic_timeline") public var hapticTimelineEnabled = true
   @AppStorage("haptic_button_press") public var hapticButtonPressEnabled = true
+  @AppStorage("sound_effect_enabled") public var soundEffectEnabled = true
 
   @AppStorage("show_tab_label_iphone") public var showiPhoneTabLabel = true
   @AppStorage("show_alt_text_for_media") public var showAltTextForMedia = true
@@ -47,6 +49,8 @@ public class UserPreferences: ObservableObject {
   @AppStorage("swipeactions-icon-style") public var swipeActionsIconStyle: SwipeActionsIconStyle = .iconWithText
 
   @AppStorage("requested_review") public var requestedReview = false
+  
+  @AppStorage("collapse-long-posts") public var collapseLongPosts = true
 
   public enum SwipeActionsIconStyle: String, CaseIterable {
     case iconWithText, iconOnly
@@ -58,6 +62,16 @@ public class UserPreferences: ObservableObject {
       case .iconOnly:
         return "enum.swipeactions.icon-only"
       }
+    }
+
+    // Have to implement this manually here due to compiler not implicitly
+    // inserting `nonisolated`, which leads to a warning:
+    //
+    //     Main actor-isolated static property 'allCases' cannot be used to
+    //     satisfy nonisolated protocol requirement
+    //
+    nonisolated public static var allCases: [Self] {
+      [.iconWithText, .iconOnly]
     }
   }
 

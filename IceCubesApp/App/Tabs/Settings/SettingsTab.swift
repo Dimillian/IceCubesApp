@@ -5,6 +5,7 @@ import Env
 import Foundation
 import Models
 import Network
+import Nuke
 import SwiftUI
 import Timeline
 
@@ -22,6 +23,7 @@ struct SettingsTabs: View {
 
   @State private var addAccountSheetPresented = false
   @State private var isEditingAccount = false
+  @State private var cachedRemoved = false
 
   @Binding var popToRootTab: Tab
 
@@ -32,6 +34,7 @@ struct SettingsTabs: View {
         accountsSection
         generalSection
         otherSections
+        cacheSection
       }
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
@@ -41,8 +44,10 @@ struct SettingsTabs: View {
       .toolbar {
         if UIDevice.current.userInterfaceIdiom == .phone {
           ToolbarItem {
-            Button("action.done") {
+            Button {
               dismiss()
+            } label: {
+              Text("action.done").bold()
             }
           }
         }
@@ -174,8 +179,8 @@ struct SettingsTabs: View {
       Toggle(isOn: $preferences.isSocialKeyboardEnabled) {
         Label("settings.other.social-keyboard", systemImage: "keyboard")
       }
-      Toggle(isOn: $preferences.autoPlayVideo) {
-        Label("settings.other.autoplay-video", systemImage: "play.square.stack")
+      Toggle(isOn: $preferences.soundEffectEnabled) {
+        Label("settings.other.sound-effect", systemImage: "hifispeaker")
       }
     }
     .listRowBackground(theme.primaryBackgroundColor)
@@ -272,5 +277,22 @@ struct SettingsTabs: View {
     .navigationTitle("settings.general.remote-timelines")
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
+  }
+
+  private var cacheSection: some View {
+    Section("settings.section.cache") {
+      if cachedRemoved {
+        Text("action.done")
+          .transition(.move(edge: .leading))
+      } else {
+        Button("settings.cache-media.clear", role: .destructive) {
+          ImagePipeline.shared.cache.removeAll()
+          withAnimation {
+            cachedRemoved = true
+          }
+        }
+      }
+    }
+    .listRowBackground(theme.primaryBackgroundColor)
   }
 }
