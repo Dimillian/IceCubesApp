@@ -86,7 +86,7 @@ struct StatusRowHeaderView: View {
   private var dateView: Text {
     Text(viewModel.finalStatus.createdAt.relativeFormatted) +
       Text(" ⸱ ") +
-      Text(Image(systemName: viewModel.status.visibility.iconName))
+      Text(Image(systemName: viewModel.finalStatus.visibility.iconName))
   }
 
   @ViewBuilder
