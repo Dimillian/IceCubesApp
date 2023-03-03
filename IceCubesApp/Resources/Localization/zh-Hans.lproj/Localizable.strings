@@ -124,8 +124,8 @@
 "settings.support.four.subtitle" = "这将大大有助于 Ice Cubes 的持续运行！";
 "settings.support.supporter.title" = "成为支持者！";
 "settings.support.supporter.subtitle" = "你可以通过每月给 Ice Cubes 捐赠成为支持者，你还能在个人资料上得到一个认证徽章，仅你可见 👀";
-"settings.support.supporter.subscribed" = "感谢成为 Ice Cubes 的支持者！";
-"settings.support.supporter.subscription-info"= "订阅将会自动续订，除非在当前订阅期至少提前一天取消自动续订。";
+"settings.support.supporter.subscribed" = "感谢你成为 Ice Cubes 的支持者！";
+"settings.support.supporter.subscription-info"= "此订阅将自动续订，除非在当前订阅期至少提前一天取消自动续订。";
 "settings.support.restore-purchase.button" = "恢复购买";
 "settings.support.restore-purchase.explanation" = "恢复你的支持者订阅，如果其尚未自动续订。";
 "settings.support.privacy-policy" = "隐私政策";
