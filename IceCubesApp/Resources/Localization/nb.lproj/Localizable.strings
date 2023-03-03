@@ -83,6 +83,7 @@
 "settings.display.restore" = "Gjenopprett standardinnstillinger";
 "settings.display.section.display" = "Visning";
 "settings.display.section.theme" = "Tema";
+"settings.display.colors.apply" = "Apply custom colors";
 "settings.display.section.theme.footer" = "Egendefinerte farger kan bare angis hvis «Match system» er deaktivert";
 "settings.display.status.action-buttons" = "Status handlingsknapper";
 "settings.display.status.media-style" = "Status mediestil";

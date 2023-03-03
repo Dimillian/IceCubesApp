@@ -83,6 +83,7 @@
 "settings.display.restore" = "Відновити налаштування";
 "settings.display.section.display" = "Відображення";
 "settings.display.section.theme" = "Тема";
+"settings.display.colors.apply" = "Apply custom colors";
 "settings.display.section.theme.footer" = "Власна кольорова схема може бути встановлена лише якщо відключено Відповідати системній темі";
 "settings.display.status.action-buttons" = "Кнопки дій статуса";
 "settings.display.status.media-style" = "Стиль медія статуса";

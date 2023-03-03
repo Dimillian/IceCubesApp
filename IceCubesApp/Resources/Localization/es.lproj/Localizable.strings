@@ -79,6 +79,7 @@
 "settings.display.restore" = "Restaurar ajustes predeterminados";
 "settings.display.section.display" = "Apariencia";
 "settings.display.section.theme" = "Tema";
+"settings.display.colors.apply" = "Apply custom colors";
 "settings.display.section.theme.footer" = "Solo se pueden usar los colores personalizados si la opción de 'sistema de coincidencia' está desactivada";
 "settings.display.status.action-buttons" = "Botones de acción";
 "settings.display.status.media-style" = "Estilo del contenido multimedia";

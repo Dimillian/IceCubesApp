@@ -79,6 +79,7 @@
 "settings.display.restore" = "Berrezarri defektuzkoa";
 "settings.display.section.display" = "Pantaila";
 "settings.display.section.theme" = "Itxura";
+"settings.display.colors.apply" = "Apply custom colors";
 "settings.display.section.theme.footer" = "Norberaren koloreak aukeratzeko sistemak darabiltzan koloreen aukera ezgaitu behar da";
 "settings.display.status.action-buttons" = "Bidalketen ekintza botoiak";
 "settings.display.status.media-style" = "Bidalketen multimediaren itxura";

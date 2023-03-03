@@ -83,6 +83,7 @@
 "settings.display.restore" = "デフォルトに戻す";
 "settings.display.section.display" = "表示";
 "settings.display.section.theme" = "テーマ";
+"settings.display.colors.apply" = "Apply custom colors";
 "settings.display.section.theme.footer" = "カスタムカラーはシステム配色との一致が無効の場合のみ設定可能です";
 "settings.display.status.action-buttons" = "アクションボタン";
 "settings.display.status.media-style" = "メディアスタイル";

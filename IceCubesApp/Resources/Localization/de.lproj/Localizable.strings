@@ -79,6 +79,7 @@
 "settings.display.restore" = "Standard wiederherstellen";
 "settings.display.section.display" = "Anzeigen";
 "settings.display.section.theme" = "Design";
+"settings.display.colors.apply" = "Apply custom colors";
 "settings.display.section.theme.footer" = "Eigene Farben können nur eingestellt werden, wenn die Systemeinstellung nicht verwendet wird.";
 "settings.display.status.action-buttons" = "Status Aktions-Buttons";
 "settings.display.status.media-style" = "Status Medien";

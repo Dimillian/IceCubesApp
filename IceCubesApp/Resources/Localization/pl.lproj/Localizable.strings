@@ -79,6 +79,7 @@
 "settings.display.restore" = "Przywróć ustawienia domyślne";
 "settings.display.section.display" = "Ekran";
 "settings.display.section.theme" = "Motyw";
+"settings.display.colors.apply" = "Apply custom colors";
 "settings.display.section.theme.footer" = "Kolory niestandardowe można ustawić tylko wtedy, gdy wyłączona jest opcja dopasowania schematu kolorów systemu.";
 "settings.display.status.action-buttons" = "Przyciski akcji";
 "settings.display.status.media-style" = "Treści multimedialne";

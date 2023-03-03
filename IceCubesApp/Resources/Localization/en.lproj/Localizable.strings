@@ -83,6 +83,7 @@
 "settings.display.restore" = "Restore Defaults";
 "settings.display.section.display" = "Display";
 "settings.display.section.theme" = "Theme";
+"settings.display.colors.apply" = "Apply custom colors";
 "settings.display.section.theme.footer" = "Custom colors can only be set if match system color scheme is disabled";
 "settings.display.status.action-buttons" = "Status Action Buttons";
 "settings.display.status.media-style" = "Status Media Style";

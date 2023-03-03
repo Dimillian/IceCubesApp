@@ -78,6 +78,7 @@
 "settings.display.restore" = "Restableix els valors per defecte";
 "settings.display.section.display" = "Aparença";
 "settings.display.section.theme" = "Tema";
+"settings.display.colors.apply" = "Apply custom colors";
 "settings.display.section.theme.footer" = "Els colors personalitzats només es poden establir si la sincronització amb els colors del sistema està desactivada";
 "settings.display.status.action-buttons" = "Botons d'acció";
 "settings.display.status.media-style" = "Estil del contingut multimèdia";

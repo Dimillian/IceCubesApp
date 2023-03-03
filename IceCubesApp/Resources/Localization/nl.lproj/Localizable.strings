@@ -79,6 +79,7 @@
 "settings.display.restore" = "Stel opnieuw in";
 "settings.display.section.display" = "Weergave";
 "settings.display.section.theme" = "Thema";
+"settings.display.colors.apply" = "Apply custom colors";
 "settings.display.section.theme.footer" = "Kleuren kunnen alleen worden ingesteld als het kleurenschema niet automatisch het kleurenschema van het systeem volgt";
 "settings.display.status.action-buttons" = "Actieknoppen";
 "settings.display.status.media-style" = "Mediastijl";

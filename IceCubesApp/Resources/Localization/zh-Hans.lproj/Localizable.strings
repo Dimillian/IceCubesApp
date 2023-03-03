@@ -79,6 +79,7 @@
 "settings.display.restore" = "恢复默认设置";
 "settings.display.section.display" = "显示";
 "settings.display.section.theme" = "主题";
+"settings.display.colors.apply" = "Apply custom colors";
 "settings.display.section.theme.footer" = "只有在“匹配系统”关闭时才能设置自定义颜色";
 "settings.display.status.action-buttons" = "导航栏样式";
 "settings.display.status.media-style" = "导航栏排列";

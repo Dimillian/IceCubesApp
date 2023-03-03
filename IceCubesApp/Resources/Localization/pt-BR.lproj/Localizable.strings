@@ -79,6 +79,7 @@
 "settings.display.restore" = "Restaurar padrões";
 "settings.display.section.display" = "Exibir";
 "settings.display.section.theme" = "Tema";
+"settings.display.colors.apply" = "Apply custom colors";
 "settings.display.section.theme.footer" = "Cores customizadas só podem ser definidas se o Padrão do Sistema estiver desabilitado";
 "settings.display.status.action-buttons" = "Botões de ação de status";
 "settings.display.status.media-style" = "Estilo de mídia de status";

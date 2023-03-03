@@ -13,6 +13,12 @@ struct DisplaySettingsView: View {
   @EnvironmentObject private var userPreferences: UserPreferences
 
   @State private var isFontSelectorPresented = false
+  
+  @State private var didChangeColors = false
+  @State private var localTintColor = Theme.shared.tintColor
+  @State private var localPrimaryBackgroundColor = Theme.shared.primaryBackgroundColor
+  @State private var localSecondaryBackgroundColor = Theme.shared.secondaryBackgroundColor
+  
   private var previewStatusViewModel = StatusRowViewModel(status: Status.placeholder(forSettings: true, language: "la"),
                                                           client: Client(server: ""),
                                                           routerPath: RouterPath()) // translate from latin button
@@ -27,12 +33,31 @@ struct DisplaySettingsView: View {
         Toggle("settings.display.theme.systemColor", isOn: $theme.followSystemColorScheme)
         themeSelectorButton
         Group {
-          ColorPicker("settings.display.theme.tint", selection: $theme.tintColor)
-          ColorPicker("settings.display.theme.background", selection: $theme.primaryBackgroundColor)
-          ColorPicker("settings.display.theme.secondary-background", selection: $theme.secondaryBackgroundColor)
+          ColorPicker("settings.display.theme.tint", selection: $localTintColor)
+          ColorPicker("settings.display.theme.background", selection: $localPrimaryBackgroundColor)
+          ColorPicker("settings.display.theme.secondary-background", selection: $localSecondaryBackgroundColor)
         }
         .disabled(theme.followSystemColorScheme)
         .opacity(theme.followSystemColorScheme ? 0.5 : 1.0)
+        .onChange(of: localTintColor) { _ in
+          didChangeColors = true
+        }
+        .onChange(of: localSecondaryBackgroundColor) { _ in
+          didChangeColors = true
+        }
+        .onChange(of: localPrimaryBackgroundColor) { _ in
+          didChangeColors = true
+        }
+        if didChangeColors {
+          Button {
+            didChangeColors = false
+            theme.tintColor = localTintColor
+            theme.primaryBackgroundColor = localPrimaryBackgroundColor
+            theme.secondaryBackgroundColor = localSecondaryBackgroundColor
+          } label: {
+            Text("settings.display.colors.apply")
+          }
+        }
       } header: {
         Text("settings.display.section.theme")
       } footer: {
@@ -131,6 +156,11 @@ struct DisplaySettingsView: View {
           theme.avatarShape = .rounded
           theme.avatarPosition = .top
           theme.statusActionsDisplay = .full
+          
+          localTintColor = theme.tintColor
+          localPrimaryBackgroundColor = theme.primaryBackgroundColor
+          localSecondaryBackgroundColor = theme.secondaryBackgroundColor
+          
         } label: {
           Text("settings.display.restore")
         }

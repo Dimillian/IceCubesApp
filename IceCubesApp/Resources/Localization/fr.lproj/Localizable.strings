@@ -79,6 +79,7 @@
 "settings.display.restore" = "Restaurer les valeurs par défaut";
 "settings.display.section.display" = "Affichage";
 "settings.display.section.theme" = "Thème";
+"settings.display.colors.apply" = "Apply custom colors";
 "settings.display.section.theme.footer" = "Les couleurs personnalisées ne peuvent être définies que si le schéma de couleur système est désactivé";
 "settings.display.status.action-buttons" = "Boutons d'action de statut";
 "settings.display.status.media-style" = "Style de média de statut";
