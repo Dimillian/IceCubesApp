@@ -283,7 +283,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
 
   private func processText() {
     guard markedTextRange == nil else { return }
-    statusText.addAttributes([.foregroundColor: UIColor(Color.label),
+    statusText.addAttributes([.foregroundColor: UIColor(Theme.shared.labelColor),
                               .font: Font.scaledBodyUIFont,
                               .backgroundColor: UIColor.clear,
                               .underlineColor: UIColor.clear],

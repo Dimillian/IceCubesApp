@@ -86,6 +86,7 @@
 "settings.display.translate-button" = "Toon vertaalknop";
 "settings.display.theme.background" = "Achtergrondkleur";
 "settings.display.theme.secondary-background" = "Secundaire achtergrondkleur";
+"settings.display.theme.text-color" = "Text Color";
 "settings.display.theme.tint" = "Kleurtint";
 "settings.display.theme.systemColor" = "Automatisch";
 "settings.general.browser" = "Browser";

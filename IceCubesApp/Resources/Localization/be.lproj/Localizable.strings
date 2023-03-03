@@ -90,6 +90,7 @@
 "settings.display.translate-button" = "Паказаць кнопку перакладу";
 "settings.display.theme.background" = "Колер фону";
 "settings.display.theme.secondary-background" = "Другасны колер фону";
+"settings.display.theme.text-color" = "Text Color";
 "settings.display.theme.tint" = "Колер адцення";
 "settings.display.theme.systemColor" = "Згодна з сістэмай";
 "settings.general.browser" = "Браўзэр";

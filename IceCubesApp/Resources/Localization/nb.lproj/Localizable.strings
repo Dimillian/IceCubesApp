@@ -90,6 +90,7 @@
 "settings.display.translate-button" = "Vis oversettelsesknapp";
 "settings.display.theme.background" = "Bakgrunnsfarge";
 "settings.display.theme.secondary-background" = "Sekundær bakgrunnsfarge";
+"settings.display.theme.text-color" = "Text Color";
 "settings.display.theme.tint" = "Temafarge";
 "settings.display.theme.systemColor" = "Match system";
 "settings.general.browser" = "Nettleser";

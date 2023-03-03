@@ -85,6 +85,7 @@
 "settings.display.translate-button" = "Mostra el botó de traducció";
 "settings.display.theme.background" = "Color de fons";
 "settings.display.theme.secondary-background" = "Color de fons secundari";
+"settings.display.theme.text-color" = "Text Color";
 "settings.display.theme.tint" = "Color del tint";
 "settings.display.theme.systemColor" = "Sincronitza amb els colors del sistema";
 "settings.general.browser" = "Navegador";

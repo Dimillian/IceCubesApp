@@ -90,6 +90,7 @@
 "settings.display.translate-button" = "翻訳ボタンの表示";
 "settings.display.theme.background" = "バックグラウンドカラー";
 "settings.display.theme.secondary-background" = "アクセントカラー";
+"settings.display.theme.text-color" = "Text Color";
 "settings.display.theme.tint" = "色合い";
 "settings.display.theme.systemColor" = "システムに合わせる";
 "settings.general.browser" = "ブラウザ";

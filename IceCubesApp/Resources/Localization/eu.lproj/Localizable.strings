@@ -86,6 +86,7 @@
 "settings.display.translate-button" = "Erakutsi itzulpen botoia";
 "settings.display.theme.background" = "Hondoaren kolorea";
 "settings.display.theme.secondary-background" = "Bigarren mailako hondoaren kolorea";
+"settings.display.theme.text-color" = "Text Color";
 "settings.display.theme.tint" = "Tonua";
 "settings.display.theme.systemColor" = "Sistemak darabilena";
 "settings.general.browser" = "Nabigatzailea";

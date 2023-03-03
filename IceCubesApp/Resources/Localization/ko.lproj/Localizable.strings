@@ -86,6 +86,7 @@
 "settings.display.translate-button" = "번역 버튼 표시";
 "settings.display.theme.background" = "배경 색상";
 "settings.display.theme.secondary-background" = "보조 배경 색상";
+"settings.display.theme.text-color" = "Text Color";
 "settings.display.theme.tint" = "강조 색상";
 "settings.display.theme.systemColor" = "시스템 설정에 맞춤";
 "settings.general.browser" = "브라우저";

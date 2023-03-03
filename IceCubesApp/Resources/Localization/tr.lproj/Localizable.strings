@@ -86,6 +86,7 @@
 "settings.display.translate-button" = "Çeviri Butonunu Göster";
 "settings.display.theme.background" = "Arka Plan Rengi";
 "settings.display.theme.secondary-background" = "İkincil Arka Plan Rengi";
+"settings.display.theme.text-color" = "Text Color";
 "settings.display.theme.tint" = "Tonlama Rengi";
 "settings.display.theme.systemColor" = "Eşleştirme Sistemi";
 "settings.general.browser" = "Tarayıcı";

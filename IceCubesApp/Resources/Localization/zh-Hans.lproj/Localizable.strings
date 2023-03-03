@@ -86,6 +86,7 @@
 "settings.display.translate-button" = "显示翻译按钮";
 "settings.display.theme.background" = "背景颜色";
 "settings.display.theme.secondary-background" = "二级背景颜色";
+"settings.display.theme.text-color" = "Text Color";
 "settings.display.theme.tint" = "色调";
 "settings.display.theme.systemColor" = "匹配系统";
 "settings.general.browser" = "默认浏览器";

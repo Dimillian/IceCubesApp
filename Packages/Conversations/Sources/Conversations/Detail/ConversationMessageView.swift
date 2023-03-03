@@ -33,6 +33,7 @@ struct ConversationMessageView: View {
         VStack(alignment: .leading) {
           EmojiTextApp(message.content, emojis: message.emojis)
             .font(.scaledBody)
+            .foregroundColor(theme.labelColor)
             .emojiSize(Font.scaledBodyPointSize)
             .padding(6)
             .environment(\.openURL, OpenURLAction { url in

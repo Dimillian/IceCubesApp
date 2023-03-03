@@ -145,6 +145,7 @@ struct AccountDetailHeaderView: View {
           HStack(alignment: .center, spacing: 2) {
             EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
               .font(.scaledHeadline)
+              .foregroundColor(theme.labelColor)
               .emojiSize(Font.scaledHeadlinePointSize)
             if account.bot {
               Text(Image(systemName: "poweroutlet.type.b.fill"))
@@ -190,6 +191,7 @@ struct AccountDetailHeaderView: View {
 
       EmojiTextApp(account.note, emojis: account.emojis)
         .font(.scaledBody)
+        .foregroundColor(theme.labelColor)
         .emojiSize(Font.scaledBodyPointSize)
         .padding(.top, 8)
         .textSelection(.enabled)

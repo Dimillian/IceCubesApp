@@ -17,6 +17,7 @@ struct StatusRowTextView: View {
                      language: viewModel.finalStatus.language,
                      lineLimit: viewModel.lineLimit)
           .font(.scaledBody)
+          .foregroundColor(theme.labelColor)
           .emojiSize(Font.scaledBodyPointSize)
           .environment(\.openURL, OpenURLAction { url in
             viewModel.routerPath.handleStatus(status: viewModel.finalStatus, url: url)

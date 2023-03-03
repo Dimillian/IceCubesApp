@@ -23,6 +23,7 @@ struct ConversationsListRow: View {
             EmojiTextApp(.init(stringValue: conversation.accounts.map { $0.safeDisplayName }.joined(separator: ", ")),
                          emojis: conversation.accounts.flatMap { $0.emojis })
               .font(.scaledSubheadline)
+              .foregroundColor(theme.labelColor)
               .emojiSize(Font.scaledSubheadlinePointSize)
               .fontWeight(.semibold)
               .foregroundColor(theme.labelColor)
@@ -41,6 +42,7 @@ struct ConversationsListRow: View {
           EmojiTextApp(conversation.lastStatus?.content ?? HTMLString(stringValue: ""), emojis: conversation.lastStatus?.emojis ?? [])
             .multilineTextAlignment(.leading)
             .font(.scaledBody)
+            .foregroundColor(theme.labelColor)
             .emojiSize(Font.scaledBodyPointSize)
         }
         Spacer()

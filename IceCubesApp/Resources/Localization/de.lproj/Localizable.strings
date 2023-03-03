@@ -86,6 +86,7 @@
 "settings.display.translate-button" = "Übersetzen-Button anzeigen";
 "settings.display.theme.background" = "Hintergrundfarbe";
 "settings.display.theme.secondary-background" = "Sekundäre Hintergrundfarbe";
+"settings.display.theme.text-color" = "Text Color";
 "settings.display.theme.tint" = "Akzentfarbe";
 "settings.display.theme.systemColor" = "Systemeinstellung verwenden";
 "settings.general.browser" = "Browser";

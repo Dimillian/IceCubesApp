@@ -90,6 +90,7 @@
 "settings.display.translate-button" = "Show Translate Button";
 "settings.display.theme.background" = "Background Colour";
 "settings.display.theme.secondary-background" = "Secondary Background Colour";
+"settings.display.theme.text-color" = "Text Color";
 "settings.display.theme.tint" = "Tint Colour";
 "settings.display.theme.systemColor" = "Match System";
 "settings.general.browser" = "Browser";

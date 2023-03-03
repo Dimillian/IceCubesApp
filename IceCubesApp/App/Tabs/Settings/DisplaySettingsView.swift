@@ -18,6 +18,7 @@ struct DisplaySettingsView: View {
   @State private var localTintColor = Theme.shared.tintColor
   @State private var localPrimaryBackgroundColor = Theme.shared.primaryBackgroundColor
   @State private var localSecondaryBackgroundColor = Theme.shared.secondaryBackgroundColor
+  @State private var localLabelColor = Theme.shared.labelColor
   
   private var previewStatusViewModel = StatusRowViewModel(status: Status.placeholder(forSettings: true, language: "la"),
                                                           client: Client(server: ""),
@@ -36,6 +37,7 @@ struct DisplaySettingsView: View {
           ColorPicker("settings.display.theme.tint", selection: $localTintColor)
           ColorPicker("settings.display.theme.background", selection: $localPrimaryBackgroundColor)
           ColorPicker("settings.display.theme.secondary-background", selection: $localSecondaryBackgroundColor)
+          ColorPicker("settings.display.theme.text-color", selection: $localLabelColor)
         }
         .disabled(theme.followSystemColorScheme)
         .opacity(theme.followSystemColorScheme ? 0.5 : 1.0)
@@ -48,12 +50,22 @@ struct DisplaySettingsView: View {
         .onChange(of: localPrimaryBackgroundColor) { _ in
           didChangeColors = true
         }
+        .onChange(of: localLabelColor) { _ in
+          didChangeColors = true
+        }
+        .onChange(of: theme.selectedSet) { _ in
+          localTintColor = theme.tintColor
+          localPrimaryBackgroundColor = theme.primaryBackgroundColor
+          localSecondaryBackgroundColor = theme.secondaryBackgroundColor
+          localLabelColor = theme.labelColor
+        }
         if didChangeColors {
           Button {
             didChangeColors = false
             theme.tintColor = localTintColor
             theme.primaryBackgroundColor = localPrimaryBackgroundColor
             theme.secondaryBackgroundColor = localSecondaryBackgroundColor
+            theme.labelColor = localLabelColor
           } label: {
             Text("settings.display.colors.apply")
           }
@@ -160,6 +172,7 @@ struct DisplaySettingsView: View {
           localTintColor = theme.tintColor
           localPrimaryBackgroundColor = theme.primaryBackgroundColor
           localSecondaryBackgroundColor = theme.secondaryBackgroundColor
+          localLabelColor = theme.labelColor
           
         } label: {
           Text("settings.display.restore")

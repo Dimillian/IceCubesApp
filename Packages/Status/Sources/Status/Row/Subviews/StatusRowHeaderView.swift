@@ -39,6 +39,7 @@ struct StatusRowHeaderView: View {
             EmojiTextApp(.init(stringValue: viewModel.finalStatus.account.safeDisplayName),
                          emojis: viewModel.finalStatus.account.emojis)
               .font(.scaledSubheadline)
+              .foregroundColor(theme.labelColor)
               .emojiSize(Font.scaledSubheadlinePointSize)
               .fontWeight(.semibold)
               .lineLimit(1)
