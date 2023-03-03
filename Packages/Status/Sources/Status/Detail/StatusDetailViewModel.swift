@@ -80,9 +80,7 @@ class StatusDetailViewModel: ObservableObject {
       statuses.append(data.status)
       statuses.append(contentsOf: data.context.descendants)
       
-      StatusDataControllerProvider.shared.dataController(for: data.status,
-                                                         client: client)
-      .updateFrom(status: data.status, publishUpdate: true)
+      StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
       
       if animate {
         withAnimation {
