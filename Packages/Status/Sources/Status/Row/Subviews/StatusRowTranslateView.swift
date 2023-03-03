@@ -5,6 +5,7 @@ import SwiftUI
 
 struct StatusRowTranslateView: View {
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
+  @Environment(\.isCompact) private var isCompact: Bool
 
   @EnvironmentObject private var preferences: UserPreferences
 
@@ -35,6 +36,7 @@ struct StatusRowTranslateView: View {
 
   var body: some View {
     if !isInCaptureMode,
+       !isCompact,
        let userLang = preferences.serverPreferences?.postLanguage,
        shouldShowTranslateButton
     {
