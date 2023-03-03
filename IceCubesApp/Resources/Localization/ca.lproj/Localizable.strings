@@ -287,6 +287,7 @@
 "account.relation.follows-you" = "Us segueix";
 "account.joined" = "S'ha unit";
 "account.action.logout" = "Tanca la sessió";
+"account.action.more" = "More Settings";
 
 "account.relation.note.edit" = "Edit Note";
 "account.relation.note.edit.placeholder" = "Enter Note text";

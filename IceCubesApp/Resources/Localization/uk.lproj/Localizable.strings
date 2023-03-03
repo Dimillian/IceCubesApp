@@ -289,6 +289,7 @@
 "account.relation.follows-you" = "Підписується на вас";
 "account.joined" = "Доєднався";
 "account.action.logout" = "Вийти з облікового запису";
+"account.action.more" = "More Settings";
 
 "account.relation.note.edit" = "Редагувати нотатку";
 "account.relation.note.edit.placeholder" = "Додати нотатку";

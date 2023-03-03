@@ -288,6 +288,7 @@
 "account.relation.follows-you" = "Følger deg";
 "account.joined" = "Ble med";
 "account.action.logout" = "Logg ut konto";
+"account.action.more" = "More Settings";
 
 "account.relation.note.edit" = "Edit Note";
 "account.relation.note.edit.placeholder" = "Enter Note text";

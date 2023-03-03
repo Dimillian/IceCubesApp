@@ -288,6 +288,7 @@
 "account.relation.follows-you" = "フォローされています";
 "account.joined" = "登録日";
 "account.action.logout" = "アカウントをログアウトする";
+"account.action.more" = "More Settings";
 
 "account.relation.note.edit" = "ノートを編集";
 "account.relation.note.edit.placeholder" = "ノートを入力";

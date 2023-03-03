@@ -287,6 +287,7 @@
 "account.joined" = "加入于";
 "account.action.logout" = "退出登录";
 "account.action.edit-filters" = "编辑过滤器";
+"account.action.more" = "More Settings";
 
 "account.relation.note.edit" = "编辑备注";
 "account.relation.note.edit.placeholder" = "输入备注文本";

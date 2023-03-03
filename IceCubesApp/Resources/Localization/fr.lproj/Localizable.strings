@@ -288,6 +288,7 @@
 "account.relation.follows-you" = "Vous suit";
 "account.joined" = "Inscrit";
 "account.action.logout" = "Déconnexion";
+"account.action.more" = "More Settings";
 
 "account.relation.note.edit" = "Modifier la note";
 "account.relation.note.edit.placeholder" = "Saisissez le texte de la note";

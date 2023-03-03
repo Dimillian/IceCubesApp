@@ -284,6 +284,7 @@
 "account.relation.follows-you" = "Seni takip ediyor";
 "account.joined" = "Katılındı";
 "account.action.logout" = "Log out account";
+"account.action.more" = "More Settings";
 
 "account.relation.note.edit" = "Edit Note";
 "account.relation.note.edit.placeholder" = "Enter Note text";

@@ -289,6 +289,7 @@
 "account.relation.follows-you" = "나를 팔로우함";
 "account.joined" = "가입";
 "account.action.logout" = "로그아웃";
+"account.action.more" = "More Settings";
 
 "account.relation.note.edit" = "노트 편집";
 "account.relation.note.edit.placeholder" = "나만 볼 수 있는 노트";

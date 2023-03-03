@@ -293,6 +293,7 @@
 "account.relation.follows-you" = "Сочыць за табой";
 "account.joined" = "Далучыліся";
 "account.action.logout" = "Выйсці з уліковага запісу";
+"account.action.more" = "More Settings";
 
 "account.relation.note.edit" = "Рэдагаваць нататку";
 "account.relation.note.edit.placeholder" = "Увядзіце тэкст нататкі";

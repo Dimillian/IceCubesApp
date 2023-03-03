@@ -289,6 +289,7 @@
 "account.joined" = "Batze-data:";
 "account.action.logout" = "Amaitu saioa";
 "account.action.edit-filters" = "Editatu iragazkiak";
+"account.action.more" = "More Settings";
 
 "account.relation.note.edit" = "Editatu oharra";
 "account.relation.note.edit.placeholder" = "Idatzi oharra hemen";

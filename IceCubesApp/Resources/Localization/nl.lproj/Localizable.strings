@@ -286,6 +286,7 @@
 "account.joined" = "Lid geworden";
 "account.action.logout" = "Log uit";
 "account.action.edit-filters" = "Bewerk filters";
+"account.action.more" = "More Settings";
 
 "account.relation.note.edit" = "Bewerk notitie";
 "account.relation.note.edit.placeholder" = "Voer notitietekst in";

@@ -286,6 +286,7 @@
 "account.relation.follows-you" = "Obserwuje ciebie";
 "account.joined" = "Dołączył(a)";
 "account.action.logout" = "Wyloguj się";
+"account.action.more" = "More Settings";
 
 "account.relation.note.edit" = "Edytuj notatkę";
 "account.relation.note.edit.placeholder" = "Wprowadź treść notatki";

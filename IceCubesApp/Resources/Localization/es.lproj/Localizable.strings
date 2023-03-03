@@ -289,6 +289,7 @@
 "account.relation.follows-you" = "Te sigue";
 "account.joined" = "Se unió el";
 "account.action.logout" = "Cerrar sesión";
+"account.action.more" = "More Settings";
 
 "account.relation.note.edit" = "Editar nota";
 "account.relation.note.edit.placeholder" = "Escribe una nota de texto";
