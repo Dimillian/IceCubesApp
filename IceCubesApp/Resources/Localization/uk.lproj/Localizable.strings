@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "Круг";
 "enum.avatar-shape.rounded" = "Закруглені";
 "enum.durations.infinite" = "без обмеження";
+"enum.durations.custom" = "custom";
 "enum.durations.fiveMinutes" = "5 хвилин";
 "enum.durations.thirtyMinutes" = "30 хвилин";
 "enum.durations.oneHour" = "1 година";
 "enum.durations.sixHours" = "6 годин";
+"enum.durations.twelveHours" = "12 годин";
 "enum.durations.oneDay" = "1 день";
 "enum.durations.threeDays" = "3 дні";
 "enum.durations.sevenDays" = "7 днів";
@@ -326,14 +328,6 @@
 "explore.section.users" = "Користувачі";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5 хвилин";
-"env.poll-duration.30m" = "30 хвилин";
-"env.poll-duration.1h" = "1 година";
-"env.poll-duration.6h" = "6 годин";
-"env.poll-duration.12h" = "12 годин";
-"env.poll-duration.1d" = "1 день";
-"env.poll-duration.3d" = "3 дні";
-"env.poll-duration.7d" = "7 днів";
 "env.poll-vote-frequency.one" = "Лише один варіант";
 "env.poll-vote-frequency.multiple" = "Вибір декількох варіантів";
 
@@ -487,6 +481,9 @@
 "filter.edit.keywords.add" = "Додати нове слово";
 "filter.edit.contexts" = "Фільтрувати вміст";
 "filter.edit.action" = "Виконати";
+"filter.edit.expiry" = "Expiry";
+"filter.edit.expiry.date-time" = "Date/Time";
+"filter.edit.expiry.duration" = "Duration";
 "account.action.edit-filters" = "Редагувати фільтри";
 "filter.contexts.home" = "Домівка та список";
 "filter.contexts.notifications" = "Сповіщення";

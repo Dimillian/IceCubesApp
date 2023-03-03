@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "Sirkel";
 "enum.avatar-shape.rounded" = "Avrundet";
 "enum.durations.infinite" = "infinite";
+"enum.durations.custom" = "custom";
 "enum.durations.fiveMinutes" = "5 minutes";
 "enum.durations.thirtyMinutes" = "30 minutes";
 "enum.durations.oneHour" = "1 hour";
 "enum.durations.sixHours" = "6 hours";
+"enum.durations.twelveHours" = "12 hours";
 "enum.durations.oneDay" = "1 day";
 "enum.durations.threeDays" = "3 days";
 "enum.durations.sevenDays" = "7 days";
@@ -325,14 +327,6 @@
 "explore.section.users" = "Brukere";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5 minutter";
-"env.poll-duration.30m" = "30 minutter";
-"env.poll-duration.1h" = "1 time";
-"env.poll-duration.6h" = "6 timer";
-"env.poll-duration.12h" = "12 timer";
-"env.poll-duration.1d" = "1 dag";
-"env.poll-duration.3d" = "3 dager";
-"env.poll-duration.7d" = "7 dager";
 "env.poll-vote-frequency.one" = "Én stemme";
 "env.poll-vote-frequency.multiple" = "Flere stemmer";
 
@@ -486,6 +480,9 @@
 "filter.edit.keywords.add" = "Legg til nytt nøkkelord";
 "filter.edit.contexts" = "Filtrer kontekster";
 "filter.edit.action" = "Filterhandling";
+"filter.edit.expiry" = "Expiry";
+"filter.edit.expiry.date-time" = "Date/Time";
+"filter.edit.expiry.duration" = "Duration";
 "account.action.edit-filters" = "Rediger filtre";
 "filter.contexts.home" = "Hjem og lister";
 "filter.contexts.notifications" = "Varsler";

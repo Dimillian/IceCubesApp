@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "円形";
 "enum.avatar-shape.rounded" = "角丸";
 "enum.durations.infinite" = "無期限";
+"enum.durations.custom" = "custom";
 "enum.durations.fiveMinutes" = "5分間";
 "enum.durations.thirtyMinutes" = "30分間";
 "enum.durations.oneHour" = "1時間";
 "enum.durations.sixHours" = "6時間";
+"enum.durations.twelveHours" = "12時間";
 "enum.durations.oneDay" = "1日間";
 "enum.durations.threeDays" = "3日間";
 "enum.durations.sevenDays" = "7日間";
@@ -325,14 +327,6 @@
 "explore.section.users" = "ユーザー";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5分間";
-"env.poll-duration.30m" = "30分間";
-"env.poll-duration.1h" = "1時間";
-"env.poll-duration.6h" = "6時間";
-"env.poll-duration.12h" = "12時間";
-"env.poll-duration.1d" = "1日間";
-"env.poll-duration.3d" = "3日間";
-"env.poll-duration.7d" = "7日間";
 "env.poll-vote-frequency.one" = "単一投票";
 "env.poll-vote-frequency.multiple" = "複数投票可";
 
@@ -486,6 +480,9 @@
 "filter.edit.keywords.add" = "新しいキーワードを追加する";
 "filter.edit.contexts" = "フィルターする文章";
 "filter.edit.action" = "フィルターする";
+"filter.edit.expiry" = "Expiry";
+"filter.edit.expiry.date-time" = "Date/Time";
+"filter.edit.expiry.duration" = "Duration";
 "account.action.edit-filters" = "フィルターを編集する";
 "filter.contexts.home" = "ホームとリスト";
 "filter.contexts.notifications" = "通知";

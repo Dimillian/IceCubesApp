@@ -67,7 +67,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
 
   @Published var showPoll: Bool = false
   @Published var pollVotingFrequency = PollVotingFrequency.oneVote
-  @Published var pollDuration = PollDuration.oneDay
+  @Published var pollDuration = Duration.oneDay
   @Published var pollOptions: [String] = ["", ""]
 
   @Published var spoilerOn: Bool = false
