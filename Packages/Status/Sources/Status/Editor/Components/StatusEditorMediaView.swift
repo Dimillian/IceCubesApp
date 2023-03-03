@@ -105,7 +105,7 @@ struct StatusEditorMediaView: View {
 
   @ViewBuilder
   private func makeImageMenu(container: StatusEditorMediaContainer) -> some View {
-    if container.mediaAttachment != nil {
+    if container.mediaAttachment?.url != nil {
       if currentInstance.isEditAltTextSupported || !viewModel.mode.isEditing {
         Button {
           editingContainer = container
