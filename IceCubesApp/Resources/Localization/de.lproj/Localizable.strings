@@ -81,14 +81,14 @@
 "settings.display.restore" = "Standard wiederherstellen";
 "settings.display.section.display" = "Anzeigen";
 "settings.display.section.theme" = "Design";
-"settings.display.colors.apply" = "Apply custom colors";
+"settings.display.colors.apply" = "Eigene Farben anwenden";
 "settings.display.section.theme.footer" = "Eigene Farben können nur eingestellt werden, wenn die Systemeinstellung nicht verwendet wird.";
 "settings.display.status.action-buttons" = "Status Aktions-Buttons";
 "settings.display.status.media-style" = "Status Medien";
 "settings.display.translate-button" = "Übersetzen-Button anzeigen";
 "settings.display.theme.background" = "Hintergrundfarbe";
 "settings.display.theme.secondary-background" = "Sekundäre Hintergrundfarbe";
-"settings.display.theme.text-color" = "Text Color";
+"settings.display.theme.text-color" = "Textfarbe";
 "settings.display.theme.tint" = "Akzentfarbe";
 "settings.display.theme.systemColor" = "Systemeinstellung verwenden";
 "settings.general.browser" = "Browser";
