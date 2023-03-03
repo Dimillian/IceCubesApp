@@ -171,8 +171,8 @@
 
 "settings.general.swipeactions" = "Actions de balayage";
 "settings.swipeactions.navigation-title" = "Actions de balayage";
-"settings.swipeactions.primary" = "Primary Action";
-"settings.swipeactions.secondary" = "Secondary Action";
+"settings.swipeactions.primary" = "Action principale";
+"settings.swipeactions.secondary" = "Action secondaire";
 "settings.swipeactions.status.action.bookmark" = "Signet";
 "settings.swipeactions.status.action.boost" = "Boost";
 "settings.swipeactions.status.action.favorite" = "Favori";
@@ -191,7 +191,7 @@
 "settings.display.section.font" = "Police";
 
 "settings.section.cache" = "Cache";
-"settings.cache-media.clear" = "Clear Media Cache";
+"settings.cache-media.clear" = "Effacer le cache de médias";
 
 // MARK: Tabs
 "tab.explore" = "Explorer";
@@ -248,12 +248,12 @@
 "account.edit.post-settings.section-title" = "Paramètres des publications";
 "account.edit.post-settings.sensitive" = "Contenu sensible";
 
-"account.edit.metadata-section-title" = "Profile Metadata";
-"account.edit.metadata-name-placeholder" = "Label";
-"account.edit.metadata-value-placeholder" = "Content";
-"account.edit.add-metadata-button" = "Add a new metadata";
+"account.edit.metadata-section-title" = "Métadonnées du profil";
+"account.edit.metadata-name-placeholder" = "Libellé";
+"account.edit.metadata-value-placeholder" = "Contenu";
+"account.edit.add-metadata-button" = "Ajouter une nouvelle métadonnée";
 
-"account.favorited-by" = "Favorisé par";
+"account.favorited-by" = "Mis en favori par";
 "account.follow.follow" = "Suivre";
 "account.follow.following" = "Suivi";
 "account.follow.requested" = "Demandé";
@@ -283,7 +283,7 @@
 // MARK: Package: Conversations
 "conversations.action.delete" = "Supprimer";
 "conversations.action.mark-read" = "Marquer comme lu";
-"conversations.action.view-detail" = "View detail";
+"conversations.action.view-detail" = "Détail de la vue";
 "conversations.empty.message" = "Vous cherchez de l'amour sur les réseaux sociaux ? Vous trouverez tous vos messages directs et vos mentions privées ici. Bon messaging ! 📱❤️";
 "conversations.empty.title" = "Boîte de réception vide";
 "conversations.error.button" = "Réessayer";
@@ -373,10 +373,10 @@
 // MARK: Package: Status
 "status.action.translate" = "Traduire";
 "status.action.translated-label-%@" = "Traduit avec %@";
-"status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
+"status.action.translated-label-from-%@-%@" = "Traduit de %@ avec %@";
 "status.action.bookmark" = "Marquer";
 "status.action.boost" = "Promouvoir";
-"status.action.boost-to-followers" = "Boost to Followers";
+"status.action.boost-to-followers" = "Booster à vos Abonnés";
 "status.action.copy-text" = "Copier le texte";
 "status.action.copy-link" = "Copier le lien";
 "status.action.delete" = "Supprimer";
@@ -400,8 +400,8 @@
 "status.action.unfavorite" = "Retirer des favoris";
 "status.action.unpin" = "Dépingler";
 "status.action.view-in-browser" = "Afficher dans le navigateur";
-"status.card.share" = "Share this link";
-"status.card.copy" = "Copy this link";
+"status.card.share" = "Partager ce lien";
+"status.card.copy" = "Copier ce lien";
 "status.draft.delete" = "Supprimer le brouillon";
 "status.draft.save" = "Enregistrer le brouillon";
 "status.editor.ai-prompt.correct" = "Corriger le texte";
@@ -410,7 +410,7 @@
 "status.editor.description.add" = "Ajouter une description";
 "status.editor.description.edit" = "Modifier la description";
 "status.editor.drafts.navigation-title" = "Brouillons";
-"status.editor.emojis.navigation-title" = "Emojis personalisés";
+"status.editor.emojis.navigation-title" = "Emojis personnalisés";
 "status.editor.error.upload" = "Erreur de téléchargement";
 "status.editor.language-select.navigation-title" = "Sélectionner la langue";
 "status.editor.language-select.recently-used" = "Utilisé récemment";
