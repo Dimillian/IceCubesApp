@@ -24,8 +24,8 @@
 "enum.avatar-position.top" = "Na górze";
 "enum.avatar-shape.circle" = "Okrągły";
 "enum.avatar-shape.rounded" = "Zaokrąglony";
-"enum.durations.infinite" = "czas nieokreślony";
-"enum.durations.custom" = "custom";
+"enum.durations.infinite" = "nieokreślony";
+"enum.durations.custom" = "niestandardowy";
 "enum.durations.fiveMinutes" = "5 minut";
 "enum.durations.thirtyMinutes" = "30 minut";
 "enum.durations.oneHour" = "1 godzina";
@@ -81,14 +81,14 @@
 "settings.display.restore" = "Przywróć ustawienia domyślne";
 "settings.display.section.display" = "Ekran";
 "settings.display.section.theme" = "Motyw";
-"settings.display.colors.apply" = "Apply custom colors";
+"settings.display.colors.apply" = "Zastosuj kolory niestandardowe";
 "settings.display.section.theme.footer" = "Kolory niestandardowe można ustawić tylko wtedy, gdy wyłączona jest opcja dopasowania schematu kolorów systemu.";
 "settings.display.status.action-buttons" = "Przyciski akcji";
 "settings.display.status.media-style" = "Treści multimedialne";
 "settings.display.translate-button" = "Pokazuj przycisk tłumaczenia";
 "settings.display.theme.background" = "Kolor tła";
 "settings.display.theme.secondary-background" = "Dodatkowy kolor tła";
-"settings.display.theme.text-color" = "Text Color";
+"settings.display.theme.text-color" = "Kolor tekstu";
 "settings.display.theme.tint" = "Kolor wiodący";
 "settings.display.theme.systemColor" = "Zgodny z systemowym";
 "settings.general.browser" = "Przeglądarka";
@@ -286,7 +286,7 @@
 "account.relation.follows-you" = "Obserwuje ciebie";
 "account.joined" = "Dołączył(a)";
 "account.action.logout" = "Wyloguj się";
-"account.action.more" = "More Settings";
+"account.action.more" = "Więcej ustawień";
 
 "account.relation.note.edit" = "Edytuj notatkę";
 "account.relation.note.edit.placeholder" = "Wprowadź treść notatki";
@@ -475,9 +475,9 @@
 "filter.edit.keywords.add" = "Dodaj nowe słowo kluczowe";
 "filter.edit.contexts" = "Kontekst filtra";
 "filter.edit.action" = "Działanie filtra";
-"filter.edit.expiry" = "Expiry";
-"filter.edit.expiry.date-time" = "Date/Time";
-"filter.edit.expiry.duration" = "Duration";
+"filter.edit.expiry" = "Wygaśnięcie";
+"filter.edit.expiry.date-time" = "Data/czas";
+"filter.edit.expiry.duration" = "Czas trwania";
 "account.action.edit-filters" = "Edytuj filtry";
 "filter.contexts.home" = "Strona główna i listy";
 "filter.contexts.notifications" = "Powiadomienia";
