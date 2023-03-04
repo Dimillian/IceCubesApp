@@ -158,17 +158,20 @@ struct IceCubesApp: App {
     TabView(selection: .init(get: {
       selectedTab
     }, set: { newTab in
-      var transaction = Transaction()
-      transaction.disablesAnimations = true
-      withTransaction(transaction) {
-        if newTab == selectedTab {
-          /// Stupid hack to trigger onChange binding in tab views.
-          popToRootTab = .other
-          DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-            popToRootTab = selectedTab
-          }
+      if newTab == selectedTab {
+        /// Stupid hack to trigger onChange binding in tab views.
+        popToRootTab = .other
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+          popToRootTab = selectedTab
         }
-        selectedTab = newTab
+      }
+      
+      selectedTab = newTab
+      
+      DispatchQueue.main.async {
+        HapticManager.shared.fireHaptic(of: .tabSelection)
+        SoundEffectManager.shared.playSound(of: .tabSelection)
+        
         if selectedTab == .notifications,
            let token = appAccountsManager.currentAccount.oauthToken
         {
@@ -176,8 +179,7 @@ struct IceCubesApp: App {
           watcher.unreadNotificationsCount = 0
         }
       }
-      HapticManager.shared.fireHaptic(of: .tabSelection)
-      SoundEffectManager.shared.playSound(of: .tabSelection)
+      
     })) {
       ForEach(availableTabs) { tab in
         tab.makeContentView(popToRootTab: $popToRootTab)
