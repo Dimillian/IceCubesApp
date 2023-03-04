@@ -101,7 +101,8 @@ struct AccountDetailHeaderView: View {
             .resizable()
             .frame(width: 25, height: 25)
             .foregroundColor(theme.tintColor)
-            .offset(x: 10, y: -10)
+            .offset(x: theme.avatarShape == .circle ? 0 : 10,
+                    y: theme.avatarShape == .circle ? 0 : -10)
         }
       }
       Spacer()
