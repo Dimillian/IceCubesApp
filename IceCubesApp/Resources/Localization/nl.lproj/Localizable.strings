@@ -508,4 +508,4 @@
 "report.action.send" = "Verstuur";
 "status.action.report" = "Meld post";
 
-"tag.suggested.mentions-%@" = "%@ mentions";
+"tag.suggested.mentions-%@" = "%@ vermeldingen";
