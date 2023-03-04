@@ -74,6 +74,10 @@ struct AboutView: View {
         • [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible)
 
         • [OpenDyslexic](http://opendyslexic.org)
+
+        • [SwiftUI-Introspect](https://github.com/siteline/SwiftUI-Introspect)
+
+        • [RevenueCat](https://github.com/RevenueCat/purchases-ios)
         """)
         .padding(.horizontal, 25)
         .multilineTextAlignment(.leading)
