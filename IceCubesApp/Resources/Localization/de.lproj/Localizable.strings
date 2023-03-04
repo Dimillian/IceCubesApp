@@ -289,7 +289,7 @@
 "account.joined" = "Beigetreten am";
 "account.action.logout" = "Abmelden";
 "account.action.edit-filters" = "Filter bearbeiten";
-"account.action.more" = "More Settings";
+"account.action.more" = "Weitere Einstellungen";
 
 "account.relation.note.edit" = "Notiz bearbeiten";
 "account.relation.note.edit.placeholder" = "Gib den Notiztext ein";
