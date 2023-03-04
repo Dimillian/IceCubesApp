@@ -99,12 +99,14 @@ public struct AppAccountsSelectorView: View {
             if let image = viewModel.roundedAvatar {
               Image(uiImage: image)
             }
+
+            let checkmark = viewModel.account?.id == currentAccount.account?.id ? "✔ " : ""
             if let token = viewModel.appAccount.oauthToken,
                preferences.getNotificationsCount(for: token) > 0
             {
-              Text("\(viewModel.account?.displayName ?? "") (\(preferences.getNotificationsCount(for: token)))")
+              Text("\(checkmark)\(viewModel.account?.displayName ?? "") (\(preferences.getNotificationsCount(for: token)))")
             } else {
-              Text("\(viewModel.account?.displayName ?? "")")
+              Text("\(checkmark)\(viewModel.account?.displayName ?? "")")
             }
           }
         }
