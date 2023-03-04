@@ -37,7 +37,7 @@ struct StatusRowActionsView: View {
           if dataController.isReblogged {
             return Image("Rocket.Fill")
           } else {
-           return Image(systemName: "lock.rotation")
+            return Image(systemName: "lock.rotation")
           }
         }
         return Image(dataController.isReblogged ? "Rocket.Fill" : "Rocket")
@@ -121,7 +121,16 @@ struct StatusRowActionsView: View {
       Button {
         handleAction(action: action)
       } label: {
-        action.image(dataController: statusDataController, privateBoost: privateBoost())
+        if action == .boost {
+          action
+            .image(dataController: statusDataController, privateBoost: privateBoost())
+            .imageScale(.medium)
+            .font(.body)
+            .fontWeight(.black)
+        } else {
+          action
+            .image(dataController: statusDataController, privateBoost: privateBoost())
+        }
       }
       .buttonStyle(
         .statusAction(
