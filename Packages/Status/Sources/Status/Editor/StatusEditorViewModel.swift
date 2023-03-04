@@ -126,7 +126,9 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
   }
 
   private var mentionString: String?
+  
   private var uploadTask: Task<Void, Never>?
+  private var suggestedTask: Task<Void, Never>?
 
   init(mode: Mode) {
     self.mode = mode
@@ -433,7 +435,8 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
   private func loadAutoCompleteResults(query: String) {
     guard let client, query.utf8.count > 1 else { return }
     var query = query
-    Task {
+    suggestedTask?.cancel()
+    suggestedTask = Task {
       do {
         var results: SearchResults?
         switch query.first {
@@ -444,6 +447,9 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
                                                                  offset: 0,
                                                                  following: nil),
                                          forceVersion: .v2)
+          guard !Task.isCancelled else {
+            return
+          }
           withAnimation {
             tagsSuggestions = results?.hashtags.sorted(by: { $0.totalUses > $1.totalUses }) ?? []
           }
@@ -454,6 +460,9 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
                                                                  offset: 0,
                                                                  following: true),
                                          forceVersion: .v2)
+          guard !Task.isCancelled else {
+            return
+          }
           withAnimation {
             mentionsSuggestions = results?.accounts ?? []
           }
