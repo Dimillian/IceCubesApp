@@ -51,9 +51,14 @@ struct StatusEditorAutoCompleteView: View {
       Button {
         viewModel.selectHashtagSuggestion(tag: tag)
       } label: {
-        Text("#\(tag.name)")
-          .font(.scaledCaption)
-          .foregroundColor(theme.tintColor)
+        VStack(alignment: .leading) {
+          Text("#\(tag.name)")
+            .font(.scaledFootnote)
+            .foregroundColor(theme.tintColor)
+          Text("tag.suggested.mentions-\(String(tag.totalUses))")
+            .font(.scaledCaption)
+            .foregroundColor(.gray)
+        }
       }
     }
   }

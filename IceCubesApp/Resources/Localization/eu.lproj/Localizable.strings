@@ -500,3 +500,5 @@
 "report.title" = "Salaketa";
 "report.action.send" = "Bidali";
 "status.action.report" = "Salatu edukia";
+
+"tag.suggested.mentions-%@" = "%@ mentions";

@@ -510,3 +510,5 @@
 "report.title" = "投稿を報告";
 "report.action.send" = "送信";
 "status.action.report" = "投稿を報告";
+
+"tag.suggested.mentions-%@" = "%@ mentions";

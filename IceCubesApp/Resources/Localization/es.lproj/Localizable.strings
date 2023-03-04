@@ -511,3 +511,5 @@
 "report.title" = "Denunciar publicación";
 "report.action.send" = "Enviar";
 "status.action.report" = "Denunciar publicación";
+
+"tag.suggested.mentions-%@" = "%@ mentions";

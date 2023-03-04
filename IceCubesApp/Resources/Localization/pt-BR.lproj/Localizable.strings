@@ -510,3 +510,5 @@
 "report.title" = "Reportar Postagem";
 "report.action.send" = "Enviar";
 "status.action.report" = "Repostar Postagem";
+
+"tag.suggested.mentions-%@" = "%@ mentions";

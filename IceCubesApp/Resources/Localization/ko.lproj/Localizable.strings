@@ -512,3 +512,5 @@
 "report.title" = "신고";
 "report.action.send" = "제출";
 "status.action.report" = "글 신고";
+
+"tag.suggested.mentions-%@" = "%@ mentions";

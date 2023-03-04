@@ -445,7 +445,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
                                                                  following: nil),
                                          forceVersion: .v2)
           withAnimation {
-            tagsSuggestions = results?.hashtags ?? []
+            tagsSuggestions = results?.hashtags.sorted(by: { $0.totalUses > $1.totalUses }) ?? []
           }
         case "@":
           query.removeFirst()

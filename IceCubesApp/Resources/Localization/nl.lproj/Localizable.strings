@@ -507,3 +507,5 @@
 "report.title" = "Meld post";
 "report.action.send" = "Verstuur";
 "status.action.report" = "Meld post";
+
+"tag.suggested.mentions-%@" = "%@ mentions";

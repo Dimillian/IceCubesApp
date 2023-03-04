@@ -505,3 +505,5 @@
 "report.title" = "Beitrag melden";
 "report.action.send" = "Absenden";
 "status.action.report" = "Beitrag melden";
+
+"tag.suggested.mentions-%@" = "%@ mentions";

@@ -512,3 +512,5 @@
 "report.title" = "举报嘟文";
 "report.action.send" = "发送";
 "status.action.report" = "举报嘟文";
+
+"tag.suggested.mentions-%@" = "%@ mentions";
