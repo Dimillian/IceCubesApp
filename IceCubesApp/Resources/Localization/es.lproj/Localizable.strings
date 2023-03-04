@@ -131,7 +131,7 @@
 "settings.support.supporter.subscribed" = " ¡Gracias por ser seguidor de Ice Cubes!";
 "settings.support.supporter.subscription-info"= "La suscripción se renueva automáticamente a menos que la canceles un día antes del siguiente ciclo de renovación.";
 "settings.support.restore-purchase.button" = "Restore purchase";
-"settings.support.restore-purchase.explanation" = "Restore your supporter subscription if it's haven't been automatically synced.";
+"settings.support.restore-purchase.explanation" = "Restore your supporter subscription if it hasn't been synced automatically.";
 "settings.support.privacy-policy" = "Política de privacidad";
 "settings.support.terms-of-use" = "Condiciones de uso";
 "settings.timeline.add" = "Añadir cronología local";
