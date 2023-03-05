@@ -99,12 +99,16 @@ public struct AppAccountsSelectorView: View {
             if let image = viewModel.roundedAvatar {
               Image(uiImage: image)
             }
+
+            let name = viewModel.account.flatMap { account in
+                account.displayName?.isEmpty != false ? "@\(account.acct)" : account.displayName
+            } ?? ""
             if let token = viewModel.appAccount.oauthToken,
                preferences.getNotificationsCount(for: token) > 0
             {
-              Text("\(viewModel.account?.displayName ?? "") (\(preferences.getNotificationsCount(for: token)))")
+              Text("\(name) (\(preferences.getNotificationsCount(for: token)))")
             } else {
-              Text("\(viewModel.account?.displayName ?? "")")
+              Text("\(name)")
             }
           }
         }
