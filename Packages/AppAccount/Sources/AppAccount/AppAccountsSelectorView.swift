@@ -78,7 +78,7 @@ public struct AppAccountsSelectorView: View {
 
   @ViewBuilder
   private var menuView: some View {
-    ForEach(accountsViewModel, id: \.appAccount.id) { viewModel in
+    ForEach(accountsViewModel.sorted { $0.acct < $1.acct }, id: \.appAccount.id) { viewModel in
       Section(viewModel.acct) {
         Button {
           if let account = currentAccount.account,
