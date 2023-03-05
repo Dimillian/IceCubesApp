@@ -25,7 +25,7 @@
 "enum.avatar-shape.circle" = "圆形";
 "enum.avatar-shape.rounded" = "圆角";
 "enum.durations.infinite" = "永久";
-"enum.durations.custom" = "custom";
+"enum.durations.custom" = "自定义";
 "enum.durations.fiveMinutes" = "5 分钟";
 "enum.durations.thirtyMinutes" = "30 分钟";
 "enum.durations.oneHour" = "1 小时";
@@ -81,14 +81,14 @@
 "settings.display.restore" = "恢复默认设置";
 "settings.display.section.display" = "显示";
 "settings.display.section.theme" = "主题";
-"settings.display.colors.apply" = "Apply custom colors";
+"settings.display.colors.apply" = "应用自定义颜色";
 "settings.display.section.theme.footer" = "只有在“匹配系统”关闭时才能设置自定义颜色";
 "settings.display.status.action-buttons" = "导航栏样式";
 "settings.display.status.media-style" = "导航栏排列";
 "settings.display.translate-button" = "显示翻译按钮";
 "settings.display.theme.background" = "背景颜色";
 "settings.display.theme.secondary-background" = "二级背景颜色";
-"settings.display.theme.text-color" = "Text Color";
+"settings.display.theme.text-color" = "文本颜色";
 "settings.display.theme.tint" = "色调";
 "settings.display.theme.systemColor" = "匹配系统";
 "settings.general.browser" = "默认浏览器";
@@ -261,12 +261,12 @@
 "account.edit.post-settings.section-title" = "嘟文设置";
 "account.edit.post-settings.sensitive" = "敏感内容";
 
-"account.edit.metadata-section-title" = "Profile Metadata";
-"account.edit.metadata-name-placeholder" = "Label";
-"account.edit.metadata-value-placeholder" = "Content";
-"account.edit.add-metadata-button" = "Add a new metadata";
+"account.edit.metadata-section-title" = "附加信息";
+"account.edit.metadata-name-placeholder" = "标签";
+"account.edit.metadata-value-placeholder" = "内容";
+"account.edit.add-metadata-button" = "添加新附加信息";
 
-"account.favorited-by" = "同样喜欢的有";
+"account.favorited-by" = "喜欢";
 "account.follow.follow" = "关注";
 "account.follow.following" = "正在关注";
 "account.follow.requested" = "已申请";
@@ -287,7 +287,7 @@
 "account.joined" = "加入于";
 "account.action.logout" = "退出登录";
 "account.action.edit-filters" = "编辑过滤器";
-"account.action.more" = "More Settings";
+"account.action.more" = "更多设置";
 
 "account.relation.note.edit" = "编辑备注";
 "account.relation.note.edit.placeholder" = "输入备注文本";
@@ -464,7 +464,7 @@
 "status.row.you-boosted" = "你转发了";
 "status.show-less" = "显示更少";
 "status.show-more" = "显示更多";
-"status.show-full-post" = "Show full post";
+"status.show-full-post" = "显示全文";
 "status.summary.at-time" = " 在 ";
 "status.summary.edited-time" = "上次编辑：";
 "status.summary.n-boosts %lld" = "%lld 转发";
@@ -482,9 +482,9 @@
 "filter.edit.keywords.add" = "添加关键词";
 "filter.edit.contexts" = "过滤范围";
 "filter.edit.action" = "过滤器行为";
-"filter.edit.expiry" = "Expiry";
-"filter.edit.expiry.date-time" = "Date/Time";
-"filter.edit.expiry.duration" = "Duration";
+"filter.edit.expiry" = "结束时间";
+"filter.edit.expiry.date-time" = "日期/时间";
+"filter.edit.expiry.duration" = "持续时间";
 "filter.contexts.home" = "主页和列表";
 "filter.contexts.notifications" = "通知";
 "filter.contexts.public" = "公共时间线";
@@ -513,4 +513,4 @@
 "report.action.send" = "发送";
 "status.action.report" = "举报嘟文";
 
-"tag.suggested.mentions-%@" = "%@ mentions";
+"tag.suggested.mentions-%@" = "%@ 个提及";
