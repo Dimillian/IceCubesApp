@@ -83,7 +83,7 @@ public class ReblogCache {
               // just a quick check to makes sure that this wasn't boosted by the current
               // user.  Hiding that would be confusing
               // But assuming it isn't then we can suppress this boost
-              print("suppressing: \(reblog.id)/ \(reblog.account.displayName) by \(status.account.displayName)")
+              print("suppressing: \(reblog.id)/ \(String(describing: reblog.account.displayName)) by \(String(describing: status.account.displayName))")
               statuses.remove(at: i)
               // assert(statuses.count == (ct-1))
             }
