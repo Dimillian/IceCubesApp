@@ -25,7 +25,7 @@
 "enum.avatar-shape.circle" = "Biribila";
 "enum.avatar-shape.rounded" = "Biribildutako ertzak";
 "enum.durations.infinite" = "Betiko";
-"enum.durations.custom" = "custom";
+"enum.durations.custom" = "neuk zehaztuko dut";
 "enum.durations.fiveMinutes" = "5 minutuz";
 "enum.durations.thirtyMinutes" = "30 minutuz";
 "enum.durations.oneHour" = "Ordubetez";
@@ -348,7 +348,7 @@
 "notifications.error.title" = "Errorea gertatu da";
 "notifications.label.poll" = "(r)en bozketa amaitu da";
 "notifications.label.follow-request" = "(e)k jarraitzeko eskaera egin dizu";
-"notifications.label.status" = "(e)k bidalketa egin du";
+"notifications.label.status" = "(e)k argitaratu du";
 "notifications.label.update" = "(e)k bidalketa editatu du";
 "notifications.menu-title.favorite" = "Gogokoak";
 "notifications.menu-title.follow" = "Jarraipenak";
@@ -428,7 +428,7 @@
 "status.editor.mode.edit" = "Bidalketa editatzen";
 "status.editor.mode.new" = "Bidalketa berria";
 "status.editor.mode.quote-%@" = "%@(r)en aipamena";
-"status.editor.mode.reply-%@" = "%@(e)ri erantzunez";
+"status.editor.mode.reply-%@" = "%@(r)i erantzunez";
 "status.editor.restore-previous" = "Berreskuratu lehengo testua";
 "status.editor.spoiler" = "Edukiari buruzko oharra";
 "status.editor.text.placeholder" = "Zer duzu buruan?";
@@ -482,7 +482,7 @@
 "filter.contexts.public" = "Denbora-lerro lokalak";
 "filter.contexts.conversations" = "Elkarrizketak";
 "filter.contexts.profiles" = "Profilak";
-"filter.action.warning" = "Ezkutatu oharpen batekin";
+"filter.action.warning" = "Ezkutatu ohartarazpen batekin";
 "filter.action.hide" = "Ezkutatu guztiz";
 
 // MARK: Accessibility
@@ -501,4 +501,4 @@
 "report.action.send" = "Bidali";
 "status.action.report" = "Salatu edukia";
 
-"tag.suggested.mentions-%@" = "%@ mentions";
+"tag.suggested.mentions-%@" = "%@ aipamenak";
