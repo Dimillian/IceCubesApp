@@ -77,7 +77,7 @@
 "settings.display.font" = "時間軸字體";
 "settings.display.font.system" = "系統";
 "settings.display.font.custom" = "自定";
-"settings.display.font.scaling-%@" = "字體縮放: %@";
+"settings.display.font.scaling-%@" = "字體縮放：%@";
 "settings.display.avatar.position" = "頭像位置";
 "settings.display.avatar.shape" = "頭像形狀";
 "settings.display.full-username" = "顯示用戶全名";
@@ -134,7 +134,7 @@
 "enum.expand-media.hide-sensitive" = "隱藏敏感題材";
 "settings.section.accounts" = "帳號";
 "settings.section.app" = "App";
-"settings.section.app.footer %@" = "App 版本: %@";
+"settings.section.app.footer %@" = "App 版本：%@";
 "settings.section.general" = "一般";
 "settings.support.alert.error.message" = "選購時發生錯誤，請再試一次。";
 "settings.support.alert.message" = "非常感謝您的捐贈！";
@@ -172,7 +172,7 @@
 "settings.about.built-with" = "Ice Cubes 運用下列開源碼：";
 "settings.about.title" = "Ice Cubes";
 
-"settings.account.cached-posts-%@" = "快取嘟文: %@";
+"settings.account.cached-posts-%@" = "快取嘟文：%@";
 "settings.account.action.delete-cache" = "清除快取";
 
 "settings.general.haptic" = "觸覺回饋";
@@ -269,7 +269,7 @@
 "account.edit.metadata-value-placeholder" = "內容";
 "account.edit.add-metadata-button" = "新增元資料";
 
-"account.favorited-by" = "被加入最愛";
+"account.favorited-by" = "加入最愛";
 "account.follow.follow" = "跟隨";
 "account.follow.following" = "已跟隨";
 "account.follow.requested" = "已申請";
@@ -454,7 +454,7 @@
 "status.media.sensitive.show" = "顯示敏感內容";
 "status.poll.n-votes %lld" = "%lld 票";
 "status.poll.n-votes-voters %lld %lld" = "%lld 票，%lld 位投票者";
-"status.poll.closed" = "關閉";
+"status.poll.closed" = "已關閉";
 "status.poll.closes-in" = "關閉於 ";
 "status.poll.duration" = "投票時限";
 "status.poll.frequency" = "投票頻率";
@@ -471,7 +471,7 @@
 "status.summary.edited-time" = "上次編輯：";
 "status.summary.n-boosts %lld" = "%lld 轉嘟";
 "status.summary.n-favorites %lld" = "%lld 最愛";
-"status.visibility.direct" = "私密";
+"status.visibility.direct" = "私訊";
 "status.visibility.follower" = "跟隨者";
 "status.visibility.public" = "所有人";
 "status.visibility.unlisted" = "不公開";

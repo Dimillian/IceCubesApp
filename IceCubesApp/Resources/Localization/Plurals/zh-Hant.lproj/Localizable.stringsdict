@@ -13,9 +13,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string>%lld new post</string>
+			<string>一篇新嘟文</string>
 			<key>other</key>
-			<string>%lld new posts</string>
+			<string>%lld 篇新嘟文</string>
 		</dict>
 	</dict>
 	<key>notifications-others-count %lld</key>
@@ -29,9 +29,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string> and %lld other </string>
+			<string>和另一位用戶</string>
 			<key>other</key>
-			<string> and %lld others </string>
+			<string>和另 %lld 位用戶</string>
 		</dict>
 	</dict>
 </dict>
