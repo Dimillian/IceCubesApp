@@ -512,4 +512,4 @@
 "report.action.send" = "送出";
 "status.action.report" = "檢舉嘟文";
 
-"tag.suggested.mentions-%@" = "%@ 提及";
+"tag.suggested.mentions-%lld" = "%lld 提及";

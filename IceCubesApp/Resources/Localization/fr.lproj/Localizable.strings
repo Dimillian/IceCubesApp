@@ -507,4 +507,4 @@
 "report.action.send" = "Envoyer";
 "status.action.report" = "Signaler la publication";
 
-"tag.suggested.mentions-%@" = "%@ mentions";
+"tag.suggested.mentions-%lld" = "%lld mentions";

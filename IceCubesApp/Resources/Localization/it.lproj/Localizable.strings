@@ -512,4 +512,4 @@
 "report.action.send" = "Invia";
 "status.action.report" = "Segnala il messaggio";
 
-"tag.suggested.mentions-%@" = "%@ mentions";
+"tag.suggested.mentions-%lld" = "%lld mentions";

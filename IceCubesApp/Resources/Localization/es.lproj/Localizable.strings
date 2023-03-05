@@ -512,4 +512,4 @@
 "report.action.send" = "Enviar";
 "status.action.report" = "Denunciar publicación";
 
-"tag.suggested.mentions-%@" = "%@ mentions";
+"tag.suggested.mentions-%lld" = "%lld mentions";

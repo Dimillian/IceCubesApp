@@ -511,4 +511,4 @@
 "report.action.send" = "Enviar";
 "status.action.report" = "Repostar Postagem";
 
-"tag.suggested.mentions-%@" = "%@ mentions";
+"tag.suggested.mentions-%lld" = "%lld mentions";

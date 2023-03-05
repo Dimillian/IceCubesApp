@@ -503,4 +503,4 @@
 "report.action.send" = "Wyślij";
 "status.action.report" = "Zgłoś post";
 
-"tag.suggested.mentions-%@" = "%@ mentions";
+"tag.suggested.mentions-%lld" = "%lld mentions";

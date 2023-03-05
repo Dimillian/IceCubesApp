@@ -513,4 +513,4 @@
 "report.action.send" = "Send";
 "status.action.report" = "Report Post";
 
-"tag.suggested.mentions-%@" = "%@ mentions";
+"tag.suggested.mentions-%lld" = "%lld mentions";
