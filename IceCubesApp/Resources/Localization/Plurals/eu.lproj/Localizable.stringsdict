@@ -35,37 +35,37 @@
 		</dict>
 	</dict>
     <key>timeline-new-posts %lld</key>
-    <dict>
-        <key>NSStringLocalizedFormatKey</key>
-        <string>%#@timelineNewPosts@</string>
-        <key>timelineNewPosts</key>
-        <dict>
-            <key>NSStringFormatSpecTypeKey</key>
-            <string>NSStringPluralRuleType</string>
-            <key>NSStringFormatValueTypeKey</key>
-            <string>lld</string>
-            <key>one</key>
-            <string>Bidalketa berri %lld</string>
-            <key>other</key>
-            <string>%lld bidalketa berri</string>
-        </dict>
-    </dict>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@timelineNewPosts@</string>
+		<key>timelineNewPosts</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Bidalketa berri %lld</string>
+			<key>other</key>
+			<string>%lld bidalketa berri</string>
+		</dict>
+	</dict>
     <key>notifications-others-count %lld</key>
-    <dict>
-        <key>NSStringLocalizedFormatKey</key>
-        <string>%#@noficationsOthersCount@</string>
-        <key>noficationsOthersCount</key>
-        <dict>
-            <key>NSStringFormatSpecTypeKey</key>
-            <string>NSStringPluralRuleType</string>
-            <key>NSStringFormatValueTypeKey</key>
-            <string>lld</string>
-            <key>one</key>
-            <string> eta beste bat </string>
-            <key>other</key>
-            <string> eta beste </string>
-        </dict>
-    </dict>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@noficationsOthersCount@</string>
+		<key>noficationsOthersCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string> eta beste bat</string>
+			<key>other</key>
+			<string> eta beste %lld</string>
+		</dict>
+	</dict>
     <key>notifications.label.favorite %lld</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -79,7 +79,7 @@
 			<key>one</key>
 			<string>(e)k gogoko egin du</string>
 			<key>other</key>
-			<string>%lld(e)k gogoko egin dute</string>
+			<string>(e)k gogoko egin dute</string>
 		</dict>
 	</dict>
     <key>notifications.label.follow %lld</key>
@@ -95,7 +95,7 @@
 			<key>one</key>
 			<string>(e)k jarraitzen dizu</string>
 			<key>other</key>
-			<string>%lld(e)k jarraitzen dizute</string>
+			<string>(e)k jarraitzen dizute</string>
 		</dict>
 	</dict>
     <key>notifications.label.mention %lld</key>
@@ -111,7 +111,7 @@
 			<key>one</key>
 			<string>(e)k aipatu zaitu</string>
 			<key>other</key>
-			<string>%lld(e)k aipatu zaituzte</string>
+			<string>(e)k aipatu zaituzte</string>
 		</dict>
 	</dict>
     <key>notifications.label.reblog %lld</key>
@@ -127,7 +127,7 @@
 			<key>one</key>
 			<string>(e)k bultzatu du</string>
 			<key>other</key>
-			<string>%lld(e)k bultzatu dute</string>
+			<string>(e)k bultzatu dute</string>
 		</dict>
 	</dict>
     <key>status.summary.n-favorites %lld</key>
