@@ -24,7 +24,8 @@ struct ConversationsListRow: View {
                          emojis: conversation.accounts.flatMap { $0.emojis })
               .font(.scaledSubheadline)
               .foregroundColor(theme.labelColor)
-              .emojiSize(Font.scaledSubheadlinePointSize)
+              .emojiSize(Font.scaledSubheadlineFont.emojiSize)
+              .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
               .fontWeight(.semibold)
               .foregroundColor(theme.labelColor)
               .multilineTextAlignment(.leading)
@@ -43,7 +44,8 @@ struct ConversationsListRow: View {
             .multilineTextAlignment(.leading)
             .font(.scaledBody)
             .foregroundColor(theme.labelColor)
-            .emojiSize(Font.scaledBodyPointSize)
+            .emojiSize(Font.scaledBodyFont.emojiSize)
+            .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
         }
         Spacer()
       }

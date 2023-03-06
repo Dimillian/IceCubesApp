@@ -26,7 +26,8 @@ public struct StatusEditHistoryView: View {
               VStack(alignment: .leading, spacing: 8) {
                 EmojiTextApp(edit.content, emojis: edit.emojis)
                   .font(.scaledBody)
-                  .emojiSize(Font.scaledBodyPointSize)
+                  .emojiSize(Font.scaledBodyFont.emojiSize)
+                  .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
                 Group {
                   Text(edit.createdAt.asDate, style: .date) +
                     Text("status.summary.at-time") +

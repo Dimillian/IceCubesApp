@@ -61,7 +61,8 @@ public struct AppAccountView: View {
           EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
           Text("\(account.username)@\(viewModel.appAccount.server)")
             .font(.scaledSubheadline)
-            .emojiSize(Font.scaledSubheadlinePointSize)
+            .emojiSize(Font.scaledSubheadlineFont.emojiSize)
+            .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
             .foregroundColor(.gray)
         }
       }
