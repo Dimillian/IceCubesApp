@@ -34,7 +34,8 @@ struct StatusEditorAutoCompleteView: View {
           VStack(alignment: .leading) {
             EmojiTextApp(.init(stringValue: account.safeDisplayName),
                          emojis: account.emojis)
-              .emojiSize(Font.scaledFootnotePointSize)
+              .emojiSize(Font.scaledFootnoteFont.emojiSize)
+              .emojiBaselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
               .font(.scaledFootnote)
               .foregroundColor(theme.labelColor)
             Text("@\(account.acct)")

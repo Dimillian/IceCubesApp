@@ -33,7 +33,8 @@ public struct ListEditView: View {
                 VStack(alignment: .leading) {
                   EmojiTextApp(.init(stringValue: account.safeDisplayName),
                                emojis: account.emojis)
-                    .emojiSize(Font.scaledBodyPointSize)
+                    .emojiSize(Font.scaledBodyFont.emojiSize)
+                    .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
                   Text("@\(account.acct)")
                     .foregroundColor(.gray)
                     .font(.scaledFootnote)

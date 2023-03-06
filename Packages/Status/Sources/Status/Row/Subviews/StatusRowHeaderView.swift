@@ -40,7 +40,8 @@ struct StatusRowHeaderView: View {
                          emojis: viewModel.finalStatus.account.emojis)
               .font(.scaledSubheadline)
               .foregroundColor(theme.labelColor)
-              .emojiSize(Font.scaledSubheadlinePointSize)
+              .emojiSize(Font.scaledSubheadlineFont.emojiSize)
+              .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
               .fontWeight(.semibold)
               .lineLimit(1)
             accountBadgeView

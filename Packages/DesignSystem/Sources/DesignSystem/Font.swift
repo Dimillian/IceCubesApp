@@ -44,17 +44,17 @@ public extension Font {
   static var scaledHeadline: Font {
     customFont(size: userScaledFontSize(baseSize: headline), relativeTo: .headline).weight(.semibold)
   }
-
-  static var scaledHeadlinePointSize: CGFloat {
-    customUIFont(size: userScaledFontSize(baseSize: headline)).pointSize
+    
+  static var scaledHeadlineFont: UIFont {
+    customUIFont(size: userScaledFontSize(baseSize: headline))
   }
 
   static var scaledBody: Font {
     customFont(size: userScaledFontSize(baseSize: body), relativeTo: .body)
   }
 
-  static var scaledBodyPointSize: CGFloat {
-    customUIFont(size: userScaledFontSize(baseSize: body)).pointSize
+  static var scaledBodyFont: UIFont {
+    customUIFont(size: userScaledFontSize(baseSize: body))
   }
 
   static var scaledBodyUIFont: UIFont {
@@ -65,32 +65,32 @@ public extension Font {
     customFont(size: userScaledFontSize(baseSize: callout), relativeTo: .callout)
   }
 
-  static var scaledCalloutPointSize: CGFloat {
-    customUIFont(size: userScaledFontSize(baseSize: body)).pointSize
+  static var scaledCalloutFont: UIFont {
+    customUIFont(size: userScaledFontSize(baseSize: body))
   }
 
   static var scaledSubheadline: Font {
     customFont(size: userScaledFontSize(baseSize: subheadline), relativeTo: .subheadline)
   }
 
-  static var scaledSubheadlinePointSize: CGFloat {
-    customUIFont(size: userScaledFontSize(baseSize: subheadline)).pointSize
+  static var scaledSubheadlineFont: UIFont {
+    customUIFont(size: userScaledFontSize(baseSize: subheadline))
   }
 
   static var scaledFootnote: Font {
     customFont(size: userScaledFontSize(baseSize: footnote), relativeTo: .footnote)
   }
 
-  static var scaledFootnotePointSize: CGFloat {
-    customUIFont(size: userScaledFontSize(baseSize: footnote)).pointSize
+  static var scaledFootnoteFont: UIFont {
+    customUIFont(size: userScaledFontSize(baseSize: footnote))
   }
 
   static var scaledCaption: Font {
     customFont(size: userScaledFontSize(baseSize: caption), relativeTo: .caption)
   }
 
-  static var scaledCaptionPointSize: CGFloat {
-    customUIFont(size: userScaledFontSize(baseSize: caption)).pointSize
+  static var scaledCaptionFont: UIFont {
+    customUIFont(size: userScaledFontSize(baseSize: caption))
   }
 }
 
@@ -100,5 +100,12 @@ public extension UIFont {
       return self
     }
     return UIFont(descriptor: descriptor, size: pointSize)
+  }
+  var emojiSize: CGFloat {
+    self.pointSize
+  }
+  var emojiBaselineOffset: CGFloat {
+    // Center emoji with capital letter size of font
+    -(self.emojiSize - self.capHeight) / 2
   }
 }

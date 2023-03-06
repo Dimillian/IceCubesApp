@@ -34,7 +34,8 @@ struct ConversationMessageView: View {
           EmojiTextApp(message.content, emojis: message.emojis)
             .font(.scaledBody)
             .foregroundColor(theme.labelColor)
-            .emojiSize(Font.scaledBodyPointSize)
+            .emojiSize(Font.scaledBodyFont.emojiSize)
+            .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
             .padding(6)
             .environment(\.openURL, OpenURLAction { url in
               routerPath.handleStatus(status: message, url: url)

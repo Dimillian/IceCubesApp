@@ -19,7 +19,8 @@ struct StatusRowReblogView: View {
           + Text("status.row.was-boosted")
       )
       .font(.scaledFootnote)
-      .emojiSize(Font.scaledFootnotePointSize)
+      .emojiSize(Font.scaledFootnoteFont.emojiSize)
+      .emojiBaselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
       .foregroundColor(.gray)
       .fontWeight(.semibold)
       .onTapGesture {
