@@ -77,9 +77,15 @@ public struct StatusPollView: View {
             .disabled(viewModel.poll.expired || (viewModel.poll.voted ?? false))
           if viewModel.showResults || status.account.id == currentAccount.account?.id {
             Spacer()
-            Text("\(percentForOption(option: option))%")
-              .font(.scaledSubheadline)
-              .frame(width: 40)
+            // Make sure they're all the same width using a ZStack with 100% hiding behind the
+            // real percentage.
+            ZStack(alignment: .trailing) {
+              Text("100%")
+                .hidden()
+
+              Text("\(percentForOption(option: option))%")
+                .font(.scaledSubheadline)
+            }
           }
         }
       }
