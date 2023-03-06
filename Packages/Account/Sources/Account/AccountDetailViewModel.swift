@@ -129,7 +129,12 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
 
   private func fetchAccountData(accountId: String, client: Client) async throws -> AccountData {
     async let account: Account = client.get(endpoint: Accounts.accounts(id: accountId))
-    async let featuredTags: [FeaturedTag] = client.get(endpoint: Accounts.featuredTags(id: accountId))
+    let featuredTags: [FeaturedTag]
+    do {
+      featuredTags = try await client.get(endpoint: Accounts.featuredTags(id: accountId))
+    } catch {
+      featuredTags = []
+    }
     if client.isAuth && !isCurrentUser {
       async let relationships: [Relationship] = client.get(endpoint: Accounts.relationships(ids: [accountId]))
       return try await .init(account: account,
