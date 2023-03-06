@@ -516,5 +516,5 @@
 "report.action.send" = "Адправіць";
 "status.action.report" = "Паскардзіцца";
 
-"tag.suggested.mentions-%@" = "%@ mentions";
+"tag.suggested.mentions-%lld" = "%lld mentions";
 

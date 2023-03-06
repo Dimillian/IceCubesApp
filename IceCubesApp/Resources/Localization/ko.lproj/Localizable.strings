@@ -513,4 +513,4 @@
 "report.action.send" = "제출";
 "status.action.report" = "글 신고";
 
-"tag.suggested.mentions-%@" = "%@개 글";
+"tag.suggested.mentions-%lld" = "%lld개 글";

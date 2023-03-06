@@ -55,7 +55,7 @@ struct StatusEditorAutoCompleteView: View {
           Text("#\(tag.name)")
             .font(.scaledFootnote)
             .foregroundColor(theme.tintColor)
-          Text("tag.suggested.mentions-\(String(tag.totalUses))")
+          Text("tag.suggested.mentions-\(tag.totalUses)")
             .font(.scaledCaption)
             .foregroundColor(.gray)
         }

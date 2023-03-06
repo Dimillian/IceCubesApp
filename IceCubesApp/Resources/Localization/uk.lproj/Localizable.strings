@@ -512,5 +512,5 @@
 "report.action.send" = "Надіслати";
 "status.action.report" = "Поскаржитися на допис";
 
-"tag.suggested.mentions-%@" = "%@ mentions";
+"tag.suggested.mentions-%lld" = "%lld mentions";
 
