@@ -15,7 +15,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
   var currentAccount: Account?
   var theme: Theme?
   var preferences: UserPreferences?
-  var languageConfirmationDialogLanguages: [String: String]?
+  var languageConfirmationDialogLanguages: (detected: String, selected: String)?
 
   var textView: UITextView? {
     didSet {
@@ -151,8 +151,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
        selectedLanguage != "",
        selectedLanguage != detectedLang
     {
-      languageConfirmationDialogLanguages = ["detected": detectedLang,
-                                             "selected": selectedLanguage]
+      languageConfirmationDialogLanguages = (detected: detectedLang, selected: selectedLanguage)
     } else {
       languageConfirmationDialogLanguages = nil
     }
