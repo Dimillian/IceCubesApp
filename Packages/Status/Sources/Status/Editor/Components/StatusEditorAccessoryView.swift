@@ -9,6 +9,7 @@ struct StatusEditorAccessoryView: View {
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var currentInstance: CurrentInstance
+  @Environment(\.colorScheme) private var colorScheme
 
   @FocusState<Bool>.Binding var isSpoilerTextFocused: Bool
   @ObservedObject var viewModel: StatusEditorViewModel
@@ -30,7 +31,7 @@ struct StatusEditorAccessoryView: View {
               if viewModel.isMediasLoading {
                 ProgressView()
               } else {
-                Image(systemName: "photo.fill.on.rectangle.fill")
+                Image(systemName: "photo.on.rectangle.angled")
               }
             }
             .accessibilityLabel("accessibility.editor.button.attach-photo")
@@ -70,7 +71,10 @@ struct StatusEditorAccessoryView: View {
               Button {
                 isCustomEmojisSheetDisplay = true
               } label: {
-                Image(systemName: "face.smiling.inverse")
+                // This is a workaround for an apparent bug in the `face.smiling` SF Symbol.
+                // See https://github.com/Dimillian/IceCubesApp/issues/1193
+                let customEmojiSheetIconName = colorScheme == .light ? "face.smiling" : "face.smiling.inverse"
+                Image(systemName: customEmojiSheetIconName)
               }
               .accessibilityLabel("accessibility.editor.button.custom-emojis")
             }
