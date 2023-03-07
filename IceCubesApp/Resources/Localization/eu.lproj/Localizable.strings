@@ -25,7 +25,7 @@
 "enum.avatar-shape.circle" = "Biribila";
 "enum.avatar-shape.rounded" = "Biribildutako ertzak";
 "enum.durations.infinite" = "Betiko";
-"enum.durations.custom" = "neuk zehaztuko dut";
+"enum.durations.custom" = "Neuk zehaztuko dut";
 "enum.durations.fiveMinutes" = "5 minutuz";
 "enum.durations.thirtyMinutes" = "30 minutuz";
 "enum.durations.oneHour" = "Ordubetez";
@@ -92,9 +92,9 @@
 "settings.display.theme.tint" = "Tonua";
 "settings.display.theme.systemColor" = "Sistemak darabilena";
 "settings.general.browser" = "Nabigatzailea";
-"settings.general.browser.in-app" = "Barneko nabigatzailea";
+"settings.general.browser.in-app" = "Barnekoa";
 "settings.general.browser.in-app.readerview" = "Barneko nabigatzailearen irakurketa bista";
-"settings.general.browser.system" = "Sistemaren nabigatzailea";
+"settings.general.browser.system" = "Sistemarena";
 "settings.general.display" = "Pantaila ezarpenak";
 "settings.general.instance" = "Instantziaren informazioa";
 "settings.general.push-notifications" = "Push jakinarazpenak";
@@ -500,5 +500,3 @@
 "report.title" = "Salaketa";
 "report.action.send" = "Bidali";
 "status.action.report" = "Salatu edukia";
-
-"tag.suggested.mentions-%@" = "%lld aipamenak";
