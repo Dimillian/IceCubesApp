@@ -61,7 +61,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string> eta beste bat</string>
+			<string> eta beste batek </string>
 			<key>other</key>
 			<string> eta beste %lld</string>
 		</dict>
@@ -77,7 +77,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string>(e)k gogoko egin du</string>
+			<string>gogoko egin du</string>
 			<key>other</key>
 			<string>(e)k gogoko egin dute</string>
 		</dict>
@@ -93,7 +93,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string>(e)k jarraitzen dizu</string>
+			<string>jarraitzen dizu</string>
 			<key>other</key>
 			<string>(e)k jarraitzen dizute</string>
 		</dict>
@@ -109,7 +109,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string>(e)k aipatu zaitu</string>
+			<string>aipatu zaitu</string>
 			<key>other</key>
 			<string>(e)k aipatu zaituzte</string>
 		</dict>
@@ -125,7 +125,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string>(e)k bultzatu du</string>
+			<string>bultzatu du</string>
 			<key>other</key>
 			<string>(e)k bultzatu dute</string>
 		</dict>
@@ -257,6 +257,22 @@
 			<string>Boto-emaile baten</string>
 			<key>other</key>
 			<string>%lld boto-emaileren</string>
+		</dict>
+	</dict>
+    <key>tag.suggested.mentions-%lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@mentionsCount@</string>
+		<key>mentionsCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>aipamen %lld</string>
+			<key>other</key>
+			<string>%lld aipamen</string>
 		</dict>
 	</dict>
 </dict>
