@@ -149,7 +149,7 @@ public struct StatusRowMediaPreviewView: View {
 
   @ViewBuilder
   private func makeFeaturedImagePreview(attachment: MediaAttachment) -> some View {
-    ZStack(alignment: .bottomTrailing) {
+    ZStack(alignment: .bottomLeading) {
       let size: CGSize = size(for: attachment) ?? .init(width: imageMaxHeight, height: imageMaxHeight)
       let newSize = imageSize(from: size, newWidth: availableWidth - appLayoutWidth)
       switch attachment.supportedType {
