@@ -35,8 +35,11 @@ public struct StatusRowView: View {
         }
       } else {
         if !isCompact, theme.avatarPosition == .leading {
-          StatusRowReblogView(viewModel: viewModel)
-          StatusRowReplyView(viewModel: viewModel)
+          Group {
+            StatusRowReblogView(viewModel: viewModel)
+            StatusRowReplyView(viewModel: viewModel)
+          }
+          .padding(.leading, AvatarView.Size.status.size.width + .statusColumnsSpacing)
         }
         HStack(alignment: .top, spacing: .statusColumnsSpacing) {
           if !isCompact,
