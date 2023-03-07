@@ -67,6 +67,7 @@ struct EditFilterView: View {
     .navigationTitle(filter?.title ?? NSLocalizedString("filter.new", comment: ""))
     .navigationBarTitleDisplayMode(.inline)
     .scrollContentBackground(.hidden)
+    .scrollDismissesKeyboard(.interactively)
     .background(theme.secondaryBackgroundColor)
     .onAppear {
       if filter == nil {
@@ -103,6 +104,7 @@ struct EditFilterView: View {
     .listRowBackground(theme.primaryBackgroundColor)
   }
   
+  @ViewBuilder
   private var titleSection: some View {
     Section("filter.edit.title") {
       TextField("filter.edit.title", text: $title)
@@ -114,6 +116,27 @@ struct EditFilterView: View {
         }
     }
     .listRowBackground(theme.primaryBackgroundColor)
+    
+    if filter == nil, !title.isEmpty {
+      Section {
+        Button {
+          Task {
+            await saveFilter()
+          }
+        } label: {
+          if isSavingFilter {
+            ProgressView()
+              .frame(maxWidth: .infinity)
+          } else {
+            Text("action.save")
+              .frame(maxWidth: .infinity)
+          }
+        }
+        .buttonStyle(.borderedProminent)
+        .transition(.opacity)
+      }
+      .listRowBackground(theme.secondaryBackgroundColor)
+    }
   }
 
   private var keywordsSection: some View {
@@ -140,13 +163,29 @@ struct EditFilterView: View {
           }
         }
       }
-      TextField("filter.edit.keywords.add", text: $newKeyword, axis: .horizontal)
-        .onSubmit {
-          Task {
-            await addKeyword(name: newKeyword)
-            newKeyword = ""
+      HStack {
+        TextField("filter.edit.keywords.add", text: $newKeyword, axis: .horizontal)
+          .onSubmit {
+            Task {
+              await addKeyword(name: newKeyword)
+              newKeyword = ""
+            }
+          }
+        Spacer()
+        if !newKeyword.isEmpty {
+          Button {
+            Task {
+              Task {
+                await addKeyword(name: newKeyword)
+                newKeyword = ""
+              }
+            }
+          } label: {
+            Image(systemName: "checkmark.circle.fill")
+              .tint(.green)
           }
         }
+      }
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
