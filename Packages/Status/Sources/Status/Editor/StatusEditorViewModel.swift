@@ -12,7 +12,14 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
   var mode: Mode
 
   var client: Client?
-  var currentAccount: Account?
+  var currentAccount: Account? {
+    didSet {
+      if let itemsProvider {
+        mediasImages = []
+        processItemsProvider(items: itemsProvider)
+      }
+    }
+  }
   var theme: Theme?
   var preferences: UserPreferences?
   var languageConfirmationDialogLanguages: (detected: String, selected: String)?
@@ -62,6 +69,8 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
   var statusTextCharacterLength: Int {
     urlLengthAdjustments - statusText.string.utf16.count - spoilerTextCount
   }
+  
+  private var itemsProvider: [NSItemProvider]?
 
   @Published var backupStatusText: NSAttributedString?
 
@@ -227,6 +236,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
     case let .new(visibility):
       self.visibility = visibility
     case let .shareExtension(items):
+      itemsProvider = items
       visibility = .pub
       processItemsProvider(items: items)
     case let .replyTo(status):
