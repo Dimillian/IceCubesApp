@@ -175,6 +175,7 @@
 "settings.account.action.delete-cache" = "Effacer le cache";
 
 "settings.general.haptic" = "Retour vibrations";
+"settings.general.action-feedback" = "Action Feedback";
 "settings.haptic.navigation-title" = "Réglages vibrations";
 "settings.haptic.timeline" = "Chronologie";
 "settings.haptic.tab-selection" = "Sélection d'onglet";

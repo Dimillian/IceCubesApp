@@ -10,14 +10,24 @@ struct HapticSettingsView: View {
 
   var body: some View {
     Form {
+      if true {
+        Section {
+          Toggle("settings.haptic.timeline", isOn: $userPreferences.hapticTimelineEnabled)
+          Toggle("settings.haptic.tab-selection", isOn: $userPreferences.hapticTabSelectionEnabled)
+          Toggle("settings.haptic.buttons", isOn: $userPreferences.hapticButtonPressEnabled)
+        } header: {
+          Text("Haptic Feedback")
+        }
+        .listRowBackground(theme.primaryBackgroundColor)
+      }
       Section {
-        Toggle("settings.haptic.timeline", isOn: $userPreferences.hapticTimelineEnabled)
-        Toggle("settings.haptic.tab-selection", isOn: $userPreferences.hapticTabSelectionEnabled)
-        Toggle("settings.haptic.buttons", isOn: $userPreferences.hapticButtonPressEnabled)
+        Toggle("settings.other.sound-effect", isOn: $userPreferences.soundEffectEnabled)
+      } header: {
+        Text("Sound Effects")
       }
       .listRowBackground(theme.primaryBackgroundColor)
     }
-    .navigationTitle("settings.haptic.navigation-title")
+    .navigationTitle("Action Feedback Settings")
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
   }

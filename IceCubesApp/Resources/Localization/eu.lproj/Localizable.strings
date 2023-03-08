@@ -172,6 +172,7 @@
 "settings.account.action.delete-cache" = "Garbitu katxea";
 
 "settings.general.haptic" = "Erreakzio haptikoak";
+"settings.general.action-feedback" = "Action Feedback";
 "settings.haptic.navigation-title" = "Ezarpen haptikoak";
 "settings.haptic.timeline" = "Denbora-lerroan";
 "settings.haptic.tab-selection" = "Fitxak hautatzean";

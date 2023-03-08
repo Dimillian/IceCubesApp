@@ -175,6 +175,7 @@
 "settings.account.action.delete-cache" = "Wyczyść bufor postów";
 
 "settings.general.haptic" = "Sygnały haptyczne";
+"settings.general.action-feedback" = "Action Feedback";
 "settings.haptic.navigation-title" = "Ustawienia haptyki";
 "settings.haptic.timeline" = "Strumień";
 "settings.haptic.tab-selection" = "Wybór zakładki";

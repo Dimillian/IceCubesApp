@@ -170,6 +170,7 @@
 "settings.account.action.delete-cache" = "清除缓存";
 
 "settings.general.haptic" = "触感触控";
+"settings.general.action-feedback" = "Action Feedback";
 "settings.haptic.navigation-title" = "触感触控设置";
 "settings.haptic.timeline" = "时间线";
 "settings.haptic.tab-selection" = "导航栏";

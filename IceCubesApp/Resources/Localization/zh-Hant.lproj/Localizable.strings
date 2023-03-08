@@ -176,6 +176,7 @@
 "settings.account.action.delete-cache" = "清除快取";
 
 "settings.general.haptic" = "觸覺回饋";
+"settings.general.action-feedback" = "Action Feedback";
 "settings.haptic.navigation-title" = "觸覺設定";
 "settings.haptic.timeline" = "時間軸";
 "settings.haptic.tab-selection" = "頁籤選擇";

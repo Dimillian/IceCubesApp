@@ -172,6 +172,7 @@
 "settings.account.action.delete-cache" = "Leeg cache";
 
 "settings.general.haptic" = "Haptische feedback";
+"settings.general.action-feedback" = "Action Feedback";
 "settings.haptic.navigation-title" = "Haptische instellingen";
 "settings.haptic.timeline" = "Tijdlijn";
 "settings.haptic.tab-selection" = "Tabselectie";

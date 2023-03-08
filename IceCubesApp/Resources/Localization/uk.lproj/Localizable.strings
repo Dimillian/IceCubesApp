@@ -176,6 +176,7 @@
 "settings.account.action.delete-cache" = "Очистити кеш";
 
 "settings.general.haptic" = "Гаптика";
+"settings.general.action-feedback" = "Action Feedback";
 "settings.haptic.navigation-title" = "Налаштування гаптики";
 "settings.haptic.timeline" = "Стрічка";
 "settings.haptic.tab-selection" = "Вибір вкладки";

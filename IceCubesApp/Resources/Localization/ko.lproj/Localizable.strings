@@ -175,6 +175,7 @@
 "settings.account.action.delete-cache" = "캐시 데이터 지우기";
 
 "settings.general.haptic" = "햅틱 피드백 설정";
+"settings.general.action-feedback" = "Action Feedback";
 "settings.haptic.navigation-title" = "햅틱 피드백 설정";
 "settings.haptic.timeline" = "타임라인에서";
 "settings.haptic.tab-selection" = "하단 탭 바를 누를 때";

@@ -176,6 +176,7 @@
 "settings.account.action.delete-cache" = "Ачысціць кэш";
 
 "settings.general.haptic" = "Тактыльная зваротная сувязь";
+"settings.general.action-feedback" = "Action Feedback";
 "settings.haptic.navigation-title" = "Тактыльныя налады";
 "settings.haptic.timeline" = "Шкала часу";
 "settings.haptic.tab-selection" = "Выбар укладкі";

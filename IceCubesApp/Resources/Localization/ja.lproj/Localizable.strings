@@ -175,6 +175,7 @@
 "settings.account.action.delete-cache" = "キャッシュをクリア";
 
 "settings.general.haptic" = "触覚フィードバック";
+"settings.general.action-feedback" = "操作フィードバック";
 "settings.haptic.navigation-title" = "触覚設定";
 "settings.haptic.timeline" = "タイムライン";
 "settings.haptic.tab-selection" = "タブセレクト";

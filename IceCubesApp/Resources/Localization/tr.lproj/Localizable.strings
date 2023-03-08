@@ -175,6 +175,7 @@
 "settings.account.action.delete-cache" = "Clear cache";
 
 "settings.general.haptic" = "Haptic Feedback";
+"settings.general.action-feedback" = "Action Feedback";
 "settings.haptic.navigation-title" = "Haptic Settings";
 "settings.haptic.timeline" = "Timeline";
 "settings.haptic.tab-selection" = "Tab Selection";
