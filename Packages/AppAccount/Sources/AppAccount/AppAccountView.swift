@@ -5,7 +5,9 @@ import SwiftUI
 
 public struct AppAccountView: View {
   @EnvironmentObject private var routerPath: RouterPath
-  @EnvironmentObject var appAccounts: AppAccountsManager
+  @EnvironmentObject private var appAccounts: AppAccountsManager
+  @EnvironmentObject private var preferences: UserPreferences
+  
   @StateObject var viewModel: AppAccountViewModel
 
   public init(viewModel: AppAccountViewModel) {
@@ -47,6 +49,19 @@ public struct AppAccountView: View {
             Image(systemName: "checkmark.circle.fill")
               .foregroundStyle(.white, .green)
               .offset(x: 5, y: -5)
+          } else if viewModel.showBadge,
+                    let token = viewModel.appAccount.oauthToken,
+                    let notificationsCount = preferences.getNotificationsCount(for: token),
+                    notificationsCount > 0{
+            ZStack {
+              Circle()
+                .fill(.red)
+              Text(notificationsCount > 99 ? "99+" : String(notificationsCount))
+                .foregroundColor(.white)
+                .font(.system(size: 9))
+            }
+            .frame(width: 20, height: 20)
+            .offset(x: 5, y: -5)
           }
         }
       } else {
@@ -66,9 +81,11 @@ public struct AppAccountView: View {
             .foregroundColor(.gray)
         }
       }
-      Spacer()
-      Image(systemName: "chevron.right")
-        .foregroundColor(.gray)
+      if viewModel.isInNavigation {
+        Spacer()
+        Image(systemName: "chevron.right")
+          .foregroundColor(.gray)
+      }
     }
     .contentShape(Rectangle())
     .onTapGesture {

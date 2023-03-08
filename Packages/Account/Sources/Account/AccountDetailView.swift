@@ -328,6 +328,12 @@ public struct AccountDetailView: View {
           } label: {
             Label("settings.push.navigation-title", systemImage: "bell")
           }
+          
+          Button {
+            routerPath.presentedSheet = .settings
+          } label: {
+            Label("settings.title", systemImage: "gear")
+          }
         }
       } label: {
         Image(systemName: "ellipsis.circle")

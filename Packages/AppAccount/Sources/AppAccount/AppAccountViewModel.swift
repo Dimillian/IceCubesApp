@@ -12,6 +12,8 @@ public class AppAccountViewModel: ObservableObject {
   var appAccount: AppAccount
   let client: Client
   let isCompact: Bool
+  let isInNavigation: Bool
+  let showBadge: Bool
 
   @Published var account: Account? {
     didSet {
@@ -21,8 +23,6 @@ public class AppAccountViewModel: ObservableObject {
     }
   }
 
-  @Published var roundedAvatar: UIImage?
-
   var acct: String {
     if let acct = appAccount.accountName {
       return acct
@@ -31,24 +31,20 @@ public class AppAccountViewModel: ObservableObject {
     }
   }
 
-  public init(appAccount: AppAccount, isCompact: Bool = false) {
+  public init(appAccount: AppAccount, isCompact: Bool = false, isInNavigation: Bool = true, showBadge: Bool = false) {
     self.appAccount = appAccount
     self.isCompact = isCompact
+    self.isInNavigation = isInNavigation
+    self.showBadge = showBadge
     client = .init(server: appAccount.server, oauthToken: appAccount.oauthToken)
   }
 
   func fetchAccount() async {
     do {
       account = Self.accountsCache[appAccount.id]
-      roundedAvatar = Self.avatarsCache[appAccount.id]
 
       account = try await client.get(endpoint: Accounts.verifyCredentials)
       Self.accountsCache[appAccount.id] = account
-
-      if let account {
-        await refreshAvatar(account: account)
-      }
-
     } catch {}
   }
 
@@ -59,19 +55,5 @@ public class AppAccountViewModel: ObservableObject {
         try appAccount.save()
       }
     } catch {}
-  }
-
-  private func refreshAvatar(account: Account) async {
-    // Warning: Non-sendable type '(any URLSessionTaskDelegate)?' exiting main actor-isolated
-    // context in call to non-isolated instance method 'data(for:delegate:)' cannot cross actor
-    // boundary.
-    // This is on the defaulted-to-nil second parameter of `.data(from:delegate:)`.
-    // There is a Radar tracking this & others like it.
-    if let (data, _) = try? await URLSession.shared.data(from: account.avatar),
-       let image = UIImage(data: data)?.roundedImage
-    {
-      roundedAvatar = image
-      Self.avatarsCache[account.id] = image
-    }
   }
 }
