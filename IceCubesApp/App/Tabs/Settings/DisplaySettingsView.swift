@@ -4,6 +4,35 @@ import Models
 import Network
 import Status
 import SwiftUI
+import Combine
+
+class DisplaySettingsLocalColors: ObservableObject {
+  @Published var tintColor = Theme.shared.tintColor
+  @Published var primaryBackgroundColor = Theme.shared.primaryBackgroundColor
+  @Published var secondaryBackgroundColor = Theme.shared.secondaryBackgroundColor
+  @Published var labelColor = Theme.shared.labelColor
+  
+  private var subscriptions = Set<AnyCancellable>()
+  
+  init() {
+    $tintColor
+      .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
+      .sink(receiveValue: { newColor in Theme.shared.tintColor = newColor } )
+      .store(in: &subscriptions)
+    $primaryBackgroundColor
+      .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
+      .sink(receiveValue: { newColor in Theme.shared.primaryBackgroundColor = newColor } )
+      .store(in: &subscriptions)
+    $secondaryBackgroundColor
+      .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
+      .sink(receiveValue: { newColor in Theme.shared.secondaryBackgroundColor = newColor } )
+      .store(in: &subscriptions)
+    $labelColor
+      .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
+      .sink(receiveValue: { newColor in Theme.shared.labelColor = newColor } )
+      .store(in: &subscriptions)
+  }
+}
 
 struct DisplaySettingsView: View {
   typealias FontState = Theme.FontState
@@ -11,18 +40,15 @@ struct DisplaySettingsView: View {
   @Environment(\.colorScheme) private var colorScheme
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var userPreferences: UserPreferences
+  
+  @StateObject private var localColors = DisplaySettingsLocalColors()
 
   @State private var isFontSelectorPresented = false
   
-  @State private var didChangeColors = false
-  @State private var localTintColor = Theme.shared.tintColor
-  @State private var localPrimaryBackgroundColor = Theme.shared.primaryBackgroundColor
-  @State private var localSecondaryBackgroundColor = Theme.shared.secondaryBackgroundColor
-  @State private var localLabelColor = Theme.shared.labelColor
-  
-  private var previewStatusViewModel = StatusRowViewModel(status: Status.placeholder(forSettings: true, language: "la"),
+  private let previewStatusViewModel = StatusRowViewModel(status: Status.placeholder(forSettings: true, language: "la"),
                                                           client: Client(server: ""),
                                                           routerPath: RouterPath()) // translate from latin button
+    
   var body: some View {
     Form {
       exampleSection
@@ -49,41 +75,18 @@ struct DisplaySettingsView: View {
       Toggle("settings.display.theme.systemColor", isOn: $theme.followSystemColorScheme)
       themeSelectorButton
       Group {
-        ColorPicker("settings.display.theme.tint", selection: $localTintColor)
-        ColorPicker("settings.display.theme.background", selection: $localPrimaryBackgroundColor)
-        ColorPicker("settings.display.theme.secondary-background", selection: $localSecondaryBackgroundColor)
-        ColorPicker("settings.display.theme.text-color", selection: $localLabelColor)
+        ColorPicker("settings.display.theme.tint", selection: $localColors.tintColor)
+        ColorPicker("settings.display.theme.background", selection: $localColors.primaryBackgroundColor)
+        ColorPicker("settings.display.theme.secondary-background", selection: $localColors.secondaryBackgroundColor)
+        ColorPicker("settings.display.theme.text-color", selection: $localColors.labelColor)
       }
       .disabled(theme.followSystemColorScheme)
       .opacity(theme.followSystemColorScheme ? 0.5 : 1.0)
-      .onChange(of: localTintColor) { _ in
-        didChangeColors = true
-      }
-      .onChange(of: localSecondaryBackgroundColor) { _ in
-        didChangeColors = true
-      }
-      .onChange(of: localPrimaryBackgroundColor) { _ in
-        didChangeColors = true
-      }
-      .onChange(of: localLabelColor) { _ in
-        didChangeColors = true
-      }
       .onChange(of: theme.selectedSet) { _ in
-        localTintColor = theme.tintColor
-        localPrimaryBackgroundColor = theme.primaryBackgroundColor
-        localSecondaryBackgroundColor = theme.secondaryBackgroundColor
-        localLabelColor = theme.labelColor
-      }
-      if didChangeColors {
-        Button {
-          didChangeColors = false
-          theme.tintColor = localTintColor
-          theme.primaryBackgroundColor = localPrimaryBackgroundColor
-          theme.secondaryBackgroundColor = localSecondaryBackgroundColor
-          theme.labelColor = localLabelColor
-        } label: {
-          Text("settings.display.colors.apply")
-        }
+        localColors.tintColor = theme.tintColor
+        localColors.primaryBackgroundColor = theme.primaryBackgroundColor
+        localColors.secondaryBackgroundColor = theme.secondaryBackgroundColor
+        localColors.labelColor = theme.labelColor
       }
     } header: {
       Text("settings.display.section.theme")
@@ -193,10 +196,10 @@ struct DisplaySettingsView: View {
         theme.avatarPosition = .top
         theme.statusActionsDisplay = .full
         
-        localTintColor = theme.tintColor
-        localPrimaryBackgroundColor = theme.primaryBackgroundColor
-        localSecondaryBackgroundColor = theme.secondaryBackgroundColor
-        localLabelColor = theme.labelColor
+        localColors.tintColor = theme.tintColor
+        localColors.primaryBackgroundColor = theme.primaryBackgroundColor
+        localColors.secondaryBackgroundColor = theme.secondaryBackgroundColor
+        localColors.labelColor = theme.labelColor
         
       } label: {
         Text("settings.display.restore")
