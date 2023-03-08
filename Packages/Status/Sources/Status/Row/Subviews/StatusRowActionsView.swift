@@ -162,17 +162,17 @@ struct StatusRowActionsView: View {
       HapticManager.shared.fireHaptic(of: .notification(.success))
       switch action {
       case .respond:
-        viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)
         SoundEffectManager.shared.playSound(of: .share)
+        viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)
       case .favorite:
-        await statusDataController.toggleFavorite(remoteStatus: viewModel.localStatusId)
         SoundEffectManager.shared.playSound(of: .favorite)
+        await statusDataController.toggleFavorite(remoteStatus: viewModel.localStatusId)
       case .bookmark:
-        await statusDataController.toggleBookmark(remoteStatus: viewModel.localStatusId)
         SoundEffectManager.shared.playSound(of: .bookmark)
+        await statusDataController.toggleBookmark(remoteStatus: viewModel.localStatusId)
       case .boost:
-        await statusDataController.toggleReblog(remoteStatus: viewModel.localStatusId)
         SoundEffectManager.shared.playSound(of: .boost)
+        await statusDataController.toggleReblog(remoteStatus: viewModel.localStatusId)
       default:
         break
       }
