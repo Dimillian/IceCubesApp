@@ -418,8 +418,8 @@
 "status.draft.delete" = "下書きを削除";
 "status.draft.save" = "下書きを保存";
 "status.editor.ai-prompt.correct" = "テキストを修正する";
-"status.editor.ai-prompt.add-tags" = "Add #Tags in place";
-"status.editor.ai-prompt.insert-tags" = "Add #Tags after my text";
+"status.editor.ai-prompt.add-tags" = "#タグを所定の位置に追加";
+"status.editor.ai-prompt.insert-tags" = "テキストの後に#タグを追加";
 "status.editor.ai-prompt.emphasize" = "テキストを強調表示する";
 "status.editor.ai-prompt.fit" = "テキストを短くする";
 "status.editor.description.add" = "説明文を追加";
