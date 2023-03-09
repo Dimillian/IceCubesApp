@@ -412,8 +412,8 @@
 "status.draft.delete" = "Ezabatu zirriborroa";
 "status.draft.save" = "Gorde zirriborroa";
 "status.editor.ai-prompt.correct" = "Zuzendu testua";
-"status.editor.ai-prompt.add-tags" = "Add #Tags in place";
-"status.editor.ai-prompt.insert-tags" = "Add #Tags after my text";
+"status.editor.ai-prompt.add-tags" = "Gehitu #Traolak tokian";
+"status.editor.ai-prompt.insert-tags" = "Gehitu #Traolak amaieran";
 "status.editor.ai-prompt.emphasize" = "Azpimarratu testua";
 "status.editor.ai-prompt.fit" = "Laburtu testua";
 "status.editor.description.add" = "Gehitu deskribapena";
