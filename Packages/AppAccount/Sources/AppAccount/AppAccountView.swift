@@ -93,11 +93,13 @@ public struct AppAccountView: View {
          let account = viewModel.account
       {
         routerPath.navigate(to: .accountSettingsWithAccount(account: account, appAccount: viewModel.appAccount))
+        HapticManager.shared.fireHaptic(of: .buttonPress)
       } else {
         var transation = Transaction()
         transation.disablesAnimations = true
         withTransaction(transation) {
           appAccounts.currentAccount = viewModel.appAccount
+          HapticManager.shared.fireHaptic(of: .notification(.success))
         }
       }
     }
