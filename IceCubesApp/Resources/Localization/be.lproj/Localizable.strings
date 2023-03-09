@@ -423,6 +423,8 @@
 "status.draft.delete" = "Выдаліць чарнавік";
 "status.draft.save" = "Захаваць чарнавік";
 "status.editor.ai-prompt.correct" = "Выправіць тэкст";
+"status.editor.ai-prompt.add-tags" = "Add #Tags in place";
+"status.editor.ai-prompt.insert-tags" = "Add #Tags after my text";
 "status.editor.ai-prompt.emphasize" = "Вылучыць тэкст";
 "status.editor.ai-prompt.fit" = "Скараціць тэкст";
 "status.editor.description.add" = "Дадаць апісанне";

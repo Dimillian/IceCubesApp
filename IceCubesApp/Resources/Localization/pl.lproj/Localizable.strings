@@ -414,6 +414,8 @@
 "status.draft.delete" = "Usuń wersję roboczą";
 "status.draft.save" = "Zachowaj wersję roboczą";
 "status.editor.ai-prompt.correct" = "Popraw tekst";
+"status.editor.ai-prompt.add-tags" = "Add #Tags in place";
+"status.editor.ai-prompt.insert-tags" = "Add #Tags after my text";
 "status.editor.ai-prompt.emphasize" = "Wyróżnij tekst";
 "status.editor.ai-prompt.fit" = "Skróć tekst";
 "status.editor.description.add" = "Dodaj opis";

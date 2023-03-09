@@ -1,7 +1,11 @@
 import Foundation
 
+protocol OpenAIRequest: Encodable {
+  var path: String { get }
+}
+
 public struct OpenAIClient {
-  private let endpoint: URL = .init(string: "https://api.openai.com/v1/completions")!
+  private let endpoint: URL = .init(string: "https://api.openai.com/v1/")!
 
   private var APIKey: String {
     if let path = Bundle.main.path(forResource: "Secret", ofType: "plist") {
@@ -26,58 +30,65 @@ public struct OpenAIClient {
     decoder.keyDecodingStrategy = .convertFromSnakeCase
     return decoder
   }
+  
+  public struct ChatRequest: OpenAIRequest {
+    public struct Message: Encodable {
+      public let role = "user"
+      public let content: String
+    }
+    
+    let model = "gpt-3.5-turbo"
+    let messages: [Message]
+    
+    let temperature: CGFloat
+    
+    var path: String {
+      "chat/completions"
+    }
 
-  public struct Request: Encodable {
-    let model = "text-davinci-003"
-    let topP: Int = 1
-    let frequencyPenalty: Int = 0
-    let presencePenalty: Int = 0
-    let prompt: String
-    let temperature: Double
-    let maxTokens: Int
-
-    public init(prompt: String, temperature: Double, maxTokens: Int) {
-      self.prompt = prompt
+    public init(content: String, temperature: CGFloat) {
+      self.messages = [.init(content: content)]
       self.temperature = temperature
-      self.maxTokens = maxTokens
     }
   }
-
+  
   public enum Prompt {
     case correct(input: String)
     case shorten(input: String)
     case emphasize(input: String)
+    case addTags(input: String)
+    case insertTags(input: String)
 
-    var request: Request {
+    var request: OpenAIRequest {
       switch self {
       case let .correct(input):
-        return Request(prompt: "Correct this to standard English:\(input)",
-                       temperature: 0,
-                       maxTokens: 500)
+        return ChatRequest(content: "Fix the spelling and grammar mistakes in the following text: \(input)", temperature: 0.2)
+      case let .addTags(input):
+        return ChatRequest(content: "Replace relevant words with Twitter hashtags in the following text while keeping the input same. Maximum of 5 hashtags: \(input)", temperature: 0.1)
+      case let .insertTags(input):
+        return ChatRequest(content: "Return the input with added Twitter hashtags at the end of the input with a maximum of 5 hashtags: \(input)", temperature: 0.2)
       case let .shorten(input):
-        return Request(prompt: "Make a summary of this paragraph:\(input)",
-                       temperature: 0.7,
-                       maxTokens: 100)
+        return ChatRequest(content: "Make a shorter version of this text: \(input)", temperature: 0.5)
       case let .emphasize(input):
-        return Request(prompt: "Make this paragraph catchy, more fun:\(input)",
-                       temperature: 0.8,
-                       maxTokens: 500)
+        return ChatRequest(content: "Make this text catchy, more fun: \(input)", temperature: 1)
       }
     }
   }
 
   public struct Response: Decodable {
     public struct Choice: Decodable {
-      public let text: String
+      public struct Message: Decodable {
+        public let role: String
+        public let content: String
+      }
+      
+      public let message: Message?
     }
 
-    public let id: String
-    public let object: String
-    public let model: String
     public let choices: [Choice]
 
     public var trimmedText: String {
-      guard var text = choices.first?.text else {
+      guard var text = choices.first?.message?.content else {
         return ""
       }
       while text.first?.isNewline == true || text.first?.isWhitespace == true {
@@ -92,7 +103,7 @@ public struct OpenAIClient {
   public func request(_ prompt: Prompt) async throws -> Response {
     do {
       let jsonData = try encoder.encode(prompt.request)
-      var request = URLRequest(url: endpoint)
+      var request = URLRequest(url: endpoint.appending(path: prompt.request.path))
       request.httpMethod = "POST"
       request.setValue(authorizationHeaderValue, forHTTPHeaderField: "Authorization")
       request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -108,6 +119,8 @@ public struct OpenAIClient {
 
 extension OpenAIClient: Sendable {}
 extension OpenAIClient.Prompt: Sendable {}
-extension OpenAIClient.Request: Sendable {}
+extension OpenAIClient.ChatRequest: Sendable {}
+extension OpenAIClient.ChatRequest.Message: Sendable {}
 extension OpenAIClient.Response: Sendable {}
 extension OpenAIClient.Response.Choice: Sendable {}
+extension OpenAIClient.Response.Choice.Message: Sendable {}

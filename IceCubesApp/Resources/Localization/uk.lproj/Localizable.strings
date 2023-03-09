@@ -419,6 +419,8 @@
 "status.draft.delete" = "Видалити чернетку";
 "status.draft.save" = "Зберегти чернетку";
 "status.editor.ai-prompt.correct" = "Виправити текст";
+"status.editor.ai-prompt.add-tags" = "Add #Tags in place";
+"status.editor.ai-prompt.insert-tags" = "Add #Tags after my text";
 "status.editor.ai-prompt.emphasize" = "Надавати виразності";
 "status.editor.ai-prompt.fit" = "Підігнати текст";
 "status.editor.description.add" = "Додати опис";

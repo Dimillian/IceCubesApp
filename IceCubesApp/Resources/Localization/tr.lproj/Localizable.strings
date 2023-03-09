@@ -414,6 +414,8 @@
 "status.draft.delete" = "Taslağı Sil";
 "status.draft.save" = "Taslağı Kaydet";
 "status.editor.ai-prompt.correct" = "Yazıyı Düzelt";
+"status.editor.ai-prompt.add-tags" = "Add #Tags in place";
+"status.editor.ai-prompt.insert-tags" = "Add #Tags after my text";
 "status.editor.ai-prompt.emphasize" = "Yazıyı Vurgula";
 "status.editor.ai-prompt.fit" = "Yazıyı Kısalt";
 "status.editor.description.add" = "Açıklama Ekle";

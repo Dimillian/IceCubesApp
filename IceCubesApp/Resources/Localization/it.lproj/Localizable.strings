@@ -419,6 +419,8 @@
 "status.draft.delete" = "Cancella la bozza";
 "status.draft.save" = "Salva la bozza";
 "status.editor.ai-prompt.correct" = "Correggi il testo";
+"status.editor.ai-prompt.add-tags" = "Add #Tags in place";
+"status.editor.ai-prompt.insert-tags" = "Add #Tags after my text";
 "status.editor.ai-prompt.emphasize" = "Enfatizza il testo";
 "status.editor.ai-prompt.fit" = "Accorcia il testo";
 "status.editor.description.add" = "Aggiungi la descrizione";

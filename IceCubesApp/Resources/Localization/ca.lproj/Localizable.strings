@@ -417,6 +417,8 @@
 "status.draft.delete" = "Elimina l'esborrany";
 "status.draft.save" = "Desa l'esborrany";
 "status.editor.ai-prompt.correct" = "Corregeix el text";
+"status.editor.ai-prompt.add-tags" = "Add #Tags in place";
+"status.editor.ai-prompt.insert-tags" = "Add #Tags after my text";
 "status.editor.ai-prompt.emphasize" = "Amplia text";
 "status.editor.ai-prompt.fit" = "Acurta el text";
 "status.editor.description.add" = "Afegeix una descripció";

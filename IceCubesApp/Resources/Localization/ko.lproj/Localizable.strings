@@ -420,6 +420,8 @@
 "status.draft.delete" = "삭제";
 "status.draft.save" = "임시 보관함에 저장";
 "status.editor.ai-prompt.correct" = "맞게 고치기";
+"status.editor.ai-prompt.add-tags" = "Add #Tags in place";
+"status.editor.ai-prompt.insert-tags" = "Add #Tags after my text";
 "status.editor.ai-prompt.emphasize" = "내용 강조하기";
 "status.editor.ai-prompt.fit" = "간결하게 바꾸기";
 "status.editor.description.add" = "설명 추가";

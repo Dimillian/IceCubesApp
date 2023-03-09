@@ -418,6 +418,8 @@
 "status.draft.delete" = "Slett utkast";
 "status.draft.save" = "Arkiver utkast";
 "status.editor.ai-prompt.correct" = "Korrekt tekst";
+"status.editor.ai-prompt.add-tags" = "Add #Tags in place";
+"status.editor.ai-prompt.insert-tags" = "Add #Tags after my text";
 "status.editor.ai-prompt.emphasize" = "Fremhev tekst";
 "status.editor.ai-prompt.fit" = "Forkort tekst";
 "status.editor.description.add" = "Legg til beskrivelse";

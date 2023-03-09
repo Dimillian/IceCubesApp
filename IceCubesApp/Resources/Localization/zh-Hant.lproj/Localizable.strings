@@ -419,6 +419,8 @@
 "status.draft.delete" = "刪除草稿";
 "status.draft.save" = "儲存草稿";
 "status.editor.ai-prompt.correct" = "更正";
+"status.editor.ai-prompt.add-tags" = "Add #Tags in place";
+"status.editor.ai-prompt.insert-tags" = "Add #Tags after my text";
 "status.editor.ai-prompt.emphasize" = "強調";
 "status.editor.ai-prompt.fit" = "精簡";
 "status.editor.description.add" = "新增描述";

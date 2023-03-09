@@ -414,6 +414,8 @@
 "status.draft.delete" = "Supprimer le brouillon";
 "status.draft.save" = "Enregistrer le brouillon";
 "status.editor.ai-prompt.correct" = "Corriger le texte";
+"status.editor.ai-prompt.add-tags" = "Add #Tags in place";
+"status.editor.ai-prompt.insert-tags" = "Add #Tags after my text";
 "status.editor.ai-prompt.emphasize" = "Mettre en évidence le texte";
 "status.editor.ai-prompt.fit" = "Raccourcir le texte";
 "status.editor.description.add" = "Ajouter une description";

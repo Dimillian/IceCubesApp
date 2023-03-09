@@ -419,6 +419,8 @@
 "status.draft.delete" = "Eliminar borrador";
 "status.draft.save" = "Guardar borrador";
 "status.editor.ai-prompt.correct" = "Corregir texto";
+"status.editor.ai-prompt.add-tags" = "Add #Tags in place";
+"status.editor.ai-prompt.insert-tags" = "Add #Tags after my text";
 "status.editor.ai-prompt.emphasize" = "Enfatizar texto";
 "status.editor.ai-prompt.fit" = "Acortar texto";
 "status.editor.description.add" = "Añadir descripción";
