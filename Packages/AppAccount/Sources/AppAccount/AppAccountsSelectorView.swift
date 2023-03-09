@@ -41,7 +41,7 @@ public struct AppAccountsSelectorView: View {
       labelView
     }
     .sheet(isPresented: $isPresented, content: {
-      accountsView.presentationDetents([.medium])
+      accountsView.presentationDetents([.medium, .large])
       .onAppear {
         refreshAccounts()
       }
