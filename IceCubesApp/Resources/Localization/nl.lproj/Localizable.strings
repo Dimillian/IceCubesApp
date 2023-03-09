@@ -412,8 +412,8 @@
 "status.draft.delete" = "Verwijder concept";
 "status.draft.save" = "Bewaar concept";
 "status.editor.ai-prompt.correct" = "Corrigeer tekst";
-"status.editor.ai-prompt.add-tags" = "Add #Tags in place";
-"status.editor.ai-prompt.insert-tags" = "Add #Tags after my text";
+"status.editor.ai-prompt.add-tags" = "Voeg #tags toe in tekst";
+"status.editor.ai-prompt.insert-tags" = "Voeg #tags toe achter tekst";
 "status.editor.ai-prompt.emphasize" = "Benadruk tekst";
 "status.editor.ai-prompt.fit" = "Kort tekst in";
 "status.editor.description.add" = "Voeg omschrijving toe";
