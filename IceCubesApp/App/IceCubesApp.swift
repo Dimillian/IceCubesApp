@@ -166,12 +166,12 @@ struct IceCubesApp: App {
         }
       }
       
+      HapticManager.shared.fireHaptic(of: .tabSelection)
+      SoundEffectManager.shared.playSound(of: .tabSelection)
+      
       selectedTab = newTab
       
       DispatchQueue.main.async {
-        HapticManager.shared.fireHaptic(of: .tabSelection)
-        SoundEffectManager.shared.playSound(of: .tabSelection)
-        
         if selectedTab == .notifications,
            let token = appAccountsManager.currentAccount.oauthToken
         {
