@@ -140,7 +140,7 @@ public struct StatusDetailView: View {
     StatusRowView(viewModel: { .init(status: status,
                                      client: client,
                                      routerPath: routerPath,
-                                     isFocused: !viewModel.isLoadingContext) })
+                                     isFocused: true) })
       .overlay {
         GeometryReader { reader in
           VStack {}

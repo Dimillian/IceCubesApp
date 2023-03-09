@@ -15,10 +15,10 @@ struct StatusRowTextView: View {
                      emojis: viewModel.finalStatus.emojis,
                      language: viewModel.finalStatus.language,
                      lineLimit: viewModel.lineLimit)
-          .font(.scaledBody)
+          .font(viewModel.isFocused ? .scaledBodyFocused : .scaledBody)
           .foregroundColor(viewModel.textDisabled ? .gray : theme.labelColor)
-          .emojiSize(Font.scaledBodyFont.emojiSize)
-          .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
+          .emojiSize(viewModel.isFocused ? Font.scaledBodyFocusedFont.emojiSize : Font.scaledBodyFont.emojiSize)
+          .emojiBaselineOffset(viewModel.isFocused ? Font.scaledBodyFocusedFont.emojiBaselineOffset : Font.scaledBodyFont.emojiBaselineOffset)
           .environment(\.openURL, OpenURLAction { url in
             viewModel.routerPath.handleStatus(status: viewModel.finalStatus, url: url)
           })

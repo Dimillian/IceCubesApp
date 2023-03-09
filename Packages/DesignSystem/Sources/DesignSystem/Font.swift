@@ -48,6 +48,14 @@ public extension Font {
   static var scaledHeadlineFont: UIFont {
     customUIFont(size: userScaledFontSize(baseSize: headline))
   }
+  
+  static var scaledBodyFocused: Font {
+    customFont(size: userScaledFontSize(baseSize: body + 2), relativeTo: .body)
+  }
+  
+  static var scaledBodyFocusedFont: UIFont {
+    customUIFont(size: userScaledFontSize(baseSize: body + 2))
+  }
 
   static var scaledBody: Font {
     customFont(size: userScaledFontSize(baseSize: body), relativeTo: .body)
