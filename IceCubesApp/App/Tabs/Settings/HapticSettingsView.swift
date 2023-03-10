@@ -27,7 +27,7 @@ struct HapticSettingsView: View {
       }
       .listRowBackground(theme.primaryBackgroundColor)
     }
-    .navigationTitle("Action Feedback Settings")
+    .navigationTitle("Sounds and Haptics")
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
   }
