@@ -8,6 +8,7 @@ import Status
 import SwiftUI
 
 public struct AccountDetailView: View {
+  @Environment(\.openURL) private var openURL
   @Environment(\.redactionReasons) private var reasons
 
   @EnvironmentObject private var watcher: StreamWatcher
@@ -327,6 +328,20 @@ public struct AccountDetailView: View {
             routerPath.presentedSheet = .accountPushNotficationsSettings
           } label: {
             Label("settings.push.navigation-title", systemImage: "bell")
+          }
+          
+          if let account = viewModel.account {
+            Divider()
+            
+            Button {
+              if let url = URL(string: "https://mastometrics.com/auth/login?username=\(account.acct)@\(client.server)&instance=\(client.server)&auto=true") {
+                openURL(url)
+              }
+            } label: {
+              Label("Mastometrics", systemImage: "chart.xyaxis.line")
+            }
+
+            Divider()
           }
           
           Button {
