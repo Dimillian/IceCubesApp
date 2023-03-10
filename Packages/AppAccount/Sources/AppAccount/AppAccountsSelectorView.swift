@@ -109,11 +109,6 @@ public struct AppAccountsSelectorView: View {
             Image(systemName: "xmark.circle")
           }
         }
-        if accountCreationEnabled {
-          ToolbarItem(placement: .navigationBarTrailing) {
-            settingsButton
-          }
-        }
       }
     }
   }
