@@ -417,8 +417,8 @@
 "status.draft.delete" = "删除草稿";
 "status.draft.save" = "保存草稿";
 "status.editor.ai-prompt.correct" = "检查拼写和语法";
-"status.editor.ai-prompt.add-tags" = "Add #Tags in place";
-"status.editor.ai-prompt.insert-tags" = "Add #Tags after my text";
+"status.editor.ai-prompt.add-tags" = "自动添加#标签";
+"status.editor.ai-prompt.insert-tags" = "在嘟文末尾添加#标签";
 "status.editor.ai-prompt.emphasize" = "使用强调语气";
 "status.editor.ai-prompt.fit" = "精简文字";
 "status.editor.description.add" = "添加描述";
