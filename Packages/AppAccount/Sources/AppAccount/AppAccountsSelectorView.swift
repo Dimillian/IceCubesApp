@@ -49,6 +49,9 @@ public struct AppAccountsSelectorView: View {
     .onChange(of: currentAccount.account?.id) { _ in
       refreshAccounts()
     }
+    .onAppear {
+      refreshAccounts()
+    }
   }
 
   @ViewBuilder
