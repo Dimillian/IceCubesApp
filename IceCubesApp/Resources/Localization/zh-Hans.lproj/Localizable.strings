@@ -417,7 +417,7 @@
 "status.draft.delete" = "删除草稿";
 "status.draft.save" = "保存草稿";
 "status.editor.ai-prompt.correct" = "检查拼写和语法";
-"status.editor.ai-prompt.add-tags" = "自动添加#标签";
+"status.editor.ai-prompt.add-tags" = "就地添加#标签";
 "status.editor.ai-prompt.insert-tags" = "在末尾添加#标签";
 "status.editor.ai-prompt.emphasize" = "使用强调语气";
 "status.editor.ai-prompt.fit" = "精简文字";
