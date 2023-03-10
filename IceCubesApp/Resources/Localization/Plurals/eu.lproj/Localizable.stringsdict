@@ -61,7 +61,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string> eta beste batek </string>
+			<string> eta beste bat</string>
 			<key>other</key>
 			<string> eta beste %lld</string>
 		</dict>
@@ -77,9 +77,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string>gogoko egin du</string>
+			<string>(e)k gogoko du</string>
 			<key>other</key>
-			<string>(e)k gogoko egin dute</string>
+			<string>(e)k gogoko dute</string>
 		</dict>
 	</dict>
     <key>notifications.label.follow %lld</key>
@@ -93,7 +93,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string>jarraitzen dizu</string>
+			<string>(e)k jarraitzen dizu</string>
 			<key>other</key>
 			<string>(e)k jarraitzen dizute</string>
 		</dict>
@@ -109,7 +109,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string>aipatu zaitu</string>
+			<string>(e)k aipatu zaitu</string>
 			<key>other</key>
 			<string>(e)k aipatu zaituzte</string>
 		</dict>
@@ -125,7 +125,7 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string>bultzatu du</string>
+			<string>(e)k bultzatu du</string>
 			<key>other</key>
 			<string>(e)k bultzatu dute</string>
 		</dict>
