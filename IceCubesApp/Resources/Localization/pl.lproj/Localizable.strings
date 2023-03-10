@@ -437,8 +437,8 @@
 "status.editor.spoiler" = "Tekst spoilera";
 "status.editor.text.placeholder" = "Co ci chodzi po głowie?";
 "status.editor.visibility" = "Widoczność postu";
-"status.editor.photo-library" = "Photos Library";
-"status.editor.browse-file" = "Browse Files";
+"status.editor.photo-library" = "Biblioteka zdjęć";
+"status.editor.browse-file" = "Przeglądaj pliki";
 "status.error.loading.message" = "Wystąpił błąd podczas ładowania postów, spróbuj ponownie.";
 "status.error.message" = "Wystąpił błąd dotyczący tego postu, proszę spróbuj ponownie.";
 "status.error.title" = "Wystąpił błąd";
