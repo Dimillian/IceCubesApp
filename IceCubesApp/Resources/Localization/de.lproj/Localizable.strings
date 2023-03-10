@@ -437,6 +437,8 @@
 "status.editor.spoiler" = "Inhaltswarnung";
 "status.editor.text.placeholder" = "Woran denkst du?";
 "status.editor.visibility" = "Sichtbarkeit";
+"status.editor.photo-library" = "Photos Library";
+"status.editor.browse-file" = "Browse Files";
 "status.error.loading.message" = "Beim Laden der Beiträge ist ein Fehler aufgetreten. Bitte versuche es erneut.";
 "status.error.message" = "Es ist ein Fehler aufgetreten. Bitte versuche es erneut.";
 "status.error.title" = "Ein Fehler ist aufgetreten";

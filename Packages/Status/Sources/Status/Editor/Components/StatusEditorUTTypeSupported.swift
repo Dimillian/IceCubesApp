@@ -21,6 +21,7 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
   case gif = "public.gif"
   case gif2 = "com.compuserve.gif"
   case quickTimeMovie = "com.apple.quicktime-movie"
+  case adobeRawImage = "com.adobe.raw-image"
 
   case uiimage = "com.apple.uikit.image"
 
@@ -32,7 +33,7 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
   //
   nonisolated public static var allCases: [StatusEditorUTTypeSupported] {
     [.url, .text, .plaintext, .image, .jpeg, .png, .tiff, .video,
-     .movie, .mp4, .gif, .gif2, .quickTimeMovie, .uiimage]
+     .movie, .mp4, .gif, .gif2, .quickTimeMovie, .uiimage, .adobeRawImage]
   }
   
   static func types() -> [UTType] {
@@ -66,7 +67,7 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
     } else if isGif, let transferable = await getGifTransferable(item: item) {
       return transferable
     }
-    if self == .jpeg || self == .png || self == .tiff || self == .image || self == .uiimage {
+    if self == .jpeg || self == .png || self == .tiff || self == .image || self == .uiimage || self == .adobeRawImage {
       if let image = result as? UIImage {
         return image
       } else if let imageURL = result as? URL,
@@ -134,25 +135,7 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
 }
 
 struct MovieFileTranseferable: Transferable {
-  private let url: URL
-  var compressedVideoURL: URL? {
-    get async {
-      await withCheckedContinuation { continuation in
-        let urlAsset = AVURLAsset(url: url, options: nil)
-        guard let exportSession = AVAssetExportSession(asset: urlAsset, presetName: AVAssetExportPreset1920x1080) else {
-          continuation.resume(returning: nil)
-          return
-        }
-        let outputURL = URL.temporaryDirectory.appending(path: "\(UUID().uuidString).\(url.pathExtension)")
-        exportSession.outputURL = outputURL
-        exportSession.outputFileType = .mp4
-        exportSession.shouldOptimizeForNetworkUse = true
-        exportSession.exportAsynchronously { () in
-          continuation.resume(returning: outputURL)
-        }
-      }
-    }
-  }
+  let url: URL
 
   static var transferRepresentation: some TransferRepresentation {
     FileRepresentation(contentType: .movie) { movie in

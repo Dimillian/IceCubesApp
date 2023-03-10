@@ -440,6 +440,8 @@
 "status.editor.spoiler" = "Escriviu l'espòiler";
 "status.editor.text.placeholder" = "Què us passa pel cap?";
 "status.editor.visibility" = "Visibilitat de la publicació";
+"status.editor.photo-library" = "Photos Library";
+"status.editor.browse-file" = "Browse Files";
 "status.error.loading.message" = "S'ha produït un error en carregar les publicacions, torneu-ho a provar.";
 "status.error.message" = "S'ha produït un error en el context d'aquesta publicació, torneu-ho a provar.";
 "status.error.title" = "S'ha produït un error";

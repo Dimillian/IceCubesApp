@@ -437,6 +437,8 @@
 "status.editor.spoiler" = "Texte spoilé";
 "status.editor.text.placeholder" = "Qu'est-ce qui vous passe par la tête ?";
 "status.editor.visibility" = "Visibilité de la publication";
+"status.editor.photo-library" = "Photos Library";
+"status.editor.browse-file" = "Browse Files";
 "status.error.loading.message" = "Une erreur s'est produite lors du chargement des publications, veuillez réessayer.";
 "status.error.message" = "Une erreur s'est produite dans le contexte de cette publication, veuillez réessayer.";
 "status.error.title" = "Une erreur s'est produite";
