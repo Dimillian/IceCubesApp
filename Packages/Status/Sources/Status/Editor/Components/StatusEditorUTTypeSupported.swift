@@ -61,12 +61,14 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
   func loadItemContent(item: NSItemProvider) async throws -> Any? {
     // Many warnings here about non-sendable type `[AnyHashable: Any]?` crossing
     // actor boundaries. Many Radars have been filed.
-    let result = try await item.loadItem(forTypeIdentifier: rawValue)
     if isVideo, let transferable = await getVideoTransferable(item: item) {
       return transferable
     } else if isGif, let transferable = await getGifTransferable(item: item) {
       return transferable
+    } else if let transferable = await getImageTansferable(item: item) {
+      return transferable
     }
+    let result = try await item.loadItem(forTypeIdentifier: rawValue)
     if self == .jpeg || self == .png || self == .tiff || self == .image || self == .uiimage || self == .adobeRawImage {
       if let image = result as? UIImage {
         return image
@@ -79,8 +81,6 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
                 let image = UIImage(data: data)
       {
         return image
-      } else if let transferable = await getImageTansferable(item: item) {
-        return transferable
       }
     }
     if let url = result as? URL {
@@ -148,9 +148,6 @@ struct MovieFileTranseferable: Transferable {
 
 struct ImageFileTranseferable: Transferable {
   let url: URL
-
-  lazy var data: Data? = try? Data(contentsOf: url)
-  lazy var image: UIImage? = UIImage(data: data ?? Data())
 
   static var transferRepresentation: some TransferRepresentation {
     FileRepresentation(contentType: .image) { image in

@@ -7,7 +7,49 @@ actor StatusEditorCompressor {
     case noData
   }
   
-  func compressImage(_ image: UIImage) async throws -> Data {
+  func compressImageFrom(url: URL) async -> Data? {
+    return await withCheckedContinuation{ continuation in
+      let sourceOptions = [kCGImageSourceShouldCache: false] as CFDictionary
+      guard let source = CGImageSourceCreateWithURL(url as CFURL, sourceOptions) else {
+        continuation.resume(returning: nil)
+        return
+      }
+      
+      let downsampleOptions = [
+        kCGImageSourceCreateThumbnailFromImageAlways: true,
+        kCGImageSourceCreateThumbnailWithTransform: true,
+        kCGImageSourceThumbnailMaxPixelSize: 4096,
+      ] as CFDictionary
+      
+      guard let cgImage = CGImageSourceCreateThumbnailAtIndex(source, 0, downsampleOptions) else {
+        continuation.resume(returning: nil)
+        return
+      }
+      
+      let data = NSMutableData()
+      guard let imageDestination = CGImageDestinationCreateWithData(data, UTType.jpeg.identifier as CFString, 1, nil) else {
+        continuation.resume(returning: nil)
+        return
+      }
+      
+      let isPNG: Bool = {
+        guard let utType = cgImage.utType else { return false }
+        return (utType as String) == UTType.png.identifier
+        
+      }()
+      
+      let destinationProperties = [
+        kCGImageDestinationLossyCompressionQuality: isPNG ? 1.0 : 0.75
+      ] as CFDictionary
+      
+      CGImageDestinationAddImage(imageDestination, cgImage, destinationProperties)
+      CGImageDestinationFinalize(imageDestination)
+      
+      continuation.resume(returning: data as Data)
+    }
+  }
+  
+  func compressImageForUpload(_ image: UIImage) async throws -> Data {
     var image = image
     if image.size.height > 5000 || image.size.width > 5000 {
       image = image.resized(to: .init(width: image.size.width / 4,

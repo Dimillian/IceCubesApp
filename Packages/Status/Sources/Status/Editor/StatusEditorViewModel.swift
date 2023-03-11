@@ -379,6 +379,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
            let handledItemType = StatusEditorUTTypeSupported(rawValue: identifier)
         {
           do {
+            let compressor = StatusEditorCompressor()
             let content = try await handledItemType.loadItemContent(item: item)
             if let text = content as? String {
               initialText += "\(text) "
@@ -388,9 +389,9 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
                                         gifTransferable: nil,
                                         mediaAttachment: nil,
                                         error: nil))
-            } else if var content = content as? ImageFileTranseferable,
-                      let image = content.image
-            {
+            } else if let content = content as? ImageFileTranseferable,
+                      let compressedData = await compressor.compressImageFrom(url: content.url),
+                      let image = UIImage(data: compressedData) {
               mediasImages.append(.init(image: image,
                                         movieTransferable: nil,
                                         gifTransferable: nil,
@@ -532,7 +533,6 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
     Task {
       var medias: [StatusEditorMediaContainer] = []
       for media in selectedMedias {
-        print(media.supportedContentTypes)
         var file: (any Transferable)?
 
         if file == nil {
@@ -545,8 +545,10 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
           file = try? await media.loadTransferable(type: ImageFileTranseferable.self)
         }
 
-        if var imageFile = file as? ImageFileTranseferable,
-           let image = imageFile.image
+        let compressor = StatusEditorCompressor()
+        if let imageFile = file as? ImageFileTranseferable,
+           let compressedData = await compressor.compressImageFrom(url: imageFile.url),
+           let image = UIImage(data: compressedData)
         {
           medias.append(.init(image: image,
                               movieTransferable: nil,
@@ -602,7 +604,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
         if let index = indexOf(container: newContainer) {
           let compressor = StatusEditorCompressor()
           if let image = originalContainer.image {
-            let imageData = try await compressor.compressImage(image)
+            let imageData = try await compressor.compressImageForUpload(image)
             let uploadedMedia = try await uploadMedia(data: imageData, mimeType: "image/jpeg")
             mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
                                         movieTransferable: nil,
