@@ -122,7 +122,7 @@
 "settings.content.default-sensitive" = "내 미디어 항상 민감함으로 표시";
 "settings.content.default-visibility" = "글 기본 공개 범위";
 "settings.content.media" = "미디어";
-"settings.content.media.show.alt" = "이미지 설명 버튼 표시";
+"settings.content.media.show.alt" = "미디어 설명 버튼 표시";
 "settings.content.reading" = "읽을 때";
 "settings.content.posting" = "올릴 때";
 "enum.expand-media.show" = "모두 표시하기";
@@ -420,8 +420,8 @@
 "status.draft.delete" = "삭제";
 "status.draft.save" = "임시 보관함에 저장";
 "status.editor.ai-prompt.correct" = "맞게 고치기";
-"status.editor.ai-prompt.add-tags" = "Add #Tags in place";
-"status.editor.ai-prompt.insert-tags" = "Add #Tags after my text";
+"status.editor.ai-prompt.add-tags" = "주요 단어 #태그 표시하기";
+"status.editor.ai-prompt.insert-tags" = "글 뒤에 #태그 추가하기";
 "status.editor.ai-prompt.emphasize" = "내용 강조하기";
 "status.editor.ai-prompt.fit" = "간결하게 바꾸기";
 "status.editor.description.add" = "설명 추가";
@@ -429,12 +429,12 @@
 "status.editor.drafts.navigation-title" = "임시 보관함";
 "status.editor.emojis.navigation-title" = "커스텀 이모지";
 "status.editor.error.upload" = "전송 오류";
-"status.editor.language-select.navigation-title" = "언어 선택";
+"status.editor.language-select.navigation-title" = "글 언어 지정";
 "status.editor.language-select.recently-used" = "최근 사용";
 "status.editor.language-select.confirmation.detected-%@" = "%@로 표시하여 게시 (인식된 언어)";
 "status.editor.language-select.confirmation.selected-%@" = "%@로 표시하여 게시 (선택한 언어)";
-"status.editor.media.edit-image" = "이미지 편집";
-"status.editor.media.image-description" = "이미지 설명";
+"status.editor.media.edit-image" = "미디어 편집";
+"status.editor.media.image-description" = "미디어 설명";
 "status.editor.mode.edit" = "글 수정";
 "status.editor.mode.new" = "새 글";
 "status.editor.mode.quote-%@" = "%@님의 글 인용";
@@ -443,8 +443,8 @@
 "status.editor.spoiler" = "열람 주의 문구";
 "status.editor.text.placeholder" = "무슨 생각을 하고 계신가요?";
 "status.editor.visibility" = "글 공개 범위";
-"status.editor.photo-library" = "Photos Library";
-"status.editor.browse-file" = "Browse Files";
+"status.editor.photo-library" = "사진 보관함";
+"status.editor.browse-file" = "파일 앱";
 "status.error.loading.message" = "글을 불러오지 못했습니다. 다시 시도해주세요.";
 "status.error.message" = "글의 상세 정보를 불러오지 못했습니다. 다시 시도해주세요.";
 "status.error.title" = "오류";
@@ -502,12 +502,12 @@
 "filter.action.hide" = "완전히 숨김";
 
 // MARK: Accessibility
-"accessibility.editor.button.attach-photo" = "이미지 첨부";
+"accessibility.editor.button.attach-photo" = "미디어 첨부";
 "accessibility.editor.button.poll" = "투표";
 "accessibility.editor.button.spoiler" = "열람 주의 문구";
 "accessibility.editor.button.drafts" = "임시 보관함";
 "accessibility.editor.button.custom-emojis" = "커스텀 이모지";
-"accessibility.editor.button.language" = "언어";
+"accessibility.editor.button.language" = "글 언어 지정";
 "accessibility.tabs.timeline.add-account" = "계정 추가";
 "accessibility.app-account.selector.accounts" = "계정";
 
