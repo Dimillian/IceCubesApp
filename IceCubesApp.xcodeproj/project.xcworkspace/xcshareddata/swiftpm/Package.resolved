@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/divadretlaw/EmojiText",
       "state" : {
-        "revision" : "3b1bd89937470d8970d3fdb6ac34943ecd2cda76",
-        "version" : "2.5.0"
+        "revision" : "b5b0a30933a6dcb6601ad3625690a823fa3f6965",
+        "version" : "2.6.0"
       }
     },
     {
@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Nuke",
       "state" : {
-        "branch" : "nuke-12",
-        "revision" : "baccf1b00f458a77a9f9615e415bc4463029cf5e"
+        "revision" : "6241e100294a2aa70d1811641585ab7da780bd0f",
+        "version" : "12.0.0"
       }
     },
     {
