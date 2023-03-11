@@ -420,8 +420,8 @@
 "status.draft.delete" = "삭제";
 "status.draft.save" = "임시 보관함에 저장";
 "status.editor.ai-prompt.correct" = "맞게 고치기";
-"status.editor.ai-prompt.add-tags" = "주요 단어를 #태그 표시";
-"status.editor.ai-prompt.insert-tags" = "글 뒤에 #태그 추가";
+"status.editor.ai-prompt.add-tags" = "주요 단어 #태그 표시하기";
+"status.editor.ai-prompt.insert-tags" = "글 뒤에 #태그 추가하기";
 "status.editor.ai-prompt.emphasize" = "내용 강조하기";
 "status.editor.ai-prompt.fit" = "간결하게 바꾸기";
 "status.editor.description.add" = "설명 추가";
@@ -443,8 +443,8 @@
 "status.editor.spoiler" = "열람 주의 문구";
 "status.editor.text.placeholder" = "무슨 생각을 하고 계신가요?";
 "status.editor.visibility" = "글 공개 범위";
-"status.editor.photo-library" = "사진 보관함에서 선택";
-"status.editor.browse-file" = "파일 앱에서 선택";
+"status.editor.photo-library" = "사진 보관함";
+"status.editor.browse-file" = "파일 앱";
 "status.error.loading.message" = "글을 불러오지 못했습니다. 다시 시도해주세요.";
 "status.error.message" = "글의 상세 정보를 불러오지 못했습니다. 다시 시도해주세요.";
 "status.error.title" = "오류";
