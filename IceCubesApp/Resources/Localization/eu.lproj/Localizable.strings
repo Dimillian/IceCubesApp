@@ -435,8 +435,8 @@
 "status.editor.spoiler" = "Edukiari buruzko oharra";
 "status.editor.text.placeholder" = "Zer duzu buruan?";
 "status.editor.visibility" = "Bidalketaren irismena";
-"status.editor.photo-library" = "Photos Library";
-"status.editor.browse-file" = "Browse Files";
+"status.editor.photo-library" = "Argazki-liburutegia";
+"status.editor.browse-file" = "Arakatu fitxategiak";
 "status.error.loading.message" = "Errorea bidalketak kargatzean; saiatu berriro.";
 "status.error.message" = "Errorea bidalketa honen testuinguruan; saiatu berriro.";
 "status.error.title" = "Errorea gertatu da";
