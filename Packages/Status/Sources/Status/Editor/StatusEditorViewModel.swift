@@ -363,6 +363,13 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
   }
 
   // MARK: - Shar sheet / Item provider
+  
+  func processURLs(urls: [URL]) {
+    isMediasLoading = true
+    let items = urls.filter { $0.startAccessingSecurityScopedResource() }
+                    .compactMap { NSItemProvider(contentsOf: $0) }
+    processItemsProvider(items: items)
+  }
 
   private func processItemsProvider(items: [NSItemProvider]) {
     Task {
@@ -402,7 +409,9 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
                                         mediaAttachment: nil,
                                         error: nil))
             }
-          } catch {}
+          } catch {
+            isMediasLoading = false
+          }
         }
       }
       if !initialText.isEmpty {
@@ -591,31 +600,22 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
       mediasImages[index] = newContainer
       do {
         if let index = indexOf(container: newContainer) {
+          let compressor = StatusEditorCompressor()
           if let image = originalContainer.image {
-            let data: Data?
-            // Mastodon API don't support images over 5K
-            if image.size.height > 5000 || image.size.width > 5000 {
-              data = image.resized(to: .init(width: image.size.width / 4,
-                                             height: image.size.height / 4))
-                .jpegData(compressionQuality: 0.80)
-            } else {
-              data = image.jpegData(compressionQuality: 0.80)
+            let imageData = try await compressor.compressImage(image)
+            let uploadedMedia = try await uploadMedia(data: imageData, mimeType: "image/jpeg")
+            mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
+                                        movieTransferable: nil,
+                                        gifTransferable: nil,
+                                        mediaAttachment: uploadedMedia,
+                                        error: nil)
+            if let uploadedMedia, uploadedMedia.url == nil {
+              scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
             }
-            if let data {
-              let uploadedMedia = try await uploadMedia(data: data, mimeType: "image/jpeg")
-              mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
-                                          movieTransferable: nil,
-                                          gifTransferable: nil,
-                                          mediaAttachment: uploadedMedia,
-                                          error: nil)
-              if let uploadedMedia, uploadedMedia.url == nil {
-                scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
-              }
-            }
-          } else if let videoURL = await originalContainer.movieTransferable?.compressedVideoURL,
-                    let data = try? Data(contentsOf: videoURL)
-          {
-            let uploadedMedia = try await uploadMedia(data: data, mimeType: videoURL.mimeType())
+          } else if let videoURL = originalContainer.movieTransferable?.url,
+                    let compressedVideoURL = await compressor.compressVideo(videoURL),
+                    let data = try? Data(contentsOf: compressedVideoURL) {
+            let uploadedMedia = try await uploadMedia(data: data, mimeType: compressedVideoURL.mimeType())
             mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
                                         movieTransferable: originalContainer.movieTransferable,
                                         gifTransferable: nil,

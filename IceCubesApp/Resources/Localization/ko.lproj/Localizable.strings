@@ -443,6 +443,8 @@
 "status.editor.spoiler" = "열람 주의 문구";
 "status.editor.text.placeholder" = "무슨 생각을 하고 계신가요?";
 "status.editor.visibility" = "글 공개 범위";
+"status.editor.photo-library" = "Photos Library";
+"status.editor.browse-file" = "Browse Files";
 "status.error.loading.message" = "글을 불러오지 못했습니다. 다시 시도해주세요.";
 "status.error.message" = "글의 상세 정보를 불러오지 못했습니다. 다시 시도해주세요.";
 "status.error.title" = "오류";

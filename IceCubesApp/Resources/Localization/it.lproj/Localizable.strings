@@ -442,6 +442,8 @@
 "status.editor.spoiler" = "Testo spoiler";
 "status.editor.text.placeholder" = "A cosa stai pensando?";
 "status.editor.visibility" = "Visibilità del post";
+"status.editor.photo-library" = "Photos Library";
+"status.editor.browse-file" = "Browse Files";
 "status.error.loading.message" = "Si è verificato un errore durante il caricamento dei post, per favore riprova.";
 "status.error.message" = "Si è verificato un errore durante il caricamento del post, per favore riprova.";
 "status.error.title" = "Si è verificato un errore";

@@ -19,6 +19,8 @@ struct StatusEditorAccessoryView: View {
   @State private var isCustomEmojisSheetDisplay: Bool = false
   @State private var languageSearch: String = ""
   @State private var isLoadingAIRequest: Bool = false
+  @State private var isPhotosPickerPresented: Bool = false
+  @State private var isFileImporterPresented: Bool = false
 
   var body: some View {
     VStack(spacing: 0) {
@@ -26,16 +28,37 @@ struct StatusEditorAccessoryView: View {
       HStack {
         ScrollView(.horizontal) {
           HStack(alignment: .center, spacing: 16) {
-            PhotosPicker(selection: $viewModel.selectedMedias,
-                         matching: .any(of: [.images, .videos])) {
+            Menu {
+              Button {
+                isPhotosPickerPresented = true
+              } label: {
+                Label("status.editor.photo-library", systemImage: "photo")
+              }
+              Button {
+                isFileImporterPresented = true
+              } label: {
+                Label("status.editor.browse-file", systemImage: "folder")
+              }
+            } label: {
               if viewModel.isMediasLoading {
                 ProgressView()
               } else {
                 Image(systemName: "photo.on.rectangle.angled")
               }
             }
+            .photosPicker(isPresented: $isPhotosPickerPresented,
+                          selection: $viewModel.selectedMedias,
+                          matching: .any(of: [.images, .videos]))
+            .fileImporter(isPresented: $isFileImporterPresented,
+                          allowedContentTypes: [.image, .video],
+                          allowsMultipleSelection: true) { result in
+              if let urls = try? result.get() {
+                viewModel.processURLs(urls: urls)
+              }
+            }
             .accessibilityLabel("accessibility.editor.button.attach-photo")
             .disabled(viewModel.showPoll)
+            
 
             Button {
               withAnimation {

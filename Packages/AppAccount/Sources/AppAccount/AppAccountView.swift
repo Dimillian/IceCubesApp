@@ -51,8 +51,8 @@ public struct AppAccountView: View {
               .offset(x: 5, y: -5)
           } else if viewModel.showBadge,
                     let token = viewModel.appAccount.oauthToken,
-                    let notificationsCount = preferences.getNotificationsCount(for: token),
-                    notificationsCount > 0{
+                    preferences.getNotificationsCount(for: token) > 0 {
+            let notificationsCount = preferences.getNotificationsCount(for: token)
             ZStack {
               Circle()
                 .fill(.red)

@@ -446,6 +446,8 @@
 "status.editor.spoiler" = "Тэкст спойлера";
 "status.editor.text.placeholder" = "Пра што вы думаеце?";
 "status.editor.visibility" = "Бачнасць допісу";
+"status.editor.photo-library" = "Photos Library";
+"status.editor.browse-file" = "Browse Files";
 "status.error.loading.message" = "Пры загрузцы паведамленняў адбылася памылка, паўтарыце спробу.";
 "status.error.message" = "Адбылася памылка ў кантэксце гэтай публікацыі, паспрабуйце яшчэ раз.";
 "status.error.title" = "Узнікла памылка";

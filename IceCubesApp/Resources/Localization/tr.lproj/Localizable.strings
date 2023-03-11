@@ -437,6 +437,8 @@
 "status.editor.spoiler" = "Spoiler Yazısı";
 "status.editor.text.placeholder" = "Aklında ne var?";
 "status.editor.visibility" = "Görüntü görünürlüğü";
+"status.editor.photo-library" = "Photos Library";
+"status.editor.browse-file" = "Browse Files";
 "status.error.loading.message" = "Gönderi yüklenirken bir hata oluştu, lütfen tekrar deneyin.";
 "status.error.message" = "Bu gönderi bağlamında bir hata oluştu, lütfen tekrar deneyin.";
 "status.error.title" = "Bir hata oluştu";
