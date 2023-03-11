@@ -68,13 +68,14 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
     } else if let transferable = await getImageTansferable(item: item) {
       return transferable
     }
+    let compressor = StatusEditorCompressor()
     let result = try await item.loadItem(forTypeIdentifier: rawValue)
     if self == .jpeg || self == .png || self == .tiff || self == .image || self == .uiimage || self == .adobeRawImage {
       if let image = result as? UIImage {
         return image
       } else if let imageURL = result as? URL,
-                let data = try? Data(contentsOf: imageURL),
-                let image = UIImage(data: data)
+                let compressedData = await compressor.compressImageFrom(url: imageURL),
+                let image = UIImage(data: compressedData)
       {
         return image
       } else if let data = result as? Data,

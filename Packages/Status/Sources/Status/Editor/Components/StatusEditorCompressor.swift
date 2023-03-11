@@ -35,7 +35,6 @@ actor StatusEditorCompressor {
       let isPNG: Bool = {
         guard let utType = cgImage.utType else { return false }
         return (utType as String) == UTType.png.identifier
-        
       }()
       
       let destinationProperties = [
