@@ -145,6 +145,9 @@ struct SettingsTabs: View {
       NavigationLink(destination: SwipeActionsSettingsView()) {
         Label("settings.general.swipeactions", systemImage: "hand.draw")
       }
+      NavigationLink(destination: TranslationSettingsView()) {
+        Label("Translation Settings", systemImage: "captions.bubble")
+      }
       Link(destination: URL(string: UIApplication.openSettingsURLString)!) {
         Label("settings.system", systemImage: "gear")
       }
@@ -182,9 +185,6 @@ struct SettingsTabs: View {
       Toggle(isOn: $preferences.soundEffectEnabled) {
         Label("settings.other.sound-effect", systemImage: "hifispeaker")
       }
-        Toggle(isOn: $preferences.translateWithDeepl) {
-            Label("settings.other.always-deepl", systemImage: "captions.bubble")
-        }
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }

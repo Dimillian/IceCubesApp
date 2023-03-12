@@ -295,7 +295,7 @@ public class StatusRowViewModel: ObservableObject {
     }
     
   func translate(userLang: String) async {
-      if !(preferences?.translateWithDeepl ?? false) {
+      if !deepLUserAPIKeyExists() {
           do {
               withAnimation {
                   isLoadingTranslation = true
@@ -316,15 +316,30 @@ public class StatusRowViewModel: ObservableObject {
     await translateWithDeepL(userLang: userLang)
   }
 
-    func translateWithDeepL(userLang: String) async {
-      let deepLClient = DeepLClient()
-      let translation = try? await deepLClient.request(target: userLang,
-                                                       text: finalStatus.content.asRawText)
-      withAnimation {
-        self.translation = translation
-        isLoadingTranslation = false
-      }
+  func translateWithDeepL(userLang: String) async {
+    let deepLClient = getDeepLClient()
+    let translation = try? await deepLClient.request(target: userLang,
+                                                     text: finalStatus.content.asRawText)
+    withAnimation {
+      self.translation = translation
+      isLoadingTranslation = false
     }
+  }
+
+  private func getDeepLClient() -> DeepLClient {
+    let userAPIKey = getUserAPIKey()
+    let userAPIfree = preferences?.userDeeplAPIFree ?? false
+    
+    return DeepLClient(userAPIKey: userAPIKey, userAPIFree: userAPIfree)
+  }
+
+  private func getUserAPIKey() -> String? {
+    KeychainHelper.read(service: "API Token", account: "DeepL", type: String.self)
+  }
+
+  func deepLUserAPIKeyExists() -> Bool {
+    getUserAPIKey() != nil
+  }
 
   func fetchRemoteStatus() async -> Bool {
     guard isRemote, let remoteStatusURL = URL(string: finalStatus.url ?? "") else { return false }
