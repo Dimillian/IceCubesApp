@@ -15,11 +15,18 @@ actor StatusEditorCompressor {
         return
       }
       
+      let maxPixelSize: Int
+      if Bundle.main.bundlePath.hasSuffix(".appex") {
+        maxPixelSize = 1536
+      } else {
+        maxPixelSize = 4096
+      }
+      
       let downsampleOptions = [
         kCGImageSourceCreateThumbnailFromImageAlways: true,
         kCGImageSourceCreateThumbnailWithTransform: true,
-        kCGImageSourceThumbnailMaxPixelSize: 4096,
-      ] as CFDictionary
+        kCGImageSourceThumbnailMaxPixelSize: maxPixelSize,
+      ] as [CFString : Any] as CFDictionary
       
       guard let cgImage = CGImageSourceCreateThumbnailAtIndex(source, 0, downsampleOptions) else {
         continuation.resume(returning: nil)
