@@ -64,7 +64,7 @@ public struct OpenAIClient {
       case let .correct(input):
         return ChatRequest(content: "Fix the spelling and grammar mistakes in the following text: \(input)", temperature: 0.2)
       case let .addTags(input):
-        return ChatRequest(content: "Add relevant camel-cased hashtags in the following text. Don't try to search for context or add hashtags of there is not enough context: \(input)", temperature: 0.1)
+        return ChatRequest(content: "Replace relevant words with camel-cased hashtags in the following text. Don't try to search for context or add hashtags of there is not enough context: \(input)", temperature: 0.1)
       case let .insertTags(input):
         return ChatRequest(content: "Return the input with added camel-cased hashtags at the end of the input. Don't try to search for context or add hashtags of there is not enough context: \(input)", temperature: 0.2)
       case let .shorten(input):
