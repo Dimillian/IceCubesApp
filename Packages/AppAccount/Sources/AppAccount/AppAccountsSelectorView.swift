@@ -16,12 +16,18 @@ public struct AppAccountsSelectorView: View {
   private let accountCreationEnabled: Bool
   private let avatarSize: AvatarView.Size
 
-  var showNotificationBadge: Bool {
+  private var showNotificationBadge: Bool {
     accountsViewModel
       .filter { $0.account?.id != currentAccount.account?.id }
       .compactMap { $0.appAccount.oauthToken }
       .map { preferences.getNotificationsCount(for: $0) }
       .reduce(0, +) > 0
+  }
+  
+  private var preferredHeight: CGFloat {
+    var baseHeight: CGFloat = 220
+    baseHeight += CGFloat(60 * accountsViewModel.count)
+    return baseHeight
   }
 
   public init(routerPath: RouterPath,
@@ -41,7 +47,7 @@ public struct AppAccountsSelectorView: View {
       labelView
     }
     .sheet(isPresented: $isPresented, content: {
-      accountsView.presentationDetents([.medium, .large])
+      accountsView.presentationDetents([.height(preferredHeight), .large])
       .onAppear {
         refreshAccounts()
       }
