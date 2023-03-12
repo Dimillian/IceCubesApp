@@ -46,7 +46,7 @@ public struct StatusRowView: View {
              theme.avatarPosition == .leading
           {
             Button {
-              viewModel.routerPath.navigate(to: .accountDetailWithAccount(account: viewModel.finalStatus.account))
+              viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
             } label: {
               AvatarView(url: viewModel.finalStatus.account.avatar, size: .status)
             }
