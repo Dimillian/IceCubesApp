@@ -285,6 +285,7 @@
 "account.list.name" = "Zerrendaren izena";
 "account.post.pinned" = "Finkatutako bidalketa";
 "account.posts" = "bidalketa";
+"account.posts.title-%@" = "%@ bidalketa";
 "account.relation.follows-you" = "Jarraitzen dizu";
 "account.joined" = "Batze-data:";
 "account.action.logout" = "Amaitu saioa";

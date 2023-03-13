@@ -286,6 +286,7 @@
 "account.list.name" = "Назва списку";
 "account.post.pinned" = "Закріплений допис";
 "account.posts" = "Дописи";
+"account.posts.title-%@" = "%@ Дописи";
 "account.relation.follows-you" = "Підписується на вас";
 "account.joined" = "Доєднався";
 "account.action.logout" = "Вийти з облікового запису";

@@ -282,6 +282,7 @@
 "account.list.name" = "Lijstnaam";
 "account.post.pinned" = "Vastgezette post";
 "account.posts" = "Posts";
+"account.posts.title-%@" = "%@ Posts";
 "account.relation.follows-you" = "Volgt jou";
 "account.joined" = "Lid geworden";
 "account.action.logout" = "Log uit";

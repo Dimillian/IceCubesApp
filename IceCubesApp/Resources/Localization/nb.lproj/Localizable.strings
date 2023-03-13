@@ -285,6 +285,7 @@
 "account.list.name" = "Listens navn";
 "account.post.pinned" = "Festet innlegg";
 "account.posts" = "Innlegg";
+"account.posts.title-%@" = "%@ Innlegg";
 "account.relation.follows-you" = "Følger deg";
 "account.joined" = "Ble med";
 "account.action.logout" = "Logg ut konto";

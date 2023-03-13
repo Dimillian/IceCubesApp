@@ -286,6 +286,7 @@
 "account.list.name" = "列表名稱";
 "account.post.pinned" = "釘選嘟文";
 "account.posts" = "嘟文";
+"account.posts.title-%@" = "%@ 嘟文";
 "account.relation.follows-you" = "跟隨了您";
 "account.joined" = "加入日期";
 "account.action.logout" = "登出帳號";

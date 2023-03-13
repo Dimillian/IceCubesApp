@@ -285,6 +285,7 @@
 "account.list.name" = "Nome della lista";
 "account.post.pinned" = "Post fissato";
 "account.posts" = "Post";
+"account.posts.title-%@" = "%@ Posts";
 "account.relation.follows-you" = "Ti segue";
 "account.joined" = "utente dal";
 "account.action.logout" = "Esci dall'account";

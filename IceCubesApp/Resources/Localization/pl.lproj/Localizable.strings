@@ -283,6 +283,7 @@
 "account.list.name" = "Nazwa listy";
 "account.post.pinned" = "Przypięty post";
 "account.posts" = "Posty";
+"account.posts.title-%@" = "%@ Posty";
 "account.relation.follows-you" = "Obserwuje ciebie";
 "account.joined" = "Dołączył(a)";
 "account.action.logout" = "Wyloguj się";

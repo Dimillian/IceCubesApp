@@ -290,6 +290,7 @@
 "account.list.name" = "Назва спісу";
 "account.post.pinned" = "Замацаваны допіс";
 "account.posts" = "Допісы";
+"account.posts.title-%@" = "%@ Допісы";
 "account.relation.follows-you" = "Сочыць за табой";
 "account.joined" = "Далучыліся";
 "account.action.logout" = "Выйсці з уліковага запісу";

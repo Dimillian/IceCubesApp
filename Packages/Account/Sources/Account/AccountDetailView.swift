@@ -150,7 +150,7 @@ public struct AccountDetailView: View {
       AccountDetailHeaderView(viewModel: viewModel,
                               account: .placeholder(),
                               scrollViewProxy: proxy)
-        .redacted(reason: .placeholder)
+      .redacted(reason: .placeholder)
     case let .data(account):
       AccountDetailHeaderView(viewModel: viewModel,
                               account: account,
@@ -353,6 +353,11 @@ public struct AccountDetailView: View {
       } label: {
         Image(systemName: "ellipsis.circle")
       }
+      .navigationTitle(
+        Text (
+          "account.posts.title-\(viewModel.account?.statusesCount ?? 0, format: .number.notation(.automatic))"
+        )
+      )
     }
   }
 }

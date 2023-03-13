@@ -286,6 +286,7 @@
 "account.list.name" = "리스트 이름";
 "account.post.pinned" = "고정된 글";
 "account.posts" = "글";
+"account.posts.title-%@" = "%@ 글";
 "account.relation.follows-you" = "나를 팔로우함";
 "account.joined" = "가입";
 "account.action.logout" = "로그아웃";

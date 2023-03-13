@@ -287,6 +287,7 @@
 "account.list.name" = "List name";
 "account.post.pinned" = "Pinned post";
 "account.posts" = "Posts";
+"account.posts.title-%@" = "%@ Posts";
 "account.relation.follows-you" = "Follows You";
 "account.joined" = "Joined";
 "account.action.logout" = "Log Out Account";

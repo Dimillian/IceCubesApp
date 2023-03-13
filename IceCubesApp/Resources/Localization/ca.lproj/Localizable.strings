@@ -284,6 +284,7 @@
 "account.list.name" = "Nom de la llista";
 "account.post.pinned" = "Publicació fixada";
 "account.posts" = "Publicacions";
+"account.posts.title-%@" = "%@ Publicacions";
 "account.relation.follows-you" = "Us segueix";
 "account.joined" = "S'ha unit";
 "account.action.logout" = "Tanca la sessió";
