@@ -49,7 +49,7 @@ public class UserPreferences: ObservableObject {
   @AppStorage("swipeactions-icon-style") public var swipeActionsIconStyle: SwipeActionsIconStyle = .iconWithText
 
   @AppStorage("requested_review") public var requestedReview = false
-  
+
   @AppStorage("collapse-long-posts") public var collapseLongPosts = true
 
   public enum SwipeActionsIconStyle: String, CaseIterable {
@@ -70,7 +70,7 @@ public class UserPreferences: ObservableObject {
     //     Main actor-isolated static property 'allCases' cannot be used to
     //     satisfy nonisolated protocol requirement
     //
-    nonisolated public static var allCases: [Self] {
+    public nonisolated static var allCases: [Self] {
       [.iconWithText, .iconOnly]
     }
   }

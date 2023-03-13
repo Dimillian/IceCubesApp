@@ -112,7 +112,8 @@ struct IceCubesApp: App {
     SideBarView(selectedTab: $selectedTab,
                 popToRootTab: $popToRootTab,
                 tabs: availableTabs,
-                routerPath: sidebarRouterPath) {
+                routerPath: sidebarRouterPath)
+    {
       GeometryReader { _ in
         HStack(spacing: 0) {
           ZStack {
@@ -165,12 +166,12 @@ struct IceCubesApp: App {
           popToRootTab = selectedTab
         }
       }
-      
+
       HapticManager.shared.fireHaptic(of: .tabSelection)
       SoundEffectManager.shared.playSound(of: .tabSelection)
-      
+
       selectedTab = newTab
-      
+
       DispatchQueue.main.async {
         if selectedTab == .notifications,
            let token = appAccountsManager.currentAccount.oauthToken
@@ -179,7 +180,7 @@ struct IceCubesApp: App {
           watcher.unreadNotificationsCount = 0
         }
       }
-      
+
     })) {
       ForEach(availableTabs) { tab in
         tab.makeContentView(popToRootTab: $popToRootTab)

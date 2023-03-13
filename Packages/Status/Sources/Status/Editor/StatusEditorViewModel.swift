@@ -20,6 +20,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
       }
     }
   }
+
   var theme: Theme?
   var preferences: UserPreferences?
   var languageConfirmationDialogLanguages: (detected: String, selected: String)?
@@ -69,7 +70,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
   var statusTextCharacterLength: Int {
     urlLengthAdjustments - statusText.string.utf16.count - spoilerTextCount
   }
-  
+
   private var itemsProvider: [NSItemProvider]?
 
   @Published var backupStatusText: NSAttributedString?
@@ -135,7 +136,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
   }
 
   private var mentionString: String?
-  
+
   private var uploadTask: Task<Void, Never>?
   private var suggestedTask: Task<Void, Never>?
 
@@ -363,11 +364,11 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
   }
 
   // MARK: - Shar sheet / Item provider
-  
+
   func processURLs(urls: [URL]) {
     isMediasLoading = true
     let items = urls.filter { $0.startAccessingSecurityScopedResource() }
-                    .compactMap { NSItemProvider(contentsOf: $0) }
+      .compactMap { NSItemProvider(contentsOf: $0) }
     processItemsProvider(items: items)
   }
 
@@ -391,7 +392,8 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
                                         error: nil))
             } else if let content = content as? ImageFileTranseferable,
                       let compressedData = await compressor.compressImageFrom(url: content.url),
-                      let image = UIImage(data: compressedData) {
+                      let image = UIImage(data: compressedData)
+            {
               mediasImages.append(.init(image: image,
                                         movieTransferable: nil,
                                         gifTransferable: nil,
@@ -616,7 +618,8 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
             }
           } else if let videoURL = originalContainer.movieTransferable?.url,
                     let compressedVideoURL = await compressor.compressVideo(videoURL),
-                    let data = try? Data(contentsOf: compressedVideoURL) {
+                    let data = try? Data(contentsOf: compressedVideoURL)
+          {
             let uploadedMedia = try await uploadMedia(data: data, mimeType: compressedVideoURL.mimeType())
             mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
                                         movieTransferable: originalContainer.movieTransferable,

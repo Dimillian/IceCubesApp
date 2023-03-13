@@ -137,9 +137,9 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
                                featuredTags: featuredTags,
                                relationships: relationships)
       } catch {
-          return try await .init(account: account,
-                                 featuredTags: [],
-                                 relationships: relationships)
+        return try await .init(account: account,
+                               featuredTags: [],
+                               relationships: relationships)
       }
     }
     return try await .init(account: account,

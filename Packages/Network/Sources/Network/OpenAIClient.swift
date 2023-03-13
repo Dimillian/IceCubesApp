@@ -30,28 +30,28 @@ public struct OpenAIClient {
     decoder.keyDecodingStrategy = .convertFromSnakeCase
     return decoder
   }
-  
+
   public struct ChatRequest: OpenAIRequest {
     public struct Message: Encodable {
       public let role = "user"
       public let content: String
     }
-    
+
     let model = "gpt-3.5-turbo"
     let messages: [Message]
-    
+
     let temperature: CGFloat
-    
+
     var path: String {
       "chat/completions"
     }
 
     public init(content: String, temperature: CGFloat) {
-      self.messages = [.init(content: content)]
+      messages = [.init(content: content)]
       self.temperature = temperature
     }
   }
-  
+
   public enum Prompt {
     case correct(input: String)
     case shorten(input: String)
@@ -81,7 +81,7 @@ public struct OpenAIClient {
         public let role: String
         public let content: String
       }
-      
+
       public let message: Message?
     }
 

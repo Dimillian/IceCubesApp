@@ -26,9 +26,9 @@ public struct AccountsListRow: View {
   @EnvironmentObject private var client: Client
 
   @StateObject var viewModel: AccountsListRowViewModel
-  
+
   @State private var isEditingRelationshipNote: Bool = false
-  
+
   let isFollowRequest: Bool
   let requestUpdated: (() -> Void)?
 
@@ -89,7 +89,7 @@ public struct AccountsListRow: View {
         AccountDetailHeaderView(viewModel: .init(account: viewModel.account),
                                 account: viewModel.account,
                                 scrollViewProxy: nil)
-        .applyAccountDetailsRowStyle(theme: theme)
+          .applyAccountDetailsRowStyle(theme: theme)
       }
       .listStyle(.plain)
       .scrollContentBackground(.hidden)
@@ -98,6 +98,5 @@ public struct AccountsListRow: View {
       .environmentObject(currentAccount)
       .environmentObject(client)
     }
-
   }
 }

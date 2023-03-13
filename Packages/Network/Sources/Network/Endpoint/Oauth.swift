@@ -13,7 +13,7 @@ public enum Oauth: Endpoint {
       return "oauth/token"
     }
   }
-  
+
   public var jsonValue: Encodable? {
     switch self {
     case let .token(code, clientId, clientSecret):
@@ -22,7 +22,7 @@ public enum Oauth: Endpoint {
       return nil
     }
   }
-  
+
   public struct TokenData: Encodable {
     public let grantType = "authorization_code"
     public let clientId: String

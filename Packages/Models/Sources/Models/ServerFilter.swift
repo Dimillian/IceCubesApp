@@ -22,14 +22,14 @@ public struct ServerFilter: Codable, Identifiable, Hashable, Sendable {
   public let context: [Context]
   public let expiresIn: Int?
   public let expiresAt: ServerDate?
-  
+
   public func hasExpiry() -> Bool {
     return expiresAt != nil
   }
-  
+
   public func isExpired() -> Bool {
     if let expiresAtDate = expiresAt?.asDate {
-       return expiresAtDate < Date()
+      return expiresAtDate < Date()
     } else {
       return false
     }

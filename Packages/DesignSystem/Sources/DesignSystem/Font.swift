@@ -44,15 +44,15 @@ public extension Font {
   static var scaledHeadline: Font {
     customFont(size: userScaledFontSize(baseSize: headline), relativeTo: .headline).weight(.semibold)
   }
-    
+
   static var scaledHeadlineFont: UIFont {
     customUIFont(size: userScaledFontSize(baseSize: headline))
   }
-  
+
   static var scaledBodyFocused: Font {
     customFont(size: userScaledFontSize(baseSize: body + 2), relativeTo: .body)
   }
-  
+
   static var scaledBodyFocusedFont: UIFont {
     customUIFont(size: userScaledFontSize(baseSize: body + 2))
   }
@@ -109,11 +109,13 @@ public extension UIFont {
     }
     return UIFont(descriptor: descriptor, size: pointSize)
   }
+
   var emojiSize: CGFloat {
-    self.pointSize
+    pointSize
   }
+
   var emojiBaselineOffset: CGFloat {
     // Center emoji with capital letter size of font
-    -(self.emojiSize - self.capHeight) / 2
+    -(emojiSize - capHeight) / 2
   }
 }

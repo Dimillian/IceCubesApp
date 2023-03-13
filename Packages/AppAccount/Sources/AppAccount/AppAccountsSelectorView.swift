@@ -23,7 +23,7 @@ public struct AppAccountsSelectorView: View {
       .map { preferences.getNotificationsCount(for: $0) }
       .reduce(0, +) > 0
   }
-  
+
   private var preferredHeight: CGFloat {
     var baseHeight: CGFloat = 220
     baseHeight += CGFloat(60 * accountsViewModel.count)
@@ -48,9 +48,9 @@ public struct AppAccountsSelectorView: View {
     }
     .sheet(isPresented: $isPresented, content: {
       accountsView.presentationDetents([.height(preferredHeight), .large])
-      .onAppear {
-        refreshAccounts()
-      }
+        .onAppear {
+          refreshAccounts()
+        }
     })
     .onChange(of: currentAccount.account?.id) { _ in
       refreshAccounts()
@@ -88,7 +88,7 @@ public struct AppAccountsSelectorView: View {
           }
         }
         .listRowBackground(theme.primaryBackgroundColor)
-        
+
         if accountCreationEnabled {
           Section {
             Button {
@@ -121,7 +121,7 @@ public struct AppAccountsSelectorView: View {
       }
     }
   }
-  
+
   private var settingsButton: some View {
     Button {
       isPresented = false

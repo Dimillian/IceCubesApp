@@ -22,7 +22,8 @@ class VideoPlayerViewModel: ObservableObject {
     }
     guard let player else { return }
     NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
-                                           object: player.currentItem, queue: .main) { [weak self] _ in
+                                           object: player.currentItem, queue: .main)
+    { [weak self] _ in
       if autoPlay {
         self?.player?.seek(to: CMTime.zero)
         self?.player?.play()

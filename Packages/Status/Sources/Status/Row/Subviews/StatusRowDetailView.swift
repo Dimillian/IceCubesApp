@@ -5,7 +5,7 @@ import SwiftUI
 
 struct StatusRowDetailView: View {
   @Environment(\.openURL) private var openURL
-  
+
   @EnvironmentObject private var statusDataController: StatusDataController
 
   @ObservedObject var viewModel: StatusRowViewModel

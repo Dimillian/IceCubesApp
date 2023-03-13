@@ -48,14 +48,14 @@ struct ContentSettingsView: View {
           Text("settings.content.expand-spoilers")
         }
         .disabled(userPreferences.useInstanceContentSettings)
-        
+
         Picker("settings.content.expand-media", selection: $userPreferences.appAutoExpandMedia) {
           ForEach(ServerPreferences.AutoExpandMedia.allCases, id: \.rawValue) { media in
             Text(media.description).tag(media)
           }
         }
         .disabled(userPreferences.useInstanceContentSettings)
-        
+
         Toggle(isOn: $userPreferences.collapseLongPosts) {
           Text("settings.content.collapse-long-posts")
         }

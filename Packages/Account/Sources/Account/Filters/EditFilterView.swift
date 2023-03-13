@@ -23,9 +23,9 @@ struct EditFilterView: View {
   @FocusState private var isTitleFocused: Bool
 
   private var data: ServerFilterData {
-    var expiresIn: String? = nil;
+    var expiresIn: String?
     // we add 50 seconds, otherwise we immediately show 6d for a 7d filter (6d, 23h, 59s)
-    switch(expirySelection){
+    switch expirySelection {
     case .infinite:
       expiresIn = "" // need to send an empty value in order for the server to clear this field in the filter
     case .custom:
@@ -33,11 +33,11 @@ struct EditFilterView: View {
     default:
       expiresIn = String(expirySelection.rawValue + 50)
     }
-    
+
     return ServerFilterData(title: title,
-          context: contexts,
-          filterAction: filterAction,
-          expiresIn: expiresIn)
+                            context: contexts,
+                            filterAction: filterAction,
+                            expiresIn: expiresIn)
   }
 
   private var canSave: Bool {
@@ -53,7 +53,7 @@ struct EditFilterView: View {
     _expiresAt = .init(initialValue: filter?.expiresAt?.asDate)
     _expirySelection = .init(initialValue: filter?.expiresAt == nil ? .infinite : .custom)
   }
-  
+
   var body: some View {
     Form {
       titleSection
@@ -95,15 +95,14 @@ struct EditFilterView: View {
       }
       if expirySelection != .infinite {
         DatePicker("filter.edit.expiry.date-time",
-                   selection: Binding<Date>(get: {self.expiresAt ?? Date()}, set: {self.expiresAt = $0}),
-                   displayedComponents: [.date, .hourAndMinute]
-        )
-        .disabled(expirySelection != .custom)
+                   selection: Binding<Date>(get: { self.expiresAt ?? Date() }, set: { self.expiresAt = $0 }),
+                   displayedComponents: [.date, .hourAndMinute])
+          .disabled(expirySelection != .custom)
       }
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
-  
+
   @ViewBuilder
   private var titleSection: some View {
     Section("filter.edit.title") {
@@ -116,7 +115,7 @@ struct EditFilterView: View {
         }
     }
     .listRowBackground(theme.primaryBackgroundColor)
-    
+
     if filter == nil, !title.isEmpty {
       Section {
         Button {

@@ -1,18 +1,18 @@
 import Foundation
-import SwiftUI
 import Models
 import Network
+import SwiftUI
 
 @MainActor
 public protocol StatusDataControlling: ObservableObject {
   var isReblogged: Bool { get set }
   var isBookmarked: Bool { get set }
   var isFavorited: Bool { get set }
-  
+
   var favoritesCount: Int { get set }
   var reblogsCount: Int { get set }
   var repliesCount: Int { get set }
-  
+
   func toggleBookmark(remoteStatus: String?) async
   func toggleReblog(remoteStatus: String?) async
   func toggleFavorite(remoteStatus: String?) async
@@ -21,14 +21,14 @@ public protocol StatusDataControlling: ObservableObject {
 @MainActor
 public final class StatusDataControllerProvider {
   public static let shared = StatusDataControllerProvider()
-  
+
   private var cache: NSMutableDictionary = [:]
-  
+
   private struct CacheKey: Hashable {
     let statusId: String
     let client: Client
   }
-  
+
   public func dataController(for status: any AnyStatus, client: Client) -> StatusDataController {
     let key = CacheKey(statusId: status.id, client: client)
     if let controller = cache[key] as? StatusDataController {
@@ -38,7 +38,7 @@ public final class StatusDataControllerProvider {
     cache[key] = controller
     return controller
   }
-  
+
   public func updateDataControllers(for statuses: [Status], client: Client) {
     for status in statuses {
       let realStatus: AnyStatus = status.reblog ?? status
@@ -52,42 +52,42 @@ public final class StatusDataControllerProvider {
 public final class StatusDataController: StatusDataControlling {
   private let status: AnyStatus
   private let client: Client
-  
+
   public var isReblogged: Bool
   public var isBookmarked: Bool
   public var isFavorited: Bool
-  
+
   public var favoritesCount: Int
   public var reblogsCount: Int
   public var repliesCount: Int
-  
+
   init(status: AnyStatus, client: Client) {
     self.status = status
     self.client = client
-    
-    self.isReblogged = status.reblogged == true
-    self.isBookmarked = status.bookmarked == true
-    self.isFavorited = status.favourited == true
-    
-    self.reblogsCount = status.reblogsCount
-    self.repliesCount = status.repliesCount
-    self.favoritesCount = status.favouritesCount
+
+    isReblogged = status.reblogged == true
+    isBookmarked = status.bookmarked == true
+    isFavorited = status.favourited == true
+
+    reblogsCount = status.reblogsCount
+    repliesCount = status.repliesCount
+    favoritesCount = status.favouritesCount
   }
-  
+
   public func updateFrom(status: AnyStatus, publishUpdate: Bool) {
-    self.isReblogged = status.reblogged == true
-    self.isBookmarked = status.bookmarked == true
-    self.isFavorited = status.favourited == true
-    
-    self.reblogsCount = status.reblogsCount
-    self.repliesCount = status.repliesCount
-    self.favoritesCount = status.favouritesCount
-    
+    isReblogged = status.reblogged == true
+    isBookmarked = status.bookmarked == true
+    isFavorited = status.favourited == true
+
+    reblogsCount = status.reblogsCount
+    repliesCount = status.repliesCount
+    favoritesCount = status.favouritesCount
+
     if publishUpdate {
       objectWillChange.send()
     }
   }
-  
+
   public func toggleFavorite(remoteStatus: String?) async {
     guard client.isAuth else { return }
     isFavorited.toggle()
@@ -104,8 +104,7 @@ public final class StatusDataController: StatusDataControlling {
       objectWillChange.send()
     }
   }
-  
-  
+
   public func toggleReblog(remoteStatus: String?) async {
     guard client.isAuth else { return }
     isReblogged.toggle()
@@ -122,7 +121,7 @@ public final class StatusDataController: StatusDataControlling {
       objectWillChange.send()
     }
   }
-  
+
   public func toggleBookmark(remoteStatus: String?) async {
     guard client.isAuth else { return }
     isBookmarked.toggle()

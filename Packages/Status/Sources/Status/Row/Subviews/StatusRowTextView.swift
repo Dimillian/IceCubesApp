@@ -7,7 +7,7 @@ struct StatusRowTextView: View {
   @EnvironmentObject private var theme: Theme
 
   @ObservedObject var viewModel: StatusRowViewModel
-  
+
   var body: some View {
     VStack {
       HStack {

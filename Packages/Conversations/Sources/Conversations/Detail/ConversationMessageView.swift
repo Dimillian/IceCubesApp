@@ -177,7 +177,8 @@ struct ConversationMessageView: View {
       let width = mediaWidth(proxy: proxy)
       if let url = attachement.url {
         LazyImage(request: makeImageRequest(for: url,
-                                            size: .init(width: width, height: 200))) { state in
+                                            size: .init(width: width, height: 200)))
+        { state in
           if let image = state.image {
             image
               .resizable()

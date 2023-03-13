@@ -41,7 +41,7 @@ public extension EnvironmentValues {
     get { self[IsInCaptureMode.self] }
     set { self[IsInCaptureMode.self] = newValue }
   }
-  
+
   var isSupporter: Bool {
     get { self[IsSupporter.self] }
     set { self[IsSupporter.self] = newValue }

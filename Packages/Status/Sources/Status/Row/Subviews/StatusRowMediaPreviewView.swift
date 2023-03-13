@@ -124,7 +124,8 @@ public struct StatusRowMediaPreviewView: View {
       }
     }
     .alert("status.editor.media.image-description",
-           isPresented: $isAltAlertDisplayed) {
+           isPresented: $isAltAlertDisplayed)
+    {
       Button("alert.button.ok", action: {})
     } message: {
       Text(altTextDisplayed ?? "")

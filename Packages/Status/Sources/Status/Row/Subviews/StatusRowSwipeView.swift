@@ -109,9 +109,9 @@ struct StatusRowSwipeView: View {
                                isBookmarked: statusDataController.isBookmarked,
                                privateBoost: privateBoost),
             imageNamed: action.iconName(isReblogged: statusDataController.isReblogged,
-                                         isFavorited: statusDataController.isFavorited,
-                                         isBookmarked: statusDataController.isBookmarked,
-                                         privateBoost: privateBoost))
+                                        isFavorited: statusDataController.isFavorited,
+                                        isBookmarked: statusDataController.isBookmarked,
+                                        privateBoost: privateBoost))
         .labelStyle(.iconOnly)
         .environment(\.symbolVariants, .none)
     case .iconWithText:
@@ -120,9 +120,9 @@ struct StatusRowSwipeView: View {
                                isBookmarked: statusDataController.isBookmarked,
                                privateBoost: privateBoost),
             imageNamed: action.iconName(isReblogged: statusDataController.isReblogged,
-                                           isFavorited: statusDataController.isFavorited,
-                                           isBookmarked: statusDataController.isBookmarked,
-                                           privateBoost: privateBoost))
+                                        isFavorited: statusDataController.isFavorited,
+                                        isBookmarked: statusDataController.isBookmarked,
+                                        privateBoost: privateBoost))
         .labelStyle(.titleAndIcon)
         .environment(\.symbolVariants, .none)
     }

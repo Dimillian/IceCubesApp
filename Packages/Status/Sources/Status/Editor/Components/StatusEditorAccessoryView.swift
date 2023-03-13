@@ -51,14 +51,14 @@ struct StatusEditorAccessoryView: View {
                           matching: .any(of: [.images, .videos]))
             .fileImporter(isPresented: $isFileImporterPresented,
                           allowedContentTypes: [.image, .video],
-                          allowsMultipleSelection: true) { result in
+                          allowsMultipleSelection: true)
+            { result in
               if let urls = try? result.get() {
                 viewModel.processURLs(urls: urls)
               }
             }
             .accessibilityLabel("accessibility.editor.button.attach-photo")
             .disabled(viewModel.showPoll)
-            
 
             Button {
               withAnimation {

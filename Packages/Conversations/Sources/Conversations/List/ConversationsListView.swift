@@ -47,7 +47,8 @@ public struct ConversationsListView: View {
           } else if viewModel.isError {
             ErrorView(title: "conversations.error.title",
                       message: "conversations.error.message",
-                      buttonTitle: "conversations.error.button") {
+                      buttonTitle: "conversations.error.button")
+            {
               Task {
                 await viewModel.fetchConversations()
               }

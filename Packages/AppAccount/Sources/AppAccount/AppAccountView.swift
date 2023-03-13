@@ -7,7 +7,7 @@ public struct AppAccountView: View {
   @EnvironmentObject private var routerPath: RouterPath
   @EnvironmentObject private var appAccounts: AppAccountsManager
   @EnvironmentObject private var preferences: UserPreferences
-  
+
   @StateObject var viewModel: AppAccountViewModel
 
   public init(viewModel: AppAccountViewModel) {
@@ -51,7 +51,8 @@ public struct AppAccountView: View {
               .offset(x: 5, y: -5)
           } else if viewModel.showBadge,
                     let token = viewModel.appAccount.oauthToken,
-                    preferences.getNotificationsCount(for: token) > 0 {
+                    preferences.getNotificationsCount(for: token) > 0
+          {
             let notificationsCount = preferences.getNotificationsCount(for: token)
             ZStack {
               Circle()

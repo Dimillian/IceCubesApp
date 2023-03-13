@@ -39,11 +39,11 @@ struct AboutView: View {
             .cornerRadius(4)
           Spacer()
         }
-        
+
         Link(destination: URL(string: "https://github.com/Dimillian/IceCubesApp/blob/main/PRIVACY.MD")!) {
           Label("settings.support.privacy-policy", systemImage: "lock")
         }
-        
+
         Link(destination: URL(string: "https://github.com/Dimillian/IceCubesApp/blob/main/TERMS.MD")!) {
           Label("settings.support.terms-of-use", systemImage: "checkmark.shield")
         }
@@ -51,7 +51,7 @@ struct AboutView: View {
         Text("\(versionNumber)©2023 Thomas Ricouard")
       }
       .listRowBackground(theme.primaryBackgroundColor)
-      
+
       Section {
         Text("""
         • [EmojiText](https://github.com/divadretlaw/EmojiText)

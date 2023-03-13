@@ -31,11 +31,11 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
   //     Main actor-isolated static property 'allCases' cannot be used to
   //     satisfy nonisolated protocol requirement
   //
-  nonisolated public static var allCases: [StatusEditorUTTypeSupported] {
+  public nonisolated static var allCases: [StatusEditorUTTypeSupported] {
     [.url, .text, .plaintext, .image, .jpeg, .png, .tiff, .video,
      .movie, .mp4, .gif, .gif2, .quickTimeMovie, .uiimage, .adobeRawImage]
   }
-  
+
   static func types() -> [UTType] {
     [.url, .text, .plainText, .image, .jpeg, .png, .tiff, .video, .mpeg4Movie, .gif, .movie, .quickTimeMovie]
   }

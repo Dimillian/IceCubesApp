@@ -1,6 +1,6 @@
+import AVKit
 import CoreHaptics
 import UIKit
-import AVKit
 
 public class SoundEffectManager {
   public static let shared: SoundEffectManager = .init()
@@ -13,7 +13,7 @@ public class SoundEffectManager {
   }
 
   private let userPreferences = UserPreferences.shared
-  
+
   private var currentPlayer: AVAudioPlayer?
 
   private init() {}

@@ -1,35 +1,35 @@
+import Combine
 import DesignSystem
 import Env
 import Models
 import Network
 import Status
 import SwiftUI
-import Combine
 
 class DisplaySettingsLocalColors: ObservableObject {
   @Published var tintColor = Theme.shared.tintColor
   @Published var primaryBackgroundColor = Theme.shared.primaryBackgroundColor
   @Published var secondaryBackgroundColor = Theme.shared.secondaryBackgroundColor
   @Published var labelColor = Theme.shared.labelColor
-  
+
   private var subscriptions = Set<AnyCancellable>()
-  
+
   init() {
     $tintColor
       .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
-      .sink(receiveValue: { newColor in Theme.shared.tintColor = newColor } )
+      .sink(receiveValue: { newColor in Theme.shared.tintColor = newColor })
       .store(in: &subscriptions)
     $primaryBackgroundColor
       .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
-      .sink(receiveValue: { newColor in Theme.shared.primaryBackgroundColor = newColor } )
+      .sink(receiveValue: { newColor in Theme.shared.primaryBackgroundColor = newColor })
       .store(in: &subscriptions)
     $secondaryBackgroundColor
       .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
-      .sink(receiveValue: { newColor in Theme.shared.secondaryBackgroundColor = newColor } )
+      .sink(receiveValue: { newColor in Theme.shared.secondaryBackgroundColor = newColor })
       .store(in: &subscriptions)
     $labelColor
       .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
-      .sink(receiveValue: { newColor in Theme.shared.labelColor = newColor } )
+      .sink(receiveValue: { newColor in Theme.shared.labelColor = newColor })
       .store(in: &subscriptions)
   }
 }
@@ -40,15 +40,15 @@ struct DisplaySettingsView: View {
   @Environment(\.colorScheme) private var colorScheme
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var userPreferences: UserPreferences
-  
+
   @StateObject private var localColors = DisplaySettingsLocalColors()
 
   @State private var isFontSelectorPresented = false
-  
+
   private let previewStatusViewModel = StatusRowViewModel(status: Status.placeholder(forSettings: true, language: "la"),
                                                           client: Client(server: ""),
                                                           routerPath: RouterPath()) // translate from latin button
-    
+
   var body: some View {
     Form {
       exampleSection
@@ -62,14 +62,14 @@ struct DisplaySettingsView: View {
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
   }
-  
+
   private var exampleSection: some View {
     Section("settings.display.example-toot") {
       StatusRowView(viewModel: { previewStatusViewModel })
         .allowsHitTesting(false)
     }
   }
-  
+
   private var themeSection: some View {
     Section {
       Toggle("settings.display.theme.systemColor", isOn: $theme.followSystemColorScheme)
@@ -97,7 +97,7 @@ struct DisplaySettingsView: View {
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
-  
+
   private var fontSection: some View {
     Section("settings.display.section.font") {
       Picker("settings.display.font", selection: .init(get: { () -> FontState in
@@ -140,7 +140,7 @@ struct DisplaySettingsView: View {
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
-  
+
   private var layoutSection: some View {
     Section("settings.display.section.display") {
       Picker("settings.display.avatar.position", selection: $theme.avatarPosition) {
@@ -169,7 +169,7 @@ struct DisplaySettingsView: View {
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
-  
+
   @ViewBuilder
   private var platformsSection: some View {
     if UIDevice.current.userInterfaceIdiom == .phone {
@@ -186,7 +186,7 @@ struct DisplaySettingsView: View {
       .listRowBackground(theme.primaryBackgroundColor)
     }
   }
-  
+
   private var resetSection: some View {
     Section {
       Button {
@@ -195,12 +195,12 @@ struct DisplaySettingsView: View {
         theme.avatarShape = .rounded
         theme.avatarPosition = .top
         theme.statusActionsDisplay = .full
-        
+
         localColors.tintColor = theme.tintColor
         localColors.primaryBackgroundColor = theme.primaryBackgroundColor
         localColors.secondaryBackgroundColor = theme.secondaryBackgroundColor
         localColors.labelColor = theme.labelColor
-        
+
       } label: {
         Text("settings.display.restore")
       }

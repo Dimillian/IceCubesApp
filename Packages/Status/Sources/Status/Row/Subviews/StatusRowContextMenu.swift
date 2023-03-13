@@ -71,7 +71,8 @@ struct StatusRowContextMenu: View {
       {
         ShareLink(item: url,
                   subject: Text(viewModel.status.reblog?.account.safeDisplayName ?? viewModel.status.account.safeDisplayName),
-                  message: Text(viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText)) {
+                  message: Text(viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText))
+        {
           Label("status.action.share", systemImage: "square.and.arrow.up")
         }
 

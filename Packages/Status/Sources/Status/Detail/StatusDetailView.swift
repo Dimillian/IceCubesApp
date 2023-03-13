@@ -155,7 +155,8 @@ public struct StatusDetailView: View {
   private var errorView: some View {
     ErrorView(title: "status.error.title",
               message: "status.error.message",
-              buttonTitle: "action.retry") {
+              buttonTitle: "action.retry")
+    {
       Task {
         await viewModel.fetch()
       }

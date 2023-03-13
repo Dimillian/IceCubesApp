@@ -24,7 +24,7 @@ struct StatusRowActionsView: View {
     //     Main actor-isolated static property 'allCases' cannot be used to
     //     satisfy nonisolated protocol requirement
     //
-    nonisolated public static var allCases: [StatusRowActionsView.Action] {
+    public nonisolated static var allCases: [StatusRowActionsView.Action] {
       [.respond, .boost, .favorite, .bookmark, .share]
     }
 
@@ -99,7 +99,8 @@ struct StatusRowActionsView: View {
             {
               ShareLink(item: url,
                         subject: Text(viewModel.finalStatus.account.safeDisplayName),
-                        message: Text(viewModel.finalStatus.content.asRawText)) {
+                        message: Text(viewModel.finalStatus.content.asRawText))
+              {
                 action.image(dataController: statusDataController)
               }
               .buttonStyle(.statusAction())
@@ -142,7 +143,8 @@ struct StatusRowActionsView: View {
         (viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id))
       if let count = action.count(dataController: statusDataController,
                                   viewModel: viewModel,
-                                  theme: theme), !viewModel.isRemote {
+                                  theme: theme), !viewModel.isRemote
+      {
         Text("\(count)")
           .foregroundColor(Color(UIColor.secondaryLabel))
           .font(.scaledFootnote)
@@ -150,7 +152,6 @@ struct StatusRowActionsView: View {
       }
     }
   }
-    
 
   private func handleAction(action: Action) {
     Task {

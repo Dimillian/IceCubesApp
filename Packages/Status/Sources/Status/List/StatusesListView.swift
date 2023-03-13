@@ -7,22 +7,23 @@ import SwiftUI
 
 public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
   @EnvironmentObject private var theme: Theme
-  
+
   @ObservedObject private var fetcher: Fetcher
   private let isRemote: Bool
   private let routerPath: RouterPath
   private let client: Client
-  
+
   public init(fetcher: Fetcher,
               client: Client,
               routerPath: RouterPath,
-              isRemote: Bool = false) {
+              isRemote: Bool = false)
+  {
     self.fetcher = fetcher
     self.isRemote = isRemote
     self.client = client
     self.routerPath = routerPath
   }
-  
+
   public var body: some View {
     switch fetcher.statusesState {
     case .loading:
@@ -33,29 +34,30 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
     case .error:
       ErrorView(title: "status.error.title",
                 message: "status.error.loading.message",
-                buttonTitle: "action.retry") {
+                buttonTitle: "action.retry")
+      {
         Task {
           await fetcher.fetchNewestStatuses()
         }
       }
-                .listRowBackground(theme.primaryBackgroundColor)
-                .listRowSeparator(.hidden)
-      
+      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowSeparator(.hidden)
+
     case let .display(statuses, nextPageState):
       ForEach(statuses, id: \.viewId) { status in
         StatusRowView(viewModel: { StatusRowViewModel(status: status,
                                                       client: client,
                                                       routerPath: routerPath,
                                                       isRemote: isRemote)
-          
-        })
-        .id(status.id)
-        .onAppear {
-          fetcher.statusDidAppear(status: status)
-        }
-        .onDisappear {
-          fetcher.statusDidDisappear(status: status)
-        }
+
+          })
+          .id(status.id)
+          .onAppear {
+            fetcher.statusDidAppear(status: status)
+          }
+          .onDisappear {
+            fetcher.statusDidDisappear(status: status)
+          }
       }
       switch nextPageState {
       case .hasNextPage:
@@ -72,7 +74,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
       }
     }
   }
-  
+
   private var loadingRow: some View {
     HStack {
       Spacer()

@@ -127,12 +127,13 @@ public struct ExploreView: View {
   private var suggestedAccountsSection: some View {
     Section("explore.section.suggested-users") {
       ForEach(viewModel.suggestedAccounts
-        .prefix(upTo: viewModel.suggestedAccounts.count > 3 ? 3 : viewModel.suggestedAccounts.count)) { account in
-          if let relationship = viewModel.suggestedAccountsRelationShips.first(where: { $0.id == account.id }) {
-            AccountsListRow(viewModel: .init(account: account, relationShip: relationship))
-              .listRowBackground(theme.primaryBackgroundColor)
-          }
+        .prefix(upTo: viewModel.suggestedAccounts.count > 3 ? 3 : viewModel.suggestedAccounts.count))
+      { account in
+        if let relationship = viewModel.suggestedAccountsRelationShips.first(where: { $0.id == account.id }) {
+          AccountsListRow(viewModel: .init(account: account, relationShip: relationship))
+            .listRowBackground(theme.primaryBackgroundColor)
         }
+      }
       NavigationLink(value: RouterDestination.accountsList(accounts: viewModel.suggestedAccounts)) {
         Text("see-more")
           .foregroundColor(theme.tintColor)
@@ -144,11 +145,12 @@ public struct ExploreView: View {
   private var trendingTagsSection: some View {
     Section("explore.section.trending.tags") {
       ForEach(viewModel.trendingTags
-        .prefix(upTo: viewModel.trendingTags.count > 5 ? 5 : viewModel.trendingTags.count)) { tag in
-          TagRowView(tag: tag)
-            .listRowBackground(theme.primaryBackgroundColor)
-            .padding(.vertical, 4)
-        }
+        .prefix(upTo: viewModel.trendingTags.count > 5 ? 5 : viewModel.trendingTags.count))
+      { tag in
+        TagRowView(tag: tag)
+          .listRowBackground(theme.primaryBackgroundColor)
+          .padding(.vertical, 4)
+      }
       NavigationLink(value: RouterDestination.tagsList(tags: viewModel.trendingTags)) {
         Text("see-more")
           .foregroundColor(theme.tintColor)
@@ -160,11 +162,12 @@ public struct ExploreView: View {
   private var trendingPostsSection: some View {
     Section("explore.section.trending.posts") {
       ForEach(viewModel.trendingStatuses
-        .prefix(upTo: viewModel.trendingStatuses.count > 3 ? 3 : viewModel.trendingStatuses.count)) { status in
-          StatusRowView(viewModel: { .init(status: status, client: client, routerPath: routerPath) })
-            .listRowBackground(theme.primaryBackgroundColor)
-            .padding(.vertical, 8)
-        }
+        .prefix(upTo: viewModel.trendingStatuses.count > 3 ? 3 : viewModel.trendingStatuses.count))
+      { status in
+        StatusRowView(viewModel: { .init(status: status, client: client, routerPath: routerPath) })
+          .listRowBackground(theme.primaryBackgroundColor)
+          .padding(.vertical, 8)
+      }
 
       NavigationLink(value: RouterDestination.trendingTimeline) {
         Text("see-more")
@@ -177,11 +180,12 @@ public struct ExploreView: View {
   private var trendingLinksSection: some View {
     Section("explore.section.trending.links") {
       ForEach(viewModel.trendingLinks
-        .prefix(upTo: viewModel.trendingLinks.count > 3 ? 3 : viewModel.trendingLinks.count)) { card in
-          StatusRowCardView(card: card)
-            .listRowBackground(theme.primaryBackgroundColor)
-            .padding(.vertical, 8)
-        }
+        .prefix(upTo: viewModel.trendingLinks.count > 3 ? 3 : viewModel.trendingLinks.count))
+      { card in
+        StatusRowCardView(card: card)
+          .listRowBackground(theme.primaryBackgroundColor)
+          .padding(.vertical, 8)
+      }
       NavigationLink {
         List {
           ForEach(viewModel.trendingLinks) { card in

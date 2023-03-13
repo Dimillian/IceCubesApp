@@ -10,20 +10,20 @@ public struct StatusRowView: View {
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
   @Environment(\.redactionReasons) private var reasons
   @Environment(\.isCompact) private var isCompact: Bool
-  
+
   @EnvironmentObject private var theme: Theme
-  
+
   @StateObject var viewModel: StatusRowViewModel
-  
+
   // StateObject accepts an @autoclosure which only allocates the view model once when the view gets on screen.
   public init(viewModel: @escaping () -> StatusRowViewModel) {
     _viewModel = StateObject(wrappedValue: viewModel())
   }
-  
+
   var contextMenu: some View {
     StatusRowContextMenu(viewModel: viewModel)
   }
-  
+
   public var body: some View {
     VStack(alignment: .leading) {
       if viewModel.isFiltered, let filter = viewModel.filter {
@@ -151,7 +151,7 @@ public struct StatusRowView: View {
                                                          client: viewModel.client)
     )
   }
-  
+
   @ViewBuilder
   private var accesibilityActions: some View {
     // Add the individual mentions as accessibility actions
@@ -160,20 +160,20 @@ public struct StatusRowView: View {
         viewModel.routerPath.navigate(to: .accountDetail(id: mention.id))
       }
     }
-    
+
     Button(viewModel.displaySpoiler ? "status.show-more" : "status.show-less") {
       withAnimation {
         viewModel.displaySpoiler.toggle()
       }
     }
-    
+
     Button("@\(viewModel.status.account.username)") {
       viewModel.routerPath.navigate(to: .accountDetail(id: viewModel.status.account.id))
     }
-    
+
     contextMenu
   }
-  
+
   private func makeFilterView(filter: Filter) -> some View {
     HStack {
       Text("status.filter.filtered-by-\(filter.title)")
@@ -186,7 +186,7 @@ public struct StatusRowView: View {
       }
     }
   }
-  
+
   private var remoteContentLoadingView: some View {
     ZStack(alignment: .center) {
       VStack {
