@@ -32,8 +32,6 @@ public class StatusRowViewModel: ObservableObject {
   @Published var isLoadingRemoteContent: Bool = false
   @Published var localStatusId: String?
   @Published var localStatus: Status?
-    
-  private var preferences: UserPreferences?
 
 
   // used by the button to expand a collapsed post
@@ -290,34 +288,35 @@ public class StatusRowViewModel: ObservableObject {
     finalStatus.language
   }
 
-    func setPreferences(preferences: UserPreferences) {
-        self.preferences = preferences
-    }
-    
   func translate(userLang: String) async {
-      if !deepLUserAPIKeyExists() {
-          do {
-              withAnimation {
-                  isLoadingTranslation = true
-              }
-              // We first use instance translation API if available.
-              let translation: StatusTranslation = try await client.post(endpoint: Statuses.translate(id: finalStatus.id,
-                                                                                                      lang: userLang))
-              withAnimation {
-                  self.translation = translation
-                  isLoadingTranslation = false
-              }
-              
-              return
-          } catch {}
-      }
+    let userAPIKey = DeepLUserAPIHandler.readAndUpdate()
+    if userAPIKey == nil {
+      do {
+        withAnimation {
+          isLoadingTranslation = true
+        }
+        // We first use instance translation API if available.
+        let translation: StatusTranslation = try await client.post(endpoint: Statuses.translate(id: finalStatus.id,
+                                                                                                lang: userLang))
+        withAnimation {
+          self.translation = translation
+          isLoadingTranslation = false
+        }
+        
+        return
+      } catch {}
+    }
       
     // If not or fail we use Ice Cubes own DeepL client.
-    await translateWithDeepL(userLang: userLang)
+    await translateWithDeepL(userLang: userLang, userAPIKey: userAPIKey)
   }
 
   func translateWithDeepL(userLang: String) async {
-    let deepLClient = getDeepLClient()
+    await translateWithDeepL(userLang: userLang, userAPIKey: DeepLUserAPIHandler.readAndUpdate())
+  }
+
+  private func translateWithDeepL(userLang: String, userAPIKey: String?) async {
+    let deepLClient = getDeepLClient(userAPIKey: userAPIKey)
     let translation = try? await deepLClient.request(target: userLang,
                                                      text: finalStatus.content.asRawText)
     withAnimation {
@@ -326,19 +325,18 @@ public class StatusRowViewModel: ObservableObject {
     }
   }
 
-  private func getDeepLClient() -> DeepLClient {
-    let userAPIKey = getUserAPIKey()
-    let userAPIfree = preferences?.userDeeplAPIFree ?? false
+  private func getDeepLClient(userAPIKey: String?) -> DeepLClient {
+    let userAPIfree = UserPreferences.shared.userDeeplAPIFree
     
     return DeepLClient(userAPIKey: userAPIKey, userAPIFree: userAPIfree)
   }
 
   private func getUserAPIKey() -> String? {
-    KeychainHelper.read(service: "API Token", account: "DeepL", type: String.self)
+      DeepLUserAPIHandler.readAndUpdate()
   }
 
-  func deepLUserAPIKeyExists() -> Bool {
-    getUserAPIKey() != nil
+  var alwaysTranslateWithDeepl: Bool {
+    DeepLUserAPIHandler.read() != nil
   }
 
   func fetchRemoteStatus() async -> Bool {

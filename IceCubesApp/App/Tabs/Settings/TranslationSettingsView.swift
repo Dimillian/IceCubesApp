@@ -4,20 +4,14 @@ import Env
 struct TranslationSettingsView: View {
   @EnvironmentObject private var preferences: UserPreferences
   @State private var apiKey: String = ""
-  @State private var translateWithDeepL = false
   
     var body: some View {
       Form {
-        Toggle(isOn: $translateWithDeepL) {
+        Toggle(isOn: preferences.$alwaysUseDeepl) {
           Label("settings.other.always-deepl", systemImage: "captions.bubble")
         }
-        .onChange(of: translateWithDeepL) { withDeepL in
-          if !withDeepL {
-            apiKey = ""
-          }
-        }
         
-        if translateWithDeepL {
+        if preferences.alwaysUseDeepl {
           Section("User API Key") {
             Picker("DeepL API Key Type", selection: $preferences.userDeeplAPIFree) {
               Text("Free").tag(true)
@@ -27,6 +21,7 @@ struct TranslationSettingsView: View {
             SecureField("API Key", text: $apiKey)
               .textContentType(.password)
           }
+          .onAppear(perform: readValue)
           
           if apiKey.isEmpty {
             Section {
@@ -39,26 +34,28 @@ struct TranslationSettingsView: View {
         }
       }
       .onSubmit(writeNewValue)
-      .onDisappear(perform: writeNewValue)
-      .onAppear(perform: readValue)
+      .onDisappear(perform: writeAndUpdate)
+      .onAppear(perform: updatePrefs)
     }
 
   private func writeNewValue() {
-    if !apiKey.isEmpty {
-      KeychainHelper.save(apiKey, service: "API Token", account: "DeepL")
-    } else {
-      KeychainHelper.delete(service: "API Token", account: "DeepL")
-    }
+    DeepLUserAPIHandler.write(value: apiKey)
+  }
+  
+  private func writeAndUpdate() {
+    DeepLUserAPIHandler.writeAndUpdate(value: apiKey)
   }
   
   private func readValue() {
-    if let apiKey = KeychainHelper.read(service: "API Token", account: "DeepL", type: String.self) {
+    if let apiKey = DeepLUserAPIHandler.read() {
       self.apiKey = apiKey
-      translateWithDeepL = true
     } else {
       self.apiKey = ""
-      translateWithDeepL = false
     }
+  }
+  
+  private func updatePrefs() {
+    DeepLUserAPIHandler.updatePreferences()
   }
 }
 

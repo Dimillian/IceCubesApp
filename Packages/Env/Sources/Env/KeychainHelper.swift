@@ -1,13 +1,14 @@
 import Foundation
 
 public enum KeychainHelper {
-  public static func save(_ data: Data, service: String, account: String) {
+  public static func save(_ data: Data, service: String, account: String, syncable: Bool = false) {
     let query = [
       kSecValueData: data,
       kSecClass: kSecClassGenericPassword,
       kSecAttrService: service,
       kSecAttrAccount: account,
-    ] as CFDictionary
+      kSecAttrSynchronizable: syncable
+    ] as [CFString : Any] as CFDictionary
     
     let status = SecItemAdd(query, nil)
     
@@ -16,6 +17,7 @@ public enum KeychainHelper {
         kSecAttrService: service,
         kSecAttrAccount: account,
         kSecClass: kSecClassGenericPassword,
+        kSecAttrSynchronizable: syncable
       ] as [CFString : Any] as CFDictionary
       
       let attributesToUpdate = [kSecValueData: data] as CFDictionary
@@ -24,22 +26,23 @@ public enum KeychainHelper {
     }
   }
   
-  public static func save<T>(_ item: T, service: String, account: String) where T : Codable {
+  public static func save<T>(_ item: T, service: String, account: String, syncable: Bool = false) where T : Codable {
     do {
       let data = try JSONEncoder().encode(item)
-      save(data, service: service, account: account)
+      save(data, service: service, account: account, syncable: syncable)
       
     } catch {
       assertionFailure("Fail to encode item for keychain: \(error)")
     }
   }
   
-  public static func read(service: String, account: String) -> Data? {
+  public static func read(service: String, account: String, syncable: Bool = false) -> Data? {
     let query = [
       kSecAttrService: service,
       kSecAttrAccount: account,
       kSecClass: kSecClassGenericPassword,
-      kSecReturnData: true
+      kSecReturnData: true,
+      kSecAttrSynchronizable: syncable
     ] as [CFString : Any] as CFDictionary
     
     var result: AnyObject?
@@ -48,8 +51,8 @@ public enum KeychainHelper {
     return (result as? Data)
   }
   
-  public static func read<T>(service: String, account: String, type: T.Type) -> T? where T : Codable {
-    guard let data = read(service: service, account: account) else {
+  public static func read<T>(service: String, account: String, type: T.Type, syncable: Bool = false) -> T? where T : Codable {
+    guard let data = read(service: service, account: account, syncable: syncable) else {
       return nil
     }
     
@@ -62,11 +65,12 @@ public enum KeychainHelper {
     }
   }
   
-  public static func delete(service: String, account: String) {
+  public static func delete(service: String, account: String, syncable: Bool = false) {
     let query = [
       kSecAttrService: service,
       kSecAttrAccount: account,
       kSecClass: kSecClassGenericPassword,
+      kSecAttrSynchronizable: syncable
     ] as [CFString : Any] as CFDictionary
     
     SecItemDelete(query)
