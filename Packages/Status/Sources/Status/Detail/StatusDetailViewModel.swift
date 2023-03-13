@@ -10,6 +10,7 @@ class StatusDetailViewModel: ObservableObject {
   public var remoteStatusURL: URL?
 
   var client: Client?
+  var routerPath: RouterPath?
 
   enum State {
     case loading, display(statuses: [Status], date: Date), error(error: Error)
@@ -93,7 +94,11 @@ class StatusDetailViewModel: ObservableObject {
         scrollToId = statusId
       }
     } catch {
-      state = .error(error: error)
+      if let error = error as? ServerError, error.httpCode == 404 {
+        _ = routerPath?.path.popLast()
+      } else {
+        state = .error(error: error)
+      }
     }
   }
 

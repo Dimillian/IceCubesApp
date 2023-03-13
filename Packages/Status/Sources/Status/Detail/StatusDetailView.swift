@@ -72,6 +72,7 @@ public struct StatusDetailView: View {
         .task {
           guard !isLoaded else { return }
           viewModel.client = client
+          viewModel.routerPath = routerPath
           let result = await viewModel.fetch()
           isLoaded = true
 
