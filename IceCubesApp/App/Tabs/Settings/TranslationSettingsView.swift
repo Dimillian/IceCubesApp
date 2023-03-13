@@ -33,13 +33,17 @@ struct TranslationSettingsView: View {
           }
         }
       }
-      .onSubmit(writeNewValue)
+      .onChange(of: apiKey, perform: writeNewValue)
       .onDisappear(perform: writeAndUpdate)
       .onAppear(perform: updatePrefs)
     }
 
   private func writeNewValue() {
-    DeepLUserAPIHandler.write(value: apiKey)
+    writeNewValue(value: apiKey)
+  }
+  
+  private func writeNewValue(value: String) {
+    DeepLUserAPIHandler.write(value: value)
   }
   
   private func writeAndUpdate() {
