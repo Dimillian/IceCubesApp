@@ -8,17 +8,17 @@ struct TranslationSettingsView: View {
     var body: some View {
       Form {
         Toggle(isOn: preferences.$alwaysUseDeepl) {
-          Label("settings.other.always-deepl", systemImage: "captions.bubble")
+          Label("settings.translation.always-deepl", systemImage: "captions.bubble")
         }
         
         if preferences.alwaysUseDeepl {
-          Section("User API Key") {
-            Picker("DeepL API Key Type", selection: $preferences.userDeeplAPIFree) {
-              Text("Free").tag(true)
-              Text("Pro").tag(false)
+          Section("settings.translation.user-api-key") {
+            Picker("settings.translation.api-key-type", selection: $preferences.userDeeplAPIFree) {
+              Text("DeepL API Free").tag(true)
+              Text("DeepL API Pro").tag(false)
             }
             
-            SecureField("API Key", text: $apiKey)
+            SecureField("settings.translation.user-api-key", text: $apiKey)
               .textContentType(.password)
           }
           .onAppear(perform: readValue)
@@ -26,7 +26,7 @@ struct TranslationSettingsView: View {
           if apiKey.isEmpty {
             Section {
               Link(destination: URL(string: "https://www.deepl.com/pro-api")!) {
-                Text("A private API Key with DeepL is needed!")
+                Text("settings.translation.needed-message")
                   .foregroundColor(.red)
               }
             }

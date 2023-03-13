@@ -165,7 +165,11 @@
 "settings.other.hide-openai" = "Enable 🤖 Helper";
 "settings.other.social-keyboard" = "Enable Social Keyboard";
 "settings.other.sound-effect" = "Enable Sound Effects";
-"settings.other.always-deepl" = "Always Translate using DeepL";
+"settings.general.translate" = "Translation Settings";
+"settings.translation.always-deepl" = "Always Translate using DeepL";
+"settings.translation.user-api-key" = "DeepL API Key";
+"settings.translation.api-key-type" = "Type of the Key";
+"settings.translation.needed-message" = "This feature requires a DeepL API key";
 "settings.push.duplicate.title" = "Duplicate Notifications Fixer";
 "settings.push.duplicate.footer" = "Receiving duplicate notifications? Try this magic button in order to fix it";
 "settings.push.duplicate.button.fix" = "🪄 Fix It";

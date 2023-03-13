@@ -141,7 +141,11 @@
 "settings.other.hide-openai" = "Gebruik 🤖-hulp";
 "settings.other.social-keyboard" = "Gebruik socialmedia-toetsenbord";
 "settings.other.sound-effect" = "Geluidseffecten";
-"settings.other.always-deepl" = "Always Translate using DeepL";
+"settings.general.translate" = "Translation Settings";
+"settings.translation.always-deepl" = "Always Translate using DeepL";
+"settings.translation.user-api-key" = "DeepL API Key";
+"settings.translation.api-key-type" = "Type of the Key";
+"settings.translation.needed-message" = "This feature requires a DeepL API key";
 "settings.general.content" = "Inhoud";
 "settings.system" = "Systeeminstellingen";
 "settings.content.navigation-title" = "Inhoud";

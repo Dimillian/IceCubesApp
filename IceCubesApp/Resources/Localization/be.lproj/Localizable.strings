@@ -165,7 +165,11 @@
 "settings.other.hide-openai" = "Уключыць 🤖 памочніка";
 "settings.other.social-keyboard" = "Уключыць сацыяльную клавіятуру";
 "settings.other.sound-effect" = "Enable Sound Effects";
-"settings.other.always-deepl" = "Always Translate using DeepL";
+"settings.general.translate" = "Translation Settings";
+"settings.translation.always-deepl" = "Always Translate using DeepL";
+"settings.translation.user-api-key" = "DeepL API Key";
+"settings.translation.api-key-type" = "Type of the Key";
+"settings.translation.needed-message" = "This feature requires a DeepL API key";
 "settings.push.duplicate.title" = "Выпраўляльнік дублікатаў апавяшчэнняў";
 "settings.push.duplicate.footer" = "Атрымліваеш падвоеныя апавяшчэнні? Паспрабуй гэтую чароўную кнопку каб выправіць";
 "settings.push.duplicate.button.fix" = "🪄 Выправіць";

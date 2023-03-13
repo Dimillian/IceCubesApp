@@ -165,7 +165,11 @@
 "settings.other.hide-openai" = "AI支援機能の有効化";
 "settings.other.social-keyboard" = "ソーシャルメディア向けキーボードの有効化";
 "settings.other.sound-effect" = "サウンドエフェクトを有効化";
-"settings.other.always-deepl" = "Always Translate using DeepL";
+"settings.general.translate" = "Translation Settings";
+"settings.translation.always-deepl" = "Always Translate using DeepL";
+"settings.translation.user-api-key" = "DeepL API Key";
+"settings.translation.api-key-type" = "Type of the Key";
+"settings.translation.needed-message" = "This feature requires a DeepL API key";
 "settings.push.duplicate.title" = "重複通知修正ツール";
 "settings.push.duplicate.footer" = "重複して通知を受け取っていませんか？修正するためにこの魔法のボタンを試してみて";
 "settings.push.duplicate.button.fix" = "🪄 修正する";

@@ -165,7 +165,11 @@
 "settings.other.hide-openai" = "Aktiver 🤖-hjelper";
 "settings.other.social-keyboard" = "Aktiver sosialt tastatur";
 "settings.other.sound-effect" = "Enable Sound Effects";
-"settings.other.always-deepl" = "Always Translate using DeepL";
+"settings.general.translate" = "Translation Settings";
+"settings.translation.always-deepl" = "Always Translate using DeepL";
+"settings.translation.user-api-key" = "DeepL API Key";
+"settings.translation.api-key-type" = "Type of the Key";
+"settings.translation.needed-message" = "This feature requires a DeepL API key";
 "settings.push.duplicate.title" = "Reparasjon av dupliserte varslinger";
 "settings.push.duplicate.footer" = "Får du dupliserte varsler? Prøv denne magiske knappen for å fikse det.";
 "settings.push.duplicate.button.fix" = "🪄 Fiks det";
