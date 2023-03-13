@@ -435,8 +435,8 @@
 "status.editor.spoiler" = "Spoilertekst";
 "status.editor.text.placeholder" = "Waar denk je aan?";
 "status.editor.visibility" = "Zichtbaarheid";
-"status.editor.photo-library" = "Photos Library";
-"status.editor.browse-file" = "Browse Files";
+"status.editor.photo-library" = "Fotobibliotheek";
+"status.editor.browse-file" = "Bestanden";
 "status.error.loading.message" = "Er heeft zich een fout voorgedaan tijdens het laden van je posts. Probeer het nogmaals.";
 "status.error.message" = "Er heeft zich een fout voorgedaan. Probeer het nogmaals.";
 "status.error.title" = "Er heeft zich een fout voorgedaan";
