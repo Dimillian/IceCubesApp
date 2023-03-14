@@ -143,9 +143,9 @@
 "settings.other.sound-effect" = "Klänge aktivieren";
 "settings.general.translate" = "Übersetzungseinstellungen";
 "settings.translation.always-deepl" = "Immer mit DeepL übersetzen";
-"settings.translation.user-api-key" = "DeepL API Schlüssel";
+"settings.translation.user-api-key" = "DeepL-API-Schlüssel";
 "settings.translation.api-key-type" = "Typ des Schlüssels";
-"settings.translation.needed-message" = "Für diese Funktion ist ein DeepL API-Schlüssel erforderlich.";
+"settings.translation.needed-message" = "Für diese Funktion ist ein DeepL-API-Schlüssel erforderlich.";
 "settings.general.content" = "Inhaltseinstellungen";
 "settings.system" = "Systemeinstellungen";
 "settings.content.navigation-title" = "Inhaltseinstellungen";
