@@ -65,6 +65,7 @@
 		9F7D939A29805DBD00EE6B7A /* AccountSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7D939929805DBD00EE6B7A /* AccountSettingView.swift */; };
 		9F8CA5972979B61100481E8E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E9B576C529743F4C00BCE646 /* Localizable.strings */; };
 		9F8CA5982979B63D00481E8E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E9B576C529743F4C00BCE646 /* Localizable.strings */; };
+		9FA6FD6229C04A8800E2312C /* TranslationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA6FD6129C04A8800E2312C /* TranslationSettingsView.swift */; };
 		9FAD85832971BF7200496AB1 /* Secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9FAD85822971BF7200496AB1 /* Secret.plist */; };
 		9FAD858B29743F7400496AB1 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAD858A29743F7400496AB1 /* ShareViewController.swift */; };
 		9FAD858E29743F7400496AB1 /* (null) in Resources */ = {isa = PBXBuildFile; };
@@ -225,6 +226,7 @@
 		9F7D939929805DBD00EE6B7A /* AccountSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingView.swift; sourceTree = "<group>"; };
 		9F7D939B2980F5C100EE6B7A /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = tr; path = tr.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		9F7D939C2980F5C200EE6B7A /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9FA6FD6129C04A8800E2312C /* TranslationSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationSettingsView.swift; sourceTree = "<group>"; };
 		9FAD85822971BF7200496AB1 /* Secret.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Secret.plist; sourceTree = "<group>"; };
 		9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IceCubesShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FAD858A29743F7400496AB1 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
@@ -524,6 +526,7 @@
 				9FAE4ACA293783B000772766 /* SettingsTab.swift */,
 				9F2A540629699698009B2D7C /* SupportAppView.swift */,
 				D08A9C3429956CFA00204A4A /* SwipeActionsSettingsView.swift */,
+				9FA6FD6129C04A8800E2312C /* TranslationSettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -819,6 +822,7 @@
 				069709AA298C9AD7006E4CB5 /* AboutView.swift in Sources */,
 				9F2B92FC295DA94500DE16D0 /* InstanceInfoView.swift in Sources */,
 				C9B22677297F6C2E001F9EFE /* ContentSettingsView.swift in Sources */,
+				9FA6FD6229C04A8800E2312C /* TranslationSettingsView.swift in Sources */,
 				9F35DB4C2952005C00B3281A /* MessagesTab.swift in Sources */,
 				9FAD85CF2975B68900496AB1 /* SideBarView.swift in Sources */,
 				9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */,
