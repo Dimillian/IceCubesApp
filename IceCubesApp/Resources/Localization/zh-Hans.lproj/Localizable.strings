@@ -141,6 +141,11 @@
 "settings.other.hide-openai" = "启用写作助手 🤖";
 "settings.other.social-keyboard" = "启用社交键盘";
 "settings.other.sound-effect" = "启用声音效果";
+"settings.general.translate" = "Translation Settings";
+"settings.translation.always-deepl" = "Always Translate using DeepL";
+"settings.translation.user-api-key" = "DeepL API Key";
+"settings.translation.api-key-type" = "Type of the Key";
+"settings.translation.needed-message" = "This feature requires a DeepL API key";
 
 "settings.general.content" = "内容设置";
 "settings.system" = "系统设置";
@@ -384,6 +389,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "翻译";
+"status.action.translate-with-deepl" = "Translate with DeepL";
 "status.action.translated-label-%@" = "由 %@ 翻译";
 "status.action.translated-label-from-%@-%@" = "翻译自 %@，使用 %@";
 "status.action.bookmark" = "书签";

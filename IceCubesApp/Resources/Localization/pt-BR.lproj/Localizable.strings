@@ -161,6 +161,11 @@
 "settings.other.hide-openai" = "Habilitar 🤖 ajudante";
 "settings.other.social-keyboard" = "Habilitar Teclado Social";
 "settings.other.sound-effect" = "Enable Sound Effects";
+"settings.general.translate" = "Translation Settings";
+"settings.translation.always-deepl" = "Always Translate using DeepL";
+"settings.translation.user-api-key" = "DeepL API Key";
+"settings.translation.api-key-type" = "Type of the Key";
+"settings.translation.needed-message" = "This feature requires a DeepL API key";
 "settings.push.duplicate.title" = "Corretor de notificações duplicadas";
 "settings.push.duplicate.footer" = "Recebendo notificações duplicadas? Tente este botão mágico para tentar corrigir";
 "settings.push.duplicate.button.fix" = "🪄 Corrigir";
@@ -385,6 +390,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Traduzir";
+"status.action.translate-with-deepl" = "Translate with DeepL";
 "status.action.translated-label-%@" = "Traduzir usando %@";
 "status.action.translated-label-from-%@-%@" = "Traduzido de %@ usando %@";
 "status.action.bookmark" = "Salvar";

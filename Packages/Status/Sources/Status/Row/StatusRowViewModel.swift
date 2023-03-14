@@ -288,28 +288,49 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   func translate(userLang: String) async {
-    do {
-      withAnimation {
-        isLoadingTranslation = true
-      }
-      // We first use instance translation API if available.
-      let translation: StatusTranslation = try await client.post(endpoint: Statuses.translate(id: finalStatus.id,
-                                                                                              lang: userLang))
-      withAnimation {
-        self.translation = translation
-        isLoadingTranslation = false
-      }
-    } catch {
-      // If not or fail we use Ice Cubes own DeepL client.
-      let deepLClient = DeepLClient()
-      let translation = try? await deepLClient.request(target: userLang,
-                                                       source: finalStatus.language,
-                                                       text: finalStatus.content.asRawText)
-      withAnimation {
-        self.translation = translation
-        isLoadingTranslation = false
-      }
+    if !alwaysTranslateWithDeepl {
+      do {
+        withAnimation {
+          isLoadingTranslation = true
+        }
+        // We first use instance translation API if available.
+        let translation: StatusTranslation = try await client.post(endpoint: Statuses.translate(id: finalStatus.id,
+                                                                                                lang: userLang))
+        withAnimation {
+          self.translation = translation
+          isLoadingTranslation = false
+        }
+
+        return
+      } catch {}
     }
+
+    // If not or fail we use Ice Cubes own DeepL client.
+    await translateWithDeepL(userLang: userLang)
+  }
+
+  func translateWithDeepL(userLang: String) async {
+    let deepLClient = getDeepLClient()
+    let translation = try? await deepLClient.request(target: userLang,
+                                                     text: finalStatus.content.asRawText)
+    withAnimation {
+      self.translation = translation
+      isLoadingTranslation = false
+    }
+  }
+
+  private func getDeepLClient() -> DeepLClient {
+    let userAPIfree = UserPreferences.shared.userDeeplAPIFree
+
+    return DeepLClient(userAPIKey: userAPIKey, userAPIFree: userAPIfree)
+  }
+
+  private var userAPIKey: String? {
+    DeepLUserAPIHandler.readIfAllowed()
+  }
+
+  var alwaysTranslateWithDeepl: Bool {
+    DeepLUserAPIHandler.shouldAlwaysUseDeepl
   }
 
   func fetchRemoteStatus() async -> Bool {

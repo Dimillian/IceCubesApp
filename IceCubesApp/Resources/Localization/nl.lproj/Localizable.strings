@@ -141,6 +141,11 @@
 "settings.other.hide-openai" = "Gebruik 🤖-hulp";
 "settings.other.social-keyboard" = "Gebruik socialmedia-toetsenbord";
 "settings.other.sound-effect" = "Geluidseffecten";
+"settings.general.translate" = "Translation Settings";
+"settings.translation.always-deepl" = "Always Translate using DeepL";
+"settings.translation.user-api-key" = "DeepL API Key";
+"settings.translation.api-key-type" = "Type of the Key";
+"settings.translation.needed-message" = "This feature requires a DeepL API key";
 "settings.general.content" = "Inhoud";
 "settings.system" = "Systeeminstellingen";
 "settings.content.navigation-title" = "Inhoud";
@@ -379,6 +384,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Vertaal";
+"status.action.translate-with-deepl" = "Translate with DeepL";
 "status.action.translated-label-%@" = "Vertaald met behulp van %@";
 "status.action.translated-label-from-%@-%@" = "Vertaald uit het %@ met behulp van %@";
 "status.action.bookmark" = "Voeg bladwijzer toe";

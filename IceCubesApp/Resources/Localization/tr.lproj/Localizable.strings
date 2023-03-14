@@ -161,6 +161,11 @@
 "settings.other.hide-openai" = "Yardımcıyı 🤖 Aktive Et";
 "settings.other.social-keyboard" = "Sosyal Klavyeyi Aktive Et";
 "settings.other.sound-effect" = "Enable Sound Effects";
+"settings.general.translate" = "Translation Settings";
+"settings.translation.always-deepl" = "Always Translate using DeepL";
+"settings.translation.user-api-key" = "DeepL API Key";
+"settings.translation.api-key-type" = "Type of the Key";
+"settings.translation.needed-message" = "This feature requires a DeepL API key";
 "settings.push.duplicate.title" = "Duplicate notifications fixer";
 "settings.push.duplicate.footer" = "Receiving duplicate notifications? Try this magic button in order to fix it";
 "settings.push.duplicate.button.fix" = "🪄 Fix it";
@@ -381,6 +386,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Tercüme et";
+"status.action.translate-with-deepl" = "Translate with DeepL";
 "status.action.translated-label-%@" = "%@ tarafından tercüme edildi";
 "status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Yer İmi Ekle";
