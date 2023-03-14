@@ -141,11 +141,11 @@
 "settings.other.hide-openai" = "Gaitu 🤖 laguntzailea";
 "settings.other.social-keyboard" = "Gaitu teklatu soziala";
 "settings.other.sound-effect" = "Gaitu soinu efektuak";
-"settings.general.translate" = "Translation Settings";
-"settings.translation.always-deepl" = "Always Translate using DeepL";
-"settings.translation.user-api-key" = "DeepL API Key";
-"settings.translation.api-key-type" = "Type of the Key";
-"settings.translation.needed-message" = "This feature requires a DeepL API key";
+"settings.general.translate" = "Itzulpen ezarpenak";
+"settings.translation.always-deepl" = "Itzuli beti DeepL erabiliz";
+"settings.translation.user-api-key" = "DeepL API gakoa";
+"settings.translation.api-key-type" = "Gako mota";
+"settings.translation.needed-message" = "Ezaugarri honek DeepL API gako bat behar du";
 "settings.general.content" = "Edukiaren ezarpenak";
 "settings.system" = "Sistemaren ezarpenak";
 "settings.content.navigation-title" = "Edukiaren ezarpenak";
@@ -384,7 +384,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Itzuli";
-"status.action.translate-with-deepl" = "Translate with DeepL";
+"status.action.translate-with-deepl" = "Itzuli DeepL erabiliz";
 "status.action.translated-label-%@" = "%@ erabiliz itzulia";
 "status.action.translated-label-from-%@-%@" = "%@(e)tik %@ erabiliz itzulia";
 "status.action.bookmark" = "Jarri laster-marka";
