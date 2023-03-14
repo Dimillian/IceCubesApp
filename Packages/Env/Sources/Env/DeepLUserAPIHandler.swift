@@ -1,51 +1,43 @@
 import Foundation
 import SwiftUI
+import KeychainSwift
 
 @MainActor
 public enum DeepLUserAPIHandler {
-  private static let service = "API Token", account = "DeepL"
+  private static let key = "DeepL"
+  private static var keychain: KeychainSwift {
+    let keychain = KeychainSwift()
+#if !DEBUG && !targetEnvironment(simulator)
+    keychain.accessGroup = AppInfo.keychainGroup
+#endif
+    return keychain
+  }
   
   public static func write(value: String) {
+    keychain.synchronizable = true
     if !value.isEmpty {
-      KeychainHelper.save(value, service: service, account: account, syncable: true)
+      keychain.set(value, forKey: key)
     } else {
-      KeychainHelper.delete(service: service, account: account, syncable: true)
+      keychain.delete(key)
     }
   }
   
-  public static func writeAndUpdate(value: String) {
-    write(value: value)
-    
-    let optValue = !value.isEmpty ? value : nil
-    updatePreferences(value: optValue)
-  }
-  
-  private static func readInternal() -> String? {
-    KeychainHelper.read(service: service, account: account, type: String.self, syncable: true)
-  }
-
-  private static func returnIfAllowed(value: String?) -> String? {
+  public static func readIfAllowed() -> String? {
     guard UserPreferences.shared.alwaysUseDeepl else {return nil}
     
-    return value
+    return readValue()
   }
   
-  private static func updatePreferences(value: String?) {
-    let oldVal = UserPreferences.shared.alwaysUseDeepl
-    UserPreferences.shared.alwaysUseDeepl = oldVal && value != nil
+  private static func readValue() -> String? {
+    keychain.synchronizable = true
+    return keychain.get(key)
   }
   
-  public static func updatePreferences() {
-    updatePreferences(value: readInternal())
-  }
-
-  public static func read() -> String? {
-    returnIfAllowed(value: readInternal())
+  public static func deactivateToggleIfNoKey() {
+    UserPreferences.shared.alwaysUseDeepl = shouldAlwaysUseDeepl
   }
   
-  public static func readAndUpdate() -> String? {
-    let value = readInternal()
-    updatePreferences(value: value)
-    return returnIfAllowed(value: value)
+  public static var shouldAlwaysUseDeepl: Bool {
+    readIfAllowed() != nil
   }
 }

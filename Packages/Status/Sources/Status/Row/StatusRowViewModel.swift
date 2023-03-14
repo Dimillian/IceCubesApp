@@ -289,8 +289,7 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   func translate(userLang: String) async {
-    let userAPIKey = DeepLUserAPIHandler.readAndUpdate()
-    if userAPIKey == nil {
+    if !alwaysTranslateWithDeepl {
       do {
         withAnimation {
           isLoadingTranslation = true
@@ -308,15 +307,11 @@ public class StatusRowViewModel: ObservableObject {
     }
       
     // If not or fail we use Ice Cubes own DeepL client.
-    await translateWithDeepL(userLang: userLang, userAPIKey: userAPIKey)
+    await translateWithDeepL(userLang: userLang)
   }
 
   func translateWithDeepL(userLang: String) async {
-    await translateWithDeepL(userLang: userLang, userAPIKey: DeepLUserAPIHandler.readAndUpdate())
-  }
-
-  private func translateWithDeepL(userLang: String, userAPIKey: String?) async {
-    let deepLClient = getDeepLClient(userAPIKey: userAPIKey)
+    let deepLClient = getDeepLClient()
     let translation = try? await deepLClient.request(target: userLang,
                                                      text: finalStatus.content.asRawText)
     withAnimation {
@@ -325,18 +320,18 @@ public class StatusRowViewModel: ObservableObject {
     }
   }
 
-  private func getDeepLClient(userAPIKey: String?) -> DeepLClient {
+  private func getDeepLClient() -> DeepLClient {
     let userAPIfree = UserPreferences.shared.userDeeplAPIFree
     
     return DeepLClient(userAPIKey: userAPIKey, userAPIFree: userAPIfree)
   }
 
-  private func getUserAPIKey() -> String? {
-      DeepLUserAPIHandler.readAndUpdate()
+  private var userAPIKey: String? {
+      DeepLUserAPIHandler.readIfAllowed()
   }
 
   var alwaysTranslateWithDeepl: Bool {
-    DeepLUserAPIHandler.read() != nil
+      DeepLUserAPIHandler.shouldAlwaysUseDeepl
   }
 
   func fetchRemoteStatus() async -> Bool {

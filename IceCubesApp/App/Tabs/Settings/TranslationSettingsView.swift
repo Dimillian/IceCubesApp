@@ -42,7 +42,6 @@ struct TranslationSettingsView: View {
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
       .onChange(of: apiKey, perform: writeNewValue)
-      .onDisappear(perform: writeAndUpdate)
       .onAppear(perform: updatePrefs)
     }
 
@@ -54,12 +53,8 @@ struct TranslationSettingsView: View {
     DeepLUserAPIHandler.write(value: value)
   }
   
-  private func writeAndUpdate() {
-    DeepLUserAPIHandler.writeAndUpdate(value: apiKey)
-  }
-  
   private func readValue() {
-    if let apiKey = DeepLUserAPIHandler.read() {
+    if let apiKey = DeepLUserAPIHandler.readIfAllowed() {
       self.apiKey = apiKey
     } else {
       self.apiKey = ""
@@ -67,7 +62,7 @@ struct TranslationSettingsView: View {
   }
   
   private func updatePrefs() {
-    DeepLUserAPIHandler.updatePreferences()
+    DeepLUserAPIHandler.deactivateToggleIfNoKey()
   }
 }
 
