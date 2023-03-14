@@ -33,7 +33,6 @@ public class StatusRowViewModel: ObservableObject {
   @Published var localStatusId: String?
   @Published var localStatus: Status?
 
-
   // used by the button to expand a collapsed post
   @Published var isCollapsed: Bool = true {
     didSet {
@@ -301,11 +300,11 @@ public class StatusRowViewModel: ObservableObject {
           self.translation = translation
           isLoadingTranslation = false
         }
-        
+
         return
       } catch {}
     }
-      
+
     // If not or fail we use Ice Cubes own DeepL client.
     await translateWithDeepL(userLang: userLang)
   }
@@ -322,16 +321,16 @@ public class StatusRowViewModel: ObservableObject {
 
   private func getDeepLClient() -> DeepLClient {
     let userAPIfree = UserPreferences.shared.userDeeplAPIFree
-    
+
     return DeepLClient(userAPIKey: userAPIKey, userAPIFree: userAPIfree)
   }
 
   private var userAPIKey: String? {
-      DeepLUserAPIHandler.readIfAllowed()
+    DeepLUserAPIHandler.readIfAllowed()
   }
 
   var alwaysTranslateWithDeepl: Bool {
-      DeepLUserAPIHandler.shouldAlwaysUseDeepl
+    DeepLUserAPIHandler.shouldAlwaysUseDeepl
   }
 
   func fetchRemoteStatus() async -> Bool {

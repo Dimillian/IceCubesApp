@@ -8,15 +8,15 @@ public struct DeepLClient {
 
   private var deeplUserAPIKey: String?
   private var deeplUserAPIFree: Bool
-  private var endpoint: String  {
-      "https://api\(deeplUserAPIFree && (deeplUserAPIKey != nil) ? "-free" : "").deepl.com/v2/translate"
+  private var endpoint: String {
+    "https://api\(deeplUserAPIFree && (deeplUserAPIKey != nil) ? "-free" : "").deepl.com/v2/translate"
   }
 
   private var APIKey: String {
     if let deeplUserAPIKey {
       return deeplUserAPIKey
     }
-    
+
     if let path = Bundle.main.path(forResource: "Secret", ofType: "plist") {
       let secret = NSDictionary(contentsOfFile: path)
       return secret?["DEEPL_SECRET"] as? String ?? ""
