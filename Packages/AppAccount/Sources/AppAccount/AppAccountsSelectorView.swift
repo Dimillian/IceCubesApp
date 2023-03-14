@@ -111,11 +111,11 @@ public struct AppAccountsSelectorView: View {
       .navigationTitle("settings.section.accounts")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
-        ToolbarItem(placement: .navigationBarLeading) {
+        ToolbarItem(placement: .navigationBarTrailing) {
           Button {
             isPresented.toggle()
           } label: {
-            Image(systemName: "xmark.circle")
+            Text("action.done").bold()
           }
         }
       }
