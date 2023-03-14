@@ -283,7 +283,6 @@ struct StatusEditorAccessoryView: View {
             }
             .onTapGesture {
               viewModel.insertStatusText(text: " :\(emoji.shortcode): ")
-              isCustomEmojisSheetDisplay = false
             }
           }
         }.padding(.horizontal)
