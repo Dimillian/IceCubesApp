@@ -1,8 +1,11 @@
 import SwiftUI
 import Env
+import DesignSystem
 
 struct TranslationSettingsView: View {
   @EnvironmentObject private var preferences: UserPreferences
+  @EnvironmentObject private var theme: Theme
+  
   @State private var apiKey: String = ""
   
     var body: some View {
@@ -10,6 +13,7 @@ struct TranslationSettingsView: View {
         Toggle(isOn: preferences.$alwaysUseDeepl) {
           Label("settings.translation.always-deepl", systemImage: "captions.bubble")
         }
+        .listRowBackground(theme.primaryBackgroundColor)
         
         if preferences.alwaysUseDeepl {
           Section("settings.translation.user-api-key") {
@@ -22,6 +26,7 @@ struct TranslationSettingsView: View {
               .textContentType(.password)
           }
           .onAppear(perform: readValue)
+          .listRowBackground(theme.primaryBackgroundColor)
           
           if apiKey.isEmpty {
             Section {
@@ -30,9 +35,12 @@ struct TranslationSettingsView: View {
                   .foregroundColor(.red)
               }
             }
+            .listRowBackground(theme.primaryBackgroundColor)
           }
         }
       }
+      .scrollContentBackground(.hidden)
+      .background(theme.secondaryBackgroundColor)
       .onChange(of: apiKey, perform: writeNewValue)
       .onDisappear(perform: writeAndUpdate)
       .onAppear(perform: updatePrefs)
