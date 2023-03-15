@@ -78,7 +78,7 @@ public struct StatusDetailView: View {
 
           if !result {
             if let url = viewModel.remoteStatusURL {
-              openURL(url)
+              await UIApplication.shared.open(url)
             }
             DispatchQueue.main.async {
               _ = routerPath.path.popLast()
