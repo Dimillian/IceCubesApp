@@ -209,6 +209,12 @@ public class Theme: ObservableObject {
     [
       BasicIcons(),
       FancyIcons(),
+      MinimalSquareIcons(),
+      NumberedIcons(),
+      NumberedSquareIcons(),
+      DotsIcons(),
+      CreativeIcons(),
+      PrettyIcons(),
     ]
   }
   
