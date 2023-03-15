@@ -4,19 +4,19 @@ import SwiftUI
 public struct TabBarIconPreviewView: View {
   @EnvironmentObject private var theme: Theme
   @Environment(\.dismiss) var dismiss
-
+  
   public init() {}
   
   public var body: some View {
-      ScrollView {
-        ForEach(availableTabBarIconSets, id: \.id) { iconSet in
-          TabBarBoxView(iconSet: iconSet)
-        }
+    ScrollView {
+      ForEach(availableTabBarIconSets, id: \.id) { iconSet in
+        TabBarBoxView(iconSet: iconSet)
       }
-      .padding(4)
-      .frame(maxHeight: .infinity)
-      .background(theme.primaryBackgroundColor)
-      .navigationTitle("design.theme.navigation-title")
+    }
+    .padding(4)
+    .frame(maxHeight: .infinity)
+    .background(theme.primaryBackgroundColor)
+    .navigationTitle("design.theme.navigation-title")
   }
 }
 
@@ -64,15 +64,6 @@ struct TabBarBoxView: View {
           Spacer()
         }
       }
-      .onAppear {
-        isSelected = theme.selectedTabBarIconSet.rawValue == iconSet.id.rawValue
-      }
-      .onChange(of: theme.selectedTabBarIconSet) { newValue in
-        isSelected = newValue.rawValue == iconSet.id.rawValue
-      }
-      .onTapGesture {
-        theme.selectedTabBarIconSet = iconSet.id
-      }
       
       Text(iconSet.name.rawValue)
         .font(.title3)
@@ -80,6 +71,19 @@ struct TabBarBoxView: View {
       
       Spacer()
     }
+    .onAppear {
+      isSelected = theme.selectedTabBarIconSet.rawValue == iconSet.id.rawValue
+    }
+    .onChange(of: theme.selectedTabBarIconSet) { newValue in
+      isSelected = newValue.rawValue == iconSet.id.rawValue
+    }
+    .onTapGesture {
+      theme.selectedTabBarIconSet = iconSet.id
+    }
+    .frame(width: nil, height: nil)
+    .background(.ultraThinMaterial)
+    .cornerRadius(20)
+    .padding()
     
   }
 }
