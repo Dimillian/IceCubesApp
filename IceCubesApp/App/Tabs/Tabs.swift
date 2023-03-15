@@ -54,6 +54,7 @@ enum Tab: Int, Identifiable, Hashable {
     }
   }
 
+  
   @ViewBuilder
   var label: some View {
     switch self {
@@ -85,7 +86,7 @@ enum Tab: Int, Identifiable, Hashable {
   var iconName: String {
     switch self {
     case .timeline:
-      return "rectangle.stack"
+      return "mail.stack"
     case .trending:
       return "chart.line.uptrend.xyaxis"
     case .local:
@@ -108,4 +109,31 @@ enum Tab: Int, Identifiable, Hashable {
       return ""
     }
   }
+  
+  func value() -> String {
+      switch self {
+      case .timeline:
+        return "timeline"
+      case .trending:
+        return "trending"
+      case .local:
+        return "local"
+      case .federated:
+        return "federated"
+      case .notifications:
+        return "notifications"
+      case .mentions:
+        return "mentions"
+      case .explore:
+        return "explore"
+      case .messages:
+        return "messages"
+      case .settings:
+        return "settings"
+      case .profile:
+        return "profile"
+      case .other:
+        return ""
+      }
+    }
 }

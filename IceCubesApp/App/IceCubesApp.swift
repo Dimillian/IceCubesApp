@@ -181,15 +181,15 @@ struct IceCubesApp: App {
     })) {
       ForEach(availableTabs) { tab in
         tab.makeContentView(popToRootTab: $popToRootTab)
-          .tabItem {
+          .tabItem ({
             if userPreferences.showiPhoneTabLabel {
-              tab.label
+              Label(tab.value().capitalized, systemImage: availableTabBarIconSets[Int(theme.selectedTabBarIconSet.rawValue)!].tabIcon[tab.value()]!)
                 .labelStyle(TitleAndIconLabelStyle())
             } else {
-              tab.label
+              Label(tab.value().capitalized, systemImage: availableTabBarIconSets[Int(theme.selectedTabBarIconSet.rawValue)!].tabIcon[tab.value()]!)
                 .labelStyle(IconOnlyLabelStyle())
             }
-          }
+          })
           .tag(tab)
           .badge(badgeFor(tab: tab))
           .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .tabBar)

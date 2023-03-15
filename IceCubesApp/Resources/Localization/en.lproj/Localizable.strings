@@ -82,10 +82,12 @@
 "settings.display.navigation-title" = "Display Settings";
 "settings.display.restore" = "Restore Defaults";
 "settings.display.section.display" = "Display";
+"settings.display.section.tabbar" = "Tab Bar";
 "settings.display.section.theme" = "Theme";
 "settings.display.section.theme.footer" = "Custom colors can only be set if match system color scheme is disabled";
 "settings.display.status.action-buttons" = "Status Action Buttons";
 "settings.display.status.media-style" = "Status Media Style";
+"settings.display.tabbar.icon" = "Icons";
 "settings.display.translate-button" = "Show Translate Button";
 "settings.display.theme.background" = "Background Color";
 "settings.display.theme.secondary-background" = "Secondary Background Color";

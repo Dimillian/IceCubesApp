@@ -41,7 +41,14 @@ struct DisplaySettingsView: View {
         }
       }
       .listRowBackground(theme.primaryBackgroundColor)
-
+      
+      if UIDevice.current.userInterfaceIdiom == .phone {
+        Section("settings.display.section.tabbar") {
+          tabBarIconSelectorButton
+        }
+        .listRowBackground(theme.primaryBackgroundColor)
+      }
+      
       Section("settings.display.section.font") {
         Picker("settings.display.font", selection: .init(get: { () -> FontState in
           if theme.chosenFont?.fontName == "OpenDyslexic-Regular" {
@@ -148,6 +155,16 @@ struct DisplaySettingsView: View {
         Text("settings.display.section.theme")
         Spacer()
         Text(theme.selectedSet.rawValue)
+      }
+    }
+  }
+  
+  private var tabBarIconSelectorButton: some View {
+    NavigationLink(destination: TabBarIconPreviewView()) {
+      HStack {
+        Text("settings.display.tabbar.icon")
+        Spacer()
+        Text(availableTabBarIconSets[Int(theme.selectedTabBarIconSet.rawValue)!].name.rawValue)
       }
     }
   }

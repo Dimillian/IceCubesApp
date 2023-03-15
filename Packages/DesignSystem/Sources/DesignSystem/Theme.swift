@@ -6,6 +6,7 @@ public class Theme: ObservableObject {
     case colorScheme, tint, label, primaryBackground, secondaryBackground
     case avatarPosition, avatarShape, statusActionsDisplay, statusDisplayStyle
     case selectedSet, selectedScheme
+    case selectedTabBarIconSet
     case followSystemColorSchme
     case displayFullUsernameTimeline
   }
@@ -123,6 +124,7 @@ public class Theme: ObservableObject {
   @AppStorage(ThemeKey.avatarPosition.rawValue) var rawAvatarPosition: String = AvatarPosition.top.rawValue
   @AppStorage(ThemeKey.avatarShape.rawValue) var rawAvatarShape: String = AvatarShape.rounded.rawValue
   @AppStorage(ThemeKey.selectedSet.rawValue) var storedSet: ColorSetName = .iceCubeDark
+  @AppStorage(ThemeKey.selectedTabBarIconSet.rawValue) var storedTabBarIconSet: IconSetId = .basic
   @AppStorage(ThemeKey.statusActionsDisplay.rawValue) public var statusActionsDisplay: StatusActionsDisplay = .full
   @AppStorage(ThemeKey.statusDisplayStyle.rawValue) public var statusDisplayStyle: StatusDisplayStyle = .large
   @AppStorage(ThemeKey.followSystemColorSchme.rawValue) public var followSystemColorScheme: Bool = true
@@ -133,6 +135,7 @@ public class Theme: ObservableObject {
   @Published public var avatarPosition: AvatarPosition = .top
   @Published public var avatarShape: AvatarShape = .rounded
   @Published public var selectedSet: ColorSetName = .iceCubeDark
+  @Published public var selectedTabBarIconSet: IconSetId = .basic
 
   private var cancellables = Set<AnyCancellable>()
 
@@ -140,6 +143,7 @@ public class Theme: ObservableObject {
 
   private init() {
     selectedSet = storedSet
+    selectedTabBarIconSet = storedTabBarIconSet
 
     avatarPosition = AvatarPosition(rawValue: rawAvatarPosition) ?? .top
     avatarShape = AvatarShape(rawValue: rawAvatarShape) ?? .rounded
@@ -167,6 +171,13 @@ public class Theme: ObservableObject {
         self?.setColor(withName: colorSetName)
       }
       .store(in: &cancellables)
+    
+    $selectedTabBarIconSet
+      .dropFirst()
+      .sink { [weak self] IconSetName in
+        self?.setTabBarIcons(withName: IconSetName)
+      }
+      .store(in: &cancellables)
   }
 
   public static var allColorSet: [ColorSet] {
@@ -192,5 +203,17 @@ public class Theme: ObservableObject {
     secondaryBackgroundColor = colorSet.secondaryBackgroundColor
     labelColor = colorSet.labelColor
     storedSet = name
+  }
+  
+  public static var allTabBarIconSet: [TabBarIconSet] {
+    [
+      BasicIcons(),
+      FancyIcons(),
+    ]
+  }
+  
+  public func setTabBarIcons(withName id: IconSetId) {
+    let tabBarIconSet = Theme.allTabBarIconSet.filter { $0.id.rawValue == id.rawValue }.first ?? BasicIcons()
+    storedTabBarIconSet = tabBarIconSet.id
   }
 }
