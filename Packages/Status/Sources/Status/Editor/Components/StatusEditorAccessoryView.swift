@@ -9,6 +9,7 @@ struct StatusEditorAccessoryView: View {
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var currentInstance: CurrentInstance
+  @Environment(\.colorScheme) private var colorScheme
 
   @FocusState<Bool>.Binding var isSpoilerTextFocused: Bool
   @ObservedObject var viewModel: StatusEditorViewModel
@@ -18,6 +19,8 @@ struct StatusEditorAccessoryView: View {
   @State private var isCustomEmojisSheetDisplay: Bool = false
   @State private var languageSearch: String = ""
   @State private var isLoadingAIRequest: Bool = false
+  @State private var isPhotosPickerPresented: Bool = false
+  @State private var isFileImporterPresented: Bool = false
 
   var body: some View {
     VStack(spacing: 0) {
@@ -25,12 +28,33 @@ struct StatusEditorAccessoryView: View {
       HStack {
         ScrollView(.horizontal) {
           HStack(alignment: .center, spacing: 16) {
-            PhotosPicker(selection: $viewModel.selectedMedias,
-                         matching: .any(of: [.images, .videos])) {
+            Menu {
+              Button {
+                isPhotosPickerPresented = true
+              } label: {
+                Label("status.editor.photo-library", systemImage: "photo")
+              }
+              Button {
+                isFileImporterPresented = true
+              } label: {
+                Label("status.editor.browse-file", systemImage: "folder")
+              }
+            } label: {
               if viewModel.isMediasLoading {
                 ProgressView()
               } else {
-                Image(systemName: "photo.fill.on.rectangle.fill")
+                Image(systemName: "photo.on.rectangle.angled")
+              }
+            }
+            .photosPicker(isPresented: $isPhotosPickerPresented,
+                          selection: $viewModel.selectedMedias,
+                          matching: .any(of: [.images, .videos]))
+            .fileImporter(isPresented: $isFileImporterPresented,
+                          allowedContentTypes: [.image, .video],
+                          allowsMultipleSelection: true)
+            { result in
+              if let urls = try? result.get() {
+                viewModel.processURLs(urls: urls)
               }
             }
             .accessibilityLabel("accessibility.editor.button.attach-photo")
@@ -70,7 +94,10 @@ struct StatusEditorAccessoryView: View {
               Button {
                 isCustomEmojisSheetDisplay = true
               } label: {
-                Image(systemName: "face.smiling.inverse")
+                // This is a workaround for an apparent bug in the `face.smiling` SF Symbol.
+                // See https://github.com/Dimillian/IceCubesApp/issues/1193
+                let customEmojiSheetIconName = colorScheme == .light ? "face.smiling" : "face.smiling.inverse"
+                Image(systemName: customEmojiSheetIconName)
               }
               .accessibilityLabel("accessibility.editor.button.custom-emojis")
             }
@@ -256,7 +283,6 @@ struct StatusEditorAccessoryView: View {
             }
             .onTapGesture {
               viewModel.insertStatusText(text: " :\(emoji.shortcode): ")
-              isCustomEmojisSheetDisplay = false
             }
           }
         }.padding(.horizontal)

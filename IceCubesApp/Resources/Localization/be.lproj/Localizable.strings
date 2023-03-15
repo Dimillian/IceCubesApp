@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "Кола";
 "enum.avatar-shape.rounded" = "Акруглены";
 "enum.durations.infinite" = "бясконцасць";
+"enum.durations.custom" = "custom";
 "enum.durations.fiveMinutes" = "5 хвілін";
 "enum.durations.thirtyMinutes" = "30 хвілін";
 "enum.durations.oneHour" = "1 гадзіна";
 "enum.durations.sixHours" = "6 гадзін";
+"enum.durations.twelveHours" = "12 гадзін";
 "enum.durations.oneDay" = "1 дзень";
 "enum.durations.threeDays" = "3 дні";
 "enum.durations.sevenDays" = "7 дзён";
@@ -83,12 +85,14 @@
 "settings.display.restore" = "Аднавіць па змаўчанні";
 "settings.display.section.display" = "Дысплэй";
 "settings.display.section.theme" = "Тэма";
+"settings.display.colors.apply" = "Apply custom colors";
 "settings.display.section.theme.footer" = "Уласныя колеры можна ўсталяваць толькі ў тым выпадку, калі адключана сістэмная каляровая схема";
 "settings.display.status.action-buttons" = "Кнопкі дзеянняў стану";
 "settings.display.status.media-style" = "Медыястыль статусу";
 "settings.display.translate-button" = "Паказаць кнопку перакладу";
 "settings.display.theme.background" = "Колер фону";
 "settings.display.theme.secondary-background" = "Другасны колер фону";
+"settings.display.theme.text-color" = "Text Color";
 "settings.display.theme.tint" = "Колер адцення";
 "settings.display.theme.systemColor" = "Згодна з сістэмай";
 "settings.general.browser" = "Браўзэр";
@@ -151,7 +155,7 @@
 "settings.support.supporter.subscribed" = " Thanks for being an Ice Cubes supporter!";
 "settings.support.supporter.subscription-info"= "Subscription are automatically renewed unless you cancel them a day before the next renewal cycle.";
 "settings.support.restore-purchase.button" = "Restore purchase";
-"settings.support.restore-purchase.explanation" = "Restore your supporter subscription if it's haven't been automatically synced.";
+"settings.support.restore-purchase.explanation" = "Restore your supporter subscription if it hasn't been synced automatically.";
 "settings.support.privacy-policy" = "Privacy Policy";
 "settings.support.terms-of-use" = "Terms";
 "settings.timeline.add" = "Дадайце мясцовую шкалу часу";
@@ -161,6 +165,11 @@
 "settings.other.hide-openai" = "Уключыць 🤖 памочніка";
 "settings.other.social-keyboard" = "Уключыць сацыяльную клавіятуру";
 "settings.other.sound-effect" = "Enable Sound Effects";
+"settings.general.translate" = "Translation Settings";
+"settings.translation.always-deepl" = "Always Translate using DeepL";
+"settings.translation.user-api-key" = "DeepL API Key";
+"settings.translation.api-key-type" = "Type of the Key";
+"settings.translation.needed-message" = "This feature requires a DeepL API key";
 "settings.push.duplicate.title" = "Выпраўляльнік дублікатаў апавяшчэнняў";
 "settings.push.duplicate.footer" = "Атрымліваеш падвоеныя апавяшчэнні? Паспрабуй гэтую чароўную кнопку каб выправіць";
 "settings.push.duplicate.button.fix" = "🪄 Выправіць";
@@ -289,6 +298,7 @@
 "account.relation.follows-you" = "Сочыць за табой";
 "account.joined" = "Далучыліся";
 "account.action.logout" = "Выйсці з уліковага запісу";
+"account.action.more" = "More Settings";
 
 "account.relation.note.edit" = "Рэдагаваць нататку";
 "account.relation.note.edit.placeholder" = "Увядзіце тэкст нататкі";
@@ -330,14 +340,6 @@
 "explore.section.users" = "Карыстальнікі";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5 хвілін";
-"env.poll-duration.30m" = "30 хвілін";
-"env.poll-duration.1h" = "1 гадзіна";
-"env.poll-duration.6h" = "6 гадзін";
-"env.poll-duration.12h" = "12 гадзін";
-"env.poll-duration.1d" = "1 дзень";
-"env.poll-duration.3d" = "3 дні";
-"env.poll-duration.7d" = "7 дзён";
 "env.poll-vote-frequency.one" = "Адзін голас";
 "env.poll-vote-frequency.multiple" = "Некалькі галасоў";
 
@@ -393,6 +395,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Перакласці";
+"status.action.translate-with-deepl" = "Translate with DeepL";
 "status.action.translated-label-%@" = "Пераклад з дапамогай %@";
 "status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Закладка";
@@ -426,6 +429,8 @@
 "status.draft.delete" = "Выдаліць чарнавік";
 "status.draft.save" = "Захаваць чарнавік";
 "status.editor.ai-prompt.correct" = "Выправіць тэкст";
+"status.editor.ai-prompt.add-tags" = "Add #Tags in place";
+"status.editor.ai-prompt.insert-tags" = "Add #Tags after my text";
 "status.editor.ai-prompt.emphasize" = "Вылучыць тэкст";
 "status.editor.ai-prompt.fit" = "Скараціць тэкст";
 "status.editor.description.add" = "Дадаць апісанне";
@@ -447,6 +452,8 @@
 "status.editor.spoiler" = "Тэкст спойлера";
 "status.editor.text.placeholder" = "Пра што вы думаеце?";
 "status.editor.visibility" = "Бачнасць допісу";
+"status.editor.photo-library" = "Photos Library";
+"status.editor.browse-file" = "Browse Files";
 "status.error.loading.message" = "Пры загрузцы паведамленняў адбылася памылка, паўтарыце спробу.";
 "status.error.message" = "Адбылася памылка ў кантэксце гэтай публікацыі, паспрабуйце яшчэ раз.";
 "status.error.title" = "Узнікла памылка";
@@ -491,6 +498,9 @@
 "filter.edit.keywords.add" = "Дадаць новае ключавое слова";
 "filter.edit.contexts" = "Кантэксты фільтра";
 "filter.edit.action" = "Дзеянне фільтра";
+"filter.edit.expiry" = "Expiry";
+"filter.edit.expiry.date-time" = "Date/Time";
+"filter.edit.expiry.duration" = "Duration";
 "account.action.edit-filters" = "Рэдагаваць фільтры";
 "filter.contexts.home" = "Галоўная старонка і спісы";
 "filter.contexts.notifications" = "Апавяшчэнні";
@@ -515,4 +525,6 @@
 "report.title" = "Паскардзіцца";
 "report.action.send" = "Адправіць";
 "status.action.report" = "Паскардзіцца";
+
+"tag.suggested.mentions-%lld" = "%lld mentions";
 

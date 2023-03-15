@@ -1,0 +1,525 @@
+// MARK: Common strings
+"action.cancel" = "取消";
+"action.delete" = "刪除";
+"action.save"  = "儲存";
+"action.done" = "結束";
+"action.retry" = "重試";
+"action.view.error" = "檢視錯誤";
+
+"alert.button.ok" = "OK";
+"alert.error" = "錯誤！";
+
+"placeholder.loading.long" = "下載，下載，再下載⋯";
+"placeholder.loading.short" = "下載中⋯";
+
+"see-more" = "更多";
+
+// MARK: Add Account
+"account.add.error.instance-not-supported" = "此伺服器現不支援。";
+"account.add.navigation-title" = "新增帳戶";
+"account.add.sign-in" = "登入";
+
+// MARK: Enums
+"enum.avatar-position.leading" = "前導";
+"enum.avatar-position.top" = "居頂";
+"enum.avatar-shape.circle" = "圓形";
+"enum.avatar-shape.rounded" = "圓角";
+"enum.durations.infinite" = "永久";
+"enum.durations.custom" = "自定";
+"enum.durations.fiveMinutes" = "五分鐘";
+"enum.durations.thirtyMinutes" = "半小時";
+"enum.durations.oneHour" = "一小時";
+"enum.durations.sixHours" = "六小時";
+"enum.durations.twelveHours" = "半天";
+"enum.durations.oneDay" = "一天";
+"enum.durations.threeDays" = "三天";
+"enum.durations.sevenDays" = "一星期";
+"enum.status-actions-display.all" = "圖示和數量";
+"enum.status-actions-display.no-buttons" = "無";
+"enum.status-actions-display.only-buttons" = "圖示";
+"enum.status-display-style.compact" = "小";
+"enum.status-display-style.medium" = "中";
+"enum.status-display-style.large" = "大";
+"enum.swipeactions.icon-with-text" = "圖文";
+"enum.swipeactions.icon-only" = "圖示";
+
+// MARK: Instances
+"instance.info.domains" = "網域";
+"instance.info.email" = "電郵";
+"instance.info.name" = "名稱";
+"instance.info.navigation-title" = "伺服器資訊";
+"instance.info.posts" = "嘟文";
+"instance.info.section.info" = "伺服器資訊";
+"instance.info.section.rules" = "伺服器規章";
+"instance.info.users" = "用戶";
+"instance.info.version" = "版本";
+"instance.list.posts-%@" = "%@ 嘟文";
+"instance.list.users-%@" = "%@ 用戶";
+"instance.suggestions" = "推薦";
+"instance.url" = "伺服器 URL";
+
+// MARK: Menu
+"menu.new-post" = "新嘟文";
+"menu.font" = "字體";
+"menu.font.bigger" = "放大";
+"menu.font.smaller" = "縮小";
+
+// MARK: Settings
+"settings.account.add" = "新增帳戶";
+"settings.app.icon" = "App 圖像";
+"settings.app.icon.navigation-title" = "圖像";
+"settings.app.icon.official" = "官方圖像";
+"settings.app.icon.designed-by" = "圖像作者";
+"settings.app.source" = "程式原始碼（GitHub）";
+"settings.app.support" = "贊助本程式";
+"settings.app.about" = "關於";
+"settings.display.example-toot" = "嘟文範例";
+"settings.display.font" = "時間軸字體";
+"settings.display.font.system" = "系統";
+"settings.display.font.custom" = "自定";
+"settings.display.font.scaling-%@" = "字體縮放：%@";
+"settings.display.avatar.position" = "頭像位置";
+"settings.display.avatar.shape" = "頭像形狀";
+"settings.display.full-username" = "顯示用戶全名";
+"settings.display.navigation-title" = "顯示設定";
+"settings.display.restore" = "還原預設值";
+"settings.display.section.display" = "顯示";
+"settings.display.section.theme" = "風格";
+"settings.display.colors.apply" = "採用自定顏色";
+"settings.display.section.theme.footer" = "自定顏色需先關閉「符合系統」選項";
+"settings.display.status.action-buttons" = "狀態列按鈕";
+"settings.display.status.media-style" = "狀態媒體式樣";
+"settings.display.translate-button" = "顯示翻譯按紐";
+"settings.display.theme.background" = "背景顏色";
+"settings.display.theme.secondary-background" = "第二背景顏色";
+"settings.display.theme.text-color" = "本文顏色";
+"settings.display.theme.tint" = "色調";
+"settings.display.theme.systemColor" = "符合系統";
+"settings.general.browser" = "瀏覽器";
+"settings.general.browser.in-app" = "內建瀏覽器";
+"settings.general.browser.in-app.readerview" = "內建閱讀器";
+"settings.general.browser.system" = "系統瀏覽器";
+"settings.general.display" = "顯示設定";
+"settings.general.instance" = "伺服器資訊";
+"settings.general.push-notifications" = "通知";
+"settings.general.remote-timelines" = "他站時間軸";
+"settings.push.boosts" = "轉嘟";
+"settings.push.favorites" = "最愛";
+"settings.push.follows" = "跟隨";
+"settings.push.main-toggle" = "通知";
+"settings.push.main-toggle.description" = "有新活動時通知";
+"settings.push.mentions" = "提及";
+"settings.push.navigation-title" = "通知";
+"settings.push.new-posts" = "新嘟文";
+"settings.push.polls" = "票選結果";
+"settings.general.content" = "內容設定";
+"settings.system" = "系統設定";
+"settings.content.navigation-title" = "內容設定";
+"settings.content.boosts" = "轉嘟";
+"settings.content.collapse-long-posts" = "縮限長文";
+"settings.content.collapse-long-posts-hint" = "「縮限長文」將只顯示數行文字，另可按紐閱讀全文";
+"settings.content.hide-repeated-boosts" = "隱藏多重轉嘟";
+"settings.content.instance-settings" = "伺服器內容設定";
+"settings.content.use-instance-settings" = "沿用伺服器設定";
+"settings.content.expand-spoilers" = "顯示所有敏感嘟文";
+"settings.content.expand-media" = "媒體顯示";
+"settings.content.default-sensitive" = "媒體一概標示為敏感";
+"settings.content.default-visibility" = "嘟文能見度";
+"settings.content.media" = "媒體";
+"settings.content.media.show.alt" = "顯示圖片描述";
+"settings.content.reading" = "閱讀";
+"settings.content.posting" = "發表";
+"enum.expand-media.show" = "全部顯示";
+"enum.expand-media.hide" = "全部隱藏";
+"enum.expand-media.hide-sensitive" = "隱藏敏感題材";
+"settings.section.accounts" = "帳號";
+"settings.section.app" = "App";
+"settings.section.app.footer %@" = "App 版本：%@";
+"settings.section.general" = "一般";
+"settings.support.alert.error.message" = "選購時發生錯誤，請再試一次。";
+"settings.support.alert.message" = "非常感謝您的捐贈！";
+"settings.support.alert.title" = "感謝！";
+"settings.support.message-from-dev" = "您好！我是 Thomas，我愛寫開源碼程式。Ice Cubes 是我最引以為傲的作品之一，但是老實說因為 Mastodon 和社交媒體的日新月異，也是最需要維護的。您如果愛用 Ice Cubes，請考慮贊助我。這將讓我很開心，也幫助我繼續維護這個軟體。 🚀";
+"settings.support.navigation-title" = "支援 Ice Cubes";
+"settings.support.one.subtitle" = "小而可愛，也好吃！";
+"settings.support.one.title" = "🍬 小額捐贈";
+"settings.support.placeholder.loading-subtitle" = "下載中⋯";
+"settings.support.three.subtitle" = "您太狂了，感激不盡！";
+"settings.support.three.title" = "🤯 慷慨捐贈";
+"settings.support.two.subtitle" = "一杯好咖啡是我的最愛 ❤️";
+"settings.support.two.title" = "☕️ 爽口捐贈";
+"settings.support.four.title" = "👽 超級捐贈";
+"settings.support.four.subtitle" = "這將大大有助於 Ice Cubes 持續運行！";
+"settings.support.supporter.title" = " 成為支持者！";
+"settings.support.supporter.subtitle" = "您若每月捐贈給 Ice Cubes 就能成為支持者，更能在個人檔案裡看到驗證徽章。限您 👀 見。";
+"settings.support.supporter.subscribed" = " 感謝您成為 Ice Cubes 支持者！";
+"settings.support.supporter.subscription-info"= "除非在訂閱期滿前一天取消，訂閱將自動繼續。";
+"settings.support.restore-purchase.button" = "還原已購項目";
+"settings.support.restore-purchase.explanation" = "若未自動同步，可以手動還原您的支持者訂閱。";
+"settings.support.privacy-policy" = "隱私政策";
+"settings.support.terms-of-use" = "使用條款";
+"settings.timeline.add" = "新增時間軸";
+"settings.title" = "設定";
+"settings.rate" = "給 Ice Cubes 評分";
+"settings.section.other" = "其他";
+"settings.other.hide-openai" = "啟用 🤖 寫作助手";
+"settings.other.social-keyboard" = "啟用社交鍵盤";
+"settings.other.sound-effect" = "啟用音效";
+"settings.push.duplicate.title" = "修理重複通知";
+"settings.push.duplicate.footer" = "收到重複通知嗎？用這個魔術按鈕修復";
+"settings.push.duplicate.button.fix" = "🪄 修復";
+"settings.other.autoplay-video" = "自動播放視訊";
+"settings.about.built-with" = "Ice Cubes 運用下列開源碼：";
+"settings.about.title" = "Ice Cubes";
+
+"settings.account.cached-posts-%@" = "快取嘟文：%@";
+"settings.account.action.delete-cache" = "清除快取";
+
+"settings.general.haptic" = "觸覺回饋";
+"settings.haptic.navigation-title" = "觸覺設定";
+"settings.haptic.timeline" = "時間軸";
+"settings.haptic.tab-selection" = "頁籤選擇";
+"settings.haptic.buttons" = "按紐";
+
+"settings.display.show-tab-label" = "顯示頁籤名稱";
+
+"settings.display.show-ipad-column" = "啟用邊欄";
+
+"settings.general.swipeactions" = "滑動功能";
+"settings.swipeactions.appearance" = "外觀";
+"settings.swipeactions.navigation-title" = "滑動功能";
+"settings.swipeactions.primary" = "主功能";
+"settings.swipeactions.secondary" = "副功能";
+"settings.swipeactions.status" = "發表";
+"settings.swipeactions.status.action.bookmark" = "書籤";
+"settings.swipeactions.status.action.boost" = "轉嘟";
+"settings.swipeactions.status.action.favorite" = "最愛";
+"settings.swipeactions.status.action.none" = "無";
+"settings.swipeactions.status.action.quote" = "引述";
+"settings.swipeactions.status.action.reply" = "回覆";
+"settings.swipeactions.status.explanation" = "滑動功能在嘟文上左右滑動使用。副功能需啟動主功能時才能使用。";
+"settings.swipeactions.status.leading" = "右滑";
+"settings.swipeactions.status.trailing" = "左滑";
+"settings.swipeactions.use-theme-colors" = "使用風格顏色";
+"settings.swipeactions.use-theme-colors-explanation" = "用風格顏色代替預設顏色";
+"settings.swipeactions.icon-style" = "圖示式樣";
+
+"settings.display.section.font" = "字體";
+
+"settings.section.cache" = "快取";
+"settings.cache-media.clear" = "清除媒體快取";
+
+"settings.general.translate" = "Translation Settings";
+"settings.translation.always-deepl" = "Always Translate using DeepL";
+"settings.translation.user-api-key" = "DeepL API Key";
+"settings.translation.api-key-type" = "Type of the Key";
+"settings.translation.needed-message" = "This feature requires a DeepL API key";
+
+// MARK: Tabs
+"tab.explore" = "探索";
+"tab.federated" = "聯邦";
+"tab.local" = "本站";
+"tab.messages" = "私訊";
+"tab.notifications" = "通知";
+"tab.settings" = "設定";
+"tab.timeline" = "時間軸";
+"tab.trending" = "流行";
+"tab.profile" = "個人檔案";
+
+// MARK: Timeline
+"timeline.%@-is-valid" = "%@ 有效";
+"timeline.add-remote.title" = "新增他站時間軸";
+"timeline.add.action.add" = "新增";
+"timeline.filter.add-local" = "新增本站時間軸";
+"timeline.filter.lists" = "列表";
+"timeline.filter.local" = "本站時間軸";
+"timeline.filter.tags" = "跟隨標籤";
+
+// MARK: Package: AppAccount
+"app-account.button.add" = "新增帳號";
+
+// MARK: Package: Account
+"account.action.add-remove-list" = "從列表中新增或刪除";
+"account.action.edit-info" = "編輯個人檔案";
+"account.action.mention" = "提及";
+"account.action.message" = "私訊";
+"account.action.notify-enable" = "啟用通知";
+"account.action.notify-disable" = "停用通知";
+"account.action.reboosts-show" = "顯示轉嘟";
+"account.action.reboosts-hide" = "隱藏轉嘟";
+"account.action.block" = "封鎖";
+"account.action.unblock" = "解封";
+"account.action.mute" = "靜音";
+"account.action.unmute" = "取消靜音";
+"account.action.share" = "分享此帳號";
+"account.boosted-by" = "轉嘟者";
+"account.detail.about" = "關於";
+"account.detail.familiar-followers" = "其他跟隨者";
+"account.detail.n-fields %lld" = "%lld 欄";
+"account.detail.featured-tags-n-posts %lld" = "%lld 嘟文";
+"account.edit.about" = "關於";
+"account.edit.account-settings.bot" = "機器人帳號";
+"account.edit.account-settings.discoverable" = "公開";
+"account.edit.account-settings.private" = "私密";
+"account.edit.account-settings.section-title" = "帳號設定";
+"account.edit.display-name" = "顯示名稱";
+"account.edit.error.save.message" = "儲存個人檔案時發生錯誤，請再試一次。";
+"account.edit.error.save.title" = "儲存個人檔案時發生錯誤";
+"account.edit.navigation-title" = "編輯個人檔案";
+"account.edit.post-settings.privacy" = "預設隱私";
+"account.edit.post-settings.section-title" = "嘟文設定";
+"account.edit.post-settings.sensitive" = "敏感內容";
+
+"account.edit.metadata-section-title" = "個人檔案元資料";
+"account.edit.metadata-name-placeholder" = "標示";
+"account.edit.metadata-value-placeholder" = "內容";
+"account.edit.add-metadata-button" = "新增元資料";
+
+"account.favorited-by" = "加入最愛";
+"account.follow.follow" = "跟隨";
+"account.follow.following" = "已跟隨";
+"account.follow.requested" = "已申請";
+"account.follow-request.accept" = "接受";
+"account.follow-request.reject" = "拒絕";
+"account.follow-requests.pending-requests" = "待辦申請";
+"account.follow-requests.instructions" = "未接受前申請者無法見到您的嘟文。";
+"account.followers" = "跟隨者";
+"account.following" = "正跟隨";
+"account.list.create" = "新增列表";
+"account.list.create.confirm" = "新增列表";
+"account.list.create.description" = "輸入列表名稱";
+"account.list.delete" = "刪除列表";
+"account.list.name" = "列表名稱";
+"account.post.pinned" = "釘選嘟文";
+"account.posts" = "嘟文";
+"account.relation.follows-you" = "跟隨了您";
+"account.joined" = "加入日期";
+"account.action.logout" = "登出帳號";
+"account.action.more" = "更多設定";
+
+"account.relation.note.edit" = "編輯備註";
+"account.relation.note.edit.placeholder" = "輸入備註";
+"account.relation.note.edit.error.save.message" = "儲存備註時發生錯誤，請再試一次。";
+"account.relation.note.edit.error.save.title" = "儲存備註時發生錯誤";
+"account.relation.note.label" = "備註：";
+
+// MARK: Package: Conversations
+"conversations.action.delete" = "刪除";
+"conversations.action.mark-read" = "標示為已讀";
+"conversations.action.view-detail" = "顯示詳情";
+"conversations.empty.message" = "在社交媒體上找尋滿足嗎？您的私訊和私人提及都在這裡。聊個開心！ 📱❤️";
+"conversations.empty.title" = "零收件匣";
+"conversations.error.button" = "重試";
+"conversations.error.message" = "下載私訊時發生錯誤";
+"conversations.error.title" = "發生錯誤";
+"conversations.navigation-title" = "私訊";
+"conversations.new.message.placeholder" = "新私訊";
+"conversations.latest.message" = "最新私訊";
+
+// MARK: Package: DesignSystem
+"design.tag.n-posts-from-n-participants %lld %lld" = "%lld 篇嘟文，%lld 位參與者";
+"design.theme.navigation-title" = "選擇風格";
+"design.theme.toots-preview" = "嘟文預覽";
+
+// MARK: Package: Explore
+"explore.navigation-title" = "探索";
+"explore.search.message-%@" = "從這裡可以搜尋 %@ 裡的任何訊息";
+"explore.search.prompt" = "搜尋用戶、嘟文、或標籤";
+"explore.search.title" = "搜尋本站";
+"explore.search.empty.message" = "搜尋無結果，請試其他查詢";
+"explore.search.empty.title" = "搜尋無結果";
+"explore.section.posts" = "嘟文";
+"explore.section.suggested-users" = "推薦用戶";
+"explore.section.tags" = "標籤";
+"explore.section.trending.links" = "流行連結";
+"explore.section.trending.posts" = "流行嘟文";
+"explore.section.trending.tags" = "流行標籤";
+"explore.section.users" = "用戶";
+
+// MARK: Package: Env
+"env.poll-vote-frequency.one" = "單一選擇";
+"env.poll-vote-frequency.multiple" = "多重選擇";
+
+// MARK: Package: Lists
+"lists.add-remove-%@" = "新增或刪除 %@";
+"lists.create" = "新增列表";
+"lists.create.confirm" = "新增列表";
+"lists.edit.users-in-list" = "列表中用戶";
+"lists.name" = "列表名稱";
+"lists.name.message" = "輸入列表名稱";
+
+// MARK: Package: Notifications
+"notifications.empty.message" = "通知？什麼通知？您的通知收件匣空空如也，太棒了！ 📱😎";
+"notifications.empty.title" = "無通知";
+"notifications.error.message" = "下載通知時發生錯誤，請再試一次。";
+"notifications.error.title" = "下載通知時發生錯誤";
+"notifications.label.favorite %lld" = "把您的嘟文加入了最愛";
+"notifications.label.follow %lld" = "跟隨了您";
+"notifications.label.mention %lld" = "提及了您";
+"notifications.label.reblog %lld" = "轉嘟了您的嘟文";
+"notifications.label.poll" = "投票結束";
+"notifications.label.follow-request" = "申請跟隨您";
+"notifications.label.status" = "發表了嘟文";
+"notifications.label.update" = "編輯了嘟文";
+"notifications.menu-title.favorite" = "最愛";
+"notifications.menu-title.follow" = "跟隨";
+"notifications.menu-title.follow-request" = "跟隨申請";
+"notifications.menu-title.mention" = "提及";
+"notifications.menu-title.poll" = "投票";
+"notifications.menu-title.reblog" = "轉嘟";
+"notifications.menu-title.status" = "嘟文";
+"notifications.menu-title.update" = "嘟文更新";
+"notifications.navigation-title" = "所有通知";
+"notifications.tab.all" = "所有";
+"notifications.tab.mentions" = "提及";
+
+"notifications.label.status.push" = "🖊️ 發表了：";
+"notifications.label.reblog.push" = "🚀 轉嘟了：";
+"notifications.label.follow.push" = "👋 跟隨了您：";
+"notifications.label.follow-request.push" = "🔒 申請跟隨您：";
+"notifications.label.favorite.push" = "⭐️ 加入了最愛：";
+"notifications.label.poll.push" = "📈 投票結束：";
+"notifications.label.update.push" = "更新了：";
+
+// MARK: Package: Timeline
+"timeline.federated" = "聯邦";
+"timeline.latest" = "跳至最新";
+"timeline.home" = "首頁";
+"timeline.local" = "本站";
+"timeline.n-recent-from-n-participants %lld %lld" = "%lld 篇新嘟文，%lld 位參與者";
+"timeline.trending" = "流行";
+"timeline.add.url" = "伺服器 URL";
+
+// MARK: Package: Status
+"status.action.translate" = "翻譯";
+"status.action.translated-label-%@" = "翻譯服務 %@";
+"status.action.translated-label-from-%@-%@" = "從 %@ 以 %@ 翻譯";
+"status.action.bookmark" = "書籤";
+"status.action.boost" = "轉嘟";
+"status.action.boost-to-followers" = "轉嘟給跟隨者";
+"status.action.copy-text" = "拷貝本文";
+"status.action.copy-link" = "拷貝連結";
+"status.action.delete" = "刪除";
+"status.action.delete.confirm.title" = "確認";
+"status.action.delete.confirm.message" = "您確定要刪除本嘟文？";
+"status.action.edit" = "編輯";
+"status.action.favorite" = "最愛";
+"status.action.mention" = "提及";
+"status.action.message" = "私訊";
+"status.action.pin" = "釘選";
+"status.action.post" = "嘟文";
+"status.action.quote" = "引述本嘟文";
+"status.action.reply" = "回覆";
+"status.action.section.your-post" = "您的嘟文";
+"status.action.share" = "分享本嘟文";
+"status.action.share-link" = "分享嘟文連結";
+"status.action.share-image" = "用影像分享本嘟文";
+"status.action.share-title" = "分享";
+"status.action.unbookmark" = "取消書籤";
+"status.action.unboost" = "取消轉嘟";
+"status.action.unfavorite" = "取消最愛";
+"status.action.unpin" = "取消釘選";
+"status.action.view-in-browser" = "在瀏覽器裡開啟";
+"status.card.share" = "分享本連結";
+"status.card.copy" = "拷貝本連結";
+"status.draft.delete" = "刪除草稿";
+"status.draft.save" = "儲存草稿";
+"status.editor.ai-prompt.correct" = "更正";
+"status.editor.ai-prompt.add-tags" = "Add #Tags in place";
+"status.editor.ai-prompt.insert-tags" = "Add #Tags after my text";
+"status.editor.ai-prompt.emphasize" = "強調";
+"status.editor.ai-prompt.fit" = "精簡";
+"status.editor.description.add" = "新增描述";
+"status.editor.description.edit" = "編輯描述";
+"status.editor.drafts.navigation-title" = "草稿";
+"status.editor.emojis.navigation-title" = "自訂表情符號";
+"status.editor.error.upload" = "上傳錯誤";
+"status.editor.language-select.navigation-title" = "選擇語言";
+"status.editor.language-select.recently-used" = "最近用過";
+"status.editor.language-select.confirmation.detected-%@" = "嘟文用 %@（偵測語言）發表";
+"status.editor.language-select.confirmation.selected-%@" = "嘟文用 %@（選擇語言）發表";
+"status.editor.media.edit-image" = "編輯媒體";
+"status.editor.media.image-description" = "媒體描述";
+"status.editor.mode.edit" = "編輯您的嘟文";
+"status.editor.mode.new" = "新增嘟文";
+"status.editor.mode.quote-%@" = "引述 %@";
+"status.editor.mode.reply-%@" = "回覆 %@";
+"status.editor.restore-previous" = "還原本文";
+"status.editor.spoiler" = "劇透警告";
+"status.editor.text.placeholder" = "您在想些什麼呢？";
+"status.editor.visibility" = "嘟文能見度";
+"status.editor.photo-library" = "Photos Library";
+"status.editor.browse-file" = "Browse Files";
+"status.error.loading.message" = "下載嘟文時發生錯誤，請再試一次。";
+"status.error.message" = "嘟文上下文發生錯誤，請再試一次。";
+"status.error.title" = "發生錯誤";
+"status.filter.filtered-by-%@" = "由 %@ 過濾";
+"status.filter.show-anyway" = "仍然顯示";
+"status.image.alt-text.abbreviation" = "ALT";
+"status.media.content.show" = "顯示內容";
+"status.media.contextmenu.copy" = "拷貝影像";
+"status.media.contextmenu.save" = "儲存影像";
+"status.media.contextmenu.share" = "分享影像";
+"status.media.contextmenu.view-browser" = "在瀏覽器裡顯示";
+"status.media.sensitive.show" = "顯示敏感內容";
+"status.poll.n-votes %lld" = "%lld 票";
+"status.poll.n-votes-voters %lld %lld" = "%lld 票，%lld 位投票者";
+"status.poll.closed" = "已關閉";
+"status.poll.closes-in" = "關閉於 ";
+"status.poll.duration" = "投票時限";
+"status.poll.frequency" = "投票頻率";
+"status.poll.option-n %lld" = "選項 %lld";
+"status.poll.send" = "投票";
+"status.post-from-%@" = "%@ 的嘟文";
+"status.row.was-boosted" = "轉嘟";
+"status.row.was-reply" = "回覆給";
+"status.row.you-boosted" = "您轉嘟了";
+"status.show-less" = "少顯示一點";
+"status.show-more" = "多顯示一點";
+"status.show-full-post" = "顯示全文";
+"status.summary.at-time" = " 於 ";
+"status.summary.edited-time" = "上次編輯：";
+"status.summary.n-boosts %lld" = "%lld 轉嘟";
+"status.summary.n-favorites %lld" = "%lld 最愛";
+"status.visibility.direct" = "私訊";
+"status.visibility.follower" = "跟隨者";
+"status.visibility.public" = "所有人";
+"status.visibility.unlisted" = "不公開";
+
+// MARK: Filters
+"filter.new" = "新增過濾器";
+"filter.filters" = "過濾器";
+"filter.edit.title" = "過濾器名稱";
+"filter.edit.keywords" = "過濾器關鍵詞";
+"filter.edit.keywords.add" = "新增關鍵詞";
+"filter.edit.contexts" = "過濾器情境";
+"filter.edit.action" = "過濾器動作";
+"filter.edit.expiry" = "期限";
+"filter.edit.expiry.date-time" = "日期時間";
+"filter.edit.expiry.duration" = "期間";
+"account.action.edit-filters" = "編輯過濾器";
+"filter.contexts.home" = "首頁和列表";
+"filter.contexts.notifications" = "通知";
+"filter.contexts.public" = "公開時間軸";
+"filter.contexts.conversations" = "對話";
+"filter.contexts.profiles" = "個人檔案";
+"filter.action.warning" = "警告之後隱藏";
+"filter.action.hide" = "完全隱藏";
+
+// MARK: Accessibility
+"accessibility.editor.button.attach-photo" = "附上相片";
+"accessibility.editor.button.poll" = "投票";
+"accessibility.editor.button.spoiler" = "劇透警告";
+"accessibility.editor.button.drafts" = "草稿";
+"accessibility.editor.button.custom-emojis" = "自定表情符號";
+"accessibility.editor.button.language" = "語言";
+"accessibility.tabs.timeline.add-account" = "新增帳號";
+"accessibility.app-account.selector.accounts" = "帳號";
+
+// MARK: Report
+"report.comment.placeholder" = "附加資訊";
+"report.title" = "檢舉嘟文";
+"report.action.send" = "送出";
+"status.action.report" = "檢舉嘟文";
+
+"tag.suggested.mentions-%lld" = "%lld 提及";

@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "Circle";
 "enum.avatar-shape.rounded" = "Rounded";
 "enum.durations.infinite" = "infinite";
+"enum.durations.custom" = "custom";
 "enum.durations.fiveMinutes" = "5 minutes";
 "enum.durations.thirtyMinutes" = "30 minutes";
 "enum.durations.oneHour" = "1 hour";
 "enum.durations.sixHours" = "6 hours";
+"enum.durations.twelveHours" = "12 hours";
 "enum.durations.oneDay" = "1 day";
 "enum.durations.threeDays" = "3 days";
 "enum.durations.sevenDays" = "7 days";
@@ -84,6 +86,7 @@
 "settings.display.section.display" = "Display";
 "settings.display.section.tabbar" = "Tab Bar";
 "settings.display.section.theme" = "Theme";
+"settings.display.colors.apply" = "Apply custom colors";
 "settings.display.section.theme.footer" = "Custom colors can only be set if match system color scheme is disabled";
 "settings.display.status.action-buttons" = "Status Action Buttons";
 "settings.display.status.media-style" = "Status Media Style";
@@ -91,6 +94,7 @@
 "settings.display.translate-button" = "Show Translate Button";
 "settings.display.theme.background" = "Background Color";
 "settings.display.theme.secondary-background" = "Secondary Background Color";
+"settings.display.theme.text-color" = "Text Color";
 "settings.display.theme.tint" = "Tint Color";
 "settings.display.theme.systemColor" = "Match System";
 "settings.general.browser" = "Browser";
@@ -153,7 +157,7 @@
 "settings.support.supporter.subscribed" = " Thanks for being an Ice Cubes supporter!";
 "settings.support.supporter.subscription-info"= "Subscription are automatically renewed unless you cancel them a day before the next renewal cycle.";
 "settings.support.restore-purchase.button" = "Restore purchase";
-"settings.support.restore-purchase.explanation" = "Restore your supporter subscription if it's haven't been automatically synced.";
+"settings.support.restore-purchase.explanation" = "Restore your supporter subscription if it hasn't been synced automatically.";
 "settings.support.privacy-policy" = "Privacy Policy";
 "settings.support.terms-of-use" = "Terms";
 "settings.timeline.add" = "Add a Local Timeline";
@@ -163,6 +167,11 @@
 "settings.other.hide-openai" = "Enable 🤖 Helper";
 "settings.other.social-keyboard" = "Enable Social Keyboard";
 "settings.other.sound-effect" = "Enable Sound Effects";
+"settings.general.translate" = "Translation Settings";
+"settings.translation.always-deepl" = "Always Translate using DeepL";
+"settings.translation.user-api-key" = "DeepL API Key";
+"settings.translation.api-key-type" = "Type of the Key";
+"settings.translation.needed-message" = "This feature requires a DeepL API key";
 "settings.push.duplicate.title" = "Duplicate Notifications Fixer";
 "settings.push.duplicate.footer" = "Receiving duplicate notifications? Try this magic button in order to fix it";
 "settings.push.duplicate.button.fix" = "🪄 Fix It";
@@ -287,6 +296,7 @@
 "account.relation.follows-you" = "Follows You";
 "account.joined" = "Joined";
 "account.action.logout" = "Log Out Account";
+"account.action.more" = "More Settings";
 
 "account.relation.note.edit" = "Edit Note";
 "account.relation.note.edit.placeholder" = "Enter Note text";
@@ -328,14 +338,6 @@
 "explore.section.users" = "Users";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5 minutes";
-"env.poll-duration.30m" = "30 minutes";
-"env.poll-duration.1h" = "1 hour";
-"env.poll-duration.6h" = "6 hours";
-"env.poll-duration.12h" = "12 hours";
-"env.poll-duration.1d" = "1 day";
-"env.poll-duration.3d" = "3 days";
-"env.poll-duration.7d" = "7 days";
 "env.poll-vote-frequency.one" = "One Vote";
 "env.poll-vote-frequency.multiple" = "Multiple Votes";
 
@@ -391,6 +393,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Translate";
+"status.action.translate-with-deepl" = "Translate with DeepL";
 "status.action.translated-label-%@" = "Translated using %@";
 "status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Bookmark";
@@ -424,6 +427,8 @@
 "status.draft.delete" = "Delete Draft";
 "status.draft.save" = "Save Draft";
 "status.editor.ai-prompt.correct" = "Correct text";
+"status.editor.ai-prompt.add-tags" = "Add #Tags in place";
+"status.editor.ai-prompt.insert-tags" = "Add #Tags after my text";
 "status.editor.ai-prompt.emphasize" = "Emphasize text";
 "status.editor.ai-prompt.fit" = "Shorten text";
 "status.editor.description.add" = "Add description";
@@ -445,6 +450,8 @@
 "status.editor.spoiler" = "Spoiler Text";
 "status.editor.text.placeholder" = "What's on your mind?";
 "status.editor.visibility" = "Post visibility";
+"status.editor.photo-library" = "Photos Library";
+"status.editor.browse-file" = "Browse Files";
 "status.error.loading.message" = "An error occurred while loading posts, please try again.";
 "status.error.message" = "An error occurred in the context of this post, please try again.";
 "status.error.title" = "An error occurred";
@@ -489,6 +496,9 @@
 "filter.edit.keywords.add" = "Add a new keyword";
 "filter.edit.contexts" = "Filter Contexts";
 "filter.edit.action" = "Filter Action";
+"filter.edit.expiry" = "Expiry";
+"filter.edit.expiry.date-time" = "Date/Time";
+"filter.edit.expiry.duration" = "Duration";
 "account.action.edit-filters" = "Edit Filters";
 "filter.contexts.home" = "Home and lists";
 "filter.contexts.notifications" = "Notifications";
@@ -514,3 +524,4 @@
 "report.action.send" = "Send";
 "status.action.report" = "Report Post";
 
+"tag.suggested.mentions-%lld" = "%lld mentions";

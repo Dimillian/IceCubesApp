@@ -35,37 +35,37 @@
 		</dict>
 	</dict>
     <key>timeline-new-posts %lld</key>
-    <dict>
-        <key>NSStringLocalizedFormatKey</key>
-        <string>%#@timelineNewPosts@</string>
-        <key>timelineNewPosts</key>
-        <dict>
-            <key>NSStringFormatSpecTypeKey</key>
-            <string>NSStringPluralRuleType</string>
-            <key>NSStringFormatValueTypeKey</key>
-            <string>lld</string>
-            <key>one</key>
-            <string>Bidalketa berri %lld</string>
-            <key>other</key>
-            <string>%lld bidalketa berri</string>
-        </dict>
-    </dict>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@timelineNewPosts@</string>
+		<key>timelineNewPosts</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>Bidalketa berri %lld</string>
+			<key>other</key>
+			<string>%lld bidalketa berri</string>
+		</dict>
+	</dict>
     <key>notifications-others-count %lld</key>
-    <dict>
-        <key>NSStringLocalizedFormatKey</key>
-        <string>%#@noficationsOthersCount@</string>
-        <key>noficationsOthersCount</key>
-        <dict>
-            <key>NSStringFormatSpecTypeKey</key>
-            <string>NSStringPluralRuleType</string>
-            <key>NSStringFormatValueTypeKey</key>
-            <string>lld</string>
-            <key>one</key>
-            <string> eta beste %lld </string>
-            <key>other</key>
-            <string> eta beste %lld </string>
-        </dict>
-    </dict>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@noficationsOthersCount@</string>
+		<key>noficationsOthersCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string> eta beste bat</string>
+			<key>other</key>
+			<string> eta beste %lld</string>
+		</dict>
+	</dict>
     <key>notifications.label.favorite %lld</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -77,9 +77,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string>Batek gogoko egin du</string>
+			<string>(e)k gogoko du</string>
 			<key>other</key>
-			<string>%lld(e)k egin dute gogoko</string>
+			<string>(e)k gogoko dute</string>
 		</dict>
 	</dict>
     <key>notifications.label.follow %lld</key>
@@ -93,9 +93,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string>Jarraitzaile %lld duzu</string>
+			<string>(e)k jarraitzen dizu</string>
 			<key>other</key>
-			<string>%lld jarraitzaile dituzu</string>
+			<string>(e)k jarraitzen dizute</string>
 		</dict>
 	</dict>
     <key>notifications.label.mention %lld</key>
@@ -109,9 +109,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string>Aipamen %lld duzu</string>
+			<string>(e)k aipatu zaitu</string>
 			<key>other</key>
-			<string>%lld aipamen dituzu</string>
+			<string>(e)k aipatu zaituzte</string>
 		</dict>
 	</dict>
     <key>notifications.label.reblog %lld</key>
@@ -125,9 +125,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string>Bultzada %lld jaso duzu</string>
+			<string>(e)k bultzatu du</string>
 			<key>other</key>
-			<string>%lld bultzada jaso dituzu</string>
+			<string>(e)k bultzatu dute</string>
 		</dict>
 	</dict>
     <key>status.summary.n-favorites %lld</key>
@@ -257,6 +257,22 @@
 			<string>Boto-emaile baten</string>
 			<key>other</key>
 			<string>%lld boto-emaileren</string>
+		</dict>
+	</dict>
+    <key>tag.suggested.mentions-%lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@mentionsCount@</string>
+		<key>mentionsCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>aipamen %lld</string>
+			<key>other</key>
+			<string>%lld aipamen</string>
 		</dict>
 	</dict>
 </dict>

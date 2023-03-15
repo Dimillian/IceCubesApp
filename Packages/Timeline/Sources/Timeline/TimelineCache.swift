@@ -34,7 +34,7 @@ public actor TimelineCache {
       try await engine.removeAllData()
       let itemKeys = statuses.map { CacheKey($0[keyPath: \.id]) }
       let dataAndKeys = try zip(itemKeys, statuses)
-        .map { (key: $0, data: try encoder.encode($1)) }
+        .map { try (key: $0, data: encoder.encode($1)) }
       try await engine.write(dataAndKeys)
     } catch {}
   }

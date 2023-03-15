@@ -105,7 +105,8 @@ struct NotificationRowView: View {
                          .foregroundColor(.gray)
                      })
                      .font(.scaledSubheadline)
-                     .emojiSize(Font.scaledSubheadlinePointSize)
+                     .emojiSize(Font.scaledSubheadlineFont.emojiSize)
+                     .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
                      .fontWeight(.semibold)
                      .lineLimit(3)
                      .fixedSize(horizontal: false, vertical: true)
@@ -144,9 +145,9 @@ struct NotificationRowView: View {
           StatusRowView(viewModel: { .init(status: status,
                                            client: client,
                                            routerPath: routerPath,
-                                           showActions: false) })
+                                           showActions: false,
+                                           textDisabled: true) })
             .lineLimit(4)
-            .foregroundColor(.gray)
         }
         Spacer()
       }
@@ -162,7 +163,8 @@ struct NotificationRowView: View {
                        emojis: notification.accounts[0].emojis)
             .lineLimit(3)
             .font(.scaledCallout)
-            .emojiSize(Font.scaledCalloutPointSize)
+            .emojiSize(Font.scaledCalloutFont.emojiSize)
+            .emojiBaselineOffset(Font.scaledCalloutFont.emojiBaselineOffset)
             .foregroundColor(.gray)
             .environment(\.openURL, OpenURLAction { url in
               routerPath.handle(url: url)

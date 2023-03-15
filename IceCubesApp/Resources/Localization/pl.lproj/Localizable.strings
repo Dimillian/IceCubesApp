@@ -24,11 +24,13 @@
 "enum.avatar-position.top" = "Na górze";
 "enum.avatar-shape.circle" = "Okrągły";
 "enum.avatar-shape.rounded" = "Zaokrąglony";
-"enum.durations.infinite" = "czas nieokreślony";
+"enum.durations.infinite" = "nieokreślony";
+"enum.durations.custom" = "niestandardowy";
 "enum.durations.fiveMinutes" = "5 minut";
 "enum.durations.thirtyMinutes" = "30 minut";
 "enum.durations.oneHour" = "1 godzina";
 "enum.durations.sixHours" = "6 godzin";
+"enum.durations.twelveHours" = "12 godzin";
 "enum.durations.oneDay" = "1 dzień";
 "enum.durations.threeDays" = "3 dni";
 "enum.durations.sevenDays" = "7 dni";
@@ -79,12 +81,14 @@
 "settings.display.restore" = "Przywróć ustawienia domyślne";
 "settings.display.section.display" = "Ekran";
 "settings.display.section.theme" = "Motyw";
+"settings.display.colors.apply" = "Zastosuj kolory niestandardowe";
 "settings.display.section.theme.footer" = "Kolory niestandardowe można ustawić tylko wtedy, gdy wyłączona jest opcja dopasowania schematu kolorów systemu.";
 "settings.display.status.action-buttons" = "Przyciski akcji";
 "settings.display.status.media-style" = "Treści multimedialne";
 "settings.display.translate-button" = "Pokazuj przycisk tłumaczenia";
 "settings.display.theme.background" = "Kolor tła";
 "settings.display.theme.secondary-background" = "Dodatkowy kolor tła";
+"settings.display.theme.text-color" = "Kolor tekstu";
 "settings.display.theme.tint" = "Kolor wiodący";
 "settings.display.theme.systemColor" = "Zgodny z systemowym";
 "settings.general.browser" = "Przeglądarka";
@@ -141,15 +145,15 @@
 "settings.support.two.subtitle" = "Uwielbiam smak wyszukanej kawy ❤️";
 "settings.support.two.title" = "☕️ Miły napiwek";
 "settings.support.four.title" = "👽 Kim jesteś?";
-"settings.support.four.subtitle" = "To pozwoli na utrzymywanie Ice Cubes w działaniu przez długi czas!";
-"settings.support.supporter.title" = " Become a supporter!";
-"settings.support.supporter.subtitle" = "By giving a monthly tip to Ice Cubes, you become a supporter, you'll even get verified badge on your profile. For your 👀 only.";
-"settings.support.supporter.subscribed" = " Thanks for being an Ice Cubes supporter!";
-"settings.support.supporter.subscription-info"= "Subscription are automatically renewed unless you cancel them a day before the next renewal cycle.";
-"settings.support.restore-purchase.button" = "Restore purchase";
-"settings.support.restore-purchase.explanation" = "Restore your supporter subscription if it's haven't been automatically synced.";
-"settings.support.privacy-policy" = "Privacy Policy";
-"settings.support.terms-of-use" = "Terms";
+"settings.support.four.subtitle" = "To bardzo pomoże w utrzymaniu Ice Cubes w działaniu!";
+"settings.support.supporter.title" = " Zostań osobą wspierającą!";
+"settings.support.supporter.subtitle" = "Przekazując Ice Cubes comiesięczny napiwek, stajesz się osobą wspierającą, a dodatkowo na swoim profilu otrzymasz znaczek weryfikacji. Tylko dla twoich 👀.";
+"settings.support.supporter.subscribed" = " Dziękuję, że wspierasz Ice Cubes!";
+"settings.support.supporter.subscription-info"= "Subskrypcja jest odnawiana automatycznie, chyba że anulujesz ją na dzień przed kolejnym cyklem odnawiania.";
+"settings.support.restore-purchase.button" = "Przywróć zakup";
+"settings.support.restore-purchase.explanation" = "Przywróć swoją subskrypcję osoby wspierającej, jeśli nie została ona automatycznie zsynchronizowana.";
+"settings.support.privacy-policy" = "Polityka prywatności";
+"settings.support.terms-of-use" = "Warunki korzystania";
 "settings.timeline.add" = "Dodaj strumień lokalny";
 "settings.title" = "Ustawienia";
 "settings.rate" = "Oceń Ice Cubes";
@@ -158,6 +162,11 @@
 "settings.other.social-keyboard" = "Włącz klawiaturę społecznościową";
 "settings.other.sound-effect" = "Włącz efekty dźwiękowe";
 "settings.push.duplicate.title" = "Korektor duplikatów powiadomień";
+"settings.general.translate" = "Ustawienia tłumaczenia";
+"settings.translation.always-deepl" = "Zawsze tłumacz przy pomocy DeepL";
+"settings.translation.user-api-key" = "Klucz DeepL API";
+"settings.translation.api-key-type" = "Rodzaj klucza";
+"settings.translation.needed-message" = "Ta funkcja wymaga klucza DeepL API";
 "settings.push.duplicate.footer" = "Otrzymujesz zduplikowane powiadomienia? Spróbuj tego magicznego przycisku, aby to naprawić";
 "settings.push.duplicate.button.fix" = "🪄 Napraw to";
 "settings.other.autoplay-video" = "Odtwarzaj filmy automatycznie";
@@ -282,6 +291,7 @@
 "account.relation.follows-you" = "Obserwuje ciebie";
 "account.joined" = "Dołączył(a)";
 "account.action.logout" = "Wyloguj się";
+"account.action.more" = "Więcej ustawień";
 
 "account.relation.note.edit" = "Edytuj notatkę";
 "account.relation.note.edit.placeholder" = "Wprowadź treść notatki";
@@ -322,14 +332,6 @@
 "explore.section.users" = "Osoby";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5 minut";
-"env.poll-duration.30m" = "30 minut";
-"env.poll-duration.1h" = "1 godzina";
-"env.poll-duration.6h" = "6 godzin";
-"env.poll-duration.12h" = "12 godzin";
-"env.poll-duration.1d" = "1 dzień";
-"env.poll-duration.3d" = "3 dni";
-"env.poll-duration.7d" = "7 dni";
 "env.poll-vote-frequency.one" = "Jeden głos";
 "env.poll-vote-frequency.multiple" = "Głosowanie wielokrotne";
 
@@ -384,6 +386,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Przetłumacz";
+"status.action.translate-with-deepl" = "Przetłumacz za pomocą DeepL";
 "status.action.translated-label-%@" = "Przetłumaczono za pomocą %@";
 "status.action.translated-label-from-%@-%@" = "Tekst %@ przetłumaczono za pomocą %@";
 "status.action.bookmark" = "Dodaj zakładkę";
@@ -417,6 +420,8 @@
 "status.draft.delete" = "Usuń wersję roboczą";
 "status.draft.save" = "Zachowaj wersję roboczą";
 "status.editor.ai-prompt.correct" = "Popraw tekst";
+"status.editor.ai-prompt.add-tags" = "Dodaj hasztagi wewnątrz tekstu";
+"status.editor.ai-prompt.insert-tags" = "Dodaj hasztagi po moim tekście";
 "status.editor.ai-prompt.emphasize" = "Wyróżnij tekst";
 "status.editor.ai-prompt.fit" = "Skróć tekst";
 "status.editor.description.add" = "Dodaj opis";
@@ -438,6 +443,8 @@
 "status.editor.spoiler" = "Tekst spoilera";
 "status.editor.text.placeholder" = "Co ci chodzi po głowie?";
 "status.editor.visibility" = "Widoczność postu";
+"status.editor.photo-library" = "Biblioteka zdjęć";
+"status.editor.browse-file" = "Przeglądaj pliki";
 "status.error.loading.message" = "Wystąpił błąd podczas ładowania postów, spróbuj ponownie.";
 "status.error.message" = "Wystąpił błąd dotyczący tego postu, proszę spróbuj ponownie.";
 "status.error.title" = "Wystąpił błąd";
@@ -478,6 +485,9 @@
 "filter.edit.keywords.add" = "Dodaj nowe słowo kluczowe";
 "filter.edit.contexts" = "Kontekst filtra";
 "filter.edit.action" = "Działanie filtra";
+"filter.edit.expiry" = "Wygaśnięcie";
+"filter.edit.expiry.date-time" = "Data/czas";
+"filter.edit.expiry.duration" = "Czas trwania";
 "account.action.edit-filters" = "Edytuj filtry";
 "filter.contexts.home" = "Strona główna i listy";
 "filter.contexts.notifications" = "Powiadomienia";
@@ -502,3 +512,4 @@
 "report.title" = "Zgłoszenie postu";
 "report.action.send" = "Wyślij";
 "status.action.report" = "Zgłoś post";
+

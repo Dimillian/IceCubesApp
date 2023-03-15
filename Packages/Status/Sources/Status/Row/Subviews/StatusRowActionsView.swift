@@ -24,7 +24,7 @@ struct StatusRowActionsView: View {
     //     Main actor-isolated static property 'allCases' cannot be used to
     //     satisfy nonisolated protocol requirement
     //
-    nonisolated public static var allCases: [StatusRowActionsView.Action] {
+    public nonisolated static var allCases: [StatusRowActionsView.Action] {
       [.respond, .boost, .favorite, .bookmark, .share]
     }
 
@@ -37,7 +37,7 @@ struct StatusRowActionsView: View {
           if dataController.isReblogged {
             return Image("Rocket.Fill")
           } else {
-           return Image(systemName: "lock.rotation")
+            return Image(systemName: "lock.rotation")
           }
         }
         return Image(dataController.isReblogged ? "Rocket.Fill" : "Rocket")
@@ -99,7 +99,8 @@ struct StatusRowActionsView: View {
             {
               ShareLink(item: url,
                         subject: Text(viewModel.finalStatus.account.safeDisplayName),
-                        message: Text(viewModel.finalStatus.content.asRawText)) {
+                        message: Text(viewModel.finalStatus.content.asRawText))
+              {
                 action.image(dataController: statusDataController)
               }
               .buttonStyle(.statusAction())
@@ -121,7 +122,16 @@ struct StatusRowActionsView: View {
       Button {
         handleAction(action: action)
       } label: {
-        action.image(dataController: statusDataController, privateBoost: privateBoost())
+        if action == .boost {
+          action
+            .image(dataController: statusDataController, privateBoost: privateBoost())
+            .imageScale(.medium)
+            .font(.body)
+            .fontWeight(.black)
+        } else {
+          action
+            .image(dataController: statusDataController, privateBoost: privateBoost())
+        }
       }
       .buttonStyle(
         .statusAction(
@@ -133,7 +143,8 @@ struct StatusRowActionsView: View {
         (viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id))
       if let count = action.count(dataController: statusDataController,
                                   viewModel: viewModel,
-                                  theme: theme), !viewModel.isRemote {
+                                  theme: theme), !viewModel.isRemote
+      {
         Text("\(count)")
           .foregroundColor(Color(UIColor.secondaryLabel))
           .font(.scaledFootnote)
@@ -141,7 +152,6 @@ struct StatusRowActionsView: View {
       }
     }
   }
-    
 
   private func handleAction(action: Action) {
     Task {
@@ -153,17 +163,17 @@ struct StatusRowActionsView: View {
       HapticManager.shared.fireHaptic(of: .notification(.success))
       switch action {
       case .respond:
-        viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)
         SoundEffectManager.shared.playSound(of: .share)
+        viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)
       case .favorite:
-        await statusDataController.toggleFavorite(remoteStatus: viewModel.localStatusId)
         SoundEffectManager.shared.playSound(of: .favorite)
+        await statusDataController.toggleFavorite(remoteStatus: viewModel.localStatusId)
       case .bookmark:
-        await statusDataController.toggleBookmark(remoteStatus: viewModel.localStatusId)
         SoundEffectManager.shared.playSound(of: .bookmark)
+        await statusDataController.toggleBookmark(remoteStatus: viewModel.localStatusId)
       case .boost:
-        await statusDataController.toggleReblog(remoteStatus: viewModel.localStatusId)
         SoundEffectManager.shared.playSound(of: .boost)
+        await statusDataController.toggleReblog(remoteStatus: viewModel.localStatusId)
       default:
         break
       }

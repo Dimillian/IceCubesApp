@@ -54,7 +54,8 @@ class ShareViewController: UIViewController {
 
     NotificationCenter.default.addObserver(forName: NotificationsName.shareSheetClose,
                                            object: nil,
-                                           queue: nil) { _ in
+                                           queue: nil)
+    { _ in
       self.close()
     }
   }

@@ -39,7 +39,9 @@ struct StatusRowHeaderView: View {
             EmojiTextApp(.init(stringValue: viewModel.finalStatus.account.safeDisplayName),
                          emojis: viewModel.finalStatus.account.emojis)
               .font(.scaledSubheadline)
-              .emojiSize(Font.scaledSubheadlinePointSize)
+              .foregroundColor(theme.labelColor)
+              .emojiSize(Font.scaledSubheadlineFont.emojiSize)
+              .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
               .fontWeight(.semibold)
               .lineLimit(1)
             accountBadgeView
@@ -86,7 +88,7 @@ struct StatusRowHeaderView: View {
   private var dateView: Text {
     Text(viewModel.finalStatus.createdAt.relativeFormatted) +
       Text(" ⸱ ") +
-      Text(Image(systemName: viewModel.status.visibility.iconName))
+      Text(Image(systemName: viewModel.finalStatus.visibility.iconName))
   }
 
   @ViewBuilder

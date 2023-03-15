@@ -28,19 +28,17 @@ struct AddAccountView: View {
   @State private var oauthURL: URL?
 
   private let instanceNamePublisher = PassthroughSubject<String, Never>()
-  
+
   private var sanitizedName: String {
-    get {
-      var name = instanceName
-        .replacingOccurrences(of: "http://", with: "")
-        .replacingOccurrences(of: "https://", with: "")
-      
-      if name.contains("@") {
-        let parts = name.components(separatedBy: "@")
-        name = parts[parts.count-1] // [@]username@server.address.com
-      }
-      return name
+    var name = instanceName
+      .replacingOccurrences(of: "http://", with: "")
+      .replacingOccurrences(of: "https://", with: "")
+
+    if name.contains("@") {
+      let parts = name.components(separatedBy: "@")
+      name = parts[parts.count - 1] // [@]username@server.address.com
     }
+    return name
   }
 
   @FocusState private var isInstanceURLFieldFocused: Bool
@@ -94,8 +92,8 @@ struct AddAccountView: View {
       .onChange(of: instanceName) { newValue in
         instanceNamePublisher.send(newValue)
       }
-      .onReceive(instanceNamePublisher.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)) { newValue in
-        //let newValue = newValue
+      .onReceive(instanceNamePublisher.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)) { _ in
+        // let newValue = newValue
         //  .replacingOccurrences(of: "http://", with: "")
         //  .replacingOccurrences(of: "https://", with: "")
         let client = Client(server: sanitizedName)
@@ -106,7 +104,7 @@ struct AddAccountView: View {
               let instance: Instance = try await client.get(endpoint: Instances.instance)
               withAnimation {
                 self.instance = instance
-                self.instanceName = sanitizedName  // clean up the text box, principally to chop off the username if present so it's clear that you might not wind up siging in as the thing in the box
+                self.instanceName = sanitizedName // clean up the text box, principally to chop off the username if present so it's clear that you might not wind up siging in as the thing in the box
               }
               instanceFetchError = nil
             } else {

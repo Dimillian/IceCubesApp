@@ -9,6 +9,7 @@ public struct StatusRowMediaPreviewView: View {
   @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
   @Environment(\.extraLeadingInset) private var extraLeadingInset: CGFloat
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
+  @Environment(\.isCompact) private var isCompact: Bool
 
   @EnvironmentObject var sceneDelegate: SceneDelegate
   @EnvironmentObject private var preferences: UserPreferences
@@ -17,7 +18,6 @@ public struct StatusRowMediaPreviewView: View {
 
   public let attachments: [MediaAttachment]
   public let sensitive: Bool
-  public let isNotifications: Bool
 
   @State private var isQuickLookLoading: Bool = false
   @State private var altTextDisplayed: String?
@@ -48,7 +48,7 @@ public struct StatusRowMediaPreviewView: View {
   }
 
   private var imageMaxHeight: CGFloat {
-    if isNotifications {
+    if isCompact {
       return 50
     }
     if theme.statusDisplayStyle == .compact {
@@ -73,7 +73,7 @@ public struct StatusRowMediaPreviewView: View {
   }
 
   private func imageSize(from: CGSize, newWidth: CGFloat) -> CGSize {
-    if isNotifications || theme.statusDisplayStyle == .compact || isSecondaryColumn {
+    if isCompact || theme.statusDisplayStyle == .compact || isSecondaryColumn {
       return .init(width: imageMaxHeight, height: imageMaxHeight)
     }
     let ratio = newWidth / from.width
@@ -91,7 +91,7 @@ public struct StatusRowMediaPreviewView: View {
             }
           }
       } else {
-        if isNotifications || theme.statusDisplayStyle == .compact {
+        if isCompact || theme.statusDisplayStyle == .compact {
           HStack {
             makeAttachmentView(for: 0)
             makeAttachmentView(for: 1)
@@ -124,7 +124,8 @@ public struct StatusRowMediaPreviewView: View {
       }
     }
     .alert("status.editor.media.image-description",
-           isPresented: $isAltAlertDisplayed) {
+           isPresented: $isAltAlertDisplayed)
+    {
       Button("alert.button.ok", action: {})
     } message: {
       Text(altTextDisplayed ?? "")
@@ -149,7 +150,7 @@ public struct StatusRowMediaPreviewView: View {
 
   @ViewBuilder
   private func makeFeaturedImagePreview(attachment: MediaAttachment) -> some View {
-    ZStack(alignment: .bottomTrailing) {
+    ZStack(alignment: .bottomLeading) {
       let size: CGSize = size(for: attachment) ?? .init(width: imageMaxHeight, height: imageMaxHeight)
       let newSize = imageSize(from: size, newWidth: availableWidth - appLayoutWidth)
       switch attachment.supportedType {
@@ -182,7 +183,7 @@ public struct StatusRowMediaPreviewView: View {
       if !isInCaptureMode, sensitive {
         cornerSensitiveButton
       }
-      if !isInCaptureMode, let alt = attachment.description, !alt.isEmpty, !isNotifications, preferences.showAltTextForMedia {
+      if !isInCaptureMode, let alt = attachment.description, !alt.isEmpty, !isCompact, preferences.showAltTextForMedia {
         Group {
           Button {
             altTextDisplayed = alt
@@ -208,7 +209,7 @@ public struct StatusRowMediaPreviewView: View {
         GeometryReader { proxy in
           switch type {
           case .image:
-            let width = isNotifications ? imageMaxHeight : proxy.frame(in: .local).width
+            let width = isCompact ? imageMaxHeight : proxy.frame(in: .local).width
             let processors: [ImageProcessing] = [.resize(size: .init(width: width, height: imageMaxHeight))]
             ZStack(alignment: .bottomTrailing) {
               LazyImage(url: attachment.previewUrl ?? attachment.url) { state in
@@ -234,7 +235,7 @@ public struct StatusRowMediaPreviewView: View {
               if !isInCaptureMode,
                  let alt = attachment.description,
                  !alt.isEmpty,
-                 !isNotifications,
+                 !isCompact,
                  preferences.showAltTextForMedia
               {
                 Button {
@@ -253,12 +254,12 @@ public struct StatusRowMediaPreviewView: View {
           case .gifv, .video, .audio:
             if let url = attachment.url {
               VideoPlayerView(viewModel: .init(url: url))
-                .frame(width: isNotifications ? imageMaxHeight : proxy.frame(in: .local).width)
+                .frame(width: isCompact ? imageMaxHeight : proxy.frame(in: .local).width)
                 .frame(height: imageMaxHeight)
             }
           }
         }
-        .frame(maxWidth: isNotifications ? imageMaxHeight : nil)
+        .frame(maxWidth: isCompact ? imageMaxHeight : nil)
         .frame(height: imageMaxHeight)
       }
       // #965: do not create overlapping tappable areas, when multiple images are shown
@@ -291,7 +292,7 @@ public struct StatusRowMediaPreviewView: View {
       Rectangle()
         .foregroundColor(.clear)
         .background(.ultraThinMaterial)
-      if !isNotifications {
+      if !isCompact {
         Button {
           withAnimation {
             isHidingMedia = false

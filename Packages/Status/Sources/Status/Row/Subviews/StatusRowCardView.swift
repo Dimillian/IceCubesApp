@@ -80,7 +80,7 @@ public struct StatusRowCardView: View {
               .lineLimit(1)
           }
           Spacer()
-        }.padding(8)
+        }.padding(16)
       }
       .frame(maxWidth: maxWidth)
       .fixedSize(horizontal: false, vertical: true)

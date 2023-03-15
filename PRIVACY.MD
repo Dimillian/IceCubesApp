@@ -1,1 +1,3 @@
 IceCubesApp does not collect or process any personal information from its users. The app is used to connect to third-party Mastodon servers that may or may not collect personal information and are not covered by this privacy policy. Each third-party Mastodon server comes equipped with its own privacy policy that can be viewed through the app or through that server's website.
+
+When you use the OpenAI feature in the composer, please be aware that your input will be sent to the OpenAI server in order to generate a response. Please refer to the [OpenAI Privacy Policy](https://openai.com/policies/privacy-policy) if you want to know more. Nothing is sent to OpenAI if you don't use this feature. You can also completely disable this button in the app settings.

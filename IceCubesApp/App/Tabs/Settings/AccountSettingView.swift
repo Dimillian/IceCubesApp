@@ -9,12 +9,14 @@ import Timeline
 
 struct AccountSettingsView: View {
   @Environment(\.dismiss) private var dismiss
+  @Environment(\.openURL) private var openURL
 
   @EnvironmentObject private var pushNotifications: PushNotificationsService
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var currentInstance: CurrentInstance
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var appAccountsManager: AppAccountsManager
+  @EnvironmentObject private var client: Client
 
   @State private var isEditingAccount: Bool = false
   @State private var isEditingFilters: Bool = false
@@ -60,6 +62,15 @@ struct AccountSettingsView: View {
             await TimelineCache.shared.clearCache(for: appAccountsManager.currentClient.id)
             cachedPostsCount = await TimelineCache.shared.cachedPostsCount(for: appAccountsManager.currentClient.id)
           }
+        }
+      }
+      .listRowBackground(theme.primaryBackgroundColor)
+
+      Section {
+        Button {
+          openURL(URL(string: "https://\(client.server)/settings/profile")!)
+        } label: {
+          Text("account.action.more")
         }
       }
       .listRowBackground(theme.primaryBackgroundColor)

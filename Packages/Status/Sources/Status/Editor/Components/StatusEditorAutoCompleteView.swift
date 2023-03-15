@@ -34,7 +34,8 @@ struct StatusEditorAutoCompleteView: View {
           VStack(alignment: .leading) {
             EmojiTextApp(.init(stringValue: account.safeDisplayName),
                          emojis: account.emojis)
-              .emojiSize(Font.scaledFootnotePointSize)
+              .emojiSize(Font.scaledFootnoteFont.emojiSize)
+              .emojiBaselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
               .font(.scaledFootnote)
               .foregroundColor(theme.labelColor)
             Text("@\(account.acct)")
@@ -51,9 +52,14 @@ struct StatusEditorAutoCompleteView: View {
       Button {
         viewModel.selectHashtagSuggestion(tag: tag)
       } label: {
-        Text("#\(tag.name)")
-          .font(.scaledCaption)
-          .foregroundColor(theme.tintColor)
+        VStack(alignment: .leading) {
+          Text("#\(tag.name)")
+            .font(.scaledFootnote)
+            .foregroundColor(theme.tintColor)
+          Text("tag.suggested.mentions-\(tag.totalUses)")
+            .font(.scaledCaption)
+            .foregroundColor(.gray)
+        }
       }
     }
   }

@@ -24,10 +24,12 @@
 "enum.avatar-shape.circle" = "Cercle";
 "enum.avatar-shape.rounded" = "Arrodonida";
 "enum.durations.infinite" = "infinite";
+"enum.durations.custom" = "custom";
 "enum.durations.fiveMinutes" = "5 minutes";
 "enum.durations.thirtyMinutes" = "30 minutes";
 "enum.durations.oneHour" = "1 hora";
 "enum.durations.sixHours" = "6 hores";
+"enum.durations.twelveHours" = "12 hores";
 "enum.durations.oneDay" = "1 dia";
 "enum.durations.threeDays" = "3 dies";
 "enum.durations.sevenDays" = "7 dies";
@@ -78,12 +80,14 @@
 "settings.display.restore" = "Restableix els valors per defecte";
 "settings.display.section.display" = "Aparença";
 "settings.display.section.theme" = "Tema";
+"settings.display.colors.apply" = "Apply custom colors";
 "settings.display.section.theme.footer" = "Els colors personalitzats només es poden establir si la sincronització amb els colors del sistema està desactivada";
 "settings.display.status.action-buttons" = "Botons d'acció";
 "settings.display.status.media-style" = "Estil del contingut multimèdia";
 "settings.display.translate-button" = "Mostra el botó de traducció";
 "settings.display.theme.background" = "Color de fons";
 "settings.display.theme.secondary-background" = "Color de fons secundari";
+"settings.display.theme.text-color" = "Text Color";
 "settings.display.theme.tint" = "Color del tint";
 "settings.display.theme.systemColor" = "Sincronitza amb els colors del sistema";
 "settings.general.browser" = "Navegador";
@@ -146,7 +150,7 @@
 "settings.support.supporter.subscribed" = " Thanks for being an Ice Cubes supporter!";
 "settings.support.supporter.subscription-info"= "Subscription are automatically renewed unless you cancel them a day before the next renewal cycle.";
 "settings.support.restore-purchase.button" = "Restore purchase";
-"settings.support.restore-purchase.explanation" = "Restore your supporter subscription if it's haven't been automatically synced.";
+"settings.support.restore-purchase.explanation" = "Restore your supporter subscription if it hasn't been synced automatically.";
 "settings.support.privacy-policy" = "Privacy Policy";
 "settings.support.terms-of-use" = "Terms";
 "settings.timeline.add" = "Afegeix una línia de temps local";
@@ -156,6 +160,11 @@
 "settings.other.hide-openai" = "Activa l'ajudant 🤖";
 "settings.other.social-keyboard" = "Activa el teclat social";
 "settings.other.sound-effect" = "Enable Sound Effects";
+"settings.general.translate" = "Translation Settings";
+"settings.translation.always-deepl" = "Always Translate using DeepL";
+"settings.translation.user-api-key" = "DeepL API Key";
+"settings.translation.api-key-type" = "Type of the Key";
+"settings.translation.needed-message" = "This feature requires a DeepL API key";
 "settings.push.duplicate.title" = "Solucionador de notificacions duplicades";
 "settings.push.duplicate.footer" = "Rebeu les notificacions duplicades? Proveu aquest botó màgic per a solucionar-ho";
 "settings.push.duplicate.button.fix" = "🪄 Soluciona-ho";
@@ -283,6 +292,7 @@
 "account.relation.follows-you" = "Us segueix";
 "account.joined" = "S'ha unit";
 "account.action.logout" = "Tanca la sessió";
+"account.action.more" = "More Settings";
 
 "account.relation.note.edit" = "Edit Note";
 "account.relation.note.edit.placeholder" = "Enter Note text";
@@ -324,14 +334,6 @@
 "explore.section.users" = "Usuaris";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5 minuts";
-"env.poll-duration.30m" = "30 minuts";
-"env.poll-duration.1h" = "1 hora";
-"env.poll-duration.6h" = "6 hores";
-"env.poll-duration.12h" = "12 hores";
-"env.poll-duration.1d" = "1 dia";
-"env.poll-duration.3d" = "3 dies";
-"env.poll-duration.7d" = "7 dies";
 "env.poll-vote-frequency.one" = "Vot únic";
 "env.poll-vote-frequency.multiple" = "Vot múltiple";
 
@@ -387,6 +389,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Tradueix";
+"status.action.translate-with-deepl" = "Translate with DeepL";
 "status.action.translated-label-%@" = "Traduït amb %@";
 "status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Afegeix als marcadors";
@@ -420,6 +423,8 @@
 "status.draft.delete" = "Elimina l'esborrany";
 "status.draft.save" = "Desa l'esborrany";
 "status.editor.ai-prompt.correct" = "Corregeix el text";
+"status.editor.ai-prompt.add-tags" = "Add #Tags in place";
+"status.editor.ai-prompt.insert-tags" = "Add #Tags after my text";
 "status.editor.ai-prompt.emphasize" = "Amplia text";
 "status.editor.ai-prompt.fit" = "Acurta el text";
 "status.editor.description.add" = "Afegeix una descripció";
@@ -441,6 +446,8 @@
 "status.editor.spoiler" = "Escriviu l'espòiler";
 "status.editor.text.placeholder" = "Què us passa pel cap?";
 "status.editor.visibility" = "Visibilitat de la publicació";
+"status.editor.photo-library" = "Photos Library";
+"status.editor.browse-file" = "Browse Files";
 "status.error.loading.message" = "S'ha produït un error en carregar les publicacions, torneu-ho a provar.";
 "status.error.message" = "S'ha produït un error en el context d'aquesta publicació, torneu-ho a provar.";
 "status.error.title" = "S'ha produït un error";
@@ -485,6 +492,9 @@
 "filter.edit.keywords.add" = "Afegeix una paraula clau";
 "filter.edit.contexts" = "Filtra els contextos";
 "filter.edit.action" = "Acció del filtre";
+"filter.edit.expiry" = "Expiry";
+"filter.edit.expiry.date-time" = "Date/Time";
+"filter.edit.expiry.duration" = "Duration";
 "account.action.edit-filters" = "Edita els filtres";
 "filter.contexts.home" = "Inici i llistes";
 "filter.contexts.notifications" = "Notificacions";
@@ -509,3 +519,5 @@
 "report.title" = "Report Post";
 "report.action.send" = "Send";
 "status.action.report" = "Report Post";
+
+"tag.suggested.mentions-%lld" = "%lld mentions";

@@ -101,7 +101,8 @@ struct AccountDetailHeaderView: View {
             .resizable()
             .frame(width: 25, height: 25)
             .foregroundColor(theme.tintColor)
-            .offset(x: 10, y: -10)
+            .offset(x: theme.avatarShape == .circle ? 0 : 10,
+                    y: theme.avatarShape == .circle ? 0 : -10)
         }
       }
       Spacer()
@@ -145,7 +146,9 @@ struct AccountDetailHeaderView: View {
           HStack(alignment: .center, spacing: 2) {
             EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
               .font(.scaledHeadline)
-              .emojiSize(Font.scaledHeadlinePointSize)
+              .foregroundColor(theme.labelColor)
+              .emojiSize(Font.scaledHeadlineFont.emojiSize)
+              .emojiBaselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
             if account.bot {
               Text(Image(systemName: "poweroutlet.type.b.fill"))
                 .font(.footnote)
@@ -190,7 +193,9 @@ struct AccountDetailHeaderView: View {
 
       EmojiTextApp(account.note, emojis: account.emojis)
         .font(.scaledBody)
-        .emojiSize(Font.scaledBodyPointSize)
+        .foregroundColor(theme.labelColor)
+        .emojiSize(Font.scaledBodyFont.emojiSize)
+        .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
         .padding(.top, 8)
         .textSelection(.enabled)
         .environment(\.openURL, OpenURLAction { url in
@@ -268,7 +273,8 @@ struct AccountDetailHeaderView: View {
                     .foregroundColor(Color.green.opacity(0.80))
                 }
                 EmojiTextApp(field.value, emojis: viewModel.account?.emojis ?? [])
-                  .emojiSize(Font.scaledBodyPointSize)
+                  .emojiSize(Font.scaledBodyFont.emojiSize)
+                  .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
                   .foregroundColor(theme.tintColor)
                   .environment(\.openURL, OpenURLAction { url in
                     routerPath.handle(url: url)

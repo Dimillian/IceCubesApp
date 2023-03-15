@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "Круг";
 "enum.avatar-shape.rounded" = "Закруглені";
 "enum.durations.infinite" = "без обмеження";
+"enum.durations.custom" = "власний";
 "enum.durations.fiveMinutes" = "5 хвилин";
 "enum.durations.thirtyMinutes" = "30 хвилин";
 "enum.durations.oneHour" = "1 година";
 "enum.durations.sixHours" = "6 годин";
+"enum.durations.twelveHours" = "12 годин";
 "enum.durations.oneDay" = "1 день";
 "enum.durations.threeDays" = "3 дні";
 "enum.durations.sevenDays" = "7 днів";
@@ -83,12 +85,14 @@
 "settings.display.restore" = "Відновити налаштування";
 "settings.display.section.display" = "Відображення";
 "settings.display.section.theme" = "Тема";
+"settings.display.colors.apply" = "Застосувати власні кольори";
 "settings.display.section.theme.footer" = "Власна кольорова схема може бути встановлена лише якщо відключено Відповідати системній темі";
 "settings.display.status.action-buttons" = "Кнопки дій статуса";
 "settings.display.status.media-style" = "Стиль медія статуса";
 "settings.display.translate-button" = "Відображати кнопку перекладу";
 "settings.display.theme.background" = "Колір фону";
 "settings.display.theme.secondary-background" = "Додатковий колір фону";
+"settings.display.theme.text-color" = "Колір тексту";
 "settings.display.theme.tint" = "Відтінок кольору";
 "settings.display.theme.systemColor" = "Відповідати системній темі";
 "settings.general.browser" = "Браузер";
@@ -151,7 +155,7 @@
 "settings.support.supporter.subscribed" = " Thanks for being an Ice Cubes supporter!";
 "settings.support.supporter.subscription-info"= "Subscription are automatically renewed unless you cancel them a day before the next renewal cycle.";
 "settings.support.restore-purchase.button" = "Restore purchase";
-"settings.support.restore-purchase.explanation" = "Restore your supporter subscription if it's haven't been automatically synced.";
+"settings.support.restore-purchase.explanation" = "Restore your supporter subscription if it hasn't been synced automatically.";
 "settings.support.privacy-policy" = "Privacy Policy";
 "settings.support.terms-of-use" = "Terms";
 "settings.timeline.add" = "Додати локальну стрічку";
@@ -161,6 +165,11 @@
 "settings.other.hide-openai" = "Увімкнути 🤖 помічника";
 "settings.other.social-keyboard" = "Увімкнути Social Keyboard";
 "settings.other.sound-effect" = "Увімкнути звукові ефекти";
+"settings.general.translate" = "Translation Settings";
+"settings.translation.always-deepl" = "Always Translate using DeepL";
+"settings.translation.user-api-key" = "DeepL API Key";
+"settings.translation.api-key-type" = "Type of the Key";
+"settings.translation.needed-message" = "This feature requires a DeepL API key";
 "settings.push.duplicate.title" = "Виправити задвоєння сповіщень";
 "settings.push.duplicate.footer" = "Отримуєте сповіщення двічі? Спробуйте цю чарівну кнопку, щоб виправити це!";
 "settings.push.duplicate.button.fix" = "🪄 Виправити!";
@@ -285,6 +294,7 @@
 "account.relation.follows-you" = "Підписується на вас";
 "account.joined" = "Доєднався";
 "account.action.logout" = "Вийти з облікового запису";
+"account.action.more" = "Більше налаштувань";
 
 "account.relation.note.edit" = "Редагувати нотатку";
 "account.relation.note.edit.placeholder" = "Додати нотатку";
@@ -296,7 +306,7 @@
 "conversations.action.delete" = "Видалити";
 "conversations.action.mark-read" = "Позначити прочитаним";
 "conversations.action.view-detail" = "Переглянути деталі";
-"conversations.empty.message" = "Ви знайдете всі свої прямі повідомлення та приватні згадки прямо тут. Приємного обміну повідомленнями! 📱❤️";
+"conversations.empty.message" = "Ви знайдете ваші особисті повідомлення та приватні згадки тут. Приємного обміну повідомленнями! 📱❤️";
 "conversations.empty.title" = "Порожня скринька";
 "conversations.error.button" = "Спробувати знову";
 "conversations.error.message" = "Помилка завантаження вашого повідомлення";
@@ -326,14 +336,6 @@
 "explore.section.users" = "Користувачі";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5 хвилин";
-"env.poll-duration.30m" = "30 хвилин";
-"env.poll-duration.1h" = "1 година";
-"env.poll-duration.6h" = "6 годин";
-"env.poll-duration.12h" = "12 годин";
-"env.poll-duration.1d" = "1 день";
-"env.poll-duration.3d" = "3 дні";
-"env.poll-duration.7d" = "7 днів";
 "env.poll-vote-frequency.one" = "Лише один варіант";
 "env.poll-vote-frequency.multiple" = "Вибір декількох варіантів";
 
@@ -389,6 +391,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Перекласти";
+"status.action.translate-with-deepl" = "Translate with DeepL";
 "status.action.translated-label-%@" = "Переклад з допомогою %@";
 "status.action.translated-label-from-%@-%@" = "Переклад з %@ з допомогою %@";
 "status.action.bookmark" = "У закладки";
@@ -422,8 +425,10 @@
 "status.draft.delete" = "Видалити чернетку";
 "status.draft.save" = "Зберегти чернетку";
 "status.editor.ai-prompt.correct" = "Виправити текст";
-"status.editor.ai-prompt.emphasize" = "Надавати виразності";
-"status.editor.ai-prompt.fit" = "Підігнати текст";
+"status.editor.ai-prompt.add-tags" = "Додати #Tags за текстом";
+"status.editor.ai-prompt.insert-tags" = "Додати #Tags у кінці";
+"status.editor.ai-prompt.emphasize" = "Розставити акценти";
+"status.editor.ai-prompt.fit" = "Скоротити текст";
 "status.editor.description.add" = "Додати опис";
 "status.editor.description.edit" = "Виправити опис";
 "status.editor.drafts.navigation-title" = "Чернетки";
@@ -443,6 +448,8 @@
 "status.editor.spoiler" = "Спойлер";
 "status.editor.text.placeholder" = "Що у вас на думці?";
 "status.editor.visibility" = "Видимість допису";
+"status.editor.photo-library" = "Photos Library";
+"status.editor.browse-file" = "Browse Files";
 "status.error.loading.message" = "An error occurred while loading posts, please try again.";
 "status.error.message" = "An error occurred in the context of this post, please try again.";
 "status.error.title" = "An error occurred";
@@ -487,6 +494,9 @@
 "filter.edit.keywords.add" = "Додати нове слово";
 "filter.edit.contexts" = "Фільтрувати вміст";
 "filter.edit.action" = "Виконати";
+"filter.edit.expiry" = "Завершується";
+"filter.edit.expiry.date-time" = "День/Година";
+"filter.edit.expiry.duration" = "Тривалість";
 "account.action.edit-filters" = "Редагувати фільтри";
 "filter.contexts.home" = "Домівка та список";
 "filter.contexts.notifications" = "Сповіщення";
@@ -511,4 +521,6 @@
 "report.title" = "Скарга на допис";
 "report.action.send" = "Надіслати";
 "status.action.report" = "Поскаржитися на допис";
+
+"tag.suggested.mentions-%lld" = "%lld mentions";
 

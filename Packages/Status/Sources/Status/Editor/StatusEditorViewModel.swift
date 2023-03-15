@@ -12,10 +12,18 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
   var mode: Mode
 
   var client: Client?
-  var currentAccount: Account?
+  var currentAccount: Account? {
+    didSet {
+      if let itemsProvider {
+        mediasImages = []
+        processItemsProvider(items: itemsProvider)
+      }
+    }
+  }
+
   var theme: Theme?
   var preferences: UserPreferences?
-  var languageConfirmationDialogLanguages: [String: String]?
+  var languageConfirmationDialogLanguages: (detected: String, selected: String)?
 
   var textView: UITextView? {
     didSet {
@@ -63,11 +71,13 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
     urlLengthAdjustments - statusText.string.utf16.count - spoilerTextCount
   }
 
+  private var itemsProvider: [NSItemProvider]?
+
   @Published var backupStatusText: NSAttributedString?
 
   @Published var showPoll: Bool = false
   @Published var pollVotingFrequency = PollVotingFrequency.oneVote
-  @Published var pollDuration = PollDuration.oneDay
+  @Published var pollDuration = Duration.oneDay
   @Published var pollOptions: [String] = ["", ""]
 
   @Published var spoilerOn: Bool = false
@@ -126,7 +136,9 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
   }
 
   private var mentionString: String?
+
   private var uploadTask: Task<Void, Never>?
+  private var suggestedTask: Task<Void, Never>?
 
   init(mode: Mode) {
     self.mode = mode
@@ -134,7 +146,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
 
   func setInitialLanguageSelection(preference: String?) {
     switch mode {
-    case let .edit(status), let .replyTo(status), let .quote(status):
+    case let .edit(status), let .quote(status):
       selectedLanguage = status.language
     default:
       break
@@ -149,8 +161,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
        selectedLanguage != "",
        selectedLanguage != detectedLang
     {
-      languageConfirmationDialogLanguages = ["detected": detectedLang,
-                                             "selected": selectedLanguage]
+      languageConfirmationDialogLanguages = (detected: detectedLang, selected: selectedLanguage)
     } else {
       languageConfirmationDialogLanguages = nil
     }
@@ -226,6 +237,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
     case let .new(visibility):
       self.visibility = visibility
     case let .shareExtension(items):
+      itemsProvider = items
       visibility = .pub
       processItemsProvider(items: items)
     case let .replyTo(status):
@@ -283,7 +295,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
 
   private func processText() {
     guard markedTextRange == nil else { return }
-    statusText.addAttributes([.foregroundColor: UIColor(Color.label),
+    statusText.addAttributes([.foregroundColor: UIColor(Theme.shared.labelColor),
                               .font: Font.scaledBodyUIFont,
                               .backgroundColor: UIColor.clear,
                               .underlineColor: UIColor.clear],
@@ -353,6 +365,13 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
 
   // MARK: - Shar sheet / Item provider
 
+  func processURLs(urls: [URL]) {
+    isMediasLoading = true
+    let items = urls.filter { $0.startAccessingSecurityScopedResource() }
+      .compactMap { NSItemProvider(contentsOf: $0) }
+    processItemsProvider(items: items)
+  }
+
   private func processItemsProvider(items: [NSItemProvider]) {
     Task {
       var initialText: String = ""
@@ -361,6 +380,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
            let handledItemType = StatusEditorUTTypeSupported(rawValue: identifier)
         {
           do {
+            let compressor = StatusEditorCompressor()
             let content = try await handledItemType.loadItemContent(item: item)
             if let text = content as? String {
               initialText += "\(text) "
@@ -370,8 +390,9 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
                                         gifTransferable: nil,
                                         mediaAttachment: nil,
                                         error: nil))
-            } else if var content = content as? ImageFileTranseferable,
-                      let image = content.image
+            } else if let content = content as? ImageFileTranseferable,
+                      let compressedData = await compressor.compressImageFrom(url: content.url),
+                      let image = UIImage(data: compressedData)
             {
               mediasImages.append(.init(image: image,
                                         movieTransferable: nil,
@@ -391,7 +412,9 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
                                         mediaAttachment: nil,
                                         error: nil))
             }
-          } catch {}
+          } catch {
+            isMediasLoading = false
+          }
         }
       }
       if !initialText.isEmpty {
@@ -433,7 +456,8 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
   private func loadAutoCompleteResults(query: String) {
     guard let client, query.utf8.count > 1 else { return }
     var query = query
-    Task {
+    suggestedTask?.cancel()
+    suggestedTask = Task {
       do {
         var results: SearchResults?
         switch query.first {
@@ -444,8 +468,11 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
                                                                  offset: 0,
                                                                  following: nil),
                                          forceVersion: .v2)
+          guard !Task.isCancelled else {
+            return
+          }
           withAnimation {
-            tagsSuggestions = results?.hashtags ?? []
+            tagsSuggestions = results?.hashtags.sorted(by: { $0.totalUses > $1.totalUses }) ?? []
           }
         case "@":
           query.removeFirst()
@@ -454,6 +481,9 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
                                                                  offset: 0,
                                                                  following: true),
                                          forceVersion: .v2)
+          guard !Task.isCancelled else {
+            return
+          }
           withAnimation {
             mentionsSuggestions = results?.accounts ?? []
           }
@@ -505,7 +535,6 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
     Task {
       var medias: [StatusEditorMediaContainer] = []
       for media in selectedMedias {
-        print(media.supportedContentTypes)
         var file: (any Transferable)?
 
         if file == nil {
@@ -518,8 +547,10 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
           file = try? await media.loadTransferable(type: ImageFileTranseferable.self)
         }
 
-        if var imageFile = file as? ImageFileTranseferable,
-           let image = imageFile.image
+        let compressor = StatusEditorCompressor()
+        if let imageFile = file as? ImageFileTranseferable,
+           let compressedData = await compressor.compressImageFrom(url: imageFile.url),
+           let image = UIImage(data: compressedData)
         {
           medias.append(.init(image: image,
                               movieTransferable: nil,
@@ -573,31 +604,23 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
       mediasImages[index] = newContainer
       do {
         if let index = indexOf(container: newContainer) {
+          let compressor = StatusEditorCompressor()
           if let image = originalContainer.image {
-            let data: Data?
-            // Mastodon API don't support images over 5K
-            if image.size.height > 5000 || image.size.width > 5000 {
-              data = image.resized(to: .init(width: image.size.width / 4,
-                                             height: image.size.height / 4))
-                .jpegData(compressionQuality: 0.80)
-            } else {
-              data = image.jpegData(compressionQuality: 0.80)
+            let imageData = try await compressor.compressImageForUpload(image)
+            let uploadedMedia = try await uploadMedia(data: imageData, mimeType: "image/jpeg")
+            mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
+                                        movieTransferable: nil,
+                                        gifTransferable: nil,
+                                        mediaAttachment: uploadedMedia,
+                                        error: nil)
+            if let uploadedMedia, uploadedMedia.url == nil {
+              scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
             }
-            if let data {
-              let uploadedMedia = try await uploadMedia(data: data, mimeType: "image/jpeg")
-              mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
-                                          movieTransferable: nil,
-                                          gifTransferable: nil,
-                                          mediaAttachment: uploadedMedia,
-                                          error: nil)
-              if let uploadedMedia, uploadedMedia.url == nil {
-                scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
-              }
-            }
-          } else if let videoURL = await originalContainer.movieTransferable?.compressedVideoURL,
-                    let data = try? Data(contentsOf: videoURL)
+          } else if let videoURL = originalContainer.movieTransferable?.url,
+                    let compressedVideoURL = await compressor.compressVideo(videoURL),
+                    let data = try? Data(contentsOf: compressedVideoURL)
           {
-            let uploadedMedia = try await uploadMedia(data: data, mimeType: videoURL.mimeType())
+            let uploadedMedia = try await uploadMedia(data: data, mimeType: compressedVideoURL.mimeType())
             mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
                                         movieTransferable: originalContainer.movieTransferable,
                                         gifTransferable: nil,

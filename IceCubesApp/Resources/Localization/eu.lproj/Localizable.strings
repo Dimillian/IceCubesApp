@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "Biribila";
 "enum.avatar-shape.rounded" = "Biribildutako ertzak";
 "enum.durations.infinite" = "Betiko";
+"enum.durations.custom" = "Neuk zehaztuko dut";
 "enum.durations.fiveMinutes" = "5 minutuz";
 "enum.durations.thirtyMinutes" = "30 minutuz";
 "enum.durations.oneHour" = "Ordubetez";
 "enum.durations.sixHours" = "6 orduz";
+"enum.durations.twelveHours" = "12 orduz";
 "enum.durations.oneDay" = "Egun batez";
 "enum.durations.threeDays" = "3 egunez";
 "enum.durations.sevenDays" = "7 egunez";
@@ -79,18 +81,20 @@
 "settings.display.restore" = "Berrezarri defektuzkoa";
 "settings.display.section.display" = "Pantaila";
 "settings.display.section.theme" = "Itxura";
+"settings.display.colors.apply" = "Ezarri norbere koloreak";
 "settings.display.section.theme.footer" = "Norberaren koloreak aukeratzeko sistemak darabiltzan koloreen aukera ezgaitu behar da";
 "settings.display.status.action-buttons" = "Bidalketen ekintza botoiak";
 "settings.display.status.media-style" = "Bidalketen multimediaren itxura";
 "settings.display.translate-button" = "Erakutsi itzulpen botoia";
 "settings.display.theme.background" = "Hondoaren kolorea";
 "settings.display.theme.secondary-background" = "Bigarren mailako hondoaren kolorea";
+"settings.display.theme.text-color" = "Testuaren kolorea";
 "settings.display.theme.tint" = "Tonua";
 "settings.display.theme.systemColor" = "Sistemak darabilena";
 "settings.general.browser" = "Nabigatzailea";
-"settings.general.browser.in-app" = "Barneko nabigatzailea";
+"settings.general.browser.in-app" = "Barnekoa";
 "settings.general.browser.in-app.readerview" = "Barneko nabigatzailearen irakurketa bista";
-"settings.general.browser.system" = "Sistemaren nabigatzailea";
+"settings.general.browser.system" = "Sistemarena";
 "settings.general.display" = "Pantaila ezarpenak";
 "settings.general.instance" = "Instantziaren informazioa";
 "settings.general.push-notifications" = "Push jakinarazpenak";
@@ -137,6 +141,11 @@
 "settings.other.hide-openai" = "Gaitu 🤖 laguntzailea";
 "settings.other.social-keyboard" = "Gaitu teklatu soziala";
 "settings.other.sound-effect" = "Gaitu soinu efektuak";
+"settings.general.translate" = "Itzulpen ezarpenak";
+"settings.translation.always-deepl" = "Itzuli beti DeepL erabiliz";
+"settings.translation.user-api-key" = "DeepL API gakoa";
+"settings.translation.api-key-type" = "Gako mota";
+"settings.translation.needed-message" = "Ezaugarri honek DeepL API gako bat behar du";
 "settings.general.content" = "Edukiaren ezarpenak";
 "settings.system" = "Sistemaren ezarpenak";
 "settings.content.navigation-title" = "Edukiaren ezarpenak";
@@ -285,6 +294,7 @@
 "account.joined" = "Batze-data:";
 "account.action.logout" = "Amaitu saioa";
 "account.action.edit-filters" = "Editatu iragazkiak";
+"account.action.more" = "Ezarpen gehiago";
 
 "account.relation.note.edit" = "Editatu oharra";
 "account.relation.note.edit.placeholder" = "Idatzi oharra hemen";
@@ -325,14 +335,6 @@
 "explore.section.users" = "Erabiltzaileak";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5 minutu";
-"env.poll-duration.30m" = "30 minutu";
-"env.poll-duration.1h" = "Ordubete";
-"env.poll-duration.6h" = "6 ordu";
-"env.poll-duration.12h" = "12 ordu";
-"env.poll-duration.1d" = "Egun 1";
-"env.poll-duration.3d" = "3 egun";
-"env.poll-duration.7d" = "7 egun";
 "env.poll-vote-frequency.one" = "Boto bakarra";
 "env.poll-vote-frequency.multiple" = "Boto bat baino gehiago";
 
@@ -349,9 +351,9 @@
 "notifications.empty.title" = "Jakinarazpenik ez";
 "notifications.error.message" = "Errorea gertatu da jakinarazpenak kargatzean, saiatu berriro.";
 "notifications.error.title" = "Errorea gertatu da";
-"notifications.label.poll" = "Bozketa amaitu da";
+"notifications.label.poll" = "(r)en bozketa amaitu da";
 "notifications.label.follow-request" = "(e)k jarraitzeko eskaera egin dizu";
-"notifications.label.status" = "(e)k bidalketa egin du";
+"notifications.label.status" = "(e)k argitaratu du";
 "notifications.label.update" = "(e)k bidalketa editatu du";
 "notifications.menu-title.favorite" = "Gogokoak";
 "notifications.menu-title.follow" = "Jarraipenak";
@@ -382,6 +384,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Itzuli";
+"status.action.translate-with-deepl" = "Itzuli DeepL erabiliz";
 "status.action.translated-label-%@" = "%@ erabiliz itzulia";
 "status.action.translated-label-from-%@-%@" = "%@(e)tik %@ erabiliz itzulia";
 "status.action.bookmark" = "Jarri laster-marka";
@@ -415,6 +418,8 @@
 "status.draft.delete" = "Ezabatu zirriborroa";
 "status.draft.save" = "Gorde zirriborroa";
 "status.editor.ai-prompt.correct" = "Zuzendu testua";
+"status.editor.ai-prompt.add-tags" = "Gehitu #Traolak tokian";
+"status.editor.ai-prompt.insert-tags" = "Gehitu #Traolak amaieran";
 "status.editor.ai-prompt.emphasize" = "Azpimarratu testua";
 "status.editor.ai-prompt.fit" = "Laburtu testua";
 "status.editor.description.add" = "Gehitu deskribapena";
@@ -431,11 +436,13 @@
 "status.editor.mode.edit" = "Bidalketa editatzen";
 "status.editor.mode.new" = "Bidalketa berria";
 "status.editor.mode.quote-%@" = "%@(r)en aipamena";
-"status.editor.mode.reply-%@" = "%@(e)ri erantzunez";
+"status.editor.mode.reply-%@" = "%@(r)i erantzunez";
 "status.editor.restore-previous" = "Berreskuratu lehengo testua";
 "status.editor.spoiler" = "Edukiari buruzko oharra";
 "status.editor.text.placeholder" = "Zer duzu buruan?";
 "status.editor.visibility" = "Bidalketaren irismena";
+"status.editor.photo-library" = "Argazki-liburutegia";
+"status.editor.browse-file" = "Arakatu fitxategiak";
 "status.error.loading.message" = "Errorea bidalketak kargatzean; saiatu berriro.";
 "status.error.message" = "Errorea bidalketa honen testuinguruan; saiatu berriro.";
 "status.error.title" = "Errorea gertatu da";
@@ -477,12 +484,15 @@
 "filter.edit.keywords.add" = "Gehitu hitz gako berria";
 "filter.edit.contexts" = "Iragazkiaren testuinguruak";
 "filter.edit.action" = "Iragazkiaren ekintzak";
+"filter.edit.expiry" = "Iraungitzea";
+"filter.edit.expiry.date-time" = "Data/Ordua";
+"filter.edit.expiry.duration" = "Iraupena";
 "filter.contexts.home" = "Hasiera eta zerrendak";
 "filter.contexts.notifications" = "Jakinarazpenak";
 "filter.contexts.public" = "Denbora-lerro lokalak";
 "filter.contexts.conversations" = "Elkarrizketak";
 "filter.contexts.profiles" = "Profilak";
-"filter.action.warning" = "Ezkutatu oharpen batekin";
+"filter.action.warning" = "Ezkutatu ohartarazpen batekin";
 "filter.action.hide" = "Ezkutatu guztiz";
 
 // MARK: Accessibility

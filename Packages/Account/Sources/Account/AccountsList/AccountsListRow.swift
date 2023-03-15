@@ -26,9 +26,9 @@ public struct AccountsListRow: View {
   @EnvironmentObject private var client: Client
 
   @StateObject var viewModel: AccountsListRowViewModel
-  
+
   @State private var isEditingRelationshipNote: Bool = false
-  
+
   let isFollowRequest: Bool
   let requestUpdated: (() -> Void)?
 
@@ -44,14 +44,16 @@ public struct AccountsListRow: View {
       VStack(alignment: .leading, spacing: 2) {
         EmojiTextApp(.init(stringValue: viewModel.account.safeDisplayName), emojis: viewModel.account.emojis)
           .font(.scaledSubheadline)
-          .emojiSize(Font.scaledSubheadlinePointSize)
+          .emojiSize(Font.scaledSubheadlineFont.emojiSize)
+          .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
           .fontWeight(.semibold)
         Text("@\(viewModel.account.acct)")
           .font(.scaledFootnote)
           .foregroundColor(.gray)
         EmojiTextApp(viewModel.account.note, emojis: viewModel.account.emojis)
           .font(.scaledFootnote)
-          .emojiSize(Font.scaledFootnotePointSize)
+          .emojiSize(Font.scaledFootnoteFont.emojiSize)
+          .emojiBaselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
           .lineLimit(3)
           .environment(\.openURL, OpenURLAction { url in
             routerPath.handle(url: url)
@@ -87,7 +89,7 @@ public struct AccountsListRow: View {
         AccountDetailHeaderView(viewModel: .init(account: viewModel.account),
                                 account: viewModel.account,
                                 scrollViewProxy: nil)
-        .applyAccountDetailsRowStyle(theme: theme)
+          .applyAccountDetailsRowStyle(theme: theme)
       }
       .listStyle(.plain)
       .scrollContentBackground(.hidden)
@@ -96,6 +98,5 @@ public struct AccountsListRow: View {
       .environmentObject(currentAccount)
       .environmentObject(client)
     }
-
   }
 }

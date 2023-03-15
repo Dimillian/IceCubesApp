@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "Kreis";
 "enum.avatar-shape.rounded" = "Abgerundet";
 "enum.durations.infinite" = "Unbegrenzt";
+"enum.durations.custom" = "Individuelle Einstellung";
 "enum.durations.fiveMinutes" = "5 Minuten";
 "enum.durations.thirtyMinutes" = "30 Minuten";
 "enum.durations.oneHour" = "1 Stunde";
 "enum.durations.sixHours" = "6 Stunden";
+"enum.durations.twelveHours" = "12 Stunden";
 "enum.durations.oneDay" = "1 Tag";
 "enum.durations.threeDays" = "3 Tage";
 "enum.durations.sevenDays" = "7 Tage";
@@ -79,12 +81,14 @@
 "settings.display.restore" = "Standard wiederherstellen";
 "settings.display.section.display" = "Anzeigen";
 "settings.display.section.theme" = "Design";
+"settings.display.colors.apply" = "Eigene Farben anwenden";
 "settings.display.section.theme.footer" = "Eigene Farben können nur eingestellt werden, wenn die Systemeinstellung nicht verwendet wird.";
 "settings.display.status.action-buttons" = "Status Aktions-Buttons";
 "settings.display.status.media-style" = "Status Medien";
 "settings.display.translate-button" = "Übersetzen-Button anzeigen";
 "settings.display.theme.background" = "Hintergrundfarbe";
 "settings.display.theme.secondary-background" = "Sekundäre Hintergrundfarbe";
+"settings.display.theme.text-color" = "Textfarbe";
 "settings.display.theme.tint" = "Akzentfarbe";
 "settings.display.theme.systemColor" = "Systemeinstellung verwenden";
 "settings.general.browser" = "Browser";
@@ -122,14 +126,14 @@
 "settings.support.two.title" = "☕️ Schönes Trinkgeld";
 "settings.support.four.title" = "👽 Wahnsinns-Trinkgeld";
 "settings.support.four.subtitle" = "Das wird eine große Hilfe sein, Ice Cubes am Laufen zu halten!";
-"settings.support.supporter.title" = " Become a supporter!";
-"settings.support.supporter.subtitle" = "By giving a monthly tip to Ice Cubes, you become a supporter, you'll even get verified badge on your profile. For your 👀 only.";
-"settings.support.supporter.subscribed" = " Thanks for being an Ice Cubes supporter!";
-"settings.support.supporter.subscription-info"= "Subscription are automatically renewed unless you cancel them a day before the next renewal cycle.";
-"settings.support.restore-purchase.button" = "Restore purchase";
-"settings.support.restore-purchase.explanation" = "Restore your supporter subscription if it's haven't been automatically synced.";
-"settings.support.privacy-policy" = "Privacy Policy";
-"settings.support.terms-of-use" = "Terms";
+"settings.support.supporter.title" = "Werde Unterstützer!";
+"settings.support.supporter.subtitle" = "Indem du Ice Cubes ein monatliches Trinkgeld gibst, wirst du Unterstützer und bekommst sogar einen Verifiziert-Haken in deinem Profil. Nur für deine 👀.";
+"settings.support.supporter.subscribed" = "Danke, dass du Ice Cubes unterstützst!";
+"settings.support.supporter.subscription-info"= "Abonnements werden automatisch verlängert, sofern du sie nicht bis zu einem Tag vor der nächsten Verlängerung kündigst.";
+"settings.support.restore-purchase.button" = "Kauf wiederherstellen";
+"settings.support.restore-purchase.explanation" = "Stell dein Abonnement wieder her, falls es nicht automatisch abgeglichen worden ist.";
+"settings.support.privacy-policy" = "Datenschutzerklärung";
+"settings.support.terms-of-use" = "Nutzungsbedingungen";
 "settings.timeline.add" = "Lokale Timeline hinzufügen";
 "settings.title" = "Einstellungen";
 "settings.rate" = "Bewerte Ice Cubes";
@@ -137,6 +141,11 @@
 "settings.other.hide-openai" = "Aktiviere 🤖-Helfer";
 "settings.other.social-keyboard" = "Soziale Tastatur aktivieren";
 "settings.other.sound-effect" = "Klänge aktivieren";
+"settings.general.translate" = "Übersetzungseinstellungen";
+"settings.translation.always-deepl" = "Immer mit DeepL übersetzen";
+"settings.translation.user-api-key" = "DeepL-API-Schlüssel";
+"settings.translation.api-key-type" = "Typ des Schlüssels";
+"settings.translation.needed-message" = "Für diese Funktion ist ein DeepL-API-Schlüssel erforderlich.";
 "settings.general.content" = "Inhaltseinstellungen";
 "settings.system" = "Systemeinstellungen";
 "settings.content.navigation-title" = "Inhaltseinstellungen";
@@ -285,6 +294,7 @@
 "account.joined" = "Beigetreten am";
 "account.action.logout" = "Abmelden";
 "account.action.edit-filters" = "Filter bearbeiten";
+"account.action.more" = "Weitere Einstellungen";
 
 "account.relation.note.edit" = "Notiz bearbeiten";
 "account.relation.note.edit.placeholder" = "Gib den Notiztext ein";
@@ -326,14 +336,6 @@
 "explore.section.users" = "Profile";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5 Minuten";
-"env.poll-duration.30m" = "30 Minuten";
-"env.poll-duration.1h" = "1 Stunde";
-"env.poll-duration.6h" = "6 Stunden";
-"env.poll-duration.12h" = "12 Stunden";
-"env.poll-duration.1d" = "1 Tag";
-"env.poll-duration.3d" = "3 Tage";
-"env.poll-duration.7d" = "7 Tage";
 "env.poll-vote-frequency.one" = "Einfache Auswahl";
 "env.poll-vote-frequency.multiple" = "Mehrfachauswahl";
 
@@ -384,6 +386,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Übersetzen";
+"status.action.translate-with-deepl" = "Mit DeepL übersetzen";
 "status.action.translated-label-%@" = "Übersetzt mit %@";
 "status.action.translated-label-from-%@-%@" = "Aus %@ mit %@ übersetzt";
 "status.action.bookmark" = "Lesezeichen setzen";
@@ -417,6 +420,8 @@
 "status.draft.delete" = "Entwurf löschen";
 "status.draft.save" = "Entwurf sichern";
 "status.editor.ai-prompt.correct" = "Text korrigieren";
+"status.editor.ai-prompt.add-tags" = "#Tags im Text einfügen";
+"status.editor.ai-prompt.insert-tags" = "#Tags nach dem Text einfügen";
 "status.editor.ai-prompt.emphasize" = "Text hervorheben";
 "status.editor.ai-prompt.fit" = "Text kürzen";
 "status.editor.description.add" = "Beschreibung hinzufügen";
@@ -438,6 +443,8 @@
 "status.editor.spoiler" = "Inhaltswarnung";
 "status.editor.text.placeholder" = "Woran denkst du?";
 "status.editor.visibility" = "Sichtbarkeit";
+"status.editor.photo-library" = "Fotoalbum";
+"status.editor.browse-file" = "Dateien durchsuchen";
 "status.error.loading.message" = "Beim Laden der Beiträge ist ein Fehler aufgetreten. Bitte versuche es erneut.";
 "status.error.message" = "Es ist ein Fehler aufgetreten. Bitte versuche es erneut.";
 "status.error.title" = "Ein Fehler ist aufgetreten";
@@ -482,6 +489,9 @@
 "filter.edit.keywords.add" = "Neues Wort hinzufügen";
 "filter.edit.contexts" = "Filterkontext";
 "filter.edit.action" = "Filteraktion";
+"filter.edit.expiry" = "Expiry";
+"filter.edit.expiry.date-time" = "Date/Time";
+"filter.edit.expiry.duration" = "Duration";
 "filter.contexts.home" = "Startseite und Listen";
 "filter.contexts.notifications" = "Mitteilungen";
 "filter.contexts.public" = "Öffentliche Timelines";
@@ -505,3 +515,5 @@
 "report.title" = "Beitrag melden";
 "report.action.send" = "Absenden";
 "status.action.report" = "Beitrag melden";
+
+"tag.suggested.mentions-%lld" = "%lld Erwähnungen";

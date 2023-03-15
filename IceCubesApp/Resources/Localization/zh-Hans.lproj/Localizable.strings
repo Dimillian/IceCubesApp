@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "圆形";
 "enum.avatar-shape.rounded" = "圆角";
 "enum.durations.infinite" = "永久";
+"enum.durations.custom" = "自定义";
 "enum.durations.fiveMinutes" = "5 分钟";
 "enum.durations.thirtyMinutes" = "30 分钟";
 "enum.durations.oneHour" = "1 小时";
 "enum.durations.sixHours" = "6 小时";
+"enum.durations.twelveHours" = "12 小时";
 "enum.durations.oneDay" = "1 天";
 "enum.durations.threeDays" = "3 天";
 "enum.durations.sevenDays" = "7 天";
@@ -79,12 +81,14 @@
 "settings.display.restore" = "恢复默认设置";
 "settings.display.section.display" = "显示";
 "settings.display.section.theme" = "主题";
+"settings.display.colors.apply" = "应用自定义颜色";
 "settings.display.section.theme.footer" = "只有在“匹配系统”关闭时才能设置自定义颜色";
 "settings.display.status.action-buttons" = "导航栏样式";
 "settings.display.status.media-style" = "导航栏排列";
 "settings.display.translate-button" = "显示翻译按钮";
 "settings.display.theme.background" = "背景颜色";
 "settings.display.theme.secondary-background" = "二级背景颜色";
+"settings.display.theme.text-color" = "文本颜色";
 "settings.display.theme.tint" = "色调";
 "settings.display.theme.systemColor" = "匹配系统";
 "settings.general.browser" = "默认浏览器";
@@ -122,21 +126,26 @@
 "settings.support.two.title" = "☕️ 很不错的捐赠";
 "settings.support.four.title" = "👽 神秘人的捐赠";
 "settings.support.four.subtitle" = "这将大大有助于 Ice Cubes 的持续运行！";
-"settings.support.supporter.title" = " Become a supporter!";
-"settings.support.supporter.subtitle" = "By giving a monthly tip to Ice Cubes, you become a supporter, you'll even get verified badge on your profile. For your 👀 only.";
-"settings.support.supporter.subscribed" = " Thanks for being an Ice Cubes supporter!";
-"settings.support.supporter.subscription-info"= "Subscription are automatically renewed unless you cancel them a day before the next renewal cycle.";
-"settings.support.restore-purchase.button" = "Restore purchase";
-"settings.support.restore-purchase.explanation" = "Restore your supporter subscription if it's haven't been automatically synced.";
-"settings.support.privacy-policy" = "Privacy Policy";
-"settings.support.terms-of-use" = "Terms";
+"settings.support.supporter.title" = "成为支持者！";
+"settings.support.supporter.subtitle" = "你可以通过每月给 Ice Cubes 捐赠成为支持者，你还能在个人资料上得到一个认证徽章，仅你可见 👀";
+"settings.support.supporter.subscribed" = "感谢你成为 Ice Cubes 的支持者！";
+"settings.support.supporter.subscription-info"= "此订阅将自动续订，除非在当前订阅期至少提前一天取消自动续订。";
+"settings.support.restore-purchase.button" = "恢复购买";
+"settings.support.restore-purchase.explanation" = "恢复你的支持者订阅，如果其尚未自动续订。";
+"settings.support.privacy-policy" = "隐私政策";
+"settings.support.terms-of-use" = "使用条款";
 "settings.timeline.add" = "添加远程时间线";
 "settings.title" = "设置";
 "settings.rate" = "给 Ice Cubes 评分";
 "settings.section.other" = "其他";
 "settings.other.hide-openai" = "启用写作助手 🤖";
 "settings.other.social-keyboard" = "启用社交键盘";
-"settings.other.sound-effect" = "Enable Sound Effects";
+"settings.other.sound-effect" = "启用声音效果";
+"settings.general.translate" = "翻译设置";
+"settings.translation.always-deepl" = "总是使用 DeepL 翻译";
+"settings.translation.user-api-key" = "DeepL API 密钥";
+"settings.translation.api-key-type" = "密钥类型";
+"settings.translation.needed-message" = "该功能需要 DeepL API 密钥";
 
 "settings.general.content" = "内容设置";
 "settings.system" = "系统设置";
@@ -257,12 +266,12 @@
 "account.edit.post-settings.section-title" = "嘟文设置";
 "account.edit.post-settings.sensitive" = "敏感内容";
 
-"account.edit.metadata-section-title" = "Profile Metadata";
-"account.edit.metadata-name-placeholder" = "Label";
-"account.edit.metadata-value-placeholder" = "Content";
-"account.edit.add-metadata-button" = "Add a new metadata";
+"account.edit.metadata-section-title" = "附加信息";
+"account.edit.metadata-name-placeholder" = "标签";
+"account.edit.metadata-value-placeholder" = "内容";
+"account.edit.add-metadata-button" = "添加新附加信息";
 
-"account.favorited-by" = "同样喜欢的有";
+"account.favorited-by" = "喜欢";
 "account.follow.follow" = "关注";
 "account.follow.following" = "正在关注";
 "account.follow.requested" = "已申请";
@@ -283,6 +292,7 @@
 "account.joined" = "加入于";
 "account.action.logout" = "退出登录";
 "account.action.edit-filters" = "编辑过滤器";
+"account.action.more" = "更多设置";
 
 "account.relation.note.edit" = "编辑备注";
 "account.relation.note.edit.placeholder" = "输入备注文本";
@@ -324,14 +334,6 @@
 "explore.section.users" = "用户";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5 分钟";
-"env.poll-duration.30m" = "30 分钟";
-"env.poll-duration.1h" = "1 小时";
-"env.poll-duration.6h" = "6 小时";
-"env.poll-duration.12h" = "12 小时";
-"env.poll-duration.1d" = "1 天";
-"env.poll-duration.3d" = "3 天";
-"env.poll-duration.7d" = "7 天";
 "env.poll-vote-frequency.one" = "单个投票";
 "env.poll-vote-frequency.multiple" = "多个投票";
 
@@ -387,6 +389,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "翻译";
+"status.action.translate-with-deepl" = "由 DeepL 翻译";
 "status.action.translated-label-%@" = "由 %@ 翻译";
 "status.action.translated-label-from-%@-%@" = "翻译自 %@，使用 %@";
 "status.action.bookmark" = "书签";
@@ -420,6 +423,8 @@
 "status.draft.delete" = "删除草稿";
 "status.draft.save" = "保存草稿";
 "status.editor.ai-prompt.correct" = "检查拼写和语法";
+"status.editor.ai-prompt.add-tags" = "自动添加#标签";
+"status.editor.ai-prompt.insert-tags" = "在末尾添加#标签";
 "status.editor.ai-prompt.emphasize" = "使用强调语气";
 "status.editor.ai-prompt.fit" = "精简文字";
 "status.editor.description.add" = "添加描述";
@@ -441,6 +446,8 @@
 "status.editor.spoiler" = "剧透警告";
 "status.editor.text.placeholder" = "在想些什么呢？";
 "status.editor.visibility" = "嘟文可见性";
+"status.editor.photo-library" = "Photos Library";
+"status.editor.browse-file" = "Browse Files";
 "status.error.loading.message" = "加载嘟文时发生错误，请重试。";
 "status.error.message" = "嘟文的上下文出现了错误，请重试。";
 "status.error.title" = "发生了一个错误";
@@ -467,7 +474,7 @@
 "status.row.you-boosted" = "你转发了";
 "status.show-less" = "显示更少";
 "status.show-more" = "显示更多";
-"status.show-full-post" = "Show full post";
+"status.show-full-post" = "显示全文";
 "status.summary.at-time" = " 在 ";
 "status.summary.edited-time" = "上次编辑：";
 "status.summary.n-boosts %lld" = "%lld 转发";
@@ -485,6 +492,9 @@
 "filter.edit.keywords.add" = "添加关键词";
 "filter.edit.contexts" = "过滤范围";
 "filter.edit.action" = "过滤器行为";
+"filter.edit.expiry" = "结束时间";
+"filter.edit.expiry.date-time" = "日期/时间";
+"filter.edit.expiry.duration" = "持续时间";
 "filter.contexts.home" = "主页和列表";
 "filter.contexts.notifications" = "通知";
 "filter.contexts.public" = "公共时间线";
@@ -512,3 +522,5 @@
 "report.title" = "举报嘟文";
 "report.action.send" = "发送";
 "status.action.report" = "举报嘟文";
+
+"tag.suggested.mentions-%lld" = "%lld 个提及";

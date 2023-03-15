@@ -6,20 +6,28 @@ public struct AppAccountsSelectorView: View {
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var appAccounts: AppAccountsManager
+  @EnvironmentObject private var theme: Theme
 
   @ObservedObject var routerPath: RouterPath
 
   @State private var accountsViewModel: [AppAccountViewModel] = []
+  @State private var isPresented: Bool = false
 
   private let accountCreationEnabled: Bool
   private let avatarSize: AvatarView.Size
 
-  var showNotificationBadge: Bool {
+  private var showNotificationBadge: Bool {
     accountsViewModel
       .filter { $0.account?.id != currentAccount.account?.id }
       .compactMap { $0.appAccount.oauthToken }
       .map { preferences.getNotificationsCount(for: $0) }
       .reduce(0, +) > 0
+  }
+
+  private var preferredHeight: CGFloat {
+    var baseHeight: CGFloat = 220
+    baseHeight += CGFloat(60 * accountsViewModel.count)
+    return baseHeight
   }
 
   public init(routerPath: RouterPath,
@@ -32,27 +40,22 @@ public struct AppAccountsSelectorView: View {
   }
 
   public var body: some View {
-    Group {
-      if UIDevice.current.userInterfaceIdiom == .pad {
-        labelView
-          .contextMenu {
-            menuView
-          }
-      } else {
-        Menu {
-          menuView
-        } label: {
-          labelView
-        }
-      }
-    }
-    .onTapGesture {
+    Button {
+      isPresented.toggle()
       HapticManager.shared.fireHaptic(of: .buttonPress)
+    } label: {
+      labelView
     }
-    .onAppear {
+    .sheet(isPresented: $isPresented, content: {
+      accountsView.presentationDetents([.height(preferredHeight), .large])
+        .onAppear {
+          refreshAccounts()
+        }
+    })
+    .onChange(of: currentAccount.account?.id) { _ in
       refreshAccounts()
     }
-    .onChange(of: currentAccount.account?.id) { _ in
+    .onAppear {
       refreshAccounts()
     }
   }
@@ -67,7 +70,7 @@ public struct AppAccountsSelectorView: View {
           .redacted(reason: .placeholder)
       }
     }.overlay(alignment: .topTrailing) {
-      if !currentAccount.followRequests.isEmpty || showNotificationBadge {
+      if (!currentAccount.followRequests.isEmpty || showNotificationBadge) && accountCreationEnabled {
         Circle()
           .fill(Color.red)
           .frame(width: 9, height: 9)
@@ -76,73 +79,66 @@ public struct AppAccountsSelectorView: View {
     .accessibilityLabel("accessibility.app-account.selector.accounts")
   }
 
-  @ViewBuilder
-  private var menuView: some View {
-    ForEach(accountsViewModel, id: \.appAccount.id) { viewModel in
-      Section(viewModel.acct) {
-        Button {
-          if let account = currentAccount.account,
-             viewModel.account?.id == account.id
-          {
-            routerPath.navigate(to: .accountDetailWithAccount(account: account))
-          } else {
-            var transation = Transaction()
-            transation.disablesAnimations = true
-            withTransaction(transation) {
-              appAccounts.currentAccount = viewModel.appAccount
-            }
-          }
-
-          HapticManager.shared.fireHaptic(of: .buttonPress)
-        } label: {
-          HStack {
-            if let image = viewModel.roundedAvatar {
-              Image(uiImage: image)
-            }
-            if let token = viewModel.appAccount.oauthToken,
-               preferences.getNotificationsCount(for: token) > 0
-            {
-              Text("\(viewModel.account?.displayName ?? "") (\(preferences.getNotificationsCount(for: token)))")
-            } else {
-              Text("\(viewModel.account?.displayName ?? "")")
-            }
+  private var accountsView: some View {
+    NavigationStack {
+      List {
+        Section {
+          ForEach(accountsViewModel.sorted { $0.acct < $1.acct }, id: \.appAccount.id) { viewModel in
+            AppAccountView(viewModel: viewModel)
           }
         }
-      }
-    }
-    if accountCreationEnabled {
-      Divider()
-      Button {
-        HapticManager.shared.fireHaptic(of: .buttonPress)
-        routerPath.presentedSheet = .addAccount
-      } label: {
-        Label("app-account.button.add", systemImage: "person.badge.plus")
-      }
-    }
+        .listRowBackground(theme.primaryBackgroundColor)
 
-    if UIDevice.current.userInterfaceIdiom == .phone && accountCreationEnabled {
-      Divider()
-      Button {
-        HapticManager.shared.fireHaptic(of: .buttonPress)
-        routerPath.presentedSheet = .settings
-      } label: {
-        Label("tab.settings", systemImage: "gear")
+        if accountCreationEnabled {
+          Section {
+            Button {
+              isPresented = false
+              HapticManager.shared.fireHaptic(of: .buttonPress)
+              DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                routerPath.presentedSheet = .addAccount
+              }
+            } label: {
+              Label("app-account.button.add", systemImage: "person.badge.plus")
+            }
+            settingsButton
+          }
+          .listRowBackground(theme.primaryBackgroundColor)
+        }
+      }
+      .listStyle(.insetGrouped)
+      .scrollContentBackground(.hidden)
+      .background(theme.secondaryBackgroundColor)
+      .navigationTitle("settings.section.accounts")
+      .navigationBarTitleDisplayMode(.inline)
+      .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button {
+            isPresented.toggle()
+          } label: {
+            Text("action.done").bold()
+          }
+        }
       }
     }
   }
 
-  private func refreshAccounts() {
-    if accountsViewModel.isEmpty || appAccounts.availableAccounts.count != accountsViewModel.count {
-      accountsViewModel = []
-      for account in appAccounts.availableAccounts {
-        let viewModel: AppAccountViewModel = .init(appAccount: account)
-        Task {
-          await viewModel.fetchAccount()
-          if !accountsViewModel.contains(where: { $0.acct == viewModel.acct }) {
-            accountsViewModel.append(viewModel)
-          }
-        }
+  private var settingsButton: some View {
+    Button {
+      isPresented = false
+      HapticManager.shared.fireHaptic(of: .buttonPress)
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        routerPath.presentedSheet = .settings
       }
+    } label: {
+      Label("tab.settings", systemImage: "gear")
+    }
+  }
+
+  private func refreshAccounts() {
+    accountsViewModel = []
+    for account in appAccounts.availableAccounts {
+      let viewModel: AppAccountViewModel = .init(appAccount: account, isInNavigation: false, showBadge: true)
+      accountsViewModel.append(viewModel)
     }
   }
 }

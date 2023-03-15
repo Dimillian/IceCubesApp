@@ -145,7 +145,8 @@ public struct NotificationsListView: View {
     case .error:
       ErrorView(title: "notifications.error.title",
                 message: "notifications.error.message",
-                buttonTitle: "action.retry") {
+                buttonTitle: "action.retry")
+      {
         Task {
           await viewModel.fetchNotifications()
         }

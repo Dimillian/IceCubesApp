@@ -1,16 +1,16 @@
-import SwiftUI
-import Models
 import DesignSystem
+import Models
+import SwiftUI
 
 public struct TagsListView: View {
   @EnvironmentObject private var theme: Theme
-  
+
   let tags: [Tag]
-  
+
   public init(tags: [Tag]) {
     self.tags = tags
   }
-  
+
   public var body: some View {
     List {
       ForEach(tags) { tag in

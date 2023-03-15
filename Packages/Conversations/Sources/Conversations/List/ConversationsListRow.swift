@@ -23,7 +23,9 @@ struct ConversationsListRow: View {
             EmojiTextApp(.init(stringValue: conversation.accounts.map { $0.safeDisplayName }.joined(separator: ", ")),
                          emojis: conversation.accounts.flatMap { $0.emojis })
               .font(.scaledSubheadline)
-              .emojiSize(Font.scaledSubheadlinePointSize)
+              .foregroundColor(theme.labelColor)
+              .emojiSize(Font.scaledSubheadlineFont.emojiSize)
+              .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
               .fontWeight(.semibold)
               .foregroundColor(theme.labelColor)
               .multilineTextAlignment(.leading)
@@ -41,7 +43,9 @@ struct ConversationsListRow: View {
           EmojiTextApp(conversation.lastStatus?.content ?? HTMLString(stringValue: ""), emojis: conversation.lastStatus?.emojis ?? [])
             .multilineTextAlignment(.leading)
             .font(.scaledBody)
-            .emojiSize(Font.scaledBodyPointSize)
+            .foregroundColor(theme.labelColor)
+            .emojiSize(Font.scaledBodyFont.emojiSize)
+            .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
         }
         Spacer()
       }

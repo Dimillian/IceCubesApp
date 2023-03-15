@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "원";
 "enum.avatar-shape.rounded" = "둥근 사각형";
 "enum.durations.infinite" = "해제할 때까지";
+"enum.durations.custom" = "직접 설정";
 "enum.durations.fiveMinutes" = "5분";
 "enum.durations.thirtyMinutes" = "30분";
 "enum.durations.oneHour" = "1시간";
 "enum.durations.sixHours" = "6시간";
+"enum.durations.twelveHours" = "12시간";
 "enum.durations.oneDay" = "1일";
 "enum.durations.threeDays" = "3일";
 "enum.durations.sevenDays" = "7일";
@@ -79,12 +81,14 @@
 "settings.display.restore" = "초기 설정으로 되돌리기";
 "settings.display.section.display" = "화면";
 "settings.display.section.theme" = "테마";
+"settings.display.colors.apply" = "변경한 색상 적용하기";
 "settings.display.section.theme.footer" = "시스템 설정에 맞춤 옵션이 꺼져 있을 때만 색상을 직접 고를 수 있습니다.";
 "settings.display.status.action-buttons" = "글 동작 버튼";
 "settings.display.status.media-style" = "글 미디어 크기";
 "settings.display.translate-button" = "번역 버튼 표시";
 "settings.display.theme.background" = "배경 색상";
 "settings.display.theme.secondary-background" = "보조 배경 색상";
+"settings.display.theme.text-color" = "글자 색상";
 "settings.display.theme.tint" = "강조 색상";
 "settings.display.theme.systemColor" = "시스템 설정에 맞춤";
 "settings.general.browser" = "브라우저";
@@ -118,7 +122,7 @@
 "settings.content.default-sensitive" = "내 미디어 항상 민감함으로 표시";
 "settings.content.default-visibility" = "글 기본 공개 범위";
 "settings.content.media" = "미디어";
-"settings.content.media.show.alt" = "이미지 설명 버튼 표시";
+"settings.content.media.show.alt" = "미디어 설명 버튼 표시";
 "settings.content.reading" = "읽을 때";
 "settings.content.posting" = "올릴 때";
 "enum.expand-media.show" = "모두 표시하기";
@@ -142,21 +146,26 @@
 "settings.support.two.title" = "☕️ 기분 좋아지는 기부금";
 "settings.support.four.title" = "👽 엄청난 기부금";
 "settings.support.four.subtitle" = "Ice Cubes가 계속 발전하는 데 정말 많은 도움이 될 거에요!";
-"settings.support.supporter.title" = " Become a supporter!";
-"settings.support.supporter.subtitle" = "By giving a monthly tip to Ice Cubes, you become a supporter, you'll even get verified badge on your profile. For your 👀 only.";
-"settings.support.supporter.subscribed" = " Thanks for being an Ice Cubes supporter!";
-"settings.support.supporter.subscription-info"= "Subscription are automatically renewed unless you cancel them a day before the next renewal cycle.";
-"settings.support.restore-purchase.button" = "Restore purchase";
-"settings.support.restore-purchase.explanation" = "Restore your supporter subscription if it's haven't been automatically synced.";
-"settings.support.privacy-policy" = "Privacy Policy";
-"settings.support.terms-of-use" = "Terms";
+"settings.support.supporter.title" = " 후원자가 되어 보세요!";
+"settings.support.supporter.subtitle" = "기부금을 매달 보내는 구독을 신청하면, 후원자가 될 수 있습니다. 프로필에 나만 볼 수 있는 자기만족용 인증 마크도 생겨요. 👀";
+"settings.support.supporter.subscribed" = " Ice Cubes의 후원자가 되어 주셔서 감사합니다!";
+"settings.support.supporter.subscription-info"= "정기 결제일 전날까지 구독을 취소하지 않는 한 구독은 자동으로 갱신됩니다.";
+"settings.support.restore-purchase.button" = "구매 내역 불러오기";
+"settings.support.restore-purchase.explanation" = "구매 내역이 자동으로 동기화되지 않았다면 위의 버튼을 눌러 구매 내역을 불러올 수 있습니다.";
+"settings.support.privacy-policy" = "개인정보 처리방침";
+"settings.support.terms-of-use" = "이용 약관";
 "settings.timeline.add" = "원격 로컬 타임라인 추가";
 "settings.title" = "설정";
 "settings.rate" = "Ice Cubes 평가 남기기";
 "settings.section.other" = "기타";
 "settings.other.hide-openai" = "글 작성 도우미 🤖";
 "settings.other.social-keyboard" = "SNS 키보드";
-"settings.other.sound-effect" = "Enable Sound Effects";
+"settings.other.sound-effect" = "효과음";
+"settings.general.translate" = "Translation Settings";
+"settings.translation.always-deepl" = "Always Translate using DeepL";
+"settings.translation.user-api-key" = "DeepL API Key";
+"settings.translation.api-key-type" = "Type of the Key";
+"settings.translation.needed-message" = "This feature requires a DeepL API key";
 "settings.push.duplicate.title" = "중복 알림 해결사";
 "settings.push.duplicate.footer" = "같은 알림이 여러 번 오나요? 위에 있는 버튼을 누르면 마법처럼 해결될 거에요.";
 "settings.push.duplicate.button.fix" = "🪄 고치기";
@@ -178,7 +187,7 @@
 
 "settings.display.show-tab-label" = "하단 탭 바에 제목 표시";
 
-"settings.display.show-ipad-column" = "보조 열 사용";
+"settings.display.show-ipad-column" = "보조 열 표시";
 
 "settings.general.swipeactions" = "쓸어넘기기 동작 설정";
 "settings.swipeactions.navigation-title" = "쓸어넘기기 동작 설정";
@@ -285,6 +294,7 @@
 "account.relation.follows-you" = "나를 팔로우함";
 "account.joined" = "가입";
 "account.action.logout" = "로그아웃";
+"account.action.more" = "계정 설정 더 보기";
 
 "account.relation.note.edit" = "노트 편집";
 "account.relation.note.edit.placeholder" = "나만 볼 수 있는 노트";
@@ -326,14 +336,6 @@
 "explore.section.users" = "사용자";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5분";
-"env.poll-duration.30m" = "30분";
-"env.poll-duration.1h" = "1시간";
-"env.poll-duration.6h" = "6시간";
-"env.poll-duration.12h" = "12시간";
-"env.poll-duration.1d" = "1일";
-"env.poll-duration.3d" = "3일";
-"env.poll-duration.7d" = "7일";
 "env.poll-vote-frequency.one" = "하나만 선택 가능";
 "env.poll-vote-frequency.multiple" = "여러 개 선택 가능";
 
@@ -390,6 +392,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "번역";
+"status.action.translate-with-deepl" = "Translate with DeepL";
 "status.action.translated-label-%@" = "%@ 서비스를 통해 번역됨";
 "status.action.translated-label-from-%@-%@" = "%2$@ 서비스를 통해 %1$@에서 번역됨";
 "status.action.bookmark" = "보관함에 추가";
@@ -423,6 +426,8 @@
 "status.draft.delete" = "삭제";
 "status.draft.save" = "임시 보관함에 저장";
 "status.editor.ai-prompt.correct" = "맞게 고치기";
+"status.editor.ai-prompt.add-tags" = "주요 단어 #태그 표시하기";
+"status.editor.ai-prompt.insert-tags" = "글 뒤에 #태그 추가하기";
 "status.editor.ai-prompt.emphasize" = "내용 강조하기";
 "status.editor.ai-prompt.fit" = "간결하게 바꾸기";
 "status.editor.description.add" = "설명 추가";
@@ -430,12 +435,12 @@
 "status.editor.drafts.navigation-title" = "임시 보관함";
 "status.editor.emojis.navigation-title" = "커스텀 이모지";
 "status.editor.error.upload" = "전송 오류";
-"status.editor.language-select.navigation-title" = "언어 선택";
+"status.editor.language-select.navigation-title" = "글 언어 지정";
 "status.editor.language-select.recently-used" = "최근 사용";
 "status.editor.language-select.confirmation.detected-%@" = "%@로 표시하여 게시 (인식된 언어)";
 "status.editor.language-select.confirmation.selected-%@" = "%@로 표시하여 게시 (선택한 언어)";
-"status.editor.media.edit-image" = "이미지 편집";
-"status.editor.media.image-description" = "이미지 설명";
+"status.editor.media.edit-image" = "미디어 편집";
+"status.editor.media.image-description" = "미디어 설명";
 "status.editor.mode.edit" = "글 수정";
 "status.editor.mode.new" = "새 글";
 "status.editor.mode.quote-%@" = "%@님의 글 인용";
@@ -444,6 +449,8 @@
 "status.editor.spoiler" = "열람 주의 문구";
 "status.editor.text.placeholder" = "무슨 생각을 하고 계신가요?";
 "status.editor.visibility" = "글 공개 범위";
+"status.editor.photo-library" = "사진 보관함";
+"status.editor.browse-file" = "파일 앱";
 "status.error.loading.message" = "글을 불러오지 못했습니다. 다시 시도해주세요.";
 "status.error.message" = "글의 상세 정보를 불러오지 못했습니다. 다시 시도해주세요.";
 "status.error.title" = "오류";
@@ -486,8 +493,11 @@
 "filter.edit.title" = "필터 이름";
 "filter.edit.keywords" = "거를 단어";
 "filter.edit.keywords.add" = "새 단어 추가";
-"filter.edit.contexts" = "필터를 적용할 곳";
+"filter.edit.contexts" = "적용할 곳";
 "filter.edit.action" = "가릴 방식";
+"filter.edit.expiry" = "가릴 기간";
+"filter.edit.expiry.date-time" = "날짜 및 시간";
+"filter.edit.expiry.duration" = "기간";
 "account.action.edit-filters" = "필터 편집";
 "filter.contexts.home" = "홈 및 리스트";
 "filter.contexts.notifications" = "알림";
@@ -498,12 +508,12 @@
 "filter.action.hide" = "완전히 숨김";
 
 // MARK: Accessibility
-"accessibility.editor.button.attach-photo" = "이미지 첨부";
+"accessibility.editor.button.attach-photo" = "미디어 첨부";
 "accessibility.editor.button.poll" = "투표";
 "accessibility.editor.button.spoiler" = "열람 주의 문구";
 "accessibility.editor.button.drafts" = "임시 보관함";
 "accessibility.editor.button.custom-emojis" = "커스텀 이모지";
-"accessibility.editor.button.language" = "언어";
+"accessibility.editor.button.language" = "글 언어 지정";
 "accessibility.tabs.timeline.add-account" = "계정 추가";
 "accessibility.app-account.selector.accounts" = "계정";
 
@@ -512,3 +522,5 @@
 "report.title" = "신고";
 "report.action.send" = "제출";
 "status.action.report" = "글 신고";
+
+"tag.suggested.mentions-%lld" = "%lld개 글";

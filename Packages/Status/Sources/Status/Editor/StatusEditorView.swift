@@ -170,10 +170,8 @@ public struct StatusEditorView: View {
 
   @ViewBuilder
   private var languageConfirmationDialog: some View {
-    if let dialogVals = viewModel.languageConfirmationDialogLanguages,
-       let detected = dialogVals["detected"],
+    if let (detected: detected, selected: selected) = viewModel.languageConfirmationDialogLanguages,
        let detectedLong = Locale.current.localizedString(forLanguageCode: detected),
-       let selected = dialogVals["selected"],
        let selectedLong = Locale.current.localizedString(forLanguageCode: selected)
     {
       Button("status.editor.language-select.confirmation.detected-\(detectedLong)") {

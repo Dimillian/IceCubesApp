@@ -25,10 +25,12 @@
 "enum.avatar-shape.circle" = "Círculo";
 "enum.avatar-shape.rounded" = "Arredondado";
 "enum.durations.infinite" = "infinito";
+"enum.durations.custom" = "custom";
 "enum.durations.fiveMinutes" = "5 minutos";
 "enum.durations.thirtyMinutes" = "30 minutos";
 "enum.durations.oneHour" = "1 hora";
 "enum.durations.sixHours" = "6 horas";
+"enum.durations.twelveHours" = "12 horas";
 "enum.durations.oneDay" = "1 dia";
 "enum.durations.threeDays" = "3 dias";
 "enum.durations.sevenDays" = "7 dias";
@@ -79,12 +81,14 @@
 "settings.display.restore" = "Restaurar padrões";
 "settings.display.section.display" = "Exibir";
 "settings.display.section.theme" = "Tema";
+"settings.display.colors.apply" = "Apply custom colors";
 "settings.display.section.theme.footer" = "Cores customizadas só podem ser definidas se o Padrão do Sistema estiver desabilitado";
 "settings.display.status.action-buttons" = "Botões de ação de status";
 "settings.display.status.media-style" = "Estilo de mídia de status";
 "settings.display.translate-button" = "Exibir botão de tradução";
 "settings.display.theme.background" = "Cor de fundo";
 "settings.display.theme.secondary-background" = "Cor de fundo secundária";
+"settings.display.theme.text-color" = "Text Color";
 "settings.display.theme.tint" = "Cor principal";
 "settings.display.theme.systemColor" = "Padrão do Sistema";
 "settings.general.browser" = "Navegador";
@@ -147,7 +151,7 @@
 "settings.support.supporter.subscribed" = " Thanks for being an Ice Cubes supporter!";
 "settings.support.supporter.subscription-info"= "Subscription are automatically renewed unless you cancel them a day before the next renewal cycle.";
 "settings.support.restore-purchase.button" = "Restore purchase";
-"settings.support.restore-purchase.explanation" = "Restore your supporter subscription if it's haven't been automatically synced.";
+"settings.support.restore-purchase.explanation" = "Restore your supporter subscription if it hasn't been synced automatically.";
 "settings.support.privacy-policy" = "Privacy Policy";
 "settings.support.terms-of-use" = "Terms";
 "settings.timeline.add" = "Adicionar uma timeline local";
@@ -157,6 +161,11 @@
 "settings.other.hide-openai" = "Habilitar 🤖 ajudante";
 "settings.other.social-keyboard" = "Habilitar Teclado Social";
 "settings.other.sound-effect" = "Enable Sound Effects";
+"settings.general.translate" = "Translation Settings";
+"settings.translation.always-deepl" = "Always Translate using DeepL";
+"settings.translation.user-api-key" = "DeepL API Key";
+"settings.translation.api-key-type" = "Type of the Key";
+"settings.translation.needed-message" = "This feature requires a DeepL API key";
 "settings.push.duplicate.title" = "Corretor de notificações duplicadas";
 "settings.push.duplicate.footer" = "Recebendo notificações duplicadas? Tente este botão mágico para tentar corrigir";
 "settings.push.duplicate.button.fix" = "🪄 Corrigir";
@@ -284,6 +293,7 @@
 "account.relation.follows-you" = "Seguiu Você";
 "account.joined" = "Entrou em";
 "account.action.logout" = "Sair da conta";
+"account.action.more" = "More Settings";
 
 "account.relation.note.edit" = "Editar nota";
 "account.relation.note.edit.placeholder" = "Digite o texto da nota";
@@ -325,14 +335,6 @@
 "explore.section.users" = "Usuários";
 
 // MARK: Package: Env
-"env.poll-duration.5m" = "5 minutos";
-"env.poll-duration.30m" = "30 minutos";
-"env.poll-duration.1h" = "1 hora";
-"env.poll-duration.6h" = "6 horas";
-"env.poll-duration.12h" = "12 horas";
-"env.poll-duration.1d" = "1 dia";
-"env.poll-duration.3d" = "3 dias";
-"env.poll-duration.7d" = "7 dias";
 "env.poll-vote-frequency.one" = "Um Voto";
 "env.poll-vote-frequency.multiple" = "Múltiplos Votos";
 
@@ -388,6 +390,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Traduzir";
+"status.action.translate-with-deepl" = "Translate with DeepL";
 "status.action.translated-label-%@" = "Traduzir usando %@";
 "status.action.translated-label-from-%@-%@" = "Traduzido de %@ usando %@";
 "status.action.bookmark" = "Salvar";
@@ -421,6 +424,8 @@
 "status.draft.delete" = "Excluir Rascunho";
 "status.draft.save" = "Salvar Rascunho";
 "status.editor.ai-prompt.correct" = "Corrigir texto";
+"status.editor.ai-prompt.add-tags" = "Add #Tags in place";
+"status.editor.ai-prompt.insert-tags" = "Add #Tags after my text";
 "status.editor.ai-prompt.emphasize" = "Enfatizar texto";
 "status.editor.ai-prompt.fit" = "Diminuir texto";
 "status.editor.description.add" = "Adicionar descrição";
@@ -442,6 +447,8 @@
 "status.editor.spoiler" = "Texto de Spoiler";
 "status.editor.text.placeholder" = "O que você está pensando?";
 "status.editor.visibility" = "Visibilidade da postagem";
+"status.editor.photo-library" = "Photos Library";
+"status.editor.browse-file" = "Browse Files";
 "status.error.loading.message" = "Ocorreu um erro enquanto as postagens eram carregadas, por favor, tente novamente.";
 "status.error.message" = "Ocorreu um erro com esta postagem, por favor, tente novamente.";
 "status.error.title" = "Ocorreu um erro";
@@ -486,6 +493,9 @@
 "filter.edit.keywords.add" = "Aidicionar uma palavra chave";
 "filter.edit.contexts" = "Filtrar Contextos";
 "filter.edit.action" = "Filtrar Ação";
+"filter.edit.expiry" = "Expiry";
+"filter.edit.expiry.date-time" = "Date/Time";
+"filter.edit.expiry.duration" = "Duration";
 "account.action.edit-filters" = "Editar Filtros";
 "filter.contexts.home" = "Início e listas";
 "filter.contexts.notifications" = "Notificações";
@@ -510,3 +520,5 @@
 "report.title" = "Reportar Postagem";
 "report.action.send" = "Enviar";
 "status.action.report" = "Repostar Postagem";
+
+"tag.suggested.mentions-%lld" = "%lld mentions";

@@ -70,7 +70,6 @@ public class RouterPath: ObservableObject {
   @Published public var path: [RouterDestination] = []
   @Published public var presentedSheet: SheetDestination?
 
-    
   public init() {}
 
   public func navigate(to: RouterDestination) {

@@ -47,23 +47,23 @@ extension Models.Notification.NotificationType {
 
   func icon(isPrivate: Bool) -> Image {
     if isPrivate {
-      return Image(systemName:"tray.fill")
+      return Image(systemName: "tray.fill")
     }
     switch self {
     case .status:
-      return Image(systemName:"pencil")
+      return Image(systemName: "pencil")
     case .mention:
-      return Image(systemName:"at")
+      return Image(systemName: "at")
     case .reblog:
       return Image("Rocket.Fill")
     case .follow, .follow_request:
-      return Image(systemName:"person.fill.badge.plus")
+      return Image(systemName: "person.fill.badge.plus")
     case .favourite:
-      return Image(systemName:"star.fill")
+      return Image(systemName: "star.fill")
     case .poll:
-      return Image(systemName:"chart.bar.fill")
+      return Image(systemName: "chart.bar.fill")
     case .update:
-      return Image(systemName:"pencil.line")
+      return Image(systemName: "pencil.line")
     }
   }
 

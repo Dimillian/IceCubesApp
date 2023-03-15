@@ -1,15 +1,15 @@
-import SwiftUI
 import Env
 import Network
+import SwiftUI
 
 public struct AccountDetailContextMenu: View {
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var routerPath: RouterPath
   @EnvironmentObject private var currentInstance: CurrentInstance
   @EnvironmentObject private var preferences: UserPreferences
-  
+
   @ObservedObject var viewModel: AccountDetailViewModel
-  
+
   public var body: some View {
     if let account = viewModel.account {
       Section(account.acct) {
@@ -68,7 +68,7 @@ public struct AccountDetailContextMenu: View {
             }
           } else {
             Menu {
-              ForEach(MutingDuration.allCases, id: \.rawValue) { duration in
+              ForEach(Duration.mutingDurations(), id: \.rawValue) { duration in
                 Button(duration.description) {
                   Task {
                     do {
