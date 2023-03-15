@@ -109,14 +109,14 @@ class StatusDetailViewModel: ObservableObject {
   }
 
   func handleEvent(event: any StreamEvent, currentAccount: Account?) {
-    if let event = event as? StreamEventUpdate,
-       event.status.account.id == currentAccount?.id
-    {
-      Task {
+    Task {
+      if let event = event as? StreamEventUpdate,
+         event.status.account.id == currentAccount?.id {
         await fetchStatusDetail(animate: true)
-      }
-    } else if event is StreamEventDelete {
-      Task {
+      } else if let event = event as? StreamEventStatusUpdate,
+                event.status.account.id == currentAccount?.id {
+        await fetchStatusDetail(animate: true)
+      } else if event is StreamEventDelete {
         await fetchStatusDetail(animate: true)
       }
     }
