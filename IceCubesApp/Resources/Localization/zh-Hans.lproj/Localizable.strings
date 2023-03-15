@@ -389,7 +389,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "翻译";
-"status.action.translate-with-deepl" = "使用 DeepL 翻译";
+"status.action.translate-with-deepl" = "由 DeepL 翻译";
 "status.action.translated-label-%@" = "由 %@ 翻译";
 "status.action.translated-label-from-%@-%@" = "翻译自 %@，使用 %@";
 "status.action.bookmark" = "书签";
