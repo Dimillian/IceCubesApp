@@ -288,11 +288,11 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   func translate(userLang: String) async {
+    withAnimation {
+      isLoadingTranslation = true
+    }
     if !alwaysTranslateWithDeepl {
       do {
-        withAnimation {
-          isLoadingTranslation = true
-        }
         // We first use instance translation API if available.
         let translation: StatusTranslation = try await client.post(endpoint: Statuses.translate(id: finalStatus.id,
                                                                                                 lang: userLang))

@@ -138,7 +138,7 @@ struct StatusRowContextMenu: View {
         Label("status.action.translate", systemImage: "captions.bubble")
       }
       
-      if viewModel.alwaysTranslateWithDeepl {
+      if !viewModel.alwaysTranslateWithDeepl {
         Button {
           Task {
             await viewModel.translateWithDeepL(userLang: lang)
