@@ -37,18 +37,23 @@ struct TabBarBoxView: View {
             scale: 1.25,
             color: .blue
           )
+          .frame(alignment: .center)
           IconView(
             iconName: iconSet.tabIcon["notifications"]!
           )
+          .frame(alignment: .center)
           IconView(
             iconName: iconSet.tabIcon["explore"]!
           )
+          .frame(alignment: .center)
           IconView(
             iconName: iconSet.tabIcon["messages"]!
           )
+          .frame(alignment: .center)
           IconView(
             iconName: iconSet.tabIcon["profile"]!
           )
+          .frame(alignment: .center)
         }
         .frame(width: nil, height: 60)
         .background(.thinMaterial)
