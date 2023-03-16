@@ -39,6 +39,7 @@ struct TranslationSettingsView: View {
         }
       }
     }
+    .navigationTitle("settings.translation.navigation-title")
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
     .onChange(of: apiKey, perform: writeNewValue)

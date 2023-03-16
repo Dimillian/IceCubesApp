@@ -142,6 +142,7 @@
 "settings.other.social-keyboard" = "Soziale Tastatur aktivieren";
 "settings.other.sound-effect" = "Klänge aktivieren";
 "settings.general.translate" = "Übersetzungseinstellungen";
+"settings.translation.navigation-title" = "Übersetzung";
 "settings.translation.always-deepl" = "Immer mit DeepL übersetzen";
 "settings.translation.user-api-key" = "DeepL-API-Schlüssel";
 "settings.translation.api-key-type" = "Typ des Schlüssels";

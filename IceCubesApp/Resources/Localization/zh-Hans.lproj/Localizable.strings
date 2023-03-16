@@ -142,6 +142,7 @@
 "settings.other.social-keyboard" = "启用社交键盘";
 "settings.other.sound-effect" = "启用声音效果";
 "settings.general.translate" = "翻译设置";
+"settings.translation.navigation-title" = "翻译设置";
 "settings.translation.always-deepl" = "总是使用 DeepL 翻译";
 "settings.translation.user-api-key" = "DeepL API 密钥";
 "settings.translation.api-key-type" = "密钥类型";
