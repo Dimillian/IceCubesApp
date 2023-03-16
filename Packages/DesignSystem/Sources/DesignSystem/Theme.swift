@@ -208,13 +208,10 @@ public class Theme: ObservableObject {
   public static var allTabBarIconSet: [TabBarIconSet] {
     [
       BasicIcons(),
-      FancyIcons(),
-      MinimalSquareIcons(),
-      NumberedIcons(),
-      NumberedSquareIcons(),
-      DotsIcons(),
-      CreativeIcons(),
-      PrettyIcons(),
+      TimelinesIcons(),
+      ModernIcons(),
+      CircleIcons(),
+      SquareIcons(),
     ]
   }
   
