@@ -208,6 +208,7 @@ struct SettingsTabs: View {
       Link(destination: URL(string: "https://github.com/Dimillian/IceCubesApp")!) {
         Label("settings.app.source", systemImage: "link")
       }
+      .accessibilityRemoveTraits(.isButton)
       .tint(theme.labelColor)
 
       NavigationLink(destination: SupportAppView()) {
@@ -218,6 +219,7 @@ struct SettingsTabs: View {
         Link(destination: reviewURL) {
           Label("settings.rate", systemImage: "link")
         }
+        .accessibilityRemoveTraits(.isButton)
         .tint(theme.labelColor)
       }
 
