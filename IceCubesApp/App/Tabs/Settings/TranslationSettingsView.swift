@@ -11,7 +11,7 @@ struct TranslationSettingsView: View {
   var body: some View {
     Form {
       Toggle(isOn: preferences.$alwaysUseDeepl) {
-        Label("settings.translation.always-deepl", systemImage: "captions.bubble")
+        Text("settings.translation.always-deepl")
       }
       .listRowBackground(theme.primaryBackgroundColor)
 
