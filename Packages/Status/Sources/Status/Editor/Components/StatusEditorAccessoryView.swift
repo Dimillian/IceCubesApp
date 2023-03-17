@@ -237,13 +237,13 @@ struct StatusEditorAccessoryView: View {
     NavigationStack {
       List {
         ForEach(preferences.draftsPosts, id: \.self) { draft in
-          Text(draft)
-            .lineLimit(3)
-            .listRowBackground(theme.primaryBackgroundColor)
-            .onTapGesture {
-              viewModel.insertStatusText(text: draft)
-              isDraftsSheetDisplayed = false
-            }
+          Button {
+            viewModel.insertStatusText(text: draft)
+            isDraftsSheetDisplayed = false
+          } label: {
+            Text(draft)
+              .lineLimit(3)
+          }.listRowBackground(theme.primaryBackgroundColor)
         }
         .onDelete { indexes in
           if let index = indexes.first {
