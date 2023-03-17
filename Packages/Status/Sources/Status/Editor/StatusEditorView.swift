@@ -235,6 +235,7 @@ public struct StatusEditorView: View {
         } else {
           AvatarView(url: account.avatar, size: .status)
             .environmentObject(theme)
+            .accessibilityHidden(true)
         }
         VStack(alignment: .leading, spacing: 4) {
           privacyMenu
