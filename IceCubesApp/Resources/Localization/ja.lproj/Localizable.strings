@@ -391,7 +391,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "翻訳";
-"status.action.translate-with-deepl" = "Translate with DeepL";
+"status.action.translate-with-deepl" = "DeepLを使用して翻訳";
 "status.action.translated-label-%@" = "%@ を使用して翻訳";
 "status.action.translated-label-from-%@-%@" = "%@ から %@ を使用して翻訳";
 "status.action.bookmark" = "ブックマーク";
@@ -513,10 +513,10 @@
 "accessibility.editor.button.drafts" = "下書き";
 "accessibility.editor.button.custom-emojis" = "カスタム絵文字";
 "accessibility.editor.button.language" = "言語";
-"accessibility.editor.button.ai-prompt" = "AI prompt";
-"accessibility.editor.button.characters-remaining" = "Characters remaining";
-"accessibility.editor.privacy.label" = "Visibility";
-"accessibility.editor.privacy.hint" = "Changes post audience.";
+"accessibility.editor.button.ai-prompt" = "AI プロンプト";
+"accessibility.editor.button.characters-remaining" = "残り文字数";
+"accessibility.editor.privacy.label" = "可視性";
+"accessibility.editor.privacy.hint" = "投稿対象者を変更します";
 "accessibility.tabs.timeline.add-account" = "アカウントを追加";
 "accessibility.app-account.selector.accounts" = "アカウント";
 
