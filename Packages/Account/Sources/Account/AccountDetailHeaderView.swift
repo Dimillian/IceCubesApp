@@ -232,12 +232,14 @@ struct AccountDetailHeaderView: View {
     if let joinedAt = viewModel.account?.createdAt.asDate {
       HStack(spacing: 4) {
         Image(systemName: "calendar")
+          .accessibilityHidden(true)
         Text("account.joined")
         Text(joinedAt, style: .date)
       }
       .foregroundColor(.gray)
       .font(.footnote)
       .padding(.top, 6)
+      .accessibilityElement(children: .combine)
     }
   }
 
