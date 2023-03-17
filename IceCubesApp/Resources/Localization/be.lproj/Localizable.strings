@@ -518,6 +518,10 @@
 "accessibility.editor.button.drafts" = "Чарнавікі";
 "accessibility.editor.button.custom-emojis" = "Уласныя эмодзі";
 "accessibility.editor.button.language" = "Мова";
+"accessibility.editor.button.ai-prompt" = "AI prompt";
+"accessibility.editor.button.characters-remaining" = "Characters remaining";
+"accessibility.editor.privacy.label" = "Visibility";
+"accessibility.editor.privacy.hint" = "Changes post audience.";
 "accessibility.tabs.timeline.add-account" = "Дадаць уліковы запіс";
 "accessibility.app-account.selector.accounts" = "Уліковыя запісы";
 

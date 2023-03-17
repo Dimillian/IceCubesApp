@@ -513,6 +513,10 @@
 "accessibility.editor.button.drafts" = "草稿";
 "accessibility.editor.button.custom-emojis" = "自定表情符號";
 "accessibility.editor.button.language" = "語言";
+"accessibility.editor.button.ai-prompt" = "AI prompt";
+"accessibility.editor.button.characters-remaining" = "Characters remaining";
+"accessibility.editor.privacy.label" = "Visibility";
+"accessibility.editor.privacy.hint" = "Changes post audience.";
 "accessibility.tabs.timeline.add-account" = "新增帳號";
 "accessibility.app-account.selector.accounts" = "帳號";
 

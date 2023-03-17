@@ -515,6 +515,10 @@
 "accessibility.editor.button.drafts" = "임시 보관함";
 "accessibility.editor.button.custom-emojis" = "커스텀 이모지";
 "accessibility.editor.button.language" = "글 언어 지정";
+"accessibility.editor.button.ai-prompt" = "AI prompt";
+"accessibility.editor.button.characters-remaining" = "Characters remaining";
+"accessibility.editor.privacy.label" = "Visibility";
+"accessibility.editor.privacy.hint" = "Changes post audience.";
 "accessibility.tabs.timeline.add-account" = "계정 추가";
 "accessibility.app-account.selector.accounts" = "계정";
 

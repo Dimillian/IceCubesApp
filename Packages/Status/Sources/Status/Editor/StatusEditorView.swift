@@ -66,7 +66,7 @@ public struct StatusEditorView: View {
           }
           .padding(.top, 8)
           .padding(.bottom, 40)
-        }
+        }.accessibilitySortPriority(1) // Ensure that all elements inside the `ScrollView` occur earlier than the accessory views
         VStack(alignment: .leading, spacing: 0) {
           StatusEditorAutoCompleteView(viewModel: viewModel)
           StatusEditorAccessoryView(isSpoilerTextFocused: $isSpoilerTextFocused,
@@ -235,6 +235,7 @@ public struct StatusEditorView: View {
         } else {
           AvatarView(url: account.avatar, size: .status)
             .environmentObject(theme)
+            .accessibilityHidden(true)
         }
         VStack(alignment: .leading, spacing: 4) {
           privacyMenu
@@ -261,6 +262,9 @@ public struct StatusEditorView: View {
     } label: {
       HStack {
         Label(viewModel.visibility.title, systemImage: viewModel.visibility.iconName)
+          .accessibilityLabel("accessibility.editor.privacy.label")
+          .accessibilityValue(viewModel.visibility.title)
+          .accessibilityHint("accessibility.editor.privacy.hint")
         Image(systemName: "chevron.down")
       }
       .font(.scaledFootnote)

@@ -514,6 +514,10 @@
 "accessibility.editor.button.drafts" = "Borradores";
 "accessibility.editor.button.custom-emojis" = "Emojis personalizados";
 "accessibility.editor.button.language" = "Idioma";
+"accessibility.editor.button.ai-prompt" = "AI prompt";
+"accessibility.editor.button.characters-remaining" = "Characters remaining";
+"accessibility.editor.privacy.label" = "Visibility";
+"accessibility.editor.privacy.hint" = "Changes post audience.";
 "accessibility.tabs.timeline.add-account" = "Añadir cuenta";
 "accessibility.app-account.selector.accounts" = "Cuentas";
 

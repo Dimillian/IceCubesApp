@@ -19,6 +19,7 @@ public extension TextView {
     var view = self
     let text = Text(placeholder)
     view.placeholderView = AnyView(configure(text))
+    view.placeholderText = placeholder
     return view
   }
 

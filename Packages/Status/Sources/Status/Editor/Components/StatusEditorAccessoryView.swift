@@ -176,6 +176,7 @@ struct StatusEditorAccessoryView: View {
         ProgressView()
       } else {
         Image(systemName: "faxmachine")
+          .accessibilityLabel("accessibility.editor.button.ai-prompt")
       }
     }
   }
@@ -236,13 +237,13 @@ struct StatusEditorAccessoryView: View {
     NavigationStack {
       List {
         ForEach(preferences.draftsPosts, id: \.self) { draft in
-          Text(draft)
-            .lineLimit(3)
-            .listRowBackground(theme.primaryBackgroundColor)
-            .onTapGesture {
-              viewModel.insertStatusText(text: draft)
-              isDraftsSheetDisplayed = false
-            }
+          Button {
+            viewModel.insertStatusText(text: draft)
+            isDraftsSheetDisplayed = false
+          } label: {
+            Text(draft)
+              .lineLimit(3)
+          }.listRowBackground(theme.primaryBackgroundColor)
         }
         .onDelete { indexes in
           if let index = indexes.first {
@@ -274,10 +275,13 @@ struct StatusEditorAccessoryView: View {
                   .resizable()
                   .aspectRatio(contentMode: .fill)
                   .frame(width: 40, height: 40)
+                  .accessibilityLabel(emoji.shortcode.replacingOccurrences(of: "_", with: " "))
+                  .accessibilityAddTraits(.isButton)
               } else if state.isLoading {
                 Rectangle()
                   .fill(Color.gray)
                   .frame(width: 40, height: 40)
+                  .accessibility(hidden: true)
                   .shimmering()
               }
             }
@@ -300,10 +304,18 @@ struct StatusEditorAccessoryView: View {
     .presentationDetents([.medium])
   }
 
+  @ViewBuilder
   private var characterCountView: some View {
-    Text("\((currentInstance.instance?.configuration?.statuses.maxCharacters ?? 500) + viewModel.statusTextCharacterLength)")
-      .foregroundColor(.gray)
+    let value = (currentInstance.instance?.configuration?.statuses.maxCharacters ?? 500) + viewModel.statusTextCharacterLength
+
+    Text("\(value)")
+      .foregroundColor(value < 0 ? .red : .secondary)
       .font(.scaledCallout)
+      .accessibilityLabel("accessibility.editor.button.characters-remaining")
+      .accessibilityValue("\(value)")
+      .accessibilityRemoveTraits(.isStaticText)
+      .accessibilityAddTraits(.updatesFrequently)
+      .accessibilityRespondsToUserInteraction(false)
   }
 
   private var recentlyUsedLanguages: [Language] {
