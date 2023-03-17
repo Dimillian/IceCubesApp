@@ -353,6 +353,12 @@ public struct AccountDetailView: View {
         }
       } label: {
         Image(systemName: "ellipsis.circle")
+          .accessibilityLabel("accessibility.tabs.profile.options.label")
+          .accessibilityInputLabels([
+            LocalizedStringKey("accessibility.tabs.profile.options.label"),
+            LocalizedStringKey("accessibility.tabs.profile.options.inputLabel1"),
+            LocalizedStringKey("accessibility.tabs.profile.options.inputLabel2")
+          ])
       }
     }
   }

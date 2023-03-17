@@ -511,6 +511,9 @@
 "accessibility.editor.button.language" = "Taal";
 "accessibility.tabs.timeline.add-account" = "Voeg account toe";
 "accessibility.app-account.selector.accounts" = "Accounts";
+"accessibility.tabs.profile.options.label" = "Options";
+"accessibility.tabs.profile.options.inputLabel1" = "Settings";
+"accessibility.tabs.profile.options.inputLabel2" = "More";
 "accessibility.tabs.profile.user-avatar.label" = "Profile photo";
 "accessibility.tabs.profile.user-avatar.hint" = "Displays a larger version.";
 "accessibility.tabs.profile.user-avatar.supporter.label" = "Supporter";

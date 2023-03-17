@@ -519,6 +519,9 @@
 "accessibility.editor.button.language" = "Мова";
 "accessibility.tabs.timeline.add-account" = "Дадаць уліковы запіс";
 "accessibility.app-account.selector.accounts" = "Уліковыя запісы";
+"accessibility.tabs.profile.options.label" = "Options";
+"accessibility.tabs.profile.options.inputLabel1" = "Settings";
+"accessibility.tabs.profile.options.inputLabel2" = "More";
 "accessibility.tabs.profile.user-avatar.label" = "Profile photo";
 "accessibility.tabs.profile.user-avatar.hint" = "Displays a larger version.";
 "accessibility.tabs.profile.user-avatar.supporter.label" = "Supporter";
