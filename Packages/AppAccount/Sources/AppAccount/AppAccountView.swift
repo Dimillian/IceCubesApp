@@ -4,6 +4,7 @@ import Env
 import SwiftUI
 
 public struct AppAccountView: View {
+  @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var routerPath: RouterPath
   @EnvironmentObject private var appAccounts: AppAccountsManager
   @EnvironmentObject private var preferences: UserPreferences
@@ -90,6 +91,7 @@ public struct AppAccountView: View {
         VStack(alignment: .leading) {
           if let account = viewModel.account {
             EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
+              .foregroundColor(theme.labelColor)
             Text("\(account.username)@\(viewModel.appAccount.server)")
               .font(.scaledSubheadline)
               .emojiSize(Font.scaledSubheadlineFont.emojiSize)
