@@ -262,6 +262,9 @@ public struct StatusEditorView: View {
     } label: {
       HStack {
         Label(viewModel.visibility.title, systemImage: viewModel.visibility.iconName)
+          .accessibilityLabel("accessibility.editor.privacy.label")
+          .accessibilityValue(viewModel.visibility.title)
+          .accessibilityHint("accessibility.editor.privacy.hint")
         Image(systemName: "chevron.down")
       }
       .font(.scaledFootnote)

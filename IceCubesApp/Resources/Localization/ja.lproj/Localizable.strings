@@ -514,6 +514,8 @@
 "accessibility.editor.button.language" = "言語";
 "accessibility.editor.button.ai-prompt" = "AI prompt";
 "accessibility.editor.button.characters-remaining" = "Characters remaining";
+"accessibility.editor.privacy.label" = "Visibility";
+"accessibility.editor.privacy.hint" = "Changes post audience.";
 "accessibility.tabs.timeline.add-account" = "アカウントを追加";
 "accessibility.app-account.selector.accounts" = "アカウント";
 
