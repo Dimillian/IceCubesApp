@@ -45,43 +45,48 @@ struct AccountDetailHeaderView: View {
   }
 
   private var headerImageView: some View {
-    ZStack(alignment: .bottomTrailing) {
-      if reasons.contains(.placeholder) {
-        Rectangle()
-          .foregroundColor(theme.secondaryBackgroundColor)
-          .frame(height: Constants.headerHeight)
-      } else {
-        LazyImage(url: account.header) { state in
-          if let image = state.image {
-            image
-              .resizable()
-              .aspectRatio(contentMode: .fill)
-              .overlay(account.haveHeader ? .black.opacity(0.50) : .clear)
-              .frame(height: Constants.headerHeight)
-              .clipped()
-          } else if state.isLoading {
-            theme.secondaryBackgroundColor
-              .frame(height: Constants.headerHeight)
-              .shimmering()
-          } else {
-            theme.secondaryBackgroundColor
-              .frame(height: Constants.headerHeight)
-          }
-        }
-        .frame(height: Constants.headerHeight)
-      }
-    }
-    .background(theme.secondaryBackgroundColor)
-    .frame(height: Constants.headerHeight)
-    .contentShape(Rectangle())
-    .onTapGesture {
+    Button {
       guard account.haveHeader else {
         return
       }
       Task {
         await quickLook.prepareFor(urls: [account.header], selectedURL: account.header)
       }
+    } label: {
+      ZStack(alignment: .bottomTrailing) {
+        if reasons.contains(.placeholder) {
+          Rectangle()
+            .foregroundColor(theme.secondaryBackgroundColor)
+            .frame(height: Constants.headerHeight)
+        } else {
+          LazyImage(url: account.header) { state in
+            if let image = state.image {
+              image
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .overlay(account.haveHeader ? .black.opacity(0.50) : .clear)
+                .frame(height: Constants.headerHeight)
+                .clipped()
+            } else if state.isLoading {
+              theme.secondaryBackgroundColor
+                .frame(height: Constants.headerHeight)
+                .shimmering()
+            } else {
+              theme.secondaryBackgroundColor
+                .frame(height: Constants.headerHeight)
+            }
+          }
+          .frame(height: Constants.headerHeight)
+        }
+      }
+      .background(theme.secondaryBackgroundColor)
+      .frame(height: Constants.headerHeight)
     }
+    .accessibilityElement(children: .combine)
+    .accessibilityAddTraits(.isImage)
+    .accessibilityLabel("accessibility.tabs.profile.header-image.label")
+    .accessibilityHint("accessibility.tabs.profile.header-image.hint")
+    .accessibilityHidden(account.haveHeader == false)
   }
 
   private var accountAvatarView: some View {
