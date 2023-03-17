@@ -13,6 +13,7 @@ public struct TextView: View {
   private var getTextView: ((UITextView) -> Void)?
 
   var placeholderView: AnyView?
+  var placeholderText: String?
   var keyboard: UIKeyboardType = .default
 
   /// Makes a new TextView that supports `NSAttributedString`
@@ -41,6 +42,7 @@ public struct TextView: View {
       minHeight: calculatedHeight,
       maxHeight: calculatedHeight
     )
+    .accessibilityValue($text.wrappedValue.string.isEmpty ? (placeholderText ?? "") : $text.wrappedValue.string)
     .background(
       placeholderView?
         .foregroundColor(Color(.placeholderText))
