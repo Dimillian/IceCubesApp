@@ -50,7 +50,8 @@ public struct TextView: View {
         .font(.scaledBody)
         .padding(.horizontal, 0)
         .padding(.vertical, 0)
-        .opacity(isEmpty ? 1 : 0),
+        .opacity(isEmpty ? 1 : 0)
+        .accessibilityHidden(true),
       alignment: .topLeading
     )
   }
