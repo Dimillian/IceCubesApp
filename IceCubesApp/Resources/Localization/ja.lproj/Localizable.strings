@@ -166,6 +166,7 @@
 "settings.other.social-keyboard" = "ソーシャルメディア向けキーボードの有効化";
 "settings.other.sound-effect" = "サウンドエフェクトを有効化";
 "settings.general.translate" = "翻訳設定";
+"settings.translation.navigation-title" = "翻訳設定";
 "settings.translation.always-deepl" = "DeepLを使用して常に翻訳する";
 "settings.translation.user-api-key" = "DeepL APIキー";
 "settings.translation.api-key-type" = "キーのタイプ";

@@ -163,6 +163,7 @@
 "settings.other.sound-effect" = "Włącz efekty dźwiękowe";
 "settings.push.duplicate.title" = "Korektor duplikatów powiadomień";
 "settings.general.translate" = "Ustawienia tłumaczenia";
+"settings.translation.navigation-title" = "Ustawienia tłumaczenia";
 "settings.translation.always-deepl" = "Zawsze tłumacz przy pomocy DeepL";
 "settings.translation.user-api-key" = "Klucz DeepL API";
 "settings.translation.api-key-type" = "Rodzaj klucza";

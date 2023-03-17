@@ -162,6 +162,7 @@
 "settings.other.social-keyboard" = "SNS 키보드";
 "settings.other.sound-effect" = "효과음";
 "settings.general.translate" = "번역 설정";
+"settings.translation.navigation-title" = "번역 설정";
 "settings.translation.always-deepl" = "항상 DeepL을 통해 번역";
 "settings.translation.user-api-key" = "DeepL API 키";
 "settings.translation.api-key-type" = "API 키 종류";

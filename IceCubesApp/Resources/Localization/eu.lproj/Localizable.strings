@@ -142,6 +142,7 @@
 "settings.other.social-keyboard" = "Gaitu teklatu soziala";
 "settings.other.sound-effect" = "Gaitu soinu efektuak";
 "settings.general.translate" = "Itzulpen ezarpenak";
+"settings.translation.navigation-title" = "Itzulpen ezarpenak";
 "settings.translation.always-deepl" = "Itzuli beti DeepL erabiliz";
 "settings.translation.user-api-key" = "DeepL API gakoa";
 "settings.translation.api-key-type" = "Gako mota";

@@ -166,6 +166,7 @@
 "settings.other.social-keyboard" = "Увімкнути Social Keyboard";
 "settings.other.sound-effect" = "Увімкнути звукові ефекти";
 "settings.general.translate" = "Translation Settings";
+"settings.translation.navigation-title" = "Translation";
 "settings.translation.always-deepl" = "Always Translate using DeepL";
 "settings.translation.user-api-key" = "DeepL API Key";
 "settings.translation.api-key-type" = "Type of the Key";
