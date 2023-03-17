@@ -503,10 +503,10 @@
 "accessibility.editor.button.drafts" = "Zirriborroak";
 "accessibility.editor.button.custom-emojis" = "Instantziaren emojiak";
 "accessibility.editor.button.language" = "Hizkuntza";
-"accessibility.editor.button.ai-prompt" = "AI prompt";
-"accessibility.editor.button.characters-remaining" = "Characters remaining";
-"accessibility.editor.privacy.label" = "Visibility";
-"accessibility.editor.privacy.hint" = "Changes post audience.";
+"accessibility.editor.button.ai-prompt" = "AA eskaera";
+"accessibility.editor.button.characters-remaining" = "Geratzen diren karaktereak";
+"accessibility.editor.privacy.label" = "Ikusgaitasuna";
+"accessibility.editor.privacy.hint" = "Nork ikus dezakeen aldatzen du.";
 "accessibility.tabs.timeline.add-account" = "Gehitu kontua";
 "accessibility.app-account.selector.accounts" = "Kontuak";
 
