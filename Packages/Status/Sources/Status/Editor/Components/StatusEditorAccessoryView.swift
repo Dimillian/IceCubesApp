@@ -176,6 +176,7 @@ struct StatusEditorAccessoryView: View {
         ProgressView()
       } else {
         Image(systemName: "faxmachine")
+          .accessibilityLabel("accessibility.editor.button.ai-prompt")
       }
     }
   }

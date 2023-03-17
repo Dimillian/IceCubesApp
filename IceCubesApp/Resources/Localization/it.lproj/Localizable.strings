@@ -512,6 +512,7 @@
 "accessibility.editor.button.drafts" = "Bozze";
 "accessibility.editor.button.custom-emojis" = "Emoji personalizzate";
 "accessibility.editor.button.language" = "Lingua";
+"accessibility.editor.button.ai-prompt" = "AI prompt";
 "accessibility.tabs.timeline.add-account" = "Aggiungi account";
 "accessibility.app-account.selector.accounts" = "Account";
 

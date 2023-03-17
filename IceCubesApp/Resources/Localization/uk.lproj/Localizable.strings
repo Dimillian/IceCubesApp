@@ -513,6 +513,7 @@
 "accessibility.editor.button.drafts" = "Чернетка";
 "accessibility.editor.button.custom-emojis" = "Власні emojis";
 "accessibility.editor.button.language" = "Мова";
+"accessibility.editor.button.ai-prompt" = "AI prompt";
 "accessibility.tabs.timeline.add-account" = "Додати профіль";
 "accessibility.app-account.selector.accounts" = "Профілі";
 

@@ -507,6 +507,7 @@
 "accessibility.editor.button.drafts" = "Entwürfe";
 "accessibility.editor.button.custom-emojis" = "Eigene Emojis";
 "accessibility.editor.button.language" = "Sprache";
+"accessibility.editor.button.ai-prompt" = "AI prompt";
 "accessibility.tabs.timeline.add-account" = "Konto hinzufügen";
 "accessibility.app-account.selector.accounts" = "Konten";
 
