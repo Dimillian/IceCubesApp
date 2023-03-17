@@ -122,6 +122,7 @@ struct AccountDetailHeaderView: View {
         } label: {
           makeCustomInfoLabel(title: "account.posts", count: account.statusesCount)
         }
+        .accessibilityHint("accessibility.tabs.profile.post-count.hint")
         .buttonStyle(.borderless)
 
         Button {
@@ -129,6 +130,7 @@ struct AccountDetailHeaderView: View {
         } label: {
           makeCustomInfoLabel(title: "account.following", count: account.followingCount)
         }
+        .accessibilityHint("accessibility.tabs.profile.following-count.hint")
         .buttonStyle(.borderless)
 
         Button {
@@ -140,6 +142,7 @@ struct AccountDetailHeaderView: View {
             needsBadge: currentAccount.account?.id == account.id && !currentAccount.followRequests.isEmpty
           )
         }
+        .accessibilityHint("accessibility.tabs.profile.follower-count.hint")
         .buttonStyle(.borderless)
 
       }.offset(y: 20)
@@ -233,6 +236,9 @@ struct AccountDetailHeaderView: View {
         .font(.scaledFootnote)
         .foregroundColor(.gray)
     }
+    .accessibilityElement(children: .ignore)
+    .accessibilityLabel(title)
+    .accessibilityValue("\(count)")
   }
 
   @ViewBuilder

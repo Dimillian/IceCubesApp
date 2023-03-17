@@ -518,6 +518,9 @@
 "accessibility.tabs.profile.user-avatar.label" = "Profile photo";
 "accessibility.tabs.profile.user-avatar.hint" = "Displays a larger version.";
 "accessibility.tabs.profile.user-avatar.supporter.label" = "Supporter";
+"accessibility.tabs.profile.post-count.hint" = "Scrolls to list";
+"accessibility.tabs.profile.following-count.hint" = "Navigates to list";
+"accessibility.tabs.profile.follower-count.hint" = "Navigates to list";
 
 // MARK: Report
 "report.comment.placeholder" = "Додаткова інформація";
