@@ -514,6 +514,7 @@
 "accessibility.editor.button.custom-emojis" = "Власні emojis";
 "accessibility.editor.button.language" = "Мова";
 "accessibility.editor.button.ai-prompt" = "AI prompt";
+"accessibility.editor.button.characters-remaining" = "Characters remaining";
 "accessibility.tabs.timeline.add-account" = "Додати профіль";
 "accessibility.app-account.selector.accounts" = "Профілі";
 

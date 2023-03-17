@@ -514,6 +514,7 @@
 "accessibility.editor.button.custom-emojis" = "Custom emojis";
 "accessibility.editor.button.language" = "Language";
 "accessibility.editor.button.ai-prompt" = "AI prompt";
+"accessibility.editor.button.characters-remaining" = "Characters remaining";
 "accessibility.tabs.timeline.add-account" = "Add Account";
 "accessibility.app-account.selector.accounts" = "Accounts";
 

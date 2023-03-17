@@ -518,6 +518,7 @@
 "accessibility.editor.button.custom-emojis" = "Уласныя эмодзі";
 "accessibility.editor.button.language" = "Мова";
 "accessibility.editor.button.ai-prompt" = "AI prompt";
+"accessibility.editor.button.characters-remaining" = "Characters remaining";
 "accessibility.tabs.timeline.add-account" = "Дадаць уліковы запіс";
 "accessibility.app-account.selector.accounts" = "Уліковыя запісы";
 

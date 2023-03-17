@@ -510,6 +510,7 @@
 "accessibility.editor.button.custom-emojis" = "Aangepaste emoji’s";
 "accessibility.editor.button.language" = "Taal";
 "accessibility.editor.button.ai-prompt" = "AI prompt";
+"accessibility.editor.button.characters-remaining" = "Characters remaining";
 "accessibility.tabs.timeline.add-account" = "Voeg account toe";
 "accessibility.app-account.selector.accounts" = "Accounts";
 

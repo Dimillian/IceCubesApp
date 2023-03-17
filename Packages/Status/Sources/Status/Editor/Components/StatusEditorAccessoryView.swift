@@ -308,6 +308,11 @@ struct StatusEditorAccessoryView: View {
     Text("\(value)")
       .foregroundColor(value < 0 ? .red : .secondary)
       .font(.scaledCallout)
+      .accessibilityLabel("accessibility.editor.button.characters-remaining")
+      .accessibilityValue("\(value)")
+      .accessibilityRemoveTraits(.isStaticText)
+      .accessibilityAddTraits(.updatesFrequently)
+      .accessibilityRespondsToUserInteraction(false)
   }
 
   private var recentlyUsedLanguages: [Language] {

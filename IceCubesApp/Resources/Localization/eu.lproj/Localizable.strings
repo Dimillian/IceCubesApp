@@ -503,6 +503,7 @@
 "accessibility.editor.button.custom-emojis" = "Instantziaren emojiak";
 "accessibility.editor.button.language" = "Hizkuntza";
 "accessibility.editor.button.ai-prompt" = "AI prompt";
+"accessibility.editor.button.characters-remaining" = "Characters remaining";
 "accessibility.tabs.timeline.add-account" = "Gehitu kontua";
 "accessibility.app-account.selector.accounts" = "Kontuak";
 
