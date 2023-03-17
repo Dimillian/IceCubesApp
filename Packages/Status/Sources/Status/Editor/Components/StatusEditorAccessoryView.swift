@@ -301,9 +301,12 @@ struct StatusEditorAccessoryView: View {
     .presentationDetents([.medium])
   }
 
+  @ViewBuilder
   private var characterCountView: some View {
-    Text("\((currentInstance.instance?.configuration?.statuses.maxCharacters ?? 500) + viewModel.statusTextCharacterLength)")
-      .foregroundColor(.secondary)
+    let value = (currentInstance.instance?.configuration?.statuses.maxCharacters ?? 500) + viewModel.statusTextCharacterLength
+
+    Text("\(value)")
+      .foregroundColor(value < 0 ? .red : .secondary)
       .font(.scaledCallout)
   }
 
