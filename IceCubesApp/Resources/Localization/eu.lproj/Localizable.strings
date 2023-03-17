@@ -504,6 +504,9 @@
 "accessibility.editor.button.language" = "Hizkuntza";
 "accessibility.tabs.timeline.add-account" = "Gehitu kontua";
 "accessibility.app-account.selector.accounts" = "Kontuak";
+"accessibility.tabs.profile.user-avatar.label" = "Profile photo";
+"accessibility.tabs.profile.user-avatar.hint" = "Displays a larger version.";
+"accessibility.tabs.profile.user-avatar.supporter.label" = "Supporter";
 
 // MARK: Report
 "report.comment.placeholder" = "Informazio gehigarria";

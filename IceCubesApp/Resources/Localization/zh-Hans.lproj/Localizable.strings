@@ -516,6 +516,9 @@
 "accessibility.editor.button.language" = "选择语言";
 "accessibility.tabs.timeline.add-account" = "添加账户";
 "accessibility.app-account.selector.accounts" = "账户";
+"accessibility.tabs.profile.user-avatar.label" = "Profile photo";
+"accessibility.tabs.profile.user-avatar.hint" = "Displays a larger version.";
+"accessibility.tabs.profile.user-avatar.supporter.label" = "Supporter";
 
 // MARK: Report
 "report.comment.placeholder" = "附加信息";

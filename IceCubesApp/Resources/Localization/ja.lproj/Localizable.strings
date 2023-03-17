@@ -514,6 +514,9 @@
 "accessibility.editor.button.language" = "言語";
 "accessibility.tabs.timeline.add-account" = "アカウントを追加";
 "accessibility.app-account.selector.accounts" = "アカウント";
+"accessibility.tabs.profile.user-avatar.label" = "Profile photo";
+"accessibility.tabs.profile.user-avatar.hint" = "Displays a larger version.";
+"accessibility.tabs.profile.user-avatar.supporter.label" = "Supporter";
 
 // MARK: Report
 "report.comment.placeholder" = "追加情報";

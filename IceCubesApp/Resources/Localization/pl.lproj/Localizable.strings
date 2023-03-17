@@ -506,6 +506,9 @@
 "accessibility.editor.button.language" = "Język";
 "accessibility.tabs.timeline.add-account" = "Dodaj konto";
 "accessibility.app-account.selector.accounts" = "Konta";
+"accessibility.tabs.profile.user-avatar.label" = "Profile photo";
+"accessibility.tabs.profile.user-avatar.hint" = "Displays a larger version.";
+"accessibility.tabs.profile.user-avatar.supporter.label" = "Supporter";
 
 // MARK: Report
 "report.comment.placeholder" = "Informacja dodatkowa";

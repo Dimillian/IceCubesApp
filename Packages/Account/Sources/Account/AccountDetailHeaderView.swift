@@ -86,25 +86,33 @@ struct AccountDetailHeaderView: View {
 
   private var accountAvatarView: some View {
     HStack {
-      ZStack(alignment: .topTrailing) {
-        AvatarView(url: account.avatar, size: .account)
-          .onTapGesture {
-            guard account.haveAvatar else {
-              return
-            }
-            Task {
-              await quickLook.prepareFor(urls: [account.avatar], selectedURL: account.avatar)
-            }
+      Button {
+        guard account.haveAvatar else {
+          return
+        }
+        Task {
+          await quickLook.prepareFor(urls: [account.avatar], selectedURL: account.avatar)
+        }
+      } label: {
+        ZStack(alignment: .topTrailing) {
+          AvatarView(url: account.avatar, size: .account)
+            .accessibilityLabel("accessibility.tabs.profile.user-avatar.label")
+          if viewModel.isCurrentUser, isSupporter {
+            Image(systemName: "checkmark.seal.fill")
+              .resizable()
+              .frame(width: 25, height: 25)
+              .foregroundColor(theme.tintColor)
+              .offset(x: theme.avatarShape == .circle ? 0 : 10,
+                      y: theme.avatarShape == .circle ? 0 : -10)
+              .accessibilityRemoveTraits(.isSelected)
+              .accessibilityLabel("accessibility.tabs.profile.user-avatar.supporter.label")
           }
-        if viewModel.isCurrentUser, isSupporter {
-          Image(systemName: "checkmark.seal.fill")
-            .resizable()
-            .frame(width: 25, height: 25)
-            .foregroundColor(theme.tintColor)
-            .offset(x: theme.avatarShape == .circle ? 0 : 10,
-                    y: theme.avatarShape == .circle ? 0 : -10)
         }
       }
+      .accessibilityElement(children: .combine)
+      .accessibilityAddTraits(.isImage)
+      .accessibilityHint("accessibility.tabs.profile.user-avatar.hint")
+      .accessibilityHidden(account.haveAvatar == false)
       Spacer()
       Group {
         Button {

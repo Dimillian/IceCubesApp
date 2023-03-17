@@ -519,6 +519,9 @@
 "accessibility.editor.button.language" = "Мова";
 "accessibility.tabs.timeline.add-account" = "Дадаць уліковы запіс";
 "accessibility.app-account.selector.accounts" = "Уліковыя запісы";
+"accessibility.tabs.profile.user-avatar.label" = "Profile photo";
+"accessibility.tabs.profile.user-avatar.hint" = "Displays a larger version.";
+"accessibility.tabs.profile.user-avatar.supporter.label" = "Supporter";
 
 // MARK: Report
 "report.comment.placeholder" = "Дадатковая інфармацыя";
