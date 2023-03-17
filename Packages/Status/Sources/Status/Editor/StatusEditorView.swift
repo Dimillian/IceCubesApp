@@ -66,7 +66,7 @@ public struct StatusEditorView: View {
           }
           .padding(.top, 8)
           .padding(.bottom, 40)
-        }
+        }.accessibilitySortPriority(1) // Ensure that all elements inside the `ScrollView` occur earlier than the accessory views
         VStack(alignment: .leading, spacing: 0) {
           StatusEditorAutoCompleteView(viewModel: viewModel)
           StatusEditorAccessoryView(isSpoilerTextFocused: $isSpoilerTextFocused,
