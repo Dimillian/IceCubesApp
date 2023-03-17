@@ -275,10 +275,13 @@ struct StatusEditorAccessoryView: View {
                   .resizable()
                   .aspectRatio(contentMode: .fill)
                   .frame(width: 40, height: 40)
+                  .accessibilityLabel(emoji.shortcode.replacingOccurrences(of: "_", with: " "))
+                  .accessibilityAddTraits(.isButton)
               } else if state.isLoading {
                 Rectangle()
                   .fill(Color.gray)
                   .frame(width: 40, height: 40)
+                  .accessibility(hidden: true)
                   .shimmering()
               }
             }
