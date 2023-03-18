@@ -211,26 +211,46 @@ private struct ConditionalAccessibilityLabelModifier: ViewModifier {
 
   @ObservedObject var viewModel: StatusRowViewModel
   let setLabel: Bool
-  
+
+  var hasSpoiler: Bool {
+    viewModel.displaySpoiler && viewModel.finalStatus.spoilerText.asRawText.isEmpty == false
+  }
+
+  // viewModel.finalStatus.spoilerText.asRawText
   func body(content: Content) -> some View {
     if setLabel {
-      content
-        .accessibilityLabel(
-          Text(viewModel.finalStatus.account.displayNameWithoutEmojis.count < 4
-            ? viewModel.finalStatus.account.safeDisplayName
-            : viewModel.finalStatus.account.displayNameWithoutEmojis
-          ) + Text(". ") +
-          Text(viewModel.finalStatus.content.asRawText) + Text(", ") +
-          boostLabel() +
-          replyLabel() +
-          Text(viewModel.finalStatus.createdAt.relativeFormatted) + Text(". ") +
-          Text("status.summary.n-replies \(viewModel.finalStatus.repliesCount)") + Text(", ") +
-          Text("status.summary.n-boosts \(viewModel.finalStatus.reblogsCount)") + Text(", ") +
-          Text("status.summary.n-favorites \(viewModel.finalStatus.favouritesCount)")
-        )
+      if hasSpoiler {
+        // Use the spoiler text in the label and place the full text as custom content
+        content
+          .accessibilityLabel(combinedAccessibilityLabel())
+          .accessibilityCustomContent(
+            LocalizedStringKey("accessibility.status.spoiler-full-content"),
+            viewModel.finalStatus.content.asRawText
+          )
+      } else {
+        content
+          .accessibilityLabel(combinedAccessibilityLabel())
+      }
     } else {
       content
     }
+  }
+
+  func combinedAccessibilityLabel() -> Text {
+    Text(viewModel.finalStatus.account.displayNameWithoutEmojis.count < 4
+      ? viewModel.finalStatus.account.safeDisplayName
+      : viewModel.finalStatus.account.displayNameWithoutEmojis
+    ) + Text(". ") +
+    Text(hasSpoiler
+      ? viewModel.finalStatus.spoilerText.asRawText
+      : viewModel.finalStatus.content.asRawText
+    ) + Text(", ") +
+    boostLabel() +
+    replyLabel() +
+    Text(viewModel.finalStatus.createdAt.relativeFormatted) + Text(". ") +
+    Text("status.summary.n-replies \(viewModel.finalStatus.repliesCount)") + Text(", ") +
+    Text("status.summary.n-boosts \(viewModel.finalStatus.reblogsCount)") + Text(", ") +
+    Text("status.summary.n-favorites \(viewModel.finalStatus.favouritesCount)")
   }
 
   func replyLabel() -> Text {

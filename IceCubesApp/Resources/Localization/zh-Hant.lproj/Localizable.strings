@@ -534,6 +534,7 @@
 "accessibility.tabs.profile.picker.posts-and-replies" = "Posts and replies";
 "accessibility.tabs.profile.picker.media" = "Media";
 "accessibility.tabs.profile.picker.lists" = "Lists";
+"accessibility.status.spoiler-full-content" = "Full Content";
 
 // MARK: Report
 "report.comment.placeholder" = "附加資訊";
