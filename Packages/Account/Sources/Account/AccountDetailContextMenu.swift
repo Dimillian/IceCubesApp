@@ -150,6 +150,17 @@ public struct AccountDetailContextMenu: View {
           Divider()
         }
 
+        if let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier
+        {
+          Button {
+            Task {
+              await viewModel.translate(userLang: lang)
+            }
+          } label: {
+            Label("status.action.translate", systemImage: "captions.bubble")
+          }
+        }
+
         if viewModel.relationship?.following == true {
           Button {
             routerPath.presentedSheet = .listAddAccount(account: account)

@@ -48,7 +48,7 @@ public struct DeepLClient {
     deeplUserAPIFree = userAPIFree
   }
 
-  public func request(target: String, text: String) async throws -> StatusTranslation {
+  public func request(target: String, text: String) async throws -> Translation {
     do {
       var components = URLComponents(string: endpoint)!
       var queryItems: [URLQueryItem] = []
