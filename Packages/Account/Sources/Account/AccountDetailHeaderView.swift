@@ -165,21 +165,31 @@ struct AccountDetailHeaderView: View {
               .emojiSize(Font.scaledHeadlineFont.emojiSize)
               .emojiBaselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
               .accessibilityAddTraits(.isHeader)
+
+            // The views here are wrapped in ZStacks as a Text(Image) does not provide an `accessibilityLabel`.
             if account.bot {
-              Text(Image(systemName: "poweroutlet.type.b.fill"))
-                .font(.footnote)
+              ZStack {
+                Text(Image(systemName: "poweroutlet.type.b.fill"))
+                  .font(.footnote)
+              }.accessibilityLabel("accessibility.tabs.profile.user.account-bot.label")
             }
             if account.locked {
-              Text(Image(systemName: "lock.fill"))
-                .font(.footnote)
+              ZStack {
+                Text(Image(systemName: "lock.fill"))
+                  .font(.footnote)
+              }.accessibilityLabel("accessibility.tabs.profile.user.account-private.label")
             }
             if viewModel.relationship?.blocking == true {
-              Text(Image(systemName: "person.crop.circle.badge.xmark.fill"))
-                .font(.footnote)
+              ZStack {
+                Text(Image(systemName: "person.crop.circle.badge.xmark.fill"))
+                  .font(.footnote)
+              }.accessibilityLabel("accessibility.tabs.profile.user.account-blocked.label")
             }
             if viewModel.relationship?.muting == true {
-              Text(Image(systemName: "speaker.slash.fill"))
-                .font(.footnote)
+              ZStack {
+                Text(Image(systemName: "speaker.slash.fill"))
+                  .font(.footnote)
+              }.accessibilityLabel("accessibility.tabs.profile.user.account-muted.label")
             }
           }
           Text("@\(account.acct)")

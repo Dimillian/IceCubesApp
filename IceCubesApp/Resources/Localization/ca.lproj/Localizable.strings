@@ -520,6 +520,10 @@
 "accessibility.tabs.profile.user-avatar.label" = "Profile photo";
 "accessibility.tabs.profile.user-avatar.hint" = "Displays a larger version.";
 "accessibility.tabs.profile.user-avatar.supporter.label" = "Supporter";
+"accessibility.tabs.profile.user.account-bot.label" = "Bot account";
+"accessibility.tabs.profile.user.account-blocked.label" = "Blocked";
+"accessibility.tabs.profile.user.account-muted.label" = "Muted";
+"accessibility.tabs.profile.user.account-private.label" = "Private account";
 "accessibility.tabs.profile.header-image.label" = "Header image";
 "accessibility.tabs.profile.header-image.hint" = "Displays a larger version.";
 "accessibility.tabs.profile.post-count.hint" = "Scrolls to list.";
