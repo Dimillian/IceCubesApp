@@ -115,9 +115,7 @@ public struct StatusRowView: View {
       viewModel.navigateToDetail()
     }
     .accessibilityActions {
-      if UIAccessibility.isVoiceOverRunning {
-        accessibilityActions
-      }
+      accessibilityActions
     }
     .background {
       Color.clear
@@ -172,8 +170,6 @@ public struct StatusRowView: View {
     Button("@\(viewModel.status.account.username)") {
       viewModel.routerPath.navigate(to: .accountDetail(id: viewModel.status.account.id))
     }
-
-    contextMenu
   }
 
   private func makeFilterView(filter: Filter) -> some View {
