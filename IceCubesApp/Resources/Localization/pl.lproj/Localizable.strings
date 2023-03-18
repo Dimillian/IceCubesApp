@@ -472,6 +472,7 @@
 "status.show-full-post" = "Pokaż cały post";
 "status.summary.at-time" = " o ";
 "status.summary.edited-time" = "Ostatnia edycja: ";
+"status.summary.n-replies %lld" = "%lld replies";
 "status.visibility.direct" = "Post bezpośredni";
 "status.visibility.follower" = "Tylko obserwujący";
 "status.visibility.public" = "Publiczny";

@@ -480,6 +480,7 @@
 "status.show-full-post" = "전체 내용 보기";
 "status.summary.at-time" = " ";
 "status.summary.edited-time" = "마지막 수정: ";
+"status.summary.n-replies %lld" = "%lld replies";
 "status.summary.n-boosts %lld" = "부스트 %lld회";
 "status.summary.n-favorites %lld" = "좋아요 %lld회";
 "status.visibility.direct" = "언급된 사용자만";

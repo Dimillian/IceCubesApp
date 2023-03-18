@@ -477,6 +477,7 @@
 "status.show-full-post" = "Show full post";
 "status.summary.at-time" = " a les ";
 "status.summary.edited-time" = "Darrera edició: ";
+"status.summary.n-replies %lld" = "%lld replies";
 "status.summary.n-boosts %lld" = "%lld impulsos";
 "status.summary.n-favorites %lld" = "%lld preferits";
 "status.visibility.direct" = "Privat";

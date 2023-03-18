@@ -66,10 +66,6 @@ public struct StatusRowView: View {
                   viewModel.navigateToDetail()
                 }
             }
-            .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
-            .accessibilityAction {
-              viewModel.navigateToDetail()
-            }
             if viewModel.showActions, viewModel.isFocused || theme.statusActionsDisplay != .none, !isInCaptureMode {
               StatusRowActionsView(viewModel: viewModel)
                 .padding(.top, 8)
@@ -114,6 +110,10 @@ public struct StatusRowView: View {
                          bottom: 12,
                          trailing: .layoutPadding))
     .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
+    .modifier(ConditionalAccessibilityLabelModifier(viewModel: viewModel, setLabel: viewModel.isFocused == false))
+    .accessibilityAction {
+      viewModel.navigateToDetail()
+    }
     .accessibilityActions {
       if UIAccessibility.isVoiceOverRunning {
         accessibilityActions
@@ -203,5 +203,57 @@ public struct StatusRowView: View {
     }
     .background(Color.black.opacity(0.40))
     .transition(.opacity)
+  }
+}
+
+/// A ``ViewModifier`` that creates a suitable combined accessibility label for a `StatusRowView` that is not focused.
+private struct ConditionalAccessibilityLabelModifier: ViewModifier {
+
+  @ObservedObject var viewModel: StatusRowViewModel
+  let setLabel: Bool
+  
+  func body(content: Content) -> some View {
+    if setLabel {
+      content
+        .accessibilityLabel(
+          Text(viewModel.finalStatus.account.displayNameWithoutEmojis.count < 4
+            ? viewModel.finalStatus.account.safeDisplayName
+            : viewModel.finalStatus.account.displayNameWithoutEmojis
+          ) + Text(". ") +
+          Text(viewModel.finalStatus.content.asRawText) + Text(", ") +
+          boostLabel() +
+          replyLabel() +
+          Text(viewModel.finalStatus.createdAt.relativeFormatted) + Text(". ") +
+          Text("status.summary.n-replies \(viewModel.finalStatus.repliesCount)") + Text(", ") +
+          Text("status.summary.n-boosts \(viewModel.finalStatus.reblogsCount)") + Text(", ") +
+          Text("status.summary.n-favorites \(viewModel.finalStatus.favouritesCount)")
+        )
+    } else {
+      content
+    }
+  }
+
+  func replyLabel() -> Text {
+    if let accountId = viewModel.status.inReplyToAccountId,
+       let mention = viewModel.status.mentions.first(where: { $0.id == accountId })
+    {
+        return Text("status.row.was-reply")
+          + Text(" ")
+          + Text(mention.username)
+          + Text(", ")
+    } else {
+      return Text("")
+    }
+  }
+
+  func boostLabel() -> Text {
+    if viewModel.status.reblog != nil {
+      return Text(viewModel.status.account.safeDisplayName)
+        + Text(" ")
+        + Text("status.row.was-boosted")
+        + Text(", ")
+    } else {
+      return Text("")
+    }
   }
 }

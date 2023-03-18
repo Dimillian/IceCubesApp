@@ -478,6 +478,7 @@
 "status.show-full-post" = "Show full post";
 "status.summary.at-time" = "kl ";
 "status.summary.edited-time" = "Sist redigert: ";
+"status.summary.n-replies %lld" = "%lld replies";
 "status.summary.n-boosts %lld" = "%lld forsterkninger";
 "status.summary.n-favorites %lld" = "%lld favoritter";
 "status.visibility.direct" = "Privat";

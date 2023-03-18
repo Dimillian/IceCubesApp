@@ -478,6 +478,7 @@
 "status.show-full-post" = "投稿をすべて表示";
 "status.summary.at-time" = " ";
 "status.summary.edited-time" = "最新編集日: ";
+"status.summary.n-replies %lld" = "%lld replies";
 "status.summary.n-boosts %lld" = "%lld ブースト";
 "status.summary.n-favorites %lld" = "%lld お気に入り";
 "status.visibility.direct" = "指定された相手のみ";

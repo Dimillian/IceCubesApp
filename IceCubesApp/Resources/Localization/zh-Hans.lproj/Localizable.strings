@@ -477,6 +477,7 @@
 "status.show-full-post" = "显示全文";
 "status.summary.at-time" = " 在 ";
 "status.summary.edited-time" = "上次编辑：";
+"status.summary.n-replies %lld" = "%lld replies";
 "status.summary.n-boosts %lld" = "%lld 转发";
 "status.summary.n-favorites %lld" = "%lld 喜欢";
 "status.visibility.direct" = "私密";

@@ -474,6 +474,7 @@
 "status.show-full-post" = "Show full post";
 "status.summary.at-time" = " de ";
 "status.summary.edited-time" = "Son düzenleme: ";
+"status.summary.n-replies %lld" = "%lld replies";
 "status.summary.n-boosts %lld" = "%lld yükseltmeler";
 "status.summary.n-favorites %lld" = "%lld favoriler";
 "status.visibility.direct" = "Gizli";

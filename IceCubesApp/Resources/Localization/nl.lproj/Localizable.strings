@@ -472,6 +472,7 @@
 "status.show-full-post" = "Toon volledige post";
 "status.summary.at-time" = " om ";
 "status.summary.edited-time" = "Laatst gewijzigd: ";
+"status.summary.n-replies %lld" = "%lld replies";
 "status.summary.n-boosts %lld" = "%lld boosts";
 "status.summary.n-favorites %lld" = "%lld favorieten";
 "status.visibility.direct" = "Direct bericht";

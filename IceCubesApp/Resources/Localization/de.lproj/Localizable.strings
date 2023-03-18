@@ -473,6 +473,7 @@
 "status.show-more" = "Mehr anzeigen";
 "status.show-full-post" = "Ganzen Beitrag anzeigen";
 "status.summary.at-time" = " um ";
+"status.summary.n-replies %lld" = "%lld replies";
 "status.summary.n-boosts %lld" = "%lld Boosts";
 "status.summary.n-favorites %lld" = "%lld Favoriten";
 "status.summary.edited-time" = "Zuletzt bearbeitet: ";

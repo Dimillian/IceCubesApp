@@ -479,6 +479,7 @@
 "status.show-full-post" = "Показати весь допис";
 "status.summary.at-time" = " о ";
 "status.summary.edited-time" = "Востаннє змінено: ";
+"status.summary.n-replies %lld" = "%lld replies";
 "status.summary.n-boosts %lld" = "%lld поширень";
 "status.summary.n-favorites %lld" = "%lld вподобань";
 "status.visibility.direct" = "Особисте";

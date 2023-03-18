@@ -483,6 +483,7 @@
 "status.show-full-post" = "Show full post";
 "status.summary.at-time" = " а ";
 "status.summary.edited-time" = "Апошняе рэдагаванне:";
+"status.summary.n-replies %lld" = "%lld replies";
 "status.summary.n-boosts %lld" = "%lld павышаных";
 "status.summary.n-favorites %lld" = "%lld улюбёных";
 "status.visibility.direct" = "Прыватны";

@@ -478,6 +478,7 @@
 "status.show-full-post" = "Show full post";
 "status.summary.at-time" = " as ";
 "status.summary.edited-time" = "Última edição: ";
+"status.summary.n-replies %lld" = "%lld replies";
 "status.summary.n-boosts %lld" = "%lld boosts";
 "status.summary.n-favorites %lld" = "%lld favoritos";
 "status.visibility.direct" = "Privado";
