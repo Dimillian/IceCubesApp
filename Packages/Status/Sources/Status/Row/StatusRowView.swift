@@ -97,12 +97,14 @@ public struct StatusRowView: View {
       contextMenu
     }
     .swipeActions(edge: .trailing) {
-      if !isCompact {
+      // The actions associated with the swipes are exposed as custom accessibility actions and there is no way to remove them.
+      if !isCompact, UIAccessibility.isVoiceOverRunning == false {
         StatusRowSwipeView(viewModel: viewModel, mode: .trailing)
       }
     }
     .swipeActions(edge: .leading) {
-      if !isCompact {
+      // The actions associated with the swipes are exposed as custom accessibility actions and there is no way to remove them.
+      if !isCompact, UIAccessibility.isVoiceOverRunning == false {
         StatusRowSwipeView(viewModel: viewModel, mode: .leading)
       }
     }
