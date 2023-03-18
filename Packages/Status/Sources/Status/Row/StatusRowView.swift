@@ -248,12 +248,12 @@ private struct ConditionalAccessibilityLabelModifier: ViewModifier {
     Text(hasSpoiler
       ? viewModel.finalStatus.spoilerText.asRawText
       : viewModel.finalStatus.content.asRawText
-    ) + Text(" ") +
+    ) + Text(", ") +
     Text(hasSpoiler
       ? "status.editor.spoiler"
       : ""
-    ) + Text(" ") +
-    imageAltText() + Text(" ") +
+    ) + Text(", ") +
+    imageAltText() + Text(", ") +
     Text(viewModel.finalStatus.createdAt.relativeFormatted) + Text(", ") +
     Text("status.summary.n-replies \(viewModel.finalStatus.repliesCount)") + Text(", ") +
     Text("status.summary.n-boosts \(viewModel.finalStatus.reblogsCount)") + Text(", ") +
@@ -265,9 +265,9 @@ private struct ConditionalAccessibilityLabelModifier: ViewModifier {
       case (true, false):
         return Text("accessibility.status.a-replied-to-\(finalUserDisplayName())") + Text(" ")
       case (_, true):
-        return Text("accessibility.status.a-boosted-b-\(userDisplayName())-\(finalUserDisplayName())")  + Text(" ")
+        return Text("accessibility.status.a-boosted-b-\(userDisplayName())-\(finalUserDisplayName())")  + Text(", ")
       default:
-        return Text(userDisplayName()) + Text(" ")
+        return Text(userDisplayName()) + Text(", ")
     }
   }
 
