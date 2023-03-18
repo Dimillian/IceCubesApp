@@ -212,6 +212,17 @@ private struct ConditionalAccessibilityLabelModifier: ViewModifier {
     viewModel.displaySpoiler && viewModel.finalStatus.spoilerText.asRawText.isEmpty == false
   }
 
+  var isReply: Bool {
+    if let accountId = viewModel.status.inReplyToAccountId, viewModel.status.mentions.contains(where: { $0.id == accountId }) {
+      return true
+    }
+    return false
+  }
+
+  var isBoost: Bool {
+    viewModel.status.reblog != nil
+  }
+
   func body(content: Content) -> some View {
     if setLabel {
       if hasSpoiler {
@@ -220,7 +231,8 @@ private struct ConditionalAccessibilityLabelModifier: ViewModifier {
           .accessibilityLabel(combinedAccessibilityLabel())
           .accessibilityCustomContent(
             LocalizedStringKey("accessibility.status.spoiler-full-content"),
-            viewModel.finalStatus.content.asRawText
+            viewModel.finalStatus.content.asRawText,
+            importance: .high
           )
       } else {
         content
@@ -232,43 +244,41 @@ private struct ConditionalAccessibilityLabelModifier: ViewModifier {
   }
 
   func combinedAccessibilityLabel() -> Text {
-    Text(viewModel.finalStatus.account.displayNameWithoutEmojis.count < 4
-      ? viewModel.finalStatus.account.safeDisplayName
-      : viewModel.finalStatus.account.displayNameWithoutEmojis
-    ) + Text(". ") +
+    userNamePreamble() +
     Text(hasSpoiler
       ? viewModel.finalStatus.spoilerText.asRawText
       : viewModel.finalStatus.content.asRawText
-    ) + Text(", ") +
-    boostLabel() +
-    replyLabel() +
-    Text(viewModel.finalStatus.createdAt.relativeFormatted) + Text(". ") +
+    ) + Text(" ") +
+    Text(hasSpoiler
+      ? "status.editor.spoiler"
+      : ""
+    ) + Text(" ") +
+    Text(viewModel.finalStatus.createdAt.relativeFormatted) + Text(", ") +
     Text("status.summary.n-replies \(viewModel.finalStatus.repliesCount)") + Text(", ") +
     Text("status.summary.n-boosts \(viewModel.finalStatus.reblogsCount)") + Text(", ") +
     Text("status.summary.n-favorites \(viewModel.finalStatus.favouritesCount)")
   }
 
-  func replyLabel() -> Text {
-    if let accountId = viewModel.status.inReplyToAccountId,
-       let mention = viewModel.status.mentions.first(where: { $0.id == accountId })
-    {
-        return Text("status.row.was-reply")
-          + Text(" ")
-          + Text(mention.username)
-          + Text(", ")
-    } else {
-      return Text("")
+  func userNamePreamble() -> Text {
+    switch (isReply, isBoost) {
+      case (true, false):
+        return Text("accessibility.status.a-replied-to-\(finalUserDisplayName())") + Text(" ")
+      case (_, true):
+        return Text("accessibility.status.a-boosted-b-\(userDisplayName())-\(finalUserDisplayName())")  + Text(" ")
+      default:
+        return Text(userDisplayName()) + Text(" ")
     }
   }
 
-  func boostLabel() -> Text {
-    if viewModel.status.reblog != nil {
-      return Text(viewModel.status.account.safeDisplayName)
-        + Text(" ")
-        + Text("status.row.was-boosted")
-        + Text(", ")
-    } else {
-      return Text("")
-    }
+  func userDisplayName() -> String {
+    viewModel.status.account.displayNameWithoutEmojis.count < 4
+      ? viewModel.status.account.safeDisplayName
+      : viewModel.status.account.displayNameWithoutEmojis
+  }
+
+  func finalUserDisplayName() -> String {
+    viewModel.finalStatus.account.displayNameWithoutEmojis.count < 4
+      ? viewModel.finalStatus.account.safeDisplayName
+      : viewModel.finalStatus.account.displayNameWithoutEmojis
   }
 }

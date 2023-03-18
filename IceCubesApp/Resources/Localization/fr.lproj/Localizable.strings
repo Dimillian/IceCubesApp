@@ -534,6 +534,8 @@
 "accessibility.tabs.profile.fields.verified.label" = "Verified";
 "accessibility.tabs.profile.fields.container.label" = "User-defined fields";
 "accessibility.status.spoiler-full-content" = "Full Content";
+"accessibility.status.a-boosted-b-%@-%@" = "%@ boosted %@";
+"accessibility.status.a-replied-to-%@" = "%@ replied to";
 
 // MARK: Report
 "report.comment.placeholder" = "Information supplémentaire";
