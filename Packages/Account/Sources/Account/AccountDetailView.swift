@@ -198,11 +198,14 @@ public struct AccountDetailView: View {
         ScrollView(.horizontal, showsIndicators: false) {
           LazyHStack(spacing: 0) {
             ForEach(viewModel.familiarFollowers) { account in
-              AvatarView(url: account.avatar, size: .badge)
-                .onTapGesture {
-                  routerPath.navigate(to: .accountDetailWithAccount(account: account))
-                }
-                .padding(.leading, -4)
+              Button {
+                routerPath.navigate(to: .accountDetailWithAccount(account: account))
+              } label: {
+                AvatarView(url: account.avatar, size: .badge)
+                  .padding(.leading, -4)
+                  .accessibilityLabel(account.safeDisplayName)
+
+              }.accessibilityAddTraits(.isImage)
             }
           }
           .padding(.leading, .layoutPadding + 4)
