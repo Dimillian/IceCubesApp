@@ -186,6 +186,7 @@ struct AccountDetailHeaderView: View {
             .font(.scaledCallout)
             .foregroundColor(.gray)
             .textSelection(.enabled)
+            .accessibilityRespondsToUserInteraction(false)
           joinedAtView
         }
         Spacer()
@@ -217,6 +218,7 @@ struct AccountDetailHeaderView: View {
         .environment(\.openURL, OpenURLAction { url in
           routerPath.handle(url: url)
         })
+        .accessibilityRespondsToUserInteraction(false)
 
       fieldsView
     }
