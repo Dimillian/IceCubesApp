@@ -319,6 +319,8 @@ struct AccountDetailHeaderView: View {
         }
       }
       .padding(8)
+      .accessibilityElement(children: .contain)
+      .accessibilityLabel("accessibility.tabs.profile.fields.container.label")
       .background(theme.secondaryBackgroundColor)
       .cornerRadius(4)
       .overlay(

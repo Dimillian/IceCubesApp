@@ -533,6 +533,7 @@
 "accessibility.tabs.profile.user-notifications.label" = "Receive notifications";
 "accessibility.tabs.profile.user-reblogs.label" = "Display boosts";
 "accessibility.tabs.profile.fields.verified.label" = "Verified";
+"accessibility.tabs.profile.fields.container.label" = "User-defined fields";
 "accessibility.status.spoiler-full-content" = "Full Content";
 
 // MARK: Report
