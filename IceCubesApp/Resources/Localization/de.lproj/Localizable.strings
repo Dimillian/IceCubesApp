@@ -508,10 +508,10 @@
 "accessibility.editor.button.drafts" = "Entwürfe";
 "accessibility.editor.button.custom-emojis" = "Eigene Emojis";
 "accessibility.editor.button.language" = "Sprache";
-"accessibility.editor.button.ai-prompt" = "AI prompt";
-"accessibility.editor.button.characters-remaining" = "Characters remaining";
-"accessibility.editor.privacy.label" = "Visibility";
-"accessibility.editor.privacy.hint" = "Changes post audience.";
+"accessibility.editor.button.ai-prompt" = "KI-Eingabe";
+"accessibility.editor.button.characters-remaining" = "Verbleibende Zeichen";
+"accessibility.editor.privacy.label" = "Sichtbarkeit";
+"accessibility.editor.privacy.hint" = "Ändert das Beitragspublikum.";
 "accessibility.tabs.timeline.add-account" = "Konto hinzufügen";
 "accessibility.app-account.selector.accounts" = "Konten";
 
