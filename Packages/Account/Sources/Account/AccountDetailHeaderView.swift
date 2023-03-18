@@ -188,7 +188,7 @@ struct AccountDetailHeaderView: View {
             .textSelection(.enabled)
             .accessibilityRespondsToUserInteraction(false)
           joinedAtView
-        }
+        }.accessibilityElement(children: .contain)
         Spacer()
         if let relationship = viewModel.relationship, !viewModel.isCurrentUser {
           HStack {
@@ -294,6 +294,7 @@ struct AccountDetailHeaderView: View {
                 if field.verifiedAt != nil {
                   Image(systemName: "checkmark.seal")
                     .foregroundColor(Color.green.opacity(0.80))
+                    .accessibilityHidden(true)
                 }
                 EmojiTextApp(field.value, emojis: viewModel.account?.emojis ?? [])
                   .emojiSize(Font.scaledBodyFont.emojiSize)
@@ -302,6 +303,7 @@ struct AccountDetailHeaderView: View {
                   .environment(\.openURL, OpenURLAction { url in
                     routerPath.handle(url: url)
                   })
+                  .accessibilityValue(field.verifiedAt != nil ? "accessibility.tabs.profile.fields.verified.label" : "")
               }
               .font(.scaledBody)
               if viewModel.fields.last != field {
@@ -311,6 +313,7 @@ struct AccountDetailHeaderView: View {
             }
             Spacer()
           }
+          .accessibilityElement(children: .combine)
         }
       }
       .padding(8)
