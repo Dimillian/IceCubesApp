@@ -55,6 +55,7 @@ public struct AccountDetailView: View {
           { tab in
             Image(systemName: tab.iconName)
               .tag(tab)
+              .accessibilityLabel(tab.accessibilityLabel)
           }
         }
         .pickerStyle(.segmented)

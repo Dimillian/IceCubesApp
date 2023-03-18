@@ -517,6 +517,13 @@
 "accessibility.tabs.profile.post-count.hint" = "Scrolls to list";
 "accessibility.tabs.profile.following-count.hint" = "Navigates to list";
 "accessibility.tabs.profile.follower-count.hint" = "Navigates to list";
+"accessibility.tabs.profile.picker.statuses" = "Posts";
+"accessibility.tabs.profile.picker.favorites" = "Favorites";
+"accessibility.tabs.profile.picker.bookmarks" = "Bookmarks";
+"accessibility.tabs.profile.picker.followed-tags" = "Tags";
+"accessibility.tabs.profile.picker.posts-and-replies" = "Posts and replies";
+"accessibility.tabs.profile.picker.media" = "Media";
+"accessibility.tabs.profile.picker.lists" = "Lists";
 
 // MARK: Report
 "report.comment.placeholder" = "Informacja dodatkowa";
