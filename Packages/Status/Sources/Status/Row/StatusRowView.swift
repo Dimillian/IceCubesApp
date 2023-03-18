@@ -116,7 +116,7 @@ public struct StatusRowView: View {
     .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
     .accessibilityActions {
       if UIAccessibility.isVoiceOverRunning {
-        accesibilityActions
+        accessibilityActions
       }
     }
     .background {
@@ -155,7 +155,7 @@ public struct StatusRowView: View {
   }
 
   @ViewBuilder
-  private var accesibilityActions: some View {
+  private var accessibilityActions: some View {
     // Add the individual mentions as accessibility actions
     ForEach(viewModel.status.mentions, id: \.id) { mention in
       Button("@\(mention.username)") {
