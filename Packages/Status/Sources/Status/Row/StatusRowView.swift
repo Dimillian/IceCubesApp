@@ -216,7 +216,6 @@ private struct ConditionalAccessibilityLabelModifier: ViewModifier {
     viewModel.displaySpoiler && viewModel.finalStatus.spoilerText.asRawText.isEmpty == false
   }
 
-  // viewModel.finalStatus.spoilerText.asRawText
   func body(content: Content) -> some View {
     if setLabel {
       if hasSpoiler {
