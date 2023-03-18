@@ -165,6 +165,7 @@ struct AccountDetailHeaderView: View {
               .foregroundColor(theme.labelColor)
               .emojiSize(Font.scaledHeadlineFont.emojiSize)
               .emojiBaselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
+              .accessibilityAddTraits(.isHeader)
             if account.bot {
               Text(Image(systemName: "poweroutlet.type.b.fill"))
                 .font(.footnote)

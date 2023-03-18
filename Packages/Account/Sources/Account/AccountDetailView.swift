@@ -194,6 +194,7 @@ public struct AccountDetailView: View {
         Text("account.detail.familiar-followers")
           .font(.scaledHeadline)
           .padding(.leading, .layoutPadding)
+          .accessibilityAddTraits(.isHeader)
         ScrollView(.horizontal, showsIndicators: false) {
           LazyHStack(spacing: 0) {
             ForEach(viewModel.familiarFollowers) { account in
