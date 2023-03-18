@@ -281,6 +281,7 @@ public struct AccountDetailView: View {
   private var pinnedPostsView: some View {
     if !viewModel.pinned.isEmpty {
       Label("account.post.pinned", systemImage: "pin.fill")
+        .accessibilityAddTraits(.isHeader)
         .font(.scaledFootnote)
         .foregroundColor(.gray)
         .fontWeight(.semibold)
