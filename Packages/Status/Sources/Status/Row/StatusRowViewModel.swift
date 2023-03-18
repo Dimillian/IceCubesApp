@@ -310,6 +310,10 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   func translateWithDeepL(userLang: String) async {
+    withAnimation {
+      isLoadingTranslation = true
+    }
+
     let deepLClient = getDeepLClient()
     let translation = try? await deepLClient.request(target: userLang,
                                                      text: finalStatus.content.asRawText)
