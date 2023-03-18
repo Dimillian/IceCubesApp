@@ -253,6 +253,7 @@ private struct ConditionalAccessibilityLabelModifier: ViewModifier {
       ? "status.editor.spoiler"
       : ""
     ) + Text(" ") +
+    imageAltText() + Text(" ") +
     Text(viewModel.finalStatus.createdAt.relativeFormatted) + Text(", ") +
     Text("status.summary.n-replies \(viewModel.finalStatus.repliesCount)") + Text(", ") +
     Text("status.summary.n-boosts \(viewModel.finalStatus.reblogsCount)") + Text(", ") +
@@ -280,5 +281,18 @@ private struct ConditionalAccessibilityLabelModifier: ViewModifier {
     viewModel.finalStatus.account.displayNameWithoutEmojis.count < 4
       ? viewModel.finalStatus.account.safeDisplayName
       : viewModel.finalStatus.account.displayNameWithoutEmojis
+  }
+
+  func imageAltText() -> Text {
+    let descriptions = viewModel.finalStatus.mediaAttachments
+      .compactMap(\.description)
+
+    if descriptions.count == 1 {
+      return Text("accessibility.image.alt-text-\(descriptions[0])")
+    } else if descriptions.count > 1 {
+      return Text("accessibility.image.alt-text-\(descriptions[0])") + Text(", ") + Text("accessibility.image.alt-text-more.label")
+    } else {
+      return Text("")
+    }
   }
 }

@@ -530,6 +530,8 @@
 "accessibility.status.spoiler-full-content" = "Full Content";
 "accessibility.status.a-boosted-b-%@-%@" = "%@ boosted %@";
 "accessibility.status.a-replied-to-%@" = "%@ replied to";
+"accessibility.image.alt-text-%@" = "Image alt text: %@";
+"accessibility.image.alt-text-more.label" = "More alt text available";
 
 // MARK: Report
 "report.comment.placeholder" = "Informazio gehigarria";
