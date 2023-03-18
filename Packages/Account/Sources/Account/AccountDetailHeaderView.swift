@@ -45,45 +45,44 @@ struct AccountDetailHeaderView: View {
   }
 
   private var headerImageView: some View {
-    Button {
+    ZStack(alignment: .bottomTrailing) {
+      if reasons.contains(.placeholder) {
+        Rectangle()
+          .foregroundColor(theme.secondaryBackgroundColor)
+          .frame(height: Constants.headerHeight)
+      } else {
+        LazyImage(url: account.header) { state in
+          if let image = state.image {
+            image
+              .resizable()
+              .aspectRatio(contentMode: .fill)
+              .overlay(account.haveHeader ? .black.opacity(0.50) : .clear)
+              .frame(height: Constants.headerHeight)
+              .clipped()
+          } else if state.isLoading {
+            theme.secondaryBackgroundColor
+              .frame(height: Constants.headerHeight)
+              .shimmering()
+          } else {
+            theme.secondaryBackgroundColor
+              .frame(height: Constants.headerHeight)
+          }
+        }
+        .frame(height: Constants.headerHeight)
+      }
+    }
+    .background(theme.secondaryBackgroundColor)
+    .frame(height: Constants.headerHeight)
+    .onTapGesture {
       guard account.haveHeader else {
         return
       }
       Task {
         await quickLook.prepareFor(urls: [account.header], selectedURL: account.header)
       }
-    } label: {
-      ZStack(alignment: .bottomTrailing) {
-        if reasons.contains(.placeholder) {
-          Rectangle()
-            .foregroundColor(theme.secondaryBackgroundColor)
-            .frame(height: Constants.headerHeight)
-        } else {
-          LazyImage(url: account.header) { state in
-            if let image = state.image {
-              image
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .overlay(account.haveHeader ? .black.opacity(0.50) : .clear)
-                .frame(height: Constants.headerHeight)
-                .clipped()
-            } else if state.isLoading {
-              theme.secondaryBackgroundColor
-                .frame(height: Constants.headerHeight)
-                .shimmering()
-            } else {
-              theme.secondaryBackgroundColor
-                .frame(height: Constants.headerHeight)
-            }
-          }
-          .frame(height: Constants.headerHeight)
-        }
-      }
-      .background(theme.secondaryBackgroundColor)
-      .frame(height: Constants.headerHeight)
     }
     .accessibilityElement(children: .combine)
-    .accessibilityAddTraits(.isImage)
+    .accessibilityAddTraits([.isImage, .isButton])
     .accessibilityLabel("accessibility.tabs.profile.header-image.label")
     .accessibilityHint("accessibility.tabs.profile.header-image.hint")
     .accessibilityHidden(account.haveHeader == false)
@@ -91,33 +90,33 @@ struct AccountDetailHeaderView: View {
 
   private var accountAvatarView: some View {
     HStack {
-      Button {
+      ZStack(alignment: .topTrailing) {
+        AvatarView(url: account.avatar, size: .account)
+          .accessibilityLabel("accessibility.tabs.profile.user-avatar.label")
+        if viewModel.isCurrentUser, isSupporter {
+          Image(systemName: "checkmark.seal.fill")
+            .resizable()
+            .frame(width: 25, height: 25)
+            .foregroundColor(theme.tintColor)
+            .offset(x: theme.avatarShape == .circle ? 0 : 10,
+                    y: theme.avatarShape == .circle ? 0 : -10)
+            .accessibilityRemoveTraits(.isSelected)
+            .accessibilityLabel("accessibility.tabs.profile.user-avatar.supporter.label")
+        }
+      }
+      .onTapGesture {
         guard account.haveAvatar else {
           return
         }
         Task {
           await quickLook.prepareFor(urls: [account.avatar], selectedURL: account.avatar)
         }
-      } label: {
-        ZStack(alignment: .topTrailing) {
-          AvatarView(url: account.avatar, size: .account)
-            .accessibilityLabel("accessibility.tabs.profile.user-avatar.label")
-          if viewModel.isCurrentUser, isSupporter {
-            Image(systemName: "checkmark.seal.fill")
-              .resizable()
-              .frame(width: 25, height: 25)
-              .foregroundColor(theme.tintColor)
-              .offset(x: theme.avatarShape == .circle ? 0 : 10,
-                      y: theme.avatarShape == .circle ? 0 : -10)
-              .accessibilityRemoveTraits(.isSelected)
-              .accessibilityLabel("accessibility.tabs.profile.user-avatar.supporter.label")
-          }
-        }
       }
       .accessibilityElement(children: .combine)
-      .accessibilityAddTraits(.isImage)
+      .accessibilityAddTraits([.isImage, .isButton])
       .accessibilityHint("accessibility.tabs.profile.user-avatar.hint")
       .accessibilityHidden(account.haveAvatar == false)
+
       Spacer()
       Group {
         Button {
