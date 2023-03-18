@@ -515,10 +515,10 @@
 "accessibility.editor.button.drafts" = "草稿";
 "accessibility.editor.button.custom-emojis" = "自定义表情";
 "accessibility.editor.button.language" = "选择语言";
-"accessibility.editor.button.ai-prompt" = "AI prompt";
-"accessibility.editor.button.characters-remaining" = "Characters remaining";
-"accessibility.editor.privacy.label" = "Visibility";
-"accessibility.editor.privacy.hint" = "Changes post audience.";
+"accessibility.editor.button.ai-prompt" = "AI 提示符";
+"accessibility.editor.button.characters-remaining" = "剩余字符";
+"accessibility.editor.privacy.label" = "可见度";
+"accessibility.editor.privacy.hint" = "更改嘟文可见度。";
 "accessibility.tabs.timeline.add-account" = "添加账户";
 "accessibility.app-account.selector.accounts" = "账户";
 
