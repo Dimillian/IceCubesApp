@@ -83,6 +83,9 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
     }
   }
 
+  @Published var translation: Translation?
+  @Published var isLoadingTranslation = false
+
   private(set) var account: Account?
   private var tabTask: Task<Void, Never>?
 
@@ -263,4 +266,22 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   func statusDidAppear(status _: Models.Status) {}
 
   func statusDidDisappear(status _: Status) {}
+
+  func translate(userLang: String) async {
+    guard let account else { return }
+    withAnimation {
+      isLoadingTranslation = true
+    }
+
+    let userAPIKey = DeepLUserAPIHandler.readIfAllowed()
+    let userAPIFree = UserPreferences.shared.userDeeplAPIFree
+    let deeplClient = DeepLClient(userAPIKey: userAPIKey, userAPIFree: userAPIFree)
+
+    let translation = try? await deeplClient.request(target: userLang, text: account.note.asRawText)
+
+    withAnimation {
+      self.translation = translation
+      isLoadingTranslation = false
+    }
+  }
 }
