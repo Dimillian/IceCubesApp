@@ -324,7 +324,7 @@ struct AccountDetailHeaderView: View {
             Spacer()
           }
           .accessibilityElement(children: .combine)
-          .modifier(ConditionalUserDefinedFieldAccessibilityActionModifier(string: field.value, routerPath: routerPath))
+          .modifier(ConditionalUserDefinedFieldAccessibilityActionModifier(field: field, routerPath: routerPath))
         }
       }
       .padding(8)
@@ -343,11 +343,11 @@ struct AccountDetailHeaderView: View {
 /// A ``ViewModifier`` that creates a attaches an accessibility action if the field value is a valid link
 private struct ConditionalUserDefinedFieldAccessibilityActionModifier: ViewModifier {
 
-  let string: HTMLString
+  let field: Account.Field
   let routerPath: RouterPath
 
   func body(content: Content) -> some View {
-    if let url = URL(string: string.asRawText), UIApplication.shared.canOpenURL(url) {
+    if let url = URL(string: field.value.asRawText), UIApplication.shared.canOpenURL(url) {
       content
         .accessibilityAction {
           let _ = routerPath.handle(url: url)
@@ -355,6 +355,7 @@ private struct ConditionalUserDefinedFieldAccessibilityActionModifier: ViewModif
         // SwiftUI will automatically decorate this element with the link trait, so we remove the button trait manually.
         // March 18th, 2023: The button trait is still re-applied…
         .accessibilityRemoveTraits(.isButton)
+        .accessibilityInputLabels([field.name])
     } else {
       content
         // This element is not interactive; setting this property removes its button trait
