@@ -521,6 +521,8 @@
 "accessibility.tabs.timeline.new-post.label" = "Compose";
 "accessibility.tabs.timeline.new-post.inputLabel1" = "New";
 "accessibility.tabs.timeline.new-post.inputLabel2" = "Create";
+"accessibility.tabs.timeline.unread-posts.label-%lld" = "%lld new posts";
+"accessibility.tabs.timeline.unread-posts.hint" = "Scrolls the timeline.";
 "accessibility.editor.button.characters-remaining" = "Characters remaining";
 "accessibility.editor.privacy.label" = "Visibility";
 "accessibility.editor.privacy.hint" = "Changes post audience.";
