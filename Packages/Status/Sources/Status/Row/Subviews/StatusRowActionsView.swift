@@ -53,24 +53,24 @@ struct StatusRowActionsView: View {
     func accessibilityLabel(dataController: StatusDataController, privateBoost: Bool = false) -> LocalizedStringKey {
       switch self {
       case .respond:
-          return "status.action.reply"
+        return "status.action.reply"
       case .boost:
-          if dataController.isReblogged {
-            return "status.action.unboost"
-          }
-          return privateBoost
-            ? "status.action.boost-to-followers"
-            : "status.action.boost"
+        if dataController.isReblogged {
+          return "status.action.unboost"
+        }
+        return privateBoost
+          ? "status.action.boost-to-followers"
+          : "status.action.boost"
       case .favorite:
-          return dataController.isFavorited
-            ? "status.action.unfavorite"
-            : "status.action.favorite"
+        return dataController.isFavorited
+          ? "status.action.unfavorite"
+          : "status.action.favorite"
       case .bookmark:
-          return dataController.isBookmarked
-            ? "status.action.unbookmark"
-            : "status.action.bookmark"
+        return dataController.isBookmarked
+          ? "status.action.unbookmark"
+          : "status.action.bookmark"
       case .share:
-          return "status.action.share"
+        return "status.action.share"
       }
     }
 

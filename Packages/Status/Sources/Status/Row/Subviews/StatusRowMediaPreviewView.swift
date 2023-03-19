@@ -337,7 +337,6 @@ public struct StatusRowMediaPreviewView: View {
 
 /// A ``ViewModifier`` that creates a suitable accessibility label for an image that may or may not have alt text
 private struct ConditionalAccessibilityLabelAltTextModifier: ViewModifier {
-
   let attachment: MediaAttachment
 
   func body(content: Content) -> some View {
@@ -349,4 +348,3 @@ private struct ConditionalAccessibilityLabelAltTextModifier: ViewModifier {
     }
   }
 }
-

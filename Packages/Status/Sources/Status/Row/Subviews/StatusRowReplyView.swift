@@ -16,8 +16,8 @@ struct StatusRowReplyView: View {
       .accessibilityElement(children: .combine)
       .accessibilityLabel(
         Text("status.row.was-reply")
-        + Text(" ")
-        + Text(mention.username)
+          + Text(" ")
+          + Text(mention.username)
       )
       .font(.scaledFootnote)
       .foregroundColor(.gray)

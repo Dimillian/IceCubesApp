@@ -1,7 +1,7 @@
 import Foundation
 import KeychainSwift
-import SwiftUI
 import Models
+import SwiftUI
 
 @MainActor
 public enum DeepLUserAPIHandler {

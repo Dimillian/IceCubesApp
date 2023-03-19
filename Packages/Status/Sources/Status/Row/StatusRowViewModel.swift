@@ -295,7 +295,7 @@ public class StatusRowViewModel: ObservableObject {
       do {
         // We first use instance translation API if available.
         let translation: Translation = try await client.post(endpoint: Statuses.translate(id: finalStatus.id,
-                                                                                                lang: userLang))
+                                                                                          lang: userLang))
         withAnimation {
           self.translation = translation
           isLoadingTranslation = false

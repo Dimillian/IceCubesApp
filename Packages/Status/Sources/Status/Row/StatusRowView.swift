@@ -204,7 +204,6 @@ public struct StatusRowView: View {
 
 /// A ``ViewModifier`` that creates a suitable combined accessibility label for a `StatusRowView` that is not focused.
 private struct ConditionalAccessibilityLabelModifier: ViewModifier {
-
   @ObservedObject var viewModel: StatusRowViewModel
   let setLabel: Bool
 
@@ -245,29 +244,29 @@ private struct ConditionalAccessibilityLabelModifier: ViewModifier {
 
   func combinedAccessibilityLabel() -> Text {
     userNamePreamble() +
-    Text(hasSpoiler
-      ? viewModel.finalStatus.spoilerText.asRawText
-      : viewModel.finalStatus.content.asRawText
-    ) + Text(", ") +
-    Text(hasSpoiler
-      ? "status.editor.spoiler"
-      : ""
-    ) + Text(", ") +
-    imageAltText() + Text(", ") +
-    Text(viewModel.finalStatus.createdAt.relativeFormatted) + Text(", ") +
-    Text("status.summary.n-replies \(viewModel.finalStatus.repliesCount)") + Text(", ") +
-    Text("status.summary.n-boosts \(viewModel.finalStatus.reblogsCount)") + Text(", ") +
-    Text("status.summary.n-favorites \(viewModel.finalStatus.favouritesCount)")
+      Text(hasSpoiler
+        ? viewModel.finalStatus.spoilerText.asRawText
+        : viewModel.finalStatus.content.asRawText
+      ) + Text(", ") +
+      Text(hasSpoiler
+        ? "status.editor.spoiler"
+        : ""
+      ) + Text(", ") +
+      imageAltText() + Text(", ") +
+      Text(viewModel.finalStatus.createdAt.relativeFormatted) + Text(", ") +
+      Text("status.summary.n-replies \(viewModel.finalStatus.repliesCount)") + Text(", ") +
+      Text("status.summary.n-boosts \(viewModel.finalStatus.reblogsCount)") + Text(", ") +
+      Text("status.summary.n-favorites \(viewModel.finalStatus.favouritesCount)")
   }
 
   func userNamePreamble() -> Text {
     switch (isReply, isBoost) {
-      case (true, false):
-        return Text("accessibility.status.a-replied-to-\(finalUserDisplayName())") + Text(" ")
-      case (_, true):
-        return Text("accessibility.status.a-boosted-b-\(userDisplayName())-\(finalUserDisplayName())")  + Text(", ")
-      default:
-        return Text(userDisplayName()) + Text(", ")
+    case (true, false):
+      return Text("accessibility.status.a-replied-to-\(finalUserDisplayName())") + Text(" ")
+    case (_, true):
+      return Text("accessibility.status.a-boosted-b-\(userDisplayName())-\(finalUserDisplayName())") + Text(", ")
+    default:
+      return Text(userDisplayName()) + Text(", ")
     }
   }
 

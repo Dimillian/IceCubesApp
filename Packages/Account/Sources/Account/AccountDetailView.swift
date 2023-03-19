@@ -363,7 +363,7 @@ public struct AccountDetailView: View {
           .accessibilityInputLabels([
             LocalizedStringKey("accessibility.tabs.profile.options.label"),
             LocalizedStringKey("accessibility.tabs.profile.options.inputLabel1"),
-            LocalizedStringKey("accessibility.tabs.profile.options.inputLabel2")
+            LocalizedStringKey("accessibility.tabs.profile.options.inputLabel2"),
           ])
       }
     }

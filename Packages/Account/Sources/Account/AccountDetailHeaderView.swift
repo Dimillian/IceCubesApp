@@ -364,7 +364,6 @@ struct AccountDetailHeaderView: View {
 
 /// A ``ViewModifier`` that creates a attaches an accessibility action if the field value is a valid link
 private struct ConditionalUserDefinedFieldAccessibilityActionModifier: ViewModifier {
-
   let field: Account.Field
   let routerPath: RouterPath
 

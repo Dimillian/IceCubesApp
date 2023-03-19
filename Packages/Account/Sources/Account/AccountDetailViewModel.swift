@@ -39,13 +39,13 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
 
     var accessibilityLabel: LocalizedStringKey {
       switch self {
-        case .statuses: return "accessibility.tabs.profile.picker.statuses"
-        case .favorites: return "accessibility.tabs.profile.picker.favorites"
-        case .bookmarks: return "accessibility.tabs.profile.picker.bookmarks"
-        case .followedTags: return "accessibility.tabs.profile.picker.followed-tags"
-        case .postsAndReplies: return "accessibility.tabs.profile.picker.posts-and-replies"
-        case .media: return "accessibility.tabs.profile.picker.media"
-        case .lists: return "accessibility.tabs.profile.picker.lists"
+      case .statuses: return "accessibility.tabs.profile.picker.statuses"
+      case .favorites: return "accessibility.tabs.profile.picker.favorites"
+      case .bookmarks: return "accessibility.tabs.profile.picker.bookmarks"
+      case .followedTags: return "accessibility.tabs.profile.picker.followed-tags"
+      case .postsAndReplies: return "accessibility.tabs.profile.picker.posts-and-replies"
+      case .media: return "accessibility.tabs.profile.picker.media"
+      case .lists: return "accessibility.tabs.profile.picker.lists"
       }
     }
   }
