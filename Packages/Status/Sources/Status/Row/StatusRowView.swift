@@ -1,6 +1,7 @@
 import DesignSystem
 import EmojiText
 import Env
+import Foundation
 import Models
 import Network
 import Shimmer
@@ -110,7 +111,12 @@ public struct StatusRowView: View {
                          bottom: 12,
                          trailing: .layoutPadding))
     .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
-    .modifier(ConditionalAccessibilityLabelModifier(viewModel: viewModel, setLabel: viewModel.isFocused == false))
+    .accessibilityLabel(viewModel.isFocused == false ? CombinedAccessibilityLabel(viewModel: viewModel).finalLabel() : Text(""))
+    .accessibilityCustomContent(
+      LocalizedStringKey("accessibility.status.spoiler-full-content"),
+      viewModel.finalStatus.content.asRawText,
+      importance: .high
+    )
     .accessibilityAction {
       viewModel.navigateToDetail()
     }
@@ -202,10 +208,9 @@ public struct StatusRowView: View {
   }
 }
 
-/// A ``ViewModifier`` that creates a suitable combined accessibility label for a `StatusRowView` that is not focused.
-private struct ConditionalAccessibilityLabelModifier: ViewModifier {
+/// A utility that creates a suitable combined accessibility label for a `StatusRowView` that is not focused.
+private struct CombinedAccessibilityLabel {
   @ObservedObject var viewModel: StatusRowViewModel
-  let setLabel: Bool
 
   var hasSpoiler: Bool {
     viewModel.displaySpoiler && viewModel.finalStatus.spoilerText.asRawText.isEmpty == false
@@ -222,27 +227,7 @@ private struct ConditionalAccessibilityLabelModifier: ViewModifier {
     viewModel.status.reblog != nil
   }
 
-  func body(content: Content) -> some View {
-    if setLabel {
-      if hasSpoiler {
-        // Use the spoiler text in the label and place the full text as custom content
-        content
-          .accessibilityLabel(combinedAccessibilityLabel())
-          .accessibilityCustomContent(
-            LocalizedStringKey("accessibility.status.spoiler-full-content"),
-            viewModel.finalStatus.content.asRawText,
-            importance: .high
-          )
-      } else {
-        content
-          .accessibilityLabel(combinedAccessibilityLabel())
-      }
-    } else {
-      content
-    }
-  }
-
-  func combinedAccessibilityLabel() -> Text {
+  func finalLabel() -> Text {
     userNamePreamble() +
       Text(hasSpoiler
         ? viewModel.finalStatus.spoilerText.asRawText
