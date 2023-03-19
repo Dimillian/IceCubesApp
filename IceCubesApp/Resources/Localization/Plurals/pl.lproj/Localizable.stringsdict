@@ -73,7 +73,7 @@
 			<key>other</key>
 			<string>%lld podbić</string>
 		</dict>
-	</dict>
+	</dict>	
 	<key>status.poll.n-votes %lld</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -91,7 +91,23 @@
 			<key>other</key>
 			<string>%lld głosów</string>
 		</dict>
-	</dict>
+	</dict>	
+	<key>status.summary.n-replies %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@statusRepliesCount@</string>
+		<key>statusRepliesCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%lld odpowiedź</string>
+			<key>other</key>
+			<string>%lld odpowiedzi</string>
+		</dict>
+	</dict>		
 	<key>status.poll.n-votes-voters %lld %lld</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
