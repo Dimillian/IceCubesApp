@@ -479,6 +479,7 @@
 "status.show-full-post" = "Show full post";
 "status.summary.at-time" = " at ";
 "status.summary.edited-time" = "Last edited: ";
+"status.summary.n-replies %lld" = "%lld replies";
 "status.summary.n-boosts %lld" = "%lld boosts";
 "status.summary.n-favorites %lld" = "%lld favourites";
 "status.visibility.direct" = "Private";
@@ -521,6 +522,37 @@
 "accessibility.editor.privacy.label" = "Visibility";
 "accessibility.editor.privacy.hint" = "Changes post audience.";
 "accessibility.app-account.selector.accounts" = "Accounts";
+"accessibility.tabs.profile.options.label" = "Options";
+"accessibility.tabs.profile.options.inputLabel1" = "Settings";
+"accessibility.tabs.profile.options.inputLabel2" = "More";
+"accessibility.tabs.profile.user-avatar.label" = "Profile photo";
+"accessibility.tabs.profile.user-avatar.hint" = "Displays a larger version.";
+"accessibility.tabs.profile.user-avatar.supporter.label" = "Supporter";
+"accessibility.tabs.profile.user.account-bot.label" = "Bot account";
+"accessibility.tabs.profile.user.account-blocked.label" = "Blocked";
+"accessibility.tabs.profile.user.account-muted.label" = "Muted";
+"accessibility.tabs.profile.user.account-private.label" = "Private account";
+"accessibility.tabs.profile.header-image.label" = "Header image";
+"accessibility.tabs.profile.header-image.hint" = "Displays a larger version.";
+"accessibility.tabs.profile.post-count.hint" = "Scrolls to list.";
+"accessibility.tabs.profile.following-count.hint" = "Navigates to list.";
+"accessibility.tabs.profile.follower-count.hint" = "Navigates to list.";
+"accessibility.tabs.profile.picker.statuses" = "Posts";
+"accessibility.tabs.profile.picker.favorites" = "Favorites";
+"accessibility.tabs.profile.picker.bookmarks" = "Bookmarks";
+"accessibility.tabs.profile.picker.followed-tags" = "Tags";
+"accessibility.tabs.profile.picker.posts-and-replies" = "Posts and replies";
+"accessibility.tabs.profile.picker.media" = "Media";
+"accessibility.tabs.profile.picker.lists" = "Lists";
+"accessibility.tabs.profile.user-notifications.label" = "Receive notifications";
+"accessibility.tabs.profile.user-reblogs.label" = "Display boosts";
+"accessibility.tabs.profile.fields.verified.label" = "Verified";
+"accessibility.tabs.profile.fields.container.label" = "User-defined fields";
+"accessibility.status.spoiler-full-content" = "Full Content";
+"accessibility.status.a-boosted-b-%@-%@" = "%@ boosted %@";
+"accessibility.status.a-replied-to-%@" = "%@ replied to";
+"accessibility.image.alt-text-%@" = "Image alt text: %@";
+"accessibility.image.alt-text-more.label" = "More alt text available";
 
 // MARK: Report
 "report.comment.placeholder" = "Additional Info";

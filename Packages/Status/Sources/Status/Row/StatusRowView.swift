@@ -66,10 +66,6 @@ public struct StatusRowView: View {
                   viewModel.navigateToDetail()
                 }
             }
-            .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
-            .accessibilityAction {
-              viewModel.navigateToDetail()
-            }
             if viewModel.showActions, viewModel.isFocused || theme.statusActionsDisplay != .none, !isInCaptureMode {
               StatusRowActionsView(viewModel: viewModel)
                 .padding(.top, 8)
@@ -97,12 +93,14 @@ public struct StatusRowView: View {
       contextMenu
     }
     .swipeActions(edge: .trailing) {
-      if !isCompact {
+      // The actions associated with the swipes are exposed as custom accessibility actions and there is no way to remove them.
+      if !isCompact, UIAccessibility.isVoiceOverRunning == false {
         StatusRowSwipeView(viewModel: viewModel, mode: .trailing)
       }
     }
     .swipeActions(edge: .leading) {
-      if !isCompact {
+      // The actions associated with the swipes are exposed as custom accessibility actions and there is no way to remove them.
+      if !isCompact, UIAccessibility.isVoiceOverRunning == false {
         StatusRowSwipeView(viewModel: viewModel, mode: .leading)
       }
     }
@@ -112,10 +110,12 @@ public struct StatusRowView: View {
                          bottom: 12,
                          trailing: .layoutPadding))
     .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
+    .modifier(ConditionalAccessibilityLabelModifier(viewModel: viewModel, setLabel: viewModel.isFocused == false))
+    .accessibilityAction {
+      viewModel.navigateToDetail()
+    }
     .accessibilityActions {
-      if UIAccessibility.isVoiceOverRunning {
-        accesibilityActions
-      }
+      accessibilityActions
     }
     .background {
       Color.clear
@@ -153,7 +153,7 @@ public struct StatusRowView: View {
   }
 
   @ViewBuilder
-  private var accesibilityActions: some View {
+  private var accessibilityActions: some View {
     // Add the individual mentions as accessibility actions
     ForEach(viewModel.status.mentions, id: \.id) { mention in
       Button("@\(mention.username)") {
@@ -170,8 +170,6 @@ public struct StatusRowView: View {
     Button("@\(viewModel.status.account.username)") {
       viewModel.routerPath.navigate(to: .accountDetail(id: viewModel.status.account.id))
     }
-
-    contextMenu
   }
 
   private func makeFilterView(filter: Filter) -> some View {
@@ -201,5 +199,100 @@ public struct StatusRowView: View {
     }
     .background(Color.black.opacity(0.40))
     .transition(.opacity)
+  }
+}
+
+/// A ``ViewModifier`` that creates a suitable combined accessibility label for a `StatusRowView` that is not focused.
+private struct ConditionalAccessibilityLabelModifier: ViewModifier {
+
+  @ObservedObject var viewModel: StatusRowViewModel
+  let setLabel: Bool
+
+  var hasSpoiler: Bool {
+    viewModel.displaySpoiler && viewModel.finalStatus.spoilerText.asRawText.isEmpty == false
+  }
+
+  var isReply: Bool {
+    if let accountId = viewModel.status.inReplyToAccountId, viewModel.status.mentions.contains(where: { $0.id == accountId }) {
+      return true
+    }
+    return false
+  }
+
+  var isBoost: Bool {
+    viewModel.status.reblog != nil
+  }
+
+  func body(content: Content) -> some View {
+    if setLabel {
+      if hasSpoiler {
+        // Use the spoiler text in the label and place the full text as custom content
+        content
+          .accessibilityLabel(combinedAccessibilityLabel())
+          .accessibilityCustomContent(
+            LocalizedStringKey("accessibility.status.spoiler-full-content"),
+            viewModel.finalStatus.content.asRawText,
+            importance: .high
+          )
+      } else {
+        content
+          .accessibilityLabel(combinedAccessibilityLabel())
+      }
+    } else {
+      content
+    }
+  }
+
+  func combinedAccessibilityLabel() -> Text {
+    userNamePreamble() +
+    Text(hasSpoiler
+      ? viewModel.finalStatus.spoilerText.asRawText
+      : viewModel.finalStatus.content.asRawText
+    ) + Text(", ") +
+    Text(hasSpoiler
+      ? "status.editor.spoiler"
+      : ""
+    ) + Text(", ") +
+    imageAltText() + Text(", ") +
+    Text(viewModel.finalStatus.createdAt.relativeFormatted) + Text(", ") +
+    Text("status.summary.n-replies \(viewModel.finalStatus.repliesCount)") + Text(", ") +
+    Text("status.summary.n-boosts \(viewModel.finalStatus.reblogsCount)") + Text(", ") +
+    Text("status.summary.n-favorites \(viewModel.finalStatus.favouritesCount)")
+  }
+
+  func userNamePreamble() -> Text {
+    switch (isReply, isBoost) {
+      case (true, false):
+        return Text("accessibility.status.a-replied-to-\(finalUserDisplayName())") + Text(" ")
+      case (_, true):
+        return Text("accessibility.status.a-boosted-b-\(userDisplayName())-\(finalUserDisplayName())")  + Text(", ")
+      default:
+        return Text(userDisplayName()) + Text(", ")
+    }
+  }
+
+  func userDisplayName() -> String {
+    viewModel.status.account.displayNameWithoutEmojis.count < 4
+      ? viewModel.status.account.safeDisplayName
+      : viewModel.status.account.displayNameWithoutEmojis
+  }
+
+  func finalUserDisplayName() -> String {
+    viewModel.finalStatus.account.displayNameWithoutEmojis.count < 4
+      ? viewModel.finalStatus.account.safeDisplayName
+      : viewModel.finalStatus.account.displayNameWithoutEmojis
+  }
+
+  func imageAltText() -> Text {
+    let descriptions = viewModel.finalStatus.mediaAttachments
+      .compactMap(\.description)
+
+    if descriptions.count == 1 {
+      return Text("accessibility.image.alt-text-\(descriptions[0])")
+    } else if descriptions.count > 1 {
+      return Text("accessibility.image.alt-text-\(descriptions[0])") + Text(", ") + Text("accessibility.image.alt-text-more.label")
+    } else {
+      return Text("")
+    }
   }
 }

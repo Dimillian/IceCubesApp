@@ -97,6 +97,9 @@ public struct FollowButton: View {
           Text("account.follow.requested")
         } else {
           Text(viewModel.relationship.following ? "account.follow.following" : "account.follow.follow")
+            .accessibilityRepresentation {
+              Toggle("account.follow.following", isOn: .constant(viewModel.relationship.following))
+            }
         }
       }
       if viewModel.relationship.following,
@@ -109,6 +112,8 @@ public struct FollowButton: View {
             }
           } label: {
             Image(systemName: viewModel.relationship.notifying ? "bell.fill" : "bell")
+          }.accessibilityRepresentation {
+            Toggle("accessibility.tabs.profile.user-notifications.label", isOn: .constant(viewModel.relationship.notifying))
           }
           Button {
             Task {
@@ -116,6 +121,8 @@ public struct FollowButton: View {
             }
           } label: {
             Image(viewModel.relationship.showingReblogs ? "Rocket.Fill" : "Rocket")
+          }.accessibilityRepresentation {
+            Toggle("accessibility.tabs.profile.user-reblogs.label", isOn: .constant(viewModel.relationship.showingReblogs))
           }
         }
       }

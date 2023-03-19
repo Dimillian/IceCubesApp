@@ -55,6 +55,7 @@ public struct AccountDetailView: View {
           { tab in
             Image(systemName: tab.iconName)
               .tag(tab)
+              .accessibilityLabel(tab.accessibilityLabel)
           }
         }
         .pickerStyle(.segmented)
@@ -193,14 +194,18 @@ public struct AccountDetailView: View {
         Text("account.detail.familiar-followers")
           .font(.scaledHeadline)
           .padding(.leading, .layoutPadding)
+          .accessibilityAddTraits(.isHeader)
         ScrollView(.horizontal, showsIndicators: false) {
           LazyHStack(spacing: 0) {
             ForEach(viewModel.familiarFollowers) { account in
-              AvatarView(url: account.avatar, size: .badge)
-                .onTapGesture {
-                  routerPath.navigate(to: .accountDetailWithAccount(account: account))
-                }
-                .padding(.leading, -4)
+              Button {
+                routerPath.navigate(to: .accountDetailWithAccount(account: account))
+              } label: {
+                AvatarView(url: account.avatar, size: .badge)
+                  .padding(.leading, -4)
+                  .accessibilityLabel(account.safeDisplayName)
+
+              }.accessibilityAddTraits(.isImage)
             }
           }
           .padding(.leading, .layoutPadding + 4)
@@ -276,6 +281,7 @@ public struct AccountDetailView: View {
   private var pinnedPostsView: some View {
     if !viewModel.pinned.isEmpty {
       Label("account.post.pinned", systemImage: "pin.fill")
+        .accessibilityAddTraits(.isHeader)
         .font(.scaledFootnote)
         .foregroundColor(.gray)
         .fontWeight(.semibold)
@@ -353,6 +359,12 @@ public struct AccountDetailView: View {
         }
       } label: {
         Image(systemName: "ellipsis.circle")
+          .accessibilityLabel("accessibility.tabs.profile.options.label")
+          .accessibilityInputLabels([
+            LocalizedStringKey("accessibility.tabs.profile.options.label"),
+            LocalizedStringKey("accessibility.tabs.profile.options.inputLabel1"),
+            LocalizedStringKey("accessibility.tabs.profile.options.inputLabel2")
+          ])
       }
     }
   }
