@@ -21,7 +21,7 @@ public class StatusRowViewModel: ObservableObject {
   @Published var isEmbedLoading: Bool = false
   @Published var isFiltered: Bool = false
 
-  @Published var translation: StatusTranslation?
+  @Published var translation: Translation?
   @Published var isLoadingTranslation: Bool = false
   @Published var showDeleteAlert: Bool = false
 
@@ -294,7 +294,7 @@ public class StatusRowViewModel: ObservableObject {
     if !alwaysTranslateWithDeepl {
       do {
         // We first use instance translation API if available.
-        let translation: StatusTranslation = try await client.post(endpoint: Statuses.translate(id: finalStatus.id,
+        let translation: Translation = try await client.post(endpoint: Statuses.translate(id: finalStatus.id,
                                                                                                 lang: userLang))
         withAnimation {
           self.translation = translation
