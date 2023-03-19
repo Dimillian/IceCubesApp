@@ -111,7 +111,8 @@ public struct StatusRowView: View {
                          bottom: 12,
                          trailing: .layoutPadding))
     .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
-    .accessibilityLabel(viewModel.isFocused == false ? CombinedAccessibilityLabel(viewModel: viewModel).finalLabel() : Text(""))
+    .accessibilityLabel(viewModel.isFocused == false && UIAccessibility.isVoiceOverRunning
+                        ? CombinedAccessibilityLabel(viewModel: viewModel).finalLabel() : Text(""))
     .accessibilityCustomContent(
       LocalizedStringKey("accessibility.status.spoiler-full-content"),
       viewModel.finalStatus.content.asRawText,
