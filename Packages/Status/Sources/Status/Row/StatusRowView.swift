@@ -203,8 +203,9 @@ public struct StatusRowView: View {
 }
 
 /// A ``ViewModifier`` that creates a suitable combined accessibility label for a `StatusRowView` that is not focused.
+@MainActor
 private struct ConditionalAccessibilityLabelModifier: ViewModifier {
-  @ObservedObject var viewModel: StatusRowViewModel
+  let viewModel: StatusRowViewModel
   let setLabel: Bool
 
   var hasSpoiler: Bool {
@@ -223,7 +224,7 @@ private struct ConditionalAccessibilityLabelModifier: ViewModifier {
   }
 
   func body(content: Content) -> some View {
-    if setLabel {
+    if UIAccessibility.isVoiceOverRunning == true, setLabel {
       if hasSpoiler {
         // Use the spoiler text in the label and place the full text as custom content
         content
