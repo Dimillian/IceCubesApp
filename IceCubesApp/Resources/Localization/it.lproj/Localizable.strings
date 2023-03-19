@@ -523,6 +523,7 @@
 "accessibility.tabs.timeline.new-post.inputLabel1" = "New";
 "accessibility.tabs.timeline.new-post.inputLabel2" = "Create";
 "accessibility.app-account.selector.accounts" = "Account";
+"accessibility.app-account.selector.accounts.hint" = "Opens options sheet.";
 "accessibility.tabs.profile.options.label" = "Options";
 "accessibility.tabs.profile.options.inputLabel1" = "Settings";
 "accessibility.tabs.profile.options.inputLabel2" = "More";

@@ -525,6 +525,7 @@
 "accessibility.editor.privacy.label" = "Visibility";
 "accessibility.editor.privacy.hint" = "Changes post audience.";
 "accessibility.app-account.selector.accounts" = "Accounts";
+"accessibility.app-account.selector.accounts.hint" = "Opens options sheet.";
 "accessibility.tabs.profile.options.label" = "Options";
 "accessibility.tabs.profile.options.inputLabel1" = "Settings";
 "accessibility.tabs.profile.options.inputLabel2" = "More";
