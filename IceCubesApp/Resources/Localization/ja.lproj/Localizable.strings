@@ -519,6 +519,9 @@
 "accessibility.editor.privacy.label" = "可視性";
 "accessibility.editor.privacy.hint" = "投稿対象者を変更します";
 "accessibility.tabs.timeline.add-account" = "アカウントを追加";
+"accessibility.tabs.timeline.new-post.label" = "Compose";
+"accessibility.tabs.timeline.new-post.inputLabel1" = "New";
+"accessibility.tabs.timeline.new-post.inputLabel2" = "Create";
 "accessibility.app-account.selector.accounts" = "アカウント";
 "accessibility.tabs.profile.options.label" = "Options";
 "accessibility.tabs.profile.options.inputLabel1" = "Settings";

@@ -518,6 +518,9 @@
 "accessibility.editor.button.language" = "Language";
 "accessibility.editor.button.ai-prompt" = "AI prompt";
 "accessibility.tabs.timeline.add-account" = "Add Account";
+"accessibility.tabs.timeline.new-post.label" = "Compose";
+"accessibility.tabs.timeline.new-post.inputLabel1" = "New";
+"accessibility.tabs.timeline.new-post.inputLabel2" = "Create";
 "accessibility.editor.button.characters-remaining" = "Characters remaining";
 "accessibility.editor.privacy.label" = "Visibility";
 "accessibility.editor.privacy.hint" = "Changes post audience.";

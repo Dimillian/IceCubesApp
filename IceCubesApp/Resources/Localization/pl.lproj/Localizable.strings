@@ -511,6 +511,9 @@
 "accessibility.editor.privacy.label" = "Widoczność postu";
 "accessibility.editor.privacy.hint" = "Zmienia odbiorców postu.";
 "accessibility.tabs.timeline.add-account" = "Dodaj konto";
+"accessibility.tabs.timeline.new-post.label" = "Compose";
+"accessibility.tabs.timeline.new-post.inputLabel1" = "New";
+"accessibility.tabs.timeline.new-post.inputLabel2" = "Create";
 "accessibility.app-account.selector.accounts" = "Konta";
 "accessibility.tabs.profile.options.label" = "Options";
 "accessibility.tabs.profile.options.inputLabel1" = "Settings";

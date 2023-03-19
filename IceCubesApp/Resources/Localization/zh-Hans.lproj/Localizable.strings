@@ -521,6 +521,9 @@
 "accessibility.editor.privacy.label" = "可见度";
 "accessibility.editor.privacy.hint" = "更改嘟文可见度。";
 "accessibility.tabs.timeline.add-account" = "添加账户";
+"accessibility.tabs.timeline.new-post.label" = "Compose";
+"accessibility.tabs.timeline.new-post.inputLabel1" = "New";
+"accessibility.tabs.timeline.new-post.inputLabel2" = "Create";
 "accessibility.app-account.selector.accounts" = "账户";
 "accessibility.tabs.profile.options.label" = "Options";
 "accessibility.tabs.profile.options.inputLabel1" = "Settings";

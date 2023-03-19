@@ -524,6 +524,9 @@
 "accessibility.editor.privacy.label" = "Visibility";
 "accessibility.editor.privacy.hint" = "Changes post audience.";
 "accessibility.tabs.timeline.add-account" = "Дадаць уліковы запіс";
+"accessibility.tabs.timeline.new-post.label" = "Compose";
+"accessibility.tabs.timeline.new-post.inputLabel1" = "New";
+"accessibility.tabs.timeline.new-post.inputLabel2" = "Create";
 "accessibility.app-account.selector.accounts" = "Уліковыя запісы";
 "accessibility.tabs.profile.options.label" = "Options";
 "accessibility.tabs.profile.options.inputLabel1" = "Settings";
