@@ -210,8 +210,9 @@ public struct StatusRowView: View {
 }
 
 /// A utility that creates a suitable combined accessibility label for a `StatusRowView` that is not focused.
+@MainActor
 private struct CombinedAccessibilityLabel {
-  @ObservedObject var viewModel: StatusRowViewModel
+  let viewModel: StatusRowViewModel
 
   var hasSpoiler: Bool {
     viewModel.displaySpoiler && viewModel.finalStatus.spoilerText.asRawText.isEmpty == false
