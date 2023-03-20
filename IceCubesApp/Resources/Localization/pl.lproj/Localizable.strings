@@ -510,7 +510,13 @@
 "accessibility.editor.privacy.label" = "Widoczność postu";
 "accessibility.editor.privacy.hint" = "Zmienia odbiorców postu.";
 "accessibility.tabs.timeline.add-account" = "Dodaj konto";
+"accessibility.tabs.timeline.new-post.label" = "Compose";
+"accessibility.tabs.timeline.new-post.inputLabel1" = "New";
+"accessibility.tabs.timeline.new-post.inputLabel2" = "Create";
+"accessibility.tabs.timeline.unread-posts.label-%lld" = "%lld new posts";
+"accessibility.tabs.timeline.unread-posts.hint" = "Scrolls the timeline.";
 "accessibility.app-account.selector.accounts" = "Konta";
+"accessibility.app-account.selector.accounts.hint" = "Opens options sheet.";
 "accessibility.tabs.profile.options.label" = "Opcje";
 "accessibility.tabs.profile.options.inputLabel1" = "Ustawienia";
 "accessibility.tabs.profile.options.inputLabel2" = "Więcej";

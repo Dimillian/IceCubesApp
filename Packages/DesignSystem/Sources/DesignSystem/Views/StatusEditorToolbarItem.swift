@@ -11,6 +11,12 @@ public extension View {
         HapticManager.shared.fireHaptic(of: .buttonPress)
       } label: {
         Image(systemName: "square.and.pencil")
+          .accessibilityLabel("accessibility.tabs.timeline.new-post.label")
+          .accessibilityInputLabels([
+            LocalizedStringKey("accessibility.tabs.timeline.new-post.label"),
+            LocalizedStringKey("accessibility.tabs.timeline.new-post.inputLabel1"),
+            LocalizedStringKey("accessibility.tabs.timeline.new-post.inputLabel2")
+          ])
       }
     }
   }
@@ -32,6 +38,12 @@ public struct StatusEditorToolbarItem: ToolbarContent {
         HapticManager.shared.fireHaptic(of: .buttonPress)
       } label: {
         Image(systemName: "square.and.pencil")
+          .accessibilityLabel("accessibility.tabs.timeline.new-post.label")
+          .accessibilityInputLabels([
+            LocalizedStringKey("accessibility.tabs.timeline.new-post.label"),
+            LocalizedStringKey("accessibility.tabs.timeline.new-post.inputLabel1"),
+            LocalizedStringKey("accessibility.tabs.timeline.new-post.inputLabel2")
+          ])
       }
     }
   }
