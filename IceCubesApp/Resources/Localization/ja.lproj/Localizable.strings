@@ -519,7 +519,13 @@
 "accessibility.editor.privacy.label" = "可視性";
 "accessibility.editor.privacy.hint" = "投稿対象者を変更します";
 "accessibility.tabs.timeline.add-account" = "アカウントを追加";
+"accessibility.tabs.timeline.new-post.label" = "Compose";
+"accessibility.tabs.timeline.new-post.inputLabel1" = "New";
+"accessibility.tabs.timeline.new-post.inputLabel2" = "Create";
+"accessibility.tabs.timeline.unread-posts.label-%lld" = "%lld new posts";
+"accessibility.tabs.timeline.unread-posts.hint" = "Scrolls the timeline.";
 "accessibility.app-account.selector.accounts" = "アカウント";
+"accessibility.app-account.selector.accounts.hint" = "Opens options sheet.";
 "accessibility.tabs.profile.options.label" = "Options";
 "accessibility.tabs.profile.options.inputLabel1" = "Settings";
 "accessibility.tabs.profile.options.inputLabel2" = "More";

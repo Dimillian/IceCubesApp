@@ -98,6 +98,10 @@ public struct TimelineView: View {
               .font(.headline)
           }
         }
+        .accessibilityRepresentation {
+          Menu(timeline.localizedTitle()) {}
+        }
+        .accessibilityAddTraits(.isHeader)
       }
     }
     .navigationBarTitleDisplayMode(.inline)
