@@ -162,6 +162,22 @@
 			<string>%lld bultzada</string>
 		</dict>
 	</dict>
+    <key>status.summary.n-replies %lld</key>
+ 	<dict>
+ 		<key>NSStringLocalizedFormatKey</key>
+ 		<string>%#@statusRepliesCount@</string>
+ 		<key>statusRepliesCount</key>
+ 		<dict>
+ 			<key>NSStringFormatSpecTypeKey</key>
+ 			<string>NSStringPluralRuleType</string>
+ 			<key>NSStringFormatValueTypeKey</key>
+ 			<string>lld</string>
+ 			<key>one</key>
+ 			<string>Erantzun %lld</string>
+ 			<key>other</key>
+ 			<string>%lld erantzun</string>
+ 		</dict>
+ 	</dict>
     <key>status.poll.n-votes %lld</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
