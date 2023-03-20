@@ -198,7 +198,10 @@ struct AccountDetailHeaderView: View {
             .textSelection(.enabled)
             .accessibilityRespondsToUserInteraction(false)
           joinedAtView
-        }.accessibilityElement(children: .contain)
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilitySortPriority(1)
+
         Spacer()
         if let relationship = viewModel.relationship, !viewModel.isCurrentUser {
           HStack {
