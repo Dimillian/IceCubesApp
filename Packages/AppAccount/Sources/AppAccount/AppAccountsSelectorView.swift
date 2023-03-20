@@ -77,6 +77,7 @@ public struct AppAccountsSelectorView: View {
       }
     }
     .accessibilityLabel("accessibility.app-account.selector.accounts")
+    .accessibilityHint("accessibility.app-account.selector.accounts.hint")
   }
 
   private var accountsView: some View {
