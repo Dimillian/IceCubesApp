@@ -113,11 +113,6 @@ public struct StatusRowView: View {
     .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
     .accessibilityLabel(viewModel.isFocused == false && UIAccessibility.isVoiceOverRunning
                         ? CombinedAccessibilityLabel(viewModel: viewModel).finalLabel() : Text(""))
-    .accessibilityCustomContent(
-      LocalizedStringKey("accessibility.status.spoiler-full-content"),
-      viewModel.finalStatus.content.asRawText,
-      importance: .high
-    )
     .accessibilityAction {
       viewModel.navigateToDetail()
     }
@@ -161,11 +156,15 @@ public struct StatusRowView: View {
 
   @ViewBuilder
   private var accessibilityActions: some View {
-    // Add the individual mentions as accessibility actions
-    ForEach(viewModel.status.mentions, id: \.id) { mention in
-      Button("@\(mention.username)") {
-        viewModel.routerPath.navigate(to: .accountDetail(id: mention.id))
-      }
+    // Add reply and quote, which are lost when the swipe actions are removed
+    Button("status.action.reply") {
+      HapticManager.shared.fireHaptic(of: .notification(.success))
+      viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
+    }
+
+    Button("status.action.quote") {
+      HapticManager.shared.fireHaptic(of: .notification(.success))
+      viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
     }
 
     Button(viewModel.displaySpoiler ? "status.show-more" : "status.show-less") {
@@ -176,6 +175,33 @@ public struct StatusRowView: View {
 
     Button("@\(viewModel.status.account.username)") {
       viewModel.routerPath.navigate(to: .accountDetail(id: viewModel.status.account.id))
+    }
+
+    // Add a reference to the post creator
+    if viewModel.status.account != viewModel.finalStatus.account {
+      Button("@\(viewModel.finalStatus.account.username)") {
+        viewModel.routerPath.navigate(to: .accountDetail(id: viewModel.finalStatus.account.id))
+      }
+    }
+
+    // Add in each detected link in the content
+    ForEach(viewModel.finalStatus.content.links) { link in
+      switch link.type {
+        case .url:
+          if UIApplication.shared.canOpenURL(link.url) {
+            Button("accessibility.tabs.timeline.content-link-\(link.title)") {
+              _ = viewModel.routerPath.handle(url: link.url)
+            }
+          }
+        case .hashtag:
+          Button("accessibility.tabs.timeline.content-hashtag-\(link.title)") {
+            _ = viewModel.routerPath.handle(url: link.url)
+          }
+        case .mention:
+          Button("\(link.title)") {
+          _ = viewModel.routerPath.handle(url: link.url)
+          }
+      }
     }
   }
 
@@ -234,11 +260,11 @@ private struct CombinedAccessibilityLabel {
       Text(hasSpoiler
         ? viewModel.finalStatus.spoilerText.asRawText
         : viewModel.finalStatus.content.asRawText
-      ) + Text(", ") +
+      ) +
       Text(hasSpoiler
         ? "status.editor.spoiler"
         : ""
-      ) + Text(", ") +
+      ) +
       imageAltText() + Text(", ") +
       Text(viewModel.finalStatus.createdAt.relativeFormatted) + Text(", ") +
       Text("status.summary.n-replies \(viewModel.finalStatus.repliesCount)") + Text(", ") +

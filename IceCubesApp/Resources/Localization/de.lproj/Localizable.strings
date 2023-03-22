@@ -519,6 +519,8 @@
 "accessibility.tabs.timeline.new-post.inputLabel2" = "Erzeugen";
 "accessibility.tabs.timeline.unread-posts.label-%lld" = "%lld neue Beiträge";
 "accessibility.tabs.timeline.unread-posts.hint" = "Bewegt durch die Timeline.";
+"accessibility.tabs.timeline.content-link-%@" = "Visit %@";
+"accessibility.tabs.timeline.content-hashtag-%@" = "Hashtag %@";
 "accessibility.app-account.selector.accounts" = "Konten";
 "accessibility.app-account.selector.accounts.hint" = "Öffnet die Optionen.";
 "accessibility.tabs.profile.options.label" = "Optionen";

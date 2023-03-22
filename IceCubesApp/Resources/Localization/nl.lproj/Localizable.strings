@@ -521,6 +521,8 @@
 "accessibility.tabs.timeline.new-post.inputLabel2" = "Maak aan";
 "accessibility.tabs.timeline.unread-posts.label-%lld" = "%lld nieuwe posts";
 "accessibility.tabs.timeline.unread-posts.hint" = "Scrollt de tijdlijn.";
+"accessibility.tabs.timeline.content-link-%@" = "Visit %@";
+"accessibility.tabs.timeline.content-hashtag-%@" = "Hashtag %@";
 "accessibility.app-account.selector.accounts" = "Accounts";
 "accessibility.app-account.selector.accounts.hint" = "Opent paneel voor opties.";
 "accessibility.tabs.profile.options.label" = "Opties";

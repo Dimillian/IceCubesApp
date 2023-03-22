@@ -524,6 +524,8 @@
 "accessibility.tabs.timeline.new-post.inputLabel2" = "Create";
 "accessibility.tabs.timeline.unread-posts.label-%lld" = "%lld new posts";
 "accessibility.tabs.timeline.unread-posts.hint" = "Scrolls the timeline.";
+"accessibility.tabs.timeline.content-link-%@" = "Visit %@";
+"accessibility.tabs.timeline.content-hashtag-%@" = "Hashtag %@";
 "accessibility.app-account.selector.accounts" = "Account";
 "accessibility.app-account.selector.accounts.hint" = "Opens options sheet.";
 "accessibility.tabs.profile.options.label" = "Options";

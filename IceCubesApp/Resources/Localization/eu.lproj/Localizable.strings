@@ -513,6 +513,8 @@
 "accessibility.tabs.timeline.new-post.inputLabel2" = "Sortu";
 "accessibility.tabs.timeline.unread-posts.label-%lld" = "%lld bidalketa berri";
 "accessibility.tabs.timeline.unread-posts.hint" = "Denbora-lerroa korritzen du.";
+"accessibility.tabs.timeline.content-link-%@" = "Visit %@";
+"accessibility.tabs.timeline.content-hashtag-%@" = "Hashtag %@";
 "accessibility.app-account.selector.accounts" = "Kontuak";
 "accessibility.app-account.selector.accounts.hint" = "Aukeren orria irekitzen du.";
 "accessibility.tabs.profile.options.label" = "Aukerak";
