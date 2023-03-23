@@ -176,12 +176,14 @@ public struct StatusRowView: View {
     }
 
     Button("@\(viewModel.status.account.username)") {
+      HapticManager.shared.fireHaptic(of: .notification(.success))
       viewModel.routerPath.navigate(to: .accountDetail(id: viewModel.status.account.id))
     }
 
     // Add a reference to the post creator
     if viewModel.status.account != viewModel.finalStatus.account {
       Button("@\(viewModel.finalStatus.account.username)") {
+        HapticManager.shared.fireHaptic(of: .notification(.success))
         viewModel.routerPath.navigate(to: .accountDetail(id: viewModel.finalStatus.account.id))
       }
     }
@@ -192,16 +194,19 @@ public struct StatusRowView: View {
         case .url:
           if UIApplication.shared.canOpenURL(link.url) {
             Button("accessibility.tabs.timeline.content-link-\(link.title)") {
+              HapticManager.shared.fireHaptic(of: .notification(.success))
               _ = viewModel.routerPath.handle(url: link.url)
             }
           }
         case .hashtag:
           Button("accessibility.tabs.timeline.content-hashtag-\(link.title)") {
+            HapticManager.shared.fireHaptic(of: .notification(.success))
             _ = viewModel.routerPath.handle(url: link.url)
           }
         case .mention:
           Button("\(link.title)") {
-          _ = viewModel.routerPath.handle(url: link.url)
+            HapticManager.shared.fireHaptic(of: .notification(.success))
+            _ = viewModel.routerPath.handle(url: link.url)
           }
       }
     }
