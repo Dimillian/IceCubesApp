@@ -536,7 +536,7 @@
 "accessibility.tabs.profile.user-avatar.supporter.label" = "支持者";
 "accessibility.tabs.profile.user.account-bot.label" = "机器人账户";
 "accessibility.tabs.profile.user.account-blocked.label" = "已屏蔽";
-"accessibility.tabs.profile.user.account-muted.label" = "静音";
+"accessibility.tabs.profile.user.account-muted.label" = "已静音";
 "accessibility.tabs.profile.user.account-private.label" = "私有账户";
 "accessibility.tabs.profile.header-image.label" = "横幅图片";
 "accessibility.tabs.profile.header-image.hint" = "显示更大尺寸。";
@@ -547,7 +547,7 @@
 "accessibility.tabs.profile.picker.favorites" = "喜欢";
 "accessibility.tabs.profile.picker.bookmarks" = "书签";
 "accessibility.tabs.profile.picker.followed-tags" = "标签";
-"accessibility.tabs.profile.picker.posts-and-replies" = "读文和回复";
+"accessibility.tabs.profile.picker.posts-and-replies" = "嘟文和回复";
 "accessibility.tabs.profile.picker.media" = "媒体";
 "accessibility.tabs.profile.picker.lists" = "列表";
 "accessibility.tabs.profile.user-notifications.label" = "接收通知";
@@ -558,7 +558,7 @@
 "accessibility.status.a-boosted-b-%@-%@" = "%@ 转发了 %@";
 "accessibility.status.a-replied-to-%@" = "%@ 回复给";
 "accessibility.image.alt-text-%@" = "图片描述文本：%@";
-"accessibility.image.alt-text-more.label" = "更多替代文本可用";
+"accessibility.image.alt-text-more.label" = "更多描述文本可用";
 
 // MARK: Report
 "report.comment.placeholder" = "附加信息";
