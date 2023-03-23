@@ -117,7 +117,9 @@ public struct StatusRowView: View {
       viewModel.navigateToDetail()
     }
     .accessibilityActions {
-      accessibilityActions
+      if isCompact == false {
+        accessibilityActions
+      }
     }
     .background {
       Color.clear
