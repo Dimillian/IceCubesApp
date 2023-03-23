@@ -179,6 +179,7 @@ public struct TimelineView: View {
               .font(.scaledFootnote)
               .foregroundColor(.gray)
           }
+          .accessibilityElement(children: .combine)
           Spacer()
           Button {
             Task {
