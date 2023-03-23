@@ -162,7 +162,7 @@ public struct StatusRowView: View {
       viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
     }
 
-    Button("status.action.quote") {
+    Button("settings.swipeactions.status.action.quote") {
       HapticManager.shared.fireHaptic(of: .notification(.success))
       viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
     }
