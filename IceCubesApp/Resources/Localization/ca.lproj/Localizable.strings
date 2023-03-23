@@ -558,6 +558,7 @@
 "accessibility.status.a-replied-to-%@" = "%@ replied to";
 "accessibility.image.alt-text-%@" = "Image alt text: %@";
 "accessibility.image.alt-text-more.label" = "More alt text available";
+"accessibility.tabs.messages.unread.label" = "Unread";
 
 // MARK: Report
 "report.comment.placeholder" = "Additional Info";

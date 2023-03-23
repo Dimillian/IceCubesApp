@@ -554,6 +554,7 @@
 "accessibility.status.a-replied-to-%@" = "%@ antwortete auf";
 "accessibility.image.alt-text-%@" = "Alternativer Bildtext: %@";
 "accessibility.image.alt-text-more.label" = "Weiterer Alt.-Text verfügbar";
+"accessibility.tabs.messages.unread.label" = "Unread";
 
 // MARK: Report
 "report.comment.placeholder" = "Zusätzliche Informationen";

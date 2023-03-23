@@ -548,6 +548,7 @@
 "accessibility.status.a-replied-to-%@" = "%@(e)k honi erantzun dio:";
 "accessibility.image.alt-text-%@" = "Irudiaren deskribapena: %@";
 "accessibility.image.alt-text-more.label" = "Deskribapen testu gehiago dago";
+"accessibility.tabs.messages.unread.label" = "Unread";
 
 // MARK: Report
 "report.comment.placeholder" = "Informazio gehigarria";

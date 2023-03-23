@@ -556,6 +556,7 @@
 "accessibility.status.a-replied-to-%@" = "%@ heeft geantwoord op";
 "accessibility.image.alt-text-%@" = "Tekst voor afbeedling: %@";
 "accessibility.image.alt-text-more.label" = "Meer tekst beschikbaar";
+"accessibility.tabs.messages.unread.label" = "Unread";
 
 // MARK: Report
 "report.comment.placeholder" = "Aanvullende informatie";
