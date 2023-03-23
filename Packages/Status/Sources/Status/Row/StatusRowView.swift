@@ -117,7 +117,7 @@ public struct StatusRowView: View {
       viewModel.navigateToDetail()
     }
     .accessibilityActions {
-      if isCompact == false {
+      if viewModel.showActions {
         accessibilityActions
       }
     }
