@@ -27,10 +27,12 @@ public struct TimelineView: View {
 
   @Binding var timeline: TimelineFilter
   @Binding var scrollToTopSignal: Int
+  private let canFilterTimeline: Bool
 
-  public init(timeline: Binding<TimelineFilter>, scrollToTopSignal: Binding<Int>) {
+  public init(timeline: Binding<TimelineFilter>, scrollToTopSignal: Binding<Int>, canFilterTimeline: Bool) {
     _timeline = timeline
     _scrollToTopSignal = scrollToTopSignal
+    self.canFilterTimeline = canFilterTimeline
   }
 
   public var body: some View {
@@ -99,9 +101,14 @@ public struct TimelineView: View {
           }
         }
         .accessibilityRepresentation {
-          Menu(timeline.localizedTitle()) {}
+          if canFilterTimeline {
+            Menu(timeline.localizedTitle()) {}
+          } else {
+            Text(timeline.localizedTitle())
+          }
         }
         .accessibilityAddTraits(.isHeader)
+        .accessibilityRemoveTraits(.isButton)
       }
     }
     .navigationBarTitleDisplayMode(.inline)
@@ -172,6 +179,7 @@ public struct TimelineView: View {
               .font(.scaledFootnote)
               .foregroundColor(.gray)
           }
+          .accessibilityElement(children: .combine)
           Spacer()
           Button {
             Task {

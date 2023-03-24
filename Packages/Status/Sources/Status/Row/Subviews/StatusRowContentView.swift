@@ -44,6 +44,7 @@ struct StatusRowContentView: View {
             Spacer()
           }
         }
+        .accessibilityHidden(viewModel.isFocused == false)
         .padding(.vertical, 4)
       }
 

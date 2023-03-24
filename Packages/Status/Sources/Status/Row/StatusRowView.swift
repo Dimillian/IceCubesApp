@@ -11,6 +11,7 @@ public struct StatusRowView: View {
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
   @Environment(\.redactionReasons) private var reasons
   @Environment(\.isCompact) private var isCompact: Bool
+  @Environment(\.accessibilityEnabled) private var accessibilityEnabled
 
   @EnvironmentObject private var theme: Theme
 
@@ -95,13 +96,13 @@ public struct StatusRowView: View {
     }
     .swipeActions(edge: .trailing) {
       // The actions associated with the swipes are exposed as custom accessibility actions and there is no way to remove them.
-      if !isCompact, UIAccessibility.isVoiceOverRunning == false {
+      if !isCompact, accessibilityEnabled == false {
         StatusRowSwipeView(viewModel: viewModel, mode: .trailing)
       }
     }
     .swipeActions(edge: .leading) {
       // The actions associated with the swipes are exposed as custom accessibility actions and there is no way to remove them.
-      if !isCompact, UIAccessibility.isVoiceOverRunning == false {
+      if !isCompact, accessibilityEnabled == false {
         StatusRowSwipeView(viewModel: viewModel, mode: .leading)
       }
     }
@@ -111,18 +112,15 @@ public struct StatusRowView: View {
                          bottom: 12,
                          trailing: .layoutPadding))
     .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
-    .accessibilityLabel(viewModel.isFocused == false && UIAccessibility.isVoiceOverRunning
+    .accessibilityLabel(viewModel.isFocused == false && accessibilityEnabled
                         ? CombinedAccessibilityLabel(viewModel: viewModel).finalLabel() : Text(""))
-    .accessibilityCustomContent(
-      LocalizedStringKey("accessibility.status.spoiler-full-content"),
-      viewModel.finalStatus.content.asRawText,
-      importance: .high
-    )
     .accessibilityAction {
       viewModel.navigateToDetail()
     }
     .accessibilityActions {
-      accessibilityActions
+      if viewModel.showActions {
+        accessibilityActions
+      }
     }
     .background {
       Color.clear
@@ -161,11 +159,15 @@ public struct StatusRowView: View {
 
   @ViewBuilder
   private var accessibilityActions: some View {
-    // Add the individual mentions as accessibility actions
-    ForEach(viewModel.status.mentions, id: \.id) { mention in
-      Button("@\(mention.username)") {
-        viewModel.routerPath.navigate(to: .accountDetail(id: mention.id))
-      }
+    // Add reply and quote, which are lost when the swipe actions are removed
+    Button("status.action.reply") {
+      HapticManager.shared.fireHaptic(of: .notification(.success))
+      viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
+    }
+
+    Button("settings.swipeactions.status.action.quote") {
+      HapticManager.shared.fireHaptic(of: .notification(.success))
+      viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
     }
 
     Button(viewModel.displaySpoiler ? "status.show-more" : "status.show-less") {
@@ -175,7 +177,39 @@ public struct StatusRowView: View {
     }
 
     Button("@\(viewModel.status.account.username)") {
+      HapticManager.shared.fireHaptic(of: .notification(.success))
       viewModel.routerPath.navigate(to: .accountDetail(id: viewModel.status.account.id))
+    }
+
+    // Add a reference to the post creator
+    if viewModel.status.account != viewModel.finalStatus.account {
+      Button("@\(viewModel.finalStatus.account.username)") {
+        HapticManager.shared.fireHaptic(of: .notification(.success))
+        viewModel.routerPath.navigate(to: .accountDetail(id: viewModel.finalStatus.account.id))
+      }
+    }
+
+    // Add in each detected link in the content
+    ForEach(viewModel.finalStatus.content.links) { link in
+      switch link.type {
+        case .url:
+          if UIApplication.shared.canOpenURL(link.url) {
+            Button("accessibility.tabs.timeline.content-link-\(link.title)") {
+              HapticManager.shared.fireHaptic(of: .notification(.success))
+              _ = viewModel.routerPath.handle(url: link.url)
+            }
+          }
+        case .hashtag:
+          Button("accessibility.tabs.timeline.content-hashtag-\(link.title)") {
+            HapticManager.shared.fireHaptic(of: .notification(.success))
+            _ = viewModel.routerPath.handle(url: link.url)
+          }
+        case .mention:
+          Button("\(link.title)") {
+            HapticManager.shared.fireHaptic(of: .notification(.success))
+            _ = viewModel.routerPath.handle(url: link.url)
+          }
+      }
     }
   }
 
@@ -234,11 +268,11 @@ private struct CombinedAccessibilityLabel {
       Text(hasSpoiler
         ? viewModel.finalStatus.spoilerText.asRawText
         : viewModel.finalStatus.content.asRawText
-      ) + Text(", ") +
+      ) +
       Text(hasSpoiler
         ? "status.editor.spoiler"
         : ""
-      ) + Text(", ") +
+      ) +
       imageAltText() + Text(", ") +
       Text(viewModel.finalStatus.createdAt.relativeFormatted) + Text(", ") +
       Text("status.summary.n-replies \(viewModel.finalStatus.repliesCount)") + Text(", ") +

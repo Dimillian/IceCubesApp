@@ -513,6 +513,8 @@
 "accessibility.tabs.timeline.new-post.inputLabel2" = "Sortu";
 "accessibility.tabs.timeline.unread-posts.label-%lld" = "%lld bidalketa berri";
 "accessibility.tabs.timeline.unread-posts.hint" = "Denbora-lerroa korritzen du.";
+"accessibility.tabs.timeline.content-link-%@" = "Visit %@";
+"accessibility.tabs.timeline.content-hashtag-%@" = "Hashtag %@";
 "accessibility.app-account.selector.accounts" = "Kontuak";
 "accessibility.app-account.selector.accounts.hint" = "Aukeren orria irekitzen du.";
 "accessibility.tabs.profile.options.label" = "Aukerak";
@@ -546,6 +548,7 @@
 "accessibility.status.a-replied-to-%@" = "%@(e)k honi erantzun dio:";
 "accessibility.image.alt-text-%@" = "Irudiaren deskribapena: %@";
 "accessibility.image.alt-text-more.label" = "Deskribapen testu gehiago dago";
+"accessibility.tabs.messages.unread.label" = "Unread";
 
 // MARK: Report
 "report.comment.placeholder" = "Informazio gehigarria";

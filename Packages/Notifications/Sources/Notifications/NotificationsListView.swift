@@ -175,5 +175,6 @@ public struct NotificationsListView: View {
       .listRowSeparator(.hidden)
       .listRowInsets(.init())
       .frame(height: .layoutPadding)
+      .accessibilityHidden(true)
   }
 }
