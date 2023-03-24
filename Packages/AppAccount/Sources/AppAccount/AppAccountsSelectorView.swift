@@ -47,10 +47,19 @@ public struct AppAccountsSelectorView: View {
       labelView
     }
     .sheet(isPresented: $isPresented, content: {
-      accountsView.presentationDetents([.height(preferredHeight), .large])
-        .onAppear {
-          refreshAccounts()
-        }
+      if #available(iOS 16.4, *) {
+        accountsView.presentationDetents([.height(preferredHeight), .large])
+          .presentationBackground(.thinMaterial)
+          .presentationCornerRadius(16)
+          .onAppear {
+            refreshAccounts()
+          }
+      } else {
+        accountsView.presentationDetents([.height(preferredHeight), .large])
+          .onAppear {
+            refreshAccounts()
+          }
+      }
     })
     .onChange(of: currentAccount.account?.id) { _ in
       refreshAccounts()
@@ -80,6 +89,14 @@ public struct AppAccountsSelectorView: View {
     .accessibilityHint("accessibility.app-account.selector.accounts.hint")
   }
 
+  private var accountBackgroundColor: Color {
+    if #available(iOS 16.4, *) {
+      return Color.clear
+    } else {
+      return theme.secondaryBackgroundColor
+    }
+  }
+  
   private var accountsView: some View {
     NavigationStack {
       List {
@@ -108,7 +125,7 @@ public struct AppAccountsSelectorView: View {
       }
       .listStyle(.insetGrouped)
       .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
+      .background(accountBackgroundColor)
       .navigationTitle("settings.section.accounts")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
