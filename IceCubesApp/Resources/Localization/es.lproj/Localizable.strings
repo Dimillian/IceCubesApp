@@ -99,7 +99,7 @@
 "settings.general.instance" = "Información de la instancia";
 "settings.general.push-notifications" = "Notificaciones";
 "settings.general.remote-timelines" = "Cronologías locales remotas";
-"settings.push.boosts" = "Retoots";
+"settings.push.boosts" = "Boosts";
 "settings.push.favorites" = "Favoritos";
 "settings.push.follows" = "Siguiendo";
 "settings.push.main-toggle" = "Notificaciones";
@@ -150,10 +150,10 @@
 "settings.general.content" = "Ajustes de contenido";
 "settings.system" = "Ajustes del sistema";
 "settings.content.navigation-title" = "Ajustes de contenido";
-"settings.content.boosts" = "Retoots";
+"settings.content.boosts" = "Boosts";
 "settings.content.collapse-long-posts" = "Colapsar publicaciones largas";
 "settings.content.collapse-long-posts-hint" = "Las publicaciones colapsadas sólo muestran un número limitado de líneas junto a un botón para mostrar la publicación completa";
-"settings.content.hide-repeated-boosts" = "Ocultar retoots repetidos";
+"settings.content.hide-repeated-boosts" = "Ocultar boosts repetidos";
 "settings.content.instance-settings" = "Ajustes de contenido del servidor";
 "settings.content.use-instance-settings" = "Usar ajustes del servidor";
 "settings.content.expand-spoilers" = "Mostrar siempre el contenido sensible";
@@ -192,7 +192,7 @@
 "settings.swipeactions.primary" = "Acción primaria";
 "settings.swipeactions.secondary" = "Acción secundaria";
 "settings.swipeactions.status.action.bookmark" = "Marcadores";
-"settings.swipeactions.status.action.boost" = "Retootear";
+"settings.swipeactions.status.action.boost" = "Boostear";
 "settings.swipeactions.status.action.favorite" = "Favorito";
 "settings.swipeactions.status.action.none" = "Ninguna";
 "settings.swipeactions.status.action.quote" = "Citar";
@@ -245,14 +245,14 @@
 "account.action.message" = "Enviar mensaje";
 "account.action.notify-enable" = "Activar notificaciones";
 "account.action.notify-disable" = "Desactivar notificaiones";
-"account.action.reboosts-show" = "Mostrar retoots";
-"account.action.reboosts-hide" = "Esconder retoots";
+"account.action.reboosts-show" = "Mostrar boosts";
+"account.action.reboosts-hide" = "Esconder boosts";
 "account.action.block" = "Bloquear";
 "account.action.unblock" = "Desbloquear";
 "account.action.mute" = "Silenciar";
 "account.action.unmute" = "Dejar de silenciar";
 "account.action.share" = "Compartir esta cuenta";
-"account.boosted-by" = "Retooteado por";
+"account.boosted-by" = "Boosteado por";
 "account.detail.about" = "Acerca de";
 "account.detail.familiar-followers" = "Seguido también por";
 "account.detail.n-fields %lld" = "%lld campos";
@@ -358,7 +358,7 @@
 "notifications.label.follow-request" = "solicitó seguirte";
 "notifications.label.mention %lld" = "te mencionó";
 "notifications.label.poll" = "terminó una encuesta";
-"notifications.label.reblog %lld" = "retooteó";
+"notifications.label.reblog %lld" = "boosteó";
 "notifications.label.status" = "publicó un estado";
 "notifications.label.update" = "editó una publicación";
 "notifications.menu-title.favorite" = "Favoritos";
@@ -366,7 +366,7 @@
 "notifications.menu-title.follow-request" = "Solicitudes para seguirte";
 "notifications.menu-title.mention" = "Menciones";
 "notifications.menu-title.poll" = "Encuestas";
-"notifications.menu-title.reblog" = "Retoots";
+"notifications.menu-title.reblog" = "Boosts";
 "notifications.menu-title.status" = "Publicaciones";
 "notifications.menu-title.update" = "Publicaciones editadas";
 "notifications.navigation-title" = "Todas las notificaciones";
@@ -374,7 +374,7 @@
 "notifications.tab.mentions" = "Menciones";
 
 "notifications.label.status.push" = "🖊️ Publicó: ";
-"notifications.label.reblog.push" = "🚀 Retooteó: ";
+"notifications.label.reblog.push" = "🚀 Boosteó: ";
 "notifications.label.follow.push" = "👋 Te siguió: ";
 "notifications.label.follow-request.push" = "🔒 Solicitó seguirte: ";
 "notifications.label.favorite.push" = "⭐️ Marcó como favorito: ";
@@ -396,8 +396,8 @@
 "status.action.translated-label-%@" = "Traducido usando %@";
 "status.action.translated-label-from-%@-%@" = "Traducido desde %@ usando %@";
 "status.action.bookmark" = "Añadir a marcadores";
-"status.action.boost" = "Retootear";
-"status.action.boost-to-followers" = "Retootear a tus seguidores";
+"status.action.boost" = "Boostear";
+"status.action.boost-to-followers" = "Boostear a tus seguidores";
 "status.action.copy-text" = "Copiar texto";
 "status.action.copy-link" = "Copiar enlace";
 "status.action.delete" = "Borrar";
@@ -417,7 +417,7 @@
 "status.action.share-image" = "Compartir publicación como imagen";
 "status.action.share-title" = "Compartir";
 "status.action.unbookmark" = "Quitar de marcadores";
-"status.action.unboost" = "Deshacer Retoot";
+"status.action.unboost" = "Deshacer boost";
 "status.action.unfavorite" = "Eliminar de favoritos";
 "status.action.unpin" = "Desfijar";
 "status.action.view-in-browser" = "Ver en navegador";
@@ -472,16 +472,16 @@
 "status.poll.option-n %lld" = "Opción %lld";
 "status.poll.send" = "Enviar voto";
 "status.post-from-%@" = "Publicado por %@";
-"status.row.was-boosted" = "retooteó";
+"status.row.was-boosted" = "boosteó";
 "status.row.was-reply" = "Respuesta a";
-"status.row.you-boosted" = "Retooteaste";
+"status.row.you-boosted" = "Boosteaste";
 "status.show-less" = "Mostrar menos";
 "status.show-more" = "Mostrar más";
 "status.show-full-post" = "Mostrar publicación completa";
 "status.summary.at-time" = " a las ";
 "status.summary.edited-time" = "Última edición: ";
 "status.summary.n-replies %lld" = "%lld respuestas";
-"status.summary.n-boosts %lld" = "%lld retoots";
+"status.summary.n-boosts %lld" = "%lld boosts";
 "status.summary.n-favorites %lld" = "%lld favoritos";
 "status.visibility.direct" = "Privado";
 "status.visibility.follower" = "Sólo seguidores";
@@ -552,14 +552,14 @@
 "accessibility.tabs.profile.picker.media" = "Multimedia";
 "accessibility.tabs.profile.picker.lists" = "Listas";
 "accessibility.tabs.profile.user-notifications.label" = "Recibir notificaciones";
-"accessibility.tabs.profile.user-reblogs.label" = "Mostrat retoots";
+"accessibility.tabs.profile.user-reblogs.label" = "Mostrar boosts";
 "accessibility.tabs.profile.fields.verified.label" = "Verificado";
 "accessibility.tabs.profile.fields.container.label" = "Campos definidos por el usuario";
 "accessibility.status.spoiler-full-content" = "Contenido completo";
-"accessibility.status.a-boosted-b-%@-%@" = "%@ rettoteó %@";
+"accessibility.status.a-boosted-b-%@-%@" = "%@ boosteó %@";
 "accessibility.status.a-replied-to-%@" = "%@ respondió a";
 "accessibility.image.alt-text-%@" = "Texto alt de la imagen: %@";
-"accessibility.image.alt-text-more.label" = "Hay más text alt diaponible";
+"accessibility.image.alt-text-more.label" = "Hay más text alt disponible";
 "accessibility.tabs.messages.unread.label" = "Unread";
 
 // MARK: Report
@@ -568,4 +568,4 @@
 "report.action.send" = "Enviar";
 "status.action.report" = "Denunciar publicación";
 
-"tag.suggested.mentions-%lld" = "%lld mentions";
+"tag.suggested.mentions-%lld" = "%lld menciones";
