@@ -472,6 +472,7 @@
 "status.show-full-post" = "Erakutsi osorik";
 "status.summary.at-time" = " · ";
 "status.summary.edited-time" = "Azkenekoz editatua: ";
+"status.summary.edit-history" = "Edit History";
 "status.visibility.direct" = "Aipatutakoak";
 "status.visibility.follower" = "Jarraitzaileak";
 "status.visibility.public" = "Publikoa";

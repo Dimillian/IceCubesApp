@@ -478,6 +478,7 @@
 "status.summary.n-replies %lld" = "%lld replies";
 "status.summary.n-boosts %lld" = "%lld boosts";
 "status.summary.n-favorites %lld" = "%lld favoris";
+"status.summary.edit-history" = "Edit History";
 "status.visibility.direct" = "Privé";
 "status.visibility.follower" = "Abonnés";
 "status.visibility.public" = "Tout le monde";

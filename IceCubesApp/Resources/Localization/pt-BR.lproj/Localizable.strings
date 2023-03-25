@@ -482,6 +482,7 @@
 "status.summary.n-replies %lld" = "%lld replies";
 "status.summary.n-boosts %lld" = "%lld boosts";
 "status.summary.n-favorites %lld" = "%lld favoritos";
+"status.summary.edit-history" = "Edit History";
 "status.visibility.direct" = "Privado";
 "status.visibility.follower" = "Seguidores";
 "status.visibility.public" = "Todos";

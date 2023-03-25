@@ -481,6 +481,7 @@
 "status.summary.n-replies %lld" = "%lld 个回复";
 "status.summary.n-boosts %lld" = "%lld 转发";
 "status.summary.n-favorites %lld" = "%lld 喜欢";
+"status.summary.edit-history" = "Edit History";
 "status.visibility.direct" = "私密";
 "status.visibility.follower" = "粉丝";
 "status.visibility.public" = "所有人";

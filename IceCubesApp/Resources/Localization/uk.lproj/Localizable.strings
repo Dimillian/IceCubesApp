@@ -483,6 +483,7 @@
 "status.summary.n-replies %lld" = "%lld replies";
 "status.summary.n-boosts %lld" = "%lld поширень";
 "status.summary.n-favorites %lld" = "%lld вподобань";
+"status.summary.edit-history" = "Edit History";
 "status.visibility.direct" = "Особисте";
 "status.visibility.follower" = "Підписникам";
 "status.visibility.public" = "Усім";

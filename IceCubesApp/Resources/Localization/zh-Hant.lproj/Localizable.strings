@@ -482,6 +482,7 @@
 "status.summary.n-replies %lld" = "%lld replies";
 "status.summary.n-boosts %lld" = "%lld 轉嘟";
 "status.summary.n-favorites %lld" = "%lld 最愛";
+"status.summary.edit-history" = "Edit History";
 "status.visibility.direct" = "私訊";
 "status.visibility.follower" = "跟隨者";
 "status.visibility.public" = "所有人";

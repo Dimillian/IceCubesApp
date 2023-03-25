@@ -51,7 +51,7 @@ public struct StatusEditHistoryView: View {
           Button("action.done", action: { dismiss() })
         }
       }
-      .navigationTitle("Edit History")
+      .navigationTitle("status.summary.edit-history")
       .navigationBarTitleDisplayMode(.inline)
       .task {
         do {
