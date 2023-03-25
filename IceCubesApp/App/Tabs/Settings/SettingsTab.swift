@@ -283,6 +283,9 @@ struct SettingsTabs: View {
     .navigationTitle("settings.general.remote-timelines")
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
+    .toolbar {
+        EditButton()
+    }
   }
 
   private func moveTimelineItems(from source: IndexSet, to destination: Int) {
