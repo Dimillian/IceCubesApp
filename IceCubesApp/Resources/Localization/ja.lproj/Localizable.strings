@@ -524,10 +524,10 @@
 "accessibility.tabs.timeline.new-post.inputLabel2" = "作成";
 "accessibility.tabs.timeline.unread-posts.label-%lld" = "%lld 件の新しい投稿";
 "accessibility.tabs.timeline.unread-posts.hint" = "タイムラインをスクロールします。";
-"accessibility.tabs.timeline.content-link-%@" = "Visit %@";
-"accessibility.tabs.timeline.content-hashtag-%@" = "Hashtag %@";
+"accessibility.tabs.timeline.content-link-%@" = "%@ にアクセス";
+"accessibility.tabs.timeline.content-hashtag-%@" = "ハッシュタグ %@";
 "accessibility.app-account.selector.accounts" = "アカウント";
-"accessibility.app-account.selector.accounts.hint" = "オプション シートを開きます。";
+"accessibility.app-account.selector.accounts.hint" = "オプションシートを開きます。";
 "accessibility.tabs.profile.options.label" = "オプション";
 "accessibility.tabs.profile.options.inputLabel1" = "設定";
 "accessibility.tabs.profile.options.inputLabel2" = "その他";
@@ -559,7 +559,7 @@
 "accessibility.status.a-replied-to-%@" = "%@ に返信";
 "accessibility.image.alt-text-%@" = "画像の代替テキスト: %@";
 "accessibility.image.alt-text-more.label" = "より多くの代替テキストを利用できます";
-"accessibility.tabs.messages.unread.label" = "Unread";
+"accessibility.tabs.messages.unread.label" = "未読";
 
 // MARK: Report
 "report.comment.placeholder" = "追加情報";
