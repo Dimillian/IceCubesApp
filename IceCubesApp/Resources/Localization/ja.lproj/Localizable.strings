@@ -482,6 +482,7 @@
 "status.summary.n-replies %lld" = "%lld 件の返信";
 "status.summary.n-boosts %lld" = "%lld ブースト";
 "status.summary.n-favorites %lld" = "%lld お気に入り";
+"status.summary.edit-history" = "Edit History";
 "status.visibility.direct" = "指定された相手のみ";
 "status.visibility.follower" = "フォロワーのみ";
 "status.visibility.public" = "公開";

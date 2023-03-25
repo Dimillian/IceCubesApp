@@ -478,6 +478,7 @@
 "status.summary.n-replies %lld" = "%lld replies";
 "status.summary.n-boosts %lld" = "%lld yükseltmeler";
 "status.summary.n-favorites %lld" = "%lld favoriler";
+"status.summary.edit-history" = "Edit History";
 "status.visibility.direct" = "Gizli";
 "status.visibility.follower" = "Takipçiler";
 "status.visibility.public" = "Herkes";

@@ -484,6 +484,7 @@
 "status.summary.n-replies %lld" = "%lld replies";
 "status.summary.n-boosts %lld" = "부스트 %lld회";
 "status.summary.n-favorites %lld" = "좋아요 %lld회";
+"status.summary.edit-history" = "글 수정 기록";
 "status.visibility.direct" = "언급된 사용자만";
 "status.visibility.follower" = "팔로워만";
 "status.visibility.public" = "공개";
