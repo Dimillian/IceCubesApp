@@ -481,7 +481,7 @@
 "status.summary.n-replies %lld" = "%lld 个回复";
 "status.summary.n-boosts %lld" = "%lld 转发";
 "status.summary.n-favorites %lld" = "%lld 喜欢";
-"status.summary.edit-history" = "Edit History";
+"status.summary.edit-history" = "编辑历史";
 "status.visibility.direct" = "私密";
 "status.visibility.follower" = "粉丝";
 "status.visibility.public" = "所有人";
@@ -560,7 +560,7 @@
 "accessibility.status.a-replied-to-%@" = "%@ 回复给";
 "accessibility.image.alt-text-%@" = "图片描述文本：%@";
 "accessibility.image.alt-text-more.label" = "更多描述文本可用";
-"accessibility.tabs.messages.unread.label" = "Unread";
+"accessibility.tabs.messages.unread.label" = "未读";
 
 // MARK: Report
 "report.comment.placeholder" = "附加信息";
