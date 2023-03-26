@@ -50,23 +50,40 @@ struct DisplaySettingsView: View {
                                                           routerPath: RouterPath()) // translate from latin button
 
   var body: some View {
-    Form {
-      exampleSection
-      themeSection
-      fontSection
-      layoutSection
-      platformsSection
-      resetSection
+    ZStack(alignment: .top) {
+      Form {
+        StatusRowView(viewModel: { previewStatusViewModel })
+          .allowsHitTesting(false)
+          .opacity(0)
+          .hidden()
+        themeSection
+        fontSection
+        layoutSection
+        platformsSection
+        resetSection
+      }
+      .navigationTitle("settings.display.navigation-title")
+      .scrollContentBackground(.hidden)
+      .background(theme.secondaryBackgroundColor)
+      examplePost
     }
-    .navigationTitle("settings.display.navigation-title")
-    .scrollContentBackground(.hidden)
-    .background(theme.secondaryBackgroundColor)
   }
 
-  private var exampleSection: some View {
-    Section("settings.display.example-toot") {
+  private var examplePost: some View {
+    VStack(spacing: 0) {
       StatusRowView(viewModel: { previewStatusViewModel })
         .allowsHitTesting(false)
+        .padding(.layoutPadding)
+        .background(theme.primaryBackgroundColor)
+        .cornerRadius(8)
+        .padding(.horizontal, .layoutPadding)
+        .padding(.top, .layoutPadding)
+        .background(theme.secondaryBackgroundColor)
+      Rectangle()
+        .fill(theme.secondaryBackgroundColor)
+        .frame(height: 30)
+        .mask(LinearGradient(gradient: Gradient(colors: [theme.secondaryBackgroundColor, .clear]),
+                             startPoint: .top, endPoint: .bottom))
     }
   }
 
