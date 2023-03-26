@@ -172,6 +172,7 @@
 "settings.display.font.system" = "Sistemak darabilena";
 "settings.display.font.custom" = "Norberak ezarritakoa";
 "settings.display.font.scaling-%@" = "Letra tipoaren neurria: %@";
+"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
 "settings.about.built-with" = "Ice Cubes ondorengo iturburu irekiko softwarea erabiliz egin da:";
 "settings.about.title" = "Ice Cubes";
 "settings.account.cached-posts-%@" = "Bidalketak katxean: %@";

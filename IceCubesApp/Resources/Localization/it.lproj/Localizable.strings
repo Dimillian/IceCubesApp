@@ -173,6 +173,7 @@
 "settings.display.font.system" = "Sistema";
 "settings.display.font.custom" = "Personalizzato";
 "settings.display.font.scaling-%@" = "Font scaling: %@";
+"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
 "settings.other.autoplay-video" = "Auto Play dei video";
 "settings.about.built-with" = "Ice Cubes utilizza i seguenti software Open Source:";
 "settings.about.title" = "Ice Cubes";

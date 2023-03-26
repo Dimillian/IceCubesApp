@@ -175,6 +175,7 @@
 "settings.display.font.system" = "Sistema";
 "settings.display.font.custom" = "Personalizada";
 "settings.display.font.scaling-%@" = "Escala de fonte: %@";
+"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
 "settings.about.built-with" = "Ice Cubes é construído com os seguintes softwares de código aberto:";
 "settings.about.title" = "Ice Cubes";
 "settings.account.cached-posts-%@" = "Pastagens cacheadas: %@";

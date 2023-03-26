@@ -78,6 +78,7 @@
 "settings.display.font.system" = "System";
 "settings.display.font.custom" = "Tilpasset";
 "settings.display.font.scaling-%@" = "Font scaling: %@";
+"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
 "settings.display.avatar.position" = "Avatarposisjon";
 "settings.display.avatar.shape" = "Avatarform";
 "settings.display.full-username" = "Display full username";

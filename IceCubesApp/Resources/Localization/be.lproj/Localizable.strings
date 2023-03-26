@@ -78,6 +78,7 @@
 "settings.display.font.system" = "Сістэмны";
 "settings.display.font.custom" = "Уласны";
 "settings.display.font.scaling-%@" = "Маштаб шрыфту: %@";
+"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
 "settings.display.avatar.position" = "Пазіцыя аватару";
 "settings.display.avatar.shape" = "Форма аватару";
 "settings.display.full-username" = "Паказваць поўнае імя";

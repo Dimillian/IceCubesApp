@@ -16,6 +16,7 @@ struct StatusRowTextView: View {
                      language: viewModel.finalStatus.language,
                      lineLimit: viewModel.lineLimit)
           .font(viewModel.isFocused ? .scaledBodyFocused : .scaledBody)
+          .lineSpacing(CGFloat(theme.lineSpacing))
           .foregroundColor(viewModel.textDisabled ? .gray : theme.labelColor)
           .emojiSize(viewModel.isFocused ? Font.scaledBodyFocusedFont.emojiSize : Font.scaledBodyFont.emojiSize)
           .emojiBaselineOffset(viewModel.isFocused ? Font.scaledBodyFocusedFont.emojiBaselineOffset : Font.scaledBodyFont.emojiBaselineOffset)

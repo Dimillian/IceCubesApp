@@ -78,6 +78,7 @@
 "settings.display.font.system" = "系統";
 "settings.display.font.custom" = "自定";
 "settings.display.font.scaling-%@" = "字體縮放：%@";
+"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
 "settings.display.avatar.position" = "頭像位置";
 "settings.display.avatar.shape" = "頭像形狀";
 "settings.display.full-username" = "顯示用戶全名";

@@ -78,6 +78,7 @@
 "settings.display.font.system" = "システムフォント";
 "settings.display.font.custom" = "カスタム";
 "settings.display.font.scaling-%@" = "フォントサイズ: %@";
+"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
 "settings.display.avatar.position" = "アバターの位置";
 "settings.display.avatar.shape" = "アバターの形";
 "settings.display.full-username" = "完全なユーザー名を表示";

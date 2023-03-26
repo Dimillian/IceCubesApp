@@ -137,6 +137,15 @@ struct DisplaySettingsView: View {
       .alignmentGuide(.listRowSeparatorLeading) { d in
         d[.leading]
       }
+      
+      VStack {
+        Slider(value: $theme.lineSpacing, in: 0.4 ... 10.0, step: 0.2)
+        Text("settings.display.font.line-spacing-\(String(format: "%.1f", theme.lineSpacing))")
+          .font(.scaledBody)
+      }
+      .alignmentGuide(.listRowSeparatorLeading) { d in
+        d[.leading]
+      }
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
