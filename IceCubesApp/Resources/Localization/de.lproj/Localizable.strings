@@ -172,7 +172,7 @@
 "settings.display.font.system" = "System";
 "settings.display.font.custom" = "Eigene";
 "settings.display.font.scaling-%@" = "Schriftskalierung: %@";
-"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
+"settings.display.font.line-spacing-%@" = "Zeilenabstand: %@";
 "settings.about.built-with" = "Ice Cubes wird mit folgender Open-Source-Software erstellt:";
 "settings.about.title" = "Ice Cubes";
 "settings.account.cached-posts-%@" = "Beiträge im Cache: %@";
