@@ -478,7 +478,7 @@
 "status.summary.n-boosts %lld" = "%lld Boosts";
 "status.summary.n-favorites %lld" = "%lld Favoriten";
 "status.summary.edited-time" = "Zuletzt bearbeitet: ";
-"status.summary.edit-history" = "Edit History";
+"status.summary.edit-history" = "Beitragsverlauf";
 "status.visibility.direct" = "Direkt";
 "status.visibility.follower" = "Follower";
 "status.visibility.public" = "Öffentlich";
