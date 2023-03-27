@@ -70,11 +70,12 @@ public struct StatusPollView: View {
   }
 
   public var body: some View {
+    let isInteractive = viewModel.poll.expired == false && (viewModel.poll.voted ?? true) == false
     VStack(alignment: .leading) {
       ForEach(Array(viewModel.poll.options.enumerated()), id: \.element.id) { index, option in
         HStack {
           makeBarView(for: option, buttonImage: buttonImage(option: option))
-            .disabled(viewModel.poll.expired || (viewModel.poll.voted ?? false))
+            .disabled(isInteractive == false)
           if viewModel.showResults || status.account.id == currentAccount.account?.id {
             Spacer()
             // Make sure they're all the same width using a ZStack with 100% hiding behind the
@@ -90,7 +91,10 @@ public struct StatusPollView: View {
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel(combinedAccessibilityLabel(for: option, index: index))
+        .accessibilityRespondsToUserInteraction(isInteractive)
         .accessibilityAddTraits(isSelected(option: option) ? .isSelected : [])
+        .accessibilityAddTraits(isInteractive ? [] : .isStaticText)
+        .accessibilityRemoveTraits(isInteractive ? [] : .isButton)
       }
       if !viewModel.poll.expired, !(viewModel.poll.voted ?? false), !viewModel.votes.isEmpty {
         Button("status.poll.send") {
