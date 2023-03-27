@@ -563,6 +563,10 @@
 "accessibility.image.alt-text-%@" = "Image alt text: %@";
 "accessibility.image.alt-text-more.label" = "More alt text available";
 "accessibility.tabs.messages.unread.label" = "Unread";
+"accessibility.status.poll.option-prefix-%lld-of-%lld" = "Option %lld of %lld";
+"accessibility.status.poll.active.label" = "Active poll";
+"accessibility.status.poll.finished.label" = "Poll results";
+"accessibility.status.poll.selected.label" = "Selected";
 
 // MARK: Report
 "report.comment.placeholder" = "Additional Info";
