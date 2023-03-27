@@ -67,6 +67,11 @@ public struct StatusRowView: View {
                 .onTapGesture {
                   viewModel.navigateToDetail()
                 }
+                .accessibilityActions {
+                  if viewModel.isFocused, viewModel.showActions {
+                    accessibilityActions
+                  }
+                }
             }
             if viewModel.showActions, viewModel.isFocused || theme.statusActionsDisplay != .none, !isInCaptureMode {
               StatusRowActionsView(viewModel: viewModel)
@@ -118,7 +123,7 @@ public struct StatusRowView: View {
       viewModel.navigateToDetail()
     }
     .accessibilityActions {
-      if viewModel.showActions {
+      if viewModel.isFocused == false, viewModel.showActions {
         accessibilityActions
       }
     }
