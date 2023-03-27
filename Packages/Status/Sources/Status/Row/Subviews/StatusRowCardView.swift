@@ -57,10 +57,11 @@ public struct StatusRowCardView: View {
                 Rectangle()
                   .fill(Color.gray)
                   .frame(height: imageHeight)
-                  .accessibilityLabel("placeholder.loading.short")
               }
             }
             .processors(processors)
+            // This image is decorative
+            .accessibilityHidden(true)
           }
           .frame(height: imageHeight)
         }
@@ -108,6 +109,9 @@ public struct StatusRowCardView: View {
           Label("status.card.copy", systemImage: "doc.on.doc")
         }
       }
+      .accessibilityElement(children: .combine)
+      .accessibilityAddTraits(.isLink)
+      .accessibilityRemoveTraits(.isStaticText)
     }
   }
 }
