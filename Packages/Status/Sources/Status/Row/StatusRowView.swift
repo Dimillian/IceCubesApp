@@ -272,9 +272,9 @@ private struct CombinedAccessibilityLabel {
       Text(hasSpoiler
         ? "status.editor.spoiler"
         : ""
-      ) +
+      ) + Text(", ") +
       pollText() +
-      imageAltText() + Text(", ") +
+      imageAltText() +
       Text(viewModel.finalStatus.createdAt.relativeFormatted) + Text(", ") +
       Text("status.summary.n-replies \(viewModel.finalStatus.repliesCount)") + Text(", ") +
       Text("status.summary.n-boosts \(viewModel.finalStatus.reblogsCount)") + Text(", ") +
@@ -338,9 +338,9 @@ private struct CombinedAccessibilityLabel {
         Text(selected ? "accessibility.status.poll.selected.label" : "") +
         Text(", ") +
         Text("accessibility.status.poll.option-prefix-\(index + 1)-of-\(poll.options.count)") +
+        Text(", ") +
         Text(option.title) +
-        Text(showPercentage ? "\(percentage)%" : "") +
-        Text(". ")
+        Text(showPercentage ? ", \(percentage)%. " : ". ")
       }
     }
     return Text("")
