@@ -312,6 +312,9 @@ private struct CombinedAccessibilityLabel {
       return Text("accessibility.image.alt-text-\(descriptions[0])")
     } else if descriptions.count > 1 {
       return Text("accessibility.image.alt-text-\(descriptions[0])") + Text(", ") + Text("accessibility.image.alt-text-more.label")
+    } else if viewModel.finalStatus.mediaAttachments.isEmpty == false {
+      let differentTypes = Set(viewModel.finalStatus.mediaAttachments.compactMap(\.localizedTypeDescription)).sorted()
+      return Text("accessibility.status.contains-media.label-\(ListFormatter.localizedString(byJoining: differentTypes))")
     } else {
       return Text("")
     }

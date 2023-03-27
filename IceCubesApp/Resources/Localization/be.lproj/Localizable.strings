@@ -571,6 +571,11 @@
 "accessibility.status.poll.active.label" = "Active poll";
 "accessibility.status.poll.finished.label" = "Poll results";
 "accessibility.status.poll.selected.label" = "Selected";
+"accessibility.media.supported-type.image.label" = "Image";
+"accessibility.media.supported-type.gifv.label" = "Animated Gif";
+"accessibility.media.supported-type.video.label" = "Video";
+"accessibility.media.supported-type.audio.label" = "Audio";
+"accessibility.status.contains-media.label-%@" = "Contains %@";
 
 // MARK: Report
 "report.comment.placeholder" = "Дадатковая інфармацыя";

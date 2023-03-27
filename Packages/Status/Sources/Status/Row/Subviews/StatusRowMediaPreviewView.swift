@@ -254,11 +254,13 @@ public struct StatusRowMediaPreviewView: View {
                 .cornerRadius(4)
               }
             }
+            .accessibilityAddTraits(.isImage)
           case .gifv, .video, .audio:
             if let url = attachment.url {
               VideoPlayerView(viewModel: .init(url: url))
                 .frame(width: isCompact ? imageMaxHeight : proxy.frame(in: .local).width)
                 .frame(height: imageMaxHeight)
+                .accessibilityAddTraits(.startsMediaSession)
             }
           }
         }
@@ -274,7 +276,7 @@ public struct StatusRowMediaPreviewView: View {
       }
       .accessibilityElement(children: .combine)
       .modifier(ConditionalAccessibilityLabelAltTextModifier(attachment: attachment))
-      .accessibilityAddTraits([.isButton, .isImage])
+      .accessibilityAddTraits(.isButton)
     }
   }
 
@@ -343,6 +345,9 @@ private struct ConditionalAccessibilityLabelAltTextModifier: ViewModifier {
     if let altText = attachment.description {
       content
         .accessibilityLabel("accessibility.image.alt-text-\(altText)")
+    } else if let typeDescription = attachment.localizedTypeDescription {
+      content
+        .accessibilityLabel(typeDescription)
     } else {
       content
     }
