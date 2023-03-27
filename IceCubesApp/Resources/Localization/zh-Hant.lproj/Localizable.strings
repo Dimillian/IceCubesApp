@@ -571,6 +571,7 @@
 "accessibility.media.supported-type.video.label" = "Video";
 "accessibility.media.supported-type.audio.label" = "Audio";
 "accessibility.status.contains-media.label-%@" = "Contains %@";
+"accessibility.status.application.label" = "App";
 
 // MARK: Report
 "report.comment.placeholder" = "附加資訊";
