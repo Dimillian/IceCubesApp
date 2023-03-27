@@ -503,6 +503,8 @@
 "filter.contexts.profiles" = "Profile";
 "filter.action.warning" = "Mit einer Warnung ausblenden";
 "filter.action.hide" = "Komplett ausblenden";
+"filter.expired" = "Expired";
+"filter.expiry-%@" = "Expiry: %@";
 
 // MARK: Accessibility
 "accessibility.editor.button.attach-photo" = "Foto anhängen";

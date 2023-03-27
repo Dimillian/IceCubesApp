@@ -509,6 +509,8 @@
 "filter.contexts.profiles" = "Profiles";
 "filter.action.warning" = "Hide with a warning";
 "filter.action.hide" = "Hide completely";
+"filter.expired" = "Expired";
+"filter.expiry-%@" = "Expiry: %@";
 
 // MARK: Accessibility
 "accessibility.editor.button.attach-photo" = "Attach photo";

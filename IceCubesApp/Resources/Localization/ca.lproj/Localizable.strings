@@ -507,6 +507,8 @@
 "filter.contexts.profiles" = "Perfils";
 "filter.action.warning" = "Amaga amb un avís";
 "filter.action.hide" = "Amaga per complet";
+"filter.expired" = "Expired";
+"filter.expiry-%@" = "Expiry: %@";
 
 // MARK: Accessibility
 "accessibility.editor.button.attach-photo" = "Attach photo";

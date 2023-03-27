@@ -501,6 +501,8 @@
 "filter.contexts.profiles" = "Profielen";
 "filter.action.warning" = "Verberg met waarschuwing";
 "filter.action.hide" = "Verberg volledig";
+"filter.expired" = "Expired";
+"filter.expiry-%@" = "Expiry: %@";
 
 "enum.expand-media.show" = "Toon alle";
 "enum.expand-media.hide" = "Verberg alle";
