@@ -54,6 +54,7 @@ public struct StatusDetailView: View {
               .listRowSeparator(.hidden)
               .listRowBackground(theme.secondaryBackgroundColor)
               .listRowInsets(.init())
+              .accessibilityHidden(true)
 
           case .error:
             errorView
@@ -119,6 +120,7 @@ public struct StatusDetailView: View {
           Rectangle()
             .fill(theme.tintColor)
             .frame(width: 2)
+            .accessibilityHidden(true)
           Spacer(minLength: 8)
         }
         if self.viewModel.statusId == status.id {

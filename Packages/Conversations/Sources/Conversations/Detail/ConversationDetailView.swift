@@ -110,6 +110,7 @@ public struct ConversationDetailView: View {
       .fill(Color.clear)
       .frame(height: 40)
       .id(Constants.bottomAnchor)
+      .accessibilityHidden(true)
   }
 
   private var inputTextView: some View {

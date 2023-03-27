@@ -57,6 +57,7 @@ public struct StatusRowCardView: View {
                 Rectangle()
                   .fill(Color.gray)
                   .frame(height: imageHeight)
+                  .accessibilityLabel("placeholder.loading.short")
               }
             }
             .processors(processors)
