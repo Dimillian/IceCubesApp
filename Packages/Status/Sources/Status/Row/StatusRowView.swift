@@ -273,6 +273,7 @@ private struct CombinedAccessibilityLabel {
         ? "status.editor.spoiler"
         : ""
       ) +
+      pollText() +
       imageAltText() + Text(", ") +
       Text(viewModel.finalStatus.createdAt.relativeFormatted) + Text(", ") +
       Text("status.summary.n-replies \(viewModel.finalStatus.repliesCount)") + Text(", ") +
@@ -314,5 +315,31 @@ private struct CombinedAccessibilityLabel {
     } else {
       return Text("")
     }
+  }
+
+  func pollText() -> Text {
+    if let poll = viewModel.finalStatus.poll {
+      let showPercentage = poll.expired || poll.voted ?? false
+      let title: LocalizedStringKey = poll.expired
+        ? "accessibility.status.poll.finished.label"
+        : "accessibility.status.poll.active.label"
+
+      return poll.options.enumerated().reduce(into: Text(title)) { text, pair in
+        let (index, option) = pair
+        let selected = poll.ownVotes?.contains(index) ?? false
+        let percentage = poll.safeVotersCount > 0
+          ? Int(round(Double(option.votesCount) / Double(poll.safeVotersCount) * 100))
+          : 0
+
+        text = text +
+        Text(selected ? "accessibility.status.poll.selected.label" : "") +
+        Text(", ") +
+        Text("accessibility.status.poll.option-prefix-\(index + 1)-of-\(poll.options.count)") +
+        Text(option.title) +
+        Text(showPercentage ? "\(percentage)%" : "") +
+        Text(". ")
+      }
+    }
+    return Text("")
   }
 }
