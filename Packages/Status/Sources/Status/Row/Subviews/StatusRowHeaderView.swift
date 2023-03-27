@@ -23,8 +23,16 @@ struct StatusRowHeaderView: View {
         contextMenuButton
       }
     }
-    .accessibilityElement()
-    .accessibilityLabel(Text("\(viewModel.finalStatus.account.safeDisplayName)"))
+    .accessibilityElement(children: .combine)
+    .accessibilityLabel(Text("\(viewModel.finalStatus.account.safeDisplayName)") + Text(", ") + Text(viewModel.finalStatus.createdAt.relativeFormatted))
+    .accessibilityAction {
+      viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
+    }
+    .accessibilityActions {
+      if viewModel.isFocused {
+        StatusRowContextMenu(viewModel: viewModel)
+      }
+    }
   }
 
   @ViewBuilder
