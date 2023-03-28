@@ -506,6 +506,8 @@
 "filter.contexts.profiles" = "个人主页";
 "filter.action.warning" = "隐藏并提醒";
 "filter.action.hide" = "完全隐藏";
+"filter.expired" = "Expired";
+"filter.expiry-%@" = "Expiry: %@";
 
 "enum.expand-media.show" = "显示所有";
 "enum.expand-media.hide" = "隐藏所有";

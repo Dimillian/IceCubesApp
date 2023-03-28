@@ -483,7 +483,7 @@
 "status.summary.n-replies %lld" = "%lld 件の返信";
 "status.summary.n-boosts %lld" = "%lld ブースト";
 "status.summary.n-favorites %lld" = "%lld お気に入り";
-"status.summary.edit-history" = "Edit History";
+"status.summary.edit-history" = "編集履歴";
 "status.visibility.direct" = "指定された相手のみ";
 "status.visibility.follower" = "フォロワーのみ";
 "status.visibility.public" = "公開";
@@ -508,6 +508,8 @@
 "filter.contexts.profiles" = "プロフィール";
 "filter.action.warning" = "警告して非表示";
 "filter.action.hide" = "完全に非表示";
+"filter.expired" = "Expired";
+"filter.expiry-%@" = "Expiry: %@";
 
 // MARK: Accessibility
 "accessibility.editor.button.attach-photo" = "画像を添付";

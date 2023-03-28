@@ -513,6 +513,8 @@
 "filter.contexts.profiles" = "Профілі";
 "filter.action.warning" = "Схаваць з папярэджаннем";
 "filter.action.hide" = "Схаваць цалкам";
+"filter.expired" = "Expired";
+"filter.expiry-%@" = "Expiry: %@";
 
 // MARK: Accessibility
 "accessibility.editor.button.attach-photo" = "Далучыць фота";

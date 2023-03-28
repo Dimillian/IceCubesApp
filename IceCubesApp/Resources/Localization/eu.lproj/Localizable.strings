@@ -77,7 +77,7 @@
 "settings.display.avatar.position" = "Abatarraren kokapena";
 "settings.display.avatar.shape" = "Abatarraren itxura";
 "settings.display.full-username" = "Erakutsi erabiltzaile izen osoa";
-"settings.display.navigation-title" = "Pantaila ezarpenak";
+"settings.display.navigation-title" = "Pantailaren ezarpenak";
 "settings.display.restore" = "Berrezarri defektuzkoa";
 "settings.display.section.display" = "Pantaila";
 "settings.display.section.theme" = "Itxura";
@@ -95,7 +95,7 @@
 "settings.general.browser.in-app" = "Barnekoa";
 "settings.general.browser.in-app.readerview" = "Barneko nabigatzailearen irakurketa bista";
 "settings.general.browser.system" = "Sistemarena";
-"settings.general.display" = "Pantaila ezarpenak";
+"settings.general.display" = "Pantailaren ezarpenak";
 "settings.general.instance" = "Instantziaren informazioa";
 "settings.general.push-notifications" = "Push jakinarazpenak";
 "settings.general.remote-timelines" = "Beste instantziatako denbora-lerro lokalak";
@@ -141,8 +141,8 @@
 "settings.other.hide-openai" = "Gaitu 🤖 laguntzailea";
 "settings.other.social-keyboard" = "Gaitu teklatu soziala";
 "settings.other.sound-effect" = "Gaitu soinu efektuak";
-"settings.general.translate" = "Itzulpen ezarpenak";
-"settings.translation.navigation-title" = "Itzulpen ezarpenak";
+"settings.general.translate" = "Itzulpenaren ezarpenak";
+"settings.translation.navigation-title" = "Itzulpenaren ezarpenak";
 "settings.translation.always-deepl" = "Itzuli beti DeepL erabiliz";
 "settings.translation.user-api-key" = "DeepL API gakoa";
 "settings.translation.api-key-type" = "Gako mota";
@@ -172,7 +172,7 @@
 "settings.display.font.system" = "Sistemak darabilena";
 "settings.display.font.custom" = "Norberak ezarritakoa";
 "settings.display.font.scaling-%@" = "Letra tipoaren neurria: %@";
-"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
+"settings.display.font.line-spacing-%@" = "Lerroen arteko espazioa: %@";
 "settings.about.built-with" = "Ice Cubes ondorengo iturburu irekiko softwarea erabiliz egin da:";
 "settings.about.title" = "Ice Cubes";
 "settings.account.cached-posts-%@" = "Bidalketak katxean: %@";
@@ -473,7 +473,7 @@
 "status.show-full-post" = "Erakutsi osorik";
 "status.summary.at-time" = " · ";
 "status.summary.edited-time" = "Azkenekoz editatua: ";
-"status.summary.edit-history" = "Edit History";
+"status.summary.edit-history" = "Edizio-historia";
 "status.visibility.direct" = "Aipatutakoak";
 "status.visibility.follower" = "Jarraitzaileak";
 "status.visibility.public" = "Publikoa";
@@ -497,6 +497,8 @@
 "filter.contexts.profiles" = "Profilak";
 "filter.action.warning" = "Ezkutatu ohartarazpen batekin";
 "filter.action.hide" = "Ezkutatu guztiz";
+"filter.expired" = "Expired";
+"filter.expiry-%@" = "Expiry: %@";
 
 // MARK: Accessibility
 "accessibility.editor.button.attach-photo" = "Erantsi irudia";

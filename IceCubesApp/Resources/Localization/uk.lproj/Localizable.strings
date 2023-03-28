@@ -509,6 +509,8 @@
 "filter.contexts.profiles" = "Профілі";
 "filter.action.warning" = "Приховати з попередженням";
 "filter.action.hide" = "Повністю приховати";
+"filter.expired" = "Expired";
+"filter.expiry-%@" = "Expiry: %@";
 
 // MARK: Accessibility
 "accessibility.editor.button.attach-photo" = "Додати світлину";

@@ -504,6 +504,8 @@
 "filter.contexts.profiles" = "Profiles";
 "filter.action.warning" = "Hide with a warning";
 "filter.action.hide" = "Hide completely";
+"filter.expired" = "Expired";
+"filter.expiry-%@" = "Expiry: %@";
 
 "enum.expand-media.show" = "Show All";
 "enum.expand-media.hide" = "Hide All";
