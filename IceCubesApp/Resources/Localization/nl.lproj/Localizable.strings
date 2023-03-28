@@ -172,7 +172,7 @@
 "settings.display.font.system" = "Systeem";
 "settings.display.font.custom" = "Aangepast";
 "settings.display.font.scaling-%@" = "Lettertype vergroten/verkleinen: %@";
-"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
+"settings.display.font.line-spacing-%@" = "Regelafstand: %@";
 "settings.about.built-with" = "Ice Cubes is gebouwd met de volgende opensourcesoftware:";
 "settings.about.title" = "Ice Cubes";
 "settings.account.cached-posts-%@" = "Posts in cache: %@";
@@ -477,7 +477,7 @@
 "status.summary.n-replies %lld" = "%lld antwoorden";
 "status.summary.n-boosts %lld" = "%lld boosts";
 "status.summary.n-favorites %lld" = "%lld favorieten";
-"status.summary.edit-history" = "Edit History";
+"status.summary.edit-history" = "Bewerkingsgeschiedenis";
 "status.visibility.direct" = "Direct bericht";
 "status.visibility.follower" = "Alleen volgers";
 "status.visibility.public" = "Openbaar";
@@ -501,8 +501,8 @@
 "filter.contexts.profiles" = "Profielen";
 "filter.action.warning" = "Verberg met waarschuwing";
 "filter.action.hide" = "Verberg volledig";
-"filter.expired" = "Expired";
-"filter.expiry-%@" = "Expiry: %@";
+"filter.expired" = "Verlopen";
+"filter.expiry-%@" = "Verloopt: %@";
 
 "enum.expand-media.show" = "Toon alle";
 "enum.expand-media.hide" = "Verberg alle";
@@ -558,9 +558,9 @@
 "accessibility.status.spoiler-full-content" = "Volledige inhoud";
 "accessibility.status.a-boosted-b-%@-%@" = "%@ heeft %@ geboost";
 "accessibility.status.a-replied-to-%@" = "%@ heeft geantwoord op";
-"accessibility.image.alt-text-%@" = "Tekst voor afbeedling: %@";
+"accessibility.image.alt-text-%@" = "Tekst voor afbeelding: %@";
 "accessibility.image.alt-text-more.label" = "Meer tekst beschikbaar";
-"accessibility.tabs.messages.unread.label" = "Unread";
+"accessibility.tabs.messages.unread.label" = "Ongelezen";
 "accessibility.status.poll.option-prefix-%lld-of-%lld" = "Option %lld of %lld";
 "accessibility.status.poll.active.label" = "Active poll";
 "accessibility.status.poll.finished.label" = "Poll results";
