@@ -211,6 +211,7 @@
 "settings.cache-media.clear" = "清除媒體快取";
 
 "settings.general.translate" = "翻譯設定";
+"settings.translation.navigation-title" = "翻譯設定";
 "settings.translation.always-deepl" = "一概用 DeepL 翻譯";
 "settings.translation.user-api-key" = "DeepL API Key";
 "settings.translation.api-key-type" = "Key 類型";
