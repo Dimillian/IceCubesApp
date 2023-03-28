@@ -477,7 +477,7 @@
 "status.summary.n-replies %lld" = "%lld antwoorden";
 "status.summary.n-boosts %lld" = "%lld boosts";
 "status.summary.n-favorites %lld" = "%lld favorieten";
-"status.summary.edit-history" = "Edit History";
+"status.summary.edit-history" = "Bewerkingsgeschiedenis";
 "status.visibility.direct" = "Direct bericht";
 "status.visibility.follower" = "Alleen volgers";
 "status.visibility.public" = "Openbaar";
