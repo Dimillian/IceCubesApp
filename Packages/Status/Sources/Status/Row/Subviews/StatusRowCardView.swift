@@ -60,6 +60,8 @@ public struct StatusRowCardView: View {
               }
             }
             .processors(processors)
+            // This image is decorative
+            .accessibilityHidden(true)
           }
           .frame(height: imageHeight)
         }
@@ -107,6 +109,9 @@ public struct StatusRowCardView: View {
           Label("status.card.copy", systemImage: "doc.on.doc")
         }
       }
+      .accessibilityElement(children: .combine)
+      .accessibilityAddTraits(.isLink)
+      .accessibilityRemoveTraits(.isStaticText)
     }
   }
 }

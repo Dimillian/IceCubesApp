@@ -28,8 +28,25 @@ public struct NotificationsListView: View {
     .id(account.account?.id)
     .environment(\.defaultMinListRowHeight, 1)
     .listStyle(.plain)
-    .navigationTitle(lockedType?.menuTitle() ?? viewModel.selectedType?.menuTitle() ?? "notifications.navigation-title")
-    .navigationBarTitleDisplayMode(.inline)
+    .toolbar {
+      ToolbarItem(placement: .principal) {
+        let title = lockedType?.menuTitle() ?? viewModel.selectedType?.menuTitle() ?? "notifications.navigation-title"
+        if lockedType == nil {
+          Text(title)
+            .font(.headline)
+            .accessibilityRepresentation {
+              Menu(title) {}
+            }
+            .accessibilityAddTraits(.isHeader)
+            .accessibilityRemoveTraits(.isButton)
+            .accessibilityRespondsToUserInteraction(true)
+        } else {
+          Text(title)
+            .font(.headline)
+            .accessibilityAddTraits(.isHeader)
+        }
+      }
+    }
     .toolbar {
       if lockedType == nil {
         ToolbarTitleMenu {
@@ -53,6 +70,7 @@ public struct NotificationsListView: View {
         }
       }
     }
+    .navigationBarTitleDisplayMode(.inline)
     .scrollContentBackground(.hidden)
     .background(theme.primaryBackgroundColor)
     .task {

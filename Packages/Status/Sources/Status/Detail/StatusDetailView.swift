@@ -11,8 +11,9 @@ public struct StatusDetailView: View {
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var routerPath: RouterPath
-  @Environment(\.openURL) private var openURL
+  
   @StateObject private var viewModel: StatusDetailViewModel
+  
   @State private var isLoaded: Bool = false
   @State private var statusHeight: CGFloat = 0
 
@@ -54,6 +55,7 @@ public struct StatusDetailView: View {
               .listRowSeparator(.hidden)
               .listRowBackground(theme.secondaryBackgroundColor)
               .listRowInsets(.init())
+              .accessibilityHidden(true)
 
           case .error:
             errorView
@@ -119,6 +121,7 @@ public struct StatusDetailView: View {
           Rectangle()
             .fill(theme.tintColor)
             .frame(width: 2)
+            .accessibilityHidden(true)
           Spacer(minLength: 8)
         }
         if self.viewModel.statusId == status.id {

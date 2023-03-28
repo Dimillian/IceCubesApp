@@ -67,6 +67,11 @@ public struct AppAccountsSelectorView: View {
     .onAppear {
       refreshAccounts()
     }
+    .accessibilityRepresentation {
+      Menu("accessibility.app-account.selector.accounts") {}
+        .accessibilityHint("accessibility.app-account.selector.accounts.hint")
+        .accessibilityRemoveTraits(.isButton)
+    }
   }
 
   @ViewBuilder
@@ -85,8 +90,6 @@ public struct AppAccountsSelectorView: View {
           .frame(width: 9, height: 9)
       }
     }
-    .accessibilityLabel("accessibility.app-account.selector.accounts")
-    .accessibilityHint("accessibility.app-account.selector.accounts.hint")
   }
 
   private var accountBackgroundColor: Color {

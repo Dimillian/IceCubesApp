@@ -101,14 +101,25 @@ public struct TimelineView: View {
           }
         }
         .accessibilityRepresentation {
-          if canFilterTimeline {
-            Menu(timeline.localizedTitle()) {}
-          } else {
-            Text(timeline.localizedTitle())
+          switch timeline {
+            case let .remoteLocal(_, filter):
+              if canFilterTimeline {
+                Menu(filter.localizedTitle()) {}
+              } else {
+                Text(filter.localizedTitle())
+              }
+            default:
+              if canFilterTimeline {
+                Menu(timeline.localizedTitle()) {}
+              } else {
+                Text(timeline.localizedTitle())
+              }
+
           }
         }
         .accessibilityAddTraits(.isHeader)
         .accessibilityRemoveTraits(.isButton)
+        .accessibilityRespondsToUserInteraction(canFilterTimeline)
       }
     }
     .navigationBarTitleDisplayMode(.inline)
@@ -217,5 +228,6 @@ public struct TimelineView: View {
       .onDisappear {
         viewModel.scrollToTopVisible = false
       }
+      .accessibilityHidden(true)
   }
 }

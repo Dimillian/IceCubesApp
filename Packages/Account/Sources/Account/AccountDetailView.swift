@@ -299,6 +299,7 @@ public struct AccountDetailView: View {
         .frame(height: 12)
         .listRowInsets(.init())
         .listRowSeparator(.hidden)
+        .accessibilityHidden(true)
     }
   }
 

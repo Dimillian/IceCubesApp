@@ -67,6 +67,11 @@ public struct StatusRowView: View {
                 .onTapGesture {
                   viewModel.navigateToDetail()
                 }
+                .accessibilityActions {
+                  if viewModel.isFocused, viewModel.showActions {
+                    accessibilityActions
+                  }
+                }
             }
             if viewModel.showActions, viewModel.isFocused || theme.statusActionsDisplay != .none, !isInCaptureMode {
               StatusRowActionsView(viewModel: viewModel)
@@ -118,7 +123,7 @@ public struct StatusRowView: View {
       viewModel.navigateToDetail()
     }
     .accessibilityActions {
-      if viewModel.showActions {
+      if viewModel.isFocused == false, viewModel.showActions {
         accessibilityActions
       }
     }
@@ -272,8 +277,9 @@ private struct CombinedAccessibilityLabel {
       Text(hasSpoiler
         ? "status.editor.spoiler"
         : ""
-      ) +
-      imageAltText() + Text(", ") +
+      ) + Text(", ") +
+      pollText() +
+      imageAltText() +
       Text(viewModel.finalStatus.createdAt.relativeFormatted) + Text(", ") +
       Text("status.summary.n-replies \(viewModel.finalStatus.repliesCount)") + Text(", ") +
       Text("status.summary.n-boosts \(viewModel.finalStatus.reblogsCount)") + Text(", ") +
@@ -308,11 +314,40 @@ private struct CombinedAccessibilityLabel {
       .compactMap(\.description)
 
     if descriptions.count == 1 {
-      return Text("accessibility.image.alt-text-\(descriptions[0])")
+      return Text("accessibility.image.alt-text-\(descriptions[0])") + Text(", ")
     } else if descriptions.count > 1 {
-      return Text("accessibility.image.alt-text-\(descriptions[0])") + Text(", ") + Text("accessibility.image.alt-text-more.label")
+      return Text("accessibility.image.alt-text-\(descriptions[0])") + Text(", ") + Text("accessibility.image.alt-text-more.label") + Text(", ")
+    } else if viewModel.finalStatus.mediaAttachments.isEmpty == false {
+      let differentTypes = Set(viewModel.finalStatus.mediaAttachments.compactMap(\.localizedTypeDescription)).sorted()
+      return Text("accessibility.status.contains-media.label-\(ListFormatter.localizedString(byJoining: differentTypes))") + Text(", ")
     } else {
       return Text("")
     }
+  }
+
+  func pollText() -> Text {
+    if let poll = viewModel.finalStatus.poll {
+      let showPercentage = poll.expired || poll.voted ?? false
+      let title: LocalizedStringKey = poll.expired
+        ? "accessibility.status.poll.finished.label"
+        : "accessibility.status.poll.active.label"
+
+      return poll.options.enumerated().reduce(into: Text(title)) { text, pair in
+        let (index, option) = pair
+        let selected = poll.ownVotes?.contains(index) ?? false
+        let percentage = poll.safeVotersCount > 0
+          ? Int(round(Double(option.votesCount) / Double(poll.safeVotersCount) * 100))
+          : 0
+
+        text = text +
+        Text(selected ? "accessibility.status.poll.selected.label" : "") +
+        Text(", ") +
+        Text("accessibility.status.poll.option-prefix-\(index + 1)-of-\(poll.options.count)") +
+        Text(", ") +
+        Text(option.title) +
+        Text(showPercentage ? ", \(percentage)%. " : ". ")
+      }
+    }
+    return Text("")
   }
 }

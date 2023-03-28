@@ -7,6 +7,7 @@ extension TextView.Representable {
 
     private var originalText: NSMutableAttributedString = .init()
     private var text: Binding<NSMutableAttributedString>
+    private var sizeCategory: ContentSizeCategory
     private var calculatedHeight: Binding<CGFloat>
 
     var didBecomeFirstResponder = false
@@ -15,6 +16,7 @@ extension TextView.Representable {
 
     init(text: Binding<NSMutableAttributedString>,
          calculatedHeight: Binding<CGFloat>,
+         sizeCategory: ContentSizeCategory,
          getTextView: ((UITextView) -> Void)?)
     {
       textView = UIKitTextView()
@@ -26,6 +28,7 @@ extension TextView.Representable {
 
       self.text = text
       self.calculatedHeight = calculatedHeight
+      self.sizeCategory = sizeCategory
       self.getTextView = getTextView
 
       super.init()
