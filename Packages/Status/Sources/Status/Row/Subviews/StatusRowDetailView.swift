@@ -30,6 +30,7 @@ struct StatusRowDetailView: View {
             Text(name)
               .underline()
           }
+          .buttonStyle(.plain)
           .accessibilityLabel("accessibility.status.application.label")
           .accessibilityValue(name)
           .accessibilityAddTraits(.isLink)
