@@ -39,6 +39,7 @@ public struct NotificationsListView: View {
             }
             .accessibilityAddTraits(.isHeader)
             .accessibilityRemoveTraits(.isButton)
+            .accessibilityRespondsToUserInteraction(true)
         } else {
           Text(title)
             .font(.headline)

@@ -119,6 +119,7 @@ public struct TimelineView: View {
         }
         .accessibilityAddTraits(.isHeader)
         .accessibilityRemoveTraits(.isButton)
+        .accessibilityRespondsToUserInteraction(canFilterTimeline)
       }
     }
     .navigationBarTitleDisplayMode(.inline)
