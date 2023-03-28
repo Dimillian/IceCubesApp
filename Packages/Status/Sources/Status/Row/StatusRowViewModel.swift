@@ -1,10 +1,10 @@
 import Combine
+import DesignSystem
 import Env
 import Models
 import NaturalLanguage
 import Network
 import SwiftUI
-import DesignSystem
 
 @MainActor
 public class StatusRowViewModel: ObservableObject {
@@ -21,7 +21,7 @@ public class StatusRowViewModel: ObservableObject {
   @Published var isEmbedLoading: Bool = false
   @Published var isFiltered: Bool = false
 
-  @Published var translation: StatusTranslation?
+  @Published var translation: Translation?
   @Published var isLoadingTranslation: Bool = false
   @Published var showDeleteAlert: Bool = false
 
@@ -39,25 +39,26 @@ public class StatusRowViewModel: ObservableObject {
       recalcCollapse()
     }
   }
+
   // number of lines to show, nil means show the whole post
   @Published var lineLimit: Int? = nil
   // post length determining if the post should be collapsed
-  let collapseThresholdLength : Int = 750
+  let collapseThresholdLength: Int = 750
   // number of text lines to show on a collpased post
   let collapsedLines: Int = 8
   // user preference, set in init
   var collapseLongPosts: Bool = false
-  
+
   private func recalcCollapse() {
     let hasContentWarning = !status.spoilerText.asRawText.isEmpty
     let showCollapseButton = collapseLongPosts && isCollapsed && !hasContentWarning
-    && finalStatus.content.asRawText.unicodeScalars.count > collapseThresholdLength
+      && finalStatus.content.asRawText.unicodeScalars.count > collapseThresholdLength
     let newlineLimit = showCollapseButton && isCollapsed ? collapsedLines : nil
     if newlineLimit != lineLimit {
       lineLimit = newlineLimit
     }
   }
-  
+
   private let theme = Theme.shared
   private let userMentionned: Bool
 
@@ -94,7 +95,7 @@ public class StatusRowViewModel: ObservableObject {
               textDisabled: Bool = false)
   {
     self.status = status
-    self.finalStatus = status.reblog ?? status
+    finalStatus = status.reblog ?? status
     self.client = client
     self.routerPath = routerPath
     self.isFocused = isFocused
@@ -112,13 +113,12 @@ public class StatusRowViewModel: ObservableObject {
       displaySpoiler = !finalStatus.spoilerText.asRawText.isEmpty
     }
 
-    
     if status.mentions.first(where: { $0.id == CurrentAccount.shared.account?.id }) != nil {
       userMentionned = true
     } else {
       userMentionned = false
     }
-    
+
     isFiltered = filter != nil
 
     if let url = embededStatusURL(),
@@ -127,7 +127,7 @@ public class StatusRowViewModel: ObservableObject {
       isEmbedLoading = false
       embeddedStatus = embed
     }
-    
+
     collapseLongPosts = UserPreferences.shared.collapseLongPosts
     recalcCollapse()
   }
@@ -187,7 +187,8 @@ public class StatusRowViewModel: ObservableObject {
     if !content.statusesURLs.isEmpty,
        let url = content.statusesURLs.first,
        !StatusEmbedCache.shared.badStatusesURLs.contains(url),
-       client.hasConnection(with: url) {
+       client.hasConnection(with: url)
+    {
       return url
     }
     return nil
@@ -202,7 +203,7 @@ public class StatusRowViewModel: ObservableObject {
       }
       return
     }
-    
+
     if let embed = StatusEmbedCache.shared.get(url: url) {
       isEmbedLoading = false
       embeddedStatus = embed
@@ -224,8 +225,7 @@ public class StatusRowViewModel: ObservableObject {
       }
       if let embed {
         StatusEmbedCache.shared.set(url: url, status: embed)
-      }
-      else {
+      } else {
         StatusEmbedCache.shared.badStatusesURLs.insert(url)
       }
       withAnimation {
@@ -288,28 +288,53 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   func translate(userLang: String) async {
-    do {
-      withAnimation {
-        isLoadingTranslation = true
-      }
-      // We first use instance translation API if available.
-      let translation: StatusTranslation = try await client.post(endpoint: Statuses.translate(id: finalStatus.id,
-                                                                                              lang: userLang))
-      withAnimation {
-        self.translation = translation
-        isLoadingTranslation = false
-      }
-    } catch {
-      // If not or fail we use Ice Cubes own DeepL client.
-      let deepLClient = DeepLClient()
-      let translation = try? await deepLClient.request(target: userLang,
-                                                       source: finalStatus.language,
-                                                       text: finalStatus.content.asRawText)
-      withAnimation {
-        self.translation = translation
-        isLoadingTranslation = false
-      }
+    withAnimation {
+      isLoadingTranslation = true
     }
+    if !alwaysTranslateWithDeepl {
+      do {
+        // We first use instance translation API if available.
+        let translation: Translation = try await client.post(endpoint: Statuses.translate(id: finalStatus.id,
+                                                                                          lang: userLang))
+        withAnimation {
+          self.translation = translation
+          isLoadingTranslation = false
+        }
+
+        return
+      } catch {}
+    }
+
+    // If not or fail we use Ice Cubes own DeepL client.
+    await translateWithDeepL(userLang: userLang)
+  }
+
+  func translateWithDeepL(userLang: String) async {
+    withAnimation {
+      isLoadingTranslation = true
+    }
+
+    let deepLClient = getDeepLClient()
+    let translation = try? await deepLClient.request(target: userLang,
+                                                     text: finalStatus.content.asRawText)
+    withAnimation {
+      self.translation = translation
+      isLoadingTranslation = false
+    }
+  }
+
+  private func getDeepLClient() -> DeepLClient {
+    let userAPIfree = UserPreferences.shared.userDeeplAPIFree
+
+    return DeepLClient(userAPIKey: userAPIKey, userAPIFree: userAPIfree)
+  }
+
+  private var userAPIKey: String? {
+    DeepLUserAPIHandler.readIfAllowed()
+  }
+
+  var alwaysTranslateWithDeepl: Bool {
+    DeepLUserAPIHandler.shouldAlwaysUseDeepl
   }
 
   func fetchRemoteStatus() async -> Bool {

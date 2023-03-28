@@ -8,6 +8,7 @@ public class Theme: ObservableObject {
     case selectedSet, selectedScheme
     case followSystemColorSchme
     case displayFullUsernameTimeline
+    case lineSpacing
   }
 
   public enum FontState: Int, CaseIterable {
@@ -127,6 +128,7 @@ public class Theme: ObservableObject {
   @AppStorage(ThemeKey.statusDisplayStyle.rawValue) public var statusDisplayStyle: StatusDisplayStyle = .large
   @AppStorage(ThemeKey.followSystemColorSchme.rawValue) public var followSystemColorScheme: Bool = true
   @AppStorage(ThemeKey.displayFullUsernameTimeline.rawValue) public var displayFullUsername: Bool = true
+  @AppStorage(ThemeKey.lineSpacing.rawValue) public var lineSpacing: Double = 0.8
   @AppStorage("font_size_scale") public var fontSizeScale: Double = 1
   @AppStorage("chosen_font") public private(set) var chosenFontData: Data?
 

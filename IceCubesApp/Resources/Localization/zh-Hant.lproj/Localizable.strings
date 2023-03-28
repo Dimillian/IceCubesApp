@@ -78,6 +78,7 @@
 "settings.display.font.system" = "系統";
 "settings.display.font.custom" = "自定";
 "settings.display.font.scaling-%@" = "字體縮放：%@";
+"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
 "settings.display.avatar.position" = "頭像位置";
 "settings.display.avatar.shape" = "頭像形狀";
 "settings.display.full-username" = "顯示用戶全名";
@@ -208,6 +209,12 @@
 
 "settings.section.cache" = "快取";
 "settings.cache-media.clear" = "清除媒體快取";
+
+"settings.general.translate" = "Translation Settings";
+"settings.translation.always-deepl" = "Always Translate using DeepL";
+"settings.translation.user-api-key" = "DeepL API Key";
+"settings.translation.api-key-type" = "Type of the Key";
+"settings.translation.needed-message" = "This feature requires a DeepL API key";
 
 // MARK: Tabs
 "tab.explore" = "探索";
@@ -419,6 +426,8 @@
 "status.draft.delete" = "刪除草稿";
 "status.draft.save" = "儲存草稿";
 "status.editor.ai-prompt.correct" = "更正";
+"status.editor.ai-prompt.add-tags" = "Add #Tags in place";
+"status.editor.ai-prompt.insert-tags" = "Add #Tags after my text";
 "status.editor.ai-prompt.emphasize" = "強調";
 "status.editor.ai-prompt.fit" = "精簡";
 "status.editor.description.add" = "新增描述";
@@ -440,6 +449,8 @@
 "status.editor.spoiler" = "劇透警告";
 "status.editor.text.placeholder" = "您在想些什麼呢？";
 "status.editor.visibility" = "嘟文能見度";
+"status.editor.photo-library" = "Photos Library";
+"status.editor.browse-file" = "Browse Files";
 "status.error.loading.message" = "下載嘟文時發生錯誤，請再試一次。";
 "status.error.message" = "嘟文上下文發生錯誤，請再試一次。";
 "status.error.title" = "發生錯誤";
@@ -469,8 +480,10 @@
 "status.show-full-post" = "顯示全文";
 "status.summary.at-time" = " 於 ";
 "status.summary.edited-time" = "上次編輯：";
+"status.summary.n-replies %lld" = "%lld replies";
 "status.summary.n-boosts %lld" = "%lld 轉嘟";
 "status.summary.n-favorites %lld" = "%lld 最愛";
+"status.summary.edit-history" = "Edit History";
 "status.visibility.direct" = "私訊";
 "status.visibility.follower" = "跟隨者";
 "status.visibility.public" = "所有人";
@@ -503,8 +516,52 @@
 "accessibility.editor.button.drafts" = "草稿";
 "accessibility.editor.button.custom-emojis" = "自定表情符號";
 "accessibility.editor.button.language" = "語言";
+"accessibility.editor.button.ai-prompt" = "AI prompt";
+"accessibility.editor.button.characters-remaining" = "Characters remaining";
+"accessibility.editor.privacy.label" = "Visibility";
+"accessibility.editor.privacy.hint" = "Changes post audience.";
 "accessibility.tabs.timeline.add-account" = "新增帳號";
+"accessibility.tabs.timeline.new-post.label" = "Compose";
+"accessibility.tabs.timeline.new-post.inputLabel1" = "New";
+"accessibility.tabs.timeline.new-post.inputLabel2" = "Create";
+"accessibility.tabs.timeline.unread-posts.label-%lld" = "%lld new posts";
+"accessibility.tabs.timeline.unread-posts.hint" = "Scrolls the timeline.";
+"accessibility.tabs.timeline.content-link-%@" = "Visit %@";
+"accessibility.tabs.timeline.content-hashtag-%@" = "Hashtag %@";
 "accessibility.app-account.selector.accounts" = "帳號";
+"accessibility.app-account.selector.accounts.hint" = "Opens options sheet.";
+"accessibility.tabs.profile.options.label" = "Options";
+"accessibility.tabs.profile.options.inputLabel1" = "Settings";
+"accessibility.tabs.profile.options.inputLabel2" = "More";
+"accessibility.tabs.profile.user-avatar.label" = "Profile photo";
+"accessibility.tabs.profile.user-avatar.hint" = "Displays a larger version.";
+"accessibility.tabs.profile.user-avatar.supporter.label" = "Supporter";
+"accessibility.tabs.profile.user.account-bot.label" = "Bot account";
+"accessibility.tabs.profile.user.account-blocked.label" = "Blocked";
+"accessibility.tabs.profile.user.account-muted.label" = "Muted";
+"accessibility.tabs.profile.user.account-private.label" = "Private account";
+"accessibility.tabs.profile.header-image.label" = "Header image";
+"accessibility.tabs.profile.header-image.hint" = "Displays a larger version.";
+"accessibility.tabs.profile.post-count.hint" = "Scrolls to list.";
+"accessibility.tabs.profile.following-count.hint" = "Navigates to list.";
+"accessibility.tabs.profile.follower-count.hint" = "Navigates to list.";
+"accessibility.tabs.profile.picker.statuses" = "Posts";
+"accessibility.tabs.profile.picker.favorites" = "Favorites";
+"accessibility.tabs.profile.picker.bookmarks" = "Bookmarks";
+"accessibility.tabs.profile.picker.followed-tags" = "Tags";
+"accessibility.tabs.profile.picker.posts-and-replies" = "Posts and replies";
+"accessibility.tabs.profile.picker.media" = "Media";
+"accessibility.tabs.profile.picker.lists" = "Lists";
+"accessibility.tabs.profile.user-notifications.label" = "Receive notifications";
+"accessibility.tabs.profile.user-reblogs.label" = "Display boosts";
+"accessibility.tabs.profile.fields.verified.label" = "Verified";
+"accessibility.tabs.profile.fields.container.label" = "User-defined fields";
+"accessibility.status.spoiler-full-content" = "Full Content";
+"accessibility.status.a-boosted-b-%@-%@" = "%@ boosted %@";
+"accessibility.status.a-replied-to-%@" = "%@ replied to";
+"accessibility.image.alt-text-%@" = "Image alt text: %@";
+"accessibility.image.alt-text-more.label" = "More alt text available";
+"accessibility.tabs.messages.unread.label" = "Unread";
 
 // MARK: Report
 "report.comment.placeholder" = "附加資訊";
@@ -512,4 +569,4 @@
 "report.action.send" = "送出";
 "status.action.report" = "檢舉嘟文";
 
-"tag.suggested.mentions-%@" = "%@ 提及";
+"tag.suggested.mentions-%lld" = "%lld 提及";

@@ -39,7 +39,6 @@
 "enum.status-actions-display.only-buttons" = "Solo bottoni";
 "enum.status-display-style.compact" = "Compatto";
 "enum.status-display-style.large" = "Completo";
-"enum.status-display-style.medium" = "Medio";
 "enum.swipeactions.icon-with-text" = "Icon e testo";
 "enum.swipeactions.icon-only" = "Solo icone";
 
@@ -141,6 +140,12 @@
 "settings.other.hide-openai" = "Abilita l'aiuto del 🤖";
 "settings.other.social-keyboard" = "Abilita social keyboard";
 "settings.other.sound-effect" = "Attiva gli effetti sonori";
+"settings.general.translate" = "Translation Settings";
+"settings.translation.navigation-title" = "Translation";
+"settings.translation.always-deepl" = "Always Translate using DeepL";
+"settings.translation.user-api-key" = "DeepL API Key";
+"settings.translation.api-key-type" = "Type of the Key";
+"settings.translation.needed-message" = "This feature requires a DeepL API key";
 "settings.general.content" = "Impostazioni dei contenuti";
 "settings.system" = "Vai alle impostazioni di sistema";
 "settings.content.navigation-title" = "Impostazioni dei contenuti";
@@ -168,6 +173,7 @@
 "settings.display.font.system" = "Sistema";
 "settings.display.font.custom" = "Personalizzato";
 "settings.display.font.scaling-%@" = "Font scaling: %@";
+"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
 "settings.other.autoplay-video" = "Auto Play dei video";
 "settings.about.built-with" = "Ice Cubes utilizza i seguenti software Open Source:";
 "settings.about.title" = "Ice Cubes";
@@ -386,6 +392,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Traduci";
+"status.action.translate-with-deepl" = "Translate with DeepL";
 "status.action.translated-label-%@" = "Tradotto usando %@";
 "status.action.translated-label-from-%@-%@" = "Tradotto da %@ usando %@";
 "status.action.bookmark" = "Salva nei segnalibri";
@@ -419,6 +426,8 @@
 "status.draft.delete" = "Cancella la bozza";
 "status.draft.save" = "Salva la bozza";
 "status.editor.ai-prompt.correct" = "Correggi il testo";
+"status.editor.ai-prompt.add-tags" = "Add #Tags in place";
+"status.editor.ai-prompt.insert-tags" = "Add #Tags after my text";
 "status.editor.ai-prompt.emphasize" = "Enfatizza il testo";
 "status.editor.ai-prompt.fit" = "Accorcia il testo";
 "status.editor.description.add" = "Aggiungi la descrizione";
@@ -440,6 +449,8 @@
 "status.editor.spoiler" = "Testo spoiler";
 "status.editor.text.placeholder" = "A cosa stai pensando?";
 "status.editor.visibility" = "Visibilità del post";
+"status.editor.photo-library" = "Photos Library";
+"status.editor.browse-file" = "Browse Files";
 "status.error.loading.message" = "Si è verificato un errore durante il caricamento dei post, per favore riprova.";
 "status.error.message" = "Si è verificato un errore durante il caricamento del post, per favore riprova.";
 "status.error.title" = "Si è verificato un errore";
@@ -469,8 +480,10 @@
 "status.show-full-post" = "Mostra il post completo";
 "status.summary.at-time" = " alle ";
 "status.summary.edited-time" = "Ultima modifica: ";
+"status.summary.n-replies %lld" = "%lld replies";
 "status.summary.n-boosts %lld" = "%lld condivisioni";
 "status.summary.n-favorites %lld" = "%lld preferiti";
+"status.summary.edit-history" = "Edit History";
 "status.visibility.direct" = "Privato";
 "status.visibility.follower" = "Solo ai follower";
 "status.visibility.public" = "A tutti";
@@ -503,8 +516,52 @@
 "accessibility.editor.button.drafts" = "Bozze";
 "accessibility.editor.button.custom-emojis" = "Emoji personalizzate";
 "accessibility.editor.button.language" = "Lingua";
+"accessibility.editor.button.ai-prompt" = "AI prompt";
+"accessibility.editor.button.characters-remaining" = "Characters remaining";
+"accessibility.editor.privacy.label" = "Visibility";
+"accessibility.editor.privacy.hint" = "Changes post audience.";
 "accessibility.tabs.timeline.add-account" = "Aggiungi account";
+"accessibility.tabs.timeline.new-post.label" = "Compose";
+"accessibility.tabs.timeline.new-post.inputLabel1" = "New";
+"accessibility.tabs.timeline.new-post.inputLabel2" = "Create";
+"accessibility.tabs.timeline.unread-posts.label-%lld" = "%lld new posts";
+"accessibility.tabs.timeline.unread-posts.hint" = "Scrolls the timeline.";
+"accessibility.tabs.timeline.content-link-%@" = "Visit %@";
+"accessibility.tabs.timeline.content-hashtag-%@" = "Hashtag %@";
 "accessibility.app-account.selector.accounts" = "Account";
+"accessibility.app-account.selector.accounts.hint" = "Opens options sheet.";
+"accessibility.tabs.profile.options.label" = "Options";
+"accessibility.tabs.profile.options.inputLabel1" = "Settings";
+"accessibility.tabs.profile.options.inputLabel2" = "More";
+"accessibility.tabs.profile.user-avatar.label" = "Profile photo";
+"accessibility.tabs.profile.user-avatar.hint" = "Displays a larger version.";
+"accessibility.tabs.profile.user-avatar.supporter.label" = "Supporter";
+"accessibility.tabs.profile.user.account-bot.label" = "Bot account";
+"accessibility.tabs.profile.user.account-blocked.label" = "Blocked";
+"accessibility.tabs.profile.user.account-muted.label" = "Muted";
+"accessibility.tabs.profile.user.account-private.label" = "Private account";
+"accessibility.tabs.profile.header-image.label" = "Header image";
+"accessibility.tabs.profile.header-image.hint" = "Displays a larger version.";
+"accessibility.tabs.profile.post-count.hint" = "Scrolls to list.";
+"accessibility.tabs.profile.following-count.hint" = "Navigates to list.";
+"accessibility.tabs.profile.follower-count.hint" = "Navigates to list.";
+"accessibility.tabs.profile.picker.statuses" = "Posts";
+"accessibility.tabs.profile.picker.favorites" = "Favorites";
+"accessibility.tabs.profile.picker.bookmarks" = "Bookmarks";
+"accessibility.tabs.profile.picker.followed-tags" = "Tags";
+"accessibility.tabs.profile.picker.posts-and-replies" = "Posts and replies";
+"accessibility.tabs.profile.picker.media" = "Media";
+"accessibility.tabs.profile.picker.lists" = "Lists";
+"accessibility.tabs.profile.user-notifications.label" = "Receive notifications";
+"accessibility.tabs.profile.user-reblogs.label" = "Display boosts";
+"accessibility.tabs.profile.fields.verified.label" = "Verified";
+"accessibility.tabs.profile.fields.container.label" = "User-defined fields";
+"accessibility.status.spoiler-full-content" = "Full Content";
+"accessibility.status.a-boosted-b-%@-%@" = "%@ boosted %@";
+"accessibility.status.a-replied-to-%@" = "%@ replied to";
+"accessibility.image.alt-text-%@" = "Image alt text: %@";
+"accessibility.image.alt-text-more.label" = "More alt text available";
+"accessibility.tabs.messages.unread.label" = "Unread";
 
 // MARK: Report
 "report.comment.placeholder" = "Informazioni aggiuntive";
@@ -512,4 +569,4 @@
 "report.action.send" = "Invia";
 "status.action.report" = "Segnala il messaggio";
 
-"tag.suggested.mentions-%@" = "%@ mentions";
+"tag.suggested.mentions-%lld" = "%lld mentions";

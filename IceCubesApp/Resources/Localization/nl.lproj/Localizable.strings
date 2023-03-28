@@ -141,6 +141,12 @@
 "settings.other.hide-openai" = "Gebruik 🤖-hulp";
 "settings.other.social-keyboard" = "Gebruik socialmedia-toetsenbord";
 "settings.other.sound-effect" = "Geluidseffecten";
+"settings.general.translate" = "Vertalingsinstellingen";
+"settings.translation.navigation-title" = "Vertaling";
+"settings.translation.always-deepl" = "Vertaal altijd met DeepL";
+"settings.translation.user-api-key" = "DeepL API-sleutel";
+"settings.translation.api-key-type" = "Sleuteltype";
+"settings.translation.needed-message" = "Deze functionaliteit vereist een DeepL API-sleutel";
 "settings.general.content" = "Inhoud";
 "settings.system" = "Systeeminstellingen";
 "settings.content.navigation-title" = "Inhoud";
@@ -166,6 +172,7 @@
 "settings.display.font.system" = "Systeem";
 "settings.display.font.custom" = "Aangepast";
 "settings.display.font.scaling-%@" = "Lettertype vergroten/verkleinen: %@";
+"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
 "settings.about.built-with" = "Ice Cubes is gebouwd met de volgende opensourcesoftware:";
 "settings.about.title" = "Ice Cubes";
 "settings.account.cached-posts-%@" = "Posts in cache: %@";
@@ -379,8 +386,9 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Vertaal";
-"status.action.translated-label-%@" = "Vertaald met behulp van %@";
-"status.action.translated-label-from-%@-%@" = "Vertaald uit het %@ met behulp van %@";
+"status.action.translate-with-deepl" = "Vertaal met DeepL";
+"status.action.translated-label-%@" = "Vertaald met %@";
+"status.action.translated-label-from-%@-%@" = "Vertaald uit het %@ met %@";
 "status.action.bookmark" = "Voeg bladwijzer toe";
 "status.action.boost" = "Boost";
 "status.action.boost-to-followers" = "Boost aan volgers";
@@ -412,6 +420,8 @@
 "status.draft.delete" = "Verwijder concept";
 "status.draft.save" = "Bewaar concept";
 "status.editor.ai-prompt.correct" = "Corrigeer tekst";
+"status.editor.ai-prompt.add-tags" = "Hashtags in tekst";
+"status.editor.ai-prompt.insert-tags" = "Hashtags na tekst";
 "status.editor.ai-prompt.emphasize" = "Benadruk tekst";
 "status.editor.ai-prompt.fit" = "Kort tekst in";
 "status.editor.description.add" = "Voeg omschrijving toe";
@@ -433,6 +443,8 @@
 "status.editor.spoiler" = "Spoilertekst";
 "status.editor.text.placeholder" = "Waar denk je aan?";
 "status.editor.visibility" = "Zichtbaarheid";
+"status.editor.photo-library" = "Fotobibliotheek";
+"status.editor.browse-file" = "Bestanden";
 "status.error.loading.message" = "Er heeft zich een fout voorgedaan tijdens het laden van je posts. Probeer het nogmaals.";
 "status.error.message" = "Er heeft zich een fout voorgedaan. Probeer het nogmaals.";
 "status.error.title" = "Er heeft zich een fout voorgedaan";
@@ -462,8 +474,10 @@
 "status.show-full-post" = "Toon volledige post";
 "status.summary.at-time" = " om ";
 "status.summary.edited-time" = "Laatst gewijzigd: ";
+"status.summary.n-replies %lld" = "%lld antwoorden";
 "status.summary.n-boosts %lld" = "%lld boosts";
 "status.summary.n-favorites %lld" = "%lld favorieten";
+"status.summary.edit-history" = "Edit History";
 "status.visibility.direct" = "Direct bericht";
 "status.visibility.follower" = "Alleen volgers";
 "status.visibility.public" = "Openbaar";
@@ -499,8 +513,52 @@
 "accessibility.editor.button.drafts" = "Concepten";
 "accessibility.editor.button.custom-emojis" = "Aangepaste emoji’s";
 "accessibility.editor.button.language" = "Taal";
+"accessibility.editor.button.ai-prompt" = "AI-prompt";
+"accessibility.editor.button.characters-remaining" = "Tekens resterend";
+"accessibility.editor.privacy.label" = "Zichtbaarheid";
+"accessibility.editor.privacy.hint" = "Wijzigt wie de post ziet.";
 "accessibility.tabs.timeline.add-account" = "Voeg account toe";
+"accessibility.tabs.timeline.new-post.label" = "Opstellen";
+"accessibility.tabs.timeline.new-post.inputLabel1" = "Nieuw";
+"accessibility.tabs.timeline.new-post.inputLabel2" = "Maak aan";
+"accessibility.tabs.timeline.unread-posts.label-%lld" = "%lld nieuwe posts";
+"accessibility.tabs.timeline.unread-posts.hint" = "Scrollt de tijdlijn.";
+"accessibility.tabs.timeline.content-link-%@" = "Visit %@";
+"accessibility.tabs.timeline.content-hashtag-%@" = "Hashtag %@";
 "accessibility.app-account.selector.accounts" = "Accounts";
+"accessibility.app-account.selector.accounts.hint" = "Opent paneel voor opties.";
+"accessibility.tabs.profile.options.label" = "Opties";
+"accessibility.tabs.profile.options.inputLabel1" = "Instellingen";
+"accessibility.tabs.profile.options.inputLabel2" = "Meer";
+"accessibility.tabs.profile.user-avatar.label" = "Profielfoto";
+"accessibility.tabs.profile.user-avatar.hint" = "Toont een grotere versie.";
+"accessibility.tabs.profile.user-avatar.supporter.label" = "Supporter";
+"accessibility.tabs.profile.user.account-bot.label" = "Bot-account";
+"accessibility.tabs.profile.user.account-blocked.label" = "Geblokkeerd";
+"accessibility.tabs.profile.user.account-muted.label" = "Gedempt";
+"accessibility.tabs.profile.user.account-private.label" = "Privé-account";
+"accessibility.tabs.profile.header-image.label" = "Achtergrondafbeelding";
+"accessibility.tabs.profile.header-image.hint" = "Toont een grotere versie.";
+"accessibility.tabs.profile.post-count.hint" = "Scrollt naar lijst.";
+"accessibility.tabs.profile.following-count.hint" = "Navigeert naar lijst.";
+"accessibility.tabs.profile.follower-count.hint" = "Navigeert naar lijst.";
+"accessibility.tabs.profile.picker.statuses" = "Posts";
+"accessibility.tabs.profile.picker.favorites" = "Favorieten";
+"accessibility.tabs.profile.picker.bookmarks" = "Bladwijzers";
+"accessibility.tabs.profile.picker.followed-tags" = "Tags";
+"accessibility.tabs.profile.picker.posts-and-replies" = "Posts en antwoorden";
+"accessibility.tabs.profile.picker.media" = "Media";
+"accessibility.tabs.profile.picker.lists" = "Lijsten";
+"accessibility.tabs.profile.user-notifications.label" = "Ontvang meldingen";
+"accessibility.tabs.profile.user-reblogs.label" = "Toon boosts";
+"accessibility.tabs.profile.fields.verified.label" = "Geverifieerd";
+"accessibility.tabs.profile.fields.container.label" = "Velden ingesteld door gebruiker";
+"accessibility.status.spoiler-full-content" = "Volledige inhoud";
+"accessibility.status.a-boosted-b-%@-%@" = "%@ heeft %@ geboost";
+"accessibility.status.a-replied-to-%@" = "%@ heeft geantwoord op";
+"accessibility.image.alt-text-%@" = "Tekst voor afbeedling: %@";
+"accessibility.image.alt-text-more.label" = "Meer tekst beschikbaar";
+"accessibility.tabs.messages.unread.label" = "Unread";
 
 // MARK: Report
 "report.comment.placeholder" = "Aanvullende informatie";
@@ -508,4 +566,4 @@
 "report.action.send" = "Verstuur";
 "status.action.report" = "Meld post";
 
-"tag.suggested.mentions-%@" = "%@ mentions";
+"tag.suggested.mentions-%lld" = "%lld vermeldingen";

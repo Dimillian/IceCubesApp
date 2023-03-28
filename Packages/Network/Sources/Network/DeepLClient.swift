@@ -6,9 +6,17 @@ public struct DeepLClient {
     case notFound
   }
 
-  private let endpoint = "https://api.deepl.com/v2/translate"
+  private var deeplUserAPIKey: String?
+  private var deeplUserAPIFree: Bool
+  private var endpoint: String {
+    "https://api\(deeplUserAPIFree && (deeplUserAPIKey != nil) ? "-free" : "").deepl.com/v2/translate"
+  }
 
   private var APIKey: String {
+    if let deeplUserAPIKey {
+      return deeplUserAPIKey
+    }
+
     if let path = Bundle.main.path(forResource: "Secret", ofType: "plist") {
       let secret = NSDictionary(contentsOfFile: path)
       return secret?["DEEPL_SECRET"] as? String ?? ""
@@ -35,9 +43,12 @@ public struct DeepLClient {
     return decoder
   }
 
-  public init() {}
+  public init(userAPIKey: String?, userAPIFree: Bool) {
+    deeplUserAPIKey = userAPIKey
+    deeplUserAPIFree = userAPIFree
+  }
 
-  public func request(target: String, source _: String?, text: String) async throws -> StatusTranslation {
+  public func request(target: String, text: String) async throws -> Translation {
     do {
       var components = URLComponents(string: endpoint)!
       var queryItems: [URLQueryItem] = []

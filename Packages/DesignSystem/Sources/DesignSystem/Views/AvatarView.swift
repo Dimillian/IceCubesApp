@@ -64,7 +64,6 @@ public struct AvatarView: View {
             AvatarPlaceholderView(size: size)
           }
         }
-        .animation(nil)
         .frame(width: size.size.width, height: size.size.height)
       }
     }

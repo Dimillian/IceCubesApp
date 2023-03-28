@@ -88,7 +88,10 @@ struct IconSelectorView: View {
           if icon.rawValue == Icon.primary.rawValue {
             UIApplication.shared.setAlternateIconName(nil)
           } else {
-            UIApplication.shared.setAlternateIconName(icon.appIconName)
+            UIApplication.shared.setAlternateIconName(icon.appIconName) { err in
+              guard let err else { return }
+              assertionFailure("\(err.localizedDescription) - Icon name: \(icon.appIconName)")
+            }
           }
         } label: {
           ZStack(alignment: .bottomTrailing) {

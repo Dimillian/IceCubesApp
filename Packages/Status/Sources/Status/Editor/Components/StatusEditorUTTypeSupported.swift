@@ -21,6 +21,7 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
   case gif = "public.gif"
   case gif2 = "com.compuserve.gif"
   case quickTimeMovie = "com.apple.quicktime-movie"
+  case adobeRawImage = "com.adobe.raw-image"
 
   case uiimage = "com.apple.uikit.image"
 
@@ -30,11 +31,11 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
   //     Main actor-isolated static property 'allCases' cannot be used to
   //     satisfy nonisolated protocol requirement
   //
-  nonisolated public static var allCases: [StatusEditorUTTypeSupported] {
+  public nonisolated static var allCases: [StatusEditorUTTypeSupported] {
     [.url, .text, .plaintext, .image, .jpeg, .png, .tiff, .video,
-     .movie, .mp4, .gif, .gif2, .quickTimeMovie, .uiimage]
+     .movie, .mp4, .gif, .gif2, .quickTimeMovie, .uiimage, .adobeRawImage]
   }
-  
+
   static func types() -> [UTType] {
     [.url, .text, .plainText, .image, .jpeg, .png, .tiff, .video, .mpeg4Movie, .gif, .movie, .quickTimeMovie]
   }
@@ -60,26 +61,27 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
   func loadItemContent(item: NSItemProvider) async throws -> Any? {
     // Many warnings here about non-sendable type `[AnyHashable: Any]?` crossing
     // actor boundaries. Many Radars have been filed.
-    let result = try await item.loadItem(forTypeIdentifier: rawValue)
     if isVideo, let transferable = await getVideoTransferable(item: item) {
       return transferable
     } else if isGif, let transferable = await getGifTransferable(item: item) {
       return transferable
+    } else if let transferable = await getImageTansferable(item: item) {
+      return transferable
     }
-    if self == .jpeg || self == .png || self == .tiff || self == .image || self == .uiimage {
+    let compressor = StatusEditorCompressor()
+    let result = try await item.loadItem(forTypeIdentifier: rawValue)
+    if self == .jpeg || self == .png || self == .tiff || self == .image || self == .uiimage || self == .adobeRawImage {
       if let image = result as? UIImage {
         return image
       } else if let imageURL = result as? URL,
-                let data = try? Data(contentsOf: imageURL),
-                let image = UIImage(data: data)
+                let compressedData = await compressor.compressImageFrom(url: imageURL),
+                let image = UIImage(data: compressedData)
       {
         return image
       } else if let data = result as? Data,
                 let image = UIImage(data: data)
       {
         return image
-      } else if let transferable = await getImageTansferable(item: item) {
-        return transferable
       }
     }
     if let url = result as? URL {
@@ -134,25 +136,7 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
 }
 
 struct MovieFileTranseferable: Transferable {
-  private let url: URL
-  var compressedVideoURL: URL? {
-    get async {
-      await withCheckedContinuation { continuation in
-        let urlAsset = AVURLAsset(url: url, options: nil)
-        guard let exportSession = AVAssetExportSession(asset: urlAsset, presetName: AVAssetExportPreset1920x1080) else {
-          continuation.resume(returning: nil)
-          return
-        }
-        let outputURL = URL.temporaryDirectory.appending(path: "\(UUID().uuidString).\(url.pathExtension)")
-        exportSession.outputURL = outputURL
-        exportSession.outputFileType = .mp4
-        exportSession.shouldOptimizeForNetworkUse = true
-        exportSession.exportAsynchronously { () in
-          continuation.resume(returning: outputURL)
-        }
-      }
-    }
-  }
+  let url: URL
 
   static var transferRepresentation: some TransferRepresentation {
     FileRepresentation(contentType: .movie) { movie in
@@ -165,9 +149,6 @@ struct MovieFileTranseferable: Transferable {
 
 struct ImageFileTranseferable: Transferable {
   let url: URL
-
-  lazy var data: Data? = try? Data(contentsOf: url)
-  lazy var image: UIImage? = UIImage(data: data ?? Data())
 
   static var transferRepresentation: some TransferRepresentation {
     FileRepresentation(contentType: .image) { image in

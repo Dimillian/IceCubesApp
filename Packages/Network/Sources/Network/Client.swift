@@ -1,8 +1,8 @@
 import Combine
 import Foundation
 import Models
-import SwiftUI
 import os
+import SwiftUI
 
 public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
   public static func == (lhs: Client, rhs: Client) -> Bool {
@@ -61,7 +61,7 @@ public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
   public init(server: String, version: Version = .v1, oauthToken: OauthToken? = nil) {
     self.server = server
     self.version = version
-    self.critical = .init(initialState: Critical(oauthToken: oauthToken, connections: [server]))
+    critical = .init(initialState: Critical(oauthToken: oauthToken, connections: [server]))
     urlSession = URLSession.shared
     decoder.keyDecodingStrategy = .convertFromSnakeCase
   }
@@ -141,7 +141,7 @@ public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
       linkHandler = .init(rawLink: link)
     }
     logResponseOnError(httpResponse: httpResponse, data: data)
-    return (try decoder.decode(Entity.self, from: data), linkHandler)
+    return try (decoder.decode(Entity.self, from: data), linkHandler)
   }
 
   public func post<Entity: Decodable>(endpoint: Endpoint, forceVersion: Version? = nil) async throws -> Entity {
@@ -184,7 +184,10 @@ public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
     do {
       return try decoder.decode(Entity.self, from: data)
     } catch {
-      if let serverError = try? decoder.decode(ServerError.self, from: data) {
+      if var serverError = try? decoder.decode(ServerError.self, from: data) {
+        if let httpResponse = httpResponse as? HTTPURLResponse {
+          serverError.httpCode = httpResponse.statusCode
+        }
         throw serverError
       }
       throw error

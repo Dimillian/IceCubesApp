@@ -162,7 +162,7 @@ extension TimelineViewModel: StatusesFetcher {
     }
     await fetchNewestStatuses()
   }
-  
+
   func fetchNewestStatuses() async {
     guard let client else { return }
     do {

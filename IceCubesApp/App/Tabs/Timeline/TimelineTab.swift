@@ -32,7 +32,7 @@ struct TimelineTab: View {
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {
-      TimelineView(timeline: $timeline, scrollToTopSignal: $scrollToTopSignal)
+      TimelineView(timeline: $timeline, scrollToTopSignal: $scrollToTopSignal, canFilterTimeline: canFilterTimeline)
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbar {

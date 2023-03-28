@@ -19,19 +19,29 @@ struct NotificationRowView: View {
     HStack(alignment: .top, spacing: 8) {
       if notification.accounts.count == 1 {
         makeAvatarView(type: notification.type)
+          .accessibilityHidden(true)
       } else {
         makeNotificationIconView(type: notification.type)
           .frame(width: AvatarView.Size.status.size.width,
                  height: AvatarView.Size.status.size.height)
+          .accessibilityHidden(true)
       }
       VStack(alignment: .leading, spacing: 2) {
         makeMainLabel(type: notification.type)
+          // The main label is redundant for mentions
+          .accessibilityHidden(notification.type == .mention)
         makeContent(type: notification.type)
         if notification.type == .follow_request,
            followRequests.map(\.id).contains(notification.accounts[0].id)
         {
           FollowRequestButtons(account: notification.accounts[0])
         }
+      }
+    }
+    .accessibilityElement(children: .combine)
+    .accessibilityActions {
+      if notification.type == .follow {
+        accessibilityUserActions
       }
     }
     .alignmentGuide(.listRowSeparatorLeading) { _ in
@@ -105,7 +115,8 @@ struct NotificationRowView: View {
                          .foregroundColor(.gray)
                      })
                      .font(.scaledSubheadline)
-                     .emojiSize(Font.scaledSubheadlinePointSize)
+                     .emojiSize(Font.scaledSubheadlineFont.emojiSize)
+                     .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
                      .fontWeight(.semibold)
                      .lineLimit(3)
                      .fixedSize(horizontal: false, vertical: true)
@@ -114,6 +125,7 @@ struct NotificationRowView: View {
             Text(" ⸱ ")
             Text(Image(systemName: status.visibility.iconName))
           }
+          .accessibilityHidden(true)
           .font(.scaledFootnote)
           .fontWeight(.regular)
           .foregroundColor(.gray)
@@ -129,6 +141,7 @@ struct NotificationRowView: View {
         routerPath.navigate(to: .accountsList(accounts: notification.accounts))
       }
     }
+    .accessibilityElement(children: .combine)
   }
 
   @ViewBuilder
@@ -160,13 +173,16 @@ struct NotificationRowView: View {
         if type == .follow {
           EmojiTextApp(notification.accounts[0].note,
                        emojis: notification.accounts[0].emojis)
+            .accessibilityLabel(notification.accounts[0].note.asRawText)
             .lineLimit(3)
             .font(.scaledCallout)
-            .emojiSize(Font.scaledCalloutPointSize)
+            .emojiSize(Font.scaledCalloutFont.emojiSize)
+            .emojiBaselineOffset(Font.scaledCalloutFont.emojiBaselineOffset)
             .foregroundColor(.gray)
             .environment(\.openURL, OpenURLAction { url in
               routerPath.handle(url: url)
             })
+            .accessibilityAddTraits(.isButton)
         }
       }
       .contentShape(Rectangle())
@@ -176,6 +192,18 @@ struct NotificationRowView: View {
         } else {
           routerPath.navigate(to: .accountsList(accounts: notification.accounts))
         }
+      }
+    }
+  }
+
+  // MARK: - Accessibility actions
+
+  @ViewBuilder
+  private var accessibilityUserActions: some View {
+    ForEach(notification.accounts) { account in
+      Button("@\(account.username)") {
+        HapticManager.shared.fireHaptic(of: .notification(.success))
+        routerPath.navigate(to: .accountDetail(id: account.id))
       }
     }
   }

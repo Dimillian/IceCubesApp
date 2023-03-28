@@ -73,7 +73,6 @@ struct AccountDetailHeaderView: View {
     }
     .background(theme.secondaryBackgroundColor)
     .frame(height: Constants.headerHeight)
-    .contentShape(Rectangle())
     .onTapGesture {
       guard account.haveHeader else {
         return
@@ -82,20 +81,18 @@ struct AccountDetailHeaderView: View {
         await quickLook.prepareFor(urls: [account.header], selectedURL: account.header)
       }
     }
+    .accessibilityElement(children: .combine)
+    .accessibilityAddTraits([.isImage, .isButton])
+    .accessibilityLabel("accessibility.tabs.profile.header-image.label")
+    .accessibilityHint("accessibility.tabs.profile.header-image.hint")
+    .accessibilityHidden(account.haveHeader == false)
   }
 
   private var accountAvatarView: some View {
     HStack {
       ZStack(alignment: .topTrailing) {
         AvatarView(url: account.avatar, size: .account)
-          .onTapGesture {
-            guard account.haveAvatar else {
-              return
-            }
-            Task {
-              await quickLook.prepareFor(urls: [account.avatar], selectedURL: account.avatar)
-            }
-          }
+          .accessibilityLabel("accessibility.tabs.profile.user-avatar.label")
         if viewModel.isCurrentUser, isSupporter {
           Image(systemName: "checkmark.seal.fill")
             .resizable()
@@ -103,8 +100,23 @@ struct AccountDetailHeaderView: View {
             .foregroundColor(theme.tintColor)
             .offset(x: theme.avatarShape == .circle ? 0 : 10,
                     y: theme.avatarShape == .circle ? 0 : -10)
+            .accessibilityRemoveTraits(.isSelected)
+            .accessibilityLabel("accessibility.tabs.profile.user-avatar.supporter.label")
         }
       }
+      .onTapGesture {
+        guard account.haveAvatar else {
+          return
+        }
+        Task {
+          await quickLook.prepareFor(urls: [account.avatar], selectedURL: account.avatar)
+        }
+      }
+      .accessibilityElement(children: .combine)
+      .accessibilityAddTraits([.isImage, .isButton])
+      .accessibilityHint("accessibility.tabs.profile.user-avatar.hint")
+      .accessibilityHidden(account.haveAvatar == false)
+
       Spacer()
       Group {
         Button {
@@ -114,6 +126,7 @@ struct AccountDetailHeaderView: View {
         } label: {
           makeCustomInfoLabel(title: "account.posts", count: account.statusesCount)
         }
+        .accessibilityHint("accessibility.tabs.profile.post-count.hint")
         .buttonStyle(.borderless)
 
         Button {
@@ -121,6 +134,7 @@ struct AccountDetailHeaderView: View {
         } label: {
           makeCustomInfoLabel(title: "account.following", count: account.followingCount)
         }
+        .accessibilityHint("accessibility.tabs.profile.following-count.hint")
         .buttonStyle(.borderless)
 
         Button {
@@ -132,6 +146,7 @@ struct AccountDetailHeaderView: View {
             needsBadge: currentAccount.account?.id == account.id && !currentAccount.followRequests.isEmpty
           )
         }
+        .accessibilityHint("accessibility.tabs.profile.follower-count.hint")
         .buttonStyle(.borderless)
 
       }.offset(y: 20)
@@ -147,30 +162,46 @@ struct AccountDetailHeaderView: View {
             EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
               .font(.scaledHeadline)
               .foregroundColor(theme.labelColor)
-              .emojiSize(Font.scaledHeadlinePointSize)
+              .emojiSize(Font.scaledHeadlineFont.emojiSize)
+              .emojiBaselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
+              .accessibilityAddTraits(.isHeader)
+
+            // The views here are wrapped in ZStacks as a Text(Image) does not provide an `accessibilityLabel`.
             if account.bot {
-              Text(Image(systemName: "poweroutlet.type.b.fill"))
-                .font(.footnote)
+              ZStack {
+                Text(Image(systemName: "poweroutlet.type.b.fill"))
+                  .font(.footnote)
+              }.accessibilityLabel("accessibility.tabs.profile.user.account-bot.label")
             }
             if account.locked {
-              Text(Image(systemName: "lock.fill"))
-                .font(.footnote)
+              ZStack {
+                Text(Image(systemName: "lock.fill"))
+                  .font(.footnote)
+              }.accessibilityLabel("accessibility.tabs.profile.user.account-private.label")
             }
             if viewModel.relationship?.blocking == true {
-              Text(Image(systemName: "person.crop.circle.badge.xmark.fill"))
-                .font(.footnote)
+              ZStack {
+                Text(Image(systemName: "person.crop.circle.badge.xmark.fill"))
+                  .font(.footnote)
+              }.accessibilityLabel("accessibility.tabs.profile.user.account-blocked.label")
             }
             if viewModel.relationship?.muting == true {
-              Text(Image(systemName: "speaker.slash.fill"))
-                .font(.footnote)
+              ZStack {
+                Text(Image(systemName: "speaker.slash.fill"))
+                  .font(.footnote)
+              }.accessibilityLabel("accessibility.tabs.profile.user.account-muted.label")
             }
           }
           Text("@\(account.acct)")
             .font(.scaledCallout)
             .foregroundColor(.gray)
             .textSelection(.enabled)
+            .accessibilityRespondsToUserInteraction(false)
           joinedAtView
         }
+        .accessibilityElement(children: .contain)
+        .accessibilitySortPriority(1)
+
         Spacer()
         if let relationship = viewModel.relationship, !viewModel.isCurrentUser {
           HStack {
@@ -193,17 +224,41 @@ struct AccountDetailHeaderView: View {
       EmojiTextApp(account.note, emojis: account.emojis)
         .font(.scaledBody)
         .foregroundColor(theme.labelColor)
-        .emojiSize(Font.scaledBodyPointSize)
+        .emojiSize(Font.scaledBodyFont.emojiSize)
+        .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
         .padding(.top, 8)
         .textSelection(.enabled)
         .environment(\.openURL, OpenURLAction { url in
           routerPath.handle(url: url)
         })
+        .accessibilityRespondsToUserInteraction(false)
+
+      if let translation = viewModel.translation, !viewModel.isLoadingTranslation {
+        GroupBox {
+          VStack(alignment: .leading, spacing: 4) {
+            Text(translation.content.asSafeMarkdownAttributedString)
+              .font(.scaledBody)
+            Text(getLocalizedStringLabel(langCode: translation.detectedSourceLanguage, provider: translation.provider))
+              .font(.footnote)
+              .foregroundColor(.gray)
+          }
+        }
+        .fixedSize(horizontal: false, vertical: true)
+      }
 
       fieldsView
     }
     .padding(.horizontal, .layoutPadding)
     .offset(y: -40)
+  }
+
+  private func getLocalizedStringLabel(langCode: String, provider: String) -> String {
+    if let localizedLanguage = Locale.current.localizedString(forLanguageCode: langCode) {
+      let format = NSLocalizedString("status.action.translated-label-from-%@-%@", comment: "")
+      return String.localizedStringWithFormat(format, localizedLanguage, provider)
+    } else {
+      return "status.action.translated-label-\(provider)"
+    }
   }
 
   private func makeCustomInfoLabel(title: LocalizedStringKey, count: Int, needsBadge: Bool = false) -> some View {
@@ -223,6 +278,9 @@ struct AccountDetailHeaderView: View {
         .font(.scaledFootnote)
         .foregroundColor(.gray)
     }
+    .accessibilityElement(children: .ignore)
+    .accessibilityLabel(title)
+    .accessibilityValue("\(count)")
   }
 
   @ViewBuilder
@@ -230,12 +288,14 @@ struct AccountDetailHeaderView: View {
     if let joinedAt = viewModel.account?.createdAt.asDate {
       HStack(spacing: 4) {
         Image(systemName: "calendar")
+          .accessibilityHidden(true)
         Text("account.joined")
         Text(joinedAt, style: .date)
       }
       .foregroundColor(.gray)
       .font(.footnote)
       .padding(.top, 6)
+      .accessibilityElement(children: .combine)
     }
   }
 
@@ -269,13 +329,16 @@ struct AccountDetailHeaderView: View {
                 if field.verifiedAt != nil {
                   Image(systemName: "checkmark.seal")
                     .foregroundColor(Color.green.opacity(0.80))
+                    .accessibilityHidden(true)
                 }
                 EmojiTextApp(field.value, emojis: viewModel.account?.emojis ?? [])
-                  .emojiSize(Font.scaledBodyPointSize)
+                  .emojiSize(Font.scaledBodyFont.emojiSize)
+                  .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
                   .foregroundColor(theme.tintColor)
                   .environment(\.openURL, OpenURLAction { url in
                     routerPath.handle(url: url)
                   })
+                  .accessibilityValue(field.verifiedAt != nil ? "accessibility.tabs.profile.fields.verified.label" : "")
               }
               .font(.scaledBody)
               if viewModel.fields.last != field {
@@ -285,15 +348,42 @@ struct AccountDetailHeaderView: View {
             }
             Spacer()
           }
+          .accessibilityElement(children: .combine)
+          .modifier(ConditionalUserDefinedFieldAccessibilityActionModifier(field: field, routerPath: routerPath))
         }
       }
       .padding(8)
+      .accessibilityElement(children: .contain)
+      .accessibilityLabel("accessibility.tabs.profile.fields.container.label")
       .background(theme.secondaryBackgroundColor)
       .cornerRadius(4)
       .overlay(
         RoundedRectangle(cornerRadius: 4)
           .stroke(.gray.opacity(0.35), lineWidth: 1)
       )
+    }
+  }
+}
+
+/// A ``ViewModifier`` that creates a attaches an accessibility action if the field value is a valid link
+private struct ConditionalUserDefinedFieldAccessibilityActionModifier: ViewModifier {
+  let field: Account.Field
+  let routerPath: RouterPath
+
+  func body(content: Content) -> some View {
+    if let url = URL(string: field.value.asRawText), UIApplication.shared.canOpenURL(url) {
+      content
+        .accessibilityAction {
+          let _ = routerPath.handle(url: url)
+        }
+        // SwiftUI will automatically decorate this element with the link trait, so we remove the button trait manually.
+        // March 18th, 2023: The button trait is still re-applied…
+        .accessibilityRemoveTraits(.isButton)
+        .accessibilityInputLabels([field.name])
+    } else {
+      content
+        // This element is not interactive; setting this property removes its button trait
+        .accessibilityRespondsToUserInteraction(false)
     }
   }
 }

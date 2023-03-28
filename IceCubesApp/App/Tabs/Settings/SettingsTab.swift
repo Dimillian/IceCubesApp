@@ -145,6 +145,9 @@ struct SettingsTabs: View {
       NavigationLink(destination: SwipeActionsSettingsView()) {
         Label("settings.general.swipeactions", systemImage: "hand.draw")
       }
+      NavigationLink(destination: TranslationSettingsView()) {
+        Label("settings.general.translate", systemImage: "captions.bubble")
+      }
       Link(destination: URL(string: UIApplication.openSettingsURLString)!) {
         Label("settings.system", systemImage: "gear")
       }
@@ -205,6 +208,7 @@ struct SettingsTabs: View {
       Link(destination: URL(string: "https://github.com/Dimillian/IceCubesApp")!) {
         Label("settings.app.source", systemImage: "link")
       }
+      .accessibilityRemoveTraits(.isButton)
       .tint(theme.labelColor)
 
       NavigationLink(destination: SupportAppView()) {
@@ -215,6 +219,7 @@ struct SettingsTabs: View {
         Link(destination: reviewURL) {
           Label("settings.rate", systemImage: "link")
         }
+        .accessibilityRemoveTraits(.isButton)
         .tint(theme.labelColor)
       }
 
@@ -266,6 +271,7 @@ struct SettingsTabs: View {
           _ = preferences.remoteLocalTimelines.remove(at: index)
         }
       }
+      .onMove(perform: moveTimelineItems)
       .listRowBackground(theme.primaryBackgroundColor)
       Button {
         routerPath.presentedSheet = .addRemoteLocalTimeline
@@ -277,6 +283,13 @@ struct SettingsTabs: View {
     .navigationTitle("settings.general.remote-timelines")
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
+    .toolbar {
+        EditButton()
+    }
+  }
+
+  private func moveTimelineItems(from source: IndexSet, to destination: Int) {
+    preferences.remoteLocalTimelines.move(fromOffsets: source, toOffset: destination)
   }
 
   private var cacheSection: some View {

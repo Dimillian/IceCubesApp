@@ -90,6 +90,9 @@ public struct StatusRowMediaPreviewView: View {
               await quickLook.prepareFor(urls: attachments.compactMap { $0.url }, selectedURL: attachment.url!)
             }
           }
+          .accessibilityElement(children: .combine)
+          .modifier(ConditionalAccessibilityLabelAltTextModifier(attachment: attachment))
+          .accessibilityAddTraits([.isButton, .isImage])
       } else {
         if isCompact || theme.statusDisplayStyle == .compact {
           HStack {
@@ -124,7 +127,8 @@ public struct StatusRowMediaPreviewView: View {
       }
     }
     .alert("status.editor.media.image-description",
-           isPresented: $isAltAlertDisplayed) {
+           isPresented: $isAltAlertDisplayed)
+    {
       Button("alert.button.ok", action: {})
     } message: {
       Text(altTextDisplayed ?? "")
@@ -149,7 +153,7 @@ public struct StatusRowMediaPreviewView: View {
 
   @ViewBuilder
   private func makeFeaturedImagePreview(attachment: MediaAttachment) -> some View {
-    ZStack(alignment: .bottomTrailing) {
+    ZStack(alignment: .bottomLeading) {
       let size: CGSize = size(for: attachment) ?? .init(width: imageMaxHeight, height: imageMaxHeight)
       let newSize = imageSize(from: size, newWidth: availableWidth - appLayoutWidth)
       switch attachment.supportedType {
@@ -268,6 +272,9 @@ public struct StatusRowMediaPreviewView: View {
           await quickLook.prepareFor(urls: attachments.compactMap { $0.url }, selectedURL: attachment.url!)
         }
       }
+      .accessibilityElement(children: .combine)
+      .modifier(ConditionalAccessibilityLabelAltTextModifier(attachment: attachment))
+      .accessibilityAddTraits([.isButton, .isImage])
     }
   }
 
@@ -324,6 +331,20 @@ public struct StatusRowMediaPreviewView: View {
       .padding(10)
       .buttonStyle(.borderedProminent)
       Spacer()
+    }
+  }
+}
+
+/// A ``ViewModifier`` that creates a suitable accessibility label for an image that may or may not have alt text
+private struct ConditionalAccessibilityLabelAltTextModifier: ViewModifier {
+  let attachment: MediaAttachment
+
+  func body(content: Content) -> some View {
+    if let altText = attachment.description {
+      content
+        .accessibilityLabel("accessibility.image.alt-text-\(altText)")
+    } else {
+      content
     }
   }
 }

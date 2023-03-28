@@ -17,9 +17,8 @@ struct AboutView: View {
   }
 
   var body: some View {
-    ScrollView {
-      VStack(alignment: .leading) {
-        Divider()
+    List {
+      Section {
         HStack {
           Spacer()
           Image("icon0")
@@ -40,22 +39,20 @@ struct AboutView: View {
             .cornerRadius(4)
           Spacer()
         }
-        .padding(.top, 10)
-        HStack {
-          Spacer()
-          Text("\(versionNumber)©2023 Thomas Ricouard")
-            .font(.scaledFootnote)
-            .foregroundColor(.gray)
-            .fontWeight(.semibold)
-            .padding(.bottom, 10)
-          Spacer()
+
+        Link(destination: URL(string: "https://github.com/Dimillian/IceCubesApp/blob/main/PRIVACY.MD")!) {
+          Label("settings.support.privacy-policy", systemImage: "lock")
         }
-        Divider()
-        Text("settings.about.built-with")
-          .padding(.horizontal, 25)
-          .padding(.bottom, 10)
-          .font(.scaledSubheadline)
-          .foregroundColor(.gray)
+
+        Link(destination: URL(string: "https://github.com/Dimillian/IceCubesApp/blob/main/TERMS.MD")!) {
+          Label("settings.support.terms-of-use", systemImage: "checkmark.shield")
+        }
+      } footer: {
+        Text("\(versionNumber)©2023 Thomas Ricouard")
+      }
+      .listRowBackground(theme.primaryBackgroundColor)
+
+      Section {
         Text("""
         • [EmojiText](https://github.com/divadretlaw/EmojiText)
 
@@ -79,14 +76,16 @@ struct AboutView: View {
 
         • [RevenueCat](https://github.com/RevenueCat/purchases-ios)
         """)
-        .padding(.horizontal, 25)
         .multilineTextAlignment(.leading)
         .font(.scaledSubheadline)
         .foregroundColor(.gray)
+      } header: {
+        Text("settings.about.built-with")
+          .textCase(nil)
       }
-      Divider()
-      Spacer()
+      .listRowBackground(theme.primaryBackgroundColor)
     }
+    .listStyle(.insetGrouped)
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
     .navigationTitle(Text("settings.about.title"))

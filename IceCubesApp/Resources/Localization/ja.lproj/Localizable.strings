@@ -78,6 +78,7 @@
 "settings.display.font.system" = "システムフォント";
 "settings.display.font.custom" = "カスタム";
 "settings.display.font.scaling-%@" = "フォントサイズ: %@";
+"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
 "settings.display.avatar.position" = "アバターの位置";
 "settings.display.avatar.shape" = "アバターの形";
 "settings.display.full-username" = "完全なユーザー名を表示";
@@ -165,6 +166,12 @@
 "settings.other.hide-openai" = "AI支援機能の有効化";
 "settings.other.social-keyboard" = "ソーシャルメディア向けキーボードの有効化";
 "settings.other.sound-effect" = "サウンドエフェクトを有効化";
+"settings.general.translate" = "翻訳設定";
+"settings.translation.navigation-title" = "翻訳設定";
+"settings.translation.always-deepl" = "DeepLを使用して常に翻訳する";
+"settings.translation.user-api-key" = "DeepL APIキー";
+"settings.translation.api-key-type" = "キーのタイプ";
+"settings.translation.needed-message" = "この機能には DeepL APIキーが必要です";
 "settings.push.duplicate.title" = "重複通知修正ツール";
 "settings.push.duplicate.footer" = "重複して通知を受け取っていませんか？修正するためにこの魔法のボタンを試してみて";
 "settings.push.duplicate.button.fix" = "🪄 修正する";
@@ -288,7 +295,7 @@
 "account.relation.follows-you" = "フォローされています";
 "account.joined" = "登録日";
 "account.action.logout" = "アカウントをログアウトする";
-"account.action.more" = "More Settings";
+"account.action.more" = "その他の設定";
 
 "account.relation.note.edit" = "ノートを編集";
 "account.relation.note.edit.placeholder" = "ノートを入力";
@@ -385,6 +392,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "翻訳";
+"status.action.translate-with-deepl" = "DeepLを使用して翻訳";
 "status.action.translated-label-%@" = "%@ を使用して翻訳";
 "status.action.translated-label-from-%@-%@" = "%@ から %@ を使用して翻訳";
 "status.action.bookmark" = "ブックマーク";
@@ -418,6 +426,8 @@
 "status.draft.delete" = "下書きを削除";
 "status.draft.save" = "下書きを保存";
 "status.editor.ai-prompt.correct" = "テキストを修正する";
+"status.editor.ai-prompt.add-tags" = "#タグを所定の位置に追加";
+"status.editor.ai-prompt.insert-tags" = "テキストの後に#タグを追加";
 "status.editor.ai-prompt.emphasize" = "テキストを強調表示する";
 "status.editor.ai-prompt.fit" = "テキストを短くする";
 "status.editor.description.add" = "説明文を追加";
@@ -439,6 +449,8 @@
 "status.editor.spoiler" = "ネタバレ";
 "status.editor.text.placeholder" = "いま、何を考えているの？";
 "status.editor.visibility" = "投稿の公開範囲";
+"status.editor.photo-library" = "写真ライブラリ";
+"status.editor.browse-file" = "ファイルの参照";
 "status.error.loading.message" = "投稿の読み込み中にエラーが発生しました、もう一度試してください";
 "status.error.message" = "この投稿のコンテキストでエラーが発生しました、もう一度試してください";
 "status.error.title" = "エラーが発生しました";
@@ -468,8 +480,10 @@
 "status.show-full-post" = "投稿をすべて表示";
 "status.summary.at-time" = " ";
 "status.summary.edited-time" = "最新編集日: ";
+"status.summary.n-replies %lld" = "%lld 件の返信";
 "status.summary.n-boosts %lld" = "%lld ブースト";
 "status.summary.n-favorites %lld" = "%lld お気に入り";
+"status.summary.edit-history" = "Edit History";
 "status.visibility.direct" = "指定された相手のみ";
 "status.visibility.follower" = "フォロワーのみ";
 "status.visibility.public" = "公開";
@@ -502,8 +516,52 @@
 "accessibility.editor.button.drafts" = "下書き";
 "accessibility.editor.button.custom-emojis" = "カスタム絵文字";
 "accessibility.editor.button.language" = "言語";
+"accessibility.editor.button.ai-prompt" = "AIプロンプト";
+"accessibility.editor.button.characters-remaining" = "残り文字数";
+"accessibility.editor.privacy.label" = "可視性";
+"accessibility.editor.privacy.hint" = "投稿対象者を変更します";
 "accessibility.tabs.timeline.add-account" = "アカウントを追加";
+"accessibility.tabs.timeline.new-post.label" = "作成";
+"accessibility.tabs.timeline.new-post.inputLabel1" = "新規";
+"accessibility.tabs.timeline.new-post.inputLabel2" = "作成";
+"accessibility.tabs.timeline.unread-posts.label-%lld" = "%lld 件の新しい投稿";
+"accessibility.tabs.timeline.unread-posts.hint" = "タイムラインをスクロールします。";
+"accessibility.tabs.timeline.content-link-%@" = "%@ にアクセス";
+"accessibility.tabs.timeline.content-hashtag-%@" = "ハッシュタグ %@";
 "accessibility.app-account.selector.accounts" = "アカウント";
+"accessibility.app-account.selector.accounts.hint" = "オプションシートを開きます。";
+"accessibility.tabs.profile.options.label" = "オプション";
+"accessibility.tabs.profile.options.inputLabel1" = "設定";
+"accessibility.tabs.profile.options.inputLabel2" = "その他";
+"accessibility.tabs.profile.user-avatar.label" = "プロフィール写真";
+"accessibility.tabs.profile.user-avatar.hint" = "拡大版を表示します。";
+"accessibility.tabs.profile.user-avatar.supporter.label" = "サポーター";
+"accessibility.tabs.profile.user.account-bot.label" = "ボットアカウント";
+"accessibility.tabs.profile.user.account-blocked.label" = "ブロック";
+"accessibility.tabs.profile.user.account-muted.label" = "ミュート";
+"accessibility.tabs.profile.user.account-private.label" = "プライベートアカウント";
+"accessibility.tabs.profile.header-image.label" = "ヘッダー画像";
+"accessibility.tabs.profile.header-image.hint" = "拡大版を表示します。";
+"accessibility.tabs.profile.post-count.hint" = "リストにスクロールします。";
+"accessibility.tabs.profile.following-count.hint" = "リストに移動します。";
+"accessibility.tabs.profile.follower-count.hint" = "リストに移動します。";
+"accessibility.tabs.profile.picker.statuses" = "投稿";
+"accessibility.tabs.profile.picker.favorites" = "お気に入り";
+"accessibility.tabs.profile.picker.bookmarks" = "ブックマーク";
+"accessibility.tabs.profile.picker.followed-tags" = "タグ";
+"accessibility.tabs.profile.picker.posts-and-replies" = "投稿と返信";
+"accessibility.tabs.profile.picker.media" = "メディア";
+"accessibility.tabs.profile.picker.lists" = "リスト";
+"accessibility.tabs.profile.user-notifications.label" = "通知を受け取る";
+"accessibility.tabs.profile.user-reblogs.label" = "表示ブースト";
+"accessibility.tabs.profile.fields.verified.label" = "検証済み";
+"accessibility.tabs.profile.fields.container.label" = "ユーザー定義フィールド";
+"accessibility.status.spoiler-full-content" = "全コンテンツ";
+"accessibility.status.a-boosted-b-%@-%@" = "%@ ブースト %@";
+"accessibility.status.a-replied-to-%@" = "%@ に返信";
+"accessibility.image.alt-text-%@" = "画像の代替テキスト: %@";
+"accessibility.image.alt-text-more.label" = "より多くの代替テキストを利用できます";
+"accessibility.tabs.messages.unread.label" = "未読";
 
 // MARK: Report
 "report.comment.placeholder" = "追加情報";
@@ -511,4 +569,4 @@
 "report.action.send" = "送信";
 "status.action.report" = "投稿を報告";
 
-"tag.suggested.mentions-%@" = "返信：%@";
+"tag.suggested.mentions-%lld" = "返信：%lld";

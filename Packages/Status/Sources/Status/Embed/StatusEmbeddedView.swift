@@ -27,6 +27,7 @@ public struct StatusEmbeddedView: View {
                                          client: client,
                                          routerPath: routerPath,
                                          showActions: false) })
+          .accessibilityLabel(status.content.asRawText)
           .environment(\.isCompact, true)
       }
       Spacer()
@@ -39,6 +40,7 @@ public struct StatusEmbeddedView: View {
         .stroke(.gray.opacity(0.35), lineWidth: 1)
     )
     .padding(.top, 8)
+    .accessibilityElement(children: .combine)
   }
 
   private func makeAccountView(account: Account) -> some View {
@@ -47,7 +49,8 @@ public struct StatusEmbeddedView: View {
       VStack(alignment: .leading, spacing: 0) {
         EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
           .font(.scaledFootnote)
-          .emojiSize(Font.scaledFootnotePointSize)
+          .emojiSize(Font.scaledFootnoteFont.emojiSize)
+          .emojiBaselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
           .fontWeight(.semibold)
         Group {
           Text("@\(account.acct)") +

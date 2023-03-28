@@ -24,7 +24,7 @@ struct StatusRowActionsView: View {
     //     Main actor-isolated static property 'allCases' cannot be used to
     //     satisfy nonisolated protocol requirement
     //
-    nonisolated public static var allCases: [StatusRowActionsView.Action] {
+    public nonisolated static var allCases: [StatusRowActionsView.Action] {
       [.respond, .boost, .favorite, .bookmark, .share]
     }
 
@@ -47,6 +47,30 @@ struct StatusRowActionsView: View {
         return Image(systemName: dataController.isBookmarked ? "bookmark.fill" : "bookmark")
       case .share:
         return Image(systemName: "square.and.arrow.up")
+      }
+    }
+
+    func accessibilityLabel(dataController: StatusDataController, privateBoost: Bool = false) -> LocalizedStringKey {
+      switch self {
+      case .respond:
+        return "status.action.reply"
+      case .boost:
+        if dataController.isReblogged {
+          return "status.action.unboost"
+        }
+        return privateBoost
+          ? "status.action.boost-to-followers"
+          : "status.action.boost"
+      case .favorite:
+        return dataController.isFavorited
+          ? "status.action.unfavorite"
+          : "status.action.favorite"
+      case .bookmark:
+        return dataController.isBookmarked
+          ? "status.action.unbookmark"
+          : "status.action.bookmark"
+      case .share:
+        return "status.action.share"
       }
     }
 
@@ -99,10 +123,13 @@ struct StatusRowActionsView: View {
             {
               ShareLink(item: url,
                         subject: Text(viewModel.finalStatus.account.safeDisplayName),
-                        message: Text(viewModel.finalStatus.content.asRawText)) {
+                        message: Text(viewModel.finalStatus.content.asRawText))
+              {
                 action.image(dataController: statusDataController)
               }
               .buttonStyle(.statusAction())
+              .accessibilityElement(children: .combine)
+              .accessibilityLabel("status.action.share-link")
             }
           } else {
             actionButton(action: action)
@@ -142,15 +169,17 @@ struct StatusRowActionsView: View {
         (viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id))
       if let count = action.count(dataController: statusDataController,
                                   viewModel: viewModel,
-                                  theme: theme), !viewModel.isRemote {
+                                  theme: theme), !viewModel.isRemote
+      {
         Text("\(count)")
           .foregroundColor(Color(UIColor.secondaryLabel))
           .font(.scaledFootnote)
           .monospacedDigit()
       }
     }
+    .accessibilityElement(children: .combine)
+    .accessibilityLabel(action.accessibilityLabel(dataController: statusDataController, privateBoost: privateBoost()))
   }
-    
 
   private func handleAction(action: Action) {
     Task {
@@ -162,17 +191,17 @@ struct StatusRowActionsView: View {
       HapticManager.shared.fireHaptic(of: .notification(.success))
       switch action {
       case .respond:
-        viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)
         SoundEffectManager.shared.playSound(of: .share)
+        viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)
       case .favorite:
-        await statusDataController.toggleFavorite(remoteStatus: viewModel.localStatusId)
         SoundEffectManager.shared.playSound(of: .favorite)
+        await statusDataController.toggleFavorite(remoteStatus: viewModel.localStatusId)
       case .bookmark:
-        await statusDataController.toggleBookmark(remoteStatus: viewModel.localStatusId)
         SoundEffectManager.shared.playSound(of: .bookmark)
+        await statusDataController.toggleBookmark(remoteStatus: viewModel.localStatusId)
       case .boost:
-        await statusDataController.toggleReblog(remoteStatus: viewModel.localStatusId)
         SoundEffectManager.shared.playSound(of: .boost)
+        await statusDataController.toggleReblog(remoteStatus: viewModel.localStatusId)
       default:
         break
       }

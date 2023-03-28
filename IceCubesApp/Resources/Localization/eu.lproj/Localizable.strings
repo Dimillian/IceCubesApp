@@ -25,7 +25,7 @@
 "enum.avatar-shape.circle" = "Biribila";
 "enum.avatar-shape.rounded" = "Biribildutako ertzak";
 "enum.durations.infinite" = "Betiko";
-"enum.durations.custom" = "custom";
+"enum.durations.custom" = "Neuk zehaztuko dut";
 "enum.durations.fiveMinutes" = "5 minutuz";
 "enum.durations.thirtyMinutes" = "30 minutuz";
 "enum.durations.oneHour" = "Ordubetez";
@@ -92,9 +92,9 @@
 "settings.display.theme.tint" = "Tonua";
 "settings.display.theme.systemColor" = "Sistemak darabilena";
 "settings.general.browser" = "Nabigatzailea";
-"settings.general.browser.in-app" = "Barneko nabigatzailea";
+"settings.general.browser.in-app" = "Barnekoa";
 "settings.general.browser.in-app.readerview" = "Barneko nabigatzailearen irakurketa bista";
-"settings.general.browser.system" = "Sistemaren nabigatzailea";
+"settings.general.browser.system" = "Sistemarena";
 "settings.general.display" = "Pantaila ezarpenak";
 "settings.general.instance" = "Instantziaren informazioa";
 "settings.general.push-notifications" = "Push jakinarazpenak";
@@ -141,6 +141,12 @@
 "settings.other.hide-openai" = "Gaitu 🤖 laguntzailea";
 "settings.other.social-keyboard" = "Gaitu teklatu soziala";
 "settings.other.sound-effect" = "Gaitu soinu efektuak";
+"settings.general.translate" = "Itzulpen ezarpenak";
+"settings.translation.navigation-title" = "Itzulpen ezarpenak";
+"settings.translation.always-deepl" = "Itzuli beti DeepL erabiliz";
+"settings.translation.user-api-key" = "DeepL API gakoa";
+"settings.translation.api-key-type" = "Gako mota";
+"settings.translation.needed-message" = "Ezaugarri honek DeepL API gako bat behar du";
 "settings.general.content" = "Edukiaren ezarpenak";
 "settings.system" = "Sistemaren ezarpenak";
 "settings.content.navigation-title" = "Edukiaren ezarpenak";
@@ -166,6 +172,7 @@
 "settings.display.font.system" = "Sistemak darabilena";
 "settings.display.font.custom" = "Norberak ezarritakoa";
 "settings.display.font.scaling-%@" = "Letra tipoaren neurria: %@";
+"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
 "settings.about.built-with" = "Ice Cubes ondorengo iturburu irekiko softwarea erabiliz egin da:";
 "settings.about.title" = "Ice Cubes";
 "settings.account.cached-posts-%@" = "Bidalketak katxean: %@";
@@ -348,7 +355,7 @@
 "notifications.error.title" = "Errorea gertatu da";
 "notifications.label.poll" = "(r)en bozketa amaitu da";
 "notifications.label.follow-request" = "(e)k jarraitzeko eskaera egin dizu";
-"notifications.label.status" = "(e)k bidalketa egin du";
+"notifications.label.status" = "(e)k argitaratu du";
 "notifications.label.update" = "(e)k bidalketa editatu du";
 "notifications.menu-title.favorite" = "Gogokoak";
 "notifications.menu-title.follow" = "Jarraipenak";
@@ -379,6 +386,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Itzuli";
+"status.action.translate-with-deepl" = "Itzuli DeepL erabiliz";
 "status.action.translated-label-%@" = "%@ erabiliz itzulia";
 "status.action.translated-label-from-%@-%@" = "%@(e)tik %@ erabiliz itzulia";
 "status.action.bookmark" = "Jarri laster-marka";
@@ -412,6 +420,8 @@
 "status.draft.delete" = "Ezabatu zirriborroa";
 "status.draft.save" = "Gorde zirriborroa";
 "status.editor.ai-prompt.correct" = "Zuzendu testua";
+"status.editor.ai-prompt.add-tags" = "Gehitu #Traolak tokian";
+"status.editor.ai-prompt.insert-tags" = "Gehitu #Traolak amaieran";
 "status.editor.ai-prompt.emphasize" = "Azpimarratu testua";
 "status.editor.ai-prompt.fit" = "Laburtu testua";
 "status.editor.description.add" = "Gehitu deskribapena";
@@ -428,11 +438,13 @@
 "status.editor.mode.edit" = "Bidalketa editatzen";
 "status.editor.mode.new" = "Bidalketa berria";
 "status.editor.mode.quote-%@" = "%@(r)en aipamena";
-"status.editor.mode.reply-%@" = "%@(e)ri erantzunez";
+"status.editor.mode.reply-%@" = "%@(r)i erantzunez";
 "status.editor.restore-previous" = "Berreskuratu lehengo testua";
 "status.editor.spoiler" = "Edukiari buruzko oharra";
 "status.editor.text.placeholder" = "Zer duzu buruan?";
 "status.editor.visibility" = "Bidalketaren irismena";
+"status.editor.photo-library" = "Argazki-liburutegia";
+"status.editor.browse-file" = "Arakatu fitxategiak";
 "status.error.loading.message" = "Errorea bidalketak kargatzean; saiatu berriro.";
 "status.error.message" = "Errorea bidalketa honen testuinguruan; saiatu berriro.";
 "status.error.title" = "Errorea gertatu da";
@@ -461,6 +473,7 @@
 "status.show-full-post" = "Erakutsi osorik";
 "status.summary.at-time" = " · ";
 "status.summary.edited-time" = "Azkenekoz editatua: ";
+"status.summary.edit-history" = "Edit History";
 "status.visibility.direct" = "Aipatutakoak";
 "status.visibility.follower" = "Jarraitzaileak";
 "status.visibility.public" = "Publikoa";
@@ -482,7 +495,7 @@
 "filter.contexts.public" = "Denbora-lerro lokalak";
 "filter.contexts.conversations" = "Elkarrizketak";
 "filter.contexts.profiles" = "Profilak";
-"filter.action.warning" = "Ezkutatu oharpen batekin";
+"filter.action.warning" = "Ezkutatu ohartarazpen batekin";
 "filter.action.hide" = "Ezkutatu guztiz";
 
 // MARK: Accessibility
@@ -492,13 +505,55 @@
 "accessibility.editor.button.drafts" = "Zirriborroak";
 "accessibility.editor.button.custom-emojis" = "Instantziaren emojiak";
 "accessibility.editor.button.language" = "Hizkuntza";
+"accessibility.editor.button.ai-prompt" = "AA eskaera";
+"accessibility.editor.button.characters-remaining" = "Geratzen diren karaktereak";
+"accessibility.editor.privacy.label" = "Ikusgaitasuna";
+"accessibility.editor.privacy.hint" = "Nork ikus dezakeen aldatzen du.";
 "accessibility.tabs.timeline.add-account" = "Gehitu kontua";
+"accessibility.tabs.timeline.new-post.label" = "Idatzi";
+"accessibility.tabs.timeline.new-post.inputLabel1" = "Berria";
+"accessibility.tabs.timeline.new-post.inputLabel2" = "Sortu";
+"accessibility.tabs.timeline.unread-posts.label-%lld" = "%lld bidalketa berri";
+"accessibility.tabs.timeline.unread-posts.hint" = "Denbora-lerroa korritzen du.";
+"accessibility.tabs.timeline.content-link-%@" = "Ikustatu %@";
+"accessibility.tabs.timeline.content-hashtag-%@" = "%@ traola";
 "accessibility.app-account.selector.accounts" = "Kontuak";
+"accessibility.app-account.selector.accounts.hint" = "Aukeren orria irekitzen du.";
+"accessibility.tabs.profile.options.label" = "Aukerak";
+"accessibility.tabs.profile.options.inputLabel1" = "Ezarpenak";
+"accessibility.tabs.profile.options.inputLabel2" = "Gehiago";
+"accessibility.tabs.profile.user-avatar.label" = "Profileko argazkia";
+"accessibility.tabs.profile.user-avatar.hint" = "Bertsio handiagoa erakusten du.";
+"accessibility.tabs.profile.user-avatar.supporter.label" = "Babeslea";
+"accessibility.tabs.profile.user.account-bot.label" = "Bot kontua";
+"accessibility.tabs.profile.user.account-blocked.label" = "Blokeatua";
+"accessibility.tabs.profile.user.account-muted.label" = "Mututua";
+"accessibility.tabs.profile.user.account-private.label" = "Babestutako kontua";
+"accessibility.tabs.profile.header-image.label" = "Goiburuko irudia";
+"accessibility.tabs.profile.header-image.hint" = "Bertsio handiagoa erakusten du.";
+"accessibility.tabs.profile.post-count.hint" = "Zerrendara korritzen du.";
+"accessibility.tabs.profile.following-count.hint" = "Zerrendara doa.";
+"accessibility.tabs.profile.follower-count.hint" = "Zerrendara doa.";
+"accessibility.tabs.profile.picker.statuses" = "Bidalketak";
+"accessibility.tabs.profile.picker.favorites" = "Gogokoak";
+"accessibility.tabs.profile.picker.bookmarks" = "Laster-markak";
+"accessibility.tabs.profile.picker.followed-tags" = "Traolak";
+"accessibility.tabs.profile.picker.posts-and-replies" = "Bidalketak eta erantzunak";
+"accessibility.tabs.profile.picker.media" = "Multimedia";
+"accessibility.tabs.profile.picker.lists" = "Zerrendak";
+"accessibility.tabs.profile.user-notifications.label" = "Jaso jakinarazpenak";
+"accessibility.tabs.profile.user-reblogs.label" = "Erakutsi bultzadak";
+"accessibility.tabs.profile.fields.verified.label" = "Egiaztatua";
+"accessibility.tabs.profile.fields.container.label" = "Erabiltzaileak ezarritako eremuak";
+"accessibility.status.spoiler-full-content" = "Eduki osoa";
+"accessibility.status.a-boosted-b-%@-%@" = "%@(e)k %@ bultzatu du";
+"accessibility.status.a-replied-to-%@" = "%@(e)k honi erantzun dio:";
+"accessibility.image.alt-text-%@" = "Irudiaren deskribapena: %@";
+"accessibility.image.alt-text-more.label" = "Deskribapen testu gehiago dago";
+"accessibility.tabs.messages.unread.label" = "Irakurri gabe";
 
 // MARK: Report
 "report.comment.placeholder" = "Informazio gehigarria";
 "report.title" = "Salaketa";
 "report.action.send" = "Bidali";
 "status.action.report" = "Salatu edukia";
-
-"tag.suggested.mentions-%@" = "%@ mentions";

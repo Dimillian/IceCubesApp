@@ -147,7 +147,7 @@
 "settings.support.four.title" = "👽 Kim jesteś?";
 "settings.support.four.subtitle" = "To bardzo pomoże w utrzymaniu Ice Cubes w działaniu!";
 "settings.support.supporter.title" = " Zostań osobą wspierającą!";
-"settings.support.supporter.subtitle" = "Przekazując Ice Cubes comiesięczny napiwek, stajesz się osobą wspierającą, a nawet otrzymasz na swoim profilu znaczek weryfikacji. Tylko dla twoich 👀.";
+"settings.support.supporter.subtitle" = "Przekazując Ice Cubes comiesięczny napiwek, stajesz się osobą wspierającą, a dodatkowo na swoim profilu otrzymasz znaczek weryfikacji. Tylko dla twoich 👀.";
 "settings.support.supporter.subscribed" = " Dziękuję, że wspierasz Ice Cubes!";
 "settings.support.supporter.subscription-info"= "Subskrypcja jest odnawiana automatycznie, chyba że anulujesz ją na dzień przed kolejnym cyklem odnawiania.";
 "settings.support.restore-purchase.button" = "Przywróć zakup";
@@ -162,6 +162,12 @@
 "settings.other.social-keyboard" = "Włącz klawiaturę społecznościową";
 "settings.other.sound-effect" = "Włącz efekty dźwiękowe";
 "settings.push.duplicate.title" = "Korektor duplikatów powiadomień";
+"settings.general.translate" = "Ustawienia tłumaczenia";
+"settings.translation.navigation-title" = "Ustawienia tłumaczenia";
+"settings.translation.always-deepl" = "Zawsze tłumacz przy pomocy DeepL";
+"settings.translation.user-api-key" = "Klucz DeepL API";
+"settings.translation.api-key-type" = "Rodzaj klucza";
+"settings.translation.needed-message" = "Ta funkcja wymaga klucza DeepL API";
 "settings.push.duplicate.footer" = "Otrzymujesz zduplikowane powiadomienia? Spróbuj tego magicznego przycisku, aby to naprawić";
 "settings.push.duplicate.button.fix" = "🪄 Napraw to";
 "settings.other.autoplay-video" = "Odtwarzaj filmy automatycznie";
@@ -169,6 +175,7 @@
 "settings.display.font.system" = "Systemowa";
 "settings.display.font.custom" = "Własna";
 "settings.display.font.scaling-%@" = "Skalowanie czcionki: %@";
+"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
 "settings.about.built-with" = "Ice Cubes zbudowano z wykorzystaniem następującego oprogramowania Open Source:";
 "settings.about.title" = "Ice Cubes";
 "settings.account.cached-posts-%@" = "Liczba postów w buforze: %@";
@@ -381,6 +388,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Przetłumacz";
+"status.action.translate-with-deepl" = "Przetłumacz za pomocą DeepL";
 "status.action.translated-label-%@" = "Przetłumaczono za pomocą %@";
 "status.action.translated-label-from-%@-%@" = "Tekst %@ przetłumaczono za pomocą %@";
 "status.action.bookmark" = "Dodaj zakładkę";
@@ -414,6 +422,8 @@
 "status.draft.delete" = "Usuń wersję roboczą";
 "status.draft.save" = "Zachowaj wersję roboczą";
 "status.editor.ai-prompt.correct" = "Popraw tekst";
+"status.editor.ai-prompt.add-tags" = "Dodaj hasztagi wewnątrz tekstu";
+"status.editor.ai-prompt.insert-tags" = "Dodaj hasztagi po moim tekście";
 "status.editor.ai-prompt.emphasize" = "Wyróżnij tekst";
 "status.editor.ai-prompt.fit" = "Skróć tekst";
 "status.editor.description.add" = "Dodaj opis";
@@ -435,6 +445,8 @@
 "status.editor.spoiler" = "Tekst spoilera";
 "status.editor.text.placeholder" = "Co ci chodzi po głowie?";
 "status.editor.visibility" = "Widoczność postu";
+"status.editor.photo-library" = "Biblioteka zdjęć";
+"status.editor.browse-file" = "Przeglądaj pliki";
 "status.error.loading.message" = "Wystąpił błąd podczas ładowania postów, spróbuj ponownie.";
 "status.error.message" = "Wystąpił błąd dotyczący tego postu, proszę spróbuj ponownie.";
 "status.error.title" = "Wystąpił błąd";
@@ -462,6 +474,7 @@
 "status.show-full-post" = "Pokaż cały post";
 "status.summary.at-time" = " o ";
 "status.summary.edited-time" = "Ostatnia edycja: ";
+"status.summary.edit-history" = "Edit History";
 "status.visibility.direct" = "Post bezpośredni";
 "status.visibility.follower" = "Tylko obserwujący";
 "status.visibility.public" = "Publiczny";
@@ -494,8 +507,52 @@
 "accessibility.editor.button.drafts" = "Wersje robocze";
 "accessibility.editor.button.custom-emojis" = "Emotikony własne";
 "accessibility.editor.button.language" = "Język";
+"accessibility.editor.button.ai-prompt" = "Funkcje AI";
+"accessibility.editor.button.characters-remaining" = "Liczba pozostałych znaków";
+"accessibility.editor.privacy.label" = "Widoczność postu";
+"accessibility.editor.privacy.hint" = "Zmienia odbiorców postu.";
 "accessibility.tabs.timeline.add-account" = "Dodaj konto";
+"accessibility.tabs.timeline.new-post.label" = "Napisz post";
+"accessibility.tabs.timeline.new-post.inputLabel1" = "Nowy";
+"accessibility.tabs.timeline.new-post.inputLabel2" = "Utwórz";
+"accessibility.tabs.timeline.unread-posts.label-%lld" = "%lld nowych postów";
+"accessibility.tabs.timeline.unread-posts.hint" = "Przewija strumień.";
+"accessibility.tabs.timeline.content-link-%@" = "Odwiedź %@";
+"accessibility.tabs.timeline.content-hashtag-%@" = "Hasztag %@";
 "accessibility.app-account.selector.accounts" = "Konta";
+"accessibility.app-account.selector.accounts.hint" = "Otwiera panel opcji.";
+"accessibility.tabs.profile.options.label" = "Opcje";
+"accessibility.tabs.profile.options.inputLabel1" = "Ustawienia";
+"accessibility.tabs.profile.options.inputLabel2" = "Więcej";
+"accessibility.tabs.profile.user-avatar.label" = "Zdjęcie profilowe";
+"accessibility.tabs.profile.user-avatar.hint" = "Wyświetla większą wersję.";
+"accessibility.tabs.profile.user-avatar.supporter.label" = "Osoba wspierająca";
+"accessibility.tabs.profile.user.account-bot.label" = "Konto bota";
+"accessibility.tabs.profile.user.account-blocked.label" = "Zablokowane";
+"accessibility.tabs.profile.user.account-muted.label" = "Wyciszone";
+"accessibility.tabs.profile.user.account-private.label" = "Konto prywatne";
+"accessibility.tabs.profile.header-image.label" = "Obrazek nagłówka";
+"accessibility.tabs.profile.header-image.hint" = "Wyświetla większą wersję.";
+"accessibility.tabs.profile.post-count.hint" = "Przewija do listy.";
+"accessibility.tabs.profile.following-count.hint" = "Przechodzi do listy.";
+"accessibility.tabs.profile.follower-count.hint" = "Przechodzi do listy.";
+"accessibility.tabs.profile.picker.statuses" = "Posty";
+"accessibility.tabs.profile.picker.favorites" = "Polubione";
+"accessibility.tabs.profile.picker.bookmarks" = "Zakładki";
+"accessibility.tabs.profile.picker.followed-tags" = "Hasztagi";
+"accessibility.tabs.profile.picker.posts-and-replies" = "Posty i odpowiedzi";
+"accessibility.tabs.profile.picker.media" = "Media";
+"accessibility.tabs.profile.picker.lists" = "Listy";
+"accessibility.tabs.profile.user-notifications.label" = "Otrzymuj powiadomienia";
+"accessibility.tabs.profile.user-reblogs.label" = "Wyświetlaj podbicia";
+"accessibility.tabs.profile.fields.verified.label" = "Zweryfikowano";
+"accessibility.tabs.profile.fields.container.label" = "Pola użytkownika";
+"accessibility.status.spoiler-full-content" = "Pełna treść";
+"accessibility.status.a-boosted-b-%@-%@" = "%@ podbił %@";
+"accessibility.status.a-replied-to-%@" = "%@ odpowiedział do";
+"accessibility.image.alt-text-%@" = "Tekst alternatywny obrazka: %@";
+"accessibility.image.alt-text-more.label" = "Dostępna jest większa ilość tekstu alternatywnego";
+"accessibility.tabs.messages.unread.label" = "Nieprzeczytane";
 
 // MARK: Report
 "report.comment.placeholder" = "Informacja dodatkowa";
@@ -503,4 +560,3 @@
 "report.action.send" = "Wyślij";
 "status.action.report" = "Zgłoś post";
 
-"tag.suggested.mentions-%@" = "%@ mentions";

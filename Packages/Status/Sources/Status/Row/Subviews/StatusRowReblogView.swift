@@ -12,14 +12,15 @@ struct StatusRowReblogView: View {
         EmojiTextApp(.init(stringValue: viewModel.status.account.safeDisplayName), emojis: viewModel.status.account.emojis)
         Text("status.row.was-boosted")
       }
-      .accessibilityElement()
+      .accessibilityElement(children: .combine)
       .accessibilityLabel(
         Text("\(viewModel.status.account.safeDisplayName)")
           + Text(" ")
           + Text("status.row.was-boosted")
       )
       .font(.scaledFootnote)
-      .emojiSize(Font.scaledFootnotePointSize)
+      .emojiSize(Font.scaledFootnoteFont.emojiSize)
+      .emojiBaselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
       .foregroundColor(.gray)
       .fontWeight(.semibold)
       .onTapGesture {

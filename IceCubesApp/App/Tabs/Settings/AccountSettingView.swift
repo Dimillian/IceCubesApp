@@ -74,7 +74,7 @@ struct AccountSettingsView: View {
         }
       }
       .listRowBackground(theme.primaryBackgroundColor)
-      
+
       Section {
         Button(role: .destructive) {
           if let token = appAccount.oauthToken {

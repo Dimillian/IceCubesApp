@@ -11,6 +11,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
   public var asMarkdown: String = ""
   public var asRawText: String = ""
   public var statusesURLs = [URL]()
+  public var links = [Link]()
 
   public var asSafeMarkdownAttributedString: AttributedString = .init()
   private var main_regex: NSRegularExpression?
@@ -75,6 +76,15 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
     } catch {
       asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
     }
+
+    links = asSafeMarkdownAttributedString.runs
+      .compactMap { run in
+        guard let link = run.link else {
+          return nil
+        }
+
+        return Link(link, displayString: String(self.asSafeMarkdownAttributedString[run.range].characters))
+      }
   }
 
   public init(stringValue: String, parseMarkdown: Bool = false) {
@@ -94,6 +104,15 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
     } else {
       asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
     }
+
+    links = asSafeMarkdownAttributedString.runs
+      .compactMap { run in
+        guard let link = run.link else {
+          return nil
+        }
+
+        return Link(link, displayString: String(self.asSafeMarkdownAttributedString[run.range].characters))
+      }
   }
 
   public func encode(to encoder: Encoder) throws {
@@ -166,5 +185,40 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
         handleNode(node: n)
       }
     } catch {}
+  }
+
+  public struct Link: Hashable, Identifiable {
+    public var id: Int { hashValue }
+    public let url: AttributeScopes.FoundationAttributes.LinkAttribute.Value
+    public let displayString: String
+    public let type: LinkType
+    public let title: String
+
+    init(_ url: AttributeScopes.FoundationAttributes.LinkAttribute.Value, displayString: String) {
+      self.url = url
+      self.displayString = displayString
+
+      switch displayString.first {
+        case "@":
+          self.type = .mention
+          self.title = displayString
+        case "#":
+          self.type = .hashtag
+          self.title = String(displayString.dropFirst())
+        default:
+          self.type = .url
+          var hostNameUrl = url.host ?? url.absoluteString
+          if hostNameUrl.hasPrefix("www.") {
+            hostNameUrl = String(hostNameUrl.dropFirst(4))
+          }
+          self.title = hostNameUrl
+      }
+    }
+
+    public enum LinkType {
+      case url
+      case mention
+      case hashtag
+    }
   }
 }

@@ -48,7 +48,7 @@ struct SupportAppView: View {
   }
 
   @EnvironmentObject private var theme: Theme
-  
+
   @Environment(\.openURL) private var openURL
 
   @State private var loadingProducts: Bool = false
@@ -86,7 +86,7 @@ struct SupportAppView: View {
       refreshUserInfo()
     }
   }
-  
+
   private func purchase(product: StoreProduct) async {
     if !isProcessingPurchase {
       isProcessingPurchase = true
@@ -101,23 +101,23 @@ struct SupportAppView: View {
       isProcessingPurchase = false
     }
   }
-  
+
   private func fetchStoreProducts() {
     Purchases.shared.getProducts(Tip.allCases.map { $0.productId }) { products in
       self.subscription = products.first(where: { $0.productIdentifier == Tip.supporter.productId })
-      self.products = products.filter{ $0.productIdentifier != Tip.supporter.productId}.sorted(by: { $0.price < $1.price })
+      self.products = products.filter { $0.productIdentifier != Tip.supporter.productId }.sorted(by: { $0.price < $1.price })
       withAnimation {
         loadingProducts = false
       }
     }
   }
-  
+
   private func refreshUserInfo() {
     Purchases.shared.getCustomerInfo { info, _ in
       self.customerInfo = info
     }
   }
-  
+
   private func makePurchaseButton(product: StoreProduct) -> some View {
     Button {
       Task {
@@ -133,7 +133,7 @@ struct SupportAppView: View {
     }
     .buttonStyle(.bordered)
   }
-  
+
   private var aboutSection: some View {
     Section {
       HStack(alignment: .top, spacing: 12) {
@@ -152,7 +152,7 @@ struct SupportAppView: View {
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
-  
+
   private var subscriptionSection: some View {
     Section {
       if loadingProducts {
@@ -163,14 +163,14 @@ struct SupportAppView: View {
             Text(Image(systemName: "checkmark.seal.fill"))
               .foregroundColor(theme.tintColor)
               .baselineOffset(-1) +
-            Text("settings.support.supporter.subscribed")
+              Text("settings.support.supporter.subscribed")
               .font(.scaledSubheadline)
           } else {
             VStack(alignment: .leading) {
               Text(Image(systemName: "checkmark.seal.fill"))
                 .foregroundColor(theme.tintColor)
                 .baselineOffset(-1) +
-              Text(Tip.supporter.title)
+                Text(Tip.supporter.title)
                 .font(.scaledSubheadline)
               Text(Tip.supporter.subtitle)
                 .font(.scaledFootnote)
@@ -179,7 +179,6 @@ struct SupportAppView: View {
             Spacer()
             makePurchaseButton(product: subscription)
           }
-
         }
         .padding(.vertical, 8)
       }
@@ -190,7 +189,7 @@ struct SupportAppView: View {
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
-  
+
   private var tipsSection: some View {
     Section {
       if loadingProducts {
@@ -215,7 +214,7 @@ struct SupportAppView: View {
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
-  
+
   private var restorePurchase: some View {
     Section {
       HStack {
@@ -234,7 +233,7 @@ struct SupportAppView: View {
     }
     .listRowBackground(theme.secondaryBackgroundColor)
   }
-  
+
   private var linksSection: some View {
     Section {
       VStack(alignment: .leading, spacing: 16) {
@@ -254,7 +253,7 @@ struct SupportAppView: View {
     }
     .listRowBackground(theme.secondaryBackgroundColor)
   }
-  
+
   private var loadingPlaceholder: some View {
     HStack {
       VStack(alignment: .leading) {

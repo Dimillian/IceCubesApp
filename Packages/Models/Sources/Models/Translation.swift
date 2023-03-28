@@ -1,6 +1,6 @@
 import Foundation
 
-public struct StatusTranslation: Decodable {
+public struct Translation: Decodable {
   public let content: HTMLString
   public let detectedSourceLanguage: String
   public let provider: String
@@ -12,4 +12,4 @@ public struct StatusTranslation: Decodable {
   }
 }
 
-extension StatusTranslation: Sendable {}
+extension Translation: Sendable {}

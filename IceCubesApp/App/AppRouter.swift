@@ -3,13 +3,13 @@ import AppAccount
 import Conversations
 import DesignSystem
 import Env
+import Explore
 import LinkPresentation
 import Lists
 import Models
 import Status
 import SwiftUI
 import Timeline
-import Explore
 
 @MainActor
 extension View {
@@ -31,9 +31,9 @@ extension View {
       case let .conversationDetail(conversation):
         ConversationDetailView(conversation: conversation)
       case let .hashTag(tag, accountId):
-        TimelineView(timeline: .constant(.hashtag(tag: tag, accountId: accountId)), scrollToTopSignal: .constant(0))
+        TimelineView(timeline: .constant(.hashtag(tag: tag, accountId: accountId)), scrollToTopSignal: .constant(0), canFilterTimeline: false)
       case let .list(list):
-        TimelineView(timeline: .constant(.list(list: list)), scrollToTopSignal: .constant(0))
+        TimelineView(timeline: .constant(.list(list: list)), scrollToTopSignal: .constant(0), canFilterTimeline: false)
       case let .following(id):
         AccountsListView(mode: .following(accountId: id))
       case let .followers(id):
@@ -45,7 +45,7 @@ extension View {
       case let .accountsList(accounts):
         AccountsListView(mode: .accountsList(accounts: accounts))
       case .trendingTimeline:
-        TimelineView(timeline: .constant(.trending), scrollToTopSignal: .constant(0))
+        TimelineView(timeline: .constant(.trending), scrollToTopSignal: .constant(0), canFilterTimeline: false)
       case let .tagsList(tags):
         TagsListView(tags: tags)
       }

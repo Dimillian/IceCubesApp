@@ -72,12 +72,13 @@ public struct StatusDetailView: View {
         .task {
           guard !isLoaded else { return }
           viewModel.client = client
+          viewModel.routerPath = routerPath
           let result = await viewModel.fetch()
           isLoaded = true
 
           if !result {
             if let url = viewModel.remoteStatusURL {
-              openURL(url)
+              await UIApplication.shared.open(url)
             }
             DispatchQueue.main.async {
               _ = routerPath.path.popLast()
@@ -140,7 +141,7 @@ public struct StatusDetailView: View {
     StatusRowView(viewModel: { .init(status: status,
                                      client: client,
                                      routerPath: routerPath,
-                                     isFocused: !viewModel.isLoadingContext) })
+                                     isFocused: true) })
       .overlay {
         GeometryReader { reader in
           VStack {}
@@ -155,7 +156,8 @@ public struct StatusDetailView: View {
   private var errorView: some View {
     ErrorView(title: "status.error.title",
               message: "status.error.message",
-              buttonTitle: "action.retry") {
+              buttonTitle: "action.retry")
+    {
       Task {
         await viewModel.fetch()
       }
@@ -189,5 +191,6 @@ public struct StatusDetailView: View {
       .listRowSeparator(.hidden)
       .listRowInsets(.init())
       .frame(height: .layoutPadding)
+      .accessibilityHidden(true)
   }
 }

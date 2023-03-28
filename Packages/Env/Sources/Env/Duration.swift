@@ -36,7 +36,7 @@ public enum Duration: Int, CaseIterable {
       return "enum.durations.custom"
     }
   }
-  
+
   public static func mutingDurations() -> [Duration] {
     return Self.allCases.filter { $0 != .custom }
   }
@@ -44,7 +44,7 @@ public enum Duration: Int, CaseIterable {
   public static func filterDurations() -> [Duration] {
     return [.infinite, .thirtyMinutes, .oneHour, .sixHours, .twelveHours, .oneDay, .sevenDays, .custom]
   }
-  
+
   public static func pollDurations() -> [Duration] {
     return [.fiveMinutes, .thirtyMinutes, .oneHour, .sixHours, .twelveHours, .oneDay, .threeDays, .sevenDays]
   }

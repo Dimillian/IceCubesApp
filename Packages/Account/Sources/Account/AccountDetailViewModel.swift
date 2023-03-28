@@ -36,6 +36,18 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
       case .lists: return "list.bullet"
       }
     }
+
+    var accessibilityLabel: LocalizedStringKey {
+      switch self {
+      case .statuses: return "accessibility.tabs.profile.picker.statuses"
+      case .favorites: return "accessibility.tabs.profile.picker.favorites"
+      case .bookmarks: return "accessibility.tabs.profile.picker.bookmarks"
+      case .followedTags: return "accessibility.tabs.profile.picker.followed-tags"
+      case .postsAndReplies: return "accessibility.tabs.profile.picker.posts-and-replies"
+      case .media: return "accessibility.tabs.profile.picker.media"
+      case .lists: return "accessibility.tabs.profile.picker.lists"
+      }
+    }
   }
 
   enum TabState {
@@ -82,6 +94,9 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
       }
     }
   }
+
+  @Published var translation: Translation?
+  @Published var isLoadingTranslation = false
 
   private(set) var account: Account?
   private var tabTask: Task<Void, Never>?
@@ -132,9 +147,15 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
     async let featuredTags: [FeaturedTag] = client.get(endpoint: Accounts.featuredTags(id: accountId))
     if client.isAuth && !isCurrentUser {
       async let relationships: [Relationship] = client.get(endpoint: Accounts.relationships(ids: [accountId]))
-      return try await .init(account: account,
-                             featuredTags: featuredTags,
-                             relationships: relationships)
+      do {
+        return try await .init(account: account,
+                               featuredTags: featuredTags,
+                               relationships: relationships)
+      } catch {
+        return try await .init(account: account,
+                               featuredTags: [],
+                               relationships: relationships)
+      }
     }
     return try await .init(account: account,
                            featuredTags: featuredTags,
@@ -257,4 +278,22 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   func statusDidAppear(status _: Models.Status) {}
 
   func statusDidDisappear(status _: Status) {}
+
+  func translate(userLang: String) async {
+    guard let account else { return }
+    withAnimation {
+      isLoadingTranslation = true
+    }
+
+    let userAPIKey = DeepLUserAPIHandler.readIfAllowed()
+    let userAPIFree = UserPreferences.shared.userDeeplAPIFree
+    let deeplClient = DeepLClient(userAPIKey: userAPIKey, userAPIFree: userAPIFree)
+
+    let translation = try? await deeplClient.request(target: userLang, text: account.note.asRawText)
+
+    withAnimation {
+      self.translation = translation
+      isLoadingTranslation = false
+    }
+  }
 }

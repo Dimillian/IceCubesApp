@@ -34,7 +34,8 @@ struct ConversationMessageView: View {
           EmojiTextApp(message.content, emojis: message.emojis)
             .font(.scaledBody)
             .foregroundColor(theme.labelColor)
-            .emojiSize(Font.scaledBodyPointSize)
+            .emojiSize(Font.scaledBodyFont.emojiSize)
+            .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
             .padding(6)
             .environment(\.openURL, OpenURLAction { url in
               routerPath.handleStatus(status: message, url: url)
@@ -176,7 +177,8 @@ struct ConversationMessageView: View {
       let width = mediaWidth(proxy: proxy)
       if let url = attachement.url {
         LazyImage(request: makeImageRequest(for: url,
-                                            size: .init(width: width, height: 200))) { state in
+                                            size: .init(width: width, height: 200)))
+        { state in
           if let image = state.image {
             image
               .resizable()

@@ -7,7 +7,7 @@ struct StatusRowTextView: View {
   @EnvironmentObject private var theme: Theme
 
   @ObservedObject var viewModel: StatusRowViewModel
-  
+
   var body: some View {
     VStack {
       HStack {
@@ -15,9 +15,11 @@ struct StatusRowTextView: View {
                      emojis: viewModel.finalStatus.emojis,
                      language: viewModel.finalStatus.language,
                      lineLimit: viewModel.lineLimit)
-          .font(.scaledBody)
+          .font(viewModel.isFocused ? .scaledBodyFocused : .scaledBody)
+          .lineSpacing(CGFloat(theme.lineSpacing))
           .foregroundColor(viewModel.textDisabled ? .gray : theme.labelColor)
-          .emojiSize(Font.scaledBodyPointSize)
+          .emojiSize(viewModel.isFocused ? Font.scaledBodyFocusedFont.emojiSize : Font.scaledBodyFont.emojiSize)
+          .emojiBaselineOffset(viewModel.isFocused ? Font.scaledBodyFocusedFont.emojiBaselineOffset : Font.scaledBodyFont.emojiBaselineOffset)
           .environment(\.openURL, OpenURLAction { url in
             viewModel.routerPath.handleStatus(status: viewModel.finalStatus, url: url)
           })

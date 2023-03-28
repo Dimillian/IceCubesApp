@@ -73,7 +73,7 @@
 			<key>other</key>
 			<string>%lld podbić</string>
 		</dict>
-	</dict>
+	</dict>	
 	<key>status.poll.n-votes %lld</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -91,7 +91,23 @@
 			<key>other</key>
 			<string>%lld głosów</string>
 		</dict>
-	</dict>
+	</dict>	
+	<key>status.summary.n-replies %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@statusRepliesCount@</string>
+		<key>statusRepliesCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%lld odpowiedź</string>
+			<key>other</key>
+			<string>%lld odpowiedzi</string>
+		</dict>
+	</dict>		
 	<key>status.poll.n-votes-voters %lld %lld</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -156,7 +172,25 @@
 			<key>other</key>
 			<string>%lld pól</string>
 		</dict>
-	</dict>
+	</dict>	
+	<key>tag.suggested.mentions-%lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@mentionsCount@</string>
+		<key>mentionsCount</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%lld wzmianka</string>
+			<key>few</key>
+			<string>%lld wzmianki</string>
+			<key>other</key>
+			<string>%lld wzmianek</string>
+		</dict>
+	</dict>	
 	<key>design.tag.n-posts-from-n-participants %lld %lld</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>

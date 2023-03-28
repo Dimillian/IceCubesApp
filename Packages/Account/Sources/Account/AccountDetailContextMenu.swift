@@ -1,15 +1,15 @@
-import SwiftUI
 import Env
 import Network
+import SwiftUI
 
 public struct AccountDetailContextMenu: View {
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var routerPath: RouterPath
   @EnvironmentObject private var currentInstance: CurrentInstance
   @EnvironmentObject private var preferences: UserPreferences
-  
+
   @ObservedObject var viewModel: AccountDetailViewModel
-  
+
   public var body: some View {
     if let account = viewModel.account {
       Section(account.acct) {
@@ -148,6 +148,17 @@ public struct AccountDetailContextMenu: View {
           }
 
           Divider()
+        }
+
+        if let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier
+        {
+          Button {
+            Task {
+              await viewModel.translate(userLang: lang)
+            }
+          } label: {
+            Label("status.action.translate", systemImage: "captions.bubble")
+          }
         }
 
         if viewModel.relationship?.following == true {

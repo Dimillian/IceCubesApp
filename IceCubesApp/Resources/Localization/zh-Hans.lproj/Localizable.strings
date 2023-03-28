@@ -25,7 +25,7 @@
 "enum.avatar-shape.circle" = "圆形";
 "enum.avatar-shape.rounded" = "圆角";
 "enum.durations.infinite" = "永久";
-"enum.durations.custom" = "custom";
+"enum.durations.custom" = "自定义";
 "enum.durations.fiveMinutes" = "5 分钟";
 "enum.durations.thirtyMinutes" = "30 分钟";
 "enum.durations.oneHour" = "1 小时";
@@ -81,14 +81,14 @@
 "settings.display.restore" = "恢复默认设置";
 "settings.display.section.display" = "显示";
 "settings.display.section.theme" = "主题";
-"settings.display.colors.apply" = "Apply custom colors";
+"settings.display.colors.apply" = "应用自定义颜色";
 "settings.display.section.theme.footer" = "只有在“匹配系统”关闭时才能设置自定义颜色";
 "settings.display.status.action-buttons" = "导航栏样式";
 "settings.display.status.media-style" = "导航栏排列";
 "settings.display.translate-button" = "显示翻译按钮";
 "settings.display.theme.background" = "背景颜色";
 "settings.display.theme.secondary-background" = "二级背景颜色";
-"settings.display.theme.text-color" = "Text Color";
+"settings.display.theme.text-color" = "文本颜色";
 "settings.display.theme.tint" = "色调";
 "settings.display.theme.systemColor" = "匹配系统";
 "settings.general.browser" = "默认浏览器";
@@ -141,6 +141,12 @@
 "settings.other.hide-openai" = "启用写作助手 🤖";
 "settings.other.social-keyboard" = "启用社交键盘";
 "settings.other.sound-effect" = "启用声音效果";
+"settings.general.translate" = "翻译设置";
+"settings.translation.navigation-title" = "翻译设置";
+"settings.translation.always-deepl" = "总是使用 DeepL 翻译";
+"settings.translation.user-api-key" = "DeepL API 密钥";
+"settings.translation.api-key-type" = "密钥类型";
+"settings.translation.needed-message" = "该功能需要 DeepL API 密钥";
 
 "settings.general.content" = "内容设置";
 "settings.system" = "系统设置";
@@ -179,6 +185,7 @@
 "settings.display.font.system" = "系统";
 "settings.display.font.custom" = "自定义";
 "settings.display.font.scaling-%@" = "字体缩放：%@";
+"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
 "settings.display.show-tab-label" = "显示 Tab 标签";
 "settings.display.show-ipad-column" = "启用边栏";
 
@@ -261,12 +268,12 @@
 "account.edit.post-settings.section-title" = "嘟文设置";
 "account.edit.post-settings.sensitive" = "敏感内容";
 
-"account.edit.metadata-section-title" = "Profile Metadata";
-"account.edit.metadata-name-placeholder" = "Label";
-"account.edit.metadata-value-placeholder" = "Content";
-"account.edit.add-metadata-button" = "Add a new metadata";
+"account.edit.metadata-section-title" = "附加信息";
+"account.edit.metadata-name-placeholder" = "标签";
+"account.edit.metadata-value-placeholder" = "内容";
+"account.edit.add-metadata-button" = "添加新附加信息";
 
-"account.favorited-by" = "同样喜欢的有";
+"account.favorited-by" = "喜欢";
 "account.follow.follow" = "关注";
 "account.follow.following" = "正在关注";
 "account.follow.requested" = "已申请";
@@ -287,7 +294,7 @@
 "account.joined" = "加入于";
 "account.action.logout" = "退出登录";
 "account.action.edit-filters" = "编辑过滤器";
-"account.action.more" = "More Settings";
+"account.action.more" = "更多设置";
 
 "account.relation.note.edit" = "编辑备注";
 "account.relation.note.edit.placeholder" = "输入备注文本";
@@ -384,6 +391,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "翻译";
+"status.action.translate-with-deepl" = "由 DeepL 翻译";
 "status.action.translated-label-%@" = "由 %@ 翻译";
 "status.action.translated-label-from-%@-%@" = "翻译自 %@，使用 %@";
 "status.action.bookmark" = "书签";
@@ -417,6 +425,8 @@
 "status.draft.delete" = "删除草稿";
 "status.draft.save" = "保存草稿";
 "status.editor.ai-prompt.correct" = "检查拼写和语法";
+"status.editor.ai-prompt.add-tags" = "自动添加#标签";
+"status.editor.ai-prompt.insert-tags" = "在末尾添加#标签";
 "status.editor.ai-prompt.emphasize" = "使用强调语气";
 "status.editor.ai-prompt.fit" = "精简文字";
 "status.editor.description.add" = "添加描述";
@@ -438,6 +448,8 @@
 "status.editor.spoiler" = "剧透警告";
 "status.editor.text.placeholder" = "在想些什么呢？";
 "status.editor.visibility" = "嘟文可见性";
+"status.editor.photo-library" = "Photos Library";
+"status.editor.browse-file" = "Browse Files";
 "status.error.loading.message" = "加载嘟文时发生错误，请重试。";
 "status.error.message" = "嘟文的上下文出现了错误，请重试。";
 "status.error.title" = "发生了一个错误";
@@ -464,11 +476,13 @@
 "status.row.you-boosted" = "你转发了";
 "status.show-less" = "显示更少";
 "status.show-more" = "显示更多";
-"status.show-full-post" = "Show full post";
+"status.show-full-post" = "显示全文";
 "status.summary.at-time" = " 在 ";
 "status.summary.edited-time" = "上次编辑：";
+"status.summary.n-replies %lld" = "%lld 个回复";
 "status.summary.n-boosts %lld" = "%lld 转发";
 "status.summary.n-favorites %lld" = "%lld 喜欢";
+"status.summary.edit-history" = "编辑历史";
 "status.visibility.direct" = "私密";
 "status.visibility.follower" = "粉丝";
 "status.visibility.public" = "所有人";
@@ -482,9 +496,9 @@
 "filter.edit.keywords.add" = "添加关键词";
 "filter.edit.contexts" = "过滤范围";
 "filter.edit.action" = "过滤器行为";
-"filter.edit.expiry" = "Expiry";
-"filter.edit.expiry.date-time" = "Date/Time";
-"filter.edit.expiry.duration" = "Duration";
+"filter.edit.expiry" = "结束时间";
+"filter.edit.expiry.date-time" = "日期/时间";
+"filter.edit.expiry.duration" = "持续时间";
 "filter.contexts.home" = "主页和列表";
 "filter.contexts.notifications" = "通知";
 "filter.contexts.public" = "公共时间线";
@@ -504,8 +518,50 @@
 "accessibility.editor.button.drafts" = "草稿";
 "accessibility.editor.button.custom-emojis" = "自定义表情";
 "accessibility.editor.button.language" = "选择语言";
+"accessibility.editor.button.ai-prompt" = "AI 提示";
+"accessibility.editor.button.characters-remaining" = "剩余字符";
+"accessibility.editor.privacy.label" = "可见度";
+"accessibility.editor.privacy.hint" = "更改嘟文可见度。";
 "accessibility.tabs.timeline.add-account" = "添加账户";
+"accessibility.tabs.timeline.new-post.label" = "发嘟";
+"accessibility.tabs.timeline.new-post.inputLabel1" = "新嘟文";
+"accessibility.tabs.timeline.new-post.inputLabel2" = "创建嘟文";
+"accessibility.tabs.timeline.unread-posts.label-%lld" = "%lld 个新嘟文";
+"accessibility.tabs.timeline.unread-posts.hint" = "滚动时间线。";
 "accessibility.app-account.selector.accounts" = "账户";
+"accessibility.app-account.selector.accounts.hint" = "打开选项表";
+"accessibility.tabs.profile.options.label" = "选项";
+"accessibility.tabs.profile.options.inputLabel1" = "设置";
+"accessibility.tabs.profile.options.inputLabel2" = "更多";
+"accessibility.tabs.profile.user-avatar.label" = "账户头像";
+"accessibility.tabs.profile.user-avatar.hint" = "显示更大尺寸。";
+"accessibility.tabs.profile.user-avatar.supporter.label" = "支持者";
+"accessibility.tabs.profile.user.account-bot.label" = "机器人账户";
+"accessibility.tabs.profile.user.account-blocked.label" = "已屏蔽";
+"accessibility.tabs.profile.user.account-muted.label" = "已静音";
+"accessibility.tabs.profile.user.account-private.label" = "私有账户";
+"accessibility.tabs.profile.header-image.label" = "横幅图片";
+"accessibility.tabs.profile.header-image.hint" = "显示更大尺寸。";
+"accessibility.tabs.profile.post-count.hint" = "滚动到列表。";
+"accessibility.tabs.profile.following-count.hint" = "前往列表。";
+"accessibility.tabs.profile.follower-count.hint" = "前往列表。";
+"accessibility.tabs.profile.picker.statuses" = "嘟文";
+"accessibility.tabs.profile.picker.favorites" = "喜欢";
+"accessibility.tabs.profile.picker.bookmarks" = "书签";
+"accessibility.tabs.profile.picker.followed-tags" = "标签";
+"accessibility.tabs.profile.picker.posts-and-replies" = "嘟文和回复";
+"accessibility.tabs.profile.picker.media" = "媒体";
+"accessibility.tabs.profile.picker.lists" = "列表";
+"accessibility.tabs.profile.user-notifications.label" = "接收通知";
+"accessibility.tabs.profile.user-reblogs.label" = "显示转发";
+"accessibility.tabs.profile.fields.verified.label" = "已认证";
+"accessibility.tabs.profile.fields.container.label" = "用户自定义字段";
+"accessibility.status.spoiler-full-content" = "完整内容";
+"accessibility.status.a-boosted-b-%@-%@" = "%@ 转发了 %@";
+"accessibility.status.a-replied-to-%@" = "%@ 回复给";
+"accessibility.image.alt-text-%@" = "图片描述文本：%@";
+"accessibility.image.alt-text-more.label" = "更多描述文本可用";
+"accessibility.tabs.messages.unread.label" = "未读";
 
 // MARK: Report
 "report.comment.placeholder" = "附加信息";
@@ -513,4 +569,4 @@
 "report.action.send" = "发送";
 "status.action.report" = "举报嘟文";
 
-"tag.suggested.mentions-%@" = "%@ mentions";
+"tag.suggested.mentions-%lld" = "%lld 个提及";
