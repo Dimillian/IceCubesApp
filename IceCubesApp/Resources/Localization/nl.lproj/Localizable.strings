@@ -172,7 +172,7 @@
 "settings.display.font.system" = "Systeem";
 "settings.display.font.custom" = "Aangepast";
 "settings.display.font.scaling-%@" = "Lettertype vergroten/verkleinen: %@";
-"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
+"settings.display.font.line-spacing-%@" = "Regelafstand: %@";
 "settings.about.built-with" = "Ice Cubes is gebouwd met de volgende opensourcesoftware:";
 "settings.about.title" = "Ice Cubes";
 "settings.account.cached-posts-%@" = "Posts in cache: %@";
