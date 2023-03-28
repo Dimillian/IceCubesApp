@@ -33,6 +33,7 @@ public struct NotificationsListView: View {
         let title = lockedType?.menuTitle() ?? viewModel.selectedType?.menuTitle() ?? "notifications.navigation-title"
         if lockedType == nil {
           Text(title)
+            .font(.headline)
             .accessibilityRepresentation {
               Menu(title) {}
             }
@@ -40,6 +41,7 @@ public struct NotificationsListView: View {
             .accessibilityRemoveTraits(.isButton)
         } else {
           Text(title)
+            .font(.headline)
             .accessibilityAddTraits(.isHeader)
         }
       }
