@@ -555,16 +555,16 @@
 "accessibility.image.alt-text-%@" = "Tekst alternatywny obrazka: %@";
 "accessibility.image.alt-text-more.label" = "Dostępna jest większa ilość tekstu alternatywnego";
 "accessibility.tabs.messages.unread.label" = "Nieprzeczytane";
-"accessibility.status.poll.option-prefix-%lld-of-%lld" = "Option %lld of %lld";
-"accessibility.status.poll.active.label" = "Active poll";
-"accessibility.status.poll.finished.label" = "Poll results";
-"accessibility.status.poll.selected.label" = "Selected";
-"accessibility.media.supported-type.image.label" = "Image";
-"accessibility.media.supported-type.gifv.label" = "Animated Gif";
-"accessibility.media.supported-type.video.label" = "Video";
+"accessibility.status.poll.option-prefix-%lld-of-%lld" = "Opcja %lld z %lld";
+"accessibility.status.poll.active.label" = "Aktywny sondaż";
+"accessibility.status.poll.finished.label" = "Wyniki sondażu";
+"accessibility.status.poll.selected.label" = "Wybór";
+"accessibility.media.supported-type.image.label" = "Obrazek";
+"accessibility.media.supported-type.gifv.label" = "Animowany obrazek";
+"accessibility.media.supported-type.video.label" = "Wideo";
 "accessibility.media.supported-type.audio.label" = "Audio";
-"accessibility.status.contains-media.label-%@" = "Contains %@";
-"accessibility.status.application.label" = "App";
+"accessibility.status.contains-media.label-%@" = "Zawiera %@";
+"accessibility.status.application.label" = "Aplikacja";
 
 // MARK: Report
 "report.comment.placeholder" = "Informacja dodatkowa";
