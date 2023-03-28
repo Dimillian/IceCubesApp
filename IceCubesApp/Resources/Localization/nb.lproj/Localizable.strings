@@ -508,6 +508,8 @@
 "filter.contexts.profiles" = "Profiler";
 "filter.action.warning" = "Skjul med advarsel";
 "filter.action.hide" = "Skjul helt";
+"filter.expired" = "Expired";
+"filter.expiry-%@" = "Expiry: %@";
 
 // MARK: Accessibility
 "accessibility.editor.button.attach-photo" = "Attach photo";

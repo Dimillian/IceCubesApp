@@ -174,8 +174,8 @@
 "settings.display.font" = "타임라인 글꼴";
 "settings.display.font.system" = "시스템 글꼴";
 "settings.display.font.custom" = "직접 설정";
-"settings.display.font.scaling-%@" = "폰트 크기 조절: %@";
-"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
+"settings.display.font.scaling-%@" = "글꼴 크기 조절: %@";
+"settings.display.font.line-spacing-%@" = "줄 간격 조절: %@";
 "settings.about.built-with" = "Ice Cubes는 다음 오픈 소스 소프트웨어를 사용하여 개발되었습니다:";
 "settings.about.title" = "Ice Cubes";
 "settings.account.cached-posts-%@" = "캐시 데이터로 저장된 글: %@개";
@@ -510,6 +510,8 @@
 "filter.contexts.profiles" = "프로필";
 "filter.action.warning" = "경고 표시하고 글 가림";
 "filter.action.hide" = "완전히 숨김";
+"filter.expired" = "기간 종료됨";
+"filter.expiry-%@" = "%@까지 가림";
 
 // MARK: Accessibility
 "accessibility.editor.button.attach-photo" = "미디어 첨부";

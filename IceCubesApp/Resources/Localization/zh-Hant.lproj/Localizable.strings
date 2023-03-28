@@ -508,6 +508,8 @@
 "filter.contexts.profiles" = "個人檔案";
 "filter.action.warning" = "警告之後隱藏";
 "filter.action.hide" = "完全隱藏";
+"filter.expired" = "Expired";
+"filter.expiry-%@" = "Expiry: %@";
 
 // MARK: Accessibility
 "accessibility.editor.button.attach-photo" = "附上相片";

@@ -497,6 +497,8 @@
 "filter.contexts.profiles" = "Profilak";
 "filter.action.warning" = "Ezkutatu ohartarazpen batekin";
 "filter.action.hide" = "Ezkutatu guztiz";
+"filter.expired" = "Expired";
+"filter.expiry-%@" = "Expiry: %@";
 
 // MARK: Accessibility
 "accessibility.editor.button.attach-photo" = "Erantsi irudia";
