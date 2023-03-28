@@ -559,6 +559,17 @@
 "accessibility.image.alt-text-%@" = "Alternativer Bildtext: %@";
 "accessibility.image.alt-text-more.label" = "Weiterer Alt.-Text verfügbar";
 "accessibility.tabs.messages.unread.label" = "Ungelesen";
+"accessibility.status.poll.option-prefix-%lld-of-%lld" = "Option %lld of %lld";
+"accessibility.status.poll.active.label" = "Active poll";
+"accessibility.status.poll.finished.label" = "Poll results";
+"accessibility.status.poll.selected.label" = "Selected";
+"accessibility.media.supported-type.image.label" = "Image";
+"accessibility.media.supported-type.gifv.label" = "Animated Gif";
+"accessibility.media.supported-type.video.label" = "Video";
+"accessibility.media.supported-type.audio.label" = "Audio";
+"accessibility.status.contains-media.label-%@" = "Contains %@";
+"accessibility.status.application.label" = "App";
+
 
 // MARK: Report
 "report.comment.placeholder" = "Zusätzliche Informationen";

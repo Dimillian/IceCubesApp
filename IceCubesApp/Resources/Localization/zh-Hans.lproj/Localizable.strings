@@ -564,6 +564,16 @@
 "accessibility.image.alt-text-%@" = "图片描述文本：%@";
 "accessibility.image.alt-text-more.label" = "更多描述文本可用";
 "accessibility.tabs.messages.unread.label" = "未读";
+"accessibility.status.poll.option-prefix-%lld-of-%lld" = "Option %lld of %lld";
+"accessibility.status.poll.active.label" = "Active poll";
+"accessibility.status.poll.finished.label" = "Poll results";
+"accessibility.status.poll.selected.label" = "Selected";
+"accessibility.media.supported-type.image.label" = "Image";
+"accessibility.media.supported-type.gifv.label" = "Animated Gif";
+"accessibility.media.supported-type.video.label" = "Video";
+"accessibility.media.supported-type.audio.label" = "Audio";
+"accessibility.status.contains-media.label-%@" = "Contains %@";
+"accessibility.status.application.label" = "App";
 
 // MARK: Report
 "report.comment.placeholder" = "附加信息";

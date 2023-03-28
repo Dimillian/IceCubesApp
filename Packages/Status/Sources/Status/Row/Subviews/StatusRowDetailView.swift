@@ -14,19 +14,28 @@ struct StatusRowDetailView: View {
     Group {
       Divider()
       HStack {
-        Text(viewModel.status.createdAt.asDate, style: .date) +
-          Text("status.summary.at-time") +
-          Text(viewModel.status.createdAt.asDate, style: .time) +
-          Text("  ·")
-        Image(systemName: viewModel.status.visibility.iconName)
+        Group {
+          Text(viewModel.status.createdAt.asDate, style: .date) +
+            Text("status.summary.at-time") +
+            Text(viewModel.status.createdAt.asDate, style: .time) +
+            Text("  ·")
+          Image(systemName: viewModel.status.visibility.iconName)
+            .accessibilityHidden(true)
+        }.accessibilityElement(children: .combine)
         Spacer()
-        Text(viewModel.status.application?.name ?? "")
-          .underline()
-          .onTapGesture {
-            if let url = viewModel.status.application?.website {
-              openURL(url)
-            }
+        if let name = viewModel.status.application?.name, let url = viewModel.status.application?.website {
+          Button {
+            openURL(url)
+          } label: {
+            Text(name)
+              .underline()
           }
+          .buttonStyle(.plain)
+          .accessibilityLabel("accessibility.status.application.label")
+          .accessibilityValue(name)
+          .accessibilityAddTraits(.isLink)
+          .accessibilityRemoveTraits(.isButton)
+        }
       }
       .font(.scaledCaption)
       .foregroundColor(.gray)

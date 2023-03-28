@@ -55,6 +55,7 @@ struct VideoPlayerView: View {
   var body: some View {
     ZStack {
       VideoPlayer(player: viewModel.player)
+        .accessibilityAddTraits(.startsMediaSession)
 
       if !preferences.autoPlayVideo {
         Image(systemName: "play.fill")

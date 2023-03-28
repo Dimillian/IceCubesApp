@@ -50,6 +50,7 @@ struct AccountDetailHeaderView: View {
         Rectangle()
           .foregroundColor(theme.secondaryBackgroundColor)
           .frame(height: Constants.headerHeight)
+          .accessibilityHidden(true)
       } else {
         LazyImage(url: account.header) { state in
           if let image = state.image {

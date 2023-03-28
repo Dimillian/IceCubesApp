@@ -24,6 +24,22 @@ public struct MediaAttachment: Codable, Identifiable, Hashable, Equatable {
     SupportedType(rawValue: type)
   }
 
+  public var localizedTypeDescription: String? {
+    if let supportedType {
+      switch supportedType {
+        case .image:
+          return NSLocalizedString("accessibility.media.supported-type.image.label", bundle: .main, comment: "A localized description of SupportedType.image")
+        case .gifv:
+          return NSLocalizedString("accessibility.media.supported-type.gifv.label", bundle: .main, comment: "A localized description of SupportedType.gifv")
+        case .video:
+          return NSLocalizedString("accessibility.media.supported-type.video.label", bundle: .main, comment: "A localized description of SupportedType.video")
+        case .audio:
+          return NSLocalizedString("accessibility.media.supported-type.audio.label", bundle: .main, comment: "A localized description of SupportedType.audio")
+      }
+    }
+    return nil
+  }
+
   public let url: URL?
   public let previewUrl: URL?
   public let description: String?
