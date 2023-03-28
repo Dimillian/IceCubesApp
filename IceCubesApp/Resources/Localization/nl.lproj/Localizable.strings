@@ -501,8 +501,8 @@
 "filter.contexts.profiles" = "Profielen";
 "filter.action.warning" = "Verberg met waarschuwing";
 "filter.action.hide" = "Verberg volledig";
-"filter.expired" = "Expired";
-"filter.expiry-%@" = "Expiry: %@";
+"filter.expired" = "Verlopen";
+"filter.expiry-%@" = "Verloopt: %@";
 
 "enum.expand-media.show" = "Toon alle";
 "enum.expand-media.hide" = "Verberg alle";
@@ -558,9 +558,9 @@
 "accessibility.status.spoiler-full-content" = "Volledige inhoud";
 "accessibility.status.a-boosted-b-%@-%@" = "%@ heeft %@ geboost";
 "accessibility.status.a-replied-to-%@" = "%@ heeft geantwoord op";
-"accessibility.image.alt-text-%@" = "Tekst voor afbeedling: %@";
+"accessibility.image.alt-text-%@" = "Tekst voor afbeelding: %@";
 "accessibility.image.alt-text-more.label" = "Meer tekst beschikbaar";
-"accessibility.tabs.messages.unread.label" = "Unread";
+"accessibility.tabs.messages.unread.label" = "Ongelezen";
 
 // MARK: Report
 "report.comment.placeholder" = "Aanvullende informatie";
