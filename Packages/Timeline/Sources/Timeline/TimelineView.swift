@@ -217,5 +217,6 @@ public struct TimelineView: View {
       .onDisappear {
         viewModel.scrollToTopVisible = false
       }
+      .accessibilityHidden(true)
   }
 }
