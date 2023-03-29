@@ -185,7 +185,7 @@
 "settings.display.font.system" = "系统";
 "settings.display.font.custom" = "自定义";
 "settings.display.font.scaling-%@" = "字体缩放：%@";
-"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
+"settings.display.font.line-spacing-%@" = "行间距：%@";
 "settings.display.show-tab-label" = "显示 Tab 标签";
 "settings.display.show-ipad-column" = "启用边栏";
 
