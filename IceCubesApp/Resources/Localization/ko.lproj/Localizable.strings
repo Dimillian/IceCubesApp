@@ -566,7 +566,7 @@
 "accessibility.image.alt-text-%@" = "미디어 설명: %@";
 "accessibility.image.alt-text-more.label" = "더 많은 미디어 설명 사용 가능";
 "accessibility.tabs.messages.unread.label" = "읽지 않음";
-"accessibility.status.poll.option-prefix-%lld-of-%lld" = "선택지 %2$lld 중 %1$lld";
+"accessibility.status.poll.option-prefix-%lld-of-%lld" = "%2$lld개 선택지 중 %1$lld-번";
 "accessibility.status.poll.active.label" = "진행 중인 투표";
 "accessibility.status.poll.finished.label" = "투표 결과";
 "accessibility.status.poll.selected.label" = "선택함";
