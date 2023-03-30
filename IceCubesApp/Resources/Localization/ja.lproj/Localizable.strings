@@ -508,8 +508,8 @@
 "filter.contexts.profiles" = "プロフィール";
 "filter.action.warning" = "警告して非表示";
 "filter.action.hide" = "完全に非表示";
-"filter.expired" = "Expired";
-"filter.expiry-%@" = "Expiry: %@";
+"filter.expired" = "期限切れ";
+"filter.expiry-%@" = "有効期限: %@";
 
 // MARK: Accessibility
 "accessibility.editor.button.attach-photo" = "画像を添付";
