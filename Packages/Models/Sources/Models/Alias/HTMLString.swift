@@ -77,6 +77,10 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
       asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
     }
 
+    /// This somehow crash in some cases.
+    /// Disabling for now
+    /// Could be related to this: https://github.com/apple/swift/issues/61532
+    /*
     links = asSafeMarkdownAttributedString.runs
       .compactMap { run in
         guard let link = run.link else {
@@ -85,6 +89,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
 
         return Link(link, displayString: String(self.asSafeMarkdownAttributedString[run.range].characters))
       }
+     */
   }
 
   public init(stringValue: String, parseMarkdown: Bool = false) {
@@ -105,6 +110,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
       asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
     }
 
+    /*
     links = asSafeMarkdownAttributedString.runs
       .compactMap { run in
         guard let link = run.link else {
@@ -113,6 +119,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
 
         return Link(link, displayString: String(self.asSafeMarkdownAttributedString[run.range].characters))
       }
+     */
   }
 
   public func encode(to encoder: Encoder) throws {
