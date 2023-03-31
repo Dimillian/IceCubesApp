@@ -65,14 +65,14 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
       return transferable
     } else if isGif, let transferable = await getGifTransferable(item: item) {
       return transferable
-    } else if let transferable = await getImageTansferable(item: item) {
-      return transferable
     }
     let compressor = StatusEditorCompressor()
     let result = try await item.loadItem(forTypeIdentifier: rawValue)
     if self == .jpeg || self == .png || self == .tiff || self == .image || self == .uiimage || self == .adobeRawImage {
-      if let image = result as? UIImage {
-        return image
+      if let image = result as? UIImage,
+         let compressedData = try? await compressor.compressImageForUpload(image),
+         let compressedImage = UIImage(data: compressedData) {
+        return compressedImage
       } else if let imageURL = result as? URL,
                 let compressedData = await compressor.compressImageFrom(url: imageURL),
                 let image = UIImage(data: compressedData)
@@ -83,6 +83,9 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
       {
         return image
       }
+    }
+    if let transferable = await getImageTansferable(item: item) {
+      return transferable
     }
     if let url = result as? URL {
       return url.absoluteString
