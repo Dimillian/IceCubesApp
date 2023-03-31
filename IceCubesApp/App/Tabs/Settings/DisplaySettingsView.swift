@@ -6,11 +6,13 @@ import Network
 import Status
 import SwiftUI
 
-class DisplaySettingsLocalColors: ObservableObject {
+class DisplaySettingsLocalValues: ObservableObject {
   @Published var tintColor = Theme.shared.tintColor
   @Published var primaryBackgroundColor = Theme.shared.primaryBackgroundColor
   @Published var secondaryBackgroundColor = Theme.shared.secondaryBackgroundColor
   @Published var labelColor = Theme.shared.labelColor
+  @Published var lineSpacing = Theme.shared.lineSpacing
+  @Published var fontSizeScale = Theme.shared.fontSizeScale
 
   private var subscriptions = Set<AnyCancellable>()
 
@@ -31,6 +33,14 @@ class DisplaySettingsLocalColors: ObservableObject {
       .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
       .sink(receiveValue: { newColor in Theme.shared.labelColor = newColor })
       .store(in: &subscriptions)
+    $lineSpacing
+      .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
+      .sink(receiveValue: { newSpacing in Theme.shared.lineSpacing = newSpacing })
+      .store(in: &subscriptions)
+    $fontSizeScale
+      .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
+      .sink(receiveValue: { newScale in Theme.shared.fontSizeScale = newScale })
+      .store(in: &subscriptions)
   }
 }
 
@@ -41,11 +51,9 @@ struct DisplaySettingsView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var userPreferences: UserPreferences
 
-  @StateObject private var localColors = DisplaySettingsLocalColors()
+  @StateObject private var localValues = DisplaySettingsLocalValues()
 
   @State private var isFontSelectorPresented = false
-  @State var fontScale = 0.0
-  @State var lineSpacing = 0.0
 
   private let previewStatusViewModel = StatusRowViewModel(status: Status.placeholder(forSettings: true, language: "la"),
                                                           client: Client(server: ""),
@@ -94,18 +102,18 @@ struct DisplaySettingsView: View {
       Toggle("settings.display.theme.systemColor", isOn: $theme.followSystemColorScheme)
       themeSelectorButton
       Group {
-        ColorPicker("settings.display.theme.tint", selection: $localColors.tintColor)
-        ColorPicker("settings.display.theme.background", selection: $localColors.primaryBackgroundColor)
-        ColorPicker("settings.display.theme.secondary-background", selection: $localColors.secondaryBackgroundColor)
-        ColorPicker("settings.display.theme.text-color", selection: $localColors.labelColor)
+        ColorPicker("settings.display.theme.tint", selection: $localValues.tintColor)
+        ColorPicker("settings.display.theme.background", selection: $localValues.primaryBackgroundColor)
+        ColorPicker("settings.display.theme.secondary-background", selection: $localValues.secondaryBackgroundColor)
+        ColorPicker("settings.display.theme.text-color", selection: $localValues.labelColor)
       }
       .disabled(theme.followSystemColorScheme)
       .opacity(theme.followSystemColorScheme ? 0.5 : 1.0)
       .onChange(of: theme.selectedSet) { _ in
-        localColors.tintColor = theme.tintColor
-        localColors.primaryBackgroundColor = theme.primaryBackgroundColor
-        localColors.secondaryBackgroundColor = theme.secondaryBackgroundColor
-        localColors.labelColor = theme.labelColor
+        localValues.tintColor = theme.tintColor
+        localValues.primaryBackgroundColor = theme.primaryBackgroundColor
+        localValues.secondaryBackgroundColor = theme.secondaryBackgroundColor
+        localValues.labelColor = theme.labelColor
       }
     } header: {
       Text("settings.display.section.theme")
@@ -149,35 +157,21 @@ struct DisplaySettingsView: View {
       .navigationDestination(isPresented: $isFontSelectorPresented, destination: { FontPicker() })
 
       VStack {
-        Slider(value: $fontScale, in: 0.5 ... 1.5, step: 0.1) { editing in
-          if !editing {
-            theme.fontSizeScale = fontScale
-          }
-        }
-        Text("settings.display.font.scaling-\(String(format: "%.1f", fontScale))")
+        Slider(value: $localValues.fontSizeScale, in: 0.5 ... 1.5, step: 0.1)
+        Text("settings.display.font.scaling-\(String(format: "%.1f", localValues.fontSizeScale))")
           .font(.scaledBody)
       }
       .alignmentGuide(.listRowSeparatorLeading) { d in
         d[.leading]
-      }
-      .onAppear {
-        fontScale = theme.fontSizeScale
       }
 
       VStack {
-        Slider(value: $lineSpacing, in: 0.4 ... 10.0, step: 0.2) { editing in
-          if !editing {
-            theme.lineSpacing = lineSpacing
-          }
-        }
-        Text("settings.display.font.line-spacing-\(String(format: "%.1f", lineSpacing))")
+        Slider(value: $localValues.lineSpacing, in: 0.4 ... 10.0, step: 0.2)
+        Text("settings.display.font.line-spacing-\(String(format: "%.1f", localValues.lineSpacing))")
           .font(.scaledBody)
       }
       .alignmentGuide(.listRowSeparatorLeading) { d in
         d[.leading]
-      }
-      .onAppear {
-        lineSpacing = theme.lineSpacing
       }
     }
     .listRowBackground(theme.primaryBackgroundColor)
@@ -238,10 +232,10 @@ struct DisplaySettingsView: View {
         theme.avatarPosition = .top
         theme.statusActionsDisplay = .full
 
-        localColors.tintColor = theme.tintColor
-        localColors.primaryBackgroundColor = theme.primaryBackgroundColor
-        localColors.secondaryBackgroundColor = theme.secondaryBackgroundColor
-        localColors.labelColor = theme.labelColor
+        localValues.tintColor = theme.tintColor
+        localValues.primaryBackgroundColor = theme.primaryBackgroundColor
+        localValues.secondaryBackgroundColor = theme.secondaryBackgroundColor
+        localValues.labelColor = theme.labelColor
 
       } label: {
         Text("settings.display.restore")
