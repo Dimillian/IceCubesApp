@@ -44,6 +44,8 @@ struct DisplaySettingsView: View {
   @StateObject private var localColors = DisplaySettingsLocalColors()
 
   @State private var isFontSelectorPresented = false
+  @State var fontScale = 0.0
+  @State var lineSpacing = 0.0
 
   private let previewStatusViewModel = StatusRowViewModel(status: Status.placeholder(forSettings: true, language: "la"),
                                                           client: Client(server: ""),
@@ -147,21 +149,35 @@ struct DisplaySettingsView: View {
       .navigationDestination(isPresented: $isFontSelectorPresented, destination: { FontPicker() })
 
       VStack {
-        Slider(value: $theme.fontSizeScale, in: 0.5 ... 1.5, step: 0.1)
-        Text("settings.display.font.scaling-\(String(format: "%.1f", theme.fontSizeScale))")
+        Slider(value: $fontScale, in: 0.5 ... 1.5, step: 0.1) { editing in
+          if !editing {
+            theme.fontSizeScale = fontScale
+          }
+        }
+        Text("settings.display.font.scaling-\(String(format: "%.1f", fontScale))")
           .font(.scaledBody)
       }
       .alignmentGuide(.listRowSeparatorLeading) { d in
         d[.leading]
       }
-      
+      .onAppear {
+        fontScale = theme.fontSizeScale
+      }
+
       VStack {
-        Slider(value: $theme.lineSpacing, in: 0.4 ... 10.0, step: 0.2)
-        Text("settings.display.font.line-spacing-\(String(format: "%.1f", theme.lineSpacing))")
+        Slider(value: $lineSpacing, in: 0.4 ... 10.0, step: 0.2) { editing in
+          if !editing {
+            theme.lineSpacing = lineSpacing
+          }
+        }
+        Text("settings.display.font.line-spacing-\(String(format: "%.1f", lineSpacing))")
           .font(.scaledBody)
       }
       .alignmentGuide(.listRowSeparatorLeading) { d in
         d[.leading]
+      }
+      .onAppear {
+        lineSpacing = theme.lineSpacing
       }
     }
     .listRowBackground(theme.primaryBackgroundColor)

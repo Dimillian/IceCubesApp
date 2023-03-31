@@ -8,7 +8,8 @@ public class Theme: ObservableObject {
     case selectedSet, selectedScheme
     case followSystemColorSchme
     case displayFullUsernameTimeline
-    case lineSpacing
+    case lineSpacing, fontSizeScale
+    case chosenFont, isPreviouslySet
   }
 
   public enum FontState: Int, CaseIterable {
@@ -115,7 +116,7 @@ public class Theme: ObservableObject {
     }
   }
 
-  @AppStorage("is_previously_set") public var isThemePreviouslySet: Bool = false
+  @AppStorage(ThemeKey.isPreviouslySet.rawValue) public var isThemePreviouslySet: Bool = false
   @AppStorage(ThemeKey.selectedScheme.rawValue) public var selectedScheme: ColorScheme = .dark
   @AppStorage(ThemeKey.tint.rawValue) public var tintColor: Color = .black
   @AppStorage(ThemeKey.primaryBackground.rawValue) public var primaryBackgroundColor: Color = .white
@@ -129,8 +130,8 @@ public class Theme: ObservableObject {
   @AppStorage(ThemeKey.followSystemColorSchme.rawValue) public var followSystemColorScheme: Bool = true
   @AppStorage(ThemeKey.displayFullUsernameTimeline.rawValue) public var displayFullUsername: Bool = true
   @AppStorage(ThemeKey.lineSpacing.rawValue) public var lineSpacing: Double = 0.8
-  @AppStorage("font_size_scale") public var fontSizeScale: Double = 1
-  @AppStorage("chosen_font") public private(set) var chosenFontData: Data?
+  @AppStorage(ThemeKey.fontSizeScale.rawValue) public var fontSizeScale: Double = 1
+  @AppStorage(ThemeKey.chosenFont.rawValue) public private(set) var chosenFontData: Data?
 
   @Published public var avatarPosition: AvatarPosition = .top
   @Published public var avatarShape: AvatarShape = .rounded
