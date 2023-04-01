@@ -564,16 +564,16 @@
 "accessibility.image.alt-text-%@" = "画像の代替テキスト: %@";
 "accessibility.image.alt-text-more.label" = "より多くの代替テキストを利用できます";
 "accessibility.tabs.messages.unread.label" = "未読";
-"accessibility.status.poll.option-prefix-%lld-of-%lld" = "Option %lld of %lld";
-"accessibility.status.poll.active.label" = "Active poll";
-"accessibility.status.poll.finished.label" = "Poll results";
-"accessibility.status.poll.selected.label" = "Selected";
-"accessibility.media.supported-type.image.label" = "Image";
-"accessibility.media.supported-type.gifv.label" = "Animated Gif";
-"accessibility.media.supported-type.video.label" = "Video";
-"accessibility.media.supported-type.audio.label" = "Audio";
-"accessibility.status.contains-media.label-%@" = "Contains %@";
-"accessibility.status.application.label" = "App";
+"accessibility.status.poll.option-prefix-%lld-of-%lld" = "オプション %lld / %lld";
+"accessibility.status.poll.active.label" = "アクティブな投票";
+"accessibility.status.poll.finished.label" = "投票結果";
+"accessibility.status.poll.selected.label" = "選択済み";
+"accessibility.media.supported-type.image.label" = "画像";
+"accessibility.media.supported-type.gifv.label" = "アニメーション GIF";
+"accessibility.media.supported-type.video.label" = "ビデオ";
+"accessibility.media.supported-type.audio.label" = "オーディオ";
+"accessibility.status.contains-media.label-%@" = "%@ を含む";
+"accessibility.status.application.label" = "アプリ";
 
 // MARK: Report
 "report.comment.placeholder" = "追加情報";
