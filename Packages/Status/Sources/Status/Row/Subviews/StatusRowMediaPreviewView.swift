@@ -90,7 +90,7 @@ public struct StatusRowMediaPreviewView: View {
               await quickLook.prepareFor(urls: attachments.compactMap { $0.url }, selectedURL: attachment.url!)
             }
           }
-          .accessibilityElement(children: .combine)
+          .accessibilityElement(children: .ignore)
           .accessibilityLabel(Self.accessibilityLabel(for: attachment))
           .accessibilityAddTraits([.isButton, .isImage])
       } else {
@@ -254,7 +254,6 @@ public struct StatusRowMediaPreviewView: View {
                 .cornerRadius(4)
               }
             }
-            .accessibilityAddTraits(.isImage)
           case .gifv, .video, .audio:
             if let url = attachment.url {
               VideoPlayerView(viewModel: .init(url: url))
@@ -274,9 +273,9 @@ public struct StatusRowMediaPreviewView: View {
           await quickLook.prepareFor(urls: attachments.compactMap { $0.url }, selectedURL: attachment.url!)
         }
       }
-      .accessibilityElement(children: .combine)
-      .accessibilityAddTraits(.isButton)
+      .accessibilityElement(children: .ignore)
       .accessibilityLabel(Self.accessibilityLabel(for: attachment))
+      .accessibilityAddTraits(attachment.supportedType == .image ? [.isImage, .isButton] : .isButton)
     }
   }
 
