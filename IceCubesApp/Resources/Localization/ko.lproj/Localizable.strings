@@ -514,6 +514,8 @@
 "filter.expiry-%@" = "%@까지 가림";
 
 // MARK: Accessibility
+"accessibility.general.toggle.on" = "On";
+"accessibility.general.toggle.off" = "Off";
 "accessibility.editor.button.attach-photo" = "미디어 첨부";
 "accessibility.editor.button.poll" = "투표";
 "accessibility.editor.button.spoiler" = "열람 주의 문구";

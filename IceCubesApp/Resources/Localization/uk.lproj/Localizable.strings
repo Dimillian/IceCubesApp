@@ -513,6 +513,8 @@
 "filter.expiry-%@" = "Expiry: %@";
 
 // MARK: Accessibility
+"accessibility.general.toggle.on" = "On";
+"accessibility.general.toggle.off" = "Off";
 "accessibility.editor.button.attach-photo" = "Додати світлину";
 "accessibility.editor.button.poll" = "Опитування";
 "accessibility.editor.button.spoiler" = "Увага! Спойлер.";

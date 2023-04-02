@@ -512,6 +512,8 @@
 "filter.expiry-%@" = "有効期限: %@";
 
 // MARK: Accessibility
+"accessibility.general.toggle.on" = "On";
+"accessibility.general.toggle.off" = "Off";
 "accessibility.editor.button.attach-photo" = "画像を添付";
 "accessibility.editor.button.poll" = "投票";
 "accessibility.editor.button.spoiler" = "ネタバレを警告";

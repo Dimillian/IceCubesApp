@@ -509,6 +509,8 @@
 "enum.expand-media.hide-sensitive" = "Verberg gevoelige";
 
 // MARK: Accessibility
+"accessibility.general.toggle.on" = "On";
+"accessibility.general.toggle.off" = "Off";
 "accessibility.editor.button.attach-photo" = "Voeg foto toe";
 "accessibility.editor.button.poll" = "Poll";
 "accessibility.editor.button.spoiler" = "Spoilerwaarschuwing";

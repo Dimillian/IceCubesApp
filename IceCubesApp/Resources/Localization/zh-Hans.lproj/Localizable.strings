@@ -514,6 +514,8 @@
 "enum.expand-media.hide-sensitive" = "隐藏敏感内容";
 
 // MARK: Accessibility
+"accessibility.general.toggle.on" = "On";
+"accessibility.general.toggle.off" = "Off";
 "accessibility.editor.button.attach-photo" = "添加图片";
 "accessibility.editor.button.poll" = "投票";
 "accessibility.editor.button.spoiler" = "剧透警告";
