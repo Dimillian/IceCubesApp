@@ -91,7 +91,7 @@ public struct StatusRowMediaPreviewView: View {
             }
           }
           .accessibilityElement(children: .combine)
-          .modifier(ConditionalAccessibilityLabelAltTextModifier(attachment: attachment))
+          .accessibilityLabel(Self.accessibilityLabel(for: attachment))
           .accessibilityAddTraits([.isButton, .isImage])
       } else {
         if isCompact || theme.statusDisplayStyle == .compact {
@@ -275,8 +275,8 @@ public struct StatusRowMediaPreviewView: View {
         }
       }
       .accessibilityElement(children: .combine)
-      .modifier(ConditionalAccessibilityLabelAltTextModifier(attachment: attachment))
       .accessibilityAddTraits(.isButton)
+      .accessibilityLabel(Self.accessibilityLabel(for: attachment))
     }
   }
 
@@ -335,21 +335,14 @@ public struct StatusRowMediaPreviewView: View {
       Spacer()
     }
   }
-}
 
-/// A ``ViewModifier`` that creates a suitable accessibility label for an image that may or may not have alt text
-private struct ConditionalAccessibilityLabelAltTextModifier: ViewModifier {
-  let attachment: MediaAttachment
-
-  func body(content: Content) -> some View {
+  private static func accessibilityLabel(for attachment: MediaAttachment) -> Text {
     if let altText = attachment.description {
-      content
-        .accessibilityLabel("accessibility.image.alt-text-\(altText)")
+      return Text("accessibility.image.alt-text-\(altText)")
     } else if let typeDescription = attachment.localizedTypeDescription {
-      content
-        .accessibilityLabel(typeDescription)
+      return Text(typeDescription)
     } else {
-      content
+      return Text("accessibility.tabs.profile.picker.media")
     }
   }
 }
