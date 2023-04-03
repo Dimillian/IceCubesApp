@@ -13,6 +13,7 @@ public struct StatusRowView: View {
   @Environment(\.isCompact) private var isCompact: Bool
   @Environment(\.accessibilityEnabled) private var accessibilityEnabled
 
+  @EnvironmentObject private var quickLook: QuickLook
   @EnvironmentObject private var theme: Theme
 
   @StateObject var viewModel: StatusRowViewModel
@@ -173,6 +174,16 @@ public struct StatusRowView: View {
     Button("settings.swipeactions.status.action.quote") {
       HapticManager.shared.fireHaptic(of: .notification(.success))
       viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
+    }
+
+    if viewModel.finalStatus.mediaAttachments.isEmpty == false {
+      Button("accessibility.status.media-viewer-action.label") {
+        HapticManager.shared.fireHaptic(of: .notification(.success))
+        Task {
+          let attachments = viewModel.finalStatus.mediaAttachments
+          await quickLook.prepareFor(urls: attachments.compactMap { $0.url }, selectedURL: attachments[0].url!)
+        }
+      }
     }
 
     Button(viewModel.displaySpoiler ? "status.show-more" : "status.show-less") {

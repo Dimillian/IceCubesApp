@@ -578,6 +578,8 @@
 "accessibility.media.supported-type.audio.label" = "Audio";
 "accessibility.status.contains-media.label-%@" = "Contains %@";
 "accessibility.status.application.label" = "App";
+"accessibility.status.media-viewer-action.label" = "Open media viewer";
+
 
 // MARK: Report
 "report.comment.placeholder" = "Additional Info";
