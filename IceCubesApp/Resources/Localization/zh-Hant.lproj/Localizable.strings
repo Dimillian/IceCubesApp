@@ -451,6 +451,7 @@
 "status.editor.text.placeholder" = "您在想些什麼呢？";
 "status.editor.visibility" = "嘟文能見度";
 "status.editor.photo-library" = "相片圖庫";
+"status.editor.camera-picker" = "Take Photo";
 "status.editor.browse-file" = "瀏覽檔案";
 "status.error.loading.message" = "下載嘟文時發生錯誤，請再試一次。";
 "status.error.message" = "嘟文上下文發生錯誤，請再試一次。";

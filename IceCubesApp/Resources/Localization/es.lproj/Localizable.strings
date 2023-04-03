@@ -451,6 +451,7 @@
 "status.editor.text.placeholder" = "¿En qué estás pensando?";
 "status.editor.visibility" = "Visibilidad de la publicación";
 "status.editor.photo-library" = "Fototeca";
+"status.editor.camera-picker" = "Take Photo";
 "status.editor.browse-file" = "Archivos";
 "status.error.loading.message" = "Ha ocurrido un error al cargar las publicaciones, por favor, vuelve a intentarlo.";
 "status.error.message" = "Ha ocurrido un error al cargar el contexto de esta publicación, por favor, vuelve a intentarlo.";

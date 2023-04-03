@@ -444,6 +444,7 @@
 "status.editor.text.placeholder" = "Zer duzu buruan?";
 "status.editor.visibility" = "Bidalketaren irismena";
 "status.editor.photo-library" = "Argazki-liburutegia";
+"status.editor.camera-picker" = "Take Photo";
 "status.editor.browse-file" = "Arakatu fitxategiak";
 "status.error.loading.message" = "Errorea bidalketak kargatzean; saiatu berriro.";
 "status.error.message" = "Errorea bidalketa honen testuinguruan; saiatu berriro.";

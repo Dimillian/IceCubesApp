@@ -371,6 +371,14 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
       .compactMap { NSItemProvider(contentsOf: $0) }
     processItemsProvider(items: items)
   }
+  
+  func processCameraPhoto(image: UIImage) {
+    mediasImages.append(.init(image: image,
+                              movieTransferable: nil,
+                              gifTransferable: nil,
+                              mediaAttachment: nil,
+                              error: nil))
+  }
 
   private func processItemsProvider(items: [NSItemProvider]) {
     Task {
