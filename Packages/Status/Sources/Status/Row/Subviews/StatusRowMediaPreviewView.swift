@@ -90,8 +90,8 @@ public struct StatusRowMediaPreviewView: View {
               await quickLook.prepareFor(urls: attachments.compactMap { $0.url }, selectedURL: attachment.url!)
             }
           }
-          .accessibilityElement(children: .combine)
-          .modifier(ConditionalAccessibilityLabelAltTextModifier(attachment: attachment))
+          .accessibilityElement(children: .ignore)
+          .accessibilityLabel(Self.accessibilityLabel(for: attachment))
           .accessibilityAddTraits([.isButton, .isImage])
       } else {
         if isCompact || theme.statusDisplayStyle == .compact {
@@ -254,7 +254,6 @@ public struct StatusRowMediaPreviewView: View {
                 .cornerRadius(4)
               }
             }
-            .accessibilityAddTraits(.isImage)
           case .gifv, .video, .audio:
             if let url = attachment.url {
               VideoPlayerView(viewModel: .init(url: url))
@@ -274,9 +273,9 @@ public struct StatusRowMediaPreviewView: View {
           await quickLook.prepareFor(urls: attachments.compactMap { $0.url }, selectedURL: attachment.url!)
         }
       }
-      .accessibilityElement(children: .combine)
-      .modifier(ConditionalAccessibilityLabelAltTextModifier(attachment: attachment))
-      .accessibilityAddTraits(.isButton)
+      .accessibilityElement(children: .ignore)
+      .accessibilityLabel(Self.accessibilityLabel(for: attachment))
+      .accessibilityAddTraits(attachment.supportedType == .image ? [.isImage, .isButton] : .isButton)
     }
   }
 
@@ -335,21 +334,14 @@ public struct StatusRowMediaPreviewView: View {
       Spacer()
     }
   }
-}
 
-/// A ``ViewModifier`` that creates a suitable accessibility label for an image that may or may not have alt text
-private struct ConditionalAccessibilityLabelAltTextModifier: ViewModifier {
-  let attachment: MediaAttachment
-
-  func body(content: Content) -> some View {
+  private static func accessibilityLabel(for attachment: MediaAttachment) -> Text {
     if let altText = attachment.description {
-      content
-        .accessibilityLabel("accessibility.image.alt-text-\(altText)")
+      return Text("accessibility.image.alt-text-\(altText)")
     } else if let typeDescription = attachment.localizedTypeDescription {
-      content
-        .accessibilityLabel(typeDescription)
+      return Text(typeDescription)
     } else {
-      content
+      return Text("accessibility.tabs.profile.picker.media")
     }
   }
 }

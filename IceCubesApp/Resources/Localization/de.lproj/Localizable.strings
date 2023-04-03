@@ -500,6 +500,8 @@
 "filter.expiry-%@" = "Expiry: %@";
 
 // MARK: Accessibility
+"accessibility.general.toggle.on" = "On";
+"accessibility.general.toggle.off" = "Off";
 "accessibility.editor.button.attach-photo" = "Foto anhängen";
 "accessibility.editor.button.poll" = "Umfrage";
 "accessibility.editor.button.spoiler" = "Inhaltswarnung";
