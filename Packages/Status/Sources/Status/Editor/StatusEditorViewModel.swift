@@ -378,6 +378,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
                               gifTransferable: nil,
                               mediaAttachment: nil,
                               error: nil))
+    processMediasToUpload()
   }
 
   private func processItemsProvider(items: [NSItemProvider]) {
