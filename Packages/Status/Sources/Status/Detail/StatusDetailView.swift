@@ -17,6 +17,10 @@ public struct StatusDetailView: View {
   @State private var isLoaded: Bool = false
   @State private var statusHeight: CGFloat = 0
 
+  /// April 4th, 2023: Without explicit focus being set, VoiceOver will skip over a seemingly random number of elements on this screen when pushing in from the main timeline.
+  /// By using ``@AccessibilityFocusState`` and setting focus once, we work around this issue.
+  @AccessibilityFocusState private var initialFocusBugWorkaround: Bool
+
   public init(statusId: String) {
     _viewModel = StateObject(wrappedValue: .init(statusId: statusId))
   }
@@ -145,6 +149,7 @@ public struct StatusDetailView: View {
                                      client: client,
                                      routerPath: routerPath,
                                      isFocused: true) })
+      .accessibilityFocused($initialFocusBugWorkaround, equals: true)
       .overlay {
         GeometryReader { reader in
           VStack {}
@@ -154,6 +159,10 @@ public struct StatusDetailView: View {
         }
       }
       .id(status.id)
+      // VoiceOver / Switch Control focus workaround
+      .onAppear {
+        self.initialFocusBugWorkaround = true
+      }
   }
 
   private var errorView: some View {
