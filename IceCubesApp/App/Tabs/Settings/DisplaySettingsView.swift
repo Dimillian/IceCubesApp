@@ -13,32 +13,34 @@ class DisplaySettingsLocalValues: ObservableObject {
   @Published var labelColor = Theme.shared.labelColor
   @Published var lineSpacing = Theme.shared.lineSpacing
   @Published var fontSizeScale = Theme.shared.fontSizeScale
+  
+  private let debouncesDelay: DispatchQueue.SchedulerTimeType.Stride = .seconds(0.5)
 
   private var subscriptions = Set<AnyCancellable>()
 
   init() {
     $tintColor
-      .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
+      .debounce(for: debouncesDelay, scheduler: DispatchQueue.main)
       .sink(receiveValue: { newColor in Theme.shared.tintColor = newColor })
       .store(in: &subscriptions)
     $primaryBackgroundColor
-      .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
+      .debounce(for: debouncesDelay, scheduler: DispatchQueue.main)
       .sink(receiveValue: { newColor in Theme.shared.primaryBackgroundColor = newColor })
       .store(in: &subscriptions)
     $secondaryBackgroundColor
-      .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
+      .debounce(for: debouncesDelay, scheduler: DispatchQueue.main)
       .sink(receiveValue: { newColor in Theme.shared.secondaryBackgroundColor = newColor })
       .store(in: &subscriptions)
     $labelColor
-      .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
+      .debounce(for: debouncesDelay, scheduler: DispatchQueue.main)
       .sink(receiveValue: { newColor in Theme.shared.labelColor = newColor })
       .store(in: &subscriptions)
     $lineSpacing
-      .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
+      .debounce(for: debouncesDelay, scheduler: DispatchQueue.main)
       .sink(receiveValue: { newSpacing in Theme.shared.lineSpacing = newSpacing })
       .store(in: &subscriptions)
     $fontSizeScale
-      .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
+      .debounce(for: debouncesDelay, scheduler: DispatchQueue.main)
       .sink(receiveValue: { newScale in Theme.shared.fontSizeScale = newScale })
       .store(in: &subscriptions)
   }
