@@ -13,6 +13,7 @@ public struct StatusRowView: View {
   @Environment(\.isCompact) private var isCompact: Bool
   @Environment(\.accessibilityEnabled) private var accessibilityEnabled
 
+  @EnvironmentObject private var quickLook: QuickLook
   @EnvironmentObject private var theme: Theme
 
   @StateObject var viewModel: StatusRowViewModel
@@ -119,6 +120,7 @@ public struct StatusRowView: View {
     .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
     .accessibilityLabel(viewModel.isFocused == false && accessibilityEnabled
                         ? CombinedAccessibilityLabel(viewModel: viewModel).finalLabel() : Text(""))
+    .accessibilityHidden(viewModel.filter?.filter.filterAction == .hide)
     .accessibilityAction {
       viewModel.navigateToDetail()
     }
@@ -175,6 +177,16 @@ public struct StatusRowView: View {
       viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
     }
 
+    if viewModel.finalStatus.mediaAttachments.isEmpty == false {
+      Button("accessibility.status.media-viewer-action.label") {
+        HapticManager.shared.fireHaptic(of: .notification(.success))
+        Task {
+          let attachments = viewModel.finalStatus.mediaAttachments
+          await quickLook.prepareFor(urls: attachments.compactMap { $0.url }, selectedURL: attachments[0].url!)
+        }
+      }
+    }
+
     Button(viewModel.displaySpoiler ? "status.show-more" : "status.show-less") {
       withAnimation {
         viewModel.displaySpoiler.toggle()
@@ -229,6 +241,9 @@ public struct StatusRowView: View {
         Text("status.filter.show-anyway")
       }
     }
+    .accessibilityAction {
+      viewModel.isFiltered = false
+    }
   }
 
   private var remoteContentLoadingView: some View {
@@ -268,8 +283,23 @@ private struct CombinedAccessibilityLabel {
     viewModel.status.reblog != nil
   }
 
+  var filter: Filter? {
+    guard viewModel.isFiltered else {
+      return nil
+    }
+    return viewModel.filter?.filter
+  }
+
   func finalLabel() -> Text {
-    userNamePreamble() +
+    if let filter {
+      switch filter.filterAction {
+        case .warn:
+          return Text("status.filter.filtered-by-\(filter.title)")
+        case .hide:
+          return Text("")
+      }
+    } else {
+      return userNamePreamble() +
       Text(hasSpoiler
         ? viewModel.finalStatus.spoilerText.asRawText
         : viewModel.finalStatus.content.asRawText
@@ -284,6 +314,8 @@ private struct CombinedAccessibilityLabel {
       Text("status.summary.n-replies \(viewModel.finalStatus.repliesCount)") + Text(", ") +
       Text("status.summary.n-boosts \(viewModel.finalStatus.reblogsCount)") + Text(", ") +
       Text("status.summary.n-favorites \(viewModel.finalStatus.favouritesCount)")
+
+    }
   }
 
   func userNamePreamble() -> Text {
