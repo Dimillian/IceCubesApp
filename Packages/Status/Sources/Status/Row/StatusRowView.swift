@@ -241,6 +241,9 @@ public struct StatusRowView: View {
         Text("status.filter.show-anyway")
       }
     }
+    .accessibilityAction {
+      viewModel.isFiltered = false
+    }
   }
 
   private var remoteContentLoadingView: some View {
