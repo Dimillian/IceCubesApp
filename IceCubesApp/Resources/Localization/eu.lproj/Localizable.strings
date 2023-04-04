@@ -275,14 +275,14 @@
 "account.edit.metadata-value-placeholder" = "Edukia";
 "account.edit.add-metadata-button" = "Gehitu metadatu berria";
 
-"account.favorited-by" = "Hauek gogoko egin dute:";
+"account.favorited-by" = "Hauek gogoko dute:";
 "account.follow.follow" = "Jarraitu";
 "account.follow.following" = "Jarraitzen";
 "account.follow.requested" = "Eskaera eginda";
 "account.follow-request.accept" = "Onartu";
 "account.follow-request.reject" = "Baztertu";
-"account.follow-requests.pending-requests" = "Erabakitzeko eskaerak";
-"account.follow-requests.instructions" = "Erabiltzaile horiek ez dituzte zure bidalketak ikusiko onartzen ez dituzun arte.";
+"account.follow-requests.pending-requests" = "Erabakitzeke dauden eskaerak";
+"account.follow-requests.instructions" = "Goiko erabiltzaileek ez dituzte zure bidalketak ikusiko onartzen ez dituzun arte.";
 "account.followers" = "jarraitzaile";
 "account.following" = "jarraitzen";
 "account.list.create" = "Sortu zerrenda berria";
@@ -373,7 +373,7 @@
 "notifications.label.reblog.push" = "🚀 Bultzatu du: ";
 "notifications.label.follow.push" = "👋 Jarraitu dizu: ";
 "notifications.label.follow-request.push" = "🔒 Jarraipen-eskaera bidali dizu: ";
-"notifications.label.favorite.push" = "⭐️ Gogoko egin du: ";
+"notifications.label.favorite.push" = "⭐️ Gogoko du: ";
 "notifications.label.poll.push" = "📈 Bozketa amaitu da: ";
 "notifications.label.update.push" = "Eguneratu du: ";
 
@@ -444,7 +444,7 @@
 "status.editor.text.placeholder" = "Zer duzu buruan?";
 "status.editor.visibility" = "Bidalketaren irismena";
 "status.editor.photo-library" = "Argazki-liburutegia";
-"status.editor.camera-picker" = "Take Photo";
+"status.editor.camera-picker" = "Egin argazkia";
 "status.editor.browse-file" = "Arakatu fitxategiak";
 "status.error.loading.message" = "Errorea bidalketak kargatzean; saiatu berriro.";
 "status.error.message" = "Errorea bidalketa honen testuinguruan; saiatu berriro.";
@@ -498,12 +498,12 @@
 "filter.contexts.profiles" = "Profilak";
 "filter.action.warning" = "Ezkutatu ohartarazpen batekin";
 "filter.action.hide" = "Ezkutatu guztiz";
-"filter.expired" = "Expired";
-"filter.expiry-%@" = "Expiry: %@";
+"filter.expired" = "Iraungi da";
+"filter.expiry-%@" = "Iraungitzea: %@";
 
 // MARK: Accessibility
-"accessibility.general.toggle.on" = "On";
-"accessibility.general.toggle.off" = "Off";
+"accessibility.general.toggle.on" = "Gaituta";
+"accessibility.general.toggle.off" = "Ezgaituta";
 "accessibility.editor.button.attach-photo" = "Erantsi irudia";
 "accessibility.editor.button.poll" = "Bozketa";
 "accessibility.editor.button.spoiler" = "Edukiari buruzko oharra";
@@ -556,16 +556,16 @@
 "accessibility.image.alt-text-%@" = "Irudiaren deskribapena: %@";
 "accessibility.image.alt-text-more.label" = "Deskribapen testu gehiago dago";
 "accessibility.tabs.messages.unread.label" = "Irakurri gabe";
-"accessibility.status.poll.option-prefix-%lld-of-%lld" = "Option %lld of %lld";
-"accessibility.status.poll.active.label" = "Active poll";
-"accessibility.status.poll.finished.label" = "Poll results";
-"accessibility.status.poll.selected.label" = "Selected";
-"accessibility.media.supported-type.image.label" = "Image";
-"accessibility.media.supported-type.gifv.label" = "Animated Gif";
-"accessibility.media.supported-type.video.label" = "Video";
-"accessibility.media.supported-type.audio.label" = "Audio";
-"accessibility.status.contains-media.label-%@" = "Contains %@";
-"accessibility.status.application.label" = "App";
+"accessibility.status.poll.option-prefix-%lld-of-%lld" = "%lld. aukera, %lld guztira";
+"accessibility.status.poll.active.label" = "Amaitu gabeko bozketa";
+"accessibility.status.poll.finished.label" = "Bozketaren emaitzak";
+"accessibility.status.poll.selected.label" = "Hautatua";
+"accessibility.media.supported-type.image.label" = "Irudia";
+"accessibility.media.supported-type.gifv.label" = "Mugimendua duen Gif-a";
+"accessibility.media.supported-type.video.label" = "Bideoa";
+"accessibility.media.supported-type.audio.label" = "Audioa";
+"accessibility.status.contains-media.label-%@" = "%@ dauka";
+"accessibility.status.application.label" = "Aplikazioa";
 
 // MARK: Report
 "report.comment.placeholder" = "Informazio gehigarria";
