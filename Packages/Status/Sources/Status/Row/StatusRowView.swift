@@ -120,6 +120,7 @@ public struct StatusRowView: View {
     .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
     .accessibilityLabel(viewModel.isFocused == false && accessibilityEnabled
                         ? CombinedAccessibilityLabel(viewModel: viewModel).finalLabel() : Text(""))
+    .accessibilityHidden(viewModel.filter?.filter.filterAction == .hide)
     .accessibilityAction {
       viewModel.navigateToDetail()
     }
@@ -279,8 +280,23 @@ private struct CombinedAccessibilityLabel {
     viewModel.status.reblog != nil
   }
 
+  var filter: Filter? {
+    guard viewModel.isFiltered else {
+      return nil
+    }
+    return viewModel.filter?.filter
+  }
+
   func finalLabel() -> Text {
-    userNamePreamble() +
+    if let filter {
+      switch filter.filterAction {
+        case .warn:
+          return Text("status.filter.filtered-by-\(filter.title)")
+        case .hide:
+          return Text("")
+      }
+    } else {
+      return userNamePreamble() +
       Text(hasSpoiler
         ? viewModel.finalStatus.spoilerText.asRawText
         : viewModel.finalStatus.content.asRawText
@@ -295,6 +311,8 @@ private struct CombinedAccessibilityLabel {
       Text("status.summary.n-replies \(viewModel.finalStatus.repliesCount)") + Text(", ") +
       Text("status.summary.n-boosts \(viewModel.finalStatus.reblogsCount)") + Text(", ") +
       Text("status.summary.n-favorites \(viewModel.finalStatus.favouritesCount)")
+
+    }
   }
 
   func userNamePreamble() -> Text {
