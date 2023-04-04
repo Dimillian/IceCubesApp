@@ -16,7 +16,7 @@ public struct Poll: Codable, Equatable, Hashable {
 
     public var id = UUID().uuidString
     public let title: String
-    public let votesCount: Int
+    public let votesCount: Int?
   }
 
   public let id: String

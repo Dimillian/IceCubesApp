@@ -444,6 +444,7 @@
 "status.editor.text.placeholder" = "Waar denk je aan?";
 "status.editor.visibility" = "Zichtbaarheid";
 "status.editor.photo-library" = "Fotobibliotheek";
+"status.editor.camera-picker" = "Take Photo";
 "status.editor.browse-file" = "Bestanden";
 "status.error.loading.message" = "Er heeft zich een fout voorgedaan tijdens het laden van je posts. Probeer het nogmaals.";
 "status.error.message" = "Er heeft zich een fout voorgedaan. Probeer het nogmaals.";
@@ -509,8 +510,8 @@
 "enum.expand-media.hide-sensitive" = "Verberg gevoelige";
 
 // MARK: Accessibility
-"accessibility.general.toggle.on" = "On";
-"accessibility.general.toggle.off" = "Off";
+"accessibility.general.toggle.on" = "Aan";
+"accessibility.general.toggle.off" = "Uit";
 "accessibility.editor.button.attach-photo" = "Voeg foto toe";
 "accessibility.editor.button.poll" = "Poll";
 "accessibility.editor.button.spoiler" = "Spoilerwaarschuwing";
@@ -573,6 +574,7 @@
 "accessibility.media.supported-type.audio.label" = "Audio";
 "accessibility.status.contains-media.label-%@" = "Contains %@";
 "accessibility.status.application.label" = "App";
+"accessibility.status.media-viewer-action.label" = "Open media viewer";
 
 // MARK: Report
 "report.comment.placeholder" = "Aanvullende informatie";

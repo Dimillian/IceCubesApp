@@ -450,6 +450,7 @@
 "status.editor.text.placeholder" = "What's on your mind?";
 "status.editor.visibility" = "Post visibility";
 "status.editor.photo-library" = "Photos Library";
+"status.editor.camera-picker" = "Take Photo";
 "status.editor.browse-file" = "Browse Files";
 "status.error.loading.message" = "An error occurred while loading posts, please try again.";
 "status.error.message" = "An error occurred in the context of this post, please try again.";
@@ -576,6 +577,7 @@
 "accessibility.media.supported-type.audio.label" = "Audio";
 "accessibility.status.contains-media.label-%@" = "Contains %@";
 "accessibility.status.application.label" = "App";
+"accessibility.status.media-viewer-action.label" = "Open media viewer";
 
 // MARK: Report
 "report.comment.placeholder" = "Additional Info";

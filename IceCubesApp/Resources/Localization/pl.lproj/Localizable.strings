@@ -446,6 +446,7 @@
 "status.editor.text.placeholder" = "Co ci chodzi po głowie?";
 "status.editor.visibility" = "Widoczność postu";
 "status.editor.photo-library" = "Biblioteka zdjęć";
+"status.editor.camera-picker" = "Take Photo";
 "status.editor.browse-file" = "Przeglądaj pliki";
 "status.error.loading.message" = "Wystąpił błąd podczas ładowania postów, spróbuj ponownie.";
 "status.error.message" = "Wystąpił błąd dotyczący tego postu, proszę spróbuj ponownie.";
@@ -567,6 +568,7 @@
 "accessibility.media.supported-type.audio.label" = "Audio";
 "accessibility.status.contains-media.label-%@" = "Zawiera %@";
 "accessibility.status.application.label" = "Aplikacja";
+"accessibility.status.media-viewer-action.label" = "Open media viewer";
 
 // MARK: Report
 "report.comment.placeholder" = "Informacja dodatkowa";

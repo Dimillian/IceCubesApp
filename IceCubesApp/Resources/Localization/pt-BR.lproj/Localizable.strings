@@ -450,6 +450,7 @@
 "status.editor.text.placeholder" = "O que você está pensando?";
 "status.editor.visibility" = "Visibilidade da postagem";
 "status.editor.photo-library" = "Biblioteca de Fotos";
+"status.editor.camera-picker" = "Take Photo";
 "status.editor.browse-file" = "Procurar Arquivos";
 "status.error.loading.message" = "Ocorreu um erro enquanto as postagens eram carregadas, por favor, tente novamente.";
 "status.error.message" = "Ocorreu um erro com esta postagem, por favor, tente novamente.";
@@ -576,6 +577,7 @@
 "accessibility.media.supported-type.audio.label" = "Audio";
 "accessibility.status.contains-media.label-%@" = "Contains %@";
 "accessibility.status.application.label" = "App";
+"accessibility.status.media-viewer-action.label" = "Open media viewer";
 
 // MARK: Report
 "report.comment.placeholder" = "Informação Adicional";

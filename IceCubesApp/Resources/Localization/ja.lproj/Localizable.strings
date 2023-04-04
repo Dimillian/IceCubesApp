@@ -450,6 +450,7 @@
 "status.editor.text.placeholder" = "いま、何を考えているの？";
 "status.editor.visibility" = "投稿の公開範囲";
 "status.editor.photo-library" = "写真ライブラリ";
+"status.editor.camera-picker" = "Take Photo";
 "status.editor.browse-file" = "ファイルの参照";
 "status.error.loading.message" = "投稿の読み込み中にエラーが発生しました、もう一度試してください";
 "status.error.message" = "この投稿のコンテキストでエラーが発生しました、もう一度試してください";
@@ -576,6 +577,7 @@
 "accessibility.media.supported-type.audio.label" = "オーディオ";
 "accessibility.status.contains-media.label-%@" = "%@ を含む";
 "accessibility.status.application.label" = "アプリ";
+"accessibility.status.media-viewer-action.label" = "Open media viewer";
 
 // MARK: Report
 "report.comment.placeholder" = "追加情報";

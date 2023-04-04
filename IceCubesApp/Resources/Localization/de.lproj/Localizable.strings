@@ -444,6 +444,7 @@
 "status.editor.text.placeholder" = "Woran denkst du?";
 "status.editor.visibility" = "Sichtbarkeit";
 "status.editor.photo-library" = "Fotoalbum";
+"status.editor.camera-picker" = "Take Photo";
 "status.editor.browse-file" = "Dateien durchsuchen";
 "status.error.loading.message" = "Beim Laden der Beiträge ist ein Fehler aufgetreten. Bitte versuche es erneut.";
 "status.error.message" = "Es ist ein Fehler aufgetreten. Bitte versuche es erneut.";
@@ -563,6 +564,7 @@
 "accessibility.media.supported-type.audio.label" = "Audio";
 "accessibility.status.contains-media.label-%@" = "Contains %@";
 "accessibility.status.application.label" = "App";
+"accessibility.status.media-viewer-action.label" = "Open media viewer";
 
 
 // MARK: Report

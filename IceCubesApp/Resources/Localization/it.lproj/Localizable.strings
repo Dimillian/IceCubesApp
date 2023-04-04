@@ -450,6 +450,7 @@
 "status.editor.text.placeholder" = "A cosa stai pensando?";
 "status.editor.visibility" = "Visibilità del post";
 "status.editor.photo-library" = "Photos Library";
+"status.editor.camera-picker" = "Take Photo";
 "status.editor.browse-file" = "Browse Files";
 "status.error.loading.message" = "Si è verificato un errore durante il caricamento dei post, per favore riprova.";
 "status.error.message" = "Si è verificato un errore durante il caricamento del post, per favore riprova.";
@@ -576,6 +577,7 @@
 "accessibility.media.supported-type.audio.label" = "Audio";
 "accessibility.status.contains-media.label-%@" = "Contains %@";
 "accessibility.status.application.label" = "App";
+"accessibility.status.media-viewer-action.label" = "Open media viewer";
 
 // MARK: Report
 "report.comment.placeholder" = "Informazioni aggiuntive";

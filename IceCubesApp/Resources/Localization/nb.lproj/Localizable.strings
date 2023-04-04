@@ -450,6 +450,7 @@
 "status.editor.text.placeholder" = "Hva tenker du på?";
 "status.editor.visibility" = "Innleggssynlighet";
 "status.editor.photo-library" = "Photos Library";
+"status.editor.camera-picker" = "Take Photo";
 "status.editor.browse-file" = "Browse Files";
 "status.error.loading.message" = "Det oppsto en feil under innlasting av innlegg, prøv igjen.";
 "status.error.message" = "Det oppsto en feil i forbindelse med dette innlegget, prøv igjen.";
@@ -576,6 +577,7 @@
 "accessibility.media.supported-type.audio.label" = "Audio";
 "accessibility.status.contains-media.label-%@" = "Contains %@";
 "accessibility.status.application.label" = "App";
+"accessibility.status.media-viewer-action.label" = "Open media viewer";
 
 // MARK: Report
 "report.comment.placeholder" = "Additional Info";
