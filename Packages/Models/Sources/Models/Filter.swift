@@ -6,7 +6,7 @@ public struct Filtered: Codable, Equatable, Hashable {
 }
 
 public struct Filter: Codable, Identifiable, Equatable, Hashable {
-  public enum Action: String, Codable {
+  public enum Action: String, Codable, Equatable {
     case warn, hide
   }
 
