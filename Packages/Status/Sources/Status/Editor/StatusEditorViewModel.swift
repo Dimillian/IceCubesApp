@@ -612,42 +612,46 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
                                                     error: nil)
       mediasImages[index] = newContainer
       do {
-        if let index = indexOf(container: newContainer) {
-          let compressor = StatusEditorCompressor()
-          if let image = originalContainer.image {
-            let imageData = try await compressor.compressImageForUpload(image)
-            let uploadedMedia = try await uploadMedia(data: imageData, mimeType: "image/jpeg")
+        let compressor = StatusEditorCompressor()
+        if let image = originalContainer.image {
+          let imageData = try await compressor.compressImageForUpload(image)
+          let uploadedMedia = try await uploadMedia(data: imageData, mimeType: "image/jpeg")
+          if let index = indexOf(container: newContainer) {
             mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
                                         movieTransferable: nil,
                                         gifTransferable: nil,
                                         mediaAttachment: uploadedMedia,
                                         error: nil)
-            if let uploadedMedia, uploadedMedia.url == nil {
-              scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
-            }
-          } else if let videoURL = originalContainer.movieTransferable?.url,
-                    let compressedVideoURL = await compressor.compressVideo(videoURL),
-                    let data = try? Data(contentsOf: compressedVideoURL)
-          {
-            let uploadedMedia = try await uploadMedia(data: data, mimeType: compressedVideoURL.mimeType())
+          }
+          if let uploadedMedia, uploadedMedia.url == nil {
+            scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
+          }
+        } else if let videoURL = originalContainer.movieTransferable?.url,
+                  let compressedVideoURL = await compressor.compressVideo(videoURL),
+                  let data = try? Data(contentsOf: compressedVideoURL)
+        {
+          let uploadedMedia = try await uploadMedia(data: data, mimeType: compressedVideoURL.mimeType())
+          if let index = indexOf(container: newContainer) {
             mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
                                         movieTransferable: originalContainer.movieTransferable,
                                         gifTransferable: nil,
                                         mediaAttachment: uploadedMedia,
                                         error: nil)
-            if let uploadedMedia, uploadedMedia.url == nil {
-              scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
-            }
-          } else if let gifData = originalContainer.gifTransferable?.data {
-            let uploadedMedia = try await uploadMedia(data: gifData, mimeType: "image/gif")
+          }
+          if let uploadedMedia, uploadedMedia.url == nil {
+            scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
+          }
+        } else if let gifData = originalContainer.gifTransferable?.data {
+          let uploadedMedia = try await uploadMedia(data: gifData, mimeType: "image/gif")
+          if let index = indexOf(container: newContainer) {
             mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
                                         movieTransferable: nil,
                                         gifTransferable: originalContainer.gifTransferable,
                                         mediaAttachment: uploadedMedia,
                                         error: nil)
-            if let uploadedMedia, uploadedMedia.url == nil {
-              scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
-            }
+          }
+          if let uploadedMedia, uploadedMedia.url == nil {
+            scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
           }
         }
       } catch {

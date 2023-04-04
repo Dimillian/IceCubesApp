@@ -367,8 +367,8 @@ private struct CombinedAccessibilityLabel {
       return poll.options.enumerated().reduce(into: Text(title)) { text, pair in
         let (index, option) = pair
         let selected = poll.ownVotes?.contains(index) ?? false
-        let percentage = poll.safeVotersCount > 0
-          ? Int(round(Double(option.votesCount) / Double(poll.safeVotersCount) * 100))
+        let percentage = poll.safeVotersCount > 0 && option.votesCount != nil
+          ? Int(round(Double(option.votesCount!) / Double(poll.safeVotersCount) * 100))
           : 0
 
         text = text +

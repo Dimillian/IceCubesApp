@@ -33,8 +33,8 @@ public struct StatusPollView: View {
   }
 
   private func ratioForOption(option: Poll.Option) -> CGFloat {
-    if viewModel.poll.safeVotersCount != 0 {
-      return CGFloat(option.votesCount) / CGFloat(viewModel.poll.safeVotersCount)
+    if let votesCount = option.votesCount, viewModel.poll.safeVotersCount != 0 {
+      return CGFloat(votesCount) / CGFloat(viewModel.poll.safeVotersCount)
     } else {
       return 0.0
     }
