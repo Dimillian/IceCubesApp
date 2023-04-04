@@ -579,6 +579,7 @@
 "accessibility.media.supported-type.audio.label" = "오디오";
 "accessibility.status.contains-media.label-%@" = "%@ 첨부됨";
 "accessibility.status.application.label" = "글 작성에 사용한 앱";
+"accessibility.status.media-viewer-action.label" = "Open media viewer";
 
 // MARK: Report
 "report.comment.placeholder" = "추가 정보";

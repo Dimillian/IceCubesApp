@@ -35,10 +35,12 @@ struct StatusEditorAccessoryView: View {
               } label: {
                 Label("status.editor.photo-library", systemImage: "photo")
               }
-              Button {
-                isCameraPickerPresented = true
-              } label: {
-                Label("status.editor.camera-picker", systemImage: "camera")
+              if !ProcessInfo.processInfo.isiOSAppOnMac {
+                Button {
+                  isCameraPickerPresented = true
+                } label: {
+                  Label("status.editor.camera-picker", systemImage: "camera")
+                }
               }
               Button {
                 isFileImporterPresented = true
