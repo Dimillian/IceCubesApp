@@ -515,8 +515,8 @@
 "enum.expand-media.hide-sensitive" = "隐藏敏感内容";
 
 // MARK: Accessibility
-"accessibility.general.toggle.on" = "On";
-"accessibility.general.toggle.off" = "Off";
+"accessibility.general.toggle.on" = "启用";
+"accessibility.general.toggle.off" = "关闭";
 "accessibility.editor.button.attach-photo" = "添加图片";
 "accessibility.editor.button.poll" = "投票";
 "accessibility.editor.button.spoiler" = "剧透警告";
@@ -577,7 +577,7 @@
 "accessibility.media.supported-type.audio.label" = "音频";
 "accessibility.status.contains-media.label-%@" = "包含 %@";
 "accessibility.status.application.label" = "应用";
-"accessibility.status.media-viewer-action.label" = "Open media viewer";
+"accessibility.status.media-viewer-action.label" = "打开媒体查看器";
 
 // MARK: Report
 "report.comment.placeholder" = "附加信息";
