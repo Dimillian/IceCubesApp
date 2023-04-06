@@ -444,7 +444,7 @@
 "status.editor.text.placeholder" = "Woran denkst du?";
 "status.editor.visibility" = "Sichtbarkeit";
 "status.editor.photo-library" = "Fotoalbum";
-"status.editor.camera-picker" = "Take Photo";
+"status.editor.camera-picker" = "Foto aufnehmen";
 "status.editor.browse-file" = "Dateien durchsuchen";
 "status.error.loading.message" = "Beim Laden der Beiträge ist ein Fehler aufgetreten. Bitte versuche es erneut.";
 "status.error.message" = "Es ist ein Fehler aufgetreten. Bitte versuche es erneut.";
@@ -487,9 +487,9 @@
 "filter.edit.keywords.add" = "Neues Wort hinzufügen";
 "filter.edit.contexts" = "Filterkontext";
 "filter.edit.action" = "Filteraktion";
-"filter.edit.expiry" = "Expiry";
-"filter.edit.expiry.date-time" = "Date/Time";
-"filter.edit.expiry.duration" = "Duration";
+"filter.edit.expiry" = "Ablaufdatum";
+"filter.edit.expiry.date-time" = "Datum/Uhrzeit";
+"filter.edit.expiry.duration" = "Dauer";
 "filter.contexts.home" = "Startseite und Listen";
 "filter.contexts.notifications" = "Mitteilungen";
 "filter.contexts.public" = "Öffentliche Timelines";
@@ -497,12 +497,12 @@
 "filter.contexts.profiles" = "Profile";
 "filter.action.warning" = "Mit einer Warnung ausblenden";
 "filter.action.hide" = "Komplett ausblenden";
-"filter.expired" = "Expired";
-"filter.expiry-%@" = "Expiry: %@";
+"filter.expired" = "Abgelaufen";
+"filter.expiry-%@" = "Läuft ab: %@";
 
 // MARK: Accessibility
-"accessibility.general.toggle.on" = "On";
-"accessibility.general.toggle.off" = "Off";
+"accessibility.general.toggle.on" = "An";
+"accessibility.general.toggle.off" = "Aus";
 "accessibility.editor.button.attach-photo" = "Foto anhängen";
 "accessibility.editor.button.poll" = "Umfrage";
 "accessibility.editor.button.spoiler" = "Inhaltswarnung";
@@ -545,7 +545,7 @@
 "accessibility.tabs.profile.picker.media" = "Medien";
 "accessibility.tabs.profile.picker.lists" = "Listen";
 "accessibility.tabs.profile.user-notifications.label" = "Benachrichtigungen erhalten";
-"accessibility.tabs.profile.user-reblogs.label" = "Bossts zeigen";
+"accessibility.tabs.profile.user-reblogs.label" = "Boosts zeigen";
 "accessibility.tabs.profile.fields.verified.label" = "Verifiziert";
 "accessibility.tabs.profile.fields.container.label" = "Benutzerdefinierte Felder";
 "accessibility.status.spoiler-full-content" = "Vollständiger Inhalt";
@@ -554,17 +554,17 @@
 "accessibility.image.alt-text-%@" = "Alternativer Bildtext: %@";
 "accessibility.image.alt-text-more.label" = "Weiterer Alt.-Text verfügbar";
 "accessibility.tabs.messages.unread.label" = "Ungelesen";
-"accessibility.status.poll.option-prefix-%lld-of-%lld" = "Option %lld of %lld";
-"accessibility.status.poll.active.label" = "Active poll";
-"accessibility.status.poll.finished.label" = "Poll results";
-"accessibility.status.poll.selected.label" = "Selected";
-"accessibility.media.supported-type.image.label" = "Image";
-"accessibility.media.supported-type.gifv.label" = "Animated Gif";
+"accessibility.status.poll.option-prefix-%lld-of-%lld" = "Option %lld von %lld";
+"accessibility.status.poll.active.label" = "Laufende Umfrage";
+"accessibility.status.poll.finished.label" = "Umfrageergebnisse";
+"accessibility.status.poll.selected.label" = "Ausgewählt";
+"accessibility.media.supported-type.image.label" = "Bild";
+"accessibility.media.supported-type.gifv.label" = "Animiertes Gif";
 "accessibility.media.supported-type.video.label" = "Video";
 "accessibility.media.supported-type.audio.label" = "Audio";
-"accessibility.status.contains-media.label-%@" = "Contains %@";
+"accessibility.status.contains-media.label-%@" = "Enthält %@";
 "accessibility.status.application.label" = "App";
-"accessibility.status.media-viewer-action.label" = "Open media viewer";
+"accessibility.status.media-viewer-action.label" = "Medienbetrachter öffnen";
 
 
 // MARK: Report
