@@ -452,8 +452,8 @@
 "status.editor.text.placeholder" = "무슨 생각을 하고 계신가요?";
 "status.editor.visibility" = "글 공개 범위";
 "status.editor.photo-library" = "사진 보관함";
-"status.editor.camera-picker" = "Take Photo";
-"status.editor.browse-file" = "파일 앱";
+"status.editor.camera-picker" = "사진 찍기";
+"status.editor.browse-file" = "파일 선택";
 "status.error.loading.message" = "글을 불러오지 못했습니다. 다시 시도해주세요.";
 "status.error.message" = "글의 상세 정보를 불러오지 못했습니다. 다시 시도해주세요.";
 "status.error.title" = "오류";
@@ -515,8 +515,8 @@
 "filter.expiry-%@" = "%@까지 가림";
 
 // MARK: Accessibility
-"accessibility.general.toggle.on" = "On";
-"accessibility.general.toggle.off" = "Off";
+"accessibility.general.toggle.on" = "켜짐";
+"accessibility.general.toggle.off" = "꺼짐";
 "accessibility.editor.button.attach-photo" = "미디어 첨부";
 "accessibility.editor.button.poll" = "투표";
 "accessibility.editor.button.spoiler" = "열람 주의 문구";
@@ -579,7 +579,7 @@
 "accessibility.media.supported-type.audio.label" = "오디오";
 "accessibility.status.contains-media.label-%@" = "%@ 첨부됨";
 "accessibility.status.application.label" = "글 작성에 사용한 앱";
-"accessibility.status.media-viewer-action.label" = "Open media viewer";
+"accessibility.status.media-viewer-action.label" = "미디어 열기";
 
 // MARK: Report
 "report.comment.placeholder" = "추가 정보";
