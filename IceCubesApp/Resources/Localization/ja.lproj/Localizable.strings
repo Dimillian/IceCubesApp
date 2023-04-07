@@ -235,6 +235,9 @@
 "timeline.filter.local" = "ローカルタイムライン";
 "timeline.filter.tags" = "フォローしたタグ";
 
+// MARK: Package: Account
+"account-list.verified-fields" = "Verified URLs:";
+
 // MARK: Package: AppAccount
 "app-account.button.add" = "アカウントの追加";
 

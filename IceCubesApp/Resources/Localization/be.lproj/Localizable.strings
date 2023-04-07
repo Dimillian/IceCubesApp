@@ -308,6 +308,8 @@
 "account.relation.note.edit.error.save.title" = "Памылка пры захаванні нататкі";
 "account.relation.note.label" = "Нататка:";
 
+"account-list.verified-fields" = "Verified URLs:";
+
 // MARK: Package: Conversations
 "conversations.action.delete" = "Выдаліць";
 "conversations.action.mark-read" = "Адзначыць як прачытанае";

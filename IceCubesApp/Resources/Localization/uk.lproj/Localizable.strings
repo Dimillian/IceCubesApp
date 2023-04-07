@@ -304,6 +304,8 @@
 "account.relation.note.edit.error.save.title" = "Помилка збереження нотатки";
 "account.relation.note.label" = "Нотатка:";
 
+"account-list.verified-fields" = "Verified URLs:";
+
 // MARK: Package: Conversations
 "conversations.action.delete" = "Видалити";
 "conversations.action.mark-read" = "Позначити прочитаним";

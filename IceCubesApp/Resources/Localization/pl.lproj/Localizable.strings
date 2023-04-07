@@ -301,6 +301,8 @@
 "account.relation.note.edit.error.save.title" = "Błąd podczas zapisywania notatki";
 "account.relation.note.label" = "Notatka:";
 
+"account-list.verified-fields" = "Verified URLs:";
+
 // MARK: Package: Conversations
 "conversations.action.delete" = "Usuń";
 "conversations.action.mark-read" = "Oznacz jako przeczytany";

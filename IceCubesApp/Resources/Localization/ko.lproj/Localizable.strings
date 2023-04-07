@@ -304,6 +304,8 @@
 "account.relation.note.edit.error.save.title" = "노트 저장 오류";
 "account.relation.note.label" = "노트";
 
+"account-list.verified-fields" = "Verified URLs:";
+
 // MARK: Package: Conversations
 "conversations.action.delete" = "삭제";
 "conversations.action.mark-read" = "읽음으로 표시";

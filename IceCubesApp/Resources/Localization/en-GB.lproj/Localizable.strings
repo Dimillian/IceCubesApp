@@ -305,6 +305,8 @@
 "account.relation.note.edit.error.save.title" = "Error while saving your note";
 "account.relation.note.label" = "Note:";
 
+"account-list.verified-fields" = "Verified URLs:";
+
 // MARK: Package: Conversations
 "conversations.action.delete" = "Delete";
 "conversations.action.mark-read" = "Mark as read";

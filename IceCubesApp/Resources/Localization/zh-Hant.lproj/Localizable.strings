@@ -305,6 +305,8 @@
 "account.relation.note.edit.error.save.title" = "儲存備註時發生錯誤";
 "account.relation.note.label" = "備註：";
 
+"account-list.verified-fields" = "Verified URLs:";
+
 // MARK: Package: Conversations
 "conversations.action.delete" = "刪除";
 "conversations.action.mark-read" = "標示為已讀";

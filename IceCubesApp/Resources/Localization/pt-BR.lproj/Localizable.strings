@@ -303,6 +303,8 @@
 "account.relation.note.edit.error.save.title" = "Erro ao salvar sua nota";
 "account.relation.note.label" = "Nota:";
 
+"account-list.verified-fields" = "Verified URLs:";
+
 // MARK: Package: Conversations
 "conversations.action.delete" = "Excluir";
 "conversations.action.mark-read" = "Marcar como lida";

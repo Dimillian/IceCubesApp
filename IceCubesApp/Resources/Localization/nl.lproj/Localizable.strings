@@ -301,6 +301,8 @@
 "account.relation.note.edit.error.save.title" = "Fout tijdens bewaren notitie";
 "account.relation.note.label" = "Notitie:";
 
+"account-list.verified-fields" = "Verified URLs:";
+
 // MARK: Package: Conversations
 "conversations.action.delete" = "Verwijder";
 "conversations.action.mark-read" = "Markeer als gelezen";
