@@ -78,7 +78,7 @@
 "settings.display.font.system" = "Системний";
 "settings.display.font.custom" = "Власний";
 "settings.display.font.scaling-%@" = "Масштабування шкрифта: %@";
-"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
+"settings.display.font.line-spacing-%@" = "Відступ між рядками: %@";
 "settings.display.avatar.position" = "Розташування Аватара";
 "settings.display.avatar.shape" = "Форма Аватара";
 "settings.display.full-username" = "Відображати повне імʼя користувача";
@@ -166,12 +166,12 @@
 "settings.other.hide-openai" = "Увімкнути 🤖 помічника";
 "settings.other.social-keyboard" = "Увімкнути Social Keyboard";
 "settings.other.sound-effect" = "Увімкнути звукові ефекти";
-"settings.general.translate" = "Translation Settings";
-"settings.translation.navigation-title" = "Translation";
-"settings.translation.always-deepl" = "Always Translate using DeepL";
+"settings.general.translate" = "Налаштування перекладу";
+"settings.translation.navigation-title" = "Переклад";
+"settings.translation.always-deepl" = "Завжди перекладати з допомогою DeepL";
 "settings.translation.user-api-key" = "DeepL API Key";
-"settings.translation.api-key-type" = "Type of the Key";
-"settings.translation.needed-message" = "This feature requires a DeepL API key";
+"settings.translation.api-key-type" = "Тип ключа";
+"settings.translation.needed-message" = "Необхідно ввести DeepL API key";
 "settings.push.duplicate.title" = "Виправити задвоєння сповіщень";
 "settings.push.duplicate.footer" = "Отримуєте сповіщення двічі? Спробуйте цю чарівну кнопку, щоб виправити це!";
 "settings.push.duplicate.button.fix" = "🪄 Виправити!";
@@ -393,7 +393,7 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Перекласти";
-"status.action.translate-with-deepl" = "Translate with DeepL";
+"status.action.translate-with-deepl" = "Перекласти з допомогою DeepL";
 "status.action.translated-label-%@" = "Переклад з допомогою %@";
 "status.action.translated-label-from-%@-%@" = "Переклад з %@ з допомогою %@";
 "status.action.bookmark" = "У закладки";
@@ -450,9 +450,9 @@
 "status.editor.spoiler" = "Спойлер";
 "status.editor.text.placeholder" = "Що у вас на думці?";
 "status.editor.visibility" = "Видимість допису";
-"status.editor.photo-library" = "Photos Library";
-"status.editor.camera-picker" = "Take Photo";
-"status.editor.browse-file" = "Browse Files";
+"status.editor.photo-library" = "Бібліотека світлин";
+"status.editor.camera-picker" = "Зробити світлину";
+"status.editor.browse-file" = "Обрати файл";
 "status.error.loading.message" = "An error occurred while loading posts, please try again.";
 "status.error.message" = "An error occurred in the context of this post, please try again.";
 "status.error.title" = "An error occurred";
@@ -482,10 +482,10 @@
 "status.show-full-post" = "Показати весь допис";
 "status.summary.at-time" = " о ";
 "status.summary.edited-time" = "Востаннє змінено: ";
-"status.summary.n-replies %lld" = "%lld replies";
+"status.summary.n-replies %lld" = "%lld відповідей";
 "status.summary.n-boosts %lld" = "%lld поширень";
 "status.summary.n-favorites %lld" = "%lld вподобань";
-"status.summary.edit-history" = "Edit History";
+"status.summary.edit-history" = "Журнал змін";
 "status.visibility.direct" = "Особисте";
 "status.visibility.follower" = "Підписникам";
 "status.visibility.public" = "Усім";
@@ -510,8 +510,8 @@
 "filter.contexts.profiles" = "Профілі";
 "filter.action.warning" = "Приховати з попередженням";
 "filter.action.hide" = "Повністю приховати";
-"filter.expired" = "Expired";
-"filter.expiry-%@" = "Expiry: %@";
+"filter.expired" = "Завершився";
+"filter.expiry-%@" = "Завершується: %@";
 
 // MARK: Accessibility
 "accessibility.general.toggle.on" = "On";
@@ -586,5 +586,5 @@
 "report.action.send" = "Надіслати";
 "status.action.report" = "Поскаржитися на допис";
 
-"tag.suggested.mentions-%lld" = "%lld mentions";
+"tag.suggested.mentions-%lld" = "%lld згадок";
 
