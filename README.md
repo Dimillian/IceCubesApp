@@ -19,7 +19,7 @@ Please note that IceCubesApp is currently in an early stage of development and a
 
 Thanks!
 
-![Icon](IceCubesApp/Assets.xcassets/AppIcon.appiconset/icon.png?)
+![Icon](IceCubesApp/Assets.xcassets/AppIcon.appiconset/144.png?)
 
 ## Building the project
 
