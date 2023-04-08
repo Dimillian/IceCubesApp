@@ -58,32 +58,32 @@ public struct AccountsListRow: View {
           .environment(\.openURL, OpenURLAction { url in
             routerPath.handle(url: url)
           })
-          
-          let fields = viewModel.account.fields.filter({$0.verifiedAt != nil})
-          
-          if !fields.isEmpty {
-              Capsule()
-                  .frame(height: 1)
-                  .foregroundStyle(.regularMaterial)
-                  .padding(.vertical, 5)
-                  .padding(.horizontal)
-              
-              ForEach(fields) { field in
-                  HStack {
-                      Image(systemName: "checkmark.seal")
-                          .foregroundColor(.green)
-                      EmojiTextApp(field.value, emojis: viewModel.account.emojis)
-                          .font(.scaledFootnote)
-                          .emojiSize(Font.scaledFootnoteFont.emojiSize)
-                          .emojiBaselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
-                          .environment(\.openURL, OpenURLAction { url in
-                              routerPath.handle(url: url)
-                          })
-                  }
-                  .padding(.top, 5)
-              }
+
+        let fields = viewModel.account.fields.filter { $0.verifiedAt != nil }
+
+        if !fields.isEmpty {
+          Capsule()
+            .frame(height: 1)
+            .foregroundStyle(.regularMaterial)
+            .padding(.vertical, 5)
+            .padding(.horizontal)
+
+          ForEach(fields) { field in
+            HStack {
+              Image(systemName: "checkmark.seal")
+                .foregroundColor(.green)
+              EmojiTextApp(field.value, emojis: viewModel.account.emojis)
+                .font(.scaledFootnote)
+                .emojiSize(Font.scaledFootnoteFont.emojiSize)
+                .emojiBaselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
+                .environment(\.openURL, OpenURLAction { url in
+                  routerPath.handle(url: url)
+                })
+            }
+            .padding(.top, 5)
           }
-          
+        }
+
         if isFollowRequest {
           FollowRequestButtons(account: viewModel.account,
                                requestUpdated: requestUpdated)
