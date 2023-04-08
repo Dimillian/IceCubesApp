@@ -302,8 +302,6 @@
 "account.relation.note.edit.error.save.title" = "保存报错";
 "account.relation.note.label" = "备注：";
 
-"account-list.verified-fields" = "Verified URLs:";
-
 // MARK: Package: Conversations
 "conversations.action.delete" = "删除";
 "conversations.action.mark-read" = "标记为已读";

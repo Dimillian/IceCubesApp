@@ -304,8 +304,6 @@
 "account.relation.note.edit.error.save.title" = "Fehler beim Sichern der Notiz";
 "account.relation.note.label" = "Notiz";
 
-"account-list.verified-fields" = "Verifizierte URLs:";
-
 // MARK: Package: Conversations
 "conversations.action.delete" = "Löschen";
 "conversations.action.mark-read" = "Als gelesen markieren";

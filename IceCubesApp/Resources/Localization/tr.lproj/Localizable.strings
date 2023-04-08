@@ -299,8 +299,6 @@
 "account.relation.note.edit.error.save.title" = "Error while saving your note";
 "account.relation.note.label" = "Note:";
 
-"account-list.verified-fields" = "Verified URLs:";
-
 // MARK: Package: Conversations
 "conversations.action.delete" = "Sil";
 "conversations.action.mark-read" = "Okundu olarak işaretle";

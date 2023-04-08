@@ -304,8 +304,6 @@
 "account.relation.note.edit.error.save.title" = "Errorea oharra gordetzerakoan";
 "account.relation.note.label" = "Oharra:";
 
-"account-list.verified-fields" = "Verified URLs:";
-
 // MARK: Package: Conversations
 "conversations.action.delete" = "Ezabatu";
 "conversations.action.mark-read" = "Markatu irakurritzat";

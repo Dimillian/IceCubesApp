@@ -68,18 +68,19 @@ public struct AccountsListRow: View {
                   .padding(.vertical, 5)
                   .padding(.horizontal)
               
-              Text("account-list.verified-fields")
-                  .font(.scaledSubheadline)
-              
               ForEach(fields) { field in
-                  EmojiTextApp(field.value, emojis: viewModel.account.emojis)
-                      .font(.scaledFootnote)
-                      .emojiSize(Font.scaledFootnoteFont.emojiSize)
-                      .emojiBaselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
-                      .environment(\.openURL, OpenURLAction { url in
-                          routerPath.handle(url: url)
-                      })
-                      .padding(.top, 5)
+                  HStack {
+                      Image(systemName: "checkmark.seal")
+                          .foregroundColor(.green)
+                      EmojiTextApp(field.value, emojis: viewModel.account.emojis)
+                          .font(.scaledFootnote)
+                          .emojiSize(Font.scaledFootnoteFont.emojiSize)
+                          .emojiBaselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
+                          .environment(\.openURL, OpenURLAction { url in
+                              routerPath.handle(url: url)
+                          })
+                  }
+                  .padding(.top, 5)
               }
           }
           
