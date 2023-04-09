@@ -157,10 +157,18 @@ extension TimelineViewModel {
 
 extension TimelineViewModel: StatusesFetcher {
   func pullToRefresh() async {
+    timelineTask?.cancel()
     if !timeline.supportNewestPagination {
       await reset()
     }
     await fetchNewestStatuses()
+  }
+  
+  func refreshTimeline() {
+    timelineTask?.cancel()
+    timelineTask = Task {
+      await fetchNewestStatuses()
+    }
   }
 
   func fetchNewestStatuses() async {
@@ -304,7 +312,10 @@ extension TimelineViewModel: StatusesFetcher {
 
     // We trigger a new fetch so we can get the next new statuses if any.
     // If none, it'll stop there.
-    if !Task.isCancelled, let latest = await datasource.get().first {
+    // Only do that in the context of the home timeline as other don't worth catching up that much.
+    if timeline == .home,
+        !Task.isCancelled,
+        let latest = await datasource.get().first {
       try await fetchNewPagesFrom(latestStatus: latest, client: client)
     }
   }

@@ -164,9 +164,7 @@ public struct TimelineView: View {
       case .active:
         if wasBackgrounded {
           wasBackgrounded = false
-          Task {
-            await viewModel.fetchNewestStatuses()
-          }
+          viewModel.refreshTimeline()
         }
       case .background:
         wasBackgrounded = true
