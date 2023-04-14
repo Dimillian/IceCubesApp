@@ -449,7 +449,7 @@
 "status.editor.spoiler" = "ネタバレ";
 "status.editor.text.placeholder" = "いま、何を考えているの？";
 "status.editor.visibility" = "投稿の公開範囲";
-"status.editor.photo-library" = "写真ライブラリ";https://github.com/Dimillian/IceCubesApp/commit/477dd520b93bf810cc8c400304a7b80aa0383c08
+"status.editor.photo-library" = "写真ライブラリ";
 "status.editor.browse-file" = "ファイルの参照";
 "status.error.loading.message" = "投稿の読み込み中にエラーが発生しました、もう一度試してください";
 "status.error.message" = "この投稿のコンテキストでエラーが発生しました、もう一度試してください";
