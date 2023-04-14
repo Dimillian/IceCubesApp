@@ -174,8 +174,8 @@
 "settings.display.font" = "타임라인 글꼴";
 "settings.display.font.system" = "시스템 글꼴";
 "settings.display.font.custom" = "직접 설정";
-"settings.display.font.scaling-%@" = "폰트 크기 조절: %@";
-"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
+"settings.display.font.scaling-%@" = "글꼴 크기 조절: %@";
+"settings.display.font.line-spacing-%@" = "줄 간격 조절: %@";
 "settings.about.built-with" = "Ice Cubes는 다음 오픈 소스 소프트웨어를 사용하여 개발되었습니다:";
 "settings.about.title" = "Ice Cubes";
 "settings.account.cached-posts-%@" = "캐시 데이터로 저장된 글: %@개";
@@ -452,7 +452,8 @@
 "status.editor.text.placeholder" = "무슨 생각을 하고 계신가요?";
 "status.editor.visibility" = "글 공개 범위";
 "status.editor.photo-library" = "사진 보관함";
-"status.editor.browse-file" = "파일 앱";
+"status.editor.camera-picker" = "사진 찍기";
+"status.editor.browse-file" = "파일 선택";
 "status.error.loading.message" = "글을 불러오지 못했습니다. 다시 시도해주세요.";
 "status.error.message" = "글의 상세 정보를 불러오지 못했습니다. 다시 시도해주세요.";
 "status.error.title" = "오류";
@@ -482,7 +483,7 @@
 "status.show-full-post" = "전체 내용 보기";
 "status.summary.at-time" = " ";
 "status.summary.edited-time" = "마지막 수정: ";
-"status.summary.n-replies %lld" = "댓글 %lld개"; /* 추가 확인 필요 */
+"status.summary.n-replies %lld" = "댓글 %lld개";
 "status.summary.n-boosts %lld" = "부스트 %lld회";
 "status.summary.n-favorites %lld" = "좋아요 %lld회";
 "status.summary.edit-history" = "글 수정 기록";
@@ -510,8 +511,12 @@
 "filter.contexts.profiles" = "프로필";
 "filter.action.warning" = "경고 표시하고 글 가림";
 "filter.action.hide" = "완전히 숨김";
+"filter.expired" = "기간 종료됨";
+"filter.expiry-%@" = "%@까지 가림";
 
 // MARK: Accessibility
+"accessibility.general.toggle.on" = "켜짐";
+"accessibility.general.toggle.off" = "꺼짐";
 "accessibility.editor.button.attach-photo" = "미디어 첨부";
 "accessibility.editor.button.poll" = "투표";
 "accessibility.editor.button.spoiler" = "열람 주의 문구";
@@ -524,17 +529,17 @@
 "accessibility.editor.privacy.hint" = "글을 볼 수 있는 대상을 변경합니다.";
 "accessibility.tabs.timeline.add-account" = "계정 추가";
 "accessibility.tabs.timeline.new-post.label" = "작성";
-"accessibility.tabs.timeline.new-post.inputLabel1" = "새 글"; /* 추가 확인 필요 */
-"accessibility.tabs.timeline.new-post.inputLabel2" = "작성"; /* 추가 확인 필요 */
-"accessibility.tabs.timeline.unread-posts.label-%lld" = "%lld개 새 글"; /* 추가 확인 필요 */
-"accessibility.tabs.timeline.unread-posts.hint" = "타임라인을 스크롤합니다."; /* 추가 확인 필요 */
-"accessibility.tabs.timeline.content-link-%@" = "다음 링크 방문: %@"; /* 추가 확인 필요 */
-"accessibility.tabs.timeline.content-hashtag-%@" = "해시태그 %@"; /* 추가 확인 필요 */
+"accessibility.tabs.timeline.new-post.inputLabel1" = "새 글";
+"accessibility.tabs.timeline.new-post.inputLabel2" = "작성";
+"accessibility.tabs.timeline.unread-posts.label-%lld" = "%lld개 새 글";
+"accessibility.tabs.timeline.unread-posts.hint" = "타임라인을 스크롤합니다.";
+"accessibility.tabs.timeline.content-link-%@" = "다음 링크 방문: %@";
+"accessibility.tabs.timeline.content-hashtag-%@" = "해시태그 %@";
 "accessibility.app-account.selector.accounts" = "계정";
-"accessibility.app-account.selector.accounts.hint" = "옵션 창을 엽니다."; /* 추가 확인 필요 */
+"accessibility.app-account.selector.accounts.hint" = "옵션 창을 엽니다.";
 "accessibility.tabs.profile.options.label" = "옵션";
-"accessibility.tabs.profile.options.inputLabel1" = "설정"; /* 추가 확인 필요 */
-"accessibility.tabs.profile.options.inputLabel2" = "더 보기"; /* 추가 확인 필요 */
+"accessibility.tabs.profile.options.inputLabel1" = "설정";
+"accessibility.tabs.profile.options.inputLabel2" = "더 보기";
 "accessibility.tabs.profile.user-avatar.label" = "프로필 사진";
 "accessibility.tabs.profile.user-avatar.hint" = "더 큰 버전을 표시합니다.";
 "accessibility.tabs.profile.user-avatar.supporter.label" = "후원자";
@@ -562,8 +567,19 @@
 "accessibility.status.a-boosted-b-%@-%@" = "%@ 님이 다음 글을 부스트함: %@";
 "accessibility.status.a-replied-to-%@" = "%@ 님이 다음 사용자의 글에 댓글을 남김: ";
 "accessibility.image.alt-text-%@" = "미디어 설명: %@";
-"accessibility.image.alt-text-more.label" = "더 많은 미디어 설명 사용 가능"; /* 추가 확인 필요 */
+"accessibility.image.alt-text-more.label" = "더 많은 미디어 설명 사용 가능";
 "accessibility.tabs.messages.unread.label" = "읽지 않음";
+"accessibility.status.poll.option-prefix-%lld-of-%lld" = "%2$lld개 선택지 중 %1$lld-번";
+"accessibility.status.poll.active.label" = "진행 중인 투표";
+"accessibility.status.poll.finished.label" = "투표 결과";
+"accessibility.status.poll.selected.label" = "선택함";
+"accessibility.media.supported-type.image.label" = "이미지";
+"accessibility.media.supported-type.gifv.label" = "움직이는 GIF";
+"accessibility.media.supported-type.video.label" = "동영상";
+"accessibility.media.supported-type.audio.label" = "오디오";
+"accessibility.status.contains-media.label-%@" = "%@ 첨부됨";
+"accessibility.status.application.label" = "글 작성에 사용한 앱";
+"accessibility.status.media-viewer-action.label" = "미디어 열기";
 
 // MARK: Report
 "report.comment.placeholder" = "추가 정보";

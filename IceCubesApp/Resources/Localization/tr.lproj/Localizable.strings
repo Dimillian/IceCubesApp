@@ -446,6 +446,7 @@
 "status.editor.text.placeholder" = "Aklında ne var?";
 "status.editor.visibility" = "Görüntü görünürlüğü";
 "status.editor.photo-library" = "Photos Library";
+"status.editor.camera-picker" = "Take Photo";
 "status.editor.browse-file" = "Browse Files";
 "status.error.loading.message" = "Gönderi yüklenirken bir hata oluştu, lütfen tekrar deneyin.";
 "status.error.message" = "Bu gönderi bağlamında bir hata oluştu, lütfen tekrar deneyin.";
@@ -504,12 +505,16 @@
 "filter.contexts.profiles" = "Profiles";
 "filter.action.warning" = "Hide with a warning";
 "filter.action.hide" = "Hide completely";
+"filter.expired" = "Expired";
+"filter.expiry-%@" = "Expiry: %@";
 
 "enum.expand-media.show" = "Show All";
 "enum.expand-media.hide" = "Hide All";
 "enum.expand-media.hide-sensitive" = "Hide Sensitive";
 
 // MARK: Accessibility
+"accessibility.general.toggle.on" = "On";
+"accessibility.general.toggle.off" = "Off";
 "accessibility.editor.button.attach-photo" = "Attach photo";
 "accessibility.editor.button.poll" = "Poll";
 "accessibility.editor.button.spoiler" = "Spoiler warning";
@@ -562,6 +567,17 @@
 "accessibility.image.alt-text-%@" = "Image alt text: %@";
 "accessibility.image.alt-text-more.label" = "More alt text available";
 "accessibility.tabs.messages.unread.label" = "Unread";
+"accessibility.status.poll.option-prefix-%lld-of-%lld" = "Option %lld of %lld";
+"accessibility.status.poll.active.label" = "Active poll";
+"accessibility.status.poll.finished.label" = "Poll results";
+"accessibility.status.poll.selected.label" = "Selected";
+"accessibility.media.supported-type.image.label" = "Image";
+"accessibility.media.supported-type.gifv.label" = "Animated Gif";
+"accessibility.media.supported-type.video.label" = "Video";
+"accessibility.media.supported-type.audio.label" = "Audio";
+"accessibility.status.contains-media.label-%@" = "Contains %@";
+"accessibility.status.application.label" = "App";
+"accessibility.status.media-viewer-action.label" = "Open media viewer";
 
 // MARK: Report
 "report.comment.placeholder" = "Additional Info";

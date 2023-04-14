@@ -13,6 +13,7 @@ public struct StatusRowView: View {
   @Environment(\.isCompact) private var isCompact: Bool
   @Environment(\.accessibilityEnabled) private var accessibilityEnabled
 
+  @EnvironmentObject private var quickLook: QuickLook
   @EnvironmentObject private var theme: Theme
 
   @StateObject var viewModel: StatusRowViewModel
@@ -67,6 +68,11 @@ public struct StatusRowView: View {
                 .onTapGesture {
                   viewModel.navigateToDetail()
                 }
+                .accessibilityActions {
+                  if viewModel.isFocused, viewModel.showActions {
+                    accessibilityActions
+                  }
+                }
             }
             if viewModel.showActions, viewModel.isFocused || theme.statusActionsDisplay != .none, !isInCaptureMode {
               StatusRowActionsView(viewModel: viewModel)
@@ -114,11 +120,12 @@ public struct StatusRowView: View {
     .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
     .accessibilityLabel(viewModel.isFocused == false && accessibilityEnabled
                         ? CombinedAccessibilityLabel(viewModel: viewModel).finalLabel() : Text(""))
+    .accessibilityHidden(viewModel.filter?.filter.filterAction == .hide)
     .accessibilityAction {
       viewModel.navigateToDetail()
     }
     .accessibilityActions {
-      if viewModel.showActions {
+      if viewModel.isFocused == false, viewModel.showActions {
         accessibilityActions
       }
     }
@@ -168,6 +175,16 @@ public struct StatusRowView: View {
     Button("settings.swipeactions.status.action.quote") {
       HapticManager.shared.fireHaptic(of: .notification(.success))
       viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
+    }
+
+    if viewModel.finalStatus.mediaAttachments.isEmpty == false {
+      Button("accessibility.status.media-viewer-action.label") {
+        HapticManager.shared.fireHaptic(of: .notification(.success))
+        Task {
+          let attachments = viewModel.finalStatus.mediaAttachments
+          await quickLook.prepareFor(urls: attachments.compactMap { $0.url }, selectedURL: attachments[0].url!)
+        }
+      }
     }
 
     Button(viewModel.displaySpoiler ? "status.show-more" : "status.show-less") {
@@ -224,6 +241,9 @@ public struct StatusRowView: View {
         Text("status.filter.show-anyway")
       }
     }
+    .accessibilityAction {
+      viewModel.isFiltered = false
+    }
   }
 
   private var remoteContentLoadingView: some View {
@@ -263,8 +283,23 @@ private struct CombinedAccessibilityLabel {
     viewModel.status.reblog != nil
   }
 
+  var filter: Filter? {
+    guard viewModel.isFiltered else {
+      return nil
+    }
+    return viewModel.filter?.filter
+  }
+
   func finalLabel() -> Text {
-    userNamePreamble() +
+    if let filter {
+      switch filter.filterAction {
+        case .warn:
+          return Text("status.filter.filtered-by-\(filter.title)")
+        case .hide:
+          return Text("")
+      }
+    } else {
+      return userNamePreamble() +
       Text(hasSpoiler
         ? viewModel.finalStatus.spoilerText.asRawText
         : viewModel.finalStatus.content.asRawText
@@ -272,12 +307,15 @@ private struct CombinedAccessibilityLabel {
       Text(hasSpoiler
         ? "status.editor.spoiler"
         : ""
-      ) +
-      imageAltText() + Text(", ") +
+      ) + Text(", ") +
+      pollText() +
+      imageAltText() +
       Text(viewModel.finalStatus.createdAt.relativeFormatted) + Text(", ") +
       Text("status.summary.n-replies \(viewModel.finalStatus.repliesCount)") + Text(", ") +
       Text("status.summary.n-boosts \(viewModel.finalStatus.reblogsCount)") + Text(", ") +
       Text("status.summary.n-favorites \(viewModel.finalStatus.favouritesCount)")
+
+    }
   }
 
   func userNamePreamble() -> Text {
@@ -308,11 +346,40 @@ private struct CombinedAccessibilityLabel {
       .compactMap(\.description)
 
     if descriptions.count == 1 {
-      return Text("accessibility.image.alt-text-\(descriptions[0])")
+      return Text("accessibility.image.alt-text-\(descriptions[0])") + Text(", ")
     } else if descriptions.count > 1 {
-      return Text("accessibility.image.alt-text-\(descriptions[0])") + Text(", ") + Text("accessibility.image.alt-text-more.label")
+      return Text("accessibility.image.alt-text-\(descriptions[0])") + Text(", ") + Text("accessibility.image.alt-text-more.label") + Text(", ")
+    } else if viewModel.finalStatus.mediaAttachments.isEmpty == false {
+      let differentTypes = Set(viewModel.finalStatus.mediaAttachments.compactMap(\.localizedTypeDescription)).sorted()
+      return Text("accessibility.status.contains-media.label-\(ListFormatter.localizedString(byJoining: differentTypes))") + Text(", ")
     } else {
       return Text("")
     }
+  }
+
+  func pollText() -> Text {
+    if let poll = viewModel.finalStatus.poll {
+      let showPercentage = poll.expired || poll.voted ?? false
+      let title: LocalizedStringKey = poll.expired
+        ? "accessibility.status.poll.finished.label"
+        : "accessibility.status.poll.active.label"
+
+      return poll.options.enumerated().reduce(into: Text(title)) { text, pair in
+        let (index, option) = pair
+        let selected = poll.ownVotes?.contains(index) ?? false
+        let percentage = poll.safeVotersCount > 0 && option.votesCount != nil
+          ? Int(round(Double(option.votesCount!) / Double(poll.safeVotersCount) * 100))
+          : 0
+
+        text = text +
+        Text(selected ? "accessibility.status.poll.selected.label" : "") +
+        Text(", ") +
+        Text("accessibility.status.poll.option-prefix-\(index + 1)-of-\(poll.options.count)") +
+        Text(", ") +
+        Text(option.title) +
+        Text(showPercentage ? ", \(percentage)%. " : ". ")
+      }
+    }
+    return Text("")
   }
 }

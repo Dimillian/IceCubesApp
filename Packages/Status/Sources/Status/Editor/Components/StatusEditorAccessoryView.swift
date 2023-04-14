@@ -21,6 +21,7 @@ struct StatusEditorAccessoryView: View {
   @State private var isLoadingAIRequest: Bool = false
   @State private var isPhotosPickerPresented: Bool = false
   @State private var isFileImporterPresented: Bool = false
+  @State private var isCameraPickerPresented: Bool = false
 
   var body: some View {
     VStack(spacing: 0) {
@@ -33,6 +34,13 @@ struct StatusEditorAccessoryView: View {
                 isPhotosPickerPresented = true
               } label: {
                 Label("status.editor.photo-library", systemImage: "photo")
+              }
+              if !ProcessInfo.processInfo.isiOSAppOnMac {
+                Button {
+                  isCameraPickerPresented = true
+                } label: {
+                  Label("status.editor.camera-picker", systemImage: "camera")
+                }
               }
               Button {
                 isFileImporterPresented = true
@@ -48,6 +56,7 @@ struct StatusEditorAccessoryView: View {
             }
             .photosPicker(isPresented: $isPhotosPickerPresented,
                           selection: $viewModel.selectedMedias,
+                          maxSelectionCount: 4,
                           matching: .any(of: [.images, .videos]))
             .fileImporter(isPresented: $isFileImporterPresented,
                           allowedContentTypes: [.image, .video],
@@ -57,6 +66,16 @@ struct StatusEditorAccessoryView: View {
                 viewModel.processURLs(urls: urls)
               }
             }
+            .fullScreenCover(isPresented: $isCameraPickerPresented, content: {
+              StatusEditorCameraPickerView(selectedImage: .init(get: {
+                nil
+              }, set: { image in
+                if let image {
+                  viewModel.processCameraPhoto(image: image)
+                }
+              }))
+              .background(.black)
+            })
             .accessibilityLabel("accessibility.editor.button.attach-photo")
             .disabled(viewModel.showPoll)
 

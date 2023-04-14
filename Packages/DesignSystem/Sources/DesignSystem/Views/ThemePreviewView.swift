@@ -38,6 +38,7 @@ struct ThemeBoxView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .cornerRadius(4)
         .shadow(radius: 2, x: 2, y: 4)
+        .accessibilityHidden(true)
 
       VStack(spacing: gutterSpace) {
         Text(color.name.rawValue)

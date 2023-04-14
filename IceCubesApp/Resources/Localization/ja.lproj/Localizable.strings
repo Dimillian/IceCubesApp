@@ -78,7 +78,7 @@
 "settings.display.font.system" = "システムフォント";
 "settings.display.font.custom" = "カスタム";
 "settings.display.font.scaling-%@" = "フォントサイズ: %@";
-"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
+"settings.display.font.line-spacing-%@" = "行間: %@";
 "settings.display.avatar.position" = "アバターの位置";
 "settings.display.avatar.shape" = "アバターの形";
 "settings.display.full-username" = "完全なユーザー名を表示";
@@ -449,7 +449,7 @@
 "status.editor.spoiler" = "ネタバレ";
 "status.editor.text.placeholder" = "いま、何を考えているの？";
 "status.editor.visibility" = "投稿の公開範囲";
-"status.editor.photo-library" = "写真ライブラリ";
+"status.editor.photo-library" = "写真ライブラリ";https://github.com/Dimillian/IceCubesApp/commit/477dd520b93bf810cc8c400304a7b80aa0383c08
 "status.editor.browse-file" = "ファイルの参照";
 "status.error.loading.message" = "投稿の読み込み中にエラーが発生しました、もう一度試してください";
 "status.error.message" = "この投稿のコンテキストでエラーが発生しました、もう一度試してください";
@@ -483,7 +483,7 @@
 "status.summary.n-replies %lld" = "%lld 件の返信";
 "status.summary.n-boosts %lld" = "%lld ブースト";
 "status.summary.n-favorites %lld" = "%lld お気に入り";
-"status.summary.edit-history" = "Edit History";
+"status.summary.edit-history" = "編集履歴";
 "status.visibility.direct" = "指定された相手のみ";
 "status.visibility.follower" = "フォロワーのみ";
 "status.visibility.public" = "公開";
@@ -508,8 +508,12 @@
 "filter.contexts.profiles" = "プロフィール";
 "filter.action.warning" = "警告して非表示";
 "filter.action.hide" = "完全に非表示";
+"filter.expired" = "期限切れ";
+"filter.expiry-%@" = "有効期限: %@";
 
 // MARK: Accessibility
+"accessibility.general.toggle.on" = "オン";
+"accessibility.general.toggle.off" = "オフ";
 "accessibility.editor.button.attach-photo" = "画像を添付";
 "accessibility.editor.button.poll" = "投票";
 "accessibility.editor.button.spoiler" = "ネタバレを警告";
@@ -562,6 +566,17 @@
 "accessibility.image.alt-text-%@" = "画像の代替テキスト: %@";
 "accessibility.image.alt-text-more.label" = "より多くの代替テキストを利用できます";
 "accessibility.tabs.messages.unread.label" = "未読";
+"accessibility.status.poll.option-prefix-%lld-of-%lld" = "オプション %lld / %lld";
+"accessibility.status.poll.active.label" = "アクティブな投票";
+"accessibility.status.poll.finished.label" = "投票結果";
+"accessibility.status.poll.selected.label" = "選択済み";
+"accessibility.media.supported-type.image.label" = "画像";
+"accessibility.media.supported-type.gifv.label" = "アニメーション GIF";
+"accessibility.media.supported-type.video.label" = "ビデオ";
+"accessibility.media.supported-type.audio.label" = "オーディオ";
+"accessibility.status.contains-media.label-%@" = "%@ を含む";
+"accessibility.status.application.label" = "アプリ";
+"accessibility.status.media-viewer-action.label" = "Open media viewer";
 
 // MARK: Report
 "report.comment.placeholder" = "追加情報";

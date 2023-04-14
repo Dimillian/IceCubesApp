@@ -175,7 +175,7 @@
 "settings.display.font.system" = "Systemowa";
 "settings.display.font.custom" = "Własna";
 "settings.display.font.scaling-%@" = "Skalowanie czcionki: %@";
-"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
+"settings.display.font.line-spacing-%@" = "Odstęp między wierszami: %@";
 "settings.about.built-with" = "Ice Cubes zbudowano z wykorzystaniem następującego oprogramowania Open Source:";
 "settings.about.title" = "Ice Cubes";
 "settings.account.cached-posts-%@" = "Liczba postów w buforze: %@";
@@ -446,6 +446,7 @@
 "status.editor.text.placeholder" = "Co ci chodzi po głowie?";
 "status.editor.visibility" = "Widoczność postu";
 "status.editor.photo-library" = "Biblioteka zdjęć";
+"status.editor.camera-picker" = "Zrób zdjęcie";
 "status.editor.browse-file" = "Przeglądaj pliki";
 "status.error.loading.message" = "Wystąpił błąd podczas ładowania postów, spróbuj ponownie.";
 "status.error.message" = "Wystąpił błąd dotyczący tego postu, proszę spróbuj ponownie.";
@@ -474,7 +475,7 @@
 "status.show-full-post" = "Pokaż cały post";
 "status.summary.at-time" = " o ";
 "status.summary.edited-time" = "Ostatnia edycja: ";
-"status.summary.edit-history" = "Edit History";
+"status.summary.edit-history" = "Historia edycji";
 "status.visibility.direct" = "Post bezpośredni";
 "status.visibility.follower" = "Tylko obserwujący";
 "status.visibility.public" = "Publiczny";
@@ -499,8 +500,12 @@
 "filter.contexts.profiles" = "Profile";
 "filter.action.warning" = "Ukryj z ostrzeżeniem";
 "filter.action.hide" = "Ukryj całkowicie";
+"filter.expired" = "Expired";
+"filter.expiry-%@" = "Expiry: %@";
 
 // MARK: Accessibility
+"accessibility.general.toggle.on" = "Włączone";
+"accessibility.general.toggle.off" = "Wyłączone";
 "accessibility.editor.button.attach-photo" = "Dołącz zdjęcie";
 "accessibility.editor.button.poll" = "Sondaż";
 "accessibility.editor.button.spoiler" = "Ostrzeżenie o spoilerze";
@@ -553,6 +558,17 @@
 "accessibility.image.alt-text-%@" = "Tekst alternatywny obrazka: %@";
 "accessibility.image.alt-text-more.label" = "Dostępna jest większa ilość tekstu alternatywnego";
 "accessibility.tabs.messages.unread.label" = "Nieprzeczytane";
+"accessibility.status.poll.option-prefix-%lld-of-%lld" = "Opcja %lld z %lld";
+"accessibility.status.poll.active.label" = "Aktywny sondaż";
+"accessibility.status.poll.finished.label" = "Wyniki sondażu";
+"accessibility.status.poll.selected.label" = "Wybór";
+"accessibility.media.supported-type.image.label" = "Obrazek";
+"accessibility.media.supported-type.gifv.label" = "Animowany obrazek";
+"accessibility.media.supported-type.video.label" = "Wideo";
+"accessibility.media.supported-type.audio.label" = "Audio";
+"accessibility.status.contains-media.label-%@" = "Zawiera %@";
+"accessibility.status.application.label" = "Aplikacja";
+"accessibility.status.media-viewer-action.label" = "Otwórz podgląd multimediów";
 
 // MARK: Report
 "report.comment.placeholder" = "Informacja dodatkowa";

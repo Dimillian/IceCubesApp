@@ -172,7 +172,7 @@
 "settings.display.font.system" = "De sistema";
 "settings.display.font.custom" = "Personalizada";
 "settings.display.font.scaling-%@" = "Escalado de tipografía: %@";
-"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
+"settings.display.font.line-spacing-%@" = "Interlineado: %@";
 "settings.about.built-with" = "Ice Cubes utiliza estas librerías de código abierto:";
 "settings.about.title" = "Ice Cubes";
 "settings.account.cached-posts-%@" = "Publicaciones cacheadas: %@";
@@ -451,6 +451,7 @@
 "status.editor.text.placeholder" = "¿En qué estás pensando?";
 "status.editor.visibility" = "Visibilidad de la publicación";
 "status.editor.photo-library" = "Fototeca";
+"status.editor.camera-picker" = "Tomar foto";
 "status.editor.browse-file" = "Archivos";
 "status.error.loading.message" = "Ha ocurrido un error al cargar las publicaciones, por favor, vuelve a intentarlo.";
 "status.error.message" = "Ha ocurrido un error al cargar el contexto de esta publicación, por favor, vuelve a intentarlo.";
@@ -484,7 +485,7 @@
 "status.summary.n-replies %lld" = "%lld respuestas";
 "status.summary.n-boosts %lld" = "%lld boosts";
 "status.summary.n-favorites %lld" = "%lld favoritos";
-"status.summary.edit-history" = "Edit History";
+"status.summary.edit-history" = "Histórico de edición";
 "status.visibility.direct" = "Privado";
 "status.visibility.follower" = "Sólo seguidores";
 "status.visibility.public" = "Todo el mundo";
@@ -509,8 +510,12 @@
 "filter.contexts.profiles" = "Perfiles";
 "filter.action.warning" = "Ocultar con una advertencia";
 "filter.action.hide" = "Ocultar completamente";
+"filter.expired" = "Expirado";
+"filter.expiry-%@" = "Expiración: %@";
 
 // MARK: Accessibility
+"accessibility.general.toggle.on" = "Activado";
+"accessibility.general.toggle.off" = "Desactivado";
 "accessibility.editor.button.attach-photo" = "Añadir foto";
 "accessibility.editor.button.poll" = "Encuesta";
 "accessibility.editor.button.spoiler" = "Advertencia";
@@ -562,7 +567,18 @@
 "accessibility.status.a-replied-to-%@" = "%@ respondió a";
 "accessibility.image.alt-text-%@" = "Texto alt de la imagen: %@";
 "accessibility.image.alt-text-more.label" = "Hay más text alt disponible";
-"accessibility.tabs.messages.unread.label" = "Unread";
+"accessibility.tabs.messages.unread.label" = "No leído";
+"accessibility.status.poll.option-prefix-%lld-of-%lld" = "Opción %lld de %lld";
+"accessibility.status.poll.active.label" = "Encuesta activa";
+"accessibility.status.poll.finished.label" = "Resultados de encuesta";
+"accessibility.status.poll.selected.label" = "Seleccionado";
+"accessibility.media.supported-type.image.label" = "Image";
+"accessibility.media.supported-type.gifv.label" = "Gif Animado";
+"accessibility.media.supported-type.video.label" = "Vídeo";
+"accessibility.media.supported-type.audio.label" = "Audio";
+"accessibility.status.contains-media.label-%@" = "Contiene %@";
+"accessibility.status.application.label" = "App";
+"accessibility.status.media-viewer-action.label" = "Open media viewer";
 
 // MARK: Report
 "report.comment.placeholder" = "Información adicional";

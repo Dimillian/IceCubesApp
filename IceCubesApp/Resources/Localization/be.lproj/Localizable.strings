@@ -455,6 +455,7 @@
 "status.editor.text.placeholder" = "Пра што вы думаеце?";
 "status.editor.visibility" = "Бачнасць допісу";
 "status.editor.photo-library" = "Photos Library";
+"status.editor.camera-picker" = "Take Photo";
 "status.editor.browse-file" = "Browse Files";
 "status.error.loading.message" = "Пры загрузцы паведамленняў адбылася памылка, паўтарыце спробу.";
 "status.error.message" = "Адбылася памылка ў кантэксце гэтай публікацыі, паспрабуйце яшчэ раз.";
@@ -513,8 +514,12 @@
 "filter.contexts.profiles" = "Профілі";
 "filter.action.warning" = "Схаваць з папярэджаннем";
 "filter.action.hide" = "Схаваць цалкам";
+"filter.expired" = "Expired";
+"filter.expiry-%@" = "Expiry: %@";
 
 // MARK: Accessibility
+"accessibility.general.toggle.on" = "On";
+"accessibility.general.toggle.off" = "Off";
 "accessibility.editor.button.attach-photo" = "Далучыць фота";
 "accessibility.editor.button.poll" = "Апытанне";
 "accessibility.editor.button.spoiler" = "Папярэджанне пра спойлер";
@@ -567,6 +572,17 @@
 "accessibility.image.alt-text-%@" = "Image alt text: %@";
 "accessibility.image.alt-text-more.label" = "More alt text available";
 "accessibility.tabs.messages.unread.label" = "Unread";
+"accessibility.status.poll.option-prefix-%lld-of-%lld" = "Option %lld of %lld";
+"accessibility.status.poll.active.label" = "Active poll";
+"accessibility.status.poll.finished.label" = "Poll results";
+"accessibility.status.poll.selected.label" = "Selected";
+"accessibility.media.supported-type.image.label" = "Image";
+"accessibility.media.supported-type.gifv.label" = "Animated Gif";
+"accessibility.media.supported-type.video.label" = "Video";
+"accessibility.media.supported-type.audio.label" = "Audio";
+"accessibility.status.contains-media.label-%@" = "Contains %@";
+"accessibility.status.application.label" = "App";
+"accessibility.status.media-viewer-action.label" = "Open media viewer";
 
 // MARK: Report
 "report.comment.placeholder" = "Дадатковая інфармацыя";

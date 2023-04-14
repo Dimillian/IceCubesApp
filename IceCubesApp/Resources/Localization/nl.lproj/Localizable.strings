@@ -172,7 +172,7 @@
 "settings.display.font.system" = "Systeem";
 "settings.display.font.custom" = "Aangepast";
 "settings.display.font.scaling-%@" = "Lettertype vergroten/verkleinen: %@";
-"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
+"settings.display.font.line-spacing-%@" = "Regelafstand: %@";
 "settings.about.built-with" = "Ice Cubes is gebouwd met de volgende opensourcesoftware:";
 "settings.about.title" = "Ice Cubes";
 "settings.account.cached-posts-%@" = "Posts in cache: %@";
@@ -444,6 +444,7 @@
 "status.editor.text.placeholder" = "Waar denk je aan?";
 "status.editor.visibility" = "Zichtbaarheid";
 "status.editor.photo-library" = "Fotobibliotheek";
+"status.editor.camera-picker" = "Maak foto";
 "status.editor.browse-file" = "Bestanden";
 "status.error.loading.message" = "Er heeft zich een fout voorgedaan tijdens het laden van je posts. Probeer het nogmaals.";
 "status.error.message" = "Er heeft zich een fout voorgedaan. Probeer het nogmaals.";
@@ -477,7 +478,7 @@
 "status.summary.n-replies %lld" = "%lld antwoorden";
 "status.summary.n-boosts %lld" = "%lld boosts";
 "status.summary.n-favorites %lld" = "%lld favorieten";
-"status.summary.edit-history" = "Edit History";
+"status.summary.edit-history" = "Bewerkingsgeschiedenis";
 "status.visibility.direct" = "Direct bericht";
 "status.visibility.follower" = "Alleen volgers";
 "status.visibility.public" = "Openbaar";
@@ -501,12 +502,16 @@
 "filter.contexts.profiles" = "Profielen";
 "filter.action.warning" = "Verberg met waarschuwing";
 "filter.action.hide" = "Verberg volledig";
+"filter.expired" = "Verlopen";
+"filter.expiry-%@" = "Verloopt: %@";
 
 "enum.expand-media.show" = "Toon alle";
 "enum.expand-media.hide" = "Verberg alle";
 "enum.expand-media.hide-sensitive" = "Verberg gevoelige";
 
 // MARK: Accessibility
+"accessibility.general.toggle.on" = "Aan";
+"accessibility.general.toggle.off" = "Uit";
 "accessibility.editor.button.attach-photo" = "Voeg foto toe";
 "accessibility.editor.button.poll" = "Poll";
 "accessibility.editor.button.spoiler" = "Spoilerwaarschuwing";
@@ -556,9 +561,20 @@
 "accessibility.status.spoiler-full-content" = "Volledige inhoud";
 "accessibility.status.a-boosted-b-%@-%@" = "%@ heeft %@ geboost";
 "accessibility.status.a-replied-to-%@" = "%@ heeft geantwoord op";
-"accessibility.image.alt-text-%@" = "Tekst voor afbeedling: %@";
+"accessibility.image.alt-text-%@" = "Tekst voor afbeelding: %@";
 "accessibility.image.alt-text-more.label" = "Meer tekst beschikbaar";
-"accessibility.tabs.messages.unread.label" = "Unread";
+"accessibility.tabs.messages.unread.label" = "Ongelezen";
+"accessibility.status.poll.option-prefix-%lld-of-%lld" = "Optie %lld van %lld";
+"accessibility.status.poll.active.label" = "Actieve poll";
+"accessibility.status.poll.finished.label" = "Pollresultaten";
+"accessibility.status.poll.selected.label" = "Geselecteerd";
+"accessibility.media.supported-type.image.label" = "Afbeelding";
+"accessibility.media.supported-type.gifv.label" = "Animated gif";
+"accessibility.media.supported-type.video.label" = "Video";
+"accessibility.media.supported-type.audio.label" = "Audio";
+"accessibility.status.contains-media.label-%@" = "Bevat %@";
+"accessibility.status.application.label" = "App";
+"accessibility.status.media-viewer-action.label" = "Open mediaviewer";
 
 // MARK: Report
 "report.comment.placeholder" = "Aanvullende informatie";

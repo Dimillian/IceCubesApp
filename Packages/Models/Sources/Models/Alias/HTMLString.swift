@@ -3,7 +3,7 @@ import SwiftSoup
 import SwiftUI
 
 private enum CodingKeys: CodingKey {
-  case htmlValue, asMarkdown, asRawText, statusesURLs
+  case htmlValue, asMarkdown, asRawText, statusesURLs, links
 }
 
 public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
@@ -11,7 +11,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
   public var asMarkdown: String = ""
   public var asRawText: String = ""
   public var statusesURLs = [URL]()
-  public var links = [Link]()
+  private(set) public var links = [Link]()
 
   public var asSafeMarkdownAttributedString: AttributedString = .init()
   private var main_regex: NSRegularExpression?
@@ -29,6 +29,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
         asMarkdown = try container.decode(String.self, forKey: .asMarkdown)
         asRawText = try container.decode(String.self, forKey: .asRawText)
         statusesURLs = try container.decode([URL].self, forKey: .statusesURLs)
+        links = try container.decode([Link].self, forKey: .links)
       } catch {
         htmlValue = ""
       }
@@ -76,15 +77,6 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
     } catch {
       asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
     }
-
-    links = asSafeMarkdownAttributedString.runs
-      .compactMap { run in
-        guard let link = run.link else {
-          return nil
-        }
-
-        return Link(link, displayString: String(self.asSafeMarkdownAttributedString[run.range].characters))
-      }
   }
 
   public init(stringValue: String, parseMarkdown: Bool = false) {
@@ -104,15 +96,6 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
     } else {
       asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
     }
-
-    links = asSafeMarkdownAttributedString.runs
-      .compactMap { run in
-        guard let link = run.link else {
-          return nil
-        }
-
-        return Link(link, displayString: String(self.asSafeMarkdownAttributedString[run.range].characters))
-      }
   }
 
   public func encode(to encoder: Encoder) throws {
@@ -121,6 +104,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
     try container.encode(asMarkdown, forKey: .asMarkdown)
     try container.encode(asRawText, forKey: .asRawText)
     try container.encode(statusesURLs, forKey: .statusesURLs)
+    try container.encode(links, forKey: .links)
   }
 
   private mutating func handleNode(node: SwiftSoup.Node) {
@@ -160,14 +144,21 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
           }
         }
         asMarkdown += "["
+        let start = asMarkdown.endIndex
         // descend into this node now so we can wrap the
         // inner part of the link in the right markup
         for nn in node.getChildNodes() {
           handleNode(node: nn)
         }
+        let finish = asMarkdown.endIndex
         asMarkdown += "]("
         asMarkdown += href
         asMarkdown += ")"
+
+        if let url = URL(string: href) {
+          let displayString = asMarkdown[start..<finish]
+          links.append(Link(url, displayString: String(displayString)))
+        }
         return
       } else if node.nodeName() == "#text" {
         var txt = node.description
@@ -187,14 +178,14 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
     } catch {}
   }
 
-  public struct Link: Hashable, Identifiable {
+  public struct Link: Codable, Hashable, Identifiable {
     public var id: Int { hashValue }
-    public let url: AttributeScopes.FoundationAttributes.LinkAttribute.Value
+    public let url: URL
     public let displayString: String
     public let type: LinkType
     public let title: String
 
-    init(_ url: AttributeScopes.FoundationAttributes.LinkAttribute.Value, displayString: String) {
+    init(_ url: URL, displayString: String) {
       self.url = url
       self.displayString = displayString
 
@@ -215,7 +206,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
       }
     }
 
-    public enum LinkType {
+    public enum LinkType: String, Codable {
       case url
       case mention
       case hashtag

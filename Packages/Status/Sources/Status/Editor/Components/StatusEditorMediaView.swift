@@ -158,5 +158,6 @@ struct StatusEditorMediaView: View {
     Rectangle()
       .foregroundColor(theme.secondaryBackgroundColor)
       .frame(width: 150, height: 150)
+      .accessibilityHidden(true)
   }
 }

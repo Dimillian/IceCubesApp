@@ -450,6 +450,7 @@
 "status.editor.text.placeholder" = "Hva tenker du på?";
 "status.editor.visibility" = "Innleggssynlighet";
 "status.editor.photo-library" = "Photos Library";
+"status.editor.camera-picker" = "Take Photo";
 "status.editor.browse-file" = "Browse Files";
 "status.error.loading.message" = "Det oppsto en feil under innlasting av innlegg, prøv igjen.";
 "status.error.message" = "Det oppsto en feil i forbindelse med dette innlegget, prøv igjen.";
@@ -508,8 +509,12 @@
 "filter.contexts.profiles" = "Profiler";
 "filter.action.warning" = "Skjul med advarsel";
 "filter.action.hide" = "Skjul helt";
+"filter.expired" = "Expired";
+"filter.expiry-%@" = "Expiry: %@";
 
 // MARK: Accessibility
+"accessibility.general.toggle.on" = "On";
+"accessibility.general.toggle.off" = "Off";
 "accessibility.editor.button.attach-photo" = "Attach photo";
 "accessibility.editor.button.poll" = "Poll";
 "accessibility.editor.button.spoiler" = "Spoiler warning";
@@ -562,6 +567,17 @@
 "accessibility.image.alt-text-%@" = "Image alt text: %@";
 "accessibility.image.alt-text-more.label" = "More alt text available";
 "accessibility.tabs.messages.unread.label" = "Unread";
+"accessibility.status.poll.option-prefix-%lld-of-%lld" = "Option %lld of %lld";
+"accessibility.status.poll.active.label" = "Active poll";
+"accessibility.status.poll.finished.label" = "Poll results";
+"accessibility.status.poll.selected.label" = "Selected";
+"accessibility.media.supported-type.image.label" = "Image";
+"accessibility.media.supported-type.gifv.label" = "Animated Gif";
+"accessibility.media.supported-type.video.label" = "Video";
+"accessibility.media.supported-type.audio.label" = "Audio";
+"accessibility.status.contains-media.label-%@" = "Contains %@";
+"accessibility.status.application.label" = "App";
+"accessibility.status.media-viewer-action.label" = "Open media viewer";
 
 // MARK: Report
 "report.comment.placeholder" = "Additional Info";

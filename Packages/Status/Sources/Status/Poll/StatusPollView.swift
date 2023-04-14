@@ -33,8 +33,8 @@ public struct StatusPollView: View {
   }
 
   private func ratioForOption(option: Poll.Option) -> CGFloat {
-    if viewModel.poll.safeVotersCount != 0 {
-      return CGFloat(option.votesCount) / CGFloat(viewModel.poll.safeVotersCount)
+    if let votesCount = option.votesCount, viewModel.poll.safeVotersCount != 0 {
+      return CGFloat(votesCount) / CGFloat(viewModel.poll.safeVotersCount)
     } else {
       return 0.0
     }
@@ -70,11 +70,12 @@ public struct StatusPollView: View {
   }
 
   public var body: some View {
+    let isInteractive = viewModel.poll.expired == false && (viewModel.poll.voted ?? true) == false
     VStack(alignment: .leading) {
-      ForEach(viewModel.poll.options) { option in
+      ForEach(Array(viewModel.poll.options.enumerated()), id: \.element.id) { index, option in
         HStack {
           makeBarView(for: option, buttonImage: buttonImage(option: option))
-            .disabled(viewModel.poll.expired || (viewModel.poll.voted ?? false))
+            .disabled(isInteractive == false)
           if viewModel.showResults || status.account.id == currentAccount.account?.id {
             Spacer()
             // Make sure they're all the same width using a ZStack with 100% hiding behind the
@@ -88,6 +89,12 @@ public struct StatusPollView: View {
             }
           }
         }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel(combinedAccessibilityLabel(for: option, index: index))
+        .accessibilityRespondsToUserInteraction(isInteractive)
+        .accessibilityAddTraits(isSelected(option: option) ? .isSelected : [])
+        .accessibilityAddTraits(isInteractive ? [] : .isStaticText)
+        .accessibilityRemoveTraits(isInteractive ? [] : .isButton)
       }
       if !viewModel.poll.expired, !(viewModel.poll.voted ?? false), !viewModel.votes.isEmpty {
         Button("status.poll.send") {
@@ -108,6 +115,18 @@ public struct StatusPollView: View {
         await viewModel.fetchPoll()
       }
     }
+    .accessibilityElement(children: .contain)
+    .accessibilityLabel(viewModel.poll.expired ? "accessibility.status.poll.finished.label" : "accessibility.status.poll.active.label")
+
+  }
+
+  func combinedAccessibilityLabel(for option: Poll.Option, index: Int) -> Text {
+    let showPercentage = viewModel.poll.expired || viewModel.poll.voted ?? false
+    return Text("accessibility.status.poll.option-prefix-\(index + 1)-of-\(viewModel.poll.options.count)") +
+      Text(", ") +
+      Text(option.title) +
+      Text(showPercentage ? ", \(percentForOption(option: option))%" : "")
+
   }
 
   private var footerView: some View {
@@ -118,6 +137,7 @@ public struct StatusPollView: View {
         Text("status.poll.n-votes \(viewModel.poll.votesCount)")
       }
       Text(" ⸱ ")
+        .accessibilityHidden(true)
       if viewModel.poll.expired {
         Text("status.poll.closed")
       } else if let date = viewModel.poll.expiresAt.value?.asDate {
@@ -127,6 +147,8 @@ public struct StatusPollView: View {
     }
     .font(.scaledFootnote)
     .foregroundColor(.gray)
+    .accessibilityElement(children: .combine)
+    .accessibilityAddTraits(.updatesFrequently)
   }
 
   @ViewBuilder

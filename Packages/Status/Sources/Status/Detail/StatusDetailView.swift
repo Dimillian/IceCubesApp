@@ -11,10 +11,15 @@ public struct StatusDetailView: View {
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var routerPath: RouterPath
-  @Environment(\.openURL) private var openURL
+  
   @StateObject private var viewModel: StatusDetailViewModel
+  
   @State private var isLoaded: Bool = false
   @State private var statusHeight: CGFloat = 0
+
+  /// April 4th, 2023: Without explicit focus being set, VoiceOver will skip over a seemingly random number of elements on this screen when pushing in from the main timeline.
+  /// By using ``@AccessibilityFocusState`` and setting focus once, we work around this issue.
+  @AccessibilityFocusState private var initialFocusBugWorkaround: Bool
 
   public init(statusId: String) {
     _viewModel = StateObject(wrappedValue: .init(statusId: statusId))
@@ -54,6 +59,7 @@ public struct StatusDetailView: View {
               .listRowSeparator(.hidden)
               .listRowBackground(theme.secondaryBackgroundColor)
               .listRowInsets(.init())
+              .accessibilityHidden(true)
 
           case .error:
             errorView
@@ -119,6 +125,7 @@ public struct StatusDetailView: View {
           Rectangle()
             .fill(theme.tintColor)
             .frame(width: 2)
+            .accessibilityHidden(true)
           Spacer(minLength: 8)
         }
         if self.viewModel.statusId == status.id {
@@ -142,6 +149,7 @@ public struct StatusDetailView: View {
                                      client: client,
                                      routerPath: routerPath,
                                      isFocused: true) })
+      .accessibilityFocused($initialFocusBugWorkaround, equals: true)
       .overlay {
         GeometryReader { reader in
           VStack {}
@@ -151,6 +159,10 @@ public struct StatusDetailView: View {
         }
       }
       .id(status.id)
+      // VoiceOver / Switch Control focus workaround
+      .onAppear {
+        self.initialFocusBugWorkaround = true
+      }
   }
 
   private var errorView: some View {
