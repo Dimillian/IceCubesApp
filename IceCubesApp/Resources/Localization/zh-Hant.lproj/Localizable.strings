@@ -451,7 +451,7 @@
 "status.editor.text.placeholder" = "您在想些什麼呢？";
 "status.editor.visibility" = "嘟文能見度";
 "status.editor.photo-library" = "相片圖庫";
-"status.editor.camera-picker" = "Take Photo";
+"status.editor.camera-picker" = "拍攝相片";
 "status.editor.browse-file" = "瀏覽檔案";
 "status.error.loading.message" = "下載嘟文時發生錯誤，請再試一次。";
 "status.error.message" = "嘟文上下文發生錯誤，請再試一次。";
@@ -510,12 +510,12 @@
 "filter.contexts.profiles" = "個人檔案";
 "filter.action.warning" = "警告之後隱藏";
 "filter.action.hide" = "完全隱藏";
-"filter.expired" = "Expired";
-"filter.expiry-%@" = "Expiry: %@";
+"filter.expired" = "過期";
+"filter.expiry-%@" = "期限：%@";
 
 // MARK: Accessibility
-"accessibility.general.toggle.on" = "On";
-"accessibility.general.toggle.off" = "Off";
+"accessibility.general.toggle.on" = "啟用";
+"accessibility.general.toggle.off" = "停用";
 "accessibility.editor.button.attach-photo" = "附上相片";
 "accessibility.editor.button.poll" = "投票";
 "accessibility.editor.button.spoiler" = "劇透警告";
@@ -568,17 +568,17 @@
 "accessibility.image.alt-text-%@" = "圖片描述文字：%@";
 "accessibility.image.alt-text-more.label" = "更多圖片描述文字";
 "accessibility.tabs.messages.unread.label" = "未讀";
-"accessibility.status.poll.option-prefix-%lld-of-%lld" = "Option %lld of %lld";
-"accessibility.status.poll.active.label" = "Active poll";
-"accessibility.status.poll.finished.label" = "Poll results";
-"accessibility.status.poll.selected.label" = "Selected";
-"accessibility.media.supported-type.image.label" = "Image";
-"accessibility.media.supported-type.gifv.label" = "Animated Gif";
-"accessibility.media.supported-type.video.label" = "Video";
-"accessibility.media.supported-type.audio.label" = "Audio";
-"accessibility.status.contains-media.label-%@" = "Contains %@";
+"accessibility.status.poll.option-prefix-%lld-of-%lld" = "%2$lld 選項之 %1$lld";
+"accessibility.status.poll.active.label" = "開放投票";
+"accessibility.status.poll.finished.label" = "票選結果";
+"accessibility.status.poll.selected.label" = "已投給";
+"accessibility.media.supported-type.image.label" = "影像";
+"accessibility.media.supported-type.gifv.label" = "Gif 動畫";
+"accessibility.media.supported-type.video.label" = "視訊";
+"accessibility.media.supported-type.audio.label" = "音訊";
+"accessibility.status.contains-media.label-%@" = "含%@";
 "accessibility.status.application.label" = "App";
-"accessibility.status.media-viewer-action.label" = "Open media viewer";
+"accessibility.status.media-viewer-action.label" = "開啟媒體播放器";
 
 // MARK: Report
 "report.comment.placeholder" = "附加資訊";
