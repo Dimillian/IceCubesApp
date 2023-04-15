@@ -456,7 +456,7 @@
 "status.error.loading.message" = "下載嘟文時發生錯誤，請再試一次。";
 "status.error.message" = "嘟文上下文發生錯誤，請再試一次。";
 "status.error.title" = "發生錯誤";
-"status.filter.filtered-by-%@" = "由 %@ 過濾";
+"status.filter.filtered-by-%@" = "依 %@ 過濾";
 "status.filter.show-anyway" = "仍然顯示";
 "status.image.alt-text.abbreviation" = "ALT";
 "status.media.content.show" = "顯示內容";
