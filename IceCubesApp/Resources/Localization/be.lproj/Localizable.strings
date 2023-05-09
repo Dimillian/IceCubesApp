@@ -120,6 +120,8 @@
 "settings.content.collapse-long-posts" = "Collapse long posts";
 "settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
 "settings.content.hide-repeated-boosts" = "Схаваць паўторныя павышэння";
+"settings.content.replies" = "Replies";
+"settings.content.show-replies" = "Show Replies";
 "settings.content.instance-settings" = "Налады змесціва серверу";
 "settings.content.use-instance-settings" = "Ужыць налады серверу";
 "settings.content.expand-spoilers" = "Заўсёды паказваць уражлівыя допісы";

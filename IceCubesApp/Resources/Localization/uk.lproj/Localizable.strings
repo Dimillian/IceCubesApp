@@ -120,6 +120,8 @@
 "settings.content.collapse-long-posts" = "Згортати довгі дописи";
 "settings.content.collapse-long-posts-hint" = "У згорнутих публікаціях відображається лише обмежена кількість рядків разом із кнопкою, щоб показати повну публікацію";
 "settings.content.hide-repeated-boosts" = "Не відображати повторні поширення";
+"settings.content.replies" = "Replies";
+"settings.content.show-replies" = "Show Replies";
 "settings.content.instance-settings" = "Налаштування відображення сервера";
 "settings.content.use-instance-settings" = "Використовувати налаштування сервера";
 "settings.content.expand-spoilers" = "Дозволити відображати делікатний вміст";

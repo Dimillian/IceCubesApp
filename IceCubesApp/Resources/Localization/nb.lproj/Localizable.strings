@@ -121,6 +121,8 @@
 "settings.content.collapse-long-posts-hint" = "Skjulte innlegg viser bare et begrenset antall linjer sammen med en knapp for å vise hele innlegget";
 "settings.content.hide-repeated-boosts" = "Skjul gjentatte forsterkninger";
 "settings.content.instance-settings" = "Innstillinger for serverinnhold";
+"settings.content.replies" = "Replies";
+"settings.content.show-replies" = "Show Replies";
 "settings.content.use-instance-settings" = "Bruk serverinnstillinger";
 "settings.content.expand-spoilers" = "Vis alltid sensitive innlegg";
 "settings.content.expand-media" = "Medievisning";

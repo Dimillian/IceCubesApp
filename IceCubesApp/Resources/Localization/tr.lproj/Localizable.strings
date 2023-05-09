@@ -115,6 +115,8 @@
 "settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
 "settings.content.boosts" = "Yükseltmeler";
 "settings.content.hide-repeated-boosts" = "Hide repeated boosts";
+"settings.content.replies" = "Replies";
+"settings.content.show-replies" = "Show Replies";
 "settings.content.instance-settings" = "Server Content Settings";
 "settings.content.use-instance-settings" = "Use server settings";
 "settings.content.expand-spoilers" = "Always show sensitive posts";

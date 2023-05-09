@@ -156,6 +156,8 @@
 "settings.content.collapse-long-posts" = "Klap lange posts in";
 "settings.content.collapse-long-posts-hint" = "Alleen een beperkt aantal regels van ingeklapte posts wordt getoond, samen met een knop om de volledige post te tonen";
 "settings.content.hide-repeated-boosts" = "Verberg herhaalde boosts";
+"settings.content.replies" = "Replies";
+"settings.content.show-replies" = "Show Replies";
 "settings.content.instance-settings" = "Serverinstellingen voor inhoud";
 "settings.content.use-instance-settings" = "Gebruik serverinstellingen";
 "settings.content.expand-spoilers" = "Toon gevoelige posts altijd";

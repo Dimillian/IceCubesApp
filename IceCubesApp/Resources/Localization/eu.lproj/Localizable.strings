@@ -156,6 +156,8 @@
 "settings.content.collapse-long-posts" = "Tolestu bidalketa luzeak";
 "settings.content.collapse-long-posts-hint" = "Tolestutako bidalketek lerro kopuru jakin bat baino ez dute erakusten, bidalketa osorik irakurri ahal izateko hedatzeko botoiarekin batera";
 "settings.content.hide-repeated-boosts" = "Ezkutatu errepikatutako bultzadak";
+"settings.content.replies" = "Replies";
+"settings.content.show-replies" = "Show Replies";
 "settings.content.instance-settings" = "Edukiari buruzko ezarpenak";
 "settings.content.use-instance-settings" = "Erabili zerbitzariko ezarpenak";
 "settings.content.expand-spoilers" = "Erakutsi beti eduki hunkigarria";

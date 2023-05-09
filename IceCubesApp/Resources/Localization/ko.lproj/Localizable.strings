@@ -117,6 +117,8 @@
 "settings.content.hide-repeated-boosts" = "중복으로 부스트된 글 숨김";
 "settings.content.instance-settings" = "서버 콘텐츠 설정";
 "settings.content.use-instance-settings" = "서버에서 설정한 대로 맞춤";
+"settings.content.replies" = "Replies";
+"settings.content.show-replies" = "Show Replies";
 "settings.content.expand-spoilers" = "열람 주의 표시된 글 항상 가리지 않음";
 "settings.content.expand-media" = "표시할 미디어";
 "settings.content.default-sensitive" = "내 미디어 항상 민감함으로 표시";

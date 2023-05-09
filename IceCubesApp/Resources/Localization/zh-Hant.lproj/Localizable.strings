@@ -120,6 +120,8 @@
 "settings.content.collapse-long-posts" = "縮限長文";
 "settings.content.collapse-long-posts-hint" = "「縮限長文」將只顯示數行文字，另可按紐閱讀全文";
 "settings.content.hide-repeated-boosts" = "隱藏多重轉嘟";
+"settings.content.replies" = "Replies";
+"settings.content.show-replies" = "Show Replies";
 "settings.content.instance-settings" = "伺服器內容設定";
 "settings.content.use-instance-settings" = "沿用伺服器設定";
 "settings.content.expand-spoilers" = "顯示所有敏感嘟文";

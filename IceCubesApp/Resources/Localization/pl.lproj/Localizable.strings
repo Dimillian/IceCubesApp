@@ -115,6 +115,8 @@
 "settings.content.collapse-long-posts" = "Zwijaj długie posty";
 "settings.content.collapse-long-posts-hint" = "Zwinięte posty wyświetlają tylko ograniczoną liczbę wierszy wraz z przyciskiem do wyświetlenia pełnego postu";
 "settings.content.hide-repeated-boosts" = "Ukryj powtórzone podbicia";
+"settings.content.replies" = "Replies";
+"settings.content.show-replies" = "Show Replies";
 "settings.content.instance-settings" = "Ustawienia treści serwera";
 "settings.content.use-instance-settings" = "Zastosuj ustawienia serwera";
 "settings.content.expand-spoilers" = "Pokazuj wrażliwe posty";

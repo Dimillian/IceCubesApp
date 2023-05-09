@@ -120,6 +120,8 @@
 "settings.content.collapse-long-posts" = "長い投稿を折りたたむ";
 "settings.content.collapse-long-posts-hint" = "折りたたまれた投稿には、限られた数の行のみが表示され、投稿全体を表示するボタンが表示されます";
 "settings.content.hide-repeated-boosts" = "度重なるブーストを隠す";
+"settings.content.replies" = "Replies";
+"settings.content.show-replies" = "Show Replies";
 "settings.content.instance-settings" = "サーバーコンテンツ設定";
 "settings.content.use-instance-settings" = "サーバー設定を使用する";
 "settings.content.expand-spoilers" = "センシティブな投稿を常に表示する";

@@ -156,6 +156,8 @@
 "settings.content.collapse-long-posts" = "Lange Beiträge einklappen";
 "settings.content.collapse-long-posts-hint" = "Eingeklappte Beiträge zeigen nur eine begrenzte Anzahl an Zeilen sowie eine Schaltfläche an, mit der der komplette Beitrag angezeigt werden kann";
 "settings.content.hide-repeated-boosts" = "Wiederholte Boosts verstecken";
+"settings.content.replies" = "Antworten";
+"settings.content.show-replies" = "Antworten anzeigen";
 "settings.content.instance-settings" = "Serverinhaltseinstellungen";
 "settings.content.use-instance-settings" = "Servereinstellungen verwenden";
 "settings.content.expand-spoilers" = "Sensible Inhalte immer zeigen";

@@ -156,6 +156,8 @@
 "settings.content.collapse-long-posts" = "Colapsar publicaciones largas";
 "settings.content.collapse-long-posts-hint" = "Las publicaciones colapsadas sólo muestran un número limitado de líneas junto a un botón para mostrar la publicación completa";
 "settings.content.hide-repeated-boosts" = "Ocultar boosts repetidos";
+"settings.content.replies" = "Replies";
+"settings.content.show-replies" = "Show Replies";
 "settings.content.instance-settings" = "Ajustes de contenido del servidor";
 "settings.content.use-instance-settings" = "Usar ajustes del servidor";
 "settings.content.expand-spoilers" = "Mostrar siempre el contenido sensible";

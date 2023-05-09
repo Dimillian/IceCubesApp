@@ -156,6 +156,8 @@
 "settings.content.collapse-long-posts" = "Comprimi i post lunghi";
 "settings.content.collapse-long-posts-hint" = "I post compressi visualizzano alcune righe del contenuto assieme ad un bottone per visualizzare tutto il post";
 "settings.content.hide-repeated-boosts" = "Nascondi le condivisioni ripetute";
+"settings.content.replies" = "Replies";
+"settings.content.show-replies" = "Show Replies";
 "settings.content.instance-settings" = "Configurazione dei contenuti del Server";
 "settings.content.expand-spoilers" = "Visualizza sempre i contenuti sensibili";
 "settings.content.expand-media" = "Visualizzazione dei media";

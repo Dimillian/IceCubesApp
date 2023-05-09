@@ -70,7 +70,8 @@ public struct AccountDetailView: View {
           }
           StatusesListView(fetcher: viewModel,
                            client: client,
-                           routerPath: routerPath)
+                           routerPath: routerPath,
+                           showRepliesRegardless: true)
         case .followedTags:
           tagsListView
         case .lists:

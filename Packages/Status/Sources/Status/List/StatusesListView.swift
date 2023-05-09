@@ -7,22 +7,26 @@ import SwiftUI
 
 public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
   @EnvironmentObject private var theme: Theme
+  @EnvironmentObject private var userPreferences: UserPreferences
 
   @ObservedObject private var fetcher: Fetcher
   // Whether this status is on a remote local timeline (many actions are unavailable if so)
   private let isRemote: Bool
   private let routerPath: RouterPath
   private let client: Client
+    private let showRepliesRegardless: Bool
 
   public init(fetcher: Fetcher,
               client: Client,
               routerPath: RouterPath,
-              isRemote: Bool = false)
+              isRemote: Bool = false,
+              showRepliesRegardless: Bool = false)
   {
     self.fetcher = fetcher
     self.isRemote = isRemote
     self.client = client
     self.routerPath = routerPath
+    self.showRepliesRegardless = showRepliesRegardless
   }
 
   public var body: some View {
@@ -45,7 +49,10 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
       .listRowSeparator(.hidden)
 
     case let .display(statuses, nextPageState):
-      ForEach(statuses, id: \.viewId) { status in
+      ForEach(statuses.filter({status in
+          !status.isThread || userPreferences.showReplies || showRepliesRegardless
+          
+      }), id: \.viewId) { status in
         StatusRowView(viewModel: { StatusRowViewModel(status: status,
                                                       client: client,
                                                       routerPath: routerPath,

@@ -115,6 +115,8 @@
 "settings.content.collapse-long-posts" = "Collapse long posts";
 "settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
 "settings.content.hide-repeated-boosts" = "Masquer les boosts répétés";
+"settings.content.replies" = "Replies";
+"settings.content.show-replies" = "Show Replies";
 "settings.content.instance-settings" = "Réglages de contenu serveur";
 "settings.content.use-instance-settings" = "Utiliser les paramètres du serveur";
 "settings.content.expand-spoilers" = "Toujours afficher les messages sensibles";

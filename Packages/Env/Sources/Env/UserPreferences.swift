@@ -34,6 +34,8 @@ public class UserPreferences: ObservableObject {
 
   @AppStorage("suppress_dupe_reblogs") public var suppressDupeReblogs: Bool = false
 
+  @AppStorage("show_replies") public var showReplies: Bool = true
+
   @AppStorage("inAppBrowserReaderView") public var inAppBrowserReaderView = false
 
   @AppStorage("haptic_tab") public var hapticTabSelectionEnabled = true

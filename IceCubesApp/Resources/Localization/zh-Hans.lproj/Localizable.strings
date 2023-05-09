@@ -157,6 +157,8 @@
 "settings.content.collapse-long-posts" = "折叠长嘟文";
 "settings.content.collapse-long-posts-hint" = "被折叠嘟文只会显示前几行但会提供查看全文的按钮";
 "settings.content.hide-repeated-boosts" = "隐藏重复的转发";
+"settings.content.replies" = "Replies";
+"settings.content.show-replies" = "Show Replies";
 "settings.content.instance-settings" = "服务器内容设置";
 "settings.content.use-instance-settings" = "使用服务器设置";
 "settings.content.expand-spoilers" = "始终显示敏感内容";

@@ -103,6 +103,11 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
   public let sensitive: Bool
   public let language: String?
 
+  public var isThread: Bool{
+    reblog?.inReplyToId != nil || reblog?.inReplyToAccountId != nil ||
+      inReplyToId != nil || inReplyToAccountId != nil
+  }
+
   public init(id: String, content: HTMLString, account: Account, createdAt: ServerDate, editedAt: ServerDate?, reblog: ReblogStatus?, mediaAttachments: [MediaAttachment], mentions: [Mention], repliesCount: Int, reblogsCount: Int, favouritesCount: Int, card: Card?, favourited: Bool?, reblogged: Bool?, pinned: Bool?, bookmarked: Bool?, emojis: [Emoji], url: String?, application: Application?, inReplyToId: String?, inReplyToAccountId: String?, visibility: Visibility, poll: Poll?, spoilerText: HTMLString, filtered: [Filtered]?, sensitive: Bool, language: String?) {
     self.id = id
     self.content = content

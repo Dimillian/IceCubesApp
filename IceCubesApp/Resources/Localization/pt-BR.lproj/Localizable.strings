@@ -115,6 +115,8 @@
 "settings.content.collapse-long-posts" = "Reduzir postagens longas";
 "settings.content.collapse-long-posts-hint" = "As postagens reduzidas exibem apenas um número limitado de linhas junto com um botão para mostrá-la completa";
 "settings.content.hide-repeated-boosts" = "Ocultar boosts repetidos";
+"settings.content.replies" = "Replies";
+"settings.content.show-replies" = "Show Replies";
 "settings.content.instance-settings" = "Configurações de conteúdo do servidor";
 "settings.content.use-instance-settings" = "Usar configurações do servidor";
 "settings.content.expand-spoilers" = "Sempre exibir postagens sensíveis";

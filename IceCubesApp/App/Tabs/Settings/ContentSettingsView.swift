@@ -19,6 +19,13 @@ struct ContentSettingsView: View {
         }
       }.listRowBackground(theme.primaryBackgroundColor)
 
+      Section("settings.content.replies") {
+        Toggle(isOn: $userPreferences.showReplies) {
+          Text("settings.content.show-replies")
+        }
+      }
+      .listRowBackground(theme.primaryBackgroundColor)
+
       Section("settings.content.media") {
         Toggle(isOn: $userPreferences.autoPlayVideo) {
           Text("settings.other.autoplay-video")

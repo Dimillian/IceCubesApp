@@ -110,7 +110,7 @@ class TimelineViewModel: ObservableObject {
          isTimelineVisible,
          await !datasource.contains(statusId: event.status.id)
       {
-        pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
+        pendingStatusesObserver.pendingStatuses.insert(event.status, at: 0)
         let newStatus = event.status
         await datasource.insert(newStatus, at: 0)
         await cacheHome()
@@ -292,7 +292,7 @@ extension TimelineViewModel: StatusesFetcher {
     await cacheHome()
 
     // Append new statuses in the timeline indicator.
-    pendingStatusesObserver.pendingStatuses.insert(contentsOf: newStatuses.map { $0.id }, at: 0)
+    pendingStatusesObserver.pendingStatuses.insert(contentsOf: newStatuses, at: 0)
 
     // High chance the user is scrolled to the top.
     // We need to update the statuses state, and then scroll to the previous top most status.
