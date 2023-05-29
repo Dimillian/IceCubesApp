@@ -53,6 +53,8 @@ public class UserPreferences: ObservableObject {
   @AppStorage("requested_review") public var requestedReview = false
 
   @AppStorage("collapse-long-posts") public var collapseLongPosts = true
+    
+  @AppStorage("share-button-behavior") public var shareButtonBehavior: PreferredShareButtonBehavior = .linkAndText
 
   public enum SwipeActionsIconStyle: String, CaseIterable {
     case iconWithText, iconOnly
