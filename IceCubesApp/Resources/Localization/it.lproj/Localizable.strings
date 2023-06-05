@@ -163,6 +163,10 @@
 "settings.content.media.show.alt" = "Mostra i testi alternativi";
 "settings.content.reading" = "Lettura";
 "settings.content.posting" = "Composizione";
+"settings.content.sharing" = "Sharing";
+"settings.content.sharing.share-button-behavior" = "Share Button Behavior";
+"settings.content.sharing.share-behavior.link-only" = "Link Only";
+"settings.content.sharing.share-behavior.link-and-text" = "Link and Text";
 "enum.expand-media.show" = "Mostra tutti";
 "enum.expand-media.hide" = "Nascondi tutti";
 "enum.expand-media.hide-sensitive" = "Nascondi sensibili";

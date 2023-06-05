@@ -130,6 +130,10 @@
 "settings.content.media.show.alt" = "Показати ALT тексти";
 "settings.content.reading" = "Читання";
 "settings.content.posting" = "Публікація";
+"settings.content.sharing" = "Sharing";
+"settings.content.sharing.share-button-behavior" = "Share Button Behavior";
+"settings.content.sharing.share-behavior.link-only" = "Link Only";
+"settings.content.sharing.share-behavior.link-and-text" = "Link and Text";
 "enum.expand-media.show" = "Відобразити все";
 "enum.expand-media.hide" = "Приховати все";
 "enum.expand-media.hide-sensitive" = "Приховувати вміст, позначений як делікатний";
