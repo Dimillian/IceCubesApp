@@ -12,6 +12,8 @@ public class StreamWatcher: ObservableObject {
 
   private let decoder = JSONDecoder()
   private let encoder = JSONEncoder()
+  
+  private var retryDelay: Int = 10
 
   public enum Stream: String {
     case publicTimeline = "public"
@@ -22,6 +24,7 @@ public class StreamWatcher: ObservableObject {
   @Published public var events: [any StreamEvent] = []
   @Published public var unreadNotificationsCount: Int = 0
   @Published public var latestEvent: (any StreamEvent)?
+  
 
   public init() {
     decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -69,7 +72,8 @@ public class StreamWatcher: ObservableObject {
   }
 
   private func receiveMessage() {
-    task?.receive(completionHandler: { result in
+    task?.receive(completionHandler: { [weak self] result in
+      guard let self = self else { return }
       switch result {
       case let .success(message):
         switch message {
@@ -100,8 +104,8 @@ public class StreamWatcher: ObservableObject {
         self.receiveMessage()
 
       case .failure:
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(10)) { [weak self] in
-          guard let self = self else { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(self.retryDelay)) {
+          self.retryDelay += 30
           self.stopWatching()
           self.connect()
           self.watch(streams: self.watchedStreams)
