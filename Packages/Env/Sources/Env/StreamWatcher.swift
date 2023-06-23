@@ -62,8 +62,10 @@ public class StreamWatcher: ObservableObject {
   }
 
   private func sendMessage(message: StreamMessage) {
-    task?.send(.data(try! encoder.encode(message)),
-               completionHandler: { _ in })
+    if let encodedMessage = try? encoder.encode(message),
+       let stringMessage = String(data: encodedMessage, encoding: .utf8) {
+      task?.send(.string(stringMessage), completionHandler: { _ in })
+    }
   }
 
   private func receiveMessage() {
