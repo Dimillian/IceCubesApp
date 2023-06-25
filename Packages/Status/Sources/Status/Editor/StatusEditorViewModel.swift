@@ -178,7 +178,6 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
                          multiple: pollVotingFrequency.canVoteMultipleTimes,
                          expires_in: pollDuration.rawValue)
       }
-
       let data = StatusData(status: statusText.string,
                             visibility: visibility,
                             inReplyToId: mode.replyToStatus?.id,
@@ -342,10 +341,8 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
       var numUrls = 0
 
       for range in urlRanges {
-        if range.length > maxLengthOfUrl {
-          numUrls += 1
-          totalUrlLength += range.length
-        }
+        numUrls += 1
+        totalUrlLength += range.length
 
         statusText.addAttributes([.foregroundColor: UIColor(theme?.tintColor ?? .brand),
                                   .underlineStyle: NSUnderlineStyle.single.rawValue,
