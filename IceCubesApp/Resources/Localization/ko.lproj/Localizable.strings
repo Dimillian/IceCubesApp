@@ -125,10 +125,10 @@
 "settings.content.media.show.alt" = "미디어 설명 버튼 표시";
 "settings.content.reading" = "읽을 때";
 "settings.content.posting" = "올릴 때";
-"settings.content.sharing" = "Sharing";
-"settings.content.sharing.share-button-behavior" = "Share Button Behavior";
-"settings.content.sharing.share-behavior.link-only" = "Link Only";
-"settings.content.sharing.share-behavior.link-and-text" = "Link and Text";
+"settings.content.sharing" = "공유할 때";
+"settings.content.sharing.share-button-behavior" = "공유 버튼 기본 동작";
+"settings.content.sharing.share-behavior.link-only" = "링크 공유";
+"settings.content.sharing.share-behavior.link-and-text" = "링크 및 본문 공유";
 "enum.expand-media.show" = "모두 표시하기";
 "enum.expand-media.hide" = "모두 가리기";
 "enum.expand-media.hide-sensitive" = "민감한 미디어만 가리기";
