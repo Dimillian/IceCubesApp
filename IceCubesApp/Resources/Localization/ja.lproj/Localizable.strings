@@ -130,6 +130,10 @@
 "settings.content.media.show.alt" = "注釈を表示";
 "settings.content.reading" = "リーディング";
 "settings.content.posting" = "ポスティング";
+"settings.content.sharing" = "Sharing";
+"settings.content.sharing.share-button-behavior" = "Share Button Behavior";
+"settings.content.sharing.share-behavior.link-only" = "Link Only";
+"settings.content.sharing.share-behavior.link-and-text" = "Link and Text";
 "enum.expand-media.show" = "全て表示";
 "enum.expand-media.hide" = "全て隠す";
 "enum.expand-media.hide-sensitive" = "センシティブなものは隠す";

@@ -130,6 +130,10 @@
 "settings.content.media.show.alt" = "Паказваць альт. тэкст";
 "settings.content.reading" = "Чытанне";
 "settings.content.posting" = "Размяшчэнне допісаў";
+"settings.content.sharing" = "Sharing";
+"settings.content.sharing.share-button-behavior" = "Share Button Behavior";
+"settings.content.sharing.share-behavior.link-only" = "Link Only";
+"settings.content.sharing.share-behavior.link-and-text" = "Link and Text";
 "enum.expand-media.show" = "Паказаць усе";
 "enum.expand-media.hide" = "Схаваць усе";
 "enum.expand-media.hide-sensitive" = "Хаваць уражлівыя допісы";

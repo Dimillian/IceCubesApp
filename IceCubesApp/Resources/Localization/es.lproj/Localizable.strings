@@ -164,6 +164,10 @@
 "settings.content.media.show.alt" = "Mostrar texto ALT";
 "settings.content.reading" = "Leyendo";
 "settings.content.posting" = "Publicando";
+"settings.content.sharing" = "Sharing";
+"settings.content.sharing.share-button-behavior" = "Share Button Behavior";
+"settings.content.sharing.share-behavior.link-only" = "Link Only";
+"settings.content.sharing.share-behavior.link-and-text" = "Link and Text";
 "settings.push.duplicate.title" = "Arreglar notificaciones duplicadas";
 "settings.push.duplicate.footer" = "¿Recibes notificaciones por duplicado? Usa este botón mágico para arreglarlo";
 "settings.push.duplicate.button.fix" = "🪄 Arréglalo";

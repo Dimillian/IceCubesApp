@@ -125,6 +125,10 @@
 "settings.content.media.show.alt" = "Pokazuj alternatywny tekst";
 "settings.content.reading" = "Czytanie postów";
 "settings.content.posting" = "Wysyłanie postów";
+"settings.content.sharing" = "Sharing";
+"settings.content.sharing.share-button-behavior" = "Share Button Behavior";
+"settings.content.sharing.share-behavior.link-only" = "Link Only";
+"settings.content.sharing.share-behavior.link-and-text" = "Link and Text";
 "enum.expand-media.show" = "Pokazuj wszystkie";
 "enum.expand-media.hide" = "Ukryj wszystkie";
 "enum.expand-media.hide-sensitive" = "Ukryj wrażliwe";

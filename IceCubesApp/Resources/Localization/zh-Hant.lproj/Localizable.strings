@@ -130,6 +130,10 @@
 "settings.content.media.show.alt" = "顯示圖片描述";
 "settings.content.reading" = "閱讀";
 "settings.content.posting" = "發表";
+"settings.content.sharing" = "Sharing";
+"settings.content.sharing.share-button-behavior" = "Share Button Behavior";
+"settings.content.sharing.share-behavior.link-only" = "Link Only";
+"settings.content.sharing.share-behavior.link-and-text" = "Link and Text";
 "enum.expand-media.show" = "全部顯示";
 "enum.expand-media.hide" = "全部隱藏";
 "enum.expand-media.hide-sensitive" = "隱藏敏感題材";

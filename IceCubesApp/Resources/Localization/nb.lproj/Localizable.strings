@@ -130,6 +130,10 @@
 "settings.content.media.show.alt" = "Show ALT texts";
 "settings.content.reading" = "Lesing";
 "settings.content.posting" = "Innlegg";
+"settings.content.sharing" = "Sharing";
+"settings.content.sharing.share-button-behavior" = "Share Button Behavior";
+"settings.content.sharing.share-behavior.link-only" = "Link Only";
+"settings.content.sharing.share-behavior.link-and-text" = "Link and Text";
 "enum.expand-media.show" = "Vis alle";
 "enum.expand-media.hide" = "Skjul alle";
 "enum.expand-media.hide-sensitive" = "Skjul sensitive";

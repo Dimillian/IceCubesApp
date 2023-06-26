@@ -130,6 +130,10 @@
 "settings.content.media.show.alt" = "Show ALT Texts";
 "settings.content.reading" = "Reading";
 "settings.content.posting" = "Posting";
+"settings.content.sharing" = "Sharing";
+"settings.content.sharing.share-button-behavior" = "Share Button Behavior";
+"settings.content.sharing.share-behavior.link-only" = "Link Only";
+"settings.content.sharing.share-behavior.link-and-text" = "Link and Text";
 "enum.expand-media.show" = "Show All";
 "enum.expand-media.hide" = "Hide All";
 "enum.expand-media.hide-sensitive" = "Hide Sensitive";

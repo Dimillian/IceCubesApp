@@ -124,6 +124,10 @@
 "settings.content.media.show.alt" = "Show ALT texts";
 "settings.content.reading" = "Llegint";
 "settings.content.posting" = "Publicant";
+"settings.content.sharing" = "Sharing";
+"settings.content.sharing.share-button-behavior" = "Share Button Behavior";
+"settings.content.sharing.share-behavior.link-only" = "Link Only";
+"settings.content.sharing.share-behavior.link-and-text" = "Link and Text";
 "enum.expand-media.show" = "Mostra-ho tot";
 "enum.expand-media.hide" = "Oculta-ho tot";
 "enum.expand-media.hide-sensitive" = "Amaga el contingut sensible";
