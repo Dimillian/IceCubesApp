@@ -287,7 +287,7 @@
 "account.follow-request.reject" = "Rejeter";
 "account.follow-requests.pending-requests" = "Demandes en attente";
 "account.follow-requests.instructions" = "Les utilisateurs ne verront pas vos messages tant que vous ne les acceptez pas.";
-"account.followers" = "Abonnés";
+"account.followers" = "Abonné·e·s";
 "account.following" = "Abonnements";
 "account.list.create" = "Créer une nouvelle liste";
 "account.list.create.confirm" = "Créer la liste";
@@ -486,7 +486,7 @@
 "status.summary.n-favorites %lld" = "%lld favoris";
 "status.summary.edit-history" = "Edit History";
 "status.visibility.direct" = "Privé";
-"status.visibility.follower" = "Abonnés";
+"status.visibility.follower" = "Abonné·e";
 "status.visibility.public" = "Tout le monde";
 "status.visibility.unlisted" = "Non répertorié";
 
