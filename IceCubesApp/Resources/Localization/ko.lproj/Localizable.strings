@@ -290,6 +290,7 @@
 "account.follow-requests.instructions" = "팔로우 요청을 수락하기 전까지 이 사용자들은 내가 쓴 팔로워 전용 글을 볼 수 없습니다.";
 "account.followers" = "팔로워";
 "account.following" = "팔로우 중";
+"account.label.followers %lld" = "팔로워 %lld명";
 "account.list.create" = "새 리스트 만들기";
 "account.list.create.confirm" = "만들기";
 "account.list.create.description" = "리스트의 이름을 입력해주세요.";
