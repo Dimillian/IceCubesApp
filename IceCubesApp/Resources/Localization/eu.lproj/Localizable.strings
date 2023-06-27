@@ -164,10 +164,10 @@
 "settings.content.media.show.alt" = "Erakutsi deskribapenak";
 "settings.content.reading" = "Irakurtzean";
 "settings.content.posting" = "Bidaltzean";
-"settings.content.sharing" = "Sharing";
-"settings.content.sharing.share-button-behavior" = "Share Button Behavior";
-"settings.content.sharing.share-behavior.link-only" = "Link Only";
-"settings.content.sharing.share-behavior.link-and-text" = "Link and Text";
+"settings.content.sharing" = "Partekatzean";
+"settings.content.sharing.share-button-behavior" = "Partekatzeko botoiaren portaera";
+"settings.content.sharing.share-behavior.link-only" = "Esteka soilik";
+"settings.content.sharing.share-behavior.link-and-text" = "Esteka eta testua";
 "settings.push.duplicate.title" = "Bikoiztutako jakinarazpenen konpontzailea";
 "settings.push.duplicate.footer" = "Jakinarazpenak birritan jasotzen al dituzu? Sakatu botoi magikoa arazoa konpontzeko";
 "settings.push.duplicate.button.fix" = "🪄 Konpondu";
