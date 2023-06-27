@@ -125,10 +125,10 @@
 "settings.content.media.show.alt" = "미디어 설명 버튼 표시";
 "settings.content.reading" = "읽을 때";
 "settings.content.posting" = "올릴 때";
-"settings.content.sharing" = "Sharing";
-"settings.content.sharing.share-button-behavior" = "Share Button Behavior";
-"settings.content.sharing.share-behavior.link-only" = "Link Only";
-"settings.content.sharing.share-behavior.link-and-text" = "Link and Text";
+"settings.content.sharing" = "공유할 때";
+"settings.content.sharing.share-button-behavior" = "공유 버튼 기본 동작";
+"settings.content.sharing.share-behavior.link-only" = "링크 공유";
+"settings.content.sharing.share-behavior.link-and-text" = "링크 및 본문 공유";
 "enum.expand-media.show" = "모두 표시하기";
 "enum.expand-media.hide" = "모두 가리기";
 "enum.expand-media.hide-sensitive" = "민감한 미디어만 가리기";
@@ -290,6 +290,7 @@
 "account.follow-requests.instructions" = "팔로우 요청을 수락하기 전까지 이 사용자들은 내가 쓴 팔로워 전용 글을 볼 수 없습니다.";
 "account.followers" = "팔로워";
 "account.following" = "팔로우 중";
+"account.label.followers %lld" = "팔로워 %lld명";
 "account.list.create" = "새 리스트 만들기";
 "account.list.create.confirm" = "만들기";
 "account.list.create.description" = "리스트의 이름을 입력해주세요.";
