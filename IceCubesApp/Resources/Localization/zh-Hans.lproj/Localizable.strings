@@ -83,8 +83,8 @@
 "settings.display.section.theme" = "主题";
 "settings.display.colors.apply" = "应用自定义颜色";
 "settings.display.section.theme.footer" = "只有在“匹配系统”关闭时才能设置自定义颜色";
-"settings.display.status.action-buttons" = "导航栏样式";
-"settings.display.status.media-style" = "导航栏排列";
+"settings.display.status.action-buttons" = "操作栏样式";
+"settings.display.status.media-style" = "媒体内容排列";
 "settings.display.translate-button" = "显示翻译按钮";
 "settings.display.theme.background" = "背景颜色";
 "settings.display.theme.secondary-background" = "二级背景颜色";
