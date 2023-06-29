@@ -13,9 +13,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string>%2$@ follower</string>
+			<string>Jarraitzaile %2$@</string>
 			<key>other</key>
-			<string>%2$@ followers</string>
+			<string>%2$@ jarraitzaile</string>
 		</dict>
 	</dict>
 	<key>account.detail.n-fields %lld</key>
