@@ -13,9 +13,9 @@
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string>%2$@ follower</string>
+			<string>%2$@粉丝</string>
 			<key>other</key>
-			<string>%2$@ followers</string>
+			<string>%2$@粉丝</string>
 		</dict>
 	</dict>
 	<key>timeline-new-posts %lld</key>
