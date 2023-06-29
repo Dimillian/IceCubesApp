@@ -165,10 +165,10 @@
 "settings.content.media.show.alt" = "显示图片描述";
 "settings.content.reading" = "阅读设置";
 "settings.content.posting" = "发布设置";
-"settings.content.sharing" = "Sharing";
-"settings.content.sharing.share-button-behavior" = "Share Button Behavior";
-"settings.content.sharing.share-behavior.link-only" = "Link Only";
-"settings.content.sharing.share-behavior.link-and-text" = "Link and Text";
+"settings.content.sharing" = "分享";
+"settings.content.sharing.share-button-behavior" = "分享内容";
+"settings.content.sharing.share-behavior.link-only" = "仅链接";
+"settings.content.sharing.share-behavior.link-and-text" = "链接和文本";
 
 "settings.push.duplicate.title" = "重复推送通知修复器";
 "settings.push.duplicate.footer" = "有收到重复的推送通知？试试用这个魔法按钮去修复吧";
