@@ -7,6 +7,7 @@ import SwiftUI
 struct StatusRowContextMenu: View {
   @Environment(\.displayScale) var displayScale
 
+  @EnvironmentObject private var client: Client
   @EnvironmentObject private var sceneDelegate: SceneDelegate
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var account: CurrentAccount
@@ -186,6 +187,68 @@ struct StatusRowContextMenu: View {
           } label: {
             Label("status.action.message", systemImage: "tray.full")
           }
+          
+          
+          if viewModel.authorRelationship?.blocking == true {
+            Button {
+              Task {
+                do {
+                  let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
+                  viewModel.authorRelationship = try await client.post(endpoint: Accounts.unblock(id: operationAccount.id))
+                } catch {
+                  print("Error while unblocking: \(error.localizedDescription)")
+                }
+              }
+            } label: {
+              Label("account.action.unblock", systemImage: "person.crop.circle.badge.exclamationmark")
+            }
+          } else {
+            Button {
+              Task {
+                do {
+                  let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
+                  viewModel.authorRelationship = try await client.post(endpoint: Accounts.block(id: operationAccount.id))
+                } catch {
+                  print("Error while blocking: \(error.localizedDescription)")
+                }
+              }
+            } label: {
+              Label("account.action.block", systemImage: "person.crop.circle.badge.xmark")
+            }
+          }
+          
+          if viewModel.authorRelationship?.muting == true {
+            Button {
+              Task {
+                do {
+                  let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
+                  viewModel.authorRelationship = try await client.post(endpoint: Accounts.unmute(id: operationAccount.id))
+                } catch {
+                  print("Error while unmuting: \(error.localizedDescription)")
+                }
+              }
+            } label: {
+              Label("account.action.unmute", systemImage: "speaker")
+            }
+          } else {
+            Menu {
+              ForEach(Duration.mutingDurations(), id: \.rawValue) { duration in
+                Button(duration.description) {
+                  Task {
+                    do {
+                      let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
+                      viewModel.authorRelationship = try await client.post(endpoint: Accounts.mute(id: operationAccount.id, json: MuteData(duration: duration.rawValue)))
+                    } catch {
+                      print("Error while muting: \(error.localizedDescription)")
+                    }
+                  }
+                }
+              }
+            } label: {
+              Label("account.action.mute", systemImage: "speaker.slash")
+            }
+          }
+          
         }
       }
       Section {
