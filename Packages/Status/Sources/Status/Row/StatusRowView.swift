@@ -99,6 +99,11 @@ public struct StatusRowView: View {
     }
     .contextMenu {
       contextMenu
+        .onAppear {
+          Task {
+            await viewModel.loadAuthorRelationship()
+          }
+        }
     }
     .swipeActions(edge: .trailing) {
       // The actions associated with the swipes are exposed as custom accessibility actions and there is no way to remove them.

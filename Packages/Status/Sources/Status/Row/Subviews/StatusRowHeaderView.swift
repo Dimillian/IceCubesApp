@@ -113,9 +113,14 @@ struct StatusRowHeaderView: View {
   private var contextMenuButton: some View {
     Menu {
       StatusRowContextMenu(viewModel: viewModel)
+        .onAppear {
+          Task {
+            await viewModel.loadAuthorRelationship()
+          }
+        }
     } label: {
       Image(systemName: "ellipsis")
-        .frame(width: 20, height: 20)
+        .frame(width: 40, height: 40)
     }
     .menuStyle(.borderlessButton)
     .foregroundColor(.gray)
