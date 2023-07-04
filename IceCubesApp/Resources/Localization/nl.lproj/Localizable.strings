@@ -164,10 +164,10 @@
 "settings.content.media.show.alt" = "Toon ALT-teksten";
 "settings.content.reading" = "Lezen";
 "settings.content.posting" = "Posten";
-"settings.content.sharing" = "Sharing";
-"settings.content.sharing.share-button-behavior" = "Share Button Behavior";
-"settings.content.sharing.share-behavior.link-only" = "Link Only";
-"settings.content.sharing.share-behavior.link-and-text" = "Link and Text";
+"settings.content.sharing" = "Delen";
+"settings.content.sharing.share-button-behavior" = "Gedrag deel-knop";
+"settings.content.sharing.share-behavior.link-only" = "Alleen link";
+"settings.content.sharing.share-behavior.link-and-text" = "Link en tekst";
 "settings.push.duplicate.title" = "Dubbele meldingen";
 "settings.push.duplicate.footer" = "Ontvang je dubbele meldingen? Gebruik deze magische knop om dit probleem te verhelpen";
 "settings.push.duplicate.button.fix" = "🪄 Los op";
