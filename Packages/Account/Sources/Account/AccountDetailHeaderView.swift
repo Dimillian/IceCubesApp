@@ -125,7 +125,7 @@ struct AccountDetailHeaderView: View {
             scrollViewProxy?.scrollTo("status", anchor: .top)
           }
         } label: {
-          makeCustomInfoLabel(title: "account.posts", count: account.statusesCount)
+          makeCustomInfoLabel(title: "account.posts", count: account.statusesCount ?? 0)
         }
         .accessibilityHint("accessibility.tabs.profile.post-count.hint")
         .buttonStyle(.borderless)
@@ -133,7 +133,7 @@ struct AccountDetailHeaderView: View {
         Button {
           routerPath.navigate(to: .following(id: account.id))
         } label: {
-          makeCustomInfoLabel(title: "account.following", count: account.followingCount)
+          makeCustomInfoLabel(title: "account.following", count: account.followingCount ?? 0)
         }
         .accessibilityHint("accessibility.tabs.profile.following-count.hint")
         .buttonStyle(.borderless)
@@ -143,7 +143,7 @@ struct AccountDetailHeaderView: View {
         } label: {
           makeCustomInfoLabel(
             title: "account.followers",
-            count: account.followersCount,
+            count: account.followersCount ?? 0,
             needsBadge: currentAccount.account?.id == account.id && !currentAccount.followRequests.isEmpty
           )
         }
