@@ -461,7 +461,7 @@
 "status.error.loading.message" = "下載嘟文時發生錯誤，請再試一次。";
 "status.error.message" = "嘟文上下文發生錯誤，請再試一次。";
 "status.error.title" = "發生錯誤";
-"status.error.posting.title" = "無法發送嘟文";
+"status.error.posting.title" = "無法發表嘟文";
 "status.filter.filtered-by-%@" = "依 %@ 過濾";
 "status.filter.show-anyway" = "仍然顯示";
 "status.image.alt-text.abbreviation" = "ALT";
