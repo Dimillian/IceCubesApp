@@ -459,6 +459,7 @@
 "status.error.loading.message" = "Si è verificato un errore durante il caricamento dei post, per favore riprova.";
 "status.error.message" = "Si è verificato un errore durante il caricamento del post, per favore riprova.";
 "status.error.title" = "Si è verificato un errore";
+"status.error.posting.title" = "Error while posting";
 "status.filter.filtered-by-%@" = "Filtrato da: %@";
 "status.filter.show-anyway" = "Mostra comunque";
 "status.image.alt-text.abbreviation" = "ALT";

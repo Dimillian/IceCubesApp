@@ -460,6 +460,7 @@
 "status.error.loading.message" = "Ha ocurrido un error al cargar las publicaciones, por favor, vuelve a intentarlo.";
 "status.error.message" = "Ha ocurrido un error al cargar el contexto de esta publicación, por favor, vuelve a intentarlo.";
 "status.error.title" = "Ha ocurrido un error";
+"status.error.posting.title" = "Error while posting";
 "status.filter.filtered-by-%@" = "Filtrado por: %@";
 "status.filter.show-anyway" = "Mostrar de todas formas";
 "status.image.alt-text.abbreviation" = "ALT";

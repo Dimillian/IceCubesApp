@@ -464,6 +464,7 @@
 "status.error.loading.message" = "Пры загрузцы паведамленняў адбылася памылка, паўтарыце спробу.";
 "status.error.message" = "Адбылася памылка ў кантэксце гэтай публікацыі, паспрабуйце яшчэ раз.";
 "status.error.title" = "Узнікла памылка";
+"status.error.posting.title" = "Error while posting";
 "status.filter.filtered-by-%@" = "Адфільтравана па: %@";
 "status.filter.show-anyway" = "Паказваць у любым выпадку";
 "status.image.alt-text.abbreviation" = "Альт.";

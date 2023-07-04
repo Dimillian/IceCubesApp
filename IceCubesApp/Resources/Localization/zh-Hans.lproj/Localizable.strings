@@ -458,6 +458,7 @@
 "status.error.loading.message" = "加载嘟文时发生错误，请重试。";
 "status.error.message" = "嘟文的上下文出现了错误，请重试。";
 "status.error.title" = "发生了一个错误";
+"status.error.posting.title" = "无法发送嘟文";
 "status.filter.filtered-by-%@" = "被 %@ 过滤";
 "status.filter.show-anyway" = "仍然显示";
 "status.image.alt-text.abbreviation" = "ALT";

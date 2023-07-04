@@ -455,6 +455,7 @@
 "status.error.loading.message" = "Une erreur s'est produite lors du chargement des publications, veuillez réessayer.";
 "status.error.message" = "Une erreur s'est produite dans le contexte de cette publication, veuillez réessayer.";
 "status.error.title" = "Une erreur s'est produite";
+"status.error.posting.title" = "Error while posting";
 "status.filter.filtered-by-%@" = "Filtré par : %@";
 "status.filter.show-anyway" = "Montrer quand même";
 "status.image.alt-text.abbreviation" = "ALT";

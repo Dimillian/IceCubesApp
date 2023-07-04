@@ -458,6 +458,7 @@
 "status.error.loading.message" = "投稿の読み込み中にエラーが発生しました、もう一度試してください";
 "status.error.message" = "この投稿のコンテキストでエラーが発生しました、もう一度試してください";
 "status.error.title" = "エラーが発生しました";
+"status.error.posting.title" = "Error while posting";
 "status.filter.filtered-by-%@" = "%@ :によりフィルターされました";
 "status.filter.show-anyway" = "とりあえず表示";
 "status.image.alt-text.abbreviation" = "注釈";

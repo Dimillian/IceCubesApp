@@ -453,6 +453,7 @@
 "status.error.loading.message" = "Er heeft zich een fout voorgedaan tijdens het laden van je posts. Probeer het nogmaals.";
 "status.error.message" = "Er heeft zich een fout voorgedaan. Probeer het nogmaals.";
 "status.error.title" = "Er heeft zich een fout voorgedaan";
+"status.error.posting.title" = "Error while posting";
 "status.filter.filtered-by-%@" = "Gefilterd op: %@";
 "status.filter.show-anyway" = "Laat toch zien";
 "status.image.alt-text.abbreviation" = "ALT";
