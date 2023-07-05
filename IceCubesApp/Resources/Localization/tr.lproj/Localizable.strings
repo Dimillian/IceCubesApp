@@ -455,6 +455,7 @@
 "status.error.loading.message" = "Gönderi yüklenirken bir hata oluştu, lütfen tekrar deneyin.";
 "status.error.message" = "Bu gönderi bağlamında bir hata oluştu, lütfen tekrar deneyin.";
 "status.error.title" = "Bir hata oluştu";
+"status.error.posting.title" = "Error while posting";
 "status.filter.filtered-by-%@" = "Tarafından filtrelendi: %@";
 "status.filter.show-anyway" = "Yine de göster";
 "status.image.alt-text.abbreviation" = "ALT";

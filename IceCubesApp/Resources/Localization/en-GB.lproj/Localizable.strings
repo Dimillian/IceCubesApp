@@ -459,6 +459,7 @@
 "status.error.loading.message" = "An error occurred while loading posts, please try again.";
 "status.error.message" = "An error occurred in the context of this post, please try again.";
 "status.error.title" = "An error occurred";
+"status.error.posting.title" = "Error while posting";
 "status.filter.filtered-by-%@" = "Filtered by: %@";
 "status.filter.show-anyway" = "Show anyway";
 "status.image.alt-text.abbreviation" = "ALT";

@@ -96,10 +96,10 @@ public struct StatusEditorView: View {
       .background(theme.primaryBackgroundColor)
       .navigationTitle(viewModel.mode.title)
       .navigationBarTitleDisplayMode(.inline)
-      .alert("Error while posting",
+      .alert("status.error.posting.title",
              isPresented: $viewModel.showPostingErrorAlert,
              actions: {
-               Button("Ok") {}
+               Button("OK") {}
              }, message: {
                Text(viewModel.postingError ?? "")
              })

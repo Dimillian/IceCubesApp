@@ -459,6 +459,7 @@
 "status.error.loading.message" = "Det oppsto en feil under innlasting av innlegg, prøv igjen.";
 "status.error.message" = "Det oppsto en feil i forbindelse med dette innlegget, prøv igjen.";
 "status.error.title" = "En feil oppstod";
+"status.error.posting.title" = "Error while posting";
 "status.filter.filtered-by-%@" = "Filtrert etter: %@";
 "status.filter.show-anyway" = "Vis uansett";
 "status.image.alt-text.abbreviation" = "ALT";
