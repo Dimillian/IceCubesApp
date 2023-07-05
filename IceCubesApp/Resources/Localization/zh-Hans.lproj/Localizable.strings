@@ -452,9 +452,9 @@
 "status.editor.spoiler" = "剧透警告";
 "status.editor.text.placeholder" = "在想些什么呢？";
 "status.editor.visibility" = "嘟文可见性";
-"status.editor.photo-library" = "Photos Library";
-"status.editor.camera-picker" = "Take Photo";
-"status.editor.browse-file" = "Browse Files";
+"status.editor.photo-library" = "照片图库";
+"status.editor.camera-picker" = "拍照";
+"status.editor.browse-file" = "选取文件";
 "status.error.loading.message" = "加载嘟文时发生错误，请重试。";
 "status.error.message" = "嘟文的上下文出现了错误，请重试。";
 "status.error.title" = "发生了一个错误";
