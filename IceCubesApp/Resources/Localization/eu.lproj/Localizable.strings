@@ -453,7 +453,7 @@
 "status.error.loading.message" = "Errorea bidalketak kargatzean; saiatu berriro.";
 "status.error.message" = "Errorea bidalketa honen testuinguruan; saiatu berriro.";
 "status.error.title" = "Errorea gertatu da";
-"status.error.posting.title" = "Error while posting";
+"status.error.posting.title" = "Errorea argitaratzean";
 "status.filter.filtered-by-%@" = "Iragazkia: %@";
 "status.filter.show-anyway" = "Erakutsi edonola ere";
 "status.image.alt-text.abbreviation" = "ALT";
