@@ -24,24 +24,24 @@
 "enum.avatar-position.top" = "Topp";
 "enum.avatar-shape.circle" = "Sirkel";
 "enum.avatar-shape.rounded" = "Avrundet";
-"enum.durations.infinite" = "infinite";
-"enum.durations.custom" = "custom";
-"enum.durations.fiveMinutes" = "5 minutes";
-"enum.durations.thirtyMinutes" = "30 minutes";
-"enum.durations.oneHour" = "1 hour";
-"enum.durations.sixHours" = "6 hours";
-"enum.durations.twelveHours" = "12 hours";
-"enum.durations.oneDay" = "1 day";
-"enum.durations.threeDays" = "3 days";
-"enum.durations.sevenDays" = "7 days";
+"enum.durations.infinite" = "uendelig";
+"enum.durations.custom" = "tilpasset";
+"enum.durations.fiveMinutes" = "5 minutter";
+"enum.durations.thirtyMinutes" = "30 minutter";
+"enum.durations.oneHour" = "1 time";
+"enum.durations.sixHours" = "6 timer";
+"enum.durations.twelveHours" = "12 timer";
+"enum.durations.oneDay" = "1 dag";
+"enum.durations.threeDays" = "3 dager";
+"enum.durations.sevenDays" = "7 dager";
 "enum.status-actions-display.all" = "Alle";
 "enum.status-actions-display.no-buttons" = "Ingen knapper";
 "enum.status-actions-display.only-buttons" = "Bare knapper";
 "enum.status-display-style.compact" = "Kompakt";
 "enum.status-display-style.large" = "Stor";
 "enum.status-display-style.medium" = "Medium";
-"enum.swipeactions.icon-with-text" = "Icon with text";
-"enum.swipeactions.icon-only" = "Icon only";
+"enum.swipeactions.icon-with-text" = "Ikon med tekst";
+"enum.swipeactions.icon-only" = "Bare ikon";
 
 // MARK: Instances
 "instance.info.domains" = "Domener";
@@ -68,37 +68,37 @@
 "settings.account.add" = "Legg til konto";
 "settings.app.icon" = "Appikon";
 "settings.app.icon.navigation-title" = "Ikon";
-"settings.app.icon.official" = "Official icons";
-"settings.app.icon.designed-by" = "Icons by";
+"settings.app.icon.official" = "Offisielle ikoner";
+"settings.app.icon.designed-by" = "Ikoner av";
 "settings.app.source" = "Kilde (GitHub-lenke)";
 "settings.app.support" = "Støtt denne appen";
-"settings.app.about" = "About";
-"settings.display.example-toot" = "Example Post";
+"settings.app.about" = "Om";
+"settings.display.example-toot" = "Eksempelinnlegg";
 "settings.display.font" = "Tidslinjefont";
 "settings.display.font.system" = "System";
 "settings.display.font.custom" = "Tilpasset";
-"settings.display.font.scaling-%@" = "Font scaling: %@";
-"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
+"settings.display.font.scaling-%@" = "Skriftskalering: %@";
+"settings.display.font.line-spacing-%@" = "Linjeavstand: %@";
 "settings.display.avatar.position" = "Avatarposisjon";
 "settings.display.avatar.shape" = "Avatarform";
-"settings.display.full-username" = "Display full username";
+"settings.display.full-username" = "Vis fullstendig brukernavn";
 "settings.display.navigation-title" = "Visningsinnstillinger";
 "settings.display.restore" = "Gjenopprett standardinnstillinger";
 "settings.display.section.display" = "Visning";
 "settings.display.section.theme" = "Tema";
-"settings.display.colors.apply" = "Apply custom colors";
+"settings.display.colors.apply" = "Bruk egendefinerte farger";
 "settings.display.section.theme.footer" = "Egendefinerte farger kan bare angis hvis «Match system» er deaktivert";
 "settings.display.status.action-buttons" = "Status handlingsknapper";
 "settings.display.status.media-style" = "Status mediestil";
 "settings.display.translate-button" = "Vis oversettelsesknapp";
 "settings.display.theme.background" = "Bakgrunnsfarge";
 "settings.display.theme.secondary-background" = "Sekundær bakgrunnsfarge";
-"settings.display.theme.text-color" = "Text Color";
+"settings.display.theme.text-color" = "Tekstfarge";
 "settings.display.theme.tint" = "Temafarge";
 "settings.display.theme.systemColor" = "Match system";
 "settings.general.browser" = "Nettleser";
 "settings.general.browser.in-app" = "Nettleser i appen";
-"settings.general.browser.in-app.readerview" = "In-App Browser Reader View";
+"settings.general.browser.in-app.readerview" = "Leservisning i appen";
 "settings.general.browser.system" = "Systemnettleser";
 "settings.general.display" = "Visningsinnstillinger";
 "settings.general.instance" = "Instansinformasjon";
@@ -120,14 +120,14 @@
 "settings.content.collapse-long-posts" = "Collapse long posts";
 "settings.content.collapse-long-posts-hint" = "Collapsed posts only display a limited number of lines together with a button to show the full post";
 "settings.content.hide-repeated-boosts" = "Hide repeated boosts";
-"settings.content.instance-settings" = "Server Content Settings";
+"settings.content.instance-settings" = "Innstillinger for serverinnhold";
 "settings.content.use-instance-settings" = "Bruk serverinnstillinger";
 "settings.content.expand-spoilers" = "Vis alltid sensitive innlegg";
 "settings.content.expand-media" = "Medievisning";
 "settings.content.default-sensitive" = "Marker alltid medier som sensitive";
 "settings.content.default-visibility" = "Innleggssynlighet";
 "settings.content.media" = "Media";
-"settings.content.media.show.alt" = "Show ALT texts";
+"settings.content.media.show.alt" = "Vis ALT-tekster";
 "settings.content.reading" = "Lesing";
 "settings.content.posting" = "Innlegg";
 "settings.content.sharing" = "Sharing";
@@ -161,39 +161,39 @@
 "settings.support.supporter.subscription-info"= "Subscription are automatically renewed unless you cancel them a day before the next renewal cycle.";
 "settings.support.restore-purchase.button" = "Restore purchase";
 "settings.support.restore-purchase.explanation" = "Restore your supporter subscription if it hasn't been synced automatically.";
-"settings.support.privacy-policy" = "Privacy Policy";
-"settings.support.terms-of-use" = "Terms";
+"settings.support.privacy-policy" = "Personvernerklæring";
+"settings.support.terms-of-use" = "Vilkår";
 "settings.timeline.add" = "Legg til en lokal tidslinje";
 "settings.title" = "Innstillinger";
 "settings.rate" = "Vurder Ice Cubes";
 "settings.section.other" = "Annet";
 "settings.other.hide-openai" = "Aktiver 🤖-hjelper";
 "settings.other.social-keyboard" = "Aktiver sosialt tastatur";
-"settings.other.sound-effect" = "Enable Sound Effects";
-"settings.general.translate" = "Translation Settings";
-"settings.translation.navigation-title" = "Translation";
-"settings.translation.always-deepl" = "Always Translate using DeepL";
-"settings.translation.user-api-key" = "DeepL API Key";
-"settings.translation.api-key-type" = "Type of the Key";
+"settings.other.sound-effect" = "Aktiver lydeffekter";
+"settings.general.translate" = "Oversettelsesinnstillinger";
+"settings.translation.navigation-title" = "Oversettelse";
+"settings.translation.always-deepl" = "Oversett alltid med DeepL";
+"settings.translation.user-api-key" = "DeepL API-nøkkel";
+"settings.translation.api-key-type" = "Type nøkkel";
 "settings.translation.needed-message" = "This feature requires a DeepL API key";
 "settings.push.duplicate.title" = "Reparasjon av dupliserte varslinger";
 "settings.push.duplicate.footer" = "Får du dupliserte varsler? Prøv denne magiske knappen for å fikse det.";
 "settings.push.duplicate.button.fix" = "🪄 Fiks det";
 "settings.other.autoplay-video" = "Spill av videoer automatisk";
-"settings.about.built-with" = "Ice Cubes is built with the following Open Source software:";
+"settings.about.built-with" = "Ice Cubes er bygget med følgende åpen kildekode-programvare:";
 "settings.about.title" = "Ice Cubes";
 "settings.account.cached-posts-%@" = "Cached posts: %@";
 "settings.account.action.delete-cache" = "Clear cache";
 
-"settings.general.haptic" = "Haptic Feedback";
-"settings.haptic.navigation-title" = "Haptic Settings";
-"settings.haptic.timeline" = "Timeline";
+"settings.general.haptic" = "Haptisk tilbakemelding";
+"settings.haptic.navigation-title" = "Haptiske innstillinger";
+"settings.haptic.timeline" = "Tidslinje";
 "settings.haptic.tab-selection" = "Tab Selection";
 "settings.haptic.buttons" = "Button Press";
 
 "settings.display.show-tab-label" = "Show tab name";
 
-"settings.display.show-ipad-column" = "Enable secondary column";
+"settings.display.show-ipad-column" = "Aktiver sekundær kolonne";
 
 "settings.general.swipeactions" = "Swipe Actions";
 "settings.swipeactions.navigation-title" = "Swipe Actions";
@@ -216,8 +216,8 @@
 
 "settings.display.section.font" = "Font";
 
-"settings.section.cache" = "Cache";
-"settings.cache-media.clear" = "Clear Media Cache";
+"settings.section.cache" = "Hurtigbuffer";
+"settings.cache-media.clear" = "Tøm mediebuffer";
 
 // MARK: Tabs
 "tab.explore" = "Utforsk";
@@ -277,7 +277,7 @@
 "account.edit.metadata-section-title" = "Profile Metadata";
 "account.edit.metadata-name-placeholder" = "Label";
 "account.edit.metadata-value-placeholder" = "Content";
-"account.edit.add-metadata-button" = "Add a new metadata";
+"account.edit.add-metadata-button" = "Legg til nye metadata";
 
 "account.favorited-by" = "Favoritt av";
 "account.follow.follow" = "Følg";
@@ -299,18 +299,18 @@
 "account.relation.follows-you" = "Følger deg";
 "account.joined" = "Ble med";
 "account.action.logout" = "Logg ut konto";
-"account.action.more" = "More Settings";
+"account.action.more" = "Flere innstillinger";
 
-"account.relation.note.edit" = "Edit Note";
-"account.relation.note.edit.placeholder" = "Enter Note text";
+"account.relation.note.edit" = "Rediger notat";
+"account.relation.note.edit.placeholder" = "Skriv inn notattekst";
 "account.relation.note.edit.error.save.message" = "Error while saving your note, please try again.";
 "account.relation.note.edit.error.save.title" = "Error while saving your note";
-"account.relation.note.label" = "Note:";
+"account.relation.note.label" = "Notat:";
 
 // MARK: Package: Conversations
 "conversations.action.delete" = "Slett";
 "conversations.action.mark-read" = "Merk som lest";
-"conversations.action.view-detail" = "View detail";
+"conversations.action.view-detail" = "Vis detaljer";
 "conversations.empty.message" = "Leter du etter kjærlighet til sosiale medier? Du finner alle dine direktemeldinger og private omtaler her. God melding! 📱❤️";
 "conversations.empty.title" = "Innboks null";
 "conversations.error.button" = "Prøv på nytt";
@@ -318,7 +318,7 @@
 "conversations.error.title" = "En feil oppstod";
 "conversations.navigation-title" = "Direktemeldinger";
 "conversations.new.message.placeholder" = "Ny melding";
-"conversations.latest.message" = "Latest Message";
+"conversations.latest.message" = "Siste melding";
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld innlegg fra %lld deltakere";
