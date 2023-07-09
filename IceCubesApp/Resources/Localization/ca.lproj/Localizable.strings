@@ -233,6 +233,7 @@
 "timeline.%--is-valid" = "% és una instància vàlida";
 "timeline.add-remote.title" = "Afegeix una línia de temps local externa";
 "timeline.add.action.add" = "Afegeix";
+"timeline.add.action.tips" = "Afegeix correctament";
 "timeline.filter.add-local" = "Afegeix una línia de temps local";
 "timeline.filter.lists" = "Llistes";
 "timeline.filter.local" = "Línies de temps locals";

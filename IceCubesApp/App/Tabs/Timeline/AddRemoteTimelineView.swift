@@ -16,6 +16,10 @@ struct AddRemoteTimelineView: View {
   @State private var instanceName: String = ""
   @State private var instance: Instance?
   @State private var instances: [InstanceSocial] = []
+  
+  @State private var addButtonEnable: Bool = false
+  @State private var showProgressView: Bool = false
+  @State private var showToast: Bool = false
 
   private let instanceNamePublisher = PassthroughSubject<String, Never>()
 
@@ -36,15 +40,22 @@ struct AddRemoteTimelineView: View {
             .foregroundColor(.green)
             .listRowBackground(theme.primaryBackgroundColor)
         }
-        Button {
-          guard instance != nil else { return }
-          preferences.remoteLocalTimelines.append(instanceName)
-          dismiss()
-        } label: {
-          Text("timeline.add.action.add")
+        HStack {
+          Button {
+            guard instance != nil else { return }
+            preferences.remoteLocalTimelines.append(instanceName)
+            buttonTappedState()
+          } label: {
+            Text("timeline.add.action.add")
+          }
+          .listRowBackground(theme.primaryBackgroundColor)
+          .disabled(!addButtonEnable)
+          if showProgressView && !instanceName.isEmpty {
+            ProgressView()
+              .scaleEffect(1.0)
+              .padding(.horizontal, 10)
+          }
         }
-        .listRowBackground(theme.primaryBackgroundColor)
-
         instancesListView
       }
       .formStyle(.grouped)
@@ -59,12 +70,20 @@ struct AddRemoteTimelineView: View {
         }
       }
       .onChange(of: instanceName) { newValue in
+        let newValue = newValue.trimmingCharacters(in: .whitespaces)
+        formChangedState()
         instanceNamePublisher.send(newValue)
       }
       .onReceive(instanceNamePublisher.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)) { newValue in
         Task {
-          let client = Client(server: newValue)
-          instance = try? await client.get(endpoint: Instances.instance)
+          if newValue.isEmpty {
+            instance = nil
+          } else {
+            let client = Client(server: newValue)
+            instance = try? await client.get(endpoint: Instances.instance)
+          }
+          showProgressView = false
+          addButtonEnable = (instance != nil) ? true : false
         }
       }
       .onAppear {
@@ -75,6 +94,7 @@ struct AddRemoteTimelineView: View {
         }
       }
     }
+    .toast(isShow: $showToast, info: "timeline.add.action.tips")
   }
 
   private var instancesListView: some View {
@@ -83,6 +103,7 @@ struct AddRemoteTimelineView: View {
         ProgressView()
           .listRowBackground(theme.primaryBackgroundColor)
       } else {
+        let instanceName = instanceName.trimmingCharacters(in: .whitespaces)
         ForEach(instanceName.isEmpty ? instances : instances.filter { $0.name.contains(instanceName.lowercased()) }) { instance in
           Button {
             self.instanceName = instance.name
@@ -102,8 +123,73 @@ struct AddRemoteTimelineView: View {
                 .foregroundColor(.gray)
             }
           }
-          .listRowBackground(theme.primaryBackgroundColor)
         }
+      }
+    }
+  }
+  
+  private func formChangedState() {
+    showProgressView = true
+    addButtonEnable = false
+  }
+  
+  private func buttonTappedState() {
+    instanceName = ""
+    instance = nil
+    addButtonEnable = false
+    showProgressView = false
+    showToast = true
+  }
+  
+  struct TWToastView: View {
+    @Binding var isShow: Bool
+    let info: LocalizedStringKey
+    @State private var isShowAnimation: Bool = true
+    @State private var duration : Double
+    
+    init(isShow: Binding<Bool>, info: LocalizedStringKey, duration: Double = 1.0) {
+      self._isShow = isShow
+      self.info = info
+      self.duration = duration
+    }
+    
+    var body: some View {
+      ZStack {
+        Text(info)
+          .font(.system(size: 12.0))
+          .foregroundColor(.white)
+          .frame(alignment: Alignment.center)
+          .padding(10)
+          .zIndex(1.0)
+          .background(
+            RoundedRectangle(cornerRadius: 12)
+              .foregroundColor(.black)
+              .opacity(0.6)
+          )
+      }
+      .onAppear() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+          isShowAnimation = false
+        }
+      }
+      .frame(alignment: .bottom)
+      .opacity(isShowAnimation ? 1 : 0)
+      .edgesIgnoringSafeArea(.all)
+      .onChange(of: isShowAnimation) { e in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+          self.isShow = false
+        }
+      }
+    }
+  }
+}
+
+extension View {
+  func toast(isShow: Binding<Bool>, info: String = "", _duration: Double = 1.0) -> some View {
+    ZStack(alignment: .bottom) {
+      self
+      if isShow.wrappedValue {
+        AddRemoteTimelineView.TWToastView(isShow:isShow, info: LocalizedStringKey(info), duration: _duration)
       }
     }
   }

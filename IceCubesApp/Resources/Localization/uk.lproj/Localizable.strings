@@ -235,6 +235,7 @@
 "timeline.%@-is-valid" = "%@ коректний сервер";
 "timeline.add-remote.title" = "Додати віддалену локальну стручку";
 "timeline.add.action.add" = "Додати";
+"timeline.add.action.tips" = "Успішно додано";
 "timeline.filter.add-local" = "Додати локальну стрічку";
 "timeline.filter.lists" = "Списки";
 "timeline.filter.local" = "Локальна стрічка";

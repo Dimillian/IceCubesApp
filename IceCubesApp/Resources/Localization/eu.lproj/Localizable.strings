@@ -235,6 +235,7 @@
 "timeline.%@-is-valid" = "%@ baliozko instantzia da";
 "timeline.add-remote.title" = "Gehitu denbora-lerro lokal bat";
 "timeline.add.action.add" = "Gehitu";
+"timeline.add.action.tips" = "Gehitu behar bezala";
 "timeline.add.url" = "Instantziaren URLa";
 "timeline.filter.add-local" = "Gehitu denbora-lerro lokal bat";
 "timeline.filter.lists" = "Zerrendak";

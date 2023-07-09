@@ -234,6 +234,7 @@
 "timeline.%@-is-valid" = "%@ é uma instância válida";
 "timeline.add-remote.title" = "Adicionar timeline local remota";
 "timeline.add.action.add" = "Adicionar";
+"timeline.add.action.tips" = "Adicionar com sucesso";
 "timeline.filter.add-local" = "Adicionar uma timeline local";
 "timeline.filter.lists" = "Listas";
 "timeline.filter.local" = "Timelines Locais";

@@ -234,6 +234,7 @@
 "timeline.%@-is-valid" = "%@ geçerli bir oluşum";
 "timeline.add-remote.title" = "Uzak yerel zaman dilimi ekleyin";
 "timeline.add.action.add" = "Ekle";
+"timeline.add.action.tips" = "Başarıyla Ekle";
 "timeline.filter.add-local" = "Zaman Dilimi Ekleyin";
 "timeline.filter.lists" = "Listeler";
 "timeline.filter.local" = "Yerel Zaman Dilimleri";

@@ -239,6 +239,7 @@
 "timeline.%@-is-valid" = "%@ сапраўдны асобнік";
 "timeline.add-remote.title" = "Дадайце аддаленую мясцовую шкалу часу";
 "timeline.add.action.add" = "Дадаць";
+"timeline.add.action.tips" = "Паспяхова дададзена";
 "timeline.filter.add-local" = "Дадайце мясцовую часовую шкалу";
 "timeline.filter.lists" = "Спісы";
 "timeline.filter.local" = "Мясцовыя шкалы часу";

@@ -235,6 +235,7 @@
 "timeline.%@-is-valid" = "%@ es una instancia válida";
 "timeline.add-remote.title" = "Añadir cronología local remota";
 "timeline.add.action.add" = "Añadir";
+"timeline.add.action.tips" = "Agregar con éxito";
 "timeline.filter.add-local" = "Añadir cronología local";
 "timeline.filter.lists" = "Listas";
 "timeline.filter.local" = "Cronologías locales";

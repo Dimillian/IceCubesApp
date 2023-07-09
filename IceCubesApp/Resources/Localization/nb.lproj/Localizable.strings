@@ -234,6 +234,7 @@
 "timeline.%@-is-valid" = "%@ er en gyldig instans";
 "timeline.add-remote.title" = "Legg til ekstern lokal tidslinje";
 "timeline.add.action.add" = "Legg til";
+"timeline.add.action.tips" = "Legg til";
 "timeline.filter.add-local" = "Legg til en lokal tidslinje";
 "timeline.filter.lists" = "Lister";
 "timeline.filter.local" = "Lokale tidslinjer";

@@ -237,6 +237,7 @@
 "timeline.%@-is-valid" = "%@ is a valid instance";
 "timeline.add-remote.title" = "Add remote local timeline";
 "timeline.add.action.add" = "Add";
+"timeline.add.action.tips" = "Add Successfully";
 "timeline.filter.add-local" = "Add a local timeline";
 "timeline.filter.lists" = "Lists";
 "timeline.filter.local" = "Local Timelines";

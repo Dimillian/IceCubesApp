@@ -231,6 +231,7 @@
 "timeline.%@-is-valid" = "%@ is een geldige instantie";
 "timeline.add-remote.title" = "Lokale tijdlijn toevoegen";
 "timeline.add.action.add" = "Voeg toe";
+"timeline.add.action.tips" = "Succesvol toevoegen";
 "timeline.filter.add-local" = "Lokale tijdlijn toevoegen";
 "timeline.filter.lists" = "Lijsten";
 "timeline.filter.local" = "Lokale tijdlijnen";

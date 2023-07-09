@@ -236,6 +236,7 @@
 "timeline.%@-is-valid" = "%@ 有效";
 "timeline.add-remote.title" = "新增他站時間軸";
 "timeline.add.action.add" = "新增";
+"timeline.add.action.tips" = "新增成功";
 "timeline.filter.add-local" = "新增本站時間軸";
 "timeline.filter.lists" = "列表";
 "timeline.filter.local" = "本站時間軸";

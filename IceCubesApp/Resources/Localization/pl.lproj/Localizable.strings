@@ -234,6 +234,7 @@
 "timeline.%@-is-valid" = "%@ jest poprawnym serwerem";
 "timeline.add-remote.title" = "Dodaj strumień serwera";
 "timeline.add.action.add" = "Dodaj";
+"timeline.add.action.tips" = "Dodaj pomyślnie";
 "timeline.filter.add-local" = "Dodaj strumień lokalny";
 "timeline.filter.lists" = "Listy";
 "timeline.filter.local" = "Strumienie lokalne";

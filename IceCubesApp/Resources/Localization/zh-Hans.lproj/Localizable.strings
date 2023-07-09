@@ -232,6 +232,7 @@
 "timeline.%@-is-valid" = "%@ 是一个可用的服务器";
 "timeline.add-remote.title" = "添加远程时间线";
 "timeline.add.action.add" = "添加";
+"timeline.add.action.tips" = "添加成功";
 "timeline.filter.add-local" = "添加远程时间线";
 "timeline.filter.lists" = "列表";
 "timeline.filter.local" = "远程时间线";

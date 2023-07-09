@@ -234,6 +234,7 @@
 "timeline.%@-is-valid" = "%@ est une instance valide";
 "timeline.add-remote.title" = "Ajouter une chronologie locale distante";
 "timeline.add.action.add" = "Ajouter";
+"timeline.add.action.tips" = "Ajouter avec succès";
 "timeline.filter.add-local" = "Ajouter une chronologie locale";
 "timeline.filter.lists" = "Listes";
 "timeline.filter.local" = "Chronologies locales";

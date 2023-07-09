@@ -235,6 +235,7 @@
 "timeline.%@-is-valid" = "%@ ist eine gültige Instanz";
 "timeline.add-remote.title" = "Andere lokale Timeline hinzufügen";
 "timeline.add.action.add" = "Hinzufügen";
+"timeline.add.action.tips" = "Erfolgreich hinzufügen";
 "timeline.add.url" = "Instanz-URL";
 "timeline.filter.add-local" = "Lokale Timeline hinzufügen";
 "timeline.filter.lists" = "Listen";

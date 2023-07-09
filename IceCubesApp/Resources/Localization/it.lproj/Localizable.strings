@@ -233,6 +233,7 @@
 "timeline.%@-is-valid" = "%@ è un'istanza valida";
 "timeline.add-remote.title" = "Aggiungi una timeline remota come locale";
 "timeline.add.action.add" = "Aggiungi";
+"timeline.add.action.tips" = "Erfolgreich hinzufügen";
 "timeline.filter.add-local" = "Aggiungi una timeline locale";
 "timeline.filter.lists" = "Liste";
 "timeline.filter.local" = "Timeline locali";

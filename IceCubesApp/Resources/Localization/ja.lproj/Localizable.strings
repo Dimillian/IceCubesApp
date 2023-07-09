@@ -234,6 +234,7 @@
 "timeline.%@-is-valid" = "%@ は有効なインスタンスです";
 "timeline.add-remote.title" = "リモートローカルタイムラインの追加";
 "timeline.add.action.add" = "追加";
+"timeline.add.action.tips" = "正常に追加されました";
 "timeline.filter.add-local" = "ローカルタイムラインの追加";
 "timeline.filter.lists" = "リスト";
 "timeline.filter.local" = "ローカルタイムライン";
