@@ -456,7 +456,7 @@
 "status.error.loading.message" = "Wystąpił błąd podczas ładowania postów, spróbuj ponownie.";
 "status.error.message" = "Wystąpił błąd dotyczący tego postu, proszę spróbuj ponownie.";
 "status.error.title" = "Wystąpił błąd";
-"status.error.posting.title" = "Error while posting";
+"status.error.posting.title" = "Błąd podczas publikowania";
 "status.filter.filtered-by-%@" = "Filtrowany przez: %@";
 "status.filter.show-anyway" = "Pokaż mimo wszystko";
 "status.image.alt-text.abbreviation" = "ALT";
