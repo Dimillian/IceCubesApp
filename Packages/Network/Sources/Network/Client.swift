@@ -92,7 +92,13 @@ public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
   {
     var components = URLComponents()
     components.scheme = scheme
-    components.host = forceServer ?? server
+    if server.contains(":"){
+      let serverPort = server.components(separatedBy: ":")
+      components.host = forceServer ?? serverPort[0]
+      components.port = Int(serverPort[1])
+    }else{
+      components.host = forceServer ?? server
+    }
     if type(of: endpoint) == Oauth.self {
       components.path += "/\(endpoint.path())"
     } else {
