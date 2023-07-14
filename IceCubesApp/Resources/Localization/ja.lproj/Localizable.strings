@@ -131,9 +131,9 @@
 "settings.content.reading" = "リーディング";
 "settings.content.posting" = "ポスティング";
 "settings.content.sharing" = "Sharing";
-"settings.content.sharing.share-button-behavior" = "Share Button Behavior";
-"settings.content.sharing.share-behavior.link-only" = "Link Only";
-"settings.content.sharing.share-behavior.link-and-text" = "Link and Text";
+"settings.content.sharing.share-button-behavior" = "共有ボタンの動作";
+"settings.content.sharing.share-behavior.link-only" = "リンクのみ";
+"settings.content.sharing.share-behavior.link-and-text" = "リンクとテキスト";
 "enum.expand-media.show" = "全て表示";
 "enum.expand-media.hide" = "全て隠す";
 "enum.expand-media.hide-sensitive" = "センシティブなものは隠す";
@@ -581,7 +581,7 @@
 "accessibility.media.supported-type.audio.label" = "オーディオ";
 "accessibility.status.contains-media.label-%@" = "%@ を含む";
 "accessibility.status.application.label" = "アプリ";
-"accessibility.status.media-viewer-action.label" = "Open media viewer";
+"accessibility.status.media-viewer-action.label" = "メディア ビューアを開く";
 
 // MARK: Report
 "report.comment.placeholder" = "追加情報";
