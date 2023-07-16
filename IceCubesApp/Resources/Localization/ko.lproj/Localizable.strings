@@ -15,7 +15,7 @@
 "see-more" = "더 보기";
 
 // MARK: Add Account
-"account.add.error.instance-not-supported" = "이 인스턴스는 현재 지원되지 않습니다.";
+"account.add.error.instance-not-supported" = "이 서버는 현재 지원되지 않습니다.";
 "account.add.navigation-title" = "계정 추가";
 "account.add.sign-in" = "로그인";
 
@@ -47,16 +47,16 @@
 "instance.info.domains" = "도메인";
 "instance.info.email" = "이메일";
 "instance.info.name" = "이름";
-"instance.info.navigation-title" = "인스턴스 정보";
+"instance.info.navigation-title" = "서버 정보";
 "instance.info.posts" = "글";
-"instance.info.section.info" = "인스턴스 정보";
-"instance.info.section.rules" = "인스턴스 규칙";
+"instance.info.section.info" = "서버 정보";
+"instance.info.section.rules" = "서버 규칙";
 "instance.info.users" = "사용자";
 "instance.info.version" = "버전";
 "instance.list.posts-%@" = "글 %@개";
 "instance.list.users-%@" = "사용자 %@명";
 "instance.suggestions" = "추천";
-"instance.url" = "인스턴스 URL";
+"instance.url" = "서버 URL";
 
 // MARK: Menu
 "menu.new-post" = "새 글";
@@ -76,8 +76,8 @@
 "settings.display.example-toot" = "글 미리 보기";
 "settings.display.avatar.position" = "프로필 사진 위치";
 "settings.display.avatar.shape" = "프로필 사진 모양";
-"settings.display.full-username" = "아이디에 인스턴스 URL 표시";
-"settings.display.navigation-title" = "화면 설정";
+"settings.display.full-username" = "아이디에 서버 URL 표시";
+"settings.display.navigation-title" = "화면";
 "settings.display.restore" = "처음 설정으로 되돌리기";
 "settings.display.section.display" = "화면";
 "settings.display.section.theme" = "테마";
@@ -95,8 +95,8 @@
 "settings.general.browser.in-app" = "인앱 브라우저";
 "settings.general.browser.in-app.readerview" = "인앱 브라우저에서 항상 읽기 도구 사용";
 "settings.general.browser.system" = "시스템 기본 브라우저";
-"settings.general.display" = "화면 설정";
-"settings.general.instance" = "인스턴스 정보";
+"settings.general.display" = "화면";
+"settings.general.instance" = "서버 정보";
 "settings.general.push-notifications" = "푸시 알림 설정";
 "settings.general.remote-timelines" = "원격 로컬 타임라인";
 "settings.push.boosts" = "부스트";
@@ -108,15 +108,15 @@
 "settings.push.navigation-title" = "푸시 알림 설정";
 "settings.push.new-posts" = "새 글";
 "settings.push.polls" = "투표 결과";
-"settings.general.content" = "콘텐츠 설정";
+"settings.general.content" = "콘텐츠";
 "settings.system" = "시스템 설정";
-"settings.content.navigation-title" = "콘텐츠 설정";
+"settings.content.navigation-title" = "콘텐츠";
 "settings.content.boosts" = "부스트";
 "settings.content.collapse-long-posts" = "긴 글을 접힌 상태로 표시";
 "settings.content.collapse-long-posts-hint" = "접힌 글은 일정 줄까지만 내용이 표시됩니다. 함께 표시되는 버튼을 누르면 전체 내용을 볼 수 있습니다.";
 "settings.content.hide-repeated-boosts" = "중복으로 부스트된 글 숨김";
-"settings.content.instance-settings" = "인스턴스 콘텐츠 설정";
-"settings.content.use-instance-settings" = "인스턴스 설정에 맞춤";
+"settings.content.instance-settings" = "서버 콘텐츠 설정";
+"settings.content.use-instance-settings" = "서버에서 설정한 대로 맞춤";
 "settings.content.expand-spoilers" = "열람 주의 표시된 글 항상 가리지 않음";
 "settings.content.expand-media" = "표시할 미디어";
 "settings.content.default-sensitive" = "내 미디어 항상 민감함으로 표시";
@@ -159,14 +159,14 @@
 "settings.support.privacy-policy" = "개인정보 처리방침";
 "settings.support.terms-of-use" = "이용 약관";
 "settings.timeline.add" = "원격 로컬 타임라인 추가";
-"settings.title" = "설정";
+"settings.title" = "앱 설정";
 "settings.rate" = "Ice Cubes 평가 남기기";
 "settings.section.other" = "기타";
-"settings.other.hide-openai" = "글 작성 도우미 🤖";
-"settings.other.social-keyboard" = "SNS 키보드";
+"settings.other.hide-openai" = "AI 글 작성 도우미 🤖";
+"settings.other.social-keyboard" = "키보드에 @, # 키 표시";
 "settings.other.sound-effect" = "효과음";
-"settings.general.translate" = "번역 설정";
-"settings.translation.navigation-title" = "번역 설정";
+"settings.general.translate" = "번역";
+"settings.translation.navigation-title" = "번역";
 "settings.translation.always-deepl" = "항상 DeepL을 통해 번역";
 "settings.translation.user-api-key" = "DeepL API 키";
 "settings.translation.api-key-type" = "API 키 종류";
@@ -185,8 +185,8 @@
 "settings.account.cached-posts-%@" = "캐시 데이터로 저장된 글: %@개";
 "settings.account.action.delete-cache" = "캐시 데이터 지우기";
 
-"settings.general.haptic" = "햅틱 피드백 설정";
-"settings.haptic.navigation-title" = "햅틱 피드백 설정";
+"settings.general.haptic" = "햅틱 피드백";
+"settings.haptic.navigation-title" = "햅틱 피드백";
 "settings.haptic.timeline" = "타임라인에서";
 "settings.haptic.tab-selection" = "하단 탭 바를 누를 때";
 "settings.haptic.buttons" = "버튼을 누를 때";
@@ -195,8 +195,8 @@
 
 "settings.display.show-ipad-column" = "보조 열 표시";
 
-"settings.general.swipeactions" = "쓸어넘기기 동작 설정";
-"settings.swipeactions.navigation-title" = "쓸어넘기기 동작 설정";
+"settings.general.swipeactions" = "쓸어넘기기 동작";
+"settings.swipeactions.navigation-title" = "쓸어넘기기 동작";
 "settings.swipeactions.primary" = "주 동작";
 "settings.swipeactions.secondary" = "보조 동작";
 "settings.swipeactions.status.action.bookmark" = "보관함에 추가";
@@ -225,13 +225,13 @@
 "tab.local" = "로컬";
 "tab.messages" = "메시지";
 "tab.notifications" = "알림";
-"tab.settings" = "설정";
+"tab.settings" = "앱 설정";
 "tab.timeline" = "타임라인";
 "tab.trending" = "뜨고 있는";
 "tab.profile" = "프로필";
 
 // MARK: Timeline
-"timeline.%@-is-valid" = "%@ 인스턴스는 사용할 수 있는 인스턴스입니다.";
+"timeline.%@-is-valid" = "%@ 서버를 추가할 수 있습니다.";
 "timeline.add-remote.title" = "원격 로컬 타임라인 추가";
 "timeline.add.action.add" = "추가";
 "timeline.filter.add-local" = "원격 로컬 타임라인 추가";
@@ -329,9 +329,9 @@
 
 // MARK: Package: Explore
 "explore.navigation-title" = "둘러보기";
-"explore.search.message-%@" = "이 화면에서 내 인스턴스(%@)에 있는 무엇이든 검색해볼 수 있습니다.";
+"explore.search.message-%@" = "여기에서 %@ 서버와 연결된 무엇이든 검색해볼 수 있습니다.";
 "explore.search.prompt" = "사용자, 글, 태그 검색";
-"explore.search.title" = "인스턴스를 탐색해보세요";
+"explore.search.title" = "서버를 탐색해보세요";
 "explore.search.empty.message" = "검색어에 대한 결과가 없습니다. 다른 검색어로 시도해주세요.";
 "explore.search.empty.title" = "검색 결과 없음";
 "explore.section.posts" = "글";
@@ -395,7 +395,7 @@
 "timeline.local" = "로컬";
 "timeline.n-recent-from-n-participants %lld %lld" = "%lld개 최근 글 (%lld명이 이야기 중)";
 "timeline.trending" = "뜨고 있는";
-"timeline.add.url" = "인스턴스 URL";
+"timeline.add.url" = "서버 URL";
 
 // MARK: Package: Status
 "status.action.translate" = "번역";
@@ -529,7 +529,7 @@
 "accessibility.editor.button.drafts" = "임시 보관함";
 "accessibility.editor.button.custom-emojis" = "커스텀 이모지";
 "accessibility.editor.button.language" = "글 언어 지정";
-"accessibility.editor.button.ai-prompt" = "글 작성 도우미";
+"accessibility.editor.button.ai-prompt" = "AI 글 작성 도우미";
 "accessibility.editor.button.characters-remaining" = "더 작성할 수 있는 글자 수";
 "accessibility.editor.privacy.label" = "글 공개 범위";
 "accessibility.editor.privacy.hint" = "글을 볼 수 있는 대상을 변경합니다.";
@@ -544,7 +544,7 @@
 "accessibility.app-account.selector.accounts" = "계정";
 "accessibility.app-account.selector.accounts.hint" = "옵션 창을 엽니다.";
 "accessibility.tabs.profile.options.label" = "옵션";
-"accessibility.tabs.profile.options.inputLabel1" = "설정";
+"accessibility.tabs.profile.options.inputLabel1" = "앱 설정";
 "accessibility.tabs.profile.options.inputLabel2" = "더 보기";
 "accessibility.tabs.profile.user-avatar.label" = "프로필 사진";
 "accessibility.tabs.profile.user-avatar.hint" = "더 큰 버전을 표시합니다.";
