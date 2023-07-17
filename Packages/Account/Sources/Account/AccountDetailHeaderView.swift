@@ -324,8 +324,9 @@ struct AccountDetailHeaderView: View {
         ForEach(viewModel.fields) { field in
           HStack {
             VStack(alignment: .leading, spacing: 2) {
-              Text(field.name)
-                .font(.scaledHeadline)
+              EmojiTextApp(.init(stringValue: field.name), emojis: viewModel.account?.emojis ?? [])
+                .emojiSize(Font.scaledHeadlineFont.emojiSize)
+                .emojiBaselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
               HStack {
                 if field.verifiedAt != nil {
                   Image(systemName: "checkmark.seal")
