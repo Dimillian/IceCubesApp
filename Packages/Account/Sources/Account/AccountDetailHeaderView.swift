@@ -327,6 +327,7 @@ struct AccountDetailHeaderView: View {
               EmojiTextApp(.init(stringValue: field.name), emojis: viewModel.account?.emojis ?? [])
                 .emojiSize(Font.scaledHeadlineFont.emojiSize)
                 .emojiBaselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
+                .font(.scaledHeadline)
               HStack {
                 if field.verifiedAt != nil {
                   Image(systemName: "checkmark.seal")
