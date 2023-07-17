@@ -173,6 +173,8 @@
 "settings.general.translate" = "Налаштування перекладу";
 "settings.translation.navigation-title" = "Переклад";
 "settings.translation.always-deepl" = "Завжди перекладати за допомогою DeepL";
+"settings.translation.auto-detect-post-language" = "Auto detect language";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary.";
 "settings.translation.user-api-key" = "DeepL API Key";
 "settings.translation.api-key-type" = "Тип ключа";
 "settings.translation.needed-message" = "Ця функція потребує ключа DeepL API key";

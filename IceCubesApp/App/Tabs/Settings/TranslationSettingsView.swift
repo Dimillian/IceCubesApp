@@ -38,6 +38,15 @@ struct TranslationSettingsView: View {
           .listRowBackground(theme.primaryBackgroundColor)
         }
       }
+      
+      Section {
+        Toggle(isOn: preferences.$autoDetectPostLanguage) {
+          Text("settings.translation.auto-detect-post-language")
+        }
+      } footer: {
+        Text("settings.translation.auto-detect-post-language-footer")
+      }
+
     }
     .navigationTitle("settings.translation.navigation-title")
     .scrollContentBackground(.hidden)

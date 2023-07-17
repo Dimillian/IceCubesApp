@@ -173,6 +173,8 @@
 "settings.general.translate" = "翻訳設定";
 "settings.translation.navigation-title" = "翻訳設定";
 "settings.translation.always-deepl" = "DeepLを使用して常に翻訳する";
+"settings.translation.auto-detect-post-language" = "Auto detect language";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary.";
 "settings.translation.user-api-key" = "DeepL APIキー";
 "settings.translation.api-key-type" = "キーのタイプ";
 "settings.translation.needed-message" = "この機能には DeepL APIキーが必要です";

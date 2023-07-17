@@ -144,6 +144,8 @@
 "settings.general.translate" = "Übersetzungseinstellungen";
 "settings.translation.navigation-title" = "Übersetzung";
 "settings.translation.always-deepl" = "Immer mit DeepL übersetzen";
+"settings.translation.auto-detect-post-language" = "Auto detect language";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary.";
 "settings.translation.user-api-key" = "DeepL-API-Schlüssel";
 "settings.translation.api-key-type" = "Typ des Schlüssels";
 "settings.translation.needed-message" = "Für diese Funktion ist ein DeepL-API-Schlüssel erforderlich.";

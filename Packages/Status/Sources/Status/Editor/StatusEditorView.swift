@@ -108,7 +108,7 @@ public struct StatusEditorView: View {
           Button {
             Task {
               viewModel.evaluateLanguages()
-              if let _ = viewModel.languageConfirmationDialogLanguages {
+              if preferences.autoDetectPostLanguage, let _ = viewModel.languageConfirmationDialogLanguages {
                 isLanguageConfirmPresented = true
               } else {
                 await postStatus()

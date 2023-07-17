@@ -144,6 +144,8 @@
 "settings.general.translate" = "Itzulpenaren ezarpenak";
 "settings.translation.navigation-title" = "Itzulpenaren ezarpenak";
 "settings.translation.always-deepl" = "Itzuli beti DeepL erabiliz";
+"settings.translation.auto-detect-post-language" = "Auto detect language";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary.";
 "settings.translation.user-api-key" = "DeepL API gakoa";
 "settings.translation.api-key-type" = "Gako mota";
 "settings.translation.needed-message" = "Ezaugarri honek DeepL API gako bat behar du";
