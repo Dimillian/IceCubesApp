@@ -674,7 +674,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
           }
           do {
             let newAttachement: MediaAttachment = try await client.get(endpoint: Media.media(id: mediaAttachement.id,
-                                                                                             description: nil))
+                                                                                             json: .init(description: nil)))
             if newAttachement.url != nil {
               let oldContainer = mediasImages[index]
               mediasImages[index] = .init(image: oldContainer.image,
@@ -695,7 +695,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
     if let index = indexOf(container: container) {
       do {
         let media: MediaAttachment = try await client.put(endpoint: Media.media(id: attachment.id,
-                                                                                description: description))
+                                                                                json: .init(description: description)))
         mediasImages[index] = .init(image: nil,
                                     movieTransferable: nil,
                                     gifTransferable: nil,
