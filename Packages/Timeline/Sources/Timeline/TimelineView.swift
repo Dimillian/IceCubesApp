@@ -1,6 +1,6 @@
 import DesignSystem
 import Env
-import Introspect
+import SwiftUIIntrospect
 import Models
 import Network
 import Shimmer
@@ -56,7 +56,7 @@ public struct TimelineView: View {
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
         .background(theme.primaryBackgroundColor)
-        .introspect(selector: TargetViewSelector.ancestorOrSiblingContaining) { (collectionView: UICollectionView) in
+        .introspect(.list, on: .iOS(.v16, .v17)) { (collectionView: UICollectionView) in
           self.collectionView = collectionView
           self.prefetcher.viewModel = viewModel
           collectionView.isPrefetchingEnabled = true
