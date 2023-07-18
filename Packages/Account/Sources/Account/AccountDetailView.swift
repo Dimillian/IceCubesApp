@@ -305,7 +305,18 @@ public struct AccountDetailView: View {
 
   @ToolbarContentBuilder
   private var toolbarContent: some ToolbarContent {
-    ToolbarItem(placement: .navigationBarTrailing) {
+    ToolbarItemGroup(placement: .navigationBarTrailing) {
+      if !viewModel.isCurrentUser {
+        Button {
+          if let account = viewModel.account {
+            routerPath.presentedSheet = .mentionStatusEditor(account: account,
+                                                             visibility: preferences.postVisibility)
+          }
+        } label: {
+          Image(systemName: "arrowshape.turn.up.left")
+        }
+      }
+      
       Menu {
         AccountDetailContextMenu(viewModel: viewModel)
 

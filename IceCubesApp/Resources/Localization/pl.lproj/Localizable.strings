@@ -169,6 +169,8 @@
 "settings.general.translate" = "Ustawienia tłumaczenia";
 "settings.translation.navigation-title" = "Ustawienia tłumaczenia";
 "settings.translation.always-deepl" = "Zawsze tłumacz przy pomocy DeepL";
+"settings.translation.auto-detect-post-language" = "Auto detect language";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary.";
 "settings.translation.user-api-key" = "Klucz DeepL API";
 "settings.translation.api-key-type" = "Rodzaj klucza";
 "settings.translation.needed-message" = "Ta funkcja wymaga klucza DeepL API";
@@ -336,6 +338,10 @@
 "explore.section.trending.posts" = "Popularne posty";
 "explore.section.trending.tags" = "Popularne hasztagi";
 "explore.section.users" = "Osoby";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "Jeden głos";
@@ -455,7 +461,7 @@
 "status.error.loading.message" = "Wystąpił błąd podczas ładowania postów, spróbuj ponownie.";
 "status.error.message" = "Wystąpił błąd dotyczący tego postu, proszę spróbuj ponownie.";
 "status.error.title" = "Wystąpił błąd";
-"status.error.posting.title" = "Error while posting";
+"status.error.posting.title" = "Błąd podczas publikowania";
 "status.filter.filtered-by-%@" = "Filtrowany przez: %@";
 "status.filter.show-anyway" = "Pokaż mimo wszystko";
 "status.image.alt-text.abbreviation" = "ALT";

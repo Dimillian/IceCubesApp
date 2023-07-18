@@ -7,7 +7,7 @@ public enum Polls: Endpoint {
   public func path() -> String {
     switch self {
     case let .poll(id):
-      return "polls/\(id)/"
+      return "polls/\(id)"
     case let .vote(id, _):
       return "polls/\(id)/votes"
     }

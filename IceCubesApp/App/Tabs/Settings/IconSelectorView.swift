@@ -25,6 +25,7 @@ struct IconSelectorView: View {
     case alt33
     case alt34, alt35
     case alt36
+    case alt37
 
     var appIconName: String {
       switch self {
@@ -54,6 +55,7 @@ struct IconSelectorView: View {
       IconSelector(title: "\("settings.app.icon.designed-by".localized) Chanhwi Joo (GitHub @te6-in)", icons: [.alt29, .alt34, .alt31, .alt35, .alt30, .alt32]),
       IconSelector(title: "\("settings.app.icon.designed-by".localized) W. Kovács Ágnes (@wildgica)", icons: [.alt33]),
       IconSelector(title: "\("settings.app.icon.designed-by".localized) Duncan Horne", icons: [.alt36]),
+      IconSelector(title: "\("settings.app.icon.designed-by".localized) BeAware@social.beaware.live", icons: [.alt37]),
     ]
   }
 

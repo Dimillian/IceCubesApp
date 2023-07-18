@@ -144,6 +144,8 @@
 "settings.general.translate" = "翻译设置";
 "settings.translation.navigation-title" = "翻译设置";
 "settings.translation.always-deepl" = "总是使用 DeepL 翻译";
+"settings.translation.auto-detect-post-language" = "自动检测语言";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes 会自动检测你将要发布的嘟文的语言，并在必要时建议你更新嘟文语言。";
 "settings.translation.user-api-key" = "DeepL API 密钥";
 "settings.translation.api-key-type" = "密钥类型";
 "settings.translation.needed-message" = "该功能需要 DeepL API 密钥";
@@ -338,6 +340,10 @@
 "explore.section.trending.posts" = "当下流行的嘟文";
 "explore.section.trending.tags" = "当下流行的标签";
 "explore.section.users" = "用户";
+"explore.scope.all" = "全部";
+"explore.scope.people" = "用户";
+"explore.scope.hashtags" = "标签";
+"explore.scope.posts" = "嘟文";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "单个投票";

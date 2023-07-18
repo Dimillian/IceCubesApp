@@ -217,6 +217,8 @@
 "settings.general.translate" = "翻譯設定";
 "settings.translation.navigation-title" = "翻譯設定";
 "settings.translation.always-deepl" = "一概用 DeepL 翻譯";
+"settings.translation.auto-detect-post-language" = "Auto detect language";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary.";
 "settings.translation.user-api-key" = "DeepL API Key";
 "settings.translation.api-key-type" = "Key 類型";
 "settings.translation.needed-message" = "本功能需有 DeepL API key";
@@ -341,6 +343,10 @@
 "explore.section.trending.posts" = "流行嘟文";
 "explore.section.trending.tags" = "流行標籤";
 "explore.section.users" = "用戶";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "單一選擇";

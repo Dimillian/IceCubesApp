@@ -28,6 +28,7 @@ public class UserPreferences: ObservableObject {
   @AppStorage("autoplay_video") public var autoPlayVideo = true
   @AppStorage("always_use_deepl") public var alwaysUseDeepl = false
   @AppStorage("user_deepl_api_free") public var userDeeplAPIFree = true
+  @AppStorage("auto_detect_post_language") public var autoDetectPostLanguage = true
 
   @AppStorage("suppress_dupe_reblogs") public var suppressDupeReblogs: Bool = false
 
