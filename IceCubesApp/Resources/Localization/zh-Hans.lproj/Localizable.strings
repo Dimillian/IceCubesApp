@@ -145,7 +145,7 @@
 "settings.translation.navigation-title" = "翻译设置";
 "settings.translation.always-deepl" = "总是使用 DeepL 翻译";
 "settings.translation.auto-detect-post-language" = "自动检测语言";
-"settings.translation.auto-detect-post-language-footer" = "Ice Cubes 将尝试自动检测你即将发布的嘟文语言，并在必要时建议更新你的嘟文语言。";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes 会自动检测你将要发布的嘟文的语言，并在必要时建议你更新嘟文语言。";
 "settings.translation.user-api-key" = "DeepL API 密钥";
 "settings.translation.api-key-type" = "密钥类型";
 "settings.translation.needed-message" = "该功能需要 DeepL API 密钥";
