@@ -173,6 +173,8 @@
 "settings.general.translate" = "Oversettelsesinnstillinger";
 "settings.translation.navigation-title" = "Oversettelse";
 "settings.translation.always-deepl" = "Oversett alltid med DeepL";
+"settings.translation.auto-detect-post-language" = "Auto detect language";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary.";
 "settings.translation.user-api-key" = "DeepL API-nøkkel";
 "settings.translation.api-key-type" = "Type nøkkel";
 "settings.translation.needed-message" = "Denne funksjonen krever en DeepL API-nøkkel";
@@ -339,6 +341,10 @@
 "explore.section.trending.posts" = "Trendende innlegg";
 "explore.section.trending.tags" = "Trendende tagger";
 "explore.section.users" = "Brukere";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "Én stemme";

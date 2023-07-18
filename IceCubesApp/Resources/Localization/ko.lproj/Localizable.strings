@@ -168,6 +168,8 @@
 "settings.general.translate" = "번역";
 "settings.translation.navigation-title" = "번역";
 "settings.translation.always-deepl" = "항상 DeepL을 통해 번역";
+"settings.translation.auto-detect-post-language" = "Auto detect language";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary.";
 "settings.translation.user-api-key" = "DeepL API 키";
 "settings.translation.api-key-type" = "API 키 종류";
 "settings.translation.needed-message" = "이 기능을 사용하려면 DeepL에서 발급받은 API 키가 있어야 합니다.";
@@ -341,6 +343,10 @@
 "explore.section.trending.posts" = "뜨고 있는 글";
 "explore.section.trending.tags" = "뜨고 있는 태그";
 "explore.section.users" = "사용자";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "하나만 선택 가능";

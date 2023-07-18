@@ -166,6 +166,10 @@ public struct StatusRowMediaPreviewView: View {
               .frame(width: newSize.width, height: newSize.height)
               .clipped()
               .cornerRadius(4)
+              .overlay(
+                RoundedRectangle(cornerRadius: 4)
+                  .stroke(.gray.opacity(0.35), lineWidth: 1)
+              )
           } else {
             RoundedRectangle(cornerRadius: 4)
               .fill(Color.gray)
@@ -224,6 +228,10 @@ public struct StatusRowMediaPreviewView: View {
                     .frame(maxHeight: imageMaxHeight)
                     .clipped()
                     .cornerRadius(4)
+                    .overlay(
+                      RoundedRectangle(cornerRadius: 4)
+                        .stroke(.gray.opacity(0.35), lineWidth: 1)
+                    )
                 } else if state.isLoading {
                   RoundedRectangle(cornerRadius: 4)
                     .fill(Color.gray)
