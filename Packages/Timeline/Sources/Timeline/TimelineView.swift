@@ -59,7 +59,9 @@ public struct TimelineView: View {
         .scrollContentBackground(.hidden)
         .background(theme.primaryBackgroundColor)
         .introspect(.list, on: .iOS(.v16, .v17)) { (collectionView: UICollectionView) in
-          self.collectionView = collectionView
+          DispatchQueue.main.async {
+            self.collectionView = collectionView
+          }
           self.prefetcher.viewModel = viewModel
           collectionView.isPrefetchingEnabled = true
           collectionView.prefetchDataSource = self.prefetcher
