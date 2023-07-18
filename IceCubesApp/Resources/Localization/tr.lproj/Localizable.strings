@@ -337,6 +337,10 @@
 "explore.section.trending.posts" = "Yükselişteki Gönderiler";
 "explore.section.trending.tags" = "Yükselişteki Etiketler";
 "explore.section.users" = "Kullanıcılar";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "Bir oy";

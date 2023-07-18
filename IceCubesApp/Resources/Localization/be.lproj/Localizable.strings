@@ -346,6 +346,10 @@
 "explore.section.trending.posts" = "Трэндавыя допісы";
 "explore.section.trending.tags" = "Трэндавыя тэгі";
 "explore.section.users" = "Карыстальнікі";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "Адзін голас";

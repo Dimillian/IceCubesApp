@@ -341,6 +341,10 @@
 "explore.section.trending.posts" = "Post di tendenza";
 "explore.section.trending.tags" = "Tag di tendenza";
 "explore.section.users" = "Utenti";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "Voto singolo";

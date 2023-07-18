@@ -342,6 +342,10 @@
 "explore.section.trending.posts" = "Publicaciones que son tendencia";
 "explore.section.trending.tags" = "Etiquetas que son tendencia";
 "explore.section.users" = "Usuarios";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "Un voto";

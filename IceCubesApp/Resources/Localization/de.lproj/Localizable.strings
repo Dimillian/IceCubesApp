@@ -341,6 +341,10 @@
 "explore.section.trending.posts" = "Beiträge im Trend";
 "explore.section.trending.tags" = "Hashtags im Trend";
 "explore.section.users" = "Profile";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "Einfache Auswahl";

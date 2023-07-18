@@ -343,6 +343,10 @@
 "explore.section.trending.posts" = "流行嘟文";
 "explore.section.trending.tags" = "流行標籤";
 "explore.section.users" = "用戶";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "單一選擇";

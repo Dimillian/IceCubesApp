@@ -339,6 +339,10 @@
 "explore.section.trending.posts" = "Trending posts";
 "explore.section.trending.tags" = "Trending hashtags";
 "explore.section.users" = "Gebruikers";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "Eén stem";

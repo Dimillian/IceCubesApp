@@ -341,6 +341,10 @@
 "explore.section.trending.posts" = "人気の投稿";
 "explore.section.trending.tags" = "人気のタグ";
 "explore.section.users" = "ユーザー";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "単一投票";

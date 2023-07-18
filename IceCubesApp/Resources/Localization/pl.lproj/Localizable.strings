@@ -338,6 +338,10 @@
 "explore.section.trending.posts" = "Popularne posty";
 "explore.section.trending.tags" = "Popularne hasztagi";
 "explore.section.users" = "Osoby";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "Jeden głos";

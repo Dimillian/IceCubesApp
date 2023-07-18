@@ -341,6 +341,10 @@
 "explore.section.trending.posts" = "Trendende innlegg";
 "explore.section.trending.tags" = "Trendende tagger";
 "explore.section.users" = "Brukere";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "Én stemme";

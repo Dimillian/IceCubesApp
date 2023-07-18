@@ -342,6 +342,10 @@
 "explore.section.trending.posts" = "Trending Posts";
 "explore.section.trending.tags" = "Trending Tags";
 "explore.section.users" = "Users";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "One Vote";

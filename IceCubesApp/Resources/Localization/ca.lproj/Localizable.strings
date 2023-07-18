@@ -340,6 +340,10 @@
 "explore.section.trending.posts" = "Publicacions populars";
 "explore.section.trending.tags" = "Etiquetes populars";
 "explore.section.users" = "Usuaris";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "Vot únic";
