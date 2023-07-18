@@ -39,7 +39,9 @@ public struct TimelineView: View {
     ScrollViewReader { proxy in
       ZStack(alignment: .top) {
         List {
-          if viewModel.tag == nil {
+            if viewModel.tagGroup != nil {
+              tagGroupHeaderView
+          } else if viewModel.tag == nil {
             scrollToTopView
           } else {
             tagHeaderView
@@ -178,40 +180,64 @@ public struct TimelineView: View {
   @ViewBuilder
   private var tagHeaderView: some View {
     if let tag = viewModel.tag {
-      VStack(alignment: .leading) {
-        Spacer()
-        HStack {
-          VStack(alignment: .leading, spacing: 4) {
-            Text("#\(tag.name)")
-              .font(.scaledHeadline)
-            Text("timeline.n-recent-from-n-participants \(tag.totalUses) \(tag.totalAccounts)")
-              .font(.scaledFootnote)
-              .foregroundColor(.gray)
-          }
-          .accessibilityElement(children: .combine)
-          Spacer()
-          Button {
-            Task {
-              if tag.following {
-                viewModel.tag = await account.unfollowTag(id: tag.name)
-              } else {
-                viewModel.tag = await account.followTag(id: tag.name)
+        headerView {
+            HStack {
+              VStack(alignment: .leading, spacing: 4) {
+                Text("#\(tag.name)")
+                  .font(.scaledHeadline)
+                Text("timeline.n-recent-from-n-participants \(tag.totalUses) \(tag.totalAccounts)")
+                  .font(.scaledFootnote)
+                  .foregroundColor(.gray)
               }
+              .accessibilityElement(children: .combine)
+              Spacer()
+              Button {
+                Task {
+                  if tag.following {
+                    viewModel.tag = await account.unfollowTag(id: tag.name)
+                  } else {
+                    viewModel.tag = await account.followTag(id: tag.name)
+                  }
+                }
+              } label: {
+                Text(tag.following ? "account.follow.following" : "account.follow.follow")
+              }.buttonStyle(.bordered)
             }
-          } label: {
-            Text(tag.following ? "account.follow.following" : "account.follow.follow")
-          }.buttonStyle(.bordered)
         }
-        Spacer()
-      }
-      .listRowBackground(theme.secondaryBackgroundColor)
-      .listRowSeparator(.hidden)
-      .listRowInsets(.init(top: 8,
-                           leading: .layoutPadding,
-                           bottom: 8,
-                           trailing: .layoutPadding))
     }
   }
+    
+    @ViewBuilder
+    private var tagGroupHeaderView: some View {
+      if let group = viewModel.tagGroup {
+          headerView {
+              HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(group.description)
+                    .font(.scaledHeadline)
+                }
+                .accessibilityElement(children: .combine)
+              }
+          }
+      }
+    }
+    
+    @ViewBuilder
+    private func headerView(
+        @ViewBuilder content: () -> some View
+    ) -> some View {
+        VStack(alignment: .leading) {
+          Spacer()
+          content()
+          Spacer()
+        }
+        .listRowBackground(theme.secondaryBackgroundColor)
+        .listRowSeparator(.hidden)
+        .listRowInsets(.init(top: 8,
+                             leading: .layoutPadding,
+                             bottom: 8,
+                             trailing: .layoutPadding))
+    }
 
   private var scrollToTopView: some View {
     HStack { EmptyView() }

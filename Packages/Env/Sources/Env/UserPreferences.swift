@@ -12,6 +12,7 @@ public class UserPreferences: ObservableObject {
   private var client: Client?
 
   @AppStorage("remote_local_timeline") public var remoteLocalTimelines: [String] = []
+    @AppStorage("tag_groups") public var tagGroups: [TagGroup] = []
   @AppStorage("preferred_browser") public var preferredBrowser: PreferredBrowser = .inAppSafari
   @AppStorage("draft_posts") public var draftsPosts: [String] = []
   @AppStorage("show_translate_button_inline") public var showTranslateButton: Bool = true

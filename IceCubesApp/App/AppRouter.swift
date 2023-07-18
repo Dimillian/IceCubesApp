@@ -32,6 +32,7 @@ extension View {
         ConversationDetailView(conversation: conversation)
       case let .hashTag(tag, accountId):
         TimelineView(timeline: .constant(.hashtag(tag: tag, accountId: accountId)), scrollToTopSignal: .constant(0), canFilterTimeline: false)
+      // TODO: anything to do in the app router????
       case let .list(list):
         TimelineView(timeline: .constant(.list(list: list)), scrollToTopSignal: .constant(0), canFilterTimeline: false)
       case let .following(id):
@@ -82,6 +83,9 @@ extension View {
       case .addRemoteLocalTimeline:
         AddRemoteTimelineView()
           .withEnvironments()
+      case .addTagGroup:
+          AddTagGroupView()
+              .withEnvironments()
       case let .statusEditHistory(status):
         StatusEditHistoryView(statusId: status)
           .withEnvironments()
