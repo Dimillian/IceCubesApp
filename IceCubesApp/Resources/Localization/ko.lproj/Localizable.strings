@@ -124,7 +124,7 @@
 "settings.content.media" = "미디어";
 "settings.content.media.show.alt" = "미디어 설명 버튼 표시";
 "settings.content.reading" = "읽을 때";
-"settings.content.posting" = "올릴 때";
+"settings.content.posting" = "게시할 때";
 "settings.content.sharing" = "공유할 때";
 "settings.content.sharing.share-button-behavior" = "공유 버튼 기본 동작";
 "settings.content.sharing.share-behavior.link-only" = "링크 공유";
@@ -168,8 +168,8 @@
 "settings.general.translate" = "번역";
 "settings.translation.navigation-title" = "번역";
 "settings.translation.always-deepl" = "항상 DeepL을 통해 번역";
-"settings.translation.auto-detect-post-language" = "Auto detect language";
-"settings.translation.auto-detect-post-language-footer" = "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary.";
+"settings.translation.auto-detect-post-language" = "글 게시 전 언어 자동 감지";
+"settings.translation.auto-detect-post-language-footer" = "글을 게시하기 전에 Ice Cubes가 지정한 글 언어와 인식된 글 언어가 동일한지 비교한 뒤, 다른 경우 필요에 따라 언어를 변경할 수 있도록 적절한 언어를 제안합니다.";
 "settings.translation.user-api-key" = "DeepL API 키";
 "settings.translation.api-key-type" = "API 키 종류";
 "settings.translation.needed-message" = "이 기능을 사용하려면 DeepL에서 발급받은 API 키가 있어야 합니다.";
@@ -343,10 +343,10 @@
 "explore.section.trending.posts" = "뜨고 있는 글";
 "explore.section.trending.tags" = "뜨고 있는 태그";
 "explore.section.users" = "사용자";
-"explore.scope.all" = "All";
-"explore.scope.people" = "People";
-"explore.scope.hashtags" = "Hashtags";
-"explore.scope.posts" = "Posts";
+"explore.scope.all" = "모두";
+"explore.scope.people" = "사용자";
+"explore.scope.hashtags" = "태그";
+"explore.scope.posts" = "글";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "하나만 선택 가능";
@@ -439,8 +439,8 @@
 "status.draft.delete" = "삭제";
 "status.draft.save" = "임시 보관함에 저장";
 "status.editor.ai-prompt.correct" = "맞게 고치기";
-"status.editor.ai-prompt.add-tags" = "주요 단어 #태그 표시하기";
-"status.editor.ai-prompt.insert-tags" = "글 뒤에 #태그 추가하기";
+"status.editor.ai-prompt.add-tags" = "주요 단어 태그 표시하기";
+"status.editor.ai-prompt.insert-tags" = "글 뒤에 태그 추가하기";
 "status.editor.ai-prompt.emphasize" = "내용 강조하기";
 "status.editor.ai-prompt.fit" = "간결하게 바꾸기";
 "status.editor.description.add" = "설명 추가";
@@ -450,8 +450,8 @@
 "status.editor.error.upload" = "전송 오류";
 "status.editor.language-select.navigation-title" = "글 언어 지정";
 "status.editor.language-select.recently-used" = "최근 사용";
-"status.editor.language-select.confirmation.detected-%@" = "%@로 표시하여 게시 (인식된 언어)";
-"status.editor.language-select.confirmation.selected-%@" = "%@로 표시하여 게시 (선택한 언어)";
+"status.editor.language-select.confirmation.detected-%@" = "글 언어를 %@로 지정 (인식된 언어)";
+"status.editor.language-select.confirmation.selected-%@" = "글 언어를 %@로 지정 (선택한 언어)";
 "status.editor.media.edit-image" = "미디어 편집";
 "status.editor.media.image-description" = "미디어 설명";
 "status.editor.mode.edit" = "글 수정";
@@ -546,7 +546,7 @@
 "accessibility.tabs.timeline.unread-posts.label-%lld" = "%lld개 새 글";
 "accessibility.tabs.timeline.unread-posts.hint" = "타임라인을 스크롤합니다.";
 "accessibility.tabs.timeline.content-link-%@" = "다음 링크 방문: %@";
-"accessibility.tabs.timeline.content-hashtag-%@" = "해시태그 %@";
+"accessibility.tabs.timeline.content-hashtag-%@" = "태그 %@";
 "accessibility.app-account.selector.accounts" = "계정";
 "accessibility.app-account.selector.accounts.hint" = "옵션 창을 엽니다.";
 "accessibility.tabs.profile.options.label" = "옵션";
