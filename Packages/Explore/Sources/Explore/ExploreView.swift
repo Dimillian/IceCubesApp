@@ -21,16 +21,7 @@ public struct ExploreView: View {
       if !viewModel.isLoaded {
         loadingView
       } else if !viewModel.searchQuery.isEmpty {
-        if viewModel.isSearching {
-          HStack {
-            Spacer()
-            ProgressView()
-            Spacer()
-          }
-          .listRowBackground(theme.secondaryBackgroundColor)
-          .listRowSeparator(.hidden)
-          .id(UUID())
-        } else if let results = viewModel.results[viewModel.searchQuery] {
+        if let results = viewModel.results[viewModel.searchQuery] {
           if results.isEmpty, !viewModel.isSearching {
             EmptyView(iconName: "magnifyingglass",
                       title: "explore.search.empty.title",
@@ -40,6 +31,15 @@ public struct ExploreView: View {
           } else {
             makeSearchResultsView(results: results)
           }
+        } else {
+          HStack {
+            Spacer()
+            ProgressView()
+            Spacer()
+          }
+          .listRowBackground(theme.secondaryBackgroundColor)
+          .listRowSeparator(.hidden)
+          .id(UUID())
         }
       } else if viewModel.allSectionsEmpty {
         EmptyView(iconName: "magnifyingglass",
