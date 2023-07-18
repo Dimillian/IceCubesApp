@@ -80,6 +80,7 @@ public struct ExploreView: View {
     .background(theme.secondaryBackgroundColor)
     .navigationTitle("explore.navigation-title")
     .searchable(text: $viewModel.searchQuery,
+                placement: .navigationBarDrawer(displayMode: .always),
                 prompt: Text("explore.search.prompt"))
   }
 
