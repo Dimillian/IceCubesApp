@@ -1,11 +1,11 @@
 import DesignSystem
 import Env
-import SwiftUIIntrospect
 import Models
 import Network
 import Shimmer
 import Status
 import SwiftUI
+import SwiftUIIntrospect
 
 public struct TimelineView: View {
   private enum Constants {
@@ -39,7 +39,9 @@ public struct TimelineView: View {
     ScrollViewReader { proxy in
       ZStack(alignment: .top) {
         List {
-          if viewModel.tag == nil {
+          if viewModel.tagGroup != nil {
+            tagGroupHeaderView
+          } else if viewModel.tag == nil {
             scrollToTopView
           } else {
             tagHeaderView
@@ -104,19 +106,18 @@ public struct TimelineView: View {
         }
         .accessibilityRepresentation {
           switch timeline {
-            case let .remoteLocal(_, filter):
-              if canFilterTimeline {
-                Menu(filter.localizedTitle()) {}
-              } else {
-                Text(filter.localizedTitle())
-              }
-            default:
-              if canFilterTimeline {
-                Menu(timeline.localizedTitle()) {}
-              } else {
-                Text(timeline.localizedTitle())
-              }
-
+          case let .remoteLocal(_, filter):
+            if canFilterTimeline {
+              Menu(filter.localizedTitle()) {}
+            } else {
+              Text(filter.localizedTitle())
+            }
+          default:
+            if canFilterTimeline {
+              Menu(timeline.localizedTitle()) {}
+            } else {
+              Text(timeline.localizedTitle())
+            }
           }
         }
         .accessibilityAddTraits(.isHeader)
@@ -180,8 +181,7 @@ public struct TimelineView: View {
   @ViewBuilder
   private var tagHeaderView: some View {
     if let tag = viewModel.tag {
-      VStack(alignment: .leading) {
-        Spacer()
+      headerView {
         HStack {
           VStack(alignment: .leading, spacing: 4) {
             Text("#\(tag.name)")
@@ -204,15 +204,47 @@ public struct TimelineView: View {
             Text(tag.following ? "account.follow.following" : "account.follow.follow")
           }.buttonStyle(.bordered)
         }
-        Spacer()
       }
-      .listRowBackground(theme.secondaryBackgroundColor)
-      .listRowSeparator(.hidden)
-      .listRowInsets(.init(top: 8,
-                           leading: .layoutPadding,
-                           bottom: 8,
-                           trailing: .layoutPadding))
     }
+  }
+
+  @ViewBuilder
+  private var tagGroupHeaderView: some View {
+    if let group = viewModel.tagGroup {
+      headerView {
+        ScrollView(.horizontal) {
+          HStack(spacing: 4) {
+            ForEach(group.tags, id: \.self) { tag in
+              Button {
+                routerPath.navigate(to: .hashTag(tag: tag, account: nil))
+              } label: {
+                Text("#\(tag)")
+                  .font(.scaledHeadline)
+              }
+              .buttonStyle(.plain)
+            }
+          }
+        }
+        .scrollIndicators(.hidden)
+      }
+    }
+  }
+
+  @ViewBuilder
+  private func headerView(
+    @ViewBuilder content: () -> some View
+  ) -> some View {
+    VStack(alignment: .leading) {
+      Spacer()
+      content()
+      Spacer()
+    }
+    .listRowBackground(theme.secondaryBackgroundColor)
+    .listRowSeparator(.hidden)
+    .listRowInsets(.init(top: 8,
+                         leading: .layoutPadding,
+                         bottom: 8,
+                         trailing: .layoutPadding))
   }
 
   private var scrollToTopView: some View {

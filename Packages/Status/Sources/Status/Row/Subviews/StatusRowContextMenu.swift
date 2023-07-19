@@ -187,8 +187,7 @@ struct StatusRowContextMenu: View {
           } label: {
             Label("status.action.message", systemImage: "tray.full")
           }
-          
-          
+
           if viewModel.authorRelationship?.blocking == true {
             Button {
               Task {
@@ -216,7 +215,7 @@ struct StatusRowContextMenu: View {
               Label("account.action.block", systemImage: "person.crop.circle.badge.xmark")
             }
           }
-          
+
           if viewModel.authorRelationship?.muting == true {
             Button {
               Task {
@@ -248,7 +247,6 @@ struct StatusRowContextMenu: View {
               Label("account.action.mute", systemImage: "speaker.slash")
             }
           }
-          
         }
       }
       Section {

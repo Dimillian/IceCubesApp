@@ -13,7 +13,7 @@ class DisplaySettingsLocalValues: ObservableObject {
   @Published var labelColor = Theme.shared.labelColor
   @Published var lineSpacing = Theme.shared.lineSpacing
   @Published var fontSizeScale = Theme.shared.fontSizeScale
-  
+
   private let debouncesDelay: DispatchQueue.SchedulerTimeType.Stride = .seconds(0.5)
 
   private var subscriptions = Set<AnyCancellable>()

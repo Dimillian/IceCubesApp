@@ -11,9 +11,9 @@ public struct StatusDetailView: View {
   @EnvironmentObject private var watcher: StreamWatcher
   @EnvironmentObject private var client: Client
   @EnvironmentObject private var routerPath: RouterPath
-  
+
   @StateObject private var viewModel: StatusDetailViewModel
-  
+
   @State private var isLoaded: Bool = false
   @State private var statusHeight: CGFloat = 0
 

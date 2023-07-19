@@ -124,7 +124,7 @@ public struct StatusRowView: View {
                          trailing: .layoutPadding))
     .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
     .accessibilityLabel(viewModel.isFocused == false && accessibilityEnabled
-                        ? CombinedAccessibilityLabel(viewModel: viewModel).finalLabel() : Text(""))
+      ? CombinedAccessibilityLabel(viewModel: viewModel).finalLabel() : Text(""))
     .accessibilityHidden(viewModel.filter?.filter.filterAction == .hide)
     .accessibilityAction {
       viewModel.navigateToDetail()
@@ -214,23 +214,23 @@ public struct StatusRowView: View {
     // Add in each detected link in the content
     ForEach(viewModel.finalStatus.content.links) { link in
       switch link.type {
-        case .url:
-          if UIApplication.shared.canOpenURL(link.url) {
-            Button("accessibility.tabs.timeline.content-link-\(link.title)") {
-              HapticManager.shared.fireHaptic(of: .notification(.success))
-              _ = viewModel.routerPath.handle(url: link.url)
-            }
-          }
-        case .hashtag:
-          Button("accessibility.tabs.timeline.content-hashtag-\(link.title)") {
+      case .url:
+        if UIApplication.shared.canOpenURL(link.url) {
+          Button("accessibility.tabs.timeline.content-link-\(link.title)") {
             HapticManager.shared.fireHaptic(of: .notification(.success))
             _ = viewModel.routerPath.handle(url: link.url)
           }
-        case .mention:
-          Button("\(link.title)") {
-            HapticManager.shared.fireHaptic(of: .notification(.success))
-            _ = viewModel.routerPath.handle(url: link.url)
-          }
+        }
+      case .hashtag:
+        Button("accessibility.tabs.timeline.content-hashtag-\(link.title)") {
+          HapticManager.shared.fireHaptic(of: .notification(.success))
+          _ = viewModel.routerPath.handle(url: link.url)
+        }
+      case .mention:
+        Button("\(link.title)") {
+          HapticManager.shared.fireHaptic(of: .notification(.success))
+          _ = viewModel.routerPath.handle(url: link.url)
+        }
       }
     }
   }
@@ -298,28 +298,27 @@ private struct CombinedAccessibilityLabel {
   func finalLabel() -> Text {
     if let filter {
       switch filter.filterAction {
-        case .warn:
-          return Text("status.filter.filtered-by-\(filter.title)")
-        case .hide:
-          return Text("")
+      case .warn:
+        return Text("status.filter.filtered-by-\(filter.title)")
+      case .hide:
+        return Text("")
       }
     } else {
       return userNamePreamble() +
-      Text(hasSpoiler
-        ? viewModel.finalStatus.spoilerText.asRawText
-        : viewModel.finalStatus.content.asRawText
-      ) +
-      Text(hasSpoiler
-        ? "status.editor.spoiler"
-        : ""
-      ) + Text(", ") +
-      pollText() +
-      imageAltText() +
-      Text(viewModel.finalStatus.createdAt.relativeFormatted) + Text(", ") +
-      Text("status.summary.n-replies \(viewModel.finalStatus.repliesCount)") + Text(", ") +
-      Text("status.summary.n-boosts \(viewModel.finalStatus.reblogsCount)") + Text(", ") +
-      Text("status.summary.n-favorites \(viewModel.finalStatus.favouritesCount)")
-
+        Text(hasSpoiler
+          ? viewModel.finalStatus.spoilerText.asRawText
+          : viewModel.finalStatus.content.asRawText
+        ) +
+        Text(hasSpoiler
+          ? "status.editor.spoiler"
+          : ""
+        ) + Text(", ") +
+        pollText() +
+        imageAltText() +
+        Text(viewModel.finalStatus.createdAt.relativeFormatted) + Text(", ") +
+        Text("status.summary.n-replies \(viewModel.finalStatus.repliesCount)") + Text(", ") +
+        Text("status.summary.n-boosts \(viewModel.finalStatus.reblogsCount)") + Text(", ") +
+        Text("status.summary.n-favorites \(viewModel.finalStatus.favouritesCount)")
     }
   }
 
@@ -377,12 +376,12 @@ private struct CombinedAccessibilityLabel {
           : 0
 
         text = text +
-        Text(selected ? "accessibility.status.poll.selected.label" : "") +
-        Text(", ") +
-        Text("accessibility.status.poll.option-prefix-\(index + 1)-of-\(poll.options.count)") +
-        Text(", ") +
-        Text(option.title) +
-        Text(showPercentage ? ", \(percentage)%. " : ". ")
+          Text(selected ? "accessibility.status.poll.selected.label" : "") +
+          Text(", ") +
+          Text("accessibility.status.poll.option-prefix-\(index + 1)-of-\(poll.options.count)") +
+          Text(", ") +
+          Text(option.title) +
+          Text(showPercentage ? ", \(percentage)%. " : ". ")
       }
     }
     return Text("")

@@ -161,6 +161,7 @@
 "settings.content.expand-media" = "Visualizzazione dei media";
 "settings.content.default-sensitive" = "Segnala sempre i contenuti come sensibili";
 "settings.content.default-visibility" = "Visibilità del post";
+"settings.content.default-reply-visibility" = "Reply Visibility";
 "settings.content.media" = "Media";
 "settings.content.media.show.alt" = "Mostra i testi alternativi";
 "settings.content.reading" = "Lettura";
@@ -239,6 +240,8 @@
 "timeline.filter.lists" = "Liste";
 "timeline.filter.local" = "Timeline locali";
 "timeline.filter.tags" = "Tag seguiti";
+"timeline.filter.tag-groups" = "Tag Groups";
+"timeline.filter.add-tag-groups" = "Add tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Aggiungi account";
@@ -597,3 +600,9 @@
 "status.action.report" = "Segnala il messaggio";
 
 "tag.suggested.mentions-%lld" = "%lld mentions";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Tag Group Title";
+"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
+"add-tag-groups.edit.tags" = "Add tags to the group";
+"add-tag-groups.edit.tags.add" = "Tag";

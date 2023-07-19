@@ -162,6 +162,7 @@
 "settings.content.expand-media" = "Multimedia erakusteko hobespenak";
 "settings.content.default-sensitive" = "Markatu eduki guztia hunkigarri gisa";
 "settings.content.default-visibility" = "Edukiaren irismena";
+"settings.content.default-reply-visibility" = "Reply Visibility";
 "settings.content.media" = "Multimedia";
 "settings.content.media.show.alt" = "Erakutsi deskribapenak";
 "settings.content.reading" = "Irakurtzean";
@@ -242,6 +243,8 @@
 "timeline.filter.lists" = "Zerrendak";
 "timeline.filter.local" = "Denbora-lerro lokalak";
 "timeline.filter.tags" = "Jarraitutako traolak";
+"timeline.filter.tag-groups" = "Tag Groups";
+"timeline.filter.add-tag-groups" = "Add tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Gehitu kontua";
@@ -584,3 +587,9 @@
 "report.title" = "Salaketa";
 "report.action.send" = "Bidali";
 "status.action.report" = "Salatu edukia";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Tag Group Title";
+"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
+"add-tag-groups.edit.tags" = "Add tags to the group";
+"add-tag-groups.edit.tags.add" = "Tag";

@@ -126,6 +126,7 @@
 "settings.content.expand-media" = "メディア表示";
 "settings.content.default-sensitive" = "常にメディアをセンシティブなものとしてマークする";
 "settings.content.default-visibility" = "投稿の可視化";
+"settings.content.default-reply-visibility" = "Reply Visibility";
 "settings.content.media" = "メディア";
 "settings.content.media.show.alt" = "注釈を表示";
 "settings.content.reading" = "リーディング";
@@ -240,6 +241,8 @@
 "timeline.filter.lists" = "リスト";
 "timeline.filter.local" = "ローカルタイムライン";
 "timeline.filter.tags" = "フォローしたタグ";
+"timeline.filter.tag-groups" = "Tag Groups";
+"timeline.filter.add-tag-groups" = "Add tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "アカウントの追加";
@@ -596,3 +599,9 @@
 "status.action.report" = "投稿を報告";
 
 "tag.suggested.mentions-%lld" = "返信：%lld";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Tag Group Title";
+"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
+"add-tag-groups.edit.tags" = "Add tags to the group";
+"add-tag-groups.edit.tags.add" = "Tag";

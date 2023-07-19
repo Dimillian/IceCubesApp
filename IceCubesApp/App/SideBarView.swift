@@ -97,9 +97,9 @@ struct SideBarView<Content: View>: View {
   private var tabsView: some View {
     ForEach(tabs) { tab in
       Button {
-        //ensure keyboard is always dismissed when selecting a tab
+        // ensure keyboard is always dismissed when selecting a tab
         hideKeyboard()
-          
+
         if tab == selectedTab {
           popToRootTab = .other
           DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
@@ -176,8 +176,8 @@ private struct SideBarIcon: View {
 }
 
 extension View {
-    func hideKeyboard() {
-        let resign = #selector(UIResponder.resignFirstResponder)
-        UIApplication.shared.sendAction(resign, to: nil, from: nil, for: nil)
-    }
+  func hideKeyboard() {
+    let resign = #selector(UIResponder.resignFirstResponder)
+    UIApplication.shared.sendAction(resign, to: nil, from: nil, for: nil)
+  }
 }

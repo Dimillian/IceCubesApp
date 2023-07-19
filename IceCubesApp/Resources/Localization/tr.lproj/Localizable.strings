@@ -121,6 +121,7 @@
 "settings.content.expand-media" = "Media display";
 "settings.content.default-sensitive" = "Always mark media as sensitive";
 "settings.content.default-visibility" = "Posting visibility";
+"settings.content.default-reply-visibility" = "Reply Visibility";
 "settings.content.media" = "Media";
 "settings.content.media.show.alt" = "Show ALT texts";
 "settings.content.reading" = "Reading";
@@ -240,6 +241,8 @@
 "timeline.filter.lists" = "Listeler";
 "timeline.filter.local" = "Yerel Zaman Dilimleri";
 "timeline.filter.tags" = "Takip Edilen Etiketler";
+"timeline.filter.tag-groups" = "Tag Groups";
+"timeline.filter.add-tag-groups" = "Add tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Hesap Ekle";
@@ -597,3 +600,9 @@
 "status.action.report" = "Report Post";
 
 "tag.suggested.mentions-%lld" = "%lld mentions";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Tag Group Title";
+"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
+"add-tag-groups.edit.tags" = "Add tags to the group";
+"add-tag-groups.edit.tags.add" = "Tag";

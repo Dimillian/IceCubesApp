@@ -105,6 +105,8 @@
 		E9DF420129830FEC0003AAD2 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DF420029830FEC0003AAD2 /* ActionRequestHandler.swift */; };
 		E9DF420329830FEC0003AAD2 /* Action.js in Resources */ = {isa = PBXBuildFile; fileRef = E9DF420229830FEC0003AAD2 /* Action.js */; };
 		E9DF420729830FEC0003AAD2 /* IceCubesActionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E9DF41FA29830FEC0003AAD2 /* IceCubesActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		FA31A9AB2A66BF7C00D5F662 /* AddTagGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA31A9AA2A66BF7C00D5F662 /* AddTagGroupView.swift */; };
+		FAD203D02A66D8A80030A7FD /* Symbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD203CF2A66D8A80030A7FD /* Symbols.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -272,6 +274,8 @@
 		E9DF420229830FEC0003AAD2 /* Action.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Action.js; sourceTree = "<group>"; };
 		E9DF420429830FEC0003AAD2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F355EEDA297A8BD500E362C0 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		FA31A9AA2A66BF7C00D5F662 /* AddTagGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTagGroupView.swift; sourceTree = "<group>"; };
+		FAD203CF2A66D8A80030A7FD /* Symbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Symbols.swift; sourceTree = "<group>"; };
 		FF8259FB298E42E000BEAB69 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
 		FF8259FC298E42E000BEAB69 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -401,6 +405,8 @@
 			children = (
 				9F398AB229360A4C00A889F2 /* TimelineTab.swift */,
 				9F7335F12967608F00AFF0BA /* AddRemoteTimelineView.swift */,
+				FA31A9AA2A66BF7C00D5F662 /* AddTagGroupView.swift */,
+				FAD203CF2A66D8A80030A7FD /* Symbols.swift */,
 			);
 			path = Timeline;
 			sourceTree = "<group>";
@@ -829,6 +835,8 @@
 				9F7335F92968576500AFF0BA /* DisplaySettingsView.swift in Sources */,
 				9F2A540729699698009B2D7C /* SupportAppView.swift in Sources */,
 				9F2B92F6295AE04800DE16D0 /* Tabs.swift in Sources */,
+				FA31A9AB2A66BF7C00D5F662 /* AddTagGroupView.swift in Sources */,
+				FAD203D02A66D8A80030A7FD /* Symbols.swift in Sources */,
 				9F398AB329360A4C00A889F2 /* TimelineTab.swift in Sources */,
 				9F398AA62935FE8A00A889F2 /* AppRouter.swift in Sources */,
 				9FBFE63D292A715500C250E9 /* IceCubesApp.swift in Sources */,
@@ -969,7 +977,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.7.0;
+				MARKETING_VERSION = 1.7.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesNotifications";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -999,7 +1007,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.7.0;
+				MARKETING_VERSION = 1.7.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesNotifications";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1030,7 +1038,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.7.0;
+				MARKETING_VERSION = 1.7.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesShareExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1060,7 +1068,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.7.0;
+				MARKETING_VERSION = 1.7.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesShareExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1191,7 +1199,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconAlternate1 AppIconAlternate2 AppIconAlternate3 AppIconAlternate4 AppIconAlternate5 AppIconAlternate6 AppIconAlternate7 AppIconAlternate8 AppIconAlternate9 AppIconAlternate10 AppIconAlternate11 AppIconAlternate12 AppIconAlternate13 AppIconAlternate14 AppIconAlternate15 AppIconAlternate16 AppIconAlternate17 AppIconAlternate19 AppIconAlternate18 AppIconAlternate20 AppIconAlternate21 AppIconAlternate22 AppIconAlternate23 AppIconAlternate24 AppIconAlternate25 AppIconAlternate26 AppIconAlternate27 AppIconAlternate28 AppIconAlternate29 AppIconAlternate30 AppIconAlternate31 AppIconAlternate32 AppIconAlternate33 AppIconAlternate34 AppIconAlternate35 AppIconAlternate36";
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconAlternate1 AppIconAlternate2 AppIconAlternate3 AppIconAlternate4 AppIconAlternate5 AppIconAlternate6 AppIconAlternate7 AppIconAlternate8 AppIconAlternate9 AppIconAlternate10 AppIconAlternate11 AppIconAlternate12 AppIconAlternate13 AppIconAlternate14 AppIconAlternate15 AppIconAlternate16 AppIconAlternate17 AppIconAlternate19 AppIconAlternate18 AppIconAlternate20 AppIconAlternate21 AppIconAlternate22 AppIconAlternate23 AppIconAlternate24 AppIconAlternate25 AppIconAlternate26 AppIconAlternate27 AppIconAlternate28 AppIconAlternate29 AppIconAlternate30 AppIconAlternate31 AppIconAlternate32 AppIconAlternate33 AppIconAlternate34 AppIconAlternate35 AppIconAlternate36 AppIconAlternate37";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -1226,7 +1234,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.7.0;
+				MARKETING_VERSION = 1.7.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -1244,7 +1252,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconAlternate1 AppIconAlternate2 AppIconAlternate3 AppIconAlternate4 AppIconAlternate5 AppIconAlternate6 AppIconAlternate7 AppIconAlternate8 AppIconAlternate9 AppIconAlternate10 AppIconAlternate11 AppIconAlternate12 AppIconAlternate13 AppIconAlternate14 AppIconAlternate15 AppIconAlternate16 AppIconAlternate17 AppIconAlternate19 AppIconAlternate18 AppIconAlternate20 AppIconAlternate21 AppIconAlternate22 AppIconAlternate23 AppIconAlternate24 AppIconAlternate25 AppIconAlternate26 AppIconAlternate27 AppIconAlternate28 AppIconAlternate29 AppIconAlternate30 AppIconAlternate31 AppIconAlternate32 AppIconAlternate33 AppIconAlternate34 AppIconAlternate35 AppIconAlternate36";
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconAlternate1 AppIconAlternate2 AppIconAlternate3 AppIconAlternate4 AppIconAlternate5 AppIconAlternate6 AppIconAlternate7 AppIconAlternate8 AppIconAlternate9 AppIconAlternate10 AppIconAlternate11 AppIconAlternate12 AppIconAlternate13 AppIconAlternate14 AppIconAlternate15 AppIconAlternate16 AppIconAlternate17 AppIconAlternate19 AppIconAlternate18 AppIconAlternate20 AppIconAlternate21 AppIconAlternate22 AppIconAlternate23 AppIconAlternate24 AppIconAlternate25 AppIconAlternate26 AppIconAlternate27 AppIconAlternate28 AppIconAlternate29 AppIconAlternate30 AppIconAlternate31 AppIconAlternate32 AppIconAlternate33 AppIconAlternate34 AppIconAlternate35 AppIconAlternate36 AppIconAlternate37";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -1279,7 +1287,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.7.0;
+				MARKETING_VERSION = 1.7.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -1313,7 +1321,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.7.0;
+				MARKETING_VERSION = 1.7.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesActionExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1344,7 +1352,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.7.0;
+				MARKETING_VERSION = 1.7.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesActionExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;

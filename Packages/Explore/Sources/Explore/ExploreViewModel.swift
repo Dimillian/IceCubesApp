@@ -7,7 +7,7 @@ import SwiftUI
 class ExploreViewModel: ObservableObject {
   enum SearchScope: String, CaseIterable {
     case all, people, hashtags, posts
-    
+
     var localizedString: LocalizedStringKey {
       switch self {
       case .all:
@@ -21,7 +21,7 @@ class ExploreViewModel: ObservableObject {
       }
     }
   }
-  
+
   var client: Client? {
     didSet {
       if oldValue != client {

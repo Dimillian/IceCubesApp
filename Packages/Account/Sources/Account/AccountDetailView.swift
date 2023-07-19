@@ -316,7 +316,7 @@ public struct AccountDetailView: View {
           Image(systemName: "arrowshape.turn.up.left")
         }
       }
-      
+
       Menu {
         AccountDetailContextMenu(viewModel: viewModel)
 

@@ -12,7 +12,7 @@ public class StreamWatcher: ObservableObject {
 
   private let decoder = JSONDecoder()
   private let encoder = JSONEncoder()
-  
+
   private var retryDelay: Int = 10
 
   public enum Stream: String {
@@ -24,7 +24,6 @@ public class StreamWatcher: ObservableObject {
   @Published public var events: [any StreamEvent] = []
   @Published public var unreadNotificationsCount: Int = 0
   @Published public var latestEvent: (any StreamEvent)?
-  
 
   public init() {
     decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -66,7 +65,8 @@ public class StreamWatcher: ObservableObject {
 
   private func sendMessage(message: StreamMessage) {
     if let encodedMessage = try? encoder.encode(message),
-       let stringMessage = String(data: encodedMessage, encoding: .utf8) {
+       let stringMessage = String(data: encodedMessage, encoding: .utf8)
+    {
       task?.send(.string(stringMessage), completionHandler: { _ in })
     }
   }

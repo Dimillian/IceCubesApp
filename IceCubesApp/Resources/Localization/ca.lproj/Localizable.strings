@@ -120,6 +120,7 @@
 "settings.content.expand-media" = "Visibilitat del contingut multimèdia";
 "settings.content.default-sensitive" = "Marca sempre el contingut com a sensible";
 "settings.content.default-visibility" = "Visibilitat de les publicacions";
+"settings.content.default-reply-visibility" = "Reply Visibility";
 "settings.content.media" = "Media";
 "settings.content.media.show.alt" = "Show ALT texts";
 "settings.content.reading" = "Llegint";
@@ -239,6 +240,8 @@
 "timeline.filter.lists" = "Llistes";
 "timeline.filter.local" = "Línies de temps locals";
 "timeline.filter.tags" = "Etiquetes seguides";
+"timeline.filter.tag-groups" = "Grups d'Etiquetes";
+"timeline.filter.add-tag-groups" = "Afegeix grup";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Afegeix un compte";
@@ -596,3 +599,15 @@
 "status.action.report" = "Report Post";
 
 "tag.suggested.mentions-%lld" = "%lld mentions";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Títol del Grup d'Etiquetes";
+"add-tag-groups.edit.icon.field" = "Icona del Grup d'Etiquetes (SFSymbol)";
+"add-tag-groups.edit.tags" = "Afegeix etiquetes al grup";
+"add-tag-groups.edit.tags.add" = "Etiqueta";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Tag Group Title";
+"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
+"add-tag-groups.edit.tags" = "Add tags to the group";
+"add-tag-groups.edit.tags.add" = "Tag";

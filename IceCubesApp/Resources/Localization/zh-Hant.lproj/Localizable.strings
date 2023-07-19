@@ -126,6 +126,7 @@
 "settings.content.expand-media" = "媒體顯示";
 "settings.content.default-sensitive" = "媒體一概標示為敏感";
 "settings.content.default-visibility" = "嘟文能見度";
+"settings.content.default-reply-visibility" = "Reply Visibility";
 "settings.content.media" = "媒體";
 "settings.content.media.show.alt" = "顯示圖片描述";
 "settings.content.reading" = "閱讀";
@@ -242,6 +243,8 @@
 "timeline.filter.lists" = "列表";
 "timeline.filter.local" = "本站時間軸";
 "timeline.filter.tags" = "跟隨標籤";
+"timeline.filter.tag-groups" = "Tag Groups";
+"timeline.filter.add-tag-groups" = "Add tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "新增帳號";
@@ -599,3 +602,9 @@
 "status.action.report" = "檢舉嘟文";
 
 "tag.suggested.mentions-%lld" = "%lld 提及";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Tag Group Title";
+"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
+"add-tag-groups.edit.tags" = "Add tags to the group";
+"add-tag-groups.edit.tags.add" = "Tag";

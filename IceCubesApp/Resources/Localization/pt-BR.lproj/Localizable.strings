@@ -121,6 +121,7 @@
 "settings.content.expand-media" = "Exibição de mídia";
 "settings.content.default-sensitive" = "Sempre marcar mídias como sensíveis";
 "settings.content.default-visibility" = "Visibilidade da postagem";
+"settings.content.default-reply-visibility" = "Reply Visibility";
 "settings.content.media" = "Mídia";
 "settings.content.media.show.alt" = "Mostrar textos ALT";
 "settings.content.reading" = "Lendo";
@@ -240,6 +241,8 @@
 "timeline.filter.lists" = "Listas";
 "timeline.filter.local" = "Timelines Locais";
 "timeline.filter.tags" = "Hashtags Seguidas";
+"timeline.filter.tag-groups" = "Tag Groups";
+"timeline.filter.add-tag-groups" = "Add tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Adicionar Conta";
@@ -597,3 +600,9 @@
 "status.action.report" = "Denunciar";
 
 "tag.suggested.mentions-%lld" = "%lld menções";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Tag Group Title";
+"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
+"add-tag-groups.edit.tags" = "Add tags to the group";
+"add-tag-groups.edit.tags.add" = "Tag";

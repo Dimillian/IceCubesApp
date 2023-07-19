@@ -12,6 +12,7 @@ public class UserPreferences: ObservableObject {
   private var client: Client?
 
   @AppStorage("remote_local_timeline") public var remoteLocalTimelines: [String] = []
+  @AppStorage("tag_groups") public var tagGroups: [TagGroup] = []
   @AppStorage("preferred_browser") public var preferredBrowser: PreferredBrowser = .inAppSafari
   @AppStorage("draft_posts") public var draftsPosts: [String] = []
   @AppStorage("show_translate_button_inline") public var showTranslateButton: Bool = true
@@ -24,6 +25,7 @@ public class UserPreferences: ObservableObject {
   @AppStorage("app_auto_expand_spoilers") public var appAutoExpandSpoilers = false
   @AppStorage("app_auto_expand_media") public var appAutoExpandMedia: ServerPreferences.AutoExpandMedia = .hideSensitive
   @AppStorage("app_default_post_visibility") public var appDefaultPostVisibility: Models.Visibility = .pub
+  @AppStorage("app_default_reply_visibility") public var appDefaultReplyVisibility: Models.Visibility = .pub
   @AppStorage("app_default_posts_sensitive") public var appDefaultPostsSensitive = false
   @AppStorage("autoplay_video") public var autoPlayVideo = true
   @AppStorage("always_use_deepl") public var alwaysUseDeepl = false
@@ -54,7 +56,7 @@ public class UserPreferences: ObservableObject {
   @AppStorage("requested_review") public var requestedReview = false
 
   @AppStorage("collapse-long-posts") public var collapseLongPosts = true
-    
+
   @AppStorage("share-button-behavior") public var shareButtonBehavior: PreferredShareButtonBehavior = .linkAndText
 
   public enum SwipeActionsIconStyle: String, CaseIterable {
@@ -87,7 +89,26 @@ public class UserPreferences: ObservableObject {
       return appDefaultPostVisibility
     }
   }
-
+  
+  public func conformReplyVisibilityConstraints() {
+    appDefaultReplyVisibility = getReplyVisibility()
+  }
+  
+  private func getReplyVisibility() -> Models.Visibility {
+    getMinVisibility(postVisibility, appDefaultReplyVisibility)
+  }
+  
+  public func getReplyVisibility(of status: Status) -> Models.Visibility {
+    getMinVisibility(getReplyVisibility(), status.visibility)
+  }
+  
+  private func getMinVisibility(_ vis1: Models.Visibility, _ vis2: Models.Visibility) -> Models.Visibility {
+    let no1 = Self.getIntOfVisibility(vis1)
+    let no2 = Self.getIntOfVisibility(vis2)
+    
+    return no1 < no2 ? vis1 : vis2
+  }
+  
   public var postIsSensitive: Bool {
     if useInstanceContentSettings {
       return serverPreferences?.postIsSensitive ?? false
@@ -152,5 +173,18 @@ public class UserPreferences: ObservableObject {
     }
     copy.insert(isoCode, at: 0)
     recentlyUsedLanguages = Array(copy.prefix(3))
+  }
+  
+  public static func getIntOfVisibility(_ vis: Models.Visibility) -> Int {
+    switch vis {
+      case .direct:
+        return 0
+      case .priv:
+        return 1
+      case .unlisted:
+        return 2
+      case .pub:
+        return 3
+    }
   }
 }

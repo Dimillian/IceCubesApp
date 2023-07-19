@@ -124,8 +124,7 @@ struct StatusRowActionsView: View {
             {
               switch userPreferences.shareButtonBehavior {
               case .linkOnly:
-                ShareLink(item: url)
-                {
+                ShareLink(item: url) {
                   action.image(dataController: statusDataController)
                 }
                 .buttonStyle(.statusAction())

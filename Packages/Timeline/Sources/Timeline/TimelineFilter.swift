@@ -32,6 +32,7 @@ public enum RemoteTimelineFilter: String, CaseIterable, Hashable, Equatable {
 public enum TimelineFilter: Hashable, Equatable {
   case home, local, federated, trending
   case hashtag(tag: String, accountId: String?)
+  case tagGroup(TagGroup)
   case list(list: Models.List)
   case remoteLocal(server: String, filter: RemoteTimelineFilter)
   case latest
@@ -72,6 +73,8 @@ public enum TimelineFilter: Hashable, Equatable {
       return "Home"
     case let .hashtag(tag, _):
       return "#\(tag)"
+    case let .tagGroup(group):
+      return group.title
     case let .list(list):
       return list.title
     case let .remoteLocal(server, _):
@@ -93,6 +96,8 @@ public enum TimelineFilter: Hashable, Equatable {
       return "timeline.home"
     case let .hashtag(tag, _):
       return "#\(tag)"
+    case let .tagGroup(group):
+      return LocalizedStringKey(group.title) // ?? not sure since this can't be localized.
     case let .list(list):
       return LocalizedStringKey(list.title)
     case let .remoteLocal(server, _):
@@ -142,8 +147,10 @@ public enum TimelineFilter: Hashable, Equatable {
       if let accountId {
         return Accounts.statuses(id: accountId, sinceId: nil, tag: tag, onlyMedia: nil, excludeReplies: nil, pinned: nil)
       } else {
-        return Timelines.hashtag(tag: tag, maxId: maxId)
+        return Timelines.hashtag(tag: tag, additional: nil, maxId: maxId)
       }
+    case let .tagGroup(group):
+      return Timelines.hashtag(tag: group.main, additional: group.additional, maxId: maxId)
     }
   }
 }
@@ -155,6 +162,7 @@ extension TimelineFilter: Codable {
     case federated
     case trending
     case hashtag
+    case tagGroup
     case list
     case remoteLocal
     case latest
@@ -180,6 +188,9 @@ extension TimelineFilter: Codable {
         tag: tag,
         accountId: accountId
       )
+    case .tagGroup:
+      let group = try container.decode(TagGroup.self, forKey: .tagGroup)
+      self = .tagGroup(group)
     case .list:
       let list = try container.decode(
         Models.List.self,
@@ -221,6 +232,8 @@ extension TimelineFilter: Codable {
       var nestedContainer = container.nestedUnkeyedContainer(forKey: .hashtag)
       try nestedContainer.encode(tag)
       try nestedContainer.encode(accountId)
+    case let .tagGroup(group):
+      try container.encode(group, forKey: .tagGroup)
     case let .list(list):
       try container.encode(list, forKey: .list)
     case let .remoteLocal(server, filter):
