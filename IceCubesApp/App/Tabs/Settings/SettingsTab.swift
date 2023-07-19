@@ -268,7 +268,7 @@ struct SettingsTabs: View {
   private var tagGroupsView: some View {
     Form {
       ForEach(preferences.tagGroups, id: \.self) { group in
-        Text(group.title)
+        Label(group.title, systemImage: group.sfSymbolName)
       }
       .onDelete { indexes in
         if let index = indexes.first {
