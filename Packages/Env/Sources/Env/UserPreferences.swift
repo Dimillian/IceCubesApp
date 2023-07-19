@@ -25,7 +25,7 @@ public class UserPreferences: ObservableObject {
   @AppStorage("app_auto_expand_spoilers") public var appAutoExpandSpoilers = false
   @AppStorage("app_auto_expand_media") public var appAutoExpandMedia: ServerPreferences.AutoExpandMedia = .hideSensitive
   @AppStorage("app_default_post_visibility") public var appDefaultPostVisibility: Models.Visibility = .pub
-  @AppStorage("app_default_reply_visibility") public var appDefaultReplyVisibility: Models.Visibility = .unlisted
+  @AppStorage("app_default_reply_visibility") public var appDefaultReplyVisibility: Models.Visibility = .pub
   @AppStorage("app_default_posts_sensitive") public var appDefaultPostsSensitive = false
   @AppStorage("autoplay_video") public var autoPlayVideo = true
   @AppStorage("always_use_deepl") public var alwaysUseDeepl = false
