@@ -75,6 +75,8 @@ struct AboutView: View {
         • [SwiftUI-Introspect](https://github.com/siteline/SwiftUI-Introspect)
 
         • [RevenueCat](https://github.com/RevenueCat/purchases-ios)
+        
+        • [SFSafeSymbols](https://github.com/SFSafeSymbols/SFSafeSymbols)
         """)
         .multilineTextAlignment(.leading)
         .font(.scaledSubheadline)
