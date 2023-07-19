@@ -162,6 +162,7 @@
 "settings.content.expand-media" = "Mediaweergave";
 "settings.content.default-sensitive" = "Markeer media standaard als gevoelig";
 "settings.content.default-visibility" = "Standaard postzichtbaarheid";
+"settings.content.default-reply-visibility" = "Reply Visibility";
 "settings.content.media" = "Media";
 "settings.content.media.show.alt" = "Toon ALT-teksten";
 "settings.content.reading" = "Lezen";

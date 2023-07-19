@@ -162,6 +162,7 @@
 "settings.content.expand-media" = "Mostrar el contenido multimedia";
 "settings.content.default-sensitive" = "Marcar siempre el contenido multimedia como sensible";
 "settings.content.default-visibility" = "Publicar visibilidad";
+"settings.content.default-reply-visibility" = "Reply Visibility";
 "settings.content.media" = "Multimedia";
 "settings.content.media.show.alt" = "Mostrar texto ALT";
 "settings.content.reading" = "Leyendo";
