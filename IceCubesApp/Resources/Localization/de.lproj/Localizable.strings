@@ -144,8 +144,8 @@
 "settings.general.translate" = "Übersetzungseinstellungen";
 "settings.translation.navigation-title" = "Übersetzung";
 "settings.translation.always-deepl" = "Immer mit DeepL übersetzen";
-"settings.translation.auto-detect-post-language" = "Auto detect language";
-"settings.translation.auto-detect-post-language-footer" = "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary.";
+"settings.translation.auto-detect-post-language" = "Sprache automatisch erkennen";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes wird versuchen, die Sprache deines Beitrags automatisch zu erkennen, und, falls nötig, vorschlagen, die Sprache zur Veröffentlichung zu ändern.";
 "settings.translation.user-api-key" = "DeepL-API-Schlüssel";
 "settings.translation.api-key-type" = "Typ des Schlüssels";
 "settings.translation.needed-message" = "Für diese Funktion ist ein DeepL-API-Schlüssel erforderlich.";
@@ -341,10 +341,10 @@
 "explore.section.trending.posts" = "Beiträge im Trend";
 "explore.section.trending.tags" = "Hashtags im Trend";
 "explore.section.users" = "Profile";
-"explore.scope.all" = "All";
-"explore.scope.people" = "People";
+"explore.scope.all" = "Alle";
+"explore.scope.people" = "Personen";
 "explore.scope.hashtags" = "Hashtags";
-"explore.scope.posts" = "Posts";
+"explore.scope.posts" = "Beiträge";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "Einfache Auswahl";
@@ -459,7 +459,7 @@
 "status.error.loading.message" = "Beim Laden der Beiträge ist ein Fehler aufgetreten. Bitte versuche es erneut.";
 "status.error.message" = "Es ist ein Fehler aufgetreten. Bitte versuche es erneut.";
 "status.error.title" = "Ein Fehler ist aufgetreten";
-"status.error.posting.title" = "Error while posting";
+"status.error.posting.title" = "Fehler beim Veröffentlichen";
 "status.filter.filtered-by-%@" = "Gefiltert von: %@";
 "status.filter.show-anyway" = "Trotzdem anzeigen";
 "status.image.alt-text.abbreviation" = "ALT";
