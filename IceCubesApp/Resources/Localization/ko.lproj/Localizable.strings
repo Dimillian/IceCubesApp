@@ -241,8 +241,8 @@
 "timeline.filter.local" = "원격 로컬 타임라인";
 "timeline.filter.tags" = "팔로우한 태그";
 "timeline-new-posts %lld" = "%lld개 새 글";
-"timeline.filter.tag-groups" = "Tag Groups";
-"timeline.filter.add-tag-groups" = "Add tag group";
+"timeline.filter.tag-groups" = "태그 모음";
+"timeline.filter.add-tag-groups" = "태그 모음 추가";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "계정 추가";
@@ -470,7 +470,7 @@
 "status.error.loading.message" = "글을 불러오지 못했습니다. 다시 시도해주세요.";
 "status.error.message" = "글의 상세 정보를 불러오지 못했습니다. 다시 시도해주세요.";
 "status.error.title" = "오류";
-"status.error.posting.title" = "Error while posting";
+"status.error.posting.title" = "게시 오류";
 "status.filter.filtered-by-%@" = "%@ 필터에 의해 가려짐";
 "status.filter.show-anyway" = "표시하기";
 "status.image.alt-text.abbreviation" = "설명";
@@ -604,7 +604,7 @@
 "tag.suggested.mentions-%lld" = "%lld개 글";
 
 // MARK: Tag Groups
-"add-tag-groups.edit.title.field" = "Tag Group Title";
-"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
-"add-tag-groups.edit.tags" = "Add tags to the group";
-"add-tag-groups.edit.tags.add" = "Tag";
+"add-tag-groups.edit.title.field" = "태그 모음 이름";
+"add-tag-groups.edit.icon.field" = "태그 모음 아이콘 (SF Symbol 이름)";
+"add-tag-groups.edit.tags" = "모음에 포함할 태그";
+"add-tag-groups.edit.tags.add" = "태그";
