@@ -162,7 +162,7 @@
 "settings.content.expand-media" = "Multimedia erakusteko hobespenak";
 "settings.content.default-sensitive" = "Markatu eduki guztia hunkigarri gisa";
 "settings.content.default-visibility" = "Edukiaren irismena";
-"settings.content.default-reply-visibility" = "Reply Visibility";
+"settings.content.default-reply-visibility" = "Erantzunen ikusgaitasuna";
 "settings.content.media" = "Multimedia";
 "settings.content.media.show.alt" = "Erakutsi deskribapenak";
 "settings.content.reading" = "Irakurtzean";
