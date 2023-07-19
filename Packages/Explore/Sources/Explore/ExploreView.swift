@@ -90,7 +90,7 @@ public struct ExploreView: View {
       }
     }
   }
-  
+
   private var quickAccessView: some View {
     ScrollView(.horizontal) {
       HStack {

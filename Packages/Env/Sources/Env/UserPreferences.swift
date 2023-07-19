@@ -12,7 +12,7 @@ public class UserPreferences: ObservableObject {
   private var client: Client?
 
   @AppStorage("remote_local_timeline") public var remoteLocalTimelines: [String] = []
-    @AppStorage("tag_groups") public var tagGroups: [TagGroup] = []
+  @AppStorage("tag_groups") public var tagGroups: [TagGroup] = []
   @AppStorage("preferred_browser") public var preferredBrowser: PreferredBrowser = .inAppSafari
   @AppStorage("draft_posts") public var draftsPosts: [String] = []
   @AppStorage("show_translate_button_inline") public var showTranslateButton: Bool = true
@@ -55,7 +55,7 @@ public class UserPreferences: ObservableObject {
   @AppStorage("requested_review") public var requestedReview = false
 
   @AppStorage("collapse-long-posts") public var collapseLongPosts = true
-    
+
   @AppStorage("share-button-behavior") public var shareButtonBehavior: PreferredShareButtonBehavior = .linkAndText
 
   public enum SwipeActionsIconStyle: String, CaseIterable {

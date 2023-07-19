@@ -71,7 +71,8 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
     if self == .jpeg || self == .png || self == .tiff || self == .image || self == .uiimage || self == .adobeRawImage {
       if let image = result as? UIImage,
          let compressedData = try? await compressor.compressImageForUpload(image),
-         let compressedImage = UIImage(data: compressedData) {
+         let compressedImage = UIImage(data: compressedData)
+      {
         return compressedImage
       } else if let imageURL = result as? URL,
                 let compressedData = await compressor.compressImageFrom(url: imageURL),

@@ -33,7 +33,7 @@ public enum SheetDestination: Identifiable {
   case listAddAccount(account: Account)
   case addAccount
   case addRemoteLocalTimeline
-case addTagGroup
+  case addTagGroup
   case statusEditHistory(status: String)
   case settings
   case accountPushNotficationsSettings
@@ -52,7 +52,7 @@ case addTagGroup
     case .addAccount:
       return "addAccount"
     case .addTagGroup:
-        return "addTagGroup"
+      return "addTagGroup"
     case .addRemoteLocalTimeline:
       return "addRemoteLocalTimeline"
     case .statusEditHistory:

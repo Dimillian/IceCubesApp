@@ -83,8 +83,8 @@ extension View {
         AddRemoteTimelineView()
           .withEnvironments()
       case .addTagGroup:
-          AddTagGroupView()
-              .withEnvironments()
+        AddTagGroupView()
+          .withEnvironments()
       case let .statusEditHistory(status):
         StatusEditHistoryView(statusId: status)
           .withEnvironments()

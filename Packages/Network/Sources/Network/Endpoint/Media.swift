@@ -16,7 +16,7 @@ public enum Media: Endpoint {
   public func queryItems() -> [URLQueryItem]? {
     return nil
   }
-  
+
   public var jsonValue: Encodable? {
     switch self {
     case let .media(_, json):
@@ -25,7 +25,6 @@ public enum Media: Endpoint {
       return nil
     }
   }
-  
 }
 
 public struct MediaDescriptionData: Encodable, Sendable {
@@ -35,4 +34,3 @@ public struct MediaDescriptionData: Encodable, Sendable {
     self.description = description
   }
 }
-

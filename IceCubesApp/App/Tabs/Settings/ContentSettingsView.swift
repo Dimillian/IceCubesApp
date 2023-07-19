@@ -27,7 +27,7 @@ struct ContentSettingsView: View {
           Text("settings.content.media.show.alt")
         }
       }.listRowBackground(theme.primaryBackgroundColor)
-      
+
       Section("settings.content.sharing") {
         Picker("settings.content.sharing.share-button-behavior", selection: $userPreferences.shareButtonBehavior) {
           ForEach(PreferredShareButtonBehavior.allCases, id: \.rawValue) { option in

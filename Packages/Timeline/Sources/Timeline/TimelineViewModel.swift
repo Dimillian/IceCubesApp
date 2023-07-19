@@ -40,13 +40,13 @@ class TimelineViewModel: ObservableObject {
   private var timelineTask: Task<Void, Never>?
 
   @Published var tag: Tag?
-    
-    var tagGroup: TagGroup? {
-        if case let .tagGroup(group) = timeline {
-            return group
-        }
-        return nil
+
+  var tagGroup: TagGroup? {
+    if case let .tagGroup(group) = timeline {
+      return group
     }
+    return nil
+  }
 
   // Internal source of truth for a timeline.
   private var datasource = TimelineDatasource()
@@ -170,7 +170,7 @@ extension TimelineViewModel: StatusesFetcher {
     }
     await fetchNewestStatuses()
   }
-  
+
   func refreshTimeline() {
     timelineTask?.cancel()
     timelineTask = Task {
@@ -321,8 +321,9 @@ extension TimelineViewModel: StatusesFetcher {
     // If none, it'll stop there.
     // Only do that in the context of the home timeline as other don't worth catching up that much.
     if timeline == .home,
-        !Task.isCancelled,
-        let latest = await datasource.get().first {
+       !Task.isCancelled,
+       let latest = await datasource.get().first
+    {
       try await fetchNewPagesFrom(latestStatus: latest, client: client)
     }
   }

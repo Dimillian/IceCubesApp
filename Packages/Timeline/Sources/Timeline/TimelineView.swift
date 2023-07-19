@@ -1,11 +1,11 @@
 import DesignSystem
 import Env
-import SwiftUIIntrospect
 import Models
 import Network
 import Shimmer
 import Status
 import SwiftUI
+import SwiftUIIntrospect
 
 public struct TimelineView: View {
   private enum Constants {
@@ -39,8 +39,8 @@ public struct TimelineView: View {
     ScrollViewReader { proxy in
       ZStack(alignment: .top) {
         List {
-            if viewModel.tagGroup != nil {
-              tagGroupHeaderView
+          if viewModel.tagGroup != nil {
+            tagGroupHeaderView
           } else if viewModel.tag == nil {
             scrollToTopView
           } else {
@@ -106,19 +106,18 @@ public struct TimelineView: View {
         }
         .accessibilityRepresentation {
           switch timeline {
-            case let .remoteLocal(_, filter):
-              if canFilterTimeline {
-                Menu(filter.localizedTitle()) {}
-              } else {
-                Text(filter.localizedTitle())
-              }
-            default:
-              if canFilterTimeline {
-                Menu(timeline.localizedTitle()) {}
-              } else {
-                Text(timeline.localizedTitle())
-              }
-
+          case let .remoteLocal(_, filter):
+            if canFilterTimeline {
+              Menu(filter.localizedTitle()) {}
+            } else {
+              Text(filter.localizedTitle())
+            }
+          default:
+            if canFilterTimeline {
+              Menu(timeline.localizedTitle()) {}
+            } else {
+              Text(timeline.localizedTitle())
+            }
           }
         }
         .accessibilityAddTraits(.isHeader)
@@ -182,64 +181,64 @@ public struct TimelineView: View {
   @ViewBuilder
   private var tagHeaderView: some View {
     if let tag = viewModel.tag {
-        headerView {
-            HStack {
-              VStack(alignment: .leading, spacing: 4) {
-                Text("#\(tag.name)")
-                  .font(.scaledHeadline)
-                Text("timeline.n-recent-from-n-participants \(tag.totalUses) \(tag.totalAccounts)")
-                  .font(.scaledFootnote)
-                  .foregroundColor(.gray)
-              }
-              .accessibilityElement(children: .combine)
-              Spacer()
-              Button {
-                Task {
-                  if tag.following {
-                    viewModel.tag = await account.unfollowTag(id: tag.name)
-                  } else {
-                    viewModel.tag = await account.followTag(id: tag.name)
-                  }
-                }
-              } label: {
-                Text(tag.following ? "account.follow.following" : "account.follow.follow")
-              }.buttonStyle(.bordered)
-            }
-        }
-    }
-  }
-    
-    @ViewBuilder
-    private var tagGroupHeaderView: some View {
-      if let group = viewModel.tagGroup {
-          headerView {
-              HStack {
-                VStack(alignment: .leading, spacing: 4) {
-                    Text(group.description)
-                    .font(.scaledHeadline)
-                }
-                .accessibilityElement(children: .combine)
-              }
+      headerView {
+        HStack {
+          VStack(alignment: .leading, spacing: 4) {
+            Text("#\(tag.name)")
+              .font(.scaledHeadline)
+            Text("timeline.n-recent-from-n-participants \(tag.totalUses) \(tag.totalAccounts)")
+              .font(.scaledFootnote)
+              .foregroundColor(.gray)
           }
+          .accessibilityElement(children: .combine)
+          Spacer()
+          Button {
+            Task {
+              if tag.following {
+                viewModel.tag = await account.unfollowTag(id: tag.name)
+              } else {
+                viewModel.tag = await account.followTag(id: tag.name)
+              }
+            }
+          } label: {
+            Text(tag.following ? "account.follow.following" : "account.follow.follow")
+          }.buttonStyle(.bordered)
+        }
       }
     }
-    
-    @ViewBuilder
-    private func headerView(
-        @ViewBuilder content: () -> some View
-    ) -> some View {
-        VStack(alignment: .leading) {
-          Spacer()
-          content()
-          Spacer()
+  }
+
+  @ViewBuilder
+  private var tagGroupHeaderView: some View {
+    if let group = viewModel.tagGroup {
+      headerView {
+        HStack {
+          VStack(alignment: .leading, spacing: 4) {
+            Text(group.description)
+              .font(.scaledHeadline)
+          }
+          .accessibilityElement(children: .combine)
         }
-        .listRowBackground(theme.secondaryBackgroundColor)
-        .listRowSeparator(.hidden)
-        .listRowInsets(.init(top: 8,
-                             leading: .layoutPadding,
-                             bottom: 8,
-                             trailing: .layoutPadding))
+      }
     }
+  }
+
+  @ViewBuilder
+  private func headerView(
+    @ViewBuilder content: () -> some View
+  ) -> some View {
+    VStack(alignment: .leading) {
+      Spacer()
+      content()
+      Spacer()
+    }
+    .listRowBackground(theme.secondaryBackgroundColor)
+    .listRowSeparator(.hidden)
+    .listRowInsets(.init(top: 8,
+                         leading: .layoutPadding,
+                         bottom: 8,
+                         trailing: .layoutPadding))
+  }
 
   private var scrollToTopView: some View {
     HStack { EmptyView() }

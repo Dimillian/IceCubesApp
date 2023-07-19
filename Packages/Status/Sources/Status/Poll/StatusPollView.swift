@@ -117,7 +117,6 @@ public struct StatusPollView: View {
     }
     .accessibilityElement(children: .contain)
     .accessibilityLabel(viewModel.poll.expired ? "accessibility.status.poll.finished.label" : "accessibility.status.poll.active.label")
-
   }
 
   func combinedAccessibilityLabel(for option: Poll.Option, index: Int) -> Text {
@@ -126,7 +125,6 @@ public struct StatusPollView: View {
       Text(", ") +
       Text(option.title) +
       Text(showPercentage ? ", \(percentForOption(option: option))%" : "")
-
   }
 
   private var footerView: some View {

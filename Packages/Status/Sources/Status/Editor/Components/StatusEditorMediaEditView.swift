@@ -15,7 +15,7 @@ struct StatusEditorMediaEditView: View {
   @FocusState private var isFieldFocused: Bool
 
   @State private var isUpdating: Bool = false
-  
+
   @State private var didAppear: Bool = false
 
   var body: some View {

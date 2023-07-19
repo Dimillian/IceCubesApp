@@ -63,28 +63,26 @@ extension Tag: Sendable {}
 extension Tag.History: Sendable {}
 extension FeaturedTag: Sendable {}
 
-
 public struct TagGroup: Codable, Equatable, Hashable {
-    public init(title: String, sfSymbolName: String, main: String, additional: [String]) {
-        self.title = title
-        self.sfSymbolName = sfSymbolName
-        self.main = main
-        self.additional = additional
-    }
-    
-    public let title: String
-    public let sfSymbolName: String
-    public let main: String
-    public let additional: [String]
-    
-    public var tags: [String] {
-        [main] + additional
-    }
-    
-    public var description: String {
-        tags
-            .map { "#\($0)" }
-            .joined(separator: " ")
-    }
-}
+  public init(title: String, sfSymbolName: String, main: String, additional: [String]) {
+    self.title = title
+    self.sfSymbolName = sfSymbolName
+    self.main = main
+    self.additional = additional
+  }
 
+  public let title: String
+  public let sfSymbolName: String
+  public let main: String
+  public let additional: [String]
+
+  public var tags: [String] {
+    [main] + additional
+  }
+
+  public var description: String {
+    tags
+      .map { "#\($0)" }
+      .joined(separator: " ")
+  }
+}
