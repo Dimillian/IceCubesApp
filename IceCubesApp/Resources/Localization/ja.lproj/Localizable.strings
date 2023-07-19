@@ -240,6 +240,8 @@
 "timeline.filter.lists" = "リスト";
 "timeline.filter.local" = "ローカルタイムライン";
 "timeline.filter.tags" = "フォローしたタグ";
+"timeline.filter.tag-groups" = "Tag Groups";
+"timeline.filter.add-tag-groups" = "Add tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "アカウントの追加";
@@ -596,3 +598,9 @@
 "status.action.report" = "投稿を報告";
 
 "tag.suggested.mentions-%lld" = "返信：%lld";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Tag Group Title";
+"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
+"add-tag-groups.edit.tags" = "Add tags to the group";
+"add-tag-groups.edit.tags.add" = "Tag";

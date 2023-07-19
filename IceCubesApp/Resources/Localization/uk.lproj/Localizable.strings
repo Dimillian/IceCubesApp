@@ -241,6 +241,8 @@
 "timeline.filter.lists" = "Списки";
 "timeline.filter.local" = "Локальна стрічка";
 "timeline.filter.tags" = "Хештеґи";
+"timeline.filter.tag-groups" = "Tag Groups";
+"timeline.filter.add-tag-groups" = "Add tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Додати обліковий запис";
@@ -598,4 +600,10 @@
 "status.action.report" = "Поскаржитися на допис";
 
 "tag.suggested.mentions-%lld" = "%lld згадок";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Tag Group Title";
+"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
+"add-tag-groups.edit.tags" = "Add tags to the group";
+"add-tag-groups.edit.tags.add" = "Tag";
 

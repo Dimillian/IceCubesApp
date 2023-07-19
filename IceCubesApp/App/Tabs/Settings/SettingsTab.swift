@@ -139,6 +139,9 @@ struct SettingsTabs: View {
       NavigationLink(destination: remoteLocalTimelinesView) {
         Label("settings.general.remote-timelines", systemImage: "dot.radiowaves.right")
       }
+        NavigationLink(destination: tagGroupsView) {
+            Label("timeline.filter.tag-groups", systemImage: "number")
+        }
       NavigationLink(destination: ContentSettingsView()) {
         Label("settings.general.content", systemImage: "rectangle.stack")
       }
@@ -261,6 +264,36 @@ struct SettingsTabs: View {
       }
     }
   }
+    
+    private var tagGroupsView: some View {
+      Form {
+        ForEach(preferences.tagGroups, id: \.self) { group in
+            Text(group.title)
+        }
+        .onDelete { indexes in
+          if let index = indexes.first {
+            _ = preferences.tagGroups.remove(at: index)
+          }
+        }
+        .onMove { source, destination in
+            preferences.tagGroups.move(fromOffsets: source, toOffset: destination)
+        }
+        .listRowBackground(theme.primaryBackgroundColor)
+        
+        Button {
+          routerPath.presentedSheet = .addTagGroup
+        } label: {
+          Label("timeline.filter.add-tag-groups", systemImage: "plus")
+        }
+        .listRowBackground(theme.primaryBackgroundColor)
+      }
+      .navigationTitle("timeline.filter.tag-groups")
+      .scrollContentBackground(.hidden)
+      .background(theme.secondaryBackgroundColor)
+      .toolbar {
+          EditButton()
+      }
+    }
 
   private var remoteLocalTimelinesView: some View {
     Form {

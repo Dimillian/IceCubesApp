@@ -241,6 +241,8 @@
 "timeline.filter.lists" = "Listas";
 "timeline.filter.local" = "Cronologías locales";
 "timeline.filter.tags" = "Etiquetas que sigues";
+"timeline.filter.tag-groups" = "Grupos de Etiquetas";
+"timeline.filter.add-tag-groups" = "Añadir grupo";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Añadir cuenta";
@@ -598,3 +600,9 @@
 "status.action.report" = "Denunciar publicación";
 
 "tag.suggested.mentions-%lld" = "%lld menciones";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Título del Grupo de Etiquetas";
+"add-tag-groups.edit.icon.field" = "Icono del Grupo de Etiquetas (SFSymbol)";
+"add-tag-groups.edit.tags" = "Añade etiquetas al grupo";
+"add-tag-groups.edit.tags.add" = "Etiqueta";

@@ -238,6 +238,8 @@
 "timeline.filter.lists" = "列表";
 "timeline.filter.local" = "远程时间线";
 "timeline.filter.tags" = "关注的标签";
+"timeline.filter.tag-groups" = "Tag Groups";
+"timeline.filter.add-tag-groups" = "Add tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "添加账户";
@@ -597,3 +599,9 @@
 "status.action.report" = "举报嘟文";
 
 "tag.suggested.mentions-%lld" = "%lld 个提及";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Tag Group Title";
+"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
+"add-tag-groups.edit.tags" = "Add tags to the group";
+"add-tag-groups.edit.tags.add" = "Tag";

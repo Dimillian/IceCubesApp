@@ -151,6 +151,25 @@ struct TimelineTab: View {
         Label("timeline.filter.add-local", systemImage: "badge.plus.radiowaves.right")
       }
     }
+      
+      Menu("timeline.filter.tag-groups") {
+          ForEach(preferences.tagGroups, id: \.self) { group in
+            Button {
+                timeline = .tagGroup(group)
+            } label: {
+              VStack {
+                  let icon = group.sfSymbolName.isEmpty ? "number" : group.sfSymbolName
+                  Label(group.title, systemImage: icon)
+              }
+            }
+          }
+          
+          Button {
+            routerPath.presentedSheet = .addTagGroup
+          } label: {
+            Label("timeline.filter.add-tag-groups", systemImage: "plus")
+          }
+      }
   }
 
   private var addAccountButton: some View {

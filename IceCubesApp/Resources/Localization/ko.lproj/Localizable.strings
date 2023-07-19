@@ -241,6 +241,8 @@
 "timeline.filter.local" = "원격 로컬 타임라인";
 "timeline.filter.tags" = "팔로우한 태그";
 "timeline-new-posts %lld" = "%lld개 새 글";
+"timeline.filter.tag-groups" = "Tag Groups";
+"timeline.filter.add-tag-groups" = "Add tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "계정 추가";
@@ -600,3 +602,9 @@
 "status.action.report" = "글 신고";
 
 "tag.suggested.mentions-%lld" = "%lld개 글";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Tag Group Title";
+"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
+"add-tag-groups.edit.tags" = "Add tags to the group";
+"add-tag-groups.edit.tags.add" = "Tag";
