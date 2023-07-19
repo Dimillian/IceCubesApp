@@ -239,8 +239,8 @@
 "timeline.filter.lists" = "列表";
 "timeline.filter.local" = "远程时间线";
 "timeline.filter.tags" = "关注的标签";
-"timeline.filter.tag-groups" = "Tag Groups";
-"timeline.filter.add-tag-groups" = "Add tag group";
+"timeline.filter.tag-groups" = "标签组";
+"timeline.filter.add-tag-groups" = "新建标签组";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "添加账户";
@@ -602,7 +602,7 @@
 "tag.suggested.mentions-%lld" = "%lld 个提及";
 
 // MARK: Tag Groups
-"add-tag-groups.edit.title.field" = "Tag Group Title";
-"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
-"add-tag-groups.edit.tags" = "Add tags to the group";
-"add-tag-groups.edit.tags.add" = "Tag";
+"add-tag-groups.edit.title.field" = "标签组名称";
+"add-tag-groups.edit.icon.field" = "标签组图标（SFSymbol）";
+"add-tag-groups.edit.tags" = "将标签添加到组";
+"add-tag-groups.edit.tags.add" = "标签";
