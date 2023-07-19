@@ -240,6 +240,8 @@
 "timeline.filter.lists" = "Listy";
 "timeline.filter.local" = "Strumienie lokalne";
 "timeline.filter.tags" = "Obserwowane hasztagi";
+"timeline.filter.tag-groups" = "Tag Groups";
+"timeline.filter.add-tag-groups" = "Add tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Dodaj konto";
@@ -586,4 +588,10 @@
 "report.title" = "Zgłoszenie postu";
 "report.action.send" = "Wyślij";
 "status.action.report" = "Zgłoś post";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Tag Group Title";
+"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
+"add-tag-groups.edit.tags" = "Add tags to the group";
+"add-tag-groups.edit.tags.add" = "Tag";
 
