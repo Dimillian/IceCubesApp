@@ -341,10 +341,10 @@
 "explore.section.trending.posts" = "Bogan dauden bidalketak";
 "explore.section.trending.tags" = "Pil-pilean dauden traolak";
 "explore.section.users" = "Erabiltzaileak";
-"explore.scope.all" = "All";
-"explore.scope.people" = "People";
-"explore.scope.hashtags" = "Hashtags";
-"explore.scope.posts" = "Posts";
+"explore.scope.all" = "Guztia";
+"explore.scope.people" = "Jendea";
+"explore.scope.hashtags" = "Traolak";
+"explore.scope.posts" = "Bidalketak";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "Boto bakarra";
