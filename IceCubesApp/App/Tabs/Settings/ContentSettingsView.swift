@@ -110,7 +110,7 @@ struct ContentSettingsView: View {
   }
 }
 
-extension View {
+fileprivate extension View {
   func onChange(of: some Equatable, _ perform: @escaping () -> Void) -> some View {
     if #available(iOS 17, macOS 14, *) {
       return onChange(of: of) { oldValue, newValue in
