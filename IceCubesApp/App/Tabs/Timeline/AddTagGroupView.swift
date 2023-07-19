@@ -17,6 +17,7 @@ struct AddTagGroupView: View {
   @State private var sfSymbolName: String = ""
   @State private var tags: [String] = []
   @State private var newTag: String = ""
+  @State private var popupTagsPresented = false
 
   private var canSave: Bool {
     !title.isEmpty &&
@@ -34,30 +35,30 @@ struct AddTagGroupView: View {
 
   var body: some View {
     NavigationStack {
-      Form {
-        metadataSection
-        keywordsSection
-      }
-      .formStyle(.grouped)
-      .navigationTitle("timeline.filter.add-tag-groups")
-      .navigationBarTitleDisplayMode(.inline)
-      .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
-      .scrollDismissesKeyboard(.immediately)
-      .toolbar {
-        ToolbarItem(placement: .navigationBarLeading) {
-          Button("action.cancel", action: { dismiss() })
+      ZStack(alignment: .bottom) {
+        Form {
+          metadataSection
+          keywordsSection
         }
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button("action.save", action: { save() })
-            .disabled(!canSave)
+        .formStyle(.grouped)
+        .navigationTitle("timeline.filter.add-tag-groups")
+        .navigationBarTitleDisplayMode(.inline)
+        .scrollContentBackground(.hidden)
+        .background(theme.secondaryBackgroundColor)
+        .scrollDismissesKeyboard(.immediately)
+        .toolbar {
+          ToolbarItem(placement: .navigationBarLeading) {
+            Button("action.cancel", action: { dismiss() })
+          }
+          ToolbarItem(placement: .navigationBarTrailing) {
+            Button("action.save", action: { save() })
+              .disabled(!canSave)
+          }
         }
+        symbolsSuggestionView
       }
       .onAppear {
         focusedField = .title
-      }
-      .overlay(alignment: .bottom) {
-        symbolsSuggestionView
       }
     }
   }
@@ -86,9 +87,8 @@ struct AddTagGroupView: View {
         Image(systemName: sfSymbolName)
       }
     }
+    .listRowBackground(theme.primaryBackgroundColor)
   }
-
-  @State private var popupTagsPresented = false
 
   private var keywordsSection: some View {
     Section("add-tag-groups.edit.tags") {
