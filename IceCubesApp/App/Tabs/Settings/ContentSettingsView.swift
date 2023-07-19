@@ -92,7 +92,7 @@ struct ContentSettingsView: View {
             }
           }
         }
-        .onChange(of: userPreferences.postVisibility) {
+        .onChange(of: userPreferences.postVisibility) { newValue in
           userPreferences.conformReplyVisibilityConstraints()
         }
         
@@ -107,19 +107,5 @@ struct ContentSettingsView: View {
     .navigationTitle("settings.content.navigation-title")
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
-  }
-}
-
-fileprivate extension View {
-  func onChange(of: some Equatable, _ perform: @escaping () -> Void) -> some View {
-    if #available(iOS 17, macOS 14, *) {
-      return onChange(of: of) { oldValue, newValue in
-        perform()
-      }
-    } else {
-      return onChange(of: of) { value in
-        perform()
-      }
-    }
   }
 }
