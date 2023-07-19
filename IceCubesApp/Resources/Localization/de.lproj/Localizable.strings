@@ -162,6 +162,7 @@
 "settings.content.expand-media" = "Medienansicht";
 "settings.content.default-sensitive" = "Medien immer als sensibel kennzeichnen";
 "settings.content.default-visibility" = "Sichtbarkeit Beiträge";
+"settings.content.default-reply-visibility" = "Sichtbarkeit Antworten";
 "settings.content.media" = "Medien";
 "settings.content.media.show.alt" = "ALT-Texte zeigen";
 "settings.content.reading" = "Lesen";
