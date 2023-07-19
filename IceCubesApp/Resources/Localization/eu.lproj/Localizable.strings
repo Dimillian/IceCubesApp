@@ -243,8 +243,8 @@
 "timeline.filter.lists" = "Zerrendak";
 "timeline.filter.local" = "Denbora-lerro lokalak";
 "timeline.filter.tags" = "Jarraitutako traolak";
-"timeline.filter.tag-groups" = "Tag Groups";
-"timeline.filter.add-tag-groups" = "Add tag group";
+"timeline.filter.tag-groups" = "Traola-sortak";
+"timeline.filter.add-tag-groups" = "Gehitu traola-sorta";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Gehitu kontua";
@@ -589,7 +589,7 @@
 "status.action.report" = "Salatu edukia";
 
 // MARK: Tag Groups
-"add-tag-groups.edit.title.field" = "Tag Group Title";
-"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
-"add-tag-groups.edit.tags" = "Add tags to the group";
-"add-tag-groups.edit.tags.add" = "Tag";
+"add-tag-groups.edit.title.field" = "Traola-sortaren izena";
+"add-tag-groups.edit.icon.field" = "Traola-sortaren ikonoa (SFSymbol izena)";
+"add-tag-groups.edit.tags" = "Gehitu traolak sortara";
+"add-tag-groups.edit.tags.add" = "Traola";
