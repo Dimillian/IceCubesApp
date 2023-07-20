@@ -126,6 +126,7 @@
 "settings.content.expand-media" = "Паказ медыя";
 "settings.content.default-sensitive" = "Заўсёды адзначаць медыя як уражлівыя";
 "settings.content.default-visibility" = "Бачнасць допісаў";
+"settings.content.default-reply-visibility" = "Reply Visibility";
 "settings.content.media" = "Медыя";
 "settings.content.media.show.alt" = "Паказваць альт. тэкст";
 "settings.content.reading" = "Чытанне";

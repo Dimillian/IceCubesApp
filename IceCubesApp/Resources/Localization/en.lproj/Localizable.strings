@@ -126,6 +126,7 @@
 "settings.content.expand-media" = "Media Display";
 "settings.content.default-sensitive" = "Always Mark Media as Sensitive";
 "settings.content.default-visibility" = "Posting Visibility";
+"settings.content.default-reply-visibility" = "Reply Visibility";
 "settings.content.media" = "Media";
 "settings.content.media.show.alt" = "Show ALT Texts";
 "settings.content.reading" = "Reading";

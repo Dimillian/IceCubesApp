@@ -79,10 +79,4 @@ public struct TagGroup: Codable, Equatable, Hashable {
   public var tags: [String] {
     [main] + additional
   }
-
-  public var description: String {
-    tags
-      .map { "#\($0)" }
-      .joined(separator: " ")
-  }
 }

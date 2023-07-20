@@ -212,13 +212,20 @@ public struct TimelineView: View {
   private var tagGroupHeaderView: some View {
     if let group = viewModel.tagGroup {
       headerView {
-        HStack {
-          VStack(alignment: .leading, spacing: 4) {
-            Text(group.description)
-              .font(.scaledHeadline)
+        ScrollView(.horizontal) {
+          HStack(spacing: 4) {
+            ForEach(group.tags, id: \.self) { tag in
+              Button {
+                routerPath.navigate(to: .hashTag(tag: tag, account: nil))
+              } label: {
+                Text("#\(tag)")
+                  .font(.scaledHeadline)
+              }
+              .buttonStyle(.plain)
+            }
           }
-          .accessibilityElement(children: .combine)
         }
+        .scrollIndicators(.hidden)
       }
     }
   }

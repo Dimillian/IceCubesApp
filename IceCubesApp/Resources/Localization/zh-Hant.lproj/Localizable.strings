@@ -126,6 +126,7 @@
 "settings.content.expand-media" = "媒體顯示";
 "settings.content.default-sensitive" = "媒體一概標示為敏感";
 "settings.content.default-visibility" = "嘟文能見度";
+"settings.content.default-reply-visibility" = "Reply Visibility";
 "settings.content.media" = "媒體";
 "settings.content.media.show.alt" = "顯示圖片描述";
 "settings.content.reading" = "閱讀";

@@ -120,6 +120,7 @@
 "settings.content.expand-media" = "Visibilitat del contingut multimèdia";
 "settings.content.default-sensitive" = "Marca sempre el contingut com a sensible";
 "settings.content.default-visibility" = "Visibilitat de les publicacions";
+"settings.content.default-reply-visibility" = "Reply Visibility";
 "settings.content.media" = "Media";
 "settings.content.media.show.alt" = "Show ALT texts";
 "settings.content.reading" = "Llegint";

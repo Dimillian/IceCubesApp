@@ -96,6 +96,7 @@
 		9FFF6784299B7D4400FE700A /* LRUCache in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF6783299B7D4400FE700A /* LRUCache */; };
 		C9B22677297F6C2E001F9EFE /* ContentSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B22676297F6C2E001F9EFE /* ContentSettingsView.swift */; };
 		D08A9C3529956CFA00204A4A /* SwipeActionsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08A9C3429956CFA00204A4A /* SwipeActionsSettingsView.swift */; };
+		DA0B24FB2A6876D50045BDD7 /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = DA0B24FA2A6876D50045BDD7 /* SFSafeSymbols */; };
 		E92817FA298443D600875FD1 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = E92817F9298443D600875FD1 /* Models */; };
 		E92817FC298443D600875FD1 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = E92817FB298443D600875FD1 /* Network */; };
 		E92817FE29844DB700875FD1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E92817FD29844DB700875FD1 /* Assets.xcassets */; };
@@ -332,6 +333,7 @@
 				9F5E581929545BE700A53960 /* Env in Frameworks */,
 				9F2A540A29699705009B2D7C /* ReceiptParser in Frameworks */,
 				9F35DB44294F9A7D00B3281A /* Status in Frameworks */,
+				DA0B24FB2A6876D50045BDD7 /* SFSafeSymbols in Frameworks */,
 				9F295540292B6C3400E0E81B /* Timeline in Frameworks */,
 				9F35DB4A29506FA100B3281A /* Notifications in Frameworks */,
 			);
@@ -649,6 +651,7 @@
 				9F2A540B29699705009B2D7C /* RevenueCat */,
 				9FE3DB56296FEFCA00628CB0 /* AppAccount */,
 				065FA1FD29866CD600012EA0 /* LRUCache */,
+				DA0B24FA2A6876D50045BDD7 /* SFSafeSymbols */,
 			);
 			productName = IceCubesApp;
 			productReference = 9FBFE639292A715500C250E9 /* IceCubesApp.app */;
@@ -730,6 +733,7 @@
 				9FAE4ACC29379A5A00772766 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				9F2A540829699705009B2D7C /* XCRemoteSwiftPackageReference "purchases-ios" */,
 				065FA1FC29866CD600012EA0 /* XCRemoteSwiftPackageReference "LRUCache" */,
+				DA0B24F92A6876D40045BDD7 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
 			);
 			productRefGroup = 9FBFE63A292A715500C250E9 /* Products */;
 			projectDirPath = "";
@@ -977,7 +981,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.7.0;
+				MARKETING_VERSION = 1.7.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesNotifications";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1007,7 +1011,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.7.0;
+				MARKETING_VERSION = 1.7.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesNotifications";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1038,7 +1042,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.7.0;
+				MARKETING_VERSION = 1.7.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesShareExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1068,7 +1072,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.7.0;
+				MARKETING_VERSION = 1.7.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesShareExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1199,7 +1203,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconAlternate1 AppIconAlternate2 AppIconAlternate3 AppIconAlternate4 AppIconAlternate5 AppIconAlternate6 AppIconAlternate7 AppIconAlternate8 AppIconAlternate9 AppIconAlternate10 AppIconAlternate11 AppIconAlternate12 AppIconAlternate13 AppIconAlternate14 AppIconAlternate15 AppIconAlternate16 AppIconAlternate17 AppIconAlternate19 AppIconAlternate18 AppIconAlternate20 AppIconAlternate21 AppIconAlternate22 AppIconAlternate23 AppIconAlternate24 AppIconAlternate25 AppIconAlternate26 AppIconAlternate27 AppIconAlternate28 AppIconAlternate29 AppIconAlternate30 AppIconAlternate31 AppIconAlternate32 AppIconAlternate33 AppIconAlternate34 AppIconAlternate35 AppIconAlternate36";
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconAlternate1 AppIconAlternate2 AppIconAlternate3 AppIconAlternate4 AppIconAlternate5 AppIconAlternate6 AppIconAlternate7 AppIconAlternate8 AppIconAlternate9 AppIconAlternate10 AppIconAlternate11 AppIconAlternate12 AppIconAlternate13 AppIconAlternate14 AppIconAlternate15 AppIconAlternate16 AppIconAlternate17 AppIconAlternate19 AppIconAlternate18 AppIconAlternate20 AppIconAlternate21 AppIconAlternate22 AppIconAlternate23 AppIconAlternate24 AppIconAlternate25 AppIconAlternate26 AppIconAlternate27 AppIconAlternate28 AppIconAlternate29 AppIconAlternate30 AppIconAlternate31 AppIconAlternate32 AppIconAlternate33 AppIconAlternate34 AppIconAlternate35 AppIconAlternate36 AppIconAlternate37";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -1234,7 +1238,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.7.0;
+				MARKETING_VERSION = 1.7.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -1252,7 +1256,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconAlternate1 AppIconAlternate2 AppIconAlternate3 AppIconAlternate4 AppIconAlternate5 AppIconAlternate6 AppIconAlternate7 AppIconAlternate8 AppIconAlternate9 AppIconAlternate10 AppIconAlternate11 AppIconAlternate12 AppIconAlternate13 AppIconAlternate14 AppIconAlternate15 AppIconAlternate16 AppIconAlternate17 AppIconAlternate19 AppIconAlternate18 AppIconAlternate20 AppIconAlternate21 AppIconAlternate22 AppIconAlternate23 AppIconAlternate24 AppIconAlternate25 AppIconAlternate26 AppIconAlternate27 AppIconAlternate28 AppIconAlternate29 AppIconAlternate30 AppIconAlternate31 AppIconAlternate32 AppIconAlternate33 AppIconAlternate34 AppIconAlternate35 AppIconAlternate36";
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconAlternate1 AppIconAlternate2 AppIconAlternate3 AppIconAlternate4 AppIconAlternate5 AppIconAlternate6 AppIconAlternate7 AppIconAlternate8 AppIconAlternate9 AppIconAlternate10 AppIconAlternate11 AppIconAlternate12 AppIconAlternate13 AppIconAlternate14 AppIconAlternate15 AppIconAlternate16 AppIconAlternate17 AppIconAlternate19 AppIconAlternate18 AppIconAlternate20 AppIconAlternate21 AppIconAlternate22 AppIconAlternate23 AppIconAlternate24 AppIconAlternate25 AppIconAlternate26 AppIconAlternate27 AppIconAlternate28 AppIconAlternate29 AppIconAlternate30 AppIconAlternate31 AppIconAlternate32 AppIconAlternate33 AppIconAlternate34 AppIconAlternate35 AppIconAlternate36 AppIconAlternate37";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -1287,7 +1291,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.7.0;
+				MARKETING_VERSION = 1.7.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -1321,7 +1325,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.7.0;
+				MARKETING_VERSION = 1.7.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesActionExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1352,7 +1356,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.7.0;
+				MARKETING_VERSION = 1.7.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesActionExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1437,6 +1441,14 @@
 			requirement = {
 				branch = master;
 				kind = branch;
+			};
+		};
+		DA0B24F92A6876D40045BDD7 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SFSafeSymbols/SFSafeSymbols";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.1.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -1577,6 +1589,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 065FA1FC29866CD600012EA0 /* XCRemoteSwiftPackageReference "LRUCache" */;
 			productName = LRUCache;
+		};
+		DA0B24FA2A6876D50045BDD7 /* SFSafeSymbols */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DA0B24F92A6876D40045BDD7 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */;
+			productName = SFSafeSymbols;
 		};
 		E92817F9298443D600875FD1 /* Models */ = {
 			isa = XCSwiftPackageProductDependency;

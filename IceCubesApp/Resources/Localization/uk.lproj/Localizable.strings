@@ -126,6 +126,7 @@
 "settings.content.expand-media" = "Відображення медіа";
 "settings.content.default-sensitive" = "Завжди позначати медія як делікатні";
 "settings.content.default-visibility" = "Видимість допису";
+"settings.content.default-reply-visibility" = "Reply Visibility";
 "settings.content.media" = "Медіа";
 "settings.content.media.show.alt" = "Показати ALT тексти";
 "settings.content.reading" = "Читання";

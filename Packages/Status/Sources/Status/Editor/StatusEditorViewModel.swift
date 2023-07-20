@@ -254,7 +254,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
         mentionString += " "
       }
       replyToStatus = status
-      visibility = status.visibility
+      visibility = UserPreferences.shared.getReplyVisibility(of: status)
       statusText = .init(string: mentionString)
       selectedRange = .init(location: mentionString.utf16.count, length: 0)
       if !mentionString.isEmpty {
