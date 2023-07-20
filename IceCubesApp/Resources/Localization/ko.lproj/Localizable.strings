@@ -207,7 +207,7 @@
 "settings.swipeactions.status.action.favorite" = "좋아요";
 "settings.swipeactions.status.action.none" = "설정 안 함";
 "settings.swipeactions.status.action.quote" = "인용";
-"settings.swipeactions.status.action.reply" = "댓글";
+"settings.swipeactions.status.action.reply" = "답글";
 "settings.swipeactions.status.explanation" = "글을 오른쪽 혹은 왼쪽으로 쓸어넘겨 원하는 동작을 실행할 수 있습니다. 보조 동작은 주 동작이 설정되어 있을 때만 추가할 수 있습니다.";
 "settings.swipeactions.status.leading" = "오른쪽으로 쓸어넘길 때";
 "settings.swipeactions.status.trailing" = "왼쪽으로 쓸어넘길 때";
@@ -426,7 +426,7 @@
 "status.action.pin" = "고정";
 "status.action.post" = "게시";
 "status.action.quote" = "인용";
-"status.action.reply" = "댓글";
+"status.action.reply" = "답글";
 "status.action.section.your-post" = "내 글을";
 "status.action.share" = "링크 및 본문 공유";
 "status.action.share-link" = "링크 공유";
@@ -460,7 +460,7 @@
 "status.editor.mode.edit" = "글 수정";
 "status.editor.mode.new" = "새 글";
 "status.editor.mode.quote-%@" = "%@님의 글 인용";
-"status.editor.mode.reply-%@" = "%@님의 글에 댓글";
+"status.editor.mode.reply-%@" = "%@님의 글에 답글";
 "status.editor.restore-previous" = "이전 상태로 되돌리기";
 "status.editor.spoiler" = "열람 주의 문구";
 "status.editor.text.placeholder" = "무슨 생각을 하고 계신가요?";
@@ -491,14 +491,14 @@
 "status.poll.send" = "투표";
 "status.post-from-%@" = "%@님의 글";
 "status.row.was-boosted" = "님이 부스트함";
-"status.row.was-reply" = "댓글:";
+"status.row.was-reply" = "답글:";
 "status.row.you-boosted" = "내가 부스트함";
 "status.show-less" = "간략히 보기";
 "status.show-more" = "더 보기";
 "status.show-full-post" = "전체 내용 보기";
 "status.summary.at-time" = " ";
 "status.summary.edited-time" = "마지막 수정: ";
-"status.summary.n-replies %lld" = "댓글 %lld개";
+"status.summary.n-replies %lld" = "답글 %lld개";
 "status.summary.n-boosts %lld" = "부스트 %lld회";
 "status.summary.n-favorites %lld" = "좋아요 %lld회";
 "status.summary.edit-history" = "글 수정 기록";
@@ -571,7 +571,7 @@
 "accessibility.tabs.profile.picker.favorites" = "좋아요한 글";
 "accessibility.tabs.profile.picker.bookmarks" = "보관함에 추가한 글";
 "accessibility.tabs.profile.picker.followed-tags" = "팔로우한 태그";
-"accessibility.tabs.profile.picker.posts-and-replies" = "글 및 댓글";
+"accessibility.tabs.profile.picker.posts-and-replies" = "글 및 답글";
 "accessibility.tabs.profile.picker.media" = "미디어가 있는 글";
 "accessibility.tabs.profile.picker.lists" = "리스트";
 "accessibility.tabs.profile.user-notifications.label" = "새 글 알림 켜기";
@@ -580,7 +580,7 @@
 "accessibility.tabs.profile.fields.container.label" = "이 사용자의 프로필 메타데이터";
 "accessibility.status.spoiler-full-content" = "전체 내용";
 "accessibility.status.a-boosted-b-%@-%@" = "%@ 님이 다음 글을 부스트함: %@";
-"accessibility.status.a-replied-to-%@" = "%@ 님이 다음 사용자의 글에 댓글을 남김: ";
+"accessibility.status.a-replied-to-%@" = "%@ 님이 다음 사용자의 글에 답글을 남김: ";
 "accessibility.image.alt-text-%@" = "미디어 설명: %@";
 "accessibility.image.alt-text-more.label" = "더 많은 미디어 설명 사용 가능";
 "accessibility.tabs.messages.unread.label" = "읽지 않음";
