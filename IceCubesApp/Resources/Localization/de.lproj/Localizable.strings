@@ -243,8 +243,8 @@
 "timeline.filter.lists" = "Listen";
 "timeline.filter.local" = "Lokale Timelines";
 "timeline.filter.tags" = "Gefolgte Hashtags";
-"timeline.filter.tag-groups" = "Tag Groups";
-"timeline.filter.add-tag-groups" = "Add tag group";
+"timeline.filter.tag-groups" = "Taggruppen";
+"timeline.filter.add-tag-groups" = "Taggruppe hinzufügen";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Konto hinzufügen";
