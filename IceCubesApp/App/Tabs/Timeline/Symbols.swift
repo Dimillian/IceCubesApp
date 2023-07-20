@@ -6,13 +6,8 @@
 //
 
 import Foundation
+import SFSafeSymbols
 
-let allSymbols: [String] = {
-  if let bundle = Bundle(identifier: "com.apple.CoreGlyphs"),
-     let resourcePath = bundle.path(forResource: "symbol_search", ofType: "plist"),
-     let plist = NSDictionary(contentsOfFile: resourcePath)
-  {
-    return plist.allKeys as? [String] ?? []
-  }
-  return []
-}()
+let allSymbols: [String] = SFSymbol.allSymbols.map { symbol in
+    symbol.rawValue
+}
