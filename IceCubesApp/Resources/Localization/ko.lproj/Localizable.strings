@@ -121,7 +121,7 @@
 "settings.content.expand-media" = "표시할 미디어";
 "settings.content.default-sensitive" = "내 미디어 항상 민감함으로 표시";
 "settings.content.default-visibility" = "글 기본 공개 범위";
-"settings.content.default-reply-visibility" = "Reply Visibility";
+"settings.content.default-reply-visibility" = "답글 기본 공개 범위";
 "settings.content.media" = "미디어";
 "settings.content.media.show.alt" = "미디어 설명 버튼 표시";
 "settings.content.reading" = "읽을 때";
