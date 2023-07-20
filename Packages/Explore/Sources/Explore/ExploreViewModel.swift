@@ -5,6 +5,23 @@ import SwiftUI
 
 @MainActor
 class ExploreViewModel: ObservableObject {
+  enum SearchScope: String, CaseIterable {
+    case all, people, hashtags, posts
+
+    var localizedString: LocalizedStringKey {
+      switch self {
+      case .all:
+        return .init("explore.scope.all")
+      case .people:
+        return .init("explore.scope.people")
+      case .hashtags:
+        return .init("explore.scope.hashtags")
+      case .posts:
+        return .init("explore.scope.posts")
+      }
+    }
+  }
+
   var client: Client? {
     didSet {
       if oldValue != client {
@@ -36,6 +53,7 @@ class ExploreViewModel: ObservableObject {
   @Published var trendingTags: [Tag] = []
   @Published var trendingStatuses: [Status] = []
   @Published var trendingLinks: [Card] = []
+  @Published var searchScope: SearchScope = .all
 
   private var searchTask: Task<Void, Never>?
   private var cancellables = Set<AnyCancellable>()

@@ -126,14 +126,15 @@
 "settings.content.expand-media" = "メディア表示";
 "settings.content.default-sensitive" = "常にメディアをセンシティブなものとしてマークする";
 "settings.content.default-visibility" = "投稿の可視化";
+"settings.content.default-reply-visibility" = "Reply Visibility";
 "settings.content.media" = "メディア";
 "settings.content.media.show.alt" = "注釈を表示";
 "settings.content.reading" = "リーディング";
 "settings.content.posting" = "ポスティング";
 "settings.content.sharing" = "Sharing";
-"settings.content.sharing.share-button-behavior" = "Share Button Behavior";
-"settings.content.sharing.share-behavior.link-only" = "Link Only";
-"settings.content.sharing.share-behavior.link-and-text" = "Link and Text";
+"settings.content.sharing.share-button-behavior" = "共有ボタンの動作";
+"settings.content.sharing.share-behavior.link-only" = "リンクのみ";
+"settings.content.sharing.share-behavior.link-and-text" = "リンクとテキスト";
 "enum.expand-media.show" = "全て表示";
 "enum.expand-media.hide" = "全て隠す";
 "enum.expand-media.hide-sensitive" = "センシティブなものは隠す";
@@ -173,6 +174,8 @@
 "settings.general.translate" = "翻訳設定";
 "settings.translation.navigation-title" = "翻訳設定";
 "settings.translation.always-deepl" = "DeepLを使用して常に翻訳する";
+"settings.translation.auto-detect-post-language" = "Auto detect language";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary.";
 "settings.translation.user-api-key" = "DeepL APIキー";
 "settings.translation.api-key-type" = "キーのタイプ";
 "settings.translation.needed-message" = "この機能には DeepL APIキーが必要です";
@@ -238,6 +241,8 @@
 "timeline.filter.lists" = "リスト";
 "timeline.filter.local" = "ローカルタイムライン";
 "timeline.filter.tags" = "フォローしたタグ";
+"timeline.filter.tag-groups" = "Tag Groups";
+"timeline.filter.add-tag-groups" = "Add tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "アカウントの追加";
@@ -339,6 +344,10 @@
 "explore.section.trending.posts" = "人気の投稿";
 "explore.section.trending.tags" = "人気のタグ";
 "explore.section.users" = "ユーザー";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "単一投票";
@@ -581,7 +590,7 @@
 "accessibility.media.supported-type.audio.label" = "オーディオ";
 "accessibility.status.contains-media.label-%@" = "%@ を含む";
 "accessibility.status.application.label" = "アプリ";
-"accessibility.status.media-viewer-action.label" = "Open media viewer";
+"accessibility.status.media-viewer-action.label" = "メディア ビューアを開く";
 
 // MARK: Report
 "report.comment.placeholder" = "追加情報";
@@ -590,3 +599,9 @@
 "status.action.report" = "投稿を報告";
 
 "tag.suggested.mentions-%lld" = "返信：%lld";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Tag Group Title";
+"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
+"add-tag-groups.edit.tags" = "Add tags to the group";
+"add-tag-groups.edit.tags.add" = "Tag";

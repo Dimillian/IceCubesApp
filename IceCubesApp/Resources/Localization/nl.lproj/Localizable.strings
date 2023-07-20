@@ -144,6 +144,8 @@
 "settings.general.translate" = "Vertalingsinstellingen";
 "settings.translation.navigation-title" = "Vertaling";
 "settings.translation.always-deepl" = "Vertaal altijd met DeepL";
+"settings.translation.auto-detect-post-language" = "Auto detect language";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary.";
 "settings.translation.user-api-key" = "DeepL API-sleutel";
 "settings.translation.api-key-type" = "Sleuteltype";
 "settings.translation.needed-message" = "Deze functionaliteit vereist een DeepL API-sleutel";
@@ -160,6 +162,7 @@
 "settings.content.expand-media" = "Mediaweergave";
 "settings.content.default-sensitive" = "Markeer media standaard als gevoelig";
 "settings.content.default-visibility" = "Standaard postzichtbaarheid";
+"settings.content.default-reply-visibility" = "Reply Visibility";
 "settings.content.media" = "Media";
 "settings.content.media.show.alt" = "Toon ALT-teksten";
 "settings.content.reading" = "Lezen";
@@ -235,6 +238,8 @@
 "timeline.filter.lists" = "Lijsten";
 "timeline.filter.local" = "Lokale tijdlijnen";
 "timeline.filter.tags" = "Gevolgde hashtags";
+"timeline.filter.tag-groups" = "Tag Groups";
+"timeline.filter.add-tag-groups" = "Add tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Account toevoegen";
@@ -337,6 +342,10 @@
 "explore.section.trending.posts" = "Trending posts";
 "explore.section.trending.tags" = "Trending hashtags";
 "explore.section.users" = "Gebruikers";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "Eén stem";
@@ -588,3 +597,9 @@
 "status.action.report" = "Meld post";
 
 "tag.suggested.mentions-%lld" = "%lld vermeldingen";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Tag Group Title";
+"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
+"add-tag-groups.edit.tags" = "Add tags to the group";
+"add-tag-groups.edit.tags.add" = "Tag";

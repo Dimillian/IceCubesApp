@@ -121,6 +121,7 @@
 "settings.content.expand-media" = "Multimedia";
 "settings.content.default-sensitive" = "Oznaczaj media jako wrażliwe";
 "settings.content.default-visibility" = "Widoczność postów";
+"settings.content.default-reply-visibility" = "Reply Visibility";
 "settings.content.media" = "Media";
 "settings.content.media.show.alt" = "Pokazuj alternatywny tekst";
 "settings.content.reading" = "Czytanie postów";
@@ -169,6 +170,8 @@
 "settings.general.translate" = "Ustawienia tłumaczenia";
 "settings.translation.navigation-title" = "Ustawienia tłumaczenia";
 "settings.translation.always-deepl" = "Zawsze tłumacz przy pomocy DeepL";
+"settings.translation.auto-detect-post-language" = "Auto detect language";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary.";
 "settings.translation.user-api-key" = "Klucz DeepL API";
 "settings.translation.api-key-type" = "Rodzaj klucza";
 "settings.translation.needed-message" = "Ta funkcja wymaga klucza DeepL API";
@@ -238,6 +241,8 @@
 "timeline.filter.lists" = "Listy";
 "timeline.filter.local" = "Strumienie lokalne";
 "timeline.filter.tags" = "Obserwowane hasztagi";
+"timeline.filter.tag-groups" = "Tag Groups";
+"timeline.filter.add-tag-groups" = "Add tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Dodaj konto";
@@ -336,6 +341,10 @@
 "explore.section.trending.posts" = "Popularne posty";
 "explore.section.trending.tags" = "Popularne hasztagi";
 "explore.section.users" = "Osoby";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "Jeden głos";
@@ -580,4 +589,10 @@
 "report.title" = "Zgłoszenie postu";
 "report.action.send" = "Wyślij";
 "status.action.report" = "Zgłoś post";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Tag Group Title";
+"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
+"add-tag-groups.edit.tags" = "Add tags to the group";
+"add-tag-groups.edit.tags.add" = "Tag";
 

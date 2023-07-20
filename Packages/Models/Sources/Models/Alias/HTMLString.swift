@@ -11,7 +11,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
   public var asMarkdown: String = ""
   public var asRawText: String = ""
   public var statusesURLs = [URL]()
-  private(set) public var links = [Link]()
+  public private(set) var links = [Link]()
 
   public var asSafeMarkdownAttributedString: AttributedString = .init()
   private var main_regex: NSRegularExpression?
@@ -156,7 +156,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
         asMarkdown += ")"
 
         if let url = URL(string: href) {
-          let displayString = asMarkdown[start..<finish]
+          let displayString = asMarkdown[start ..< finish]
           links.append(Link(url, displayString: String(displayString)))
         }
         return
@@ -190,19 +190,19 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
       self.displayString = displayString
 
       switch displayString.first {
-        case "@":
-          self.type = .mention
-          self.title = displayString
-        case "#":
-          self.type = .hashtag
-          self.title = String(displayString.dropFirst())
-        default:
-          self.type = .url
-          var hostNameUrl = url.host ?? url.absoluteString
-          if hostNameUrl.hasPrefix("www.") {
-            hostNameUrl = String(hostNameUrl.dropFirst(4))
-          }
-          self.title = hostNameUrl
+      case "@":
+        type = .mention
+        title = displayString
+      case "#":
+        type = .hashtag
+        title = String(displayString.dropFirst())
+      default:
+        type = .url
+        var hostNameUrl = url.host ?? url.absoluteString
+        if hostNameUrl.hasPrefix("www.") {
+          hostNameUrl = String(hostNameUrl.dropFirst(4))
+        }
+        title = hostNameUrl
       }
     }
 

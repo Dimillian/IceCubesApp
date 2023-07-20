@@ -126,6 +126,7 @@
 "settings.content.expand-media" = "Відображення медіа";
 "settings.content.default-sensitive" = "Завжди позначати медія як делікатні";
 "settings.content.default-visibility" = "Видимість допису";
+"settings.content.default-reply-visibility" = "Reply Visibility";
 "settings.content.media" = "Медіа";
 "settings.content.media.show.alt" = "Показати ALT тексти";
 "settings.content.reading" = "Читання";
@@ -173,6 +174,8 @@
 "settings.general.translate" = "Налаштування перекладу";
 "settings.translation.navigation-title" = "Переклад";
 "settings.translation.always-deepl" = "Завжди перекладати за допомогою DeepL";
+"settings.translation.auto-detect-post-language" = "Auto detect language";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary.";
 "settings.translation.user-api-key" = "DeepL API Key";
 "settings.translation.api-key-type" = "Тип ключа";
 "settings.translation.needed-message" = "Ця функція потребує ключа DeepL API key";
@@ -239,6 +242,8 @@
 "timeline.filter.lists" = "Списки";
 "timeline.filter.local" = "Локальна стрічка";
 "timeline.filter.tags" = "Хештеґи";
+"timeline.filter.tag-groups" = "Tag Groups";
+"timeline.filter.add-tag-groups" = "Add tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Додати обліковий запис";
@@ -340,6 +345,10 @@
 "explore.section.trending.posts" = "Популярні дописи";
 "explore.section.trending.tags" = "Популярні хештеґи";
 "explore.section.users" = "Користувачі";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "Лише один варіант";
@@ -592,4 +601,10 @@
 "status.action.report" = "Поскаржитися на допис";
 
 "tag.suggested.mentions-%lld" = "%lld згадок";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Tag Group Title";
+"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
+"add-tag-groups.edit.tags" = "Add tags to the group";
+"add-tag-groups.edit.tags.add" = "Tag";
 

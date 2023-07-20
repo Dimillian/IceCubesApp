@@ -99,7 +99,7 @@ public struct AppAccountsSelectorView: View {
       return theme.secondaryBackgroundColor
     }
   }
-  
+
   private var accountsView: some View {
     NavigationStack {
       List {

@@ -33,13 +33,14 @@ public class StatusRowViewModel: ObservableObject {
   @Published var isLoadingRemoteContent: Bool = false
   @Published var localStatusId: String?
   @Published var localStatus: Status?
-  
+
   // The relationship our user has to the author of this post, if available
   @Published var authorRelationship: Relationship? {
     didSet {
       // if we are newly blocking or muting the author, force collapse post so it goes away
       if let relationship = authorRelationship,
-         relationship.blocking || relationship.muting {
+         relationship.blocking || relationship.muting
+      {
         lineLimit = 0
       }
     }

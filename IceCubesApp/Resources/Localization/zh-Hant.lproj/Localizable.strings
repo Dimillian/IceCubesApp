@@ -126,6 +126,7 @@
 "settings.content.expand-media" = "媒體顯示";
 "settings.content.default-sensitive" = "媒體一概標示為敏感";
 "settings.content.default-visibility" = "嘟文能見度";
+"settings.content.default-reply-visibility" = "Reply Visibility";
 "settings.content.media" = "媒體";
 "settings.content.media.show.alt" = "顯示圖片描述";
 "settings.content.reading" = "閱讀";
@@ -217,6 +218,8 @@
 "settings.general.translate" = "翻譯設定";
 "settings.translation.navigation-title" = "翻譯設定";
 "settings.translation.always-deepl" = "一概用 DeepL 翻譯";
+"settings.translation.auto-detect-post-language" = "Auto detect language";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary.";
 "settings.translation.user-api-key" = "DeepL API Key";
 "settings.translation.api-key-type" = "Key 類型";
 "settings.translation.needed-message" = "本功能需有 DeepL API key";
@@ -240,6 +243,8 @@
 "timeline.filter.lists" = "列表";
 "timeline.filter.local" = "本站時間軸";
 "timeline.filter.tags" = "跟隨標籤";
+"timeline.filter.tag-groups" = "Tag Groups";
+"timeline.filter.add-tag-groups" = "Add tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "新增帳號";
@@ -341,6 +346,10 @@
 "explore.section.trending.posts" = "流行嘟文";
 "explore.section.trending.tags" = "流行標籤";
 "explore.section.users" = "用戶";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "單一選擇";
@@ -593,3 +602,9 @@
 "status.action.report" = "檢舉嘟文";
 
 "tag.suggested.mentions-%lld" = "%lld 提及";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Tag Group Title";
+"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
+"add-tag-groups.edit.tags" = "Add tags to the group";
+"add-tag-groups.edit.tags.add" = "Tag";

@@ -144,6 +144,8 @@
 "settings.general.translate" = "翻译设置";
 "settings.translation.navigation-title" = "翻译设置";
 "settings.translation.always-deepl" = "总是使用 DeepL 翻译";
+"settings.translation.auto-detect-post-language" = "自动检测语言";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes 会自动检测你将要发布的嘟文的语言，并在必要时建议你更新嘟文语言。";
 "settings.translation.user-api-key" = "DeepL API 密钥";
 "settings.translation.api-key-type" = "密钥类型";
 "settings.translation.needed-message" = "该功能需要 DeepL API 密钥";
@@ -161,6 +163,7 @@
 "settings.content.expand-media" = "媒体显示";
 "settings.content.default-sensitive" = "始终将媒体标为敏感内容";
 "settings.content.default-visibility" = "默认发布内容可见性";
+"settings.content.default-reply-visibility" = "默认回复可见性";
 "settings.content.media" = "媒体";
 "settings.content.media.show.alt" = "显示图片描述";
 "settings.content.reading" = "阅读设置";
@@ -190,7 +193,7 @@
 "settings.display.font.custom" = "自定义";
 "settings.display.font.scaling-%@" = "字体缩放：%@";
 "settings.display.font.line-spacing-%@" = "行间距：%@";
-"settings.display.show-tab-label" = "显示 Tab 标签";
+"settings.display.show-tab-label" = "在导航栏中显示文本";
 "settings.display.show-ipad-column" = "启用边栏";
 
 "settings.general.swipeactions" = "轻扫操作";
@@ -236,6 +239,8 @@
 "timeline.filter.lists" = "列表";
 "timeline.filter.local" = "远程时间线";
 "timeline.filter.tags" = "关注的标签";
+"timeline.filter.tag-groups" = "标签组";
+"timeline.filter.add-tag-groups" = "新建标签组";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "添加账户";
@@ -338,6 +343,10 @@
 "explore.section.trending.posts" = "当下流行的嘟文";
 "explore.section.trending.tags" = "当下流行的标签";
 "explore.section.users" = "用户";
+"explore.scope.all" = "全部";
+"explore.scope.people" = "用户";
+"explore.scope.hashtags" = "标签";
+"explore.scope.posts" = "嘟文";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "单个投票";
@@ -591,3 +600,9 @@
 "status.action.report" = "举报嘟文";
 
 "tag.suggested.mentions-%lld" = "%lld 个提及";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "标签组名称";
+"add-tag-groups.edit.icon.field" = "标签组图标（SFSymbol）";
+"add-tag-groups.edit.tags" = "将标签添加到组";
+"add-tag-groups.edit.tags.add" = "标签";

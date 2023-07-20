@@ -126,6 +126,7 @@
 "settings.content.expand-media" = "Media Display";
 "settings.content.default-sensitive" = "Always Mark Media as Sensitive";
 "settings.content.default-visibility" = "Posting Visibility";
+"settings.content.default-reply-visibility" = "Reply Visibility";
 "settings.content.media" = "Media";
 "settings.content.media.show.alt" = "Show ALT Texts";
 "settings.content.reading" = "Reading";
@@ -173,6 +174,8 @@
 "settings.general.translate" = "Translation Settings";
 "settings.translation.navigation-title" = "Translation";
 "settings.translation.always-deepl" = "Always Translate using DeepL";
+"settings.translation.auto-detect-post-language" = "Auto detect language";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary.";
 "settings.translation.user-api-key" = "DeepL API Key";
 "settings.translation.api-key-type" = "Type of the Key";
 "settings.translation.needed-message" = "This feature requires a DeepL API key";
@@ -239,6 +242,8 @@
 "timeline.filter.lists" = "Lists";
 "timeline.filter.local" = "Local Timelines";
 "timeline.filter.tags" = "Followed Tags";
+"timeline.filter.tag-groups" = "Tag Groups";
+"timeline.filter.add-tag-groups" = "Add tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Add Account";
@@ -340,6 +345,10 @@
 "explore.section.trending.posts" = "Trending Posts";
 "explore.section.trending.tags" = "Trending Tags";
 "explore.section.users" = "Users";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "One Vote";
@@ -593,3 +602,9 @@
 "status.action.report" = "Report Post";
 
 "tag.suggested.mentions-%lld" = "%lld mentions";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Tag Group Title";
+"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
+"add-tag-groups.edit.tags" = "Add tags to the group";
+"add-tag-groups.edit.tags.add" = "Tag";

@@ -201,26 +201,25 @@ struct ConversationsListRow: View {
       // Add in each detected link in the content
       ForEach(lastStatus.content.links) { link in
         switch link.type {
-          case .url:
-            if UIApplication.shared.canOpenURL(link.url) {
-              Button("accessibility.tabs.timeline.content-link-\(link.title)") {
-                HapticManager.shared.fireHaptic(of: .notification(.success))
-                _ = routerPath.handle(url: link.url)
-              }
-            }
-          case .hashtag:
-            Button("accessibility.tabs.timeline.content-hashtag-\(link.title)") {
+        case .url:
+          if UIApplication.shared.canOpenURL(link.url) {
+            Button("accessibility.tabs.timeline.content-link-\(link.title)") {
               HapticManager.shared.fireHaptic(of: .notification(.success))
               _ = routerPath.handle(url: link.url)
             }
-          case .mention:
-            Button("\(link.title)") {
-              HapticManager.shared.fireHaptic(of: .notification(.success))
-              _ = routerPath.handle(url: link.url)
-            }
+          }
+        case .hashtag:
+          Button("accessibility.tabs.timeline.content-hashtag-\(link.title)") {
+            HapticManager.shared.fireHaptic(of: .notification(.success))
+            _ = routerPath.handle(url: link.url)
+          }
+        case .mention:
+          Button("\(link.title)") {
+            HapticManager.shared.fireHaptic(of: .notification(.success))
+            _ = routerPath.handle(url: link.url)
+          }
         }
       }
     }
-
   }
 }
