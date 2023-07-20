@@ -135,7 +135,7 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
 
   public static func placeholder(forSettings: Bool = false, language: String? = nil) -> Status {
     .init(id: UUID().uuidString,
-          content: .init(stringValue: "Lorem ipsum [#dolor](#) sit amet\nconsectetur [@adipiscing](#) elit.",
+          content: .init(stringValue: "Here's to the [#crazy](#) ones. The misfits. The [@rebels](#). The troublemakers.",
                          parseMarkdown: forSettings),
 
           account: .placeholder(),
