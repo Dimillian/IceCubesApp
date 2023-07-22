@@ -20,7 +20,12 @@ struct EditFilterView: View {
   @State private var filterAction: ServerFilter.Action
   @State private var expiresAt: Date?
   @State private var expirySelection: Duration
-  @FocusState private var isTitleFocused: Bool
+  
+  enum Fields {
+    case title, newKeyword
+  }
+  
+  @FocusState private var focusedField: Fields?
 
   private var data: ServerFilterData {
     var expiresIn: String?
@@ -71,7 +76,7 @@ struct EditFilterView: View {
     .background(theme.secondaryBackgroundColor)
     .onAppear {
       if filter == nil {
-        isTitleFocused = true
+        focusedField = .title
       }
     }
     .toolbar {
@@ -107,7 +112,7 @@ struct EditFilterView: View {
   private var titleSection: some View {
     Section("filter.edit.title") {
       TextField("filter.edit.title", text: $title)
-        .focused($isTitleFocused)
+        .focused($focusedField, equals: .title)
         .onSubmit {
           Task {
             await saveFilter()
@@ -164,10 +169,12 @@ struct EditFilterView: View {
       }
       HStack {
         TextField("filter.edit.keywords.add", text: $newKeyword, axis: .horizontal)
+          .focused($focusedField, equals: .newKeyword)
           .onSubmit {
             Task {
               await addKeyword(name: newKeyword)
               newKeyword = ""
+              focusedField = .newKeyword
             }
           }
         Spacer()
