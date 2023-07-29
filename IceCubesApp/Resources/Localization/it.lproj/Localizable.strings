@@ -35,8 +35,8 @@
 "enum.durations.threeDays" = "3 giorni";
 "enum.durations.sevenDays" = "7 giorni";
 "enum.status-actions-display.all" = "Tutti";
-"enum.status-actions-display.no-buttons" = "Nessun pulsante";
-"enum.status-actions-display.only-buttons" = "Solo pulsanti";
+"enum.status-actions-display.no-buttons" = "Nessun bottone";
+"enum.status-actions-display.only-buttons" = "Solo bottoni";
 "enum.status-display-style.compact" = "Compatto";
 "enum.status-display-style.large" = "Completo";
 "enum.swipeactions.icon-with-text" = "Icon e testo";
@@ -82,14 +82,14 @@
 "settings.display.section.theme" = "Tema";
 "settings.display.colors.apply" = "Apply custom colors";
 "settings.display.section.theme.footer" = "I colori personalizzati possono essere impostati solo se i colori di sistema sono disabilitati";
-"settings.display.status.action-buttons" = "Pulsanti di azione";
+"settings.display.status.action-buttons" = "Bottoni di azione";
 "settings.display.status.media-style" = "Stile dei media";
-"settings.display.translate-button" = "Mostra pulsante per la traduzione";
-"settings.display.theme.background" = "Colore sfondo principale";
-"settings.display.theme.secondary-background" = "Colore sfondo secondario";
-"settings.display.theme.text-color" = "Colore del testo";
+"settings.display.translate-button" = "Mostra bottone per la traduzione";
+"settings.display.theme.background" = "Colore di sfondo";
+"settings.display.theme.secondary-background" = "Colore di sfondo secondario";
+"settings.display.theme.text-color" = "Text Color";
 "settings.display.theme.tint" = "Colore";
-"settings.display.theme.systemColor" = "Automatico";
+"settings.display.theme.systemColor" = "Utilizza le impostazioni di sistema";
 "settings.general.browser" = "Browser";
 "settings.general.browser.in-app" = "In-App Browser";
 "settings.general.browser.system" = "Browser di sistema";
@@ -98,7 +98,7 @@
 "settings.general.instance" = "Informazioni sull'istanza";
 "settings.general.push-notifications" = "Notifiche";
 "settings.general.remote-timelines" = "Timeline remote come locali";
-"settings.push.boosts" = "Boosts";
+"settings.push.boosts" = "Condivisioni";
 "settings.push.favorites" = "Preferiti";
 "settings.push.follows" = "Chi ti segue";
 "settings.push.main-toggle" = "Notifiche";
@@ -110,7 +110,7 @@
 "settings.section.accounts" = "Account";
 "settings.section.app" = "Applicazione";
 "settings.section.app.footer %@" = "Versione dell'app: %@";
-"settings.section.general" = "Generali";
+"settings.section.general" = "Generale";
 "settings.support.alert.error.message" = "Si è verificato un errore mentre processavamo il tuo pagamento, per favore riprova.";
 "settings.support.alert.message" = "Grazie mille per il tuo contributo! È davvero apprezzato!";
 "settings.support.alert.title" = "Grazie!";
@@ -137,14 +137,14 @@
 "settings.title" = "Impostazioni";
 "settings.rate" = "Valuta Ice Cubes";
 "settings.section.other" = "Altro";
-"settings.other.hide-openai" = "Aiuto del 🤖";
-"settings.other.social-keyboard" = "Social keyboard";
-"settings.other.sound-effect" = "Effetti sonori";
-"settings.general.translate" = "Impostazioni di traduzione";
-"settings.translation.navigation-title" = "Traduzione";
-"settings.translation.always-deepl" = "Traduci sempre con DeepL";
-"settings.translation.auto-detect-post-language" = "Rileva automaticamente la lingua";
-"settings.translation.auto-detect-post-language-footer" = "Ice Cubes cercherà di rilevare automaticamente la lingua del post che stai per pubblicare e, se necessario, ti suggerirà di aggiornare la lingua del post.";
+"settings.other.hide-openai" = "Abilita l'aiuto del 🤖";
+"settings.other.social-keyboard" = "Abilita social keyboard";
+"settings.other.sound-effect" = "Attiva gli effetti sonori";
+"settings.general.translate" = "Translation Settings";
+"settings.translation.navigation-title" = "Translation";
+"settings.translation.always-deepl" = "Always Translate using DeepL";
+"settings.translation.auto-detect-post-language" = "Auto detect language";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary.";
 "settings.translation.user-api-key" = "DeepL API Key";
 "settings.translation.api-key-type" = "Type of the Key";
 "settings.translation.needed-message" = "This feature requires a DeepL API key";
@@ -154,8 +154,8 @@
 "settings.content.use-instance-settings" = "Utilizza le impostazioni del server";
 "settings.content.boosts" = "Condivisioni";
 "settings.content.collapse-long-posts" = "Comprimi i post lunghi";
-"settings.content.collapse-long-posts-hint" = "I post compressi visualizzano alcune righe del contenuto assieme ad un pulsante per visualizzare tutto il post";
-"settings.content.hide-repeated-boosts" = "Nascondi i Boots ripetuti";
+"settings.content.collapse-long-posts-hint" = "I post compressi visualizzano alcune righe del contenuto assieme ad un bottone per visualizzare tutto il post";
+"settings.content.hide-repeated-boosts" = "Nascondi le condivisioni ripetute";
 "settings.content.instance-settings" = "Configurazione dei contenuti del Server";
 "settings.content.expand-spoilers" = "Visualizza sempre i contenuti sensibili";
 "settings.content.expand-media" = "Visualizzazione dei media";
@@ -163,24 +163,24 @@
 "settings.content.default-visibility" = "Visibilità del post";
 "settings.content.default-reply-visibility" = "Reply Visibility";
 "settings.content.media" = "Media";
-"settings.content.media.show.alt" = "Mostra i tag ALT";
+"settings.content.media.show.alt" = "Mostra i testi alternativi";
 "settings.content.reading" = "Lettura";
 "settings.content.posting" = "Composizione";
-"settings.content.sharing" = "Condivisione";
+"settings.content.sharing" = "Sharing";
 "settings.content.sharing.share-button-behavior" = "Share Button Behavior";
-"settings.content.sharing.share-behavior.link-only" = "Solo Link";
-"settings.content.sharing.share-behavior.link-and-text" = "Link e Testo";
+"settings.content.sharing.share-behavior.link-only" = "Link Only";
+"settings.content.sharing.share-behavior.link-and-text" = "Link and Text";
 "enum.expand-media.show" = "Mostra tutti";
 "enum.expand-media.hide" = "Nascondi tutti";
 "enum.expand-media.hide-sensitive" = "Nascondi sensibili";
 "settings.push.duplicate.title" = "Sistema le notifiche duplicate";
-"settings.push.duplicate.footer" = "Ricevi notifiche duplicate? Prova questo pulsante magico per aggiustarle";
+"settings.push.duplicate.footer" = "Ricevi notifiche duplicate? Prova questo bottone magico per aggiustarle";
 "settings.push.duplicate.button.fix" = "🪄 Aggiusta";
 "settings.display.font" = "Font della Timeline";
 "settings.display.font.system" = "Sistema";
 "settings.display.font.custom" = "Personalizzato";
-"settings.display.font.scaling-%@" = "Dimensione del Font: %@";
-"settings.display.font.line-spacing-%@" = "Interlinea: %@";
+"settings.display.font.scaling-%@" = "Font scaling: %@";
+"settings.display.font.line-spacing-%@" = "Line Spacing: %@";
 "settings.other.autoplay-video" = "Auto Play dei video";
 "settings.about.built-with" = "Ice Cubes utilizza i seguenti software Open Source:";
 "settings.about.title" = "Ice Cubes";
@@ -191,7 +191,7 @@
 "settings.haptic.navigation-title" = "Impostazioni feedback aptico";
 "settings.haptic.timeline" = "Timeline";
 "settings.haptic.tab-selection" = "Selezione Tab";
-"settings.haptic.buttons" = "Pressione dei pulsanti";
+"settings.haptic.buttons" = "Pressione dei bottoni";
 
 "settings.display.show-tab-label" = "Visualizza il nome della tab";
 
@@ -327,7 +327,7 @@
 
 // MARK: Package: DesignSystem
 "design.tag.n-posts-from-n-participants %lld %lld" = "%lld post da %lld partecipanti";
-"design.theme.navigation-title" = "Temi";
+"design.theme.navigation-title" = "Selettore del tema";
 "design.theme.toots-preview" = "Anteprima dei Toot";
 
 // MARK: Package: Explore
@@ -405,11 +405,11 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Traduci";
-"status.action.translate-with-deepl" = "Traduci con DeepL";
+"status.action.translate-with-deepl" = "Translate with DeepL";
 "status.action.translated-label-%@" = "Tradotto usando %@";
 "status.action.translated-label-from-%@-%@" = "Tradotto da %@ usando %@";
 "status.action.bookmark" = "Salva nei segnalibri";
-"status.action.boost" = "Boost";
+"status.action.boost" = "Condividi";
 "status.action.boost-to-followers" = "Condividi con i follower";
 "status.action.copy-text" = "Copia il testo";
 "status.action.copy-link" = "Copia il link";
@@ -433,7 +433,7 @@
 "status.action.unboost" = "Rimuovi la condivisione";
 "status.action.unfavorite" = "Rimuovi l'apprezzamento";
 "status.action.unpin" = "Non fissare";
-"status.action.view-in-browser" = "Mostra nel Browser";
+"status.action.view-in-browser" = "Vedi nel Browser";
 "status.card.share" = "Condividi questo link";
 "status.card.copy" = "Copia questo link";
 "status.draft.delete" = "Cancella la bozza";
