@@ -243,6 +243,7 @@
 "timeline.filter.tags" = "Obserwowane hasztagi";
 "timeline.filter.tag-groups" = "Grupy hasztagów";
 "timeline.filter.add-tag-groups" = "Dodaj grupę hasztagów";
+"timeline.filter.edit-tag-groups" = "Edit tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Dodaj konto";

@@ -245,6 +245,7 @@
 "timeline.filter.tags" = "跟隨標籤";
 "timeline.filter.tag-groups" = "Tag Groups";
 "timeline.filter.add-tag-groups" = "Add tag group";
+"timeline.filter.edit-tag-groups" = "Edit tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "新增帳號";

@@ -245,6 +245,7 @@
 "timeline.filter.tags" = "Gefolgte Hashtags";
 "timeline.filter.tag-groups" = "Taggruppen";
 "timeline.filter.add-tag-groups" = "Taggruppe hinzufügen";
+"timeline.filter.edit-tag-groups" = "Edit tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Konto hinzufügen";

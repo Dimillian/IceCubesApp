@@ -7,7 +7,7 @@ import NukeUI
 import Shimmer
 import SwiftUI
 
-struct AddTagGroupView: View {
+struct EditTagGroupView: View {
   @Environment(\.dismiss) private var dismiss
 
   @EnvironmentObject private var preferences: UserPreferences
@@ -18,6 +18,9 @@ struct AddTagGroupView: View {
   @State private var tags: [String] = []
   @State private var newTag: String = ""
   @State private var popupTagsPresented = false
+
+  private var editingTagGroup: TagGroup?
+  private var onSaved: ((TagGroup) -> Void)?
 
   private var canSave: Bool {
     !title.isEmpty &&
@@ -32,6 +35,11 @@ struct AddTagGroupView: View {
     case symbol
     case new
   }
+  
+  init(editingTagGroup: TagGroup? = nil, onSaved: ((TagGroup) -> Void)? = nil) {
+    self.editingTagGroup = editingTagGroup
+    self.onSaved = onSaved
+  }
 
   var body: some View {
     NavigationStack {
@@ -41,7 +49,7 @@ struct AddTagGroupView: View {
           keywordsSection
         }
         .formStyle(.grouped)
-        .navigationTitle("timeline.filter.add-tag-groups")
+        .navigationTitle(editingTagGroup != nil ? "timeline.filter.edit-tag-groups" : "timeline.filter.add-tag-groups")
         .navigationBarTitleDisplayMode(.inline)
         .scrollContentBackground(.hidden)
         .background(theme.secondaryBackgroundColor)
@@ -59,6 +67,11 @@ struct AddTagGroupView: View {
       }
       .onAppear {
         focusedField = .title
+        if let editingTagGroup {
+          title = editingTagGroup.title
+          sfSymbolName = editingTagGroup.sfSymbolName
+          tags = editingTagGroup.tags
+        }
       }
     }
   }
@@ -150,14 +163,22 @@ struct AddTagGroupView: View {
   private func save() {
     var toSave = tags
     let main = toSave.removeFirst()
-    preferences.tagGroups.append(.init(
+    
+    let tagGroup: TagGroup = .init(
       title: title.trimmingCharacters(in: .whitespaces),
       sfSymbolName: sfSymbolName,
       main: main,
       additional: toSave
-    ))
+    )
+    if let editingTagGroup,
+        let index = preferences.tagGroups.firstIndex(of: editingTagGroup) {
+      preferences.tagGroups[index] = tagGroup
+    } else {
+      preferences.tagGroups.append(tagGroup)
+    }
 
     dismiss()
+    onSaved?(tagGroup)
   }
 
   @ViewBuilder
@@ -189,7 +210,7 @@ struct AddTagGroupView: View {
 
 struct AddTagGroupView_Previews: PreviewProvider {
   static var previews: some View {
-    AddTagGroupView()
+    EditTagGroupView()
       .withEnvironments()
   }
 }
