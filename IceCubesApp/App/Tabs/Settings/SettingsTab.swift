@@ -269,6 +269,9 @@ struct SettingsTabs: View {
     Form {
       ForEach(preferences.tagGroups, id: \.self) { group in
         Label(group.title, systemImage: group.sfSymbolName)
+          .onTapGesture {
+            routerPath.presentedSheet = .editTagGroup(tagGroup: group, onSaved: nil)
+          }
       }
       .onDelete { indexes in
         if let index = indexes.first {

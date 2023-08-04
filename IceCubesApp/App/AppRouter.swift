@@ -83,7 +83,7 @@ extension View {
         AddRemoteTimelineView()
           .withEnvironments()
       case .addTagGroup:
-        AddTagGroupView()
+        EditTagGroupView()
           .withEnvironments()
       case let .statusEditHistory(status):
         StatusEditHistoryView(statusId: status)
@@ -104,6 +104,9 @@ extension View {
           .withEnvironments()
       case let .shareImage(image, status):
         ActivityView(image: image, status: status)
+      case let .editTagGroup(tagGroup, onSaved):
+        EditTagGroupView(editingTagGroup: tagGroup, onSaved: onSaved)
+          .withEnvironments()
       }
     }
   }

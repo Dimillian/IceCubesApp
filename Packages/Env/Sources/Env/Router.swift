@@ -39,6 +39,7 @@ public enum SheetDestination: Identifiable {
   case accountPushNotficationsSettings
   case report(status: Status)
   case shareImage(image: UIImage, status: Status)
+  case editTagGroup(tagGroup: TagGroup, onSaved: ((TagGroup) -> Void)?)
 
   public var id: String {
     switch self {
@@ -61,6 +62,8 @@ public enum SheetDestination: Identifiable {
       return "report"
     case .shareImage:
       return "shareImage"
+    case .editTagGroup:
+      return "editTagGroup"
     }
   }
 }

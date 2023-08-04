@@ -240,8 +240,11 @@
 "timeline.filter.lists" = "Liste";
 "timeline.filter.local" = "Timeline locali";
 "timeline.filter.tags" = "Tag seguiti";
+
 "timeline.filter.tag-groups" = "Gruppi di tag";
 "timeline.filter.add-tag-groups" = "Nuovo gruppo con tag";
+"timeline.filter.edit-tag-groups" = "Modifica un gruppo di tag";
+
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Aggiungi account";

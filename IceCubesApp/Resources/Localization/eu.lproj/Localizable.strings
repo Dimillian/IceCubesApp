@@ -245,6 +245,7 @@
 "timeline.filter.tags" = "Jarraitutako traolak";
 "timeline.filter.tag-groups" = "Traola-sortak";
 "timeline.filter.add-tag-groups" = "Gehitu traola-sorta";
+"timeline.filter.edit-tag-groups" = "Edit tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Gehitu kontua";

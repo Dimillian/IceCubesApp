@@ -212,20 +212,28 @@ public struct TimelineView: View {
   private var tagGroupHeaderView: some View {
     if let group = viewModel.tagGroup {
       headerView {
-        ScrollView(.horizontal) {
-          HStack(spacing: 4) {
-            ForEach(group.tags, id: \.self) { tag in
-              Button {
-                routerPath.navigate(to: .hashTag(tag: tag, account: nil))
-              } label: {
-                Text("#\(tag)")
-                  .font(.scaledHeadline)
+        HStack {
+          ScrollView(.horizontal) {
+            HStack(spacing: 4) {
+              ForEach(group.tags, id: \.self) { tag in
+                Button {
+                  routerPath.navigate(to: .hashTag(tag: tag, account: nil))
+                } label: {
+                  Text("#\(tag)")
+                    .font(.scaledHeadline)
+                }
+                .buttonStyle(.plain)
               }
-              .buttonStyle(.plain)
             }
           }
+          .scrollIndicators(.hidden)
+          Button("status.action.edit") {
+            routerPath.presentedSheet = .editTagGroup(tagGroup: group, onSaved: { group in
+              viewModel.timeline = .tagGroup(group)
+            })
+          }
+          .buttonStyle(.bordered)
         }
-        .scrollIndicators(.hidden)
       }
     }
   }

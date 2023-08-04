@@ -246,6 +246,7 @@
 "timeline.filter.tags" = "Followed Tags";
 "timeline.filter.tag-groups" = "Tag Groups";
 "timeline.filter.add-tag-groups" = "Add tag group";
+"timeline.filter.edit-tag-groups" = "Edit tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Add Account";

@@ -244,6 +244,7 @@
 "timeline-new-posts %lld" = "%lld개 새 글";
 "timeline.filter.tag-groups" = "태그 모음";
 "timeline.filter.add-tag-groups" = "태그 모음 추가";
+"timeline.filter.edit-tag-groups" = "Edit tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "계정 추가";

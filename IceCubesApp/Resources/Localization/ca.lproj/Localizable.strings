@@ -242,6 +242,7 @@
 "timeline.filter.tags" = "Etiquetes seguides";
 "timeline.filter.tag-groups" = "Grups d'Etiquetes";
 "timeline.filter.add-tag-groups" = "Afegeix grup";
+"timeline.filter.edit-tag-groups" = "Edit tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Afegeix un compte";
