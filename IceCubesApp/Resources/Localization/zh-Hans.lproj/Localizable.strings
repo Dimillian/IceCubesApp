@@ -241,7 +241,7 @@
 "timeline.filter.tags" = "关注的标签";
 "timeline.filter.tag-groups" = "标签组";
 "timeline.filter.add-tag-groups" = "新建标签组";
-"timeline.filter.edit-tag-groups" = "Edit tag group";
+"timeline.filter.edit-tag-groups" = "编辑标签组";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "添加账户";
