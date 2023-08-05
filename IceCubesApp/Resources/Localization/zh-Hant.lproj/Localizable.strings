@@ -484,7 +484,7 @@
 "status.poll.n-votes %lld" = "%lld 票";
 "status.poll.n-votes-voters %lld %lld" = "%lld 票，%lld 位投票者";
 "status.poll.closed" = "已關閉";
-"status.poll.closes-in" = "關閉於 ";
+"status.poll.closes-in %@" = "關閉於 %@";
 "status.poll.duration" = "投票時限";
 "status.poll.frequency" = "投票頻率";
 "status.poll.option-n %lld" = "選項 %lld";

@@ -482,7 +482,7 @@
 "status.poll.n-votes %lld" = "%lld stemmer";
 "status.poll.n-votes-voters %lld %lld" = "%lld stemmer fra %lld velgere";
 "status.poll.closed" = "Lukket";
-"status.poll.closes-in" = "Lukkes om ";
+"status.poll.closes-in %@" = "Lukkes om %@";
 "status.poll.duration" = "Avstemningens varighet";
 "status.poll.frequency" = "Avstemningsfrekvens";
 "status.poll.option-n %lld" = "Valg %lld";

@@ -476,7 +476,7 @@
 "status.media.contextmenu.view-browser" = "Zobacz w przeglądarce";
 "status.media.sensitive.show" = "Pokaż wrażliwą zawartość";
 "status.poll.closed" = "Zamknięty";
-"status.poll.closes-in" = "Zostanie zakończony za ";
+"status.poll.closes-in %@" = "Zostanie zakończony za %@";
 "status.poll.duration" = "Czas trwania sondażu";
 "status.poll.frequency" = "Częstotliwość odpytywania";
 "status.poll.option-n %lld" = "Opcja %lld";

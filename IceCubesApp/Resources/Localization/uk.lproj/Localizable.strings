@@ -483,7 +483,7 @@
 "status.poll.n-votes %lld" = "%lld голосів";
 "status.poll.n-votes-voters %lld %lld" = "%lld голосів від %lld опитаних";
 "status.poll.closed" = "Закрито";
-"status.poll.closes-in" = "Завершується в ";
+"status.poll.closes-in %@" = "Завершується в %@";
 "status.poll.duration" = "Тривалість опитування";
 "status.poll.frequency" = "Частота опитування";
 "status.poll.option-n %lld" = "Варіант %lld";

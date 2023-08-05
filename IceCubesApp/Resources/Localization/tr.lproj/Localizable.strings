@@ -478,7 +478,7 @@
 "status.poll.n-votes %lld" = "%lld oy";
 "status.poll.n-votes-voters %lld %lld" = "%lld votes from %lld voters";
 "status.poll.closed" = "Kapandı";
-"status.poll.closes-in" = "Kapanacak ";
+"status.poll.closes-in %@" = "Kapanacak %@";
 "status.poll.duration" = "Anket Süresi";
 "status.poll.frequency" = "Anket Sıklığı";
 "status.poll.option-n %lld" = "Seçenek %lld";
