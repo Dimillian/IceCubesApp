@@ -154,7 +154,7 @@
 "settings.support.supporter.title" = " Become a supporter!";
 "settings.support.supporter.subtitle" = "By giving a monthly tip to Ice Cubes, you become a supporter, you'll even get verified badge on your profile. For your 👀 only.";
 "settings.support.supporter.subscribed" = " Thanks for being an Ice Cubes supporter!";
-"settings.support.supporter.subscription-info"= "Subscription are automatically renewed unless you cancel them a day before the next renewal cycle.";
+"settings.support.supporter.subscription-info"= "The supporter subscription is a monthly auto renewable subscription giving you a verified badge only visible to you on your profile. Subscription are automatically renewed unless you cancel them a day before the next renewal cycle.";
 "settings.support.restore-purchase.button" = "Restore purchase";
 "settings.support.restore-purchase.explanation" = "Restore your supporter subscription if it hasn't been synced automatically.";
 "settings.support.privacy-policy" = "Privacy Policy";
