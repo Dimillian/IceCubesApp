@@ -11,7 +11,7 @@ public struct StatusRowView: View {
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
   @Environment(\.redactionReasons) private var reasons
   @Environment(\.isCompact) private var isCompact: Bool
-  @Environment(\.accessibilityEnabled) private var accessibilityEnabled
+  @Environment(\.accessibilityVoiceOverEnabled) private var accessibilityVoiceOverEnabled
 
   @EnvironmentObject private var quickLook: QuickLook
   @EnvironmentObject private var theme: Theme
@@ -107,13 +107,13 @@ public struct StatusRowView: View {
     }
     .swipeActions(edge: .trailing) {
       // The actions associated with the swipes are exposed as custom accessibility actions and there is no way to remove them.
-      if !isCompact, accessibilityEnabled == false {
+      if !isCompact, accessibilityVoiceOverEnabled == false {
         StatusRowSwipeView(viewModel: viewModel, mode: .trailing)
       }
     }
     .swipeActions(edge: .leading) {
       // The actions associated with the swipes are exposed as custom accessibility actions and there is no way to remove them.
-      if !isCompact, accessibilityEnabled == false {
+      if !isCompact, accessibilityVoiceOverEnabled == false {
         StatusRowSwipeView(viewModel: viewModel, mode: .leading)
       }
     }
@@ -123,7 +123,7 @@ public struct StatusRowView: View {
                          bottom: 12,
                          trailing: .layoutPadding))
     .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
-    .accessibilityLabel(viewModel.isFocused == false && accessibilityEnabled
+    .accessibilityLabel(viewModel.isFocused == false && accessibilityVoiceOverEnabled
       ? CombinedAccessibilityLabel(viewModel: viewModel).finalLabel() : Text(""))
     .accessibilityHidden(viewModel.filter?.filter.filterAction == .hide)
     .accessibilityAction {
@@ -181,6 +181,7 @@ public struct StatusRowView: View {
       HapticManager.shared.fireHaptic(of: .notification(.success))
       viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
     }
+    .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv)
 
     if viewModel.finalStatus.mediaAttachments.isEmpty == false {
       Button("accessibility.status.media-viewer-action.label") {

@@ -54,14 +54,12 @@ struct StatusRowContextMenu: View {
       } label: {
         Label("status.action.reply", systemImage: "arrowshape.turn.up.left")
       }
-    }
-
-    if viewModel.status.visibility == .pub, !viewModel.isRemote {
       Button {
         viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
       } label: {
         Label("status.action.quote", systemImage: "quote.bubble")
       }
+      .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv)
     }
 
     Divider()
