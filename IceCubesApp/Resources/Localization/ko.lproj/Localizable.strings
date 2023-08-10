@@ -485,7 +485,7 @@
 "status.poll.n-votes %lld" = "%lld표";
 "status.poll.n-votes-voters %lld %lld" = "%lld표 (%lld명)";
 "status.poll.closed" = "종료됨";
-"status.poll.closes-in" = "종료까지 ";
+"status.poll.closes-in %@" = "종료까지 %@";
 "status.poll.duration" = "투표 기간";
 "status.poll.frequency" = "투표 선택 옵션";
 "status.poll.option-n %lld" = "선택지 %lld";

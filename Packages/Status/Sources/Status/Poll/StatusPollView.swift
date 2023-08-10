@@ -139,8 +139,7 @@ public struct StatusPollView: View {
       if viewModel.poll.expired {
         Text("status.poll.closed")
       } else if let date = viewModel.poll.expiresAt.value?.asDate {
-        Text("status.poll.closes-in")
-        Text(date, style: .timer)
+        Text("status.poll.closes-in \(date, style: .timer)")
       }
     }
     .font(.scaledFootnote)

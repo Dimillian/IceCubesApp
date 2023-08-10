@@ -481,7 +481,7 @@
 "status.poll.n-votes %lld" = "%lld vots";
 "status.poll.n-votes-voters %lld %lld" = "%lld votes from %lld voters";
 "status.poll.closed" = "Finalitzada";
-"status.poll.closes-in" = "Finalitza en";
+"status.poll.closes-in %@" = "Finalitza en %@";
 "status.poll.duration" = "Durada de l'enquesta";
 "status.poll.frequency" = "Freqüència de l'enquesta";
 "status.poll.option-n %lld" = "Opció %lld";

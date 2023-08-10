@@ -481,7 +481,7 @@
 "status.poll.n-votes %lld" = "%lld 投票";
 "status.poll.n-votes-voters %lld %lld" = "%lld 票 %lld からの投票";
 "status.poll.closed" = "投票終了";
-"status.poll.closes-in" = "投票終了まで ";
+"status.poll.closes-in %@" = "投票終了まで %@";
 "status.poll.duration" = "投票期間";
 "status.poll.frequency" = "投票頻度";
 "status.poll.option-n %lld" = "オプション %lld";

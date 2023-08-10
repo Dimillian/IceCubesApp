@@ -476,7 +476,7 @@
 "status.poll.n-votes %lld" = "%lld stemmen";
 "status.poll.n-votes-voters %lld %lld" = "%lld stemmen van %lld stemmers";
 "status.poll.closed" = "Beëindigd";
-"status.poll.closes-in" = "Eindigt over ";
+"status.poll.closes-in %@" = "Eindigt over %@";
 "status.poll.duration" = "Pollduur";
 "status.poll.frequency" = "Pollingfrequentie";
 "status.poll.option-n %lld" = "Optie %lld";

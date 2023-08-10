@@ -475,7 +475,7 @@
 "status.media.sensitive.show" = "Erakutsi eduki hunkigarria";
 "status.poll.n-votes %lld" = "%lld boto";
 "status.poll.closed" = "Amaituta";
-"status.poll.closes-in" = "Epemuga: ";
+"status.poll.closes-in %@" = "Epemuga: %@";
 "status.poll.duration" = "Bozketaren iraupena";
 "status.poll.frequency" = "Bozketaren maiztasuna";
 "status.poll.option-n %lld" = "%lld. aukera";

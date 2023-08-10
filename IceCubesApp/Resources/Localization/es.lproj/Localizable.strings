@@ -483,7 +483,7 @@
 "status.poll.n-votes %lld" = "%lld votos";
 "status.poll.n-votes-voters %lld %lld" = "%lld votos de %lld participantes";
 "status.poll.closed" = "Cerrada";
-"status.poll.closes-in" = "Acaba en ";
+"status.poll.closes-in %@" = "Acaba en %@";
 "status.poll.duration" = "Duración de la encuesta";
 "status.poll.frequency" = "Frecuencia de la encuesta";
 "status.poll.option-n %lld" = "Opción %lld";
