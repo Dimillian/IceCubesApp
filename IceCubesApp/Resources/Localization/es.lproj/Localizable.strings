@@ -515,7 +515,7 @@
 "filter.edit.contexts" = "Contextos del filtro";
 "filter.edit.action" = "Acción del filtro";
 "filter.edit.expiry" = "Expiración";
-"filter.edit.expiry.date-time" = "Date/Time";
+"filter.edit.expiry.date-time" = "Fecha/Hora";
 "filter.edit.expiry.duration" = "Duración";
 "account.action.edit-filters" = "Editar filtros";
 "filter.contexts.home" = "Inicio y listas";
