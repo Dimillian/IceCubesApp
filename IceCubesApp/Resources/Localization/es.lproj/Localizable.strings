@@ -546,7 +546,7 @@
 "accessibility.tabs.timeline.new-post.inputLabel1" = "Nueva";
 "accessibility.tabs.timeline.new-post.inputLabel2" = "Crear";
 "accessibility.tabs.timeline.unread-posts.label-%lld" = "%lld publicaciones nuevas";
-"accessibility.tabs.timeline.unread-posts.hint" = "Desplaza la cronología.";
+"accessibility.tabs.timeline.unread-posts.hint" = "Desplazarse por la cronología.";
 "accessibility.tabs.timeline.content-link-%@" = "Visit %@";
 "accessibility.tabs.timeline.content-hashtag-%@" = "Hashtag %@";
 "accessibility.app-account.selector.accounts" = "Cuentas";
