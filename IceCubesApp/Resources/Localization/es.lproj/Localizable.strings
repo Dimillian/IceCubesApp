@@ -24,8 +24,8 @@
 "enum.avatar-position.top" = "Arriba";
 "enum.avatar-shape.circle" = "Círculo";
 "enum.avatar-shape.rounded" = "Redondeado";
-"enum.durations.infinite" = "infinito";
-"enum.durations.custom" = "custom";
+"enum.durations.infinite" = "Infinito";
+"enum.durations.custom" = "Personalizado";
 "enum.durations.fiveMinutes" = "5 minutos";
 "enum.durations.thirtyMinutes" = "30 minutos";
 "enum.durations.oneHour" = "1 hora";
@@ -38,7 +38,7 @@
 "enum.status-actions-display.no-buttons" = "Sin botones";
 "enum.status-actions-display.only-buttons" = "Sólo botones";
 "enum.status-display-style.compact" = "Compacto";
-"enum.status-display-style.medium" = "Medium";
+"enum.status-display-style.medium" = "Mediano";
 "enum.status-display-style.large" = "Grande";
 "enum.swipeactions.icon-with-text" = "Icono con texto";
 "enum.swipeactions.icon-only" = "Sólo icono";
@@ -144,8 +144,8 @@
 "settings.general.translate" = "Ajustes de traducción";
 "settings.translation.navigation-title" = "Traducción";
 "settings.translation.always-deepl" = "Traducir siempre con DeepL";
-"settings.translation.auto-detect-post-language" = "Auto detect language";
-"settings.translation.auto-detect-post-language-footer" = "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary.";
+"settings.translation.auto-detect-post-language" = "Detectar idioma automáticamente";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes intentará detectar el idioma de la publicación automáticamente cuando estés a punto de publicarla y sugerirá cambiar el idioma de la publicación si es necesario.";
 "settings.translation.user-api-key" = "Clave API de DeepL";
 "settings.translation.api-key-type" = "Tipo de clave";
 "settings.translation.needed-message" = "Esta funcionalidad requiere una clave API de DeepL";
@@ -161,16 +161,16 @@
 "settings.content.expand-spoilers" = "Mostrar siempre el contenido sensible";
 "settings.content.expand-media" = "Mostrar el contenido multimedia";
 "settings.content.default-sensitive" = "Marcar siempre el contenido multimedia como sensible";
-"settings.content.default-visibility" = "Publicar visibilidad";
-"settings.content.default-reply-visibility" = "Reply Visibility";
+"settings.content.default-visibility" = "Visibilidad de las publicaciones";
+"settings.content.default-reply-visibility" = "Visibilidad de las respuestas";
 "settings.content.media" = "Multimedia";
 "settings.content.media.show.alt" = "Mostrar texto ALT";
 "settings.content.reading" = "Leyendo";
 "settings.content.posting" = "Publicando";
-"settings.content.sharing" = "Sharing";
-"settings.content.sharing.share-button-behavior" = "Share Button Behavior";
-"settings.content.sharing.share-behavior.link-only" = "Link Only";
-"settings.content.sharing.share-behavior.link-and-text" = "Link and Text";
+"settings.content.sharing" = "Compartir";
+"settings.content.sharing.share-button-behavior" = "Comportamiento del botón de compartir";
+"settings.content.sharing.share-behavior.link-only" = "Sólo el enlace";
+"settings.content.sharing.share-behavior.link-and-text" = "Enlace y texto";
 "settings.push.duplicate.title" = "Arreglar notificaciones duplicadas";
 "settings.push.duplicate.footer" = "¿Recibes notificaciones por duplicado? Usa este botón mágico para arreglarlo";
 "settings.push.duplicate.button.fix" = "🪄 Arréglalo";
@@ -244,7 +244,7 @@
 "timeline.filter.tags" = "Etiquetas que sigues";
 "timeline.filter.tag-groups" = "Grupos de Etiquetas";
 "timeline.filter.add-tag-groups" = "Añadir grupo";
-"timeline.filter.edit-tag-groups" = "Edit tag group";
+"timeline.filter.edit-tag-groups" = "Editar grupo";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Añadir cuenta";
@@ -346,10 +346,10 @@
 "explore.section.trending.posts" = "Publicaciones que son tendencia";
 "explore.section.trending.tags" = "Etiquetas que son tendencia";
 "explore.section.users" = "Usuarios";
-"explore.scope.all" = "All";
-"explore.scope.people" = "People";
+"explore.scope.all" = "Todo";
+"explore.scope.people" = "Personas";
 "explore.scope.hashtags" = "Hashtags";
-"explore.scope.posts" = "Posts";
+"explore.scope.posts" = "Publicaciones";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "Un voto";
@@ -470,7 +470,7 @@
 "status.error.loading.message" = "Ha ocurrido un error al cargar las publicaciones, por favor, vuelve a intentarlo.";
 "status.error.message" = "Ha ocurrido un error al cargar el contexto de esta publicación, por favor, vuelve a intentarlo.";
 "status.error.title" = "Ha ocurrido un error";
-"status.error.posting.title" = "Error while posting";
+"status.error.posting.title" = "Error al publicar";
 "status.filter.filtered-by-%@" = "Filtrado por: %@";
 "status.filter.show-anyway" = "Mostrar de todas formas";
 "status.image.alt-text.abbreviation" = "ALT";
@@ -542,11 +542,11 @@
 "accessibility.editor.privacy.label" = "Visibilidad";
 "accessibility.editor.privacy.hint" = "Cambiar audiencia de la publicación.";
 "accessibility.tabs.timeline.add-account" = "Añadir cuenta";
-"accessibility.tabs.timeline.new-post.label" = "Compose";
+"accessibility.tabs.timeline.new-post.label" = "Publicar";
 "accessibility.tabs.timeline.new-post.inputLabel1" = "Nueva";
 "accessibility.tabs.timeline.new-post.inputLabel2" = "Crear";
 "accessibility.tabs.timeline.unread-posts.label-%lld" = "%lld publicaciones nuevas";
-"accessibility.tabs.timeline.unread-posts.hint" = "Scrolls the timeline.";
+"accessibility.tabs.timeline.unread-posts.hint" = "Desplaza la cronología.";
 "accessibility.tabs.timeline.content-link-%@" = "Visit %@";
 "accessibility.tabs.timeline.content-hashtag-%@" = "Hashtag %@";
 "accessibility.app-account.selector.accounts" = "Cuentas";
@@ -593,7 +593,7 @@
 "accessibility.media.supported-type.audio.label" = "Audio";
 "accessibility.status.contains-media.label-%@" = "Contiene %@";
 "accessibility.status.application.label" = "App";
-"accessibility.status.media-viewer-action.label" = "Open media viewer";
+"accessibility.status.media-viewer-action.label" = "Abrir reproductor multimedia";
 
 // MARK: Report
 "report.comment.placeholder" = "Información adicional";
