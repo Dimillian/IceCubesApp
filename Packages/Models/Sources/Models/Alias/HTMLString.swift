@@ -11,7 +11,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
   public var asMarkdown: String = ""
   public var asRawText: String = ""
   public var statusesURLs = [URL]()
-  public private(set) var links = [Link]()
+  private(set) public var links = [Link]()
 
   public var asSafeMarkdownAttributedString: AttributedString = .init()
   private var main_regex: NSRegularExpression?
@@ -151,14 +151,18 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
           handleNode(node: nn)
         }
         let finish = asMarkdown.endIndex
-        asMarkdown += "]("
-        asMarkdown += href
-        asMarkdown += ")"
 
-        if let url = URL(string: href) {
-          let displayString = asMarkdown[start ..< finish]
+        var linkRef = href
+        if let url = URL(string: href, encodePath: true) {
+          linkRef = url.absoluteString
+          let displayString = asMarkdown[start..<finish]
           links.append(Link(url, displayString: String(displayString)))
         }
+
+        asMarkdown += "]("
+        asMarkdown += linkRef
+        asMarkdown += ")"
+
         return
       } else if node.nodeName() == "#text" {
         var txt = node.description
@@ -190,19 +194,19 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
       self.displayString = displayString
 
       switch displayString.first {
-      case "@":
-        type = .mention
-        title = displayString
-      case "#":
-        type = .hashtag
-        title = String(displayString.dropFirst())
-      default:
-        type = .url
-        var hostNameUrl = url.host ?? url.absoluteString
-        if hostNameUrl.hasPrefix("www.") {
-          hostNameUrl = String(hostNameUrl.dropFirst(4))
-        }
-        title = hostNameUrl
+        case "@":
+          self.type = .mention
+          self.title = displayString
+        case "#":
+          self.type = .hashtag
+          self.title = String(displayString.dropFirst())
+        default:
+          self.type = .url
+          var hostNameUrl = url.host ?? url.absoluteString
+          if hostNameUrl.hasPrefix("www.") {
+            hostNameUrl = String(hostNameUrl.dropFirst(4))
+          }
+          self.title = hostNameUrl
       }
     }
 

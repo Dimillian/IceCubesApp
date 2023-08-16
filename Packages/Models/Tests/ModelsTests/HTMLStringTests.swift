@@ -41,5 +41,15 @@ final class HTMLStringTests: XCTestCase {
     XCTAssertEqual(1, htmlString.links.count)
     XCTAssertEqual("https://test.com", htmlString.links[0].url.absoluteString)
     XCTAssertEqual("test", htmlString.links[0].displayString)
+
+    let extendedCharLink = "\"<p>This is a <a href=\\\"https://test.com/goßëña\\\">test</a></p>\""
+    htmlString = try decoder.decode(HTMLString.self, from: Data(extendedCharLink.utf8))
+    XCTAssertEqual("This is a test", htmlString.asRawText)
+    XCTAssertEqual("<p>This is a <a href=\"https://test.com/goßëña\">test</a></p>", htmlString.htmlValue)
+    XCTAssertEqual("This is a [test](https://test.com/go%C3%9F%C3%AB%C3%B1a)", htmlString.asMarkdown)
+    XCTAssertEqual(0, htmlString.statusesURLs.count)
+    XCTAssertEqual(1, htmlString.links.count)
+    XCTAssertEqual("https://test.com/go%C3%9F%C3%AB%C3%B1a", htmlString.links[0].url.absoluteString)
+    XCTAssertEqual("test", htmlString.links[0].displayString)
   }
 }
