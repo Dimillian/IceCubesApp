@@ -213,3 +213,45 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
     }
   }
 }
+
+extension URL {
+  
+  // It's common to use non-ASCII characters in URLs even though they're technically
+  //   invalid characters. Every modern browser handles this by silently encoding
+  //   the invalid characters on the user's behalf. However, trying to create a URL
+  //   object with un-encoded characters will result in nil so we need to encode the
+  //   invalid characters before creating the URL object. The unencoded version
+  //   should still be shown in the displayed status.
+  public init?(string: String, encodePath: Bool) {
+    var encodedUrlString = ""
+    if encodePath,
+       string.starts(with: "http://") || string.starts(with: "https://"),
+       var startIndex = string.firstIndex(of: "/")
+    {
+      startIndex = string.index(startIndex, offsetBy: 1)
+      
+      // We don't want to encode the host portion of the URL
+      if var startIndex = string[startIndex...].firstIndex(of: "/") {
+        encodedUrlString = String(string[...startIndex])
+        while let endIndex = string[string.index(after: startIndex)...].firstIndex(of: "/") {
+          let componentStartIndex = string.index(after: startIndex)
+          encodedUrlString = encodedUrlString + (string[componentStartIndex...endIndex].addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? "")
+          startIndex = endIndex
+        }
+        
+        // The last part of the path may have a query string appended to it
+        let componentStartIndex = string.index(after: startIndex)
+        if let queryStartIndex = string[componentStartIndex...].firstIndex(of: "?") {
+          encodedUrlString = encodedUrlString + (string[componentStartIndex..<queryStartIndex].addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? "")
+          encodedUrlString = encodedUrlString + (string[queryStartIndex...].addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
+        } else {
+          encodedUrlString = encodedUrlString + (string[componentStartIndex...].addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? "")
+        }
+      }
+    }
+    if encodedUrlString.isEmpty {
+      encodedUrlString = string
+    }
+    self.init(string: encodedUrlString)
+  }
+}
