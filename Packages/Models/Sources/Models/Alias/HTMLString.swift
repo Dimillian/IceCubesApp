@@ -37,10 +37,12 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
 
     if !alreadyDecoded {
       // https://daringfireball.net/projects/markdown/syntax
-      // Pre-escape \ ` _ * and [ as these are the only
-      // characters the markdown parser used picks up
-      // when it renders to attributed text
-      main_regex = try? NSRegularExpression(pattern: "([\\*\\`\\[\\\\])", options: .caseInsensitive)
+      // Pre-escape \ ` _ * ~ and [ as these are the only
+      // characters the markdown parser uses when it renders
+      // to attributed text. Note that ~ for strikethrough is
+      // not documented in the syntax docs but is used by
+      // AttributedString.
+      main_regex = try? NSRegularExpression(pattern: "([\\*\\`\\~\\[\\\\])", options: .caseInsensitive)
       // don't escape underscores that are between colons, they are most likely custom emoji
       underscore_regex = try? NSRegularExpression(pattern: "(?!\\B:[^:]*)(_)(?![^:]*:\\B)", options: .caseInsensitive)
 

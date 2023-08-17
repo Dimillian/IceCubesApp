@@ -81,5 +81,11 @@ final class HTMLStringTests: XCTestCase {
     XCTAssertEqual("This _is_ an :emoji_maybe:", htmlString.asRawText)
     XCTAssertEqual("<p>This _is_ an :emoji_maybe:</p>", htmlString.htmlValue)
     XCTAssertEqual("This \\_is\\_ an :emoji_maybe:", htmlString.asMarkdown)
+
+    let strikeContent = "\"<p>This ~is~ a\\n`test`</p>\""
+    htmlString = try decoder.decode(HTMLString.self, from: Data(strikeContent.utf8))
+    XCTAssertEqual("This ~is~ a\n`test`", htmlString.asRawText)
+    XCTAssertEqual("<p>This ~is~ a\n`test`</p>", htmlString.htmlValue)
+    XCTAssertEqual("This \\~is\\~ a \\`test\\`", htmlString.asMarkdown)
   }
 }
