@@ -153,10 +153,17 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
         let finish = asMarkdown.endIndex
 
         var linkRef = href
-        if let url = URL(string: href, encodePath: true) {
-          linkRef = url.absoluteString
+        
+        // Try creating a URL from the string. If it fails, try URL encoding
+        //   the string first.
+        var url = URL(string: href)
+        if url == nil {
+          url = URL(string: href, encodePath: true)
+        }
+        if let linkUrl = url  {
+          linkRef = linkUrl.absoluteString
           let displayString = asMarkdown[start..<finish]
-          links.append(Link(url, displayString: String(displayString)))
+          links.append(Link(linkUrl, displayString: String(displayString)))
         }
 
         asMarkdown += "]("

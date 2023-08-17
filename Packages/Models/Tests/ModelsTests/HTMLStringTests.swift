@@ -19,6 +19,10 @@ final class HTMLStringTests: XCTestCase {
     
     let extendedCharQuery = URL(string: "http://test.com/blah/city?name=京都市", encodePath: true)
     XCTAssertEqual("http://test.com/blah/city?name=%E4%BA%AC%E9%83%BD%E5%B8%82", extendedCharQuery?.absoluteString)
+
+    // Double encoding will happen if you ask to encodePath on an already encoded string
+    let alreadyEncodedPath = URL(string: "https://en.wikipedia.org/wiki/Elbbr%C3%BCcken_station", encodePath: true)
+    XCTAssertEqual("https://en.wikipedia.org/wiki/Elbbr%25C3%25BCcken_station", alreadyEncodedPath?.absoluteString)
   }
   
   func testHTMLStringInit() throws {
@@ -46,6 +50,16 @@ final class HTMLStringTests: XCTestCase {
     htmlString = try decoder.decode(HTMLString.self, from: Data(extendedCharLink.utf8))
     XCTAssertEqual("This is a test", htmlString.asRawText)
     XCTAssertEqual("<p>This is a <a href=\"https://test.com/goßëña\">test</a></p>", htmlString.htmlValue)
+    XCTAssertEqual("This is a [test](https://test.com/go%C3%9F%C3%AB%C3%B1a)", htmlString.asMarkdown)
+    XCTAssertEqual(0, htmlString.statusesURLs.count)
+    XCTAssertEqual(1, htmlString.links.count)
+    XCTAssertEqual("https://test.com/go%C3%9F%C3%AB%C3%B1a", htmlString.links[0].url.absoluteString)
+    XCTAssertEqual("test", htmlString.links[0].displayString)
+
+    let alreadyEncodedLink = "\"<p>This is a <a href=\\\"https://test.com/go%C3%9F%C3%AB%C3%B1a\\\">test</a></p>\""
+    htmlString = try decoder.decode(HTMLString.self, from: Data(alreadyEncodedLink.utf8))
+    XCTAssertEqual("This is a test", htmlString.asRawText)
+    XCTAssertEqual("<p>This is a <a href=\"https://test.com/go%C3%9F%C3%AB%C3%B1a\">test</a></p>", htmlString.htmlValue)
     XCTAssertEqual("This is a [test](https://test.com/go%C3%9F%C3%AB%C3%B1a)", htmlString.asMarkdown)
     XCTAssertEqual(0, htmlString.statusesURLs.count)
     XCTAssertEqual(1, htmlString.links.count)
