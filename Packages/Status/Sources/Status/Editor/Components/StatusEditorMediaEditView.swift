@@ -16,6 +16,8 @@ struct StatusEditorMediaEditView: View {
 
   @State private var isUpdating: Bool = false
 
+  @State private var didAppear: Bool = false
+
   var body: some View {
     NavigationStack {
       Form {
@@ -51,8 +53,11 @@ struct StatusEditorMediaEditView: View {
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
       .onAppear {
-        imageDescription = container.mediaAttachment?.description ?? ""
-        isFieldFocused = true
+        if !didAppear {
+          imageDescription = container.mediaAttachment?.description ?? ""
+          isFieldFocused = true
+          didAppear = true
+        }
       }
       .navigationTitle("status.editor.media.edit-image")
       .navigationBarTitleDisplayMode(.inline)

@@ -10,6 +10,7 @@ import SwiftUI
 public class StatusRowViewModel: ObservableObject {
   let status: Status
   let isFocused: Bool
+  // Whether this status is on a remote local timeline (many actions are unavailable if so)
   let isRemote: Bool
   let showActions: Bool
   let textDisabled: Bool
@@ -32,6 +33,18 @@ public class StatusRowViewModel: ObservableObject {
   @Published var isLoadingRemoteContent: Bool = false
   @Published var localStatusId: String?
   @Published var localStatus: Status?
+
+  // The relationship our user has to the author of this post, if available
+  @Published var authorRelationship: Relationship? {
+    didSet {
+      // if we are newly blocking or muting the author, force collapse post so it goes away
+      if let relationship = authorRelationship,
+         relationship.blocking || relationship.muting
+      {
+        lineLimit = 0
+      }
+    }
+  }
 
   // used by the button to expand a collapsed post
   @Published var isCollapsed: Bool = true {
@@ -180,6 +193,11 @@ public class StatusRowViewModel: ObservableObject {
     } else {
       routerPath.navigate(to: .accountDetail(id: mention.id))
     }
+  }
+
+  func loadAuthorRelationship() async {
+    let relationships: [Relationship]? = try? await client.get(endpoint: Accounts.relationships(ids: [status.reblog?.account.id ?? status.account.id]))
+    authorRelationship = relationships?.first
   }
 
   private func embededStatusURL() -> URL? {

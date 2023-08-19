@@ -178,7 +178,6 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
                          multiple: pollVotingFrequency.canVoteMultipleTimes,
                          expires_in: pollDuration.rawValue)
       }
-
       let data = StatusData(status: statusText.string,
                             visibility: visibility,
                             inReplyToId: mode.replyToStatus?.id,
@@ -255,7 +254,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
         mentionString += " "
       }
       replyToStatus = status
-      visibility = status.visibility
+      visibility = UserPreferences.shared.getReplyVisibility(of: status)
       statusText = .init(string: mentionString)
       selectedRange = .init(location: mentionString.utf16.count, length: 0)
       if !mentionString.isEmpty {
@@ -342,10 +341,8 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
       var numUrls = 0
 
       for range in urlRanges {
-        if range.length > maxLengthOfUrl {
-          numUrls += 1
-          totalUrlLength += range.length
-        }
+        numUrls += 1
+        totalUrlLength += range.length
 
         statusText.addAttributes([.foregroundColor: UIColor(theme?.tintColor ?? .brand),
                                   .underlineStyle: NSUnderlineStyle.single.rawValue,
@@ -371,7 +368,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
       .compactMap { NSItemProvider(contentsOf: $0) }
     processItemsProvider(items: items)
   }
-  
+
   func processCameraPhoto(image: UIImage) {
     mediasImages.append(.init(image: image,
                               movieTransferable: nil,
@@ -677,7 +674,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
           }
           do {
             let newAttachement: MediaAttachment = try await client.get(endpoint: Media.media(id: mediaAttachement.id,
-                                                                                             description: nil))
+                                                                                             json: .init(description: nil)))
             if newAttachement.url != nil {
               let oldContainer = mediasImages[index]
               mediasImages[index] = .init(image: oldContainer.image,
@@ -698,7 +695,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
     if let index = indexOf(container: container) {
       do {
         let media: MediaAttachment = try await client.put(endpoint: Media.media(id: attachment.id,
-                                                                                description: description))
+                                                                                json: .init(description: description)))
         mediasImages[index] = .init(image: nil,
                                     movieTransferable: nil,
                                     gifTransferable: nil,

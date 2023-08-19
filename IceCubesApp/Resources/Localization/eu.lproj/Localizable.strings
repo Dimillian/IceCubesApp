@@ -144,6 +144,8 @@
 "settings.general.translate" = "Itzulpenaren ezarpenak";
 "settings.translation.navigation-title" = "Itzulpenaren ezarpenak";
 "settings.translation.always-deepl" = "Itzuli beti DeepL erabiliz";
+"settings.translation.auto-detect-post-language" = "Auto detect language";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary.";
 "settings.translation.user-api-key" = "DeepL API gakoa";
 "settings.translation.api-key-type" = "Gako mota";
 "settings.translation.needed-message" = "Ezaugarri honek DeepL API gako bat behar du";
@@ -160,10 +162,15 @@
 "settings.content.expand-media" = "Multimedia erakusteko hobespenak";
 "settings.content.default-sensitive" = "Markatu eduki guztia hunkigarri gisa";
 "settings.content.default-visibility" = "Edukiaren irismena";
+"settings.content.default-reply-visibility" = "Erantzunen ikusgaitasuna";
 "settings.content.media" = "Multimedia";
 "settings.content.media.show.alt" = "Erakutsi deskribapenak";
 "settings.content.reading" = "Irakurtzean";
 "settings.content.posting" = "Bidaltzean";
+"settings.content.sharing" = "Partekatzean";
+"settings.content.sharing.share-button-behavior" = "Partekatzeko botoiaren portaera";
+"settings.content.sharing.share-behavior.link-only" = "Esteka soilik";
+"settings.content.sharing.share-behavior.link-and-text" = "Esteka eta testua";
 "settings.push.duplicate.title" = "Bikoiztutako jakinarazpenen konpontzailea";
 "settings.push.duplicate.footer" = "Jakinarazpenak birritan jasotzen al dituzu? Sakatu botoi magikoa arazoa konpontzeko";
 "settings.push.duplicate.button.fix" = "🪄 Konpondu";
@@ -236,6 +243,9 @@
 "timeline.filter.lists" = "Zerrendak";
 "timeline.filter.local" = "Denbora-lerro lokalak";
 "timeline.filter.tags" = "Jarraitutako traolak";
+"timeline.filter.tag-groups" = "Traola-sortak";
+"timeline.filter.add-tag-groups" = "Gehitu traola-sorta";
+"timeline.filter.edit-tag-groups" = "Editatu traola-sorta";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Gehitu kontua";
@@ -335,6 +345,10 @@
 "explore.section.trending.posts" = "Bogan dauden bidalketak";
 "explore.section.trending.tags" = "Pil-pilean dauden traolak";
 "explore.section.users" = "Erabiltzaileak";
+"explore.scope.all" = "Guztia";
+"explore.scope.people" = "Jendea";
+"explore.scope.hashtags" = "Traolak";
+"explore.scope.posts" = "Bidalketak";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "Boto bakarra";
@@ -449,6 +463,7 @@
 "status.error.loading.message" = "Errorea bidalketak kargatzean; saiatu berriro.";
 "status.error.message" = "Errorea bidalketa honen testuinguruan; saiatu berriro.";
 "status.error.title" = "Errorea gertatu da";
+"status.error.posting.title" = "Errorea argitaratzean";
 "status.filter.filtered-by-%@" = "Iragazkia: %@";
 "status.filter.show-anyway" = "Erakutsi edonola ere";
 "status.image.alt-text.abbreviation" = "ALT";
@@ -460,7 +475,7 @@
 "status.media.sensitive.show" = "Erakutsi eduki hunkigarria";
 "status.poll.n-votes %lld" = "%lld boto";
 "status.poll.closed" = "Amaituta";
-"status.poll.closes-in" = "Epemuga: ";
+"status.poll.closes-in %@" = "Epemuga: %@";
 "status.poll.duration" = "Bozketaren iraupena";
 "status.poll.frequency" = "Bozketaren maiztasuna";
 "status.poll.option-n %lld" = "%lld. aukera";
@@ -573,3 +588,9 @@
 "report.title" = "Salaketa";
 "report.action.send" = "Bidali";
 "status.action.report" = "Salatu edukia";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Traola-sortaren izena";
+"add-tag-groups.edit.icon.field" = "Traola-sortaren ikonoa (SFSymbol izena)";
+"add-tag-groups.edit.tags" = "Gehitu traolak sortara";
+"add-tag-groups.edit.tags.add" = "Traola";

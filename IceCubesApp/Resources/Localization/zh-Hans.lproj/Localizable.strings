@@ -83,8 +83,8 @@
 "settings.display.section.theme" = "主题";
 "settings.display.colors.apply" = "应用自定义颜色";
 "settings.display.section.theme.footer" = "只有在“匹配系统”关闭时才能设置自定义颜色";
-"settings.display.status.action-buttons" = "导航栏样式";
-"settings.display.status.media-style" = "导航栏排列";
+"settings.display.status.action-buttons" = "操作栏样式";
+"settings.display.status.media-style" = "媒体内容排列";
 "settings.display.translate-button" = "显示翻译按钮";
 "settings.display.theme.background" = "背景颜色";
 "settings.display.theme.secondary-background" = "二级背景颜色";
@@ -144,6 +144,8 @@
 "settings.general.translate" = "翻译设置";
 "settings.translation.navigation-title" = "翻译设置";
 "settings.translation.always-deepl" = "总是使用 DeepL 翻译";
+"settings.translation.auto-detect-post-language" = "自动检测语言";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes 会自动检测你将要发布的嘟文的语言，并在必要时建议你更新嘟文语言。";
 "settings.translation.user-api-key" = "DeepL API 密钥";
 "settings.translation.api-key-type" = "密钥类型";
 "settings.translation.needed-message" = "该功能需要 DeepL API 密钥";
@@ -161,10 +163,15 @@
 "settings.content.expand-media" = "媒体显示";
 "settings.content.default-sensitive" = "始终将媒体标为敏感内容";
 "settings.content.default-visibility" = "默认发布内容可见性";
+"settings.content.default-reply-visibility" = "默认回复可见性";
 "settings.content.media" = "媒体";
 "settings.content.media.show.alt" = "显示图片描述";
 "settings.content.reading" = "阅读设置";
 "settings.content.posting" = "发布设置";
+"settings.content.sharing" = "分享";
+"settings.content.sharing.share-button-behavior" = "分享内容";
+"settings.content.sharing.share-behavior.link-only" = "仅链接";
+"settings.content.sharing.share-behavior.link-and-text" = "链接和文本";
 
 "settings.push.duplicate.title" = "重复推送通知修复器";
 "settings.push.duplicate.footer" = "有收到重复的推送通知？试试用这个魔法按钮去修复吧";
@@ -186,7 +193,7 @@
 "settings.display.font.custom" = "自定义";
 "settings.display.font.scaling-%@" = "字体缩放：%@";
 "settings.display.font.line-spacing-%@" = "行间距：%@";
-"settings.display.show-tab-label" = "显示 Tab 标签";
+"settings.display.show-tab-label" = "在导航栏中显示文本";
 "settings.display.show-ipad-column" = "启用边栏";
 
 "settings.general.swipeactions" = "轻扫操作";
@@ -232,6 +239,9 @@
 "timeline.filter.lists" = "列表";
 "timeline.filter.local" = "远程时间线";
 "timeline.filter.tags" = "关注的标签";
+"timeline.filter.tag-groups" = "标签组";
+"timeline.filter.add-tag-groups" = "新建标签组";
+"timeline.filter.edit-tag-groups" = "编辑标签组";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "添加账户";
@@ -334,6 +344,10 @@
 "explore.section.trending.posts" = "当下流行的嘟文";
 "explore.section.trending.tags" = "当下流行的标签";
 "explore.section.users" = "用户";
+"explore.scope.all" = "全部";
+"explore.scope.people" = "用户";
+"explore.scope.hashtags" = "标签";
+"explore.scope.posts" = "嘟文";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "单个投票";
@@ -448,12 +462,13 @@
 "status.editor.spoiler" = "剧透警告";
 "status.editor.text.placeholder" = "在想些什么呢？";
 "status.editor.visibility" = "嘟文可见性";
-"status.editor.photo-library" = "Photos Library";
-"status.editor.camera-picker" = "Take Photo";
-"status.editor.browse-file" = "Browse Files";
+"status.editor.photo-library" = "照片图库";
+"status.editor.camera-picker" = "拍照";
+"status.editor.browse-file" = "选取文件";
 "status.error.loading.message" = "加载嘟文时发生错误，请重试。";
 "status.error.message" = "嘟文的上下文出现了错误，请重试。";
 "status.error.title" = "发生了一个错误";
+"status.error.posting.title" = "无法发送嘟文";
 "status.filter.filtered-by-%@" = "被 %@ 过滤";
 "status.filter.show-anyway" = "仍然显示";
 "status.image.alt-text.abbreviation" = "ALT";
@@ -466,7 +481,7 @@
 "status.poll.n-votes %lld" = "%lld 票";
 "status.poll.n-votes-voters %lld %lld" = "%lld 票来自 %lld 个投票者";
 "status.poll.closed" = "已关闭";
-"status.poll.closes-in" = "关闭于 ";
+"status.poll.closes-in %@" = "关闭于 %@";
 "status.poll.duration" = "投票持续时间";
 "status.poll.frequency" = "投票频率";
 "status.poll.option-n %lld" = "%lld 选项";
@@ -586,3 +601,9 @@
 "status.action.report" = "举报嘟文";
 
 "tag.suggested.mentions-%lld" = "%lld 个提及";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "标签组名称";
+"add-tag-groups.edit.icon.field" = "标签组图标（SFSymbol）";
+"add-tag-groups.edit.tags" = "将标签添加到组";
+"add-tag-groups.edit.tags.add" = "标签";

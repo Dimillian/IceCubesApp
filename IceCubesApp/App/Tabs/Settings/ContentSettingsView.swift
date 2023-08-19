@@ -28,6 +28,16 @@ struct ContentSettingsView: View {
         }
       }.listRowBackground(theme.primaryBackgroundColor)
 
+      Section("settings.content.sharing") {
+        Picker("settings.content.sharing.share-button-behavior", selection: $userPreferences.shareButtonBehavior) {
+          ForEach(PreferredShareButtonBehavior.allCases, id: \.rawValue) { option in
+            Text(option.title)
+              .tag(option)
+          }
+        }
+      }
+      .listRowBackground(theme.primaryBackgroundColor)
+
       Section("settings.content.instance-settings") {
         Toggle(isOn: $userPreferences.useInstanceContentSettings) {
           Text("settings.content.use-instance-settings")
@@ -73,7 +83,19 @@ struct ContentSettingsView: View {
           }
         }
         .disabled(userPreferences.useInstanceContentSettings)
-
+        
+        Picker("settings.content.default-reply-visibility", selection: $userPreferences.appDefaultReplyVisibility) {
+          ForEach(Visibility.allCases, id: \.rawValue) { vis in
+            if UserPreferences.getIntOfVisibility(vis) <=
+                UserPreferences.getIntOfVisibility(userPreferences.postVisibility) {
+              Text(vis.title).tag(vis)
+            }
+          }
+        }
+        .onChange(of: userPreferences.postVisibility) { newValue in
+          userPreferences.conformReplyVisibilityConstraints()
+        }
+        
         Toggle(isOn: $userPreferences.appDefaultPostsSensitive) {
           Text("settings.content.default-sensitive")
         }

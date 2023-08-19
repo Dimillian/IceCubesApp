@@ -121,10 +121,15 @@
 "settings.content.expand-media" = "Multimedia";
 "settings.content.default-sensitive" = "Oznaczaj media jako wrażliwe";
 "settings.content.default-visibility" = "Widoczność postów";
+"settings.content.default-reply-visibility" = "Widoczność odpowiedzi";
 "settings.content.media" = "Media";
 "settings.content.media.show.alt" = "Pokazuj alternatywny tekst";
 "settings.content.reading" = "Czytanie postów";
 "settings.content.posting" = "Wysyłanie postów";
+"settings.content.sharing" = "Udostępnianie";
+"settings.content.sharing.share-button-behavior" = "Działanie przycisku udostępniania";
+"settings.content.sharing.share-behavior.link-only" = "Tylko link";
+"settings.content.sharing.share-behavior.link-and-text" = "Link i tekst";
 "enum.expand-media.show" = "Pokazuj wszystkie";
 "enum.expand-media.hide" = "Ukryj wszystkie";
 "enum.expand-media.hide-sensitive" = "Ukryj wrażliwe";
@@ -165,6 +170,8 @@
 "settings.general.translate" = "Ustawienia tłumaczenia";
 "settings.translation.navigation-title" = "Ustawienia tłumaczenia";
 "settings.translation.always-deepl" = "Zawsze tłumacz przy pomocy DeepL";
+"settings.translation.auto-detect-post-language" = "Automatyczne wykrywanie języka";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes spróbuje automatycznie wykryć język postu, który zamierzasz opublikować i w razie potrzeby zasugeruje aktualizację języka postu.";
 "settings.translation.user-api-key" = "Klucz DeepL API";
 "settings.translation.api-key-type" = "Rodzaj klucza";
 "settings.translation.needed-message" = "Ta funkcja wymaga klucza DeepL API";
@@ -234,6 +241,9 @@
 "timeline.filter.lists" = "Listy";
 "timeline.filter.local" = "Strumienie lokalne";
 "timeline.filter.tags" = "Obserwowane hasztagi";
+"timeline.filter.tag-groups" = "Grupy hasztagów";
+"timeline.filter.add-tag-groups" = "Dodaj grupę hasztagów";
+"timeline.filter.edit-tag-groups" = "Edytuj grupę hasztagów";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Dodaj konto";
@@ -332,6 +342,10 @@
 "explore.section.trending.posts" = "Popularne posty";
 "explore.section.trending.tags" = "Popularne hasztagi";
 "explore.section.users" = "Osoby";
+"explore.scope.all" = "Wszystko";
+"explore.scope.people" = "Osoby";
+"explore.scope.hashtags" = "Hasztagi";
+"explore.scope.posts" = "Posty";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "Jeden głos";
@@ -451,6 +465,7 @@
 "status.error.loading.message" = "Wystąpił błąd podczas ładowania postów, spróbuj ponownie.";
 "status.error.message" = "Wystąpił błąd dotyczący tego postu, proszę spróbuj ponownie.";
 "status.error.title" = "Wystąpił błąd";
+"status.error.posting.title" = "Błąd podczas publikowania";
 "status.filter.filtered-by-%@" = "Filtrowany przez: %@";
 "status.filter.show-anyway" = "Pokaż mimo wszystko";
 "status.image.alt-text.abbreviation" = "ALT";
@@ -461,7 +476,7 @@
 "status.media.contextmenu.view-browser" = "Zobacz w przeglądarce";
 "status.media.sensitive.show" = "Pokaż wrażliwą zawartość";
 "status.poll.closed" = "Zamknięty";
-"status.poll.closes-in" = "Zostanie zakończony za ";
+"status.poll.closes-in %@" = "Zostanie zakończony za %@";
 "status.poll.duration" = "Czas trwania sondażu";
 "status.poll.frequency" = "Częstotliwość odpytywania";
 "status.poll.option-n %lld" = "Opcja %lld";
@@ -575,4 +590,10 @@
 "report.title" = "Zgłoszenie postu";
 "report.action.send" = "Wyślij";
 "status.action.report" = "Zgłoś post";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Nazwa grupy hasztagów";
+"add-tag-groups.edit.icon.field" = "Ikona grupy (nazwa symbolu SF)";
+"add-tag-groups.edit.tags" = "Dodaj hasztagi do grupy";
+"add-tag-groups.edit.tags.add" = "Hasztag";
 

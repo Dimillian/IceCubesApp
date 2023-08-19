@@ -2,6 +2,22 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>account.detail.featured-tags-n-posts %lld</key>
+	<dict>
+		<key>NSStringLocalizedFormatKey</key>
+		<string>%#@accountDetailFeaturedTagsPosts@</string>
+		<key>accountDetailFeaturedTagsPosts</key>
+		<dict>
+			<key>NSStringFormatSpecTypeKey</key>
+			<string>NSStringPluralRuleType</string>
+			<key>NSStringFormatValueTypeKey</key>
+			<string>lld</string>
+			<key>one</key>
+			<string>%lld Beitrag</string>
+			<key>other</key>
+			<string>%lld Beiträge</string>
+		</dict>
+	</dict>
 	<key>account.detail.n-fields %lld</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
@@ -18,20 +34,20 @@
 			<string>%lld Felder</string>
 		</dict>
 	</dict>
-	<key>account.detail.featured-tags-n-posts %lld</key>
+	<key>account.label.followers %lld %@</key>
 	<dict>
 		<key>NSStringLocalizedFormatKey</key>
-		<string>%#@accountDetailFeaturedTagsPosts@</string>
-		<key>accountDetailFeaturedTagsPosts</key>
+		<string>%#@followers@</string>
+		<key>followers</key>
 		<dict>
 			<key>NSStringFormatSpecTypeKey</key>
 			<string>NSStringPluralRuleType</string>
 			<key>NSStringFormatValueTypeKey</key>
 			<string>lld</string>
 			<key>one</key>
-			<string>%lld Beitrag</string>
+			<string>%2$@ Follower</string>
 			<key>other</key>
-			<string>%lld Beiträge</string>
+			<string>%2$@ Follower</string>
 		</dict>
 	</dict>
 	<key>timeline-new-posts %lld</key>

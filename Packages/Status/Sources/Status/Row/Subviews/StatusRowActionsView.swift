@@ -8,6 +8,7 @@ struct StatusRowActionsView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var statusDataController: StatusDataController
+  @EnvironmentObject private var userPreferences: UserPreferences
   @ObservedObject var viewModel: StatusRowViewModel
 
   func privateBoost() -> Bool {
@@ -121,15 +122,25 @@ struct StatusRowActionsView: View {
             if let urlString = viewModel.finalStatus.url,
                let url = URL(string: urlString)
             {
-              ShareLink(item: url,
-                        subject: Text(viewModel.finalStatus.account.safeDisplayName),
-                        message: Text(viewModel.finalStatus.content.asRawText))
-              {
-                action.image(dataController: statusDataController)
+              switch userPreferences.shareButtonBehavior {
+              case .linkOnly:
+                ShareLink(item: url) {
+                  action.image(dataController: statusDataController)
+                }
+                .buttonStyle(.statusAction())
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("status.action.share-link")
+              case .linkAndText:
+                ShareLink(item: url,
+                          subject: Text(viewModel.finalStatus.account.safeDisplayName),
+                          message: Text(viewModel.finalStatus.content.asRawText))
+                {
+                  action.image(dataController: statusDataController)
+                }
+                .buttonStyle(.statusAction())
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("status.action.share-link")
               }
-              .buttonStyle(.statusAction())
-              .accessibilityElement(children: .combine)
-              .accessibilityLabel("status.action.share-link")
             }
           } else {
             actionButton(action: action)

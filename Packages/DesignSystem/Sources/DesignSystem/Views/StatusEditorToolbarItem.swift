@@ -15,7 +15,7 @@ public extension View {
           .accessibilityInputLabels([
             LocalizedStringKey("accessibility.tabs.timeline.new-post.label"),
             LocalizedStringKey("accessibility.tabs.timeline.new-post.inputLabel1"),
-            LocalizedStringKey("accessibility.tabs.timeline.new-post.inputLabel2")
+            LocalizedStringKey("accessibility.tabs.timeline.new-post.inputLabel2"),
           ])
       }
     }
@@ -42,7 +42,7 @@ public struct StatusEditorToolbarItem: ToolbarContent {
           .accessibilityInputLabels([
             LocalizedStringKey("accessibility.tabs.timeline.new-post.label"),
             LocalizedStringKey("accessibility.tabs.timeline.new-post.inputLabel1"),
-            LocalizedStringKey("accessibility.tabs.timeline.new-post.inputLabel2")
+            LocalizedStringKey("accessibility.tabs.timeline.new-post.inputLabel2"),
           ])
       }
     }

@@ -50,39 +50,35 @@ public struct AccountsListRow: View {
         Text("@\(viewModel.account.acct)")
           .font(.scaledFootnote)
           .foregroundColor(.gray)
-        EmojiTextApp(viewModel.account.note, emojis: viewModel.account.emojis)
+
+        // First parameter is the number for the plural
+        // Second parameter is the formatted string to show
+        Text("account.label.followers \(viewModel.account.followersCount ?? 0) \(viewModel.account.followersCount ?? 0, format: .number.notation(.compactName))")
           .font(.scaledFootnote)
+
+        if let field = viewModel.account.fields.filter({ $0.verifiedAt != nil }).first {
+          HStack(spacing: 2) {
+            Image(systemName: "checkmark.seal")
+              .font(.scaledFootnote)
+              .foregroundColor(.green)
+
+            EmojiTextApp(field.value, emojis: viewModel.account.emojis)
+              .font(.scaledFootnote)
+              .emojiSize(Font.scaledFootnoteFont.emojiSize)
+              .emojiBaselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
+              .environment(\.openURL, OpenURLAction { url in
+                routerPath.handle(url: url)
+              })
+          }
+        }
+
+        EmojiTextApp(viewModel.account.note, emojis: viewModel.account.emojis, lineLimit: 2)
+          .font(.scaledCaption)
           .emojiSize(Font.scaledFootnoteFont.emojiSize)
           .emojiBaselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
-          .lineLimit(3)
           .environment(\.openURL, OpenURLAction { url in
             routerPath.handle(url: url)
           })
-
-        let fields = viewModel.account.fields.filter { $0.verifiedAt != nil }
-
-        if !fields.isEmpty {
-          Capsule()
-            .frame(height: 1)
-            .foregroundStyle(.regularMaterial)
-            .padding(.vertical, 5)
-            .padding(.horizontal)
-
-          ForEach(fields) { field in
-            HStack {
-              Image(systemName: "checkmark.seal")
-                .foregroundColor(.green)
-              EmojiTextApp(field.value, emojis: viewModel.account.emojis)
-                .font(.scaledFootnote)
-                .emojiSize(Font.scaledFootnoteFont.emojiSize)
-                .emojiBaselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
-                .environment(\.openURL, OpenURLAction { url in
-                  routerPath.handle(url: url)
-                })
-            }
-            .padding(.top, 5)
-          }
-        }
 
         if isFollowRequest {
           FollowRequestButtons(account: viewModel.account,

@@ -13,6 +13,8 @@ public class StreamWatcher: ObservableObject {
   private let decoder = JSONDecoder()
   private let encoder = JSONEncoder()
 
+  private var retryDelay: Int = 10
+
   public enum Stream: String {
     case publicTimeline = "public"
     case user
@@ -62,12 +64,16 @@ public class StreamWatcher: ObservableObject {
   }
 
   private func sendMessage(message: StreamMessage) {
-    task?.send(.data(try! encoder.encode(message)),
-               completionHandler: { _ in })
+    if let encodedMessage = try? encoder.encode(message),
+       let stringMessage = String(data: encodedMessage, encoding: .utf8)
+    {
+      task?.send(.string(stringMessage), completionHandler: { _ in })
+    }
   }
 
   private func receiveMessage() {
-    task?.receive(completionHandler: { result in
+    task?.receive(completionHandler: { [weak self] result in
+      guard let self = self else { return }
       switch result {
       case let .success(message):
         switch message {
@@ -98,8 +104,8 @@ public class StreamWatcher: ObservableObject {
         self.receiveMessage()
 
       case .failure:
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(10)) { [weak self] in
-          guard let self = self else { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(self.retryDelay)) {
+          self.retryDelay += 30
           self.stopWatching()
           self.connect()
           self.watch(streams: self.watchedStreams)

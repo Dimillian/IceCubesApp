@@ -126,10 +126,15 @@
 "settings.content.expand-media" = "媒體顯示";
 "settings.content.default-sensitive" = "媒體一概標示為敏感";
 "settings.content.default-visibility" = "嘟文能見度";
+"settings.content.default-reply-visibility" = "Reply Visibility";
 "settings.content.media" = "媒體";
 "settings.content.media.show.alt" = "顯示圖片描述";
 "settings.content.reading" = "閱讀";
 "settings.content.posting" = "發表";
+"settings.content.sharing" = "Sharing";
+"settings.content.sharing.share-button-behavior" = "Share Button Behavior";
+"settings.content.sharing.share-behavior.link-only" = "Link Only";
+"settings.content.sharing.share-behavior.link-and-text" = "Link and Text";
 "enum.expand-media.show" = "全部顯示";
 "enum.expand-media.hide" = "全部隱藏";
 "enum.expand-media.hide-sensitive" = "隱藏敏感題材";
@@ -213,6 +218,8 @@
 "settings.general.translate" = "翻譯設定";
 "settings.translation.navigation-title" = "翻譯設定";
 "settings.translation.always-deepl" = "一概用 DeepL 翻譯";
+"settings.translation.auto-detect-post-language" = "Auto detect language";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary.";
 "settings.translation.user-api-key" = "DeepL API Key";
 "settings.translation.api-key-type" = "Key 類型";
 "settings.translation.needed-message" = "本功能需有 DeepL API key";
@@ -236,6 +243,9 @@
 "timeline.filter.lists" = "列表";
 "timeline.filter.local" = "本站時間軸";
 "timeline.filter.tags" = "跟隨標籤";
+"timeline.filter.tag-groups" = "Tag Groups";
+"timeline.filter.add-tag-groups" = "Add tag group";
+"timeline.filter.edit-tag-groups" = "Edit tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "新增帳號";
@@ -337,6 +347,10 @@
 "explore.section.trending.posts" = "流行嘟文";
 "explore.section.trending.tags" = "流行標籤";
 "explore.section.users" = "用戶";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "單一選擇";
@@ -457,6 +471,7 @@
 "status.error.loading.message" = "下載嘟文時發生錯誤，請再試一次。";
 "status.error.message" = "嘟文上下文發生錯誤，請再試一次。";
 "status.error.title" = "發生錯誤";
+"status.error.posting.title" = "無法發表嘟文";
 "status.filter.filtered-by-%@" = "依 %@ 過濾";
 "status.filter.show-anyway" = "仍然顯示";
 "status.image.alt-text.abbreviation" = "ALT";
@@ -469,7 +484,7 @@
 "status.poll.n-votes %lld" = "%lld 票";
 "status.poll.n-votes-voters %lld %lld" = "%lld 票，%lld 位投票者";
 "status.poll.closed" = "已關閉";
-"status.poll.closes-in" = "關閉於 ";
+"status.poll.closes-in %@" = "關閉於 %@";
 "status.poll.duration" = "投票時限";
 "status.poll.frequency" = "投票頻率";
 "status.poll.option-n %lld" = "選項 %lld";
@@ -588,3 +603,9 @@
 "status.action.report" = "檢舉嘟文";
 
 "tag.suggested.mentions-%lld" = "%lld 提及";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Tag Group Title";
+"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
+"add-tag-groups.edit.tags" = "Add tags to the group";
+"add-tag-groups.edit.tags.add" = "Tag";

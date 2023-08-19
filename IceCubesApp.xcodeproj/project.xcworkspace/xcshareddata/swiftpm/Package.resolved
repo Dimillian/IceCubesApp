@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/divadretlaw/EmojiText",
       "state" : {
-        "revision" : "b5b0a30933a6dcb6601ad3625690a823fa3f6965",
-        "version" : "2.6.0"
+        "revision" : "a4ddf5077c241170e8ac0d3a9480c511e27c1ae9",
+        "version" : "2.8.0"
       }
     },
     {
@@ -24,7 +24,7 @@
       "location" : "https://github.com/evgenyneu/keychain-swift",
       "state" : {
         "branch" : "master",
-        "revision" : "e43f9b99b172ae6a7253047f8ba95c7a0b05b99f"
+        "revision" : "c1fde55798b164cad44b5e23cfa2f0f1ebcd76af"
       }
     },
     {
@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Nuke",
       "state" : {
-        "revision" : "6241e100294a2aa70d1811641585ab7da780bd0f",
-        "version" : "12.0.0"
+        "revision" : "c3864b8882bc69f5edfe5c70e18786c91d228b28",
+        "version" : "12.1.3"
       }
     },
     {
@@ -50,8 +50,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RevenueCat/purchases-ios.git",
       "state" : {
-        "revision" : "b5562ed1409c47b20c74da3f2a1c2d603ca37508",
-        "version" : "4.17.7"
+        "revision" : "8d16e02c96efbcf58eaf7eef2e595942d935f572",
+        "version" : "4.25.0"
+      }
+    },
+    {
+      "identity" : "sfsafesymbols",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SFSafeSymbols/SFSafeSymbols",
+      "state" : {
+        "revision" : "7cca2d60925876b5953a2cf7341cd80fbeac983c",
+        "version" : "4.1.1"
       }
     },
     {
@@ -68,8 +77,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/scinfu/SwiftSoup.git",
       "state" : {
-        "revision" : "f707b8680cddb96dc1855632340a572ef37bbb98",
-        "version" : "2.5.3"
+        "revision" : "8b6cf29eead8841a1fa7822481cb3af4ddaadba6",
+        "version" : "2.6.1"
       }
     },
     {
@@ -77,8 +86,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/siteline/SwiftUI-Introspect.git",
       "state" : {
-        "revision" : "f2616860a41f9d9932da412a8978fec79c06fe24",
-        "version" : "0.1.4"
+        "revision" : "730ab9e6cdbb3122ad88277b295c4cecd284a311",
+        "version" : "0.9.1"
       }
     },
     {

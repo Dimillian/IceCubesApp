@@ -33,11 +33,13 @@ public enum SheetDestination: Identifiable {
   case listAddAccount(account: Account)
   case addAccount
   case addRemoteLocalTimeline
+  case addTagGroup
   case statusEditHistory(status: String)
   case settings
   case accountPushNotficationsSettings
   case report(status: Status)
   case shareImage(image: UIImage, status: Status)
+  case editTagGroup(tagGroup: TagGroup, onSaved: ((TagGroup) -> Void)?)
 
   public var id: String {
     switch self {
@@ -50,6 +52,8 @@ public enum SheetDestination: Identifiable {
       return "listAddAccount"
     case .addAccount:
       return "addAccount"
+    case .addTagGroup:
+      return "addTagGroup"
     case .addRemoteLocalTimeline:
       return "addRemoteLocalTimeline"
     case .statusEditHistory:
@@ -58,6 +62,8 @@ public enum SheetDestination: Identifiable {
       return "report"
     case .shareImage:
       return "shareImage"
+    case .editTagGroup:
+      return "editTagGroup"
     }
   }
 }

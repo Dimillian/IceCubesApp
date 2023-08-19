@@ -19,18 +19,10 @@ public struct ExploreView: View {
   public var body: some View {
     List {
       if !viewModel.isLoaded {
+        quickAccessView
         loadingView
       } else if !viewModel.searchQuery.isEmpty {
-        if viewModel.isSearching {
-          HStack {
-            Spacer()
-            ProgressView()
-            Spacer()
-          }
-          .listRowBackground(theme.secondaryBackgroundColor)
-          .listRowSeparator(.hidden)
-          .id(UUID())
-        } else if let results = viewModel.results[viewModel.searchQuery] {
+        if let results = viewModel.results[viewModel.searchQuery] {
           if results.isEmpty, !viewModel.isSearching {
             EmptyView(iconName: "magnifyingglass",
                       title: "explore.search.empty.title",
@@ -40,6 +32,15 @@ public struct ExploreView: View {
           } else {
             makeSearchResultsView(results: results)
           }
+        } else {
+          HStack {
+            Spacer()
+            ProgressView()
+            Spacer()
+          }
+          .listRowBackground(theme.secondaryBackgroundColor)
+          .listRowSeparator(.hidden)
+          .id(UUID())
         }
       } else if viewModel.allSectionsEmpty {
         EmptyView(iconName: "magnifyingglass",
@@ -48,6 +49,7 @@ public struct ExploreView: View {
           .listRowBackground(theme.secondaryBackgroundColor)
           .listRowSeparator(.hidden)
       } else {
+        quickAccessView
         if !viewModel.trendingTags.isEmpty {
           trendingTagsSection
         }
@@ -80,7 +82,37 @@ public struct ExploreView: View {
     .background(theme.secondaryBackgroundColor)
     .navigationTitle("explore.navigation-title")
     .searchable(text: $viewModel.searchQuery,
+                placement: .navigationBarDrawer(displayMode: .always),
                 prompt: Text("explore.search.prompt"))
+    .searchScopes($viewModel.searchScope) {
+      ForEach(ExploreViewModel.SearchScope.allCases, id: \.self) { scope in
+        Text(scope.localizedString)
+      }
+    }
+  }
+
+  private var quickAccessView: some View {
+    ScrollView(.horizontal) {
+      HStack {
+        Button("explore.section.trending.tags") {
+          routerPath.navigate(to: RouterDestination.tagsList(tags: viewModel.trendingTags))
+        }
+        .buttonStyle(.bordered)
+        Button("explore.section.suggested-users") {
+          routerPath.navigate(to: RouterDestination.accountsList(accounts: viewModel.suggestedAccounts))
+        }
+        .buttonStyle(.bordered)
+        Button("explore.section.trending.posts") {
+          routerPath.navigate(to: RouterDestination.trendingTimeline)
+        }
+        .buttonStyle(.bordered)
+      }
+      .padding(.horizontal, 16)
+    }
+    .scrollIndicators(.never)
+    .listRowInsets(EdgeInsets())
+    .listRowBackground(theme.secondaryBackgroundColor)
+    .listRowSeparator(.hidden)
   }
 
   private var loadingView: some View {
@@ -94,7 +126,7 @@ public struct ExploreView: View {
 
   @ViewBuilder
   private func makeSearchResultsView(results: SearchResults) -> some View {
-    if !results.accounts.isEmpty {
+    if !results.accounts.isEmpty && (viewModel.searchScope == .all || viewModel.searchScope == .people) {
       Section("explore.section.users") {
         ForEach(results.accounts) { account in
           if let relationship = results.relationships.first(where: { $0.id == account.id }) {
@@ -104,7 +136,7 @@ public struct ExploreView: View {
         }
       }
     }
-    if !results.hashtags.isEmpty {
+    if !results.hashtags.isEmpty && (viewModel.searchScope == .all || viewModel.searchScope == .hashtags) {
       Section("explore.section.tags") {
         ForEach(results.hashtags) { tag in
           TagRowView(tag: tag)
@@ -113,7 +145,7 @@ public struct ExploreView: View {
         }
       }
     }
-    if !results.statuses.isEmpty {
+    if !results.statuses.isEmpty && (viewModel.searchScope == .all || viewModel.searchScope == .posts) {
       Section("explore.section.posts") {
         ForEach(results.statuses) { status in
           StatusRowView(viewModel: { .init(status: status, client: client, routerPath: routerPath) })

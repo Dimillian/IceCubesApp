@@ -218,8 +218,11 @@ public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
 
   public func makeWebSocketTask(endpoint: Endpoint, instanceStreamingURL: URL?) -> URLSessionWebSocketTask {
     let url = makeURL(scheme: "wss", endpoint: endpoint, forceServer: instanceStreamingURL?.host)
-    let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: "GET")
-    return urlSession.webSocketTask(with: request)
+    var subprotocols: [String] = []
+    if let oauthToken = critical.withLock({ $0.oauthToken }) {
+      subprotocols.append(oauthToken.accessToken)
+    }
+    return urlSession.webSocketTask(with: url, protocols: subprotocols)
   }
 
   public func mediaUpload<Entity: Decodable>(endpoint: Endpoint,

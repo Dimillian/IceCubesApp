@@ -144,6 +144,8 @@
 "settings.general.translate" = "Übersetzungseinstellungen";
 "settings.translation.navigation-title" = "Übersetzung";
 "settings.translation.always-deepl" = "Immer mit DeepL übersetzen";
+"settings.translation.auto-detect-post-language" = "Sprache automatisch erkennen";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes wird versuchen, die Sprache deines Beitrags automatisch zu erkennen, und, falls nötig, vorschlagen, die Sprache zur Veröffentlichung zu ändern.";
 "settings.translation.user-api-key" = "DeepL-API-Schlüssel";
 "settings.translation.api-key-type" = "Typ des Schlüssels";
 "settings.translation.needed-message" = "Für diese Funktion ist ein DeepL-API-Schlüssel erforderlich.";
@@ -160,10 +162,15 @@
 "settings.content.expand-media" = "Medienansicht";
 "settings.content.default-sensitive" = "Medien immer als sensibel kennzeichnen";
 "settings.content.default-visibility" = "Sichtbarkeit Beiträge";
+"settings.content.default-reply-visibility" = "Sichtbarkeit Antworten";
 "settings.content.media" = "Medien";
 "settings.content.media.show.alt" = "ALT-Texte zeigen";
 "settings.content.reading" = "Lesen";
 "settings.content.posting" = "Schreiben";
+"settings.content.sharing" = "Teilen";
+"settings.content.sharing.share-button-behavior" = "Verhalten beim Teilen";
+"settings.content.sharing.share-behavior.link-only" = "Nur Link";
+"settings.content.sharing.share-behavior.link-and-text" = "Link und Text";
 "settings.push.duplicate.title" = "Doppelte-Mitteilungen-Korrigierer";
 "settings.push.duplicate.footer" = "Bekommst du doppelte Mitteilungen? Probier diesen magischen Knopf aus";
 "settings.push.duplicate.button.fix" = "🪄 Beheben";
@@ -236,6 +243,9 @@
 "timeline.filter.lists" = "Listen";
 "timeline.filter.local" = "Lokale Timelines";
 "timeline.filter.tags" = "Gefolgte Hashtags";
+"timeline.filter.tag-groups" = "Taggruppen";
+"timeline.filter.add-tag-groups" = "Taggruppe hinzufügen";
+"timeline.filter.edit-tag-groups" = "Taggruppe bearbeiten";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Konto hinzufügen";
@@ -335,6 +345,10 @@
 "explore.section.trending.posts" = "Beiträge im Trend";
 "explore.section.trending.tags" = "Hashtags im Trend";
 "explore.section.users" = "Profile";
+"explore.scope.all" = "Alle";
+"explore.scope.people" = "Personen";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Beiträge";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "Einfache Auswahl";
@@ -449,6 +463,7 @@
 "status.error.loading.message" = "Beim Laden der Beiträge ist ein Fehler aufgetreten. Bitte versuche es erneut.";
 "status.error.message" = "Es ist ein Fehler aufgetreten. Bitte versuche es erneut.";
 "status.error.title" = "Ein Fehler ist aufgetreten";
+"status.error.posting.title" = "Fehler beim Veröffentlichen";
 "status.filter.filtered-by-%@" = "Gefiltert von: %@";
 "status.filter.show-anyway" = "Trotzdem anzeigen";
 "status.image.alt-text.abbreviation" = "ALT";
@@ -459,7 +474,7 @@
 "status.media.contextmenu.view-browser" = "Im Browser anzeigen";
 "status.media.sensitive.show" = "Sensiblen Inhalt zeigen";
 "status.poll.closed" = "Beendet";
-"status.poll.closes-in" = "Endet in ";
+"status.poll.closes-in %@" = "Endet in %@";
 "status.poll.duration" = "Umfragedauer";
 "status.poll.frequency" = "Auswahlmöglichkeiten";
 "status.poll.option-n %lld" = "Option %lld";
@@ -572,3 +587,9 @@
 "report.title" = "Beitrag melden";
 "report.action.send" = "Absenden";
 "status.action.report" = "Beitrag melden";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Tag Group Title";
+"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
+"add-tag-groups.edit.tags" = "Add tags to the group";
+"add-tag-groups.edit.tags.add" = "Tag";

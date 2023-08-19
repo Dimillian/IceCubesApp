@@ -144,6 +144,8 @@
 "settings.general.translate" = "Ajustes de traducción";
 "settings.translation.navigation-title" = "Traducción";
 "settings.translation.always-deepl" = "Traducir siempre con DeepL";
+"settings.translation.auto-detect-post-language" = "Auto detect language";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary.";
 "settings.translation.user-api-key" = "Clave API de DeepL";
 "settings.translation.api-key-type" = "Tipo de clave";
 "settings.translation.needed-message" = "Esta funcionalidad requiere una clave API de DeepL";
@@ -160,10 +162,15 @@
 "settings.content.expand-media" = "Mostrar el contenido multimedia";
 "settings.content.default-sensitive" = "Marcar siempre el contenido multimedia como sensible";
 "settings.content.default-visibility" = "Publicar visibilidad";
+"settings.content.default-reply-visibility" = "Reply Visibility";
 "settings.content.media" = "Multimedia";
 "settings.content.media.show.alt" = "Mostrar texto ALT";
 "settings.content.reading" = "Leyendo";
 "settings.content.posting" = "Publicando";
+"settings.content.sharing" = "Sharing";
+"settings.content.sharing.share-button-behavior" = "Share Button Behavior";
+"settings.content.sharing.share-behavior.link-only" = "Link Only";
+"settings.content.sharing.share-behavior.link-and-text" = "Link and Text";
 "settings.push.duplicate.title" = "Arreglar notificaciones duplicadas";
 "settings.push.duplicate.footer" = "¿Recibes notificaciones por duplicado? Usa este botón mágico para arreglarlo";
 "settings.push.duplicate.button.fix" = "🪄 Arréglalo";
@@ -235,6 +242,9 @@
 "timeline.filter.lists" = "Listas";
 "timeline.filter.local" = "Cronologías locales";
 "timeline.filter.tags" = "Etiquetas que sigues";
+"timeline.filter.tag-groups" = "Grupos de Etiquetas";
+"timeline.filter.add-tag-groups" = "Añadir grupo";
+"timeline.filter.edit-tag-groups" = "Edit tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Añadir cuenta";
@@ -336,6 +346,10 @@
 "explore.section.trending.posts" = "Publicaciones que son tendencia";
 "explore.section.trending.tags" = "Etiquetas que son tendencia";
 "explore.section.users" = "Usuarios";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "Un voto";
@@ -456,6 +470,7 @@
 "status.error.loading.message" = "Ha ocurrido un error al cargar las publicaciones, por favor, vuelve a intentarlo.";
 "status.error.message" = "Ha ocurrido un error al cargar el contexto de esta publicación, por favor, vuelve a intentarlo.";
 "status.error.title" = "Ha ocurrido un error";
+"status.error.posting.title" = "Error while posting";
 "status.filter.filtered-by-%@" = "Filtrado por: %@";
 "status.filter.show-anyway" = "Mostrar de todas formas";
 "status.image.alt-text.abbreviation" = "ALT";
@@ -468,7 +483,7 @@
 "status.poll.n-votes %lld" = "%lld votos";
 "status.poll.n-votes-voters %lld %lld" = "%lld votos de %lld participantes";
 "status.poll.closed" = "Cerrada";
-"status.poll.closes-in" = "Acaba en ";
+"status.poll.closes-in %@" = "Acaba en %@";
 "status.poll.duration" = "Duración de la encuesta";
 "status.poll.frequency" = "Frecuencia de la encuesta";
 "status.poll.option-n %lld" = "Opción %lld";
@@ -587,3 +602,9 @@
 "status.action.report" = "Denunciar publicación";
 
 "tag.suggested.mentions-%lld" = "%lld menciones";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Título del Grupo de Etiquetas";
+"add-tag-groups.edit.icon.field" = "Icono del Grupo de Etiquetas (SFSymbol)";
+"add-tag-groups.edit.tags" = "Añade etiquetas al grupo";
+"add-tag-groups.edit.tags.add" = "Etiqueta";

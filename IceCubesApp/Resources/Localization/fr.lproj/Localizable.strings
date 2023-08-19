@@ -121,10 +121,15 @@
 "settings.content.expand-media" = "Affichage des médias";
 "settings.content.default-sensitive" = "Toujours marquer les médias comme sensibles";
 "settings.content.default-visibility" = "Visibilité des publications";
+"settings.content.default-reply-visibility" = "Reply Visibility";
 "settings.content.media" = "Média";
 "settings.content.media.show.alt" = "Montrer les textes ALT";
 "settings.content.reading" = "Lecture";
 "settings.content.posting" = "Publication";
+"settings.content.sharing" = "Sharing";
+"settings.content.sharing.share-button-behavior" = "Share Button Behavior";
+"settings.content.sharing.share-behavior.link-only" = "Link Only";
+"settings.content.sharing.share-behavior.link-and-text" = "Link and Text";
 "enum.expand-media.show" = "Afficher tout";
 "enum.expand-media.hide" = "Masquer tout";
 "enum.expand-media.hide-sensitive" = "Masquer sensible";
@@ -149,7 +154,7 @@
 "settings.support.supporter.title" = " Become a supporter!";
 "settings.support.supporter.subtitle" = "By giving a monthly tip to Ice Cubes, you become a supporter, you'll even get verified badge on your profile. For your 👀 only.";
 "settings.support.supporter.subscribed" = " Thanks for being an Ice Cubes supporter!";
-"settings.support.supporter.subscription-info"= "Subscription are automatically renewed unless you cancel them a day before the next renewal cycle.";
+"settings.support.supporter.subscription-info"= "The supporter subscription is a monthly auto renewable subscription giving you a verified badge only visible to you on your profile. Subscription are automatically renewed unless you cancel them a day before the next renewal cycle.";
 "settings.support.restore-purchase.button" = "Restore purchase";
 "settings.support.restore-purchase.explanation" = "Restore your supporter subscription if it hasn't been synced automatically.";
 "settings.support.privacy-policy" = "Privacy Policy";
@@ -164,6 +169,8 @@
 "settings.general.translate" = "Translation Settings";
 "settings.translation.navigation-title" = "Translation";
 "settings.translation.always-deepl" = "Always Translate using DeepL";
+"settings.translation.auto-detect-post-language" = "Auto detect language";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary.";
 "settings.translation.user-api-key" = "DeepL API Key";
 "settings.translation.api-key-type" = "Type of the Key";
 "settings.translation.needed-message" = "This feature requires a DeepL API key";
@@ -234,6 +241,9 @@
 "timeline.filter.lists" = "Listes";
 "timeline.filter.local" = "Chronologies locales";
 "timeline.filter.tags" = "Tags suivis";
+"timeline.filter.tag-groups" = "Tag Groups";
+"timeline.filter.add-tag-groups" = "Add tag group";
+"timeline.filter.edit-tag-groups" = "Edit tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Ajouter un compte";
@@ -283,7 +293,7 @@
 "account.follow-request.reject" = "Rejeter";
 "account.follow-requests.pending-requests" = "Demandes en attente";
 "account.follow-requests.instructions" = "Les utilisateurs ne verront pas vos messages tant que vous ne les acceptez pas.";
-"account.followers" = "Abonnés";
+"account.followers" = "Abonné·e·s";
 "account.following" = "Abonnements";
 "account.list.create" = "Créer une nouvelle liste";
 "account.list.create.confirm" = "Créer la liste";
@@ -335,6 +345,10 @@
 "explore.section.trending.posts" = "Publications tendance";
 "explore.section.trending.tags" = "Étiquettes tendance";
 "explore.section.users" = "Utilisateurs";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "Un vote";
@@ -451,6 +465,7 @@
 "status.error.loading.message" = "Une erreur s'est produite lors du chargement des publications, veuillez réessayer.";
 "status.error.message" = "Une erreur s'est produite dans le contexte de cette publication, veuillez réessayer.";
 "status.error.title" = "Une erreur s'est produite";
+"status.error.posting.title" = "Error while posting";
 "status.filter.filtered-by-%@" = "Filtré par : %@";
 "status.filter.show-anyway" = "Montrer quand même";
 "status.image.alt-text.abbreviation" = "ALT";
@@ -463,7 +478,7 @@
 "status.poll.n-votes %lld" = "%lld votes";
 "status.poll.n-votes-voters %lld %lld" = "%lld votes de %lld voteurs";
 "status.poll.closed" = "Fermé";
-"status.poll.closes-in" = "Ferme dans";
+"status.poll.closes-in %@" = "Ferme dans %@";
 "status.poll.duration" = "Durée du sondage";
 "status.poll.frequency" = "Fréquence de sondage";
 "status.poll.option-n %lld" = "Option %lld";
@@ -482,7 +497,7 @@
 "status.summary.n-favorites %lld" = "%lld favoris";
 "status.summary.edit-history" = "Edit History";
 "status.visibility.direct" = "Privé";
-"status.visibility.follower" = "Abonnés";
+"status.visibility.follower" = "Abonné·e";
 "status.visibility.public" = "Tout le monde";
 "status.visibility.unlisted" = "Non répertorié";
 
@@ -582,3 +597,9 @@
 "status.action.report" = "Signaler la publication";
 
 "tag.suggested.mentions-%lld" = "%lld mentions";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Tag Group Title";
+"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
+"add-tag-groups.edit.tags" = "Add tags to the group";
+"add-tag-groups.edit.tags.add" = "Tag";

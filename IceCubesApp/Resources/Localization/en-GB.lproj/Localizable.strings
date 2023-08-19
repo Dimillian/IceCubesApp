@@ -127,10 +127,15 @@
 "settings.content.expand-media" = "Media Display";
 "settings.content.default-sensitive" = "Always Mark Media as Sensitive";
 "settings.content.default-visibility" = "Posting Visibility";
+"settings.content.default-reply-visibility" = "Reply Visibility";
 "settings.content.media" = "Media";
 "settings.content.media.show.alt" = "Show ALT Texts";
 "settings.content.reading" = "Reading";
 "settings.content.posting" = "Posting";
+"settings.content.sharing" = "Sharing";
+"settings.content.sharing.share-button-behavior" = "Share Button Behavior";
+"settings.content.sharing.share-behavior.link-only" = "Link Only";
+"settings.content.sharing.share-behavior.link-and-text" = "Link and Text";
 "enum.expand-media.show" = "Show All";
 "enum.expand-media.hide" = "Hide All";
 "enum.expand-media.hide-sensitive" = "Hide Sensitive";
@@ -155,7 +160,7 @@
 "settings.support.supporter.title" = " Become a supporter!";
 "settings.support.supporter.subtitle" = "By giving a monthly tip to Ice Cubes, you become a supporter, you'll even get verified badge on your profile. For your 👀 only.";
 "settings.support.supporter.subscribed" = " Thanks for being an Ice Cubes supporter!";
-"settings.support.supporter.subscription-info"= "Subscription are automatically renewed unless you cancel them a day before the next renewal cycle.";
+"settings.support.supporter.subscription-info"= "The supporter subscription is a monthly auto renewable subscription giving you a verified badge only visible to you on your profile. Subscription are automatically renewed unless you cancel them a day before the next renewal cycle.";
 "settings.support.restore-purchase.button" = "Restore purchase";
 "settings.support.restore-purchase.explanation" = "Restore your supporter subscription if it hasn't been synced automatically.";
 "settings.support.privacy-policy" = "Privacy Policy";
@@ -170,6 +175,8 @@
 "settings.general.translate" = "Translation Settings";
 "settings.translation.navigation-title" = "Translation";
 "settings.translation.always-deepl" = "Always Translate using DeepL";
+"settings.translation.auto-detect-post-language" = "Auto detect language";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary.";
 "settings.translation.user-api-key" = "DeepL API Key";
 "settings.translation.api-key-type" = "Type of the Key";
 "settings.translation.needed-message" = "This feature requires a DeepL API key";
@@ -237,6 +244,9 @@
 "timeline.filter.lists" = "Lists";
 "timeline.filter.local" = "Local Timelines";
 "timeline.filter.tags" = "Followed Tags";
+"timeline.filter.tag-groups" = "Tag Groups";
+"timeline.filter.add-tag-groups" = "Add tag group";
+"timeline.filter.edit-tag-groups" = "Edit tag group";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "Add Account";
@@ -337,6 +347,10 @@
 "explore.section.trending.posts" = "Trending Posts";
 "explore.section.trending.tags" = "Trending Tags";
 "explore.section.users" = "Users";
+"explore.scope.all" = "All";
+"explore.scope.people" = "People";
+"explore.scope.hashtags" = "Hashtags";
+"explore.scope.posts" = "Posts";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "One Vote";
@@ -455,6 +469,7 @@
 "status.error.loading.message" = "An error occurred while loading posts, please try again.";
 "status.error.message" = "An error occurred in the context of this post, please try again.";
 "status.error.title" = "An error occurred";
+"status.error.posting.title" = "Error while posting";
 "status.filter.filtered-by-%@" = "Filtered by: %@";
 "status.filter.show-anyway" = "Show anyway";
 "status.image.alt-text.abbreviation" = "ALT";
@@ -467,7 +482,7 @@
 "status.poll.n-votes %lld" = "%lld votes";
 "status.poll.n-votes-voters %lld %lld" = "%lld votes from %lld voters";
 "status.poll.closed" = "Closed";
-"status.poll.closes-in" = "Closes in ";
+"status.poll.closes-in %@" = "Closes in %@";
 "status.poll.duration" = "Poll Duration";
 "status.poll.frequency" = "Polling Frequency";
 "status.poll.option-n %lld" = "Option %lld";
@@ -586,3 +601,9 @@
 "status.action.report" = "Report Post";
 
 "tag.suggested.mentions-%lld" = "%lld mentions";
+
+// MARK: Tag Groups
+"add-tag-groups.edit.title.field" = "Tag Group Title";
+"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
+"add-tag-groups.edit.tags" = "Add tags to the group";
+"add-tag-groups.edit.tags.add" = "Tag";

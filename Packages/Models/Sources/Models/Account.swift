@@ -47,9 +47,9 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
   public let acct: String
   public let note: HTMLString
   public let createdAt: ServerDate
-  public let followersCount: Int
-  public let followingCount: Int
-  public let statusesCount: Int
+  public let followersCount: Int?
+  public let followingCount: Int?
+  public let statusesCount: Int?
   public let lastStatusAt: String?
   public let fields: [Field]
   public let locked: Bool

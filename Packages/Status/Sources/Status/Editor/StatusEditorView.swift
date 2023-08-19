@@ -96,10 +96,10 @@ public struct StatusEditorView: View {
       .background(theme.primaryBackgroundColor)
       .navigationTitle(viewModel.mode.title)
       .navigationBarTitleDisplayMode(.inline)
-      .alert("Error while posting",
+      .alert("status.error.posting.title",
              isPresented: $viewModel.showPostingErrorAlert,
              actions: {
-               Button("Ok") {}
+               Button("OK") {}
              }, message: {
                Text(viewModel.postingError ?? "")
              })
@@ -108,7 +108,7 @@ public struct StatusEditorView: View {
           Button {
             Task {
               viewModel.evaluateLanguages()
-              if let _ = viewModel.languageConfirmationDialogLanguages {
+              if preferences.autoDetectPostLanguage, let _ = viewModel.languageConfirmationDialogLanguages {
                 isLanguageConfirmPresented = true
               } else {
                 await postStatus()
