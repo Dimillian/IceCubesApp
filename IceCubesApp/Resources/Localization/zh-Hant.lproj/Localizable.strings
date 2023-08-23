@@ -124,17 +124,17 @@
 "settings.content.use-instance-settings" = "沿用伺服器設定";
 "settings.content.expand-spoilers" = "顯示所有敏感嘟文";
 "settings.content.expand-media" = "媒體顯示";
-"settings.content.default-sensitive" = "媒體一概標示為敏感";
+"settings.content.default-sensitive" = "媒體一律標示為敏感題材";
 "settings.content.default-visibility" = "嘟文能見度";
-"settings.content.default-reply-visibility" = "Reply Visibility";
+"settings.content.default-reply-visibility" = "回文能見度";
 "settings.content.media" = "媒體";
 "settings.content.media.show.alt" = "顯示圖片描述";
 "settings.content.reading" = "閱讀";
 "settings.content.posting" = "發表";
-"settings.content.sharing" = "Sharing";
-"settings.content.sharing.share-button-behavior" = "Share Button Behavior";
-"settings.content.sharing.share-behavior.link-only" = "Link Only";
-"settings.content.sharing.share-behavior.link-and-text" = "Link and Text";
+"settings.content.sharing" = "分享";
+"settings.content.sharing.share-button-behavior" = "分享紐功能";
+"settings.content.sharing.share-behavior.link-only" = "只連結";
+"settings.content.sharing.share-behavior.link-and-text" = "連結與本文";
 "enum.expand-media.show" = "全部顯示";
 "enum.expand-media.hide" = "全部隱藏";
 "enum.expand-media.hide-sensitive" = "隱藏敏感題材";
@@ -218,11 +218,11 @@
 "settings.general.translate" = "翻譯設定";
 "settings.translation.navigation-title" = "翻譯設定";
 "settings.translation.always-deepl" = "一概用 DeepL 翻譯";
-"settings.translation.auto-detect-post-language" = "Auto detect language";
-"settings.translation.auto-detect-post-language-footer" = "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary.";
-"settings.translation.user-api-key" = "DeepL API Key";
-"settings.translation.api-key-type" = "Key 類型";
-"settings.translation.needed-message" = "本功能需有 DeepL API key";
+"settings.translation.auto-detect-post-language" = "自動偵測語言";
+"settings.translation.auto-detect-post-language-footer" = "Ice Cubes 將自動偵測您用的語言，必要時會提醒您設定嘟文的語言。";
+"settings.translation.user-api-key" = "DeepL API 密鑰";
+"settings.translation.api-key-type" = "密鑰類型";
+"settings.translation.needed-message" = "本功能需有 DeepL API 密鑰";
 
 // MARK: Tabs
 "tab.explore" = "探索";
@@ -243,9 +243,9 @@
 "timeline.filter.lists" = "列表";
 "timeline.filter.local" = "本站時間軸";
 "timeline.filter.tags" = "跟隨標籤";
-"timeline.filter.tag-groups" = "Tag Groups";
-"timeline.filter.add-tag-groups" = "Add tag group";
-"timeline.filter.edit-tag-groups" = "Edit tag group";
+"timeline.filter.tag-groups" = "標籤組";
+"timeline.filter.add-tag-groups" = "新增標籤組";
+"timeline.filter.edit-tag-groups" = "編輯標籤組";
 
 // MARK: Package: AppAccount
 "app-account.button.add" = "新增帳號";
@@ -347,10 +347,10 @@
 "explore.section.trending.posts" = "流行嘟文";
 "explore.section.trending.tags" = "流行標籤";
 "explore.section.users" = "用戶";
-"explore.scope.all" = "All";
-"explore.scope.people" = "People";
-"explore.scope.hashtags" = "Hashtags";
-"explore.scope.posts" = "Posts";
+"explore.scope.all" = "全部";
+"explore.scope.people" = "用戶";
+"explore.scope.hashtags" = "主題標籤";
+"explore.scope.posts" = "嘟文";
 
 // MARK: Package: Env
 "env.poll-vote-frequency.one" = "單一選擇";
@@ -605,7 +605,7 @@
 "tag.suggested.mentions-%lld" = "%lld 提及";
 
 // MARK: Tag Groups
-"add-tag-groups.edit.title.field" = "Tag Group Title";
-"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
-"add-tag-groups.edit.tags" = "Add tags to the group";
-"add-tag-groups.edit.tags.add" = "Tag";
+"add-tag-groups.edit.title.field" = "標籤組名稱";
+"add-tag-groups.edit.icon.field" = "標籤組圖示（SFSymbol 名稱）";
+"add-tag-groups.edit.tags" = "把標籤加入標籤組";
+"add-tag-groups.edit.tags.add" = "標籤";
