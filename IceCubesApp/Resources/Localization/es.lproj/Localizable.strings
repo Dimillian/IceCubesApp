@@ -82,7 +82,7 @@
 "settings.display.section.display" = "Apariencia";
 "settings.display.section.theme" = "Tema";
 "settings.display.colors.apply" = "Aplicar colores personalizados";
-"settings.display.section.theme.footer" = "Solo se pueden usar los colores personalizados si la opción de 'sistema de coincidencia' está desactivada";
+"settings.display.section.theme.footer" = "Solo se pueden usar los colores personalizados si la opción de 'Coincidir con el sistema' está desactivada";
 "settings.display.status.action-buttons" = "Botones de acción";
 "settings.display.status.media-style" = "Estilo del contenido multimedia";
 "settings.display.translate-button" = "Mostrar botón para traducir";
@@ -90,7 +90,7 @@
 "settings.display.theme.secondary-background" = "Color de fondo secundario";
 "settings.display.theme.text-color" = "Color del texto";
 "settings.display.theme.tint" = "Color";
-"settings.display.theme.systemColor" = "Sistema de coincidencia";
+"settings.display.theme.systemColor" = "Coincidir con el sistema";
 "settings.general.browser" = "Navegador";
 "settings.general.browser.in-app" = "Interno";
 "settings.general.browser.in-app.readerview" = "Vista de lectura en navegador interno";
