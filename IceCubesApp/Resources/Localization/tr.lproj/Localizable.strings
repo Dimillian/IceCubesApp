@@ -251,6 +251,7 @@
 // MARK: Package: Account
 "account.action.add-remove-list" = "Listeye Ekle/Çıkar";
 "account.action.edit-info" = "Bilgiyi Düzenle";
+"account.action.privacy-settings" = "Privacy Settings";
 "account.action.mention" = "Bahset";
 "account.action.message" = "Mesaj Gönder";
 "account.action.notify-enable" = "Enable Notifications";

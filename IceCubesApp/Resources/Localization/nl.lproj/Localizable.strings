@@ -248,6 +248,7 @@
 // MARK: Package: Account
 "account.action.add-remove-list" = "Aan lijsten toevoegen of verwijderen";
 "account.action.edit-info" = "Bewerken";
+"account.action.privacy-settings" = "Privacy Settings";
 "account.action.mention" = "Vermelden";
 "account.action.message" = "Bericht sturen";
 "account.action.notify-enable" = "Schakel meldingen in";

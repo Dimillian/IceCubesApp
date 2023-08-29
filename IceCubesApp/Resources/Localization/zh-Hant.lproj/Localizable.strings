@@ -253,6 +253,7 @@
 // MARK: Package: Account
 "account.action.add-remove-list" = "從列表中新增或刪除";
 "account.action.edit-info" = "編輯個人檔案";
+"account.action.privacy-settings" = "Privacy Settings";
 "account.action.mention" = "提及";
 "account.action.message" = "私訊";
 "account.action.notify-enable" = "啟用通知";

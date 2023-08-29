@@ -256,6 +256,7 @@
 // MARK: Package: Account
 "account.action.add-remove-list" = "Дадаць/Выдаліць са спісаў";
 "account.action.edit-info" = "Рэдагаваць звесткі";
+"account.action.privacy-settings" = "Privacy Settings";
 "account.action.mention" = "Згадванне";
 "account.action.message" = "Паведамленне";
 "account.action.notify-enable" = "Уключыць апавяшчэнні";

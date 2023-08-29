@@ -252,6 +252,7 @@
 // MARK: Package: Account
 "account.action.add-remove-list" = "리스트에서 추가/제거";
 "account.action.edit-info" = "프로필 편집";
+"account.action.privacy-settings" = "Privacy Settings";
 "account.action.mention" = "언급";
 "account.action.message" = "메시지 작성";
 "account.action.notify-enable" = "새 글 알림 켜기";

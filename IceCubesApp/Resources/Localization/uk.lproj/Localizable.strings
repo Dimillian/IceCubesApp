@@ -252,6 +252,7 @@
 // MARK: Package: Account
 "account.action.add-remove-list" = "Додати/Видалити зі списку";
 "account.action.edit-info" = "Редагувати інформацію";
+"account.action.privacy-settings" = "Privacy Settings";
 "account.action.mention" = "Згадати";
 "account.action.message" = "Повідомлення";
 "account.action.notify-enable" = "Увімкнути сповіщення";

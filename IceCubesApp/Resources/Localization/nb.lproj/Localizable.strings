@@ -251,6 +251,7 @@
 // MARK: Package: Account
 "account.action.add-remove-list" = "Legg til/fjern fra lister";
 "account.action.edit-info" = "Rediger info";
+"account.action.privacy-settings" = "Privacy Settings";
 "account.action.mention" = "Omtale";
 "account.action.message" = "Melding";
 "account.action.notify-enable" = "Aktiver varsler";

@@ -250,6 +250,7 @@
 // MARK: Package: Account
 "account.action.add-remove-list" = "Afegeix/elimina de les llistes";
 "account.action.edit-info" = "Edita la informació";
+"account.action.privacy-settings" = "Privacy Settings";
 "account.action.mention" = "Menciona";
 "account.action.message" = "Envia un missatge";
 "account.action.notify-enable" = "Activa les notificacions";

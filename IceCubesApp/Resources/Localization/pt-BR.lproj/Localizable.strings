@@ -251,6 +251,7 @@
 // MARK: Package: Account
 "account.action.add-remove-list" = "Adicionar/Remover das listas";
 "account.action.edit-info" = "Editar Informação";
+"account.action.privacy-settings" = "Privacy Settings";
 "account.action.mention" = "Menção";
 "account.action.message" = "Mensagem";
 "account.action.notify-enable" = "Habilitar Notificações";

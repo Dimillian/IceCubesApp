@@ -251,6 +251,7 @@
 // MARK: Package: Account
 "account.action.add-remove-list" = "リストへの追加/削除";
 "account.action.edit-info" = "プロフィールを編集";
+"account.action.privacy-settings" = "Privacy Settings";
 "account.action.mention" = "返信";
 "account.action.message" = "メッセージ";
 "account.action.notify-enable" = "通知を有効にする";

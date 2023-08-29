@@ -334,6 +334,14 @@ public struct AccountDetailView: View {
           } label: {
             Label("account.action.edit-info", systemImage: "pencil")
           }
+          
+          Button {
+            if let url = URL(string: "https://\(client.server)/settings/privacy") {
+              openURL(url)
+            }
+          } label: {
+            Label("account.action.privacy-settings", systemImage: "lock")
+          }
 
           if currentInstance.isFiltersSupported {
             Button {
