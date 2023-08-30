@@ -183,6 +183,8 @@ public class Theme: ObservableObject {
       NemesisLight(),
       MediumLight(),
       MediumDark(),
+      ConstellationLight(),
+      ConstellationDark(),
     ]
   }
 
