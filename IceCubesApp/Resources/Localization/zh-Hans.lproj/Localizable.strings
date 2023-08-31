@@ -249,7 +249,7 @@
 // MARK: Package: Account
 "account.action.add-remove-list" = "从列表中添加/移除";
 "account.action.edit-info" = "编辑个人资料";
-"account.action.privacy-settings" = "Privacy Settings";
+"account.action.privacy-settings" = "隐私设置";
 "account.action.mention" = "提及";
 "account.action.message" = "私信";
 "account.action.notify-enable" = "启用通知";
