@@ -15,8 +15,6 @@ It's a great starting point for learning SwiftUI. The app covers many of the bas
 
 The architecture is straightforward MVVM for most parts, no redux on this one ;)
 
-Please note that IceCubesApp is currently in an early stage of development and as such, there are many features that are still missing. While the app is functional and can be used to browse and interact with Mastodon, there are still many features that are planned for the future.
-
 Thanks!
 
 ![Icon](IceCubesApp/Assets.xcassets/AppIcon.appiconset/144.png?)
