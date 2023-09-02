@@ -253,7 +253,7 @@
 // MARK: Package: Account
 "account.action.add-remove-list" = "Gehitu/Kendu zerrendatik";
 "account.action.edit-info" = "Editatu informazioa";
-"account.action.privacy-settings" = "Privacy Settings";
+"account.action.privacy-settings" = "Pribatutasun ezarpenak";
 "account.action.mention" = "Aipatu";
 "account.action.message" = "Bidali mezua";
 "account.action.notify-enable" = "Gaitu jakinarazpenak";
