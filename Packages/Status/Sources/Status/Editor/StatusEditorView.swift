@@ -66,7 +66,10 @@ public struct StatusEditorView: View {
           }
           .padding(.top, 8)
           .padding(.bottom, 40)
-        }.accessibilitySortPriority(1) // Ensure that all elements inside the `ScrollView` occur earlier than the accessory views
+        }
+        .accessibilitySortPriority(1) // Ensure that all elements inside the `ScrollView` occur earlier than the accessory views
+        .padding(.top, 1) // hacky fix for weird SwiftUI scrollView bug when adding padding
+        .padding(.bottom, 48)
         VStack(alignment: .leading, spacing: 0) {
           StatusEditorAutoCompleteView(viewModel: viewModel)
           StatusEditorAccessoryView(isSpoilerTextFocused: $isSpoilerTextFocused,
