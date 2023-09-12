@@ -5,7 +5,7 @@ public class SceneDelegate: NSObject, ObservableObject, UIWindowSceneDelegate {
   public var window: UIWindow?
 
   public var windowWidth: CGFloat {
-    window?.bounds.size.width ?? UIScreen.main.bounds.size.width
+    window?.bounds.size.width ?? 0
   }
 
   public func scene(_ scene: UIScene,

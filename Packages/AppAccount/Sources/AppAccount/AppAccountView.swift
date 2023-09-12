@@ -53,7 +53,7 @@ public struct AppAccountView: View {
         transation.disablesAnimations = true
         withTransaction(transation) {
           appAccounts.currentAccount = viewModel.appAccount
-          HapticManager.shared.fireHaptic(of: .notification(.success))
+          HapticManager.shared.fireHaptic(of: .buttonPress)
         }
       }
     } label: {

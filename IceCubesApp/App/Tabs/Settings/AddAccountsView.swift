@@ -70,7 +70,6 @@ struct AddAccountView: View {
       .navigationBarTitleDisplayMode(.inline)
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
-      .scrollDismissesKeyboard(.immediately)
       .toolbar {
         if !appAccountsManager.availableAccounts.isEmpty {
           ToolbarItem(placement: .navigationBarLeading) {

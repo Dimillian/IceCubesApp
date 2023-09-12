@@ -7,24 +7,31 @@ public class HapticManager {
   public enum HapticType {
     case buttonPress
     case dataRefresh(intensity: CGFloat)
+  #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
     case notification(_ type: UINotificationFeedbackGenerator.FeedbackType)
+  #endif
     case tabSelection
     case timeline
   }
 
+  #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
   private let selectionGenerator = UISelectionFeedbackGenerator()
   private let impactGenerator = UIImpactFeedbackGenerator(style: .heavy)
   private let notificationGenerator = UINotificationFeedbackGenerator()
+  #endif
 
   private let userPreferences = UserPreferences.shared
 
   private init() {
+  #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
     selectionGenerator.prepare()
     impactGenerator.prepare()
+  #endif
   }
 
   @MainActor
   public func fireHaptic(of type: HapticType) {
+  #if os(iOS) || targetEnvironment(macCatalyst) || os(tvOS)
     guard supportsHaptics else { return }
 
     switch type {
@@ -49,6 +56,7 @@ public class HapticManager {
         selectionGenerator.selectionChanged()
       }
     }
+    #endif
   }
 
   public var supportsHaptics: Bool {

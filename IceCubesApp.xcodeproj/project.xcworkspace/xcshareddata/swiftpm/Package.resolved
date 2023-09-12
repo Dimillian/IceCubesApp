@@ -10,15 +10,6 @@
       }
     },
     {
-      "identity" : "emojitext",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/divadretlaw/EmojiText",
-      "state" : {
-        "revision" : "a4ddf5077c241170e8ac0d3a9480c511e27c1ae9",
-        "version" : "2.8.0"
-      }
-    },
-    {
       "identity" : "keychain-swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/evgenyneu/keychain-swift",

@@ -27,7 +27,6 @@ public struct EditAccountView: View {
       .environment(\.editMode, .constant(.active))
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
-      .scrollDismissesKeyboard(.immediately)
       .navigationTitle("account.edit.navigation-title")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {

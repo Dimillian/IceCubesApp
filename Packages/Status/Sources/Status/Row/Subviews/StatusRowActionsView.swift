@@ -199,7 +199,7 @@ struct StatusRowActionsView: View {
           return
         }
       }
-      HapticManager.shared.fireHaptic(of: .notification(.success))
+      HapticManager.shared.fireHaptic(of: .buttonPress)
       switch action {
       case .respond:
         SoundEffectManager.shared.playSound(of: .share)

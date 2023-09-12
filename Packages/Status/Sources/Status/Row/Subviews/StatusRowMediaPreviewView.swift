@@ -25,11 +25,6 @@ public struct StatusRowMediaPreviewView: View {
   @State private var isHidingMedia: Bool = false
 
   var availableWidth: CGFloat {
-    if UIDevice.current.userInterfaceIdiom == .phone &&
-      (UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight) || theme.statusDisplayStyle == .medium
-    {
-      return sceneDelegate.windowWidth * 0.80
-    }
     return sceneDelegate.windowWidth
   }
 

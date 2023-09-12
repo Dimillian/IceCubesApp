@@ -82,7 +82,7 @@ struct StatusRowSwipeView: View {
   @ViewBuilder
   private func makeSwipeButtonForRouterPath(action: StatusAction, destination: SheetDestination) -> some View {
     Button {
-      HapticManager.shared.fireHaptic(of: .notification(.success))
+      HapticManager.shared.fireHaptic(of: .buttonPress)
       viewModel.routerPath.presentedSheet = destination
     } label: {
       makeSwipeLabel(action: action, style: preferences.swipeActionsIconStyle)
@@ -93,7 +93,7 @@ struct StatusRowSwipeView: View {
   private func makeSwipeButtonForTask(action: StatusAction, privateBoost: Bool = false, task: @escaping () async -> Void) -> some View {
     Button {
       Task {
-        HapticManager.shared.fireHaptic(of: .notification(.success))
+        HapticManager.shared.fireHaptic(of: .buttonPress)
         await task()
       }
     } label: {

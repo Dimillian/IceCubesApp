@@ -45,7 +45,6 @@ public struct ConversationDetailView: View {
         }
         .padding(.horizontal, .layoutPadding)
       }
-      .scrollDismissesKeyboard(.interactively)
       .safeAreaInset(edge: .bottom) {
         inputTextView
       }

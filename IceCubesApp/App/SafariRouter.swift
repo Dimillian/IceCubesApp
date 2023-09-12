@@ -56,7 +56,7 @@ private struct SafariRouter: ViewModifier {
   }
 }
 
-private class InAppSafariManager: NSObject, ObservableObject, SFSafariViewControllerDelegate {
+private class InAppSafariManager: NSObject, ObservableObject {
   var windowScene: UIWindowScene?
   let viewController: UIViewController = .init()
   var window: UIWindow?
@@ -71,9 +71,6 @@ private class InAppSafariManager: NSObject, ObservableObject, SFSafariViewContro
     configuration.entersReaderIfAvailable = UserPreferences.shared.inAppBrowserReaderView
 
     let safari = SFSafariViewController(url: url, configuration: configuration)
-    safari.preferredBarTintColor = UIColor(Theme.shared.primaryBackgroundColor)
-    safari.preferredControlTintColor = UIColor(Theme.shared.tintColor)
-    safari.delegate = self
 
     DispatchQueue.main.async { [weak self] in
       self?.viewController.present(safari, animated: true)

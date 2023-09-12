@@ -52,7 +52,6 @@ struct AddRemoteTimelineView: View {
       .navigationBarTitleDisplayMode(.inline)
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
-      .scrollDismissesKeyboard(.immediately)
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
           Button("action.cancel", action: { dismiss() })
