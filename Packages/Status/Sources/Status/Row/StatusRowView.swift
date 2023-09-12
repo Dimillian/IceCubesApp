@@ -117,7 +117,6 @@ public struct StatusRowView: View {
         StatusRowSwipeView(viewModel: viewModel, mode: .leading)
       }
     }
-    .listRowBackground(viewModel.highlightRowColor)
     .listRowInsets(.init(top: 12,
                          leading: .layoutPadding,
                          bottom: 12,

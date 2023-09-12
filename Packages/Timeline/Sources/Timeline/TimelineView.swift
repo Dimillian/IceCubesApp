@@ -57,7 +57,6 @@ public struct TimelineView: View {
         .environment(\.defaultMinListRowHeight, 1)
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
-        .background(theme.primaryBackgroundColor)
         .introspect(.list, on: .iOS(.v16, .v17)) { (collectionView: UICollectionView) in
           DispatchQueue.main.async {
             self.collectionView = collectionView
@@ -257,7 +256,6 @@ public struct TimelineView: View {
 
   private var scrollToTopView: some View {
     HStack { EmptyView() }
-      .listRowBackground(theme.primaryBackgroundColor)
       .listRowSeparator(.hidden)
       .listRowInsets(.init())
       .frame(height: .layoutPadding)

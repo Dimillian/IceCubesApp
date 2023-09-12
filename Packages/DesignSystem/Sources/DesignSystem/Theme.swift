@@ -169,6 +169,10 @@ public class Theme: ObservableObject {
         self?.setColor(withName: colorSetName)
       }
       .store(in: &cancellables)
+    
+    #if os(visionOS)
+      selectedSet = .iceCubeDark
+    #endif
   }
 
   public static var allColorSet: [ColorSet] {

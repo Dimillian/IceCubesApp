@@ -72,7 +72,6 @@ public struct NotificationsListView: View {
     }
     .navigationBarTitleDisplayMode(.inline)
     .scrollContentBackground(.hidden)
-    .background(theme.primaryBackgroundColor)
     .task {
       viewModel.client = client
       viewModel.currentAccount = account
@@ -119,7 +118,6 @@ public struct NotificationsListView: View {
                                leading: .layoutPadding + 4,
                                bottom: 12,
                                trailing: .layoutPadding))
-          .listRowBackground(theme.primaryBackgroundColor)
           .redacted(reason: .placeholder)
       }
 
@@ -128,7 +126,6 @@ public struct NotificationsListView: View {
         EmptyView(iconName: "bell.slash",
                   title: "notifications.empty.title",
                   message: "notifications.empty.message")
-          .listRowBackground(theme.primaryBackgroundColor)
           .listSectionSeparator(.hidden)
       } else {
         ForEach(notifications) { notification in
@@ -140,8 +137,6 @@ public struct NotificationsListView: View {
                                  leading: .layoutPadding + 4,
                                  bottom: 12,
                                  trailing: .layoutPadding))
-            .listRowBackground(notification.type == .mention && lockedType != .mention ?
-              theme.secondaryBackgroundColor : theme.primaryBackgroundColor)
             .id(notification.id)
         }
       }
@@ -169,7 +164,6 @@ public struct NotificationsListView: View {
           await viewModel.fetchNotifications()
         }
       }
-      .listRowBackground(theme.primaryBackgroundColor)
       .listSectionSeparator(.hidden)
     }
   }
@@ -184,7 +178,6 @@ public struct NotificationsListView: View {
                          leading: .layoutPadding + 4,
                          bottom: .layoutPadding,
                          trailing: .layoutPadding))
-    .listRowBackground(theme.primaryBackgroundColor)
   }
 
   private var topPaddingView: some View {

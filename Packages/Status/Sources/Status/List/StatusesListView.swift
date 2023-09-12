@@ -41,7 +41,6 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
           await fetcher.fetchNewestStatuses()
         }
       }
-      .listRowBackground(theme.primaryBackgroundColor)
       .listRowSeparator(.hidden)
 
     case let .display(statuses, nextPageState):
@@ -83,6 +82,5 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
       Spacer()
     }
     .padding(.horizontal, .layoutPadding)
-    .listRowBackground(theme.primaryBackgroundColor)
   }
 }

@@ -25,7 +25,7 @@ public struct StatusRowMediaPreviewView: View {
   @State private var isHidingMedia: Bool = false
 
   var availableWidth: CGFloat {
-    return sceneDelegate.windowWidth
+    return sceneDelegate.windowWidth * 0.50
   }
 
   var appLayoutWidth: CGFloat {
