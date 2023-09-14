@@ -4,11 +4,12 @@ import SafariServices
 import SwiftUI
 
 extension View {
-  func withSafariRouter() -> some View {
+  @MainActor func withSafariRouter() -> some View {
     modifier(SafariRouter())
   }
 }
 
+@MainActor
 private struct SafariRouter: ViewModifier {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var preferences: UserPreferences
@@ -56,6 +57,7 @@ private struct SafariRouter: ViewModifier {
   }
 }
 
+@MainActor
 private class InAppSafariManager: NSObject, ObservableObject, SFSafariViewControllerDelegate {
   var windowScene: UIWindowScene?
   let viewController: UIViewController = .init()
@@ -99,10 +101,12 @@ private class InAppSafariManager: NSObject, ObservableObject, SFSafariViewContro
     return window
   }
 
-  func safariViewControllerDidFinish(_: SFSafariViewController) {
-    window?.resignKey()
-    window?.isHidden = false
-    window = nil
+  nonisolated func safariViewControllerDidFinish(_: SFSafariViewController) {
+    Task { @MainActor in
+      window?.resignKey()
+      window?.isHidden = false
+      window = nil
+    }
   }
 }
 

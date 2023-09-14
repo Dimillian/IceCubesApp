@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RevenueCat/purchases-ios.git",
       "state" : {
-        "revision" : "4601c1e0c246f3d74094229737e894a9f2339e6a",
-        "version" : "4.25.7"
+        "revision" : "78d2f159d6d647f26ae5a9dd38276ea06403e7ec",
+        "version" : "4.25.9"
       }
     },
     {
@@ -86,8 +86,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/siteline/SwiftUI-Introspect.git",
       "state" : {
-        "revision" : "9da0f9b7bffe96a7c98a0128f1e214f62728a39a",
-        "version" : "0.11.1"
+        "revision" : "3ba734dd20faada0e3234b68e78db97005315f0e",
+        "version" : "1.0.0"
       }
     },
     {

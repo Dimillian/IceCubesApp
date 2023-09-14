@@ -25,7 +25,9 @@ struct TranslationSettingsView: View {
           SecureField("settings.translation.user-api-key", text: $apiKey)
             .textContentType(.password)
         }
-        .onAppear(perform: readValue)
+        .onAppear {
+          readValue()
+        }
         .listRowBackground(theme.primaryBackgroundColor)
 
         if apiKey.isEmpty {

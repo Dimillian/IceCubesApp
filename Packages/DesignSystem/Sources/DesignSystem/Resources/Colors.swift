@@ -14,7 +14,7 @@ public extension Color {
   }
 
   static var label: Color {
-    Color("label", bundle: .module)
+    Color(.label)
   }
 }
 

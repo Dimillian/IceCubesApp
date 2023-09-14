@@ -5,12 +5,13 @@ import Foundation
 import Status
 import SwiftUI
 
+@MainActor
 enum Tab: Int, Identifiable, Hashable {
   case timeline, notifications, mentions, explore, messages, settings, other
   case trending, federated, local
   case profile
 
-  var id: Int {
+  nonisolated var id: Int {
     rawValue
   }
 

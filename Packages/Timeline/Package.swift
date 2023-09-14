@@ -21,7 +21,7 @@ let package = Package(
     .package(name: "Env", path: "../Env"),
     .package(name: "Status", path: "../Status"),
     .package(name: "DesignSystem", path: "../DesignSystem"),
-    .package(url: "https://github.com/siteline/SwiftUI-Introspect.git", from: "0.9.1"),
+    .package(url: "https://github.com/siteline/SwiftUI-Introspect.git", from: "1.0.0"),
     .package(url: "https://github.com/mergesort/Bodega", from: "2.0.2"),
   ],
   targets: [

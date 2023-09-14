@@ -307,7 +307,9 @@ struct SettingsTabs: View {
           _ = preferences.remoteLocalTimelines.remove(at: index)
         }
       }
-      .onMove(perform: moveTimelineItems)
+      .onMove(perform: { indices, newOffset in
+        moveTimelineItems(from: indices, to: newOffset)
+      })
       .listRowBackground(theme.primaryBackgroundColor)
       Button {
         routerPath.presentedSheet = .addRemoteLocalTimeline
@@ -324,6 +326,7 @@ struct SettingsTabs: View {
     }
   }
 
+  
   private func moveTimelineItems(from source: IndexSet, to destination: Int) {
     preferences.remoteLocalTimelines.move(fromOffsets: source, toOffset: destination)
   }
