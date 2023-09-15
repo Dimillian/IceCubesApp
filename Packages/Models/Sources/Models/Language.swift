@@ -1,7 +1,8 @@
 import Foundation
 
+@MainActor
 public struct Language: Identifiable, Equatable, Hashable {
-  public var id: String { isoCode }
+  nonisolated public var id: String { isoCode }
 
   public let isoCode: String
   public let nativeName: String?

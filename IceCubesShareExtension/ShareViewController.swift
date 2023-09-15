@@ -55,13 +55,15 @@ class ShareViewController: UIViewController {
     NotificationCenter.default.addObserver(forName: NotificationsName.shareSheetClose,
                                            object: nil,
                                            queue: nil)
-    { _ in
-      self.close()
+    { [weak self] _ in
+      self?.close()
     }
   }
 
-  func close() {
-    extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
+  nonisolated func close() {
+    Task { @MainActor in
+      extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
+    }
   }
 
   override func viewDidAppear(_ animated: Bool) {

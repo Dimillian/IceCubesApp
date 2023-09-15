@@ -3,6 +3,7 @@ import DesignSystem
 import Env
 import SwiftUI
 
+@MainActor
 class VideoPlayerViewModel: ObservableObject {
   @Published var player: AVPlayer?
   private let url: URL
@@ -23,24 +24,27 @@ class VideoPlayerViewModel: ObservableObject {
     guard let player else { return }
     NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
                                            object: player.currentItem, queue: .main)
-    { [weak self] _ in
-      if autoPlay {
-        self?.player?.seek(to: CMTime.zero)
-        self?.player?.play()
+    { _ in
+      Task { @MainActor [weak self] in
+        if autoPlay {
+          self?.play()
+        }
       }
     }
   }
+  
 
   func pause() {
     player?.pause()
   }
 
   func play() {
+    player?.seek(to: CMTime.zero)
     player?.play()
   }
 
   deinit {
-    NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: self.player)
+    NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
   }
 }
 

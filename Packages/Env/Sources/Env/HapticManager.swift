@@ -1,6 +1,7 @@
 import CoreHaptics
 import UIKit
 
+@MainActor
 public class HapticManager {
   public static let shared: HapticManager = .init()
 

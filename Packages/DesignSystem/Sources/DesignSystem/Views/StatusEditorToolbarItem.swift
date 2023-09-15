@@ -22,6 +22,7 @@ public extension View {
   }
 }
 
+@MainActor
 public struct StatusEditorToolbarItem: ToolbarContent {
   @EnvironmentObject private var routerPath: RouterPath
 
@@ -34,8 +35,10 @@ public struct StatusEditorToolbarItem: ToolbarContent {
   public var body: some ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
       Button {
-        routerPath.presentedSheet = .newStatusEditor(visibility: visibility)
-        HapticManager.shared.fireHaptic(of: .buttonPress)
+        Task { @MainActor in
+          routerPath.presentedSheet = .newStatusEditor(visibility: visibility)
+          HapticManager.shared.fireHaptic(of: .buttonPress)
+        }
       } label: {
         Image(systemName: "square.and.pencil")
           .accessibilityLabel("accessibility.tabs.timeline.new-post.label")
@@ -49,13 +52,14 @@ public struct StatusEditorToolbarItem: ToolbarContent {
   }
 }
 
+@MainActor
 public struct SecondaryColumnToolbarItem: ToolbarContent {
   @Environment(\.isSecondaryColumn) private var isSecondaryColumn
   @EnvironmentObject private var preferences: UserPreferences
 
   public init() {}
 
-  public var body: some ToolbarContent {
+   public var body: some ToolbarContent {
     ToolbarItem(placement: isSecondaryColumn ? .navigationBarLeading : .navigationBarTrailing) {
       Button {
         withAnimation {

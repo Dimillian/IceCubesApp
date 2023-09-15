@@ -7,6 +7,9 @@ import Network
 import SwiftUI
 import UserNotifications
 
+extension UNNotificationResponse: @unchecked Sendable { }
+extension UNUserNotificationCenter: @unchecked Sendable { }
+
 public struct PushAccount: Equatable {
   public let server: String
   public let token: OauthToken

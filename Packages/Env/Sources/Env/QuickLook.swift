@@ -1,5 +1,5 @@
 import Combine
-import QuickLook
+@preconcurrency import QuickLook
 import SwiftUI
 
 @MainActor

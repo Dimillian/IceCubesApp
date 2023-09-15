@@ -55,7 +55,7 @@ public struct AvatarView: View {
           .fill(.gray)
           .frame(width: size.size.width, height: size.size.height)
       } else {
-        LazyImage(request: url.map(makeImageRequest)) { state in
+        LazyImage(request: url.map{ makeImageRequest(for: $0) }) { state in
           if let image = state.image {
             image
               .resizable()
