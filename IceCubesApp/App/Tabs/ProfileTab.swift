@@ -13,7 +13,7 @@ struct ProfileTab: View {
   @EnvironmentObject private var theme: Theme
   @Environment(Client.self) private var client
   @EnvironmentObject private var currentAccount: CurrentAccount
-  @StateObject private var routerPath = RouterPath()
+  @State private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab
 
   var body: some View {
@@ -41,6 +41,6 @@ struct ProfileTab: View {
       routerPath.client = client
     }
     .withSafariRouter()
-    .environmentObject(routerPath)
+    .environment(routerPath)
   }
 }

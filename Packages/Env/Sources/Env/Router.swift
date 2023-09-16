@@ -3,6 +3,7 @@ import Foundation
 import Models
 import Network
 import SwiftUI
+import Observation
 
 public enum RouterDestination: Hashable {
   case accountDetail(id: String)
@@ -69,12 +70,12 @@ public enum SheetDestination: Identifiable {
 }
 
 @MainActor
-public class RouterPath: ObservableObject {
+@Observable public class RouterPath {
   public var client: Client?
   public var urlHandler: ((URL) -> OpenURLAction.Result)?
 
-  @Published public var path: [RouterDestination] = []
-  @Published public var presentedSheet: SheetDestination?
+  public var path: [RouterDestination] = []
+  public var presentedSheet: SheetDestination?
 
   public init() {}
 

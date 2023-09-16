@@ -8,9 +8,9 @@ import SwiftUI
 public struct StatusDetailView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var watcher: StreamWatcher
+  @Environment(StreamWatcher.self) private var watcher
   @Environment(Client.self) private var client
-  @EnvironmentObject private var routerPath: RouterPath
+  @Environment(RouterPath.self) private var routerPath
 
   @StateObject private var viewModel: StatusDetailViewModel
 

@@ -13,12 +13,12 @@ struct NotificationsTab: View {
 
   @EnvironmentObject private var theme: Theme
   @Environment(Client.self) private var client
-  @EnvironmentObject private var watcher: StreamWatcher
+  @Environment(StreamWatcher.self) private var watcher
   @Environment(AppAccountsManager.self) private var appAccount
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var userPreferences: UserPreferences
   @EnvironmentObject private var pushNotificationsService: PushNotificationsService
-  @StateObject private var routerPath = RouterPath()
+  @State private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab
 
   let lockedType: Models.Notification.NotificationType?
@@ -54,7 +54,7 @@ struct NotificationsTab: View {
       }
     }
     .withSafariRouter()
-    .environmentObject(routerPath)
+    .environment(routerPath)
     .onChange(of: $popToRootTab.wrappedValue) { oldValue, newValue in
       if newValue == .notifications {
         routerPath.path = []

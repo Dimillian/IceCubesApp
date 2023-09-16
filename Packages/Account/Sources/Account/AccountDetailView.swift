@@ -11,13 +11,13 @@ public struct AccountDetailView: View {
   @Environment(\.openURL) private var openURL
   @Environment(\.redactionReasons) private var reasons
 
-  @EnvironmentObject private var watcher: StreamWatcher
+  @Environment(StreamWatcher.self) private var watcher
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var currentInstance: CurrentInstance
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
   @Environment(Client.self) private var client
-  @EnvironmentObject private var routerPath: RouterPath
+  @Environment(RouterPath.self) private var routerPath
 
   @State private var viewModel: AccountDetailViewModel
   @State private var isCurrentUser: Bool = false

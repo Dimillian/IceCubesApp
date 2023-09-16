@@ -15,12 +15,12 @@ public struct TimelineView: View {
   @Environment(\.scenePhase) private var scenePhase
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var account: CurrentAccount
-  @EnvironmentObject private var watcher: StreamWatcher
+  @Environment(StreamWatcher.self) private var watcher
   @Environment(Client.self) private var client
-  @EnvironmentObject private var routerPath: RouterPath
+  @Environment(RouterPath.self) private var routerPath
 
-  @StateObject private var viewModel = TimelineViewModel()
-  @StateObject private var prefetcher = TimelinePrefetcher()
+  @State private var viewModel = TimelineViewModel()
+  @State private var prefetcher = TimelinePrefetcher()
 
   @State private var wasBackgrounded: Bool = false
   @State private var collectionView: UICollectionView?

@@ -24,7 +24,7 @@ public extension View {
 
 @MainActor
 public struct StatusEditorToolbarItem: ToolbarContent {
-  @EnvironmentObject private var routerPath: RouterPath
+  @Environment(RouterPath.self) private var routerPath
 
   let visibility: Models.Visibility
 

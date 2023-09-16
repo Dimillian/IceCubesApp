@@ -20,10 +20,10 @@ struct IceCubesApp: App {
   @StateObject private var currentAccount = CurrentAccount.shared
   @StateObject private var userPreferences = UserPreferences.shared
   @StateObject private var pushNotificationsService = PushNotificationsService.shared
-  @StateObject private var watcher = StreamWatcher()
+  @State private var watcher = StreamWatcher()
   @StateObject private var quickLook = QuickLook()
   @StateObject private var theme = Theme.shared
-  @StateObject private var sidebarRouterPath = RouterPath()
+  @State private var sidebarRouterPath = RouterPath()
 
   @State private var selectedTab: Tab = .timeline
   @State private var popToRootTab: Tab = .other
@@ -50,7 +50,7 @@ struct IceCubesApp: App {
         .environmentObject(currentInstance)
         .environmentObject(userPreferences)
         .environmentObject(theme)
-        .environmentObject(watcher)
+        .environment(watcher)
         .environmentObject(pushNotificationsService)
         .environment(\.isSupporter, isSupporter)
         .fullScreenCover(item: $quickLook.url, content: { url in

@@ -2,9 +2,10 @@ import Combine
 import Foundation
 import Models
 import Network
+import Observation
 
 @MainActor
-public class StreamWatcher: ObservableObject {
+@Observable public class StreamWatcher {
   private var client: Client?
   private var task: URLSessionWebSocketTask?
   private var watchedStreams: [Stream] = []
@@ -21,9 +22,9 @@ public class StreamWatcher: ObservableObject {
     case direct
   }
 
-  @Published public var events: [any StreamEvent] = []
-  @Published public var unreadNotificationsCount: Int = 0
-  @Published public var latestEvent: (any StreamEvent)?
+  public var events: [any StreamEvent] = []
+  public var unreadNotificationsCount: Int = 0
+  public var latestEvent: (any StreamEvent)?
 
   public init() {
     decoder.keyDecodingStrategy = .convertFromSnakeCase

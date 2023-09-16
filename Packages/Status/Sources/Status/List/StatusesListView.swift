@@ -8,7 +8,7 @@ import SwiftUI
 public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
   @EnvironmentObject private var theme: Theme
 
-  @ObservedObject private var fetcher: Fetcher
+  @State private var fetcher: Fetcher
   // Whether this status is on a remote local timeline (many actions are unavailable if so)
   private let isRemote: Bool
   private let routerPath: RouterPath
@@ -19,7 +19,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
               routerPath: RouterPath,
               isRemote: Bool = false)
   {
-    self.fetcher = fetcher
+    _fetcher = .init(initialValue: fetcher)
     self.isRemote = isRemote
     self.client = client
     self.routerPath = routerPath

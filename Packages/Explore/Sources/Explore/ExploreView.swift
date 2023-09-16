@@ -10,7 +10,7 @@ import SwiftUI
 public struct ExploreView: View {
   @EnvironmentObject private var theme: Theme
   @Environment(Client.self) private var client
-  @EnvironmentObject private var routerPath: RouterPath
+  @Environment(RouterPath.self) private var routerPath
 
   @StateObject private var viewModel = ExploreViewModel()
 

@@ -17,7 +17,7 @@ public struct StatusEditorView: View {
   @EnvironmentObject private var theme: Theme
   @Environment(Client.self) private var client
   @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var routerPath: RouterPath
+  @Environment(RouterPath.self) private var routerPath
   @Environment(\.dismiss) private var dismiss
 
   @StateObject private var viewModel: StatusEditorViewModel

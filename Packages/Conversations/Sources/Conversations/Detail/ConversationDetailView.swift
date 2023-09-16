@@ -11,11 +11,11 @@ public struct ConversationDetailView: View {
   }
 
   @EnvironmentObject private var quickLook: QuickLook
-  @EnvironmentObject private var routerPath: RouterPath
+  @Environment(RouterPath.self) private var routerPath
   @EnvironmentObject private var currentAccount: CurrentAccount
   @Environment(Client.self) private var client
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var watcher: StreamWatcher
+  @Environment(StreamWatcher.self) private var watcher
 
   @StateObject private var viewModel: ConversationDetailViewModel
 

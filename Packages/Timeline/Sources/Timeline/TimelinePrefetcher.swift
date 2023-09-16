@@ -2,8 +2,9 @@ import Models
 import Nuke
 import SwiftUI
 import UIKit
+import Observation
 
-final class TimelinePrefetcher: NSObject, ObservableObject, UICollectionViewDataSourcePrefetching {
+@Observable final class TimelinePrefetcher: NSObject, UICollectionViewDataSourcePrefetching {
   private let prefetcher = ImagePrefetcher()
 
   weak var viewModel: TimelineViewModel?

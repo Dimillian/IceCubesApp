@@ -23,7 +23,7 @@ import Observation
 public struct AccountsListRow: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var routerPath: RouterPath
+  @Environment(RouterPath.self) private var routerPath
   @Environment(Client.self) private var client
 
   @State var viewModel: AccountsListRowViewModel

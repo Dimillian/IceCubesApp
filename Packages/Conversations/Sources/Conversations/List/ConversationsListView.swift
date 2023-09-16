@@ -7,8 +7,8 @@ import SwiftUI
 
 public struct ConversationsListView: View {
   @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var routerPath: RouterPath
-  @EnvironmentObject private var watcher: StreamWatcher
+  @Environment(RouterPath.self) private var routerPath
+  @Environment(StreamWatcher.self) private var watcher
   @Environment(Client.self) private var client
   @EnvironmentObject private var theme: Theme
 

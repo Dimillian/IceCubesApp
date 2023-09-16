@@ -9,13 +9,13 @@ struct SideBarView<Content: View>: View {
   @Environment(AppAccountsManager.self) private var appAccounts
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var watcher: StreamWatcher
+  @Environment(StreamWatcher.self) private var watcher
   @EnvironmentObject private var userPreferences: UserPreferences
 
   @Binding var selectedTab: Tab
   @Binding var popToRootTab: Tab
   var tabs: [Tab]
-  @ObservedObject var routerPath = RouterPath()
+  @State var routerPath = RouterPath()
   @ViewBuilder var content: () -> Content
 
   private func badgeFor(tab: Tab) -> Int {

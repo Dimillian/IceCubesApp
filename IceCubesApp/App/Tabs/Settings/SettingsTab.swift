@@ -19,8 +19,7 @@ struct SettingsTabs: View {
   @Environment(AppAccountsManager.self) private var appAccountsManager
   @EnvironmentObject private var theme: Theme
 
-  @StateObject private var routerPath = RouterPath()
-
+  @State private var routerPath = RouterPath()
   @State private var addAccountSheetPresented = false
   @State private var isEditingAccount = false
   @State private var cachedRemoved = false
@@ -67,7 +66,7 @@ struct SettingsTabs: View {
       }
     }
     .withSafariRouter()
-    .environmentObject(routerPath)
+    .environment(routerPath)
     .onChange(of: $popToRootTab.wrappedValue) { oldValue, newValue in
       if newValue == .notifications {
         routerPath.path = []

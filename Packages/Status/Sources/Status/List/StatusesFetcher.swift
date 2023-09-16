@@ -1,6 +1,7 @@
 import Combine
 import Models
 import SwiftUI
+import Observation
 
 public enum StatusesState {
   public enum PagingState {
@@ -13,7 +14,7 @@ public enum StatusesState {
 }
 
 @MainActor
-public protocol StatusesFetcher: ObservableObject {
+public protocol StatusesFetcher {
   var statusesState: StatusesState { get }
   func fetchNewestStatuses() async
   func fetchNextPage() async

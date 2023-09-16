@@ -10,11 +10,11 @@ import SwiftUI
 
 struct MessagesTab: View {
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var watcher: StreamWatcher
+  @Environment(StreamWatcher.self) private var watcher
   @Environment(Client.self) private var client
   @EnvironmentObject private var currentAccount: CurrentAccount
   @Environment(AppAccountsManager.self) private var appAccount
-  @StateObject private var routerPath = RouterPath()
+  @State private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab
 
   var body: some View {
@@ -44,6 +44,6 @@ struct MessagesTab: View {
       routerPath.client = client
     }
     .withSafariRouter()
-    .environmentObject(routerPath)
+    .environment(routerPath)
   }
 }

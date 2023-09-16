@@ -8,9 +8,9 @@ import SwiftUI
 public struct NotificationsListView: View {
   @Environment(\.scenePhase) private var scenePhase
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var watcher: StreamWatcher
+  @Environment(StreamWatcher.self) private var watcher
   @Environment(Client.self) private var client
-  @EnvironmentObject private var routerPath: RouterPath
+  @Environment(RouterPath.self) private var routerPath
   @EnvironmentObject private var account: CurrentAccount
   @StateObject private var viewModel = NotificationsViewModel()
 

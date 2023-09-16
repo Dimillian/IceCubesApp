@@ -8,7 +8,7 @@ public struct AppAccountsSelectorView: View {
   @Environment(AppAccountsManager.self) private var appAccounts
   @EnvironmentObject private var theme: Theme
 
-  @ObservedObject var routerPath: RouterPath
+  var routerPath: RouterPath
 
   @State private var accountsViewModel: [AppAccountViewModel] = []
   @State private var isPresented: Bool = false

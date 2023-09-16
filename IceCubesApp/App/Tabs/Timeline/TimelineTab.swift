@@ -13,7 +13,7 @@ struct TimelineTab: View {
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var preferences: UserPreferences
   @Environment(Client.self) private var client
-  @StateObject private var routerPath = RouterPath()
+  @State private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab
 
   @State private var didAppear: Bool = false
@@ -90,7 +90,7 @@ struct TimelineTab: View {
       }
     }
     .withSafariRouter()
-    .environmentObject(routerPath)
+    .environment(routerPath)
   }
 
   @ViewBuilder
