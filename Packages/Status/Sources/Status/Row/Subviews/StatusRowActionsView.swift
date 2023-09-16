@@ -9,7 +9,12 @@ struct StatusRowActionsView: View {
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var statusDataController: StatusDataController
   @EnvironmentObject private var userPreferences: UserPreferences
+  
+  @Environment(\.isStatusFocused) private var isFocused
+  @Environment(\.isStatusDetailLoaded) private var isStatusDetailLoaded
+  
   @ObservedObject var viewModel: StatusRowViewModel
+  
 
   func privateBoost() -> Bool {
     viewModel.status.visibility == .priv && viewModel.status.account.id == currentAccount.account?.id
@@ -75,8 +80,8 @@ struct StatusRowActionsView: View {
       }
     }
 
-    func count(dataController: StatusDataController, viewModel: StatusRowViewModel, theme: Theme) -> Int? {
-      if theme.statusActionsDisplay == .discret, !viewModel.isFocused {
+    func count(dataController: StatusDataController, isFocused: Bool, theme: Theme) -> Int? {
+      if theme.statusActionsDisplay == .discret, isFocused {
         return nil
       }
       switch self {
@@ -148,8 +153,11 @@ struct StatusRowActionsView: View {
           }
         }
       }
-      if viewModel.isFocused {
+      
+      if isStatusDetailLoaded {
         StatusRowDetailView(viewModel: viewModel)
+          .transition(.move(edge: .bottom))
+          .animation(.snappy)
       }
     }
   }
@@ -179,7 +187,7 @@ struct StatusRowActionsView: View {
       .disabled(action == .boost &&
         (viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id))
       if let count = action.count(dataController: statusDataController,
-                                  viewModel: viewModel,
+                                  isFocused: isFocused,
                                   theme: theme), !viewModel.isRemote
       {
         Text("\(count)")

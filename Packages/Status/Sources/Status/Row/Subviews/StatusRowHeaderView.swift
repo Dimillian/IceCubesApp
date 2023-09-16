@@ -5,6 +5,8 @@ import SwiftUI
 
 struct StatusRowHeaderView: View {
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
+  @Environment(\.isStatusFocused) private var isFocused
+  
   @EnvironmentObject private var theme: Theme
 
   let viewModel: StatusRowViewModel
@@ -29,7 +31,7 @@ struct StatusRowHeaderView: View {
       viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
     }
     .accessibilityActions {
-      if viewModel.isFocused {
+      if isFocused {
         StatusRowContextMenu(viewModel: viewModel)
       }
     }

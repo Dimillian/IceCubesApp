@@ -21,6 +21,14 @@ private struct IsSupporter: EnvironmentKey {
   static let defaultValue: Bool = false
 }
 
+private struct IsStatusDetailLoaded: EnvironmentKey {
+  static let defaultValue: Bool = false
+}
+
+private struct IsStatusFocused: EnvironmentKey {
+  static let defaultValue: Bool = false
+}
+
 public extension EnvironmentValues {
   var isSecondaryColumn: Bool {
     get { self[SecondaryColumnKey.self] }
@@ -45,5 +53,15 @@ public extension EnvironmentValues {
   var isSupporter: Bool {
     get { self[IsSupporter.self] }
     set { self[IsSupporter.self] = newValue }
+  }
+  
+  var isStatusDetailLoaded: Bool {
+    get { self[IsStatusDetailLoaded.self] }
+    set { self[IsStatusDetailLoaded.self] = newValue }
+  }
+  
+  var isStatusFocused: Bool {
+    get { self[IsStatusFocused.self] }
+    set { self[IsStatusFocused.self] = newValue }
   }
 }

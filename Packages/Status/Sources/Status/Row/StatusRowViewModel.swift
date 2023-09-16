@@ -9,7 +9,6 @@ import SwiftUI
 @MainActor
 public class StatusRowViewModel: ObservableObject {
   let status: Status
-  let isFocused: Bool
   // Whether this status is on a remote local timeline (many actions are unavailable if so)
   let isRemote: Bool
   let showActions: Bool
@@ -102,7 +101,6 @@ public class StatusRowViewModel: ObservableObject {
   public init(status: Status,
               client: Client,
               routerPath: RouterPath,
-              isFocused: Bool = false,
               isRemote: Bool = false,
               showActions: Bool = true,
               textDisabled: Bool = false)
@@ -111,7 +109,6 @@ public class StatusRowViewModel: ObservableObject {
     finalStatus = status.reblog ?? status
     self.client = client
     self.routerPath = routerPath
-    self.isFocused = isFocused
     self.isRemote = isRemote
     self.showActions = showActions
     self.textDisabled = textDisabled
@@ -159,7 +156,6 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   func navigateToDetail() {
-    guard !isFocused else { return }
     if isRemote, let url = URL(string: finalStatus.url ?? "") {
       routerPath.navigate(to: .remoteStatusDetail(url: url))
     } else {

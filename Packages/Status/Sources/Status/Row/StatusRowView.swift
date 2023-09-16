@@ -12,6 +12,7 @@ public struct StatusRowView: View {
   @Environment(\.redactionReasons) private var reasons
   @Environment(\.isCompact) private var isCompact: Bool
   @Environment(\.accessibilityVoiceOverEnabled) private var accessibilityVoiceOverEnabled
+  @Environment(\.isStatusFocused) private var isFocused
 
   @EnvironmentObject private var quickLook: QuickLook
   @EnvironmentObject private var theme: Theme
@@ -66,20 +67,22 @@ public struct StatusRowView: View {
               StatusRowContentView(viewModel: viewModel)
                 .contentShape(Rectangle())
                 .onTapGesture {
+                  guard !isFocused else { return }
                   viewModel.navigateToDetail()
                 }
                 .accessibilityActions {
-                  if viewModel.isFocused, viewModel.showActions {
+                  if isFocused, viewModel.showActions {
                     accessibilityActions
                   }
                 }
             }
-            if viewModel.showActions, viewModel.isFocused || theme.statusActionsDisplay != .none, !isInCaptureMode {
+            if viewModel.showActions, isFocused || theme.statusActionsDisplay != .none, !isInCaptureMode {
               StatusRowActionsView(viewModel: viewModel)
                 .padding(.top, 8)
-                .tint(viewModel.isFocused ? theme.tintColor : .gray)
+                .tint(isFocused ? theme.tintColor : .gray)
                 .contentShape(Rectangle())
                 .onTapGesture {
+                  guard !isFocused else { return }
                   viewModel.navigateToDetail()
                 }
             }
@@ -122,15 +125,16 @@ public struct StatusRowView: View {
                          leading: .layoutPadding,
                          bottom: 12,
                          trailing: .layoutPadding))
-    .accessibilityElement(children: viewModel.isFocused ? .contain : .combine)
-    .accessibilityLabel(viewModel.isFocused == false && accessibilityVoiceOverEnabled
+    .accessibilityElement(children: isFocused ? .contain : .combine)
+    .accessibilityLabel(isFocused == false && accessibilityVoiceOverEnabled
       ? CombinedAccessibilityLabel(viewModel: viewModel).finalLabel() : Text(""))
     .accessibilityHidden(viewModel.filter?.filter.filterAction == .hide)
     .accessibilityAction {
+      guard !isFocused else { return }
       viewModel.navigateToDetail()
     }
     .accessibilityActions {
-      if viewModel.isFocused == false, viewModel.showActions {
+      if isFocused == false, viewModel.showActions {
         accessibilityActions
       }
     }
@@ -138,6 +142,7 @@ public struct StatusRowView: View {
       Color.clear
         .contentShape(Rectangle())
         .onTapGesture {
+          guard !isFocused else { return }
           viewModel.navigateToDetail()
         }
     }

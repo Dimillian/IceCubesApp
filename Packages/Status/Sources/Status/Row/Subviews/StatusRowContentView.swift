@@ -6,6 +6,7 @@ import SwiftUI
 struct StatusRowContentView: View {
   @Environment(\.redactionReasons) private var reasons
   @Environment(\.isCompact) private var isCompact
+  @Environment(\.isStatusFocused) private var isFocused
 
   @EnvironmentObject private var theme: Theme
 
@@ -44,7 +45,7 @@ struct StatusRowContentView: View {
             Spacer()
           }
         }
-        .accessibilityHidden(viewModel.isFocused == false)
+        .accessibilityHidden(isFocused == false)
         .padding(.vertical, 4)
       }
 

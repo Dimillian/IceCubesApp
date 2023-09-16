@@ -22,15 +22,15 @@ public struct StatusDetailView: View {
   @AccessibilityFocusState private var initialFocusBugWorkaround: Bool
 
   public init(statusId: String) {
-    _viewModel = StateObject(wrappedValue: .init(statusId: statusId))
+    _viewModel = StateObject(wrappedValue: { .init(statusId: statusId) }())
   }
 
   public init(status: Status) {
-    _viewModel = StateObject(wrappedValue: .init(status: status))
+    _viewModel = StateObject(wrappedValue: { .init(status: status) }())
   }
 
   public init(remoteStatusURL: URL) {
-    _viewModel = StateObject(wrappedValue: .init(remoteStatusURL: remoteStatusURL))
+    _viewModel = StateObject(wrappedValue: { .init(remoteStatusURL: remoteStatusURL) }())
   }
 
   public var body: some View {
@@ -147,8 +147,9 @@ public struct StatusDetailView: View {
   private func makeCurrentStatusView(status: Status) -> some View {
     StatusRowView(viewModel: { .init(status: status,
                                      client: client,
-                                     routerPath: routerPath,
-                                     isFocused: true) })
+                                     routerPath: routerPath) })
+      .environment(\.isStatusFocused, true)
+      .environment(\.isStatusDetailLoaded, !viewModel.isLoadingContext)
       .accessibilityFocused($initialFocusBugWorkaround, equals: true)
       .overlay {
         GeometryReader { reader in
