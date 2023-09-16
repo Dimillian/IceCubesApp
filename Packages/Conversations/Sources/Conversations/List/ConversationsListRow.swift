@@ -6,7 +6,7 @@ import Network
 import SwiftUI
 
 struct ConversationsListRow: View {
-  @EnvironmentObject private var client: Client
+  @Environment(Client.self) private var client
   @EnvironmentObject private var routerPath: RouterPath
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var currentAccount: CurrentAccount

@@ -7,7 +7,7 @@ let package = Package(
   name: "Network",
   defaultLocalization: "en",
   platforms: [
-    .iOS(.v16),
+    .iOS(.v17),
   ],
   products: [
     .library(

@@ -11,9 +11,9 @@ import SwiftUI
 struct MessagesTab: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var watcher: StreamWatcher
-  @EnvironmentObject private var client: Client
+  @Environment(Client.self) private var client
   @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var appAccount: AppAccountsManager
+  @Environment(AppAccountsManager.self) private var appAccount
   @StateObject private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab
 
@@ -32,12 +32,12 @@ struct MessagesTab: View {
         .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
         .id(client.id)
     }
-    .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
-      if popToRootTab == .messages {
+    .onChange(of: $popToRootTab.wrappedValue) { oldValue, newValue in
+      if newValue == .messages {
         routerPath.path = []
       }
     }
-    .onChange(of: client.id) { _ in
+    .onChange(of: client.id) {
       routerPath.path = []
     }
     .onAppear {

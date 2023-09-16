@@ -5,12 +5,10 @@ import SwiftUI
 public struct EditRelationshipNoteView: View {
   @Environment(\.dismiss) private var dismiss
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var client: Client
+  @Environment(Client.self) private var client
 
-  // need this model to refresh after storing the new note on mastodon
-  var accountDetailViewModel: AccountDetailViewModel
-
-  @StateObject private var viewModel = EditRelationshipNoteViewModel()
+  @State var accountDetailViewModel: AccountDetailViewModel
+  @State private var viewModel = EditRelationshipNoteViewModel()
 
   public var body: some View {
     NavigationStack {

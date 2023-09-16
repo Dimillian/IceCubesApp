@@ -5,6 +5,7 @@ import Models
 import Network
 import Status
 import SwiftUI
+import Observation
 
 class DisplaySettingsLocalValues: ObservableObject {
   @Published var tintColor = Theme.shared.tintColor
@@ -64,7 +65,7 @@ struct DisplaySettingsView: View {
   var body: some View {
     ZStack(alignment: .top) {
       Form {
-        StatusRowView(viewModel: { previewStatusViewModel })
+        StatusRowView(viewModel: previewStatusViewModel)
           .allowsHitTesting(false)
           .opacity(0)
           .hidden()
@@ -83,7 +84,7 @@ struct DisplaySettingsView: View {
 
   private var examplePost: some View {
     VStack(spacing: 0) {
-      StatusRowView(viewModel: { previewStatusViewModel })
+      StatusRowView(viewModel: previewStatusViewModel)
         .allowsHitTesting(false)
         .padding(.layoutPadding)
         .background(theme.primaryBackgroundColor)
@@ -111,7 +112,7 @@ struct DisplaySettingsView: View {
       }
       .disabled(theme.followSystemColorScheme)
       .opacity(theme.followSystemColorScheme ? 0.5 : 1.0)
-      .onChange(of: theme.selectedSet) { _ in
+      .onChange(of: theme.selectedSet) {
         localValues.tintColor = theme.tintColor
         localValues.primaryBackgroundColor = theme.primaryBackgroundColor
         localValues.secondaryBackgroundColor = theme.secondaryBackgroundColor

@@ -7,7 +7,7 @@ struct StatusRowTextView: View {
   @EnvironmentObject private var theme: Theme
   @Environment(\.isStatusFocused) private var isFocused
 
-  @ObservedObject var viewModel: StatusRowViewModel
+  var viewModel: StatusRowViewModel
 
   var body: some View {
     VStack {

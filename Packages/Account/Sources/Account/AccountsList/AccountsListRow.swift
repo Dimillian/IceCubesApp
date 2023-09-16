@@ -5,13 +5,14 @@ import Env
 import Models
 import Network
 import SwiftUI
+import Observation
 
 @MainActor
-public class AccountsListRowViewModel: ObservableObject {
+@Observable public class AccountsListRowViewModel {
   var client: Client?
 
-  @Published var account: Account
-  @Published var relationShip: Relationship?
+  var account: Account
+  var relationShip: Relationship?
 
   public init(account: Account, relationShip: Relationship? = nil) {
     self.account = account
@@ -23,9 +24,9 @@ public struct AccountsListRow: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var routerPath: RouterPath
-  @EnvironmentObject private var client: Client
+  @Environment(Client.self) private var client
 
-  @StateObject var viewModel: AccountsListRowViewModel
+  @State var viewModel: AccountsListRowViewModel
 
   @State private var isEditingRelationshipNote: Bool = false
 
@@ -33,7 +34,7 @@ public struct AccountsListRow: View {
   let requestUpdated: (() -> Void)?
 
   public init(viewModel: AccountsListRowViewModel, isFollowRequest: Bool = false, requestUpdated: (() -> Void)? = nil) {
-    _viewModel = StateObject(wrappedValue: viewModel)
+    self.viewModel = viewModel
     self.isFollowRequest = isFollowRequest
     self.requestUpdated = requestUpdated
   }
@@ -118,7 +119,7 @@ public struct AccountsListRow: View {
       .background(theme.primaryBackgroundColor)
       .environmentObject(theme)
       .environmentObject(currentAccount)
-      .environmentObject(client)
+      .environment(client)
     }
   }
 }

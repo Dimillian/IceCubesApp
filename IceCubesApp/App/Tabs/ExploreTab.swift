@@ -11,7 +11,7 @@ struct ExploreTab: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var client: Client
+  @Environment(Client.self) private var client
   @StateObject private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab
 
@@ -36,12 +36,12 @@ struct ExploreTab: View {
     }
     .withSafariRouter()
     .environmentObject(routerPath)
-    .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
-      if popToRootTab == .explore {
+    .onChange(of: $popToRootTab.wrappedValue) { oldValue, newValue in
+      if newValue == .explore {
         routerPath.path = []
       }
     }
-    .onChange(of: client.id) { _ in
+    .onChange(of: client.id) {
       routerPath.path = []
     }
     .onAppear {

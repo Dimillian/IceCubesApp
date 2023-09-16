@@ -3,8 +3,9 @@ import Foundation
 import Models
 import os
 import SwiftUI
+import Observation
 
-public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
+@Observable public final class Client: Equatable, Identifiable, Hashable {
   public static func == (lhs: Client, rhs: Client) -> Bool {
     let lhsToken = lhs.critical.withLock { $0.oauthToken }
     let rhsToken = rhs.critical.withLock { $0.oauthToken }

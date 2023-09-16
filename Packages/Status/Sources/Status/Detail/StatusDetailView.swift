@@ -9,7 +9,7 @@ public struct StatusDetailView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var watcher: StreamWatcher
-  @EnvironmentObject private var client: Client
+  @Environment(Client.self) private var client
   @EnvironmentObject private var routerPath: RouterPath
 
   @StateObject private var viewModel: StatusDetailViewModel
@@ -69,10 +69,10 @@ public struct StatusDetailView: View {
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
         .background(theme.primaryBackgroundColor)
-        .onChange(of: viewModel.scrollToId, perform: { scrollToId in
-          if let scrollToId {
+        .onChange(of: viewModel.scrollToId, { oldValue, newValue in
+          if let newValue {
             viewModel.scrollToId = nil
-            proxy.scrollTo(scrollToId, anchor: .top)
+            proxy.scrollTo(newValue, anchor: .top)
           }
         })
         .task {
@@ -92,7 +92,7 @@ public struct StatusDetailView: View {
           }
         }
       }
-      .onChange(of: watcher.latestEvent?.id) { _ in
+      .onChange(of: watcher.latestEvent?.id) {
         guard let lastEvent = watcher.latestEvent else { return }
         viewModel.handleEvent(event: lastEvent, currentAccount: currentAccount.account)
       }
@@ -132,7 +132,7 @@ public struct StatusDetailView: View {
           makeCurrentStatusView(status: status)
             .environment(\.extraLeadingInset, isReplyToPrevious ? 10 : 0)
         } else {
-          StatusRowView(viewModel: { viewModel })
+          StatusRowView(viewModel: viewModel)
             .environment(\.extraLeadingInset, isReplyToPrevious ? 10 : 0)
         }
       }
@@ -145,9 +145,9 @@ public struct StatusDetailView: View {
   }
 
   private func makeCurrentStatusView(status: Status) -> some View {
-    StatusRowView(viewModel: { .init(status: status,
-                                     client: client,
-                                     routerPath: routerPath) })
+    StatusRowView(viewModel: .init(status: status,
+                                   client: client,
+                                   routerPath: routerPath))
       .environment(\.isStatusFocused, true)
       .environment(\.isStatusDetailLoaded, !viewModel.isLoadingContext)
       .accessibilityFocused($initialFocusBugWorkaround, equals: true)
@@ -181,7 +181,7 @@ public struct StatusDetailView: View {
 
   private var loadingDetailView: some View {
     ForEach(Status.placeholders()) { status in
-      StatusRowView(viewModel: { .init(status: status, client: client, routerPath: routerPath) })
+      StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
         .redacted(reason: .placeholder)
     }
   }

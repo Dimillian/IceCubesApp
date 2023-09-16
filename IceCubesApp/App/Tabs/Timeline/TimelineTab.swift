@@ -8,11 +8,11 @@ import SwiftUI
 import Timeline
 
 struct TimelineTab: View {
-  @EnvironmentObject private var appAccount: AppAccountsManager
+  @Environment(AppAccountsManager.self) private var appAccount
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var client: Client
+  @Environment(Client.self) private var client
   @StateObject private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab
 
@@ -58,22 +58,22 @@ struct TimelineTab: View {
         routerPath.presentedSheet = .addAccount
       }
     }
-    .onChange(of: client.isAuth, perform: { _ in
+    .onChange(of: client.isAuth) {
       if client.isAuth {
         timeline = lastTimelineFilter
       } else {
         timeline = .federated
       }
-    })
-    .onChange(of: currentAccount.account?.id, perform: { _ in
+    }
+    .onChange(of: currentAccount.account?.id) {
       if client.isAuth, canFilterTimeline {
         timeline = lastTimelineFilter
       } else {
         timeline = .federated
       }
-    })
-    .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
-      if popToRootTab == .timeline {
+    }
+    .onChange(of: $popToRootTab.wrappedValue) { oldValue, newValue in
+      if newValue == .timeline {
         if routerPath.path.isEmpty {
           scrollToTopSignal += 1
         } else {
@@ -81,12 +81,12 @@ struct TimelineTab: View {
         }
       }
     }
-    .onChange(of: client.id) { _ in
+    .onChange(of: client.id) {
       routerPath.path = []
     }
-    .onChange(of: timeline) { timeline in
-      if timeline == .home || timeline == .federated || timeline == .local {
-        lastTimelineFilter = timeline
+    .onChange(of: timeline) { oldValue, newValue in
+      if newValue == .home || newValue == .federated || newValue == .local {
+        lastTimelineFilter = newValue
       }
     }
     .withSafariRouter()

@@ -13,7 +13,7 @@ struct StatusRowActionsView: View {
   @Environment(\.isStatusFocused) private var isFocused
   @Environment(\.isStatusDetailLoaded) private var isStatusDetailLoaded
   
-  @ObservedObject var viewModel: StatusRowViewModel
+  var viewModel: StatusRowViewModel
   
 
   func privateBoost() -> Bool {

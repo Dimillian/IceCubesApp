@@ -12,9 +12,9 @@ struct NotificationsTab: View {
   @Environment(\.scenePhase) private var scenePhase
 
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var client: Client
+  @Environment(Client.self) private var client
   @EnvironmentObject private var watcher: StreamWatcher
-  @EnvironmentObject private var appAccount: AppAccountsManager
+  @Environment(AppAccountsManager.self) private var appAccount
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var userPreferences: UserPreferences
   @EnvironmentObject private var pushNotificationsService: PushNotificationsService
@@ -55,34 +55,34 @@ struct NotificationsTab: View {
     }
     .withSafariRouter()
     .environmentObject(routerPath)
-    .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
-      if popToRootTab == .notifications {
+    .onChange(of: $popToRootTab.wrappedValue) { oldValue, newValue in
+      if newValue == .notifications {
         routerPath.path = []
       }
     }
-    .onChange(of: pushNotificationsService.handledNotification) { notification in
-      if let notification, let type = notification.notification.supportedType {
+    .onChange(of: pushNotificationsService.handledNotification) { oldValue, newValue in
+      if let newValue, let type = newValue.notification.supportedType {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
           switch type {
           case .follow, .follow_request:
-            routerPath.navigate(to: .accountDetailWithAccount(account: notification.notification.account))
+            routerPath.navigate(to: .accountDetailWithAccount(account: newValue.notification.account))
           default:
-            if let status = notification.notification.status {
+            if let status = newValue.notification.status {
               routerPath.navigate(to: .statusDetailWithStatus(status: status))
             }
           }
         }
       }
     }
-    .onChange(of: scenePhase, perform: { scenePhase in
-      switch scenePhase {
+    .onChange(of: scenePhase) { oldValue, newValue in
+      switch newValue {
       case .active:
         clearNotifications()
       default:
         break
       }
-    })
-    .onChange(of: client.id) { _ in
+    }
+    .onChange(of: client.id) {
       routerPath.path = []
     }
   }

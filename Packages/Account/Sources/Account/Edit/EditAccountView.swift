@@ -5,10 +5,10 @@ import SwiftUI
 
 public struct EditAccountView: View {
   @Environment(\.dismiss) private var dismiss
-  @EnvironmentObject private var client: Client
+  @Environment(Client.self) private var client
   @EnvironmentObject private var theme: Theme
 
-  @StateObject private var viewModel = EditAccountViewModel()
+  @State private var viewModel = EditAccountViewModel()
 
   public init() {}
 

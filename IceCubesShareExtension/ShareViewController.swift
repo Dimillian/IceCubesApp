@@ -28,8 +28,8 @@ class ShareViewController: UIViewController {
       if let attachments = item.attachments {
         let view = StatusEditorView(mode: .shareExtension(items: attachments))
           .environmentObject(UserPreferences.shared)
-          .environmentObject(appAccountsManager)
-          .environmentObject(client)
+          .environment(appAccountsManager)
+          .environment(client)
           .environmentObject(account)
           .environmentObject(theme)
           .environmentObject(instance)

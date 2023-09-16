@@ -9,7 +9,7 @@ public struct ConversationsListView: View {
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var routerPath: RouterPath
   @EnvironmentObject private var watcher: StreamWatcher
-  @EnvironmentObject private var client: Client
+  @Environment(Client.self) private var client
   @EnvironmentObject private var theme: Theme
 
   @StateObject private var viewModel = ConversationsListViewModel()
@@ -83,7 +83,7 @@ public struct ConversationsListView: View {
         SecondaryColumnToolbarItem()
       }
     }
-    .onChange(of: watcher.latestEvent?.id) { _ in
+    .onChange(of: watcher.latestEvent?.id) {
       if let latestEvent = watcher.latestEvent {
         viewModel.handleEvent(event: latestEvent)
       }

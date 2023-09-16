@@ -15,7 +15,7 @@ struct IceCubesApp: App {
 
   @Environment(\.scenePhase) private var scenePhase
 
-  @StateObject private var appAccountsManager = AppAccountsManager.shared
+  @State private var appAccountsManager = AppAccountsManager.shared
   @StateObject private var currentInstance = CurrentInstance.shared
   @StateObject private var currentAccount = CurrentAccount.shared
   @StateObject private var userPreferences = UserPreferences.shared
@@ -43,8 +43,8 @@ struct IceCubesApp: App {
           setupRevenueCat()
           refreshPushSubs()
         }
-        .environmentObject(appAccountsManager)
-        .environmentObject(appAccountsManager.currentClient)
+        .environment(appAccountsManager)
+        .environment(appAccountsManager.currentClient)
         .environmentObject(quickLook)
         .environmentObject(currentAccount)
         .environmentObject(currentInstance)
@@ -58,17 +58,17 @@ struct IceCubesApp: App {
             .edgesIgnoringSafeArea(.bottom)
             .background(TransparentBackground())
         })
-        .onChange(of: pushNotificationsService.handledNotification) { notification in
-          if notification != nil {
+        .onChange(of: pushNotificationsService.handledNotification) { oldValue, newValue in
+          if newValue != nil {
             pushNotificationsService.handledNotification = nil
-            if appAccountsManager.currentAccount.oauthToken?.accessToken != notification?.account.token.accessToken,
+            if appAccountsManager.currentAccount.oauthToken?.accessToken != newValue?.account.token.accessToken,
                let account = appAccountsManager.availableAccounts.first(where:
-                 { $0.oauthToken?.accessToken == notification?.account.token.accessToken })
+                 { $0.oauthToken?.accessToken == newValue?.account.token.accessToken })
             {
               appAccountsManager.currentAccount = account
               DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 selectedTab = .notifications
-                pushNotificationsService.handledNotification = notification
+                pushNotificationsService.handledNotification = newValue
               }
             } else {
               selectedTab = .notifications
@@ -79,12 +79,12 @@ struct IceCubesApp: App {
     .commands {
       appMenu
     }
-    .onChange(of: scenePhase) { scenePhase in
-      handleScenePhase(scenePhase: scenePhase)
+    .onChange(of: scenePhase) { oldValue, newValue in
+      handleScenePhase(scenePhase: newValue)
     }
-    .onChange(of: appAccountsManager.currentClient) { newClient in
-      setNewClientsInEnv(client: newClient)
-      if newClient.isAuth {
+    .onChange(of: appAccountsManager.currentClient) { oldValue, newValue in
+      setNewClientsInEnv(client: newValue)
+      if newValue.isAuth {
         watcher.watch(streams: [.user, .direct])
       }
     }
@@ -143,7 +143,7 @@ struct IceCubesApp: App {
           }
         }
       }
-    }.onChange(of: $appAccountsManager.currentAccount.id) { _ in
+    }.onChange(of: $appAccountsManager.currentAccount.id) {
       sideBarLoadedTabs.removeAll()
     }
   }
@@ -218,7 +218,7 @@ struct IceCubesApp: App {
       watcher.stopWatching()
     case .active:
       watcher.watch(streams: [.user, .direct])
-      UIApplication.shared.applicationIconBadgeNumber = 0
+      UNUserNotificationCenter.current().setBadgeCount(0)
       Task {
         await userPreferences.refreshServerPreferences()
       }

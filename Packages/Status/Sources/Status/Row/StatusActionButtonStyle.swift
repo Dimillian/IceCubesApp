@@ -28,8 +28,8 @@ struct StatusActionButtonStyle: ButtonStyle {
           SparklesView(counter: sparklesCounter, tint: tint, size: 5, velocity: 30)
         }
       }
-      .onChange(of: configuration.isPressed) { isPressed in
-        guard tintColor != nil, !isPressed, !isOn else { return }
+      .onChange(of: configuration.isPressed) { oldValue, newValue in
+        guard tintColor != nil, !newValue, !isOn else { return }
 
         withAnimation(.spring(response: 1, dampingFraction: 1)) {
           sparklesCounter += 1
@@ -88,8 +88,8 @@ struct StatusActionButtonStyle: ButtonStyle {
         .onAppear {
           cells = Self.generateCells()
         }
-        .onChange(of: counter) { [counter] newCounter in
-          if floor(counter) != floor(newCounter) {
+        .onChange(of: counter) { oldValue, newValue in
+          if floor(oldValue) != floor(newValue) {
             cells = Self.generateCells()
           }
         }

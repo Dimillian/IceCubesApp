@@ -5,9 +5,10 @@ import Models
 import NaturalLanguage
 import Network
 import SwiftUI
+import Observation
 
 @MainActor
-public class StatusRowViewModel: ObservableObject {
+@Observable public class StatusRowViewModel {
   let status: Status
   // Whether this status is on a remote local timeline (many actions are unavailable if so)
   let isRemote: Bool
@@ -15,26 +16,26 @@ public class StatusRowViewModel: ObservableObject {
   let textDisabled: Bool
   let finalStatus: AnyStatus
 
-  @Published var isPinned: Bool
-  @Published var embeddedStatus: Status?
-  @Published var displaySpoiler: Bool = false
-  @Published var isEmbedLoading: Bool = false
-  @Published var isFiltered: Bool = false
+  var isPinned: Bool
+  var embeddedStatus: Status?
+  var displaySpoiler: Bool = false
+  var isEmbedLoading: Bool = false
+  var isFiltered: Bool = false
 
-  @Published var translation: Translation?
-  @Published var isLoadingTranslation: Bool = false
-  @Published var showDeleteAlert: Bool = false
+  var translation: Translation?
+  var isLoadingTranslation: Bool = false
+  var showDeleteAlert: Bool = false
 
   private var actionsAccountsFetched: Bool = false
-  @Published var favoriters: [Account] = []
-  @Published var rebloggers: [Account] = []
+  var favoriters: [Account] = []
+  var rebloggers: [Account] = []
 
-  @Published var isLoadingRemoteContent: Bool = false
-  @Published var localStatusId: String?
-  @Published var localStatus: Status?
+  var isLoadingRemoteContent: Bool = false
+  var localStatusId: String?
+  var localStatus: Status?
 
   // The relationship our user has to the author of this post, if available
-  @Published var authorRelationship: Relationship? {
+  var authorRelationship: Relationship? {
     didSet {
       // if we are newly blocking or muting the author, force collapse post so it goes away
       if let relationship = authorRelationship,
@@ -46,14 +47,14 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   // used by the button to expand a collapsed post
-  @Published var isCollapsed: Bool = true {
+  var isCollapsed: Bool = true {
     didSet {
       recalcCollapse()
     }
   }
 
   // number of lines to show, nil means show the whole post
-  @Published var lineLimit: Int? = nil
+  var lineLimit: Int? = nil
   // post length determining if the post should be collapsed
   let collapseThresholdLength: Int = 750
   // number of text lines to show on a collpased post

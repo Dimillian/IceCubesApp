@@ -18,7 +18,7 @@ struct AccountDetailHeaderView: View {
   @Environment(\.redactionReasons) private var reasons
   @Environment(\.isSupporter) private var isSupporter: Bool
 
-  @ObservedObject var viewModel: AccountDetailViewModel
+  var viewModel: AccountDetailViewModel
   let account: Account
   let scrollViewProxy: ScrollViewProxy?
 

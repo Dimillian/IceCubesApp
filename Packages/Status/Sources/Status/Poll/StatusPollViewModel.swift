@@ -2,14 +2,15 @@ import Combine
 import Models
 import Network
 import SwiftUI
+import Observation
 
 @MainActor
-public class StatusPollViewModel: ObservableObject {
+@Observable public class StatusPollViewModel {
   public var client: Client?
   public var instance: Instance?
 
-  @Published var poll: Poll
-  @Published var votes: [Int] = []
+  var poll: Poll
+  var votes: [Int] = []
 
   var showResults: Bool {
     poll.ownVotes?.isEmpty == false || poll.expired

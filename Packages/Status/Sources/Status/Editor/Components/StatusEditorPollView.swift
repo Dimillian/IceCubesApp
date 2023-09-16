@@ -38,10 +38,6 @@ struct StatusEditorPollView: View {
                   addChoice(at: index)
                 }
               }
-              .onChange(of: viewModel.pollOptions[index]) {
-                let maxCharacters: Int = currentInstance.instance?.configuration?.polls.maxCharactersPerOption ?? 50
-                viewModel.pollOptions[index] = String($0.prefix(maxCharacters))
-              }
 
             if canAddMoreAt(index) {
               Button {

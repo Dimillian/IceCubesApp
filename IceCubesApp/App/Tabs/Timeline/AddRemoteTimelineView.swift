@@ -58,7 +58,7 @@ struct AddRemoteTimelineView: View {
           Button("action.cancel", action: { dismiss() })
         }
       }
-      .onChange(of: instanceName) { newValue in
+      .onChange(of: instanceName) { oldValue, newValue in
         instanceNamePublisher.send(newValue)
       }
       .onReceive(instanceNamePublisher.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)) { newValue in

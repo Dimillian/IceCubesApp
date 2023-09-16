@@ -1,6 +1,7 @@
 import Models
 import Network
 import SwiftUI
+import Observation
 
 public enum AccountsListMode {
   case following(accountId: String), followers(accountId: String)
@@ -24,7 +25,7 @@ public enum AccountsListMode {
 }
 
 @MainActor
-class AccountsListViewModel: ObservableObject {
+@Observable class AccountsListViewModel {
   var client: Client?
 
   let mode: AccountsListMode
@@ -44,7 +45,7 @@ class AccountsListViewModel: ObservableObject {
   private var accounts: [Account] = []
   private var relationships: [Relationship] = []
 
-  @Published var state = State.loading
+  var state = State.loading
 
   private var nextPageId: String?
 

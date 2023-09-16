@@ -9,7 +9,7 @@ struct EditFilterView: View {
 
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var account: CurrentAccount
-  @EnvironmentObject private var client: Client
+  @Environment(Client.self) private var client
 
   @State private var isSavingFilter: Bool = false
   @State private var filter: ServerFilter?
@@ -91,9 +91,9 @@ struct EditFilterView: View {
           Text(duration.description).tag(duration)
         }
       }
-      .onChange(of: expirySelection) { duration in
-        if duration != .custom {
-          expiresAt = Date(timeIntervalSinceNow: TimeInterval(duration.rawValue))
+      .onChange(of: expirySelection) { oldValue, newValue in
+        if newValue != .custom {
+          expiresAt = Date(timeIntervalSinceNow: TimeInterval(newValue.rawValue))
         }
       }
       if expirySelection != .infinite {
@@ -227,7 +227,7 @@ struct EditFilterView: View {
       } label: {
         EmptyView()
       }
-      .onChange(of: filterAction) { _ in
+      .onChange(of: filterAction) {
         Task {
           await saveFilter()
         }

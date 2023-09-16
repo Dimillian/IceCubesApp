@@ -116,9 +116,9 @@ extension View {
       .environmentObject(UserPreferences.shared)
       .environmentObject(CurrentInstance.shared)
       .environmentObject(Theme.shared)
-      .environmentObject(AppAccountsManager.shared)
+      .environment(AppAccountsManager.shared)
       .environmentObject(PushNotificationsService.shared)
-      .environmentObject(AppAccountsManager.shared.currentClient)
+      .environment(AppAccountsManager.shared.currentClient)
   }
 }
 

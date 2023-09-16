@@ -3,16 +3,17 @@ import Foundation
 import Models
 import Network
 import SwiftUI
+import Observation
 
 @MainActor
-public class FollowButtonViewModel: ObservableObject {
+@Observable public class FollowButtonViewModel {
   var client: Client?
 
   public let accountId: String
   public let shouldDisplayNotify: Bool
   public let relationshipUpdated: (Relationship) -> Void
-  @Published public private(set) var relationship: Relationship
-  @Published public private(set) var isUpdating: Bool = false
+  public private(set) var relationship: Relationship
+  public private(set) var isUpdating: Bool = false
 
   public init(accountId: String,
               relationship: Relationship,
@@ -75,11 +76,11 @@ public class FollowButtonViewModel: ObservableObject {
 }
 
 public struct FollowButton: View {
-  @EnvironmentObject private var client: Client
-  @StateObject private var viewModel: FollowButtonViewModel
+  @Environment(Client.self) private var client
+  @State private var viewModel: FollowButtonViewModel
 
   public init(viewModel: FollowButtonViewModel) {
-    _viewModel = StateObject(wrappedValue: viewModel)
+    _viewModel = .init(initialValue: viewModel)
   }
 
   public var body: some View {

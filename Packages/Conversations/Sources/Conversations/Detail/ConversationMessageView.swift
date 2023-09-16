@@ -9,7 +9,7 @@ struct ConversationMessageView: View {
   @EnvironmentObject private var quickLook: QuickLook
   @EnvironmentObject private var routerPath: RouterPath
   @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var client: Client
+  @Environment(Client.self) private var client
   @EnvironmentObject private var theme: Theme
 
   let message: Status

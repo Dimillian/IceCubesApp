@@ -3,13 +3,14 @@ import Env
 import Models
 import Network
 import SwiftUI
+import Observation
 
 @MainActor
-public class AppAccountsManager: ObservableObject {
+@Observable public class AppAccountsManager {
   @AppStorage("latestCurrentAccountKey", store: UserPreferences.sharedDefault)
   public static var latestCurrentAccountKey: String = ""
 
-  @Published public var currentAccount: AppAccount {
+  public var currentAccount: AppAccount {
     didSet {
       Self.latestCurrentAccountKey = currentAccount.id
       currentClient = .init(server: currentAccount.server,
@@ -17,8 +18,8 @@ public class AppAccountsManager: ObservableObject {
     }
   }
 
-  @Published public var availableAccounts: [AppAccount]
-  @Published public var currentClient: Client
+  public var availableAccounts: [AppAccount]
+  public var currentClient: Client
 
   public var pushAccounts: [PushAccount] {
     availableAccounts.filter { $0.oauthToken != nil }

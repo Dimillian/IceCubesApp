@@ -13,7 +13,7 @@ public struct ConversationDetailView: View {
   @EnvironmentObject private var quickLook: QuickLook
   @EnvironmentObject private var routerPath: RouterPath
   @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var client: Client
+  @Environment(Client.self) private var client
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var watcher: StreamWatcher
 
@@ -85,7 +85,7 @@ public struct ConversationDetailView: View {
         }
       }
     }
-    .onChange(of: watcher.latestEvent?.id) { _ in
+    .onChange(of: watcher.latestEvent?.id) {
       if let latestEvent = watcher.latestEvent {
         viewModel.handleEvent(event: latestEvent)
         DispatchQueue.main.async {

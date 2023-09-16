@@ -7,13 +7,13 @@ import SwiftUI
 
 public struct AccountsListView: View {
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var client: Client
+  @Environment(Client.self) private var client
   @EnvironmentObject private var currentAccount: CurrentAccount
-  @StateObject private var viewModel: AccountsListViewModel
+  @State private var viewModel: AccountsListViewModel
   @State private var didAppear: Bool = false
 
   public init(mode: AccountsListMode) {
-    _viewModel = StateObject(wrappedValue: .init(mode: mode))
+    _viewModel = .init(initialValue: .init(mode: mode))
   }
 
   public var body: some View {

@@ -9,7 +9,7 @@ public struct NotificationsListView: View {
   @Environment(\.scenePhase) private var scenePhase
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var watcher: StreamWatcher
-  @EnvironmentObject private var client: Client
+  @Environment(Client.self) private var client
   @EnvironmentObject private var routerPath: RouterPath
   @EnvironmentObject private var account: CurrentAccount
   @StateObject private var viewModel = NotificationsViewModel()
@@ -88,13 +88,13 @@ public struct NotificationsListView: View {
       HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
       SoundEffectManager.shared.playSound(of: .refresh)
     }
-    .onChange(of: watcher.latestEvent?.id, perform: { _ in
+    .onChange(of: watcher.latestEvent?.id) {
       if let latestEvent = watcher.latestEvent {
         viewModel.handleEvent(event: latestEvent)
       }
-    })
-    .onChange(of: scenePhase, perform: { scenePhase in
-      switch scenePhase {
+    }
+    .onChange(of: scenePhase) { oldValue, newValue in
+      switch newValue {
       case .active:
         Task {
           await viewModel.fetchNotifications()
@@ -102,7 +102,7 @@ public struct NotificationsListView: View {
       default:
         break
       }
-    })
+    }
   }
 
   @ViewBuilder

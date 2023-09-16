@@ -7,14 +7,14 @@ import SwiftUI
 struct StatusRowContextMenu: View {
   @Environment(\.displayScale) var displayScale
 
-  @EnvironmentObject private var client: Client
+  @Environment(Client.self) private var client
   @EnvironmentObject private var sceneDelegate: SceneDelegate
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var account: CurrentAccount
   @EnvironmentObject private var currentInstance: CurrentInstance
   @EnvironmentObject private var statusDataController: StatusDataController
 
-  @ObservedObject var viewModel: StatusRowViewModel
+  var viewModel: StatusRowViewModel
 
   var boostLabel: some View {
     if viewModel.status.visibility == .priv, viewModel.status.account.id == account.account?.id {
@@ -81,7 +81,7 @@ struct StatusRowContextMenu: View {
 
         Button {
           let view = HStack {
-            StatusRowView(viewModel: { viewModel })
+            StatusRowView(viewModel: viewModel)
               .padding(16)
           }
           .environment(\.isInCaptureMode, true)
@@ -91,7 +91,7 @@ struct StatusRowContextMenu: View {
           .environmentObject(currentInstance)
           .environmentObject(SceneDelegate())
           .environmentObject(QuickLook())
-          .environmentObject(viewModel.client)
+          .environment(viewModel.client)
           .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
           .foregroundColor(Theme.shared.labelColor)
           .background(Theme.shared.primaryBackgroundColor)

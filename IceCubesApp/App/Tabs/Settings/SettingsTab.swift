@@ -14,9 +14,9 @@ struct SettingsTabs: View {
 
   @EnvironmentObject private var pushNotifications: PushNotificationsService
   @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var client: Client
+  @Environment(Client.self) private var client
   @EnvironmentObject private var currentInstance: CurrentInstance
-  @EnvironmentObject private var appAccountsManager: AppAccountsManager
+  @Environment(AppAccountsManager.self) private var appAccountsManager
   @EnvironmentObject private var theme: Theme
 
   @StateObject private var routerPath = RouterPath()
@@ -68,8 +68,8 @@ struct SettingsTabs: View {
     }
     .withSafariRouter()
     .environmentObject(routerPath)
-    .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
-      if popToRootTab == .notifications {
+    .onChange(of: $popToRootTab.wrappedValue) { oldValue, newValue in
+      if newValue == .notifications {
         routerPath.path = []
       }
     }

@@ -1,13 +1,14 @@
 import Models
 import Network
 import SwiftUI
+import Observation
 
 @MainActor
-class EditAccountViewModel: ObservableObject {
-  class FieldEditViewModel: ObservableObject, Identifiable {
+@Observable class EditAccountViewModel {
+  @Observable class FieldEditViewModel: Identifiable {
     let id = UUID().uuidString
-    @Published var name: String = ""
-    @Published var value: String = ""
+    var name: String = ""
+    var value: String = ""
 
     init(name: String, value: String) {
       self.name = name
@@ -17,18 +18,18 @@ class EditAccountViewModel: ObservableObject {
 
   public var client: Client?
 
-  @Published var displayName: String = ""
-  @Published var note: String = ""
-  @Published var postPrivacy = Models.Visibility.pub
-  @Published var isSensitive: Bool = false
-  @Published var isBot: Bool = false
-  @Published var isLocked: Bool = false
-  @Published var isDiscoverable: Bool = false
-  @Published var fields: [FieldEditViewModel] = []
+  var displayName: String = ""
+  var note: String = ""
+  var postPrivacy = Models.Visibility.pub
+  var isSensitive: Bool = false
+  var isBot: Bool = false
+  var isLocked: Bool = false
+  var isDiscoverable: Bool = false
+  var fields: [FieldEditViewModel] = []
 
-  @Published var isLoading: Bool = true
-  @Published var isSaving: Bool = false
-  @Published var saveError: Bool = false
+  var isLoading: Bool = true
+  var isSaving: Bool = false
+  var saveError: Bool = false
 
   init() {}
 

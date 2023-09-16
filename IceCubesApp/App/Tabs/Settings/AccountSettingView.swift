@@ -15,8 +15,8 @@ struct AccountSettingsView: View {
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var currentInstance: CurrentInstance
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var appAccountsManager: AppAccountsManager
-  @EnvironmentObject private var client: Client
+  @Environment(AppAccountsManager.self) private var appAccountsManager
+  @Environment(Client.self) private var client
 
   @State private var isEditingAccount: Bool = false
   @State private var isEditingFilters: Bool = false

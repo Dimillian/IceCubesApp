@@ -8,7 +8,7 @@ struct StatusRowDetailView: View {
 
   @EnvironmentObject private var statusDataController: StatusDataController
 
-  @ObservedObject var viewModel: StatusRowViewModel
+  var viewModel: StatusRowViewModel
 
   var body: some View {
     Group {

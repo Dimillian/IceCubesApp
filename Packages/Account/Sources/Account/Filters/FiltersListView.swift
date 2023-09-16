@@ -9,7 +9,7 @@ public struct FiltersListView: View {
 
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var account: CurrentAccount
-  @EnvironmentObject private var client: Client
+  @Environment(Client.self) private var client
 
   @State private var isLoading: Bool = true
   @State private var filters: [ServerFilter] = []

@@ -12,10 +12,10 @@ import SwiftUI
 import UIKit
 
 public struct StatusEditorView: View {
-  @EnvironmentObject private var appAccounts: AppAccountsManager
+  @Environment(AppAccountsManager.self) private var appAccounts
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var client: Client
+  @Environment(Client.self) private var client
   @EnvironmentObject private var currentAccount: CurrentAccount
   @EnvironmentObject private var routerPath: RouterPath
   @Environment(\.dismiss) private var dismiss
@@ -90,9 +90,9 @@ public struct StatusEditorView: View {
           await viewModel.fetchCustomEmojis()
         }
       }
-      .onChange(of: currentAccount.account?.id, perform: { _ in
+      .onChange(of: currentAccount.account?.id) {
         viewModel.currentAccount = currentAccount.account
-      })
+      }
       .background(theme.primaryBackgroundColor)
       .navigationTitle(viewModel.mode.title)
       .navigationBarTitleDisplayMode(.inline)
@@ -161,10 +161,10 @@ public struct StatusEditorView: View {
       }
     }
     .interactiveDismissDisabled(viewModel.shouldDisplayDismissWarning)
-    .onChange(of: appAccounts.currentClient) { newClient in
+    .onChange(of: appAccounts.currentClient) { oldValue, newValue in
       if viewModel.mode.isInShareExtension {
-        currentAccount.setClient(client: newClient)
-        viewModel.client = newClient
+        currentAccount.setClient(client: newValue)
+        viewModel.client = newValue
       }
     }
   }

@@ -9,7 +9,7 @@ public struct ReportView: View {
   @Environment(\.dismiss) private var dismiss
 
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var client: Client
+  @Environment(Client.self) private var client
 
   let status: Status
   @State private var commentText: String = ""

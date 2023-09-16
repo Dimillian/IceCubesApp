@@ -1,14 +1,15 @@
 import Network
 import SwiftUI
+import Observation
 
 @MainActor
-class EditRelationshipNoteViewModel: ObservableObject {
+@Observable class EditRelationshipNoteViewModel {
   public var note: String = ""
   public var relatedAccountId: String?
   public var client: Client?
 
-  @Published var isSaving: Bool = false
-  @Published var saveError: Bool = false
+  var isSaving: Bool = false
+  var saveError: Bool = false
 
   init() {}
 

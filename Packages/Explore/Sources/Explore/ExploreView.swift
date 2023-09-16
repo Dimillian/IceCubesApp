@@ -9,7 +9,7 @@ import SwiftUI
 
 public struct ExploreView: View {
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var client: Client
+  @Environment(Client.self) private var client
   @EnvironmentObject private var routerPath: RouterPath
 
   @StateObject private var viewModel = ExploreViewModel()
@@ -117,7 +117,7 @@ public struct ExploreView: View {
 
   private var loadingView: some View {
     ForEach(Status.placeholders()) { status in
-      StatusRowView(viewModel: { .init(status: status, client: client, routerPath: routerPath) })
+      StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
         .padding(.vertical, 8)
         .redacted(reason: .placeholder)
         .listRowBackground(theme.primaryBackgroundColor)
@@ -148,7 +148,7 @@ public struct ExploreView: View {
     if !results.statuses.isEmpty, viewModel.searchScope == .all || viewModel.searchScope == .posts {
       Section("explore.section.posts") {
         ForEach(results.statuses) { status in
-          StatusRowView(viewModel: { .init(status: status, client: client, routerPath: routerPath) })
+          StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
             .listRowBackground(theme.primaryBackgroundColor)
             .padding(.vertical, 8)
         }
@@ -196,7 +196,7 @@ public struct ExploreView: View {
       ForEach(viewModel.trendingStatuses
         .prefix(upTo: viewModel.trendingStatuses.count > 3 ? 3 : viewModel.trendingStatuses.count))
       { status in
-        StatusRowView(viewModel: { .init(status: status, client: client, routerPath: routerPath) })
+        StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
           .listRowBackground(theme.primaryBackgroundColor)
           .padding(.vertical, 8)
       }

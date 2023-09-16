@@ -5,7 +5,7 @@ import SwiftUI
 public struct AppAccountsSelectorView: View {
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var appAccounts: AppAccountsManager
+  @Environment(AppAccountsManager.self) private var appAccounts
   @EnvironmentObject private var theme: Theme
 
   @ObservedObject var routerPath: RouterPath
@@ -61,7 +61,7 @@ public struct AppAccountsSelectorView: View {
           }
       }
     })
-    .onChange(of: currentAccount.account?.id) { _ in
+    .onChange(of: currentAccount.account?.id) {
       refreshAccounts()
     }
     .onAppear {

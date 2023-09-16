@@ -44,7 +44,7 @@ struct ContentSettingsView: View {
         }
       }
       .listRowBackground(theme.primaryBackgroundColor)
-      .onChange(of: userPreferences.useInstanceContentSettings) { newVal in
+      .onChange(of: userPreferences.useInstanceContentSettings) { oldValue, newVal in
         if newVal {
           userPreferences.appAutoExpandSpoilers = userPreferences.autoExpandSpoilers
           userPreferences.appAutoExpandMedia = userPreferences.autoExpandMedia
@@ -93,7 +93,7 @@ struct ContentSettingsView: View {
             }
           }
         }
-        .onChange(of: userPreferences.postVisibility) { _ in
+        .onChange(of: userPreferences.postVisibility) {
           userPreferences.conformReplyVisibilityConstraints()
         }
 

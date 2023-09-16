@@ -17,7 +17,7 @@ struct StatusRowSwipeView: View {
     viewModel.status.visibility == .priv && viewModel.status.account.id == currentAccount.account?.id
   }
 
-  @ObservedObject var viewModel: StatusRowViewModel
+  var viewModel: StatusRowViewModel
   let mode: Mode
 
   var body: some View {

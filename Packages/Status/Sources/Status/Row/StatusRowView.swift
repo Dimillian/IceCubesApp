@@ -17,11 +17,10 @@ public struct StatusRowView: View {
   @EnvironmentObject private var quickLook: QuickLook
   @EnvironmentObject private var theme: Theme
 
-  @StateObject var viewModel: StatusRowViewModel
+  @State var viewModel: StatusRowViewModel
 
-  // StateObject accepts an @autoclosure which only allocates the view model once when the view gets on screen.
-  public init(viewModel: @escaping () -> StatusRowViewModel) {
-    _viewModel = StateObject(wrappedValue: viewModel())
+  public init(viewModel: StatusRowViewModel) {
+    _viewModel = .init(initialValue: viewModel)
   }
 
   var contextMenu: some View {
