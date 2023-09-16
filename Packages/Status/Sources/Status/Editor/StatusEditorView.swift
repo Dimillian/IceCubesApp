@@ -96,6 +96,7 @@ public struct StatusEditorView: View {
       .background(theme.primaryBackgroundColor)
       .navigationTitle(viewModel.mode.title)
       .navigationBarTitleDisplayMode(.inline)
+      .toolbarBackground(.visible, for: .navigationBar)
       .alert("status.error.posting.title",
              isPresented: $viewModel.showPostingErrorAlert,
              actions: {
