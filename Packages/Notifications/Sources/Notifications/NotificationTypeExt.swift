@@ -6,42 +6,42 @@ extension Models.Notification.NotificationType {
   public func label(count: Int) -> LocalizedStringKey {
     switch self {
     case .status:
-      return "notifications.label.status"
+      "notifications.label.status"
     case .mention:
-      return ""
+      ""
     case .reblog:
-      return "notifications.label.reblog \(count)"
+      "notifications.label.reblog \(count)"
     case .follow:
-      return "notifications.label.follow \(count)"
+      "notifications.label.follow \(count)"
     case .follow_request:
-      return "notifications.label.follow-request"
+      "notifications.label.follow-request"
     case .favourite:
-      return "notifications.label.favorite \(count)"
+      "notifications.label.favorite \(count)"
     case .poll:
-      return "notifications.label.poll"
+      "notifications.label.poll"
     case .update:
-      return "notifications.label.update"
+      "notifications.label.update"
     }
   }
 
   public func notificationKey() -> String {
     switch self {
     case .status:
-      return "notifications.label.status.push"
+      "notifications.label.status.push"
     case .mention:
-      return ""
+      ""
     case .reblog:
-      return "notifications.label.reblog.push"
+      "notifications.label.reblog.push"
     case .follow:
-      return "notifications.label.follow.push"
+      "notifications.label.follow.push"
     case .follow_request:
-      return "notifications.label.follow-request.push"
+      "notifications.label.follow-request.push"
     case .favourite:
-      return "notifications.label.favorite.push"
+      "notifications.label.favorite.push"
     case .poll:
-      return "notifications.label.poll.push"
+      "notifications.label.poll.push"
     case .update:
-      return "notifications.label.update.push"
+      "notifications.label.update.push"
     }
   }
 
@@ -86,21 +86,21 @@ extension Models.Notification.NotificationType {
   func menuTitle() -> LocalizedStringKey {
     switch self {
     case .status:
-      return "notifications.menu-title.status"
+      "notifications.menu-title.status"
     case .mention:
-      return "notifications.menu-title.mention"
+      "notifications.menu-title.mention"
     case .reblog:
-      return "notifications.menu-title.reblog"
+      "notifications.menu-title.reblog"
     case .follow:
-      return "notifications.menu-title.follow"
+      "notifications.menu-title.follow"
     case .follow_request:
-      return "notifications.menu-title.follow-request"
+      "notifications.menu-title.follow-request"
     case .favourite:
-      return "notifications.menu-title.favorite"
+      "notifications.menu-title.favorite"
     case .poll:
-      return "notifications.menu-title.poll"
+      "notifications.menu-title.poll"
     case .update:
-      return "notifications.menu-title.update"
+      "notifications.menu-title.update"
     }
   }
 }

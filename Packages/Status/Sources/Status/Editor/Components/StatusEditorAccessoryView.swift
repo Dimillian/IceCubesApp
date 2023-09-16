@@ -162,7 +162,7 @@ struct StatusEditorAccessoryView: View {
 
   @ViewBuilder
   private func languageTextView(isoCode: String, nativeName: String?, name: String?) -> some View {
-    if let nativeName = nativeName, let name = name {
+    if let nativeName, let name {
       Text("\(nativeName) (\(name))")
     } else {
       Text(isoCode.uppercased())

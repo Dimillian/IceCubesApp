@@ -6,14 +6,14 @@ public enum Streaming: Endpoint {
   public func path() -> String {
     switch self {
     case .streaming:
-      return "streaming"
+      "streaming"
     }
   }
 
   public func queryItems() -> [URLQueryItem]? {
     switch self {
     default:
-      return nil
+      nil
     }
   }
 }

@@ -250,7 +250,7 @@ extension TimelineViewModel: StatusesFetcher {
     var newStatuses: [Status] = await fetchNewPages(minId: latestStatus.id, maxPages: 10)
 
     // Dedup statuses, a status with the same id could have been streamed in.
-    let ids = await datasource.get().map { $0.id }
+    let ids = await datasource.get().map(\.id)
     newStatuses = newStatuses.filter { status in
       !ids.contains(where: { $0 == status.id })
     }
@@ -292,7 +292,7 @@ extension TimelineViewModel: StatusesFetcher {
     await cacheHome()
 
     // Append new statuses in the timeline indicator.
-    pendingStatusesObserver.pendingStatuses.insert(contentsOf: newStatuses.map { $0.id }, at: 0)
+    pendingStatusesObserver.pendingStatuses.insert(contentsOf: newStatuses.map(\.id), at: 0)
 
     // High chance the user is scrolled to the top.
     // We need to update the statuses state, and then scroll to the previous top most status.

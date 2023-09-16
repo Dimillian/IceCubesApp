@@ -14,40 +14,40 @@ public extension StatusEditorViewModel {
     var isInShareExtension: Bool {
       switch self {
       case .shareExtension:
-        return true
+        true
       default:
-        return false
+        false
       }
     }
 
     var isEditing: Bool {
       switch self {
       case .edit:
-        return true
+        true
       default:
-        return false
+        false
       }
     }
 
     var replyToStatus: Status? {
       switch self {
       case let .replyTo(status):
-        return status
+        status
       default:
-        return nil
+        nil
       }
     }
 
     var title: LocalizedStringKey {
       switch self {
       case .new, .mention, .shareExtension:
-        return "status.editor.mode.new"
+        "status.editor.mode.new"
       case .edit:
-        return "status.editor.mode.edit"
+        "status.editor.mode.edit"
       case let .replyTo(status):
-        return "status.editor.mode.reply-\(status.reblog?.account.displayNameWithoutEmojis ?? status.account.displayNameWithoutEmojis)"
+        "status.editor.mode.reply-\(status.reblog?.account.displayNameWithoutEmojis ?? status.account.displayNameWithoutEmojis)"
       case let .quote(status):
-        return "status.editor.mode.quote-\(status.reblog?.account.displayNameWithoutEmojis ?? status.account.displayNameWithoutEmojis)"
+        "status.editor.mode.quote-\(status.reblog?.account.displayNameWithoutEmojis ?? status.account.displayNameWithoutEmojis)"
       }
     }
   }

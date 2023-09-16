@@ -33,7 +33,7 @@ let package = Package(
         .product(name: "DesignSystem", package: "DesignSystem"),
       ],
       swiftSettings: [
-        .enableExperimentalFeature("StrictConcurrency")
+        .enableExperimentalFeature("StrictConcurrency"),
       ]
     ),
   ]

@@ -188,7 +188,7 @@ public struct StatusRowView: View {
         HapticManager.shared.fireHaptic(of: .notification(.success))
         Task {
           let attachments = viewModel.finalStatus.mediaAttachments
-          await quickLook.prepareFor(urls: attachments.compactMap { $0.url }, selectedURL: attachments[0].url!)
+          await quickLook.prepareFor(urls: attachments.compactMap(\.url), selectedURL: attachments[0].url!)
         }
       }
     }
@@ -300,12 +300,12 @@ private struct CombinedAccessibilityLabel {
     if let filter {
       switch filter.filterAction {
       case .warn:
-        return Text("status.filter.filtered-by-\(filter.title)")
+        Text("status.filter.filtered-by-\(filter.title)")
       case .hide:
-        return Text("")
+        Text("")
       }
     } else {
-      return userNamePreamble() +
+      userNamePreamble() +
         Text(hasSpoiler
           ? viewModel.finalStatus.spoilerText.asRawText
           : viewModel.finalStatus.content.asRawText
@@ -326,11 +326,11 @@ private struct CombinedAccessibilityLabel {
   func userNamePreamble() -> Text {
     switch (isReply, isBoost) {
     case (true, false):
-      return Text("accessibility.status.a-replied-to-\(finalUserDisplayName())") + Text(" ")
+      Text("accessibility.status.a-replied-to-\(finalUserDisplayName())") + Text(" ")
     case (_, true):
-      return Text("accessibility.status.a-boosted-b-\(userDisplayName())-\(finalUserDisplayName())") + Text(", ")
+      Text("accessibility.status.a-boosted-b-\(userDisplayName())-\(finalUserDisplayName())") + Text(", ")
     default:
-      return Text(userDisplayName()) + Text(", ")
+      Text(userDisplayName()) + Text(", ")
     }
   }
 

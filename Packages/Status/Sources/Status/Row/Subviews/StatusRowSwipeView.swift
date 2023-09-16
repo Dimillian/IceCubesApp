@@ -14,7 +14,7 @@ struct StatusRowSwipeView: View {
   }
 
   func privateBoost() -> Bool {
-    return viewModel.status.visibility == .priv && viewModel.status.account.id == currentAccount.account?.id
+    viewModel.status.visibility == .priv && viewModel.status.account.id == currentAccount.account?.id
   }
 
   @ObservedObject var viewModel: StatusRowViewModel
@@ -60,7 +60,7 @@ struct StatusRowSwipeView: View {
       makeSwipeButtonForRouterPath(action: action, destination: .replyToStatusEditor(status: viewModel.status))
     case .quote:
       makeSwipeButtonForRouterPath(action: action, destination: .quoteStatusEditor(status: viewModel.status))
-      .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv)
+        .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv)
     case .favorite:
       makeSwipeButtonForTask(action: action) {
         await statusDataController.toggleFavorite(remoteStatus: nil)

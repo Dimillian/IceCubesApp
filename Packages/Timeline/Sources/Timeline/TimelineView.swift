@@ -62,9 +62,9 @@ public struct TimelineView: View {
           DispatchQueue.main.async {
             self.collectionView = collectionView
           }
-          self.prefetcher.viewModel = viewModel
+          prefetcher.viewModel = viewModel
           collectionView.isPrefetchingEnabled = true
-          collectionView.prefetchDataSource = self.prefetcher
+          collectionView.prefetchDataSource = prefetcher
         }
         if viewModel.timeline.supportNewestPagination {
           PendingStatusesObserverView(observer: viewModel.pendingStatusesObserver)

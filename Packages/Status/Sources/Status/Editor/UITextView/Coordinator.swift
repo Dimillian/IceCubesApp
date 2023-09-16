@@ -3,7 +3,7 @@ import SwiftUI
 
 extension TextView.Representable {
   final class Coordinator: NSObject, UITextViewDelegate {
-    internal let textView: UIKitTextView
+    let textView: UIKitTextView
 
     private var originalText: NSMutableAttributedString = .init()
     private var text: Binding<NSMutableAttributedString>
@@ -64,7 +64,7 @@ extension TextView.Representable {
     }
 
     func textView(_: UITextView, shouldChangeTextIn _: NSRange, replacementText _: String) -> Bool {
-      return true
+      true
     }
   }
 }

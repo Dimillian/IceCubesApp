@@ -1,16 +1,16 @@
+import AudioToolbox
 import AVKit
 import CoreHaptics
 import UIKit
-import AudioToolbox
 
 @MainActor
 public class SoundEffectManager {
   public static let shared: SoundEffectManager = .init()
-  
+
   public enum SoundEffect: String, CaseIterable {
     case pull, refresh, tootSent, tabSelection, bookmark, boost, favorite, share
   }
-  
+
   var pullId: SystemSoundID = 0
   var refreshId: SystemSoundID = 1
   var tootSentId: SystemSoundID = 2
@@ -19,9 +19,9 @@ public class SoundEffectManager {
   var boostId: SystemSoundID = 5
   var favoriteId: SystemSoundID = 6
   var shareId: SystemSoundID = 7
-  
+
   private let userPreferences = UserPreferences.shared
-  
+
   private init() {
     registerSounds()
   }
@@ -50,7 +50,7 @@ public class SoundEffectManager {
       }
     }
   }
-  
+
   public func playSound(of type: SoundEffect) {
     guard userPreferences.soundEffectEnabled else { return }
     switch type {

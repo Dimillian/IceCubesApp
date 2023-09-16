@@ -33,9 +33,9 @@ public struct AvatarView: View {
     var cornerRadius: CGFloat {
       switch self {
       case .badge, .boost, .list:
-        return size.width / 2
+        size.width / 2
       default:
-        return 4
+        4
       }
     }
   }
@@ -55,7 +55,7 @@ public struct AvatarView: View {
           .fill(.gray)
           .frame(width: size.size.width, height: size.size.height)
       } else {
-        LazyImage(request: url.map{ makeImageRequest(for: $0) }) { state in
+        LazyImage(request: url.map { makeImageRequest(for: $0) }) { state in
           if let image = state.image {
             image
               .resizable()
@@ -80,9 +80,9 @@ public struct AvatarView: View {
   private var clipShape: some Shape {
     switch theme.avatarShape {
     case .circle:
-      return AnyShape(Circle())
+      AnyShape(Circle())
     case .rounded:
-      return AnyShape(RoundedRectangle(cornerRadius: size.cornerRadius))
+      AnyShape(RoundedRectangle(cornerRadius: size.cornerRadius))
     }
   }
 }

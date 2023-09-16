@@ -59,7 +59,7 @@ public struct SecondaryColumnToolbarItem: ToolbarContent {
 
   public init() {}
 
-   public var body: some ToolbarContent {
+  public var body: some ToolbarContent {
     ToolbarItem(placement: isSecondaryColumn ? .navigationBarLeading : .navigationBarTrailing) {
       Button {
         withAnimation {

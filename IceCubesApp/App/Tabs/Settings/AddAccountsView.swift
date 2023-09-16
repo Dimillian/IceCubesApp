@@ -100,11 +100,11 @@ struct AddAccountView: View {
         Task {
           do {
             // bare bones preflight for domain validity
-            if client.server.contains(".") && client.server.last != "." {
+            if client.server.contains("."), client.server.last != "." {
               let instance: Instance = try await client.get(endpoint: Instances.instance)
               withAnimation {
                 self.instance = instance
-                self.instanceName = sanitizedName // clean up the text box, principally to chop off the username if present so it's clear that you might not wind up siging in as the thing in the box
+                instanceName = sanitizedName // clean up the text box, principally to chop off the username if present so it's clear that you might not wind up siging in as the thing in the box
               }
               instanceFetchError = nil
             } else {
@@ -178,7 +178,7 @@ struct AddAccountView: View {
       } else {
         ForEach(sanitizedName.isEmpty ? instances : instances.filter { $0.name.contains(sanitizedName.lowercased()) }) { instance in
           Button {
-            self.instanceName = instance.name
+            instanceName = instance.name
           } label: {
             VStack(alignment: .leading, spacing: 4) {
               Text(instance.name)

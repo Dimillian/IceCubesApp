@@ -27,7 +27,7 @@ public class AppAccountsManager: ObservableObject {
 
   public static var shared = AppAccountsManager()
 
-  internal init() {
+  init() {
     var defaultAccount = AppAccount(server: AppInfo.defaultServer, accountName: nil, oauthToken: nil)
     let keychainAccounts = AppAccount.retrieveAll()
     availableAccounts = keychainAccounts

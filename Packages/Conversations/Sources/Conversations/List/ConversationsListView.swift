@@ -18,9 +18,9 @@ public struct ConversationsListView: View {
 
   private var conversations: Binding<[Conversation]> {
     if viewModel.isLoadingFirstPage {
-      return Binding.constant(Conversation.placeholders())
+      Binding.constant(Conversation.placeholders())
     } else {
-      return $viewModel.conversations
+      $viewModel.conversations
     }
   }
 
@@ -40,7 +40,7 @@ public struct ConversationsListView: View {
               }
               Divider()
             }
-          } else if conversations.isEmpty && !viewModel.isLoadingFirstPage && !viewModel.isError {
+          } else if conversations.isEmpty, !viewModel.isLoadingFirstPage, !viewModel.isError {
             EmptyView(iconName: "tray",
                       title: "conversations.empty.title",
                       message: "conversations.empty.message")
@@ -79,7 +79,7 @@ public struct ConversationsListView: View {
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
       StatusEditorToolbarItem(visibility: .direct)
-      if UIDevice.current.userInterfaceIdiom == .pad && !preferences.showiPadSecondaryColumn {
+      if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn {
         SecondaryColumnToolbarItem()
       }
     }

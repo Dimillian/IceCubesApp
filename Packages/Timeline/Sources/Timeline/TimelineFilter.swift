@@ -9,22 +9,22 @@ public enum RemoteTimelineFilter: String, CaseIterable, Hashable, Equatable {
   public func localizedTitle() -> LocalizedStringKey {
     switch self {
     case .federated:
-      return "timeline.federated"
+      "timeline.federated"
     case .local:
-      return "timeline.local"
+      "timeline.local"
     case .trending:
-      return "timeline.trending"
+      "timeline.trending"
     }
   }
 
   public func iconName() -> String {
     switch self {
     case .federated:
-      return "globe.americas"
+      "globe.americas"
     case .local:
-      return "person.2"
+      "person.2"
     case .trending:
-      return "chart.line.uptrend.xyaxis"
+      "chart.line.uptrend.xyaxis"
     }
   }
 }
@@ -51,106 +51,106 @@ public enum TimelineFilter: Hashable, Equatable {
   public var supportNewestPagination: Bool {
     switch self {
     case .trending:
-      return false
+      false
     case let .remoteLocal(_, filter):
-      return filter != .trending
+      filter != .trending
     default:
-      return true
+      true
     }
   }
 
   public var title: String {
     switch self {
     case .latest:
-      return "Latest"
+      "Latest"
     case .federated:
-      return "Federated"
+      "Federated"
     case .local:
-      return "Local"
+      "Local"
     case .trending:
-      return "Trending"
+      "Trending"
     case .home:
-      return "Home"
+      "Home"
     case let .hashtag(tag, _):
-      return "#\(tag)"
+      "#\(tag)"
     case let .tagGroup(group):
-      return group.title
+      group.title
     case let .list(list):
-      return list.title
+      list.title
     case let .remoteLocal(server, _):
-      return server
+      server
     }
   }
 
   public func localizedTitle() -> LocalizedStringKey {
     switch self {
     case .latest:
-      return "timeline.latest"
+      "timeline.latest"
     case .federated:
-      return "timeline.federated"
+      "timeline.federated"
     case .local:
-      return "timeline.local"
+      "timeline.local"
     case .trending:
-      return "timeline.trending"
+      "timeline.trending"
     case .home:
-      return "timeline.home"
+      "timeline.home"
     case let .hashtag(tag, _):
-      return "#\(tag)"
+      "#\(tag)"
     case let .tagGroup(group):
-      return LocalizedStringKey(group.title) // ?? not sure since this can't be localized.
+      LocalizedStringKey(group.title) // ?? not sure since this can't be localized.
     case let .list(list):
-      return LocalizedStringKey(list.title)
+      LocalizedStringKey(list.title)
     case let .remoteLocal(server, _):
-      return LocalizedStringKey(server)
+      LocalizedStringKey(server)
     }
   }
 
   public func iconName() -> String? {
     switch self {
     case .latest:
-      return "arrow.counterclockwise"
+      "arrow.counterclockwise"
     case .federated:
-      return "globe.americas"
+      "globe.americas"
     case .local:
-      return "person.2"
+      "person.2"
     case .trending:
-      return "chart.line.uptrend.xyaxis"
+      "chart.line.uptrend.xyaxis"
     case .home:
-      return "house"
+      "house"
     case .list:
-      return "list.bullet"
+      "list.bullet"
     case .remoteLocal:
-      return "dot.radiowaves.right"
+      "dot.radiowaves.right"
     default:
-      return nil
+      nil
     }
   }
 
   public func endpoint(sinceId: String?, maxId: String?, minId: String?, offset: Int?) -> Endpoint {
     switch self {
-    case .federated: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: false)
-    case .local: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true)
+    case .federated: Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: false)
+    case .local: Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true)
     case let .remoteLocal(_, filter):
       switch filter {
       case .local:
-        return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true)
+        Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true)
       case .federated:
-        return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: false)
+        Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: false)
       case .trending:
-        return Trends.statuses(offset: offset)
+        Trends.statuses(offset: offset)
       }
-    case .latest: return Timelines.home(sinceId: nil, maxId: nil, minId: nil)
-    case .home: return Timelines.home(sinceId: sinceId, maxId: maxId, minId: minId)
-    case .trending: return Trends.statuses(offset: offset)
-    case let .list(list): return Timelines.list(listId: list.id, sinceId: sinceId, maxId: maxId, minId: minId)
+    case .latest: Timelines.home(sinceId: nil, maxId: nil, minId: nil)
+    case .home: Timelines.home(sinceId: sinceId, maxId: maxId, minId: minId)
+    case .trending: Trends.statuses(offset: offset)
+    case let .list(list): Timelines.list(listId: list.id, sinceId: sinceId, maxId: maxId, minId: minId)
     case let .hashtag(tag, accountId):
       if let accountId {
-        return Accounts.statuses(id: accountId, sinceId: nil, tag: tag, onlyMedia: nil, excludeReplies: nil, pinned: nil)
+        Accounts.statuses(id: accountId, sinceId: nil, tag: tag, onlyMedia: nil, excludeReplies: nil, pinned: nil)
       } else {
-        return Timelines.hashtag(tag: tag, additional: nil, maxId: maxId)
+        Timelines.hashtag(tag: tag, additional: nil, maxId: maxId)
       }
     case let .tagGroup(group):
-      return Timelines.hashtag(tag: group.main, additional: group.additional, maxId: maxId)
+      Timelines.hashtag(tag: group.main, additional: group.additional, maxId: maxId)
     }
   }
 }

@@ -29,7 +29,7 @@ let package = Package(
         .product(name: "Status", package: "Status"),
       ],
       swiftSettings: [
-        .enableExperimentalFeature("StrictConcurrency")
+        .enableExperimentalFeature("StrictConcurrency"),
       ]
     ),
     .testTarget(

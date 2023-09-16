@@ -15,7 +15,7 @@ public enum Push: Endpoint {
   public func path() -> String {
     switch self {
     case .subscription, .createSub:
-      return "push/subscription"
+      "push/subscription"
     }
   }
 

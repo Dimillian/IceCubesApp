@@ -66,7 +66,7 @@ struct StatusEditorMediaEditView: View {
           Button {
             if !imageDescription.isEmpty {
               isUpdating = true
-              if currentInstance.isEditAltTextSupported && viewModel.mode.isEditing {
+              if currentInstance.isEditAltTextSupported, viewModel.mode.isEditing {
                 Task {
                   await viewModel.editDescription(container: container, description: imageDescription)
                   dismiss()

@@ -11,7 +11,7 @@ extension ConsolidatedNotification {
   var notificationIds: [String] { notifications.map(\.id) }
 }
 
-extension Array where Element == ConsolidatedNotification {
+extension [ConsolidatedNotification] {
   var notificationCount: Int {
     reduce(0) { $0 + ($1.accounts.isEmpty ? 1 : $1.accounts.count) }
   }

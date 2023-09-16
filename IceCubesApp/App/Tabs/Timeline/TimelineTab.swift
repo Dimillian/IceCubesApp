@@ -43,7 +43,7 @@ struct TimelineTab: View {
     }
     .onAppear {
       routerPath.client = client
-      if !didAppear && canFilterTimeline {
+      if !didAppear, canFilterTimeline {
         didAppear = true
         if client.isAuth {
           timeline = lastTimelineFilter
@@ -97,7 +97,7 @@ struct TimelineTab: View {
   private var timelineFilterButton: some View {
     if timeline.supportNewestPagination {
       Button {
-        self.timeline = .latest
+        timeline = .latest
       } label: {
         Label(TimelineFilter.latest.localizedTitle(), systemImage: TimelineFilter.latest.iconName() ?? "")
       }
@@ -197,7 +197,7 @@ struct TimelineTab: View {
       }
       statusEditorToolbarItem(routerPath: routerPath,
                               visibility: preferences.postVisibility)
-      if UIDevice.current.userInterfaceIdiom == .pad && !preferences.showiPadSecondaryColumn {
+      if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn {
         SecondaryColumnToolbarItem()
       }
     } else {

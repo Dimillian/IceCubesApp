@@ -73,7 +73,7 @@ public class StreamWatcher: ObservableObject {
 
   private func receiveMessage() {
     task?.receive(completionHandler: { [weak self] result in
-      guard let self = self else { return }
+      guard let self else { return }
       switch result {
       case let .success(message):
         switch message {
@@ -83,8 +83,8 @@ public class StreamWatcher: ObservableObject {
               print("Error decoding streaming event string")
               return
             }
-            let rawEvent = try self.decoder.decode(RawStreamEvent.self, from: data)
-            if let event = self.rawEventToEvent(rawEvent: rawEvent) {
+            let rawEvent = try decoder.decode(RawStreamEvent.self, from: data)
+            if let event = rawEventToEvent(rawEvent: rawEvent) {
               Task { @MainActor in
                 self.events.append(event)
                 self.latestEvent = event
@@ -101,10 +101,10 @@ public class StreamWatcher: ObservableObject {
           break
         }
 
-        self.receiveMessage()
+        receiveMessage()
 
       case .failure:
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(self.retryDelay)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(retryDelay)) {
           self.retryDelay += 30
           self.stopWatching()
           self.connect()

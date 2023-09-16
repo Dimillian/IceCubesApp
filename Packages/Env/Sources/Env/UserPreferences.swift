@@ -65,9 +65,9 @@ public class UserPreferences: ObservableObject {
     public var description: LocalizedStringKey {
       switch self {
       case .iconWithText:
-        return "enum.swipeactions.icon-with-text"
+        "enum.swipeactions.icon-with-text"
       case .iconOnly:
-        return "enum.swipeactions.icon-only"
+        "enum.swipeactions.icon-only"
       }
     }
 
@@ -84,52 +84,52 @@ public class UserPreferences: ObservableObject {
 
   public var postVisibility: Models.Visibility {
     if useInstanceContentSettings {
-      return serverPreferences?.postVisibility ?? .pub
+      serverPreferences?.postVisibility ?? .pub
     } else {
-      return appDefaultPostVisibility
+      appDefaultPostVisibility
     }
   }
-  
+
   public func conformReplyVisibilityConstraints() {
     appDefaultReplyVisibility = getReplyVisibility()
   }
-  
+
   private func getReplyVisibility() -> Models.Visibility {
     getMinVisibility(postVisibility, appDefaultReplyVisibility)
   }
-  
+
   public func getReplyVisibility(of status: Status) -> Models.Visibility {
     getMinVisibility(getReplyVisibility(), status.visibility)
   }
-  
+
   private func getMinVisibility(_ vis1: Models.Visibility, _ vis2: Models.Visibility) -> Models.Visibility {
     let no1 = Self.getIntOfVisibility(vis1)
     let no2 = Self.getIntOfVisibility(vis2)
-    
+
     return no1 < no2 ? vis1 : vis2
   }
-  
+
   public var postIsSensitive: Bool {
     if useInstanceContentSettings {
-      return serverPreferences?.postIsSensitive ?? false
+      serverPreferences?.postIsSensitive ?? false
     } else {
-      return appDefaultPostsSensitive
+      appDefaultPostsSensitive
     }
   }
 
   public var autoExpandSpoilers: Bool {
     if useInstanceContentSettings {
-      return serverPreferences?.autoExpandSpoilers ?? true
+      serverPreferences?.autoExpandSpoilers ?? true
     } else {
-      return appAutoExpandSpoilers
+      appAutoExpandSpoilers
     }
   }
 
   public var autoExpandMedia: ServerPreferences.AutoExpandMedia {
     if useInstanceContentSettings {
-      return serverPreferences?.autoExpandMedia ?? .hideSensitive
+      serverPreferences?.autoExpandMedia ?? .hideSensitive
     } else {
-      return appAutoExpandMedia
+      appAutoExpandMedia
     }
   }
 
@@ -174,17 +174,17 @@ public class UserPreferences: ObservableObject {
     copy.insert(isoCode, at: 0)
     recentlyUsedLanguages = Array(copy.prefix(3))
   }
-  
+
   public static func getIntOfVisibility(_ vis: Models.Visibility) -> Int {
     switch vis {
-      case .direct:
-        return 0
-      case .priv:
-        return 1
-      case .unlisted:
-        return 2
-      case .pub:
-        return 3
+    case .direct:
+      0
+    case .priv:
+      1
+    case .unlisted:
+      2
+    case .pub:
+      3
     }
   }
 }

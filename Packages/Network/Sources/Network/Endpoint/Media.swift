@@ -7,22 +7,22 @@ public enum Media: Endpoint {
   public func path() -> String {
     switch self {
     case .medias:
-      return "media"
+      "media"
     case let .media(id, _):
-      return "media/\(id)"
+      "media/\(id)"
     }
   }
 
   public func queryItems() -> [URLQueryItem]? {
-    return nil
+    nil
   }
 
   public var jsonValue: Encodable? {
     switch self {
     case let .media(_, json):
-      return json
+      json
     default:
-      return nil
+      nil
     }
   }
 }

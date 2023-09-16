@@ -7,9 +7,9 @@ public enum Instances: Endpoint {
   public func path() -> String {
     switch self {
     case .instance:
-      return "instance"
+      "instance"
     case .peers:
-      return "instance/peers"
+      "instance/peers"
     }
   }
 

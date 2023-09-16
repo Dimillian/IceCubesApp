@@ -9,13 +9,13 @@ public enum Timelines: Endpoint {
   public func path() -> String {
     switch self {
     case .pub:
-      return "timelines/public"
+      "timelines/public"
     case .home:
-      return "timelines/home"
+      "timelines/home"
     case let .list(listId, _, _, _):
-      return "timelines/list/\(listId)"
+      "timelines/list/\(listId)"
     case let .hashtag(tag, _, _):
-      return "timelines/tag/\(tag)"
+      "timelines/tag/\(tag)"
     }
   }
 

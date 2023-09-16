@@ -12,7 +12,7 @@ struct StatusRowActionsView: View {
   @ObservedObject var viewModel: StatusRowViewModel
 
   func privateBoost() -> Bool {
-    return viewModel.status.visibility == .priv && viewModel.status.account.id == currentAccount.account?.id
+    viewModel.status.visibility == .priv && viewModel.status.account.id == currentAccount.account?.id
   }
 
   @MainActor
@@ -76,7 +76,7 @@ struct StatusRowActionsView: View {
     }
 
     func count(dataController: StatusDataController, viewModel: StatusRowViewModel, theme: Theme) -> Int? {
-      if theme.statusActionsDisplay == .discret && !viewModel.isFocused {
+      if theme.statusActionsDisplay == .discret, !viewModel.isFocused {
         return nil
       }
       switch self {
@@ -94,22 +94,22 @@ struct StatusRowActionsView: View {
     func tintColor(theme: Theme) -> Color? {
       switch self {
       case .respond, .share:
-        return nil
+        nil
       case .favorite:
-        return .yellow
+        .yellow
       case .bookmark:
-        return .pink
+        .pink
       case .boost:
-        return theme.tintColor
+        theme.tintColor
       }
     }
 
     func isOn(dataController: StatusDataController) -> Bool {
       switch self {
-      case .respond, .share: return false
-      case .favorite: return dataController.isFavorited
-      case .bookmark: return dataController.isBookmarked
-      case .boost: return dataController.isReblogged
+      case .respond, .share: false
+      case .favorite: dataController.isFavorited
+      case .bookmark: dataController.isBookmarked
+      case .boost: dataController.isReblogged
       }
     }
   }

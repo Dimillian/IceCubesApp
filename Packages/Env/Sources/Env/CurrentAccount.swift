@@ -48,7 +48,7 @@ public class CurrentAccount: ObservableObject {
   }
 
   public func fetchConnections() async {
-    guard let client = client else { return }
+    guard let client else { return }
     do {
       let connections: [String] = try await client.get(endpoint: Instances.peers)
       client.addConnections(connections)
@@ -56,7 +56,7 @@ public class CurrentAccount: ObservableObject {
   }
 
   public func fetchCurrentAccount() async {
-    guard let client = client, client.isAuth else {
+    guard let client, client.isAuth else {
       account = nil
       return
     }

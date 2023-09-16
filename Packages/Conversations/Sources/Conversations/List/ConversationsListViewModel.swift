@@ -60,11 +60,10 @@ class ConversationsListViewModel: ObservableObject {
 
   func favorite(conversation: Conversation) async {
     guard let client, let message = conversation.lastStatus else { return }
-    let endpoint: Endpoint
-    if message.favourited ?? false {
-      endpoint = Statuses.unfavorite(id: message.id)
+    let endpoint: Endpoint = if message.favourited ?? false {
+      Statuses.unfavorite(id: message.id)
     } else {
-      endpoint = Statuses.favorite(id: message.id)
+      Statuses.favorite(id: message.id)
     }
     do {
       let status: Status = try await client.post(endpoint: endpoint)
@@ -74,11 +73,10 @@ class ConversationsListViewModel: ObservableObject {
 
   func bookmark(conversation: Conversation) async {
     guard let client, let message = conversation.lastStatus else { return }
-    let endpoint: Endpoint
-    if message.bookmarked ?? false {
-      endpoint = Statuses.unbookmark(id: message.id)
+    let endpoint: Endpoint = if message.bookmarked ?? false {
+      Statuses.unbookmark(id: message.id)
     } else {
-      endpoint = Statuses.bookmark(id: message.id)
+      Statuses.bookmark(id: message.id)
     }
     do {
       let status: Status = try await client.post(endpoint: endpoint)

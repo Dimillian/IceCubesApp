@@ -7,8 +7,8 @@ public enum PreferredShareButtonBehavior: Int, CaseIterable, Codable {
 
   public var title: LocalizedStringKey {
     switch self {
-    case .linkOnly: return "settings.content.sharing.share-behavior.link-only"
-    case .linkAndText: return "settings.content.sharing.share-behavior.link-and-text"
+    case .linkOnly: "settings.content.sharing.share-behavior.link-only"
+    case .linkAndText: "settings.content.sharing.share-behavior.link-and-text"
     }
   }
 }

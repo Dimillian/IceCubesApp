@@ -155,8 +155,8 @@ struct ActivityView: UIViewControllerRepresentable {
   }
 
   func makeUIViewController(context _: UIViewControllerRepresentableContext<ActivityView>) -> UIActivityViewController {
-    return UIActivityViewController(activityItems: [image, LinkDelegate(image: image, status: status)],
-                                    applicationActivities: nil)
+    UIActivityViewController(activityItems: [image, LinkDelegate(image: image, status: status)],
+                             applicationActivities: nil)
   }
 
   func updateUIViewController(_: UIActivityViewController, context _: UIViewControllerRepresentableContext<ActivityView>) {}

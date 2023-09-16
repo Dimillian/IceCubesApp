@@ -25,7 +25,7 @@ let package = Package(
         "SwiftSoup",
       ],
       swiftSettings: [
-        .enableExperimentalFeature("StrictConcurrency")
+        .enableExperimentalFeature("StrictConcurrency"),
       ]
     ),
     .testTarget(

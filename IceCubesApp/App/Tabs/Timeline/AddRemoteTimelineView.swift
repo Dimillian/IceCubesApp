@@ -71,7 +71,7 @@ struct AddRemoteTimelineView: View {
         isInstanceURLFieldFocused = true
         let client = InstanceSocialClient()
         Task {
-          self.instances = await client.fetchInstances()
+          instances = await client.fetchInstances()
         }
       }
     }
@@ -85,7 +85,7 @@ struct AddRemoteTimelineView: View {
       } else {
         ForEach(instanceName.isEmpty ? instances : instances.filter { $0.name.contains(instanceName.lowercased()) }) { instance in
           Button {
-            self.instanceName = instance.name
+            instanceName = instance.name
           } label: {
             VStack(alignment: .leading, spacing: 4) {
               Text(instance.name)

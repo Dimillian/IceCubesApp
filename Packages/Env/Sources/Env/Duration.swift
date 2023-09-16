@@ -15,37 +15,37 @@ public enum Duration: Int, CaseIterable {
   public var description: LocalizedStringKey {
     switch self {
     case .infinite:
-      return "enum.durations.infinite"
+      "enum.durations.infinite"
     case .fiveMinutes:
-      return "enum.durations.fiveMinutes"
+      "enum.durations.fiveMinutes"
     case .thirtyMinutes:
-      return "enum.durations.thirtyMinutes"
+      "enum.durations.thirtyMinutes"
     case .oneHour:
-      return "enum.durations.oneHour"
+      "enum.durations.oneHour"
     case .sixHours:
-      return "enum.durations.sixHours"
+      "enum.durations.sixHours"
     case .twelveHours:
-      return "enum.durations.twelveHours"
+      "enum.durations.twelveHours"
     case .oneDay:
-      return "enum.durations.oneDay"
+      "enum.durations.oneDay"
     case .threeDays:
-      return "enum.durations.threeDays"
+      "enum.durations.threeDays"
     case .sevenDays:
-      return "enum.durations.sevenDays"
+      "enum.durations.sevenDays"
     case .custom:
-      return "enum.durations.custom"
+      "enum.durations.custom"
     }
   }
 
   public static func mutingDurations() -> [Duration] {
-    return Self.allCases.filter { $0 != .custom }
+    allCases.filter { $0 != .custom }
   }
 
   public static func filterDurations() -> [Duration] {
-    return [.infinite, .thirtyMinutes, .oneHour, .sixHours, .twelveHours, .oneDay, .sevenDays, .custom]
+    [.infinite, .thirtyMinutes, .oneHour, .sixHours, .twelveHours, .oneDay, .sevenDays, .custom]
   }
 
   public static func pollDurations() -> [Duration] {
-    return [.fiveMinutes, .thirtyMinutes, .oneHour, .sixHours, .twelveHours, .oneDay, .threeDays, .sevenDays]
+    [.fiveMinutes, .thirtyMinutes, .oneHour, .sixHours, .twelveHours, .oneDay, .threeDays, .sevenDays]
   }
 }

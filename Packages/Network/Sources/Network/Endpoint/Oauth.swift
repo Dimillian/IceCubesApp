@@ -8,18 +8,18 @@ public enum Oauth: Endpoint {
   public func path() -> String {
     switch self {
     case .authorize:
-      return "oauth/authorize"
+      "oauth/authorize"
     case .token:
-      return "oauth/token"
+      "oauth/token"
     }
   }
 
   public var jsonValue: Encodable? {
     switch self {
     case let .token(code, clientId, clientSecret):
-      return TokenData(clientId: clientId, clientSecret: clientSecret, code: code)
+      TokenData(clientId: clientId, clientSecret: clientSecret, code: code)
     default:
-      return nil
+      nil
     }
   }
 

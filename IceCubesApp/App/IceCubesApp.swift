@@ -100,7 +100,7 @@ struct IceCubesApp: App {
   }
 
   private func badgeFor(tab: Tab) -> Int {
-    if tab == .notifications && selectedTab != tab,
+    if tab == .notifications, selectedTab != tab,
        let token = appAccountsManager.currentAccount.oauthToken
     {
       return watcher.unreadNotificationsCount + userPreferences.getNotificationsCount(for: token)

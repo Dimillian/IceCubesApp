@@ -8,7 +8,7 @@ actor StatusEditorCompressor {
   }
 
   func compressImageFrom(url: URL) async -> Data? {
-    return await withCheckedContinuation { continuation in
+    await withCheckedContinuation { continuation in
       let sourceOptions = [kCGImageSourceShouldCache: false] as CFDictionary
       guard let source = CGImageSourceCreateWithURL(url as CFURL, sourceOptions) else {
         continuation.resume(returning: nil)

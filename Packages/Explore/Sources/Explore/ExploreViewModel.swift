@@ -11,13 +11,13 @@ class ExploreViewModel: ObservableObject {
     var localizedString: LocalizedStringKey {
       switch self {
       case .all:
-        return .init("explore.scope.all")
+        .init("explore.scope.all")
       case .people:
-        return .init("explore.scope.people")
+        .init("explore.scope.people")
       case .hashtags:
-        return .init("explore.scope.hashtags")
+        .init("explore.scope.hashtags")
       case .posts:
-        return .init("explore.scope.posts")
+        .init("explore.scope.posts")
       }
     }
   }
@@ -77,7 +77,7 @@ class ExploreViewModel: ObservableObject {
       trendingStatuses = data.trendingStatuses
       trendingLinks = data.trendingLinks
 
-      suggestedAccountsRelationShips = try await client.get(endpoint: Accounts.relationships(ids: suggestedAccounts.map { $0.id }))
+      suggestedAccountsRelationShips = try await client.get(endpoint: Accounts.relationships(ids: suggestedAccounts.map(\.id)))
       withAnimation {
         isLoaded = true
       }
@@ -118,7 +118,7 @@ class ExploreViewModel: ObservableObject {
                                                                                   following: nil),
                                                           forceVersion: .v2)
         let relationships: [Relationship] =
-          try await client.get(endpoint: Accounts.relationships(ids: results.accounts.map { $0.id }))
+          try await client.get(endpoint: Accounts.relationships(ids: results.accounts.map(\.id)))
         results.relationships = relationships
         withAnimation {
           self.results[searchQuery] = results

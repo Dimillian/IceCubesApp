@@ -6,7 +6,7 @@ public enum CustomEmojis: Endpoint {
   public func path() -> String {
     switch self {
     case .customEmojis:
-      return "custom_emojis"
+      "custom_emojis"
     }
   }
 

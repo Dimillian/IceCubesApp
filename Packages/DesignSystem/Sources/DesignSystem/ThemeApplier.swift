@@ -97,7 +97,7 @@ struct ThemeApplier: ViewModifier {
     private func allWindows() -> [UIWindow] {
       UIApplication.shared.connectedScenes
         .compactMap { $0 as? UIWindowScene }
-        .flatMap { $0.windows }
+        .flatMap(\.windows)
     }
   #endif
 }

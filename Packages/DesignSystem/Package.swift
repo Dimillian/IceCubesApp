@@ -34,7 +34,7 @@ let package = Package(
         .product(name: "EmojiText", package: "EmojiText"),
       ],
       swiftSettings: [
-        .enableExperimentalFeature("StrictConcurrency")
+        .enableExperimentalFeature("StrictConcurrency"),
       ]
     ),
   ]

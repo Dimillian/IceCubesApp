@@ -51,7 +51,7 @@ private struct SafariRouter: ViewModifier {
       }
       .background {
         WindowReader { window in
-          self.safariManager.windowScene = window.windowScene
+          safariManager.windowScene = window.windowScene
         }
       }
   }
@@ -65,7 +65,7 @@ private class InAppSafariManager: NSObject, ObservableObject, SFSafariViewContro
 
   @MainActor
   func open(_ url: URL) -> OpenURLAction.Result {
-    guard let windowScene = windowScene else { return .systemAction }
+    guard let windowScene else { return .systemAction }
 
     window = setupWindow(windowScene: windowScene)
 
@@ -85,7 +85,7 @@ private class InAppSafariManager: NSObject, ObservableObject, SFSafariViewContro
   }
 
   func setupWindow(windowScene: UIWindowScene) -> UIWindow {
-    let window = self.window ?? UIWindow(windowScene: windowScene)
+    let window = window ?? UIWindow(windowScene: windowScene)
 
     window.rootViewController = viewController
     window.makeKeyAndVisible()

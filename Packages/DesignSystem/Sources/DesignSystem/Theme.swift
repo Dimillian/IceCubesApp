@@ -22,15 +22,15 @@ public class Theme: ObservableObject {
     public var title: LocalizedStringKey {
       switch self {
       case .system:
-        return "settings.display.font.system"
+        "settings.display.font.system"
       case .openDyslexic:
-        return "Open Dyslexic"
+        "Open Dyslexic"
       case .hyperLegible:
-        return "Hyper Legible"
+        "Hyper Legible"
       case .SFRounded:
-        return "SF Rounded"
+        "SF Rounded"
       case .custom:
-        return "settings.display.font.custom"
+        "settings.display.font.custom"
       }
     }
   }
@@ -41,9 +41,9 @@ public class Theme: ObservableObject {
     public var description: LocalizedStringKey {
       switch self {
       case .leading:
-        return "enum.avatar-position.leading"
+        "enum.avatar-position.leading"
       case .top:
-        return "enum.avatar-position.top"
+        "enum.avatar-position.top"
       }
     }
   }
@@ -54,9 +54,9 @@ public class Theme: ObservableObject {
     public var description: LocalizedStringKey {
       switch self {
       case .circle:
-        return "enum.avatar-shape.circle"
+        "enum.avatar-shape.circle"
       case .rounded:
-        return "enum.avatar-shape.rounded"
+        "enum.avatar-shape.rounded"
       }
     }
   }
@@ -67,11 +67,11 @@ public class Theme: ObservableObject {
     public var description: LocalizedStringKey {
       switch self {
       case .full:
-        return "enum.status-actions-display.all"
+        "enum.status-actions-display.all"
       case .discret:
-        return "enum.status-actions-display.only-buttons"
+        "enum.status-actions-display.only-buttons"
       case .none:
-        return "enum.status-actions-display.no-buttons"
+        "enum.status-actions-display.no-buttons"
       }
     }
   }
@@ -82,11 +82,11 @@ public class Theme: ObservableObject {
     public var description: LocalizedStringKey {
       switch self {
       case .large:
-        return "enum.status-display-style.large"
+        "enum.status-display-style.large"
       case .medium:
-        return "enum.status-display-style.medium"
+        "enum.status-display-style.medium"
       case .compact:
-        return "enum.status-display-style.compact"
+        "enum.status-display-style.compact"
       }
     }
   }

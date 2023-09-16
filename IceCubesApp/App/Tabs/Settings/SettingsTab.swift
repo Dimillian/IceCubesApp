@@ -51,7 +51,7 @@ struct SettingsTabs: View {
             }
           }
         }
-        if UIDevice.current.userInterfaceIdiom == .pad && !preferences.showiPadSecondaryColumn {
+        if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn {
           SecondaryColumnToolbarItem()
         }
       }
@@ -326,7 +326,6 @@ struct SettingsTabs: View {
     }
   }
 
-  
   private func moveTimelineItems(from source: IndexSet, to destination: Int) {
     preferences.remoteLocalTimelines.move(fromOffsets: source, toOffset: destination)
   }

@@ -35,7 +35,7 @@ struct EditTagGroupView: View {
     case symbol
     case new
   }
-  
+
   init(editingTagGroup: TagGroup? = nil, onSaved: ((TagGroup) -> Void)? = nil) {
     self.editingTagGroup = editingTagGroup
     self.onSaved = onSaved
@@ -163,7 +163,7 @@ struct EditTagGroupView: View {
   private func save() {
     var toSave = tags
     let main = toSave.removeFirst()
-    
+
     let tagGroup: TagGroup = .init(
       title: title.trimmingCharacters(in: .whitespaces),
       sfSymbolName: sfSymbolName,
@@ -171,7 +171,8 @@ struct EditTagGroupView: View {
       additional: toSave
     )
     if let editingTagGroup,
-        let index = preferences.tagGroups.firstIndex(of: editingTagGroup) {
+       let index = preferences.tagGroups.firstIndex(of: editingTagGroup)
+    {
       preferences.tagGroups[index] = tagGroup
     } else {
       preferences.tagGroups.append(tagGroup)
@@ -183,7 +184,7 @@ struct EditTagGroupView: View {
 
   @ViewBuilder
   private var symbolsSuggestionView: some View {
-    if focusedField == .symbol && !sfSymbolName.isEmpty {
+    if focusedField == .symbol, !sfSymbolName.isEmpty {
       let filteredMatches = allSymbols
         .filter { $0.contains(sfSymbolName) }
       if !filteredMatches.isEmpty {

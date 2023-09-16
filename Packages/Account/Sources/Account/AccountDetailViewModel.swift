@@ -27,25 +27,25 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
 
     var iconName: String {
       switch self {
-      case .statuses: return "bubble.right"
-      case .favorites: return "star"
-      case .bookmarks: return "bookmark"
-      case .followedTags: return "tag"
-      case .postsAndReplies: return "bubble.left.and.bubble.right"
-      case .media: return "photo.on.rectangle.angled"
-      case .lists: return "list.bullet"
+      case .statuses: "bubble.right"
+      case .favorites: "star"
+      case .bookmarks: "bookmark"
+      case .followedTags: "tag"
+      case .postsAndReplies: "bubble.left.and.bubble.right"
+      case .media: "photo.on.rectangle.angled"
+      case .lists: "list.bullet"
       }
     }
 
     var accessibilityLabel: LocalizedStringKey {
       switch self {
-      case .statuses: return "accessibility.tabs.profile.picker.statuses"
-      case .favorites: return "accessibility.tabs.profile.picker.favorites"
-      case .bookmarks: return "accessibility.tabs.profile.picker.bookmarks"
-      case .followedTags: return "accessibility.tabs.profile.picker.followed-tags"
-      case .postsAndReplies: return "accessibility.tabs.profile.picker.posts-and-replies"
-      case .media: return "accessibility.tabs.profile.picker.media"
-      case .lists: return "accessibility.tabs.profile.picker.lists"
+      case .statuses: "accessibility.tabs.profile.picker.statuses"
+      case .favorites: "accessibility.tabs.profile.picker.favorites"
+      case .bookmarks: "accessibility.tabs.profile.picker.bookmarks"
+      case .followedTags: "accessibility.tabs.profile.picker.followed-tags"
+      case .postsAndReplies: "accessibility.tabs.profile.picker.posts-and-replies"
+      case .media: "accessibility.tabs.profile.picker.media"
+      case .lists: "accessibility.tabs.profile.picker.lists"
       }
     }
   }
@@ -145,7 +145,7 @@ class AccountDetailViewModel: ObservableObject, StatusesFetcher {
   private func fetchAccountData(accountId: String, client: Client) async throws -> AccountData {
     async let account: Account = client.get(endpoint: Accounts.accounts(id: accountId))
     async let featuredTags: [FeaturedTag] = client.get(endpoint: Accounts.featuredTags(id: accountId))
-    if client.isAuth && !isCurrentUser {
+    if client.isAuth, !isCurrentUser {
       async let relationships: [Relationship] = client.get(endpoint: Accounts.relationships(ids: [accountId]))
       do {
         return try await .init(account: account,

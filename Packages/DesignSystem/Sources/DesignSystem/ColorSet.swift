@@ -160,19 +160,18 @@ public struct ConstellationDark: ColorSet {
   public var scheme: ColorScheme = .dark
   public var tintColor: Color = .init(hex: 0xFFD966)
   public var primaryBackgroundColor: Color = .init(hex: 0x09192C)
-  public var secondaryBackgroundColor: Color = .init(hex: 0x304c7a)
+  public var secondaryBackgroundColor: Color = .init(hex: 0x304C7A)
   public var labelColor: Color = .init(hex: 0xE2E4E2)
 
   public init() {}
 }
 
-
 public struct ConstellationLight: ColorSet {
   public var name: ColorSetName = .constellationLight
   public var scheme: ColorScheme = .light
-  public var tintColor: Color = .init(hex: 0xc82238)
-  public var primaryBackgroundColor: Color = .init(hex: 0xf4f5f7)
-  public var secondaryBackgroundColor: Color = .init(hex: 0xacc7e5)
+  public var tintColor: Color = .init(hex: 0xC82238)
+  public var primaryBackgroundColor: Color = .init(hex: 0xF4F5F7)
+  public var secondaryBackgroundColor: Color = .init(hex: 0xACC7E5)
   public var labelColor: Color = .black
 
   public init() {}

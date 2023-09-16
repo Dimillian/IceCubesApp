@@ -88,11 +88,11 @@ public class StatusRowViewModel: ObservableObject {
 
   var highlightRowColor: Color {
     if status.visibility == .direct {
-      return theme.tintColor.opacity(0.15)
+      theme.tintColor.opacity(0.15)
     } else if userMentionned {
-      return theme.secondaryBackgroundColor
+      theme.secondaryBackgroundColor
     } else {
-      return theme.primaryBackgroundColor
+      theme.primaryBackgroundColor
     }
   }
 
@@ -147,10 +147,10 @@ public class StatusRowViewModel: ObservableObject {
 
   func markSeen() {
     // called in on appear so we can cache that the status has been seen.
-    if UserPreferences.shared.suppressDupeReblogs && !seen {
+    if UserPreferences.shared.suppressDupeReblogs, !seen {
       DispatchQueue.global().async { [weak self] in
         guard let self else { return }
-        ReblogCache.shared.cache(self.status, seen: true)
+        ReblogCache.shared.cache(status, seen: true)
         Task { @MainActor in
           self.seen = true
         }

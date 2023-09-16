@@ -32,7 +32,6 @@ class VideoPlayerViewModel: ObservableObject {
       }
     }
   }
-  
 
   func pause() {
     player?.pause()

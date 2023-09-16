@@ -13,7 +13,7 @@ struct QuickLookPreview: UIViewControllerRepresentable {
   let urls: [URL]
 
   func makeUIViewController(context _: Context) -> UIViewController {
-    return AppQLPreviewController(selectedURL: selectedURL, urls: urls)
+    AppQLPreviewController(selectedURL: selectedURL, urls: urls)
   }
 
   func updateUIViewController(
@@ -53,11 +53,11 @@ class AppQLPreviewController: UIViewController {
 
 extension AppQLPreviewController: QLPreviewControllerDataSource {
   nonisolated func numberOfPreviewItems(in _: QLPreviewController) -> Int {
-    return urls.count
+    urls.count
   }
 
   nonisolated func previewController(_: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
-    return urls[index] as QLPreviewItem
+    urls[index] as QLPreviewItem
   }
 }
 
@@ -81,7 +81,7 @@ extension AppQLPreviewController: QLPreviewControllerDelegate {
 
 struct TransparentBackground: UIViewControllerRepresentable {
   public func makeUIViewController(context _: Context) -> UIViewController {
-    return TransparentController()
+    TransparentController()
   }
 
   public func updateUIViewController(_: UIViewController, context _: Context) {}

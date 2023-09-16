@@ -37,7 +37,7 @@ let package = Package(
         .product(name: "Bodega", package: "Bodega"),
       ],
       swiftSettings: [
-        .enableExperimentalFeature("StrictConcurrency")
+        .enableExperimentalFeature("StrictConcurrency"),
       ]
     ),
     .testTarget(

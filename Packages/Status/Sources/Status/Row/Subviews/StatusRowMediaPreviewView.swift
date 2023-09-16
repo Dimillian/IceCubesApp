@@ -87,7 +87,7 @@ public struct StatusRowMediaPreviewView: View {
         makeFeaturedImagePreview(attachment: attachment)
           .onTapGesture {
             Task {
-              await quickLook.prepareFor(urls: attachments.compactMap { $0.url }, selectedURL: attachment.url!)
+              await quickLook.prepareFor(urls: attachments.compactMap(\.url), selectedURL: attachment.url!)
             }
           }
           .accessibilityElement(children: .ignore)
@@ -134,7 +134,7 @@ public struct StatusRowMediaPreviewView: View {
       Text(altTextDisplayed ?? "")
     }
     .onAppear {
-      if sensitive && preferences.autoExpandMedia == .hideSensitive {
+      if sensitive, preferences.autoExpandMedia == .hideSensitive {
         isHidingMedia = true
       } else if preferences.autoExpandMedia == .hideAll {
         isHidingMedia = true
@@ -278,7 +278,7 @@ public struct StatusRowMediaPreviewView: View {
       .contentShape(Rectangle())
       .onTapGesture {
         Task {
-          await quickLook.prepareFor(urls: attachments.compactMap { $0.url }, selectedURL: attachment.url!)
+          await quickLook.prepareFor(urls: attachments.compactMap(\.url), selectedURL: attachment.url!)
         }
       }
       .accessibilityElement(children: .ignore)
@@ -345,11 +345,11 @@ public struct StatusRowMediaPreviewView: View {
 
   private static func accessibilityLabel(for attachment: MediaAttachment) -> Text {
     if let altText = attachment.description {
-      return Text("accessibility.image.alt-text-\(altText)")
+      Text("accessibility.image.alt-text-\(altText)")
     } else if let typeDescription = attachment.localizedTypeDescription {
-      return Text(typeDescription)
+      Text(typeDescription)
     } else {
-      return Text("accessibility.tabs.profile.picker.media")
+      Text("accessibility.tabs.profile.picker.media")
     }
   }
 }

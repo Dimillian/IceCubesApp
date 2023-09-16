@@ -8,9 +8,9 @@ public struct AppAccount: Codable, Identifiable, Hashable {
 
   public var key: String {
     if let oauthToken {
-      return "\(server):\(oauthToken.createdAt)"
+      "\(server):\(oauthToken.createdAt)"
     } else {
-      return "\(server):anonymous"
+      "\(server):anonymous"
     }
   }
 

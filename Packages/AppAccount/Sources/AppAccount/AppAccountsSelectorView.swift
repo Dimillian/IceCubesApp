@@ -19,7 +19,7 @@ public struct AppAccountsSelectorView: View {
   private var showNotificationBadge: Bool {
     accountsViewModel
       .filter { $0.account?.id != currentAccount.account?.id }
-      .compactMap { $0.appAccount.oauthToken }
+      .compactMap(\.appAccount.oauthToken)
       .map { preferences.getNotificationsCount(for: $0) }
       .reduce(0, +) > 0
   }
@@ -84,7 +84,7 @@ public struct AppAccountsSelectorView: View {
           .redacted(reason: .placeholder)
       }
     }.overlay(alignment: .topTrailing) {
-      if (!currentAccount.followRequests.isEmpty || showNotificationBadge) && accountCreationEnabled {
+      if !currentAccount.followRequests.isEmpty || showNotificationBadge, accountCreationEnabled {
         Circle()
           .fill(Color.red)
           .frame(width: 9, height: 9)

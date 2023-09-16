@@ -12,17 +12,17 @@ public enum ServerFilters: Endpoint {
   public func path() -> String {
     switch self {
     case .filters:
-      return "filters"
+      "filters"
     case .createFilter:
-      return "filters"
+      "filters"
     case let .filter(id):
-      return "filters/\(id)"
+      "filters/\(id)"
     case let .editFilter(id, _):
-      return "filters/\(id)"
+      "filters/\(id)"
     case let .addKeyword(id, _, _):
-      return "filters/\(id)/keywords"
+      "filters/\(id)/keywords"
     case let .removeKeyword(id):
-      return "filters/keywords/\(id)"
+      "filters/keywords/\(id)"
     }
   }
 
@@ -39,11 +39,11 @@ public enum ServerFilters: Endpoint {
   public var jsonValue: Encodable? {
     switch self {
     case let .createFilter(json):
-      return json
+      json
     case let .editFilter(_, json):
-      return json
+      json
     default:
-      return nil
+      nil
     }
   }
 }

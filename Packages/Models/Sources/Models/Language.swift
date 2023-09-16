@@ -2,7 +2,7 @@ import Foundation
 
 @MainActor
 public struct Language: Identifiable, Equatable, Hashable {
-  nonisolated public var id: String { isoCode }
+  public nonisolated var id: String { isoCode }
 
   public let isoCode: String
   public let nativeName: String?

@@ -7,8 +7,8 @@ import Network
 import SwiftUI
 import UserNotifications
 
-extension UNNotificationResponse: @unchecked Sendable { }
-extension UNUserNotificationCenter: @unchecked Sendable { }
+extension UNNotificationResponse: @unchecked Sendable {}
+extension UNUserNotificationCenter: @unchecked Sendable {}
 
 public struct PushAccount: Equatable {
   public let server: String
@@ -157,7 +157,7 @@ extension PushNotificationsService: UNUserNotificationCenterDelegate {
 
 extension Data {
   var hexString: String {
-    return map { String(format: "%02.2hhx", arguments: [$0]) }.joined()
+    map { String(format: "%02.2hhx", arguments: [$0]) }.joined()
   }
 }
 
@@ -199,7 +199,7 @@ public class PushNotificationSubscriptionSettings: ObservableObject {
   }
 
   public func updateSubscription() async {
-    guard let pushToken = pushToken else { return }
+    guard let pushToken else { return }
     let client = Client(server: account.server, oauthToken: account.token)
     do {
       var listenerURL = PushNotificationsService.Constants.endpoint

@@ -51,7 +51,7 @@ class NotificationsViewModel: ObservableObject {
     if let selectedType {
       var excludedTypes = Models.Notification.NotificationType.allCases
       excludedTypes.removeAll(where: { $0 == selectedType })
-      return excludedTypes.map { $0.rawValue }
+      return excludedTypes.map(\.rawValue)
     }
     return nil
   }

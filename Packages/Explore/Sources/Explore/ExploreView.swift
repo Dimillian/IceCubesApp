@@ -126,7 +126,7 @@ public struct ExploreView: View {
 
   @ViewBuilder
   private func makeSearchResultsView(results: SearchResults) -> some View {
-    if !results.accounts.isEmpty && (viewModel.searchScope == .all || viewModel.searchScope == .people) {
+    if !results.accounts.isEmpty, viewModel.searchScope == .all || viewModel.searchScope == .people {
       Section("explore.section.users") {
         ForEach(results.accounts) { account in
           if let relationship = results.relationships.first(where: { $0.id == account.id }) {
@@ -136,7 +136,7 @@ public struct ExploreView: View {
         }
       }
     }
-    if !results.hashtags.isEmpty && (viewModel.searchScope == .all || viewModel.searchScope == .hashtags) {
+    if !results.hashtags.isEmpty, viewModel.searchScope == .all || viewModel.searchScope == .hashtags {
       Section("explore.section.tags") {
         ForEach(results.hashtags) { tag in
           TagRowView(tag: tag)
@@ -145,7 +145,7 @@ public struct ExploreView: View {
         }
       }
     }
-    if !results.statuses.isEmpty && (viewModel.searchScope == .all || viewModel.searchScope == .posts) {
+    if !results.statuses.isEmpty, viewModel.searchScope == .all || viewModel.searchScope == .posts {
       Section("explore.section.posts") {
         ForEach(results.statuses) { status in
           StatusRowView(viewModel: { .init(status: status, client: client, routerPath: routerPath) })

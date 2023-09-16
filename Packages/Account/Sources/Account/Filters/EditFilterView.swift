@@ -20,23 +20,21 @@ struct EditFilterView: View {
   @State private var filterAction: ServerFilter.Action
   @State private var expiresAt: Date?
   @State private var expirySelection: Duration
-  
+
   enum Fields {
     case title, newKeyword
   }
-  
+
   @FocusState private var focusedField: Fields?
 
   private var data: ServerFilterData {
-    var expiresIn: String?
-    // we add 50 seconds, otherwise we immediately show 6d for a 7d filter (6d, 23h, 59s)
-    switch expirySelection {
+    let expiresIn: String? = switch expirySelection {
     case .infinite:
-      expiresIn = "" // need to send an empty value in order for the server to clear this field in the filter
+      "" // need to send an empty value in order for the server to clear this field in the filter
     case .custom:
-      expiresIn = String(Int(expiresAt?.timeIntervalSince(Date()) ?? 0) + 50)
+      String(Int(expiresAt?.timeIntervalSince(Date()) ?? 0) + 50)
     default:
-      expiresIn = String(expirySelection.rawValue + 50)
+      String(expirySelection.rawValue + 50)
     }
 
     return ServerFilterData(title: title,
@@ -100,7 +98,7 @@ struct EditFilterView: View {
       }
       if expirySelection != .infinite {
         DatePicker("filter.edit.expiry.date-time",
-                   selection: Binding<Date>(get: { self.expiresAt ?? Date() }, set: { self.expiresAt = $0 }),
+                   selection: Binding<Date>(get: { expiresAt ?? Date() }, set: { expiresAt = $0 }),
                    displayedComponents: [.date, .hourAndMinute])
           .disabled(expirySelection != .custom)
       }

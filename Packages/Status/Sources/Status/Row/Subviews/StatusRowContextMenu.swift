@@ -17,14 +17,14 @@ struct StatusRowContextMenu: View {
   @ObservedObject var viewModel: StatusRowViewModel
 
   var boostLabel: some View {
-    if self.viewModel.status.visibility == .priv && self.viewModel.status.account.id == self.account.account?.id {
-      if self.statusDataController.isReblogged {
+    if viewModel.status.visibility == .priv, viewModel.status.account.id == account.account?.id {
+      if statusDataController.isReblogged {
         return Label("status.action.unboost", systemImage: "lock.rotation")
       }
       return Label("status.action.boost-to-followers", systemImage: "lock.rotation")
     }
 
-    if self.statusDataController.isReblogged {
+    if statusDataController.isReblogged {
       return Label("status.action.unboost", image: "Rocket")
     }
     return Label("status.action.boost", image: "Rocket")
@@ -262,7 +262,7 @@ struct ActivityView: UIViewControllerRepresentable {
   let image: Image
 
   func makeUIViewController(context _: UIViewControllerRepresentableContext<ActivityView>) -> UIActivityViewController {
-    return UIActivityViewController(activityItems: [image], applicationActivities: nil)
+    UIActivityViewController(activityItems: [image], applicationActivities: nil)
   }
 
   func updateUIViewController(_: UIActivityViewController, context _: UIViewControllerRepresentableContext<ActivityView>) {}

@@ -10,15 +10,15 @@ public enum AccountsListMode {
   var title: LocalizedStringKey {
     switch self {
     case .following:
-      return "account.following"
+      "account.following"
     case .followers:
-      return "account.followers"
+      "account.followers"
     case .favoritedBy:
-      return "account.favorited-by"
+      "account.favorited-by"
     case .rebloggedBy:
-      return "account.boosted-by"
+      "account.boosted-by"
     case .accountsList:
-      return ""
+      ""
     }
   }
 }
@@ -76,7 +76,7 @@ class AccountsListViewModel: ObservableObject {
       }
       nextPageId = link?.maxId
       relationships = try await client.get(endpoint:
-        Accounts.relationships(ids: accounts.map { $0.id }))
+        Accounts.relationships(ids: accounts.map(\.id)))
       state = .display(accounts: accounts,
                        relationships: relationships,
                        nextPageState: link?.maxId != nil ? .hasNextPage : .none)
@@ -108,7 +108,7 @@ class AccountsListViewModel: ObservableObject {
       }
       accounts.append(contentsOf: newAccounts)
       let newRelationships: [Relationship] =
-        try await client.get(endpoint: Accounts.relationships(ids: newAccounts.map { $0.id }))
+        try await client.get(endpoint: Accounts.relationships(ids: newAccounts.map(\.id)))
 
       relationships.append(contentsOf: newRelationships)
       self.nextPageId = link?.maxId

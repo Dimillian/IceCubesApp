@@ -29,7 +29,7 @@ struct ExploreTab: View {
               AppAccountsSelectorView(routerPath: routerPath)
             }
           }
-          if UIDevice.current.userInterfaceIdiom == .pad && !preferences.showiPadSecondaryColumn {
+          if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn {
             SecondaryColumnToolbarItem()
           }
         }

@@ -70,7 +70,7 @@ class NotificationService: UNNotificationServiceExtension {
         preferences.setNotification(count: currentCount, token: token)
       }
 
-      let tokens = AppAccountsManager.shared.pushAccounts.map { $0.token }
+      let tokens = AppAccountsManager.shared.pushAccounts.map(\.token)
       bestAttemptContent.badge = .init(integerLiteral: preferences.getNotificationsTotalCount(for: tokens))
 
       if let urlString = notification.icon,

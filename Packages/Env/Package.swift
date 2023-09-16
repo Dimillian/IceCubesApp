@@ -29,7 +29,7 @@ let package = Package(
         .product(name: "KeychainSwift", package: "keychain-swift"),
       ],
       swiftSettings: [
-        .enableExperimentalFeature("StrictConcurrency")
+        .enableExperimentalFeature("StrictConcurrency"),
       ]
     ),
   ]

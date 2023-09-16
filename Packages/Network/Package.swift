@@ -25,7 +25,7 @@ let package = Package(
         .product(name: "Models", package: "Models"),
       ],
       swiftSettings: [
-        .enableExperimentalFeature("StrictConcurrency")
+        .enableExperimentalFeature("StrictConcurrency"),
       ]
     ),
     .testTarget(

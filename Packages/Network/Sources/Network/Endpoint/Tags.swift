@@ -8,18 +8,18 @@ public enum Tags: Endpoint {
   public func path() -> String {
     switch self {
     case let .tag(id):
-      return "tags/\(id)/"
+      "tags/\(id)/"
     case let .follow(id):
-      return "tags/\(id)/follow"
+      "tags/\(id)/follow"
     case let .unfollow(id):
-      return "tags/\(id)/unfollow"
+      "tags/\(id)/unfollow"
     }
   }
 
   public func queryItems() -> [URLQueryItem]? {
     switch self {
     default:
-      return nil
+      nil
     }
   }
 }

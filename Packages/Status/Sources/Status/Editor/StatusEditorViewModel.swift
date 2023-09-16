@@ -157,7 +157,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
 
   func evaluateLanguages() {
     if let detectedLang = detectLanguage(text: statusText.string),
-       let selectedLanguage = selectedLanguage,
+       let selectedLanguage,
        selectedLanguage != "",
        selectedLanguage != detectedLang
     {
@@ -311,14 +311,14 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
       let range = NSMakeRange(0, statusText.string.utf16.count)
       var ranges = hashtagRegex.matches(in: statusText.string,
                                         options: [],
-                                        range: range).map { $0.range }
+                                        range: range).map(\.range)
       ranges.append(contentsOf: mentionRegex.matches(in: statusText.string,
                                                      options: [],
-                                                     range: range).map { $0.range })
+                                                     range: range).map(\.range))
 
       let urlRanges = urlRegex.matches(in: statusText.string,
                                        options: [],
-                                       range: range).map { $0.range }
+                                       range: range).map(\.range)
 
       var foundSuggestionRange = false
       for nsRange in ranges {

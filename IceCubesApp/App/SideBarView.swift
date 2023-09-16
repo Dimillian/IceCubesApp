@@ -19,7 +19,7 @@ struct SideBarView<Content: View>: View {
   @ViewBuilder var content: () -> Content
 
   private func badgeFor(tab: Tab) -> Int {
-    if tab == .notifications && selectedTab != tab,
+    if tab == .notifications, selectedTab != tab,
        let token = appAccounts.currentAccount.oauthToken
     {
       return watcher.unreadNotificationsCount + userPreferences.getNotificationsCount(for: token)

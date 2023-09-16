@@ -41,7 +41,7 @@ public class CurrentInstance: ObservableObject {
   }
 
   public func fetchCurrentInstance() async {
-    guard let client = client else { return }
+    guard let client else { return }
     instance = try? await client.get(endpoint: Instances.instance)
   }
 }

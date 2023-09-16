@@ -25,9 +25,9 @@ public class AppAccountViewModel: ObservableObject {
 
   var acct: String {
     if let acct = appAccount.accountName {
-      return acct
+      acct
     } else {
-      return "@\(account?.acct ?? "...")@\(appAccount.server)"
+      "@\(account?.acct ?? "...")@\(appAccount.server)"
     }
   }
 

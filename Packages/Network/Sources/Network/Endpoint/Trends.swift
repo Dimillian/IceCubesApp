@@ -8,11 +8,11 @@ public enum Trends: Endpoint {
   public func path() -> String {
     switch self {
     case .tags:
-      return "trends/tags"
+      "trends/tags"
     case .statuses:
-      return "trends/statuses"
+      "trends/statuses"
     case .links:
-      return "trends/links"
+      "trends/links"
     }
   }
 

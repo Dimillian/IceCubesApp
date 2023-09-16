@@ -15,7 +15,7 @@ public extension TextView {
   ///         .placeholder("placeholder") { view in
   ///             view.foregroundColor(.red)
   ///         }
-  func placeholder<V: View>(_ placeholder: String, _ configure: (Text) -> V) -> TextView {
+  func placeholder(_ placeholder: String, _ configure: (Text) -> some View) -> TextView {
     var view = self
     let text = Text(placeholder)
     view.placeholderView = AnyView(configure(text))
@@ -24,7 +24,7 @@ public extension TextView {
   }
 
   /// Specify a custom placeholder view
-  func placeholder<V: View>(_ placeholder: V) -> TextView {
+  func placeholder(_ placeholder: some View) -> TextView {
     var view = self
     view.placeholderView = AnyView(placeholder)
     return view

@@ -161,7 +161,7 @@ public struct StatusDetailView: View {
       .id(status.id)
       // VoiceOver / Switch Control focus workaround
       .onAppear {
-        self.initialFocusBugWorkaround = true
+        initialFocusBugWorkaround = true
       }
   }
 

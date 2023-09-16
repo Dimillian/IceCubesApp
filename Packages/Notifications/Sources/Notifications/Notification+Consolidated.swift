@@ -8,7 +8,7 @@
 import Foundation
 import Models
 
-extension Array where Element == Models.Notification {
+extension [Models.Notification] {
   func consolidated(selectedType: Models.Notification.NotificationType?) async -> [ConsolidatedNotification] {
     await withCheckedContinuation { result in
       DispatchQueue.global().async {

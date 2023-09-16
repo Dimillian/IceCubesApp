@@ -27,8 +27,8 @@ struct ConversationsListRow: View {
             .accessibilityHidden(true)
           VStack(alignment: .leading, spacing: 4) {
             HStack {
-              EmojiTextApp(.init(stringValue: conversation.accounts.map { $0.safeDisplayName }.joined(separator: ", ")),
-                           emojis: conversation.accounts.flatMap { $0.emojis })
+              EmojiTextApp(.init(stringValue: conversation.accounts.map(\.safeDisplayName).joined(separator: ", ")),
+                           emojis: conversation.accounts.flatMap(\.emojis))
                 .font(.scaledSubheadline)
                 .foregroundColor(theme.labelColor)
                 .emojiSize(Font.scaledSubheadlineFont.emojiSize)

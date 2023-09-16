@@ -32,9 +32,9 @@ struct IconSelectorView: View {
     var appIconName: String {
       switch self {
       case .primary:
-        return "AppIcon"
+        "AppIcon"
       default:
-        return "AppIconAlternate\(rawValue)"
+        "AppIconAlternate\(rawValue)"
       }
     }
 
@@ -120,6 +120,6 @@ struct IconSelectorView: View {
 
 extension String {
   var localized: String {
-    return NSLocalizedString(self, comment: "")
+    NSLocalizedString(self, comment: "")
   }
 }

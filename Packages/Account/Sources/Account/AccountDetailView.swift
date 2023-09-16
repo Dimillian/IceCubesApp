@@ -89,7 +89,7 @@ public struct AccountDetailView: View {
       viewModel.client = client
 
       // Avoid capturing non-Sendable `self` just to access the view model.
-      let viewModel = self.viewModel
+      let viewModel = viewModel
       Task {
         await withTaskGroup(of: Void.self) { group in
           group.addTask { await viewModel.fetchAccount() }
@@ -334,7 +334,7 @@ public struct AccountDetailView: View {
           } label: {
             Label("account.action.edit-info", systemImage: "pencil")
           }
-          
+
           Button {
             if let url = URL(string: "https://\(client.server)/settings/privacy") {
               openURL(url)

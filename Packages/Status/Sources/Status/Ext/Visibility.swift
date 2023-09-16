@@ -9,26 +9,26 @@ public extension Models.Visibility {
   var iconName: String {
     switch self {
     case .pub:
-      return "globe.americas"
+      "globe.americas"
     case .unlisted:
-      return "lock.open"
+      "lock.open"
     case .priv:
-      return "lock"
+      "lock"
     case .direct:
-      return "tray.full"
+      "tray.full"
     }
   }
 
   var title: LocalizedStringKey {
     switch self {
     case .pub:
-      return "status.visibility.public"
+      "status.visibility.public"
     case .unlisted:
-      return "status.visibility.unlisted"
+      "status.visibility.unlisted"
     case .priv:
-      return "status.visibility.follower"
+      "status.visibility.follower"
     case .direct:
-      return "status.visibility.direct"
+      "status.visibility.direct"
     }
   }
 }

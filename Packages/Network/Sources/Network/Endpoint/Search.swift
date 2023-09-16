@@ -6,7 +6,7 @@ public enum Search: Endpoint {
   public func path() -> String {
     switch self {
     case .search:
-      return "search"
+      "search"
     }
   }
 
