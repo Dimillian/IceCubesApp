@@ -32,8 +32,7 @@ import SwiftUI
   var isLoadingTranslation: Bool = false
   var showDeleteAlert: Bool = false
 
-  @ObservationIgnored
-  private var actionsAccountsFetched: Bool = false
+  private(set) var actionsAccountsFetched: Bool = false
   var favoriters: [Account] = []
   var rebloggers: [Account] = []
 
@@ -289,9 +288,15 @@ import SwiftUI
   func fetchActionsAccounts() async {
     guard !actionsAccountsFetched else { return }
     do {
-      favoriters = try await client.get(endpoint: Statuses.favoritedBy(id: status.id, maxId: nil))
-      rebloggers = try await client.get(endpoint: Statuses.rebloggedBy(id: status.id, maxId: nil))
-      actionsAccountsFetched = true
+      withAnimation(.snappy) {
+        actionsAccountsFetched = true
+      }
+      let favoriters: [Account] = try await client.get(endpoint: Statuses.favoritedBy(id: status.id, maxId: nil))
+      let rebloggers: [Account] = try await client.get(endpoint: Statuses.rebloggedBy(id: status.id, maxId: nil))
+      withAnimation(.snappy) {
+        self.favoriters = favoriters
+        self.rebloggers = rebloggers
+      }
     } catch {}
   }
 
