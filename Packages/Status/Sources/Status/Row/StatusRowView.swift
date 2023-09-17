@@ -99,8 +99,6 @@ public struct StatusRowView: View {
                 
                 if isFocused, isStatusDetailLoaded {
                   StatusRowDetailView(viewModel: viewModel)
-                    .transition(.move(edge: .bottom))
-                    .animation(.snappy, value: isStatusDetailLoaded)
                 }
               }
             }

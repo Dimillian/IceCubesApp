@@ -115,11 +115,13 @@ public struct StatusDetailView: View {
         .environment(\.isStatusFocused, isFocused)
         .environment(\.isStatusDetailLoaded, isFocused ? !self.viewModel.isLoadingContext : false)
         .overlay {
-          GeometryReader { reader in
-            VStack {}
-              .onAppear {
-                statusHeight = reader.size.height
-              }
+          if isFocused {
+            GeometryReader { reader in
+              VStack {}
+                .onAppear {
+                  statusHeight = reader.size.height
+                }
+            }
           }
         }
         .id(status.id)

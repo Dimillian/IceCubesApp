@@ -15,6 +15,12 @@ import SwiftUI
   let showActions: Bool
   let textDisabled: Bool
   let finalStatus: AnyStatus
+  
+  let client: Client
+  let routerPath: RouterPath
+  
+  private let theme = Theme.shared
+  private let userMentionned: Bool
 
   var isPinned: Bool
   var embeddedStatus: Status?
@@ -26,6 +32,7 @@ import SwiftUI
   var isLoadingTranslation: Bool = false
   var showDeleteAlert: Bool = false
 
+  @ObservationIgnored
   private var actionsAccountsFetched: Bool = false
   var favoriters: [Account] = []
   var rebloggers: [Account] = []
@@ -56,10 +63,13 @@ import SwiftUI
   // number of lines to show, nil means show the whole post
   var lineLimit: Int?
   // post length determining if the post should be collapsed
+  @ObservationIgnored
   let collapseThresholdLength: Int = 750
   // number of text lines to show on a collpased post
+  @ObservationIgnored
   let collapsedLines: Int = 8
   // user preference, set in init
+  @ObservationIgnored
   var collapseLongPosts: Bool = false
 
   private func recalcCollapse() {
@@ -72,9 +82,7 @@ import SwiftUI
     }
   }
 
-  private let theme = Theme.shared
-  private let userMentionned: Bool
-
+  @ObservationIgnored
   private var seen = false
 
   var filter: Filtered? {
@@ -95,9 +103,6 @@ import SwiftUI
       theme.primaryBackgroundColor
     }
   }
-
-  let client: Client
-  let routerPath: RouterPath
 
   public init(status: Status,
               client: Client,
