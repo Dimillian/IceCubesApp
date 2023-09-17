@@ -3,7 +3,7 @@ import Models
 import SwiftUI
 
 public struct FollowRequestButtons: View {
-  @EnvironmentObject private var currentAccount: CurrentAccount
+  @Environment(CurrentAccount.self) private var currentAccount
 
   let account: Account
   let requestUpdated: (() -> Void)?

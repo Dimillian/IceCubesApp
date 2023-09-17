@@ -7,7 +7,7 @@ import SwiftUI
 
 public struct StatusDetailView: View {
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var currentAccount: CurrentAccount
+  @Environment(CurrentAccount.self) private var currentAccount
   @Environment(StreamWatcher.self) private var watcher
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath

@@ -10,7 +10,7 @@ import Timeline
 struct TimelineTab: View {
   @Environment(AppAccountsManager.self) private var appAccount
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var currentAccount: CurrentAccount
+  @Environment(CurrentAccount.self) private var currentAccount
   @EnvironmentObject private var preferences: UserPreferences
   @Environment(Client.self) private var client
   @State private var routerPath = RouterPath()

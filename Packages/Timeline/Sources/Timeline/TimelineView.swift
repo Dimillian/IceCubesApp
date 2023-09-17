@@ -14,7 +14,7 @@ public struct TimelineView: View {
 
   @Environment(\.scenePhase) private var scenePhase
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var account: CurrentAccount
+ @Environment(CurrentAccount.self) private var account
   @Environment(StreamWatcher.self) private var watcher
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath

@@ -11,9 +11,9 @@ struct AccountSettingsView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(\.openURL) private var openURL
 
-  @EnvironmentObject private var pushNotifications: PushNotificationsService
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var currentInstance: CurrentInstance
+  @Environment(PushNotificationsService.self) private var pushNotifications
+  @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(CurrentInstance.self) private var currentInstance
   @EnvironmentObject private var theme: Theme
   @Environment(AppAccountsManager.self) private var appAccountsManager
   @Environment(Client.self) private var client

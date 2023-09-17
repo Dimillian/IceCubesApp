@@ -12,7 +12,7 @@ struct MessagesTab: View {
   @EnvironmentObject private var theme: Theme
   @Environment(StreamWatcher.self) private var watcher
   @Environment(Client.self) private var client
-  @EnvironmentObject private var currentAccount: CurrentAccount
+  @Environment(CurrentAccount.self) private var currentAccount
   @Environment(AppAccountsManager.self) private var appAccount
   @State private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab

@@ -4,7 +4,7 @@ import SwiftUI
 
 public struct AppAccountsSelectorView: View {
   @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var currentAccount: CurrentAccount
+  @Environment(CurrentAccount.self) private var currentAccount
   @Environment(AppAccountsManager.self) private var appAccounts
   @EnvironmentObject private var theme: Theme
 

@@ -11,7 +11,7 @@ public struct NotificationsListView: View {
   @Environment(StreamWatcher.self) private var watcher
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath
-  @EnvironmentObject private var account: CurrentAccount
+ @Environment(CurrentAccount.self) private var account
   @StateObject private var viewModel = NotificationsViewModel()
 
   let lockedType: Models.Notification.NotificationType?

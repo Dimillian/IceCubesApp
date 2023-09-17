@@ -2,10 +2,11 @@ import Combine
 import Foundation
 import Models
 import Network
+import Observation
 
 @MainActor
-public class CurrentInstance: ObservableObject {
-  @Published public private(set) var instance: Instance?
+@Observable public class CurrentInstance {
+  public private(set) var instance: Instance?
 
   private var client: Client?
 

@@ -12,7 +12,7 @@ public struct ConversationDetailView: View {
 
   @EnvironmentObject private var quickLook: QuickLook
   @Environment(RouterPath.self) private var routerPath
-  @EnvironmentObject private var currentAccount: CurrentAccount
+  @Environment(CurrentAccount.self) private var currentAccount
   @Environment(Client.self) private var client
   @EnvironmentObject private var theme: Theme
   @Environment(StreamWatcher.self) private var watcher

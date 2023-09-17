@@ -22,7 +22,7 @@ import Observation
 
 public struct AccountsListRow: View {
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var currentAccount: CurrentAccount
+  @Environment(CurrentAccount.self) private var currentAccount
   @Environment(RouterPath.self) private var routerPath
   @Environment(Client.self) private var client
 
@@ -118,7 +118,7 @@ public struct AccountsListRow: View {
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
       .environmentObject(theme)
-      .environmentObject(currentAccount)
+      .environment(currentAccount)
       .environment(client)
     }
   }

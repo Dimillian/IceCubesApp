@@ -8,7 +8,7 @@ import SwiftUI
 public struct AccountsListView: View {
   @EnvironmentObject private var theme: Theme
   @Environment(Client.self) private var client
-  @EnvironmentObject private var currentAccount: CurrentAccount
+  @Environment(CurrentAccount.self) private var currentAccount
   @State private var viewModel: AccountsListViewModel
   @State private var didAppear: Bool = false
 

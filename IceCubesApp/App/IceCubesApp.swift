@@ -16,10 +16,10 @@ struct IceCubesApp: App {
   @Environment(\.scenePhase) private var scenePhase
 
   @State private var appAccountsManager = AppAccountsManager.shared
-  @StateObject private var currentInstance = CurrentInstance.shared
-  @StateObject private var currentAccount = CurrentAccount.shared
+  @State private var currentInstance = CurrentInstance.shared
+  @State private var currentAccount = CurrentAccount.shared
   @StateObject private var userPreferences = UserPreferences.shared
-  @StateObject private var pushNotificationsService = PushNotificationsService.shared
+  @State private var pushNotificationsService = PushNotificationsService.shared
   @State private var watcher = StreamWatcher()
   @StateObject private var quickLook = QuickLook()
   @StateObject private var theme = Theme.shared
@@ -46,12 +46,12 @@ struct IceCubesApp: App {
         .environment(appAccountsManager)
         .environment(appAccountsManager.currentClient)
         .environmentObject(quickLook)
-        .environmentObject(currentAccount)
-        .environmentObject(currentInstance)
+        .environment(currentAccount)
+        .environment(currentInstance)
         .environmentObject(userPreferences)
         .environmentObject(theme)
         .environment(watcher)
-        .environmentObject(pushNotificationsService)
+        .environment(pushNotificationsService)
         .environment(\.isSupporter, isSupporter)
         .fullScreenCover(item: $quickLook.url, content: { url in
           QuickLookPreview(selectedURL: url, urls: quickLook.urls)

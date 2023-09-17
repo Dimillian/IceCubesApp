@@ -15,9 +15,9 @@ struct NotificationsTab: View {
   @Environment(Client.self) private var client
   @Environment(StreamWatcher.self) private var watcher
   @Environment(AppAccountsManager.self) private var appAccount
-  @EnvironmentObject private var currentAccount: CurrentAccount
+  @Environment(CurrentAccount.self) private var currentAccount
   @EnvironmentObject private var userPreferences: UserPreferences
-  @EnvironmentObject private var pushNotificationsService: PushNotificationsService
+  @Environment(PushNotificationsService.self) private var pushNotificationsService
   @State private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab
 

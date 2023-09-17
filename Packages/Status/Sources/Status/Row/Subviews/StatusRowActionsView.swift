@@ -6,7 +6,7 @@ import SwiftUI
 
 struct StatusRowActionsView: View {
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var currentAccount: CurrentAccount
+  @Environment(CurrentAccount.self) private var currentAccount
   @EnvironmentObject private var statusDataController: StatusDataController
   @EnvironmentObject private var userPreferences: UserPreferences
   

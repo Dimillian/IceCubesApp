@@ -7,8 +7,8 @@ import SwiftUI
 public struct StatusPollView: View {
   @EnvironmentObject private var theme: Theme
   @Environment(Client.self) private var client
-  @EnvironmentObject private var currentInstance: CurrentInstance
-  @EnvironmentObject private var currentAccount: CurrentAccount
+  @Environment(CurrentInstance.self) private var currentInstance
+  @Environment(CurrentAccount.self) private var currentAccount
   
   @State private var viewModel: StatusPollViewModel
 

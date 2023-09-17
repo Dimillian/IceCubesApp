@@ -14,9 +14,9 @@ struct AddAccountView: View {
   @Environment(\.scenePhase) private var scenePhase
 
   @Environment(AppAccountsManager.self) private var appAccountsManager
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var currentInstance: CurrentInstance
-  @EnvironmentObject private var pushNotifications: PushNotificationsService
+  @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(CurrentInstance.self) private var currentInstance
+  @Environment(PushNotificationsService.self) private var pushNotifications
   @EnvironmentObject private var theme: Theme
 
   @State private var instanceName: String = ""

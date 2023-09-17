@@ -5,7 +5,7 @@ import SwiftUI
 public struct AccountDetailContextMenu: View {
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath
-  @EnvironmentObject private var currentInstance: CurrentInstance
+  @Environment(CurrentInstance.self) private var currentInstance
   @EnvironmentObject private var preferences: UserPreferences
 
   var viewModel: AccountDetailViewModel

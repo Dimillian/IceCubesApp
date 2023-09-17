@@ -9,7 +9,7 @@ struct ConversationsListRow: View {
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var currentAccount: CurrentAccount
+  @Environment(CurrentAccount.self) private var currentAccount
 
   @Binding var conversation: Conversation
   @ObservedObject var viewModel: ConversationsListViewModel

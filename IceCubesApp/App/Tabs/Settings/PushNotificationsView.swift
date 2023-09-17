@@ -10,7 +10,7 @@ import UserNotifications
 struct PushNotificationsView: View {
   @EnvironmentObject private var theme: Theme
   @Environment(AppAccountsManager.self) private var appAccountsManager
-  @EnvironmentObject private var pushNotifications: PushNotificationsService
+  @Environment(PushNotificationsService.self) private var pushNotifications
 
   @StateObject public var subscription: PushNotificationSubscriptionSettings
 

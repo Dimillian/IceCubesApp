@@ -12,8 +12,8 @@ public struct AccountDetailView: View {
   @Environment(\.redactionReasons) private var reasons
 
   @Environment(StreamWatcher.self) private var watcher
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var currentInstance: CurrentInstance
+  @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(CurrentInstance.self) private var currentInstance
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
   @Environment(Client.self) private var client

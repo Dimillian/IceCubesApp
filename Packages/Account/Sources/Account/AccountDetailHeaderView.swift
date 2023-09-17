@@ -14,7 +14,7 @@ struct AccountDetailHeaderView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var quickLook: QuickLook
   @Environment(RouterPath.self) private var routerPath
-  @EnvironmentObject private var currentAccount: CurrentAccount
+  @Environment(CurrentAccount.self) private var currentAccount
   @Environment(\.redactionReasons) private var reasons
   @Environment(\.isSupporter) private var isSupporter: Bool
 

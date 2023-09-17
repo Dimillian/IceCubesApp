@@ -7,7 +7,7 @@ import SwiftUI
 
 struct SideBarView<Content: View>: View {
   @Environment(AppAccountsManager.self) private var appAccounts
-  @EnvironmentObject private var currentAccount: CurrentAccount
+  @Environment(CurrentAccount.self) private var currentAccount
   @EnvironmentObject private var theme: Theme
   @Environment(StreamWatcher.self) private var watcher
   @EnvironmentObject private var userPreferences: UserPreferences

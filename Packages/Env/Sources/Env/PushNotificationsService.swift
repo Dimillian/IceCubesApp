@@ -6,6 +6,7 @@ import Models
 import Network
 import SwiftUI
 import UserNotifications
+import Observation
 
 extension UNNotificationResponse: @unchecked Sendable {}
 extension UNUserNotificationCenter: @unchecked Sendable {}
@@ -28,7 +29,7 @@ public struct HandledNotification: Equatable {
 }
 
 @MainActor
-public class PushNotificationsService: NSObject, ObservableObject {
+@Observable public class PushNotificationsService: NSObject {
   enum Constants {
     static let endpoint = "https://icecubesrelay.fly.dev"
     static let keychainAuthKey = "notifications_auth_key"
@@ -39,9 +40,9 @@ public class PushNotificationsService: NSObject, ObservableObject {
 
   public private(set) var subscriptions: [PushNotificationSubscriptionSettings] = []
 
-  @Published public var pushToken: Data?
+  public var pushToken: Data?
 
-  @Published public var handledNotification: HandledNotification?
+  public var handledNotification: HandledNotification?
 
   override init() {
     super.init()

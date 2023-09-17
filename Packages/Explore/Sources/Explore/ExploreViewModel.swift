@@ -1,10 +1,10 @@
-import Combine
 import Models
 import Network
 import SwiftUI
+import Observation
 
 @MainActor
-class ExploreViewModel: ObservableObject {
+@Observable class ExploreViewModel {
   enum SearchScope: String, CaseIterable {
     case all, people, hashtags, posts
 
@@ -39,34 +39,25 @@ class ExploreViewModel: ObservableObject {
     trendingLinks.isEmpty && trendingTags.isEmpty && trendingStatuses.isEmpty && suggestedAccounts.isEmpty
   }
 
-  @Published var searchQuery = "" {
+  var searchQuery = "" {
     didSet {
       isSearching = true
     }
   }
 
-  @Published var results: [String: SearchResults] = [:]
-  @Published var isLoaded = false
-  @Published var isSearching = false
-  @Published var suggestedAccounts: [Account] = []
-  @Published var suggestedAccountsRelationShips: [Relationship] = []
-  @Published var trendingTags: [Tag] = []
-  @Published var trendingStatuses: [Status] = []
-  @Published var trendingLinks: [Card] = []
-  @Published var searchScope: SearchScope = .all
+  var results: [String: SearchResults] = [:]
+  var isLoaded = false
+  var isSearching = false
+  var suggestedAccounts: [Account] = []
+  var suggestedAccountsRelationShips: [Relationship] = []
+  var trendingTags: [Tag] = []
+  var trendingStatuses: [Status] = []
+  var trendingLinks: [Card] = []
+  var searchScope: SearchScope = .all
 
   private var searchTask: Task<Void, Never>?
-  private var cancellables = Set<AnyCancellable>()
-
-  init() {
-    $searchQuery
-      .removeDuplicates()
-      .debounce(for: .milliseconds(250), scheduler: DispatchQueue.main)
-      .sink(receiveValue: { [weak self] _ in
-        self?.search()
-      })
-      .store(in: &cancellables)
-  }
+  
+  init() { }
 
   func fetchTrending() async {
     guard let client else { return }
@@ -112,6 +103,7 @@ class ExploreViewModel: ObservableObject {
     searchTask = Task {
       guard let client else { return }
       do {
+        try await Task.sleep(for: .milliseconds(250))
         var results: SearchResults = try await client.get(endpoint: Search.search(query: searchQuery,
                                                                                   type: nil,
                                                                                   offset: nil,

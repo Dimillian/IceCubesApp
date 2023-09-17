@@ -12,7 +12,7 @@ public struct ExploreView: View {
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath
 
-  @StateObject private var viewModel = ExploreViewModel()
+  @State private var viewModel = ExploreViewModel()
 
   public init() {}
 
@@ -87,6 +87,11 @@ public struct ExploreView: View {
     .searchScopes($viewModel.searchScope) {
       ForEach(ExploreViewModel.SearchScope.allCases, id: \.self) { scope in
         Text(scope.localizedString)
+      }
+    }
+    .onChange(of: viewModel.searchQuery) { oldValue, newValue in
+      if oldValue != newValue {
+        viewModel.search()
       }
     }
   }

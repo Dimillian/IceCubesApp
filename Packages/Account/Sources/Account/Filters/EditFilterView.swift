@@ -8,7 +8,7 @@ struct EditFilterView: View {
   @Environment(\.dismiss) private var dismiss
 
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var account: CurrentAccount
+ @Environment(CurrentAccount.self) private var account
   @Environment(Client.self) private var client
 
   @State private var isSavingFilter: Bool = false

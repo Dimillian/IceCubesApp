@@ -12,7 +12,7 @@ struct ProfileTab: View {
   @Environment(AppAccountsManager.self) private var appAccount
   @EnvironmentObject private var theme: Theme
   @Environment(Client.self) private var client
-  @EnvironmentObject private var currentAccount: CurrentAccount
+  @Environment(CurrentAccount.self) private var currentAccount
   @State private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab
 

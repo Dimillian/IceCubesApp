@@ -12,10 +12,10 @@ import Timeline
 struct SettingsTabs: View {
   @Environment(\.dismiss) private var dismiss
 
-  @EnvironmentObject private var pushNotifications: PushNotificationsService
+  @Environment(PushNotificationsService.self) private var pushNotifications
   @EnvironmentObject private var preferences: UserPreferences
   @Environment(Client.self) private var client
-  @EnvironmentObject private var currentInstance: CurrentInstance
+  @Environment(CurrentInstance.self) private var currentInstance
   @Environment(AppAccountsManager.self) private var appAccountsManager
   @EnvironmentObject private var theme: Theme
 

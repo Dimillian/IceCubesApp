@@ -10,7 +10,7 @@ import SwiftUI
 struct ExploreTab: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var currentAccount: CurrentAccount
+  @Environment(CurrentAccount.self) private var currentAccount
   @Environment(Client.self) private var client
   @State private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab

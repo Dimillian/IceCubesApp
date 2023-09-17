@@ -6,7 +6,7 @@ import SwiftUI
 struct StatusRowSwipeView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var currentAccount: CurrentAccount
+  @Environment(CurrentAccount.self) private var currentAccount
   @EnvironmentObject private var statusDataController: StatusDataController
 
   enum Mode {
