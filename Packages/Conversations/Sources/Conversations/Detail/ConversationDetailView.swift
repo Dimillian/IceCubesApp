@@ -10,14 +10,14 @@ public struct ConversationDetailView: View {
     static let bottomAnchor = "bottom"
   }
 
-  @EnvironmentObject private var quickLook: QuickLook
+  @Environment(QuickLook.self) private var quickLook
   @Environment(RouterPath.self) private var routerPath
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(Client.self) private var client
   @EnvironmentObject private var theme: Theme
   @Environment(StreamWatcher.self) private var watcher
 
-  @StateObject private var viewModel: ConversationDetailViewModel
+  @State private var viewModel: ConversationDetailViewModel
 
   @FocusState private var isMessageFieldFocused: Bool
 
@@ -25,7 +25,7 @@ public struct ConversationDetailView: View {
   @State private var didAppear: Bool = false
 
   public init(conversation: Conversation) {
-    _viewModel = StateObject(wrappedValue: .init(conversation: conversation))
+    _viewModel = .init(initialValue: .init(conversation: conversation))
   }
 
   public var body: some View {

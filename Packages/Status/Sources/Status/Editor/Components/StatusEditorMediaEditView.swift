@@ -8,7 +8,7 @@ struct StatusEditorMediaEditView: View {
   @Environment(\.dismiss) private var dismiss
   @EnvironmentObject private var theme: Theme
   @Environment(CurrentInstance.self) private var currentInstance
-  @ObservedObject var viewModel: StatusEditorViewModel
+  var viewModel: StatusEditorViewModel
   let container: StatusEditorMediaContainer
 
   @State private var imageDescription: String = ""

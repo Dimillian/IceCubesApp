@@ -5,7 +5,7 @@ import SwiftUI
 
 struct StatusEditorAutoCompleteView: View {
   @EnvironmentObject private var theme: Theme
-  @ObservedObject var viewModel: StatusEditorViewModel
+  var viewModel: StatusEditorViewModel
 
   var body: some View {
     if !viewModel.mentionsSuggestions.isEmpty || !viewModel.tagsSuggestions.isEmpty {

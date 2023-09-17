@@ -12,7 +12,7 @@ public struct StatusDetailView: View {
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath
 
-  @StateObject private var viewModel: StatusDetailViewModel
+  @State private var viewModel: StatusDetailViewModel
 
   @State private var isLoaded: Bool = false
   @State private var statusHeight: CGFloat = 0
@@ -22,15 +22,15 @@ public struct StatusDetailView: View {
   @AccessibilityFocusState private var initialFocusBugWorkaround: Bool
 
   public init(statusId: String) {
-    _viewModel = StateObject(wrappedValue: { .init(statusId: statusId) }())
+    _viewModel = .init(wrappedValue: .init(statusId: statusId))
   }
 
   public init(status: Status) {
-    _viewModel = StateObject(wrappedValue: { .init(status: status) }())
+    _viewModel = .init(wrappedValue: .init(status: status))
   }
 
   public init(remoteStatusURL: URL) {
-    _viewModel = StateObject(wrappedValue: { .init(remoteStatusURL: remoteStatusURL) }())
+    _viewModel = .init(wrappedValue: .init(remoteStatusURL: remoteStatusURL))
   }
 
   public var body: some View {

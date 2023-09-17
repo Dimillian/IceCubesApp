@@ -11,9 +11,9 @@ public struct StatusRowMediaPreviewView: View {
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
   @Environment(\.isCompact) private var isCompact: Bool
 
-  @EnvironmentObject var sceneDelegate: SceneDelegate
+  @Environment(SceneDelegate.self) private var sceneDelegate
   @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var quickLook: QuickLook
+  @Environment(QuickLook.self) private var quickLook
   @EnvironmentObject private var theme: Theme
 
   public let attachments: [MediaAttachment]

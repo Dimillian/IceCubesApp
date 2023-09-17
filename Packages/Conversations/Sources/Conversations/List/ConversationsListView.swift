@@ -12,7 +12,7 @@ public struct ConversationsListView: View {
   @Environment(Client.self) private var client
   @EnvironmentObject private var theme: Theme
 
-  @StateObject private var viewModel = ConversationsListViewModel()
+  @State private var viewModel = ConversationsListViewModel()
 
   public init() {}
 

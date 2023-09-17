@@ -12,7 +12,7 @@ struct ConversationsListRow: View {
   @Environment(CurrentAccount.self) private var currentAccount
 
   @Binding var conversation: Conversation
-  @ObservedObject var viewModel: ConversationsListViewModel
+  var viewModel: ConversationsListViewModel
 
   var body: some View {
     Button {

@@ -5,7 +5,7 @@ import Network
 import SwiftUI
 
 @MainActor
-class StatusDetailViewModel: ObservableObject {
+@Observable class StatusDetailViewModel {
   public var statusId: String?
   public var remoteStatusURL: URL?
 
@@ -16,10 +16,10 @@ class StatusDetailViewModel: ObservableObject {
     case loading, display(statuses: [Status], date: Date), error(error: Error)
   }
 
-  @Published var state: State = .loading
-  @Published var isLoadingContext = true
-  @Published var title: LocalizedStringKey = ""
-  @Published var scrollToId: String?
+  var state: State = .loading
+  var isLoadingContext = true
+  var title: LocalizedStringKey = ""
+  var scrollToId: String?
 
   init(statusId: String) {
     state = .loading

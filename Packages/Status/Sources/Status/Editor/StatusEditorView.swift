@@ -20,14 +20,14 @@ public struct StatusEditorView: View {
   @Environment(RouterPath.self) private var routerPath
   @Environment(\.dismiss) private var dismiss
 
-  @StateObject private var viewModel: StatusEditorViewModel
+  @State private var viewModel: StatusEditorViewModel
   @FocusState private var isSpoilerTextFocused: Bool
 
   @State private var isDismissAlertPresented: Bool = false
   @State private var isLanguageConfirmPresented = false
 
   public init(mode: StatusEditorViewModel.Mode) {
-    _viewModel = StateObject(wrappedValue: .init(mode: mode))
+    _viewModel = .init(initialValue: .init(mode: mode))
   }
 
   public var body: some View {

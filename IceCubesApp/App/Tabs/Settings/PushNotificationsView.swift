@@ -12,7 +12,7 @@ struct PushNotificationsView: View {
   @Environment(AppAccountsManager.self) private var appAccountsManager
   @Environment(PushNotificationsService.self) private var pushNotifications
 
-  @StateObject public var subscription: PushNotificationSubscriptionSettings
+  @State public var subscription: PushNotificationSubscriptionSettings
 
   var body: some View {
     Form {

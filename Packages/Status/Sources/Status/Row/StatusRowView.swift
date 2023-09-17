@@ -14,7 +14,7 @@ public struct StatusRowView: View {
   @Environment(\.accessibilityVoiceOverEnabled) private var accessibilityVoiceOverEnabled
   @Environment(\.isStatusFocused) private var isFocused
 
-  @EnvironmentObject private var quickLook: QuickLook
+  @Environment(QuickLook.self) private var quickLook
   @EnvironmentObject private var theme: Theme
 
   @State var viewModel: StatusRowViewModel

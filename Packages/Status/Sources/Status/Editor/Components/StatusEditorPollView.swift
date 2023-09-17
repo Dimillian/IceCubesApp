@@ -14,13 +14,13 @@ struct StatusEditorPollView: View {
   @EnvironmentObject private var theme: Theme
   @Environment(CurrentInstance.self) private var currentInstance
 
-  @ObservedObject var viewModel: StatusEditorViewModel
+  var viewModel: StatusEditorViewModel
 
   @Binding var showPoll: Bool
 
   var body: some View {
+    @Bindable var viewModel = viewModel
     let count = viewModel.pollOptions.count
-
     VStack {
       ForEach(0 ..< count, id: \.self) { index in
         VStack {

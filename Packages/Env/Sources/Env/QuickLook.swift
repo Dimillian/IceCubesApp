@@ -3,8 +3,8 @@ import Combine
 import SwiftUI
 
 @MainActor
-public class QuickLook: ObservableObject {
-  @Published public var url: URL? {
+@Observable public class QuickLook {
+  public var url: URL? {
     didSet {
       if url == nil {
         cleanup(urls: urls)
@@ -12,9 +12,9 @@ public class QuickLook: ObservableObject {
     }
   }
 
-  @Published public private(set) var urls: [URL] = []
-  @Published public private(set) var isPreparing: Bool = false
-  @Published public private(set) var latestError: Error?
+  public private(set) var urls: [URL] = []
+  public private(set) var isPreparing: Bool = false
+  public private(set) var latestError: Error?
 
   public init() {}
 

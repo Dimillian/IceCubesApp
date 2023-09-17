@@ -21,7 +21,7 @@ struct IceCubesApp: App {
   @StateObject private var userPreferences = UserPreferences.shared
   @State private var pushNotificationsService = PushNotificationsService.shared
   @State private var watcher = StreamWatcher()
-  @StateObject private var quickLook = QuickLook()
+  @State private var quickLook = QuickLook()
   @StateObject private var theme = Theme.shared
   @State private var sidebarRouterPath = RouterPath()
 
@@ -45,7 +45,7 @@ struct IceCubesApp: App {
         }
         .environment(appAccountsManager)
         .environment(appAccountsManager.currentClient)
-        .environmentObject(quickLook)
+        .environment(quickLook)
         .environment(currentAccount)
         .environment(currentInstance)
         .environmentObject(userPreferences)

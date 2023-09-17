@@ -8,9 +8,9 @@ struct StatusRowContextMenu: View {
   @Environment(\.displayScale) var displayScale
 
   @Environment(Client.self) private var client
-  @EnvironmentObject private var sceneDelegate: SceneDelegate
+  @Environment(SceneDelegate.self) private var sceneDelegate
   @EnvironmentObject private var preferences: UserPreferences
- @Environment(CurrentAccount.self) private var account
+  @Environment(CurrentAccount.self) private var account
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(StatusDataController.self) private var statusDataController
 
@@ -89,8 +89,8 @@ struct StatusRowContextMenu: View {
           .environmentObject(preferences)
           .environment(account)
           .environment(currentInstance)
-          .environmentObject(SceneDelegate())
-          .environmentObject(QuickLook())
+          .environment(SceneDelegate())
+          .environment(QuickLook())
           .environment(viewModel.client)
           .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
           .foregroundColor(Theme.shared.labelColor)

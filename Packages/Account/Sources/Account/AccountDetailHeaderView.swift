@@ -12,7 +12,7 @@ struct AccountDetailHeaderView: View {
   }
 
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var quickLook: QuickLook
+  @Environment(QuickLook.self) private var quickLook
   @Environment(RouterPath.self) private var routerPath
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(\.redactionReasons) private var reasons
