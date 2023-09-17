@@ -7,7 +7,7 @@ struct StatusRowSwipeView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var preferences: UserPreferences
   @Environment(CurrentAccount.self) private var currentAccount
-  @EnvironmentObject private var statusDataController: StatusDataController
+  @Environment(StatusDataController.self) private var statusDataController
 
   enum Mode {
     case leading, trailing

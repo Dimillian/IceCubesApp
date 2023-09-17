@@ -12,7 +12,7 @@ struct StatusRowContextMenu: View {
   @EnvironmentObject private var preferences: UserPreferences
  @Environment(CurrentAccount.self) private var account
   @Environment(CurrentInstance.self) private var currentInstance
-  @EnvironmentObject private var statusDataController: StatusDataController
+  @Environment(StatusDataController.self) private var statusDataController
 
   var viewModel: StatusRowViewModel
 

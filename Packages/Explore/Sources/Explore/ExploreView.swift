@@ -89,10 +89,11 @@ public struct ExploreView: View {
         Text(scope.localizedString)
       }
     }
-    .onChange(of: viewModel.searchQuery) { oldValue, newValue in
-      if oldValue != newValue {
-        viewModel.search()
-      }
+    .task(id: viewModel.searchQuery) {
+      do {
+        try await Task.sleep(for: .milliseconds(150))
+        await viewModel.search()
+      } catch { }
     }
   }
 

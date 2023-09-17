@@ -9,10 +9,10 @@ public struct ListEditView: View {
   @EnvironmentObject private var theme: Theme
   @Environment(Client.self) private var client
 
-  @StateObject private var viewModel: ListEditViewModel
+  @State private var viewModel: ListEditViewModel
 
   public init(list: Models.List) {
-    _viewModel = StateObject(wrappedValue: .init(list: list))
+    _viewModel = .init(initialValue: .init(list: list))
   }
 
   public var body: some View {

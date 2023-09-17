@@ -7,7 +7,7 @@ import SwiftUI
 struct StatusRowActionsView: View {
   @EnvironmentObject private var theme: Theme
   @Environment(CurrentAccount.self) private var currentAccount
-  @EnvironmentObject private var statusDataController: StatusDataController
+  @Environment(StatusDataController.self) private var statusDataController
   @EnvironmentObject private var userPreferences: UserPreferences
   
   @Environment(\.isStatusFocused) private var isFocused

@@ -3,6 +3,7 @@ import NukeUI
 import Shimmer
 import SwiftUI
 
+@MainActor
 public struct AvatarView: View {
   @Environment(\.redactionReasons) private var reasons
   @EnvironmentObject private var theme: Theme

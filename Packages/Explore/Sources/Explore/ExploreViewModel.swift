@@ -54,8 +54,6 @@ import Observation
   var trendingStatuses: [Status] = []
   var trendingLinks: [Card] = []
   var searchScope: SearchScope = .all
-
-  private var searchTask: Task<Void, Never>?
   
   init() { }
 
@@ -95,30 +93,24 @@ import Observation
                            trendingLinks: trendingLinks)
   }
 
-  func search() {
-    guard !searchQuery.isEmpty else { return }
-    isSearching = true
-    searchTask?.cancel()
-    searchTask = nil
-    searchTask = Task {
-      guard let client else { return }
-      do {
-        try await Task.sleep(for: .milliseconds(250))
-        var results: SearchResults = try await client.get(endpoint: Search.search(query: searchQuery,
-                                                                                  type: nil,
-                                                                                  offset: nil,
-                                                                                  following: nil),
-                                                          forceVersion: .v2)
-        let relationships: [Relationship] =
-          try await client.get(endpoint: Accounts.relationships(ids: results.accounts.map(\.id)))
-        results.relationships = relationships
-        withAnimation {
-          self.results[searchQuery] = results
-          isSearching = false
-        }
-      } catch {
+  func search() async {
+    guard let client else { return }
+    do {
+      try await Task.sleep(for: .milliseconds(250))
+      var results: SearchResults = try await client.get(endpoint: Search.search(query: searchQuery,
+                                                                                type: nil,
+                                                                                offset: nil,
+                                                                                following: nil),
+                                                        forceVersion: .v2)
+      let relationships: [Relationship] =
+        try await client.get(endpoint: Accounts.relationships(ids: results.accounts.map(\.id)))
+      results.relationships = relationships
+      withAnimation {
+        self.results[searchQuery] = results
         isSearching = false
       }
+    } catch {
+      isSearching = false
     }
   }
 }

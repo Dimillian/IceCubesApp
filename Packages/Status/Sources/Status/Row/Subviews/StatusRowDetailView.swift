@@ -3,10 +3,11 @@ import Env
 import Models
 import SwiftUI
 
+@MainActor
 struct StatusRowDetailView: View {
   @Environment(\.openURL) private var openURL
 
-  @EnvironmentObject private var statusDataController: StatusDataController
+  @Environment(StatusDataController.self) private var statusDataController
 
   var viewModel: StatusRowViewModel
 

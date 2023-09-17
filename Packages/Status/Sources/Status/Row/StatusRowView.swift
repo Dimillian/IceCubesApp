@@ -167,7 +167,7 @@ public struct StatusRowView: View {
     .alignmentGuide(.listRowSeparatorLeading) { _ in
       -100
     }
-    .environmentObject(
+    .environment(
       StatusDataControllerProvider.shared.dataController(for: viewModel.finalStatus,
                                                          client: viewModel.client)
     )

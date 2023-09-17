@@ -2,9 +2,10 @@ import Foundation
 import Models
 import Network
 import SwiftUI
+import Observation
 
 @MainActor
-public protocol StatusDataControlling: ObservableObject {
+public protocol StatusDataControlling {
   var isReblogged: Bool { get set }
   var isBookmarked: Bool { get set }
   var isFavorited: Bool { get set }
@@ -43,13 +44,13 @@ public final class StatusDataControllerProvider {
     for status in statuses {
       let realStatus: AnyStatus = status.reblog ?? status
       let controller = dataController(for: realStatus, client: client)
-      controller.updateFrom(status: realStatus, publishUpdate: false)
+      controller.updateFrom(status: realStatus)
     }
   }
 }
 
 @MainActor
-public final class StatusDataController: StatusDataControlling {
+@Observable public final class StatusDataController: StatusDataControlling {
   private let status: AnyStatus
   private let client: Client
 
@@ -74,7 +75,7 @@ public final class StatusDataController: StatusDataControlling {
     favoritesCount = status.favouritesCount
   }
 
-  public func updateFrom(status: AnyStatus, publishUpdate: Bool) {
+  public func updateFrom(status: AnyStatus) {
     isReblogged = status.reblogged == true
     isBookmarked = status.bookmarked == true
     isFavorited = status.favourited == true
@@ -82,10 +83,6 @@ public final class StatusDataController: StatusDataControlling {
     reblogsCount = status.reblogsCount
     repliesCount = status.repliesCount
     favoritesCount = status.favouritesCount
-
-    if publishUpdate {
-      objectWillChange.send()
-    }
   }
 
   public func toggleFavorite(remoteStatus: String?) async {
@@ -94,14 +91,12 @@ public final class StatusDataController: StatusDataControlling {
     let id = remoteStatus ?? status.id
     let endpoint = isFavorited ? Statuses.favorite(id: id) : Statuses.unfavorite(id: id)
     favoritesCount += isFavorited ? 1 : -1
-    objectWillChange.send()
     do {
       let status: Status = try await client.post(endpoint: endpoint)
-      updateFrom(status: status, publishUpdate: true)
+      updateFrom(status: status)
     } catch {
       isFavorited.toggle()
       favoritesCount += isFavorited ? -1 : 1
-      objectWillChange.send()
     }
   }
 
@@ -111,14 +106,12 @@ public final class StatusDataController: StatusDataControlling {
     let id = remoteStatus ?? status.id
     let endpoint = isReblogged ? Statuses.reblog(id: id) : Statuses.unreblog(id: id)
     reblogsCount += isReblogged ? 1 : -1
-    objectWillChange.send()
     do {
       let status: Status = try await client.post(endpoint: endpoint)
-      updateFrom(status: status.reblog ?? status, publishUpdate: true)
+      updateFrom(status: status.reblog ?? status)
     } catch {
       isReblogged.toggle()
       reblogsCount += isReblogged ? -1 : 1
-      objectWillChange.send()
     }
   }
 
@@ -127,13 +120,11 @@ public final class StatusDataController: StatusDataControlling {
     isBookmarked.toggle()
     let id = remoteStatus ?? status.id
     let endpoint = isBookmarked ? Statuses.bookmark(id: id) : Statuses.unbookmark(id: id)
-    objectWillChange.send()
     do {
       let status: Status = try await client.post(endpoint: endpoint)
-      updateFrom(status: status, publishUpdate: true)
+      updateFrom(status: status)
     } catch {
       isBookmarked.toggle()
-      objectWillChange.send()
     }
   }
 }
