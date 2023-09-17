@@ -17,9 +17,10 @@ import SwiftUI
   }
 
   var state: State = .loading
-  var isLoadingContext = true
   var title: LocalizedStringKey = ""
   var scrollToId: String?
+  
+  @ObservationIgnored
   var isReplyToPreviousCache: [String: Bool] = [:]
 
   init(statusId: String) {
@@ -75,7 +76,6 @@ import SwiftUI
   private func fetchStatusDetail(animate: Bool) async {
     guard let client, let statusId else { return }
     do {
-      isLoadingContext = true
       let data = try await fetchContextData(client: client, statusId: statusId)
       title = "status.post-from-\(data.status.account.displayNameWithoutEmojis)"
       var statuses = data.context.ancestors
@@ -87,11 +87,9 @@ import SwiftUI
       if animate {
         withAnimation {
           state = .display(statuses: statuses)
-          isLoadingContext = false
         }
       } else {
         state = .display(statuses: statuses)
-        isLoadingContext = false
         scrollToId = statusId
       }
     } catch {

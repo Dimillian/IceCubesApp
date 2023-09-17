@@ -13,7 +13,6 @@ public struct StatusRowView: View {
   @Environment(\.isCompact) private var isCompact: Bool
   @Environment(\.accessibilityVoiceOverEnabled) private var accessibilityVoiceOverEnabled
   @Environment(\.isStatusFocused) private var isFocused
-  @Environment(\.isStatusDetailLoaded) private var isStatusDetailLoaded
   @Environment(\.isStatusReplyToPrevious) private var isStatusReplyToPrevious
 
   @Environment(QuickLook.self) private var quickLook

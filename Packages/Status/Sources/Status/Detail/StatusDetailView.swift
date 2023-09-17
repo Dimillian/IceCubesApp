@@ -112,7 +112,6 @@ public struct StatusDetailView: View {
         .environment(\.extraLeadingInset, isReplyToPrevious ? 10 : 0)
         .environment(\.isStatusReplyToPrevious, isReplyToPrevious)
         .environment(\.isStatusFocused, isFocused)
-        .environment(\.isStatusDetailLoaded, isFocused ? !self.viewModel.isLoadingContext : false)
         .overlay {
           if isFocused {
             GeometryReader { reader in
