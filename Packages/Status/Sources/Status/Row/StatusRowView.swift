@@ -13,11 +13,12 @@ public struct StatusRowView: View {
   @Environment(\.isCompact) private var isCompact: Bool
   @Environment(\.accessibilityVoiceOverEnabled) private var accessibilityVoiceOverEnabled
   @Environment(\.isStatusFocused) private var isFocused
+  @Environment(\.isStatusDetailLoaded) private var isStatusDetailLoaded
 
   @Environment(QuickLook.self) private var quickLook
   @EnvironmentObject private var theme: Theme
 
-  @State var viewModel: StatusRowViewModel
+  @State private var viewModel: StatusRowViewModel
 
   public init(viewModel: StatusRowViewModel) {
     _viewModel = .init(initialValue: viewModel)
@@ -28,6 +29,7 @@ public struct StatusRowView: View {
   }
 
   public var body: some View {
+    let _ = Self._printChanges()
     VStack(alignment: .leading) {
       if viewModel.isFiltered, let filter = viewModel.filter {
         switch filter.filter.filterAction {
@@ -75,15 +77,21 @@ public struct StatusRowView: View {
                   }
                 }
             }
-            if viewModel.showActions, isFocused || theme.statusActionsDisplay != .none, !isInCaptureMode {
-              StatusRowActionsView(viewModel: viewModel)
-                .padding(.top, 8)
-                .tint(isFocused ? theme.tintColor : .gray)
-                .contentShape(Rectangle())
-                .onTapGesture {
-                  guard !isFocused else { return }
-                  viewModel.navigateToDetail()
-                }
+            VStack(alignment: .leading, spacing: 12) {
+              if viewModel.showActions, isFocused || theme.statusActionsDisplay != .none, !isInCaptureMode {
+                StatusRowActionsView(viewModel: viewModel)
+                  .padding(.top, 8)
+                  .tint(isFocused ? theme.tintColor : .gray)
+                  .contentShape(Rectangle())
+                  .onTapGesture {
+                    guard !isFocused else { return }
+                    viewModel.navigateToDetail()
+                  }
+              }
+              
+              if isFocused, isStatusDetailLoaded {
+                StatusRowDetailView(viewModel: viewModel)
+              }
             }
           }
         }
