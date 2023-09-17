@@ -1,8 +1,8 @@
 import DesignSystem
 import Env
+import Observation
 import SafariServices
 import SwiftUI
-import Observation
 
 extension View {
   @MainActor func withSafariRouter() -> some View {

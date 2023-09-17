@@ -9,12 +9,11 @@ struct StatusRowActionsView: View {
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(StatusDataController.self) private var statusDataController
   @EnvironmentObject private var userPreferences: UserPreferences
-  
+
   @Environment(\.isStatusFocused) private var isFocused
   @Environment(\.isStatusDetailLoaded) private var isStatusDetailLoaded
-  
+
   var viewModel: StatusRowViewModel
-  
 
   func privateBoost() -> Bool {
     viewModel.status.visibility == .priv && viewModel.status.account.id == currentAccount.account?.id
@@ -153,7 +152,7 @@ struct StatusRowActionsView: View {
           }
         }
       }
-      
+
       if isStatusDetailLoaded {
         StatusRowDetailView(viewModel: viewModel)
           .transition(.move(edge: .bottom))

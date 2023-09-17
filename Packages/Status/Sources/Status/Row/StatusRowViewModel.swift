@@ -4,8 +4,8 @@ import Env
 import Models
 import NaturalLanguage
 import Network
-import SwiftUI
 import Observation
+import SwiftUI
 
 @MainActor
 @Observable public class StatusRowViewModel {
@@ -54,7 +54,7 @@ import Observation
   }
 
   // number of lines to show, nil means show the whole post
-  var lineLimit: Int? = nil
+  var lineLimit: Int?
   // post length determining if the post should be collapsed
   let collapseThresholdLength: Int = 750
   // number of text lines to show on a collpased post

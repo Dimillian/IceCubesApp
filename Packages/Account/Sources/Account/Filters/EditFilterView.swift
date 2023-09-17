@@ -8,7 +8,7 @@ struct EditFilterView: View {
   @Environment(\.dismiss) private var dismiss
 
   @EnvironmentObject private var theme: Theme
- @Environment(CurrentAccount.self) private var account
+  @Environment(CurrentAccount.self) private var account
   @Environment(Client.self) private var client
 
   @State private var isSavingFilter: Bool = false
@@ -91,7 +91,7 @@ struct EditFilterView: View {
           Text(duration.description).tag(duration)
         }
       }
-      .onChange(of: expirySelection) { oldValue, newValue in
+      .onChange(of: expirySelection) { _, newValue in
         if newValue != .custom {
           expiresAt = Date(timeIntervalSinceNow: TimeInterval(newValue.rawValue))
         }

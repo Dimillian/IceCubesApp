@@ -2,8 +2,8 @@ import Combine
 import Foundation
 import Models
 import Network
-import SwiftUI
 import Observation
+import SwiftUI
 
 public enum RouterDestination: Hashable {
   case accountDetail(id: String)

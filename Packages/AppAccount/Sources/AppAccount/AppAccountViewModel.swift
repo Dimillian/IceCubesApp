@@ -2,8 +2,8 @@ import Combine
 import DesignSystem
 import Models
 import Network
-import SwiftUI
 import Observation
+import SwiftUI
 
 @MainActor
 @Observable public class AppAccountViewModel {

@@ -93,7 +93,7 @@ public struct ExploreView: View {
       do {
         try await Task.sleep(for: .milliseconds(150))
         await viewModel.search()
-      } catch { }
+      } catch {}
     }
   }
 

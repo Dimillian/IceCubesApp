@@ -1,8 +1,8 @@
 import Models
 import Nuke
+import Observation
 import SwiftUI
 import UIKit
-import Observation
 
 @Observable final class TimelinePrefetcher: NSObject, UICollectionViewDataSourcePrefetching {
   private let prefetcher = ImagePrefetcher()

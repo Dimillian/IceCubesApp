@@ -54,12 +54,12 @@ public extension EnvironmentValues {
     get { self[IsSupporter.self] }
     set { self[IsSupporter.self] = newValue }
   }
-  
+
   var isStatusDetailLoaded: Bool {
     get { self[IsStatusDetailLoaded.self] }
     set { self[IsStatusDetailLoaded.self] = newValue }
   }
-  
+
   var isStatusFocused: Bool {
     get { self[IsStatusFocused.self] }
     set { self[IsStatusFocused.self] = newValue }

@@ -67,7 +67,7 @@ struct SettingsTabs: View {
     }
     .withSafariRouter()
     .environment(routerPath)
-    .onChange(of: $popToRootTab.wrappedValue) { oldValue, newValue in
+    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
       if newValue == .notifications {
         routerPath.path = []
       }

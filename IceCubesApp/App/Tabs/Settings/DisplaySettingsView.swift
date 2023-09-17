@@ -3,9 +3,9 @@ import DesignSystem
 import Env
 import Models
 import Network
+import Observation
 import Status
 import SwiftUI
-import Observation
 
 class DisplaySettingsLocalValues: ObservableObject {
   @Published var tintColor = Theme.shared.tintColor

@@ -1,6 +1,6 @@
 import Network
-import SwiftUI
 import Observation
+import SwiftUI
 
 @MainActor
 @Observable class EditRelationshipNoteViewModel {
@@ -19,7 +19,7 @@ import Observation
     {
       isSaving = true
       do {
-        let _ = try await client!.post(endpoint: Accounts.relationshipNote(id: relatedAccountId!, json: RelationshipNoteData(note: note)))
+        _ = try await client!.post(endpoint: Accounts.relationshipNote(id: relatedAccountId!, json: RelationshipNoteData(note: note)))
       } catch {
         isSaving = false
         saveError = true

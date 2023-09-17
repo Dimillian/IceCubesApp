@@ -4,8 +4,8 @@ import EmojiText
 import Env
 import Models
 import Network
-import SwiftUI
 import Observation
+import SwiftUI
 
 @MainActor
 @Observable public class AccountsListRowViewModel {

@@ -1,8 +1,8 @@
 import Foundation
 import Models
 import Network
-import SwiftUI
 import Observation
+import SwiftUI
 
 @MainActor
 public protocol StatusDataControlling {

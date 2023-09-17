@@ -69,12 +69,12 @@ public struct StatusDetailView: View {
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
         .background(theme.primaryBackgroundColor)
-        .onChange(of: viewModel.scrollToId, { oldValue, newValue in
+        .onChange(of: viewModel.scrollToId) { _, newValue in
           if let newValue {
             viewModel.scrollToId = nil
             proxy.scrollTo(newValue, anchor: .top)
           }
-        })
+        }
         .task {
           guard !isLoaded else { return }
           viewModel.client = client

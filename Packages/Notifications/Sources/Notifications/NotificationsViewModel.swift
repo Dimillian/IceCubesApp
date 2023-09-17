@@ -2,8 +2,8 @@ import Env
 import Foundation
 import Models
 import Network
-import SwiftUI
 import Observation
+import SwiftUI
 
 @MainActor
 @Observable class NotificationsViewModel {

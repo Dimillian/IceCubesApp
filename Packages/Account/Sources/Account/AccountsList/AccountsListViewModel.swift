@@ -1,7 +1,7 @@
 import Models
 import Network
-import SwiftUI
 import Observation
+import SwiftUI
 
 public enum AccountsListMode {
   case following(accountId: String), followers(accountId: String)

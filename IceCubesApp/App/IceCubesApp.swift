@@ -58,7 +58,7 @@ struct IceCubesApp: App {
             .edgesIgnoringSafeArea(.bottom)
             .background(TransparentBackground())
         })
-        .onChange(of: pushNotificationsService.handledNotification) { oldValue, newValue in
+        .onChange(of: pushNotificationsService.handledNotification) { _, newValue in
           if newValue != nil {
             pushNotificationsService.handledNotification = nil
             if appAccountsManager.currentAccount.oauthToken?.accessToken != newValue?.account.token.accessToken,
@@ -79,10 +79,10 @@ struct IceCubesApp: App {
     .commands {
       appMenu
     }
-    .onChange(of: scenePhase) { oldValue, newValue in
+    .onChange(of: scenePhase) { _, newValue in
       handleScenePhase(scenePhase: newValue)
     }
-    .onChange(of: appAccountsManager.currentClient) { oldValue, newValue in
+    .onChange(of: appAccountsManager.currentClient) { _, newValue in
       setNewClientsInEnv(client: newValue)
       if newValue.isAuth {
         watcher.watch(streams: [.user, .direct])

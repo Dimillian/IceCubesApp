@@ -9,7 +9,7 @@ public struct StatusPollView: View {
   @Environment(Client.self) private var client
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(CurrentAccount.self) private var currentAccount
-  
+
   @State private var viewModel: StatusPollViewModel
 
   private var status: AnyStatus

@@ -1,7 +1,7 @@
 import Combine
 import Models
-import SwiftUI
 import Observation
+import SwiftUI
 
 public enum StatusesState {
   public enum PagingState {

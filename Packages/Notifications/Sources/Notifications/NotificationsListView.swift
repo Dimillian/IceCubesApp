@@ -93,7 +93,7 @@ public struct NotificationsListView: View {
         viewModel.handleEvent(event: latestEvent)
       }
     }
-    .onChange(of: scenePhase) { oldValue, newValue in
+    .onChange(of: scenePhase) { _, newValue in
       switch newValue {
       case .active:
         Task {

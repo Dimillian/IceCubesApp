@@ -32,7 +32,7 @@ struct MessagesTab: View {
         .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
         .id(client.id)
     }
-    .onChange(of: $popToRootTab.wrappedValue) { oldValue, newValue in
+    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
       if newValue == .messages {
         routerPath.path = []
       }

@@ -72,7 +72,7 @@ struct TimelineTab: View {
         timeline = .federated
       }
     }
-    .onChange(of: $popToRootTab.wrappedValue) { oldValue, newValue in
+    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
       if newValue == .timeline {
         if routerPath.path.isEmpty {
           scrollToTopSignal += 1
@@ -84,7 +84,7 @@ struct TimelineTab: View {
     .onChange(of: client.id) {
       routerPath.path = []
     }
-    .onChange(of: timeline) { oldValue, newValue in
+    .onChange(of: timeline) { _, newValue in
       if newValue == .home || newValue == .federated || newValue == .local {
         lastTimelineFilter = newValue
       }

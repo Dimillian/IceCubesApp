@@ -1,7 +1,7 @@
 import Models
 import Network
-import SwiftUI
 import Observation
+import SwiftUI
 
 @MainActor
 @Observable class ExploreViewModel {
@@ -54,8 +54,8 @@ import Observation
   var trendingStatuses: [Status] = []
   var trendingLinks: [Card] = []
   var searchScope: SearchScope = .all
-  
-  init() { }
+
+  init() {}
 
   func fetchTrending() async {
     guard let client else { return }

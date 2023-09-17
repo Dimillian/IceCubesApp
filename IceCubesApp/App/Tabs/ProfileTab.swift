@@ -29,7 +29,7 @@ struct ProfileTab: View {
           .redacted(reason: .placeholder)
       }
     }
-    .onChange(of: $popToRootTab.wrappedValue) { oldValue, newValue in
+    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
       if newValue == .profile {
         routerPath.path = []
       }

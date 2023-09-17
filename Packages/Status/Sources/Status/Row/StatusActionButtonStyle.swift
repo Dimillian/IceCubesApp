@@ -28,7 +28,7 @@ struct StatusActionButtonStyle: ButtonStyle {
           SparklesView(counter: sparklesCounter, tint: tint, size: 5, velocity: 30)
         }
       }
-      .onChange(of: configuration.isPressed) { oldValue, newValue in
+      .onChange(of: configuration.isPressed) { _, newValue in
         guard tintColor != nil, !newValue, !isOn else { return }
 
         withAnimation(.spring(response: 1, dampingFraction: 1)) {

@@ -164,7 +164,7 @@ public struct StatusEditorView: View {
       }
     }
     .interactiveDismissDisabled(viewModel.shouldDisplayDismissWarning)
-    .onChange(of: appAccounts.currentClient) { oldValue, newValue in
+    .onChange(of: appAccounts.currentClient) { _, newValue in
       if viewModel.mode.isInShareExtension {
         currentAccount.setClient(client: newValue)
         viewModel.client = newValue

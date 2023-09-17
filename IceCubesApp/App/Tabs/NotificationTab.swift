@@ -55,12 +55,12 @@ struct NotificationsTab: View {
     }
     .withSafariRouter()
     .environment(routerPath)
-    .onChange(of: $popToRootTab.wrappedValue) { oldValue, newValue in
+    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
       if newValue == .notifications {
         routerPath.path = []
       }
     }
-    .onChange(of: pushNotificationsService.handledNotification) { oldValue, newValue in
+    .onChange(of: pushNotificationsService.handledNotification) { _, newValue in
       if let newValue, let type = newValue.notification.supportedType {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
           switch type {
@@ -74,7 +74,7 @@ struct NotificationsTab: View {
         }
       }
     }
-    .onChange(of: scenePhase) { oldValue, newValue in
+    .onChange(of: scenePhase) { _, newValue in
       switch newValue {
       case .active:
         clearNotifications()

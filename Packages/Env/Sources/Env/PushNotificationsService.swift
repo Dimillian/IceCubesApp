@@ -4,9 +4,9 @@ import Foundation
 import KeychainSwift
 import Models
 import Network
+import Observation
 import SwiftUI
 import UserNotifications
-import Observation
 
 extension UNNotificationResponse: @unchecked Sendable {}
 extension UNUserNotificationCenter: @unchecked Sendable {}

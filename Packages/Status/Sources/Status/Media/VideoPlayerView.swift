@@ -1,8 +1,8 @@
 import AVKit
 import DesignSystem
 import Env
-import SwiftUI
 import Observation
+import SwiftUI
 
 @MainActor
 @Observable class VideoPlayerViewModel {
@@ -76,7 +76,7 @@ struct VideoPlayerView: View {
       viewModel.pause()
     }
     .cornerRadius(4)
-    .onChange(of: scenePhase) { oldValue, newValue in
+    .onChange(of: scenePhase) { _, newValue in
       switch newValue {
       case .background, .inactive:
         viewModel.pause()

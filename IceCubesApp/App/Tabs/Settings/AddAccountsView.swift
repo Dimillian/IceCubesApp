@@ -89,7 +89,7 @@ struct AddAccountView: View {
         }
         isSigninIn = false
       }
-      .onChange(of: instanceName) { oldValue, newValue in
+      .onChange(of: instanceName) { _, newValue in
         instanceNamePublisher.send(newValue)
       }
       .onReceive(instanceNamePublisher.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)) { _ in
@@ -119,7 +119,7 @@ struct AddAccountView: View {
           }
         }
       }
-      .onChange(of: scenePhase) { oldValue, newValue in
+      .onChange(of: scenePhase) { _, newValue in
         switch newValue {
         case .active:
           isSigninIn = false
@@ -132,7 +132,7 @@ struct AddAccountView: View {
           await continueSignIn(url: url)
         }
       })
-      .onChange(of: oauthURL) { oldValue, newValue in
+      .onChange(of: oauthURL) { _, newValue in
         if newValue == nil {
           isSigninIn = false
         }

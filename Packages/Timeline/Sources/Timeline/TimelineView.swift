@@ -14,7 +14,7 @@ public struct TimelineView: View {
 
   @Environment(\.scenePhase) private var scenePhase
   @EnvironmentObject private var theme: Theme
- @Environment(CurrentAccount.self) private var account
+  @Environment(CurrentAccount.self) private var account
   @Environment(StreamWatcher.self) private var watcher
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath
@@ -70,7 +70,7 @@ public struct TimelineView: View {
           PendingStatusesObserverView(observer: viewModel.pendingStatusesObserver)
         }
       }
-      .onChange(of: viewModel.scrollToIndex) { oldValue, newValue in
+      .onChange(of: viewModel.scrollToIndex) { _, newValue in
         if let collectionView,
            let newValue,
            let rows = collectionView.dataSource?.collectionView(collectionView, numberOfItemsInSection: 0),
@@ -150,7 +150,7 @@ public struct TimelineView: View {
         viewModel.handleEvent(event: latestEvent, currentAccount: account)
       }
     }
-    .onChange(of: timeline) { oldValue, newValue in
+    .onChange(of: timeline) { _, newValue in
       switch newValue {
       case let .remoteLocal(server, _):
         viewModel.client = Client(server: server)
@@ -159,10 +159,10 @@ public struct TimelineView: View {
       }
       viewModel.timeline = newValue
     }
-    .onChange(of: viewModel.timeline) { oldValue, newValue in
+    .onChange(of: viewModel.timeline) { _, newValue in
       timeline = newValue
     }
-    .onChange(of: scenePhase) { oldValue, newValue in
+    .onChange(of: scenePhase) { _, newValue in
       switch newValue {
       case .active:
         if wasBackgrounded {

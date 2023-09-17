@@ -121,7 +121,7 @@ public struct AccountDetailView: View {
         viewModel.handleEvent(event: latestEvent, currentAccount: currentAccount)
       }
     }
-    .onChange(of: isEditingAccount) { oldValue, newValue in
+    .onChange(of: isEditingAccount) { _, newValue in
       if !newValue {
         Task {
           await viewModel.fetchAccount()
@@ -292,7 +292,7 @@ public struct AccountDetailView: View {
         .listRowSeparator(.hidden)
         .listRowBackground(theme.primaryBackgroundColor)
       ForEach(viewModel.pinned) { status in
-        StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath) )
+        StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
       }
       Rectangle()
         .fill(theme.secondaryBackgroundColor)

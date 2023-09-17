@@ -44,7 +44,7 @@ struct ContentSettingsView: View {
         }
       }
       .listRowBackground(theme.primaryBackgroundColor)
-      .onChange(of: userPreferences.useInstanceContentSettings) { oldValue, newVal in
+      .onChange(of: userPreferences.useInstanceContentSettings) { _, newVal in
         if newVal {
           userPreferences.appAutoExpandSpoilers = userPreferences.autoExpandSpoilers
           userPreferences.appAutoExpandMedia = userPreferences.autoExpandMedia

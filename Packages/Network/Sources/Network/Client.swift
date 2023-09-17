@@ -1,9 +1,9 @@
 import Combine
 import Foundation
 import Models
+import Observation
 import os
 import SwiftUI
-import Observation
 
 @Observable public final class Client: Equatable, Identifiable, Hashable {
   public static func == (lhs: Client, rhs: Client) -> Bool {
