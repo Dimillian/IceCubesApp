@@ -111,8 +111,7 @@ struct IceCubesApp: App {
   private var sidebarView: some View {
     SideBarView(selectedTab: $selectedTab,
                 popToRootTab: $popToRootTab,
-                tabs: availableTabs,
-                routerPath: sidebarRouterPath)
+                tabs: availableTabs)
     {
       GeometryReader { _ in
         HStack(spacing: 0) {
@@ -146,6 +145,7 @@ struct IceCubesApp: App {
     }.onChange(of: $appAccountsManager.currentAccount.id) {
       sideBarLoadedTabs.removeAll()
     }
+    .environment(sidebarRouterPath)
   }
 
   private var notificationsSecondaryColumn: some View {

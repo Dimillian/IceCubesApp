@@ -11,11 +11,11 @@ struct SideBarView<Content: View>: View {
   @EnvironmentObject private var theme: Theme
   @Environment(StreamWatcher.self) private var watcher
   @EnvironmentObject private var userPreferences: UserPreferences
+  @Environment(RouterPath.self) private var routerPath
 
   @Binding var selectedTab: Tab
   @Binding var popToRootTab: Tab
   var tabs: [Tab]
-  @State var routerPath = RouterPath()
   @ViewBuilder var content: () -> Content
 
   private func badgeFor(tab: Tab) -> Int {
@@ -122,6 +122,7 @@ struct SideBarView<Content: View>: View {
   }
 
   var body: some View {
+    @Bindable var routerPath = routerPath
     HStack(spacing: 0) {
       ScrollView {
         VStack(alignment: .center) {
