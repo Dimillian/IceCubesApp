@@ -14,6 +14,7 @@ public struct StatusRowView: View {
   @Environment(\.accessibilityVoiceOverEnabled) private var accessibilityVoiceOverEnabled
   @Environment(\.isStatusFocused) private var isFocused
   @Environment(\.isStatusDetailLoaded) private var isStatusDetailLoaded
+  @Environment(\.isStatusReplyToPrevious) private var isStatusReplyToPrevious
 
   @Environment(QuickLook.self) private var quickLook
   @EnvironmentObject private var theme: Theme
@@ -29,67 +30,78 @@ public struct StatusRowView: View {
   }
 
   public var body: some View {
-    VStack(alignment: .leading) {
-      if viewModel.isFiltered, let filter = viewModel.filter {
-        switch filter.filter.filterAction {
-        case .warn:
-          makeFilterView(filter: filter.filter)
-        case .hide:
-          EmptyView()
-        }
-      } else {
-        if !isCompact, theme.avatarPosition == .leading {
-          Group {
-            StatusRowReblogView(viewModel: viewModel)
-            StatusRowReplyView(viewModel: viewModel)
+    HStack(spacing: 0) {
+      if isStatusReplyToPrevious {
+        Rectangle()
+          .fill(theme.tintColor)
+          .frame(width: 2)
+          .accessibilityHidden(true)
+        Spacer(minLength: 8)
+      }
+      VStack(alignment: .leading) {
+        if viewModel.isFiltered, let filter = viewModel.filter {
+          switch filter.filter.filterAction {
+          case .warn:
+            makeFilterView(filter: filter.filter)
+          case .hide:
+            EmptyView()
           }
-          .padding(.leading, AvatarView.Size.status.size.width + .statusColumnsSpacing)
-        }
-        HStack(alignment: .top, spacing: .statusColumnsSpacing) {
-          if !isCompact,
-             theme.avatarPosition == .leading
-          {
-            Button {
-              viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
-            } label: {
-              AvatarView(url: viewModel.finalStatus.account.avatar, size: .status)
-            }
-          }
-          VStack(alignment: .leading) {
-            if !isCompact, theme.avatarPosition == .top {
+        } else {
+          if !isCompact, theme.avatarPosition == .leading {
+            Group {
               StatusRowReblogView(viewModel: viewModel)
               StatusRowReplyView(viewModel: viewModel)
             }
-            VStack(alignment: .leading, spacing: 8) {
-              if !isCompact {
-                StatusRowHeaderView(viewModel: viewModel)
+            .padding(.leading, AvatarView.Size.status.size.width + .statusColumnsSpacing)
+          }
+          HStack(alignment: .top, spacing: .statusColumnsSpacing) {
+            if !isCompact,
+               theme.avatarPosition == .leading
+            {
+              Button {
+                viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
+              } label: {
+                AvatarView(url: viewModel.finalStatus.account.avatar, size: .status)
               }
-              StatusRowContentView(viewModel: viewModel)
-                .contentShape(Rectangle())
-                .onTapGesture {
-                  guard !isFocused else { return }
-                  viewModel.navigateToDetail()
-                }
-                .accessibilityActions {
-                  if isFocused, viewModel.showActions {
-                    accessibilityActions
-                  }
-                }
             }
-            VStack(alignment: .leading, spacing: 12) {
-              if viewModel.showActions, isFocused || theme.statusActionsDisplay != .none, !isInCaptureMode {
-                StatusRowActionsView(viewModel: viewModel)
-                  .padding(.top, 8)
-                  .tint(isFocused ? theme.tintColor : .gray)
+            VStack(alignment: .leading) {
+              if !isCompact, theme.avatarPosition == .top {
+                StatusRowReblogView(viewModel: viewModel)
+                StatusRowReplyView(viewModel: viewModel)
+              }
+              VStack(alignment: .leading, spacing: 8) {
+                if !isCompact {
+                  StatusRowHeaderView(viewModel: viewModel)
+                }
+                StatusRowContentView(viewModel: viewModel)
                   .contentShape(Rectangle())
                   .onTapGesture {
                     guard !isFocused else { return }
                     viewModel.navigateToDetail()
                   }
+                  .accessibilityActions {
+                    if isFocused, viewModel.showActions {
+                      accessibilityActions
+                    }
+                  }
               }
-              
-              if isFocused, isStatusDetailLoaded {
-                StatusRowDetailView(viewModel: viewModel)
+              VStack(alignment: .leading, spacing: 12) {
+                if viewModel.showActions, isFocused || theme.statusActionsDisplay != .none, !isInCaptureMode {
+                  StatusRowActionsView(viewModel: viewModel)
+                    .padding(.top, 8)
+                    .tint(isFocused ? theme.tintColor : .gray)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                      guard !isFocused else { return }
+                      viewModel.navigateToDetail()
+                    }
+                }
+                
+                if isFocused, isStatusDetailLoaded {
+                  StatusRowDetailView(viewModel: viewModel)
+                    .transition(.move(edge: .bottom))
+                    .animation(.snappy, value: isStatusDetailLoaded)
+                }
               }
             }
           }

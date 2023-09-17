@@ -103,67 +103,32 @@ public struct StatusDetailView: View {
 
   private func makeStatusesListView(statuses: [Status], date _: Date) -> some View {
     ForEach(statuses) { status in
-      var isReplyToPrevious: Bool = false
-      if let index = statuses.firstIndex(where: { $0.id == status.id }),
-         index > 0,
-         statuses[index - 1].id == status.inReplyToId
-      {
-        if index == 1, statuses.count > 2 {
-          let nextStatus = statuses[2]
-          isReplyToPrevious = nextStatus.inReplyToId == status.id
-        } else if statuses.count == 2 {
-          isReplyToPrevious = false
-        } else {
-          isReplyToPrevious = true
-        }
-      }
+      let isReplyToPrevious = viewModel.isReplyToPreviousCache[status.id] ?? false
       let viewModel: StatusRowViewModel = .init(status: status,
                                                 client: client,
                                                 routerPath: routerPath)
-      return HStack(spacing: 0) {
-        if isReplyToPrevious {
-          Rectangle()
-            .fill(theme.tintColor)
-            .frame(width: 2)
-            .accessibilityHidden(true)
-          Spacer(minLength: 8)
-        }
-        if self.viewModel.statusId == status.id {
-          makeCurrentStatusView(status: status)
-            .environment(\.extraLeadingInset, isReplyToPrevious ? 10 : 0)
-        } else {
-          StatusRowView(viewModel: viewModel)
-            .environment(\.extraLeadingInset, isReplyToPrevious ? 10 : 0)
-        }
-      }
-      .listRowBackground(viewModel.highlightRowColor)
-      .listRowInsets(.init(top: 12,
-                           leading: .layoutPadding,
-                           bottom: 12,
-                           trailing: .layoutPadding))
-    }
-  }
+      let isFocused = self.viewModel.statusId == status.id
 
-  private func makeCurrentStatusView(status: Status) -> some View {
-    StatusRowView(viewModel: .init(status: status,
-                                   client: client,
-                                   routerPath: routerPath))
-      .environment(\.isStatusFocused, true)
-      .environment(\.isStatusDetailLoaded, !viewModel.isLoadingContext)
-      .accessibilityFocused($initialFocusBugWorkaround, equals: true)
-      .overlay {
-        GeometryReader { reader in
-          VStack {}
-            .onAppear {
-              statusHeight = reader.size.height
-            }
+      StatusRowView(viewModel: viewModel)
+        .environment(\.extraLeadingInset, isReplyToPrevious ? 10 : 0)
+        .environment(\.isStatusReplyToPrevious, isReplyToPrevious)
+        .environment(\.isStatusFocused, isFocused)
+        .environment(\.isStatusDetailLoaded, isFocused ? !self.viewModel.isLoadingContext : false)
+        .overlay {
+          GeometryReader { reader in
+            VStack {}
+              .onAppear {
+                statusHeight = reader.size.height
+              }
+          }
         }
-      }
-      .id(status.id)
-      // VoiceOver / Switch Control focus workaround
-      .onAppear {
-        initialFocusBugWorkaround = true
-      }
+        .id(status.id)
+        .listRowBackground(viewModel.highlightRowColor)
+        .listRowInsets(.init(top: 12,
+                             leading: .layoutPadding,
+                             bottom: 12,
+                             trailing: .layoutPadding))
+    }
   }
 
   private var errorView: some View {

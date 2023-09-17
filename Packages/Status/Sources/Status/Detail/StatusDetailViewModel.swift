@@ -20,6 +20,7 @@ import SwiftUI
   var isLoadingContext = true
   var title: LocalizedStringKey = ""
   var scrollToId: String?
+  var isReplyToPreviousCache: [String: Bool] = [:]
 
   init(statusId: String) {
     state = .loading
@@ -80,17 +81,17 @@ import SwiftUI
       var statuses = data.context.ancestors
       statuses.append(data.status)
       statuses.append(contentsOf: data.context.descendants)
-
+      cacheReplyTopPrevious(statuses: statuses)
       StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
 
       if animate {
         withAnimation {
-          isLoadingContext = false
           state = .display(statuses: statuses, date: Date())
+          isLoadingContext = false
         }
       } else {
-        isLoadingContext = false
         state = .display(statuses: statuses, date: Date())
+        isLoadingContext = false
         scrollToId = statusId
       }
     } catch {
@@ -108,6 +109,27 @@ import SwiftUI
     return try await .init(status: status, context: context)
   }
 
+  private func cacheReplyTopPrevious(statuses: [Status]) {
+    isReplyToPreviousCache = [:]
+    for status in statuses {
+      var isReplyToPrevious: Bool = false
+      if let index = statuses.firstIndex(where: { $0.id == status.id }),
+         index > 0,
+         statuses[index - 1].id == status.inReplyToId
+      {
+        if index == 1, statuses.count > 2 {
+          let nextStatus = statuses[2]
+          isReplyToPrevious = nextStatus.inReplyToId == status.id
+        } else if statuses.count == 2 {
+          isReplyToPrevious = false
+        } else {
+          isReplyToPrevious = true
+        }
+      }
+      isReplyToPreviousCache[status.id] = isReplyToPrevious
+    }
+  }
+  
   func handleEvent(event: any StreamEvent, currentAccount: Account?) {
     Task {
       if let event = event as? StreamEventUpdate,

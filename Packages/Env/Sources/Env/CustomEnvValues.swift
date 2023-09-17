@@ -29,6 +29,10 @@ private struct IsStatusFocused: EnvironmentKey {
   static let defaultValue: Bool = false
 }
 
+private struct IsStatusReplyToPrevious: EnvironmentKey {
+  static let defaultValue: Bool = false
+}
+
 public extension EnvironmentValues {
   var isSecondaryColumn: Bool {
     get { self[SecondaryColumnKey.self] }
@@ -63,5 +67,10 @@ public extension EnvironmentValues {
   var isStatusFocused: Bool {
     get { self[IsStatusFocused.self] }
     set { self[IsStatusFocused.self] = newValue }
+  }
+  
+  var isStatusReplyToPrevious: Bool {
+    get { self[IsStatusReplyToPrevious.self] }
+    set { self[IsStatusReplyToPrevious.self] = newValue }
   }
 }
