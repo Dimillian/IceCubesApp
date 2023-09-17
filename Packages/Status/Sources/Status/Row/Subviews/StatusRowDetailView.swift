@@ -106,7 +106,7 @@ struct StatusRowDetailView: View {
           AvatarView(url: account.avatar, size: .list)
             .padding(.leading, -4)
         }
-        .transition(.scale)
+        .transition(.opacity)
       }
       .padding(.leading, .layoutPadding)
     }

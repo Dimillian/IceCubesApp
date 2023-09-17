@@ -97,7 +97,7 @@ public struct StatusRowView: View {
                     }
                 }
                 
-                if isFocused, isStatusDetailLoaded {
+                if isFocused {
                   StatusRowDetailView(viewModel: viewModel)
                 }
               }

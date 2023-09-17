@@ -13,7 +13,7 @@ import SwiftUI
   var routerPath: RouterPath?
 
   enum State {
-    case loading, display(statuses: [Status], date: Date), error(error: Error)
+    case loading, display(statuses: [Status]), error(error: Error)
   }
 
   var state: State = .loading
@@ -29,7 +29,7 @@ import SwiftUI
   }
 
   init(status: Status) {
-    state = .display(statuses: [status], date: Date())
+    state = .display(statuses: [status])
     title = "status.post-from-\(status.account.displayNameWithoutEmojis)"
     statusId = status.id
     remoteStatusURL = nil
@@ -86,11 +86,11 @@ import SwiftUI
 
       if animate {
         withAnimation {
-          state = .display(statuses: statuses, date: Date())
+          state = .display(statuses: statuses)
           isLoadingContext = false
         }
       } else {
-        state = .display(statuses: statuses, date: Date())
+        state = .display(statuses: statuses)
         isLoadingContext = false
         scrollToId = statusId
       }

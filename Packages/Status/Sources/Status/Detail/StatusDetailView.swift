@@ -45,9 +45,8 @@ public struct StatusDetailView: View {
           case .loading:
             loadingDetailView
 
-          case let .display(statuses, date):
-            makeStatusesListView(statuses: statuses, date: date)
-              .id(date)
+          case let .display(statuses):
+            makeStatusesListView(statuses: statuses)
 
             if !isLoaded {
               loadingContextView
@@ -101,7 +100,7 @@ public struct StatusDetailView: View {
     .navigationBarTitleDisplayMode(.inline)
   }
 
-  private func makeStatusesListView(statuses: [Status], date _: Date) -> some View {
+  private func makeStatusesListView(statuses: [Status]) -> some View {
     ForEach(statuses) { status in
       let isReplyToPrevious = viewModel.isReplyToPreviousCache[status.id] ?? false
       let viewModel: StatusRowViewModel = .init(status: status,

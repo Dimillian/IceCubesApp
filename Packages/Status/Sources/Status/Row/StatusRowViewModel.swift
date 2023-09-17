@@ -288,12 +288,12 @@ import SwiftUI
   func fetchActionsAccounts() async {
     guard !actionsAccountsFetched else { return }
     do {
-      withAnimation(.snappy) {
+      withAnimation(.smooth) {
         actionsAccountsFetched = true
       }
       let favoriters: [Account] = try await client.get(endpoint: Statuses.favoritedBy(id: status.id, maxId: nil))
       let rebloggers: [Account] = try await client.get(endpoint: Statuses.rebloggedBy(id: status.id, maxId: nil))
-      withAnimation(.snappy) {
+      withAnimation(.smooth) {
         self.favoriters = favoriters
         self.rebloggers = rebloggers
       }
