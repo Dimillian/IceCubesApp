@@ -29,7 +29,6 @@ public struct StatusRowView: View {
   }
 
   public var body: some View {
-    let _ = Self._printChanges()
     VStack(alignment: .leading) {
       if viewModel.isFiltered, let filter = viewModel.filter {
         switch filter.filter.filterAction {
