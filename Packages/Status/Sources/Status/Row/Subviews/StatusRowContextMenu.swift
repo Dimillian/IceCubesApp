@@ -163,7 +163,7 @@ struct StatusRowContextMenu: View {
         }
         if currentInstance.isEditSupported {
           Button {
-            viewModel.routerPath.presentedSheet = .editStatusEditor(status: viewModel.status)
+            viewModel.routerPath.presentedSheet = .editStatusEditor(status: viewModel.status.reblogAsAsStatus ?? viewModel.status)
           } label: {
             Label("status.action.edit", systemImage: "pencil")
           }
