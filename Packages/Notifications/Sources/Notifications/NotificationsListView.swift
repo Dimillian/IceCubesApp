@@ -114,13 +114,13 @@ public struct NotificationsListView: View {
                             client: client,
                             routerPath: routerPath,
                             followRequests: account.followRequests)
-          .redacted(reason: .placeholder)
           .listRowInsets(.init(top: 12,
                                leading: .layoutPadding + 4,
                                bottom: 12,
                                trailing: .layoutPadding))
           .listRowBackground(theme.primaryBackgroundColor)
           .redacted(reason: .placeholder)
+          .allowsHitTesting(false)
       }
 
     case let .display(notifications, nextPageState):

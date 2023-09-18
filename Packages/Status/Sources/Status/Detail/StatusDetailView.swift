@@ -148,6 +148,7 @@ public struct StatusDetailView: View {
     ForEach(Status.placeholders()) { status in
       StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
         .redacted(reason: .placeholder)
+        .allowsHitTesting(false)
     }
   }
 

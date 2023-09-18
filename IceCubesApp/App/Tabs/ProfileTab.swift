@@ -27,6 +27,7 @@ struct ProfileTab: View {
       } else {
         AccountDetailView(account: .placeholder())
           .redacted(reason: .placeholder)
+          .allowsHitTesting(false)
       }
     }
     .onChange(of: $popToRootTab.wrappedValue) { _, newValue in

@@ -126,6 +126,7 @@ public struct ExploreView: View {
       StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
         .padding(.vertical, 8)
         .redacted(reason: .placeholder)
+        .allowsHitTesting(false)
         .listRowBackground(theme.primaryBackgroundColor)
     }
   }

@@ -82,6 +82,7 @@ public struct AppAccountsSelectorView: View {
       } else {
         AvatarView(url: nil, size: avatarSize)
           .redacted(reason: .placeholder)
+          .allowsHitTesting(false)
       }
     }.overlay(alignment: .topTrailing) {
       if !currentAccount.followRequests.isEmpty || showNotificationBadge, accountCreationEnabled {

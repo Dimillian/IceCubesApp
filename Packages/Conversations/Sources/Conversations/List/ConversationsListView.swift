@@ -34,6 +34,7 @@ public struct ConversationsListView: View {
                 ConversationsListRow(conversation: $conversation, viewModel: viewModel)
                   .padding(.horizontal, .layoutPadding)
                   .redacted(reason: .placeholder)
+                  .allowsHitTesting(false)
               } else {
                 ConversationsListRow(conversation: $conversation, viewModel: viewModel)
                   .padding(.horizontal, .layoutPadding)

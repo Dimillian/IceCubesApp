@@ -213,6 +213,7 @@ struct AddAccountView: View {
         .foregroundColor(.gray)
     }
     .redacted(reason: .placeholder)
+    .allowsHitTesting(false)
     .shimmering()
     .listRowBackground(theme.primaryBackgroundColor)
   }

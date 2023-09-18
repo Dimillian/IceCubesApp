@@ -101,6 +101,7 @@ public struct ConversationDetailView: View {
     ForEach(Status.placeholders()) { message in
       ConversationMessageView(message: message, conversation: viewModel.conversation)
         .redacted(reason: .placeholder)
+        .allowsHitTesting(false)
         .padding(.vertical, 4)
     }
   }

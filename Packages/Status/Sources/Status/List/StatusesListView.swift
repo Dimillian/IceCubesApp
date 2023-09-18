@@ -31,6 +31,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
       ForEach(Status.placeholders()) { status in
         StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
           .redacted(reason: .placeholder)
+          .allowsHitTesting(false)
       }
     case .error:
       ErrorView(title: "status.error.title",

@@ -266,6 +266,7 @@ struct SupportAppView: View {
       .padding(.vertical, 8)
     }
     .redacted(reason: .placeholder)
+    .allowsHitTesting(false)
     .shimmering()
   }
 }

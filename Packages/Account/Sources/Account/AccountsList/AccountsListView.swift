@@ -23,6 +23,7 @@ public struct AccountsListView: View {
         ForEach(Account.placeholders()) { _ in
           AccountsListRow(viewModel: .init(account: .placeholder(), relationShip: .placeholder()))
             .redacted(reason: .placeholder)
+            .allowsHitTesting(false)
             .shimmering()
             .listRowBackground(theme.primaryBackgroundColor)
         }
