@@ -138,6 +138,7 @@ public struct ConversationDetailView: View {
         if !viewModel.newMessageText.isEmpty {
           Button {
             Task {
+              guard !viewModel.isSendingMessage else { return }
               await viewModel.postMessage()
             }
           } label: {
