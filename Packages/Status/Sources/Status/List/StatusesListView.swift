@@ -8,7 +8,7 @@ import SwiftUI
 public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
   @EnvironmentObject private var theme: Theme
 
-  @ObservedObject private var fetcher: Fetcher
+  @State private var fetcher: Fetcher
   // Whether this status is on a remote local timeline (many actions are unavailable if so)
   private let isRemote: Bool
   private let routerPath: RouterPath
@@ -19,7 +19,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
               routerPath: RouterPath,
               isRemote: Bool = false)
   {
-    self.fetcher = fetcher
+    _fetcher = .init(initialValue: fetcher)
     self.isRemote = isRemote
     self.client = client
     self.routerPath = routerPath
@@ -29,7 +29,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
     switch fetcher.statusesState {
     case .loading:
       ForEach(Status.placeholders()) { status in
-        StatusRowView(viewModel: { .init(status: status, client: client, routerPath: routerPath) })
+        StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
           .redacted(reason: .placeholder)
       }
     case .error:
@@ -46,12 +46,10 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
 
     case let .display(statuses, nextPageState):
       ForEach(statuses, id: \.viewId) { status in
-        StatusRowView(viewModel: { StatusRowViewModel(status: status,
-                                                      client: client,
-                                                      routerPath: routerPath,
-                                                      isRemote: isRemote)
-
-          })
+        StatusRowView(viewModel: StatusRowViewModel(status: status,
+                                                    client: client,
+                                                    routerPath: routerPath,
+                                                    isRemote: isRemote))
           .id(status.id)
           .onAppear {
             fetcher.statusDidAppear(status: status)

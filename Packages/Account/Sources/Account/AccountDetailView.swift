@@ -11,15 +11,15 @@ public struct AccountDetailView: View {
   @Environment(\.openURL) private var openURL
   @Environment(\.redactionReasons) private var reasons
 
-  @EnvironmentObject private var watcher: StreamWatcher
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var currentInstance: CurrentInstance
+  @Environment(StreamWatcher.self) private var watcher
+  @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(CurrentInstance.self) private var currentInstance
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var routerPath: RouterPath
+  @Environment(Client.self) private var client
+  @Environment(RouterPath.self) private var routerPath
 
-  @StateObject private var viewModel: AccountDetailViewModel
+  @State private var viewModel: AccountDetailViewModel
   @State private var isCurrentUser: Bool = false
   @State private var isCreateListAlertPresented: Bool = false
   @State private var createListTitle: String = ""
@@ -30,12 +30,12 @@ public struct AccountDetailView: View {
 
   /// When coming from a URL like a mention tap in a status.
   public init(accountId: String) {
-    _viewModel = StateObject(wrappedValue: .init(accountId: accountId))
+    _viewModel = .init(initialValue: .init(accountId: accountId))
   }
 
   /// When the account is already fetched by the parent caller.
   public init(account: Account) {
-    _viewModel = StateObject(wrappedValue: .init(account: account))
+    _viewModel = .init(initialValue: .init(account: account))
   }
 
   public var body: some View {
@@ -114,21 +114,21 @@ public struct AccountDetailView: View {
         SoundEffectManager.shared.playSound(of: .refresh)
       }
     }
-    .onChange(of: watcher.latestEvent?.id) { _ in
+    .onChange(of: watcher.latestEvent?.id) {
       if let latestEvent = watcher.latestEvent,
          viewModel.accountId == currentAccount.account?.id
       {
         viewModel.handleEvent(event: latestEvent, currentAccount: currentAccount)
       }
     }
-    .onChange(of: isEditingAccount, perform: { isEditing in
-      if !isEditing {
+    .onChange(of: isEditingAccount) { _, newValue in
+      if !newValue {
         Task {
           await viewModel.fetchAccount()
           await preferences.refreshServerPreferences()
         }
       }
-    })
+    }
     .sheet(isPresented: $isEditingAccount, content: {
       EditAccountView()
     })
@@ -292,7 +292,7 @@ public struct AccountDetailView: View {
         .listRowSeparator(.hidden)
         .listRowBackground(theme.primaryBackgroundColor)
       ForEach(viewModel.pinned) { status in
-        StatusRowView(viewModel: { .init(status: status, client: client, routerPath: routerPath) })
+        StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
       }
       Rectangle()
         .fill(theme.secondaryBackgroundColor)

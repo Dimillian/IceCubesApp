@@ -1,11 +1,12 @@
 import AVKit
 import DesignSystem
 import Env
+import Observation
 import SwiftUI
 
 @MainActor
-class VideoPlayerViewModel: ObservableObject {
-  @Published var player: AVPlayer?
+@Observable class VideoPlayerViewModel {
+  var player: AVPlayer?
   private let url: URL
 
   init(url: URL) {
@@ -53,7 +54,7 @@ struct VideoPlayerView: View {
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
 
-  @StateObject var viewModel: VideoPlayerViewModel
+  @State var viewModel: VideoPlayerViewModel
 
   var body: some View {
     ZStack {
@@ -75,8 +76,8 @@ struct VideoPlayerView: View {
       viewModel.pause()
     }
     .cornerRadius(4)
-    .onChange(of: scenePhase, perform: { scenePhase in
-      switch scenePhase {
+    .onChange(of: scenePhase) { _, newValue in
+      switch newValue {
       case .background, .inactive:
         viewModel.pause()
       case .active:
@@ -86,6 +87,6 @@ struct VideoPlayerView: View {
       default:
         break
       }
-    })
+    }
   }
 }

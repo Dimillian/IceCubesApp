@@ -11,12 +11,12 @@ struct AccountSettingsView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(\.openURL) private var openURL
 
-  @EnvironmentObject private var pushNotifications: PushNotificationsService
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var currentInstance: CurrentInstance
+  @Environment(PushNotificationsService.self) private var pushNotifications
+  @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(CurrentInstance.self) private var currentInstance
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var appAccountsManager: AppAccountsManager
-  @EnvironmentObject private var client: Client
+  @Environment(AppAccountsManager.self) private var appAccountsManager
+  @Environment(Client.self) private var client
 
   @State private var isEditingAccount: Bool = false
   @State private var isEditingFilters: Bool = false

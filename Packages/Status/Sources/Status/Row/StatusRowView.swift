@@ -13,15 +13,15 @@ public struct StatusRowView: View {
   @Environment(\.isCompact) private var isCompact: Bool
   @Environment(\.accessibilityVoiceOverEnabled) private var accessibilityVoiceOverEnabled
   @Environment(\.isStatusFocused) private var isFocused
+  @Environment(\.isStatusReplyToPrevious) private var isStatusReplyToPrevious
 
-  @EnvironmentObject private var quickLook: QuickLook
+  @Environment(QuickLook.self) private var quickLook
   @EnvironmentObject private var theme: Theme
 
-  @StateObject var viewModel: StatusRowViewModel
+  @State private var viewModel: StatusRowViewModel
 
-  // StateObject accepts an @autoclosure which only allocates the view model once when the view gets on screen.
-  public init(viewModel: @escaping () -> StatusRowViewModel) {
-    _viewModel = StateObject(wrappedValue: viewModel())
+  public init(viewModel: StatusRowViewModel) {
+    _viewModel = .init(initialValue: viewModel)
   }
 
   var contextMenu: some View {
@@ -29,62 +29,77 @@ public struct StatusRowView: View {
   }
 
   public var body: some View {
-    VStack(alignment: .leading) {
-      if viewModel.isFiltered, let filter = viewModel.filter {
-        switch filter.filter.filterAction {
-        case .warn:
-          makeFilterView(filter: filter.filter)
-        case .hide:
-          EmptyView()
-        }
-      } else {
-        if !isCompact, theme.avatarPosition == .leading {
-          Group {
-            StatusRowReblogView(viewModel: viewModel)
-            StatusRowReplyView(viewModel: viewModel)
+    HStack(spacing: 0) {
+      if isStatusReplyToPrevious {
+        Rectangle()
+          .fill(theme.tintColor)
+          .frame(width: 2)
+          .accessibilityHidden(true)
+        Spacer(minLength: 8)
+      }
+      VStack(alignment: .leading) {
+        if viewModel.isFiltered, let filter = viewModel.filter {
+          switch filter.filter.filterAction {
+          case .warn:
+            makeFilterView(filter: filter.filter)
+          case .hide:
+            EmptyView()
           }
-          .padding(.leading, AvatarView.Size.status.size.width + .statusColumnsSpacing)
-        }
-        HStack(alignment: .top, spacing: .statusColumnsSpacing) {
-          if !isCompact,
-             theme.avatarPosition == .leading
-          {
-            Button {
-              viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
-            } label: {
-              AvatarView(url: viewModel.finalStatus.account.avatar, size: .status)
-            }
-          }
-          VStack(alignment: .leading) {
-            if !isCompact, theme.avatarPosition == .top {
+        } else {
+          if !isCompact, theme.avatarPosition == .leading {
+            Group {
               StatusRowReblogView(viewModel: viewModel)
               StatusRowReplyView(viewModel: viewModel)
             }
-            VStack(alignment: .leading, spacing: 8) {
-              if !isCompact {
-                StatusRowHeaderView(viewModel: viewModel)
+            .padding(.leading, AvatarView.Size.status.size.width + .statusColumnsSpacing)
+          }
+          HStack(alignment: .top, spacing: .statusColumnsSpacing) {
+            if !isCompact,
+               theme.avatarPosition == .leading
+            {
+              Button {
+                viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
+              } label: {
+                AvatarView(url: viewModel.finalStatus.account.avatar, size: .status)
               }
-              StatusRowContentView(viewModel: viewModel)
-                .contentShape(Rectangle())
-                .onTapGesture {
-                  guard !isFocused else { return }
-                  viewModel.navigateToDetail()
-                }
-                .accessibilityActions {
-                  if isFocused, viewModel.showActions {
-                    accessibilityActions
-                  }
-                }
             }
-            if viewModel.showActions, isFocused || theme.statusActionsDisplay != .none, !isInCaptureMode {
-              StatusRowActionsView(viewModel: viewModel)
-                .padding(.top, 8)
-                .tint(isFocused ? theme.tintColor : .gray)
-                .contentShape(Rectangle())
-                .onTapGesture {
-                  guard !isFocused else { return }
-                  viewModel.navigateToDetail()
+            VStack(alignment: .leading) {
+              if !isCompact, theme.avatarPosition == .top {
+                StatusRowReblogView(viewModel: viewModel)
+                StatusRowReplyView(viewModel: viewModel)
+              }
+              VStack(alignment: .leading, spacing: 8) {
+                if !isCompact {
+                  StatusRowHeaderView(viewModel: viewModel)
                 }
+                StatusRowContentView(viewModel: viewModel)
+                  .contentShape(Rectangle())
+                  .onTapGesture {
+                    guard !isFocused else { return }
+                    viewModel.navigateToDetail()
+                  }
+                  .accessibilityActions {
+                    if isFocused, viewModel.showActions {
+                      accessibilityActions
+                    }
+                  }
+              }
+              VStack(alignment: .leading, spacing: 12) {
+                if viewModel.showActions, isFocused || theme.statusActionsDisplay != .none, !isInCaptureMode {
+                  StatusRowActionsView(viewModel: viewModel)
+                    .padding(.top, 8)
+                    .tint(isFocused ? theme.tintColor : .gray)
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                      guard !isFocused else { return }
+                      viewModel.navigateToDetail()
+                    }
+                }
+                
+                if isFocused {
+                  StatusRowDetailView(viewModel: viewModel)
+                }
+              }
             }
           }
         }
@@ -168,7 +183,7 @@ public struct StatusRowView: View {
     .alignmentGuide(.listRowSeparatorLeading) { _ in
       -100
     }
-    .environmentObject(
+    .environment(
       StatusDataControllerProvider.shared.dataController(for: viewModel.finalStatus,
                                                          client: viewModel.client)
     )

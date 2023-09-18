@@ -1,5 +1,6 @@
 import Models
 import Network
+import Observation
 import SwiftUI
 
 public enum AccountsListMode {
@@ -24,7 +25,7 @@ public enum AccountsListMode {
 }
 
 @MainActor
-class AccountsListViewModel: ObservableObject {
+@Observable class AccountsListViewModel {
   var client: Client?
 
   let mode: AccountsListMode
@@ -44,7 +45,7 @@ class AccountsListViewModel: ObservableObject {
   private var accounts: [Account] = []
   private var relationships: [Relationship] = []
 
-  @Published var state = State.loading
+  var state = State.loading
 
   private var nextPageId: String?
 

@@ -9,11 +9,11 @@ import Shimmer
 import SwiftUI
 
 struct ProfileTab: View {
-  @EnvironmentObject private var appAccount: AppAccountsManager
+  @Environment(AppAccountsManager.self) private var appAccount
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @StateObject private var routerPath = RouterPath()
+  @Environment(Client.self) private var client
+  @Environment(CurrentAccount.self) private var currentAccount
+  @State private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab
 
   var body: some View {
@@ -29,18 +29,18 @@ struct ProfileTab: View {
           .redacted(reason: .placeholder)
       }
     }
-    .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
-      if popToRootTab == .profile {
+    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
+      if newValue == .profile {
         routerPath.path = []
       }
     }
-    .onChange(of: client.id) { _ in
+    .onChange(of: client.id) {
       routerPath.path = []
     }
     .onAppear {
       routerPath.client = client
     }
     .withSafariRouter()
-    .environmentObject(routerPath)
+    .environment(routerPath)
   }
 }

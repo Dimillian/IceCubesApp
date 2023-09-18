@@ -13,10 +13,10 @@ struct AddAccountView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(\.scenePhase) private var scenePhase
 
-  @EnvironmentObject private var appAccountsManager: AppAccountsManager
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var currentInstance: CurrentInstance
-  @EnvironmentObject private var pushNotifications: PushNotificationsService
+  @Environment(AppAccountsManager.self) private var appAccountsManager
+  @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(CurrentInstance.self) private var currentInstance
+  @Environment(PushNotificationsService.self) private var pushNotifications
   @EnvironmentObject private var theme: Theme
 
   @State private var instanceName: String = ""
@@ -89,7 +89,7 @@ struct AddAccountView: View {
         }
         isSigninIn = false
       }
-      .onChange(of: instanceName) { newValue in
+      .onChange(of: instanceName) { _, newValue in
         instanceNamePublisher.send(newValue)
       }
       .onReceive(instanceNamePublisher.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)) { _ in
@@ -119,24 +119,24 @@ struct AddAccountView: View {
           }
         }
       }
-      .onChange(of: scenePhase, perform: { scenePhase in
-        switch scenePhase {
+      .onChange(of: scenePhase) { _, newValue in
+        switch newValue {
         case .active:
           isSigninIn = false
         default:
           break
         }
-      })
+      }
       .onOpenURL(perform: { url in
         Task {
           await continueSignIn(url: url)
         }
       })
-      .onChange(of: oauthURL, perform: { newValue in
+      .onChange(of: oauthURL) { _, newValue in
         if newValue == nil {
           isSigninIn = false
         }
-      })
+      }
       .sheet(item: $oauthURL, content: { url in
         SafariView(url: url)
       })

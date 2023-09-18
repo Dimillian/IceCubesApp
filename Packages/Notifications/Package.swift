@@ -7,7 +7,7 @@ let package = Package(
   name: "Notifications",
   defaultLocalization: "en",
   platforms: [
-    .iOS(.v16),
+    .iOS(.v17),
   ],
   products: [
     .library(

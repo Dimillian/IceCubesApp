@@ -1,7 +1,7 @@
 import Combine
 import UIKit
 
-public class SceneDelegate: NSObject, ObservableObject, UIWindowSceneDelegate {
+@Observable public class SceneDelegate: NSObject, UIWindowSceneDelegate {
   public var window: UIWindow?
 
   public var windowWidth: CGFloat {

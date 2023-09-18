@@ -1,5 +1,6 @@
 import DesignSystem
 import Env
+import Observation
 import SafariServices
 import SwiftUI
 
@@ -13,9 +14,9 @@ extension View {
 private struct SafariRouter: ViewModifier {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var routerPath: RouterPath
+  @Environment(RouterPath.self) private var routerPath
 
-  @StateObject private var safariManager = InAppSafariManager()
+  @State private var safariManager = InAppSafariManager()
 
   func body(content: Content) -> some View {
     content
@@ -58,7 +59,7 @@ private struct SafariRouter: ViewModifier {
 }
 
 @MainActor
-private class InAppSafariManager: NSObject, ObservableObject, SFSafariViewControllerDelegate {
+@Observable private class InAppSafariManager: NSObject, SFSafariViewControllerDelegate {
   var windowScene: UIWindowScene?
   let viewController: UIViewController = .init()
   var window: UIWindow?

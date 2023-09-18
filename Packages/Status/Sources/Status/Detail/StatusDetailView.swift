@@ -7,12 +7,12 @@ import SwiftUI
 
 public struct StatusDetailView: View {
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var watcher: StreamWatcher
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var routerPath: RouterPath
+  @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(StreamWatcher.self) private var watcher
+  @Environment(Client.self) private var client
+  @Environment(RouterPath.self) private var routerPath
 
-  @StateObject private var viewModel: StatusDetailViewModel
+  @State private var viewModel: StatusDetailViewModel
 
   @State private var isLoaded: Bool = false
   @State private var statusHeight: CGFloat = 0
@@ -22,15 +22,15 @@ public struct StatusDetailView: View {
   @AccessibilityFocusState private var initialFocusBugWorkaround: Bool
 
   public init(statusId: String) {
-    _viewModel = StateObject(wrappedValue: { .init(statusId: statusId) }())
+    _viewModel = .init(wrappedValue: .init(statusId: statusId))
   }
 
   public init(status: Status) {
-    _viewModel = StateObject(wrappedValue: { .init(status: status) }())
+    _viewModel = .init(wrappedValue: .init(status: status))
   }
 
   public init(remoteStatusURL: URL) {
-    _viewModel = StateObject(wrappedValue: { .init(remoteStatusURL: remoteStatusURL) }())
+    _viewModel = .init(wrappedValue: .init(remoteStatusURL: remoteStatusURL))
   }
 
   public var body: some View {
@@ -45,9 +45,8 @@ public struct StatusDetailView: View {
           case .loading:
             loadingDetailView
 
-          case let .display(statuses, date):
-            makeStatusesListView(statuses: statuses, date: date)
-              .id(date)
+          case let .display(statuses):
+            makeStatusesListView(statuses: statuses)
 
             if !isLoaded {
               loadingContextView
@@ -69,12 +68,12 @@ public struct StatusDetailView: View {
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
         .background(theme.primaryBackgroundColor)
-        .onChange(of: viewModel.scrollToId, perform: { scrollToId in
-          if let scrollToId {
+        .onChange(of: viewModel.scrollToId) { _, newValue in
+          if let newValue {
             viewModel.scrollToId = nil
-            proxy.scrollTo(scrollToId, anchor: .top)
+            proxy.scrollTo(newValue, anchor: .top)
           }
-        })
+        }
         .task {
           guard !isLoaded else { return }
           viewModel.client = client
@@ -92,7 +91,7 @@ public struct StatusDetailView: View {
           }
         }
       }
-      .onChange(of: watcher.latestEvent?.id) { _ in
+      .onChange(of: watcher.latestEvent?.id) {
         guard let lastEvent = watcher.latestEvent else { return }
         viewModel.handleEvent(event: lastEvent, currentAccount: currentAccount.account)
       }
@@ -101,69 +100,35 @@ public struct StatusDetailView: View {
     .navigationBarTitleDisplayMode(.inline)
   }
 
-  private func makeStatusesListView(statuses: [Status], date _: Date) -> some View {
+  private func makeStatusesListView(statuses: [Status]) -> some View {
     ForEach(statuses) { status in
-      var isReplyToPrevious: Bool = false
-      if let index = statuses.firstIndex(where: { $0.id == status.id }),
-         index > 0,
-         statuses[index - 1].id == status.inReplyToId
-      {
-        if index == 1, statuses.count > 2 {
-          let nextStatus = statuses[2]
-          isReplyToPrevious = nextStatus.inReplyToId == status.id
-        } else if statuses.count == 2 {
-          isReplyToPrevious = false
-        } else {
-          isReplyToPrevious = true
-        }
-      }
+      let isReplyToPrevious = viewModel.isReplyToPreviousCache[status.id] ?? false
       let viewModel: StatusRowViewModel = .init(status: status,
                                                 client: client,
                                                 routerPath: routerPath)
-      return HStack(spacing: 0) {
-        if isReplyToPrevious {
-          Rectangle()
-            .fill(theme.tintColor)
-            .frame(width: 2)
-            .accessibilityHidden(true)
-          Spacer(minLength: 8)
-        }
-        if self.viewModel.statusId == status.id {
-          makeCurrentStatusView(status: status)
-            .environment(\.extraLeadingInset, isReplyToPrevious ? 10 : 0)
-        } else {
-          StatusRowView(viewModel: { viewModel })
-            .environment(\.extraLeadingInset, isReplyToPrevious ? 10 : 0)
-        }
-      }
-      .listRowBackground(viewModel.highlightRowColor)
-      .listRowInsets(.init(top: 12,
-                           leading: .layoutPadding,
-                           bottom: 12,
-                           trailing: .layoutPadding))
-    }
-  }
+      let isFocused = self.viewModel.statusId == status.id
 
-  private func makeCurrentStatusView(status: Status) -> some View {
-    StatusRowView(viewModel: { .init(status: status,
-                                     client: client,
-                                     routerPath: routerPath) })
-      .environment(\.isStatusFocused, true)
-      .environment(\.isStatusDetailLoaded, !viewModel.isLoadingContext)
-      .accessibilityFocused($initialFocusBugWorkaround, equals: true)
-      .overlay {
-        GeometryReader { reader in
-          VStack {}
-            .onAppear {
-              statusHeight = reader.size.height
+      StatusRowView(viewModel: viewModel)
+        .environment(\.extraLeadingInset, isReplyToPrevious ? 10 : 0)
+        .environment(\.isStatusReplyToPrevious, isReplyToPrevious)
+        .environment(\.isStatusFocused, isFocused)
+        .overlay {
+          if isFocused {
+            GeometryReader { reader in
+              VStack {}
+                .onAppear {
+                  statusHeight = reader.size.height
+                }
             }
+          }
         }
-      }
-      .id(status.id)
-      // VoiceOver / Switch Control focus workaround
-      .onAppear {
-        initialFocusBugWorkaround = true
-      }
+        .id(status.id)
+        .listRowBackground(viewModel.highlightRowColor)
+        .listRowInsets(.init(top: 12,
+                             leading: .layoutPadding,
+                             bottom: 12,
+                             trailing: .layoutPadding))
+    }
   }
 
   private var errorView: some View {
@@ -181,7 +146,7 @@ public struct StatusDetailView: View {
 
   private var loadingDetailView: some View {
     ForEach(Status.placeholders()) { status in
-      StatusRowView(viewModel: { .init(status: status, client: client, routerPath: routerPath) })
+      StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
         .redacted(reason: .placeholder)
     }
   }

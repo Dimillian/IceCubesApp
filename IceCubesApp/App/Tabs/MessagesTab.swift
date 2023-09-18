@@ -10,11 +10,11 @@ import SwiftUI
 
 struct MessagesTab: View {
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var watcher: StreamWatcher
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var appAccount: AppAccountsManager
-  @StateObject private var routerPath = RouterPath()
+  @Environment(StreamWatcher.self) private var watcher
+  @Environment(Client.self) private var client
+  @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(AppAccountsManager.self) private var appAccount
+  @State private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab
 
   var body: some View {
@@ -32,18 +32,18 @@ struct MessagesTab: View {
         .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
         .id(client.id)
     }
-    .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
-      if popToRootTab == .messages {
+    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
+      if newValue == .messages {
         routerPath.path = []
       }
     }
-    .onChange(of: client.id) { _ in
+    .onChange(of: client.id) {
       routerPath.path = []
     }
     .onAppear {
       routerPath.client = client
     }
     .withSafariRouter()
-    .environmentObject(routerPath)
+    .environment(routerPath)
   }
 }

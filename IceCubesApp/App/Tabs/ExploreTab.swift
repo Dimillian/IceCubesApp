@@ -10,9 +10,9 @@ import SwiftUI
 struct ExploreTab: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var client: Client
-  @StateObject private var routerPath = RouterPath()
+  @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(Client.self) private var client
+  @State private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab
 
   var body: some View {
@@ -35,13 +35,13 @@ struct ExploreTab: View {
         }
     }
     .withSafariRouter()
-    .environmentObject(routerPath)
-    .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
-      if popToRootTab == .explore {
+    .environment(routerPath)
+    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
+      if newValue == .explore {
         routerPath.path = []
       }
     }
-    .onChange(of: client.id) { _ in
+    .onChange(of: client.id) {
       routerPath.path = []
     }
     .onAppear {

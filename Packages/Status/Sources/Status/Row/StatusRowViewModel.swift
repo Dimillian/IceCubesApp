@@ -4,37 +4,44 @@ import Env
 import Models
 import NaturalLanguage
 import Network
+import Observation
 import SwiftUI
 
 @MainActor
-public class StatusRowViewModel: ObservableObject {
+@Observable public class StatusRowViewModel {
   let status: Status
   // Whether this status is on a remote local timeline (many actions are unavailable if so)
   let isRemote: Bool
   let showActions: Bool
   let textDisabled: Bool
   let finalStatus: AnyStatus
+  
+  let client: Client
+  let routerPath: RouterPath
+  
+  private let theme = Theme.shared
+  private let userMentionned: Bool
 
-  @Published var isPinned: Bool
-  @Published var embeddedStatus: Status?
-  @Published var displaySpoiler: Bool = false
-  @Published var isEmbedLoading: Bool = false
-  @Published var isFiltered: Bool = false
+  var isPinned: Bool
+  var embeddedStatus: Status?
+  var displaySpoiler: Bool = false
+  var isEmbedLoading: Bool = false
+  var isFiltered: Bool = false
 
-  @Published var translation: Translation?
-  @Published var isLoadingTranslation: Bool = false
-  @Published var showDeleteAlert: Bool = false
+  var translation: Translation?
+  var isLoadingTranslation: Bool = false
+  var showDeleteAlert: Bool = false
 
-  private var actionsAccountsFetched: Bool = false
-  @Published var favoriters: [Account] = []
-  @Published var rebloggers: [Account] = []
+  private(set) var actionsAccountsFetched: Bool = false
+  var favoriters: [Account] = []
+  var rebloggers: [Account] = []
 
-  @Published var isLoadingRemoteContent: Bool = false
-  @Published var localStatusId: String?
-  @Published var localStatus: Status?
+  var isLoadingRemoteContent: Bool = false
+  var localStatusId: String?
+  var localStatus: Status?
 
   // The relationship our user has to the author of this post, if available
-  @Published var authorRelationship: Relationship? {
+  var authorRelationship: Relationship? {
     didSet {
       // if we are newly blocking or muting the author, force collapse post so it goes away
       if let relationship = authorRelationship,
@@ -46,19 +53,22 @@ public class StatusRowViewModel: ObservableObject {
   }
 
   // used by the button to expand a collapsed post
-  @Published var isCollapsed: Bool = true {
+  var isCollapsed: Bool = true {
     didSet {
       recalcCollapse()
     }
   }
 
   // number of lines to show, nil means show the whole post
-  @Published var lineLimit: Int? = nil
+  var lineLimit: Int?
   // post length determining if the post should be collapsed
+  @ObservationIgnored
   let collapseThresholdLength: Int = 750
   // number of text lines to show on a collpased post
+  @ObservationIgnored
   let collapsedLines: Int = 8
   // user preference, set in init
+  @ObservationIgnored
   var collapseLongPosts: Bool = false
 
   private func recalcCollapse() {
@@ -71,9 +81,7 @@ public class StatusRowViewModel: ObservableObject {
     }
   }
 
-  private let theme = Theme.shared
-  private let userMentionned: Bool
-
+  @ObservationIgnored
   private var seen = false
 
   var filter: Filtered? {
@@ -94,9 +102,6 @@ public class StatusRowViewModel: ObservableObject {
       theme.primaryBackgroundColor
     }
   }
-
-  let client: Client
-  let routerPath: RouterPath
 
   public init(status: Status,
               client: Client,
@@ -283,9 +288,15 @@ public class StatusRowViewModel: ObservableObject {
   func fetchActionsAccounts() async {
     guard !actionsAccountsFetched else { return }
     do {
-      favoriters = try await client.get(endpoint: Statuses.favoritedBy(id: status.id, maxId: nil))
-      rebloggers = try await client.get(endpoint: Statuses.rebloggedBy(id: status.id, maxId: nil))
-      actionsAccountsFetched = true
+      withAnimation(.smooth) {
+        actionsAccountsFetched = true
+      }
+      let favoriters: [Account] = try await client.get(endpoint: Statuses.favoritedBy(id: status.id, maxId: nil))
+      let rebloggers: [Account] = try await client.get(endpoint: Statuses.rebloggedBy(id: status.id, maxId: nil))
+      withAnimation(.smooth) {
+        self.favoriters = favoriters
+        self.rebloggers = rebloggers
+      }
     } catch {}
   }
 

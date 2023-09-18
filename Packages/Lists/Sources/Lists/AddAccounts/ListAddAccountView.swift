@@ -6,16 +6,16 @@ import SwiftUI
 
 public struct ListAddAccountView: View {
   @Environment(\.dismiss) private var dismiss
-  @EnvironmentObject private var client: Client
+  @Environment(Client.self) private var client
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @StateObject private var viewModel: ListAddAccountViewModel
+  @Environment(CurrentAccount.self) private var currentAccount
+  @State private var viewModel: ListAddAccountViewModel
 
   @State private var isCreateListAlertPresented: Bool = false
   @State private var createListTitle: String = ""
 
   public init(account: Account) {
-    _viewModel = StateObject(wrappedValue: .init(account: account))
+    _viewModel = .init(initialValue: .init(account: account))
   }
 
   public var body: some View {

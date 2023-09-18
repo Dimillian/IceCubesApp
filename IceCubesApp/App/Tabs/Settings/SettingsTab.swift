@@ -12,15 +12,14 @@ import Timeline
 struct SettingsTabs: View {
   @Environment(\.dismiss) private var dismiss
 
-  @EnvironmentObject private var pushNotifications: PushNotificationsService
+  @Environment(PushNotificationsService.self) private var pushNotifications
   @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var currentInstance: CurrentInstance
-  @EnvironmentObject private var appAccountsManager: AppAccountsManager
+  @Environment(Client.self) private var client
+  @Environment(CurrentInstance.self) private var currentInstance
+  @Environment(AppAccountsManager.self) private var appAccountsManager
   @EnvironmentObject private var theme: Theme
 
-  @StateObject private var routerPath = RouterPath()
-
+  @State private var routerPath = RouterPath()
   @State private var addAccountSheetPresented = false
   @State private var isEditingAccount = false
   @State private var cachedRemoved = false
@@ -67,9 +66,9 @@ struct SettingsTabs: View {
       }
     }
     .withSafariRouter()
-    .environmentObject(routerPath)
-    .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
-      if popToRootTab == .notifications {
+    .environment(routerPath)
+    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
+      if newValue == .notifications {
         routerPath.path = []
       }
     }

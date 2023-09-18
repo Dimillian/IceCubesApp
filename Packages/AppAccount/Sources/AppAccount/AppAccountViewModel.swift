@@ -2,10 +2,11 @@ import Combine
 import DesignSystem
 import Models
 import Network
+import Observation
 import SwiftUI
 
 @MainActor
-public class AppAccountViewModel: ObservableObject {
+@Observable public class AppAccountViewModel {
   private static var avatarsCache: [String: UIImage] = [:]
   private static var accountsCache: [String: Account] = [:]
 
@@ -15,7 +16,7 @@ public class AppAccountViewModel: ObservableObject {
   let isInNavigation: Bool
   let showBadge: Bool
 
-  @Published var account: Account? {
+  var account: Account? {
     didSet {
       if let account {
         refreshAcct(account: account)

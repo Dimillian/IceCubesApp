@@ -8,11 +8,11 @@ import SwiftUI
 struct StatusEditorAccessoryView: View {
   @EnvironmentObject private var preferences: UserPreferences
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var currentInstance: CurrentInstance
+  @Environment(CurrentInstance.self) private var currentInstance
   @Environment(\.colorScheme) private var colorScheme
 
   @FocusState<Bool>.Binding var isSpoilerTextFocused: Bool
-  @ObservedObject var viewModel: StatusEditorViewModel
+  var viewModel: StatusEditorViewModel
 
   @State private var isDraftsSheetDisplayed: Bool = false
   @State private var isLanguageSheetDisplayed: Bool = false
@@ -24,6 +24,7 @@ struct StatusEditorAccessoryView: View {
   @State private var isCameraPickerPresented: Bool = false
 
   var body: some View {
+    @Bindable var viewModel = viewModel
     VStack(spacing: 0) {
       Divider()
       HStack {

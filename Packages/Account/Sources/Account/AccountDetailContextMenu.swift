@@ -3,12 +3,12 @@ import Network
 import SwiftUI
 
 public struct AccountDetailContextMenu: View {
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var routerPath: RouterPath
-  @EnvironmentObject private var currentInstance: CurrentInstance
+  @Environment(Client.self) private var client
+  @Environment(RouterPath.self) private var routerPath
+  @Environment(CurrentInstance.self) private var currentInstance
   @EnvironmentObject private var preferences: UserPreferences
 
-  @ObservedObject var viewModel: AccountDetailViewModel
+  var viewModel: AccountDetailViewModel
 
   public var body: some View {
     if let account = viewModel.account {

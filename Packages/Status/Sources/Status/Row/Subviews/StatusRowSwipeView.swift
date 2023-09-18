@@ -6,8 +6,8 @@ import SwiftUI
 struct StatusRowSwipeView: View {
   @EnvironmentObject private var theme: Theme
   @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var statusDataController: StatusDataController
+  @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(StatusDataController.self) private var statusDataController
 
   enum Mode {
     case leading, trailing
@@ -17,7 +17,7 @@ struct StatusRowSwipeView: View {
     viewModel.status.visibility == .priv && viewModel.status.account.id == currentAccount.account?.id
   }
 
-  @ObservedObject var viewModel: StatusRowViewModel
+  var viewModel: StatusRowViewModel
   let mode: Mode
 
   var body: some View {

@@ -2,10 +2,11 @@ import Env
 import Foundation
 import Models
 import Network
+import Observation
 import SwiftUI
 
 @MainActor
-class NotificationsViewModel: ObservableObject {
+@Observable class NotificationsViewModel {
   public enum State {
     public enum PagingState {
       case none, hasNextPage, loadingNextPage
@@ -35,8 +36,8 @@ class NotificationsViewModel: ObservableObject {
 
   var currentAccount: CurrentAccount?
 
-  @Published var state: State = .loading
-  @Published var selectedType: Models.Notification.NotificationType? {
+  var state: State = .loading
+  var selectedType: Models.Notification.NotificationType? {
     didSet {
       if oldValue != selectedType {
         consolidatedNotifications = []

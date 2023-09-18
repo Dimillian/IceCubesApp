@@ -1,14 +1,15 @@
 import Env
 import Models
 import Network
+import Observation
 import Status
 import SwiftUI
 
 @MainActor
-class TimelineViewModel: ObservableObject {
-  @Published var scrollToIndex: Int?
-  @Published var statusesState: StatusesState = .loading
-  @Published var timeline: TimelineFilter = .federated {
+@Observable class TimelineViewModel {
+  var scrollToIndex: Int?
+  var statusesState: StatusesState = .loading
+  var timeline: TimelineFilter = .federated {
     didSet {
       timelineTask?.cancel()
       timelineTask = Task {
@@ -39,7 +40,7 @@ class TimelineViewModel: ObservableObject {
 
   private var timelineTask: Task<Void, Never>?
 
-  @Published var tag: Tag?
+  var tag: Tag?
 
   var tagGroup: TagGroup? {
     if case let .tagGroup(group) = timeline {

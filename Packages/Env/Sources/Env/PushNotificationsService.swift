@@ -4,6 +4,7 @@ import Foundation
 import KeychainSwift
 import Models
 import Network
+import Observation
 import SwiftUI
 import UserNotifications
 
@@ -28,7 +29,7 @@ public struct HandledNotification: Equatable {
 }
 
 @MainActor
-public class PushNotificationsService: NSObject, ObservableObject {
+@Observable public class PushNotificationsService: NSObject {
   enum Constants {
     static let endpoint = "https://icecubesrelay.fly.dev"
     static let keychainAuthKey = "notifications_auth_key"
@@ -39,9 +40,9 @@ public class PushNotificationsService: NSObject, ObservableObject {
 
   public private(set) var subscriptions: [PushNotificationSubscriptionSettings] = []
 
-  @Published public var pushToken: Data?
+  public var pushToken: Data?
 
-  @Published public var handledNotification: HandledNotification?
+  public var handledNotification: HandledNotification?
 
   override init() {
     super.init()
@@ -162,14 +163,14 @@ extension Data {
 }
 
 @MainActor
-public class PushNotificationSubscriptionSettings: ObservableObject {
-  @Published public var isEnabled: Bool = true
-  @Published public var isFollowNotificationEnabled: Bool = true
-  @Published public var isFavoriteNotificationEnabled: Bool = true
-  @Published public var isReblogNotificationEnabled: Bool = true
-  @Published public var isMentionNotificationEnabled: Bool = true
-  @Published public var isPollNotificationEnabled: Bool = true
-  @Published public var isNewPostsNotificationEnabled: Bool = true
+@Observable public class PushNotificationSubscriptionSettings {
+  public var isEnabled: Bool = true
+  public var isFollowNotificationEnabled: Bool = true
+  public var isFavoriteNotificationEnabled: Bool = true
+  public var isReblogNotificationEnabled: Bool = true
+  public var isMentionNotificationEnabled: Bool = true
+  public var isPollNotificationEnabled: Bool = true
+  public var isNewPostsNotificationEnabled: Bool = true
 
   public let account: PushAccount
 

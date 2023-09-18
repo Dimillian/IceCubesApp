@@ -112,13 +112,13 @@ extension View {
   }
 
   func withEnvironments() -> some View {
-    environmentObject(CurrentAccount.shared)
+    environment(CurrentAccount.shared)
       .environmentObject(UserPreferences.shared)
-      .environmentObject(CurrentInstance.shared)
+      .environment(CurrentInstance.shared)
       .environmentObject(Theme.shared)
-      .environmentObject(AppAccountsManager.shared)
-      .environmentObject(PushNotificationsService.shared)
-      .environmentObject(AppAccountsManager.shared.currentClient)
+      .environment(AppAccountsManager.shared)
+      .environment(PushNotificationsService.shared)
+      .environment(AppAccountsManager.shared.currentClient)
   }
 }
 

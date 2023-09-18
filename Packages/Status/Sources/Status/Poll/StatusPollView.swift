@@ -6,15 +6,16 @@ import SwiftUI
 
 public struct StatusPollView: View {
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var currentInstance: CurrentInstance
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @StateObject private var viewModel: StatusPollViewModel
+  @Environment(Client.self) private var client
+  @Environment(CurrentInstance.self) private var currentInstance
+  @Environment(CurrentAccount.self) private var currentAccount
+
+  @State private var viewModel: StatusPollViewModel
 
   private var status: AnyStatus
 
   public init(poll: Poll, status: AnyStatus) {
-    _viewModel = StateObject(wrappedValue: .init(poll: poll))
+    _viewModel = .init(initialValue: .init(poll: poll))
     self.status = status
   }
 

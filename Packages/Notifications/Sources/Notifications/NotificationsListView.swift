@@ -8,11 +8,11 @@ import SwiftUI
 public struct NotificationsListView: View {
   @Environment(\.scenePhase) private var scenePhase
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var watcher: StreamWatcher
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var routerPath: RouterPath
-  @EnvironmentObject private var account: CurrentAccount
-  @StateObject private var viewModel = NotificationsViewModel()
+  @Environment(StreamWatcher.self) private var watcher
+  @Environment(Client.self) private var client
+  @Environment(RouterPath.self) private var routerPath
+  @Environment(CurrentAccount.self) private var account
+  @State private var viewModel = NotificationsViewModel()
 
   let lockedType: Models.Notification.NotificationType?
 
@@ -88,13 +88,13 @@ public struct NotificationsListView: View {
       HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
       SoundEffectManager.shared.playSound(of: .refresh)
     }
-    .onChange(of: watcher.latestEvent?.id, perform: { _ in
+    .onChange(of: watcher.latestEvent?.id) {
       if let latestEvent = watcher.latestEvent {
         viewModel.handleEvent(event: latestEvent)
       }
-    })
-    .onChange(of: scenePhase, perform: { scenePhase in
-      switch scenePhase {
+    }
+    .onChange(of: scenePhase) { _, newValue in
+      switch newValue {
       case .active:
         Task {
           await viewModel.fetchNotifications()
@@ -102,7 +102,7 @@ public struct NotificationsListView: View {
       default:
         break
       }
-    })
+    }
   }
 
   @ViewBuilder

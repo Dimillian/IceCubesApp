@@ -7,8 +7,8 @@ import SwiftUI
 
 struct StatusEditorMediaView: View {
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var currentInstance: CurrentInstance
-  @ObservedObject var viewModel: StatusEditorViewModel
+  @Environment(CurrentInstance.self) private var currentInstance
+  var viewModel: StatusEditorViewModel
   @State private var editingContainer: StatusEditorMediaContainer?
 
   @State private var isErrorDisplayed: Bool = false

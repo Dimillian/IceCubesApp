@@ -8,8 +8,8 @@ public struct FiltersListView: View {
   @Environment(\.dismiss) private var dismiss
 
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var account: CurrentAccount
-  @EnvironmentObject private var client: Client
+  @Environment(CurrentAccount.self) private var account
+  @Environment(Client.self) private var client
 
   @State private var isLoading: Bool = true
   @State private var filters: [ServerFilter] = []

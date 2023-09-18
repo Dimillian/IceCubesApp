@@ -6,13 +6,13 @@ import Network
 import SwiftUI
 
 struct ConversationsListRow: View {
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var routerPath: RouterPath
+  @Environment(Client.self) private var client
+  @Environment(RouterPath.self) private var routerPath
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var currentAccount: CurrentAccount
+  @Environment(CurrentAccount.self) private var currentAccount
 
   @Binding var conversation: Conversation
-  @ObservedObject var viewModel: ConversationsListViewModel
+  var viewModel: ConversationsListViewModel
 
   var body: some View {
     Button {

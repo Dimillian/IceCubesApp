@@ -14,13 +14,13 @@ public struct TimelineView: View {
 
   @Environment(\.scenePhase) private var scenePhase
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var account: CurrentAccount
-  @EnvironmentObject private var watcher: StreamWatcher
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var routerPath: RouterPath
+  @Environment(CurrentAccount.self) private var account
+  @Environment(StreamWatcher.self) private var watcher
+  @Environment(Client.self) private var client
+  @Environment(RouterPath.self) private var routerPath
 
-  @StateObject private var viewModel = TimelineViewModel()
-  @StateObject private var prefetcher = TimelinePrefetcher()
+  @State private var viewModel = TimelineViewModel()
+  @State private var prefetcher = TimelinePrefetcher()
 
   @State private var wasBackgrounded: Bool = false
   @State private var collectionView: UICollectionView?
@@ -58,7 +58,7 @@ public struct TimelineView: View {
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
         .background(theme.primaryBackgroundColor)
-        .introspect(.list, on: .iOS(.v16, .v17)) { (collectionView: UICollectionView) in
+        .introspect(.list, on: .iOS(.v17)) { (collectionView: UICollectionView) in
           DispatchQueue.main.async {
             self.collectionView = collectionView
           }
@@ -70,24 +70,24 @@ public struct TimelineView: View {
           PendingStatusesObserverView(observer: viewModel.pendingStatusesObserver)
         }
       }
-      .onChange(of: viewModel.scrollToIndex) { index in
+      .onChange(of: viewModel.scrollToIndex) { _, newValue in
         if let collectionView,
-           let index,
+           let newValue,
            let rows = collectionView.dataSource?.collectionView(collectionView, numberOfItemsInSection: 0),
-           rows > index
+           rows > newValue
         {
-          collectionView.scrollToItem(at: .init(row: index, section: 0),
+          collectionView.scrollToItem(at: .init(row: newValue, section: 0),
                                       at: .top,
                                       animated: viewModel.scrollToIndexAnimated)
           viewModel.scrollToIndexAnimated = false
           viewModel.scrollToIndex = nil
         }
       }
-      .onChange(of: scrollToTopSignal, perform: { _ in
+      .onChange(of: scrollToTopSignal) {
         withAnimation {
           proxy.scrollTo(Constants.scrollToTop, anchor: .top)
         }
-      })
+      }
     }
     .toolbar {
       ToolbarItem(placement: .principal) {
@@ -145,25 +145,25 @@ public struct TimelineView: View {
       HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
       SoundEffectManager.shared.playSound(of: .refresh)
     }
-    .onChange(of: watcher.latestEvent?.id) { _ in
+    .onChange(of: watcher.latestEvent?.id) {
       if let latestEvent = watcher.latestEvent {
         viewModel.handleEvent(event: latestEvent, currentAccount: account)
       }
     }
-    .onChange(of: timeline) { newTimeline in
-      switch newTimeline {
+    .onChange(of: timeline) { _, newValue in
+      switch newValue {
       case let .remoteLocal(server, _):
         viewModel.client = Client(server: server)
       default:
         viewModel.client = client
       }
-      viewModel.timeline = newTimeline
+      viewModel.timeline = newValue
     }
-    .onChange(of: viewModel.timeline, perform: { newValue in
+    .onChange(of: viewModel.timeline) { _, newValue in
       timeline = newValue
-    })
-    .onChange(of: scenePhase, perform: { scenePhase in
-      switch scenePhase {
+    }
+    .onChange(of: scenePhase) { _, newValue in
+      switch newValue {
       case .active:
         if wasBackgrounded {
           wasBackgrounded = false
@@ -175,7 +175,7 @@ public struct TimelineView: View {
       default:
         break
       }
-    })
+    }
   }
 
   @ViewBuilder

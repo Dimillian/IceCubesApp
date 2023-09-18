@@ -14,7 +14,7 @@ struct SwipeActionsSettingsView: View {
 
         createStatusActionPicker(selection: $userPreferences.swipeActionsStatusLeadingLeft,
                                  label: "settings.swipeactions.primary")
-          .onChange(of: userPreferences.swipeActionsStatusLeadingLeft) { action in
+          .onChange(of: userPreferences.swipeActionsStatusLeadingLeft) { _, action in
             if action == .none {
               userPreferences.swipeActionsStatusLeadingRight = .none
             }
@@ -29,7 +29,7 @@ struct SwipeActionsSettingsView: View {
 
         createStatusActionPicker(selection: $userPreferences.swipeActionsStatusTrailingRight,
                                  label: "settings.swipeactions.primary")
-          .onChange(of: userPreferences.swipeActionsStatusTrailingRight) { action in
+          .onChange(of: userPreferences.swipeActionsStatusTrailingRight) { _, action in
             if action == .none {
               userPreferences.swipeActionsStatusTrailingLeft = .none
             }

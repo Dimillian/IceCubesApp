@@ -9,7 +9,7 @@ struct StatusRowTranslateView: View {
 
   @EnvironmentObject private var preferences: UserPreferences
 
-  @ObservedObject var viewModel: StatusRowViewModel
+  var viewModel: StatusRowViewModel
 
   private var shouldShowTranslateButton: Bool {
     let statusLang = viewModel.getStatusLang()

@@ -81,7 +81,7 @@ struct ThemeBoxView: View {
     .onAppear {
       isSelected = theme.selectedSet.rawValue == color.name.rawValue
     }
-    .onChange(of: theme.selectedSet) { newValue in
+    .onChange(of: theme.selectedSet) { _, newValue in
       isSelected = newValue.rawValue == color.name.rawValue
     }
     .onTapGesture {

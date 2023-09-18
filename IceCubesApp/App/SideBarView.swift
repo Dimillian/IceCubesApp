@@ -6,16 +6,16 @@ import Models
 import SwiftUI
 
 struct SideBarView<Content: View>: View {
-  @EnvironmentObject private var appAccounts: AppAccountsManager
-  @EnvironmentObject private var currentAccount: CurrentAccount
+  @Environment(AppAccountsManager.self) private var appAccounts
+  @Environment(CurrentAccount.self) private var currentAccount
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var watcher: StreamWatcher
+  @Environment(StreamWatcher.self) private var watcher
   @EnvironmentObject private var userPreferences: UserPreferences
+  @Environment(RouterPath.self) private var routerPath
 
   @Binding var selectedTab: Tab
   @Binding var popToRootTab: Tab
   var tabs: [Tab]
-  @ObservedObject var routerPath = RouterPath()
   @ViewBuilder var content: () -> Content
 
   private func badgeFor(tab: Tab) -> Int {
@@ -122,6 +122,7 @@ struct SideBarView<Content: View>: View {
   }
 
   var body: some View {
+    @Bindable var routerPath = routerPath
     HStack(spacing: 0) {
       ScrollView {
         VStack(alignment: .center) {

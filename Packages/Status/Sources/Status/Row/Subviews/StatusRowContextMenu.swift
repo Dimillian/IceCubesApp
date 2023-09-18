@@ -7,14 +7,14 @@ import SwiftUI
 struct StatusRowContextMenu: View {
   @Environment(\.displayScale) var displayScale
 
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var sceneDelegate: SceneDelegate
+  @Environment(Client.self) private var client
+  @Environment(SceneDelegate.self) private var sceneDelegate
   @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var account: CurrentAccount
-  @EnvironmentObject private var currentInstance: CurrentInstance
-  @EnvironmentObject private var statusDataController: StatusDataController
+  @Environment(CurrentAccount.self) private var account
+  @Environment(CurrentInstance.self) private var currentInstance
+  @Environment(StatusDataController.self) private var statusDataController
 
-  @ObservedObject var viewModel: StatusRowViewModel
+  var viewModel: StatusRowViewModel
 
   var boostLabel: some View {
     if viewModel.status.visibility == .priv, viewModel.status.account.id == account.account?.id {
@@ -81,17 +81,17 @@ struct StatusRowContextMenu: View {
 
         Button {
           let view = HStack {
-            StatusRowView(viewModel: { viewModel })
+            StatusRowView(viewModel: viewModel)
               .padding(16)
           }
           .environment(\.isInCaptureMode, true)
           .environmentObject(Theme.shared)
           .environmentObject(preferences)
-          .environmentObject(account)
-          .environmentObject(currentInstance)
-          .environmentObject(SceneDelegate())
-          .environmentObject(QuickLook())
-          .environmentObject(viewModel.client)
+          .environment(account)
+          .environment(currentInstance)
+          .environment(SceneDelegate())
+          .environment(QuickLook())
+          .environment(viewModel.client)
           .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
           .foregroundColor(Theme.shared.labelColor)
           .background(Theme.shared.primaryBackgroundColor)

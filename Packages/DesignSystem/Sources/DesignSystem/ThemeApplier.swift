@@ -41,16 +41,16 @@ struct ThemeApplier: ViewModifier {
         setWindowUserInterfaceStyle(from: theme.selectedScheme)
         setBarsColor(theme.primaryBackgroundColor)
       }
-      .onChange(of: theme.tintColor) { newValue in
+      .onChange(of: theme.tintColor) { _, newValue in
         setWindowTint(newValue)
       }
-      .onChange(of: theme.primaryBackgroundColor) { newValue in
+      .onChange(of: theme.primaryBackgroundColor) { _, newValue in
         setBarsColor(newValue)
       }
-      .onChange(of: theme.selectedScheme) { newValue in
+      .onChange(of: theme.selectedScheme) { _, newValue in
         setWindowUserInterfaceStyle(from: newValue)
       }
-      .onChange(of: colorScheme) { newColorScheme in
+      .onChange(of: colorScheme) { _, newColorScheme in
         if theme.followSystemColorScheme,
            let sets = availableColorsSets
            .first(where: { $0.light.name == theme.selectedSet || $0.dark.name == theme.selectedSet })

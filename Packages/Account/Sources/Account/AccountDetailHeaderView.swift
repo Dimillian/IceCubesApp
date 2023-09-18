@@ -12,13 +12,13 @@ struct AccountDetailHeaderView: View {
   }
 
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var quickLook: QuickLook
-  @EnvironmentObject private var routerPath: RouterPath
-  @EnvironmentObject private var currentAccount: CurrentAccount
+  @Environment(QuickLook.self) private var quickLook
+  @Environment(RouterPath.self) private var routerPath
+  @Environment(CurrentAccount.self) private var currentAccount
   @Environment(\.redactionReasons) private var reasons
   @Environment(\.isSupporter) private var isSupporter: Bool
 
-  @ObservedObject var viewModel: AccountDetailViewModel
+  var viewModel: AccountDetailViewModel
   let account: Account
   let scrollViewProxy: ScrollViewProxy?
 

@@ -1,11 +1,12 @@
 import Env
 import Foundation
 import Models
+import Observation
 import SwiftUI
 
 @MainActor
-class PendingStatusesObserver: ObservableObject {
-  @Published var pendingStatusesCount: Int = 0
+@Observable class PendingStatusesObserver {
+  var pendingStatusesCount: Int = 0
 
   var disableUpdate: Bool = false
   var scrollToIndex: ((Int) -> Void)?
@@ -27,7 +28,7 @@ class PendingStatusesObserver: ObservableObject {
 }
 
 struct PendingStatusesObserverView: View {
-  @ObservedObject var observer: PendingStatusesObserver
+  @State var observer: PendingStatusesObserver
 
   var body: some View {
     if observer.pendingStatusesCount > 0 {

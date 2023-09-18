@@ -3,13 +3,13 @@ import Network
 import SwiftUI
 
 @MainActor
-class ConversationsListViewModel: ObservableObject {
+@Observable class ConversationsListViewModel {
   var client: Client?
 
-  @Published var isLoadingFirstPage: Bool = true
-  @Published var isLoadingNextPage: Bool = false
-  @Published var conversations: [Conversation] = []
-  @Published var isError: Bool = false
+  var isLoadingFirstPage: Bool = true
+  var isLoadingNextPage: Bool = false
+  var conversations: [Conversation] = []
+  var isError: Bool = false
 
   var nextPage: LinkHandler?
 

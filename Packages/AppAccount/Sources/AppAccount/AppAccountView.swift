@@ -5,14 +5,14 @@ import SwiftUI
 
 public struct AppAccountView: View {
   @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var routerPath: RouterPath
-  @EnvironmentObject private var appAccounts: AppAccountsManager
+  @Environment(RouterPath.self) private var routerPath
+  @Environment(AppAccountsManager.self) private var appAccounts
   @EnvironmentObject private var preferences: UserPreferences
 
-  @StateObject var viewModel: AppAccountViewModel
+  @State var viewModel: AppAccountViewModel
 
   public init(viewModel: AppAccountViewModel) {
-    _viewModel = .init(wrappedValue: viewModel)
+    self.viewModel = viewModel
   }
 
   public var body: some View {

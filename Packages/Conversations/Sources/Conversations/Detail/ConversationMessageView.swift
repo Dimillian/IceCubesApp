@@ -6,10 +6,10 @@ import NukeUI
 import SwiftUI
 
 struct ConversationMessageView: View {
-  @EnvironmentObject private var quickLook: QuickLook
-  @EnvironmentObject private var routerPath: RouterPath
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var client: Client
+  @Environment(QuickLook.self) private var quickLook
+  @Environment(RouterPath.self) private var routerPath
+  @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(Client.self) private var client
   @EnvironmentObject private var theme: Theme
 
   let message: Status

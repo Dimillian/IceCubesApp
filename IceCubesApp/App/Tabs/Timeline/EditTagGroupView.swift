@@ -93,7 +93,7 @@ struct EditTagGroupView: View {
           .onSubmit {
             focusedField = Focus.new
           }
-          .onChange(of: sfSymbolName) { _ in
+          .onChange(of: sfSymbolName) {
             popupTagsPresented = true
           }
 

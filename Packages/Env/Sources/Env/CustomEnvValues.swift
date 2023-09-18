@@ -21,11 +21,11 @@ private struct IsSupporter: EnvironmentKey {
   static let defaultValue: Bool = false
 }
 
-private struct IsStatusDetailLoaded: EnvironmentKey {
+private struct IsStatusFocused: EnvironmentKey {
   static let defaultValue: Bool = false
 }
 
-private struct IsStatusFocused: EnvironmentKey {
+private struct IsStatusReplyToPrevious: EnvironmentKey {
   static let defaultValue: Bool = false
 }
 
@@ -54,14 +54,14 @@ public extension EnvironmentValues {
     get { self[IsSupporter.self] }
     set { self[IsSupporter.self] = newValue }
   }
-  
-  var isStatusDetailLoaded: Bool {
-    get { self[IsStatusDetailLoaded.self] }
-    set { self[IsStatusDetailLoaded.self] = newValue }
-  }
-  
+
   var isStatusFocused: Bool {
     get { self[IsStatusFocused.self] }
     set { self[IsStatusFocused.self] = newValue }
+  }
+  
+  var isStatusReplyToPrevious: Bool {
+    get { self[IsStatusReplyToPrevious.self] }
+    set { self[IsStatusReplyToPrevious.self] = newValue }
   }
 }

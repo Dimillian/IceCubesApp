@@ -10,10 +10,11 @@ struct StatusRowContentView: View {
 
   @EnvironmentObject private var theme: Theme
 
-  @ObservedObject var viewModel: StatusRowViewModel
+  var viewModel: StatusRowViewModel
 
   var body: some View {
     if !viewModel.finalStatus.spoilerText.asRawText.isEmpty {
+      @Bindable var viewModel = viewModel
       StatusRowSpoilerView(status: viewModel.finalStatus, displaySpoiler: $viewModel.displaySpoiler)
     }
 
