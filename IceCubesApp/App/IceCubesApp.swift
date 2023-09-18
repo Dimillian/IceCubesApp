@@ -187,10 +187,8 @@ struct IceCubesApp: App {
           .tabItem {
             if userPreferences.showiPhoneTabLabel {
               tab.label
-                .labelStyle(TitleAndIconLabelStyle())
             } else {
-              tab.label
-                .labelStyle(IconOnlyLabelStyle())
+              Image(systemName: tab.iconName)
             }
           }
           .tag(tab)
