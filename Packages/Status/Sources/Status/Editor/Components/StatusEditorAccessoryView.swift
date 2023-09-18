@@ -108,6 +108,14 @@ struct StatusEditorAccessoryView: View {
                 Image(systemName: "archivebox")
               }
               .accessibilityLabel("accessibility.editor.button.drafts")
+              .popover(isPresented: $isDraftsSheetDisplayed) {
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                  draftsSheetView
+                } else {
+                  draftsSheetView
+                    .frame(width: 400, height: 500)
+                }
+              }
             }
 
             if !viewModel.customEmojis.isEmpty {
@@ -120,6 +128,14 @@ struct StatusEditorAccessoryView: View {
                 Image(systemName: customEmojiSheetIconName)
               }
               .accessibilityLabel("accessibility.editor.button.custom-emojis")
+              .popover(isPresented: $isCustomEmojisSheetDisplay) {
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                  customEmojisSheet
+                } else {
+                  customEmojisSheet
+                    .frame(width: 400, height: 500)
+                }
+              }
             }
 
             Button {
@@ -132,6 +148,14 @@ struct StatusEditorAccessoryView: View {
               }
             }
             .accessibilityLabel("accessibility.editor.button.language")
+            .popover(isPresented: $isLanguageSheetDisplayed) {
+              if UIDevice.current.userInterfaceIdiom == .phone {
+                languageSheetView
+              } else {
+                languageSheetView
+                  .frame(width: 400, height: 500)
+              }
+            }
 
             if preferences.isOpenAIEnabled {
               AIMenu.disabled(!viewModel.canPost)
@@ -146,15 +170,6 @@ struct StatusEditorAccessoryView: View {
       .frame(height: 20)
       .padding(.vertical, 12)
       .background(.ultraThinMaterial)
-    }
-    .sheet(isPresented: $isDraftsSheetDisplayed) {
-      draftsSheetView
-    }
-    .sheet(isPresented: $isLanguageSheetDisplayed) {
-      languageSheetView
-    }
-    .sheet(isPresented: $isCustomEmojisSheetDisplay) {
-      customEmojisSheet
     }
     .onAppear {
       viewModel.setInitialLanguageSelection(preference: preferences.recentlyUsedLanguages.first ?? preferences.serverPreferences?.postLanguage)
