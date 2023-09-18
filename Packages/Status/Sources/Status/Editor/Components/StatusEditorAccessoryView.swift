@@ -278,6 +278,7 @@ struct StatusEditorAccessoryView: View {
           } label: {
             Text(draft)
               .lineLimit(3)
+              .foregroundStyle(theme.labelColor)
           }.listRowBackground(theme.primaryBackgroundColor)
         }
         .onDelete { indexes in
