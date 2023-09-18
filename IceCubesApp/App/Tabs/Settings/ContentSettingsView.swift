@@ -9,7 +9,7 @@ import UserNotifications
 
 struct ContentSettingsView: View {
   @EnvironmentObject private var userPreferences: UserPreferences
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   var body: some View {
     Form {

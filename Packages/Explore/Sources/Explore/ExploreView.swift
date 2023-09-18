@@ -7,8 +7,9 @@ import Shimmer
 import Status
 import SwiftUI
 
+@MainActor
 public struct ExploreView: View {
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath
 

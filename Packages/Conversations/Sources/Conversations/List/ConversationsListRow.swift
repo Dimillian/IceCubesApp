@@ -5,10 +5,11 @@ import Models
 import Network
 import SwiftUI
 
+@MainActor
 struct ConversationsListRow: View {
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var currentAccount
 
   @Binding var conversation: Conversation

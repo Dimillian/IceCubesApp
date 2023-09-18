@@ -4,10 +4,11 @@ import Models
 import Network
 import SwiftUI
 
+@MainActor
 struct EditFilterView: View {
   @Environment(\.dismiss) private var dismiss
 
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var account
   @Environment(Client.self) private var client
 

@@ -5,9 +5,10 @@ import Network
 import Shimmer
 import SwiftUI
 
+@MainActor
 public struct NotificationsListView: View {
   @Environment(\.scenePhase) private var scenePhase
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(StreamWatcher.self) private var watcher
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath

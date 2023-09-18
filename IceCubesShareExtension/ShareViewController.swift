@@ -31,7 +31,7 @@ class ShareViewController: UIViewController {
           .environment(appAccountsManager)
           .environment(client)
           .environment(account)
-          .environmentObject(theme)
+          .environment(theme)
           .environment(instance)
           .tint(theme.tintColor)
           .preferredColorScheme(colorScheme == .light ? .light : .dark)

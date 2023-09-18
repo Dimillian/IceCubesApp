@@ -15,10 +15,10 @@ import SwiftUI
   let showActions: Bool
   let textDisabled: Bool
   let finalStatus: AnyStatus
-  
+
   let client: Client
   let routerPath: RouterPath
-  
+
   private let theme = Theme.shared
   private let userMentionned: Bool
 

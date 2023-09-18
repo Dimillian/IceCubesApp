@@ -3,8 +3,9 @@ import Env
 import Models
 import SwiftUI
 
+@MainActor
 struct StatusRowTextView: View {
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(\.isStatusFocused) private var isFocused
 
   var viewModel: StatusRowViewModel

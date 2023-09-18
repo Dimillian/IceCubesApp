@@ -3,7 +3,7 @@ import SwiftUI
 
 public struct ThemePreviewView: View {
   private let gutterSpace: Double = 8
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(\.dismiss) var dismiss
 
   public init() {}
@@ -25,7 +25,7 @@ public struct ThemePreviewView: View {
 }
 
 struct ThemeBoxView: View {
-  @EnvironmentObject var theme: Theme
+  @Environment(Theme.self) private var theme
   private let gutterSpace = 8.0
   @State private var isSelected = false
 

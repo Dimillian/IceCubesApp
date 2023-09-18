@@ -9,7 +9,7 @@ import Timeline
 
 struct TimelineTab: View {
   @Environment(AppAccountsManager.self) private var appAccount
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var currentAccount
   @EnvironmentObject private var preferences: UserPreferences
   @Environment(Client.self) private var client

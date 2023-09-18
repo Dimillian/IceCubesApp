@@ -8,8 +8,9 @@ import Network
 import Shimmer
 import SwiftUI
 
+@MainActor
 struct MessagesTab: View {
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(StreamWatcher.self) private var watcher
   @Environment(Client.self) private var client
   @Environment(CurrentAccount.self) private var currentAccount

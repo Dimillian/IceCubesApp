@@ -4,7 +4,7 @@ import Models
 import SwiftUI
 
 struct StatusRowSwipeView: View {
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @EnvironmentObject private var preferences: UserPreferences
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(StatusDataController.self) private var statusDataController

@@ -7,13 +7,14 @@ import Status
 import SwiftUI
 import SwiftUIIntrospect
 
+@MainActor
 public struct TimelineView: View {
   private enum Constants {
     static let scrollToTop = "top"
   }
 
   @Environment(\.scenePhase) private var scenePhase
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var account
   @Environment(StreamWatcher.self) private var watcher
   @Environment(Client.self) private var client

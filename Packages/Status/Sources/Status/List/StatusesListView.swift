@@ -5,8 +5,9 @@ import Network
 import Shimmer
 import SwiftUI
 
+@MainActor
 public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   @State private var fetcher: Fetcher
   // Whether this status is on a remote local timeline (many actions are unavailable if so)

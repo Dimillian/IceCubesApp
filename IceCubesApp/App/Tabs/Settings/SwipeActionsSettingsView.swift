@@ -3,7 +3,7 @@ import Env
 import SwiftUI
 
 struct SwipeActionsSettingsView: View {
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @EnvironmentObject private var userPreferences: UserPreferences
 
   var body: some View {

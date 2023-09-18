@@ -3,8 +3,9 @@ import EmojiText
 import Foundation
 import SwiftUI
 
+@MainActor
 struct StatusEditorAutoCompleteView: View {
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   var viewModel: StatusEditorViewModel
 
   var body: some View {

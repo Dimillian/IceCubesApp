@@ -8,7 +8,7 @@ struct StatusRowContentView: View {
   @Environment(\.isCompact) private var isCompact
   @Environment(\.isStatusFocused) private var isFocused
 
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   var viewModel: StatusRowViewModel
 

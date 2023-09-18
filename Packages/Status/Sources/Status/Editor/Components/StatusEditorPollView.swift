@@ -2,6 +2,7 @@ import DesignSystem
 import Env
 import SwiftUI
 
+@MainActor
 struct StatusEditorPollView: View {
   enum FocusField: Hashable {
     case option(Int)
@@ -11,7 +12,7 @@ struct StatusEditorPollView: View {
 
   @State private var currentFocusIndex: Int = 0
 
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(CurrentInstance.self) private var currentInstance
 
   var viewModel: StatusEditorViewModel

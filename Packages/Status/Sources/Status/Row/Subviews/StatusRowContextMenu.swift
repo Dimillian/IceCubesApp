@@ -4,6 +4,7 @@ import Foundation
 import Network
 import SwiftUI
 
+@MainActor
 struct StatusRowContextMenu: View {
   @Environment(\.displayScale) var displayScale
 
@@ -85,7 +86,7 @@ struct StatusRowContextMenu: View {
               .padding(16)
           }
           .environment(\.isInCaptureMode, true)
-          .environmentObject(Theme.shared)
+          .environment(Theme.shared)
           .environmentObject(preferences)
           .environment(account)
           .environment(currentInstance)

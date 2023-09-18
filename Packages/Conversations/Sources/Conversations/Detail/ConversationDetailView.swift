@@ -5,6 +5,7 @@ import Network
 import NukeUI
 import SwiftUI
 
+@MainActor
 public struct ConversationDetailView: View {
   private enum Constants {
     static let bottomAnchor = "bottom"
@@ -14,7 +15,7 @@ public struct ConversationDetailView: View {
   @Environment(RouterPath.self) private var routerPath
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(Client.self) private var client
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(StreamWatcher.self) private var watcher
 
   @State private var viewModel: ConversationDetailViewModel

@@ -9,10 +9,11 @@ public extension View {
   }
 }
 
+@MainActor
 struct ThemeApplier: ViewModifier {
   @Environment(\EnvironmentValues.colorScheme) var colorScheme
 
-  @ObservedObject var theme: Theme
+  var theme: Theme
 
   var actualColorScheme: SwiftUI.ColorScheme? {
     if theme.followSystemColorScheme {

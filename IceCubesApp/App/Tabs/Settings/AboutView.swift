@@ -2,9 +2,10 @@ import DesignSystem
 import Env
 import SwiftUI
 
+@MainActor
 struct AboutView: View {
   @Environment(RouterPath.self) private var routerPath
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   let versionNumber: String
 
@@ -101,6 +102,6 @@ struct AboutView: View {
 struct AboutView_Previews: PreviewProvider {
   static var previews: some View {
     AboutView()
-      .environmentObject(Theme.shared)
+      .environment(Theme.shared)
   }
 }

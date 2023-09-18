@@ -3,11 +3,12 @@ import Env
 import Models
 import SwiftUI
 
+@MainActor
 struct StatusRowHeaderView: View {
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
   @Environment(\.isStatusFocused) private var isFocused
 
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   let viewModel: StatusRowViewModel
 

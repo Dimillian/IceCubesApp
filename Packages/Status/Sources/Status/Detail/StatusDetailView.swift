@@ -5,8 +5,9 @@ import Network
 import Shimmer
 import SwiftUI
 
+@MainActor
 public struct StatusDetailView: View {
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(StreamWatcher.self) private var watcher
   @Environment(Client.self) private var client

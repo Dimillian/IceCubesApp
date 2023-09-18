@@ -6,12 +6,13 @@ import NukeUI
 import Shimmer
 import SwiftUI
 
+@MainActor
 struct AccountDetailHeaderView: View {
   enum Constants {
     static let headerHeight: CGFloat = 200
   }
 
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(QuickLook.self) private var quickLook
   @Environment(RouterPath.self) private var routerPath
   @Environment(CurrentAccount.self) private var currentAccount

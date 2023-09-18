@@ -4,8 +4,9 @@ import Models
 import Network
 import SwiftUI
 
+@MainActor
 public struct StatusPollView: View {
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(Client.self) private var client
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(CurrentAccount.self) private var currentAccount

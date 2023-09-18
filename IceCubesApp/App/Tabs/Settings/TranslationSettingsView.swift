@@ -4,7 +4,7 @@ import SwiftUI
 
 struct TranslationSettingsView: View {
   @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   @State private var apiKey: String = ""
 

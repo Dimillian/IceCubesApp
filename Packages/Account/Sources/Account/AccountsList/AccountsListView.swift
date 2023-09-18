@@ -5,8 +5,9 @@ import Network
 import Shimmer
 import SwiftUI
 
+@MainActor
 public struct AccountsListView: View {
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(Client.self) private var client
   @Environment(CurrentAccount.self) private var currentAccount
   @State private var viewModel: AccountsListViewModel

@@ -11,7 +11,7 @@ struct AddRemoteTimelineView: View {
   @Environment(\.dismiss) private var dismiss
 
   @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   @State private var instanceName: String = ""
   @State private var instance: Instance?

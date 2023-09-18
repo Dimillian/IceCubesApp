@@ -15,15 +15,14 @@ import SwiftUI
   var lineSpacing = Theme.shared.lineSpacing
   var fontSizeScale = Theme.shared.fontSizeScale
 
-
-  init() { }
+  init() {}
 }
 
 struct DisplaySettingsView: View {
   typealias FontState = Theme.FontState
 
   @Environment(\.colorScheme) private var colorScheme
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @EnvironmentObject private var userPreferences: UserPreferences
 
   @State private var localValues = DisplaySettingsLocalValues()
@@ -51,27 +50,27 @@ struct DisplaySettingsView: View {
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
       .task(id: localValues.tintColor) {
-        do { try await Task.sleep(for: .microseconds(500)) } catch { }
+        do { try await Task.sleep(for: .microseconds(500)) } catch {}
         Theme.shared.tintColor = localValues.tintColor
       }
       .task(id: localValues.primaryBackgroundColor) {
-        do { try await Task.sleep(for: .microseconds(500)) } catch { }
+        do { try await Task.sleep(for: .microseconds(500)) } catch {}
         Theme.shared.primaryBackgroundColor = localValues.primaryBackgroundColor
       }
       .task(id: localValues.secondaryBackgroundColor) {
-        do { try await Task.sleep(for: .microseconds(500)) } catch { }
+        do { try await Task.sleep(for: .microseconds(500)) } catch {}
         Theme.shared.secondaryBackgroundColor = localValues.secondaryBackgroundColor
       }
       .task(id: localValues.labelColor) {
-        do { try await Task.sleep(for: .microseconds(500)) } catch { }
+        do { try await Task.sleep(for: .microseconds(500)) } catch {}
         Theme.shared.labelColor = localValues.labelColor
       }
       .task(id: localValues.lineSpacing) {
-        do { try await Task.sleep(for: .microseconds(500)) } catch { }
+        do { try await Task.sleep(for: .microseconds(500)) } catch {}
         Theme.shared.lineSpacing = localValues.lineSpacing
       }
       .task(id: localValues.fontSizeScale) {
-        do { try await Task.sleep(for: .microseconds(500)) } catch { }
+        do { try await Task.sleep(for: .microseconds(500)) } catch {}
         Theme.shared.fontSizeScale = localValues.fontSizeScale
       }
       examplePost
@@ -96,7 +95,9 @@ struct DisplaySettingsView: View {
     }
   }
 
+  @ViewBuilder
   private var themeSection: some View {
+    @Bindable var theme = theme
     Section {
       Toggle("settings.display.theme.systemColor", isOn: $theme.followSystemColorScheme)
       themeSelectorButton
@@ -176,7 +177,9 @@ struct DisplaySettingsView: View {
     .listRowBackground(theme.primaryBackgroundColor)
   }
 
+  @ViewBuilder
   private var layoutSection: some View {
+    @Bindable var theme = theme
     Section("settings.display.section.display") {
       Picker("settings.display.avatar.position", selection: $theme.avatarPosition) {
         ForEach(Theme.AvatarPosition.allCases, id: \.rawValue) { position in

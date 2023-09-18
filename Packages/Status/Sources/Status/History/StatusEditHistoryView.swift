@@ -7,7 +7,7 @@ public struct StatusEditHistoryView: View {
   @Environment(\.dismiss) private var dismiss
 
   @Environment(Client.self) private var client
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   private let statusId: String
 

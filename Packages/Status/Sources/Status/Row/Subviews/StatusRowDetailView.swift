@@ -75,7 +75,7 @@ struct StatusRowDetailView: View {
         .buttonStyle(.borderless)
         .transition(.move(edge: .leading))
       }
-      
+
       if viewModel.actionsAccountsFetched, statusDataController.reblogsCount > 0 {
         Divider()
         Button {

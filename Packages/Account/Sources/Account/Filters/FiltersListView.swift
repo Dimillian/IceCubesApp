@@ -7,7 +7,7 @@ import SwiftUI
 public struct FiltersListView: View {
   @Environment(\.dismiss) private var dismiss
 
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var account
   @Environment(Client.self) private var client
 

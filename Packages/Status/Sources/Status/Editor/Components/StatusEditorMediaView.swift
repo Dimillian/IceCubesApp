@@ -5,8 +5,9 @@ import Models
 import NukeUI
 import SwiftUI
 
+@MainActor
 struct StatusEditorMediaView: View {
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(CurrentInstance.self) private var currentInstance
   var viewModel: StatusEditorViewModel
   @State private var editingContainer: StatusEditorMediaContainer?

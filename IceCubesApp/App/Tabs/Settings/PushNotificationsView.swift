@@ -7,8 +7,9 @@ import NukeUI
 import SwiftUI
 import UserNotifications
 
+@MainActor
 struct PushNotificationsView: View {
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(AppAccountsManager.self) private var appAccountsManager
   @Environment(PushNotificationsService.self) private var pushNotifications
 

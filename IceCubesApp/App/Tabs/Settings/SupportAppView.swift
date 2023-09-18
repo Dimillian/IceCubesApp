@@ -4,6 +4,7 @@ import RevenueCat
 import Shimmer
 import SwiftUI
 
+@MainActor
 struct SupportAppView: View {
   enum Tip: String, CaseIterable {
     case one, two, three, four, supporter
@@ -47,7 +48,7 @@ struct SupportAppView: View {
     }
   }
 
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   @Environment(\.openURL) private var openURL
 

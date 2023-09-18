@@ -19,7 +19,7 @@ import SwiftUI
   var state: State = .loading
   var title: LocalizedStringKey = ""
   var scrollToId: String?
-  
+
   @ObservationIgnored
   var isReplyToPreviousCache: [String: Bool] = [:]
 
@@ -127,7 +127,7 @@ import SwiftUI
       isReplyToPreviousCache[status.id] = isReplyToPrevious
     }
   }
-  
+
   func handleEvent(event: any StreamEvent, currentAccount: Account?) {
     Task {
       if let event = event as? StreamEventUpdate,

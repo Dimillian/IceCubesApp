@@ -59,7 +59,7 @@ public extension EnvironmentValues {
     get { self[IsStatusFocused.self] }
     set { self[IsStatusFocused.self] = newValue }
   }
-  
+
   var isStatusReplyToPrevious: Bool {
     get { self[IsStatusReplyToPrevious.self] }
     set { self[IsStatusReplyToPrevious.self] = newValue }

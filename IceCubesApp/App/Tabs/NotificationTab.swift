@@ -11,7 +11,7 @@ struct NotificationsTab: View {
   @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
   @Environment(\.scenePhase) private var scenePhase
 
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(Client.self) private var client
   @Environment(StreamWatcher.self) private var watcher
   @Environment(AppAccountsManager.self) private var appAccount

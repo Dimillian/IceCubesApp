@@ -1,14 +1,35 @@
 import Combine
 import SwiftUI
 
-public class Theme: ObservableObject {
-  enum ThemeKey: String {
-    case colorScheme, tint, label, primaryBackground, secondaryBackground
-    case avatarPosition, avatarShape, statusActionsDisplay, statusDisplayStyle
-    case selectedSet, selectedScheme
-    case followSystemColorSchme
-    case displayFullUsernameTimeline
-    case lineSpacing
+@Observable public class Theme {
+  class ThemeStorage {
+    enum ThemeKey: String {
+      case colorScheme, tint, label, primaryBackground, secondaryBackground
+      case avatarPosition, avatarShape, statusActionsDisplay, statusDisplayStyle
+      case selectedSet, selectedScheme
+      case followSystemColorSchme
+      case displayFullUsernameTimeline
+      case lineSpacing
+    }
+
+    @AppStorage("is_previously_set") public var isThemePreviouslySet: Bool = false
+    @AppStorage(ThemeKey.selectedScheme.rawValue) public var selectedScheme: ColorScheme = .dark
+    @AppStorage(ThemeKey.tint.rawValue) public var tintColor: Color = .black
+    @AppStorage(ThemeKey.primaryBackground.rawValue) public var primaryBackgroundColor: Color = .white
+    @AppStorage(ThemeKey.secondaryBackground.rawValue) public var secondaryBackgroundColor: Color = .gray
+    @AppStorage(ThemeKey.label.rawValue) public var labelColor: Color = .black
+    @AppStorage(ThemeKey.avatarPosition.rawValue) var rawAvatarPosition: String = AvatarPosition.top.rawValue
+    @AppStorage(ThemeKey.avatarShape.rawValue) var rawAvatarShape: String = AvatarShape.rounded.rawValue
+    @AppStorage(ThemeKey.selectedSet.rawValue) var storedSet: ColorSetName = .iceCubeDark
+    @AppStorage(ThemeKey.statusActionsDisplay.rawValue) public var statusActionsDisplay: StatusActionsDisplay = .full
+    @AppStorage(ThemeKey.statusDisplayStyle.rawValue) public var statusDisplayStyle: StatusDisplayStyle = .large
+    @AppStorage(ThemeKey.followSystemColorSchme.rawValue) public var followSystemColorScheme: Bool = true
+    @AppStorage(ThemeKey.displayFullUsernameTimeline.rawValue) public var displayFullUsername: Bool = true
+    @AppStorage(ThemeKey.lineSpacing.rawValue) public var lineSpacing: Double = 0.8
+    @AppStorage("font_size_scale") public var fontSizeScale: Double = 1
+    @AppStorage("chosen_font") public var chosenFontData: Data?
+
+    init() {}
   }
 
   public enum FontState: Int, CaseIterable {
@@ -18,7 +39,6 @@ public class Theme: ObservableObject {
     case SFRounded
     case custom
 
-    @MainActor
     public var title: LocalizedStringKey {
       switch self {
       case .system:
@@ -115,60 +135,144 @@ public class Theme: ObservableObject {
     }
   }
 
-  @AppStorage("is_previously_set") public var isThemePreviouslySet: Bool = false
-  @AppStorage(ThemeKey.selectedScheme.rawValue) public var selectedScheme: ColorScheme = .dark
-  @AppStorage(ThemeKey.tint.rawValue) public var tintColor: Color = .black
-  @AppStorage(ThemeKey.primaryBackground.rawValue) public var primaryBackgroundColor: Color = .white
-  @AppStorage(ThemeKey.secondaryBackground.rawValue) public var secondaryBackgroundColor: Color = .gray
-  @AppStorage(ThemeKey.label.rawValue) public var labelColor: Color = .black
-  @AppStorage(ThemeKey.avatarPosition.rawValue) var rawAvatarPosition: String = AvatarPosition.top.rawValue
-  @AppStorage(ThemeKey.avatarShape.rawValue) var rawAvatarShape: String = AvatarShape.rounded.rawValue
-  @AppStorage(ThemeKey.selectedSet.rawValue) var storedSet: ColorSetName = .iceCubeDark
-  @AppStorage(ThemeKey.statusActionsDisplay.rawValue) public var statusActionsDisplay: StatusActionsDisplay = .full
-  @AppStorage(ThemeKey.statusDisplayStyle.rawValue) public var statusDisplayStyle: StatusDisplayStyle = .large
-  @AppStorage(ThemeKey.followSystemColorSchme.rawValue) public var followSystemColorScheme: Bool = true
-  @AppStorage(ThemeKey.displayFullUsernameTimeline.rawValue) public var displayFullUsername: Bool = true
-  @AppStorage(ThemeKey.lineSpacing.rawValue) public var lineSpacing: Double = 0.8
-  @AppStorage("font_size_scale") public var fontSizeScale: Double = 1
-  @AppStorage("chosen_font") public private(set) var chosenFontData: Data?
+  let themeStorage = ThemeStorage()
 
-  @Published public var avatarPosition: AvatarPosition = .top
-  @Published public var avatarShape: AvatarShape = .rounded
-  @Published public var selectedSet: ColorSetName = .iceCubeDark
+  public var isThemePreviouslySet: Bool {
+    didSet {
+      themeStorage.isThemePreviouslySet = isThemePreviouslySet
+    }
+  }
 
-  private var cancellables = Set<AnyCancellable>()
+  public var selectedScheme: ColorScheme {
+    didSet {
+      themeStorage.selectedScheme = selectedScheme
+    }
+  }
+
+  public var tintColor: Color {
+    didSet {
+      themeStorage.tintColor = tintColor
+    }
+  }
+
+  public var primaryBackgroundColor: Color {
+    didSet {
+      themeStorage.primaryBackgroundColor = primaryBackgroundColor
+    }
+  }
+
+  public var secondaryBackgroundColor: Color {
+    didSet {
+      themeStorage.secondaryBackgroundColor = secondaryBackgroundColor
+    }
+  }
+
+  public var labelColor: Color {
+    didSet {
+      themeStorage.labelColor = labelColor
+    }
+  }
+
+  private var rawAvatarPosition: String {
+    didSet {
+      themeStorage.rawAvatarPosition = rawAvatarPosition
+    }
+  }
+
+  private var rawAvatarShape: String {
+    didSet {
+      themeStorage.rawAvatarShape = rawAvatarShape
+    }
+  }
+
+  private var storedSet: ColorSetName {
+    didSet {
+      themeStorage.storedSet = storedSet
+    }
+  }
+
+  public var statusActionsDisplay: StatusActionsDisplay {
+    didSet {
+      themeStorage.statusActionsDisplay = statusActionsDisplay
+    }
+  }
+
+  public var statusDisplayStyle: StatusDisplayStyle {
+    didSet {
+      themeStorage.statusDisplayStyle = statusDisplayStyle
+    }
+  }
+
+  public var followSystemColorScheme: Bool {
+    didSet {
+      themeStorage.followSystemColorScheme = followSystemColorScheme
+    }
+  }
+
+  public var displayFullUsername: Bool {
+    didSet {
+      themeStorage.displayFullUsername = displayFullUsername
+    }
+  }
+
+  public var lineSpacing: Double {
+    didSet {
+      themeStorage.lineSpacing = lineSpacing
+    }
+  }
+
+  public var fontSizeScale: Double {
+    didSet {
+      themeStorage.fontSizeScale = fontSizeScale
+    }
+  }
+
+  public private(set) var chosenFontData: Data? {
+    didSet {
+      themeStorage.chosenFontData = chosenFontData
+    }
+  }
+
+  public var avatarPosition: AvatarPosition = .top {
+    didSet {
+      rawAvatarPosition = avatarShape.rawValue
+    }
+  }
+
+  public var avatarShape: AvatarShape = .rounded {
+    didSet {
+      rawAvatarShape = avatarShape.rawValue
+    }
+  }
+
+  public var selectedSet: ColorSetName = .iceCubeDark {
+    didSet {
+      setColor(withName: selectedSet)
+    }
+  }
 
   public static let shared = Theme()
 
   private init() {
+    isThemePreviouslySet = themeStorage.isThemePreviouslySet
+    selectedScheme = themeStorage.selectedScheme
+    tintColor = themeStorage.tintColor
+    primaryBackgroundColor = themeStorage.primaryBackgroundColor
+    secondaryBackgroundColor = themeStorage.secondaryBackgroundColor
+    labelColor = themeStorage.labelColor
+    rawAvatarPosition = themeStorage.rawAvatarPosition
+    rawAvatarShape = themeStorage.rawAvatarShape
+    storedSet = themeStorage.storedSet
+    statusActionsDisplay = themeStorage.statusActionsDisplay
+    statusDisplayStyle = themeStorage.statusDisplayStyle
+    followSystemColorScheme = themeStorage.followSystemColorScheme
+    displayFullUsername = themeStorage.displayFullUsername
+    lineSpacing = themeStorage.lineSpacing
+    fontSizeScale = themeStorage.fontSizeScale
+    chosenFontData = themeStorage.chosenFontData
     selectedSet = storedSet
-
     avatarPosition = AvatarPosition(rawValue: rawAvatarPosition) ?? .top
     avatarShape = AvatarShape(rawValue: rawAvatarShape) ?? .rounded
-
-    $avatarPosition
-      .dropFirst()
-      .map(\.rawValue)
-      .sink { [weak self] position in
-        self?.rawAvatarPosition = position
-      }
-      .store(in: &cancellables)
-
-    $avatarShape
-      .dropFirst()
-      .map(\.rawValue)
-      .sink { [weak self] shape in
-        self?.rawAvatarShape = shape
-      }
-      .store(in: &cancellables)
-
-    // Workaround, since @AppStorage can't be directly observed
-    $selectedSet
-      .dropFirst()
-      .sink { [weak self] colorSetName in
-        self?.setColor(withName: colorSetName)
-      }
-      .store(in: &cancellables)
   }
 
   public static var allColorSet: [ColorSet] {

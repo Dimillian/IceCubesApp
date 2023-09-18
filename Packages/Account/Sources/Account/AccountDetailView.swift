@@ -15,7 +15,7 @@ public struct AccountDetailView: View {
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(CurrentInstance.self) private var currentInstance
   @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath
 

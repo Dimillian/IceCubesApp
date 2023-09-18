@@ -10,7 +10,7 @@ public struct ConversationsListView: View {
   @Environment(RouterPath.self) private var routerPath
   @Environment(StreamWatcher.self) private var watcher
   @Environment(Client.self) private var client
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   @State private var viewModel = ConversationsListViewModel()
 

@@ -8,7 +8,7 @@ import SwiftUI
 struct SideBarView<Content: View>: View {
   @Environment(AppAccountsManager.self) private var appAccounts
   @Environment(CurrentAccount.self) private var currentAccount
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(StreamWatcher.self) private var watcher
   @EnvironmentObject private var userPreferences: UserPreferences
   @Environment(RouterPath.self) private var routerPath
@@ -155,7 +155,7 @@ struct SideBarView<Content: View>: View {
 }
 
 private struct SideBarIcon: View {
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   let systemIconName: String
   let isSelected: Bool

@@ -22,7 +22,7 @@ struct IceCubesApp: App {
   @State private var pushNotificationsService = PushNotificationsService.shared
   @State private var watcher = StreamWatcher()
   @State private var quickLook = QuickLook()
-  @StateObject private var theme = Theme.shared
+  @State private var theme = Theme.shared
   @State private var sidebarRouterPath = RouterPath()
 
   @State private var selectedTab: Tab = .timeline
@@ -49,7 +49,7 @@ struct IceCubesApp: App {
         .environment(currentAccount)
         .environment(currentInstance)
         .environmentObject(userPreferences)
-        .environmentObject(theme)
+        .environment(theme)
         .environment(watcher)
         .environment(pushNotificationsService)
         .environment(\.isSupporter, isSupporter)

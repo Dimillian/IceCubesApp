@@ -6,8 +6,9 @@ import Network
 import Status
 import SwiftUI
 
+@MainActor
 struct NotificationRowView: View {
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(\.redactionReasons) private var reasons
 
   let notification: ConsolidatedNotification

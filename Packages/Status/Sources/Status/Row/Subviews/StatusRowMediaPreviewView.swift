@@ -14,7 +14,7 @@ public struct StatusRowMediaPreviewView: View {
   @Environment(SceneDelegate.self) private var sceneDelegate
   @EnvironmentObject private var preferences: UserPreferences
   @Environment(QuickLook.self) private var quickLook
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   public let attachments: [MediaAttachment]
   public let sensitive: Bool

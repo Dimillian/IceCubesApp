@@ -7,6 +7,7 @@ import Network
 import Shimmer
 import SwiftUI
 
+@MainActor
 public struct StatusRowView: View {
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
   @Environment(\.redactionReasons) private var reasons
@@ -16,7 +17,7 @@ public struct StatusRowView: View {
   @Environment(\.isStatusReplyToPrevious) private var isStatusReplyToPrevious
 
   @Environment(QuickLook.self) private var quickLook
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   @State private var viewModel: StatusRowViewModel
 
@@ -95,7 +96,7 @@ public struct StatusRowView: View {
                       viewModel.navigateToDetail()
                     }
                 }
-                
+
                 if isFocused {
                   StatusRowDetailView(viewModel: viewModel)
                 }

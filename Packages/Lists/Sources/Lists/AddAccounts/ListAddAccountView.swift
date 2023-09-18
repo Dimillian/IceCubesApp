@@ -4,10 +4,11 @@ import Models
 import Network
 import SwiftUI
 
+@MainActor
 public struct ListAddAccountView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(Client.self) private var client
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var currentAccount
   @State private var viewModel: ListAddAccountViewModel
 

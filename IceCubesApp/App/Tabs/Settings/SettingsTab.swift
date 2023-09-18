@@ -17,7 +17,7 @@ struct SettingsTabs: View {
   @Environment(Client.self) private var client
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(AppAccountsManager.self) private var appAccountsManager
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   @State private var routerPath = RouterPath()
   @State private var addAccountSheetPresented = false

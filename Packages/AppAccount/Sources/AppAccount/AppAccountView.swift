@@ -4,7 +4,7 @@ import Env
 import SwiftUI
 
 public struct AppAccountView: View {
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(RouterPath.self) private var routerPath
   @Environment(AppAccountsManager.self) private var appAccounts
   @EnvironmentObject private var preferences: UserPreferences

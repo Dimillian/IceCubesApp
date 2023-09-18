@@ -6,7 +6,7 @@ import SwiftUI
 @MainActor
 public struct AvatarView: View {
   @Environment(\.redactionReasons) private var reasons
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   public enum Size {
     case account, status, embed, badge, list, boost

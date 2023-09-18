@@ -7,7 +7,7 @@ import SwiftUI
 
 @MainActor
 public struct StatusEmbeddedView: View {
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   public let status: Status
   public let client: Client

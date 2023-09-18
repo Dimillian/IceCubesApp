@@ -7,7 +7,7 @@ import SwiftUI
 
 struct StatusEditorAccessoryView: View {
   @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(\.colorScheme) private var colorScheme
 

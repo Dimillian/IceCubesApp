@@ -5,12 +5,13 @@ import Network
 import NukeUI
 import SwiftUI
 
+@MainActor
 struct ConversationMessageView: View {
   @Environment(QuickLook.self) private var quickLook
   @Environment(RouterPath.self) private var routerPath
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(Client.self) private var client
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   let message: Status
   let conversation: Conversation

@@ -52,7 +52,7 @@ struct VideoPlayerView: View {
   @Environment(\.scenePhase) private var scenePhase
   @Environment(\.isCompact) private var isCompact
   @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   @State var viewModel: VideoPlayerViewModel
 

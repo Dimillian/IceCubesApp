@@ -9,6 +9,7 @@ import SafariServices
 import Shimmer
 import SwiftUI
 
+@MainActor
 struct AddAccountView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(\.scenePhase) private var scenePhase
@@ -17,7 +18,7 @@ struct AddAccountView: View {
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(PushNotificationsService.self) private var pushNotifications
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   @State private var instanceName: String = ""
   @State private var instance: Instance?

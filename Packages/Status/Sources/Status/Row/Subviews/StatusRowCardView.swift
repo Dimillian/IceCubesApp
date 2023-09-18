@@ -9,7 +9,7 @@ public struct StatusRowCardView: View {
   @Environment(\.openURL) private var openURL
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
 
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   let card: Card
 

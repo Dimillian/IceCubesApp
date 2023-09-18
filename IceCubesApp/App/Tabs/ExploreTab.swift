@@ -8,7 +8,7 @@ import Shimmer
 import SwiftUI
 
 struct ExploreTab: View {
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @EnvironmentObject private var preferences: UserPreferences
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(Client.self) private var client

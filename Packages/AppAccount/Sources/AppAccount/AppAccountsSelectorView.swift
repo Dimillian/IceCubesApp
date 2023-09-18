@@ -6,7 +6,7 @@ public struct AppAccountsSelectorView: View {
   @EnvironmentObject private var preferences: UserPreferences
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(AppAccountsManager.self) private var appAccounts
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   var routerPath: RouterPath
 

@@ -5,7 +5,7 @@ import Network
 import SwiftUI
 
 struct StatusRowActionsView: View {
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(StatusDataController.self) private var statusDataController
   @EnvironmentObject private var userPreferences: UserPreferences
@@ -13,7 +13,7 @@ struct StatusRowActionsView: View {
   @Environment(\.isStatusFocused) private var isFocused
 
   var viewModel: StatusRowViewModel
-  
+
   func privateBoost() -> Bool {
     viewModel.status.visibility == .priv && viewModel.status.account.id == currentAccount.account?.id
   }

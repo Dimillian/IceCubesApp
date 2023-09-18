@@ -11,10 +11,11 @@ import StoreKit
 import SwiftUI
 import UIKit
 
+@MainActor
 public struct StatusEditorView: View {
   @Environment(AppAccountsManager.self) private var appAccounts
   @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(Client.self) private var client
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(RouterPath.self) private var routerPath
@@ -238,7 +239,7 @@ public struct StatusEditorView: View {
                                   avatarSize: .status)
         } else {
           AvatarView(url: account.avatar, size: .status)
-            .environmentObject(theme)
+            .environment(theme)
             .accessibilityHidden(true)
         }
         VStack(alignment: .leading, spacing: 4) {

@@ -20,8 +20,9 @@ import SwiftUI
   }
 }
 
+@MainActor
 public struct AccountsListRow: View {
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(RouterPath.self) private var routerPath
   @Environment(Client.self) private var client
@@ -117,7 +118,7 @@ public struct AccountsListRow: View {
       .listStyle(.plain)
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
-      .environmentObject(theme)
+      .environment(theme)
       .environment(currentAccount)
       .environment(client)
     }

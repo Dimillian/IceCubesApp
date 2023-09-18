@@ -14,7 +14,7 @@ struct AccountSettingsView: View {
   @Environment(PushNotificationsService.self) private var pushNotifications
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(CurrentInstance.self) private var currentInstance
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
   @Environment(AppAccountsManager.self) private var appAccountsManager
   @Environment(Client.self) private var client
 
