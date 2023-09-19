@@ -18,7 +18,6 @@ public struct StatusEditorView: View {
   @Environment(Theme.self) private var theme
   @Environment(Client.self) private var client
   @Environment(CurrentAccount.self) private var currentAccount
-  @Environment(RouterPath.self) private var routerPath
   @Environment(\.dismiss) private var dismiss
 
   @State private var viewModel: StatusEditorViewModel
@@ -49,13 +48,13 @@ public struct StatusEditorView: View {
                      .padding(.horizontal, .layoutPadding)
             StatusEditorMediaView(viewModel: viewModel)
             if let status = viewModel.embeddedStatus {
-              StatusEmbeddedView(status: status, client: client, routerPath: routerPath)
+              StatusEmbeddedView(status: status, client: client, routerPath: RouterPath())
                 .padding(.horizontal, .layoutPadding)
                 .disabled(true)
             } else if let status = viewModel.replyToStatus {
               Divider()
                 .padding(.top, 20)
-              StatusEmbeddedView(status: status, client: client, routerPath: routerPath)
+              StatusEmbeddedView(status: status, client: client, routerPath: RouterPath())
                 .padding(.horizontal, .layoutPadding)
                 .disabled(true)
             }
