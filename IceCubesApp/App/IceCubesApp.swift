@@ -103,7 +103,7 @@ struct IceCubesApp: App {
     if tab == .notifications, selectedTab != tab,
        let token = appAccountsManager.currentAccount.oauthToken
     {
-      return watcher.unreadNotificationsCount + userPreferences.getNotificationsCount(for: token)
+      return watcher.unreadNotificationsCount + (userPreferences.notificationsCount[token] ?? 0)
     }
     return 0
   }
@@ -176,7 +176,7 @@ struct IceCubesApp: App {
         if selectedTab == .notifications,
            let token = appAccountsManager.currentAccount.oauthToken
         {
-          userPreferences.setNotification(count: 0, token: token)
+          userPreferences.notificationsCount[token] = 0
           watcher.unreadNotificationsCount = 0
         }
       }
@@ -217,6 +217,7 @@ struct IceCubesApp: App {
     case .active:
       watcher.watch(streams: [.user, .direct])
       UNUserNotificationCenter.current().setBadgeCount(0)
+      userPreferences.reloadNotificationsCount(tokens: appAccountsManager.availableAccounts.compactMap{ $0.oauthToken })
       Task {
         await userPreferences.refreshServerPreferences()
       }
@@ -285,6 +286,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   }
 
   func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError _: Error) {}
+  
+  func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) async -> UIBackgroundFetchResult {
+    
+    UserPreferences.shared.reloadNotificationsCount(tokens: AppAccountsManager.shared.availableAccounts.compactMap{ $0.oauthToken })
+    return .noData
+  }
 
   func application(_: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options _: UIScene.ConnectionOptions) -> UISceneConfiguration {
     let configuration = UISceneConfiguration(name: nil, sessionRole: connectingSceneSession.role)

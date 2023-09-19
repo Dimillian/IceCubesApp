@@ -22,7 +22,7 @@ struct SideBarView<Content: View>: View {
     if tab == .notifications, selectedTab != tab,
        let token = appAccounts.currentAccount.oauthToken
     {
-      return watcher.unreadNotificationsCount + userPreferences.getNotificationsCount(for: token)
+      return watcher.unreadNotificationsCount + (userPreferences.notificationsCount[token] ?? 0)
     }
     return 0
   }
@@ -82,9 +82,10 @@ struct SideBarView<Content: View>: View {
         AppAccountView(viewModel: .init(appAccount: account, isCompact: true))
         if showBadge,
            let token = account.oauthToken,
-           userPreferences.getNotificationsCount(for: token) > 0
+           let notificationsCount = userPreferences.notificationsCount[token],
+           notificationsCount > 0
         {
-          makeBadgeView(count: userPreferences.getNotificationsCount(for: token))
+          makeBadgeView(count: notificationsCount)
         }
       }
     }
@@ -110,7 +111,7 @@ struct SideBarView<Content: View>: View {
         SoundEffectManager.shared.playSound(of: .tabSelection)
         if tab == .notifications {
           if let token = appAccounts.currentAccount.oauthToken {
-            userPreferences.setNotification(count: 0, token: token)
+            userPreferences.notificationsCount[token] = 0
           }
           watcher.unreadNotificationsCount = 0
         }

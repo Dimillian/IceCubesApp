@@ -20,7 +20,7 @@ public struct AppAccountsSelectorView: View {
     accountsViewModel
       .filter { $0.account?.id != currentAccount.account?.id }
       .compactMap(\.appAccount.oauthToken)
-      .map { preferences.getNotificationsCount(for: $0) }
+      .map { preferences.notificationsCount[$0] ?? 0 }
       .reduce(0, +) > 0
   }
 
