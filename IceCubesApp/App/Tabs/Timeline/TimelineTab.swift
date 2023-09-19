@@ -60,18 +60,10 @@ struct TimelineTab: View {
       }
     }
     .onChange(of: client.isAuth) {
-      if client.isAuth {
-        timeline = lastTimelineFilter
-      } else {
-        timeline = .federated
-      }
+      resetTimelineFilter()
     }
     .onChange(of: currentAccount.account?.id) {
-      if client.isAuth, canFilterTimeline {
-        timeline = lastTimelineFilter
-      } else {
-        timeline = .federated
-      }
+      resetTimelineFilter()
     }
     .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
       if newValue == .timeline {
@@ -233,6 +225,14 @@ struct TimelineTab: View {
       ToolbarItem {
         EmptyView()
       }
+    }
+  }
+  
+  private func resetTimelineFilter() {
+    if client.isAuth, canFilterTimeline {
+      timeline = lastTimelineFilter
+    } else {
+      timeline = .federated
     }
   }
 }
