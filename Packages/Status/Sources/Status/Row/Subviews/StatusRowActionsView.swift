@@ -4,11 +4,12 @@ import Models
 import Network
 import SwiftUI
 
+@MainActor
 struct StatusRowActionsView: View {
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(StatusDataController.self) private var statusDataController
-  @EnvironmentObject private var userPreferences: UserPreferences
+  @Environment(UserPreferences.self) private var userPreferences
 
   @Environment(\.isStatusFocused) private var isFocused
 

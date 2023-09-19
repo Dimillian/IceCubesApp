@@ -2,26 +2,19 @@ import DesignSystem
 import Env
 import SwiftUI
 
+@MainActor
 struct TranslationSettingsView: View {
-  @EnvironmentObject private var preferences: UserPreferences
+  @Environment(UserPreferences.self) private var preferences
   @Environment(Theme.self) private var theme
 
   @State private var apiKey: String = ""
 
   var body: some View {
     Form {
-      Toggle(isOn: preferences.$alwaysUseDeepl) {
-        Text("settings.translation.always-deepl")
-      }
-      .listRowBackground(theme.primaryBackgroundColor)
-
+      deepLToggle
       if preferences.alwaysUseDeepl {
         Section("settings.translation.user-api-key") {
-          Picker("settings.translation.api-key-type", selection: $preferences.userDeeplAPIFree) {
-            Text("DeepL API Free").tag(true)
-            Text("DeepL API Pro").tag(false)
-          }
-
+          deepLPicker
           SecureField("settings.translation.user-api-key", text: $apiKey)
             .textContentType(.password)
         }
@@ -40,14 +33,7 @@ struct TranslationSettingsView: View {
           .listRowBackground(theme.primaryBackgroundColor)
         }
       }
-
-      Section {
-        Toggle(isOn: preferences.$autoDetectPostLanguage) {
-          Text("settings.translation.auto-detect-post-language")
-        }
-      } footer: {
-        Text("settings.translation.auto-detect-post-language-footer")
-      }
+      autoDetectSection
     }
     .navigationTitle("settings.translation.navigation-title")
     .scrollContentBackground(.hidden)
@@ -56,6 +42,36 @@ struct TranslationSettingsView: View {
       writeNewValue()
     }
     .onAppear(perform: updatePrefs)
+  }
+  
+  @ViewBuilder
+  private var deepLToggle: some View {
+    @Bindable var preferences = preferences
+    Toggle(isOn: $preferences.alwaysUseDeepl) {
+      Text("settings.translation.always-deepl")
+    }
+    .listRowBackground(theme.primaryBackgroundColor)
+  }
+  
+  @ViewBuilder
+  private var deepLPicker: some View {
+    @Bindable var preferences = preferences
+    Picker("settings.translation.api-key-type", selection: $preferences.userDeeplAPIFree) {
+      Text("DeepL API Free").tag(true)
+      Text("DeepL API Pro").tag(false)
+    }
+  }
+  
+  @ViewBuilder
+  private var autoDetectSection: some View {
+    @Bindable var preferences = preferences
+    Section {
+      Toggle(isOn: $preferences.autoDetectPostLanguage) {
+        Text("settings.translation.auto-detect-post-language")
+      }
+    } footer: {
+      Text("settings.translation.auto-detect-post-language-footer")
+    }
   }
 
   private func writeNewValue() {
@@ -82,6 +98,6 @@ struct TranslationSettingsView: View {
 struct TranslationSettingsView_Previews: PreviewProvider {
   static var previews: some View {
     TranslationSettingsView()
-      .environmentObject(UserPreferences.shared)
+      .environment(UserPreferences.shared)
   }
 }

@@ -2,11 +2,13 @@ import DesignSystem
 import Env
 import SwiftUI
 
+@MainActor
 struct SwipeActionsSettingsView: View {
   @Environment(Theme.self) private var theme
-  @EnvironmentObject private var userPreferences: UserPreferences
+  @Environment(UserPreferences.self) private var userPreferences
 
   var body: some View {
+    @Bindable var userPreferences = userPreferences
     Form {
       Section {
         Label("settings.swipeactions.status.leading", systemImage: "arrow.right")

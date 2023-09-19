@@ -7,6 +7,7 @@ import Notifications
 import SwiftUI
 import Timeline
 
+@MainActor
 struct NotificationsTab: View {
   @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
   @Environment(\.scenePhase) private var scenePhase
@@ -16,7 +17,7 @@ struct NotificationsTab: View {
   @Environment(StreamWatcher.self) private var watcher
   @Environment(AppAccountsManager.self) private var appAccount
   @Environment(CurrentAccount.self) private var currentAccount
-  @EnvironmentObject private var userPreferences: UserPreferences
+  @Environment(UserPreferences.self) private var userPreferences
   @Environment(PushNotificationsService.self) private var pushNotificationsService
   @State private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab

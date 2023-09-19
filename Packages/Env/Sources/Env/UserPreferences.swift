@@ -5,63 +5,250 @@ import Network
 import SwiftUI
 
 @MainActor
-public class UserPreferences: ObservableObject {
+@Observable public class UserPreferences {
+  class Storage {
+    @AppStorage("remote_local_timeline") public var remoteLocalTimelines: [String] = []
+    @AppStorage("tag_groups") public var tagGroups: [TagGroup] = []
+    @AppStorage("preferred_browser") public var preferredBrowser: PreferredBrowser = .inAppSafari
+    @AppStorage("draft_posts") public var draftsPosts: [String] = []
+    @AppStorage("show_translate_button_inline") public var showTranslateButton: Bool = true
+    @AppStorage("is_open_ai_enabled") public var isOpenAIEnabled: Bool = true
+    
+    @AppStorage("recently_used_languages") public var recentlyUsedLanguages: [String] = []
+    @AppStorage("social_keyboard_composer") public var isSocialKeyboardEnabled: Bool = true
+    
+    @AppStorage("use_instance_content_settings") public var useInstanceContentSettings: Bool = true
+    @AppStorage("app_auto_expand_spoilers") public var appAutoExpandSpoilers = false
+    @AppStorage("app_auto_expand_media") public var appAutoExpandMedia: ServerPreferences.AutoExpandMedia = .hideSensitive
+    @AppStorage("app_default_post_visibility") public var appDefaultPostVisibility: Models.Visibility = .pub
+    @AppStorage("app_default_reply_visibility") public var appDefaultReplyVisibility: Models.Visibility = .pub
+    @AppStorage("app_default_posts_sensitive") public var appDefaultPostsSensitive = false
+    @AppStorage("autoplay_video") public var autoPlayVideo = true
+    @AppStorage("always_use_deepl") public var alwaysUseDeepl = false
+    @AppStorage("user_deepl_api_free") public var userDeeplAPIFree = true
+    @AppStorage("auto_detect_post_language") public var autoDetectPostLanguage = true
+    
+    @AppStorage("suppress_dupe_reblogs") public var suppressDupeReblogs: Bool = false
+    
+    @AppStorage("inAppBrowserReaderView") public var inAppBrowserReaderView = false
+    
+    @AppStorage("haptic_tab") public var hapticTabSelectionEnabled = true
+    @AppStorage("haptic_timeline") public var hapticTimelineEnabled = true
+    @AppStorage("haptic_button_press") public var hapticButtonPressEnabled = true
+    @AppStorage("sound_effect_enabled") public var soundEffectEnabled = true
+    
+    @AppStorage("show_tab_label_iphone") public var showiPhoneTabLabel = true
+    @AppStorage("show_alt_text_for_media") public var showAltTextForMedia = true
+    
+    @AppStorage("show_second_column_ipad") public var showiPadSecondaryColumn = true
+    
+    @AppStorage("swipeactions-status-trailing-right") public var swipeActionsStatusTrailingRight = StatusAction.favorite
+    @AppStorage("swipeactions-status-trailing-left") public var swipeActionsStatusTrailingLeft = StatusAction.boost
+    @AppStorage("swipeactions-status-leading-left") public var swipeActionsStatusLeadingLeft = StatusAction.reply
+    @AppStorage("swipeactions-status-leading-right") public var swipeActionsStatusLeadingRight = StatusAction.none
+    @AppStorage("swipeactions-use-theme-color") public var swipeActionsUseThemeColor = false
+    @AppStorage("swipeactions-icon-style") public var swipeActionsIconStyle: SwipeActionsIconStyle = .iconWithText
+    
+    @AppStorage("requested_review") public var requestedReview = false
+    
+    @AppStorage("collapse-long-posts") public var collapseLongPosts = true
+    
+    @AppStorage("share-button-behavior") public var shareButtonBehavior: PreferredShareButtonBehavior = .linkAndText
+    
+    init() { }
+  }
+  
   public static let sharedDefault = UserDefaults(suiteName: "group.com.thomasricouard.IceCubesApp")
   public static let shared = UserPreferences()
-
+  private let storage = Storage()
+  
   private var client: Client?
-
-  @AppStorage("remote_local_timeline") public var remoteLocalTimelines: [String] = []
-  @AppStorage("tag_groups") public var tagGroups: [TagGroup] = []
-  @AppStorage("preferred_browser") public var preferredBrowser: PreferredBrowser = .inAppSafari
-  @AppStorage("draft_posts") public var draftsPosts: [String] = []
-  @AppStorage("show_translate_button_inline") public var showTranslateButton: Bool = true
-  @AppStorage("is_open_ai_enabled") public var isOpenAIEnabled: Bool = true
-
-  @AppStorage("recently_used_languages") public var recentlyUsedLanguages: [String] = []
-  @AppStorage("social_keyboard_composer") public var isSocialKeyboardEnabled: Bool = true
-
-  @AppStorage("use_instance_content_settings") public var useInstanceContentSettings: Bool = true
-  @AppStorage("app_auto_expand_spoilers") public var appAutoExpandSpoilers = false
-  @AppStorage("app_auto_expand_media") public var appAutoExpandMedia: ServerPreferences.AutoExpandMedia = .hideSensitive
-  @AppStorage("app_default_post_visibility") public var appDefaultPostVisibility: Models.Visibility = .pub
-  @AppStorage("app_default_reply_visibility") public var appDefaultReplyVisibility: Models.Visibility = .pub
-  @AppStorage("app_default_posts_sensitive") public var appDefaultPostsSensitive = false
-  @AppStorage("autoplay_video") public var autoPlayVideo = true
-  @AppStorage("always_use_deepl") public var alwaysUseDeepl = false
-  @AppStorage("user_deepl_api_free") public var userDeeplAPIFree = true
-  @AppStorage("auto_detect_post_language") public var autoDetectPostLanguage = true
-
-  @AppStorage("suppress_dupe_reblogs") public var suppressDupeReblogs: Bool = false
-
-  @AppStorage("inAppBrowserReaderView") public var inAppBrowserReaderView = false
-
-  @AppStorage("haptic_tab") public var hapticTabSelectionEnabled = true
-  @AppStorage("haptic_timeline") public var hapticTimelineEnabled = true
-  @AppStorage("haptic_button_press") public var hapticButtonPressEnabled = true
-  @AppStorage("sound_effect_enabled") public var soundEffectEnabled = true
-
-  @AppStorage("show_tab_label_iphone") public var showiPhoneTabLabel = true
-  @AppStorage("show_alt_text_for_media") public var showAltTextForMedia = true
-
-  @AppStorage("show_second_column_ipad") public var showiPadSecondaryColumn = true
-
-  @AppStorage("swipeactions-status-trailing-right") public var swipeActionsStatusTrailingRight = StatusAction.favorite
-  @AppStorage("swipeactions-status-trailing-left") public var swipeActionsStatusTrailingLeft = StatusAction.boost
-  @AppStorage("swipeactions-status-leading-left") public var swipeActionsStatusLeadingLeft = StatusAction.reply
-  @AppStorage("swipeactions-status-leading-right") public var swipeActionsStatusLeadingRight = StatusAction.none
-  @AppStorage("swipeactions-use-theme-color") public var swipeActionsUseThemeColor = false
-  @AppStorage("swipeactions-icon-style") public var swipeActionsIconStyle: SwipeActionsIconStyle = .iconWithText
-
-  @AppStorage("requested_review") public var requestedReview = false
-
-  @AppStorage("collapse-long-posts") public var collapseLongPosts = true
-
-  @AppStorage("share-button-behavior") public var shareButtonBehavior: PreferredShareButtonBehavior = .linkAndText
-
+  
+  public var remoteLocalTimelines: [String] {
+    didSet {
+      storage.remoteLocalTimelines = remoteLocalTimelines
+    }
+  }
+  public var tagGroups: [TagGroup] {
+    didSet {
+      storage.tagGroups = tagGroups
+    }
+  }
+  public var preferredBrowser: PreferredBrowser {
+    didSet {
+      storage.preferredBrowser = preferredBrowser
+    }
+  }
+  public var draftsPosts: [String] {
+    didSet {
+      storage.draftsPosts = draftsPosts
+    }
+  }
+  public var showTranslateButton: Bool {
+    didSet {
+      storage.showTranslateButton = showTranslateButton
+    }
+  }
+  public var isOpenAIEnabled: Bool {
+    didSet {
+      storage.isOpenAIEnabled = isOpenAIEnabled
+    }
+  }
+  public var recentlyUsedLanguages: [String] {
+    didSet {
+      storage.recentlyUsedLanguages = recentlyUsedLanguages
+    }
+  }
+  public var isSocialKeyboardEnabled: Bool {
+    didSet {
+      storage.isSocialKeyboardEnabled = isSocialKeyboardEnabled
+    }
+  }
+  public var useInstanceContentSettings: Bool {
+    didSet {
+      storage.useInstanceContentSettings = useInstanceContentSettings
+    }
+  }
+  public var appAutoExpandSpoilers: Bool {
+    didSet {
+      storage.appAutoExpandSpoilers = appAutoExpandSpoilers
+    }
+  }
+  public var appAutoExpandMedia: ServerPreferences.AutoExpandMedia {
+    didSet {
+      storage.appAutoExpandMedia = appAutoExpandMedia
+    }
+  }
+  public var appDefaultPostVisibility: Models.Visibility {
+    didSet {
+      storage.appDefaultPostVisibility = appDefaultPostVisibility
+    }
+  }
+  public var appDefaultReplyVisibility: Models.Visibility {
+    didSet {
+      storage.appDefaultReplyVisibility = appDefaultReplyVisibility
+    }
+  }
+  public var appDefaultPostsSensitive: Bool {
+    didSet {
+      storage.appDefaultPostsSensitive = appDefaultPostsSensitive
+    }
+  }
+  public var autoPlayVideo: Bool {
+    didSet {
+      storage.autoPlayVideo = autoPlayVideo
+    }
+  }
+  public var alwaysUseDeepl: Bool {
+    didSet {
+      storage.alwaysUseDeepl = alwaysUseDeepl
+    }
+  }
+  public var userDeeplAPIFree: Bool {
+    didSet {
+      storage.userDeeplAPIFree = userDeeplAPIFree
+    }
+  }
+  public var autoDetectPostLanguage: Bool {
+    didSet {
+      storage.autoDetectPostLanguage = autoDetectPostLanguage
+    }
+  }
+  public var suppressDupeReblogs: Bool {
+    didSet {
+      storage.suppressDupeReblogs = suppressDupeReblogs
+    }
+  }
+  public var inAppBrowserReaderView: Bool {
+    didSet {
+      storage.inAppBrowserReaderView = inAppBrowserReaderView
+    }
+  }
+  public var hapticTabSelectionEnabled: Bool {
+    didSet {
+      storage.hapticTabSelectionEnabled = hapticTabSelectionEnabled
+    }
+  }
+  public var hapticTimelineEnabled: Bool {
+    didSet {
+      storage.hapticTimelineEnabled = hapticTimelineEnabled
+    }
+  }
+  public var hapticButtonPressEnabled: Bool {
+    didSet {
+      storage.hapticButtonPressEnabled = hapticButtonPressEnabled
+    }
+  }
+  public var soundEffectEnabled: Bool {
+    didSet {
+      storage.soundEffectEnabled = soundEffectEnabled
+    }
+  }
+  public var showiPhoneTabLabel: Bool {
+    didSet {
+      storage.showiPhoneTabLabel = showiPhoneTabLabel
+    }
+  }
+  public var showAltTextForMedia: Bool {
+    didSet {
+      storage.showAltTextForMedia = showAltTextForMedia
+    }
+  }
+  public var showiPadSecondaryColumn: Bool {
+    didSet {
+      storage.showiPadSecondaryColumn = showiPadSecondaryColumn
+    }
+  }
+  public var swipeActionsStatusTrailingRight: StatusAction {
+    didSet {
+      storage.swipeActionsStatusTrailingRight = swipeActionsStatusTrailingRight
+    }
+  }
+  public var swipeActionsStatusTrailingLeft: StatusAction {
+    didSet {
+      storage.swipeActionsStatusTrailingLeft = swipeActionsStatusTrailingLeft
+    }
+  }
+  public var swipeActionsStatusLeadingLeft: StatusAction {
+    didSet {
+      storage.swipeActionsStatusLeadingLeft = swipeActionsStatusLeadingLeft
+    }
+  }
+  public var swipeActionsStatusLeadingRight: StatusAction {
+    didSet {
+      storage.swipeActionsStatusLeadingRight = swipeActionsStatusLeadingRight
+    }
+  }
+  public var swipeActionsUseThemeColor: Bool {
+    didSet {
+      storage.swipeActionsUseThemeColor = swipeActionsUseThemeColor
+    }
+  }
+  public var swipeActionsIconStyle: SwipeActionsIconStyle {
+    didSet {
+      storage.swipeActionsIconStyle = swipeActionsIconStyle
+    }
+  }
+  public var requestedReview: Bool {
+    didSet {
+      storage.requestedReview = requestedReview
+    }
+  }
+  public var collapseLongPosts: Bool {
+    didSet {
+      storage.collapseLongPosts = collapseLongPosts
+    }
+  }
+  public var shareButtonBehavior: PreferredShareButtonBehavior {
+    didSet {
+      storage.shareButtonBehavior = shareButtonBehavior
+    }
+  }
+  
+  
   public enum SwipeActionsIconStyle: String, CaseIterable {
     case iconWithText, iconOnly
-
+    
     public var description: LocalizedStringKey {
       switch self {
       case .iconWithText:
@@ -70,7 +257,7 @@ public class UserPreferences: ObservableObject {
         "enum.swipeactions.icon-only"
       }
     }
-
+    
     // Have to implement this manually here due to compiler not implicitly
     // inserting `nonisolated`, which leads to a warning:
     //
@@ -81,7 +268,7 @@ public class UserPreferences: ObservableObject {
       [.iconWithText, .iconOnly]
     }
   }
-
+  
   public var postVisibility: Models.Visibility {
     if useInstanceContentSettings {
       serverPreferences?.postVisibility ?? .pub
@@ -89,26 +276,26 @@ public class UserPreferences: ObservableObject {
       appDefaultPostVisibility
     }
   }
-
+  
   public func conformReplyVisibilityConstraints() {
     appDefaultReplyVisibility = getReplyVisibility()
   }
-
+  
   private func getReplyVisibility() -> Models.Visibility {
     getMinVisibility(postVisibility, appDefaultReplyVisibility)
   }
-
+  
   public func getReplyVisibility(of status: Status) -> Models.Visibility {
     getMinVisibility(getReplyVisibility(), status.visibility)
   }
-
+  
   private func getMinVisibility(_ vis1: Models.Visibility, _ vis2: Models.Visibility) -> Models.Visibility {
     let no1 = Self.getIntOfVisibility(vis1)
     let no2 = Self.getIntOfVisibility(vis2)
-
+    
     return no1 < no2 ? vis1 : vis2
   }
-
+  
   public var postIsSensitive: Bool {
     if useInstanceContentSettings {
       serverPreferences?.postIsSensitive ?? false
@@ -116,7 +303,7 @@ public class UserPreferences: ObservableObject {
       appDefaultPostsSensitive
     }
   }
-
+  
   public var autoExpandSpoilers: Bool {
     if useInstanceContentSettings {
       serverPreferences?.autoExpandSpoilers ?? true
@@ -124,7 +311,7 @@ public class UserPreferences: ObservableObject {
       appAutoExpandSpoilers
     }
   }
-
+  
   public var autoExpandMedia: ServerPreferences.AutoExpandMedia {
     if useInstanceContentSettings {
       serverPreferences?.autoExpandMedia ?? .hideSensitive
@@ -132,8 +319,8 @@ public class UserPreferences: ObservableObject {
       appAutoExpandMedia
     }
   }
-
-  @Published public var notificationsCount: [OauthToken: Int] = [:] {
+  
+  public var notificationsCount: [OauthToken: Int] = [:] {
     didSet {
       for (key, value) in notificationsCount {
         Self.sharedDefault?.set(value, forKey: "push_notifications_count_\(key.createdAt)")
@@ -152,22 +339,20 @@ public class UserPreferences: ObservableObject {
     }
   }
   
-  @Published public var serverPreferences: ServerPreferences?
-
-  private init() {}
-
+  public var serverPreferences: ServerPreferences?
+  
   public func setClient(client: Client) {
     self.client = client
     Task {
       await refreshServerPreferences()
     }
   }
-
+  
   public func refreshServerPreferences() async {
     guard let client, client.isAuth else { return }
     serverPreferences = try? await client.get(endpoint: Accounts.preferences)
   }
-
+  
   public func markLanguageAsSelected(isoCode: String) {
     var copy = recentlyUsedLanguages
     if let index = copy.firstIndex(of: isoCode) {
@@ -176,7 +361,7 @@ public class UserPreferences: ObservableObject {
     copy.insert(isoCode, at: 0)
     recentlyUsedLanguages = Array(copy.prefix(3))
   }
-
+  
   public static func getIntOfVisibility(_ vis: Models.Visibility) -> Int {
     switch vis {
     case .direct:
@@ -188,5 +373,44 @@ public class UserPreferences: ObservableObject {
     case .pub:
       3
     }
+  }
+  
+  private init() {
+    remoteLocalTimelines = storage.remoteLocalTimelines
+    tagGroups = storage.tagGroups
+    preferredBrowser = storage.preferredBrowser
+    draftsPosts = storage.draftsPosts
+    showTranslateButton = storage.showTranslateButton
+    isOpenAIEnabled = storage.isOpenAIEnabled
+    recentlyUsedLanguages = storage.recentlyUsedLanguages
+    isSocialKeyboardEnabled = storage.isSocialKeyboardEnabled
+    useInstanceContentSettings = storage.useInstanceContentSettings
+    appAutoExpandSpoilers = storage.appAutoExpandSpoilers
+    appAutoExpandMedia = storage.appAutoExpandMedia
+    appDefaultPostVisibility = storage.appDefaultPostVisibility
+    appDefaultReplyVisibility = storage.appDefaultReplyVisibility
+    appDefaultPostsSensitive = storage.appDefaultPostsSensitive
+    autoPlayVideo = storage.autoPlayVideo
+    alwaysUseDeepl = storage.alwaysUseDeepl
+    userDeeplAPIFree = storage.userDeeplAPIFree
+    autoDetectPostLanguage = storage.autoDetectPostLanguage
+    suppressDupeReblogs = storage.suppressDupeReblogs
+    inAppBrowserReaderView = storage.inAppBrowserReaderView
+    hapticTabSelectionEnabled = storage.hapticTabSelectionEnabled
+    hapticTimelineEnabled = storage.hapticTimelineEnabled
+    hapticButtonPressEnabled = storage.hapticButtonPressEnabled
+    soundEffectEnabled = storage.soundEffectEnabled
+    showiPhoneTabLabel = storage.showiPhoneTabLabel
+    showAltTextForMedia = storage.showAltTextForMedia
+    showiPadSecondaryColumn = storage.showiPadSecondaryColumn
+    swipeActionsStatusTrailingRight = storage.swipeActionsStatusTrailingRight
+    swipeActionsStatusTrailingLeft = storage.swipeActionsStatusTrailingLeft
+    swipeActionsStatusLeadingLeft = storage.swipeActionsStatusLeadingLeft
+    swipeActionsStatusLeadingRight = storage.swipeActionsStatusLeadingRight
+    swipeActionsUseThemeColor = storage.swipeActionsUseThemeColor
+    swipeActionsIconStyle = storage.swipeActionsIconStyle
+    requestedReview = storage.requestedReview
+    collapseLongPosts = storage.collapseLongPosts
+    shareButtonBehavior = storage.shareButtonBehavior
   }
 }

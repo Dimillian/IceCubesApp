@@ -3,11 +3,12 @@ import EmojiText
 import Env
 import SwiftUI
 
+@MainActor
 public struct AppAccountView: View {
   @Environment(Theme.self) private var theme
   @Environment(RouterPath.self) private var routerPath
   @Environment(AppAccountsManager.self) private var appAccounts
-  @EnvironmentObject private var preferences: UserPreferences
+  @Environment(UserPreferences.self) private var preferences
 
   @State var viewModel: AppAccountViewModel
 

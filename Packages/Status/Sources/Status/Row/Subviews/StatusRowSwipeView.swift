@@ -3,9 +3,10 @@ import Env
 import Models
 import SwiftUI
 
+@MainActor
 struct StatusRowSwipeView: View {
   @Environment(Theme.self) private var theme
-  @EnvironmentObject private var preferences: UserPreferences
+  @Environment(UserPreferences.self) private var preferences
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(StatusDataController.self) private var statusDataController
 

@@ -7,6 +7,7 @@ import Shimmer
 import Status
 import SwiftUI
 
+@MainActor
 public struct AccountDetailView: View {
   @Environment(\.openURL) private var openURL
   @Environment(\.redactionReasons) private var reasons
@@ -14,7 +15,7 @@ public struct AccountDetailView: View {
   @Environment(StreamWatcher.self) private var watcher
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(CurrentInstance.self) private var currentInstance
-  @EnvironmentObject private var preferences: UserPreferences
+  @Environment(UserPreferences.self) private var preferences
   @Environment(Theme.self) private var theme
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath

@@ -3,11 +3,12 @@ import Env
 import Models
 import SwiftUI
 
+@MainActor
 struct StatusRowTranslateView: View {
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
   @Environment(\.isCompact) private var isCompact: Bool
 
-  @EnvironmentObject private var preferences: UserPreferences
+  @Environment(UserPreferences.self) private var preferences
 
   var viewModel: StatusRowViewModel
 

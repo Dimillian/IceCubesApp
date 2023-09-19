@@ -14,7 +14,7 @@ import UIKit
 @MainActor
 public struct StatusEditorView: View {
   @Environment(AppAccountsManager.self) private var appAccounts
-  @EnvironmentObject private var preferences: UserPreferences
+  @Environment(UserPreferences.self) private var preferences
   @Environment(Theme.self) private var theme
   @Environment(Client.self) private var client
   @Environment(CurrentAccount.self) private var currentAccount

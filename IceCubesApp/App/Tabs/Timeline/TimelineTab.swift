@@ -7,11 +7,12 @@ import Network
 import SwiftUI
 import Timeline
 
+@MainActor
 struct TimelineTab: View {
   @Environment(AppAccountsManager.self) private var appAccount
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var currentAccount
-  @EnvironmentObject private var preferences: UserPreferences
+  @Environment(UserPreferences.self) private var preferences
   @Environment(Client.self) private var client
   @State private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab

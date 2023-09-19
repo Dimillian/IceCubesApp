@@ -18,12 +18,13 @@ import SwiftUI
   init() {}
 }
 
+@MainActor
 struct DisplaySettingsView: View {
   typealias FontState = Theme.FontState
 
   @Environment(\.colorScheme) private var colorScheme
   @Environment(Theme.self) private var theme
-  @EnvironmentObject private var userPreferences: UserPreferences
+  @Environment(UserPreferences.self) private var userPreferences
 
   @State private var localValues = DisplaySettingsLocalValues()
 
@@ -180,6 +181,7 @@ struct DisplaySettingsView: View {
   @ViewBuilder
   private var layoutSection: some View {
     @Bindable var theme = theme
+    @Bindable var userPreferences = userPreferences
     Section("settings.display.section.display") {
       Picker("settings.display.avatar.position", selection: $theme.avatarPosition) {
         ForEach(Theme.AvatarPosition.allCases, id: \.rawValue) { position in
@@ -210,6 +212,7 @@ struct DisplaySettingsView: View {
 
   @ViewBuilder
   private var platformsSection: some View {
+    @Bindable var userPreferences = userPreferences
     if UIDevice.current.userInterfaceIdiom == .phone {
       Section("iPhone") {
         Toggle("settings.display.show-tab-label", isOn: $userPreferences.showiPhoneTabLabel)

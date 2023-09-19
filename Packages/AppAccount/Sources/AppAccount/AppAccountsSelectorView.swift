@@ -2,8 +2,9 @@ import DesignSystem
 import Env
 import SwiftUI
 
+@MainActor
 public struct AppAccountsSelectorView: View {
-  @EnvironmentObject private var preferences: UserPreferences
+  @Environment(UserPreferences.self) private var preferences
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(AppAccountsManager.self) private var appAccounts
   @Environment(Theme.self) private var theme

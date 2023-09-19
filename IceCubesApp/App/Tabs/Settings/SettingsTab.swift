@@ -9,11 +9,12 @@ import Nuke
 import SwiftUI
 import Timeline
 
+@MainActor
 struct SettingsTabs: View {
   @Environment(\.dismiss) private var dismiss
 
   @Environment(PushNotificationsService.self) private var pushNotifications
-  @EnvironmentObject private var preferences: UserPreferences
+  @Environment(UserPreferences.self) private var preferences
   @Environment(Client.self) private var client
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(AppAccountsManager.self) private var appAccountsManager
@@ -158,7 +159,9 @@ struct SettingsTabs: View {
     .listRowBackground(theme.primaryBackgroundColor)
   }
 
+  @ViewBuilder
   private var otherSections: some View {
+    @Bindable var preferences = preferences
     Section("settings.section.other") {
       if !ProcessInfo.processInfo.isiOSAppOnMac {
         Picker(selection: $preferences.preferredBrowser) {

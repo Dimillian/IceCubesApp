@@ -7,11 +7,13 @@ import NukeUI
 import SwiftUI
 import UserNotifications
 
+@MainActor
 struct ContentSettingsView: View {
-  @EnvironmentObject private var userPreferences: UserPreferences
+  @Environment(UserPreferences.self) private var userPreferences
   @Environment(Theme.self) private var theme
 
   var body: some View {
+    @Bindable var userPreferences = userPreferences
     Form {
       Section("settings.content.boosts") {
         Toggle(isOn: $userPreferences.suppressDupeReblogs) {

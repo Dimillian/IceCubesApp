@@ -5,8 +5,9 @@ import NukeUI
 import PhotosUI
 import SwiftUI
 
+@MainActor
 struct StatusEditorAccessoryView: View {
-  @EnvironmentObject private var preferences: UserPreferences
+  @Environment(UserPreferences.self) private var preferences
   @Environment(Theme.self) private var theme
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(\.colorScheme) private var colorScheme

@@ -10,7 +10,7 @@ struct StatusRowContextMenu: View {
 
   @Environment(Client.self) private var client
   @Environment(SceneDelegate.self) private var sceneDelegate
-  @EnvironmentObject private var preferences: UserPreferences
+  @Environment(UserPreferences.self) private var preferences
   @Environment(CurrentAccount.self) private var account
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(StatusDataController.self) private var statusDataController
@@ -87,7 +87,7 @@ struct StatusRowContextMenu: View {
           }
           .environment(\.isInCaptureMode, true)
           .environment(Theme.shared)
-          .environmentObject(preferences)
+          .environment(preferences)
           .environment(account)
           .environment(currentInstance)
           .environment(SceneDelegate())

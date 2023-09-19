@@ -6,7 +6,7 @@ public struct AccountDetailContextMenu: View {
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath
   @Environment(CurrentInstance.self) private var currentInstance
-  @EnvironmentObject private var preferences: UserPreferences
+  @Environment(UserPreferences.self) private var preferences
 
   var viewModel: AccountDetailViewModel
 

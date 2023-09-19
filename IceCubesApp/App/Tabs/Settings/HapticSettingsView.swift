@@ -4,11 +4,13 @@ import Models
 import Status
 import SwiftUI
 
+@MainActor
 struct HapticSettingsView: View {
   @Environment(Theme.self) private var theme
-  @EnvironmentObject private var userPreferences: UserPreferences
+  @Environment(UserPreferences.self) private var userPreferences
 
   var body: some View {
+    @Bindable var userPreferences = userPreferences
     Form {
       Section {
         Toggle("settings.haptic.timeline", isOn: $userPreferences.hapticTimelineEnabled)

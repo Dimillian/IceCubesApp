@@ -27,7 +27,7 @@ class ShareViewController: UIViewController {
     if let item = extensionContext?.inputItems.first as? NSExtensionItem {
       if let attachments = item.attachments {
         let view = StatusEditorView(mode: .shareExtension(items: attachments))
-          .environmentObject(UserPreferences.shared)
+          .environment(UserPreferences.shared)
           .environment(appAccountsManager)
           .environment(client)
           .environment(account)

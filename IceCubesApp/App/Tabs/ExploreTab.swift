@@ -7,9 +7,10 @@ import Network
 import Shimmer
 import SwiftUI
 
+@MainActor
 struct ExploreTab: View {
   @Environment(Theme.self) private var theme
-  @EnvironmentObject private var preferences: UserPreferences
+  @Environment(UserPreferences.self) private var preferences
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(Client.self) private var client
   @State private var routerPath = RouterPath()

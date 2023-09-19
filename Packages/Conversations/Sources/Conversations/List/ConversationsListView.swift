@@ -5,8 +5,9 @@ import Network
 import Shimmer
 import SwiftUI
 
+@MainActor
 public struct ConversationsListView: View {
-  @EnvironmentObject private var preferences: UserPreferences
+  @Environment(UserPreferences.self) private var preferences
   @Environment(RouterPath.self) private var routerPath
   @Environment(StreamWatcher.self) private var watcher
   @Environment(Client.self) private var client

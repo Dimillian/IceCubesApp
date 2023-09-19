@@ -5,12 +5,13 @@ import Env
 import Models
 import SwiftUI
 
+@MainActor
 struct SideBarView<Content: View>: View {
   @Environment(AppAccountsManager.self) private var appAccounts
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(Theme.self) private var theme
   @Environment(StreamWatcher.self) private var watcher
-  @EnvironmentObject private var userPreferences: UserPreferences
+  @Environment(UserPreferences.self) private var userPreferences
   @Environment(RouterPath.self) private var routerPath
 
   @Binding var selectedTab: Tab

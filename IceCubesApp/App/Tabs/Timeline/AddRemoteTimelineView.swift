@@ -7,10 +7,11 @@ import NukeUI
 import Shimmer
 import SwiftUI
 
+@MainActor
 struct AddRemoteTimelineView: View {
   @Environment(\.dismiss) private var dismiss
 
-  @EnvironmentObject private var preferences: UserPreferences
+  @Environment(UserPreferences.self) private var preferences
   @Environment(Theme.self) private var theme
 
   @State private var instanceName: String = ""

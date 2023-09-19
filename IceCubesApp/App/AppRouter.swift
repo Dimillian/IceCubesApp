@@ -113,7 +113,7 @@ extension View {
 
   func withEnvironments() -> some View {
     environment(CurrentAccount.shared)
-      .environmentObject(UserPreferences.shared)
+      .environment(UserPreferences.shared)
       .environment(CurrentInstance.shared)
       .environment(Theme.shared)
       .environment(AppAccountsManager.shared)

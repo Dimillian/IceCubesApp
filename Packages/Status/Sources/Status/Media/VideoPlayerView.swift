@@ -51,7 +51,7 @@ import SwiftUI
 struct VideoPlayerView: View {
   @Environment(\.scenePhase) private var scenePhase
   @Environment(\.isCompact) private var isCompact
-  @EnvironmentObject private var preferences: UserPreferences
+  @Environment(UserPreferences.self) private var preferences
   @Environment(Theme.self) private var theme
 
   @State var viewModel: VideoPlayerViewModel

@@ -13,7 +13,7 @@ extension View {
 @MainActor
 private struct SafariRouter: ViewModifier {
   @Environment(Theme.self) private var theme
-  @EnvironmentObject private var preferences: UserPreferences
+  @Environment(UserPreferences.self) private var preferences
   @Environment(RouterPath.self) private var routerPath
 
   @State private var safariManager = InAppSafariManager()

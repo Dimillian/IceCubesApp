@@ -4,6 +4,7 @@ import Models
 import Network
 import SwiftUI
 
+@MainActor
 public struct FiltersListView: View {
   @Environment(\.dismiss) private var dismiss
 

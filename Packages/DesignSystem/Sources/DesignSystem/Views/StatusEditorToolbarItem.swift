@@ -55,7 +55,7 @@ public struct StatusEditorToolbarItem: ToolbarContent {
 @MainActor
 public struct SecondaryColumnToolbarItem: ToolbarContent {
   @Environment(\.isSecondaryColumn) private var isSecondaryColumn
-  @EnvironmentObject private var preferences: UserPreferences
+  @Environment(UserPreferences.self) private var preferences
 
   public init() {}
 

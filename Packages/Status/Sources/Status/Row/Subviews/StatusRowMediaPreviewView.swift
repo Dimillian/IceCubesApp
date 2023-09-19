@@ -5,6 +5,7 @@ import Nuke
 import NukeUI
 import SwiftUI
 
+@MainActor
 public struct StatusRowMediaPreviewView: View {
   @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
   @Environment(\.extraLeadingInset) private var extraLeadingInset: CGFloat
@@ -12,7 +13,7 @@ public struct StatusRowMediaPreviewView: View {
   @Environment(\.isCompact) private var isCompact: Bool
 
   @Environment(SceneDelegate.self) private var sceneDelegate
-  @EnvironmentObject private var preferences: UserPreferences
+  @Environment(UserPreferences.self) private var preferences
   @Environment(QuickLook.self) private var quickLook
   @Environment(Theme.self) private var theme
 
