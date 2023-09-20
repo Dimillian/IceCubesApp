@@ -232,8 +232,7 @@ struct DisplaySettingsView: View {
     Section {
       Button {
         theme.followSystemColorScheme = true
-        theme.selectedSet = colorScheme == .dark ? .iceCubeDark : .iceCubeLight
-        theme.setColor(withName: theme.selectedSet)
+        theme.applySet(set: colorScheme == .dark ? .iceCubeDark : .iceCubeLight)
         theme.avatarShape = .rounded
         theme.avatarPosition = .top
         theme.statusActionsDisplay = .full

@@ -30,15 +30,13 @@ struct ThemeApplier: ViewModifier {
       .onAppear {
         // If theme is never set before set the default store. This should only execute once after install.
         if !theme.isThemePreviouslySet {
-          theme.selectedSet = colorScheme == .dark ? .iceCubeDark : .iceCubeLight
-          theme.setColor(withName: theme.selectedSet)
+          theme.applySet(set: colorScheme == .dark ? .iceCubeDark : .iceCubeLight)
           theme.isThemePreviouslySet = true
         } else if theme.followSystemColorScheme, theme.isThemePreviouslySet,
                   let sets = availableColorsSets
                   .first(where: { $0.light.name == theme.selectedSet || $0.dark.name == theme.selectedSet })
         {
-          theme.selectedSet = colorScheme == .dark ? sets.dark.name : sets.light.name
-          theme.setColor(withName: theme.selectedSet)
+          theme.applySet(set: colorScheme == .dark ? sets.dark.name : sets.light.name)
         }
         setWindowTint(theme.tintColor)
         setWindowUserInterfaceStyle(from: theme.selectedScheme)
@@ -58,8 +56,7 @@ struct ThemeApplier: ViewModifier {
            let sets = availableColorsSets
            .first(where: { $0.light.name == theme.selectedSet || $0.dark.name == theme.selectedSet })
         {
-          theme.selectedSet = newColorScheme == .dark ? sets.dark.name : sets.light.name
-          theme.setColor(withName: theme.selectedSet)
+          theme.applySet(set: newColorScheme == .dark ? sets.dark.name : sets.light.name)
         }
       }
     #endif

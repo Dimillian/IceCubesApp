@@ -287,6 +287,11 @@ import SwiftUI
       ConstellationDark(),
     ]
   }
+  
+  public func applySet(set: ColorSetName) {
+    selectedSet = set
+    setColor(withName: set)
+  }
 
   public func setColor(withName name: ColorSetName) {
     let colorSet = Theme.allColorSet.filter { $0.name == name }.first ?? IceCubeDark()

@@ -89,8 +89,7 @@ struct ThemeBoxView: View {
       if color.scheme != currentScheme {
         theme.followSystemColorScheme = false
       }
-      theme.selectedSet = color.name
-      theme.setColor(withName: theme.selectedSet)
+      theme.applySet(set: color.name)
     }
   }
 }
