@@ -113,36 +113,34 @@ struct IceCubesApp: App {
                 popToRootTab: $popToRootTab,
                 tabs: availableTabs)
     {
-      GeometryReader { _ in
-        HStack(spacing: 0) {
-          ZStack {
-            if selectedTab == .profile {
-              ProfileTab(popToRootTab: $popToRootTab)
-            }
-            ForEach(availableTabs) { tab in
-              if tab == selectedTab || sideBarLoadedTabs.contains(tab) {
-                tab
-                  .makeContentView(popToRootTab: $popToRootTab)
-                  .opacity(tab == selectedTab ? 1 : 0)
-                  .transition(.opacity)
-                  .id("\(tab)\(appAccountsManager.currentAccount.id)")
-                  .onAppear {
-                    sideBarLoadedTabs.insert(tab)
-                  }
-              } else {
-                EmptyView()
+      ZStack {
+        if selectedTab == .profile {
+          ProfileTab(popToRootTab: $popToRootTab)
+        }
+        ForEach(availableTabs) { tab in
+          if tab == selectedTab || sideBarLoadedTabs.contains(tab) {
+            tab
+              .makeContentView(popToRootTab: $popToRootTab)
+              .opacity(tab == selectedTab ? 1 : 0)
+              .transition(.opacity)
+              .id("\(tab)\(appAccountsManager.currentAccount.id)")
+              .onAppear {
+                sideBarLoadedTabs.insert(tab)
               }
-            }
-          }
-          if appAccountsManager.currentClient.isAuth,
-             userPreferences.showiPadSecondaryColumn
-          {
-            Divider().edgesIgnoringSafeArea(.all)
-            notificationsSecondaryColumn
+          } else {
+            EmptyView()
           }
         }
       }
-    }.onChange(of: $appAccountsManager.currentAccount.id) {
+    }
+    .inspector(isPresented: .init(get: {
+      appAccountsManager.currentClient.isAuth && userPreferences.showiPadSecondaryColumn
+    }, set: { newValue in
+      userPreferences.showiPadSecondaryColumn = newValue
+    }), content: {
+      notificationsSecondaryColumn
+    })
+    .onChange(of: $appAccountsManager.currentAccount.id) {
       sideBarLoadedTabs.removeAll()
     }
     .environment(sidebarRouterPath)
@@ -151,8 +149,8 @@ struct IceCubesApp: App {
   private var notificationsSecondaryColumn: some View {
     NotificationsTab(popToRootTab: $popToRootTab, lockedType: nil)
       .environment(\.isSecondaryColumn, true)
-      .frame(maxWidth: .secondaryColumnWidth)
       .id(appAccountsManager.currentAccount.id)
+      .inspectorColumnWidth(.secondaryColumnWidth)
   }
 
   private var tabBarView: some View {

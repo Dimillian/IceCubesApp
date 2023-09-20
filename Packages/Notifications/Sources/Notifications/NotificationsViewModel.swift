@@ -93,6 +93,8 @@ import SwiftUI
                          nextPageState: consolidatedNotifications.isEmpty ? .none : nextPageState)
       }
     } catch {
+      let error = error as NSError
+      guard error.code != -999 else { return }
       state = .error(error: error)
     }
   }
