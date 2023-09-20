@@ -5,7 +5,7 @@ import SwiftUI
   class ThemeStorage {
     enum ThemeKey: String {
       case colorScheme, tint, label, primaryBackground, secondaryBackground
-      case avatarPosition, avatarShape, statusActionsDisplay, statusDisplayStyle
+      case avatarPosition2, avatarShape2, statusActionsDisplay, statusDisplayStyle
       case selectedSet, selectedScheme
       case followSystemColorSchme
       case displayFullUsernameTimeline
@@ -18,8 +18,8 @@ import SwiftUI
     @AppStorage(ThemeKey.primaryBackground.rawValue) public var primaryBackgroundColor: Color = .white
     @AppStorage(ThemeKey.secondaryBackground.rawValue) public var secondaryBackgroundColor: Color = .gray
     @AppStorage(ThemeKey.label.rawValue) public var labelColor: Color = .black
-    @AppStorage(ThemeKey.avatarPosition.rawValue) var rawAvatarPosition: String = AvatarPosition.top.rawValue
-    @AppStorage(ThemeKey.avatarShape.rawValue) var rawAvatarShape: String = AvatarShape.rounded.rawValue
+    @AppStorage(ThemeKey.avatarPosition2.rawValue) var avatarPosition: AvatarPosition = AvatarPosition.top
+    @AppStorage(ThemeKey.avatarShape2.rawValue) var avatarShape: AvatarShape = AvatarShape.rounded
     @AppStorage(ThemeKey.selectedSet.rawValue) var storedSet: ColorSetName = .iceCubeDark
     @AppStorage(ThemeKey.statusActionsDisplay.rawValue) public var statusActionsDisplay: StatusActionsDisplay = .full
     @AppStorage(ThemeKey.statusDisplayStyle.rawValue) public var statusDisplayStyle: StatusDisplayStyle = .large
@@ -173,15 +173,15 @@ import SwiftUI
     }
   }
 
-  private var rawAvatarPosition: String {
+  public var avatarPosition: AvatarPosition {
     didSet {
-      themeStorage.rawAvatarPosition = rawAvatarPosition
+      themeStorage.avatarPosition = avatarPosition
     }
   }
 
-  private var rawAvatarShape: String {
+  public var avatarShape: AvatarShape {
     didSet {
-      themeStorage.rawAvatarShape = rawAvatarShape
+      themeStorage.avatarShape = avatarShape
     }
   }
 
@@ -233,18 +233,6 @@ import SwiftUI
     }
   }
 
-  public var avatarPosition: AvatarPosition = .top {
-    didSet {
-      rawAvatarPosition = avatarShape.rawValue
-    }
-  }
-
-  public var avatarShape: AvatarShape = .rounded {
-    didSet {
-      rawAvatarShape = avatarShape.rawValue
-    }
-  }
-
   public var selectedSet: ColorSetName = .iceCubeDark
 
   public static let shared = Theme()
@@ -256,8 +244,8 @@ import SwiftUI
     primaryBackgroundColor = themeStorage.primaryBackgroundColor
     secondaryBackgroundColor = themeStorage.secondaryBackgroundColor
     labelColor = themeStorage.labelColor
-    rawAvatarPosition = themeStorage.rawAvatarPosition
-    rawAvatarShape = themeStorage.rawAvatarShape
+    avatarPosition = themeStorage.avatarPosition
+    avatarShape = themeStorage.avatarShape
     storedSet = themeStorage.storedSet
     statusActionsDisplay = themeStorage.statusActionsDisplay
     statusDisplayStyle = themeStorage.statusDisplayStyle
@@ -267,8 +255,6 @@ import SwiftUI
     fontSizeScale = themeStorage.fontSizeScale
     chosenFontData = themeStorage.chosenFontData
     selectedSet = storedSet
-    avatarPosition = AvatarPosition(rawValue: rawAvatarPosition) ?? .top
-    avatarShape = AvatarShape(rawValue: rawAvatarShape) ?? .rounded
   }
 
   public static var allColorSet: [ColorSet] {
