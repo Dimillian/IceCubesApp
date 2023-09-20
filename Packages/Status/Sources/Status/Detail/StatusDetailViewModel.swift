@@ -34,6 +34,9 @@ import SwiftUI
     title = "status.post-from-\(status.account.displayNameWithoutEmojis)"
     statusId = status.id
     remoteStatusURL = nil
+    if status.inReplyToId != nil {
+      isReplyToPreviousCache[status.id] = true
+    }
   }
 
   init(remoteStatusURL: URL) {
