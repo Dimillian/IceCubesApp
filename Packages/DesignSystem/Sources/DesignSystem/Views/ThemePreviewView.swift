@@ -90,6 +90,7 @@ struct ThemeBoxView: View {
         theme.followSystemColorScheme = false
       }
       theme.selectedSet = color.name
+      theme.setColor(withName: theme.selectedSet)
     }
   }
 }

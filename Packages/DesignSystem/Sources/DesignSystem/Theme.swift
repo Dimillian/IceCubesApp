@@ -245,11 +245,7 @@ import SwiftUI
     }
   }
 
-  public var selectedSet: ColorSetName = .iceCubeDark {
-    didSet {
-      setColor(withName: selectedSet)
-    }
-  }
+  public var selectedSet: ColorSetName = .iceCubeDark
 
   public static let shared = Theme()
 
