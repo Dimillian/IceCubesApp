@@ -10,7 +10,6 @@ import SwiftUI
     @AppStorage("remote_local_timeline") public var remoteLocalTimelines: [String] = []
     @AppStorage("tag_groups") public var tagGroups: [TagGroup] = []
     @AppStorage("preferred_browser") public var preferredBrowser: PreferredBrowser = .inAppSafari
-    @AppStorage("draft_posts") public var draftsPosts: [String] = []
     @AppStorage("show_translate_button_inline") public var showTranslateButton: Bool = true
     @AppStorage("is_open_ai_enabled") public var isOpenAIEnabled: Bool = true
     
@@ -79,11 +78,7 @@ import SwiftUI
       storage.preferredBrowser = preferredBrowser
     }
   }
-  public var draftsPosts: [String] {
-    didSet {
-      storage.draftsPosts = draftsPosts
-    }
-  }
+
   public var showTranslateButton: Bool {
     didSet {
       storage.showTranslateButton = showTranslateButton
@@ -379,7 +374,6 @@ import SwiftUI
     remoteLocalTimelines = storage.remoteLocalTimelines
     tagGroups = storage.tagGroups
     preferredBrowser = storage.preferredBrowser
-    draftsPosts = storage.draftsPosts
     showTranslateButton = storage.showTranslateButton
     isOpenAIEnabled = storage.isOpenAIEnabled
     recentlyUsedLanguages = storage.recentlyUsedLanguages

@@ -19,6 +19,7 @@ public struct StatusEditorView: View {
   @Environment(Client.self) private var client
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(\.dismiss) private var dismiss
+  @Environment(\.modelContext) private var context
 
   @State private var viewModel: StatusEditorViewModel
   @FocusState private var isSpoilerTextFocused: Bool
@@ -144,22 +145,23 @@ public struct StatusEditorView: View {
             Text("action.cancel")
           }
           .keyboardShortcut(.cancelAction)
-          .confirmationDialog("",
-                              isPresented: $isDismissAlertPresented,
-                              actions: {
-                                Button("status.draft.delete", role: .destructive) {
-                                  dismiss()
-                                  NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
-                                                                  object: nil)
-                                }
-                                Button("status.draft.save") {
-                                  preferences.draftsPosts.insert(viewModel.statusText.string, at: 0)
-                                  dismiss()
-                                  NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
-                                                                  object: nil)
-                                }
-                                Button("action.cancel", role: .cancel) {}
-                              })
+          .confirmationDialog(
+            "",
+            isPresented: $isDismissAlertPresented,
+            actions: {
+              Button("status.draft.delete", role: .destructive) {
+                dismiss()
+                NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
+                                                object: nil)
+              }
+              Button("status.draft.save") {
+                context.insert(Draft(content: viewModel.statusText.string))
+                dismiss()
+                NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
+                                                object: nil)
+              }
+              Button("action.cancel", role: .cancel) {}
+            })
         }
       }
     }

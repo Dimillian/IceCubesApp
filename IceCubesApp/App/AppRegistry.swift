@@ -120,6 +120,12 @@ extension View {
       .environment(PushNotificationsService.shared)
       .environment(AppAccountsManager.shared.currentClient)
   }
+  
+  func withModelContainer() -> some View {
+    modelContainer(for: [
+      Draft.self,
+    ])
+  }
 }
 
 struct ActivityView: UIViewControllerRepresentable {

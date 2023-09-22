@@ -111,9 +111,10 @@ struct StatusEditorAccessoryView: View {
               .accessibilityLabel("accessibility.editor.button.drafts")
               .popover(isPresented: $isDraftsSheetDisplayed) {
                 if UIDevice.current.userInterfaceIdiom == .phone {
-                  draftsSheetView
+                  draftsListView
+                    .presentationDetents([.medium])
                 } else {
-                  draftsSheetView
+                  draftsListView
                     .frame(width: 400, height: 500)
                 }
               }
@@ -175,6 +176,16 @@ struct StatusEditorAccessoryView: View {
     .onAppear {
       viewModel.setInitialLanguageSelection(preference: preferences.recentlyUsedLanguages.first ?? preferences.serverPreferences?.postLanguage)
     }
+  }
+  
+  private var draftsListView: some View {
+    DraftsListView(selectedDraft: .init(get: {
+      nil
+    }, set: { draft in
+      if let draft {
+        viewModel.insertStatusText(text: draft.content)
+      }
+    }))
   }
 
   @ViewBuilder
@@ -267,38 +278,6 @@ struct StatusEditorAccessoryView: View {
         isLanguageSheetDisplayed = false
       }
     }
-  }
-
-  private var draftsSheetView: some View {
-    NavigationStack {
-      List {
-        ForEach(preferences.draftsPosts, id: \.self) { draft in
-          Button {
-            viewModel.insertStatusText(text: draft)
-            isDraftsSheetDisplayed = false
-          } label: {
-            Text(draft)
-              .lineLimit(3)
-              .foregroundStyle(theme.labelColor)
-          }.listRowBackground(theme.primaryBackgroundColor)
-        }
-        .onDelete { indexes in
-          if let index = indexes.first {
-            preferences.draftsPosts.remove(at: index)
-          }
-        }
-      }
-      .toolbar {
-        ToolbarItem(placement: .navigationBarLeading) {
-          Button("action.cancel", action: { isDraftsSheetDisplayed = false })
-        }
-      }
-      .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
-      .navigationTitle("status.editor.drafts.navigation-title")
-      .navigationBarTitleDisplayMode(.inline)
-    }
-    .presentationDetents([.medium])
   }
 
   private var customEmojisSheet: some View {

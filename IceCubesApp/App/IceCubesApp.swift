@@ -8,6 +8,7 @@ import Network
 import RevenueCat
 import SwiftUI
 import Timeline
+import Status
 
 @main
 struct IceCubesApp: App {
@@ -75,6 +76,7 @@ struct IceCubesApp: App {
             }
           }
         }
+        .withModelContainer()
     }
     .commands {
       appMenu
