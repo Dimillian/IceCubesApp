@@ -549,6 +549,8 @@
 "accessibility.tabs.timeline.new-post.inputLabel2" = "创建嘟文";
 "accessibility.tabs.timeline.unread-posts.label-%lld" = "%lld 个新嘟文";
 "accessibility.tabs.timeline.unread-posts.hint" = "滚动时间线。";
+"accessibility.tabs.timeline.content-link-%@" = "访问 %@";
+"accessibility.tabs.timeline.content-hashtag-%@" = "给 %@ 添加标签";
 "accessibility.app-account.selector.accounts" = "账户";
 "accessibility.app-account.selector.accounts.hint" = "打开选项表";
 "accessibility.tabs.profile.options.label" = "选项";
