@@ -7,7 +7,6 @@ import SwiftUI
 @MainActor
 @Observable public class UserPreferences {
   class Storage {
-    @AppStorage("remote_local_timeline") public var remoteLocalTimelines: [String] = []
     @AppStorage("tag_groups") public var tagGroups: [TagGroup] = []
     @AppStorage("preferred_browser") public var preferredBrowser: PreferredBrowser = .inAppSafari
     @AppStorage("show_translate_button_inline") public var showTranslateButton: Bool = true
@@ -62,12 +61,7 @@ import SwiftUI
   private let storage = Storage()
   
   private var client: Client?
-  
-  public var remoteLocalTimelines: [String] {
-    didSet {
-      storage.remoteLocalTimelines = remoteLocalTimelines
-    }
-  }
+
   public var tagGroups: [TagGroup] {
     didSet {
       storage.tagGroups = tagGroups
@@ -371,7 +365,6 @@ import SwiftUI
   }
   
   private init() {
-    remoteLocalTimelines = storage.remoteLocalTimelines
     tagGroups = storage.tagGroups
     preferredBrowser = storage.preferredBrowser
     showTranslateButton = storage.showTranslateButton

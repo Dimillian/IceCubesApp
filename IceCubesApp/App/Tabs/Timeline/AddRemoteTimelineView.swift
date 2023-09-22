@@ -10,6 +10,7 @@ import SwiftUI
 @MainActor
 struct AddRemoteTimelineView: View {
   @Environment(\.dismiss) private var dismiss
+  @Environment(\.modelContext) private var context
 
   @Environment(UserPreferences.self) private var preferences
   @Environment(Theme.self) private var theme
@@ -39,7 +40,7 @@ struct AddRemoteTimelineView: View {
         }
         Button {
           guard instance != nil else { return }
-          preferences.remoteLocalTimelines.append(instanceName)
+          context.insert(LocalTimeline(instance: instanceName))
           dismiss()
         } label: {
           Text("timeline.add.action.add")

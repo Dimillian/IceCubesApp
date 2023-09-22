@@ -1,6 +1,7 @@
 import SwiftUI
 import SwiftData
 import DesignSystem
+import Models
 
 struct DraftsListView: View {
   @AppStorage("draft_posts") public var legacyDraftPosts: [String] = []

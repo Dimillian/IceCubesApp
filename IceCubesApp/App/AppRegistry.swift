@@ -124,6 +124,7 @@ extension View {
   func withModelContainer() -> some View {
     modelContainer(for: [
       Draft.self,
+      LocalTimeline.self,
     ])
   }
 }

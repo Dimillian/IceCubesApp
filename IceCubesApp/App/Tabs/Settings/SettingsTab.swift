@@ -8,10 +8,12 @@ import Network
 import Nuke
 import SwiftUI
 import Timeline
+import SwiftData
 
 @MainActor
 struct SettingsTabs: View {
   @Environment(\.dismiss) private var dismiss
+  @Environment(\.modelContext) private var context
 
   @Environment(PushNotificationsService.self) private var pushNotifications
   @Environment(UserPreferences.self) private var preferences
@@ -27,6 +29,8 @@ struct SettingsTabs: View {
   @State private var timelineCache = TimelineCache()
 
   @Binding var popToRootTab: Tab
+  
+  @Query(sort: \LocalTimeline.creationDate, order: .reverse) var localTimelines: [LocalTimeline]
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {
@@ -303,16 +307,13 @@ struct SettingsTabs: View {
 
   private var remoteLocalTimelinesView: some View {
     Form {
-      ForEach(preferences.remoteLocalTimelines, id: \.self) { server in
-        Text(server)
+      ForEach(localTimelines) { timeline in
+        Text(timeline.instance)
       }.onDelete { indexes in
         if let index = indexes.first {
-          _ = preferences.remoteLocalTimelines.remove(at: index)
+          context.delete(localTimelines[index])
         }
       }
-      .onMove(perform: { indices, newOffset in
-        moveTimelineItems(from: indices, to: newOffset)
-      })
       .listRowBackground(theme.primaryBackgroundColor)
       Button {
         routerPath.presentedSheet = .addRemoteLocalTimeline
@@ -327,10 +328,6 @@ struct SettingsTabs: View {
     .toolbar {
       EditButton()
     }
-  }
-
-  private func moveTimelineItems(from source: IndexSet, to destination: Int) {
-    preferences.remoteLocalTimelines.move(fromOffsets: source, toOffset: destination)
   }
 
   private var cacheSection: some View {

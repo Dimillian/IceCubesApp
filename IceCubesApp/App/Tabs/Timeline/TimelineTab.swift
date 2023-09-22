@@ -6,9 +6,12 @@ import Models
 import Network
 import SwiftUI
 import Timeline
+import SwiftData
 
 @MainActor
 struct TimelineTab: View {
+  @Environment(\.modelContext) private var context
+  
   @Environment(AppAccountsManager.self) private var appAccount
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var currentAccount
@@ -18,17 +21,20 @@ struct TimelineTab: View {
   @Binding var popToRootTab: Tab
 
   @State private var didAppear: Bool = false
-  @State private var timeline: TimelineFilter
+  @State private var timeline: TimelineFilter = .home
   @State private var scrollToTopSignal: Int = 0
+  
+  @Query(sort: \LocalTimeline.creationDate, order: .reverse) var localTimelines: [LocalTimeline]
 
-  @AppStorage("last_timeline_filter") public var lastTimelineFilter: TimelineFilter = .home
+  @AppStorage("remote_local_timeline") var legacyLocalTimelines: [String] = []
+  @AppStorage("last_timeline_filter")  var lastTimelineFilter: TimelineFilter = .home
 
   private let canFilterTimeline: Bool
 
   init(popToRootTab: Binding<Tab>, timeline: TimelineFilter? = nil) {
     canFilterTimeline = timeline == nil
-    self.timeline = timeline ?? .home
     _popToRootTab = popToRootTab
+    self.timeline = timeline ?? .home
   }
 
   var body: some View {
@@ -43,6 +49,7 @@ struct TimelineTab: View {
         .id(client.id)
     }
     .onAppear {
+      migrateUserPreferencesTimeline()
       routerPath.client = client
       if !didAppear, canFilterTimeline {
         didAppear = true
@@ -129,12 +136,12 @@ struct TimelineTab: View {
     }
 
     Menu("timeline.filter.local") {
-      ForEach(preferences.remoteLocalTimelines, id: \.self) { server in
+      ForEach(localTimelines) { remoteLocal in
         Button {
-          timeline = .remoteLocal(server: server, filter: .local)
+          timeline = .remoteLocal(server: remoteLocal.instance, filter: .local)
         } label: {
           VStack {
-            Label(server, systemImage: "dot.radiowaves.right")
+            Label(remoteLocal.instance, systemImage: "dot.radiowaves.right")
           }
         }
       }
@@ -234,5 +241,12 @@ struct TimelineTab: View {
     } else {
       timeline = .federated
     }
+  }
+  
+  func migrateUserPreferencesTimeline() {
+    for instance in legacyLocalTimelines {
+      context.insert(LocalTimeline(instance: instance))
+    }
+    legacyLocalTimelines = []
   }
 }
