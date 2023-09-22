@@ -115,33 +115,31 @@ struct IceCubesApp: App {
                 popToRootTab: $popToRootTab,
                 tabs: availableTabs)
     {
-      GeometryReader { _ in
-        HStack(spacing: 0) {
-          ZStack {
-            if selectedTab == .profile {
-              ProfileTab(popToRootTab: $popToRootTab)
-            }
-            ForEach(availableTabs) { tab in
-              if tab == selectedTab || sideBarLoadedTabs.contains(tab) {
-                tab
-                  .makeContentView(popToRootTab: $popToRootTab)
-                  .opacity(tab == selectedTab ? 1 : 0)
-                  .transition(.opacity)
-                  .id("\(tab)\(appAccountsManager.currentAccount.id)")
-                  .onAppear {
-                    sideBarLoadedTabs.insert(tab)
-                  }
-              } else {
-                EmptyView()
-              }
+      HStack(spacing: 0) {
+        ZStack {
+          if selectedTab == .profile {
+            ProfileTab(popToRootTab: $popToRootTab)
+          }
+          ForEach(availableTabs) { tab in
+            if tab == selectedTab || sideBarLoadedTabs.contains(tab) {
+              tab
+                .makeContentView(popToRootTab: $popToRootTab)
+                .opacity(tab == selectedTab ? 1 : 0)
+                .transition(.opacity)
+                .id("\(tab)\(appAccountsManager.currentAccount.id)")
+                .onAppear {
+                  sideBarLoadedTabs.insert(tab)
+                }
+            } else {
+              EmptyView()
             }
           }
-          if appAccountsManager.currentClient.isAuth,
-             userPreferences.showiPadSecondaryColumn
-          {
-            Divider().edgesIgnoringSafeArea(.all)
-            notificationsSecondaryColumn
-          }
+        }
+        if appAccountsManager.currentClient.isAuth,
+           userPreferences.showiPadSecondaryColumn
+        {
+          Divider().edgesIgnoringSafeArea(.all)
+          notificationsSecondaryColumn
         }
       }
     }.onChange(of: $appAccountsManager.currentAccount.id) {

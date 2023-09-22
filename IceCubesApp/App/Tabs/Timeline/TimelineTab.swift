@@ -95,6 +95,12 @@ struct TimelineTab: View {
       if client.isAuth, newValue == .home || newValue == .federated || newValue == .local {
         lastTimelineFilter = newValue
       }
+      switch newValue {
+      case .tagGroup:
+        break
+      default:
+        selectedTagGroup = nil
+      }
     }
     .withSafariRouter()
     .environment(routerPath)
