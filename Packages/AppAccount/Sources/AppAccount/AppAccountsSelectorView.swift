@@ -142,6 +142,7 @@ public struct AppAccountsSelectorView: View {
           }
         }
       }
+      .environment(routerPath)
     }
   }
 
