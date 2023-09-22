@@ -27,11 +27,15 @@ public struct TimelineView: View {
   @State private var collectionView: UICollectionView?
 
   @Binding var timeline: TimelineFilter
+  @Binding var selectedTagGroup: TagGroup?
   @Binding var scrollToTopSignal: Int
   private let canFilterTimeline: Bool
 
-  public init(timeline: Binding<TimelineFilter>, scrollToTopSignal: Binding<Int>, canFilterTimeline: Bool) {
+  public init(timeline: Binding<TimelineFilter>,
+              selectedTagGroup: Binding<TagGroup?>,
+              scrollToTopSignal: Binding<Int>, canFilterTimeline: Bool) {
     _timeline = timeline
+    _selectedTagGroup = selectedTagGroup
     _scrollToTopSignal = scrollToTopSignal
     self.canFilterTimeline = canFilterTimeline
   }
@@ -40,13 +44,9 @@ public struct TimelineView: View {
     ScrollViewReader { proxy in
       ZStack(alignment: .top) {
         List {
-          if viewModel.tagGroup != nil {
-            tagGroupHeaderView
-          } else if viewModel.tag == nil {
-            scrollToTopView
-          } else {
-            tagHeaderView
-          }
+          scrollToTopView
+          tagGroupHeaderView
+          tagHeaderView
           switch viewModel.timeline {
           case .remoteLocal:
             StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath, isRemote: true)
@@ -211,7 +211,7 @@ public struct TimelineView: View {
 
   @ViewBuilder
   private var tagGroupHeaderView: some View {
-    if let group = viewModel.tagGroup {
+    if let group = selectedTagGroup {
       headerView {
         HStack {
           ScrollView(.horizontal) {
@@ -230,7 +230,7 @@ public struct TimelineView: View {
           .scrollIndicators(.hidden)
           Button("status.action.edit") {
             routerPath.presentedSheet = .editTagGroup(tagGroup: group, onSaved: { group in
-              viewModel.timeline = .tagGroup(group)
+              viewModel.timeline = .tagGroup(title: group.title, tags: group.tags)
             })
           }
           .buttonStyle(.bordered)

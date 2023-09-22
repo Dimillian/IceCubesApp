@@ -10,8 +10,8 @@ import SwiftUI
 @MainActor
 struct EditTagGroupView: View {
   @Environment(\.dismiss) private var dismiss
+  @Environment(\.modelContext) private var context
 
-  @Environment(UserPreferences.self) private var preferences
   @Environment(Theme.self) private var theme
 
   @State private var title: String = ""
@@ -22,7 +22,7 @@ struct EditTagGroupView: View {
 
   private var editingTagGroup: TagGroup?
   private var onSaved: ((TagGroup) -> Void)?
-
+  
   private var canSave: Bool {
     !title.isEmpty &&
       // At least have 2 tags, one main and one additional.
@@ -70,7 +70,7 @@ struct EditTagGroupView: View {
         focusedField = .title
         if let editingTagGroup {
           title = editingTagGroup.title
-          sfSymbolName = editingTagGroup.sfSymbolName
+          sfSymbolName = editingTagGroup.symbolName
           tags = editingTagGroup.tags
         }
       }
@@ -162,25 +162,20 @@ struct EditTagGroupView: View {
   }
 
   private func save() {
-    var toSave = tags
-    let main = toSave.removeFirst()
-
-    let tagGroup: TagGroup = .init(
-      title: title.trimmingCharacters(in: .whitespaces),
-      sfSymbolName: sfSymbolName,
-      main: main,
-      additional: toSave
-    )
-    if let editingTagGroup,
-       let index = preferences.tagGroups.firstIndex(of: editingTagGroup)
-    {
-      preferences.tagGroups[index] = tagGroup
+    if let editingTagGroup {
+      editingTagGroup.title = title
+      editingTagGroup.symbolName = sfSymbolName
+      editingTagGroup.tags = tags
+      onSaved?(editingTagGroup)
     } else {
-      preferences.tagGroups.append(tagGroup)
+      let tagGroup = TagGroup(title: title.trimmingCharacters(in: .whitespacesAndNewlines),
+                              symbolName: sfSymbolName,
+                              tags: tags)
+      context.insert(tagGroup)
+      onSaved?(tagGroup)
     }
 
     dismiss()
-    onSaved?(tagGroup)
   }
 
   @ViewBuilder

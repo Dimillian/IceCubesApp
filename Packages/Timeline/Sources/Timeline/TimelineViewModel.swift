@@ -42,13 +42,6 @@ import SwiftUI
 
   var tag: Tag?
 
-  var tagGroup: TagGroup? {
-    if case let .tagGroup(group) = timeline {
-      return group
-    }
-    return nil
-  }
-
   // Internal source of truth for a timeline.
   private var datasource = TimelineDatasource()
   private let cache = TimelineCache()

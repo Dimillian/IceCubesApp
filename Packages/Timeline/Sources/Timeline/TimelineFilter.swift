@@ -32,7 +32,7 @@ public enum RemoteTimelineFilter: String, CaseIterable, Hashable, Equatable {
 public enum TimelineFilter: Hashable, Equatable {
   case home, local, federated, trending
   case hashtag(tag: String, accountId: String?)
-  case tagGroup(TagGroup)
+  case tagGroup(title: String, tags: [String])
   case list(list: Models.List)
   case remoteLocal(server: String, filter: RemoteTimelineFilter)
   case latest
@@ -73,8 +73,8 @@ public enum TimelineFilter: Hashable, Equatable {
       "Home"
     case let .hashtag(tag, _):
       "#\(tag)"
-    case let .tagGroup(group):
-      group.title
+    case let .tagGroup(title, _):
+      title
     case let .list(list):
       list.title
     case let .remoteLocal(server, _):
@@ -96,8 +96,8 @@ public enum TimelineFilter: Hashable, Equatable {
       "timeline.home"
     case let .hashtag(tag, _):
       "#\(tag)"
-    case let .tagGroup(group):
-      LocalizedStringKey(group.title) // ?? not sure since this can't be localized.
+    case let .tagGroup(title, _):
+      LocalizedStringKey(title) // ?? not sure since this can't be localized.
     case let .list(list):
       LocalizedStringKey(list.title)
     case let .remoteLocal(server, _):
@@ -128,29 +128,31 @@ public enum TimelineFilter: Hashable, Equatable {
 
   public func endpoint(sinceId: String?, maxId: String?, minId: String?, offset: Int?) -> Endpoint {
     switch self {
-    case .federated: Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: false)
-    case .local: Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true)
+    case .federated: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: false)
+    case .local: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true)
     case let .remoteLocal(_, filter):
       switch filter {
       case .local:
-        Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true)
+        return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true)
       case .federated:
-        Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: false)
+        return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: false)
       case .trending:
-        Trends.statuses(offset: offset)
+        return Trends.statuses(offset: offset)
       }
-    case .latest: Timelines.home(sinceId: nil, maxId: nil, minId: nil)
-    case .home: Timelines.home(sinceId: sinceId, maxId: maxId, minId: minId)
-    case .trending: Trends.statuses(offset: offset)
-    case let .list(list): Timelines.list(listId: list.id, sinceId: sinceId, maxId: maxId, minId: minId)
+    case .latest: return Timelines.home(sinceId: nil, maxId: nil, minId: nil)
+    case .home: return Timelines.home(sinceId: sinceId, maxId: maxId, minId: minId)
+    case .trending: return Trends.statuses(offset: offset)
+    case let .list(list): return Timelines.list(listId: list.id, sinceId: sinceId, maxId: maxId, minId: minId)
     case let .hashtag(tag, accountId):
       if let accountId {
-        Accounts.statuses(id: accountId, sinceId: nil, tag: tag, onlyMedia: nil, excludeReplies: nil, pinned: nil)
+        return Accounts.statuses(id: accountId, sinceId: nil, tag: tag, onlyMedia: nil, excludeReplies: nil, pinned: nil)
       } else {
-        Timelines.hashtag(tag: tag, additional: nil, maxId: maxId)
+        return Timelines.hashtag(tag: tag, additional: nil, maxId: maxId)
       }
-    case let .tagGroup(group):
-      Timelines.hashtag(tag: group.main, additional: group.additional, maxId: maxId)
+    case let .tagGroup(_, tags):
+      var tags = tags
+      tags.removeFirst()
+      return Timelines.hashtag(tag: tags.first ?? "", additional: tags, maxId: maxId)
     }
   }
 }
@@ -189,8 +191,13 @@ extension TimelineFilter: Codable {
         accountId: accountId
       )
     case .tagGroup:
-      let group = try container.decode(TagGroup.self, forKey: .tagGroup)
-      self = .tagGroup(group)
+      var nestedContainer = try container.nestedUnkeyedContainer(forKey: .hashtag)
+      let title = try nestedContainer.decode(String.self)
+      let tags = try nestedContainer.decode([String].self)
+      self = .tagGroup(
+        title: title,
+        tags: tags
+      )
     case .list:
       let list = try container.decode(
         Models.List.self,
@@ -232,8 +239,10 @@ extension TimelineFilter: Codable {
       var nestedContainer = container.nestedUnkeyedContainer(forKey: .hashtag)
       try nestedContainer.encode(tag)
       try nestedContainer.encode(accountId)
-    case let .tagGroup(group):
-      try container.encode(group, forKey: .tagGroup)
+    case let .tagGroup(title, tags):
+      var nestedContainer = container.nestedUnkeyedContainer(forKey: .tagGroup)
+      try nestedContainer.encode(title)
+      try nestedContainer.encode(tags)
     case let .list(list):
       try container.encode(list, forKey: .list)
     case let .remoteLocal(server, filter):

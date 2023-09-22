@@ -31,6 +31,7 @@ struct SettingsTabs: View {
   @Binding var popToRootTab: Tab
   
   @Query(sort: \LocalTimeline.creationDate, order: .reverse) var localTimelines: [LocalTimeline]
+  @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {
@@ -274,19 +275,16 @@ struct SettingsTabs: View {
 
   private var tagGroupsView: some View {
     Form {
-      ForEach(preferences.tagGroups, id: \.self) { group in
-        Label(group.title, systemImage: group.sfSymbolName)
+      ForEach(tagGroups) { group in
+        Label(group.title, systemImage: group.symbolName)
           .onTapGesture {
             routerPath.presentedSheet = .editTagGroup(tagGroup: group, onSaved: nil)
           }
       }
       .onDelete { indexes in
         if let index = indexes.first {
-          _ = preferences.tagGroups.remove(at: index)
+          context.delete(tagGroups[index])
         }
-      }
-      .onMove { source, destination in
-        preferences.tagGroups.move(fromOffsets: source, toOffset: destination)
       }
       .listRowBackground(theme.primaryBackgroundColor)
 

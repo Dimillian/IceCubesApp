@@ -7,7 +7,6 @@ import SwiftUI
 @MainActor
 @Observable public class UserPreferences {
   class Storage {
-    @AppStorage("tag_groups") public var tagGroups: [TagGroup] = []
     @AppStorage("preferred_browser") public var preferredBrowser: PreferredBrowser = .inAppSafari
     @AppStorage("show_translate_button_inline") public var showTranslateButton: Bool = true
     @AppStorage("is_open_ai_enabled") public var isOpenAIEnabled: Bool = true
@@ -62,11 +61,6 @@ import SwiftUI
   
   private var client: Client?
 
-  public var tagGroups: [TagGroup] {
-    didSet {
-      storage.tagGroups = tagGroups
-    }
-  }
   public var preferredBrowser: PreferredBrowser {
     didSet {
       storage.preferredBrowser = preferredBrowser
@@ -365,7 +359,6 @@ import SwiftUI
   }
   
   private init() {
-    tagGroups = storage.tagGroups
     preferredBrowser = storage.preferredBrowser
     showTranslateButton = storage.showTranslateButton
     isOpenAIEnabled = storage.isOpenAIEnabled

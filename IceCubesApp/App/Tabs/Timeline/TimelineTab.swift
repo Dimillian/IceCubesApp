@@ -22,12 +22,15 @@ struct TimelineTab: View {
 
   @State private var didAppear: Bool = false
   @State private var timeline: TimelineFilter = .home
+  @State private var selectedTagGroup: TagGroup?
   @State private var scrollToTopSignal: Int = 0
   
   @Query(sort: \LocalTimeline.creationDate, order: .reverse) var localTimelines: [LocalTimeline]
-
+  @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
   @AppStorage("remote_local_timeline") var legacyLocalTimelines: [String] = []
-  @AppStorage("last_timeline_filter")  var lastTimelineFilter: TimelineFilter = .home
+  @AppStorage("tag_groups") var legacyTagGroups: [LegacyTagGroup] = []
+  
+  @AppStorage("last_timeline_filter") var lastTimelineFilter: TimelineFilter = .home
 
   private let canFilterTimeline: Bool
 
@@ -39,7 +42,10 @@ struct TimelineTab: View {
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {
-      TimelineView(timeline: $timeline, scrollToTopSignal: $scrollToTopSignal, canFilterTimeline: canFilterTimeline)
+      TimelineView(timeline: $timeline,
+                   selectedTagGroup: $selectedTagGroup,
+                   scrollToTopSignal: $scrollToTopSignal,
+                   canFilterTimeline: canFilterTimeline)
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbar {
@@ -50,6 +56,7 @@ struct TimelineTab: View {
     }
     .onAppear {
       migrateUserPreferencesTimeline()
+      migrateUserPreferencesTagGroups()
       routerPath.client = client
       if !didAppear, canFilterTimeline {
         didAppear = true
@@ -153,12 +160,13 @@ struct TimelineTab: View {
     }
 
     Menu("timeline.filter.tag-groups") {
-      ForEach(preferences.tagGroups, id: \.self) { group in
+      ForEach(tagGroups) { group in
         Button {
-          timeline = .tagGroup(group)
+          selectedTagGroup = group
+          timeline = .tagGroup(title: group.title, tags: group.tags)
         } label: {
           VStack {
-            let icon = group.sfSymbolName.isEmpty ? "number" : group.sfSymbolName
+            let icon = group.symbolName.isEmpty ? "number" : group.symbolName
             Label(group.title, systemImage: icon)
           }
         }
@@ -248,5 +256,12 @@ struct TimelineTab: View {
       context.insert(LocalTimeline(instance: instance))
     }
     legacyLocalTimelines = []
+  }
+  
+  func migrateUserPreferencesTagGroups() {
+    for group in legacyTagGroups {
+      context.insert(TagGroup(title: group.title, symbolName: group.sfSymbolName, tags: group.tags))
+    }
+    legacyTagGroups = []
   }
 }

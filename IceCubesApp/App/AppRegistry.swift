@@ -31,9 +31,15 @@ extension View {
       case let .conversationDetail(conversation):
         ConversationDetailView(conversation: conversation)
       case let .hashTag(tag, accountId):
-        TimelineView(timeline: .constant(.hashtag(tag: tag, accountId: accountId)), scrollToTopSignal: .constant(0), canFilterTimeline: false)
+        TimelineView(timeline: .constant(.hashtag(tag: tag, accountId: accountId)), 
+                     selectedTagGroup: .constant(nil),
+                     scrollToTopSignal: .constant(0),
+                     canFilterTimeline: false)
       case let .list(list):
-        TimelineView(timeline: .constant(.list(list: list)), scrollToTopSignal: .constant(0), canFilterTimeline: false)
+        TimelineView(timeline: .constant(.list(list: list)), 
+                     selectedTagGroup: .constant(nil),
+                     scrollToTopSignal: .constant(0),
+                     canFilterTimeline: false)
       case let .following(id):
         AccountsListView(mode: .following(accountId: id))
       case let .followers(id):
@@ -45,7 +51,10 @@ extension View {
       case let .accountsList(accounts):
         AccountsListView(mode: .accountsList(accounts: accounts))
       case .trendingTimeline:
-        TimelineView(timeline: .constant(.trending), scrollToTopSignal: .constant(0), canFilterTimeline: false)
+        TimelineView(timeline: .constant(.trending),
+                     selectedTagGroup: .constant(nil),
+                     scrollToTopSignal: .constant(0),
+                     canFilterTimeline: false)
       case let .tagsList(tags):
         TagsListView(tags: tags)
       }
@@ -125,6 +134,7 @@ extension View {
     modelContainer(for: [
       Draft.self,
       LocalTimeline.self,
+      TagGroup.self
     ])
   }
 }
