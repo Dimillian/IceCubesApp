@@ -51,7 +51,7 @@ import SwiftUI
 
   // Internal source of truth for a timeline.
   private var datasource = TimelineDatasource()
-  private let cache: TimelineCache = .shared
+  private let cache = TimelineCache()
   private var visibileStatusesIds = Set<String>()
   private var canStreamEvents: Bool = true
 

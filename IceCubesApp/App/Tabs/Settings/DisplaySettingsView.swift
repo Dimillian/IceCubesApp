@@ -14,8 +14,6 @@ import SwiftUI
   var labelColor = Theme.shared.labelColor
   var lineSpacing = Theme.shared.lineSpacing
   var fontSizeScale = Theme.shared.fontSizeScale
-
-  init() {}
 }
 
 @MainActor
@@ -52,27 +50,27 @@ struct DisplaySettingsView: View {
       .background(theme.secondaryBackgroundColor)
       .task(id: localValues.tintColor) {
         do { try await Task.sleep(for: .microseconds(500)) } catch {}
-        Theme.shared.tintColor = localValues.tintColor
+        theme.tintColor = localValues.tintColor
       }
       .task(id: localValues.primaryBackgroundColor) {
         do { try await Task.sleep(for: .microseconds(500)) } catch {}
-        Theme.shared.primaryBackgroundColor = localValues.primaryBackgroundColor
+        theme.primaryBackgroundColor = localValues.primaryBackgroundColor
       }
       .task(id: localValues.secondaryBackgroundColor) {
         do { try await Task.sleep(for: .microseconds(500)) } catch {}
-        Theme.shared.secondaryBackgroundColor = localValues.secondaryBackgroundColor
+        theme.secondaryBackgroundColor = localValues.secondaryBackgroundColor
       }
       .task(id: localValues.labelColor) {
         do { try await Task.sleep(for: .microseconds(500)) } catch {}
-        Theme.shared.labelColor = localValues.labelColor
+        theme.labelColor = localValues.labelColor
       }
       .task(id: localValues.lineSpacing) {
         do { try await Task.sleep(for: .microseconds(500)) } catch {}
-        Theme.shared.lineSpacing = localValues.lineSpacing
+        theme.lineSpacing = localValues.lineSpacing
       }
       .task(id: localValues.fontSizeScale) {
         do { try await Task.sleep(for: .microseconds(500)) } catch {}
-        Theme.shared.fontSizeScale = localValues.fontSizeScale
+        theme.fontSizeScale = localValues.fontSizeScale
       }
       examplePost
     }

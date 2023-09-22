@@ -24,6 +24,7 @@ struct SettingsTabs: View {
   @State private var addAccountSheetPresented = false
   @State private var isEditingAccount = false
   @State private var cachedRemoved = false
+  @State private var timelineCache = TimelineCache()
 
   @Binding var popToRootTab: Tab
 
@@ -114,7 +115,7 @@ struct SettingsTabs: View {
        let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token })
     {
       let client = Client(server: account.server, oauthToken: token)
-      await TimelineCache.shared.clearCache(for: client.id)
+      await timelineCache.clearCache(for: client.id)
       await sub.deleteSubscription()
       appAccountsManager.delete(account: account)
     }

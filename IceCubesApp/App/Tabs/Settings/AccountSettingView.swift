@@ -21,6 +21,7 @@ struct AccountSettingsView: View {
   @State private var isEditingAccount: Bool = false
   @State private var isEditingFilters: Bool = false
   @State private var cachedPostsCount: Int = 0
+  @State private var timelineCache = TimelineCache()
 
   let account: Account
   let appAccount: AppAccount
@@ -59,8 +60,8 @@ struct AccountSettingsView: View {
         Label("settings.account.cached-posts-\(String(cachedPostsCount))", systemImage: "internaldrive")
         Button("settings.account.action.delete-cache", role: .destructive) {
           Task {
-            await TimelineCache.shared.clearCache(for: appAccountsManager.currentClient.id)
-            cachedPostsCount = await TimelineCache.shared.cachedPostsCount(for: appAccountsManager.currentClient.id)
+            await timelineCache.clearCache(for: appAccountsManager.currentClient.id)
+            cachedPostsCount = await timelineCache.cachedPostsCount(for: appAccountsManager.currentClient.id)
           }
         }
       }
@@ -80,7 +81,7 @@ struct AccountSettingsView: View {
           if let token = appAccount.oauthToken {
             Task {
               let client = Client(server: appAccount.server, oauthToken: token)
-              await TimelineCache.shared.clearCache(for: client.id)
+              await timelineCache.clearCache(for: client.id)
               if let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token }) {
                 await sub.deleteSubscription()
               }
@@ -111,7 +112,7 @@ struct AccountSettingsView: View {
       }
     }
     .task {
-      cachedPostsCount = await TimelineCache.shared.cachedPostsCount(for: appAccountsManager.currentClient.id)
+      cachedPostsCount = await timelineCache.cachedPostsCount(for: appAccountsManager.currentClient.id)
     }
     .navigationTitle(account.safeDisplayName)
     .scrollContentBackground(.hidden)

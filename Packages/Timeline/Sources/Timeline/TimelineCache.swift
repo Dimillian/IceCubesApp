@@ -4,8 +4,6 @@ import Network
 import SwiftUI
 
 public actor TimelineCache {
-  public static let shared: TimelineCache = .init()
-
   private func storageFor(_ client: String) -> SQLiteStorageEngine {
     SQLiteStorageEngine.default(appendingPath: client)
   }
@@ -13,7 +11,7 @@ public actor TimelineCache {
   private let decoder = JSONDecoder()
   private let encoder = JSONEncoder()
 
-  private init() {}
+  public init() {}
 
   public func cachedPostsCount(for client: String) async -> Int {
     await storageFor(client).allKeys().count
