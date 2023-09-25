@@ -27,6 +27,7 @@ struct TimelineTab: View {
   
   @Query(sort: \LocalTimeline.creationDate, order: .reverse) var localTimelines: [LocalTimeline]
   @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
+  
   @AppStorage("remote_local_timeline") var legacyLocalTimelines: [String] = []
   @AppStorage("tag_groups") var legacyTagGroups: [LegacyTagGroup] = []
   
@@ -92,7 +93,7 @@ struct TimelineTab: View {
       routerPath.path = []
     }
     .onChange(of: timeline) { _, newValue in
-      if client.isAuth, newValue == .home || newValue == .federated || newValue == .local {
+      if client.isAuth, canFilterTimeline {
         lastTimelineFilter = newValue
       }
       switch newValue {
