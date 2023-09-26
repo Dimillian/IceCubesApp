@@ -407,7 +407,6 @@
 
 // MARK: Package: Status
 "status.action.translate" = "翻訳";
-"status.action.translate-with-deepl" = "DeepLを使用して翻訳";
 "status.action.translated-label-%@" = "%@ を使用して翻訳";
 "status.action.translated-label-from-%@-%@" = "%@ から %@ を使用して翻訳";
 "status.action.bookmark" = "ブックマーク";

@@ -407,7 +407,6 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Oversett";
-"status.action.translate-with-deepl" = "Oversett med DeepL";
 "status.action.translated-label-%@" = "Oversatt ved hjelp av %@";
 "status.action.translated-label-from-%@-%@" = "Oversatt fra %@ ved å bruke %@";
 "status.action.bookmark" = "Bokmerk";

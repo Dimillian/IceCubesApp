@@ -408,7 +408,6 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Перекласти";
-"status.action.translate-with-deepl" = "Перекласти з допомогою DeepL";
 "status.action.translated-label-%@" = "Переклад з допомогою %@";
 "status.action.translated-label-from-%@-%@" = "Переклад з %@ з допомогою %@";
 "status.action.bookmark" = "У закладки";
