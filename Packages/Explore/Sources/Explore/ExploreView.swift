@@ -32,7 +32,7 @@ public struct ExploreView: View {
           .padding(.bottom, 4)
         if !viewModel.isLoaded {
           quickAccessView
-            .padding(.bottom, 4)
+            .padding(.bottom, 5)
           loadingView
         } else if !viewModel.searchQuery.isEmpty {
           if let results = viewModel.results[viewModel.searchQuery] {
