@@ -40,7 +40,11 @@ struct ExploreTab: View {
     .environment(routerPath)
     .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
       if newValue == .explore {
-        routerPath.path = []
+        if routerPath.path.isEmpty {
+          scrollToTopSignal += 1
+        } else {
+          routerPath.path = []
+        }
       }
     }
     .onChange(of: client.id) {
