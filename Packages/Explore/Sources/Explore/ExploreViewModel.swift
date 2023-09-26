@@ -55,6 +55,7 @@ import SwiftUI
   var trendingLinks: [Card] = []
   var searchScope: SearchScope = .all
   var scrollToTopVisible: Bool = false
+  var isSearchPresented: Bool = false
 
   init() {}
 
