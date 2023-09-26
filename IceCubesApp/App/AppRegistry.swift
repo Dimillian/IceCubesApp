@@ -17,9 +17,9 @@ extension View {
     navigationDestination(for: RouterDestination.self) { destination in
       switch destination {
       case let .accountDetail(id):
-        AccountDetailView(accountId: id)
+        AccountDetailView(accountId: id, scrollToTopSignal: .constant(0))
       case let .accountDetailWithAccount(account):
-        AccountDetailView(account: account)
+        AccountDetailView(account: account, scrollToTopSignal: .constant(0))
       case let .accountSettingsWithAccount(account, appAccount):
         AccountSettingsView(account: account, appAccount: appAccount)
       case let .statusDetail(id):
