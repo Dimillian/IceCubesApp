@@ -9,16 +9,25 @@ import SwiftUI
 
 @MainActor
 public struct ExploreView: View {
+  private enum Constants {
+    static let scrollToTop = "top"
+  }
+  
   @Environment(Theme.self) private var theme
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath
 
   @State private var viewModel = ExploreViewModel()
+  
+  @Binding var scrollToTopSignal: Int
 
-  public init() {}
+  public init(scrollToTopSignal: Binding<Int>) {
+    _scrollToTopSignal = scrollToTopSignal
+  }
 
   public var body: some View {
     List {
+      scrollToTopView
       if !viewModel.isLoaded {
         quickAccessView
         loadingView
@@ -245,5 +254,21 @@ public struct ExploreView: View {
       }
       .listRowBackground(theme.primaryBackgroundColor)
     }
+  }
+  
+  private var scrollToTopView: some View {
+    EmptyView()
+      .listRowBackground(theme.primaryBackgroundColor)
+      .listRowSeparator(.hidden)
+      .listRowInsets(.init())
+      .frame(height: .layoutPadding)
+      .id(Constants.scrollToTop)
+      .onAppear {
+        viewModel.scrollToTopVisible = true
+      }
+      .onDisappear {
+        viewModel.scrollToTopVisible = false
+      }
+      .accessibilityHidden(true)
   }
 }
