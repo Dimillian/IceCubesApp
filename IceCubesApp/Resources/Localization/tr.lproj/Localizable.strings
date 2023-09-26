@@ -403,7 +403,6 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Tercüme et";
-"status.action.translate-with-deepl" = "Translate with DeepL";
 "status.action.translated-label-%@" = "%@ tarafından tercüme edildi";
 "status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Yer İmi Ekle";

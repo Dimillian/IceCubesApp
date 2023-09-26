@@ -406,7 +406,6 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Tradueix";
-"status.action.translate-with-deepl" = "Translate with DeepL";
 "status.action.translated-label-%@" = "Traduït amb %@";
 "status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Afegeix als marcadors";

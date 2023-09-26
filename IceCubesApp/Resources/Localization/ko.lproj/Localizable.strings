@@ -410,7 +410,6 @@
 
 // MARK: Package: Status
 "status.action.translate" = "번역";
-"status.action.translate-with-deepl" = "DeepL 번역";
 "status.action.translated-label-%@" = "%@ 서비스를 통해 번역됨";
 "status.action.translated-label-from-%@-%@" = "%2$@ 서비스를 통해 %1$@에서 번역됨";
 "status.action.bookmark" = "보관함에 추가";

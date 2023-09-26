@@ -409,7 +409,6 @@
 
 // MARK: Package: Status
 "status.action.translate" = "翻譯";
-"status.action.translate-with-deepl" = "以 DeepL 翻譯";
 "status.action.translated-label-%@" = "翻譯服務 %@";
 "status.action.translated-label-from-%@-%@" = "從 %@ 以 %@ 翻譯";
 "status.action.bookmark" = "書籤";
