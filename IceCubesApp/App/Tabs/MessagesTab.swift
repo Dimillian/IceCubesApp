@@ -16,11 +16,12 @@ struct MessagesTab: View {
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(AppAccountsManager.self) private var appAccount
   @State private var routerPath = RouterPath()
+  @State private var scrollToTopSignal: Int = 0
   @Binding var popToRootTab: Tab
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {
-      ConversationsListView()
+      ConversationsListView(scrollToTopSignal: $scrollToTopSignal)
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbar {
@@ -35,7 +36,11 @@ struct MessagesTab: View {
     }
     .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
       if newValue == .messages {
-        routerPath.path = []
+        if routerPath.path.isEmpty {
+          scrollToTopSignal += 1
+        } else {
+          routerPath.path = []
+        }
       }
     }
     .onChange(of: client.id) {
