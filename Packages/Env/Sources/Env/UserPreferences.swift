@@ -9,6 +9,7 @@ import SwiftUI
   class Storage {
     @AppStorage("preferred_browser") public var preferredBrowser: PreferredBrowser = .inAppSafari
     @AppStorage("show_translate_button_inline") public var showTranslateButton: Bool = true
+    @AppStorage("show_pending_at_bottom") public var pendingShownAtBottom: Bool = false
     @AppStorage("is_open_ai_enabled") public var isOpenAIEnabled: Bool = true
     
     @AppStorage("recently_used_languages") public var recentlyUsedLanguages: [String] = []
@@ -70,6 +71,11 @@ import SwiftUI
   public var showTranslateButton: Bool {
     didSet {
       storage.showTranslateButton = showTranslateButton
+    }
+  }
+  public var pendingShownAtBottom : Bool {
+    didSet {
+        storage.pendingShownAtBottom = pendingShownAtBottom
     }
   }
   public var isOpenAIEnabled: Bool {
@@ -392,5 +398,6 @@ import SwiftUI
     requestedReview = storage.requestedReview
     collapseLongPosts = storage.collapseLongPosts
     shareButtonBehavior = storage.shareButtonBehavior
+    pendingShownAtBottom = storage.pendingShownAtBottom
   }
 }

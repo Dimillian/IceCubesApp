@@ -86,6 +86,7 @@
 "settings.display.status.action-buttons" = "글 동작 버튼";
 "settings.display.status.media-style" = "글 미디어 크기";
 "settings.display.translate-button" = "번역 버튼 표시";
+"settings.display.pending-at-bottom" = "화면 하단에 읽지 않은 버튼 표시";
 "settings.display.theme.background" = "배경 색상";
 "settings.display.theme.secondary-background" = "보조 배경 색상";
 "settings.display.theme.text-color" = "글자 색상";

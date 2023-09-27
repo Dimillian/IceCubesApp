@@ -91,6 +91,7 @@
 "settings.display.status.action-buttons" = "Кнопкі дзеянняў стану";
 "settings.display.status.media-style" = "Медыястыль статусу";
 "settings.display.translate-button" = "Паказаць кнопку перакладу";
+"settings.display.pending-at-bottom" = "Кнопка «Паказаць непрачытаныя» ўнізе экрана";
 "settings.display.theme.background" = "Колер фону";
 "settings.display.theme.secondary-background" = "Другасны колер фону";
 "settings.display.theme.text-color" = "Text Color";
