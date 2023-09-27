@@ -401,7 +401,6 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Übersetzen";
-"status.action.translate-with-deepl" = "Mit DeepL übersetzen";
 "status.action.translated-label-%@" = "Übersetzt mit %@";
 "status.action.translated-label-from-%@-%@" = "Aus %@ mit %@ übersetzt";
 "status.action.bookmark" = "Lesezeichen setzen";

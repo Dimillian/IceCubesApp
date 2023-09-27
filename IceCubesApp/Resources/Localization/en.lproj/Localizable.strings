@@ -408,7 +408,6 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Translate";
-"status.action.translate-with-deepl" = "Translate with DeepL";
 "status.action.translated-label-%@" = "Translated using %@";
 "status.action.translated-label-from-%@-%@" = "Translated from %@ using %@";
 "status.action.bookmark" = "Bookmark";

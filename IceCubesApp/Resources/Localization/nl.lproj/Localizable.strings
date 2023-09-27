@@ -401,7 +401,6 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Vertaal";
-"status.action.translate-with-deepl" = "Vertaal met DeepL";
 "status.action.translated-label-%@" = "Vertaald met %@";
 "status.action.translated-label-from-%@-%@" = "Vertaald uit het %@ met %@";
 "status.action.bookmark" = "Voeg bladwijzer toe";

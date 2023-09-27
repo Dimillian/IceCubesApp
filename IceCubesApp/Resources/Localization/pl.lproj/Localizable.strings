@@ -403,7 +403,6 @@
 
 // MARK: Package: Status
 "status.action.translate" = "Przetłumacz";
-"status.action.translate-with-deepl" = "Przetłumacz za pomocą DeepL";
 "status.action.translated-label-%@" = "Przetłumaczono za pomocą %@";
 "status.action.translated-label-from-%@-%@" = "Tekst %@ przetłumaczono za pomocą %@";
 "status.action.bookmark" = "Dodaj zakładkę";

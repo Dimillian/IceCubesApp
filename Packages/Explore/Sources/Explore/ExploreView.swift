@@ -252,20 +252,8 @@ public struct ExploreView: View {
           .listRowBackground(theme.primaryBackgroundColor)
           .padding(.vertical, 8)
       }
-      NavigationLink {
-        List {
-          ForEach(viewModel.trendingLinks) { card in
-            StatusRowCardView(card: card)
-              .listRowBackground(theme.primaryBackgroundColor)
-              .padding(.vertical, 8)
-          }
-        }
-        .scrollContentBackground(.hidden)
-        .background(theme.primaryBackgroundColor)
-        .listStyle(.plain)
-        .navigationTitle("explore.section.trending.links")
-        .navigationBarTitleDisplayMode(.inline)
-      } label: {
+      
+      NavigationLink(value: RouterDestination.trendingLinks(cards: viewModel.trendingLinks)) {
         Text("see-more")
           .foregroundColor(theme.tintColor)
       }

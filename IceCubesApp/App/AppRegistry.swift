@@ -55,6 +55,8 @@ extension View {
                      selectedTagGroup: .constant(nil),
                      scrollToTopSignal: .constant(0),
                      canFilterTimeline: false)
+      case let .trendingLinks(cards):
+        CardsListView(cards: cards)
       case let .tagsList(tags):
         TagsListView(tags: tags)
       }
