@@ -20,6 +20,8 @@ public struct AccountDetailView: View {
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath
 
+  @StateObject private var blockConfirmation: BlockConfirmation = BlockConfirmation()
+  
   @State private var viewModel: AccountDetailViewModel
   @State private var isCurrentUser: Bool = false
   @State private var isCreateListAlertPresented: Bool = false
@@ -388,6 +390,22 @@ public struct AccountDetailView: View {
             LocalizedStringKey("accessibility.tabs.profile.options.inputLabel2"),
           ])
       }
+      .environmentObject(blockConfirmation)
+      .confirmationDialog("Block User", isPresented: $blockConfirmation.isPresentingBlockingConfirmation) {
+        if let account = viewModel.account {
+          Button("Block \(account.username)", role: .destructive) {
+            Task {
+              do {
+                viewModel.relationship = try await client.post(endpoint: Accounts.block(id: account.id))
+              } catch {
+                print("Error while blocking: \(error.localizedDescription)")
+              }
+            }
+          }
+        }
+      } message: {
+        Text("Do you want to block this user?")
+      }
     }
   }
 }
@@ -398,6 +416,10 @@ extension View {
       .listRowSeparator(.hidden)
       .listRowBackground(theme.primaryBackgroundColor)
   }
+}
+
+class BlockConfirmation: ObservableObject {
+  @Published var isPresentingBlockingConfirmation: Bool = false
 }
 
 struct AccountDetailView_Previews: PreviewProvider {
