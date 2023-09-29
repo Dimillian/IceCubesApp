@@ -128,10 +128,7 @@ public struct ConversationsListView: View {
   }
   
   private var scrollToTopView: some View {
-    HStack { EmptyView() }
-      .listRowBackground(Color.pink)
-      .listRowSeparator(.hidden)
-      .listRowInsets(.init())
+    ScrollToView()
       .frame(height: .scrollToViewHeight)
       .id(Constants.scrollToTop)
       .onAppear {
@@ -140,6 +137,5 @@ public struct ConversationsListView: View {
       .onDisappear {
         viewModel.scrollToTopVisible = false
       }
-      .accessibilityHidden(true)
   }
 }

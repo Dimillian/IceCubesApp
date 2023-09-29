@@ -212,10 +212,7 @@ public struct NotificationsListView: View {
   }
   
   private var scrollToTopView: some View {
-    HStack { EmptyView() }
-      .listRowBackground(theme.primaryBackgroundColor)
-      .listRowSeparator(.hidden)
-      .listRowInsets(.init())
+    ScrollToView()
       .frame(height: .scrollToViewHeight)
       .id(Constants.scrollToTop)
       .onAppear {
@@ -224,6 +221,5 @@ public struct NotificationsListView: View {
       .onDisappear {
         viewModel.scrollToTopVisible = false
       }
-      .accessibilityHidden(true)
   }
 }

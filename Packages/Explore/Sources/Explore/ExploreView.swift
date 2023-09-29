@@ -262,10 +262,7 @@ public struct ExploreView: View {
   }
   
   private var scrollToTopView: some View {
-    HStack { EmptyView() }
-      .listRowBackground(theme.secondaryBackgroundColor)
-      .listRowSeparator(.hidden)
-      .listRowInsets(.init())
+    ScrollToView()
       .frame(height: .scrollToViewHeight)
       .id(Constants.scrollToTop)
       .onAppear {
@@ -274,6 +271,5 @@ public struct ExploreView: View {
       .onDisappear {
         viewModel.scrollToTopVisible = false
       }
-      .accessibilityHidden(true)
   }
 }

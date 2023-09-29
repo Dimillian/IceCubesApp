@@ -257,10 +257,7 @@ public struct TimelineView: View {
   }
 
   private var scrollToTopView: some View {
-    HStack { EmptyView() }
-      .listRowBackground(theme.primaryBackgroundColor)
-      .listRowSeparator(.hidden)
-      .listRowInsets(.init())
+    ScrollToView()
       .frame(height: .layoutPadding)
       .id(Constants.scrollToTop)
       .onAppear {
@@ -269,6 +266,5 @@ public struct TimelineView: View {
       .onDisappear {
         viewModel.scrollToTopVisible = false
       }
-      .accessibilityHidden(true)
   }
 }
