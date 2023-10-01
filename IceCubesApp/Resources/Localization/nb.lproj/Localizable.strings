@@ -91,6 +91,7 @@
 "settings.display.status.action-buttons" = "Status handlingsknapper";
 "settings.display.status.media-style" = "Status mediestil";
 "settings.display.translate-button" = "Vis oversettelsesknapp";
+"settings.display.pending-at-bottom" = "Vis ulest-knappen nederst på skjermen";
 "settings.display.theme.background" = "Bakgrunnsfarge";
 "settings.display.theme.secondary-background" = "Sekundær bakgrunnsfarge";
 "settings.display.theme.text-color" = "Tekstfarge";

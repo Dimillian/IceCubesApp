@@ -85,6 +85,7 @@
 "settings.display.status.action-buttons" = "Botons d'acció";
 "settings.display.status.media-style" = "Estil del contingut multimèdia";
 "settings.display.translate-button" = "Mostra el botó de traducció";
+"settings.display.pending-at-bottom" = "Mostra el botó no llegit a la part inferior de la pantalla";
 "settings.display.theme.background" = "Color de fons";
 "settings.display.theme.secondary-background" = "Color de fons secundari";
 "settings.display.theme.text-color" = "Text Color";
