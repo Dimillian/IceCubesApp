@@ -226,7 +226,7 @@ public struct ExploreView: View {
           .listRowBackground(theme.primaryBackgroundColor)
           .padding(.vertical, 8)
       }
-      
+
       NavigationLink(value: RouterDestination.trendingLinks(cards: viewModel.trendingLinks)) {
         Text("see-more")
           .foregroundColor(theme.tintColor)

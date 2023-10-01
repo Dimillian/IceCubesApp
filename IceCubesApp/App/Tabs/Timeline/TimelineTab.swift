@@ -4,14 +4,14 @@ import DesignSystem
 import Env
 import Models
 import Network
+import SwiftData
 import SwiftUI
 import Timeline
-import SwiftData
 
 @MainActor
 struct TimelineTab: View {
   @Environment(\.modelContext) private var context
-  
+
   @Environment(AppAccountsManager.self) private var appAccount
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var currentAccount
@@ -24,13 +24,13 @@ struct TimelineTab: View {
   @State private var timeline: TimelineFilter = .home
   @State private var selectedTagGroup: TagGroup?
   @State private var scrollToTopSignal: Int = 0
-  
+
   @Query(sort: \LocalTimeline.creationDate, order: .reverse) var localTimelines: [LocalTimeline]
   @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
-  
+
   @AppStorage("remote_local_timeline") var legacyLocalTimelines: [String] = []
   @AppStorage("tag_groups") var legacyTagGroups: [LegacyTagGroup] = []
-  
+
   @AppStorage("last_timeline_filter") var lastTimelineFilter: TimelineFilter = .home
 
   private let canFilterTimeline: Bool
@@ -249,7 +249,7 @@ struct TimelineTab: View {
       }
     }
   }
-  
+
   private func resetTimelineFilter() {
     if client.isAuth, canFilterTimeline {
       timeline = lastTimelineFilter
@@ -257,14 +257,14 @@ struct TimelineTab: View {
       timeline = .federated
     }
   }
-  
+
   func migrateUserPreferencesTimeline() {
     for instance in legacyLocalTimelines {
       context.insert(LocalTimeline(instance: instance))
     }
     legacyLocalTimelines = []
   }
-  
+
   func migrateUserPreferencesTagGroups() {
     for group in legacyTagGroups {
       context.insert(TagGroup(title: group.title, symbolName: group.sfSymbolName, tags: group.tags))

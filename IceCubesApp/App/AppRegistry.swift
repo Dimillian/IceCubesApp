@@ -31,12 +31,12 @@ extension View {
       case let .conversationDetail(conversation):
         ConversationDetailView(conversation: conversation)
       case let .hashTag(tag, accountId):
-        TimelineView(timeline: .constant(.hashtag(tag: tag, accountId: accountId)), 
+        TimelineView(timeline: .constant(.hashtag(tag: tag, accountId: accountId)),
                      selectedTagGroup: .constant(nil),
                      scrollToTopSignal: .constant(0),
                      canFilterTimeline: false)
       case let .list(list):
-        TimelineView(timeline: .constant(.list(list: list)), 
+        TimelineView(timeline: .constant(.list(list: list)),
                      selectedTagGroup: .constant(nil),
                      scrollToTopSignal: .constant(0),
                      canFilterTimeline: false)
@@ -131,12 +131,12 @@ extension View {
       .environment(PushNotificationsService.shared)
       .environment(AppAccountsManager.shared.currentClient)
   }
-  
+
   func withModelContainer() -> some View {
     modelContainer(for: [
       Draft.self,
       LocalTimeline.self,
-      TagGroup.self
+      TagGroup.self,
     ])
   }
 }

@@ -43,10 +43,10 @@ struct AddAccountView: View {
   }
 
   @FocusState private var isInstanceURLFieldFocused: Bool
-    
-    private func cleanServerStr(_ server: String) -> String {
-        server.replacingOccurrences(of: " ", with: "")
-    }
+
+  private func cleanServerStr(_ server: String) -> String {
+    server.replacingOccurrences(of: " ", with: "")
+  }
 
   var body: some View {
     NavigationStack {
@@ -59,7 +59,7 @@ struct AddAccountView: View {
           .autocorrectionDisabled()
           .focused($isInstanceURLFieldFocused)
           .onChange(of: instanceName) { _, _ in
-              instanceName = cleanServerStr(instanceName)
+            instanceName = cleanServerStr(instanceName)
           }
         if let instanceFetchError {
           Text(instanceFetchError)
