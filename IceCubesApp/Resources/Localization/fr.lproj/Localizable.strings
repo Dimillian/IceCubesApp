@@ -86,6 +86,7 @@
 "settings.display.status.action-buttons" = "Boutons d'action de statut";
 "settings.display.status.media-style" = "Style de média de statut";
 "settings.display.translate-button" = "Afficher le bouton de traduction";
+"settings.display.pending-at-bottom" = "Afficher le bouton des toots non lus en bas de l'écran";
 "settings.display.theme.background" = "Couleur de fond";
 "settings.display.theme.secondary-background" = "Couleur de fond secondaire";
 "settings.display.theme.text-color" = "Couleur du texte";

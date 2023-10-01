@@ -86,6 +86,7 @@
 "settings.display.status.action-buttons" = "Actieknoppen";
 "settings.display.status.media-style" = "Mediastijl";
 "settings.display.translate-button" = "Toon vertaalknop";
+"settings.display.pending-at-bottom" = "De knop Ongelezen onder aan het scherm weergeven";
 "settings.display.theme.background" = "Achtergrondkleur";
 "settings.display.theme.secondary-background" = "Secundaire achtergrondkleur";
 "settings.display.theme.text-color" = "Tekstkleur";

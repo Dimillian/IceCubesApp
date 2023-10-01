@@ -85,6 +85,7 @@
 "settings.display.status.action-buttons" = "Pulsanti di azione";
 "settings.display.status.media-style" = "Stile dei media";
 "settings.display.translate-button" = "Mostra pulsante per la traduzione";
+"settings.display.pending-at-bottom" = "Visualizzare non letto nella parte inferiore dello schermo";
 "settings.display.theme.background" = "Colore sfondo principale";
 "settings.display.theme.secondary-background" = "Colore sfondo secondario";
 "settings.display.theme.text-color" = "Colore del testo";

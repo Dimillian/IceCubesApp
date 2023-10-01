@@ -86,6 +86,7 @@
 "settings.display.status.action-buttons" = "操作栏样式";
 "settings.display.status.media-style" = "媒体内容排列";
 "settings.display.translate-button" = "显示翻译按钮";
+"settings.display.pending-at-bottom" = "在屏幕底部显示未读按钮";
 "settings.display.theme.background" = "背景颜色";
 "settings.display.theme.secondary-background" = "二级背景颜色";
 "settings.display.theme.text-color" = "文本颜色";

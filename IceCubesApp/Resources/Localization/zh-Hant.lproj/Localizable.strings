@@ -91,6 +91,7 @@
 "settings.display.status.action-buttons" = "狀態列按鈕";
 "settings.display.status.media-style" = "狀態媒體式樣";
 "settings.display.translate-button" = "顯示翻譯按紐";
+"settings.display.pending-at-bottom" = "在螢幕底部顯示未讀按鈕";
 "settings.display.theme.background" = "背景顏色";
 "settings.display.theme.secondary-background" = "第二背景顏色";
 "settings.display.theme.text-color" = "本文顏色";
