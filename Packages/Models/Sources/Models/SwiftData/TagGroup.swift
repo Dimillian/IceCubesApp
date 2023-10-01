@@ -15,14 +15,3 @@ import SwiftUI
     creationDate = Date()
   }
 }
-
-public struct LegacyTagGroup: Codable, Equatable, Hashable {
-  public let title: String
-  public let sfSymbolName: String
-  public let main: String
-  public let additional: [String]
-
-  public var tags: [String] {
-    [main] + additional
-  }
-}

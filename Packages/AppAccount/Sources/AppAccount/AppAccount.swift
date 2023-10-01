@@ -24,7 +24,6 @@ public extension AppAccount {
   }
 
   static func retrieveAll() -> [AppAccount] {
-    migrateLegacyAccounts()
     let keychain = Self.keychain
     let decoder = JSONDecoder()
     let keys = keychain.allKeys
@@ -38,19 +37,6 @@ public extension AppAccount {
       }
     }
     return accounts
-  }
-
-  static func migrateLegacyAccounts() {
-    let keychain = KeychainSwift()
-    let decoder = JSONDecoder()
-    let keys = keychain.allKeys
-    for key in keys {
-      if let data = keychain.getData(key) {
-        if let account = try? decoder.decode(AppAccount.self, from: data) {
-          try? account.save()
-        }
-      }
-    }
   }
 
   static func deleteAll() {

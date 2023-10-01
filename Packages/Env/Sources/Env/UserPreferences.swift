@@ -349,7 +349,7 @@ import SwiftUI
   }
 
   public var totalNotificationsCount: Int {
-    notificationsCount.compactMap(\.value).reduce(0, +)
+    notificationsCount.compactMap{ $0.value }.reduce(0, +)
   }
 
   public func reloadNotificationsCount(tokens: [OauthToken]) {
