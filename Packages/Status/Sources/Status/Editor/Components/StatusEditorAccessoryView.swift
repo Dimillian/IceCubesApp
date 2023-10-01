@@ -177,7 +177,7 @@ struct StatusEditorAccessoryView: View {
       viewModel.setInitialLanguageSelection(preference: preferences.recentlyUsedLanguages.first ?? preferences.serverPreferences?.postLanguage)
     }
   }
-  
+
   private var draftsListView: some View {
     DraftsListView(selectedDraft: .init(get: {
       nil

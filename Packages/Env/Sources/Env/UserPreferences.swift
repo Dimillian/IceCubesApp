@@ -11,10 +11,10 @@ import SwiftUI
     @AppStorage("show_translate_button_inline") public var showTranslateButton: Bool = true
     @AppStorage("show_pending_at_bottom") public var pendingShownAtBottom: Bool = false
     @AppStorage("is_open_ai_enabled") public var isOpenAIEnabled: Bool = true
-    
+
     @AppStorage("recently_used_languages") public var recentlyUsedLanguages: [String] = []
     @AppStorage("social_keyboard_composer") public var isSocialKeyboardEnabled: Bool = true
-    
+
     @AppStorage("use_instance_content_settings") public var useInstanceContentSettings: Bool = true
     @AppStorage("app_auto_expand_spoilers") public var appAutoExpandSpoilers = false
     @AppStorage("app_auto_expand_media") public var appAutoExpandMedia: ServerPreferences.AutoExpandMedia = .hideSensitive
@@ -25,41 +25,41 @@ import SwiftUI
     @AppStorage("always_use_deepl") public var alwaysUseDeepl = false
     @AppStorage("user_deepl_api_free") public var userDeeplAPIFree = true
     @AppStorage("auto_detect_post_language") public var autoDetectPostLanguage = true
-    
+
     @AppStorage("suppress_dupe_reblogs") public var suppressDupeReblogs: Bool = false
-    
+
     @AppStorage("inAppBrowserReaderView") public var inAppBrowserReaderView = false
-    
+
     @AppStorage("haptic_tab") public var hapticTabSelectionEnabled = true
     @AppStorage("haptic_timeline") public var hapticTimelineEnabled = true
     @AppStorage("haptic_button_press") public var hapticButtonPressEnabled = true
     @AppStorage("sound_effect_enabled") public var soundEffectEnabled = true
-    
+
     @AppStorage("show_tab_label_iphone") public var showiPhoneTabLabel = true
     @AppStorage("show_alt_text_for_media") public var showAltTextForMedia = true
-    
+
     @AppStorage("show_second_column_ipad") public var showiPadSecondaryColumn = true
-    
+
     @AppStorage("swipeactions-status-trailing-right") public var swipeActionsStatusTrailingRight = StatusAction.favorite
     @AppStorage("swipeactions-status-trailing-left") public var swipeActionsStatusTrailingLeft = StatusAction.boost
     @AppStorage("swipeactions-status-leading-left") public var swipeActionsStatusLeadingLeft = StatusAction.reply
     @AppStorage("swipeactions-status-leading-right") public var swipeActionsStatusLeadingRight = StatusAction.none
     @AppStorage("swipeactions-use-theme-color") public var swipeActionsUseThemeColor = false
     @AppStorage("swipeactions-icon-style") public var swipeActionsIconStyle: SwipeActionsIconStyle = .iconWithText
-    
+
     @AppStorage("requested_review") public var requestedReview = false
-    
+
     @AppStorage("collapse-long-posts") public var collapseLongPosts = true
-    
+
     @AppStorage("share-button-behavior") public var shareButtonBehavior: PreferredShareButtonBehavior = .linkAndText
-    
-    init() { }
+
+    init() {}
   }
-  
+
   public static let sharedDefault = UserDefaults(suiteName: "group.com.thomasricouard.IceCubesApp")
   public static let shared = UserPreferences()
   private let storage = Storage()
-  
+
   private var client: Client?
 
   public var preferredBrowser: PreferredBrowser {
@@ -73,171 +73,202 @@ import SwiftUI
       storage.showTranslateButton = showTranslateButton
     }
   }
+
   public var pendingShownAtBottom : Bool {
     didSet {
         storage.pendingShownAtBottom = pendingShownAtBottom
     }
   }
+  
   public var isOpenAIEnabled: Bool {
     didSet {
       storage.isOpenAIEnabled = isOpenAIEnabled
     }
   }
+
   public var recentlyUsedLanguages: [String] {
     didSet {
       storage.recentlyUsedLanguages = recentlyUsedLanguages
     }
   }
+
   public var isSocialKeyboardEnabled: Bool {
     didSet {
       storage.isSocialKeyboardEnabled = isSocialKeyboardEnabled
     }
   }
+
   public var useInstanceContentSettings: Bool {
     didSet {
       storage.useInstanceContentSettings = useInstanceContentSettings
     }
   }
+
   public var appAutoExpandSpoilers: Bool {
     didSet {
       storage.appAutoExpandSpoilers = appAutoExpandSpoilers
     }
   }
+
   public var appAutoExpandMedia: ServerPreferences.AutoExpandMedia {
     didSet {
       storage.appAutoExpandMedia = appAutoExpandMedia
     }
   }
+
   public var appDefaultPostVisibility: Models.Visibility {
     didSet {
       storage.appDefaultPostVisibility = appDefaultPostVisibility
     }
   }
+
   public var appDefaultReplyVisibility: Models.Visibility {
     didSet {
       storage.appDefaultReplyVisibility = appDefaultReplyVisibility
     }
   }
+
   public var appDefaultPostsSensitive: Bool {
     didSet {
       storage.appDefaultPostsSensitive = appDefaultPostsSensitive
     }
   }
+
   public var autoPlayVideo: Bool {
     didSet {
       storage.autoPlayVideo = autoPlayVideo
     }
   }
+
   public var alwaysUseDeepl: Bool {
     didSet {
       storage.alwaysUseDeepl = alwaysUseDeepl
     }
   }
+
   public var userDeeplAPIFree: Bool {
     didSet {
       storage.userDeeplAPIFree = userDeeplAPIFree
     }
   }
+
   public var autoDetectPostLanguage: Bool {
     didSet {
       storage.autoDetectPostLanguage = autoDetectPostLanguage
     }
   }
+
   public var suppressDupeReblogs: Bool {
     didSet {
       storage.suppressDupeReblogs = suppressDupeReblogs
     }
   }
+
   public var inAppBrowserReaderView: Bool {
     didSet {
       storage.inAppBrowserReaderView = inAppBrowserReaderView
     }
   }
+
   public var hapticTabSelectionEnabled: Bool {
     didSet {
       storage.hapticTabSelectionEnabled = hapticTabSelectionEnabled
     }
   }
+
   public var hapticTimelineEnabled: Bool {
     didSet {
       storage.hapticTimelineEnabled = hapticTimelineEnabled
     }
   }
+
   public var hapticButtonPressEnabled: Bool {
     didSet {
       storage.hapticButtonPressEnabled = hapticButtonPressEnabled
     }
   }
+
   public var soundEffectEnabled: Bool {
     didSet {
       storage.soundEffectEnabled = soundEffectEnabled
     }
   }
+
   public var showiPhoneTabLabel: Bool {
     didSet {
       storage.showiPhoneTabLabel = showiPhoneTabLabel
     }
   }
+
   public var showAltTextForMedia: Bool {
     didSet {
       storage.showAltTextForMedia = showAltTextForMedia
     }
   }
+
   public var showiPadSecondaryColumn: Bool {
     didSet {
       storage.showiPadSecondaryColumn = showiPadSecondaryColumn
     }
   }
+
   public var swipeActionsStatusTrailingRight: StatusAction {
     didSet {
       storage.swipeActionsStatusTrailingRight = swipeActionsStatusTrailingRight
     }
   }
+
   public var swipeActionsStatusTrailingLeft: StatusAction {
     didSet {
       storage.swipeActionsStatusTrailingLeft = swipeActionsStatusTrailingLeft
     }
   }
+
   public var swipeActionsStatusLeadingLeft: StatusAction {
     didSet {
       storage.swipeActionsStatusLeadingLeft = swipeActionsStatusLeadingLeft
     }
   }
+
   public var swipeActionsStatusLeadingRight: StatusAction {
     didSet {
       storage.swipeActionsStatusLeadingRight = swipeActionsStatusLeadingRight
     }
   }
+
   public var swipeActionsUseThemeColor: Bool {
     didSet {
       storage.swipeActionsUseThemeColor = swipeActionsUseThemeColor
     }
   }
+
   public var swipeActionsIconStyle: SwipeActionsIconStyle {
     didSet {
       storage.swipeActionsIconStyle = swipeActionsIconStyle
     }
   }
+
   public var requestedReview: Bool {
     didSet {
       storage.requestedReview = requestedReview
     }
   }
+
   public var collapseLongPosts: Bool {
     didSet {
       storage.collapseLongPosts = collapseLongPosts
     }
   }
+
   public var shareButtonBehavior: PreferredShareButtonBehavior {
     didSet {
       storage.shareButtonBehavior = shareButtonBehavior
     }
   }
-  
-  
+
   public enum SwipeActionsIconStyle: String, CaseIterable {
     case iconWithText, iconOnly
-    
+
     public var description: LocalizedStringKey {
       switch self {
       case .iconWithText:
@@ -246,7 +277,7 @@ import SwiftUI
         "enum.swipeactions.icon-only"
       }
     }
-    
+
     // Have to implement this manually here due to compiler not implicitly
     // inserting `nonisolated`, which leads to a warning:
     //
@@ -257,7 +288,7 @@ import SwiftUI
       [.iconWithText, .iconOnly]
     }
   }
-  
+
   public var postVisibility: Models.Visibility {
     if useInstanceContentSettings {
       serverPreferences?.postVisibility ?? .pub
@@ -265,26 +296,26 @@ import SwiftUI
       appDefaultPostVisibility
     }
   }
-  
+
   public func conformReplyVisibilityConstraints() {
     appDefaultReplyVisibility = getReplyVisibility()
   }
-  
+
   private func getReplyVisibility() -> Models.Visibility {
     getMinVisibility(postVisibility, appDefaultReplyVisibility)
   }
-  
+
   public func getReplyVisibility(of status: Status) -> Models.Visibility {
     getMinVisibility(getReplyVisibility(), status.visibility)
   }
-  
+
   private func getMinVisibility(_ vis1: Models.Visibility, _ vis2: Models.Visibility) -> Models.Visibility {
     let no1 = Self.getIntOfVisibility(vis1)
     let no2 = Self.getIntOfVisibility(vis2)
-    
+
     return no1 < no2 ? vis1 : vis2
   }
-  
+
   public var postIsSensitive: Bool {
     if useInstanceContentSettings {
       serverPreferences?.postIsSensitive ?? false
@@ -292,7 +323,7 @@ import SwiftUI
       appDefaultPostsSensitive
     }
   }
-  
+
   public var autoExpandSpoilers: Bool {
     if useInstanceContentSettings {
       serverPreferences?.autoExpandSpoilers ?? true
@@ -300,7 +331,7 @@ import SwiftUI
       appAutoExpandSpoilers
     }
   }
-  
+
   public var autoExpandMedia: ServerPreferences.AutoExpandMedia {
     if useInstanceContentSettings {
       serverPreferences?.autoExpandMedia ?? .hideSensitive
@@ -308,7 +339,7 @@ import SwiftUI
       appAutoExpandMedia
     }
   }
-  
+
   public var notificationsCount: [OauthToken: Int] = [:] {
     didSet {
       for (key, value) in notificationsCount {
@@ -316,32 +347,32 @@ import SwiftUI
       }
     }
   }
-  
+
   public var totalNotificationsCount: Int {
-    notificationsCount.compactMap{ $0.value }.reduce(0, +)
+    notificationsCount.compactMap(\.value).reduce(0, +)
   }
-  
+
   public func reloadNotificationsCount(tokens: [OauthToken]) {
     notificationsCount = [:]
     for token in tokens {
       notificationsCount[token] = Self.sharedDefault?.integer(forKey: "push_notifications_count_\(token.createdAt)") ?? 0
     }
   }
-  
+
   public var serverPreferences: ServerPreferences?
-  
+
   public func setClient(client: Client) {
     self.client = client
     Task {
       await refreshServerPreferences()
     }
   }
-  
+
   public func refreshServerPreferences() async {
     guard let client, client.isAuth else { return }
     serverPreferences = try? await client.get(endpoint: Accounts.preferences)
   }
-  
+
   public func markLanguageAsSelected(isoCode: String) {
     var copy = recentlyUsedLanguages
     if let index = copy.firstIndex(of: isoCode) {
@@ -350,7 +381,7 @@ import SwiftUI
     copy.insert(isoCode, at: 0)
     recentlyUsedLanguages = Array(copy.prefix(3))
   }
-  
+
   public static func getIntOfVisibility(_ vis: Models.Visibility) -> Int {
     switch vis {
     case .direct:
@@ -363,7 +394,7 @@ import SwiftUI
       3
     }
   }
-  
+
   private init() {
     preferredBrowser = storage.preferredBrowser
     showTranslateButton = storage.showTranslateButton

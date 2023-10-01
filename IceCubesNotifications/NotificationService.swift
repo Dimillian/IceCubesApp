@@ -66,7 +66,7 @@ class NotificationService: UNNotificationServiceExtension {
       let preferences = UserPreferences.shared
       let tokens = AppAccountsManager.shared.pushAccounts.map(\.token)
       preferences.reloadNotificationsCount(tokens: tokens)
-      
+
       if let token = AppAccountsManager.shared.availableAccounts.first(where: { $0.oauthToken?.accessToken == notification.accessToken })?.oauthToken {
         var currentCount = preferences.notificationsCount[token] ?? 0
         currentCount += 1

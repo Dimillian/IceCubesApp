@@ -161,7 +161,8 @@ public struct StatusEditorView: View {
                                                 object: nil)
               }
               Button("action.cancel", role: .cancel) {}
-            })
+            }
+          )
         }
       }
     }

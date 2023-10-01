@@ -6,9 +6,9 @@ import Env
 import KeychainSwift
 import Network
 import RevenueCat
+import Status
 import SwiftUI
 import Timeline
-import Status
 
 @main
 struct IceCubesApp: App {
@@ -217,7 +217,7 @@ struct IceCubesApp: App {
     case .active:
       watcher.watch(streams: [.user, .direct])
       UNUserNotificationCenter.current().setBadgeCount(0)
-      userPreferences.reloadNotificationsCount(tokens: appAccountsManager.availableAccounts.compactMap{ $0.oauthToken })
+      userPreferences.reloadNotificationsCount(tokens: appAccountsManager.availableAccounts.compactMap(\.oauthToken))
       Task {
         await userPreferences.refreshServerPreferences()
       }
@@ -286,10 +286,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   }
 
   func application(_: UIApplication, didFailToRegisterForRemoteNotificationsWithError _: Error) {}
-  
-  func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) async -> UIBackgroundFetchResult {
-    
-    UserPreferences.shared.reloadNotificationsCount(tokens: AppAccountsManager.shared.availableAccounts.compactMap{ $0.oauthToken })
+
+  func application(_: UIApplication, didReceiveRemoteNotification _: [AnyHashable: Any]) async -> UIBackgroundFetchResult {
+    UserPreferences.shared.reloadNotificationsCount(tokens: AppAccountsManager.shared.availableAccounts.compactMap(\.oauthToken))
     return .noData
   }
 
