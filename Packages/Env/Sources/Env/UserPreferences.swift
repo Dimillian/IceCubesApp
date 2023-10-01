@@ -74,12 +74,12 @@ import SwiftUI
     }
   }
 
-  public var pendingShownAtBottom : Bool {
+  public var pendingShownAtBottom: Bool {
     didSet {
-        storage.pendingShownAtBottom = pendingShownAtBottom
+      storage.pendingShownAtBottom = pendingShownAtBottom
     }
   }
-  
+
   public var isOpenAIEnabled: Bool {
     didSet {
       storage.isOpenAIEnabled = isOpenAIEnabled

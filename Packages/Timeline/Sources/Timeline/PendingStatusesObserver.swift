@@ -48,7 +48,7 @@ struct PendingStatusesObserverView: View {
         .cornerRadius(8)
       }
       .padding(12)
-      .frame(maxHeight: .infinity, alignment: preferences.pendingShownAtBottom ? .bottom : .top )
+      .frame(maxHeight: .infinity, alignment: preferences.pendingShownAtBottom ? .bottom : .top)
     }
   }
 }
