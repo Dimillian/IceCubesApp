@@ -40,9 +40,14 @@ import Observation
   }
 
   private func connect() {
-    guard let client else { return }
-    task = client.makeWebSocketTask(endpoint: Streaming.streaming, instanceStreamingURL: instanceStreamingURL)
-    task?.resume()
+    guard let task = try? client?.makeWebSocketTask(
+      endpoint: Streaming.streaming,
+      instanceStreamingURL: instanceStreamingURL
+    ) else {
+      return
+    }
+    self.task = task
+    self.task?.resume()
     receiveMessage()
   }
 
