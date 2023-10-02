@@ -8,6 +8,8 @@ public struct AccountDetailContextMenu: View {
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(UserPreferences.self) private var preferences
 
+  @Binding var showBlockConfirmation: Bool
+  
   var viewModel: AccountDetailViewModel
 
   public var body: some View {
@@ -42,13 +44,7 @@ public struct AccountDetailContextMenu: View {
             }
           } else {
             Button {
-              Task {
-                do {
-                  viewModel.relationship = try await client.post(endpoint: Accounts.block(id: account.id))
-                } catch {
-                  print("Error while blocking: \(error.localizedDescription)")
-                }
-              }
+              showBlockConfirmation.toggle()
             } label: {
               Label("account.action.block", systemImage: "person.crop.circle.badge.xmark")
             }
