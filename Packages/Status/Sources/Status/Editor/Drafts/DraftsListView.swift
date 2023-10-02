@@ -1,20 +1,18 @@
-import SwiftUI
-import SwiftData
 import DesignSystem
 import Models
+import SwiftData
+import SwiftUI
 
 struct DraftsListView: View {
-  @AppStorage("draft_posts") public var legacyDraftPosts: [String] = []
-  
   @Environment(\.dismiss) private var dismiss
   @Environment(\.modelContext) private var context
-  
+
   @Environment(Theme.self) private var theme
-  
+
   @Query(sort: \Draft.creationDate, order: .reverse) var drafts: [Draft]
-  
+
   @Binding var selectedDraft: Draft?
-  
+
   var body: some View {
     NavigationStack {
       List {
@@ -49,17 +47,6 @@ struct DraftsListView: View {
       .background(theme.secondaryBackgroundColor)
       .navigationTitle("status.editor.drafts.navigation-title")
       .navigationBarTitleDisplayMode(.inline)
-      .onAppear {
-        migrateUserPreferencesDraft()
-      }
     }
-  }
-  
-  func migrateUserPreferencesDraft() {
-    for draft in legacyDraftPosts {
-      let newDraft = Draft(content: draft)
-      context.insert(newDraft)
-    }
-    legacyDraftPosts = []
   }
 }

@@ -86,6 +86,7 @@
 "settings.display.status.action-buttons" = "Status Aktions-Buttons";
 "settings.display.status.media-style" = "Status Medien";
 "settings.display.translate-button" = "Übersetzen-Button anzeigen";
+"settings.display.pending-at-bottom" = "Ungelesene-Button am unteren Rand anzeigen";
 "settings.display.theme.background" = "Hintergrundfarbe";
 "settings.display.theme.secondary-background" = "Sekundäre Hintergrundfarbe";
 "settings.display.theme.text-color" = "Textfarbe";

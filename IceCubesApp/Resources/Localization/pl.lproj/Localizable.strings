@@ -86,6 +86,7 @@
 "settings.display.status.action-buttons" = "Przyciski akcji";
 "settings.display.status.media-style" = "Treści multimedialne";
 "settings.display.translate-button" = "Pokazuj przycisk tłumaczenia";
+"settings.display.pending-at-bottom" = "Wyświetlanie przycisku nieprzeczytanych u dołu ekranu";
 "settings.display.theme.background" = "Kolor tła";
 "settings.display.theme.secondary-background" = "Dodatkowy kolor tła";
 "settings.display.theme.text-color" = "Kolor tekstu";

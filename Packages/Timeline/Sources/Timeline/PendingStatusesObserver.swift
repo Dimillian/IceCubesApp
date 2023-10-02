@@ -29,7 +29,7 @@ import SwiftUI
 
 struct PendingStatusesObserverView: View {
   @State var observer: PendingStatusesObserver
-
+  @Environment(UserPreferences.self) private var preferences
   var body: some View {
     if observer.pendingStatusesCount > 0 {
       HStack(spacing: 6) {
@@ -48,6 +48,7 @@ struct PendingStatusesObserverView: View {
         .cornerRadius(8)
       }
       .padding(12)
+      .frame(maxHeight: .infinity, alignment: preferences.pendingShownAtBottom ? .bottom : .top)
     }
   }
 }

@@ -86,6 +86,7 @@
 "settings.display.status.action-buttons" = "Bidalketen ekintza botoiak";
 "settings.display.status.media-style" = "Bidalketen multimediaren itxura";
 "settings.display.translate-button" = "Erakutsi itzulpen botoia";
+"settings.display.pending-at-bottom" = "Erakutsi irakurri gabeko botoia pantailaren behealdean";
 "settings.display.theme.background" = "Hondoaren kolorea";
 "settings.display.theme.secondary-background" = "Bigarren mailako hondoaren kolorea";
 "settings.display.theme.text-color" = "Testuaren kolorea";

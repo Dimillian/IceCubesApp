@@ -22,7 +22,7 @@ struct EditTagGroupView: View {
 
   private var editingTagGroup: TagGroup?
   private var onSaved: ((TagGroup) -> Void)?
-  
+
   private var canSave: Bool {
     !title.isEmpty &&
       // At least have 2 tags, one main and one additional.
