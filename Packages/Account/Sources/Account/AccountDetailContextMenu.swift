@@ -8,7 +8,7 @@ public struct AccountDetailContextMenu: View {
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(UserPreferences.self) private var preferences
 
-  @EnvironmentObject private var blockConfirmation: BlockConfirmation
+  @Binding var showBlockConfirmation: Bool
   
   var viewModel: AccountDetailViewModel
 
@@ -44,7 +44,7 @@ public struct AccountDetailContextMenu: View {
             }
           } else {
             Button {
-              blockConfirmation.isPresentingBlockingConfirmation.toggle()
+              showBlockConfirmation.toggle()
             } label: {
               Label("account.action.block", systemImage: "person.crop.circle.badge.xmark")
             }
