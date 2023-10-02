@@ -121,6 +121,8 @@ public struct AccountsListRow: View {
       .environment(theme)
       .environment(currentAccount)
       .environment(client)
+      .environment(QuickLook())
+      .environment(routerPath)
     }
   }
 }
