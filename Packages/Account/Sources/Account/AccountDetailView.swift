@@ -24,6 +24,7 @@ public struct AccountDetailView: View {
   @State private var isCurrentUser: Bool = false
   @State private var isCreateListAlertPresented: Bool = false
   @State private var createListTitle: String = ""
+  @State private var showBlockConfirmation: Bool = false
 
   @State private var isEditingAccount: Bool = false
   @State private var isEditingFilters: Bool = false
@@ -320,7 +321,7 @@ public struct AccountDetailView: View {
       }
 
       Menu {
-        AccountDetailContextMenu(viewModel: viewModel)
+        AccountDetailContextMenu(showBlockConfirmation: $showBlockConfirmation, viewModel: viewModel)
 
         if !viewModel.isCurrentUser {
           Button {
@@ -387,6 +388,21 @@ public struct AccountDetailView: View {
             LocalizedStringKey("accessibility.tabs.profile.options.inputLabel1"),
             LocalizedStringKey("accessibility.tabs.profile.options.inputLabel2"),
           ])
+      }
+      .confirmationDialog("Block User", isPresented: $showBlockConfirmation) {
+        if let account = viewModel.account {
+          Button("Block \(account.username)", role: .destructive) {
+            Task {
+              do {
+                viewModel.relationship = try await client.post(endpoint: Accounts.block(id: account.id))
+              } catch {
+                print("Error while blocking: \(error.localizedDescription)")
+              }
+            }
+          }
+        }
+      } message: {
+        Text("Do you want to block this user?")
       }
     }
   }
