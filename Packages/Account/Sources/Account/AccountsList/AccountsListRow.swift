@@ -30,6 +30,7 @@ public struct AccountsListRow: View {
   @State var viewModel: AccountsListRowViewModel
 
   @State private var isEditingRelationshipNote: Bool = false
+  @State private var showBlockConfirmation: Bool = false
 
   let isFollowRequest: Bool
   let requestUpdated: (() -> Void)?
@@ -107,7 +108,7 @@ public struct AccountsListRow: View {
       routerPath.navigate(to: .accountDetailWithAccount(account: viewModel.account))
     }
     .contextMenu {
-      AccountDetailContextMenu(viewModel: .init(account: viewModel.account))
+      AccountDetailContextMenu(showBlockConfirmation: $showBlockConfirmation, viewModel: .init(account: viewModel.account))
     } preview: {
       List {
         AccountDetailHeaderView(viewModel: .init(account: viewModel.account),
