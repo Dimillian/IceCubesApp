@@ -7,10 +7,6 @@ import SwiftUI
 
 @MainActor
 public struct NotificationsListView: View {
-  private enum Constants {
-    static let scrollToTop = "top"
-  }
-  
   @Environment(\.scenePhase) private var scenePhase
   @Environment(Theme.self) private var theme
   @Environment(StreamWatcher.self) private var watcher
@@ -39,7 +35,7 @@ public struct NotificationsListView: View {
       .listStyle(.plain)
       .onChange(of: scrollToTopSignal) {
         withAnimation {
-          proxy.scrollTo(Constants.scrollToTop, anchor: .top)
+          proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
         }
       }
     }
@@ -214,7 +210,6 @@ public struct NotificationsListView: View {
   private var scrollToTopView: some View {
     ScrollToView()
       .frame(height: .scrollToViewHeight)
-      .id(Constants.scrollToTop)
       .onAppear {
         viewModel.scrollToTopVisible = true
       }

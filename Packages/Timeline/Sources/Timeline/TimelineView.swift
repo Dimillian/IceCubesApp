@@ -9,10 +9,6 @@ import SwiftUIIntrospect
 
 @MainActor
 public struct TimelineView: View {
-  private enum Constants {
-    static let scrollToTop = "top"
-  }
-
   @Environment(\.scenePhase) private var scenePhase
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var account
@@ -86,7 +82,7 @@ public struct TimelineView: View {
       }
       .onChange(of: scrollToTopSignal) {
         withAnimation {
-          proxy.scrollTo(Constants.scrollToTop, anchor: .top)
+          proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
         }
       }
     }
@@ -259,7 +255,6 @@ public struct TimelineView: View {
   private var scrollToTopView: some View {
     ScrollToView()
       .frame(height: .layoutPadding)
-      .id(Constants.scrollToTop)
       .onAppear {
         viewModel.scrollToTopVisible = true
       }

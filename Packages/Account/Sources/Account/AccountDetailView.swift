@@ -9,10 +9,6 @@ import SwiftUI
 
 @MainActor
 public struct AccountDetailView: View {
-  private enum Constants {
-    static let scrollToTop = "top"
-  }
-  
   @Environment(\.openURL) private var openURL
   @Environment(\.redactionReasons) private var reasons
 
@@ -53,7 +49,7 @@ public struct AccountDetailView: View {
         makeHeaderView(proxy: proxy)
           .applyAccountDetailsRowStyle(theme: theme)
           .padding(.bottom, -20)
-          .id(Constants.scrollToTop)
+          .id(ScrollToView.Constants.scrollToTop)
         familiarFollowers
           .applyAccountDetailsRowStyle(theme: theme)
         featuredTagsView
@@ -93,7 +89,7 @@ public struct AccountDetailView: View {
       .background(theme.primaryBackgroundColor)
       .onChange(of: scrollToTopSignal) {
         withAnimation {
-          proxy.scrollTo(Constants.scrollToTop, anchor: .top)
+          proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
         }
       }
     }

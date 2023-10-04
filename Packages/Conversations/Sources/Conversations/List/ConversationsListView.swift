@@ -7,10 +7,6 @@ import SwiftUI
 
 @MainActor
 public struct ConversationsListView: View {
-  private enum Constants {
-    static let scrollToTop = "top"
-  }
-  
   @Environment(UserPreferences.self) private var preferences
   @Environment(RouterPath.self) private var routerPath
   @Environment(StreamWatcher.self) private var watcher
@@ -102,7 +98,7 @@ public struct ConversationsListView: View {
       }
       .onChange(of: scrollToTopSignal) {
         withAnimation {
-          proxy.scrollTo(Constants.scrollToTop, anchor: .top)
+          proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
         }
       }
       .refreshable {
@@ -130,7 +126,6 @@ public struct ConversationsListView: View {
   private var scrollToTopView: some View {
     ScrollToView()
       .frame(height: .scrollToViewHeight)
-      .id(Constants.scrollToTop)
       .onAppear {
         viewModel.scrollToTopVisible = true
       }

@@ -9,10 +9,6 @@ import SwiftUI
 
 @MainActor
 public struct ExploreView: View {
-  private enum Constants {
-    static let scrollToTop = "top"
-  }
-  
   @Environment(Theme.self) private var theme
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath
@@ -117,7 +113,7 @@ public struct ExploreView: View {
           viewModel.isSearchPresented.toggle()
         } else {
           withAnimation {
-            proxy.scrollTo(Constants.scrollToTop, anchor: .top)
+            proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
           }
         }
       }
@@ -264,7 +260,6 @@ public struct ExploreView: View {
   private var scrollToTopView: some View {
     ScrollToView()
       .frame(height: .scrollToViewHeight)
-      .id(Constants.scrollToTop)
       .onAppear {
         viewModel.scrollToTopVisible = true
       }
