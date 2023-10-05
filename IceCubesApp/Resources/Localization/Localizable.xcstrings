@@ -16776,7 +16776,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag Group Icon (SFSymbol name)"
+            "value" : "Taggruppensymbol (SFSymbol-Name)"
           }
         },
         "en" : {
@@ -16894,7 +16894,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add tags to the group"
+            "value" : "Tags der Gruppe hinzufügen"
           }
         },
         "en" : {
@@ -17131,7 +17131,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag Group Title"
+            "value" : "Taggruppentitel"
           }
         },
         "en" : {
@@ -65174,7 +65174,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add or remove tag from tag groups"
+            "value" : "Tag zu Tabgruppen hinzufügen oder entfernen"
           }
         },
         "en" : {
