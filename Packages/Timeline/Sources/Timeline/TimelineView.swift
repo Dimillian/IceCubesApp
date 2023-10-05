@@ -6,6 +6,7 @@ import Shimmer
 import Status
 import SwiftUI
 import SwiftUIIntrospect
+import SwiftData
 
 @MainActor
 public struct TimelineView: View {
@@ -25,6 +26,9 @@ public struct TimelineView: View {
   @Binding var timeline: TimelineFilter
   @Binding var selectedTagGroup: TagGroup?
   @Binding var scrollToTopSignal: Int
+  
+  @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
+  
   private let canFilterTimeline: Bool
 
   public init(timeline: Binding<TimelineFilter>,
@@ -88,40 +92,8 @@ public struct TimelineView: View {
       }
     }
     .toolbar {
-      ToolbarItem(placement: .principal) {
-        VStack(alignment: .center) {
-          switch timeline {
-          case let .remoteLocal(_, filter):
-            Text(filter.localizedTitle())
-              .font(.headline)
-            Text(timeline.localizedTitle())
-              .font(.caption)
-              .foregroundColor(.gray)
-          default:
-            Text(timeline.localizedTitle())
-              .font(.headline)
-          }
-        }
-        .accessibilityRepresentation {
-          switch timeline {
-          case let .remoteLocal(_, filter):
-            if canFilterTimeline {
-              Menu(filter.localizedTitle()) {}
-            } else {
-              Text(filter.localizedTitle())
-            }
-          default:
-            if canFilterTimeline {
-              Menu(timeline.localizedTitle()) {}
-            } else {
-              Text(timeline.localizedTitle())
-            }
-          }
-        }
-        .accessibilityAddTraits(.isHeader)
-        .accessibilityRemoveTraits(.isButton)
-        .accessibilityRespondsToUserInteraction(canFilterTimeline)
-      }
+      toolbarTitleView
+      toolbarTagGroupButton
     }
     .navigationBarTitleDisplayMode(.inline)
     .onAppear {
@@ -251,6 +223,73 @@ public struct TimelineView: View {
                          leading: .layoutPadding,
                          bottom: 8,
                          trailing: .layoutPadding))
+  }
+  
+  @ToolbarContentBuilder
+  private var toolbarTitleView: some ToolbarContent {
+    ToolbarItem(placement: .principal) {
+      VStack(alignment: .center) {
+        switch timeline {
+        case let .remoteLocal(_, filter):
+          Text(filter.localizedTitle())
+            .font(.headline)
+          Text(timeline.localizedTitle())
+            .font(.caption)
+            .foregroundColor(.gray)
+        default:
+          Text(timeline.localizedTitle())
+            .font(.headline)
+        }
+      }
+      .accessibilityRepresentation {
+        switch timeline {
+        case let .remoteLocal(_, filter):
+          if canFilterTimeline {
+            Menu(filter.localizedTitle()) {}
+          } else {
+            Text(filter.localizedTitle())
+          }
+        default:
+          if canFilterTimeline {
+            Menu(timeline.localizedTitle()) {}
+          } else {
+            Text(timeline.localizedTitle())
+          }
+        }
+      }
+      .accessibilityAddTraits(.isHeader)
+      .accessibilityRemoveTraits(.isButton)
+      .accessibilityRespondsToUserInteraction(canFilterTimeline)
+    }
+  }
+  
+  @ToolbarContentBuilder
+  private var toolbarTagGroupButton: some ToolbarContent {
+    ToolbarItem(placement: .topBarTrailing) {
+      switch timeline {
+      case let .hashtag(tag, _):
+        Menu {
+          Section("tag-groups.edit.section.title") {
+            ForEach(tagGroups) { group in
+              Button {
+                if group.tags.contains(tag) {
+                  group.tags.removeAll(where: { $0 == tag })
+                } else {
+                  group.tags.append(tag)
+                }
+              } label: {
+                Label(group.title,
+                      systemImage: group.tags.contains(tag) ? "checkmark.rectangle.fill" : "checkmark.rectangle")
+              }
+            }
+          }
+        } label: {
+          Image(systemName: "ellipsis")
+        }
+      default:
+        EmptyView()
+      }
+    }
   }
 
   private var scrollToTopView: some View {

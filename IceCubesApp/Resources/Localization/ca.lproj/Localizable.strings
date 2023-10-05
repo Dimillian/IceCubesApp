@@ -607,9 +607,4 @@
 "add-tag-groups.edit.icon.field" = "Icona del Grup d'Etiquetes (SFSymbol)";
 "add-tag-groups.edit.tags" = "Afegeix etiquetes al grup";
 "add-tag-groups.edit.tags.add" = "Etiqueta";
-
-// MARK: Tag Groups
-"add-tag-groups.edit.title.field" = "Tag Group Title";
-"add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
-"add-tag-groups.edit.tags" = "Add tags to the group";
-"add-tag-groups.edit.tags.add" = "Tag";
+"tag-groups.edit.section.title" = "Add or remove tag from tag groups";

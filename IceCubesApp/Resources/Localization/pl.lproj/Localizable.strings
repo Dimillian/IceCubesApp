@@ -597,4 +597,5 @@
 "add-tag-groups.edit.icon.field" = "Ikona grupy (nazwa symbolu SF)";
 "add-tag-groups.edit.tags" = "Dodaj hasztagi do grupy";
 "add-tag-groups.edit.tags.add" = "Hasztag";
+"tag-groups.edit.section.title" = "Add or remove tag from tag groups";
 

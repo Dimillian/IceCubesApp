@@ -595,3 +595,4 @@
 "add-tag-groups.edit.icon.field" = "Traola-sortaren ikonoa (SFSymbol izena)";
 "add-tag-groups.edit.tags" = "Gehitu traolak sortara";
 "add-tag-groups.edit.tags.add" = "Traola";
+"tag-groups.edit.section.title" = "Add or remove tag from tag groups";

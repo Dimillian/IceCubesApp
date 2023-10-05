@@ -610,3 +610,4 @@
 "add-tag-groups.edit.icon.field" = "标签组图标（SFSymbol）";
 "add-tag-groups.edit.tags" = "将标签添加到组";
 "add-tag-groups.edit.tags.add" = "标签";
+"tag-groups.edit.section.title" = "Add or remove tag from tag groups";

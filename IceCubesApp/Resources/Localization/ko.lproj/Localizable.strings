@@ -611,3 +611,4 @@
 "add-tag-groups.edit.icon.field" = "태그 모음 아이콘 (SF Symbol 이름)";
 "add-tag-groups.edit.tags" = "모음에 포함할 태그";
 "add-tag-groups.edit.tags.add" = "태그";
+"tag-groups.edit.section.title" = "Add or remove tag from tag groups";

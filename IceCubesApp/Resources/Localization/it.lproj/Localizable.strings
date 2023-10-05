@@ -610,3 +610,4 @@
 "add-tag-groups.edit.icon.field" = "Icona del gruppo (nome simbolo SF)";
 "add-tag-groups.edit.tags" = "Tag aggiunti al gruppo";
 "add-tag-groups.edit.tags.add" = "Tag";
+"tag-groups.edit.section.title" = "Add or remove tag from tag groups";

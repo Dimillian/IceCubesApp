@@ -609,4 +609,5 @@
 "add-tag-groups.edit.icon.field" = "Tag Group Icon (SFSymbol name)";
 "add-tag-groups.edit.tags" = "Add tags to the group";
 "add-tag-groups.edit.tags.add" = "Tag";
+"tag-groups.edit.section.title" = "Add or remove tag from tag groups";
 
