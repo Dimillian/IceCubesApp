@@ -197,13 +197,13 @@ struct DisplaySettingsView: View {
           Text(buttonStyle.description).tag(buttonStyle)
         }
       }
-
       Picker("settings.display.status.media-style", selection: $theme.statusDisplayStyle) {
         ForEach(Theme.StatusDisplayStyle.allCases, id: \.rawValue) { buttonStyle in
           Text(buttonStyle.description).tag(buttonStyle)
         }
       }
       Toggle("settings.display.translate-button", isOn: $userPreferences.showTranslateButton)
+      Toggle("settings.display.pending-at-bottom", isOn: $userPreferences.pendingShownAtBottom)
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }

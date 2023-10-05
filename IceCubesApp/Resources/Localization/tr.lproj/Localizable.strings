@@ -86,6 +86,7 @@
 "settings.display.status.action-buttons" = "Durum Aksiyon Butonları";
 "settings.display.status.media-style" = "Durum Medya Stili";
 "settings.display.translate-button" = "Çeviri Butonunu Göster";
+"settings.display.pending-at-bottom" = "Ekranın alt kısmında okunmamış düğmesini görüntüleyin";
 "settings.display.theme.background" = "Arka Plan Rengi";
 "settings.display.theme.secondary-background" = "İkincil Arka Plan Rengi";
 "settings.display.theme.text-color" = "Text Color";

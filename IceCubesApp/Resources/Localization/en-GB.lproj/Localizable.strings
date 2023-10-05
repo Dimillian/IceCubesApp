@@ -91,6 +91,7 @@
 "settings.display.status.action-buttons" = "Status Action Buttons";
 "settings.display.status.media-style" = "Status Media Style";
 "settings.display.translate-button" = "Show Translate Button";
+"settings.display.pending-at-bottom" = "Show Pending Button at Bottom";
 "settings.display.theme.background" = "Background Colour";
 "settings.display.theme.secondary-background" = "Secondary Background Colour";
 "settings.display.theme.text-color" = "Text Color";

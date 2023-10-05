@@ -44,6 +44,10 @@ struct AddAccountView: View {
 
   @FocusState private var isInstanceURLFieldFocused: Bool
 
+  private func cleanServerStr(_ server: String) -> String {
+    server.replacingOccurrences(of: " ", with: "")
+  }
+
   var body: some View {
     NavigationStack {
       Form {
@@ -54,6 +58,9 @@ struct AddAccountView: View {
           .textInputAutocapitalization(.never)
           .autocorrectionDisabled()
           .focused($isInstanceURLFieldFocused)
+          .onChange(of: instanceName) { _, _ in
+            instanceName = cleanServerStr(instanceName)
+          }
         if let instanceFetchError {
           Text(instanceFetchError)
         }

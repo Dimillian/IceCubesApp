@@ -18,6 +18,10 @@ import SwiftUI
   public enum Version: String, Sendable {
     case v1, v2
   }
+  
+  public enum ClientError: Error {
+    case unexpectedRequest
+  }
 
   public enum OauthError: Error {
     case missingApp
@@ -89,8 +93,7 @@ import SwiftUI
   private func makeURL(scheme: String = "https",
                        endpoint: Endpoint,
                        forceVersion: Version? = nil,
-                       forceServer: String? = nil) -> URL
-  {
+                       forceServer: String? = nil) throws -> URL {
     var components = URLComponents()
     components.scheme = scheme
     components.host = forceServer ?? server
@@ -100,7 +103,10 @@ import SwiftUI
       components.path += "/api/\(forceVersion?.rawValue ?? version.rawValue)/\(endpoint.path())"
     }
     components.queryItems = endpoint.queryItems()
-    return components.url!
+    guard let url = components.url else {
+      throw ClientError.unexpectedRequest
+    }
+    return url
   }
 
   private func makeURLRequest(url: URL, endpoint: Endpoint, httpMethod: String) -> URLRequest {
@@ -124,8 +130,8 @@ import SwiftUI
     return request
   }
 
-  private func makeGet(endpoint: Endpoint) -> URLRequest {
-    let url = makeURL(endpoint: endpoint)
+  private func makeGet(endpoint: Endpoint) throws -> URLRequest {
+    let url = try makeURL(endpoint: endpoint)
     return makeURLRequest(url: url, endpoint: endpoint, httpMethod: "GET")
   }
 
@@ -134,7 +140,7 @@ import SwiftUI
   }
 
   public func getWithLink<Entity: Decodable>(endpoint: Endpoint) async throws -> (Entity, LinkHandler?) {
-    let (data, httpResponse) = try await urlSession.data(for: makeGet(endpoint: endpoint))
+    let (data, httpResponse) = try await urlSession.data(for: try makeGet(endpoint: endpoint))
     var linkHandler: LinkHandler?
     if let response = httpResponse as? HTTPURLResponse,
        let link = response.allHeaderFields["Link"] as? String
@@ -150,14 +156,14 @@ import SwiftUI
   }
 
   public func post(endpoint: Endpoint, forceVersion: Version? = nil) async throws -> HTTPURLResponse? {
-    let url = makeURL(endpoint: endpoint, forceVersion: forceVersion)
+    let url = try makeURL(endpoint: endpoint, forceVersion: forceVersion)
     let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: "POST")
     let (_, httpResponse) = try await urlSession.data(for: request)
     return httpResponse as? HTTPURLResponse
   }
 
   public func patch(endpoint: Endpoint) async throws -> HTTPURLResponse? {
-    let url = makeURL(endpoint: endpoint)
+    let url = try makeURL(endpoint: endpoint)
     let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: "PATCH")
     let (_, httpResponse) = try await urlSession.data(for: request)
     return httpResponse as? HTTPURLResponse
@@ -168,7 +174,7 @@ import SwiftUI
   }
 
   public func delete(endpoint: Endpoint, forceVersion: Version? = nil) async throws -> HTTPURLResponse? {
-    let url = makeURL(endpoint: endpoint, forceVersion: forceVersion)
+    let url = try makeURL(endpoint: endpoint, forceVersion: forceVersion)
     let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: "DELETE")
     let (_, httpResponse) = try await urlSession.data(for: request)
     return httpResponse as? HTTPURLResponse
@@ -178,7 +184,7 @@ import SwiftUI
                                                     method: String,
                                                     forceVersion: Version? = nil) async throws -> Entity
   {
-    let url = makeURL(endpoint: endpoint, forceVersion: forceVersion)
+    let url = try makeURL(endpoint: endpoint, forceVersion: forceVersion)
     let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: method)
     let (data, httpResponse) = try await urlSession.data(for: request)
     logResponseOnError(httpResponse: httpResponse, data: data)
@@ -198,7 +204,7 @@ import SwiftUI
   public func oauthURL() async throws -> URL {
     let app: InstanceApp = try await post(endpoint: Apps.registerApp)
     critical.withLock { $0.oauthApp = app }
-    return makeURL(endpoint: Oauth.authorize(clientId: app.clientId))
+    return try makeURL(endpoint: Oauth.authorize(clientId: app.clientId))
   }
 
   public func continueOauthFlow(url: URL) async throws -> OauthToken {
@@ -217,8 +223,8 @@ import SwiftUI
     return token
   }
 
-  public func makeWebSocketTask(endpoint: Endpoint, instanceStreamingURL: URL?) -> URLSessionWebSocketTask {
-    let url = makeURL(scheme: "wss", endpoint: endpoint, forceServer: instanceStreamingURL?.host)
+  public func makeWebSocketTask(endpoint: Endpoint, instanceStreamingURL: URL?) throws -> URLSessionWebSocketTask {
+    let url = try makeURL(scheme: "wss", endpoint: endpoint, forceServer: instanceStreamingURL?.host)
     var subprotocols: [String] = []
     if let oauthToken = critical.withLock({ $0.oauthToken }) {
       subprotocols.append(oauthToken.accessToken)
@@ -233,7 +239,7 @@ import SwiftUI
                                              filename: String,
                                              data: Data) async throws -> Entity
   {
-    let url = makeURL(endpoint: endpoint, forceVersion: version)
+    let url = try makeURL(endpoint: endpoint, forceVersion: version)
     var request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: method)
     let boundary = UUID().uuidString
     request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")

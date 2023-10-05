@@ -91,6 +91,7 @@
 "settings.display.status.action-buttons" = "Кнопки дій статуса";
 "settings.display.status.media-style" = "Стиль медія статуса";
 "settings.display.translate-button" = "Відображати кнопку перекладу";
+"settings.display.pending-at-bottom" = "Показати непрочитану кнопку внизу екрана";
 "settings.display.theme.background" = "Колір фону";
 "settings.display.theme.secondary-background" = "Додатковий колір фону";
 "settings.display.theme.text-color" = "Колір тексту";

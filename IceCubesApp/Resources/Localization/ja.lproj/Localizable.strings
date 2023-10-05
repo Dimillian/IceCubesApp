@@ -91,6 +91,7 @@
 "settings.display.status.action-buttons" = "アクションボタン";
 "settings.display.status.media-style" = "メディアスタイル";
 "settings.display.translate-button" = "翻訳ボタンの表示";
+"settings.display.pending-at-bottom" = "画面下に未読ボタンを表示する";
 "settings.display.theme.background" = "バックグラウンドカラー";
 "settings.display.theme.secondary-background" = "アクセントカラー";
 "settings.display.theme.text-color" = "テキストカラー";
