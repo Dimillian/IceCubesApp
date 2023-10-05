@@ -188,9 +188,9 @@ private func localURLFor(received: ReceivedTransferredFile) -> URL {
 public extension URL {
   func mimeType() -> String {
     if let mimeType = UTType(filenameExtension: pathExtension)?.preferredMIMEType {
-      return mimeType
+      mimeType
     } else {
-      return "application/octet-stream"
+      "application/octet-stream"
     }
   }
 }

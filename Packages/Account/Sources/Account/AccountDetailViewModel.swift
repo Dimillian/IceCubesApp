@@ -96,6 +96,8 @@ import SwiftUI
     }
   }
 
+  var scrollToTopVisible: Bool = false
+
   var translation: Translation?
   var isLoadingTranslation = false
 

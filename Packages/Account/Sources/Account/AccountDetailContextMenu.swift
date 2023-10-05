@@ -146,8 +146,7 @@ public struct AccountDetailContextMenu: View {
           Divider()
         }
 
-        if let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier
-        {
+        if let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier {
           Button {
             Task {
               await viewModel.translate(userLang: lang)

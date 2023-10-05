@@ -14,21 +14,31 @@ public struct NotificationsListView: View {
   @Environment(RouterPath.self) private var routerPath
   @Environment(CurrentAccount.self) private var account
   @State private var viewModel = NotificationsViewModel()
+  @Binding var scrollToTopSignal: Int
 
   let lockedType: Models.Notification.NotificationType?
 
-  public init(lockedType: Models.Notification.NotificationType?) {
+  public init(lockedType: Models.Notification.NotificationType?, scrollToTopSignal: Binding<Int>) {
     self.lockedType = lockedType
+    _scrollToTopSignal = scrollToTopSignal
   }
 
   public var body: some View {
-    List {
-      topPaddingView
-      notificationsView
+    ScrollViewReader { proxy in
+      List {
+        scrollToTopView
+        topPaddingView
+        notificationsView
+      }
+      .id(account.account?.id)
+      .environment(\.defaultMinListRowHeight, 1)
+      .listStyle(.plain)
+      .onChange(of: scrollToTopSignal) {
+        withAnimation {
+          proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
+        }
+      }
     }
-    .id(account.account?.id)
-    .environment(\.defaultMinListRowHeight, 1)
-    .listStyle(.plain)
     .toolbar {
       ToolbarItem(placement: .principal) {
         let title = lockedType?.menuTitle() ?? viewModel.selectedType?.menuTitle() ?? "notifications.navigation-title"
@@ -195,5 +205,16 @@ public struct NotificationsListView: View {
       .listRowInsets(.init())
       .frame(height: .layoutPadding)
       .accessibilityHidden(true)
+  }
+
+  private var scrollToTopView: some View {
+    ScrollToView()
+      .frame(height: .scrollToViewHeight)
+      .onAppear {
+        viewModel.scrollToTopVisible = true
+      }
+      .onDisappear {
+        viewModel.scrollToTopVisible = false
+      }
   }
 }

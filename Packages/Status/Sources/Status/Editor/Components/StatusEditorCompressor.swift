@@ -15,11 +15,10 @@ actor StatusEditorCompressor {
         return
       }
 
-      let maxPixelSize: Int
-      if Bundle.main.bundlePath.hasSuffix(".appex") {
-        maxPixelSize = 1536
+      let maxPixelSize: Int = if Bundle.main.bundlePath.hasSuffix(".appex") {
+        1536
       } else {
-        maxPixelSize = 4096
+        4096
       }
 
       let downsampleOptions = [

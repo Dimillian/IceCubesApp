@@ -83,9 +83,9 @@ import SwiftUI
       if let rootHost = host.split(separator: ".", maxSplits: 1).last {
         // Sometimes the connection is with the root host instead of a subdomain
         // eg. Mastodon runs on mastdon.domain.com but the connection is with domain.com
-        return $0.connections.contains(host) || $0.connections.contains(String(rootHost))
+        $0.connections.contains(host) || $0.connections.contains(String(rootHost))
       } else {
-        return $0.connections.contains(host)
+        $0.connections.contains(host)
       }
     }
   }

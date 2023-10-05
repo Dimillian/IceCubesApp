@@ -30,14 +30,18 @@ public struct AccountDetailView: View {
   @State private var isEditingFilters: Bool = false
   @State private var isEditingRelationshipNote: Bool = false
 
+  @Binding var scrollToTopSignal: Int
+
   /// When coming from a URL like a mention tap in a status.
-  public init(accountId: String) {
+  public init(accountId: String, scrollToTopSignal: Binding<Int>) {
     _viewModel = .init(initialValue: .init(accountId: accountId))
+    _scrollToTopSignal = scrollToTopSignal
   }
 
   /// When the account is already fetched by the parent caller.
-  public init(account: Account) {
+  public init(account: Account, scrollToTopSignal: Binding<Int>) {
     _viewModel = .init(initialValue: .init(account: account))
+    _scrollToTopSignal = scrollToTopSignal
   }
 
   public var body: some View {
@@ -46,6 +50,7 @@ public struct AccountDetailView: View {
         makeHeaderView(proxy: proxy)
           .applyAccountDetailsRowStyle(theme: theme)
           .padding(.bottom, -20)
+          .id(ScrollToView.Constants.scrollToTop)
         familiarFollowers
           .applyAccountDetailsRowStyle(theme: theme)
         featuredTagsView
@@ -83,6 +88,11 @@ public struct AccountDetailView: View {
       .listStyle(.plain)
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
+      .onChange(of: scrollToTopSignal) {
+        withAnimation {
+          proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
+        }
+      }
     }
     .onAppear {
       guard reasons != .placeholder else { return }
@@ -418,6 +428,6 @@ extension View {
 
 struct AccountDetailView_Previews: PreviewProvider {
   static var previews: some View {
-    AccountDetailView(account: .placeholder())
+    AccountDetailView(account: .placeholder(), scrollToTopSignal: .constant(0))
   }
 }
