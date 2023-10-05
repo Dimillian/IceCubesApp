@@ -258,7 +258,7 @@ struct SupportAppView: View {
   private var loadingPlaceholder: some View {
     HStack {
       VStack(alignment: .leading) {
-        Text("placeholder.loading.short.")
+        Text("placeholder.loading.short")
           .font(.scaledSubheadline)
         Text("settings.support.placeholder.loading-subtitle")
           .font(.scaledFootnote)
