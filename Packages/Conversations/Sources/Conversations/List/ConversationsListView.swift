@@ -14,9 +14,9 @@ public struct ConversationsListView: View {
   @Environment(Theme.self) private var theme
 
   @State private var viewModel = ConversationsListViewModel()
-  
+
   @Binding var scrollToTopSignal: Int
-  
+
   public init(scrollToTopSignal: Binding<Int>) {
     _scrollToTopSignal = scrollToTopSignal
   }
@@ -62,7 +62,7 @@ public struct ConversationsListView: View {
                 }
               }
             }
-            
+
             if viewModel.nextPage != nil {
               HStack {
                 Spacer()
@@ -122,7 +122,7 @@ public struct ConversationsListView: View {
       }
     }
   }
-  
+
   private var scrollToTopView: some View {
     ScrollToView()
       .frame(height: .scrollToViewHeight)

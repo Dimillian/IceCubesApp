@@ -96,9 +96,9 @@ public struct AppAccountsSelectorView: View {
 
   private var accountBackgroundColor: Color {
     if #available(iOS 16.4, *) {
-      return Color.clear
+      Color.clear
     } else {
-      return theme.secondaryBackgroundColor
+      theme.secondaryBackgroundColor
     }
   }
 

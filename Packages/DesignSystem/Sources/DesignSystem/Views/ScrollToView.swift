@@ -7,9 +7,9 @@ public struct ScrollToView: View {
   public enum Constants {
     public static let scrollToTop = "top"
   }
-  
+
   public init() {}
-  
+
   public var body: some View {
     HStack { SwiftUI.EmptyView() }
       .listRowBackground(Color.clear)

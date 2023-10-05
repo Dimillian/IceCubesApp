@@ -14,7 +14,7 @@ public struct ExploreView: View {
   @Environment(RouterPath.self) private var routerPath
 
   @State private var viewModel = ExploreViewModel()
-  
+
   @Binding var scrollToTopSignal: Int
 
   public init(scrollToTopSignal: Binding<Int>) {
@@ -36,8 +36,8 @@ public struct ExploreView: View {
               EmptyView(iconName: "magnifyingglass",
                         title: "explore.search.empty.title",
                         message: "explore.search.empty.message")
-              .listRowBackground(theme.secondaryBackgroundColor)
-              .listRowSeparator(.hidden)
+                .listRowBackground(theme.secondaryBackgroundColor)
+                .listRowSeparator(.hidden)
             } else {
               makeSearchResultsView(results: results)
             }
@@ -55,8 +55,8 @@ public struct ExploreView: View {
           EmptyView(iconName: "magnifyingglass",
                     title: "explore.search.title",
                     message: "explore.search.message-\(client.server)")
-          .listRowBackground(theme.secondaryBackgroundColor)
-          .listRowSeparator(.hidden)
+            .listRowBackground(theme.secondaryBackgroundColor)
+            .listRowSeparator(.hidden)
         } else {
           quickAccessView
             .padding(.bottom, 4)
@@ -248,7 +248,7 @@ public struct ExploreView: View {
           .listRowBackground(theme.primaryBackgroundColor)
           .padding(.vertical, 8)
       }
-      
+
       NavigationLink(value: RouterDestination.trendingLinks(cards: viewModel.trendingLinks)) {
         Text("see-more")
           .foregroundColor(theme.tintColor)
@@ -256,7 +256,7 @@ public struct ExploreView: View {
       .listRowBackground(theme.primaryBackgroundColor)
     }
   }
-  
+
   private var scrollToTopView: some View {
     ScrollToView()
       .frame(height: .scrollToViewHeight)

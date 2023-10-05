@@ -43,7 +43,7 @@ struct TranslationSettingsView: View {
     }
     .onAppear(perform: updatePrefs)
   }
-  
+
   @ViewBuilder
   private var deepLToggle: some View {
     @Bindable var preferences = preferences
@@ -52,7 +52,7 @@ struct TranslationSettingsView: View {
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
-  
+
   @ViewBuilder
   private var deepLPicker: some View {
     @Bindable var preferences = preferences
@@ -61,7 +61,7 @@ struct TranslationSettingsView: View {
       Text("DeepL API Pro").tag(false)
     }
   }
-  
+
   @ViewBuilder
   private var autoDetectSection: some View {
     @Bindable var preferences = preferences

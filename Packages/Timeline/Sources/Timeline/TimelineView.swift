@@ -29,7 +29,8 @@ public struct TimelineView: View {
 
   public init(timeline: Binding<TimelineFilter>,
               selectedTagGroup: Binding<TagGroup?>,
-              scrollToTopSignal: Binding<Int>, canFilterTimeline: Bool) {
+              scrollToTopSignal: Binding<Int>, canFilterTimeline: Bool)
+  {
     _timeline = timeline
     _selectedTagGroup = selectedTagGroup
     _scrollToTopSignal = scrollToTopSignal

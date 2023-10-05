@@ -28,7 +28,7 @@ public struct AccountDetailView: View {
   @State private var isEditingAccount: Bool = false
   @State private var isEditingFilters: Bool = false
   @State private var isEditingRelationshipNote: Bool = false
-  
+
   @Binding var scrollToTopSignal: Int
 
   /// When coming from a URL like a mention tap in a status.

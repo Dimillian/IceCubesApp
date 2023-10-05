@@ -18,8 +18,8 @@ import SwiftUI
     @AppStorage(ThemeKey.primaryBackground.rawValue) public var primaryBackgroundColor: Color = .white
     @AppStorage(ThemeKey.secondaryBackground.rawValue) public var secondaryBackgroundColor: Color = .gray
     @AppStorage(ThemeKey.label.rawValue) public var labelColor: Color = .black
-    @AppStorage(ThemeKey.avatarPosition2.rawValue) var avatarPosition: AvatarPosition = AvatarPosition.top
-    @AppStorage(ThemeKey.avatarShape2.rawValue) var avatarShape: AvatarShape = AvatarShape.rounded
+    @AppStorage(ThemeKey.avatarPosition2.rawValue) var avatarPosition: AvatarPosition = .top
+    @AppStorage(ThemeKey.avatarShape2.rawValue) var avatarShape: AvatarShape = .rounded
     @AppStorage(ThemeKey.selectedSet.rawValue) var storedSet: ColorSetName = .iceCubeDark
     @AppStorage(ThemeKey.statusActionsDisplay.rawValue) public var statusActionsDisplay: StatusActionsDisplay = .full
     @AppStorage(ThemeKey.statusDisplayStyle.rawValue) public var statusDisplayStyle: StatusDisplayStyle = .large
@@ -273,7 +273,7 @@ import SwiftUI
       ConstellationDark(),
     ]
   }
-  
+
   public func applySet(set: ColorSetName) {
     selectedSet = set
     setColor(withName: set)

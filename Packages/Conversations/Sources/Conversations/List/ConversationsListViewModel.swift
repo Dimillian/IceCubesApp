@@ -12,7 +12,7 @@ import SwiftUI
   var isError: Bool = false
 
   var nextPage: LinkHandler?
-  
+
   var scrollToTopVisible: Bool = false
 
   public init() {}

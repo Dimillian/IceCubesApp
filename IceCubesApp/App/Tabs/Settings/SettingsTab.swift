@@ -6,9 +6,9 @@ import Foundation
 import Models
 import Network
 import Nuke
+import SwiftData
 import SwiftUI
 import Timeline
-import SwiftData
 
 @MainActor
 struct SettingsTabs: View {
@@ -29,7 +29,7 @@ struct SettingsTabs: View {
   @State private var timelineCache = TimelineCache()
 
   @Binding var popToRootTab: Tab
-  
+
   @Query(sort: \LocalTimeline.creationDate, order: .reverse) var localTimelines: [LocalTimeline]
   @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
 

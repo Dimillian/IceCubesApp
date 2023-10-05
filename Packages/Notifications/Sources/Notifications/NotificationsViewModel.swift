@@ -47,7 +47,7 @@ import SwiftUI
       }
     }
   }
-  
+
   var scrollToTopVisible: Bool = false
 
   private var queryTypes: [String]? {

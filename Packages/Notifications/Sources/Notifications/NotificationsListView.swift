@@ -206,7 +206,7 @@ public struct NotificationsListView: View {
       .frame(height: .layoutPadding)
       .accessibilityHidden(true)
   }
-  
+
   private var scrollToTopView: some View {
     ScrollToView()
       .frame(height: .scrollToViewHeight)
