@@ -25,6 +25,8 @@ public struct TimelineView: View {
 
   @State private var wasBackgrounded: Bool = false
   @State private var collectionView: UICollectionView?
+  @FocusState private var focused: Bool
+  @State private var topVisibleItemIndex = 1
 
   @Binding var timeline: TimelineFilter
   @Binding var selectedTagGroup: TagGroup?
@@ -81,6 +83,7 @@ public struct TimelineView: View {
           collectionView.scrollToItem(at: .init(row: newValue, section: 0),
                                       at: .top,
                                       animated: viewModel.scrollToIndexAnimated)
+          topVisibleItemIndex = newValue
           viewModel.scrollToIndexAnimated = false
           viewModel.scrollToIndex = nil
         }
@@ -128,6 +131,18 @@ public struct TimelineView: View {
       }
     }
     .navigationBarTitleDisplayMode(.inline)
+    .focusable()
+    .focused($focused)
+    .onKeyPress(.upArrow) {
+        viewModel.scrollToIndexAnimated = true
+        viewModel.scrollToIndex = topVisibleItemIndex - 1
+        return .handled
+    }
+    .onKeyPress(.downArrow) {
+        viewModel.scrollToIndexAnimated = true
+        viewModel.scrollToIndex = topVisibleItemIndex + 1
+        return .handled
+    }
     .onAppear {
       viewModel.isTimelineVisible = true
 
@@ -136,6 +151,8 @@ public struct TimelineView: View {
       }
 
       viewModel.timeline = timeline
+
+      focused = true
     }
     .onDisappear {
       viewModel.isTimelineVisible = false
