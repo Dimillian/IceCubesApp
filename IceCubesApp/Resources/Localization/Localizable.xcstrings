@@ -3,6 +3,12 @@
   "strings" : {
     "  ⸱  " : {
       "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "  ⸱  "
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13,6 +19,12 @@
     },
     "#%@" : {
       "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "#%@"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23,6 +35,12 @@
     },
     "%@©2023 Thomas Ricouard" : {
       "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@©2023 Thomas Ricouard"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -33,6 +51,12 @@
     },
     "• [EmojiText](https://github.com/divadretlaw/EmojiText)\n\n• [HTML2Markdown](https://gitlab.com/mflint/HTML2Markdown)\n\n• [KeychainSwift](https://github.com/evgenyneu/keychain-swift)\n\n• [LRUCache](https://github.com/nicklockwood/LRUCache)\n\n• [Bodega](https://github.com/mergesort/Bodega)\n\n• [Nuke](https://github.com/kean/Nuke)\n\n• [SwiftSoup](https://github.com/scinfu/SwiftSoup.git)\n\n• [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible)\n\n• [OpenDyslexic](http://opendyslexic.org)\n\n• [SwiftUI-Introspect](https://github.com/siteline/SwiftUI-Introspect)\n\n• [RevenueCat](https://github.com/RevenueCat/purchases-ios)\n\n• [SFSafeSymbols](https://github.com/SFSafeSymbols/SFSafeSymbols)" : {
       "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "• [EmojiText](https://github.com/divadretlaw/EmojiText)\n\n• [HTML2Markdown](https://gitlab.com/mflint/HTML2Markdown)\n\n• [KeychainSwift](https://github.com/evgenyneu/keychain-swift)\n\n• [LRUCache](https://github.com/nicklockwood/LRUCache)\n\n• [Bodega](https://github.com/mergesort/Bodega)\n\n• [Nuke](https://github.com/kean/Nuke)\n\n• [SwiftSoup](https://github.com/scinfu/SwiftSoup.git)\n\n• [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible)\n\n• [OpenDyslexic](http://opendyslexic.org)\n\n• [SwiftUI-Introspect](https://github.com/siteline/SwiftUI-Introspect)\n\n• [RevenueCat](https://github.com/RevenueCat/purchases-ios)\n\n• [SFSafeSymbols](https://github.com/SFSafeSymbols/SFSafeSymbols)"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14350,13 +14374,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%2$@ follower"
+                      "value" : "%2$@ volger"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%2$@ followers"
+                      "value" : "%2$@ volgers"
                     }
                   }
                 }
@@ -16864,7 +16888,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag Group Icon (SFSymbol name)"
+            "value" : "Symbool taggroep (SFSymbol name)"
           }
         },
         "pl" : {
@@ -16982,7 +17006,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add tags to the group"
+            "value" : "Voeg tags toe aan de groep"
           }
         },
         "pl" : {
@@ -17219,7 +17243,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag Group Title"
+            "value" : "Titel taggroep"
           }
         },
         "pl" : {
@@ -18928,6 +18952,12 @@
     },
     "DeepL API Free" : {
       "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL API Free"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18938,6 +18968,12 @@
     },
     "DeepL API Pro" : {
       "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL API Pro"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28458,6 +28494,12 @@
     },
     "iPad" : {
       "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iPad"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28468,6 +28510,12 @@
     },
     "iPhone" : {
       "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iPhone"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -36584,7 +36632,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reply Visibility"
+            "value" : "Zichtbaarheid antwoorden"
           }
         },
         "pl" : {
@@ -36820,7 +36868,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Standaard postzichtbaarheid"
+            "value" : "Zichtbaarheid posts"
           }
         },
         "pl" : {
@@ -51582,7 +51630,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Auto detect language"
+            "value" : "Herken taal automatisch"
           }
         },
         "pl" : {
@@ -51700,7 +51748,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary."
+            "value" : "Ice Cubes probeert de taal van de te plaatsen post automatisch te herkennen en geeft dan de suggestie de taal van de post aan te passen, indien nodig. "
           }
         },
         "pl" : {
