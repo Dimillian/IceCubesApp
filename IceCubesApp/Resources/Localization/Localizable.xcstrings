@@ -8092,8 +8092,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Block %@"
+            "state" : "translated",
+            "value" : "%@ blockieren"
           }
         },
         "en" : {
@@ -8211,8 +8211,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Do you want to block this user?"
+            "state" : "translated",
+            "value" : "Möchtest du diesen Benutzer blockieren?"
           }
         },
         "en" : {
