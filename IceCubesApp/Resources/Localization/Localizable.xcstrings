@@ -8182,8 +8182,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Block %@"
+            "state" : "translated",
+            "value" : "屏蔽 %@"
           }
         },
         "zh-Hant" : {
@@ -8301,8 +8301,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Do you want to block this user?"
+            "state" : "translated",
+            "value" : "你确认要屏蔽该用户吗？"
           }
         },
         "zh-Hant" : {
