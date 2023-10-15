@@ -15,6 +15,12 @@
             "value" : "  ⸱  "
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "  ⸱  "
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32,6 +38,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "#%@"
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "#%@"
@@ -59,6 +71,12 @@
             "value" : "%@©2023 Thomas Ricouard"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@©2023 Thomas Ricouard"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -76,6 +94,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "• [EmojiText](https://github.com/divadretlaw/EmojiText)\n\n• [HTML2Markdown](https://gitlab.com/mflint/HTML2Markdown)\n\n• [KeychainSwift](https://github.com/evgenyneu/keychain-swift)\n\n• [LRUCache](https://github.com/nicklockwood/LRUCache)\n\n• [Bodega](https://github.com/mergesort/Bodega)\n\n• [Nuke](https://github.com/kean/Nuke)\n\n• [SwiftSoup](https://github.com/scinfu/SwiftSoup.git)\n\n• [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible)\n\n• [OpenDyslexic](http://opendyslexic.org)\n\n• [SwiftUI-Introspect](https://github.com/siteline/SwiftUI-Introspect)\n\n• [RevenueCat](https://github.com/RevenueCat/purchases-ios)\n\n• [SFSafeSymbols](https://github.com/SFSafeSymbols/SFSafeSymbols)"
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "• [EmojiText](https://github.com/divadretlaw/EmojiText)\n\n• [HTML2Markdown](https://gitlab.com/mflint/HTML2Markdown)\n\n• [KeychainSwift](https://github.com/evgenyneu/keychain-swift)\n\n• [LRUCache](https://github.com/nicklockwood/LRUCache)\n\n• [Bodega](https://github.com/mergesort/Bodega)\n\n• [Nuke](https://github.com/kean/Nuke)\n\n• [SwiftSoup](https://github.com/scinfu/SwiftSoup.git)\n\n• [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible)\n\n• [OpenDyslexic](http://opendyslexic.org)\n\n• [SwiftUI-Introspect](https://github.com/siteline/SwiftUI-Introspect)\n\n• [RevenueCat](https://github.com/RevenueCat/purchases-ios)\n\n• [SFSafeSymbols](https://github.com/SFSafeSymbols/SFSafeSymbols)"
@@ -8158,8 +8182,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Block %@"
+            "state" : "translated",
+            "value" : "Zablokuj %@"
           }
         },
         "pt-BR" : {
@@ -8277,8 +8301,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Do you want to block this user?"
+            "state" : "translated",
+            "value" : "Czy chcesz zablokować tego użytkownika?"
           }
         },
         "pt-BR" : {
@@ -19226,6 +19250,12 @@
             "value" : "DeepL API Free"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL API Free"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19243,6 +19273,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL API Pro"
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "DeepL API Pro"
@@ -26838,7 +26874,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Expired"
+            "value" : "Wygasły"
           }
         },
         "pt-BR" : {
@@ -26957,7 +26993,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Expiry: %@"
+            "value" : "Wygaśnięcie: %@"
           }
         },
         "pt-BR" : {
@@ -28780,6 +28816,12 @@
             "value" : "iPad"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iPad"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28797,6 +28839,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iPhone"
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "iPhone"
