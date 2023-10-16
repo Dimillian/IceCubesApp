@@ -17,12 +17,14 @@ let package = Package(
   ],
   dependencies: [
     .package(name: "Models", path: "../Models"),
+    .package(name: "DesignSystem", path: "../DesignSystem"),
   ],
   targets: [
     .target(
       name: "MediaUI",
       dependencies: [
         .product(name: "Models", package: "Models"),
+        .product(name: "DesignSystem", package: "DesignSystem"),
       ],
       swiftSettings: [
         .enableExperimentalFeature("StrictConcurrency"),
