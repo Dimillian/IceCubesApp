@@ -4,6 +4,7 @@ import Models
 import Nuke
 import NukeUI
 import SwiftUI
+import MediaUI
 
 @MainActor
 public struct StatusRowMediaPreviewView: View {
@@ -87,9 +88,7 @@ public struct StatusRowMediaPreviewView: View {
       if attachments.count == 1, let attachment = attachments.first {
         makeFeaturedImagePreview(attachment: attachment)
           .onTapGesture {
-            Task {
-              await quickLook.prepareFor(urls: attachments.compactMap(\.url), selectedURL: attachment.url!)
-            }
+            quickLook.prepareFor(selectedMediaAttachment: attachment, mediaAttachments: attachments)
           }
           .accessibilityElement(children: .ignore)
           .accessibilityLabel(Self.accessibilityLabel(for: attachment))
@@ -117,11 +116,6 @@ public struct StatusRowMediaPreviewView: View {
       }
     }
     .overlay {
-      if quickLook.isPreparing {
-        quickLookLoadingView
-          .transition(.opacity)
-      }
-
       if isHidingMedia {
         sensitiveMediaOverlay
           .transition(.opacity)
@@ -182,7 +176,7 @@ public struct StatusRowMediaPreviewView: View {
 
       case .gifv, .video, .audio:
         if let url = attachment.url {
-          VideoPlayerView(viewModel: .init(url: url))
+          MediaUIAttachmentVideoView(viewModel: .init(url: url))
             .frame(width: newSize.width, height: newSize.height)
         }
       case .none:
@@ -265,7 +259,7 @@ public struct StatusRowMediaPreviewView: View {
             }
           case .gifv, .video, .audio:
             if let url = attachment.url {
-              VideoPlayerView(viewModel: .init(url: url))
+              MediaUIAttachmentVideoView(viewModel: .init(url: url))
                 .frame(width: isCompact ? imageMaxHeight : proxy.frame(in: .local).width)
                 .frame(height: imageMaxHeight)
                 .accessibilityAddTraits(.startsMediaSession)
@@ -278,29 +272,12 @@ public struct StatusRowMediaPreviewView: View {
       // #965: do not create overlapping tappable areas, when multiple images are shown
       .contentShape(Rectangle())
       .onTapGesture {
-        Task {
-          await quickLook.prepareFor(urls: attachments.compactMap(\.url), selectedURL: attachment.url!)
-        }
+        quickLook.prepareFor(selectedMediaAttachment: attachment, mediaAttachments: attachments)
       }
       .accessibilityElement(children: .ignore)
       .accessibilityLabel(Self.accessibilityLabel(for: attachment))
       .accessibilityAddTraits(attachment.supportedType == .image ? [.isImage, .isButton] : .isButton)
     }
-  }
-
-  private var quickLookLoadingView: some View {
-    ZStack(alignment: .center) {
-      VStack {
-        Spacer()
-        HStack {
-          Spacer()
-          ProgressView()
-          Spacer()
-        }
-        Spacer()
-      }
-    }
-    .background(.ultraThinMaterial)
   }
 
   private var sensitiveMediaOverlay: some View {

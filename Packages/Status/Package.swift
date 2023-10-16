@@ -18,6 +18,7 @@ let package = Package(
   dependencies: [
     .package(name: "AppAccount", path: "../AppAccount"),
     .package(name: "Models", path: "../Models"),
+    .package(name: "MediaUI", path: "../MediaUI"),
     .package(name: "Network", path: "../Network"),
     .package(name: "Env", path: "../Env"),
     .package(name: "DesignSystem", path: "../DesignSystem"),
@@ -28,6 +29,7 @@ let package = Package(
       dependencies: [
         .product(name: "AppAccount", package: "AppAccount"),
         .product(name: "Models", package: "Models"),
+        .product(name: "MediaUI", package: "MediaUI"),
         .product(name: "Network", package: "Network"),
         .product(name: "Env", package: "Env"),
         .product(name: "DesignSystem", package: "DesignSystem"),

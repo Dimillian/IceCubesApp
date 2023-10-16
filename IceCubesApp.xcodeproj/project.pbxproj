@@ -85,6 +85,7 @@
 		9FBFE64E292A72BD00C250E9 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 9FBFE64D292A72BD00C250E9 /* Network */; };
 		9FD34823293D06E800DB0EE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FD34822293D06E800DB0EE9 /* Assets.xcassets */; };
 		9FD542E72962D2FF0045321A /* Lists in Frameworks */ = {isa = PBXBuildFile; productRef = 9FD542E62962D2FF0045321A /* Lists */; };
+		9FE0346C2ADD5C2100529EA8 /* MediaUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE0346B2ADD5C2100529EA8 /* MediaUI */; };
 		9FE151A6293C90F900E9683D /* IconSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE151A5293C90F900E9683D /* IconSelectorView.swift */; };
 		9FE3DB57296FEFCA00628CB0 /* AppAccount in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE3DB56296FEFCA00628CB0 /* AppAccount */; };
 		9FFF677C299B7B2C00FE700A /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF677B299B7B2C00FE700A /* Notifications */; };
@@ -222,6 +223,8 @@
 		9FCBB3D429859615009B77EE /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9FD34822293D06E800DB0EE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9FD542E52962D2CE0045321A /* Lists */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Lists; path = Packages/Lists; sourceTree = "<group>"; };
+		9FE034692ADD597100529EA8 /* MediaUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MediaUI; path = Packages/MediaUI; sourceTree = "<group>"; };
+		9FE0346A2ADD59AC00529EA8 /* MediaUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MediaUI; path = Packages/MediaUI; sourceTree = "<group>"; };
 		9FE151A5293C90F900E9683D /* IconSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSelectorView.swift; sourceTree = "<group>"; };
 		9FE3DB55296FEF5800628CB0 /* AppAccount */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppAccount; path = Packages/AppAccount; sourceTree = "<group>"; };
 		B0BAB49E29B3D7A9008F54D7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -287,6 +290,7 @@
 				9FAE4ACE29379A5A00772766 /* KeychainSwift in Frameworks */,
 				9F7335EA2966B3F800AFF0BA /* Conversations in Frameworks */,
 				9FE3DB57296FEFCA00628CB0 /* AppAccount in Frameworks */,
+				9FE0346C2ADD5C2100529EA8 /* MediaUI in Frameworks */,
 				9F398AA92935FFDB00A889F2 /* Account in Frameworks */,
 				9FBFE64E292A72BD00C250E9 /* Network in Frameworks */,
 				9FD542E72962D2FF0045321A /* Lists in Frameworks */,
@@ -434,6 +438,7 @@
 				9F55C68E295598F900F94077 /* Explore */,
 				9F5E581729545B5500A53960 /* Env */,
 				9F398AA32935F90100A889F2 /* Models */,
+				9FE0346A2ADD59AC00529EA8 /* MediaUI */,
 				9F29553D292B67B600E0E81B /* Network */,
 				9FD542E52962D2CE0045321A /* Lists */,
 				9F35DB4829506F7F00B3281A /* Notifications */,
@@ -470,6 +475,7 @@
 		9FBFE64C292A72BD00C250E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9FE034692ADD597100529EA8 /* MediaUI */,
 				9F2A540D2969A0B0009B2D7C /* StoreKit.framework */,
 				9F2A5404296995FB009B2D7C /* QuickLookUI.framework */,
 				9F7335EE29674F7100AFF0BA /* QuickLook.framework */,
@@ -612,6 +618,7 @@
 				9FE3DB56296FEFCA00628CB0 /* AppAccount */,
 				065FA1FD29866CD600012EA0 /* LRUCache */,
 				DA0B24FA2A6876D50045BDD7 /* SFSafeSymbols */,
+				9FE0346B2ADD5C2100529EA8 /* MediaUI */,
 			);
 			productName = IceCubesApp;
 			productReference = 9FBFE639292A715500C250E9 /* IceCubesApp.app */;
@@ -1480,6 +1487,10 @@
 		9FD542E62962D2FF0045321A /* Lists */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Lists;
+		};
+		9FE0346B2ADD5C2100529EA8 /* MediaUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = MediaUI;
 		};
 		9FE3DB56296FEFCA00628CB0 /* AppAccount */ = {
 			isa = XCSwiftPackageProductDependency;

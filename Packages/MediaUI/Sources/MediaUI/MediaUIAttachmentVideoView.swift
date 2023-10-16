@@ -5,11 +5,11 @@ import Observation
 import SwiftUI
 
 @MainActor
-@Observable class VideoPlayerViewModel {
+@Observable public class MediaUIAttachmentVideoViewModel {
   var player: AVPlayer?
   private let url: URL
 
-  init(url: URL) {
+  public init(url: URL) {
     self.url = url
   }
 
@@ -48,15 +48,19 @@ import SwiftUI
   }
 }
 
-struct VideoPlayerView: View {
+public struct MediaUIAttachmentVideoView: View {
   @Environment(\.scenePhase) private var scenePhase
   @Environment(\.isCompact) private var isCompact
   @Environment(UserPreferences.self) private var preferences
   @Environment(Theme.self) private var theme
 
-  @State var viewModel: VideoPlayerViewModel
+  @State var viewModel: MediaUIAttachmentVideoViewModel
+  
+  public init(viewModel: MediaUIAttachmentVideoViewModel) {
+    _viewModel = .init(wrappedValue: viewModel)
+  }
 
-  var body: some View {
+  public var body: some View {
     ZStack {
       VideoPlayer(player: viewModel.player)
         .accessibilityAddTraits(.startsMediaSession)

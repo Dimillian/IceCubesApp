@@ -207,10 +207,8 @@ public struct StatusRowView: View {
     if viewModel.finalStatus.mediaAttachments.isEmpty == false {
       Button("accessibility.status.media-viewer-action.label") {
         HapticManager.shared.fireHaptic(of: .notification(.success))
-        Task {
-          let attachments = viewModel.finalStatus.mediaAttachments
-          await quickLook.prepareFor(urls: attachments.compactMap(\.url), selectedURL: attachments[0].url!)
-        }
+        let attachments = viewModel.finalStatus.mediaAttachments
+        quickLook.prepareFor(selectedMediaAttachment: attachments[0], mediaAttachments: attachments)
       }
     }
 
