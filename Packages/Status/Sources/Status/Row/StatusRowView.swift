@@ -97,7 +97,7 @@ public struct StatusRowView: View {
                     }
                 }
 
-                if isFocused {
+                if isFocused, !isCompact {
                   StatusRowDetailView(viewModel: viewModel)
                 }
               }

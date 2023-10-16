@@ -29,6 +29,7 @@ public struct StatusEmbeddedView: View {
                                        showActions: false))
           .accessibilityLabel(status.content.asRawText)
           .environment(\.isCompact, true)
+          .environment(\.isStatusFocused, false)
       }
       Spacer()
     }
