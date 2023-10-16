@@ -15,6 +15,8 @@ struct IceCubesApp: App {
   @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
 
   @Environment(\.scenePhase) private var scenePhase
+  // FIXME: horizontalSizeClass will always get nil here
+  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
   @State private var appAccountsManager = AppAccountsManager.shared
   @State private var currentInstance = CurrentInstance.shared
@@ -94,7 +96,7 @@ struct IceCubesApp: App {
 
   @ViewBuilder
   private var appView: some View {
-    if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
+    if let horizontalSizeClass, horizontalSizeClass == .regular {
       sidebarView
     } else {
       tabBarView
