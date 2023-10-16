@@ -26,6 +26,8 @@ public struct StatusEditorView: View {
 
   @State private var isDismissAlertPresented: Bool = false
   @State private var isLanguageConfirmPresented = false
+  
+  @State private var editingContainer: StatusEditorMediaContainer?
 
   public init(mode: StatusEditorViewModel.Mode) {
     _viewModel = .init(initialValue: .init(mode: mode))
@@ -47,7 +49,8 @@ public struct StatusEditorView: View {
                      .placeholder(String(localized: "status.editor.text.placeholder"))
                      .setKeyboardType(preferences.isSocialKeyboardEnabled ? .twitter : .default)
                      .padding(.horizontal, .layoutPadding)
-            StatusEditorMediaView(viewModel: viewModel)
+            StatusEditorMediaView(viewModel: viewModel,
+                                  editingContainer: $editingContainer)
             if let status = viewModel.embeddedStatus {
               StatusEmbeddedView(status: status, client: client, routerPath: RouterPath())
                 .padding(.horizontal, .layoutPadding)
@@ -165,6 +168,10 @@ public struct StatusEditorView: View {
           )
         }
       }
+    }
+    .sheet(item: $editingContainer) { container in
+      StatusEditorMediaEditView(viewModel: viewModel, container: container)
+        .preferredColorScheme(theme.selectedScheme == .dark ? .dark : .light)
     }
     .interactiveDismissDisabled(viewModel.shouldDisplayDismissWarning)
     .onChange(of: appAccounts.currentClient) { _, newValue in
