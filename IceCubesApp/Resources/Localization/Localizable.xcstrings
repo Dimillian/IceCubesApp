@@ -8140,8 +8140,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Block %@"
+            "state" : "translated",
+            "value" : "Blokeatu %@"
           }
         },
         "fr" : {
@@ -8259,8 +8259,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Do you want to block this user?"
+            "state" : "translated",
+            "value" : "Erabiltzailea blokeatu nahi duzu?"
           }
         },
         "fr" : {
