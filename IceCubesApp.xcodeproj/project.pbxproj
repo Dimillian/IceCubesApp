@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		026E8A762ADEFB0200BE8A2A /* AppIcons in Frameworks */ = {isa = PBXBuildFile; productRef = 026E8A752ADEFB0200BE8A2A /* AppIcons */; };
 		065FA1FE29866CD600012EA0 /* LRUCache in Frameworks */ = {isa = PBXBuildFile; productRef = 065FA1FD29866CD600012EA0 /* LRUCache */; };
 		065FA20A298675BA00012EA0 /* LRUCache in Frameworks */ = {isa = PBXBuildFile; productRef = 065FA209298675BA00012EA0 /* LRUCache */; };
 		069709A5298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 069709A3298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf */; };
@@ -148,6 +149,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		026E8A742ADEFAA600BE8A2A /* AppIcons */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppIcons; path = Packages/AppIcons; sourceTree = "<group>"; };
 		069709A3298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Atkinson-Hyperlegible-Regular-102.ttf"; sourceTree = "<group>"; };
 		069709A7298C87B5006E4CB5 /* OpenDyslexic-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenDyslexic-Regular.otf"; sourceTree = "<group>"; };
 		069709A9298C9AD7006E4CB5 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F7335EF29674F7100AFF0BA /* QuickLook.framework in Frameworks */,
+				026E8A762ADEFB0200BE8A2A /* AppIcons in Frameworks */,
 				9F7335ED2967463400AFF0BA /* AVKit.framework in Frameworks */,
 				9F2A540C29699705009B2D7C /* RevenueCat in Frameworks */,
 				065FA1FE29866CD600012EA0 /* LRUCache in Frameworks */,
@@ -427,6 +430,7 @@
 				9FAD858929743F7400496AB1 /* IceCubesShareExtension */,
 				9FBFE63A292A715500C250E9 /* Products */,
 				9FBFE64C292A72BD00C250E9 /* Frameworks */,
+				026E8A742ADEFAA600BE8A2A /* AppIcons */,
 				9FE3DB55296FEF5800628CB0 /* AppAccount */,
 				9F398AAC2936005300A889F2 /* Account */,
 				9F7335E82966B3DC00AFF0BA /* Conversations */,
@@ -612,6 +616,7 @@
 				9FE3DB56296FEFCA00628CB0 /* AppAccount */,
 				065FA1FD29866CD600012EA0 /* LRUCache */,
 				DA0B24FA2A6876D50045BDD7 /* SFSafeSymbols */,
+				026E8A752ADEFB0200BE8A2A /* AppIcons */,
 			);
 			productName = IceCubesApp;
 			productReference = 9FBFE639292A715500C250E9 /* IceCubesApp.app */;
@@ -1370,6 +1375,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		026E8A752ADEFB0200BE8A2A /* AppIcons */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppIcons;
+		};
 		065FA1FD29866CD600012EA0 /* LRUCache */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 065FA1FC29866CD600012EA0 /* XCRemoteSwiftPackageReference "LRUCache" */;
