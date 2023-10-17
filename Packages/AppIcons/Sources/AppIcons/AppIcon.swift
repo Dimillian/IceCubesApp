@@ -17,6 +17,14 @@ public enum AppIcon: Int, Identifiable, CaseIterable {
     case alt38, alt39
     case alt40, alt41, alt42
 
+    public init(string: String) {
+        if string == AppIcon.primary.appIconName {
+            self = AppIcon.primary
+        } else {
+            self = .init(rawValue: Int(String(string.replacing("AppIconAlternate", with: "")))!)!
+        }
+    }
+
     /// File name for the actual App Icon asset.
     var appIconName: String {
         switch self {

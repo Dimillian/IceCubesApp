@@ -11,8 +11,6 @@ public class IconController {
     public static let shared = IconController()
 
     public func setAppIcon(_ newAppIcon: AppIcon) {
-        currentIcon = newAppIcon.appIconName // UIApplication.shared.alternateIconName ?? AppIcon.primary.appIconName
-
         switch newAppIcon {
             case .primary:
                 UIApplication.shared.setAlternateIconName(nil)
@@ -23,6 +21,8 @@ public class IconController {
                     }
                 }
         }
+
+        currentIcon = UIApplication.shared.alternateIconName ?? AppIcon.primary.appIconName
     }
 }
 

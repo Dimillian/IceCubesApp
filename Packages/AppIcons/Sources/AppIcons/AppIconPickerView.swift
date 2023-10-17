@@ -6,16 +6,26 @@ public struct AppIconPickerView: View {
     public init() {
     }
 
+    @ViewBuilder
+    private var currentIcon: some View {
+        let iconView = IconView(AppIcon(string: iconController.currentIcon))
+
+        ZStack {
+            iconView
+                .blur(radius: 20)
+                .opacity(0.5)
+            iconView
+                .clipShape(.rect(cornerRadius: 30))
+        }
+        .frame(width: 128, height: 128)
+        .frame(maxWidth: .infinity, alignment: .center)
+    }
+
     public var body: some View {
         List {
             Section("Current Icon") {
                 VStack(alignment: .leading) {
-
-                    IconView(filename: iconController.currentIcon)
-                        .frame(width: 128, height: 128)
-                        .background(.black)
-                        .clipShape(.rect(cornerRadius: 30))
-                        .frame(maxWidth: .infinity, alignment: .center)
+                    currentIcon
                 }
             }
             .listRowBackground(Color.clear)

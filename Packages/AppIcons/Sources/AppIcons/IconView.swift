@@ -8,19 +8,15 @@
 import SwiftUI
 
 struct IconView: View {
-    var filename: String
+    var appIcon: AppIcon
     private let cornerRadius: CGFloat = 20.0
 
-    init(_ icon: AppIcon) {
-        self.filename = icon.iconName
-    }
-
-    init(filename: String) {
-        self.filename = filename
+    init(_ appIcon: AppIcon) {
+        self.appIcon = appIcon
     }
 
     var body: some View {
-        if let uiImage = UIImage(named: filename, in: .module, with: .none) {
+        if let uiImage = UIImage(named: appIcon.iconName, in: .module, with: .none) {
             Image(uiImage: uiImage)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
