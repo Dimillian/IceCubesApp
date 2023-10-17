@@ -9,6 +9,7 @@ import Nuke
 import SwiftData
 import SwiftUI
 import Timeline
+import AppIcons
 
 @MainActor
 struct SettingsTabs: View {
@@ -203,7 +204,11 @@ struct SettingsTabs: View {
   private var appSection: some View {
     Section {
       if !ProcessInfo.processInfo.isiOSAppOnMac {
-        NavigationLink(destination: IconSelectorView()) {
+//        NavigationLink(destination: IconSelectorView()) {
+          NavigationLink(destination: {
+              AppIconPickerView()
+                  .background(theme.primaryBackgroundColor)
+          }) {
           Label {
             Text("settings.app.icon")
           } icon: {
