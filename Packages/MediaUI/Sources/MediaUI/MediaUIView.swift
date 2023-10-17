@@ -16,6 +16,9 @@ public struct MediaUIView: View {
   @State private var isAltAlertDisplayed: Bool = false
   @State private var quickLookURL: URL?
   
+  @State private var isSavingPhoto: Bool = false
+  @State private var didSavePhoto: Bool = false
+  
   public init(selectedAttachment: MediaAttachment, attachments: [MediaAttachment]) {
     self.selectedAttachment = selectedAttachment
     self.attachments = attachments
@@ -77,6 +80,36 @@ public struct MediaUIView: View {
           }
         }
         ToolbarItem(placement: .topBarTrailing) {
+          if let attachment = attachments.first(where: { $0.id == scrollToId}),
+             let url = attachment.url,
+              attachment.supportedType == .image {
+            Button {
+              Task {
+                isSavingPhoto = true
+                if await saveImage(url: url) {
+                  withAnimation {
+                    isSavingPhoto = false
+                    didSavePhoto = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                      didSavePhoto = false
+                    }
+                  }
+                } else {
+                  isSavingPhoto = false
+                }
+              }
+            } label: {
+              if isSavingPhoto {
+                ProgressView()
+              } else if didSavePhoto {
+                Image(systemName: "checkmark.circle.fill")
+              } else {
+                Image(systemName: "arrow.down.circle")
+              }
+            }
+          }
+        }
+        ToolbarItem(placement: .topBarTrailing) {
           if let url = attachments.first(where: { $0.id == scrollToId})?.url {
             ShareLink(item: url)
           }
@@ -117,5 +150,24 @@ public struct MediaUIView: View {
     }
     try data?.write(to: path)
     return path
+  }
+  
+  private func uiimageFor(url: URL) async throws -> UIImage? {
+    var data = ImagePipeline.shared.cache.cachedData(for: .init(url: url))
+    if data == nil {
+      data = try await URLSession.shared.data(from: url).0
+    }
+    if let data {
+      return UIImage(data: data)
+    }
+    return nil
+  }
+  
+  private func saveImage(url: URL) async -> Bool {
+    if let image = try? await uiimageFor(url: url) {
+      UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+      return true
+    }
+    return false
   }
 }
