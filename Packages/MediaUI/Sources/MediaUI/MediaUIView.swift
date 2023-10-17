@@ -33,7 +33,7 @@ public struct MediaUIView: View {
                   .containerRelativeFrame(.horizontal, count: 1, span: 1, spacing: 0)
                   .id(attachment.id)
               case .video, .gifv, .audio:
-                MediaUIAttachmentVideoView(viewModel: .init(url: url))
+                MediaUIAttachmentVideoView(viewModel: .init(url: url, forceAutoPlay: true))
                   .containerRelativeFrame(.horizontal, count: 1, span: 1, spacing: 0)
                   .containerRelativeFrame(.vertical, count: 1, span: 1, spacing: 0)
                   .id(attachment.id)
