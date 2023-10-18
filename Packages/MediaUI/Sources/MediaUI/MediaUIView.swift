@@ -5,7 +5,7 @@ import SwiftUI
 import Models
 import QuickLook
 
-public struct MediaUIView: View {
+public struct MediaUIView: View, @unchecked Sendable {
   @Environment(\.dismiss) private var dismiss
   
   public let selectedAttachment: MediaAttachment
@@ -51,69 +51,7 @@ public struct MediaUIView: View {
       .scrollTargetBehavior(.viewAligned)
       .scrollPosition(id: $scrollToId)
       .toolbar {
-        ToolbarItem(placement: .topBarLeading) {
-          Button {
-            dismiss()
-          } label: {
-            Image(systemName: "xmark.circle")
-          }
-        }
-        ToolbarItem(placement: .topBarTrailing) {
-          if let url = attachments.first(where: { $0.id == scrollToId})?.url {
-            Button {
-              Task {
-                quickLookURL = try? await localPathFor(url: url)
-              }
-            } label: {
-              Image(systemName: "info.circle")
-            }
-          }
-        }
-        ToolbarItem(placement: .topBarTrailing) {
-          if let alt = attachments.first(where: { $0.id == scrollToId})?.description {
-            Button {
-              altTextDisplayed = alt
-              isAltAlertDisplayed = true
-            } label: {
-              Text("status.image.alt-text.abbreviation")
-            }
-          }
-        }
-        ToolbarItem(placement: .topBarTrailing) {
-          if let attachment = attachments.first(where: { $0.id == scrollToId}),
-             let url = attachment.url,
-              attachment.supportedType == .image {
-            Button {
-              Task {
-                isSavingPhoto = true
-                if await saveImage(url: url) {
-                  withAnimation {
-                    isSavingPhoto = false
-                    didSavePhoto = true
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                      didSavePhoto = false
-                    }
-                  }
-                } else {
-                  isSavingPhoto = false
-                }
-              }
-            } label: {
-              if isSavingPhoto {
-                ProgressView()
-              } else if didSavePhoto {
-                Image(systemName: "checkmark.circle.fill")
-              } else {
-                Image(systemName: "arrow.down.circle")
-              }
-            }
-          }
-        }
-        ToolbarItem(placement: .topBarTrailing) {
-          if let url = attachments.first(where: { $0.id == scrollToId})?.url {
-            ShareLink(item: url)
-          }
-        }
+        toolbarView
       }
       .alert("status.editor.media.image-description",
              isPresented: $isAltAlertDisplayed)
@@ -131,6 +69,80 @@ public struct MediaUIView: View {
     }
   }
   
+  @ToolbarContentBuilder
+  private var toolbarView: some ToolbarContent {
+    ToolbarItem(placement: .topBarLeading) {
+      Button {
+        dismiss()
+      } label: {
+        Image(systemName: "xmark.circle")
+      }
+    }
+    ToolbarItem(placement: .topBarTrailing) {
+      if let url = attachments.first(where: { $0.id == scrollToId})?.url {
+        Button {
+          Task {
+            quickLookURL = await localPathFor(url: url)
+          }
+        } label: {
+          Image(systemName: "info.circle")
+        }
+      }
+    }
+    ToolbarItem(placement: .topBarTrailing) {
+      if let alt = attachments.first(where: { $0.id == scrollToId})?.description {
+        Button {
+          altTextDisplayed = alt
+          isAltAlertDisplayed = true
+        } label: {
+          Text("status.image.alt-text.abbreviation")
+        }
+      }
+    }
+    ToolbarItem(placement: .topBarTrailing) {
+      if let attachment = attachments.first(where: { $0.id == scrollToId}),
+         let url = attachment.url,
+          attachment.supportedType == .image {
+        Button {
+          Task {
+            isSavingPhoto = true
+            if await saveImage(url: url) {
+              withAnimation {
+                isSavingPhoto = false
+                didSavePhoto = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                  didSavePhoto = false
+                }
+              }
+            } else {
+              isSavingPhoto = false
+            }
+          }
+        } label: {
+          if isSavingPhoto {
+            ProgressView()
+          } else if didSavePhoto {
+            Image(systemName: "checkmark.circle.fill")
+          } else {
+            Image(systemName: "arrow.down.circle")
+          }
+        }
+      }
+    }
+    ToolbarItem(placement: .topBarTrailing) {
+      if let attachment = attachments.first(where: { $0.id == scrollToId}),
+         let url = attachment.url {
+        switch attachment.supportedType {
+        case .image:
+          let transferable = MediaUIImageTransferable(url: url)
+          ShareLink(item: transferable, preview: .init("status.media.contextmenu.share",
+                                                       image: transferable))
+        default:
+          ShareLink(item: url)
+        }
+      }
+    }
+  }
   
   private var quickLookDir: URL {
     try! FileManager.default.url(for: .cachesDirectory,
@@ -140,23 +152,25 @@ public struct MediaUIView: View {
     .appending(component: "quicklook")
   }
   
-  private func localPathFor(url: URL) async throws -> URL {
+  private func imageData(_ url: URL) async -> Data? {
+    var data = ImagePipeline.shared.cache.cachedData(for: .init(url: url))
+    if data == nil {
+      data = try? await URLSession.shared.data(from: url).0
+    }
+    return data
+  }
+  
+  private func localPathFor(url: URL) async -> URL {
     try? FileManager.default.removeItem(at: quickLookDir)
     try? FileManager.default.createDirectory(at: quickLookDir, withIntermediateDirectories: true)
     let path = quickLookDir.appendingPathComponent(url.lastPathComponent)
-    var data = ImagePipeline.shared.cache.cachedData(for: .init(url: url))
-    if data == nil {
-      data = try await URLSession.shared.data(from: url).0
-    }
-    try data?.write(to: path)
+    let data = await imageData(url)
+    try? data?.write(to: path)
     return path
   }
   
   private func uiimageFor(url: URL) async throws -> UIImage? {
-    var data = ImagePipeline.shared.cache.cachedData(for: .init(url: url))
-    if data == nil {
-      data = try await URLSession.shared.data(from: url).0
-    }
+    let data = await imageData(url)
     if let data {
       return UIImage(data: data)
     }

@@ -17,7 +17,7 @@ import SwiftUI
 
   func preparePlayer(autoPlay: Bool) {
     player = .init(url: url)
-    player?.isMuted = true
+    player?.isMuted = !forceAutoPlay
     player?.audiovisualBackgroundPlaybackPolicy = .pauses
     if autoPlay || forceAutoPlay {
       player?.play()

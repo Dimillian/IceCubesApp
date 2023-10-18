@@ -63,6 +63,11 @@ struct IceCubesApp: App {
           .environment(userPreferences)
           .environment(theme)
         }
+        .fullScreenCover(item: $quickLook.url, content: { url in
+          QuickLookPreview(selectedURL: url, urls: quickLook.urls)
+            .edgesIgnoringSafeArea(.bottom)
+            .background(TransparentBackground())
+        })
         .onChange(of: pushNotificationsService.handledNotification) { _, newValue in
           if newValue != nil {
             pushNotificationsService.handledNotification = nil
