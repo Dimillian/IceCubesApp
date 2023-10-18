@@ -4,34 +4,26 @@
 import PackageDescription
 
 let package = Package(
-  name: "Status",
+  name: "MediaUI",
   defaultLocalization: "en",
   platforms: [
     .iOS(.v17),
   ],
   products: [
     .library(
-      name: "Status",
-      targets: ["Status"]
+      name: "MediaUI",
+      targets: ["MediaUI"]
     ),
   ],
   dependencies: [
-    .package(name: "AppAccount", path: "../AppAccount"),
     .package(name: "Models", path: "../Models"),
-    .package(name: "MediaUI", path: "../MediaUI"),
-    .package(name: "Network", path: "../Network"),
-    .package(name: "Env", path: "../Env"),
     .package(name: "DesignSystem", path: "../DesignSystem"),
   ],
   targets: [
     .target(
-      name: "Status",
+      name: "MediaUI",
       dependencies: [
-        .product(name: "AppAccount", package: "AppAccount"),
         .product(name: "Models", package: "Models"),
-        .product(name: "MediaUI", package: "MediaUI"),
-        .product(name: "Network", package: "Network"),
-        .product(name: "Env", package: "Env"),
         .product(name: "DesignSystem", package: "DesignSystem"),
       ],
       swiftSettings: [

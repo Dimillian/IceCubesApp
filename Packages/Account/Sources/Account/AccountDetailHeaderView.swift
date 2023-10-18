@@ -79,9 +79,8 @@ struct AccountDetailHeaderView: View {
       guard account.haveHeader else {
         return
       }
-      Task {
-        await quickLook.prepareFor(urls: [account.header], selectedURL: account.header)
-      }
+      let attachement = MediaAttachment.imageWith(url: account.header)
+      quickLook.prepareFor(selectedMediaAttachment: attachement, mediaAttachments: [attachement])
     }
     .accessibilityElement(children: .combine)
     .accessibilityAddTraits([.isImage, .isButton])
@@ -110,9 +109,8 @@ struct AccountDetailHeaderView: View {
         guard account.haveAvatar else {
           return
         }
-        Task {
-          await quickLook.prepareFor(urls: [account.avatar], selectedURL: account.avatar)
-        }
+        let attachement = MediaAttachment.imageWith(url: account.avatar)
+        quickLook.prepareFor(selectedMediaAttachment: attachement, mediaAttachments: [attachement])
       }
       .accessibilityElement(children: .combine)
       .accessibilityAddTraits([.isImage, .isButton])

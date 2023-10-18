@@ -5,19 +5,21 @@ import Observation
 import SwiftUI
 
 @MainActor
-@Observable class VideoPlayerViewModel {
+@Observable public class MediaUIAttachmentVideoViewModel {
   var player: AVPlayer?
   private let url: URL
+  let forceAutoPlay: Bool
 
-  init(url: URL) {
+  public init(url: URL, forceAutoPlay: Bool = false) {
     self.url = url
+    self.forceAutoPlay = forceAutoPlay
   }
 
   func preparePlayer(autoPlay: Bool) {
     player = .init(url: url)
     player?.isMuted = true
     player?.audiovisualBackgroundPlaybackPolicy = .pauses
-    if autoPlay {
+    if autoPlay || forceAutoPlay {
       player?.play()
     } else {
       player?.pause()
@@ -27,7 +29,7 @@ import SwiftUI
                                            object: player.currentItem, queue: .main)
     { _ in
       Task { @MainActor [weak self] in
-        if autoPlay {
+        if autoPlay || self?.forceAutoPlay == true {
           self?.play()
         }
       }
@@ -48,20 +50,24 @@ import SwiftUI
   }
 }
 
-struct VideoPlayerView: View {
+public struct MediaUIAttachmentVideoView: View {
   @Environment(\.scenePhase) private var scenePhase
   @Environment(\.isCompact) private var isCompact
   @Environment(UserPreferences.self) private var preferences
   @Environment(Theme.self) private var theme
 
-  @State var viewModel: VideoPlayerViewModel
+  @State var viewModel: MediaUIAttachmentVideoViewModel
+  
+  public init(viewModel: MediaUIAttachmentVideoViewModel) {
+    _viewModel = .init(wrappedValue: viewModel)
+  }
 
-  var body: some View {
+  public var body: some View {
     ZStack {
       VideoPlayer(player: viewModel.player)
         .accessibilityAddTraits(.startsMediaSession)
 
-      if !preferences.autoPlayVideo {
+      if !preferences.autoPlayVideo && !viewModel.forceAutoPlay {
         Image(systemName: "play.fill")
           .font(isCompact ? .body : .largeTitle)
           .foregroundColor(theme.tintColor)
@@ -81,7 +87,7 @@ struct VideoPlayerView: View {
       case .background, .inactive:
         viewModel.pause()
       case .active:
-        if preferences.autoPlayVideo {
+        if preferences.autoPlayVideo || viewModel.forceAutoPlay {
           viewModel.play()
         }
       default:

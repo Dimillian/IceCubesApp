@@ -200,11 +200,7 @@ struct ConversationMessageView: View {
     .frame(height: 200)
     .contentShape(Rectangle())
     .onTapGesture {
-      if let url = attachement.url {
-        Task {
-          await quickLook.prepareFor(urls: [url], selectedURL: url)
-        }
-      }
+      quickLook.prepareFor(selectedMediaAttachment: attachement, mediaAttachments: [attachement])
     }
   }
 

@@ -9,6 +9,7 @@ import RevenueCat
 import Status
 import SwiftUI
 import Timeline
+import MediaUI
 
 @main
 struct IceCubesApp: App {
@@ -54,11 +55,14 @@ struct IceCubesApp: App {
         .environment(watcher)
         .environment(pushNotificationsService)
         .environment(\.isSupporter, isSupporter)
-        .fullScreenCover(item: $quickLook.url, content: { url in
-          QuickLookPreview(selectedURL: url, urls: quickLook.urls)
-            .edgesIgnoringSafeArea(.bottom)
-            .background(TransparentBackground())
-        })
+        .sheet(item: $quickLook.selectedMediaAttachment) { selectedMediaAttachment in
+          MediaUIView(selectedAttachment: selectedMediaAttachment,
+                      attachments: quickLook.mediaAttachments)
+          .presentationBackground(.ultraThinMaterial)
+          .presentationCornerRadius(16)
+          .environment(userPreferences)
+          .environment(theme)
+        }
         .onChange(of: pushNotificationsService.handledNotification) { _, newValue in
           if newValue != nil {
             pushNotificationsService.handledNotification = nil
@@ -265,8 +269,6 @@ struct IceCubesApp: App {
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
-  let themeObserver = ThemeObserverViewController(nibName: nil, bundle: nil)
-
   func application(_: UIApplication,
                    didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool
   {
@@ -298,13 +300,5 @@ class AppDelegate: NSObject, UIApplicationDelegate {
       configuration.delegateClass = SceneDelegate.self
     }
     return configuration
-  }
-}
-
-class ThemeObserverViewController: UIViewController {
-  override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-    super.traitCollectionDidChange(previousTraitCollection)
-
-    print(traitCollection.userInterfaceStyle.rawValue)
   }
 }

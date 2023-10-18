@@ -48,19 +48,12 @@ public struct AppAccountsSelectorView: View {
       labelView
     }
     .sheet(isPresented: $isPresented, content: {
-      if #available(iOS 16.4, *) {
-        accountsView.presentationDetents([.height(preferredHeight), .large])
-          .presentationBackground(.thinMaterial)
-          .presentationCornerRadius(16)
-          .onAppear {
-            refreshAccounts()
-          }
-      } else {
-        accountsView.presentationDetents([.height(preferredHeight), .large])
-          .onAppear {
-            refreshAccounts()
-          }
-      }
+      accountsView.presentationDetents([.height(preferredHeight), .large])
+        .presentationBackground(.thinMaterial)
+        .presentationCornerRadius(16)
+        .onAppear {
+          refreshAccounts()
+        }
     })
     .onChange(of: currentAccount.account?.id) {
       refreshAccounts()
