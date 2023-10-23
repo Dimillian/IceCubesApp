@@ -7,6 +7,6 @@ public extension CGFloat {
   static let scrollToViewHeight: CGFloat = 1
   static let statusColumnsSpacing: CGFloat = 8
   static let secondaryColumnWidth: CGFloat = 400
-  static let sidebarWidth: CGFloat = 80
+  static let sidebarWidth: CGFloat = 90
   static let pollBarHeight: CGFloat = 30
 }

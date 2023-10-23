@@ -16,7 +16,7 @@ public struct AvatarView: View {
       case .account:
         return .init(width: 80, height: 80)
       case .status:
-        if ProcessInfo.processInfo.isiOSAppOnMac {
+        if ProcessInfo.processInfo.isMacCatalystApp {
           return .init(width: 48, height: 48)
         }
         return .init(width: 40, height: 40)

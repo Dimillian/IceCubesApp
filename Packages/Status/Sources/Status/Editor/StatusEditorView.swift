@@ -215,7 +215,7 @@ public struct StatusEditorView: View {
       SoundEffectManager.shared.playSound(of: .tootSent)
       NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
                                       object: nil)
-      if !viewModel.mode.isInShareExtension, !preferences.requestedReview, !ProcessInfo.processInfo.isiOSAppOnMac {
+      if !viewModel.mode.isInShareExtension, !preferences.requestedReview, !ProcessInfo.processInfo.isMacCatalystApp {
         if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
           SKStoreReviewController.requestReview(in: scene)
         }

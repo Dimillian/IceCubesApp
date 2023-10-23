@@ -169,7 +169,7 @@ struct SettingsTabs: View {
   private var otherSections: some View {
     @Bindable var preferences = preferences
     Section("settings.section.other") {
-      if !ProcessInfo.processInfo.isiOSAppOnMac {
+      if !ProcessInfo.processInfo.isMacCatalystApp{
         Picker(selection: $preferences.preferredBrowser) {
           ForEach(PreferredBrowser.allCases, id: \.rawValue) { browser in
             switch browser {
@@ -202,7 +202,7 @@ struct SettingsTabs: View {
 
   private var appSection: some View {
     Section {
-      if !ProcessInfo.processInfo.isiOSAppOnMac {
+      if !ProcessInfo.processInfo.isMacCatalystApp {
         NavigationLink(destination: IconSelectorView()) {
           Label {
             Text("settings.app.icon")

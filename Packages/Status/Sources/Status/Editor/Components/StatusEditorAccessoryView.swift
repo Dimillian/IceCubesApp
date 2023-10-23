@@ -37,7 +37,7 @@ struct StatusEditorAccessoryView: View {
               } label: {
                 Label("status.editor.photo-library", systemImage: "photo")
               }
-              if !ProcessInfo.processInfo.isiOSAppOnMac {
+              if !ProcessInfo.processInfo.isMacCatalystApp {
                 Button {
                   isCameraPickerPresented = true
                 } label: {

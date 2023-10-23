@@ -9,6 +9,7 @@ import SwiftUI
 
 @MainActor
 public struct StatusRowView: View {
+  @Environment(\.openWindow) private var openWindow
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
   @Environment(\.redactionReasons) private var reasons
   @Environment(\.isCompact) private var isCompact: Bool
@@ -208,7 +209,12 @@ public struct StatusRowView: View {
       Button("accessibility.status.media-viewer-action.label") {
         HapticManager.shared.fireHaptic(of: .notification(.success))
         let attachments = viewModel.finalStatus.mediaAttachments
-        quickLook.prepareFor(selectedMediaAttachment: attachments[0], mediaAttachments: attachments)
+        if ProcessInfo.processInfo.isMacCatalystApp {
+          openWindow(value: WindowDestination.mediaViewer(attachments: attachments,
+                                                   selectedAttachment: attachments[0]))
+        } else {
+          quickLook.prepareFor(selectedMediaAttachment: attachments[0], mediaAttachments: attachments)
+        }
       }
     }
 

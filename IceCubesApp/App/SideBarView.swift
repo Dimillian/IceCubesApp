@@ -7,6 +7,8 @@ import SwiftUI
 
 @MainActor
 struct SideBarView<Content: View>: View {
+  @Environment(\.openWindow) private var openWindow
+  
   @Environment(AppAccountsManager.self) private var appAccounts
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(Theme.self) private var theme
@@ -55,7 +57,11 @@ struct SideBarView<Content: View>: View {
 
   private var postButton: some View {
     Button {
-      routerPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
+      if ProcessInfo.processInfo.isMacCatalystApp {
+        openWindow(value: WindowDestination.newStatusEditor(visibility: userPreferences.postVisibility))
+      } else {
+        routerPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
+      }
     } label: {
       Image(systemName: "square.and.pencil")
         .resizable()

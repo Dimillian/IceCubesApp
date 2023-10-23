@@ -8,6 +8,7 @@ import MediaUI
 
 @MainActor
 public struct StatusRowMediaPreviewView: View {
+  @Environment(\.openWindow) private var openWindow
   @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
   @Environment(\.extraLeadingInset) private var extraLeadingInset: CGFloat
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
@@ -88,7 +89,12 @@ public struct StatusRowMediaPreviewView: View {
       if attachments.count == 1, let attachment = attachments.first {
         makeFeaturedImagePreview(attachment: attachment)
           .onTapGesture {
-            quickLook.prepareFor(selectedMediaAttachment: attachment, mediaAttachments: attachments)
+            if ProcessInfo.processInfo.isMacCatalystApp {
+              openWindow(value: WindowDestination.mediaViewer(attachments: attachments,
+                                                              selectedAttachment: attachment))
+            } else {
+              quickLook.prepareFor(selectedMediaAttachment: attachment, mediaAttachments: attachments)
+            }
           }
           .accessibilityElement(children: .ignore)
           .accessibilityLabel(Self.accessibilityLabel(for: attachment))
@@ -272,7 +278,12 @@ public struct StatusRowMediaPreviewView: View {
       // #965: do not create overlapping tappable areas, when multiple images are shown
       .contentShape(Rectangle())
       .onTapGesture {
-        quickLook.prepareFor(selectedMediaAttachment: attachment, mediaAttachments: attachments)
+        if ProcessInfo.processInfo.isMacCatalystApp {
+          openWindow(value: WindowDestination.mediaViewer(attachments: attachments,
+                                                          selectedAttachment: attachment))
+        } else {
+          quickLook.prepareFor(selectedMediaAttachment: attachment, mediaAttachments: attachments)
+        }
       }
       .accessibilityElement(children: .ignore)
       .accessibilityLabel(Self.accessibilityLabel(for: attachment))

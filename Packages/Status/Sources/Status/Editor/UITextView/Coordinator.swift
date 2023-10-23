@@ -45,7 +45,7 @@ extension TextView.Representable {
       textView.allowsEditingTextAttributes = false
       textView.returnKeyType = .default
       textView.allowsEditingTextAttributes = true
-      if ProcessInfo.processInfo.isiOSAppOnMac {
+      if ProcessInfo.processInfo.isMacCatalystApp {
         textView.inlinePredictionType = .no
       }
 

@@ -4,26 +4,15 @@ import SwiftUI
 
 @MainActor
 public extension View {
-  func statusEditorToolbarItem(routerPath: RouterPath, visibility: Models.Visibility) -> some ToolbarContent {
-    ToolbarItem(placement: .navigationBarTrailing) {
-      Button {
-        routerPath.presentedSheet = .newStatusEditor(visibility: visibility)
-        HapticManager.shared.fireHaptic(of: .buttonPress)
-      } label: {
-        Image(systemName: "square.and.pencil")
-          .accessibilityLabel("accessibility.tabs.timeline.new-post.label")
-          .accessibilityInputLabels([
-            LocalizedStringKey("accessibility.tabs.timeline.new-post.label"),
-            LocalizedStringKey("accessibility.tabs.timeline.new-post.inputLabel1"),
-            LocalizedStringKey("accessibility.tabs.timeline.new-post.inputLabel2"),
-          ])
-      }
-    }
+  func statusEditorToolbarItem(routerPath: RouterPath,
+                               visibility: Models.Visibility) -> some ToolbarContent {
+    StatusEditorToolbarItem(visibility: visibility)
   }
 }
 
 @MainActor
 public struct StatusEditorToolbarItem: ToolbarContent {
+  @Environment(\.openWindow) private var openWindow
   @Environment(RouterPath.self) private var routerPath
 
   let visibility: Models.Visibility
@@ -36,8 +25,12 @@ public struct StatusEditorToolbarItem: ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
       Button {
         Task { @MainActor in
-          routerPath.presentedSheet = .newStatusEditor(visibility: visibility)
-          HapticManager.shared.fireHaptic(of: .buttonPress)
+          if ProcessInfo.processInfo.isMacCatalystApp {
+            openWindow(value: WindowDestination.newStatusEditor(visibility: visibility))
+          } else {
+            routerPath.presentedSheet = .newStatusEditor(visibility: visibility)
+            HapticManager.shared.fireHaptic(of: .buttonPress)
+          }
         }
       } label: {
         Image(systemName: "square.and.pencil")

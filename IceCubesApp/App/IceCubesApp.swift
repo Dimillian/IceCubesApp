@@ -37,6 +37,11 @@ struct IceCubesApp: App {
   }
 
   var body: some Scene {
+    appScene
+    otherScenes
+  }
+  
+  private var appScene: some Scene {
     WindowGroup {
       appView
         .applyTheme(theme)
@@ -60,14 +65,8 @@ struct IceCubesApp: App {
                       attachments: quickLook.mediaAttachments)
           .presentationBackground(.ultraThinMaterial)
           .presentationCornerRadius(16)
-          .environment(userPreferences)
-          .environment(theme)
+          .withEnvironments()
         }
-        .fullScreenCover(item: $quickLook.url, content: { url in
-          QuickLookPreview(selectedURL: url, urls: quickLook.urls)
-            .edgesIgnoringSafeArea(.bottom)
-            .background(TransparentBackground())
-        })
         .onChange(of: pushNotificationsService.handledNotification) { _, newValue in
           if newValue != nil {
             pushNotificationsService.handledNotification = nil
@@ -99,6 +98,7 @@ struct IceCubesApp: App {
         watcher.watch(streams: [.user, .direct])
       }
     }
+    
   }
 
   @ViewBuilder
@@ -206,6 +206,27 @@ struct IceCubesApp: App {
       }
     }
     .id(appAccountsManager.currentClient.id)
+  }
+  
+  private var otherScenes: some Scene {
+    WindowGroup(for: WindowDestination.self) { destination in
+      Group {
+        switch destination.wrappedValue {
+        case let .newStatusEditor(visibility):
+          StatusEditorView(mode: .new(visibility: visibility))
+        case let .mediaViewer(attachments, selectedAttachment):
+          MediaUIView(selectedAttachment: selectedAttachment,
+                      attachments: attachments)
+        case .none:
+          EmptyView()
+        }
+      }
+      .withEnvironments()
+      .withModelContainer()
+      .applyTheme(theme)
+    }
+    .defaultSize(width: 600, height: 800)
+    .windowResizability(.automatic)
   }
 
   private func setNewClientsInEnv(client: Client) {

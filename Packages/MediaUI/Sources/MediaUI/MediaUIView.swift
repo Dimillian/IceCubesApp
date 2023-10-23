@@ -71,6 +71,7 @@ public struct MediaUIView: View, @unchecked Sendable {
   
   @ToolbarContentBuilder
   private var toolbarView: some ToolbarContent {
+    #if !targetEnvironment(macCatalyst)
     ToolbarItem(placement: .topBarLeading) {
       Button {
         dismiss()
@@ -78,6 +79,7 @@ public struct MediaUIView: View, @unchecked Sendable {
         Image(systemName: "xmark.circle")
       }
     }
+    #endif
     ToolbarItem(placement: .topBarTrailing) {
       if let url = attachments.first(where: { $0.id == scrollToId})?.url {
         Button {
