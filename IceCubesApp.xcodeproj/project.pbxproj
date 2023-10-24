@@ -30,7 +30,7 @@
 		9F2A540E2969A0B0009B2D7C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F2A540D2969A0B0009B2D7C /* StoreKit.framework */; };
 		9F2A5411296A1429009B2D7C /* PushNotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2A5410296A1429009B2D7C /* PushNotificationsView.swift */; };
 		9F2A5419296AB631009B2D7C /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2A5418296AB631009B2D7C /* NotificationService.swift */; };
-		9F2A541D296AB631009B2D7C /* IceCubesNotifications.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9F2A5416296AB631009B2D7C /* IceCubesNotifications.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9F2A541D296AB631009B2D7C /* IceCubesNotifications.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9F2A5416296AB631009B2D7C /* IceCubesNotifications.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9F2A5424296AB67A009B2D7C /* Env in Frameworks */ = {isa = PBXBuildFile; productRef = 9F2A5423296AB67A009B2D7C /* Env */; };
 		9F2A5426296AB67E009B2D7C /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9F2A5425296AB67E009B2D7C /* KeychainSwift */; };
 		9F2A5428296AB683009B2D7C /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 9F2A5427296AB683009B2D7C /* Models */; };
@@ -67,7 +67,7 @@
 		9FAD85832971BF7200496AB1 /* Secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9FAD85822971BF7200496AB1 /* Secret.plist */; };
 		9FAD858B29743F7400496AB1 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAD858A29743F7400496AB1 /* ShareViewController.swift */; };
 		9FAD858E29743F7400496AB1 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		9FAD859229743F7400496AB1 /* IceCubesShareExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9FAD859229743F7400496AB1 /* IceCubesShareExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9FAD85982974405D00496AB1 /* Status in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD85972974405D00496AB1 /* Status */; };
 		9FAD859A297440CB00496AB1 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD8599297440CB00496AB1 /* KeychainSwift */; };
 		9FAD859C2974422700496AB1 /* AppAccount in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD859B2974422700496AB1 /* AppAccount */; };
@@ -102,7 +102,7 @@
 		E9DF41FC29830FEC0003AAD2 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9DF41FB29830FEC0003AAD2 /* UniformTypeIdentifiers.framework */; };
 		E9DF420129830FEC0003AAD2 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DF420029830FEC0003AAD2 /* ActionRequestHandler.swift */; };
 		E9DF420329830FEC0003AAD2 /* Action.js in Resources */ = {isa = PBXBuildFile; fileRef = E9DF420229830FEC0003AAD2 /* Action.js */; };
-		E9DF420729830FEC0003AAD2 /* IceCubesActionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E9DF41FA29830FEC0003AAD2 /* IceCubesActionExtension.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E9DF420729830FEC0003AAD2 /* IceCubesActionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E9DF41FA29830FEC0003AAD2 /* IceCubesActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		FA31A9AB2A66BF7C00D5F662 /* EditTagGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA31A9AA2A66BF7C00D5F662 /* EditTagGroupView.swift */; };
 		FAD203D02A66D8A80030A7FD /* Symbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD203CF2A66D8A80030A7FD /* Symbols.swift */; };
 /* End PBXBuildFile section */
@@ -833,19 +833,16 @@
 /* Begin PBXTargetDependency section */
 		9F2A541C296AB631009B2D7C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			platformFilter = ios;
 			target = 9F2A5415296AB631009B2D7C /* IceCubesNotifications */;
 			targetProxy = 9F2A541B296AB631009B2D7C /* PBXContainerItemProxy */;
 		};
 		9FAD859129743F7400496AB1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			platformFilter = ios;
 			target = 9FAD858729743F7400496AB1 /* IceCubesShareExtension */;
 			targetProxy = 9FAD859029743F7400496AB1 /* PBXContainerItemProxy */;
 		};
 		E9DF420629830FEC0003AAD2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			platformFilter = ios;
 			target = E9DF41F929830FEC0003AAD2 /* IceCubesActionExtension */;
 			targetProxy = E9DF420529830FEC0003AAD2 /* PBXContainerItemProxy */;
 		};
