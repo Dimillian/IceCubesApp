@@ -10,6 +10,7 @@ import SwiftUI
     @AppStorage("preferred_browser") public var preferredBrowser: PreferredBrowser = .inAppSafari
     @AppStorage("show_translate_button_inline") public var showTranslateButton: Bool = true
     @AppStorage("show_pending_at_bottom") public var pendingShownAtBottom: Bool = false
+    @AppStorage("show_pending_left") public var pendingShownLeft: Bool = false
     @AppStorage("is_open_ai_enabled") public var isOpenAIEnabled: Bool = true
 
     @AppStorage("recently_used_languages") public var recentlyUsedLanguages: [String] = []
@@ -77,6 +78,31 @@ import SwiftUI
   public var pendingShownAtBottom: Bool {
     didSet {
       storage.pendingShownAtBottom = pendingShownAtBottom
+    }
+  }
+  
+  public var pendingShownLeft: Bool {
+    didSet {
+      storage.pendingShownLeft = pendingShownLeft
+    }
+  }
+  
+  public var pendingLocation: Alignment {
+    get {
+      let fromLeft = Locale.current.language.characterDirection == .leftToRight ? pendingShownLeft : !pendingShownLeft
+      if pendingShownAtBottom {
+        if fromLeft {
+          return .bottomLeading
+        } else {
+          return .bottomTrailing
+        }
+      } else {
+        if fromLeft {
+          return .topLeading
+        } else {
+          return .topTrailing
+        }
+      }
     }
   }
 
@@ -430,5 +456,6 @@ import SwiftUI
     collapseLongPosts = storage.collapseLongPosts
     shareButtonBehavior = storage.shareButtonBehavior
     pendingShownAtBottom = storage.pendingShownAtBottom
+      pendingShownLeft = storage.pendingShownLeft
   }
 }

@@ -204,6 +204,7 @@ struct DisplaySettingsView: View {
       }
       Toggle("settings.display.translate-button", isOn: $userPreferences.showTranslateButton)
       Toggle("settings.display.pending-at-bottom", isOn: $userPreferences.pendingShownAtBottom)
+      Toggle("settings.display.pending-left", isOn: $userPreferences.pendingShownLeft)
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }

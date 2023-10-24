@@ -32,23 +32,20 @@ struct PendingStatusesObserverView: View {
   @Environment(UserPreferences.self) private var preferences
   var body: some View {
     if observer.pendingStatusesCount > 0 {
-      HStack(spacing: 6) {
-        Spacer()
-        Button {
-          observer.scrollToIndex?(observer.pendingStatusesCount)
-        } label: {
-          Text("\(observer.pendingStatusesCount)")
-            // Accessibility: this results in a frame with a size of at least 44x44 at regular font size
-            .frame(minWidth: 30, minHeight: 30)
-        }
-        .accessibilityLabel("accessibility.tabs.timeline.unread-posts.label-\(observer.pendingStatusesCount)")
-        .accessibilityHint("accessibility.tabs.timeline.unread-posts.hint")
-        .buttonStyle(.bordered)
-        .background(.thinMaterial)
-        .cornerRadius(8)
+      Button {
+        observer.scrollToIndex?(observer.pendingStatusesCount)
+      } label: {
+        Text("\(observer.pendingStatusesCount)")
+          // Accessibility: this results in a frame with a size of at least 44x44 at regular font size
+          .frame(minWidth: 30, minHeight: 30)
       }
+      .accessibilityLabel("accessibility.tabs.timeline.unread-posts.label-\(observer.pendingStatusesCount)")
+      .accessibilityHint("accessibility.tabs.timeline.unread-posts.hint")
+      .buttonStyle(.bordered)
+      .background(.thinMaterial)
+      .cornerRadius(8)
       .padding(12)
-      .frame(maxHeight: .infinity, alignment: preferences.pendingShownAtBottom ? .bottom : .top)
+      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: preferences.pendingLocation)
     }
   }
 }

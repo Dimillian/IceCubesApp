@@ -40339,6 +40339,23 @@
         }
       }
     },
+    "settings.display.pending-left" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ungelesene-Button am linken Rand anzeigen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Pending Button on the Left"
+          }
+        }
+      }
+    },
     "settings.display.restore" : {
       "localizations" : {
         "be" : {
