@@ -12,6 +12,7 @@ struct AccountDetailHeaderView: View {
     static let headerHeight: CGFloat = 200
   }
 
+  @Environment(\.openWindow) private var openWindow
   @Environment(Theme.self) private var theme
   @Environment(QuickLook.self) private var quickLook
   @Environment(RouterPath.self) private var routerPath
@@ -80,7 +81,13 @@ struct AccountDetailHeaderView: View {
         return
       }
       let attachement = MediaAttachment.imageWith(url: account.header)
-      quickLook.prepareFor(selectedMediaAttachment: attachement, mediaAttachments: [attachement])
+      
+      if ProcessInfo.processInfo.isMacCatalystApp {
+        openWindow(value: WindowDestination.mediaViewer(attachments: [attachement],
+                                                        selectedAttachment: attachement))
+      } else {
+        quickLook.prepareFor(selectedMediaAttachment: attachement, mediaAttachments: [attachement])
+      }
     }
     .accessibilityElement(children: .combine)
     .accessibilityAddTraits([.isImage, .isButton])
@@ -110,7 +117,12 @@ struct AccountDetailHeaderView: View {
           return
         }
         let attachement = MediaAttachment.imageWith(url: account.avatar)
-        quickLook.prepareFor(selectedMediaAttachment: attachement, mediaAttachments: [attachement])
+        if ProcessInfo.processInfo.isMacCatalystApp {
+          openWindow(value: WindowDestination.mediaViewer(attachments: [attachement],
+                                                          selectedAttachment: attachement))
+        } else {
+          quickLook.prepareFor(selectedMediaAttachment: attachement, mediaAttachments: [attachement])
+        }
       }
       .accessibilityElement(children: .combine)
       .accessibilityAddTraits([.isImage, .isButton])

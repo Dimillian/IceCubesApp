@@ -7,6 +7,7 @@ import SwiftUI
 
 @MainActor
 struct ConversationMessageView: View {
+  @Environment(\.openWindow) private var openWindow
   @Environment(QuickLook.self) private var quickLook
   @Environment(RouterPath.self) private var routerPath
   @Environment(CurrentAccount.self) private var currentAccount
@@ -200,7 +201,12 @@ struct ConversationMessageView: View {
     .frame(height: 200)
     .contentShape(Rectangle())
     .onTapGesture {
-      quickLook.prepareFor(selectedMediaAttachment: attachement, mediaAttachments: [attachement])
+      if ProcessInfo.processInfo.isMacCatalystApp {
+        openWindow(value: WindowDestination.mediaViewer(attachments: [attachement],
+                                                        selectedAttachment: attachement))
+      } else {
+        quickLook.prepareFor(selectedMediaAttachment: attachement, mediaAttachments: [attachement])
+      }
     }
   }
 

@@ -16,6 +16,7 @@ struct IceCubesApp: App {
   @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
 
   @Environment(\.scenePhase) private var scenePhase
+  @Environment(\.openWindow) private var openWindow
 
   @State private var appAccountsManager = AppAccountsManager.shared
   @State private var currentInstance = CurrentInstance.shared
@@ -42,7 +43,7 @@ struct IceCubesApp: App {
   }
   
   private var appScene: some Scene {
-    WindowGroup {
+    WindowGroup(id: "MainWindow") {
       appView
         .applyTheme(theme)
         .onAppear {
@@ -98,7 +99,6 @@ struct IceCubesApp: App {
         watcher.watch(streams: [.user, .direct])
       }
     }
-    
   }
 
   @ViewBuilder
@@ -273,9 +273,18 @@ struct IceCubesApp: App {
   @CommandsBuilder
   private var appMenu: some Commands {
     CommandGroup(replacing: .newItem) {
-      Button("menu.new-post") {
-        sidebarRouterPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
+      Button("menu.new-window") {
+        openWindow(id: "MainWindow")
       }
+      .keyboardShortcut("n", modifiers: .shift)
+      Button("menu.new-post") {
+        if ProcessInfo.processInfo.isMacCatalystApp {
+          openWindow(value: WindowDestination.newStatusEditor(visibility: userPreferences.postVisibility))
+        } else {
+          sidebarRouterPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
+        }
+      }
+      .keyboardShortcut("n", modifiers: .command)
     }
     CommandGroup(replacing: .textFormatting) {
       Menu("menu.font") {

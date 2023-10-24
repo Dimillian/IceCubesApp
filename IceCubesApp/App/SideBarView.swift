@@ -69,7 +69,6 @@ struct SideBarView<Content: View>: View {
         .frame(width: 20, height: 30)
     }
     .buttonStyle(.borderedProminent)
-    .keyboardShortcut("n", modifiers: .command)
   }
 
   private func makeAccountButton(account: AppAccount, showBadge: Bool) -> some View {
