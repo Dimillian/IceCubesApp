@@ -49,7 +49,6 @@ public struct StatusRowCardView: View {
           if let imageURL = card.image, !isInCaptureMode {
             GeometryReader { proxy in
               let width = imageWidthFor(proxy: proxy)
-              let processors: [ImageProcessing] = [.resize(size: .init(width: width, height: imageHeight))]
               LazyImage(url: imageURL) { state in
                 if let image = state.image {
                   image
@@ -64,7 +63,6 @@ public struct StatusRowCardView: View {
                     .frame(height: imageHeight)
                 }
               }
-              .processors(processors)
               // This image is decorative
               .accessibilityHidden(true)
             }

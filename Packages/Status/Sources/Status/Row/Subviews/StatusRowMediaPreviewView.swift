@@ -218,7 +218,6 @@ public struct StatusRowMediaPreviewView: View {
           switch type {
           case .image:
             let width = isCompact ? imageMaxHeight : proxy.frame(in: .local).width
-            let processors: [ImageProcessing] = [.resize(size: .init(width: width, height: imageMaxHeight))]
             ZStack(alignment: .bottomTrailing) {
               LazyImage(url: attachment.previewUrl ?? attachment.url) { state in
                 if let image = state.image {
@@ -240,7 +239,6 @@ public struct StatusRowMediaPreviewView: View {
                     .frame(maxWidth: width)
                 }
               }
-              .processors(processors)
               if sensitive, !isInCaptureMode {
                 cornerSensitiveButton
               }
