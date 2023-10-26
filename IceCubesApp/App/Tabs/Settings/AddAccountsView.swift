@@ -13,6 +13,7 @@ import SwiftUI
 struct AddAccountView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(\.scenePhase) private var scenePhase
+  @Environment(\.openURL) private var openURL
 
   @Environment(AppAccountsManager.self) private var appAccountsManager
   @Environment(CurrentAccount.self) private var currentAccount
@@ -145,9 +146,11 @@ struct AddAccountView: View {
           isSigninIn = false
         }
       }
+      #if !targetEnvironment(macCatalyst)
       .sheet(item: $oauthURL, content: { url in
         SafariView(url: url)
       })
+      #endif
     }
   }
 
@@ -230,7 +233,11 @@ struct AddAccountView: View {
     do {
       signInClient = .init(server: sanitizedName)
       if let oauthURL = try await signInClient?.oauthURL() {
-        self.oauthURL = oauthURL
+        if ProcessInfo.processInfo.isMacCatalystApp {
+          openURL(oauthURL)
+        } else {
+          self.oauthURL = oauthURL
+        }
       } else {
         isSigninIn = false
       }
