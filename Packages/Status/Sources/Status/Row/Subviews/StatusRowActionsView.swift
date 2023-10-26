@@ -11,6 +11,7 @@ struct StatusRowActionsView: View {
   @Environment(StatusDataController.self) private var statusDataController
   @Environment(UserPreferences.self) private var userPreferences
 
+  @Environment(\.openWindow) private var openWindow
   @Environment(\.isStatusFocused) private var isFocused
 
   var viewModel: StatusRowViewModel
@@ -204,7 +205,11 @@ struct StatusRowActionsView: View {
       switch action {
       case .respond:
         SoundEffectManager.shared.playSound(of: .share)
-        viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)
+        if ProcessInfo.processInfo.isMacCatalystApp {
+          openWindow(value: WindowDestination.replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status))
+        } else {
+          viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)
+        }
       case .favorite:
         SoundEffectManager.shared.playSound(of: .favorite)
         await statusDataController.toggleFavorite(remoteStatus: viewModel.localStatusId)

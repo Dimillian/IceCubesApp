@@ -28,15 +28,9 @@ public enum RouterDestination: Hashable {
 public enum WindowDestination: Hashable, Codable {
   case newStatusEditor(visibility: Models.Visibility)
   case mediaViewer(attachments: [MediaAttachment], selectedAttachment: MediaAttachment)
-  
-  var initialSize: CGSize {
-    switch self {
-    case .newStatusEditor:
-      return .init(width: 500, height: 700)
-    case .mediaViewer:
-      return .init(width: 800, height: 600)
-    }
-  }
+  case editStatusEditor(status: Status)
+  case replyToStatusEditor(status: Status)
+  case quoteStatusEditor(status: Status)
 }
 
 public enum SheetDestination: Identifiable {

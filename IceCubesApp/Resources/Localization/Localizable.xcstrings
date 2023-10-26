@@ -30068,6 +30068,28 @@
         }
       }
     },
+    "menu.timeline" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Timeline"
+          }
+        }
+      }
+    },
+    "menu.timeline.refresh" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jump to Latest"
+          }
+        }
+      }
+    },
     "notifications-others-count %lld" : {
       "extractionState" : "manual",
       "localizations" : {

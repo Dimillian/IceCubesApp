@@ -89,7 +89,7 @@ public struct StatusEditorView: View {
         viewModel.prepareStatusText()
         if !client.isAuth {
           dismiss()
-          NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
+          NotificationCenter.default.post(name: .shareSheetClose,
                                           object: nil)
         }
 
@@ -141,7 +141,7 @@ public struct StatusEditorView: View {
               isDismissAlertPresented = true
             } else {
               dismiss()
-              NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
+              NotificationCenter.default.post(name: .shareSheetClose,
                                               object: nil)
             }
           } label: {
@@ -154,13 +154,13 @@ public struct StatusEditorView: View {
             actions: {
               Button("status.draft.delete", role: .destructive) {
                 dismiss()
-                NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
+                NotificationCenter.default.post(name: .shareSheetClose,
                                                 object: nil)
               }
               Button("status.draft.save") {
                 context.insert(Draft(content: viewModel.statusText.string))
                 dismiss()
-                NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
+                NotificationCenter.default.post(name: .shareSheetClose,
                                                 object: nil)
               }
               Button("action.cancel", role: .cancel) {}
@@ -213,7 +213,7 @@ public struct StatusEditorView: View {
     if status != nil {
       dismiss()
       SoundEffectManager.shared.playSound(of: .tootSent)
-      NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
+      NotificationCenter.default.post(name: .shareSheetClose,
                                       object: nil)
       if !viewModel.mode.isInShareExtension, !preferences.requestedReview, !ProcessInfo.processInfo.isMacCatalystApp {
         if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {

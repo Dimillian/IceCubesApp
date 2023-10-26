@@ -7,6 +7,7 @@ import SwiftUI
 @MainActor
 struct StatusRowContextMenu: View {
   @Environment(\.displayScale) var displayScale
+  @Environment(\.openWindow) var openWindow
 
   @Environment(Client.self) private var client
   @Environment(SceneDelegate.self) private var sceneDelegate
@@ -14,6 +15,7 @@ struct StatusRowContextMenu: View {
   @Environment(CurrentAccount.self) private var account
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(StatusDataController.self) private var statusDataController
+  @Environment(QuickLook.self) private var quickLook
 
   var viewModel: StatusRowViewModel
 
@@ -51,12 +53,20 @@ struct StatusRowContextMenu: View {
               systemImage: "bookmark")
       }
       Button {
-        viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
+        if ProcessInfo.processInfo.isMacCatalystApp {
+          openWindow(value: WindowDestination.replyToStatusEditor(status: viewModel.status))
+        } else {
+          viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
+        }
       } label: {
         Label("status.action.reply", systemImage: "arrowshape.turn.up.left")
       }
       Button {
-        viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
+        if ProcessInfo.processInfo.isMacCatalystApp {
+          openWindow(value: WindowDestination.quoteStatusEditor(status: viewModel.status))
+        } else {
+          viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
+        }
       } label: {
         Label("status.action.quote", systemImage: "quote.bubble")
       }
@@ -91,7 +101,7 @@ struct StatusRowContextMenu: View {
           .environment(account)
           .environment(currentInstance)
           .environment(SceneDelegate())
-          .environment(QuickLook())
+          .environment(quickLook)
           .environment(viewModel.client)
           .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
           .foregroundColor(Theme.shared.labelColor)

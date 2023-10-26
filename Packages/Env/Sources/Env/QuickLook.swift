@@ -7,7 +7,9 @@ import QuickLook
   public var selectedMediaAttachment: MediaAttachment?
   public var mediaAttachments: [MediaAttachment] = []
   
-  public init() {}
+  public static let shared = QuickLook()
+  
+  private init() {}
   
   public func prepareFor(selectedMediaAttachment: MediaAttachment, mediaAttachments: [MediaAttachment]) {
     self.selectedMediaAttachment = selectedMediaAttachment

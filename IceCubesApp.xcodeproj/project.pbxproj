@@ -80,6 +80,10 @@
 		9FAE4ACE29379A5A00772766 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAE4ACD29379A5A00772766 /* KeychainSwift */; };
 		9FB143D12983104700A27BB1 /* glass.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9F2A542B296B1177009B2D7C /* glass.caf */; };
 		9FB143D22983104A00A27BB1 /* glass.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9F2A542D296B1CC0009B2D7C /* glass.wav */; };
+		9FB183222AE9268800BBB692 /* IceCubesApp+Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB183212AE9268800BBB692 /* IceCubesApp+Menu.swift */; };
+		9FB183252AE926E900BBB692 /* IceCubesApp+Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB183242AE926E900BBB692 /* IceCubesApp+Sidebar.swift */; };
+		9FB183272AE9279F00BBB692 /* IceCubesApp+Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB183262AE9279F00BBB692 /* IceCubesApp+Tabbar.swift */; };
+		9FB183292AE9449100BBB692 /* IceCubesApp+Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB183282AE9449100BBB692 /* IceCubesApp+Scene.swift */; };
 		9FBFE63D292A715500C250E9 /* IceCubesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBFE63C292A715500C250E9 /* IceCubesApp.swift */; };
 		9FBFE64E292A72BD00C250E9 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 9FBFE64D292A72BD00C250E9 /* Network */; };
 		9FD34823293D06E800DB0EE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FD34822293D06E800DB0EE9 /* Assets.xcassets */; };
@@ -214,6 +218,10 @@
 		9FAD85CE2975B68900496AB1 /* SideBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarView.swift; sourceTree = "<group>"; };
 		9FAE4AC8293774FF00772766 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9FAE4ACA293783B000772766 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
+		9FB183212AE9268800BBB692 /* IceCubesApp+Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IceCubesApp+Menu.swift"; sourceTree = "<group>"; };
+		9FB183242AE926E900BBB692 /* IceCubesApp+Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IceCubesApp+Sidebar.swift"; sourceTree = "<group>"; };
+		9FB183262AE9279F00BBB692 /* IceCubesApp+Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IceCubesApp+Tabbar.swift"; sourceTree = "<group>"; };
+		9FB183282AE9449100BBB692 /* IceCubesApp+Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IceCubesApp+Scene.swift"; sourceTree = "<group>"; };
 		9FBFE639292A715500C250E9 /* IceCubesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IceCubesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FBFE63C292A715500C250E9 /* IceCubesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceCubesApp.swift; sourceTree = "<group>"; };
 		9FBFE642292A715600C250E9 /* IceCubesApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IceCubesApp.entitlements; sourceTree = "<group>"; };
@@ -337,9 +345,9 @@
 		9F398AB429360A5800A889F2 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				9FB183232AE926BB00BBB692 /* Main */,
 				9F654BF0299AC46200D27FA5 /* Report */,
 				9FAE4AC9293783A200772766 /* Tabs */,
-				9FBFE63C292A715500C250E9 /* IceCubesApp.swift */,
 				9F398AA52935FE8A00A889F2 /* AppRegistry.swift */,
 				639CDF9B296AC82F00C35E58 /* SafariRouter.swift */,
 				9FAD85CE2975B68900496AB1 /* SideBarView.swift */,
@@ -416,6 +424,18 @@
 				9F4A48182976B21900A1A038 /* ProfileTab.swift */,
 			);
 			path = Tabs;
+			sourceTree = "<group>";
+		};
+		9FB183232AE926BB00BBB692 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				9FBFE63C292A715500C250E9 /* IceCubesApp.swift */,
+				9FB183212AE9268800BBB692 /* IceCubesApp+Menu.swift */,
+				9FB183242AE926E900BBB692 /* IceCubesApp+Sidebar.swift */,
+				9FB183262AE9279F00BBB692 /* IceCubesApp+Tabbar.swift */,
+				9FB183282AE9449100BBB692 /* IceCubesApp+Scene.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		9FBFE630292A715500C250E9 = {
@@ -791,16 +811,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				9FE151A6293C90F900E9683D /* IconSelectorView.swift in Sources */,
+				9FB183222AE9268800BBB692 /* IceCubesApp+Menu.swift in Sources */,
+				9FB183252AE926E900BBB692 /* IceCubesApp+Sidebar.swift in Sources */,
 				9F7D939A29805DBD00EE6B7A /* AccountSettingView.swift in Sources */,
 				069709AA298C9AD7006E4CB5 /* AboutView.swift in Sources */,
 				9F2B92FC295DA94500DE16D0 /* InstanceInfoView.swift in Sources */,
 				C9B22677297F6C2E001F9EFE /* ContentSettingsView.swift in Sources */,
 				9FA6FD6229C04A8800E2312C /* TranslationSettingsView.swift in Sources */,
+				9FB183272AE9279F00BBB692 /* IceCubesApp+Tabbar.swift in Sources */,
 				9F35DB4C2952005C00B3281A /* MessagesTab.swift in Sources */,
 				9FAD85CF2975B68900496AB1 /* SideBarView.swift in Sources */,
 				9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */,
 				9F7335F92968576500AFF0BA /* DisplaySettingsView.swift in Sources */,
 				9F2A540729699698009B2D7C /* SupportAppView.swift in Sources */,
+				9FB183292AE9449100BBB692 /* IceCubesApp+Scene.swift in Sources */,
 				9F2B92F6295AE04800DE16D0 /* Tabs.swift in Sources */,
 				FA31A9AB2A66BF7C00D5F662 /* EditTagGroupView.swift in Sources */,
 				FAD203D02A66D8A80030A7FD /* Symbols.swift in Sources */,
@@ -891,7 +915,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.9.3;
+				MARKETING_VERSION = 1.9.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesNotifications";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -925,7 +949,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.9.3;
+				MARKETING_VERSION = 1.9.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesNotifications";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -960,7 +984,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.9.3;
+				MARKETING_VERSION = 1.9.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesShareExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -994,7 +1018,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.9.3;
+				MARKETING_VERSION = 1.9.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesShareExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1174,7 +1198,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.9.3;
+				MARKETING_VERSION = 1.9.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -1228,7 +1252,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.9.3;
+				MARKETING_VERSION = 1.9.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
@@ -1263,7 +1287,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.9.3;
+				MARKETING_VERSION = 1.9.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesActionExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1298,7 +1322,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.9.3;
+				MARKETING_VERSION = 1.9.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesActionExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;

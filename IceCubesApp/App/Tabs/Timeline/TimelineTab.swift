@@ -98,6 +98,21 @@ struct TimelineTab: View {
         selectedTagGroup = nil
       }
     }
+    .onReceive(NotificationCenter.default.publisher(for: .refreshTimeline)) { _ in
+      timeline = .latest
+    }
+    .onReceive(NotificationCenter.default.publisher(for: .trendingTimeline)) { _ in
+      timeline = .trending
+    }
+    .onReceive(NotificationCenter.default.publisher(for: .localTimeline)) { _ in
+      timeline = .local
+    }
+    .onReceive(NotificationCenter.default.publisher(for: .federatedTimeline)) { _ in
+      timeline = .federated
+    }
+    .onReceive(NotificationCenter.default.publisher(for: .homeTimeline)) { _ in
+      timeline = .home
+    }
     .withSafariRouter()
     .environment(routerPath)
   }
@@ -110,7 +125,6 @@ struct TimelineTab: View {
       } label: {
         Label(TimelineFilter.latest.localizedTitle(), systemImage: TimelineFilter.latest.iconName() ?? "")
       }
-      .keyboardShortcut("r", modifiers: .command)
       Divider()
     }
     ForEach(TimelineFilter.availableTimeline(client: client), id: \.self) { timeline in

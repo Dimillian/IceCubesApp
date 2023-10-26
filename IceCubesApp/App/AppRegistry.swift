@@ -10,6 +10,7 @@ import Models
 import Status
 import SwiftUI
 import Timeline
+import MediaUI
 
 @MainActor
 extension View {
@@ -130,6 +131,7 @@ extension View {
       .environment(AppAccountsManager.shared)
       .environment(PushNotificationsService.shared)
       .environment(AppAccountsManager.shared.currentClient)
+      .environment(QuickLook.shared)
   }
 
   func withModelContainer() -> some View {

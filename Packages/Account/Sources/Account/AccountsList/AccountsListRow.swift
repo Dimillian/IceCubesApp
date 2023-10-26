@@ -26,6 +26,7 @@ public struct AccountsListRow: View {
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(RouterPath.self) private var routerPath
   @Environment(Client.self) private var client
+  @Environment(QuickLook.self) private var quickLook
 
   @State var viewModel: AccountsListRowViewModel
 
@@ -122,7 +123,7 @@ public struct AccountsListRow: View {
       .environment(theme)
       .environment(currentAccount)
       .environment(client)
-      .environment(QuickLook())
+      .environment(quickLook)
       .environment(routerPath)
     }
   }
