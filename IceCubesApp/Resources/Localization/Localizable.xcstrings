@@ -30034,7 +30034,7 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "新嘟文"
           }
         },
@@ -30153,7 +30153,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "New Window"
+            "value" : "新建窗口"
           }
         },
         "zh-Hant" : {
