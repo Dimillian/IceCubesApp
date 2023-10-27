@@ -19,6 +19,7 @@ public struct StatusEditorView: View {
   @Environment(Client.self) private var client
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(\.dismiss) private var dismiss
+  @Environment(\.dismissWindow) private var dismissWindow
   @Environment(\.modelContext) private var context
 
   @State private var viewModel: StatusEditorViewModel
@@ -88,7 +89,7 @@ public struct StatusEditorView: View {
         viewModel.preferences = preferences
         viewModel.prepareStatusText()
         if !client.isAuth {
-          dismiss()
+          close()
           NotificationCenter.default.post(name: .shareSheetClose,
                                           object: nil)
         }
@@ -140,7 +141,7 @@ public struct StatusEditorView: View {
             if viewModel.shouldDisplayDismissWarning {
               isDismissAlertPresented = true
             } else {
-              dismiss()
+              close()
               NotificationCenter.default.post(name: .shareSheetClose,
                                               object: nil)
             }
@@ -153,13 +154,13 @@ public struct StatusEditorView: View {
             isPresented: $isDismissAlertPresented,
             actions: {
               Button("status.draft.delete", role: .destructive) {
-                dismiss()
+                close()
                 NotificationCenter.default.post(name: .shareSheetClose,
                                                 object: nil)
               }
               Button("status.draft.save") {
                 context.insert(Draft(content: viewModel.statusText.string))
-                dismiss()
+                close()
                 NotificationCenter.default.post(name: .shareSheetClose,
                                                 object: nil)
               }
@@ -211,7 +212,7 @@ public struct StatusEditorView: View {
   private func postStatus() async {
     let status = await viewModel.postStatus()
     if status != nil {
-      dismiss()
+      close()
       SoundEffectManager.shared.playSound(of: .tootSent)
       NotificationCenter.default.post(name: .shareSheetClose,
                                       object: nil)
@@ -287,6 +288,14 @@ public struct StatusEditorView: View {
         RoundedRectangle(cornerRadius: 8)
           .stroke(theme.tintColor, lineWidth: 1)
       )
+    }
+  }
+  
+  private func close() {
+    if ProcessInfo.processInfo.isMacCatalystApp {
+      dismissWindow()
+    } else {
+      dismiss()
     }
   }
 }
