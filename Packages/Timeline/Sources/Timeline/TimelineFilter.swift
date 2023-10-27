@@ -151,8 +151,8 @@ public enum TimelineFilter: Hashable, Equatable {
       }
     case let .tagGroup(_, tags):
       var tags = tags
-      tags.removeFirst()
-      return Timelines.hashtag(tag: tags.first ?? "", additional: tags, maxId: maxId)
+      let tag = tags.removeFirst()
+      return Timelines.hashtag(tag: tag, additional: tags, maxId: maxId)
     }
   }
 }
