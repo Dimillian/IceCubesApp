@@ -163,7 +163,11 @@ struct StatusRowContextMenu: View {
         }
         if currentInstance.isEditSupported {
           Button {
-            viewModel.routerPath.presentedSheet = .editStatusEditor(status: viewModel.status.reblogAsAsStatus ?? viewModel.status)
+            if ProcessInfo.processInfo.isMacCatalystApp {
+              openWindow(value: WindowDestination.editStatusEditor(status: viewModel.status.reblogAsAsStatus ?? viewModel.status))
+            } else {
+              viewModel.routerPath.presentedSheet = .editStatusEditor(status: viewModel.status.reblogAsAsStatus ?? viewModel.status)
+            }
           } label: {
             Label("status.action.edit", systemImage: "pencil")
           }
