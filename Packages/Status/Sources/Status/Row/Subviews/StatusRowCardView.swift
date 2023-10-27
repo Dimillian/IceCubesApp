@@ -47,9 +47,8 @@ public struct StatusRowCardView: View {
       if let title = card.title, let url = URL(string: card.url) {
         VStack(alignment: .leading) {
           if let imageURL = card.image, !isInCaptureMode {
-            GeometryReader { proxy in
-              let width = imageWidthFor(proxy: proxy)
-              LazyImage(url: imageURL) { state in
+                LazyResizableImage(url: imageURL) { state, proxy in
+                let width = imageWidthFor(proxy: proxy)
                 if let image = state.image {
                   image
                     .resizable()
@@ -65,7 +64,6 @@ public struct StatusRowCardView: View {
               }
               // This image is decorative
               .accessibilityHidden(true)
-            }
             .frame(height: imageHeight)
           }
           HStack {
@@ -116,4 +114,35 @@ public struct StatusRowCardView: View {
     }
     .buttonStyle(.plain)
   }
+}
+
+
+struct LazyResizableImage<Content: View>: View {
+    init(url: URL?, @ViewBuilder content: @escaping (LazyImageState, GeometryProxy) -> Content) {
+        self.imageURL = url
+        self.content = content
+    }
+
+    let imageURL: URL?
+    @State private var resizeProcessor: ImageProcessors.Resize?
+    @State private var debouncedTask: Task<Void, Never>?
+
+    @ViewBuilder
+    private var content: (LazyImageState, _ proxy: GeometryProxy) -> Content
+
+    var body: some View {
+        GeometryReader { proxy in
+            LazyImage(url: imageURL) { state in
+                content(state, proxy)
+            }
+            .processors([resizeProcessor == nil ? .resize(size: proxy.size) : resizeProcessor!])
+            .onChange(of: proxy.size, initial: true) { oldValue, newValue in
+                debouncedTask?.cancel()
+                debouncedTask = Task {
+                    do { try await Task.sleep(for: .milliseconds(200)) } catch { return }
+                    resizeProcessor = .resize(size: newValue)
+                }
+            }
+        }
+    }
 }

@@ -217,9 +217,9 @@ public struct StatusRowMediaPreviewView: View {
         GeometryReader { proxy in
           switch type {
           case .image:
-            let width = isCompact ? imageMaxHeight : proxy.frame(in: .local).width
             ZStack(alignment: .bottomTrailing) {
-              LazyImage(url: attachment.previewUrl ?? attachment.url) { state in
+              LazyResizableImage(url: attachment.previewUrl ?? attachment.url) { state, proxy in
+                let width = isCompact ? imageMaxHeight : proxy.frame(in: .local).width
                 if let image = state.image {
                   image
                     .resizable()
