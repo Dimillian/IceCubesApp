@@ -30010,7 +30010,7 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Nowy post"
           }
         },
@@ -30129,7 +30129,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "New Window"
+            "value" : "Nowe okno"
           }
         },
         "pt-BR" : {
