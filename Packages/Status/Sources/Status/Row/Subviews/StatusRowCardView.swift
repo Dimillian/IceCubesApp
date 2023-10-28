@@ -115,34 +115,3 @@ public struct StatusRowCardView: View {
     .buttonStyle(.plain)
   }
 }
-
-
-struct LazyResizableImage<Content: View>: View {
-  init(url: URL?, @ViewBuilder content: @escaping (LazyImageState, GeometryProxy) -> Content) {
-    self.imageURL = url
-    self.content = content
-  }
-
-  let imageURL: URL?
-  @State private var resizeProcessor: ImageProcessors.Resize?
-  @State private var debouncedTask: Task<Void, Never>?
-
-  @ViewBuilder
-  private var content: (LazyImageState, _ proxy: GeometryProxy) -> Content
-
-  var body: some View {
-    GeometryReader { proxy in
-      LazyImage(url: imageURL) { state in
-        content(state, proxy)
-      }
-      .processors([resizeProcessor == nil ? .resize(size: proxy.size) : resizeProcessor!])
-      .onChange(of: proxy.size, initial: true) { oldValue, newValue in
-        debouncedTask?.cancel()
-        debouncedTask = Task {
-          do { try await Task.sleep(for: .milliseconds(200)) } catch { return }
-          resizeProcessor = .resize(size: newValue)
-        }
-      }
-    }
-  }
-}
