@@ -15,6 +15,7 @@ public struct MediaUIView: View, @unchecked Sendable {
   @State private var altTextDisplayed: String?
   @State private var isAltAlertDisplayed: Bool = false
   @State private var quickLookURL: URL?
+  @State private var isLoadingQuickLook = false
   
   @State private var isSavingPhoto: Bool = false
   @State private var didSavePhoto: Bool = false
@@ -84,10 +85,16 @@ public struct MediaUIView: View, @unchecked Sendable {
       if let url = attachments.first(where: { $0.id == scrollToId})?.url {
         Button {
           Task {
+            isLoadingQuickLook = true
             quickLookURL = await localPathFor(url: url)
+            isLoadingQuickLook = false
           }
         } label: {
-          Image(systemName: "info.circle")
+          if isLoadingQuickLook {
+            ProgressView()
+          } else {
+            Image(systemName: "info.circle")
+          }
         }
       }
     }
