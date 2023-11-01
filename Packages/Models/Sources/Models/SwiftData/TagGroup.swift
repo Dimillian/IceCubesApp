@@ -6,7 +6,7 @@ import SwiftUI
   public var title: String = ""
   public var symbolName: String = ""
   public var tags: [String] = []
-  public var creationDate: Date = .init()
+  public var creationDate: Date = Date()
 
   public init(title: String, symbolName: String, tags: [String]) {
     self.title = title
