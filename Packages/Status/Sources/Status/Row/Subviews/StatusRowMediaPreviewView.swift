@@ -29,7 +29,7 @@ public struct StatusRowMediaPreviewView: View {
 
   var availableWidth: CGFloat {
     if UIDevice.current.userInterfaceIdiom == .phone &&
-      (UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight) || theme.statusDisplayStyle == .medium
+        (UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight) || theme.statusDisplayStyle == .medium
     {
       return sceneDelegate.windowWidth * 0.80
     }
@@ -217,10 +217,9 @@ public struct StatusRowMediaPreviewView: View {
         GeometryReader { proxy in
           switch type {
           case .image:
-            let width = isCompact ? imageMaxHeight : proxy.frame(in: .local).width
-            let processors: [ImageProcessing] = [.resize(size: .init(width: width, height: imageMaxHeight))]
             ZStack(alignment: .bottomTrailing) {
-              LazyImage(url: attachment.previewUrl ?? attachment.url) { state in
+              LazyResizableImage(url: attachment.previewUrl ?? attachment.url) { state, proxy in
+                let width = isCompact ? imageMaxHeight : proxy.frame(in: .local).width
                 if let image = state.image {
                   image
                     .resizable()
@@ -240,7 +239,6 @@ public struct StatusRowMediaPreviewView: View {
                     .frame(maxWidth: width)
                 }
               }
-              .processors(processors)
               if sensitive, !isInCaptureMode {
                 cornerSensitiveButton
               }
