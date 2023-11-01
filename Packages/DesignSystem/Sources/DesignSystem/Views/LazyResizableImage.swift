@@ -11,8 +11,8 @@ import SwiftUI
 
 /// A LazyImage (Nuke) with a geometry reader under the hood in order to use a Resize Processor to optimize performances on lists.
 /// This views also allows smooth resizing of the images by debouncing the update of the ImageProcessor. 
-struct LazyResizableImage<Content: View>: View {
-    init(url: URL?, @ViewBuilder content: @escaping (LazyImageState, GeometryProxy) -> Content) {
+public struct LazyResizableImage<Content: View>: View {
+    public init(url: URL?, @ViewBuilder content: @escaping (LazyImageState, GeometryProxy) -> Content) {
         self.imageURL = url
         self.content = content
     }
@@ -24,7 +24,7 @@ struct LazyResizableImage<Content: View>: View {
     @ViewBuilder
     private var content: (LazyImageState, _ proxy: GeometryProxy) -> Content
 
-    var body: some View {
+    public var body: some View {
         GeometryReader { proxy in
             LazyImage(url: imageURL) { state in
                 content(state, proxy)
