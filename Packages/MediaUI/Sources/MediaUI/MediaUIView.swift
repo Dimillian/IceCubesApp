@@ -1,78 +1,64 @@
-import Foundation
-import NukeUI
 import Nuke
 import SwiftUI
 import Models
 import QuickLook
 
 public struct MediaUIView: View, @unchecked Sendable {
-  @Environment(\.dismiss) private var dismiss
-  
-  public let selectedAttachment: MediaAttachment
-  public let attachments: [MediaAttachment]
-  
-  @State private var scrollToId: String?
-  @State private var altTextDisplayed: String?
-  @State private var isAltAlertDisplayed: Bool = false
-  @State private var quickLookURL: URL?
-  @State private var isLoadingQuickLook = false
-  
-  @State private var isSavingPhoto: Bool = false
-  @State private var didSavePhoto: Bool = false
-  
-  public init(selectedAttachment: MediaAttachment, attachments: [MediaAttachment]) {
-    self.selectedAttachment = selectedAttachment
-    self.attachments = attachments
-  }
+  private let data: [DisplayData]
+  private let initialItem: DisplayData?
+  @State private var scrolledItem: DisplayData?
 
   public var body: some View {
     NavigationStack {
       ScrollView(.horizontal, showsIndicators: false) {
         LazyHStack {
-          ForEach(attachments) { attachment in
-            if let url = attachment.url {
-              switch attachment.supportedType {
-              case .image:
-                MediaUIAttachmentImageView(url: url)
-                  .containerRelativeFrame(.horizontal, count: 1, span: 1, spacing: 0)
-                  .id(attachment.id)
-              case .video, .gifv, .audio:
-                MediaUIAttachmentVideoView(viewModel: .init(url: url, forceAutoPlay: true))
-                  .containerRelativeFrame(.horizontal, count: 1, span: 1, spacing: 0)
-                  .containerRelativeFrame(.vertical, count: 1, span: 1, spacing: 0)
-                  .id(attachment.id)
-              case .none:
-                EmptyView()
-              }
-            }
+          ForEach(data) {
+            DisplayView(data: $0)
+              .containerRelativeFrame([.horizontal, .vertical])
+              .id($0)
           }
         }
         .scrollTargetLayout()
       }
       .scrollTargetBehavior(.viewAligned)
-      .scrollPosition(id: $scrollToId)
+      .scrollPosition(id: $scrolledItem)
       .toolbar {
-        toolbarView
+        if let item = scrolledItem {
+          MediaToolBar(data: item)
+        }
       }
-      .alert("status.editor.media.image-description",
-             isPresented: $isAltAlertDisplayed)
-      {
-        Button("alert.button.ok", action: {})
-      } message: {
-        Text(altTextDisplayed ?? "")
-      }
-      .quickLookPreview($quickLookURL)
       .onAppear {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-          scrollToId = selectedAttachment.id
+          scrolledItem = initialItem
         }
       }
     }
   }
-  
-  @ToolbarContentBuilder
-  private var toolbarView: some ToolbarContent {
-    #if !targetEnvironment(macCatalyst)
+
+  public init(selectedAttachment: MediaAttachment, attachments: [MediaAttachment]) {
+    self.data = attachments.compactMap { DisplayData(from: $0) }
+    self.initialItem = DisplayData(from: selectedAttachment)
+  }
+}
+
+private struct MediaToolBar: ToolbarContent {
+  let data: DisplayData
+
+  var body: some ToolbarContent {
+#if !targetEnvironment(macCatalyst)
+    DismissToolbarItem()
+#endif
+    QuickLookToolbarItem(itemUrl: data.url)
+    AltTextToolbarItem(alt: data.description)
+    SavePhotoToolbarItem(url: data.url, type: data.type)
+    ShareToolbarItem(url: data.url, type: data.type)
+  }
+}
+
+private struct DismissToolbarItem: ToolbarContent {
+  @Environment(\.dismiss) private var dismiss
+
+  var body: some ToolbarContent {
     ToolbarItem(placement: .topBarLeading) {
       Button {
         dismiss()
@@ -80,87 +66,74 @@ public struct MediaUIView: View, @unchecked Sendable {
         Image(systemName: "xmark.circle")
       }
     }
-    #endif
+  }
+}
+
+private struct AltTextToolbarItem: ToolbarContent {
+  let alt: String?
+  @State private var isAlertDisplayed = false
+
+  var body: some ToolbarContent {
     ToolbarItem(placement: .topBarTrailing) {
-      if let url = attachments.first(where: { $0.id == scrollToId})?.url {
+      if let alt = alt {
         Button {
-          Task {
-            isLoadingQuickLook = true
-            quickLookURL = await localPathFor(url: url)
-            isLoadingQuickLook = false
-          }
-        } label: {
-          if isLoadingQuickLook {
-            ProgressView()
-          } else {
-            Image(systemName: "info.circle")
-          }
-        }
-      }
-    }
-    ToolbarItem(placement: .topBarTrailing) {
-      if let alt = attachments.first(where: { $0.id == scrollToId})?.description {
-        Button {
-          altTextDisplayed = alt
-          isAltAlertDisplayed = true
+          isAlertDisplayed = true
         } label: {
           Text("status.image.alt-text.abbreviation")
         }
+        .alert("status.editor.media.image-description",
+               isPresented: $isAlertDisplayed
+        ) {
+          Button("alert.button.ok", action: {})
+        } message: {
+          Text(alt)
+        }
+      } else {
+        EmptyView()
       }
     }
+  }
+}
+
+private struct SavePhotoToolbarItem: ToolbarContent, @unchecked Sendable {
+  let url: URL
+  let type: DisplayType
+  @State private var state = SavingState.unsaved
+
+  var body: some ToolbarContent {
     ToolbarItem(placement: .topBarTrailing) {
-      if let attachment = attachments.first(where: { $0.id == scrollToId}),
-         let url = attachment.url,
-          attachment.supportedType == .image {
+      if type == .image {
         Button {
           Task {
-            isSavingPhoto = true
+            state = .saving
             if await saveImage(url: url) {
               withAnimation {
-                isSavingPhoto = false
-                didSavePhoto = true
+                state = .saved
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                  didSavePhoto = false
+                  state = .unsaved
                 }
               }
-            } else {
-              isSavingPhoto = false
             }
           }
         } label: {
-          if isSavingPhoto {
-            ProgressView()
-          } else if didSavePhoto {
-            Image(systemName: "checkmark.circle.fill")
-          } else {
-            Image(systemName: "arrow.down.circle")
+          switch state {
+          case .unsaved: Image(systemName: "arrow.down.circle")
+          case .saving : ProgressView()
+          case .saved  : Image(systemName: "checkmark.circle.fill")
           }
         }
-      }
-    }
-    ToolbarItem(placement: .topBarTrailing) {
-      if let attachment = attachments.first(where: { $0.id == scrollToId}),
-         let url = attachment.url {
-        switch attachment.supportedType {
-        case .image:
-          let transferable = MediaUIImageTransferable(url: url)
-          ShareLink(item: transferable, preview: .init("status.media.contextmenu.share",
-                                                       image: transferable))
-        default:
-          ShareLink(item: url)
-        }
+      } else {
+        EmptyView()
       }
     }
   }
-  
-  private var quickLookDir: URL {
-    try! FileManager.default.url(for: .cachesDirectory,
-                                 in: .userDomainMask,
-                                 appropriateFor: nil,
-                                 create: false)
-    .appending(component: "quicklook")
+
+  private enum SavingState {
+    case unsaved
+    case saving
+    case saved
   }
-  
+
   private func imageData(_ url: URL) async -> Data? {
     var data = ImagePipeline.shared.cache.cachedData(for: .init(url: url))
     if data == nil {
@@ -168,7 +141,56 @@ public struct MediaUIView: View, @unchecked Sendable {
     }
     return data
   }
-  
+
+  private func uiimageFor(url: URL) async throws -> UIImage? {
+    let data = await imageData(url)
+    if let data {
+      return UIImage(data: data)
+    }
+    return nil
+  }
+
+  private func saveImage(url: URL) async -> Bool {
+    if let image = try? await uiimageFor(url: url) {
+      UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+      return true
+    }
+    return false
+  }
+}
+
+private struct QuickLookToolbarItem: ToolbarContent, @unchecked Sendable {
+  let itemUrl: URL
+  @State private var localPath: URL?
+  @State private var isLoading = false
+
+  var body: some ToolbarContent {
+    ToolbarItem(placement: .topBarTrailing) {
+      Button {
+        Task {
+          isLoading = true
+          localPath = await localPathFor(url: itemUrl)
+          isLoading = false
+        }
+      } label: {
+        if isLoading {
+          ProgressView()
+        } else {
+          Image(systemName: "info.circle")
+        }
+      }
+      .quickLookPreview($localPath)
+    }
+  }
+
+  private func imageData(_ url: URL) async -> Data? {
+    var data = ImagePipeline.shared.cache.cachedData(for: .init(url: url))
+    if data == nil {
+      data = try? await URLSession.shared.data(from: url).0
+    }
+    return data
+  }
+
   private func localPathFor(url: URL) async -> URL {
     try? FileManager.default.removeItem(at: quickLookDir)
     try? FileManager.default.createDirectory(at: quickLookDir, withIntermediateDirectories: true)
@@ -177,20 +199,73 @@ public struct MediaUIView: View, @unchecked Sendable {
     try? data?.write(to: path)
     return path
   }
-  
-  private func uiimageFor(url: URL) async throws -> UIImage? {
-    let data = await imageData(url)
-    if let data {
-      return UIImage(data: data)
-    }
-    return nil
+
+  private var quickLookDir: URL {
+    try! FileManager.default.url(for: .cachesDirectory,
+                                 in: .userDomainMask,
+                                 appropriateFor: nil,
+                                 create: false)
+    .appending(component: "quicklook")
   }
-  
-  private func saveImage(url: URL) async -> Bool {
-    if let image = try? await uiimageFor(url: url) {
-      UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-      return true
+}
+
+private struct ShareToolbarItem: ToolbarContent, @unchecked Sendable {
+  let url: URL
+  let type: DisplayType
+
+  var body: some ToolbarContent {
+    ToolbarItem(placement: .topBarTrailing) {
+      if type == .image {
+        let transferable = MediaUIImageTransferable(url: url)
+        ShareLink(item: transferable, preview: .init("status.media.contextmenu.share",
+                                                     image: transferable))
+      } else {
+        ShareLink(item: url)
+      }
     }
-    return false
+  }
+}
+
+private struct DisplayData: Identifiable, Hashable {
+  let id: String
+  let url: URL
+  let description: String?
+  let type: DisplayType
+
+  init?(from attachment: MediaAttachment) {
+    guard let url = attachment.url else { return nil }
+    guard let type = attachment.supportedType else { return nil }
+
+    self.id = attachment.id
+    self.url = url
+    self.description = attachment.description
+    self.type = DisplayType(from: type)
+  }
+}
+
+private enum DisplayType {
+  case image
+  case av
+
+  init(from attachmentType: MediaAttachment.SupportedType) {
+    switch attachmentType {
+    case .image:
+      self = .image
+    case .video, .gifv, .audio:
+      self = .av
+    }
+  }
+}
+
+private struct DisplayView: View {
+  let data: DisplayData
+
+  var body: some View {
+    switch data.type {
+    case .image:
+      MediaUIAttachmentImageView(url: data.url)
+    case .av:
+      MediaUIAttachmentVideoView(viewModel: .init(url: data.url, forceAutoPlay: true))
+    }
   }
 }
