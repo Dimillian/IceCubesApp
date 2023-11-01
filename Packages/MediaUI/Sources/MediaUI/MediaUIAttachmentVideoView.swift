@@ -57,7 +57,7 @@ public struct MediaUIAttachmentVideoView: View {
   @Environment(Theme.self) private var theme
 
   @State var viewModel: MediaUIAttachmentVideoViewModel
-  
+
   public init(viewModel: MediaUIAttachmentVideoViewModel) {
     _viewModel = .init(wrappedValue: viewModel)
   }
@@ -67,7 +67,7 @@ public struct MediaUIAttachmentVideoView: View {
       VideoPlayer(player: viewModel.player)
         .accessibilityAddTraits(.startsMediaSession)
 
-      if !preferences.autoPlayVideo && !viewModel.forceAutoPlay {
+      if !preferences.autoPlayVideo, !viewModel.forceAutoPlay {
         Image(systemName: "play.fill")
           .font(isCompact ? .body : .largeTitle)
           .foregroundColor(theme.tintColor)

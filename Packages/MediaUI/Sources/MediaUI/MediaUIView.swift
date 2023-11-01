@@ -1,7 +1,7 @@
-import Nuke
-import SwiftUI
 import Models
+import Nuke
 import QuickLook
+import SwiftUI
 
 public struct MediaUIView: View, @unchecked Sendable {
   private let data: [DisplayData]
@@ -36,8 +36,8 @@ public struct MediaUIView: View, @unchecked Sendable {
   }
 
   public init(selectedAttachment: MediaAttachment, attachments: [MediaAttachment]) {
-    self.data = attachments.compactMap { DisplayData(from: $0) }
-    self.initialItem = DisplayData(from: selectedAttachment)
+    data = attachments.compactMap { DisplayData(from: $0) }
+    initialItem = DisplayData(from: selectedAttachment)
   }
 }
 
@@ -45,9 +45,9 @@ private struct MediaToolBar: ToolbarContent {
   let data: DisplayData
 
   var body: some ToolbarContent {
-#if !targetEnvironment(macCatalyst)
-    DismissToolbarItem()
-#endif
+    #if !targetEnvironment(macCatalyst)
+      DismissToolbarItem()
+    #endif
     QuickLookToolbarItem(itemUrl: data.url)
     AltTextToolbarItem(alt: data.description)
     SavePhotoToolbarItem(url: data.url, type: data.type)
@@ -75,15 +75,15 @@ private struct AltTextToolbarItem: ToolbarContent {
 
   var body: some ToolbarContent {
     ToolbarItem(placement: .topBarTrailing) {
-      if let alt = alt {
+      if let alt {
         Button {
           isAlertDisplayed = true
         } label: {
           Text("status.image.alt-text.abbreviation")
         }
         .alert("status.editor.media.image-description",
-               isPresented: $isAlertDisplayed
-        ) {
+               isPresented: $isAlertDisplayed)
+        {
           Button("alert.button.ok", action: {})
         } message: {
           Text(alt)
@@ -118,8 +118,8 @@ private struct SavePhotoToolbarItem: ToolbarContent, @unchecked Sendable {
         } label: {
           switch state {
           case .unsaved: Image(systemName: "arrow.down.circle")
-          case .saving : ProgressView()
-          case .saved  : Image(systemName: "checkmark.circle.fill")
+          case .saving: ProgressView()
+          case .saved: Image(systemName: "checkmark.circle.fill")
           }
         }
       } else {
@@ -205,7 +205,7 @@ private struct QuickLookToolbarItem: ToolbarContent, @unchecked Sendable {
                                  in: .userDomainMask,
                                  appropriateFor: nil,
                                  create: false)
-    .appending(component: "quicklook")
+      .appending(component: "quicklook")
   }
 }
 
@@ -236,9 +236,9 @@ private struct DisplayData: Identifiable, Hashable {
     guard let url = attachment.url else { return nil }
     guard let type = attachment.supportedType else { return nil }
 
-    self.id = attachment.id
+    id = attachment.id
     self.url = url
-    self.description = attachment.description
+    description = attachment.description
     self.type = DisplayType(from: type)
   }
 }

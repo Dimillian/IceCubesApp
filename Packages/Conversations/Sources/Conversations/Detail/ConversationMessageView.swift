@@ -106,11 +106,10 @@ struct ConversationMessageView: View {
     Button {
       Task {
         do {
-          let status: Status
-          if isLiked {
-            status = try await client.post(endpoint: Statuses.unfavorite(id: message.id))
+          let status: Status = if isLiked {
+            try await client.post(endpoint: Statuses.unfavorite(id: message.id))
           } else {
-            status = try await client.post(endpoint: Statuses.favorite(id: message.id))
+            try await client.post(endpoint: Statuses.favorite(id: message.id))
           }
           withAnimation {
             isLiked = status.favourited == true
@@ -123,11 +122,10 @@ struct ConversationMessageView: View {
     }
     Button { Task {
       do {
-        let status: Status
-        if isBookmarked {
-          status = try await client.post(endpoint: Statuses.unbookmark(id: message.id))
+        let status: Status = if isBookmarked {
+          try await client.post(endpoint: Statuses.unbookmark(id: message.id))
         } else {
-          status = try await client.post(endpoint: Statuses.bookmark(id: message.id))
+          try await client.post(endpoint: Statuses.bookmark(id: message.id))
         }
         withAnimation {
           isBookmarked = status.bookmarked == true

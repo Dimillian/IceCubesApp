@@ -8,7 +8,7 @@ import SwiftUI
 @MainActor
 struct SideBarView<Content: View>: View {
   @Environment(\.openWindow) private var openWindow
-  
+
   @Environment(AppAccountsManager.self) private var appAccounts
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(Theme.self) private var theme

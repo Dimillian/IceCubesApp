@@ -4,7 +4,7 @@ import SwiftUI
 
 @Model public class LocalTimeline {
   public var instance: String = ""
-  public var creationDate: Date = Date()
+  public var creationDate: Date = .init()
 
   public init(instance: String) {
     self.instance = instance

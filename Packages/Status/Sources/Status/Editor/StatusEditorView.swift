@@ -27,7 +27,7 @@ public struct StatusEditorView: View {
 
   @State private var isDismissAlertPresented: Bool = false
   @State private var isLanguageConfirmPresented = false
-  
+
   @State private var editingContainer: StatusEditorMediaContainer?
 
   public init(mode: StatusEditorViewModel.Mode) {
@@ -290,7 +290,7 @@ public struct StatusEditorView: View {
       )
     }
   }
-  
+
   private func close() {
     if ProcessInfo.processInfo.isMacCatalystApp {
       dismissWindow()

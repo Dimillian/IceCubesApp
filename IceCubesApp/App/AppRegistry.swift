@@ -6,11 +6,11 @@ import Env
 import Explore
 import LinkPresentation
 import Lists
+import MediaUI
 import Models
 import Status
 import SwiftUI
 import Timeline
-import MediaUI
 
 @MainActor
 extension View {

@@ -1,7 +1,7 @@
-import SwiftUI
 import Env
-import Status
 import MediaUI
+import Status
+import SwiftUI
 
 extension IceCubesApp {
   var appScene: some Scene {
@@ -26,9 +26,9 @@ extension IceCubesApp {
         .sheet(item: $quickLook.selectedMediaAttachment) { selectedMediaAttachment in
           MediaUIView(selectedAttachment: selectedMediaAttachment,
                       attachments: quickLook.mediaAttachments)
-          .presentationBackground(.ultraThinMaterial)
-          .presentationCornerRadius(16)
-          .withEnvironments()
+            .presentationBackground(.ultraThinMaterial)
+            .presentationCornerRadius(16)
+            .withEnvironments()
         }
         .onChange(of: pushNotificationsService.handledNotification) { _, newValue in
           if newValue != nil {
@@ -72,7 +72,6 @@ extension IceCubesApp {
     }
   }
 
-  
   var otherScenes: some Scene {
     WindowGroup(for: WindowDestination.self) { destination in
       Group {

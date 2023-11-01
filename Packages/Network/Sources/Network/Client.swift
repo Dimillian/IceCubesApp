@@ -18,7 +18,7 @@ import SwiftUI
   public enum Version: String, Sendable {
     case v1, v2
   }
-  
+
   public enum ClientError: Error {
     case unexpectedRequest
   }
@@ -93,7 +93,8 @@ import SwiftUI
   private func makeURL(scheme: String = "https",
                        endpoint: Endpoint,
                        forceVersion: Version? = nil,
-                       forceServer: String? = nil) throws -> URL {
+                       forceServer: String? = nil) throws -> URL
+  {
     var components = URLComponents()
     components.scheme = scheme
     components.host = forceServer ?? server
@@ -140,7 +141,7 @@ import SwiftUI
   }
 
   public func getWithLink<Entity: Decodable>(endpoint: Endpoint) async throws -> (Entity, LinkHandler?) {
-    let (data, httpResponse) = try await urlSession.data(for: try makeGet(endpoint: endpoint))
+    let (data, httpResponse) = try await urlSession.data(for: makeGet(endpoint: endpoint))
     var linkHandler: LinkHandler?
     if let response = httpResponse as? HTTPURLResponse,
        let link = response.allHeaderFields["Link"] as? String

@@ -211,7 +211,7 @@ public struct StatusRowView: View {
         let attachments = viewModel.finalStatus.mediaAttachments
         if ProcessInfo.processInfo.isMacCatalystApp {
           openWindow(value: WindowDestination.mediaViewer(attachments: attachments,
-                                                   selectedAttachment: attachments[0]))
+                                                          selectedAttachment: attachments[0]))
         } else {
           quickLook.prepareFor(selectedMediaAttachment: attachments[0], mediaAttachments: attachments)
         }

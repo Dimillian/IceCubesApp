@@ -14,12 +14,12 @@ import UIKit
   {
     guard let windowScene = scene as? UIWindowScene else { return }
     window = windowScene.keyWindow
-    
+
     #if targetEnvironment(macCatalyst)
-    if let titlebar = windowScene.titlebar {
-      titlebar.titleVisibility = .hidden
-      titlebar.toolbar = nil
-     }
+      if let titlebar = windowScene.titlebar {
+        titlebar.titleVisibility = .hidden
+        titlebar.toolbar = nil
+      }
     #endif
   }
 }

@@ -7,7 +7,7 @@ public struct AccountDetailContextMenu: View {
   @Environment(RouterPath.self) private var routerPath
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(UserPreferences.self) private var preferences
-  
+
   @Binding var showBlockConfirmation: Bool
 
   var viewModel: AccountDetailViewModel

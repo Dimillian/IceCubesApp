@@ -4,8 +4,9 @@ import SwiftUI
 
 @MainActor
 public extension View {
-  func statusEditorToolbarItem(routerPath: RouterPath,
-                               visibility: Models.Visibility) -> some ToolbarContent {
+  func statusEditorToolbarItem(routerPath _: RouterPath,
+                               visibility: Models.Visibility) -> some ToolbarContent
+  {
     StatusEditorToolbarItem(visibility: visibility)
   }
 }

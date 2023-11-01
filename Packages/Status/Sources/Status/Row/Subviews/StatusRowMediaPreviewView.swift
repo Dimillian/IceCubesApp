@@ -1,10 +1,10 @@
 import DesignSystem
 import Env
+import MediaUI
 import Models
 import Nuke
 import NukeUI
 import SwiftUI
-import MediaUI
 
 @MainActor
 public struct StatusRowMediaPreviewView: View {
@@ -29,7 +29,7 @@ public struct StatusRowMediaPreviewView: View {
 
   var availableWidth: CGFloat {
     if UIDevice.current.userInterfaceIdiom == .phone &&
-        (UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight) || theme.statusDisplayStyle == .medium
+      (UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight) || theme.statusDisplayStyle == .medium
     {
       return sceneDelegate.windowWidth * 0.80
     }

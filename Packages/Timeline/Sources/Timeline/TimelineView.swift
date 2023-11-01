@@ -4,9 +4,9 @@ import Models
 import Network
 import Shimmer
 import Status
+import SwiftData
 import SwiftUI
 import SwiftUIIntrospect
-import SwiftData
 
 @MainActor
 public struct TimelineView: View {
@@ -26,9 +26,9 @@ public struct TimelineView: View {
   @Binding var timeline: TimelineFilter
   @Binding var selectedTagGroup: TagGroup?
   @Binding var scrollToTopSignal: Int
-  
+
   @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
-  
+
   private let canFilterTimeline: Bool
 
   public init(timeline: Binding<TimelineFilter>,
@@ -224,7 +224,7 @@ public struct TimelineView: View {
                          bottom: 8,
                          trailing: .layoutPadding))
   }
-  
+
   @ToolbarContentBuilder
   private var toolbarTitleView: some ToolbarContent {
     ToolbarItem(placement: .principal) {
@@ -262,7 +262,7 @@ public struct TimelineView: View {
       .accessibilityRespondsToUserInteraction(canFilterTimeline)
     }
   }
-  
+
   @ToolbarContentBuilder
   private var toolbarTagGroupButton: some ToolbarContent {
     ToolbarItem(placement: .topBarTrailing) {

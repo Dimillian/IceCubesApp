@@ -1,5 +1,5 @@
-import SwiftUI
 import Env
+import SwiftUI
 
 extension IceCubesApp {
   var tabBarView: some View {
@@ -45,8 +45,7 @@ extension IceCubesApp {
     }
     .id(appAccountsManager.currentClient.id)
   }
-  
-  
+
   private func badgeFor(tab: Tab) -> Int {
     if tab == .notifications, selectedTab != tab,
        let token = appAccountsManager.currentAccount.oauthToken

@@ -4,12 +4,12 @@ import AVFoundation
 import DesignSystem
 import Env
 import KeychainSwift
+import MediaUI
 import Network
 import RevenueCat
 import Status
 import SwiftUI
 import Timeline
-import MediaUI
 
 @main
 struct IceCubesApp: App {
@@ -41,7 +41,7 @@ struct IceCubesApp: App {
     appScene
     otherScenes
   }
-  
+
   func setNewClientsInEnv(client: Client) {
     currentAccount.setClient(client: client)
     currentInstance.setClient(client: client)

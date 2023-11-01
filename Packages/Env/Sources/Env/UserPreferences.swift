@@ -80,28 +80,26 @@ import SwiftUI
       storage.pendingShownAtBottom = pendingShownAtBottom
     }
   }
-  
+
   public var pendingShownLeft: Bool {
     didSet {
       storage.pendingShownLeft = pendingShownLeft
     }
   }
-  
+
   public var pendingLocation: Alignment {
-    get {
-      let fromLeft = Locale.current.language.characterDirection == .leftToRight ? pendingShownLeft : !pendingShownLeft
-      if pendingShownAtBottom {
-        if fromLeft {
-          return .bottomLeading
-        } else {
-          return .bottomTrailing
-        }
+    let fromLeft = Locale.current.language.characterDirection == .leftToRight ? pendingShownLeft : !pendingShownLeft
+    if pendingShownAtBottom {
+      if fromLeft {
+        return .bottomLeading
       } else {
-        if fromLeft {
-          return .topLeading
-        } else {
-          return .topTrailing
-        }
+        return .bottomTrailing
+      }
+    } else {
+      if fromLeft {
+        return .topLeading
+      } else {
+        return .topTrailing
       }
     }
   }
@@ -375,7 +373,7 @@ import SwiftUI
   }
 
   public var totalNotificationsCount: Int {
-    notificationsCount.compactMap{ $0.value }.reduce(0, +)
+    notificationsCount.compactMap(\.value).reduce(0, +)
   }
 
   public func reloadNotificationsCount(tokens: [OauthToken]) {
@@ -456,6 +454,6 @@ import SwiftUI
     collapseLongPosts = storage.collapseLongPosts
     shareButtonBehavior = storage.shareButtonBehavior
     pendingShownAtBottom = storage.pendingShownAtBottom
-      pendingShownLeft = storage.pendingShownLeft
+    pendingShownLeft = storage.pendingShownLeft
   }
 }

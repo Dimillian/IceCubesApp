@@ -1,5 +1,5 @@
-import SwiftUI
 import Env
+import SwiftUI
 
 extension IceCubesApp {
   var sidebarView: some View {
@@ -46,5 +46,4 @@ extension IceCubesApp {
       .frame(maxWidth: .secondaryColumnWidth)
       .id(appAccountsManager.currentAccount.id)
   }
-
 }

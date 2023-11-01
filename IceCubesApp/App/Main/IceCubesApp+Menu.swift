@@ -1,5 +1,5 @@
-import SwiftUI
 import Env
+import SwiftUI
 
 extension IceCubesApp {
   @CommandsBuilder

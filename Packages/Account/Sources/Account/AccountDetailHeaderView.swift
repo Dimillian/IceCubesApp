@@ -81,7 +81,7 @@ struct AccountDetailHeaderView: View {
         return
       }
       let attachement = MediaAttachment.imageWith(url: account.header)
-      
+
       if ProcessInfo.processInfo.isMacCatalystApp {
         openWindow(value: WindowDestination.mediaViewer(attachments: [attachement],
                                                         selectedAttachment: attachement))
