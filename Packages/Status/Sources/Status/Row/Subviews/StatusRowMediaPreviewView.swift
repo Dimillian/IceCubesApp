@@ -25,11 +25,10 @@ public struct StatusRowMediaPreviewView: View {
   @State private var isQuickLookLoading: Bool = false
   @State private var altTextDisplayed: String?
   @State private var isAltAlertDisplayed: Bool = false
-  @State private var isHidingMedia: Bool = false
 
   var availableWidth: CGFloat {
     if UIDevice.current.userInterfaceIdiom == .phone &&
-      (UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight) || theme.statusDisplayStyle == .medium
+        (UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight) || theme.statusDisplayStyle == .medium
     {
       return sceneDelegate.windowWidth * 0.80
     }
@@ -122,9 +121,13 @@ public struct StatusRowMediaPreviewView: View {
       }
     }
     .overlay {
-      if isHidingMedia {
-        sensitiveMediaOverlay
-          .transition(.opacity)
+      if !isInCaptureMode, sensitive {
+        MediaOverlay(
+          isCompact: isCompact,
+          isSensitive: sensitive,
+          isHiding: isHidingMedia,
+          color: theme.labelColor
+        )
       }
     }
     .alert("status.editor.media.image-description",
@@ -134,14 +137,15 @@ public struct StatusRowMediaPreviewView: View {
     } message: {
       Text(altTextDisplayed ?? "")
     }
-    .onAppear {
-      if sensitive, preferences.autoExpandMedia == .hideSensitive {
-        isHidingMedia = true
-      } else if preferences.autoExpandMedia == .hideAll {
-        isHidingMedia = true
-      } else {
-        isHidingMedia = false
-      }
+  }
+
+  private var isHidingMedia: Bool {
+    if sensitive, preferences.autoExpandMedia == .hideSensitive {
+      true
+    } else if preferences.autoExpandMedia == .hideAll {
+      true
+    } else {
+      false
     }
   }
 
@@ -187,9 +191,6 @@ public struct StatusRowMediaPreviewView: View {
         }
       case .none:
         EmptyView()
-      }
-      if !isInCaptureMode, sensitive {
-        cornerSensitiveButton
       }
       if !isInCaptureMode, let alt = attachment.description, !alt.isEmpty, !isCompact, preferences.showAltTextForMedia {
         Group {
@@ -239,9 +240,6 @@ public struct StatusRowMediaPreviewView: View {
                     .frame(maxWidth: width)
                 }
               }
-              if sensitive, !isInCaptureMode {
-                cornerSensitiveButton
-              }
               if !isInCaptureMode,
                  let alt = attachment.description,
                  !alt.isEmpty,
@@ -289,47 +287,6 @@ public struct StatusRowMediaPreviewView: View {
     }
   }
 
-  private var sensitiveMediaOverlay: some View {
-    ZStack {
-      Rectangle()
-        .foregroundColor(.clear)
-        .background(.ultraThinMaterial)
-      if !isCompact {
-        Button {
-          withAnimation {
-            isHidingMedia = false
-          }
-        } label: {
-          Group {
-            if sensitive {
-              Label("status.media.sensitive.show", systemImage: "eye")
-            } else {
-              Label("status.media.content.show", systemImage: "eye")
-            }
-          }
-          .foregroundColor(theme.labelColor)
-        }
-        .buttonStyle(.borderedProminent)
-      }
-    }
-  }
-
-  private var cornerSensitiveButton: some View {
-    HStack {
-      Button {
-        withAnimation {
-          isHidingMedia = true
-        }
-      } label: {
-        Image(systemName: "eye.slash")
-          .frame(minHeight: 21) // Match the alt button in case it is also present
-      }
-      .padding(10)
-      .buttonStyle(.borderedProminent)
-      Spacer()
-    }
-  }
-
   private static func accessibilityLabel(for attachment: MediaAttachment) -> Text {
     if let altText = attachment.description {
       Text("accessibility.image.alt-text-\(altText)")
@@ -338,5 +295,54 @@ public struct StatusRowMediaPreviewView: View {
     } else {
       Text("accessibility.tabs.profile.picker.media")
     }
+  }
+}
+
+struct MediaOverlay: View {
+  @Namespace var buttonSpace
+  let isCompact: Bool
+  let isSensitive: Bool
+  let color: Color
+  @State private var isHiding = true
+
+  var body: some View {
+    ZStack {
+      Rectangle()
+        .foregroundColor(.clear)
+        .background(.ultraThinMaterial)
+        .frame(width: isHiding ? nil : 0, height: isHiding ? nil : 0)
+      if !isCompact {
+        Button {
+          withAnimation { isHiding.toggle() }
+        } label: {
+          if isHiding {
+            HStack(spacing: 0) {
+              Image(systemName: "eye.slash")
+                .padding(.trailing, 3)
+              Text(labelString)
+            }
+            .matchedGeometryEffect(id: "text", in: buttonSpace)
+          } else {
+            Image(systemName: "eye")
+              .matchedGeometryEffect(id: "text", in: buttonSpace)
+          }
+        }
+        .foregroundColor(color)
+        .buttonStyle(.borderedProminent)
+        .padding(10)
+      }
+    }
+    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: isHiding ? .center : .bottomLeading)
+  }
+
+  private var labelString: String {
+    isSensitive ? "status.media.sensitive.show" : "status.media.content.show"
+  }
+
+  init(isCompact: Bool, isSensitive: Bool, isHiding: Bool = true, color: Color) {
+    self.isCompact = isCompact
+    self.isSensitive = isSensitive
+    self.isHiding = isHiding
+    self.color = color
   }
 }
