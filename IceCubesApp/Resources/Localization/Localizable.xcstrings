@@ -40400,7 +40400,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wyświetlanie przycisku nieprzeczytanych u dołu ekranu"
+            "value" : "Pokazuj przycisk nieprzeczytanych na dole ekranu"
           }
         },
         "pt-BR" : {
@@ -40448,6 +40448,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Show Pending Button on the Left"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pokazuj przycisk nieprzeczytanych po lewej stronie"
           }
         }
       }
