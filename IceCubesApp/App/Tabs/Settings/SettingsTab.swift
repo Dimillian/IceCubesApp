@@ -12,7 +12,6 @@ import Timeline
 
 @MainActor
 struct SettingsTabs: View {
-  @Environment(\.dismiss) private var dismiss
   @Environment(\.modelContext) private var context
 
   @Environment(PushNotificationsService.self) private var pushNotifications
@@ -48,15 +47,6 @@ struct SettingsTabs: View {
       .navigationBarTitleDisplayMode(.inline)
       .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
       .toolbar {
-        if UIDevice.current.userInterfaceIdiom == .phone {
-          ToolbarItem {
-            Button {
-              dismiss()
-            } label: {
-              Text("action.done").bold()
-            }
-          }
-        }
         if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn {
           SecondaryColumnToolbarItem()
         }
