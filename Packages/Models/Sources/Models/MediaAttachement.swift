@@ -50,7 +50,7 @@ public struct MediaAttachment: Codable, Identifiable, Hashable, Equatable {
           type: "image",
           url: url,
           previewUrl: url,
-          description: nil,
+          description: "demo alt text here",
           meta: nil)
   }
 }
