@@ -29992,7 +29992,7 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "새 글"
           }
         },
@@ -30111,7 +30111,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "New Window"
+            "value" : "새 창"
           }
         },
         "nb" : {
@@ -40448,6 +40448,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Show Pending Button on the Left"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "읽지 않은 글 수를 왼쪽에 표시"
           }
         }
       }
