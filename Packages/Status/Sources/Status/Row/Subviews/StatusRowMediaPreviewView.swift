@@ -62,32 +62,18 @@ public struct StatusRowMediaPreviewView: View {
 
   public var body: some View {
     Group {
-      if attachments.count == 1, let attachment = attachments.first {
+      if attachments.count == 1 {
         FeaturedImagePreView(
-          attachment: attachment,
+          attachment: attachments[0],
           imageMaxHeight: imageMaxHeight,
           sensitive: sensitive,
           appLayoutWidth: appLayoutWidth,
           availableWidth: availableWidth
         )
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Self.accessibilityLabel(for: attachment))
+        .accessibilityLabel(Self.accessibilityLabel(for: attachments[0]))
         .accessibilityAddTraits([.isButton, .isImage])
-        .onTapGesture {
-          if ProcessInfo.processInfo.isMacCatalystApp {
-            openWindow(
-              value: WindowDestination.mediaViewer(
-                attachments: attachments,
-                selectedAttachment: attachment
-              )
-            )
-          } else {
-            quickLook.prepareFor(
-              selectedMediaAttachment: attachment,
-              mediaAttachments: attachments
-            )
-          }
-        }
+        .onTapGesture { tabAction(for: 0) }
       } else {
         if isCompact || theme.statusDisplayStyle == .compact {
           HStack {
@@ -120,21 +106,23 @@ public struct StatusRowMediaPreviewView: View {
         imageMaxHeight: imageMaxHeight,
         attachment: attachments[index]
       )
-      .onTapGesture {
-        if ProcessInfo.processInfo.isMacCatalystApp {
-          openWindow(
-            value: WindowDestination.mediaViewer(
-              attachments: attachments,
-              selectedAttachment: attachments[index]
-            )
-          )
-        } else {
-          quickLook.prepareFor(
-            selectedMediaAttachment: attachments[index],
-            mediaAttachments: attachments
-          )
-        }
-      }
+      .onTapGesture { tabAction(for: index) }
+    }
+  }
+
+  private func tabAction(for index: Int) {
+    if ProcessInfo.processInfo.isMacCatalystApp {
+      openWindow(
+        value: WindowDestination.mediaViewer(
+          attachments: attachments,
+          selectedAttachment: attachments[index]
+        )
+      )
+    } else {
+      quickLook.prepareFor(
+        selectedMediaAttachment: attachments[index],
+        mediaAttachments: attachments
+      )
     }
   }
 
