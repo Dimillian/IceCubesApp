@@ -301,9 +301,16 @@ struct BlurOverLay: View {
               }
             } label: {
               if isTextExpanded {
-                HStack {
+                ViewThatFits(in: .horizontal) {
+                  HStack {
+                    Image(systemName: "eye")
+                    Text(sensitive ? "status.media.sensitive.show" : "status.media.content.show" )
+                  }
+                  HStack {
+                    Image(systemName: "eye")
+                    Text("Show")
+                  }
                   Image(systemName: "eye")
-                  Text(sensitive ? "status.media.sensitive.show" : "status.media.content.show" )
                 }
                 .lineLimit(1)
                 .foregroundColor(theme.labelColor)
