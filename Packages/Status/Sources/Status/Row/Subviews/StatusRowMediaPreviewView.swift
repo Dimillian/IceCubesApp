@@ -100,11 +100,14 @@ public struct StatusRowMediaPreviewView: View {
 
   @ViewBuilder
   private func makeAttachmentView(for index: Int) -> some View {
-    if attachments.count > index {
+    if 
+      attachments.count > index,
+      let data = DisplayData(from: attachments[index])
+    {
       MediaPreview(
         sensitive: sensitive,
         imageMaxHeight: imageMaxHeight,
-        attachment: attachments[index]
+        displayData: data
       )
       .onTapGesture { tabAction(for: index) }
     }
@@ -140,68 +143,54 @@ public struct StatusRowMediaPreviewView: View {
 private struct MediaPreview: View {
   let sensitive: Bool
   let imageMaxHeight: CGFloat
-  let attachment: MediaAttachment
+  let displayData: DisplayData
 
   @Environment(UserPreferences.self) private var preferences
   @Environment(\.isCompact) private var isCompact: Bool
 
   var body: some View {
-    if let type = attachment.supportedType {
-      Group {
-        GeometryReader { proxy in
-          switch type {
-          case .image:
-            ZStack(alignment: .bottomTrailing) {
-              LazyResizableImage(url: attachment.previewUrl ?? attachment.url) { state, proxy in
-                let width = isCompact ? imageMaxHeight : proxy.frame(in: .local).width
-                if let image = state.image {
-                  image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(maxWidth: width, maxHeight: imageMaxHeight)
-                    .clipped()
-                    .cornerRadius(4)
-                    .overlay(
-                      RoundedRectangle(cornerRadius: 4)
-                        .stroke(.gray.opacity(0.35), lineWidth: 1)
-                    )
-                } else if state.isLoading {
-                  RoundedRectangle(cornerRadius: 4)
-                    .fill(Color.gray)
-                    .frame(maxWidth: width, maxHeight: imageMaxHeight)
-                }
-              }
-              BlurOverLay(sensitive: sensitive, font: .scaledFootnote)
-              AltTextButton(text: attachment.description, font: .scaledFootnote)
-            }
-          case .gifv, .video, .audio:
-            if let url = attachment.url {
-              MediaUIAttachmentVideoView(viewModel: .init(url: url))
-                .frame(width: isCompact ? imageMaxHeight : proxy.frame(in: .local).width)
-                .frame(height: imageMaxHeight)
-                .accessibilityAddTraits(.startsMediaSession)
-            }
+    GeometryReader { proxy in
+      switch displayData.type {
+      case .image:
+        LazyResizableImage(url: displayData.previewUrl) { state, proxy in
+          let width = isCompact ? imageMaxHeight : proxy.frame(in: .local).width
+          if let image = state.image {
+            image
+              .resizable()
+              .aspectRatio(contentMode: .fill)
+              .frame(maxWidth: width, maxHeight: imageMaxHeight)
+              .overlay(
+                RoundedRectangle(cornerRadius: 4)
+                  .stroke(.gray.opacity(0.35), lineWidth: 1)
+              )
+          } else if state.isLoading {
+            RoundedRectangle(cornerRadius: 4)
+              .fill(Color.gray)
+              .frame(maxWidth: width, maxHeight: imageMaxHeight)
           }
         }
-        .frame(maxWidth: isCompact ? imageMaxHeight : nil)
-        .frame(height: imageMaxHeight)
+        .overlay {
+          BlurOverLay(sensitive: sensitive, font: .scaledFootnote)
+        }
+        .overlay {
+          AltTextButton(text: displayData.description, font: .scaledFootnote)
+        }
+      case .av:
+        MediaUIAttachmentVideoView(viewModel: .init(url: displayData.url))
+          .frame(width: isCompact ? imageMaxHeight : proxy.frame(in: .local).width)
+          .frame(height: imageMaxHeight)
+          .accessibilityAddTraits(.startsMediaSession)
       }
-      // #965: do not create overlapping tappable areas, when multiple images are shown
-      .contentShape(Rectangle())
-      .accessibilityElement(children: .ignore)
-      .accessibilityLabel(accessibilityLabel)
-      .accessibilityAddTraits(attachment.supportedType == .image ? [.isImage, .isButton] : .isButton)
     }
-  }
-
-  private var accessibilityLabel: Text {
-    if let altText = attachment.description {
-      Text("accessibility.image.alt-text-\(altText)")
-    } else if let typeDescription = attachment.localizedTypeDescription {
-      Text(typeDescription)
-    } else {
-      Text("accessibility.tabs.profile.picker.media")
-    }
+    .frame(maxWidth: isCompact ? imageMaxHeight : nil)
+    .frame(height: imageMaxHeight)
+    .clipped()
+    .cornerRadius(4)
+    // #965: do not create overlapping tappable areas, when multiple images are shown
+    .contentShape(Rectangle())
+    .accessibilityElement(children: .ignore)
+    .accessibilityLabel(Text(displayData.accessibilityText))
+    .accessibilityAddTraits(displayData.type == .image ? [.isImage, .isButton] : .isButton)
   }
 }
 
@@ -227,30 +216,24 @@ private struct FeaturedImagePreView: View {
             image
               .resizable()
               .aspectRatio(contentMode: .fill)
-              .frame(width: newSize.width, height: newSize.height)
-              .clipped()
-              .cornerRadius(4)
               .overlay(
                 RoundedRectangle(cornerRadius: 4)
                   .stroke(.gray.opacity(0.35), lineWidth: 1)
               )
           } else {
-            RoundedRectangle(cornerRadius: 4)
-              .fill(Color.gray)
-              .frame(width: newSize.width, height: newSize.height)
+            RoundedRectangle(cornerRadius: 4).fill(Color.gray)
           }
         }
         .processors([.resize(size: newSize)])
-        .frame(width: newSize.width, height: newSize.height)
       case .gifv, .video, .audio:
         if let url = attachment.url {
           MediaUIAttachmentVideoView(viewModel: .init(url: url))
-            .frame(width: newSize.width, height: newSize.height)
         }
       case .none:
         EmptyView()
       }
     }
+    .frame(width: newSize.width, height: newSize.height)
     .overlay {
       BlurOverLay(sensitive: sensitive, font: .scaledFootnote)
     }
@@ -260,6 +243,8 @@ private struct FeaturedImagePreView: View {
         font: theme.statusDisplayStyle == .compact ? .footnote : .body
       )
     }
+    .clipped()
+    .cornerRadius(4)
   }
 
   private func size(for media: MediaAttachment) -> CGSize? {
@@ -402,6 +387,51 @@ struct AltTextButton: View {
         maxHeight: .infinity,
         alignment: .bottomTrailing
       )
+    }
+  }
+}
+
+private struct DisplayData: Identifiable, Hashable {
+  let id: String
+  let url: URL
+  let previewUrl: URL?
+  let description: String?
+  let type: DisplayType
+  let accessibilityText: String
+
+  init?(from attachment: MediaAttachment) {
+    guard let url = attachment.url else { return nil }
+    guard let type = attachment.supportedType else { return nil }
+
+    id = attachment.id
+    self.url = url
+    self.previewUrl = attachment.previewUrl ?? attachment.url
+    description = attachment.description
+    self.type = DisplayType(from: type)
+    accessibilityText = Self.getAccessibilityString(from: attachment)
+  }
+
+  private static func getAccessibilityString(from attachment: MediaAttachment) -> String {
+    if let altText = attachment.description {
+      "accessibility.image.alt-text-\(altText)"
+    } else if let typeDescription = attachment.localizedTypeDescription {
+      typeDescription
+    } else {
+      "accessibility.tabs.profile.picker.media"
+    }
+  }
+}
+
+private enum DisplayType {
+  case image
+  case av
+
+  init(from attachmentType: MediaAttachment.SupportedType) {
+    switch attachmentType {
+    case .image:
+      self = .image
+    case .video, .gifv, .audio:
+      self = .av
     }
   }
 }
