@@ -39,13 +39,29 @@ import SwiftUI
   var state: State = .loading
   var selectedType: Models.Notification.NotificationType? {
     didSet {
-      if oldValue != selectedType {
-        consolidatedNotifications = []
-        Task {
-          await fetchNotifications()
-        }
+      guard oldValue != selectedType,
+            let id = client?.id
+      else { return }
+
+      UserDefaults.standard.set(selectedType?.rawValue ?? "", forKey: "notification-filter-\(id)")
+
+      consolidatedNotifications = []
+      Task {
+        await fetchNotifications()
       }
     }
+  }
+
+  func loadSelectedType(for client: Client) {
+    self.client = client
+    
+    guard let value = UserDefaults.standard.string(forKey: "notification-filter-\(client.id)")
+    else {
+      selectedType = nil
+      return
+    }
+
+    selectedType = .init(rawValue: value)
   }
 
   var scrollToTopVisible: Bool = false

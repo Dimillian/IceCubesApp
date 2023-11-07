@@ -39,6 +39,7 @@ public struct NotificationsListView: View {
         }
       }
     }
+    .onAppear { viewModel.loadSelectedType(for: client) }
     .toolbar {
       ToolbarItem(placement: .principal) {
         let title = lockedType?.menuTitle() ?? viewModel.selectedType?.menuTitle() ?? "notifications.navigation-title"
