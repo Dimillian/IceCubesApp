@@ -100,7 +100,7 @@ public struct StatusRowMediaPreviewView: View {
 
   @ViewBuilder
   private func makeAttachmentView(for index: Int) -> some View {
-    if 
+    if
       attachments.count > index,
       let data = DisplayData(from: attachments[index])
     {
@@ -278,7 +278,6 @@ struct BlurOverLay: View {
   @Environment(UserPreferences.self) private var preferences
   @Environment(\.isCompact) private var isCompact: Bool
 
-
   @Namespace var buttonSpace
 
   var body: some View {
@@ -289,40 +288,41 @@ struct BlurOverLay: View {
           .background(.ultraThinMaterial)
           .frame(
             width: isFrameExpanded ? nil : 0,
-            height: isFrameExpanded ? nil : 0)
+            height: isFrameExpanded ? nil : 0
+          )
         if !isCompact {
-            Button {
-              withAnimation(.spring(duration: 0.2)) {
-                isTextExpanded.toggle()
-              } completion: {
-                withAnimation(.spring(duration: 0.3)) {
-                  isFrameExpanded.toggle()
-                }
-              }
-            } label: {
-              if isTextExpanded {
-                ViewThatFits(in: .horizontal) {
-                  HStack {
-                    Image(systemName: "eye")
-                    Text(sensitive ? "status.media.sensitive.show" : "status.media.content.show" )
-                  }
-                  HStack {
-                    Image(systemName: "eye")
-                    Text("Show")
-                  }
-                  Image(systemName: "eye")
-                }
-                .lineLimit(1)
-                .foregroundColor(theme.labelColor)
-                .matchedGeometryEffect(id: "text", in: buttonSpace)
-              } else {
-                Image(systemName: "eye.slash")
-                  .matchedGeometryEffect(id: "text", in: buttonSpace)
+          Button {
+            withAnimation(.spring(duration: 0.2)) {
+              isTextExpanded.toggle()
+            } completion: {
+              withAnimation(.spring(duration: 0.3)) {
+                isFrameExpanded.toggle()
               }
             }
-            .foregroundColor(theme.labelColor)
-            .buttonStyle(.borderedProminent)
-            .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
+          } label: {
+            if isTextExpanded {
+              ViewThatFits(in: .horizontal) {
+                HStack {
+                  Image(systemName: "eye")
+                  Text(sensitive ? "status.media.sensitive.show" : "status.media.content.show")
+                }
+                HStack {
+                  Image(systemName: "eye")
+                  Text("Show")
+                }
+                Image(systemName: "eye")
+              }
+              .lineLimit(1)
+              .foregroundColor(theme.labelColor)
+              .matchedGeometryEffect(id: "text", in: buttonSpace)
+            } else {
+              Image(systemName: "eye.slash")
+                .matchedGeometryEffect(id: "text", in: buttonSpace)
+            }
+          }
+          .foregroundColor(theme.labelColor)
+          .buttonStyle(.borderedProminent)
+          .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
         }
       }
       .font(font)
@@ -362,7 +362,7 @@ struct AltTextButton: View {
 
   var body: some View {
     if !isInCaptureMode,
-       let text = text,
+       let text,
        !text.isEmpty,
        !isCompact,
        preferences.showAltTextForMedia
@@ -373,7 +373,7 @@ struct AltTextButton: View {
         ZStack {
           // use to sync button with show/hide content button
           Image(systemName: "eye.slash").opacity(0)
-        Text("status.image.alt-text.abbreviation")
+          Text("status.image.alt-text.abbreviation")
         }
       }
       .buttonStyle(.borderless)
@@ -412,7 +412,7 @@ private struct DisplayData: Identifiable, Hashable {
 
     id = attachment.id
     self.url = url
-    self.previewUrl = attachment.previewUrl ?? attachment.url
+    previewUrl = attachment.previewUrl ?? attachment.url
     description = attachment.description
     self.type = DisplayType(from: type)
     accessibilityText = Self.getAccessibilityString(from: attachment)
@@ -457,7 +457,7 @@ struct WrapperForPreview: View {
     VStack {
       ScrollView {
         VStack {
-          ForEach(1..<5) { number in
+          ForEach(1 ..< 5) { number in
             VStack {
               Text("Preview for \(number) item(s)")
               StatusRowMediaPreviewView(
@@ -484,7 +484,7 @@ struct WrapperForPreview: View {
     .padding()
   }
 
-  static private let url = URL(string: "https://www.upwork.com/catalog-images/c5dffd9b5094556adb26e0a193a1c494")!
-  static private let attachment = MediaAttachment.imageWith(url: url)
-  static private let local = Locale(identifier: "en")
+  private static let url = URL(string: "https://www.upwork.com/catalog-images/c5dffd9b5094556adb26e0a193a1c494")!
+  private static let attachment = MediaAttachment.imageWith(url: url)
+  private static let local = Locale(identifier: "en")
 }
