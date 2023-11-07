@@ -201,23 +201,23 @@ struct StatusRowActionsView: View {
           return
         }
       }
-      HapticManager.shared.fireHaptic(of: .notification(.success))
+      HapticManager.shared.fireHaptic(.notification(.success))
       switch action {
       case .respond:
-        SoundEffectManager.shared.playSound(of: .share)
+        SoundEffectManager.shared.playSound(.share)
         if ProcessInfo.processInfo.isMacCatalystApp {
           openWindow(value: WindowDestination.replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status))
         } else {
           viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)
         }
       case .favorite:
-        SoundEffectManager.shared.playSound(of: .favorite)
+        SoundEffectManager.shared.playSound(.favorite)
         await statusDataController.toggleFavorite(remoteStatus: viewModel.localStatusId)
       case .bookmark:
-        SoundEffectManager.shared.playSound(of: .bookmark)
+        SoundEffectManager.shared.playSound(.bookmark)
         await statusDataController.toggleBookmark(remoteStatus: viewModel.localStatusId)
       case .boost:
-        SoundEffectManager.shared.playSound(of: .boost)
+        SoundEffectManager.shared.playSound(.boost)
         await statusDataController.toggleReblog(remoteStatus: viewModel.localStatusId)
       default:
         break

@@ -105,11 +105,11 @@ public struct ConversationsListView: View {
         // note: this Task wrapper should not be necessary, but it reportedly crashes without it
         // when refreshing on an empty list
         Task {
-          SoundEffectManager.shared.playSound(of: .pull)
-          HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
+          SoundEffectManager.shared.playSound(.pull)
+          HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.3))
           await viewModel.fetchConversations()
-          HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
-          SoundEffectManager.shared.playSound(of: .refresh)
+          HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.7))
+          SoundEffectManager.shared.playSound(.refresh)
         }
       }
       .onAppear {

@@ -195,19 +195,19 @@ public struct StatusRowView: View {
   private var accessibilityActions: some View {
     // Add reply and quote, which are lost when the swipe actions are removed
     Button("status.action.reply") {
-      HapticManager.shared.fireHaptic(of: .notification(.success))
+      HapticManager.shared.fireHaptic(.notification(.success))
       viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
     }
 
     Button("settings.swipeactions.status.action.quote") {
-      HapticManager.shared.fireHaptic(of: .notification(.success))
+      HapticManager.shared.fireHaptic(.notification(.success))
       viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
     }
     .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv)
 
     if viewModel.finalStatus.mediaAttachments.isEmpty == false {
       Button("accessibility.status.media-viewer-action.label") {
-        HapticManager.shared.fireHaptic(of: .notification(.success))
+        HapticManager.shared.fireHaptic(.notification(.success))
         let attachments = viewModel.finalStatus.mediaAttachments
         if ProcessInfo.processInfo.isMacCatalystApp {
           openWindow(value: WindowDestination.mediaViewer(attachments: attachments,
@@ -225,14 +225,14 @@ public struct StatusRowView: View {
     }
 
     Button("@\(viewModel.status.account.username)") {
-      HapticManager.shared.fireHaptic(of: .notification(.success))
+      HapticManager.shared.fireHaptic(.notification(.success))
       viewModel.routerPath.navigate(to: .accountDetail(id: viewModel.status.account.id))
     }
 
     // Add a reference to the post creator
     if viewModel.status.account != viewModel.finalStatus.account {
       Button("@\(viewModel.finalStatus.account.username)") {
-        HapticManager.shared.fireHaptic(of: .notification(.success))
+        HapticManager.shared.fireHaptic(.notification(.success))
         viewModel.routerPath.navigate(to: .accountDetail(id: viewModel.finalStatus.account.id))
       }
     }
@@ -243,18 +243,18 @@ public struct StatusRowView: View {
       case .url:
         if UIApplication.shared.canOpenURL(link.url) {
           Button("accessibility.tabs.timeline.content-link-\(link.title)") {
-            HapticManager.shared.fireHaptic(of: .notification(.success))
+            HapticManager.shared.fireHaptic(.notification(.success))
             _ = viewModel.routerPath.handle(url: link.url)
           }
         }
       case .hashtag:
         Button("accessibility.tabs.timeline.content-hashtag-\(link.title)") {
-          HapticManager.shared.fireHaptic(of: .notification(.success))
+          HapticManager.shared.fireHaptic(.notification(.success))
           _ = viewModel.routerPath.handle(url: link.url)
         }
       case .mention:
         Button("\(link.title)") {
-          HapticManager.shared.fireHaptic(of: .notification(.success))
+          HapticManager.shared.fireHaptic(.notification(.success))
           _ = viewModel.routerPath.handle(url: link.url)
         }
       }

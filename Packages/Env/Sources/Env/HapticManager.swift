@@ -25,7 +25,7 @@ public class HapticManager {
   }
 
   @MainActor
-  public func fireHaptic(of type: HapticType) {
+  public func fireHaptic(_ type: HapticType) {
     guard supportsHaptics else { return }
 
     switch type {
