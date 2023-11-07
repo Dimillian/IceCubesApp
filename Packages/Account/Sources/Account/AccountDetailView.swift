@@ -118,12 +118,12 @@ public struct AccountDetailView: View {
     }
     .refreshable {
       Task {
-        SoundEffectManager.shared.playSound(of: .pull)
+        SoundEffectManager.shared.playSound(.pull)
         HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
         await viewModel.fetchAccount()
         await viewModel.fetchNewestStatuses()
         HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
-        SoundEffectManager.shared.playSound(of: .refresh)
+        SoundEffectManager.shared.playSound(.refresh)
       }
     }
     .onChange(of: watcher.latestEvent?.id) {

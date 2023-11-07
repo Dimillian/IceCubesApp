@@ -213,7 +213,7 @@ public struct StatusEditorView: View {
     let status = await viewModel.postStatus()
     if status != nil {
       close()
-      SoundEffectManager.shared.playSound(of: .tootSent)
+      SoundEffectManager.shared.playSound(.tootSent)
       NotificationCenter.default.post(name: .shareSheetClose,
                                       object: nil)
       if !viewModel.mode.isInShareExtension, !preferences.requestedReview, !ProcessInfo.processInfo.isMacCatalystApp {

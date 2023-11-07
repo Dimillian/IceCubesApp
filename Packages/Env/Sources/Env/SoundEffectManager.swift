@@ -32,10 +32,10 @@ public class SoundEffectManager {
     systemSoundIDs[effect] = soundId
   }
 
-  public func playSound(of type: SoundEffect) {
+  public func playSound(_ effect: SoundEffect) {
     guard
       userPreferences.soundEffectEnabled,
-      let soundId = systemSoundIDs[type]
+      let soundId = systemSoundIDs[effect]
     else {
       return
     }

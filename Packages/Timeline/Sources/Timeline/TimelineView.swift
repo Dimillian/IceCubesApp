@@ -109,11 +109,11 @@ public struct TimelineView: View {
       viewModel.isTimelineVisible = false
     }
     .refreshable {
-      SoundEffectManager.shared.playSound(of: .pull)
+      SoundEffectManager.shared.playSound(.pull)
       HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
       await viewModel.pullToRefresh()
       HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
-      SoundEffectManager.shared.playSound(of: .refresh)
+      SoundEffectManager.shared.playSound(.refresh)
     }
     .onChange(of: watcher.latestEvent?.id) {
       if let latestEvent = watcher.latestEvent {
