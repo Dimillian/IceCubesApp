@@ -43,7 +43,7 @@ public struct AppAccountsSelectorView: View {
   public var body: some View {
     Button {
       isPresented.toggle()
-      HapticManager.shared.fireHaptic(of: .buttonPress)
+      HapticManager.shared.fireHaptic(.buttonPress)
     } label: {
       labelView
     }
@@ -109,7 +109,7 @@ public struct AppAccountsSelectorView: View {
           Section {
             Button {
               isPresented = false
-              HapticManager.shared.fireHaptic(of: .buttonPress)
+              HapticManager.shared.fireHaptic(.buttonPress)
               DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 routerPath.presentedSheet = .addAccount
               }
@@ -142,7 +142,7 @@ public struct AppAccountsSelectorView: View {
   private var settingsButton: some View {
     Button {
       isPresented = false
-      HapticManager.shared.fireHaptic(of: .buttonPress)
+      HapticManager.shared.fireHaptic(.buttonPress)
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
         routerPath.presentedSheet = .settings
       }

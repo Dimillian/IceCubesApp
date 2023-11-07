@@ -192,7 +192,7 @@ import SwiftUI
       case let .edit(status):
         postStatus = try await client.put(endpoint: Statuses.editStatus(id: status.id, json: data))
       }
-      HapticManager.shared.fireHaptic(of: .notification(.success))
+      HapticManager.shared.fireHaptic(.notification(.success))
       if hasExplicitlySelectedLanguage, let selectedLanguage {
         preferences?.markLanguageAsSelected(isoCode: selectedLanguage)
       }
@@ -204,7 +204,7 @@ import SwiftUI
         showPostingErrorAlert = true
       }
       isPosting = false
-      HapticManager.shared.fireHaptic(of: .notification(.error))
+      HapticManager.shared.fireHaptic(.notification(.error))
       return nil
     }
   }

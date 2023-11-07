@@ -94,9 +94,9 @@ public struct NotificationsListView: View {
     }
     .refreshable {
       SoundEffectManager.shared.playSound(.pull)
-      HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
+      HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.3))
       await viewModel.fetchNotifications()
-      HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
+      HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.7))
       SoundEffectManager.shared.playSound(.refresh)
     }
     .onChange(of: watcher.latestEvent?.id) {

@@ -14,7 +14,7 @@ extension IceCubesApp {
         }
       }
 
-      HapticManager.shared.fireHaptic(of: .tabSelection)
+      HapticManager.shared.fireHaptic(.tabSelection)
       SoundEffectManager.shared.playSound(.tabSelection)
 
       selectedTab = newTab

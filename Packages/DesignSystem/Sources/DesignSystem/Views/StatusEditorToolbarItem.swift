@@ -30,7 +30,7 @@ public struct StatusEditorToolbarItem: ToolbarContent {
             openWindow(value: WindowDestination.newStatusEditor(visibility: visibility))
           } else {
             routerPath.presentedSheet = .newStatusEditor(visibility: visibility)
-            HapticManager.shared.fireHaptic(of: .buttonPress)
+            HapticManager.shared.fireHaptic(.buttonPress)
           }
         }
       } label: {

@@ -81,7 +81,7 @@ struct ConversationsListRow: View {
       }
       .accessibilityAction(.magicTap) {
         if let lastStatus = conversation.lastStatus {
-          HapticManager.shared.fireHaptic(of: .notification(.success))
+          HapticManager.shared.fireHaptic(.notification(.success))
           routerPath.presentedSheet = .replyToStatusEditor(status: lastStatus)
         }
       }
@@ -182,7 +182,7 @@ struct ConversationsListRow: View {
   var replyAction: some View {
     if let lastStatus = conversation.lastStatus {
       Button("status.action.reply") {
-        HapticManager.shared.fireHaptic(of: .notification(.success))
+        HapticManager.shared.fireHaptic(.notification(.success))
         routerPath.presentedSheet = .replyToStatusEditor(status: lastStatus)
       }
     } else {
@@ -195,7 +195,7 @@ struct ConversationsListRow: View {
     if let lastStatus = conversation.lastStatus {
       if lastStatus.account.id != currentAccount.account?.id {
         Button("@\(lastStatus.account.username)") {
-          HapticManager.shared.fireHaptic(of: .notification(.success))
+          HapticManager.shared.fireHaptic(.notification(.success))
           routerPath.navigate(to: .accountDetail(id: lastStatus.account.id))
         }
       }
@@ -205,18 +205,18 @@ struct ConversationsListRow: View {
         case .url:
           if UIApplication.shared.canOpenURL(link.url) {
             Button("accessibility.tabs.timeline.content-link-\(link.title)") {
-              HapticManager.shared.fireHaptic(of: .notification(.success))
+              HapticManager.shared.fireHaptic(.notification(.success))
               _ = routerPath.handle(url: link.url)
             }
           }
         case .hashtag:
           Button("accessibility.tabs.timeline.content-hashtag-\(link.title)") {
-            HapticManager.shared.fireHaptic(of: .notification(.success))
+            HapticManager.shared.fireHaptic(.notification(.success))
             _ = routerPath.handle(url: link.url)
           }
         case .mention:
           Button("\(link.title)") {
-            HapticManager.shared.fireHaptic(of: .notification(.success))
+            HapticManager.shared.fireHaptic(.notification(.success))
             _ = routerPath.handle(url: link.url)
           }
         }

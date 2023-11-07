@@ -203,7 +203,7 @@ struct NotificationRowView: View {
   private var accessibilityUserActions: some View {
     ForEach(notification.accounts) { account in
       Button("@\(account.username)") {
-        HapticManager.shared.fireHaptic(of: .notification(.success))
+        HapticManager.shared.fireHaptic(.notification(.success))
         routerPath.navigate(to: .accountDetail(id: account.id))
       }
     }
