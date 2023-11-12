@@ -26,6 +26,12 @@
             "state" : "translated",
             "value" : "  ⸱  "
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "  ⸱  "
+          }
         }
       }
     },
@@ -50,6 +56,12 @@
           }
         },
         "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "#%@"
+          }
+        },
+        "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "#%@"
@@ -82,6 +94,12 @@
             "state" : "translated",
             "value" : "%@©2023 Thomas Ricouard"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@©2023 Thomas Ricouard"
+          }
         }
       }
     },
@@ -106,6 +124,12 @@
           }
         },
         "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "• [EmojiText](https://github.com/divadretlaw/EmojiText)\n\n• [HTML2Markdown](https://gitlab.com/mflint/HTML2Markdown)\n\n• [KeychainSwift](https://github.com/evgenyneu/keychain-swift)\n\n• [LRUCache](https://github.com/nicklockwood/LRUCache)\n\n• [Bodega](https://github.com/mergesort/Bodega)\n\n• [Nuke](https://github.com/kean/Nuke)\n\n• [SwiftSoup](https://github.com/scinfu/SwiftSoup.git)\n\n• [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible)\n\n• [OpenDyslexic](http://opendyslexic.org)\n\n• [SwiftUI-Introspect](https://github.com/siteline/SwiftUI-Introspect)\n\n• [RevenueCat](https://github.com/RevenueCat/purchases-ios)\n\n• [SFSafeSymbols](https://github.com/SFSafeSymbols/SFSafeSymbols)"
+          }
+        },
+        "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "• [EmojiText](https://github.com/divadretlaw/EmojiText)\n\n• [HTML2Markdown](https://gitlab.com/mflint/HTML2Markdown)\n\n• [KeychainSwift](https://github.com/evgenyneu/keychain-swift)\n\n• [LRUCache](https://github.com/nicklockwood/LRUCache)\n\n• [Bodega](https://github.com/mergesort/Bodega)\n\n• [Nuke](https://github.com/kean/Nuke)\n\n• [SwiftSoup](https://github.com/scinfu/SwiftSoup.git)\n\n• [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible)\n\n• [OpenDyslexic](http://opendyslexic.org)\n\n• [SwiftUI-Introspect](https://github.com/siteline/SwiftUI-Introspect)\n\n• [RevenueCat](https://github.com/RevenueCat/purchases-ios)\n\n• [SFSafeSymbols](https://github.com/SFSafeSymbols/SFSafeSymbols)"
@@ -8212,8 +8236,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Block %@"
+            "state" : "translated",
+            "value" : "封鎖 %@"
           }
         }
       }
@@ -8331,8 +8355,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Do you want to block this user?"
+            "state" : "translated",
+            "value" : "您要封鎖這個使用者嗎？"
           }
         }
       }
@@ -9518,7 +9542,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Privacy Settings"
+            "value" : "私密設定"
           }
         }
       }
@@ -14822,13 +14846,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%2$@ follower"
+                      "value" : "%2$@ 跟隨者"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%2$@ followers"
+                      "value" : "%2$@ 跟隨者"
                     }
                   }
                 }
@@ -19261,6 +19285,12 @@
             "state" : "translated",
             "value" : "DeepL API Free"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL API Free"
+          }
         }
       }
     },
@@ -19285,6 +19315,12 @@
           }
         },
         "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL API Pro"
+          }
+        },
+        "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "DeepL API Pro"
@@ -28827,6 +28863,12 @@
             "state" : "translated",
             "value" : "iPad"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iPad"
+          }
         }
       }
     },
@@ -28851,6 +28893,12 @@
           }
         },
         "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iPhone"
+          }
+        },
+        "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "iPhone"
@@ -30040,8 +30088,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "新嘟文"
+            "state" : "translated",
+            "value" : "新增嘟文"
           }
         }
       }
@@ -30159,7 +30207,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "New Window"
+            "value" : "新增視窗"
           }
         }
       }
@@ -40460,6 +40508,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "읽지 않은 글 수를 왼쪽에 표시"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在螢幕左方顯示未讀按鈕"
           }
         }
       }
@@ -65855,7 +65909,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add or remove tag from tag groups"
+            "value" : "從標籤組新增或刪除標籤"
           }
         }
       }
