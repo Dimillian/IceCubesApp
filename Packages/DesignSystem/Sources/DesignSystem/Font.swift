@@ -12,7 +12,7 @@ public extension Font {
   private static let subheadline = onMac ? 16.0 : 15.0
   private static let footnote = onMac ? 15.0 : 13.0
   private static let caption = onMac ? 14.0 : 12.0
-  private static let onMac = ProcessInfo.processInfo.isiOSAppOnMac
+  private static let onMac = ProcessInfo.processInfo.isMacCatalystApp
 
   private static func customFont(size: CGFloat, relativeTo textStyle: TextStyle) -> Font {
     if let chosenFont = Theme.shared.chosenFont {

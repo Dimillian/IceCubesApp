@@ -2,6 +2,7 @@ import Combine
 import Foundation
 import Models
 import Network
+import Observation
 import SwiftUI
 
 public enum RouterDestination: Hashable {
@@ -20,7 +21,16 @@ public enum RouterDestination: Hashable {
   case rebloggedBy(id: String)
   case accountsList(accounts: [Account])
   case trendingTimeline
+  case trendingLinks(cards: [Card])
   case tagsList(tags: [Tag])
+}
+
+public enum WindowDestination: Hashable, Codable {
+  case newStatusEditor(visibility: Models.Visibility)
+  case mediaViewer(attachments: [MediaAttachment], selectedAttachment: MediaAttachment)
+  case editStatusEditor(status: Status)
+  case replyToStatusEditor(status: Status)
+  case quoteStatusEditor(status: Status)
 }
 
 public enum SheetDestination: Identifiable {
@@ -45,36 +55,36 @@ public enum SheetDestination: Identifiable {
     switch self {
     case .editStatusEditor, .newStatusEditor, .replyToStatusEditor, .quoteStatusEditor,
          .mentionStatusEditor, .settings, .accountPushNotficationsSettings:
-      return "statusEditor"
+      "statusEditor"
     case .listEdit:
-      return "listEdit"
+      "listEdit"
     case .listAddAccount:
-      return "listAddAccount"
+      "listAddAccount"
     case .addAccount:
-      return "addAccount"
+      "addAccount"
     case .addTagGroup:
-      return "addTagGroup"
+      "addTagGroup"
     case .addRemoteLocalTimeline:
-      return "addRemoteLocalTimeline"
+      "addRemoteLocalTimeline"
     case .statusEditHistory:
-      return "statusEditHistory"
+      "statusEditHistory"
     case .report:
-      return "report"
+      "report"
     case .shareImage:
-      return "shareImage"
+      "shareImage"
     case .editTagGroup:
-      return "editTagGroup"
+      "editTagGroup"
     }
   }
 }
 
 @MainActor
-public class RouterPath: ObservableObject {
+@Observable public class RouterPath {
   public var client: Client?
   public var urlHandler: ((URL) -> OpenURLAction.Result)?
 
-  @Published public var path: [RouterDestination] = []
-  @Published public var presentedSheet: SheetDestination?
+  public var path: [RouterDestination] = []
+  public var presentedSheet: SheetDestination?
 
   public init() {}
 
@@ -83,9 +93,9 @@ public class RouterPath: ObservableObject {
   }
 
   public func handleStatus(status: AnyStatus, url: URL) -> OpenURLAction.Result {
-    if url.pathComponents.count == 3 && url.pathComponents[1] == "tags" &&
-      url.host() == status.account.url?.host(),
-      let tag = url.pathComponents.last
+    if url.pathComponents.count == 3, url.pathComponents[1] == "tags",
+       url.host() == status.account.url?.host(),
+       let tag = url.pathComponents.last
     {
       // OK this test looks weird but it's
       // A 3 component path i.e. ["/", "tags", "tagname"]
@@ -97,7 +107,7 @@ public class RouterPath: ObservableObject {
     } else if let mention = status.mentions.first(where: { $0.url == url }) {
       navigate(to: .accountDetail(id: mention.id))
       return .handled
-    } else if let client = client,
+    } else if let client,
               client.isAuth,
               client.hasConnection(with: url),
               let id = Int(url.lastPathComponent)
@@ -126,7 +136,7 @@ public class RouterPath: ObservableObject {
         await navigateToAccountFrom(acct: acct, url: url)
       }
       return .handled
-    } else if let client = client,
+    } else if let client,
               client.isAuth,
               client.hasConnection(with: url),
               let id = Int(url.lastPathComponent)

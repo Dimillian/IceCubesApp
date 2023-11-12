@@ -5,24 +5,27 @@ import Env
 import Models
 import SwiftUI
 
+@MainActor
 struct SideBarView<Content: View>: View {
-  @EnvironmentObject private var appAccounts: AppAccountsManager
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var watcher: StreamWatcher
-  @EnvironmentObject private var userPreferences: UserPreferences
+  @Environment(\.openWindow) private var openWindow
+
+  @Environment(AppAccountsManager.self) private var appAccounts
+  @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(Theme.self) private var theme
+  @Environment(StreamWatcher.self) private var watcher
+  @Environment(UserPreferences.self) private var userPreferences
+  @Environment(RouterPath.self) private var routerPath
 
   @Binding var selectedTab: Tab
   @Binding var popToRootTab: Tab
   var tabs: [Tab]
-  @ObservedObject var routerPath = RouterPath()
   @ViewBuilder var content: () -> Content
 
   private func badgeFor(tab: Tab) -> Int {
-    if tab == .notifications && selectedTab != tab,
+    if tab == .notifications, selectedTab != tab,
        let token = appAccounts.currentAccount.oauthToken
     {
-      return watcher.unreadNotificationsCount + userPreferences.getNotificationsCount(for: token)
+      return watcher.unreadNotificationsCount + (userPreferences.notificationsCount[token] ?? 0)
     }
     return 0
   }
@@ -54,7 +57,11 @@ struct SideBarView<Content: View>: View {
 
   private var postButton: some View {
     Button {
-      routerPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
+      if ProcessInfo.processInfo.isMacCatalystApp {
+        openWindow(value: WindowDestination.newStatusEditor(visibility: userPreferences.postVisibility))
+      } else {
+        routerPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
+      }
     } label: {
       Image(systemName: "square.and.pencil")
         .resizable()
@@ -62,14 +69,13 @@ struct SideBarView<Content: View>: View {
         .frame(width: 20, height: 30)
     }
     .buttonStyle(.borderedProminent)
-    .keyboardShortcut("n", modifiers: .command)
   }
 
   private func makeAccountButton(account: AppAccount, showBadge: Bool) -> some View {
     Button {
       if account.id == appAccounts.currentAccount.id {
         selectedTab = .profile
-        SoundEffectManager.shared.playSound(of: .tabSelection)
+        SoundEffectManager.shared.playSound(.tabSelection)
       } else {
         var transation = Transaction()
         transation.disablesAnimations = true
@@ -82,9 +88,10 @@ struct SideBarView<Content: View>: View {
         AppAccountView(viewModel: .init(appAccount: account, isCompact: true))
         if showBadge,
            let token = account.oauthToken,
-           userPreferences.getNotificationsCount(for: token) > 0
+           let notificationsCount = userPreferences.notificationsCount[token],
+           notificationsCount > 0
         {
-          makeBadgeView(count: userPreferences.getNotificationsCount(for: token))
+          makeBadgeView(count: notificationsCount)
         }
       }
     }
@@ -107,10 +114,10 @@ struct SideBarView<Content: View>: View {
           }
         }
         selectedTab = tab
-        SoundEffectManager.shared.playSound(of: .tabSelection)
+        SoundEffectManager.shared.playSound(.tabSelection)
         if tab == .notifications {
           if let token = appAccounts.currentAccount.oauthToken {
-            userPreferences.setNotification(count: 0, token: token)
+            userPreferences.notificationsCount[token] = 0
           }
           watcher.unreadNotificationsCount = 0
         }
@@ -122,6 +129,7 @@ struct SideBarView<Content: View>: View {
   }
 
   var body: some View {
+    @Bindable var routerPath = routerPath
     HStack(spacing: 0) {
       ScrollView {
         VStack(alignment: .center) {
@@ -154,7 +162,7 @@ struct SideBarView<Content: View>: View {
 }
 
 private struct SideBarIcon: View {
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   let systemIconName: String
   let isSelected: Bool
@@ -176,7 +184,7 @@ private struct SideBarIcon: View {
 }
 
 extension View {
-  func hideKeyboard() {
+  @MainActor func hideKeyboard() {
     let resign = #selector(UIResponder.resignFirstResponder)
     UIApplication.shared.sendAction(resign, to: nil, from: nil, for: nil)
   }

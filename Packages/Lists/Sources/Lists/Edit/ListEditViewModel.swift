@@ -1,16 +1,17 @@
 import Combine
 import Models
 import Network
+import Observation
 import SwiftUI
 
 @MainActor
-public class ListEditViewModel: ObservableObject {
+@Observable public class ListEditViewModel {
   let list: Models.List
 
   var client: Client?
 
-  @Published var isLoadingAccounts: Bool = true
-  @Published var accounts: [Account] = []
+  var isLoadingAccounts: Bool = true
+  var accounts: [Account] = []
 
   init(list: Models.List) {
     self.list = list

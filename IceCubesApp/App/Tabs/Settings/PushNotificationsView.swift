@@ -7,12 +7,13 @@ import NukeUI
 import SwiftUI
 import UserNotifications
 
+@MainActor
 struct PushNotificationsView: View {
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var appAccountsManager: AppAccountsManager
-  @EnvironmentObject private var pushNotifications: PushNotificationsService
+  @Environment(Theme.self) private var theme
+  @Environment(AppAccountsManager.self) private var appAccountsManager
+  @Environment(PushNotificationsService.self) private var pushNotifications
 
-  @StateObject public var subscription: PushNotificationSubscriptionSettings
+  @State public var subscription: PushNotificationSubscriptionSettings
 
   var body: some View {
     Form {

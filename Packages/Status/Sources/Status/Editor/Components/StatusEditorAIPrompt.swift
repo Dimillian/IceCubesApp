@@ -24,15 +24,15 @@ enum StatusEditorAIPrompt: CaseIterable {
   func toRequestPrompt(text: String) -> OpenAIClient.Prompt {
     switch self {
     case .correct:
-      return .correct(input: text)
+      .correct(input: text)
     case .addTags:
-      return .addTags(input: text)
+      .addTags(input: text)
     case .insertTags:
-      return .insertTags(input: text)
+      .insertTags(input: text)
     case .fit:
-      return .shorten(input: text)
+      .shorten(input: text)
     case .emphasize:
-      return .emphasize(input: text)
+      .emphasize(input: text)
     }
   }
 }

@@ -2,13 +2,14 @@ import DesignSystem
 import Env
 import SwiftUI
 
+@MainActor
 public struct AppAccountsSelectorView: View {
-  @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var appAccounts: AppAccountsManager
-  @EnvironmentObject private var theme: Theme
+  @Environment(UserPreferences.self) private var preferences
+  @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(AppAccountsManager.self) private var appAccounts
+  @Environment(Theme.self) private var theme
 
-  @ObservedObject var routerPath: RouterPath
+  var routerPath: RouterPath
 
   @State private var accountsViewModel: [AppAccountViewModel] = []
   @State private var isPresented: Bool = false
@@ -19,8 +20,8 @@ public struct AppAccountsSelectorView: View {
   private var showNotificationBadge: Bool {
     accountsViewModel
       .filter { $0.account?.id != currentAccount.account?.id }
-      .compactMap { $0.appAccount.oauthToken }
-      .map { preferences.getNotificationsCount(for: $0) }
+      .compactMap(\.appAccount.oauthToken)
+      .map { preferences.notificationsCount[$0] ?? 0 }
       .reduce(0, +) > 0
   }
 
@@ -42,26 +43,19 @@ public struct AppAccountsSelectorView: View {
   public var body: some View {
     Button {
       isPresented.toggle()
-      HapticManager.shared.fireHaptic(of: .buttonPress)
+      HapticManager.shared.fireHaptic(.buttonPress)
     } label: {
       labelView
     }
     .sheet(isPresented: $isPresented, content: {
-      if #available(iOS 16.4, *) {
-        accountsView.presentationDetents([.height(preferredHeight), .large])
-          .presentationBackground(.thinMaterial)
-          .presentationCornerRadius(16)
-          .onAppear {
-            refreshAccounts()
-          }
-      } else {
-        accountsView.presentationDetents([.height(preferredHeight), .large])
-          .onAppear {
-            refreshAccounts()
-          }
-      }
+      accountsView.presentationDetents([.height(preferredHeight), .large])
+        .presentationBackground(.thinMaterial)
+        .presentationCornerRadius(16)
+        .onAppear {
+          refreshAccounts()
+        }
     })
-    .onChange(of: currentAccount.account?.id) { _ in
+    .onChange(of: currentAccount.account?.id) {
       refreshAccounts()
     }
     .onAppear {
@@ -82,9 +76,10 @@ public struct AppAccountsSelectorView: View {
       } else {
         AvatarView(url: nil, size: avatarSize)
           .redacted(reason: .placeholder)
+          .allowsHitTesting(false)
       }
     }.overlay(alignment: .topTrailing) {
-      if (!currentAccount.followRequests.isEmpty || showNotificationBadge) && accountCreationEnabled {
+      if !currentAccount.followRequests.isEmpty || showNotificationBadge, accountCreationEnabled {
         Circle()
           .fill(Color.red)
           .frame(width: 9, height: 9)
@@ -94,9 +89,9 @@ public struct AppAccountsSelectorView: View {
 
   private var accountBackgroundColor: Color {
     if #available(iOS 16.4, *) {
-      return Color.clear
+      Color.clear
     } else {
-      return theme.secondaryBackgroundColor
+      theme.secondaryBackgroundColor
     }
   }
 
@@ -114,7 +109,7 @@ public struct AppAccountsSelectorView: View {
           Section {
             Button {
               isPresented = false
-              HapticManager.shared.fireHaptic(of: .buttonPress)
+              HapticManager.shared.fireHaptic(.buttonPress)
               DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 routerPath.presentedSheet = .addAccount
               }
@@ -140,13 +135,14 @@ public struct AppAccountsSelectorView: View {
           }
         }
       }
+      .environment(routerPath)
     }
   }
 
   private var settingsButton: some View {
     Button {
       isPresented = false
-      HapticManager.shared.fireHaptic(of: .buttonPress)
+      HapticManager.shared.fireHaptic(.buttonPress)
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
         routerPath.presentedSheet = .settings
       }

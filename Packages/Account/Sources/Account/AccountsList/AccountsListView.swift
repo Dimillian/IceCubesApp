@@ -5,15 +5,16 @@ import Network
 import Shimmer
 import SwiftUI
 
+@MainActor
 public struct AccountsListView: View {
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @StateObject private var viewModel: AccountsListViewModel
+  @Environment(Theme.self) private var theme
+  @Environment(Client.self) private var client
+  @Environment(CurrentAccount.self) private var currentAccount
+  @State private var viewModel: AccountsListViewModel
   @State private var didAppear: Bool = false
 
   public init(mode: AccountsListMode) {
-    _viewModel = StateObject(wrappedValue: .init(mode: mode))
+    _viewModel = .init(initialValue: .init(mode: mode))
   }
 
   public var body: some View {
@@ -23,6 +24,7 @@ public struct AccountsListView: View {
         ForEach(Account.placeholders()) { _ in
           AccountsListRow(viewModel: .init(account: .placeholder(), relationShip: .placeholder()))
             .redacted(reason: .placeholder)
+            .allowsHitTesting(false)
             .shimmering()
             .listRowBackground(theme.primaryBackgroundColor)
         }

@@ -7,25 +7,27 @@ import Notifications
 import SwiftUI
 import Timeline
 
+@MainActor
 struct NotificationsTab: View {
   @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
   @Environment(\.scenePhase) private var scenePhase
 
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var watcher: StreamWatcher
-  @EnvironmentObject private var appAccount: AppAccountsManager
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var userPreferences: UserPreferences
-  @EnvironmentObject private var pushNotificationsService: PushNotificationsService
-  @StateObject private var routerPath = RouterPath()
+  @Environment(Theme.self) private var theme
+  @Environment(Client.self) private var client
+  @Environment(StreamWatcher.self) private var watcher
+  @Environment(AppAccountsManager.self) private var appAccount
+  @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(UserPreferences.self) private var userPreferences
+  @Environment(PushNotificationsService.self) private var pushNotificationsService
+  @State private var routerPath = RouterPath()
+  @State private var scrollToTopSignal: Int = 0
   @Binding var popToRootTab: Tab
 
   let lockedType: Models.Notification.NotificationType?
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {
-      NotificationsListView(lockedType: lockedType)
+      NotificationsListView(lockedType: lockedType, scrollToTopSignal: $scrollToTopSignal)
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbar {
@@ -54,35 +56,39 @@ struct NotificationsTab: View {
       }
     }
     .withSafariRouter()
-    .environmentObject(routerPath)
-    .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
-      if popToRootTab == .notifications {
-        routerPath.path = []
+    .environment(routerPath)
+    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
+      if newValue == .notifications {
+        if routerPath.path.isEmpty {
+          scrollToTopSignal += 1
+        } else {
+          routerPath.path = []
+        }
       }
     }
-    .onChange(of: pushNotificationsService.handledNotification) { notification in
-      if let notification, let type = notification.notification.supportedType {
+    .onChange(of: pushNotificationsService.handledNotification) { _, newValue in
+      if let newValue, let type = newValue.notification.supportedType {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
           switch type {
           case .follow, .follow_request:
-            routerPath.navigate(to: .accountDetailWithAccount(account: notification.notification.account))
+            routerPath.navigate(to: .accountDetailWithAccount(account: newValue.notification.account))
           default:
-            if let status = notification.notification.status {
+            if let status = newValue.notification.status {
               routerPath.navigate(to: .statusDetailWithStatus(status: status))
             }
           }
         }
       }
     }
-    .onChange(of: scenePhase, perform: { scenePhase in
-      switch scenePhase {
+    .onChange(of: scenePhase) { _, newValue in
+      switch newValue {
       case .active:
         clearNotifications()
       default:
         break
       }
-    })
-    .onChange(of: client.id) { _ in
+    }
+    .onChange(of: client.id) {
       routerPath.path = []
     }
   }
@@ -90,7 +96,7 @@ struct NotificationsTab: View {
   private func clearNotifications() {
     if isSecondaryColumn {
       if let token = appAccount.currentAccount.oauthToken {
-        userPreferences.setNotification(count: 0, token: token)
+        userPreferences.notificationsCount[token] = 0
       }
       watcher.unreadNotificationsCount = 0
     }

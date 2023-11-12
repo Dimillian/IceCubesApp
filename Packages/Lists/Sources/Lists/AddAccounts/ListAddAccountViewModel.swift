@@ -1,13 +1,14 @@
 import Models
 import Network
+import Observation
 import SwiftUI
 
 @MainActor
-class ListAddAccountViewModel: ObservableObject {
+@Observable class ListAddAccountViewModel {
   let account: Account
 
-  @Published var inLists: [Models.List] = []
-  @Published var isLoadingInfo: Bool = true
+  var inLists: [Models.List] = []
+  var isLoadingInfo: Bool = true
 
   var client: Client?
 

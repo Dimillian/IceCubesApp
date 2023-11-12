@@ -4,35 +4,46 @@ import DesignSystem
 import Env
 import Models
 import Network
+import SwiftData
 import SwiftUI
 import Timeline
 
+@MainActor
 struct TimelineTab: View {
-  @EnvironmentObject private var appAccount: AppAccountsManager
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var client: Client
-  @StateObject private var routerPath = RouterPath()
+  @Environment(\.modelContext) private var context
+
+  @Environment(AppAccountsManager.self) private var appAccount
+  @Environment(Theme.self) private var theme
+  @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(UserPreferences.self) private var preferences
+  @Environment(Client.self) private var client
+  @State private var routerPath = RouterPath()
   @Binding var popToRootTab: Tab
 
   @State private var didAppear: Bool = false
-  @State private var timeline: TimelineFilter
+  @State private var timeline: TimelineFilter = .home
+  @State private var selectedTagGroup: TagGroup?
   @State private var scrollToTopSignal: Int = 0
 
-  @AppStorage("last_timeline_filter") public var lastTimelineFilter: TimelineFilter = .home
+  @Query(sort: \LocalTimeline.creationDate, order: .reverse) var localTimelines: [LocalTimeline]
+  @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
+
+  @AppStorage("last_timeline_filter") var lastTimelineFilter: TimelineFilter = .home
 
   private let canFilterTimeline: Bool
 
   init(popToRootTab: Binding<Tab>, timeline: TimelineFilter? = nil) {
     canFilterTimeline = timeline == nil
-    self.timeline = timeline ?? .home
     _popToRootTab = popToRootTab
+    _timeline = .init(initialValue: timeline ?? .home)
   }
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {
-      TimelineView(timeline: $timeline, scrollToTopSignal: $scrollToTopSignal, canFilterTimeline: canFilterTimeline)
+      TimelineView(timeline: $timeline,
+                   selectedTagGroup: $selectedTagGroup,
+                   scrollToTopSignal: $scrollToTopSignal,
+                   canFilterTimeline: canFilterTimeline)
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbar {
@@ -43,7 +54,7 @@ struct TimelineTab: View {
     }
     .onAppear {
       routerPath.client = client
-      if !didAppear && canFilterTimeline {
+      if !didAppear, canFilterTimeline {
         didAppear = true
         if client.isAuth {
           timeline = lastTimelineFilter
@@ -58,22 +69,14 @@ struct TimelineTab: View {
         routerPath.presentedSheet = .addAccount
       }
     }
-    .onChange(of: client.isAuth, perform: { _ in
-      if client.isAuth {
-        timeline = lastTimelineFilter
-      } else {
-        timeline = .federated
-      }
-    })
-    .onChange(of: currentAccount.account?.id, perform: { _ in
-      if client.isAuth, canFilterTimeline {
-        timeline = lastTimelineFilter
-      } else {
-        timeline = .federated
-      }
-    })
-    .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
-      if popToRootTab == .timeline {
+    .onChange(of: client.isAuth) {
+      resetTimelineFilter()
+    }
+    .onChange(of: currentAccount.account?.id) {
+      resetTimelineFilter()
+    }
+    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
+      if newValue == .timeline {
         if routerPath.path.isEmpty {
           scrollToTopSignal += 1
         } else {
@@ -81,27 +84,47 @@ struct TimelineTab: View {
         }
       }
     }
-    .onChange(of: client.id) { _ in
+    .onChange(of: client.id) {
       routerPath.path = []
     }
-    .onChange(of: timeline) { timeline in
-      if timeline == .home || timeline == .federated || timeline == .local {
-        lastTimelineFilter = timeline
+    .onChange(of: timeline) { _, newValue in
+      if client.isAuth, canFilterTimeline {
+        lastTimelineFilter = newValue
+      }
+      switch newValue {
+      case .tagGroup:
+        break
+      default:
+        selectedTagGroup = nil
       }
     }
+    .onReceive(NotificationCenter.default.publisher(for: .refreshTimeline)) { _ in
+      timeline = .latest
+    }
+    .onReceive(NotificationCenter.default.publisher(for: .trendingTimeline)) { _ in
+      timeline = .trending
+    }
+    .onReceive(NotificationCenter.default.publisher(for: .localTimeline)) { _ in
+      timeline = .local
+    }
+    .onReceive(NotificationCenter.default.publisher(for: .federatedTimeline)) { _ in
+      timeline = .federated
+    }
+    .onReceive(NotificationCenter.default.publisher(for: .homeTimeline)) { _ in
+      timeline = .home
+    }
     .withSafariRouter()
-    .environmentObject(routerPath)
+    .environment(routerPath)
   }
 
   @ViewBuilder
   private var timelineFilterButton: some View {
     if timeline.supportNewestPagination {
       Button {
-        self.timeline = .latest
+        timeline = .latest
       } label: {
         Label(TimelineFilter.latest.localizedTitle(), systemImage: TimelineFilter.latest.iconName() ?? "")
       }
-      .keyboardShortcut("r", modifiers: .command)
       Divider()
     }
     ForEach(TimelineFilter.availableTimeline(client: client), id: \.self) { timeline in
@@ -136,12 +159,12 @@ struct TimelineTab: View {
     }
 
     Menu("timeline.filter.local") {
-      ForEach(preferences.remoteLocalTimelines, id: \.self) { server in
+      ForEach(localTimelines) { remoteLocal in
         Button {
-          timeline = .remoteLocal(server: server, filter: .local)
+          timeline = .remoteLocal(server: remoteLocal.instance, filter: .local)
         } label: {
           VStack {
-            Label(server, systemImage: "dot.radiowaves.right")
+            Label(remoteLocal.instance, systemImage: "dot.radiowaves.right")
           }
         }
       }
@@ -153,12 +176,13 @@ struct TimelineTab: View {
     }
 
     Menu("timeline.filter.tag-groups") {
-      ForEach(preferences.tagGroups, id: \.self) { group in
+      ForEach(tagGroups) { group in
         Button {
-          timeline = .tagGroup(group)
+          selectedTagGroup = group
+          timeline = .tagGroup(title: group.title, tags: group.tags)
         } label: {
           VStack {
-            let icon = group.sfSymbolName.isEmpty ? "number" : group.sfSymbolName
+            let icon = group.symbolName.isEmpty ? "number" : group.symbolName
             Label(group.title, systemImage: icon)
           }
         }
@@ -197,7 +221,7 @@ struct TimelineTab: View {
       }
       statusEditorToolbarItem(routerPath: routerPath,
                               visibility: preferences.postVisibility)
-      if UIDevice.current.userInterfaceIdiom == .pad && !preferences.showiPadSecondaryColumn {
+      if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn {
         SecondaryColumnToolbarItem()
       }
     } else {
@@ -232,6 +256,14 @@ struct TimelineTab: View {
       ToolbarItem {
         EmptyView()
       }
+    }
+  }
+
+  private func resetTimelineFilter() {
+    if client.isAuth, canFilterTimeline {
+      timeline = lastTimelineFilter
+    } else {
+      timeline = .federated
     }
   }
 }

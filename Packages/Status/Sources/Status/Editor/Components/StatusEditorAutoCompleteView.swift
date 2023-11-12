@@ -3,9 +3,10 @@ import EmojiText
 import Foundation
 import SwiftUI
 
+@MainActor
 struct StatusEditorAutoCompleteView: View {
-  @EnvironmentObject private var theme: Theme
-  @ObservedObject var viewModel: StatusEditorViewModel
+  @Environment(Theme.self) private var theme
+  var viewModel: StatusEditorViewModel
 
   var body: some View {
     if !viewModel.mentionsSuggestions.isEmpty || !viewModel.tagsSuggestions.isEmpty {

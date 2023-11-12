@@ -10,13 +10,13 @@ public enum Lists: Endpoint {
   public func path() -> String {
     switch self {
     case .lists, .createList:
-      return "lists"
+      "lists"
     case let .list(id):
-      return "lists/\(id)"
+      "lists/\(id)"
     case let .accounts(listId):
-      return "lists/\(listId)/accounts"
+      "lists/\(listId)/accounts"
     case let .updateAccounts(listId, _):
-      return "lists/\(listId)/accounts"
+      "lists/\(listId)/accounts"
     }
   }
 

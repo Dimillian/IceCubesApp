@@ -8,7 +8,7 @@ import PhotosUI
 import SwiftUI
 
 @MainActor
-public class StatusEditorViewModel: NSObject, ObservableObject {
+@Observable public class StatusEditorViewModel: NSObject {
   var mode: Mode
 
   var client: Client?
@@ -50,7 +50,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
     return textView.markedTextRange
   }
 
-  @Published var statusText = NSMutableAttributedString(string: "") {
+  var statusText = NSMutableAttributedString(string: "") {
     didSet {
       let range = selectedRange
       processText()
@@ -73,18 +73,18 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
 
   private var itemsProvider: [NSItemProvider]?
 
-  @Published var backupStatusText: NSAttributedString?
+  var backupStatusText: NSAttributedString?
 
-  @Published var showPoll: Bool = false
-  @Published var pollVotingFrequency = PollVotingFrequency.oneVote
-  @Published var pollDuration = Duration.oneDay
-  @Published var pollOptions: [String] = ["", ""]
+  var showPoll: Bool = false
+  var pollVotingFrequency = PollVotingFrequency.oneVote
+  var pollDuration = Duration.oneDay
+  var pollOptions: [String] = ["", ""]
 
-  @Published var spoilerOn: Bool = false
-  @Published var spoilerText: String = ""
+  var spoilerOn: Bool = false
+  var spoilerText: String = ""
 
-  @Published var isPosting: Bool = false
-  @Published var selectedMedias: [PhotosPickerItem] = [] {
+  var isPosting: Bool = false
+  var selectedMedias: [PhotosPickerItem] = [] {
     didSet {
       if selectedMedias.count > 4 {
         selectedMedias = selectedMedias.prefix(4).map { $0 }
@@ -94,16 +94,16 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
     }
   }
 
-  @Published var isMediasLoading: Bool = false
+  var isMediasLoading: Bool = false
 
-  @Published var mediasImages: [StatusEditorMediaContainer] = []
-  @Published var replyToStatus: Status?
-  @Published var embeddedStatus: Status?
+  var mediasImages: [StatusEditorMediaContainer] = []
+  var replyToStatus: Status?
+  var embeddedStatus: Status?
 
-  @Published var customEmojis: [Emoji] = []
+  var customEmojis: [Emoji] = []
 
-  @Published var postingError: String?
-  @Published var showPostingErrorAlert: Bool = false
+  var postingError: String?
+  var showPostingErrorAlert: Bool = false
 
   var canPost: Bool {
     statusText.length > 0 || !mediasImages.isEmpty
@@ -123,11 +123,11 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
     return !modifiedStatusText.isEmpty && !mode.isInShareExtension
   }
 
-  @Published var visibility: Models.Visibility = .pub
+  var visibility: Models.Visibility = .pub
 
-  @Published var mentionsSuggestions: [Account] = []
-  @Published var tagsSuggestions: [Tag] = []
-  @Published var selectedLanguage: String?
+  var mentionsSuggestions: [Account] = []
+  var tagsSuggestions: [Tag] = []
+  var selectedLanguage: String?
   var hasExplicitlySelectedLanguage: Bool = false
   private var currentSuggestionRange: NSRange?
 
@@ -157,7 +157,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
 
   func evaluateLanguages() {
     if let detectedLang = detectLanguage(text: statusText.string),
-       let selectedLanguage = selectedLanguage,
+       let selectedLanguage,
        selectedLanguage != "",
        selectedLanguage != detectedLang
     {
@@ -192,7 +192,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
       case let .edit(status):
         postStatus = try await client.put(endpoint: Statuses.editStatus(id: status.id, json: data))
       }
-      HapticManager.shared.fireHaptic(of: .notification(.success))
+      HapticManager.shared.fireHaptic(.notification(.success))
       if hasExplicitlySelectedLanguage, let selectedLanguage {
         preferences?.markLanguageAsSelected(isoCode: selectedLanguage)
       }
@@ -204,7 +204,7 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
         showPostingErrorAlert = true
       }
       isPosting = false
-      HapticManager.shared.fireHaptic(of: .notification(.error))
+      HapticManager.shared.fireHaptic(.notification(.error))
       return nil
     }
   }
@@ -311,14 +311,14 @@ public class StatusEditorViewModel: NSObject, ObservableObject {
       let range = NSMakeRange(0, statusText.string.utf16.count)
       var ranges = hashtagRegex.matches(in: statusText.string,
                                         options: [],
-                                        range: range).map { $0.range }
+                                        range: range).map(\.range)
       ranges.append(contentsOf: mentionRegex.matches(in: statusText.string,
                                                      options: [],
-                                                     range: range).map { $0.range })
+                                                     range: range).map(\.range))
 
       let urlRanges = urlRegex.matches(in: statusText.string,
                                        options: [],
-                                       range: range).map { $0.range }
+                                       range: range).map(\.range)
 
       var foundSuggestionRange = false
       for nsRange in ranges {

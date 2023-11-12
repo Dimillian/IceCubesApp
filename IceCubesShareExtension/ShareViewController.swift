@@ -27,12 +27,12 @@ class ShareViewController: UIViewController {
     if let item = extensionContext?.inputItems.first as? NSExtensionItem {
       if let attachments = item.attachments {
         let view = StatusEditorView(mode: .shareExtension(items: attachments))
-          .environmentObject(UserPreferences.shared)
-          .environmentObject(appAccountsManager)
-          .environmentObject(client)
-          .environmentObject(account)
-          .environmentObject(theme)
-          .environmentObject(instance)
+          .environment(UserPreferences.shared)
+          .environment(appAccountsManager)
+          .environment(client)
+          .environment(account)
+          .environment(theme)
+          .environment(instance)
           .tint(theme.tintColor)
           .preferredColorScheme(colorScheme == .light ? .light : .dark)
         let childView = UIHostingController(rootView: view)
@@ -52,16 +52,18 @@ class ShareViewController: UIViewController {
       }
     }
 
-    NotificationCenter.default.addObserver(forName: NotificationsName.shareSheetClose,
+    NotificationCenter.default.addObserver(forName: .shareSheetClose,
                                            object: nil,
                                            queue: nil)
-    { _ in
-      self.close()
+    { [weak self] _ in
+      self?.close()
     }
   }
 
-  func close() {
-    extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
+  nonisolated func close() {
+    Task { @MainActor in
+      extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
+    }
   }
 
   override func viewDidAppear(_ animated: Bool) {

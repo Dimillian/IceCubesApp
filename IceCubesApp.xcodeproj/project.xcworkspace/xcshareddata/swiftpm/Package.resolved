@@ -3,10 +3,10 @@
     {
       "identity" : "bodega",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/mergesort/Bodega.git",
+      "location" : "https://github.com/mergesort/Bodega",
       "state" : {
-        "revision" : "3e7c1c58ad9a46aa8551cebfe87770003cdaaaca",
-        "version" : "2.0.2"
+        "revision" : "f0554077c178088ba11557bbdbb71775cc6a1b84",
+        "version" : "2.1.0"
       }
     },
     {
@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Nuke",
       "state" : {
-        "revision" : "c3864b8882bc69f5edfe5c70e18786c91d228b28",
-        "version" : "12.1.3"
+        "revision" : "3f666f120b63ea7de57d42e9a7c9b47f8e7a290b",
+        "version" : "12.1.6"
       }
     },
     {
@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RevenueCat/purchases-ios.git",
       "state" : {
-        "revision" : "8d16e02c96efbcf58eaf7eef2e595942d935f572",
-        "version" : "4.25.0"
+        "revision" : "78d2f159d6d647f26ae5a9dd38276ea06403e7ec",
+        "version" : "4.25.9"
       }
     },
     {
@@ -68,8 +68,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/stephencelis/SQLite.swift.git",
       "state" : {
-        "revision" : "4d543d811ee644fa4cc4bfa0be996b4dd6ba0f54",
-        "version" : "0.13.3"
+        "revision" : "7a2e3cd27de56f6d396e84f63beefd0267b55ccb",
+        "version" : "0.14.1"
       }
     },
     {
@@ -86,8 +86,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/siteline/SwiftUI-Introspect.git",
       "state" : {
-        "revision" : "730ab9e6cdbb3122ad88277b295c4cecd284a311",
-        "version" : "0.9.1"
+        "revision" : "3ba734dd20faada0e3234b68e78db97005315f0e",
+        "version" : "1.0.0"
       }
     },
     {

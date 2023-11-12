@@ -3,21 +3,22 @@ import Env
 import Models
 import SwiftUI
 
+@MainActor
 struct StatusRowSwipeView: View {
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var statusDataController: StatusDataController
+  @Environment(Theme.self) private var theme
+  @Environment(UserPreferences.self) private var preferences
+  @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(StatusDataController.self) private var statusDataController
 
   enum Mode {
     case leading, trailing
   }
 
   func privateBoost() -> Bool {
-    return viewModel.status.visibility == .priv && viewModel.status.account.id == currentAccount.account?.id
+    viewModel.status.visibility == .priv && viewModel.status.account.id == currentAccount.account?.id
   }
 
-  @ObservedObject var viewModel: StatusRowViewModel
+  var viewModel: StatusRowViewModel
   let mode: Mode
 
   var body: some View {
@@ -60,7 +61,7 @@ struct StatusRowSwipeView: View {
       makeSwipeButtonForRouterPath(action: action, destination: .replyToStatusEditor(status: viewModel.status))
     case .quote:
       makeSwipeButtonForRouterPath(action: action, destination: .quoteStatusEditor(status: viewModel.status))
-      .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv)
+        .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv)
     case .favorite:
       makeSwipeButtonForTask(action: action) {
         await statusDataController.toggleFavorite(remoteStatus: nil)
@@ -82,7 +83,7 @@ struct StatusRowSwipeView: View {
   @ViewBuilder
   private func makeSwipeButtonForRouterPath(action: StatusAction, destination: SheetDestination) -> some View {
     Button {
-      HapticManager.shared.fireHaptic(of: .notification(.success))
+      HapticManager.shared.fireHaptic(.notification(.success))
       viewModel.routerPath.presentedSheet = destination
     } label: {
       makeSwipeLabel(action: action, style: preferences.swipeActionsIconStyle)
@@ -93,7 +94,7 @@ struct StatusRowSwipeView: View {
   private func makeSwipeButtonForTask(action: StatusAction, privateBoost: Bool = false, task: @escaping () async -> Void) -> some View {
     Button {
       Task {
-        HapticManager.shared.fireHaptic(of: .notification(.success))
+        HapticManager.shared.fireHaptic(.notification(.success))
         await task()
       }
     } label: {

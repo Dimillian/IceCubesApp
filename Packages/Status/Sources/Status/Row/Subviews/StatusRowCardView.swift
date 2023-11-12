@@ -9,7 +9,7 @@ public struct StatusRowCardView: View {
   @Environment(\.openURL) private var openURL
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
 
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   let card: Card
 
@@ -47,27 +47,23 @@ public struct StatusRowCardView: View {
       if let title = card.title, let url = URL(string: card.url) {
         VStack(alignment: .leading) {
           if let imageURL = card.image, !isInCaptureMode {
-            GeometryReader { proxy in
+            LazyResizableImage(url: imageURL) { state, proxy in
               let width = imageWidthFor(proxy: proxy)
-              let processors: [ImageProcessing] = [.resize(size: .init(width: width, height: imageHeight))]
-              LazyImage(url: imageURL) { state in
-                if let image = state.image {
-                  image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(height: imageHeight)
-                    .frame(maxWidth: width)
-                    .clipped()
-                } else if state.isLoading {
-                  Rectangle()
-                    .fill(Color.gray)
-                    .frame(height: imageHeight)
-                }
+              if let image = state.image {
+                image
+                  .resizable()
+                  .aspectRatio(contentMode: .fill)
+                  .frame(height: imageHeight)
+                  .frame(maxWidth: width)
+                  .clipped()
+              } else if state.isLoading {
+                Rectangle()
+                  .fill(Color.gray)
+                  .frame(height: imageHeight)
               }
-              .processors(processors)
-              // This image is decorative
-              .accessibilityHidden(true)
             }
+            // This image is decorative
+            .accessibilityHidden(true)
             .frame(height: imageHeight)
           }
           HStack {

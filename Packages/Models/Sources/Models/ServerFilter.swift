@@ -24,14 +24,14 @@ public struct ServerFilter: Codable, Identifiable, Hashable, Sendable {
   public let expiresAt: ServerDate?
 
   public func hasExpiry() -> Bool {
-    return expiresAt != nil
+    expiresAt != nil
   }
 
   public func isExpired() -> Bool {
     if let expiresAtDate = expiresAt?.asDate {
-      return expiresAtDate < Date()
+      expiresAtDate < Date()
     } else {
-      return false
+      false
     }
   }
 }
@@ -40,30 +40,30 @@ public extension ServerFilter.Context {
   var iconName: String {
     switch self {
     case .home:
-      return "rectangle.stack"
+      "rectangle.stack"
     case .notifications:
-      return "bell"
+      "bell"
     case .public:
-      return "globe.americas"
+      "globe.americas"
     case .thread:
-      return "bubble.left.and.bubble.right"
+      "bubble.left.and.bubble.right"
     case .account:
-      return "person.crop.circle"
+      "person.crop.circle"
     }
   }
 
   var name: String {
     switch self {
     case .home:
-      return NSLocalizedString("filter.contexts.home", comment: "")
+      NSLocalizedString("filter.contexts.home", comment: "")
     case .notifications:
-      return NSLocalizedString("filter.contexts.notifications", comment: "")
+      NSLocalizedString("filter.contexts.notifications", comment: "")
     case .public:
-      return NSLocalizedString("filter.contexts.public", comment: "")
+      NSLocalizedString("filter.contexts.public", comment: "")
     case .thread:
-      return NSLocalizedString("filter.contexts.conversations", comment: "")
+      NSLocalizedString("filter.contexts.conversations", comment: "")
     case .account:
-      return NSLocalizedString("filter.contexts.profiles", comment: "")
+      NSLocalizedString("filter.contexts.profiles", comment: "")
     }
   }
 }
@@ -72,9 +72,9 @@ public extension ServerFilter.Action {
   var label: String {
     switch self {
     case .warn:
-      return NSLocalizedString("filter.action.warning", comment: "")
+      NSLocalizedString("filter.action.warning", comment: "")
     case .hide:
-      return NSLocalizedString("filter.action.hide", comment: "")
+      NSLocalizedString("filter.action.hide", comment: "")
     }
   }
 }

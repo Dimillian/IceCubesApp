@@ -7,17 +7,19 @@ import Network
 import Shimmer
 import SwiftUI
 
+@MainActor
 struct ExploreTab: View {
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var client: Client
-  @StateObject private var routerPath = RouterPath()
+  @Environment(Theme.self) private var theme
+  @Environment(UserPreferences.self) private var preferences
+  @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(Client.self) private var client
+  @State private var routerPath = RouterPath()
+  @State private var scrollToTopSignal: Int = 0
   @Binding var popToRootTab: Tab
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {
-      ExploreView()
+      ExploreView(scrollToTopSignal: $scrollToTopSignal)
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
@@ -29,19 +31,23 @@ struct ExploreTab: View {
               AppAccountsSelectorView(routerPath: routerPath)
             }
           }
-          if UIDevice.current.userInterfaceIdiom == .pad && !preferences.showiPadSecondaryColumn {
+          if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn {
             SecondaryColumnToolbarItem()
           }
         }
     }
     .withSafariRouter()
-    .environmentObject(routerPath)
-    .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
-      if popToRootTab == .explore {
-        routerPath.path = []
+    .environment(routerPath)
+    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
+      if newValue == .explore {
+        if routerPath.path.isEmpty {
+          scrollToTopSignal += 1
+        } else {
+          routerPath.path = []
+        }
       }
     }
-    .onChange(of: client.id) { _ in
+    .onChange(of: client.id) {
       routerPath.path = []
     }
     .onAppear {

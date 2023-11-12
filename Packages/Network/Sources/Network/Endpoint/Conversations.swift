@@ -8,20 +8,20 @@ public enum Conversations: Endpoint {
   public func path() -> String {
     switch self {
     case .conversations:
-      return "conversations"
+      "conversations"
     case let .delete(id):
-      return "conversations/\(id)"
+      "conversations/\(id)"
     case let .read(id):
-      return "conversations/\(id)/read"
+      "conversations/\(id)/read"
     }
   }
 
   public func queryItems() -> [URLQueryItem]? {
     switch self {
     case let .conversations(maxId):
-      return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
+      makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
     default:
-      return nil
+      nil
     }
   }
 }

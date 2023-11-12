@@ -38,6 +38,6 @@ public struct EmojiTextApp: View {
 
   private func isRTL() -> Bool {
     // Arabic, Hebrew, Persian, Urdu, Kurdish, Azeri, Dhivehi
-    return ["ar", "he", "fa", "ur", "ku", "az", "dv"].contains(language)
+    ["ar", "he", "fa", "ur", "ku", "az", "dv"].contains(language)
   }
 }

@@ -1,28 +1,25 @@
 import DesignSystem
 import Env
+import MediaUI
 import Models
 import Nuke
 import NukeUI
 import SwiftUI
 
+@MainActor
 public struct StatusRowMediaPreviewView: View {
-  @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
+  @Environment(\.openWindow) private var openWindow
   @Environment(\.extraLeadingInset) private var extraLeadingInset: CGFloat
-  @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
   @Environment(\.isCompact) private var isCompact: Bool
-
-  @EnvironmentObject var sceneDelegate: SceneDelegate
-  @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var quickLook: QuickLook
-  @EnvironmentObject private var theme: Theme
+  @Environment(SceneDelegate.self) private var sceneDelegate
+  @Environment(UserPreferences.self) private var preferences
+  @Environment(QuickLook.self) private var quickLook
+  @Environment(Theme.self) private var theme
 
   public let attachments: [MediaAttachment]
   public let sensitive: Bool
 
   @State private var isQuickLookLoading: Bool = false
-  @State private var altTextDisplayed: String?
-  @State private var isAltAlertDisplayed: Bool = false
-  @State private var isHidingMedia: Bool = false
 
   var availableWidth: CGFloat {
     if UIDevice.current.userInterfaceIdiom == .phone &&
@@ -63,36 +60,20 @@ public struct StatusRowMediaPreviewView: View {
     return attachments.count > 2 ? 150 : 200
   }
 
-  private func size(for media: MediaAttachment) -> CGSize? {
-    if let width = media.meta?.original?.width,
-       let height = media.meta?.original?.height
-    {
-      return .init(width: CGFloat(width), height: CGFloat(height))
-    }
-    return nil
-  }
-
-  private func imageSize(from: CGSize, newWidth: CGFloat) -> CGSize {
-    if isCompact || theme.statusDisplayStyle == .compact || isSecondaryColumn {
-      return .init(width: imageMaxHeight, height: imageMaxHeight)
-    }
-    let ratio = newWidth / from.width
-    let newHeight = from.height * ratio
-    return .init(width: newWidth, height: newHeight)
-  }
-
   public var body: some View {
     Group {
-      if attachments.count == 1, let attachment = attachments.first {
-        makeFeaturedImagePreview(attachment: attachment)
-          .onTapGesture {
-            Task {
-              await quickLook.prepareFor(urls: attachments.compactMap { $0.url }, selectedURL: attachment.url!)
-            }
-          }
-          .accessibilityElement(children: .ignore)
-          .accessibilityLabel(Self.accessibilityLabel(for: attachment))
-          .accessibilityAddTraits([.isButton, .isImage])
+      if attachments.count == 1 {
+        FeaturedImagePreView(
+          attachment: attachments[0],
+          imageMaxHeight: imageMaxHeight,
+          sensitive: sensitive,
+          appLayoutWidth: appLayoutWidth,
+          availableWidth: availableWidth
+        )
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Self.accessibilityLabel(for: attachments[0]))
+        .accessibilityAddTraits([.isButton, .isImage])
+        .onTapGesture { tabAction(for: 0) }
       } else {
         if isCompact || theme.statusDisplayStyle == .compact {
           HStack {
@@ -115,47 +96,119 @@ public struct StatusRowMediaPreviewView: View {
         }
       }
     }
-    .overlay {
-      if quickLook.isPreparing {
-        quickLookLoadingView
-          .transition(.opacity)
-      }
-
-      if isHidingMedia {
-        sensitiveMediaOverlay
-          .transition(.opacity)
-      }
-    }
-    .alert("status.editor.media.image-description",
-           isPresented: $isAltAlertDisplayed)
-    {
-      Button("alert.button.ok", action: {})
-    } message: {
-      Text(altTextDisplayed ?? "")
-    }
-    .onAppear {
-      if sensitive && preferences.autoExpandMedia == .hideSensitive {
-        isHidingMedia = true
-      } else if preferences.autoExpandMedia == .hideAll {
-        isHidingMedia = true
-      } else {
-        isHidingMedia = false
-      }
-    }
   }
 
   @ViewBuilder
   private func makeAttachmentView(for index: Int) -> some View {
-    if attachments.count > index {
-      makePreview(attachment: attachments[index])
+    if
+      attachments.count > index,
+      let data = DisplayData(from: attachments[index])
+    {
+      MediaPreview(
+        sensitive: sensitive,
+        imageMaxHeight: imageMaxHeight,
+        displayData: data
+      )
+      .onTapGesture { tabAction(for: index) }
     }
   }
 
-  @ViewBuilder
-  private func makeFeaturedImagePreview(attachment: MediaAttachment) -> some View {
-    ZStack(alignment: .bottomLeading) {
-      let size: CGSize = size(for: attachment) ?? .init(width: imageMaxHeight, height: imageMaxHeight)
-      let newSize = imageSize(from: size, newWidth: availableWidth - appLayoutWidth)
+  private func tabAction(for index: Int) {
+    if ProcessInfo.processInfo.isMacCatalystApp {
+      openWindow(
+        value: WindowDestination.mediaViewer(
+          attachments: attachments,
+          selectedAttachment: attachments[index]
+        )
+      )
+    } else {
+      quickLook.prepareFor(
+        selectedMediaAttachment: attachments[index],
+        mediaAttachments: attachments
+      )
+    }
+  }
+
+  private static func accessibilityLabel(for attachment: MediaAttachment) -> Text {
+    if let altText = attachment.description {
+      Text("accessibility.image.alt-text-\(altText)")
+    } else if let typeDescription = attachment.localizedTypeDescription {
+      Text(typeDescription)
+    } else {
+      Text("accessibility.tabs.profile.picker.media")
+    }
+  }
+}
+
+private struct MediaPreview: View {
+  let sensitive: Bool
+  let imageMaxHeight: CGFloat
+  let displayData: DisplayData
+
+  @Environment(UserPreferences.self) private var preferences
+  @Environment(\.isCompact) private var isCompact: Bool
+
+  var body: some View {
+    GeometryReader { proxy in
+      switch displayData.type {
+      case .image:
+        LazyResizableImage(url: displayData.previewUrl) { state, proxy in
+          let width = isCompact ? imageMaxHeight : proxy.frame(in: .local).width
+          if let image = state.image {
+            image
+              .resizable()
+              .aspectRatio(contentMode: .fill)
+              .frame(maxWidth: width, maxHeight: imageMaxHeight)
+              .overlay(
+                RoundedRectangle(cornerRadius: 4)
+                  .stroke(.gray.opacity(0.35), lineWidth: 1)
+              )
+          } else if state.isLoading {
+            RoundedRectangle(cornerRadius: 4)
+              .fill(Color.gray)
+              .frame(maxWidth: width, maxHeight: imageMaxHeight)
+          }
+        }
+        .overlay {
+          BlurOverLay(sensitive: sensitive, font: .scaledFootnote)
+        }
+        .overlay {
+          AltTextButton(text: displayData.description, font: .scaledFootnote)
+        }
+      case .av:
+        MediaUIAttachmentVideoView(viewModel: .init(url: displayData.url))
+          .frame(width: isCompact ? imageMaxHeight : proxy.frame(in: .local).width)
+          .frame(height: imageMaxHeight)
+          .accessibilityAddTraits(.startsMediaSession)
+      }
+    }
+    .frame(maxWidth: isCompact ? imageMaxHeight : nil)
+    .frame(height: imageMaxHeight)
+    .clipped()
+    .cornerRadius(4)
+    // #965: do not create overlapping tappable areas, when multiple images are shown
+    .contentShape(Rectangle())
+    .accessibilityElement(children: .ignore)
+    .accessibilityLabel(Text(displayData.accessibilityText))
+    .accessibilityAddTraits(displayData.type == .image ? [.isImage, .isButton] : .isButton)
+  }
+}
+
+private struct FeaturedImagePreView: View {
+  let attachment: MediaAttachment
+  let imageMaxHeight: CGFloat
+  let sensitive: Bool
+  let appLayoutWidth: CGFloat
+  let availableWidth: CGFloat
+
+  @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
+  @Environment(Theme.self) private var theme
+  @Environment(\.isCompact) private var isCompact: Bool
+
+  var body: some View {
+    let size: CGSize = size(for: attachment) ?? .init(width: imageMaxHeight, height: imageMaxHeight)
+    let newSize = imageSize(from: size, newWidth: availableWidth - appLayoutWidth)
+    Group {
       switch attachment.supportedType {
       case .image:
         LazyImage(url: attachment.url) { state in
@@ -163,193 +216,275 @@ public struct StatusRowMediaPreviewView: View {
             image
               .resizable()
               .aspectRatio(contentMode: .fill)
-              .frame(width: newSize.width, height: newSize.height)
-              .clipped()
-              .cornerRadius(4)
               .overlay(
                 RoundedRectangle(cornerRadius: 4)
                   .stroke(.gray.opacity(0.35), lineWidth: 1)
               )
           } else {
-            RoundedRectangle(cornerRadius: 4)
-              .fill(Color.gray)
-              .frame(width: newSize.width, height: newSize.height)
+            RoundedRectangle(cornerRadius: 4).fill(Color.gray)
           }
         }
         .processors([.resize(size: newSize)])
-        .frame(width: newSize.width, height: newSize.height)
-
       case .gifv, .video, .audio:
         if let url = attachment.url {
-          VideoPlayerView(viewModel: .init(url: url))
-            .frame(width: newSize.width, height: newSize.height)
+          MediaUIAttachmentVideoView(viewModel: .init(url: url))
         }
       case .none:
         EmptyView()
       }
-      if !isInCaptureMode, sensitive {
-        cornerSensitiveButton
-      }
-      if !isInCaptureMode, let alt = attachment.description, !alt.isEmpty, !isCompact, preferences.showAltTextForMedia {
-        Group {
+    }
+    .frame(width: newSize.width, height: newSize.height)
+    .overlay {
+      BlurOverLay(sensitive: sensitive, font: .scaledFootnote)
+    }
+    .overlay {
+      AltTextButton(
+        text: attachment.description,
+        font: theme.statusDisplayStyle == .compact ? .footnote : .body
+      )
+    }
+    .clipped()
+    .cornerRadius(4)
+  }
+
+  private func size(for media: MediaAttachment) -> CGSize? {
+    guard let width = media.meta?.original?.width,
+          let height = media.meta?.original?.height
+    else { return nil }
+
+    return .init(width: CGFloat(width), height: CGFloat(height))
+  }
+
+  private func imageSize(from: CGSize, newWidth: CGFloat) -> CGSize {
+    if isCompact || theme.statusDisplayStyle == .compact || isSecondaryColumn {
+      return .init(width: imageMaxHeight, height: imageMaxHeight)
+    }
+    let ratio = newWidth / from.width
+    let newHeight = from.height * ratio
+    return .init(width: newWidth, height: newHeight)
+  }
+}
+
+@MainActor
+struct BlurOverLay: View {
+  let sensitive: Bool
+  let font: Font?
+
+  @State private var isFrameExpanded = true
+  @State private var isTextExpanded = true
+
+  @Environment(Theme.self) private var theme
+  @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
+  @Environment(UserPreferences.self) private var preferences
+  @Environment(\.isCompact) private var isCompact: Bool
+
+  @Namespace var buttonSpace
+
+  var body: some View {
+    if hasOverlay {
+      ZStack {
+        Rectangle()
+          .foregroundColor(.clear)
+          .background(.ultraThinMaterial)
+          .frame(
+            width: isFrameExpanded ? nil : 0,
+            height: isFrameExpanded ? nil : 0
+          )
+        if !isCompact {
           Button {
-            altTextDisplayed = alt
-            isAltAlertDisplayed = true
+            withAnimation(.spring(duration: 0.2)) {
+              isTextExpanded.toggle()
+            } completion: {
+              withAnimation(.spring(duration: 0.3)) {
+                isFrameExpanded.toggle()
+              }
+            }
           } label: {
-            Text("status.image.alt-text.abbreviation")
-              .font(theme.statusDisplayStyle == .compact ? .footnote : .body)
-          }
-          .buttonStyle(.borderless)
-          .padding(4)
-          .background(.thinMaterial)
-          .cornerRadius(4)
-        }
-        .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
-      }
-    }
-  }
-
-  @ViewBuilder
-  private func makePreview(attachment: MediaAttachment) -> some View {
-    if let type = attachment.supportedType, !isInCaptureMode {
-      Group {
-        GeometryReader { proxy in
-          switch type {
-          case .image:
-            let width = isCompact ? imageMaxHeight : proxy.frame(in: .local).width
-            let processors: [ImageProcessing] = [.resize(size: .init(width: width, height: imageMaxHeight))]
-            ZStack(alignment: .bottomTrailing) {
-              LazyImage(url: attachment.previewUrl ?? attachment.url) { state in
-                if let image = state.image {
-                  image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(maxWidth: width)
-                    .frame(maxHeight: imageMaxHeight)
-                    .clipped()
-                    .cornerRadius(4)
-                    .overlay(
-                      RoundedRectangle(cornerRadius: 4)
-                        .stroke(.gray.opacity(0.35), lineWidth: 1)
-                    )
-                } else if state.isLoading {
-                  RoundedRectangle(cornerRadius: 4)
-                    .fill(Color.gray)
-                    .frame(maxHeight: imageMaxHeight)
-                    .frame(maxWidth: width)
+            if isTextExpanded {
+              ViewThatFits(in: .horizontal) {
+                HStack {
+                  Image(systemName: "eye")
+                  Text(sensitive ? "status.media.sensitive.show" : "status.media.content.show")
                 }
-              }
-              .processors(processors)
-              if sensitive, !isInCaptureMode {
-                cornerSensitiveButton
-              }
-              if !isInCaptureMode,
-                 let alt = attachment.description,
-                 !alt.isEmpty,
-                 !isCompact,
-                 preferences.showAltTextForMedia
-              {
-                Button {
-                  altTextDisplayed = alt
-                  isAltAlertDisplayed = true
-                } label: {
-                  Text("status.image.alt-text.abbreviation")
-                    .font(.scaledFootnote)
+                HStack {
+                  Image(systemName: "eye")
+                  Text("Show")
                 }
-                .buttonStyle(.borderless)
-                .padding(4)
-                .background(.thinMaterial)
-                .cornerRadius(4)
+                Image(systemName: "eye")
               }
-            }
-          case .gifv, .video, .audio:
-            if let url = attachment.url {
-              VideoPlayerView(viewModel: .init(url: url))
-                .frame(width: isCompact ? imageMaxHeight : proxy.frame(in: .local).width)
-                .frame(height: imageMaxHeight)
-                .accessibilityAddTraits(.startsMediaSession)
-            }
-          }
-        }
-        .frame(maxWidth: isCompact ? imageMaxHeight : nil)
-        .frame(height: imageMaxHeight)
-      }
-      // #965: do not create overlapping tappable areas, when multiple images are shown
-      .contentShape(Rectangle())
-      .onTapGesture {
-        Task {
-          await quickLook.prepareFor(urls: attachments.compactMap { $0.url }, selectedURL: attachment.url!)
-        }
-      }
-      .accessibilityElement(children: .ignore)
-      .accessibilityLabel(Self.accessibilityLabel(for: attachment))
-      .accessibilityAddTraits(attachment.supportedType == .image ? [.isImage, .isButton] : .isButton)
-    }
-  }
-
-  private var quickLookLoadingView: some View {
-    ZStack(alignment: .center) {
-      VStack {
-        Spacer()
-        HStack {
-          Spacer()
-          ProgressView()
-          Spacer()
-        }
-        Spacer()
-      }
-    }
-    .background(.ultraThinMaterial)
-  }
-
-  private var sensitiveMediaOverlay: some View {
-    ZStack {
-      Rectangle()
-        .foregroundColor(.clear)
-        .background(.ultraThinMaterial)
-      if !isCompact {
-        Button {
-          withAnimation {
-            isHidingMedia = false
-          }
-        } label: {
-          Group {
-            if sensitive {
-              Label("status.media.sensitive.show", systemImage: "eye")
+              .lineLimit(1)
+              .foregroundColor(theme.labelColor)
+              .matchedGeometryEffect(id: "text", in: buttonSpace)
             } else {
-              Label("status.media.content.show", systemImage: "eye")
+              Image(systemName: "eye.slash")
+                .matchedGeometryEffect(id: "text", in: buttonSpace)
             }
           }
           .foregroundColor(theme.labelColor)
+          .buttonStyle(.borderedProminent)
+          .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
         }
-        .buttonStyle(.borderedProminent)
       }
-    }
-  }
-
-  private var cornerSensitiveButton: some View {
-    HStack {
-      Button {
-        withAnimation {
-          isHidingMedia = true
-        }
-      } label: {
-        Image(systemName: "eye.slash")
-          .frame(minHeight: 21) // Match the alt button in case it is also present
-      }
-      .padding(10)
-      .buttonStyle(.borderedProminent)
-      Spacer()
-    }
-  }
-
-  private static func accessibilityLabel(for attachment: MediaAttachment) -> Text {
-    if let altText = attachment.description {
-      return Text("accessibility.image.alt-text-\(altText)")
-    } else if let typeDescription = attachment.localizedTypeDescription {
-      return Text(typeDescription)
+      .font(font)
+      .frame(
+        maxWidth: .infinity,
+        maxHeight: .infinity,
+        alignment: isFrameExpanded ? .center : .bottomLeading
+      )
     } else {
-      return Text("accessibility.tabs.profile.picker.media")
+      EmptyView()
     }
   }
+
+  private var hasOverlay: Bool {
+    switch (sensitive, preferences.autoExpandMedia) {
+    case (_, .hideAll), (true, .hideSensitive):
+      switch isInCaptureMode {
+      case true: false
+      case false: true
+      }
+    default: false
+    }
+  }
+}
+
+struct AltTextButton: View {
+  let text: String?
+  let font: Font?
+
+  @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
+  @Environment(\.isCompact) private var isCompact: Bool
+  @Environment(UserPreferences.self) private var preferences
+  @Environment(\.locale) private var locale
+  @Environment(Theme.self) private var theme
+
+  @State private var isDisplayingAlert = false
+
+  var body: some View {
+    if !isInCaptureMode,
+       let text,
+       !text.isEmpty,
+       !isCompact,
+       preferences.showAltTextForMedia
+    {
+      Button {
+        isDisplayingAlert = true
+      } label: {
+        ZStack {
+          // use to sync button with show/hide content button
+          Image(systemName: "eye.slash").opacity(0)
+          Text("status.image.alt-text.abbreviation")
+        }
+      }
+      .buttonStyle(.borderless)
+      .padding(EdgeInsets(top: 5, leading: 7, bottom: 5, trailing: 7))
+      .background(.thinMaterial)
+      .cornerRadius(4)
+      .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
+      .alert(
+        "status.editor.media.image-description",
+        isPresented: $isDisplayingAlert
+      ) {
+        Button("alert.button.ok", action: {})
+      } message: {
+        Text(text)
+      }
+      .frame(
+        maxWidth: .infinity,
+        maxHeight: .infinity,
+        alignment: .bottomTrailing
+      )
+    }
+  }
+}
+
+private struct DisplayData: Identifiable, Hashable {
+  let id: String
+  let url: URL
+  let previewUrl: URL?
+  let description: String?
+  let type: DisplayType
+  let accessibilityText: String
+
+  init?(from attachment: MediaAttachment) {
+    guard let url = attachment.url else { return nil }
+    guard let type = attachment.supportedType else { return nil }
+
+    id = attachment.id
+    self.url = url
+    previewUrl = attachment.previewUrl ?? attachment.url
+    description = attachment.description
+    self.type = DisplayType(from: type)
+    accessibilityText = Self.getAccessibilityString(from: attachment)
+  }
+
+  private static func getAccessibilityString(from attachment: MediaAttachment) -> String {
+    if let altText = attachment.description {
+      "accessibility.image.alt-text-\(altText)"
+    } else if let typeDescription = attachment.localizedTypeDescription {
+      typeDescription
+    } else {
+      "accessibility.tabs.profile.picker.media"
+    }
+  }
+}
+
+private enum DisplayType {
+  case image
+  case av
+
+  init(from attachmentType: MediaAttachment.SupportedType) {
+    switch attachmentType {
+    case .image:
+      self = .image
+    case .video, .gifv, .audio:
+      self = .av
+    }
+  }
+}
+
+struct StatusRowMediaPreviewView_Previews: PreviewProvider {
+  static var previews: some View {
+    WrapperForPreview()
+  }
+}
+
+struct WrapperForPreview: View {
+  @State private var isCompact = false
+  @State private var isInCaptureMode = false
+
+  var body: some View {
+    VStack {
+      ScrollView {
+        VStack {
+          ForEach(1 ..< 5) { number in
+            VStack {
+              Text("Preview for \(number) item(s)")
+              StatusRowMediaPreviewView(
+                attachments: Array(repeating: Self.attachment, count: number),
+                sensitive: true
+              )
+            }
+            .padding()
+            .border(.red)
+          }
+        }
+      }
+      .environment(SceneDelegate())
+      .environment(UserPreferences.shared)
+      .environment(QuickLook.shared)
+      .environment(Theme.shared)
+      .environment(\.isCompact, isCompact)
+      .environment(\.isInCaptureMode, isInCaptureMode)
+
+      Divider()
+      Toggle("Compact Mode", isOn: $isCompact.animation())
+      Toggle("Capture Mode", isOn: $isInCaptureMode)
+    }
+    .padding()
+  }
+
+  private static let url = URL(string: "https://www.upwork.com/catalog-images/c5dffd9b5094556adb26e0a193a1c494")!
+  private static let attachment = MediaAttachment.imageWith(url: url)
+  private static let local = Locale(identifier: "en")
 }

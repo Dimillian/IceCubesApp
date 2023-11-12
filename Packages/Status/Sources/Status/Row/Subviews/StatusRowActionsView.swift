@@ -4,15 +4,20 @@ import Models
 import Network
 import SwiftUI
 
+@MainActor
 struct StatusRowActionsView: View {
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var statusDataController: StatusDataController
-  @EnvironmentObject private var userPreferences: UserPreferences
-  @ObservedObject var viewModel: StatusRowViewModel
+  @Environment(Theme.self) private var theme
+  @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(StatusDataController.self) private var statusDataController
+  @Environment(UserPreferences.self) private var userPreferences
+
+  @Environment(\.openWindow) private var openWindow
+  @Environment(\.isStatusFocused) private var isFocused
+
+  var viewModel: StatusRowViewModel
 
   func privateBoost() -> Bool {
-    return viewModel.status.visibility == .priv && viewModel.status.account.id == currentAccount.account?.id
+    viewModel.status.visibility == .priv && viewModel.status.account.id == currentAccount.account?.id
   }
 
   @MainActor
@@ -75,8 +80,8 @@ struct StatusRowActionsView: View {
       }
     }
 
-    func count(dataController: StatusDataController, viewModel: StatusRowViewModel, theme: Theme) -> Int? {
-      if theme.statusActionsDisplay == .discret && !viewModel.isFocused {
+    func count(dataController: StatusDataController, isFocused: Bool, theme: Theme) -> Int? {
+      if theme.statusActionsDisplay == .discret, isFocused {
         return nil
       }
       switch self {
@@ -94,22 +99,22 @@ struct StatusRowActionsView: View {
     func tintColor(theme: Theme) -> Color? {
       switch self {
       case .respond, .share:
-        return nil
+        nil
       case .favorite:
-        return .yellow
+        .yellow
       case .bookmark:
-        return .pink
+        .pink
       case .boost:
-        return theme.tintColor
+        theme.tintColor
       }
     }
 
     func isOn(dataController: StatusDataController) -> Bool {
       switch self {
-      case .respond, .share: return false
-      case .favorite: return dataController.isFavorited
-      case .bookmark: return dataController.isBookmarked
-      case .boost: return dataController.isReblogged
+      case .respond, .share: false
+      case .favorite: dataController.isFavorited
+      case .bookmark: dataController.isBookmarked
+      case .boost: dataController.isReblogged
       }
     }
   }
@@ -148,9 +153,6 @@ struct StatusRowActionsView: View {
           }
         }
       }
-      if viewModel.isFocused {
-        StatusRowDetailView(viewModel: viewModel)
-      }
     }
   }
 
@@ -179,7 +181,7 @@ struct StatusRowActionsView: View {
       .disabled(action == .boost &&
         (viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id))
       if let count = action.count(dataController: statusDataController,
-                                  viewModel: viewModel,
+                                  isFocused: isFocused,
                                   theme: theme), !viewModel.isRemote
       {
         Text("\(count)")
@@ -199,19 +201,23 @@ struct StatusRowActionsView: View {
           return
         }
       }
-      HapticManager.shared.fireHaptic(of: .notification(.success))
+      HapticManager.shared.fireHaptic(.notification(.success))
       switch action {
       case .respond:
-        SoundEffectManager.shared.playSound(of: .share)
-        viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)
+        SoundEffectManager.shared.playSound(.share)
+        if ProcessInfo.processInfo.isMacCatalystApp {
+          openWindow(value: WindowDestination.replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status))
+        } else {
+          viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)
+        }
       case .favorite:
-        SoundEffectManager.shared.playSound(of: .favorite)
+        SoundEffectManager.shared.playSound(.favorite)
         await statusDataController.toggleFavorite(remoteStatus: viewModel.localStatusId)
       case .bookmark:
-        SoundEffectManager.shared.playSound(of: .bookmark)
+        SoundEffectManager.shared.playSound(.bookmark)
         await statusDataController.toggleBookmark(remoteStatus: viewModel.localStatusId)
       case .boost:
-        SoundEffectManager.shared.playSound(of: .boost)
+        SoundEffectManager.shared.playSound(.boost)
         await statusDataController.toggleReblog(remoteStatus: viewModel.localStatusId)
       default:
         break

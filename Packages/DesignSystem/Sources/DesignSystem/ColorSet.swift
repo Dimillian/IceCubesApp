@@ -5,7 +5,8 @@ public let availableColorsSets: [ColorSetCouple] =
    .init(light: IceCubeNeonLight(), dark: IceCubeNeonDark()),
    .init(light: DesertLight(), dark: DesertDark()),
    .init(light: NemesisLight(), dark: NemesisDark()),
-   .init(light: MediumLight(), dark: MediumDark())]
+   .init(light: MediumLight(), dark: MediumDark()),
+   .init(light: ConstellationLight(), dark: ConstellationDark())]
 
 public protocol ColorSet {
   var name: ColorSetName { get }
@@ -31,6 +32,8 @@ public enum ColorSetName: String {
   case nemesisLight = "Nemesis - Light"
   case mediumLight = "Medium - Light"
   case mediumDark = "Medium - Dark"
+  case constellationLight = "Constellation - Light"
+  case constellationDark = "Constellation - Dark"
 }
 
 public struct ColorSetCouple: Identifiable {
@@ -147,6 +150,28 @@ public struct MediumLight: ColorSet {
   public var tintColor: Color = .init(hex: 0x1A8917)
   public var primaryBackgroundColor: Color = .init(hex: 0xFFFFFF)
   public var secondaryBackgroundColor: Color = .init(hex: 0xFAFAFA)
+  public var labelColor: Color = .black
+
+  public init() {}
+}
+
+public struct ConstellationDark: ColorSet {
+  public var name: ColorSetName = .constellationDark
+  public var scheme: ColorScheme = .dark
+  public var tintColor: Color = .init(hex: 0xFFD966)
+  public var primaryBackgroundColor: Color = .init(hex: 0x09192C)
+  public var secondaryBackgroundColor: Color = .init(hex: 0x304C7A)
+  public var labelColor: Color = .init(hex: 0xE2E4E2)
+
+  public init() {}
+}
+
+public struct ConstellationLight: ColorSet {
+  public var name: ColorSetName = .constellationLight
+  public var scheme: ColorScheme = .light
+  public var tintColor: Color = .init(hex: 0xC82238)
+  public var primaryBackgroundColor: Color = .init(hex: 0xF4F5F7)
+  public var secondaryBackgroundColor: Color = .init(hex: 0xACC7E5)
   public var labelColor: Color = .black
 
   public init() {}

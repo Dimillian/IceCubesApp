@@ -7,11 +7,12 @@ import NukeUI
 import Shimmer
 import SwiftUI
 
+@MainActor
 struct EditTagGroupView: View {
   @Environment(\.dismiss) private var dismiss
+  @Environment(\.modelContext) private var context
 
-  @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   @State private var title: String = ""
   @State private var sfSymbolName: String = ""
@@ -35,7 +36,7 @@ struct EditTagGroupView: View {
     case symbol
     case new
   }
-  
+
   init(editingTagGroup: TagGroup? = nil, onSaved: ((TagGroup) -> Void)? = nil) {
     self.editingTagGroup = editingTagGroup
     self.onSaved = onSaved
@@ -69,7 +70,7 @@ struct EditTagGroupView: View {
         focusedField = .title
         if let editingTagGroup {
           title = editingTagGroup.title
-          sfSymbolName = editingTagGroup.sfSymbolName
+          sfSymbolName = editingTagGroup.symbolName
           tags = editingTagGroup.tags
         }
       }
@@ -93,7 +94,7 @@ struct EditTagGroupView: View {
           .onSubmit {
             focusedField = Focus.new
           }
-          .onChange(of: sfSymbolName) { _ in
+          .onChange(of: sfSymbolName) {
             popupTagsPresented = true
           }
 
@@ -161,29 +162,25 @@ struct EditTagGroupView: View {
   }
 
   private func save() {
-    var toSave = tags
-    let main = toSave.removeFirst()
-    
-    let tagGroup: TagGroup = .init(
-      title: title.trimmingCharacters(in: .whitespaces),
-      sfSymbolName: sfSymbolName,
-      main: main,
-      additional: toSave
-    )
-    if let editingTagGroup,
-        let index = preferences.tagGroups.firstIndex(of: editingTagGroup) {
-      preferences.tagGroups[index] = tagGroup
+    if let editingTagGroup {
+      editingTagGroup.title = title
+      editingTagGroup.symbolName = sfSymbolName
+      editingTagGroup.tags = tags
+      onSaved?(editingTagGroup)
     } else {
-      preferences.tagGroups.append(tagGroup)
+      let tagGroup = TagGroup(title: title.trimmingCharacters(in: .whitespacesAndNewlines),
+                              symbolName: sfSymbolName,
+                              tags: tags)
+      context.insert(tagGroup)
+      onSaved?(tagGroup)
     }
 
     dismiss()
-    onSaved?(tagGroup)
   }
 
   @ViewBuilder
   private var symbolsSuggestionView: some View {
-    if focusedField == .symbol && !sfSymbolName.isEmpty {
+    if focusedField == .symbol, !sfSymbolName.isEmpty {
       let filteredMatches = allSymbols
         .filter { $0.contains(sfSymbolName) }
       if !filteredMatches.isEmpty {

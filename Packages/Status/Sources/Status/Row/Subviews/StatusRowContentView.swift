@@ -6,13 +6,15 @@ import SwiftUI
 struct StatusRowContentView: View {
   @Environment(\.redactionReasons) private var reasons
   @Environment(\.isCompact) private var isCompact
+  @Environment(\.isStatusFocused) private var isFocused
 
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
-  @ObservedObject var viewModel: StatusRowViewModel
+  var viewModel: StatusRowViewModel
 
   var body: some View {
     if !viewModel.finalStatus.spoilerText.asRawText.isEmpty {
+      @Bindable var viewModel = viewModel
       StatusRowSpoilerView(status: viewModel.finalStatus, displaySpoiler: $viewModel.displaySpoiler)
     }
 
@@ -44,7 +46,7 @@ struct StatusRowContentView: View {
             Spacer()
           }
         }
-        .accessibilityHidden(viewModel.isFocused == false)
+        .accessibilityHidden(isFocused == false)
         .padding(.vertical, 4)
       }
 

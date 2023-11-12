@@ -3,7 +3,7 @@ import Models
 import SwiftUI
 
 public struct TagRowView: View {
-  @EnvironmentObject private var routerPath: RouterPath
+  @Environment(RouterPath.self) private var routerPath
 
   let tag: Tag
 

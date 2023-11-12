@@ -5,11 +5,12 @@ import Models
 import NukeUI
 import SwiftUI
 
+@MainActor
 struct StatusEditorMediaView: View {
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var currentInstance: CurrentInstance
-  @ObservedObject var viewModel: StatusEditorViewModel
-  @State private var editingContainer: StatusEditorMediaContainer?
+  @Environment(Theme.self) private var theme
+  @Environment(CurrentInstance.self) private var currentInstance
+  var viewModel: StatusEditorViewModel
+  @Binding var editingContainer: StatusEditorMediaContainer?
 
   @State private var isErrorDisplayed: Bool = false
 
@@ -38,10 +39,6 @@ struct StatusEditorMediaView: View {
         }
       }
       .padding(.horizontal, .layoutPadding)
-    }
-    .sheet(item: $editingContainer) { container in
-      StatusEditorMediaEditView(viewModel: viewModel, container: container)
-        .preferredColorScheme(theme.selectedScheme == .dark ? .dark : .light)
     }
   }
 

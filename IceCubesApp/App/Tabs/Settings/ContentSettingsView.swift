@@ -7,11 +7,13 @@ import NukeUI
 import SwiftUI
 import UserNotifications
 
+@MainActor
 struct ContentSettingsView: View {
-  @EnvironmentObject private var userPreferences: UserPreferences
-  @EnvironmentObject private var theme: Theme
+  @Environment(UserPreferences.self) private var userPreferences
+  @Environment(Theme.self) private var theme
 
   var body: some View {
+    @Bindable var userPreferences = userPreferences
     Form {
       Section("settings.content.boosts") {
         Toggle(isOn: $userPreferences.suppressDupeReblogs) {
@@ -44,7 +46,7 @@ struct ContentSettingsView: View {
         }
       }
       .listRowBackground(theme.primaryBackgroundColor)
-      .onChange(of: userPreferences.useInstanceContentSettings) { newVal in
+      .onChange(of: userPreferences.useInstanceContentSettings) { _, newVal in
         if newVal {
           userPreferences.appAutoExpandSpoilers = userPreferences.autoExpandSpoilers
           userPreferences.appAutoExpandMedia = userPreferences.autoExpandMedia
@@ -83,19 +85,20 @@ struct ContentSettingsView: View {
           }
         }
         .disabled(userPreferences.useInstanceContentSettings)
-        
+
         Picker("settings.content.default-reply-visibility", selection: $userPreferences.appDefaultReplyVisibility) {
           ForEach(Visibility.allCases, id: \.rawValue) { vis in
             if UserPreferences.getIntOfVisibility(vis) <=
-                UserPreferences.getIntOfVisibility(userPreferences.postVisibility) {
+              UserPreferences.getIntOfVisibility(userPreferences.postVisibility)
+            {
               Text(vis.title).tag(vis)
             }
           }
         }
-        .onChange(of: userPreferences.postVisibility) { newValue in
+        .onChange(of: userPreferences.postVisibility) {
           userPreferences.conformReplyVisibilityConstraints()
         }
-        
+
         Toggle(isOn: $userPreferences.appDefaultPostsSensitive) {
           Text("settings.content.default-sensitive")
         }

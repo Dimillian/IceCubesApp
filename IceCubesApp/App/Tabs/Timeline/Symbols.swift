@@ -9,5 +9,5 @@ import Foundation
 import SFSafeSymbols
 
 let allSymbols: [String] = SFSymbol.allSymbols.map { symbol in
-    symbol.rawValue
+  symbol.rawValue
 }

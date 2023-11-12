@@ -33,49 +33,49 @@ public enum Accounts: Endpoint {
   public func path() -> String {
     switch self {
     case let .accounts(id):
-      return "accounts/\(id)"
+      "accounts/\(id)"
     case .favorites:
-      return "favourites"
+      "favourites"
     case .bookmarks:
-      return "bookmarks"
+      "bookmarks"
     case .followedTags:
-      return "followed_tags"
+      "followed_tags"
     case let .featuredTags(id):
-      return "accounts/\(id)/featured_tags"
+      "accounts/\(id)/featured_tags"
     case .verifyCredentials:
-      return "accounts/verify_credentials"
+      "accounts/verify_credentials"
     case .updateCredentials:
-      return "accounts/update_credentials"
+      "accounts/update_credentials"
     case let .statuses(id, _, _, _, _, _):
-      return "accounts/\(id)/statuses"
+      "accounts/\(id)/statuses"
     case .relationships:
-      return "accounts/relationships"
+      "accounts/relationships"
     case let .follow(id, _, _):
-      return "accounts/\(id)/follow"
+      "accounts/\(id)/follow"
     case let .unfollow(id):
-      return "accounts/\(id)/unfollow"
+      "accounts/\(id)/unfollow"
     case .familiarFollowers:
-      return "accounts/familiar_followers"
+      "accounts/familiar_followers"
     case .suggestions:
-      return "suggestions"
+      "suggestions"
     case let .following(id, _):
-      return "accounts/\(id)/following"
+      "accounts/\(id)/following"
     case let .followers(id, _):
-      return "accounts/\(id)/followers"
+      "accounts/\(id)/followers"
     case let .lists(id):
-      return "accounts/\(id)/lists"
+      "accounts/\(id)/lists"
     case .preferences:
-      return "preferences"
+      "preferences"
     case let .block(id):
-      return "accounts/\(id)/block"
+      "accounts/\(id)/block"
     case let .unblock(id):
-      return "accounts/\(id)/unblock"
+      "accounts/\(id)/unblock"
     case let .mute(id, _):
-      return "accounts/\(id)/mute"
+      "accounts/\(id)/mute"
     case let .unmute(id):
-      return "accounts/\(id)/unmute"
+      "accounts/\(id)/unmute"
     case let .relationshipNote(id, _):
-      return "accounts/\(id)/note"
+      "accounts/\(id)/note"
     }
   }
 
@@ -128,13 +128,13 @@ public enum Accounts: Endpoint {
   public var jsonValue: Encodable? {
     switch self {
     case let .mute(_, json):
-      return json
+      json
     case let .relationshipNote(_, json):
-      return json
+      json
     case let .updateCredentials(json):
-      return json
+      json
     default:
-      return nil
+      nil
     }
   }
 }

@@ -1,4 +1,4 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -7,7 +7,7 @@ let package = Package(
   name: "Explore",
   defaultLocalization: "en",
   platforms: [
-    .iOS(.v16),
+    .iOS(.v17),
   ],
   products: [
     .library(
@@ -33,6 +33,9 @@ let package = Package(
         .product(name: "Env", package: "Env"),
         .product(name: "Status", package: "Status"),
         .product(name: "DesignSystem", package: "DesignSystem"),
+      ],
+      swiftSettings: [
+        .enableExperimentalFeature("StrictConcurrency"),
       ]
     ),
   ]

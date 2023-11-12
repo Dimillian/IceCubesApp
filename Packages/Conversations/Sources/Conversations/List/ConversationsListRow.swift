@@ -5,14 +5,15 @@ import Models
 import Network
 import SwiftUI
 
+@MainActor
 struct ConversationsListRow: View {
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var routerPath: RouterPath
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var currentAccount: CurrentAccount
+  @Environment(Client.self) private var client
+  @Environment(RouterPath.self) private var routerPath
+  @Environment(Theme.self) private var theme
+  @Environment(CurrentAccount.self) private var currentAccount
 
   @Binding var conversation: Conversation
-  @ObservedObject var viewModel: ConversationsListViewModel
+  var viewModel: ConversationsListViewModel
 
   var body: some View {
     Button {
@@ -27,8 +28,8 @@ struct ConversationsListRow: View {
             .accessibilityHidden(true)
           VStack(alignment: .leading, spacing: 4) {
             HStack {
-              EmojiTextApp(.init(stringValue: conversation.accounts.map { $0.safeDisplayName }.joined(separator: ", ")),
-                           emojis: conversation.accounts.flatMap { $0.emojis })
+              EmojiTextApp(.init(stringValue: conversation.accounts.map(\.safeDisplayName).joined(separator: ", ")),
+                           emojis: conversation.accounts.flatMap(\.emojis))
                 .font(.scaledSubheadline)
                 .foregroundColor(theme.labelColor)
                 .emojiSize(Font.scaledSubheadlineFont.emojiSize)
@@ -80,7 +81,7 @@ struct ConversationsListRow: View {
       }
       .accessibilityAction(.magicTap) {
         if let lastStatus = conversation.lastStatus {
-          HapticManager.shared.fireHaptic(of: .notification(.success))
+          HapticManager.shared.fireHaptic(.notification(.success))
           routerPath.presentedSheet = .replyToStatusEditor(status: lastStatus)
         }
       }
@@ -181,7 +182,7 @@ struct ConversationsListRow: View {
   var replyAction: some View {
     if let lastStatus = conversation.lastStatus {
       Button("status.action.reply") {
-        HapticManager.shared.fireHaptic(of: .notification(.success))
+        HapticManager.shared.fireHaptic(.notification(.success))
         routerPath.presentedSheet = .replyToStatusEditor(status: lastStatus)
       }
     } else {
@@ -194,7 +195,7 @@ struct ConversationsListRow: View {
     if let lastStatus = conversation.lastStatus {
       if lastStatus.account.id != currentAccount.account?.id {
         Button("@\(lastStatus.account.username)") {
-          HapticManager.shared.fireHaptic(of: .notification(.success))
+          HapticManager.shared.fireHaptic(.notification(.success))
           routerPath.navigate(to: .accountDetail(id: lastStatus.account.id))
         }
       }
@@ -204,18 +205,18 @@ struct ConversationsListRow: View {
         case .url:
           if UIApplication.shared.canOpenURL(link.url) {
             Button("accessibility.tabs.timeline.content-link-\(link.title)") {
-              HapticManager.shared.fireHaptic(of: .notification(.success))
+              HapticManager.shared.fireHaptic(.notification(.success))
               _ = routerPath.handle(url: link.url)
             }
           }
         case .hashtag:
           Button("accessibility.tabs.timeline.content-hashtag-\(link.title)") {
-            HapticManager.shared.fireHaptic(of: .notification(.success))
+            HapticManager.shared.fireHaptic(.notification(.success))
             _ = routerPath.handle(url: link.url)
           }
         case .mention:
           Button("\(link.title)") {
-            HapticManager.shared.fireHaptic(of: .notification(.success))
+            HapticManager.shared.fireHaptic(.notification(.success))
             _ = routerPath.handle(url: link.url)
           }
         }

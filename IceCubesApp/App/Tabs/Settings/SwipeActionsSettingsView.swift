@@ -2,11 +2,13 @@ import DesignSystem
 import Env
 import SwiftUI
 
+@MainActor
 struct SwipeActionsSettingsView: View {
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var userPreferences: UserPreferences
+  @Environment(Theme.self) private var theme
+  @Environment(UserPreferences.self) private var userPreferences
 
   var body: some View {
+    @Bindable var userPreferences = userPreferences
     Form {
       Section {
         Label("settings.swipeactions.status.leading", systemImage: "arrow.right")
@@ -14,7 +16,7 @@ struct SwipeActionsSettingsView: View {
 
         createStatusActionPicker(selection: $userPreferences.swipeActionsStatusLeadingLeft,
                                  label: "settings.swipeactions.primary")
-          .onChange(of: userPreferences.swipeActionsStatusLeadingLeft) { action in
+          .onChange(of: userPreferences.swipeActionsStatusLeadingLeft) { _, action in
             if action == .none {
               userPreferences.swipeActionsStatusLeadingRight = .none
             }
@@ -29,7 +31,7 @@ struct SwipeActionsSettingsView: View {
 
         createStatusActionPicker(selection: $userPreferences.swipeActionsStatusTrailingRight,
                                  label: "settings.swipeactions.primary")
-          .onChange(of: userPreferences.swipeActionsStatusTrailingRight) { action in
+          .onChange(of: userPreferences.swipeActionsStatusTrailingRight) { _, action in
             if action == .none {
               userPreferences.swipeActionsStatusTrailingLeft = .none
             }
@@ -68,7 +70,7 @@ struct SwipeActionsSettingsView: View {
   }
 
   private func createStatusActionPicker(selection: Binding<StatusAction>, label: LocalizedStringKey) -> some View {
-    return Picker(selection: selection, label: Text(label)) {
+    Picker(selection: selection, label: Text(label)) {
       Section {
         Text(StatusAction.none.displayName()).tag(StatusAction.none)
       }

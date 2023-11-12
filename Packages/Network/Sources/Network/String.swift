@@ -2,7 +2,7 @@ import Foundation
 
 public extension String {
   func escape() -> String {
-    return replacingOccurrences(of: "&amp;", with: "&")
+    replacingOccurrences(of: "&amp;", with: "&")
       .replacingOccurrences(of: "&lt;", with: "<")
       .replacingOccurrences(of: "&gt;", with: ">")
       .replacingOccurrences(of: "&quot;", with: "\"")

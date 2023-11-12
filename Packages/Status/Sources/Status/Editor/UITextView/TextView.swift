@@ -59,7 +59,7 @@ public struct TextView: View {
 
 final class UIKitTextView: UITextView {
   override var keyCommands: [UIKeyCommand]? {
-    return (super.keyCommands ?? []) + [
+    (super.keyCommands ?? []) + [
       UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(escape(_:))),
     ]
   }

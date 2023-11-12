@@ -2,18 +2,19 @@ import Combine
 import Foundation
 import Models
 import Network
+import Observation
 
 @MainActor
-public class CurrentAccount: ObservableObject {
+@Observable public class CurrentAccount {
   private static var accountsCache: [String: Account] = [:]
 
-  @Published public private(set) var account: Account?
-  @Published public private(set) var lists: [List] = []
-  @Published public private(set) var tags: [Tag] = []
-  @Published public private(set) var followRequests: [Account] = []
-  @Published public private(set) var isUpdating: Bool = false
-  @Published public private(set) var updatingFollowRequestAccountIds = Set<String>()
-  @Published public private(set) var isLoadingAccount: Bool = false
+  public private(set) var account: Account?
+  public private(set) var lists: [List] = []
+  public private(set) var tags: [Tag] = []
+  public private(set) var followRequests: [Account] = []
+  public private(set) var isUpdating: Bool = false
+  public private(set) var updatingFollowRequestAccountIds = Set<String>()
+  public private(set) var isLoadingAccount: Bool = false
 
   private var client: Client?
 
@@ -48,7 +49,7 @@ public class CurrentAccount: ObservableObject {
   }
 
   public func fetchConnections() async {
-    guard let client = client else { return }
+    guard let client else { return }
     do {
       let connections: [String] = try await client.get(endpoint: Instances.peers)
       client.addConnections(connections)
@@ -56,7 +57,7 @@ public class CurrentAccount: ObservableObject {
   }
 
   public func fetchCurrentAccount() async {
-    guard let client = client, client.isAuth else {
+    guard let client, client.isAuth else {
       account = nil
       return
     }

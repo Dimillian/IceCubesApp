@@ -9,10 +9,11 @@ public extension View {
   }
 }
 
+@MainActor
 struct ThemeApplier: ViewModifier {
   @Environment(\EnvironmentValues.colorScheme) var colorScheme
 
-  @ObservedObject var theme: Theme
+  var theme: Theme
 
   var actualColorScheme: SwiftUI.ColorScheme? {
     if theme.followSystemColorScheme {
@@ -29,33 +30,33 @@ struct ThemeApplier: ViewModifier {
       .onAppear {
         // If theme is never set before set the default store. This should only execute once after install.
         if !theme.isThemePreviouslySet {
-          theme.selectedSet = colorScheme == .dark ? .iceCubeDark : .iceCubeLight
+          theme.applySet(set: colorScheme == .dark ? .iceCubeDark : .iceCubeLight)
           theme.isThemePreviouslySet = true
         } else if theme.followSystemColorScheme, theme.isThemePreviouslySet,
                   let sets = availableColorsSets
                   .first(where: { $0.light.name == theme.selectedSet || $0.dark.name == theme.selectedSet })
         {
-          theme.selectedSet = colorScheme == .dark ? sets.dark.name : sets.light.name
+          theme.applySet(set: colorScheme == .dark ? sets.dark.name : sets.light.name)
         }
         setWindowTint(theme.tintColor)
         setWindowUserInterfaceStyle(from: theme.selectedScheme)
         setBarsColor(theme.primaryBackgroundColor)
       }
-      .onChange(of: theme.tintColor) { newValue in
+      .onChange(of: theme.tintColor) { _, newValue in
         setWindowTint(newValue)
       }
-      .onChange(of: theme.primaryBackgroundColor) { newValue in
+      .onChange(of: theme.primaryBackgroundColor) { _, newValue in
         setBarsColor(newValue)
       }
-      .onChange(of: theme.selectedScheme) { newValue in
+      .onChange(of: theme.selectedScheme) { _, newValue in
         setWindowUserInterfaceStyle(from: newValue)
       }
-      .onChange(of: colorScheme) { newColorScheme in
+      .onChange(of: colorScheme) { _, newColorScheme in
         if theme.followSystemColorScheme,
            let sets = availableColorsSets
            .first(where: { $0.light.name == theme.selectedSet || $0.dark.name == theme.selectedSet })
         {
-          theme.selectedSet = newColorScheme == .dark ? sets.dark.name : sets.light.name
+          theme.applySet(set: newColorScheme == .dark ? sets.dark.name : sets.light.name)
         }
       }
     #endif
@@ -97,7 +98,7 @@ struct ThemeApplier: ViewModifier {
     private func allWindows() -> [UIWindow] {
       UIApplication.shared.connectedScenes
         .compactMap { $0 as? UIWindowScene }
-        .flatMap { $0.windows }
+        .flatMap(\.windows)
     }
   #endif
 }

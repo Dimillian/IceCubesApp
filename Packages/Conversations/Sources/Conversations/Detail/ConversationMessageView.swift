@@ -5,12 +5,14 @@ import Network
 import NukeUI
 import SwiftUI
 
+@MainActor
 struct ConversationMessageView: View {
-  @EnvironmentObject private var quickLook: QuickLook
-  @EnvironmentObject private var routerPath: RouterPath
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var theme: Theme
+  @Environment(\.openWindow) private var openWindow
+  @Environment(QuickLook.self) private var quickLook
+  @Environment(RouterPath.self) private var routerPath
+  @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(Client.self) private var client
+  @Environment(Theme.self) private var theme
 
   let message: Status
   let conversation: Conversation
@@ -199,10 +201,11 @@ struct ConversationMessageView: View {
     .frame(height: 200)
     .contentShape(Rectangle())
     .onTapGesture {
-      if let url = attachement.url {
-        Task {
-          await quickLook.prepareFor(urls: [url], selectedURL: url)
-        }
+      if ProcessInfo.processInfo.isMacCatalystApp {
+        openWindow(value: WindowDestination.mediaViewer(attachments: [attachement],
+                                                        selectedAttachment: attachement))
+      } else {
+        quickLook.prepareFor(selectedMediaAttachment: attachement, mediaAttachments: [attachement])
       }
     }
   }

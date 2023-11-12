@@ -44,6 +44,15 @@ public struct MediaAttachment: Codable, Identifiable, Hashable, Equatable {
   public let previewUrl: URL?
   public let description: String?
   public let meta: MetaContainer?
+
+  public static func imageWith(url: URL) -> MediaAttachment {
+    .init(id: UUID().uuidString,
+          type: "image",
+          url: url,
+          previewUrl: url,
+          description: "demo alt text here",
+          meta: nil)
+  }
 }
 
 extension MediaAttachment: Sendable {}

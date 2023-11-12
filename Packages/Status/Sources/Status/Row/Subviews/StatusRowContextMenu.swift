@@ -4,27 +4,30 @@ import Foundation
 import Network
 import SwiftUI
 
+@MainActor
 struct StatusRowContextMenu: View {
   @Environment(\.displayScale) var displayScale
+  @Environment(\.openWindow) var openWindow
 
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var sceneDelegate: SceneDelegate
-  @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var account: CurrentAccount
-  @EnvironmentObject private var currentInstance: CurrentInstance
-  @EnvironmentObject private var statusDataController: StatusDataController
+  @Environment(Client.self) private var client
+  @Environment(SceneDelegate.self) private var sceneDelegate
+  @Environment(UserPreferences.self) private var preferences
+  @Environment(CurrentAccount.self) private var account
+  @Environment(CurrentInstance.self) private var currentInstance
+  @Environment(StatusDataController.self) private var statusDataController
+  @Environment(QuickLook.self) private var quickLook
 
-  @ObservedObject var viewModel: StatusRowViewModel
+  var viewModel: StatusRowViewModel
 
   var boostLabel: some View {
-    if self.viewModel.status.visibility == .priv && self.viewModel.status.account.id == self.account.account?.id {
-      if self.statusDataController.isReblogged {
+    if viewModel.status.visibility == .priv, viewModel.status.account.id == account.account?.id {
+      if statusDataController.isReblogged {
         return Label("status.action.unboost", systemImage: "lock.rotation")
       }
       return Label("status.action.boost-to-followers", systemImage: "lock.rotation")
     }
 
-    if self.statusDataController.isReblogged {
+    if statusDataController.isReblogged {
       return Label("status.action.unboost", image: "Rocket")
     }
     return Label("status.action.boost", image: "Rocket")
@@ -50,12 +53,20 @@ struct StatusRowContextMenu: View {
               systemImage: "bookmark")
       }
       Button {
-        viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
+        if ProcessInfo.processInfo.isMacCatalystApp {
+          openWindow(value: WindowDestination.replyToStatusEditor(status: viewModel.status))
+        } else {
+          viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
+        }
       } label: {
         Label("status.action.reply", systemImage: "arrowshape.turn.up.left")
       }
       Button {
-        viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
+        if ProcessInfo.processInfo.isMacCatalystApp {
+          openWindow(value: WindowDestination.quoteStatusEditor(status: viewModel.status))
+        } else {
+          viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
+        }
       } label: {
         Label("status.action.quote", systemImage: "quote.bubble")
       }
@@ -81,17 +92,17 @@ struct StatusRowContextMenu: View {
 
         Button {
           let view = HStack {
-            StatusRowView(viewModel: { viewModel })
+            StatusRowView(viewModel: viewModel)
               .padding(16)
           }
           .environment(\.isInCaptureMode, true)
-          .environmentObject(Theme.shared)
-          .environmentObject(preferences)
-          .environmentObject(account)
-          .environmentObject(currentInstance)
-          .environmentObject(SceneDelegate())
-          .environmentObject(QuickLook())
-          .environmentObject(viewModel.client)
+          .environment(Theme.shared)
+          .environment(preferences)
+          .environment(account)
+          .environment(currentInstance)
+          .environment(SceneDelegate())
+          .environment(quickLook)
+          .environment(viewModel.client)
           .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
           .foregroundColor(Theme.shared.labelColor)
           .background(Theme.shared.primaryBackgroundColor)
@@ -127,24 +138,13 @@ struct StatusRowContextMenu: View {
       Label("status.action.copy-link", systemImage: "link")
     }
 
-    if let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier
-    {
+    if let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier {
       Button {
         Task {
           await viewModel.translate(userLang: lang)
         }
       } label: {
         Label("status.action.translate", systemImage: "captions.bubble")
-      }
-
-      if !viewModel.alwaysTranslateWithDeepl {
-        Button {
-          Task {
-            await viewModel.translateWithDeepL(userLang: lang)
-          }
-        } label: {
-          Label("status.action.translate-with-deepl", systemImage: "captions.bubble")
-        }
       }
     }
 
@@ -163,7 +163,11 @@ struct StatusRowContextMenu: View {
         }
         if currentInstance.isEditSupported {
           Button {
-            viewModel.routerPath.presentedSheet = .editStatusEditor(status: viewModel.status)
+            if ProcessInfo.processInfo.isMacCatalystApp {
+              openWindow(value: WindowDestination.editStatusEditor(status: viewModel.status.reblogAsAsStatus ?? viewModel.status))
+            } else {
+              viewModel.routerPath.presentedSheet = .editStatusEditor(status: viewModel.status.reblogAsAsStatus ?? viewModel.status)
+            }
           } label: {
             Label("status.action.edit", systemImage: "pencil")
           }
@@ -262,7 +266,7 @@ struct ActivityView: UIViewControllerRepresentable {
   let image: Image
 
   func makeUIViewController(context _: UIViewControllerRepresentableContext<ActivityView>) -> UIActivityViewController {
-    return UIActivityViewController(activityItems: [image], applicationActivities: nil)
+    UIActivityViewController(activityItems: [image], applicationActivities: nil)
   }
 
   func updateUIViewController(_: UIActivityViewController, context _: UIViewControllerRepresentableContext<ActivityView>) {}

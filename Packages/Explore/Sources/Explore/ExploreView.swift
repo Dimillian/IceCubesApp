@@ -7,86 +7,115 @@ import Shimmer
 import Status
 import SwiftUI
 
+@MainActor
 public struct ExploreView: View {
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var routerPath: RouterPath
+  @Environment(Theme.self) private var theme
+  @Environment(Client.self) private var client
+  @Environment(RouterPath.self) private var routerPath
 
-  @StateObject private var viewModel = ExploreViewModel()
+  @State private var viewModel = ExploreViewModel()
 
-  public init() {}
+  @Binding var scrollToTopSignal: Int
+
+  public init(scrollToTopSignal: Binding<Int>) {
+    _scrollToTopSignal = scrollToTopSignal
+  }
 
   public var body: some View {
-    List {
-      if !viewModel.isLoaded {
-        quickAccessView
-        loadingView
-      } else if !viewModel.searchQuery.isEmpty {
-        if let results = viewModel.results[viewModel.searchQuery] {
-          if results.isEmpty, !viewModel.isSearching {
-            EmptyView(iconName: "magnifyingglass",
-                      title: "explore.search.empty.title",
-                      message: "explore.search.empty.message")
-              .listRowBackground(theme.secondaryBackgroundColor)
-              .listRowSeparator(.hidden)
+    ScrollViewReader { proxy in
+      List {
+        scrollToTopView
+          .padding(.bottom, 4)
+        if !viewModel.isLoaded {
+          quickAccessView
+            .padding(.bottom, 5)
+          loadingView
+        } else if !viewModel.searchQuery.isEmpty {
+          if let results = viewModel.results[viewModel.searchQuery] {
+            if results.isEmpty, !viewModel.isSearching {
+              EmptyView(iconName: "magnifyingglass",
+                        title: "explore.search.empty.title",
+                        message: "explore.search.empty.message")
+                .listRowBackground(theme.secondaryBackgroundColor)
+                .listRowSeparator(.hidden)
+            } else {
+              makeSearchResultsView(results: results)
+            }
           } else {
-            makeSearchResultsView(results: results)
+            HStack {
+              Spacer()
+              ProgressView()
+              Spacer()
+            }
+            .listRowBackground(theme.secondaryBackgroundColor)
+            .listRowSeparator(.hidden)
+            .id(UUID())
           }
+        } else if viewModel.allSectionsEmpty {
+          EmptyView(iconName: "magnifyingglass",
+                    title: "explore.search.title",
+                    message: "explore.search.message-\(client.server)")
+            .listRowBackground(theme.secondaryBackgroundColor)
+            .listRowSeparator(.hidden)
         } else {
-          HStack {
-            Spacer()
-            ProgressView()
-            Spacer()
+          quickAccessView
+            .padding(.bottom, 4)
+
+          if !viewModel.trendingTags.isEmpty {
+            trendingTagsSection
           }
-          .listRowBackground(theme.secondaryBackgroundColor)
-          .listRowSeparator(.hidden)
-          .id(UUID())
-        }
-      } else if viewModel.allSectionsEmpty {
-        EmptyView(iconName: "magnifyingglass",
-                  title: "explore.search.title",
-                  message: "explore.search.message-\(client.server)")
-          .listRowBackground(theme.secondaryBackgroundColor)
-          .listRowSeparator(.hidden)
-      } else {
-        quickAccessView
-        if !viewModel.trendingTags.isEmpty {
-          trendingTagsSection
-        }
-        if !viewModel.suggestedAccounts.isEmpty {
-          suggestedAccountsSection
-        }
-        if !viewModel.trendingStatuses.isEmpty {
-          trendingPostsSection
-        }
-        if !viewModel.trendingLinks.isEmpty {
-          trendingLinksSection
+          if !viewModel.suggestedAccounts.isEmpty {
+            suggestedAccountsSection
+          }
+          if !viewModel.trendingStatuses.isEmpty {
+            trendingPostsSection
+          }
+          if !viewModel.trendingLinks.isEmpty {
+            trendingLinksSection
+          }
         }
       }
-    }
-    .task {
-      viewModel.client = client
-      await viewModel.fetchTrending()
-    }
-    .refreshable {
-      Task {
-        SoundEffectManager.shared.playSound(of: .pull)
-        HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
+      .environment(\.defaultMinListRowHeight, .scrollToViewHeight)
+      .task {
+        viewModel.client = client
         await viewModel.fetchTrending()
-        HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
-        SoundEffectManager.shared.playSound(of: .refresh)
       }
-    }
-    .listStyle(.grouped)
-    .scrollContentBackground(.hidden)
-    .background(theme.secondaryBackgroundColor)
-    .navigationTitle("explore.navigation-title")
-    .searchable(text: $viewModel.searchQuery,
-                placement: .navigationBarDrawer(displayMode: .always),
-                prompt: Text("explore.search.prompt"))
-    .searchScopes($viewModel.searchScope) {
-      ForEach(ExploreViewModel.SearchScope.allCases, id: \.self) { scope in
-        Text(scope.localizedString)
+      .refreshable {
+        Task {
+          SoundEffectManager.shared.playSound(.pull)
+          HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.3))
+          await viewModel.fetchTrending()
+          HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.7))
+          SoundEffectManager.shared.playSound(.refresh)
+        }
+      }
+      .listStyle(.grouped)
+      .scrollContentBackground(.hidden)
+      .background(theme.secondaryBackgroundColor)
+      .navigationTitle("explore.navigation-title")
+      .searchable(text: $viewModel.searchQuery,
+                  isPresented: $viewModel.isSearchPresented,
+                  placement: .navigationBarDrawer(displayMode: .always),
+                  prompt: Text("explore.search.prompt"))
+      .searchScopes($viewModel.searchScope) {
+        ForEach(ExploreViewModel.SearchScope.allCases, id: \.self) { scope in
+          Text(scope.localizedString)
+        }
+      }
+      .task(id: viewModel.searchQuery) {
+        do {
+          try await Task.sleep(for: .milliseconds(150))
+          await viewModel.search()
+        } catch {}
+      }
+      .onChange(of: scrollToTopSignal) {
+        if viewModel.scrollToTopVisible {
+          viewModel.isSearchPresented.toggle()
+        } else {
+          withAnimation {
+            proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
+          }
+        }
       }
     }
   }
@@ -117,16 +146,17 @@ public struct ExploreView: View {
 
   private var loadingView: some View {
     ForEach(Status.placeholders()) { status in
-      StatusRowView(viewModel: { .init(status: status, client: client, routerPath: routerPath) })
+      StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
         .padding(.vertical, 8)
         .redacted(reason: .placeholder)
+        .allowsHitTesting(false)
         .listRowBackground(theme.primaryBackgroundColor)
     }
   }
 
   @ViewBuilder
   private func makeSearchResultsView(results: SearchResults) -> some View {
-    if !results.accounts.isEmpty && (viewModel.searchScope == .all || viewModel.searchScope == .people) {
+    if !results.accounts.isEmpty, viewModel.searchScope == .all || viewModel.searchScope == .people {
       Section("explore.section.users") {
         ForEach(results.accounts) { account in
           if let relationship = results.relationships.first(where: { $0.id == account.id }) {
@@ -136,7 +166,7 @@ public struct ExploreView: View {
         }
       }
     }
-    if !results.hashtags.isEmpty && (viewModel.searchScope == .all || viewModel.searchScope == .hashtags) {
+    if !results.hashtags.isEmpty, viewModel.searchScope == .all || viewModel.searchScope == .hashtags {
       Section("explore.section.tags") {
         ForEach(results.hashtags) { tag in
           TagRowView(tag: tag)
@@ -145,10 +175,10 @@ public struct ExploreView: View {
         }
       }
     }
-    if !results.statuses.isEmpty && (viewModel.searchScope == .all || viewModel.searchScope == .posts) {
+    if !results.statuses.isEmpty, viewModel.searchScope == .all || viewModel.searchScope == .posts {
       Section("explore.section.posts") {
         ForEach(results.statuses) { status in
-          StatusRowView(viewModel: { .init(status: status, client: client, routerPath: routerPath) })
+          StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
             .listRowBackground(theme.primaryBackgroundColor)
             .padding(.vertical, 8)
         }
@@ -196,7 +226,7 @@ public struct ExploreView: View {
       ForEach(viewModel.trendingStatuses
         .prefix(upTo: viewModel.trendingStatuses.count > 3 ? 3 : viewModel.trendingStatuses.count))
       { status in
-        StatusRowView(viewModel: { .init(status: status, client: client, routerPath: routerPath) })
+        StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
           .listRowBackground(theme.primaryBackgroundColor)
           .padding(.vertical, 8)
       }
@@ -218,24 +248,23 @@ public struct ExploreView: View {
           .listRowBackground(theme.primaryBackgroundColor)
           .padding(.vertical, 8)
       }
-      NavigationLink {
-        List {
-          ForEach(viewModel.trendingLinks) { card in
-            StatusRowCardView(card: card)
-              .listRowBackground(theme.primaryBackgroundColor)
-              .padding(.vertical, 8)
-          }
-        }
-        .scrollContentBackground(.hidden)
-        .background(theme.primaryBackgroundColor)
-        .listStyle(.plain)
-        .navigationTitle("explore.section.trending.links")
-        .navigationBarTitleDisplayMode(.inline)
-      } label: {
+
+      NavigationLink(value: RouterDestination.trendingLinks(cards: viewModel.trendingLinks)) {
         Text("see-more")
           .foregroundColor(theme.tintColor)
       }
       .listRowBackground(theme.primaryBackgroundColor)
     }
+  }
+
+  private var scrollToTopView: some View {
+    ScrollToView()
+      .frame(height: .scrollToViewHeight)
+      .onAppear {
+        viewModel.scrollToTopVisible = true
+      }
+      .onDisappear {
+        viewModel.scrollToTopVisible = false
+      }
   }
 }

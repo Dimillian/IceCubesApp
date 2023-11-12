@@ -4,26 +4,17 @@ import SwiftUI
 
 @MainActor
 public extension View {
-  func statusEditorToolbarItem(routerPath: RouterPath, visibility: Models.Visibility) -> some ToolbarContent {
-    ToolbarItem(placement: .navigationBarTrailing) {
-      Button {
-        routerPath.presentedSheet = .newStatusEditor(visibility: visibility)
-        HapticManager.shared.fireHaptic(of: .buttonPress)
-      } label: {
-        Image(systemName: "square.and.pencil")
-          .accessibilityLabel("accessibility.tabs.timeline.new-post.label")
-          .accessibilityInputLabels([
-            LocalizedStringKey("accessibility.tabs.timeline.new-post.label"),
-            LocalizedStringKey("accessibility.tabs.timeline.new-post.inputLabel1"),
-            LocalizedStringKey("accessibility.tabs.timeline.new-post.inputLabel2"),
-          ])
-      }
-    }
+  func statusEditorToolbarItem(routerPath _: RouterPath,
+                               visibility: Models.Visibility) -> some ToolbarContent
+  {
+    StatusEditorToolbarItem(visibility: visibility)
   }
 }
 
+@MainActor
 public struct StatusEditorToolbarItem: ToolbarContent {
-  @EnvironmentObject private var routerPath: RouterPath
+  @Environment(\.openWindow) private var openWindow
+  @Environment(RouterPath.self) private var routerPath
 
   let visibility: Models.Visibility
 
@@ -34,8 +25,14 @@ public struct StatusEditorToolbarItem: ToolbarContent {
   public var body: some ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
       Button {
-        routerPath.presentedSheet = .newStatusEditor(visibility: visibility)
-        HapticManager.shared.fireHaptic(of: .buttonPress)
+        Task { @MainActor in
+          if ProcessInfo.processInfo.isMacCatalystApp {
+            openWindow(value: WindowDestination.newStatusEditor(visibility: visibility))
+          } else {
+            routerPath.presentedSheet = .newStatusEditor(visibility: visibility)
+            HapticManager.shared.fireHaptic(.buttonPress)
+          }
+        }
       } label: {
         Image(systemName: "square.and.pencil")
           .accessibilityLabel("accessibility.tabs.timeline.new-post.label")
@@ -49,9 +46,10 @@ public struct StatusEditorToolbarItem: ToolbarContent {
   }
 }
 
+@MainActor
 public struct SecondaryColumnToolbarItem: ToolbarContent {
   @Environment(\.isSecondaryColumn) private var isSecondaryColumn
-  @EnvironmentObject private var preferences: UserPreferences
+  @Environment(UserPreferences.self) private var preferences
 
   public init() {}
 

@@ -3,57 +3,28 @@ import DesignSystem
 import Env
 import Models
 import Network
+import Observation
 import Status
 import SwiftUI
 
-class DisplaySettingsLocalValues: ObservableObject {
-  @Published var tintColor = Theme.shared.tintColor
-  @Published var primaryBackgroundColor = Theme.shared.primaryBackgroundColor
-  @Published var secondaryBackgroundColor = Theme.shared.secondaryBackgroundColor
-  @Published var labelColor = Theme.shared.labelColor
-  @Published var lineSpacing = Theme.shared.lineSpacing
-  @Published var fontSizeScale = Theme.shared.fontSizeScale
-
-  private let debouncesDelay: DispatchQueue.SchedulerTimeType.Stride = .seconds(0.5)
-
-  private var subscriptions = Set<AnyCancellable>()
-
-  init() {
-    $tintColor
-      .debounce(for: debouncesDelay, scheduler: DispatchQueue.main)
-      .sink(receiveValue: { newColor in Theme.shared.tintColor = newColor })
-      .store(in: &subscriptions)
-    $primaryBackgroundColor
-      .debounce(for: debouncesDelay, scheduler: DispatchQueue.main)
-      .sink(receiveValue: { newColor in Theme.shared.primaryBackgroundColor = newColor })
-      .store(in: &subscriptions)
-    $secondaryBackgroundColor
-      .debounce(for: debouncesDelay, scheduler: DispatchQueue.main)
-      .sink(receiveValue: { newColor in Theme.shared.secondaryBackgroundColor = newColor })
-      .store(in: &subscriptions)
-    $labelColor
-      .debounce(for: debouncesDelay, scheduler: DispatchQueue.main)
-      .sink(receiveValue: { newColor in Theme.shared.labelColor = newColor })
-      .store(in: &subscriptions)
-    $lineSpacing
-      .debounce(for: debouncesDelay, scheduler: DispatchQueue.main)
-      .sink(receiveValue: { newSpacing in Theme.shared.lineSpacing = newSpacing })
-      .store(in: &subscriptions)
-    $fontSizeScale
-      .debounce(for: debouncesDelay, scheduler: DispatchQueue.main)
-      .sink(receiveValue: { newScale in Theme.shared.fontSizeScale = newScale })
-      .store(in: &subscriptions)
-  }
+@Observable class DisplaySettingsLocalValues {
+  var tintColor = Theme.shared.tintColor
+  var primaryBackgroundColor = Theme.shared.primaryBackgroundColor
+  var secondaryBackgroundColor = Theme.shared.secondaryBackgroundColor
+  var labelColor = Theme.shared.labelColor
+  var lineSpacing = Theme.shared.lineSpacing
+  var fontSizeScale = Theme.shared.fontSizeScale
 }
 
+@MainActor
 struct DisplaySettingsView: View {
   typealias FontState = Theme.FontState
 
   @Environment(\.colorScheme) private var colorScheme
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var userPreferences: UserPreferences
+  @Environment(Theme.self) private var theme
+  @Environment(UserPreferences.self) private var userPreferences
 
-  @StateObject private var localValues = DisplaySettingsLocalValues()
+  @State private var localValues = DisplaySettingsLocalValues()
 
   @State private var isFontSelectorPresented = false
 
@@ -64,7 +35,7 @@ struct DisplaySettingsView: View {
   var body: some View {
     ZStack(alignment: .top) {
       Form {
-        StatusRowView(viewModel: { previewStatusViewModel })
+        StatusRowView(viewModel: previewStatusViewModel)
           .allowsHitTesting(false)
           .opacity(0)
           .hidden()
@@ -77,13 +48,37 @@ struct DisplaySettingsView: View {
       .navigationTitle("settings.display.navigation-title")
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
+      .task(id: localValues.tintColor) {
+        do { try await Task.sleep(for: .microseconds(500)) } catch {}
+        theme.tintColor = localValues.tintColor
+      }
+      .task(id: localValues.primaryBackgroundColor) {
+        do { try await Task.sleep(for: .microseconds(500)) } catch {}
+        theme.primaryBackgroundColor = localValues.primaryBackgroundColor
+      }
+      .task(id: localValues.secondaryBackgroundColor) {
+        do { try await Task.sleep(for: .microseconds(500)) } catch {}
+        theme.secondaryBackgroundColor = localValues.secondaryBackgroundColor
+      }
+      .task(id: localValues.labelColor) {
+        do { try await Task.sleep(for: .microseconds(500)) } catch {}
+        theme.labelColor = localValues.labelColor
+      }
+      .task(id: localValues.lineSpacing) {
+        do { try await Task.sleep(for: .microseconds(500)) } catch {}
+        theme.lineSpacing = localValues.lineSpacing
+      }
+      .task(id: localValues.fontSizeScale) {
+        do { try await Task.sleep(for: .microseconds(500)) } catch {}
+        theme.fontSizeScale = localValues.fontSizeScale
+      }
       examplePost
     }
   }
 
   private var examplePost: some View {
     VStack(spacing: 0) {
-      StatusRowView(viewModel: { previewStatusViewModel })
+      StatusRowView(viewModel: previewStatusViewModel)
         .allowsHitTesting(false)
         .padding(.layoutPadding)
         .background(theme.primaryBackgroundColor)
@@ -99,7 +94,9 @@ struct DisplaySettingsView: View {
     }
   }
 
+  @ViewBuilder
   private var themeSection: some View {
+    @Bindable var theme = theme
     Section {
       Toggle("settings.display.theme.systemColor", isOn: $theme.followSystemColorScheme)
       themeSelectorButton
@@ -111,7 +108,7 @@ struct DisplaySettingsView: View {
       }
       .disabled(theme.followSystemColorScheme)
       .opacity(theme.followSystemColorScheme ? 0.5 : 1.0)
-      .onChange(of: theme.selectedSet) { _ in
+      .onChange(of: theme.selectedSet) {
         localValues.tintColor = theme.tintColor
         localValues.primaryBackgroundColor = theme.primaryBackgroundColor
         localValues.secondaryBackgroundColor = theme.secondaryBackgroundColor
@@ -179,7 +176,10 @@ struct DisplaySettingsView: View {
     .listRowBackground(theme.primaryBackgroundColor)
   }
 
+  @ViewBuilder
   private var layoutSection: some View {
+    @Bindable var theme = theme
+    @Bindable var userPreferences = userPreferences
     Section("settings.display.section.display") {
       Picker("settings.display.avatar.position", selection: $theme.avatarPosition) {
         ForEach(Theme.AvatarPosition.allCases, id: \.rawValue) { position in
@@ -197,19 +197,21 @@ struct DisplaySettingsView: View {
           Text(buttonStyle.description).tag(buttonStyle)
         }
       }
-
       Picker("settings.display.status.media-style", selection: $theme.statusDisplayStyle) {
         ForEach(Theme.StatusDisplayStyle.allCases, id: \.rawValue) { buttonStyle in
           Text(buttonStyle.description).tag(buttonStyle)
         }
       }
       Toggle("settings.display.translate-button", isOn: $userPreferences.showTranslateButton)
+      Toggle("settings.display.pending-at-bottom", isOn: $userPreferences.pendingShownAtBottom)
+      Toggle("settings.display.pending-left", isOn: $userPreferences.pendingShownLeft)
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
 
   @ViewBuilder
   private var platformsSection: some View {
+    @Bindable var userPreferences = userPreferences
     if UIDevice.current.userInterfaceIdiom == .phone {
       Section("iPhone") {
         Toggle("settings.display.show-tab-label", isOn: $userPreferences.showiPhoneTabLabel)
@@ -229,7 +231,7 @@ struct DisplaySettingsView: View {
     Section {
       Button {
         theme.followSystemColorScheme = true
-        theme.selectedSet = colorScheme == .dark ? .iceCubeDark : .iceCubeLight
+        theme.applySet(set: colorScheme == .dark ? .iceCubeDark : .iceCubeLight)
         theme.avatarShape = .rounded
         theme.avatarPosition = .top
         theme.statusActionsDisplay = .full

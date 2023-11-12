@@ -1,14 +1,15 @@
 import Network
+import Observation
 import SwiftUI
 
 @MainActor
-class EditRelationshipNoteViewModel: ObservableObject {
+@Observable class EditRelationshipNoteViewModel {
   public var note: String = ""
   public var relatedAccountId: String?
   public var client: Client?
 
-  @Published var isSaving: Bool = false
-  @Published var saveError: Bool = false
+  var isSaving: Bool = false
+  var saveError: Bool = false
 
   init() {}
 
@@ -18,7 +19,7 @@ class EditRelationshipNoteViewModel: ObservableObject {
     {
       isSaving = true
       do {
-        let _ = try await client!.post(endpoint: Accounts.relationshipNote(id: relatedAccountId!, json: RelationshipNoteData(note: note)))
+        _ = try await client!.post(endpoint: Accounts.relationshipNote(id: relatedAccountId!, json: RelationshipNoteData(note: note)))
       } catch {
         isSaving = false
         saveError = true

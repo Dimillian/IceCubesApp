@@ -11,23 +11,27 @@ import StoreKit
 import SwiftUI
 import UIKit
 
+@MainActor
 public struct StatusEditorView: View {
-  @EnvironmentObject private var appAccounts: AppAccountsManager
-  @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var routerPath: RouterPath
+  @Environment(AppAccountsManager.self) private var appAccounts
+  @Environment(UserPreferences.self) private var preferences
+  @Environment(Theme.self) private var theme
+  @Environment(Client.self) private var client
+  @Environment(CurrentAccount.self) private var currentAccount
   @Environment(\.dismiss) private var dismiss
+  @Environment(\.dismissWindow) private var dismissWindow
+  @Environment(\.modelContext) private var context
 
-  @StateObject private var viewModel: StatusEditorViewModel
+  @State private var viewModel: StatusEditorViewModel
   @FocusState private var isSpoilerTextFocused: Bool
 
   @State private var isDismissAlertPresented: Bool = false
   @State private var isLanguageConfirmPresented = false
 
+  @State private var editingContainer: StatusEditorMediaContainer?
+
   public init(mode: StatusEditorViewModel.Mode) {
-    _viewModel = StateObject(wrappedValue: .init(mode: mode))
+    _viewModel = .init(initialValue: .init(mode: mode))
   }
 
   public var body: some View {
@@ -46,15 +50,16 @@ public struct StatusEditorView: View {
                      .placeholder(String(localized: "status.editor.text.placeholder"))
                      .setKeyboardType(preferences.isSocialKeyboardEnabled ? .twitter : .default)
                      .padding(.horizontal, .layoutPadding)
-            StatusEditorMediaView(viewModel: viewModel)
+            StatusEditorMediaView(viewModel: viewModel,
+                                  editingContainer: $editingContainer)
             if let status = viewModel.embeddedStatus {
-              StatusEmbeddedView(status: status, client: client, routerPath: routerPath)
+              StatusEmbeddedView(status: status, client: client, routerPath: RouterPath())
                 .padding(.horizontal, .layoutPadding)
                 .disabled(true)
             } else if let status = viewModel.replyToStatus {
               Divider()
                 .padding(.top, 20)
-              StatusEmbeddedView(status: status, client: client, routerPath: routerPath)
+              StatusEmbeddedView(status: status, client: client, routerPath: RouterPath())
                 .padding(.horizontal, .layoutPadding)
                 .disabled(true)
             }
@@ -66,7 +71,10 @@ public struct StatusEditorView: View {
           }
           .padding(.top, 8)
           .padding(.bottom, 40)
-        }.accessibilitySortPriority(1) // Ensure that all elements inside the `ScrollView` occur earlier than the accessory views
+        }
+        .accessibilitySortPriority(1) // Ensure that all elements inside the `ScrollView` occur earlier than the accessory views
+        .padding(.top, 1) // hacky fix for weird SwiftUI scrollView bug when adding padding
+        .padding(.bottom, 48)
         VStack(alignment: .leading, spacing: 0) {
           StatusEditorAutoCompleteView(viewModel: viewModel)
           StatusEditorAccessoryView(isSpoilerTextFocused: $isSpoilerTextFocused,
@@ -81,8 +89,8 @@ public struct StatusEditorView: View {
         viewModel.preferences = preferences
         viewModel.prepareStatusText()
         if !client.isAuth {
-          dismiss()
-          NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
+          close()
+          NotificationCenter.default.post(name: .shareSheetClose,
                                           object: nil)
         }
 
@@ -90,12 +98,13 @@ public struct StatusEditorView: View {
           await viewModel.fetchCustomEmojis()
         }
       }
-      .onChange(of: currentAccount.account?.id, perform: { _ in
+      .onChange(of: currentAccount.account?.id) {
         viewModel.currentAccount = currentAccount.account
-      })
+      }
       .background(theme.primaryBackgroundColor)
       .navigationTitle(viewModel.mode.title)
       .navigationBarTitleDisplayMode(.inline)
+      .toolbarBackground(.visible, for: .navigationBar)
       .alert("status.error.posting.title",
              isPresented: $viewModel.showPostingErrorAlert,
              actions: {
@@ -132,38 +141,44 @@ public struct StatusEditorView: View {
             if viewModel.shouldDisplayDismissWarning {
               isDismissAlertPresented = true
             } else {
-              dismiss()
-              NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
+              close()
+              NotificationCenter.default.post(name: .shareSheetClose,
                                               object: nil)
             }
           } label: {
             Text("action.cancel")
           }
           .keyboardShortcut(.cancelAction)
-          .confirmationDialog("",
-                              isPresented: $isDismissAlertPresented,
-                              actions: {
-                                Button("status.draft.delete", role: .destructive) {
-                                  dismiss()
-                                  NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
-                                                                  object: nil)
-                                }
-                                Button("status.draft.save") {
-                                  preferences.draftsPosts.insert(viewModel.statusText.string, at: 0)
-                                  dismiss()
-                                  NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
-                                                                  object: nil)
-                                }
-                                Button("action.cancel", role: .cancel) {}
-                              })
+          .confirmationDialog(
+            "",
+            isPresented: $isDismissAlertPresented,
+            actions: {
+              Button("status.draft.delete", role: .destructive) {
+                close()
+                NotificationCenter.default.post(name: .shareSheetClose,
+                                                object: nil)
+              }
+              Button("status.draft.save") {
+                context.insert(Draft(content: viewModel.statusText.string))
+                close()
+                NotificationCenter.default.post(name: .shareSheetClose,
+                                                object: nil)
+              }
+              Button("action.cancel", role: .cancel) {}
+            }
+          )
         }
       }
     }
+    .sheet(item: $editingContainer) { container in
+      StatusEditorMediaEditView(viewModel: viewModel, container: container)
+        .preferredColorScheme(theme.selectedScheme == .dark ? .dark : .light)
+    }
     .interactiveDismissDisabled(viewModel.shouldDisplayDismissWarning)
-    .onChange(of: appAccounts.currentClient) { newClient in
+    .onChange(of: appAccounts.currentClient) { _, newValue in
       if viewModel.mode.isInShareExtension {
-        currentAccount.setClient(client: newClient)
-        viewModel.client = newClient
+        currentAccount.setClient(client: newValue)
+        viewModel.client = newValue
       }
     }
   }
@@ -197,11 +212,11 @@ public struct StatusEditorView: View {
   private func postStatus() async {
     let status = await viewModel.postStatus()
     if status != nil {
-      dismiss()
-      SoundEffectManager.shared.playSound(of: .tootSent)
-      NotificationCenter.default.post(name: NotificationsName.shareSheetClose,
+      close()
+      SoundEffectManager.shared.playSound(.tootSent)
+      NotificationCenter.default.post(name: .shareSheetClose,
                                       object: nil)
-      if !viewModel.mode.isInShareExtension, !preferences.requestedReview, !ProcessInfo.processInfo.isiOSAppOnMac {
+      if !viewModel.mode.isInShareExtension, !preferences.requestedReview, !ProcessInfo.processInfo.isMacCatalystApp {
         if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
           SKStoreReviewController.requestReview(in: scene)
         }
@@ -234,7 +249,7 @@ public struct StatusEditorView: View {
                                   avatarSize: .status)
         } else {
           AvatarView(url: account.avatar, size: .status)
-            .environmentObject(theme)
+            .environment(theme)
             .accessibilityHidden(true)
         }
         VStack(alignment: .leading, spacing: 4) {
@@ -273,6 +288,14 @@ public struct StatusEditorView: View {
         RoundedRectangle(cornerRadius: 8)
           .stroke(theme.tintColor, lineWidth: 1)
       )
+    }
+  }
+
+  private func close() {
+    if ProcessInfo.processInfo.isMacCatalystApp {
+      dismissWindow()
+    } else {
+      dismiss()
     }
   }
 }

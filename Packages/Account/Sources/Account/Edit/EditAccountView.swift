@@ -3,12 +3,13 @@ import Models
 import Network
 import SwiftUI
 
+@MainActor
 public struct EditAccountView: View {
   @Environment(\.dismiss) private var dismiss
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var theme: Theme
+  @Environment(Client.self) private var client
+  @Environment(Theme.self) private var theme
 
-  @StateObject private var viewModel = EditAccountViewModel()
+  @State private var viewModel = EditAccountViewModel()
 
   public init() {}
 

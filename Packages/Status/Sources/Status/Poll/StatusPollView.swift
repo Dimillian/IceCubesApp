@@ -4,17 +4,19 @@ import Models
 import Network
 import SwiftUI
 
+@MainActor
 public struct StatusPollView: View {
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var currentInstance: CurrentInstance
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @StateObject private var viewModel: StatusPollViewModel
+  @Environment(Theme.self) private var theme
+  @Environment(Client.self) private var client
+  @Environment(CurrentInstance.self) private var currentInstance
+  @Environment(CurrentAccount.self) private var currentAccount
+
+  @State private var viewModel: StatusPollViewModel
 
   private var status: AnyStatus
 
   public init(poll: Poll, status: AnyStatus) {
-    _viewModel = StateObject(wrappedValue: .init(poll: poll))
+    _viewModel = .init(initialValue: .init(poll: poll))
     self.status = status
   }
 
@@ -34,9 +36,9 @@ public struct StatusPollView: View {
 
   private func ratioForOption(option: Poll.Option) -> CGFloat {
     if let votesCount = option.votesCount, viewModel.poll.safeVotersCount != 0 {
-      return CGFloat(votesCount) / CGFloat(viewModel.poll.safeVotersCount)
+      CGFloat(votesCount) / CGFloat(viewModel.poll.safeVotersCount)
     } else {
-      return 0.0
+      0.0
     }
   }
 

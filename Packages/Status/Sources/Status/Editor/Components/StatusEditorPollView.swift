@@ -2,6 +2,7 @@ import DesignSystem
 import Env
 import SwiftUI
 
+@MainActor
 struct StatusEditorPollView: View {
   enum FocusField: Hashable {
     case option(Int)
@@ -11,16 +12,16 @@ struct StatusEditorPollView: View {
 
   @State private var currentFocusIndex: Int = 0
 
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var currentInstance: CurrentInstance
+  @Environment(Theme.self) private var theme
+  @Environment(CurrentInstance.self) private var currentInstance
 
-  @ObservedObject var viewModel: StatusEditorViewModel
+  var viewModel: StatusEditorViewModel
 
   @Binding var showPoll: Bool
 
   var body: some View {
+    @Bindable var viewModel = viewModel
     let count = viewModel.pollOptions.count
-
     VStack {
       ForEach(0 ..< count, id: \.self) { index in
         VStack {
@@ -37,10 +38,6 @@ struct StatusEditorPollView: View {
                 if canAddMoreAt(index) {
                   addChoice(at: index)
                 }
-              }
-              .onChange(of: viewModel.pollOptions[index]) {
-                let maxCharacters: Int = currentInstance.instance?.configuration?.polls.maxCharactersPerOption ?? 50
-                viewModel.pollOptions[index] = String($0.prefix(maxCharacters))
               }
 
             if canAddMoreAt(index) {

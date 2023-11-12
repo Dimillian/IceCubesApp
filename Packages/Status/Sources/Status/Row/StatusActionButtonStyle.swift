@@ -28,8 +28,8 @@ struct StatusActionButtonStyle: ButtonStyle {
           SparklesView(counter: sparklesCounter, tint: tint, size: 5, velocity: 30)
         }
       }
-      .onChange(of: configuration.isPressed) { isPressed in
-        guard tintColor != nil && !isPressed && !isOn else { return }
+      .onChange(of: configuration.isPressed) { _, newValue in
+        guard tintColor != nil, !newValue, !isOn else { return }
 
         withAnimation(.spring(response: 1, dampingFraction: 1)) {
           sparklesCounter += 1
@@ -39,9 +39,9 @@ struct StatusActionButtonStyle: ButtonStyle {
 
   func brightness(configuration: Configuration) -> Double {
     switch (configuration.isPressed, isOn) {
-    case (true, true): return 0.6
-    case (true, false): return 0.2
-    default: return 0
+    case (true, true): 0.6
+    case (true, false): 0.2
+    default: 0
     }
   }
 
@@ -88,8 +88,8 @@ struct StatusActionButtonStyle: ButtonStyle {
         .onAppear {
           cells = Self.generateCells()
         }
-        .onChange(of: counter) { [counter] newCounter in
-          if floor(counter) != floor(newCounter) {
+        .onChange(of: counter) { oldValue, newValue in
+          if floor(oldValue) != floor(newValue) {
             cells = Self.generateCells()
           }
         }
@@ -120,7 +120,7 @@ struct StatusActionButtonStyle: ButtonStyle {
     }
 
     static func deg2rad(_ number: Double) -> Double {
-      return number * .pi / 180
+      number * .pi / 180
     }
   }
 }

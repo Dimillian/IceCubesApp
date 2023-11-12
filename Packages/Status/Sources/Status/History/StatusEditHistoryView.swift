@@ -6,8 +6,8 @@ import SwiftUI
 public struct StatusEditHistoryView: View {
   @Environment(\.dismiss) private var dismiss
 
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var theme: Theme
+  @Environment(Client.self) private var client
+  @Environment(Theme.self) private var theme
 
   private let statusId: String
 

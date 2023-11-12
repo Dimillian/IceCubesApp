@@ -14,7 +14,7 @@ public extension Color {
   }
 
   static var label: Color {
-    Color("label", bundle: .module)
+    Color(.label)
   }
 }
 
@@ -27,7 +27,7 @@ extension Color: RawRepresentable {
   }
 
   public var rawValue: Int {
-    guard let coreImageColor = coreImageColor else {
+    guard let coreImageColor else {
       return 0
     }
     let red = Int(coreImageColor.red * 255 + 0.5)
@@ -37,7 +37,7 @@ extension Color: RawRepresentable {
   }
 
   private var coreImageColor: CIColor? {
-    return CIColor(color: .init(self))
+    CIColor(color: .init(self))
   }
 }
 

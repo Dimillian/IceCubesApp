@@ -1,20 +1,22 @@
 import DesignSystem
 import Env
+import Observation
 import SafariServices
 import SwiftUI
 
 extension View {
-  func withSafariRouter() -> some View {
+  @MainActor func withSafariRouter() -> some View {
     modifier(SafariRouter())
   }
 }
 
+@MainActor
 private struct SafariRouter: ViewModifier {
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var routerPath: RouterPath
+  @Environment(Theme.self) private var theme
+  @Environment(UserPreferences.self) private var preferences
+  @Environment(RouterPath.self) private var routerPath
 
-  @StateObject private var safariManager = InAppSafariManager()
+  @State private var safariManager = InAppSafariManager()
 
   func body(content: Content) -> some View {
     content
@@ -40,7 +42,7 @@ private struct SafariRouter: ViewModifier {
               return .handled
             }
           }
-          guard preferences.preferredBrowser == .inAppSafari, !ProcessInfo.processInfo.isiOSAppOnMac else { return .systemAction }
+          guard preferences.preferredBrowser == .inAppSafari, !ProcessInfo.processInfo.isMacCatalystApp else { return .systemAction }
           // SFSafariViewController only supports initial URLs with http:// or https:// schemes.
           guard let scheme = url.scheme, ["https", "http"].contains(scheme.lowercased()) else {
             return .systemAction
@@ -50,20 +52,21 @@ private struct SafariRouter: ViewModifier {
       }
       .background {
         WindowReader { window in
-          self.safariManager.windowScene = window.windowScene
+          safariManager.windowScene = window.windowScene
         }
       }
   }
 }
 
-private class InAppSafariManager: NSObject, ObservableObject, SFSafariViewControllerDelegate {
+@MainActor
+@Observable private class InAppSafariManager: NSObject, SFSafariViewControllerDelegate {
   var windowScene: UIWindowScene?
   let viewController: UIViewController = .init()
   var window: UIWindow?
 
   @MainActor
   func open(_ url: URL) -> OpenURLAction.Result {
-    guard let windowScene = windowScene else { return .systemAction }
+    guard let windowScene else { return .systemAction }
 
     window = setupWindow(windowScene: windowScene)
 
@@ -83,7 +86,7 @@ private class InAppSafariManager: NSObject, ObservableObject, SFSafariViewContro
   }
 
   func setupWindow(windowScene: UIWindowScene) -> UIWindow {
-    let window = self.window ?? UIWindow(windowScene: windowScene)
+    let window = window ?? UIWindow(windowScene: windowScene)
 
     window.rootViewController = viewController
     window.makeKeyAndVisible()
@@ -99,10 +102,12 @@ private class InAppSafariManager: NSObject, ObservableObject, SFSafariViewContro
     return window
   }
 
-  func safariViewControllerDidFinish(_: SFSafariViewController) {
-    window?.resignKey()
-    window?.isHidden = false
-    window = nil
+  nonisolated func safariViewControllerDidFinish(_: SFSafariViewController) {
+    Task { @MainActor in
+      window?.resignKey()
+      window?.isHidden = false
+      window = nil
+    }
   }
 }
 

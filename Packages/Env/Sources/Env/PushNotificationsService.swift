@@ -4,8 +4,12 @@ import Foundation
 import KeychainSwift
 import Models
 import Network
+import Observation
 import SwiftUI
 import UserNotifications
+
+extension UNNotificationResponse: @unchecked Sendable {}
+extension UNUserNotificationCenter: @unchecked Sendable {}
 
 public struct PushAccount: Equatable {
   public let server: String
@@ -25,7 +29,7 @@ public struct HandledNotification: Equatable {
 }
 
 @MainActor
-public class PushNotificationsService: NSObject, ObservableObject {
+@Observable public class PushNotificationsService: NSObject {
   enum Constants {
     static let endpoint = "https://icecubesrelay.fly.dev"
     static let keychainAuthKey = "notifications_auth_key"
@@ -36,9 +40,9 @@ public class PushNotificationsService: NSObject, ObservableObject {
 
   public private(set) var subscriptions: [PushNotificationSubscriptionSettings] = []
 
-  @Published public var pushToken: Data?
+  public var pushToken: Data?
 
-  @Published public var handledNotification: HandledNotification?
+  public var handledNotification: HandledNotification?
 
   override init() {
     super.init()
@@ -154,19 +158,19 @@ extension PushNotificationsService: UNUserNotificationCenterDelegate {
 
 extension Data {
   var hexString: String {
-    return map { String(format: "%02.2hhx", arguments: [$0]) }.joined()
+    map { String(format: "%02.2hhx", arguments: [$0]) }.joined()
   }
 }
 
 @MainActor
-public class PushNotificationSubscriptionSettings: ObservableObject {
-  @Published public var isEnabled: Bool = true
-  @Published public var isFollowNotificationEnabled: Bool = true
-  @Published public var isFavoriteNotificationEnabled: Bool = true
-  @Published public var isReblogNotificationEnabled: Bool = true
-  @Published public var isMentionNotificationEnabled: Bool = true
-  @Published public var isPollNotificationEnabled: Bool = true
-  @Published public var isNewPostsNotificationEnabled: Bool = true
+@Observable public class PushNotificationSubscriptionSettings {
+  public var isEnabled: Bool = true
+  public var isFollowNotificationEnabled: Bool = true
+  public var isFavoriteNotificationEnabled: Bool = true
+  public var isReblogNotificationEnabled: Bool = true
+  public var isMentionNotificationEnabled: Bool = true
+  public var isPollNotificationEnabled: Bool = true
+  public var isNewPostsNotificationEnabled: Bool = true
 
   public let account: PushAccount
 
@@ -196,7 +200,7 @@ public class PushNotificationSubscriptionSettings: ObservableObject {
   }
 
   public func updateSubscription() async {
-    guard let pushToken = pushToken else { return }
+    guard let pushToken else { return }
     let client = Client(server: account.server, oauthToken: account.token)
     do {
       var listenerURL = PushNotificationsService.Constants.endpoint

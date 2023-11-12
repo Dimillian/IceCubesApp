@@ -7,7 +7,7 @@ public enum Apps: Endpoint {
   public func path() -> String {
     switch self {
     case .registerApp:
-      return "apps"
+      "apps"
     }
   }
 

@@ -4,12 +4,13 @@ import Models
 import Network
 import SwiftUI
 
+@MainActor
 public struct FiltersListView: View {
   @Environment(\.dismiss) private var dismiss
 
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var account: CurrentAccount
-  @EnvironmentObject private var client: Client
+  @Environment(Theme.self) private var theme
+  @Environment(CurrentAccount.self) private var account
+  @Environment(Client.self) private var client
 
   @State private var isLoading: Bool = true
   @State private var filters: [ServerFilter] = []
@@ -19,11 +20,11 @@ public struct FiltersListView: View {
   public var body: some View {
     NavigationStack {
       Form {
-        if !isLoading && filters.isEmpty {
+        if !isLoading, filters.isEmpty {
           EmptyView()
         } else {
           Section {
-            if isLoading && filters.isEmpty {
+            if isLoading, filters.isEmpty {
               ProgressView()
             } else {
               ForEach(filters) { filter in
@@ -31,7 +32,7 @@ public struct FiltersListView: View {
                   VStack(alignment: .leading) {
                     Text(filter.title)
                       .font(.scaledSubheadline)
-                    Text("\(filter.context.map { $0.name }.joined(separator: ", "))")
+                    Text("\(filter.context.map(\.name).joined(separator: ", "))")
                       .font(.scaledBody)
                       .foregroundColor(.gray)
                     if filter.hasExpiry() {

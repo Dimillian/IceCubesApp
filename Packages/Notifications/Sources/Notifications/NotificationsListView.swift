@@ -5,29 +5,40 @@ import Network
 import Shimmer
 import SwiftUI
 
+@MainActor
 public struct NotificationsListView: View {
   @Environment(\.scenePhase) private var scenePhase
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var watcher: StreamWatcher
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var routerPath: RouterPath
-  @EnvironmentObject private var account: CurrentAccount
-  @StateObject private var viewModel = NotificationsViewModel()
+  @Environment(Theme.self) private var theme
+  @Environment(StreamWatcher.self) private var watcher
+  @Environment(Client.self) private var client
+  @Environment(RouterPath.self) private var routerPath
+  @Environment(CurrentAccount.self) private var account
+  @State private var viewModel = NotificationsViewModel()
+  @Binding var scrollToTopSignal: Int
 
   let lockedType: Models.Notification.NotificationType?
 
-  public init(lockedType: Models.Notification.NotificationType?) {
+  public init(lockedType: Models.Notification.NotificationType?, scrollToTopSignal: Binding<Int>) {
     self.lockedType = lockedType
+    _scrollToTopSignal = scrollToTopSignal
   }
 
   public var body: some View {
-    List {
-      topPaddingView
-      notificationsView
+    ScrollViewReader { proxy in
+      List {
+        scrollToTopView
+        topPaddingView
+        notificationsView
+      }
+      .id(account.account?.id)
+      .environment(\.defaultMinListRowHeight, 1)
+      .listStyle(.plain)
+      .onChange(of: scrollToTopSignal) {
+        withAnimation {
+          proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
+        }
+      }
     }
-    .id(account.account?.id)
-    .environment(\.defaultMinListRowHeight, 1)
-    .listStyle(.plain)
     .toolbar {
       ToolbarItem(placement: .principal) {
         let title = lockedType?.menuTitle() ?? viewModel.selectedType?.menuTitle() ?? "notifications.navigation-title"
@@ -82,19 +93,19 @@ public struct NotificationsListView: View {
       await viewModel.fetchNotifications()
     }
     .refreshable {
-      SoundEffectManager.shared.playSound(of: .pull)
-      HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
+      SoundEffectManager.shared.playSound(.pull)
+      HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.3))
       await viewModel.fetchNotifications()
-      HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
-      SoundEffectManager.shared.playSound(of: .refresh)
+      HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.7))
+      SoundEffectManager.shared.playSound(.refresh)
     }
-    .onChange(of: watcher.latestEvent?.id, perform: { _ in
+    .onChange(of: watcher.latestEvent?.id) {
       if let latestEvent = watcher.latestEvent {
         viewModel.handleEvent(event: latestEvent)
       }
-    })
-    .onChange(of: scenePhase, perform: { scenePhase in
-      switch scenePhase {
+    }
+    .onChange(of: scenePhase) { _, newValue in
+      switch newValue {
       case .active:
         Task {
           await viewModel.fetchNotifications()
@@ -102,7 +113,7 @@ public struct NotificationsListView: View {
       default:
         break
       }
-    })
+    }
   }
 
   @ViewBuilder
@@ -114,13 +125,13 @@ public struct NotificationsListView: View {
                             client: client,
                             routerPath: routerPath,
                             followRequests: account.followRequests)
-          .redacted(reason: .placeholder)
           .listRowInsets(.init(top: 12,
                                leading: .layoutPadding + 4,
                                bottom: 12,
                                trailing: .layoutPadding))
           .listRowBackground(theme.primaryBackgroundColor)
           .redacted(reason: .placeholder)
+          .allowsHitTesting(false)
       }
 
     case let .display(notifications, nextPageState):
@@ -194,5 +205,16 @@ public struct NotificationsListView: View {
       .listRowInsets(.init())
       .frame(height: .layoutPadding)
       .accessibilityHidden(true)
+  }
+
+  private var scrollToTopView: some View {
+    ScrollToView()
+      .frame(height: .scrollToViewHeight)
+      .onAppear {
+        viewModel.scrollToTopVisible = true
+      }
+      .onDisappear {
+        viewModel.scrollToTopVisible = false
+      }
   }
 }

@@ -9,15 +9,17 @@ import SafariServices
 import Shimmer
 import SwiftUI
 
+@MainActor
 struct AddAccountView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(\.scenePhase) private var scenePhase
+  @Environment(\.openURL) private var openURL
 
-  @EnvironmentObject private var appAccountsManager: AppAccountsManager
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var currentInstance: CurrentInstance
-  @EnvironmentObject private var pushNotifications: PushNotificationsService
-  @EnvironmentObject private var theme: Theme
+  @Environment(AppAccountsManager.self) private var appAccountsManager
+  @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(CurrentInstance.self) private var currentInstance
+  @Environment(PushNotificationsService.self) private var pushNotifications
+  @Environment(Theme.self) private var theme
 
   @State private var instanceName: String = ""
   @State private var instance: Instance?
@@ -43,6 +45,10 @@ struct AddAccountView: View {
 
   @FocusState private var isInstanceURLFieldFocused: Bool
 
+  private func cleanServerStr(_ server: String) -> String {
+    server.replacingOccurrences(of: " ", with: "")
+  }
+
   var body: some View {
     NavigationStack {
       Form {
@@ -53,6 +59,9 @@ struct AddAccountView: View {
           .textInputAutocapitalization(.never)
           .autocorrectionDisabled()
           .focused($isInstanceURLFieldFocused)
+          .onChange(of: instanceName) { _, _ in
+            instanceName = cleanServerStr(instanceName)
+          }
         if let instanceFetchError {
           Text(instanceFetchError)
         }
@@ -89,7 +98,7 @@ struct AddAccountView: View {
         }
         isSigninIn = false
       }
-      .onChange(of: instanceName) { newValue in
+      .onChange(of: instanceName) { _, newValue in
         instanceNamePublisher.send(newValue)
       }
       .onReceive(instanceNamePublisher.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)) { _ in
@@ -100,11 +109,11 @@ struct AddAccountView: View {
         Task {
           do {
             // bare bones preflight for domain validity
-            if client.server.contains(".") && client.server.last != "." {
+            if client.server.contains("."), client.server.last != "." {
               let instance: Instance = try await client.get(endpoint: Instances.instance)
               withAnimation {
                 self.instance = instance
-                self.instanceName = sanitizedName // clean up the text box, principally to chop off the username if present so it's clear that you might not wind up siging in as the thing in the box
+                instanceName = sanitizedName // clean up the text box, principally to chop off the username if present so it's clear that you might not wind up siging in as the thing in the box
               }
               instanceFetchError = nil
             } else {
@@ -119,27 +128,29 @@ struct AddAccountView: View {
           }
         }
       }
-      .onChange(of: scenePhase, perform: { scenePhase in
-        switch scenePhase {
+      .onChange(of: scenePhase) { _, newValue in
+        switch newValue {
         case .active:
           isSigninIn = false
         default:
           break
         }
-      })
+      }
       .onOpenURL(perform: { url in
         Task {
           await continueSignIn(url: url)
         }
       })
-      .onChange(of: oauthURL, perform: { newValue in
+      .onChange(of: oauthURL) { _, newValue in
         if newValue == nil {
           isSigninIn = false
         }
-      })
+      }
+      #if !targetEnvironment(macCatalyst)
       .sheet(item: $oauthURL, content: { url in
         SafariView(url: url)
       })
+      #endif
     }
   }
 
@@ -178,7 +189,7 @@ struct AddAccountView: View {
       } else {
         ForEach(sanitizedName.isEmpty ? instances : instances.filter { $0.name.contains(sanitizedName.lowercased()) }) { instance in
           Button {
-            self.instanceName = instance.name
+            instanceName = instance.name
           } label: {
             VStack(alignment: .leading, spacing: 4) {
               Text(instance.name)
@@ -213,6 +224,7 @@ struct AddAccountView: View {
         .foregroundColor(.gray)
     }
     .redacted(reason: .placeholder)
+    .allowsHitTesting(false)
     .shimmering()
     .listRowBackground(theme.primaryBackgroundColor)
   }
@@ -221,7 +233,11 @@ struct AddAccountView: View {
     do {
       signInClient = .init(server: sanitizedName)
       if let oauthURL = try await signInClient?.oauthURL() {
-        self.oauthURL = oauthURL
+        if ProcessInfo.processInfo.isMacCatalystApp {
+          openURL(oauthURL)
+        } else {
+          self.oauthURL = oauthURL
+        }
       } else {
         isSigninIn = false
       }

@@ -5,19 +5,20 @@ import Network
 import NukeUI
 import SwiftUI
 
+@MainActor
 public struct ConversationDetailView: View {
   private enum Constants {
     static let bottomAnchor = "bottom"
   }
 
-  @EnvironmentObject private var quickLook: QuickLook
-  @EnvironmentObject private var routerPath: RouterPath
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var watcher: StreamWatcher
+  @Environment(QuickLook.self) private var quickLook
+  @Environment(RouterPath.self) private var routerPath
+  @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(Client.self) private var client
+  @Environment(Theme.self) private var theme
+  @Environment(StreamWatcher.self) private var watcher
 
-  @StateObject private var viewModel: ConversationDetailViewModel
+  @State private var viewModel: ConversationDetailViewModel
 
   @FocusState private var isMessageFieldFocused: Bool
 
@@ -25,7 +26,7 @@ public struct ConversationDetailView: View {
   @State private var didAppear: Bool = false
 
   public init(conversation: Conversation) {
-    _viewModel = StateObject(wrappedValue: .init(conversation: conversation))
+    _viewModel = .init(initialValue: .init(conversation: conversation))
   }
 
   public var body: some View {
@@ -85,7 +86,7 @@ public struct ConversationDetailView: View {
         }
       }
     }
-    .onChange(of: watcher.latestEvent?.id) { _ in
+    .onChange(of: watcher.latestEvent?.id) {
       if let latestEvent = watcher.latestEvent {
         viewModel.handleEvent(event: latestEvent)
         DispatchQueue.main.async {
@@ -101,6 +102,7 @@ public struct ConversationDetailView: View {
     ForEach(Status.placeholders()) { message in
       ConversationMessageView(message: message, conversation: viewModel.conversation)
         .redacted(reason: .placeholder)
+        .allowsHitTesting(false)
         .padding(.vertical, 4)
     }
   }
@@ -138,6 +140,7 @@ public struct ConversationDetailView: View {
         if !viewModel.newMessageText.isEmpty {
           Button {
             Task {
+              guard !viewModel.isSendingMessage else { return }
               await viewModel.postMessage()
             }
           } label: {

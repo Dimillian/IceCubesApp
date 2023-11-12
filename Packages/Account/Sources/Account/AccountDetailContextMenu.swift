@@ -3,12 +3,14 @@ import Network
 import SwiftUI
 
 public struct AccountDetailContextMenu: View {
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var routerPath: RouterPath
-  @EnvironmentObject private var currentInstance: CurrentInstance
-  @EnvironmentObject private var preferences: UserPreferences
+  @Environment(Client.self) private var client
+  @Environment(RouterPath.self) private var routerPath
+  @Environment(CurrentInstance.self) private var currentInstance
+  @Environment(UserPreferences.self) private var preferences
 
-  @ObservedObject var viewModel: AccountDetailViewModel
+  @Binding var showBlockConfirmation: Bool
+
+  var viewModel: AccountDetailViewModel
 
   public var body: some View {
     if let account = viewModel.account {
@@ -42,13 +44,7 @@ public struct AccountDetailContextMenu: View {
             }
           } else {
             Button {
-              Task {
-                do {
-                  viewModel.relationship = try await client.post(endpoint: Accounts.block(id: account.id))
-                } catch {
-                  print("Error while blocking: \(error.localizedDescription)")
-                }
-              }
+              showBlockConfirmation.toggle()
             } label: {
               Label("account.action.block", systemImage: "person.crop.circle.badge.xmark")
             }
@@ -150,8 +146,7 @@ public struct AccountDetailContextMenu: View {
           Divider()
         }
 
-        if let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier
-        {
+        if let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier {
           Button {
             Task {
               await viewModel.translate(userLang: lang)

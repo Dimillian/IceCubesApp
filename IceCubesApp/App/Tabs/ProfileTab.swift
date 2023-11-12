@@ -8,39 +8,46 @@ import Network
 import Shimmer
 import SwiftUI
 
+@MainActor
 struct ProfileTab: View {
-  @EnvironmentObject private var appAccount: AppAccountsManager
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @StateObject private var routerPath = RouterPath()
+  @Environment(AppAccountsManager.self) private var appAccount
+  @Environment(Theme.self) private var theme
+  @Environment(Client.self) private var client
+  @Environment(CurrentAccount.self) private var currentAccount
+  @State private var routerPath = RouterPath()
+  @State private var scrollToTopSignal: Int = 0
   @Binding var popToRootTab: Tab
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {
       if let account = currentAccount.account {
-        AccountDetailView(account: account)
+        AccountDetailView(account: account, scrollToTopSignal: $scrollToTopSignal)
           .withAppRouter()
           .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
           .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
           .id(account.id)
       } else {
-        AccountDetailView(account: .placeholder())
+        AccountDetailView(account: .placeholder(), scrollToTopSignal: $scrollToTopSignal)
           .redacted(reason: .placeholder)
+          .allowsHitTesting(false)
       }
     }
-    .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
-      if popToRootTab == .profile {
-        routerPath.path = []
+    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
+      if newValue == .profile {
+        if routerPath.path.isEmpty {
+          scrollToTopSignal += 1
+        } else {
+          routerPath.path = []
+        }
       }
     }
-    .onChange(of: client.id) { _ in
+    .onChange(of: client.id) {
       routerPath.path = []
     }
     .onAppear {
       routerPath.client = client
     }
     .withSafariRouter()
-    .environmentObject(routerPath)
+    .environment(routerPath)
   }
 }

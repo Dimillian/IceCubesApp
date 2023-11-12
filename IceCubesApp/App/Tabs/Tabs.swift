@@ -5,12 +5,13 @@ import Foundation
 import Status
 import SwiftUI
 
+@MainActor
 enum Tab: Int, Identifiable, Hashable {
   case timeline, notifications, mentions, explore, messages, settings, other
   case trending, federated, local
   case profile
 
-  var id: Int {
+  nonisolated var id: Int {
     rawValue
   }
 
@@ -85,27 +86,27 @@ enum Tab: Int, Identifiable, Hashable {
   var iconName: String {
     switch self {
     case .timeline:
-      return "rectangle.stack"
+      "rectangle.stack"
     case .trending:
-      return "chart.line.uptrend.xyaxis"
+      "chart.line.uptrend.xyaxis"
     case .local:
-      return "person.2"
+      "person.2"
     case .federated:
-      return "globe.americas"
+      "globe.americas"
     case .notifications:
-      return "bell"
+      "bell"
     case .mentions:
-      return "at"
+      "at"
     case .explore:
-      return "magnifyingglass"
+      "magnifyingglass"
     case .messages:
-      return "tray"
+      "tray"
     case .settings:
-      return "gear"
+      "gear"
     case .profile:
-      return "person.crop.circle"
+      "person.crop.circle"
     case .other:
-      return ""
+      ""
     }
   }
 }

@@ -8,11 +8,11 @@ public enum FollowRequests: Endpoint {
   public func path() -> String {
     switch self {
     case .list:
-      return "follow_requests"
+      "follow_requests"
     case let .accept(id):
-      return "follow_requests/\(id)/authorize"
+      "follow_requests/\(id)/authorize"
     case let .reject(id):
-      return "follow_requests/\(id)/reject"
+      "follow_requests/\(id)/reject"
     }
   }
 

@@ -16,11 +16,11 @@ public struct ServerPreferences: Decodable {
     public var description: LocalizedStringKey {
       switch self {
       case .showAll:
-        return "enum.expand-media.show"
+        "enum.expand-media.show"
       case .hideAll:
-        return "enum.expand-media.hide"
+        "enum.expand-media.hide"
       case .hideSensitive:
-        return "enum.expand-media.hide-sensitive"
+        "enum.expand-media.hide-sensitive"
       }
     }
   }

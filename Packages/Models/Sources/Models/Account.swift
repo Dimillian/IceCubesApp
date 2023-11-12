@@ -60,11 +60,11 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
   public let discoverable: Bool?
 
   public var haveAvatar: Bool {
-    return avatar.lastPathComponent != "missing.png"
+    avatar.lastPathComponent != "missing.png"
   }
 
   public var haveHeader: Bool {
-    return header.lastPathComponent != "missing.png"
+    header.lastPathComponent != "missing.png"
   }
 
   public init(id: String, username: String, displayName: String?, avatar: URL, header: URL, acct: String, note: HTMLString, createdAt: ServerDate, followersCount: Int, followingCount: Int, statusesCount: Int, lastStatusAt: String? = nil, fields: [Account.Field], locked: Bool, emojis: [Emoji], url: URL? = nil, source: Account.Source? = nil, bot: Bool, discoverable: Bool? = nil) {

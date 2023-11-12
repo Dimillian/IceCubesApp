@@ -2,14 +2,15 @@ import Combine
 import Env
 import Models
 import Network
+import Observation
 import SwiftUI
 
 @MainActor
-public class AppAccountsManager: ObservableObject {
+@Observable public class AppAccountsManager {
   @AppStorage("latestCurrentAccountKey", store: UserPreferences.sharedDefault)
   public static var latestCurrentAccountKey: String = ""
 
-  @Published public var currentAccount: AppAccount {
+  public var currentAccount: AppAccount {
     didSet {
       Self.latestCurrentAccountKey = currentAccount.id
       currentClient = .init(server: currentAccount.server,
@@ -17,8 +18,8 @@ public class AppAccountsManager: ObservableObject {
     }
   }
 
-  @Published public var availableAccounts: [AppAccount]
-  @Published public var currentClient: Client
+  public var availableAccounts: [AppAccount]
+  public var currentClient: Client
 
   public var pushAccounts: [PushAccount] {
     availableAccounts.filter { $0.oauthToken != nil }
@@ -27,7 +28,7 @@ public class AppAccountsManager: ObservableObject {
 
   public static var shared = AppAccountsManager()
 
-  internal init() {
+  init() {
     var defaultAccount = AppAccount(server: AppInfo.defaultServer, accountName: nil, oauthToken: nil)
     let keychainAccounts = AppAccount.retrieveAll()
     availableAccounts = keychainAccounts

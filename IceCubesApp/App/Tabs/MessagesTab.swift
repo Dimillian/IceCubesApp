@@ -8,18 +8,20 @@ import Network
 import Shimmer
 import SwiftUI
 
+@MainActor
 struct MessagesTab: View {
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var watcher: StreamWatcher
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var appAccount: AppAccountsManager
-  @StateObject private var routerPath = RouterPath()
+  @Environment(Theme.self) private var theme
+  @Environment(StreamWatcher.self) private var watcher
+  @Environment(Client.self) private var client
+  @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(AppAccountsManager.self) private var appAccount
+  @State private var routerPath = RouterPath()
+  @State private var scrollToTopSignal: Int = 0
   @Binding var popToRootTab: Tab
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {
-      ConversationsListView()
+      ConversationsListView(scrollToTopSignal: $scrollToTopSignal)
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbar {
@@ -32,18 +34,22 @@ struct MessagesTab: View {
         .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
         .id(client.id)
     }
-    .onChange(of: $popToRootTab.wrappedValue) { popToRootTab in
-      if popToRootTab == .messages {
-        routerPath.path = []
+    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
+      if newValue == .messages {
+        if routerPath.path.isEmpty {
+          scrollToTopSignal += 1
+        } else {
+          routerPath.path = []
+        }
       }
     }
-    .onChange(of: client.id) { _ in
+    .onChange(of: client.id) {
       routerPath.path = []
     }
     .onAppear {
       routerPath.client = client
     }
     .withSafariRouter()
-    .environmentObject(routerPath)
+    .environment(routerPath)
   }
 }

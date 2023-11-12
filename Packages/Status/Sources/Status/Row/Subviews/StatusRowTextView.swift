@@ -3,10 +3,12 @@ import Env
 import Models
 import SwiftUI
 
+@MainActor
 struct StatusRowTextView: View {
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
+  @Environment(\.isStatusFocused) private var isFocused
 
-  @ObservedObject var viewModel: StatusRowViewModel
+  var viewModel: StatusRowViewModel
 
   var body: some View {
     VStack {
@@ -15,11 +17,11 @@ struct StatusRowTextView: View {
                      emojis: viewModel.finalStatus.emojis,
                      language: viewModel.finalStatus.language,
                      lineLimit: viewModel.lineLimit)
-          .font(viewModel.isFocused ? .scaledBodyFocused : .scaledBody)
+          .font(isFocused ? .scaledBodyFocused : .scaledBody)
           .lineSpacing(CGFloat(theme.lineSpacing))
           .foregroundColor(viewModel.textDisabled ? .gray : theme.labelColor)
-          .emojiSize(viewModel.isFocused ? Font.scaledBodyFocusedFont.emojiSize : Font.scaledBodyFont.emojiSize)
-          .emojiBaselineOffset(viewModel.isFocused ? Font.scaledBodyFocusedFont.emojiBaselineOffset : Font.scaledBodyFont.emojiBaselineOffset)
+          .emojiSize(isFocused ? Font.scaledBodyFocusedFont.emojiSize : Font.scaledBodyFont.emojiSize)
+          .emojiBaselineOffset(isFocused ? Font.scaledBodyFocusedFont.emojiBaselineOffset : Font.scaledBodyFont.emojiBaselineOffset)
           .environment(\.openURL, OpenURLAction { url in
             viewModel.routerPath.handleStatus(status: viewModel.finalStatus, url: url)
           })

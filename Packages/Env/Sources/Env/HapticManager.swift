@@ -1,6 +1,7 @@
 import CoreHaptics
 import UIKit
 
+@MainActor
 public class HapticManager {
   public static let shared: HapticManager = .init()
 
@@ -24,7 +25,7 @@ public class HapticManager {
   }
 
   @MainActor
-  public func fireHaptic(of type: HapticType) {
+  public func fireHaptic(_ type: HapticType) {
     guard supportsHaptics else { return }
 
     switch type {

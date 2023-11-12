@@ -43,18 +43,18 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
   var isVideo: Bool {
     switch self {
     case .video, .movie, .mp4, .quickTimeMovie:
-      return true
+      true
     default:
-      return false
+      false
     }
   }
 
   var isGif: Bool {
     switch self {
     case .gif, .gif2:
-      return true
+      true
     default:
-      return false
+      false
     }
   }
 
@@ -100,7 +100,7 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
   }
 
   private func getVideoTransferable(item: NSItemProvider) async -> MovieFileTranseferable? {
-    return await withCheckedContinuation { continuation in
+    await withCheckedContinuation { continuation in
       _ = item.loadTransferable(type: MovieFileTranseferable.self) { result in
         switch result {
         case let .success(success):
@@ -113,7 +113,7 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
   }
 
   private func getGifTransferable(item: NSItemProvider) async -> GifFileTranseferable? {
-    return await withCheckedContinuation { continuation in
+    await withCheckedContinuation { continuation in
       _ = item.loadTransferable(type: GifFileTranseferable.self) { result in
         switch result {
         case let .success(success):
@@ -126,7 +126,7 @@ enum StatusEditorUTTypeSupported: String, CaseIterable {
   }
 
   private func getImageTansferable(item: NSItemProvider) async -> ImageFileTranseferable? {
-    return await withCheckedContinuation { continuation in
+    await withCheckedContinuation { continuation in
       _ = item.loadTransferable(type: ImageFileTranseferable.self) { result in
         switch result {
         case let .success(success):
@@ -188,9 +188,9 @@ private func localURLFor(received: ReceivedTransferredFile) -> URL {
 public extension URL {
   func mimeType() -> String {
     if let mimeType = UTType(filenameExtension: pathExtension)?.preferredMIMEType {
-      return mimeType
+      mimeType
     } else {
-      return "application/octet-stream"
+      "application/octet-stream"
     }
   }
 }

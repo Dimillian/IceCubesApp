@@ -4,6 +4,7 @@ import RevenueCat
 import Shimmer
 import SwiftUI
 
+@MainActor
 struct SupportAppView: View {
   enum Tip: String, CaseIterable {
     case one, two, three, four, supporter
@@ -19,35 +20,35 @@ struct SupportAppView: View {
     var title: LocalizedStringKey {
       switch self {
       case .one:
-        return "settings.support.one.title"
+        "settings.support.one.title"
       case .two:
-        return "settings.support.two.title"
+        "settings.support.two.title"
       case .three:
-        return "settings.support.three.title"
+        "settings.support.three.title"
       case .four:
-        return "settings.support.four.title"
+        "settings.support.four.title"
       case .supporter:
-        return "settings.support.supporter.title"
+        "settings.support.supporter.title"
       }
     }
 
     var subtitle: LocalizedStringKey {
       switch self {
       case .one:
-        return "settings.support.one.subtitle"
+        "settings.support.one.subtitle"
       case .two:
-        return "settings.support.two.subtitle"
+        "settings.support.two.subtitle"
       case .three:
-        return "settings.support.three.subtitle"
+        "settings.support.three.subtitle"
       case .four:
-        return "settings.support.four.subtitle"
+        "settings.support.four.subtitle"
       case .supporter:
-        return "settings.support.supporter.subtitle"
+        "settings.support.supporter.subtitle"
       }
     }
   }
 
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   @Environment(\.openURL) private var openURL
 
@@ -103,8 +104,8 @@ struct SupportAppView: View {
   }
 
   private func fetchStoreProducts() {
-    Purchases.shared.getProducts(Tip.allCases.map { $0.productId }) { products in
-      self.subscription = products.first(where: { $0.productIdentifier == Tip.supporter.productId })
+    Purchases.shared.getProducts(Tip.allCases.map(\.productId)) { products in
+      subscription = products.first(where: { $0.productIdentifier == Tip.supporter.productId })
       self.products = products.filter { $0.productIdentifier != Tip.supporter.productId }.sorted(by: { $0.price < $1.price })
       withAnimation {
         loadingProducts = false
@@ -114,7 +115,7 @@ struct SupportAppView: View {
 
   private func refreshUserInfo() {
     Purchases.shared.getCustomerInfo { info, _ in
-      self.customerInfo = info
+      customerInfo = info
     }
   }
 
@@ -221,7 +222,7 @@ struct SupportAppView: View {
         Spacer()
         Button {
           Purchases.shared.restorePurchases { info, _ in
-            self.customerInfo = info
+            customerInfo = info
           }
         } label: {
           Text("settings.support.restore-purchase.button")
@@ -257,7 +258,7 @@ struct SupportAppView: View {
   private var loadingPlaceholder: some View {
     HStack {
       VStack(alignment: .leading) {
-        Text("placeholder.loading.short.")
+        Text("placeholder.loading.short")
           .font(.scaledSubheadline)
         Text("settings.support.placeholder.loading-subtitle")
           .font(.scaledFootnote)
@@ -266,6 +267,7 @@ struct SupportAppView: View {
       .padding(.vertical, 8)
     }
     .redacted(reason: .placeholder)
+    .allowsHitTesting(false)
     .shimmering()
   }
 }

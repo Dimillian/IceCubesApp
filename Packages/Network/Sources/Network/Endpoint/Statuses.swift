@@ -23,39 +23,39 @@ public enum Statuses: Endpoint {
   public func path() -> String {
     switch self {
     case .postStatus:
-      return "statuses"
+      "statuses"
     case let .status(id):
-      return "statuses/\(id)"
+      "statuses/\(id)"
     case let .editStatus(id, _):
-      return "statuses/\(id)"
+      "statuses/\(id)"
     case let .context(id):
-      return "statuses/\(id)/context"
+      "statuses/\(id)/context"
     case let .favorite(id):
-      return "statuses/\(id)/favourite"
+      "statuses/\(id)/favourite"
     case let .unfavorite(id):
-      return "statuses/\(id)/unfavourite"
+      "statuses/\(id)/unfavourite"
     case let .reblog(id):
-      return "statuses/\(id)/reblog"
+      "statuses/\(id)/reblog"
     case let .unreblog(id):
-      return "statuses/\(id)/unreblog"
+      "statuses/\(id)/unreblog"
     case let .rebloggedBy(id, _):
-      return "statuses/\(id)/reblogged_by"
+      "statuses/\(id)/reblogged_by"
     case let .favoritedBy(id, _):
-      return "statuses/\(id)/favourited_by"
+      "statuses/\(id)/favourited_by"
     case let .pin(id):
-      return "statuses/\(id)/pin"
+      "statuses/\(id)/pin"
     case let .unpin(id):
-      return "statuses/\(id)/unpin"
+      "statuses/\(id)/unpin"
     case let .bookmark(id):
-      return "statuses/\(id)/bookmark"
+      "statuses/\(id)/bookmark"
     case let .unbookmark(id):
-      return "statuses/\(id)/unbookmark"
+      "statuses/\(id)/unbookmark"
     case let .history(id):
-      return "statuses/\(id)/history"
+      "statuses/\(id)/history"
     case let .translate(id, _):
-      return "statuses/\(id)/translate"
+      "statuses/\(id)/translate"
     case .report:
-      return "reports"
+      "reports"
     }
   }
 
@@ -82,11 +82,11 @@ public enum Statuses: Endpoint {
   public var jsonValue: Encodable? {
     switch self {
     case let .postStatus(json):
-      return json
+      json
     case let .editStatus(_, json):
-      return json
+      json
     default:
-      return nil
+      nil
     }
   }
 }

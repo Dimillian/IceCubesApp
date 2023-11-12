@@ -4,15 +4,16 @@ import Models
 import Network
 import SwiftUI
 
+@MainActor
 public struct ListEditView: View {
   @Environment(\.dismiss) private var dismiss
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var client: Client
+  @Environment(Theme.self) private var theme
+  @Environment(Client.self) private var client
 
-  @StateObject private var viewModel: ListEditViewModel
+  @State private var viewModel: ListEditViewModel
 
   public init(list: Models.List) {
-    _viewModel = StateObject(wrappedValue: .init(list: list))
+    _viewModel = .init(initialValue: .init(list: list))
   }
 
   public var body: some View {

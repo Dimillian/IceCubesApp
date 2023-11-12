@@ -11,11 +11,11 @@ public enum Notifications: Endpoint {
   public func path() -> String {
     switch self {
     case .notifications:
-      return "notifications"
+      "notifications"
     case let .notification(id):
-      return "notifications/\(id)"
+      "notifications/\(id)"
     case .clear:
-      return "notifications/clear"
+      "notifications/clear"
     }
   }
 

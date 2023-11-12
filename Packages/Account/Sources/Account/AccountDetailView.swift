@@ -7,35 +7,41 @@ import Shimmer
 import Status
 import SwiftUI
 
+@MainActor
 public struct AccountDetailView: View {
   @Environment(\.openURL) private var openURL
   @Environment(\.redactionReasons) private var reasons
 
-  @EnvironmentObject private var watcher: StreamWatcher
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var currentInstance: CurrentInstance
-  @EnvironmentObject private var preferences: UserPreferences
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var client: Client
-  @EnvironmentObject private var routerPath: RouterPath
+  @Environment(StreamWatcher.self) private var watcher
+  @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(CurrentInstance.self) private var currentInstance
+  @Environment(UserPreferences.self) private var preferences
+  @Environment(Theme.self) private var theme
+  @Environment(Client.self) private var client
+  @Environment(RouterPath.self) private var routerPath
 
-  @StateObject private var viewModel: AccountDetailViewModel
+  @State private var viewModel: AccountDetailViewModel
   @State private var isCurrentUser: Bool = false
   @State private var isCreateListAlertPresented: Bool = false
   @State private var createListTitle: String = ""
+  @State private var showBlockConfirmation: Bool = false
 
   @State private var isEditingAccount: Bool = false
   @State private var isEditingFilters: Bool = false
   @State private var isEditingRelationshipNote: Bool = false
 
+  @Binding var scrollToTopSignal: Int
+
   /// When coming from a URL like a mention tap in a status.
-  public init(accountId: String) {
-    _viewModel = StateObject(wrappedValue: .init(accountId: accountId))
+  public init(accountId: String, scrollToTopSignal: Binding<Int>) {
+    _viewModel = .init(initialValue: .init(accountId: accountId))
+    _scrollToTopSignal = scrollToTopSignal
   }
 
   /// When the account is already fetched by the parent caller.
-  public init(account: Account) {
-    _viewModel = StateObject(wrappedValue: .init(account: account))
+  public init(account: Account, scrollToTopSignal: Binding<Int>) {
+    _viewModel = .init(initialValue: .init(account: account))
+    _scrollToTopSignal = scrollToTopSignal
   }
 
   public var body: some View {
@@ -44,6 +50,7 @@ public struct AccountDetailView: View {
         makeHeaderView(proxy: proxy)
           .applyAccountDetailsRowStyle(theme: theme)
           .padding(.bottom, -20)
+          .id(ScrollToView.Constants.scrollToTop)
         familiarFollowers
           .applyAccountDetailsRowStyle(theme: theme)
         featuredTagsView
@@ -81,6 +88,11 @@ public struct AccountDetailView: View {
       .listStyle(.plain)
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
+      .onChange(of: scrollToTopSignal) {
+        withAnimation {
+          proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
+        }
+      }
     }
     .onAppear {
       guard reasons != .placeholder else { return }
@@ -89,7 +101,7 @@ public struct AccountDetailView: View {
       viewModel.client = client
 
       // Avoid capturing non-Sendable `self` just to access the view model.
-      let viewModel = self.viewModel
+      let viewModel = viewModel
       Task {
         await withTaskGroup(of: Void.self) { group in
           group.addTask { await viewModel.fetchAccount() }
@@ -106,29 +118,29 @@ public struct AccountDetailView: View {
     }
     .refreshable {
       Task {
-        SoundEffectManager.shared.playSound(of: .pull)
-        HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.3))
+        SoundEffectManager.shared.playSound(.pull)
+        HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.3))
         await viewModel.fetchAccount()
         await viewModel.fetchNewestStatuses()
-        HapticManager.shared.fireHaptic(of: .dataRefresh(intensity: 0.7))
-        SoundEffectManager.shared.playSound(of: .refresh)
+        HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.7))
+        SoundEffectManager.shared.playSound(.refresh)
       }
     }
-    .onChange(of: watcher.latestEvent?.id) { _ in
+    .onChange(of: watcher.latestEvent?.id) {
       if let latestEvent = watcher.latestEvent,
          viewModel.accountId == currentAccount.account?.id
       {
         viewModel.handleEvent(event: latestEvent, currentAccount: currentAccount)
       }
     }
-    .onChange(of: isEditingAccount, perform: { isEditing in
-      if !isEditing {
+    .onChange(of: isEditingAccount) { _, newValue in
+      if !newValue {
         Task {
           await viewModel.fetchAccount()
           await preferences.refreshServerPreferences()
         }
       }
-    })
+    }
     .sheet(isPresented: $isEditingAccount, content: {
       EditAccountView()
     })
@@ -153,6 +165,7 @@ public struct AccountDetailView: View {
                               account: .placeholder(),
                               scrollViewProxy: proxy)
         .redacted(reason: .placeholder)
+        .allowsHitTesting(false)
     case let .data(account):
       AccountDetailHeaderView(viewModel: viewModel,
                               account: account,
@@ -292,7 +305,7 @@ public struct AccountDetailView: View {
         .listRowSeparator(.hidden)
         .listRowBackground(theme.primaryBackgroundColor)
       ForEach(viewModel.pinned) { status in
-        StatusRowView(viewModel: { .init(status: status, client: client, routerPath: routerPath) })
+        StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
       }
       Rectangle()
         .fill(theme.secondaryBackgroundColor)
@@ -318,7 +331,7 @@ public struct AccountDetailView: View {
       }
 
       Menu {
-        AccountDetailContextMenu(viewModel: viewModel)
+        AccountDetailContextMenu(showBlockConfirmation: $showBlockConfirmation, viewModel: viewModel)
 
         if !viewModel.isCurrentUser {
           Button {
@@ -333,6 +346,14 @@ public struct AccountDetailView: View {
             isEditingAccount = true
           } label: {
             Label("account.action.edit-info", systemImage: "pencil")
+          }
+
+          Button {
+            if let url = URL(string: "https://\(client.server)/settings/privacy") {
+              openURL(url)
+            }
+          } label: {
+            Label("account.action.privacy-settings", systemImage: "lock")
           }
 
           if currentInstance.isFiltersSupported {
@@ -378,6 +399,21 @@ public struct AccountDetailView: View {
             LocalizedStringKey("accessibility.tabs.profile.options.inputLabel2"),
           ])
       }
+      .confirmationDialog("Block User", isPresented: $showBlockConfirmation) {
+        if let account = viewModel.account {
+          Button("account.action.block-user-\(account.username)", role: .destructive) {
+            Task {
+              do {
+                viewModel.relationship = try await client.post(endpoint: Accounts.block(id: account.id))
+              } catch {
+                print("Error while blocking: \(error.localizedDescription)")
+              }
+            }
+          }
+        }
+      } message: {
+        Text("account.action.block-user-confirmation")
+      }
     }
   }
 }
@@ -392,6 +428,6 @@ extension View {
 
 struct AccountDetailView_Previews: PreviewProvider {
   static var previews: some View {
-    AccountDetailView(account: .placeholder())
+    AccountDetailView(account: .placeholder(), scrollToTopSignal: .constant(0))
   }
 }

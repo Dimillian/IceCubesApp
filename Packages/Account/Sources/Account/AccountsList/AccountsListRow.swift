@@ -4,14 +4,15 @@ import EmojiText
 import Env
 import Models
 import Network
+import Observation
 import SwiftUI
 
 @MainActor
-public class AccountsListRowViewModel: ObservableObject {
+@Observable public class AccountsListRowViewModel {
   var client: Client?
 
-  @Published var account: Account
-  @Published var relationShip: Relationship?
+  var account: Account
+  var relationShip: Relationship?
 
   public init(account: Account, relationShip: Relationship? = nil) {
     self.account = account
@@ -19,21 +20,24 @@ public class AccountsListRowViewModel: ObservableObject {
   }
 }
 
+@MainActor
 public struct AccountsListRow: View {
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var currentAccount: CurrentAccount
-  @EnvironmentObject private var routerPath: RouterPath
-  @EnvironmentObject private var client: Client
+  @Environment(Theme.self) private var theme
+  @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(RouterPath.self) private var routerPath
+  @Environment(Client.self) private var client
+  @Environment(QuickLook.self) private var quickLook
 
-  @StateObject var viewModel: AccountsListRowViewModel
+  @State var viewModel: AccountsListRowViewModel
 
   @State private var isEditingRelationshipNote: Bool = false
+  @State private var showBlockConfirmation: Bool = false
 
   let isFollowRequest: Bool
   let requestUpdated: (() -> Void)?
 
   public init(viewModel: AccountsListRowViewModel, isFollowRequest: Bool = false, requestUpdated: (() -> Void)? = nil) {
-    _viewModel = StateObject(wrappedValue: viewModel)
+    self.viewModel = viewModel
     self.isFollowRequest = isFollowRequest
     self.requestUpdated = requestUpdated
   }
@@ -105,7 +109,7 @@ public struct AccountsListRow: View {
       routerPath.navigate(to: .accountDetailWithAccount(account: viewModel.account))
     }
     .contextMenu {
-      AccountDetailContextMenu(viewModel: .init(account: viewModel.account))
+      AccountDetailContextMenu(showBlockConfirmation: $showBlockConfirmation, viewModel: .init(account: viewModel.account))
     } preview: {
       List {
         AccountDetailHeaderView(viewModel: .init(account: viewModel.account),
@@ -116,9 +120,11 @@ public struct AccountsListRow: View {
       .listStyle(.plain)
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
-      .environmentObject(theme)
-      .environmentObject(currentAccount)
-      .environmentObject(client)
+      .environment(theme)
+      .environment(currentAccount)
+      .environment(client)
+      .environment(quickLook)
+      .environment(routerPath)
     }
   }
 }

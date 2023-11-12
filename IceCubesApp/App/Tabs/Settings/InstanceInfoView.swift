@@ -4,7 +4,7 @@ import NukeUI
 import SwiftUI
 
 struct InstanceInfoView: View {
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   let instance: Instance
 
@@ -19,7 +19,7 @@ struct InstanceInfoView: View {
 }
 
 public struct InstanceInfoSection: View {
-  @EnvironmentObject private var theme: Theme
+  @Environment(Theme.self) private var theme
 
   let instance: Instance
 

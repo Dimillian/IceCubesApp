@@ -4,7 +4,7 @@ import LRUCache
 import Models
 import SwiftUI
 
-public class ReblogCache {
+public class ReblogCache: @unchecked Sendable {
   struct CacheEntry: Codable {
     var reblogId: String
     var postId: String

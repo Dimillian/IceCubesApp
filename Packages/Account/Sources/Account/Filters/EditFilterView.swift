@@ -4,12 +4,13 @@ import Models
 import Network
 import SwiftUI
 
+@MainActor
 struct EditFilterView: View {
   @Environment(\.dismiss) private var dismiss
 
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var account: CurrentAccount
-  @EnvironmentObject private var client: Client
+  @Environment(Theme.self) private var theme
+  @Environment(CurrentAccount.self) private var account
+  @Environment(Client.self) private var client
 
   @State private var isSavingFilter: Bool = false
   @State private var filter: ServerFilter?
@@ -20,23 +21,21 @@ struct EditFilterView: View {
   @State private var filterAction: ServerFilter.Action
   @State private var expiresAt: Date?
   @State private var expirySelection: Duration
-  
+
   enum Fields {
     case title, newKeyword
   }
-  
+
   @FocusState private var focusedField: Fields?
 
   private var data: ServerFilterData {
-    var expiresIn: String?
-    // we add 50 seconds, otherwise we immediately show 6d for a 7d filter (6d, 23h, 59s)
-    switch expirySelection {
+    let expiresIn: String? = switch expirySelection {
     case .infinite:
-      expiresIn = "" // need to send an empty value in order for the server to clear this field in the filter
+      "" // need to send an empty value in order for the server to clear this field in the filter
     case .custom:
-      expiresIn = String(Int(expiresAt?.timeIntervalSince(Date()) ?? 0) + 50)
+      String(Int(expiresAt?.timeIntervalSince(Date()) ?? 0) + 50)
     default:
-      expiresIn = String(expirySelection.rawValue + 50)
+      String(expirySelection.rawValue + 50)
     }
 
     return ServerFilterData(title: title,
@@ -93,14 +92,14 @@ struct EditFilterView: View {
           Text(duration.description).tag(duration)
         }
       }
-      .onChange(of: expirySelection) { duration in
-        if duration != .custom {
-          expiresAt = Date(timeIntervalSinceNow: TimeInterval(duration.rawValue))
+      .onChange(of: expirySelection) { _, newValue in
+        if newValue != .custom {
+          expiresAt = Date(timeIntervalSinceNow: TimeInterval(newValue.rawValue))
         }
       }
       if expirySelection != .infinite {
         DatePicker("filter.edit.expiry.date-time",
-                   selection: Binding<Date>(get: { self.expiresAt ?? Date() }, set: { self.expiresAt = $0 }),
+                   selection: Binding<Date>(get: { expiresAt ?? Date() }, set: { expiresAt = $0 }),
                    displayedComponents: [.date, .hourAndMinute])
           .disabled(expirySelection != .custom)
       }
@@ -229,7 +228,7 @@ struct EditFilterView: View {
       } label: {
         EmptyView()
       }
-      .onChange(of: filterAction) { _ in
+      .onChange(of: filterAction) {
         Task {
           await saveFilter()
         }

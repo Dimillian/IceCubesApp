@@ -3,12 +3,13 @@ import Env
 import Models
 import SwiftUI
 
+@MainActor
 struct StatusRowDetailView: View {
   @Environment(\.openURL) private var openURL
 
-  @EnvironmentObject private var statusDataController: StatusDataController
+  @Environment(StatusDataController.self) private var statusDataController
 
-  @ObservedObject var viewModel: StatusRowViewModel
+  var viewModel: StatusRowViewModel
 
   var body: some View {
     Group {
@@ -57,7 +58,7 @@ struct StatusRowDetailView: View {
         .foregroundColor(.gray)
       }
 
-      if statusDataController.favoritesCount > 0 {
+      if viewModel.actionsAccountsFetched, statusDataController.favoritesCount > 0 {
         Divider()
         Button {
           viewModel.routerPath.navigate(to: .favoritedBy(id: viewModel.status.id))
@@ -72,8 +73,10 @@ struct StatusRowDetailView: View {
           .frame(height: 20)
         }
         .buttonStyle(.borderless)
+        .transition(.move(edge: .leading))
       }
-      if statusDataController.reblogsCount > 0 {
+
+      if viewModel.actionsAccountsFetched, statusDataController.reblogsCount > 0 {
         Divider()
         Button {
           viewModel.routerPath.navigate(to: .rebloggedBy(id: viewModel.status.id))
@@ -88,6 +91,7 @@ struct StatusRowDetailView: View {
           .frame(height: 20)
         }
         .buttonStyle(.borderless)
+        .transition(.move(edge: .leading))
       }
     }
     .task {
@@ -102,6 +106,7 @@ struct StatusRowDetailView: View {
           AvatarView(url: account.avatar, size: .list)
             .padding(.leading, -4)
         }
+        .transition(.opacity)
       }
       .padding(.leading, .layoutPadding)
     }

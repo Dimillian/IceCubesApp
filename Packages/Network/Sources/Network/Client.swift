@@ -1,10 +1,11 @@
 import Combine
 import Foundation
 import Models
+import Observation
 import os
 import SwiftUI
 
-public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
+@Observable public final class Client: Equatable, Identifiable, Hashable {
   public static func == (lhs: Client, rhs: Client) -> Bool {
     let lhsToken = lhs.critical.withLock { $0.oauthToken }
     let rhsToken = rhs.critical.withLock { $0.oauthToken }
@@ -16,6 +17,10 @@ public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
 
   public enum Version: String, Sendable {
     case v1, v2
+  }
+
+  public enum ClientError: Error {
+    case unexpectedRequest
   }
 
   public enum OauthError: Error {
@@ -78,9 +83,9 @@ public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
       if let rootHost = host.split(separator: ".", maxSplits: 1).last {
         // Sometimes the connection is with the root host instead of a subdomain
         // eg. Mastodon runs on mastdon.domain.com but the connection is with domain.com
-        return $0.connections.contains(host) || $0.connections.contains(String(rootHost))
+        $0.connections.contains(host) || $0.connections.contains(String(rootHost))
       } else {
-        return $0.connections.contains(host)
+        $0.connections.contains(host)
       }
     }
   }
@@ -88,7 +93,7 @@ public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
   private func makeURL(scheme: String = "https",
                        endpoint: Endpoint,
                        forceVersion: Version? = nil,
-                       forceServer: String? = nil) -> URL
+                       forceServer: String? = nil) throws -> URL
   {
     var components = URLComponents()
     components.scheme = scheme
@@ -99,7 +104,10 @@ public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
       components.path += "/api/\(forceVersion?.rawValue ?? version.rawValue)/\(endpoint.path())"
     }
     components.queryItems = endpoint.queryItems()
-    return components.url!
+    guard let url = components.url else {
+      throw ClientError.unexpectedRequest
+    }
+    return url
   }
 
   private func makeURLRequest(url: URL, endpoint: Endpoint, httpMethod: String) -> URLRequest {
@@ -123,8 +131,8 @@ public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
     return request
   }
 
-  private func makeGet(endpoint: Endpoint) -> URLRequest {
-    let url = makeURL(endpoint: endpoint)
+  private func makeGet(endpoint: Endpoint) throws -> URLRequest {
+    let url = try makeURL(endpoint: endpoint)
     return makeURLRequest(url: url, endpoint: endpoint, httpMethod: "GET")
   }
 
@@ -149,14 +157,14 @@ public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
   }
 
   public func post(endpoint: Endpoint, forceVersion: Version? = nil) async throws -> HTTPURLResponse? {
-    let url = makeURL(endpoint: endpoint, forceVersion: forceVersion)
+    let url = try makeURL(endpoint: endpoint, forceVersion: forceVersion)
     let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: "POST")
     let (_, httpResponse) = try await urlSession.data(for: request)
     return httpResponse as? HTTPURLResponse
   }
 
   public func patch(endpoint: Endpoint) async throws -> HTTPURLResponse? {
-    let url = makeURL(endpoint: endpoint)
+    let url = try makeURL(endpoint: endpoint)
     let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: "PATCH")
     let (_, httpResponse) = try await urlSession.data(for: request)
     return httpResponse as? HTTPURLResponse
@@ -167,7 +175,7 @@ public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
   }
 
   public func delete(endpoint: Endpoint, forceVersion: Version? = nil) async throws -> HTTPURLResponse? {
-    let url = makeURL(endpoint: endpoint, forceVersion: forceVersion)
+    let url = try makeURL(endpoint: endpoint, forceVersion: forceVersion)
     let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: "DELETE")
     let (_, httpResponse) = try await urlSession.data(for: request)
     return httpResponse as? HTTPURLResponse
@@ -177,7 +185,7 @@ public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
                                                     method: String,
                                                     forceVersion: Version? = nil) async throws -> Entity
   {
-    let url = makeURL(endpoint: endpoint, forceVersion: forceVersion)
+    let url = try makeURL(endpoint: endpoint, forceVersion: forceVersion)
     let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: method)
     let (data, httpResponse) = try await urlSession.data(for: request)
     logResponseOnError(httpResponse: httpResponse, data: data)
@@ -197,7 +205,7 @@ public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
   public func oauthURL() async throws -> URL {
     let app: InstanceApp = try await post(endpoint: Apps.registerApp)
     critical.withLock { $0.oauthApp = app }
-    return makeURL(endpoint: Oauth.authorize(clientId: app.clientId))
+    return try makeURL(endpoint: Oauth.authorize(clientId: app.clientId))
   }
 
   public func continueOauthFlow(url: URL) async throws -> OauthToken {
@@ -216,8 +224,8 @@ public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
     return token
   }
 
-  public func makeWebSocketTask(endpoint: Endpoint, instanceStreamingURL: URL?) -> URLSessionWebSocketTask {
-    let url = makeURL(scheme: "wss", endpoint: endpoint, forceServer: instanceStreamingURL?.host)
+  public func makeWebSocketTask(endpoint: Endpoint, instanceStreamingURL: URL?) throws -> URLSessionWebSocketTask {
+    let url = try makeURL(scheme: "wss", endpoint: endpoint, forceServer: instanceStreamingURL?.host)
     var subprotocols: [String] = []
     if let oauthToken = critical.withLock({ $0.oauthToken }) {
       subprotocols.append(oauthToken.accessToken)
@@ -232,7 +240,7 @@ public final class Client: ObservableObject, Equatable, Identifiable, Hashable {
                                              filename: String,
                                              data: Data) async throws -> Entity
   {
-    let url = makeURL(endpoint: endpoint, forceVersion: version)
+    let url = try makeURL(endpoint: endpoint, forceVersion: version)
     var request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: method)
     let boundary = UUID().uuidString
     request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")

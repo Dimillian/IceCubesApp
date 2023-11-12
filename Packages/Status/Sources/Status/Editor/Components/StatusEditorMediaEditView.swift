@@ -6,9 +6,9 @@ import SwiftUI
 
 struct StatusEditorMediaEditView: View {
   @Environment(\.dismiss) private var dismiss
-  @EnvironmentObject private var theme: Theme
-  @EnvironmentObject private var currentInstance: CurrentInstance
-  @ObservedObject var viewModel: StatusEditorViewModel
+  @Environment(Theme.self) private var theme
+  @Environment(CurrentInstance.self) private var currentInstance
+  var viewModel: StatusEditorViewModel
   let container: StatusEditorMediaContainer
 
   @State private var imageDescription: String = ""
@@ -66,7 +66,7 @@ struct StatusEditorMediaEditView: View {
           Button {
             if !imageDescription.isEmpty {
               isUpdating = true
-              if currentInstance.isEditAltTextSupported && viewModel.mode.isEditing {
+              if currentInstance.isEditAltTextSupported, viewModel.mode.isEditing {
                 Task {
                   await viewModel.editDescription(container: container, description: imageDescription)
                   dismiss()
