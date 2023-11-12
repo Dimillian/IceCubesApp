@@ -68,7 +68,8 @@ public struct StatusRowMediaPreviewView: View {
           imageMaxHeight: imageMaxHeight,
           sensitive: sensitive,
           appLayoutWidth: appLayoutWidth,
-          availableWidth: availableWidth
+          availableWidth: availableWidth,
+          availableHeight: sceneDelegate.windowHeight - 200
         )
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(Self.accessibilityLabel(for: attachments[0]))
@@ -200,6 +201,7 @@ private struct FeaturedImagePreView: View {
   let sensitive: Bool
   let appLayoutWidth: CGFloat
   let availableWidth: CGFloat
+  let availableHeight: CGFloat
 
   @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
   @Environment(Theme.self) private var theme
@@ -261,7 +263,11 @@ private struct FeaturedImagePreView: View {
     }
     let ratio = newWidth / from.width
     let newHeight = from.height * ratio
-    return .init(width: newWidth, height: newHeight)
+    if newHeight <= availableHeight {
+      return .init(width: newWidth, height: newHeight)
+    }
+    let newWidth = from.width * (availableHeight / from.height)
+    return .init(width: newWidth, height: availableHeight)
   }
 }
 

@@ -8,6 +8,10 @@ import UIKit
     window?.bounds.size.width ?? UIScreen.main.bounds.size.width
   }
 
+  public var windowHeight: CGFloat {
+    window?.bounds.size.height ?? UIScreen.main.bounds.size.height
+  }
+
   public func scene(_ scene: UIScene,
                     willConnectTo _: UISceneSession,
                     options _: UIScene.ConnectionOptions)
