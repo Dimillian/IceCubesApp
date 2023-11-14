@@ -222,7 +222,7 @@
 		9FB183242AE926E900BBB692 /* IceCubesApp+Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IceCubesApp+Sidebar.swift"; sourceTree = "<group>"; };
 		9FB183262AE9279F00BBB692 /* IceCubesApp+Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IceCubesApp+Tabbar.swift"; sourceTree = "<group>"; };
 		9FB183282AE9449100BBB692 /* IceCubesApp+Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IceCubesApp+Scene.swift"; sourceTree = "<group>"; };
-		9FBFE639292A715500C250E9 /* IceCubesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IceCubesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9FBFE639292A715500C250E9 /* Ice Cubes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ice Cubes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FBFE63C292A715500C250E9 /* IceCubesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceCubesApp.swift; sourceTree = "<group>"; };
 		9FBFE642292A715600C250E9 /* IceCubesApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IceCubesApp.entitlements; sourceTree = "<group>"; };
 		9FC60CB82AE6C2F600C6EAD2 /* IceCubesActionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IceCubesActionExtension.entitlements; sourceTree = "<group>"; };
@@ -468,7 +468,7 @@
 		9FBFE63A292A715500C250E9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9FBFE639292A715500C250E9 /* IceCubesApp.app */,
+				9FBFE639292A715500C250E9 /* Ice Cubes.app */,
 				9F2A5416296AB631009B2D7C /* IceCubesNotifications.appex */,
 				9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */,
 				E9DF41FA29830FEC0003AAD2 /* IceCubesActionExtension.appex */,
@@ -640,7 +640,7 @@
 				9FE0346B2ADD5C2100529EA8 /* MediaUI */,
 			);
 			productName = IceCubesApp;
-			productReference = 9FBFE639292A715500C250E9 /* IceCubesApp.app */;
+			productReference = 9FBFE639292A715500C250E9 /* Ice Cubes.app */;
 			productType = "com.apple.product-type.application";
 		};
 		E9DF41F929830FEC0003AAD2 /* IceCubesActionExtension */ = {
@@ -1200,7 +1200,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.9.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Ice Cubes";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;
@@ -1254,7 +1254,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.9.7;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Ice Cubes";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = YES;

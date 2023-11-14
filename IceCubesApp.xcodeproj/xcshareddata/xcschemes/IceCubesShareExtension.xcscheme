@@ -30,7 +30,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9FBFE638292A715500C250E9"
-               BuildableName = "IceCubesApp.app"
+               BuildableName = "Ice Cubes.app"
                BlueprintName = "IceCubesApp"
                ReferencedContainer = "container:IceCubesApp.xcodeproj">
             </BuildableReference>
@@ -61,7 +61,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9FBFE638292A715500C250E9"
-            BuildableName = "IceCubesApp.app"
+            BuildableName = "Ice Cubes.app"
             BlueprintName = "IceCubesApp"
             ReferencedContainer = "container:IceCubesApp.xcodeproj">
          </BuildableReference>
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9FBFE638292A715500C250E9"
-            BuildableName = "IceCubesApp.app"
+            BuildableName = "Ice Cubes.app"
             BlueprintName = "IceCubesApp"
             ReferencedContainer = "container:IceCubesApp.xcodeproj">
          </BuildableReference>
