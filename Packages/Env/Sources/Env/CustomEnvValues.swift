@@ -25,8 +25,8 @@ private struct IsStatusFocused: EnvironmentKey {
   static let defaultValue: Bool = false
 }
 
-private struct IsStatusReplyToPrevious: EnvironmentKey {
-  static let defaultValue: Bool = false
+private struct IndentationLevel: EnvironmentKey {
+  static let defaultValue: UInt = 0
 }
 
 public extension EnvironmentValues {
@@ -60,8 +60,8 @@ public extension EnvironmentValues {
     set { self[IsStatusFocused.self] = newValue }
   }
 
-  var isStatusReplyToPrevious: Bool {
-    get { self[IsStatusReplyToPrevious.self] }
-    set { self[IsStatusReplyToPrevious.self] = newValue }
+  var indentationLevel: UInt {
+    get { self[IndentationLevel.self] }
+    set { self[IndentationLevel.self] = newValue }
   }
 }

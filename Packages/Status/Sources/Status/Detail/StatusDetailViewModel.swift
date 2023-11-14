@@ -19,9 +19,10 @@ import SwiftUI
   var state: State = .loading
   var title: LocalizedStringKey = ""
   var scrollToId: String?
+  static var maxIndent = UInt(7)
 
   @ObservationIgnored
-  var isReplyToPreviousCache: [String: Bool] = [:]
+  var indentationLevelPreviousCache: [String: UInt] = [:]
 
   init(statusId: String) {
     state = .loading
@@ -35,7 +36,7 @@ import SwiftUI
     statusId = status.id
     remoteStatusURL = nil
     if status.inReplyToId != nil {
-      isReplyToPreviousCache[status.id] = true
+      indentationLevelPreviousCache[status.id] = 1
     }
   }
 
@@ -111,23 +112,14 @@ import SwiftUI
   }
 
   private func cacheReplyTopPrevious(statuses: [Status]) {
-    isReplyToPreviousCache = [:]
+    indentationLevelPreviousCache = [:]
     for status in statuses {
-      var isReplyToPrevious: Bool = false
-      if let index = statuses.firstIndex(where: { $0.id == status.id }),
-         index > 0,
-         statuses[index - 1].id == status.inReplyToId
-      {
-        if index == 1, statuses.count > 2 {
-          let nextStatus = statuses[2]
-          isReplyToPrevious = nextStatus.inReplyToId == status.id
-        } else if statuses.count == 2 {
-          isReplyToPrevious = false
-        } else {
-          isReplyToPrevious = true
-        }
+      if let inReplyToId = status.inReplyToId,
+         let prevIndent = indentationLevelPreviousCache[inReplyToId] {
+        indentationLevelPreviousCache[status.id] = prevIndent + 1
+      } else {
+        indentationLevelPreviousCache[status.id] = 0
       }
-      isReplyToPreviousCache[status.id] = isReplyToPrevious
     }
   }
 
@@ -145,5 +137,9 @@ import SwiftUI
         await fetchStatusDetail(animate: true)
       }
     }
+  }
+  
+  func getIndentationLevel(id: String) -> UInt {
+    min(indentationLevelPreviousCache[id] ?? 0, Self.maxIndent)
   }
 }
