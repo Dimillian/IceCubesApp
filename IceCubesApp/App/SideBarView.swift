@@ -58,7 +58,7 @@ struct SideBarView<Content: View>: View {
   private var postButton: some View {
     Button {
       if ProcessInfo.processInfo.isMacCatalystApp {
-        openWindow(value: WindowDestination.newStatusEditor(visibility: userPreferences.postVisibility))
+        openWindow(value: WindowDestinationEditor.newStatusEditor(visibility: userPreferences.postVisibility))
       } else {
         routerPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
       }

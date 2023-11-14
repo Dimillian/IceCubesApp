@@ -206,7 +206,7 @@ struct StatusRowActionsView: View {
       case .respond:
         SoundEffectManager.shared.playSound(.share)
         if ProcessInfo.processInfo.isMacCatalystApp {
-          openWindow(value: WindowDestination.replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status))
+          openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status))
         } else {
           viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)
         }

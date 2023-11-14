@@ -25,12 +25,15 @@ public enum RouterDestination: Hashable {
   case tagsList(tags: [Tag])
 }
 
-public enum WindowDestination: Hashable, Codable {
+public enum WindowDestinationEditor: Hashable, Codable {
   case newStatusEditor(visibility: Models.Visibility)
-  case mediaViewer(attachments: [MediaAttachment], selectedAttachment: MediaAttachment)
   case editStatusEditor(status: Status)
   case replyToStatusEditor(status: Status)
   case quoteStatusEditor(status: Status)
+}
+
+public enum WindowDestinationMedia: Hashable, Codable {
+  case mediaViewer(attachments: [MediaAttachment], selectedAttachment: MediaAttachment)
 }
 
 public enum SheetDestination: Identifiable {

@@ -7,6 +7,7 @@ public struct MediaUIView: View, @unchecked Sendable {
   private let data: [DisplayData]
   private let initialItem: DisplayData?
   @State private var scrolledItem: DisplayData?
+  @FocusState private var isFocused: Bool
 
   public var body: some View {
     NavigationStack {
@@ -20,6 +21,17 @@ public struct MediaUIView: View, @unchecked Sendable {
         }
         .scrollTargetLayout()
       }
+      .focusable()
+      .focused($isFocused)
+      .focusEffectDisabled()
+      .onKeyPress(.leftArrow, action: {
+        scrollToPrevious()
+        return .handled
+      })
+      .onKeyPress(.rightArrow, action: {
+        scrollToNext()
+        return .handled
+      })
       .scrollTargetBehavior(.viewAligned)
       .scrollPosition(id: $scrolledItem)
       .toolbar {
@@ -30,6 +42,7 @@ public struct MediaUIView: View, @unchecked Sendable {
       .onAppear {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
           scrolledItem = initialItem
+          isFocused = true
         }
       }
     }
@@ -38,6 +51,22 @@ public struct MediaUIView: View, @unchecked Sendable {
   public init(selectedAttachment: MediaAttachment, attachments: [MediaAttachment]) {
     data = attachments.compactMap { DisplayData(from: $0) }
     initialItem = DisplayData(from: selectedAttachment)
+  }
+  
+  private func scrollToPrevious() {
+    if let scrolledItem, let index = data.firstIndex(of: scrolledItem), index > 0 {
+      withAnimation {
+        self.scrolledItem = data[index - 1]
+      }
+    }
+  }
+  
+  private func scrollToNext() {
+    if let scrolledItem, let index = data.firstIndex(of: scrolledItem), index < data.count - 1{
+      withAnimation {
+        self.scrolledItem = data[index + 1]
+      }
+    }
   }
 }
 

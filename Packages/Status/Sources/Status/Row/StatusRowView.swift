@@ -210,7 +210,7 @@ public struct StatusRowView: View {
         HapticManager.shared.fireHaptic(.notification(.success))
         let attachments = viewModel.finalStatus.mediaAttachments
         if ProcessInfo.processInfo.isMacCatalystApp {
-          openWindow(value: WindowDestination.mediaViewer(attachments: attachments,
+          openWindow(value: WindowDestinationMedia.mediaViewer(attachments: attachments,
                                                           selectedAttachment: attachments[0]))
         } else {
           quickLook.prepareFor(selectedMediaAttachment: attachments[0], mediaAttachments: attachments)

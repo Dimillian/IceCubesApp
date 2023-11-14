@@ -11,7 +11,7 @@ extension IceCubesApp {
       .keyboardShortcut("n", modifiers: .shift)
       Button("menu.new-post") {
         if ProcessInfo.processInfo.isMacCatalystApp {
-          openWindow(value: WindowDestination.newStatusEditor(visibility: userPreferences.postVisibility))
+          openWindow(value: WindowDestinationEditor.newStatusEditor(visibility: userPreferences.postVisibility))
         } else {
           sidebarRouterPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
         }

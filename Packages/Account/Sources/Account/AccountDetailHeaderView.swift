@@ -83,7 +83,7 @@ struct AccountDetailHeaderView: View {
       let attachement = MediaAttachment.imageWith(url: account.header)
 
       if ProcessInfo.processInfo.isMacCatalystApp {
-        openWindow(value: WindowDestination.mediaViewer(attachments: [attachement],
+        openWindow(value: WindowDestinationMedia.mediaViewer(attachments: [attachement],
                                                         selectedAttachment: attachement))
       } else {
         quickLook.prepareFor(selectedMediaAttachment: attachement, mediaAttachments: [attachement])
@@ -118,7 +118,7 @@ struct AccountDetailHeaderView: View {
         }
         let attachement = MediaAttachment.imageWith(url: account.avatar)
         if ProcessInfo.processInfo.isMacCatalystApp {
-          openWindow(value: WindowDestination.mediaViewer(attachments: [attachement],
+          openWindow(value: WindowDestinationMedia.mediaViewer(attachments: [attachement],
                                                           selectedAttachment: attachement))
         } else {
           quickLook.prepareFor(selectedMediaAttachment: attachement, mediaAttachments: [attachement])

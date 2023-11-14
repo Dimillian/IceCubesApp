@@ -116,7 +116,7 @@ public struct StatusRowMediaPreviewView: View {
   private func tabAction(for index: Int) {
     if ProcessInfo.processInfo.isMacCatalystApp {
       openWindow(
-        value: WindowDestination.mediaViewer(
+        value: WindowDestinationMedia.mediaViewer(
           attachments: attachments,
           selectedAttachment: attachments[index]
         )

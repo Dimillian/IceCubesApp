@@ -27,7 +27,7 @@ public struct StatusEditorToolbarItem: ToolbarContent {
       Button {
         Task { @MainActor in
           if ProcessInfo.processInfo.isMacCatalystApp {
-            openWindow(value: WindowDestination.newStatusEditor(visibility: visibility))
+            openWindow(value: WindowDestinationEditor.newStatusEditor(visibility: visibility))
           } else {
             routerPath.presentedSheet = .newStatusEditor(visibility: visibility)
             HapticManager.shared.fireHaptic(.buttonPress)

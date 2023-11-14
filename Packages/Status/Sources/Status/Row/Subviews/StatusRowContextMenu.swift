@@ -54,7 +54,7 @@ struct StatusRowContextMenu: View {
       }
       Button {
         if ProcessInfo.processInfo.isMacCatalystApp {
-          openWindow(value: WindowDestination.replyToStatusEditor(status: viewModel.status))
+          openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: viewModel.status))
         } else {
           viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
         }
@@ -63,7 +63,7 @@ struct StatusRowContextMenu: View {
       }
       Button {
         if ProcessInfo.processInfo.isMacCatalystApp {
-          openWindow(value: WindowDestination.quoteStatusEditor(status: viewModel.status))
+          openWindow(value: WindowDestinationEditor.quoteStatusEditor(status: viewModel.status))
         } else {
           viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
         }
@@ -164,7 +164,7 @@ struct StatusRowContextMenu: View {
         if currentInstance.isEditSupported {
           Button {
             if ProcessInfo.processInfo.isMacCatalystApp {
-              openWindow(value: WindowDestination.editStatusEditor(status: viewModel.status.reblogAsAsStatus ?? viewModel.status))
+              openWindow(value: WindowDestinationEditor.editStatusEditor(status: viewModel.status.reblogAsAsStatus ?? viewModel.status))
             } else {
               viewModel.routerPath.presentedSheet = .editStatusEditor(status: viewModel.status.reblogAsAsStatus ?? viewModel.status)
             }

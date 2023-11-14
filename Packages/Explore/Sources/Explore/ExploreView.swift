@@ -89,7 +89,7 @@ public struct ExploreView: View {
           SoundEffectManager.shared.playSound(.refresh)
         }
       }
-      .listStyle(.grouped)
+      .listStyle(.plain)
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
       .navigationTitle("explore.navigation-title")
