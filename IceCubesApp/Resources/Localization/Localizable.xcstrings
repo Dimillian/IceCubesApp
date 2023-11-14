@@ -61700,7 +61700,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "關閉於 %@"
+            "value" : "將於 %@ 關閉"
           }
         }
       }
