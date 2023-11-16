@@ -36,6 +36,7 @@ import SwiftUI
 
   var currentAccount: CurrentAccount?
 
+  private let filterKey = "notification-filter"
   var state: State = .loading
   var selectedType: Models.Notification.NotificationType? {
     didSet {
@@ -43,7 +44,7 @@ import SwiftUI
             let id = client?.id
       else { return }
 
-      UserDefaults.standard.set(selectedType?.rawValue ?? "", forKey: "notification-filter-\(id)")
+      UserDefaults.standard.set(selectedType?.rawValue ?? "", forKey: filterKey)
 
       consolidatedNotifications = []
       Task {
@@ -52,10 +53,10 @@ import SwiftUI
     }
   }
 
-  func loadSelectedType(for client: Client) {
+  func loadSelectedType() {
     self.client = client
     
-    guard let value = UserDefaults.standard.string(forKey: "notification-filter-\(client.id)")
+    guard let value = UserDefaults.standard.string(forKey: filterKey)
     else {
       selectedType = nil
       return
