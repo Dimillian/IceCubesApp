@@ -69,7 +69,7 @@ public struct StatusRowMediaPreviewView: View {
           sensitive: sensitive,
           appLayoutWidth: appLayoutWidth,
           availableWidth: availableWidth,
-          availableHeight: sceneDelegate.windowHeight - 200
+          availableHeight: sceneDelegate.windowHeight
         )
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(Self.accessibilityLabel(for: attachments[0]))
@@ -209,7 +209,7 @@ private struct FeaturedImagePreView: View {
 
   var body: some View {
     let size: CGSize = size(for: attachment) ?? .init(width: imageMaxHeight, height: imageMaxHeight)
-    let newSize = imageSize(from: size, newWidth: availableWidth - appLayoutWidth)
+    let newSize = imageSize(from: size)
     Group {
       switch attachment.supportedType {
       case .image:
@@ -257,17 +257,27 @@ private struct FeaturedImagePreView: View {
     return .init(width: CGFloat(width), height: CGFloat(height))
   }
 
-  private func imageSize(from: CGSize, newWidth: CGFloat) -> CGSize {
+  private func imageSize(from: CGSize) -> CGSize {
     if isCompact || theme.statusDisplayStyle == .compact || isSecondaryColumn {
       return .init(width: imageMaxHeight, height: imageMaxHeight)
     }
-    let ratio = newWidth / from.width
-    let newHeight = from.height * ratio
-    if newHeight <= availableHeight {
-      return .init(width: newWidth, height: newHeight)
+
+    let boxWidth = availableWidth - appLayoutWidth
+    let boxHeight = availableHeight * 0.8 // use only 80% of window height to leave room for text
+
+    if from.width <= boxWidth && from.height <= boxHeight {
+      // intrinsic size of image fits just fine
+      return from
     }
-    let newWidth = from.width * (availableHeight / from.height)
-    return .init(width: newWidth, height: availableHeight)
+
+    // shrink image proportionally to fit inside the box
+    let xRatio = boxWidth / from.width
+    let yRatio = boxHeight / from.height
+    if xRatio < yRatio {
+      return .init(width: boxWidth, height: from.height * xRatio)
+    } else {
+      return .init(width: from.width * yRatio, height: boxHeight)
+    }
   }
 }
 
