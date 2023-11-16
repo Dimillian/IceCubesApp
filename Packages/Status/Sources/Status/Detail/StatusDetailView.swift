@@ -103,15 +103,15 @@ public struct StatusDetailView: View {
 
   private func makeStatusesListView(statuses: [Status]) -> some View {
     ForEach(statuses) { status in
-      let isReplyToPrevious = viewModel.isReplyToPreviousCache[status.id] ?? false
+      let indentationLevel = viewModel.getIndentationLevel(id: status.id)
       let viewModel: StatusRowViewModel = .init(status: status,
                                                 client: client,
                                                 routerPath: routerPath)
       let isFocused = self.viewModel.statusId == status.id
 
       StatusRowView(viewModel: viewModel)
-        .environment(\.extraLeadingInset, isReplyToPrevious ? 10 : 0)
-        .environment(\.isStatusReplyToPrevious, isReplyToPrevious)
+        .environment(\.extraLeadingInset, (indentationLevel > 0) ? 10 : 0)
+        .environment(\.indentationLevel, indentationLevel)
         .environment(\.isStatusFocused, isFocused)
         .overlay {
           if isFocused {

@@ -15,7 +15,7 @@ public struct StatusRowView: View {
   @Environment(\.isCompact) private var isCompact: Bool
   @Environment(\.accessibilityVoiceOverEnabled) private var accessibilityVoiceOverEnabled
   @Environment(\.isStatusFocused) private var isFocused
-  @Environment(\.isStatusReplyToPrevious) private var isStatusReplyToPrevious
+  @Environment(\.indentationLevel) private var indentationLevel
 
   @Environment(QuickLook.self) private var quickLook
   @Environment(Theme.self) private var theme
@@ -32,11 +32,15 @@ public struct StatusRowView: View {
 
   public var body: some View {
     HStack(spacing: 0) {
-      if isStatusReplyToPrevious {
-        Rectangle()
-          .fill(theme.tintColor)
-          .frame(width: 2)
-          .accessibilityHidden(true)
+      HStack(spacing: 3) {
+        ForEach(0..<indentationLevel, id: \.self) {_ in
+          Rectangle()
+            .fill(theme.tintColor)
+            .frame(width: 2)
+            .accessibilityHidden(true)
+        }
+      }
+      if indentationLevel > 0 {
         Spacer(minLength: 8)
       }
       VStack(alignment: .leading) {
