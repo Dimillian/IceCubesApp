@@ -60,7 +60,7 @@ public struct AvatarView: View {
           if let image = state.image {
             image
               .resizable()
-              .aspectRatio(contentMode: .fit)
+              .scaledToFill()
           } else {
             AvatarPlaceholderView(size: size)
           }
