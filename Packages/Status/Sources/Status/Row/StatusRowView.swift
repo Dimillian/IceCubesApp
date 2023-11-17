@@ -57,7 +57,7 @@ public struct StatusRowView: View {
               StatusRowReblogView(viewModel: viewModel)
               StatusRowReplyView(viewModel: viewModel)
             }
-            .padding(.leading, AvatarView.Size.status.size.width + .statusColumnsSpacing)
+            .padding(.leading, AvatarView.FrameConfig.status.width + .statusColumnsSpacing)
           }
           HStack(alignment: .top, spacing: .statusColumnsSpacing) {
             if !isCompact,
@@ -66,7 +66,7 @@ public struct StatusRowView: View {
               Button {
                 viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
               } label: {
-                AvatarView(url: viewModel.finalStatus.account.avatar, size: .status)
+                AvatarView(url: viewModel.finalStatus.account.avatar, config: .status)
               }
             }
             VStack(alignment: .leading) {

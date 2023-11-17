@@ -246,9 +246,9 @@ public struct StatusEditorView: View {
         if viewModel.mode.isInShareExtension {
           AppAccountsSelectorView(routerPath: RouterPath(),
                                   accountCreationEnabled: false,
-                                  avatarSize: .status)
+                                  avatarConfig: .status)
         } else {
-          AvatarView(url: account.avatar, size: .status)
+          AvatarView(url: account.avatar, config: AvatarView.FrameConfig.status)
             .environment(theme)
             .accessibilityHidden(true)
         }

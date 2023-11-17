@@ -23,8 +23,8 @@ struct NotificationRowView: View {
           .accessibilityHidden(true)
       } else {
         makeNotificationIconView(type: notification.type)
-          .frame(width: AvatarView.Size.status.size.width,
-                 height: AvatarView.Size.status.size.height)
+          .frame(width: AvatarView.FrameConfig.status.width,
+                 height: AvatarView.FrameConfig.status.height)
           .accessibilityHidden(true)
       }
       VStack(alignment: .leading, spacing: 2) {
@@ -91,7 +91,7 @@ struct NotificationRowView: View {
             }
           }
           .padding(.leading, 1)
-          .frame(height: AvatarView.Size.status.size.height + 2)
+          .frame(height: AvatarView.FrameConfig.status.size.height + 2)
         }.offset(y: -1)
       }
       HStack(spacing: 0) {

@@ -44,7 +44,7 @@ public struct AccountsListRow: View {
 
   public var body: some View {
     HStack(alignment: .top) {
-      AvatarView(url: viewModel.account.avatar, size: .status)
+      AvatarView(url: viewModel.account.avatar, config: .status)
       VStack(alignment: .leading, spacing: 2) {
         EmojiTextApp(.init(stringValue: viewModel.account.safeDisplayName), emojis: viewModel.account.emojis)
           .font(.scaledSubheadline)
