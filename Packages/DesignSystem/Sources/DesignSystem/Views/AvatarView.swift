@@ -95,3 +95,13 @@ private struct AvatarPlaceholderView: View {
     }
   }
 }
+
+struct AvatarView_Previews: PreviewProvider {
+  static var previews: some View {
+    AvatarView(url: url, config: .account)
+      .environment(Theme.shared)
+      .previewLayout(.sizeThatFits)
+  }
+
+  private static let url = URL(string: "https://static.independent.co.uk/s3fs-public/thumbnails/image/2014/03/25/12/eiffel.jpg")!
+}
