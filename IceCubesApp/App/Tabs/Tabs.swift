@@ -47,7 +47,7 @@ enum Tab: Int, Identifiable, Hashable {
     case .messages:
       MessagesTab(popToRootTab: popToRootTab)
     case .settings:
-      SettingsTabs(popToRootTab: popToRootTab)
+      SettingsTabs(popToRootTab: popToRootTab, isModal: false)
     case .profile:
       ProfileTab(popToRootTab: popToRootTab)
     case .other:

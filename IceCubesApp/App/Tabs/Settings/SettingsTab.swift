@@ -29,6 +29,8 @@ struct SettingsTabs: View {
   @State private var timelineCache = TimelineCache()
 
   @Binding var popToRootTab: Tab
+  
+  let isModal: Bool
 
   @Query(sort: \LocalTimeline.creationDate, order: .reverse) var localTimelines: [LocalTimeline]
   @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
@@ -48,7 +50,7 @@ struct SettingsTabs: View {
       .navigationBarTitleDisplayMode(.inline)
       .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
       .toolbar {
-        if UIDevice.current.userInterfaceIdiom == .phone {
+        if UIDevice.current.userInterfaceIdiom == .phone || isModal {
           ToolbarItem {
             Button {
               dismiss()
