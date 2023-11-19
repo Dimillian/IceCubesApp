@@ -42,7 +42,7 @@ struct StatusRowHeaderView: View {
   private var accountView: some View {
     HStack(alignment: .center) {
       if theme.avatarPosition == .top {
-        AvatarView(url: viewModel.finalStatus.account.avatar, config: .status)
+        AvatarView(account: viewModel.finalStatus.account, config: .status)
       }
       VStack(alignment: .leading, spacing: 2) {
         HStack(alignment: .firstTextBaseline, spacing: 2) {

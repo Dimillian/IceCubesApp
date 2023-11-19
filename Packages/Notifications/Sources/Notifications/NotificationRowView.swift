@@ -52,7 +52,7 @@ struct NotificationRowView: View {
 
   private func makeAvatarView(type: Models.Notification.NotificationType) -> some View {
     ZStack(alignment: .topLeading) {
-      AvatarView(url: notification.accounts[0].avatar)
+      AvatarView(account: notification.accounts[0])
       makeNotificationIconView(type: type)
         .offset(x: -8, y: -8)
     }
@@ -83,7 +83,7 @@ struct NotificationRowView: View {
         ScrollView(.horizontal, showsIndicators: false) {
           LazyHStack(spacing: 8) {
             ForEach(notification.accounts) { account in
-              AvatarView(url: account.avatar)
+              AvatarView(account: account)
                 .contentShape(Rectangle())
                 .onTapGesture {
                   routerPath.navigate(to: .accountDetailWithAccount(account: account))

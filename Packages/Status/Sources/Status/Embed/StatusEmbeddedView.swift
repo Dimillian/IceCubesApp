@@ -46,7 +46,7 @@ public struct StatusEmbeddedView: View {
 
   private func makeAccountView(account: Account) -> some View {
     HStack(alignment: .center) {
-      AvatarView(url: account.avatar, config: .embed)
+      AvatarView(account: account, config: .embed)
       VStack(alignment: .leading, spacing: 0) {
         EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
           .font(.scaledFootnote)

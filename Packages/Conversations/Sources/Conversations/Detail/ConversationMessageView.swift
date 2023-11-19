@@ -27,7 +27,7 @@ struct ConversationMessageView: View {
         if isOwnMessage {
           Spacer()
         } else {
-          AvatarView(url: message.account.avatar, config: .status)
+          AvatarView(account: message.account, config: .status)
             .onTapGesture {
               routerPath.navigate(to: .accountDetailWithAccount(account: message.account))
             }

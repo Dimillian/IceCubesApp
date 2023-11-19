@@ -103,7 +103,7 @@ struct StatusRowDetailView: View {
     ScrollView(.horizontal, showsIndicators: false) {
       LazyHStack(spacing: 0) {
         ForEach(accounts) { account in
-          AvatarView(url: account.avatar, config: .list)
+          AvatarView(account: account, config: .list)
             .padding(.leading, -4)
         }
         .transition(.opacity)

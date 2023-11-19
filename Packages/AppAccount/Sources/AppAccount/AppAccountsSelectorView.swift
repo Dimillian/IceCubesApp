@@ -71,10 +71,10 @@ public struct AppAccountsSelectorView: View {
   @ViewBuilder
   private var labelView: some View {
     Group {
-      if let avatar = currentAccount.account?.avatar, !currentAccount.isLoadingAccount {
-        AvatarView(url: avatar, config: avatarConfig)
+      if let account = currentAccount.account, !currentAccount.isLoadingAccount {
+        AvatarView(account: account, config: avatarConfig)
       } else {
-        AvatarView(url: nil,  config: avatarConfig)
+        AvatarView(account: nil,  config: avatarConfig)
           .redacted(reason: .placeholder)
           .allowsHitTesting(false)
       }
