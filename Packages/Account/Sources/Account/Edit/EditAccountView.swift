@@ -10,15 +10,13 @@ public struct EditAccountView: View {
   @Environment(Client.self) private var client
   @Environment(Theme.self) private var theme
   @Environment(UserPreferences.self) private var userPrefs
-  @Environment(\.contentSettingsFactory) private var contentSettings
 
   @State private var viewModel = EditAccountViewModel()
-  @State private var showContentSettings = false
 
   public init() {}
 
   public var body: some View {
-    NavigationStack {
+    NavigationStack{
       Form {
         if viewModel.isLoading {
           loadingSection
@@ -77,17 +75,7 @@ public struct EditAccountView: View {
   private var postSettingsSection: some View {
     Section("account.edit.post-settings.section-title") {
       if !userPrefs.useInstanceContentSettings {
-        HStack {
-          Button("account.edit.post-settings.content-settings-reference") {showContentSettings.toggle()}
-            .buttonStyle(.plain)
-            .navigationDestination(isPresented: $showContentSettings) {
-              contentSettings
-            }
-          Spacer()
-          Image(systemName: "chevron.right")
-            .font(.caption)
-        }
-        .foregroundStyle(Color.accentColor)
+        Text("account.edit.post-settings.content-settings-reference")
       }
       Picker(selection: $viewModel.postPrivacy) {
         ForEach(Models.Visibility.supportDefault, id: \.rawValue) { privacy in
