@@ -12723,6 +12723,23 @@
         }
       }
     },
+    "account.edit.post-settings.content-settings-reference" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Achtung: Diese Optionen werden durch die globalen Inhaltseinstellungen überschrieben"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning: These settings are overwritten by the global content settings"
+          }
+        }
+      }
+    },
     "account.edit.post-settings.privacy" : {
       "extractionState" : "manual",
       "localizations" : {
