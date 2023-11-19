@@ -139,7 +139,13 @@ import SwiftUI
     }
   }
   
-  func getIndentationLevel(id: String) -> UInt {
-    min(indentationLevelPreviousCache[id] ?? 0, Self.maxIndent)
+  func getIndentationLevel(id: String) -> (indentationLevel: UInt, extraInset: Double) {
+    let level = min(indentationLevelPreviousCache[id] ?? 0, Self.maxIndent)
+    
+    let barSize = Double(level) * 2
+    let spaceBetween = (Double(level) - 1) * 3
+    let size = barSize + spaceBetween + 8
+    
+    return (level, size)
   }
 }

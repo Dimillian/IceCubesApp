@@ -12,6 +12,7 @@ public struct StatusDetailView: View {
   @Environment(StreamWatcher.self) private var watcher
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath
+  @Environment(\.isCompact) private var isCompact: Bool
 
   @State private var viewModel: StatusDetailViewModel
 
@@ -103,15 +104,15 @@ public struct StatusDetailView: View {
 
   private func makeStatusesListView(statuses: [Status]) -> some View {
     ForEach(statuses) { status in
-      let indentationLevel = viewModel.getIndentationLevel(id: status.id)
+      let (indentationLevel, extraInsets) = viewModel.getIndentationLevel(id: status.id)
       let viewModel: StatusRowViewModel = .init(status: status,
                                                 client: client,
                                                 routerPath: routerPath)
       let isFocused = self.viewModel.statusId == status.id
 
       StatusRowView(viewModel: viewModel)
-        .environment(\.extraLeadingInset, (indentationLevel > 0) ? 10 : 0)
-        .environment(\.indentationLevel, indentationLevel)
+        .environment(\.extraLeadingInset, !isCompact ? extraInsets : 0)
+        .environment(\.indentationLevel, !isCompact ? indentationLevel : 0)
         .environment(\.isStatusFocused, isFocused)
         .overlay {
           if isFocused {
