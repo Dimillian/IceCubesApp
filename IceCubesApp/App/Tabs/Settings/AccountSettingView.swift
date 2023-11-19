@@ -98,6 +98,7 @@ struct AccountSettingsView: View {
     }
     .sheet(isPresented: $isEditingAccount, content: {
       EditAccountView()
+            .environment(\.contentSettingsFactory, AnyView(ContentSettingsView()))
     })
     .sheet(isPresented: $isEditingFilters, content: {
       FiltersListView()

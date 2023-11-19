@@ -1,6 +1,7 @@
 import DesignSystem
 import Models
 import Network
+import Env
 import SwiftUI
 
 @MainActor
@@ -8,8 +9,11 @@ public struct EditAccountView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(Client.self) private var client
   @Environment(Theme.self) private var theme
+  @Environment(UserPreferences.self) private var userPrefs
+  @Environment(\.contentSettingsFactory) private var contentSettings
 
   @State private var viewModel = EditAccountViewModel()
+  @State private var showContentSettings = false
 
   public init() {}
 
@@ -72,6 +76,19 @@ public struct EditAccountView: View {
 
   private var postSettingsSection: some View {
     Section("account.edit.post-settings.section-title") {
+      if !userPrefs.useInstanceContentSettings {
+        HStack {
+          Button("account.edit.post-settings.content-settings-reference") {showContentSettings.toggle()}
+            .buttonStyle(.plain)
+            .navigationDestination(isPresented: $showContentSettings) {
+              contentSettings
+            }
+          Spacer()
+          Image(systemName: "chevron.right")
+            .font(.caption)
+        }
+        .foregroundStyle(Color.accentColor)
+      }
       Picker(selection: $viewModel.postPrivacy) {
         ForEach(Models.Visibility.supportDefault, id: \.rawValue) { privacy in
           Text(privacy.title).tag(privacy)

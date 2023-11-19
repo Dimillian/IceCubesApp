@@ -29,6 +29,10 @@ private struct IndentationLevel: EnvironmentKey {
   static let defaultValue: UInt = 0
 }
 
+private struct ContentSettingsFactory: EnvironmentKey {
+  static let defaultValue: AnyView = AnyView(EmptyView())
+}
+
 public extension EnvironmentValues {
   var isSecondaryColumn: Bool {
     get { self[SecondaryColumnKey.self] }
@@ -63,5 +67,10 @@ public extension EnvironmentValues {
   var indentationLevel: UInt {
     get { self[IndentationLevel.self] }
     set { self[IndentationLevel.self] = newValue }
+  }
+  
+  var contentSettingsFactory: AnyView {
+    get { self[ContentSettingsFactory.self] }
+    set { self[ContentSettingsFactory.self] = newValue }
   }
 }
