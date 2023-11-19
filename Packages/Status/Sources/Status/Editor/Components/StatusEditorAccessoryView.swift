@@ -120,7 +120,7 @@ struct StatusEditorAccessoryView: View {
               }
             }
 
-            if !viewModel.customEmojis.isEmpty {
+            if !viewModel.customEmojiContainer.isEmpty {
               Button {
                 isCustomEmojisSheetDisplay = true
               } label: {
@@ -283,29 +283,37 @@ struct StatusEditorAccessoryView: View {
   private var customEmojisSheet: some View {
     NavigationStack {
       ScrollView {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 40))], spacing: 9) {
-          ForEach(viewModel.customEmojis) { emoji in
-            LazyImage(url: emoji.url) { state in
-              if let image = state.image {
-                image
-                  .resizable()
-                  .aspectRatio(contentMode: .fill)
-                  .frame(width: 40, height: 40)
-                  .accessibilityLabel(emoji.shortcode.replacingOccurrences(of: "_", with: " "))
-                  .accessibilityAddTraits(.isButton)
-              } else if state.isLoading {
-                Rectangle()
-                  .fill(Color.gray)
-                  .frame(width: 40, height: 40)
-                  .accessibility(hidden: true)
-                  .shimmering()
+        ForEach(viewModel.customEmojiContainer) { container in
+          VStack(alignment: .leading) {
+            Text(container.categoryName)
+              .font(.scaledFootnote)
+            LazyVGrid(columns: [GridItem(.adaptive(minimum: 40))], spacing: 9) {
+              ForEach(container.emojis) { emoji in
+                LazyImage(url: emoji.url) { state in
+                  if let image = state.image {
+                    image
+                      .resizable()
+                      .aspectRatio(contentMode: .fill)
+                      .frame(width: 40, height: 40)
+                      .accessibilityLabel(emoji.shortcode.replacingOccurrences(of: "_", with: " "))
+                      .accessibilityAddTraits(.isButton)
+                  } else if state.isLoading {
+                    Rectangle()
+                      .fill(Color.gray)
+                      .frame(width: 40, height: 40)
+                      .accessibility(hidden: true)
+                      .shimmering()
+                  }
+                }
+                .onTapGesture {
+                  viewModel.insertStatusText(text: " :\(emoji.shortcode): ")
+                }
               }
             }
-            .onTapGesture {
-              viewModel.insertStatusText(text: " :\(emoji.shortcode): ")
-            }
           }
-        }.padding(.horizontal)
+          .padding(.horizontal)
+          .padding(.bottom)
+        }
       }
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {

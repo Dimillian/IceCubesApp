@@ -100,7 +100,7 @@ import SwiftUI
   var replyToStatus: Status?
   var embeddedStatus: Status?
 
-  var customEmojis: [Emoji] = []
+  var customEmojiContainer: [StatusEditorCategorizedEmojiContainer] = []
 
   var postingError: String?
   var showPostingErrorAlert: Bool = false
@@ -726,9 +726,33 @@ import SwiftUI
   // MARK: - Custom emojis
 
   func fetchCustomEmojis() async {
+    typealias EmojiContainer = StatusEditorCategorizedEmojiContainer
+    
     guard let client else { return }
     do {
-      customEmojis = try await client.get(endpoint: CustomEmojis.customEmojis) ?? []
+      let customEmojis: [Emoji] = try await client.get(endpoint: CustomEmojis.customEmojis) ?? []
+      var emojiContainers: [EmojiContainer] = []
+      
+      customEmojis.reduce([String: [Emoji]]()) { currentDict, emoji in
+        var dict = currentDict
+        let category = emoji.category ?? "Uncategorized"
+        
+        if let emojis = dict[category] {
+          dict[category] = emojis + [emoji]
+        } else {
+          dict[category] = [emoji]
+        }
+        
+        return dict
+      }.sorted(by: { lhs, rhs in
+        if rhs.key == "Uncategorized" { return false }
+        else if lhs.key == "Uncategorized" { return true }
+        else { return lhs.key < rhs.key }
+      }).forEach { key, value in
+        emojiContainers.append(.init(categoryName: key, emojis: value))
+      }
+      
+      customEmojiContainer = emojiContainers
     } catch {}
   }
 }
