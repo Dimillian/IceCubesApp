@@ -64,7 +64,7 @@ public struct AvatarView: View {
     return FrameConfig(width: config.width, height: config.height, cornerRadius: cornerRadius)
   }
 
-  public init(account: Account?, config: FrameConfig = FrameConfig.status, hasPopup: Bool = true) {
+  public init(account: Account?, config: FrameConfig = FrameConfig.status, hasPopup: Bool = false) {
     self.account = account
     self.config = config
     self.hasPopup = hasPopup

@@ -99,7 +99,7 @@ struct AccountDetailHeaderView: View {
   private var accountAvatarView: some View {
     HStack {
       ZStack(alignment: .topTrailing) {
-        AvatarView(account: account, config: .account, hasPopup: false)
+        AvatarView(account: account, config: .account)
           .accessibilityLabel("accessibility.tabs.profile.user-avatar.label")
         if viewModel.isCurrentUser, isSupporter {
           Image(systemName: "checkmark.seal.fill")

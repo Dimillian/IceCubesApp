@@ -66,7 +66,7 @@ public struct StatusRowView: View {
               Button {
                 viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
               } label: {
-                AvatarView(account: viewModel.finalStatus.account, config: .status)
+                AvatarView(account: viewModel.finalStatus.account, config: .status, hasPopup: true)
               }
             }
             VStack(alignment: .leading) {
