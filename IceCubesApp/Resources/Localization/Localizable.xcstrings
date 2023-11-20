@@ -3,6 +3,12 @@
   "strings" : {
     "  ⸱  " : {
       "localizations" : {
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "  ⸱  "
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -37,6 +43,18 @@
     },
     "#%@" : {
       "localizations" : {
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "#%@"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "#%@"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -71,6 +89,12 @@
     },
     "%@©2023 Thomas Ricouard" : {
       "localizations" : {
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@©2023 Thomas Ricouard"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12726,6 +12750,18 @@
     "account.edit.post-settings.content-settings-reference" : {
       "extractionState" : "manual",
       "localizations" : {
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning: These settings are overwritten by the global content settings"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning: These settings are overwritten by the global content settings"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12733,6 +12769,96 @@
           }
         },
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning: These settings are overwritten by the global content settings"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning: These settings are overwritten by the global content settings"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning: These settings are overwritten by the global content settings"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning: These settings are overwritten by the global content settings"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning: These settings are overwritten by the global content settings"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning: These settings are overwritten by the global content settings"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning: These settings are overwritten by the global content settings"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning: These settings are overwritten by the global content settings"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning: These settings are overwritten by the global content settings"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning: These settings are overwritten by the global content settings"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning: These settings are overwritten by the global content settings"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning: These settings are overwritten by the global content settings"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning: These settings are overwritten by the global content settings"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning: These settings are overwritten by the global content settings"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning: These settings are overwritten by the global content settings"
+          }
+        },
+        "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Warning: These settings are overwritten by the global content settings"
@@ -13533,6 +13659,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Estes usuários não verão suas postagens até que você os aceite."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning: These settings are overwritten by the global content settings"
           }
         },
         "uk" : {
@@ -19279,6 +19411,24 @@
     },
     "DeepL API Free" : {
       "localizations" : {
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL API Free"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL API Free"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL API Free"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19313,6 +19463,24 @@
     },
     "DeepL API Pro" : {
       "localizations" : {
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL API Pro"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL API Pro"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL API Pro"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19719,6 +19887,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Папярэдні прагляд"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toots preview"
           }
         },
         "de" : {
@@ -28857,6 +29031,24 @@
     },
     "iPad" : {
       "localizations" : {
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iPad"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iPad"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iPad"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28891,6 +29083,18 @@
     },
     "iPhone" : {
       "localizations" : {
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iPhone"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iPhone"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -30578,6 +30782,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Апавяшчэнні? Якія апавяшчэнні? Ваша скрыня апавяшчэнняў выглядае такой пустой. Працягвайце заставацца цудоўным! 📱😎"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications? What notifications? Your notification inbox is looking so empty. Keep on being awesome! 📱😎"
           }
         },
         "de" : {
@@ -40503,6 +40713,18 @@
     "settings.display.pending-left" : {
       "extractionState" : "manual",
       "localizations" : {
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Pending Button on the Left"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL API Pro"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "needs_review",
@@ -40515,16 +40737,82 @@
             "value" : "Show Pending Button on the Left"
           }
         },
-        "pl" : {
+        "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pokazuj przycisk nieprzeczytanych po lewej stronie"
+            "value" : "Show Pending Button on the Left"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Pending Button on the Left"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Pending Button on the Left"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Pending Button on the Left"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Pending Button on the Left"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Pending Button on the Left"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "읽지 않은 글 수를 왼쪽에 표시"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning: These settings are overwritten by the global content settings"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pokazuj przycisk nieprzeczytanych po lewej stronie"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Pending Button on the Left"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Pending Button on the Left"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Pending Button on the Left"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Pending Button on the Left"
           }
         },
         "zh-Hant" : {
@@ -56406,6 +56694,12 @@
             "value" : "Share this link"
           }
         },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share this link"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -66440,6 +66734,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ сапраўдны асобнік"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ is a valid instance"
           }
         },
         "de" : {

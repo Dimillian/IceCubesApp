@@ -694,7 +694,6 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 				de,
 				nl,
 				es,
@@ -713,6 +712,7 @@
 				be,
 				uk,
 				"zh-Hant",
+				Base,
 			);
 			mainGroup = 9FBFE630292A715500C250E9;
 			packageReferences = (
