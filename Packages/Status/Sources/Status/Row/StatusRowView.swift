@@ -32,16 +32,18 @@ public struct StatusRowView: View {
 
   public var body: some View {
     HStack(spacing: 0) {
-      HStack(spacing: 3) {
-        ForEach(0..<indentationLevel, id: \.self) {_ in
-          Rectangle()
-            .fill(theme.tintColor)
-            .frame(width: 2)
-            .accessibilityHidden(true)
+      if !isCompact {
+        HStack(spacing: 3) {
+          ForEach(0..<indentationLevel, id: \.self) {_ in
+            Rectangle()
+              .fill(theme.tintColor)
+              .frame(width: 2)
+              .accessibilityHidden(true)
+          }
         }
-      }
-      if indentationLevel > 0 {
-        Spacer(minLength: 8)
+        if indentationLevel > 0 {
+          Spacer(minLength: 8)
+        }
       }
       VStack(alignment: .leading) {
         if viewModel.isFiltered, let filter = viewModel.filter {

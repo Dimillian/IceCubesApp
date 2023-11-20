@@ -73,10 +73,9 @@ public struct AppAccountsSelectorView: View {
     Group {
       if let account = currentAccount.account, !currentAccount.isLoadingAccount {
         AvatarView(account: account, config: avatarConfig)
+          .padding(.leading, 16)
       } else {
-        AvatarView(account: nil,  config: avatarConfig)
-          .redacted(reason: .placeholder)
-          .allowsHitTesting(false)
+        ProgressView()
       }
     }.overlay(alignment: .topTrailing) {
       if !currentAccount.followRequests.isEmpty || showNotificationBadge, accountCreationEnabled {
