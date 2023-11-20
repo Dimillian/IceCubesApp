@@ -30,6 +30,7 @@ public struct AvatarView: View {
               }
             }
           }
+          .hoverEffect(.lift)
           .popover(isPresented: $showPopup) {
             AccountPopupView(
               account: account,
