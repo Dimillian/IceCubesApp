@@ -30,6 +30,10 @@ public struct AvatarView: View {
                   showPopup = true
                 }
               }
+            } else {
+              if !showPopup {
+                toggleTask.cancel()
+              }
             }
           }
           .hoverEffect(.lift)
