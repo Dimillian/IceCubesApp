@@ -46,6 +46,7 @@ public struct AppAccountsSelectorView: View {
       HapticManager.shared.fireHaptic(.buttonPress)
     } label: {
       labelView
+        .contentShape(Rectangle())
     }
     .sheet(isPresented: $isPresented, content: {
       accountsView.presentationDetents([.height(preferredHeight), .large])
@@ -73,9 +74,10 @@ public struct AppAccountsSelectorView: View {
     Group {
       if let account = currentAccount.account, !currentAccount.isLoadingAccount {
         AvatarView(account: account, config: avatarConfig)
-          .padding(.leading, 16)
       } else {
-        ProgressView()
+        AvatarView(account: nil,  config: avatarConfig)
+          .redacted(reason: .placeholder)
+          .allowsHitTesting(false)
       }
     }.overlay(alignment: .topTrailing) {
       if !currentAccount.followRequests.isEmpty || showNotificationBadge, accountCreationEnabled {

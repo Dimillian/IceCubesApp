@@ -20,6 +20,7 @@ public struct AvatarView: View {
     if let account = account {
       if hasPopup {
         AvatarImage(account: account, config: adaptiveConfig)
+          .frame(width: config.width, height: config.height)
           .onHover { hovering in
             if hovering {
               toggleTask.cancel()
@@ -48,6 +49,7 @@ public struct AvatarView: View {
           }
       } else {
         AvatarImage(account: account, config: adaptiveConfig)
+          .frame(width: config.width, height: config.height)
       }
     } else {
       AvatarPlaceHolder(config: adaptiveConfig)
@@ -155,8 +157,9 @@ struct AvatarImage: View {
       LazyImage(request: ImageRequest(url: account.avatar, processors: [.resize(size: config.size)])
       ) { state in
         if let image = state.image {
-          image.resizable().scaledToFill()
-            .frame(width: config.width, height: config.height)
+          image
+            .resizable()
+            .scaledToFit()
             .clipShape(RoundedRectangle(cornerRadius: config.cornerRadius))
             .overlay(
               RoundedRectangle(cornerRadius: config.cornerRadius)
