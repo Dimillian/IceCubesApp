@@ -31,7 +31,7 @@ public struct StatusRowMediaPreviewView: View {
   }
 
   var appLayoutWidth: CGFloat {
-    let avatarColumnWidth = theme.avatarPosition == .leading ? AvatarView.Size.status.size.width + .statusColumnsSpacing : 0
+    let avatarColumnWidth = theme.avatarPosition == .leading ? AvatarView.FrameConfig.status.width + .statusColumnsSpacing : 0
     var sidebarWidth: CGFloat = 0
     var secondaryColumnWidth: CGFloat = 0
     let layoutPading: CGFloat = .layoutPadding * 2

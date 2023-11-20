@@ -15,7 +15,7 @@ public struct AppAccountsSelectorView: View {
   @State private var isPresented: Bool = false
 
   private let accountCreationEnabled: Bool
-  private let avatarSize: AvatarView.Size
+  private let avatarConfig: AvatarView.FrameConfig
 
   private var showNotificationBadge: Bool {
     accountsViewModel
@@ -33,11 +33,11 @@ public struct AppAccountsSelectorView: View {
 
   public init(routerPath: RouterPath,
               accountCreationEnabled: Bool = true,
-              avatarSize: AvatarView.Size = .badge)
+              avatarConfig: AvatarView.FrameConfig = .badge)
   {
     self.routerPath = routerPath
     self.accountCreationEnabled = accountCreationEnabled
-    self.avatarSize = avatarSize
+    self.avatarConfig = avatarConfig
   }
 
   public var body: some View {
@@ -71,10 +71,10 @@ public struct AppAccountsSelectorView: View {
   @ViewBuilder
   private var labelView: some View {
     Group {
-      if let avatar = currentAccount.account?.avatar, !currentAccount.isLoadingAccount {
-        AvatarView(url: avatar, size: avatarSize)
+      if let account = currentAccount.account, !currentAccount.isLoadingAccount {
+        AvatarView(account: account, config: avatarConfig)
       } else {
-        AvatarView(url: nil, size: avatarSize)
+        AvatarView(account: nil,  config: avatarConfig)
           .redacted(reason: .placeholder)
           .allowsHitTesting(false)
       }

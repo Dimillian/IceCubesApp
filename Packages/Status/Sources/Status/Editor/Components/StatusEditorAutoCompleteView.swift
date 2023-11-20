@@ -31,7 +31,7 @@ struct StatusEditorAutoCompleteView: View {
         viewModel.selectMentionSuggestion(account: account)
       } label: {
         HStack {
-          AvatarView(url: account.avatar, size: .badge)
+          AvatarView(account: account, config: AvatarView.FrameConfig.badge)
           VStack(alignment: .leading) {
             EmojiTextApp(.init(stringValue: account.safeDisplayName),
                          emojis: account.emojis)
