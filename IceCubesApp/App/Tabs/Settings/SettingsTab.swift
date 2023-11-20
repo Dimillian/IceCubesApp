@@ -159,10 +159,12 @@ struct SettingsTabs: View {
       NavigationLink(destination: TranslationSettingsView()) {
         Label("settings.general.translate", systemImage: "captions.bubble")
       }
+      #if !targetEnvironment(macCatalyst)
       Link(destination: URL(string: UIApplication.openSettingsURLString)!) {
         Label("settings.system", systemImage: "gear")
       }
       .tint(theme.labelColor)
+      #endif
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
