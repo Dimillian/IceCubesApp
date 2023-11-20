@@ -21,12 +21,14 @@ public struct AvatarView: View {
       if hasPopup {
         AvatarImage(account: account, config: adaptiveConfig)
           .onHover { hovering in
-            toggleTask.cancel()
-            toggleTask = Task {
-              try? await Task.sleep(nanoseconds: NSEC_PER_SEC / 2)
-              guard !Task.isCancelled else { return }
-              if !showPopup && hovering {
-                showPopup = true
+            if hovering {
+              toggleTask.cancel()
+              toggleTask = Task {
+                try? await Task.sleep(nanoseconds: NSEC_PER_SEC / 2)
+                guard !Task.isCancelled else { return }
+                if !showPopup {
+                  showPopup = true
+                }
               }
             }
           }
