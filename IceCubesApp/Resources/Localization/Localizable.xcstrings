@@ -12855,7 +12855,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Warning: These settings are overwritten by the global content settings"
+            "value" : "警告：这些设置已被全局内容设置覆盖"
           }
         },
         "zh-Hant" : {
@@ -40812,7 +40812,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show Pending Button on the Left"
+            "value" : "在屏幕左侧显示未读按钮"
           }
         },
         "zh-Hant" : {
