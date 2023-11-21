@@ -6,28 +6,20 @@ import Network
 import NukeUI
 import Shimmer
 import SwiftUI
+import SwiftData
 
 @MainActor
 struct EditTagGroupView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(\.modelContext) private var context
-
   @Environment(Theme.self) private var theme
 
-  @State private var title: String = ""
-  @State private var sfSymbolName: String = ""
-  @State private var tags: [String] = []
   @State private var newTag: String = ""
   @State private var popupTagsPresented = false
+  @Bindable private var tagGroup: TagGroup
 
-  private var editingTagGroup: TagGroup?
-  private var onSaved: ((TagGroup) -> Void)?
-
-  private var canSave: Bool {
-    !title.isEmpty &&
-      // At least have 2 tags, one main and one additional.
-      tags.count >= 2
-  }
+  private let onSaved: ((TagGroup) -> Void)?
+  private let isNewGroup: Bool
 
   @FocusState private var focusedField: Focus?
 
@@ -37,9 +29,10 @@ struct EditTagGroupView: View {
     case new
   }
 
-  init(editingTagGroup: TagGroup? = nil, onSaved: ((TagGroup) -> Void)? = nil) {
-    self.editingTagGroup = editingTagGroup
+  init(tagGroup: TagGroup = .emptyGroup, onSaved: ((TagGroup) -> Void)? = nil) {
+    self._tagGroup = Bindable(wrappedValue: tagGroup)
     self.onSaved = onSaved
+    self.isNewGroup = tagGroup.title.isEmpty
   }
 
   var body: some View {
@@ -50,7 +43,11 @@ struct EditTagGroupView: View {
           keywordsSection
         }
         .formStyle(.grouped)
-        .navigationTitle(editingTagGroup != nil ? "timeline.filter.edit-tag-groups" : "timeline.filter.add-tag-groups")
+        .navigationTitle(
+          isNewGroup
+          ? "timeline.filter.add-tag-groups"
+          : "timeline.filter.edit-tag-groups"
+        )
         .navigationBarTitleDisplayMode(.inline)
         .scrollContentBackground(.hidden)
         .background(theme.secondaryBackgroundColor)
@@ -61,18 +58,13 @@ struct EditTagGroupView: View {
           }
           ToolbarItem(placement: .navigationBarTrailing) {
             Button("action.save", action: { save() })
-              .disabled(!canSave)
+              .disabled(!tagGroup.isValid)
           }
         }
         symbolsSuggestionView
       }
       .onAppear {
         focusedField = .title
-        if let editingTagGroup {
-          title = editingTagGroup.title
-          sfSymbolName = editingTagGroup.symbolName
-          tags = editingTagGroup.tags
-        }
       }
     }
   }
@@ -80,25 +72,25 @@ struct EditTagGroupView: View {
   @ViewBuilder
   private var metadataSection: some View {
     Section {
-      TextField("add-tag-groups.edit.title.field", text: $title, axis: .horizontal)
+      TextField("add-tag-groups.edit.title.field", text: $tagGroup.title, axis: .horizontal)
         .focused($focusedField, equals: Focus.title)
         .onSubmit {
           focusedField = Focus.symbol
         }
 
       HStack {
-        TextField("add-tag-groups.edit.icon.field", text: $sfSymbolName, axis: .horizontal)
+        TextField("add-tag-groups.edit.icon.field", text: $tagGroup.symbolName, axis: .horizontal)
           .textInputAutocapitalization(.never)
           .autocorrectionDisabled()
           .focused($focusedField, equals: Focus.symbol)
           .onSubmit {
             focusedField = Focus.new
           }
-          .onChange(of: sfSymbolName) {
+          .onChange(of: tagGroup.symbolName) {
             popupTagsPresented = true
           }
 
-        Image(systemName: sfSymbolName)
+        Image(systemName: tagGroup.symbolName)
       }
     }
     .listRowBackground(theme.primaryBackgroundColor)
@@ -106,7 +98,7 @@ struct EditTagGroupView: View {
 
   private var keywordsSection: some View {
     Section("add-tag-groups.edit.tags") {
-      ForEach(tags, id: \.self) { tag in
+      ForEach(tagGroup.tags, id: \.self) { tag in
         HStack {
           Text(tag)
           Spacer()
@@ -120,7 +112,7 @@ struct EditTagGroupView: View {
       }
       .onDelete { indexes in
         if let index = indexes.first {
-          let tag = tags[index]
+          let tag = tagGroup.tags[index]
           deleteTag(tag)
         }
       }
@@ -152,43 +144,36 @@ struct EditTagGroupView: View {
     focusedField = Focus.new
   }
 
+  // TODO: Show error and disable <Enter> for empty and duplicate tags
   private func addTag(_ tag: String) {
     guard !tag.isEmpty else { return }
-    tags.append(tag)
+    tagGroup.tags.append(tag)
   }
 
+  // TODO: make more sense to be a set
   private func deleteTag(_ tag: String) {
-    tags.removeAll(where: { $0 == tag })
+    tagGroup.tags.removeAll(where: { $0 == tag })
   }
 
   private func save() {
-    if let editingTagGroup {
-      editingTagGroup.title = title
-      editingTagGroup.symbolName = sfSymbolName
-      editingTagGroup.tags = tags
-      onSaved?(editingTagGroup)
-    } else {
-      let tagGroup = TagGroup(title: title.trimmingCharacters(in: .whitespacesAndNewlines),
-                              symbolName: sfSymbolName,
-                              tags: tags)
-      context.insert(tagGroup)
-      onSaved?(tagGroup)
-    }
+    tagGroup.format()
+    context.insert(tagGroup)
+    onSaved?(tagGroup)
 
     dismiss()
   }
 
   @ViewBuilder
   private var symbolsSuggestionView: some View {
-    if focusedField == .symbol, !sfSymbolName.isEmpty {
+    if focusedField == .symbol, !tagGroup.symbolName.isEmpty {
       let filteredMatches = allSymbols
-        .filter { $0.contains(sfSymbolName) }
+        .filter { $0.contains(tagGroup.symbolName) }
       if !filteredMatches.isEmpty {
         ScrollView(.horizontal, showsIndicators: false) {
           LazyHStack {
             ForEach(filteredMatches, id: \.self) { symbolName in
               Button {
-                sfSymbolName = symbolName
+                tagGroup.symbolName = symbolName
               } label: {
                 Image(systemName: symbolName)
               }
@@ -207,7 +192,23 @@ struct EditTagGroupView: View {
 
 struct AddTagGroupView_Previews: PreviewProvider {
   static var previews: some View {
-    EditTagGroupView()
+    let container = try? ModelContainer(for: TagGroup.self, configurations: ModelConfiguration())
+
+    return EditTagGroupView()
       .withEnvironments()
+      .modelContainer(container!)
+  }
+}
+
+extension TagGroup {
+  static let emptyGroup = TagGroup(title: "", symbolName: "", tags: [])
+
+  var isValid: Bool {
+    !title.isEmpty &&
+    tags.count >= 2 // At least have 2 tags, one main and one additional.
+  }
+
+  func format() {
+    title = title.trimmingCharacters(in: .whitespacesAndNewlines)
   }
 }

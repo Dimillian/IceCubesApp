@@ -117,7 +117,7 @@ extension View {
       case let .shareImage(image, status):
         ActivityView(image: image, status: status)
       case let .editTagGroup(tagGroup, onSaved):
-        EditTagGroupView(editingTagGroup: tagGroup, onSaved: onSaved)
+        EditTagGroupView(tagGroup: tagGroup, onSaved: onSaved)
           .withEnvironments()
       }
     }
