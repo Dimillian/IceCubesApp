@@ -96,7 +96,7 @@ struct EditTagGroupView: View {
     .listRowBackground(theme.primaryBackgroundColor)
   }
 
-  private var keywordsSection: some View {
+  var keywordsSection: some View {
     Section("add-tag-groups.edit.tags") {
       ForEach(tagGroup.tags, id: \.self) { tag in
         HStack {
@@ -117,13 +117,14 @@ struct EditTagGroupView: View {
         }
       }
       HStack {
-        TextField("add-tag-groups.edit.tags.add", text: $newTag, axis: .horizontal)
-          .textInputAutocapitalization(.never)
-          .autocorrectionDisabled()
-          .onSubmit {
-            addNewTag()
-          }
-          .focused($focusedField, equals: Focus.new)
+        // this condition is using to overcome a SwiftUI bug
+        // "add new tag" `TextField` is not focused after adding the first tag
+        if tagGroup.tags.isEmpty {
+          addNewTagTextField()
+        } else {
+          addNewTagTextField()
+            .onAppear { focusedField = .new }
+        }
         Spacer()
         if !newTag.isEmpty {
           Button {
@@ -136,6 +137,16 @@ struct EditTagGroupView: View {
       }
     }
     .listRowBackground(theme.primaryBackgroundColor)
+  }
+
+  private func addNewTagTextField() -> some View {
+    return TextField("add-tag-groups.edit.tags.add", text: $newTag, axis: .horizontal)
+      .textInputAutocapitalization(.never)
+      .autocorrectionDisabled()
+      .onSubmit {
+        addNewTag()
+      }
+      .focused($focusedField, equals: Focus.new)
   }
 
   private func addNewTag() {
