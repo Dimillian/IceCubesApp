@@ -139,7 +139,7 @@ struct EditTagGroupView: View {
   }
 
   private func addNewTag() {
-    addTag(newTag.trimmingCharacters(in: .whitespaces))
+    addTag(newTag.trimmingCharacters(in: .whitespaces).lowercased())
     newTag = ""
     focusedField = Focus.new
   }
@@ -210,5 +210,6 @@ extension TagGroup {
 
   func format() {
     title = title.trimmingCharacters(in: .whitespacesAndNewlines)
+    tags = tags.map { $0.lowercased() }
   }
 }
