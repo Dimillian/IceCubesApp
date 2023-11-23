@@ -40,31 +40,28 @@ struct EditTagGroupView: View {
 
   var body: some View {
     NavigationStack {
-      ZStack(alignment: .bottom) {
-        Form {
-          metadataSection
-          keywordsSection
+      Form {
+        metadataSection
+        keywordsSection
+      }
+      .formStyle(.grouped)
+      .navigationTitle(
+        isNewGroup
+        ? "timeline.filter.add-tag-groups"
+        : "timeline.filter.edit-tag-groups"
+      )
+      .navigationBarTitleDisplayMode(.inline)
+      //        .scrollContentBackground(.hidden)
+      .background(theme.secondaryBackgroundColor)
+      .scrollDismissesKeyboard(.immediately)
+      .toolbar {
+        ToolbarItem(placement: .navigationBarLeading) {
+          Button("action.cancel", action: { dismiss() })
         }
-        .formStyle(.grouped)
-        .navigationTitle(
-          isNewGroup
-          ? "timeline.filter.add-tag-groups"
-          : "timeline.filter.edit-tag-groups"
-        )
-        .navigationBarTitleDisplayMode(.inline)
-        .scrollContentBackground(.hidden)
-        .background(theme.secondaryBackgroundColor)
-        .scrollDismissesKeyboard(.immediately)
-        .toolbar {
-          ToolbarItem(placement: .navigationBarLeading) {
-            Button("action.cancel", action: { dismiss() })
-          }
-          ToolbarItem(placement: .navigationBarTrailing) {
-            Button("action.save", action: { save() })
-              .disabled(!tagGroup.isValid)
-          }
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button("action.save", action: { save() })
+            .disabled(!tagGroup.isValid)
         }
-        symbolsSuggestionView
       }
       .onAppear {
         focusedField = .title
@@ -81,24 +78,34 @@ struct EditTagGroupView: View {
           focusedField = Focus.symbol
         }
 
-      HStack {
-        TextField("add-tag-groups.edit.icon.field", text: $symbolQuery, axis: .horizontal)
-          .textInputAutocapitalization(.never)
-          .autocorrectionDisabled()
-          .focused($focusedField, equals: Focus.symbol)
-          .onSubmit {
-            focusedField = Focus.new
-          }
-          .onChange(of: tagGroup.symbolName) {
-            if !tagGroup.symbolName.isEmpty {
-              popupTagsPresented = true
+      VStack {
+        HStack {
+          TextField("add-tag-groups.edit.icon.field", text: $symbolQuery, axis: .horizontal)
+            .textInputAutocapitalization(.never)
+            .autocorrectionDisabled()
+            .focused($focusedField, equals: Focus.symbol)
+            .onSubmit {
+              if TagGroup.SymbolSearchModel.allSymbols.contains(symbolQuery) {
+                tagGroup.symbolName = symbolQuery
+              }
+              focusedField = Focus.new
             }
-          }
-          .onChange(of: symbolQuery) {
-            symbolSearchModel.search(for: symbolQuery)
-          }
+            .onChange(of: symbolQuery) {
+              symbolSearchModel.search(for: symbolQuery, exclude: tagGroup.symbolName)
+            }
+            .onChange(of: focusedField) {
+              symbolQuery = tagGroup.symbolName
+            }
 
-        Image(systemName: tagGroup.symbolName)
+            Image(systemName: tagGroup.symbolName)
+            .frame(height: 30)
+        }
+
+        if focusedField == Focus.symbol {
+          symbolsSuggestionView
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(height: 40)
+        }
       }
     }
     .listRowBackground(theme.primaryBackgroundColor)
@@ -184,20 +191,29 @@ struct EditTagGroupView: View {
 
   @ViewBuilder
   private var symbolsSuggestionView: some View {
-    ScrollView(.horizontal, showsIndicators: false) {
-      LazyHStack {
-        ForEach(symbolSearchModel.results, id: \.self) { symbolName in
-          Button {
-            tagGroup.symbolName = symbolName
-          } label: {
-            Image(systemName: symbolName)
+    if symbolSearchModel.results.isEmpty {
+      Text("No Symbol Found")
+    } else if symbolQuery == tagGroup.symbolName && symbolSearchModel.results.count == 1 {
+      Text("\(symbolQuery)").bold().italic() + Text(" are already selected.")
+    } else {
+      ScrollView(.horizontal, showsIndicators: false) {
+        LazyHStack {
+          ForEach(symbolSearchModel.results, id: \.self) { symbolName in
+            Button {
+              symbolSearchModel.search(for: symbolQuery, exclude: symbolName)
+              tagGroup.symbolName = symbolName
+            } label: {
+              Image(systemName: symbolName)
+            }
+            .buttonStyle(.plain)
           }
         }
+        .animation(.spring(duration: 0.2), value: symbolSearchModel.results)
       }
-      .padding(.horizontal, .layoutPadding)
+      .onAppear {
+        symbolSearchModel.search(for: symbolQuery, exclude: tagGroup.symbolName)
+      }
     }
-    .frame(height: symbolSearchModel.results.isEmpty ? 0 : 40)
-    .background(.ultraThinMaterial)
   }
 }
 
@@ -234,7 +250,7 @@ extension TagGroup {
     private(set) var results: [String] = []
 
     private var task = Task<Void, Never> {}
-    func search(for query: String) {
+    func search(for query: String, exclude excludedSymbol: String) {
       task.cancel()
       currentQuery = query
 
@@ -249,13 +265,16 @@ extension TagGroup {
               query == self.currentQuery
         else { return }
 
-        results = Self.allSymbols.filter { $0.contains(query) }
+        results = Self.allSymbols.filter {
+          $0.contains(query) &&
+          $0 != excludedSymbol
+        }
       }
     }
 
     deinit { task.cancel() }
 
-    private static let allSymbols: [String] = SFSymbol.allSymbols.map { symbol in
+    static let allSymbols: [String] = SFSymbol.allSymbols.map { symbol in
       symbol.rawValue
     }
   }
