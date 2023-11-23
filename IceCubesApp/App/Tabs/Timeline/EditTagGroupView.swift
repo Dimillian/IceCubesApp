@@ -83,11 +83,14 @@ struct EditTagGroupView: View {
         if focusedField == .title {
           if tagGroup.title.isEmpty {
             Text("Need a Non-Empty Title")
-              .font(.caption2)
+              .font(.caption)
               .foregroundStyle(.red)
-          } else if tagGroups.contains(where: { $0.title == tagGroup.title }) {
+          } else if
+            isNewGroup,
+            tagGroups.contains(where: { $0.title == tagGroup.title })
+          {
             Text("\(tagGroup.title) Already Exists")
-              .font(.caption2)
+              .font(.caption)
               .foregroundStyle(.red)
           }
         }
@@ -120,7 +123,7 @@ struct EditTagGroupView: View {
            focusedField == .symbol
         {
           Text("Need to Select a Symbol")
-            .font(.caption2)
+            .font(.caption)
             .foregroundStyle(.red)
         }
 
@@ -195,13 +198,13 @@ struct EditTagGroupView: View {
       if focusedField == .new {
         if tagGroup.tags.count < 2 {
           Text("Need at Least 2 Tags to Form a Group")
-            .font(.caption2)
+            .font(.caption)
             .foregroundStyle(.red)
         }
         
         if tagGroup.tags.contains(newTag) {
           Text("Duplicated Tag")
-            .font(.caption2)
+            .font(.caption)
             .foregroundStyle(.red)
         }
       }
@@ -245,18 +248,22 @@ struct EditTagGroupView: View {
           && symbolSearchResult.count == 0
       {
         Text("\(symbolQuery)").bold().italic() + Text(" are already selected.")
+          .font(.caption)
+          .foregroundStyle(.red)
       } else {
         Text("No Symbol Found")
       }
     } else {
       ScrollView(.horizontal, showsIndicators: false) {
         LazyHStack {
-          ForEach(symbolSearchResult, id: \.self) { symbolName in
+          ForEach(symbolSearchResult, id: \.self) { name in
             Button {
               symbolSearchResult = TagGroup.searchSymbol(for: symbolQuery, exclude: tagGroup.symbolName)
-              tagGroup.symbolName = symbolName
+              tagGroup.symbolName = name
+              symbolQuery = name
+              focusedField = .new
             } label: {
-              Image(systemName: symbolName)
+              Image(systemName: name)
             }
             .buttonStyle(.plain)
           }
