@@ -7,6 +7,7 @@ import NukeUI
 import Shimmer
 import SwiftUI
 import SwiftData
+import SFSafeSymbols
 
 @MainActor
 struct EditTagGroupView: View {
@@ -17,6 +18,8 @@ struct EditTagGroupView: View {
   @State private var newTag: String = ""
   @State private var popupTagsPresented = false
   @Bindable private var tagGroup: TagGroup
+  @Bindable private var symbolSearchModel = TagGroup.SymbolSearchModel()
+  @State private var symbolQuery = ""
 
   private let onSaved: ((TagGroup) -> Void)?
   private let isNewGroup: Bool
@@ -79,7 +82,7 @@ struct EditTagGroupView: View {
         }
 
       HStack {
-        TextField("add-tag-groups.edit.icon.field", text: $tagGroup.symbolName, axis: .horizontal)
+        TextField("add-tag-groups.edit.icon.field", text: $symbolQuery, axis: .horizontal)
           .textInputAutocapitalization(.never)
           .autocorrectionDisabled()
           .focused($focusedField, equals: Focus.symbol)
@@ -87,7 +90,12 @@ struct EditTagGroupView: View {
             focusedField = Focus.new
           }
           .onChange(of: tagGroup.symbolName) {
-            popupTagsPresented = true
+            if !tagGroup.symbolName.isEmpty {
+              popupTagsPresented = true
+            }
+          }
+          .onChange(of: symbolQuery) {
+            symbolSearchModel.search(for: symbolQuery)
           }
 
         Image(systemName: tagGroup.symbolName)
@@ -176,28 +184,20 @@ struct EditTagGroupView: View {
 
   @ViewBuilder
   private var symbolsSuggestionView: some View {
-    if focusedField == .symbol, !tagGroup.symbolName.isEmpty {
-      let filteredMatches = allSymbols
-        .filter { $0.contains(tagGroup.symbolName) }
-      if !filteredMatches.isEmpty {
-        ScrollView(.horizontal, showsIndicators: false) {
-          LazyHStack {
-            ForEach(filteredMatches, id: \.self) { symbolName in
-              Button {
-                tagGroup.symbolName = symbolName
-              } label: {
-                Image(systemName: symbolName)
-              }
-            }
+    ScrollView(.horizontal, showsIndicators: false) {
+      LazyHStack {
+        ForEach(symbolSearchModel.results, id: \.self) { symbolName in
+          Button {
+            tagGroup.symbolName = symbolName
+          } label: {
+            Image(systemName: symbolName)
           }
-          .padding(.horizontal, .layoutPadding)
         }
-        .frame(height: 40)
-        .background(.ultraThinMaterial)
       }
-    } else {
-      EmptyView()
+      .padding(.horizontal, .layoutPadding)
     }
+    .frame(height: symbolSearchModel.results.isEmpty ? 0 : 40)
+    .background(.ultraThinMaterial)
   }
 }
 
@@ -205,9 +205,13 @@ struct AddTagGroupView_Previews: PreviewProvider {
   static var previews: some View {
     let container = try? ModelContainer(for: TagGroup.self, configurations: ModelConfiguration())
 
-    return EditTagGroupView()
-      .withEnvironments()
-      .modelContainer(container!)
+    // need to use `sheet` to show `symbolsSuggestionView`
+    return Text("parent view for EditTagGroupView")
+      .sheet(isPresented: .constant(true)) {
+        EditTagGroupView()
+          .withEnvironments()
+          .modelContainer(container!)
+      }
   }
 }
 
@@ -222,5 +226,37 @@ extension TagGroup {
   func format() {
     title = title.trimmingCharacters(in: .whitespacesAndNewlines)
     tags = tags.map { $0.lowercased() }
+  }
+
+  @Observable
+  final class SymbolSearchModel: Sendable {
+    private var currentQuery = ""
+    private(set) var results: [String] = []
+
+    private var task = Task<Void, Never> {}
+    func search(for query: String) {
+      task.cancel()
+      currentQuery = query
+
+      guard !query.isEmpty
+      else {
+        results = []
+        return
+      }
+
+      task = Task {
+        guard !Task.isCancelled,
+              query == self.currentQuery
+        else { return }
+
+        results = Self.allSymbols.filter { $0.contains(query) }
+      }
+    }
+
+    deinit { task.cancel() }
+
+    private static let allSymbols: [String] = SFSymbol.allSymbols.map { symbol in
+      symbol.rawValue
+    }
   }
 }
