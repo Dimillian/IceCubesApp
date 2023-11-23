@@ -131,6 +131,7 @@ struct EditTagGroupView: View {
           deleteTag(tag)
         }
       }
+
       HStack {
         // this condition is using to overcome a SwiftUI bug
         // "add new tag" `TextField` is not focused after adding the first tag
@@ -155,7 +156,7 @@ struct EditTagGroupView: View {
   }
 
   private func addNewTagTextField() -> some View {
-    return TextField("add-tag-groups.edit.tags.add", text: $newTag, axis: .horizontal)
+    TextField("add-tag-groups.edit.tags.add", text: $newTag, axis: .horizontal)
       .textInputAutocapitalization(.never)
       .autocorrectionDisabled()
       .onSubmit {
@@ -172,8 +173,12 @@ struct EditTagGroupView: View {
 
   // TODO: Show error and disable <Enter> for empty and duplicate tags
   private func addTag(_ tag: String) {
-    guard !tag.isEmpty else { return }
+    guard !tag.isEmpty,
+          !tagGroup.tags.contains(tag)
+    else { return }
+
     tagGroup.tags.append(tag)
+    tagGroup.tags.sort()
   }
 
   // TODO: make more sense to be a set
