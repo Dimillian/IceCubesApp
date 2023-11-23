@@ -17,7 +17,7 @@ struct EditTagGroupView: View {
 
   @State private var newTag: String = ""
   @State private var popupTagsPresented = false
-  @Bindable private var tagGroup: TagGroup
+  @State private var tagGroup: TagGroup
   @State private var symbolQuery = ""
   @State private var symbolSearchResult = [String]()
   @Query var tagGroups: [TagGroup]
@@ -33,8 +33,8 @@ struct EditTagGroupView: View {
     case new
   }
 
-  init(tagGroup: TagGroup = .emptyGroup, onSaved: ((TagGroup) -> Void)? = nil) {
-    self._tagGroup = Bindable(wrappedValue: tagGroup)
+  init(tagGroup: TagGroup = .emptyGroup(), onSaved: ((TagGroup) -> Void)? = nil) {
+    self._tagGroup = State(wrappedValue: tagGroup)
     self.onSaved = onSaved
     self.isNewGroup = tagGroup.title.isEmpty
   }
@@ -285,7 +285,9 @@ struct AddTagGroupView_Previews: PreviewProvider {
 }
 
 extension TagGroup {
-  static let emptyGroup = TagGroup(title: "", symbolName: "", tags: [])
+  static func emptyGroup() -> TagGroup {
+    TagGroup(title: "", symbolName: "", tags: [])
+  }
 
   var isValid: Bool {
     !title.isEmpty &&
