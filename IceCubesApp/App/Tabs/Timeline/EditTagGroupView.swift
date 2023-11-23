@@ -18,8 +18,8 @@ struct EditTagGroupView: View {
   @State private var newTag: String = ""
   @State private var popupTagsPresented = false
   @Bindable private var tagGroup: TagGroup
-  @Bindable private var symbolSearchModel = TagGroup.SymbolSearchModel()
   @State private var symbolQuery = ""
+  @State private var symbolSearchResult = [String]()
 
   private let onSaved: ((TagGroup) -> Void)?
   private let isNewGroup: Bool
@@ -85,19 +85,19 @@ struct EditTagGroupView: View {
             .autocorrectionDisabled()
             .focused($focusedField, equals: Focus.symbol)
             .onSubmit {
-              if TagGroup.SymbolSearchModel.allSymbols.contains(symbolQuery) {
+              if TagGroup.allSymbols.contains(symbolQuery) {
                 tagGroup.symbolName = symbolQuery
               }
               focusedField = Focus.new
             }
             .onChange(of: symbolQuery) {
-              symbolSearchModel.search(for: symbolQuery, exclude: tagGroup.symbolName)
+              symbolSearchResult = TagGroup.searchSymbol(for: symbolQuery, exclude: tagGroup.symbolName)
             }
             .onChange(of: focusedField) {
               symbolQuery = tagGroup.symbolName
             }
 
-            Image(systemName: tagGroup.symbolName)
+          Image(systemName: tagGroup.symbolName)
             .frame(height: 30)
         }
 
@@ -196,16 +196,21 @@ struct EditTagGroupView: View {
 
   @ViewBuilder
   private var symbolsSuggestionView: some View {
-    if symbolSearchModel.results.isEmpty {
-      Text("No Symbol Found")
-    } else if symbolQuery == tagGroup.symbolName && symbolSearchModel.results.count == 1 {
-      Text("\(symbolQuery)").bold().italic() + Text(" are already selected.")
+    if symbolSearchResult.isEmpty {
+      if symbolQuery == tagGroup.symbolName
+          && !symbolQuery.isEmpty
+          && symbolSearchResult.count == 0
+      {
+        Text("\(symbolQuery)").bold().italic() + Text(" are already selected.")
+      } else {
+        Text("No Symbol Found")
+      }
     } else {
       ScrollView(.horizontal, showsIndicators: false) {
         LazyHStack {
-          ForEach(symbolSearchModel.results, id: \.self) { symbolName in
+          ForEach(symbolSearchResult, id: \.self) { symbolName in
             Button {
-              symbolSearchModel.search(for: symbolQuery, exclude: symbolName)
+              symbolSearchResult = TagGroup.searchSymbol(for: symbolQuery, exclude: tagGroup.symbolName)
               tagGroup.symbolName = symbolName
             } label: {
               Image(systemName: symbolName)
@@ -213,10 +218,10 @@ struct EditTagGroupView: View {
             .buttonStyle(.plain)
           }
         }
-        .animation(.spring(duration: 0.2), value: symbolSearchModel.results)
+        .animation(.spring(duration: 0.2), value: symbolSearchResult)
       }
       .onAppear {
-        symbolSearchModel.search(for: symbolQuery, exclude: tagGroup.symbolName)
+        symbolSearchResult = TagGroup.searchSymbol(for: symbolQuery, exclude: tagGroup.symbolName)
       }
     }
   }
@@ -249,38 +254,16 @@ extension TagGroup {
     tags = tags.map { $0.lowercased() }
   }
 
-  @Observable
-  final class SymbolSearchModel: Sendable {
-    private var currentQuery = ""
-    private(set) var results: [String] = []
+  static func searchSymbol(for query: String, exclude excludedSymbol: String) -> [String] {
+    guard !query.isEmpty else { return [] }
 
-    private var task = Task<Void, Never> {}
-    func search(for query: String, exclude excludedSymbol: String) {
-      task.cancel()
-      currentQuery = query
-
-      guard !query.isEmpty
-      else {
-        results = []
-        return
-      }
-
-      task = Task {
-        guard !Task.isCancelled,
-              query == self.currentQuery
-        else { return }
-
-        results = Self.allSymbols.filter {
-          $0.contains(query) &&
-          $0 != excludedSymbol
-        }
-      }
+    return Self.allSymbols.filter {
+      $0.contains(query) &&
+      $0 != excludedSymbol
     }
+  }
 
-    deinit { task.cancel() }
-
-    static let allSymbols: [String] = SFSymbol.allSymbols.map { symbol in
-      symbol.rawValue
-    }
+  static let allSymbols: [String] = SFSymbol.allSymbols.map { symbol in
+    symbol.rawValue
   }
 }
