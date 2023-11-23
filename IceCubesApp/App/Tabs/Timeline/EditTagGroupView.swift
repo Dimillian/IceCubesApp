@@ -20,6 +20,7 @@ struct EditTagGroupView: View {
   @Bindable private var tagGroup: TagGroup
   @State private var symbolQuery = ""
   @State private var symbolSearchResult = [String]()
+  @Query var tagGroups: [TagGroup]
 
   private let onSaved: ((TagGroup) -> Void)?
   private let isNewGroup: Bool
@@ -72,13 +73,27 @@ struct EditTagGroupView: View {
   @ViewBuilder
   private var metadataSection: some View {
     Section {
-      TextField("add-tag-groups.edit.title.field", text: $tagGroup.title, axis: .horizontal)
-        .focused($focusedField, equals: Focus.title)
-        .onSubmit {
-          focusedField = Focus.symbol
-        }
+      VStack(alignment: .leading) {
+        TextField("add-tag-groups.edit.title.field", text: $tagGroup.title, axis: .horizontal)
+          .focused($focusedField, equals: Focus.title)
+          .onSubmit {
+            focusedField = Focus.symbol
+          }
 
-      VStack {
+        if focusedField == .title {
+          if tagGroup.title.isEmpty {
+            Text("Need a Non-Empty Title")
+              .font(.caption2)
+              .foregroundStyle(.red)
+          } else if tagGroups.contains(where: { $0.title == tagGroup.title }) {
+            Text("\(tagGroup.title) Already Exists")
+              .font(.caption2)
+              .foregroundStyle(.red)
+          }
+        }
+      }
+
+      VStack(alignment: .leading) {
         HStack {
           TextField("add-tag-groups.edit.icon.field", text: $symbolQuery, axis: .horizontal)
             .textInputAutocapitalization(.never)
@@ -99,6 +114,14 @@ struct EditTagGroupView: View {
 
           Image(systemName: tagGroup.symbolName)
             .frame(height: 30)
+        }
+
+        if tagGroup.symbolName.isEmpty,
+           focusedField == .symbol
+        {
+          Text("Need to Select a Symbol")
+            .font(.caption2)
+            .foregroundStyle(.red)
         }
 
         if focusedField == Focus.symbol {
@@ -141,8 +164,12 @@ struct EditTagGroupView: View {
           addNewTagTextField()
             .onAppear { focusedField = .new }
         }
+
         Spacer()
-        if !newTag.isEmpty {
+
+        if !newTag.isEmpty,
+           !tagGroup.tags.contains(newTag)
+        {
           Button {
             addNewTag()
           } label: {
@@ -156,13 +183,29 @@ struct EditTagGroupView: View {
   }
 
   private func addNewTagTextField() -> some View {
-    TextField("add-tag-groups.edit.tags.add", text: $newTag, axis: .horizontal)
-      .textInputAutocapitalization(.never)
-      .autocorrectionDisabled()
-      .onSubmit {
-        addNewTag()
+    VStack(alignment: .leading) {
+      TextField("add-tag-groups.edit.tags.add", text: $newTag, axis: .horizontal)
+        .textInputAutocapitalization(.never)
+        .autocorrectionDisabled()
+        .onSubmit {
+          addNewTag()
+        }
+        .focused($focusedField, equals: Focus.new)
+
+      if focusedField == .new {
+        if tagGroup.tags.count < 2 {
+          Text("Need at Least 2 Tags to Form a Group")
+            .font(.caption2)
+            .foregroundStyle(.red)
+        }
+        
+        if tagGroup.tags.contains(newTag) {
+          Text("Duplicated Tag")
+            .font(.caption2)
+            .foregroundStyle(.red)
+        }
       }
-      .focused($focusedField, equals: Focus.new)
+    }
   }
 
   private func addNewTag() {
@@ -246,7 +289,8 @@ extension TagGroup {
 
   var isValid: Bool {
     !title.isEmpty &&
-    tags.count >= 2 // At least have 2 tags, one main and one additional.
+    tags.count >= 2 && // At least have 2 tags, one main and one additional.
+    !symbolName.isEmpty
   }
 
   func format() {
