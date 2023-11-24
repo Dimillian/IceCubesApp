@@ -107,7 +107,7 @@ struct AddTagGroupView_Previews: PreviewProvider {
   }
 }
 
-struct TitleInputView: View {
+private struct TitleInputView: View {
   @Binding var title: String
   let titleValidationStatus: TagGroup.TitleValidationStatus
 
@@ -125,32 +125,32 @@ struct TitleInputView: View {
           focusedField = .symbol
         }
 
-      if focusedField == .title {
-        if case let .invalid(description) = titleValidationStatus {
-          Text(description)
-            .font(.caption)
-            .foregroundStyle(.red)
-        } else if
-          isNewGroup,
-          tagGroups.contains(where: { $0.title == title })
-        {
-          Text("\(title) Already Exists")
-            .font(.caption)
-            .foregroundStyle(.red)
-        }
+      if focusedField == .title, !warningText.isEmpty {
+        Text(warningText).warningLabel()
       }
     }
   }
+
+  var warningText: String {
+    if case let .invalid(description) = titleValidationStatus {
+      return description
+    } else if
+      isNewGroup,
+      tagGroups.contains(where: { $0.title == title })
+    {
+      return "\(title) already exists"
+    }
+    return ""
+  }
 }
 
-struct SymbolInputView: View {
+private struct SymbolInputView: View {
   @State private var symbolQuery = ""
 
   @Binding var selectedSymbol: String
   let selectedSymbolValidationStatus: TagGroup.SymbolNameValidationStatus
 
   @FocusState.Binding var focusedField: EditTagGroupView.Focus?
-
 
   var body: some View {
     VStack(alignment: .leading) {
@@ -176,9 +176,7 @@ struct SymbolInputView: View {
       if case let .invalid(description) = selectedSymbolValidationStatus,
          focusedField == .symbol
       {
-        Text(description)
-          .font(.caption)
-          .foregroundStyle(.red)
+        Text(description).warningLabel()
       }
 
       if focusedField == .symbol {
@@ -194,7 +192,7 @@ struct SymbolInputView: View {
   }
 }
 
-struct TagsInputView: View {
+private struct TagsInputView: View {
   @State private var newTag: String = ""
   @Binding var tags: [String]
   let tagsValidationStatus: TagGroup.TagsValidationStatus
@@ -206,11 +204,8 @@ struct TagsInputView: View {
       HStack {
         Text(tag)
         Spacer()
-        Button {
-          deleteTag(tag)
-        } label: {
-          Image(systemName: "trash")
-            .tint(.red)
+        Button { deleteTag(tag) } label: {
+          Image(systemName: "trash").tint(.red)
         }
       }
     }
@@ -236,29 +231,25 @@ struct TagsInputView: View {
 
         Spacer()
 
-        if !newTag.isEmpty,
-           !tags.contains(newTag)
-        {
-          Button {
-            addNewTag()
-          } label: {
-            Image(systemName: "checkmark.circle.fill")
-              .tint(.green)
+        if !newTag.isEmpty, !tags.contains(newTag) {
+          Button { addNewTag() } label: {
+            Image(systemName: "checkmark.circle.fill").tint(.green)
           }
         }
       }
 
-      if focusedField == .new {
-        if tags.contains(newTag) {
-          Text("duplicated tag")
-            .font(.caption)
-            .foregroundStyle(.red)
-        } else if case let .invalid(description) = tagsValidationStatus {
-          Text(description)
-            .font(.caption)
-            .foregroundStyle(.red)
-        }
+      if focusedField == .new, !warningText.isEmpty {
+        Text(warningText).warningLabel()
       }
+    }
+
+    var warningText: String {
+      if tags.contains(newTag) {
+        return "duplicated tag"
+      } else if case let .invalid(description) = tagsValidationStatus {
+        return description
+      }
+      return ""
     }
   }
 
@@ -280,7 +271,6 @@ struct TagsInputView: View {
     focusedField = .new
   }
 
-  // TODO: Show error and disable <Enter> for empty and duplicate tags
   private func addTag(_ tag: String) {
     guard !tag.isEmpty,
           !tags.contains(tag)
@@ -290,13 +280,12 @@ struct TagsInputView: View {
     tags.sort()
   }
 
-  // TODO: make more sense to be a set
   private func deleteTag(_ tag: String) {
     tags.removeAll(where: { $0 == tag })
   }
 }
 
-struct SymbolSearchResultsView: View {
+private struct SymbolSearchResultsView: View {
   @Binding var symbolQuery: String
   @Binding var selectedSymbol: String
   @State private var results: [String] = []
@@ -402,7 +391,6 @@ extension TagGroup {
     return .valid
   }
 
-
   // MARK: TagGroup validation
   var isValid: Bool {
     titleValidationStatus == .valid
@@ -432,5 +420,12 @@ extension TagGroup {
 
   static let allSymbols: [String] = SFSymbol.allSymbols.map { symbol in
     symbol.rawValue
+  }
+}
+
+extension Text {
+  func warningLabel() -> Text {
+    self.font(.caption)
+      .foregroundStyle(.red)
   }
 }
