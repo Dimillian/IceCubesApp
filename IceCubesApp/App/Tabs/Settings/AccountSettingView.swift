@@ -105,7 +105,7 @@ struct AccountSettingsView: View {
     .toolbar {
       ToolbarItem(placement: .principal) {
         HStack {
-          AvatarView(account: account, config: .embed)
+          AvatarView(account.avatar, config: .embed)
           Text(account.safeDisplayName)
             .font(.headline)
         }

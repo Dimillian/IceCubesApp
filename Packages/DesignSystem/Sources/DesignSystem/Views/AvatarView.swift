@@ -8,49 +8,13 @@ import Models
 public struct AvatarView: View {
   @Environment(Theme.self) private var theme
 
-  @State private var showPopup = false
-  @State private var autoDismiss = true
-  @State private var toggleTask: Task<Void, Never> = Task {}
-
-  public let account: Account?
+  public let avatar: URL?
   public let config: FrameConfig
-  public let hasPopup: Bool
 
   public var body: some View {
-    if let account = account {
-      if hasPopup {
-        AvatarImage(account: account, config: adaptiveConfig)
-          .frame(width: config.width, height: config.height)
-          .onHover { hovering in
-            if hovering {
-              toggleTask.cancel()
-              toggleTask = Task {
-                try? await Task.sleep(nanoseconds: NSEC_PER_SEC / 2)
-                guard !Task.isCancelled else { return }
-                if !showPopup {
-                  showPopup = true
-                }
-              }
-            } else {
-              if !showPopup {
-                toggleTask.cancel()
-              }
-            }
-          }
-          .hoverEffect(.lift)
-          .popover(isPresented: $showPopup) {
-            AccountPopupView(
-              account: account,
-              theme: theme,
-              showPopup: $showPopup,
-              autoDismiss: $autoDismiss,
-              toggleTask: $toggleTask
-            )
-          }
-      } else {
-        AvatarImage(account: account, config: adaptiveConfig)
-          .frame(width: config.width, height: config.height)
-      }
+    if let avatar {
+      AvatarImage(avatar, config: adaptiveConfig)
+        .frame(width: config.width, height: config.height)
     } else {
       AvatarPlaceHolder(config: adaptiveConfig)
     }
@@ -66,10 +30,9 @@ public struct AvatarView: View {
     return FrameConfig(width: config.width, height: config.height, cornerRadius: cornerRadius)
   }
 
-  public init(account: Account?, config: FrameConfig = FrameConfig.status, hasPopup: Bool = false) {
-    self.account = account
+  public init(_ avatar: URL? = nil, config: FrameConfig = .status) {
+    self.avatar = avatar
     self.config = config
-    self.hasPopup = hasPopup
   }
 
   public struct FrameConfig: Equatable {
@@ -110,7 +73,7 @@ struct PreviewWrapper: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      AvatarView(account: Self.account, config: .status)
+      AvatarView(Self.account.avatar)
         .environment(Theme.shared)
       Toggle("Avatar Shape", isOn: $isCircleAvatar)
     }
@@ -147,14 +110,14 @@ struct PreviewWrapper: View {
 struct AvatarImage: View {
   @Environment(\.redactionReasons) private var reasons
 
-  public let account: Account
+  public let avatar: URL
   public let config: AvatarView.FrameConfig
 
   var body: some View {
     if reasons == .placeholder {
       AvatarPlaceHolder(config: config)
     } else {
-      LazyImage(request: ImageRequest(url: account.avatar, processors: [.resize(size: config.size)])
+      LazyImage(request: ImageRequest(url: avatar, processors: [.resize(size: config.size)])
       ) { state in
         if let image = state.image {
           image
@@ -169,6 +132,11 @@ struct AvatarImage: View {
       }
     }
   }
+
+  init(_ avatar: URL, config: AvatarView.FrameConfig) {
+    self.avatar = avatar
+    self.config = config
+  }
 }
 
 struct AvatarPlaceHolder: View {
@@ -181,7 +149,7 @@ struct AvatarPlaceHolder: View {
   }
 }
 
-struct AccountPopupView: View {
+struct AccountPopoverView: View {
   let account: Account
   let theme: Theme // using `@Environment(Theme.self) will crash the SwiftUI preview
   private let config: AvatarView.FrameConfig = .account
@@ -204,7 +172,7 @@ struct AccountPopupView: View {
 
       VStack(alignment: .leading) {
         HStack(alignment: .bottomAvatar) {
-          AvatarImage(account: account, config: adaptiveConfig)
+          AvatarImage(account.avatar, config: adaptiveConfig)
           Spacer()
           makeCustomInfoLabel(title: "account.following", count: account.followingCount ?? 0)
           makeCustomInfoLabel(title: "account.posts", count: account.statusesCount ?? 0)
@@ -316,4 +284,54 @@ private enum BottomAvatarAlignment: AlignmentID {
 
 extension VerticalAlignment {
   static let bottomAvatar = VerticalAlignment(BottomAvatarAlignment.self)
+}
+
+public struct AccountPopoverModifier : ViewModifier {
+  @Environment(Theme.self) private var theme
+
+  @State private var showPopup = false
+  @State private var autoDismiss = true
+  @State private var toggleTask: Task<Void, Never> = Task {}
+
+  let account: Account
+
+  public func body(content: Content) -> some View {
+    content
+      .onHover { hovering in
+        if hovering {
+          toggleTask.cancel()
+          toggleTask = Task {
+            try? await Task.sleep(nanoseconds: NSEC_PER_SEC / 2)
+            guard !Task.isCancelled else { return }
+            if !showPopup {
+              showPopup = true
+            }
+          }
+        } else {
+          if !showPopup {
+            toggleTask.cancel()
+          }
+        }
+      }
+      .hoverEffect(.lift)
+      .popover(isPresented: $showPopup) {
+        AccountPopoverView(
+          account: account,
+          theme: theme,
+          showPopup: $showPopup,
+          autoDismiss: $autoDismiss,
+          toggleTask: $toggleTask
+        )
+      }
+  }
+
+  init(_ account: Account) {
+    self.account = account
+  }
+}
+
+extension View {
+  public func accountPopover(_ account: Account) -> some View {
+    modifier(AccountPopoverModifier(account))
+  }
 }

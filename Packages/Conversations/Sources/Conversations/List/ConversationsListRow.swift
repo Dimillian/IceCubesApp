@@ -24,7 +24,7 @@ struct ConversationsListRow: View {
     } label: {
       VStack(alignment: .leading) {
         HStack(alignment: .top, spacing: 8) {
-          AvatarView(account: conversation.accounts.first!)
+          AvatarView(conversation.accounts.first!.avatar)
             .accessibilityHidden(true)
           VStack(alignment: .leading, spacing: 4) {
             HStack {

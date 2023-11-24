@@ -35,7 +35,7 @@ public struct AppAccountView: View {
   private var compactView: some View {
     HStack {
       if let account = viewModel.account {
-        AvatarView(account: account)
+        AvatarView(account.avatar)
       } else {
         ProgressView()
       }
@@ -61,7 +61,7 @@ public struct AppAccountView: View {
       HStack {
         if let account = viewModel.account {
           ZStack(alignment: .topTrailing) {
-            AvatarView(account: account)
+            AvatarView(account.avatar)
             if viewModel.appAccount.id == appAccounts.currentAccount.id {
               Image(systemName: "checkmark.circle.fill")
                 .foregroundStyle(.white, .green)

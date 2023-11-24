@@ -30,7 +30,7 @@ public struct ListEditView: View {
           } else {
             ForEach(viewModel.accounts) { account in
               HStack {
-                AvatarView(account: account, config: .status)
+                AvatarView(account.avatar)
                 VStack(alignment: .leading) {
                   EmojiTextApp(.init(stringValue: account.safeDisplayName),
                                emojis: account.emojis)
