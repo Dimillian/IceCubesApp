@@ -9,6 +9,12 @@
             "value" : "  ⸱  "
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "  ⸱  "
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -55,6 +61,12 @@
             "value" : "#%@"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "#%@"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -95,6 +107,12 @@
             "value" : "%@©2023 Thomas Ricouard"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@©2023 Thomas Ricouard"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -129,6 +147,12 @@
     },
     "• [EmojiText](https://github.com/divadretlaw/EmojiText)\n\n• [HTML2Markdown](https://gitlab.com/mflint/HTML2Markdown)\n\n• [KeychainSwift](https://github.com/evgenyneu/keychain-swift)\n\n• [LRUCache](https://github.com/nicklockwood/LRUCache)\n\n• [Bodega](https://github.com/mergesort/Bodega)\n\n• [Nuke](https://github.com/kean/Nuke)\n\n• [SwiftSoup](https://github.com/scinfu/SwiftSoup.git)\n\n• [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible)\n\n• [OpenDyslexic](http://opendyslexic.org)\n\n• [SwiftUI-Introspect](https://github.com/siteline/SwiftUI-Introspect)\n\n• [RevenueCat](https://github.com/RevenueCat/purchases-ios)\n\n• [SFSafeSymbols](https://github.com/SFSafeSymbols/SFSafeSymbols)" : {
       "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " [EmojiText](https://github.com/divadretlaw/EmojiText)\n\n• [HTML2Markdown](https://gitlab.com/mflint/HTML2Markdown)\n\n• [KeychainSwift](https://github.com/evgenyneu/keychain-swift)\n\n• [LRUCache](https://github.com/nicklockwood/LRUCache)\n\n• [Bodega](https://github.com/mergesort/Bodega)\n\n• [Nuke](https://github.com/kean/Nuke)\n\n• [SwiftSoup](https://github.com/scinfu/SwiftSoup.git)\n\n• [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible)\n\n• [OpenDyslexic](http://opendyslexic.org)\n\n• [SwiftUI-Introspect](https://github.com/siteline/SwiftUI-Introspect)\n\n• [RevenueCat](https://github.com/RevenueCat/purchases-ios)\n\n• [SFSafeSymbols](https://github.com/SFSafeSymbols/SFSafeSymbols)"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5809,7 +5833,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scrolls to list."
+            "value" : "Scorri fino all'elenco."
           }
         },
         "ja" : {
@@ -8200,8 +8224,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Block %@"
+            "state" : "translated",
+            "value" : "Blocca %@"
           }
         },
         "ja" : {
@@ -8319,8 +8343,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Do you want to block this user?"
+            "state" : "translated",
+            "value" : "Vuoi bloccare questo utente?"
           }
         },
         "ja" : {
@@ -9506,7 +9530,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Privacy Settings"
+            "value" : "Impostazioni Privacy"
           }
         },
         "ja" : {
@@ -10101,7 +10125,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sblocca"
+            "value" : "Riattiva"
           }
         },
         "ja" : {
@@ -12801,7 +12825,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Warning: These settings are overwritten by the global content settings"
+            "value" : "Attenzione: queste impostazioni vengono sovrascritte dalle impostazioni globali"
           }
         },
         "ja" : {
@@ -19429,6 +19453,12 @@
             "value" : "DeepL API Free"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL API Free"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19476,6 +19506,12 @@
           }
         },
         "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL API Pro"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "DeepL API Pro"
@@ -22669,6 +22705,12 @@
             "value" : "Moyen"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medio"
+          }
+        },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23858,7 +23900,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mi dispiace ma la richiesta non ha prodotto risultati"
+            "value" : "Purtroppo richiesta non ha prodotto risultati, provane un'altra."
           }
         },
         "ja" : {
@@ -29049,6 +29091,12 @@
             "value" : "iPad"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iPad"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29090,6 +29138,12 @@
           }
         },
         "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iPhone"
+          }
+        },
+        "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "iPhone"
@@ -30249,7 +30303,7 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Nuovo post"
           }
         },
@@ -40764,7 +40818,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show Pending Button on the Left"
+            "value" : "Mostra il pulsante \"In sospeso\" a sinistra"
           }
         },
         "ja" : {
@@ -64740,7 +64794,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Solo ai follower"
+            "value" : "Solo follower"
           }
         },
         "ja" : {
@@ -64859,7 +64913,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "A tutti"
+            "value" : "Pubblico"
           }
         },
         "ja" : {
@@ -66041,7 +66095,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Trending"
+            "value" : "In tendenza"
           }
         },
         "ja" : {
@@ -68804,7 +68858,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Trending"
+            "value" : "In tendenza"
           }
         },
         "ja" : {
