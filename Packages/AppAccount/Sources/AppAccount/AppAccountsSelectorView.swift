@@ -73,9 +73,9 @@ public struct AppAccountsSelectorView: View {
   private var labelView: some View {
     Group {
       if let account = currentAccount.account, !currentAccount.isLoadingAccount {
-        AvatarView(account: account, config: avatarConfig)
+        AvatarView(account.avatar, config: avatarConfig)
       } else {
-        AvatarView(account: nil,  config: avatarConfig)
+        AvatarView(config: avatarConfig)
           .redacted(reason: .placeholder)
           .allowsHitTesting(false)
       }

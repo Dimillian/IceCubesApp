@@ -42,19 +42,22 @@ struct StatusRowHeaderView: View {
   private var accountView: some View {
     HStack(alignment: .center) {
       if theme.avatarPosition == .top {
-        AvatarView(account: viewModel.finalStatus.account, config: .status, hasPopup: true)
+        AvatarView(viewModel.finalStatus.account.avatar)
+          .accountPopover(viewModel.finalStatus.account)
       }
       VStack(alignment: .leading, spacing: 2) {
         HStack(alignment: .firstTextBaseline, spacing: 2) {
           Group {
             EmojiTextApp(.init(stringValue: viewModel.finalStatus.account.safeDisplayName),
                          emojis: viewModel.finalStatus.account.emojis)
-              .font(.scaledSubheadline)
-              .foregroundColor(theme.labelColor)
-              .emojiSize(Font.scaledSubheadlineFont.emojiSize)
-              .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
-              .fontWeight(.semibold)
-              .lineLimit(1)
+            .font(.scaledSubheadline)
+            .foregroundColor(theme.labelColor)
+            .emojiSize(Font.scaledSubheadlineFont.emojiSize)
+            .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
+            .fontWeight(.semibold)
+            .lineLimit(1)
+            .accountPopover(viewModel.finalStatus.account)
+
             accountBadgeView
               .font(.footnote)
           }
@@ -69,6 +72,7 @@ struct StatusRowHeaderView: View {
               .font(.scaledFootnote)
               .foregroundColor(.gray)
               .lineLimit(1)
+              .accountPopover(viewModel.finalStatus.account)
           }
         }
         if theme.avatarPosition == .top {
@@ -82,6 +86,7 @@ struct StatusRowHeaderView: View {
             .foregroundColor(.gray)
             .lineLimit(1)
             .offset(y: 1)
+            .accountPopover(viewModel.finalStatus.account)
         }
       }
     }

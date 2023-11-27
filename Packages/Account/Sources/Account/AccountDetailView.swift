@@ -214,7 +214,7 @@ public struct AccountDetailView: View {
               Button {
                 routerPath.navigate(to: .accountDetailWithAccount(account: account))
               } label: {
-                AvatarView(account: account, config: .badge)
+                AvatarView(account.avatar, config: .badge)
                   .padding(.leading, -4)
                   .accessibilityLabel(account.safeDisplayName)
 

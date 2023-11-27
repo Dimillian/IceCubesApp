@@ -248,7 +248,7 @@ public struct StatusEditorView: View {
                                   accountCreationEnabled: false,
                                   avatarConfig: .status)
         } else {
-          AvatarView(account: account, config: AvatarView.FrameConfig.status)
+          AvatarView(account.avatar, config: AvatarView.FrameConfig.status)
             .environment(theme)
             .accessibilityHidden(true)
         }
