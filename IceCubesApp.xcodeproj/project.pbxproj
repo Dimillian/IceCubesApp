@@ -329,6 +329,14 @@
 			path = Plurals;
 			sourceTree = "<group>";
 		};
+		9F0811402B14869F0020F85E /* TagGroup */ = {
+			isa = PBXGroup;
+			children = (
+				FA31A9AA2A66BF7C00D5F662 /* EditTagGroupView.swift */,
+			);
+			path = TagGroup;
+			sourceTree = "<group>";
+		};
 		9F2A5417296AB631009B2D7C /* IceCubesNotifications */ = {
 			isa = PBXGroup;
 			children = (
@@ -375,7 +383,6 @@
 			children = (
 				9F398AB229360A4C00A889F2 /* TimelineTab.swift */,
 				9F7335F12967608F00AFF0BA /* AddRemoteTimelineView.swift */,
-				FA31A9AA2A66BF7C00D5F662 /* EditTagGroupView.swift */,
 			);
 			path = Timeline;
 			sourceTree = "<group>";
@@ -412,6 +419,7 @@
 		9FAE4AC9293783A200772766 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				9F0811402B14869F0020F85E /* TagGroup */,
 				9F7335F02967607A00AFF0BA /* Timeline */,
 				9FE151A4293C90EA00E9683D /* Settings */,
 				9F35DB4629506F6600B3281A /* NotificationTab.swift */,
