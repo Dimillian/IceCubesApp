@@ -1,0 +1,436 @@
+import Combine
+import DesignSystem
+import Env
+import Models
+import Network
+import NukeUI
+import Shimmer
+import SwiftUI
+import SwiftData
+import SFSafeSymbols
+
+@MainActor
+struct EditTagGroupView: View {
+  @Environment(\.dismiss) private var dismiss
+  @Environment(\.modelContext) private var context
+  @Environment(Theme.self) private var theme
+
+  @State private var tagGroup: TagGroup
+
+  private let onSaved: ((TagGroup) -> Void)?
+  private let isNewGroup: Bool
+
+  @FocusState private var focusedField: Focus?
+
+  var body: some View {
+    NavigationStack {
+      Form {
+        Section {
+          TitleInputView(
+            title: $tagGroup.title,
+            titleValidationStatus: tagGroup.titleValidationStatus,
+            focusedField: $focusedField,
+            isNewGroup: isNewGroup
+          )
+
+          SymbolInputView(
+            selectedSymbol: $tagGroup.symbolName,
+            selectedSymbolValidationStatus: tagGroup.symbolNameValidationStatus,
+            focusedField: $focusedField
+          )
+        }
+        .listRowBackground(theme.primaryBackgroundColor)
+
+        Section("add-tag-groups.edit.tags") {
+          TagsInputView(
+            tags: $tagGroup.tags,
+            tagsValidationStatus: tagGroup.tagsValidationStatus,
+            focusedField: $focusedField
+          )
+        }
+        .listRowBackground(theme.primaryBackgroundColor)
+      }
+      .formStyle(.grouped)
+      .navigationTitle(
+        isNewGroup
+        ? "timeline.filter.add-tag-groups"
+        : "timeline.filter.edit-tag-groups"
+      )
+      .navigationBarTitleDisplayMode(.inline)
+      .scrollContentBackground(.hidden)
+      .background(theme.secondaryBackgroundColor)
+      .scrollDismissesKeyboard(.immediately)
+      .toolbar {
+        ToolbarItem(placement: .navigationBarLeading) {
+          Button("action.cancel", action: { dismiss() })
+        }
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button("action.save", action: { save() })
+            .disabled(!tagGroup.isValid)
+        }
+      }
+      .onAppear {
+        focusedField = .title
+      }
+    }
+  }
+
+  init(tagGroup: TagGroup = .emptyGroup(), onSaved: ((TagGroup) -> Void)? = nil) {
+    self._tagGroup = State(wrappedValue: tagGroup)
+    self.onSaved = onSaved
+    self.isNewGroup = tagGroup.title.isEmpty
+  }
+
+  private func save() {
+    tagGroup.format()
+    context.insert(tagGroup)
+    onSaved?(tagGroup)
+
+    dismiss()
+  }
+
+  enum Focus {
+    case title
+    case symbol
+    case new
+  }
+}
+
+struct AddTagGroupView_Previews: PreviewProvider {
+  static var previews: some View {
+    let container = try? ModelContainer(for: TagGroup.self, configurations: ModelConfiguration())
+
+    // need to use `sheet` to show `symbolsSuggestionView` in preview
+    return Text("parent view for EditTagGroupView")
+      .sheet(isPresented: .constant(true)) {
+        EditTagGroupView()
+          .withEnvironments()
+          .modelContainer(container!)
+      }
+  }
+}
+
+private struct TitleInputView: View {
+  @Binding var title: String
+  let titleValidationStatus: TagGroup.TitleValidationStatus
+
+  @FocusState.Binding var focusedField: EditTagGroupView.Focus?
+
+  @Query var tagGroups: [TagGroup]
+
+  let isNewGroup: Bool
+
+  var body: some View {
+    VStack(alignment: .leading) {
+      TextField("add-tag-groups.edit.title.field", text: $title, axis: .horizontal)
+        .focused($focusedField, equals: .title)
+        .onSubmit {
+          focusedField = .symbol
+        }
+
+      if focusedField == .title, !warningText.isEmpty {
+        Text(warningText).warningLabel()
+      }
+    }
+  }
+
+  var warningText: String {
+    if case let .invalid(description) = titleValidationStatus {
+      return description
+    } else if
+      isNewGroup,
+      tagGroups.contains(where: { $0.title == title })
+    {
+      return "\(title) already exists"
+    }
+    return ""
+  }
+}
+
+private struct SymbolInputView: View {
+  @State private var symbolQuery = ""
+
+  @Binding var selectedSymbol: String
+  let selectedSymbolValidationStatus: TagGroup.SymbolNameValidationStatus
+
+  @FocusState.Binding var focusedField: EditTagGroupView.Focus?
+
+  var body: some View {
+    VStack(alignment: .leading) {
+      HStack {
+        TextField("add-tag-groups.edit.icon.field", text: $symbolQuery, axis: .horizontal)
+          .textInputAutocapitalization(.never)
+          .autocorrectionDisabled()
+          .focused($focusedField, equals: .symbol)
+          .onSubmit {
+            if TagGroup.allSymbols.contains(symbolQuery) {
+              selectedSymbol = symbolQuery
+            }
+            focusedField = .new
+          }
+          .onChange(of: focusedField) {
+            symbolQuery = selectedSymbol
+          }
+
+        Image(systemName: selectedSymbol)
+          .frame(height: 30)
+      }
+
+      if case let .invalid(description) = selectedSymbolValidationStatus,
+         focusedField == .symbol
+      {
+        Text(description).warningLabel()
+      }
+
+      if focusedField == .symbol {
+        SymbolSearchResultsView(
+          symbolQuery: $symbolQuery,
+          selectedSymbol: $selectedSymbol,
+          focusedField: $focusedField
+        )
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(height: 40)
+      }
+    }
+  }
+}
+
+private struct TagsInputView: View {
+  @State private var newTag: String = ""
+  @Binding var tags: [String]
+  let tagsValidationStatus: TagGroup.TagsValidationStatus
+
+  @FocusState.Binding var focusedField: EditTagGroupView.Focus?
+
+  var body: some View {
+    ForEach(tags, id: \.self) { tag in
+      HStack {
+        Text(tag)
+        Spacer()
+        Button { deleteTag(tag) } label: {
+          Image(systemName: "trash")
+            .foregroundStyle(.red)
+        }
+        .buttonStyle(.plain)
+      }
+    }
+    .onDelete { indexes in
+      if let index = indexes.first {
+        let tag = tags[index]
+        deleteTag(tag)
+      }
+    }
+
+    // this `VStack` need to be here to overcome a SwiftUI bug
+    // "add new tag" `TextField` is not focused after adding the first tag
+    VStack(alignment: .leading) {
+      HStack {
+        // this condition is using to overcome a SwiftUI bug
+        // "add new tag" `TextField` is not focused after adding the first tag
+        if tags.isEmpty {
+          addNewTagTextField()
+        } else {
+          addNewTagTextField()
+            .onAppear { focusedField = .new }
+        }
+
+        Spacer()
+
+        if !newTag.isEmpty, !tags.contains(newTag) {
+          Button { addNewTag() } label: {
+            Image(systemName: "checkmark.circle.fill").tint(.green)
+          }
+        }
+      }
+
+      if focusedField == .new, !warningText.isEmpty {
+        Text(warningText).warningLabel()
+      }
+    }
+
+    var warningText: String {
+      if tags.contains(newTag) {
+        return "duplicated tag"
+      } else if case let .invalid(description) = tagsValidationStatus {
+        return description
+      }
+      return ""
+    }
+  }
+
+  private func addNewTagTextField() -> some View {
+    VStack(alignment: .leading) {
+      TextField("add-tag-groups.edit.tags.add", text: $newTag, axis: .horizontal)
+        .textInputAutocapitalization(.never)
+        .autocorrectionDisabled()
+        .onSubmit {
+          addNewTag()
+        }
+        .focused($focusedField, equals: .new)
+    }
+  }
+
+  private func addNewTag() {
+    addTag(newTag.trimmingCharacters(in: .whitespaces).lowercased())
+    newTag = ""
+    focusedField = .new
+  }
+
+  private func addTag(_ tag: String) {
+    guard !tag.isEmpty,
+          !tags.contains(tag)
+    else { return }
+
+    tags.append(tag)
+    tags.sort()
+  }
+
+  private func deleteTag(_ tag: String) {
+    tags.removeAll(where: { $0 == tag })
+  }
+}
+
+private struct SymbolSearchResultsView: View {
+  @Binding var symbolQuery: String
+  @Binding var selectedSymbol: String
+  @State private var results: [String] = []
+
+  @FocusState.Binding var focusedField: EditTagGroupView.Focus?
+
+  var body: some View {
+    Group {
+      switch validationStatus {
+      case .valid:
+        ScrollView(.horizontal, showsIndicators: false) {
+          LazyHStack {
+            ForEach(results, id: \.self) { name in
+              Button {
+                results = TagGroup.searchSymbol(for: symbolQuery, exclude: selectedSymbol)
+                selectedSymbol = name
+                symbolQuery = name
+                focusedField = .new
+              } label: {
+                Image(systemName: name)
+              }
+              .buttonStyle(.plain)
+            }
+          }
+          .animation(.spring(duration: 0.2), value: results)
+        }
+        .onAppear {
+          results = TagGroup.searchSymbol(for: symbolQuery, exclude: selectedSymbol)
+        }
+      case .invalid(let description):
+        Text(description)
+          .font(.subheadline)
+          .foregroundStyle(.secondary)
+      }
+    }
+    .onAppear {
+      results = TagGroup.searchSymbol(for: symbolQuery, exclude: selectedSymbol)
+    }
+    .onChange(of: symbolQuery) {
+      results = TagGroup.searchSymbol(for: symbolQuery, exclude: selectedSymbol)
+    }
+  }
+
+  // MARK: search results validation
+  enum ValidationStatus: Equatable {
+    case valid
+    case invalid(description: String)
+  }
+
+  var validationStatus: ValidationStatus {
+    if results.isEmpty {
+      if symbolQuery == selectedSymbol
+          && !symbolQuery.isEmpty
+          && results.count == 0
+      {
+        return .invalid(description: "\(symbolQuery) is already selected")
+      } else {
+        return .invalid(description: "No Symbol Found")
+      }
+    } else {
+      return .valid
+    }
+  }
+}
+
+extension TagGroup {
+  // MARK: title validation
+  enum TitleValidationStatus: Equatable {
+    case valid
+    case invalid(description: String)
+  }
+
+  var titleValidationStatus: TitleValidationStatus {
+    title.isEmpty ? .invalid(description: "title is empty") : .valid
+  }
+
+  // MARK: symbolName validation
+  enum SymbolNameValidationStatus: Equatable {
+    case valid
+    case invalid(description: String)
+  }
+
+  var symbolNameValidationStatus: SymbolNameValidationStatus {
+    if symbolName.isEmpty {
+      return .invalid(description: "no symbol is selected yet")
+    } else if !Self.allSymbols.contains(symbolName) {
+      return .invalid(description: "\(symbolName) is not a valid FSSymbol name")
+    }
+
+    return .valid
+  }
+
+  // MARK: tags validation
+  enum TagsValidationStatus: Equatable {
+    case valid
+    case invalid(description: String)
+  }
+
+  var tagsValidationStatus: TagsValidationStatus {
+    if tags.count < 2 {
+      return .invalid(description: "the number of tags is smaller than 2")
+    }
+    return .valid
+  }
+
+  // MARK: TagGroup validation
+  var isValid: Bool {
+    titleValidationStatus == .valid
+    && symbolNameValidationStatus == .valid
+    && tagsValidationStatus == .valid
+  }
+
+  // MARK: format
+  func format() {
+    title = title.trimmingCharacters(in: .whitespacesAndNewlines)
+    tags = tags.map { $0.lowercased() }
+  }
+
+  // MARK: static members
+  static func emptyGroup() -> TagGroup {
+    TagGroup(title: "", symbolName: "", tags: [])
+  }
+
+  static func searchSymbol(for query: String, exclude excludedSymbol: String) -> [String] {
+    guard !query.isEmpty else { return [] }
+
+    return Self.allSymbols.filter {
+      $0.contains(query) &&
+      $0 != excludedSymbol
+    }
+  }
+
+  static let allSymbols: [String] = SFSymbol.allSymbols.map { symbol in
+    symbol.rawValue
+  }
+}
+
+extension Text {
+  func warningLabel() -> Text {
+    self.font(.caption)
+      .foregroundStyle(.red)
+  }
+}
