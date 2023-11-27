@@ -39,6 +39,7 @@ struct EditTagGroupView: View {
             focusedField: $focusedField
           )
         }
+        .listRowBackground(theme.primaryBackgroundColor)
 
         Section("add-tag-groups.edit.tags") {
           TagsInputView(
@@ -47,6 +48,7 @@ struct EditTagGroupView: View {
             focusedField: $focusedField
           )
         }
+        .listRowBackground(theme.primaryBackgroundColor)
       }
       .formStyle(.grouped)
       .navigationTitle(
@@ -55,6 +57,7 @@ struct EditTagGroupView: View {
         : "timeline.filter.edit-tag-groups"
       )
       .navigationBarTitleDisplayMode(.inline)
+      .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
       .scrollDismissesKeyboard(.immediately)
       .toolbar {
@@ -205,8 +208,10 @@ private struct TagsInputView: View {
         Text(tag)
         Spacer()
         Button { deleteTag(tag) } label: {
-          Image(systemName: "trash").tint(.red)
+          Image(systemName: "trash")
+            .foregroundStyle(.red)
         }
+        .buttonStyle(.plain)
       }
     }
     .onDelete { indexes in

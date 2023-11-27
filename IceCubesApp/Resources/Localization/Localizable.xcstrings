@@ -34681,6 +34681,9 @@
         }
       }
     },
+    "parent view for EditTagGroupView" : {
+
+    },
     "placeholder.loading.long" : {
       "localizations" : {
         "be" : {
