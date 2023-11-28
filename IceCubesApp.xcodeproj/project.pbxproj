@@ -322,13 +322,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7429BCEA297C64CF0069A946 /* Plurals */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Plurals;
-			sourceTree = "<group>";
-		};
 		9F0811402B14869F0020F85E /* TagGroup */ = {
 			isa = PBXGroup;
 			children = (
@@ -531,7 +524,6 @@
 		E9B576C029743F2A00BCE646 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
-				7429BCEA297C64CF0069A946 /* Plurals */,
 				9F38A7322ACEA26100DBCD66 /* Localizable.xcstrings */,
 			);
 			path = Localization;
