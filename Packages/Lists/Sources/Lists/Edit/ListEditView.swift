@@ -163,6 +163,7 @@ public struct ListEditView: View {
             Text("@\(account.acct)")
               .foregroundColor(.gray)
               .font(.scaledFootnote)
+              .lineLimit(1)
           }
         }
       }.onDelete { indexes in

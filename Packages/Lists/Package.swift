@@ -16,6 +16,7 @@ let package = Package(
     ),
   ],
   dependencies: [
+    .package(name: "Account", path: "../Account"),
     .package(name: "Network", path: "../Network"),
     .package(name: "Models", path: "../Models"),
     .package(name: "Env", path: "../Env"),
