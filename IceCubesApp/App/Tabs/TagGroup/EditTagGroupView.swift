@@ -128,20 +128,20 @@ private struct TitleInputView: View {
           focusedField = .symbol
         }
 
-      if focusedField == .title, !warningText.isEmpty {
+      if focusedField == .title, warningText != "" {
         Text(warningText).warningLabel()
       }
     }
   }
 
-  var warningText: String {
+  var warningText: LocalizedStringKey {
     if case let .invalid(description) = titleValidationStatus {
       return description
     } else if
       isNewGroup,
       tagGroups.contains(where: { $0.title == title })
     {
-      return "\(title) already exists"
+      return "\(title) add-tag-groups.edit.title.field.warning.already-exists"
     }
     return ""
   }
@@ -243,14 +243,14 @@ private struct TagsInputView: View {
         }
       }
 
-      if focusedField == .new, !warningText.isEmpty {
+      if focusedField == .new, warningText != "" {
         Text(warningText).warningLabel()
       }
     }
 
-    var warningText: String {
+    var warningText: LocalizedStringKey {
       if tags.contains(newTag) {
-        return "duplicated tag"
+        return "add-tag-groups.edit.tags.field.warning.duplicated-tag"
       } else if case let .invalid(description) = tagsValidationStatus {
         return description
       }
@@ -337,7 +337,7 @@ private struct SymbolSearchResultsView: View {
   // MARK: search results validation
   enum ValidationStatus: Equatable {
     case valid
-    case invalid(description: String)
+    case invalid(description: LocalizedStringKey)
   }
 
   var validationStatus: ValidationStatus {
@@ -346,9 +346,9 @@ private struct SymbolSearchResultsView: View {
           && !symbolQuery.isEmpty
           && results.count == 0
       {
-        return .invalid(description: "\(symbolQuery) is already selected")
+        return .invalid(description: "\(symbolQuery) add-tag-groups.edit.tags.field.warning.search-results.already-selected")
       } else {
-        return .invalid(description: "No Symbol Found")
+        return .invalid(description: "add-tag-groups.edit.tags.field.warning.search-results.no-symbol-found")
       }
     } else {
       return .valid
@@ -360,24 +360,26 @@ extension TagGroup {
   // MARK: title validation
   enum TitleValidationStatus: Equatable {
     case valid
-    case invalid(description: String)
+    case invalid(description: LocalizedStringKey)
   }
 
   var titleValidationStatus: TitleValidationStatus {
-    title.isEmpty ? .invalid(description: "title is empty") : .valid
+    title.isEmpty
+    ? .invalid(description: "add-tag-groups.edit.title.field.warning.empty-title")
+    : .valid
   }
 
   // MARK: symbolName validation
   enum SymbolNameValidationStatus: Equatable {
     case valid
-    case invalid(description: String)
+    case invalid(description: LocalizedStringKey)
   }
 
   var symbolNameValidationStatus: SymbolNameValidationStatus {
     if symbolName.isEmpty {
-      return .invalid(description: "no symbol is selected yet")
+      return .invalid(description: "add-tag-groups.edit.title.field.warning.no-symbol-selected")
     } else if !Self.allSymbols.contains(symbolName) {
-      return .invalid(description: "\(symbolName) is not a valid FSSymbol name")
+      return .invalid(description: "\(symbolName) add-tag-groups.edit.title.field.warning.invalid-sfsymbol-name")
     }
 
     return .valid
@@ -386,12 +388,12 @@ extension TagGroup {
   // MARK: tags validation
   enum TagsValidationStatus: Equatable {
     case valid
-    case invalid(description: String)
+    case invalid(description: LocalizedStringKey)
   }
 
   var tagsValidationStatus: TagsValidationStatus {
     if tags.count < 2 {
-      return .invalid(description: "the number of tags is smaller than 2")
+      return .invalid(description: "add-tag-groups.edit.tags.field.warning.number-of-tags")
     }
     return .valid
   }

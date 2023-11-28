@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
     "  ⸱  " : {
       "localizations" : {
         "be" : {
@@ -221,6 +224,36 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "#%@"
+          }
+        }
+      }
+    },
+    "%@ add-tag-groups.edit.tags.field.warning.search-results.already-selected" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ is already selected"
+          }
+        }
+      }
+    },
+    "%@ add-tag-groups.edit.title.field.warning.already-exists" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ already exists"
+          }
+        }
+      }
+    },
+    "%@ add-tag-groups.edit.title.field.warning.invalid-sfsymbol-name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ is an invalid SFSymbol name"
           }
         }
       }
@@ -17930,6 +17963,36 @@
         }
       }
     },
+    "add-tag-groups.edit.tags.field.warning.duplicated-tag" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Duplicated tag"
+          }
+        }
+      }
+    },
+    "add-tag-groups.edit.tags.field.warning.number-of-tags" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Number of tags is less than 2"
+          }
+        }
+      }
+    },
+    "add-tag-groups.edit.tags.field.warning.search-results.no-symbol-found" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Symbol Found"
+          }
+        }
+      }
+    },
     "add-tag-groups.edit.title.field" : {
       "comment" : "MARK: Tag Groups",
       "localizations" : {
@@ -18045,6 +18108,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "標籤組名稱"
+          }
+        }
+      }
+    },
+    "add-tag-groups.edit.title.field.warning.empty-title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Empty title"
+          }
+        }
+      }
+    },
+    "add-tag-groups.edit.title.field.warning.no-symbol-selected" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No symbol is selected"
           }
         }
       }
