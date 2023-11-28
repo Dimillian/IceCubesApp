@@ -26,6 +26,7 @@ let package = Package(
     .target(
       name: "Lists",
       dependencies: [
+        .product(name: "Account", package: "Account"),
         .product(name: "Network", package: "Network"),
         .product(name: "Models", package: "Models"),
         .product(name: "Env", package: "Env"),
