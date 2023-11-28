@@ -258,7 +258,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is already selected"
+            "value" : "%@ ist bereits ausgewählt"
           }
         },
         "en" : {
@@ -376,7 +376,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ already exists"
+            "value" : "%@ existiert bereits"
           }
         },
         "en" : {
@@ -18317,7 +18317,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Duplicated tag"
+            "value" : "Doppelter Tag"
           }
         },
         "en" : {
@@ -18435,7 +18435,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Number of tags is less than 2"
+            "value" : "Die Anzahl der Tags ist kleiner als 2"
           }
         },
         "en" : {
@@ -18553,7 +18553,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Symbol Found"
+            "value" : "Kein Symbol gefunden"
           }
         },
         "en" : {
@@ -18790,7 +18790,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Empty title"
+            "value" : "Leerer Titel"
           }
         },
         "en" : {
@@ -18908,7 +18908,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No symbol is selected"
+            "value" : "Kein Symbol ist ausgewählt"
           }
         },
         "en" : {
@@ -20918,7 +20918,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%#@count_posts@ von %#@count_participants@"
+            "value" : "%lld Beiträge von %lld"
           },
           "substitutions" : {
             "count_participants" : {
@@ -20928,7 +20928,7 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg Teilnehmenden"
+                      "value" : "%arg Teilnehmendem"
                     }
                   },
                   "other" : {
@@ -30663,7 +30663,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hide these posts from home"
+            "value" : "Diese Beiträge auf der Startseite verstecken"
           }
         },
         "en" : {
@@ -30782,7 +30782,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show replies to"
+            "value" : "Zeige Antworten auf"
           }
         },
         "en" : {
@@ -30901,7 +30901,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Title"
+            "value" : "Titel"
           }
         },
         "en" : {
@@ -31020,7 +31020,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Any followed user"
+            "value" : "Irgendein gefolgter Nutzer"
           }
         },
         "en" : {
@@ -31258,7 +31258,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No one"
+            "value" : "Niemand"
           }
         },
         "en" : {
@@ -37168,7 +37168,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "parent view for EditTagGroupView"
+            "value" : "Elternansicht für EditTagGroupView"
           }
         },
         "en-GB" : {
@@ -65033,7 +65033,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%#@count_votes@ von %#@count_voters@"
+            "value" : "%lld von %lld"
           },
           "substitutions" : {
             "count_voters" : {
@@ -65043,7 +65043,7 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg Teilnehmenden"
+                      "value" : "%arg Teilnehmendem"
                     }
                   },
                   "other" : {
