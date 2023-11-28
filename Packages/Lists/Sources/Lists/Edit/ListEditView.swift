@@ -18,7 +18,29 @@ public struct ListEditView: View {
 
   public var body: some View {
     NavigationStack {
-      List {
+      Form {
+        Section("lists.edit.settings") {
+          TextField("list.edit.title", text: $viewModel.title) {
+            Task {  await viewModel.update() }
+          }
+          Picker("list.edit.repliesPolicy",
+                 selection: $viewModel.repliesPolicy) {
+            ForEach(Models.List.RepliesPolicy.allCases) { policy in
+              Text(policy.title)
+                .tag(policy)
+            }
+          }
+          Toggle("list.edit.isExclusive", isOn: $viewModel.isExclusive)
+        }
+        .listRowBackground(theme.primaryBackgroundColor)
+        .disabled(viewModel.isUpdating)
+        .onChange(of: viewModel.repliesPolicy) { _, _ in
+          Task { await viewModel.update() }
+        }
+        .onChange(of: viewModel.isExclusive) { _, _ in
+          Task { await viewModel.update() }
+        }
+        
         Section("lists.edit.users-in-list") {
           if viewModel.isLoadingAccounts {
             HStack {
@@ -26,7 +48,6 @@ public struct ListEditView: View {
               ProgressView()
               Spacer()
             }
-            .listRowBackground(theme.primaryBackgroundColor)
           } else {
             ForEach(viewModel.accounts) { account in
               HStack {
@@ -41,7 +62,6 @@ public struct ListEditView: View {
                     .font(.scaledFootnote)
                 }
               }
-              .listRowBackground(theme.primaryBackgroundColor)
             }.onDelete { indexes in
               if let index = indexes.first {
                 Task {
@@ -52,6 +72,7 @@ public struct ListEditView: View {
             }
           }
         }
+        .listRowBackground(theme.primaryBackgroundColor)
       }
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)

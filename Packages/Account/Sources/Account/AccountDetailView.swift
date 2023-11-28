@@ -22,8 +22,6 @@ public struct AccountDetailView: View {
 
   @State private var viewModel: AccountDetailViewModel
   @State private var isCurrentUser: Bool = false
-  @State private var isCreateListAlertPresented: Bool = false
-  @State private var createListTitle: String = ""
   @State private var showBlockConfirmation: Bool = false
 
   @State private var isEditingAccount: Bool = false
@@ -262,7 +260,7 @@ public struct AccountDetailView: View {
         }
       }
       Button("account.list.create") {
-        isCreateListAlertPresented = true
+        routerPath.presentedSheet = .listCreate
       }
       .tint(theme.tintColor)
       .buttonStyle(.borderless)
@@ -270,23 +268,6 @@ public struct AccountDetailView: View {
     }
     .task {
       await currentAccount.fetchLists()
-    }
-    .alert("account.list.create", isPresented: $isCreateListAlertPresented) {
-      TextField("account.list.name", text: $createListTitle)
-      Button("action.cancel") {
-        isCreateListAlertPresented = false
-        createListTitle = ""
-      }
-      Button("account.list.create.confirm") {
-        guard !createListTitle.isEmpty else { return }
-        isCreateListAlertPresented = false
-        Task {
-          await currentAccount.createList(title: createListTitle)
-          createListTitle = ""
-        }
-      }
-    } message: {
-      Text("account.list.create.description")
     }
   }
 

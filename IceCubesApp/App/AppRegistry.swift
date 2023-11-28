@@ -82,6 +82,9 @@ extension View {
       case let .mentionStatusEditor(account, visibility):
         StatusEditorView(mode: .mention(account: account, visibility: visibility))
           .withEnvironments()
+      case .listCreate:
+        ListCreateView()
+          .withEnvironments()
       case let .listEdit(list):
         ListEditView(list: list)
           .withEnvironments()
