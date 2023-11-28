@@ -3,6 +3,7 @@ import EmojiText
 import Models
 import Network
 import SwiftUI
+import Account
 
 @MainActor
 public struct ListEditView: View {
@@ -42,38 +43,28 @@ public struct ListEditView: View {
         }
         
         Section("lists.edit.users-in-list") {
-          if viewModel.isLoadingAccounts {
-            HStack {
-              Spacer()
-              ProgressView()
-              Spacer()
-            }
-          } else {
-            ForEach(viewModel.accounts) { account in
-              HStack {
-                AvatarView(account.avatar)
-                VStack(alignment: .leading) {
-                  EmojiTextApp(.init(stringValue: account.safeDisplayName),
-                               emojis: account.emojis)
-                    .emojiSize(Font.scaledBodyFont.emojiSize)
-                    .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
-                  Text("@\(account.acct)")
-                    .foregroundColor(.gray)
-                    .font(.scaledFootnote)
-                }
-              }
-            }.onDelete { indexes in
-              if let index = indexes.first {
-                Task {
-                  let account = viewModel.accounts[index]
-                  await viewModel.delete(account: account)
-                }
+          HStack {
+            TextField("lists.edit.users-search",
+                      text: $viewModel.searchUserQuery)
+            if !viewModel.searchUserQuery.isEmpty {
+              Button {
+                viewModel.searchUserQuery = ""
+              } label: {
+                Image(systemName: "xmark.circle")
               }
             }
           }
+          .id("stableId")
+          if !viewModel.searchUserQuery.isEmpty {
+            searchAccountsView
+          } else {
+            listAccountsView
+          }
         }
         .listRowBackground(theme.primaryBackgroundColor)
+        .disabled(viewModel.isUpdating)
       }
+      .scrollDismissesKeyboard(.immediately)
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
       .toolbar {
@@ -91,6 +82,98 @@ public struct ListEditView: View {
           await viewModel.fetchAccounts()
         }
       }
+      .task(id: viewModel.searchUserQuery) {
+        do {
+          viewModel.isSearching = true
+          try await Task.sleep(for: .milliseconds(150))
+          await viewModel.searchUsers()
+        } catch {}
+      }
     }
   }
+  
+  private var loadingView: some View {
+    HStack {
+      Spacer()
+      ProgressView()
+      Spacer()
+    }
+    .id(UUID())
+  }
+  
+  @ViewBuilder
+  private var searchAccountsView: some View {
+    if viewModel.isSearching {
+      loadingView
+    } else {
+      ForEach(viewModel.searchedAccounts) { account in
+        HStack {
+          AvatarView(account.avatar)
+          VStack(alignment: .leading) {
+            EmojiTextApp(.init(stringValue: account.safeDisplayName),
+                         emojis: account.emojis)
+              .emojiSize(Font.scaledBodyFont.emojiSize)
+              .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
+            Text("@\(account.acct)")
+              .foregroundColor(.gray)
+              .font(.scaledFootnote)
+              .lineLimit(1)
+          }
+          Spacer()
+          if let relationship = viewModel.searchedRelationships[account.id] {
+            if relationship.following {
+              Toggle("", isOn: .init(get: {
+                viewModel.accounts.contains(where: { $0.id == account.id })
+              }, set: { addedToList in
+                Task {
+                  if addedToList {
+                    await viewModel.add(account: account)
+                  } else {
+                    await viewModel.delete(account: account)
+                  }
+                }
+              }))
+            } else {
+              FollowButton(viewModel: .init(accountId: account.id,
+                                            relationship: relationship,
+                                            shouldDisplayNotify: false,
+                                            relationshipUpdated: { relationship in
+                viewModel.searchedRelationships[account.id] = relationship
+              }))
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  @ViewBuilder
+  private var listAccountsView: some View {
+    if viewModel.isLoadingAccounts {
+      loadingView
+    } else {
+      ForEach(viewModel.accounts) { account in
+        HStack {
+          AvatarView(account.avatar)
+          VStack(alignment: .leading) {
+            EmojiTextApp(.init(stringValue: account.safeDisplayName),
+                         emojis: account.emojis)
+              .emojiSize(Font.scaledBodyFont.emojiSize)
+              .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
+            Text("@\(account.acct)")
+              .foregroundColor(.gray)
+              .font(.scaledFootnote)
+          }
+        }
+      }.onDelete { indexes in
+        if let index = indexes.first {
+          Task {
+            let account = viewModel.accounts[index]
+            await viewModel.delete(account: account)
+          }
+        }
+      }
+    }
+  }
+  
 }

@@ -19,6 +19,11 @@ import Env
   var isExclusive: Bool
   
   var isUpdating: Bool = false
+  
+  var searchUserQuery: String = ""
+  var searchedAccounts: [Account] = []
+  var searchedRelationships: [String: Relationship] = [:]
+  var isSearching: Bool = false
 
   init(list: Models.List) {
     self.list = list
@@ -58,14 +63,51 @@ import Env
     }
   }
   
+  func add(account: Account) async {
+    guard let client else { return }
+    do {
+      isUpdating = true
+      let response = try await client.post(endpoint: Lists.updateAccounts(listId: list.id, accounts: [account.id]))
+      if response?.statusCode == 200 {
+        accounts.append(account)
+      }
+      isUpdating = false
+    } catch {
+      isUpdating = false
+    }
+  }
+  
   func delete(account: Account) async {
     guard let client else { return }
     do {
+      isUpdating = true
       let response = try await client.delete(endpoint: Lists.updateAccounts(listId: list.id, accounts: [account.id]))
       if response?.statusCode == 200 {
         accounts.removeAll(where: { $0.id == account.id })
       }
-    } catch {}
+      isUpdating = false
+    } catch {
+      isUpdating = false
+    }
+  }
+  
+  func searchUsers() async {
+    guard let client, !searchUserQuery.isEmpty else { return }
+    do {
+      isSearching = true
+      let results: SearchResults = try await client.get(endpoint: Search.search(query: searchUserQuery,
+                                                                                type: nil,
+                                                                                offset: nil,
+                                                                                following: nil),
+                                                        forceVersion: .v2)
+      let relationships: [Relationship] =
+        try await client.get(endpoint: Accounts.relationships(ids: results.accounts.map(\.id)))
+      searchedRelationships = relationships.reduce(into: [String: Relationship]()) {
+        $0[$1.id] = $1
+      }
+      searchedAccounts = results.accounts
+      isSearching = false
+    } catch { }
   }
 }
 
