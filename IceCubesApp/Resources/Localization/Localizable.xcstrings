@@ -14,6 +14,12 @@
             "state" : "translated",
             "value" : ""
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
         }
       }
     },
@@ -348,7 +354,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is already selected"
+            "value" : "已选择：%@"
           }
         },
         "zh-Hant" : {
@@ -466,7 +472,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ already exists"
+            "value" : "%@ 已存在"
           }
         },
         "zh-Hant" : {
@@ -584,7 +590,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is an invalid SFSymbol name"
+            "value" : "%@ 是无效的 SFSymbol 名称"
           }
         },
         "zh-Hant" : {
@@ -18171,7 +18177,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "将标签添加到组"
+            "value" : "添加标签"
           }
         },
         "zh-Hant" : {
@@ -18407,7 +18413,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Duplicated tag"
+            "value" : "重复标签"
           }
         },
         "zh-Hant" : {
@@ -18525,7 +18531,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Number of tags is less than 2"
+            "value" : "少于两个标签"
           }
         },
         "zh-Hant" : {
@@ -18643,7 +18649,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Symbol Found"
+            "value" : "未找到任何图标"
           }
         },
         "zh-Hant" : {
@@ -18880,7 +18886,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Empty title"
+            "value" : "未输入标签组名称"
           }
         },
         "zh-Hant" : {
@@ -18998,7 +19004,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No symbol is selected"
+            "value" : "未选择标签组图标"
           }
         },
         "zh-Hant" : {
@@ -23398,7 +23404,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "显示所有"
+            "value" : "全部粉丝"
           }
         },
         "zh-Hant" : {
@@ -30753,7 +30759,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hide these posts from home"
+            "value" : "不在主页显示这些嘟文"
           }
         },
         "zh-Hant" : {
@@ -30872,7 +30878,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show replies to"
+            "value" : "显示用户回复"
           }
         },
         "zh-Hant" : {
@@ -30991,7 +30997,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Title"
+            "value" : "列表名称"
           }
         },
         "zh-Hant" : {
@@ -31110,7 +31116,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Any followed user"
+            "value" : "全部粉丝"
           }
         },
         "zh-Hant" : {
@@ -31229,7 +31235,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Members of the list"
+            "value" : "仅列表成员"
           }
         },
         "zh-Hant" : {
@@ -31348,7 +31354,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No one"
+            "value" : "无"
           }
         },
         "zh-Hant" : {
@@ -31825,7 +31831,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "List settings"
+            "value" : "列表设置"
           }
         },
         "zh-Hant" : {
@@ -32063,7 +32069,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Search users"
+            "value" : "搜索用户"
           }
         },
         "zh-Hant" : {
