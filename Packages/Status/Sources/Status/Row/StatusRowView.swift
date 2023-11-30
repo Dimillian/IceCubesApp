@@ -34,11 +34,12 @@ public struct StatusRowView: View {
     HStack(spacing: 0) {
       if !isCompact {
         HStack(spacing: 3) {
-          ForEach(0..<indentationLevel, id: \.self) {_ in
+          ForEach(0..<indentationLevel, id: \.self) { level in
             Rectangle()
               .fill(theme.tintColor)
               .frame(width: 2)
               .accessibilityHidden(true)
+              .opacity((indentationLevel == level + 1) ? 1 : 0.15)
           }
         }
         if indentationLevel > 0 {
