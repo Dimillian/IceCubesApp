@@ -28,8 +28,8 @@ import Env
   init(list: Models.List) {
     self.list = list
     self.title = list.title
-    self.repliesPolicy = list.repliesPolicy
-    self.isExclusive = list.exclusive
+    self.repliesPolicy = list.repliesPolicy ?? .list
+    self.isExclusive = list.exclusive ?? false
   }
 
   func fetchAccounts() async {
@@ -54,8 +54,8 @@ import Env
                                                                      exclusive: isExclusive ))
       self.list = list
       self.title = list.title
-      self.repliesPolicy = list.repliesPolicy
-      self.isExclusive = list.exclusive
+      self.repliesPolicy = list.repliesPolicy ?? .list
+      self.isExclusive = list.exclusive ?? false
       self.isUpdating = false
       await CurrentAccount.shared.fetchLists()
     } catch {
