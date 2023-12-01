@@ -53,6 +53,8 @@ import SwiftUI
     @AppStorage("collapse-long-posts") public var collapseLongPosts = true
 
     @AppStorage("share-button-behavior") public var shareButtonBehavior: PreferredShareButtonBehavior = .linkAndText
+    
+    @AppStorage("fast_refresh") public var fastRefreshEnabled: Bool = false
 
     init() {}
   }
@@ -289,6 +291,12 @@ import SwiftUI
       storage.shareButtonBehavior = shareButtonBehavior
     }
   }
+  
+  public var fastRefreshEnabled: Bool {
+    didSet {
+      storage.fastRefreshEnabled = fastRefreshEnabled
+    }
+  }
 
   public enum SwipeActionsIconStyle: String, CaseIterable {
     case iconWithText, iconOnly
@@ -455,5 +463,6 @@ import SwiftUI
     shareButtonBehavior = storage.shareButtonBehavior
     pendingShownAtBottom = storage.pendingShownAtBottom
     pendingShownLeft = storage.pendingShownLeft
+    fastRefreshEnabled = storage.fastRefreshEnabled
   }
 }
