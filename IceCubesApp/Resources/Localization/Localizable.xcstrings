@@ -15,6 +15,12 @@
             "value" : ""
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -312,7 +318,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is already selected"
+            "value" : "이름이 %@인 SF Symbol을 이미 선택했습니다."
           }
         },
         "nb" : {
@@ -430,7 +436,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ already exists"
+            "value" : "이름이 %@인 태그 모음이 이미 있습니다."
           }
         },
         "nb" : {
@@ -548,7 +554,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is an invalid SFSymbol name"
+            "value" : "이름이 %@인 SF Symbol이 없습니다."
           }
         },
         "nb" : {
@@ -13477,7 +13483,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Warning: These settings are overwritten by the global content settings"
+            "value" : "주의하세요: 콘텐츠 설정이 이 설정을 덮어쓰고 있기 때문에 이 설정은 적용되지 않습니다."
           }
         },
         "nb" : {
@@ -17899,7 +17905,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "View 오류"
+            "value" : "오류"
           }
         },
         "nb" : {
@@ -18371,7 +18377,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Duplicated tag"
+            "value" : "이미 추가된 태그입니다."
           }
         },
         "nb" : {
@@ -18489,7 +18495,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Number of tags is less than 2"
+            "value" : "태그 모음에는 2개 이상의 태그가 포함되어야 합니다."
           }
         },
         "nb" : {
@@ -18607,7 +18613,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Symbol Found"
+            "value" : "아이콘 검색 결과가 없습니다."
           }
         },
         "nb" : {
@@ -18844,7 +18850,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Empty title"
+            "value" : "태그 모음의 이름을 입력해주세요."
           }
         },
         "nb" : {
@@ -18962,7 +18968,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No symbol is selected"
+            "value" : "아이콘을 선택해주세요."
           }
         },
         "nb" : {
@@ -30717,7 +30723,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hide these posts from home"
+            "value" : "홈 타임라인에서 이 리스트의 글 숨김"
           }
         },
         "nb" : {
@@ -30836,7 +30842,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show replies to"
+            "value" : "이 리스트에 있는 사용자가 남긴 답글 표시"
           }
         },
         "nb" : {
@@ -30955,7 +30961,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Title"
+            "value" : "이름"
           }
         },
         "nb" : {
@@ -31074,7 +31080,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Any followed user"
+            "value" : "이 리스트의 다른 사용자나 내가 팔로우한 사용자에게 남긴 답글까지"
           }
         },
         "nb" : {
@@ -31193,7 +31199,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Members of the list"
+            "value" : "이 리스트의 다른 사용자에게 남긴 답글까지"
           }
         },
         "nb" : {
@@ -31312,7 +31318,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No one"
+            "value" : "다른 사용자에게 남긴 답글 표시 안 함"
           }
         },
         "nb" : {
@@ -31789,7 +31795,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "List settings"
+            "value" : "리스트 설정"
           }
         },
         "nb" : {
@@ -32027,7 +32033,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Search users"
+            "value" : "사용자 검색"
           }
         },
         "nb" : {
