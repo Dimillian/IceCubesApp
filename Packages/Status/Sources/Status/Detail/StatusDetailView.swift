@@ -66,6 +66,7 @@ public struct StatusDetailView: View {
             errorView
           }
         }
+        .listRowSpacing(0)
         .environment(\.defaultMinListRowHeight, 1)
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
@@ -126,10 +127,6 @@ public struct StatusDetailView: View {
         }
         .id(status.id)
         .listRowBackground(viewModel.highlightRowColor)
-        .listRowInsets(.init(top: 12,
-                             leading: .layoutPadding,
-                             bottom: 12,
-                             trailing: .layoutPadding))
     }
   }
 

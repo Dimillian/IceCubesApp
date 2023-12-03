@@ -56,6 +56,7 @@ public struct TimelineView: View {
           }
         }
         .id(client.id)
+        .listRowSpacing(0)
         .environment(\.defaultMinListRowHeight, 1)
         .listStyle(.plain)
         .scrollContentBackground(.hidden)

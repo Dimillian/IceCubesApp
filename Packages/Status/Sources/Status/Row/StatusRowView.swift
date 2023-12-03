@@ -112,8 +112,13 @@ public struct StatusRowView: View {
             }
           }
         }
+
+        Divider()
       }
+      .padding(.top, 12)
     }
+    .listRowInsets(.init(top: 0, leading: .layoutPadding, bottom: 0, trailing: .layoutPadding))
+    .listRowSeparator(.hidden)
     .onAppear {
       viewModel.markSeen()
       if reasons.isEmpty {
@@ -145,10 +150,6 @@ public struct StatusRowView: View {
       }
     }
     .listRowBackground(viewModel.highlightRowColor)
-    .listRowInsets(.init(top: 12,
-                         leading: .layoutPadding,
-                         bottom: 12,
-                         trailing: .layoutPadding))
     .accessibilityElement(children: isFocused ? .contain : .combine)
     .accessibilityLabel(isFocused == false && accessibilityVoiceOverEnabled
       ? CombinedAccessibilityLabel(viewModel: viewModel).finalLabel() : Text(""))
