@@ -47215,8 +47215,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh"
+            "state" : "translated",
+            "value" : "Schnelles Aktualisieren"
           }
         },
         "en" : {
