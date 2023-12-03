@@ -6,7 +6,7 @@
 	<string>development</string>
 	<key>com.apple.developer.icloud-container-identifiers</key>
 	<array>
-		<string>iCloud.icecubesapp</string>
+		<string>iCloud.$(BUNDLE_ID_PREFIX).IceCubesApp</string>
 	</array>
 	<key>com.apple.developer.icloud-services</key>
 	<array>
