@@ -121,6 +121,7 @@ public struct StatusRowView: View {
       }
       .padding(.top, 12)
     }
+    .listRowSeparator(showInnerSeparator ? .hidden : .visible)
     .listRowInsets(.init(top: 0, leading: .layoutPadding, bottom: 0, trailing: .layoutPadding))
     .onAppear {
       viewModel.markSeen()

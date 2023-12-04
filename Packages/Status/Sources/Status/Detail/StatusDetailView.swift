@@ -112,7 +112,6 @@ public struct StatusDetailView: View {
       let isFocused = self.viewModel.statusId == status.id
 
       StatusRowView(viewModel: viewModel, showInnerSeparator: true)
-        .listRowSeparator(.hidden)
         .environment(\.extraLeadingInset, !isCompact ? extraInsets : 0)
         .environment(\.indentationLevel, !isCompact ? indentationLevel : 0)
         .environment(\.isStatusFocused, isFocused)
