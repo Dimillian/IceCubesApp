@@ -61788,8 +61788,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "🤖 Generate description"
+            "state" : "translated",
+            "value" : "🤖 Beschreibung erzeugen"
           }
         },
         "en" : {
