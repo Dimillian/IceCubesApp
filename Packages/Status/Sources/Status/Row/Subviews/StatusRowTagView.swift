@@ -7,14 +7,13 @@ struct StatusRowTagView: View {
   let viewModel: StatusRowViewModel
 
   var body: some View {
-    Group {
-      if let tag = viewModel.finalStatus.content.links.first(where: { $0.type == .hashtag}),
-         currentAccount.tags.contains(where: { $0.name.lowercased() == tag.title.lowercased() }) {
-        Text("#\(tag.title)")
-      }
+    if let tag = viewModel.finalStatus.content.links.first(where: { link in
+      link.type == .hashtag && currentAccount.tags.contains(where: { $0.name.lowercased() == link.title.lowercased() })
+    }) {
+      Text("#\(tag.title)")
+        .font(.scaledFootnote)
+        .foregroundColor(.gray)
+        .fontWeight(.semibold)
     }
-    .font(.scaledFootnote)
-    .foregroundColor(.gray)
-    .fontWeight(.semibold)
   }
 }
