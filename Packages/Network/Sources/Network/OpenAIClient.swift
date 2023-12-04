@@ -96,7 +96,7 @@ public struct OpenAIClient {
       case let .emphasize(input):
         ChatRequest(content: "Make this text catchy, more fun: \(input)", temperature: 1)
       case let .imageDescription(image):
-        VisionRequest(messages: [.init(content: [.init(type: "text", text: "What’s in this image?", imageUrl: nil)
+        VisionRequest(messages: [.init(content: [.init(type: "text", text: "What’s in this image? Be brief, it's for image alt description on a social network. Don't write in the first person.", imageUrl: nil)
                                                  , .init(type: "image_url", text: nil, imageUrl: .init(url: image))])])
       }
     }
