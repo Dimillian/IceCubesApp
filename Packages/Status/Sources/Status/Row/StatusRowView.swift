@@ -22,8 +22,11 @@ public struct StatusRowView: View {
 
   @State private var viewModel: StatusRowViewModel
 
-  public init(viewModel: StatusRowViewModel) {
-    _viewModel = .init(initialValue: viewModel)
+  let showInnerSeparator: Bool
+
+  public init(viewModel: StatusRowViewModel, showInnerSeparator: Bool = false) {
+    self._viewModel = .init(initialValue: viewModel)
+    self.showInnerSeparator = showInnerSeparator
   }
 
   var contextMenu: some View {
@@ -109,16 +112,16 @@ public struct StatusRowView: View {
                   StatusRowDetailView(viewModel: viewModel)
                 }
               }
+              .padding(.bottom, 12)
             }
           }
         }
 
-        Divider()
+        if showInnerSeparator { Divider() }
       }
       .padding(.top, 12)
     }
     .listRowInsets(.init(top: 0, leading: .layoutPadding, bottom: 0, trailing: .layoutPadding))
-    .listRowSeparator(.hidden)
     .onAppear {
       viewModel.markSeen()
       if reasons.isEmpty {

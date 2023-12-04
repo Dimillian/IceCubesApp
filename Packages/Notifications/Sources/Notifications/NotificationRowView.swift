@@ -209,3 +209,46 @@ struct NotificationRowView: View {
     }
   }
 }
+
+#Preview {
+  List {
+    NotificationRowView(
+      notification: ConsolidatedNotification.placeholder(),
+      client: Client(server: "server", version: Client.Version.v2, oauthToken: nil),
+      routerPath: RouterPath(),
+      followRequests: CurrentAccount.shared.followRequests
+    )
+    .listRowInsets(.init(top: 12,
+                         leading: .layoutPadding + 4,
+                         bottom: 0,
+                         trailing: .layoutPadding))
+
+    NotificationRowView(
+      notification: ConsolidatedNotification.mentionPlaceholder(),
+      client: Client(server: "server", version: Client.Version.v2, oauthToken: nil),
+      routerPath: RouterPath(),
+      followRequests: CurrentAccount.shared.followRequests
+    )
+    .listRowInsets(.init(top: 12,
+                         leading: .layoutPadding + 4,
+                         bottom: 0,
+                         trailing: .layoutPadding))
+
+    NotificationRowView(
+      notification: ConsolidatedNotification.mentionPlaceholder(),
+      client: Client(server: "server", version: Client.Version.v2, oauthToken: nil),
+      routerPath: RouterPath(),
+      followRequests: CurrentAccount.shared.followRequests
+    )
+    .listRowInsets(.init(top: 12,
+                         leading: .layoutPadding + 4,
+                         bottom: 0,
+                         trailing: .layoutPadding))
+  }
+  .listRowSpacing(0)
+  .environment(CurrentAccount.shared)
+  .environment(UserPreferences.shared)
+  .environment(Theme.shared)
+  .environment(PushNotificationsService.shared)
+  .environment(QuickLook.shared)
+}

@@ -31,6 +31,7 @@ public struct NotificationsListView: View {
         notificationsView
       }
       .id(account.account?.id)
+      .listRowSpacing(0)
       .environment(\.defaultMinListRowHeight, 1)
       .listStyle(.plain)
       .onChange(of: scrollToTopSignal) {
@@ -128,7 +129,7 @@ public struct NotificationsListView: View {
                             followRequests: account.followRequests)
           .listRowInsets(.init(top: 12,
                                leading: .layoutPadding + 4,
-                               bottom: 12,
+                               bottom: 0,
                                trailing: .layoutPadding))
           .listRowBackground(theme.primaryBackgroundColor)
           .redacted(reason: .placeholder)
@@ -148,13 +149,13 @@ public struct NotificationsListView: View {
                               client: client,
                               routerPath: routerPath,
                               followRequests: account.followRequests)
-            .listRowInsets(.init(top: 12,
-                                 leading: .layoutPadding + 4,
-                                 bottom: 12,
-                                 trailing: .layoutPadding))
-            .listRowBackground(notification.type == .mention && lockedType != .mention ?
-              theme.secondaryBackgroundColor : theme.primaryBackgroundColor)
-            .id(notification.id)
+          .listRowInsets(.init(top: 12,
+                               leading: .layoutPadding + 4,
+                               bottom: 0,
+                               trailing: .layoutPadding))
+          .listRowBackground(notification.type == .mention && lockedType != .mention ?
+                             theme.secondaryBackgroundColor : theme.primaryBackgroundColor)
+          .id(notification.id)
         }
       }
 

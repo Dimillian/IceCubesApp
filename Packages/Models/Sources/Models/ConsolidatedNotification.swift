@@ -37,6 +37,14 @@ public struct ConsolidatedNotification: Identifiable {
           status: .placeholder())
   }
 
+  public static func mentionPlaceholder() -> ConsolidatedNotification {
+    .init(notifications: [Notification.placeholder()],
+          type: .mention,
+          createdAt: ServerDate(),
+          accounts: [.placeholder()],
+          status: .placeholder())
+  }
+
   public static func placeholders() -> [ConsolidatedNotification] {
     [.placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder()]
   }
