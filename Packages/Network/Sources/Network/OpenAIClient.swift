@@ -2,6 +2,13 @@ import Foundation
 
 protocol OpenAIRequest: Encodable {
   var path: String { get }
+  var model: String { get }
+}
+
+extension OpenAIRequest {
+  var path: String {
+    "chat/completions"
+  }
 }
 
 public struct OpenAIClient {
@@ -42,14 +49,30 @@ public struct OpenAIClient {
 
     let temperature: CGFloat
 
-    var path: String {
-      "chat/completions"
-    }
-
     public init(content: String, temperature: CGFloat) {
       messages = [.init(content: content)]
       self.temperature = temperature
     }
+  }
+  
+  public struct VisionRequest: OpenAIRequest {
+    public struct Message: Encodable {
+      public struct MessageContent: Encodable {
+        public struct ImageUrl: Encodable {
+          public let url: URL
+        }
+        public let type: String
+        public let text: String?
+        public let imageUrl: ImageUrl?
+      }
+      
+      public let role = "user"
+      public let content: [MessageContent]
+    }
+
+    let model = "gpt-4-vision-preview"
+    let messages: [Message]
+    let maxTokens = 50
   }
 
   public enum Prompt {
@@ -58,6 +81,7 @@ public struct OpenAIClient {
     case emphasize(input: String)
     case addTags(input: String)
     case insertTags(input: String)
+    case imageDescription(image: URL)
 
     var request: OpenAIRequest {
       switch self {
@@ -71,6 +95,9 @@ public struct OpenAIClient {
         ChatRequest(content: "Make a shorter version of this text: \(input)", temperature: 0.5)
       case let .emphasize(input):
         ChatRequest(content: "Make this text catchy, more fun: \(input)", temperature: 1)
+      case let .imageDescription(image):
+        VisionRequest(messages: [.init(content: [.init(type: "text", text: "What’s in this image?", imageUrl: nil)
+                                                 , .init(type: "image_url", text: nil, imageUrl: .init(url: image))])])
       }
     }
   }

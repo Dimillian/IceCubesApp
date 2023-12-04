@@ -3,11 +3,14 @@ import Env
 import Models
 import Shimmer
 import SwiftUI
+import Network
 
 struct StatusEditorMediaEditView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(Theme.self) private var theme
   @Environment(CurrentInstance.self) private var currentInstance
+  @Environment(UserPreferences.self) private var preferences
+  
   var viewModel: StatusEditorViewModel
   let container: StatusEditorMediaContainer
 
@@ -17,6 +20,7 @@ struct StatusEditorMediaEditView: View {
   @State private var isUpdating: Bool = false
 
   @State private var didAppear: Bool = false
+  @State private var isGeneratingDescription: Bool = false
 
   var body: some View {
     NavigationStack {
@@ -26,6 +30,23 @@ struct StatusEditorMediaEditView: View {
                     text: $imageDescription,
                     axis: .vertical)
             .focused($isFieldFocused)
+          if let url = container.mediaAttachment?.url, preferences.isOpenAIEnabled {
+            Button {
+              isGeneratingDescription = true
+              Task {
+                let client = OpenAIClient()
+                let response = try await client.request(.imageDescription(image: url))
+                imageDescription = response.trimmedText
+                isGeneratingDescription = false
+              }
+            } label: {
+              if isGeneratingDescription {
+                ProgressView()
+              } else {
+                Text("status.editor.media.generate-description")
+              }
+            }
+          }
         }
         .listRowBackground(theme.primaryBackgroundColor)
         Section {
