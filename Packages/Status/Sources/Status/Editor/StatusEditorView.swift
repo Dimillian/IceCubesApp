@@ -256,7 +256,7 @@ public struct StatusEditorView: View {
           privacyMenu
           Text("@\(account.acct)@\(appAccounts.currentClient.server)")
             .font(.scaledFootnote)
-            .foregroundColor(.gray)
+            .foregroundStyle(.secondary)
         }
         Spacer()
       }

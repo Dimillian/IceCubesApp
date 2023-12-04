@@ -59,7 +59,7 @@ struct StatusEditorAutoCompleteView: View {
             .foregroundColor(theme.tintColor)
           Text("tag.suggested.mentions-\(tag.totalUses)")
             .font(.scaledCaption)
-            .foregroundColor(.gray)
+            .foregroundStyle(.secondary)
         }
       }
     }

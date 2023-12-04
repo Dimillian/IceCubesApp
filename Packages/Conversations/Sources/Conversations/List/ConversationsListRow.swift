@@ -104,7 +104,7 @@ struct ConversationsListRow: View {
       }
     }
     .padding(.leading, 48)
-    .foregroundColor(.gray)
+    .foregroundStyle(.secondary)
   }
 
   @ViewBuilder

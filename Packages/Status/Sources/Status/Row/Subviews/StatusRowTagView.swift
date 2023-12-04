@@ -12,7 +12,7 @@ struct StatusRowTagView: View {
     }) {
       Text("#\(tag.title)")
         .font(.scaledFootnote)
-        .foregroundColor(.gray)
+        .foregroundStyle(.secondary)
         .fontWeight(.semibold)
     }
   }

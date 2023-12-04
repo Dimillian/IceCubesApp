@@ -115,7 +115,7 @@ public struct ListEditView: View {
               .emojiSize(Font.scaledBodyFont.emojiSize)
               .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
             Text("@\(account.acct)")
-              .foregroundColor(.gray)
+              .foregroundStyle(.secondary)
               .font(.scaledFootnote)
               .lineLimit(1)
           }
@@ -161,7 +161,7 @@ public struct ListEditView: View {
               .emojiSize(Font.scaledBodyFont.emojiSize)
               .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
             Text("@\(account.acct)")
-              .foregroundColor(.gray)
+              .foregroundStyle(.secondary)
               .font(.scaledFootnote)
               .lineLimit(1)
           }

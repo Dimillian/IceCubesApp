@@ -65,12 +65,12 @@ struct StatusRowHeaderView: View {
           if theme.avatarPosition == .leading {
             dateView
               .font(.scaledFootnote)
-              .foregroundColor(.gray)
+              .foregroundStyle(.secondary)
               .lineLimit(1)
           } else {
             Text("@\(theme.displayFullUsername ? viewModel.finalStatus.account.acct : viewModel.finalStatus.account.username)")
               .font(.scaledFootnote)
-              .foregroundColor(.gray)
+              .foregroundStyle(.secondary)
               .lineLimit(1)
               .accountPopover(viewModel.finalStatus.account)
           }
@@ -78,12 +78,12 @@ struct StatusRowHeaderView: View {
         if theme.avatarPosition == .top {
           dateView
             .font(.scaledFootnote)
-            .foregroundColor(.gray)
+            .foregroundStyle(.secondary)
             .lineLimit(1)
         } else if theme.displayFullUsername, theme.avatarPosition == .leading {
           Text("@\(viewModel.finalStatus.account.acct)")
             .font(.scaledFootnote)
-            .foregroundColor(.gray)
+            .foregroundStyle(.secondary)
             .lineLimit(1)
             .offset(y: 1)
             .accountPopover(viewModel.finalStatus.account)
@@ -114,7 +114,7 @@ struct StatusRowHeaderView: View {
         .resizable()
         .aspectRatio(contentMode: .fit)
         .frame(width: 15)
-        .foregroundColor(.gray)
+        .foregroundStyle(.secondary)
     }
   }
 
@@ -131,7 +131,7 @@ struct StatusRowHeaderView: View {
         .frame(width: 40, height: 40)
     }
     .menuStyle(.borderlessButton)
-    .foregroundColor(.gray)
+    .foregroundStyle(.secondary)
     .contentShape(Rectangle())
     .accessibilityHidden(true)
   }

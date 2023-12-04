@@ -53,7 +53,7 @@ public struct AccountsListRow: View {
           .fontWeight(.semibold)
         Text("@\(viewModel.account.acct)")
           .font(.scaledFootnote)
-          .foregroundColor(.gray)
+          .foregroundStyle(Color.secondary)
 
         // First parameter is the number for the plural
         // Second parameter is the formatted string to show

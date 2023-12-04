@@ -197,12 +197,12 @@ struct AddAccountView: View {
                 .foregroundColor(.primary)
               Text(instance.info?.shortDescription ?? "")
                 .font(.scaledBody)
-                .foregroundColor(.gray)
+                .foregroundStyle(Color.secondary)
               (Text("instance.list.users-\(instance.users)")
                 + Text("  ⸱  ")
                 + Text("instance.list.posts-\(instance.statuses)"))
                 .font(.scaledFootnote)
-                .foregroundColor(.gray)
+                .foregroundStyle(Color.secondary)
             }
           }
           .listRowBackground(theme.primaryBackgroundColor)
@@ -218,10 +218,10 @@ struct AddAccountView: View {
         .foregroundColor(.primary)
       Text("placeholder.loading.long")
         .font(.scaledBody)
-        .foregroundColor(.gray)
+        .foregroundStyle(.secondary)
       Text("placeholder.loading.short")
         .font(.scaledFootnote)
-        .foregroundColor(.gray)
+        .foregroundStyle(.secondary)
     }
     .redacted(reason: .placeholder)
     .allowsHitTesting(false)

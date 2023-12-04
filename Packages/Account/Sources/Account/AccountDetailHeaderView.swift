@@ -206,7 +206,7 @@ struct AccountDetailHeaderView: View {
           }
           Text("@\(account.acct)")
             .font(.scaledCallout)
-            .foregroundColor(.gray)
+            .foregroundStyle(.secondary)
             .textSelection(.enabled)
             .accessibilityRespondsToUserInteraction(false)
           joinedAtView
@@ -252,7 +252,7 @@ struct AccountDetailHeaderView: View {
               .font(.scaledBody)
             Text(getLocalizedStringLabel(langCode: translation.detectedSourceLanguage, provider: translation.provider))
               .font(.footnote)
-              .foregroundColor(.gray)
+              .foregroundStyle(.secondary)
           }
         }
         .fixedSize(horizontal: false, vertical: true)
@@ -288,7 +288,7 @@ struct AccountDetailHeaderView: View {
         }
       Text(title)
         .font(.scaledFootnote)
-        .foregroundColor(.gray)
+        .foregroundStyle(.secondary)
     }
     .accessibilityElement(children: .ignore)
     .accessibilityLabel(title)
@@ -304,7 +304,7 @@ struct AccountDetailHeaderView: View {
         Text("account.joined")
         Text(joinedAt, style: .date)
       }
-      .foregroundColor(.gray)
+      .foregroundStyle(.secondary)
       .font(.footnote)
       .padding(.top, 6)
       .accessibilityElement(children: .combine)
@@ -315,7 +315,7 @@ struct AccountDetailHeaderView: View {
   private func makeNoteView(_ note: String) -> some View {
     VStack(alignment: .leading, spacing: 4) {
       Text("account.relation.note.label")
-        .foregroundColor(.gray)
+        .foregroundStyle(.secondary)
       Text(note)
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(8)

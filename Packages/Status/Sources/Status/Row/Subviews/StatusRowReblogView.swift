@@ -21,7 +21,7 @@ struct StatusRowReblogView: View {
       .font(.scaledFootnote)
       .emojiSize(Font.scaledFootnoteFont.emojiSize)
       .emojiBaselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
-      .foregroundColor(.gray)
+      .foregroundStyle(.secondary)
       .fontWeight(.semibold)
       .onTapGesture {
         viewModel.navigateToAccountDetail(account: viewModel.status.account)

@@ -277,7 +277,7 @@ public struct AccountDetailView: View {
       Label("account.post.pinned", systemImage: "pin.fill")
         .accessibilityAddTraits(.isHeader)
         .font(.scaledFootnote)
-        .foregroundColor(.gray)
+        .foregroundStyle(.secondary)
         .fontWeight(.semibold)
         .listRowInsets(.init(top: 0,
                              leading: 12,

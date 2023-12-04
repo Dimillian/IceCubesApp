@@ -27,7 +27,7 @@ public struct ErrorView: View {
         Text(message)
           .font(.scaledSubheadline)
           .multilineTextAlignment(.center)
-          .foregroundColor(.gray)
+          .foregroundStyle(.secondary)
         Button {
           onButtonPress()
         } label: {

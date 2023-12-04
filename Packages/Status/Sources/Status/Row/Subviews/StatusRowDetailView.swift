@@ -39,7 +39,7 @@ struct StatusRowDetailView: View {
         }
       }
       .font(.scaledCaption)
-      .foregroundColor(.gray)
+      .foregroundStyle(.secondary)
 
       if let editedAt = viewModel.status.editedAt {
         Divider()
@@ -55,7 +55,7 @@ struct StatusRowDetailView: View {
         }
         .underline()
         .font(.scaledCaption)
-        .foregroundColor(.gray)
+        .foregroundStyle(.secondary)
       }
 
       if viewModel.actionsAccountsFetched, statusDataController.favoritesCount > 0 {

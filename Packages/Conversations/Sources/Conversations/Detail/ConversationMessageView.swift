@@ -78,7 +78,7 @@ struct ConversationMessageView: View {
             Text(message.createdAt.asDate, style: .time)
           }
           .font(.scaledFootnote)
-          .foregroundColor(.gray)
+          .foregroundStyle(.secondary)
           if !isOwnMessage {
             Spacer()
           }

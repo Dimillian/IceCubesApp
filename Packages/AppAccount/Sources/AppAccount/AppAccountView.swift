@@ -86,7 +86,7 @@ public struct AppAccountView: View {
           ProgressView()
           Text(viewModel.appAccount.accountName ?? viewModel.acct)
             .font(.scaledSubheadline)
-            .foregroundColor(.gray)
+            .foregroundStyle(Color.secondary)
             .padding(.leading, 6)
         }
         VStack(alignment: .leading) {
@@ -97,13 +97,13 @@ public struct AppAccountView: View {
               .font(.scaledSubheadline)
               .emojiSize(Font.scaledSubheadlineFont.emojiSize)
               .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
-              .foregroundColor(.gray)
+              .foregroundStyle(Color.secondary)
           }
         }
         if viewModel.isInNavigation {
           Spacer()
           Image(systemName: "chevron.right")
-            .foregroundColor(.gray)
+            .foregroundStyle(.secondary)
         }
       }
     }

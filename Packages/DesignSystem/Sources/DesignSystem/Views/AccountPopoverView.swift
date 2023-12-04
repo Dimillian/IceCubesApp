@@ -45,7 +45,7 @@ struct AccountPopoverView: View {
 
         Text("@\(account.acct)")
           .font(.callout)
-          .foregroundColor(.gray)
+          .foregroundStyle(.secondary)
           .textSelection(.enabled)
           .accessibilityRespondsToUserInteraction(false)
           .help("@\(account.acct)")
@@ -56,7 +56,7 @@ struct AccountPopoverView: View {
           Text("account.joined")
           Text(account.createdAt.asDate, style: .date)
         }
-        .foregroundColor(.gray)
+        .foregroundStyle(.secondary)
         .font(.footnote)
         .accessibilityElement(children: .combine)
 
@@ -110,7 +110,7 @@ struct AccountPopoverView: View {
         }
       Text(title)
         .font(.scaledFootnote)
-        .foregroundColor(.gray)
+        .foregroundStyle(.secondary)
         .alignmentGuide(.bottomAvatar, computeValue: { dimension in
           dimension[.firstTextBaseline]
         })

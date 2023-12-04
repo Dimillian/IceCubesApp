@@ -74,7 +74,7 @@ public struct StatusRowCardView: View {
               if let description = card.description, !description.isEmpty {
                 Text(description)
                   .font(.scaledBody)
-                  .foregroundColor(.gray)
+                  .foregroundStyle(.secondary)
                   .lineLimit(3)
               }
               Text(url.host() ?? url.absoluteString)

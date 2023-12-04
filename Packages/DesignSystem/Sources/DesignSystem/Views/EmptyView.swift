@@ -23,7 +23,7 @@ public struct EmptyView: View {
       Text(message)
         .font(.scaledSubheadline)
         .multilineTextAlignment(.center)
-        .foregroundColor(.gray)
+        .foregroundStyle(.secondary)
     }
     .padding(.top, 100)
     .padding(.layoutPadding)

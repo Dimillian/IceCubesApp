@@ -109,11 +109,11 @@ struct NotificationRowView: View {
                          Text(" ⸱ ")
                          .font(.scaledFootnote)
                          .fontWeight(.regular)
-                         .foregroundColor(.gray) +
+                         .foregroundStyle(.secondary) +
                          Text(notification.createdAt.relativeFormatted)
                          .font(.scaledFootnote)
                          .fontWeight(.regular)
-                         .foregroundColor(.gray)
+                         .foregroundStyle(.secondary)
                      })
                      .font(.scaledSubheadline)
                      .emojiSize(Font.scaledSubheadlineFont.emojiSize)
@@ -129,7 +129,7 @@ struct NotificationRowView: View {
           .accessibilityHidden(true)
           .font(.scaledFootnote)
           .fontWeight(.regular)
-          .foregroundColor(.gray)
+          .foregroundStyle(.secondary)
         }
         Spacer()
       }
@@ -169,7 +169,7 @@ struct NotificationRowView: View {
       Group {
         Text("@\(notification.accounts[0].acct)")
           .font(.scaledCallout)
-          .foregroundColor(.gray)
+          .foregroundStyle(.secondary)
 
         if type == .follow {
           EmojiTextApp(notification.accounts[0].note,
@@ -179,7 +179,7 @@ struct NotificationRowView: View {
             .font(.scaledCallout)
             .emojiSize(Font.scaledCalloutFont.emojiSize)
             .emojiBaselineOffset(Font.scaledCalloutFont.emojiBaselineOffset)
-            .foregroundColor(.gray)
+            .foregroundStyle(.secondary)
             .environment(\.openURL, OpenURLAction { url in
               routerPath.handle(url: url)
             })

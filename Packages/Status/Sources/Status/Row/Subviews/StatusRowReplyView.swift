@@ -32,7 +32,7 @@ struct StatusRowReplyView: View {
       }
     }
     .font(.scaledFootnote)
-    .foregroundColor(.gray)
+    .foregroundStyle(.secondary)
     .fontWeight(.semibold)
   }
 }

@@ -59,7 +59,7 @@ public struct StatusEmbeddedView: View {
             Text(status.reblog?.createdAt.relativeFormatted ?? status.createdAt.relativeFormatted)
         }
         .font(.scaledCaption)
-        .foregroundColor(.gray)
+        .foregroundStyle(.secondary)
       }
     }
   }

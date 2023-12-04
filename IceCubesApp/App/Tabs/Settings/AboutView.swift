@@ -81,7 +81,7 @@ struct AboutView: View {
         """)
         .multilineTextAlignment(.leading)
         .font(.scaledSubheadline)
-        .foregroundColor(.gray)
+        .foregroundStyle(.secondary)
       } header: {
         Text("settings.about.built-with")
           .textCase(nil)

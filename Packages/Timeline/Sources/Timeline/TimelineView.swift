@@ -159,7 +159,7 @@ public struct TimelineView: View {
               .font(.scaledHeadline)
             Text("timeline.n-recent-from-n-participants \(tag.totalUses) \(tag.totalAccounts)")
               .font(.scaledFootnote)
-              .foregroundColor(.gray)
+              .foregroundStyle(.secondary)
           }
           .accessibilityElement(children: .combine)
           Spacer()
@@ -236,7 +236,7 @@ public struct TimelineView: View {
             .font(.headline)
           Text(timeline.localizedTitle())
             .font(.caption)
-            .foregroundColor(.gray)
+            .foregroundStyle(.secondary)
         default:
           Text(timeline.localizedTitle())
             .font(.headline)
