@@ -25,6 +25,10 @@ private struct IsStatusFocused: EnvironmentKey {
   static let defaultValue: Bool = false
 }
 
+private struct IsHomeTimeline: EnvironmentKey {
+  static let defaultValue: Bool = false
+}
+
 private struct IndentationLevel: EnvironmentKey {
   static let defaultValue: UInt = 0
 }
@@ -63,5 +67,10 @@ public extension EnvironmentValues {
   var indentationLevel: UInt {
     get { self[IndentationLevel.self] }
     set { self[IndentationLevel.self] = newValue }
+  }
+  
+  var isHomeTimeline: Bool {
+    get { self[IsHomeTimeline.self] }
+    set { self[IsHomeTimeline.self] = newValue }
   }
 }

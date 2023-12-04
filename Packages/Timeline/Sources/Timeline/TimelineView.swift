@@ -53,6 +53,7 @@ public struct TimelineView: View {
             StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath, isRemote: true)
           default:
             StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath)
+              .environment(\.isHomeTimeline, timeline == .home)
           }
         }
         .id(client.id)

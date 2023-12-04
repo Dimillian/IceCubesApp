@@ -16,6 +16,7 @@ public struct StatusRowView: View {
   @Environment(\.accessibilityVoiceOverEnabled) private var accessibilityVoiceOverEnabled
   @Environment(\.isStatusFocused) private var isFocused
   @Environment(\.indentationLevel) private var indentationLevel
+  @Environment(\.isHomeTimeline) private var isHomeTimeline
 
   @Environment(QuickLook.self) private var quickLook
   @Environment(Theme.self) private var theme
@@ -76,6 +77,9 @@ public struct StatusRowView: View {
               if !isCompact, theme.avatarPosition == .top {
                 StatusRowReblogView(viewModel: viewModel)
                 StatusRowReplyView(viewModel: viewModel)
+                if isHomeTimeline {
+                  StatusRowTagView(viewModel: viewModel)
+                }
               }
               VStack(alignment: .leading, spacing: 8) {
                 if !isCompact {
