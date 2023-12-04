@@ -65766,8 +65766,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Continues a thread"
+            "state" : "translated",
+            "value" : "Setzt einen Thread fort"
           }
         },
         "en" : {
