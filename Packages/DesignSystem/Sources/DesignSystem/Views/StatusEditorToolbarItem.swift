@@ -26,12 +26,12 @@ public struct StatusEditorToolbarItem: ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
       Button {
         Task { @MainActor in
-          if ProcessInfo.processInfo.isMacCatalystApp {
-            openWindow(value: WindowDestinationEditor.newStatusEditor(visibility: visibility))
-          } else {
-            routerPath.presentedSheet = .newStatusEditor(visibility: visibility)
-            HapticManager.shared.fireHaptic(.buttonPress)
-          }
+#if targetEnvironment(macCatalyst)
+          openWindow(value: WindowDestinationEditor.newStatusEditor(visibility: visibility))
+#else
+          routerPath.presentedSheet = .newStatusEditor(visibility: visibility)
+          HapticManager.shared.fireHaptic(.buttonPress)
+#endif
         }
       } label: {
         Image(systemName: "square.and.pencil")

@@ -205,11 +205,11 @@ struct StatusRowActionsView: View {
       switch action {
       case .respond:
         SoundEffectManager.shared.playSound(.share)
-        if ProcessInfo.processInfo.isMacCatalystApp {
-          openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status))
-        } else {
-          viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)
-        }
+#if targetEnvironment(macCatalyst)
+        openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status))
+#else
+        viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)
+#endif
       case .favorite:
         SoundEffectManager.shared.playSound(.favorite)
         await statusDataController.toggleFavorite(remoteStatus: viewModel.localStatusId)

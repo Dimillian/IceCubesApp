@@ -42,7 +42,9 @@ private struct SafariRouter: ViewModifier {
               return .handled
             }
           }
-          guard preferences.preferredBrowser == .inAppSafari, !ProcessInfo.processInfo.isMacCatalystApp else { return .systemAction }
+#if !targetEnvironment(macCatalyst)
+          guard preferences.preferredBrowser == .inAppSafari else { return .systemAction }
+#endif
           // SFSafariViewController only supports initial URLs with http:// or https:// schemes.
           guard let scheme = url.scheme, ["https", "http"].contains(scheme.lowercased()) else {
             return .systemAction

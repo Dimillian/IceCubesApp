@@ -53,20 +53,20 @@ struct StatusRowContextMenu: View {
               systemImage: "bookmark")
       }
       Button {
-        if ProcessInfo.processInfo.isMacCatalystApp {
-          openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: viewModel.status))
-        } else {
-          viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
-        }
+#if targetEnvironment(macCatalyst)
+        openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: viewModel.status))
+#else
+        viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
+#endif
       } label: {
         Label("status.action.reply", systemImage: "arrowshape.turn.up.left")
       }
       Button {
-        if ProcessInfo.processInfo.isMacCatalystApp {
-          openWindow(value: WindowDestinationEditor.quoteStatusEditor(status: viewModel.status))
-        } else {
-          viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
-        }
+#if targetEnvironment(macCatalyst)
+        openWindow(value: WindowDestinationEditor.quoteStatusEditor(status: viewModel.status))
+#else
+        viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
+#endif
       } label: {
         Label("status.action.quote", systemImage: "quote.bubble")
       }
@@ -163,11 +163,11 @@ struct StatusRowContextMenu: View {
         }
         if currentInstance.isEditSupported {
           Button {
-            if ProcessInfo.processInfo.isMacCatalystApp {
-              openWindow(value: WindowDestinationEditor.editStatusEditor(status: viewModel.status.reblogAsAsStatus ?? viewModel.status))
-            } else {
-              viewModel.routerPath.presentedSheet = .editStatusEditor(status: viewModel.status.reblogAsAsStatus ?? viewModel.status)
-            }
+#if targetEnvironment(macCatalyst)
+            openWindow(value: WindowDestinationEditor.editStatusEditor(status: viewModel.status.reblogAsAsStatus ?? viewModel.status))
+#else
+            viewModel.routerPath.presentedSheet = .editStatusEditor(status: viewModel.status.reblogAsAsStatus ?? viewModel.status)
+#endif
           } label: {
             Label("status.action.edit", systemImage: "pencil")
           }
