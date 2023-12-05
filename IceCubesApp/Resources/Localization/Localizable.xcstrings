@@ -294,7 +294,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ already exists"
+            "value" : "%@ hautatua dago lehendik ere"
           }
         },
         "fr" : {
@@ -412,7 +412,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ already exists"
+            "value" : "%@ badago lehendik ere"
           }
         },
         "fr" : {
@@ -529,7 +529,7 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "%@ is an invalid SFSymbol name"
           }
         },
@@ -13459,7 +13459,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Warning: These settings are overwritten by the global content settings"
+            "value" : "Adi: Edukiaren ezarpen orokorrek ezarpen hauen gainean idatz dezakete"
           }
         },
         "fr" : {
@@ -18353,7 +18353,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Duplicated tag"
+            "value" : "Bikoiztutako traola"
           }
         },
         "fr" : {
@@ -18471,7 +18471,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Number of tags is less than 2"
+            "value" : "Traolen kopurua 2 baino txikiagoa da"
           }
         },
         "fr" : {
@@ -18588,7 +18588,7 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "No Symbol Found"
           }
         },
@@ -18826,7 +18826,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Empty title"
+            "value" : "Titulurik gabe"
           }
         },
         "fr" : {
@@ -18943,7 +18943,7 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "No symbol is selected"
           }
         },
@@ -30699,7 +30699,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hide these posts from home"
+            "value" : "Ezkutatu bidalketa hauek hasierako jariotik"
           }
         },
         "fr" : {
@@ -30818,7 +30818,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show replies to"
+            "value" : "Erakutsi honi erantzundakoa:"
           }
         },
         "fr" : {
@@ -30937,7 +30937,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Title"
+            "value" : "Titulua"
           }
         },
         "fr" : {
@@ -31056,7 +31056,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Any followed user"
+            "value" : "Jarraitutako edozein erabiltzaile"
           }
         },
         "fr" : {
@@ -31175,7 +31175,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Members of the list"
+            "value" : "Zerrendako kideak"
           }
         },
         "fr" : {
@@ -31294,7 +31294,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No one"
+            "value" : "Bat ere ez"
           }
         },
         "fr" : {
@@ -31771,7 +31771,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "List settings"
+            "value" : "Zerrendaren ezarpenak"
           }
         },
         "fr" : {
@@ -32009,7 +32009,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Search users"
+            "value" : "Bilatu erabiltzaileak"
           }
         },
         "fr" : {
@@ -32365,7 +32365,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Letra tipoa"
+            "value" : "Letra-tipoa"
           }
         },
         "fr" : {
@@ -36490,7 +36490,7 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Bultzadak"
           }
         },
@@ -37198,7 +37198,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "parent view for EditTagGroupView"
+            "value" : "EditTagGroupView ikuspegi nagusia"
           }
         },
         "fr" : {
@@ -37316,7 +37316,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kargatzen, kargatzen, kargatzen ..."
+            "value" : "Kargatzen, kargatzen, kargatzen…"
           }
         },
         "fr" : {
@@ -37434,7 +37434,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kargatzen ..."
+            "value" : "Kargatzen…"
           }
         },
         "fr" : {
@@ -37789,7 +37789,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Salaketa"
+            "value" : "Salatu edukia"
           }
         },
         "fr" : {
@@ -42754,7 +42754,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Letra tipoaren neurria: %@"
+            "value" : "Letra-tipoaren neurria: %@"
           }
         },
         "fr" : {
@@ -43346,7 +43346,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show Pending Button on the Left"
+            "value" : "Erakutsi Egiteke botoia ezker aldean"
           }
         },
         "fr" : {
@@ -43700,7 +43700,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Letra tipoa"
+            "value" : "Letra-tipoa"
           }
         },
         "fr" : {
@@ -47239,8 +47239,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh"
+            "state" : "translated",
+            "value" : "Freskatze azkarra"
           }
         },
         "fr" : {
@@ -51016,7 +51016,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Azpititulua kargatzen ..."
+            "value" : "Azpititulua kargatzen…"
           }
         },
         "fr" : {
@@ -55152,7 +55152,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Auto detect language"
+            "value" : "Antzeman hizkuntza automatikoki"
           }
         },
         "fr" : {
@@ -55270,7 +55270,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary."
+            "value" : "Ice Cubes automatikoki saiatuko da argitaratzear zauden bidalketaren hizkuntza antzematen eta bidalketaren hizkuntza aldatzea gomendatuko dizu bat ez datorrela ikusten badu."
           }
         },
         "fr" : {
@@ -61771,7 +61771,7 @@
         }
       }
     },
-    "status.editor.media.generate-description" : {
+        "status.editor.media.generate-description" : {
       "extractionState" : "manual",
       "localizations" : {
         "be" : {
@@ -61812,8 +61812,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "🤖 Generate description"
+            "state" : "translated",
+            "value" : "🤖 Sortu deskribapena"
           }
         },
         "fr" : {
@@ -65909,8 +65909,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Continues a thread"
+            "state" : "translated",
+            "value" : "Hariari jarraiki"
           }
         },
         "fr" : {
@@ -68053,7 +68053,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Esploratu"
+            "value" : "Arakatu"
           }
         },
         "fr" : {
@@ -69116,7 +69116,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add or remove tag from tag groups"
+            "value" : "Gehitu edo kendu traola-sortetatik"
           }
         },
         "fr" : {
