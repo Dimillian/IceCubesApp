@@ -47305,8 +47305,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh"
+            "state" : "translated",
+            "value" : "快速刷新"
           }
         },
         "zh-Hant" : {
@@ -61771,7 +61771,7 @@
         }
       }
     },
-        "status.editor.media.generate-description" : {
+    "status.editor.media.generate-description" : {
       "extractionState" : "manual",
       "localizations" : {
         "be" : {
@@ -61878,8 +61878,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "🤖 Generate description"
+            "state" : "translated",
+            "value" : "🤖 生成图片描述"
           }
         },
         "zh-Hant" : {
@@ -65975,8 +65975,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Continues a thread"
+            "state" : "translated",
+            "value" : "续接嘟文"
           }
         },
         "zh-Hant" : {
