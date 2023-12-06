@@ -336,7 +336,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is already selected"
+            "value" : "%@ został już wybrany"
           }
         },
         "pt-BR" : {
@@ -454,7 +454,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ already exists"
+            "value" : "już istnieje"
           }
         },
         "pt-BR" : {
@@ -572,7 +572,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is an invalid SFSymbol name"
+            "value" : "%@ to nieprawidłowa nazwa symbolu SF"
           }
         },
         "pt-BR" : {
@@ -9020,7 +9020,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Czy chcesz zablokować tego użytkownika?"
+            "value" : "Czy chcesz zablokować tę osobę?"
           }
         },
         "pt-BR" : {
@@ -13501,7 +13501,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Warning: These settings are overwritten by the global content settings"
+            "value" : "Ostrzeżenie: te ustawienia są zastępowane przez globalne ustawienia treści"
           }
         },
         "pt-BR" : {
@@ -14334,7 +14334,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ci użytkownicy nie zobaczą twoich postów, dopóki ich nie zaakceptujesz."
+            "value" : "Te osoby nie zobaczą twoich postów, dopóki ich nie zaakceptujesz."
           }
         },
         "pt-BR" : {
@@ -18395,7 +18395,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Duplicated tag"
+            "value" : "Powtórzony hasztag"
           }
         },
         "pt-BR" : {
@@ -18513,7 +18513,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Number of tags is less than 2"
+            "value" : "Liczba hasztagów jest mniejsza niż 2"
           }
         },
         "pt-BR" : {
@@ -18631,7 +18631,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Symbol Found"
+            "value" : "Nie znaleziono takiego symbolu"
           }
         },
         "pt-BR" : {
@@ -18868,7 +18868,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Empty title"
+            "value" : "Brak tytułu"
           }
         },
         "pt-BR" : {
@@ -18986,7 +18986,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No symbol is selected"
+            "value" : "Nie wybrano żadnego symbolu"
           }
         },
         "pt-BR" : {
@@ -30741,7 +30741,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hide these posts from home"
+            "value" : "Nie pokazuj tych postów na stronie głównej"
           }
         },
         "pt-BR" : {
@@ -30860,7 +30860,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show replies to"
+            "value" : "Pokazuj odpowiedzi do"
           }
         },
         "pt-BR" : {
@@ -30979,7 +30979,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Title"
+            "value" : "Tytuł"
           }
         },
         "pt-BR" : {
@@ -31098,7 +31098,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Any followed user"
+            "value" : "Obserwowane osoby"
           }
         },
         "pt-BR" : {
@@ -31217,7 +31217,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Members of the list"
+            "value" : "Członkowie listy"
           }
         },
         "pt-BR" : {
@@ -31336,7 +31336,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No one"
+            "value" : "Nikt"
           }
         },
         "pt-BR" : {
@@ -31813,7 +31813,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "List settings"
+            "value" : "Ustawienia listy"
           }
         },
         "pt-BR" : {
@@ -32051,7 +32051,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Search users"
+            "value" : "Wyszukaj osoby"
           }
         },
         "pt-BR" : {
@@ -47281,8 +47281,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh"
+            "state" : "translated",
+            "value" : "Szybkie odświeżanie"
           }
         },
         "pt-BR" : {
@@ -47990,7 +47990,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Otrzymujesz zduplikowane powiadomienia? Spróbuj tego magicznego przycisku, aby to naprawić"
+            "value" : "Otrzymujesz powtórzone powiadomienia? Spróbuj tego magicznego przycisku, aby to naprawić"
           }
         },
         "pt-BR" : {
@@ -61854,8 +61854,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "🤖 Generate description"
+            "state" : "translated",
+            "value" : "🤖 Wygeneruj opis"
           }
         },
         "pt-BR" : {
@@ -65951,8 +65951,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Continues a thread"
+            "state" : "translated",
+            "value" : "Kontynuuje wątek"
           }
         },
         "pt-BR" : {
@@ -69158,7 +69158,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add or remove tag from tag groups"
+            "value" : "Dodaj lub usuń hashtag z grupy hasztagów"
           }
         },
         "pt-BR" : {
