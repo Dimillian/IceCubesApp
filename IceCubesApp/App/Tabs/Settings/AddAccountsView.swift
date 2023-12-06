@@ -1,4 +1,5 @@
 import AppAccount
+import AuthenticationServices
 import Combine
 import DesignSystem
 import Env
@@ -27,7 +28,6 @@ struct AddAccountView: View {
   @State private var signInClient: Client?
   @State private var instances: [InstanceSocial] = []
   @State private var instanceFetchError: LocalizedStringKey?
-  @State private var oauthURL: URL?
 
   private let instanceNamePublisher = PassthroughSubject<String, Never>()
 
@@ -136,21 +136,6 @@ struct AddAccountView: View {
           break
         }
       }
-      .onOpenURL(perform: { url in
-        Task {
-          await continueSignIn(url: url)
-        }
-      })
-      .onChange(of: oauthURL) { _, newValue in
-        if newValue == nil {
-          isSigninIn = false
-        }
-      }
-      #if !targetEnvironment(macCatalyst)
-      .sheet(item: $oauthURL, content: { url in
-        SafariView(url: url)
-      })
-      #endif
     }
   }
 
@@ -233,11 +218,19 @@ struct AddAccountView: View {
     do {
       signInClient = .init(server: sanitizedName)
       if let oauthURL = try await signInClient?.oauthURL() {
-#if targetEnvironment(macCatalyst)
-        openURL(oauthURL)
-#else
-        self.oauthURL = oauthURL
-#endif
+        let session = ASWebAuthenticationSession(url: oauthURL,
+                                                 callbackURLScheme: AppInfo.scheme.replacingOccurrences(of: "://", with: ""))
+        { callbackURL, error in
+          if let callbackURL {
+            Task {
+              await continueSignIn(url: callbackURL)
+            }
+          } else {
+            isSigninIn = false
+          }
+        }
+        session.presentationContextProvider = SceneDelegate.authViewController
+        session.start()
       } else {
         isSigninIn = false
       }
@@ -252,7 +245,6 @@ struct AddAccountView: View {
       return
     }
     do {
-      oauthURL = nil
       let oauthToken = try await client.continueOauthFlow(url: url)
       let client = Client(server: client.server, oauthToken: oauthToken)
       let account: Account = try await client.get(endpoint: Accounts.verifyCredentials)
@@ -266,7 +258,6 @@ struct AddAccountView: View {
       isSigninIn = false
       dismiss()
     } catch {
-      oauthURL = nil
       isSigninIn = false
     }
   }
