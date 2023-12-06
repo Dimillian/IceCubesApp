@@ -21,20 +21,21 @@ struct StatusEditorMediaView: View {
           Menu {
             makeImageMenu(container: container)
           } label: {
-            ZStack(alignment: .bottomTrailing) {
-              if let attachement = container.mediaAttachment {
-                makeLazyImage(mediaAttachement: attachement)
-              } else if container.image != nil {
-                makeLocalImage(container: container)
-              } else if container.movieTransferable != nil || container.gifTransferable != nil {
-                makeVideoAttachement(container: container)
-              } else if let error = container.error as? ServerError {
-                makeErrorView(error: error)
-              }
-              if container.mediaAttachment?.description?.isEmpty == false {
-                altMarker
-              }
+            if let attachement = container.mediaAttachment {
+              makeLazyImage(mediaAttachement: attachement)
+            } else if container.image != nil {
+              makeLocalImage(container: container)
+            } else if container.movieTransferable != nil || container.gifTransferable != nil {
+              makeVideoAttachement(container: container)
+            } else if let error = container.error as? ServerError {
+              makeErrorView(error: error)
             }
+          }
+          .overlay(alignment: .bottomTrailing) {
+            makeAltMarker(container: container)
+          }
+          .overlay(alignment: .topTrailing) {
+            makeDiscardMarker(container: container)
           }
         }
       }
@@ -141,14 +142,32 @@ struct StatusEditorMediaView: View {
     }
   }
 
-  private var altMarker: some View {
-    Button {} label: {
+  private func makeAltMarker(container: StatusEditorMediaContainer) -> some View {
+    Button {
+      editingContainer = container
+    } label: {
       Text("status.image.alt-text.abbreviation")
         .font(.caption2)
     }
     .padding(4)
     .background(.thinMaterial)
     .cornerRadius(8)
+    .padding(4)
+  }
+
+  private func makeDiscardMarker(container: StatusEditorMediaContainer) -> some View {
+    Button(role: .destructive) {
+      withAnimation {
+        viewModel.mediasImages.removeAll(where: { $0.id == container.id })
+      }
+    } label: {
+      Image(systemName: "xmark")
+        .font(.caption2)
+        .foregroundStyle(.tint)
+        .padding(4)
+        .background(Circle().fill(.thinMaterial))
+    }
+    .padding(4)
   }
 
   private var placeholderView: some View {
