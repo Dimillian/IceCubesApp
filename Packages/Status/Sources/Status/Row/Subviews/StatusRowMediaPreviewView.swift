@@ -115,19 +115,19 @@ public struct StatusRowMediaPreviewView: View {
   }
 
   private func tabAction(for index: Int) {
-    if ProcessInfo.processInfo.isMacCatalystApp {
+#if targetEnvironment(macCatalyst)
       openWindow(
         value: WindowDestinationMedia.mediaViewer(
           attachments: attachments,
           selectedAttachment: attachments[index]
         )
       )
-    } else {
+#else
       quickLook.prepareFor(
         selectedMediaAttachment: attachments[index],
         mediaAttachments: attachments
       )
-    }
+#endif
   }
 
   private static func accessibilityLabel(for attachment: MediaAttachment) -> Text {

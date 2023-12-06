@@ -233,11 +233,11 @@ struct AddAccountView: View {
     do {
       signInClient = .init(server: sanitizedName)
       if let oauthURL = try await signInClient?.oauthURL() {
-        if ProcessInfo.processInfo.isMacCatalystApp {
-          openURL(oauthURL)
-        } else {
-          self.oauthURL = oauthURL
-        }
+#if targetEnvironment(macCatalyst)
+        openURL(oauthURL)
+#else
+        self.oauthURL = oauthURL
+#endif
       } else {
         isSigninIn = false
       }

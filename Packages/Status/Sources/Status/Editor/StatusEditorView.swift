@@ -216,12 +216,14 @@ public struct StatusEditorView: View {
       SoundEffectManager.shared.playSound(.tootSent)
       NotificationCenter.default.post(name: .shareSheetClose,
                                       object: nil)
-      if !viewModel.mode.isInShareExtension, !preferences.requestedReview, !ProcessInfo.processInfo.isMacCatalystApp {
+#if !targetEnvironment(macCatalyst)
+      if !viewModel.mode.isInShareExtension, !preferences.requestedReview {
         if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
           SKStoreReviewController.requestReview(in: scene)
         }
         preferences.requestedReview = true
       }
+#endif
     }
   }
 
@@ -292,10 +294,10 @@ public struct StatusEditorView: View {
   }
 
   private func close() {
-    if ProcessInfo.processInfo.isMacCatalystApp {
-      dismissWindow()
-    } else {
-      dismiss()
-    }
+#if targetEnvironment(macCatalyst)
+    dismissWindow()
+#else
+    dismiss()
+#endif
   }
 }
