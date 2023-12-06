@@ -66,63 +66,50 @@ extension View {
 
   func withSheetDestinations(sheetDestinations: Binding<SheetDestination?>) -> some View {
     sheet(item: sheetDestinations) { destination in
-      switch destination {
-      case let .replyToStatusEditor(status):
-        StatusEditorView(mode: .replyTo(status: status))
-          .withEnvironments()
-      case let .newStatusEditor(visibility):
-        StatusEditorView(mode: .new(visibility: visibility))
-          .withEnvironments()
-      case let .editStatusEditor(status):
-        StatusEditorView(mode: .edit(status: status))
-          .withEnvironments()
-      case let .quoteStatusEditor(status):
-        StatusEditorView(mode: .quote(status: status))
-          .withEnvironments()
-      case let .mentionStatusEditor(account, visibility):
-        StatusEditorView(mode: .mention(account: account, visibility: visibility))
-          .withEnvironments()
-      case .listCreate:
-        ListCreateView()
-          .withEnvironments()
-      case let .listEdit(list):
-        ListEditView(list: list)
-          .withEnvironments()
-      case let .listAddAccount(account):
-        ListAddAccountView(account: account)
-          .withEnvironments()
-      case .addAccount:
-        AddAccountView()
-          .withEnvironments()
-      case .addRemoteLocalTimeline:
-        AddRemoteTimelineView()
-          .withEnvironments()
-      case .addTagGroup:
-        EditTagGroupView()
-          .withEnvironments()
-      case let .statusEditHistory(status):
-        StatusEditHistoryView(statusId: status)
-          .withEnvironments()
-      case .settings:
-        SettingsTabs(popToRootTab: .constant(.settings), isModal: true)
-          .withEnvironments()
-          .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
-      case .accountPushNotficationsSettings:
-        if let subscription = PushNotificationsService.shared.subscriptions.first(where: { $0.account.token == AppAccountsManager.shared.currentAccount.oauthToken }) {
-          PushNotificationsView(subscription: subscription)
-            .withEnvironments()
-        } else {
-          EmptyView()
+      Group {
+        switch destination {
+        case let .replyToStatusEditor(status):
+          StatusEditorView(mode: .replyTo(status: status))
+        case let .newStatusEditor(visibility):
+          StatusEditorView(mode: .new(visibility: visibility))
+        case let .editStatusEditor(status):
+          StatusEditorView(mode: .edit(status: status))
+        case let .quoteStatusEditor(status):
+          StatusEditorView(mode: .quote(status: status))
+        case let .mentionStatusEditor(account, visibility):
+          StatusEditorView(mode: .mention(account: account, visibility: visibility))
+        case .listCreate:
+          ListCreateView()
+        case let .listEdit(list):
+          ListEditView(list: list)
+        case let .listAddAccount(account):
+          ListAddAccountView(account: account)
+        case .addAccount:
+          AddAccountView()
+        case .addRemoteLocalTimeline:
+          AddRemoteTimelineView()
+        case .addTagGroup:
+          EditTagGroupView()
+        case let .statusEditHistory(status):
+          StatusEditHistoryView(statusId: status)
+        case .settings:
+          SettingsTabs(popToRootTab: .constant(.settings), isModal: true)
+            .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
+        case .accountPushNotficationsSettings:
+          if let subscription = PushNotificationsService.shared.subscriptions.first(where: { $0.account.token == AppAccountsManager.shared.currentAccount.oauthToken }) {
+            PushNotificationsView(subscription: subscription)
+          } else {
+            EmptyView()
+          }
+        case let .report(status):
+          ReportView(status: status)
+        case let .shareImage(image, status):
+          ActivityView(image: image, status: status)
+        case let .editTagGroup(tagGroup, onSaved):
+          EditTagGroupView(tagGroup: tagGroup, onSaved: onSaved)
         }
-      case let .report(status):
-        ReportView(status: status)
-          .withEnvironments()
-      case let .shareImage(image, status):
-        ActivityView(image: image, status: status)
-      case let .editTagGroup(tagGroup, onSaved):
-        EditTagGroupView(tagGroup: tagGroup, onSaved: onSaved)
-          .withEnvironments()
       }
+      .withEnvironments()
     }
   }
 
