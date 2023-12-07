@@ -563,20 +563,7 @@ import SwiftUI
 
   func prepareToPost(for pickerItem: PhotosPickerItem) {
     Task(priority: .high) {
-      var container: StatusEditorMediaContainer?
-
-      let clock = ContinuousClock()
-      var elapsed = await clock.measure {
-        container = await old_makeMediaContainer(from: pickerItem)
-      }
-      print("old implementation: \(elapsed)")
-
-      elapsed = await clock.measure {
-        container = await makeMediaContainer(from: pickerItem)
-      }
-      print("new implementation: \(elapsed)")
-
-      if let container {
+      if let container = await makeMediaContainer(from: pickerItem) {
         await MainActor.run { self.mediasImages.append(container) }
         await upload(container: container)
         await MainActor.run { self.isMediasLoading = false }
@@ -649,55 +636,6 @@ import SwiftUI
       gifTransferable: nil,
       mediaAttachment: nil,
       error: nil)
-  }
-
-  func old_makeMediaContainer(from pickerItem: PhotosPickerItem) async -> StatusEditorMediaContainer? {
-    async let imageFile = try? pickerItem.loadTransferable(type: ImageFileTranseferable.self)
-    async let gifFile = try? pickerItem.loadTransferable(type: GifFileTranseferable.self)
-    async let movieFile = try? pickerItem.loadTransferable(type: MovieFileTranseferable.self)
-
-    let file : (any Transferable)?
-    if let imageFile = await imageFile {
-      file = imageFile
-    } else if let gifFile = await gifFile {
-      file = gifFile
-    } else if let movieFile = await movieFile {
-      file = movieFile
-    } else {
-      file = nil
-    }
-
-    let compressor = StatusEditorCompressor()
-    if let imageFile = file as? ImageFileTranseferable,
-       let compressedData = await compressor.compressImageFrom(url: imageFile.url),
-       let image = UIImage(data: compressedData)
-    {
-      return StatusEditorMediaContainer(
-        id: pickerItem.itemIdentifier ?? UUID().uuidString,
-        image: image,
-        movieTransferable: nil,
-        gifTransferable: nil,
-        mediaAttachment: nil,
-        error: nil)
-    } else if let videoFile = file as? MovieFileTranseferable {
-      return StatusEditorMediaContainer(
-        id: pickerItem.itemIdentifier ?? UUID().uuidString,
-        image: nil,
-        movieTransferable: videoFile,
-        gifTransferable: nil,
-        mediaAttachment: nil,
-        error: nil)
-    } else if let gifFile = file as? GifFileTranseferable {
-      return StatusEditorMediaContainer(
-        id: pickerItem.itemIdentifier ?? UUID().uuidString,
-        image: nil,
-        movieTransferable: nil,
-        gifTransferable: gifFile,
-        mediaAttachment: nil,
-        error: nil)
-    }
-
-    return nil
   }
 
   func upload(container: StatusEditorMediaContainer) async {
