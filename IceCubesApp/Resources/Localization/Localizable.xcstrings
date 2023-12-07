@@ -529,8 +529,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%@ is an invalid SFSymbol name"
+            "state" : "translated",
+            "value" : "%@ ez da baliozko SFSymbol izena"
           }
         },
         "fr" : {
@@ -17999,7 +17999,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Traola-sortaren ikonoa (SFSymbol izena)"
+            "value" : "Sortaren ikonoa (SFSymbol izena)"
           }
         },
         "fr" : {
@@ -18588,8 +18588,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "No Symbol Found"
+            "state" : "translated",
+            "value" : "Ez da ikurrik aurkitu"
           }
         },
         "fr" : {
@@ -18943,8 +18943,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "No symbol is selected"
+            "state" : "translated",
+            "value" : "Ez da ikurrik hautatu"
           }
         },
         "fr" : {
@@ -66148,7 +66148,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Honi erantzunez: %@"
+            "value" : "%@(r)i erantzunez"
           }
         },
         "fr" : {
