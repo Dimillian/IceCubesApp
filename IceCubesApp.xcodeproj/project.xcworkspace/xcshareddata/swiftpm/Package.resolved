@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/divadretlaw/EmojiText",
       "state" : {
-        "revision" : "a4ddf5077c241170e8ac0d3a9480c511e27c1ae9",
-        "version" : "2.8.0"
+        "revision" : "65b570ea0b0d9fc89a000900691a73a16c0baa54",
+        "version" : "3.0.2"
       }
     },
     {
@@ -24,7 +24,7 @@
       "location" : "https://github.com/evgenyneu/keychain-swift",
       "state" : {
         "branch" : "master",
-        "revision" : "95219e66c94b6ba25e7d6ece7aecf1ea13134174"
+        "revision" : "f38cb0ada97847ac5068b915b8d2793b35435668"
       }
     },
     {
@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Nuke",
       "state" : {
-        "revision" : "3f666f120b63ea7de57d42e9a7c9b47f8e7a290b",
-        "version" : "12.1.6"
+        "revision" : "1694798e876113d44f6ec6ead965d7286695981d",
+        "version" : "12.2.0"
       }
     },
     {
@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RevenueCat/purchases-ios.git",
       "state" : {
-        "revision" : "47d9150b04c5fe6e9b37e3b8bfdfb7be606e0f74",
-        "version" : "4.30.5"
+        "revision" : "b8d20ba1c8e13cc73d72e37cf98607d01fd357b6",
+        "version" : "4.31.2"
       }
     },
     {
