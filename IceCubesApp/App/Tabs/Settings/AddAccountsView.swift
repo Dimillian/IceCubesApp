@@ -1,5 +1,4 @@
 import AppAccount
-import AuthenticationServices
 import Combine
 import DesignSystem
 import Env
@@ -15,6 +14,7 @@ struct AddAccountView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(\.scenePhase) private var scenePhase
   @Environment(\.openURL) private var openURL
+  @Environment(\.webAuthenticationSession) private var webAuthenticationSession
 
   @Environment(AppAccountsManager.self) private var appAccountsManager
   @Environment(CurrentAccount.self) private var currentAccount
@@ -215,26 +215,12 @@ struct AddAccountView: View {
   }
 
   private func signIn() async {
-    do {
-      signInClient = .init(server: sanitizedName)
-      if let oauthURL = try await signInClient?.oauthURL() {
-        let session = ASWebAuthenticationSession(url: oauthURL,
-                                                 callbackURLScheme: AppInfo.scheme.replacingOccurrences(of: "://", with: ""))
-        { callbackURL, error in
-          if let callbackURL {
-            Task {
-              await continueSignIn(url: callbackURL)
-            }
-          } else {
-            isSigninIn = false
-          }
-        }
-        session.presentationContextProvider = SceneDelegate.authViewController
-        session.start()
-      } else {
-        isSigninIn = false
-      }
-    } catch {
+    signInClient = .init(server: sanitizedName)
+    if let oauthURL = try? await signInClient?.oauthURL(),
+       let url = try? await webAuthenticationSession.authenticate(using: oauthURL,
+                                                                 callbackURLScheme: AppInfo.scheme.replacingOccurrences(of: "://", with: "")){
+      await continueSignIn(url: url)
+    } else {
       isSigninIn = false
     }
   }
