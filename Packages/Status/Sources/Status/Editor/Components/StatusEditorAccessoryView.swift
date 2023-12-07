@@ -59,7 +59,9 @@ struct StatusEditorAccessoryView: View {
             .photosPicker(isPresented: $isPhotosPickerPresented,
                           selection: $viewModel.selectedMedias,
                           maxSelectionCount: 4,
-                          matching: .any(of: [.images, .videos]))
+                          matching: .any(of: [.images, .videos]),
+                          photoLibrary: .shared()
+            )
             .fileImporter(isPresented: $isFileImporterPresented,
                           allowedContentTypes: [.image, .video],
                           allowsMultipleSelection: true)

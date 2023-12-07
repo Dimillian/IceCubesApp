@@ -123,7 +123,13 @@ struct StatusEditorMediaView: View {
 
     Button(role: .destructive) {
       withAnimation {
-        viewModel.mediasImages.removeAll(where: { $0.id == container.id })
+        viewModel.selectedMedias.removeAll(where: {
+          if let id = $0.itemIdentifier {
+            return id == container.id
+          }
+          return false
+        })
+
       }
     } label: {
       Label("action.delete", systemImage: "trash")
@@ -158,7 +164,12 @@ struct StatusEditorMediaView: View {
   private func makeDiscardMarker(container: StatusEditorMediaContainer) -> some View {
     Button(role: .destructive) {
       withAnimation {
-        viewModel.mediasImages.removeAll(where: { $0.id == container.id })
+        viewModel.selectedMedias.removeAll(where: {
+          if let id = $0.itemIdentifier {
+            return id == container.id
+          }
+          return false
+        })
       }
     } label: {
       Image(systemName: "xmark")
