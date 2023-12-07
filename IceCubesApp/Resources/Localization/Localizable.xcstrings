@@ -3278,7 +3278,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ 님이 다음 글을 부스트함: %@"
+            "value" : "%@님이 다음 글을 부스트함: %@"
           }
         },
         "nb" : {
@@ -3397,7 +3397,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ 님이 다음 사용자의 글에 답글을 남김: "
+            "value" : "%@님이 다음 사용자의 글에 답글을 남김: "
           }
         },
         "nb" : {
@@ -8883,7 +8883,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ 차단"
+            "value" : "%@님 차단"
           }
         },
         "nb" : {
@@ -30842,7 +30842,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "이 리스트에 있는 사용자가 남긴 답글 표시"
+            "value" : "표시할 답글"
           }
         },
         "nb" : {
@@ -31080,7 +31080,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "이 리스트의 다른 사용자나 내가 팔로우한 사용자에게 남긴 답글까지"
+            "value" : "리스트에 있거나 내가 팔로우한 사용자에게 남긴 답글"
           }
         },
         "nb" : {
@@ -31199,7 +31199,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "이 리스트의 다른 사용자에게 남긴 답글까지"
+            "value" : "리스트에 있는 사용자에게 남긴 답글"
           }
         },
         "nb" : {
@@ -31438,7 +31438,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ 추가/제거"
+            "value" : "%@님 추가/제거"
           }
         },
         "nb" : {
@@ -47263,8 +47263,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh"
+            "state" : "translated",
+            "value" : "타임라인 당길 때 완전히 새로고침"
           }
         },
         "nb" : {
@@ -47382,7 +47382,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "AI 글 작성 도우미 🤖"
+            "value" : "AI 도우미 표시 🤖"
           }
         },
         "nb" : {
@@ -61836,8 +61836,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "🤖 Generate description"
+            "state" : "translated",
+            "value" : "🤖 설명 생성"
           }
         },
         "nb" : {
@@ -62194,7 +62194,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "새 글"
+            "value" : "글 작성"
           }
         },
         "nb" : {
@@ -65933,8 +65933,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Continues a thread"
+            "state" : "translated",
+            "value" : "이전 글에서 계속"
           }
         },
         "nb" : {
@@ -66172,7 +66172,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "답글: %@"
+            "value" : "%@님에게 남긴 답글"
           }
         },
         "nb" : {
@@ -71299,7 +71299,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "최신 타임라인 다시 불러오기"
+            "value" : "완전히 새로고침"
           }
         },
         "nb" : {
