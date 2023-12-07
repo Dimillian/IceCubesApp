@@ -563,18 +563,18 @@ import SwiftUI
   func prepareToPost(for pickerItem: PhotosPickerItem) {
     Task(priority: .high) {
       if let container = await makeMediaContainer(from: pickerItem) {
-        await MainActor.run { self.mediaContainers.append(container) }
+        self.mediaContainers.append(container)
         await upload(container: container)
-        await MainActor.run { self.isMediasLoading = false }
+        self.isMediasLoading = false
       }
     }
   }
 
   func prepareToPost(for container: StatusEditorMediaContainer) {
     Task(priority: .high) {
-      await MainActor.run { self.mediaContainers.append(container) }
+      self.mediaContainers.append(container)
       await upload(container: container)
-      await MainActor.run { self.isMediasLoading = false }
+      self.isMediasLoading = false
     }
   }
 
