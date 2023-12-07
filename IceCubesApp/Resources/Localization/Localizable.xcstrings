@@ -406,7 +406,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ already exists"
+            "value" : "%@ ya existe"
           }
         },
         "eu" : {
@@ -3010,7 +3010,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Image"
+            "value" : "Imagen"
           }
         },
         "eu" : {
@@ -8853,7 +8853,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Block %@"
+            "value" : "Bloquear a %@"
           }
         },
         "eu" : {
@@ -10158,7 +10158,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Privacy Settings"
+            "value" : "Ajustes de privacidad"
           }
         },
         "eu" : {
@@ -18347,7 +18347,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Duplicated tag"
+            "value" : "Etiqueta duplicada"
           }
         },
         "eu" : {
@@ -18465,7 +18465,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Number of tags is less than 2"
+            "value" : "El número de etiquetas es menor que 2"
           }
         },
         "eu" : {
@@ -18583,7 +18583,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Symbol Found"
+            "value" : "No se encontró ningún símbolo"
           }
         },
         "eu" : {
@@ -18820,7 +18820,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Empty title"
+            "value" : "Título vacío"
           }
         },
         "eu" : {
@@ -18938,7 +18938,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No symbol is selected"
+            "value" : "Ningún símbolo seleccionado"
           }
         },
         "eu" : {
@@ -20716,7 +20716,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "DeepL API Free"
+            "value" : "DeepL API Gratis"
           }
         },
         "eu" : {
@@ -30812,7 +30812,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show replies to"
+            "value" : "Mostrar respuestas a"
           }
         },
         "eu" : {
@@ -31050,7 +31050,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Any followed user"
+            "value" : "Cualquier usuario seguido"
           }
         },
         "eu" : {
@@ -31169,7 +31169,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Members of the list"
+            "value" : "Miembros de la lista"
           }
         },
         "eu" : {
@@ -31288,7 +31288,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No one"
+            "value" : "Nadie"
           }
         },
         "eu" : {
@@ -31765,7 +31765,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "List settings"
+            "value" : "Ajustes de listas"
           }
         },
         "eu" : {
@@ -32003,7 +32003,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Search users"
+            "value" : "Buscar usuarios"
           }
         },
         "eu" : {
@@ -32832,7 +32832,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "New Window"
+            "value" : "Nueva Ventana"
           }
         },
         "eu" : {
@@ -37192,7 +37192,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "parent view for EditTagGroupView"
+            "value" : "Vista principal para EditTagGroupView"
           }
         },
         "eu" : {
@@ -43340,7 +43340,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show Pending Button on the Left"
+            "value" : "Mostrar Botón Pendiente a la Izquierda"
           }
         },
         "eu" : {
@@ -47233,8 +47233,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh"
+            "state" : "translated",
+            "value" : "Actualización rápida"
           }
         },
         "eu" : {
@@ -61806,8 +61806,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "🤖 Generate description"
+            "state" : "translated",
+            "value" : "🤖 Generar descripción"
           }
         },
         "eu" : {
@@ -65903,8 +65903,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Continues a thread"
+            "state" : "translated",
+            "value" : "Continúa un hilo"
           }
         },
         "eu" : {
@@ -69110,7 +69110,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add or remove tag from tag groups"
+            "value" : "Añadir o borrar etiqueta del grupo de etiquetas"
           }
         },
         "eu" : {
