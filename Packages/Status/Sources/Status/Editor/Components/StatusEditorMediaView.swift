@@ -17,7 +17,7 @@ struct StatusEditorMediaView: View {
   var body: some View {
     ScrollView(.horizontal, showsIndicators: false) {
       HStack(spacing: 8) {
-        ForEach(viewModel.mediasImages) { container in
+        ForEach(viewModel.mediaContainers) { container in
           Menu {
             makeImageMenu(container: container)
           } label: {
@@ -123,7 +123,7 @@ struct StatusEditorMediaView: View {
 
     Button(role: .destructive) {
       withAnimation {
-        viewModel.selectedMedias.removeAll(where: {
+        viewModel.mediaPickers.removeAll(where: {
           if let id = $0.itemIdentifier {
             return id == container.id
           }
@@ -164,7 +164,7 @@ struct StatusEditorMediaView: View {
   private func makeDiscardMarker(container: StatusEditorMediaContainer) -> some View {
     Button(role: .destructive) {
       withAnimation {
-        viewModel.selectedMedias.removeAll(where: {
+        viewModel.mediaPickers.removeAll(where: {
           if let id = $0.itemIdentifier {
             return id == container.id
           }

@@ -15,7 +15,7 @@ import SwiftUI
   var currentAccount: Account? {
     didSet {
       if let itemsProvider {
-        mediasImages = []
+        mediaContainers = []
         processItemsProvider(items: itemsProvider)
       }
     }
@@ -84,22 +84,21 @@ import SwiftUI
   var spoilerText: String = ""
 
   var isPosting: Bool = false
-  var selectedMedias: [PhotosPickerItem] = [] {
+  var mediaPickers: [PhotosPickerItem] = [] {
     didSet {
-      if selectedMedias.count > 4 {
-        selectedMedias = selectedMedias.prefix(4).map { $0 }
+      if mediaPickers.count > 4 {
+        mediaPickers = mediaPickers.prefix(4).map { $0 }
       }
 
       let removedIDs = oldValue
-        .filter { !selectedMedias.contains($0) }
+        .filter { !mediaPickers.contains($0) }
         .compactMap { $0.itemIdentifier }
-      mediasImages.removeAll { removedIDs.contains($0.id) }
+      mediaContainers.removeAll { removedIDs.contains($0.id) }
 
-      let newPickerItems = selectedMedias.filter { !oldValue.contains($0) }
+      let newPickerItems = mediaPickers.filter { !oldValue.contains($0) }
       if !newPickerItems.isEmpty {
         isMediasLoading = true
         for item in newPickerItems {
-          print("prepare for \(item.itemIdentifier)")
           prepareToPost(for: item)
         }
       }
@@ -108,7 +107,7 @@ import SwiftUI
 
   var isMediasLoading: Bool = false
 
-  private(set) var mediasImages: [StatusEditorMediaContainer] = []
+  private(set) var mediaContainers: [StatusEditorMediaContainer] = []
   var replyToStatus: Status?
   var embeddedStatus: Status?
 
@@ -118,11 +117,11 @@ import SwiftUI
   var showPostingErrorAlert: Bool = false
 
   var canPost: Bool {
-    statusText.length > 0 || !mediasImages.isEmpty
+    statusText.length > 0 || !mediaContainers.isEmpty
   }
 
   var shouldDisablePollButton: Bool {
-    !selectedMedias.isEmpty
+    !mediaPickers.isEmpty
   }
 
   var shouldDisplayDismissWarning: Bool {
@@ -193,7 +192,7 @@ import SwiftUI
                             visibility: visibility,
                             inReplyToId: mode.replyToStatus?.id,
                             spoilerText: spoilerOn ? spoilerText : nil,
-                            mediaIds: mediasImages.compactMap { $0.mediaAttachment?.id },
+                            mediaIds: mediaContainers.compactMap { $0.mediaAttachment?.id },
                             poll: pollData,
                             language: selectedLanguage,
                             mediaAttributes: mediaAttributes)
@@ -289,7 +288,7 @@ import SwiftUI
       spoilerOn = !status.spoilerText.asRawText.isEmpty
       spoilerText = status.spoilerText.asRawText
       visibility = status.visibility
-      mediasImages = status.mediaAttachments.map {
+      mediaContainers = status.mediaAttachments.map {
         StatusEditorMediaContainer(
           id: UUID().uuidString,
           image: nil,
@@ -558,13 +557,13 @@ import SwiftUI
   // MARK: - Media related function
 
   private func indexOf(container: StatusEditorMediaContainer) -> Int? {
-    mediasImages.firstIndex(where: { $0.id == container.id })
+    mediaContainers.firstIndex(where: { $0.id == container.id })
   }
 
   func prepareToPost(for pickerItem: PhotosPickerItem) {
     Task(priority: .high) {
       if let container = await makeMediaContainer(from: pickerItem) {
-        await MainActor.run { self.mediasImages.append(container) }
+        await MainActor.run { self.mediaContainers.append(container) }
         await upload(container: container)
         await MainActor.run { self.isMediasLoading = false }
       }
@@ -573,7 +572,7 @@ import SwiftUI
 
   func prepareToPost(for container: StatusEditorMediaContainer) {
     Task(priority: .high) {
-      await MainActor.run { self.mediasImages.append(container) }
+      await MainActor.run { self.mediaContainers.append(container) }
       await upload(container: container)
       await MainActor.run { self.isMediasLoading = false }
     }
@@ -640,7 +639,7 @@ import SwiftUI
 
   func upload(container: StatusEditorMediaContainer) async {
     if let index = indexOf(container: container) {
-      let originalContainer = mediasImages[index]
+      let originalContainer = mediaContainers[index]
       guard originalContainer.mediaAttachment == nil else { return }
       let newContainer = StatusEditorMediaContainer(
         id: originalContainer.id,
@@ -649,14 +648,14 @@ import SwiftUI
         gifTransferable: nil,
         mediaAttachment: nil,
         error: nil)
-      mediasImages[index] = newContainer
+      mediaContainers[index] = newContainer
       do {
         let compressor = StatusEditorCompressor()
         if let image = originalContainer.image {
           let imageData = try await compressor.compressImageForUpload(image)
           let uploadedMedia = try await uploadMedia(data: imageData, mimeType: "image/jpeg")
           if let index = indexOf(container: newContainer) {
-            mediasImages[index] = StatusEditorMediaContainer(
+            mediaContainers[index] = StatusEditorMediaContainer(
               id: originalContainer.id,
               image: mode.isInShareExtension ? originalContainer.image : nil,
               movieTransferable: nil,
@@ -673,7 +672,7 @@ import SwiftUI
         {
           let uploadedMedia = try await uploadMedia(data: data, mimeType: compressedVideoURL.mimeType())
           if let index = indexOf(container: newContainer) {
-            mediasImages[index] = StatusEditorMediaContainer(
+            mediaContainers[index] = StatusEditorMediaContainer(
               id: originalContainer.id,
               image: mode.isInShareExtension ? originalContainer.image : nil,
               movieTransferable: originalContainer.movieTransferable,
@@ -687,7 +686,7 @@ import SwiftUI
         } else if let gifData = originalContainer.gifTransferable?.data {
           let uploadedMedia = try await uploadMedia(data: gifData, mimeType: "image/gif")
           if let index = indexOf(container: newContainer) {
-            mediasImages[index] = StatusEditorMediaContainer(
+            mediaContainers[index] = StatusEditorMediaContainer(
               id: originalContainer.id,
               image: mode.isInShareExtension ? originalContainer.image : nil,
               movieTransferable: nil,
@@ -701,7 +700,7 @@ import SwiftUI
         }
       } catch {
         if let index = indexOf(container: newContainer) {
-          mediasImages[index] = StatusEditorMediaContainer(
+          mediaContainers[index] = StatusEditorMediaContainer(
             id: originalContainer.id,
             image: originalContainer.image,
             movieTransferable: nil,
@@ -717,17 +716,17 @@ import SwiftUI
     Task {
       repeat {
         if let client,
-           let index = mediasImages.firstIndex(where: { $0.mediaAttachment?.id == mediaAttachement.id })
+           let index = mediaContainers.firstIndex(where: { $0.mediaAttachment?.id == mediaAttachement.id })
         {
-          guard mediasImages[index].mediaAttachment?.url == nil else {
+          guard mediaContainers[index].mediaAttachment?.url == nil else {
             return
           }
           do {
             let newAttachement: MediaAttachment = try await client.get(endpoint: Media.media(id: mediaAttachement.id,
                                                                                              json: .init(description: nil)))
             if newAttachement.url != nil {
-              let oldContainer = mediasImages[index]
-              mediasImages[index] = StatusEditorMediaContainer(
+              let oldContainer = mediaContainers[index]
+              mediaContainers[index] = StatusEditorMediaContainer(
                 id: mediaAttachement.id,
                 image: oldContainer.image,
                 movieTransferable: oldContainer.movieTransferable,
@@ -748,7 +747,7 @@ import SwiftUI
       do {
         let media: MediaAttachment = try await client.put(endpoint: Media.media(id: attachment.id,
                                                                                 json: .init(description: description)))
-        mediasImages[index] = StatusEditorMediaContainer(
+        mediaContainers[index] = StatusEditorMediaContainer(
           id: container.id,
           image: nil,
           movieTransferable: nil,
