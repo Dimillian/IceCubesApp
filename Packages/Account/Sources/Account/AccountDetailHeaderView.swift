@@ -81,13 +81,13 @@ struct AccountDetailHeaderView: View {
         return
       }
       let attachement = MediaAttachment.imageWith(url: account.header)
-
-      if ProcessInfo.processInfo.isMacCatalystApp {
-        openWindow(value: WindowDestinationMedia.mediaViewer(attachments: [attachement],
-                                                        selectedAttachment: attachement))
-      } else {
+#if targetEnvironment(macCatalyst)
+        openWindow(value: WindowDestinationMedia.mediaViewer(
+          attachments: [attachement],
+          selectedAttachment: attachement))
+#else
         quickLook.prepareFor(selectedMediaAttachment: attachement, mediaAttachments: [attachement])
-      }
+#endif
     }
     .accessibilityElement(children: .combine)
     .accessibilityAddTraits([.isImage, .isButton])
@@ -117,12 +117,12 @@ struct AccountDetailHeaderView: View {
           return
         }
         let attachement = MediaAttachment.imageWith(url: account.avatar)
-        if ProcessInfo.processInfo.isMacCatalystApp {
-          openWindow(value: WindowDestinationMedia.mediaViewer(attachments: [attachement],
-                                                          selectedAttachment: attachement))
-        } else {
-          quickLook.prepareFor(selectedMediaAttachment: attachement, mediaAttachments: [attachement])
-        }
+#if targetEnvironment(macCatalyst)
+        openWindow(value: WindowDestinationMedia.mediaViewer(attachments: [attachement],
+                                                             selectedAttachment: attachement))
+#else
+        quickLook.prepareFor(selectedMediaAttachment: attachement, mediaAttachments: [attachement])
+#endif
       }
       .accessibilityElement(children: .combine)
       .accessibilityAddTraits([.isImage, .isButton])

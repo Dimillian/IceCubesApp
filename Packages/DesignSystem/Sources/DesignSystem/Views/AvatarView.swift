@@ -47,12 +47,11 @@ public struct AvatarView: View {
     }
 
     public static let account = FrameConfig(width: 80, height: 80)
-    public static let status = {
-      if ProcessInfo.processInfo.isMacCatalystApp {
-        return FrameConfig(width: 48, height: 48)
-      }
-      return FrameConfig(width: 40, height: 40)
-    }()
+#if targetEnvironment(macCatalyst)
+    public static let status = FrameConfig(width: 48, height: 48)
+#else
+    public static let status = FrameConfig(width: 40, height: 40)
+#endif
     public static let embed = FrameConfig(width: 34, height: 34)
     public static let badge = FrameConfig(width: 28, height: 28, cornerRadius: 14)
     public static let list = FrameConfig(width: 20, height: 20, cornerRadius: 10)

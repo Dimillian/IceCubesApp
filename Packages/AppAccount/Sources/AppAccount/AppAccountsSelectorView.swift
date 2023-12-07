@@ -88,14 +88,6 @@ public struct AppAccountsSelectorView: View {
     }
   }
 
-  private var accountBackgroundColor: Color {
-    if #available(iOS 16.4, *) {
-      Color.clear
-    } else {
-      theme.secondaryBackgroundColor
-    }
-  }
-
   private var accountsView: some View {
     NavigationStack {
       List {
@@ -124,7 +116,7 @@ public struct AppAccountsSelectorView: View {
       }
       .listStyle(.insetGrouped)
       .scrollContentBackground(.hidden)
-      .background(accountBackgroundColor)
+      .background(.clear)
       .navigationTitle("settings.section.accounts")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
