@@ -54,10 +54,7 @@ public struct StatusRowMediaPreviewView: View {
       }
       return 100
     }
-    if attachments.count == 1 {
-      return 300
-    }
-    return attachments.count > 2 ? 150 : 200
+    return 300
   }
 
   public var body: some View {
@@ -76,25 +73,15 @@ public struct StatusRowMediaPreviewView: View {
         .accessibilityAddTraits([.isButton, .isImage])
         .onTapGesture { tabAction(for: 0) }
       } else {
-        if isCompact || theme.statusDisplayStyle == .compact {
+        ScrollView(.horizontal, showsIndicators: false) {
           HStack {
             makeAttachmentView(for: 0)
             makeAttachmentView(for: 1)
             makeAttachmentView(for: 2)
             makeAttachmentView(for: 3)
           }
-        } else {
-          VStack {
-            HStack {
-              makeAttachmentView(for: 0)
-              makeAttachmentView(for: 1)
-            }
-            HStack {
-              makeAttachmentView(for: 2)
-              makeAttachmentView(for: 3)
-            }
-          }
         }
+        .scrollClipDisabled()
       }
     }
   }
@@ -183,8 +170,7 @@ private struct MediaPreview: View {
           .accessibilityAddTraits(.startsMediaSession)
       }
     }
-    .frame(maxWidth: isCompact ? imageMaxHeight : nil)
-    .frame(height: imageMaxHeight)
+    .frame(width: imageMaxHeight / 1.5, height: imageMaxHeight)
     .clipped()
     .cornerRadius(4)
     // #965: do not create overlapping tappable areas, when multiple images are shown
