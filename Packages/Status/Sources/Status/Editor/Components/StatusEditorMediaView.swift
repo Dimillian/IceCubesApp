@@ -14,31 +14,51 @@ struct StatusEditorMediaView: View {
 
   @State private var isErrorDisplayed: Bool = false
 
+  @Namespace var mediaSpace
+
   var body: some View {
-    HStack(spacing: 8) {
-      if !viewModel.mediaContainers.isEmpty {
-        VStack(spacing: 8) {
-          makeMediaItem(container: viewModel.mediaContainers[0])
-          if viewModel.mediaContainers.count > 3 {
-            makeMediaItem(container: viewModel.mediaContainers[3])
-          }
-        }
-        if viewModel.mediaContainers.count > 1 {
-          VStack(spacing: 8) {
-            makeMediaItem(container: viewModel.mediaContainers[1])
-            if viewModel.mediaContainers.count > 2 {
-              makeMediaItem(container: viewModel.mediaContainers[2])
-            }
-          }
-        }
+    Group {
+      switch count {
+      case 1: mediaLayout
+      case 2: mediaLayout
+      case 3: mediaLayout
+      case 4: mediaLayout
+      default: mediaLayout
       }
     }
     .padding(.horizontal, .layoutPadding)
     .frame(minWidth: 300, idealWidth: 450, minHeight: 200, idealHeight: 250)
+    .animation(.spring(duration: 0.3), value: count)
   }
 
-  private func makeMediaItem(container: StatusEditorMediaContainer) -> some View {
-    Menu {
+  private var count: Int { viewModel.mediaContainers.count }
+  private var containers: [StatusEditorMediaContainer] { viewModel.mediaContainers }
+
+  private func pixel(at index: Int) -> some View {
+    Rectangle().frame(width: 0, height: 0)
+      .matchedGeometryEffect(id: 0, in: mediaSpace)
+  }
+
+  // TODO: add match geo
+  // TODO: try 2 name space
+  // TODO: refactor pixel into makeMediaItem
+  private var mediaLayout: some View {
+    HStack(spacing: count > 1 ? 8 : 0) {
+      VStack(spacing: count > 3 ? 8 : 0) {
+        if count > 0 { makeMediaItem(at: 0) } else { pixel(at: 0) }
+        if count > 3 { makeMediaItem(at: 3) } else { pixel(at: 3) }
+      }
+      VStack(spacing: count > 2 ? 8 : 0) {
+        if count > 1 { makeMediaItem(at: 1) } else { pixel(at: 1) }
+        if count > 2 { makeMediaItem(at: 2) } else { pixel(at: 2) }
+      }
+    }
+  }
+
+  private func makeMediaItem(at index: Int) -> some View {
+    let container = viewModel.mediaContainers[index]
+
+    return Menu {
       makeImageMenu(container: container)
     } label: {
       RoundedRectangle(cornerRadius: 8).fill(.clear)
@@ -53,7 +73,6 @@ struct StatusEditorMediaView: View {
             makeErrorView(error: error)
           }
         }
-        .clipShape(RoundedRectangle(cornerRadius: 8))
     }
     .overlay(alignment: .bottomTrailing) {
       makeAltMarker(container: container)
@@ -61,6 +80,9 @@ struct StatusEditorMediaView: View {
     .overlay(alignment: .topTrailing) {
       makeDiscardMarker(container: container)
     }
+    .clipShape(RoundedRectangle(cornerRadius: 8))
+    .matchedGeometryEffect(id: container.id, in: mediaSpace)
+    .matchedGeometryEffect(id: index, in: mediaSpace)
   }
 
   private func makeVideoAttachement(container: StatusEditorMediaContainer) -> some View {
@@ -138,15 +160,7 @@ struct StatusEditorMediaView: View {
     }
 
     Button(role: .destructive) {
-      withAnimation {
-        viewModel.mediaPickers.removeAll(where: {
-          if let id = $0.itemIdentifier {
-            return id == container.id
-          }
-          return false
-        })
-
-      }
+      deleteAction(container: container)
     } label: {
       Label("action.delete", systemImage: "trash")
     }
@@ -174,19 +188,12 @@ struct StatusEditorMediaView: View {
     .padding(8)
     .background(.thinMaterial)
     .cornerRadius(8)
-    .padding(8)
+    .padding(4)
   }
 
   private func makeDiscardMarker(container: StatusEditorMediaContainer) -> some View {
     Button(role: .destructive) {
-      withAnimation {
-        viewModel.mediaPickers.removeAll(where: {
-          if let id = $0.itemIdentifier {
-            return id == container.id
-          }
-          return false
-        })
-      }
+      deleteAction(container: container)
     } label: {
       Image(systemName: "xmark")
         .font(.caption2)
@@ -194,7 +201,16 @@ struct StatusEditorMediaView: View {
         .padding(8)
         .background(Circle().fill(.thinMaterial))
     }
-    .padding(8)
+    .padding(4)
+  }
+
+  private func deleteAction(container: StatusEditorMediaContainer) {
+    viewModel.mediaPickers.removeAll(where: {
+      if let id = $0.itemIdentifier {
+        return id == container.id
+      }
+      return false
+    })
   }
 
   private var placeholderView: some View {
