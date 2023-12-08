@@ -15,31 +15,51 @@ struct StatusEditorMediaView: View {
   @State private var isErrorDisplayed: Bool = false
 
   var body: some View {
-    ScrollView(.horizontal, showsIndicators: false) {
-      HStack(spacing: 8) {
-        ForEach(viewModel.mediaContainers) { container in
-          Menu {
-            makeImageMenu(container: container)
-          } label: {
-            if let attachement = container.mediaAttachment {
-              makeLazyImage(mediaAttachement: attachement)
-            } else if container.image != nil {
-              makeLocalImage(container: container)
-            } else if container.movieTransferable != nil || container.gifTransferable != nil {
-              makeVideoAttachement(container: container)
-            } else if let error = container.error as? ServerError {
-              makeErrorView(error: error)
+    HStack(spacing: 8) {
+      if !viewModel.mediaContainers.isEmpty {
+        VStack(spacing: 8) {
+          makeMediaItem(container: viewModel.mediaContainers[0])
+          if viewModel.mediaContainers.count > 3 {
+            makeMediaItem(container: viewModel.mediaContainers[3])
+          }
+        }
+        if viewModel.mediaContainers.count > 1 {
+          VStack(spacing: 8) {
+            makeMediaItem(container: viewModel.mediaContainers[1])
+            if viewModel.mediaContainers.count > 2 {
+              makeMediaItem(container: viewModel.mediaContainers[2])
             }
-          }
-          .overlay(alignment: .bottomTrailing) {
-            makeAltMarker(container: container)
-          }
-          .overlay(alignment: .topTrailing) {
-            makeDiscardMarker(container: container)
           }
         }
       }
-      .padding(.horizontal, .layoutPadding)
+    }
+    .padding(.horizontal, .layoutPadding)
+    .frame(minWidth: 300, idealWidth: 450, minHeight: 200, idealHeight: 250)
+  }
+
+  private func makeMediaItem(container: StatusEditorMediaContainer) -> some View {
+    Menu {
+      makeImageMenu(container: container)
+    } label: {
+      RoundedRectangle(cornerRadius: 8).fill(.clear)
+        .overlay {
+          if let attachement = container.mediaAttachment {
+            makeLazyImage(mediaAttachement: attachement)
+          } else if container.image != nil {
+            makeLocalImage(container: container)
+          } else if container.movieTransferable != nil || container.gifTransferable != nil {
+            makeVideoAttachement(container: container)
+          } else if let error = container.error as? ServerError {
+            makeErrorView(error: error)
+          }
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+    }
+    .overlay(alignment: .bottomTrailing) {
+      makeAltMarker(container: container)
+    }
+    .overlay(alignment: .topTrailing) {
+      makeDiscardMarker(container: container)
     }
   }
 
@@ -51,7 +71,6 @@ struct StatusEditorMediaView: View {
       }
     }
     .cornerRadius(8)
-    .frame(width: 150, height: 150)
   }
 
   private func makeLocalImage(container: StatusEditorMediaContainer) -> some View {
@@ -59,8 +78,7 @@ struct StatusEditorMediaView: View {
       Image(uiImage: container.image!)
         .resizable()
         .blur(radius: container.mediaAttachment == nil ? 20 : 0)
-        .aspectRatio(contentMode: .fill)
-        .frame(width: 150, height: 150)
+        .scaledToFill()
         .cornerRadius(8)
       if container.error != nil {
         Text("status.editor.error.upload")
@@ -77,8 +95,7 @@ struct StatusEditorMediaView: View {
           if let image = state.image {
             image
               .resizable()
-              .aspectRatio(contentMode: .fill)
-              .frame(width: 150, height: 150)
+              .scaledToFill()
           } else {
             placeholderView
           }
@@ -97,7 +114,6 @@ struct StatusEditorMediaView: View {
           .tint(.white)
       }
     }
-    .frame(width: 150, height: 150)
     .cornerRadius(8)
   }
 
@@ -155,10 +171,10 @@ struct StatusEditorMediaView: View {
       Text("status.image.alt-text.abbreviation")
         .font(.caption2)
     }
-    .padding(4)
+    .padding(8)
     .background(.thinMaterial)
     .cornerRadius(8)
-    .padding(4)
+    .padding(8)
   }
 
   private func makeDiscardMarker(container: StatusEditorMediaContainer) -> some View {
@@ -175,16 +191,15 @@ struct StatusEditorMediaView: View {
       Image(systemName: "xmark")
         .font(.caption2)
         .foregroundStyle(.tint)
-        .padding(4)
+        .padding(8)
         .background(Circle().fill(.thinMaterial))
     }
-    .padding(4)
+    .padding(8)
   }
 
   private var placeholderView: some View {
     Rectangle()
       .foregroundColor(theme.secondaryBackgroundColor)
-      .frame(width: 150, height: 150)
       .accessibilityHidden(true)
   }
 }
