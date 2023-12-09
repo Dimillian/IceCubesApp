@@ -1,30 +1,11 @@
 import Foundation
 
 protocol OpenAIRequest: Encodable {
-  var path: String { get }
   var model: String { get }
 }
 
-extension OpenAIRequest {
-  var path: String {
-    "chat/completions"
-  }
-}
-
 public struct OpenAIClient {
-  private let endpoint: URL = .init(string: "https://api.openai.com/v1/")!
-
-  private var APIKey: String {
-    if let path = Bundle.main.path(forResource: "Secret", ofType: "plist") {
-      let secret = NSDictionary(contentsOfFile: path)
-      return secret?["OPENAI_SECRET"] as? String ?? ""
-    }
-    return ""
-  }
-
-  private var authorizationHeaderValue: String {
-    "Bearer \(APIKey)"
-  }
+  private let endpoint: URL = .init(string: "https://icecubesrelay.fly.dev/openai")!
 
   private var encoder: JSONEncoder {
     let encoder = JSONEncoder()
@@ -130,9 +111,8 @@ public struct OpenAIClient {
   public func request(_ prompt: Prompt) async throws -> Response {
     do {
       let jsonData = try encoder.encode(prompt.request)
-      var request = URLRequest(url: endpoint.appending(path: prompt.request.path))
+      var request = URLRequest(url: endpoint)
       request.httpMethod = "POST"
-      request.setValue(authorizationHeaderValue, forHTTPHeaderField: "Authorization")
       request.setValue("application/json", forHTTPHeaderField: "Content-Type")
       request.httpBody = jsonData
       let (result, _) = try await URLSession.shared.data(for: request)
