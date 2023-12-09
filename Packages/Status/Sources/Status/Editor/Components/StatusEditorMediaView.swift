@@ -15,9 +15,10 @@ struct StatusEditorMediaView: View {
   @State private var isErrorDisplayed: Bool = false
 
   @Namespace var mediaSpace
+  @State private var scrollID: String?
 
   var body: some View {
-    Group {
+    ScrollView(.horizontal, showsIndicators: showsScrollIndicators) {
       switch count {
       case 1: mediaLayout
       case 2: mediaLayout
@@ -26,33 +27,61 @@ struct StatusEditorMediaView: View {
       default: mediaLayout
       }
     }
+    .scrollPosition(id: $scrollID, anchor: .trailing)
     .padding(.horizontal, .layoutPadding)
-    .frame(minWidth: 300, idealWidth: 450, minHeight: 200, idealHeight: 250)
+    .frame(height: count > 0 ? containerHeight : 0)
     .animation(.spring(duration: 0.3), value: count)
+    .onChange(of: count) { oldValue, newValue in
+      if oldValue < newValue {
+        Task {
+          try? await Task.sleep(for: .seconds(0.5))
+          withAnimation(.bouncy(duration: 0.5)) {
+            scrollID = containers.last?.id
+          }
+        }
+      }
+    }
   }
 
   private var count: Int { viewModel.mediaContainers.count }
   private var containers: [StatusEditorMediaContainer] { viewModel.mediaContainers }
+  private let containerHeight: CGFloat = 300
+  private var containerWidth: CGFloat { containerHeight / 1.5 }
+
+#if targetEnvironment(macCatalyst)
+  private var showsScrollIndicators : Bool { count > 1 }
+  private var scrollBottomPadding : CGFloat? = nil
+#else
+  private var showsScrollIndicators : Bool = false
+  private var scrollBottomPadding : CGFloat? = 0
+#endif
+
+  init(viewModel: StatusEditorViewModel, editingContainer: Binding<StatusEditorMediaContainer?>) {
+    self.viewModel = viewModel
+    self._editingContainer = editingContainer
+  }
 
   private func pixel(at index: Int) -> some View {
     Rectangle().frame(width: 0, height: 0)
-      .matchedGeometryEffect(id: 0, in: mediaSpace)
+      .matchedGeometryEffect(id: index, in: mediaSpace, anchor: .leading)
   }
 
-  // TODO: add match geo
-  // TODO: try 2 name space
-  // TODO: refactor pixel into makeMediaItem
   private var mediaLayout: some View {
-    HStack(spacing: count > 1 ? 8 : 0) {
-      VStack(spacing: count > 3 ? 8 : 0) {
-        if count > 0 { makeMediaItem(at: 0) } else { pixel(at: 0) }
-        if count > 3 { makeMediaItem(at: 3) } else { pixel(at: 3) }
-      }
-      VStack(spacing: count > 2 ? 8 : 0) {
-        if count > 1 { makeMediaItem(at: 1) } else { pixel(at: 1) }
-        if count > 2 { makeMediaItem(at: 2) } else { pixel(at: 2) }
-      }
+    HStack(alignment: .center, spacing: count > 1 ? 8 : 0) {
+      if count > 0 {
+        if count == 1 {
+          makeMediaItem(at: 0)
+            .containerRelativeFrame(.horizontal, alignment: .leading)
+        } else {
+          makeMediaItem(at: 0)
+        }
+      } else { pixel(at: 0) }
+      if count > 1 { makeMediaItem(at: 1) } else { pixel(at: 1) }
+      if count > 2 { makeMediaItem(at: 2) } else { pixel(at: 2) }
+      if count > 3 { makeMediaItem(at: 3) } else { pixel(at: 3) }
     }
+    .padding(.bottom, scrollBottomPadding)
+    .scrollTargetLayout()
   }
 
   private func makeMediaItem(at index: Int) -> some View {
@@ -81,8 +110,10 @@ struct StatusEditorMediaView: View {
       makeDiscardMarker(container: container)
     }
     .clipShape(RoundedRectangle(cornerRadius: 8))
-    .matchedGeometryEffect(id: container.id, in: mediaSpace)
-    .matchedGeometryEffect(id: index, in: mediaSpace)
+    .frame(minWidth: count == 1 ? nil : containerWidth, maxWidth: 600)
+    .id(container.id)
+    .matchedGeometryEffect(id: container.id, in: mediaSpace, anchor: .leading)
+    .matchedGeometryEffect(id: index, in: mediaSpace, anchor: .leading)
   }
 
   private func makeVideoAttachement(container: StatusEditorMediaContainer) -> some View {
