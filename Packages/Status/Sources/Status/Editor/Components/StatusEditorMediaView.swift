@@ -14,33 +14,106 @@ struct StatusEditorMediaView: View {
 
   @State private var isErrorDisplayed: Bool = false
 
+  @Namespace var mediaSpace
+  @State private var scrollID: String?
+
   var body: some View {
-    ScrollView(.horizontal, showsIndicators: false) {
-      HStack(spacing: 8) {
-        ForEach(viewModel.mediaContainers) { container in
-          Menu {
-            makeImageMenu(container: container)
-          } label: {
-            if let attachement = container.mediaAttachment {
-              makeLazyImage(mediaAttachement: attachement)
-            } else if container.image != nil {
-              makeLocalImage(container: container)
-            } else if container.movieTransferable != nil || container.gifTransferable != nil {
-              makeVideoAttachement(container: container)
-            } else if let error = container.error as? ServerError {
-              makeErrorView(error: error)
-            }
-          }
-          .overlay(alignment: .bottomTrailing) {
-            makeAltMarker(container: container)
-          }
-          .overlay(alignment: .topTrailing) {
-            makeDiscardMarker(container: container)
+    ScrollView(.horizontal, showsIndicators: showsScrollIndicators) {
+      switch count {
+      case 1: mediaLayout
+      case 2: mediaLayout
+      case 3: mediaLayout
+      case 4: mediaLayout
+      default: mediaLayout
+      }
+    }
+    .scrollPosition(id: $scrollID, anchor: .trailing)
+    .padding(.horizontal, .layoutPadding)
+    .frame(height: count > 0 ? containerHeight : 0)
+    .animation(.spring(duration: 0.3), value: count)
+    .onChange(of: count) { oldValue, newValue in
+      if oldValue < newValue {
+        Task {
+          try? await Task.sleep(for: .seconds(0.5))
+          withAnimation(.bouncy(duration: 0.5)) {
+            scrollID = containers.last?.id
           }
         }
       }
-      .padding(.horizontal, .layoutPadding)
     }
+  }
+
+  private var count: Int { viewModel.mediaContainers.count }
+  private var containers: [StatusEditorMediaContainer] { viewModel.mediaContainers }
+  private let containerHeight: CGFloat = 300
+  private var containerWidth: CGFloat { containerHeight / 1.5 }
+
+#if targetEnvironment(macCatalyst)
+  private var showsScrollIndicators : Bool { count > 1 }
+  private var scrollBottomPadding : CGFloat? = nil
+#else
+  private var showsScrollIndicators : Bool = false
+  private var scrollBottomPadding : CGFloat? = 0
+#endif
+
+  init(viewModel: StatusEditorViewModel, editingContainer: Binding<StatusEditorMediaContainer?>) {
+    self.viewModel = viewModel
+    self._editingContainer = editingContainer
+  }
+
+  private func pixel(at index: Int) -> some View {
+    Rectangle().frame(width: 0, height: 0)
+      .matchedGeometryEffect(id: index, in: mediaSpace, anchor: .leading)
+  }
+
+  private var mediaLayout: some View {
+    HStack(alignment: .center, spacing: count > 1 ? 8 : 0) {
+      if count > 0 {
+        if count == 1 {
+          makeMediaItem(at: 0)
+            .containerRelativeFrame(.horizontal, alignment: .leading)
+        } else {
+          makeMediaItem(at: 0)
+        }
+      } else { pixel(at: 0) }
+      if count > 1 { makeMediaItem(at: 1) } else { pixel(at: 1) }
+      if count > 2 { makeMediaItem(at: 2) } else { pixel(at: 2) }
+      if count > 3 { makeMediaItem(at: 3) } else { pixel(at: 3) }
+    }
+    .padding(.bottom, scrollBottomPadding)
+    .scrollTargetLayout()
+  }
+
+  private func makeMediaItem(at index: Int) -> some View {
+    let container = viewModel.mediaContainers[index]
+
+    return Menu {
+      makeImageMenu(container: container)
+    } label: {
+      RoundedRectangle(cornerRadius: 8).fill(.clear)
+        .overlay {
+          if let attachement = container.mediaAttachment {
+            makeLazyImage(mediaAttachement: attachement)
+          } else if container.image != nil {
+            makeLocalImage(container: container)
+          } else if container.movieTransferable != nil || container.gifTransferable != nil {
+            makeVideoAttachement(container: container)
+          } else if let error = container.error as? ServerError {
+            makeErrorView(error: error)
+          }
+        }
+    }
+    .overlay(alignment: .bottomTrailing) {
+      makeAltMarker(container: container)
+    }
+    .overlay(alignment: .topTrailing) {
+      makeDiscardMarker(container: container)
+    }
+    .clipShape(RoundedRectangle(cornerRadius: 8))
+    .frame(minWidth: count == 1 ? nil : containerWidth, maxWidth: 600)
+    .id(container.id)
+    .matchedGeometryEffect(id: container.id, in: mediaSpace, anchor: .leading)
+    .matchedGeometryEffect(id: index, in: mediaSpace, anchor: .leading)
   }
 
   private func makeVideoAttachement(container: StatusEditorMediaContainer) -> some View {
@@ -51,7 +124,6 @@ struct StatusEditorMediaView: View {
       }
     }
     .cornerRadius(8)
-    .frame(width: 150, height: 150)
   }
 
   private func makeLocalImage(container: StatusEditorMediaContainer) -> some View {
@@ -59,8 +131,7 @@ struct StatusEditorMediaView: View {
       Image(uiImage: container.image!)
         .resizable()
         .blur(radius: container.mediaAttachment == nil ? 20 : 0)
-        .aspectRatio(contentMode: .fill)
-        .frame(width: 150, height: 150)
+        .scaledToFill()
         .cornerRadius(8)
       if container.error != nil {
         Text("status.editor.error.upload")
@@ -77,8 +148,7 @@ struct StatusEditorMediaView: View {
           if let image = state.image {
             image
               .resizable()
-              .aspectRatio(contentMode: .fill)
-              .frame(width: 150, height: 150)
+              .scaledToFill()
           } else {
             placeholderView
           }
@@ -97,7 +167,6 @@ struct StatusEditorMediaView: View {
           .tint(.white)
       }
     }
-    .frame(width: 150, height: 150)
     .cornerRadius(8)
   }
 
@@ -122,15 +191,7 @@ struct StatusEditorMediaView: View {
     }
 
     Button(role: .destructive) {
-      withAnimation {
-        viewModel.mediaPickers.removeAll(where: {
-          if let id = $0.itemIdentifier {
-            return id == container.id
-          }
-          return false
-        })
-
-      }
+      deleteAction(container: container)
     } label: {
       Label("action.delete", systemImage: "trash")
     }
@@ -155,7 +216,7 @@ struct StatusEditorMediaView: View {
       Text("status.image.alt-text.abbreviation")
         .font(.caption2)
     }
-    .padding(4)
+    .padding(8)
     .background(.thinMaterial)
     .cornerRadius(8)
     .padding(4)
@@ -163,28 +224,29 @@ struct StatusEditorMediaView: View {
 
   private func makeDiscardMarker(container: StatusEditorMediaContainer) -> some View {
     Button(role: .destructive) {
-      withAnimation {
-        viewModel.mediaPickers.removeAll(where: {
-          if let id = $0.itemIdentifier {
-            return id == container.id
-          }
-          return false
-        })
-      }
+      deleteAction(container: container)
     } label: {
       Image(systemName: "xmark")
         .font(.caption2)
         .foregroundStyle(.tint)
-        .padding(4)
+        .padding(8)
         .background(Circle().fill(.thinMaterial))
     }
     .padding(4)
   }
 
+  private func deleteAction(container: StatusEditorMediaContainer) {
+    viewModel.mediaPickers.removeAll(where: {
+      if let id = $0.itemIdentifier {
+        return id == container.id
+      }
+      return false
+    })
+  }
+
   private var placeholderView: some View {
     Rectangle()
       .foregroundColor(theme.secondaryBackgroundColor)
-      .frame(width: 150, height: 150)
       .accessibilityHidden(true)
   }
 }
