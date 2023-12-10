@@ -93,6 +93,11 @@ public struct StatusDetailView: View {
           }
         }
       }
+      .refreshable {
+        Task {
+          await viewModel.fetch()
+        }
+      }
       .onChange(of: watcher.latestEvent?.id) {
         guard let lastEvent = watcher.latestEvent else { return }
         viewModel.handleEvent(event: lastEvent, currentAccount: currentAccount.account)
