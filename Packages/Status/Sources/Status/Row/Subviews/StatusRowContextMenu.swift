@@ -18,6 +18,7 @@ struct StatusRowContextMenu: View {
   @Environment(QuickLook.self) private var quickLook
 
   var viewModel: StatusRowViewModel
+  @Binding var showTextForSelection: Bool
 
   var boostLabel: some View {
     if viewModel.status.visibility == .priv, viewModel.status.account.id == account.account?.id {
@@ -130,6 +131,12 @@ struct StatusRowContextMenu: View {
       UIPasteboard.general.string = viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText
     } label: {
       Label("status.action.copy-text", systemImage: "doc.on.doc")
+    }
+
+    Button {
+      showTextForSelection = true
+    } label: {
+      Label("status.action.select-text", systemImage: "selection.pin.in.out")
     }
 
     Button {
@@ -270,4 +277,48 @@ struct ActivityView: UIViewControllerRepresentable {
   }
 
   func updateUIViewController(_: UIActivityViewController, context _: UIViewControllerRepresentableContext<ActivityView>) {}
+}
+
+struct SelectTextView: View {
+  @Environment(\.dismiss) private var dismiss
+  let content: AttributedString
+
+  var body: some View {
+    NavigationStack {
+      SelectableText(content: content)
+        .padding()
+        .toolbar {
+          ToolbarItem(placement: .navigationBarTrailing) {
+            Button {
+              dismiss()
+            } label: {
+              Text("action.done").bold()
+            }
+          }
+        }
+        .navigationTitle("status.action.select-text")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+  }
+}
+
+struct SelectableText: UIViewRepresentable {
+  let content: AttributedString
+
+  func makeUIView(context: Context) -> UITextView {
+    let attributedText = NSMutableAttributedString(content)
+    attributedText.addAttribute(
+      .font,
+      value: Font.scaledBodyFont,
+      range: NSRange(location: 0, length: content.characters.count)
+    )
+
+    let textView = UITextView()
+    textView.isEditable = false
+    textView.attributedText = attributedText
+    return textView
+  }
+
+  func updateUIView(_ uiView: UITextView, context: Context) {}
+  func makeCoordinator() -> Void {}
 }

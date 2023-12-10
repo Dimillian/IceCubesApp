@@ -57843,6 +57843,17 @@
         }
       }
     },
+    "status.action.select-text" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select Text"
+          }
+        }
+      }
+    },
     "status.action.share" : {
       "extractionState" : "manual",
       "localizations" : {

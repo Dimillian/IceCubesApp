@@ -22,13 +22,14 @@ public struct StatusRowView: View {
   @Environment(Theme.self) private var theme
 
   @State private var viewModel: StatusRowViewModel
+  @State private var showSelectableText: Bool = false
 
   public init(viewModel: StatusRowViewModel) {
     _viewModel = .init(initialValue: viewModel)
   }
 
   var contextMenu: some View {
-    StatusRowContextMenu(viewModel: viewModel)
+    StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showSelectableText)
   }
 
   public var body: some View {
@@ -195,6 +196,10 @@ public struct StatusRowView: View {
     })
     .alignmentGuide(.listRowSeparatorLeading) { _ in
       -100
+    }
+    .sheet(isPresented: $showSelectableText) {
+      let content = viewModel.status.reblog?.content.asSafeMarkdownAttributedString ?? viewModel.status.content.asSafeMarkdownAttributedString
+      SelectTextView(content: content)
     }
     .environment(
       StatusDataControllerProvider.shared.dataController(for: viewModel.finalStatus,
