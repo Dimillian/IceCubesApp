@@ -43068,6 +43068,23 @@
         }
       }
     },
+    "settings.display.max-thread-indentation-%@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Max. Einrückung von Threads: %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Max thread indentation: %@"
+          }
+        }
+      }
+    },
     "settings.display.navigation-title" : {
       "localizations" : {
         "be" : {
@@ -44245,6 +44262,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "顯示頁籤名稱"
+          }
+        }
+      }
+    },
+    "settings.display.show-thread-indentation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rücke Threads ein"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show thread indentation"
           }
         }
       }

@@ -205,6 +205,16 @@ struct DisplaySettingsView: View {
       Toggle("settings.display.translate-button", isOn: $userPreferences.showTranslateButton)
       Toggle("settings.display.pending-at-bottom", isOn: $userPreferences.pendingShownAtBottom)
       Toggle("settings.display.pending-left", isOn: $userPreferences.pendingShownLeft)
+      Toggle("settings.display.show-thread-indentation", isOn: $userPreferences.showThreadIndentation)
+      if userPreferences.showThreadIndentation {
+        Slider(value: .init(get: {
+          Double(userPreferences.maxThreadIndentation)
+        }, set: { newVal in
+          userPreferences.maxThreadIndentation = UInt(newVal)
+        }), in: 1...20, step: 1)
+        Text("settings.display.max-thread-indentation-\(String(userPreferences.maxThreadIndentation))")
+          .font(.scaledBody)
+      }
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }

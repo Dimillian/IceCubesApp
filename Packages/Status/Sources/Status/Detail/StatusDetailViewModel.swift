@@ -19,7 +19,6 @@ import SwiftUI
   var state: State = .loading
   var title: LocalizedStringKey = ""
   var scrollToId: String?
-  static var maxIndent = UInt(7)
 
   @ObservationIgnored
   var indentationLevelPreviousCache: [String: UInt] = [:]
@@ -139,8 +138,8 @@ import SwiftUI
     }
   }
   
-  func getIndentationLevel(id: String) -> (indentationLevel: UInt, extraInset: Double) {
-    let level = min(indentationLevelPreviousCache[id] ?? 0, Self.maxIndent)
+    func getIndentationLevel(id: String, maxIndent: UInt) -> (indentationLevel: UInt, extraInset: Double) {
+    let level = min(indentationLevelPreviousCache[id] ?? 0, maxIndent)
     
     let barSize = Double(level) * 2
     let spaceBetween = (Double(level) - 1) * 3
