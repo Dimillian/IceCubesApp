@@ -43068,19 +43068,19 @@
         }
       }
     },
-    "settings.display.max-thread-indentation-%@" : {
+    "settings.display.max-reply-indentation-%@" : {
       "extractionState" : "manual",
       "localizations" : {
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Max. Einrückung von Threads: %@"
+            "state" : "translated",
+            "value" : "Max. Einrückung von Antworten: %@"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Max thread indentation: %@"
+            "value" : "Max reply indentation: %@"
           }
         }
       }
@@ -44148,6 +44148,23 @@
         }
       }
     },
+    "settings.display.show-reply-indentation" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rücke Antworten ein"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show reply indentation"
+          }
+        }
+      }
+    },
     "settings.display.show-tab-label" : {
       "localizations" : {
         "be" : {
@@ -44262,23 +44279,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "顯示頁籤名稱"
-          }
-        }
-      }
-    },
-    "settings.display.show-thread-indentation" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rücke Threads ein"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Show thread indentation"
           }
         }
       }

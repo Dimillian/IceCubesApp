@@ -205,14 +205,14 @@ struct DisplaySettingsView: View {
       Toggle("settings.display.translate-button", isOn: $userPreferences.showTranslateButton)
       Toggle("settings.display.pending-at-bottom", isOn: $userPreferences.pendingShownAtBottom)
       Toggle("settings.display.pending-left", isOn: $userPreferences.pendingShownLeft)
-      Toggle("settings.display.show-thread-indentation", isOn: $userPreferences.showThreadIndentation)
-      if userPreferences.showThreadIndentation {
+      Toggle("settings.display.show-reply-indentation", isOn: $userPreferences.showReplyIndentation)
+      if userPreferences.showReplyIndentation {
         Slider(value: .init(get: {
-          Double(userPreferences.maxThreadIndentation)
+          Double(userPreferences.maxReplyIndentation)
         }, set: { newVal in
-          userPreferences.maxThreadIndentation = UInt(newVal)
+          userPreferences.maxReplyIndentation = UInt(newVal)
         }), in: 1...20, step: 1)
-        Text("settings.display.max-thread-indentation-\(String(userPreferences.maxThreadIndentation))")
+        Text("settings.display.max-reply-indentation-\(String(userPreferences.maxReplyIndentation))")
           .font(.scaledBody)
       }
     }

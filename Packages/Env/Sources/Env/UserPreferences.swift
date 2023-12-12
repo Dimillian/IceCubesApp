@@ -56,8 +56,8 @@ import SwiftUI
     
     @AppStorage("fast_refresh") public var fastRefreshEnabled: Bool = false
 
-    @AppStorage("max_thread_indentation") public var maxThreadIndentation: UInt = 7
-    @AppStorage("show_thread_indentation") public var showThreadIndentation: Bool = true
+    @AppStorage("max_reply_indentation") public var maxReplyIndentation: UInt = 7
+    @AppStorage("show_reply_indentation") public var showReplyIndentation: Bool = true
 
     init() {}
   }
@@ -301,20 +301,20 @@ import SwiftUI
     }
   }
 
-  public var maxThreadIndentation: UInt {
+  public var maxReplyIndentation: UInt {
     didSet {
-      storage.maxThreadIndentation = maxThreadIndentation
+      storage.maxReplyIndentation = maxReplyIndentation
     }
   }
 
-  public var showThreadIndentation: Bool {
+  public var showReplyIndentation: Bool {
     didSet {
-      storage.showThreadIndentation = showThreadIndentation
+      storage.showReplyIndentation = showReplyIndentation
     }
   }
 
   public func getRealMaxIndent() -> UInt {
-    showThreadIndentation ? maxThreadIndentation : 0
+    showReplyIndentation ? maxReplyIndentation : 0
   }
 
   public enum SwipeActionsIconStyle: String, CaseIterable {
@@ -483,8 +483,8 @@ import SwiftUI
     pendingShownAtBottom = storage.pendingShownAtBottom
     pendingShownLeft = storage.pendingShownLeft
     fastRefreshEnabled = storage.fastRefreshEnabled
-    maxThreadIndentation = storage.maxThreadIndentation
-    showThreadIndentation = storage.showThreadIndentation
+    maxReplyIndentation = storage.maxReplyIndentation
+    showReplyIndentation = storage.showReplyIndentation
   }
 }
 
