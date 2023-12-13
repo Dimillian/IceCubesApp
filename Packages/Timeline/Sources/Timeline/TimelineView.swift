@@ -273,23 +273,25 @@ public struct TimelineView: View {
     ToolbarItem(placement: .topBarTrailing) {
       switch timeline {
       case let .hashtag(tag, _):
-        Menu {
-          Section("tag-groups.edit.section.title") {
-            ForEach(tagGroups) { group in
-              Button {
-                if group.tags.contains(tag) {
-                  group.tags.removeAll(where: { $0 == tag })
-                } else {
-                  group.tags.append(tag)
+        if !tagGroups.isEmpty {
+          Menu {
+            Section("tag-groups.edit.section.title") {
+              ForEach(tagGroups) { group in
+                Button {
+                  if group.tags.contains(tag) {
+                    group.tags.removeAll(where: { $0 == tag })
+                  } else {
+                    group.tags.append(tag)
+                  }
+                } label: {
+                  Label(group.title,
+                        systemImage: group.tags.contains(tag) ? "checkmark.rectangle.fill" : "checkmark.rectangle")
                 }
-              } label: {
-                Label(group.title,
-                      systemImage: group.tags.contains(tag) ? "checkmark.rectangle.fill" : "checkmark.rectangle")
               }
             }
+          } label: {
+            Image(systemName: "ellipsis")
           }
-        } label: {
-          Image(systemName: "ellipsis")
         }
       default:
         EmptyView()

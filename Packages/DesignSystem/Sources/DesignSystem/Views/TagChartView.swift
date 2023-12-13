@@ -3,15 +3,17 @@ import Charts
 import Models
 
 public struct TagChartView: View {
-  let tag: Tag
+  @State private var sortedHistory: [Tag.History] = []
   
   public init(tag: Tag) {
-    self.tag = tag
+    _sortedHistory = .init(initialValue: tag.history.sorted {
+      Int($0.day) ?? 0 < Int($1.day) ?? 0
+    })
   }
   
   public var body: some View {
-    Chart(tag.sortedHistory) { data in
-      AreaMark(x: .value("day", tag.sortedHistory.firstIndex(where: { $0.id == data.id }) ?? 0),
+    Chart(sortedHistory) { data in
+      AreaMark(x: .value("day", sortedHistory.firstIndex(where: { $0.id == data.id }) ?? 0),
                y: .value("uses", Int(data.uses) ?? 0))
       .interpolationMethod(.catmullRom)
     }

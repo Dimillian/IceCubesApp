@@ -27,11 +27,6 @@ public struct Tag: Codable, Identifiable, Equatable, Hashable {
   public let following: Bool
   public let history: [History]
 
-  public var sortedHistory: [History] {
-    history.sorted {
-      Int($0.day) ?? 0 < Int($1.day) ?? 0
-    }
-  }
   public var totalUses: Int {
     history.compactMap { Int($0.uses) }.reduce(0, +)
   }
