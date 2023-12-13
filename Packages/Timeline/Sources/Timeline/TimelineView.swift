@@ -7,6 +7,7 @@ import Status
 import SwiftData
 import SwiftUI
 import SwiftUIIntrospect
+import Charts
 
 @MainActor
 public struct TimelineView: View {
@@ -154,6 +155,9 @@ public struct TimelineView: View {
     if let tag = viewModel.tag {
       headerView {
         HStack {
+          TagChartView(tag: tag)
+            .padding(.top, 12)
+          
           VStack(alignment: .leading, spacing: 4) {
             Text("#\(tag.name)")
               .font(.scaledHeadline)

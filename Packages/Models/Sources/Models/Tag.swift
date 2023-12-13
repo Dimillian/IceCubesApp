@@ -1,7 +1,10 @@
 import Foundation
 
 public struct Tag: Codable, Identifiable, Equatable, Hashable {
-  public struct History: Codable {
+  public struct History: Codable, Identifiable {
+    public var id: String {
+      day
+    }
     public let day: String
     public let accounts: String
     public let uses: String
@@ -24,6 +27,11 @@ public struct Tag: Codable, Identifiable, Equatable, Hashable {
   public let following: Bool
   public let history: [History]
 
+  public var sortedHistory: [History] {
+    history.sorted {
+      Int($0.day) ?? 0 < Int($1.day) ?? 0
+    }
+  }
   public var totalUses: Int {
     history.compactMap { Int($0.uses) }.reduce(0, +)
   }

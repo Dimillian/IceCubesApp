@@ -21,6 +21,7 @@ public struct TagRowView: View {
           .foregroundStyle(.secondary)
       }
       Spacer()
+      TagChartView(tag: tag)
     }
     .contentShape(Rectangle())
     .onTapGesture {
