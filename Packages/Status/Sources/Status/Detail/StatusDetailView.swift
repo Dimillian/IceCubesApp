@@ -13,6 +13,7 @@ public struct StatusDetailView: View {
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath
   @Environment(\.isCompact) private var isCompact: Bool
+  @Environment(UserPreferences.self) private var userPreferences: UserPreferences
 
   @State private var viewModel: StatusDetailViewModel
 
@@ -109,7 +110,7 @@ public struct StatusDetailView: View {
 
   private func makeStatusesListView(statuses: [Status]) -> some View {
     ForEach(statuses) { status in
-      let (indentationLevel, extraInsets) = viewModel.getIndentationLevel(id: status.id)
+      let (indentationLevel, extraInsets) = viewModel.getIndentationLevel(id: status.id, maxIndent: userPreferences.getRealMaxIndent())
       let viewModel: StatusRowViewModel = .init(status: status,
                                                 client: client,
                                                 routerPath: routerPath,
