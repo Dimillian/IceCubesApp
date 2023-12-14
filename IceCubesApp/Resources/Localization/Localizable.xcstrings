@@ -61176,6 +61176,17 @@
         }
       }
     },
+    "status.editor.follow-up.text.placeholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Type your follow-up content here."
+          }
+        }
+      }
+    },
     "status.editor.language-select.confirmation.detected-%@" : {
       "extractionState" : "manual",
       "localizations" : {

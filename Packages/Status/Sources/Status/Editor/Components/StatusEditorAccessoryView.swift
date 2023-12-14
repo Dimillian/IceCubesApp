@@ -12,8 +12,9 @@ struct StatusEditorAccessoryView: View {
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(\.colorScheme) private var colorScheme
 
-  @FocusState<Bool>.Binding var isSpoilerTextFocused: Bool
-  var viewModel: StatusEditorViewModel
+  @FocusState<UUID?>.Binding var isSpoilerTextFocused: UUID?
+  let focusedSEVM: StatusEditorViewModel
+  @Binding var followUpSEVMs: [StatusEditorViewModel]
 
   @State private var isDraftsSheetDisplayed: Bool = false
   @State private var isLanguageSheetDisplayed: Bool = false
@@ -25,7 +26,8 @@ struct StatusEditorAccessoryView: View {
   @State private var isCameraPickerPresented: Bool = false
 
   var body: some View {
-    @Bindable var viewModel = viewModel
+    @Bindable var viewModel = focusedSEVM
+
     VStack(spacing: 0) {
       Divider()
       HStack {
@@ -84,6 +86,14 @@ struct StatusEditorAccessoryView: View {
             .disabled(viewModel.showPoll)
 
             Button {
+              // all SEVM have the same visibility value
+              followUpSEVMs.append(StatusEditorViewModel(mode: .new(visibility: focusedSEVM.visibility)))
+            } label: {
+              Image(systemName: "arrowshape.turn.up.left.circle.fill") 
+            }
+            .disabled(!canAddNewSEVM)
+
+            Button {
               withAnimation {
                 viewModel.showPoll.toggle()
                 viewModel.resetPollDefaults()
@@ -98,7 +108,7 @@ struct StatusEditorAccessoryView: View {
               withAnimation {
                 viewModel.spoilerOn.toggle()
               }
-              isSpoilerTextFocused.toggle()
+              isSpoilerTextFocused = viewModel.id
             } label: {
               Image(systemName: viewModel.spoilerOn ? "exclamationmark.triangle.fill" : "exclamationmark.triangle")
             }
@@ -180,12 +190,26 @@ struct StatusEditorAccessoryView: View {
     }
   }
 
+  private var canAddNewSEVM: Bool {
+    guard followUpSEVMs.count < 5 else { return false }
+
+    if followUpSEVMs.isEmpty,                  // there is only mainSEVM on the editor
+       !focusedSEVM.statusText.string.isEmpty  // focusedSEVM is also mainSEVM
+    { return true }
+
+    if let lastSEVMs = followUpSEVMs.last,
+       !lastSEVMs.statusText.string.isEmpty
+    { return true }
+
+    return false
+  }
+
   private var draftsListView: some View {
     DraftsListView(selectedDraft: .init(get: {
       nil
     }, set: { draft in
       if let draft {
-        viewModel.insertStatusText(text: draft.content)
+        focusedSEVM.insertStatusText(text: draft.content)
       }
     }))
   }
@@ -205,17 +229,17 @@ struct StatusEditorAccessoryView: View {
         Button {
           Task {
             isLoadingAIRequest = true
-            await viewModel.runOpenAI(prompt: prompt.toRequestPrompt(text: viewModel.statusText.string))
+            await focusedSEVM.runOpenAI(prompt: prompt.toRequestPrompt(text: focusedSEVM.statusText.string))
             isLoadingAIRequest = false
           }
         } label: {
           prompt.label
         }
       }
-      if let backup = viewModel.backupStatusText {
+      if let backup = focusedSEVM.backupStatusText {
         Button {
-          viewModel.replaceTextWith(text: backup.string)
-          viewModel.backupStatusText = nil
+          focusedSEVM.replaceTextWith(text: backup.string)
+          focusedSEVM.backupStatusText = nil
         } label: {
           Label("status.editor.restore-previous", systemImage: "arrow.uturn.right")
         }
@@ -268,15 +292,15 @@ struct StatusEditorAccessoryView: View {
           name: language.localizedName
         ).tag(language.isoCode)
         Spacer()
-        if language.isoCode == viewModel.selectedLanguage {
+        if language.isoCode == focusedSEVM.selectedLanguage {
           Image(systemName: "checkmark")
         }
       }
       .listRowBackground(theme.primaryBackgroundColor)
       .contentShape(Rectangle())
       .onTapGesture {
-        viewModel.selectedLanguage = language.isoCode
-        viewModel.hasExplicitlySelectedLanguage = true
+        focusedSEVM.selectedLanguage = language.isoCode
+        focusedSEVM.hasExplicitlySelectedLanguage = true
         isLanguageSheetDisplayed = false
       }
     }
@@ -285,7 +309,7 @@ struct StatusEditorAccessoryView: View {
   private var customEmojisSheet: some View {
     NavigationStack {
       ScrollView {
-        ForEach(viewModel.customEmojiContainer) { container in
+        ForEach(focusedSEVM.customEmojiContainer) { container in
           VStack(alignment: .leading) {
             Text(container.categoryName)
               .font(.scaledFootnote)
@@ -308,7 +332,7 @@ struct StatusEditorAccessoryView: View {
                   }
                 }
                 .onTapGesture {
-                  viewModel.insertStatusText(text: " :\(emoji.shortcode): ")
+                  focusedSEVM.insertStatusText(text: " :\(emoji.shortcode): ")
                 }
               }
             }
@@ -332,7 +356,7 @@ struct StatusEditorAccessoryView: View {
 
   @ViewBuilder
   private var characterCountView: some View {
-    let value = (currentInstance.instance?.configuration?.statuses.maxCharacters ?? 500) + viewModel.statusTextCharacterLength
+    let value = (currentInstance.instance?.configuration?.statuses.maxCharacters ?? 500) + focusedSEVM.statusTextCharacterLength
 
     Text("\(value)")
       .foregroundColor(value < 0 ? .red : .secondary)
