@@ -105,6 +105,7 @@ struct StatusEditorMediaEditView: View {
           }
         }
       }
+      .preferredColorScheme(theme.selectedScheme == .dark ? .dark : .light)
     }
   }
   

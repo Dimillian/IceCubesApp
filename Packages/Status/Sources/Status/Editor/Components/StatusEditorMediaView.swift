@@ -10,7 +10,7 @@ struct StatusEditorMediaView: View {
   @Environment(Theme.self) private var theme
   @Environment(CurrentInstance.self) private var currentInstance
   var viewModel: StatusEditorViewModel
-  @Binding var editingContainer: StatusEditorMediaContainer?
+  @Binding var editingMediaContainer: StatusEditorMediaContainer?
 
   @State private var isErrorDisplayed: Bool = false
 
@@ -56,9 +56,9 @@ struct StatusEditorMediaView: View {
   private var scrollBottomPadding : CGFloat? = 0
 #endif
 
-  init(viewModel: StatusEditorViewModel, editingContainer: Binding<StatusEditorMediaContainer?>) {
+  init(viewModel: StatusEditorViewModel, editingMediaContainer: Binding<StatusEditorMediaContainer?>) {
     self.viewModel = viewModel
-    self._editingContainer = editingContainer
+    self._editingMediaContainer = editingMediaContainer
   }
 
   private func pixel(at index: Int) -> some View {
@@ -175,7 +175,7 @@ struct StatusEditorMediaView: View {
     if container.mediaAttachment?.url != nil {
       if currentInstance.isEditAltTextSupported || !viewModel.mode.isEditing {
         Button {
-          editingContainer = container
+          editingMediaContainer = container
         } label: {
           Label(container.mediaAttachment?.description?.isEmpty == false ?
             "status.editor.description.edit" : "status.editor.description.add",
@@ -211,7 +211,7 @@ struct StatusEditorMediaView: View {
 
   private func makeAltMarker(container: StatusEditorMediaContainer) -> some View {
     Button {
-      editingContainer = container
+      editingMediaContainer = container
     } label: {
       Text("status.image.alt-text.abbreviation")
         .font(.caption2)

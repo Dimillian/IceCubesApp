@@ -8,7 +8,9 @@ import PhotosUI
 import SwiftUI
 
 @MainActor
-@Observable public class StatusEditorViewModel: NSObject {
+@Observable public class StatusEditorViewModel: NSObject, Identifiable {
+  public let id = UUID()
+  
   var mode: Mode
 
   var client: Client?
