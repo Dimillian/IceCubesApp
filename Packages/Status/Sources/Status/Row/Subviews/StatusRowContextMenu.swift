@@ -296,6 +296,7 @@ struct SelectTextView: View {
             }
           }
         }
+        .background(Color.primaryBackground)
         .navigationTitle("status.action.select-text")
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -316,6 +317,8 @@ struct SelectableText: UIViewRepresentable {
     let textView = UITextView()
     textView.isEditable = false
     textView.attributedText = attributedText
+    textView.textColor = UIColor(Color.label)
+    textView.backgroundColor = UIColor(Color.primaryBackground)
     return textView
   }
 
