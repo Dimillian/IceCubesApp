@@ -112,7 +112,8 @@ public struct StatusDetailView: View {
       let (indentationLevel, extraInsets) = viewModel.getIndentationLevel(id: status.id)
       let viewModel: StatusRowViewModel = .init(status: status,
                                                 client: client,
-                                                routerPath: routerPath)
+                                                routerPath: routerPath,
+                                                scrollToId: $viewModel.scrollToId)
       let isFocused = self.viewModel.statusId == status.id
 
       StatusRowView(viewModel: viewModel)
