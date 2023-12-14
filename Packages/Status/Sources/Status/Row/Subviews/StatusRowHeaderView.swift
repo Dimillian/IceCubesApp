@@ -11,6 +11,7 @@ struct StatusRowHeaderView: View {
   @Environment(Theme.self) private var theme
 
   let viewModel: StatusRowViewModel
+  @State private var showTextForSelection: Bool = false
 
   var body: some View {
     HStack(alignment: .center) {
@@ -26,6 +27,10 @@ struct StatusRowHeaderView: View {
         contextMenuButton
       }
     }
+    .sheet(isPresented: $showTextForSelection) {
+      let content = viewModel.status.reblog?.content.asSafeMarkdownAttributedString ?? viewModel.status.content.asSafeMarkdownAttributedString
+      SelectTextView(content: content)
+    }
     .accessibilityElement(children: .combine)
     .accessibilityLabel(Text("\(viewModel.finalStatus.account.safeDisplayName)") + Text(", ") + Text(viewModel.finalStatus.createdAt.relativeFormatted))
     .accessibilityAction {
@@ -33,7 +38,7 @@ struct StatusRowHeaderView: View {
     }
     .accessibilityActions {
       if isFocused {
-        StatusRowContextMenu(viewModel: viewModel)
+        StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showTextForSelection)
       }
     }
   }
@@ -120,7 +125,7 @@ struct StatusRowHeaderView: View {
 
   private var contextMenuButton: some View {
     Menu {
-      StatusRowContextMenu(viewModel: viewModel)
+      StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showTextForSelection)
         .onAppear {
           Task {
             await viewModel.loadAuthorRelationship()
