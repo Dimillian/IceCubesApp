@@ -78,10 +78,10 @@ struct StatusEditorToolbarItems: ToolbarContent {
   }
 
   @discardableResult
-  private func postStatus(with model: StatusEditorViewModel) async -> Status? {
+  private func postStatus(with model: StatusEditorViewModel, isMainPost: Bool) async -> Status? {
     let status = await model.postStatus()
 
-    if status != nil {
+    if status != nil && isMainPost {
       close()
       SoundEffectManager.shared.playSound(.tootSent)
       NotificationCenter.default.post(name: .shareSheetClose, object: nil)
@@ -99,10 +99,10 @@ struct StatusEditorToolbarItems: ToolbarContent {
   }
 
   private func postAllStatus() async {
-    guard let openingPost = await postStatus(with: mainSEVM) else { return }
+    guard let openingPost = await postStatus(with: mainSEVM, isMainPost: true) else { return }
     for p in followUpSEVMs {
       p.mode = .replyTo(status: openingPost)
-      await postStatus(with: p)
+      await postStatus(with: p, isMainPost: false)
     }
   }
 
