@@ -43175,8 +43175,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Max reply indentation: %@"
+            "state" : "translated",
+            "value" : "最大回复缩进：%@"
           }
         },
         "zh-Hant" : {
@@ -44357,8 +44357,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show reply indentation"
+            "state" : "translated",
+            "value" : "显示回复缩进"
           }
         },
         "zh-Hant" : {
@@ -58188,8 +58188,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Select Text"
+            "state" : "translated",
+            "value" : "选择文本"
           }
         },
         "zh-Hant" : {
@@ -61640,8 +61640,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Type your follow-up content here."
+            "state" : "translated",
+            "value" : "在这里输入你的后续内容"
           }
         },
         "zh-Hant" : {
