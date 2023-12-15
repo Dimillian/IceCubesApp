@@ -16,6 +16,7 @@ struct StatusRowContextMenu: View {
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(StatusDataController.self) private var statusDataController
   @Environment(QuickLook.self) private var quickLook
+  @Environment(Theme.self) private var theme
 
   var viewModel: StatusRowViewModel
   @Binding var showTextForSelection: Bool
@@ -296,7 +297,7 @@ struct SelectTextView: View {
             }
           }
         }
-        .background(Color.primaryBackground)
+        .background(Theme.shared.primaryBackgroundColor)
         .navigationTitle("status.action.select-text")
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -318,7 +319,7 @@ struct SelectableText: UIViewRepresentable {
     textView.isEditable = false
     textView.attributedText = attributedText
     textView.textColor = UIColor(Color.label)
-    textView.backgroundColor = UIColor(Color.primaryBackground)
+    textView.backgroundColor = UIColor(Theme.shared.primaryBackgroundColor)
     return textView
   }
 

@@ -74,7 +74,7 @@ public struct StatusEditorView: View {
       .scrollPosition(id: $scrollID, anchor: .top)
       .animation(.bouncy(duration: 0.3), value: editorFocusState)
       .animation(.bouncy(duration: 0.3), value: followUpSEVMs)
-      .background(Color.primaryBackground)
+      .background(theme.primaryBackgroundColor)
       .safeAreaInset(edge: .bottom) {
         StatusEditorAutoCompleteView(viewModel: focusedSEVM)
       }
