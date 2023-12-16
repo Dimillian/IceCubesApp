@@ -18,9 +18,10 @@ public struct TagRowView: View {
           .font(.scaledHeadline)
         Text("design.tag.n-posts-from-n-participants \(tag.totalUses) \(tag.totalAccounts)")
           .font(.scaledFootnote)
-          .foregroundColor(.gray)
+          .foregroundStyle(.secondary)
       }
       Spacer()
+      TagChartView(tag: tag)
     }
     .contentShape(Rectangle())
     .onTapGesture {

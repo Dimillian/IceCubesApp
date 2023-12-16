@@ -35,7 +35,7 @@ public struct AppAccountView: View {
   private var compactView: some View {
     HStack {
       if let account = viewModel.account {
-        AvatarView(url: account.avatar)
+        AvatarView(account.avatar)
       } else {
         ProgressView()
       }
@@ -61,7 +61,7 @@ public struct AppAccountView: View {
       HStack {
         if let account = viewModel.account {
           ZStack(alignment: .topTrailing) {
-            AvatarView(url: account.avatar)
+            AvatarView(account.avatar)
             if viewModel.appAccount.id == appAccounts.currentAccount.id {
               Image(systemName: "checkmark.circle.fill")
                 .foregroundStyle(.white, .green)
@@ -86,7 +86,7 @@ public struct AppAccountView: View {
           ProgressView()
           Text(viewModel.appAccount.accountName ?? viewModel.acct)
             .font(.scaledSubheadline)
-            .foregroundColor(.gray)
+            .foregroundStyle(Color.secondary)
             .padding(.leading, 6)
         }
         VStack(alignment: .leading) {
@@ -97,13 +97,13 @@ public struct AppAccountView: View {
               .font(.scaledSubheadline)
               .emojiSize(Font.scaledSubheadlineFont.emojiSize)
               .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
-              .foregroundColor(.gray)
+              .foregroundStyle(Color.secondary)
           }
         }
         if viewModel.isInNavigation {
           Spacer()
           Image(systemName: "chevron.right")
-            .foregroundColor(.gray)
+            .foregroundStyle(.secondary)
         }
       }
     }

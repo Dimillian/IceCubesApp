@@ -46,7 +46,7 @@ public struct StatusEmbeddedView: View {
 
   private func makeAccountView(account: Account) -> some View {
     HStack(alignment: .center) {
-      AvatarView(url: account.avatar, size: .embed)
+      AvatarView(account.avatar, config: .embed)
       VStack(alignment: .leading, spacing: 0) {
         EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
           .font(.scaledFootnote)
@@ -59,7 +59,7 @@ public struct StatusEmbeddedView: View {
             Text(status.reblog?.createdAt.relativeFormatted ?? status.createdAt.relativeFormatted)
         }
         .font(.scaledCaption)
-        .foregroundColor(.gray)
+        .foregroundStyle(.secondary)
       }
     }
   }

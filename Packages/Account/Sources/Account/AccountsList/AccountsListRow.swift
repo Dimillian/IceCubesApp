@@ -44,7 +44,7 @@ public struct AccountsListRow: View {
 
   public var body: some View {
     HStack(alignment: .top) {
-      AvatarView(url: viewModel.account.avatar, size: .status)
+      AvatarView(viewModel.account.avatar)
       VStack(alignment: .leading, spacing: 2) {
         EmojiTextApp(.init(stringValue: viewModel.account.safeDisplayName), emojis: viewModel.account.emojis)
           .font(.scaledSubheadline)
@@ -53,7 +53,7 @@ public struct AccountsListRow: View {
           .fontWeight(.semibold)
         Text("@\(viewModel.account.acct)")
           .font(.scaledFootnote)
-          .foregroundColor(.gray)
+          .foregroundStyle(Color.secondary)
 
         // First parameter is the number for the plural
         // Second parameter is the formatted string to show

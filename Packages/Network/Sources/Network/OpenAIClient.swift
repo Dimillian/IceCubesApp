@@ -1,23 +1,11 @@
 import Foundation
 
 protocol OpenAIRequest: Encodable {
-  var path: String { get }
+  var model: String { get }
 }
 
 public struct OpenAIClient {
-  private let endpoint: URL = .init(string: "https://api.openai.com/v1/")!
-
-  private var APIKey: String {
-    if let path = Bundle.main.path(forResource: "Secret", ofType: "plist") {
-      let secret = NSDictionary(contentsOfFile: path)
-      return secret?["OPENAI_SECRET"] as? String ?? ""
-    }
-    return ""
-  }
-
-  private var authorizationHeaderValue: String {
-    "Bearer \(APIKey)"
-  }
+  private let endpoint: URL = .init(string: "https://icecubesrelay.fly.dev/openai")!
 
   private var encoder: JSONEncoder {
     let encoder = JSONEncoder()
@@ -42,14 +30,30 @@ public struct OpenAIClient {
 
     let temperature: CGFloat
 
-    var path: String {
-      "chat/completions"
-    }
-
     public init(content: String, temperature: CGFloat) {
       messages = [.init(content: content)]
       self.temperature = temperature
     }
+  }
+  
+  public struct VisionRequest: OpenAIRequest {
+    public struct Message: Encodable {
+      public struct MessageContent: Encodable {
+        public struct ImageUrl: Encodable {
+          public let url: URL
+        }
+        public let type: String
+        public let text: String?
+        public let imageUrl: ImageUrl?
+      }
+      
+      public let role = "user"
+      public let content: [MessageContent]
+    }
+
+    let model = "gpt-4-vision-preview"
+    let messages: [Message]
+    let maxTokens = 50
   }
 
   public enum Prompt {
@@ -58,6 +62,7 @@ public struct OpenAIClient {
     case emphasize(input: String)
     case addTags(input: String)
     case insertTags(input: String)
+    case imageDescription(image: URL)
 
     var request: OpenAIRequest {
       switch self {
@@ -71,6 +76,9 @@ public struct OpenAIClient {
         ChatRequest(content: "Make a shorter version of this text: \(input)", temperature: 0.5)
       case let .emphasize(input):
         ChatRequest(content: "Make this text catchy, more fun: \(input)", temperature: 1)
+      case let .imageDescription(image):
+        VisionRequest(messages: [.init(content: [.init(type: "text", text: "What’s in this image? Be brief, it's for image alt description on a social network. Don't write in the first person.", imageUrl: nil)
+                                                 , .init(type: "image_url", text: nil, imageUrl: .init(url: image))])])
       }
     }
   }
@@ -103,9 +111,8 @@ public struct OpenAIClient {
   public func request(_ prompt: Prompt) async throws -> Response {
     do {
       let jsonData = try encoder.encode(prompt.request)
-      var request = URLRequest(url: endpoint.appending(path: prompt.request.path))
+      var request = URLRequest(url: endpoint)
       request.httpMethod = "POST"
-      request.setValue(authorizationHeaderValue, forHTTPHeaderField: "Authorization")
       request.setValue("application/json", forHTTPHeaderField: "Content-Type")
       request.httpBody = jsonData
       let (result, _) = try await URLSession.shared.data(for: request)

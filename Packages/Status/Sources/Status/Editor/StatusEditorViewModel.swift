@@ -8,14 +8,16 @@ import PhotosUI
 import SwiftUI
 
 @MainActor
-@Observable public class StatusEditorViewModel: NSObject {
+@Observable public class StatusEditorViewModel: NSObject, Identifiable {
+  public let id = UUID()
+  
   var mode: Mode
 
   var client: Client?
   var currentAccount: Account? {
     didSet {
       if let itemsProvider {
-        mediasImages = []
+        mediaContainers = []
         processItemsProvider(items: itemsProvider)
       }
     }
@@ -84,33 +86,44 @@ import SwiftUI
   var spoilerText: String = ""
 
   var isPosting: Bool = false
-  var selectedMedias: [PhotosPickerItem] = [] {
+  var mediaPickers: [PhotosPickerItem] = [] {
     didSet {
-      if selectedMedias.count > 4 {
-        selectedMedias = selectedMedias.prefix(4).map { $0 }
+      if mediaPickers.count > 4 {
+        mediaPickers = mediaPickers.prefix(4).map { $0 }
       }
-      isMediasLoading = true
-      inflateSelectedMedias()
+
+      let removedIDs = oldValue
+        .filter { !mediaPickers.contains($0) }
+        .compactMap { $0.itemIdentifier }
+      mediaContainers.removeAll { removedIDs.contains($0.id) }
+
+      let newPickerItems = mediaPickers.filter { !oldValue.contains($0) }
+      if !newPickerItems.isEmpty {
+        isMediasLoading = true
+        for item in newPickerItems {
+          prepareToPost(for: item)
+        }
+      }
     }
   }
 
   var isMediasLoading: Bool = false
 
-  var mediasImages: [StatusEditorMediaContainer] = []
+  private(set) var mediaContainers: [StatusEditorMediaContainer] = []
   var replyToStatus: Status?
   var embeddedStatus: Status?
 
-  var customEmojis: [Emoji] = []
+  var customEmojiContainer: [StatusEditorCategorizedEmojiContainer] = []
 
   var postingError: String?
   var showPostingErrorAlert: Bool = false
 
   var canPost: Bool {
-    statusText.length > 0 || !mediasImages.isEmpty
+    statusText.length > 0 || !mediaContainers.isEmpty
   }
 
   var shouldDisablePollButton: Bool {
-    !selectedMedias.isEmpty
+    !mediaPickers.isEmpty
   }
 
   var shouldDisplayDismissWarning: Bool {
@@ -137,7 +150,6 @@ import SwiftUI
 
   private var mentionString: String?
 
-  private var uploadTask: Task<Void, Never>?
   private var suggestedTask: Task<Void, Never>?
 
   init(mode: Mode) {
@@ -182,7 +194,7 @@ import SwiftUI
                             visibility: visibility,
                             inReplyToId: mode.replyToStatus?.id,
                             spoilerText: spoilerOn ? spoilerText : nil,
-                            mediaIds: mediasImages.compactMap { $0.mediaAttachment?.id },
+                            mediaIds: mediaContainers.compactMap { $0.mediaAttachment?.id },
                             poll: pollData,
                             language: selectedLanguage,
                             mediaAttributes: mediaAttributes)
@@ -278,11 +290,15 @@ import SwiftUI
       spoilerOn = !status.spoilerText.asRawText.isEmpty
       spoilerText = status.spoilerText.asRawText
       visibility = status.visibility
-      mediasImages = status.mediaAttachments.map { .init(image: nil,
-                                                         movieTransferable: nil,
-                                                         gifTransferable: nil,
-                                                         mediaAttachment: $0,
-                                                         error: nil) }
+      mediaContainers = status.mediaAttachments.map {
+        StatusEditorMediaContainer(
+          id: UUID().uuidString,
+          image: nil,
+          movieTransferable: nil,
+          gifTransferable: nil,
+          mediaAttachment: $0,
+          error: nil)
+      }
     case let .quote(status):
       embeddedStatus = status
       if let url = embeddedStatusURL {
@@ -370,12 +386,14 @@ import SwiftUI
   }
 
   func processCameraPhoto(image: UIImage) {
-    mediasImages.append(.init(image: image,
-                              movieTransferable: nil,
-                              gifTransferable: nil,
-                              mediaAttachment: nil,
-                              error: nil))
-    processMediasToUpload()
+    let container = StatusEditorMediaContainer(
+      id: UUID().uuidString,
+      image: image,
+      movieTransferable: nil,
+      gifTransferable: nil,
+      mediaAttachment: nil,
+      error: nil)
+    prepareToPost(for: container)
   }
 
   private func processItemsProvider(items: [NSItemProvider]) {
@@ -391,32 +409,44 @@ import SwiftUI
             if let text = content as? String {
               initialText += "\(text) "
             } else if let image = content as? UIImage {
-              mediasImages.append(.init(image: image,
-                                        movieTransferable: nil,
-                                        gifTransferable: nil,
-                                        mediaAttachment: nil,
-                                        error: nil))
+              let container = StatusEditorMediaContainer(
+                id: UUID().uuidString,
+                image: image,
+                movieTransferable: nil,
+                gifTransferable: nil,
+                mediaAttachment: nil,
+                error: nil)
+              prepareToPost(for: container)
             } else if let content = content as? ImageFileTranseferable,
                       let compressedData = await compressor.compressImageFrom(url: content.url),
                       let image = UIImage(data: compressedData)
             {
-              mediasImages.append(.init(image: image,
-                                        movieTransferable: nil,
-                                        gifTransferable: nil,
-                                        mediaAttachment: nil,
-                                        error: nil))
+              let container = StatusEditorMediaContainer(
+                id: UUID().uuidString,
+                image: image,
+                movieTransferable: nil,
+                gifTransferable: nil,
+                mediaAttachment: nil,
+                error: nil)
+              prepareToPost(for: container)
             } else if let video = content as? MovieFileTranseferable {
-              mediasImages.append(.init(image: nil,
-                                        movieTransferable: video,
-                                        gifTransferable: nil,
-                                        mediaAttachment: nil,
-                                        error: nil))
+              let container = StatusEditorMediaContainer(
+                id: UUID().uuidString,
+                image: nil,
+                movieTransferable: video,
+                gifTransferable: nil,
+                mediaAttachment: nil,
+                error: nil)
+              prepareToPost(for: container)
             } else if let gif = content as? GifFileTranseferable {
-              mediasImages.append(.init(image: nil,
-                                        movieTransferable: nil,
-                                        gifTransferable: gif,
-                                        mediaAttachment: nil,
-                                        error: nil))
+              let container = StatusEditorMediaContainer(
+                id: UUID().uuidString,
+                image: nil,
+                movieTransferable: nil,
+                gifTransferable: gif,
+                mediaAttachment: nil,
+                error: nil)
+              prepareToPost(for: container)
             }
           } catch {
             isMediasLoading = false
@@ -426,9 +456,6 @@ import SwiftUI
       if !initialText.isEmpty {
         statusText = .init(string: initialText)
         selectedRange = .init(location: statusText.string.utf16.count, length: 0)
-      }
-      if !mediasImages.isEmpty {
-        processMediasToUpload()
       }
     }
   }
@@ -482,16 +509,16 @@ import SwiftUI
           }
         case "@":
           query.removeFirst()
-          results = try await client.get(endpoint: Search.search(query: query,
-                                                                 type: "accounts",
-                                                                 offset: 0,
-                                                                 following: true),
-                                         forceVersion: .v2)
+          let accounts: [Account] = try await client.get(endpoint: Search.accountsSearch(query: query,
+                                                                                         type: nil,
+                                                                                         offset: 0,
+                                                                                         following: nil),
+                                                         forceVersion: .v1)
           guard !Task.isCancelled else {
             return
           }
           withAnimation {
-            mentionsSuggestions = results?.accounts ?? []
+            mentionsSuggestions = accounts
           }
         default:
           break
@@ -532,93 +559,111 @@ import SwiftUI
   // MARK: - Media related function
 
   private func indexOf(container: StatusEditorMediaContainer) -> Int? {
-    mediasImages.firstIndex(where: { $0.id == container.id })
+    mediaContainers.firstIndex(where: { $0.id == container.id })
   }
 
-  func inflateSelectedMedias() {
-    mediasImages = []
-
-    Task {
-      var medias: [StatusEditorMediaContainer] = []
-      for media in selectedMedias {
-        var file: (any Transferable)?
-
-        if file == nil {
-          file = try? await media.loadTransferable(type: GifFileTranseferable.self)
-        }
-        if file == nil {
-          file = try? await media.loadTransferable(type: MovieFileTranseferable.self)
-        }
-        if file == nil {
-          file = try? await media.loadTransferable(type: ImageFileTranseferable.self)
-        }
-
-        let compressor = StatusEditorCompressor()
-        if let imageFile = file as? ImageFileTranseferable,
-           let compressedData = await compressor.compressImageFrom(url: imageFile.url),
-           let image = UIImage(data: compressedData)
-        {
-          medias.append(.init(image: image,
-                              movieTransferable: nil,
-                              gifTransferable: nil,
-                              mediaAttachment: nil,
-                              error: nil))
-        } else if let videoFile = file as? MovieFileTranseferable {
-          medias.append(.init(image: nil,
-                              movieTransferable: videoFile,
-                              gifTransferable: nil,
-                              mediaAttachment: nil,
-                              error: nil))
-        } else if let gifFile = file as? GifFileTranseferable {
-          medias.append(.init(image: nil,
-                              movieTransferable: nil,
-                              gifTransferable: gifFile,
-                              mediaAttachment: nil,
-                              error: nil))
-        }
-      }
-
-      DispatchQueue.main.async { [weak self] in
-        self?.mediasImages = medias
-        self?.processMediasToUpload()
+  func prepareToPost(for pickerItem: PhotosPickerItem) {
+    Task(priority: .high) {
+      if let container = await makeMediaContainer(from: pickerItem) {
+        self.mediaContainers.append(container)
+        await upload(container: container)
+        self.isMediasLoading = false
       }
     }
   }
 
-  private func processMediasToUpload() {
-    isMediasLoading = false
-    uploadTask?.cancel()
-    let mediasCopy = mediasImages
-    uploadTask = Task {
-      for media in mediasCopy {
-        if !Task.isCancelled {
-          await upload(container: media)
+  func prepareToPost(for container: StatusEditorMediaContainer) {
+    Task(priority: .high) {
+      self.mediaContainers.append(container)
+      await upload(container: container)
+      self.isMediasLoading = false
+    }
+  }
+
+  func makeMediaContainer(from pickerItem: PhotosPickerItem) async -> StatusEditorMediaContainer? {
+    await withTaskGroup(of: StatusEditorMediaContainer?.self, returning: StatusEditorMediaContainer?.self) { taskGroup in
+      taskGroup.addTask(priority: .high) { await Self.makeImageContainer(from: pickerItem) }
+      taskGroup.addTask(priority: .high) { await Self.makeGifContainer(from: pickerItem) }
+      taskGroup.addTask(priority: .high) { await Self.makeMovieContainer(from: pickerItem) }
+
+      for await container in taskGroup {
+        if let container {
+          taskGroup.cancelAll()
+          return container
         }
       }
+
+      return nil
     }
+  }
+
+  private static func makeGifContainer(from pickerItem: PhotosPickerItem) async -> StatusEditorMediaContainer? {
+    guard let gifFile = try? await pickerItem.loadTransferable(type: GifFileTranseferable.self) else { return nil }
+
+    return StatusEditorMediaContainer(
+      id: pickerItem.itemIdentifier ?? UUID().uuidString,
+      image: nil,
+      movieTransferable: nil,
+      gifTransferable: gifFile,
+      mediaAttachment: nil,
+      error: nil)
+  }
+
+  private static func makeMovieContainer(from pickerItem: PhotosPickerItem) async -> StatusEditorMediaContainer? {
+    guard let movieFile = try? await pickerItem.loadTransferable(type: MovieFileTranseferable.self) else { return nil }
+
+    return StatusEditorMediaContainer(
+      id: pickerItem.itemIdentifier ?? UUID().uuidString,
+      image: nil,
+      movieTransferable: movieFile,
+      gifTransferable: nil,
+      mediaAttachment: nil,
+      error: nil)
+  }
+
+  private static func makeImageContainer(from pickerItem: PhotosPickerItem) async -> StatusEditorMediaContainer? {
+    guard let imageFile = try? await pickerItem.loadTransferable(type: ImageFileTranseferable.self) else { return nil }
+
+    let compressor = StatusEditorCompressor()
+
+    guard let compressedData = await compressor.compressImageFrom(url: imageFile.url),
+          let image = UIImage(data: compressedData)
+    else { return nil }
+
+    return StatusEditorMediaContainer(
+      id: pickerItem.itemIdentifier ?? UUID().uuidString,
+      image: image,
+      movieTransferable: nil,
+      gifTransferable: nil,
+      mediaAttachment: nil,
+      error: nil)
   }
 
   func upload(container: StatusEditorMediaContainer) async {
     if let index = indexOf(container: container) {
-      let originalContainer = mediasImages[index]
+      let originalContainer = mediaContainers[index]
       guard originalContainer.mediaAttachment == nil else { return }
-      let newContainer = StatusEditorMediaContainer(image: originalContainer.image,
-                                                    movieTransferable: originalContainer.movieTransferable,
-                                                    gifTransferable: nil,
-                                                    mediaAttachment: nil,
-                                                    error: nil)
-      mediasImages[index] = newContainer
+      let newContainer = StatusEditorMediaContainer(
+        id: originalContainer.id,
+        image: originalContainer.image,
+        movieTransferable: originalContainer.movieTransferable,
+        gifTransferable: nil,
+        mediaAttachment: nil,
+        error: nil)
+      mediaContainers[index] = newContainer
       do {
         let compressor = StatusEditorCompressor()
         if let image = originalContainer.image {
           let imageData = try await compressor.compressImageForUpload(image)
           let uploadedMedia = try await uploadMedia(data: imageData, mimeType: "image/jpeg")
           if let index = indexOf(container: newContainer) {
-            mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
-                                        movieTransferable: nil,
-                                        gifTransferable: nil,
-                                        mediaAttachment: uploadedMedia,
-                                        error: nil)
+            mediaContainers[index] = StatusEditorMediaContainer(
+              id: originalContainer.id,
+              image: mode.isInShareExtension ? originalContainer.image : nil,
+              movieTransferable: nil,
+              gifTransferable: nil,
+              mediaAttachment: uploadedMedia,
+              error: nil)
           }
           if let uploadedMedia, uploadedMedia.url == nil {
             scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
@@ -629,11 +674,13 @@ import SwiftUI
         {
           let uploadedMedia = try await uploadMedia(data: data, mimeType: compressedVideoURL.mimeType())
           if let index = indexOf(container: newContainer) {
-            mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
-                                        movieTransferable: originalContainer.movieTransferable,
-                                        gifTransferable: nil,
-                                        mediaAttachment: uploadedMedia,
-                                        error: nil)
+            mediaContainers[index] = StatusEditorMediaContainer(
+              id: originalContainer.id,
+              image: mode.isInShareExtension ? originalContainer.image : nil,
+              movieTransferable: originalContainer.movieTransferable,
+              gifTransferable: nil,
+              mediaAttachment: uploadedMedia,
+              error: nil)
           }
           if let uploadedMedia, uploadedMedia.url == nil {
             scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
@@ -641,11 +688,13 @@ import SwiftUI
         } else if let gifData = originalContainer.gifTransferable?.data {
           let uploadedMedia = try await uploadMedia(data: gifData, mimeType: "image/gif")
           if let index = indexOf(container: newContainer) {
-            mediasImages[index] = .init(image: mode.isInShareExtension ? originalContainer.image : nil,
-                                        movieTransferable: nil,
-                                        gifTransferable: originalContainer.gifTransferable,
-                                        mediaAttachment: uploadedMedia,
-                                        error: nil)
+            mediaContainers[index] = StatusEditorMediaContainer(
+              id: originalContainer.id,
+              image: mode.isInShareExtension ? originalContainer.image : nil,
+              movieTransferable: nil,
+              gifTransferable: originalContainer.gifTransferable,
+              mediaAttachment: uploadedMedia,
+              error: nil)
           }
           if let uploadedMedia, uploadedMedia.url == nil {
             scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
@@ -653,11 +702,13 @@ import SwiftUI
         }
       } catch {
         if let index = indexOf(container: newContainer) {
-          mediasImages[index] = .init(image: originalContainer.image,
-                                      movieTransferable: nil,
-                                      gifTransferable: nil,
-                                      mediaAttachment: nil,
-                                      error: error)
+          mediaContainers[index] = StatusEditorMediaContainer(
+            id: originalContainer.id,
+            image: originalContainer.image,
+            movieTransferable: nil,
+            gifTransferable: nil,
+            mediaAttachment: nil,
+            error: error)
         }
       }
     }
@@ -667,21 +718,23 @@ import SwiftUI
     Task {
       repeat {
         if let client,
-           let index = mediasImages.firstIndex(where: { $0.mediaAttachment?.id == mediaAttachement.id })
+           let index = mediaContainers.firstIndex(where: { $0.mediaAttachment?.id == mediaAttachement.id })
         {
-          guard mediasImages[index].mediaAttachment?.url == nil else {
+          guard mediaContainers[index].mediaAttachment?.url == nil else {
             return
           }
           do {
             let newAttachement: MediaAttachment = try await client.get(endpoint: Media.media(id: mediaAttachement.id,
                                                                                              json: .init(description: nil)))
             if newAttachement.url != nil {
-              let oldContainer = mediasImages[index]
-              mediasImages[index] = .init(image: oldContainer.image,
-                                          movieTransferable: oldContainer.movieTransferable,
-                                          gifTransferable: oldContainer.gifTransferable,
-                                          mediaAttachment: newAttachement,
-                                          error: nil)
+              let oldContainer = mediaContainers[index]
+              mediaContainers[index] = StatusEditorMediaContainer(
+                id: mediaAttachement.id,
+                image: oldContainer.image,
+                movieTransferable: oldContainer.movieTransferable,
+                gifTransferable: oldContainer.gifTransferable,
+                mediaAttachment: newAttachement,
+                error: nil)
             }
           } catch {}
         }
@@ -696,11 +749,13 @@ import SwiftUI
       do {
         let media: MediaAttachment = try await client.put(endpoint: Media.media(id: attachment.id,
                                                                                 json: .init(description: description)))
-        mediasImages[index] = .init(image: nil,
-                                    movieTransferable: nil,
-                                    gifTransferable: nil,
-                                    mediaAttachment: media,
-                                    error: nil)
+        mediaContainers[index] = StatusEditorMediaContainer(
+          id: container.id,
+          image: nil,
+          movieTransferable: nil,
+          gifTransferable: nil,
+          mediaAttachment: media,
+          error: nil)
       } catch { print(error) }
     }
   }
@@ -726,9 +781,33 @@ import SwiftUI
   // MARK: - Custom emojis
 
   func fetchCustomEmojis() async {
+    typealias EmojiContainer = StatusEditorCategorizedEmojiContainer
+
     guard let client else { return }
     do {
-      customEmojis = try await client.get(endpoint: CustomEmojis.customEmojis) ?? []
+      let customEmojis: [Emoji] = try await client.get(endpoint: CustomEmojis.customEmojis) ?? []
+      var emojiContainers: [EmojiContainer] = []
+
+      customEmojis.reduce([String: [Emoji]]()) { currentDict, emoji in
+        var dict = currentDict
+        let category = emoji.category ?? "Uncategorized"
+
+        if let emojis = dict[category] {
+          dict[category] = emojis + [emoji]
+        } else {
+          dict[category] = [emoji]
+        }
+
+        return dict
+      }.sorted(by: { lhs, rhs in
+        if rhs.key == "Uncategorized" { return false }
+        else if lhs.key == "Uncategorized" { return true }
+        else { return lhs.key < rhs.key }
+      }).forEach { key, value in
+        emojiContainers.append(.init(categoryName: key, emojis: value))
+      }
+
+      customEmojiContainer = emojiContainers
     } catch {}
   }
 }
@@ -761,3 +840,5 @@ extension StatusEditorViewModel: UITextPasteDelegate {
     }
   }
 }
+
+extension PhotosPickerItem: @unchecked Sendable {}

@@ -3,11 +3,15 @@ import Env
 import Models
 import Shimmer
 import SwiftUI
+import Network
 
+@MainActor
 struct StatusEditorMediaEditView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(Theme.self) private var theme
   @Environment(CurrentInstance.self) private var currentInstance
+  @Environment(UserPreferences.self) private var preferences
+  
   var viewModel: StatusEditorViewModel
   let container: StatusEditorMediaContainer
 
@@ -17,6 +21,10 @@ struct StatusEditorMediaEditView: View {
   @State private var isUpdating: Bool = false
 
   @State private var didAppear: Bool = false
+  @State private var isGeneratingDescription: Bool = false
+  
+  @State private var showTranslateButton: Bool = false
+  @State private var isTranslating: Bool = false
 
   var body: some View {
     NavigationStack {
@@ -26,6 +34,8 @@ struct StatusEditorMediaEditView: View {
                     text: $imageDescription,
                     axis: .vertical)
             .focused($isFieldFocused)
+          generateButton
+          translateButton
         }
         .listRowBackground(theme.primaryBackgroundColor)
         Section {
@@ -95,6 +105,75 @@ struct StatusEditorMediaEditView: View {
           }
         }
       }
+      .preferredColorScheme(theme.selectedScheme == .dark ? .dark : .light)
     }
+  }
+  
+  @ViewBuilder
+  private var generateButton: some View {
+    if let url = container.mediaAttachment?.url, preferences.isOpenAIEnabled {
+      Button {
+        Task {
+          if let description = await generateDescription(url: url) {
+            imageDescription = description
+            let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier
+            if lang != nil, lang != "en" {
+              withAnimation {
+                showTranslateButton = true
+              }
+            }
+          }
+        }
+      } label: {
+        if isGeneratingDescription {
+          ProgressView()
+        } else {
+          Text("status.editor.media.generate-description")
+        }
+      }
+    }
+  }
+  
+  @ViewBuilder
+  private var translateButton: some View {
+    if showTranslateButton {
+      Button {
+        Task {
+          if let description = await translateDescription() {
+            imageDescription = description
+            withAnimation {
+              showTranslateButton = false
+            }
+          }
+        }
+      } label: {
+        if isTranslating {
+          ProgressView()
+        } else {
+          Text("status.action.translate")
+        }
+      }
+
+    }
+  }
+  
+  private func generateDescription(url: URL) async -> String? {
+    isGeneratingDescription = true
+    let client = OpenAIClient()
+    let response = try? await client.request(.imageDescription(image: url))
+    isGeneratingDescription = false
+    return response?.trimmedText
+  }
+  
+  private func translateDescription() async -> String? {
+    isTranslating = true
+    let userAPIKey = DeepLUserAPIHandler.readIfAllowed()
+    let userAPIFree = UserPreferences.shared.userDeeplAPIFree
+    let deeplClient = DeepLClient(userAPIKey: userAPIKey, userAPIFree: userAPIFree)
+    let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier
+    guard let lang else { return nil }
+    let translation = try? await deeplClient.request(target: lang, text: imageDescription)
+    isTranslating = false
+    return translation?.content.asRawText
   }
 }

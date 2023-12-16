@@ -3,6 +3,7 @@ import Models
 
 public enum Accounts: Endpoint {
   case accounts(id: String)
+  case lookup(name: String)
   case favorites(sinceId: String?)
   case bookmarks(sinceId: String?)
   case followedTags
@@ -34,6 +35,8 @@ public enum Accounts: Endpoint {
     switch self {
     case let .accounts(id):
       "accounts/\(id)"
+    case .lookup:
+      "accounts/lookup"
     case .favorites:
       "favourites"
     case .bookmarks:
@@ -81,6 +84,10 @@ public enum Accounts: Endpoint {
 
   public func queryItems() -> [URLQueryItem]? {
     switch self {
+    case let .lookup(name):
+      return [
+        .init(name: "acct", value: name),
+      ]
     case let .statuses(_, sinceId, tag, onlyMedia, excludeReplies, pinned):
       var params: [URLQueryItem] = []
       if let tag {

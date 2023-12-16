@@ -15,29 +15,38 @@ public struct StatusRowView: View {
   @Environment(\.isCompact) private var isCompact: Bool
   @Environment(\.accessibilityVoiceOverEnabled) private var accessibilityVoiceOverEnabled
   @Environment(\.isStatusFocused) private var isFocused
-  @Environment(\.isStatusReplyToPrevious) private var isStatusReplyToPrevious
+  @Environment(\.indentationLevel) private var indentationLevel
+  @Environment(\.isHomeTimeline) private var isHomeTimeline
 
   @Environment(QuickLook.self) private var quickLook
   @Environment(Theme.self) private var theme
 
   @State private var viewModel: StatusRowViewModel
+  @State private var showSelectableText: Bool = false
 
   public init(viewModel: StatusRowViewModel) {
     _viewModel = .init(initialValue: viewModel)
   }
 
   var contextMenu: some View {
-    StatusRowContextMenu(viewModel: viewModel)
+    StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showSelectableText)
   }
 
   public var body: some View {
     HStack(spacing: 0) {
-      if isStatusReplyToPrevious {
-        Rectangle()
-          .fill(theme.tintColor)
-          .frame(width: 2)
-          .accessibilityHidden(true)
-        Spacer(minLength: 8)
+      if !isCompact {
+        HStack(spacing: 3) {
+          ForEach(0..<indentationLevel, id: \.self) { level in
+            Rectangle()
+              .fill(theme.tintColor)
+              .frame(width: 2)
+              .accessibilityHidden(true)
+              .opacity((indentationLevel == level + 1) ? 1 : 0.15)
+          }
+        }
+        if indentationLevel > 0 {
+          Spacer(minLength: 8)
+        }
       }
       VStack(alignment: .leading) {
         if viewModel.isFiltered, let filter = viewModel.filter {
@@ -53,7 +62,7 @@ public struct StatusRowView: View {
               StatusRowReblogView(viewModel: viewModel)
               StatusRowReplyView(viewModel: viewModel)
             }
-            .padding(.leading, AvatarView.Size.status.size.width + .statusColumnsSpacing)
+            .padding(.leading, AvatarView.FrameConfig.status.width + .statusColumnsSpacing)
           }
           HStack(alignment: .top, spacing: .statusColumnsSpacing) {
             if !isCompact,
@@ -62,13 +71,16 @@ public struct StatusRowView: View {
               Button {
                 viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
               } label: {
-                AvatarView(url: viewModel.finalStatus.account.avatar, size: .status)
+                AvatarView(viewModel.finalStatus.account.avatar)
               }
             }
             VStack(alignment: .leading) {
               if !isCompact, theme.avatarPosition == .top {
                 StatusRowReblogView(viewModel: viewModel)
                 StatusRowReplyView(viewModel: viewModel)
+                if isHomeTimeline {
+                  StatusRowTagView(viewModel: viewModel)
+                }
               }
               VStack(alignment: .leading, spacing: 8) {
                 if !isCompact {
@@ -185,6 +197,10 @@ public struct StatusRowView: View {
     .alignmentGuide(.listRowSeparatorLeading) { _ in
       -100
     }
+    .sheet(isPresented: $showSelectableText) {
+      let content = viewModel.status.reblog?.content.asSafeMarkdownAttributedString ?? viewModel.status.content.asSafeMarkdownAttributedString
+      SelectTextView(content: content)
+    }
     .environment(
       StatusDataControllerProvider.shared.dataController(for: viewModel.finalStatus,
                                                          client: viewModel.client)
@@ -209,12 +225,13 @@ public struct StatusRowView: View {
       Button("accessibility.status.media-viewer-action.label") {
         HapticManager.shared.fireHaptic(.notification(.success))
         let attachments = viewModel.finalStatus.mediaAttachments
-        if ProcessInfo.processInfo.isMacCatalystApp {
-          openWindow(value: WindowDestination.mediaViewer(attachments: attachments,
-                                                          selectedAttachment: attachments[0]))
-        } else {
-          quickLook.prepareFor(selectedMediaAttachment: attachments[0], mediaAttachments: attachments)
-        }
+#if targetEnvironment(macCatalyst)
+        openWindow(value: WindowDestinationMedia.mediaViewer(
+          attachments: attachments,
+          selectedAttachment: attachments[0]))
+#else
+        quickLook.prepareFor(selectedMediaAttachment: attachments[0], mediaAttachments: attachments)
+#endif
       }
     }
 

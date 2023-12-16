@@ -12,6 +12,8 @@ public struct StatusDetailView: View {
   @Environment(StreamWatcher.self) private var watcher
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath
+  @Environment(\.isCompact) private var isCompact: Bool
+  @Environment(UserPreferences.self) private var userPreferences: UserPreferences
 
   @State private var viewModel: StatusDetailViewModel
 
@@ -92,6 +94,11 @@ public struct StatusDetailView: View {
           }
         }
       }
+      .refreshable {
+        Task {
+          await viewModel.fetch()
+        }
+      }
       .onChange(of: watcher.latestEvent?.id) {
         guard let lastEvent = watcher.latestEvent else { return }
         viewModel.handleEvent(event: lastEvent, currentAccount: currentAccount.account)
@@ -103,15 +110,16 @@ public struct StatusDetailView: View {
 
   private func makeStatusesListView(statuses: [Status]) -> some View {
     ForEach(statuses) { status in
-      let isReplyToPrevious = viewModel.isReplyToPreviousCache[status.id] ?? false
+      let (indentationLevel, extraInsets) = viewModel.getIndentationLevel(id: status.id, maxIndent: userPreferences.getRealMaxIndent())
       let viewModel: StatusRowViewModel = .init(status: status,
                                                 client: client,
-                                                routerPath: routerPath)
+                                                routerPath: routerPath,
+                                                scrollToId: $viewModel.scrollToId)
       let isFocused = self.viewModel.statusId == status.id
 
       StatusRowView(viewModel: viewModel)
-        .environment(\.extraLeadingInset, isReplyToPrevious ? 10 : 0)
-        .environment(\.isStatusReplyToPrevious, isReplyToPrevious)
+        .environment(\.extraLeadingInset, !isCompact ? extraInsets : 0)
+        .environment(\.indentationLevel, !isCompact ? indentationLevel : 0)
         .environment(\.isStatusFocused, isFocused)
         .overlay {
           if isFocused {

@@ -62,7 +62,7 @@ struct StatusRowTranslateView: View {
             .font(.scaledBody)
           Text(getLocalizedString(langCode: translation.detectedSourceLanguage, provider: translation.provider))
             .font(.footnote)
-            .foregroundColor(.gray)
+            .foregroundStyle(.secondary)
         }
       }
       .fixedSize(horizontal: false, vertical: true)

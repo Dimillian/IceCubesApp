@@ -87,15 +87,7 @@ import Observation
       tags = []
     }
   }
-
-  public func createList(title: String) async {
-    guard let client else { return }
-    do {
-      let list: Models.List = try await client.post(endpoint: Lists.createList(title: title))
-      lists.append(list)
-    } catch {}
-  }
-
+  
   public func deleteList(list: Models.List) async {
     guard let client else { return }
     lists.removeAll(where: { $0.id == list.id })

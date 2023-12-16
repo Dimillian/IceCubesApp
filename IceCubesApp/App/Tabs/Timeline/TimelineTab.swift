@@ -143,6 +143,11 @@ struct TimelineTab: View {
             Label(list.title, systemImage: "list.bullet")
           }
         }
+        Button {
+          routerPath.presentedSheet = .listCreate
+        } label: {
+          Label("account.list.create", systemImage: "plus")
+        }
       }
     }
 

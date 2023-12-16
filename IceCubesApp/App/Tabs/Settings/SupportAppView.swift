@@ -175,7 +175,7 @@ struct SupportAppView: View {
                 .font(.scaledSubheadline)
               Text(Tip.supporter.subtitle)
                 .font(.scaledFootnote)
-                .foregroundColor(.gray)
+                .foregroundStyle(.secondary)
             }
             Spacer()
             makePurchaseButton(product: subscription)
@@ -204,7 +204,7 @@ struct SupportAppView: View {
                 .font(.scaledSubheadline)
               Text(tip.subtitle)
                 .font(.scaledFootnote)
-                .foregroundColor(.gray)
+                .foregroundStyle(.secondary)
             }
             Spacer()
             makePurchaseButton(product: product)
@@ -262,7 +262,7 @@ struct SupportAppView: View {
           .font(.scaledSubheadline)
         Text("settings.support.placeholder.loading-subtitle")
           .font(.scaledFootnote)
-          .foregroundColor(.gray)
+          .foregroundStyle(.secondary)
       }
       .padding(.vertical, 8)
     }

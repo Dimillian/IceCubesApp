@@ -5,7 +5,7 @@ import SwiftUI
 import UIKit
 
 struct StatusEditorMediaContainer: Identifiable {
-  let id = UUID().uuidString
+  let id: String
   let image: UIImage?
   let movieTransferable: MovieFileTranseferable?
   let gifTransferable: GifFileTranseferable?

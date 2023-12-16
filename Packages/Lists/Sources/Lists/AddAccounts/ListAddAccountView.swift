@@ -12,9 +12,6 @@ public struct ListAddAccountView: View {
   @Environment(CurrentAccount.self) private var currentAccount
   @State private var viewModel: ListAddAccountViewModel
 
-  @State private var isCreateListAlertPresented: Bool = false
-  @State private var createListTitle: String = ""
-
   public init(account: Account) {
     _viewModel = .init(initialValue: .init(account: account))
   }
@@ -40,10 +37,6 @@ public struct ListAddAccountView: View {
           }
           .listRowBackground(theme.primaryBackgroundColor)
         }
-        Button("lists.create") {
-          isCreateListAlertPresented = true
-        }
-        .listRowBackground(theme.primaryBackgroundColor)
       }
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
@@ -55,23 +48,6 @@ public struct ListAddAccountView: View {
             dismiss()
           }
         }
-      }
-      .alert("lists.create", isPresented: $isCreateListAlertPresented) {
-        TextField("lists.name", text: $createListTitle)
-        Button("action.cancel") {
-          isCreateListAlertPresented = false
-          createListTitle = ""
-        }
-        Button("lists.create.confirm") {
-          guard !createListTitle.isEmpty else { return }
-          isCreateListAlertPresented = false
-          Task {
-            await currentAccount.createList(title: createListTitle)
-            createListTitle = ""
-          }
-        }
-      } message: {
-        Text("lists.name.message")
       }
     }
     .task {

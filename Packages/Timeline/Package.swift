@@ -22,7 +22,7 @@ let package = Package(
     .package(name: "Status", path: "../Status"),
     .package(name: "DesignSystem", path: "../DesignSystem"),
     .package(url: "https://github.com/siteline/SwiftUI-Introspect.git", from: "1.0.0"),
-    .package(url: "https://github.com/mergesort/Bodega", from: "2.0.2"),
+    .package(url: "https://github.com/mergesort/Bodega", exact: "2.1.0"),
   ],
   targets: [
     .target(

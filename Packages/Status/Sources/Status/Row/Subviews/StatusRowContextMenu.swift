@@ -16,8 +16,10 @@ struct StatusRowContextMenu: View {
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(StatusDataController.self) private var statusDataController
   @Environment(QuickLook.self) private var quickLook
+  @Environment(Theme.self) private var theme
 
   var viewModel: StatusRowViewModel
+  @Binding var showTextForSelection: Bool
 
   var boostLabel: some View {
     if viewModel.status.visibility == .priv, viewModel.status.account.id == account.account?.id {
@@ -53,20 +55,20 @@ struct StatusRowContextMenu: View {
               systemImage: "bookmark")
       }
       Button {
-        if ProcessInfo.processInfo.isMacCatalystApp {
-          openWindow(value: WindowDestination.replyToStatusEditor(status: viewModel.status))
-        } else {
-          viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
-        }
+#if targetEnvironment(macCatalyst)
+        openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: viewModel.status))
+#else
+        viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
+#endif
       } label: {
         Label("status.action.reply", systemImage: "arrowshape.turn.up.left")
       }
       Button {
-        if ProcessInfo.processInfo.isMacCatalystApp {
-          openWindow(value: WindowDestination.quoteStatusEditor(status: viewModel.status))
-        } else {
-          viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
-        }
+#if targetEnvironment(macCatalyst)
+        openWindow(value: WindowDestinationEditor.quoteStatusEditor(status: viewModel.status))
+#else
+        viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
+#endif
       } label: {
         Label("status.action.quote", systemImage: "quote.bubble")
       }
@@ -133,6 +135,12 @@ struct StatusRowContextMenu: View {
     }
 
     Button {
+      showTextForSelection = true
+    } label: {
+      Label("status.action.select-text", systemImage: "selection.pin.in.out")
+    }
+
+    Button {
       UIPasteboard.general.string = viewModel.status.reblog?.url ?? viewModel.status.url
     } label: {
       Label("status.action.copy-link", systemImage: "link")
@@ -163,11 +171,11 @@ struct StatusRowContextMenu: View {
         }
         if currentInstance.isEditSupported {
           Button {
-            if ProcessInfo.processInfo.isMacCatalystApp {
-              openWindow(value: WindowDestination.editStatusEditor(status: viewModel.status.reblogAsAsStatus ?? viewModel.status))
-            } else {
-              viewModel.routerPath.presentedSheet = .editStatusEditor(status: viewModel.status.reblogAsAsStatus ?? viewModel.status)
-            }
+#if targetEnvironment(macCatalyst)
+            openWindow(value: WindowDestinationEditor.editStatusEditor(status: viewModel.status.reblogAsAsStatus ?? viewModel.status))
+#else
+            viewModel.routerPath.presentedSheet = .editStatusEditor(status: viewModel.status.reblogAsAsStatus ?? viewModel.status)
+#endif
           } label: {
             Label("status.action.edit", systemImage: "pencil")
           }
@@ -270,4 +278,51 @@ struct ActivityView: UIViewControllerRepresentable {
   }
 
   func updateUIViewController(_: UIActivityViewController, context _: UIViewControllerRepresentableContext<ActivityView>) {}
+}
+
+struct SelectTextView: View {
+  @Environment(\.dismiss) private var dismiss
+  let content: AttributedString
+
+  var body: some View {
+    NavigationStack {
+      SelectableText(content: content)
+        .padding()
+        .toolbar {
+          ToolbarItem(placement: .navigationBarTrailing) {
+            Button {
+              dismiss()
+            } label: {
+              Text("action.done").bold()
+            }
+          }
+        }
+        .background(Theme.shared.primaryBackgroundColor)
+        .navigationTitle("status.action.select-text")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+  }
+}
+
+struct SelectableText: UIViewRepresentable {
+  let content: AttributedString
+
+  func makeUIView(context: Context) -> UITextView {
+    let attributedText = NSMutableAttributedString(content)
+    attributedText.addAttribute(
+      .font,
+      value: Font.scaledBodyFont,
+      range: NSRange(location: 0, length: content.characters.count)
+    )
+
+    let textView = UITextView()
+    textView.isEditable = false
+    textView.attributedText = attributedText
+    textView.textColor = UIColor(Color.label)
+    textView.backgroundColor = UIColor(Theme.shared.primaryBackgroundColor)
+    return textView
+  }
+
+  func updateUIView(_ uiView: UITextView, context: Context) {}
+  func makeCoordinator() -> Void {}
 }

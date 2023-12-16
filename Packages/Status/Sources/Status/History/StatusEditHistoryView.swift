@@ -34,7 +34,7 @@ public struct StatusEditHistoryView: View {
                     Text(edit.createdAt.asDate, style: .time)
                 }
                 .font(.footnote)
-                .foregroundColor(.gray)
+                .foregroundStyle(.secondary)
               }
             }
           } else {

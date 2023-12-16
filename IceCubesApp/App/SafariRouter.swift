@@ -3,6 +3,7 @@ import Env
 import Observation
 import SafariServices
 import SwiftUI
+import Models
 
 extension View {
   @MainActor func withSafariRouter() -> some View {
@@ -26,7 +27,7 @@ private struct SafariRouter: ViewModifier {
       })
       .onOpenURL { url in
         // Open external URL (from icecubesapp://)
-        let urlString = url.absoluteString.replacingOccurrences(of: "icecubesapp://", with: "https://")
+        let urlString = url.absoluteString.replacingOccurrences(of: AppInfo.scheme, with: "https://")
         guard let url = URL(string: urlString), url.host != nil else { return }
         _ = routerPath.handle(url: url)
       }
@@ -42,7 +43,9 @@ private struct SafariRouter: ViewModifier {
               return .handled
             }
           }
-          guard preferences.preferredBrowser == .inAppSafari, !ProcessInfo.processInfo.isMacCatalystApp else { return .systemAction }
+#if !targetEnvironment(macCatalyst)
+          guard preferences.preferredBrowser == .inAppSafari else { return .systemAction }
+#endif
           // SFSafariViewController only supports initial URLs with http:// or https:// schemes.
           guard let scheme = url.scheme, ["https", "http"].contains(scheme.lowercased()) else {
             return .systemAction
