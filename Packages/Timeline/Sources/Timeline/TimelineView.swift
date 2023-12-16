@@ -7,6 +7,7 @@ import Status
 import SwiftData
 import SwiftUI
 import SwiftUIIntrospect
+import Charts
 
 @MainActor
 public struct TimelineView: View {
@@ -53,6 +54,7 @@ public struct TimelineView: View {
             StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath, isRemote: true)
           default:
             StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath)
+              .environment(\.isHomeTimeline, timeline == .home)
           }
         }
         .id(client.id)
@@ -153,12 +155,15 @@ public struct TimelineView: View {
     if let tag = viewModel.tag {
       headerView {
         HStack {
+          TagChartView(tag: tag)
+            .padding(.top, 12)
+          
           VStack(alignment: .leading, spacing: 4) {
             Text("#\(tag.name)")
               .font(.scaledHeadline)
             Text("timeline.n-recent-from-n-participants \(tag.totalUses) \(tag.totalAccounts)")
               .font(.scaledFootnote)
-              .foregroundColor(.gray)
+              .foregroundStyle(.secondary)
           }
           .accessibilityElement(children: .combine)
           Spacer()
@@ -235,7 +240,7 @@ public struct TimelineView: View {
             .font(.headline)
           Text(timeline.localizedTitle())
             .font(.caption)
-            .foregroundColor(.gray)
+            .foregroundStyle(.secondary)
         default:
           Text(timeline.localizedTitle())
             .font(.headline)
@@ -268,23 +273,25 @@ public struct TimelineView: View {
     ToolbarItem(placement: .topBarTrailing) {
       switch timeline {
       case let .hashtag(tag, _):
-        Menu {
-          Section("tag-groups.edit.section.title") {
-            ForEach(tagGroups) { group in
-              Button {
-                if group.tags.contains(tag) {
-                  group.tags.removeAll(where: { $0 == tag })
-                } else {
-                  group.tags.append(tag)
+        if !tagGroups.isEmpty {
+          Menu {
+            Section("tag-groups.edit.section.title") {
+              ForEach(tagGroups) { group in
+                Button {
+                  if group.tags.contains(tag) {
+                    group.tags.removeAll(where: { $0 == tag })
+                  } else {
+                    group.tags.append(tag)
+                  }
+                } label: {
+                  Label(group.title,
+                        systemImage: group.tags.contains(tag) ? "checkmark.rectangle.fill" : "checkmark.rectangle")
                 }
-              } label: {
-                Label(group.title,
-                      systemImage: group.tags.contains(tag) ? "checkmark.rectangle.fill" : "checkmark.rectangle")
               }
             }
+          } label: {
+            Image(systemName: "ellipsis")
           }
-        } label: {
-          Image(systemName: "ellipsis")
         }
       default:
         EmptyView()

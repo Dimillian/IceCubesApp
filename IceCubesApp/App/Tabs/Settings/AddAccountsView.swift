@@ -14,6 +14,7 @@ struct AddAccountView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(\.scenePhase) private var scenePhase
   @Environment(\.openURL) private var openURL
+  @Environment(\.webAuthenticationSession) private var webAuthenticationSession
 
   @Environment(AppAccountsManager.self) private var appAccountsManager
   @Environment(CurrentAccount.self) private var currentAccount
@@ -27,7 +28,6 @@ struct AddAccountView: View {
   @State private var signInClient: Client?
   @State private var instances: [InstanceSocial] = []
   @State private var instanceFetchError: LocalizedStringKey?
-  @State private var oauthURL: URL?
 
   private let instanceNamePublisher = PassthroughSubject<String, Never>()
 
@@ -136,21 +136,6 @@ struct AddAccountView: View {
           break
         }
       }
-      .onOpenURL(perform: { url in
-        Task {
-          await continueSignIn(url: url)
-        }
-      })
-      .onChange(of: oauthURL) { _, newValue in
-        if newValue == nil {
-          isSigninIn = false
-        }
-      }
-      #if !targetEnvironment(macCatalyst)
-      .sheet(item: $oauthURL, content: { url in
-        SafariView(url: url)
-      })
-      #endif
     }
   }
 
@@ -197,12 +182,12 @@ struct AddAccountView: View {
                 .foregroundColor(.primary)
               Text(instance.info?.shortDescription ?? "")
                 .font(.scaledBody)
-                .foregroundColor(.gray)
+                .foregroundStyle(Color.secondary)
               (Text("instance.list.users-\(instance.users)")
                 + Text("  ⸱  ")
                 + Text("instance.list.posts-\(instance.statuses)"))
                 .font(.scaledFootnote)
-                .foregroundColor(.gray)
+                .foregroundStyle(Color.secondary)
             }
           }
           .listRowBackground(theme.primaryBackgroundColor)
@@ -218,10 +203,10 @@ struct AddAccountView: View {
         .foregroundColor(.primary)
       Text("placeholder.loading.long")
         .font(.scaledBody)
-        .foregroundColor(.gray)
+        .foregroundStyle(.secondary)
       Text("placeholder.loading.short")
         .font(.scaledFootnote)
-        .foregroundColor(.gray)
+        .foregroundStyle(.secondary)
     }
     .redacted(reason: .placeholder)
     .allowsHitTesting(false)
@@ -230,18 +215,12 @@ struct AddAccountView: View {
   }
 
   private func signIn() async {
-    do {
-      signInClient = .init(server: sanitizedName)
-      if let oauthURL = try await signInClient?.oauthURL() {
-        if ProcessInfo.processInfo.isMacCatalystApp {
-          openURL(oauthURL)
-        } else {
-          self.oauthURL = oauthURL
-        }
-      } else {
-        isSigninIn = false
-      }
-    } catch {
+    signInClient = .init(server: sanitizedName)
+    if let oauthURL = try? await signInClient?.oauthURL(),
+       let url = try? await webAuthenticationSession.authenticate(using: oauthURL,
+                                                                 callbackURLScheme: AppInfo.scheme.replacingOccurrences(of: "://", with: "")){
+      await continueSignIn(url: url)
+    } else {
       isSigninIn = false
     }
   }
@@ -252,7 +231,6 @@ struct AddAccountView: View {
       return
     }
     do {
-      oauthURL = nil
       let oauthToken = try await client.continueOauthFlow(url: url)
       let client = Client(server: client.server, oauthToken: oauthToken)
       let account: Account = try await client.get(endpoint: Accounts.verifyCredentials)
@@ -266,7 +244,6 @@ struct AddAccountView: View {
       isSigninIn = false
       dismiss()
     } catch {
-      oauthURL = nil
       isSigninIn = false
     }
   }

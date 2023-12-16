@@ -39,6 +39,8 @@ import SwiftUI
   var isLoadingRemoteContent: Bool = false
   var localStatusId: String?
   var localStatus: Status?
+  
+  private var scrollToId = nil as Binding<String?>?
 
   // The relationship our user has to the author of this post, if available
   var authorRelationship: Relationship? {
@@ -108,7 +110,8 @@ import SwiftUI
               routerPath: RouterPath,
               isRemote: Bool = false,
               showActions: Bool = true,
-              textDisabled: Bool = false)
+              textDisabled: Bool = false,
+              scrollToId: Binding<String?>? = nil)
   {
     self.status = status
     finalStatus = status.reblog ?? status
@@ -117,6 +120,7 @@ import SwiftUI
     self.isRemote = isRemote
     self.showActions = showActions
     self.textDisabled = textDisabled
+    self.scrollToId = scrollToId
     if let reblog = status.reblog {
       isPinned = reblog.pinned == true
     } else {
@@ -193,6 +197,15 @@ import SwiftUI
       }
     } else {
       routerPath.navigate(to: .accountDetail(id: mention.id))
+    }
+  }
+  
+  func goToParent() {
+    guard let id = status.inReplyToId else {return}
+    if let _ = scrollToId {
+      scrollToId?.wrappedValue = id
+    } else {
+      routerPath.navigate(to: .statusDetail(id: id))
     }
   }
 

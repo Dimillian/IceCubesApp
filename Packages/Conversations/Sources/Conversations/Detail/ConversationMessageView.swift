@@ -27,7 +27,7 @@ struct ConversationMessageView: View {
         if isOwnMessage {
           Spacer()
         } else {
-          AvatarView(url: message.account.avatar, size: .status)
+          AvatarView(message.account.avatar)
             .onTapGesture {
               routerPath.navigate(to: .accountDetailWithAccount(account: message.account))
             }
@@ -78,7 +78,7 @@ struct ConversationMessageView: View {
             Text(message.createdAt.asDate, style: .time)
           }
           .font(.scaledFootnote)
-          .foregroundColor(.gray)
+          .foregroundStyle(.secondary)
           if !isOwnMessage {
             Spacer()
           }
@@ -201,12 +201,12 @@ struct ConversationMessageView: View {
     .frame(height: 200)
     .contentShape(Rectangle())
     .onTapGesture {
-      if ProcessInfo.processInfo.isMacCatalystApp {
-        openWindow(value: WindowDestination.mediaViewer(attachments: [attachement],
-                                                        selectedAttachment: attachement))
-      } else {
-        quickLook.prepareFor(selectedMediaAttachment: attachement, mediaAttachments: [attachement])
-      }
+#if targetEnvironment(macCatalyst)
+      openWindow(value: WindowDestinationMedia.mediaViewer(attachments: [attachement],
+                                                           selectedAttachment: attachement))
+#else
+      quickLook.prepareFor(selectedMediaAttachment: attachement, mediaAttachments: [attachement])
+#endif
     }
   }
 

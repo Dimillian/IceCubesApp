@@ -31,7 +31,7 @@ public struct StatusRowMediaPreviewView: View {
   }
 
   var appLayoutWidth: CGFloat {
-    let avatarColumnWidth = theme.avatarPosition == .leading ? AvatarView.Size.status.size.width + .statusColumnsSpacing : 0
+    let avatarColumnWidth = theme.avatarPosition == .leading ? AvatarView.FrameConfig.status.width + .statusColumnsSpacing : 0
     var sidebarWidth: CGFloat = 0
     var secondaryColumnWidth: CGFloat = 0
     let layoutPading: CGFloat = .layoutPadding * 2
@@ -54,10 +54,7 @@ public struct StatusRowMediaPreviewView: View {
       }
       return 100
     }
-    if attachments.count == 1 {
-      return 300
-    }
-    return attachments.count > 2 ? 150 : 200
+    return 300
   }
 
   public var body: some View {
@@ -68,32 +65,23 @@ public struct StatusRowMediaPreviewView: View {
           imageMaxHeight: imageMaxHeight,
           sensitive: sensitive,
           appLayoutWidth: appLayoutWidth,
-          availableWidth: availableWidth
+          availableWidth: availableWidth,
+          availableHeight: sceneDelegate.windowHeight
         )
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(Self.accessibilityLabel(for: attachments[0]))
         .accessibilityAddTraits([.isButton, .isImage])
         .onTapGesture { tabAction(for: 0) }
       } else {
-        if isCompact || theme.statusDisplayStyle == .compact {
+        ScrollView(.horizontal, showsIndicators: false) {
           HStack {
             makeAttachmentView(for: 0)
             makeAttachmentView(for: 1)
             makeAttachmentView(for: 2)
             makeAttachmentView(for: 3)
           }
-        } else {
-          VStack {
-            HStack {
-              makeAttachmentView(for: 0)
-              makeAttachmentView(for: 1)
-            }
-            HStack {
-              makeAttachmentView(for: 2)
-              makeAttachmentView(for: 3)
-            }
-          }
         }
+        .scrollClipDisabled()
       }
     }
   }
@@ -114,19 +102,19 @@ public struct StatusRowMediaPreviewView: View {
   }
 
   private func tabAction(for index: Int) {
-    if ProcessInfo.processInfo.isMacCatalystApp {
+#if targetEnvironment(macCatalyst)
       openWindow(
-        value: WindowDestination.mediaViewer(
+        value: WindowDestinationMedia.mediaViewer(
           attachments: attachments,
           selectedAttachment: attachments[index]
         )
       )
-    } else {
+#else
       quickLook.prepareFor(
         selectedMediaAttachment: attachments[index],
         mediaAttachments: attachments
       )
-    }
+#endif
   }
 
   private static func accessibilityLabel(for attachment: MediaAttachment) -> Text {
@@ -182,8 +170,7 @@ private struct MediaPreview: View {
           .accessibilityAddTraits(.startsMediaSession)
       }
     }
-    .frame(maxWidth: isCompact ? imageMaxHeight : nil)
-    .frame(height: imageMaxHeight)
+    .frame(width: imageMaxHeight / 1.5, height: imageMaxHeight)
     .clipped()
     .cornerRadius(4)
     // #965: do not create overlapping tappable areas, when multiple images are shown
@@ -200,6 +187,7 @@ private struct FeaturedImagePreView: View {
   let sensitive: Bool
   let appLayoutWidth: CGFloat
   let availableWidth: CGFloat
+  let availableHeight: CGFloat
 
   @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
   @Environment(Theme.self) private var theme
@@ -207,7 +195,7 @@ private struct FeaturedImagePreView: View {
 
   var body: some View {
     let size: CGSize = size(for: attachment) ?? .init(width: imageMaxHeight, height: imageMaxHeight)
-    let newSize = imageSize(from: size, newWidth: availableWidth - appLayoutWidth)
+    let newSize = imageSize(from: size)
     Group {
       switch attachment.supportedType {
       case .image:
@@ -255,13 +243,27 @@ private struct FeaturedImagePreView: View {
     return .init(width: CGFloat(width), height: CGFloat(height))
   }
 
-  private func imageSize(from: CGSize, newWidth: CGFloat) -> CGSize {
+  private func imageSize(from: CGSize) -> CGSize {
     if isCompact || theme.statusDisplayStyle == .compact || isSecondaryColumn {
       return .init(width: imageMaxHeight, height: imageMaxHeight)
     }
-    let ratio = newWidth / from.width
-    let newHeight = from.height * ratio
-    return .init(width: newWidth, height: newHeight)
+
+    let boxWidth = availableWidth - appLayoutWidth
+    let boxHeight = availableHeight * 0.8 // use only 80% of window height to leave room for text
+
+    if from.width <= boxWidth && from.height <= boxHeight {
+      // intrinsic size of image fits just fine
+      return from
+    }
+
+    // shrink image proportionally to fit inside the box
+    let xRatio = boxWidth / from.width
+    let yRatio = boxHeight / from.height
+    if xRatio < yRatio {
+      return .init(width: boxWidth, height: from.height * xRatio)
+    } else {
+      return .init(width: from.width * yRatio, height: boxHeight)
+    }
   }
 }
 

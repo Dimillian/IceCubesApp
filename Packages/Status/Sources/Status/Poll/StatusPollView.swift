@@ -145,7 +145,7 @@ public struct StatusPollView: View {
       }
     }
     .font(.scaledFootnote)
-    .foregroundColor(.gray)
+    .foregroundStyle(.secondary)
     .accessibilityElement(children: .combine)
     .accessibilityAddTraits(.updatesFrequently)
   }

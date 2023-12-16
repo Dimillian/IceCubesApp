@@ -25,12 +25,15 @@ public enum RouterDestination: Hashable {
   case tagsList(tags: [Tag])
 }
 
-public enum WindowDestination: Hashable, Codable {
+public enum WindowDestinationEditor: Hashable, Codable {
   case newStatusEditor(visibility: Models.Visibility)
-  case mediaViewer(attachments: [MediaAttachment], selectedAttachment: MediaAttachment)
   case editStatusEditor(status: Status)
   case replyToStatusEditor(status: Status)
   case quoteStatusEditor(status: Status)
+}
+
+public enum WindowDestinationMedia: Hashable, Codable {
+  case mediaViewer(attachments: [MediaAttachment], selectedAttachment: MediaAttachment)
 }
 
 public enum SheetDestination: Identifiable {
@@ -39,6 +42,7 @@ public enum SheetDestination: Identifiable {
   case replyToStatusEditor(status: Status)
   case quoteStatusEditor(status: Status)
   case mentionStatusEditor(account: Account, visibility: Models.Visibility)
+  case listCreate
   case listEdit(list: Models.List)
   case listAddAccount(account: Account)
   case addAccount
@@ -56,6 +60,8 @@ public enum SheetDestination: Identifiable {
     case .editStatusEditor, .newStatusEditor, .replyToStatusEditor, .quoteStatusEditor,
          .mentionStatusEditor, .settings, .accountPushNotficationsSettings:
       "statusEditor"
+    case .listCreate:
+      "listCreate"
     case .listEdit:
       "listEdit"
     case .listAddAccount:

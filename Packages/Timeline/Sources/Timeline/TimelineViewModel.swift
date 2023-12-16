@@ -159,7 +159,7 @@ extension TimelineViewModel {
 extension TimelineViewModel: StatusesFetcher {
   func pullToRefresh() async {
     timelineTask?.cancel()
-    if !timeline.supportNewestPagination {
+    if !timeline.supportNewestPagination || UserPreferences.shared.fastRefreshEnabled {
       await reset()
     }
     await fetchNewestStatuses()
@@ -168,6 +168,9 @@ extension TimelineViewModel: StatusesFetcher {
   func refreshTimeline() {
     timelineTask?.cancel()
     timelineTask = Task {
+      if UserPreferences.shared.fastRefreshEnabled {
+        await reset()
+      }
       await fetchNewestStatuses()
     }
   }
@@ -199,7 +202,7 @@ extension TimelineViewModel: StatusesFetcher {
     // Else we fetch top most page from the API.
     if let cachedStatuses = await getCachedStatuses(),
        !cachedStatuses.isEmpty,
-       timeline == .home
+       timeline == .home && !UserPreferences.shared.fastRefreshEnabled
     {
       await datasource.set(cachedStatuses)
       if let latestSeenId = await cache.getLatestSeenStatus(for: client)?.last,

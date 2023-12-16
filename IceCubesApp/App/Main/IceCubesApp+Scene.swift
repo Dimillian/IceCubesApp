@@ -72,8 +72,9 @@ extension IceCubesApp {
     }
   }
 
+  @SceneBuilder
   var otherScenes: some Scene {
-    WindowGroup(for: WindowDestination.self) { destination in
+    WindowGroup(for: WindowDestinationEditor.self) { destination in
       Group {
         switch destination.wrappedValue {
         case let .newStatusEditor(visibility):
@@ -84,6 +85,21 @@ extension IceCubesApp {
           StatusEditorView(mode: .quote(status: status))
         case let .replyToStatusEditor(status):
           StatusEditorView(mode: .replyTo(status: status))
+        case .none:
+          EmptyView()
+        }
+      }
+      .withEnvironments()
+      .withModelContainer()
+      .applyTheme(theme)
+      .frame(minWidth: 300, minHeight: 400)
+    }
+    .defaultSize(width: 600, height: 800)
+    .windowResizability(.contentMinSize)
+    
+    WindowGroup(for: WindowDestinationMedia.self) { destination in
+      Group {
+        switch destination.wrappedValue {
         case let .mediaViewer(attachments, selectedAttachment):
           MediaUIView(selectedAttachment: selectedAttachment,
                       attachments: attachments)
@@ -94,8 +110,9 @@ extension IceCubesApp {
       .withEnvironments()
       .withModelContainer()
       .applyTheme(theme)
+      .frame(minWidth: 300, minHeight: 400)
     }
-    .defaultSize(width: 600, height: 800)
-    .windowResizability(.automatic)
+    .defaultSize(width: 1200, height: 1000)
+    .windowResizability(.contentMinSize)
   }
 }

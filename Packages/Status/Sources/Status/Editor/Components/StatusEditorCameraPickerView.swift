@@ -3,7 +3,7 @@ import UIKit
 
 struct StatusEditorCameraPickerView: UIViewControllerRepresentable {
   @Binding var selectedImage: UIImage?
-  @Environment(\.presentationMode) var isPresented
+  @Environment(\.dismiss) var dismiss
 
   class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     let picker: StatusEditorCameraPickerView
@@ -15,7 +15,7 @@ struct StatusEditorCameraPickerView: UIViewControllerRepresentable {
     func imagePickerController(_: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
       guard let selectedImage = info[.originalImage] as? UIImage else { return }
       picker.selectedImage = selectedImage
-      picker.isPresented.wrappedValue.dismiss()
+      picker.dismiss()
     }
   }
 

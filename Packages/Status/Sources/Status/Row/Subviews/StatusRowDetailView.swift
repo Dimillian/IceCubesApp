@@ -39,7 +39,7 @@ struct StatusRowDetailView: View {
         }
       }
       .font(.scaledCaption)
-      .foregroundColor(.gray)
+      .foregroundStyle(.secondary)
 
       if let editedAt = viewModel.status.editedAt {
         Divider()
@@ -55,7 +55,7 @@ struct StatusRowDetailView: View {
         }
         .underline()
         .font(.scaledCaption)
-        .foregroundColor(.gray)
+        .foregroundStyle(.secondary)
       }
 
       if viewModel.actionsAccountsFetched, statusDataController.favoritesCount > 0 {
@@ -103,7 +103,7 @@ struct StatusRowDetailView: View {
     ScrollView(.horizontal, showsIndicators: false) {
       LazyHStack(spacing: 0) {
         ForEach(accounts) { account in
-          AvatarView(url: account.avatar, size: .list)
+          AvatarView(account.avatar, config: .list)
             .padding(.leading, -4)
         }
         .transition(.opacity)

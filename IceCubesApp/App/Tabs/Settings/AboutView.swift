@@ -1,12 +1,19 @@
 import DesignSystem
 import Env
 import SwiftUI
+import Account
+import Network
+import Models
 
 @MainActor
 struct AboutView: View {
   @Environment(RouterPath.self) private var routerPath
   @Environment(Theme.self) private var theme
+  @Environment(Client.self) private var client
 
+  @State private var dimillianAccount: AccountsListRowViewModel?
+  @State private var iceCubesAccount: AccountsListRowViewModel?
+  
   let versionNumber: String
 
   init() {
@@ -40,7 +47,6 @@ struct AboutView: View {
             .cornerRadius(4)
           Spacer()
         }
-
         Link(destination: URL(string: "https://github.com/Dimillian/IceCubesApp/blob/main/PRIVACY.MD")!) {
           Label("settings.support.privacy-policy", systemImage: "lock")
         }
@@ -52,6 +58,9 @@ struct AboutView: View {
         Text("\(versionNumber)©2023 Thomas Ricouard")
       }
       .listRowBackground(theme.primaryBackgroundColor)
+
+      
+      followAccountsSection
 
       Section {
         Text("""
@@ -81,12 +90,15 @@ struct AboutView: View {
         """)
         .multilineTextAlignment(.leading)
         .font(.scaledSubheadline)
-        .foregroundColor(.gray)
+        .foregroundStyle(.secondary)
       } header: {
         Text("settings.about.built-with")
           .textCase(nil)
       }
       .listRowBackground(theme.primaryBackgroundColor)
+    }
+    .task {
+      await fetchAccounts()
     }
     .listStyle(.insetGrouped)
     .scrollContentBackground(.hidden)
@@ -96,6 +108,46 @@ struct AboutView: View {
     .environment(\.openURL, OpenURLAction { url in
       routerPath.handle(url: url)
     })
+  }
+  
+  
+  @ViewBuilder
+  private var followAccountsSection: some View {
+    if let iceCubesAccount, let dimillianAccount {
+      Section {
+        AccountsListRow(viewModel: iceCubesAccount)
+        AccountsListRow(viewModel: dimillianAccount)
+      }
+      .listRowBackground(theme.primaryBackgroundColor)
+    } else {
+      Section {
+        ProgressView()
+      }
+      .listRowBackground(theme.primaryBackgroundColor)
+    }
+  }
+
+  private func fetchAccounts() async {
+    await withThrowingTaskGroup(of: Void.self) { group in
+      group.addTask {
+        let viewModel = try await fetchAccountViewModel(account: "dimillian@mastodon.social")
+        await MainActor.run {
+          self.dimillianAccount = viewModel
+        }
+      }
+      group.addTask {
+        let viewModel = try await fetchAccountViewModel(account: "icecubesapp@mastodon.online")
+        await MainActor.run {
+          self.iceCubesAccount = viewModel
+        }
+      }
+    }
+  }
+  
+  private func fetchAccountViewModel(account: String) async throws -> AccountsListRowViewModel {
+    let dimillianAccount: Account = try await client.get(endpoint: Accounts.lookup(name: account))
+    let rel: [Relationship] = try await client.get(endpoint: Accounts.relationships(ids: [dimillianAccount.id]))
+    return .init(account: dimillianAccount, relationShip: rel.first)
   }
 }
 

@@ -31,7 +31,7 @@ struct StatusEditorAutoCompleteView: View {
         viewModel.selectMentionSuggestion(account: account)
       } label: {
         HStack {
-          AvatarView(url: account.avatar, size: .badge)
+          AvatarView(account.avatar, config: AvatarView.FrameConfig.badge)
           VStack(alignment: .leading) {
             EmojiTextApp(.init(stringValue: account.safeDisplayName),
                          emojis: account.emojis)
@@ -59,7 +59,7 @@ struct StatusEditorAutoCompleteView: View {
             .foregroundColor(theme.tintColor)
           Text("tag.suggested.mentions-\(tag.totalUses)")
             .font(.scaledCaption)
-            .foregroundColor(.gray)
+            .foregroundStyle(.secondary)
         }
       }
     }

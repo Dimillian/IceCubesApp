@@ -10,11 +10,11 @@ extension IceCubesApp {
       }
       .keyboardShortcut("n", modifiers: .shift)
       Button("menu.new-post") {
-        if ProcessInfo.processInfo.isMacCatalystApp {
-          openWindow(value: WindowDestination.newStatusEditor(visibility: userPreferences.postVisibility))
-        } else {
-          sidebarRouterPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
-        }
+#if targetEnvironment(macCatalyst)
+        openWindow(value: WindowDestinationEditor.newStatusEditor(visibility: userPreferences.postVisibility))
+#else
+        sidebarRouterPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
+#endif
       }
       .keyboardShortcut("n", modifiers: .command)
     }

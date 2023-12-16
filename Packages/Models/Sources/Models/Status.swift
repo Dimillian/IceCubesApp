@@ -1,23 +1,5 @@
 import Foundation
 
-public struct Application: Codable, Identifiable, Hashable, Equatable {
-  public var id: String {
-    name
-  }
-
-  public let name: String
-  public let website: URL?
-}
-
-public extension Application {
-  init(from decoder: Decoder) throws {
-    let values = try decoder.container(keyedBy: CodingKeys.self)
-
-    name = try values.decodeIfPresent(String.self, forKey: .name) ?? ""
-    website = try? values.decodeIfPresent(URL.self, forKey: .website)
-  }
-}
-
 public enum Visibility: String, Codable, CaseIterable, Hashable, Equatable, Sendable {
   case pub = "public"
   case unlisted
@@ -269,7 +251,6 @@ public final class ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Ha
   }
 }
 
-extension Application: Sendable {}
 extension StatusViewId: Sendable {}
 
 // Every property in Status is immutable.

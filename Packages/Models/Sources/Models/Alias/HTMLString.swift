@@ -183,6 +183,28 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
         }
         // Strip newlines and line separators - they should be being sent as <br>s
         asMarkdown += txt.replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: "\u{2028}", with: "")
+      } else if node.nodeName() == "ul" {
+        // Unordered (bulleted) list
+        // SwiftUI's Text won't display these in an AttributedString, but we can at least improve the appearance
+        asMarkdown += "\n\n"
+        for nn in node.getChildNodes() {
+          asMarkdown += "- "
+          handleNode(node: nn)
+          asMarkdown += "\n"
+        }
+        return
+      } else if node.nodeName() == "ol" {
+        // Ordered (numbered) list
+        // Same thing, won't display in a Text, but this is just an attempt to improve the appearance
+        asMarkdown += "\n\n"
+        var curNumber = 1
+        for nn in node.getChildNodes() {
+          asMarkdown += "\(curNumber). "
+          handleNode(node: nn)
+          asMarkdown += "\n"
+          curNumber += 1
+        }
+        return
       }
 
       for n in node.getChildNodes() {
