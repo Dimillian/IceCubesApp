@@ -44160,8 +44160,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Account on Hover"
+            "state" : "translated",
+            "value" : "Konto beim Überfahren anzeigen"
           }
         },
         "en" : {
