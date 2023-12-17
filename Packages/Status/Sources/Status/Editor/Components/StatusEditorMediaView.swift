@@ -4,6 +4,7 @@ import Env
 import Models
 import NukeUI
 import SwiftUI
+import MediaUI
 
 @MainActor
 struct StatusEditorMediaView: View {
@@ -93,13 +94,13 @@ struct StatusEditorMediaView: View {
       RoundedRectangle(cornerRadius: 8).fill(.clear)
         .overlay {
           if let attachement = container.mediaAttachment {
-            makeLazyImage(mediaAttachement: attachement)
+            makeRemoteMediaView(mediaAttachement: attachement)
           } else if container.image != nil {
-            makeLocalImage(container: container)
-          } else if container.movieTransferable != nil || container.gifTransferable != nil {
-            makeVideoAttachement(container: container)
+            makeLocalImageView(container: container)
           } else if let error = container.error as? ServerError {
             makeErrorView(error: error)
+          } else {
+            placeholderView
           }
         }
     }
@@ -116,17 +117,7 @@ struct StatusEditorMediaView: View {
     .matchedGeometryEffect(id: index, in: mediaSpace, anchor: .leading)
   }
 
-  private func makeVideoAttachement(container: StatusEditorMediaContainer) -> some View {
-    ZStack(alignment: .center) {
-      placeholderView
-      if container.mediaAttachment == nil {
-        ProgressView()
-      }
-    }
-    .cornerRadius(8)
-  }
-
-  private func makeLocalImage(container: StatusEditorMediaContainer) -> some View {
+  private func makeLocalImageView(container: StatusEditorMediaContainer) -> some View {
     ZStack(alignment: .center) {
       Image(uiImage: container.image!)
         .resizable()
@@ -141,30 +132,29 @@ struct StatusEditorMediaView: View {
     }
   }
 
-  private func makeLazyImage(mediaAttachement: MediaAttachment) -> some View {
+  private func makeRemoteMediaView(mediaAttachement: MediaAttachment) -> some View {
     ZStack(alignment: .center) {
-      if let url = mediaAttachement.url ?? mediaAttachement.previewUrl {
-        LazyImage(url: url) { state in
-          if let image = state.image {
-            image
-              .resizable()
-              .scaledToFill()
-          } else {
-            placeholderView
+      switch mediaAttachement.supportedType {
+      case .gifv, .video, .audio:
+        if let url = mediaAttachement.url {
+          MediaUIAttachmentVideoView(viewModel: .init(url: url, forceAutoPlay: true))
+        } else {
+          placeholderView
+        }
+      case .image:
+        if let url = mediaAttachement.url ?? mediaAttachement.previewUrl {
+          LazyImage(url: url) { state in
+            if let image = state.image {
+              image
+                .resizable()
+                .scaledToFill()
+            } else {
+              placeholderView
+            }
           }
         }
-      } else {
-        placeholderView
-      }
-      if mediaAttachement.url == nil {
-        ProgressView()
-      }
-      if mediaAttachement.url != nil,
-         mediaAttachement.supportedType == .video || mediaAttachement.supportedType == .gifv
-      {
-        Image(systemName: "play.fill")
-          .font(.headline)
-          .tint(.white)
+      case .none:
+        EmptyView()
       }
     }
     .cornerRadius(8)
@@ -242,11 +232,18 @@ struct StatusEditorMediaView: View {
       }
       return false
     })
+    viewModel.mediaContainers.removeAll {
+      $0.id == container.id
+    }
   }
 
   private var placeholderView: some View {
-    Rectangle()
-      .foregroundColor(theme.secondaryBackgroundColor)
-      .accessibilityHidden(true)
+    ZStack(alignment: .center) {
+      Rectangle()
+        .foregroundColor(theme.secondaryBackgroundColor)
+        .accessibilityHidden(true)
+      ProgressView()
+    }
+    .cornerRadius(8)
   }
 }

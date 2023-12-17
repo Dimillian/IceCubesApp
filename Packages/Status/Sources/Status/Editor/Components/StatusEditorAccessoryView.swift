@@ -4,6 +4,7 @@ import Models
 import NukeUI
 import PhotosUI
 import SwiftUI
+import GiphyUISDK
 
 @MainActor
 struct StatusEditorAccessoryView: View {
@@ -24,6 +25,7 @@ struct StatusEditorAccessoryView: View {
   @State private var isPhotosPickerPresented: Bool = false
   @State private var isFileImporterPresented: Bool = false
   @State private var isCameraPickerPresented: Bool = false
+  @State private var isGIFPickerPresented: Bool = false
 
   var body: some View {
     @Bindable var viewModel = focusedSEVM
@@ -50,6 +52,12 @@ struct StatusEditorAccessoryView: View {
                 isFileImporterPresented = true
               } label: {
                 Label("status.editor.browse-file", systemImage: "folder")
+              }
+              
+              Button {
+                isGIFPickerPresented = true
+              } label: {
+                Label("GIPHY", systemImage: "party.popper")
               }
             } label: {
               if viewModel.isMediasLoading {
@@ -81,6 +89,18 @@ struct StatusEditorAccessoryView: View {
                 }
               }))
               .background(.black)
+            })
+            .sheet(isPresented: $isGIFPickerPresented, content: {
+              GifPickerView { url in
+                GPHCache.shared.downloadAssetData(url) { data, error in
+                  guard let data else { return }
+                  viewModel.processGIFData(data: data)
+                }
+                isGIFPickerPresented = false
+              } onShouldDismissGifPicker: {
+                isGIFPickerPresented = false
+              }
+              .presentationDetents([.medium, .large])
             })
             .accessibilityLabel("accessibility.editor.button.attach-photo")
             .disabled(viewModel.showPoll)
