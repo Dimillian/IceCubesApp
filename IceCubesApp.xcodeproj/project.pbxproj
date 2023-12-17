@@ -88,9 +88,10 @@
 		9FBFE64E292A72BD00C250E9 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 9FBFE64D292A72BD00C250E9 /* Network */; };
 		9FD34823293D06E800DB0EE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FD34822293D06E800DB0EE9 /* Assets.xcassets */; };
 		9FD542E72962D2FF0045321A /* Lists in Frameworks */ = {isa = PBXBuildFile; productRef = 9FD542E62962D2FF0045321A /* Lists */; };
-		9FE0346C2ADD5C2100529EA8 /* MediaUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE0346B2ADD5C2100529EA8 /* MediaUI */; };
 		9FE151A6293C90F900E9683D /* IconSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE151A5293C90F900E9683D /* IconSelectorView.swift */; };
 		9FE3DB57296FEFCA00628CB0 /* AppAccount in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE3DB56296FEFCA00628CB0 /* AppAccount */; };
+		9FF614472B2EDCE500F7B0E6 /* GiphyUISDK in Frameworks */ = {isa = PBXBuildFile; productRef = 9FF614462B2EDCE500F7B0E6 /* GiphyUISDK */; };
+		9FF614492B2EDCEC00F7B0E6 /* GiphyUISDK in Frameworks */ = {isa = PBXBuildFile; productRef = 9FF614482B2EDCEC00F7B0E6 /* GiphyUISDK */; };
 		9FFF677C299B7B2C00FE700A /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF677B299B7B2C00FE700A /* Notifications */; };
 		9FFF677E299B7D2800FE700A /* Status in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF677D299B7D2800FE700A /* Status */; };
 		9FFF6780299B7D2B00FE700A /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF677F299B7D2B00FE700A /* DesignSystem */; };
@@ -228,7 +229,6 @@
 		9FCBB3D429859615009B77EE /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9FD34822293D06E800DB0EE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9FD542E52962D2CE0045321A /* Lists */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Lists; path = Packages/Lists; sourceTree = "<group>"; };
-		9FE034692ADD597100529EA8 /* MediaUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MediaUI; path = Packages/MediaUI; sourceTree = "<group>"; };
 		9FE0346A2ADD59AC00529EA8 /* MediaUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MediaUI; path = Packages/MediaUI; sourceTree = "<group>"; };
 		9FE151A5293C90F900E9683D /* IconSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSelectorView.swift; sourceTree = "<group>"; };
 		9FE3DB55296FEF5800628CB0 /* AppAccount */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppAccount; path = Packages/AppAccount; sourceTree = "<group>"; };
@@ -275,6 +275,7 @@
 				9FAD85A2297456A400496AB1 /* Env in Frameworks */,
 				9FAD85A0297456A100496AB1 /* Models in Frameworks */,
 				9FAD85A4297456A800496AB1 /* DesignSystem in Frameworks */,
+				9FF614492B2EDCEC00F7B0E6 /* GiphyUISDK in Frameworks */,
 				9FAD859E2974569B00496AB1 /* Account in Frameworks */,
 				9FAD859C2974422700496AB1 /* AppAccount in Frameworks */,
 				9FAD859A297440CB00496AB1 /* KeychainSwift in Frameworks */,
@@ -296,13 +297,13 @@
 				9FAE4ACE29379A5A00772766 /* KeychainSwift in Frameworks */,
 				9F7335EA2966B3F800AFF0BA /* Conversations in Frameworks */,
 				9FE3DB57296FEFCA00628CB0 /* AppAccount in Frameworks */,
-				9FE0346C2ADD5C2100529EA8 /* MediaUI in Frameworks */,
 				9F398AA92935FFDB00A889F2 /* Account in Frameworks */,
 				9FBFE64E292A72BD00C250E9 /* Network in Frameworks */,
 				9FD542E72962D2FF0045321A /* Lists in Frameworks */,
 				9F398AAB2935FFDB00A889F2 /* Models in Frameworks */,
 				9F5E581929545BE700A53960 /* Env in Frameworks */,
 				9F2A540A29699705009B2D7C /* ReceiptParser in Frameworks */,
+				9FF614472B2EDCE500F7B0E6 /* GiphyUISDK in Frameworks */,
 				9F35DB44294F9A7D00B3281A /* Status in Frameworks */,
 				DA0B24FB2A6876D50045BDD7 /* SFSafeSymbols in Frameworks */,
 				9F295540292B6C3400E0E81B /* Timeline in Frameworks */,
@@ -493,7 +494,6 @@
 		9FBFE64C292A72BD00C250E9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9FE034692ADD597100529EA8 /* MediaUI */,
 				9F2A540D2969A0B0009B2D7C /* StoreKit.framework */,
 				9F2A5404296995FB009B2D7C /* QuickLookUI.framework */,
 				9F7335EE29674F7100AFF0BA /* QuickLook.framework */,
@@ -597,6 +597,7 @@
 				9FAD85A1297456A400496AB1 /* Env */,
 				9FAD85A3297456A800496AB1 /* DesignSystem */,
 				065FA209298675BA00012EA0 /* LRUCache */,
+				9FF614482B2EDCEC00F7B0E6 /* GiphyUISDK */,
 			);
 			productName = IceCubesShareExtension;
 			productReference = 9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */;
@@ -636,7 +637,7 @@
 				9FE3DB56296FEFCA00628CB0 /* AppAccount */,
 				065FA1FD29866CD600012EA0 /* LRUCache */,
 				DA0B24FA2A6876D50045BDD7 /* SFSafeSymbols */,
-				9FE0346B2ADD5C2100529EA8 /* MediaUI */,
+				9FF614462B2EDCE500F7B0E6 /* GiphyUISDK */,
 			);
 			productName = IceCubesApp;
 			productReference = 9FBFE639292A715500C250E9 /* Ice Cubes.app */;
@@ -719,6 +720,7 @@
 				9F2A540829699705009B2D7C /* XCRemoteSwiftPackageReference "purchases-ios" */,
 				065FA1FC29866CD600012EA0 /* XCRemoteSwiftPackageReference "LRUCache" */,
 				DA0B24F92A6876D40045BDD7 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
+				9FF614452B2EDCE500F7B0E6 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */,
 			);
 			productRefGroup = 9FBFE63A292A715500C250E9 /* Products */;
 			projectDirPath = "";
@@ -1410,6 +1412,14 @@
 				kind = branch;
 			};
 		};
+		9FF614452B2EDCE500F7B0E6 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Giphy/giphy-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.7;
+			};
+		};
 		DA0B24F92A6876D40045BDD7 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SFSafeSymbols/SFSafeSymbols";
@@ -1532,13 +1542,19 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Lists;
 		};
-		9FE0346B2ADD5C2100529EA8 /* MediaUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = MediaUI;
-		};
 		9FE3DB56296FEFCA00628CB0 /* AppAccount */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppAccount;
+		};
+		9FF614462B2EDCE500F7B0E6 /* GiphyUISDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9FF614452B2EDCE500F7B0E6 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */;
+			productName = GiphyUISDK;
+		};
+		9FF614482B2EDCEC00F7B0E6 /* GiphyUISDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9FF614452B2EDCE500F7B0E6 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */;
+			productName = GiphyUISDK;
 		};
 		9FFF677B299B7B2C00FE700A /* Notifications */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -109,7 +109,7 @@ import SwiftUI
 
   var isMediasLoading: Bool = false
 
-  private(set) var mediaContainers: [StatusEditorMediaContainer] = []
+  var mediaContainers: [StatusEditorMediaContainer] = []
   var replyToStatus: Status?
   var embeddedStatus: Status?
 
@@ -383,6 +383,19 @@ import SwiftUI
     let items = urls.filter { $0.startAccessingSecurityScopedResource() }
       .compactMap { NSItemProvider(contentsOf: $0) }
     processItemsProvider(items: items)
+  }
+  
+  func processGIFData(data: Data) {
+    isMediasLoading = true
+    let url = URL.temporaryDirectory.appending(path: "\(UUID().uuidString).gif")
+    try? data.write(to: url)
+    let container = StatusEditorMediaContainer(id: UUID().uuidString,
+                                               image: nil,
+                                               movieTransferable: nil,
+                                               gifTransferable: .init(url: url),
+                                               mediaAttachment: nil,
+                                               error: nil)
+    prepareToPost(for: container)
   }
 
   func processCameraPhoto(image: UIImage) {
@@ -725,7 +738,7 @@ import SwiftUI
           }
           do {
             let newAttachement: MediaAttachment = try await client.get(endpoint: Media.media(id: mediaAttachement.id,
-                                                                                             json: .init(description: nil)))
+                                                                                             json: nil))
             if newAttachement.url != nil {
               let oldContainer = mediaContainers[index]
               mediaContainers[index] = StatusEditorMediaContainer(
@@ -736,7 +749,9 @@ import SwiftUI
                 mediaAttachment: newAttachement,
                 error: nil)
             }
-          } catch {}
+          } catch {
+            print(error.localizedDescription)
+          }
         }
         try? await Task.sleep(for: .seconds(5))
       } while !Task.isCancelled

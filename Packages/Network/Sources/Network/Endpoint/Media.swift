@@ -2,7 +2,7 @@ import Foundation
 
 public enum Media: Endpoint {
   case medias
-  case media(id: String, json: MediaDescriptionData)
+  case media(id: String, json: MediaDescriptionData?)
 
   public func path() -> String {
     switch self {
@@ -20,9 +20,12 @@ public enum Media: Endpoint {
   public var jsonValue: Encodable? {
     switch self {
     case let .media(_, json):
-      json
+      if let json {
+        return json
+      }
+      return nil
     default:
-      nil
+      return nil
     }
   }
 }
