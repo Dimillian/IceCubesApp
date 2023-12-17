@@ -217,6 +217,9 @@ struct DisplaySettingsView: View {
             .font(.scaledBody)
         }
       }
+      #if targetEnvironment(macCatalyst)
+      Toggle("settings.display.show-account-popover", isOn: $userPreferences.showAccountPopover)
+      #endif
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }

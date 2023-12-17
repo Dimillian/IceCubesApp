@@ -1,3 +1,4 @@
+import Env
 import Nuke
 import NukeUI
 import Shimmer
@@ -143,6 +144,7 @@ extension VerticalAlignment {
 
 public struct AccountPopoverModifier : ViewModifier {
   @Environment(Theme.self) private var theme
+  @Environment(UserPreferences.self) private var userPreferences
 
   @State private var showPopup = false
   @State private var autoDismiss = true
@@ -151,7 +153,11 @@ public struct AccountPopoverModifier : ViewModifier {
   let account: Account
 
   public func body(content: Content) -> some View {
-    content
+    if !userPreferences.showAccountPopover {
+      return AnyView(content)
+    }
+    
+    return AnyView(content
       .onHover { hovering in
         if hovering {
           toggleTask.cancel()
@@ -177,7 +183,7 @@ public struct AccountPopoverModifier : ViewModifier {
           autoDismiss: $autoDismiss,
           toggleTask: $toggleTask
         )
-      }
+      })
   }
 
   init(_ account: Account) {
