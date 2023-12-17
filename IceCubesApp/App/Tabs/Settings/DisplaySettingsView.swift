@@ -207,14 +207,19 @@ struct DisplaySettingsView: View {
       Toggle("settings.display.pending-left", isOn: $userPreferences.pendingShownLeft)
       Toggle("settings.display.show-reply-indentation", isOn: $userPreferences.showReplyIndentation)
       if userPreferences.showReplyIndentation {
-        Slider(value: .init(get: {
-          Double(userPreferences.maxReplyIndentation)
-        }, set: { newVal in
-          userPreferences.maxReplyIndentation = UInt(newVal)
-        }), in: 1...20, step: 1)
-        Text("settings.display.max-reply-indentation-\(String(userPreferences.maxReplyIndentation))")
-          .font(.scaledBody)
+        VStack {
+          Slider(value: .init(get: {
+            Double(userPreferences.maxReplyIndentation)
+          }, set: { newVal in
+            userPreferences.maxReplyIndentation = UInt(newVal)
+          }), in: 1...20, step: 1)
+          Text("settings.display.max-reply-indentation-\(String(userPreferences.maxReplyIndentation))")
+            .font(.scaledBody)
+        }
       }
+      #if targetEnvironment(macCatalyst)
+      Toggle("settings.display.show-account-popover", isOn: $userPreferences.showAccountPopover)
+      #endif
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }

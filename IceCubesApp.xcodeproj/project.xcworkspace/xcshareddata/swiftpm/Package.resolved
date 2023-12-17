@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/divadretlaw/EmojiText",
       "state" : {
-        "revision" : "65b570ea0b0d9fc89a000900691a73a16c0baa54",
-        "version" : "3.0.2"
+        "revision" : "4b08e28898ef3de175280d453ccb62d0a82beb7e",
+        "version" : "3.2.0"
       }
     },
     {
@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RevenueCat/purchases-ios.git",
       "state" : {
-        "revision" : "b8d20ba1c8e13cc73d72e37cf98607d01fd357b6",
-        "version" : "4.31.2"
+        "revision" : "cb3cc43b6181bc5f4482e35742448ee6ddc587e8",
+        "version" : "4.31.4"
       }
     },
     {
