@@ -46,44 +46,11 @@ public struct StatusRowCardView: View {
     } label: {
       if let title = card.title, let url = URL(string: card.url) {
         VStack(alignment: .leading) {
-          if let imageURL = card.image, !isInCaptureMode {
-            LazyResizableImage(url: imageURL) { state, proxy in
-              let width = imageWidthFor(proxy: proxy)
-              if let image = state.image {
-                image
-                  .resizable()
-                  .aspectRatio(contentMode: .fill)
-                  .frame(height: imageHeight)
-                  .frame(maxWidth: width)
-                  .clipped()
-              } else if state.isLoading {
-                Rectangle()
-                  .fill(Color.gray)
-                  .frame(height: imageHeight)
-              }
-            }
-            // This image is decorative
-            .accessibilityHidden(true)
-            .frame(height: imageHeight)
+          if url.host() == "apps.apple.com" {
+            appStoreLinkPreview(title, url)
+          } else {
+            defaultLinkPreview(title, url)
           }
-          HStack {
-            VStack(alignment: .leading, spacing: 6) {
-              Text(title)
-                .font(.scaledHeadline)
-                .lineLimit(3)
-              if let description = card.description, !description.isEmpty {
-                Text(description)
-                  .font(.scaledBody)
-                  .foregroundStyle(.secondary)
-                  .lineLimit(3)
-              }
-              Text(url.host() ?? url.absoluteString)
-                .font(.scaledFootnote)
-                .foregroundColor(theme.tintColor)
-                .lineLimit(1)
-            }
-            Spacer()
-          }.padding(16)
         }
         .frame(maxWidth: maxWidth)
         .fixedSize(horizontal: false, vertical: true)
@@ -113,5 +80,89 @@ public struct StatusRowCardView: View {
       }
     }
     .buttonStyle(.plain)
+  }
+
+  @MainActor
+  private func defaultLinkPreview(_ title: String, _ url: URL) -> some View {
+    Group {
+      if let imageURL = card.image, !isInCaptureMode {
+        LazyResizableImage(url: imageURL) { state, proxy in
+          let width = imageWidthFor(proxy: proxy)
+          if let image = state.image {
+            image
+              .resizable()
+              .aspectRatio(contentMode: .fill)
+              .frame(height: imageHeight)
+              .frame(maxWidth: width)
+              .clipped()
+          } else if state.isLoading {
+            Rectangle()
+              .fill(Color.gray)
+              .frame(height: imageHeight)
+          }
+        }
+        // This image is decorative
+        .accessibilityHidden(true)
+        .frame(height: imageHeight)
+      }
+      HStack {
+        VStack(alignment: .leading, spacing: 6) {
+          Text(title)
+            .font(.scaledHeadline)
+            .lineLimit(3)
+          if let description = card.description, !description.isEmpty {
+            Text(description)
+              .font(.scaledBody)
+              .foregroundStyle(.secondary)
+              .lineLimit(3)
+          }
+          Text(url.host() ?? url.absoluteString)
+            .font(.scaledFootnote)
+            .foregroundColor(theme.tintColor)
+            .lineLimit(1)
+        }
+        Spacer()
+      }.padding(16)
+    }
+  }
+
+  @MainActor
+  private func appStoreLinkPreview(_ title: String, _ url: URL) -> some View {
+    HStack {
+      if let imageURL = card.image, !isInCaptureMode {
+        LazyResizableImage(url: imageURL) { state, proxy in
+          if let image = state.image {
+            image
+              .resizable()
+              .aspectRatio(contentMode: .fill)
+              .frame(width: imageHeight, height: imageHeight)
+              .clipped()
+          } else if state.isLoading {
+            Rectangle()
+              .fill(Color.gray)
+              .frame(width: imageHeight, height: imageHeight)
+          }
+        }
+        // This image is decorative
+        .accessibilityHidden(true)
+        .frame(width: imageHeight, height: imageHeight)
+      }
+      
+      VStack(alignment: .leading, spacing: 6) {
+        Text(title)
+          .font(.scaledHeadline)
+          .lineLimit(3)
+        if let description = card.description, !description.isEmpty {
+          Text(description)
+            .font(.scaledBody)
+            .foregroundStyle(.secondary)
+            .lineLimit(3)
+        }
+        Text(url.host() ?? url.absoluteString)
+          .font(.scaledFootnote)
+          .foregroundColor(theme.tintColor)
+          .lineLimit(1)
+      }.padding(16)
+    }
   }
 }
