@@ -99,10 +99,13 @@ struct StatusEditorToolbarItems: ToolbarContent {
   }
 
   private func postAllStatus() async {
-    guard let openingPost = await postStatus(with: mainSEVM, isMainPost: true) else { return }
+    guard var latestPost = await postStatus(with: mainSEVM, isMainPost: true) else { return }
     for p in followUpSEVMs {
-      p.mode = .replyTo(status: openingPost)
-      await postStatus(with: p, isMainPost: false)
+      p.mode = .replyTo(status: latestPost)
+      guard let post = await postStatus(with: p, isMainPost: false) else {
+        break
+      }
+      latestPost = post
     }
   }
 
