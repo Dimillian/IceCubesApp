@@ -58098,8 +58098,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Select Text"
+            "state" : "translated",
+            "value" : "Text auswählen"
           }
         },
         "en" : {
@@ -61550,8 +61550,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Type your follow-up content here."
+            "state" : "translated",
+            "value" : "Gib hier deinen Folgeinhalt ein."
           }
         },
         "en" : {
