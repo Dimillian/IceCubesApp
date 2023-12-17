@@ -46,8 +46,9 @@ public struct StatusRowCardView: View {
     } label: {
       if let title = card.title, let url = URL(string: card.url) {
         VStack(alignment: .leading) {
-          if url.host() == "apps.apple.com" {
-            appStoreLinkPreview(title, url)
+          let sitesWithIcons = [ "apps.apple.com", "music.apple.com", "open.spotify.com" ]
+          if let host = url.host(), sitesWithIcons.contains(host) {
+            iconLinkPreview(title, url)
           } else {
             defaultLinkPreview(title, url)
           }
@@ -127,7 +128,8 @@ public struct StatusRowCardView: View {
   }
 
   @MainActor
-  private func appStoreLinkPreview(_ title: String, _ url: URL) -> some View {
+  private func iconLinkPreview(_ title: String, _ url: URL) -> some View {
+    // ..where the image is known to be a square icon
     HStack {
       if let imageURL = card.image, !isInCaptureMode {
         LazyResizableImage(url: imageURL) { state, proxy in
