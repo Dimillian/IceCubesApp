@@ -215,7 +215,9 @@ struct DisplaySettingsView: View {
         Text("settings.display.max-reply-indentation-\(String(userPreferences.maxReplyIndentation))")
           .font(.scaledBody)
       }
+      #if targetEnvironment(macCatalyst)
       Toggle("settings.display.show-account-popover", isOn: $userPreferences.showAccountPopover)
+      #endif
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }
