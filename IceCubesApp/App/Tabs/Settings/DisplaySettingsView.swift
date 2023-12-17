@@ -215,6 +215,7 @@ struct DisplaySettingsView: View {
         Text("settings.display.max-reply-indentation-\(String(userPreferences.maxReplyIndentation))")
           .font(.scaledBody)
       }
+      Toggle("settings.display.show-account-popover", isOn: $userPreferences.showAccountPopover)
     }
     .listRowBackground(theme.primaryBackgroundColor)
   }

@@ -44132,6 +44132,22 @@
         }
       }
     },
+    "settings.display.show-account-popover" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Account on Hover"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "顯示游標下的帳號"
+          }
+        }
+      }
+    },
     "settings.display.show-ipad-column" : {
       "localizations" : {
         "be" : {
