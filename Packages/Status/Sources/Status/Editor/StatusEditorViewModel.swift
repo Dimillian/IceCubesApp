@@ -10,7 +10,7 @@ import SwiftUI
 @MainActor
 @Observable public class StatusEditorViewModel: NSObject, Identifiable {
   public let id = UUID()
-  
+
   var mode: Mode
 
   var client: Client?
@@ -94,7 +94,7 @@ import SwiftUI
 
       let removedIDs = oldValue
         .filter { !mediaPickers.contains($0) }
-        .compactMap { $0.itemIdentifier }
+        .compactMap(\.itemIdentifier)
       mediaContainers.removeAll { removedIDs.contains($0.id) }
 
       let newPickerItems = mediaPickers.filter { !oldValue.contains($0) }
@@ -297,7 +297,8 @@ import SwiftUI
           movieTransferable: nil,
           gifTransferable: nil,
           mediaAttachment: $0,
-          error: nil)
+          error: nil
+        )
       }
     case let .quote(status):
       embeddedStatus = status
@@ -384,7 +385,7 @@ import SwiftUI
       .compactMap { NSItemProvider(contentsOf: $0) }
     processItemsProvider(items: items)
   }
-  
+
   func processGIFData(data: Data) {
     isMediasLoading = true
     let url = URL.temporaryDirectory.appending(path: "\(UUID().uuidString).gif")
@@ -405,7 +406,8 @@ import SwiftUI
       movieTransferable: nil,
       gifTransferable: nil,
       mediaAttachment: nil,
-      error: nil)
+      error: nil
+    )
     prepareToPost(for: container)
   }
 
@@ -428,7 +430,8 @@ import SwiftUI
                 movieTransferable: nil,
                 gifTransferable: nil,
                 mediaAttachment: nil,
-                error: nil)
+                error: nil
+              )
               prepareToPost(for: container)
             } else if let content = content as? ImageFileTranseferable,
                       let compressedData = await compressor.compressImageFrom(url: content.url),
@@ -440,7 +443,8 @@ import SwiftUI
                 movieTransferable: nil,
                 gifTransferable: nil,
                 mediaAttachment: nil,
-                error: nil)
+                error: nil
+              )
               prepareToPost(for: container)
             } else if let video = content as? MovieFileTranseferable {
               let container = StatusEditorMediaContainer(
@@ -449,7 +453,8 @@ import SwiftUI
                 movieTransferable: video,
                 gifTransferable: nil,
                 mediaAttachment: nil,
-                error: nil)
+                error: nil
+              )
               prepareToPost(for: container)
             } else if let gif = content as? GifFileTranseferable {
               let container = StatusEditorMediaContainer(
@@ -458,7 +463,8 @@ import SwiftUI
                 movieTransferable: nil,
                 gifTransferable: gif,
                 mediaAttachment: nil,
-                error: nil)
+                error: nil
+              )
               prepareToPost(for: container)
             }
           } catch {
@@ -619,7 +625,8 @@ import SwiftUI
       movieTransferable: nil,
       gifTransferable: gifFile,
       mediaAttachment: nil,
-      error: nil)
+      error: nil
+    )
   }
 
   private static func makeMovieContainer(from pickerItem: PhotosPickerItem) async -> StatusEditorMediaContainer? {
@@ -631,7 +638,8 @@ import SwiftUI
       movieTransferable: movieFile,
       gifTransferable: nil,
       mediaAttachment: nil,
-      error: nil)
+      error: nil
+    )
   }
 
   private static func makeImageContainer(from pickerItem: PhotosPickerItem) async -> StatusEditorMediaContainer? {
@@ -649,7 +657,8 @@ import SwiftUI
       movieTransferable: nil,
       gifTransferable: nil,
       mediaAttachment: nil,
-      error: nil)
+      error: nil
+    )
   }
 
   func upload(container: StatusEditorMediaContainer) async {
@@ -662,7 +671,8 @@ import SwiftUI
         movieTransferable: originalContainer.movieTransferable,
         gifTransferable: nil,
         mediaAttachment: nil,
-        error: nil)
+        error: nil
+      )
       mediaContainers[index] = newContainer
       do {
         let compressor = StatusEditorCompressor()
@@ -676,7 +686,8 @@ import SwiftUI
               movieTransferable: nil,
               gifTransferable: nil,
               mediaAttachment: uploadedMedia,
-              error: nil)
+              error: nil
+            )
           }
           if let uploadedMedia, uploadedMedia.url == nil {
             scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
@@ -693,7 +704,8 @@ import SwiftUI
               movieTransferable: originalContainer.movieTransferable,
               gifTransferable: nil,
               mediaAttachment: uploadedMedia,
-              error: nil)
+              error: nil
+            )
           }
           if let uploadedMedia, uploadedMedia.url == nil {
             scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
@@ -707,7 +719,8 @@ import SwiftUI
               movieTransferable: nil,
               gifTransferable: originalContainer.gifTransferable,
               mediaAttachment: uploadedMedia,
-              error: nil)
+              error: nil
+            )
           }
           if let uploadedMedia, uploadedMedia.url == nil {
             scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
@@ -721,7 +734,8 @@ import SwiftUI
             movieTransferable: nil,
             gifTransferable: nil,
             mediaAttachment: nil,
-            error: error)
+            error: error
+          )
         }
       }
     }
@@ -747,7 +761,8 @@ import SwiftUI
                 movieTransferable: oldContainer.movieTransferable,
                 gifTransferable: oldContainer.gifTransferable,
                 mediaAttachment: newAttachement,
-                error: nil)
+                error: nil
+              )
             }
           } catch {
             print(error.localizedDescription)
@@ -770,7 +785,8 @@ import SwiftUI
           movieTransferable: nil,
           gifTransferable: nil,
           mediaAttachment: media,
-          error: nil)
+          error: nil
+        )
       } catch { print(error) }
     }
   }
@@ -815,9 +831,9 @@ import SwiftUI
 
         return dict
       }.sorted(by: { lhs, rhs in
-        if rhs.key == "Uncategorized" { return false }
-        else if lhs.key == "Uncategorized" { return true }
-        else { return lhs.key < rhs.key }
+        if rhs.key == "Uncategorized" { false }
+        else if lhs.key == "Uncategorized" { true }
+        else { lhs.key < rhs.key }
       }).forEach { key, value in
         emojiContainers.append(.init(categoryName: key, emojis: value))
       }

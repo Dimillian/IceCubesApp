@@ -1,9 +1,9 @@
+import Account
 import DesignSystem
 import EmojiText
 import Models
 import Network
 import SwiftUI
-import Account
 
 @MainActor
 public struct ListEditView: View {
@@ -22,10 +22,11 @@ public struct ListEditView: View {
       Form {
         Section("lists.edit.settings") {
           TextField("list.edit.title", text: $viewModel.title) {
-            Task {  await viewModel.update() }
+            Task { await viewModel.update() }
           }
           Picker("list.edit.repliesPolicy",
-                 selection: $viewModel.repliesPolicy) {
+                 selection: $viewModel.repliesPolicy)
+          {
             ForEach(Models.List.RepliesPolicy.allCases) { policy in
               Text(policy.title)
                 .tag(policy)
@@ -41,7 +42,7 @@ public struct ListEditView: View {
         .onChange(of: viewModel.isExclusive) { _, _ in
           Task { await viewModel.update() }
         }
-        
+
         Section("lists.edit.users-in-list") {
           HStack {
             TextField("lists.edit.users-search",
@@ -91,7 +92,7 @@ public struct ListEditView: View {
       }
     }
   }
-  
+
   private var loadingView: some View {
     HStack {
       Spacer()
@@ -100,7 +101,7 @@ public struct ListEditView: View {
     }
     .id(UUID())
   }
-  
+
   @ViewBuilder
   private var searchAccountsView: some View {
     if viewModel.isSearching {
@@ -138,15 +139,15 @@ public struct ListEditView: View {
                                             relationship: relationship,
                                             shouldDisplayNotify: false,
                                             relationshipUpdated: { relationship in
-                viewModel.searchedRelationships[account.id] = relationship
-              }))
+                                              viewModel.searchedRelationships[account.id] = relationship
+                                            }))
             }
           }
         }
       }
     }
   }
-  
+
   @ViewBuilder
   private var listAccountsView: some View {
     if viewModel.isLoadingAccounts {
@@ -176,5 +177,4 @@ public struct ListEditView: View {
       }
     }
   }
-  
 }

@@ -212,7 +212,7 @@ struct DisplaySettingsView: View {
             Double(userPreferences.maxReplyIndentation)
           }, set: { newVal in
             userPreferences.maxReplyIndentation = UInt(newVal)
-          }), in: 1...20, step: 1)
+          }), in: 1 ... 20, step: 1)
           Text("settings.display.max-reply-indentation-\(String(userPreferences.maxReplyIndentation))")
             .font(.scaledBody)
         }

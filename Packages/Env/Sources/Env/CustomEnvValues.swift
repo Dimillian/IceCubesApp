@@ -68,7 +68,7 @@ public extension EnvironmentValues {
     get { self[IndentationLevel.self] }
     set { self[IndentationLevel.self] = newValue }
   }
-  
+
   var isHomeTimeline: Bool {
     get { self[IsHomeTimeline.self] }
     set { self[IsHomeTimeline.self] = newValue }

@@ -102,19 +102,19 @@ public struct StatusRowMediaPreviewView: View {
   }
 
   private func tabAction(for index: Int) {
-#if targetEnvironment(macCatalyst)
+    #if targetEnvironment(macCatalyst)
       openWindow(
         value: WindowDestinationMedia.mediaViewer(
           attachments: attachments,
           selectedAttachment: attachments[index]
         )
       )
-#else
+    #else
       quickLook.prepareFor(
         selectedMediaAttachment: attachments[index],
         mediaAttachments: attachments
       )
-#endif
+    #endif
   }
 
   private static func accessibilityLabel(for attachment: MediaAttachment) -> Text {
@@ -137,10 +137,10 @@ private struct MediaPreview: View {
   @Environment(\.isCompact) private var isCompact: Bool
 
   var body: some View {
-    GeometryReader { proxy in
+    GeometryReader { _ in
       switch displayData.type {
       case .image:
-        LazyResizableImage(url: displayData.previewUrl) { state, proxy in
+        LazyResizableImage(url: displayData.previewUrl) { state, _ in
           if let image = state.image {
             image
               .resizable()
@@ -247,7 +247,7 @@ private struct FeaturedImagePreView: View {
     let boxWidth = availableWidth - appLayoutWidth
     let boxHeight = availableHeight * 0.8 // use only 80% of window height to leave room for text
 
-    if from.width <= boxWidth && from.height <= boxHeight {
+    if from.width <= boxWidth, from.height <= boxHeight {
       // intrinsic size of image fits just fine
       return from
     }

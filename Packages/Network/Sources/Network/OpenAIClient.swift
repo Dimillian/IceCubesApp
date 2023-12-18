@@ -35,18 +35,19 @@ public struct OpenAIClient {
       self.temperature = temperature
     }
   }
-  
+
   public struct VisionRequest: OpenAIRequest {
     public struct Message: Encodable {
       public struct MessageContent: Encodable {
         public struct ImageUrl: Encodable {
           public let url: URL
         }
+
         public let type: String
         public let text: String?
         public let imageUrl: ImageUrl?
       }
-      
+
       public let role = "user"
       public let content: [MessageContent]
     }
@@ -77,8 +78,8 @@ public struct OpenAIClient {
       case let .emphasize(input):
         ChatRequest(content: "Make this text catchy, more fun: \(input)", temperature: 1)
       case let .imageDescription(image):
-        VisionRequest(messages: [.init(content: [.init(type: "text", text: "What’s in this image? Be brief, it's for image alt description on a social network. Don't write in the first person.", imageUrl: nil)
-                                                 , .init(type: "image_url", text: nil, imageUrl: .init(url: image))])])
+        VisionRequest(messages: [.init(content: [.init(type: "text", text: "What’s in this image? Be brief, it's for image alt description on a social network. Don't write in the first person.", imageUrl: nil),
+                                                 .init(type: "image_url", text: nil, imageUrl: .init(url: image))])])
       }
     }
   }

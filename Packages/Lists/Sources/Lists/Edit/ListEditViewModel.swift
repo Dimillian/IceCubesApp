@@ -1,9 +1,9 @@
 import Combine
+import Env
 import Models
 import Network
 import Observation
 import SwiftUI
-import Env
 
 @MainActor
 @Observable public class ListEditViewModel {
@@ -13,13 +13,13 @@ import Env
 
   var isLoadingAccounts: Bool = true
   var accounts: [Account] = []
-  
+
   var title: String
   var repliesPolicy: Models.List.RepliesPolicy
   var isExclusive: Bool
-  
+
   var isUpdating: Bool = false
-  
+
   var searchUserQuery: String = ""
   var searchedAccounts: [Account] = []
   var searchedRelationships: [String: Relationship] = [:]
@@ -27,9 +27,9 @@ import Env
 
   init(list: Models.List) {
     self.list = list
-    self.title = list.title
-    self.repliesPolicy = list.repliesPolicy ?? .list
-    self.isExclusive = list.exclusive ?? false
+    title = list.title
+    repliesPolicy = list.repliesPolicy ?? .list
+    isExclusive = list.exclusive ?? false
   }
 
   func fetchAccounts() async {
@@ -42,27 +42,27 @@ import Env
       isLoadingAccounts = false
     }
   }
-  
+
   func update() async {
     guard let client else { return }
     do {
       isUpdating = true
       let list: Models.List = try await client.put(endpoint:
-                                                    Lists.updateList(id: list.id,
-                                                                     title: title,
-                                                                     repliesPolicy: repliesPolicy,
-                                                                     exclusive: isExclusive ))
+        Lists.updateList(id: list.id,
+                         title: title,
+                         repliesPolicy: repliesPolicy,
+                         exclusive: isExclusive))
       self.list = list
-      self.title = list.title
-      self.repliesPolicy = list.repliesPolicy ?? .list
-      self.isExclusive = list.exclusive ?? false
-      self.isUpdating = false
+      title = list.title
+      repliesPolicy = list.repliesPolicy ?? .list
+      isExclusive = list.exclusive ?? false
+      isUpdating = false
       await CurrentAccount.shared.fetchLists()
     } catch {
       isUpdating = false
     }
   }
-  
+
   func add(account: Account) async {
     guard let client else { return }
     do {
@@ -76,7 +76,7 @@ import Env
       isUpdating = false
     }
   }
-  
+
   func delete(account: Account) async {
     guard let client else { return }
     do {
@@ -90,7 +90,7 @@ import Env
       isUpdating = false
     }
   }
-  
+
   func searchUsers() async {
     guard let client, !searchUserQuery.isEmpty else { return }
     do {
@@ -107,7 +107,7 @@ import Env
       }
       searchedAccounts = results.accounts
       isSearching = false
-    } catch { }
+    } catch {}
   }
 }
 
@@ -115,11 +115,11 @@ extension Models.List.RepliesPolicy {
   var title: LocalizedStringKey {
     switch self {
     case .followed:
-      return "list.repliesPolicy.followed"
+      "list.repliesPolicy.followed"
     case .list:
-      return "list.repliesPolicy.list"
+      "list.repliesPolicy.list"
     case .none:
-      return "list.repliesPolicy.none"
+      "list.repliesPolicy.none"
     }
   }
 }

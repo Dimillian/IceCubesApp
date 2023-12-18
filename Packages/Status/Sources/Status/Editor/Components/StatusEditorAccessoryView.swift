@@ -1,10 +1,10 @@
 import DesignSystem
 import Env
+import GiphyUISDK
 import Models
 import NukeUI
 import PhotosUI
 import SwiftUI
-import GiphyUISDK
 
 @MainActor
 struct StatusEditorAccessoryView: View {
@@ -41,19 +41,19 @@ struct StatusEditorAccessoryView: View {
               } label: {
                 Label("status.editor.photo-library", systemImage: "photo")
               }
-#if !targetEnvironment(macCatalyst)
-              Button {
-                isCameraPickerPresented = true
-              } label: {
-                Label("status.editor.camera-picker", systemImage: "camera")
-              }
-#endif
+              #if !targetEnvironment(macCatalyst)
+                Button {
+                  isCameraPickerPresented = true
+                } label: {
+                  Label("status.editor.camera-picker", systemImage: "camera")
+                }
+              #endif
               Button {
                 isFileImporterPresented = true
               } label: {
                 Label("status.editor.browse-file", systemImage: "folder")
               }
-              
+
               Button {
                 isGIFPickerPresented = true
               } label: {
@@ -70,8 +70,7 @@ struct StatusEditorAccessoryView: View {
                           selection: $viewModel.mediaPickers,
                           maxSelectionCount: 4,
                           matching: .any(of: [.images, .videos]),
-                          photoLibrary: .shared()
-            )
+                          photoLibrary: .shared())
             .fileImporter(isPresented: $isFileImporterPresented,
                           allowedContentTypes: [.image, .video],
                           allowsMultipleSelection: true)
@@ -92,7 +91,7 @@ struct StatusEditorAccessoryView: View {
             })
             .sheet(isPresented: $isGIFPickerPresented, content: {
               GifPickerView { url in
-                GPHCache.shared.downloadAssetData(url) { data, error in
+                GPHCache.shared.downloadAssetData(url) { data, _ in
                   guard let data else { return }
                   viewModel.processGIFData(data: data)
                 }
@@ -109,7 +108,7 @@ struct StatusEditorAccessoryView: View {
               // all SEVM have the same visibility value
               followUpSEVMs.append(StatusEditorViewModel(mode: .new(visibility: focusedSEVM.visibility)))
             } label: {
-              Image(systemName: "arrowshape.turn.up.left.circle.fill") 
+              Image(systemName: "arrowshape.turn.up.left.circle.fill")
             }
             .disabled(!canAddNewSEVM)
 
@@ -213,8 +212,8 @@ struct StatusEditorAccessoryView: View {
   private var canAddNewSEVM: Bool {
     guard followUpSEVMs.count < 5 else { return false }
 
-    if followUpSEVMs.isEmpty,                  // there is only mainSEVM on the editor
-       !focusedSEVM.statusText.string.isEmpty  // focusedSEVM is also mainSEVM
+    if followUpSEVMs.isEmpty, // there is only mainSEVM on the editor
+       !focusedSEVM.statusText.string.isEmpty // focusedSEVM is also mainSEVM
     { return true }
 
     if let lastSEVMs = followUpSEVMs.last,
