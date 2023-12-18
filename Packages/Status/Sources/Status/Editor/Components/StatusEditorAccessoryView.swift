@@ -31,189 +31,217 @@ struct StatusEditorAccessoryView: View {
 
   var body: some View {
     @Bindable var viewModel = focusedSEVM
-
     VStack(spacing: 0) {
+      #if os(visionOS)
+      HStack {
+        contentView
+      }
+      .frame(height: 24)
+      .padding(16)
+      .background(.ultraThinMaterial)
+      .cornerRadius(8)
+      #else
       Divider()
       HStack {
-        ScrollView(.horizontal) {
-          HStack(alignment: .center, spacing: 16) {
-            Menu {
-              Button {
-                isPhotosPickerPresented = true
-              } label: {
-                Label("status.editor.photo-library", systemImage: "photo")
-              }
-              #if !targetEnvironment(macCatalyst)
-                Button {
-                  isCameraPickerPresented = true
-                } label: {
-                  Label("status.editor.camera-picker", systemImage: "camera")
-                }
-              #endif
-              Button {
-                isFileImporterPresented = true
-              } label: {
-                Label("status.editor.browse-file", systemImage: "folder")
-              }
-
-              #if !os(visionOS)
-              Button {
-                isGIFPickerPresented = true
-              } label: {
-                Label("GIPHY", systemImage: "party.popper")
-              }
-              #endif
-            } label: {
-              if viewModel.isMediasLoading {
-                ProgressView()
-              } else {
-                Image(systemName: "photo.on.rectangle.angled")
-              }
-            }
-            .photosPicker(isPresented: $isPhotosPickerPresented,
-                          selection: $viewModel.mediaPickers,
-                          maxSelectionCount: 4,
-                          matching: .any(of: [.images, .videos]),
-                          photoLibrary: .shared())
-            .fileImporter(isPresented: $isFileImporterPresented,
-                          allowedContentTypes: [.image, .video],
-                          allowsMultipleSelection: true)
-            { result in
-              if let urls = try? result.get() {
-                viewModel.processURLs(urls: urls)
-              }
-            }
-            .fullScreenCover(isPresented: $isCameraPickerPresented, content: {
-              StatusEditorCameraPickerView(selectedImage: .init(get: {
-                nil
-              }, set: { image in
-                if let image {
-                  viewModel.processCameraPhoto(image: image)
-                }
-              }))
-              .background(.black)
-            })
-            .sheet(isPresented: $isGIFPickerPresented, content: {
-              #if !os(visionOS)
-              GifPickerView { url in
-                GPHCache.shared.downloadAssetData(url) { data, _ in
-                  guard let data else { return }
-                  viewModel.processGIFData(data: data)
-                }
-                isGIFPickerPresented = false
-              } onShouldDismissGifPicker: {
-                isGIFPickerPresented = false
-              }
-              .presentationDetents([.medium, .large])
-              #else
-              EmptyView()
-              #endif
-            })
-            .accessibilityLabel("accessibility.editor.button.attach-photo")
-            .disabled(viewModel.showPoll)
-
-            Button {
-              // all SEVM have the same visibility value
-              followUpSEVMs.append(StatusEditorViewModel(mode: .new(visibility: focusedSEVM.visibility)))
-            } label: {
-              Image(systemName: "arrowshape.turn.up.left.circle.fill")
-            }
-            .disabled(!canAddNewSEVM)
-
-            Button {
-              withAnimation {
-                viewModel.showPoll.toggle()
-                viewModel.resetPollDefaults()
-              }
-            } label: {
-              Image(systemName: "chart.bar")
-            }
-            .accessibilityLabel("accessibility.editor.button.poll")
-            .disabled(viewModel.shouldDisablePollButton)
-
-            Button {
-              withAnimation {
-                viewModel.spoilerOn.toggle()
-              }
-              isSpoilerTextFocused = viewModel.id
-            } label: {
-              Image(systemName: viewModel.spoilerOn ? "exclamationmark.triangle.fill" : "exclamationmark.triangle")
-            }
-            .accessibilityLabel("accessibility.editor.button.spoiler")
-
-            if !viewModel.mode.isInShareExtension {
-              Button {
-                isDraftsSheetDisplayed = true
-              } label: {
-                Image(systemName: "archivebox")
-              }
-              .accessibilityLabel("accessibility.editor.button.drafts")
-              .popover(isPresented: $isDraftsSheetDisplayed) {
-                if UIDevice.current.userInterfaceIdiom == .phone {
-                  draftsListView
-                    .presentationDetents([.medium])
-                } else {
-                  draftsListView
-                    .frame(width: 400, height: 500)
-                }
-              }
-            }
-
-            if !viewModel.customEmojiContainer.isEmpty {
-              Button {
-                isCustomEmojisSheetDisplay = true
-              } label: {
-                // This is a workaround for an apparent bug in the `face.smiling` SF Symbol.
-                // See https://github.com/Dimillian/IceCubesApp/issues/1193
-                let customEmojiSheetIconName = colorScheme == .light ? "face.smiling" : "face.smiling.inverse"
-                Image(systemName: customEmojiSheetIconName)
-              }
-              .accessibilityLabel("accessibility.editor.button.custom-emojis")
-              .popover(isPresented: $isCustomEmojisSheetDisplay) {
-                if UIDevice.current.userInterfaceIdiom == .phone {
-                  customEmojisSheet
-                } else {
-                  customEmojisSheet
-                    .frame(width: 400, height: 500)
-                }
-              }
-            }
-
-            Button {
-              isLanguageSheetDisplayed.toggle()
-            } label: {
-              if let language = viewModel.selectedLanguage {
-                Text(language.uppercased())
-              } else {
-                Image(systemName: "globe")
-              }
-            }
-            .accessibilityLabel("accessibility.editor.button.language")
-            .popover(isPresented: $isLanguageSheetDisplayed) {
-              if UIDevice.current.userInterfaceIdiom == .phone {
-                languageSheetView
-              } else {
-                languageSheetView
-                  .frame(width: 400, height: 500)
-              }
-            }
-
-            if preferences.isOpenAIEnabled {
-              AIMenu.disabled(!viewModel.canPost)
-            }
-          }
-          .padding(.horizontal, .layoutPadding)
-        }
-        Spacer()
-        characterCountView
-          .padding(.trailing, .layoutPadding)
+        contentView
       }
       .frame(height: 20)
       .padding(.vertical, 12)
       .background(.ultraThinMaterial)
+      #endif
     }
     .onAppear {
       viewModel.setInitialLanguageSelection(preference: preferences.recentlyUsedLanguages.first ?? preferences.serverPreferences?.postLanguage)
+    }
+  }
+
+  @ViewBuilder
+  private var contentView: some View {
+    #if os(visionOS)
+    HStack(spacing: 8) {
+      actionsView
+      characterCountView
+        .padding(.leading, 16)
+    }
+    #else
+    ScrollView(.horizontal) {
+      HStack(alignment: .center, spacing: 16) {
+        actionsView
+      }
+      .padding(.horizontal, .layoutPadding)
+    }
+    Spacer()
+    characterCountView
+      .padding(.trailing, .layoutPadding)
+    #endif
+  }
+  
+  @ViewBuilder
+  private var actionsView: some View {
+    @Bindable var viewModel = focusedSEVM
+    Menu {
+      Button {
+        isPhotosPickerPresented = true
+      } label: {
+        Label("status.editor.photo-library", systemImage: "photo")
+      }
+      #if !targetEnvironment(macCatalyst)
+        Button {
+          isCameraPickerPresented = true
+        } label: {
+          Label("status.editor.camera-picker", systemImage: "camera")
+        }
+      #endif
+      Button {
+        isFileImporterPresented = true
+      } label: {
+        Label("status.editor.browse-file", systemImage: "folder")
+      }
+
+      #if !os(visionOS)
+      Button {
+        isGIFPickerPresented = true
+      } label: {
+        Label("GIPHY", systemImage: "party.popper")
+      }
+      #endif
+    } label: {
+      if viewModel.isMediasLoading {
+        ProgressView()
+      } else {
+        Image(systemName: "photo.on.rectangle.angled")
+      }
+    }
+    .photosPicker(isPresented: $isPhotosPickerPresented,
+                  selection: $viewModel.mediaPickers,
+                  maxSelectionCount: 4,
+                  matching: .any(of: [.images, .videos]),
+                  photoLibrary: .shared())
+    .fileImporter(isPresented: $isFileImporterPresented,
+                  allowedContentTypes: [.image, .video],
+                  allowsMultipleSelection: true)
+    { result in
+      if let urls = try? result.get() {
+        viewModel.processURLs(urls: urls)
+      }
+    }
+    .fullScreenCover(isPresented: $isCameraPickerPresented, content: {
+      StatusEditorCameraPickerView(selectedImage: .init(get: {
+        nil
+      }, set: { image in
+        if let image {
+          viewModel.processCameraPhoto(image: image)
+        }
+      }))
+      .background(.black)
+    })
+    .sheet(isPresented: $isGIFPickerPresented, content: {
+      #if !os(visionOS)
+      GifPickerView { url in
+        GPHCache.shared.downloadAssetData(url) { data, _ in
+          guard let data else { return }
+          viewModel.processGIFData(data: data)
+        }
+        isGIFPickerPresented = false
+      } onShouldDismissGifPicker: {
+        isGIFPickerPresented = false
+      }
+      .presentationDetents([.medium, .large])
+      #else
+      EmptyView()
+      #endif
+    })
+    .accessibilityLabel("accessibility.editor.button.attach-photo")
+    .disabled(viewModel.showPoll)
+
+    Button {
+      // all SEVM have the same visibility value
+      followUpSEVMs.append(StatusEditorViewModel(mode: .new(visibility: focusedSEVM.visibility)))
+    } label: {
+      Image(systemName: "arrowshape.turn.up.left.circle.fill")
+    }
+    .disabled(!canAddNewSEVM)
+
+    Button {
+      withAnimation {
+        viewModel.showPoll.toggle()
+        viewModel.resetPollDefaults()
+      }
+    } label: {
+      Image(systemName: "chart.bar")
+    }
+    .accessibilityLabel("accessibility.editor.button.poll")
+    .disabled(viewModel.shouldDisablePollButton)
+
+    Button {
+      withAnimation {
+        viewModel.spoilerOn.toggle()
+      }
+      isSpoilerTextFocused = viewModel.id
+    } label: {
+      Image(systemName: viewModel.spoilerOn ? "exclamationmark.triangle.fill" : "exclamationmark.triangle")
+    }
+    .accessibilityLabel("accessibility.editor.button.spoiler")
+
+    if !viewModel.mode.isInShareExtension {
+      Button {
+        isDraftsSheetDisplayed = true
+      } label: {
+        Image(systemName: "archivebox")
+      }
+      .accessibilityLabel("accessibility.editor.button.drafts")
+      .popover(isPresented: $isDraftsSheetDisplayed) {
+        if UIDevice.current.userInterfaceIdiom == .phone {
+          draftsListView
+            .presentationDetents([.medium])
+        } else {
+          draftsListView
+            .frame(width: 400, height: 500)
+        }
+      }
+    }
+
+    if !viewModel.customEmojiContainer.isEmpty {
+      Button {
+        isCustomEmojisSheetDisplay = true
+      } label: {
+        // This is a workaround for an apparent bug in the `face.smiling` SF Symbol.
+        // See https://github.com/Dimillian/IceCubesApp/issues/1193
+        let customEmojiSheetIconName = colorScheme == .light ? "face.smiling" : "face.smiling.inverse"
+        Image(systemName: customEmojiSheetIconName)
+      }
+      .accessibilityLabel("accessibility.editor.button.custom-emojis")
+      .popover(isPresented: $isCustomEmojisSheetDisplay) {
+        if UIDevice.current.userInterfaceIdiom == .phone {
+          customEmojisSheet
+        } else {
+          customEmojisSheet
+            .frame(width: 400, height: 500)
+        }
+      }
+    }
+
+    Button {
+      isLanguageSheetDisplayed.toggle()
+    } label: {
+      if let language = viewModel.selectedLanguage {
+        Text(language.uppercased())
+      } else {
+        Image(systemName: "globe")
+      }
+    }
+    .accessibilityLabel("accessibility.editor.button.language")
+    .popover(isPresented: $isLanguageSheetDisplayed) {
+      if UIDevice.current.userInterfaceIdiom == .phone {
+        languageSheetView
+      } else {
+        languageSheetView
+          .frame(width: 400, height: 500)
+      }
+    }
+
+    if preferences.isOpenAIEnabled {
+      AIMenu.disabled(!viewModel.canPost)
     }
   }
 

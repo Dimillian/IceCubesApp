@@ -132,8 +132,11 @@ public struct NotificationsListView: View {
                                leading: .layoutPadding + 4,
                                bottom: 12,
                                trailing: .layoutPadding))
-          #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
+          #if os(visionOS)
+          .listRowBackground(RoundedRectangle(cornerRadius: 8)
+            .foregroundStyle(Material.regular))
+          #else
+           .listRowBackground(theme.primaryBackgroundColor)
           #endif
           .redacted(reason: .placeholder)
           .allowsHitTesting(false)
@@ -158,7 +161,10 @@ public struct NotificationsListView: View {
                                  leading: .layoutPadding + 4,
                                  bottom: 12,
                                  trailing: .layoutPadding))
-            #if !os(visionOS)
+            #if os(visionOS)
+            .listRowBackground(RoundedRectangle(cornerRadius: 8)
+              .foregroundStyle(notification.type == .mention && lockedType != .mention ? Material.thick : Material.regular))
+            #else
             .listRowBackground(notification.type == .mention && lockedType != .mention ?
               theme.secondaryBackgroundColor : theme.primaryBackgroundColor)
             #endif

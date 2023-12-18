@@ -96,7 +96,12 @@ public struct AppAccountsSelectorView: View {
             AppAccountView(viewModel: viewModel)
           }
         }
-        .listRowBackground(theme.primaryBackgroundColor)
+        #if os(visionOS)
+        .listRowBackground(RoundedRectangle(cornerRadius: 8)
+          .foregroundStyle(Material.regular))
+        #else
+         .listRowBackground(theme.primaryBackgroundColor)
+        #endif
 
         if accountCreationEnabled {
           Section {
@@ -111,7 +116,12 @@ public struct AppAccountsSelectorView: View {
             }
             settingsButton
           }
-          .listRowBackground(theme.primaryBackgroundColor)
+          #if os(visionOS)
+          .listRowBackground(Rectangle()
+            .foregroundStyle(Material.regular))
+          #else
+           .listRowBackground(theme.primaryBackgroundColor)
+          #endif
         }
       }
       .listStyle(.insetGrouped)

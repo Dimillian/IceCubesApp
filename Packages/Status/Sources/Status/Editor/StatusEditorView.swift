@@ -73,13 +73,21 @@ public struct StatusEditorView: View {
       .scrollPosition(id: $scrollID, anchor: .top)
       .animation(.bouncy(duration: 0.3), value: editorFocusState)
       .animation(.bouncy(duration: 0.3), value: followUpSEVMs)
+      #if !os(visionOS)
       .background(theme.primaryBackgroundColor)
+      #endif
       .safeAreaInset(edge: .bottom) {
         StatusEditorAutoCompleteView(viewModel: focusedSEVM)
       }
+      #if os(visionOS)
+      .ornament(attachmentAnchor: .scene(.bottom)) {
+        StatusEditorAccessoryView(isSpoilerTextFocused: $isSpoilerTextFocused, focusedSEVM: focusedSEVM, followUpSEVMs: $followUpSEVMs)
+          }
+      #else
       .safeAreaInset(edge: .bottom) {
         StatusEditorAccessoryView(isSpoilerTextFocused: $isSpoilerTextFocused, focusedSEVM: focusedSEVM, followUpSEVMs: $followUpSEVMs)
       }
+      #endif
       .accessibilitySortPriority(1) // Ensure that all elements inside the `ScrollView` occur earlier than the accessory views
       .navigationTitle(focusedSEVM.mode.title)
       .navigationBarTitleDisplayMode(.inline)

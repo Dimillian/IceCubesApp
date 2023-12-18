@@ -149,8 +149,11 @@ public struct StatusRowView: View {
         StatusRowSwipeView(viewModel: viewModel, mode: .leading)
       }
     }
-    #if !os(visionOS)
-    .listRowBackground(viewModel.highlightRowColor)
+    #if os(visionOS)
+    .listRowBackground(RoundedRectangle(cornerRadius: 8)
+      .foregroundStyle(Material.regular))
+    #else
+     .listRowBackground(viewModel.highlightRowColor)
     #endif
     .listRowInsets(.init(top: 12,
                          leading: .layoutPadding,
