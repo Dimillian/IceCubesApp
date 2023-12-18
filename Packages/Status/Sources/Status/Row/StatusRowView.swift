@@ -36,7 +36,7 @@ public struct StatusRowView: View {
     HStack(spacing: 0) {
       if !isCompact {
         HStack(spacing: 3) {
-          ForEach(0..<indentationLevel, id: \.self) { level in
+          ForEach(0 ..< indentationLevel, id: \.self) { level in
             Rectangle()
               .fill(theme.tintColor)
               .frame(width: 2)
@@ -225,13 +225,14 @@ public struct StatusRowView: View {
       Button("accessibility.status.media-viewer-action.label") {
         HapticManager.shared.fireHaptic(.notification(.success))
         let attachments = viewModel.finalStatus.mediaAttachments
-#if targetEnvironment(macCatalyst)
-        openWindow(value: WindowDestinationMedia.mediaViewer(
-          attachments: attachments,
-          selectedAttachment: attachments[0]))
-#else
-        quickLook.prepareFor(selectedMediaAttachment: attachments[0], mediaAttachments: attachments)
-#endif
+        #if targetEnvironment(macCatalyst)
+          openWindow(value: WindowDestinationMedia.mediaViewer(
+            attachments: attachments,
+            selectedAttachment: attachments[0]
+          ))
+        #else
+          quickLook.prepareFor(selectedMediaAttachment: attachments[0], mediaAttachments: attachments)
+        #endif
       }
     }
 

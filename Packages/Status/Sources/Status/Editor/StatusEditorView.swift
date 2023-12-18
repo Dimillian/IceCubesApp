@@ -24,7 +24,7 @@ public struct StatusEditorView: View {
   @State private var scrollID: UUID?
 
   @FocusState private var editorFocusState: StatusEditorFocusState?
-  
+
   private var focusedSEVM: StatusEditorViewModel {
     if case let .followUp(id) = editorFocusState,
        let sevm = followUpSEVMs.first(where: { $0.id == id })
@@ -38,7 +38,7 @@ public struct StatusEditorView: View {
   }
 
   public var body: some View {
-    @Bindable var focusedSEVM = self.focusedSEVM
+    @Bindable var focusedSEVM = focusedSEVM
 
     NavigationStack {
       ScrollView {
@@ -54,7 +54,7 @@ public struct StatusEditorView: View {
           )
           .id(mainSEVM.id)
 
-          ForEach(followUpSEVMs) { sevm  in
+          ForEach(followUpSEVMs) { sevm in
             @Bindable var sevm: StatusEditorViewModel = sevm
 
             StatusEditorCoreView(
@@ -93,7 +93,8 @@ public struct StatusEditorView: View {
           Button("OK") {}
         }, message: {
           Text(mainSEVM.postingError ?? "")
-        })
+        }
+      )
       .interactiveDismissDisabled(mainSEVM.shouldDisplayDismissWarning)
       .onChange(of: appAccounts.currentClient) { _, newValue in
         if mainSEVM.mode.isInShareExtension {

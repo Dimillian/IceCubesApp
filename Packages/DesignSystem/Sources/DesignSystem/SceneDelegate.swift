@@ -6,14 +6,14 @@ public class SceneDelegate: NSObject, UIWindowSceneDelegate, Sendable {
   public var window: UIWindow?
   public private(set) var windowWidth: CGFloat = UIScreen.main.bounds.size.width
   public private(set) var windowHeight: CGFloat = UIScreen.main.bounds.size.height
-  
+
   public func scene(_ scene: UIScene,
                     willConnectTo _: UISceneSession,
                     options _: UIScene.ConnectionOptions)
   {
     guard let windowScene = scene as? UIWindowScene else { return }
     window = windowScene.keyWindow
-    
+
     #if targetEnvironment(macCatalyst)
       if let titlebar = windowScene.titlebar {
         titlebar.titleVisibility = .hidden
@@ -22,10 +22,10 @@ public class SceneDelegate: NSObject, UIWindowSceneDelegate, Sendable {
     #endif
   }
 
-  public override init() {
+  override public init() {
     super.init()
-    self.windowWidth = self.window?.bounds.size.width ?? UIScreen.main.bounds.size.width
-    self.windowHeight = self.window?.bounds.size.height ?? UIScreen.main.bounds.size.height
+    windowWidth = window?.bounds.size.width ?? UIScreen.main.bounds.size.width
+    windowHeight = window?.bounds.size.height ?? UIScreen.main.bounds.size.height
     Self.observedSceneDelegate.insert(self)
     _ = Self.observer // just for activating the lazy static property
   }

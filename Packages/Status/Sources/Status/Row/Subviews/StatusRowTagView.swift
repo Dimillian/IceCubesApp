@@ -1,6 +1,6 @@
 import DesignSystem
-import SwiftUI
 import Env
+import SwiftUI
 
 struct StatusRowTagView: View {
   @Environment(CurrentAccount.self) private var currentAccount

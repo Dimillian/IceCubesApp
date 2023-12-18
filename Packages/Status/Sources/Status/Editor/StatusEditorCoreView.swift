@@ -1,10 +1,10 @@
-import SwiftUI
-import Models
-import Env
-import DesignSystem
 import Accounts
 import AppAccount
+import DesignSystem
+import Env
+import Models
 import Network
+import SwiftUI
 
 @MainActor
 struct StatusEditorCoreView: View {
@@ -22,11 +22,11 @@ struct StatusEditorCoreView: View {
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(AppAccountsManager.self) private var appAccounts
   @Environment(Client.self) private var client
-#if targetEnvironment(macCatalyst)
-  @Environment(\.dismissWindow) private var dismissWindow
-#else
-  @Environment(\.dismiss) private var dismiss
-#endif
+  #if targetEnvironment(macCatalyst)
+    @Environment(\.dismissWindow) private var dismissWindow
+  #else
+    @Environment(\.dismiss) private var dismiss
+  #endif
 
   var body: some View {
     HStack(spacing: 0) {
@@ -145,11 +145,11 @@ struct StatusEditorCoreView: View {
     viewModel.preferences = preferences
     viewModel.prepareStatusText()
     if !client.isAuth {
-#if targetEnvironment(macCatalyst)
-      dismissWindow()
-#else
-      dismiss()
-#endif
+      #if targetEnvironment(macCatalyst)
+        dismissWindow()
+      #else
+        dismiss()
+      #endif
       NotificationCenter.default.post(name: .shareSheetClose, object: nil)
     }
 

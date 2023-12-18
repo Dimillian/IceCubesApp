@@ -54,7 +54,7 @@ public struct MediaUIView: View, @unchecked Sendable {
     data = attachments.compactMap { DisplayData(from: $0) }
     initialItem = DisplayData(from: selectedAttachment)
   }
-  
+
   private func scrollToPrevious() {
     if let scrolledItem, let index = data.firstIndex(of: scrolledItem), index > 0 {
       withAnimation {
@@ -62,9 +62,9 @@ public struct MediaUIView: View, @unchecked Sendable {
       }
     }
   }
-  
+
   private func scrollToNext() {
-    if let scrolledItem, let index = data.firstIndex(of: scrolledItem), index < data.count - 1{
+    if let scrolledItem, let index = data.firstIndex(of: scrolledItem), index < data.count - 1 {
       withAnimation {
         self.scrolledItem = data[index + 1]
       }

@@ -1,9 +1,9 @@
 import Env
+import Models
 import Nuke
 import NukeUI
 import Shimmer
 import SwiftUI
-import Models
 
 struct AccountPopoverView: View {
   let account: Account
@@ -36,7 +36,7 @@ struct AccountPopoverView: View {
         }
         .frame(height: adaptiveConfig.height / 2, alignment: .bottom)
 
-        EmojiTextApp(.init(stringValue: account.safeDisplayName ), emojis: account.emojis)
+        EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
           .font(.headline)
           .foregroundColor(theme.labelColor)
           .emojiSize(Font.scaledHeadlineFont.emojiSize)
@@ -122,11 +122,10 @@ struct AccountPopoverView: View {
   }
 
   private var adaptiveConfig: AvatarView.FrameConfig {
-    var cornerRadius: CGFloat
-    if config == .badge || theme.avatarShape == .circle {
-      cornerRadius = config.width / 2
+    var cornerRadius: CGFloat = if config == .badge || theme.avatarShape == .circle {
+      config.width / 2
     } else {
-      cornerRadius = config.cornerRadius
+      config.cornerRadius
     }
     return AvatarView.FrameConfig(width: config.width, height: config.height, cornerRadius: cornerRadius)
   }
@@ -142,7 +141,7 @@ extension VerticalAlignment {
   static let bottomAvatar = VerticalAlignment(BottomAvatarAlignment.self)
 }
 
-public struct AccountPopoverModifier : ViewModifier {
+public struct AccountPopoverModifier: ViewModifier {
   @Environment(Theme.self) private var theme
   @Environment(UserPreferences.self) private var userPreferences
 
@@ -156,7 +155,7 @@ public struct AccountPopoverModifier : ViewModifier {
     if !userPreferences.showAccountPopover {
       return AnyView(content)
     }
-    
+
     return AnyView(content
       .onHover { hovering in
         if hovering {
@@ -191,8 +190,8 @@ public struct AccountPopoverModifier : ViewModifier {
   }
 }
 
-extension View {
-  public func accountPopover(_ account: Account) -> some View {
+public extension View {
+  func accountPopover(_ account: Account) -> some View {
     modifier(AccountPopoverModifier(account))
   }
 }

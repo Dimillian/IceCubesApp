@@ -29,7 +29,7 @@ struct SettingsTabs: View {
   @State private var timelineCache = TimelineCache()
 
   @Binding var popToRootTab: Tab
-  
+
   let isModal: Bool
 
   @Query(sort: \LocalTimeline.creationDate, order: .reverse) var localTimelines: [LocalTimeline]
@@ -160,10 +160,10 @@ struct SettingsTabs: View {
         Label("settings.general.translate", systemImage: "captions.bubble")
       }
       #if !targetEnvironment(macCatalyst)
-      Link(destination: URL(string: UIApplication.openSettingsURLString)!) {
-        Label("settings.system", systemImage: "gear")
-      }
-      .tint(theme.labelColor)
+        Link(destination: URL(string: UIApplication.openSettingsURLString)!) {
+          Label("settings.system", systemImage: "gear")
+        }
+        .tint(theme.labelColor)
       #endif
     }
     .listRowBackground(theme.primaryBackgroundColor)
@@ -173,24 +173,24 @@ struct SettingsTabs: View {
   private var otherSections: some View {
     @Bindable var preferences = preferences
     Section("settings.section.other") {
-#if !targetEnvironment(macCatalyst)
-      Picker(selection: $preferences.preferredBrowser) {
-        ForEach(PreferredBrowser.allCases, id: \.rawValue) { browser in
-          switch browser {
-          case .inAppSafari:
-            Text("settings.general.browser.in-app").tag(browser)
-          case .safari:
-            Text("settings.general.browser.system").tag(browser)
+      #if !targetEnvironment(macCatalyst)
+        Picker(selection: $preferences.preferredBrowser) {
+          ForEach(PreferredBrowser.allCases, id: \.rawValue) { browser in
+            switch browser {
+            case .inAppSafari:
+              Text("settings.general.browser.in-app").tag(browser)
+            case .safari:
+              Text("settings.general.browser.system").tag(browser)
+            }
           }
+        } label: {
+          Label("settings.general.browser", systemImage: "network")
         }
-      } label: {
-        Label("settings.general.browser", systemImage: "network")
-      }
-      Toggle(isOn: $preferences.inAppBrowserReaderView) {
-        Label("settings.general.browser.in-app.readerview", systemImage: "doc.plaintext")
-      }
-      .disabled(preferences.preferredBrowser != PreferredBrowser.inAppSafari)
-#endif
+        Toggle(isOn: $preferences.inAppBrowserReaderView) {
+          Label("settings.general.browser.in-app.readerview", systemImage: "doc.plaintext")
+        }
+        .disabled(preferences.preferredBrowser != PreferredBrowser.inAppSafari)
+      #endif
       Toggle(isOn: $preferences.isOpenAIEnabled) {
         Label("settings.other.hide-openai", systemImage: "faxmachine")
       }
@@ -209,19 +209,19 @@ struct SettingsTabs: View {
 
   private var appSection: some View {
     Section {
-#if !targetEnvironment(macCatalyst)
-      NavigationLink(destination: IconSelectorView()) {
-        Label {
-          Text("settings.app.icon")
-        } icon: {
-          let icon = IconSelectorView.Icon(string: UIApplication.shared.alternateIconName ?? "AppIcon")
-          Image(uiImage: .init(named: icon.iconName)!)
-            .resizable()
-            .frame(width: 25, height: 25)
-            .cornerRadius(4)
+      #if !targetEnvironment(macCatalyst)
+        NavigationLink(destination: IconSelectorView()) {
+          Label {
+            Text("settings.app.icon")
+          } icon: {
+            let icon = IconSelectorView.Icon(string: UIApplication.shared.alternateIconName ?? "AppIcon")
+            Image(uiImage: .init(named: icon.iconName)!)
+              .resizable()
+              .frame(width: 25, height: 25)
+              .cornerRadius(4)
+          }
         }
-      }
-#endif
+      #endif
 
       Link(destination: URL(string: "https://github.com/Dimillian/IceCubesApp")!) {
         Label("settings.app.source", systemImage: "link")

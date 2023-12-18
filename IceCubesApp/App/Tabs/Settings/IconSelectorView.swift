@@ -53,7 +53,7 @@ struct IconSelectorView: View {
     static let items = [
       IconSelector(title: "settings.app.icon.official".localized, icons: [.primary, .alt1, .alt2, .alt3, .alt4, .alt5, .alt6, .alt7, .alt8,
                                                                           .alt9, .alt10, .alt11, .alt12, .alt13, .alt14,
-                                                                          .alt15, .alt16, .alt17, .alt18, .alt19, .alt25, 
+                                                                          .alt15, .alt16, .alt17, .alt18, .alt19, .alt25,
                                                                           .alt43, .alt44, .alt45, .alt46, .alt47]),
       IconSelector(title: "\("settings.app.icon.designed-by".localized) Albert Kinng", icons: [.alt20, .alt21, .alt22, .alt23, .alt24]),
       IconSelector(title: "\("settings.app.icon.designed-by".localized) Dan van Moll", icons: [.alt26, .alt27, .alt28]),

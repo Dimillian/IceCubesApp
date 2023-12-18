@@ -96,7 +96,7 @@ extension IceCubesApp {
     }
     .defaultSize(width: 600, height: 800)
     .windowResizability(.contentMinSize)
-    
+
     WindowGroup(for: WindowDestinationMedia.self) { destination in
       Group {
         switch destination.wrappedValue {

@@ -54,8 +54,8 @@ import SwiftUI
   }
 
   func loadSelectedType() {
-    self.client = client
-    
+    client = client
+
     guard let value = UserDefaults.standard.string(forKey: filterKey)
     else {
       selectedType = nil

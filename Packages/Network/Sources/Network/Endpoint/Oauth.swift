@@ -35,14 +35,14 @@ public enum Oauth: Endpoint {
   public func queryItems() -> [URLQueryItem]? {
     switch self {
     case let .authorize(clientId):
-      return [
+      [
         .init(name: "response_type", value: "code"),
         .init(name: "client_id", value: clientId),
         .init(name: "redirect_uri", value: AppInfo.scheme),
         .init(name: "scope", value: AppInfo.scopes),
       ]
     default:
-      return nil
+      nil
     }
   }
 }

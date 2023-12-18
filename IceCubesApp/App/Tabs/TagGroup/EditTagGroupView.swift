@@ -4,10 +4,10 @@ import Env
 import Models
 import Network
 import NukeUI
-import Shimmer
-import SwiftUI
-import SwiftData
 import SFSafeSymbols
+import Shimmer
+import SwiftData
+import SwiftUI
 
 @MainActor
 struct EditTagGroupView: View {
@@ -53,8 +53,8 @@ struct EditTagGroupView: View {
       .formStyle(.grouped)
       .navigationTitle(
         isNewGroup
-        ? "timeline.filter.add-tag-groups"
-        : "timeline.filter.edit-tag-groups"
+          ? "timeline.filter.add-tag-groups"
+          : "timeline.filter.edit-tag-groups"
       )
       .navigationBarTitleDisplayMode(.inline)
       .scrollContentBackground(.hidden)
@@ -76,9 +76,9 @@ struct EditTagGroupView: View {
   }
 
   init(tagGroup: TagGroup = .emptyGroup(), onSaved: ((TagGroup) -> Void)? = nil) {
-    self._tagGroup = State(wrappedValue: tagGroup)
+    _tagGroup = State(wrappedValue: tagGroup)
     self.onSaved = onSaved
-    self.isNewGroup = tagGroup.title.isEmpty
+    isNewGroup = tagGroup.title.isEmpty
   }
 
   private func save() {
@@ -320,7 +320,7 @@ private struct SymbolSearchResultsView: View {
         .onAppear {
           results = TagGroup.searchSymbol(for: symbolQuery, exclude: selectedSymbol)
         }
-      case .invalid(let description):
+      case let .invalid(description):
         Text(description)
           .font(.subheadline)
           .foregroundStyle(.secondary)
@@ -335,6 +335,7 @@ private struct SymbolSearchResultsView: View {
   }
 
   // MARK: search results validation
+
   enum ValidationStatus: Equatable {
     case valid
     case invalid(description: LocalizedStringKey)
@@ -342,22 +343,23 @@ private struct SymbolSearchResultsView: View {
 
   var validationStatus: ValidationStatus {
     if results.isEmpty {
-      if symbolQuery == selectedSymbol
-          && !symbolQuery.isEmpty
-          && results.count == 0
+      if symbolQuery == selectedSymbol,
+         !symbolQuery.isEmpty,
+         results.count == 0
       {
-        return .invalid(description: "\(symbolQuery) add-tag-groups.edit.tags.field.warning.search-results.already-selected")
+        .invalid(description: "\(symbolQuery) add-tag-groups.edit.tags.field.warning.search-results.already-selected")
       } else {
-        return .invalid(description: "add-tag-groups.edit.tags.field.warning.search-results.no-symbol-found")
+        .invalid(description: "add-tag-groups.edit.tags.field.warning.search-results.no-symbol-found")
       }
     } else {
-      return .valid
+      .valid
     }
   }
 }
 
 extension TagGroup {
   // MARK: title validation
+
   enum TitleValidationStatus: Equatable {
     case valid
     case invalid(description: LocalizedStringKey)
@@ -365,11 +367,12 @@ extension TagGroup {
 
   var titleValidationStatus: TitleValidationStatus {
     title.isEmpty
-    ? .invalid(description: "add-tag-groups.edit.title.field.warning.empty-title")
-    : .valid
+      ? .invalid(description: "add-tag-groups.edit.title.field.warning.empty-title")
+      : .valid
   }
 
   // MARK: symbolName validation
+
   enum SymbolNameValidationStatus: Equatable {
     case valid
     case invalid(description: LocalizedStringKey)
@@ -386,6 +389,7 @@ extension TagGroup {
   }
 
   // MARK: tags validation
+
   enum TagsValidationStatus: Equatable {
     case valid
     case invalid(description: LocalizedStringKey)
@@ -399,19 +403,22 @@ extension TagGroup {
   }
 
   // MARK: TagGroup validation
+
   var isValid: Bool {
     titleValidationStatus == .valid
-    && symbolNameValidationStatus == .valid
-    && tagsValidationStatus == .valid
+      && symbolNameValidationStatus == .valid
+      && tagsValidationStatus == .valid
   }
 
   // MARK: format
+
   func format() {
     title = title.trimmingCharacters(in: .whitespacesAndNewlines)
     tags = tags.map { $0.lowercased() }
   }
 
   // MARK: static members
+
   static func emptyGroup() -> TagGroup {
     TagGroup(title: "", symbolName: "", tags: [])
   }
@@ -419,9 +426,9 @@ extension TagGroup {
   static func searchSymbol(for query: String, exclude excludedSymbol: String) -> [String] {
     guard !query.isEmpty else { return [] }
 
-    return Self.allSymbols.filter {
+    return allSymbols.filter {
       $0.contains(query) &&
-      $0 != excludedSymbol
+        $0 != excludedSymbol
     }
   }
 
@@ -432,7 +439,7 @@ extension TagGroup {
 
 extension Text {
   func warningLabel() -> Text {
-    self.font(.caption)
+    font(.caption)
       .foregroundStyle(.red)
   }
 }

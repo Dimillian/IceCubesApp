@@ -114,7 +114,8 @@ import SwiftUI
     indentationLevelPreviousCache = [:]
     for status in statuses {
       if let inReplyToId = status.inReplyToId,
-         let prevIndent = indentationLevelPreviousCache[inReplyToId] {
+         let prevIndent = indentationLevelPreviousCache[inReplyToId]
+      {
         indentationLevelPreviousCache[status.id] = prevIndent + 1
       } else {
         indentationLevelPreviousCache[status.id] = 0
@@ -137,14 +138,14 @@ import SwiftUI
       }
     }
   }
-  
-    func getIndentationLevel(id: String, maxIndent: UInt) -> (indentationLevel: UInt, extraInset: Double) {
+
+  func getIndentationLevel(id: String, maxIndent: UInt) -> (indentationLevel: UInt, extraInset: Double) {
     let level = min(indentationLevelPreviousCache[id] ?? 0, maxIndent)
-    
+
     let barSize = Double(level) * 2
     let spaceBetween = (Double(level) - 1) * 3
     let size = barSize + spaceBetween + 8
-    
+
     return (level, size)
   }
 }

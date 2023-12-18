@@ -1,9 +1,9 @@
 import DesignSystem
 import Env
+import Models
 import Observation
 import SafariServices
 import SwiftUI
-import Models
 
 extension View {
   @MainActor func withSafariRouter() -> some View {
@@ -43,9 +43,9 @@ private struct SafariRouter: ViewModifier {
               return .handled
             }
           }
-#if !targetEnvironment(macCatalyst)
-          guard preferences.preferredBrowser == .inAppSafari else { return .systemAction }
-#endif
+          #if !targetEnvironment(macCatalyst)
+            guard preferences.preferredBrowser == .inAppSafari else { return .systemAction }
+          #endif
           // SFSafariViewController only supports initial URLs with http:// or https:// schemes.
           guard let scheme = url.scheme, ["https", "http"].contains(scheme.lowercased()) else {
             return .systemAction

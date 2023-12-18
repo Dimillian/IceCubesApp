@@ -55,13 +55,13 @@ struct StatusRowHeaderView: View {
           Group {
             EmojiTextApp(.init(stringValue: viewModel.finalStatus.account.safeDisplayName),
                          emojis: viewModel.finalStatus.account.emojis)
-            .font(.scaledSubheadline)
-            .foregroundColor(theme.labelColor)
-            .emojiSize(Font.scaledSubheadlineFont.emojiSize)
-            .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
-            .fontWeight(.semibold)
-            .lineLimit(1)
-            .accountPopover(viewModel.finalStatus.account)
+              .font(.scaledSubheadline)
+              .foregroundColor(theme.labelColor)
+              .emojiSize(Font.scaledSubheadlineFont.emojiSize)
+              .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
+              .fontWeight(.semibold)
+              .lineLimit(1)
+              .accountPopover(viewModel.finalStatus.account)
 
             accountBadgeView
               .font(.footnote)

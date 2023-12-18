@@ -1,10 +1,10 @@
 import AVKit
 import DesignSystem
 import Env
+import MediaUI
 import Models
 import NukeUI
 import SwiftUI
-import MediaUI
 
 @MainActor
 struct StatusEditorMediaView: View {
@@ -49,17 +49,17 @@ struct StatusEditorMediaView: View {
   private let containerHeight: CGFloat = 300
   private var containerWidth: CGFloat { containerHeight / 1.5 }
 
-#if targetEnvironment(macCatalyst)
-  private var showsScrollIndicators : Bool { count > 1 }
-  private var scrollBottomPadding : CGFloat? = nil
-#else
-  private var showsScrollIndicators : Bool = false
-  private var scrollBottomPadding : CGFloat? = 0
-#endif
+  #if targetEnvironment(macCatalyst)
+    private var showsScrollIndicators: Bool { count > 1 }
+    private var scrollBottomPadding: CGFloat?
+  #else
+    private var showsScrollIndicators: Bool = false
+    private var scrollBottomPadding: CGFloat? = 0
+  #endif
 
   init(viewModel: StatusEditorViewModel, editingMediaContainer: Binding<StatusEditorMediaContainer?>) {
     self.viewModel = viewModel
-    self._editingMediaContainer = editingMediaContainer
+    _editingMediaContainer = editingMediaContainer
   }
 
   private func pixel(at index: Int) -> some View {

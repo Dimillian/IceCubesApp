@@ -1,9 +1,9 @@
 import DesignSystem
 import Env
 import Models
+import Network
 import Shimmer
 import SwiftUI
-import Network
 
 @MainActor
 struct StatusEditorMediaEditView: View {
@@ -11,7 +11,7 @@ struct StatusEditorMediaEditView: View {
   @Environment(Theme.self) private var theme
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(UserPreferences.self) private var preferences
-  
+
   var viewModel: StatusEditorViewModel
   let container: StatusEditorMediaContainer
 
@@ -22,7 +22,7 @@ struct StatusEditorMediaEditView: View {
 
   @State private var didAppear: Bool = false
   @State private var isGeneratingDescription: Bool = false
-  
+
   @State private var showTranslateButton: Bool = false
   @State private var isTranslating: Bool = false
 
@@ -108,7 +108,7 @@ struct StatusEditorMediaEditView: View {
       .preferredColorScheme(theme.selectedScheme == .dark ? .dark : .light)
     }
   }
-  
+
   @ViewBuilder
   private var generateButton: some View {
     if let url = container.mediaAttachment?.url, preferences.isOpenAIEnabled {
@@ -133,7 +133,7 @@ struct StatusEditorMediaEditView: View {
       }
     }
   }
-  
+
   @ViewBuilder
   private var translateButton: some View {
     if showTranslateButton {
@@ -153,10 +153,9 @@ struct StatusEditorMediaEditView: View {
           Text("status.action.translate")
         }
       }
-
     }
   }
-  
+
   private func generateDescription(url: URL) async -> String? {
     isGeneratingDescription = true
     let client = OpenAIClient()
@@ -164,7 +163,7 @@ struct StatusEditorMediaEditView: View {
     isGeneratingDescription = false
     return response?.trimmedText
   }
-  
+
   private func translateDescription() async -> String? {
     isTranslating = true
     let userAPIKey = DeepLUserAPIHandler.readIfAllowed()

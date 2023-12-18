@@ -1,7 +1,7 @@
 import DesignSystem
+import Env
 import Models
 import Network
-import Env
 import SwiftUI
 
 @MainActor
@@ -16,7 +16,7 @@ public struct EditAccountView: View {
   public init() {}
 
   public var body: some View {
-    NavigationStack{
+    NavigationStack {
       Form {
         if viewModel.isLoading {
           loadingSection

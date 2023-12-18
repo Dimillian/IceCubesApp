@@ -218,7 +218,8 @@ struct AddAccountView: View {
     signInClient = .init(server: sanitizedName)
     if let oauthURL = try? await signInClient?.oauthURL(),
        let url = try? await webAuthenticationSession.authenticate(using: oauthURL,
-                                                                 callbackURLScheme: AppInfo.scheme.replacingOccurrences(of: "://", with: "")){
+                                                                  callbackURLScheme: AppInfo.scheme.replacingOccurrences(of: "://", with: ""))
+    {
       await continueSignIn(url: url)
     } else {
       isSigninIn = false

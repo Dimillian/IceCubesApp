@@ -1,9 +1,9 @@
+import Account
 import DesignSystem
 import Env
-import SwiftUI
-import Account
-import Network
 import Models
+import Network
+import SwiftUI
 
 @MainActor
 struct AboutView: View {
@@ -13,7 +13,7 @@ struct AboutView: View {
 
   @State private var dimillianAccount: AccountsListRowViewModel?
   @State private var iceCubesAccount: AccountsListRowViewModel?
-  
+
   let versionNumber: String
 
   init() {
@@ -59,7 +59,6 @@ struct AboutView: View {
       }
       .listRowBackground(theme.primaryBackgroundColor)
 
-      
       followAccountsSection
 
       Section {
@@ -109,8 +108,7 @@ struct AboutView: View {
       routerPath.handle(url: url)
     })
   }
-  
-  
+
   @ViewBuilder
   private var followAccountsSection: some View {
     if let iceCubesAccount, let dimillianAccount {
@@ -132,18 +130,18 @@ struct AboutView: View {
       group.addTask {
         let viewModel = try await fetchAccountViewModel(account: "dimillian@mastodon.social")
         await MainActor.run {
-          self.dimillianAccount = viewModel
+          dimillianAccount = viewModel
         }
       }
       group.addTask {
         let viewModel = try await fetchAccountViewModel(account: "icecubesapp@mastodon.online")
         await MainActor.run {
-          self.iceCubesAccount = viewModel
+          iceCubesAccount = viewModel
         }
       }
     }
   }
-  
+
   private func fetchAccountViewModel(account: String) async throws -> AccountsListRowViewModel {
     let dimillianAccount: Account = try await client.get(endpoint: Accounts.lookup(name: account))
     let rel: [Relationship] = try await client.get(endpoint: Accounts.relationships(ids: [dimillianAccount.id]))

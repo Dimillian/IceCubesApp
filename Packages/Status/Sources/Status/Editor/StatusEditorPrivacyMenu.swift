@@ -1,5 +1,5 @@
-import SwiftUI
 import Models
+import SwiftUI
 
 struct StatusEditorPrivacyMenu: View {
   @Binding var visibility: Models.Visibility
@@ -8,7 +8,7 @@ struct StatusEditorPrivacyMenu: View {
   var body: some View {
     Menu {
       ForEach(Models.Visibility.allCases, id: \.self) { vis in
-        Button { self.visibility = vis } label: {
+        Button { visibility = vis } label: {
           Label(vis.title, systemImage: vis.iconName)
         }
       }
@@ -29,4 +29,3 @@ struct StatusEditorPrivacyMenu: View {
     }
   }
 }
-
