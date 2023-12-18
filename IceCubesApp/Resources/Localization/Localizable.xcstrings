@@ -44250,8 +44250,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Account on Hover"
+            "state" : "translated",
+            "value" : "悬停时显示账户信息"
           }
         },
         "zh-Hant" : {
