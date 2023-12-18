@@ -108,7 +108,9 @@ struct ContentSettingsView: View {
       .listRowBackground(theme.primaryBackgroundColor)
     }
     .navigationTitle("settings.content.navigation-title")
+    #if !os(visionOS)
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
+    #endif
   }
 }

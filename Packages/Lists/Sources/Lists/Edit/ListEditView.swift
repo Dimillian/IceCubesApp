@@ -65,7 +65,9 @@ public struct ListEditView: View {
         .listRowBackground(theme.primaryBackgroundColor)
         .disabled(viewModel.isUpdating)
       }
+      #if !os(visionOS)
       .scrollDismissesKeyboard(.immediately)
+      #endif
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
       .toolbar {

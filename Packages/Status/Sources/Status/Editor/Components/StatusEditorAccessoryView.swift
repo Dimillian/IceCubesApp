@@ -1,6 +1,8 @@
 import DesignSystem
 import Env
+#if !os(visionOS)
 import GiphyUISDK
+#endif
 import Models
 import NukeUI
 import PhotosUI
@@ -54,11 +56,13 @@ struct StatusEditorAccessoryView: View {
                 Label("status.editor.browse-file", systemImage: "folder")
               }
 
+              #if !os(visionOS)
               Button {
                 isGIFPickerPresented = true
               } label: {
                 Label("GIPHY", systemImage: "party.popper")
               }
+              #endif
             } label: {
               if viewModel.isMediasLoading {
                 ProgressView()
@@ -90,6 +94,7 @@ struct StatusEditorAccessoryView: View {
               .background(.black)
             })
             .sheet(isPresented: $isGIFPickerPresented, content: {
+              #if !os(visionOS)
               GifPickerView { url in
                 GPHCache.shared.downloadAssetData(url) { data, _ in
                   guard let data else { return }
@@ -100,6 +105,9 @@ struct StatusEditorAccessoryView: View {
                 isGIFPickerPresented = false
               }
               .presentationDetents([.medium, .large])
+              #else
+              EmptyView()
+              #endif
             })
             .accessibilityLabel("accessibility.editor.button.attach-photo")
             .disabled(viewModel.showPoll)

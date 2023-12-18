@@ -100,8 +100,10 @@ struct AboutView: View {
       await fetchAccounts()
     }
     .listStyle(.insetGrouped)
+    #if !os(visionOS)
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
+    #endif
     .navigationTitle(Text("settings.about.title"))
     .navigationBarTitleDisplayMode(.large)
     .environment(\.openURL, OpenURLAction { url in

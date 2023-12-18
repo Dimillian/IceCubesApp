@@ -77,9 +77,11 @@ struct AddAccountView: View {
       .formStyle(.grouped)
       .navigationTitle("account.add.navigation-title")
       .navigationBarTitleDisplayMode(.inline)
+      #if !os(visionOS)
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
       .scrollDismissesKeyboard(.immediately)
+      #endif
       .toolbar {
         if !appAccountsManager.availableAccounts.isEmpty {
           ToolbarItem(placement: .navigationBarLeading) {

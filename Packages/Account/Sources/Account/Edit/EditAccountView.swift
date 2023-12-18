@@ -30,7 +30,9 @@ public struct EditAccountView: View {
       .environment(\.editMode, .constant(.active))
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
+      #if !os(visionOS)
       .scrollDismissesKeyboard(.immediately)
+      #endif
       .navigationTitle("account.edit.navigation-title")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {

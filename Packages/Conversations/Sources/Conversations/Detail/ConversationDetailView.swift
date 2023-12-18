@@ -46,7 +46,9 @@ public struct ConversationDetailView: View {
         }
         .padding(.horizontal, .layoutPadding)
       }
+      #if !os(visionOS)
       .scrollDismissesKeyboard(.interactively)
+      #endif
       .safeAreaInset(edge: .bottom) {
         inputTextView
       }

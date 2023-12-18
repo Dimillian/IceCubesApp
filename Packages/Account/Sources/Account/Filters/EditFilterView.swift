@@ -71,7 +71,9 @@ struct EditFilterView: View {
     .navigationTitle(filter?.title ?? NSLocalizedString("filter.new", comment: ""))
     .navigationBarTitleDisplayMode(.inline)
     .scrollContentBackground(.hidden)
+    #if !os(visionOS)
     .scrollDismissesKeyboard(.interactively)
+    #endif
     .background(theme.secondaryBackgroundColor)
     .onAppear {
       if filter == nil {
