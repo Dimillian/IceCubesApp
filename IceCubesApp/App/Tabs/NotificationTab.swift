@@ -31,6 +31,13 @@ struct NotificationsTab: View {
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbar {
+          ToolbarItem(placement: .topBarTrailing) {
+            Button {
+              routerPath.presentedSheet = .accountPushNotficationsSettings
+            } label: {
+              Image(systemName: "bell.badge")
+            }
+          }
           if !isSecondaryColumn {
             statusEditorToolbarItem(routerPath: routerPath,
                                     visibility: userPreferences.postVisibility)
