@@ -28,9 +28,9 @@ public struct EditAccountView: View {
         }
       }
       .environment(\.editMode, .constant(.active))
+      #if !os(visionOS)
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
-      #if !os(visionOS)
       .scrollDismissesKeyboard(.immediately)
       #endif
       .navigationTitle("account.edit.navigation-title")
@@ -58,7 +58,9 @@ public struct EditAccountView: View {
         Spacer()
       }
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   @ViewBuilder
@@ -71,7 +73,9 @@ public struct EditAccountView: View {
       TextField("account.edit.about", text: $viewModel.note, axis: .vertical)
         .frame(maxHeight: 150)
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   private var postSettingsSection: some View {
@@ -91,7 +95,9 @@ public struct EditAccountView: View {
         Label("account.edit.post-settings.sensitive", systemImage: "eye")
       }
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   private var accountSection: some View {
@@ -106,7 +112,9 @@ public struct EditAccountView: View {
         Label("account.edit.account-settings.discoverable", systemImage: "magnifyingglass")
       }
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   private var fieldsSection: some View {
@@ -140,7 +148,9 @@ public struct EditAccountView: View {
         }
       }
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   @ToolbarContentBuilder

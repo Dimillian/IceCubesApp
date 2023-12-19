@@ -81,8 +81,10 @@ public struct ConversationsListView: View {
         }
         .padding(.top, .layoutPadding)
       }
+      #if !os(visionOS)
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
+      #endif
       .navigationTitle("conversations.navigation-title")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {

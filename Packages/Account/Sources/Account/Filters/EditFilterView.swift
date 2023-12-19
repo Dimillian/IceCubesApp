@@ -70,11 +70,11 @@ struct EditFilterView: View {
     }
     .navigationTitle(filter?.title ?? NSLocalizedString("filter.new", comment: ""))
     .navigationBarTitleDisplayMode(.inline)
-    .scrollContentBackground(.hidden)
     #if !os(visionOS)
+    .scrollContentBackground(.hidden)
     .scrollDismissesKeyboard(.interactively)
-    #endif
     .background(theme.secondaryBackgroundColor)
+    #endif
     .onAppear {
       if filter == nil {
         focusedField = .title
@@ -106,7 +106,9 @@ struct EditFilterView: View {
           .disabled(expirySelection != .custom)
       }
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   @ViewBuilder
@@ -120,7 +122,9 @@ struct EditFilterView: View {
           }
         }
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
 
     if filter == nil, !title.isEmpty {
       Section {
@@ -140,7 +144,9 @@ struct EditFilterView: View {
         .buttonStyle(.borderedProminent)
         .transition(.opacity)
       }
+      #if !os(visionOS)
       .listRowBackground(theme.secondaryBackgroundColor)
+      #endif
     }
   }
 
@@ -194,7 +200,9 @@ struct EditFilterView: View {
         }
       }
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   private var contextsSection: some View {
@@ -216,7 +224,9 @@ struct EditFilterView: View {
         }
         .disabled(isSavingFilter)
       }
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
     }
   }
 
@@ -237,7 +247,9 @@ struct EditFilterView: View {
       }
       .pickerStyle(.inline)
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   private var saveButton: some View {

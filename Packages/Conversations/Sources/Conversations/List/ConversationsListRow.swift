@@ -85,6 +85,8 @@ struct ConversationsListRow: View {
         }
       }
     }
+    .buttonStyle(.plain)
+    .hoverEffectDisabled()
   }
 
   private var actionsView: some View {

@@ -97,7 +97,7 @@ extension View {
             .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
         case .accountPushNotficationsSettings:
           if let subscription = PushNotificationsService.shared.subscriptions.first(where: { $0.account.token == AppAccountsManager.shared.currentAccount.oauthToken }) {
-            PushNotificationsView(subscription: subscription)
+            PushNotificationsViewWrapper(subscription: subscription)
           } else {
             EmptyView()
           }

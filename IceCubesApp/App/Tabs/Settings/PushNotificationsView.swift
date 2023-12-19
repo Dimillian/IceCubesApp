@@ -7,6 +7,27 @@ import NukeUI
 import SwiftUI
 import UserNotifications
 
+struct PushNotificationsViewWrapper: View {
+  @Environment(\.dismiss) private var dismiss
+  
+  public let subscription: PushNotificationSubscriptionSettings
+  
+  var body: some View {
+    NavigationStack {
+      PushNotificationsView(subscription: subscription)
+        .toolbar {
+          ToolbarItem(placement: .navigationBarLeading) {
+            Button {
+              dismiss()
+            } label: {
+              Image(systemName: "xmark.circle")
+            }
+          }
+        }
+    }
+  }
+}
+
 @MainActor
 struct PushNotificationsView: View {
   @Environment(Theme.self) private var theme
@@ -33,7 +54,9 @@ struct PushNotificationsView: View {
       } footer: {
         Text("settings.push.main-toggle.description")
       }
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
 
       if subscription.isEnabled {
         Section {
@@ -86,7 +109,9 @@ struct PushNotificationsView: View {
             Label("settings.push.new-posts", systemImage: "bubble.right")
           }
         }
+        #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
+        #endif
       }
 
       Section {
@@ -101,11 +126,15 @@ struct PushNotificationsView: View {
       } footer: {
         Text("settings.push.duplicate.footer")
       }
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
     }
     .navigationTitle("settings.push.navigation-title")
+    #if !os(visionOS)
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
+    #endif
     .task {
       await subscription.fetchSubscription()
     }

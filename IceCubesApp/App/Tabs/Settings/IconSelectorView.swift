@@ -85,7 +85,9 @@ struct IconSelectorView: View {
       .padding(6)
       .navigationTitle("settings.app.icon.navigation-title")
     }
+    #if !os(visionOS)
     .background(theme.primaryBackgroundColor)
+    #endif
   }
 
   private func makeIconGridView(icons: [Icon]) -> some View {
@@ -116,6 +118,7 @@ struct IconSelectorView: View {
             }
           }
         }
+        .buttonStyle(.plain)
       }
     }
   }
