@@ -183,9 +183,9 @@ struct AddAccountView: View {
               Text(instance.info?.shortDescription ?? "")
                 .font(.scaledBody)
                 .foregroundStyle(Color.secondary)
-              (Text("instance.list.users-\(instance.users)")
+              (Text("instance.list.users-\(formatAsNumber(instance.users))")
                 + Text("  ⸱  ")
-                + Text("instance.list.posts-\(instance.statuses)"))
+               + Text("instance.list.posts-\(formatAsNumber(instance.statuses))"))
                 .font(.scaledFootnote)
                 .foregroundStyle(Color.secondary)
             }
@@ -194,6 +194,15 @@ struct AddAccountView: View {
         }
       }
     }
+  }
+
+  private func formatAsNumber(_ string: String) -> String {
+    (Int(string) ?? 0)
+      .formatted(
+        .number
+          .notation(.compactName)
+          .locale(.current)
+      )
   }
 
   private var placeholderRow: some View {
