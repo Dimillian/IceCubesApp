@@ -43,7 +43,11 @@ struct ConversationMessageView: View {
               routerPath.handleStatus(status: message, url: url)
             })
         }
+        #if os(visionOS)
+        .background(isOwnMessage ? Material.ultraThick : Material.regular)
+        #else
         .background(isOwnMessage ? theme.tintColor.opacity(0.2) : theme.secondaryBackgroundColor)
+        #endif
         .cornerRadius(8)
         .padding(.leading, isOwnMessage ? 24 : 0)
         .padding(.trailing, isOwnMessage ? 0 : 24)

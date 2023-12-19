@@ -60,8 +60,10 @@ public struct TimelineView: View {
         .id(client.id)
         .environment(\.defaultMinListRowHeight, 1)
         .listStyle(.plain)
+        #if !os(visionOS)
         .scrollContentBackground(.hidden)
         .background(theme.primaryBackgroundColor)
+        #endif
         .introspect(.list, on: .iOS(.v17)) { (collectionView: UICollectionView) in
           DispatchQueue.main.async {
             self.collectionView = collectionView

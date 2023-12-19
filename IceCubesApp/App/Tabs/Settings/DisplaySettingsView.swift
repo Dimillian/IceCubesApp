@@ -46,8 +46,10 @@ struct DisplaySettingsView: View {
         resetSection
       }
       .navigationTitle("settings.display.navigation-title")
+      #if !os(visionOS)
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
+      #endif
       .task(id: localValues.tintColor) {
         do { try await Task.sleep(for: .microseconds(500)) } catch {}
         theme.tintColor = localValues.tintColor
@@ -121,7 +123,9 @@ struct DisplaySettingsView: View {
         Text("settings.display.section.theme.footer")
       }
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   private var fontSection: some View {
@@ -173,7 +177,9 @@ struct DisplaySettingsView: View {
         d[.leading]
       }
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   @ViewBuilder
@@ -222,7 +228,9 @@ struct DisplaySettingsView: View {
       }
       Toggle("settings.display.show-account-popover", isOn: $userPreferences.showAccountPopover)
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   @ViewBuilder
@@ -232,14 +240,18 @@ struct DisplaySettingsView: View {
       Section("iPhone") {
         Toggle("settings.display.show-tab-label", isOn: $userPreferences.showiPhoneTabLabel)
       }
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
     }
 
     if UIDevice.current.userInterfaceIdiom == .pad {
       Section("iPad") {
         Toggle("settings.display.show-ipad-column", isOn: $userPreferences.showiPadSecondaryColumn)
       }
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
     }
   }
 
@@ -261,7 +273,9 @@ struct DisplaySettingsView: View {
         Text("settings.display.restore")
       }
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   private var themeSelectorButton: some View {

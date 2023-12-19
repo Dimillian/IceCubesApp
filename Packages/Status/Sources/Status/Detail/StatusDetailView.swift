@@ -59,7 +59,9 @@ public struct StatusDetailView: View {
               .foregroundColor(theme.secondaryBackgroundColor)
               .frame(minHeight: reader.frame(in: .local).size.height - statusHeight)
               .listRowSeparator(.hidden)
+              #if !os(visionOS)
               .listRowBackground(theme.secondaryBackgroundColor)
+              #endif
               .listRowInsets(.init())
               .accessibilityHidden(true)
 
@@ -69,8 +71,10 @@ public struct StatusDetailView: View {
         }
         .environment(\.defaultMinListRowHeight, 1)
         .listStyle(.plain)
+        #if !os(visionOS)
         .scrollContentBackground(.hidden)
         .background(theme.primaryBackgroundColor)
+        #endif
         .onChange(of: viewModel.scrollToId) { _, newValue in
           if let newValue {
             viewModel.scrollToId = nil
@@ -132,7 +136,9 @@ public struct StatusDetailView: View {
           }
         }
         .id(status.id)
+        #if !os(visionOS)
         .listRowBackground(viewModel.highlightRowColor)
+        #endif
         .listRowInsets(.init(top: 12,
                              leading: .layoutPadding,
                              bottom: 12,
@@ -149,7 +155,9 @@ public struct StatusDetailView: View {
         await viewModel.fetch()
       }
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
     .listRowSeparator(.hidden)
   }
 
@@ -169,13 +177,17 @@ public struct StatusDetailView: View {
     }
     .frame(height: 50)
     .listRowSeparator(.hidden)
+    #if !os(visionOS)
     .listRowBackground(theme.secondaryBackgroundColor)
+    #endif
     .listRowInsets(.init())
   }
 
   private var topPaddingView: some View {
     HStack { EmptyView() }
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
       .listRowSeparator(.hidden)
       .listRowInsets(.init())
       .frame(height: .layoutPadding)

@@ -96,7 +96,9 @@ public struct AppAccountsSelectorView: View {
             AppAccountView(viewModel: viewModel)
           }
         }
-        .listRowBackground(theme.primaryBackgroundColor)
+        #if !os(visionOS)
+          .listRowBackground(theme.primaryBackgroundColor)
+        #endif
 
         if accountCreationEnabled {
           Section {
@@ -111,7 +113,9 @@ public struct AppAccountsSelectorView: View {
             }
             settingsButton
           }
-          .listRowBackground(theme.primaryBackgroundColor)
+          #if !os(visionOS)
+            .listRowBackground(theme.primaryBackgroundColor)
+          #endif
         }
       }
       .listStyle(.insetGrouped)

@@ -53,7 +53,9 @@ struct AddAccountView: View {
     NavigationStack {
       Form {
         TextField("instance.url", text: $instanceName)
+        #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)
+        #endif
           .keyboardType(.URL)
           .textContentType(.URL)
           .textInputAutocapitalization(.never)
@@ -77,9 +79,11 @@ struct AddAccountView: View {
       .formStyle(.grouped)
       .navigationTitle("account.add.navigation-title")
       .navigationBarTitleDisplayMode(.inline)
+      #if !os(visionOS)
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
       .scrollDismissesKeyboard(.immediately)
+      #endif
       .toolbar {
         if !appAccountsManager.availableAccounts.isEmpty {
           ToolbarItem(placement: .navigationBarLeading) {
@@ -164,7 +168,9 @@ struct AddAccountView: View {
       }
       .buttonStyle(.borderedProminent)
     }
+    #if !os(visionOS)
     .listRowBackground(theme.tintColor)
+    #endif
   }
 
   private var instancesListView: some View {
@@ -210,11 +216,13 @@ struct AddAccountView: View {
               .padding(10)
             }
           }
+          #if !os(visionOS)
           .background(theme.primaryBackgroundColor)
           .listRowBackground(Color.clear)
           .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
           .listRowSeparator(.hidden)
           .clipShape(RoundedRectangle(cornerRadius: 5))
+          #endif
           .overlay {
             RoundedRectangle(cornerRadius: 5)
               .stroke(lineWidth: 1)
@@ -249,7 +257,9 @@ struct AddAccountView: View {
     .redacted(reason: .placeholder)
     .allowsHitTesting(false)
     .shimmering()
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   private func signIn() async {

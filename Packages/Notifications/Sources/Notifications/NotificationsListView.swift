@@ -83,8 +83,10 @@ public struct NotificationsListView: View {
       }
     }
     .navigationBarTitleDisplayMode(.inline)
+    #if !os(visionOS)
     .scrollContentBackground(.hidden)
     .background(theme.primaryBackgroundColor)
+    #endif
     .task {
       viewModel.client = client
       viewModel.currentAccount = account
@@ -130,7 +132,12 @@ public struct NotificationsListView: View {
                                leading: .layoutPadding + 4,
                                bottom: 12,
                                trailing: .layoutPadding))
-          .listRowBackground(theme.primaryBackgroundColor)
+          #if os(visionOS)
+          .listRowBackground(RoundedRectangle(cornerRadius: 8)
+            .foregroundStyle(Material.regular))
+          #else
+           .listRowBackground(theme.primaryBackgroundColor)
+          #endif
           .redacted(reason: .placeholder)
           .allowsHitTesting(false)
       }
@@ -140,7 +147,9 @@ public struct NotificationsListView: View {
         EmptyView(iconName: "bell.slash",
                   title: "notifications.empty.title",
                   message: "notifications.empty.message")
+          #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)
+          #endif
           .listSectionSeparator(.hidden)
       } else {
         ForEach(notifications) { notification in
@@ -152,8 +161,13 @@ public struct NotificationsListView: View {
                                  leading: .layoutPadding + 4,
                                  bottom: 12,
                                  trailing: .layoutPadding))
+            #if os(visionOS)
+            .listRowBackground(RoundedRectangle(cornerRadius: 8)
+              .foregroundStyle(notification.type == .mention && lockedType != .mention ? Material.thick : Material.regular))
+            #else
             .listRowBackground(notification.type == .mention && lockedType != .mention ?
               theme.secondaryBackgroundColor : theme.primaryBackgroundColor)
+            #endif
             .id(notification.id)
         }
       }
@@ -181,7 +195,9 @@ public struct NotificationsListView: View {
           await viewModel.fetchNotifications()
         }
       }
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
       .listSectionSeparator(.hidden)
     }
   }
@@ -196,7 +212,9 @@ public struct NotificationsListView: View {
                          leading: .layoutPadding + 4,
                          bottom: .layoutPadding,
                          trailing: .layoutPadding))
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   private var topPaddingView: some View {

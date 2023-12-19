@@ -1,4 +1,3 @@
-import Accounts
 import DesignSystem
 import Env
 import Models
@@ -86,6 +85,8 @@ struct ConversationsListRow: View {
         }
       }
     }
+    .buttonStyle(.plain)
+    .hoverEffectDisabled()
   }
 
   private var actionsView: some View {

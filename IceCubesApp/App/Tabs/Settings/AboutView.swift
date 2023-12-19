@@ -57,7 +57,9 @@ struct AboutView: View {
       } footer: {
         Text("\(versionNumber)©2023 Thomas Ricouard")
       }
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
 
       followAccountsSection
 
@@ -94,14 +96,18 @@ struct AboutView: View {
         Text("settings.about.built-with")
           .textCase(nil)
       }
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
     }
     .task {
       await fetchAccounts()
     }
     .listStyle(.insetGrouped)
+    #if !os(visionOS)
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
+    #endif
     .navigationTitle(Text("settings.about.title"))
     .navigationBarTitleDisplayMode(.large)
     .environment(\.openURL, OpenURLAction { url in
@@ -116,12 +122,16 @@ struct AboutView: View {
         AccountsListRow(viewModel: iceCubesAccount)
         AccountsListRow(viewModel: dimillianAccount)
       }
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
     } else {
       Section {
         ProgressView()
       }
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
     }
   }
 
