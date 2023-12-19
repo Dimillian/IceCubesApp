@@ -41,8 +41,13 @@ struct PendingStatusesObserverView: View {
       }
       .accessibilityLabel("accessibility.tabs.timeline.unread-posts.label-\(observer.pendingStatusesCount)")
       .accessibilityHint("accessibility.tabs.timeline.unread-posts.hint")
+      #if os(visionOS)
+      .buttonStyle(.bordered)
+      .tint(Material.thick)
+      #else
       .buttonStyle(.bordered)
       .background(.thinMaterial)
+      #endif
       .cornerRadius(8)
       .padding(12)
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: preferences.pendingLocation)

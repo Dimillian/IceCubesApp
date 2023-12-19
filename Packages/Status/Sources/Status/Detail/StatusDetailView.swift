@@ -55,15 +55,15 @@ public struct StatusDetailView: View {
               loadingContextView
             }
 
+          #if !os(visionOS)
             Rectangle()
               .foregroundColor(theme.secondaryBackgroundColor)
               .frame(minHeight: reader.frame(in: .local).size.height - statusHeight)
               .listRowSeparator(.hidden)
-              #if !os(visionOS)
               .listRowBackground(theme.secondaryBackgroundColor)
-              #endif
               .listRowInsets(.init())
               .accessibilityHidden(true)
+          #endif
 
           case .error:
             errorView

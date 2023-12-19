@@ -152,8 +152,9 @@ public struct StatusRowView: View {
     #if os(visionOS)
     .listRowBackground(RoundedRectangle(cornerRadius: 8)
       .foregroundStyle(Material.regular))
+    .listRowHoverEffect(.lift)
     #else
-     .listRowBackground(viewModel.highlightRowColor)
+    .listRowBackground(viewModel.highlightRowColor)
     #endif
     .listRowInsets(.init(top: 12,
                          leading: .layoutPadding,

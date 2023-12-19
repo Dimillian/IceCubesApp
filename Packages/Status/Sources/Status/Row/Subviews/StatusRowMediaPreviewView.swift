@@ -22,14 +22,16 @@ public struct StatusRowMediaPreviewView: View {
   @State private var isQuickLookLoading: Bool = false
 
   var availableWidth: CGFloat {
-    #if !os(visionOS)
+    #if os(visionOS)
+      return sceneDelegate.windowWidth * 0.96
+    #else
     if UIDevice.current.userInterfaceIdiom == .phone &&
       (UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight) || theme.statusDisplayStyle == .medium
     {
       return sceneDelegate.windowWidth * 0.80
     }
-    #endif
     return sceneDelegate.windowWidth
+    #endif
   }
 
   var appLayoutWidth: CGFloat {
