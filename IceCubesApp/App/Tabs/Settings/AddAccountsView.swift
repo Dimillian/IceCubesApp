@@ -177,23 +177,61 @@ struct AddAccountView: View {
             instanceName = instance.name
           } label: {
             VStack(alignment: .leading, spacing: 4) {
-              Text(instance.name)
-                .font(.scaledHeadline)
-                .foregroundColor(.primary)
-              Text(instance.info?.shortDescription ?? "")
-                .font(.scaledBody)
-                .foregroundStyle(Color.secondary)
-              (Text("instance.list.users-\(instance.users)")
-                + Text("  ⸱  ")
-                + Text("instance.list.posts-\(instance.statuses)"))
-                .font(.scaledFootnote)
-                .foregroundStyle(Color.secondary)
+              LazyImage(url: instance.thumbnail) { state in
+                if let image = state.image {
+                  image
+                    .resizable()
+                    .scaledToFill()
+                } else {
+                  Rectangle().fill(theme.tintColor.opacity(0.1))
+                }
+              }
+              .frame(height: 100)
+              .frame(maxWidth: .infinity)
+              .clipped()
+
+              VStack(alignment: .leading) {
+                HStack {
+                  Text(instance.name)
+                    .font(.scaledHeadline)
+                    .foregroundColor(.primary)
+                  Spacer()
+                  (Text("instance.list.users-\(formatAsNumber(instance.users))")
+                   + Text("  ⸱  ")
+                   + Text("instance.list.posts-\(formatAsNumber(instance.statuses))"))
+                  .foregroundStyle(theme.tintColor)
+                }
+                .padding(.bottom, 5)
+                Text(instance.info?.shortDescription?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")
+                  .foregroundStyle(Color.secondary)
+                  .lineLimit(10)
+              }
+              .font(.scaledFootnote)
+              .padding(10)
             }
           }
-          .listRowBackground(theme.primaryBackgroundColor)
+          .background(theme.primaryBackgroundColor)
+          .listRowBackground(Color.clear)
+          .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
+          .listRowSeparator(.hidden)
+          .clipShape(RoundedRectangle(cornerRadius: 5))
+          .overlay {
+            RoundedRectangle(cornerRadius: 5)
+              .stroke(lineWidth: 1)
+              .fill(theme.tintColor)
+          }
         }
       }
     }
+  }
+
+  private func formatAsNumber(_ string: String) -> String {
+    (Int(string) ?? 0)
+      .formatted(
+        .number
+          .notation(.compactName)
+          .locale(.current)
+      )
   }
 
   private var placeholderRow: some View {
