@@ -75,7 +75,7 @@ struct AddRemoteTimelineView: View {
         isInstanceURLFieldFocused = true
         let client = InstanceSocialClient()
         Task {
-          instances = await client.fetchInstances()
+          instances = await client.fetchInstances(keyword: instanceName)
         }
       }
     }
