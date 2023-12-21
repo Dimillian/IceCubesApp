@@ -137,16 +137,24 @@ struct StatusEditorAccessoryView: View {
     })
     .sheet(isPresented: $isGIFPickerPresented, content: {
       #if !os(visionOS)
-      GifPickerView { url in
-        GPHCache.shared.downloadAssetData(url) { data, _ in
-          guard let data else { return }
-          viewModel.processGIFData(data: data)
+        #if targetEnvironment(macCatalyst)
+        NavigationStack {
+          giphyView
+          .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+              Button {
+                isGIFPickerPresented = false
+              } label: {
+                Image(systemName: "xmark.circle")
+              }
+            }
+          }
         }
-        isGIFPickerPresented = false
-      } onShouldDismissGifPicker: {
-        isGIFPickerPresented = false
-      }
-      .presentationDetents([.medium, .large])
+        .presentationDetents([.medium, .large])
+        #else
+        giphyView
+          .presentationDetents([.medium, .large])
+        #endif
       #else
       EmptyView()
       #endif
@@ -257,6 +265,20 @@ struct StatusEditorAccessoryView: View {
     { return true }
 
     return false
+  }
+  
+  @ViewBuilder
+  private var giphyView: some View {
+    @Bindable var viewModel = focusedSEVM
+    GifPickerView { url in
+      GPHCache.shared.downloadAssetData(url) { data, _ in
+        guard let data else { return }
+        viewModel.processGIFData(data: data)
+      }
+      isGIFPickerPresented = false
+    } onShouldDismissGifPicker: {
+      isGIFPickerPresented = false
+    }
   }
 
   private var draftsListView: some View {
