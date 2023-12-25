@@ -64,6 +64,10 @@ public struct TimelineView: View {
         .scrollContentBackground(.hidden)
         .background(theme.primaryBackgroundColor)
         #endif
+        .searchable(text: $viewModel.searchQuery,
+                    isPresented: $viewModel.isSearchPresented,
+                    placement: .navigationBarDrawer(displayMode: .automatic),
+                    prompt: Text("Search"))
         .introspect(.list, on: .iOS(.v17)) { (collectionView: UICollectionView) in
           DispatchQueue.main.async {
             self.collectionView = collectionView

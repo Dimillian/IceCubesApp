@@ -77,6 +77,28 @@ import SwiftUI
   var isTimelineVisible: Bool = false
   let pendingStatusesObserver: PendingStatusesObserver = .init()
   var scrollToIndexAnimated: Bool = false
+  
+  var searchQuery: String = "" {
+    didSet {
+      Task {
+        let statuses = await datasource.get().filter { status in
+          status.content.asRawText.contains(searchQuery)
+        }
+        statusesState = .display(statuses: statuses, nextPageState: .none)
+      }
+    }
+  }
+  
+  var isSearchPresented: Bool = false {
+    didSet {
+      if !isSearchPresented {
+        Task {
+          let statuses = await datasource.get()
+          statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+        }
+      }
+    }
+  }
 
   init() {
     pendingStatusesObserver.scrollToIndex = { [weak self] index in
