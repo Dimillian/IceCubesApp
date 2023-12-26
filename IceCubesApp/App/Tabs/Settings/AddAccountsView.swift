@@ -28,6 +28,9 @@ struct AddAccountView: View {
   @State private var signInClient: Client?
   @State private var instances: [InstanceSocial] = []
   @State private var instanceFetchError: LocalizedStringKey?
+  @State private var instanceSocialClient = InstanceSocialClient()
+  @State private var searchingTask = Task<Void, Never> {}
+  @State private var getInstanceDetailTask = Task<Void, Never> {}
 
   private let instanceNamePublisher = PassthroughSubject<String, Never>()
 
@@ -93,28 +96,39 @@ struct AddAccountView: View {
       }
       .onAppear {
         isInstanceURLFieldFocused = true
-        let client = InstanceSocialClient()
         Task {
-          let instances = await client.fetchInstances()
+          let instances = await instanceSocialClient.fetchInstances(keyword: instanceName)
           withAnimation {
             self.instances = instances
           }
         }
         isSigninIn = false
       }
-      .onChange(of: instanceName) { _, newValue in
-        instanceNamePublisher.send(newValue)
-      }
-      .onReceive(instanceNamePublisher.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)) { _ in
-        // let newValue = newValue
-        //  .replacingOccurrences(of: "http://", with: "")
-        //  .replacingOccurrences(of: "https://", with: "")
-        let client = Client(server: sanitizedName)
-        Task {
+      .onChange(of: instanceName) {
+        searchingTask.cancel()
+        searchingTask = Task {
+          try? await Task.sleep(for: .seconds(0.1))
+          guard !Task.isCancelled else { return }
+
+          let instances = await instanceSocialClient.fetchInstances(keyword: instanceName)
+          withAnimation {
+            self.instances = instances
+          }
+        }
+
+        getInstanceDetailTask.cancel()
+        getInstanceDetailTask = Task {
+          try? await Task.sleep(for: .seconds(0.1))
+          guard !Task.isCancelled else { return }
+
           do {
             // bare bones preflight for domain validity
-            if client.server.contains("."), client.server.last != "." {
-              let instance: Instance = try await client.get(endpoint: Instances.instance)
+            let instanceDetailClient = Client(server: sanitizedName)
+            if
+              instanceDetailClient.server.contains("."),
+              instanceDetailClient.server.last != "."
+            {
+              let instance: Instance = try await instanceDetailClient.get(endpoint: Instances.instance)
               withAnimation {
                 self.instance = instance
                 instanceName = sanitizedName // clean up the text box, principally to chop off the username if present so it's clear that you might not wind up siging in as the thing in the box
@@ -178,7 +192,7 @@ struct AddAccountView: View {
       if instances.isEmpty {
         placeholderRow
       } else {
-        ForEach(sanitizedName.isEmpty ? instances : instances.filter { $0.name.contains(sanitizedName.lowercased()) }) { instance in
+        ForEach(instances) { instance in
           Button {
             instanceName = instance.name
           } label: {
@@ -221,13 +235,8 @@ struct AddAccountView: View {
           .listRowBackground(Color.clear)
           .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
           .listRowSeparator(.hidden)
-          .clipShape(RoundedRectangle(cornerRadius: 5))
+          .clipShape(RoundedRectangle(cornerRadius: 4))
           #endif
-          .overlay {
-            RoundedRectangle(cornerRadius: 5)
-              .stroke(lineWidth: 1)
-              .fill(theme.tintColor)
-          }
         }
       }
     }
