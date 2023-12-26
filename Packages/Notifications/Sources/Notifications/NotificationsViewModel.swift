@@ -162,13 +162,6 @@ import SwiftUI
     }
   }
 
-  func clear() async {
-    guard let client else { return }
-    do {
-      let _: ServerError = try await client.post(endpoint: Notifications.clear)
-    } catch {}
-  }
-
   func handleEvent(event: any StreamEvent) {
     Task {
       // Check if the event is a notification,

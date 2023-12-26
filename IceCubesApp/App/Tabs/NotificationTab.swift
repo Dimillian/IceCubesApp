@@ -103,6 +103,9 @@ struct NotificationsTab: View {
     if selectedTab == .notifications || isSecondaryColumn {
       if let token = appAccount.currentAccount.oauthToken {
         userPreferences.notificationsCount[token] = 0
+        Task {
+          let _: ServerError = try await client.post(endpoint: Notifications.clear)
+        }
       }
       watcher.unreadNotificationsCount = 0
     }
