@@ -235,13 +235,8 @@ struct AddAccountView: View {
           .listRowBackground(Color.clear)
           .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
           .listRowSeparator(.hidden)
-          .clipShape(RoundedRectangle(cornerRadius: 5))
+          .clipShape(RoundedRectangle(cornerRadius: 4))
           #endif
-          .overlay {
-            RoundedRectangle(cornerRadius: 5)
-              .stroke(lineWidth: 1)
-              .fill(theme.tintColor)
-          }
         }
       }
     }
