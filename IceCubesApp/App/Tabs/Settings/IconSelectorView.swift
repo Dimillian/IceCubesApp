@@ -9,7 +9,7 @@ struct IconSelectorView: View {
     }
 
     init(string: String) {
-      if string == Icon.primary.appIconName {
+      if string == "AppIcon" {
         self = .primary
       } else {
         self = .init(rawValue: Int(String(string.replacing("AppIconAlternate", with: "")))!)!
@@ -32,16 +32,7 @@ struct IconSelectorView: View {
     case alt43, alt44, alt45, alt46, alt47, alt48, alt49
 
     var appIconName: String {
-      switch self {
-      case .primary:
-        "AppIcon"
-      default:
-        "AppIconAlternate\(rawValue)"
-      }
-    }
-
-    var iconName: String {
-      "icon\(rawValue)"
+      return "AppIconAlternate\(rawValue)"
     }
   }
 
@@ -105,7 +96,7 @@ struct IconSelectorView: View {
           }
         } label: {
           ZStack(alignment: .bottomTrailing) {
-            Image(uiImage: .init(named: icon.iconName) ?? .init())
+            Image(uiImage: .init(named: icon.appIconName) ?? .init())
               .resizable()
               .aspectRatio(contentMode: .fit)
               .frame(minHeight: 125, maxHeight: 1024)
