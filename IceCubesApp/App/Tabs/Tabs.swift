@@ -113,3 +113,14 @@ enum Tab: Int, Identifiable, Hashable {
     }
   }
 }
+
+private struct SelectedTab: EnvironmentKey {
+  static let defaultValue: Tab = .timeline
+}
+
+extension EnvironmentValues {
+  var selectedTab: Tab {
+    get { self[SelectedTab.self] }
+    set { self[SelectedTab.self] = newValue }
+  }
+}

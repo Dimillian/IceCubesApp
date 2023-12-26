@@ -11,6 +11,7 @@ import Timeline
 struct NotificationsTab: View {
   @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
   @Environment(\.scenePhase) private var scenePhase
+  @Environment(\.selectedTab) private var selectedTab: Tab
 
   @Environment(Theme.self) private var theme
   @Environment(Client.self) private var client
@@ -58,9 +59,7 @@ struct NotificationsTab: View {
     }
     .onAppear {
       routerPath.client = client
-      if isSecondaryColumn {
-        clearNotifications()
-      }
+      clearNotifications()
     }
     .withSafariRouter()
     .environment(routerPath)
@@ -101,7 +100,7 @@ struct NotificationsTab: View {
   }
 
   private func clearNotifications() {
-    if isSecondaryColumn {
+    if selectedTab == .notifications || isSecondaryColumn {
       if let token = appAccount.currentAccount.oauthToken {
         userPreferences.notificationsCount[token] = 0
       }

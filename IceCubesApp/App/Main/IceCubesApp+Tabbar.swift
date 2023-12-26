@@ -18,16 +18,6 @@ extension IceCubesApp {
       SoundEffectManager.shared.playSound(.tabSelection)
 
       selectedTab = newTab
-
-      DispatchQueue.main.async {
-        if selectedTab == .notifications,
-           let token = appAccountsManager.currentAccount.oauthToken
-        {
-          userPreferences.notificationsCount[token] = 0
-          watcher.unreadNotificationsCount = 0
-        }
-      }
-
     })) {
       ForEach(availableTabs) { tab in
         tab.makeContentView(popToRootTab: $popToRootTab)
@@ -44,6 +34,7 @@ extension IceCubesApp {
       }
     }
     .id(appAccountsManager.currentClient.id)
+    .environment(\.selectedTab, selectedTab)
   }
 
   private func badgeFor(tab: Tab) -> Int {
