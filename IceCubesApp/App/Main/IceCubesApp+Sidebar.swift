@@ -15,7 +15,7 @@ extension IceCubesApp {
           ForEach(availableTabs) { tab in
             if tab == selectedTab || sideBarLoadedTabs.contains(tab) {
               tab
-                .makeContentView(popToRootTab: $popToRootTab)
+                .makeContentView(selectedTab: $selectedTab, popToRootTab: $popToRootTab)
                 .opacity(tab == selectedTab ? 1 : 0)
                 .transition(.opacity)
                 .id("\(tab)\(appAccountsManager.currentAccount.id)")
@@ -41,7 +41,8 @@ extension IceCubesApp {
   }
 
   var notificationsSecondaryColumn: some View {
-    NotificationsTab(popToRootTab: $popToRootTab, lockedType: nil)
+    NotificationsTab(selectedTab: .constant(.notifications),
+                     popToRootTab: $popToRootTab, lockedType: nil)
       .environment(\.isSecondaryColumn, true)
       .frame(maxWidth: .secondaryColumnWidth)
       .id(appAccountsManager.currentAccount.id)

@@ -11,7 +11,6 @@ import Timeline
 struct NotificationsTab: View {
   @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
   @Environment(\.scenePhase) private var scenePhase
-  @Environment(\.selectedTab) private var selectedTab: Tab
 
   @Environment(Theme.self) private var theme
   @Environment(Client.self) private var client
@@ -22,6 +21,8 @@ struct NotificationsTab: View {
   @Environment(PushNotificationsService.self) private var pushNotificationsService
   @State private var routerPath = RouterPath()
   @State private var scrollToTopSignal: Int = 0
+  
+  @Binding var selectedTab: Tab
   @Binding var popToRootTab: Tab
 
   let lockedType: Models.Notification.NotificationType?
@@ -72,6 +73,9 @@ struct NotificationsTab: View {
         }
       }
     }
+    .onChange(of: selectedTab, { _, newValue in
+      clearNotifications()
+    })
     .onChange(of: pushNotificationsService.handledNotification) { _, newValue in
       if let newValue, let type = newValue.notification.supportedType {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {

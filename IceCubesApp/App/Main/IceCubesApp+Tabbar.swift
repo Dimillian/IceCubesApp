@@ -20,7 +20,7 @@ extension IceCubesApp {
       selectedTab = newTab
     })) {
       ForEach(availableTabs) { tab in
-        tab.makeContentView(popToRootTab: $popToRootTab)
+        tab.makeContentView(selectedTab: $selectedTab, popToRootTab: $popToRootTab)
           .tabItem {
             if userPreferences.showiPhoneTabLabel {
               tab.label
@@ -34,7 +34,6 @@ extension IceCubesApp {
       }
     }
     .id(appAccountsManager.currentClient.id)
-    .environment(\.selectedTab, selectedTab)
   }
 
   private func badgeFor(tab: Tab) -> Int {

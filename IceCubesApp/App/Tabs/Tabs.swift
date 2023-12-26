@@ -31,7 +31,7 @@ enum Tab: Int, Identifiable, Hashable {
   }
 
   @ViewBuilder
-  func makeContentView(popToRootTab: Binding<Tab>) -> some View {
+  func makeContentView(selectedTab: Binding<Tab>, popToRootTab: Binding<Tab>) -> some View {
     switch self {
     case .timeline:
       TimelineTab(popToRootTab: popToRootTab)
@@ -42,9 +42,9 @@ enum Tab: Int, Identifiable, Hashable {
     case .federated:
       TimelineTab(popToRootTab: popToRootTab, timeline: .federated)
     case .notifications:
-      NotificationsTab(popToRootTab: popToRootTab, lockedType: nil)
+      NotificationsTab(selectedTab: selectedTab, popToRootTab: popToRootTab, lockedType: nil)
     case .mentions:
-      NotificationsTab(popToRootTab: popToRootTab, lockedType: .mention)
+      NotificationsTab(selectedTab: selectedTab, popToRootTab: popToRootTab, lockedType: .mention)
     case .explore:
       ExploreTab(popToRootTab: popToRootTab)
     case .messages:
@@ -111,16 +111,5 @@ enum Tab: Int, Identifiable, Hashable {
     case .other:
       ""
     }
-  }
-}
-
-private struct SelectedTab: EnvironmentKey {
-  static let defaultValue: Tab = .timeline
-}
-
-extension EnvironmentValues {
-  var selectedTab: Tab {
-    get { self[SelectedTab.self] }
-    set { self[SelectedTab.self] = newValue }
   }
 }

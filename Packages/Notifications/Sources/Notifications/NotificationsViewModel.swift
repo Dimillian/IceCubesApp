@@ -90,6 +90,7 @@ import SwiftUI
                                                                      types: queryTypes,
                                                                      limit: Constants.notificationLimit))
         consolidatedNotifications = await notifications.consolidated(selectedType: selectedType)
+        markAsRead()
         nextPageState = notifications.count < Constants.notificationLimit ? .none : .hasNextPage
       } else if let firstId = consolidatedNotifications.first?.id {
         var newNotifications: [Models.Notification] = await fetchNewPages(minId: firstId, maxPages: 10)
@@ -97,6 +98,7 @@ import SwiftUI
         newNotifications = newNotifications.filter { notification in
           !consolidatedNotifications.contains(where: { $0.id == notification.id })
         }
+        
         await consolidatedNotifications.insert(
           contentsOf: newNotifications.consolidated(selectedType: selectedType),
           at: 0
@@ -107,6 +109,8 @@ import SwiftUI
         await currentAccount.fetchFollowerRequests()
       }
 
+      markAsRead()
+      
       withAnimation {
         state = .display(notifications: consolidatedNotifications,
                          nextPageState: consolidatedNotifications.isEmpty ? .none : nextPageState)
@@ -159,6 +163,15 @@ import SwiftUI
                        nextPageState: newNotifications.count < Constants.notificationLimit ? .none : .hasNextPage)
     } catch {
       state = .error(error: error)
+    }
+  }
+  
+  func markAsRead() {
+    guard let client, let id = consolidatedNotifications.first?.notifications.first?.id else { return }
+    Task {
+      do {
+        let _: Marker = try await client.post(endpoint: Markers.markNotifications(lastReadId: id))
+      } catch { }
     }
   }
 
