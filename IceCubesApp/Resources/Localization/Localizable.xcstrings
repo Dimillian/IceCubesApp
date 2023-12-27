@@ -50387,8 +50387,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+            "state" : "translated",
+            "value" : "快速刷新会停止时间线缓存并总是在回到应用时间线选项的时候获取最新时间线"
           }
         },
         "zh-Hant" : {
@@ -72549,8 +72549,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Resume"
+            "state" : "translated",
+            "value" : "恢复位置"
           }
         },
         "zh-Hant" : {
