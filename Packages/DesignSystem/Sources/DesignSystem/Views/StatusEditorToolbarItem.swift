@@ -41,6 +41,7 @@ public struct StatusEditorToolbarItem: ToolbarContent {
             LocalizedStringKey("accessibility.tabs.timeline.new-post.inputLabel1"),
             LocalizedStringKey("accessibility.tabs.timeline.new-post.inputLabel2"),
           ])
+          .offset(y: -2)
       }
     }
   }
