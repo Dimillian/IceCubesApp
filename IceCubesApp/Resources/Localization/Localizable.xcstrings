@@ -50281,6 +50281,124 @@
         }
       }
     },
+    "settings.section.other.footer" : {
+      "localizations" : {
+        "be" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+          }
+        }
+      }
+    },
     "settings.support.alert.error.message" : {
       "localizations" : {
         "be" : {

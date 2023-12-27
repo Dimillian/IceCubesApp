@@ -178,7 +178,7 @@ struct SettingsTabs: View {
   @ViewBuilder
   private var otherSections: some View {
     @Bindable var preferences = preferences
-    Section("settings.section.other") {
+    Section {
       #if !targetEnvironment(macCatalyst)
         Picker(selection: $preferences.preferredBrowser) {
           ForEach(PreferredBrowser.allCases, id: \.rawValue) { browser in
@@ -209,6 +209,10 @@ struct SettingsTabs: View {
       Toggle(isOn: $preferences.fastRefreshEnabled) {
         Label("settings.other.fast-refresh", systemImage: "arrow.clockwise")
       }
+    } header: {
+      Text("settings.section.other")
+    } footer: {
+      Text("settings.section.other.footer")
     }
     #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
