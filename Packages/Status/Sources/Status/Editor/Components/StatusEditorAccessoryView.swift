@@ -75,7 +75,7 @@ struct StatusEditorAccessoryView: View {
       .padding(.trailing, .layoutPadding)
     #endif
   }
-  
+
   @ViewBuilder
   private var actionsView: some View {
     @Bindable var viewModel = focusedSEVM
@@ -266,7 +266,7 @@ struct StatusEditorAccessoryView: View {
 
     return false
   }
-  
+
   @ViewBuilder
   private var giphyView: some View {
     @Bindable var viewModel = focusedSEVM
