@@ -53,13 +53,13 @@ struct StatusRowHeaderView: View {
               .lineLimit(1)
               .accountPopover(viewModel.finalStatus.account)
 
-            if redactionReasons.isEmpty {
+            if !redactionReasons.contains(.placeholder) {
               accountBadgeView
                 .font(.footnote)
             }
           }
           .layoutPriority(1)
-          if redactionReasons.isEmpty {
+          if !redactionReasons.contains(.placeholder) {
             if theme.avatarPosition == .leading {
               dateView
             } else {

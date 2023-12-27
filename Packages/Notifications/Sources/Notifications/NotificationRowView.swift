@@ -94,7 +94,7 @@ struct NotificationRowView: View {
           .frame(height: AvatarView.FrameConfig.status.size.height + 2)
         }.offset(y: -1)
       }
-      if reasons.isEmpty {
+      if !reasons.contains(.placeholder) {
         HStack(spacing: 0) {
           EmojiTextApp(.init(stringValue: notification.accounts[0].safeDisplayName),
                        emojis: notification.accounts[0].emojis,

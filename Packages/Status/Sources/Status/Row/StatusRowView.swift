@@ -96,7 +96,7 @@ public struct StatusRowView: View {
                     accessibilityActions
                   }
                 }
-              if reasons.isEmpty,
+              if !reasons.contains(.placeholder),
                   viewModel.showActions, isFocused || theme.statusActionsDisplay != .none,
                  !isInCaptureMode {
                 StatusRowActionsView(viewModel: viewModel)
@@ -115,7 +115,7 @@ public struct StatusRowView: View {
     }
     .onAppear {
       viewModel.markSeen()
-      if reasons.isEmpty {
+      if !reasons.contains(.placeholder) {
         if !isCompact, viewModel.embeddedStatus == nil {
           Task {
             await viewModel.loadEmbeddedStatus()
