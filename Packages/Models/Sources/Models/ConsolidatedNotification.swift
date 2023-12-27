@@ -38,7 +38,10 @@ public struct ConsolidatedNotification: Identifiable {
   }
 
   public static func placeholders() -> [ConsolidatedNotification] {
-    [.placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder()]
+    [.placeholder(), .placeholder(), .placeholder(), 
+      .placeholder(), .placeholder(), .placeholder(),
+     .placeholder(), .placeholder(), .placeholder(),
+     .placeholder(), .placeholder(), .placeholder()]
   }
 }
 

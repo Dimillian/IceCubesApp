@@ -149,6 +149,8 @@ private struct MediaPreview: View {
             image
               .resizable()
               .aspectRatio(contentMode: .fill)
+              .frame(width: displayData.isLandscape ? imageMaxHeight * 1.2 : imageMaxHeight / 1.5,
+                     height: imageMaxHeight)
               .overlay(
                 RoundedRectangle(cornerRadius: 4)
                   .stroke(.gray.opacity(0.35), lineWidth: 1)

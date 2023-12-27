@@ -13,6 +13,8 @@ struct StatusRowActionsView: View {
 
   @Environment(\.openWindow) private var openWindow
   @Environment(\.isStatusFocused) private var isFocused
+  
+  @State private var showTextForSelection: Bool = false
 
   var viewModel: StatusRowViewModel
 
@@ -22,7 +24,7 @@ struct StatusRowActionsView: View {
 
   @MainActor
   enum Action: CaseIterable {
-    case respond, boost, favorite, bookmark, share
+    case respond, boost, favorite, bookmark, share, menu
 
     // Have to implement this manually here due to compiler not implicitly
     // inserting `nonisolated`, which leads to a warning:
@@ -31,7 +33,7 @@ struct StatusRowActionsView: View {
     //     satisfy nonisolated protocol requirement
     //
     public nonisolated static var allCases: [StatusRowActionsView.Action] {
-      [.respond, .boost, .favorite, .bookmark, .share]
+      [.respond, .boost, .favorite, .share, .menu]
     }
 
     func image(dataController: StatusDataController, privateBoost: Bool = false) -> Image {
@@ -53,6 +55,8 @@ struct StatusRowActionsView: View {
         return Image(systemName: dataController.isBookmarked ? "bookmark.fill" : "bookmark")
       case .share:
         return Image(systemName: "square.and.arrow.up")
+      case .menu:
+        return Image(systemName: "ellipsis")
       }
     }
 
@@ -77,6 +81,8 @@ struct StatusRowActionsView: View {
           : "status.action.bookmark"
       case .share:
         return "status.action.share"
+      case .menu:
+        return "status.context.menu"
       }
     }
 
@@ -91,14 +97,14 @@ struct StatusRowActionsView: View {
         return dataController.favoritesCount
       case .boost:
         return dataController.reblogsCount
-      case .share, .bookmark:
+      case .share, .bookmark, .menu:
         return nil
       }
     }
 
     func tintColor(theme: Theme) -> Color? {
       switch self {
-      case .respond, .share:
+      case .respond, .share, .menu:
         nil
       case .favorite:
         .yellow
@@ -111,7 +117,7 @@ struct StatusRowActionsView: View {
 
     func isOn(dataController: StatusDataController) -> Bool {
       switch self {
-      case .respond, .share: false
+      case .respond, .share, .menu: false
       case .favorite: dataController.isFavorited
       case .bookmark: dataController.isBookmarked
       case .boost: dataController.isReblogged
@@ -147,12 +153,32 @@ struct StatusRowActionsView: View {
                 .accessibilityLabel("status.action.share-link")
               }
             }
+            Spacer()
+          } else if action == .menu {
+            Menu {
+              StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showTextForSelection)
+                .onAppear {
+                  Task {
+                    await viewModel.loadAuthorRelationship()
+                  }
+                }
+            } label: {
+              Label("", systemImage: "ellipsis")
+            }
+            .menuStyle(.button)
+            .foregroundStyle(.secondary)
+            .contentShape(Rectangle())
+            .accessibilityLabel("status.action.context-menu")
           } else {
             actionButton(action: action)
             Spacer()
           }
         }
       }
+    }
+    .sheet(isPresented: $showTextForSelection) {
+      let content = viewModel.status.reblog?.content.asSafeMarkdownAttributedString ?? viewModel.status.content.asSafeMarkdownAttributedString
+      SelectTextView(content: content)
     }
   }
 

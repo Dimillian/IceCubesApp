@@ -18,14 +18,14 @@ import SwiftUI
     @AppStorage(ThemeKey.primaryBackground.rawValue) public var primaryBackgroundColor: Color = .white
     @AppStorage(ThemeKey.secondaryBackground.rawValue) public var secondaryBackgroundColor: Color = .gray
     @AppStorage(ThemeKey.label.rawValue) public var labelColor: Color = .black
-    @AppStorage(ThemeKey.avatarPosition2.rawValue) var avatarPosition: AvatarPosition = .top
-    @AppStorage(ThemeKey.avatarShape2.rawValue) var avatarShape: AvatarShape = .rounded
+    @AppStorage(ThemeKey.avatarPosition2.rawValue) var avatarPosition: AvatarPosition = .leading
+    @AppStorage(ThemeKey.avatarShape2.rawValue) var avatarShape: AvatarShape = .circle
     @AppStorage(ThemeKey.selectedSet.rawValue) var storedSet: ColorSetName = .iceCubeDark
     @AppStorage(ThemeKey.statusActionsDisplay.rawValue) public var statusActionsDisplay: StatusActionsDisplay = .full
     @AppStorage(ThemeKey.statusDisplayStyle.rawValue) public var statusDisplayStyle: StatusDisplayStyle = .large
     @AppStorage(ThemeKey.followSystemColorSchme.rawValue) public var followSystemColorScheme: Bool = true
-    @AppStorage(ThemeKey.displayFullUsernameTimeline.rawValue) public var displayFullUsername: Bool = true
-    @AppStorage(ThemeKey.lineSpacing.rawValue) public var lineSpacing: Double = 0.8
+    @AppStorage(ThemeKey.displayFullUsernameTimeline.rawValue) public var displayFullUsername: Bool = false
+    @AppStorage(ThemeKey.lineSpacing.rawValue) public var lineSpacing: Double = 1.2
     @AppStorage("font_size_scale") public var fontSizeScale: Double = 1
     @AppStorage("chosen_font") public var chosenFontData: Data?
 
