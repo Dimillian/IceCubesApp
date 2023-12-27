@@ -81,7 +81,7 @@ struct StatusRowActionsView: View {
     }
 
     func count(dataController: StatusDataController, isFocused: Bool, theme: Theme) -> Int? {
-      if theme.statusActionsDisplay == .discret, isFocused {
+      if theme.statusActionsDisplay == .discret, !isFocused {
         return nil
       }
       switch self {
