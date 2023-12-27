@@ -22,7 +22,9 @@ struct StatusRowHeaderView: View {
       }
       .buttonStyle(.plain)
       Spacer()
-      dateView
+      if !redactionReasons.contains(.placeholder) {
+        dateView
+      }
     }
     .accessibilityElement(children: .combine)
     .accessibilityLabel(Text("\(viewModel.finalStatus.account.safeDisplayName)") + Text(", ") + Text(viewModel.finalStatus.createdAt.relativeFormatted))
@@ -83,9 +85,9 @@ struct StatusRowHeaderView: View {
 
   private var dateView: some View {
     Group {
-      Text(viewModel.finalStatus.createdAt.relativeFormatted) +
-        Text(" ⸱ ") +
-        Text(Image(systemName: viewModel.finalStatus.visibility.iconName))
+      Text(Image(systemName: viewModel.finalStatus.visibility.iconName)) +
+      Text(" ⸱ ") +
+      Text(viewModel.finalStatus.createdAt.relativeFormatted)
     }
     .font(.scaledFootnote)
     .foregroundStyle(.secondary)
