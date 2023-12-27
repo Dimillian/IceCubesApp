@@ -6,15 +6,23 @@ private enum CodingKeys: CodingKey {
 
 public struct ServerDate: Codable, Hashable, Equatable, Sendable {
   public let asDate: Date
+  private let aDay: TimeInterval = 60 * 60 * 24
 
   public var relativeFormatted: String {
-    DateFormatterCache.shared.createdAtRelativeFormatter.localizedString(for: asDate, relativeTo: Date())
+    let date = asDate
+    if Date().timeIntervalSince(date) >= aDay {
+      return DateFormatterCache.shared.createdAtRelativeFormatter.localizedString(for: date,
+                                                                                  relativeTo: Date())
+    } else {
+      return Duration.seconds(-date.timeIntervalSinceNow).formatted(.units(width: .narrow,
+                                                                     maximumUnitCount: 1))
+    }
   }
 
   public var shortDateFormatted: String {
     DateFormatterCache.shared.createdAtShortDateFormatted.string(from: asDate)
   }
-
+  
   private static let calendar = Calendar(identifier: .gregorian)
 
   public init() {
