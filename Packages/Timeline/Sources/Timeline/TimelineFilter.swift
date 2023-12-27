@@ -36,6 +36,7 @@ public enum TimelineFilter: Hashable, Equatable {
   case list(list: Models.List)
   case remoteLocal(server: String, filter: RemoteTimelineFilter)
   case latest
+  case resume
 
   public func hash(into hasher: inout Hasher) {
     hasher.combine(title)
@@ -63,6 +64,8 @@ public enum TimelineFilter: Hashable, Equatable {
     switch self {
     case .latest:
       "Latest"
+    case .resume:
+      "Resume"
     case .federated:
       "Federated"
     case .local:
@@ -86,6 +89,8 @@ public enum TimelineFilter: Hashable, Equatable {
     switch self {
     case .latest:
       "timeline.latest"
+    case .resume:
+      "timeline.resume"
     case .federated:
       "timeline.federated"
     case .local:
@@ -109,6 +114,8 @@ public enum TimelineFilter: Hashable, Equatable {
     switch self {
     case .latest:
       "arrow.counterclockwise"
+    case .resume:
+      "clock.arrow.2.circlepath"
     case .federated:
       "globe.americas"
     case .local:
@@ -140,6 +147,7 @@ public enum TimelineFilter: Hashable, Equatable {
         return Trends.statuses(offset: offset)
       }
     case .latest: return Timelines.home(sinceId: nil, maxId: nil, minId: nil)
+    case .resume: return Timelines.home(sinceId: nil, maxId: nil, minId: nil)
     case .home: return Timelines.home(sinceId: sinceId, maxId: maxId, minId: minId)
     case .trending: return Trends.statuses(offset: offset)
     case let .list(list): return Timelines.list(listId: list.id, sinceId: sinceId, maxId: maxId, minId: minId)
@@ -172,6 +180,7 @@ extension TimelineFilter: Codable {
     case list
     case remoteLocal
     case latest
+    case resume
   }
 
   public init(from decoder: Decoder) throws {
@@ -255,6 +264,8 @@ extension TimelineFilter: Codable {
       try nestedContainer.encode(filter)
     case .latest:
       try container.encode(CodingKeys.latest.rawValue, forKey: .latest)
+    case .resume:
+      try container.encode(CodingKeys.resume.rawValue, forKey: .latest)
     }
   }
 }

@@ -10,23 +10,34 @@ import SwiftUI
   var scrollToIndex: Int?
   var statusesState: StatusesState = .loading
   var timeline: TimelineFilter = .federated {
+    willSet {
+      if timeline == .home && newValue != .resume {
+        saveMarker()
+      }
+    }
     didSet {
       timelineTask?.cancel()
       timelineTask = Task {
-        if timeline == .latest {
+        if timeline == .latest || timeline == .resume {
           if oldValue == .home {
             await clearHomeCache()
           }
+          if timeline == .resume, let marker = await fetchMarker() {
+            self.marker = marker
+          }
           timeline = oldValue
         }
+        
         if oldValue != timeline {
           await reset()
           pendingStatusesObserver.pendingStatuses = []
           tag = nil
         }
+        
         guard !Task.isCancelled else {
           return
         }
+        
         await fetchNewestStatuses()
         switch timeline {
         case let .hashtag(tag, _):
@@ -77,7 +88,8 @@ import SwiftUI
   var isTimelineVisible: Bool = false
   let pendingStatusesObserver: PendingStatusesObserver = .init()
   var scrollToIndexAnimated: Bool = false
-
+  var marker: Marker.Content?
+  
   init() {
     pendingStatusesObserver.scrollToIndex = { [weak self] index in
       self?.scrollToIndexAnimated = true
@@ -174,19 +186,42 @@ extension TimelineViewModel: StatusesFetcher {
       await fetchNewestStatuses()
     }
   }
+  
+  func fetchStatuses(from: Marker.Content) async throws {
+    guard let client else { return }
+    statusesState = .loading
+    var statuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
+                                                                              maxId: from.lastReadId,
+                                                                              minId: nil,
+                                                                              offset: 0))
+
+    ReblogCache.shared.removeDuplicateReblogs(&statuses)
+    StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
+
+    await datasource.set(statuses)
+    await cacheHome()
+    marker = nil
+
+    withAnimation {
+      statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+    }
+    
+    await fetchNewestStatuses()
+  }
 
   func fetchNewestStatuses() async {
     guard let client else { return }
     do {
-      if await datasource.isEmpty {
+      if let marker {
+        try await fetchStatuses(from: marker)
+      } else if await datasource.isEmpty {
         try await fetchFirstPage(client: client)
       } else if let latest = await datasource.get().first, timeline.supportNewestPagination {
-        try await fetchNewPagesFrom(latestStatus: latest, client: client)
+        try await fetchNewPagesFrom(latestStatus: latest.id, client: client)
       }
     } catch {
       statusesState = .error(error: error)
       canStreamEvents = true
-      print("timeline parse error: \(error)")
     }
   }
 
@@ -241,10 +276,10 @@ extension TimelineViewModel: StatusesFetcher {
   }
 
   // Fetch pages from the top most status of the tomeline.
-  private func fetchNewPagesFrom(latestStatus: Status, client: Client) async throws {
+  private func fetchNewPagesFrom(latestStatus: String, client: Client) async throws {
     canStreamEvents = false
     let initialTimeline = timeline
-    var newStatuses: [Status] = await fetchNewPages(minId: latestStatus.id, maxPages: 10)
+    var newStatuses: [Status] = await fetchNewPages(minId: latestStatus, maxPages: 10)
 
     // Dedup statuses, a status with the same id could have been streamed in.
     let ids = await datasource.get().map(\.id)
@@ -321,7 +356,7 @@ extension TimelineViewModel: StatusesFetcher {
        !Task.isCancelled,
        let latest = await datasource.get().first
     {
-      try await fetchNewPagesFrom(latestStatus: latest, client: client)
+      try await fetchNewPagesFrom(latestStatus: latest.id, client: client)
     }
   }
 
@@ -390,5 +425,30 @@ extension TimelineViewModel: StatusesFetcher {
 
   func statusDidDisappear(status: Status) {
     visibileStatusesIds.remove(status.id)
+  }
+}
+
+// MARK: - MARKER
+extension TimelineViewModel {
+  func fetchMarker() async -> Marker.Content? {
+    guard let client else {
+      return nil
+    }
+    do {
+      let data: Marker = try await client.get(endpoint: Markers.markers)
+      return data.home
+    } catch {
+      return nil
+    }
+  }
+  
+  func saveMarker() {
+    guard timeline == .home, let client else { return }
+    Task {
+      guard let id = await cache.getLatestSeenStatus(for: client)?.first else { return }
+      do {
+        let _: Marker = try await client.post(endpoint: Markers.markHome(lastReadId: id))
+      } catch { }
+    }
   }
 }

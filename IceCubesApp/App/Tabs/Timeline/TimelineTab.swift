@@ -125,6 +125,16 @@ struct TimelineTab: View {
       } label: {
         Label(TimelineFilter.latest.localizedTitle(), systemImage: TimelineFilter.latest.iconName() ?? "")
       }
+      if timeline == .home {
+        Button {
+          timeline = .resume
+        } label: {
+          VStack {
+            Label(TimelineFilter.resume.localizedTitle(),
+                  systemImage: TimelineFilter.resume.iconName() ?? "")
+          }
+        }
+      }
       Divider()
     }
     ForEach(TimelineFilter.availableTimeline(client: client), id: \.self) { timeline in

@@ -34,7 +34,8 @@ public struct TimelineView: View {
 
   public init(timeline: Binding<TimelineFilter>,
               selectedTagGroup: Binding<TagGroup?>,
-              scrollToTopSignal: Binding<Int>, canFilterTimeline: Bool)
+              scrollToTopSignal: Binding<Int>,
+              canFilterTimeline: Bool)
   {
     _timeline = timeline
     _selectedTagGroup = selectedTagGroup
@@ -111,6 +112,7 @@ public struct TimelineView: View {
     }
     .onDisappear {
       viewModel.isTimelineVisible = false
+      viewModel.saveMarker()
     }
     .refreshable {
       SoundEffectManager.shared.playSound(.pull)
@@ -145,7 +147,8 @@ public struct TimelineView: View {
         }
       case .background:
         wasBackgrounded = true
-
+        viewModel.saveMarker()
+        
       default:
         break
       }
@@ -243,6 +246,9 @@ public struct TimelineView: View {
           Text(timeline.localizedTitle())
             .font(.caption)
             .foregroundStyle(.secondary)
+        case .home:
+          Text(timeline.localizedTitle())
+            .font(.headline)
         default:
           Text(timeline.localizedTitle())
             .font(.headline)
