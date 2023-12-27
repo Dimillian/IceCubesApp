@@ -22,9 +22,7 @@ struct StatusRowHeaderView: View {
       }
       .buttonStyle(.plain)
       Spacer()
-      if !isInCaptureMode {
-        threadIcon
-      }
+      dateView
     }
     .accessibilityElement(children: .combine)
     .accessibilityLabel(Text("\(viewModel.finalStatus.account.safeDisplayName)") + Text(", ") + Text(viewModel.finalStatus.createdAt.relativeFormatted))
@@ -59,27 +57,16 @@ struct StatusRowHeaderView: View {
             }
           }
           .layoutPriority(1)
-          if !redactionReasons.contains(.placeholder) {
-            if theme.avatarPosition == .leading {
-              dateView
-            } else {
-              Text("@\(theme.displayFullUsername ? viewModel.finalStatus.account.acct : viewModel.finalStatus.account.username)")
-                .font(.scaledFootnote)
-                .foregroundStyle(.secondary)
-                .lineLimit(1)
-                .accountPopover(viewModel.finalStatus.account)
-            }
-          }
         }
-        if theme.avatarPosition == .top {
-          dateView
-        } else if theme.displayFullUsername, theme.avatarPosition == .leading {
-          Text("@\(viewModel.finalStatus.account.acct)")
-            .font(.scaledFootnote)
-            .foregroundStyle(.secondary)
-            .lineLimit(1)
-            .offset(y: 1)
-            .accountPopover(viewModel.finalStatus.account)
+        if !redactionReasons.contains(.placeholder) {
+         if (theme.displayFullUsername && theme.avatarPosition == .leading) ||
+              theme.avatarPosition == .top {
+           Text("@\(theme.displayFullUsername ? viewModel.finalStatus.account.acct : viewModel.finalStatus.account.username)")
+             .font(.scaledFootnote)
+             .foregroundStyle(.secondary)
+             .lineLimit(1)
+             .accountPopover(viewModel.finalStatus.account)
+         }
         }
       }
     }
@@ -103,16 +90,5 @@ struct StatusRowHeaderView: View {
     .font(.scaledFootnote)
     .foregroundStyle(.secondary)
     .lineLimit(1)
-  }
-
-  @ViewBuilder
-  private var threadIcon: some View {
-    if viewModel.isThread {
-      Image(systemName: "bubble.left.and.bubble.right")
-        .resizable()
-        .aspectRatio(contentMode: .fit)
-        .frame(width: 15)
-        .foregroundStyle(.secondary)
-    }
   }
 }
