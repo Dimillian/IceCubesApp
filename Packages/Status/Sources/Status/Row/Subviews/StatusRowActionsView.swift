@@ -136,6 +136,7 @@ struct StatusRowActionsView: View {
               case .linkOnly:
                 ShareLink(item: url) {
                   action.image(dataController: statusDataController)
+                    .font(.scaledBody)
                 }
                 .buttonStyle(.statusAction())
                 .accessibilityElement(children: .combine)
@@ -146,6 +147,7 @@ struct StatusRowActionsView: View {
                           message: Text(viewModel.finalStatus.content.asRawText))
                 {
                   action.image(dataController: statusDataController)
+                    .font(.scaledBody)
                 }
                 .buttonStyle(.statusAction())
                 .accessibilityElement(children: .combine)
