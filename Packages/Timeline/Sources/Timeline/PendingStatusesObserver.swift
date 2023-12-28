@@ -44,7 +44,7 @@ struct PendingStatusesObserverView: View {
           .contentTransition(.numericText(countsDown: true))
           // Accessibility: this results in a frame with a size of at least 44x44 at regular font size
           .frame(minWidth: 16, minHeight: 16)
-          .font(.footnote)
+          .font(.footnote.monospacedDigit())
       }
       .accessibilityLabel("accessibility.tabs.timeline.unread-posts.label-\(observer.pendingStatusesCount)")
       .accessibilityHint("accessibility.tabs.timeline.unread-posts.hint")
