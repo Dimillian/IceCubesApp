@@ -190,11 +190,12 @@ struct StatusRowActionsView: View {
           action
             .image(dataController: statusDataController, privateBoost: privateBoost())
             .imageScale(.medium)
-            .font(.body)
+            .font(.scaledBody)
             .fontWeight(.black)
         } else {
           action
             .image(dataController: statusDataController, privateBoost: privateBoost())
+            .font(.scaledBody)
         }
       }
       .buttonStyle(
@@ -210,6 +211,7 @@ struct StatusRowActionsView: View {
                                   theme: theme), !viewModel.isRemote
       {
         Text("\(count)")
+          .contentTransition(.numericText(value: Double(count)))
           .foregroundColor(Color(UIColor.secondaryLabel))
           .font(.scaledFootnote)
           .monospacedDigit()
