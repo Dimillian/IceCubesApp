@@ -156,7 +156,7 @@ public struct StatusRowView: View {
       viewModel.navigateToDetail()
     }
     .accessibilityActions {
-      if isFocused == false, viewModel.showActions {
+      if !isFocused, viewModel.showActions, accessibilityVoiceOverEnabled {
         accessibilityActions
       }
     }
