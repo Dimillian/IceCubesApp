@@ -5753,7 +5753,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Favorites"
+            "value" : "Favourites"
           }
         },
         "es" : {
@@ -42162,7 +42162,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apply custom colors"
+            "value" : "Apply custom colours"
           }
         },
         "es" : {
@@ -45354,7 +45354,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Text Color"
+            "value" : "Text Colour"
           }
         },
         "es" : {
@@ -54089,7 +54089,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Favorite"
+            "value" : "Favourite"
           }
         },
         "es" : {
