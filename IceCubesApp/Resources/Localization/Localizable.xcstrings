@@ -50415,8 +50415,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+            "state" : "translated",
+            "value" : "Die schnelle Aktualisierung deaktiviert das Caching der Timeline und ruft immer eine frische Timeline ab, wenn du auf den Timeline-Tab oder in die App zurückkehrst."
           }
         },
         "en" : {
