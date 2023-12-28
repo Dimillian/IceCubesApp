@@ -10,6 +10,8 @@ enum Tab: Int, Identifiable, Hashable {
   case timeline, notifications, mentions, explore, messages, settings, other
   case trending, federated, local
   case profile
+  case bookmarks
+  case favorites
 
   nonisolated var id: Int {
     rawValue
@@ -22,7 +24,7 @@ enum Tab: Int, Identifiable, Hashable {
   static func loggedInTabs() -> [Tab] {
     if UIDevice.current.userInterfaceIdiom == .pad ||
         UIDevice.current.userInterfaceIdiom == .mac {
-      [.timeline, .trending, .federated, .local, .notifications, .mentions, .explore, .messages, .settings]
+      [.timeline, .trending, .federated, .local, .notifications, .mentions, .explore, .messages, .bookmarks, .favorites, .settings]
     } else if  UIDevice.current.userInterfaceIdiom == .vision {
       [.profile, .timeline, .trending, .federated, .local, .notifications, .mentions, .explore, .messages, .settings]
     } else {
@@ -53,6 +55,14 @@ enum Tab: Int, Identifiable, Hashable {
       SettingsTabs(popToRootTab: popToRootTab, isModal: false)
     case .profile:
       ProfileTab(popToRootTab: popToRootTab)
+    case .bookmarks:
+      NavigationTab {
+        AccountStatusesListView(mode: .bookmarks)
+      }
+    case .favorites:
+      NavigationTab {
+        AccountStatusesListView(mode: .favorites)
+      }
     case .other:
       EmptyView()
     }
@@ -81,6 +91,10 @@ enum Tab: Int, Identifiable, Hashable {
       Label("tab.settings", systemImage: iconName)
     case .profile:
       Label("tab.profile", systemImage: iconName)
+    case .bookmarks:
+      Label("accessibility.tabs.profile.picker.bookmarks", systemImage: iconName)
+    case .favorites:
+      Label("accessibility.tabs.profile.picker.favorites", systemImage: iconName)
     case .other:
       EmptyView()
     }
@@ -108,6 +122,10 @@ enum Tab: Int, Identifiable, Hashable {
       "gear"
     case .profile:
       "person.crop.circle"
+    case .bookmarks:
+      "bookmark"
+    case .favorites:
+      "star"
     case .other:
       ""
     }
