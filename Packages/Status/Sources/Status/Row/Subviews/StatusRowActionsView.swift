@@ -21,20 +21,19 @@ struct StatusRowActionsView: View {
   func privateBoost() -> Bool {
     viewModel.status.visibility == .priv && viewModel.status.account.id == currentAccount.account?.id
   }
+  
+  var actions: [Action] {
+    switch theme.statusActionSecondary {
+    case .share:
+      return [.respond, .boost, .favorite, .share, .menu]
+    case .bookmark:
+      return [.respond, .boost, .favorite, .bookmark, .menu]
+    }
+  }
 
   @MainActor
-  enum Action: CaseIterable {
+  enum Action {
     case respond, boost, favorite, bookmark, share, menu
-
-    // Have to implement this manually here due to compiler not implicitly
-    // inserting `nonisolated`, which leads to a warning:
-    //
-    //     Main actor-isolated static property 'allCases' cannot be used to
-    //     satisfy nonisolated protocol requirement
-    //
-    public nonisolated static var allCases: [StatusRowActionsView.Action] {
-      [.respond, .boost, .favorite, .share, .menu]
-    }
 
     func image(dataController: StatusDataController, privateBoost: Bool = false) -> Image {
       switch self {
@@ -128,7 +127,7 @@ struct StatusRowActionsView: View {
   var body: some View {
     VStack(spacing: 12) {
       HStack {
-        ForEach(Action.allCases, id: \.self) { action in
+        ForEach(actions, id: \.self) { action in
           if action == .share {
             if let urlString = viewModel.finalStatus.url,
                let url = URL(string: urlString)

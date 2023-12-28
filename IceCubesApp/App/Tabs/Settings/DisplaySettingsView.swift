@@ -203,6 +203,11 @@ struct DisplaySettingsView: View {
           Text(buttonStyle.description).tag(buttonStyle)
         }
       }
+      Picker("settings.display.status.action-secondary", selection: $theme.statusActionSecondary) {
+        ForEach(Theme.StatusActionSecondary.allCases, id: \.rawValue) { action in
+          Text(action.description).tag(action)
+        }
+      }
       Picker("settings.display.status.media-style", selection: $theme.statusDisplayStyle) {
         ForEach(Theme.StatusDisplayStyle.allCases, id: \.rawValue) { buttonStyle in
           Text(buttonStyle.description).tag(buttonStyle)
