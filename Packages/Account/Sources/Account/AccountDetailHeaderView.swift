@@ -227,6 +227,8 @@ struct AccountDetailHeaderView: View {
                                             viewModel.relationship = relationship
                                           }))
           }
+        } else if !viewModel.isCurrentUser {
+          ProgressView()
         }
       }
 
