@@ -6,7 +6,7 @@ import Status
 import SwiftUI
 
 @MainActor
-enum Tab: Int, Identifiable, Hashable {
+enum Tab: Int, Identifiable, Hashable, CaseIterable {
   case timeline, notifications, mentions, explore, messages, settings, other
   case trending, federated, local
   case profile
@@ -82,7 +82,7 @@ enum Tab: Int, Identifiable, Hashable {
     case .notifications:
       Label("tab.notifications", systemImage: iconName)
     case .mentions:
-      Label("tab.notifications", systemImage: iconName)
+      Label("tab.mentions", systemImage: iconName)
     case .explore:
       Label("tab.explore", systemImage: iconName)
     case .messages:
@@ -129,5 +129,65 @@ enum Tab: Int, Identifiable, Hashable {
     case .other:
       ""
     }
+  }
+}
+
+@Observable
+class iOSTabs {
+  enum TabEntries: String {
+    case first, second, third, fourth, fifth
+  }
+  
+  class Storage {
+    @AppStorage(TabEntries.first.rawValue) var firstTab = Tab.timeline
+    @AppStorage(TabEntries.second.rawValue) var secondTab = Tab.notifications
+    @AppStorage(TabEntries.third.rawValue) var thirdTab = Tab.explore
+    @AppStorage(TabEntries.fourth.rawValue) var fourthTab = Tab.messages
+    @AppStorage(TabEntries.fifth.rawValue) var fifthTab = Tab.profile
+  }
+  
+  private let storage = Storage()
+  public static let shared = iOSTabs()
+  
+  var tabs: [Tab] {
+    [firstTab, secondTab, thirdTab, fourthTab, fifthTab]
+  }
+  
+  var firstTab: Tab {
+    didSet {
+      storage.firstTab = firstTab
+    }
+  }
+  
+  var secondTab: Tab {
+    didSet {
+      storage.secondTab = secondTab
+    }
+  }
+  
+  var thirdTab: Tab {
+    didSet {
+      storage.thirdTab = thirdTab
+    }
+  }
+  
+  var fourthTab: Tab {
+    didSet {
+      storage.fourthTab = fourthTab
+    }
+  }
+  
+  var fifthTab: Tab {
+    didSet {
+      storage.fifthTab = fifthTab
+    }
+  }
+  
+  private init() {
+    firstTab = storage.firstTab
+    secondTab = storage.secondTab
+    thirdTab = storage.thirdTab
+    fourthTab = storage.fourthTab
+    fifthTab = storage.fifthTab
   }
 }

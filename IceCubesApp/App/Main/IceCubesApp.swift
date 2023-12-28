@@ -30,11 +30,15 @@ struct IceCubesApp: App {
 
   @State var selectedTab: Tab = .timeline
   @State var popToRootTab: Tab = .other
+  @State var iosTabs = iOSTabs.shared
   @State var sideBarLoadedTabs: Set<Tab> = Set()
   @State var isSupporter: Bool = false
 
   var availableTabs: [Tab] {
-    appAccountsManager.currentClient.isAuth ? Tab.loggedInTabs() : Tab.loggedOutTab()
+    if UIDevice.current.userInterfaceIdiom == .phone {
+      return appAccountsManager.currentClient.isAuth ? iosTabs.tabs : Tab.loggedOutTab()
+    }
+    return appAccountsManager.currentClient.isAuth ? Tab.loggedInTabs() : Tab.loggedOutTab()
   }
 
   var body: some Scene {

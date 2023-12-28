@@ -160,6 +160,11 @@ struct SettingsTabs: View {
       NavigationLink(destination: SwipeActionsSettingsView()) {
         Label("settings.general.swipeactions", systemImage: "hand.draw")
       }
+      if UIDevice.current.userInterfaceIdiom == .phone {
+        NavigationLink(destination: TabbarEntriesSettingsView()) {
+          Label("settings.general.tabbarEntries", systemImage: "platter.filled.bottom.iphone")
+        }
+      }
       NavigationLink(destination: TranslationSettingsView()) {
         Label("settings.general.translate", systemImage: "captions.bubble")
       }
