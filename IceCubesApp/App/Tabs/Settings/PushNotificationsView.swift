@@ -7,27 +7,6 @@ import NukeUI
 import SwiftUI
 import UserNotifications
 
-struct PushNotificationsViewWrapper: View {
-  @Environment(\.dismiss) private var dismiss
-  
-  public let subscription: PushNotificationSubscriptionSettings
-  
-  var body: some View {
-    NavigationStack {
-      PushNotificationsView(subscription: subscription)
-        .toolbar {
-          ToolbarItem(placement: .navigationBarLeading) {
-            Button {
-              dismiss()
-            } label: {
-              Image(systemName: "xmark.circle")
-            }
-          }
-        }
-    }
-  }
-}
-
 @MainActor
 struct PushNotificationsView: View {
   @Environment(Theme.self) private var theme

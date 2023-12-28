@@ -97,10 +97,14 @@ extension View {
             .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
         case .accountPushNotficationsSettings:
           if let subscription = PushNotificationsService.shared.subscriptions.first(where: { $0.account.token == AppAccountsManager.shared.currentAccount.oauthToken }) {
-            PushNotificationsViewWrapper(subscription: subscription)
+            NavigationSheet { PushNotificationsView(subscription: subscription) }
           } else {
             EmptyView()
           }
+        case .about:
+          NavigationSheet { AboutView() }
+        case .support:
+          NavigationSheet { SupportAppView() }
         case let .report(status):
           ReportView(status: status)
         case let .shareImage(image, status):

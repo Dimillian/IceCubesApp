@@ -15,6 +15,7 @@
 		639CDF9C296AC82F00C35E58 /* SafariRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639CDF9B296AC82F00C35E58 /* SafariRouter.swift */; };
 		9F15D6002B3D6A850008C220 /* NavigationTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F15D5FF2B3D6A850008C220 /* NavigationTab.swift */; };
 		9F15D6022B3D6E280008C220 /* TabbarEntriesSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F15D6012B3D6E280008C220 /* TabbarEntriesSettingsView.swift */; };
+		9F15D6042B3DC2180008C220 /* NavigationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F15D6032B3DC2180008C220 /* NavigationSheet.swift */; };
 		9F18801229AE477F00D85459 /* tabSelection.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9F18800A29AE477E00D85459 /* tabSelection.wav */; };
 		9F18801329AE477F00D85459 /* share.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9F18800B29AE477E00D85459 /* share.wav */; };
 		9F18801429AE477F00D85459 /* bookmark.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9F18800C29AE477E00D85459 /* bookmark.wav */; };
@@ -164,6 +165,7 @@
 		9664F1A8299BA5F700CBE70E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9F15D5FF2B3D6A850008C220 /* NavigationTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTab.swift; sourceTree = "<group>"; };
 		9F15D6012B3D6E280008C220 /* TabbarEntriesSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarEntriesSettingsView.swift; sourceTree = "<group>"; };
+		9F15D6032B3DC2180008C220 /* NavigationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationSheet.swift; sourceTree = "<group>"; };
 		9F18800A29AE477E00D85459 /* tabSelection.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tabSelection.wav; sourceTree = "<group>"; };
 		9F18800B29AE477E00D85459 /* share.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = share.wav; sourceTree = "<group>"; };
 		9F18800C29AE477E00D85459 /* bookmark.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bookmark.wav; sourceTree = "<group>"; };
@@ -429,6 +431,7 @@
 				9F2B92F5295AE04800DE16D0 /* Tabs.swift */,
 				9F4A48182976B21900A1A038 /* ProfileTab.swift */,
 				9F15D5FF2B3D6A850008C220 /* NavigationTab.swift */,
+				9F15D6032B3DC2180008C220 /* NavigationSheet.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -824,6 +827,7 @@
 				069709AA298C9AD7006E4CB5 /* AboutView.swift in Sources */,
 				9F2B92FC295DA94500DE16D0 /* InstanceInfoView.swift in Sources */,
 				C9B22677297F6C2E001F9EFE /* ContentSettingsView.swift in Sources */,
+				9F15D6042B3DC2180008C220 /* NavigationSheet.swift in Sources */,
 				9FA6FD6229C04A8800E2312C /* TranslationSettingsView.swift in Sources */,
 				9FB183272AE9279F00BBB692 /* IceCubesApp+Tabbar.swift in Sources */,
 				9F35DB4C2952005C00B3281A /* MessagesTab.swift in Sources */,
