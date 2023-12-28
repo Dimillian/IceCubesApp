@@ -41,7 +41,7 @@ struct PendingStatusesObserverView: View {
         observer.scrollToIndex?(observer.pendingStatusesCount)
       } label: {
         Text("\(observer.pendingStatusesCount)")
-          .contentTransition(.numericText(countsDown: true))
+          .contentTransition(.numericText(value: Double(observer.pendingStatusesCount)))
           // Accessibility: this results in a frame with a size of at least 44x44 at regular font size
           .frame(minWidth: 16, minHeight: 16)
           .font(.footnote.monospacedDigit())
