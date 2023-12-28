@@ -38,13 +38,16 @@ import SwiftUI
 
   private let filterKey = "notification-filter"
   var state: State = .loading
+  var isLockedType: Bool = false
   var selectedType: Models.Notification.NotificationType? {
     didSet {
       guard oldValue != selectedType,
             let id = client?.id
       else { return }
 
-      UserDefaults.standard.set(selectedType?.rawValue ?? "", forKey: filterKey)
+      if !isLockedType {
+        UserDefaults.standard.set(selectedType?.rawValue ?? "", forKey: filterKey)
+      }
 
       consolidatedNotifications = []
       Task {

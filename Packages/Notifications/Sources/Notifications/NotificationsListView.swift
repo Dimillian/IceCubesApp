@@ -91,6 +91,7 @@ public struct NotificationsListView: View {
       viewModel.client = client
       viewModel.currentAccount = account
       if let lockedType {
+        viewModel.isLockedType = true
         viewModel.selectedType = lockedType
       }
       await viewModel.fetchNotifications()
