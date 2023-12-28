@@ -39,7 +39,6 @@ public struct NotificationsListView: View {
         }
       }
     }
-    .onAppear { viewModel.loadSelectedType() }
     .toolbar {
       ToolbarItem(placement: .principal) {
         let title = lockedType?.menuTitle() ?? viewModel.selectedType?.menuTitle() ?? "notifications.navigation-title"
@@ -64,6 +63,9 @@ public struct NotificationsListView: View {
         ToolbarTitleMenu {
           Button {
             viewModel.selectedType = nil
+            Task {
+              await viewModel.fetchNotifications()
+            }
           } label: {
             Label("notifications.navigation-title", systemImage: "bell.fill")
           }
@@ -71,6 +73,9 @@ public struct NotificationsListView: View {
           ForEach(Notification.NotificationType.allCases, id: \.self) { type in
             Button {
               viewModel.selectedType = type
+              Task {
+                await viewModel.fetchNotifications()
+              }
             } label: {
               Label {
                 Text(type.menuTitle())
@@ -87,14 +92,18 @@ public struct NotificationsListView: View {
     .scrollContentBackground(.hidden)
     .background(theme.primaryBackgroundColor)
     #endif
-    .task {
+    .onAppear {
       viewModel.client = client
       viewModel.currentAccount = account
       if let lockedType {
         viewModel.isLockedType = true
         viewModel.selectedType = lockedType
+      } else {
+        viewModel.loadSelectedType()
       }
-      await viewModel.fetchNotifications()
+      Task {
+        await viewModel.fetchNotifications()
+      }
     }
     .refreshable {
       SoundEffectManager.shared.playSound(.pull)

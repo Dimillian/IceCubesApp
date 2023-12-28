@@ -50,15 +50,10 @@ import SwiftUI
       }
 
       consolidatedNotifications = []
-      Task {
-        await fetchNotifications()
-      }
     }
   }
 
   func loadSelectedType() {
-    client = client
-
     guard let value = UserDefaults.standard.string(forKey: filterKey)
     else {
       selectedType = nil
