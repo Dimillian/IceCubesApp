@@ -16,7 +16,6 @@ public struct StatusRowView: View {
   @Environment(\.accessibilityVoiceOverEnabled) private var accessibilityVoiceOverEnabled
   @Environment(\.isStatusFocused) private var isFocused
   @Environment(\.indentationLevel) private var indentationLevel
-  @Environment(\.isHomeTimeline) private var isHomeTimeline
 
   @Environment(QuickLook.self) private var quickLook
   @Environment(Theme.self) private var theme
@@ -57,12 +56,13 @@ public struct StatusRowView: View {
             EmptyView()
           }
         } else {
-          if !isCompact, theme.avatarPosition == .leading {
+          if !isCompact {
             Group {
+              StatusRowTagView(viewModel: viewModel)
               StatusRowReblogView(viewModel: viewModel)
               StatusRowReplyView(viewModel: viewModel)
             }
-            .padding(.leading, AvatarView.FrameConfig.status.width + .statusColumnsSpacing)
+            .padding(.leading, theme.avatarPosition == .top ? 0 : AvatarView.FrameConfig.status.width + .statusColumnsSpacing)
           }
           HStack(alignment: .top, spacing: .statusColumnsSpacing) {
             if !isCompact,
@@ -75,13 +75,6 @@ public struct StatusRowView: View {
               }
             }
             VStack(alignment: .leading, spacing: .statusComponentSpacing) {
-              if !isCompact, theme.avatarPosition == .top {
-                StatusRowReblogView(viewModel: viewModel)
-                StatusRowReplyView(viewModel: viewModel)
-                if isHomeTimeline {
-                  StatusRowTagView(viewModel: viewModel)
-                }
-              }
               if !isCompact {
                 StatusRowHeaderView(viewModel: viewModel)
               }
