@@ -13,10 +13,15 @@ struct StatusRowActionsView: View {
 
   @Environment(\.openWindow) private var openWindow
   @Environment(\.isStatusFocused) private var isFocused
+  @Environment(\.horizontalSizeClass) var horizontalSizeClass
   
   @State private var showTextForSelection: Bool = false
 
   var viewModel: StatusRowViewModel
+  
+  var isNarrow: Bool {
+    horizontalSizeClass == .compact && (UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac)
+  }
 
   func privateBoost() -> Bool {
     viewModel.status.visibility == .priv && viewModel.status.account.id == currentAccount.account?.id
@@ -210,7 +215,8 @@ struct StatusRowActionsView: View {
       )
       .disabled(action == .boost &&
         (viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id))
-      if let count = action.count(dataController: statusDataController,
+      if !isNarrow,
+          let count = action.count(dataController: statusDataController,
                                   isFocused: isFocused,
                                   theme: theme), !viewModel.isRemote
       {
