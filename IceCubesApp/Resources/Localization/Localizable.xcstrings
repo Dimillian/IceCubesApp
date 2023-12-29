@@ -44751,8 +44751,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Secondary status action"
+            "state" : "translated",
+            "value" : "Sekundäre Statusaktion"
           }
         },
         "en" : {
@@ -46994,7 +46994,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tabs Customizations"
+            "value" : "Tabs anpassen"
           }
         },
         "en" : {
@@ -69933,7 +69933,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mentions"
+            "value" : "Erwähnungen"
           }
         },
         "en" : {
@@ -73403,8 +73403,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Resume"
+            "state" : "translated",
+            "value" : "Fortsetzen"
           }
         },
         "en" : {
