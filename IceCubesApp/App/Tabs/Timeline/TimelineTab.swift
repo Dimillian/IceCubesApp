@@ -277,7 +277,7 @@ struct TimelineTab: View {
   private func resetTimelineFilter() {
     if client.isAuth, canFilterTimeline {
       timeline = lastTimelineFilter
-    } else {
+    } else if !client.isAuth {
       timeline = .federated
     }
   }
