@@ -40,20 +40,7 @@ struct NotificationsTab: View {
               Image(systemName: "bell.badge")
             }
           }
-          if !isSecondaryColumn {
-            statusEditorToolbarItem(routerPath: routerPath,
-                                    visibility: userPreferences.postVisibility)
-            if UIDevice.current.userInterfaceIdiom != .pad {
-              ToolbarItem(placement: .navigationBarLeading) {
-                AppAccountsSelectorView(routerPath: routerPath)
-              }
-            }
-          }
-          if UIDevice.current.userInterfaceIdiom == .pad {
-            if (!isSecondaryColumn && !userPreferences.showiPadSecondaryColumn) || isSecondaryColumn {
-              SecondaryColumnToolbarItem()
-            }
-          }
+          ToolbarTab(routerPath: $routerPath)
         }
         .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
         .id(client.id)

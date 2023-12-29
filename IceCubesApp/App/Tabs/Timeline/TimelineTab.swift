@@ -228,17 +228,7 @@ struct TimelineTab: View {
       }
     }
     if client.isAuth {
-      if UIDevice.current.userInterfaceIdiom != .pad {
-        ToolbarItem(placement: .navigationBarLeading) {
-          AppAccountsSelectorView(routerPath: routerPath)
-            .id(currentAccount.account?.id)
-        }
-      }
-      statusEditorToolbarItem(routerPath: routerPath,
-                              visibility: preferences.postVisibility)
-      if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn {
-        SecondaryColumnToolbarItem()
-      }
+      ToolbarTab(routerPath: $routerPath)
     } else {
       ToolbarItem(placement: .navigationBarTrailing) {
         addAccountButton

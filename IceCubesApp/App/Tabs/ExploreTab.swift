@@ -24,16 +24,7 @@ struct ExploreTab: View {
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
         .toolbar {
-          statusEditorToolbarItem(routerPath: routerPath,
-                                  visibility: preferences.postVisibility)
-          if UIDevice.current.userInterfaceIdiom != .pad {
-            ToolbarItem(placement: .navigationBarLeading) {
-              AppAccountsSelectorView(routerPath: routerPath)
-            }
-          }
-          if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn {
-            SecondaryColumnToolbarItem()
-          }
+          ToolbarTab(routerPath: $routerPath)
         }
     }
     .withSafariRouter()

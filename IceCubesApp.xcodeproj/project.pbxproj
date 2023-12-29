@@ -58,6 +58,8 @@
 		9F55C68D2955968700F94077 /* ExploreTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F55C68C2955968700F94077 /* ExploreTab.swift */; };
 		9F55C6902955993C00F94077 /* Explore in Frameworks */ = {isa = PBXBuildFile; productRef = 9F55C68F2955993C00F94077 /* Explore */; };
 		9F5E581929545BE700A53960 /* Env in Frameworks */ = {isa = PBXBuildFile; productRef = 9F5E581829545BE700A53960 /* Env */; };
+		9F6028562B3F36AE00476078 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6028552B3F36AE00476078 /* AppView.swift */; };
+		9F6028582B3F3B7600476078 /* ToolbarTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6028572B3F3B7600476078 /* ToolbarTab.swift */; };
 		9F654BEF299AC45B00D27FA5 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F654BEE299AC45B00D27FA5 /* ReportView.swift */; };
 		9F7335EA2966B3F800AFF0BA /* Conversations in Frameworks */ = {isa = PBXBuildFile; productRef = 9F7335E92966B3F800AFF0BA /* Conversations */; };
 		9F7335ED2967463400AFF0BA /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F7335EB2967461B00AFF0BA /* AVKit.framework */; };
@@ -84,8 +86,6 @@
 		9FB143D12983104700A27BB1 /* glass.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9F2A542B296B1177009B2D7C /* glass.caf */; };
 		9FB143D22983104A00A27BB1 /* glass.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9F2A542D296B1CC0009B2D7C /* glass.wav */; };
 		9FB183222AE9268800BBB692 /* IceCubesApp+Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB183212AE9268800BBB692 /* IceCubesApp+Menu.swift */; };
-		9FB183252AE926E900BBB692 /* IceCubesApp+Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB183242AE926E900BBB692 /* IceCubesApp+Sidebar.swift */; };
-		9FB183272AE9279F00BBB692 /* IceCubesApp+Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB183262AE9279F00BBB692 /* IceCubesApp+Tabbar.swift */; };
 		9FB183292AE9449100BBB692 /* IceCubesApp+Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB183282AE9449100BBB692 /* IceCubesApp+Scene.swift */; };
 		9FBFE63D292A715500C250E9 /* IceCubesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBFE63C292A715500C250E9 /* IceCubesApp.swift */; };
 		9FBFE64E292A72BD00C250E9 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 9FBFE64D292A72BD00C250E9 /* Network */; };
@@ -206,6 +206,8 @@
 		9F55C68C2955968700F94077 /* ExploreTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreTab.swift; sourceTree = "<group>"; };
 		9F55C68E295598F900F94077 /* Explore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Explore; path = Packages/Explore; sourceTree = "<group>"; };
 		9F5E581729545B5500A53960 /* Env */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Env; path = Packages/Env; sourceTree = "<group>"; };
+		9F6028552B3F36AE00476078 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		9F6028572B3F3B7600476078 /* ToolbarTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarTab.swift; sourceTree = "<group>"; };
 		9F62216829A68DA4007B77CA /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9F654BEE299AC45B00D27FA5 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		9F7335E82966B3DC00AFF0BA /* Conversations */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Conversations; path = Packages/Conversations; sourceTree = "<group>"; };
@@ -225,8 +227,6 @@
 		9FAE4AC8293774FF00772766 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9FAE4ACA293783B000772766 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		9FB183212AE9268800BBB692 /* IceCubesApp+Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IceCubesApp+Menu.swift"; sourceTree = "<group>"; };
-		9FB183242AE926E900BBB692 /* IceCubesApp+Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IceCubesApp+Sidebar.swift"; sourceTree = "<group>"; };
-		9FB183262AE9279F00BBB692 /* IceCubesApp+Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IceCubesApp+Tabbar.swift"; sourceTree = "<group>"; };
 		9FB183282AE9449100BBB692 /* IceCubesApp+Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IceCubesApp+Scene.swift"; sourceTree = "<group>"; };
 		9FBFE639292A715500C250E9 /* Ice Cubes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ice Cubes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FBFE63C292A715500C250E9 /* IceCubesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceCubesApp.swift; sourceTree = "<group>"; };
@@ -432,6 +432,7 @@
 				9F4A48182976B21900A1A038 /* ProfileTab.swift */,
 				9F15D5FF2B3D6A850008C220 /* NavigationTab.swift */,
 				9F15D6032B3DC2180008C220 /* NavigationSheet.swift */,
+				9F6028572B3F3B7600476078 /* ToolbarTab.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -441,9 +442,8 @@
 			children = (
 				9FBFE63C292A715500C250E9 /* IceCubesApp.swift */,
 				9FB183212AE9268800BBB692 /* IceCubesApp+Menu.swift */,
-				9FB183242AE926E900BBB692 /* IceCubesApp+Sidebar.swift */,
-				9FB183262AE9279F00BBB692 /* IceCubesApp+Tabbar.swift */,
 				9FB183282AE9449100BBB692 /* IceCubesApp+Scene.swift */,
+				9F6028552B3F36AE00476078 /* AppView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -822,14 +822,12 @@
 			files = (
 				9FE151A6293C90F900E9683D /* IconSelectorView.swift in Sources */,
 				9FB183222AE9268800BBB692 /* IceCubesApp+Menu.swift in Sources */,
-				9FB183252AE926E900BBB692 /* IceCubesApp+Sidebar.swift in Sources */,
 				9F7D939A29805DBD00EE6B7A /* AccountSettingView.swift in Sources */,
 				069709AA298C9AD7006E4CB5 /* AboutView.swift in Sources */,
 				9F2B92FC295DA94500DE16D0 /* InstanceInfoView.swift in Sources */,
 				C9B22677297F6C2E001F9EFE /* ContentSettingsView.swift in Sources */,
 				9F15D6042B3DC2180008C220 /* NavigationSheet.swift in Sources */,
 				9FA6FD6229C04A8800E2312C /* TranslationSettingsView.swift in Sources */,
-				9FB183272AE9279F00BBB692 /* IceCubesApp+Tabbar.swift in Sources */,
 				9F35DB4C2952005C00B3281A /* MessagesTab.swift in Sources */,
 				9FAD85CF2975B68900496AB1 /* SideBarView.swift in Sources */,
 				9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */,
@@ -850,9 +848,11 @@
 				9F654BEF299AC45B00D27FA5 /* ReportView.swift in Sources */,
 				D08A9C3529956CFA00204A4A /* SwipeActionsSettingsView.swift in Sources */,
 				9F7335F22967608F00AFF0BA /* AddRemoteTimelineView.swift in Sources */,
+				9F6028562B3F36AE00476078 /* AppView.swift in Sources */,
 				9F55C68D2955968700F94077 /* ExploreTab.swift in Sources */,
 				9F1E8B47298EBCBB00609F80 /* HapticSettingsView.swift in Sources */,
 				9F2A5411296A1429009B2D7C /* PushNotificationsView.swift in Sources */,
+				9F6028582B3F3B7600476078 /* ToolbarTab.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

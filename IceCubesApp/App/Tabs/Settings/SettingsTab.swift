@@ -14,6 +14,7 @@ import Timeline
 struct SettingsTabs: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(\.modelContext) private var context
+  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
   @Environment(PushNotificationsService.self) private var pushNotifications
   @Environment(UserPreferences.self) private var preferences
@@ -160,7 +161,7 @@ struct SettingsTabs: View {
       NavigationLink(destination: SwipeActionsSettingsView()) {
         Label("settings.general.swipeactions", systemImage: "hand.draw")
       }
-      if UIDevice.current.userInterfaceIdiom == .phone {
+      if UIDevice.current.userInterfaceIdiom == .phone || horizontalSizeClass == .compact {
         NavigationLink(destination: TabbarEntriesSettingsView()) {
           Label("settings.general.tabbarEntries", systemImage: "platter.filled.bottom.iphone")
         }

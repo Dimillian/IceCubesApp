@@ -6,7 +6,7 @@ import SwiftUI
 extension IceCubesApp {
   var appScene: some Scene {
     WindowGroup(id: "MainWindow") {
-      appView
+      AppView(selectedTab: $selectedTab, sidebarRouterPath: $sidebarRouterPath)
         .applyTheme(theme)
         .onAppear {
           setNewClientsInEnv(client: appAccountsManager.currentClient)
@@ -60,15 +60,6 @@ extension IceCubesApp {
       if newValue.isAuth {
         watcher.watch(streams: [.user, .direct])
       }
-    }
-  }
-
-  @ViewBuilder
-  private var appView: some View {
-    if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
-      sidebarView
-    } else {
-      tabBarView
     }
   }
 

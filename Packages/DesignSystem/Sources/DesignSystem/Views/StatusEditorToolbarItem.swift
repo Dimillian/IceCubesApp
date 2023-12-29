@@ -12,6 +12,15 @@ public extension View {
 }
 
 @MainActor
+public extension ToolbarContent {
+  func statusEditorToolbarItem(routerPath _: RouterPath,
+                               visibility: Models.Visibility) -> some ToolbarContent
+  {
+    StatusEditorToolbarItem(visibility: visibility)
+  }
+}
+
+@MainActor
 public struct StatusEditorToolbarItem: ToolbarContent {
   @Environment(\.openWindow) private var openWindow
   @Environment(RouterPath.self) private var routerPath
