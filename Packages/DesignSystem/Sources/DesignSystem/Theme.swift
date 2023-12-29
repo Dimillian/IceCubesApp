@@ -293,6 +293,8 @@ import SwiftUI
       MediumDark(),
       ConstellationLight(),
       ConstellationDark(),
+      ThreadsLight(),
+      ThreadsDark()
     ]
   }
 

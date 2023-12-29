@@ -6,7 +6,8 @@ public let availableColorsSets: [ColorSetCouple] =
    .init(light: DesertLight(), dark: DesertDark()),
    .init(light: NemesisLight(), dark: NemesisDark()),
    .init(light: MediumLight(), dark: MediumDark()),
-   .init(light: ConstellationLight(), dark: ConstellationDark())]
+   .init(light: ConstellationLight(), dark: ConstellationDark()),
+   .init(light: ThreadsLight(), dark: ThreadsDark())]
 
 public protocol ColorSet {
   var name: ColorSetName { get }
@@ -34,6 +35,8 @@ public enum ColorSetName: String {
   case mediumDark = "Medium - Dark"
   case constellationLight = "Constellation - Light"
   case constellationDark = "Constellation - Dark"
+  case threadsLight = "Threads - Light"
+  case threadsDark = "Threads - Dark"
 }
 
 public struct ColorSetCouple: Identifiable {
@@ -176,3 +179,26 @@ public struct ConstellationLight: ColorSet {
 
   public init() {}
 }
+
+public struct ThreadsDark: ColorSet {
+  public var name: ColorSetName = .threadsDark
+  public var scheme: ColorScheme = .dark
+  public var tintColor: Color = .init(hex: 0x0095F6)
+  public var primaryBackgroundColor: Color = .init(hex: 0x101010)
+  public var secondaryBackgroundColor: Color = .init(hex: 0x181818)
+  public var labelColor: Color = .init(hex: 0xE2E4E2)
+
+  public init() {}
+}
+
+public struct ThreadsLight: ColorSet {
+  public var name: ColorSetName = .threadsLight
+  public var scheme: ColorScheme = .light
+  public var tintColor: Color = .init(hex: 0x0095F6)
+  public var primaryBackgroundColor: Color = .init(hex: 0xFFFFFF)
+  public var secondaryBackgroundColor: Color = .init(hex: 0xFFFFFF)
+  public var labelColor: Color = .black
+
+  public init() {}
+}
+
