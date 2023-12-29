@@ -9,6 +9,32 @@ IceCubesApp is an open-source application for accessing the decentralized social
 
 You can connect to any Mastodon instance, browse your timeline, interact with other users, and post updates and media.
 
+## Features
+
+### Timeline
+
+<img src="Images/timeline1.png" />
+<img src="Images/timeline2.png" />
+<img src="Images/timeline3.png" />
+
+* A navigation bar title menu lets you easily swap between your home, local, federated, and trending timeline.
+* You can also easily access your lists, followed tags, and tag groups.
+* Tag groups are custom timelines made of multiple tags, a feature unique to Ice Cubes.
+* You can also add a remote local timeline. A helpful feature to browse the public timeline of other instances.
+* Ice Cubes rely heavily on the streaming events of Mastodon to do stuff like showing new posts live in the home timeline and editing and deleting your posts.
+* The timeline sync is semi-automatic; your position is sent to the Mastodon marker API, and from another device running Ice Cubes, you can resume your home timeline position.
+* The home timeline is cached using the third-party library [Bodega](https://github.com/mergesort/Bodega). A lite SQLite wrappers. The current position is saved in user default, so when you switch accounts or launch the app, your cached home timeline and position are restored. Then new posts will be fetched and displayed with an unread counter.
+
+`Code` -> Status & Timeline package
+
+### Notifications
+
+### Explore / Search
+
+### Direct Messages
+
+### Multi Accounts
+
 The project is split into different Swift Packages to make managing and maintaining the codebase easier. Each package focuses on a specific application aspect, such as the UI, network communication, or data models. This modular approach allows for easier collaboration and ensures the code is organized and easily understood.
 
 It's a great starting point for learning SwiftUI. The app covers many of the basic concepts of SwiftUI, such as building layouts, working with data, and handling user interaction. By exploring the code, you can understand how to use SwiftUI in your daily life. Plus, the open-source nature of IceCubesApp means you can see how real-world applications are built and get a sense of best practices for using SwiftUI.
@@ -17,7 +43,7 @@ The architecture is straightforward MVVM for most parts, there is no redux on th
 
 Thanks!
 
-![Icon](IceCubesApp/Assets.xcassets/AppIcon.appiconset/144.png?)
+<img src="Images/AppIcon.png" />
 
 ## Building the project
 
