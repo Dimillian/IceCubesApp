@@ -194,10 +194,12 @@ struct StatusRowActionsView: View {
             .imageScale(.medium)
             .font(.scaledBody)
             .fontWeight(.black)
+            .contentShape(Rectangle())
         } else {
           action
             .image(dataController: statusDataController, privateBoost: privateBoost())
             .font(.scaledBody)
+            .contentShape(Rectangle())
         }
       }
       .buttonStyle(
