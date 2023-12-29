@@ -30480,7 +30480,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "iPad"
+            "value" : "iPad-ean"
           }
         },
         "fr" : {
@@ -30592,7 +30592,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "iPhone"
+            "value" : "iPhone-ean"
           }
         },
         "fr" : {
@@ -47018,7 +47018,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tabs Customizations"
+            "value" : "Erlaitzen hobespenak"
           }
         },
         "fr" : {
@@ -47490,7 +47490,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fitxak hautatzean"
+            "value" : "Erlaitzak hautatzean"
           }
         },
         "fr" : {
@@ -55402,7 +55402,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fifth Tab"
+            "value" : "Bosgarren erlaitza"
           }
         },
         "fr" : {
@@ -55520,7 +55520,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "First Tab"
+            "value" : "Lehen erlaitza"
           }
         },
         "fr" : {
@@ -55638,7 +55638,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fourth Tab"
+            "value" : "Laugarren erlaitza"
           }
         },
         "fr" : {
@@ -55756,7 +55756,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Second Tab"
+            "value" : "Bigarren erlaitza"
           }
         },
         "fr" : {
