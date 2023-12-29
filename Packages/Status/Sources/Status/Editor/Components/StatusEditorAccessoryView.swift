@@ -267,6 +267,7 @@ struct StatusEditorAccessoryView: View {
     return false
   }
 
+  #if !os(visionOS)
   @ViewBuilder
   private var giphyView: some View {
     @Bindable var viewModel = focusedSEVM
@@ -280,6 +281,7 @@ struct StatusEditorAccessoryView: View {
       isGIFPickerPresented = false
     }
   }
+  #endif
 
   private var draftsListView: some View {
     DraftsListView(selectedDraft: .init(get: {
