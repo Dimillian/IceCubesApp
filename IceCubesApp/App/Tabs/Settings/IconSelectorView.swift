@@ -29,7 +29,7 @@ struct IconSelectorView: View {
     case alt37
     case alt38, alt39
     case alt40, alt41, alt42
-    case alt43, alt44, alt45, alt46, alt47, alt48, alt49
+    case alt43, alt44, alt45, alt46, alt47, alt48, alt49, alt50, alt51
 
     var appIconName: String {
       return "AppIconAlternate\(rawValue)"
@@ -42,10 +42,10 @@ struct IconSelectorView: View {
     let icons: [Icon]
 
     static let items = [
-      IconSelector(title: "settings.app.icon.official".localized, icons: [.primary, .alt1, .alt2, .alt3, .alt4, .alt5, .alt6, .alt7, .alt8,
+      IconSelector(title: "settings.app.icon.official".localized, icons: [.primary, .alt50, .alt1, .alt2, .alt3, .alt4, .alt5, .alt6, .alt7, .alt8,
                                                                           .alt9, .alt10, .alt11, .alt12, .alt13, .alt14,
                                                                           .alt15, .alt16, .alt17, .alt18, .alt19, .alt25,
-                                                                          .alt43, .alt44, .alt45, .alt46, .alt47]),
+                                                                          .alt43, .alt44, .alt45, .alt46, .alt47, .alt51]),
       IconSelector(title: "\("settings.app.icon.designed-by".localized) Albert Kinng", icons: [.alt20, .alt21, .alt22, .alt23, .alt24]),
       IconSelector(title: "\("settings.app.icon.designed-by".localized) Dan van Moll", icons: [.alt26, .alt27, .alt28]),
       IconSelector(title: "\("settings.app.icon.designed-by".localized) Chanhwi Joo (GitHub @te6-in)", icons: [.alt29, .alt34, .alt31, .alt35, .alt30, .alt32, .alt40]),
