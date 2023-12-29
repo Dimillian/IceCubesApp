@@ -23,11 +23,12 @@ It has a dedicated UI with a sidebar on macOS and iPadOS.
 * Tag groups are custom timelines made of multiple tags, a feature unique to Ice Cubes.
 * Quote post!
 * You can also add a remote local timeline. A helpful feature to browse the public timeline of other instances. Another Ice Cubes only feature.
-* Ice Cubes rely heavily on the streaming events of Mastodon to do stuff like showing new posts live in the home timeline and editing and deleting your posts.
+* Ice Cubes relies heavily on the streaming events of Mastodon to do stuff like showing new posts live in the home timeline and editing and deleting your posts.
 * The timeline sync is semi-automatic; your position is sent to the Mastodon marker API, and from another device running Ice Cubes, you can resume your home timeline position.
 * The home timeline is cached using the third-party library [Bodega](https://github.com/mergesort/Bodega). A lite SQLite wrappers. The current position is saved in user default, so when you switch accounts or launch the app, your cached home timeline and position are restored. Then new posts will be fetched and displayed with an unread counter.
 * iCloud sync of tag groups, remote timelines and drafts.
 * Server side filters support.
+* Create and switch to your lists.
 
 `Code` -> Status & Timeline package
 
@@ -116,6 +117,19 @@ It has a dedicated UI with a sidebar on macOS and iPadOS.
 * The account token is securely stored in the keychain.
 
 `Code` -> Account & AppAcount packages
+
+### Other
+
+<img src="Images/more.png" />
+
+* You can support this project with tips in the app and Github sponsoring.
+* Massive amount of customization settings.
+* You can tweak the display settings like the font, line spacing, status actions buttons, etc...
+* Many built-in themes.
+* Make your theme.
+* Customize your swipe gestures.
+* Customize your tabbar entries.
+* Sound & haptic feedback support.
 
 ## A note on the architecture
 
