@@ -11007,7 +11007,7 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Gehitu kontua"
           }
         },
@@ -36502,7 +36502,7 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Bultzadak"
           }
         },
@@ -36860,7 +36860,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jakinarazpen guztiak"
+            "value" : "Guztiak"
           }
         },
         "fr" : {
@@ -38392,7 +38392,7 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Gehitu kontua"
           }
         },
@@ -43121,8 +43121,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Max reply indentation: %@"
+            "state" : "translated",
+            "value" : "Gehienezko koska: %@"
           }
         },
         "fr" : {
@@ -44184,8 +44184,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Account on Hover"
+            "state" : "translated",
+            "value" : "Erakutsi kontua sagua gainetik pasatzean"
           }
         },
         "fr" : {
@@ -44421,8 +44421,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show reply indentation"
+            "state" : "translated",
+            "value" : "Erakutsi koska erantzunetan"
           }
         },
         "fr" : {
@@ -44751,8 +44751,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Secondary status action"
+            "state" : "translated",
+            "value" : "Sekundäre Statusaktion"
           }
         },
         "en" : {
@@ -44775,8 +44775,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Secondary status action"
+            "state" : "translated",
+            "value" : "Bigarren egoeraren ekintza"
           }
         },
         "fr" : {
@@ -46994,7 +46994,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tabs Customizations"
+            "value" : "Tabs anpassen"
           }
         },
         "en" : {
@@ -50557,8 +50557,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+            "state" : "translated",
+            "value" : "Freskatze azkarrak denbora-lerroko katxea itzaltzen du; denbora-lerroa berriro atzitzen du hasierako jariora bueltatu edo aplikaziora itzultzean."
           }
         },
         "fr" : {
@@ -55871,6 +55871,12 @@
             "value" : "Third Tab"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hirugarren erlaitza"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -59190,8 +59196,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Select Text"
+            "state" : "translated",
+            "value" : "Hautatu testua"
           }
         },
         "fr" : {
@@ -62642,8 +62648,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Type your follow-up content here."
+            "state" : "translated",
+            "value" : "Idatzi hariaren jarraipena hemen."
           }
         },
         "fr" : {
@@ -69927,7 +69933,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mentions"
+            "value" : "Erwähnungen"
           }
         },
         "en" : {
@@ -73397,8 +73403,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Resume"
+            "state" : "translated",
+            "value" : "Fortsetzen"
           }
         },
         "en" : {
@@ -73421,8 +73427,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Resume"
+            "state" : "translated",
+            "value" : "Jarraitu"
           }
         },
         "fr" : {
