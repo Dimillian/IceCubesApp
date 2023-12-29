@@ -27,6 +27,7 @@ struct AboutView: View {
   var body: some View {
     List {
       Section {
+        #if !targetEnvironment(macCatalyst)
         HStack {
           Spacer()
           Image(uiImage: .init(named: "AppIconAlternate0")!)
@@ -47,6 +48,7 @@ struct AboutView: View {
             .cornerRadius(4)
           Spacer()
         }
+        #endif
         Link(destination: URL(string: "https://github.com/Dimillian/IceCubesApp/blob/main/PRIVACY.MD")!) {
           Label("settings.support.privacy-policy", systemImage: "lock")
         }
