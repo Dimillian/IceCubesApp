@@ -13,14 +13,12 @@ You can connect to any Mastodon instance, browse your timeline, interact with ot
 
 ### Timeline
 
-<img src="Images/timeline1.png" />
-<img src="Images/timeline2.png" />
-<img src="Images/timeline3.png" />
+<img src="Images/timeline.png" />
 
 * A navigation bar title menu lets you easily swap between your home, local, federated, and trending timeline.
 * You can also easily access your lists, followed tags, and tag groups.
 * Tag groups are custom timelines made of multiple tags, a feature unique to Ice Cubes.
-* You can also add a remote local timeline. A helpful feature to browse the public timeline of other instances.
+* You can also add a remote local timeline. A helpful feature to browse the public timeline of other instances. Another Ice Cubes only feature.
 * Ice Cubes rely heavily on the streaming events of Mastodon to do stuff like showing new posts live in the home timeline and editing and deleting your posts.
 * The timeline sync is semi-automatic; your position is sent to the Mastodon marker API, and from another device running Ice Cubes, you can resume your home timeline position.
 * The home timeline is cached using the third-party library [Bodega](https://github.com/mergesort/Bodega). A lite SQLite wrappers. The current position is saved in user default, so when you switch accounts or launch the app, your cached home timeline and position are restored. Then new posts will be fetched and displayed with an unread counter.
@@ -28,6 +26,21 @@ You can connect to any Mastodon instance, browse your timeline, interact with ot
 `Code` -> Status & Timeline package
 
 ### Notifications
+
+<img src="Images/notifications.png" />
+
+* Full support for push notifications.
+* Ice Cubes runs its proxy between Mastodon and APNS, which is necessary for Mastodon to route push notifications to the user's device.
+* Push notifications are never and can't be read by the proxy.
+* Push notifications content/body is decoded on the device. Look for `NotificationServiceSupport`
+* Push notifications are rich, and use Apple INSendMessageIntent API for contact pictures.
+* Push notifications are grouped by activities, like mentions, favorites, boosts, etc...
+* Notifications within the app are also grouped/stacked.
+* You can select which kind of push notifications you want to receive within the app.
+* Route to the correct post and switch to the proper account when taping notifications.
+
+
+`Code` -> Notifications package and NotificationService extension.
 
 ### Explore / Search
 
