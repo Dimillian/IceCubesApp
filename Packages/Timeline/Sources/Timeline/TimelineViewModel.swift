@@ -18,15 +18,7 @@ import SwiftUI
     didSet {
       timelineTask?.cancel()
       timelineTask = Task {
-        if timeline == .latest || timeline == .resume {
-          if oldValue == .home {
-            await clearHomeCache()
-          }
-          if timeline == .resume, let marker = await fetchMarker() {
-            self.marker = marker
-          }
-          timeline = oldValue
-        }
+        await handleLatestOrResume(oldValue)
         
         if oldValue != timeline {
           await reset()
@@ -102,6 +94,18 @@ import SwiftUI
 
   func reset() async {
     await datasource.reset()
+  }
+  
+  private func handleLatestOrResume(_ oldValue: TimelineFilter) async {
+    if timeline == .latest || timeline == .resume {
+      if oldValue == .home {
+        await clearHomeCache()
+      }
+      if timeline == .resume, let marker = await fetchMarker() {
+        self.marker = marker
+      }
+      timeline = oldValue
+    }
   }
 
   func handleEvent(event: any StreamEvent) async {
