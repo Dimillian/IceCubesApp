@@ -48,8 +48,8 @@ public struct TimelineView: View {
       ZStack(alignment: .top) {
         List {
           scrollToTopView
-          tagGroupHeaderView
-          tagHeaderView
+          TimelineTagGroupheaderView(group: $selectedTagGroup, timeline: $viewModel.timeline)
+          TimelineTagHeaderView(tag: $viewModel.tag)
           switch viewModel.timeline {
           case .remoteLocal:
             StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath, isRemote: true)
@@ -155,86 +155,6 @@ public struct TimelineView: View {
         break
       }
     }
-  }
-
-  @ViewBuilder
-  private var tagHeaderView: some View {
-    if let tag = viewModel.tag {
-      headerView {
-        HStack {
-          TagChartView(tag: tag)
-            .padding(.top, 12)
-
-          VStack(alignment: .leading, spacing: 4) {
-            Text("#\(tag.name)")
-              .font(.scaledHeadline)
-            Text("timeline.n-recent-from-n-participants \(tag.totalUses) \(tag.totalAccounts)")
-              .font(.scaledFootnote)
-              .foregroundStyle(.secondary)
-          }
-          .accessibilityElement(children: .combine)
-          Spacer()
-          Button {
-            Task {
-              if tag.following {
-                viewModel.tag = await account.unfollowTag(id: tag.name)
-              } else {
-                viewModel.tag = await account.followTag(id: tag.name)
-              }
-            }
-          } label: {
-            Text(tag.following ? "account.follow.following" : "account.follow.follow")
-          }.buttonStyle(.bordered)
-        }
-      }
-    }
-  }
-
-  @ViewBuilder
-  private var tagGroupHeaderView: some View {
-    if let group = selectedTagGroup {
-      headerView {
-        HStack {
-          ScrollView(.horizontal) {
-            HStack(spacing: 4) {
-              ForEach(group.tags, id: \.self) { tag in
-                Button {
-                  routerPath.navigate(to: .hashTag(tag: tag, account: nil))
-                } label: {
-                  Text("#\(tag)")
-                    .font(.scaledHeadline)
-                }
-                .buttonStyle(.plain)
-              }
-            }
-          }
-          .scrollIndicators(.hidden)
-          Button("status.action.edit") {
-            routerPath.presentedSheet = .editTagGroup(tagGroup: group, onSaved: { group in
-              viewModel.timeline = .tagGroup(title: group.title, tags: group.tags)
-            })
-          }
-          .buttonStyle(.bordered)
-        }
-      }
-    }
-  }
-
-  @ViewBuilder
-  private func headerView(
-    @ViewBuilder content: () -> some View
-  ) -> some View {
-    VStack(alignment: .leading) {
-      Spacer()
-      content()
-      Spacer()
-    }
-    .listRowBackground(theme.secondaryBackgroundColor)
-    .listRowSeparator(.hidden)
-    .listRowInsets(.init(top: 8,
-                         leading: .layoutPadding,
-                         bottom: 8,
-                         trailing: .layoutPadding))
   }
 
   @ToolbarContentBuilder
