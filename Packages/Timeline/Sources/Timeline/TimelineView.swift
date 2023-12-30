@@ -122,8 +122,10 @@ public struct TimelineView: View {
       SoundEffectManager.shared.playSound(.refresh)
     }
     .onChange(of: watcher.latestEvent?.id) {
-      if let latestEvent = watcher.latestEvent {
-        viewModel.handleEvent(event: latestEvent, currentAccount: account)
+      Task {
+        if let latestEvent = watcher.latestEvent {
+          await viewModel.handleEvent(event: latestEvent)
+        }
       }
     }
     .onChange(of: timeline) { _, newValue in

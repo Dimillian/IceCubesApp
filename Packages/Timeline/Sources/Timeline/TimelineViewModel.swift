@@ -54,14 +54,10 @@ import SwiftUI
   var tag: Tag?
 
   // Internal source of truth for a timeline.
-  private var datasource = TimelineDatasource()
+  private(set) var datasource = TimelineDatasource()
   private let cache = TimelineCache()
   private var visibileStatusesIds = Set<String>()
   private var canStreamEvents: Bool = true
-
-  private var accountId: String? {
-    CurrentAccount.shared.account?.id
-  }
 
   var client: Client? {
     didSet {
@@ -108,35 +104,33 @@ import SwiftUI
     await datasource.reset()
   }
 
-  func handleEvent(event: any StreamEvent, currentAccount _: CurrentAccount) {
-    Task {
-      if let event = event as? StreamEventUpdate,
-         timeline == .home,
-         canStreamEvents,
-         isTimelineVisible,
-         await !datasource.contains(statusId: event.status.id)
-      {
-        pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
-        let newStatus = event.status
-        await datasource.insert(newStatus, at: 0)
+  func handleEvent(event: any StreamEvent) async {
+    if let event = event as? StreamEventUpdate,
+       timeline == .home,
+       canStreamEvents,
+       isTimelineVisible,
+       await !datasource.contains(statusId: event.status.id)
+    {
+      pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
+      let newStatus = event.status
+      await datasource.insert(newStatus, at: 0)
+      await cacheHome()
+      let statuses = await datasource.get()
+      withAnimation {
+        statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+      }
+    } else if let event = event as? StreamEventDelete {
+      await datasource.remove(event.status)
+      await cacheHome()
+      let statuses = await datasource.get()
+      withAnimation {
+        statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+      }
+    } else if let event = event as? StreamEventStatusUpdate {
+      if let originalIndex = await datasource.indexOf(statusId: event.status.id) {
+        await datasource.replace(event.status, at: originalIndex)
         await cacheHome()
-        let statuses = await datasource.get()
-        withAnimation {
-          statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
-        }
-      } else if let event = event as? StreamEventDelete {
-        await datasource.remove(event.status)
-        await cacheHome()
-        let statuses = await datasource.get()
-        withAnimation {
-          statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
-        }
-      } else if let event = event as? StreamEventStatusUpdate {
-        if let originalIndex = await datasource.indexOf(statusId: event.status.id) {
-          await datasource.replace(event.status, at: originalIndex)
-          await cacheHome()
-          statusesState = await .display(statuses: datasource.get(), nextPageState: .hasNextPage)
-        }
+        statusesState = await .display(statuses: datasource.get(), nextPageState: .hasNextPage)
       }
     }
   }

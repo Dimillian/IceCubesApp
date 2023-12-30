@@ -30558,6 +30558,7 @@
       }
     },
     "iPhone" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
