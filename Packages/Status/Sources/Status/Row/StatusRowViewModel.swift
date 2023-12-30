@@ -39,7 +39,7 @@ import SwiftUI
   var isLoadingRemoteContent: Bool = false
   var localStatusId: String?
   var localStatus: Status?
-  
+
   private var scrollToId = nil as Binding<String?>?
 
   // The relationship our user has to the author of this post, if available
@@ -199,9 +199,9 @@ import SwiftUI
       routerPath.navigate(to: .accountDetail(id: mention.id))
     }
   }
-  
+
   func goToParent() {
-    guard let id = status.inReplyToId else {return}
+    guard let id = status.inReplyToId else { return }
     if let _ = scrollToId {
       scrollToId?.wrappedValue = id
     } else {

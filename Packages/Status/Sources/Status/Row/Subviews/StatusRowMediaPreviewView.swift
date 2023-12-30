@@ -22,12 +22,16 @@ public struct StatusRowMediaPreviewView: View {
   @State private var isQuickLookLoading: Bool = false
 
   var availableWidth: CGFloat {
+    #if os(visionOS)
+      return sceneDelegate.windowWidth * 0.96
+    #else
     if UIDevice.current.userInterfaceIdiom == .phone &&
       (UIDevice.current.orientation == .landscapeLeft || UIDevice.current.orientation == .landscapeRight) || theme.statusDisplayStyle == .medium
     {
       return sceneDelegate.windowWidth * 0.80
     }
     return sceneDelegate.windowWidth
+    #endif
   }
 
   var appLayoutWidth: CGFloat {
@@ -102,19 +106,19 @@ public struct StatusRowMediaPreviewView: View {
   }
 
   private func tabAction(for index: Int) {
-#if targetEnvironment(macCatalyst)
+    #if targetEnvironment(macCatalyst)
       openWindow(
         value: WindowDestinationMedia.mediaViewer(
           attachments: attachments,
           selectedAttachment: attachments[index]
         )
       )
-#else
+    #else
       quickLook.prepareFor(
         selectedMediaAttachment: attachments[index],
         mediaAttachments: attachments
       )
-#endif
+    #endif
   }
 
   private static func accessibilityLabel(for attachment: MediaAttachment) -> Text {
@@ -137,16 +141,16 @@ private struct MediaPreview: View {
   @Environment(\.isCompact) private var isCompact: Bool
 
   var body: some View {
-    GeometryReader { proxy in
+    GeometryReader { _ in
       switch displayData.type {
       case .image:
-        LazyResizableImage(url: displayData.previewUrl) { state, proxy in
-          let width = isCompact ? imageMaxHeight : proxy.frame(in: .local).width
+        LazyResizableImage(url: displayData.previewUrl) { state, _ in
           if let image = state.image {
             image
               .resizable()
               .aspectRatio(contentMode: .fill)
-              .frame(maxWidth: width, maxHeight: imageMaxHeight)
+              .frame(width: displayData.isLandscape ? imageMaxHeight * 1.2 : imageMaxHeight / 1.5,
+                     height: imageMaxHeight)
               .overlay(
                 RoundedRectangle(cornerRadius: 4)
                   .stroke(.gray.opacity(0.35), lineWidth: 1)
@@ -154,7 +158,6 @@ private struct MediaPreview: View {
           } else if state.isLoading {
             RoundedRectangle(cornerRadius: 4)
               .fill(Color.gray)
-              .frame(maxWidth: width, maxHeight: imageMaxHeight)
           }
         }
         .overlay {
@@ -165,12 +168,11 @@ private struct MediaPreview: View {
         }
       case .av:
         MediaUIAttachmentVideoView(viewModel: .init(url: displayData.url))
-          .frame(width: isCompact ? imageMaxHeight : proxy.frame(in: .local).width)
-          .frame(height: imageMaxHeight)
           .accessibilityAddTraits(.startsMediaSession)
       }
     }
-    .frame(width: imageMaxHeight / 1.5, height: imageMaxHeight)
+    .frame(width: displayData.isLandscape ? imageMaxHeight * 1.2 : imageMaxHeight / 1.5,
+           height: imageMaxHeight)
     .clipped()
     .cornerRadius(4)
     // #965: do not create overlapping tappable areas, when multiple images are shown
@@ -251,7 +253,7 @@ private struct FeaturedImagePreView: View {
     let boxWidth = availableWidth - appLayoutWidth
     let boxHeight = availableHeight * 0.8 // use only 80% of window height to leave room for text
 
-    if from.width <= boxWidth && from.height <= boxHeight {
+    if from.width <= boxWidth, from.height <= boxHeight {
       // intrinsic size of image fits just fine
       return from
     }
@@ -407,6 +409,7 @@ private struct DisplayData: Identifiable, Hashable {
   let description: String?
   let type: DisplayType
   let accessibilityText: String
+  let isLandscape: Bool
 
   init?(from attachment: MediaAttachment) {
     guard let url = attachment.url else { return nil }
@@ -418,6 +421,7 @@ private struct DisplayData: Identifiable, Hashable {
     description = attachment.description
     self.type = DisplayType(from: type)
     accessibilityText = Self.getAccessibilityString(from: attachment)
+    isLandscape = (attachment.meta?.original?.width ?? 0) > (attachment.meta?.original?.height ?? 0)
   }
 
   private static func getAccessibilityString(from attachment: MediaAttachment) -> String {

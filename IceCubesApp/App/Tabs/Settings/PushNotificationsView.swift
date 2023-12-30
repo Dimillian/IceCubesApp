@@ -33,7 +33,9 @@ struct PushNotificationsView: View {
       } footer: {
         Text("settings.push.main-toggle.description")
       }
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
 
       if subscription.isEnabled {
         Section {
@@ -86,7 +88,9 @@ struct PushNotificationsView: View {
             Label("settings.push.new-posts", systemImage: "bubble.right")
           }
         }
+        #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
+        #endif
       }
 
       Section {
@@ -101,11 +105,15 @@ struct PushNotificationsView: View {
       } footer: {
         Text("settings.push.duplicate.footer")
       }
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
     }
     .navigationTitle("settings.push.navigation-title")
+    #if !os(visionOS)
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
+    #endif
     .task {
       await subscription.fetchSubscription()
     }

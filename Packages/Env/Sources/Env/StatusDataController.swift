@@ -90,7 +90,9 @@ public final class StatusDataControllerProvider {
     isFavorited.toggle()
     let id = remoteStatus ?? status.id
     let endpoint = isFavorited ? Statuses.favorite(id: id) : Statuses.unfavorite(id: id)
-    favoritesCount += isFavorited ? 1 : -1
+    withAnimation(.default) {
+      favoritesCount += isFavorited ? 1 : -1
+    }
     do {
       let status: Status = try await client.post(endpoint: endpoint)
       updateFrom(status: status)
@@ -105,7 +107,9 @@ public final class StatusDataControllerProvider {
     isReblogged.toggle()
     let id = remoteStatus ?? status.id
     let endpoint = isReblogged ? Statuses.reblog(id: id) : Statuses.unreblog(id: id)
-    reblogsCount += isReblogged ? 1 : -1
+    withAnimation(.default) {
+      reblogsCount += isReblogged ? 1 : -1
+    }
     do {
       let status: Status = try await client.post(endpoint: endpoint)
       updateFrom(status: status.reblog ?? status)

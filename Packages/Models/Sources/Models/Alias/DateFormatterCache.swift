@@ -10,6 +10,8 @@ class DateFormatterCache: @unchecked Sendable {
   init() {
     let createdAtRelativeFormatter = RelativeDateTimeFormatter()
     createdAtRelativeFormatter.unitsStyle = .short
+    createdAtRelativeFormatter.formattingContext = .listItem
+    createdAtRelativeFormatter.dateTimeStyle = .numeric
     self.createdAtRelativeFormatter = createdAtRelativeFormatter
 
     let createdAtShortDateFormatted = DateFormatter()

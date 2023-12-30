@@ -6,7 +6,7 @@ import SwiftUI
 extension IceCubesApp {
   var appScene: some Scene {
     WindowGroup(id: "MainWindow") {
-      appView
+      AppView(selectedTab: $selectedTab, sidebarRouterPath: $sidebarRouterPath)
         .applyTheme(theme)
         .onAppear {
           setNewClientsInEnv(client: appAccountsManager.currentClient)
@@ -63,15 +63,6 @@ extension IceCubesApp {
     }
   }
 
-  @ViewBuilder
-  private var appView: some View {
-    if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
-      sidebarView
-    } else {
-      tabBarView
-    }
-  }
-
   @SceneBuilder
   var otherScenes: some Scene {
     WindowGroup(for: WindowDestinationEditor.self) { destination in
@@ -96,7 +87,7 @@ extension IceCubesApp {
     }
     .defaultSize(width: 600, height: 800)
     .windowResizability(.contentMinSize)
-    
+
     WindowGroup(for: WindowDestinationMedia.self) { destination in
       Group {
         switch destination.wrappedValue {

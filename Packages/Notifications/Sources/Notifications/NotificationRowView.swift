@@ -94,44 +94,50 @@ struct NotificationRowView: View {
           .frame(height: AvatarView.FrameConfig.status.size.height + 2)
         }.offset(y: -1)
       }
-      HStack(spacing: 0) {
-        EmojiTextApp(.init(stringValue: notification.accounts[0].safeDisplayName),
-                     emojis: notification.accounts[0].emojis,
-                     append: {
-                       (notification.accounts.count > 1
-                         ? Text("notifications-others-count \(notification.accounts.count - 1)")
-                         .font(.scaledSubheadline)
-                         .fontWeight(.regular)
-                         : Text(" ")) +
-                         Text(type.label(count: notification.accounts.count))
-                         .font(.scaledSubheadline)
-                         .fontWeight(.regular) +
-                         Text(" ⸱ ")
-                         .font(.scaledFootnote)
-                         .fontWeight(.regular)
-                         .foregroundStyle(.secondary) +
-                         Text(notification.createdAt.relativeFormatted)
-                         .font(.scaledFootnote)
-                         .fontWeight(.regular)
-                         .foregroundStyle(.secondary)
-                     })
-                     .font(.scaledSubheadline)
-                     .emojiSize(Font.scaledSubheadlineFont.emojiSize)
-                     .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
-                     .fontWeight(.semibold)
-                     .lineLimit(3)
-                     .fixedSize(horizontal: false, vertical: true)
-        if let status = notification.status, notification.type == .mention {
-          Group {
-            Text(" ⸱ ")
-            Text(Image(systemName: status.visibility.iconName))
+      if !reasons.contains(.placeholder) {
+        HStack(spacing: 0) {
+          EmojiTextApp(.init(stringValue: notification.accounts[0].safeDisplayName),
+                       emojis: notification.accounts[0].emojis,
+                       append: {
+                         (notification.accounts.count > 1
+                           ? Text("notifications-others-count \(notification.accounts.count - 1)")
+                           .font(.scaledSubheadline)
+                           .fontWeight(.regular)
+                           : Text(" ")) +
+                           Text(type.label(count: notification.accounts.count))
+                           .font(.scaledSubheadline)
+                           .fontWeight(.regular) +
+                           Text(" ⸱ ")
+                           .font(.scaledFootnote)
+                           .fontWeight(.regular)
+                           .foregroundStyle(.secondary) +
+                           Text(notification.createdAt.relativeFormatted)
+                           .font(.scaledFootnote)
+                           .fontWeight(.regular)
+                           .foregroundStyle(.secondary)
+                       })
+                       .font(.scaledSubheadline)
+                       .emojiSize(Font.scaledSubheadlineFont.emojiSize)
+                       .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
+                       .fontWeight(.semibold)
+                       .lineLimit(3)
+                       .fixedSize(horizontal: false, vertical: true)
+          if let status = notification.status, notification.type == .mention {
+            Group {
+              Text(" ⸱ ")
+              Text(Image(systemName: status.visibility.iconName))
+            }
+            .accessibilityHidden(true)
+            .font(.scaledFootnote)
+            .fontWeight(.regular)
+            .foregroundStyle(.secondary)
           }
-          .accessibilityHidden(true)
-          .font(.scaledFootnote)
-          .fontWeight(.regular)
-          .foregroundStyle(.secondary)
+          Spacer()
         }
-        Spacer()
+      } else {
+        Text("          ")
+          .font(.scaledSubheadline)
+          .fontWeight(.semibold)
       }
     }
     .contentShape(Rectangle())

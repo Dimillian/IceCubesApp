@@ -1,13 +1,16 @@
 import DesignSystem
-import SwiftUI
 import Env
+import SwiftUI
 
 struct StatusRowTagView: View {
   @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(\.isHomeTimeline) private var isHomeTimeline
+  
   let viewModel: StatusRowViewModel
 
   var body: some View {
-    if let tag = viewModel.finalStatus.content.links.first(where: { link in
+    if isHomeTimeline,
+        let tag = viewModel.finalStatus.content.links.first(where: { link in
       link.type == .hashtag && currentAccount.tags.contains(where: { $0.name.lowercased() == link.title.lowercased() })
     }) {
       Text("#\(tag.title)")

@@ -19,7 +19,10 @@ struct ContentSettingsView: View {
         Toggle(isOn: $userPreferences.suppressDupeReblogs) {
           Text("settings.content.hide-repeated-boosts")
         }
-      }.listRowBackground(theme.primaryBackgroundColor)
+      }
+      #if !os(visionOS)
+      .listRowBackground(theme.primaryBackgroundColor)
+      #endif
 
       Section("settings.content.media") {
         Toggle(isOn: $userPreferences.autoPlayVideo) {
@@ -28,7 +31,10 @@ struct ContentSettingsView: View {
         Toggle(isOn: $userPreferences.showAltTextForMedia) {
           Text("settings.content.media.show.alt")
         }
-      }.listRowBackground(theme.primaryBackgroundColor)
+      }
+      #if !os(visionOS)
+      .listRowBackground(theme.primaryBackgroundColor)
+      #endif
 
       Section("settings.content.sharing") {
         Picker("settings.content.sharing.share-button-behavior", selection: $userPreferences.shareButtonBehavior) {
@@ -38,14 +44,18 @@ struct ContentSettingsView: View {
           }
         }
       }
+       #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
 
       Section("settings.content.instance-settings") {
         Toggle(isOn: $userPreferences.useInstanceContentSettings) {
           Text("settings.content.use-instance-settings")
         }
       }
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
       .onChange(of: userPreferences.useInstanceContentSettings) { _, newVal in
         if newVal {
           userPreferences.appAutoExpandSpoilers = userPreferences.autoExpandSpoilers
@@ -76,7 +86,9 @@ struct ContentSettingsView: View {
       } footer: {
         Text("settings.content.collapse-long-posts-hint")
       }
+       #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
 
       Section("settings.content.posting") {
         Picker("settings.content.default-visibility", selection: $userPreferences.appDefaultPostVisibility) {
@@ -104,11 +116,14 @@ struct ContentSettingsView: View {
         }
         .disabled(userPreferences.useInstanceContentSettings)
       }
-
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
     }
     .navigationTitle("settings.content.navigation-title")
+    #if !os(visionOS)
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
+    #endif
   }
 }

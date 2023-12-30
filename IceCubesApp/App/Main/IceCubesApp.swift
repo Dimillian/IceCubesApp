@@ -26,16 +26,11 @@ struct IceCubesApp: App {
   @State var watcher = StreamWatcher()
   @State var quickLook = QuickLook.shared
   @State var theme = Theme.shared
-  @State var sidebarRouterPath = RouterPath()
-
+  
   @State var selectedTab: Tab = .timeline
-  @State var popToRootTab: Tab = .other
-  @State var sideBarLoadedTabs: Set<Tab> = Set()
+  @State var sidebarRouterPath = RouterPath()
+  
   @State var isSupporter: Bool = false
-
-  var availableTabs: [Tab] {
-    appAccountsManager.currentClient.isAuth ? Tab.loggedInTabs() : Tab.loggedOutTab()
-  }
 
   var body: some Scene {
     appScene

@@ -59,6 +59,8 @@ import SwiftUI
     @AppStorage("max_reply_indentation") public var maxReplyIndentation: UInt = 7
     @AppStorage("show_reply_indentation") public var showReplyIndentation: Bool = true
 
+    @AppStorage("show_account_popover") public var showAccountPopover: Bool = true
+
     init() {}
   }
 
@@ -313,6 +315,12 @@ import SwiftUI
     }
   }
 
+  public var showAccountPopover: Bool {
+    didSet {
+      storage.showAccountPopover = showAccountPopover
+    }
+  }
+
   public func getRealMaxIndent() -> UInt {
     showReplyIndentation ? maxReplyIndentation : 0
   }
@@ -485,6 +493,7 @@ import SwiftUI
     fastRefreshEnabled = storage.fastRefreshEnabled
     maxReplyIndentation = storage.maxReplyIndentation
     showReplyIndentation = storage.showReplyIndentation
+    showAccountPopover = storage.showAccountPopover
   }
 }
 

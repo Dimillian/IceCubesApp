@@ -3,6 +3,7 @@ import Foundation
 import Models
 import Observation
 import SwiftUI
+import DesignSystem
 
 @MainActor
 @Observable class PendingStatusesObserver {
@@ -13,7 +14,9 @@ import SwiftUI
 
   var pendingStatuses: [String] = [] {
     didSet {
-      pendingStatusesCount = pendingStatuses.count
+      withAnimation(.default) {
+        pendingStatusesCount = pendingStatuses.count
+      }
     }
   }
 
@@ -30,21 +33,34 @@ import SwiftUI
 struct PendingStatusesObserverView: View {
   @State var observer: PendingStatusesObserver
   @Environment(UserPreferences.self) private var preferences
+  @Environment(Theme.self) private var theme
+  
   var body: some View {
     if observer.pendingStatusesCount > 0 {
       Button {
         observer.scrollToIndex?(observer.pendingStatusesCount)
       } label: {
         Text("\(observer.pendingStatusesCount)")
+          .contentTransition(.numericText(value: Double(observer.pendingStatusesCount)))
           // Accessibility: this results in a frame with a size of at least 44x44 at regular font size
-          .frame(minWidth: 30, minHeight: 30)
+          .frame(minWidth: 16, minHeight: 16)
+          .font(.footnote.monospacedDigit())
       }
       .accessibilityLabel("accessibility.tabs.timeline.unread-posts.label-\(observer.pendingStatusesCount)")
       .accessibilityHint("accessibility.tabs.timeline.unread-posts.hint")
+      #if os(visionOS)
+      .buttonStyle(.bordered)
+      .tint(Material.thick)
+      #else
       .buttonStyle(.bordered)
       .background(.thinMaterial)
+      #endif
       .cornerRadius(8)
-      .padding(12)
+      .overlay(
+        RoundedRectangle(cornerRadius: 8)
+          .stroke(theme.tintColor, lineWidth: 1)
+      )
+      .padding(8)
       .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: preferences.pendingLocation)
     }
   }

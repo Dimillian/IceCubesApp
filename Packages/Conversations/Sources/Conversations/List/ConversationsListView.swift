@@ -81,16 +81,12 @@ public struct ConversationsListView: View {
         }
         .padding(.top, .layoutPadding)
       }
+      #if !os(visionOS)
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
+      #endif
       .navigationTitle("conversations.navigation-title")
       .navigationBarTitleDisplayMode(.inline)
-      .toolbar {
-        StatusEditorToolbarItem(visibility: .direct)
-        if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn {
-          SecondaryColumnToolbarItem()
-        }
-      }
       .onChange(of: watcher.latestEvent?.id) {
         if let latestEvent = watcher.latestEvent {
           viewModel.handleEvent(event: latestEvent)

@@ -87,7 +87,7 @@ import Observation
       tags = []
     }
   }
-  
+
   public func deleteList(list: Models.List) async {
     guard let client else { return }
     lists.removeAll(where: { $0.id == list.id })

@@ -115,7 +115,9 @@ struct AccountSettingsView: View {
       cachedPostsCount = await timelineCache.cachedPostsCount(for: appAccountsManager.currentClient.id)
     }
     .navigationTitle(account.safeDisplayName)
+    #if !os(visionOS)
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
+    #endif
   }
 }

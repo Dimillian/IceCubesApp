@@ -55,20 +55,20 @@ struct StatusRowContextMenu: View {
               systemImage: "bookmark")
       }
       Button {
-#if targetEnvironment(macCatalyst)
-        openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: viewModel.status))
-#else
-        viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
-#endif
+        #if targetEnvironment(macCatalyst)
+          openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: viewModel.status))
+        #else
+          viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
+        #endif
       } label: {
         Label("status.action.reply", systemImage: "arrowshape.turn.up.left")
       }
       Button {
-#if targetEnvironment(macCatalyst)
-        openWindow(value: WindowDestinationEditor.quoteStatusEditor(status: viewModel.status))
-#else
-        viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
-#endif
+        #if targetEnvironment(macCatalyst)
+          openWindow(value: WindowDestinationEditor.quoteStatusEditor(status: viewModel.status))
+        #else
+          viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
+        #endif
       } label: {
         Label("status.action.quote", systemImage: "quote.bubble")
       }
@@ -171,11 +171,11 @@ struct StatusRowContextMenu: View {
         }
         if currentInstance.isEditSupported {
           Button {
-#if targetEnvironment(macCatalyst)
-            openWindow(value: WindowDestinationEditor.editStatusEditor(status: viewModel.status.reblogAsAsStatus ?? viewModel.status))
-#else
-            viewModel.routerPath.presentedSheet = .editStatusEditor(status: viewModel.status.reblogAsAsStatus ?? viewModel.status)
-#endif
+            #if targetEnvironment(macCatalyst)
+              openWindow(value: WindowDestinationEditor.editStatusEditor(status: viewModel.status.reblogAsAsStatus ?? viewModel.status))
+            #else
+              viewModel.routerPath.presentedSheet = .editStatusEditor(status: viewModel.status.reblogAsAsStatus ?? viewModel.status)
+            #endif
           } label: {
             Label("status.action.edit", systemImage: "pencil")
           }
@@ -307,7 +307,7 @@ struct SelectTextView: View {
 struct SelectableText: UIViewRepresentable {
   let content: AttributedString
 
-  func makeUIView(context: Context) -> UITextView {
+  func makeUIView(context _: Context) -> UITextView {
     let attributedText = NSMutableAttributedString(content)
     attributedText.addAttribute(
       .font,
@@ -323,6 +323,6 @@ struct SelectableText: UIViewRepresentable {
     return textView
   }
 
-  func updateUIView(_ uiView: UITextView, context: Context) {}
-  func makeCoordinator() -> Void {}
+  func updateUIView(_: UITextView, context _: Context) {}
+  func makeCoordinator() {}
 }

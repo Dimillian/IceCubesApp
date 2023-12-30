@@ -5,6 +5,7 @@ public struct Tag: Codable, Identifiable, Equatable, Hashable {
     public var id: String {
       day
     }
+
     public let day: String
     public let accounts: String
     public let uses: String

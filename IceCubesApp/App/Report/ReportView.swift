@@ -35,9 +35,11 @@ public struct ReportView: View {
       }
       .navigationTitle("report.title")
       .navigationBarTitleDisplayMode(.inline)
+      #if !os(visionOS)
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
       .scrollDismissesKeyboard(.immediately)
+      #endif
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button {

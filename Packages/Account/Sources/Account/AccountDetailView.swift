@@ -84,8 +84,10 @@ public struct AccountDetailView: View {
       }
       .environment(\.defaultMinListRowHeight, 1)
       .listStyle(.plain)
+      #if !os(visionOS)
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
+      #endif
       .onChange(of: scrollToTopSignal) {
         withAnimation {
           proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
@@ -216,7 +218,9 @@ public struct AccountDetailView: View {
                   .padding(.leading, -4)
                   .accessibilityLabel(account.safeDisplayName)
 
-              }.accessibilityAddTraits(.isImage)
+              }
+              .accessibilityAddTraits(.isImage)
+              .buttonStyle(.plain)
             }
           }
           .padding(.leading, .layoutPadding + 4)
@@ -235,7 +239,9 @@ public struct AccountDetailView: View {
           Spacer()
           Image(systemName: "chevron.right")
         }
+        #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
+        #endif
       }
     }.task {
       await currentAccount.fetchFollowedTags()
@@ -250,7 +256,9 @@ public struct AccountDetailView: View {
             .font(.scaledHeadline)
             .foregroundColor(theme.labelColor)
         }
+        #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
+        #endif
         .contextMenu {
           Button("account.list.delete", role: .destructive) {
             Task {
@@ -264,7 +272,9 @@ public struct AccountDetailView: View {
       }
       .tint(theme.tintColor)
       .buttonStyle(.borderless)
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
     }
     .task {
       await currentAccount.fetchLists()
@@ -284,7 +294,9 @@ public struct AccountDetailView: View {
                              bottom: 0,
                              trailing: .layoutPadding))
         .listRowSeparator(.hidden)
+        #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
+        #endif
       ForEach(viewModel.pinned) { status in
         StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
       }
@@ -403,7 +415,9 @@ extension View {
   func applyAccountDetailsRowStyle(theme: Theme) -> some View {
     listRowInsets(.init())
       .listRowSeparator(.hidden)
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
   }
 }
 

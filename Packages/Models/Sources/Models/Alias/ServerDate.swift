@@ -6,19 +6,28 @@ private enum CodingKeys: CodingKey {
 
 public struct ServerDate: Codable, Hashable, Equatable, Sendable {
   public let asDate: Date
+  private let isOlderThanADay: Bool
 
   public var relativeFormatted: String {
-    DateFormatterCache.shared.createdAtRelativeFormatter.localizedString(for: asDate, relativeTo: Date())
+    let date = asDate
+    if isOlderThanADay {
+      return DateFormatterCache.shared.createdAtRelativeFormatter.localizedString(for: date,
+                                                                                  relativeTo: Date())
+    } else {
+      return Duration.seconds(-date.timeIntervalSinceNow).formatted(.units(width: .narrow,
+                                                                     maximumUnitCount: 1))
+    }
   }
 
   public var shortDateFormatted: String {
     DateFormatterCache.shared.createdAtShortDateFormatted.string(from: asDate)
   }
-
+  
   private static let calendar = Calendar(identifier: .gregorian)
 
   public init() {
     asDate = Date() - 100
+    isOlderThanADay = false
   }
 
   public init(from decoder: Decoder) throws {
@@ -32,6 +41,9 @@ public struct ServerDate: Codable, Hashable, Equatable, Sendable {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       asDate = try container.decode(Date.self, forKey: .asDate)
     }
+    
+    let aDay: TimeInterval = 60 * 60 * 24
+    isOlderThanADay = Date().timeIntervalSince(asDate) >= aDay
   }
 
   public func encode(to encoder: Encoder) throws {

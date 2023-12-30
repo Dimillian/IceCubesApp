@@ -16,7 +16,6 @@ public struct StatusRowView: View {
   @Environment(\.accessibilityVoiceOverEnabled) private var accessibilityVoiceOverEnabled
   @Environment(\.isStatusFocused) private var isFocused
   @Environment(\.indentationLevel) private var indentationLevel
-  @Environment(\.isHomeTimeline) private var isHomeTimeline
 
   @Environment(QuickLook.self) private var quickLook
   @Environment(Theme.self) private var theme
@@ -36,7 +35,7 @@ public struct StatusRowView: View {
     HStack(spacing: 0) {
       if !isCompact {
         HStack(spacing: 3) {
-          ForEach(0..<indentationLevel, id: \.self) { level in
+          ForEach(0 ..< indentationLevel, id: \.self) { level in
             Rectangle()
               .fill(theme.tintColor)
               .frame(width: 2)
@@ -48,7 +47,7 @@ public struct StatusRowView: View {
           Spacer(minLength: 8)
         }
       }
-      VStack(alignment: .leading) {
+      VStack(alignment: .leading, spacing: .statusComponentSpacing) {
         if viewModel.isFiltered, let filter = viewModel.filter {
           switch filter.filter.filterAction {
           case .warn:
@@ -57,12 +56,13 @@ public struct StatusRowView: View {
             EmptyView()
           }
         } else {
-          if !isCompact, theme.avatarPosition == .leading {
+          if !isCompact {
             Group {
+              StatusRowTagView(viewModel: viewModel)
               StatusRowReblogView(viewModel: viewModel)
               StatusRowReplyView(viewModel: viewModel)
             }
-            .padding(.leading, AvatarView.FrameConfig.status.width + .statusColumnsSpacing)
+            .padding(.leading, theme.avatarPosition == .top ? 0 : AvatarView.FrameConfig.status.width + .statusColumnsSpacing)
           }
           HStack(alignment: .top, spacing: .statusColumnsSpacing) {
             if !isCompact,
@@ -74,45 +74,32 @@ public struct StatusRowView: View {
                 AvatarView(viewModel.finalStatus.account.avatar)
               }
             }
-            VStack(alignment: .leading) {
-              if !isCompact, theme.avatarPosition == .top {
-                StatusRowReblogView(viewModel: viewModel)
-                StatusRowReplyView(viewModel: viewModel)
-                if isHomeTimeline {
-                  StatusRowTagView(viewModel: viewModel)
-                }
+            VStack(alignment: .leading, spacing: .statusComponentSpacing) {
+              if !isCompact {
+                StatusRowHeaderView(viewModel: viewModel)
               }
-              VStack(alignment: .leading, spacing: 8) {
-                if !isCompact {
-                  StatusRowHeaderView(viewModel: viewModel)
+              StatusRowContentView(viewModel: viewModel)
+                .contentShape(Rectangle())
+                .onTapGesture {
+                  guard !isFocused else { return }
+                  viewModel.navigateToDetail()
                 }
-                StatusRowContentView(viewModel: viewModel)
+                .accessibilityActions {
+                  if isFocused, viewModel.showActions {
+                    accessibilityActions
+                  }
+                }
+              if !reasons.contains(.placeholder),
+                  viewModel.showActions, isFocused || theme.statusActionsDisplay != .none,
+                 !isInCaptureMode {
+                StatusRowActionsView(viewModel: viewModel)
+                  .tint(isFocused ? theme.tintColor : .gray)
                   .contentShape(Rectangle())
-                  .onTapGesture {
-                    guard !isFocused else { return }
-                    viewModel.navigateToDetail()
-                  }
-                  .accessibilityActions {
-                    if isFocused, viewModel.showActions {
-                      accessibilityActions
-                    }
-                  }
+                  .padding(.top, 6)
               }
-              VStack(alignment: .leading, spacing: 12) {
-                if viewModel.showActions, isFocused || theme.statusActionsDisplay != .none, !isInCaptureMode {
-                  StatusRowActionsView(viewModel: viewModel)
-                    .padding(.top, 8)
-                    .tint(isFocused ? theme.tintColor : .gray)
-                    .contentShape(Rectangle())
-                    .onTapGesture {
-                      guard !isFocused else { return }
-                      viewModel.navigateToDetail()
-                    }
-                }
 
-                if isFocused, !isCompact {
-                  StatusRowDetailView(viewModel: viewModel)
-                }
+              if isFocused, !isCompact {
+                StatusRowDetailView(viewModel: viewModel)
               }
             }
           }
@@ -121,7 +108,7 @@ public struct StatusRowView: View {
     }
     .onAppear {
       viewModel.markSeen()
-      if reasons.isEmpty {
+      if !reasons.contains(.placeholder) {
         if !isCompact, viewModel.embeddedStatus == nil {
           Task {
             await viewModel.loadEmbeddedStatus()
@@ -149,7 +136,13 @@ public struct StatusRowView: View {
         StatusRowSwipeView(viewModel: viewModel, mode: .leading)
       }
     }
+    #if os(visionOS)
+    .listRowBackground(RoundedRectangle(cornerRadius: 8)
+      .foregroundStyle(Material.regular))
+    .listRowHoverEffect(.lift)
+    #else
     .listRowBackground(viewModel.highlightRowColor)
+    #endif
     .listRowInsets(.init(top: 12,
                          leading: .layoutPadding,
                          bottom: 12,
@@ -163,7 +156,7 @@ public struct StatusRowView: View {
       viewModel.navigateToDetail()
     }
     .accessibilityActions {
-      if isFocused == false, viewModel.showActions {
+      if !isFocused, viewModel.showActions, accessibilityVoiceOverEnabled {
         accessibilityActions
       }
     }
@@ -225,13 +218,14 @@ public struct StatusRowView: View {
       Button("accessibility.status.media-viewer-action.label") {
         HapticManager.shared.fireHaptic(.notification(.success))
         let attachments = viewModel.finalStatus.mediaAttachments
-#if targetEnvironment(macCatalyst)
-        openWindow(value: WindowDestinationMedia.mediaViewer(
-          attachments: attachments,
-          selectedAttachment: attachments[0]))
-#else
-        quickLook.prepareFor(selectedMediaAttachment: attachments[0], mediaAttachments: attachments)
-#endif
+        #if targetEnvironment(macCatalyst)
+          openWindow(value: WindowDestinationMedia.mediaViewer(
+            attachments: attachments,
+            selectedAttachment: attachments[0]
+          ))
+        #else
+          quickLook.prepareFor(selectedMediaAttachment: attachments[0], mediaAttachments: attachments)
+        #endif
       }
     }
 

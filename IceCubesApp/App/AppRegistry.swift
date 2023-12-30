@@ -33,11 +33,13 @@ extension View {
         ConversationDetailView(conversation: conversation)
       case let .hashTag(tag, accountId):
         TimelineView(timeline: .constant(.hashtag(tag: tag, accountId: accountId)),
+                     pinnedFilters: .constant([]),
                      selectedTagGroup: .constant(nil),
                      scrollToTopSignal: .constant(0),
                      canFilterTimeline: false)
       case let .list(list):
         TimelineView(timeline: .constant(.list(list: list)),
+                     pinnedFilters: .constant([]),
                      selectedTagGroup: .constant(nil),
                      scrollToTopSignal: .constant(0),
                      canFilterTimeline: false)
@@ -53,6 +55,7 @@ extension View {
         AccountsListView(mode: .accountsList(accounts: accounts))
       case .trendingTimeline:
         TimelineView(timeline: .constant(.trending),
+                     pinnedFilters: .constant([]),
                      selectedTagGroup: .constant(nil),
                      scrollToTopSignal: .constant(0),
                      canFilterTimeline: false)
@@ -97,10 +100,14 @@ extension View {
             .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
         case .accountPushNotficationsSettings:
           if let subscription = PushNotificationsService.shared.subscriptions.first(where: { $0.account.token == AppAccountsManager.shared.currentAccount.oauthToken }) {
-            PushNotificationsView(subscription: subscription)
+            NavigationSheet { PushNotificationsView(subscription: subscription) }
           } else {
             EmptyView()
           }
+        case .about:
+          NavigationSheet { AboutView() }
+        case .support:
+          NavigationSheet { SupportAppView() }
         case let .report(status):
           ReportView(status: status)
         case let .shareImage(image, status):

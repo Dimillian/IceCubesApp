@@ -1,4 +1,3 @@
-import Accounts
 import AppAccount
 import DesignSystem
 import EmojiText
@@ -24,7 +23,7 @@ public struct StatusEditorView: View {
   @State private var scrollID: UUID?
 
   @FocusState private var editorFocusState: StatusEditorFocusState?
-  
+
   private var focusedSEVM: StatusEditorViewModel {
     if case let .followUp(id) = editorFocusState,
        let sevm = followUpSEVMs.first(where: { $0.id == id })
@@ -38,7 +37,7 @@ public struct StatusEditorView: View {
   }
 
   public var body: some View {
-    @Bindable var focusedSEVM = self.focusedSEVM
+    @Bindable var focusedSEVM = focusedSEVM
 
     NavigationStack {
       ScrollView {
@@ -54,7 +53,7 @@ public struct StatusEditorView: View {
           )
           .id(mainSEVM.id)
 
-          ForEach(followUpSEVMs) { sevm  in
+          ForEach(followUpSEVMs) { sevm in
             @Bindable var sevm: StatusEditorViewModel = sevm
 
             StatusEditorCoreView(
@@ -74,13 +73,21 @@ public struct StatusEditorView: View {
       .scrollPosition(id: $scrollID, anchor: .top)
       .animation(.bouncy(duration: 0.3), value: editorFocusState)
       .animation(.bouncy(duration: 0.3), value: followUpSEVMs)
+      #if !os(visionOS)
       .background(theme.primaryBackgroundColor)
+      #endif
       .safeAreaInset(edge: .bottom) {
         StatusEditorAutoCompleteView(viewModel: focusedSEVM)
       }
+      #if os(visionOS)
+      .ornament(attachmentAnchor: .scene(.bottom)) {
+        StatusEditorAccessoryView(isSpoilerTextFocused: $isSpoilerTextFocused, focusedSEVM: focusedSEVM, followUpSEVMs: $followUpSEVMs)
+          }
+      #else
       .safeAreaInset(edge: .bottom) {
         StatusEditorAccessoryView(isSpoilerTextFocused: $isSpoilerTextFocused, focusedSEVM: focusedSEVM, followUpSEVMs: $followUpSEVMs)
       }
+      #endif
       .accessibilitySortPriority(1) // Ensure that all elements inside the `ScrollView` occur earlier than the accessory views
       .navigationTitle(focusedSEVM.mode.title)
       .navigationBarTitleDisplayMode(.inline)
@@ -93,7 +100,8 @@ public struct StatusEditorView: View {
           Button("OK") {}
         }, message: {
           Text(mainSEVM.postingError ?? "")
-        })
+        }
+      )
       .interactiveDismissDisabled(mainSEVM.shouldDisplayDismissWarning)
       .onChange(of: appAccounts.currentClient) { _, newValue in
         if mainSEVM.mode.isInShareExtension {

@@ -1,7 +1,7 @@
-import SwiftUI
 import Env
 import Models
 import StoreKit
+import SwiftUI
 
 @MainActor
 struct StatusEditorToolbarItems: ToolbarContent {
@@ -12,11 +12,11 @@ struct StatusEditorToolbarItems: ToolbarContent {
 
   @Environment(\.modelContext) private var context
   @Environment(UserPreferences.self) private var preferences
-#if targetEnvironment(macCatalyst)
-  @Environment(\.dismissWindow) private var dismissWindow
-#else
-  @Environment(\.dismiss) private var dismiss
-#endif
+  #if targetEnvironment(macCatalyst)
+    @Environment(\.dismissWindow) private var dismissWindow
+  #else
+    @Environment(\.dismiss) private var dismiss
+  #endif
 
   var body: some ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
@@ -81,36 +81,39 @@ struct StatusEditorToolbarItems: ToolbarContent {
   private func postStatus(with model: StatusEditorViewModel, isMainPost: Bool) async -> Status? {
     let status = await model.postStatus()
 
-    if status != nil && isMainPost {
+    if status != nil, isMainPost {
       close()
       SoundEffectManager.shared.playSound(.tootSent)
       NotificationCenter.default.post(name: .shareSheetClose, object: nil)
-#if !targetEnvironment(macCatalyst)
-      if !mainSEVM.mode.isInShareExtension, !preferences.requestedReview {
-        if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
-          SKStoreReviewController.requestReview(in: scene)
+      #if !targetEnvironment(macCatalyst)
+        if !mainSEVM.mode.isInShareExtension, !preferences.requestedReview {
+          if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+            SKStoreReviewController.requestReview(in: scene)
+          }
+          preferences.requestedReview = true
         }
-        preferences.requestedReview = true
-      }
-#endif
+      #endif
     }
 
     return status
   }
 
   private func postAllStatus() async {
-    guard let openingPost = await postStatus(with: mainSEVM, isMainPost: true) else { return }
+    guard var latestPost = await postStatus(with: mainSEVM, isMainPost: true) else { return }
     for p in followUpSEVMs {
-      p.mode = .replyTo(status: openingPost)
-      await postStatus(with: p, isMainPost: false)
+      p.mode = .replyTo(status: latestPost)
+      guard let post = await postStatus(with: p, isMainPost: false) else {
+        break
+      }
+      latestPost = post
     }
   }
 
-#if targetEnvironment(macCatalyst)
-  private func close() { dismissWindow() }
-#else
-  private func close() { dismiss() }
-#endif
+  #if targetEnvironment(macCatalyst)
+    private func close() { dismissWindow() }
+  #else
+    private func close() { dismiss() }
+  #endif
 
   @ViewBuilder
   private var languageConfirmationDialog: some View {
