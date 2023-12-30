@@ -29,7 +29,8 @@ public enum RemoteTimelineFilter: String, CaseIterable, Hashable, Equatable {
   }
 }
 
-public enum TimelineFilter: Hashable, Equatable {
+public enum TimelineFilter: Hashable, Equatable, Identifiable {
+  
   case home, local, federated, trending
   case hashtag(tag: String, accountId: String?)
   case tagGroup(title: String, tags: [String])
@@ -38,6 +39,10 @@ public enum TimelineFilter: Hashable, Equatable {
   case latest
   case resume
 
+  public var id: String {
+    title
+  }
+  
   public func hash(into hasher: inout Hasher) {
     hasher.combine(title)
   }
@@ -204,7 +209,7 @@ extension TimelineFilter: Codable {
         accountId: accountId
       )
     case .tagGroup:
-      var nestedContainer = try container.nestedUnkeyedContainer(forKey: .hashtag)
+      var nestedContainer = try container.nestedUnkeyedContainer(forKey: .tagGroup)
       let title = try nestedContainer.decode(String.self)
       let tags = try nestedContainer.decode([String].self)
       self = .tagGroup(
@@ -259,7 +264,7 @@ extension TimelineFilter: Codable {
     case let .list(list):
       try container.encode(list, forKey: .list)
     case let .remoteLocal(server, filter):
-      var nestedContainer = container.nestedUnkeyedContainer(forKey: .hashtag)
+      var nestedContainer = container.nestedUnkeyedContainer(forKey: .remoteLocal)
       try nestedContainer.encode(server)
       try nestedContainer.encode(filter)
     case .latest:

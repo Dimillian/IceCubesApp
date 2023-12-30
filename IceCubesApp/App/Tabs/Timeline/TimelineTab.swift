@@ -29,6 +29,7 @@ struct TimelineTab: View {
   @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
 
   @AppStorage("last_timeline_filter") var lastTimelineFilter: TimelineFilter = .home
+  @AppStorage("timeline_pinned_filters") private var pinnedFilters: [TimelineFilter] = []
 
   private let canFilterTimeline: Bool
 
@@ -41,6 +42,7 @@ struct TimelineTab: View {
   var body: some View {
     NavigationStack(path: $routerPath.path) {
       TimelineView(timeline: $timeline,
+                   pinnedFilters: $pinnedFilters,
                    selectedTagGroup: $selectedTagGroup,
                    scrollToTopSignal: $scrollToTopSignal,
                    canFilterTimeline: canFilterTimeline)
@@ -119,96 +121,13 @@ struct TimelineTab: View {
 
   @ViewBuilder
   private var timelineFilterButton: some View {
-    if timeline.supportNewestPagination {
-      Button {
-        timeline = .latest
-      } label: {
-        Label(TimelineFilter.latest.localizedTitle(), systemImage: TimelineFilter.latest.iconName() ?? "")
-      }
-      if timeline == .home {
-        Button {
-          timeline = .resume
-        } label: {
-          VStack {
-            Label(TimelineFilter.resume.localizedTitle(),
-                  systemImage: TimelineFilter.resume.iconName() ?? "")
-          }
-        }
-      }
-      Divider()
-    }
-    ForEach(TimelineFilter.availableTimeline(client: client), id: \.self) { timeline in
-      Button {
-        self.timeline = timeline
-      } label: {
-        Label(timeline.localizedTitle(), systemImage: timeline.iconName() ?? "")
-      }
-    }
-    if !currentAccount.lists.isEmpty {
-      Menu("timeline.filter.lists") {
-        ForEach(currentAccount.sortedLists) { list in
-          Button {
-            timeline = .list(list: list)
-          } label: {
-            Label(list.title, systemImage: "list.bullet")
-          }
-        }
-        Button {
-          routerPath.presentedSheet = .listCreate
-        } label: {
-          Label("account.list.create", systemImage: "plus")
-        }
-      }
-    }
-
-    if !currentAccount.tags.isEmpty {
-      Menu("timeline.filter.tags") {
-        ForEach(currentAccount.sortedTags) { tag in
-          Button {
-            timeline = .hashtag(tag: tag.name, accountId: nil)
-          } label: {
-            Label("#\(tag.name)", systemImage: "number")
-          }
-        }
-      }
-    }
-
-    Menu("timeline.filter.local") {
-      ForEach(localTimelines) { remoteLocal in
-        Button {
-          timeline = .remoteLocal(server: remoteLocal.instance, filter: .local)
-        } label: {
-          VStack {
-            Label(remoteLocal.instance, systemImage: "dot.radiowaves.right")
-          }
-        }
-      }
-      Button {
-        routerPath.presentedSheet = .addRemoteLocalTimeline
-      } label: {
-        Label("timeline.filter.add-local", systemImage: "badge.plus.radiowaves.right")
-      }
-    }
-
-    Menu("timeline.filter.tag-groups") {
-      ForEach(tagGroups) { group in
-        Button {
-          selectedTagGroup = group
-          timeline = .tagGroup(title: group.title, tags: group.tags)
-        } label: {
-          VStack {
-            let icon = group.symbolName.isEmpty ? "number" : group.symbolName
-            Label(group.title, systemImage: icon)
-          }
-        }
-      }
-
-      Button {
-        routerPath.presentedSheet = .addTagGroup
-      } label: {
-        Label("timeline.filter.add-tag-groups", systemImage: "plus")
-      }
-    }
+    latestOrResumeButtons
+    pinMenuButton
+    timelineFiltersButtons
+    listsFiltersButons
+    tagsFiltersButtons
+    localTimelinesFiltersButtons
+    tagGroupsFiltersButtons
   }
 
   private var addAccountButton: some View {
@@ -260,6 +179,136 @@ struct TimelineTab: View {
     default:
       ToolbarItem {
         EmptyView()
+      }
+    }
+  }
+  
+  @ViewBuilder
+  private var latestOrResumeButtons: some View {
+    if timeline.supportNewestPagination {
+      Button {
+        timeline = .latest
+      } label: {
+        Label(TimelineFilter.latest.localizedTitle(), systemImage: TimelineFilter.latest.iconName() ?? "")
+      }
+      if timeline == .home {
+        Button {
+          timeline = .resume
+        } label: {
+          VStack {
+            Label(TimelineFilter.resume.localizedTitle(),
+                  systemImage: TimelineFilter.resume.iconName() ?? "")
+          }
+        }
+      }
+      Divider()
+    }
+  }
+  
+  @ViewBuilder
+  private var pinMenuButton: some View {
+    let index = pinnedFilters.firstIndex(where: { $0.id == timeline.id})
+    Button {
+      withAnimation {
+        if let index {
+          pinnedFilters.remove(at: index)
+        } else {
+          pinnedFilters.append(timeline)
+        }
+      }
+    } label: {
+      if index != nil  {
+        Label("status.action.unpin", systemImage: "pin.slash")
+      } else {
+        Label("status.action.pin", systemImage: "pin")
+      }
+    }
+    
+    Divider()
+  }
+  
+  private var timelineFiltersButtons: some View {
+    ForEach(TimelineFilter.availableTimeline(client: client), id: \.self) { timeline in
+      Button {
+        self.timeline = timeline
+      } label: {
+        Label(timeline.localizedTitle(), systemImage: timeline.iconName() ?? "")
+      }
+    }
+  }
+  
+  @ViewBuilder
+  private var listsFiltersButons: some View {
+    if !currentAccount.lists.isEmpty {
+      Menu("timeline.filter.lists") {
+        ForEach(currentAccount.sortedLists) { list in
+          Button {
+            timeline = .list(list: list)
+          } label: {
+            Label(list.title, systemImage: "list.bullet")
+          }
+        }
+        Button {
+          routerPath.presentedSheet = .listCreate
+        } label: {
+          Label("account.list.create", systemImage: "plus")
+        }
+      }
+    }
+  }
+  
+  @ViewBuilder
+  private var tagsFiltersButtons: some View {
+    if !currentAccount.tags.isEmpty {
+      Menu("timeline.filter.tags") {
+        ForEach(currentAccount.sortedTags) { tag in
+          Button {
+            timeline = .hashtag(tag: tag.name, accountId: nil)
+          } label: {
+            Label("#\(tag.name)", systemImage: "number")
+          }
+        }
+      }
+    }
+  }
+  
+  private var localTimelinesFiltersButtons: some View {
+    Menu("timeline.filter.local") {
+      ForEach(localTimelines) { remoteLocal in
+        Button {
+          timeline = .remoteLocal(server: remoteLocal.instance, filter: .local)
+        } label: {
+          VStack {
+            Label(remoteLocal.instance, systemImage: "dot.radiowaves.right")
+          }
+        }
+      }
+      Button {
+        routerPath.presentedSheet = .addRemoteLocalTimeline
+      } label: {
+        Label("timeline.filter.add-local", systemImage: "badge.plus.radiowaves.right")
+      }
+    }
+  }
+  
+  private var tagGroupsFiltersButtons: some View {
+    Menu("timeline.filter.tag-groups") {
+      ForEach(tagGroups) { group in
+        Button {
+          selectedTagGroup = group
+          timeline = .tagGroup(title: group.title, tags: group.tags)
+        } label: {
+          VStack {
+            let icon = group.symbolName.isEmpty ? "number" : group.symbolName
+            Label(group.title, systemImage: icon)
+          }
+        }
+      }
+
+      Button {
+        routerPath.presentedSheet = .addTagGroup
+      } label: {
+        Label("timeline.filter.add-tag-groups", systemImage: "plus")
       }
     }
   }

@@ -25,6 +25,7 @@ public struct TimelineView: View {
   @State private var collectionView: UICollectionView?
 
   @Binding var timeline: TimelineFilter
+  @Binding var pinnedFilters: [TimelineFilter]
   @Binding var selectedTagGroup: TagGroup?
   @Binding var scrollToTopSignal: Int
 
@@ -33,11 +34,13 @@ public struct TimelineView: View {
   private let canFilterTimeline: Bool
 
   public init(timeline: Binding<TimelineFilter>,
+              pinnedFilters: Binding<[TimelineFilter]>,
               selectedTagGroup: Binding<TagGroup?>,
               scrollToTopSignal: Binding<Int>,
               canFilterTimeline: Bool)
   {
     _timeline = timeline
+    _pinnedFilters = pinnedFilters
     _selectedTagGroup = selectedTagGroup
     _scrollToTopSignal = scrollToTopSignal
     self.canFilterTimeline = canFilterTimeline
@@ -48,7 +51,7 @@ public struct TimelineView: View {
       ZStack(alignment: .top) {
         List {
           scrollToTopView
-          TimelineTagGroupheaderView(group: $selectedTagGroup, timeline: $viewModel.timeline)
+          TimelineTagGroupheaderView(group: $selectedTagGroup, timeline: $timeline)
           TimelineTagHeaderView(tag: $viewModel.tag)
           switch viewModel.timeline {
           case .remoteLocal:
@@ -75,6 +78,14 @@ public struct TimelineView: View {
         }
         if viewModel.timeline.supportNewestPagination {
           PendingStatusesObserverView(observer: viewModel.pendingStatusesObserver)
+        }
+      }
+      .safeAreaInset(edge: .top) {
+        if canFilterTimeline, !pinnedFilters.isEmpty {
+          TimelineQuickAccessPills(pinnedFilters: $pinnedFilters, timeline: $timeline)
+            .padding(.vertical, 8)
+            .padding(.horizontal, .layoutPadding)
+            .background(theme.primaryBackgroundColor.opacity(0.50).background(Material.ultraThin))
         }
       }
       .onChange(of: viewModel.scrollToIndex) { _, newValue in
