@@ -10,6 +10,7 @@ struct TabbarEntriesSettingsView: View {
   @State private var tabs = iOSTabs.shared
 
   var body: some View {
+    @Bindable var userPreferences = userPreferences
     Form {
       Section {
         Picker("settings.tabs.first-tab", selection: $tabs.firstTab) {
@@ -37,6 +38,13 @@ struct TabbarEntriesSettingsView: View {
             tab.label.tag(tab)
           }
         }
+      }
+      #if !os(visionOS)
+      .listRowBackground(theme.primaryBackgroundColor)
+      #endif
+      
+      Section {
+        Toggle("settings.display.show-tab-label", isOn: $userPreferences.showiPhoneTabLabel)
       }
       #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)

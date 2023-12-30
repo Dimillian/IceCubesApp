@@ -241,14 +241,6 @@ struct DisplaySettingsView: View {
   @ViewBuilder
   private var platformsSection: some View {
     @Bindable var userPreferences = userPreferences
-    if UIDevice.current.userInterfaceIdiom == .phone {
-      Section("iPhone") {
-        Toggle("settings.display.show-tab-label", isOn: $userPreferences.showiPhoneTabLabel)
-      }
-      #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
-      #endif
-    }
 
     if UIDevice.current.userInterfaceIdiom == .pad {
       Section("iPad") {
