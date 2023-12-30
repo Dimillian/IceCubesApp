@@ -5,13 +5,18 @@ import Models
 
 @MainActor
 final class TimelineViewModelTests: XCTestCase {
-  func testStreamEventInsertNewStatus() async throws {
-    let subject = TimelineViewModel()
+  var subject = TimelineViewModel()
+  
+  override func setUp() async throws {
+    subject = TimelineViewModel()
     let client = Client(server: "localhost")
     subject.client = client
     subject.timeline = .home
     subject.isTimelineVisible = true
-        
+    subject.timelineTask?.cancel()
+  }
+  
+  func testStreamEventInsertNewStatus() async throws {
     let isEmpty = await subject.datasource.isEmpty
     XCTAssertTrue(isEmpty)
     await subject.datasource.append(.placeholder())
@@ -23,12 +28,6 @@ final class TimelineViewModelTests: XCTestCase {
   }
   
   func testStreamEventInsertDuplicateStatus() async throws {
-    let subject = TimelineViewModel()
-    let client = Client(server: "localhost")
-    subject.client = client
-    subject.timeline = .home
-    subject.isTimelineVisible = true
-        
     let isEmpty = await subject.datasource.isEmpty
     XCTAssertTrue(isEmpty)
     let status = Status.placeholder()
@@ -41,12 +40,6 @@ final class TimelineViewModelTests: XCTestCase {
   }
   
   func testStreamEventRemove() async throws {
-    let subject = TimelineViewModel()
-    let client = Client(server: "localhost")
-    subject.client = client
-    subject.timeline = .home
-    subject.isTimelineVisible = true
-        
     let isEmpty = await subject.datasource.isEmpty
     XCTAssertTrue(isEmpty)
     let status = Status.placeholder()
@@ -59,12 +52,6 @@ final class TimelineViewModelTests: XCTestCase {
   }
   
   func testStreamEventUpdateStatus() async throws {
-    let subject = TimelineViewModel()
-    let client = Client(server: "localhost")
-    subject.client = client
-    subject.timeline = .home
-    subject.isTimelineVisible = true
-        
     var status = Status.placeholder()
     let isEmpty = await subject.datasource.isEmpty
     XCTAssertTrue(isEmpty)

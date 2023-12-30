@@ -41,7 +41,7 @@ import SwiftUI
     }
   }
 
-  private var timelineTask: Task<Void, Never>?
+  private(set) var timelineTask: Task<Void, Never>?
 
   var tag: Tag?
 
@@ -133,8 +133,9 @@ import SwiftUI
     } else if let event = event as? StreamEventStatusUpdate {
       if let originalIndex = await datasource.indexOf(statusId: event.status.id) {
         await datasource.replace(event.status, at: originalIndex)
+        let statuses = await datasource.get()
         await cacheHome()
-        statusesState = await .display(statuses: datasource.get(), nextPageState: .hasNextPage)
+        statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
       }
     }
   }

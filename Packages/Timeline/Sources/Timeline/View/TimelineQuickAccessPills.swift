@@ -23,11 +23,6 @@ struct TimelineQuickAccessPills: View {
     }
     .scrollClipDisabled()
     .scrollIndicators(.never)
-    .listRowInsets(EdgeInsets(top: 8, leading: .layoutPadding, bottom: 8, trailing: .layoutPadding))
-#if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
-#endif
-    .listRowSeparator(.hidden)
   }
   
   @ViewBuilder
