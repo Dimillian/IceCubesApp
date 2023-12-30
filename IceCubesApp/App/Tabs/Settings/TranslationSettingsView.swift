@@ -21,8 +21,10 @@ struct TranslationSettingsView: View {
         .onAppear {
           readValue()
         }
+        #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
-
+        #endif
+        
         if apiKey.isEmpty {
           Section {
             Link(destination: URL(string: "https://www.deepl.com/pro-api")!) {
@@ -30,14 +32,18 @@ struct TranslationSettingsView: View {
                 .foregroundColor(.red)
             }
           }
+          #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)
+          #endif
         }
       }
       autoDetectSection
     }
     .navigationTitle("settings.translation.navigation-title")
+    #if !os(visionOS)
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
+    #endif
     .onChange(of: apiKey) {
       writeNewValue()
     }
@@ -50,7 +56,9 @@ struct TranslationSettingsView: View {
     Toggle(isOn: $preferences.alwaysUseDeepl) {
       Text("settings.translation.always-deepl")
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   @ViewBuilder

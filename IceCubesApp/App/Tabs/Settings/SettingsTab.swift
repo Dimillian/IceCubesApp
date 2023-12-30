@@ -14,6 +14,7 @@ import Timeline
 struct SettingsTabs: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(\.modelContext) private var context
+  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
   @Environment(PushNotificationsService.self) private var pushNotifications
   @Environment(UserPreferences.self) private var preferences
@@ -45,7 +46,9 @@ struct SettingsTabs: View {
         cacheSection
       }
       .scrollContentBackground(.hidden)
+      #if !os(visionOS)
       .background(theme.secondaryBackgroundColor)
+      #endif
       .navigationTitle(Text("settings.title"))
       .navigationBarTitleDisplayMode(.inline)
       .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
@@ -114,7 +117,9 @@ struct SettingsTabs: View {
       }
       addAccountButton
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   private func logoutAccount(account: AppAccount) async {
@@ -156,6 +161,11 @@ struct SettingsTabs: View {
       NavigationLink(destination: SwipeActionsSettingsView()) {
         Label("settings.general.swipeactions", systemImage: "hand.draw")
       }
+      if UIDevice.current.userInterfaceIdiom == .phone || horizontalSizeClass == .compact {
+        NavigationLink(destination: TabbarEntriesSettingsView()) {
+          Label("settings.general.tabbarEntries", systemImage: "platter.filled.bottom.iphone")
+        }
+      }
       NavigationLink(destination: TranslationSettingsView()) {
         Label("settings.general.translate", systemImage: "captions.bubble")
       }
@@ -166,13 +176,15 @@ struct SettingsTabs: View {
         .tint(theme.labelColor)
       #endif
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   @ViewBuilder
   private var otherSections: some View {
     @Bindable var preferences = preferences
-    Section("settings.section.other") {
+    Section {
       #if !targetEnvironment(macCatalyst)
         Picker(selection: $preferences.preferredBrowser) {
           ForEach(PreferredBrowser.allCases, id: \.rawValue) { browser in
@@ -203,19 +215,25 @@ struct SettingsTabs: View {
       Toggle(isOn: $preferences.fastRefreshEnabled) {
         Label("settings.other.fast-refresh", systemImage: "arrow.clockwise")
       }
+    } header: {
+      Text("settings.section.other")
+    } footer: {
+      Text("settings.section.other.footer")
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   private var appSection: some View {
     Section {
-      #if !targetEnvironment(macCatalyst)
+      #if !targetEnvironment(macCatalyst) && !os(visionOS)
         NavigationLink(destination: IconSelectorView()) {
           Label {
             Text("settings.app.icon")
           } icon: {
             let icon = IconSelectorView.Icon(string: UIApplication.shared.alternateIconName ?? "AppIcon")
-            Image(uiImage: .init(named: icon.iconName)!)
+            Image(uiImage: .init(named: icon.appIconName)!)
               .resizable()
               .frame(width: 25, height: 25)
               .cornerRadius(4)
@@ -252,7 +270,9 @@ struct SettingsTabs: View {
         Text("settings.section.app.footer \(appVersion)").frame(maxWidth: .infinity, alignment: .center)
       }
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   private var addAccountButton: some View {
@@ -293,18 +313,24 @@ struct SettingsTabs: View {
           context.delete(tagGroups[index])
         }
       }
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
 
       Button {
         routerPath.presentedSheet = .addTagGroup
       } label: {
         Label("timeline.filter.add-tag-groups", systemImage: "plus")
       }
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
     }
     .navigationTitle("timeline.filter.tag-groups")
     .scrollContentBackground(.hidden)
+    #if !os(visionOS)
     .background(theme.secondaryBackgroundColor)
+    #endif
     .toolbar {
       EditButton()
     }
@@ -319,17 +345,23 @@ struct SettingsTabs: View {
           context.delete(localTimelines[index])
         }
       }
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
       Button {
         routerPath.presentedSheet = .addRemoteLocalTimeline
       } label: {
         Label("settings.timeline.add", systemImage: "badge.plus.radiowaves.right")
       }
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
     }
     .navigationTitle("settings.general.remote-timelines")
     .scrollContentBackground(.hidden)
+    #if !os(visionOS)
     .background(theme.secondaryBackgroundColor)
+    #endif
     .toolbar {
       EditButton()
     }
@@ -349,6 +381,8 @@ struct SettingsTabs: View {
         }
       }
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 }

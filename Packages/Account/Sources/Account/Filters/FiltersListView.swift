@@ -54,7 +54,9 @@ public struct FiltersListView: View {
               }
             }
           }
+          #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)
+          #endif
         }
 
         Section {
@@ -62,15 +64,19 @@ public struct FiltersListView: View {
             Label("filter.new", systemImage: "plus")
           }
         }
+        #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
+        #endif
       }
       .toolbar {
         toolbarContent
       }
       .navigationTitle("filter.filters")
       .navigationBarTitleDisplayMode(.inline)
+      #if !os(visionOS)
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
+      #endif
       .task {
         do {
           isLoading = true

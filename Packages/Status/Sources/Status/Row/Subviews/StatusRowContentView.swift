@@ -20,7 +20,9 @@ struct StatusRowContentView: View {
 
     if !viewModel.displaySpoiler {
       StatusRowTextView(viewModel: viewModel)
-      StatusRowTranslateView(viewModel: viewModel)
+      if !reasons.contains(.placeholder) {
+        StatusRowTranslateView(viewModel: viewModel)
+      }
       if let poll = viewModel.finalStatus.poll {
         StatusPollView(poll: poll, status: viewModel.finalStatus)
       }

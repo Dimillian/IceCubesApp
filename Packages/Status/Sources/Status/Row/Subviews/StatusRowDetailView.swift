@@ -12,7 +12,7 @@ struct StatusRowDetailView: View {
   var viewModel: StatusRowViewModel
 
   var body: some View {
-    Group {
+    VStack(alignment: .leading, spacing: 12) {
       Divider()
       HStack {
         Group {

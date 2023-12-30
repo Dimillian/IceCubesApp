@@ -25,11 +25,7 @@ struct MessagesTab: View {
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbar {
-          if UIDevice.current.userInterfaceIdiom != .pad {
-            ToolbarItem(placement: .navigationBarLeading) {
-              AppAccountsSelectorView(routerPath: routerPath)
-            }
-          }
+          ToolbarTab(routerPath: $routerPath)
         }
         .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
         .id(client.id)

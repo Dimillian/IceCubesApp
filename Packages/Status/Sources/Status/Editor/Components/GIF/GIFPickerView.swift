@@ -1,3 +1,4 @@
+#if !os(visionOS)
 import DesignSystem
 import GiphyUISDK
 import SwiftUI
@@ -49,3 +50,4 @@ struct GifPickerView: UIViewControllerRepresentable {
     }
   }
 }
+#endif

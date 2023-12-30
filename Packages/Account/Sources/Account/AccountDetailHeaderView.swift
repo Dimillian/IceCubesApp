@@ -74,7 +74,9 @@ struct AccountDetailHeaderView: View {
         .frame(height: Constants.headerHeight)
       }
     }
+    #if !os(visionOS)
     .background(theme.secondaryBackgroundColor)
+    #endif
     .frame(height: Constants.headerHeight)
     .onTapGesture {
       guard account.haveHeader else {
@@ -225,6 +227,8 @@ struct AccountDetailHeaderView: View {
                                             viewModel.relationship = relationship
                                           }))
           }
+        } else if !viewModel.isCurrentUser {
+          ProgressView()
         }
       }
 
@@ -320,7 +324,9 @@ struct AccountDetailHeaderView: View {
       Text(note)
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(8)
+      #if !os(visionOS)
         .background(theme.secondaryBackgroundColor)
+      #endif
         .cornerRadius(4)
         .overlay(
           RoundedRectangle(cornerRadius: 4)
@@ -370,7 +376,11 @@ struct AccountDetailHeaderView: View {
       .padding(8)
       .accessibilityElement(children: .contain)
       .accessibilityLabel("accessibility.tabs.profile.fields.container.label")
+      #if os(visionOS)
+      .background(Material.thick)
+      #else
       .background(theme.secondaryBackgroundColor)
+      #endif
       .cornerRadius(4)
       .overlay(
         RoundedRectangle(cornerRadius: 4)

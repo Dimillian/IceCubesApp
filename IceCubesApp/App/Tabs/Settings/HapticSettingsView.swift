@@ -17,10 +17,14 @@ struct HapticSettingsView: View {
         Toggle("settings.haptic.tab-selection", isOn: $userPreferences.hapticTabSelectionEnabled)
         Toggle("settings.haptic.buttons", isOn: $userPreferences.hapticButtonPressEnabled)
       }
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
     }
     .navigationTitle("settings.haptic.navigation-title")
+    #if !os(visionOS)
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
+    #endif
   }
 }

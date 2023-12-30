@@ -148,7 +148,8 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
   }
 
   public static func placeholders() -> [Status] {
-    [.placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder()]
+    [.placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(),
+     .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder()]
   }
 
   public var reblogAsAsStatus: Status? {

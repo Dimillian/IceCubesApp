@@ -27,26 +27,28 @@ struct AboutView: View {
   var body: some View {
     List {
       Section {
+        #if !targetEnvironment(macCatalyst)
         HStack {
           Spacer()
-          Image("icon0")
+          Image(uiImage: .init(named: "AppIconAlternate0")!)
             .resizable()
             .frame(width: 50, height: 50)
             .cornerRadius(4)
-          Image("icon14")
+          Image(uiImage: .init(named: "AppIconAlternate4")!)
             .resizable()
             .frame(width: 50, height: 50)
             .cornerRadius(4)
-          Image("icon17")
+          Image(uiImage: .init(named: "AppIconAlternate17")!)
             .resizable()
             .frame(width: 50, height: 50)
             .cornerRadius(4)
-          Image("icon23")
+          Image(uiImage: .init(named: "AppIconAlternate23")!)
             .resizable()
             .frame(width: 50, height: 50)
             .cornerRadius(4)
           Spacer()
         }
+        #endif
         Link(destination: URL(string: "https://github.com/Dimillian/IceCubesApp/blob/main/PRIVACY.MD")!) {
           Label("settings.support.privacy-policy", systemImage: "lock")
         }
@@ -57,7 +59,9 @@ struct AboutView: View {
       } footer: {
         Text("\(versionNumber)©2023 Thomas Ricouard")
       }
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
 
       followAccountsSection
 
@@ -94,14 +98,18 @@ struct AboutView: View {
         Text("settings.about.built-with")
           .textCase(nil)
       }
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
     }
     .task {
       await fetchAccounts()
     }
     .listStyle(.insetGrouped)
+    #if !os(visionOS)
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
+    #endif
     .navigationTitle(Text("settings.about.title"))
     .navigationBarTitleDisplayMode(.large)
     .environment(\.openURL, OpenURLAction { url in
@@ -116,12 +124,16 @@ struct AboutView: View {
         AccountsListRow(viewModel: iceCubesAccount)
         AccountsListRow(viewModel: dimillianAccount)
       }
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
     } else {
       Section {
         ProgressView()
       }
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
     }
   }
 

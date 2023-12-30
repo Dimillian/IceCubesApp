@@ -50,6 +50,8 @@ public enum SheetDestination: Identifiable {
   case addTagGroup
   case statusEditHistory(status: String)
   case settings
+  case about
+  case support
   case accountPushNotficationsSettings
   case report(status: Status)
   case shareImage(image: UIImage, status: Status)
@@ -58,7 +60,7 @@ public enum SheetDestination: Identifiable {
   public var id: String {
     switch self {
     case .editStatusEditor, .newStatusEditor, .replyToStatusEditor, .quoteStatusEditor,
-         .mentionStatusEditor, .settings, .accountPushNotficationsSettings:
+         .mentionStatusEditor:
       "statusEditor"
     case .listCreate:
       "listCreate"
@@ -80,6 +82,8 @@ public enum SheetDestination: Identifiable {
       "shareImage"
     case .editTagGroup:
       "editTagGroup"
+    case .settings, .support, .about, .accountPushNotficationsSettings:
+      "settings"
     }
   }
 }

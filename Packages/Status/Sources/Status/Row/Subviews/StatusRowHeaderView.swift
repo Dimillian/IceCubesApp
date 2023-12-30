@@ -2,19 +2,19 @@ import DesignSystem
 import Env
 import Models
 import SwiftUI
+import Network
 
 @MainActor
 struct StatusRowHeaderView: View {
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
   @Environment(\.isStatusFocused) private var isFocused
+  @Environment(\.redactionReasons) private var redactionReasons
 
   @Environment(Theme.self) private var theme
 
   let viewModel: StatusRowViewModel
-  @State private var showTextForSelection: Bool = false
-
   var body: some View {
-    HStack(alignment: .center) {
+    HStack(alignment: theme.avatarPosition == .top ? .center : .top) {
       Button {
         viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
       } label: {
@@ -22,24 +22,14 @@ struct StatusRowHeaderView: View {
       }
       .buttonStyle(.plain)
       Spacer()
-      if !isInCaptureMode {
-        threadIcon
-        contextMenuButton
+      if !redactionReasons.contains(.placeholder) {
+        dateView
       }
-    }
-    .sheet(isPresented: $showTextForSelection) {
-      let content = viewModel.status.reblog?.content.asSafeMarkdownAttributedString ?? viewModel.status.content.asSafeMarkdownAttributedString
-      SelectTextView(content: content)
     }
     .accessibilityElement(children: .combine)
     .accessibilityLabel(Text("\(viewModel.finalStatus.account.safeDisplayName)") + Text(", ") + Text(viewModel.finalStatus.createdAt.relativeFormatted))
     .accessibilityAction {
       viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
-    }
-    .accessibilityActions {
-      if isFocused {
-        StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showTextForSelection)
-      }
     }
   }
 
@@ -63,35 +53,22 @@ struct StatusRowHeaderView: View {
               .lineLimit(1)
               .accountPopover(viewModel.finalStatus.account)
 
-            accountBadgeView
-              .font(.footnote)
+            if !redactionReasons.contains(.placeholder) {
+              accountBadgeView
+                .font(.footnote)
+            }
           }
           .layoutPriority(1)
-          if theme.avatarPosition == .leading {
-            dateView
-              .font(.scaledFootnote)
-              .foregroundStyle(.secondary)
-              .lineLimit(1)
-          } else {
-            Text("@\(theme.displayFullUsername ? viewModel.finalStatus.account.acct : viewModel.finalStatus.account.username)")
-              .font(.scaledFootnote)
-              .foregroundStyle(.secondary)
-              .lineLimit(1)
-              .accountPopover(viewModel.finalStatus.account)
-          }
         }
-        if theme.avatarPosition == .top {
-          dateView
-            .font(.scaledFootnote)
-            .foregroundStyle(.secondary)
-            .lineLimit(1)
-        } else if theme.displayFullUsername, theme.avatarPosition == .leading {
-          Text("@\(viewModel.finalStatus.account.acct)")
-            .font(.scaledFootnote)
-            .foregroundStyle(.secondary)
-            .lineLimit(1)
-            .offset(y: 1)
-            .accountPopover(viewModel.finalStatus.account)
+        if !redactionReasons.contains(.placeholder) {
+         if (theme.displayFullUsername && theme.avatarPosition == .leading) ||
+              theme.avatarPosition == .top {
+           Text("@\(theme.displayFullUsername ? viewModel.finalStatus.account.acct : viewModel.finalStatus.account.username)")
+             .font(.scaledFootnote)
+             .foregroundStyle(.secondary)
+             .lineLimit(1)
+             .accountPopover(viewModel.finalStatus.account)
+         }
         }
       }
     }
@@ -106,38 +83,14 @@ struct StatusRowHeaderView: View {
     return Text("")
   }
 
-  private var dateView: Text {
-    Text(viewModel.finalStatus.createdAt.relativeFormatted) +
+  private var dateView: some View {
+    Group {
+      Text(Image(systemName: viewModel.finalStatus.visibility.iconName)) +
       Text(" ⸱ ") +
-      Text(Image(systemName: viewModel.finalStatus.visibility.iconName))
-  }
-
-  @ViewBuilder
-  private var threadIcon: some View {
-    if viewModel.isThread {
-      Image(systemName: "bubble.left.and.bubble.right")
-        .resizable()
-        .aspectRatio(contentMode: .fit)
-        .frame(width: 15)
-        .foregroundStyle(.secondary)
+      Text(viewModel.finalStatus.createdAt.relativeFormatted)
     }
-  }
-
-  private var contextMenuButton: some View {
-    Menu {
-      StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showTextForSelection)
-        .onAppear {
-          Task {
-            await viewModel.loadAuthorRelationship()
-          }
-        }
-    } label: {
-      Image(systemName: "ellipsis")
-        .frame(width: 40, height: 40)
-    }
-    .menuStyle(.borderlessButton)
+    .font(.scaledFootnote)
     .foregroundStyle(.secondary)
-    .contentShape(Rectangle())
-    .accessibilityHidden(true)
+    .lineLimit(1)
   }
 }

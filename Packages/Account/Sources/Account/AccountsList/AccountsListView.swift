@@ -26,7 +26,9 @@ public struct AccountsListView: View {
             .redacted(reason: .placeholder)
             .allowsHitTesting(false)
             .shimmering()
+            #if !os(visionOS)
             .listRowBackground(theme.primaryBackgroundColor)
+            #endif
         }
       case let .display(accounts, relationships, nextPageState):
         if case .followers = viewModel.mode,
@@ -49,7 +51,9 @@ public struct AccountsListView: View {
                   }
                 }
               )
+              #if !os(visionOS)
               .listRowBackground(theme.primaryBackgroundColor)
+              #endif
             }
           }
         }
@@ -58,7 +62,9 @@ public struct AccountsListView: View {
             if let relationship = relationships.first(where: { $0.id == account.id }) {
               AccountsListRow(viewModel: .init(account: account,
                                                relationShip: relationship))
+                #if !os(visionOS)
                 .listRowBackground(theme.primaryBackgroundColor)
+                #endif
             }
           }
         }
@@ -66,7 +72,9 @@ public struct AccountsListView: View {
         switch nextPageState {
         case .hasNextPage:
           loadingRow
+            #if !os(visionOS)
             .listRowBackground(theme.primaryBackgroundColor)
+            #endif
             .onAppear {
               Task {
                 await viewModel.fetchNextPage()
@@ -75,18 +83,24 @@ public struct AccountsListView: View {
 
         case .loadingNextPage:
           loadingRow
+            #if !os(visionOS)
             .listRowBackground(theme.primaryBackgroundColor)
+            #endif
         case .none:
           EmptyView()
         }
 
       case let .error(error):
         Text(error.localizedDescription)
+          #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)
+          #endif
       }
     }
+    #if !os(visionOS)
     .scrollContentBackground(.hidden)
     .background(theme.primaryBackgroundColor)
+    #endif
     .listStyle(.plain)
     .navigationTitle(viewModel.mode.title)
     .navigationBarTitleDisplayMode(.inline)

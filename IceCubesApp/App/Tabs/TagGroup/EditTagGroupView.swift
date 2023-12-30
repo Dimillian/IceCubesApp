@@ -57,9 +57,11 @@ struct EditTagGroupView: View {
           : "timeline.filter.edit-tag-groups"
       )
       .navigationBarTitleDisplayMode(.inline)
+      #if !os(visionOS)
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
       .scrollDismissesKeyboard(.immediately)
+      #endif
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
           Button("action.cancel", action: { dismiss() })

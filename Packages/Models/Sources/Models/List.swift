@@ -13,6 +13,13 @@ public struct List: Codable, Identifiable, Equatable, Hashable {
 
     case followed, list, none
   }
+  
+  public init(id: String, title: String, repliesPolicy: RepliesPolicy? = nil, exclusive: Bool? = nil) {
+    self.id = id
+    self.title = title
+    self.repliesPolicy = repliesPolicy
+    self.exclusive = exclusive
+  }
 }
 
 extension List: Sendable {}

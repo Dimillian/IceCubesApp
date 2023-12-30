@@ -10,6 +10,7 @@ import SwiftUI
       case followSystemColorSchme
       case displayFullUsernameTimeline
       case lineSpacing
+      case statusActionSecondary
     }
 
     @AppStorage("is_previously_set") public var isThemePreviouslySet: Bool = false
@@ -18,14 +19,15 @@ import SwiftUI
     @AppStorage(ThemeKey.primaryBackground.rawValue) public var primaryBackgroundColor: Color = .white
     @AppStorage(ThemeKey.secondaryBackground.rawValue) public var secondaryBackgroundColor: Color = .gray
     @AppStorage(ThemeKey.label.rawValue) public var labelColor: Color = .black
-    @AppStorage(ThemeKey.avatarPosition2.rawValue) var avatarPosition: AvatarPosition = .top
-    @AppStorage(ThemeKey.avatarShape2.rawValue) var avatarShape: AvatarShape = .rounded
+    @AppStorage(ThemeKey.avatarPosition2.rawValue) var avatarPosition: AvatarPosition = .leading
+    @AppStorage(ThemeKey.avatarShape2.rawValue) var avatarShape: AvatarShape = .circle
     @AppStorage(ThemeKey.selectedSet.rawValue) var storedSet: ColorSetName = .iceCubeDark
     @AppStorage(ThemeKey.statusActionsDisplay.rawValue) public var statusActionsDisplay: StatusActionsDisplay = .full
     @AppStorage(ThemeKey.statusDisplayStyle.rawValue) public var statusDisplayStyle: StatusDisplayStyle = .large
     @AppStorage(ThemeKey.followSystemColorSchme.rawValue) public var followSystemColorScheme: Bool = true
-    @AppStorage(ThemeKey.displayFullUsernameTimeline.rawValue) public var displayFullUsername: Bool = true
-    @AppStorage(ThemeKey.lineSpacing.rawValue) public var lineSpacing: Double = 0.8
+    @AppStorage(ThemeKey.displayFullUsernameTimeline.rawValue) public var displayFullUsername: Bool = false
+    @AppStorage(ThemeKey.lineSpacing.rawValue) public var lineSpacing: Double = 1.2
+    @AppStorage(ThemeKey.statusActionSecondary.rawValue) public var statusActionSecondary: StatusActionSecondary = .share
     @AppStorage("font_size_scale") public var fontSizeScale: Double = 1
     @AppStorage("chosen_font") public var chosenFontData: Data?
 
@@ -64,6 +66,19 @@ import SwiftUI
         "enum.avatar-position.leading"
       case .top:
         "enum.avatar-position.top"
+      }
+    }
+  }
+  
+  public enum StatusActionSecondary: String, CaseIterable {
+    case share, bookmark
+    
+    public var description: LocalizedStringKey {
+      switch self {
+      case .share:
+        "status.action.share-title"
+      case .bookmark:
+        "status.action.bookmark"
       }
     }
   }
@@ -202,6 +217,12 @@ import SwiftUI
       themeStorage.statusDisplayStyle = statusDisplayStyle
     }
   }
+  
+  public var statusActionSecondary: StatusActionSecondary {
+    didSet {
+      themeStorage.statusActionSecondary = statusActionSecondary
+    }
+  }
 
   public var followSystemColorScheme: Bool {
     didSet {
@@ -254,6 +275,7 @@ import SwiftUI
     lineSpacing = themeStorage.lineSpacing
     fontSizeScale = themeStorage.fontSizeScale
     chosenFontData = themeStorage.chosenFontData
+    statusActionSecondary = themeStorage.statusActionSecondary
     selectedSet = storedSet
   }
 
@@ -271,6 +293,8 @@ import SwiftUI
       MediumDark(),
       ConstellationLight(),
       ConstellationDark(),
+      ThreadsLight(),
+      ThreadsDark()
     ]
   }
 

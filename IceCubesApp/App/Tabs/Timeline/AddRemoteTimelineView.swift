@@ -52,9 +52,11 @@ struct AddRemoteTimelineView: View {
       .formStyle(.grouped)
       .navigationTitle("timeline.add-remote.title")
       .navigationBarTitleDisplayMode(.inline)
+      #if !os(visionOS)
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
       .scrollDismissesKeyboard(.immediately)
+      #endif
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
           Button("action.cancel", action: { dismiss() })
@@ -73,7 +75,7 @@ struct AddRemoteTimelineView: View {
         isInstanceURLFieldFocused = true
         let client = InstanceSocialClient()
         Task {
-          instances = await client.fetchInstances()
+          instances = await client.fetchInstances(keyword: instanceName)
         }
       }
     }

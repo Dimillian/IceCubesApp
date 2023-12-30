@@ -11,6 +11,10 @@ actor TimelineDatasource {
   func get() -> [Status] {
     statuses.filter { $0.filtered?.first?.filter.filterAction != .hide }
   }
+  
+  func count() -> Int {
+    statuses.count
+  }
 
   func reset() {
     statuses = []

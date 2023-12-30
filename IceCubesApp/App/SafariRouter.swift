@@ -17,7 +17,9 @@ private struct SafariRouter: ViewModifier {
   @Environment(UserPreferences.self) private var preferences
   @Environment(RouterPath.self) private var routerPath
 
+  #if !os(visionOS)
   @State private var safariManager = InAppSafariManager()
+  #endif
 
   func body(content: Content) -> some View {
     content
@@ -50,17 +52,24 @@ private struct SafariRouter: ViewModifier {
           guard let scheme = url.scheme, ["https", "http"].contains(scheme.lowercased()) else {
             return .systemAction
           }
+          #if os(visionOS)
+          return .systemAction
+          #else
           return safariManager.open(url)
+          #endif
         }
       }
+      #if !os(visionOS)
       .background {
         WindowReader { window in
           safariManager.windowScene = window.windowScene
         }
       }
+      #endif
   }
 }
 
+#if !os(visionOS)
 @MainActor
 @Observable private class InAppSafariManager: NSObject, SFSafariViewControllerDelegate {
   var windowScene: UIWindowScene?
@@ -113,6 +122,7 @@ private struct SafariRouter: ViewModifier {
     }
   }
 }
+#endif
 
 private struct WindowReader: UIViewRepresentable {
   var onUpdate: (UIWindow) -> Void

@@ -26,7 +26,7 @@ public struct AppAccountsSelectorView: View {
   }
 
   private var preferredHeight: CGFloat {
-    var baseHeight: CGFloat = 220
+    var baseHeight: CGFloat = 310
     baseHeight += CGFloat(60 * accountsViewModel.count)
     return baseHeight
   }
@@ -95,23 +95,21 @@ public struct AppAccountsSelectorView: View {
           ForEach(accountsViewModel.sorted { $0.acct < $1.acct }, id: \.appAccount.id) { viewModel in
             AppAccountView(viewModel: viewModel)
           }
+          addAccountButton
         }
-        .listRowBackground(theme.primaryBackgroundColor)
+        #if !os(visionOS)
+          .listRowBackground(theme.primaryBackgroundColor)
+        #endif
 
         if accountCreationEnabled {
           Section {
-            Button {
-              isPresented = false
-              HapticManager.shared.fireHaptic(.buttonPress)
-              DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                routerPath.presentedSheet = .addAccount
-              }
-            } label: {
-              Label("app-account.button.add", systemImage: "person.badge.plus")
-            }
             settingsButton
+            aboutButton
+            supportButton
           }
-          .listRowBackground(theme.primaryBackgroundColor)
+          #if !os(visionOS)
+            .listRowBackground(theme.primaryBackgroundColor)
+          #endif
         }
       }
       .listStyle(.insetGrouped)
@@ -131,6 +129,18 @@ public struct AppAccountsSelectorView: View {
       .environment(routerPath)
     }
   }
+  
+  private var addAccountButton: some View {
+    Button {
+      isPresented = false
+      HapticManager.shared.fireHaptic(.buttonPress)
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        routerPath.presentedSheet = .addAccount
+      }
+    } label: {
+      Label("app-account.button.add", systemImage: "person.badge.plus")
+    }
+  }
 
   private var settingsButton: some View {
     Button {
@@ -141,6 +151,30 @@ public struct AppAccountsSelectorView: View {
       }
     } label: {
       Label("tab.settings", systemImage: "gear")
+    }
+  }
+  
+  private var supportButton: some View {
+    Button {
+      isPresented = false
+      HapticManager.shared.fireHaptic(.buttonPress)
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        routerPath.presentedSheet = .support
+      }
+    } label: {
+      Label("settings.app.support", systemImage: "wand.and.stars")
+    }
+  }
+  
+  private var aboutButton: some View {
+    Button {
+      isPresented = false
+      HapticManager.shared.fireHaptic(.buttonPress)
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        routerPath.presentedSheet = .about
+      }
+    } label: {
+      Label("account.edit.about", systemImage: "info.circle")
     }
   }
 

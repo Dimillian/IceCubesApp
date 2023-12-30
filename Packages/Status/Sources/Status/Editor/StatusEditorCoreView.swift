@@ -1,4 +1,3 @@
-import Accounts
 import AppAccount
 import DesignSystem
 import Env
@@ -53,7 +52,9 @@ struct StatusEditorCoreView: View {
       }
       .opacity(editorFocusState == assignedFocusState ? 1 : 0.6)
     }
+    #if !os(visionOS)
     .background(theme.primaryBackgroundColor)
+    #endif
     .focused($editorFocusState, equals: assignedFocusState)
     .onAppear { setupViewModel() }
   }

@@ -13,26 +13,32 @@ struct StatusRowActionsView: View {
 
   @Environment(\.openWindow) private var openWindow
   @Environment(\.isStatusFocused) private var isFocused
+  @Environment(\.horizontalSizeClass) var horizontalSizeClass
+  
+  @State private var showTextForSelection: Bool = false
 
   var viewModel: StatusRowViewModel
+  
+  var isNarrow: Bool {
+    horizontalSizeClass == .compact && (UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac)
+  }
 
   func privateBoost() -> Bool {
     viewModel.status.visibility == .priv && viewModel.status.account.id == currentAccount.account?.id
   }
+  
+  var actions: [Action] {
+    switch theme.statusActionSecondary {
+    case .share:
+      return [.respond, .boost, .favorite, .share, .menu]
+    case .bookmark:
+      return [.respond, .boost, .favorite, .bookmark, .menu]
+    }
+  }
 
   @MainActor
-  enum Action: CaseIterable {
-    case respond, boost, favorite, bookmark, share
-
-    // Have to implement this manually here due to compiler not implicitly
-    // inserting `nonisolated`, which leads to a warning:
-    //
-    //     Main actor-isolated static property 'allCases' cannot be used to
-    //     satisfy nonisolated protocol requirement
-    //
-    public nonisolated static var allCases: [StatusRowActionsView.Action] {
-      [.respond, .boost, .favorite, .bookmark, .share]
-    }
+  enum Action {
+    case respond, boost, favorite, bookmark, share, menu
 
     func image(dataController: StatusDataController, privateBoost: Bool = false) -> Image {
       switch self {
@@ -53,6 +59,8 @@ struct StatusRowActionsView: View {
         return Image(systemName: dataController.isBookmarked ? "bookmark.fill" : "bookmark")
       case .share:
         return Image(systemName: "square.and.arrow.up")
+      case .menu:
+        return Image(systemName: "ellipsis")
       }
     }
 
@@ -77,11 +85,13 @@ struct StatusRowActionsView: View {
           : "status.action.bookmark"
       case .share:
         return "status.action.share"
+      case .menu:
+        return "status.context.menu"
       }
     }
 
     func count(dataController: StatusDataController, isFocused: Bool, theme: Theme) -> Int? {
-      if theme.statusActionsDisplay == .discret, isFocused {
+      if theme.statusActionsDisplay == .discret, !isFocused {
         return nil
       }
       switch self {
@@ -91,14 +101,14 @@ struct StatusRowActionsView: View {
         return dataController.favoritesCount
       case .boost:
         return dataController.reblogsCount
-      case .share, .bookmark:
+      case .share, .bookmark, .menu:
         return nil
       }
     }
 
     func tintColor(theme: Theme) -> Color? {
       switch self {
-      case .respond, .share:
+      case .respond, .share, .menu:
         nil
       case .favorite:
         .yellow
@@ -111,7 +121,7 @@ struct StatusRowActionsView: View {
 
     func isOn(dataController: StatusDataController) -> Bool {
       switch self {
-      case .respond, .share: false
+      case .respond, .share, .menu: false
       case .favorite: dataController.isFavorited
       case .bookmark: dataController.isBookmarked
       case .boost: dataController.isReblogged
@@ -122,7 +132,7 @@ struct StatusRowActionsView: View {
   var body: some View {
     VStack(spacing: 12) {
       HStack {
-        ForEach(Action.allCases, id: \.self) { action in
+        ForEach(actions, id: \.self) { action in
           if action == .share {
             if let urlString = viewModel.finalStatus.url,
                let url = URL(string: urlString)
@@ -131,6 +141,7 @@ struct StatusRowActionsView: View {
               case .linkOnly:
                 ShareLink(item: url) {
                   action.image(dataController: statusDataController)
+                    .font(.scaledBody)
                 }
                 .buttonStyle(.statusAction())
                 .accessibilityElement(children: .combine)
@@ -141,18 +152,39 @@ struct StatusRowActionsView: View {
                           message: Text(viewModel.finalStatus.content.asRawText))
                 {
                   action.image(dataController: statusDataController)
+                    .font(.scaledBody)
                 }
                 .buttonStyle(.statusAction())
                 .accessibilityElement(children: .combine)
                 .accessibilityLabel("status.action.share-link")
               }
             }
+            Spacer()
+          } else if action == .menu {
+            Menu {
+              StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showTextForSelection)
+                .onAppear {
+                  Task {
+                    await viewModel.loadAuthorRelationship()
+                  }
+                }
+            } label: {
+              Label("", systemImage: "ellipsis")
+            }
+            .menuStyle(.button)
+            .foregroundStyle(.secondary)
+            .contentShape(Rectangle())
+            .accessibilityLabel("status.action.context-menu")
           } else {
             actionButton(action: action)
             Spacer()
           }
         }
       }
+    }
+    .sheet(isPresented: $showTextForSelection) {
+      let content = viewModel.status.reblog?.content.asSafeMarkdownAttributedString ?? viewModel.status.content.asSafeMarkdownAttributedString
+      SelectTextView(content: content)
     }
   }
 
@@ -165,11 +197,14 @@ struct StatusRowActionsView: View {
           action
             .image(dataController: statusDataController, privateBoost: privateBoost())
             .imageScale(.medium)
-            .font(.body)
+            .font(.scaledBody)
             .fontWeight(.black)
+            .contentShape(Rectangle())
         } else {
           action
             .image(dataController: statusDataController, privateBoost: privateBoost())
+            .font(.scaledBody)
+            .contentShape(Rectangle())
         }
       }
       .buttonStyle(
@@ -180,11 +215,13 @@ struct StatusRowActionsView: View {
       )
       .disabled(action == .boost &&
         (viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id))
-      if let count = action.count(dataController: statusDataController,
+      if !isNarrow,
+          let count = action.count(dataController: statusDataController,
                                   isFocused: isFocused,
                                   theme: theme), !viewModel.isRemote
       {
         Text("\(count)")
+          .contentTransition(.numericText(value: Double(count)))
           .foregroundColor(Color(UIColor.secondaryLabel))
           .font(.scaledFootnote)
           .monospacedDigit()
