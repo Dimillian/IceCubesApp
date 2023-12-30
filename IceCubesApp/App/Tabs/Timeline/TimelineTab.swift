@@ -189,7 +189,7 @@ struct TimelineTab: View {
       Button {
         timeline = .latest
       } label: {
-        Label(TimelineFilter.latest.localizedTitle(), systemImage: TimelineFilter.latest.iconName() ?? "")
+        Label(TimelineFilter.latest.localizedTitle(), systemImage: TimelineFilter.latest.iconName())
       }
       if timeline == .home {
         Button {
@@ -197,7 +197,7 @@ struct TimelineTab: View {
         } label: {
           VStack {
             Label(TimelineFilter.resume.localizedTitle(),
-                  systemImage: TimelineFilter.resume.iconName() ?? "")
+                  systemImage: TimelineFilter.resume.iconName())
           }
         }
       }
@@ -232,7 +232,7 @@ struct TimelineTab: View {
       Button {
         self.timeline = timeline
       } label: {
-        Label(timeline.localizedTitle(), systemImage: timeline.iconName() ?? "")
+        Label(timeline.localizedTitle(), systemImage: timeline.iconName())
       }
     }
   }

@@ -42,7 +42,7 @@ struct TimelineQuickAccessPills: View {
     Button {
       timeline = filter
     } label: {
-      Label(filter.localizedTitle(), systemImage: filter.iconName() ?? "")
+      Label(filter.localizedTitle(), systemImage: filter.iconName())
         .font(.callout)
     }
     .transition(.push(from: .leading).combined(with: .opacity))

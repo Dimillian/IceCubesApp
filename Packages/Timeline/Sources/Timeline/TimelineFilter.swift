@@ -115,7 +115,7 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
     }
   }
 
-  public func iconName() -> String? {
+  public func iconName() -> String {
     switch self {
     case .latest:
       "arrow.counterclockwise"
@@ -133,8 +133,10 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
       "list.bullet"
     case .remoteLocal:
       "dot.radiowaves.right"
-    default:
-      nil
+    case .tagGroup:
+      "tag"
+    case .hashtag:
+      "number"
     }
   }
 
