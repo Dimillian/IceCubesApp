@@ -275,7 +275,6 @@ struct BlurOverLay: View {
   let font: Font?
 
   @State private var isFrameExpanded = true
-  @State private var isTextExpanded = true
 
   @Environment(Theme.self) private var theme
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
@@ -296,32 +295,31 @@ struct BlurOverLay: View {
           )
         if !isCompact {
           Button {
-            withAnimation(.spring(duration: 0.2)) {
-              isTextExpanded.toggle()
-            } completion: {
-              withAnimation(.spring(duration: 0.3)) {
-                isFrameExpanded.toggle()
-              }
+            withAnimation(.spring) {
+              isFrameExpanded.toggle()
             }
           } label: {
-            if isTextExpanded {
+            if isFrameExpanded {
               ViewThatFits(in: .horizontal) {
                 HStack {
                   Image(systemName: "eye")
+                    .matchedGeometryEffect(id: "eye", in: buttonSpace)
                   Text(sensitive ? "status.media.sensitive.show" : "status.media.content.show")
                 }
                 HStack {
                   Image(systemName: "eye")
+                    .matchedGeometryEffect(id: "eye", in: buttonSpace)
                   Text("Show")
                 }
                 Image(systemName: "eye")
+                  .matchedGeometryEffect(id: "eye", in: buttonSpace)
               }
               .lineLimit(1)
               .foregroundColor(theme.labelColor)
-              .matchedGeometryEffect(id: "text", in: buttonSpace)
             } else {
               Image(systemName: "eye.slash")
-                .matchedGeometryEffect(id: "text", in: buttonSpace)
+                .transition(.opacity)
+                .matchedGeometryEffect(id: "eye", in: buttonSpace)
             }
           }
           .foregroundColor(theme.labelColor)
