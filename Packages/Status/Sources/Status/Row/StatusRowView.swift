@@ -281,6 +281,13 @@ public struct StatusRowView: View {
         }
       } label: {
         Text("status.filter.show-anyway")
+          .foregroundStyle(theme.tintColor)
+      }
+      .buttonStyle(.plain)
+    }
+    .onTapGesture {
+      withAnimation {
+        viewModel.isFiltered = false
       }
     }
     .accessibilityAction {
