@@ -19,7 +19,7 @@ public struct TimelineView: View {
   @Environment(RouterPath.self) private var routerPath
 
   @State private var viewModel = TimelineViewModel()
-  @State private var prefetcher = TimelinePrefetcher()
+  @State private var prefetcher = TimelineMediaPrefetcher()
 
   @State private var wasBackgrounded: Bool = false
   @State private var collectionView: UICollectionView?
@@ -77,7 +77,7 @@ public struct TimelineView: View {
           collectionView.prefetchDataSource = prefetcher
         }
         if viewModel.timeline.supportNewestPagination {
-          PendingStatusesObserverView(observer: viewModel.pendingStatusesObserver)
+          TimelineUnreadStatusesView(observer: viewModel.pendingStatusesObserver)
         }
       }
       .safeAreaInset(edge: .top) {

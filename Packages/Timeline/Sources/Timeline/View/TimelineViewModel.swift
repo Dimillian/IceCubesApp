@@ -74,7 +74,7 @@ import SwiftUI
   }
 
   var isTimelineVisible: Bool = false
-  let pendingStatusesObserver: PendingStatusesObserver = .init()
+  let pendingStatusesObserver: TimelineUnreadStatusesObserver = .init()
   var scrollToIndexAnimated: Bool = false
   var marker: Marker.Content?
   

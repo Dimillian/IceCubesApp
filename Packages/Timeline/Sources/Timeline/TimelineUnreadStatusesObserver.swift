@@ -6,7 +6,7 @@ import SwiftUI
 import DesignSystem
 
 @MainActor
-@Observable class PendingStatusesObserver {
+@Observable class TimelineUnreadStatusesObserver {
   var pendingStatusesCount: Int = 0
 
   var disableUpdate: Bool = false
@@ -30,8 +30,8 @@ import DesignSystem
   init() {}
 }
 
-struct PendingStatusesObserverView: View {
-  @State var observer: PendingStatusesObserver
+struct TimelineUnreadStatusesView: View {
+  @State var observer: TimelineUnreadStatusesObserver
   @Environment(UserPreferences.self) private var preferences
   @Environment(Theme.self) private var theme
   
