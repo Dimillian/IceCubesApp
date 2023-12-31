@@ -278,7 +278,7 @@ extension TimelineViewModel: StatusesFetcher {
   private func fetchNewPagesFrom(latestStatus: String, client: Client) async throws {
     canStreamEvents = false
     let initialTimeline = timeline
-    var newStatuses: [Status] = await fetchNewPages(minId: latestStatus, maxPages: 10)
+    var newStatuses: [Status] = await fetchNewPages(minId: latestStatus, maxPages: 5)
 
     // Dedup statuses, a status with the same id could have been streamed in.
     let ids = await datasource.get().map(\.id)
