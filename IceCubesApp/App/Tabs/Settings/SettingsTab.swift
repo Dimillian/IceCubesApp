@@ -53,7 +53,7 @@ struct SettingsTabs: View {
       .navigationBarTitleDisplayMode(.inline)
       .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
       .toolbar {
-        if UIDevice.current.userInterfaceIdiom == .phone || isModal {
+        if isModal {
           ToolbarItem {
             Button {
               dismiss()
