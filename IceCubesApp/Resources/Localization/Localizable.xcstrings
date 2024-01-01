@@ -47031,7 +47031,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tabs Customizations"
+            "value" : "Personalizzazione dei Tabs"
           }
         },
         "ja" : {
@@ -47857,7 +47857,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fast refresh"
+            "value" : "Aggiornamento rapido"
           }
         },
         "ja" : {
@@ -50571,7 +50571,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+            "value" : "L'aggiornamento rapido disattiva la cache della timeline e recupera sempre una timeline nuova quando si torna alla scheda della timeline o all'applicazione."
           }
         },
         "ja" : {
@@ -55415,7 +55415,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fifth Tab"
+            "value" : "Quinto Tab"
           }
         },
         "ja" : {
@@ -55533,7 +55533,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "First Tab"
+            "value" : "Primo Tab"
           }
         },
         "ja" : {
@@ -55651,7 +55651,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fourth Tab"
+            "value" : "Quarto Tab"
           }
         },
         "ja" : {
@@ -55769,7 +55769,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Second Tab"
+            "value" : "Secondo Tab"
           }
         },
         "ja" : {
@@ -55887,7 +55887,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Third Tab"
+            "value" : "Terzo Tab"
           }
         },
         "ja" : {
@@ -73441,7 +73441,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Resume"
+            "value" : "Riprendere"
           }
         },
         "ja" : {
