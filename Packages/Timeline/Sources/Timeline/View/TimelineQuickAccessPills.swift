@@ -42,8 +42,15 @@ struct TimelineQuickAccessPills: View {
     Button {
       timeline = filter
     } label: {
-      Label(filter.localizedTitle(), systemImage: filter.iconName())
-        .font(.callout)
+      switch filter {
+      case .hashtag:
+        Label(filter.title.replacingOccurrences(of: "#", with: ""),
+              systemImage: filter.iconName())
+          .font(.callout)
+      default:
+        Label(filter.localizedTitle(), systemImage: filter.iconName())
+          .font(.callout)
+      }
     }
     .transition(.push(from: .leading).combined(with: .opacity))
     .onDrag {
