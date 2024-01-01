@@ -269,6 +269,7 @@ extension TimelineViewModel: StatusesFetcher {
       StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
 
       await datasource.set(statuses)
+      statuses = await datasource.get()
       await cacheHome()
 
       withAnimation {

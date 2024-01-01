@@ -48,19 +48,17 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
 
     case let .display(statuses, nextPageState):
       ForEach(statuses, id: \.viewId) { status in
-        if !status.isHidden {
-          StatusRowView(viewModel: StatusRowViewModel(status: status,
-                                                      client: client,
-                                                      routerPath: routerPath,
-                                                      isRemote: isRemote))
-            .id(status.id)
-            .onAppear {
-              fetcher.statusDidAppear(status: status)
-            }
-            .onDisappear {
-              fetcher.statusDidDisappear(status: status)
-            }
-        }
+        StatusRowView(viewModel: StatusRowViewModel(status: status,
+                                                    client: client,
+                                                    routerPath: routerPath,
+                                                    isRemote: isRemote))
+          .id(status.id)
+          .onAppear {
+            fetcher.statusDidAppear(status: status)
+          }
+          .onDisappear {
+            fetcher.statusDidDisappear(status: status)
+          }
       }
       switch nextPageState {
       case .hasNextPage:
