@@ -122,6 +122,7 @@ public struct StatusDetailView: View {
       let isFocused = self.viewModel.statusId == status.id
 
       StatusRowView(viewModel: viewModel)
+        .id(status.id + (status.editedAt?.asDate.description ?? ""))
         .environment(\.extraLeadingInset, !isCompact ? extraInsets : 0)
         .environment(\.indentationLevel, !isCompact ? indentationLevel : 0)
         .environment(\.isStatusFocused, isFocused)
@@ -135,7 +136,6 @@ public struct StatusDetailView: View {
             }
           }
         }
-        .id(status.id)
         #if !os(visionOS)
         .listRowBackground(viewModel.highlightRowColor)
         #endif

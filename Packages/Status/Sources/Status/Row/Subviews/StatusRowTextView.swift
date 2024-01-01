@@ -7,13 +7,15 @@ import SwiftUI
 struct StatusRowTextView: View {
   @Environment(Theme.self) private var theme
   @Environment(\.isStatusFocused) private var isFocused
+  
+  @Environment(StatusDataController.self) private var statusDataController
 
   var viewModel: StatusRowViewModel
 
   var body: some View {
     VStack {
       HStack {
-        EmojiTextApp(viewModel.finalStatus.content,
+        EmojiTextApp(statusDataController.content,
                      emojis: viewModel.finalStatus.emojis,
                      language: viewModel.finalStatus.language,
                      lineLimit: viewModel.lineLimit)

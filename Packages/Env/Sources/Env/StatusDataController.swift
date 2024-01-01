@@ -57,6 +57,7 @@ public final class StatusDataControllerProvider {
   public var isReblogged: Bool
   public var isBookmarked: Bool
   public var isFavorited: Bool
+  public var content: HTMLString
 
   public var favoritesCount: Int
   public var reblogsCount: Int
@@ -73,6 +74,7 @@ public final class StatusDataControllerProvider {
     reblogsCount = status.reblogsCount
     repliesCount = status.repliesCount
     favoritesCount = status.favouritesCount
+    content = status.content
   }
 
   public func updateFrom(status: AnyStatus) {
@@ -83,6 +85,7 @@ public final class StatusDataControllerProvider {
     reblogsCount = status.reblogsCount
     repliesCount = status.repliesCount
     favoritesCount = status.favouritesCount
+    content = status.content
   }
 
   public func toggleFavorite(remoteStatus: String?) async {
