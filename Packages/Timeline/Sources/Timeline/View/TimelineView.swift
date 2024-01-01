@@ -243,7 +243,7 @@ public struct TimelineView: View {
 
   private var scrollToTopView: some View {
     ScrollToView()
-      .frame(height: .layoutPadding)
+      .frame(height: pinnedFilters.isEmpty ? .layoutPadding : 0)
       .onAppear {
         viewModel.scrollToTopVisible = true
       }
