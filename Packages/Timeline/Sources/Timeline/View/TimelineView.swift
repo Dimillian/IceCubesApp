@@ -80,12 +80,13 @@ public struct TimelineView: View {
           TimelineUnreadStatusesView(observer: viewModel.pendingStatusesObserver)
         }
       }
-      .safeAreaInset(edge: .top) {
+      .safeAreaInset(edge: .top, spacing: 0) {
         if canFilterTimeline, !pinnedFilters.isEmpty {
           TimelineQuickAccessPills(pinnedFilters: $pinnedFilters, timeline: $timeline)
             .padding(.vertical, 8)
             .padding(.horizontal, .layoutPadding)
-            .background(theme.primaryBackgroundColor.opacity(0.50).background(Material.ultraThin))
+            .background(theme.primaryBackgroundColor.opacity(0.50))
+            .background(Material.regular)
         }
       }
       .onChange(of: viewModel.scrollToIndex) { _, newValue in
