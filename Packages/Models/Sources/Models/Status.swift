@@ -35,6 +35,7 @@ public protocol AnyStatus {
   var filtered: [Filtered]? { get }
   var sensitive: Bool { get }
   var language: String? { get }
+  var isHidden: Bool { get }
 }
 
 public struct StatusViewId: Hashable {
@@ -84,6 +85,10 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
   public let filtered: [Filtered]?
   public let sensitive: Bool
   public let language: String?
+  
+  public var isHidden: Bool {
+    filtered?.first?.filter.filterAction == .hide
+  }
 
   public init(id: String, content: HTMLString, account: Account, createdAt: ServerDate, editedAt: ServerDate?, reblog: ReblogStatus?, mediaAttachments: [MediaAttachment], mentions: [Mention], repliesCount: Int, reblogsCount: Int, favouritesCount: Int, card: Card?, favourited: Bool?, reblogged: Bool?, pinned: Bool?, bookmarked: Bool?, emojis: [Emoji], url: String?, application: Application?, inReplyToId: String?, inReplyToAccountId: String?, visibility: Visibility, poll: Poll?, spoilerText: HTMLString, filtered: [Filtered]?, sensitive: Bool, language: String?) {
     self.id = id
@@ -221,6 +226,10 @@ public final class ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Ha
   public let filtered: [Filtered]?
   public let sensitive: Bool
   public let language: String?
+  
+  public var isHidden: Bool {
+    filtered?.first?.filter.filterAction == .hide
+  }
 
   public init(id: String, content: HTMLString, account: Account, createdAt: ServerDate, editedAt: ServerDate?, mediaAttachments: [MediaAttachment], mentions: [Mention], repliesCount: Int, reblogsCount: Int, favouritesCount: Int, card: Card?, favourited: Bool?, reblogged: Bool?, pinned: Bool?, bookmarked: Bool?, emojis: [Emoji], url: String?, application: Application? = nil, inReplyToId: String?, inReplyToAccountId: String?, visibility: Visibility, poll: Poll?, spoilerText: HTMLString, filtered: [Filtered]?, sensitive: Bool, language: String?) {
     self.id = id
