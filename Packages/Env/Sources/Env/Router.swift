@@ -140,7 +140,9 @@ public enum SheetDestination: Identifiable {
     {
       navigate(to: .hashTag(tag: tag, account: nil))
       return .handled
-    } else if url.lastPathComponent.first == "@", let host = url.host {
+    } else if url.lastPathComponent.first == "@",
+                let host = url.host,
+              !host.hasPrefix("www") {
       let acct = "\(url.lastPathComponent)@\(host)"
       Task {
         await navigateToAccountFrom(acct: acct, url: url)
