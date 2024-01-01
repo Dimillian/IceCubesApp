@@ -110,6 +110,7 @@ import SwiftUI
 
   func handleEvent(event: any StreamEvent) async {
     if let event = event as? StreamEventUpdate,
+       let client,
        timeline == .home,
        canStreamEvents,
        isTimelineVisible,
@@ -119,6 +120,7 @@ import SwiftUI
       let newStatus = event.status
       await datasource.insert(newStatus, at: 0)
       await cacheHome()
+      StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
       let statuses = await datasource.get()
       withAnimation {
         statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
@@ -130,8 +132,9 @@ import SwiftUI
       withAnimation {
         statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
       }
-    } else if let event = event as? StreamEventStatusUpdate {
+    } else if let event = event as? StreamEventStatusUpdate, let client {
       if let originalIndex = await datasource.indexOf(statusId: event.status.id) {
+        StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
         await datasource.replace(event.status, at: originalIndex)
         let statuses = await datasource.get()
         await cacheHome()

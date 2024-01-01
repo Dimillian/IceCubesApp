@@ -201,8 +201,14 @@ import SwiftUI
       switch mode {
       case .new, .replyTo, .quote, .mention, .shareExtension:
         postStatus = try await client.post(endpoint: Statuses.postStatus(json: data))
+        if let postStatus {
+          StreamWatcher.shared.emmitPostEvent(for: postStatus)
+        }
       case let .edit(status):
         postStatus = try await client.put(endpoint: Statuses.editStatus(id: status.id, json: data))
+        if let postStatus {
+          StreamWatcher.shared.emmitEditEvent(for: postStatus)
+        }
       }
       HapticManager.shared.fireHaptic(.notification(.success))
       if hasExplicitlySelectedLanguage, let selectedLanguage {
