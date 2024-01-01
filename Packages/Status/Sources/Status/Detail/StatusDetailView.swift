@@ -81,19 +81,21 @@ public struct StatusDetailView: View {
             proxy.scrollTo(newValue, anchor: .top)
           }
         }
-        .task {
+        .onAppear {
           guard !isLoaded else { return }
           viewModel.client = client
           viewModel.routerPath = routerPath
-          let result = await viewModel.fetch()
-          isLoaded = true
+          Task {
+            let result = await viewModel.fetch()
+            isLoaded = true
 
-          if !result {
-            if let url = viewModel.remoteStatusURL {
-              await UIApplication.shared.open(url)
-            }
-            DispatchQueue.main.async {
-              _ = routerPath.path.popLast()
+            if !result {
+              if let url = viewModel.remoteStatusURL {
+                await UIApplication.shared.open(url)
+              }
+              DispatchQueue.main.async {
+                _ = routerPath.path.popLast()
+              }
             }
           }
         }
