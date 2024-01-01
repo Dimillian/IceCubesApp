@@ -33,5 +33,9 @@ let package = Package(
         .enableExperimentalFeature("StrictConcurrency"),
       ]
     ),
+    .testTarget(
+      name: "EnvTests",
+      dependencies: ["Env"]
+    ),
   ]
 )
