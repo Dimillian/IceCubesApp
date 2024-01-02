@@ -44848,8 +44848,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Secondary status action"
+            "state" : "translated",
+            "value" : "狀態列次要動作"
           }
         }
       }
@@ -47090,8 +47090,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Tabs Customizations"
+            "state" : "translated",
+            "value" : "客製化頁籤列"
           }
         }
       }
@@ -47917,7 +47917,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "快速更新"
+            "value" : "盡速更新"
           }
         }
       }
@@ -50630,8 +50630,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+            "state" : "translated",
+            "value" : "「盡速更新」將停用暫存，每次回到時間軸頁籤時都會重新下載新鮮內容。"
           }
         }
       }
@@ -55474,8 +55474,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fifth Tab"
+            "state" : "translated",
+            "value" : "頁籤五"
           }
         }
       }
@@ -55592,8 +55592,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "First Tab"
+            "state" : "translated",
+            "value" : "頁籤一"
           }
         }
       }
@@ -55710,8 +55710,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fourth Tab"
+            "state" : "translated",
+            "value" : "頁籤四"
           }
         }
       }
@@ -55828,8 +55828,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Second Tab"
+            "state" : "translated",
+            "value" : "頁籤二"
           }
         }
       }
@@ -55946,8 +55946,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Third Tab"
+            "state" : "translated",
+            "value" : "頁籤三"
           }
         }
       }
@@ -70029,8 +70029,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Mentions"
+            "state" : "translated",
+            "value" : "提及"
           }
         }
       }
@@ -73500,8 +73500,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Resume"
+            "state" : "translated",
+            "value" : "繼續"
           }
         }
       }
