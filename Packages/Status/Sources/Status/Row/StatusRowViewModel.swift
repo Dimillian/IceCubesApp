@@ -186,20 +186,6 @@ import SwiftUI
     }
   }
 
-  func navigateToMention(mention: Mention) {
-    if isRemote {
-      withAnimation {
-        isLoadingRemoteContent = true
-      }
-      Task {
-        await routerPath.navigateToAccountFrom(url: mention.url)
-        isLoadingRemoteContent = false
-      }
-    } else {
-      routerPath.navigate(to: .accountDetail(id: mention.id))
-    }
-  }
-
   func goToParent() {
     guard let id = status.inReplyToId else { return }
     if let _ = scrollToId {
