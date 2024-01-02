@@ -41,7 +41,6 @@ struct TimelineQuickAccessPills: View {
       }
       pinnedFilters = filters
     })
-    
   }
   
   @ViewBuilder

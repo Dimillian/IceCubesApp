@@ -45,15 +45,17 @@ struct TimelineUnreadStatusesView: View {
           // Accessibility: this results in a frame with a size of at least 44x44 at regular font size
           .frame(minWidth: 16, minHeight: 16)
           .font(.footnote.monospacedDigit())
+          .fontWeight(.bold)
+          .foregroundStyle(theme.labelColor)
       }
       .accessibilityLabel("accessibility.tabs.timeline.unread-posts.label-\(observer.pendingStatusesCount)")
       .accessibilityHint("accessibility.tabs.timeline.unread-posts.hint")
       #if os(visionOS)
       .buttonStyle(.bordered)
-      .tint(Material.thick)
+      .tint(Material.ultraThick)
       #else
       .buttonStyle(.bordered)
-      .background(.thinMaterial)
+      .background(Material.ultraThick)
       #endif
       .cornerRadius(8)
       .overlay(
