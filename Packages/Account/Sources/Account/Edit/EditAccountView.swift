@@ -69,7 +69,7 @@ public struct EditAccountView: View {
     Section {
       ZStack(alignment: .center) {
         if let header = viewModel.header {
-          ZStack(alignment: .topTrailing) {
+          ZStack(alignment: .topLeading) {
             LazyImage(url: header) { state in
               if let image = state.image {
                 image
@@ -85,24 +85,20 @@ public struct EditAccountView: View {
               }
             }
             .frame(height: 150)
-            Button {
-              viewModel.isChangingHeader = true
-              viewModel.isPhotoPickerPresented = true
-            } label: {
-              Image(systemName: "photo.badge.plus")
-                .foregroundStyle(.white)
-            }
-            .buttonStyle(.borderedProminent)
-            .clipShape(Circle())
-            .offset(y: 4)
           }
         }
         if let avatar = viewModel.avatar {
           ZStack(alignment: .bottomLeading) {
             AvatarView(avatar, config: .account)
-            Button {
-              viewModel.isChangingAvatar = true
-              viewModel.isPhotoPickerPresented = true
+            Menu {
+              Button("account.edit.avatar") {
+                viewModel.isChangingAvatar = true
+                viewModel.isPhotoPickerPresented = true
+              }
+              Button("account.edit.header") {
+                viewModel.isChangingHeader = true
+                viewModel.isPhotoPickerPresented = true
+              }
             } label: {
               Image(systemName: "photo.badge.plus")
                 .foregroundStyle(.white)
@@ -110,7 +106,6 @@ public struct EditAccountView: View {
             .buttonStyle(.borderedProminent)
             .clipShape(Circle())
             .offset(x: -8, y: 8)
-
           }
         }
       }
