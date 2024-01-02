@@ -140,6 +140,19 @@ public struct TimelineView: View {
         }
       }
     }
+    .onChange(of: account.lists, { _, lists in
+      guard client.isAuth else { return }
+      switch timeline {
+      case let .list(list):
+        if let accountList = lists.first(where: { $0.id == list.id }),
+            list.id == accountList.id,
+           accountList.title != list.title {
+          timeline = .list(list: accountList)
+        }
+      default:
+        break
+      }
+    })
     .onChange(of: timeline) { _, newValue in
       switch newValue {
       case let .remoteLocal(server, _):
