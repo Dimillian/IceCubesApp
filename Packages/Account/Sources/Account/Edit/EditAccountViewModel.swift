@@ -2,6 +2,8 @@ import Models
 import Network
 import Observation
 import SwiftUI
+import PhotosUI
+import Status
 
 @MainActor
 @Observable class EditAccountViewModel {
@@ -26,10 +28,43 @@ import SwiftUI
   var isLocked: Bool = false
   var isDiscoverable: Bool = false
   var fields: [FieldEditViewModel] = []
+  var avatar: URL?
+  var header: URL?
+  
+  var isPhotoPickerPresented: Bool = false {
+    didSet {
+      if !isPhotoPickerPresented && mediaPickers.isEmpty {
+        isChangingAvatar = false
+        isChangingHeader = false
+      }
+    }
+  }
+  var isChangingAvatar: Bool = false
+  var isChangingHeader: Bool = false
 
   var isLoading: Bool = true
   var isSaving: Bool = false
   var saveError: Bool = false
+  
+  var mediaPickers: [PhotosPickerItem] = [] {
+    didSet {
+      if let item = mediaPickers.first {
+        Task {
+          if let data = await getItemImageData(item: item) {
+            if isChangingAvatar {
+              await uploadAvatar(data: data)
+            } else if isChangingHeader {
+              await uploadHeader(data: data)
+            }
+            await fetchAccount()
+            isChangingAvatar = false
+            isChangingHeader = false
+            mediaPickers = []
+          }
+        }
+      }
+    }
+  }
 
   init() {}
 
@@ -44,6 +79,8 @@ import SwiftUI
       isBot = account.bot
       isLocked = account.locked
       isDiscoverable = account.discoverable ?? false
+      avatar = account.avatar
+      header = account.header
       fields = account.source?.fields.map { .init(name: $0.name, value: $0.value.asRawText) } ?? []
       withAnimation {
         isLoading = false
@@ -70,5 +107,48 @@ import SwiftUI
       isSaving = false
       saveError = true
     }
+  }
+  
+  private func uploadHeader(data: Data) async -> Bool {
+    guard let client else { return false }
+    do {
+      let response = try await client.mediaUpload(endpoint: Accounts.updateCredentialsMedia,
+                                                   version: .v1,
+                                                   method: "PATCH",
+                                                   mimeType: "image/jpeg",
+                                                   filename: "header",
+                                                   data: data)
+      return response?.statusCode == 200
+    } catch {
+      return false
+    }
+  }
+  
+  private func uploadAvatar(data: Data) async -> Bool {
+    guard let client else { return false }
+    do {
+      let response = try await client.mediaUpload(endpoint: Accounts.updateCredentialsMedia,
+                                                   version: .v1,
+                                                   method: "PATCH",
+                                                   mimeType: "image/jpeg",
+                                                   filename: "avatar",
+                                                   data: data)
+      return response?.statusCode == 200
+    } catch {
+      return false
+    }
+  }
+  
+  private func getItemImageData(item: PhotosPickerItem) async -> Data? {
+    guard let imageFile = try? await item.loadTransferable(type: ImageFileTranseferable.self) else { return nil }
+
+    let compressor = StatusEditorCompressor()
+
+    guard let compressedData = await compressor.compressImageFrom(url: imageFile.url),
+            let image = UIImage(data: compressedData),
+            let uploadData = try? await compressor.compressImageForUpload(image)
+    else { return nil }
+    
+    return uploadData
   }
 }
