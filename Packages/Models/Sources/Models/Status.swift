@@ -8,7 +8,6 @@ public enum Visibility: String, Codable, CaseIterable, Hashable, Equatable, Send
 }
 
 public protocol AnyStatus {
-  var viewId: StatusViewId { get }
   var id: String { get }
   var content: HTMLString { get }
   var account: Account { get }
@@ -38,20 +37,9 @@ public protocol AnyStatus {
   var isHidden: Bool { get }
 }
 
-public struct StatusViewId: Hashable {
-  let id: String
-  let editedAt: Date?
-}
-
-public extension AnyStatus {
-  var viewId: StatusViewId {
-    StatusViewId(id: id, editedAt: editedAt?.asDate)
-  }
-}
-
 public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable {
   public static func == (lhs: Status, rhs: Status) -> Bool {
-    lhs.id == rhs.id && lhs.viewId == rhs.viewId
+    lhs.id == rhs.id && lhs.editedAt?.asDate == rhs.editedAt?.asDate
   }
 
   public func hash(into hasher: inout Hasher) {
@@ -260,8 +248,6 @@ public final class ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Ha
     self.language = language
   }
 }
-
-extension StatusViewId: Sendable {}
 
 // Every property in Status is immutable.
 extension Status: Sendable {}
