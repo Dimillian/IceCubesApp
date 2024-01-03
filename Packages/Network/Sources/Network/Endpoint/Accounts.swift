@@ -9,6 +9,7 @@ public enum Accounts: Endpoint {
   case followedTags
   case featuredTags(id: String)
   case verifyCredentials
+  case updateCredentialsMedia
   case updateCredentials(json: UpdateCredentialsData)
   case statuses(id: String,
                 sinceId: String?,
@@ -47,7 +48,7 @@ public enum Accounts: Endpoint {
       "accounts/\(id)/featured_tags"
     case .verifyCredentials:
       "accounts/verify_credentials"
-    case .updateCredentials:
+    case .updateCredentials, .updateCredentialsMedia:
       "accounts/update_credentials"
     case let .statuses(id, _, _, _, _, _):
       "accounts/\(id)/statuses"

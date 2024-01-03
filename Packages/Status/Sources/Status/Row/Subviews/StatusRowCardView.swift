@@ -48,7 +48,8 @@ public struct StatusRowCardView: View {
       if let title = card.title, let url = URL(string: card.url) {
         VStack(alignment: .leading) {
           let sitesWithIcons = ["apps.apple.com", "music.apple.com", "open.spotify.com"]
-          if let host = url.host(), sitesWithIcons.contains(host) {
+          if (UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac),
+             let host = url.host(), sitesWithIcons.contains(host) {
             iconLinkPreview(title, url)
           } else {
             defaultLinkPreview(title, url)

@@ -17,12 +17,10 @@ public struct MediaUIView: View, @unchecked Sendable {
             DisplayView(data: $0)
               .containerRelativeFrame([.horizontal, .vertical])
               .id($0)
-              .safeAreaPadding($0.type == .av ? [.bottom] : [])
           }
         }
         .scrollTargetLayout()
       }
-      .ignoresSafeArea(.all, edges: .bottom)
       .focusable()
       .focused($isFocused)
       .focusEffectDisabled()

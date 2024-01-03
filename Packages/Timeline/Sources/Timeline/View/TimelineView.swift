@@ -19,7 +19,7 @@ public struct TimelineView: View {
   @Environment(RouterPath.self) private var routerPath
 
   @State private var viewModel = TimelineViewModel()
-  @State private var prefetcher = TimelinePrefetcher()
+  @State private var prefetcher = TimelineMediaPrefetcher()
 
   @State private var wasBackgrounded: Bool = false
   @State private var collectionView: UICollectionView?
@@ -77,15 +77,16 @@ public struct TimelineView: View {
           collectionView.prefetchDataSource = prefetcher
         }
         if viewModel.timeline.supportNewestPagination {
-          PendingStatusesObserverView(observer: viewModel.pendingStatusesObserver)
+          TimelineUnreadStatusesView(observer: viewModel.pendingStatusesObserver)
         }
       }
-      .safeAreaInset(edge: .top) {
+      .safeAreaInset(edge: .top, spacing: 0) {
         if canFilterTimeline, !pinnedFilters.isEmpty {
           TimelineQuickAccessPills(pinnedFilters: $pinnedFilters, timeline: $timeline)
             .padding(.vertical, 8)
             .padding(.horizontal, .layoutPadding)
-            .background(theme.primaryBackgroundColor.opacity(0.50).background(Material.ultraThin))
+            .background(theme.primaryBackgroundColor.opacity(0.50))
+            .background(Material.regular)
         }
       }
       .onChange(of: viewModel.scrollToIndex) { _, newValue in
@@ -113,6 +114,7 @@ public struct TimelineView: View {
     }
     .navigationBarTitleDisplayMode(.inline)
     .onAppear {
+      viewModel.canFilterTimeline = canFilterTimeline
       viewModel.isTimelineVisible = true
 
       if viewModel.client == nil {
@@ -139,6 +141,19 @@ public struct TimelineView: View {
         }
       }
     }
+    .onChange(of: account.lists, { _, lists in
+      guard client.isAuth else { return }
+      switch timeline {
+      case let .list(list):
+        if let accountList = lists.first(where: { $0.id == list.id }),
+            list.id == accountList.id,
+           accountList.title != list.title {
+          timeline = .list(list: accountList)
+        }
+      default:
+        break
+      }
+    })
     .onChange(of: timeline) { _, newValue in
       switch newValue {
       case let .remoteLocal(server, _):
@@ -242,7 +257,7 @@ public struct TimelineView: View {
 
   private var scrollToTopView: some View {
     ScrollToView()
-      .frame(height: .layoutPadding)
+      .frame(height: pinnedFilters.isEmpty ? .layoutPadding : 0)
       .onAppear {
         viewModel.scrollToTopVisible = true
       }

@@ -102,6 +102,19 @@ public struct AccountsListView: View {
     .background(theme.primaryBackgroundColor)
     #endif
     .listStyle(.plain)
+    .toolbar {
+      ToolbarItem(placement: .principal) {
+        VStack {
+          Text(viewModel.mode.title)
+            .font(.headline)
+          if let count = viewModel.totalCount {
+            Text(String(count))
+              .font(.footnote)
+              .foregroundStyle(.secondary)
+          }
+        }
+      }
+    }
     .navigationTitle(viewModel.mode.title)
     .navigationBarTitleDisplayMode(.inline)
     .task {

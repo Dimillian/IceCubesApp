@@ -151,10 +151,10 @@ struct MovieFileTranseferable: Transferable {
   }
 }
 
-struct ImageFileTranseferable: Transferable {
-  let url: URL
+public struct ImageFileTranseferable: Transferable, Sendable {
+  public let url: URL
 
-  static var transferRepresentation: some TransferRepresentation {
+  public static var transferRepresentation: some TransferRepresentation {
     FileRepresentation(contentType: .image) { image in
       SentTransferredFile(image.url)
     } importing: { received in

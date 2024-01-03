@@ -162,15 +162,15 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
       if let accountId {
         return Accounts.statuses(id: accountId, sinceId: nil, tag: tag, onlyMedia: nil, excludeReplies: nil, pinned: nil)
       } else {
-        return Timelines.hashtag(tag: tag, additional: nil, maxId: maxId)
+        return Timelines.hashtag(tag: tag, additional: nil, maxId: maxId, minId: minId)
       }
     case let .tagGroup(_, tags):
       var tags = tags
       if !tags.isEmpty {
         let tag = tags.removeFirst()
-        return Timelines.hashtag(tag: tag, additional: tags, maxId: maxId)
+        return Timelines.hashtag(tag: tag, additional: tags, maxId: maxId, minId: minId)
       } else {
-        return Timelines.hashtag(tag: "", additional: tags, maxId: maxId)
+        return Timelines.hashtag(tag: "", additional: tags, maxId: maxId, minId: minId)
       }
     }
   }

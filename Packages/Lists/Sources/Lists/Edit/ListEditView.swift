@@ -72,8 +72,17 @@ public struct ListEditView: View {
       .background(theme.secondaryBackgroundColor)
       .toolbar {
         ToolbarItem {
-          Button("action.done") {
-            dismiss()
+          Button {
+            Task {
+              await viewModel.update()
+              dismiss()
+            }
+          } label: {
+            if viewModel.isUpdating {
+              ProgressView()
+            } else {
+              Text("action.done")
+            }
           }
         }
       }

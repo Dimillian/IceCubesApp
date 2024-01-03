@@ -46,6 +46,7 @@ public enum AccountsListMode {
   private var relationships: [Relationship] = []
 
   var state = State.loading
+  var totalCount: Int?
 
   private var nextPageId: String?
 
@@ -60,9 +61,13 @@ public enum AccountsListMode {
       let link: LinkHandler?
       switch mode {
       case let .followers(accountId):
+        var account: Account = try await client.get(endpoint: Accounts.accounts(id: accountId))
+        totalCount = account.followersCount
         (accounts, link) = try await client.getWithLink(endpoint: Accounts.followers(id: accountId,
                                                                                      maxId: nil))
       case let .following(accountId):
+        var account: Account = try await client.get(endpoint: Accounts.accounts(id: accountId))
+        totalCount = account.followingCount
         (accounts, link) = try await client.getWithLink(endpoint: Accounts.following(id: accountId,
                                                                                      maxId: nil))
       case let .rebloggedBy(statusId):
