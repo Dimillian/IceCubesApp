@@ -56,7 +56,6 @@ struct StatusRowContentView: View {
          !viewModel.isEmbedLoading,
          !isCompact,
          theme.statusDisplayStyle != .compact,
-         viewModel.finalStatus.content.statusesURLs.isEmpty,
          viewModel.finalStatus.mediaAttachments.isEmpty
       {
         StatusRowCardView(card: card)
