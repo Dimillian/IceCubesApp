@@ -2,7 +2,14 @@
   "sourceLanguage" : "en",
   "strings" : {
     "" : {
-
+      "localizations" : {
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
     },
     "  ⸱  " : {
       "localizations" : {
@@ -329,7 +336,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is already selected"
+            "value" : "%@ вже обраний"
           }
         },
         "zh-Hans" : {
@@ -447,7 +454,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ already exists"
+            "value" : "%@ вже існує"
           }
         },
         "zh-Hans" : {
@@ -565,7 +572,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is an invalid SFSymbol name"
+            "value" : "%@ - неправильне ім'я для SFSymbol"
           }
         },
         "zh-Hans" : {
@@ -908,7 +915,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Профілі"
+            "value" : "Облікові записи"
           }
         },
         "zh-Hans" : {
@@ -1027,7 +1034,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Opens options sheet."
+            "value" : "Відкриває випадаючий список"
           }
         },
         "zh-Hans" : {
@@ -1146,7 +1153,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "AI prompt"
+            "value" : "Запит для штучного інтелекту (AI)"
           }
         },
         "zh-Hans" : {
@@ -1503,7 +1510,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Власні emojis"
+            "value" : "Власні емоджі"
           }
         },
         "zh-Hans" : {
@@ -2217,7 +2224,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visibility"
+            "value" : "Видимість"
           }
         },
         "zh-Hans" : {
@@ -2336,7 +2343,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Off"
+            "value" : "Виключити"
           }
         },
         "zh-Hans" : {
@@ -2456,7 +2463,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "On"
+            "value" : "Включити"
           }
         },
         "zh-Hans" : {
@@ -7216,7 +7223,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Blocked"
+            "value" : "Заблокований"
           }
         },
         "zh-Hans" : {
@@ -7454,7 +7461,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Muted"
+            "value" : "Прихований"
           }
         },
         "zh-Hans" : {
@@ -7573,7 +7580,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Private account"
+            "value" : "Приватний обліковий запис"
           }
         },
         "zh-Hans" : {
@@ -7691,7 +7698,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Додати профіль"
+            "value" : "Додати обліковий запис"
           }
         },
         "zh-Hans" : {
@@ -8894,7 +8901,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Block %@"
+            "value" : "Заблокувати %@"
           }
         },
         "zh-Hans" : {
@@ -9013,7 +9020,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Do you want to block this user?"
+            "value" : "Чи бажаєте ви заблокувати цього користувача?"
           }
         },
         "zh-Hans" : {
@@ -9605,7 +9612,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Повідомлення"
+            "value" : "Написати повідомлення"
           }
         },
         "zh-Hans" : {
@@ -10199,7 +10206,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Privacy Settings"
+            "value" : "Налаштування приватності"
           }
         },
         "zh-Hans" : {
@@ -10556,7 +10563,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Поширити цей профіль"
+            "value" : "Поширити цей обліковий запис"
           }
         },
         "zh-Hans" : {
@@ -11030,8 +11037,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Додати підключення"
+            "state" : "translated",
+            "value" : "Додати профіль"
           }
         },
         "zh-Hans" : {
@@ -11281,125 +11288,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "轉嘟者"
-          }
-        }
-      }
-    },
-    "account.detail.about" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "be" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Дадзеныя"
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Quant a"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Über"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "About"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "About"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Acerca de"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Honi buruz"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "À propos"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Informazioni"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "詳細"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "정보"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Om"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Over"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Dane"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sobre"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hakkında"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Про"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "附加信息"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "關於"
           }
         }
       }
@@ -11947,7 +11835,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Про"
+            "value" : "Про вас"
           }
         },
         "zh-Hans" : {
@@ -12660,8 +12548,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit avatar"
+            "state" : "translated",
+            "value" : "Редагувати аватар"
           }
         },
         "zh-Hans" : {
@@ -13018,7 +12906,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Помилка збереження облікового запису"
+            "value" : "Помилка збереження вашого облікового запису"
           }
         },
         "zh-Hans" : {
@@ -13136,8 +13024,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit header"
+            "state" : "translated",
+            "value" : "Редагувати заголовок"
           }
         },
         "zh-Hans" : {
@@ -13732,7 +13620,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Warning: These settings are overwritten by the global content settings"
+            "value" : "Увага: ці налаштування перезаписані глобальними налаштуваннями"
           }
         },
         "zh-Hans" : {
@@ -14922,7 +14810,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Підписаний"
+            "value" : "Підписані"
           }
         },
         "zh-Hans" : {
@@ -15398,7 +15286,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Доєднався"
+            "value" : "Доєднались"
           }
         },
         "zh-Hans" : {
@@ -16847,7 +16735,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Підписується на вас"
+            "value" : "Підписані на вас"
           }
         },
         "zh-Hans" : {
@@ -17680,7 +17568,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Видалено"
+            "value" : "Видалити"
           }
         },
         "zh-Hans" : {
@@ -18035,7 +17923,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Збережено"
+            "value" : "Зберегти"
           }
         },
         "zh-Hans" : {
@@ -18154,7 +18042,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Переглянути помилки"
+            "value" : "Переглянути помилку"
           }
         },
         "zh-Hans" : {
@@ -18272,7 +18160,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag Group Icon (SFSymbol name)"
+            "value" : "Іконка для групи теґів (SFSymbol)"
           }
         },
         "zh-Hans" : {
@@ -18390,7 +18278,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add tags to the group"
+            "value" : "Додати теґи до групи"
           }
         },
         "zh-Hans" : {
@@ -18508,7 +18396,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag"
+            "value" : "Теґ"
           }
         },
         "zh-Hans" : {
@@ -18626,7 +18514,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Duplicated tag"
+            "value" : "Дубльований теґ"
           }
         },
         "zh-Hans" : {
@@ -18744,7 +18632,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Number of tags is less than 2"
+            "value" : "Кількість теґів менша двох"
           }
         },
         "zh-Hans" : {
@@ -18862,7 +18750,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Symbol Found"
+            "value" : "Символ не знайдено"
           }
         },
         "zh-Hans" : {
@@ -18981,7 +18869,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag Group Title"
+            "value" : "Назва групи теґів"
           }
         },
         "zh-Hans" : {
@@ -19099,7 +18987,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Empty title"
+            "value" : "Назва не може бути порожньою"
           }
         },
         "zh-Hans" : {
@@ -19217,7 +19105,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No symbol is selected"
+            "value" : "Символ не обрано"
           }
         },
         "zh-Hans" : {
@@ -20526,7 +20414,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Виникла халепа"
+            "value" : "Виникла помилка"
           }
         },
         "zh-Hans" : {
@@ -25047,7 +24935,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "All"
+            "value" : "Всі"
           }
         },
         "zh-Hans" : {
@@ -25166,7 +25054,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hashtags"
+            "value" : "Хештеґи"
           }
         },
         "zh-Hans" : {
@@ -25285,7 +25173,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "People"
+            "value" : "Люди"
           }
         },
         "zh-Hans" : {
@@ -25404,7 +25292,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Posts"
+            "value" : "Дописи"
           }
         },
         "zh-Hans" : {
@@ -30860,7 +30748,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hide these posts from home"
+            "value" : "Заховати ці дописи з Домівки"
           }
         },
         "zh-Hans" : {
@@ -34342,7 +34230,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "підписка на вас"
+            "value" : "підписались на вас"
           }
         },
         "zh-Hans" : {
@@ -37266,112 +37154,10 @@
     },
     "parent view for EditTagGroupView" : {
       "localizations" : {
-        "be" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "parent view for EditTagGroupView"
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "parent view for EditTagGroupView"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Elternansicht für EditTagGroupView"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "parent view for EditTagGroupView"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vista principal para EditTagGroupView"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "EditTagGroupView ikuspegi nagusia"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "parent view for EditTagGroupView"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "parent view for EditTagGroupView"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "parent view for EditTagGroupView"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "parent view for EditTagGroupView"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "parent view for EditTagGroupView"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "parent view for EditTagGroupView"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "parent view for EditTagGroupView"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "parent view for EditTagGroupView"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "parent view for EditTagGroupView"
-          }
-        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "parent view for EditTagGroupView"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "parent view for EditTagGroupView"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "parent view for EditTagGroupView"
+            "value" : ""
           }
         }
       }
@@ -37950,7 +37736,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Скарга на допис"
+            "value" : "Поскаржитись на допис"
           }
         },
         "zh-Hans" : {
@@ -38187,7 +37973,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes створено з Open Source продуктами та любовʼю:"
+            "value" : "Ice Cubes створено за допомогою цього Open Source програмного забезпечення:"
           }
         },
         "zh-Hans" : {
@@ -38541,7 +38327,7 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Додати обліковий запис"
           }
         },
@@ -39960,7 +39746,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "У згорнутих публікаціях відображається лише обмежена кількість рядків разом із кнопкою, щоб показати повну публікацію"
+            "value" : "Згорнуті дописи відображають лише обмежену кількість рядків. Щоб побачити мовний вміст, необхідно натиснути на кнопку розгорнення допису."
           }
         },
         "zh-Hans" : {
@@ -40078,7 +39864,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reply Visibility"
+            "value" : "Видимість відповідей"
           }
         },
         "zh-Hans" : {
@@ -41258,7 +41044,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Публікація"
+            "value" : "Допис"
           }
         },
         "zh-Hans" : {
@@ -41494,7 +41280,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sharing"
+            "value" : "Поширення"
           }
         },
         "zh-Hans" : {
@@ -41613,7 +41399,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Link and Text"
+            "value" : "Посилання та текст"
           }
         },
         "zh-Hans" : {
@@ -41732,7 +41518,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Link Only"
+            "value" : "Лише посилання"
           }
         },
         "zh-Hans" : {
@@ -41850,7 +41636,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Share Button Behavior"
+            "value" : "Поведінка кнопки Поширити"
           }
         },
         "zh-Hans" : {
@@ -42086,7 +41872,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Розташування Аватара"
+            "value" : "Розташування аватара"
           }
         },
         "zh-Hans" : {
@@ -42204,7 +41990,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Форма Аватара"
+            "value" : "Форма аватара"
           }
         },
         "zh-Hans" : {
@@ -43270,8 +43056,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Max reply indentation: %@"
+            "state" : "translated",
+            "value" : "Максимальний відступ підповідей: %@"
           }
         },
         "zh-Hans" : {
@@ -43626,7 +43412,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show Pending Button on the Left"
+            "value" : "Показувати непрочитану кнопку зліва"
           }
         },
         "zh-Hans" : {
@@ -44333,8 +44119,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Account on Hover"
+            "state" : "translated",
+            "value" : "Показувати обліковий запис при наведенні"
           }
         },
         "zh-Hans" : {
@@ -44570,8 +44356,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show reply indentation"
+            "state" : "translated",
+            "value" : "Показувати відступи у відповідях"
           }
         },
         "zh-Hans" : {
@@ -44924,8 +44710,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Secondary status action"
+            "state" : "translated",
+            "value" : "Вторинна дія статуса"
           }
         },
         "zh-Hans" : {
@@ -47992,8 +47778,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh"
+            "state" : "translated",
+            "value" : "Швидке оновлення"
           }
         },
         "zh-Hans" : {
@@ -49645,7 +49431,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Новий допис"
+            "value" : "Нові дописи"
           }
         },
         "zh-Hans" : {
@@ -49999,7 +49785,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Профілі"
+            "value" : "Облікові записи"
           }
         },
         "zh-Hans" : {
@@ -50706,8 +50492,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
+            "state" : "translated",
+            "value" : "Швидке оновлення вимикає збереження позиції у стрічці. Завжди оновлює стрічку наново."
           }
         },
         "zh-Hans" : {
@@ -54011,7 +53797,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Публікація"
+            "value" : "Надіслати"
           }
         },
         "zh-Hans" : {
@@ -54843,7 +54629,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Дії гортання доступні, якщо провести пальцем ліворуч або праворуч по публікації. Додаткова дія доступна, лише якщо встановлено основну дію."
+            "value" : "Дії гортання доступні, якщо провести пальцем ліворуч або праворуч по допису. Додаткова дія доступна, лише якщо встановлено основну дію."
           }
         },
         "zh-Hans" : {
@@ -56613,7 +56399,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Auto detect language"
+            "value" : "Автоматично визначати мову"
           }
         },
         "zh-Hans" : {
@@ -56731,7 +56517,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary."
+            "value" : "Ice Cubes спробує автоматично визначити мову вашого допису і запропонує оновити мову допису, якщо забажаєте."
           }
         },
         "zh-Hans" : {
@@ -57918,7 +57704,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ви впевнені, що хочете видалити цей допис?"
+            "value" : "Ви впевнені, що хочете видалити цей допис?"
           }
         },
         "zh-Hans" : {
@@ -58751,7 +58537,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Допис"
+            "value" : "Надіслати"
           }
         },
         "zh-Hans" : {
@@ -59345,8 +59131,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Select Text"
+            "state" : "translated",
+            "value" : "Обрати текст"
           }
         },
         "zh-Hans" : {
@@ -62797,8 +62583,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Type your follow-up content here."
+            "state" : "translated",
+            "value" : "Введіть ваш подальший контент тут."
           }
         },
         "zh-Hans" : {
@@ -62917,7 +62703,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Опубліковано на %@ (Detected language)"
+            "value" : "Опубліковано на %@ (Виявлена мова)"
           }
         },
         "zh-Hans" : {
@@ -63036,7 +62822,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Опубліковано на %@ (Selected language)"
+            "value" : "Опубліковано на %@ (Обрана мова)"
           }
         },
         "zh-Hans" : {
@@ -63511,8 +63297,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "🤖 Generate description"
+            "state" : "translated",
+            "value" : "🤖 Згенерувати опис"
           }
         },
         "zh-Hans" : {
@@ -64107,7 +63893,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "У відповідь на %@"
+            "value" : "Відповідаєте %@"
           }
         },
         "zh-Hans" : {
@@ -64821,7 +64607,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "An error occurred while loading posts, please try again."
+            "value" : "Сталась помилка під час завантаження дописів. Будь ласка, спробуйте знову."
           }
         },
         "zh-Hans" : {
@@ -64940,7 +64726,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "An error occurred in the context of this post, please try again."
+            "value" : "Сталась помилка в контексті цього допису. Будь ласка, спробуйте знову."
           }
         },
         "zh-Hans" : {
@@ -67608,8 +67394,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Continues a thread"
+            "state" : "translated",
+            "value" : "Продовження треду"
           }
         },
         "zh-Hans" : {
@@ -70106,7 +69892,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mentions"
+            "value" : "Згадування"
           }
         },
         "zh-Hans" : {
@@ -72264,7 +72050,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add tag group"
+            "value" : "Додати групу теґів"
           }
         },
         "zh-Hans" : {
@@ -72382,7 +72168,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Edit tag group"
+            "value" : "Редагувати групу теґів"
           }
         },
         "zh-Hans" : {
@@ -72736,7 +72522,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag Groups"
+            "value" : "Групи теґів"
           }
         },
         "zh-Hans" : {
@@ -73576,8 +73362,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Resume"
+            "state" : "translated",
+            "value" : "Оновити"
           }
         },
         "zh-Hans" : {
