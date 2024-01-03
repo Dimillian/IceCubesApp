@@ -17,7 +17,8 @@ import Observation
   private var retryDelay: Int = 10
 
   public enum Stream: String {
-    case publicTimeline = "public"
+    case federated = "public"
+    case local
     case user
     case direct
   }

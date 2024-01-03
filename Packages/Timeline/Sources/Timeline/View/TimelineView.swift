@@ -114,6 +114,7 @@ public struct TimelineView: View {
     }
     .navigationBarTitleDisplayMode(.inline)
     .onAppear {
+      viewModel.canFilterTimeline = canFilterTimeline
       viewModel.isTimelineVisible = true
 
       if viewModel.client == nil {
