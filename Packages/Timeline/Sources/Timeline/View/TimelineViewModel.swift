@@ -48,7 +48,10 @@ import SwiftUI
   // Internal source of truth for a timeline.
   private(set) var datasource = TimelineDatasource()
   private let cache = TimelineCache()
-  private var visibileStatusesIds = Set<String>()
+  
+  @ObservationIgnored
+  private var visibileStatuses: [Status] = []
+  
   private var canStreamEvents: Bool = true
 
   var client: Client? {
@@ -98,9 +101,7 @@ import SwiftUI
   
   private func handleLatestOrResume(_ oldValue: TimelineFilter) async {
     if timeline == .latest || timeline == .resume {
-      if oldValue == .home {
-        await clearHomeCache()
-      }
+      await clearCache(filter: oldValue)
       if timeline == .resume, let marker = await fetchMarker() {
         self.marker = marker
       }
@@ -119,7 +120,7 @@ import SwiftUI
       pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
       let newStatus = event.status
       await datasource.insert(newStatus, at: 0)
-      await cacheHome()
+      await cache()
       StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
       let statuses = await datasource.get()
       withAnimation {
@@ -127,7 +128,7 @@ import SwiftUI
       }
     } else if let event = event as? StreamEventDelete {
       await datasource.remove(event.status)
-      await cacheHome()
+      await cache()
       let statuses = await datasource.get()
       withAnimation {
         statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
@@ -137,7 +138,7 @@ import SwiftUI
         StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
         await datasource.replace(event.status, at: originalIndex)
         let statuses = await datasource.get()
-        await cacheHome()
+        await cache()
         statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
       }
     }
@@ -147,23 +148,23 @@ import SwiftUI
 // MARK: - Cache
 
 extension TimelineViewModel {
-  private func cacheHome() async {
-    if let client, timeline == .home {
-      await cache.set(statuses: datasource.get(), client: client.id)
+  private func cache() async {
+    if let client, timeline.supportNewestPagination {
+      await cache.set(statuses: datasource.get(), client: client.id, filter: timeline.id)
     }
   }
 
   private func getCachedStatuses() async -> [Status]? {
     if let client {
-      return await cache.getStatuses(for: client.id)
+      return await cache.getStatuses(for: client.id, filter: timeline.id)
     }
     return nil
   }
 
-  private func clearHomeCache() async {
+  private func clearCache(filter: TimelineFilter) async {
     if let client {
-      await cache.clearCache(for: client.id)
-      await cache.setLatestSeenStatuses(ids: [], for: client)
+      await cache.clearCache(for: client.id, filter: filter.id)
+      await cache.setLatestSeenStatuses([], for: client, filter: filter.id)
     }
   }
 }
@@ -201,7 +202,7 @@ extension TimelineViewModel: StatusesFetcher {
     StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
 
     await datasource.set(statuses)
-    await cacheHome()
+    await cache()
     marker = nil
 
     withAnimation {
@@ -237,22 +238,23 @@ extension TimelineViewModel: StatusesFetcher {
 
     // If we get statuses from the cache for the home timeline, we displays those.
     // Else we fetch top most page from the API.
-    if let cachedStatuses = await getCachedStatuses(),
+    if timeline.supportNewestPagination,
+       let cachedStatuses = await getCachedStatuses(),
        !cachedStatuses.isEmpty,
-       timeline == .home, !UserPreferences.shared.fastRefreshEnabled
+       !UserPreferences.shared.fastRefreshEnabled
     {
       await datasource.set(cachedStatuses)
-      if let latestSeenId = await cache.getLatestSeenStatus(for: client)?.last,
+      let statuses = await datasource.get()
+      if let latestSeenId = await cache.getLatestSeenStatus(for: client, filter: timeline.id)?.first,
          let index = await datasource.indexOf(statusId: latestSeenId),
          index > 0
       {
         // Restore cache and scroll to latest seen status.
-        statusesState = await .display(statuses: datasource.get(), nextPageState: .hasNextPage)
+        statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
         scrollToIndexAnimated = false
         scrollToIndex = index + 1
       } else {
         // Restore cache and scroll to top.
-        let statuses = await datasource.get()
         withAnimation {
           statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
         }
@@ -270,7 +272,7 @@ extension TimelineViewModel: StatusesFetcher {
 
       await datasource.set(statuses)
       statuses = await datasource.get()
-      await cacheHome()
+      await cache()
 
       withAnimation {
         statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
@@ -318,20 +320,20 @@ extension TimelineViewModel: StatusesFetcher {
     }
 
     // Keep track of the top most status, so we can scroll back to it after view update.
-    let topStatusId = await datasource.get().first?.id
+    let topStatus = await datasource.get().first
 
     // Insert new statuses in internal datasource.
     await datasource.insert(contentOf: newStatuses, at: 0)
 
-    // Cache statuses for home timeline.
-    await cacheHome()
+    // Cache statuses for timeline.
+    await cache()
 
     // Append new statuses in the timeline indicator.
     pendingStatusesObserver.pendingStatuses.insert(contentsOf: newStatuses.map(\.id), at: 0)
 
     // High chance the user is scrolled to the top.
     // We need to update the statuses state, and then scroll to the previous top most status.
-    if let topStatusId, visibileStatusesIds.contains(topStatusId), scrollToTopVisible {
+    if let topStatus, visibileStatuses.contains(where: { $0.id == topStatus.id}), scrollToTopVisible {
       pendingStatusesObserver.disableUpdate = true
       let statuses = await datasource.get()
       statusesState = .display(statuses: statuses,
@@ -417,17 +419,17 @@ extension TimelineViewModel: StatusesFetcher {
 
   func statusDidAppear(status: Status) {
     pendingStatusesObserver.removeStatus(status: status)
-    visibileStatusesIds.insert(status.id)
-
-    if let client, timeline == .home {
+    visibileStatuses.insert(status, at: 0)
+    
+    if let client, timeline.supportNewestPagination {
       Task {
-        await cache.setLatestSeenStatuses(ids: visibileStatusesIds.map { $0 }, for: client)
+        await cache.setLatestSeenStatuses(visibileStatuses, for: client, filter: timeline.id)
       }
     }
   }
 
   func statusDidDisappear(status: Status) {
-    visibileStatusesIds.remove(status.id)
+    visibileStatuses.removeAll(where: { $0.id == status.id })
   }
 }
 
@@ -448,7 +450,7 @@ extension TimelineViewModel {
   func saveMarker() {
     guard timeline == .home, let client else { return }
     Task {
-      guard let id = await cache.getLatestSeenStatus(for: client)?.first else { return }
+      guard let id = await cache.getLatestSeenStatus(for: client, filter: timeline.id)?.first else { return }
       do {
         let _: Marker = try await client.post(endpoint: Markers.markHome(lastReadId: id))
       } catch { }
