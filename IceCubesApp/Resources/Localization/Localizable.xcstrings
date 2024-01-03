@@ -12703,8 +12703,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit avatar"
+            "state" : "translated",
+            "value" : "编辑头像"
           }
         },
         "zh-Hant" : {
@@ -13179,8 +13179,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit header"
+            "state" : "translated",
+            "value" : "编辑横幅图片"
           }
         },
         "zh-Hant" : {
@@ -45080,8 +45080,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Secondary status action"
+            "state" : "translated",
+            "value" : "二级操作栏按钮"
           }
         },
         "zh-Hant" : {
@@ -47322,8 +47322,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Tabs Customizations"
+            "state" : "translated",
+            "value" : "首页设置"
           }
         },
         "zh-Hant" : {
@@ -55706,8 +55706,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fifth Tab"
+            "state" : "translated",
+            "value" : "第五页"
           }
         },
         "zh-Hant" : {
@@ -55824,8 +55824,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "First Tab"
+            "state" : "translated",
+            "value" : "第四页"
           }
         },
         "zh-Hant" : {
@@ -55942,8 +55942,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fourth Tab"
+            "state" : "translated",
+            "value" : "第三页"
           }
         },
         "zh-Hant" : {
@@ -56060,8 +56060,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Second Tab"
+            "state" : "translated",
+            "value" : "第二页"
           }
         },
         "zh-Hant" : {
@@ -56178,8 +56178,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Third Tab"
+            "state" : "translated",
+            "value" : "首页"
           }
         },
         "zh-Hant" : {
@@ -70261,8 +70261,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Mentions"
+            "state" : "translated",
+            "value" : "提及"
           }
         },
         "zh-Hant" : {
