@@ -91,7 +91,10 @@ import SwiftUI
   private func fetchTag(id: String) async {
     guard let client else { return }
     do {
-      tag = try await client.get(endpoint: Tags.tag(id: id))
+      let tag: Tag = try await client.get(endpoint: Tags.tag(id: id))
+      withAnimation {
+        self.tag = tag
+      }
     } catch {}
   }
 
