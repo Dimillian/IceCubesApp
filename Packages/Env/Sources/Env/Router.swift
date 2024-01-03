@@ -30,6 +30,7 @@ public enum WindowDestinationEditor: Hashable, Codable {
   case editStatusEditor(status: Status)
   case replyToStatusEditor(status: Status)
   case quoteStatusEditor(status: Status)
+  case mentionStatusEditor(account: Account, visibility: Models.Visibility)
 }
 
 public enum WindowDestinationMedia: Hashable, Codable {

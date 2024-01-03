@@ -11,6 +11,7 @@ import SwiftUI
 public struct AccountDetailView: View {
   @Environment(\.openURL) private var openURL
   @Environment(\.redactionReasons) private var reasons
+  @Environment(\.openWindow) private var openWindow
 
   @Environment(StreamWatcher.self) private var watcher
   @Environment(CurrentAccount.self) private var currentAccount
@@ -329,8 +330,13 @@ public struct AccountDetailView: View {
       if !viewModel.isCurrentUser {
         Button {
           if let account = viewModel.account {
-            routerPath.presentedSheet = .mentionStatusEditor(account: account,
-                                                             visibility: preferences.postVisibility)
+            #if targetEnvironment(macCatalyst)
+              openWindow(value: WindowDestinationEditor.mentionStatusEditor(account: account, visibility: preferences.postVisibility))
+            #else
+              routerPath.presentedSheet = .mentionStatusEditor(account: account,
+                                                               visibility: preferences.postVisibility)
+            #endif
+  
           }
         } label: {
           Image(systemName: "arrowshape.turn.up.left")
