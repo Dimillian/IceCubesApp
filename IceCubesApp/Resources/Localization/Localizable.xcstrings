@@ -45081,7 +45081,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "二级操作栏按钮"
+            "value" : "二级状态操作"
           }
         },
         "zh-Hant" : {
@@ -55707,7 +55707,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "第五页"
+            "value" : "第五栏"
           }
         },
         "zh-Hant" : {
@@ -55825,7 +55825,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "第四页"
+            "value" : "第一栏"
           }
         },
         "zh-Hant" : {
@@ -55943,7 +55943,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "第三页"
+            "value" : "第四栏"
           }
         },
         "zh-Hant" : {
@@ -56061,7 +56061,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "第二页"
+            "value" : "第二栏"
           }
         },
         "zh-Hant" : {
@@ -56179,7 +56179,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "首页"
+            "value" : "第三栏"
           }
         },
         "zh-Hant" : {
