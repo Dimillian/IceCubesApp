@@ -30,7 +30,8 @@ public struct LazyResizableImage<Content: View>: View {
         content(state, proxy)
       }
       .processors([resizeProcessor == nil ? .resize(size: proxy.size) : resizeProcessor!])
-      .onChange(of: proxy.size, initial: true) { _, newValue in
+      .onChange(of: proxy.size, initial: true) { oldValue, newValue in
+        guard oldValue != newValue else { return }
         debouncedTask?.cancel()
         debouncedTask = Task {
           do { try await Task.sleep(for: .milliseconds(200)) } catch { return }

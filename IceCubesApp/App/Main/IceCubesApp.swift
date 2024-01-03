@@ -23,7 +23,7 @@ struct IceCubesApp: App {
   @State var currentAccount = CurrentAccount.shared
   @State var userPreferences = UserPreferences.shared
   @State var pushNotificationsService = PushNotificationsService.shared
-  @State var watcher = StreamWatcher()
+  @State var watcher = StreamWatcher.shared
   @State var quickLook = QuickLook.shared
   @State var theme = Theme.shared
   

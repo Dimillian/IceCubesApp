@@ -4,6 +4,8 @@ import SwiftUI
 
 struct StatusRowTagView: View {
   @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(RouterPath.self) private var routerPath
+  
   @Environment(\.isHomeTimeline) private var isHomeTimeline
   
   let viewModel: StatusRowViewModel
@@ -17,6 +19,9 @@ struct StatusRowTagView: View {
         .font(.scaledFootnote)
         .foregroundStyle(.secondary)
         .fontWeight(.semibold)
+        .onTapGesture {
+          routerPath.navigate(to: .hashTag(tag: tag.title, account: nil))
+        }
     }
   }
 }

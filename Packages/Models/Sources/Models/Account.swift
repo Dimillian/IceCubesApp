@@ -14,7 +14,9 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
       lhs.lastStatusAt == rhs.lastStatusAt &&
       lhs.discoverable == rhs.discoverable &&
       lhs.bot == rhs.bot &&
-      lhs.locked == rhs.locked
+      lhs.locked == rhs.locked &&
+      lhs.avatar == rhs.avatar &&
+      lhs.header == rhs.header
   }
 
   public func hash(into hasher: inout Hasher) {

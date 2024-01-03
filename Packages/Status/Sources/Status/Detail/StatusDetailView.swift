@@ -81,19 +81,21 @@ public struct StatusDetailView: View {
             proxy.scrollTo(newValue, anchor: .top)
           }
         }
-        .task {
+        .onAppear {
           guard !isLoaded else { return }
           viewModel.client = client
           viewModel.routerPath = routerPath
-          let result = await viewModel.fetch()
-          isLoaded = true
+          Task {
+            let result = await viewModel.fetch()
+            isLoaded = true
 
-          if !result {
-            if let url = viewModel.remoteStatusURL {
-              await UIApplication.shared.open(url)
-            }
-            DispatchQueue.main.async {
-              _ = routerPath.path.popLast()
+            if !result {
+              if let url = viewModel.remoteStatusURL {
+                await UIApplication.shared.open(url)
+              }
+              DispatchQueue.main.async {
+                _ = routerPath.path.popLast()
+              }
             }
           }
         }
@@ -122,6 +124,7 @@ public struct StatusDetailView: View {
       let isFocused = self.viewModel.statusId == status.id
 
       StatusRowView(viewModel: viewModel)
+        .id(status.id + (status.editedAt?.asDate.description ?? ""))
         .environment(\.extraLeadingInset, !isCompact ? extraInsets : 0)
         .environment(\.indentationLevel, !isCompact ? indentationLevel : 0)
         .environment(\.isStatusFocused, isFocused)
@@ -135,7 +138,6 @@ public struct StatusDetailView: View {
             }
           }
         }
-        .id(status.id)
         #if !os(visionOS)
         .listRowBackground(viewModel.highlightRowColor)
         #endif

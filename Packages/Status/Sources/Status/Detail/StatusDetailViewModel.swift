@@ -93,7 +93,7 @@ import SwiftUI
         }
       } else {
         state = .display(statuses: statuses)
-        scrollToId = statusId
+        scrollToId = data.status.id + (data.status.editedAt?.asDate.description ?? "")
       }
     } catch {
       if let error = error as? ServerError, error.httpCode == 404 {

@@ -255,6 +255,11 @@ struct EditFilterView: View {
   private var saveButton: some View {
     Button {
       Task {
+        if !newKeyword.isEmpty {
+          await addKeyword(name: newKeyword)
+          newKeyword = ""
+          focusedField = .newKeyword
+        }
         await saveFilter()
         dismiss()
       }

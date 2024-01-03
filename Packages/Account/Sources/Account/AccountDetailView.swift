@@ -11,6 +11,7 @@ import SwiftUI
 public struct AccountDetailView: View {
   @Environment(\.openURL) private var openURL
   @Environment(\.redactionReasons) private var reasons
+  @Environment(\.openWindow) private var openWindow
 
   @Environment(StreamWatcher.self) private var watcher
   @Environment(CurrentAccount.self) private var currentAccount
@@ -27,6 +28,8 @@ public struct AccountDetailView: View {
   @State private var isEditingAccount: Bool = false
   @State private var isEditingFilters: Bool = false
   @State private var isEditingRelationshipNote: Bool = false
+  
+  @State private var displayTitle: Bool = false
 
   @Binding var scrollToTopSignal: Int
 
@@ -45,10 +48,12 @@ public struct AccountDetailView: View {
   public var body: some View {
     ScrollViewReader { proxy in
       List {
+        ScrollToView()
+          .onAppear { displayTitle = false }
+          .onDisappear { displayTitle = true }
         makeHeaderView(proxy: proxy)
           .applyAccountDetailsRowStyle(theme: theme)
           .padding(.bottom, -20)
-          .id(ScrollToView.Constants.scrollToTop)
         familiarFollowers
           .applyAccountDetailsRowStyle(theme: theme)
         featuredTagsView
@@ -311,12 +316,27 @@ public struct AccountDetailView: View {
 
   @ToolbarContentBuilder
   private var toolbarContent: some ToolbarContent {
+    ToolbarItem(placement: .principal) {
+      if let account = viewModel.account, displayTitle {
+        VStack {
+          Text(account.displayName ?? "").font(.headline)
+          Text("account.detail.featured-tags-n-posts \(account.statusesCount ?? 0)")
+            .font(.footnote)
+            .foregroundStyle(.secondary)
+        }
+      }
+    }
     ToolbarItemGroup(placement: .navigationBarTrailing) {
       if !viewModel.isCurrentUser {
         Button {
           if let account = viewModel.account {
-            routerPath.presentedSheet = .mentionStatusEditor(account: account,
-                                                             visibility: preferences.postVisibility)
+            #if targetEnvironment(macCatalyst)
+              openWindow(value: WindowDestinationEditor.mentionStatusEditor(account: account, visibility: preferences.postVisibility))
+            #else
+              routerPath.presentedSheet = .mentionStatusEditor(account: account,
+                                                               visibility: preferences.postVisibility)
+            #endif
+  
           }
         } label: {
           Image(systemName: "arrowshape.turn.up.left")

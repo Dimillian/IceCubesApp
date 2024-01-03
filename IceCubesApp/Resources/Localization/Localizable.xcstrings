@@ -4694,7 +4694,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Egiaztatua"
+            "value" : "Egiaztatuta"
           }
         },
         "fr" : {
@@ -7193,7 +7193,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Blokeatua"
+            "value" : "Blokeatuta"
           }
         },
         "fr" : {
@@ -7431,7 +7431,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mututua"
+            "value" : "Mutututa"
           }
         },
         "fr" : {
@@ -11245,7 +11245,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hauek bultzatua:"
+            "value" : "Hauek bultzatu dute:"
           }
         },
         "fr" : {
@@ -12596,6 +12596,125 @@
         }
       }
     },
+    "account.edit.avatar" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "be" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit avatar"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit avatar"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit avatar"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit avatar"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit avatar"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit avatar"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editatu abatarra"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editer l'avatar"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit avatar"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit avatar"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit avatar"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit avatar"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit avatar"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit avatar"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit avatar"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit avatar"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit avatar"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑头像"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit avatar"
+          }
+        }
+      }
+    },
     "account.edit.display-name" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -12949,6 +13068,125 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "儲存個人檔案時發生錯誤"
+          }
+        }
+      }
+    },
+    "account.edit.header" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "be" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit header"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit header"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit header"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit header"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit header"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit header"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editatu goiburua"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editer la bannière"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit header"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit header"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit header"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit header"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit header"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit header"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit header"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit header"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit header"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑横幅图片"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Edit header"
           }
         }
       }
@@ -30593,7 +30831,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "iPhone-ean"
+            "value" : "iPhone-an"
           }
         },
         "fr" : {
@@ -43359,7 +43597,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erakutsi irakurri gabeko botoia pantailaren behealdean"
+            "value" : "Erakutsi irakurtzeke zenbakia behealdean"
           }
         },
         "fr" : {
@@ -43478,7 +43716,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erakutsi Egiteke botoia ezker aldean"
+            "value" : "Erakutsi irakurtzeke zenbakia ezkerraldean"
           }
         },
         "fr" : {
@@ -44541,7 +44779,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erakutsi fitxen izena"
+            "value" : "Erakutsi erlaitzen izena"
           }
         },
         "fr" : {
@@ -44842,14 +45080,14 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Secondary status action"
+            "state" : "translated",
+            "value" : "二级状态操作"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Secondary status action"
+            "state" : "translated",
+            "value" : "狀態列次要動作"
           }
         }
       }
@@ -47031,7 +47269,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tabs Customizations"
+            "value" : "Personalizzazione dei Tabs"
           }
         },
         "ja" : {
@@ -47084,14 +47322,14 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Tabs Customizations"
+            "state" : "translated",
+            "value" : "首页设置"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Tabs Customizations"
+            "state" : "translated",
+            "value" : "客製化頁籤列"
           }
         }
       }
@@ -47857,7 +48095,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fast refresh"
+            "value" : "Aggiornamento rapido"
           }
         },
         "ja" : {
@@ -47917,7 +48155,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "快速更新"
+            "value" : "盡速更新"
           }
         }
       }
@@ -50523,37 +50761,37 @@
         "be" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Die schnelle Aktualisierung deaktiviert das Caching der Timeline und ruft immer eine frische Timeline ab, wenn du auf den Timeline-Tab oder in die App zurückkehrst."
+            "value" : "Die schnelle Aktualisierung deaktiviert Positionsspeicherung und Caching der Timeline. Sie ruft immer eine frische Timeline ab."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetch a fresh timeline."
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetch a fresh timeline."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
           }
         },
         "eu" : {
@@ -50565,61 +50803,61 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+            "value" : "L'aggiornamento rapido disattiva la cache della timeline e recupera sempre una timeline nuova quando si torna alla scheda della timeline o all'applicazione."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
           }
         },
         "zh-Hans" : {
@@ -50630,8 +50868,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh turns off timeline caching and always fetches a fresh timeline when returning to the timeline tab or the app."
+            "state" : "translated",
+            "value" : "「盡速更新」將停用暫存，每次回到時間軸頁籤時都會重新下載新鮮內容。"
           }
         }
       }
@@ -52329,7 +52567,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Harpidetza automatikoki berriztuko da hurrengo berritze-zikloa baino egun bat lehenago ezeztatzen ez baduzu."
+            "value" : "Babeslearen harpidetza hilero automatikoki berriztuko den harpidetza da. Zure profilean egiaztapen-intsignia erakutsiko du, zuk bakarrik ikusi ahal izango duzu. Harpidetza automatikoki berriztuko da hurrengo berritze-zikloa baino egun bat lehenago ezeztatzen ez baduzu."
           }
         },
         "fr" : {
@@ -55415,7 +55653,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fifth Tab"
+            "value" : "Quinto Tab"
           }
         },
         "ja" : {
@@ -55468,14 +55706,14 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fifth Tab"
+            "state" : "translated",
+            "value" : "第五栏"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fifth Tab"
+            "state" : "translated",
+            "value" : "頁籤五"
           }
         }
       }
@@ -55533,7 +55771,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "First Tab"
+            "value" : "Primo Tab"
           }
         },
         "ja" : {
@@ -55586,14 +55824,14 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "First Tab"
+            "state" : "translated",
+            "value" : "第一栏"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "First Tab"
+            "state" : "translated",
+            "value" : "頁籤一"
           }
         }
       }
@@ -55651,7 +55889,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fourth Tab"
+            "value" : "Quarto Tab"
           }
         },
         "ja" : {
@@ -55704,14 +55942,14 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fourth Tab"
+            "state" : "translated",
+            "value" : "第四栏"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fourth Tab"
+            "state" : "translated",
+            "value" : "頁籤四"
           }
         }
       }
@@ -55769,7 +56007,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Second Tab"
+            "value" : "Secondo Tab"
           }
         },
         "ja" : {
@@ -55822,14 +56060,14 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Second Tab"
+            "state" : "translated",
+            "value" : "第二栏"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Second Tab"
+            "state" : "translated",
+            "value" : "頁籤二"
           }
         }
       }
@@ -55887,7 +56125,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Third Tab"
+            "value" : "Terzo Tab"
           }
         },
         "ja" : {
@@ -55940,14 +56178,14 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Third Tab"
+            "state" : "translated",
+            "value" : "第三栏"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Third Tab"
+            "state" : "translated",
+            "value" : "頁籤三"
           }
         }
       }
@@ -67580,7 +67818,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "(e)k bultzatua"
+            "value" : "(e)k bultzatu du"
           }
         },
         "fr" : {
@@ -67818,7 +68056,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zuk bultzatua"
+            "value" : "Zuk bultzatu duzu"
           }
         },
         "fr" : {
@@ -69958,7 +70196,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mentions"
+            "value" : "Aipamenak"
           }
         },
         "fr" : {
@@ -70023,14 +70261,14 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Mentions"
+            "state" : "translated",
+            "value" : "提及"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Mentions"
+            "state" : "translated",
+            "value" : "提及"
           }
         }
       }
@@ -73441,7 +73679,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Resume"
+            "value" : "Riprendere"
           }
         },
         "ja" : {
@@ -73500,8 +73738,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Resume"
+            "state" : "translated",
+            "value" : "繼續"
           }
         }
       }

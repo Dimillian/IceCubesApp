@@ -189,44 +189,43 @@ struct StatusRowActionsView: View {
   }
 
   private func actionButton(action: Action) -> some View {
-    HStack(spacing: 2) {
-      Button {
-        handleAction(action: action)
-      } label: {
+    Button {
+      handleAction(action: action)
+    } label: {
+      HStack(spacing: 2) {
         if action == .boost {
           action
             .image(dataController: statusDataController, privateBoost: privateBoost())
             .imageScale(.medium)
             .font(.scaledBody)
             .fontWeight(.black)
-            .contentShape(Rectangle())
         } else {
           action
             .image(dataController: statusDataController, privateBoost: privateBoost())
             .font(.scaledBody)
-            .contentShape(Rectangle())
+        }
+        if !isNarrow,
+           let count = action.count(dataController: statusDataController,
+                                    isFocused: isFocused,
+                                    theme: theme), !viewModel.isRemote
+        {
+          Text("\(count)")
+            .contentTransition(.numericText(value: Double(count)))
+            .foregroundColor(Color(UIColor.secondaryLabel))
+            .font(.scaledFootnote)
+            .monospacedDigit()
         }
       }
-      .buttonStyle(
-        .statusAction(
-          isOn: action.isOn(dataController: statusDataController),
-          tintColor: action.tintColor(theme: theme)
-        )
-      )
-      .disabled(action == .boost &&
-        (viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id))
-      if !isNarrow,
-          let count = action.count(dataController: statusDataController,
-                                  isFocused: isFocused,
-                                  theme: theme), !viewModel.isRemote
-      {
-        Text("\(count)")
-          .contentTransition(.numericText(value: Double(count)))
-          .foregroundColor(Color(UIColor.secondaryLabel))
-          .font(.scaledFootnote)
-          .monospacedDigit()
-      }
+      .contentShape(Rectangle())
     }
+    .buttonStyle(
+      .statusAction(
+        isOn: action.isOn(dataController: statusDataController),
+        tintColor: action.tintColor(theme: theme)
+      )
+    )
+    .disabled(action == .boost &&
+              (viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id))
     .accessibilityElement(children: .combine)
     .accessibilityLabel(action.accessibilityLabel(dataController: statusDataController, privateBoost: privateBoost()))
   }

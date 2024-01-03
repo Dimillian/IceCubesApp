@@ -240,6 +240,47 @@ import SwiftUI
                                              filename: String,
                                              data: Data) async throws -> Entity
   {
+    let request = try makeFormDataRequest(endpoint: endpoint,
+                                          version: version,
+                                          method: method,
+                                          mimeType: mimeType,
+                                          filename: filename,
+                                          data: data)
+    let (data, httpResponse) = try await urlSession.data(for: request)
+    logResponseOnError(httpResponse: httpResponse, data: data)
+    do {
+      return try decoder.decode(Entity.self, from: data)
+    } catch {
+      if let serverError = try? decoder.decode(ServerError.self, from: data) {
+        throw serverError
+      }
+      throw error
+    }
+  }
+  
+  public func mediaUpload(endpoint: Endpoint,
+                          version: Version,
+                          method: String,
+                          mimeType: String,
+                          filename: String,
+                          data: Data) async throws -> HTTPURLResponse?
+  {
+    let request = try makeFormDataRequest(endpoint: endpoint,
+                                          version: version,
+                                          method: method,
+                                          mimeType: mimeType,
+                                          filename: filename,
+                                          data: data)
+    let (_, httpResponse) = try await urlSession.data(for: request)
+    return httpResponse as? HTTPURLResponse
+  }
+  
+  private func makeFormDataRequest(endpoint: Endpoint,
+                                   version: Version,
+                                   method: String,
+                                   mimeType: String,
+                                   filename: String,
+                                   data: Data) throws -> URLRequest {
     let url = try makeURL(endpoint: endpoint, forceVersion: version)
     var request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: method)
     let boundary = UUID().uuidString
@@ -252,16 +293,7 @@ import SwiftUI
     httpBody.append(data)
     httpBody.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
     request.httpBody = httpBody as Data
-    let (data, httpResponse) = try await urlSession.data(for: request)
-    logResponseOnError(httpResponse: httpResponse, data: data)
-    do {
-      return try decoder.decode(Entity.self, from: data)
-    } catch {
-      if let serverError = try? decoder.decode(ServerError.self, from: data) {
-        throw serverError
-      }
-      throw error
-    }
+    return request
   }
 
   private func logResponseOnError(httpResponse: URLResponse, data: Data) {

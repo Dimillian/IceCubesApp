@@ -76,6 +76,8 @@ extension IceCubesApp {
           StatusEditorView(mode: .quote(status: status))
         case let .replyToStatusEditor(status):
           StatusEditorView(mode: .replyTo(status: status))
+        case let .mentionStatusEditor(account, visibility):
+          StatusEditorView(mode: .mention(account: account, visibility: visibility))
         case .none:
           EmptyView()
         }

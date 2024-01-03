@@ -2,9 +2,11 @@ import SwiftUI
 import Env
 import Models
 import DesignSystem
+import Network
 
 @MainActor
 struct TimelineQuickAccessPills: View {
+  @Environment(Client.self) private var client
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var currentAccount
   
@@ -23,11 +25,27 @@ struct TimelineQuickAccessPills: View {
     }
     .scrollClipDisabled()
     .scrollIndicators(.never)
+    .onChange(of: currentAccount.lists, { _, lists in
+      guard client.isAuth else { return }
+      var filters = pinnedFilters
+      for (index, filter) in filters.enumerated() {
+        switch filter {
+        case .list(let list):
+          if let accountList = lists.first(where: { $0.id == list.id }),
+             accountList.title != list.title {
+            filters[index] = .list(list: accountList)
+          }
+        default:
+          break
+        }
+      }
+      pinnedFilters = filters
+    })
   }
   
   @ViewBuilder
   private func makePill(_ filter: TimelineFilter) -> some View {
-    if !isFilterSupport(filter) {
+    if !isFilterSupported(filter) {
       EmptyView()
     } else if filter == timeline {
       makeButton(filter)
@@ -42,8 +60,20 @@ struct TimelineQuickAccessPills: View {
     Button {
       timeline = filter
     } label: {
-      Label(filter.localizedTitle(), systemImage: filter.iconName())
-        .font(.callout)
+      switch filter {
+      case .hashtag:
+        Label(filter.title.replacingOccurrences(of: "#", with: ""),
+              systemImage: filter.iconName())
+          .font(.callout)
+      case let .list(list):
+        if let list = currentAccount.lists.first(where: { $0.id == list.id }) {
+          Label(list.title, systemImage: filter.iconName())
+            .font(.callout)
+        }
+      default:
+        Label(filter.localizedTitle(), systemImage: filter.iconName())
+          .font(.callout)
+      }
     }
     .transition(.push(from: .leading).combined(with: .opacity))
     .onDrag {
@@ -55,7 +85,7 @@ struct TimelineQuickAccessPills: View {
                                                     draggedItem: $draggedFilter))
   }
   
-  private func isFilterSupport(_ filter: TimelineFilter) -> Bool {
+  private func isFilterSupported(_ filter: TimelineFilter) -> Bool {
     switch filter {
     case .list(let list):
       return currentAccount.lists.contains(where: { $0.id == list.id })

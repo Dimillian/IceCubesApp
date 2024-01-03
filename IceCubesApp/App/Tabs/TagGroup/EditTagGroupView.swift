@@ -60,7 +60,7 @@ struct EditTagGroupView: View {
       #if !os(visionOS)
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
-      .scrollDismissesKeyboard(.immediately)
+      .scrollDismissesKeyboard(.interactively)
       #endif
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {

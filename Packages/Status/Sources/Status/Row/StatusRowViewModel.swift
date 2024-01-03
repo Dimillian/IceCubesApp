@@ -186,20 +186,6 @@ import SwiftUI
     }
   }
 
-  func navigateToMention(mention: Mention) {
-    if isRemote {
-      withAnimation {
-        isLoadingRemoteContent = true
-      }
-      Task {
-        await routerPath.navigateToAccountFrom(url: mention.url)
-        isLoadingRemoteContent = false
-      }
-    } else {
-      routerPath.navigate(to: .accountDetail(id: mention.id))
-    }
-  }
-
   func goToParent() {
     guard let id = status.inReplyToId else { return }
     if let _ = scrollToId {
@@ -295,6 +281,7 @@ import SwiftUI
   func delete() async {
     do {
       _ = try await client.delete(endpoint: Statuses.status(id: status.id))
+      StreamWatcher.shared.emmitDeleteEvent(for: status.id)
     } catch {}
   }
 

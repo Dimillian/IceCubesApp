@@ -4,7 +4,7 @@ import Observation
 import SwiftUI
 import UIKit
 
-@Observable final class TimelinePrefetcher: NSObject, UICollectionViewDataSourcePrefetching {
+@Observable final class TimelineMediaPrefetcher: NSObject, UICollectionViewDataSourcePrefetching {
   private let prefetcher = ImagePrefetcher()
 
   weak var viewModel: TimelineViewModel?

@@ -17,7 +17,8 @@ import Observation
   private var retryDelay: Int = 10
 
   public enum Stream: String {
-    case publicTimeline = "public"
+    case federated = "public"
+    case local
     case user
     case direct
   }
@@ -26,7 +27,9 @@ import Observation
   public var unreadNotificationsCount: Int = 0
   public var latestEvent: (any StreamEvent)?
 
-  public init() {
+  public static let shared = StreamWatcher()
+  
+  private init() {
     decoder.keyDecodingStrategy = .convertFromSnakeCase
   }
 
@@ -148,5 +151,23 @@ import Observation
       print("Raw data: \(rawEvent.payload)")
       return nil
     }
+  }
+  
+  public func emmitDeleteEvent(for status: String) {
+    let event = StreamEventDelete(status: status)
+    self.events.append(event)
+    self.latestEvent = event
+  }
+  
+  public func emmitEditEvent(for status: Status) {
+    let event = StreamEventStatusUpdate(status: status)
+    self.events.append(event)
+    self.latestEvent = event
+  }
+  
+  public func emmitPostEvent(for status: Status) {
+    let event = StreamEventUpdate(status: status)
+    self.events.append(event)
+    self.latestEvent = event
   }
 }

@@ -47,12 +47,11 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
       .listRowSeparator(.hidden)
 
     case let .display(statuses, nextPageState):
-      ForEach(statuses, id: \.viewId) { status in
+      ForEach(statuses, id: \.id) { status in
         StatusRowView(viewModel: StatusRowViewModel(status: status,
                                                     client: client,
                                                     routerPath: routerPath,
                                                     isRemote: isRemote))
-          .id(status.id)
           .onAppear {
             fetcher.statusDidAppear(status: status)
           }
