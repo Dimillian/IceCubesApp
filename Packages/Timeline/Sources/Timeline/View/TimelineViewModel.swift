@@ -48,11 +48,17 @@ import SwiftUI
   // Internal source of truth for a timeline.
   private(set) var datasource = TimelineDatasource()
   private let cache = TimelineCache()
+  private var isCacheEnabled: Bool {
+    canFilterTimeline && timeline.supportNewestPagination
+  }
   
   @ObservationIgnored
   private var visibileStatuses: [Status] = []
   
   private var canStreamEvents: Bool = true
+  
+  @ObservationIgnored
+  var canFilterTimeline: Bool = true
 
   var client: Client? {
     didSet {
@@ -152,20 +158,20 @@ import SwiftUI
 
 extension TimelineViewModel {
   private func cache() async {
-    if let client, timeline.supportNewestPagination {
+    if let client, isCacheEnabled {
       await cache.set(statuses: datasource.get(), client: client.id, filter: timeline.id)
     }
   }
 
   private func getCachedStatuses() async -> [Status]? {
-    if let client {
+    if let client, isCacheEnabled {
       return await cache.getStatuses(for: client.id, filter: timeline.id)
     }
     return nil
   }
 
   private func clearCache(filter: TimelineFilter) async {
-    if let client {
+    if let client, isCacheEnabled {
       await cache.clearCache(for: client.id, filter: filter.id)
       await cache.setLatestSeenStatuses([], for: client, filter: filter.id)
     }

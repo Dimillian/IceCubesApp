@@ -4700,7 +4700,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Egiaztatua"
+            "value" : "Egiaztatuta"
           }
         },
         "fr" : {
@@ -7199,7 +7199,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Blokeatua"
+            "value" : "Blokeatuta"
           }
         },
         "fr" : {
@@ -7437,7 +7437,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mututua"
+            "value" : "Mutututa"
           }
         },
         "fr" : {
@@ -11251,7 +11251,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hauek bultzatua:"
+            "value" : "Hauek bultzatu dute:"
           }
         },
         "fr" : {
@@ -12524,8 +12524,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit avatar"
+            "state" : "translated",
+            "value" : "Editatu abatarra"
           }
         },
         "fr" : {
@@ -12590,8 +12590,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit avatar"
+            "state" : "translated",
+            "value" : "编辑头像"
           }
         },
         "zh-Hant" : {
@@ -13000,8 +13000,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit header"
+            "state" : "translated",
+            "value" : "Editatu goiburua"
           }
         },
         "fr" : {
@@ -13066,8 +13066,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit header"
+            "state" : "translated",
+            "value" : "编辑横幅图片"
           }
         },
         "zh-Hant" : {
@@ -43259,7 +43259,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erakutsi irakurri gabeko botoia pantailaren behealdean"
+            "value" : "Erakutsi irakurtzeke zenbakia behealdean"
           }
         },
         "fr" : {
@@ -43378,7 +43378,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erakutsi Egiteke botoia ezker aldean"
+            "value" : "Erakutsi irakurtzeke zenbakia ezkerraldean"
           }
         },
         "fr" : {
@@ -44441,7 +44441,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erakutsi fitxen izena"
+            "value" : "Erakutsi erlaitzen izena"
           }
         },
         "fr" : {
@@ -44742,8 +44742,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Secondary status action"
+            "state" : "translated",
+            "value" : "二级状态操作"
           }
         },
         "zh-Hant" : {
@@ -46984,8 +46984,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Tabs Customizations"
+            "state" : "translated",
+            "value" : "首页设置"
           }
         },
         "zh-Hant" : {
@@ -50435,19 +50435,19 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Die schnelle Aktualisierung deaktiviert das Caching der Timeline und ruft immer eine frische Timeline ab, wenn du auf den Timeline-Tab oder in die App zurückkehrst."
+            "value" : "Die schnelle Aktualisierung deaktiviert Positionsspeicherung und Caching der Timeline. Sie ruft immer eine frische Timeline ab."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
+            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetch a fresh timeline."
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
+            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetch a fresh timeline."
           }
         },
         "es" : {
@@ -52229,7 +52229,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Harpidetza automatikoki berriztuko da hurrengo berritze-zikloa baino egun bat lehenago ezeztatzen ez baduzu."
+            "value" : "Babeslearen harpidetza hilero automatikoki berriztuko den harpidetza da. Zure profilean egiaztapen-intsignia erakutsiko du, zuk bakarrik ikusi ahal izango duzu. Harpidetza automatikoki berriztuko da hurrengo berritze-zikloa baino egun bat lehenago ezeztatzen ez baduzu."
           }
         },
         "fr" : {
@@ -55368,8 +55368,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fifth Tab"
+            "state" : "translated",
+            "value" : "第五栏"
           }
         },
         "zh-Hant" : {
@@ -55486,8 +55486,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "First Tab"
+            "state" : "translated",
+            "value" : "第一栏"
           }
         },
         "zh-Hant" : {
@@ -55604,8 +55604,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fourth Tab"
+            "state" : "translated",
+            "value" : "第四栏"
           }
         },
         "zh-Hant" : {
@@ -55722,8 +55722,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Second Tab"
+            "state" : "translated",
+            "value" : "第二栏"
           }
         },
         "zh-Hant" : {
@@ -55840,8 +55840,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Third Tab"
+            "state" : "translated",
+            "value" : "第三栏"
           }
         },
         "zh-Hant" : {
@@ -67480,7 +67480,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "(e)k bultzatua"
+            "value" : "(e)k bultzatu du"
           }
         },
         "fr" : {
@@ -67718,7 +67718,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zuk bultzatua"
+            "value" : "Zuk bultzatu duzu"
           }
         },
         "fr" : {
@@ -69858,7 +69858,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mentions"
+            "value" : "Aipamenak"
           }
         },
         "fr" : {
@@ -69923,8 +69923,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Mentions"
+            "state" : "translated",
+            "value" : "提及"
           }
         },
         "zh-Hant" : {
