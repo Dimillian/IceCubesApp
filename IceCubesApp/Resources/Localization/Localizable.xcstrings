@@ -4694,7 +4694,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Egiaztatua"
+            "value" : "Egiaztatuta"
           }
         },
         "fr" : {
@@ -7193,7 +7193,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Blokeatua"
+            "value" : "Blokeatuta"
           }
         },
         "fr" : {
@@ -7431,7 +7431,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mututua"
+            "value" : "Mutututa"
           }
         },
         "fr" : {
@@ -11245,7 +11245,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hauek bultzatua:"
+            "value" : "Hauek bultzatu dute:"
           }
         },
         "fr" : {
@@ -12637,8 +12637,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit avatar"
+            "state" : "translated",
+            "value" : "Editatu abatarra"
           }
         },
         "fr" : {
@@ -13113,8 +13113,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit header"
+            "state" : "translated",
+            "value" : "Editatu goiburua"
           }
         },
         "fr" : {
@@ -30831,7 +30831,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "iPhone-ean"
+            "value" : "iPhone-an"
           }
         },
         "fr" : {
@@ -43597,7 +43597,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erakutsi irakurri gabeko botoia pantailaren behealdean"
+            "value" : "Erakutsi irakurtzeke zenbakia behealdean"
           }
         },
         "fr" : {
@@ -43716,7 +43716,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erakutsi Egiteke botoia ezker aldean"
+            "value" : "Erakutsi irakurtzeke zenbakia ezkerraldean"
           }
         },
         "fr" : {
@@ -44779,7 +44779,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erakutsi fitxen izena"
+            "value" : "Erakutsi erlaitzen izena"
           }
         },
         "fr" : {
@@ -52567,7 +52567,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Harpidetza automatikoki berriztuko da hurrengo berritze-zikloa baino egun bat lehenago ezeztatzen ez baduzu."
+            "value" : "Babeslearen harpidetza hilero automatikoki berriztuko den harpidetza da. Zure profilean egiaztapen-intsignia erakutsiko du, zuk bakarrik ikusi ahal izango duzu. Harpidetza automatikoki berriztuko da hurrengo berritze-zikloa baino egun bat lehenago ezeztatzen ez baduzu."
           }
         },
         "fr" : {
@@ -67818,7 +67818,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "(e)k bultzatua"
+            "value" : "(e)k bultzatu du"
           }
         },
         "fr" : {
@@ -68056,7 +68056,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zuk bultzatua"
+            "value" : "Zuk bultzatu duzu"
           }
         },
         "fr" : {
@@ -70196,7 +70196,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mentions"
+            "value" : "Aipamenak"
           }
         },
         "fr" : {
