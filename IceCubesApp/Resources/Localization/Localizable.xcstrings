@@ -11001,7 +11001,7 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Añadir cuenta"
           }
         },
@@ -12631,8 +12631,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit avatar"
+            "state" : "translated",
+            "value" : "Editar avatar"
           }
         },
         "eu" : {
@@ -13107,8 +13107,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit header"
+            "state" : "translated",
+            "value" : "Editar cabecera"
           }
         },
         "eu" : {
@@ -38625,7 +38625,7 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Añadir cuenta"
           }
         },
@@ -43354,8 +43354,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Max reply indentation: %@"
+            "state" : "translated",
+            "value" : "Sangría máxima de respuesta: %@"
           }
         },
         "eu" : {
@@ -44417,8 +44417,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Account on Hover"
+            "state" : "translated",
+            "value" : "Mostrar cuenta al pasar el ratón por encima"
           }
         },
         "eu" : {
@@ -44654,8 +44654,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show reply indentation"
+            "state" : "translated",
+            "value" : "Mostrar sangría de respuesta"
           }
         },
         "eu" : {
@@ -45008,8 +45008,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Secondary status action"
+            "state" : "translated",
+            "value" : "Acción de estado secundario"
           }
         },
         "eu" : {
@@ -50790,8 +50790,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
+            "state" : "translated",
+            "value" : "La actualización rápida desactiva el guardado de la posición de la cronología y el almacenamiento en caché. Siempre obtendrá una cronología nueva."
           }
         },
         "eu" : {
@@ -59429,8 +59429,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Select Text"
+            "state" : "translated",
+            "value" : "Seleccionar texto"
           }
         },
         "eu" : {
@@ -62881,8 +62881,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Type your follow-up content here."
+            "state" : "translated",
+            "value" : "Escriba aquí el resto de su contenido."
           }
         },
         "eu" : {
@@ -73660,8 +73660,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Resume"
+            "state" : "translated",
+            "value" : "Continuar"
           }
         },
         "eu" : {
