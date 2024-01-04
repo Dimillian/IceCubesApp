@@ -162,6 +162,7 @@ struct SideBarView<Content: View>: View {
       content()
     }
     .background(.thinMaterial)
+    .edgesIgnoringSafeArea(.bottom)
     .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
   }
 }
