@@ -18,8 +18,7 @@ struct AppView: View {
   @Environment(Theme.self) private var theme
   @Environment(StreamWatcher.self) private var watcher
   
-  @Environment(\.horizontalSizeClass) var horizontalSizeClass
-  
+
   @Binding var selectedTab: Tab
   @Binding var sidebarRouterPath: RouterPath
   
@@ -28,8 +27,7 @@ struct AppView: View {
   @State var sideBarLoadedTabs: Set<Tab> = Set()
   
   var body: some View {
-    if (UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac) &&
-        horizontalSizeClass == .regular {
+    if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
       sidebarView
     } else {
       tabBarView
@@ -37,7 +35,7 @@ struct AppView: View {
   }
   
   var availableTabs: [Tab] {
-    if UIDevice.current.userInterfaceIdiom == .phone || horizontalSizeClass == .compact {
+    if UIDevice.current.userInterfaceIdiom == .phone {
       return appAccountsManager.currentClient.isAuth ? iosTabs.tabs : Tab.loggedOutTab()
     }
     return appAccountsManager.currentClient.isAuth ? Tab.loggedInTabs() : Tab.loggedOutTab()
