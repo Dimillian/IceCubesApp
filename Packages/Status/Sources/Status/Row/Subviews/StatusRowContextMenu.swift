@@ -105,6 +105,7 @@ struct StatusRowContextMenu: View {
           .environment(SceneDelegate())
           .environment(quickLook)
           .environment(viewModel.client)
+          .environment(RouterPath())
           .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
           .foregroundColor(Theme.shared.labelColor)
           .background(Theme.shared.primaryBackgroundColor)
