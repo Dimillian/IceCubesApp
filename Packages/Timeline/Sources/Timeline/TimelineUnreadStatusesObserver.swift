@@ -46,7 +46,6 @@ struct TimelineUnreadStatusesView: View {
           if observer.isLoadingNewStatuses {
             ProgressView()
               .tint(theme.labelColor)
-              .transition(.scale)
           }
           if observer.pendingStatusesCount > 0 {
             Text("\(observer.pendingStatusesCount)")

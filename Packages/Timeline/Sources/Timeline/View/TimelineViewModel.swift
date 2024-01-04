@@ -137,14 +137,14 @@ import SwiftUI
       await datasource.insert(newStatus, at: 0)
       await cache()
       StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
-      let statuses = await datasource.get()
+      let statuses = await datasource.getFiltered()
       withAnimation {
         statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
       }
     } else if let event = event as? StreamEventDelete {
       await datasource.remove(event.status)
       await cache()
-      let statuses = await datasource.get()
+      let statuses = await datasource.getFiltered()
       withAnimation {
         statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
       }
@@ -152,8 +152,8 @@ import SwiftUI
       if let originalIndex = await datasource.indexOf(statusId: event.status.id) {
         StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
         await datasource.replace(event.status, at: originalIndex)
-        let statuses = await datasource.get()
         await cache()
+        let statuses = await datasource.getFiltered()
         statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
       }
     }
@@ -260,7 +260,7 @@ extension TimelineViewModel: StatusesFetcher {
        !UserPreferences.shared.fastRefreshEnabled
     {
       await datasource.set(cachedStatuses)
-      let statuses = await datasource.get()
+      let statuses = await datasource.getFiltered()
       if let latestSeenId = await cache.getLatestSeenStatus(for: client, filter: timeline.id)?.first,
          let index = await datasource.indexOf(statusId: latestSeenId),
          index > 0
@@ -287,8 +287,8 @@ extension TimelineViewModel: StatusesFetcher {
       StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
 
       await datasource.set(statuses)
-      statuses = await datasource.get()
       await cache()
+      statuses = await datasource.getFiltered()
 
       withAnimation {
         statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
@@ -336,7 +336,7 @@ extension TimelineViewModel: StatusesFetcher {
     }
 
     // Keep track of the top most status, so we can scroll back to it after view update.
-    let topStatus = await datasource.get().first
+    let topStatus = await datasource.getFiltered().first
 
     // Insert new statuses in internal datasource.
     await datasource.insert(contentOf: newStatuses, at: 0)
@@ -351,7 +351,7 @@ extension TimelineViewModel: StatusesFetcher {
     // We need to update the statuses state, and then scroll to the previous top most status.
     if let topStatus, visibileStatuses.contains(where: { $0.id == topStatus.id}), scrollToTopVisible {
       pendingStatusesObserver.disableUpdate = true
-      let statuses = await datasource.get()
+      let statuses = await datasource.getFiltered()
       statusesState = .display(statuses: statuses,
                                nextPageState: statuses.count < 20 ? .none : .hasNextPage)
       scrollToIndexAnimated = false
@@ -362,7 +362,7 @@ extension TimelineViewModel: StatusesFetcher {
       }
     } else {
       // This will keep the scroll position (if the list is scrolled) and prepend statuses on the top.
-      let statuses = await datasource.get()
+      let statuses = await datasource.getFiltered()
       withAnimation {
         statusesState = .display(statuses: statuses,
                                  nextPageState: statuses.count < 20 ? .none : .hasNextPage)
@@ -415,19 +415,20 @@ extension TimelineViewModel: StatusesFetcher {
   func fetchNextPage() async {
     guard let client else { return }
     do {
-      guard let lastId = await datasource.get().last?.id else { return }
-      statusesState = await .display(statuses: datasource.get(), nextPageState: .loadingNextPage)
+      let statuses = await datasource.get()
+      guard let lastId = statuses.last?.id else { return }
+      statusesState = await .display(statuses: datasource.getFiltered(), nextPageState: .loadingNextPage)
       var newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
                                                                                    maxId: lastId,
                                                                                    minId: nil,
-                                                                                   offset: datasource.get().count))
+                                                                                   offset: statuses.count))
 
       ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
 
       await datasource.append(contentOf: newStatuses)
       StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
 
-      statusesState = await .display(statuses: datasource.get(),
+      statusesState = await .display(statuses: datasource.getFiltered(),
                                      nextPageState: newStatuses.count < 20 ? .none : .hasNextPage)
     } catch {
       statusesState = .error(error: error)
