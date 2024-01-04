@@ -24,7 +24,7 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable {
   static func loggedInTabs() -> [Tab] {
     if UIDevice.current.userInterfaceIdiom == .pad ||
         UIDevice.current.userInterfaceIdiom == .mac {
-      [.timeline, .trending, .federated, .local, .notifications, .mentions, .explore, .messages, .bookmarks, .favorites, .settings]
+      [.timeline, .trending, .federated, .local, .notifications, .mentions, .explore, .messages, .bookmarks, .favorites, .profile, .settings]
     } else if  UIDevice.current.userInterfaceIdiom == .vision {
       [.profile, .timeline, .trending, .federated, .local, .notifications, .mentions, .explore, .messages, .settings]
     } else {

@@ -105,28 +105,30 @@ struct SideBarView<Content: View>: View {
 
   private var tabsView: some View {
     ForEach(tabs) { tab in
-      Button {
-        // ensure keyboard is always dismissed when selecting a tab
-        hideKeyboard()
+      if tab != .profile {
+        Button {
+          // ensure keyboard is always dismissed when selecting a tab
+          hideKeyboard()
 
-        if tab == selectedTab {
-          popToRootTab = .other
-          DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-            popToRootTab = tab
+          if tab == selectedTab {
+            popToRootTab = .other
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+              popToRootTab = tab
+            }
           }
-        }
-        selectedTab = tab
-        SoundEffectManager.shared.playSound(.tabSelection)
-        if tab == .notifications {
-          if let token = appAccounts.currentAccount.oauthToken {
-            userPreferences.notificationsCount[token] = 0
+          selectedTab = tab
+          SoundEffectManager.shared.playSound(.tabSelection)
+          if tab == .notifications {
+            if let token = appAccounts.currentAccount.oauthToken {
+              userPreferences.notificationsCount[token] = 0
+            }
+            watcher.unreadNotificationsCount = 0
           }
-          watcher.unreadNotificationsCount = 0
+        } label: {
+          makeIconForTab(tab: tab)
         }
-      } label: {
-        makeIconForTab(tab: tab)
+        .background(tab == selectedTab ? theme.secondaryBackgroundColor : .clear)
       }
-      .background(tab == selectedTab ? theme.secondaryBackgroundColor : .clear)
     }
   }
 
