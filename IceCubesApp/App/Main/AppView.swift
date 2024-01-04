@@ -36,7 +36,7 @@ struct AppView: View {
   }
   
   var availableTabs: [Tab] {
-    if UIDevice.current.userInterfaceIdiom == .phone {
+    if UIDevice.current.userInterfaceIdiom == .phone || horizontalSizeClass == .compact {
       return appAccountsManager.currentClient.isAuth ? iosTabs.tabs : Tab.loggedOutTab()
     }
     return appAccountsManager.currentClient.isAuth ? Tab.loggedInTabs() : Tab.loggedOutTab()

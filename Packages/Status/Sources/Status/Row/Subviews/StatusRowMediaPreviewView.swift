@@ -11,6 +11,7 @@ public struct StatusRowMediaPreviewView: View {
   @Environment(\.openWindow) private var openWindow
   @Environment(\.extraLeadingInset) private var extraLeadingInset: CGFloat
   @Environment(\.isCompact) private var isCompact: Bool
+  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
   @Environment(SceneDelegate.self) private var sceneDelegate
   @Environment(UserPreferences.self) private var preferences
   @Environment(QuickLook.self) private var quickLook
@@ -39,7 +40,7 @@ public struct StatusRowMediaPreviewView: View {
     var sidebarWidth: CGFloat = 0
     var secondaryColumnWidth: CGFloat = 0
     let layoutPading: CGFloat = .layoutPadding * 2
-    if UIDevice.current.userInterfaceIdiom == .pad {
+    if UIDevice.current.userInterfaceIdiom == .pad && horizontalSizeClass != .compact {
       sidebarWidth = .sidebarWidth
       if preferences.showiPadSecondaryColumn {
         secondaryColumnWidth = .secondaryColumnWidth
