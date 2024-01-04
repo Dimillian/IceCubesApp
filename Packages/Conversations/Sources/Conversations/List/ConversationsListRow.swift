@@ -6,6 +6,8 @@ import SwiftUI
 
 @MainActor
 struct ConversationsListRow: View {
+  @Environment(\.openWindow) private var openWindow
+  
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath
   @Environment(Theme.self) private var theme
@@ -81,7 +83,11 @@ struct ConversationsListRow: View {
       .accessibilityAction(.magicTap) {
         if let lastStatus = conversation.lastStatus {
           HapticManager.shared.fireHaptic(.notification(.success))
-          routerPath.presentedSheet = .replyToStatusEditor(status: lastStatus)
+          #if targetEnvironment(macCatalyst)
+            openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: lastStatus))
+          #else
+            routerPath.presentedSheet = .replyToStatusEditor(status: lastStatus)
+          #endif
         }
       }
     }
@@ -92,7 +98,14 @@ struct ConversationsListRow: View {
   private var actionsView: some View {
     HStack(spacing: 12) {
       Button {
-        routerPath.presentedSheet = .replyToStatusEditor(status: conversation.lastStatus!)
+        if let lastStatus = conversation.lastStatus {
+          HapticManager.shared.fireHaptic(.notification(.success))
+          #if targetEnvironment(macCatalyst)
+            openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: lastStatus))
+          #else
+            routerPath.presentedSheet = .replyToStatusEditor(status: lastStatus)
+          #endif
+        }
       } label: {
         Image(systemName: "arrowshape.turn.up.left.fill")
       }
