@@ -88,7 +88,7 @@ import SwiftUI
       case .statuses, .postsAndReplies, .media:
         tabTask?.cancel()
         tabTask = Task {
-          await fetchNewestStatuses()
+          await fetchNewestStatuses(pullToRefresh: false)
         }
       default:
         reloadTabState()
@@ -170,7 +170,7 @@ import SwiftUI
     self.familiarFollowers = familiarFollowers?.first?.accounts ?? []
   }
 
-  func fetchNewestStatuses() async {
+  func fetchNewestStatuses(pullToRefresh: Bool) async {
     guard let client else { return }
     do {
       tabState = .statuses(statusesState: .loading)

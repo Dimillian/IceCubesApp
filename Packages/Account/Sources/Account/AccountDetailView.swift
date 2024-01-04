@@ -112,7 +112,7 @@ public struct AccountDetailView: View {
           group.addTask { await viewModel.fetchAccount() }
           group.addTask {
             if await viewModel.statuses.isEmpty {
-              await viewModel.fetchNewestStatuses()
+              await viewModel.fetchNewestStatuses(pullToRefresh: false)
             }
           }
           if !viewModel.isCurrentUser {
@@ -126,7 +126,7 @@ public struct AccountDetailView: View {
         SoundEffectManager.shared.playSound(.pull)
         HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.3))
         await viewModel.fetchAccount()
-        await viewModel.fetchNewestStatuses()
+        await viewModel.fetchNewestStatuses(pullToRefresh: true)
         HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.7))
         SoundEffectManager.shared.playSound(.refresh)
       }

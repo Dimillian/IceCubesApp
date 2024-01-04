@@ -30,7 +30,7 @@ import SwiftUI
           return
         }
         
-        await fetchNewestStatuses()
+        await fetchNewestStatuses(pullToRefresh: false)
         switch timeline {
         case let .hashtag(tag, _):
           await fetchTag(id: tag)
@@ -55,7 +55,13 @@ import SwiftUI
   @ObservationIgnored
   private var visibileStatuses: [Status] = []
   
-  private var canStreamEvents: Bool = true
+  private var canStreamEvents: Bool = true {
+    didSet {
+      if canStreamEvents {
+        pendingStatusesObserver.isLoadingNewStatuses = false
+      }
+    }
+  }
   
   @ObservationIgnored
   var canFilterTimeline: Bool = true
@@ -186,7 +192,7 @@ extension TimelineViewModel: StatusesFetcher {
     if !timeline.supportNewestPagination || UserPreferences.shared.fastRefreshEnabled {
       await reset()
     }
-    await fetchNewestStatuses()
+    await fetchNewestStatuses(pullToRefresh: true)
   }
 
   func refreshTimeline() {
@@ -195,7 +201,7 @@ extension TimelineViewModel: StatusesFetcher {
       if UserPreferences.shared.fastRefreshEnabled {
         await reset()
       }
-      await fetchNewestStatuses()
+      await fetchNewestStatuses(pullToRefresh: false)
     }
   }
   
@@ -218,10 +224,10 @@ extension TimelineViewModel: StatusesFetcher {
       statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
     }
     
-    await fetchNewestStatuses()
+    await fetchNewestStatuses(pullToRefresh: false)
   }
 
-  func fetchNewestStatuses() async {
+  func fetchNewestStatuses(pullToRefresh: Bool) async {
     guard let client else { return }
     do {
       if let marker {
@@ -229,6 +235,7 @@ extension TimelineViewModel: StatusesFetcher {
       } else if await datasource.isEmpty {
         try await fetchFirstPage(client: client)
       } else if let latest = await datasource.get().first, timeline.supportNewestPagination {
+        pendingStatusesObserver.isLoadingNewStatuses = !pullToRefresh
         try await fetchNewPagesFrom(latestStatus: latest.id, client: client)
       }
     } catch {
@@ -269,7 +276,7 @@ extension TimelineViewModel: StatusesFetcher {
         }
       }
       // And then we fetch statuses again toget newest statuses from there.
-      await fetchNewestStatuses()
+      await fetchNewestStatuses(pullToRefresh: false)
     } else {
       var statuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
                                                                                 maxId: nil,
@@ -370,6 +377,7 @@ extension TimelineViewModel: StatusesFetcher {
        !Task.isCancelled,
        let latest = await datasource.get().first
     {
+      pendingStatusesObserver.isLoadingNewStatuses = true
       try await fetchNewPagesFrom(latestStatus: latest.id, client: client)
     }
   }

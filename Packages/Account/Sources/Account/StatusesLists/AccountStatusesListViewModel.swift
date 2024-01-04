@@ -40,7 +40,7 @@ public class AccountStatusesListViewModel: StatusesFetcher {
     self.mode = mode
   }
   
-  public func fetchNewestStatuses() async {
+  public func fetchNewestStatuses(pullToRefresh: Bool) async {
     guard let client else { return }
     statusesState = .loading
     do {
