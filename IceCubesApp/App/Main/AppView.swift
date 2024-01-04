@@ -18,13 +18,14 @@ struct AppView: View {
   @Environment(Theme.self) private var theme
   @Environment(StreamWatcher.self) private var watcher
   
+  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+  
 
   @Binding var selectedTab: Tab
   @Binding var sidebarRouterPath: RouterPath
   
   @State var popToRootTab: Tab = .other
   @State var iosTabs = iOSTabs.shared
-  @State var sideBarLoadedTabs: Set<Tab> = Set()
   
   var body: some View {
     if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
@@ -90,34 +91,29 @@ struct AppView: View {
                 tabs: availableTabs)
     {
       HStack(spacing: 0) {
-        ZStack {
-          if selectedTab == .profile {
-            ProfileTab(popToRootTab: $popToRootTab)
-          }
+        TabView(selection: $selectedTab) {
           ForEach(availableTabs) { tab in
-            if tab == selectedTab || sideBarLoadedTabs.contains(tab) {
-              tab
-                .makeContentView(selectedTab: $selectedTab, popToRootTab: $popToRootTab)
-                .opacity(tab == selectedTab ? 1 : 0)
-                .transition(.opacity)
-                .id("\(tab)\(appAccountsManager.currentAccount.id)")
-                .onAppear {
-                  sideBarLoadedTabs.insert(tab)
-                }
-            } else {
-              EmptyView()
-            }
+            tab
+              .makeContentView(selectedTab: $selectedTab, popToRootTab: $popToRootTab)
+              .tabItem {
+                tab.label
+              }
+              .tag(tab)
           }
         }
-        if appAccountsManager.currentClient.isAuth,
+        .introspect(.tabView, on: .iOS(.v17)) { (tabview: UITabBarController) in
+          tabview.tabBar.isHidden = horizontalSizeClass == .regular
+          tabview.customizableViewControllers = []
+          tabview.moreNavigationController.isNavigationBarHidden = true
+        }
+        if horizontalSizeClass == .regular,
+           appAccountsManager.currentClient.isAuth,
            userPreferences.showiPadSecondaryColumn
         {
           Divider().edgesIgnoringSafeArea(.all)
           notificationsSecondaryColumn
         }
       }
-    }.onChange(of: appAccountsManager.currentAccount.id) {
-      sideBarLoadedTabs.removeAll()
     }
     .environment(sidebarRouterPath)
   }
@@ -130,4 +126,3 @@ struct AppView: View {
       .id(appAccountsManager.currentAccount.id)
   }
 }
-

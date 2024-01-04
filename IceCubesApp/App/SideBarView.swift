@@ -4,10 +4,12 @@ import DesignSystem
 import Env
 import Models
 import SwiftUI
+import SwiftUIIntrospect
 
 @MainActor
 struct SideBarView<Content: View>: View {
   @Environment(\.openWindow) private var openWindow
+  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
   @Environment(AppAccountsManager.self) private var appAccounts
   @Environment(CurrentAccount.self) private var currentAccount
@@ -131,29 +133,30 @@ struct SideBarView<Content: View>: View {
   var body: some View {
     @Bindable var routerPath = routerPath
     HStack(spacing: 0) {
-      ScrollView {
-        VStack(alignment: .center) {
-          if appAccounts.availableAccounts.isEmpty {
-            tabsView
-          } else {
-            ForEach(appAccounts.availableAccounts) { account in
-              makeAccountButton(account: account,
-                                showBadge: account.id != appAccounts.currentAccount.id)
-              if account.id == appAccounts.currentAccount.id {
-                tabsView
+      if horizontalSizeClass == .regular {
+        ScrollView {
+          VStack(alignment: .center) {
+            if appAccounts.availableAccounts.isEmpty {
+              tabsView
+            } else {
+              ForEach(appAccounts.availableAccounts) { account in
+                makeAccountButton(account: account,
+                                  showBadge: account.id != appAccounts.currentAccount.id)
+                if account.id == appAccounts.currentAccount.id {
+                  tabsView
+                }
               }
             }
+            postButton
+              .padding(.top, 12)
+            Spacer()
           }
-          postButton
-            .padding(.top, 12)
-          Spacer()
         }
+        .frame(width: .sidebarWidth)
+        .scrollContentBackground(.hidden)
+        .background(.thinMaterial)
+          Divider().edgesIgnoringSafeArea(.all)
       }
-      .frame(width: .sidebarWidth)
-      .scrollContentBackground(.hidden)
-      .background(.thinMaterial)
-      Divider()
-        .edgesIgnoringSafeArea(.top)
       content()
     }
     .background(.thinMaterial)
