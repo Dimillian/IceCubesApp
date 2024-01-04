@@ -42,7 +42,7 @@ struct TimelineUnreadStatusesView: View {
       Button {
         observer.scrollToIndex?(observer.pendingStatusesCount)
       } label: {
-        HStack {
+        HStack(spacing: 8) {
           if observer.isLoadingNewStatuses {
             ProgressView()
               .tint(theme.labelColor)
