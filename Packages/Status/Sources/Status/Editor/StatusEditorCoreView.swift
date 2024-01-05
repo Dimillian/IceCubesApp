@@ -75,7 +75,7 @@ struct StatusEditorCoreView: View {
     if let account = currentAccount.account, !viewModel.mode.isEditing {
       HStack {
         if viewModel.mode.isInShareExtension {
-          AppAccountsSelectorView(routerPath: RouterPath(),
+          AppAccountsSelectorViewButton(routerPath: RouterPath(),
                                   accountCreationEnabled: false,
                                   avatarConfig: .status)
         } else {

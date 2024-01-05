@@ -19,14 +19,14 @@ struct AppView: View {
   @Environment(Theme.self) private var theme
   @Environment(StreamWatcher.self) private var watcher
   
-  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-  
-
   @Binding var selectedTab: Tab
-  @Binding var appRouterPath: RouterPath
-  
+  @Binding var sidebarRouterPath: RouterPath
+    
+  @State var accountsViewModel: [AppAccountViewModel] = []
   @State var popToRootTab: Tab = .other
   @State var iosTabs = iOSTabs.shared
+  @State var sideBarLoadedTabs: Set<Tab> = Set()
+  @State var accountViewSelectorVisisble: Bool = false
   
   var body: some View {
     if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
@@ -41,6 +41,12 @@ struct AppView: View {
       return appAccountsManager.currentClient.isAuth ? iosTabs.tabs : Tab.loggedOutTab()
     }
     return appAccountsManager.currentClient.isAuth ? Tab.loggedInTabs() : Tab.loggedOutTab()
+  }
+    
+  private var preferredHeight: CGFloat {
+    var baseHeight: CGFloat = 310
+    baseHeight += CGFloat(60 * accountsViewModel.count)
+    return baseHeight
   }
 
   var tabBarView: some View {
@@ -99,6 +105,18 @@ struct AppView: View {
             }
         }
     }))
+    .sheet(isPresented: $accountViewSelectorVisisble, content: {
+        return AppAccountsSelectorView(routerPath: RouterPath(), accountsViewModel: $accountsViewModel, isPresented: $accountViewSelectorVisisble)
+            .presentationDetents([.height(preferredHeight), .large])
+            .presentationBackground(.thinMaterial)
+            .presentationCornerRadius(16)
+            .onAppear {
+              refreshAccounts()
+            }
+    })
+    .onLongPressGesture(perform: {
+        accountViewSelectorVisisble = true
+    })
     .id(appAccountsManager.currentClient.id)
     .withSheetDestinations(sheetDestinations: $appRouterPath.presentedSheet)
   }
@@ -152,4 +170,12 @@ struct AppView: View {
       .frame(maxWidth: .secondaryColumnWidth)
       .id(appAccountsManager.currentAccount.id)
   }
+    
+    private func refreshAccounts() {
+      accountsViewModel = []
+      for account in appAccountsManager.availableAccounts {
+        let viewModel: AppAccountViewModel = .init(appAccount: account, isInNavigation: false, showBadge: true)
+        accountsViewModel.append(viewModel)
+      }
+    }
 }

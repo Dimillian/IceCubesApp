@@ -19,7 +19,7 @@ struct ToolbarTab: ToolbarContent {
       if UIDevice.current.userInterfaceIdiom != .pad ||
           (UIDevice.current.userInterfaceIdiom == .pad && horizontalSizeClass == .compact) {
         ToolbarItem(placement: .navigationBarLeading) {
-          AppAccountsSelectorView(routerPath: routerPath)
+          AppAccountsSelectorViewButton(routerPath: routerPath)
         }
       }
     }
