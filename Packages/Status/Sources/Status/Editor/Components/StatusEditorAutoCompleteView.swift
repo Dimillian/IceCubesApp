@@ -18,7 +18,9 @@ struct StatusEditorAutoCompleteView: View {
   @Query(sort: \RecentTag.lastUse, order: .reverse) var recentTags: [RecentTag]
 
   var body: some View {
-    if !viewModel.mentionsSuggestions.isEmpty || !viewModel.tagsSuggestions.isEmpty {
+    if !viewModel.mentionsSuggestions.isEmpty || 
+        !viewModel.tagsSuggestions.isEmpty ||
+        (viewModel.showRecentsTagsInline && !recentTags.isEmpty)  {
       VStack {
         HStack {
           ScrollView(.horizontal, showsIndicators: false) {
@@ -77,7 +79,35 @@ struct StatusEditorAutoCompleteView: View {
     }
   }
 
+  @ViewBuilder
   private var suggestionsTagView: some View {
+    if viewModel.showRecentsTagsInline {
+      recentTagsSuggestionView
+    } else {
+      remoteTagsSuggestionView
+    }
+  }
+  
+  private var recentTagsSuggestionView: some View {
+    ForEach(recentTags) { tag in
+      Button {
+        withAnimation {
+          isTagSuggestionExpanded = false
+          viewModel.selectHashtagSuggestion(tag: tag.title)
+        }
+        tag.lastUse = Date()
+      } label: {
+        VStack(alignment: .leading) {
+          Text("#\(tag.title)")
+            .font(.scaledFootnote)
+            .fontWeight(.bold)
+            .foregroundColor(theme.labelColor)
+        }
+      }
+    }
+  }
+  
+  private var remoteTagsSuggestionView: some View {
     ForEach(viewModel.tagsSuggestions) { tag in
       Button {
         withAnimation {
