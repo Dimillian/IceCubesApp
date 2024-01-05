@@ -10,6 +10,7 @@ import RevenueCat
 import Status
 import SwiftUI
 import Timeline
+import Models
 
 @MainActor
 struct AppView: View {
@@ -77,6 +78,27 @@ struct AppView: View {
           .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .tabBar)
       }
     }
+    .gesture(DragGesture().onEnded({ value in
+        if value.translation.height < 0 {
+            var found = false
+            var accountToSet : AppAccount = appAccountsManager.availableAccounts[0]
+            for account in appAccountsManager.availableAccounts {
+                if found {
+                    accountToSet = account
+                    break
+                }
+                if account.id == appAccountsManager.currentAccount.id {
+                    found = true
+                }
+            }
+            var transation = Transaction()
+            transation.disablesAnimations = true
+            withTransaction(transation) {
+              appAccountsManager.currentAccount = accountToSet
+              HapticManager.shared.fireHaptic(.notification(.success))
+            }
+        }
+    }))
     .id(appAccountsManager.currentClient.id)
     .withSheetDestinations(sheetDestinations: $appRouterPath.presentedSheet)
   }
