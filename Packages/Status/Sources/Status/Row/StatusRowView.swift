@@ -144,7 +144,7 @@ public struct StatusRowView: View {
     #endif
     .listRowInsets(.init(top: 12,
                          leading: .layoutPadding,
-                         bottom: 6,
+                         bottom: 12,
                          trailing: .layoutPadding))
     .accessibilityElement(children: isFocused ? .contain : .combine)
     .accessibilityLabel(isFocused == false && accessibilityVoiceOverEnabled
