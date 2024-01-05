@@ -136,6 +136,7 @@ extension View {
       Draft.self,
       LocalTimeline.self,
       TagGroup.self,
+      RecentTag.self,
     ])
   }
 }

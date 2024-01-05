@@ -564,9 +564,9 @@ import SwiftUI
     }
   }
 
-  func selectHashtagSuggestion(tag: Tag) {
+  func selectHashtagSuggestion(tag: String) {
     if let range = currentSuggestionRange {
-      replaceTextWith(text: "#\(tag.name) ", inRange: range)
+      replaceTextWith(text: "#\(tag) ", inRange: range)
     }
   }
 

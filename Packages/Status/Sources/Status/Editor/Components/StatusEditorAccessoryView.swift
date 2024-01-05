@@ -38,7 +38,7 @@ struct StatusEditorAccessoryView: View {
       }
       .frame(height: 24)
       .padding(16)
-      .background(.ultraThinMaterial)
+      .background(.thinMaterial)
       .cornerRadius(8)
       #else
       Divider()
@@ -47,7 +47,7 @@ struct StatusEditorAccessoryView: View {
       }
       .frame(height: 20)
       .padding(.vertical, 12)
-      .background(.ultraThinMaterial)
+      .background(.thinMaterial)
       #endif
     }
     .onAppear {
