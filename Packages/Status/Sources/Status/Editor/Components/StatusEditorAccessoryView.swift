@@ -64,7 +64,7 @@ struct StatusEditorAccessoryView: View {
         .padding(.leading, 16)
     }
     #else
-    ScrollView(.horizontal) {
+    ScrollView(.horizontal, showsIndicators: false) {
       HStack(alignment: .center, spacing: 16) {
         actionsView
       }

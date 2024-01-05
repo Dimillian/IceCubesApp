@@ -160,6 +160,6 @@ struct StatusEditorAutoCompleteView: View {
       }
       .padding(.horizontal, .layoutPadding)
     }
-    .frame(height: 250)
+    .frame(height: 200)
   }
 }
