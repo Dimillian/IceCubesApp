@@ -22,7 +22,7 @@ struct AppView: View {
   
 
   @Binding var selectedTab: Tab
-  @Binding var sidebarRouterPath: RouterPath
+  @Binding var appRouterPath: RouterPath
   
   @State var popToRootTab: Tab = .other
   @State var iosTabs = iOSTabs.shared
@@ -46,6 +46,10 @@ struct AppView: View {
     TabView(selection: .init(get: {
       selectedTab
     }, set: { newTab in
+      if newTab == .post {
+        appRouterPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
+        return
+      }
       if newTab == selectedTab {
         /// Stupid hack to trigger onChange binding in tab views.
         popToRootTab = .other
@@ -74,6 +78,7 @@ struct AppView: View {
       }
     }
     .id(appAccountsManager.currentClient.id)
+    .withSheetDestinations(sheetDestinations: $appRouterPath.presentedSheet)
   }
 
   private func badgeFor(tab: Tab) -> Int {
@@ -115,7 +120,7 @@ struct AppView: View {
         }
       }
     }
-    .environment(sidebarRouterPath)
+    .environment(appRouterPath)
   }
 
   var notificationsSecondaryColumn: some View {
