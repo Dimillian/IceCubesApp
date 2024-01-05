@@ -38590,7 +38590,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Опис"
+            "value" : "Про застосунок"
           }
         },
         "zh-Hans" : {
@@ -38708,7 +38708,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Іконка додатку"
+            "value" : "Іконка застосунку"
           }
         },
         "zh-Hans" : {
@@ -39300,7 +39300,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Підтримати додаток"
+            "value" : "Підтримати застосунок"
           }
         },
         "zh-Hans" : {
@@ -49929,7 +49929,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Додаток"
+            "value" : "Застосунок"
           }
         },
         "zh-Hans" : {
@@ -50047,7 +50047,7 @@
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Версія додатку: %@"
+            "value" : "Версія застосунку: %@"
           }
         },
         "zh-Hans" : {

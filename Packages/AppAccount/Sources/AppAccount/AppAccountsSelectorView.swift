@@ -174,7 +174,7 @@ public struct AppAccountsSelectorView: View {
         routerPath.presentedSheet = .about
       }
     } label: {
-      Label("account.edit.about", systemImage: "info.circle")
+      Label("settings.app.about", systemImage: "info.circle")
     }
   }
 
