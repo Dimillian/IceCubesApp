@@ -12,6 +12,7 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable {
   case profile
   case bookmarks
   case favorites
+  case post
 
   nonisolated var id: Int {
     rawValue
@@ -24,7 +25,7 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable {
   static func loggedInTabs() -> [Tab] {
     if UIDevice.current.userInterfaceIdiom == .pad ||
         UIDevice.current.userInterfaceIdiom == .mac {
-      [.timeline, .trending, .federated, .local, .notifications, .mentions, .explore, .messages, .bookmarks, .favorites, .settings]
+      [.timeline, .trending, .federated, .local, .notifications, .mentions, .explore, .messages, .bookmarks, .favorites, .profile, .settings]
     } else if  UIDevice.current.userInterfaceIdiom == .vision {
       [.profile, .timeline, .trending, .federated, .local, .notifications, .mentions, .explore, .messages, .settings]
     } else {
@@ -63,6 +64,8 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable {
       NavigationTab {
         AccountStatusesListView(mode: .favorites)
       }
+    case .post:
+      VStack { }
     case .other:
       EmptyView()
     }
@@ -95,8 +98,11 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable {
       Label("accessibility.tabs.profile.picker.bookmarks", systemImage: iconName)
     case .favorites:
       Label("accessibility.tabs.profile.picker.favorites", systemImage: iconName)
+    case .post:
+      Label("menu.new-post", systemImage: iconName)
     case .other:
       EmptyView()
+      
     }
   }
 
@@ -126,6 +132,8 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable {
       "bookmark"
     case .favorites:
       "star"
+    case .post:
+      "square.and.pencil"
     case .other:
       ""
     }

@@ -16,6 +16,7 @@ public struct StatusEditorView: View {
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(Theme.self) private var theme
 
+  @State private var presentationDetent: PresentationDetent = .large
   @State private var mainSEVM: StatusEditorViewModel
   @State private var followUpSEVMs: [StatusEditorViewModel] = []
   @FocusState private var isSpoilerTextFocused: UUID? // connect CoreEditor and StatusEditorAccessoryView
@@ -85,7 +86,9 @@ public struct StatusEditorView: View {
           }
       #else
       .safeAreaInset(edge: .bottom) {
-        StatusEditorAccessoryView(isSpoilerTextFocused: $isSpoilerTextFocused, focusedSEVM: focusedSEVM, followUpSEVMs: $followUpSEVMs)
+        if presentationDetent == .large || presentationDetent == .medium {
+          StatusEditorAccessoryView(isSpoilerTextFocused: $isSpoilerTextFocused, focusedSEVM: focusedSEVM, followUpSEVMs: $followUpSEVMs)
+        }
       }
       #endif
       .accessibilitySortPriority(1) // Ensure that all elements inside the `ScrollView` occur earlier than the accessory views
@@ -138,5 +141,7 @@ public struct StatusEditorView: View {
     .sheet(item: $editingMediaContainer) { container in
       StatusEditorMediaEditView(viewModel: focusedSEVM, container: container)
     }
+    .presentationDetents([.large, .medium, .height(50)], selection: $presentationDetent)
+    .presentationBackgroundInteraction(.enabled(upThrough: .medium))
   }
 }

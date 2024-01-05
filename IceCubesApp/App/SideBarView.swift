@@ -4,10 +4,12 @@ import DesignSystem
 import Env
 import Models
 import SwiftUI
+import SwiftUIIntrospect
 
 @MainActor
 struct SideBarView<Content: View>: View {
   @Environment(\.openWindow) private var openWindow
+  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
   @Environment(AppAccountsManager.self) private var appAccounts
   @Environment(CurrentAccount.self) private var currentAccount
@@ -67,6 +69,7 @@ struct SideBarView<Content: View>: View {
         .resizable()
         .aspectRatio(contentMode: .fit)
         .frame(width: 20, height: 30)
+        .offset(x: 2, y: -2)
     }
     .buttonStyle(.borderedProminent)
   }
@@ -85,7 +88,8 @@ struct SideBarView<Content: View>: View {
       }
     } label: {
       ZStack(alignment: .topTrailing) {
-        AppAccountView(viewModel: .init(appAccount: account, isCompact: true))
+        AppAccountView(viewModel: .init(appAccount: account, isCompact: true),
+                       isParentPresented: .constant(false))
         if showBadge,
            let token = account.oauthToken,
            let notificationsCount = userPreferences.notificationsCount[token],
@@ -103,60 +107,64 @@ struct SideBarView<Content: View>: View {
 
   private var tabsView: some View {
     ForEach(tabs) { tab in
-      Button {
-        // ensure keyboard is always dismissed when selecting a tab
-        hideKeyboard()
+      if tab != .profile {
+        Button {
+          // ensure keyboard is always dismissed when selecting a tab
+          hideKeyboard()
 
-        if tab == selectedTab {
-          popToRootTab = .other
-          DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-            popToRootTab = tab
+          if tab == selectedTab {
+            popToRootTab = .other
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+              popToRootTab = tab
+            }
           }
-        }
-        selectedTab = tab
-        SoundEffectManager.shared.playSound(.tabSelection)
-        if tab == .notifications {
-          if let token = appAccounts.currentAccount.oauthToken {
-            userPreferences.notificationsCount[token] = 0
+          selectedTab = tab
+          SoundEffectManager.shared.playSound(.tabSelection)
+          if tab == .notifications {
+            if let token = appAccounts.currentAccount.oauthToken {
+              userPreferences.notificationsCount[token] = 0
+            }
+            watcher.unreadNotificationsCount = 0
           }
-          watcher.unreadNotificationsCount = 0
+        } label: {
+          makeIconForTab(tab: tab)
         }
-      } label: {
-        makeIconForTab(tab: tab)
+        .background(tab == selectedTab ? theme.secondaryBackgroundColor : .clear)
       }
-      .background(tab == selectedTab ? theme.secondaryBackgroundColor : .clear)
     }
   }
 
   var body: some View {
     @Bindable var routerPath = routerPath
     HStack(spacing: 0) {
-      ScrollView {
-        VStack(alignment: .center) {
-          if appAccounts.availableAccounts.isEmpty {
-            tabsView
-          } else {
-            ForEach(appAccounts.availableAccounts) { account in
-              makeAccountButton(account: account,
-                                showBadge: account.id != appAccounts.currentAccount.id)
-              if account.id == appAccounts.currentAccount.id {
-                tabsView
+      if horizontalSizeClass == .regular {
+        ScrollView {
+          VStack(alignment: .center) {
+            if appAccounts.availableAccounts.isEmpty {
+              tabsView
+            } else {
+              ForEach(appAccounts.availableAccounts) { account in
+                makeAccountButton(account: account,
+                                  showBadge: account.id != appAccounts.currentAccount.id)
+                if account.id == appAccounts.currentAccount.id {
+                  tabsView
+                }
               }
             }
+            postButton
+              .padding(.top, 12)
+            Spacer()
           }
-          postButton
-            .padding(.top, 12)
-          Spacer()
         }
+        .frame(width: .sidebarWidth)
+        .scrollContentBackground(.hidden)
+        .background(.thinMaterial)
+          Divider().edgesIgnoringSafeArea(.all)
       }
-      .frame(width: .sidebarWidth)
-      .scrollContentBackground(.hidden)
-      .background(.thinMaterial)
-      Divider()
-        .edgesIgnoringSafeArea(.top)
       content()
     }
     .background(.thinMaterial)
+    .edgesIgnoringSafeArea(.bottom)
     .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
   }
 }

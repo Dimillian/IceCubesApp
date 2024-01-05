@@ -16,7 +16,7 @@ public enum StatusesState {
 @MainActor
 public protocol StatusesFetcher {
   var statusesState: StatusesState { get }
-  func fetchNewestStatuses() async
+  func fetchNewestStatuses(pullToRefresh: Bool) async
   func fetchNextPage() async
   func statusDidAppear(status: Status)
   func statusDidDisappear(status: Status)

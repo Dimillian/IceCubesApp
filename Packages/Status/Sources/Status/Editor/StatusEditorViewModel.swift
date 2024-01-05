@@ -140,6 +140,7 @@ import SwiftUI
 
   var mentionsSuggestions: [Account] = []
   var tagsSuggestions: [Tag] = []
+  var showRecentsTagsInline: Bool = false
   var selectedLanguage: String?
   var hasExplicitlySelectedLanguage: Bool = false
   private var currentSuggestionRange: NSRange?
@@ -322,7 +323,7 @@ import SwiftUI
                               .backgroundColor: UIColor.clear,
                               .underlineColor: UIColor.clear],
                              range: NSMakeRange(0, statusText.string.utf16.count))
-    let hashtagPattern = "(#+[\\w0-9(_)]{1,})"
+    let hashtagPattern = "(#+[\\w0-9(_)]{0,})"
     let mentionPattern = "(@+[a-zA-Z0-9(_).-]{1,})"
     let urlPattern = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)"
 
@@ -512,7 +513,7 @@ import SwiftUI
   // MARK: - Autocomplete
 
   private func loadAutoCompleteResults(query: String) {
-    guard let client, query.utf8.count > 1 else { return }
+    guard let client else { return }
     var query = query
     suggestedTask?.cancel()
     suggestedTask = Task {
@@ -520,6 +521,13 @@ import SwiftUI
         var results: SearchResults?
         switch query.first {
         case "#":
+          if query.utf8.count == 1 {
+            withAnimation {
+              showRecentsTagsInline = true
+            }
+            return
+          }
+          showRecentsTagsInline = false
           query.removeFirst()
           results = try await client.get(endpoint: Search.search(query: query,
                                                                  type: "hashtags",
@@ -533,6 +541,7 @@ import SwiftUI
             tagsSuggestions = results?.hashtags.sorted(by: { $0.totalUses > $1.totalUses }) ?? []
           }
         case "@":
+          guard query.utf8.count > 1 else { return }
           query.removeFirst()
           let accounts: [Account] = try await client.get(endpoint: Search.accountsSearch(query: query,
                                                                                          type: nil,
@@ -553,9 +562,12 @@ import SwiftUI
   }
 
   private func resetAutoCompletion() {
-    tagsSuggestions = []
-    mentionsSuggestions = []
-    currentSuggestionRange = nil
+    withAnimation {
+      tagsSuggestions = []
+      mentionsSuggestions = []
+      currentSuggestionRange = nil
+      showRecentsTagsInline = false
+    }
   }
 
   func selectMentionSuggestion(account: Account) {
@@ -564,9 +576,9 @@ import SwiftUI
     }
   }
 
-  func selectHashtagSuggestion(tag: Tag) {
+  func selectHashtagSuggestion(tag: String) {
     if let range = currentSuggestionRange {
-      replaceTextWith(text: "#\(tag.name) ", inRange: range)
+      replaceTextWith(text: "#\(tag) ", inRange: range)
     }
   }
 

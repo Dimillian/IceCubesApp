@@ -13,7 +13,7 @@ extension IceCubesApp {
         #if targetEnvironment(macCatalyst)
           openWindow(value: WindowDestinationEditor.newStatusEditor(visibility: userPreferences.postVisibility))
         #else
-          sidebarRouterPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
+          appRouterPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
         #endif
       }
       .keyboardShortcut("n", modifiers: .command)

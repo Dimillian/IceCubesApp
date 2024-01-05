@@ -40,7 +40,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
                 buttonTitle: "action.retry")
       {
         Task {
-          await fetcher.fetchNewestStatuses()
+          await fetcher.fetchNewestStatuses(pullToRefresh: false)
         }
       }
       .listRowBackground(theme.primaryBackgroundColor)

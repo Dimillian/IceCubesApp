@@ -2,6 +2,7 @@ import SwiftUI
 import Env
 import AppAccount
 import DesignSystem
+import Network
 
 @MainActor
 struct NavigationTab<Content: View>: View {
@@ -11,6 +12,7 @@ struct NavigationTab<Content: View>: View {
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(UserPreferences.self) private var userPreferences
   @Environment(Theme.self) private var theme
+  @Environment(Client.self) private var client
   
   var content: () -> Content
   
@@ -26,10 +28,18 @@ struct NavigationTab<Content: View>: View {
         .withEnvironments()
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
+        .withSafariRouter()
         .toolbar {
           ToolbarTab(routerPath: $routerPath)
         }
         .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
+        .onChange(of: client.id) {
+          routerPath.path = []
+        }
+        .onAppear {
+          routerPath.client = client
+        }
+        .withSafariRouter()
     }
     .environment(routerPath)
   }

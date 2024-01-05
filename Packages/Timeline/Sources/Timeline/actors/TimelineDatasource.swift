@@ -9,6 +9,10 @@ actor TimelineDatasource {
   }
 
   func get() -> [Status] {
+    statuses
+  }
+  
+  func getFiltered() -> [Status] {
     statuses.filter{ !$0.isHidden }
   }
   

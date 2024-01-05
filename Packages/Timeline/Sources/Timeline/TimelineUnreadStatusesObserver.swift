@@ -11,6 +11,8 @@ import DesignSystem
 
   var disableUpdate: Bool = false
   var scrollToIndex: ((Int) -> Void)?
+  
+  var isLoadingNewStatuses: Bool = false
 
   var pendingStatuses: [String] = [] {
     didSet {
@@ -36,17 +38,25 @@ struct TimelineUnreadStatusesView: View {
   @Environment(Theme.self) private var theme
   
   var body: some View {
-    if observer.pendingStatusesCount > 0 {
+    if observer.pendingStatusesCount > 0 || observer.isLoadingNewStatuses {
       Button {
         observer.scrollToIndex?(observer.pendingStatusesCount)
       } label: {
-        Text("\(observer.pendingStatusesCount)")
-          .contentTransition(.numericText(value: Double(observer.pendingStatusesCount)))
-          // Accessibility: this results in a frame with a size of at least 44x44 at regular font size
-          .frame(minWidth: 16, minHeight: 16)
-          .font(.footnote.monospacedDigit())
-          .fontWeight(.bold)
-          .foregroundStyle(theme.labelColor)
+        HStack(spacing: 8) {
+          if observer.isLoadingNewStatuses {
+            ProgressView()
+              .tint(theme.labelColor)
+          }
+          if observer.pendingStatusesCount > 0 {
+            Text("\(observer.pendingStatusesCount)")
+              .contentTransition(.numericText(value: Double(observer.pendingStatusesCount)))
+              // Accessibility: this results in a frame with a size of at least 44x44 at regular font size
+              .frame(minWidth: 16, minHeight: 16)
+              .font(.footnote.monospacedDigit())
+              .fontWeight(.bold)
+              .foregroundStyle(theme.labelColor)
+          }
+        }
       }
       .accessibilityLabel("accessibility.tabs.timeline.unread-posts.label-\(observer.pendingStatusesCount)")
       .accessibilityHint("accessibility.tabs.timeline.unread-posts.hint")

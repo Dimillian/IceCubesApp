@@ -6,7 +6,7 @@ import SwiftUI
 extension IceCubesApp {
   var appScene: some Scene {
     WindowGroup(id: "MainWindow") {
-      AppView(selectedTab: $selectedTab, sidebarRouterPath: $sidebarRouterPath)
+      AppView(selectedTab: $selectedTab, appRouterPath: $appRouterPath)
         .applyTheme(theme)
         .onAppear {
           setNewClientsInEnv(client: appAccountsManager.currentClient)
