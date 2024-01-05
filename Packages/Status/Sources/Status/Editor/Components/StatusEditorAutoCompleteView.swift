@@ -161,5 +161,13 @@ struct StatusEditorAutoCompleteView: View {
       .padding(.horizontal, .layoutPadding)
     }
     .frame(height: 200)
+    .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                        .onEnded({ value in
+                          withAnimation {
+                            if value.translation.height > 0 {
+                              isTagSuggestionExpanded = false
+                            }
+                          }
+                        }))
   }
 }
