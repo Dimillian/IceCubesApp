@@ -101,7 +101,7 @@ struct SettingsTabs: View {
                 .tint(.red)
             }
           }
-          AppAccountView(viewModel: .init(appAccount: account))
+          AppAccountView(viewModel: .init(appAccount: account), isParentPresented: .constant(false))
         }
       }
       .onDelete { indexSet in

@@ -88,7 +88,8 @@ struct SideBarView<Content: View>: View {
       }
     } label: {
       ZStack(alignment: .topTrailing) {
-        AppAccountView(viewModel: .init(appAccount: account, isCompact: true))
+        AppAccountView(viewModel: .init(appAccount: account, isCompact: true),
+                       isParentPresented: .constant(false))
         if showBadge,
            let token = account.oauthToken,
            let notificationsCount = userPreferences.notificationsCount[token],
