@@ -76,8 +76,13 @@ public struct StatusPollView: View {
     VStack(alignment: .leading) {
       ForEach(Array(viewModel.poll.options.enumerated()), id: \.element.id) { index, option in
         HStack {
-          makeBarView(for: option, buttonImage: buttonImage(option: option))
-            .disabled(isInteractive == false)
+          if status.account.id == currentAccount.account?.id {
+            makeBarView(for: option, buttonImage: EmptyView())
+              .disabled(true)
+          } else {
+            makeBarView(for: option, buttonImage: buttonImage(option: option))
+              .disabled(isInteractive == false)
+          }
           if viewModel.showResults || status.account.id == currentAccount.account?.id {
             Spacer()
             // Make sure they're all the same width using a ZStack with 100% hiding behind the
