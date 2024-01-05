@@ -11037,7 +11037,7 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "계정 추가"
           }
         },
@@ -12548,8 +12548,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit avatar"
+            "state" : "translated",
+            "value" : "프로필 사진 편집"
           }
         },
         "nb" : {
@@ -13024,8 +13024,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit header"
+            "state" : "translated",
+            "value" : "헤더 사진 편집"
           }
         },
         "nb" : {
@@ -38317,7 +38317,7 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "계정 추가"
           }
         },
@@ -43046,8 +43046,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Max reply indentation: %@"
+            "state" : "translated",
+            "value" : "최대 %@번까지 들여쓰기"
           }
         },
         "nb" : {
@@ -44109,8 +44109,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Account on Hover"
+            "state" : "translated",
+            "value" : "커서 올렸을 때 계정 정보 표시"
           }
         },
         "nb" : {
@@ -44346,8 +44346,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show reply indentation"
+            "state" : "translated",
+            "value" : "답글 들여쓰기하여 표시"
           }
         },
         "nb" : {
@@ -44465,7 +44465,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "하단 탭 바에 제목 표시"
+            "value" : "제목 표시"
           }
         },
         "nb" : {
@@ -44700,8 +44700,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Secondary status action"
+            "state" : "translated",
+            "value" : "글 보조 동작"
           }
         },
         "nb" : {
@@ -46943,7 +46943,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tabs Customizations"
+            "value" : "하단 탭"
           }
         },
         "nb" : {
@@ -50482,8 +50482,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
+            "state" : "translated",
+            "value" : "타임라인 당길 때 완전히 새로고침 옵션이 켜져 있으면 마지막으로 본 타임라인 위치가 저장되지 않고, 새로고침할 때마다 타임라인을 완전히 새롭게 불러옵니다."
           }
         },
         "nb" : {
@@ -55327,7 +55327,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fifth Tab"
+            "value" : "다섯 번째 탭"
           }
         },
         "nb" : {
@@ -55445,7 +55445,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "First Tab"
+            "value" : "첫 번째 탭"
           }
         },
         "nb" : {
@@ -55563,7 +55563,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fourth Tab"
+            "value" : "네 번째 탭"
           }
         },
         "nb" : {
@@ -55681,7 +55681,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Second Tab"
+            "value" : "두 번째 탭"
           }
         },
         "nb" : {
@@ -55799,7 +55799,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Third Tab"
+            "value" : "세 번째 탭"
           }
         },
         "nb" : {
@@ -59121,8 +59121,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Select Text"
+            "state" : "translated",
+            "value" : "본문 텍스트 선택"
           }
         },
         "nb" : {
@@ -62573,8 +62573,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Type your follow-up content here."
+            "state" : "translated",
+            "value" : "앞 글에 이어지는 내용을 작성하세요."
           }
         },
         "nb" : {
@@ -73352,8 +73352,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Resume"
+            "state" : "translated",
+            "value" : "마지막 위치로 돌아가기"
           }
         },
         "nb" : {
