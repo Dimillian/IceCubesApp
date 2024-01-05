@@ -69,6 +69,7 @@ struct SideBarView<Content: View>: View {
         .resizable()
         .aspectRatio(contentMode: .fit)
         .frame(width: 20, height: 30)
+        .offset(x: 2, y: -2)
     }
     .buttonStyle(.borderedProminent)
   }
