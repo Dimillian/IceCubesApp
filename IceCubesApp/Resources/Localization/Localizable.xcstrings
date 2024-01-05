@@ -27,6 +27,12 @@
             "value" : ""
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
@@ -366,7 +372,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is already selected"
+            "value" : "%@ zaten seçildi"
           }
         },
         "uk" : {
@@ -484,7 +490,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ already exists"
+            "value" : "%@ zaten mevcut"
           }
         },
         "uk" : {
@@ -602,7 +608,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is an invalid SFSymbol name"
+            "value" : "%@ geçerli bir SFSymbol ismi değil"
           }
         },
         "uk" : {
@@ -945,7 +951,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Accounts"
+            "value" : "Hesaplar"
           }
         },
         "uk" : {
@@ -1064,7 +1070,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Opens options sheet."
+            "value" : "Seçenekler sayfasını açar."
           }
         },
         "uk" : {
@@ -1183,7 +1189,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "AI prompt"
+            "value" : "AI komutu"
           }
         },
         "uk" : {
@@ -1302,7 +1308,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Attach photo"
+            "value" : "Fotoğraf iliştir"
           }
         },
         "uk" : {
@@ -1421,7 +1427,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Characters remaining"
+            "value" : "Kalan Karakter Sayısı"
           }
         },
         "uk" : {
@@ -1540,7 +1546,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Custom emojis"
+            "value" : "Özel emojiler"
           }
         },
         "uk" : {
@@ -1659,7 +1665,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Drafts"
+            "value" : "Taslaklar"
           }
         },
         "uk" : {
@@ -1778,7 +1784,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Language"
+            "value" : "Dil"
           }
         },
         "uk" : {
@@ -1897,7 +1903,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Poll"
+            "value" : "Anket"
           }
         },
         "uk" : {
@@ -2016,7 +2022,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Spoiler warning"
+            "value" : "Spoiler uyarısı"
           }
         },
         "uk" : {
@@ -2135,7 +2141,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Changes post audience."
+            "value" : "Gönderi kitlesini değiştirir"
           }
         },
         "uk" : {
@@ -2254,7 +2260,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visibility"
+            "value" : "Görünüm"
           }
         },
         "uk" : {
@@ -2373,7 +2379,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Off"
+            "value" : "Kapalı"
           }
         },
         "uk" : {
@@ -2493,7 +2499,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "On"
+            "value" : "Açık"
           }
         },
         "uk" : {
@@ -2612,7 +2618,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Image alt text: %@"
+            "value" : "Resim alt metni: %@"
           }
         },
         "uk" : {
@@ -2731,7 +2737,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "More alt text available"
+            "value" : "Daha fazla alt metni mümkün"
           }
         },
         "uk" : {
@@ -2850,7 +2856,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Audio"
+            "value" : "Ses"
           }
         },
         "uk" : {
@@ -2969,7 +2975,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Animated Gif"
+            "value" : "Hareketli Gif"
           }
         },
         "uk" : {
@@ -3088,7 +3094,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Image"
+            "value" : "Resim"
           }
         },
         "uk" : {
@@ -3326,7 +3332,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ boosted %@"
+            "value" : "%@ kullanıcısı  %@ kullanıcısını boostladı"
           }
         },
         "uk" : {
@@ -3445,7 +3451,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ replied to"
+            "value" : "%@ yanıtladı"
           }
         },
         "uk" : {
@@ -3564,7 +3570,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "App"
+            "value" : "Uygulama"
           }
         },
         "uk" : {
@@ -3683,7 +3689,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Contains %@"
+            "value" : "%@ içerir"
           }
         },
         "uk" : {
@@ -3802,7 +3808,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Open media viewer"
+            "value" : "Medya Görüntüleyiciyi aç"
           }
         },
         "uk" : {
@@ -3921,7 +3927,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Active poll"
+            "value" : "Aktif Anket"
           }
         },
         "uk" : {
@@ -4040,7 +4046,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Poll results"
+            "value" : "Anket sonuçları"
           }
         },
         "uk" : {
@@ -4159,7 +4165,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Option %lld of %lld"
+            "value" : "%lld seçeneği, %lld tarafından"
           }
         },
         "uk" : {
@@ -4278,7 +4284,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Selected"
+            "value" : "Seçili"
           }
         },
         "uk" : {
@@ -4397,7 +4403,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Full Content"
+            "value" : "Tüm İçerik"
           }
         },
         "uk" : {
@@ -4516,7 +4522,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Unread"
+            "value" : "Okunmamış"
           }
         },
         "uk" : {
@@ -4635,7 +4641,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "User-defined fields"
+            "value" : "Kullanıcı-tanımlı alanlar"
           }
         },
         "uk" : {
@@ -4754,7 +4760,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Verified"
+            "value" : "Onaylı"
           }
         },
         "uk" : {
@@ -4873,7 +4879,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Navigates to list."
+            "value" : "Listeye gider."
           }
         },
         "uk" : {
@@ -4992,7 +4998,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Navigates to list."
+            "value" : "Listeye gider."
           }
         },
         "uk" : {
@@ -5111,7 +5117,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Displays a larger version."
+            "value" : "Daha büyük bir versiyonunu gösterir."
           }
         },
         "uk" : {
@@ -5230,7 +5236,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Header image"
+            "value" : "Başlık resmi"
           }
         },
         "uk" : {
@@ -5349,7 +5355,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Settings"
+            "value" : "Ayarlar"
           }
         },
         "uk" : {
@@ -5468,7 +5474,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "More"
+            "value" : "Daha Fazla"
           }
         },
         "uk" : {
@@ -5587,7 +5593,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Options"
+            "value" : "Seçenekler"
           }
         },
         "uk" : {
@@ -5706,7 +5712,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bookmarks"
+            "value" : "Yer imleri"
           }
         },
         "uk" : {
@@ -5825,7 +5831,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Favorites"
+            "value" : "Favoriler"
           }
         },
         "uk" : {
@@ -5944,7 +5950,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tags"
+            "value" : "Etiketler"
           }
         },
         "uk" : {
@@ -6063,7 +6069,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lists"
+            "value" : "Listeler"
           }
         },
         "uk" : {
@@ -6182,7 +6188,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Media"
+            "value" : "Medya"
           }
         },
         "uk" : {
@@ -6301,7 +6307,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Posts and replies"
+            "value" : "Gönderiler ve Yanıtlar"
           }
         },
         "uk" : {
@@ -6420,7 +6426,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Posts"
+            "value" : "Gönderiler"
           }
         },
         "uk" : {
@@ -6539,7 +6545,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scrolls to list."
+            "value" : "Listeyi kaydırır."
           }
         },
         "uk" : {
@@ -6658,7 +6664,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Displays a larger version."
+            "value" : "Daha büyük bir versiyonunu gösterir."
           }
         },
         "uk" : {
@@ -6777,7 +6783,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Profile photo"
+            "value" : "Profil fotoğrafı"
           }
         },
         "uk" : {
@@ -6896,7 +6902,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Supporter"
+            "value" : "Destekçi"
           }
         },
         "uk" : {
@@ -7015,7 +7021,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Receive notifications"
+            "value" : "Bildirimleri al"
           }
         },
         "uk" : {
@@ -7134,7 +7140,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Display boosts"
+            "value" : "Boostları göster"
           }
         },
         "uk" : {
@@ -7253,7 +7259,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Blocked"
+            "value" : "Engellenmiş"
           }
         },
         "uk" : {
@@ -7372,7 +7378,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bot account"
+            "value" : "Bot hesap"
           }
         },
         "uk" : {
@@ -7491,7 +7497,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Muted"
+            "value" : "Sessize Alındı"
           }
         },
         "uk" : {
@@ -7610,7 +7616,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Private account"
+            "value" : "Özel hesap"
           }
         },
         "uk" : {
@@ -7728,7 +7734,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add Account"
+            "value" : "Hesap Ekle"
           }
         },
         "uk" : {
@@ -7966,7 +7972,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visit %@"
+            "value" : "%@ Ziyaret Et"
           }
         },
         "uk" : {
@@ -8085,7 +8091,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "New"
+            "value" : "Yeni"
           }
         },
         "uk" : {
@@ -8204,7 +8210,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Create"
+            "value" : "Yarat"
           }
         },
         "uk" : {
@@ -8323,7 +8329,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Compose"
+            "value" : "Oluştur"
           }
         },
         "uk" : {
@@ -8442,7 +8448,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scrolls the timeline."
+            "value" : "Akışı kaydırır."
           }
         },
         "uk" : {
@@ -8573,7 +8579,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld new posts"
+            "value" : "%lld yeni gönderi"
           }
         },
         "uk" : {
@@ -8931,7 +8937,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Block %@"
+            "value" : "%@ Kullanıcısını Engelle"
           }
         },
         "uk" : {
@@ -9050,7 +9056,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Do you want to block this user?"
+            "value" : "Bu kullanıcıyı engellemek istiyor musunuz?"
           }
         },
         "uk" : {
@@ -9168,7 +9174,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Edit Filters"
+            "value" : "Filtreleri Düzenle"
           }
         },
         "uk" : {
@@ -9404,7 +9410,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Log out account"
+            "value" : "Hesaptan Çıkış Yap"
           }
         },
         "uk" : {
@@ -9760,7 +9766,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "More Settings"
+            "value" : "Daha Fazla Ayar"
           }
         },
         "uk" : {
@@ -9998,7 +10004,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Disable Notifications"
+            "value" : "Bildirimleri Devre Dışı Bırak"
           }
         },
         "uk" : {
@@ -10117,7 +10123,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enable Notifications"
+            "value" : "Bildirimleri aktifleştir"
           }
         },
         "uk" : {
@@ -10236,7 +10242,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Privacy Settings"
+            "value" : "Gizlilik Politikası"
           }
         },
         "uk" : {
@@ -10355,7 +10361,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hide Boosts"
+            "value" : "Boostsları gizle"
           }
         },
         "uk" : {
@@ -10474,7 +10480,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show Boosts"
+            "value" : "Boostları göster"
           }
         },
         "uk" : {
@@ -10593,7 +10599,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Share this account"
+            "value" : "Bu hesabı paylaş"
           }
         },
         "uk" : {
@@ -11067,7 +11073,7 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Hesap Ekle"
           }
         },
@@ -11585,7 +11591,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld gönderiler"
+            "value" : "%lld gönderi"
           }
         },
         "uk" : {
@@ -11746,7 +11752,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld alanlar"
+            "value" : "%lld alan"
           }
         },
         "uk" : {
@@ -12460,7 +12466,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add a new metadata"
+            "value" : "Yeni metadata ekle"
           }
         },
         "uk" : {
@@ -12578,8 +12584,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit avatar"
+            "state" : "translated",
+            "value" : "Avatar'ı düzenle"
           }
         },
         "uk" : {
@@ -13054,8 +13060,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit header"
+            "state" : "translated",
+            "value" : "Başlığı düzenle"
           }
         },
         "uk" : {
@@ -13174,7 +13180,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Label"
+            "value" : "Etiket"
           }
         },
         "uk" : {
@@ -13293,7 +13299,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Profile Metadata"
+            "value" : "Profil Metadatası"
           }
         },
         "uk" : {
@@ -13412,7 +13418,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Content"
+            "value" : "İçerik"
           }
         },
         "uk" : {
@@ -13650,7 +13656,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Warning: These settings are overwritten by the global content settings"
+            "value" : "Uyarı: Bu ayarlar global içerik ayarları tarafından değiştirilecektir"
           }
         },
         "uk" : {
@@ -14245,7 +14251,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Accept"
+            "value" : "Kabul et"
           }
         },
         "uk" : {
@@ -14364,7 +14370,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reject"
+            "value" : "Reddet"
           }
         },
         "uk" : {
@@ -14483,7 +14489,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Warning: These settings are overwritten by the global content settings"
+            "value" : "Uyarı: Bu ayarlar global içerik ayarları tarafından değiştirildi"
           }
         },
         "uk" : {
@@ -14602,7 +14608,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pending requests"
+            "value" : "Bekleyen istekler"
           }
         },
         "uk" : {
@@ -15739,13 +15745,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%2$@ follower"
+                      "value" : "%2$@ takipçi"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%2$@ followers"
+                      "value" : "%2$@ takipçi"
                     }
                   }
                 }
@@ -16884,7 +16890,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Edit Note"
+            "value" : "Notu Düzenle"
           }
         },
         "uk" : {
@@ -17003,7 +17009,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Error while saving your note, please try again."
+            "value" : "Notunuz kaydedilirken hata oluştu, lütfen tekrar deneyin."
           }
         },
         "uk" : {
@@ -17122,7 +17128,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Error while saving your note"
+            "value" : "Notunuz kaydedilirken hata oluştu"
           }
         },
         "uk" : {
@@ -17241,7 +17247,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enter Note text"
+            "value" : "Not metnini gir"
           }
         },
         "uk" : {
@@ -17360,7 +17366,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Note:"
+            "value" : "Not:"
           }
         },
         "uk" : {
@@ -18072,7 +18078,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "View error"
+            "value" : "Hatayı görüntüle"
           }
         },
         "uk" : {
@@ -18190,7 +18196,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag Group Icon (SFSymbol name)"
+            "value" : "Etiket Grup İkonu (SFSymbol ismi)"
           }
         },
         "uk" : {
@@ -18308,7 +18314,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add tags to the group"
+            "value" : "Etiketleri gruba ekle"
           }
         },
         "uk" : {
@@ -18426,7 +18432,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag"
+            "value" : "Etiket"
           }
         },
         "uk" : {
@@ -18544,7 +18550,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Duplicated tag"
+            "value" : "Çoklanmış etiker"
           }
         },
         "uk" : {
@@ -18662,7 +18668,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Number of tags is less than 2"
+            "value" : "2'den az sayıda etiket var"
           }
         },
         "uk" : {
@@ -18780,7 +18786,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Symbol Found"
+            "value" : "Sembol Bulunamadı"
           }
         },
         "uk" : {
@@ -18899,7 +18905,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag Group Title"
+            "value" : "Etiket Grubu Başlığı"
           }
         },
         "uk" : {
@@ -19017,7 +19023,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Empty title"
+            "value" : "Boş başlık"
           }
         },
         "uk" : {
@@ -19135,7 +19141,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No symbol is selected"
+            "value" : "Sembol Seçilmedi"
           }
         },
         "uk" : {
@@ -19849,7 +19855,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "View detail"
+            "value" : "Detayı görüntüle"
           }
         },
         "uk" : {
@@ -20563,7 +20569,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Latest Message"
+            "value" : "Son Mesaj"
           }
         },
         "uk" : {
@@ -20913,7 +20919,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "DeepL API Free"
+            "value" : "DeepL API Ücretsiz"
           }
         },
         "uk" : {
@@ -21273,7 +21279,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld katılımcılar tarafından %lld gönderi"
+            "value" : "%lld katılımcı tarafından %lld gönderi"
           }
         },
         "uk" : {
@@ -22107,7 +22113,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "custom"
+            "value" : "özel"
           }
         },
         "uk" : {
@@ -22226,7 +22232,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "5 minutes"
+            "value" : "5 dakika"
           }
         },
         "uk" : {
@@ -22345,7 +22351,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "infinite"
+            "value" : "sonsuz"
           }
         },
         "uk" : {
@@ -22464,7 +22470,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "1 day"
+            "value" : "1 gün"
           }
         },
         "uk" : {
@@ -22583,7 +22589,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "1 hour"
+            "value" : "1 saat"
           }
         },
         "uk" : {
@@ -22702,7 +22708,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "7 days"
+            "value" : "7 gün"
           }
         },
         "uk" : {
@@ -22821,7 +22827,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "6 hours"
+            "value" : "6 saat"
           }
         },
         "uk" : {
@@ -22940,7 +22946,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "30 minutes"
+            "value" : "30 dakika"
           }
         },
         "uk" : {
@@ -23059,7 +23065,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "3 days"
+            "value" : "3 gün"
           }
         },
         "uk" : {
@@ -23297,7 +23303,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hide All"
+            "value" : "Tümünü gizle"
           }
         },
         "uk" : {
@@ -23416,7 +23422,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hide Sensitive"
+            "value" : "Hassas İçeriği Gizle"
           }
         },
         "uk" : {
@@ -23535,7 +23541,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show All"
+            "value" : "Tümünü Göster"
           }
         },
         "uk" : {
@@ -24249,7 +24255,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Medium"
+            "value" : "Orta"
           }
         },
         "uk" : {
@@ -24368,7 +24374,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Icon only"
+            "value" : "Sadece ikon"
           }
         },
         "uk" : {
@@ -24487,7 +24493,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Icon with text"
+            "value" : "İkon ve metin"
           }
         },
         "uk" : {
@@ -24965,7 +24971,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "All"
+            "value" : "Tümü"
           }
         },
         "uk" : {
@@ -25084,7 +25090,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hashtags"
+            "value" : "Hashtagler"
           }
         },
         "uk" : {
@@ -25203,7 +25209,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "People"
+            "value" : "Kişiler"
           }
         },
         "uk" : {
@@ -25322,7 +25328,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Posts"
+            "value" : "Gönderiler"
           }
         },
         "uk" : {
@@ -26869,7 +26875,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hide completely"
+            "value" : "Tamamen gizle"
           }
         },
         "uk" : {
@@ -26988,7 +26994,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hide with a warning"
+            "value" : "Uyarıyla gizle"
           }
         },
         "uk" : {
@@ -27107,7 +27113,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Conversations"
+            "value" : "Sohbetler"
           }
         },
         "uk" : {
@@ -27226,7 +27232,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Home and lists"
+            "value" : "Ana Ekran ve Listeler"
           }
         },
         "uk" : {
@@ -27345,7 +27351,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notifications"
+            "value" : "Bildirim"
           }
         },
         "uk" : {
@@ -27464,7 +27470,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Profiles"
+            "value" : "Profiller"
           }
         },
         "uk" : {
@@ -27583,7 +27589,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Public timelines"
+            "value" : "Genel akış"
           }
         },
         "uk" : {
@@ -27702,7 +27708,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Filter Action"
+            "value" : "Aksiyonu Filtrele"
           }
         },
         "uk" : {
@@ -27821,7 +27827,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Filter Contexts"
+            "value" : "İçerikleri Filtrele"
           }
         },
         "uk" : {
@@ -27940,7 +27946,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Expiry"
+            "value" : "Son Kullanma"
           }
         },
         "uk" : {
@@ -28059,7 +28065,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Date/Time"
+            "value" : "Tarih/Saat"
           }
         },
         "uk" : {
@@ -28178,7 +28184,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Duration"
+            "value" : "Süre"
           }
         },
         "uk" : {
@@ -28297,7 +28303,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Filter Keywords"
+            "value" : "Etiketleri Filtrele"
           }
         },
         "uk" : {
@@ -28416,7 +28422,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add a new keyword"
+            "value" : "Yeni klavye ekle"
           }
         },
         "uk" : {
@@ -28535,7 +28541,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Filter title"
+            "value" : "Başlığı Filtrele"
           }
         },
         "uk" : {
@@ -28654,7 +28660,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Expired"
+            "value" : "Sona Erdi"
           }
         },
         "uk" : {
@@ -28773,7 +28779,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Expiry: %@"
+            "value" : "Eskidi: %@"
           }
         },
         "uk" : {
@@ -28892,7 +28898,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Filters"
+            "value" : "Filtre"
           }
         },
         "uk" : {
@@ -29012,7 +29018,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "New Filter"
+            "value" : "Yeni Filtre"
           }
         },
         "uk" : {
@@ -29131,7 +29137,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Domainler"
+            "value" : "Alan adları"
           }
         },
         "uk" : {
@@ -30075,7 +30081,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Versiyon"
+            "value" : "Sürüm"
           }
         },
         "uk" : {
@@ -30193,7 +30199,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ gönderiler"
+            "value" : "%@ gönderi"
           }
         },
         "uk" : {
@@ -30311,7 +30317,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ kullanıcılar"
+            "value" : "%@ kullanıcı"
           }
         },
         "uk" : {
@@ -30547,7 +30553,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Oluşum URL'si"
+            "value" : "Oluşum URL'i"
           }
         },
         "uk" : {
@@ -30778,7 +30784,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hide these posts from home"
+            "value" : "Bu gönderileri ana ekranda gizle"
           }
         },
         "uk" : {
@@ -30897,7 +30903,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show replies to"
+            "value" : "Cevapları Göster"
           }
         },
         "uk" : {
@@ -31016,7 +31022,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Title"
+            "value" : "Başlık"
           }
         },
         "uk" : {
@@ -31135,7 +31141,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Any followed user"
+            "value" : "Takip edilen herhangi bir kullanıcı"
           }
         },
         "uk" : {
@@ -31254,7 +31260,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Members of the list"
+            "value" : "Liste üyeleri"
           }
         },
         "uk" : {
@@ -31373,7 +31379,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No one"
+            "value" : "Kimse"
           }
         },
         "uk" : {
@@ -31850,7 +31856,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "List settings"
+            "value" : "Liste ayarları"
           }
         },
         "uk" : {
@@ -32088,7 +32094,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Search users"
+            "value" : "Kullanıcıları ara"
           }
         },
         "uk" : {
@@ -32562,7 +32568,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bigger"
+            "value" : "Daha büyük"
           }
         },
         "uk" : {
@@ -32680,7 +32686,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Smaller"
+            "value" : "Daha Küçük"
           }
         },
         "uk" : {
@@ -32799,7 +32805,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "New post"
+            "value" : "Yeni Gönderi"
           }
         },
         "uk" : {
@@ -32917,7 +32923,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "New Window"
+            "value" : "Yeni Pencere"
           }
         },
         "uk" : {
@@ -33213,13 +33219,13 @@
               "one" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : " and %lld other "
+                  "value" : " ve %lld "
                 }
               },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : " and %lld others "
+                  "value" : " ve %lld "
                 }
               }
             }
@@ -33378,7 +33384,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bildirimler? Ne bildirimi? Bildirim gelen kutunuz boş gözüküyor. Harika olmaya devam edin! 📱😎"
+            "value" : "Bildirim mi? Ne bildirimi? Bildirim gelen kutunuz boş gözüküyor. Harika olmaya devam edin! 📱😎"
           }
         },
         "uk" : {
@@ -34057,7 +34063,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "⭐️ Starred: "
+            "value" : "⭐️ Favoriler: "
           }
         },
         "uk" : {
@@ -34498,7 +34504,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🔒 Requested to follow you: "
+            "value" : "🔒 Takip etmek istiyor: "
           }
         },
         "uk" : {
@@ -34617,7 +34623,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "👋 Followed you: "
+            "value" : "👋 Takip etti: "
           }
         },
         "uk" : {
@@ -35058,7 +35064,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "📈 Poll ended: "
+            "value" : "📈 Oylama sona erdi: "
           }
         },
         "uk" : {
@@ -35380,7 +35386,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🚀 Boosted: "
+            "value" : "🚀 Boostlandı: "
           }
         },
         "uk" : {
@@ -35618,7 +35624,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🖊️ Posted: "
+            "value" : "🖊️ Gönderildi: "
           }
         },
         "uk" : {
@@ -35856,7 +35862,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Updated: "
+            "value" : "Güncellendi: "
           }
         },
         "uk" : {
@@ -37519,7 +37525,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Send"
+            "value" : "Gönder"
           }
         },
         "uk" : {
@@ -37638,7 +37644,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Additional Info"
+            "value" : "Ek bilgi"
           }
         },
         "uk" : {
@@ -37756,7 +37762,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Report Post"
+            "value" : "Gönderiyi Bildir"
           }
         },
         "uk" : {
@@ -37993,7 +37999,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes is built with the following Open Source software:"
+            "value" : "Ice Cubes şu açık kaynak yazılımları ile kuruldu:"
           }
         },
         "uk" : {
@@ -38229,7 +38235,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Clear cache"
+            "value" : "Önbelleği Temizle"
           }
         },
         "uk" : {
@@ -38347,7 +38353,7 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Hesap Ekle"
           }
         },
@@ -38466,7 +38472,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cached posts: %@"
+            "value" : "Önbelleklenmiş Gönderiler: %@"
           }
         },
         "uk" : {
@@ -38584,7 +38590,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "About"
+            "value" : "Hakkında"
           }
         },
         "uk" : {
@@ -38821,7 +38827,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Icons by"
+            "value" : "İkonlar:"
           }
         },
         "uk" : {
@@ -39058,7 +39064,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Official icons"
+            "value" : "Resmi ikonlar"
           }
         },
         "uk" : {
@@ -39412,7 +39418,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Clear Media Cache"
+            "value" : "Medya Önbelleğini Temizle"
           }
         },
         "uk" : {
@@ -39648,7 +39654,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Collapse long posts"
+            "value" : "Uzun gönderileri daralt"
           }
         },
         "uk" : {
@@ -39766,7 +39772,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Collapsed posts only display a limited number of lines together with a button to show the full post"
+            "value" : "Daraltılmış gönderiler sınırlı sayıda çizgiyi beraber gösterir ve yanında genişletmek için bir buton gösterir"
           }
         },
         "uk" : {
@@ -39884,7 +39890,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reply Visibility"
+            "value" : "Yanıt Görünümü"
           }
         },
         "uk" : {
@@ -40002,7 +40008,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Always mark media as sensitive"
+            "value" : "Her Zaman Medyayı Hassas Olarak İşaretle"
           }
         },
         "uk" : {
@@ -40120,7 +40126,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Posting visibility"
+            "value" : "Gönderi Görünürlüğü"
           }
         },
         "uk" : {
@@ -40238,7 +40244,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Media display"
+            "value" : "Medya Görünümü"
           }
         },
         "uk" : {
@@ -40356,7 +40362,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Always show sensitive posts"
+            "value" : "Her Zaman Hassas İçerikleri Göster"
           }
         },
         "uk" : {
@@ -40474,7 +40480,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hide repeated boosts"
+            "value" : "Tekrarlanan boostları gizle"
           }
         },
         "uk" : {
@@ -40592,7 +40598,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Server Content Settings"
+            "value" : "Sunucu İçerik Ayarları"
           }
         },
         "uk" : {
@@ -40710,7 +40716,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Media"
+            "value" : "Medya"
           }
         },
         "uk" : {
@@ -40828,7 +40834,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show ALT texts"
+            "value" : "ALT metinlerini göster"
           }
         },
         "uk" : {
@@ -40946,7 +40952,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Content Settings"
+            "value" : "İçerik Ayarları"
           }
         },
         "uk" : {
@@ -41064,7 +41070,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Posting"
+            "value" : "Gönderiliyor"
           }
         },
         "uk" : {
@@ -41182,7 +41188,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reading"
+            "value" : "Okunuyor"
           }
         },
         "uk" : {
@@ -41300,7 +41306,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sharing"
+            "value" : "Paylaşıyor"
           }
         },
         "uk" : {
@@ -41419,7 +41425,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Link and Text"
+            "value" : "Bağlantı ve Metin"
           }
         },
         "uk" : {
@@ -41538,7 +41544,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Link Only"
+            "value" : "Yalnızca Bağlantı"
           }
         },
         "uk" : {
@@ -41656,7 +41662,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Share Button Behavior"
+            "value" : "Paylaşma Buton Davranışı"
           }
         },
         "uk" : {
@@ -41774,7 +41780,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Use server settings"
+            "value" : "Sunucu Ayarlarını Kullan"
           }
         },
         "uk" : {
@@ -42129,7 +42135,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apply custom colors"
+            "value" : "Özel renkleri ayarla"
           }
         },
         "uk" : {
@@ -42248,7 +42254,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Example Post"
+            "value" : "Örnek Gönderi"
           }
         },
         "uk" : {
@@ -42366,7 +42372,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Timeline Font"
+            "value" : "Akış Fontu"
           }
         },
         "uk" : {
@@ -42485,7 +42491,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Custom"
+            "value" : "Özel"
           }
         },
         "uk" : {
@@ -42603,7 +42609,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Line Spacing: %@"
+            "value" : "Satır Aralığı: %@"
           }
         },
         "uk" : {
@@ -42721,7 +42727,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Font scaling: %@"
+            "value" : "Font ölçeklendirme: %@"
           }
         },
         "uk" : {
@@ -42840,7 +42846,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "System"
+            "value" : "Sistem"
           }
         },
         "uk" : {
@@ -42958,7 +42964,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Display full username"
+            "value" : "Tam Kullanıcı Adını Göster"
           }
         },
         "uk" : {
@@ -43076,8 +43082,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Max reply indentation: %@"
+            "state" : "translated",
+            "value" : "Maksimum yanıt girintisi: %@"
           }
         },
         "uk" : {
@@ -43432,7 +43438,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show Pending Button on the Left"
+            "value" : "Solda Bekliyor Butonunu Göster"
           }
         },
         "uk" : {
@@ -44022,7 +44028,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Custom colors can only be set if match system color scheme is disabled"
+            "value" : "Özel renkler, sadece sistem renk şeması devre dışı iken ayarlanabilir"
           }
         },
         "uk" : {
@@ -44139,8 +44145,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Account on Hover"
+            "state" : "translated",
+            "value" : "Üzerine geldiğinde hesabı göster"
           }
         },
         "uk" : {
@@ -44258,7 +44264,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enable secondary column"
+            "value" : "İkincil sütunu aktif et"
           }
         },
         "uk" : {
@@ -44376,8 +44382,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show reply indentation"
+            "state" : "translated",
+            "value" : "Cevap girintisini göster"
           }
         },
         "uk" : {
@@ -44495,7 +44501,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show tab name"
+            "value" : "Sekme Adını Göster"
           }
         },
         "uk" : {
@@ -44730,8 +44736,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Secondary status action"
+            "state" : "translated",
+            "value" : "İkincil durum aksiyonu"
           }
         },
         "uk" : {
@@ -45321,7 +45327,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Text Color"
+            "value" : "Metin Rengi"
           }
         },
         "uk" : {
@@ -45911,7 +45917,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "In-App Browser Reader View"
+            "value" : "Uygulama içi Okuma Modunda Tarayıcı Görünümü"
           }
         },
         "uk" : {
@@ -46147,7 +46153,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Content Settings"
+            "value" : "İçerik Ayarları"
           }
         },
         "uk" : {
@@ -46383,7 +46389,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Haptic Feedback"
+            "value" : "Dokunsal Geribildirim"
           }
         },
         "uk" : {
@@ -46855,7 +46861,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Swipe Actions"
+            "value" : "Kaydırma Aksiyonları"
           }
         },
         "uk" : {
@@ -46973,7 +46979,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tabs Customizations"
+            "value" : "Sekme Özelleştirmeleri"
           }
         },
         "uk" : {
@@ -47091,7 +47097,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Translation Settings"
+            "value" : "Çeviri Ayarları"
           }
         },
         "uk" : {
@@ -47209,7 +47215,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Button Press"
+            "value" : "Buton Basımı"
           }
         },
         "uk" : {
@@ -47327,7 +47333,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Haptic Settings"
+            "value" : "Dokunsal Ayarları"
           }
         },
         "uk" : {
@@ -47445,7 +47451,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tab Selection"
+            "value" : "Sekme Seçimi"
           }
         },
         "uk" : {
@@ -47563,7 +47569,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Timeline"
+            "value" : "Akış"
           }
         },
         "uk" : {
@@ -47681,7 +47687,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Auto Play Videos"
+            "value" : "Videoları Otomatik Oynat"
           }
         },
         "uk" : {
@@ -47798,8 +47804,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh"
+            "state" : "translated",
+            "value" : "Hızlı yenileme"
           }
         },
         "uk" : {
@@ -48153,7 +48159,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enable Sound Effects"
+            "value" : "Ses efektlerini aktif et"
           }
         },
         "uk" : {
@@ -48389,7 +48395,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🪄 Fix it"
+            "value" : "🪄 Düzelt"
           }
         },
         "uk" : {
@@ -48507,7 +48513,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Receiving duplicate notifications? Try this magic button in order to fix it"
+            "value" : "Tıpatıp aynı bildirimler mi alıyorsun? Bu büyülü butonu dene ve sorunu çöz"
           }
         },
         "uk" : {
@@ -48625,7 +48631,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Duplicate notifications fixer"
+            "value" : "Bildirim Çözücüyü Çoğalt"
           }
         },
         "uk" : {
@@ -50159,7 +50165,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cache"
+            "value" : "Önbellek"
           }
         },
         "uk" : {
@@ -50512,8 +50518,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
+            "state" : "translated",
+            "value" : "Hızlı yenileme zaman akışı pozisyonunu kaydetmeyi ve önbelleklemeyi devre dışı bırakır. Her zaman taze akışı çeker."
           }
         },
         "uk" : {
@@ -51811,7 +51817,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Privacy Policy"
+            "value" : "Gizlilik Politikası"
           }
         },
         "uk" : {
@@ -51929,7 +51935,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Restore purchase"
+            "value" : "Satın Almayı Geri Yükle"
           }
         },
         "uk" : {
@@ -52047,7 +52053,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Restore your supporter subscription if it hasn't been synced automatically."
+            "value" : "Eğer otomatik senkronize olmadıysa destekçi bağışını geri yükle."
           }
         },
         "uk" : {
@@ -52165,7 +52171,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " Thanks for being an Ice Cubes supporter!"
+            "value" : "Ice Cubes destekçisi olduğunuz için teşekkürler!"
           }
         },
         "uk" : {
@@ -52283,7 +52289,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The supporter subscription is a monthly auto renewable subscription giving you a verified badge only visible to you on your profile. Subscription are automatically renewed unless you cancel them a day before the next renewal cycle."
+            "value" : "Destekçi aboneliği, her ay yenilenen ve sadece size gözükecek bir onay etiketi veren bir üründür. Abonelikler, bir gün öncesine kadar iptal etmediğiniz sürece yenilenmeye devam eder."
           }
         },
         "uk" : {
@@ -52401,7 +52407,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "By giving a monthly tip to Ice Cubes, you become a supporter, you'll even get verified badge on your profile. For your 👀 only."
+            "value" : "Ice Cubes uygulamasına aylık bağış yaparak, profilinde bile onaylanmış etiketi alabilirsin. Sadece senin için. 👀"
           }
         },
         "uk" : {
@@ -52519,7 +52525,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " Become a supporter!"
+            "value" : "Destekçi olun!"
           }
         },
         "uk" : {
@@ -52637,7 +52643,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Terms"
+            "value" : "Koşullar"
           }
         },
         "uk" : {
@@ -53227,7 +53233,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Appearance"
+            "value" : "Görünüm"
           }
         },
         "uk" : {
@@ -53345,7 +53351,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Icon Style"
+            "value" : "İkon stili"
           }
         },
         "uk" : {
@@ -53463,7 +53469,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Swipe Actions"
+            "value" : "Kaydırma Aksiyonları"
           }
         },
         "uk" : {
@@ -53581,7 +53587,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Primary Action"
+            "value" : "Birincil Aksiyon"
           }
         },
         "uk" : {
@@ -53699,7 +53705,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Secondary Action"
+            "value" : "İkincil Aksiyon"
           }
         },
         "uk" : {
@@ -53817,7 +53823,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Post"
+            "value" : "Gönderi"
           }
         },
         "uk" : {
@@ -53936,7 +53942,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bookmark"
+            "value" : "Yer imi"
           }
         },
         "uk" : {
@@ -54174,7 +54180,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Favorite"
+            "value" : "Favori"
           }
         },
         "uk" : {
@@ -54293,7 +54299,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "None"
+            "value" : "Hiç"
           }
         },
         "uk" : {
@@ -54412,7 +54418,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quote"
+            "value" : "Alıntı"
           }
         },
         "uk" : {
@@ -54531,7 +54537,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reply"
+            "value" : "Yanıtla"
           }
         },
         "uk" : {
@@ -54649,7 +54655,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set."
+            "value" : "Kaydırma ayarları sola ve sağa kaydırma ile kullanılabilir. İkincil aksiyon sadece birincil aksiyon seçili ise kurulabilir."
           }
         },
         "uk" : {
@@ -54767,7 +54773,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Swipe Right"
+            "value" : "Sağa Kaydır"
           }
         },
         "uk" : {
@@ -54885,7 +54891,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Swipe Left"
+            "value" : "Sola kaydır"
           }
         },
         "uk" : {
@@ -55003,7 +55009,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Use Theme Colors"
+            "value" : "Tema Renklerini Kullan"
           }
         },
         "uk" : {
@@ -55121,7 +55127,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Use theme colors instead of default colors"
+            "value" : "Varsayılan Renkler Yerine Tema Renklerini Kullan"
           }
         },
         "uk" : {
@@ -55239,7 +55245,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "System Settings"
+            "value" : "Sistem Ayarları"
           }
         },
         "uk" : {
@@ -55357,7 +55363,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fifth Tab"
+            "value" : "Beşinci Sekme"
           }
         },
         "uk" : {
@@ -55475,7 +55481,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "First Tab"
+            "value" : "Birinci Sekme"
           }
         },
         "uk" : {
@@ -55593,7 +55599,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fourth Tab"
+            "value" : "Dördüncü Sekme"
           }
         },
         "uk" : {
@@ -55711,7 +55717,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Second Tab"
+            "value" : "İkinci Sekme"
           }
         },
         "uk" : {
@@ -55829,7 +55835,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Third Tab"
+            "value" : "Üçüncü Sekme"
           }
         },
         "uk" : {
@@ -56183,7 +56189,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Always Translate using DeepL"
+            "value" : "Her Zaman DeepL kullanarak Çevir"
           }
         },
         "uk" : {
@@ -56301,7 +56307,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Type of the Key"
+            "value" : "Anahtar türü"
           }
         },
         "uk" : {
@@ -56419,7 +56425,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Auto detect language"
+            "value" : "Dili otomatik algıla"
           }
         },
         "uk" : {
@@ -56537,7 +56543,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary."
+            "value" : "Ice Cubes göndereceğin gönderinin dilini algılamaya çalışacak ve gerekirse gönderi dilini güncellemeni önerecek."
           }
         },
         "uk" : {
@@ -56655,7 +56661,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Translation"
+            "value" : "Çeviri"
           }
         },
         "uk" : {
@@ -56773,7 +56779,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "This feature requires a DeepL API key"
+            "value" : "Bu özellik bir DeepL API anahtarı gerektirir"
           }
         },
         "uk" : {
@@ -56891,7 +56897,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "DeepL API Key"
+            "value" : "DeepL API Anahtarı"
           }
         },
         "uk" : {
@@ -57248,7 +57254,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Boost to Followers"
+            "value" : "Takipçileri Boostla "
           }
         },
         "uk" : {
@@ -57367,7 +57373,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Copy Link"
+            "value" : "Bağlantıyı Kopyala"
           }
         },
         "uk" : {
@@ -57724,7 +57730,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "are you sure you want to delete this post?"
+            "value" : "Bu gönderiyi silmek istediğinden emin misin?"
           }
         },
         "uk" : {
@@ -57843,7 +57849,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Confirm"
+            "value" : "Doğrula"
           }
         },
         "uk" : {
@@ -58081,7 +58087,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Favori"
+            "value" : "Favoriye Al"
           }
         },
         "uk" : {
@@ -58914,7 +58920,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Report Post"
+            "value" : "Gönderiyi Bildir"
           }
         },
         "uk" : {
@@ -59151,8 +59157,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Select Text"
+            "state" : "translated",
+            "value" : "Metni Seç"
           }
         },
         "uk" : {
@@ -59390,7 +59396,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Share post as image"
+            "value" : "Gönderiyi resim olarak paylaş"
           }
         },
         "uk" : {
@@ -59509,7 +59515,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Share post link"
+            "value" : "Gönderi linkini paylaş"
           }
         },
         "uk" : {
@@ -59628,7 +59634,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Share"
+            "value" : "Paylaş"
           }
         },
         "uk" : {
@@ -59986,7 +59992,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Translated from %@ using %@"
+            "value" : "%@ tarafından %@ kullanılarak çevrildi"
           }
         },
         "uk" : {
@@ -60700,7 +60706,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Copy this link"
+            "value" : "Bu bağlantıyı kopyala"
           }
         },
         "uk" : {
@@ -60819,7 +60825,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Share this link"
+            "value" : "Bu bağlantıyı paylaş"
           }
         },
         "uk" : {
@@ -61176,7 +61182,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add #Tags in place"
+            "value" : "Yerine #Etiketler ekle"
           }
         },
         "uk" : {
@@ -61652,7 +61658,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add #Tags after my text"
+            "value" : "Metnimden sonra #Etiketler ekle"
           }
         },
         "uk" : {
@@ -61890,7 +61896,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Take Photo"
+            "value" : "Fotoğraf Çek"
           }
         },
         "uk" : {
@@ -62366,7 +62372,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Custom Emojis"
+            "value" : "Özel Emojiler"
           }
         },
         "uk" : {
@@ -62603,8 +62609,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Type your follow-up content here."
+            "state" : "translated",
+            "value" : "Devam eden içeriğini burada yaz."
           }
         },
         "uk" : {
@@ -62723,7 +62729,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Post in %@ (Detected language)"
+            "value" : "%@ Metin (Saptanmış dil)"
           }
         },
         "uk" : {
@@ -62842,7 +62848,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Post in %@ (Selected language)"
+            "value" : "%@ dilinde gönderi (Seçili dil)"
           }
         },
         "uk" : {
@@ -63317,8 +63323,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "🤖 Generate description"
+            "state" : "translated",
+            "value" : "🤖 Açıklama yarat"
           }
         },
         "uk" : {
@@ -63794,7 +63800,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@'dan alıntılandı"
+            "value" : "%@ kullanıcısından alıntılandı"
           }
         },
         "uk" : {
@@ -63913,7 +63919,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@'a cevap veriliyor"
+            "value" : "%@ kullanıcısına cevap veriliyor"
           }
         },
         "uk" : {
@@ -64032,7 +64038,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Photos Library"
+            "value" : "Fotoğraf Kütüphanesi"
           }
         },
         "uk" : {
@@ -64865,7 +64871,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Error while posting"
+            "value" : "Gönderilirken hata oluştu"
           }
         },
         "uk" : {
@@ -66939,7 +66945,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld votes from %lld voters"
+            "value" : "%lld adet oy %lld kişi içinde"
           }
         },
         "uk" : {
@@ -67177,7 +67183,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Send Vote"
+            "value" : "Oy Ver"
           }
         },
         "uk" : {
@@ -67296,7 +67302,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gönderi tarafından %@"
+            "value" : "Gönderi,  %@ tarafından"
           }
         },
         "uk" : {
@@ -67414,8 +67420,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Continues a thread"
+            "state" : "translated",
+            "value" : "Konu olarak devam eder"
           }
         },
         "uk" : {
@@ -67891,7 +67897,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show full post"
+            "value" : "Tüm gönderileri göster"
           }
         },
         "uk" : {
@@ -68367,7 +68373,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Edit History"
+            "value" : "Geçmişi Düzenle"
           }
         },
         "uk" : {
@@ -68647,7 +68653,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld yükseltmeler"
+            "value" : "%lld yükseltme"
           }
         },
         "uk" : {
@@ -68808,7 +68814,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld favoriler"
+            "value" : "%lld favori"
           }
         },
         "uk" : {
@@ -68963,7 +68969,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld replies"
+            "value" : "%lld cevap"
           }
         },
         "uk" : {
@@ -69912,7 +69918,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mentions"
+            "value" : "Bahsedilme"
           }
         },
         "uk" : {
@@ -70266,7 +70272,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Profile"
+            "value" : "Profil"
           }
         },
         "uk" : {
@@ -70739,7 +70745,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add or remove tag from tag groups"
+            "value" : "Etiket grubuna etiket ekle veya kaldır"
           }
         },
         "uk" : {
@@ -70900,7 +70906,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld mentions"
+            "value" : "%lld bahsetme"
           }
         },
         "uk" : {
@@ -70924,6 +70930,7 @@
       }
     },
     "timeline-new-posts %lld" : {
+      "comment" : "Turkish does not have \"-ler\" on words in the sentence, so it follows the singular word.",
       "extractionState" : "manual",
       "localizations" : {
         "be" : {
@@ -71202,7 +71209,7 @@
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "%lld yeni gönderiler"
+                  "value" : "%lld yeni gönderi"
                 }
               }
             }
@@ -71714,7 +71721,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Instance URL"
+            "value" : "Oluşum URL'i"
           }
         },
         "uk" : {
@@ -72070,7 +72077,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add tag group"
+            "value" : "Etiket grubu ekle"
           }
         },
         "uk" : {
@@ -72188,7 +72195,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Edit tag group"
+            "value" : "Etiket grubunu düzenle"
           }
         },
         "uk" : {
@@ -72542,7 +72549,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag Groups"
+            "value" : "Etiket Grupları"
           }
         },
         "uk" : {
@@ -72898,7 +72905,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jump to Latest"
+            "value" : "Sonuncuya Atla"
           }
         },
         "uk" : {
@@ -73264,7 +73271,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld katılımcılar tarafından %lld yeni gönderiler"
+            "value" : "%lld katılımcı tarafından %lld yeni gönderiler"
           }
         },
         "uk" : {
@@ -73382,8 +73389,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Resume"
+            "state" : "translated",
+            "value" : "Devam Et"
           }
         },
         "uk" : {
@@ -73502,7 +73509,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Trending"
+            "value" : "Popüler"
           }
         },
         "uk" : {
