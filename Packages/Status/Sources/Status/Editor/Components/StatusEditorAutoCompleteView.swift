@@ -80,7 +80,10 @@ struct StatusEditorAutoCompleteView: View {
   private var suggestionsTagView: some View {
     ForEach(viewModel.tagsSuggestions) { tag in
       Button {
-        viewModel.selectHashtagSuggestion(tag: tag.name)
+        withAnimation {
+          isTagSuggestionExpanded = false
+          viewModel.selectHashtagSuggestion(tag: tag.name)
+        }
         if let index = recentTags.firstIndex(where: { $0.title.lowercased() == tag.name.lowercased() }) {
           recentTags[index].lastUse = Date()
         } else {
