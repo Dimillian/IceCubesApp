@@ -143,6 +143,8 @@ struct StatusRowActionsView: View {
                   action.image(dataController: statusDataController)
                     .font(.scaledBody)
                 }
+                .padding(.vertical, 6)
+                .padding(.trailing, 8)
                 .buttonStyle(.statusAction())
                 .accessibilityElement(children: .combine)
                 .accessibilityLabel("status.action.share-link")
@@ -154,6 +156,8 @@ struct StatusRowActionsView: View {
                   action.image(dataController: statusDataController)
                     .font(.scaledBody)
                 }
+                .padding(.vertical, 6)
+                .padding(.trailing, 8)
                 .buttonStyle(.statusAction())
                 .accessibilityElement(children: .combine)
                 .accessibilityLabel("status.action.share-link")
@@ -170,6 +174,7 @@ struct StatusRowActionsView: View {
                 }
             } label: {
               Label("", systemImage: "ellipsis")
+                .padding(.vertical, 6)
             }
             .menuStyle(.button)
             .foregroundStyle(.secondary)
@@ -216,6 +221,8 @@ struct StatusRowActionsView: View {
             .monospacedDigit()
         }
       }
+      .padding(.vertical, 6)
+      .padding(.trailing, 8)
       .contentShape(Rectangle())
     }
     .buttonStyle(

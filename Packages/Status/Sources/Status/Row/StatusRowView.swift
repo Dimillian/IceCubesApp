@@ -95,7 +95,6 @@ public struct StatusRowView: View {
                 StatusRowActionsView(viewModel: viewModel)
                   .tint(isFocused ? theme.tintColor : .gray)
                   .contentShape(Rectangle())
-                  .padding(.top, 6)
               }
 
               if isFocused, !isCompact {
