@@ -20,9 +20,7 @@ extension StatusEditor {
     let focusedSEVM: ViewModel
     @Binding var followUpSEVMs: [ViewModel]
 
-    @State private var isLanguageSheetDisplayed: Bool = false
     @State private var isCustomEmojisSheetDisplay: Bool = false
-    @State private var languageSearch: String = ""
     @State private var isLoadingAIRequest: Bool = false
     @State private var isPhotosPickerPresented: Bool = false
     @State private var isFileImporterPresented: Bool = false
@@ -49,9 +47,6 @@ extension StatusEditor {
         .padding(.vertical, 12)
         .background(.thinMaterial)
         #endif
-      }
-      .onAppear {
-        viewModel.setInitialLanguageSelection(preference: preferences.recentlyUsedLanguages.first ?? preferences.serverPreferences?.postLanguage)
       }
     }
 
@@ -219,25 +214,6 @@ extension StatusEditor {
         Image(systemName: "at")
       }
 
-      Button {
-        isLanguageSheetDisplayed.toggle()
-      } label: {
-        if let language = viewModel.selectedLanguage {
-          Text(language.uppercased())
-        } else {
-          Image(systemName: "globe")
-        }
-      }
-      .accessibilityLabel("accessibility.editor.button.language")
-      .popover(isPresented: $isLanguageSheetDisplayed) {
-        if UIDevice.current.userInterfaceIdiom == .phone {
-          languageSheetView
-        } else {
-          languageSheetView
-            .frame(width: 400, height: 500)
-        }
-      }
-
       if preferences.isOpenAIEnabled {
         AIMenu.disabled(!viewModel.canPost)
       }
@@ -273,15 +249,6 @@ extension StatusEditor {
     }
     #endif
 
-    @ViewBuilder
-    private func languageTextView(isoCode: String, nativeName: String?, name: String?) -> some View {
-      if let nativeName, let name {
-        Text("\(nativeName) (\(name))")
-      } else {
-        Text(isoCode.uppercased())
-      }
-    }
-
     private var AIMenu: some View {
       Menu {
         ForEach(AIPrompt.allCases, id: \.self) { prompt in
@@ -309,58 +276,6 @@ extension StatusEditor {
         } else {
           Image(systemName: "faxmachine")
             .accessibilityLabel("accessibility.editor.button.ai-prompt")
-        }
-      }
-    }
-
-    private var languageSheetView: some View {
-      NavigationStack {
-        List {
-          if languageSearch.isEmpty {
-            if !recentlyUsedLanguages.isEmpty {
-              Section("status.editor.language-select.recently-used") {
-                languageSheetSection(languages: recentlyUsedLanguages)
-              }
-            }
-            Section {
-              languageSheetSection(languages: otherLanguages)
-            }
-          } else {
-            languageSheetSection(languages: languageSearchResult(query: languageSearch))
-          }
-        }
-        .searchable(text: $languageSearch)
-        .toolbar {
-          ToolbarItem(placement: .navigationBarLeading) {
-            Button("action.cancel", action: { isLanguageSheetDisplayed = false })
-          }
-        }
-        .navigationTitle("status.editor.language-select.navigation-title")
-        .navigationBarTitleDisplayMode(.inline)
-        .scrollContentBackground(.hidden)
-        .background(theme.secondaryBackgroundColor)
-      }
-    }
-
-    private func languageSheetSection(languages: [Language]) -> some View {
-      ForEach(languages) { language in
-        HStack {
-          languageTextView(
-            isoCode: language.isoCode,
-            nativeName: language.nativeName,
-            name: language.localizedName
-          ).tag(language.isoCode)
-          Spacer()
-          if language.isoCode == focusedSEVM.selectedLanguage {
-            Image(systemName: "checkmark")
-          }
-        }
-        .listRowBackground(theme.primaryBackgroundColor)
-        .contentShape(Rectangle())
-        .onTapGesture {
-          focusedSEVM.selectedLanguage = language.isoCode
-          focusedSEVM.hasExplicitlySelectedLanguage = true
-          isLanguageSheetDisplayed = false
         }
       }
     }
@@ -411,26 +326,6 @@ extension StatusEditor {
         .navigationBarTitleDisplayMode(.inline)
       }
       .presentationDetents([.medium])
-    }
-    
-    private var recentlyUsedLanguages: [Language] {
-      preferences.recentlyUsedLanguages.compactMap { isoCode in
-        Language.allAvailableLanguages.first { $0.isoCode == isoCode }
-      }
-    }
-
-    private var otherLanguages: [Language] {
-      Language.allAvailableLanguages.filter { !preferences.recentlyUsedLanguages.contains($0.isoCode) }
-    }
-
-    private func languageSearchResult(query: String) -> [Language] {
-      Language.allAvailableLanguages.filter { language in
-        guard !languageSearch.isEmpty else {
-          return true
-        }
-        return language.nativeName?.lowercased().hasPrefix(query.lowercased()) == true
-          || language.localizedName?.lowercased().hasPrefix(query.lowercased()) == true
-      }
     }
   }
 

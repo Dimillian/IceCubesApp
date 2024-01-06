@@ -8,15 +8,6 @@ import SwiftUI
 extension StatusEditor {
   @MainActor
   struct EditorView: View {
-    @Bindable var viewModel: ViewModel
-    @Binding var followUpSEVMs: [ViewModel]
-    @Binding var editingMediaContainer: MediaContainer?
-
-    @FocusState<UUID?>.Binding var isSpoilerTextFocused: UUID?
-    @FocusState<EditorFocusState?>.Binding var editorFocusState: EditorFocusState?
-    let assignedFocusState: EditorFocusState
-    let isMain: Bool
-
     @Environment(Theme.self) private var theme
     @Environment(UserPreferences.self) private var preferences
     @Environment(CurrentAccount.self) private var currentAccount
@@ -28,6 +19,18 @@ extension StatusEditor {
     #else
       @Environment(\.dismiss) private var dismiss
     #endif
+    
+    @Bindable var viewModel: ViewModel
+    @Binding var followUpSEVMs: [ViewModel]
+    @Binding var editingMediaContainer: MediaContainer?
+    
+    @State private var isLanguageSheetDisplayed: Bool = false
+    @State private var languageSearch: String = ""
+
+    @FocusState<UUID?>.Binding var isSpoilerTextFocused: UUID?
+    @FocusState<EditorFocusState?>.Binding var editorFocusState: EditorFocusState?
+    let assignedFocusState: EditorFocusState
+    let isMain: Bool
 
     var body: some View {
       HStack(spacing: 0) {
@@ -44,7 +47,7 @@ extension StatusEditor {
           VStack(spacing: 0) {
             accountHeaderView
             textInput
-            characterCountView
+            characterCountAndLangView
             MediaView(viewModel: viewModel, editingMediaContainer: $editingMediaContainer)
             embeddedStatus
             pollView
@@ -144,9 +147,9 @@ extension StatusEditor {
     
     
     @ViewBuilder
-    private var characterCountView: some View {
+    private var characterCountAndLangView: some View {
       let value = (currentInstance.instance?.configuration?.statuses.maxCharacters ?? 500) + viewModel.statusTextCharacterLength
-      HStack {
+      HStack(alignment: .center) {
         Text("\(value)")
           .foregroundColor(value < 0 ? .red : .secondary)
           .font(.scaledCallout)
@@ -156,8 +159,118 @@ extension StatusEditor {
           .accessibilityAddTraits(.updatesFrequently)
           .accessibilityRespondsToUserInteraction(false)
           .padding(.leading, .layoutPadding)
-          .padding(.bottom, 8)
+        
+        Button {
+          isLanguageSheetDisplayed.toggle()
+        } label: {
+          HStack(alignment: .center) {
+            if let language = viewModel.selectedLanguage {
+              Image(systemName: "text.bubble")
+              Text(language.uppercased())
+            } else {
+              Image(systemName: "globe")
+            }
+          }
+          .font(.footnote)
+        }
+        .buttonStyle(.bordered)
+        .onAppear {
+          viewModel.setInitialLanguageSelection(preference: preferences.recentlyUsedLanguages.first ?? preferences.serverPreferences?.postLanguage)
+        }
+        .accessibilityLabel("accessibility.editor.button.language")
+        .popover(isPresented: $isLanguageSheetDisplayed) {
+          if UIDevice.current.userInterfaceIdiom == .phone {
+            languageSheetView
+          } else {
+            languageSheetView
+              .frame(width: 400, height: 500)
+          }
+        }
+        
         Spacer()
+      }
+      .padding(.bottom, 8)
+    }
+    
+    private var languageSheetView: some View {
+      NavigationStack {
+        List {
+          if languageSearch.isEmpty {
+            if !recentlyUsedLanguages.isEmpty {
+              Section("status.editor.language-select.recently-used") {
+                languageSheetSection(languages: recentlyUsedLanguages)
+              }
+            }
+            Section {
+              languageSheetSection(languages: otherLanguages)
+            }
+          } else {
+            languageSheetSection(languages: languageSearchResult(query: languageSearch))
+          }
+        }
+        .searchable(text: $languageSearch)
+        .toolbar {
+          ToolbarItem(placement: .navigationBarLeading) {
+            Button("action.cancel", action: { isLanguageSheetDisplayed = false })
+          }
+        }
+        .navigationTitle("status.editor.language-select.navigation-title")
+        .navigationBarTitleDisplayMode(.inline)
+        .scrollContentBackground(.hidden)
+        .background(theme.secondaryBackgroundColor)
+      }
+    }
+    
+    
+    @ViewBuilder
+    private func languageTextView(isoCode: String, nativeName: String?, name: String?) -> some View {
+      if let nativeName, let name {
+        Text("\(nativeName) (\(name))")
+      } else {
+        Text(isoCode.uppercased())
+      }
+    }
+
+    private func languageSheetSection(languages: [Language]) -> some View {
+      ForEach(languages) { language in
+        HStack {
+          languageTextView(
+            isoCode: language.isoCode,
+            nativeName: language.nativeName,
+            name: language.localizedName
+          ).tag(language.isoCode)
+          Spacer()
+          if language.isoCode == viewModel.selectedLanguage {
+            Image(systemName: "checkmark")
+          }
+        }
+        .listRowBackground(theme.primaryBackgroundColor)
+        .contentShape(Rectangle())
+        .onTapGesture {
+          viewModel.selectedLanguage = language.isoCode
+          viewModel.hasExplicitlySelectedLanguage = true
+          isLanguageSheetDisplayed = false
+        }
+      }
+    }
+    
+    private var recentlyUsedLanguages: [Language] {
+      preferences.recentlyUsedLanguages.compactMap { isoCode in
+        Language.allAvailableLanguages.first { $0.isoCode == isoCode }
+      }
+    }
+
+    private var otherLanguages: [Language] {
+      Language.allAvailableLanguages.filter { !preferences.recentlyUsedLanguages.contains($0.isoCode) }
+    }
+
+    private func languageSearchResult(query: String) -> [Language] {
+      Language.allAvailableLanguages.filter { language in
+        guard !languageSearch.isEmpty else {
+          return true
+        }
+        return language.nativeName?.lowercased().hasPrefix(query.lowercased()) == true
+          || language.localizedName?.lowercased().hasPrefix(query.lowercased()) == true
       }
     }
 
