@@ -21061,22 +21061,131 @@
         "be" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld допісы ад %lld удзельнікаў"
+            "value" : "%#@count_posts@ %#@count_participants@"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "few" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg удзельнікаў"
+                    }
+                  },
+                  "many" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg удзельнікаў"
+                    }
+                  },
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg удзельнікаў"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg удзельнікаў"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "few" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg допісы ад "
+                    }
+                  },
+                  "many" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg допісы ад "
+                    }
+                  },
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg допісы ад "
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg допісы ад "
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld publicacions de %lld participants"
+            "value" : "%#@count_posts@ de %#@count_participants@"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg participants"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg participants"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg publicacions "
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg publicacions "
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld Beiträge von %lld"
+            "value" : "%#@count_posts@ von %#@count_participants@"
           },
           "substitutions" : {
             "count_participants" : {
+              "argNum" : 2,
               "formatSpecifier" : "lld",
               "variations" : {
                 "plural" : {
@@ -21096,6 +21205,7 @@
               }
             },
             "count_posts" : {
+              "argNum" : 1,
               "formatSpecifier" : "lld",
               "variations" : {
                 "plural" : {
@@ -21118,29 +21228,155 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld posts from %lld participants"
+            "state" : "needs_review",
+            "value" : "%#@count_posts@ posts from %#@count_participants@ participants"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld posts from %lld participants"
+            "value" : "%#@count_posts@ from %#@count_participants@"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg participants"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg participants"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg posts"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg posts"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld publicaciones de %lld participantes"
+            "value" : "%#@count_posts@  %#@count_participants@"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg participantes"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg participantes"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg publicaciones de "
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg publicaciones de "
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%#@tagParticipantsCount@ %#@tagPostsCount@"
+            "value" : "%#@count_participants@ %#@count_posts@"
           },
           "substitutions" : {
-            "tagParticipantsCount" : {
+            "count_participants" : {
               "argNum" : 2,
               "formatSpecifier" : "lld",
               "variations" : {
@@ -21160,7 +21396,7 @@
                 }
               }
             },
-            "tagPostsCount" : {
+            "count_posts" : {
               "argNum" : 1,
               "formatSpecifier" : "lld",
               "variations" : {
@@ -21185,46 +21421,274 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld publications de %lld participants"
+            "value" : "%#@count_posts@  de %#@count_participants@"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg participants"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg participants"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg publications"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg publications"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld post da %lld partecipanti"
+            "value" : "%#@count_posts@ da %#@count_participants@"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg partecipanti"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg partecipanti"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg post "
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg post"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld トゥートの投稿 %lld 人が投稿している"
+            "value" : "%#@count_posts@ %#@count_participants@"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg 人が投稿している"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg トゥートの投稿 "
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld개 글 (%lld명이 이야기 중)"
+            "value" : "%#@count_posts@  %#@count_participants@"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "(%arg명이 이야기 중)"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg 개 글 "
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld innlegg fra %lld deltakere"
+            "value" : "%#@count_posts@ %#@count_participants@"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg deltakere"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg deltakere"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg innlegg fra "
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg innlegg fra "
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld posts van %lld deelnemers"
+            "value" : "%#@count_posts@ van %#@count_participants@"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg deelnemers"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg deelnemers"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg posts"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg posts"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%#@tagPostsCount@ %#@tagParticipantsCount@"
+            "value" : "%#@count_posts@ %#@count_participants@"
           },
           "substitutions" : {
-            "tagParticipantsCount" : {
+            "count_participants" : {
               "formatSpecifier" : "lld",
               "variations" : {
                 "plural" : {
@@ -21243,7 +21707,7 @@
                 }
               }
             },
-            "tagPostsCount" : {
+            "count_posts" : {
               "formatSpecifier" : "lld",
               "variations" : {
                 "plural" : {
@@ -21273,31 +21737,241 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld postagens de %lld participantes"
+            "value" : "%#@count_posts@ %#@count_participants@"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg participantes"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg participantes"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg postagens de "
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg postagens de "
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld katılımcı tarafından %lld gönderi"
+            "value" : "%#@count_posts@ %#@count_participants@"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg gönderi"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg gönderi"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg katılımcı tarafından "
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg katılımcı tarafından "
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld дописів від %lld учасників"
+            "value" : "%#@count_posts@%#@count_participants@"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "few" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg учасників"
+                    }
+                  },
+                  "many" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg учасників"
+                    }
+                  },
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg учасників"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg учасників"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "few" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg дописів від "
+                    }
+                  },
+                  "many" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg дописів від "
+                    }
+                  },
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg дописів від "
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg дописів від "
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld 条嘟文来自 %lld 个参与者"
+            "value" : "%#@count_posts@ %#@count_participants@"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg 个参与者"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg 条嘟文来自 "
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld 篇嘟文，%lld 位參與者"
+            "value" : "%#@count_posts@ %#@count_participants@ "
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg 位參與者"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg 篇嘟文，"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -66845,22 +67519,131 @@
         "be" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld галасоў ад %lld удзельнікаў"
+            "value" : "%#@count_votes@ %#@count_voters@"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "few" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg удзельнікаў"
+                    }
+                  },
+                  "many" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg удзельнікаў"
+                    }
+                  },
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg удзельнікаў"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg удзельнікаў"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "few" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg галасоў ад "
+                    }
+                  },
+                  "many" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg галасоў ад "
+                    }
+                  },
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg галасоў ад "
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg галасоў ад "
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld votes from %lld voters"
+            "value" : "%#@count_votes@ from %#@count_voters@"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg voters"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg voters"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg votes"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg votes"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld von %lld"
+            "state" : "needs_review",
+            "value" : "%#@count_votes@ von %#@count_voters@"
           },
           "substitutions" : {
             "count_voters" : {
+              "argNum" : 2,
               "formatSpecifier" : "lld",
               "variations" : {
                 "plural" : {
@@ -66880,6 +67663,7 @@
               }
             },
             "count_votes" : {
+              "argNum" : 1,
               "formatSpecifier" : "lld",
               "variations" : {
                 "plural" : {
@@ -66903,28 +67687,154 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld votes from %lld voters"
+            "value" : "%#@count_votes@ votes from %#@count_voters@ voters"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "en-GB" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld votes from %lld voters"
+            "state" : "needs_review",
+            "value" : "%#@count_votes@ votes from %#@count_voters@ voters"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld votos de %lld participantes"
+            "value" : "%#@count_votes@%#@count_voters@"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg participantes"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg participantes"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg votos de "
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg votos de "
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%#@tagVotersCount@ %#@tagVotesCount@"
+            "value" : "%#@count_voters@ %#@count_votes@"
           },
           "substitutions" : {
-            "tagVotersCount" : {
+            "count_voters" : {
               "argNum" : 2,
               "formatSpecifier" : "lld",
               "variations" : {
@@ -66944,7 +67854,7 @@
                 }
               }
             },
-            "tagVotesCount" : {
+            "count_votes" : {
               "argNum" : 1,
               "formatSpecifier" : "lld",
               "variations" : {
@@ -66969,46 +67879,274 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld votes de %lld voteurs"
+            "value" : "%#@count_votes@ de %#@count_voters@"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg voteurs"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg voteurs"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg votes"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg votes"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld voti da %lld persone"
+            "value" : "%#@count_votes@ da %#@count_voters@"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg persone"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg persone"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg voti "
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg voti"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld 票 %lld からの投票"
+            "value" : "%#@count_votes@  %#@count_voters@"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg からの投票"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg 票"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld표 (%lld명)"
+            "value" : "%#@count_votes@ %#@count_voters@"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "(%arg명)"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg 표"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld stemmer fra %lld velgere"
+            "value" : "%#@count_votes@ %#@count_voters@"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg velgere"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg velgere"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg stemmer fra "
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg stemmer fra "
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld stemmen van %lld stemmers"
+            "value" : "%#@count_votes@ van %#@count_voters@"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg stemmers"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg stemmers"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg stemmen"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg stemmen"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%#@tagVotesCount@ %#@tagVotersCount@"
+            "value" : "%#@count_votes@ %#@count_voters@"
           },
           "substitutions" : {
-            "tagVotersCount" : {
+            "count_voters" : {
               "formatSpecifier" : "lld",
               "variations" : {
                 "plural" : {
@@ -67027,7 +68165,7 @@
                 }
               }
             },
-            "tagVotesCount" : {
+            "count_votes" : {
               "formatSpecifier" : "lld",
               "variations" : {
                 "plural" : {
@@ -67057,31 +68195,241 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld votos de %lld votantes"
+            "value" : "%#@count_votes@ %#@count_voters@"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg votantes"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg votantes"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg votos de "
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg votos de "
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld adet oy %lld kişi içinde"
+            "value" : "%#@count_votes@ adet oy %#@count_voters@ kişi içinde"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg kişi içinde"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg kişi içinde"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg adet oy "
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg adet oy "
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld голосів від %lld опитаних"
+            "value" : "%#@count_votes@ %#@count_voters@"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "few" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg опитаних"
+                    }
+                  },
+                  "many" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg опитаних"
+                    }
+                  },
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg опитаних"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg опитаних"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "few" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg голосів від "
+                    }
+                  },
+                  "many" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg голосів від "
+                    }
+                  },
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg голосів від "
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg голосів від "
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld 票来自 %lld 个投票者"
+            "value" : "%#@count_votes@ %#@count_voters@"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg 个投票者"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg 票来自 "
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld 票，%lld 位投票者"
+            "value" : "%#@count_votes@ %#@count_voters@"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg  票，"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg 位投票者"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -73247,10 +74595,10 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%#@tagParticipantsCount@ %#@tagPostsCount@"
+            "value" : "%#@count_participants@ %#@count_posts@"
           },
           "substitutions" : {
-            "tagParticipantsCount" : {
+            "count_participants" : {
               "argNum" : 2,
               "formatSpecifier" : "lld",
               "variations" : {
@@ -73270,7 +74618,7 @@
                 }
               }
             },
-            "tagPostsCount" : {
+            "count_posts" : {
               "argNum" : 1,
               "formatSpecifier" : "lld",
               "variations" : {
@@ -73331,10 +74679,10 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%#@tagPostsCount@ %#@tagParticipantsCount@"
+            "value" : "%#@count_posts@ %#@count_participants@"
           },
           "substitutions" : {
-            "tagParticipantsCount" : {
+            "count_participants" : {
               "formatSpecifier" : "lld",
               "variations" : {
                 "plural" : {
@@ -73353,7 +74701,7 @@
                 }
               }
             },
-            "tagPostsCount" : {
+            "count_posts" : {
               "formatSpecifier" : "lld",
               "variations" : {
                 "plural" : {
