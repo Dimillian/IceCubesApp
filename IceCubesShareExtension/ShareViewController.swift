@@ -3,7 +3,7 @@ import AppAccount
 import DesignSystem
 import Env
 import Network
-import Status
+import StatusKit
 import SwiftUI
 import UIKit
 

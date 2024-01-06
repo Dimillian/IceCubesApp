@@ -1,6 +1,6 @@
 import DesignSystem
 import Models
-import Status
+import StatusKit
 import SwiftUI
 
 public struct CardsListView: View {

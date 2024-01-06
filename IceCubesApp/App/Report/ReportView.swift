@@ -2,7 +2,7 @@ import DesignSystem
 import Env
 import Models
 import Network
-import Status
+import StatusKit
 import SwiftUI
 
 public struct ReportView: View {

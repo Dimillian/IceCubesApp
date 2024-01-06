@@ -7,7 +7,7 @@ import KeychainSwift
 import MediaUI
 import Network
 import RevenueCat
-import Status
+import StatusKit
 import SwiftUI
 import Timeline
 

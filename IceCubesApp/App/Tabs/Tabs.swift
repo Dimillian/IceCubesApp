@@ -2,7 +2,7 @@ import Account
 import DesignSystem
 import Explore
 import Foundation
-import Status
+import StatusKit
 import SwiftUI
 
 @MainActor

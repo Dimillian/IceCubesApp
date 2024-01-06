@@ -20,7 +20,7 @@ let package = Package(
     .package(name: "Network", path: "../Network"),
     .package(name: "Models", path: "../Models"),
     .package(name: "Env", path: "../Env"),
-    .package(name: "Status", path: "../Status"),
+    .package(name: "StatusKit", path: "../StatusKit"),
     .package(name: "DesignSystem", path: "../DesignSystem"),
   ],
   targets: [
@@ -30,7 +30,7 @@ let package = Package(
         .product(name: "Network", package: "Network"),
         .product(name: "Models", package: "Models"),
         .product(name: "Env", package: "Env"),
-        .product(name: "Status", package: "Status"),
+        .product(name: "StatusKit", package: "StatusKit"),
         .product(name: "DesignSystem", package: "DesignSystem"),
       ],
       swiftSettings: [

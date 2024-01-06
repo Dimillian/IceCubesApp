@@ -8,7 +8,7 @@ import LinkPresentation
 import Lists
 import MediaUI
 import Models
-import Status
+import StatusKit
 import SwiftUI
 import Timeline
 

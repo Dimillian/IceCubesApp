@@ -1,4 +1,4 @@
-import Status
+import StatusKit
 import Network
 import SwiftUI
 import Env

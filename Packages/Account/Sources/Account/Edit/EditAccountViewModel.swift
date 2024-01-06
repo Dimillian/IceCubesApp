@@ -3,7 +3,7 @@ import Network
 import Observation
 import SwiftUI
 import PhotosUI
-import Status
+import StatusKit
 
 @MainActor
 @Observable class EditAccountViewModel {

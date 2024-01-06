@@ -41,7 +41,6 @@
 		9F2B92F6295AE04800DE16D0 /* Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92F5295AE04800DE16D0 /* Tabs.swift */; };
 		9F2B92FA295DA7D700DE16D0 /* AddAccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92F9295DA7D700DE16D0 /* AddAccountsView.swift */; };
 		9F2B92FC295DA94500DE16D0 /* InstanceInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92FB295DA94500DE16D0 /* InstanceInfoView.swift */; };
-		9F35DB44294F9A7D00B3281A /* Status in Frameworks */ = {isa = PBXBuildFile; productRef = 9F35DB43294F9A7D00B3281A /* Status */; };
 		9F35DB4729506F6600B3281A /* NotificationTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F35DB4629506F6600B3281A /* NotificationTab.swift */; };
 		9F35DB4A29506FA100B3281A /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 9F35DB4929506FA100B3281A /* Notifications */; };
 		9F35DB4C2952005C00B3281A /* MessagesTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F35DB4B2952005C00B3281A /* MessagesTab.swift */; };
@@ -71,7 +70,6 @@
 		9FAD858B29743F7400496AB1 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAD858A29743F7400496AB1 /* ShareViewController.swift */; };
 		9FAD858E29743F7400496AB1 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		9FAD859229743F7400496AB1 /* IceCubesShareExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */; platformFilters = (ios, maccatalyst, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		9FAD85982974405D00496AB1 /* Status in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD85972974405D00496AB1 /* Status */; };
 		9FAD859A297440CB00496AB1 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD8599297440CB00496AB1 /* KeychainSwift */; };
 		9FAD859C2974422700496AB1 /* AppAccount in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD859B2974422700496AB1 /* AppAccount */; };
 		9FAD859E2974569B00496AB1 /* Account in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD859D2974569B00496AB1 /* Account */; };
@@ -90,12 +88,14 @@
 		9FC14EF22B494D180006CEE1 /* TagsGroupSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC14EF12B494D180006CEE1 /* TagsGroupSettingView.swift */; };
 		9FC14EF42B494D940006CEE1 /* RemoteTimelinesSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC14EF32B494D940006CEE1 /* RemoteTimelinesSettingView.swift */; };
 		9FC14EF62B494DFF0006CEE1 /* RecenTagsSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC14EF52B494DFF0006CEE1 /* RecenTagsSettingView.swift */; };
+		9FC2A38B2B49D19A00DFD1C1 /* StatusKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9FC2A38A2B49D19A00DFD1C1 /* StatusKit */; };
+		9FC2A38D2B49D1A200DFD1C1 /* StatusKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9FC2A38C2B49D1A200DFD1C1 /* StatusKit */; };
+		9FC2A38F2B49D1AA00DFD1C1 /* StatusKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9FC2A38E2B49D1AA00DFD1C1 /* StatusKit */; };
 		9FD34823293D06E800DB0EE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FD34822293D06E800DB0EE9 /* Assets.xcassets */; };
 		9FD542E72962D2FF0045321A /* Lists in Frameworks */ = {isa = PBXBuildFile; productRef = 9FD542E62962D2FF0045321A /* Lists */; };
 		9FE151A6293C90F900E9683D /* IconSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE151A5293C90F900E9683D /* IconSelectorView.swift */; };
 		9FE3DB57296FEFCA00628CB0 /* AppAccount in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE3DB56296FEFCA00628CB0 /* AppAccount */; };
 		9FFF677C299B7B2C00FE700A /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF677B299B7B2C00FE700A /* Notifications */; };
-		9FFF677E299B7D2800FE700A /* Status in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF677D299B7D2800FE700A /* Status */; };
 		9FFF6780299B7D2B00FE700A /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF677F299B7D2B00FE700A /* DesignSystem */; };
 		9FFF6782299B7D3A00FE700A /* Account in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF6781299B7D3A00FE700A /* Account */; };
 		C9B22677297F6C2E001F9EFE /* ContentSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B22676297F6C2E001F9EFE /* ContentSettingsView.swift */; };
@@ -190,7 +190,6 @@
 		9F2B92F5295AE04800DE16D0 /* Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabs.swift; sourceTree = "<group>"; };
 		9F2B92F9295DA7D700DE16D0 /* AddAccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountsView.swift; sourceTree = "<group>"; };
 		9F2B92FB295DA94500DE16D0 /* InstanceInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceInfoView.swift; sourceTree = "<group>"; };
-		9F35DB42294F9A2900B3281A /* Status */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Status; path = Packages/Status; sourceTree = "<group>"; };
 		9F35DB45294FA04C00B3281A /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DesignSystem; path = Packages/DesignSystem; sourceTree = "<group>"; };
 		9F35DB4629506F6600B3281A /* NotificationTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTab.swift; sourceTree = "<group>"; };
 		9F35DB4829506F7F00B3281A /* Notifications */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Notifications; path = Packages/Notifications; sourceTree = "<group>"; };
@@ -231,6 +230,7 @@
 		9FC14EF12B494D180006CEE1 /* TagsGroupSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsGroupSettingView.swift; sourceTree = "<group>"; };
 		9FC14EF32B494D940006CEE1 /* RemoteTimelinesSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteTimelinesSettingView.swift; sourceTree = "<group>"; };
 		9FC14EF52B494DFF0006CEE1 /* RecenTagsSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecenTagsSettingView.swift; sourceTree = "<group>"; };
+		9FC2A3892B49D10000DFD1C1 /* StatusKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StatusKit; path = Packages/StatusKit; sourceTree = "<group>"; };
 		9FC60CB82AE6C2F600C6EAD2 /* IceCubesActionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IceCubesActionExtension.entitlements; sourceTree = "<group>"; };
 		9FCBB3D22984EFD5009B77EE /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9FCBB3D429859615009B77EE /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -268,8 +268,8 @@
 				9FFF6780299B7D2B00FE700A /* DesignSystem in Frameworks */,
 				9F2A5428296AB683009B2D7C /* Models in Frameworks */,
 				9FFF6782299B7D3A00FE700A /* Account in Frameworks */,
+				9FC2A38D2B49D1A200DFD1C1 /* StatusKit in Frameworks */,
 				9F2A5426296AB67E009B2D7C /* KeychainSwift in Frameworks */,
-				9FFF677E299B7D2800FE700A /* Status in Frameworks */,
 				9F2A5424296AB67A009B2D7C /* Env in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,8 +283,8 @@
 				9FAD85A4297456A800496AB1 /* DesignSystem in Frameworks */,
 				9FAD859E2974569B00496AB1 /* Account in Frameworks */,
 				9FAD859C2974422700496AB1 /* AppAccount in Frameworks */,
+				9FC2A38F2B49D1AA00DFD1C1 /* StatusKit in Frameworks */,
 				9FAD859A297440CB00496AB1 /* KeychainSwift in Frameworks */,
-				9FAD85982974405D00496AB1 /* Status in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,10 +306,10 @@
 				9F398AAB2935FFDB00A889F2 /* Models in Frameworks */,
 				9F5E581929545BE700A53960 /* Env in Frameworks */,
 				9F2A540A29699705009B2D7C /* ReceiptParser in Frameworks */,
-				9F35DB44294F9A7D00B3281A /* Status in Frameworks */,
 				DA0B24FB2A6876D50045BDD7 /* SFSafeSymbols in Frameworks */,
 				9F295540292B6C3400E0E81B /* Timeline in Frameworks */,
 				9F35DB4A29506FA100B3281A /* Notifications in Frameworks */,
+				9FC2A38B2B49D19A00DFD1C1 /* StatusKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,12 +462,12 @@
 				9F55C68E295598F900F94077 /* Explore */,
 				9F5E581729545B5500A53960 /* Env */,
 				9F398AA32935F90100A889F2 /* Models */,
+				9FC2A3892B49D10000DFD1C1 /* StatusKit */,
 				9FE0346A2ADD59AC00529EA8 /* MediaUI */,
 				9F29553D292B67B600E0E81B /* Network */,
 				9FD542E52962D2CE0045321A /* Lists */,
 				9F35DB4829506F7F00B3281A /* Notifications */,
 				9F29553E292B6AF600E0E81B /* Timeline */,
-				9F35DB42294F9A2900B3281A /* Status */,
 			);
 			sourceTree = "<group>";
 		};
@@ -574,9 +574,9 @@
 				9F2A5427296AB683009B2D7C /* Models */,
 				9F7D93932980063100EE6B7A /* AppAccount */,
 				9FFF677B299B7B2C00FE700A /* Notifications */,
-				9FFF677D299B7D2800FE700A /* Status */,
 				9FFF677F299B7D2B00FE700A /* DesignSystem */,
 				9FFF6781299B7D3A00FE700A /* Account */,
+				9FC2A38C2B49D1A200DFD1C1 /* StatusKit */,
 			);
 			productName = IceCubesNotifications;
 			productReference = 9F2A5416296AB631009B2D7C /* IceCubesNotifications.appex */;
@@ -596,13 +596,13 @@
 			);
 			name = IceCubesShareExtension;
 			packageProductDependencies = (
-				9FAD85972974405D00496AB1 /* Status */,
 				9FAD8599297440CB00496AB1 /* KeychainSwift */,
 				9FAD859B2974422700496AB1 /* AppAccount */,
 				9FAD859D2974569B00496AB1 /* Account */,
 				9FAD859F297456A100496AB1 /* Models */,
 				9FAD85A1297456A400496AB1 /* Env */,
 				9FAD85A3297456A800496AB1 /* DesignSystem */,
+				9FC2A38E2B49D1AA00DFD1C1 /* StatusKit */,
 			);
 			productName = IceCubesShareExtension;
 			productReference = 9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */;
@@ -631,7 +631,6 @@
 				9F398AA82935FFDB00A889F2 /* Account */,
 				9F398AAA2935FFDB00A889F2 /* Models */,
 				9FAE4ACD29379A5A00772766 /* KeychainSwift */,
-				9F35DB43294F9A7D00B3281A /* Status */,
 				9F35DB4929506FA100B3281A /* Notifications */,
 				9F5E581829545BE700A53960 /* Env */,
 				9F55C68F2955993C00F94077 /* Explore */,
@@ -641,6 +640,7 @@
 				9F2A540B29699705009B2D7C /* RevenueCat */,
 				9FE3DB56296FEFCA00628CB0 /* AppAccount */,
 				DA0B24FA2A6876D50045BDD7 /* SFSafeSymbols */,
+				9FC2A38A2B49D19A00DFD1C1 /* StatusKit */,
 			);
 			productName = IceCubesApp;
 			productReference = 9FBFE639292A715500C250E9 /* Ice Cubes.app */;
@@ -1458,10 +1458,6 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Models;
 		};
-		9F35DB43294F9A7D00B3281A /* Status */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Status;
-		};
 		9F35DB4929506FA100B3281A /* Notifications */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Notifications;
@@ -1489,10 +1485,6 @@
 		9F7D93932980063100EE6B7A /* AppAccount */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppAccount;
-		};
-		9FAD85972974405D00496AB1 /* Status */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Status;
 		};
 		9FAD8599297440CB00496AB1 /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1528,6 +1520,18 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Network;
 		};
+		9FC2A38A2B49D19A00DFD1C1 /* StatusKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StatusKit;
+		};
+		9FC2A38C2B49D1A200DFD1C1 /* StatusKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StatusKit;
+		};
+		9FC2A38E2B49D1AA00DFD1C1 /* StatusKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StatusKit;
+		};
 		9FD542E62962D2FF0045321A /* Lists */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Lists;
@@ -1539,10 +1543,6 @@
 		9FFF677B299B7B2C00FE700A /* Notifications */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Notifications;
-		};
-		9FFF677D299B7D2800FE700A /* Status */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Status;
 		};
 		9FFF677F299B7D2B00FE700A /* DesignSystem */ = {
 			isa = XCSwiftPackageProductDependency;

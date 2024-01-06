@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-  name: "Status",
+  name: "StatusKit",
   defaultLocalization: "en",
   platforms: [
     .iOS(.v17),
@@ -12,8 +12,8 @@ let package = Package(
   ],
   products: [
     .library(
-      name: "Status",
-      targets: ["Status"]
+      name: "StatusKit",
+      targets: ["StatusKit"]
     ),
   ],
   dependencies: [
@@ -28,7 +28,7 @@ let package = Package(
   ],
   targets: [
     .target(
-      name: "Status",
+      name: "StatusKit",
       dependencies: [
         .product(name: "AppAccount", package: "AppAccount"),
         .product(name: "Models", package: "Models"),

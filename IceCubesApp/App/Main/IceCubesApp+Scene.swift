@@ -1,6 +1,6 @@
 import Env
 import MediaUI
-import Status
+import StatusKit
 import SwiftUI
 
 extension IceCubesApp {

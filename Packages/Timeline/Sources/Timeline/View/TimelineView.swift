@@ -4,7 +4,7 @@ import Env
 import Models
 import Network
 import Shimmer
-import Status
+import StatusKit
 import SwiftData
 import SwiftUI
 import SwiftUIIntrospect
