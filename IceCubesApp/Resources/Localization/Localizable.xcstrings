@@ -50547,13 +50547,13 @@
         "be" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
+            "value" : "Fast refresh disables timeline position saving and caching. It'll always fetch a fresh timeline."
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
+            "value" : "Fast refresh disables timeline position saving and caching. It'll always fetch a fresh timeline."
           }
         },
         "de" : {
@@ -50565,13 +50565,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetch a fresh timeline."
+            "value" : "Fast refresh disables timeline position saving and caching. It'll always fetch a fresh timeline."
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetch a fresh timeline."
+            "value" : "Fast refresh disables timeline position saving and caching. It'll always fetch a fresh timeline."
           }
         },
         "es" : {
@@ -50589,7 +50589,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
+            "value" : "Fast refresh disables timeline position saving and caching. It'll always fetch a fresh timeline."
           }
         },
         "it" : {
@@ -50601,7 +50601,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
+            "value" : "Fast refresh disables timeline position saving and caching. It'll always fetch a fresh timeline."
           }
         },
         "ko" : {
@@ -50613,25 +50613,25 @@
         "nb" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
+            "value" : "Fast refresh disables timeline position saving and caching. It'll always fetch a fresh timeline."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
+            "value" : "Fast refresh disables timeline position saving and caching. It'll always fetch a fresh timeline."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
+            "value" : "Fast refresh disables timeline position saving and caching. It'll always fetch a fresh timeline."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Fast refresh disable timeline position saving and caching. It'll always fetches a fresh timeline."
+            "value" : "Fast refresh disables timeline position saving and caching. It'll always fetch a fresh timeline."
           }
         },
         "tr" : {
