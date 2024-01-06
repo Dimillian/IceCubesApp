@@ -95,7 +95,9 @@ extension StatusEditor {
         .accessibilitySortPriority(1) // Ensure that all elements inside the `ScrollView` occur earlier than the accessory views
         .navigationTitle(focusedSEVM.mode.title)
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar { ToolbarItems(mainSEVM: mainSEVM, followUpSEVMs: followUpSEVMs) }
+        .toolbar { ToolbarItems(mainSEVM: mainSEVM,
+                                focusedSEVM: focusedSEVM,
+                                followUpSEVMs: followUpSEVMs) }
         .toolbarBackground(.visible, for: .navigationBar)
         .alert(
           "status.error.posting.title",
@@ -142,8 +144,8 @@ extension StatusEditor {
       .sheet(item: $editingMediaContainer) { container in
         StatusEditor.MediaEditView(viewModel: focusedSEVM, container: container)
       }
-      .presentationDetents([.large, .medium, .height(50)], selection: $presentationDetent)
-      .presentationBackgroundInteraction(.enabled(upThrough: .medium))
+      .presentationDetents([.large, .height(100)], selection: $presentationDetent)
+      .presentationBackgroundInteraction(.enabled)
     }
   }
 

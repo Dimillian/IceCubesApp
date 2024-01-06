@@ -2,17 +2,23 @@ import Env
 import Models
 import StoreKit
 import SwiftUI
+import DesignSystem
 
 extension StatusEditor {
   @MainActor
   struct ToolbarItems: ToolbarContent {
     @State private var isLanguageConfirmPresented = false
     @State private var isDismissAlertPresented: Bool = false
+    @State private var isDraftsSheetDisplayed: Bool = false
+    
     let mainSEVM: ViewModel
+    let focusedSEVM: ViewModel
     let followUpSEVMs: [ViewModel]
 
     @Environment(\.modelContext) private var context
     @Environment(UserPreferences.self) private var preferences
+    @Environment(Theme.self) private var theme
+    
     #if targetEnvironment(macCatalyst)
       @Environment(\.dismissWindow) private var dismissWindow
     #else
@@ -20,6 +26,26 @@ extension StatusEditor {
     #endif
 
     var body: some ToolbarContent {
+      if !mainSEVM.mode.isInShareExtension {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button {
+            isDraftsSheetDisplayed = true
+          } label: {
+            Text("status.editor.drafts.navigation-title")
+          }
+          .accessibilityLabel("accessibility.editor.button.drafts")
+          .popover(isPresented: $isDraftsSheetDisplayed) {
+            if UIDevice.current.userInterfaceIdiom == .phone {
+              draftsListView
+                .presentationDetents([.medium])
+            } else {
+              draftsListView
+                .frame(width: 400, height: 500)
+            }
+          }
+        }
+      }
+        
       ToolbarItem(placement: .navigationBarTrailing) {
         Button {
           Task {
@@ -31,13 +57,10 @@ extension StatusEditor {
             }
           }
         } label: {
-          if mainSEVM.isPosting {
-            ProgressView()
-          } else {
-            Text("status.action.post").bold()
-          }
+          Text("status.action.post").bold()
         }
-        .disabled(!mainSEVM.canPost)
+        .buttonStyle(.borderedProminent)
+        .disabled(!mainSEVM.canPost || mainSEVM.isPosting)
         .keyboardShortcut(.return, modifiers: .command)
         .confirmationDialog("", isPresented: $isLanguageConfirmPresented, actions: {
           languageConfirmationDialog
@@ -136,6 +159,16 @@ extension StatusEditor {
       } else {
         EmptyView()
       }
+    }
+    
+    private var draftsListView: some View {
+      DraftsListView(selectedDraft: .init(get: {
+        nil
+      }, set: { draft in
+        if let draft {
+          focusedSEVM.insertStatusText(text: draft.content)
+        }
+      }))
     }
   }
 }

@@ -147,7 +147,6 @@ extension StatusEditor {
     private var characterCountView: some View {
       let value = (currentInstance.instance?.configuration?.statuses.maxCharacters ?? 500) + viewModel.statusTextCharacterLength
       HStack {
-        Spacer()
         Text("\(value)")
           .foregroundColor(value < 0 ? .red : .secondary)
           .font(.scaledCallout)
@@ -156,8 +155,9 @@ extension StatusEditor {
           .accessibilityRemoveTraits(.isStaticText)
           .accessibilityAddTraits(.updatesFrequently)
           .accessibilityRespondsToUserInteraction(false)
-          .padding(.trailing, 8)
+          .padding(.leading, .layoutPadding)
           .padding(.bottom, 8)
+        Spacer()
       }
     }
 

@@ -20,7 +20,6 @@ extension StatusEditor {
     let focusedSEVM: ViewModel
     @Binding var followUpSEVMs: [ViewModel]
 
-    @State private var isDraftsSheetDisplayed: Bool = false
     @State private var isLanguageSheetDisplayed: Bool = false
     @State private var isCustomEmojisSheetDisplay: Bool = false
     @State private var languageSearch: String = ""
@@ -188,24 +187,6 @@ extension StatusEditor {
       }
       .accessibilityLabel("accessibility.editor.button.spoiler")
 
-      if !viewModel.mode.isInShareExtension {
-        Button {
-          isDraftsSheetDisplayed = true
-        } label: {
-          Image(systemName: "archivebox")
-        }
-        .accessibilityLabel("accessibility.editor.button.drafts")
-        .popover(isPresented: $isDraftsSheetDisplayed) {
-          if UIDevice.current.userInterfaceIdiom == .phone {
-            draftsListView
-              .presentationDetents([.medium])
-          } else {
-            draftsListView
-              .frame(width: 400, height: 500)
-          }
-        }
-      }
-
       if !viewModel.customEmojiContainer.isEmpty {
         Button {
           isCustomEmojisSheetDisplay = true
@@ -291,16 +272,6 @@ extension StatusEditor {
       }
     }
     #endif
-
-    private var draftsListView: some View {
-      DraftsListView(selectedDraft: .init(get: {
-        nil
-      }, set: { draft in
-        if let draft {
-          focusedSEVM.insertStatusText(text: draft.content)
-        }
-      }))
-    }
 
     @ViewBuilder
     private func languageTextView(isoCode: String, nativeName: String?, name: String?) -> some View {
