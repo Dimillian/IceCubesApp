@@ -87,6 +87,9 @@
 		9FB183292AE9449100BBB692 /* IceCubesApp+Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB183282AE9449100BBB692 /* IceCubesApp+Scene.swift */; };
 		9FBFE63D292A715500C250E9 /* IceCubesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBFE63C292A715500C250E9 /* IceCubesApp.swift */; };
 		9FBFE64E292A72BD00C250E9 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 9FBFE64D292A72BD00C250E9 /* Network */; };
+		9FC14EF22B494D180006CEE1 /* TagsGroupSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC14EF12B494D180006CEE1 /* TagsGroupSettingView.swift */; };
+		9FC14EF42B494D940006CEE1 /* RemoteTimelinesSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC14EF32B494D940006CEE1 /* RemoteTimelinesSettingView.swift */; };
+		9FC14EF62B494DFF0006CEE1 /* RecenTagsSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC14EF52B494DFF0006CEE1 /* RecenTagsSettingView.swift */; };
 		9FD34823293D06E800DB0EE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FD34822293D06E800DB0EE9 /* Assets.xcassets */; };
 		9FD542E72962D2FF0045321A /* Lists in Frameworks */ = {isa = PBXBuildFile; productRef = 9FD542E62962D2FF0045321A /* Lists */; };
 		9FE151A6293C90F900E9683D /* IconSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE151A5293C90F900E9683D /* IconSelectorView.swift */; };
@@ -225,6 +228,9 @@
 		9FB183282AE9449100BBB692 /* IceCubesApp+Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IceCubesApp+Scene.swift"; sourceTree = "<group>"; };
 		9FBFE639292A715500C250E9 /* Ice Cubes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ice Cubes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FBFE63C292A715500C250E9 /* IceCubesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceCubesApp.swift; sourceTree = "<group>"; };
+		9FC14EF12B494D180006CEE1 /* TagsGroupSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsGroupSettingView.swift; sourceTree = "<group>"; };
+		9FC14EF32B494D940006CEE1 /* RemoteTimelinesSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteTimelinesSettingView.swift; sourceTree = "<group>"; };
+		9FC14EF52B494DFF0006CEE1 /* RecenTagsSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecenTagsSettingView.swift; sourceTree = "<group>"; };
 		9FC60CB82AE6C2F600C6EAD2 /* IceCubesActionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IceCubesActionExtension.entitlements; sourceTree = "<group>"; };
 		9FCBB3D22984EFD5009B77EE /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9FCBB3D429859615009B77EE /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -518,6 +524,9 @@
 				D08A9C3429956CFA00204A4A /* SwipeActionsSettingsView.swift */,
 				9FA6FD6129C04A8800E2312C /* TranslationSettingsView.swift */,
 				9F15D6012B3D6E280008C220 /* TabbarEntriesSettingsView.swift */,
+				9FC14EF12B494D180006CEE1 /* TagsGroupSettingView.swift */,
+				9FC14EF32B494D940006CEE1 /* RemoteTimelinesSettingView.swift */,
+				9FC14EF52B494DFF0006CEE1 /* RecenTagsSettingView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -706,7 +715,6 @@
 				be,
 				uk,
 				"zh-Hant",
-				Base,
 			);
 			mainGroup = 9FBFE630292A715500C250E9;
 			packageReferences = (
@@ -814,6 +822,8 @@
 				9F35DB4C2952005C00B3281A /* MessagesTab.swift in Sources */,
 				9FAD85CF2975B68900496AB1 /* SideBarView.swift in Sources */,
 				9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */,
+				9FC14EF42B494D940006CEE1 /* RemoteTimelinesSettingView.swift in Sources */,
+				9FC14EF22B494D180006CEE1 /* TagsGroupSettingView.swift in Sources */,
 				9F15D6022B3D6E280008C220 /* TabbarEntriesSettingsView.swift in Sources */,
 				9F7335F92968576500AFF0BA /* DisplaySettingsView.swift in Sources */,
 				9F2A540729699698009B2D7C /* SupportAppView.swift in Sources */,
@@ -831,6 +841,7 @@
 				9F654BEF299AC45B00D27FA5 /* ReportView.swift in Sources */,
 				D08A9C3529956CFA00204A4A /* SwipeActionsSettingsView.swift in Sources */,
 				9F7335F22967608F00AFF0BA /* AddRemoteTimelineView.swift in Sources */,
+				9FC14EF62B494DFF0006CEE1 /* RecenTagsSettingView.swift in Sources */,
 				9F6028562B3F36AE00476078 /* AppView.swift in Sources */,
 				9F55C68D2955968700F94077 /* ExploreTab.swift in Sources */,
 				9F1E8B47298EBCBB00609F80 /* HapticSettingsView.swift in Sources */,
