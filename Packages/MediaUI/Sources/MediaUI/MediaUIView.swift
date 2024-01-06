@@ -2,6 +2,7 @@ import Models
 import Nuke
 import QuickLook
 import SwiftUI
+import AVFoundation
 
 public struct MediaUIView: View, @unchecked Sendable {
   private let data: [DisplayData]
@@ -40,10 +41,14 @@ public struct MediaUIView: View, @unchecked Sendable {
         }
       }
       .onAppear {
+        try? AVAudioSession.sharedInstance().setCategory(.playback)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
           scrolledItem = initialItem
           isFocused = true
         }
+      }
+      .onDisappear {
+        try? AVAudioSession.sharedInstance().setCategory(.ambient)
       }
     }
   }
