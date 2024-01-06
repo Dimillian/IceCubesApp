@@ -21060,8 +21060,8 @@
       "localizations" : {
         "be" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_posts@ допісы ад %#@count_participants@ удзельнікаў"
+            "state" : "translated",
+            "value" : "%#@count_posts@ %#@count_participants@"
           },
           "substitutions" : {
             "count_participants" : {
@@ -21071,26 +21071,26 @@
                 "plural" : {
                   "few" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg удзельнікаў"
                     }
                   },
                   "many" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg удзельнікаў"
                     }
                   },
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg удзельнікаў"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg удзельнікаў"
                     }
                   }
                 }
@@ -21103,26 +21103,26 @@
                 "plural" : {
                   "few" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg допісы ад "
                     }
                   },
                   "many" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg допісы ад "
                     }
                   },
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg допісы ад "
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg допісы ад "
                     }
                   }
                 }
@@ -21132,8 +21132,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_posts@ publicacions de %#@count_participants@ participants"
+            "state" : "translated",
+            "value" : "%#@count_posts@ de %#@count_participants@"
           },
           "substitutions" : {
             "count_participants" : {
@@ -21143,14 +21143,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg participants"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg participants"
                     }
                   }
                 }
@@ -21163,14 +21163,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg publicacions "
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg publicacions "
                     }
                   }
                 }
@@ -21180,8 +21180,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_posts@ Beiträge von %#@count_participants@"
+            "state" : "translated",
+            "value" : "%#@count_posts@ von %#@count_participants@"
           },
           "substitutions" : {
             "count_participants" : {
@@ -21276,8 +21276,8 @@
         },
         "en-GB" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_posts@ posts from %#@count_participants@ participants"
+            "state" : "translated",
+            "value" : "%#@count_posts@ from %#@count_participants@"
           },
           "substitutions" : {
             "count_participants" : {
@@ -21287,14 +21287,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg participants"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg participants"
                     }
                   }
                 }
@@ -21307,14 +21307,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg posts"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg posts"
                     }
                   }
                 }
@@ -21324,8 +21324,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_posts@ publicaciones de %#@count_participants@ participantes"
+            "state" : "translated",
+            "value" : "%#@count_posts@  %#@count_participants@"
           },
           "substitutions" : {
             "count_participants" : {
@@ -21335,14 +21335,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg participantes"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg participantes"
                     }
                   }
                 }
@@ -21355,14 +21355,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg publicaciones de "
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg publicaciones de "
                     }
                   }
                 }
@@ -21420,8 +21420,8 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_posts@ publications de %#@count_participants@ participants"
+            "state" : "translated",
+            "value" : "%#@count_posts@  de %#@count_participants@"
           },
           "substitutions" : {
             "count_participants" : {
@@ -21431,14 +21431,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg participants"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg participants"
                     }
                   }
                 }
@@ -21451,14 +21451,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg publications"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg publications"
                     }
                   }
                 }
@@ -21468,8 +21468,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_posts@ post da %#@count_participants@ partecipanti"
+            "state" : "translated",
+            "value" : "%#@count_posts@ da %#@count_participants@"
           },
           "substitutions" : {
             "count_participants" : {
@@ -21479,14 +21479,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg partecipanti"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg partecipanti"
                     }
                   }
                 }
@@ -21499,14 +21499,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg post "
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg post"
                     }
                   }
                 }
@@ -21516,8 +21516,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_posts@ トゥートの投稿 %#@count_participants@ 人が投稿している"
+            "state" : "translated",
+            "value" : "%#@count_posts@ %#@count_participants@"
           },
           "substitutions" : {
             "count_participants" : {
@@ -21527,8 +21527,8 @@
                 "plural" : {
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg 人が投稿している"
                     }
                   }
                 }
@@ -21541,8 +21541,8 @@
                 "plural" : {
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg トゥートの投稿 "
                     }
                   }
                 }
@@ -21552,8 +21552,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_posts@개 글 (%#@count_participants@명이 이야기 중)"
+            "state" : "translated",
+            "value" : "%#@count_posts@  %#@count_participants@"
           },
           "substitutions" : {
             "count_participants" : {
@@ -21563,8 +21563,8 @@
                 "plural" : {
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "(%arg명이 이야기 중)"
                     }
                   }
                 }
@@ -21577,8 +21577,8 @@
                 "plural" : {
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg 개 글 "
                     }
                   }
                 }
@@ -21588,8 +21588,8 @@
         },
         "nb" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_posts@ innlegg fra %#@count_participants@ deltakere"
+            "state" : "translated",
+            "value" : "%#@count_posts@ %#@count_participants@"
           },
           "substitutions" : {
             "count_participants" : {
@@ -21599,14 +21599,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg deltakere"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg deltakere"
                     }
                   }
                 }
@@ -21619,14 +21619,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg innlegg fra "
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg innlegg fra "
                     }
                   }
                 }
@@ -21636,8 +21636,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_posts@ posts van %#@count_participants@ deelnemers"
+            "state" : "translated",
+            "value" : "%#@count_posts@ van %#@count_participants@"
           },
           "substitutions" : {
             "count_participants" : {
@@ -21647,14 +21647,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg deelnemers"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg deelnemers"
                     }
                   }
                 }
@@ -21667,14 +21667,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg posts"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg posts"
                     }
                   }
                 }
@@ -21736,8 +21736,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_posts@ postagens de %#@count_participants@ participantes"
+            "state" : "translated",
+            "value" : "%#@count_posts@ %#@count_participants@"
           },
           "substitutions" : {
             "count_participants" : {
@@ -21747,14 +21747,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg participantes"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg participantes"
                     }
                   }
                 }
@@ -21767,14 +21767,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg postagens de "
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg postagens de "
                     }
                   }
                 }
@@ -21784,8 +21784,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_posts@ katılımcı tarafından %#@count_participants@ gönderi"
+            "state" : "translated",
+            "value" : "%#@count_posts@ %#@count_participants@"
           },
           "substitutions" : {
             "count_participants" : {
@@ -21795,14 +21795,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg gönderi"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg gönderi"
                     }
                   }
                 }
@@ -21815,14 +21815,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg katılımcı tarafından "
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg katılımcı tarafından "
                     }
                   }
                 }
@@ -21832,8 +21832,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_posts@ дописів від %#@count_participants@ учасників"
+            "state" : "translated",
+            "value" : "%#@count_posts@%#@count_participants@"
           },
           "substitutions" : {
             "count_participants" : {
@@ -21843,26 +21843,26 @@
                 "plural" : {
                   "few" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg учасників"
                     }
                   },
                   "many" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg учасників"
                     }
                   },
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg учасників"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg учасників"
                     }
                   }
                 }
@@ -21875,26 +21875,26 @@
                 "plural" : {
                   "few" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg дописів від "
                     }
                   },
                   "many" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg дописів від "
                     }
                   },
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg дописів від "
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg дописів від "
                     }
                   }
                 }
@@ -21904,8 +21904,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_posts@ 条嘟文来自 %#@count_participants@ 个参与者"
+            "state" : "translated",
+            "value" : "%#@count_posts@ %#@count_participants@"
           },
           "substitutions" : {
             "count_participants" : {
@@ -21915,8 +21915,8 @@
                 "plural" : {
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg 个参与者"
                     }
                   }
                 }
@@ -21929,8 +21929,8 @@
                 "plural" : {
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg 条嘟文来自 "
                     }
                   }
                 }
@@ -21940,8 +21940,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_posts@ 篇嘟文，%#@count_participants@ 位參與者"
+            "state" : "translated",
+            "value" : "%#@count_posts@ %#@count_participants@ "
           },
           "substitutions" : {
             "count_participants" : {
@@ -21951,8 +21951,8 @@
                 "plural" : {
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg 位參與者"
                     }
                   }
                 }
@@ -21965,8 +21965,8 @@
                 "plural" : {
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg 篇嘟文，"
                     }
                   }
                 }
@@ -67518,8 +67518,8 @@
       "localizations" : {
         "be" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_votes@ галасоў ад %#@count_voters@ удзельнікаў"
+            "state" : "translated",
+            "value" : "%#@count_votes@ %#@count_voters@"
           },
           "substitutions" : {
             "count_voters" : {
@@ -67529,26 +67529,26 @@
                 "plural" : {
                   "few" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg удзельнікаў"
                     }
                   },
                   "many" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg удзельнікаў"
                     }
                   },
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg удзельнікаў"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg удзельнікаў"
                     }
                   }
                 }
@@ -67561,26 +67561,26 @@
                 "plural" : {
                   "few" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg галасоў ад "
                     }
                   },
                   "many" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg галасоў ад "
                     }
                   },
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg галасоў ад "
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg галасоў ад "
                     }
                   }
                 }
@@ -67590,8 +67590,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_votes@ votes from %#@count_voters@ voters"
+            "state" : "translated",
+            "value" : "%#@count_votes@ from %#@count_voters@"
           },
           "substitutions" : {
             "count_voters" : {
@@ -67601,14 +67601,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg voters"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg voters"
                     }
                   }
                 }
@@ -67621,14 +67621,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg votes"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg votes"
                     }
                   }
                 }
@@ -67782,8 +67782,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_votes@ votos de %#@count_voters@ participantes"
+            "state" : "translated",
+            "value" : "%#@count_votes@%#@count_voters@"
           },
           "substitutions" : {
             "count_voters" : {
@@ -67793,14 +67793,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg participantes"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg participantes"
                     }
                   }
                 }
@@ -67813,14 +67813,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg votos de "
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg votos de "
                     }
                   }
                 }
@@ -67878,8 +67878,8 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_votes@ votes de %#@count_voters@ voteurs"
+            "state" : "translated",
+            "value" : "%#@count_votes@ de %#@count_voters@"
           },
           "substitutions" : {
             "count_voters" : {
@@ -67889,14 +67889,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg voteurs"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg voteurs"
                     }
                   }
                 }
@@ -67909,14 +67909,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg votes"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg votes"
                     }
                   }
                 }
@@ -67926,8 +67926,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_votes@ voti da %#@count_voters@ persone"
+            "state" : "translated",
+            "value" : "%#@count_votes@ da %#@count_voters@"
           },
           "substitutions" : {
             "count_voters" : {
@@ -67937,14 +67937,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg persone"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg persone"
                     }
                   }
                 }
@@ -67957,14 +67957,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg voti "
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg voti"
                     }
                   }
                 }
@@ -67974,8 +67974,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_votes@ 票 %#@count_voters@ からの投票"
+            "state" : "translated",
+            "value" : "%#@count_votes@  %#@count_voters@"
           },
           "substitutions" : {
             "count_voters" : {
@@ -67985,8 +67985,8 @@
                 "plural" : {
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg からの投票"
                     }
                   }
                 }
@@ -67999,8 +67999,8 @@
                 "plural" : {
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg 票"
                     }
                   }
                 }
@@ -68010,8 +68010,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_votes@표 (%#@count_voters@명)"
+            "state" : "translated",
+            "value" : "%#@count_votes@ %#@count_voters@"
           },
           "substitutions" : {
             "count_voters" : {
@@ -68021,8 +68021,8 @@
                 "plural" : {
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "(%arg명)"
                     }
                   }
                 }
@@ -68035,8 +68035,8 @@
                 "plural" : {
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg 표"
                     }
                   }
                 }
@@ -68046,8 +68046,8 @@
         },
         "nb" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_votes@ stemmer fra %#@count_voters@ velgere"
+            "state" : "translated",
+            "value" : "%#@count_votes@ %#@count_voters@"
           },
           "substitutions" : {
             "count_voters" : {
@@ -68057,14 +68057,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg velgere"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg velgere"
                     }
                   }
                 }
@@ -68077,14 +68077,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg stemmer fra "
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg stemmer fra "
                     }
                   }
                 }
@@ -68094,8 +68094,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_votes@ stemmen van %#@count_voters@ stemmers"
+            "state" : "translated",
+            "value" : "%#@count_votes@ van %#@count_voters@"
           },
           "substitutions" : {
             "count_voters" : {
@@ -68105,14 +68105,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg stemmers"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg stemmers"
                     }
                   }
                 }
@@ -68125,14 +68125,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg stemmen"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg stemmen"
                     }
                   }
                 }
@@ -68194,8 +68194,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_votes@ votos de %#@count_voters@ votantes"
+            "state" : "translated",
+            "value" : "%#@count_votes@ %#@count_voters@"
           },
           "substitutions" : {
             "count_voters" : {
@@ -68205,14 +68205,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg votantes"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg votantes"
                     }
                   }
                 }
@@ -68225,14 +68225,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg votos de "
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg votos de "
                     }
                   }
                 }
@@ -68242,7 +68242,7 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "%#@count_votes@ adet oy %#@count_voters@ kişi içinde"
           },
           "substitutions" : {
@@ -68253,14 +68253,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg kişi içinde"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg kişi içinde"
                     }
                   }
                 }
@@ -68273,14 +68273,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg adet oy "
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg adet oy "
                     }
                   }
                 }
@@ -68290,8 +68290,8 @@
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_votes@ голосів від %#@count_voters@ опитаних"
+            "state" : "translated",
+            "value" : "%#@count_votes@ %#@count_voters@"
           },
           "substitutions" : {
             "count_voters" : {
@@ -68301,26 +68301,26 @@
                 "plural" : {
                   "few" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg опитаних"
                     }
                   },
                   "many" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg опитаних"
                     }
                   },
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg опитаних"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg опитаних"
                     }
                   }
                 }
@@ -68333,26 +68333,26 @@
                 "plural" : {
                   "few" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg голосів від "
                     }
                   },
                   "many" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg голосів від "
                     }
                   },
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg голосів від "
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg голосів від "
                     }
                   }
                 }
@@ -68362,8 +68362,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_votes@ 票来自 %#@count_voters@ 个投票者"
+            "state" : "translated",
+            "value" : "%#@count_votes@ %#@count_voters@"
           },
           "substitutions" : {
             "count_voters" : {
@@ -68373,8 +68373,8 @@
                 "plural" : {
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg 个投票者"
                     }
                   }
                 }
@@ -68387,8 +68387,8 @@
                 "plural" : {
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg 票来自 "
                     }
                   }
                 }
@@ -68398,8 +68398,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@count_votes@ 票，%#@count_voters@ 位投票者"
+            "state" : "translated",
+            "value" : "%#@count_votes@ %#@count_voters@"
           },
           "substitutions" : {
             "count_voters" : {
@@ -68409,8 +68409,8 @@
                 "plural" : {
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg  票，"
                     }
                   }
                 }
@@ -68423,8 +68423,8 @@
                 "plural" : {
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg 位投票者"
                     }
                   }
                 }
@@ -74595,10 +74595,10 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%#@tagParticipantsCount@ %#@tagPostsCount@"
+            "value" : "%#@count_participants@ %#@count_posts@"
           },
           "substitutions" : {
-            "tagParticipantsCount" : {
+            "count_participants" : {
               "argNum" : 2,
               "formatSpecifier" : "lld",
               "variations" : {
@@ -74618,7 +74618,7 @@
                 }
               }
             },
-            "tagPostsCount" : {
+            "count_posts" : {
               "argNum" : 1,
               "formatSpecifier" : "lld",
               "variations" : {
@@ -74679,10 +74679,10 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%#@tagPostsCount@ %#@tagParticipantsCount@"
+            "value" : "%#@count_posts@ %#@count_participants@"
           },
           "substitutions" : {
-            "tagParticipantsCount" : {
+            "count_participants" : {
               "formatSpecifier" : "lld",
               "variations" : {
                 "plural" : {
@@ -74701,7 +74701,7 @@
                 }
               }
             },
-            "tagPostsCount" : {
+            "count_posts" : {
               "formatSpecifier" : "lld",
               "variations" : {
                 "plural" : {
