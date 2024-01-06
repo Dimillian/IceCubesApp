@@ -15,7 +15,14 @@ struct RecenTagsSettingView: View {
   var body: some View {
     Form {
       ForEach(tags) { tag in
-        Text("#\(tag.title)")
+        VStack(alignment: .leading) {
+          Text("#\(tag.title)")
+            .font(.scaledBody)
+            .foregroundColor(.primary)
+          Text(tag.formattedDate)
+            .font(.scaledFootnote)
+            .foregroundStyle(.secondary)
+        }
       }.onDelete { indexes in
         if let index = indexes.first {
           context.delete(tags[index])

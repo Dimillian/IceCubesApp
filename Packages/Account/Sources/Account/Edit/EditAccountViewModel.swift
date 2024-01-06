@@ -52,9 +52,9 @@ import Status
         Task {
           if let data = await getItemImageData(item: item) {
             if isChangingAvatar {
-              await uploadAvatar(data: data)
+              _ = await uploadAvatar(data: data)
             } else if isChangingHeader {
-              await uploadHeader(data: data)
+              _ = await uploadHeader(data: data)
             }
             await fetchAccount()
             isChangingAvatar = false

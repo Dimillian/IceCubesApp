@@ -32,10 +32,15 @@ extension StatusEditorAutoCompleteView {
                   viewModel.selectHashtagSuggestion(tag: tag.title)
                 }
               } label: {
-                Text("#\(tag.title)")
-                  .font(.scaledFootnote)
-                  .fontWeight(.bold)
-                  .foregroundColor(theme.labelColor)
+                VStack(alignment: .leading) {
+                  Text("#\(tag.title)")
+                    .font(.scaledFootnote)
+                    .fontWeight(.bold)
+                    .foregroundColor(theme.labelColor)
+                  Text(tag.formattedDate)
+                    .font(.scaledFootnote)
+                    .foregroundStyle(theme.tintColor)
+                }
               }
               Spacer()
             }

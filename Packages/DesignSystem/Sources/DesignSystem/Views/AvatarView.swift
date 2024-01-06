@@ -21,7 +21,7 @@ public struct AvatarView: View {
   }
 
   private var adaptiveConfig: FrameConfig {
-    var cornerRadius: CGFloat = if config == .badge || theme.avatarShape == .circle {
+    let cornerRadius: CGFloat = if config == .badge || theme.avatarShape == .circle {
       config.width / 2
     } else {
       config.cornerRadius

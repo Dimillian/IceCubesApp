@@ -29,6 +29,9 @@ extension StatusEditorAutoCompleteView {
               .font(.scaledFootnote)
               .fontWeight(.bold)
               .foregroundColor(theme.labelColor)
+            Text(tag.formattedDate)
+              .font(.scaledFootnote)
+              .foregroundStyle(theme.tintColor)
           }
         }
       }

@@ -28,7 +28,11 @@ struct StatusEditorAutoCompleteView: View {
               if !viewModel.mentionsSuggestions.isEmpty {
                 Self.MentionsView(viewModel: viewModel)
               } else {
-                suggestionsTagView
+                if viewModel.showRecentsTagsInline {
+                  Self.RecentTagsView(viewModel: viewModel, isTagSuggestionExpanded: $isTagSuggestionExpanded)
+                } else {
+                  Self.RemoteTagsView(viewModel: viewModel, isTagSuggestionExpanded: $isTagSuggestionExpanded)
+                }
               }
             }
             .padding(.horizontal, .layoutPadding)
@@ -52,15 +56,6 @@ struct StatusEditorAutoCompleteView: View {
         }
       }
       .background(.thinMaterial)
-    }
-  }
-
-  @ViewBuilder
-  private var suggestionsTagView: some View {
-    if viewModel.showRecentsTagsInline {
-      Self.RecentTagsView(viewModel: viewModel, isTagSuggestionExpanded: $isTagSuggestionExpanded)
-    } else {
-      Self.RemoteTagsView(viewModel: viewModel, isTagSuggestionExpanded: $isTagSuggestionExpanded)
     }
   }
 }
