@@ -5,17 +5,17 @@ import UIKit
 struct MediaUIImageTransferable: Codable, Transferable {
   let url: URL
 
-  func fetchAsImage() -> Image {
-    let data = try? Data(contentsOf: url)
-    guard let data, let uiimage = UIImage(data: data) else {
-      return Image(systemName: "photo")
+  func fetchData() async -> Data {
+    do {
+      return try await URLSession.shared.data(from: url).0
+    } catch {
+      return Data()
     }
-    return Image(uiImage: uiimage)
   }
 
   static var transferRepresentation: some TransferRepresentation {
-    ProxyRepresentation { media in
-      media.fetchAsImage()
+    DataRepresentation(exportedContentType: .jpeg) { media in
+      await media.fetchData()
     }
   }
 }
