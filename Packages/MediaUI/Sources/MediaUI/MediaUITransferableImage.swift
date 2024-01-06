@@ -14,8 +14,8 @@ struct MediaUIImageTransferable: Codable, Transferable {
   }
 
   static var transferRepresentation: some TransferRepresentation {
-    DataRepresentation(exportedContentType: .jpeg) { media in
-      await media.fetchData()
+    DataRepresentation(exportedContentType: .jpeg) { transferable in
+      await transferable.fetchData()
     }
   }
 }
