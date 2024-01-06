@@ -21060,23 +21060,132 @@
       "localizations" : {
         "be" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld допісы ад %lld удзельнікаў"
+            "state" : "needs_review",
+            "value" : "%#@count_posts@ допісы ад %#@count_participants@ удзельнікаў"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "few" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "many" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "few" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "many" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld publicacions de %lld participants"
+            "state" : "needs_review",
+            "value" : "%#@count_posts@ publicacions de %#@count_participants@ participants"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld Beiträge von %lld"
+            "state" : "needs_review",
+            "value" : "%#@count_posts@ Beiträge von %#@count_participants@"
           },
           "substitutions" : {
             "count_participants" : {
+              "argNum" : 2,
               "formatSpecifier" : "lld",
               "variations" : {
                 "plural" : {
@@ -21096,6 +21205,7 @@
               }
             },
             "count_posts" : {
+              "argNum" : 1,
               "formatSpecifier" : "lld",
               "variations" : {
                 "plural" : {
@@ -21118,29 +21228,155 @@
         },
         "en" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld posts from %lld participants"
+            "state" : "needs_review",
+            "value" : "%#@count_posts@ posts from %#@count_participants@ participants"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "en-GB" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld posts from %lld participants"
+            "state" : "needs_review",
+            "value" : "%#@count_posts@ posts from %#@count_participants@ participants"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld publicaciones de %lld participantes"
+            "state" : "needs_review",
+            "value" : "%#@count_posts@ publicaciones de %#@count_participants@ participantes"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%#@tagParticipantsCount@ %#@tagPostsCount@"
+            "value" : "%#@count_participants@ %#@count_posts@"
           },
           "substitutions" : {
-            "tagParticipantsCount" : {
+            "count_participants" : {
               "argNum" : 2,
               "formatSpecifier" : "lld",
               "variations" : {
@@ -21160,7 +21396,7 @@
                 }
               }
             },
-            "tagPostsCount" : {
+            "count_posts" : {
               "argNum" : 1,
               "formatSpecifier" : "lld",
               "variations" : {
@@ -21184,47 +21420,275 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld publications de %lld participants"
+            "state" : "needs_review",
+            "value" : "%#@count_posts@ publications de %#@count_participants@ participants"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld post da %lld partecipanti"
+            "state" : "needs_review",
+            "value" : "%#@count_posts@ post da %#@count_participants@ partecipanti"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld トゥートの投稿 %lld 人が投稿している"
+            "state" : "needs_review",
+            "value" : "%#@count_posts@ トゥートの投稿 %#@count_participants@ 人が投稿している"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld개 글 (%lld명이 이야기 중)"
+            "state" : "needs_review",
+            "value" : "%#@count_posts@개 글 (%#@count_participants@명이 이야기 중)"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "nb" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld innlegg fra %lld deltakere"
+            "state" : "needs_review",
+            "value" : "%#@count_posts@ innlegg fra %#@count_participants@ deltakere"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld posts van %lld deelnemers"
+            "state" : "needs_review",
+            "value" : "%#@count_posts@ posts van %#@count_participants@ deelnemers"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%#@tagPostsCount@ %#@tagParticipantsCount@"
+            "value" : "%#@count_posts@ %#@count_participants@"
           },
           "substitutions" : {
-            "tagParticipantsCount" : {
+            "count_participants" : {
               "formatSpecifier" : "lld",
               "variations" : {
                 "plural" : {
@@ -21243,7 +21707,7 @@
                 }
               }
             },
-            "tagPostsCount" : {
+            "count_posts" : {
               "formatSpecifier" : "lld",
               "variations" : {
                 "plural" : {
@@ -21272,32 +21736,242 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld postagens de %lld participantes"
+            "state" : "needs_review",
+            "value" : "%#@count_posts@ postagens de %#@count_participants@ participantes"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld katılımcı tarafından %lld gönderi"
+            "state" : "needs_review",
+            "value" : "%#@count_posts@ katılımcı tarafından %#@count_participants@ gönderi"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld дописів від %lld учасників"
+            "state" : "needs_review",
+            "value" : "%#@count_posts@ дописів від %#@count_participants@ учасників"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "few" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "many" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "few" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "many" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld 条嘟文来自 %lld 个参与者"
+            "state" : "needs_review",
+            "value" : "%#@count_posts@ 条嘟文来自 %#@count_participants@ 个参与者"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld 篇嘟文，%lld 位參與者"
+            "state" : "needs_review",
+            "value" : "%#@count_posts@ 篇嘟文，%#@count_participants@ 位參與者"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -66844,23 +67518,132 @@
       "localizations" : {
         "be" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld галасоў ад %lld удзельнікаў"
+            "state" : "needs_review",
+            "value" : "%#@count_votes@ галасоў ад %#@count_voters@ удзельнікаў"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "few" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "many" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "few" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "many" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld votes from %lld voters"
+            "state" : "needs_review",
+            "value" : "%#@count_votes@ votes from %#@count_voters@ voters"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld von %lld"
+            "state" : "needs_review",
+            "value" : "%#@count_votes@ von %#@count_voters@"
           },
           "substitutions" : {
             "count_voters" : {
+              "argNum" : 2,
               "formatSpecifier" : "lld",
               "variations" : {
                 "plural" : {
@@ -66880,6 +67663,7 @@
               }
             },
             "count_votes" : {
+              "argNum" : 1,
               "formatSpecifier" : "lld",
               "variations" : {
                 "plural" : {
@@ -66903,28 +67687,154 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%lld votes from %lld voters"
+            "value" : "%#@count_votes@ votes from %#@count_voters@ voters"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "en-GB" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld votes from %lld voters"
+            "state" : "needs_review",
+            "value" : "%#@count_votes@ votes from %#@count_voters@ voters"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld votos de %lld participantes"
+            "state" : "needs_review",
+            "value" : "%#@count_votes@ votos de %#@count_voters@ participantes"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%#@tagVotersCount@ %#@tagVotesCount@"
+            "value" : "%#@count_voters@ %#@count_votes@"
           },
           "substitutions" : {
-            "tagVotersCount" : {
+            "count_voters" : {
               "argNum" : 2,
               "formatSpecifier" : "lld",
               "variations" : {
@@ -66944,7 +67854,7 @@
                 }
               }
             },
-            "tagVotesCount" : {
+            "count_votes" : {
               "argNum" : 1,
               "formatSpecifier" : "lld",
               "variations" : {
@@ -66968,47 +67878,275 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld votes de %lld voteurs"
+            "state" : "needs_review",
+            "value" : "%#@count_votes@ votes de %#@count_voters@ voteurs"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld voti da %lld persone"
+            "state" : "needs_review",
+            "value" : "%#@count_votes@ voti da %#@count_voters@ persone"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld 票 %lld からの投票"
+            "state" : "needs_review",
+            "value" : "%#@count_votes@ 票 %#@count_voters@ からの投票"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld표 (%lld명)"
+            "state" : "needs_review",
+            "value" : "%#@count_votes@표 (%#@count_voters@명)"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "nb" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld stemmer fra %lld velgere"
+            "state" : "needs_review",
+            "value" : "%#@count_votes@ stemmer fra %#@count_voters@ velgere"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld stemmen van %lld stemmers"
+            "state" : "needs_review",
+            "value" : "%#@count_votes@ stemmen van %#@count_voters@ stemmers"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%#@tagVotesCount@ %#@tagVotersCount@"
+            "value" : "%#@count_votes@ %#@count_voters@"
           },
           "substitutions" : {
-            "tagVotersCount" : {
+            "count_voters" : {
               "formatSpecifier" : "lld",
               "variations" : {
                 "plural" : {
@@ -67027,7 +68165,7 @@
                 }
               }
             },
-            "tagVotesCount" : {
+            "count_votes" : {
               "formatSpecifier" : "lld",
               "variations" : {
                 "plural" : {
@@ -67056,32 +68194,242 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld votos de %lld votantes"
+            "state" : "needs_review",
+            "value" : "%#@count_votes@ votos de %#@count_voters@ votantes"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld adet oy %lld kişi içinde"
+            "state" : "needs_review",
+            "value" : "%#@count_votes@ adet oy %#@count_voters@ kişi içinde"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld голосів від %lld опитаних"
+            "state" : "needs_review",
+            "value" : "%#@count_votes@ голосів від %#@count_voters@ опитаних"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "few" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "many" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "few" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "many" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld 票来自 %lld 个投票者"
+            "state" : "needs_review",
+            "value" : "%#@count_votes@ 票来自 %#@count_voters@ 个投票者"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "%lld 票，%lld 位投票者"
+            "state" : "needs_review",
+            "value" : "%#@count_votes@ 票，%#@count_voters@ 位投票者"
+          },
+          "substitutions" : {
+            "count_voters" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_votes" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "needs_review",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
