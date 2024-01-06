@@ -19,6 +19,7 @@ struct StatusEditorCoreView: View {
   @Environment(Theme.self) private var theme
   @Environment(UserPreferences.self) private var preferences
   @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(CurrentInstance.self) private var currentInstance
   @Environment(AppAccountsManager.self) private var appAccounts
   @Environment(Client.self) private var client
   #if targetEnvironment(macCatalyst)
@@ -42,6 +43,7 @@ struct StatusEditorCoreView: View {
         VStack(spacing: 0) {
           accountHeaderView
           textInput
+          characterCountView
           StatusEditorMediaView(viewModel: viewModel, editingMediaContainer: $editingMediaContainer)
           embeddedStatus
           pollView
@@ -136,6 +138,25 @@ struct StatusEditorCoreView: View {
     if viewModel.showPoll {
       StatusEditorPollView(viewModel: viewModel, showPoll: $viewModel.showPoll)
         .padding(.horizontal)
+    }
+  }
+  
+  
+  @ViewBuilder
+  private var characterCountView: some View {
+    let value = (currentInstance.instance?.configuration?.statuses.maxCharacters ?? 500) + viewModel.statusTextCharacterLength
+    HStack {
+      Spacer()
+      Text("\(value)")
+        .foregroundColor(value < 0 ? .red : .secondary)
+        .font(.scaledCallout)
+        .accessibilityLabel("accessibility.editor.button.characters-remaining")
+        .accessibilityValue("\(value)")
+        .accessibilityRemoveTraits(.isStaticText)
+        .accessibilityAddTraits(.updatesFrequently)
+        .accessibilityRespondsToUserInteraction(false)
+        .padding(.trailing, 8)
+        .padding(.bottom, 8)
     }
   }
 

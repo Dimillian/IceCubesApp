@@ -235,6 +235,7 @@ import SwiftUI
     string.mutableString.insert(text, at: selectedRange.location)
     statusText = string
     selectedRange = NSRange(location: selectedRange.location + text.utf16.count, length: 0)
+    processText()
   }
 
   func replaceTextWith(text: String, inRange: NSRange) {

@@ -60,8 +60,6 @@ struct StatusEditorAccessoryView: View {
     #if os(visionOS)
     HStack(spacing: 8) {
       actionsView
-      characterCountView
-        .padding(.leading, 16)
     }
     #else
     ScrollView(.horizontal, showsIndicators: false) {
@@ -71,8 +69,6 @@ struct StatusEditorAccessoryView: View {
       .padding(.horizontal, .layoutPadding)
     }
     Spacer()
-    characterCountView
-      .padding(.trailing, .layoutPadding)
     #endif
   }
 
@@ -227,6 +223,18 @@ struct StatusEditorAccessoryView: View {
             .frame(width: 400, height: 500)
         }
       }
+    }
+    
+    Button {
+      viewModel.insertStatusText(text: "#")
+    } label: {
+      Image(systemName: "number")
+    }
+    
+    Button {
+      viewModel.insertStatusText(text: "@")
+    } label: {
+      Image(systemName: "at")
     }
 
     Button {
@@ -432,21 +440,7 @@ struct StatusEditorAccessoryView: View {
     }
     .presentationDetents([.medium])
   }
-
-  @ViewBuilder
-  private var characterCountView: some View {
-    let value = (currentInstance.instance?.configuration?.statuses.maxCharacters ?? 500) + focusedSEVM.statusTextCharacterLength
-
-    Text("\(value)")
-      .foregroundColor(value < 0 ? .red : .secondary)
-      .font(.scaledCallout)
-      .accessibilityLabel("accessibility.editor.button.characters-remaining")
-      .accessibilityValue("\(value)")
-      .accessibilityRemoveTraits(.isStaticText)
-      .accessibilityAddTraits(.updatesFrequently)
-      .accessibilityRespondsToUserInteraction(false)
-  }
-
+  
   private var recentlyUsedLanguages: [Language] {
     preferences.recentlyUsedLanguages.compactMap { isoCode in
       Language.allAvailableLanguages.first { $0.isoCode == isoCode }
