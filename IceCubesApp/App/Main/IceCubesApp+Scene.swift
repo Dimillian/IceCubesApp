@@ -69,15 +69,15 @@ extension IceCubesApp {
       Group {
         switch destination.wrappedValue {
         case let .newStatusEditor(visibility):
-          StatusEditorView(mode: .new(visibility: visibility))
+          StatusEditor.MainView(mode: .new(visibility: visibility))
         case let .editStatusEditor(status):
-          StatusEditorView(mode: .edit(status: status))
+          StatusEditor.MainView(mode: .edit(status: status))
         case let .quoteStatusEditor(status):
-          StatusEditorView(mode: .quote(status: status))
+          StatusEditor.MainView(mode: .quote(status: status))
         case let .replyToStatusEditor(status):
-          StatusEditorView(mode: .replyTo(status: status))
+          StatusEditor.MainView(mode: .replyTo(status: status))
         case let .mentionStatusEditor(account, visibility):
-          StatusEditorView(mode: .mention(account: account, visibility: visibility))
+          StatusEditor.MainView(mode: .mention(account: account, visibility: visibility))
         case .none:
           EmptyView()
         }

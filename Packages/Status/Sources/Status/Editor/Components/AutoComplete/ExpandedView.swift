@@ -6,15 +6,14 @@ import Models
 import SwiftData
 import Env
 
-extension StatusEditorAutoCompleteView {
-  
+extension StatusEditor.AutoCompleteView {
   @MainActor
   struct ExpandedView: View {
     @Environment(\.modelContext) private var context
     @Environment(Theme.self) private var theme
     @Environment(CurrentAccount.self) private var currentAccount
     
-    var viewModel: StatusEditorViewModel
+    var viewModel: StatusEditor.ViewModel
     @Binding var isTagSuggestionExpanded: Bool
     
     @Query(sort: \RecentTag.lastUse, order: .reverse) var recentTags: [RecentTag]

@@ -6,11 +6,11 @@ import Models
 import SwiftData
 
 
-extension StatusEditorAutoCompleteView {
+extension StatusEditor.AutoCompleteView  {
   struct MentionsView: View {
     @Environment(Theme.self) private var theme
     
-    var viewModel: StatusEditorViewModel
+    var viewModel: StatusEditor.ViewModel
   
     var body: some View {
       ForEach(viewModel.mentionsSuggestions) { account in
