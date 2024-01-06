@@ -4,12 +4,15 @@ import Foundation
 import SwiftUI
 import Models
 import SwiftData
-
+import Env
 
 extension StatusEditorAutoCompleteView {
+  
+  @MainActor
   struct ExpandedView: View {
     @Environment(\.modelContext) private var context
     @Environment(Theme.self) private var theme
+    @Environment(CurrentAccount.self) private var currentAccount
     
     var viewModel: StatusEditorViewModel
     @Binding var isTagSuggestionExpanded: Bool
@@ -17,6 +20,15 @@ extension StatusEditorAutoCompleteView {
     @Query(sort: \RecentTag.lastUse, order: .reverse) var recentTags: [RecentTag]
     
     var body: some View {
+      TabView {
+        recentTagsPage
+        followedTagsPage
+      }
+      .tabViewStyle(.page(indexDisplayMode: .always))
+      .frame(height: 200)
+    }
+    
+    private var recentTagsPage: some View {
       ScrollView(.vertical) {
         LazyVStack(alignment: .leading, spacing: 12) {
           Text("status.editor.language-select.recently-used")
@@ -48,15 +60,41 @@ extension StatusEditorAutoCompleteView {
         }
         .padding(.horizontal, .layoutPadding)
       }
-      .frame(height: 200)
-      .gesture(DragGesture(minimumDistance: 0, coordinateSpace: .local)
-                          .onEnded({ value in
-                            withAnimation {
-                              if value.translation.height > 0 {
-                                isTagSuggestionExpanded = false
-                              }
-                            }
-                          }))
+    }
+    
+    private var followedTagsPage: some View {
+      ScrollView(.vertical) {
+        LazyVStack(alignment: .leading, spacing: 12) {
+          Text("timeline.filter.tags")
+            .font(.scaledSubheadline)
+            .foregroundStyle(theme.labelColor)
+            .fontWeight(.bold)
+          ForEach(currentAccount.tags) { tag in
+            HStack {
+              Button {
+                if let index = recentTags.firstIndex(where: { $0.title.lowercased() == tag.name.lowercased() }) {
+                  recentTags[index].lastUse = Date()
+                } else {
+                  context.insert(RecentTag(title: tag.name))
+                }
+                withAnimation {
+                  isTagSuggestionExpanded = false
+                  viewModel.selectHashtagSuggestion(tag: tag.name)
+                }
+              } label: {
+                VStack(alignment: .leading) {
+                  Text("#\(tag.name)")
+                    .font(.scaledFootnote)
+                    .fontWeight(.bold)
+                    .foregroundColor(theme.labelColor)
+                }
+              }
+              Spacer()
+            }
+          }
+        }
+        .padding(.horizontal, .layoutPadding)
+      }
     }
   }
 }

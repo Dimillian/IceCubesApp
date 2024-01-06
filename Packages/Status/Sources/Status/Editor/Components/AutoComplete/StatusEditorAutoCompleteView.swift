@@ -38,7 +38,7 @@ struct StatusEditorAutoCompleteView: View {
             .padding(.horizontal, .layoutPadding)
           }
           .scrollContentBackground(.hidden)
-          if !viewModel.tagsSuggestions.isEmpty {
+          if viewModel.mentionsSuggestions.isEmpty {
             Spacer()
             Button {
               withAnimation {
@@ -46,8 +46,8 @@ struct StatusEditorAutoCompleteView: View {
               }
             } label: {
               Image(systemName: isTagSuggestionExpanded ? "chevron.down.circle" : "chevron.up.circle")
+                .padding(.trailing, 8)
             }
-            .padding(.trailing, 8)
           }
         }
         .frame(height: 40)
