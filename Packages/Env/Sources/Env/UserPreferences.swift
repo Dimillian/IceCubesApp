@@ -23,7 +23,7 @@ import SwiftUI
     @AppStorage("app_default_reply_visibility") public var appDefaultReplyVisibility: Models.Visibility = .pub
     @AppStorage("app_default_posts_sensitive") public var appDefaultPostsSensitive = false
     @AppStorage("autoplay_video") public var autoPlayVideo = true
-    @AppStorage("mute_video") public var muteVideo = false
+    @AppStorage("mute_video") public var muteVideo = true
     @AppStorage("always_use_deepl") public var alwaysUseDeepl = false
     @AppStorage("user_deepl_api_free") public var userDeeplAPIFree = true
     @AppStorage("auto_detect_post_language") public var autoDetectPostLanguage = true
