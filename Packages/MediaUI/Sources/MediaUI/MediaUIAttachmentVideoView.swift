@@ -114,7 +114,8 @@ public struct MediaUIAttachmentVideoView: View {
       if !preferences.autoPlayVideo, 
           !viewModel.forceAutoPlay,
          !isFullScreen,
-          !viewModel.isPlaying {
+          !viewModel.isPlaying,
+          !isCompact {
         Button(action: {
           viewModel.play()
         }, label: {
