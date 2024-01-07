@@ -9,6 +9,7 @@ import SwiftUI
   var player: AVPlayer?
   private let url: URL
   let forceAutoPlay: Bool
+  var isPlaying: Bool = false
 
   public init(url: URL, forceAutoPlay: Bool = false) {
     self.url = url
@@ -17,12 +18,13 @@ import SwiftUI
 
   func preparePlayer(autoPlay: Bool) {
     player = .init(url: url)
-    player?.isMuted = !forceAutoPlay
     player?.audiovisualBackgroundPlaybackPolicy = .pauses
     if autoPlay || forceAutoPlay {
       player?.play()
+      isPlaying = true
     } else {
       player?.pause()
+      isPlaying = false
     }
     guard let player else { return }
     NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
@@ -37,10 +39,12 @@ import SwiftUI
   }
 
   func pause() {
+    isPlaying = false
     player?.pause()
   }
 
   func play() {
+    isPlaying = true
     player?.seek(to: CMTime.zero)
     player?.play()
   }
@@ -50,6 +54,7 @@ import SwiftUI
   }
 }
 
+@MainActor
 public struct MediaUIAttachmentVideoView: View {
   @Environment(\.scenePhase) private var scenePhase
   @Environment(\.isCompact) private var isCompact
@@ -57,29 +62,36 @@ public struct MediaUIAttachmentVideoView: View {
   @Environment(Theme.self) private var theme
 
   @State var viewModel: MediaUIAttachmentVideoViewModel
+  @State var isFullScreen: Bool = false
 
   public init(viewModel: MediaUIAttachmentVideoViewModel) {
     _viewModel = .init(wrappedValue: viewModel)
   }
 
   public var body: some View {
-    ZStack {
-      VideoPlayer(player: viewModel.player)
-        .accessibilityAddTraits(.startsMediaSession)
-
-      if !preferences.autoPlayVideo, !viewModel.forceAutoPlay {
-        Image(systemName: "play.fill")
-          .font(isCompact ? .body : .largeTitle)
-          .foregroundColor(theme.tintColor)
-          .padding(.all, isCompact ? 6 : nil)
-          .background(Circle().fill(.thinMaterial))
-          .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
-      }
-    }.onAppear {
-      viewModel.preparePlayer(autoPlay: preferences.autoPlayVideo)
+    videoView
+    .onAppear {
+      try? AVAudioSession.sharedInstance().setCategory(.playback)
+      viewModel.preparePlayer(autoPlay: isFullScreen ? true : preferences.autoPlayVideo)
     }
     .onDisappear {
+      try? AVAudioSession.sharedInstance().setCategory(.ambient)
       viewModel.pause()
+    }
+    .onTapGesture {
+      isFullScreen = true
+    }
+    .fullScreenCover(isPresented: $isFullScreen) {
+      NavigationStack {
+        videoView
+          .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+              Button { isFullScreen.toggle() } label: {
+                Image(systemName: "xmark.circle")
+              }
+            }
+          }
+      }
     }
     .cornerRadius(4)
     .onChange(of: scenePhase) { _, newValue in
@@ -87,12 +99,33 @@ public struct MediaUIAttachmentVideoView: View {
       case .background, .inactive:
         viewModel.pause()
       case .active:
-        if preferences.autoPlayVideo || viewModel.forceAutoPlay {
+        if preferences.autoPlayVideo || viewModel.forceAutoPlay || isFullScreen {
           viewModel.play()
         }
       default:
         break
       }
     }
+  }
+  
+  private var videoView: some View {
+    VideoPlayer(player: viewModel.player, videoOverlay: {
+      if !preferences.autoPlayVideo, 
+          !viewModel.forceAutoPlay,
+         !isFullScreen,
+          !viewModel.isPlaying {
+        Button(action: {
+          viewModel.play()
+        }, label: {
+          Image(systemName: "play.fill")
+            .font(isCompact ? .body : .largeTitle)
+            .foregroundColor(theme.tintColor)
+            .padding(.all, isCompact ? 6 : nil)
+            .background(Circle().fill(.thinMaterial))
+            .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
+        })
+      }
+    })
+    .accessibilityAddTraits(.startsMediaSession)
   }
 }
