@@ -30,6 +30,7 @@ extension StatusEditor {
         }
       }
       .scrollPosition(id: $scrollID, anchor: .trailing)
+      .scrollClipDisabled()
       .padding(.horizontal, .layoutPadding)
       .frame(height: count > 0 ? containerHeight : 0)
       .animation(.spring(duration: 0.3), value: count)

@@ -28,6 +28,9 @@ struct ContentSettingsView: View {
         Toggle(isOn: $userPreferences.autoPlayVideo) {
           Text("settings.other.autoplay-video")
         }
+        Toggle(isOn: $userPreferences.muteVideo) {
+          Text("settings.other.mute-video")
+        }
         Toggle(isOn: $userPreferences.showAltTextForMedia) {
           Text("settings.content.media.show.alt")
         }

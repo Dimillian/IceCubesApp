@@ -37,6 +37,10 @@ import SwiftUI
       }
     }
   }
+  
+  func mute(_ mute: Bool) {
+    player?.isMuted = mute
+  }
 
   func pause() {
     isPlaying = false
@@ -71,13 +75,22 @@ public struct MediaUIAttachmentVideoView: View {
   public var body: some View {
     videoView
     .onAppear {
-      try? AVAudioSession.sharedInstance().setCategory(.playback)
       viewModel.preparePlayer(autoPlay: isFullScreen ? true : preferences.autoPlayVideo,
                               isCompact: isCompact)
+      viewModel.mute(preferences.muteVideo)
+      
+      DispatchQueue.global().async {
+        try? AVAudioSession.sharedInstance().setCategory(.playback, options: .duckOthers)
+        try? AVAudioSession.sharedInstance().setActive(true)
+      }
     }
     .onDisappear {
-      try? AVAudioSession.sharedInstance().setCategory(.ambient)
       viewModel.pause()
+      
+      DispatchQueue.global().async {
+        try? AVAudioSession.sharedInstance().setCategory(.ambient, options: .mixWithOthers)
+        try? AVAudioSession.sharedInstance().setActive(true)
+      }
     }
     .onTapGesture {
       if !preferences.autoPlayVideo && !viewModel.isPlaying {
@@ -101,11 +114,13 @@ public struct MediaUIAttachmentVideoView: View {
         if isCompact || !preferences.autoPlayVideo {
           viewModel.play()
         }
+        viewModel.mute(false)
       }
       .onDisappear {
         if isCompact || !preferences.autoPlayVideo {
           viewModel.pause()
         }
+        viewModel.mute(preferences.muteVideo)
       }
     }
     .cornerRadius(4)
