@@ -132,6 +132,7 @@ extension StatusEditor {
                                        routerPath: RouterPath(),
                                        showActions: false))
           .accessibilityLabel(status.content.asRawText)
+          .environment(RouterPath())
           .allowsHitTesting(false)
           .environment(\.isStatusFocused, false)
           .padding(.horizontal, .layoutPadding)
