@@ -52,6 +52,11 @@ import SwiftUI
     player?.seek(to: CMTime.zero)
     player?.play()
   }
+  
+  func resume() {
+    isPlaying = true
+    player?.play()
+  }
 
   deinit {
     NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
@@ -106,19 +111,25 @@ public struct MediaUIAttachmentVideoView: View {
           try? AVAudioSession.sharedInstance().setCategory(.playback, options: .duckOthers)
           try? AVAudioSession.sharedInstance().setActive(true)
         }
-        if isCompact || !preferences.autoPlayVideo {
-          viewModel.play()
-        }
         viewModel.mute(false)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+          if isCompact || !preferences.autoPlayVideo {
+            viewModel.play()
+          } else {
+            viewModel.resume()
+          }
+        }
       }
       .onDisappear {
         if isCompact || !preferences.autoPlayVideo {
           viewModel.pause()
         }
         viewModel.mute(preferences.muteVideo)
-        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
-        try? AVAudioSession.sharedInstance().setCategory(.ambient, options: .mixWithOthers)
-        try? AVAudioSession.sharedInstance().setActive(true)
+        DispatchQueue.global().async {
+          try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+          try? AVAudioSession.sharedInstance().setCategory(.ambient, options: .mixWithOthers)
+          try? AVAudioSession.sharedInstance().setActive(true)
+        }
       }
     }
     .cornerRadius(4)
