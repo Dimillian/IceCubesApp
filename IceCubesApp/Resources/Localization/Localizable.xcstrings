@@ -2021,7 +2021,7 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Spoiler uyarısı"
           }
         },
@@ -65067,8 +65067,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Spoiler Yazısı"
+            "state" : "translated",
+            "value" : "Spoiler uyarısı"
           }
         },
         "uk" : {
