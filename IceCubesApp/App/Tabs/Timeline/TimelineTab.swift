@@ -94,7 +94,7 @@ struct TimelineTab: View {
         lastTimelineFilter = newValue
       }
       switch newValue {
-      case let .tagGroup(title, _):
+      case let .tagGroup(title, _, _):
         if let group = tagGroups.first(where: { $0.title == title}) {
           selectedTagGroup = group
         }
@@ -297,7 +297,7 @@ struct TimelineTab: View {
     Menu("timeline.filter.tag-groups") {
       ForEach(tagGroups) { group in
         Button {
-          timeline = .tagGroup(title: group.title, tags: group.tags)
+          timeline = .tagGroup(title: group.title, tags: group.tags, symbolName: group.symbolName)
         } label: {
           VStack {
             let icon = group.symbolName.isEmpty ? "number" : group.symbolName
