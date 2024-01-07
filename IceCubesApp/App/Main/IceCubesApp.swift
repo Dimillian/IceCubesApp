@@ -83,7 +83,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_: UIApplication,
                    didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool
   {
-    try? AVAudioSession.sharedInstance().setCategory(.ambient)
+    try? AVAudioSession.sharedInstance().setCategory(.ambient, options: .mixWithOthers)
+    try? AVAudioSession.sharedInstance().setActive(true)
     PushNotificationsService.shared.setAccounts(accounts: AppAccountsManager.shared.pushAccounts)
     return true
   }
