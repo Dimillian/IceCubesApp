@@ -80,6 +80,10 @@ public struct MediaUIAttachmentVideoView: View {
       viewModel.pause()
     }
     .onTapGesture {
+      if !preferences.autoPlayVideo && !viewModel.isPlaying {
+        viewModel.play()
+        return
+      }
       isFullScreen = true
     }
     .fullScreenCover(isPresented: $isFullScreen) {
@@ -92,6 +96,16 @@ public struct MediaUIAttachmentVideoView: View {
               }
             }
           }
+      }
+      .onAppear {
+        if isCompact || !preferences.autoPlayVideo {
+          viewModel.play()
+        }
+      }
+      .onDisappear {
+        if isCompact || !preferences.autoPlayVideo {
+          viewModel.pause()
+        }
       }
     }
     .cornerRadius(4)
