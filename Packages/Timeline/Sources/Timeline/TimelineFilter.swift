@@ -33,7 +33,7 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
   
   case home, local, federated, trending
   case hashtag(tag: String, accountId: String?)
-  case tagGroup(title: String, tags: [String])
+  case tagGroup(title: String, tags: [String], symbolName: String)
   case list(list: Models.List)
   case remoteLocal(server: String, filter: RemoteTimelineFilter)
   case latest
@@ -81,7 +81,7 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
       "Home"
     case let .hashtag(tag, _):
       "#\(tag)"
-    case let .tagGroup(title, _):
+    case let .tagGroup(title, _, _):
       title
     case let .list(list):
       list.title
@@ -106,7 +106,7 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
       "timeline.home"
     case let .hashtag(tag, _):
       "#\(tag)"
-    case let .tagGroup(title, _):
+    case let .tagGroup(title, _, _):
       LocalizedStringKey(title) // ?? not sure since this can't be localized.
     case let .list(list):
       LocalizedStringKey(list.title)
@@ -133,8 +133,8 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
       "list.bullet"
     case .remoteLocal:
       "dot.radiowaves.right"
-    case .tagGroup:
-      "tag"
+    case let .tagGroup(_, _, symbolName):
+        symbolName
     case .hashtag:
       "number"
     }
@@ -164,7 +164,7 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
       } else {
         return Timelines.hashtag(tag: tag, additional: nil, maxId: maxId, minId: minId)
       }
-    case let .tagGroup(_, tags):
+    case let .tagGroup(_, tags, _):
       var tags = tags
       if !tags.isEmpty {
         let tag = tags.removeFirst()
@@ -214,9 +214,11 @@ extension TimelineFilter: Codable {
       var nestedContainer = try container.nestedUnkeyedContainer(forKey: .tagGroup)
       let title = try nestedContainer.decode(String.self)
       let tags = try nestedContainer.decode([String].self)
+      let symbolName = try nestedContainer.decode(String.self)
       self = .tagGroup(
         title: title,
-        tags: tags
+        tags: tags,
+        symbolName: symbolName
       )
     case .list:
       let list = try container.decode(
@@ -259,10 +261,11 @@ extension TimelineFilter: Codable {
       var nestedContainer = container.nestedUnkeyedContainer(forKey: .hashtag)
       try nestedContainer.encode(tag)
       try nestedContainer.encode(accountId)
-    case let .tagGroup(title, tags):
+    case let .tagGroup(title, tags, symbolName):
       var nestedContainer = container.nestedUnkeyedContainer(forKey: .tagGroup)
       try nestedContainer.encode(title)
       try nestedContainer.encode(tags)
+      try nestedContainer.encode(symbolName)
     case let .list(list):
       try container.encode(list, forKey: .list)
     case let .remoteLocal(server, filter):
