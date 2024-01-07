@@ -25,7 +25,7 @@ extension StatusEditor {
               VStack(alignment: .leading, spacing: 8) {
                 Text(draft.content)
                   .font(.body)
-                  .lineLimit(3)
+                  .lineLimit(10)
                   .foregroundStyle(theme.labelColor)
                 Text(draft.creationDate, style: .relative)
                   .font(.footnote)

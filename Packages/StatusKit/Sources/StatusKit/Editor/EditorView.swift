@@ -190,8 +190,6 @@ extension StatusEditor {
         Text("\(value)")
           .foregroundColor(value < 0 ? .red : .secondary)
           .font(.callout.monospacedDigit())
-          .contentTransition(.numericText(value: Double(value)))
-          .animation(.default, value: value)
           .accessibilityLabel("accessibility.editor.button.characters-remaining")
           .accessibilityValue("\(value)")
           .accessibilityRemoveTraits(.isStaticText)
