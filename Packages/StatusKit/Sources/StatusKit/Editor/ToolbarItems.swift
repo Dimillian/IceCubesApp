@@ -31,7 +31,7 @@ extension StatusEditor {
           Button {
             isDraftsSheetDisplayed = true
           } label: {
-            Text("status.editor.drafts.navigation-title")
+            Image(systemName: "pencil.and.list.clipboard")
           }
           .accessibilityLabel("accessibility.editor.button.drafts")
           .popover(isPresented: $isDraftsSheetDisplayed) {
@@ -57,7 +57,8 @@ extension StatusEditor {
             }
           }
         } label: {
-          Text("status.action.post").bold()
+          Image(systemName: "paperplane.fill")
+            .bold()
         }
         .buttonStyle(.borderedProminent)
         .disabled(!mainSEVM.canPost || mainSEVM.isPosting)
@@ -77,7 +78,7 @@ extension StatusEditor {
                                             object: nil)
           }
         } label: {
-          Text("action.cancel")
+          Image(systemName: "xmark")
         }
         .keyboardShortcut(.cancelAction)
         .confirmationDialog(
