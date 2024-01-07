@@ -16,10 +16,10 @@ import SwiftUI
     self.forceAutoPlay = forceAutoPlay
   }
 
-  func preparePlayer(autoPlay: Bool) {
+  func preparePlayer(autoPlay: Bool, isCompact: Bool) {
     player = .init(url: url)
     player?.audiovisualBackgroundPlaybackPolicy = .pauses
-    if autoPlay || forceAutoPlay {
+    if (autoPlay || forceAutoPlay) && !isCompact {
       player?.play()
       isPlaying = true
     } else {
@@ -72,7 +72,8 @@ public struct MediaUIAttachmentVideoView: View {
     videoView
     .onAppear {
       try? AVAudioSession.sharedInstance().setCategory(.playback)
-      viewModel.preparePlayer(autoPlay: isFullScreen ? true : preferences.autoPlayVideo)
+      viewModel.preparePlayer(autoPlay: isFullScreen ? true : preferences.autoPlayVideo,
+                              isCompact: isCompact)
     }
     .onDisappear {
       try? AVAudioSession.sharedInstance().setCategory(.ambient)
@@ -99,7 +100,7 @@ public struct MediaUIAttachmentVideoView: View {
       case .background, .inactive:
         viewModel.pause()
       case .active:
-        if preferences.autoPlayVideo || viewModel.forceAutoPlay || isFullScreen {
+        if (preferences.autoPlayVideo || viewModel.forceAutoPlay || isFullScreen) && !isCompact {
           viewModel.play()
         }
       default:
