@@ -6,6 +6,7 @@ import Network
 import StatusKit
 import SwiftUI
 import UIKit
+import Models
 
 class ShareViewController: UIViewController {
   override func viewDidLoad() {
@@ -33,6 +34,12 @@ class ShareViewController: UIViewController {
           .environment(account)
           .environment(theme)
           .environment(instance)
+          .modelContainer(for: [
+            Draft.self,
+            LocalTimeline.self,
+            TagGroup.self,
+            RecentTag.self,
+          ])
           .tint(theme.tintColor)
           .preferredColorScheme(colorScheme == .light ? .light : .dark)
         let childView = UIHostingController(rootView: view)
