@@ -33,7 +33,7 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
   
   case home, local, federated, trending
   case hashtag(tag: String, accountId: String?)
-  case tagGroup(title: String, tags: [String], symbolName: String)
+  case tagGroup(title: String, tags: [String], symbolName: String?)
   case list(list: Models.List)
   case remoteLocal(server: String, filter: RemoteTimelineFilter)
   case latest
@@ -134,7 +134,7 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
     case .remoteLocal:
       "dot.radiowaves.right"
     case let .tagGroup(_, _, symbolName):
-        symbolName
+        symbolName ?? "tag"
     case .hashtag:
       "number"
     }
@@ -214,7 +214,7 @@ extension TimelineFilter: Codable {
       var nestedContainer = try container.nestedUnkeyedContainer(forKey: .tagGroup)
       let title = try nestedContainer.decode(String.self)
       let tags = try nestedContainer.decode([String].self)
-      let symbolName = try nestedContainer.decode(String.self)
+      let symbolName = try? nestedContainer.decode(String.self)
       self = .tagGroup(
         title: title,
         tags: tags,
@@ -265,7 +265,7 @@ extension TimelineFilter: Codable {
       var nestedContainer = container.nestedUnkeyedContainer(forKey: .tagGroup)
       try nestedContainer.encode(title)
       try nestedContainer.encode(tags)
-      try nestedContainer.encode(symbolName)
+      try? nestedContainer.encode(symbolName)
     case let .list(list):
       try container.encode(list, forKey: .list)
     case let .remoteLocal(server, filter):
