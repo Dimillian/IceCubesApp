@@ -23,9 +23,6 @@ extension StatusEditor {
     @Bindable var viewModel: ViewModel
     @Binding var followUpSEVMs: [ViewModel]
     @Binding var editingMediaContainer: MediaContainer?
-    
-    @State private var isLanguageSheetDisplayed: Bool = false
-    @State private var languageSearch: String = ""
 
     @FocusState<UUID?>.Binding var isSpoilerTextFocused: UUID?
     @FocusState<EditorFocusState?>.Binding var editorFocusState: EditorFocusState?
@@ -47,10 +44,10 @@ extension StatusEditor {
           VStack(spacing: 0) {
             accountHeaderView
             textInput
+            pollView
             characterCountAndLangView
             MediaView(viewModel: viewModel, editingMediaContainer: $editingMediaContainer)
             embeddedStatus
-            pollView
           }
           .padding(.vertical)
 
@@ -128,9 +125,19 @@ extension StatusEditor {
 
     @ViewBuilder
     private var embeddedStatus: some View {
-      if viewModel.replyToStatus != nil { Divider().padding(.top, 20) }
-
-      if let status = viewModel.embeddedStatus ?? viewModel.replyToStatus {
+      if let status = viewModel.replyToStatus {
+        Divider().padding(.vertical, .statusComponentSpacing)
+        StatusRowView(viewModel: .init(status: status,
+                                       client: client,
+                                       routerPath: RouterPath(),
+                                       showActions: false))
+          .accessibilityLabel(status.content.asRawText)
+          .allowsHitTesting(false)
+          .environment(\.isStatusFocused, false)
+          .padding(.horizontal, .layoutPadding)
+          .padding(.vertical, .statusComponentSpacing)
+        
+      } else if let status = viewModel.embeddedStatus {
         StatusEmbeddedView(status: status, client: client, routerPath: RouterPath())
           .padding(.horizontal, .layoutPadding)
           .disabled(true)
@@ -150,130 +157,49 @@ extension StatusEditor {
     private var characterCountAndLangView: some View {
       let value = (currentInstance.instance?.configuration?.statuses.maxCharacters ?? 500) + viewModel.statusTextCharacterLength
       HStack(alignment: .center) {
+        LangButton(viewModel: viewModel)
+          .padding(.leading, .layoutPadding)
+        
+        Button {
+          withAnimation {
+            viewModel.showPoll.toggle()
+            viewModel.resetPollDefaults()
+          }
+        } label: {
+          Image(systemName: viewModel.showPoll ? "chart.bar.fill" : "chart.bar")
+        }
+        .buttonStyle(.bordered)
+        .accessibilityLabel("accessibility.editor.button.poll")
+        .disabled(viewModel.shouldDisablePollButton)
+
+        Button {
+          withAnimation {
+            viewModel.spoilerOn.toggle()
+          }
+          isSpoilerTextFocused = viewModel.id
+        } label: {
+          Image(systemName: viewModel.spoilerOn ? "exclamationmark.triangle.fill" : "exclamationmark.triangle")
+        }
+        .buttonStyle(.bordered)
+        .accessibilityLabel("accessibility.editor.button.spoiler")
+        
+        Spacer()
+        
         Text("\(value)")
           .foregroundColor(value < 0 ? .red : .secondary)
-          .font(.scaledCallout)
+          .font(.callout.monospacedDigit())
+          .contentTransition(.numericText(value: Double(value)))
+          .animation(.default, value: value)
           .accessibilityLabel("accessibility.editor.button.characters-remaining")
           .accessibilityValue("\(value)")
           .accessibilityRemoveTraits(.isStaticText)
           .accessibilityAddTraits(.updatesFrequently)
           .accessibilityRespondsToUserInteraction(false)
-          .padding(.leading, .layoutPadding)
-        
-        Button {
-          isLanguageSheetDisplayed.toggle()
-        } label: {
-          HStack(alignment: .center) {
-            if let language = viewModel.selectedLanguage {
-              Image(systemName: "text.bubble")
-              Text(language.uppercased())
-            } else {
-              Image(systemName: "globe")
-            }
-          }
-          .font(.footnote)
-        }
-        .buttonStyle(.bordered)
-        .onAppear {
-          viewModel.setInitialLanguageSelection(preference: preferences.recentlyUsedLanguages.first ?? preferences.serverPreferences?.postLanguage)
-        }
-        .accessibilityLabel("accessibility.editor.button.language")
-        .popover(isPresented: $isLanguageSheetDisplayed) {
-          if UIDevice.current.userInterfaceIdiom == .phone {
-            languageSheetView
-          } else {
-            languageSheetView
-              .frame(width: 400, height: 500)
-          }
-        }
-        
-        Spacer()
+          .padding(.trailing, .layoutPadding)
       }
-      .padding(.bottom, 8)
+      .padding(.vertical, 8)
     }
     
-    private var languageSheetView: some View {
-      NavigationStack {
-        List {
-          if languageSearch.isEmpty {
-            if !recentlyUsedLanguages.isEmpty {
-              Section("status.editor.language-select.recently-used") {
-                languageSheetSection(languages: recentlyUsedLanguages)
-              }
-            }
-            Section {
-              languageSheetSection(languages: otherLanguages)
-            }
-          } else {
-            languageSheetSection(languages: languageSearchResult(query: languageSearch))
-          }
-        }
-        .searchable(text: $languageSearch)
-        .toolbar {
-          ToolbarItem(placement: .navigationBarLeading) {
-            Button("action.cancel", action: { isLanguageSheetDisplayed = false })
-          }
-        }
-        .navigationTitle("status.editor.language-select.navigation-title")
-        .navigationBarTitleDisplayMode(.inline)
-        .scrollContentBackground(.hidden)
-        .background(theme.secondaryBackgroundColor)
-      }
-    }
-    
-    
-    @ViewBuilder
-    private func languageTextView(isoCode: String, nativeName: String?, name: String?) -> some View {
-      if let nativeName, let name {
-        Text("\(nativeName) (\(name))")
-      } else {
-        Text(isoCode.uppercased())
-      }
-    }
-
-    private func languageSheetSection(languages: [Language]) -> some View {
-      ForEach(languages) { language in
-        HStack {
-          languageTextView(
-            isoCode: language.isoCode,
-            nativeName: language.nativeName,
-            name: language.localizedName
-          ).tag(language.isoCode)
-          Spacer()
-          if language.isoCode == viewModel.selectedLanguage {
-            Image(systemName: "checkmark")
-          }
-        }
-        .listRowBackground(theme.primaryBackgroundColor)
-        .contentShape(Rectangle())
-        .onTapGesture {
-          viewModel.selectedLanguage = language.isoCode
-          viewModel.hasExplicitlySelectedLanguage = true
-          isLanguageSheetDisplayed = false
-        }
-      }
-    }
-    
-    private var recentlyUsedLanguages: [Language] {
-      preferences.recentlyUsedLanguages.compactMap { isoCode in
-        Language.allAvailableLanguages.first { $0.isoCode == isoCode }
-      }
-    }
-
-    private var otherLanguages: [Language] {
-      Language.allAvailableLanguages.filter { !preferences.recentlyUsedLanguages.contains($0.isoCode) }
-    }
-
-    private func languageSearchResult(query: String) -> [Language] {
-      Language.allAvailableLanguages.filter { language in
-        guard !languageSearch.isEmpty else {
-          return true
-        }
-        return language.nativeName?.lowercased().hasPrefix(query.lowercased()) == true
-          || language.localizedName?.lowercased().hasPrefix(query.lowercased()) == true
-      }
-    }
-
     private func setupViewModel() {
       viewModel.client = client
       viewModel.currentAccount = currentAccount.account

@@ -57,13 +57,10 @@ extension StatusEditor {
         actionsView
       }
       #else
-      ScrollView(.horizontal, showsIndicators: false) {
-        HStack(alignment: .center, spacing: 16) {
-          actionsView
-        }
-        .padding(.horizontal, .layoutPadding)
+      HStack(alignment: .center, spacing: 16) {
+        actionsView
       }
-      Spacer()
+      .padding(.horizontal, .layoutPadding)
       #endif
     }
 
@@ -153,6 +150,7 @@ extension StatusEditor {
       .accessibilityLabel("accessibility.editor.button.attach-photo")
       .disabled(viewModel.showPoll)
 
+      
       Button {
         // all SEVM have the same visibility value
         followUpSEVMs.append(ViewModel(mode: .new(visibility: focusedSEVM.visibility)))
@@ -160,28 +158,7 @@ extension StatusEditor {
         Image(systemName: "arrowshape.turn.up.left.circle.fill")
       }
       .disabled(!canAddNewSEVM)
-
-      Button {
-        withAnimation {
-          viewModel.showPoll.toggle()
-          viewModel.resetPollDefaults()
-        }
-      } label: {
-        Image(systemName: "chart.bar")
-      }
-      .accessibilityLabel("accessibility.editor.button.poll")
-      .disabled(viewModel.shouldDisablePollButton)
-
-      Button {
-        withAnimation {
-          viewModel.spoilerOn.toggle()
-        }
-        isSpoilerTextFocused = viewModel.id
-      } label: {
-        Image(systemName: viewModel.spoilerOn ? "exclamationmark.triangle.fill" : "exclamationmark.triangle")
-      }
-      .accessibilityLabel("accessibility.editor.button.spoiler")
-
+      
       if !viewModel.customEmojiContainer.isEmpty {
         Button {
           isCustomEmojisSheetDisplay = true
@@ -202,20 +179,23 @@ extension StatusEditor {
         }
       }
       
-      Button {
-        viewModel.insertStatusText(text: "#")
-      } label: {
-        Image(systemName: "number")
+      
+      if preferences.isOpenAIEnabled {
+        AIMenu.disabled(!viewModel.canPost)
       }
+      
+      Spacer()
       
       Button {
         viewModel.insertStatusText(text: "@")
       } label: {
         Image(systemName: "at")
       }
-
-      if preferences.isOpenAIEnabled {
-        AIMenu.disabled(!viewModel.canPost)
+      
+      Button {
+        viewModel.insertStatusText(text: "#")
+      } label: {
+        Image(systemName: "number")
       }
     }
 

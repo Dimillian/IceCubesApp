@@ -14,7 +14,7 @@ import SwiftUI
     @AppStorage("is_open_ai_enabled") public var isOpenAIEnabled: Bool = true
 
     @AppStorage("recently_used_languages") public var recentlyUsedLanguages: [String] = []
-    @AppStorage("social_keyboard_composer") public var isSocialKeyboardEnabled: Bool = true
+    @AppStorage("social_keyboard_composer") public var isSocialKeyboardEnabled: Bool = false
 
     @AppStorage("use_instance_content_settings") public var useInstanceContentSettings: Bool = true
     @AppStorage("app_auto_expand_spoilers") public var appAutoExpandSpoilers = false

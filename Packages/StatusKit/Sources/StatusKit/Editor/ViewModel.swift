@@ -125,7 +125,7 @@ extension StatusEditor {
     }
 
     var shouldDisablePollButton: Bool {
-      !mediaPickers.isEmpty
+      !mediaContainers.isEmpty
     }
 
     var shouldDisplayDismissWarning: Bool {
