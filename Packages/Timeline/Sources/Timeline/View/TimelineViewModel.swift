@@ -218,6 +218,7 @@ extension TimelineViewModel: StatusesFetcher {
 
     await datasource.set(statuses)
     await cache()
+    statuses = await datasource.getFiltered()
     marker = nil
 
     withAnimation {
