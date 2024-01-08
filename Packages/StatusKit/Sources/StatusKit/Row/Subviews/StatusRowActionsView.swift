@@ -214,7 +214,7 @@ struct StatusRowActionsView: View {
                                     isFocused: isFocused,
                                     theme: theme), !viewModel.isRemote
         {
-          Text("\(count)")
+          Text(count, format: .number.notation(.compactName))
             .contentTransition(.numericText(value: Double(count)))
             .foregroundColor(Color(UIColor.secondaryLabel))
             .font(.scaledFootnote)
