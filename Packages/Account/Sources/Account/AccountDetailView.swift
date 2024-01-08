@@ -12,6 +12,7 @@ public struct AccountDetailView: View {
   @Environment(\.openURL) private var openURL
   @Environment(\.redactionReasons) private var reasons
   @Environment(\.openWindow) private var openWindow
+    @Environment(\.dismiss) var dismiss
 
   @Environment(StreamWatcher.self) private var watcher
   @Environment(CurrentAccount.self) private var currentAccount
@@ -157,6 +158,7 @@ public struct AccountDetailView: View {
     })
     .edgesIgnoringSafeArea(.top)
     .navigationBarTitleDisplayMode(.inline)
+    .navigationBarBackButtonHidden(true)
     .toolbar {
       toolbarContent
     }
@@ -316,6 +318,20 @@ public struct AccountDetailView: View {
 
   @ToolbarContentBuilder
   private var toolbarContent: some ToolbarContent {
+      if !viewModel.isCurrentUser {
+          ToolbarItem(placement: .topBarLeading) {
+              Button(action: {
+                  dismiss()
+              }) {
+                  HStack {
+                      Image(systemName: "chevron.left")
+                          .bold()
+                      Text("Back")
+                  }
+              }
+          }
+      }
+      
     ToolbarItem(placement: .principal) {
       if let account = viewModel.account, displayTitle {
         VStack {
