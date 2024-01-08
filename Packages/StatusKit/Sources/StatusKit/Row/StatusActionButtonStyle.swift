@@ -35,6 +35,7 @@ struct StatusActionButtonStyle: ButtonStyle {
           sparklesCounter += 1
         }
       }
+      .contentShape(Rectangle())
   }
 
   func brightness(configuration: Configuration) -> Double {
