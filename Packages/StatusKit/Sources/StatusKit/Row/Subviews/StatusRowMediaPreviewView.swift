@@ -243,6 +243,10 @@ private struct FeaturedImagePreView: View {
           let height = media.meta?.original?.height
     else { return nil }
 
+    guard width != 1 && height != 1 else {
+      return .init(width: 800, height: 600)
+    }
+    
     return .init(width: CGFloat(width), height: CGFloat(height))
   }
 
