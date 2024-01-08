@@ -19,7 +19,9 @@ import SwiftUI
   func preparePlayer(autoPlay: Bool, isCompact: Bool) {
     player = .init(url: url)
     player?.audiovisualBackgroundPlaybackPolicy = .pauses
+    #if !os(visionOS)
     player?.preventsDisplaySleepDuringVideoPlayback = false
+    #endif
     if (autoPlay || forceAutoPlay) && !isCompact {
       player?.play()
       isPlaying = true

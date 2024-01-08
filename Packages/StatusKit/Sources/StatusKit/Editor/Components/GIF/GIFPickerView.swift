@@ -1,4 +1,4 @@
-#if !os(visionOS)
+#if !os(visionOS) && !DEBUG
 import DesignSystem
 import GiphyUISDK
 import SwiftUI

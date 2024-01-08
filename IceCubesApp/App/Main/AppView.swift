@@ -28,11 +28,15 @@ struct AppView: View {
   @State var iosTabs = iOSTabs.shared
   
   var body: some View {
+    #if os(visionOS)
+    tabBarView
+    #else
     if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
       sidebarView
     } else {
       tabBarView
     }
+    #endif
   }
   
   var availableTabs: [Tab] {
@@ -90,6 +94,7 @@ struct AppView: View {
     return 0
   }
   
+  #if !os(visionOS)
   var sidebarView: some View {
     SideBarView(selectedTab: $selectedTab,
                 popToRootTab: $popToRootTab,
@@ -122,6 +127,7 @@ struct AppView: View {
     }
     .environment(appRouterPath)
   }
+  #endif
 
   var notificationsSecondaryColumn: some View {
     NotificationsTab(selectedTab: .constant(.notifications),

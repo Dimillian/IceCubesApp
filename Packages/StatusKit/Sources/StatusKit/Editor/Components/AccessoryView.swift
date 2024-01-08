@@ -1,6 +1,6 @@
 import DesignSystem
 import Env
-#if !os(visionOS)
+#if !os(visionOS) && !DEBUG
 import GiphyUISDK
 #endif
 import Models
@@ -124,7 +124,7 @@ extension StatusEditor {
         .background(.black)
       })
       .sheet(isPresented: $isGIFPickerPresented, content: {
-        #if !os(visionOS)
+        #if !os(visionOS) && !DEBUG
           #if targetEnvironment(macCatalyst)
           NavigationStack {
             giphyView
@@ -213,7 +213,7 @@ extension StatusEditor {
       return false
     }
 
-    #if !os(visionOS)
+    #if !os(visionOS) && !DEBUG
     @ViewBuilder
     private var giphyView: some View {
       @Bindable var viewModel = focusedSEVM
