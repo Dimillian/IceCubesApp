@@ -157,33 +157,31 @@ extension StatusEditor {
     private var characterCountAndLangView: some View {
       let value = (currentInstance.instance?.configuration?.statuses.maxCharacters ?? 500) + viewModel.statusTextCharacterLength
       HStack(alignment: .center) {
-        if editorFocusState == assignedFocusState {
-          LangButton(viewModel: viewModel)
-            .padding(.leading, .layoutPadding)
-          
-          Button {
-            withAnimation {
-              viewModel.showPoll.toggle()
-              viewModel.resetPollDefaults()
-            }
-          } label: {
-            Image(systemName: viewModel.showPoll ? "chart.bar.fill" : "chart.bar")
+        LangButton(viewModel: viewModel)
+          .padding(.leading, .layoutPadding)
+        
+        Button {
+          withAnimation {
+            viewModel.showPoll.toggle()
+            viewModel.resetPollDefaults()
           }
-          .buttonStyle(.bordered)
-          .accessibilityLabel("accessibility.editor.button.poll")
-          .disabled(viewModel.shouldDisablePollButton)
-
-          Button {
-            withAnimation {
-              viewModel.spoilerOn.toggle()
-            }
-            isSpoilerTextFocused = viewModel.id
-          } label: {
-            Image(systemName: viewModel.spoilerOn ? "exclamationmark.triangle.fill" : "exclamationmark.triangle")
-          }
-          .buttonStyle(.bordered)
-          .accessibilityLabel("accessibility.editor.button.spoiler")
+        } label: {
+          Image(systemName: viewModel.showPoll ? "chart.bar.fill" : "chart.bar")
         }
+        .buttonStyle(.bordered)
+        .accessibilityLabel("accessibility.editor.button.poll")
+        .disabled(viewModel.shouldDisablePollButton)
+
+        Button {
+          withAnimation {
+            viewModel.spoilerOn.toggle()
+          }
+          isSpoilerTextFocused = viewModel.id
+        } label: {
+          Image(systemName: viewModel.spoilerOn ? "exclamationmark.triangle.fill" : "exclamationmark.triangle")
+        }
+        .buttonStyle(.bordered)
+        .accessibilityLabel("accessibility.editor.button.spoiler")
         
         Spacer()
         
