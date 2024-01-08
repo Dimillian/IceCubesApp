@@ -241,19 +241,17 @@ struct TimelineTab: View {
   
   @ViewBuilder
   private var listsFiltersButons: some View {
-    if !currentAccount.lists.isEmpty {
-      Menu("timeline.filter.lists") {
-        ForEach(currentAccount.sortedLists) { list in
-          Button {
-            timeline = .list(list: list)
-          } label: {
-            Label(list.title, systemImage: "list.bullet")
-          }
-        }
+    Menu("timeline.filter.lists") {
+      Button {
+        routerPath.presentedSheet = .listCreate
+      } label: {
+        Label("account.list.create", systemImage: "plus")
+      }
+      ForEach(currentAccount.sortedLists) { list in
         Button {
-          routerPath.presentedSheet = .listCreate
+          timeline = .list(list: list)
         } label: {
-          Label("account.list.create", systemImage: "plus")
+          Label(list.title, systemImage: "list.bullet")
         }
       }
     }
