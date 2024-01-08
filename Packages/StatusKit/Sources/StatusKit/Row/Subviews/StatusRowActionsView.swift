@@ -177,6 +177,7 @@ struct StatusRowActionsView: View {
                 .padding(.vertical, 6)
             }
             .menuStyle(.button)
+            .buttonStyle(.borderless)
             .foregroundStyle(.secondary)
             .contentShape(Rectangle())
             .accessibilityLabel("status.action.context-menu")
@@ -226,10 +227,10 @@ struct StatusRowActionsView: View {
       .contentShape(Rectangle())
     }
     .buttonStyle(
-      .statusAction(
-        isOn: action.isOn(dataController: statusDataController),
-        tintColor: action.tintColor(theme: theme)
-      )
+        .statusAction(
+          isOn: action.isOn(dataController: statusDataController),
+          tintColor: action.tintColor(theme: theme)
+        )
     )
     .disabled(action == .boost &&
               (viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id))
