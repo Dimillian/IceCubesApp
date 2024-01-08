@@ -62,6 +62,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
       switch nextPageState {
       case .hasNextPage:
         loadingRow
+          .id(UUID().uuidString)
           .onAppear {
             Task {
               await fetcher.fetchNextPage()
@@ -69,6 +70,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
           }
       case .loadingNextPage:
         loadingRow
+          .id(UUID().uuidString)
       case .none:
         EmptyView()
       }
