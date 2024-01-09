@@ -75,9 +75,7 @@ private struct MediaToolBar: ToolbarContent {
   let data: DisplayData
 
   var body: some ToolbarContent {
-    #if !targetEnvironment(macCatalyst)
-      DismissToolbarItem()
-    #endif
+    DismissToolbarItem()
     QuickLookToolbarItem(itemUrl: data.url)
     AltTextToolbarItem(alt: data.description)
     SavePhotoToolbarItem(url: data.url, type: data.type)
@@ -95,6 +93,8 @@ private struct DismissToolbarItem: ToolbarContent {
       } label: {
         Image(systemName: "xmark.circle")
       }
+      .opacity(0)
+      .keyboardShortcut(.cancelAction)
     }
   }
 }

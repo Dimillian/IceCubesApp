@@ -228,12 +228,12 @@ extension StatusEditor {
         postingTimer = nil
         
         if let postStatus {
-          StreamWatcher.shared.emmitEditEvent(for: postStatus)
-          HapticManager.shared.fireHaptic(.notification(.success))
           withAnimation {
             postingProgress = 99.0
           }
           try await Task.sleep(for: .seconds(0.5))
+          StreamWatcher.shared.emmitEditEvent(for: postStatus)
+          HapticManager.shared.fireHaptic(.notification(.success))
         }
         
         if hasExplicitlySelectedLanguage, let selectedLanguage {
