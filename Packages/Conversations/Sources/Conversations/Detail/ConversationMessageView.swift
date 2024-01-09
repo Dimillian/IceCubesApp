@@ -205,7 +205,7 @@ struct ConversationMessageView: View {
     .frame(height: 200)
     .contentShape(Rectangle())
     .onTapGesture {
-#if targetEnvironment(macCatalyst)
+#if targetEnvironment(macCatalyst) || os(visionOS)
       openWindow(value: WindowDestinationMedia.mediaViewer(attachments: [attachement],
                                                            selectedAttachment: attachement))
 #else

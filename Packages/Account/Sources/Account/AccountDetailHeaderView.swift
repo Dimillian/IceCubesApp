@@ -83,7 +83,7 @@ struct AccountDetailHeaderView: View {
         return
       }
       let attachement = MediaAttachment.imageWith(url: account.header)
-      #if targetEnvironment(macCatalyst)
+      #if targetEnvironment(macCatalyst) || os(visionOS)
         openWindow(value: WindowDestinationMedia.mediaViewer(
           attachments: [attachement],
           selectedAttachment: attachement
@@ -120,7 +120,7 @@ struct AccountDetailHeaderView: View {
           return
         }
         let attachement = MediaAttachment.imageWith(url: account.avatar)
-        #if targetEnvironment(macCatalyst)
+        #if targetEnvironment(macCatalyst) || os(visionOS)
           openWindow(value: WindowDestinationMedia.mediaViewer(attachments: [attachement],
                                                                selectedAttachment: attachement))
         #else

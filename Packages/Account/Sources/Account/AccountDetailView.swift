@@ -279,7 +279,7 @@ public struct AccountDetailView: View {
       if !viewModel.isCurrentUser {
         Button {
           if let account = viewModel.account {
-            #if targetEnvironment(macCatalyst)
+            #if targetEnvironment(macCatalyst) || os(visionOS)
               openWindow(value: WindowDestinationEditor.mentionStatusEditor(account: account, visibility: preferences.postVisibility))
             #else
               routerPath.presentedSheet = .mentionStatusEditor(account: account,

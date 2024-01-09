@@ -217,7 +217,7 @@ public struct StatusRowView: View {
       Button("accessibility.status.media-viewer-action.label") {
         HapticManager.shared.fireHaptic(.notification(.success))
         let attachments = viewModel.finalStatus.mediaAttachments
-        #if targetEnvironment(macCatalyst)
+        #if targetEnvironment(macCatalyst) || os(visionOS)
           openWindow(value: WindowDestinationMedia.mediaViewer(
             attachments: attachments,
             selectedAttachment: attachments[0]

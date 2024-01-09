@@ -96,7 +96,7 @@ import SwiftUI
   }
 
   func search() async {
-    guard let client else { return }
+    guard let client, !searchQuery.isEmpty else { return }
     do {
       try await Task.sleep(for: .milliseconds(250))
       var results: SearchResults = try await client.get(endpoint: Search.search(query: searchQuery,

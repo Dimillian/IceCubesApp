@@ -55,7 +55,7 @@ struct StatusRowContextMenu: View {
               systemImage: "bookmark")
       }
       Button {
-        #if targetEnvironment(macCatalyst)
+        #if targetEnvironment(macCatalyst) || os(visionOS)
           openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: viewModel.status))
         #else
           viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
@@ -64,7 +64,7 @@ struct StatusRowContextMenu: View {
         Label("status.action.reply", systemImage: "arrowshape.turn.up.left")
       }
       Button {
-        #if targetEnvironment(macCatalyst)
+        #if targetEnvironment(macCatalyst) || os(visionOS)
           openWindow(value: WindowDestinationEditor.quoteStatusEditor(status: viewModel.status))
         #else
           viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
@@ -172,7 +172,7 @@ struct StatusRowContextMenu: View {
         }
         if currentInstance.isEditSupported {
           Button {
-            #if targetEnvironment(macCatalyst)
+            #if targetEnvironment(macCatalyst) || os(visionOS)
               openWindow(value: WindowDestinationEditor.editStatusEditor(status: viewModel.status.reblogAsAsStatus ?? viewModel.status))
             #else
               viewModel.routerPath.presentedSheet = .editStatusEditor(status: viewModel.status.reblogAsAsStatus ?? viewModel.status)

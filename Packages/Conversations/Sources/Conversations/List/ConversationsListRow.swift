@@ -83,7 +83,7 @@ struct ConversationsListRow: View {
       .accessibilityAction(.magicTap) {
         if let lastStatus = conversation.lastStatus {
           HapticManager.shared.fireHaptic(.notification(.success))
-          #if targetEnvironment(macCatalyst)
+          #if targetEnvironment(macCatalyst) || os(visionOS)
             openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: lastStatus))
           #else
             routerPath.presentedSheet = .replyToStatusEditor(status: lastStatus)
@@ -100,7 +100,7 @@ struct ConversationsListRow: View {
       Button {
         if let lastStatus = conversation.lastStatus {
           HapticManager.shared.fireHaptic(.notification(.success))
-          #if targetEnvironment(macCatalyst)
+          #if targetEnvironment(macCatalyst) || os(visionOS)
             openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: lastStatus))
           #else
             routerPath.presentedSheet = .replyToStatusEditor(status: lastStatus)

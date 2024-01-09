@@ -252,7 +252,7 @@ struct StatusRowActionsView: View {
       switch action {
       case .respond:
         SoundEffectManager.shared.playSound(.share)
-        #if targetEnvironment(macCatalyst)
+        #if targetEnvironment(macCatalyst) || os(visionOS)
           openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status))
         #else
           viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)

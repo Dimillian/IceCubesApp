@@ -107,7 +107,7 @@ public struct StatusRowMediaPreviewView: View {
   }
 
   private func tabAction(for index: Int) {
-    #if targetEnvironment(macCatalyst)
+    #if targetEnvironment(macCatalyst) || os(visionOS)
       openWindow(
         value: WindowDestinationMedia.mediaViewer(
           attachments: attachments,
