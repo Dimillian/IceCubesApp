@@ -2033,8 +2033,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "剧透警告"
+            "state" : "translated",
+            "value" : "内容警告"
           }
         },
         "zh-Hant" : {
@@ -47428,8 +47428,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Recently Used Tags"
+            "state" : "translated",
+            "value" : "最近使用的标签"
           }
         },
         "zh-Hant" : {
@@ -48844,8 +48844,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Mute Videos"
+            "state" : "translated",
+            "value" : "视频静音播放"
           }
         },
         "zh-Hant" : {
@@ -65197,8 +65197,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "剧透警告"
+            "state" : "translated",
+            "value" : "内容警告"
           }
         },
         "zh-Hant" : {
