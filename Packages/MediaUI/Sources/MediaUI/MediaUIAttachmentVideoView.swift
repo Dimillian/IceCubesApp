@@ -60,6 +60,12 @@ import SwiftUI
     isPlaying = true
     player?.play()
   }
+  
+  func preventSleep(_ preventSleep: Bool) {
+    #if !os(visionOS)
+    player?.preventsDisplaySleepDuringVideoPlayback = preventSleep
+    #endif
+  }
 
   deinit {
     NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
@@ -114,6 +120,7 @@ public struct MediaUIAttachmentVideoView: View {
           try? AVAudioSession.sharedInstance().setCategory(.playback, options: .duckOthers)
           try? AVAudioSession.sharedInstance().setActive(true)
         }
+        viewModel.preventSleep(true)
         viewModel.mute(false)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
           if isCompact || !preferences.autoPlayVideo {
@@ -127,6 +134,7 @@ public struct MediaUIAttachmentVideoView: View {
         if isCompact || !preferences.autoPlayVideo {
           viewModel.pause()
         }
+        viewModel.preventSleep(false)
         viewModel.mute(preferences.muteVideo)
         DispatchQueue.global().async {
           try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)

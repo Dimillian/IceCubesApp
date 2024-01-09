@@ -213,8 +213,7 @@ struct StatusRowActionsView: View {
         if !isNarrow,
            let count = action.count(dataController: statusDataController,
                                     isFocused: isFocused,
-                                    theme: theme), !viewModel.isRemote,
-            count > 0
+                                    theme: theme), !viewModel.isRemote
         {
           Text(count, format: .number.notation(.compactName))
             .lineLimit(1)
@@ -223,6 +222,7 @@ struct StatusRowActionsView: View {
             .foregroundColor(Color(UIColor.secondaryLabel))
             .font(.scaledFootnote)
             .monospacedDigit()
+            .opacity(count > 0 ? 1 : 0)
         }
       }
       .padding(.vertical, 6)
