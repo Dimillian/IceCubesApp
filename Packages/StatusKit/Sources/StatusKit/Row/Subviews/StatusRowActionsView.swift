@@ -213,9 +213,12 @@ struct StatusRowActionsView: View {
         if !isNarrow,
            let count = action.count(dataController: statusDataController,
                                     isFocused: isFocused,
-                                    theme: theme), !viewModel.isRemote
+                                    theme: theme), !viewModel.isRemote,
+            count > 0
         {
           Text(count, format: .number.notation(.compactName))
+            .lineLimit(1)
+            .minimumScaleFactor(0.6)
             .contentTransition(.numericText(value: Double(count)))
             .foregroundColor(Color(UIColor.secondaryLabel))
             .font(.scaledFootnote)
