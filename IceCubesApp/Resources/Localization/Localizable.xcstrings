@@ -58556,7 +58556,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "are you sure you want to delete this post?"
+            "value" : "Are you sure you want to delete this post?"
           }
         },
         "de" : {
@@ -58568,13 +58568,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "are you sure you want to delete this post?"
+            "value" : "Are you sure you want to delete this post?"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "are you sure you want to delete this post?"
+            "value" : "Are you sure you want to delete this post?"
           }
         },
         "es" : {
@@ -58592,7 +58592,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "êtes vous sûr de vouloir supprimer ce message ?"
+            "value" : "Êtes vous sûr de vouloir supprimer ce message ?"
           }
         },
         "it" : {
@@ -58616,7 +58616,7 @@
         "nb" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "er du sikker på at du vil slette dette innlegget?"
+            "value" : "Er du sikker på at du vil slette dette innlegget?"
           }
         },
         "nl" : {
@@ -58628,13 +58628,13 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "czy na pewno chcesz usunąć ten post?"
+            "value" : "Czy na pewno chcesz usunąć ten post?"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "tem certeza que deseja excluir esta postagem?"
+            "value" : "Tem certeza que deseja excluir esta postagem?"
           }
         },
         "tr" : {
