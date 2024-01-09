@@ -57,10 +57,20 @@ extension StatusEditor {
         actionsView
       }
       #else
-      HStack(alignment: .center, spacing: 16) {
-        actionsView
+      ViewThatFits {
+        HStack(alignment: .center, spacing: 16) {
+          actionsView
+        }
+        .padding(.horizontal, .layoutPadding)
+        
+        ScrollView(.horizontal) {
+          HStack(alignment: .center, spacing: 16) {
+            actionsView
+          }
+          .padding(.horizontal, .layoutPadding)
+        }
+        .scrollIndicators(.hidden)
       }
-      .padding(.horizontal, .layoutPadding)
       #endif
     }
 
