@@ -8,6 +8,7 @@ import SwiftUI
 
 @MainActor
 public struct StatusRowMediaPreviewView: View {
+  @Environment(\.isPresented) private var isPresented
   @Environment(\.openWindow) private var openWindow
   @Environment(\.extraLeadingInset) private var extraLeadingInset: CGFloat
   @Environment(\.isCompact) private var isCompact: Bool
@@ -31,7 +32,11 @@ public struct StatusRowMediaPreviewView: View {
     {
       return sceneDelegate.windowWidth * 0.80
     }
-    return sceneDelegate.windowWidth
+    if isPresented && UIDevice.current.userInterfaceIdiom == .pad {
+      return sceneDelegate.windowWidth * 0.50
+    } else {
+      return sceneDelegate.windowWidth
+    }
     #endif
   }
 

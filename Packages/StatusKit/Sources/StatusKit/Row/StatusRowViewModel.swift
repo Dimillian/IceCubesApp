@@ -280,8 +280,8 @@ import SwiftUI
 
   func delete() async {
     do {
-      _ = try await client.delete(endpoint: Statuses.status(id: status.id))
       StreamWatcher.shared.emmitDeleteEvent(for: status.id)
+      _ = try await client.delete(endpoint: Statuses.status(id: status.id))
     } catch {}
   }
 

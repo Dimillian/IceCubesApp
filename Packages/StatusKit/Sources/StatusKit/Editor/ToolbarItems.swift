@@ -105,7 +105,6 @@ extension StatusEditor {
     @discardableResult
     private func postStatus(with model: ViewModel, isMainPost: Bool) async -> Status? {
       let status = await model.postStatus()
-
       if status != nil, isMainPost {
         close()
         SoundEffectManager.shared.playSound(.tootSent)

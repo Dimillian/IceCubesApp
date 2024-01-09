@@ -44,6 +44,9 @@ extension StatusEditor {
       NavigationStack {
         ScrollView {
           VStackLayout(spacing: 0) {
+            if mainSEVM.isPosting {
+              ProgressView(value: mainSEVM.postingProgress, total: 100.0)
+            }
             EditorView(
               viewModel: mainSEVM,
               followUpSEVMs: $followUpSEVMs,

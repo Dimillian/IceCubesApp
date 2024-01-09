@@ -87,7 +87,10 @@ extension StatusEditor {
     var spoilerOn: Bool = false
     var spoilerText: String = ""
 
+    var postingProgress: Double = 0.0
+    var postingTimer: Timer?
     var isPosting: Bool = false
+    
     var mediaPickers: [PhotosPickerItem] = [] {
       didSet {
         if mediaPickers.count > 4 {
@@ -185,6 +188,19 @@ extension StatusEditor {
     func postStatus() async -> Status? {
       guard let client else { return nil }
       do {
+        if postingTimer == nil {
+          Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in
+            Task { @MainActor in
+              if self.postingProgress < 100 {
+                self.postingProgress += 0.5
+              }
+              if self.postingProgress >= 100 {
+                self.postingTimer?.invalidate()
+                self.postingTimer = nil
+              }
+            }
+          }
+        }
         isPosting = true
         let postStatus: Status?
         var pollData: StatusData.PollData?
@@ -204,20 +220,27 @@ extension StatusEditor {
         switch mode {
         case .new, .replyTo, .quote, .mention, .shareExtension:
           postStatus = try await client.post(endpoint: Statuses.postStatus(json: data))
-          if let postStatus {
-            StreamWatcher.shared.emmitPostEvent(for: postStatus)
-          }
         case let .edit(status):
           postStatus = try await client.put(endpoint: Statuses.editStatus(id: status.id, json: data))
-          if let postStatus {
-            StreamWatcher.shared.emmitEditEvent(for: postStatus)
-          }
         }
-        HapticManager.shared.fireHaptic(.notification(.success))
+        
+        postingTimer?.invalidate()
+        postingTimer = nil
+        
+        if let postStatus {
+          StreamWatcher.shared.emmitEditEvent(for: postStatus)
+          HapticManager.shared.fireHaptic(.notification(.success))
+          withAnimation {
+            postingProgress = 99.0
+          }
+          try await Task.sleep(for: .seconds(0.5))
+        }
+        
         if hasExplicitlySelectedLanguage, let selectedLanguage {
           preferences?.markLanguageAsSelected(isoCode: selectedLanguage)
         }
         isPosting = false
+        
         return postStatus
       } catch {
         if let error = error as? Models.ServerError {
