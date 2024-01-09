@@ -1943,7 +1943,7 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Inhaltswarnung"
           }
         },
@@ -12506,8 +12506,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit avatar"
+            "state" : "translated",
+            "value" : "Avatar ändern"
           }
         },
         "en" : {
@@ -12982,8 +12982,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit header"
+            "state" : "translated",
+            "value" : "Header ändern"
           }
         },
         "en" : {
@@ -47338,8 +47338,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Recently Used Tags"
+            "state" : "translated",
+            "value" : "Zuletzt verwendete Tags"
           }
         },
         "en" : {
@@ -48754,8 +48754,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Mute Videos"
+            "state" : "translated",
+            "value" : "Videos stummschalten"
           }
         },
         "en" : {
@@ -65107,7 +65107,7 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Inhaltswarnung"
           }
         },
@@ -67756,7 +67756,7 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "%#@count_votes@ von %#@count_voters@"
           },
           "substitutions" : {
