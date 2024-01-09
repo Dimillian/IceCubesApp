@@ -26,8 +26,8 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable {
     if UIDevice.current.userInterfaceIdiom == .pad ||
         UIDevice.current.userInterfaceIdiom == .mac {
       [.timeline, .trending, .federated, .local, .notifications, .mentions, .explore, .messages, .bookmarks, .favorites, .profile, .settings]
-    } else if  UIDevice.current.userInterfaceIdiom == .vision {
-      [.profile, .timeline, .trending, .federated, .local, .notifications, .mentions, .explore, .messages, .settings]
+    } else if UIDevice.current.userInterfaceIdiom == .vision {
+      [.profile, .timeline, .notifications, .mentions, .explore, .messages, .settings]
     } else {
       [.timeline, .notifications, .explore, .messages, .profile]
     }
