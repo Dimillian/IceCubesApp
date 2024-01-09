@@ -36,7 +36,7 @@ extension StatusEditor {
         }
         .frame(height: 24)
         .padding(16)
-        .background(.thinMaterial)
+        .background(.thickMaterial)
         .cornerRadius(8)
         #else
         Divider()

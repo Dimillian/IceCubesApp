@@ -60,8 +60,13 @@ struct TimelineUnreadStatusesView: View {
       }
       .accessibilityLabel("accessibility.tabs.timeline.unread-posts.label-\(observer.pendingStatusesCount)")
       .accessibilityHint("accessibility.tabs.timeline.unread-posts.hint")
+      #if os(visionOS)
       .buttonStyle(.bordered)
       .tint(Material.ultraThick)
+      #else
+      .buttonStyle(.bordered)
+      .background(Material.ultraThick)
+      #endif
       .cornerRadius(8)
       #if !os(visionOS)
       .overlay(
