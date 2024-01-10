@@ -27,6 +27,12 @@
             "value" : ""
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2009,8 +2015,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Ostrzeżenie o spoilerze"
+            "state" : "translated",
+            "value" : "Ostrzeżenie dotyczące treści"
           }
         },
         "pt-BR" : {
@@ -11061,7 +11067,7 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Dodaj konto"
           }
         },
@@ -12572,8 +12578,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit avatar"
+            "state" : "translated",
+            "value" : "Edytuj awatar"
           }
         },
         "pt-BR" : {
@@ -13048,8 +13054,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit header"
+            "state" : "translated",
+            "value" : "Edytuj nagłówek"
           }
         },
         "pt-BR" : {
@@ -39015,7 +39021,7 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Dodaj konto"
           }
         },
@@ -43744,8 +43750,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Max reply indentation: %@"
+            "state" : "translated",
+            "value" : "Max wcięcie odpowiedzi: %@"
           }
         },
         "pt-BR" : {
@@ -44807,8 +44813,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Account on Hover"
+            "state" : "translated",
+            "value" : "Pokazuj konto po najechaniu kursorem"
           }
         },
         "pt-BR" : {
@@ -45044,8 +45050,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show reply indentation"
+            "state" : "translated",
+            "value" : "Pokazuj wcięcie odpowiedzi"
           }
         },
         "pt-BR" : {
@@ -45398,8 +45404,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Secondary status action"
+            "state" : "translated",
+            "value" : "Działanie o statusie drugorzędnym"
           }
         },
         "pt-BR" : {
@@ -47404,8 +47410,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Recently Used Tags"
+            "state" : "translated",
+            "value" : "Ostatnio używane hasztagi"
           }
         },
         "pt-BR" : {
@@ -47641,8 +47647,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Sidebar Customizations"
+            "state" : "translated",
+            "value" : "Personalizacja paska bocznego"
           }
         },
         "pt-BR" : {
@@ -47878,7 +47884,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tabs Customizations"
+            "value" : "Personalizacja zakładek"
           }
         },
         "pt-BR" : {
@@ -48939,8 +48945,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Mute Videos"
+            "state" : "translated",
+            "value" : "Wycisz filmy"
           }
         },
         "pt-BR" : {
@@ -51535,8 +51541,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh disables timeline position saving and caching. It'll always fetch a fresh timeline."
+            "state" : "translated",
+            "value" : "Szybkie odświeżanie wyłącza zapisywanie i buforowanie pozycji w strumieniu. Pobierany będzie zawsze świeży strumień."
           }
         },
         "pt-BR" : {
@@ -56380,7 +56386,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fifth Tab"
+            "value" : "Piąta zakładka"
           }
         },
         "pt-BR" : {
@@ -56498,7 +56504,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "First Tab"
+            "value" : "Pierwsza zakładka"
           }
         },
         "pt-BR" : {
@@ -56616,7 +56622,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fourth Tab"
+            "value" : "Czwarta zakładka"
           }
         },
         "pt-BR" : {
@@ -56734,7 +56740,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Second Tab"
+            "value" : "Druga zakładka"
           }
         },
         "pt-BR" : {
@@ -56852,7 +56858,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Third Tab"
+            "value" : "Trzecia zakładka"
           }
         },
         "pt-BR" : {
@@ -60174,8 +60180,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Select Text"
+            "state" : "translated",
+            "value" : "Wybierz tekst"
           }
         },
         "pt-BR" : {
@@ -63626,8 +63632,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Type your follow-up content here."
+            "state" : "translated",
+            "value" : "Tutaj wpisz swoją dalszą treść"
           }
         },
         "pt-BR" : {
@@ -65292,8 +65298,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Tekst spoilera"
+            "state" : "translated",
+            "value" : "Ostrzeżenie dotyczące treści"
           }
         },
         "pt-BR" : {
@@ -71609,7 +71615,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mentions"
+            "value" : "Wzmianki"
           }
         },
         "pt-BR" : {
@@ -75080,8 +75086,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Resume"
+            "state" : "translated",
+            "value" : "Wznów"
           }
         },
         "pt-BR" : {
