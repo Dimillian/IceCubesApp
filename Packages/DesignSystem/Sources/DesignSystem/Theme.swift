@@ -294,7 +294,9 @@ import SwiftUI
       ConstellationLight(),
       ConstellationDark(),
       ThreadsLight(),
-      ThreadsDark()
+      ThreadsDark(),
+      MozillaLight(),
+      MozillaDark()
     ]
   }
 

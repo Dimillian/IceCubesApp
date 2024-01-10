@@ -28,12 +28,13 @@ struct StatusRowActionsView: View {
   }
   
   var actions: [Action] {
-    switch theme.statusActionSecondary {
-    case .share:
-      return [.respond, .boost, .favorite, .share, .menu]
-    case .bookmark:
-      return [.respond, .boost, .favorite, .bookmark, .menu]
-    }
+//    switch theme.statusActionSecondary {
+//    case .share:
+//      return [.respond, .boost, .favorite, .share, .menu]
+//    case .bookmark:
+//      return [.respond, .boost, .favorite, .bookmark, .menu]
+//    }
+      [.respond, .boost, .favorite, .share]
   }
 
   @MainActor
@@ -43,7 +44,7 @@ struct StatusRowActionsView: View {
     func image(dataController: StatusDataController, privateBoost: Bool = false) -> Image {
       switch self {
       case .respond:
-        return Image(systemName: "arrowshape.turn.up.left")
+          return Image(systemName: "bubble.left.and.bubble.right")
       case .boost:
         if privateBoost {
           if dataController.isReblogged {
@@ -52,9 +53,9 @@ struct StatusRowActionsView: View {
             return Image(systemName: "lock.rotation")
           }
         }
-        return Image(dataController.isReblogged ? "Rocket.Fill" : "Rocket")
+          return Image(systemName: dataController.isReblogged ? "arrow.2.squarepath" : "arrow.2.squarepath")
       case .favorite:
-        return Image(systemName: dataController.isFavorited ? "star.fill" : "star")
+        return Image(systemName: dataController.isFavorited ? "heart.fill" : "heart")
       case .bookmark:
         return Image(systemName: dataController.isBookmarked ? "bookmark.fill" : "bookmark")
       case .share:
@@ -163,7 +164,6 @@ struct StatusRowActionsView: View {
                 .accessibilityLabel("status.action.share-link")
               }
             }
-            Spacer()
           } else if action == .menu {
             Menu {
               StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showTextForSelection)
@@ -183,6 +183,9 @@ struct StatusRowActionsView: View {
             .accessibilityLabel("status.action.context-menu")
           } else {
             actionButton(action: action)
+          }
+
+          if action != actions.last {
             Spacer()
           }
         }
@@ -199,17 +202,10 @@ struct StatusRowActionsView: View {
       handleAction(action: action)
     } label: {
       HStack(spacing: 2) {
-        if action == .boost {
-          action
-            .image(dataController: statusDataController, privateBoost: privateBoost())
-            .imageScale(.medium)
-            .font(.scaledBody)
-            .fontWeight(.black)
-        } else {
-          action
-            .image(dataController: statusDataController, privateBoost: privateBoost())
-            .font(.scaledBody)
-        }
+        action
+              .image(dataController: statusDataController, privateBoost: privateBoost())
+              .font(.scaledBody)
+
         if !isNarrow,
            let count = action.count(dataController: statusDataController,
                                     isFocused: isFocused,
@@ -219,7 +215,7 @@ struct StatusRowActionsView: View {
             .lineLimit(1)
             .minimumScaleFactor(0.6)
             .contentTransition(.numericText(value: Double(count)))
-            .foregroundColor(Color(UIColor.secondaryLabel))
+            .foregroundColor(.black)
             .font(.scaledFootnote)
             .monospacedDigit()
             .opacity(count > 0 ? 1 : 0)
