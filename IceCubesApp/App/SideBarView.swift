@@ -17,11 +17,13 @@ struct SideBarView<Content: View>: View {
   @Environment(StreamWatcher.self) private var watcher
   @Environment(UserPreferences.self) private var userPreferences
   @Environment(RouterPath.self) private var routerPath
-
+  
   @Binding var selectedTab: Tab
   @Binding var popToRootTab: Tab
   var tabs: [Tab]
   @ViewBuilder var content: () -> Content
+  
+  @State private var sidebarTabs = SidebarTabs.shared
 
   private func badgeFor(tab: Tab) -> Int {
     if tab == .notifications, selectedTab != tab,
@@ -107,7 +109,7 @@ struct SideBarView<Content: View>: View {
 
   private var tabsView: some View {
     ForEach(tabs) { tab in
-      if tab != .profile {
+      if tab != .profile && sidebarTabs.isEnabled(tab) {
         Button {
           // ensure keyboard is always dismissed when selecting a tab
           hideKeyboard()

@@ -26,6 +26,7 @@ struct AppView: View {
   
   @State var popToRootTab: Tab = .other
   @State var iosTabs = iOSTabs.shared
+  @State var sidebarTabs = SidebarTabs.shared
   
   var body: some View {
     #if os(visionOS)
@@ -40,10 +41,15 @@ struct AppView: View {
   }
   
   var availableTabs: [Tab] {
-    if UIDevice.current.userInterfaceIdiom == .phone || horizontalSizeClass == .compact {
-      return appAccountsManager.currentClient.isAuth ? iosTabs.tabs : Tab.loggedOutTab()
+    guard appAccountsManager.currentClient.isAuth else {
+      return Tab.loggedOutTab()
     }
-    return appAccountsManager.currentClient.isAuth ? Tab.loggedInTabs() : Tab.loggedOutTab()
+    if UIDevice.current.userInterfaceIdiom == .phone || horizontalSizeClass == .compact {
+      return iosTabs.tabs
+    } else if UIDevice.current.userInterfaceIdiom == .vision {
+      return Tab.visionOSTab()
+    }
+    return sidebarTabs.tabs.map{ $0.tab }
   }
 
   var tabBarView: some View {

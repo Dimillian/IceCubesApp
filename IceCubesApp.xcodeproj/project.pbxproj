@@ -83,6 +83,7 @@
 		9FB143D22983104A00A27BB1 /* glass.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9F2A542D296B1CC0009B2D7C /* glass.wav */; };
 		9FB183222AE9268800BBB692 /* IceCubesApp+Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB183212AE9268800BBB692 /* IceCubesApp+Menu.swift */; };
 		9FB183292AE9449100BBB692 /* IceCubesApp+Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB183282AE9449100BBB692 /* IceCubesApp+Scene.swift */; };
+		9FBA1D352B4E9B7E00ADB568 /* SidebarEntriesSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBA1D342B4E9B7E00ADB568 /* SidebarEntriesSettingsView.swift */; };
 		9FBFE63D292A715500C250E9 /* IceCubesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBFE63C292A715500C250E9 /* IceCubesApp.swift */; };
 		9FBFE64E292A72BD00C250E9 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 9FBFE64D292A72BD00C250E9 /* Network */; };
 		9FC14EF22B494D180006CEE1 /* TagsGroupSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC14EF12B494D180006CEE1 /* TagsGroupSettingView.swift */; };
@@ -227,6 +228,7 @@
 		9FAE4ACA293783B000772766 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		9FB183212AE9268800BBB692 /* IceCubesApp+Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IceCubesApp+Menu.swift"; sourceTree = "<group>"; };
 		9FB183282AE9449100BBB692 /* IceCubesApp+Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IceCubesApp+Scene.swift"; sourceTree = "<group>"; };
+		9FBA1D342B4E9B7E00ADB568 /* SidebarEntriesSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarEntriesSettingsView.swift; sourceTree = "<group>"; };
 		9FBFE639292A715500C250E9 /* Ice Cubes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ice Cubes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FBFE63C292A715500C250E9 /* IceCubesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceCubesApp.swift; sourceTree = "<group>"; };
 		9FC14EF12B494D180006CEE1 /* TagsGroupSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsGroupSettingView.swift; sourceTree = "<group>"; };
@@ -531,6 +533,7 @@
 				9FC14EF12B494D180006CEE1 /* TagsGroupSettingView.swift */,
 				9FC14EF32B494D940006CEE1 /* RemoteTimelinesSettingView.swift */,
 				9FC14EF52B494DFF0006CEE1 /* RecenTagsSettingView.swift */,
+				9FBA1D342B4E9B7E00ADB568 /* SidebarEntriesSettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -852,6 +855,7 @@
 				9F6028562B3F36AE00476078 /* AppView.swift in Sources */,
 				9F55C68D2955968700F94077 /* ExploreTab.swift in Sources */,
 				9F1E8B47298EBCBB00609F80 /* HapticSettingsView.swift in Sources */,
+				9FBA1D352B4E9B7E00ADB568 /* SidebarEntriesSettingsView.swift in Sources */,
 				9F2A5411296A1429009B2D7C /* PushNotificationsView.swift in Sources */,
 				9F6028582B3F3B7600476078 /* ToolbarTab.swift in Sources */,
 			);
