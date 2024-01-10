@@ -164,29 +164,9 @@ struct StatusRowActionsView: View {
                 .accessibilityLabel("status.action.share-link")
               }
             }
-          } else if action == .menu {
-            Menu {
-              StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showTextForSelection)
-                .onAppear {
-                  Task {
-                    await viewModel.loadAuthorRelationship()
-                  }
-                }
-            } label: {
-              Label("", systemImage: "ellipsis")
-                .padding(.vertical, 6)
-            }
-            .menuStyle(.button)
-            .buttonStyle(.borderless)
-            .foregroundStyle(.secondary)
-            .contentShape(Rectangle())
-            .accessibilityLabel("status.action.context-menu")
           } else {
-            actionButton(action: action)
-          }
-
-          if action != actions.last {
-            Spacer()
+              actionButton(action: action)
+              Spacer()
           }
         }
       }
