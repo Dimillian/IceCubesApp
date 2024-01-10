@@ -134,6 +134,7 @@ extension StatusEditor {
           .environment(RouterPath())
           .allowsHitTesting(false)
           .environment(\.isStatusFocused, false)
+          .environment(\.isModal, true)
           .padding(.horizontal, .layoutPadding)
           .padding(.vertical, .statusComponentSpacing)
         
