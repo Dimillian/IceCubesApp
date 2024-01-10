@@ -14,14 +14,14 @@ struct StatusRowHeaderView: View {
 
   let viewModel: StatusRowViewModel
   var body: some View {
-    HStack(alignment: theme.avatarPosition == .top ? .center : .top) {
+      VStack(alignment: .leading) {
       Button {
         viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
       } label: {
         accountView
       }
       .buttonStyle(.plain)
-      Spacer()
+
       if !redactionReasons.contains(.placeholder) {
         dateView
       }
@@ -85,12 +85,12 @@ struct StatusRowHeaderView: View {
 
   private var dateView: some View {
     Group {
-      Text(Image(systemName: viewModel.finalStatus.visibility.iconName)) +
-      Text(" ⸱ ") +
-      Text(viewModel.finalStatus.createdAt.relativeFormatted)
+      Text(viewModel.finalStatus.createdAt.relativeFormatted) +
+      Text(" - ") +
+      Text("@\(viewModel.finalStatus.account.acct)")
     }
-    .font(.scaledFootnote)
+    .font(.subheadline)
     .foregroundStyle(.secondary)
-    .lineLimit(1)
+    .lineLimit(2)
   }
 }
