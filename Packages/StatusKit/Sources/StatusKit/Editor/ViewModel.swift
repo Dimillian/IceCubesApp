@@ -220,21 +220,24 @@ extension StatusEditor {
         switch mode {
         case .new, .replyTo, .quote, .mention, .shareExtension:
           postStatus = try await client.post(endpoint: Statuses.postStatus(json: data))
+          if let postStatus {
+            StreamWatcher.shared.emmitPostEvent(for: postStatus)
+          }
         case let .edit(status):
           postStatus = try await client.put(endpoint: Statuses.editStatus(id: status.id, json: data))
+          if let postStatus {
+            StreamWatcher.shared.emmitEditEvent(for: postStatus)
+          }
         }
         
         postingTimer?.invalidate()
         postingTimer = nil
         
-        if let postStatus {
-          withAnimation {
-            postingProgress = 99.0
-          }
-          try await Task.sleep(for: .seconds(0.5))
-          StreamWatcher.shared.emmitEditEvent(for: postStatus)
-          HapticManager.shared.fireHaptic(.notification(.success))
+        withAnimation {
+          postingProgress = 99.0
         }
+        try await Task.sleep(for: .seconds(0.5))
+        HapticManager.shared.fireHaptic(.notification(.success))
         
         if hasExplicitlySelectedLanguage, let selectedLanguage {
           preferences?.markLanguageAsSelected(isoCode: selectedLanguage)
