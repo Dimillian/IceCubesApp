@@ -31,6 +31,10 @@ public struct StatusRowView: View {
     StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showSelectableText)
   }
 
+  var headerView: some View {
+    StatusRowHeaderView(showTextForSelection: $showSelectableText, viewModel: viewModel)
+  }
+
   public var body: some View {
     HStack(spacing: 0) {
       if !isCompact {
@@ -73,7 +77,7 @@ public struct StatusRowView: View {
             }
             VStack(alignment: .leading, spacing: .statusComponentSpacing) {
               if !isCompact {
-                StatusRowHeaderView(viewModel: viewModel)
+                  headerView
               }
               StatusRowContentView(viewModel: viewModel)
                 .contentShape(Rectangle())

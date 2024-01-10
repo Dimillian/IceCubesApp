@@ -12,6 +12,8 @@ struct StatusRowHeaderView: View {
 
   @Environment(Theme.self) private var theme
 
+  @Binding var showTextForSelection: Bool
+
   let viewModel: StatusRowViewModel
   var body: some View {
       VStack(alignment: .leading) {
@@ -25,11 +27,22 @@ struct StatusRowHeaderView: View {
 
               Spacer()
 
-              Button {
-                  print("Menu")
+              Menu {
+                StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showTextForSelection)
+                  .onAppear {
+                    Task {
+                      await viewModel.loadAuthorRelationship()
+                    }
+                  }
               } label: {
-                  Image(systemName: "ellipsis")
+                Label("", systemImage: "ellipsis")
+                  .padding(.vertical, 6)
               }
+              .menuStyle(.button)
+              .buttonStyle(.borderless)
+              .foregroundStyle(.secondary)
+              .contentShape(Rectangle())
+              .accessibilityLabel("status.action.context-menu")
           }
 
       if !redactionReasons.contains(.placeholder) {
