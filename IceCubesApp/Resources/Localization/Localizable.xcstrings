@@ -20539,7 +20539,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "가장 최근 메시지를"
+            "value" : "마지막 메시지를"
           }
         },
         "nb" : {
@@ -47386,8 +47386,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Recently Used Tags"
+            "state" : "translated",
+            "value" : "최근 사용한 태그"
           }
         },
         "nb" : {
@@ -48802,8 +48802,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Mute Videos"
+            "state" : "translated",
+            "value" : "동영상 음소거 상태로 재생"
           }
         },
         "nb" : {
