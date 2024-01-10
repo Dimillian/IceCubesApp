@@ -30,7 +30,7 @@ struct StatusRowContextMenu: View {
     }
 
     if statusDataController.isReblogged {
-      return Label("status.action.unboost", image: "Rocket")
+      return Label("status.action.unboost", image: "Rocket.fill")
     }
     return Label("status.action.boost", image: "Rocket")
   }
@@ -38,21 +38,27 @@ struct StatusRowContextMenu: View {
   var body: some View {
     if !viewModel.isRemote {
       Button { Task {
+        HapticManager.shared.fireHaptic(.notification(.success))
+        SoundEffectManager.shared.playSound(.favorite)
         await statusDataController.toggleFavorite(remoteStatus: nil)
       } } label: {
-        Label(statusDataController.isFavorited ? "status.action.unfavorite" : "status.action.favorite", systemImage: "star")
+        Label(statusDataController.isFavorited ? "status.action.unfavorite" : "status.action.favorite", systemImage: statusDataController.isFavorited ? "star.fill" : "star")
       }
       Button { Task {
+        HapticManager.shared.fireHaptic(.notification(.success))
+        SoundEffectManager.shared.playSound(.boost)
         await statusDataController.toggleReblog(remoteStatus: nil)
       } } label: {
         boostLabel
       }
       .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != account.account?.id)
       Button { Task {
+        SoundEffectManager.shared.playSound(.bookmark)
+        HapticManager.shared.fireHaptic(.notification(.success))
         await statusDataController.toggleBookmark(remoteStatus: nil)
       } } label: {
         Label(statusDataController.isBookmarked ? "status.action.unbookmark" : "status.action.bookmark",
-              systemImage: "bookmark")
+              systemImage: statusDataController.isBookmarked ? "bookmark.fill" : "bookmark")
       }
       Button {
         #if targetEnvironment(macCatalyst) || os(visionOS)
