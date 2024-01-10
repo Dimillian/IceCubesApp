@@ -15,12 +15,22 @@ struct StatusRowHeaderView: View {
   let viewModel: StatusRowViewModel
   var body: some View {
       VStack(alignment: .leading) {
-      Button {
-        viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
-      } label: {
-        accountView
-      }
-      .buttonStyle(.plain)
+          HStack {
+              Button {
+                  viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
+              } label: {
+                  accountView
+              }
+              .buttonStyle(.plain)
+
+              Spacer()
+
+              Button {
+                  print("Menu")
+              } label: {
+                  Image(systemName: "ellipsis")
+              }
+          }
 
       if !redactionReasons.contains(.placeholder) {
         dateView
