@@ -72,6 +72,7 @@ struct AppView: View {
           .tabItem {
             if userPreferences.showiPhoneTabLabel {
               tab.label
+                .environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
             } else {
               Image(systemName: tab.iconName)
             }

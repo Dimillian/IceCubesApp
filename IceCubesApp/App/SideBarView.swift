@@ -182,6 +182,7 @@ private struct SideBarIcon: View {
       .font(.title2)
       .fontWeight(.medium)
       .foregroundColor(isSelected ? theme.tintColor : theme.labelColor)
+      .symbolVariant(isSelected ? .fill : .none)
       .scaleEffect(isHovered ? 0.8 : 1.0)
       .onHover { isHovered in
         withAnimation(.interpolatingSpring(stiffness: 300, damping: 15)) {
