@@ -151,19 +151,6 @@ import SwiftUI
     recalcCollapse()
   }
 
-  func markSeen() {
-    // called in on appear so we can cache that the status has been seen.
-    if UserPreferences.shared.suppressDupeReblogs, !seen {
-      DispatchQueue.global().async { [weak self] in
-        guard let self else { return }
-        ReblogCache.shared.cache(status, seen: true)
-        Task { @MainActor in
-          self.seen = true
-        }
-      }
-    }
-  }
-
   func navigateToDetail() {
     if isRemote, let url = URL(string: finalStatus.url ?? "") {
       routerPath.navigate(to: .remoteStatusDetail(url: url))

@@ -106,7 +106,6 @@ public struct StatusRowView: View {
       }
     }
     .onAppear {
-      viewModel.markSeen()
       if !reasons.contains(.placeholder) {
         if !isCompact, viewModel.embeddedStatus == nil {
           Task {

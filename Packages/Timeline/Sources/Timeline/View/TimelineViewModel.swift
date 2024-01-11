@@ -205,6 +205,14 @@ extension TimelineViewModel: StatusesFetcher {
     }
   }
   
+  func refreshTimelineContentFilter() async {
+    timelineTask?.cancel()
+    let statuses = await datasource.getFiltered()
+    withAnimation {
+      statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+    }
+  }
+  
   func fetchStatuses(from: Marker.Content) async throws {
     guard let client else { return }
     statusesState = .loading
@@ -213,7 +221,6 @@ extension TimelineViewModel: StatusesFetcher {
                                                                               minId: nil,
                                                                               offset: 0))
 
-    ReblogCache.shared.removeDuplicateReblogs(&statuses)
     StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
 
     await datasource.set(statuses)
@@ -284,7 +291,6 @@ extension TimelineViewModel: StatusesFetcher {
                                                                                 minId: nil,
                                                                                 offset: 0))
 
-      ReblogCache.shared.removeDuplicateReblogs(&statuses)
       StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
 
       await datasource.set(statuses)
@@ -309,7 +315,6 @@ extension TimelineViewModel: StatusesFetcher {
       !ids.contains(where: { $0 == status.id })
     }
 
-    ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
     StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
 
     // If no new statuses, resume streaming and exit.
@@ -401,7 +406,6 @@ extension TimelineViewModel: StatusesFetcher {
       {
         pagesLoaded += 1
 
-        ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
         StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
 
         allStatuses.insert(contentsOf: newStatuses, at: 0)
@@ -424,7 +428,6 @@ extension TimelineViewModel: StatusesFetcher {
                                                                                    minId: nil,
                                                                                    offset: statuses.count))
 
-      ReblogCache.shared.removeDuplicateReblogs(&newStatuses)
 
       await datasource.append(contentOf: newStatuses)
       StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)

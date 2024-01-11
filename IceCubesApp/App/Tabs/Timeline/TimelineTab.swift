@@ -124,7 +124,10 @@ struct TimelineTab: View {
   @ViewBuilder
   private var timelineFilterButton: some View {
     latestOrResumeButtons
+    contentFilterButton
+    Divider()
     pinMenuButton
+    Divider()
     timelineFiltersButtons
     listsFiltersButons
     tagsFiltersButtons
@@ -203,7 +206,6 @@ struct TimelineTab: View {
           }
         }
       }
-      Divider()
     }
   }
   
@@ -225,8 +227,6 @@ struct TimelineTab: View {
         Label("status.action.pin", systemImage: "pin")
       }
     }
-    
-    Divider()
   }
   
   private var timelineFiltersButtons: some View {
@@ -310,6 +310,14 @@ struct TimelineTab: View {
         Label("timeline.filter.add-tag-groups", systemImage: "plus")
       }
     }
+  }
+  
+  private var contentFilterButton: some View {
+    Button(action: {
+      routerPath.presentedSheet = .timelineContentFilter
+    }, label: {
+      Label("timeline.content-filter.title", systemSymbol: .line3HorizontalDecrease)
+    })
   }
 
   private func resetTimelineFilter() {

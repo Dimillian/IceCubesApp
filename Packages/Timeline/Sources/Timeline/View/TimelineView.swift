@@ -20,6 +20,7 @@ public struct TimelineView: View {
 
   @State private var viewModel = TimelineViewModel()
   @State private var prefetcher = TimelineMediaPrefetcher()
+  @State private var contentFilter = TimelineContentFilter.shared
 
   @State private var wasBackgrounded: Bool = false
   @State private var collectionView: UICollectionView?
@@ -165,6 +166,18 @@ public struct TimelineView: View {
     }
     .onChange(of: viewModel.timeline) { _, newValue in
       timeline = newValue
+    }
+    .onChange(of: contentFilter.showReplies) { _, _ in
+      Task { await viewModel.refreshTimelineContentFilter() }
+    }
+    .onChange(of: contentFilter.showBoosts) { _, _ in
+      Task { await viewModel.refreshTimelineContentFilter() }
+    }
+    .onChange(of: contentFilter.showThreads) { _, _ in
+      Task { await viewModel.refreshTimelineContentFilter() }
+    }
+    .onChange(of: contentFilter.showQuotePosts) { _, _ in
+      Task { await viewModel.refreshTimelineContentFilter() }
     }
     .onChange(of: scenePhase) { _, newValue in
       switch newValue {

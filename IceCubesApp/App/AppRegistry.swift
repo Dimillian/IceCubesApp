@@ -114,6 +114,8 @@ extension View {
           ActivityView(image: image, status: status)
         case let .editTagGroup(tagGroup, onSaved):
           EditTagGroupView(tagGroup: tagGroup, onSaved: onSaved)
+        case .timelineContentFilter:
+          NavigationSheet { TimelineContentFilterView() }
         }
       }
       .withEnvironments()
