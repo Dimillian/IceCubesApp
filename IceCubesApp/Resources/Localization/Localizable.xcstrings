@@ -536,7 +536,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is an invalid SFSymbol name"
+            "value" : "%@ ist kein gültiger SFSymbol-Name"
           }
         },
         "en" : {
@@ -47581,8 +47581,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Sidebar Customizations"
+            "state" : "translated",
+            "value" : "Anpassungen Seitenleiste"
           }
         },
         "en" : {
