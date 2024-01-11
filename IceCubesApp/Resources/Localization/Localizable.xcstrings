@@ -2045,7 +2045,7 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "劇透警告"
           }
         }
@@ -47442,8 +47442,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Recently Used Tags"
+            "state" : "translated",
+            "value" : "最近使用過的標籤"
           }
         }
       }
@@ -47679,8 +47679,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Sidebar Customizations"
+            "state" : "translated",
+            "value" : "自定邊欄"
           }
         }
       }
@@ -47916,7 +47916,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "客製化頁籤列"
+            "value" : "自定頁籤列"
           }
         }
       }
@@ -48977,8 +48977,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Mute Videos"
+            "state" : "translated",
+            "value" : "靜音視訊"
           }
         }
       }
@@ -65330,7 +65330,7 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "劇透警告"
           }
         }
@@ -73567,8 +73567,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Content Filter"
+            "state" : "translated",
+            "value" : "內容篩選"
           }
         }
       }
@@ -74396,8 +74396,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Boosts"
+            "state" : "translated",
+            "value" : "顯示轉嘟"
           }
         }
       }
@@ -74515,8 +74515,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Quotes"
+            "state" : "translated",
+            "value" : "顯示引述"
           }
         }
       }
@@ -74634,8 +74634,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Replies"
+            "state" : "translated",
+            "value" : "顯示回覆"
           }
         }
       }
@@ -74753,8 +74753,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Threads"
+            "state" : "translated",
+            "value" : "顯示續帖"
           }
         }
       }
