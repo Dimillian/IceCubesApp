@@ -30,7 +30,6 @@ public enum RemoteTimelineFilter: String, CaseIterable, Hashable, Equatable {
 }
 
 public enum TimelineFilter: Hashable, Equatable, Identifiable {
-  
   case home, local, federated, trending
   case hashtag(tag: String, accountId: String?)
   case tagGroup(title: String, tags: [String], symbolName: String?)
@@ -39,10 +38,14 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
   case latest
   case resume
 
+  public static var mozillaFilters: [TimelineFilter] {
+    [.home, .local, .federated,]
+  }
+
   public var id: String {
     title
   }
-  
+
   public func hash(into hasher: inout Hasher) {
     hasher.combine(title)
   }

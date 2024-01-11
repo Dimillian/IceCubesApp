@@ -47,12 +47,24 @@ public struct TimelineView: View {
   }
 
   public var body: some View {
+      Picker("Feed Source", selection: $timeline) {
+          ForEach(TimelineFilter.mozillaFilters, id: \.self) { filter in
+              Text(filter.localizedTitle())
+          }
+      }
+      .pickerStyle(.segmented)
     ScrollViewReader { proxy in
       ZStack(alignment: .top) {
         List {
           scrollToTopView
           TimelineTagGroupheaderView(group: $selectedTagGroup, timeline: $timeline)
+                .background {
+                    Color.red
+                }
           TimelineTagHeaderView(tag: $viewModel.tag)
+                .background {
+                    Color.blue
+                }
           switch viewModel.timeline {
           case .remoteLocal:
             StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath, isRemote: true)
@@ -109,7 +121,6 @@ public struct TimelineView: View {
       }
     }
     .toolbar {
-      toolbarTitleView
       toolbarTagGroupButton
     }
     .navigationBarTitleDisplayMode(.inline)
