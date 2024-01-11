@@ -83,9 +83,6 @@ import SwiftUI
     }
   }
 
-  @ObservationIgnored
-  private var seen = false
-
   var filter: Filtered? {
     finalStatus.filtered?.first
   }
