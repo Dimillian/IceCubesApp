@@ -3,7 +3,7 @@ import EmojiText
 import Env
 import Models
 import Network
-import Status
+import StatusKit
 import SwiftUI
 
 @MainActor

@@ -7,7 +7,7 @@ import KeychainSwift
 import MediaUI
 import Network
 import RevenueCat
-import Status
+import StatusKit
 import SwiftUI
 import Timeline
 
@@ -18,35 +18,48 @@ struct AppView: View {
   @Environment(Theme.self) private var theme
   @Environment(StreamWatcher.self) private var watcher
   
-  @Environment(\.horizontalSizeClass) var horizontalSizeClass
+  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
   
+
   @Binding var selectedTab: Tab
-  @Binding var sidebarRouterPath: RouterPath
+  @Binding var appRouterPath: RouterPath
   
   @State var popToRootTab: Tab = .other
   @State var iosTabs = iOSTabs.shared
-  @State var sideBarLoadedTabs: Set<Tab> = Set()
+  @State var sidebarTabs = SidebarTabs.shared
   
   var body: some View {
-    if (UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac) &&
-        horizontalSizeClass == .regular {
+    #if os(visionOS)
+    tabBarView
+    #else
+    if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
       sidebarView
     } else {
       tabBarView
     }
+    #endif
   }
   
   var availableTabs: [Tab] {
-    if UIDevice.current.userInterfaceIdiom == .phone || horizontalSizeClass == .compact {
-      return appAccountsManager.currentClient.isAuth ? iosTabs.tabs : Tab.loggedOutTab()
+    guard appAccountsManager.currentClient.isAuth else {
+      return Tab.loggedOutTab()
     }
-    return appAccountsManager.currentClient.isAuth ? Tab.loggedInTabs() : Tab.loggedOutTab()
+    if UIDevice.current.userInterfaceIdiom == .phone || horizontalSizeClass == .compact {
+      return iosTabs.tabs
+    } else if UIDevice.current.userInterfaceIdiom == .vision {
+      return Tab.visionOSTab()
+    }
+    return sidebarTabs.tabs.map{ $0.tab }
   }
 
   var tabBarView: some View {
     TabView(selection: .init(get: {
       selectedTab
     }, set: { newTab in
+      if newTab == .post {
+        appRouterPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
+        return
+      }
       if newTab == selectedTab {
         /// Stupid hack to trigger onChange binding in tab views.
         popToRootTab = .other
@@ -65,6 +78,7 @@ struct AppView: View {
           .tabItem {
             if userPreferences.showiPhoneTabLabel {
               tab.label
+                .environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
             } else {
               Image(systemName: tab.iconName)
             }
@@ -75,6 +89,7 @@ struct AppView: View {
       }
     }
     .id(appAccountsManager.currentClient.id)
+    .withSheetDestinations(sheetDestinations: $appRouterPath.presentedSheet)
   }
 
   private func badgeFor(tab: Tab) -> Int {
@@ -86,43 +101,40 @@ struct AppView: View {
     return 0
   }
   
+  #if !os(visionOS)
   var sidebarView: some View {
     SideBarView(selectedTab: $selectedTab,
                 popToRootTab: $popToRootTab,
                 tabs: availableTabs)
     {
       HStack(spacing: 0) {
-        ZStack {
-          if selectedTab == .profile {
-            ProfileTab(popToRootTab: $popToRootTab)
-          }
+        TabView(selection: $selectedTab) {
           ForEach(availableTabs) { tab in
-            if tab == selectedTab || sideBarLoadedTabs.contains(tab) {
-              tab
-                .makeContentView(selectedTab: $selectedTab, popToRootTab: $popToRootTab)
-                .opacity(tab == selectedTab ? 1 : 0)
-                .transition(.opacity)
-                .id("\(tab)\(appAccountsManager.currentAccount.id)")
-                .onAppear {
-                  sideBarLoadedTabs.insert(tab)
-                }
-            } else {
-              EmptyView()
-            }
+            tab
+              .makeContentView(selectedTab: $selectedTab, popToRootTab: $popToRootTab)
+              .tabItem {
+                tab.label
+              }
+              .tag(tab)
           }
         }
-        if appAccountsManager.currentClient.isAuth,
+        .introspect(.tabView, on: .iOS(.v17)) { (tabview: UITabBarController) in
+          tabview.tabBar.isHidden = horizontalSizeClass == .regular
+          tabview.customizableViewControllers = []
+          tabview.moreNavigationController.isNavigationBarHidden = true
+        }
+        if horizontalSizeClass == .regular,
+           appAccountsManager.currentClient.isAuth,
            userPreferences.showiPadSecondaryColumn
         {
           Divider().edgesIgnoringSafeArea(.all)
           notificationsSecondaryColumn
         }
       }
-    }.onChange(of: appAccountsManager.currentAccount.id) {
-      sideBarLoadedTabs.removeAll()
     }
-    .environment(sidebarRouterPath)
+    .environment(appRouterPath)
   }
+  #endif
 
   var notificationsSecondaryColumn: some View {
     NotificationsTab(selectedTab: .constant(.notifications),
@@ -132,4 +144,3 @@ struct AppView: View {
       .id(appAccountsManager.currentAccount.id)
   }
 }
-

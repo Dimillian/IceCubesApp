@@ -12,8 +12,11 @@ public struct AppAccountView: View {
 
   @State var viewModel: AppAccountViewModel
 
-  public init(viewModel: AppAccountViewModel) {
+  @Binding var isParentPresented: Bool
+  
+  public init(viewModel: AppAccountViewModel, isParentPresented: Binding<Bool>) {
     self.viewModel = viewModel
+    _isParentPresented = isParentPresented
   }
 
   public var body: some View {
@@ -47,8 +50,14 @@ public struct AppAccountView: View {
       if appAccounts.currentAccount.id == viewModel.appAccount.id,
          let account = viewModel.account
       {
-        routerPath.navigate(to: .accountSettingsWithAccount(account: account, appAccount: viewModel.appAccount))
-        HapticManager.shared.fireHaptic(.buttonPress)
+        if viewModel.isInSettings {
+          routerPath.navigate(to: .accountSettingsWithAccount(account: account, appAccount: viewModel.appAccount))
+          HapticManager.shared.fireHaptic(.buttonPress)
+        } else {
+          isParentPresented = false
+          routerPath.navigate(to: .accountDetailWithAccount(account: account))
+          HapticManager.shared.fireHaptic(.buttonPress)
+        }
       } else {
         var transation = Transaction()
         transation.disablesAnimations = true
@@ -100,7 +109,7 @@ public struct AppAccountView: View {
               .foregroundStyle(Color.secondary)
           }
         }
-        if viewModel.isInNavigation {
+        if viewModel.isInSettings {
           Spacer()
           Image(systemName: "chevron.right")
             .foregroundStyle(.secondary)

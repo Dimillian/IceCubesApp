@@ -4,7 +4,7 @@ import Env
 import Models
 import Network
 import Observation
-import Status
+import StatusKit
 import SwiftUI
 
 @Observable class DisplaySettingsLocalValues {

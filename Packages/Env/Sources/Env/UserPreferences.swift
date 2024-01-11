@@ -14,7 +14,7 @@ import SwiftUI
     @AppStorage("is_open_ai_enabled") public var isOpenAIEnabled: Bool = true
 
     @AppStorage("recently_used_languages") public var recentlyUsedLanguages: [String] = []
-    @AppStorage("social_keyboard_composer") public var isSocialKeyboardEnabled: Bool = true
+    @AppStorage("social_keyboard_composer") public var isSocialKeyboardEnabled: Bool = false
 
     @AppStorage("use_instance_content_settings") public var useInstanceContentSettings: Bool = true
     @AppStorage("app_auto_expand_spoilers") public var appAutoExpandSpoilers = false
@@ -23,11 +23,10 @@ import SwiftUI
     @AppStorage("app_default_reply_visibility") public var appDefaultReplyVisibility: Models.Visibility = .pub
     @AppStorage("app_default_posts_sensitive") public var appDefaultPostsSensitive = false
     @AppStorage("autoplay_video") public var autoPlayVideo = true
+    @AppStorage("mute_video") public var muteVideo = true
     @AppStorage("always_use_deepl") public var alwaysUseDeepl = false
     @AppStorage("user_deepl_api_free") public var userDeeplAPIFree = true
     @AppStorage("auto_detect_post_language") public var autoDetectPostLanguage = true
-
-    @AppStorage("suppress_dupe_reblogs") public var suppressDupeReblogs: Bool = false
 
     @AppStorage("inAppBrowserReaderView") public var inAppBrowserReaderView = false
 
@@ -171,6 +170,13 @@ import SwiftUI
     }
   }
 
+  public var muteVideo: Bool {
+    didSet {
+      storage.muteVideo = muteVideo
+    }
+  }
+
+  
   public var alwaysUseDeepl: Bool {
     didSet {
       storage.alwaysUseDeepl = alwaysUseDeepl
@@ -186,12 +192,6 @@ import SwiftUI
   public var autoDetectPostLanguage: Bool {
     didSet {
       storage.autoDetectPostLanguage = autoDetectPostLanguage
-    }
-  }
-
-  public var suppressDupeReblogs: Bool {
-    didSet {
-      storage.suppressDupeReblogs = suppressDupeReblogs
     }
   }
 
@@ -470,7 +470,6 @@ import SwiftUI
     alwaysUseDeepl = storage.alwaysUseDeepl
     userDeeplAPIFree = storage.userDeeplAPIFree
     autoDetectPostLanguage = storage.autoDetectPostLanguage
-    suppressDupeReblogs = storage.suppressDupeReblogs
     inAppBrowserReaderView = storage.inAppBrowserReaderView
     hapticTabSelectionEnabled = storage.hapticTabSelectionEnabled
     hapticTimelineEnabled = storage.hapticTimelineEnabled
@@ -494,6 +493,7 @@ import SwiftUI
     maxReplyIndentation = storage.maxReplyIndentation
     showReplyIndentation = storage.showReplyIndentation
     showAccountPopover = storage.showAccountPopover
+    muteVideo = storage.muteVideo
   }
 }
 

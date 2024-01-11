@@ -13,7 +13,6 @@ import Timeline
 @MainActor
 struct SettingsTabs: View {
   @Environment(\.dismiss) private var dismiss
-  @Environment(\.modelContext) private var context
   @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
   @Environment(PushNotificationsService.self) private var pushNotifications
@@ -32,9 +31,6 @@ struct SettingsTabs: View {
   @Binding var popToRootTab: Tab
 
   let isModal: Bool
-
-  @Query(sort: \LocalTimeline.creationDate, order: .reverse) var localTimelines: [LocalTimeline]
-  @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {
@@ -101,7 +97,7 @@ struct SettingsTabs: View {
                 .tint(.red)
             }
           }
-          AppAccountView(viewModel: .init(appAccount: account))
+          AppAccountView(viewModel: .init(appAccount: account), isParentPresented: .constant(false))
         }
       }
       .onDelete { indexSet in
@@ -149,11 +145,14 @@ struct SettingsTabs: View {
           Label("settings.general.haptic", systemImage: "waveform.path")
         }
       }
-      NavigationLink(destination: remoteLocalTimelinesView) {
+      NavigationLink(destination: RemoteTimelinesSettingView()) {
         Label("settings.general.remote-timelines", systemImage: "dot.radiowaves.right")
       }
-      NavigationLink(destination: tagGroupsView) {
+      NavigationLink(destination: TagsGroupSettingView()) {
         Label("timeline.filter.tag-groups", systemImage: "number")
+      }
+      NavigationLink(destination: RecenTagsSettingView()) {
+        Label("settings.general.recent-tags", systemImage: "clock")
       }
       NavigationLink(destination: ContentSettingsView()) {
         Label("settings.general.content", systemImage: "rectangle.stack")
@@ -164,6 +163,10 @@ struct SettingsTabs: View {
       if UIDevice.current.userInterfaceIdiom == .phone || horizontalSizeClass == .compact {
         NavigationLink(destination: TabbarEntriesSettingsView()) {
           Label("settings.general.tabbarEntries", systemImage: "platter.filled.bottom.iphone")
+        }
+      } else if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
+        NavigationLink(destination: SidebarEntriesSettingsView()) {
+          Label("settings.general.sidebarEntries", systemImage: "sidebar.squares.leading")
         }
       }
       NavigationLink(destination: TranslationSettingsView()) {
@@ -297,73 +300,6 @@ struct SettingsTabs: View {
       } else {
         Text("account.action.logout")
       }
-    }
-  }
-
-  private var tagGroupsView: some View {
-    Form {
-      ForEach(tagGroups) { group in
-        Label(group.title, systemImage: group.symbolName)
-          .onTapGesture {
-            routerPath.presentedSheet = .editTagGroup(tagGroup: group, onSaved: nil)
-          }
-      }
-      .onDelete { indexes in
-        if let index = indexes.first {
-          context.delete(tagGroups[index])
-        }
-      }
-      #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
-      #endif
-
-      Button {
-        routerPath.presentedSheet = .addTagGroup
-      } label: {
-        Label("timeline.filter.add-tag-groups", systemImage: "plus")
-      }
-      #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
-      #endif
-    }
-    .navigationTitle("timeline.filter.tag-groups")
-    .scrollContentBackground(.hidden)
-    #if !os(visionOS)
-    .background(theme.secondaryBackgroundColor)
-    #endif
-    .toolbar {
-      EditButton()
-    }
-  }
-
-  private var remoteLocalTimelinesView: some View {
-    Form {
-      ForEach(localTimelines) { timeline in
-        Text(timeline.instance)
-      }.onDelete { indexes in
-        if let index = indexes.first {
-          context.delete(localTimelines[index])
-        }
-      }
-      #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
-      #endif
-      Button {
-        routerPath.presentedSheet = .addRemoteLocalTimeline
-      } label: {
-        Label("settings.timeline.add", systemImage: "badge.plus.radiowaves.right")
-      }
-      #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
-      #endif
-    }
-    .navigationTitle("settings.general.remote-timelines")
-    .scrollContentBackground(.hidden)
-    #if !os(visionOS)
-    .background(theme.secondaryBackgroundColor)
-    #endif
-    .toolbar {
-      EditButton()
     }
   }
 

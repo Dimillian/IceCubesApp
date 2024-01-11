@@ -93,7 +93,7 @@ public struct AppAccountsSelectorView: View {
       List {
         Section {
           ForEach(accountsViewModel.sorted { $0.acct < $1.acct }, id: \.appAccount.id) { viewModel in
-            AppAccountView(viewModel: viewModel)
+            AppAccountView(viewModel: viewModel, isParentPresented: $isPresented)
           }
           addAccountButton
         }
@@ -174,14 +174,14 @@ public struct AppAccountsSelectorView: View {
         routerPath.presentedSheet = .about
       }
     } label: {
-      Label("account.edit.about", systemImage: "info.circle")
+      Label("settings.app.about", systemImage: "info.circle")
     }
   }
 
   private func refreshAccounts() {
     accountsViewModel = []
     for account in appAccounts.availableAccounts {
-      let viewModel: AppAccountViewModel = .init(appAccount: account, isInNavigation: false, showBadge: true)
+      let viewModel: AppAccountViewModel = .init(appAccount: account, isInSettings: false, showBadge: true)
       accountsViewModel.append(viewModel)
     }
   }

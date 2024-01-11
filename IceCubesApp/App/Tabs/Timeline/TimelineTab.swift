@@ -94,7 +94,7 @@ struct TimelineTab: View {
         lastTimelineFilter = newValue
       }
       switch newValue {
-      case let .tagGroup(title, _):
+      case let .tagGroup(title, _, _):
         if let group = tagGroups.first(where: { $0.title == title}) {
           selectedTagGroup = group
         }
@@ -124,7 +124,10 @@ struct TimelineTab: View {
   @ViewBuilder
   private var timelineFilterButton: some View {
     latestOrResumeButtons
+    contentFilterButton
+    Divider()
     pinMenuButton
+    Divider()
     timelineFiltersButtons
     listsFiltersButons
     tagsFiltersButtons
@@ -203,7 +206,6 @@ struct TimelineTab: View {
           }
         }
       }
-      Divider()
     }
   }
   
@@ -225,8 +227,6 @@ struct TimelineTab: View {
         Label("status.action.pin", systemImage: "pin")
       }
     }
-    
-    Divider()
   }
   
   private var timelineFiltersButtons: some View {
@@ -241,19 +241,17 @@ struct TimelineTab: View {
   
   @ViewBuilder
   private var listsFiltersButons: some View {
-    if !currentAccount.lists.isEmpty {
-      Menu("timeline.filter.lists") {
-        ForEach(currentAccount.sortedLists) { list in
-          Button {
-            timeline = .list(list: list)
-          } label: {
-            Label(list.title, systemImage: "list.bullet")
-          }
-        }
+    Menu("timeline.filter.lists") {
+      Button {
+        routerPath.presentedSheet = .listCreate
+      } label: {
+        Label("account.list.create", systemImage: "plus")
+      }
+      ForEach(currentAccount.sortedLists) { list in
         Button {
-          routerPath.presentedSheet = .listCreate
+          timeline = .list(list: list)
         } label: {
-          Label("account.list.create", systemImage: "plus")
+          Label(list.title, systemImage: "list.bullet")
         }
       }
     }
@@ -297,7 +295,7 @@ struct TimelineTab: View {
     Menu("timeline.filter.tag-groups") {
       ForEach(tagGroups) { group in
         Button {
-          timeline = .tagGroup(title: group.title, tags: group.tags)
+          timeline = .tagGroup(title: group.title, tags: group.tags, symbolName: group.symbolName)
         } label: {
           VStack {
             let icon = group.symbolName.isEmpty ? "number" : group.symbolName
@@ -312,6 +310,14 @@ struct TimelineTab: View {
         Label("timeline.filter.add-tag-groups", systemImage: "plus")
       }
     }
+  }
+  
+  private var contentFilterButton: some View {
+    Button(action: {
+      routerPath.presentedSheet = .timelineContentFilter
+    }, label: {
+      Label("timeline.content-filter.title", systemSymbol: .line3HorizontalDecrease)
+    })
   }
 
   private func resetTimelineFilter() {

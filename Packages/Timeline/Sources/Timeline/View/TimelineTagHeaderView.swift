@@ -8,6 +8,8 @@ struct TimelineTagHeaderView: View {
   
   @Binding var tag: Tag?
   
+  @State var isLoading: Bool = false
+  
   var body: some View {
     if let tag {
       TimelineHeaderView {
@@ -26,15 +28,19 @@ struct TimelineTagHeaderView: View {
           Spacer()
           Button {
             Task {
+              isLoading = true
               if tag.following {
                 self.tag = await account.unfollowTag(id: tag.name)
               } else {
                 self.tag = await account.followTag(id: tag.name)
               }
+              isLoading = false
             }
           } label: {
             Text(tag.following ? "account.follow.following" : "account.follow.follow")
-          }.buttonStyle(.bordered)
+          }
+          .disabled(isLoading)
+          .buttonStyle(.bordered)
         }
       }
     }

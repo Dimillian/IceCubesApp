@@ -37,7 +37,7 @@ struct NotificationsTab: View {
             Button {
               routerPath.presentedSheet = .accountPushNotficationsSettings
             } label: {
-              Image(systemName: "bell.badge")
+              Image(systemName: "bell")
             }
           }
           ToolbarTab(routerPath: $routerPath)

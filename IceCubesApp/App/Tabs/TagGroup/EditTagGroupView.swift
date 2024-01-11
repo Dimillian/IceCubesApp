@@ -103,7 +103,7 @@ struct AddTagGroupView_Previews: PreviewProvider {
     let container = try? ModelContainer(for: TagGroup.self, configurations: ModelConfiguration())
 
     // need to use `sheet` to show `symbolsSuggestionView` in preview
-    return Text("parent view for EditTagGroupView")
+    return Text(verbatim: "parent view for EditTagGroupView")
       .sheet(isPresented: .constant(true)) {
         EditTagGroupView()
           .withEnvironments()

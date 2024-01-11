@@ -4,7 +4,7 @@ import Env
 import Models
 import Network
 import Shimmer
-import Status
+import StatusKit
 import SwiftUI
 
 @MainActor
@@ -63,9 +63,15 @@ public struct AccountDetailView: View {
           ForEach(isCurrentUser ? AccountDetailViewModel.Tab.currentAccountTabs : AccountDetailViewModel.Tab.accountTabs,
                   id: \.self)
           { tab in
-            Image(systemName: tab.iconName)
-              .tag(tab)
-              .accessibilityLabel(tab.accessibilityLabel)
+            if tab == .boosts {
+              Image("Rocket")
+                .tag(tab)
+                .accessibilityLabel(tab.accessibilityLabel)
+            } else {
+              Image(systemName: tab.iconName)
+                .tag(tab)
+                .accessibilityLabel(tab.accessibilityLabel)
+            }
           }
         }
         .pickerStyle(.segmented)
@@ -73,19 +79,12 @@ public struct AccountDetailView: View {
         .applyAccountDetailsRowStyle(theme: theme)
         .id("status")
 
-        switch viewModel.tabState {
-        case .statuses:
-          if viewModel.selectedTab == .statuses {
-            pinnedPostsView
-          }
-          StatusesListView(fetcher: viewModel,
-                           client: client,
-                           routerPath: routerPath)
-        case .followedTags:
-          tagsListView
-        case .lists:
-          listsListView
+        if viewModel.selectedTab == .statuses {
+          pinnedPostsView
         }
+        StatusesListView(fetcher: viewModel,
+                         client: client,
+                         routerPath: routerPath)
       }
       .environment(\.defaultMinListRowHeight, 1)
       .listStyle(.plain)
@@ -112,7 +111,7 @@ public struct AccountDetailView: View {
           group.addTask { await viewModel.fetchAccount() }
           group.addTask {
             if await viewModel.statuses.isEmpty {
-              await viewModel.fetchNewestStatuses()
+              await viewModel.fetchNewestStatuses(pullToRefresh: false)
             }
           }
           if !viewModel.isCurrentUser {
@@ -126,7 +125,7 @@ public struct AccountDetailView: View {
         SoundEffectManager.shared.playSound(.pull)
         HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.3))
         await viewModel.fetchAccount()
-        await viewModel.fetchNewestStatuses()
+        await viewModel.fetchNewestStatuses(pullToRefresh: true)
         HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.7))
         SoundEffectManager.shared.playSound(.refresh)
       }
@@ -236,56 +235,6 @@ public struct AccountDetailView: View {
     }
   }
 
-  private var tagsListView: some View {
-    Group {
-      ForEach(currentAccount.sortedTags) { tag in
-        HStack {
-          TagRowView(tag: tag)
-          Spacer()
-          Image(systemName: "chevron.right")
-        }
-        #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
-        #endif
-      }
-    }.task {
-      await currentAccount.fetchFollowedTags()
-    }
-  }
-
-  private var listsListView: some View {
-    Group {
-      ForEach(currentAccount.sortedLists) { list in
-        NavigationLink(value: RouterDestination.list(list: list)) {
-          Text(list.title)
-            .font(.scaledHeadline)
-            .foregroundColor(theme.labelColor)
-        }
-        #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
-        #endif
-        .contextMenu {
-          Button("account.list.delete", role: .destructive) {
-            Task {
-              await currentAccount.deleteList(list: list)
-            }
-          }
-        }
-      }
-      Button("account.list.create") {
-        routerPath.presentedSheet = .listCreate
-      }
-      .tint(theme.tintColor)
-      .buttonStyle(.borderless)
-      #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
-      #endif
-    }
-    .task {
-      await currentAccount.fetchLists()
-    }
-  }
-
   @ViewBuilder
   private var pinnedPostsView: some View {
     if !viewModel.pinned.isEmpty {
@@ -330,7 +279,7 @@ public struct AccountDetailView: View {
       if !viewModel.isCurrentUser {
         Button {
           if let account = viewModel.account {
-            #if targetEnvironment(macCatalyst)
+            #if targetEnvironment(macCatalyst) || os(visionOS)
               openWindow(value: WindowDestinationEditor.mentionStatusEditor(account: account, visibility: preferences.postVisibility))
             #else
               routerPath.presentedSheet = .mentionStatusEditor(account: account,

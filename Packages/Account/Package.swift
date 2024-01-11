@@ -19,7 +19,7 @@ let package = Package(
   dependencies: [
     .package(name: "Network", path: "../Network"),
     .package(name: "Models", path: "../Models"),
-    .package(name: "Status", path: "../Status"),
+    .package(name: "StatusKit", path: "../StatusKit"),
     .package(name: "Env", path: "../Env"),
   ],
   targets: [
@@ -28,7 +28,7 @@ let package = Package(
       dependencies: [
         .product(name: "Network", package: "Network"),
         .product(name: "Models", package: "Models"),
-        .product(name: "Status", package: "Status"),
+        .product(name: "StatusKit", package: "StatusKit"),
         .product(name: "Env", package: "Env"),
       ],
       swiftSettings: [

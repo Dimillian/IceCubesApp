@@ -2,16 +2,19 @@ import Account
 import DesignSystem
 import Explore
 import Foundation
-import Status
+import StatusKit
 import SwiftUI
 
 @MainActor
-enum Tab: Int, Identifiable, Hashable, CaseIterable {
+enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
   case timeline, notifications, mentions, explore, messages, settings, other
   case trending, federated, local
   case profile
   case bookmarks
   case favorites
+  case post
+  case followedTags
+  case lists
 
   nonisolated var id: Int {
     rawValue
@@ -20,16 +23,9 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable {
   static func loggedOutTab() -> [Tab] {
     [.timeline, .settings]
   }
-
-  static func loggedInTabs() -> [Tab] {
-    if UIDevice.current.userInterfaceIdiom == .pad ||
-        UIDevice.current.userInterfaceIdiom == .mac {
-      [.timeline, .trending, .federated, .local, .notifications, .mentions, .explore, .messages, .bookmarks, .favorites, .settings]
-    } else if  UIDevice.current.userInterfaceIdiom == .vision {
-      [.profile, .timeline, .trending, .federated, .local, .notifications, .mentions, .explore, .messages, .settings]
-    } else {
-      [.timeline, .notifications, .explore, .messages, .profile]
-    }
+  
+  static func visionOSTab() -> [Tab] {
+    [.profile, .timeline, .notifications, .mentions, .explore, .messages, .settings]
   }
 
   @ViewBuilder
@@ -63,6 +59,16 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable {
       NavigationTab {
         AccountStatusesListView(mode: .favorites)
       }
+    case .followedTags:
+      NavigationTab {
+        FollowedTagsListView()
+      }
+    case .lists:
+      NavigationTab {
+        ListsListView()
+      }
+    case .post:
+      VStack { }
     case .other:
       EmptyView()
     }
@@ -95,8 +101,15 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable {
       Label("accessibility.tabs.profile.picker.bookmarks", systemImage: iconName)
     case .favorites:
       Label("accessibility.tabs.profile.picker.favorites", systemImage: iconName)
+    case .post:
+      Label("menu.new-post", systemImage: iconName)
+    case .followedTags:
+      Label("timeline.filter.tags", systemImage: iconName)
+    case .lists:
+      Label("timeline.filter.lists", systemImage: iconName)
     case .other:
       EmptyView()
+      
     }
   }
 
@@ -126,9 +139,60 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable {
       "bookmark"
     case .favorites:
       "star"
+    case .post:
+      "square.and.pencil"
+    case .followedTags:
+      "tag"
+    case .lists:
+      "list.bullet"
     case .other:
       ""
     }
+  }
+}
+
+@Observable
+class SidebarTabs {
+  struct SidedebarTab: Hashable, Codable {
+    let tab: Tab
+    var enabled: Bool
+  }
+  
+  class Storage {
+    @AppStorage("sidebar_tabs") var tabs: [SidedebarTab] = [
+      .init(tab: .timeline, enabled: true),
+      .init(tab: .trending, enabled: true),
+      .init(tab: .federated, enabled: true),
+      .init(tab: .local, enabled: true),
+      .init(tab: .notifications, enabled: true),
+      .init(tab: .mentions, enabled: true),
+      .init(tab: .messages, enabled: true),
+      .init(tab: .explore, enabled: true),
+      .init(tab: .bookmarks, enabled: true),
+      .init(tab: .favorites, enabled: true),
+      .init(tab: .followedTags, enabled: true),
+      .init(tab: .lists, enabled: true),
+      
+      .init(tab: .settings, enabled: true),
+      .init(tab: .profile, enabled: true),
+    ]
+  }
+  
+  private let storage = Storage()
+  public static let shared = SidebarTabs()
+  
+  var tabs: [SidedebarTab] {
+    didSet {
+      storage.tabs = tabs
+    }
+  }
+  
+  func isEnabled(_ tab: Tab) -> Bool {
+    tabs.first(where: { $0.tab.id == tab.id })?.enabled == true
+  }
+  
+  private init() {
+    tabs = storage.tabs
   }
 }
 
