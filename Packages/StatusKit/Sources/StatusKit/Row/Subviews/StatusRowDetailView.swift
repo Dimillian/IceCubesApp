@@ -48,8 +48,8 @@ struct StatusRowDetailView: View {
             Text(editedAt.asDate, style: .date) +
             Text("status.summary.at-time") +
             Text(editedAt.asDate, style: .time)
-          Spacer()
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .onTapGesture {
           viewModel.routerPath.presentedSheet = .statusEditHistory(status: viewModel.status.id)
         }

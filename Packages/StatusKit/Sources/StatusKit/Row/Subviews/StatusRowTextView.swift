@@ -27,8 +27,8 @@ struct StatusRowTextView: View {
           .environment(\.openURL, OpenURLAction { url in
             viewModel.routerPath.handleStatus(status: viewModel.finalStatus, url: url)
           })
-        Spacer()
       }
+      .frame(maxWidth: .infinity, alignment: .leading)
       makeCollapseButton()
     }
   }

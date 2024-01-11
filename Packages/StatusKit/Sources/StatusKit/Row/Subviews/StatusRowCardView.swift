@@ -107,24 +107,23 @@ public struct StatusRowCardView: View {
       .accessibilityHidden(true)
       .frame(height: imageHeight)
     }
-    HStack {
-      VStack(alignment: .leading, spacing: 6) {
-        Text(title)
-          .font(.scaledHeadline)
+    VStack(alignment: .leading, spacing: 6) {
+      Text(title)
+        .font(.scaledHeadline)
+        .lineLimit(3)
+      if let description = card.description, !description.isEmpty {
+        Text(description)
+          .font(.scaledBody)
+          .foregroundStyle(.secondary)
           .lineLimit(3)
-        if let description = card.description, !description.isEmpty {
-          Text(description)
-            .font(.scaledBody)
-            .foregroundStyle(.secondary)
-            .lineLimit(3)
-        }
-        Text(url.host() ?? url.absoluteString)
-          .font(.scaledFootnote)
-          .foregroundColor(theme.tintColor)
-          .lineLimit(1)
       }
-      Spacer()
-    }.padding(16)
+      Text(url.host() ?? url.absoluteString)
+        .font(.scaledFootnote)
+        .foregroundColor(theme.tintColor)
+        .lineLimit(1)
+    }
+    .frame(maxWidth: .infinity, alignment: .leading)
+    .padding(16)
   }
 
   private func iconLinkPreview(_ title: String, _ url: URL) -> some View {
