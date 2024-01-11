@@ -73471,8 +73471,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Content Filter"
+            "state" : "translated",
+            "value" : "Inhaltsfilter"
           }
         },
         "en" : {
@@ -74300,8 +74300,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Boosts"
+            "state" : "translated",
+            "value" : "Boosts zeigen"
           }
         },
         "en" : {
@@ -74419,8 +74419,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Quotes"
+            "state" : "translated",
+            "value" : "Zitate zeigen"
           }
         },
         "en" : {
@@ -74538,8 +74538,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Replies"
+            "state" : "translated",
+            "value" : "Antworten zeigen"
           }
         },
         "en" : {
@@ -74657,8 +74657,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Threads"
+            "state" : "translated",
+            "value" : "Threads zeigen"
           }
         },
         "en" : {
