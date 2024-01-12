@@ -27,6 +27,12 @@
             "value" : ""
           }
         },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -360,7 +366,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is already selected"
+            "value" : "%@ is al geselecteerd"
           }
         },
         "pl" : {
@@ -478,7 +484,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ already exists"
+            "value" : "%@ bestaat al"
           }
         },
         "pl" : {
@@ -596,7 +602,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is an invalid SFSymbol name"
+            "value" : "%@ is geen geldige SFSymbol-naam"
           }
         },
         "pl" : {
@@ -2009,7 +2015,7 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Spoilerwaarschuwing"
           }
         },
@@ -2045,7 +2051,7 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "劇透警告"
           }
         }
@@ -2963,7 +2969,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Animated gif"
+            "value" : "Bewegende GIF"
           }
         },
         "pl" : {
@@ -7960,7 +7966,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visit %@"
+            "value" : "Bezoek %@"
           }
         },
         "pl" : {
@@ -8925,7 +8931,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Block %@"
+            "value" : "Blokkeer %@"
           }
         },
         "pl" : {
@@ -9044,7 +9050,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Do you want to block this user?"
+            "value" : "Wil je deze gebruiker blokkeren?"
           }
         },
         "pl" : {
@@ -10230,7 +10236,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Privacy Settings"
+            "value" : "Privacy-instellingen"
           }
         },
         "pl" : {
@@ -11061,7 +11067,7 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Account toevoegen"
           }
         },
@@ -12572,8 +12578,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit avatar"
+            "state" : "translated",
+            "value" : "Wijzig avatar"
           }
         },
         "pl" : {
@@ -13048,8 +13054,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit header"
+            "state" : "translated",
+            "value" : "Wijzig header"
           }
         },
         "pl" : {
@@ -13644,7 +13650,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Warning: These settings are overwritten by the global content settings"
+            "value" : "Waarschuwing: deze instellingen worden overschreven door de algemene inhoudsinstellingen"
           }
         },
         "pl" : {
@@ -18184,7 +18190,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Symbool taggroep (SFSymbol name)"
+            "value" : "Symbool taggroep (SFSymbol-naam)"
           }
         },
         "pl" : {
@@ -18538,7 +18544,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Duplicated tag"
+            "value" : "Gedupliceerde tag"
           }
         },
         "pl" : {
@@ -18656,7 +18662,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Number of tags is less than 2"
+            "value" : "Het aantal tags is kleiner dan 2"
           }
         },
         "pl" : {
@@ -18774,7 +18780,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Symbol Found"
+            "value" : "Geen symbool gevonden"
           }
         },
         "pl" : {
@@ -19011,7 +19017,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Empty title"
+            "value" : "Lege titel"
           }
         },
         "pl" : {
@@ -19129,7 +19135,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No symbol is selected"
+            "value" : "Geen symbool geselecteerd"
           }
         },
         "pl" : {
@@ -21654,7 +21660,7 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg deelnemers"
+                      "value" : "%arg deelnemer"
                     }
                   },
                   "other" : {
@@ -21674,7 +21680,7 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg posts"
+                      "value" : "%arg post"
                     }
                   },
                   "other" : {
@@ -25633,7 +25639,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "All"
+            "value" : "Alles"
           }
         },
         "pl" : {
@@ -25871,7 +25877,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "People"
+            "value" : "Mensen"
           }
         },
         "pl" : {
@@ -31446,7 +31452,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hide these posts from home"
+            "value" : "Verberg deze posts van start"
           }
         },
         "pl" : {
@@ -39015,7 +39021,7 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Account toevoegen"
           }
         },
@@ -43746,8 +43752,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Max reply indentation: %@"
+            "state" : "translated",
+            "value" : "Max. inspringen voor antwoorden: %@"
           }
         },
         "pl" : {
@@ -44809,8 +44815,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Account on Hover"
+            "state" : "translated",
+            "value" : "Toon account bij aanwijzen"
           }
         },
         "pl" : {
@@ -45046,8 +45052,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show reply indentation"
+            "state" : "translated",
+            "value" : "Inspringen voor antwoorden"
           }
         },
         "pl" : {
@@ -45400,8 +45406,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Secondary status action"
+            "state" : "translated",
+            "value" : "Secundaire statusactie"
           }
         },
         "pl" : {
@@ -47406,8 +47412,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Recently Used Tags"
+            "state" : "translated",
+            "value" : "Onlangs gebruikte tags"
           }
         },
         "pl" : {
@@ -47442,8 +47448,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Recently Used Tags"
+            "state" : "translated",
+            "value" : "最近使用過的標籤"
           }
         }
       }
@@ -47643,8 +47649,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Sidebar Customizations"
+            "state" : "translated",
+            "value" : "Navigatiekolom-aanpassingen"
           }
         },
         "pl" : {
@@ -47679,8 +47685,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Sidebar Customizations"
+            "state" : "translated",
+            "value" : "自定邊欄"
           }
         }
       }
@@ -47916,7 +47922,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "客製化頁籤列"
+            "value" : "自定頁籤列"
           }
         }
       }
@@ -48705,8 +48711,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh"
+            "state" : "translated",
+            "value" : "Snel vernieuwen"
           }
         },
         "pl" : {
@@ -48941,8 +48947,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Mute Videos"
+            "state" : "translated",
+            "value" : "Video’s dempen"
           }
         },
         "pl" : {
@@ -48977,8 +48983,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Mute Videos"
+            "state" : "translated",
+            "value" : "靜音視訊"
           }
         }
       }
@@ -51537,8 +51543,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh disables timeline position saving and caching. It'll always fetch a fresh timeline."
+            "state" : "translated",
+            "value" : "Snel vernieuwen schakelt het bewaren van de tijdlijnpositie en caching uit. Er wordt altijd een nieuwe tijdlijn opgehaald."
           }
         },
         "pl" : {
@@ -56382,7 +56388,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fifth Tab"
+            "value" : "Vijfde tabblad"
           }
         },
         "pl" : {
@@ -56500,7 +56506,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "First Tab"
+            "value" : "Eerste tabblad"
           }
         },
         "pl" : {
@@ -56618,7 +56624,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fourth Tab"
+            "value" : "Vierde tabblad"
           }
         },
         "pl" : {
@@ -56736,7 +56742,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Second Tab"
+            "value" : "Tweede tabblad"
           }
         },
         "pl" : {
@@ -56854,7 +56860,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Third Tab"
+            "value" : "Derde tabblad"
           }
         },
         "pl" : {
@@ -60176,8 +60182,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Select Text"
+            "state" : "translated",
+            "value" : "Selecteer tekst"
           }
         },
         "pl" : {
@@ -63628,8 +63634,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Type your follow-up content here."
+            "state" : "translated",
+            "value" : "Typ hier je follow-up-inhoud."
           }
         },
         "pl" : {
@@ -64342,8 +64348,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "🤖 Generate description"
+            "state" : "translated",
+            "value" : "🤖 Genereer omschrijving"
           }
         },
         "pl" : {
@@ -65294,8 +65300,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Spoilertekst"
+            "state" : "translated",
+            "value" : "Waarschuwing gevoelig materiaal"
           }
         },
         "pl" : {
@@ -65330,7 +65336,7 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "劇透警告"
           }
         }
@@ -65890,7 +65896,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Error while posting"
+            "value" : "Fout tijdens posten"
           }
         },
         "pl" : {
@@ -68351,7 +68357,7 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg stemmers"
+                      "value" : "%arg stemmer"
                     }
                   },
                   "other" : {
@@ -68371,7 +68377,7 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg stemmen"
+                      "value" : "%arg stem"
                     }
                   },
                   "other" : {
@@ -69113,8 +69119,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Continues a thread"
+            "state" : "translated",
+            "value" : "Vervolgt een thread"
           }
         },
         "pl" : {
@@ -72438,7 +72444,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add or remove tag from tag groups"
+            "value" : "Tags toevoegen aan of verwijderen uit taggroepen"
           }
         },
         "pl" : {
@@ -73471,8 +73477,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Content Filter"
+            "state" : "translated",
+            "value" : "Inhaltsfilter"
           }
         },
         "en" : {
@@ -73531,14 +73537,14 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Content Filter"
+            "state" : "translated",
+            "value" : "Inhoudfilter"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Content Filter"
+            "state" : "translated",
+            "value" : "Filtr zawartości"
           }
         },
         "pt-BR" : {
@@ -73567,8 +73573,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Content Filter"
+            "state" : "translated",
+            "value" : "內容篩選"
           }
         }
       }
@@ -74300,8 +74306,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Boosts"
+            "state" : "translated",
+            "value" : "Boosts zeigen"
           }
         },
         "en" : {
@@ -74360,14 +74366,14 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Boosts"
+            "state" : "translated",
+            "value" : "Toon boosts"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Boosts"
+            "state" : "translated",
+            "value" : "Pokazuj podbicia"
           }
         },
         "pt-BR" : {
@@ -74396,8 +74402,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Boosts"
+            "state" : "translated",
+            "value" : "顯示轉嘟"
           }
         }
       }
@@ -74419,8 +74425,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Quotes"
+            "state" : "translated",
+            "value" : "Zitate zeigen"
           }
         },
         "en" : {
@@ -74479,14 +74485,14 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Quotes"
+            "state" : "translated",
+            "value" : "Toon citaten"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Quotes"
+            "state" : "translated",
+            "value" : "Pokazuj cytaty"
           }
         },
         "pt-BR" : {
@@ -74515,8 +74521,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Quotes"
+            "state" : "translated",
+            "value" : "顯示引述"
           }
         }
       }
@@ -74538,8 +74544,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Replies"
+            "state" : "translated",
+            "value" : "Antworten zeigen"
           }
         },
         "en" : {
@@ -74598,14 +74604,14 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Replies"
+            "state" : "translated",
+            "value" : "Toon antwoorden"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Replies"
+            "state" : "translated",
+            "value" : "Pokazuj odpowiedzi"
           }
         },
         "pt-BR" : {
@@ -74634,8 +74640,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Replies"
+            "state" : "translated",
+            "value" : "顯示回覆"
           }
         }
       }
@@ -74657,8 +74663,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Threads"
+            "state" : "translated",
+            "value" : "Threads zeigen"
           }
         },
         "en" : {
@@ -74717,14 +74723,14 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Threads"
+            "state" : "translated",
+            "value" : "Toon threads"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Threads"
+            "state" : "translated",
+            "value" : "Pokazuj wątki"
           }
         },
         "pt-BR" : {
@@ -74753,8 +74759,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Threads"
+            "state" : "translated",
+            "value" : "顯示續帖"
           }
         }
       }
@@ -74836,7 +74842,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag Groups"
+            "value" : "Taggroepen"
           }
         },
         "pl" : {
@@ -75676,8 +75682,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Resume"
+            "state" : "translated",
+            "value" : "Hervat"
           }
         },
         "pl" : {
