@@ -16,12 +16,6 @@ struct ToolbarTab: ToolbarContent {
     if !isSecondaryColumn {
       statusEditorToolbarItem(routerPath: routerPath,
                               visibility: userPreferences.postVisibility)
-      if UIDevice.current.userInterfaceIdiom != .pad ||
-          (UIDevice.current.userInterfaceIdiom == .pad && horizontalSizeClass == .compact) {
-        ToolbarItem(placement: .navigationBarLeading) {
-          AppAccountsSelectorView(routerPath: routerPath)
-        }
-      }
     }
     if UIDevice.current.userInterfaceIdiom == .pad && horizontalSizeClass == .regular {
       if (!isSecondaryColumn && !userPreferences.showiPadSecondaryColumn) || isSecondaryColumn {
