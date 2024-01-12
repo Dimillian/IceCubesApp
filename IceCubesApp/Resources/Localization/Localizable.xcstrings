@@ -1979,7 +1979,7 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Edukiari buruzko oharra"
           }
         },
@@ -47376,8 +47376,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Recently Used Tags"
+            "state" : "translated",
+            "value" : "Berriki erabilitako traolak"
           }
         },
         "fr" : {
@@ -47613,8 +47613,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Sidebar Customizations"
+            "state" : "translated",
+            "value" : "Albo-barraren pertsonalizazioa"
           }
         },
         "fr" : {
@@ -48911,8 +48911,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Mute Videos"
+            "state" : "translated",
+            "value" : "Mututu bideoak"
           }
         },
         "fr" : {
@@ -65264,7 +65264,7 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Edukiari buruzko oharra"
           }
         },
@@ -73501,8 +73501,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Content Filter"
+            "state" : "translated",
+            "value" : "Edukiaren iragazkiak"
           }
         },
         "fr" : {
@@ -74330,8 +74330,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Boosts"
+            "state" : "translated",
+            "value" : "Erakutsi bultzadak"
           }
         },
         "fr" : {
@@ -74449,8 +74449,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Quotes"
+            "state" : "translated",
+            "value" : "Erakutsi aipuak"
           }
         },
         "fr" : {
@@ -74568,8 +74568,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Replies"
+            "state" : "translated",
+            "value" : "Erakutsi erantzunak"
           }
         },
         "fr" : {
@@ -74687,8 +74687,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Threads"
+            "state" : "translated",
+            "value" : "Erakutsi hariak"
           }
         },
         "fr" : {
