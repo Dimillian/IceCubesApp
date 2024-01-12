@@ -107,7 +107,7 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
     case .favorites:
       Label("accessibility.tabs.profile.picker.favorites", systemImage: iconName)
     case .post:
-      Image(systemName: iconName)
+        Image(iconName)
     case .followedTags:
       Label("timeline.filter.tags", systemImage: iconName)
     case .lists:
@@ -147,7 +147,7 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
     case .favorites:
       "star"
     case .post:
-      "square.and.pencil"
+      "hexagonPlus"
     case .followedTags:
       "tag"
     case .lists:
