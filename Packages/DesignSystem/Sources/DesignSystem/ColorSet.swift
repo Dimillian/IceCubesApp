@@ -208,7 +208,7 @@ public struct ThreadsLight: ColorSet {
 public struct MozillaLight: ColorSet {
   public var name: ColorSetName = .mozillaLight
   public var scheme: ColorScheme = .light
-  public var tintColor: Color = .init(hex: 0x592ACB)
+  public var tintColor: Color = .init(hex: 0x7542E5)
   public var primaryBackgroundColor: Color = .init(hex: 0xFFFFFF)
   public var secondaryBackgroundColor: Color = .init(hex: 0xFFFFFF)
   public var labelColor: Color = .black
@@ -219,7 +219,7 @@ public struct MozillaLight: ColorSet {
 public struct MozillaDark: ColorSet {
   public var name: ColorSetName = .mozillaDark
   public var scheme: ColorScheme = .dark
-  public var tintColor: Color = .init(hex: 0x592ACB)
+  public var tintColor: Color = .init(hex: 0xCB9EFF)
   public var primaryBackgroundColor: Color = .init(hex: 0x101010)
   public var secondaryBackgroundColor: Color = .init(hex: 0x181818)
   public var labelColor: Color = .init(hex: 0xE2E4E2)

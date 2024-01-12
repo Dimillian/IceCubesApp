@@ -3,6 +3,16 @@
     {
       "filename" : "HexagonPlus.svg",
       "idiom" : "universal"
+    },
+    {
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ],
+      "filename" : "HexagonPlusDarkMode.svg",
+      "idiom" : "universal"
     }
   ],
   "info" : {
