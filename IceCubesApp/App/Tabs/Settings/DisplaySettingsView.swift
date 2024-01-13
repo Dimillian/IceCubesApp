@@ -243,7 +243,7 @@ struct DisplaySettingsView: View {
     @Bindable var userPreferences = userPreferences
 
     if UIDevice.current.userInterfaceIdiom == .pad {
-      Section("iPad") {
+      Section("settings.display.section.platform") {
         Toggle("settings.display.show-ipad-column", isOn: $userPreferences.showiPadSecondaryColumn)
       }
       #if !os(visionOS)
