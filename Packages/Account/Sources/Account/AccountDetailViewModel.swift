@@ -260,7 +260,7 @@ import SwiftUI
 
   func handleEvent(event: any StreamEvent, currentAccount: CurrentAccount) {
     if let event = event as? StreamEventUpdate {
-      if event.status.account.id == currentAccount.account?.id {
+      if event.status.account.id == currentAccount.account?.id, selectedTab == .statuses {
         statuses.insert(event.status, at: 0)
         statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
       }
