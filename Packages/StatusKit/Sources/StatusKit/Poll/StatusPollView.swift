@@ -103,15 +103,23 @@ public struct StatusPollView: View {
         .accessibilityAddTraits(isInteractive ? [] : .isStaticText)
         .accessibilityRemoveTraits(isInteractive ? [] : .isButton)
       }
-      if !viewModel.poll.expired, !(viewModel.poll.voted ?? false), !viewModel.votes.isEmpty {
-        Button("status.poll.send") {
-          Task {
-            do {
-              await viewModel.postVotes()
+      if !viewModel.poll.expired, !(viewModel.poll.voted ?? false) {
+        HStack {
+          if !viewModel.votes.isEmpty {
+            Button("status.poll.send") {
+              Task {
+                do {
+                  await viewModel.postVotes()
+                }
+              }
             }
+            .buttonStyle(.borderedProminent)
           }
+          Button(viewModel.showResults ? "status.poll.hide-results" : "status.poll.show-results") {
+            viewModel.showResults.toggle()
+          }
+          .buttonStyle(.bordered)
         }
-        .buttonStyle(.bordered)
       }
       footerView
 

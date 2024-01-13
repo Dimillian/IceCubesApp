@@ -67603,6 +67603,17 @@
         }
       }
     },
+    "status.poll.hide-results" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide Results"
+          }
+        }
+      }
+    },
     "status.poll.n-votes %lld" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -68919,6 +68930,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "投票"
+          }
+        }
+      }
+    },
+    "status.poll.show-results" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Results"
           }
         }
       }
