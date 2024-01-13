@@ -94,6 +94,7 @@ public struct StatusPollView: View {
               Text("\(percentForOption(option: option))%")
                 .font(.scaledSubheadline)
             }
+            .frame(height: .pollBarHeight)
           }
         }
         .accessibilityElement(children: .combine)
@@ -103,15 +104,25 @@ public struct StatusPollView: View {
         .accessibilityAddTraits(isInteractive ? [] : .isStaticText)
         .accessibilityRemoveTraits(isInteractive ? [] : .isButton)
       }
-      if !viewModel.poll.expired, !(viewModel.poll.voted ?? false), !viewModel.votes.isEmpty {
-        Button("status.poll.send") {
-          Task {
-            do {
-              await viewModel.postVotes()
+      if !viewModel.poll.expired, !(viewModel.poll.voted ?? false) {
+        HStack {
+          if !viewModel.votes.isEmpty {
+            Button("status.poll.send") {
+              Task {
+                do {
+                  await viewModel.postVotes()
+                }
+              }
+            }
+            .buttonStyle(.borderedProminent)
+          }
+          Button(viewModel.showResults ? "status.poll.hide-results" : "status.poll.show-results") {
+            withAnimation {
+              viewModel.showResults.toggle()
             }
           }
+          .buttonStyle(.bordered)
         }
-        .buttonStyle(.bordered)
       }
       footerView
 
@@ -181,6 +192,8 @@ public struct StatusPollView: View {
                     Spacer()
                   }
                 }
+                .transition(.asymmetric(insertion: .push(from: .leading),
+                                        removal: .push(from: .trailing)))
               }
             }
             .foregroundColor(theme.tintColor.opacity(0.40))

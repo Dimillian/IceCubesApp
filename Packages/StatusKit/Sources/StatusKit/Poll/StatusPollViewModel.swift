@@ -11,10 +11,7 @@ import SwiftUI
 
   var poll: Poll
   var votes: [Int] = []
-
-  var showResults: Bool {
-    poll.ownVotes?.isEmpty == false || poll.expired
-  }
+  var showResults: Bool = false
 
   public init(poll: Poll) {
     self.poll = poll
@@ -25,6 +22,7 @@ import SwiftUI
     guard let client else { return }
     do {
       poll = try await client.get(endpoint: Polls.poll(id: poll.id))
+      showResults = poll.ownVotes?.isEmpty == false || poll.expired
       votes = poll.ownVotes ?? []
     } catch {}
   }
@@ -35,6 +33,7 @@ import SwiftUI
       poll = try await client.post(endpoint: Polls.vote(id: poll.id, votes: votes))
       withAnimation {
         votes = poll.ownVotes ?? []
+        showResults = true
       }
     } catch {
       print(error)
