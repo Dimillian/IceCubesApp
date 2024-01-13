@@ -33,6 +33,7 @@ import SwiftUI
       poll = try await client.post(endpoint: Polls.vote(id: poll.id, votes: votes))
       withAnimation {
         votes = poll.ownVotes ?? []
+        showResults = true
       }
     } catch {
       print(error)

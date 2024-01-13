@@ -94,6 +94,7 @@ public struct StatusPollView: View {
               Text("\(percentForOption(option: option))%")
                 .font(.scaledSubheadline)
             }
+            .frame(height: .pollBarHeight)
           }
         }
         .accessibilityElement(children: .combine)
@@ -116,7 +117,9 @@ public struct StatusPollView: View {
             .buttonStyle(.borderedProminent)
           }
           Button(viewModel.showResults ? "status.poll.hide-results" : "status.poll.show-results") {
-            viewModel.showResults.toggle()
+            withAnimation {
+              viewModel.showResults.toggle()
+            }
           }
           .buttonStyle(.bordered)
         }
@@ -189,6 +192,8 @@ public struct StatusPollView: View {
                     Spacer()
                   }
                 }
+                .transition(.asymmetric(insertion: .push(from: .leading),
+                                        removal: .push(from: .trailing)))
               }
             }
             .foregroundColor(theme.tintColor.opacity(0.40))
