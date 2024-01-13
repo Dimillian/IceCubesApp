@@ -44503,6 +44503,581 @@
         }
       }
     },
+    "settings.display.section.platform" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "be" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "ca" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "de" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "en-GB" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "es" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "eu" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "fr" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "it" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "ja" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "ko" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "nb" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "nl" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "pl" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "pt-BR" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "tr" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "uk" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "zh-Hans" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "zh-Hant" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "settings.display.section.theme" : {
       "localizations" : {
         "be" : {
