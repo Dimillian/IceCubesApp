@@ -67686,8 +67686,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Hide Results"
+            "state" : "translated",
+            "value" : "Ukryj wyniki"
           }
         },
         "pt-BR" : {
@@ -69125,8 +69125,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Results"
+            "state" : "translated",
+            "value" : "Pokaż wyniki"
           }
         },
         "pt-BR" : {
