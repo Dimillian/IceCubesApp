@@ -258,6 +258,22 @@ import SwiftUI
 
   public static let shared = Theme()
 
+  public func restoreDefault() {
+    applySet(set: themeStorage.selectedScheme == .dark ? .iceCubeDark : .iceCubeLight)
+    isThemePreviouslySet = true
+    avatarPosition = .leading
+    avatarShape = .circle
+    storedSet = selectedSet
+    statusActionsDisplay = .full
+    statusDisplayStyle = .large
+    followSystemColorScheme = true
+    displayFullUsername = false
+    lineSpacing = 1.2
+    fontSizeScale = 1
+    chosenFontData = nil
+    statusActionSecondary = .share
+  }
+  
   private init() {
     isThemePreviouslySet = themeStorage.isThemePreviouslySet
     selectedScheme = themeStorage.selectedScheme
