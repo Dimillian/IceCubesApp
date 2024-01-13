@@ -47679,8 +47679,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Sidebar Customizations"
+            "state" : "translated",
+            "value" : "边栏自定义"
           }
         },
         "zh-Hant" : {
@@ -73567,8 +73567,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Content Filter"
+            "state" : "translated",
+            "value" : "内容筛选"
           }
         },
         "zh-Hant" : {
@@ -74396,8 +74396,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Boosts"
+            "state" : "translated",
+            "value" : "显示转发"
           }
         },
         "zh-Hant" : {
@@ -74515,8 +74515,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Quotes"
+            "state" : "translated",
+            "value" : "显示引用"
           }
         },
         "zh-Hant" : {
@@ -74634,8 +74634,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Replies"
+            "state" : "translated",
+            "value" : "显示回复"
           }
         },
         "zh-Hant" : {
@@ -74753,8 +74753,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Threads"
+            "state" : "translated",
+            "value" : "显示续接嘟文"
           }
         },
         "zh-Hant" : {
