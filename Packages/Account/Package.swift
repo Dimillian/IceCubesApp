@@ -21,6 +21,7 @@ let package = Package(
     .package(name: "Models", path: "../Models"),
     .package(name: "StatusKit", path: "../StatusKit"),
     .package(name: "Env", path: "../Env"),
+    .package(url: "https://github.com/Dean151/ButtonKit", from: "0.1.1"),
   ],
   targets: [
     .target(
@@ -30,6 +31,7 @@ let package = Package(
         .product(name: "Models", package: "Models"),
         .product(name: "StatusKit", package: "StatusKit"),
         .product(name: "Env", package: "Env"),
+        .product(name: "ButtonKit", package: "ButtonKit")
       ],
       swiftSettings: [
         .enableExperimentalFeature("StrictConcurrency"),
