@@ -1973,8 +1973,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Advertencia"
+            "state" : "translated",
+            "value" : "Advertencia de contenido"
           }
         },
         "eu" : {
@@ -47707,8 +47707,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Recently Used Tags"
+            "state" : "translated",
+            "value" : "Etiquetas usadas recientemente"
           }
         },
         "eu" : {
@@ -47944,8 +47944,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Sidebar Customizations"
+            "state" : "translated",
+            "value" : "Personalizaciones de la Barra Lateral"
           }
         },
         "eu" : {
@@ -49242,8 +49242,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Mute Videos"
+            "state" : "translated",
+            "value" : "Silenciar Vídeos"
           }
         },
         "eu" : {
@@ -65595,8 +65595,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Escribe tu advertencia aquí"
+            "state" : "translated",
+            "value" : "Aviso de contenido"
           }
         },
         "eu" : {
@@ -67975,8 +67975,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Hide Results"
+            "state" : "translated",
+            "value" : "Ocultar Resultados"
           }
         },
         "eu" : {
@@ -69414,8 +69414,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Results"
+            "state" : "translated",
+            "value" : "Mostrar resultados"
           }
         },
         "eu" : {
@@ -74070,8 +74070,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Content Filter"
+            "state" : "translated",
+            "value" : "Filtro de contenido"
           }
         },
         "eu" : {
@@ -74899,8 +74899,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Boosts"
+            "state" : "translated",
+            "value" : "Mostrar Boosts"
           }
         },
         "eu" : {
@@ -75018,8 +75018,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Quotes"
+            "state" : "translated",
+            "value" : "Mostrar Citas"
           }
         },
         "eu" : {
@@ -75137,8 +75137,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Replies"
+            "state" : "translated",
+            "value" : "Mostrar Respuestas"
           }
         },
         "eu" : {
@@ -75256,8 +75256,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Threads"
+            "state" : "translated",
+            "value" : "Mostrar Hilos"
           }
         },
         "eu" : {
