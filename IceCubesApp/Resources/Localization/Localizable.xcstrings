@@ -67957,8 +67957,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Hide Results"
+            "state" : "translated",
+            "value" : "Ergebnisse verstecken"
           }
         },
         "en" : {
@@ -69396,8 +69396,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Results"
+            "state" : "translated",
+            "value" : "Ergebnisse zeigen"
           }
         },
         "en" : {
