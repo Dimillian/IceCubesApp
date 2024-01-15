@@ -21,6 +21,12 @@
             "value" : ""
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -348,7 +354,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is already selected"
+            "value" : "%@はすでに選択されています"
           }
         },
         "ko" : {
@@ -466,7 +472,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ already exists"
+            "value" : "%@はもう存在しています"
           }
         },
         "ko" : {
@@ -584,7 +590,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is an invalid SFSymbol name"
+            "value" : "%@は無効な SFSymbol 名です"
           }
         },
         "ko" : {
@@ -1997,7 +2003,7 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "ネタバレを警告"
           }
         },
@@ -8913,7 +8919,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Block %@"
+            "value" : "%@をブロック"
           }
         },
         "ko" : {
@@ -9032,7 +9038,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Do you want to block this user?"
+            "value" : "このユーザーをブロックしますか？"
           }
         },
         "ko" : {
@@ -10218,7 +10224,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Privacy Settings"
+            "value" : "プライバシー設定"
           }
         },
         "ko" : {
@@ -11049,7 +11055,7 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "アカウントの追加"
           }
         },
@@ -12560,8 +12566,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit avatar"
+            "state" : "translated",
+            "value" : "アバターの編集"
           }
         },
         "ko" : {
@@ -13036,8 +13042,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit header"
+            "state" : "translated",
+            "value" : "ヘッダーの編集"
           }
         },
         "ko" : {
@@ -13632,7 +13638,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Warning: These settings are overwritten by the global content settings"
+            "value" : "警告: これらの設定はグローバル コンテンツ設定によって上書きされます"
           }
         },
         "ko" : {
@@ -18172,7 +18178,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag Group Icon (SFSymbol name)"
+            "value" : "タググループアイコン（SFSymbol名）"
           }
         },
         "ko" : {
@@ -18290,7 +18296,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add tags to the group"
+            "value" : "グループにタグを追加する"
           }
         },
         "ko" : {
@@ -18408,7 +18414,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag"
+            "value" : "タグ"
           }
         },
         "ko" : {
@@ -18526,7 +18532,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Duplicated tag"
+            "value" : "重複したタグ"
           }
         },
         "ko" : {
@@ -18644,7 +18650,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Number of tags is less than 2"
+            "value" : "タグの数が2未満です"
           }
         },
         "ko" : {
@@ -18762,7 +18768,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Symbol Found"
+            "value" : "シンボルが見つかりません"
           }
         },
         "ko" : {
@@ -18881,7 +18887,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag Group Title"
+            "value" : "タググループのタイトル"
           }
         },
         "ko" : {
@@ -18999,7 +19005,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Empty title"
+            "value" : "空のタイトル"
           }
         },
         "ko" : {
@@ -19117,7 +19123,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No symbol is selected"
+            "value" : "シンボルが選択されていません"
           }
         },
         "ko" : {
@@ -25621,7 +25627,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "All"
+            "value" : "全て"
           }
         },
         "ko" : {
@@ -25740,7 +25746,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hashtags"
+            "value" : "ハッシュタグ"
           }
         },
         "ko" : {
@@ -25859,7 +25865,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "People"
+            "value" : "人々"
           }
         },
         "ko" : {
@@ -25978,7 +25984,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Posts"
+            "value" : "投稿"
           }
         },
         "ko" : {
@@ -32506,7 +32512,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "List settings"
+            "value" : "リスト設定"
           }
         },
         "ko" : {
@@ -32744,7 +32750,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Search users"
+            "value" : "ユーザーを検索"
           }
         },
         "ko" : {
@@ -33573,7 +33579,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "New Window"
+            "value" : "新しい窓"
           }
         },
         "ko" : {
@@ -39003,7 +39009,7 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "アカウントの追加"
           }
         },
@@ -40422,7 +40428,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reply Visibility"
+            "value" : "返信の可視性"
           }
         },
         "ko" : {
@@ -41720,7 +41726,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sharing"
+            "value" : "共有"
           }
         },
         "ko" : {
@@ -43496,8 +43502,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Max reply indentation: %@"
+            "state" : "translated",
+            "value" : "返信の最大インデント: %@"
           }
         },
         "ko" : {
@@ -43852,7 +43858,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show Pending Button on the Left"
+            "value" : "左側に保留中のボタンを表示"
           }
         },
         "ko" : {
@@ -45134,8 +45140,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Account on Hover"
+            "state" : "translated",
+            "value" : "マウスオーバーでアカウントを表示"
           }
         },
         "ko" : {
@@ -45371,8 +45377,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show reply indentation"
+            "state" : "translated",
+            "value" : "返信のインデントを表示"
           }
         },
         "ko" : {
@@ -45725,8 +45731,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Secondary status action"
+            "state" : "translated",
+            "value" : "二次ステータスアクション"
           }
         },
         "ko" : {
@@ -47731,8 +47737,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Recently Used Tags"
+            "state" : "translated",
+            "value" : "最近使用したタグ"
           }
         },
         "ko" : {
@@ -47968,8 +47974,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Sidebar Customizations"
+            "state" : "translated",
+            "value" : "サイドバーのカスタマイズ"
           }
         },
         "ko" : {
@@ -48205,7 +48211,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tabs Customizations"
+            "value" : "タブのカスタマイズ"
           }
         },
         "ko" : {
@@ -49030,8 +49036,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh"
+            "state" : "translated",
+            "value" : "高速リフレッシュ"
           }
         },
         "ko" : {
@@ -49266,8 +49272,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Mute Videos"
+            "state" : "translated",
+            "value" : "ビデオをミュートする"
           }
         },
         "ko" : {
@@ -51862,8 +51868,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh disables timeline position saving and caching. It'll always fetch a fresh timeline."
+            "state" : "translated",
+            "value" : "高速更新では、タイムライン位置の保存とキャッシュが無効になります。常に新鮮なタイムラインを取得します。"
           }
         },
         "ko" : {
@@ -57769,7 +57775,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Auto detect language"
+            "value" : "言語を自動検出"
           }
         },
         "ko" : {
@@ -57887,7 +57893,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary."
+            "value" : "Ice Cubesは、投稿しようとしている投稿の言語を自動的に検出しようとし、必要に応じて投稿言語を更新するよう提案します。"
           }
         },
         "ko" : {
@@ -60501,8 +60507,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Select Text"
+            "state" : "translated",
+            "value" : "テキストの選択"
           }
         },
         "ko" : {
@@ -63240,7 +63246,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Take Photo"
+            "value" : "写真を撮る"
           }
         },
         "ko" : {
@@ -63953,8 +63959,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Type your follow-up content here."
+            "state" : "translated",
+            "value" : "ここにフォローアップのコンテンツを入力します。"
           }
         },
         "ko" : {
@@ -64667,8 +64673,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "🤖 Generate description"
+            "state" : "translated",
+            "value" : "🤖 説明を生成"
           }
         },
         "ko" : {
@@ -65619,7 +65625,7 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "ネタバレ"
           }
         },
@@ -66215,7 +66221,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Error while posting"
+            "value" : "投稿時にエラーが発生しました"
           }
         },
         "ko" : {
@@ -67999,8 +68005,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Hide Results"
+            "state" : "translated",
+            "value" : "結果を非表示"
           }
         },
         "ko" : {
@@ -69438,8 +69444,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Results"
+            "state" : "translated",
+            "value" : "結果を表示"
           }
         },
         "ko" : {
@@ -69676,8 +69682,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Continues a thread"
+            "state" : "translated",
+            "value" : "スレッドを継続"
           }
         },
         "ko" : {
@@ -72174,7 +72180,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mentions"
+            "value" : "メンション"
           }
         },
         "ko" : {
@@ -73001,7 +73007,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add or remove tag from tag groups"
+            "value" : "タググループへのタグの追加または削除"
           }
         },
         "ko" : {
@@ -74094,8 +74100,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Content Filter"
+            "state" : "translated",
+            "value" : "コンテンツフィルター"
           }
         },
         "ko" : {
@@ -74451,7 +74457,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add tag group"
+            "value" : "タググループを追加"
           }
         },
         "ko" : {
@@ -74569,7 +74575,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Edit tag group"
+            "value" : "タググループを編集する"
           }
         },
         "ko" : {
@@ -74923,8 +74929,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Boosts"
+            "state" : "translated",
+            "value" : "ブーストを表示"
           }
         },
         "ko" : {
@@ -75042,8 +75048,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Quotes"
+            "state" : "translated",
+            "value" : "引用を表示"
           }
         },
         "ko" : {
@@ -75161,8 +75167,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Replies"
+            "state" : "translated",
+            "value" : "返信を表示"
           }
         },
         "ko" : {
@@ -75280,8 +75286,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Threads"
+            "state" : "translated",
+            "value" : "スレッドを表示"
           }
         },
         "ko" : {
@@ -75399,7 +75405,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag Groups"
+            "value" : "タググループ"
           }
         },
         "ko" : {
@@ -76239,8 +76245,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Resume"
+            "state" : "translated",
+            "value" : "再開する"
           }
         },
         "ko" : {
