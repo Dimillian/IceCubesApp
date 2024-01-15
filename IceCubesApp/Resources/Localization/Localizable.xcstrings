@@ -31269,6 +31269,7 @@
       }
     },
     "iPad" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {

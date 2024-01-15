@@ -396,7 +396,7 @@ extension TimelineViewModel: StatusesFetcher {
     do {
       while
         !Task.isCancelled,
-        var newStatuses: [Status] =
+        let newStatuses: [Status] =
         try await client.get(endpoint: timeline.endpoint(sinceId: nil,
                                                          maxId: nil,
                                                          minId: latestMinId,
@@ -423,7 +423,7 @@ extension TimelineViewModel: StatusesFetcher {
       let statuses = await datasource.get()
       guard let lastId = statuses.last?.id else { return }
       statusesState = await .display(statuses: datasource.getFiltered(), nextPageState: .loadingNextPage)
-      var newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
+      let newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
                                                                                    maxId: lastId,
                                                                                    minId: nil,
                                                                                    offset: statuses.count))
