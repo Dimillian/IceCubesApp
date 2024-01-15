@@ -40,7 +40,6 @@ struct StatusRowHeaderView: View {
               }
               .menuStyle(.button)
               .buttonStyle(.borderless)
-              .foregroundStyle(.secondary)
               .contentShape(Rectangle())
               .accessibilityLabel("status.action.context-menu")
           }
