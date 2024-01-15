@@ -41,6 +41,7 @@ struct StatusRowHeaderView: View {
           }
       } label: {
         Label("", systemImage: "ellipsis")
+          .foregroundStyle(Theme.shared.labelColor)
           .padding(.vertical, 6)
       }
       .menuStyle(.button)
