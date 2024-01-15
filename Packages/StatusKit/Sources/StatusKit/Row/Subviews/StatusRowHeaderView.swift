@@ -16,37 +16,37 @@ struct StatusRowHeaderView: View {
 
   let viewModel: StatusRowViewModel
   var body: some View {
-      VStack(alignment: .leading) {
-          HStack {
-              Button {
-                  viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
-              } label: {
-                  accountView
-              }
-              .buttonStyle(.plain)
+    HStack()
+    {
+      VStack(alignment: .leading, spacing: 0) {
+        Button {
+          viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
+        } label: {
+          accountView
+        }
+        .buttonStyle(.plain)
 
-              Spacer()
-
-              Menu {
-                StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showTextForSelection)
-                  .onAppear {
-                    Task {
-                      await viewModel.loadAuthorRelationship()
-                    }
-                  }
-              } label: {
-                Label("", systemImage: "ellipsis")
-                  .padding(.vertical, 6)
-              }
-              .menuStyle(.button)
-              .buttonStyle(.borderless)
-              .contentShape(Rectangle())
-              .accessibilityLabel("status.action.context-menu")
-          }
-
-      if !redactionReasons.contains(.placeholder) {
-        dateView
+        if !redactionReasons.contains(.placeholder) {
+          dateView
+        }
       }
+      Spacer()
+
+      Menu {
+        StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showTextForSelection)
+          .onAppear {
+            Task {
+              await viewModel.loadAuthorRelationship()
+            }
+          }
+      } label: {
+        Label("", systemImage: "ellipsis")
+          .padding(.vertical, 6)
+      }
+      .menuStyle(.button)
+      .buttonStyle(.borderless)
+      .contentShape(Rectangle())
+      .accessibilityLabel("status.action.context-menu")
     }
     .accessibilityElement(children: .combine)
     .accessibilityLabel(Text("\(viewModel.finalStatus.account.safeDisplayName)") + Text(", ") + Text(viewModel.finalStatus.createdAt.relativeFormatted))
@@ -67,7 +67,6 @@ struct StatusRowHeaderView: View {
           Group {
             EmojiTextApp(.init(stringValue: viewModel.finalStatus.account.safeDisplayName),
                          emojis: viewModel.finalStatus.account.emojis)
-              .font(.scaledSubheadline)
               .foregroundColor(theme.labelColor)
               .emojiSize(Font.scaledSubheadlineFont.emojiSize)
               .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
@@ -111,7 +110,6 @@ struct StatusRowHeaderView: View {
       Text(" - ") +
       Text("@\(viewModel.finalStatus.account.acct)")
     }
-    .font(.subheadline)
     .foregroundStyle(.secondary)
     .lineLimit(2)
   }
