@@ -136,7 +136,7 @@ public struct StatusRowView: View {
     }
     #if os(visionOS)
     .listRowBackground(RoundedRectangle(cornerRadius: 8)
-      .foregroundStyle(Material.regular))
+      .foregroundStyle(.background))
     .listRowHoverEffect(.lift)
     #else
     .listRowBackground(viewModel.highlightRowColor)
