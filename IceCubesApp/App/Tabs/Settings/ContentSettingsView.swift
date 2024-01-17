@@ -59,6 +59,7 @@ struct ContentSettingsView: View {
           userPreferences.appAutoExpandMedia = userPreferences.autoExpandMedia
           userPreferences.appDefaultPostsSensitive = userPreferences.postIsSensitive
           userPreferences.appDefaultPostVisibility = userPreferences.postVisibility
+          userPreferences.appRequireAltText = userPreferences.appRequireAltText
         }
       }
 
@@ -112,6 +113,10 @@ struct ContentSettingsView: View {
           Text("settings.content.default-sensitive")
         }
         .disabled(userPreferences.useInstanceContentSettings)
+          
+        Toggle(isOn: $userPreferences.appRequireAltText) {
+          Text("settings.content.require-alt-text")
+        }
       }
       #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)

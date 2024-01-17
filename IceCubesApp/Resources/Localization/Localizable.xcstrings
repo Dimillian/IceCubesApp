@@ -41561,6 +41561,16 @@
         }
       }
     },
+    "settings.content.require-alt-text" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Require Alt Text to Post"
+          }
+        }
+      }
+    },
     "settings.content.sharing" : {
       "localizations" : {
         "be" : {
@@ -66051,6 +66061,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "嘟文上下文發生錯誤，請再試一次。"
+          }
+        }
+      }
+    },
+    "status.error.no-alt-text" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your settings require alt text on all media before posting"
           }
         }
       }
