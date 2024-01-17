@@ -1,4 +1,5 @@
 import Charts
+import DesignKit
 import DesignSystem
 import Env
 import Models
@@ -24,6 +25,8 @@ public struct TimelineView: View {
   @State private var wasBackgrounded: Bool = false
   @State private var collectionView: UICollectionView?
 
+  @State private var selectedTimelineFilter: LocalizedStringKey
+
   @Binding var timeline: TimelineFilter
   @Binding var pinnedFilters: [TimelineFilter]
   @Binding var selectedTagGroup: TagGroup?
@@ -44,15 +47,23 @@ public struct TimelineView: View {
     _selectedTagGroup = selectedTagGroup
     _scrollToTopSignal = scrollToTopSignal
     self.canFilterTimeline = canFilterTimeline
+    _selectedTimelineFilter = State(initialValue: "Home")
   }
 
   public var body: some View {
-      Picker("Feed Source", selection: $timeline) {
-          ForEach(TimelineFilter.mozillaFilters, id: \.self) { filter in
-              Text(filter.localizedTitle())
+      SegmentedControl(sources: TimelineFilter.mozillaFilters.map { $0.localizedTitle() }, selected: $selectedTimelineFilter)
+          .onChange(of: selectedTimelineFilter) { newValue in
+              print(newValue)
+              if let selectedTimeline = TimelineFilter.mozillaFilters.first(where: { $0.localizedTitle() == newValue }) {
+                  self.timeline = selectedTimeline
+              }
           }
-      }
-      .pickerStyle(.segmented)
+//      Picker("Feed Source", selection: $timeline) {
+//          ForEach(TimelineFilter.mozillaFilters, id: \.self) { filter in
+//              Text(filter.localizedTitle())
+//          }
+//      }
+//      .pickerStyle(.segmented)
     ScrollViewReader { proxy in
       ZStack(alignment: .top) {
         List {
