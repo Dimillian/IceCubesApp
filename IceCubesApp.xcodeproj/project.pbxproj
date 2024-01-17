@@ -1447,7 +1447,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/MozillaSocial/mozilla-social-ios";
 			requirement = {
-				branch = segmentedControlPublic;
+				branch = develop;
 				kind = branch;
 			};
 		};

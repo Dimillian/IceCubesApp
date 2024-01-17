@@ -86,8 +86,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/MozillaSocial/mozilla-social-ios",
       "state" : {
-        "branch" : "segmentedControlPublic",
-        "revision" : "9eac1bf5de30e605dc0e885c0427fc875a708d76"
+        "branch" : "develop",
+        "revision" : "99fc895aff02ab76696c75cd08757ad5ea6ac5ed"
       }
     },
     {
