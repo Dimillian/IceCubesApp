@@ -23,8 +23,12 @@ public struct StatusRowView: View {
   @State private var viewModel: StatusRowViewModel
   @State private var showSelectableText: Bool = false
 
-  public init(viewModel: StatusRowViewModel) {
-    _viewModel = .init(initialValue: viewModel)
+  public enum Context { case timeline, detail }
+  private let context: Context
+
+  public init(viewModel: StatusRowViewModel, context: Context = .timeline) {
+    self._viewModel = .init(initialValue: viewModel)
+    self.context = context
   }
 
   var contextMenu: some View {
@@ -56,7 +60,7 @@ public struct StatusRowView: View {
             EmptyView()
           }
         } else {
-          if !isCompact {
+          if !isCompact && context != .detail {
             Group {
               StatusRowTagView(viewModel: viewModel)
               StatusRowReblogView(viewModel: viewModel)
