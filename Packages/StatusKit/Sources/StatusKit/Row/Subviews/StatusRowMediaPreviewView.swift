@@ -22,6 +22,19 @@ public struct StatusRowMediaPreviewView: View {
 
   @State private var isQuickLookLoading: Bool = false
 
+  init(attachments: [MediaAttachment], sensitive: Bool) {
+    self.attachments = attachments
+    self.sensitive = sensitive
+  }
+
+#if targetEnvironment(macCatalyst)
+  private var showsScrollIndicators: Bool { attachments.count > 1 }
+  private var scrollBottomPadding: CGFloat?
+#else
+  private var showsScrollIndicators: Bool = false
+  private var scrollBottomPadding: CGFloat? = 0
+#endif
+
   var availableWidth: CGFloat {
     #if os(visionOS)
       return sceneDelegate.windowWidth * 0.96
@@ -78,13 +91,14 @@ public struct StatusRowMediaPreviewView: View {
         .accessibilityAddTraits([.isButton, .isImage])
         .onTapGesture { tabAction(for: 0) }
       } else {
-        ScrollView(.horizontal, showsIndicators: false) {
+        ScrollView(.horizontal, showsIndicators: showsScrollIndicators) {
           HStack {
             makeAttachmentView(for: 0)
             makeAttachmentView(for: 1)
             makeAttachmentView(for: 2)
             makeAttachmentView(for: 3)
           }
+          .padding(.bottom, scrollBottomPadding)
         }
         .scrollClipDisabled()
       }
