@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Dean151/ButtonKit",
       "state" : {
-        "revision" : "377f5bab4ed047704316d531e0826d4de5ebf6a4",
-        "version" : "0.1.1"
+        "revision" : "d4ed31ead81d04165591148f80bd2e56688bdbd7",
+        "version" : "0.1.2"
       }
     },
     {
@@ -95,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/MozillaSocial/mozilla-social-ios",
       "state" : {
-        "branch" : "develop",
-        "revision" : "99fc895aff02ab76696c75cd08757ad5ea6ac5ed"
+        "branch" : "ios17",
+        "revision" : "68ed7ae56d73da0b18894717d3c81172c9eae588"
       }
     },
     {
