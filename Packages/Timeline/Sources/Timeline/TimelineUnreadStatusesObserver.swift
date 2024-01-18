@@ -45,7 +45,6 @@ struct TimelineUnreadStatusesView: View {
         HStack(spacing: 8) {
           if observer.isLoadingNewStatuses {
             ProgressView()
-              .tint(theme.labelColor)
           }
           if observer.pendingStatusesCount > 0 {
             Text("\(observer.pendingStatusesCount)")
@@ -54,7 +53,6 @@ struct TimelineUnreadStatusesView: View {
               .frame(minWidth: 16, minHeight: 16)
               .font(.footnote.monospacedDigit())
               .fontWeight(.bold)
-              .foregroundStyle(theme.labelColor)
           }
         }
       }
@@ -69,6 +67,7 @@ struct TimelineUnreadStatusesView: View {
       #endif
       .cornerRadius(8)
       #if !os(visionOS)
+      .foregroundStyle(.secondary)
       .overlay(
         RoundedRectangle(cornerRadius: 8)
           .stroke(theme.tintColor, lineWidth: 1)

@@ -8,7 +8,6 @@ import SwiftUI
 
 @MainActor
 public struct StatusRowMediaPreviewView: View {
-  @Environment(\.isPresented) private var isPresented
   @Environment(\.openWindow) private var openWindow
   @Environment(\.extraLeadingInset) private var extraLeadingInset: CGFloat
   @Environment(\.isCompact) private var isCompact: Bool
@@ -23,6 +22,19 @@ public struct StatusRowMediaPreviewView: View {
 
   @State private var isQuickLookLoading: Bool = false
 
+  init(attachments: [MediaAttachment], sensitive: Bool) {
+    self.attachments = attachments
+    self.sensitive = sensitive
+  }
+
+#if targetEnvironment(macCatalyst)
+  private var showsScrollIndicators: Bool { attachments.count > 1 }
+  private var scrollBottomPadding: CGFloat?
+#else
+  private var showsScrollIndicators: Bool = false
+  private var scrollBottomPadding: CGFloat? = 0
+#endif
+
   var availableWidth: CGFloat {
     #if os(visionOS)
       return sceneDelegate.windowWidth * 0.96
@@ -32,11 +44,7 @@ public struct StatusRowMediaPreviewView: View {
     {
       return sceneDelegate.windowWidth * 0.80
     }
-    if isPresented && UIDevice.current.userInterfaceIdiom == .pad {
-      return sceneDelegate.windowWidth * 0.50
-    } else {
-      return sceneDelegate.windowWidth
-    }
+    return sceneDelegate.windowWidth
     #endif
   }
 
@@ -83,13 +91,14 @@ public struct StatusRowMediaPreviewView: View {
         .accessibilityAddTraits([.isButton, .isImage])
         .onTapGesture { tabAction(for: 0) }
       } else {
-        ScrollView(.horizontal, showsIndicators: false) {
+        ScrollView(.horizontal, showsIndicators: showsScrollIndicators) {
           HStack {
             makeAttachmentView(for: 0)
             makeAttachmentView(for: 1)
             makeAttachmentView(for: 2)
             makeAttachmentView(for: 3)
           }
+          .padding(.bottom, scrollBottomPadding)
         }
         .scrollClipDisabled()
       }
@@ -189,6 +198,7 @@ private struct MediaPreview: View {
   }
 }
 
+@MainActor
 private struct FeaturedImagePreView: View {
   let attachment: MediaAttachment
   let imageMaxHeight: CGFloat
@@ -200,6 +210,7 @@ private struct FeaturedImagePreView: View {
   @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
   @Environment(Theme.self) private var theme
   @Environment(\.isCompact) private var isCompact: Bool
+  @Environment(\.isModal) private var isModal: Bool
 
   var body: some View {
     let size: CGSize = size(for: attachment) ?? .init(width: imageMaxHeight, height: imageMaxHeight)
@@ -260,7 +271,11 @@ private struct FeaturedImagePreView: View {
       return .init(width: imageMaxHeight, height: imageMaxHeight)
     }
 
-    let boxWidth = availableWidth - appLayoutWidth
+    var boxWidth = availableWidth - appLayoutWidth
+    if isModal &&
+        (UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac) {
+      boxWidth = availableWidth * 0.50
+    }
     let boxHeight = availableHeight * 0.8 // use only 80% of window height to leave room for text
 
     if from.width <= boxWidth, from.height <= boxHeight {

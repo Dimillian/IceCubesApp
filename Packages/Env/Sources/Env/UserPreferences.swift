@@ -28,8 +28,6 @@ import SwiftUI
     @AppStorage("user_deepl_api_free") public var userDeeplAPIFree = true
     @AppStorage("auto_detect_post_language") public var autoDetectPostLanguage = true
 
-    @AppStorage("suppress_dupe_reblogs") public var suppressDupeReblogs: Bool = false
-
     @AppStorage("inAppBrowserReaderView") public var inAppBrowserReaderView = false
 
     @AppStorage("haptic_tab") public var hapticTabSelectionEnabled = true
@@ -194,12 +192,6 @@ import SwiftUI
   public var autoDetectPostLanguage: Bool {
     didSet {
       storage.autoDetectPostLanguage = autoDetectPostLanguage
-    }
-  }
-
-  public var suppressDupeReblogs: Bool {
-    didSet {
-      storage.suppressDupeReblogs = suppressDupeReblogs
     }
   }
 
@@ -478,7 +470,6 @@ import SwiftUI
     alwaysUseDeepl = storage.alwaysUseDeepl
     userDeeplAPIFree = storage.userDeeplAPIFree
     autoDetectPostLanguage = storage.autoDetectPostLanguage
-    suppressDupeReblogs = storage.suppressDupeReblogs
     inAppBrowserReaderView = storage.inAppBrowserReaderView
     hapticTabSelectionEnabled = storage.hapticTabSelectionEnabled
     hapticTimelineEnabled = storage.hapticTimelineEnabled

@@ -48,7 +48,9 @@ public struct StatusRowCardView: View {
       if let title = card.title, let url = URL(string: card.url) {
         VStack(alignment: .leading) {
           let sitesWithIcons = ["apps.apple.com", "music.apple.com", "open.spotify.com"]
-          if (UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac),
+          if (UIDevice.current.userInterfaceIdiom == .pad || 
+              UIDevice.current.userInterfaceIdiom == .mac ||
+              UIDevice.current.userInterfaceIdiom == .vision),
              let host = url.host(), sitesWithIcons.contains(host) {
             iconLinkPreview(title, url)
           } else {
@@ -57,7 +59,11 @@ public struct StatusRowCardView: View {
         }
         .frame(maxWidth: maxWidth)
         .fixedSize(horizontal: false, vertical: true)
+        #if os(visionOS)
+        .background(Material.thick)
+        #else
         .background(theme.secondaryBackgroundColor)
+        #endif
         .cornerRadius(16)
         .overlay(
           RoundedRectangle(cornerRadius: 16)
@@ -107,24 +113,23 @@ public struct StatusRowCardView: View {
       .accessibilityHidden(true)
       .frame(height: imageHeight)
     }
-    HStack {
-      VStack(alignment: .leading, spacing: 6) {
-        Text(title)
-          .font(.scaledHeadline)
+    VStack(alignment: .leading, spacing: 6) {
+      Text(title)
+        .font(.scaledHeadline)
+        .lineLimit(3)
+      if let description = card.description, !description.isEmpty {
+        Text(description)
+          .font(.scaledBody)
+          .foregroundStyle(.secondary)
           .lineLimit(3)
-        if let description = card.description, !description.isEmpty {
-          Text(description)
-            .font(.scaledBody)
-            .foregroundStyle(.secondary)
-            .lineLimit(3)
-        }
-        Text(url.host() ?? url.absoluteString)
-          .font(.scaledFootnote)
-          .foregroundColor(theme.tintColor)
-          .lineLimit(1)
       }
-      Spacer()
-    }.padding(16)
+      Text(url.host() ?? url.absoluteString)
+        .font(.scaledFootnote)
+        .foregroundColor(theme.tintColor)
+        .lineLimit(1)
+    }
+    .frame(maxWidth: .infinity, alignment: .leading)
+    .padding(16)
   }
 
   private func iconLinkPreview(_ title: String, _ url: URL) -> some View {

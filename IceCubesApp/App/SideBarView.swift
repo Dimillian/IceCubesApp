@@ -43,8 +43,9 @@ struct SideBarView<Content: View>: View {
         makeBadgeView(count: badge)
       }
     }
-    .contentShape(Rectangle())
-    .frame(width: .sidebarWidth, height: 50)
+    .frame(width: .sidebarWidth - 24, height: 50)
+    .background(tab == selectedTab ? theme.secondaryBackgroundColor : .clear,
+                in: RoundedRectangle(cornerRadius: 8))
   }
 
   private func makeBadgeView(count: Int) -> some View {
@@ -131,7 +132,6 @@ struct SideBarView<Content: View>: View {
         } label: {
           makeIconForTab(tab: tab)
         }
-        .background(tab == selectedTab ? theme.secondaryBackgroundColor : .clear)
       }
     }
   }
@@ -153,14 +153,19 @@ struct SideBarView<Content: View>: View {
                 }
               }
             }
-            postButton
-              .padding(.top, 12)
-            Spacer()
           }
         }
         .frame(width: .sidebarWidth)
         .scrollContentBackground(.hidden)
         .background(.thinMaterial)
+        .safeAreaInset(edge: .bottom, content: {
+          HStack {
+            postButton
+              .padding(.vertical, 24)
+          }
+          .frame(width: .sidebarWidth)
+          .background(.thinMaterial)
+        })
           Divider().edgesIgnoringSafeArea(.all)
       }
       content()

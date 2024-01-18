@@ -23,8 +23,12 @@ public struct StatusRowView: View {
   @State private var viewModel: StatusRowViewModel
   @State private var showSelectableText: Bool = false
 
-  public init(viewModel: StatusRowViewModel) {
-    _viewModel = .init(initialValue: viewModel)
+  public enum Context { case timeline, detail }
+  private let context: Context
+
+  public init(viewModel: StatusRowViewModel, context: Context = .timeline) {
+    self._viewModel = .init(initialValue: viewModel)
+    self.context = context
   }
 
   var contextMenu: some View {
@@ -60,7 +64,7 @@ public struct StatusRowView: View {
             EmptyView()
           }
         } else {
-          if !isCompact {
+          if !isCompact && context != .detail {
               StatusRowTagView(viewModel: viewModel)
               StatusRowReblogView(viewModel: viewModel)
               StatusRowReplyView(viewModel: viewModel)
@@ -107,7 +111,6 @@ public struct StatusRowView: View {
       }
     }
     .onAppear {
-      viewModel.markSeen()
       if !reasons.contains(.placeholder) {
         if !isCompact, viewModel.embeddedStatus == nil {
           Task {
@@ -138,8 +141,8 @@ public struct StatusRowView: View {
     }
     #if os(visionOS)
     .listRowBackground(RoundedRectangle(cornerRadius: 8)
-      .foregroundStyle(Material.regular))
-    .listRowHoverEffect(.lift)
+      .foregroundStyle(.background).hoverEffect())
+    .listRowHoverEffectDisabled()
     #else
     .listRowBackground(viewModel.highlightRowColor)
     #endif

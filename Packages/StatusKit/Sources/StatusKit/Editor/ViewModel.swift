@@ -591,11 +591,16 @@ extension StatusEditor {
     }
 
     private func resetAutoCompletion() {
-      withAnimation {
-        tagsSuggestions = []
-        mentionsSuggestions = []
-        currentSuggestionRange = nil
-        showRecentsTagsInline = false
+      if !tagsSuggestions.isEmpty ||
+          !mentionsSuggestions.isEmpty ||
+          currentSuggestionRange != nil ||
+          showRecentsTagsInline {
+        withAnimation {
+          tagsSuggestions = []
+          mentionsSuggestions = []
+          currentSuggestionRange = nil
+          showRecentsTagsInline = false
+        }
       }
     }
 

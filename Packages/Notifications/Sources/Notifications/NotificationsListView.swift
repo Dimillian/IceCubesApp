@@ -144,7 +144,7 @@ public struct NotificationsListView: View {
                                trailing: .layoutPadding))
           #if os(visionOS)
           .listRowBackground(RoundedRectangle(cornerRadius: 8)
-            .foregroundStyle(Material.regular))
+            .foregroundStyle(.background))
           #else
            .listRowBackground(theme.primaryBackgroundColor)
           #endif

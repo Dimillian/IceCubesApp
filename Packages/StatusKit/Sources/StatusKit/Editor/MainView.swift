@@ -85,13 +85,17 @@ extension StatusEditor {
           AutoCompleteView(viewModel: focusedSEVM)
         }
         #if os(visionOS)
-        .ornament(attachmentAnchor: .scene(.bottom)) {
-          AccessoryView(isSpoilerTextFocused: $isSpoilerTextFocused, focusedSEVM: focusedSEVM, followUpSEVMs: $followUpSEVMs)
-            }
+        .ornament(attachmentAnchor: .scene(.leading)) {
+          AccessoryView(isSpoilerTextFocused: $isSpoilerTextFocused,
+                        focusedSEVM: focusedSEVM,
+                        followUpSEVMs: $followUpSEVMs)
+        }
         #else
         .safeAreaInset(edge: .bottom) {
           if presentationDetent == .large || presentationDetent == .medium {
-            AccessoryView(isSpoilerTextFocused: $isSpoilerTextFocused, focusedSEVM: focusedSEVM, followUpSEVMs: $followUpSEVMs)
+            AccessoryView(isSpoilerTextFocused: $isSpoilerTextFocused,
+                          focusedSEVM: focusedSEVM,
+                          followUpSEVMs: $followUpSEVMs)
           }
         }
         #endif

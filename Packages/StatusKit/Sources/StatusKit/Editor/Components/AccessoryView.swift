@@ -29,31 +29,31 @@ extension StatusEditor {
 
     var body: some View {
       @Bindable var viewModel = focusedSEVM
-      VStack(spacing: 0) {
-        #if os(visionOS)
-        HStack {
-          contentView
-        }
-        .frame(height: 24)
-        .padding(16)
-        .background(.thickMaterial)
-        .cornerRadius(8)
-        #else
-        Divider()
-        HStack {
-          contentView
-        }
-        .frame(height: 20)
-        .padding(.vertical, 12)
-        .background(.thinMaterial)
-        #endif
+      #if os(visionOS)
+      HStack {
+        contentView
+          .buttonStyle(.borderless)
       }
+      .frame(width: 32)
+      .padding(16)
+      .glassBackgroundEffect()
+      .cornerRadius(8)
+      .padding(.trailing, 78)
+      #else
+      Divider()
+      HStack {
+        contentView
+      }
+      .frame(height: 20)
+      .padding(.vertical, 12)
+      .background(.thinMaterial)
+      #endif
     }
 
     @ViewBuilder
     private var contentView: some View {
       #if os(visionOS)
-      HStack(spacing: 8) {
+      VStack(spacing: 8) {
         actionsView
       }
       #else
