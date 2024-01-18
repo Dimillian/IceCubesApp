@@ -64,9 +64,9 @@ public struct StatusRowCardView: View {
         #else
         .background(theme.secondaryBackgroundColor)
         #endif
-        .cornerRadius(16)
+        .cornerRadius(10)
         .overlay(
-          RoundedRectangle(cornerRadius: 16)
+          RoundedRectangle(cornerRadius: 10)
             .stroke(.gray.opacity(0.35), lineWidth: 1)
         )
         .contextMenu {
@@ -113,13 +113,13 @@ public struct StatusRowCardView: View {
       .accessibilityHidden(true)
       .frame(height: imageHeight)
     }
-    VStack(alignment: .leading, spacing: 6) {
+    VStack(alignment: .leading, spacing: 4) {
       Text(title)
         .font(.scaledHeadline)
-        .lineLimit(3)
+        .lineLimit(1)
       if let description = card.description, !description.isEmpty {
         Text(description)
-          .font(.scaledBody)
+          .font(.scaledFootnote)
           .foregroundStyle(.secondary)
           .lineLimit(3)
       }
@@ -129,7 +129,8 @@ public struct StatusRowCardView: View {
         .lineLimit(1)
     }
     .frame(maxWidth: .infinity, alignment: .leading)
-    .padding(16)
+    .padding(.horizontal, 10)
+    .padding(.bottom, 10)
   }
 
   private func iconLinkPreview(_ title: String, _ url: URL) -> some View {
