@@ -154,12 +154,17 @@ public struct TimelineView: View {
         break
       }
     })
-    .onChange(of: timeline) { _, newValue in
+    .onChange(of: timeline) { oldValue, newValue in
       switch newValue {
       case let .remoteLocal(server, _):
         viewModel.client = Client(server: server)
       default:
-        viewModel.client = client
+        switch oldValue {
+        case let .remoteLocal(server, _):
+          viewModel.client = Client(server: server)
+        default:
+          viewModel.client = client
+        }
       }
       viewModel.timeline = newValue
     }

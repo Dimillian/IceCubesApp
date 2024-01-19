@@ -40,7 +40,13 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
   case resume
 
   public var id: String {
-    title
+    switch self {
+    case let .remoteLocal(server, filter):
+      return server + filter.rawValue
+    default:
+      return title
+    }
+
   }
   
   public func hash(into hasher: inout Hasher) {
