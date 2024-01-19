@@ -158,6 +158,8 @@ public struct StatusRowCardView: View {
 }
 
 struct DefaultPreviewImage: View {
+  @Environment(Theme.self) private var theme
+  
   let url: URL
   let originalWidth: CGFloat
   let originalHeight: CGFloat
@@ -165,7 +167,8 @@ struct DefaultPreviewImage: View {
   var body: some View {
     _Layout(originalWidth: originalWidth, originalHeight: originalHeight) {
       LazyResizableImage(url: url) { state, _ in
-        Rectangle().fill(Color.gray)
+        Rectangle()
+          .fill(theme.secondaryBackgroundColor)
           .overlay {
             if let image = state.image {
               image.resizable().scaledToFill()
