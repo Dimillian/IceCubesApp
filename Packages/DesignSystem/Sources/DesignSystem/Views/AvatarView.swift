@@ -1,7 +1,6 @@
 import Models
 import Nuke
 import NukeUI
-import Shimmer
 import SwiftUI
 
 @MainActor

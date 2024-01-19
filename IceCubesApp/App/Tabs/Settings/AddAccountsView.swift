@@ -6,7 +6,6 @@ import Models
 import Network
 import NukeUI
 import SafariServices
-import Shimmer
 import SwiftUI
 
 @MainActor
@@ -265,7 +264,6 @@ struct AddAccountView: View {
     }
     .redacted(reason: .placeholder)
     .allowsHitTesting(false)
-    .shimmering()
     #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
     #endif

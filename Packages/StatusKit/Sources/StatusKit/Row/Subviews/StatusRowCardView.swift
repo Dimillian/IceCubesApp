@@ -2,7 +2,6 @@ import DesignSystem
 import Models
 import Nuke
 import NukeUI
-import Shimmer
 import SwiftUI
 
 @MainActor
@@ -60,7 +59,8 @@ public struct StatusRowCardView: View {
         .frame(maxWidth: maxWidth)
         .fixedSize(horizontal: false, vertical: true)
         #if os(visionOS)
-        .background(Material.thick)
+        .background(.background)
+        .hoverEffect()
         #else
         .background(theme.secondaryBackgroundColor)
         #endif

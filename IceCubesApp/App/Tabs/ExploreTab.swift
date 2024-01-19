@@ -4,7 +4,6 @@ import Env
 import Explore
 import Models
 import Network
-import Shimmer
 import SwiftUI
 
 @MainActor

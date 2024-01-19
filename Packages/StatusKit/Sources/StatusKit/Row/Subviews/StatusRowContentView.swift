@@ -36,7 +36,6 @@ struct StatusRowContentView: View {
                            routerPath: viewModel.routerPath)
           .fixedSize(horizontal: false, vertical: true)
           .redacted(reason: viewModel.isEmbedLoading ? .placeholder : [])
-          .shimmering(active: viewModel.isEmbedLoading)
           .transition(.opacity)
       }
 

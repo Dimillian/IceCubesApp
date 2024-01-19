@@ -292,7 +292,6 @@ extension StatusEditor {
                         .fill(Color.gray)
                         .frame(width: 40, height: 40)
                         .accessibility(hidden: true)
-                        .shimmering()
                     }
                   }
                   .onTapGesture {

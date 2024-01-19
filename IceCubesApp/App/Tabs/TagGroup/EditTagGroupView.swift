@@ -5,7 +5,6 @@ import Models
 import Network
 import NukeUI
 import SFSafeSymbols
-import Shimmer
 import SwiftData
 import SwiftUI
 
