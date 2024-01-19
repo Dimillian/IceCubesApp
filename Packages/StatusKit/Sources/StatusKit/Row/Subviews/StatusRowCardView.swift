@@ -45,9 +45,9 @@ public struct StatusRowCardView: View {
       }
     } label: {
       if let title = card.title, let url = URL(string: card.url) {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 0) {
           let sitesWithIcons = ["apps.apple.com", "music.apple.com", "open.spotify.com"]
-          if (UIDevice.current.userInterfaceIdiom == .pad || 
+          if (UIDevice.current.userInterfaceIdiom == .pad ||
               UIDevice.current.userInterfaceIdiom == .mac ||
               UIDevice.current.userInterfaceIdiom == .vision),
              let host = url.host(), sitesWithIcons.contains(host) {
@@ -94,25 +94,9 @@ public struct StatusRowCardView: View {
   @ViewBuilder
   private func defaultLinkPreview(_ title: String, _ url: URL) -> some View {
     if let imageURL = card.image, !isInCaptureMode {
-      LazyResizableImage(url: imageURL) { state, proxy in
-        let width = imageWidthFor(proxy: proxy)
-        if let image = state.image {
-          image
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(height: imageHeight)
-            .frame(maxWidth: width)
-            .clipped()
-        } else if state.isLoading {
-          Rectangle()
-            .fill(Color.gray)
-            .frame(height: imageHeight)
-        }
-      }
-      // This image is decorative
-      .accessibilityHidden(true)
-      .frame(height: imageHeight)
+      DefaultPreviewImage(url: imageURL, originalWidth: card.width, originalHeight: card.height)
     }
+
     VStack(alignment: .leading, spacing: 4) {
       Text(title)
         .font(.scaledHeadline)
@@ -129,8 +113,7 @@ public struct StatusRowCardView: View {
         .lineLimit(1)
     }
     .frame(maxWidth: .infinity, alignment: .leading)
-    .padding(.horizontal, 10)
-    .padding(.bottom, 10)
+    .padding(10)
   }
 
   private func iconLinkPreview(_ title: String, _ url: URL) -> some View {
@@ -170,6 +153,60 @@ public struct StatusRowCardView: View {
           .foregroundColor(theme.tintColor)
           .lineLimit(1)
       }.padding(16)
+    }
+  }
+}
+
+struct DefaultPreviewImage: View {
+  @Environment(Theme.self) private var theme
+  
+  let url: URL
+  let originalWidth: CGFloat
+  let originalHeight: CGFloat
+
+  var body: some View {
+    _Layout(originalWidth: originalWidth, originalHeight: originalHeight) {
+      LazyResizableImage(url: url) { state, _ in
+        Rectangle()
+          .fill(theme.secondaryBackgroundColor)
+          .overlay {
+            if let image = state.image {
+              image.resizable().scaledToFill()
+            }
+          }
+      }
+      .accessibilityHidden(true) // This image is decorative
+      .clipped()
+    }
+  }
+
+  private struct _Layout: Layout {
+    let originalWidth: CGFloat
+    let originalHeight: CGFloat
+
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+      guard !subviews.isEmpty else { return CGSize.zero }
+      return calculateSize(proposal)
+    }
+
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+      guard let view = subviews.first else { return }
+
+      let size = calculateSize(proposal)
+      view.place(at: bounds.origin, proposal: ProposedViewSize(size))
+    }
+
+    private func calculateSize(_ proposal: ProposedViewSize) -> CGSize {
+      return switch (proposal.width, proposal.height) {
+      case (nil, nil):
+        CGSize(width: originalWidth, height: originalWidth)
+      case let (nil, .some(height)):
+        CGSize(width: originalWidth, height: min(height, originalWidth))
+      case (0, _):
+        CGSize.zero
+      case let (.some(width), _):
+        CGSize(width: width, height: width / originalWidth * originalHeight)
+      }
     }
   }
 }
