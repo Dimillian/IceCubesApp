@@ -68060,8 +68060,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Hide Results"
+            "state" : "translated",
+            "value" : "隐藏结果"
           }
         },
         "zh-Hant" : {
@@ -69499,8 +69499,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Results"
+            "state" : "translated",
+            "value" : "显示结果"
           }
         },
         "zh-Hant" : {
