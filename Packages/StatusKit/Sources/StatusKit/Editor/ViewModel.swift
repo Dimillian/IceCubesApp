@@ -451,9 +451,8 @@ extension StatusEditor {
       Task {
         var initialText: String = ""
         for item in items {
-          if let identifier = item.registeredTypeIdentifiers.first,
-             let handledItemType = UTTypeSupported(rawValue: identifier)
-          {
+          if let identifier = item.registeredTypeIdentifiers.first {
+            let handledItemType = UTTypeSupported(value: identifier)
             do {
               let compressor = Compressor()
               let content = try await handledItemType.loadItemContent(item: item)
@@ -900,7 +899,7 @@ extension StatusEditor {
 
 extension StatusEditor.ViewModel: DropDelegate {
   public func performDrop(info: DropInfo) -> Bool {
-    let item = info.itemProviders(for: StatusEditor.UTTypeSupported.types())
+    let item = info.itemProviders(for: [.image, .video, .gif])
     processItemsProvider(items: item)
     return true
   }
