@@ -28,7 +28,9 @@ public struct AccountDetailContextMenu: View {
             Label("account.action.message", systemImage: "tray.full")
           }
 
-          Divider()
+            #if !targetEnvironment(macCatalyst)
+            Divider()
+            #endif
 
           if viewModel.relationship?.blocking == true {
             Button {
@@ -143,7 +145,9 @@ public struct AccountDetailContextMenu: View {
             }
           }
 
-          Divider()
+            #if !targetEnvironment(macCatalyst)
+            Divider()
+            #endif
         }
 
         if let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier {
@@ -173,7 +177,9 @@ public struct AccountDetailContextMenu: View {
           }
         }
 
+        #if !targetEnvironment(macCatalyst)
         Divider()
+        #endif
       }
     }
   }
