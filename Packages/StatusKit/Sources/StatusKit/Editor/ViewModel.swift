@@ -899,7 +899,7 @@ extension StatusEditor {
 
 extension StatusEditor.ViewModel: DropDelegate {
   public func performDrop(info: DropInfo) -> Bool {
-    let item = info.itemProviders(for: [.image, .video, .gif])
+    let item = info.itemProviders(for: [.image, .video, .gif, .mpeg4Movie, .quickTimeMovie, .movie])
     processItemsProvider(items: item)
     return true
   }

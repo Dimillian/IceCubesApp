@@ -125,7 +125,8 @@ extension StatusEditor {
             }
           }
         }
-        .onDrop(of: [.image, .video, .gif], delegate: focusedSEVM)
+        .onDrop(of: [.image, .video, .gif, .mpeg4Movie, .quickTimeMovie, .movie],
+                delegate: focusedSEVM)
         .onChange(of: currentAccount.account?.id) {
           mainSEVM.currentAccount = currentAccount.account
           for p in followUpSEVMs {

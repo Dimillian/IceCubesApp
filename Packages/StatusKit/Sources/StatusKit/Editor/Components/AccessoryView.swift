@@ -116,7 +116,7 @@ extension StatusEditor {
                     matching: .any(of: [.images, .videos]),
                     photoLibrary: .shared())
       .fileImporter(isPresented: $isFileImporterPresented,
-                    allowedContentTypes: [.image, .video],
+                    allowedContentTypes: [.image, .video, .movie],
                     allowsMultipleSelection: true)
       { result in
         if let urls = try? result.get() {

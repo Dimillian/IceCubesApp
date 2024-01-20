@@ -88,6 +88,9 @@ extension StatusEditor {
       FileRepresentation(importedContentType: .movie) { receivedTransferrable in
         return MovieFileTranseferable(url: receivedTransferrable.localURL)
       }
+      FileRepresentation(importedContentType: .video) { receivedTransferrable in
+        return MovieFileTranseferable(url: receivedTransferrable.localURL)
+      }
     }
   }
   
