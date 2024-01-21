@@ -20,7 +20,6 @@ extension StatusEditor {
     @State private var presentationDetent: PresentationDetent = .large
     @State private var mainSEVM: ViewModel
     @State private var followUpSEVMs: [ViewModel] = []
-    @FocusState private var isSpoilerTextFocused: UUID? // connect CoreEditor and StatusEditorAccessoryView
     @State private var editingMediaContainer: MediaContainer?
     @State private var scrollID: UUID?
 
@@ -49,9 +48,8 @@ extension StatusEditor {
             }
             EditorView(
               viewModel: mainSEVM,
-              followUpSEVMs: $followUpSEVMs,
+              followUpSEVMs: $followUpSEVMs, 
               editingMediaContainer: $editingMediaContainer,
-              isSpoilerTextFocused: $isSpoilerTextFocused,
               editorFocusState: $editorFocusState,
               assignedFocusState: .main,
               isMain: true
@@ -65,7 +63,6 @@ extension StatusEditor {
                 viewModel: sevm,
                 followUpSEVMs: $followUpSEVMs,
                 editingMediaContainer: $editingMediaContainer,
-                isSpoilerTextFocused: $isSpoilerTextFocused,
                 editorFocusState: $editorFocusState,
                 assignedFocusState: .followUp(index: sevm.id),
                 isMain: false
@@ -86,15 +83,13 @@ extension StatusEditor {
         }
         #if os(visionOS)
         .ornament(attachmentAnchor: .scene(.leading)) {
-          AccessoryView(isSpoilerTextFocused: $isSpoilerTextFocused,
-                        focusedSEVM: focusedSEVM,
+          AccessoryView(focusedSEVM: focusedSEVM,
                         followUpSEVMs: $followUpSEVMs)
         }
         #else
         .safeAreaInset(edge: .bottom) {
           if presentationDetent == .large || presentationDetent == .medium {
-            AccessoryView(isSpoilerTextFocused: $isSpoilerTextFocused,
-                          focusedSEVM: focusedSEVM,
+            AccessoryView(focusedSEVM: focusedSEVM,
                           followUpSEVMs: $followUpSEVMs)
           }
         }

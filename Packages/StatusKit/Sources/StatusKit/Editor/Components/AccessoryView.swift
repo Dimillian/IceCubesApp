@@ -16,7 +16,6 @@ extension StatusEditor {
     @Environment(CurrentInstance.self) private var currentInstance
     @Environment(\.colorScheme) private var colorScheme
 
-    @FocusState<UUID?>.Binding var isSpoilerTextFocused: UUID?
     let focusedSEVM: ViewModel
     @Binding var followUpSEVMs: [ViewModel]
 
