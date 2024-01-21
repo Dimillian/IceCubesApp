@@ -31,12 +31,20 @@ struct StatusRowContentView: View {
          !isCompact,
          viewModel.isEmbedLoading || viewModel.embeddedStatus != nil
       {
-        StatusEmbeddedView(status: viewModel.embeddedStatus ?? Status.placeholder(),
-                           client: viewModel.client,
-                           routerPath: viewModel.routerPath)
-          .fixedSize(horizontal: false, vertical: true)
-          .redacted(reason: viewModel.isEmbedLoading ? .placeholder : [])
-          .transition(.opacity)
+        if let embeddedStatus = viewModel.embeddedStatus {
+          StatusEmbeddedView(status: embeddedStatus,
+                             client: viewModel.client,
+                             routerPath: viewModel.routerPath)
+            .fixedSize(horizontal: false, vertical: true)
+            .transition(.opacity)
+        } else {
+          StatusEmbeddedView(status: Status.placeholder(),
+                             client: viewModel.client,
+                             routerPath: viewModel.routerPath)
+            .fixedSize(horizontal: false, vertical: true)
+            .redacted(reason: .placeholder)
+            .transition(.opacity)
+        }
       }
 
       if !viewModel.finalStatus.mediaAttachments.isEmpty {
