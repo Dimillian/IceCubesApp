@@ -30,9 +30,6 @@ public struct TimelineContentFilterView: View {
     }
     .navigationTitle("timeline.content-filter.title")
     .navigationBarTitleDisplayMode(.inline)
-    #if !os(visionOS)
     .scrollContentBackground(.hidden)
-    .background(theme.secondaryBackgroundColor)
-    #endif
   }
 }

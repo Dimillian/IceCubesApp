@@ -135,6 +135,7 @@ extension View {
       case .timelineContentFilter:
         NavigationSheet { TimelineContentFilterView() }
           .presentationDetents([.medium])
+          .presentationBackground(.thinMaterial)
           .withEnvironments()
       }
     }
