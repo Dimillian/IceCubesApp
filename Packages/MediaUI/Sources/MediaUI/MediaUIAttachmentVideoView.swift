@@ -75,7 +75,7 @@ import SwiftUI
 @MainActor
 public struct MediaUIAttachmentVideoView: View {
   @Environment(\.scenePhase) private var scenePhase
-  @Environment(\.isCompact) private var isCompact
+  @Environment(\.isMediaCompact) private var isCompact
   @Environment(UserPreferences.self) private var preferences
   @Environment(Theme.self) private var theme
 

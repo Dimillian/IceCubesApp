@@ -10,7 +10,7 @@ import SwiftUI
 public struct StatusRowMediaPreviewView: View {
   @Environment(\.openWindow) private var openWindow
   @Environment(\.extraLeadingInset) private var extraLeadingInset: CGFloat
-  @Environment(\.isCompact) private var isCompact: Bool
+  @Environment(\.isMediaCompact) private var isCompact: Bool
   @Environment(\.horizontalSizeClass) private var horizontalSizeClass
   @Environment(SceneDelegate.self) private var sceneDelegate
   @Environment(UserPreferences.self) private var preferences

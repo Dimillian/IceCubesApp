@@ -160,6 +160,7 @@ struct NotificationRowView: View {
                                          client: client,
                                          routerPath: routerPath,
                                          showActions: true))
+          .environment(\.isMediaCompact, false)
         } else {
           StatusRowView(viewModel: .init(status: status,
                                          client: client,
@@ -167,6 +168,7 @@ struct NotificationRowView: View {
                                          showActions: false,
                                          textDisabled: true))
             .lineLimit(4)
+            .environment(\.isMediaCompact, true)
         }
         Spacer()
       }
