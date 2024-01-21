@@ -181,9 +181,9 @@ extension StatusEditor {
         .accessibilityLabel("accessibility.editor.button.custom-emojis")
         .popover(isPresented: $isCustomEmojisSheetDisplay) {
           if UIDevice.current.userInterfaceIdiom == .phone {
-            customEmojisSheet
+            CustomEmojisView(viewModel: focusedSEVM)
           } else {
-            customEmojisSheet
+            CustomEmojisView(viewModel: focusedSEVM)
               .frame(width: 400, height: 500)
           }
         }
@@ -270,52 +270,6 @@ extension StatusEditor {
       }
     }
 
-    private var customEmojisSheet: some View {
-      NavigationStack {
-        ScrollView {
-          ForEach(focusedSEVM.customEmojiContainer) { container in
-            VStack(alignment: .leading) {
-              Text(container.categoryName)
-                .font(.scaledFootnote)
-              LazyVGrid(columns: [GridItem(.adaptive(minimum: 40))], spacing: 9) {
-                ForEach(container.emojis) { emoji in
-                  LazyImage(url: emoji.url) { state in
-                    if let image = state.image {
-                      image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 40, height: 40)
-                        .accessibilityLabel(emoji.shortcode.replacingOccurrences(of: "_", with: " "))
-                        .accessibilityAddTraits(.isButton)
-                    } else if state.isLoading {
-                      Rectangle()
-                        .fill(Color.gray)
-                        .frame(width: 40, height: 40)
-                        .accessibility(hidden: true)
-                    }
-                  }
-                  .onTapGesture {
-                    focusedSEVM.insertStatusText(text: " :\(emoji.shortcode): ")
-                  }
-                }
-              }
-            }
-            .padding(.horizontal)
-            .padding(.bottom)
-          }
-        }
-        .toolbar {
-          ToolbarItem(placement: .navigationBarLeading) {
-            Button("action.cancel", action: { isCustomEmojisSheetDisplay = false })
-          }
-        }
-        .scrollContentBackground(.hidden)
-        .background(theme.primaryBackgroundColor)
-        .navigationTitle("status.editor.emojis.navigation-title")
-        .navigationBarTitleDisplayMode(.inline)
-      }
-      .presentationDetents([.medium])
-    }
   }
 
 }

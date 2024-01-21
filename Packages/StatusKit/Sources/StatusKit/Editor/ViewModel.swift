@@ -872,7 +872,7 @@ extension StatusEditor {
 
         customEmojis.reduce([String: [Emoji]]()) { currentDict, emoji in
           var dict = currentDict
-          let category = emoji.category ?? "Uncategorized"
+          let category = emoji.category ?? "Custom"
 
           if let emojis = dict[category] {
             dict[category] = emojis + [emoji]
@@ -882,8 +882,8 @@ extension StatusEditor {
 
           return dict
         }.sorted(by: { lhs, rhs in
-          if rhs.key == "Uncategorized" { false }
-          else if lhs.key == "Uncategorized" { true }
+          if rhs.key == "Custom" { false }
+          else if lhs.key == "Custom" { true }
           else { lhs.key < rhs.key }
         }).forEach { key, value in
           emojiContainers.append(.init(categoryName: key, emojis: value))
