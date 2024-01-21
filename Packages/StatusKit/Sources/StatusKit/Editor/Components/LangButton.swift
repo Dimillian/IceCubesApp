@@ -35,13 +35,8 @@ extension StatusEditor {
         viewModel.setInitialLanguageSelection(preference: preferences.recentlyUsedLanguages.first ?? preferences.serverPreferences?.postLanguage)
       }
       .accessibilityLabel("accessibility.editor.button.language")
-      .popover(isPresented: $isLanguageSheetDisplayed) {
-        if UIDevice.current.userInterfaceIdiom == .phone {
-          languageSheetView
-        } else {
-          languageSheetView
-            .frame(width: 400, height: 500)
-        }
+      .sheet(isPresented: $isLanguageSheetDisplayed) {
+        languageSheetView
       }
     }
     
@@ -61,7 +56,7 @@ extension StatusEditor {
             languageSheetSection(languages: languageSearchResult(query: languageSearch))
           }
         }
-        .searchable(text: $languageSearch)
+        .searchable(text: $languageSearch, placement: .navigationBarDrawer)
         .toolbar {
           ToolbarItem(placement: .navigationBarLeading) {
             Button("action.cancel", action: { isLanguageSheetDisplayed = false })
