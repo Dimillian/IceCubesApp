@@ -197,6 +197,8 @@ struct DefaultPreviewImage: View {
     }
 
     private func calculateSize(_ proposal: ProposedViewSize) -> CGSize {
+      guard originalWidth > 0 else { return CGSize.zero }
+
       return switch (proposal.width, proposal.height) {
       case (nil, nil):
         CGSize(width: originalWidth, height: originalWidth)

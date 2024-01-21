@@ -31274,119 +31274,6 @@
         }
       }
     },
-    "iPad" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "be" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad-ean"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        }
-      }
-    },
     "list.edit.isExclusive" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -56678,7 +56565,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fifth Tab"
+            "value" : "Fünfter Tab"
           }
         },
         "en" : {
@@ -56796,7 +56683,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "First Tab"
+            "value" : "Erster Tab"
           }
         },
         "en" : {
@@ -56914,7 +56801,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fourth Tab"
+            "value" : "Vierter Tab"
           }
         },
         "en" : {
@@ -57032,7 +56919,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Second Tab"
+            "value" : "Zweiter Tab"
           }
         },
         "en" : {
@@ -57150,7 +57037,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Third Tab"
+            "value" : "Dritter Tab"
           }
         },
         "en" : {
@@ -68060,8 +67947,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Hide Results"
+            "state" : "translated",
+            "value" : "隐藏结果"
           }
         },
         "zh-Hant" : {
@@ -69499,8 +69386,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Results"
+            "state" : "translated",
+            "value" : "显示结果"
           }
         },
         "zh-Hant" : {
