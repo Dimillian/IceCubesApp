@@ -161,7 +161,11 @@ public struct TimelineView: View {
       default:
         switch oldValue {
         case let .remoteLocal(server, _):
-          viewModel.client = Client(server: server)
+          if newValue == .latest {
+            viewModel.client = Client(server: server)
+          } else {
+            viewModel.client = client
+          }
         default:
           viewModel.client = client
         }
