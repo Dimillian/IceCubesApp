@@ -35,11 +35,13 @@ struct DisplaySettingsView: View {
   var body: some View {
     ZStack(alignment: .top) {
       Form {
+        #if !os(visionOS)
         StatusRowView(viewModel: previewStatusViewModel)
           .allowsHitTesting(false)
           .opacity(0)
           .hidden()
         themeSection
+        #endif
         fontSection
         layoutSection
         platformsSection
@@ -74,7 +76,9 @@ struct DisplaySettingsView: View {
         do { try await Task.sleep(for: .microseconds(500)) } catch {}
         theme.fontSizeScale = localValues.fontSizeScale
       }
+      #if !os(visionOS)
       examplePost
+      #endif
     }
   }
 
