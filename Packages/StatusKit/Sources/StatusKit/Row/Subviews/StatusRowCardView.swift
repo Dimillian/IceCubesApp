@@ -197,9 +197,7 @@ struct DefaultPreviewImage: View {
     }
 
     private func calculateSize(_ proposal: ProposedViewSize) -> CGSize {
-      guard originalWidth > 0 else { return CGSize.zero }
-
-      return switch (proposal.width, proposal.height) {
+      switch (proposal.width, proposal.height) {
       case (nil, nil):
         CGSize(width: originalWidth, height: originalWidth)
       case let (nil, .some(height)):
@@ -207,7 +205,11 @@ struct DefaultPreviewImage: View {
       case (0, _):
         CGSize.zero
       case let (.some(width), _):
-        CGSize(width: width, height: width / originalWidth * originalHeight)
+        if originalWidth == 0 {
+          CGSize(width: width, height: width / 2)
+        } else {
+          CGSize(width: width, height: width / originalWidth * originalHeight)
+        }
       }
     }
   }
