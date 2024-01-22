@@ -7,7 +7,7 @@ import SwiftUI
 @MainActor
 @Observable public class MediaUIAttachmentVideoViewModel {
   var player: AVPlayer?
-  private let url: URL
+  let url: URL
   let forceAutoPlay: Bool
   var isPlaying: Bool = false
 
@@ -112,6 +112,7 @@ public struct MediaUIAttachmentVideoView: View {
                 Image(systemName: "xmark.circle")
               }
             }
+            QuickLookToolbarItem(itemUrl: viewModel.url)
           }
       }
       .onAppear {
