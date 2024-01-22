@@ -107,6 +107,7 @@ public struct StatusRowView: View {
           }
         }
       }
+      .padding(.init(top: 12, leading: 0, bottom: isFocused ? 12 : 6, trailing: 0))
     }
     .onAppear {
       if !reasons.contains(.placeholder) {
@@ -144,9 +145,9 @@ public struct StatusRowView: View {
     #else
     .listRowBackground(viewModel.highlightRowColor)
     #endif
-    .listRowInsets(.init(top: 12,
+    .listRowInsets(.init(top: 0,
                          leading: .layoutPadding,
-                         bottom: isFocused ? 12 : 6,
+                         bottom: 0,
                          trailing: .layoutPadding))
     .accessibilityElement(children: isFocused ? .contain : .combine)
     .accessibilityLabel(isFocused == false && accessibilityVoiceOverEnabled
