@@ -130,6 +130,18 @@ extension StatusEditor {
     var shouldDisablePollButton: Bool {
       !mediaContainers.isEmpty
     }
+      
+    var allMediaHasDescription: Bool {
+        var everyMediaHasAltText: Bool = true;
+        mediaContainers.forEach { mediaContainer in
+            if (((mediaContainer.mediaAttachment?.description) == nil) ||
+                mediaContainer.mediaAttachment?.description?.count == 0) {
+                everyMediaHasAltText = false
+            }
+        }
+        
+        return everyMediaHasAltText;
+    }
 
     var shouldDisplayDismissWarning: Bool {
       var modifiedStatusText = statusText.string.trimmingCharacters(in: .whitespaces)
@@ -188,6 +200,10 @@ extension StatusEditor {
     func postStatus() async -> Status? {
       guard let client else { return nil }
       do {
+        if (!allMediaHasDescription && UserPreferences.shared.appRequireAltText) {
+          throw PostError.missingAltText
+        }
+          
         if postingTimer == nil {
           Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in
             Task { @MainActor in
@@ -249,6 +265,10 @@ extension StatusEditor {
         if let error = error as? Models.ServerError {
           postingError = error.error
           showPostingErrorAlert = true
+        }
+        if let postError = error as? PostError {
+            postingError = postError.description
+            showPostingErrorAlert = true
         }
         isPosting = false
         HapticManager.shared.fireHaptic(.notification(.error))

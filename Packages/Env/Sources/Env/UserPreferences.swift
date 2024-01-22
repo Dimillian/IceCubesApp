@@ -22,6 +22,7 @@ import SwiftUI
     @AppStorage("app_default_post_visibility") public var appDefaultPostVisibility: Models.Visibility = .pub
     @AppStorage("app_default_reply_visibility") public var appDefaultReplyVisibility: Models.Visibility = .pub
     @AppStorage("app_default_posts_sensitive") public var appDefaultPostsSensitive = false
+    @AppStorage("app_require_alt_text") public var appRequireAltText = false
     @AppStorage("autoplay_video") public var autoPlayVideo = true
     @AppStorage("mute_video") public var muteVideo = true
     @AppStorage("always_use_deepl") public var alwaysUseDeepl = false
@@ -161,6 +162,12 @@ import SwiftUI
   public var appDefaultPostsSensitive: Bool {
     didSet {
       storage.appDefaultPostsSensitive = appDefaultPostsSensitive
+    }
+  }
+    
+  public var appRequireAltText: Bool {
+    didSet {
+      storage.appRequireAltText = appRequireAltText
     }
   }
 
@@ -466,6 +473,7 @@ import SwiftUI
     appDefaultPostVisibility = storage.appDefaultPostVisibility
     appDefaultReplyVisibility = storage.appDefaultReplyVisibility
     appDefaultPostsSensitive = storage.appDefaultPostsSensitive
+    appRequireAltText = storage.appRequireAltText
     autoPlayVideo = storage.autoPlayVideo
     alwaysUseDeepl = storage.alwaysUseDeepl
     userDeeplAPIFree = storage.userDeeplAPIFree
