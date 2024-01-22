@@ -3,6 +3,7 @@ import DesignSystem
 import Env
 import Observation
 import SwiftUI
+import Models
 
 @MainActor
 @Observable public class MediaUIAttachmentVideoViewModel {
@@ -74,6 +75,7 @@ import SwiftUI
 
 @MainActor
 public struct MediaUIAttachmentVideoView: View {
+  @Environment(\.openWindow) private var openWindow
   @Environment(\.scenePhase) private var scenePhase
   @Environment(\.isMediaCompact) private var isCompact
   @Environment(UserPreferences.self) private var preferences
@@ -101,7 +103,13 @@ public struct MediaUIAttachmentVideoView: View {
         viewModel.play()
         return
       }
+      #if targetEnvironment(macCatalyst)
+      viewModel.pause()
+      let attachement = MediaAttachment.videoWith(url: viewModel.url)
+      openWindow(value: WindowDestinationMedia.mediaViewer(attachments: [attachement], selectedAttachment: attachement))
+      #else
       isFullScreen = true
+      #endif
     }
     .fullScreenCover(isPresented: $isFullScreen) {
       NavigationStack {
