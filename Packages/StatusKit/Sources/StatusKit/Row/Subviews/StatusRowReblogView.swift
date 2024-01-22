@@ -7,8 +7,7 @@ struct StatusRowReblogView: View {
   var body: some View {
     if viewModel.status.reblog != nil {
       HStack(spacing: 2) {
-        Image("Rocket.Fill")
-        AvatarView(viewModel.status.account.avatar, config: .boost)
+          Image(systemName: "arrow.2.squarepath")
         EmojiTextApp(.init(stringValue: viewModel.status.account.safeDisplayName), emojis: viewModel.status.account.emojis)
         Text("status.row.was-boosted")
       }
@@ -21,7 +20,6 @@ struct StatusRowReblogView: View {
       .font(.scaledFootnote)
       .emojiSize(Font.scaledFootnoteFont.emojiSize)
       .emojiBaselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
-      .foregroundStyle(.secondary)
       .fontWeight(.semibold)
       .onTapGesture {
         viewModel.navigateToAccountDetail(account: viewModel.status.account)

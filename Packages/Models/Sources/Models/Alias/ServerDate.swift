@@ -14,8 +14,8 @@ public struct ServerDate: Codable, Hashable, Equatable, Sendable {
       return DateFormatterCache.shared.createdAtRelativeFormatter.localizedString(for: date,
                                                                                   relativeTo: Date())
     } else {
-      return Duration.seconds(-date.timeIntervalSinceNow).formatted(.units(width: .narrow,
-                                                                     maximumUnitCount: 1))
+        return Duration.seconds(-date.timeIntervalSinceNow).formatted(.units(width: .wide,
+                                                                     maximumUnitCount: 1)) + " ago"
     }
   }
 

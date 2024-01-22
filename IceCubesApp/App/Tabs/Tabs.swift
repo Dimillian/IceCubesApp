@@ -15,6 +15,7 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
   case post
   case followedTags
   case lists
+  case discover
 
   nonisolated var id: Int {
     rawValue
@@ -69,6 +70,10 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
       }
     case .post:
       VStack { }
+    case .discover:
+        NavigationTab {
+            Text("Todays Top Picks, Coming Soon!")
+        }
     case .other:
       EmptyView()
     }
@@ -78,7 +83,7 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
   var label: some View {
     switch self {
     case .timeline:
-      Label("tab.timeline", systemImage: iconName)
+        Image(systemName: iconName)
     case .trending:
       Label("tab.trending", systemImage: iconName)
     case .local:
@@ -86,7 +91,7 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
     case .federated:
       Label("tab.federated", systemImage: iconName)
     case .notifications:
-      Label("tab.notifications", systemImage: iconName)
+      Image(systemName: iconName)
     case .mentions:
       Label("tab.mentions", systemImage: iconName)
     case .explore:
@@ -96,17 +101,19 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
     case .settings:
       Label("tab.settings", systemImage: iconName)
     case .profile:
-      Label("tab.profile", systemImage: iconName)
+      Image(systemName: iconName)
     case .bookmarks:
       Label("accessibility.tabs.profile.picker.bookmarks", systemImage: iconName)
     case .favorites:
       Label("accessibility.tabs.profile.picker.favorites", systemImage: iconName)
     case .post:
-      Label("menu.new-post", systemImage: iconName)
+        Image(iconName)
     case .followedTags:
       Label("timeline.filter.tags", systemImage: iconName)
     case .lists:
       Label("timeline.filter.lists", systemImage: iconName)
+    case .discover:
+      Image(systemName: iconName)
     case .other:
       EmptyView()
       
@@ -116,7 +123,7 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
   var iconName: String {
     switch self {
     case .timeline:
-      "rectangle.stack"
+      "house"
     case .trending:
       "chart.line.uptrend.xyaxis"
     case .local:
@@ -140,11 +147,13 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
     case .favorites:
       "star"
     case .post:
-      "square.and.pencil"
+      "hexagonPlus"
     case .followedTags:
       "tag"
     case .lists:
       "list.bullet"
+    case .discover:
+        "safari"
     case .other:
       ""
     }
@@ -204,9 +213,9 @@ class iOSTabs {
   
   class Storage {
     @AppStorage(TabEntries.first.rawValue) var firstTab = Tab.timeline
-    @AppStorage(TabEntries.second.rawValue) var secondTab = Tab.notifications
-    @AppStorage(TabEntries.third.rawValue) var thirdTab = Tab.explore
-    @AppStorage(TabEntries.fourth.rawValue) var fourthTab = Tab.messages
+    @AppStorage(TabEntries.second.rawValue) var secondTab = Tab.discover
+    @AppStorage(TabEntries.third.rawValue) var thirdTab = Tab.post
+    @AppStorage(TabEntries.fourth.rawValue) var fourthTab = Tab.notifications
     @AppStorage(TabEntries.fifth.rawValue) var fifthTab = Tab.profile
   }
   

@@ -34,7 +34,6 @@ struct StatusRowReplyView: View {
       }
     }
     .font(.scaledFootnote)
-    .foregroundStyle(.secondary)
     .fontWeight(.semibold)
   }
 }

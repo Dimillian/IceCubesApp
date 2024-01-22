@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "apollo-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apollographql/apollo-ios.git",
+      "state" : {
+        "revision" : "fdb97fe7016edc10dd217e530864dd3eee0f114b",
+        "version" : "1.7.0"
+      }
+    },
+    {
       "identity" : "bodega",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mergesort/Bodega",
@@ -14,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Dean151/ButtonKit",
       "state" : {
-        "revision" : "377f5bab4ed047704316d531e0826d4de5ebf6a4",
-        "version" : "0.1.1"
+        "revision" : "d4ed31ead81d04165591148f80bd2e56688bdbd7",
+        "version" : "0.1.2"
       }
     },
     {
@@ -37,6 +46,15 @@
       }
     },
     {
+      "identity" : "glean-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mozilla/glean-swift",
+      "state" : {
+        "revision" : "63e6475bd275399b701951925c64fd4c9a5f7c2d",
+        "version" : "54.0.0"
+      }
+    },
+    {
       "identity" : "keychain-swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/evgenyneu/keychain-swift",
@@ -55,12 +73,30 @@
       }
     },
     {
+      "identity" : "lottie-spm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/airbnb/lottie-spm.git",
+      "state" : {
+        "revision" : "96790253c1a82223bd43da651121abfd7e96d0f3",
+        "version" : "4.3.4"
+      }
+    },
+    {
       "identity" : "lrucache",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/nicklockwood/LRUCache",
       "state" : {
         "revision" : "6d2b5246c9c98dcd498552bb22f08d55b12a8371",
         "version" : "1.0.4"
+      }
+    },
+    {
+      "identity" : "mozilla-social-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/MozillaSocial/mozilla-social-ios",
+      "state" : {
+        "branch" : "ios17",
+        "revision" : "68ed7ae56d73da0b18894717d3c81172c9eae588"
       }
     },
     {

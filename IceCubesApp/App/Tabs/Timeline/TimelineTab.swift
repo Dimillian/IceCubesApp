@@ -49,6 +49,13 @@ struct TimelineTab: View {
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbar {
+            ToolbarItem(placement: .navigation){
+            Image("mozillaLogo")
+                    .resizable()
+                    .frame(width: 96, height: 27)
+                    .padding(.vertical, 10)
+          }
+
           toolbarView
         }
         .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)

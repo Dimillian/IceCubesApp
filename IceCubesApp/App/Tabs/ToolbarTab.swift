@@ -2,6 +2,7 @@ import SwiftUI
 import Env
 import AppAccount
 import DesignSystem
+import Explore
 
 @MainActor
 struct ToolbarTab: ToolbarContent {
@@ -11,17 +12,16 @@ struct ToolbarTab: ToolbarContent {
   @Environment(UserPreferences.self) private var userPreferences
   
   @Binding var routerPath: RouterPath
-  
+  @State private var scrollToTopSignal: Int = 0
+
   var body: some ToolbarContent {
     if !isSecondaryColumn {
-      statusEditorToolbarItem(routerPath: routerPath,
-                              visibility: userPreferences.postVisibility)
-      if UIDevice.current.userInterfaceIdiom != .pad ||
-          (UIDevice.current.userInterfaceIdiom == .pad && horizontalSizeClass == .compact) {
-        ToolbarItem(placement: .navigationBarLeading) {
-          AppAccountsSelectorView(routerPath: routerPath)
+        ToolbarItem {
+            NavigationLink(destination: ExploreView(scrollToTopSignal: $scrollToTopSignal)) {
+                Image(systemName: "magnifyingglass")
+                    .foregroundStyle(Theme.shared.labelColor)
+            }
         }
-      }
     }
     if UIDevice.current.userInterfaceIdiom == .pad && horizontalSizeClass == .regular {
       if (!isSecondaryColumn && !userPreferences.showiPadSecondaryColumn) || isSecondaryColumn {

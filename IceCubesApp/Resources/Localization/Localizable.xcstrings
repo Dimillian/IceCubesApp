@@ -72365,6 +72365,7 @@
       }
     },
     "tab.notifications" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -72483,6 +72484,7 @@
       }
     },
     "tab.profile" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -76430,6 +76432,9 @@
           }
         }
       }
+    },
+    "Todays Top Picks, Coming Soon!" : {
+
     }
   },
   "version" : "1.0"

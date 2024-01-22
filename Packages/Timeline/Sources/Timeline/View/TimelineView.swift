@@ -1,4 +1,5 @@
 import Charts
+import DesignKit
 import DesignSystem
 import Env
 import Models
@@ -25,6 +26,8 @@ public struct TimelineView: View {
   @State private var wasBackgrounded: Bool = false
   @State private var collectionView: UICollectionView?
 
+  @State private var selectedTimelineFilter: LocalizedStringKey
+
   @Binding var timeline: TimelineFilter
   @Binding var pinnedFilters: [TimelineFilter]
   @Binding var selectedTagGroup: TagGroup?
@@ -45,15 +48,28 @@ public struct TimelineView: View {
     _selectedTagGroup = selectedTagGroup
     _scrollToTopSignal = scrollToTopSignal
     self.canFilterTimeline = canFilterTimeline
+    _selectedTimelineFilter = State(initialValue: TimelineFilter.mozillaFilters.first!.localizedTitle())
   }
 
   public var body: some View {
+      SegmentedControl(sources: TimelineFilter.mozillaFilters.map { $0.localizedTitle() }, selected: $selectedTimelineFilter)
+          .onChange(of: selectedTimelineFilter) { newValue in
+              if let selectedTimeline = TimelineFilter.mozillaFilters.first(where: { $0.localizedTitle() == newValue }) {
+                  self.timeline = selectedTimeline
+              }
+          }
     ScrollViewReader { proxy in
       ZStack(alignment: .top) {
         List {
           scrollToTopView
           TimelineTagGroupheaderView(group: $selectedTagGroup, timeline: $timeline)
+                .background {
+                    Color.red
+                }
           TimelineTagHeaderView(tag: $viewModel.tag)
+                .background {
+                    Color.blue
+                }
           switch viewModel.timeline {
           case .remoteLocal:
             StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath, isRemote: true)
@@ -110,7 +126,6 @@ public struct TimelineView: View {
       }
     }
     .toolbar {
-      toolbarTitleView
       toolbarTagGroupButton
     }
     .navigationBarTitleDisplayMode(.inline)

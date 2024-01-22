@@ -12,19 +12,42 @@ struct StatusRowHeaderView: View {
 
   @Environment(Theme.self) private var theme
 
+  @Binding var showTextForSelection: Bool
+
   let viewModel: StatusRowViewModel
   var body: some View {
-    HStack(alignment: theme.avatarPosition == .top ? .center : .top) {
-      Button {
-        viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
-      } label: {
-        accountView
+    HStack()
+    {
+      VStack(alignment: .leading, spacing: 0) {
+        Button {
+          viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
+        } label: {
+          accountView
+        }
+        .buttonStyle(.plain)
+
+        if !redactionReasons.contains(.placeholder) {
+          dateView
+        }
       }
-      .buttonStyle(.plain)
       Spacer()
-      if !redactionReasons.contains(.placeholder) {
-        dateView
+
+      Menu {
+        StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showTextForSelection)
+          .onAppear {
+            Task {
+              await viewModel.loadAuthorRelationship()
+            }
+          }
+      } label: {
+        Label("", systemImage: "ellipsis")
+          .foregroundStyle(Theme.shared.labelColor)
+          .padding(.vertical, 6)
       }
+      .menuStyle(.button)
+      .buttonStyle(.borderless)
+      .contentShape(Rectangle())
+      .accessibilityLabel("status.action.context-menu")
     }
     .accessibilityElement(children: .combine)
     .accessibilityLabel(Text("\(viewModel.finalStatus.account.safeDisplayName)") + Text(", ") + Text(viewModel.finalStatus.createdAt.relativeFormatted))
@@ -45,7 +68,6 @@ struct StatusRowHeaderView: View {
           Group {
             EmojiTextApp(.init(stringValue: viewModel.finalStatus.account.safeDisplayName),
                          emojis: viewModel.finalStatus.account.emojis)
-              .font(.scaledSubheadline)
               .foregroundColor(theme.labelColor)
               .emojiSize(Font.scaledSubheadlineFont.emojiSize)
               .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
@@ -85,12 +107,11 @@ struct StatusRowHeaderView: View {
 
   private var dateView: some View {
     Group {
-      Text(Image(systemName: viewModel.finalStatus.visibility.iconName)) +
-      Text(" ⸱ ") +
-      Text(viewModel.finalStatus.createdAt.relativeFormatted)
+      Text(viewModel.finalStatus.createdAt.relativeFormatted) +
+      Text(" - ") +
+      Text("@\(viewModel.finalStatus.account.acct)")
     }
-    .font(.scaledFootnote)
     .foregroundStyle(.secondary)
-    .lineLimit(1)
+    .lineLimit(2)
   }
 }
