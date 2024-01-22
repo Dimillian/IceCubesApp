@@ -107,7 +107,7 @@ public struct StatusRowView: View {
           }
         }
       }
-      .padding(.init(top: 12, leading: 0, bottom: isFocused ? 12 : 6, trailing: 0))
+      .padding(.init(top: isCompact ? 6 : 12, leading: 0, bottom: isFocused ? 12 : 6, trailing: 0))
     }
     .onAppear {
       if !reasons.contains(.placeholder) {

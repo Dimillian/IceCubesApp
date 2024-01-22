@@ -27,7 +27,7 @@ struct NotificationRowView: View {
                  height: AvatarView.FrameConfig.status.height)
           .accessibilityHidden(true)
       }
-      VStack(alignment: .leading, spacing: 2) {
+      VStack(alignment: .leading, spacing: 0) {
         makeMainLabel(type: notification.type)
           // The main label is redundant for mentions
           .accessibilityHidden(notification.type == .mention)

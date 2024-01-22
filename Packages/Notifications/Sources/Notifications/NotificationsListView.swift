@@ -139,7 +139,7 @@ public struct NotificationsListView: View {
                             followRequests: account.followRequests)
           .listRowInsets(.init(top: 12,
                                leading: .layoutPadding + 4,
-                               bottom: 12,
+                               bottom: 0,
                                trailing: .layoutPadding))
           #if os(visionOS)
           .listRowBackground(RoundedRectangle(cornerRadius: 8)
@@ -168,7 +168,7 @@ public struct NotificationsListView: View {
                               followRequests: account.followRequests)
             .listRowInsets(.init(top: 12,
                                  leading: .layoutPadding + 4,
-                                 bottom: 12,
+                                 bottom: 6,
                                  trailing: .layoutPadding))
             #if os(visionOS)
             .listRowBackground(RoundedRectangle(cornerRadius: 8)
