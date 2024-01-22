@@ -144,11 +144,12 @@ struct StatusRowActionsView: View {
                     .font(.scaledBody)
                 }
                 .padding(.vertical, 6)
-                .padding(.trailing, 8)
+                .padding(.horizontal, 8)
                 #if os(visionOS)
                 .buttonStyle(.borderless)
                 #else
                 .buttonStyle(.statusAction())
+                .offset(x: -8)
                 #endif
                 .accessibilityElement(children: .combine)
                 .accessibilityLabel("status.action.share-link")
@@ -161,11 +162,12 @@ struct StatusRowActionsView: View {
                     .font(.scaledBody)
                 }
                 .padding(.vertical, 6)
-                .padding(.trailing, 8)
+                .padding(.horizontal, 8)
                 #if os(visionOS)
                 .buttonStyle(.borderless)
                 #else
                 .buttonStyle(.statusAction())
+                .offset(x: -8)
                 #endif
                 .accessibilityElement(children: .combine)
                 .accessibilityLabel("status.action.share-link")
@@ -234,7 +236,7 @@ struct StatusRowActionsView: View {
         }
       }
       .padding(.vertical, 6)
-      .padding(.trailing, 8)
+      .padding(.horizontal, 8)
       .contentShape(Rectangle())
     }
     #if os(visionOS)
@@ -246,6 +248,7 @@ struct StatusRowActionsView: View {
           tintColor: action.tintColor(theme: theme)
         )
     )
+    .offset(x: -8)
     #endif
     .disabled(action == .boost &&
               (viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id))
