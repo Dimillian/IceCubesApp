@@ -47,7 +47,7 @@ struct SettingsTabs: View {
       #endif
       .navigationTitle(Text("settings.title"))
       .navigationBarTitleDisplayMode(.inline)
-      .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
+      .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
       .toolbar {
         if isModal {
           ToolbarItem {

@@ -23,7 +23,7 @@ struct ProfileTab: View {
         AccountDetailView(account: account, scrollToTopSignal: $scrollToTopSignal)
           .withAppRouter()
           .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
-          .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
+          .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
           .id(account.id)
       } else {
         AccountDetailView(account: .placeholder(), scrollToTopSignal: $scrollToTopSignal)

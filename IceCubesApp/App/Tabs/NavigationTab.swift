@@ -32,7 +32,7 @@ struct NavigationTab<Content: View>: View {
         .toolbar {
           ToolbarTab(routerPath: $routerPath)
         }
-        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
+        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
         .onChange(of: client.id) {
           routerPath.path = []
         }

@@ -42,7 +42,7 @@ struct NotificationsTab: View {
           }
           ToolbarTab(routerPath: $routerPath)
         }
-        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
+        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
         .id(client.id)
     }
     .onAppear {

@@ -82,12 +82,18 @@ public struct TimelineView: View {
       }
       .safeAreaInset(edge: .top, spacing: 0) {
         if canFilterTimeline, !pinnedFilters.isEmpty {
-          TimelineQuickAccessPills(pinnedFilters: $pinnedFilters, timeline: $timeline)
-            .padding(.vertical, 8)
-            .padding(.horizontal, .layoutPadding)
-            .background(theme.primaryBackgroundColor.opacity(0.50))
-            .background(Material.regular)
+          VStack(spacing: 0) {
+            TimelineQuickAccessPills(pinnedFilters: $pinnedFilters, timeline: $timeline)
+              .padding(.vertical, 8)
+              .padding(.horizontal, .layoutPadding)
+              .background(theme.primaryBackgroundColor.opacity(0.30))
+              .background(Material.ultraThin)
+            Divider()
+          }
         }
+      }
+      .if(canFilterTimeline && !pinnedFilters.isEmpty) { view in
+        view.toolbarBackground(.hidden, for: .navigationBar)
       }
       .onChange(of: viewModel.scrollToIndex) { _, newValue in
         if let collectionView,

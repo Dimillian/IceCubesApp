@@ -89,7 +89,7 @@ struct AppView: View {
           }
           .tag(tab)
           .badge(badgeFor(tab: tab))
-          .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .tabBar)
+          .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .tabBar)
       }
     }
     .id(appAccountsManager.currentClient.id)
