@@ -220,11 +220,7 @@ public struct EditAccountView: View {
 
   @ToolbarContentBuilder
   private var toolbarContent: some ToolbarContent {
-    ToolbarItem(placement: .navigationBarLeading) {
-      Button("action.cancel") {
-        dismiss()
-      }
-    }
+    CancelToolbarItem()
 
     ToolbarItem(placement: .navigationBarTrailing) {
       Button {

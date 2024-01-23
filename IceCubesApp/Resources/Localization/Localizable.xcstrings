@@ -17415,6 +17415,7 @@
     },
     "action.cancel" : {
       "comment" : "MARK: Common strings",
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {

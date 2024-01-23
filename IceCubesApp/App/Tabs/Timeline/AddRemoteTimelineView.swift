@@ -57,9 +57,7 @@ struct AddRemoteTimelineView: View {
       .scrollDismissesKeyboard(.immediately)
       #endif
       .toolbar {
-        ToolbarItem(placement: .navigationBarLeading) {
-          Button("action.cancel", action: { dismiss() })
-        }
+        CancelToolbarItem()
       }
       .onChange(of: instanceName) { _, newValue in
         instanceNamePublisher.send(newValue)

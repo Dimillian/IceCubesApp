@@ -52,9 +52,7 @@ extension StatusEditor {
           }
         }
         .toolbar {
-          ToolbarItem(placement: .navigationBarLeading) {
-            Button("action.cancel", action: { dismiss() })
-          }
+          CancelToolbarItem()
         }
         .scrollContentBackground(.hidden)
         .navigationTitle("status.editor.emojis.navigation-title")

@@ -88,9 +88,7 @@ struct AddAccountView: View {
       #endif
       .toolbar {
         if !appAccountsManager.availableAccounts.isEmpty {
-          ToolbarItem(placement: .navigationBarLeading) {
-            Button("action.cancel", action: { dismiss() })
-          }
+          CancelToolbarItem()
         }
       }
       .onAppear {

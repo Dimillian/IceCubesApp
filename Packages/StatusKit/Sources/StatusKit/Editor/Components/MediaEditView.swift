@@ -98,11 +98,7 @@ extension StatusEditor {
             }
           }
 
-          ToolbarItem(placement: .navigationBarLeading) {
-            Button("action.cancel") {
-              dismiss()
-            }
-          }
+          CancelToolbarItem()
         }
         .preferredColorScheme(theme.selectedScheme == .dark ? .dark : .light)
       }
