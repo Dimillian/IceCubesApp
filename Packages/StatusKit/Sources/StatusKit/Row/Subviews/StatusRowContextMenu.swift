@@ -228,45 +228,14 @@ struct StatusRowContextMenu: View {
               Label("account.action.mute", systemImage: "speaker.slash")
             }
           }
+          
+          #if targetEnvironment(macCatalyst)
+            accountContactMenuItems
+          #else
           ControlGroup {
-            Button {
-              viewModel.routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .pub)
-            } label: {
-              Label("status.action.mention", systemImage: "at")
-            }
-            Button {
-              viewModel.routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .direct)
-            } label: {
-              Label("status.action.message", systemImage: "tray.full")
-            }
-            if viewModel.authorRelationship?.blocking == true {
-              Button {
-                Task {
-                  do {
-                    let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
-                    viewModel.authorRelationship = try await client.post(endpoint: Accounts.unblock(id: operationAccount.id))
-                  } catch {
-                    print("Error while unblocking: \(error.localizedDescription)")
-                  }
-                }
-              } label: {
-                Label("account.action.unblock", systemImage: "person.crop.circle.badge.exclamationmark")
-              }
-            } else {
-              Button {
-                Task {
-                  do {
-                    let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
-                    viewModel.authorRelationship = try await client.post(endpoint: Accounts.block(id: operationAccount.id))
-                  } catch {
-                    print("Error while blocking: \(error.localizedDescription)")
-                  }
-                }
-              } label: {
-                Label("account.action.block", systemImage: "person.crop.circle.badge.xmark")
-              }
-            }
+            accountContactMenuItems
           }
+          #endif
         }
       }
       Section {
@@ -275,6 +244,55 @@ struct StatusRowContextMenu: View {
         } label: {
           Label("status.action.report", systemImage: "exclamationmark.bubble")
         }
+      }
+    }
+  }
+  
+  @ViewBuilder
+  private var accountContactMenuItems: some View {
+    Button {
+      #if targetEnvironment(macCatalyst) || os(visionOS)
+        openWindow(value: WindowDestinationEditor.mentionStatusEditor(account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .pub))
+      #else
+        viewModel.routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .pub)
+      #endif
+    } label: {
+      Label("status.action.mention", systemImage: "at")
+    }
+    Button {
+      #if targetEnvironment(macCatalyst) || os(visionOS)
+        openWindow(value: WindowDestinationEditor.mentionStatusEditor(account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .direct))
+      #else
+        viewModel.routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .direct)
+      #endif
+    } label: {
+      Label("status.action.message", systemImage: "tray.full")
+    }
+    if viewModel.authorRelationship?.blocking == true {
+      Button {
+        Task {
+          do {
+            let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
+            viewModel.authorRelationship = try await client.post(endpoint: Accounts.unblock(id: operationAccount.id))
+          } catch {
+            print("Error while unblocking: \(error.localizedDescription)")
+          }
+        }
+      } label: {
+        Label("account.action.unblock", systemImage: "person.crop.circle.badge.exclamationmark")
+      }
+    } else {
+      Button {
+        Task {
+          do {
+            let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
+            viewModel.authorRelationship = try await client.post(endpoint: Accounts.block(id: operationAccount.id))
+          } catch {
+            print("Error while blocking: \(error.localizedDescription)")
+          }
+        }
+      } label: {
+        Label("account.action.block", systemImage: "person.crop.circle.badge.xmark")
       }
     }
   }
