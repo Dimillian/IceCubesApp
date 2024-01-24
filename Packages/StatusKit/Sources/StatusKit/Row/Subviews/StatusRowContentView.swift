@@ -42,7 +42,7 @@ struct StatusRowContentView: View {
                              client: viewModel.client,
                              routerPath: viewModel.routerPath)
             .fixedSize(horizontal: false, vertical: true)
-            .redacted(reason: .placeholder)
+            .loading()
             .transition(.opacity)
         }
       }

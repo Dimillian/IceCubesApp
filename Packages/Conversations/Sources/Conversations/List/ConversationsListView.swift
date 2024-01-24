@@ -39,7 +39,7 @@ public struct ConversationsListView: View {
                 if viewModel.isLoadingFirstPage {
                   ConversationsListRow(conversation: $conversation, viewModel: viewModel)
                     .padding(.horizontal, .layoutPadding)
-                    .redacted(reason: .placeholder)
+                    .loading()
                     .allowsHitTesting(false)
                 } else {
                   ConversationsListRow(conversation: $conversation, viewModel: viewModel)

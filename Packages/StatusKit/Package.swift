@@ -24,6 +24,7 @@ let package = Package(
     .package(name: "Env", path: "../Env"),
     .package(name: "DesignSystem", path: "../DesignSystem"),
     .package(url: "https://github.com/nicklockwood/LRUCache", from: "1.0.4"),
+    .package(url: "https://github.com/markiv/SwiftUI-Shimmer.git", from: "1.4.0")
   ],
   targets: [
     .target(
@@ -36,6 +37,7 @@ let package = Package(
         .product(name: "Env", package: "Env"),
         .product(name: "DesignSystem", package: "DesignSystem"),
         .product(name: "LRUCache", package: "LRUCache"),
+        .product(name: "Shimmer", package: "SwiftUI-Shimmer"),
       ],
       swiftSettings: [
         .enableExperimentalFeature("StrictConcurrency"),

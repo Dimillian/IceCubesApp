@@ -154,7 +154,7 @@ public struct ExploreView: View {
     ForEach(Status.placeholders()) { status in
       StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
         .padding(.vertical, 8)
-        .redacted(reason: .placeholder)
+        .loading()
         .allowsHitTesting(false)
         #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)

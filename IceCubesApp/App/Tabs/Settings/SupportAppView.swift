@@ -277,7 +277,7 @@ struct SupportAppView: View {
       }
       .padding(.vertical, 8)
     }
-    .redacted(reason: .placeholder)
+    .loading()
     .allowsHitTesting(false)
   }
 }

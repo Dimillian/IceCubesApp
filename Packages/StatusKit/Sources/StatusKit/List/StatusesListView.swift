@@ -30,7 +30,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
     case .loading:
       ForEach(Status.placeholders()) { status in
         StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
-          .redacted(reason: .placeholder)
+          .loading()
           .allowsHitTesting(false)
       }
     case .error:

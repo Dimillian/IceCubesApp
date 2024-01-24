@@ -76,7 +76,7 @@ public struct AppAccountsSelectorView: View {
         AvatarView(account.avatar, config: avatarConfig)
       } else {
         AvatarView(config: avatarConfig)
-          .redacted(reason: .placeholder)
+          .loading()
           .allowsHitTesting(false)
       }
     }.overlay(alignment: .topTrailing) {

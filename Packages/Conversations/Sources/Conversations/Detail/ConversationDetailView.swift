@@ -105,7 +105,7 @@ public struct ConversationDetailView: View {
   private var loadingView: some View {
     ForEach(Status.placeholders()) { message in
       ConversationMessageView(message: message, conversation: viewModel.conversation)
-        .redacted(reason: .placeholder)
+        .loading()
         .allowsHitTesting(false)
         .padding(.vertical, 4)
     }

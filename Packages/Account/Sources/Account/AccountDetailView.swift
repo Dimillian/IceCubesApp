@@ -167,7 +167,7 @@ public struct AccountDetailView: View {
       AccountDetailHeaderView(viewModel: viewModel,
                               account: .placeholder(),
                               scrollViewProxy: proxy)
-        .redacted(reason: .placeholder)
+        .loading()
         .allowsHitTesting(false)
     case let .data(account):
       AccountDetailHeaderView(viewModel: viewModel,

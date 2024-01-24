@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		011AD2D42B6126F000F7B7FB /* Shimmer in Frameworks */ = {isa = PBXBuildFile; productRef = 011AD2D32B6126F000F7B7FB /* Shimmer */; };
 		069709A5298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 069709A3298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf */; };
 		069709A8298C87B5006E4CB5 /* OpenDyslexic-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 069709A7298C87B5006E4CB5 /* OpenDyslexic-Regular.otf */; };
 		069709AA298C9AD7006E4CB5 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069709A9298C9AD7006E4CB5 /* AboutView.swift */; };
@@ -313,6 +314,7 @@
 				9F5E581929545BE700A53960 /* Env in Frameworks */,
 				9F2A540A29699705009B2D7C /* ReceiptParser in Frameworks */,
 				DA0B24FB2A6876D50045BDD7 /* SFSafeSymbols in Frameworks */,
+				011AD2D42B6126F000F7B7FB /* Shimmer in Frameworks */,
 				9F295540292B6C3400E0E81B /* Timeline in Frameworks */,
 				9F35DB4A29506FA100B3281A /* Notifications in Frameworks */,
 				9FC2A38B2B49D19A00DFD1C1 /* StatusKit in Frameworks */,
@@ -731,6 +733,7 @@
 				9F2A540829699705009B2D7C /* XCRemoteSwiftPackageReference "purchases-ios" */,
 				DA0B24F92A6876D40045BDD7 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
 				9FE4CCA92B4C848A00DA5F13 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */,
+				011AD2D22B6126F000F7B7FB /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */,
 			);
 			productRefGroup = 9FBFE63A292A715500C250E9 /* Products */;
 			projectDirPath = "";
@@ -1415,6 +1418,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		011AD2D22B6126F000F7B7FB /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/markiv/SwiftUI-Shimmer.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.0;
+			};
+		};
 		9F2A540829699705009B2D7C /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
@@ -1450,6 +1461,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		011AD2D32B6126F000F7B7FB /* Shimmer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 011AD2D22B6126F000F7B7FB /* XCRemoteSwiftPackageReference "SwiftUI-Shimmer" */;
+			productName = Shimmer;
+		};
 		9F29553F292B6C3400E0E81B /* Timeline */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Timeline;

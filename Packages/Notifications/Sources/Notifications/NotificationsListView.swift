@@ -147,7 +147,7 @@ public struct NotificationsListView: View {
           #else
            .listRowBackground(theme.primaryBackgroundColor)
           #endif
-          .redacted(reason: .placeholder)
+          .loading()
           .allowsHitTesting(false)
       }
 

@@ -27,7 +27,7 @@ struct ProfileTab: View {
           .id(account.id)
       } else {
         AccountDetailView(account: .placeholder(), scrollToTopSignal: $scrollToTopSignal)
-          .redacted(reason: .placeholder)
+          .loading()
           .allowsHitTesting(false)
       }
     }

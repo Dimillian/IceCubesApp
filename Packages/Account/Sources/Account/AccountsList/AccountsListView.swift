@@ -87,7 +87,7 @@ public struct AccountsListView: View {
     case .loading:
       ForEach(Account.placeholders()) { _ in
         AccountsListRow(viewModel: .init(account: .placeholder(), relationShip: .placeholder()))
-          .redacted(reason: .placeholder)
+          .loading()
           .allowsHitTesting(false)
           #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)

@@ -260,7 +260,7 @@ struct AddAccountView: View {
         .font(.scaledFootnote)
         .foregroundStyle(.secondary)
     }
-    .redacted(reason: .placeholder)
+    .loading()
     .allowsHitTesting(false)
     #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
