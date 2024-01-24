@@ -60,7 +60,7 @@ extension StatusEditor {
       }
       .presentationBackground(.thinMaterial)
       .presentationCornerRadius(16)
-      .presentationDetents([.medium, .large])
+      .presentationDetents([.medium])
     }
   }
 }
