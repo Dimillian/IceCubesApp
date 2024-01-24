@@ -95,7 +95,7 @@ struct NotificationRowView: View {
         }.offset(y: -1)
       }
       if !reasons.contains(.placeholder) {
-        HStack(spacing: 0) {
+        HStack(alignment: .top) {
           EmojiTextApp(.init(stringValue: notification.accounts[0].safeDisplayName),
                        emojis: notification.accounts[0].emojis,
                        append: {
@@ -106,15 +106,7 @@ struct NotificationRowView: View {
                            : Text(" ")) +
                            Text(type.label(count: notification.accounts.count))
                            .font(.scaledSubheadline)
-                           .fontWeight(.regular) +
-                           Text(" ⸱ ")
-                           .font(.scaledFootnote)
                            .fontWeight(.regular)
-                           .foregroundStyle(.secondary) +
-                           Text(notification.createdAt.relativeFormatted)
-                           .font(.scaledFootnote)
-                           .fontWeight(.regular)
-                           .foregroundStyle(.secondary)
                        })
                        .font(.scaledSubheadline)
                        .emojiSize(Font.scaledSubheadlineFont.emojiSize)
@@ -122,6 +114,10 @@ struct NotificationRowView: View {
                        .fontWeight(.semibold)
                        .lineLimit(3)
                        .fixedSize(horizontal: false, vertical: true)
+          Spacer()
+          Text(notification.createdAt.relativeFormatted)
+            .font(.subheadline)
+            .foregroundStyle(.secondary)
           if let status = notification.status, notification.type == .mention {
             Group {
               Text(" ⸱ ")
@@ -132,7 +128,6 @@ struct NotificationRowView: View {
             .fontWeight(.regular)
             .foregroundStyle(.secondary)
           }
-          Spacer()
         }
       } else {
         Text("          ")
