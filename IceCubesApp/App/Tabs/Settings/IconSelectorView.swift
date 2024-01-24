@@ -44,7 +44,6 @@ struct IconSelectorView: View {
         .alt5, .alt6, .alt7, .alt8,
         .alt9, .alt10, .alt11, .alt12, .alt13, .alt14, .alt15,
         .alt16, .alt17, .alt18, .alt19, .alt20, .alt21]),
-      IconSelector(title: "\("settings.app.icon.designed-by".localized) Louie Mantia, Jr.", icons: []),
       IconSelector(title: "\("settings.app.icon.designed-by".localized) Albert Kinng", icons: [.alt22, .alt23, .alt24, .alt25, .alt26]),
       IconSelector(title: "\("settings.app.icon.designed-by".localized) Dan van Moll", icons: [.alt27, .alt28, .alt29]),
       IconSelector(title: "\("settings.app.icon.designed-by".localized) Chanhwi Joo (GitHub @te6-in)", icons: [.alt30, .alt31, .alt32, .alt33, .alt34, .alt35, .alt36]),
