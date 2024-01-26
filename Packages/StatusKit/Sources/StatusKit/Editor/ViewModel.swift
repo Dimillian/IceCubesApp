@@ -670,7 +670,7 @@ extension StatusEditor {
       }
     }
 
-    func makeMediaContainer(from pickerItem: PhotosPickerItem) async -> MediaContainer? {
+    nonisolated func makeMediaContainer(from pickerItem: PhotosPickerItem) async -> MediaContainer? {
       await withTaskGroup(of: MediaContainer?.self, returning: MediaContainer?.self) { taskGroup in
         taskGroup.addTask(priority: .high) { await Self.makeImageContainer(from: pickerItem) }
         taskGroup.addTask(priority: .high) { await Self.makeGifContainer(from: pickerItem) }

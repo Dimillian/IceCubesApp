@@ -108,9 +108,7 @@ public struct ExploreView: View {
         }
       }
       .task(id: viewModel.searchQuery) {
-        do {
-          await viewModel.search()
-        } catch {}
+        await viewModel.search()
       }
       .onChange(of: scrollToTopSignal) {
         if viewModel.scrollToTopVisible {

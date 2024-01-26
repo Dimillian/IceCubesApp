@@ -5,7 +5,7 @@ import SwiftUI
 import UIKit
 
 extension StatusEditor {
-  struct MediaContainer: Identifiable {
+  struct MediaContainer: Identifiable, Sendable {
     let id: String
     let image: UIImage?
     let movieTransferable: MovieFileTranseferable?

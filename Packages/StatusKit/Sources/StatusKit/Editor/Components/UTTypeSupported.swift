@@ -72,7 +72,7 @@ extension StatusEditor {
 }
 
 extension StatusEditor {
-  final class MovieFileTranseferable: Transferable {
+  final class MovieFileTranseferable: Transferable, Sendable {
     let url: URL
 
     init(url: URL) {
@@ -94,7 +94,7 @@ extension StatusEditor {
     }
   }
   
-  final class GifFileTranseferable: Transferable {
+  final class GifFileTranseferable: Transferable, Sendable {
     let url: URL
 
     init(url: URL) {
