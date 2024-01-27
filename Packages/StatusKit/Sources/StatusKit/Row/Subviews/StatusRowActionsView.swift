@@ -141,7 +141,8 @@ struct StatusRowActionsView: View {
               case .linkOnly:
                 ShareLink(item: url) {
                   action.image(dataController: statusDataController)
-                    .font(.scaledBody)
+                    .font(.body)
+                    .dynamicTypeSize(.medium)
                 }
                 .padding(.vertical, 6)
                 .padding(.horizontal, 8)
@@ -159,7 +160,8 @@ struct StatusRowActionsView: View {
                           message: Text(viewModel.finalStatus.content.asRawText))
                 {
                   action.image(dataController: statusDataController)
-                    .font(.scaledBody)
+                    .font(.body)
+                    .dynamicTypeSize(.medium)
                 }
                 .padding(.vertical, 6)
                 .padding(.horizontal, 8)
@@ -213,12 +215,14 @@ struct StatusRowActionsView: View {
           action
             .image(dataController: statusDataController, privateBoost: privateBoost())
             .imageScale(.medium)
-            .font(.scaledBody)
+            .font(.body)
             .fontWeight(.black)
+            .dynamicTypeSize(.medium)
         } else {
           action
             .image(dataController: statusDataController, privateBoost: privateBoost())
-            .font(.scaledBody)
+            .font(.body)
+            .dynamicTypeSize(.medium)
         }
         if !isNarrow,
            let count = action.count(dataController: statusDataController,
@@ -230,7 +234,8 @@ struct StatusRowActionsView: View {
             .minimumScaleFactor(0.6)
             .contentTransition(.numericText(value: Double(count)))
             .foregroundColor(Color(UIColor.secondaryLabel))
-            .font(.scaledFootnote)
+            .font(.footnote)
+            .dynamicTypeSize(.small)
             .monospacedDigit()
             .opacity(count > 0 ? 1 : 0)
         }
