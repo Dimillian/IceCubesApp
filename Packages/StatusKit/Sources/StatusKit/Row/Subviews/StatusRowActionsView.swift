@@ -141,8 +141,12 @@ struct StatusRowActionsView: View {
               case .linkOnly:
                 ShareLink(item: url) {
                   action.image(dataController: statusDataController)
+                    #if targetEnvironment(macCatalyst)
+                    .font(.scaledBody)
+                    #else
                     .font(.body)
                     .dynamicTypeSize(.medium)
+                    #endif
                 }
                 .padding(.vertical, 6)
                 .padding(.horizontal, 8)
@@ -160,8 +164,12 @@ struct StatusRowActionsView: View {
                           message: Text(viewModel.finalStatus.content.asRawText))
                 {
                   action.image(dataController: statusDataController)
+                    #if targetEnvironment(macCatalyst)
+                    .font(.scaledBody)
+                    #else
                     .font(.body)
                     .dynamicTypeSize(.medium)
+                    #endif
                 }
                 .padding(.vertical, 6)
                 .padding(.horizontal, 8)
@@ -215,14 +223,22 @@ struct StatusRowActionsView: View {
           action
             .image(dataController: statusDataController, privateBoost: privateBoost())
             .imageScale(.medium)
-            .font(.body)
             .fontWeight(.black)
+            #if targetEnvironment(macCatalyst)
+            .font(.scaledBody)
+            #else
+            .font(.body)
             .dynamicTypeSize(.medium)
+            #endif
         } else {
           action
             .image(dataController: statusDataController, privateBoost: privateBoost())
+            #if targetEnvironment(macCatalyst)
+            .font(.scaledBody)
+            #else
             .font(.body)
             .dynamicTypeSize(.medium)
+            #endif
         }
         if !isNarrow,
            let count = action.count(dataController: statusDataController,
@@ -234,8 +250,12 @@ struct StatusRowActionsView: View {
             .minimumScaleFactor(0.6)
             .contentTransition(.numericText(value: Double(count)))
             .foregroundColor(Color(UIColor.secondaryLabel))
+            #if targetEnvironment(macCatalyst)
+            .font(.scaledFootnote)
+            #else
             .font(.footnote)
             .dynamicTypeSize(.small)
+            #endif
             .monospacedDigit()
             .opacity(count > 0 ? 1 : 0)
         }
