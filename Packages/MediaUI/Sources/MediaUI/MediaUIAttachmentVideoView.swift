@@ -50,6 +50,12 @@ import Models
     isPlaying = false
     player?.pause()
   }
+  
+  func stop() {
+    isPlaying = false
+    player?.pause()
+    player = nil
+  }
 
   func play() {
     isPlaying = true
@@ -96,7 +102,7 @@ public struct MediaUIAttachmentVideoView: View {
       viewModel.mute(preferences.muteVideo)
     }
     .onDisappear {
-      viewModel.pause()
+      viewModel.stop()
     }
     .onTapGesture {
       if !preferences.autoPlayVideo && !viewModel.isPlaying {
