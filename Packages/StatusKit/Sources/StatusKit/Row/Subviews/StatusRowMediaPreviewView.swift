@@ -121,7 +121,7 @@ private struct MediaPreview: View {
   let displayData: DisplayData
 
   var body: some View {
-    GeometryReader { _ in
+    Group {
       switch displayData.type {
       case .image:
         LazyResizableImage(url: displayData.previewUrl) { state, _ in
@@ -409,13 +409,12 @@ private struct FeaturedImagePreView: View {
   var body: some View {
     if let url = attachment.url {
       _Layout(originalWidth: originalWidth, originalHeight: originalHeight, maxSize: maxSize) {
-
         Group {
           RoundedRectangle(cornerRadius: 10).fill(Color.gray)
             .overlay {
               switch attachment.supportedType {
               case .image:
-                LazyImage(url: attachment.url) { state in
+                LazyResizableImage(url: attachment.url) { state, _ in
                   if let image = state.image {
                     image
                       .resizable()
