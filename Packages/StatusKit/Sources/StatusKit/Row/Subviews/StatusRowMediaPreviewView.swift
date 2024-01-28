@@ -132,11 +132,11 @@ private struct MediaPreview: View {
               .frame(width: displayData.isLandscape ? imageMaxHeight * 1.2 : imageMaxHeight / 1.5,
                      height: imageMaxHeight)
               .overlay(
-                RoundedRectangle(cornerRadius: 4)
+                RoundedRectangle(cornerRadius: 10)
                   .stroke(.gray.opacity(0.35), lineWidth: 1)
               )
           } else if state.isLoading {
-            RoundedRectangle(cornerRadius: 4)
+            RoundedRectangle(cornerRadius: 10)
               .fill(Color.gray)
           }
         }
@@ -154,7 +154,7 @@ private struct MediaPreview: View {
     .frame(width: displayData.isLandscape ? imageMaxHeight * 1.2 : imageMaxHeight / 1.5,
            height: imageMaxHeight)
     .clipped()
-    .cornerRadius(4)
+    .cornerRadius(10)
     // #965: do not create overlapping tappable areas, when multiple images are shown
     .contentShape(Rectangle())
     .accessibilityElement(children: .ignore)
@@ -409,7 +409,6 @@ private struct FeaturedImagePreView: View {
   var body: some View {
     if let url = attachment.url {
       _Layout(originalWidth: originalWidth, originalHeight: originalHeight, maxSize: maxSize) {
-//        RoundedRectangle(cornerRadius: 10).fill(Color.gray)
 
         Group {
           RoundedRectangle(cornerRadius: 10).fill(Color.gray)
