@@ -161,6 +161,7 @@ public struct StatusPollView: View {
 
       HStack {
         Text(option.title)
+          .multilineTextAlignment(.leading)
           .foregroundColor(theme.labelColor)
           .font(.scaledBody)
           .lineLimit(3)
