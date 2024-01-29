@@ -141,11 +141,21 @@ struct StatusRowActionsView: View {
               case .linkOnly:
                 ShareLink(item: url) {
                   action.image(dataController: statusDataController)
+                    #if targetEnvironment(macCatalyst)
                     .font(.scaledBody)
+                    #else
+                    .font(.body)
+                    .dynamicTypeSize(.large)
+                    #endif
                 }
                 .padding(.vertical, 6)
-                .padding(.trailing, 8)
+                .padding(.horizontal, 8)
+                #if os(visionOS)
+                .buttonStyle(.borderless)
+                #else
                 .buttonStyle(.statusAction())
+                .offset(x: -8)
+                #endif
                 .accessibilityElement(children: .combine)
                 .accessibilityLabel("status.action.share-link")
               case .linkAndText:
@@ -154,11 +164,21 @@ struct StatusRowActionsView: View {
                           message: Text(viewModel.finalStatus.content.asRawText))
                 {
                   action.image(dataController: statusDataController)
+                    #if targetEnvironment(macCatalyst)
                     .font(.scaledBody)
+                    #else
+                    .font(.body)
+                    .dynamicTypeSize(.large)
+                    #endif
                 }
                 .padding(.vertical, 6)
-                .padding(.trailing, 8)
+                .padding(.horizontal, 8)
+                #if os(visionOS)
+                .buttonStyle(.borderless)
+                #else
                 .buttonStyle(.statusAction())
+                .offset(x: -8)
+                #endif
                 .accessibilityElement(children: .combine)
                 .accessibilityLabel("status.action.share-link")
               }
@@ -203,12 +223,22 @@ struct StatusRowActionsView: View {
           action
             .image(dataController: statusDataController, privateBoost: privateBoost())
             .imageScale(.medium)
-            .font(.scaledBody)
             .fontWeight(.black)
+            #if targetEnvironment(macCatalyst)
+            .font(.scaledBody)
+            #else
+            .font(.body)
+            .dynamicTypeSize(.large)
+            #endif
         } else {
           action
             .image(dataController: statusDataController, privateBoost: privateBoost())
+            #if targetEnvironment(macCatalyst)
             .font(.scaledBody)
+            #else
+            .font(.body)
+            .dynamicTypeSize(.large)
+            #endif
         }
         if !isNarrow,
            let count = action.count(dataController: statusDataController,
@@ -220,21 +250,31 @@ struct StatusRowActionsView: View {
             .minimumScaleFactor(0.6)
             .contentTransition(.numericText(value: Double(count)))
             .foregroundColor(Color(UIColor.secondaryLabel))
+            #if targetEnvironment(macCatalyst)
             .font(.scaledFootnote)
+            #else
+            .font(.footnote)
+            .dynamicTypeSize(.medium)
+            #endif
             .monospacedDigit()
             .opacity(count > 0 ? 1 : 0)
         }
       }
       .padding(.vertical, 6)
-      .padding(.trailing, 8)
+      .padding(.horizontal, 8)
       .contentShape(Rectangle())
     }
+    #if os(visionOS)
+    .buttonStyle(.borderless)
+    #else
     .buttonStyle(
         .statusAction(
           isOn: action.isOn(dataController: statusDataController),
           tintColor: action.tintColor(theme: theme)
         )
     )
+    .offset(x: -8)
+    #endif
     .disabled(action == .boost &&
               (viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id))
     .accessibilityElement(children: .combine)

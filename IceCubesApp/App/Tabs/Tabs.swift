@@ -25,7 +25,7 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
   }
   
   static func visionOSTab() -> [Tab] {
-    [.profile, .timeline, .notifications, .mentions, .explore, .messages, .settings]
+    [.profile, .timeline, .notifications, .mentions, .explore, .messages, .post, .settings]
   }
 
   @ViewBuilder

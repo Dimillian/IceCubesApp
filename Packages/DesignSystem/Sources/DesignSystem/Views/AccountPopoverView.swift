@@ -2,7 +2,6 @@ import Env
 import Models
 import Nuke
 import NukeUI
-import Shimmer
 import SwiftUI
 
 struct AccountPopoverView: View {

@@ -87,7 +87,12 @@ extension StatusEditor {
     func compressVideo(_ url: URL) async -> URL? {
       await withCheckedContinuation { continuation in
         let urlAsset = AVURLAsset(url: url, options: nil)
-        guard let exportSession = AVAssetExportSession(asset: urlAsset, presetName: AVAssetExportPreset1920x1080) else {
+        let presetName: String = if Bundle.main.bundlePath.hasSuffix(".appex") {
+          AVAssetExportPreset1280x720
+        } else {
+          AVAssetExportPreset1920x1080
+        }
+        guard let exportSession = AVAssetExportSession(asset: urlAsset, presetName: presetName) else {
           continuation.resume(returning: nil)
           return
         }

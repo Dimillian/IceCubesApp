@@ -65,13 +65,7 @@ public struct ReportView: View {
           }
         }
 
-        ToolbarItem(placement: .navigationBarLeading) {
-          Button {
-            dismiss()
-          } label: {
-            Text("action.cancel")
-          }
-        }
+        CancelToolbarItem()
       }
     }
   }

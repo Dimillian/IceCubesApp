@@ -103,15 +103,25 @@ public struct StatusPollView: View {
         .accessibilityAddTraits(isInteractive ? [] : .isStaticText)
         .accessibilityRemoveTraits(isInteractive ? [] : .isButton)
       }
-      if !viewModel.poll.expired, !(viewModel.poll.voted ?? false), !viewModel.votes.isEmpty {
-        Button("status.poll.send") {
-          Task {
-            do {
-              await viewModel.postVotes()
+      if !viewModel.poll.expired, !(viewModel.poll.voted ?? false) {
+        HStack {
+          if !viewModel.votes.isEmpty {
+            Button("status.poll.send") {
+              Task {
+                do {
+                  await viewModel.postVotes()
+                }
+              }
+            }
+            .buttonStyle(.borderedProminent)
+          }
+          Button(viewModel.showResults ? "status.poll.hide-results" : "status.poll.show-results") {
+            withAnimation {
+              viewModel.showResults.toggle()
             }
           }
+          .buttonStyle(.bordered)
         }
-        .buttonStyle(.bordered)
       }
       footerView
 
@@ -175,30 +185,31 @@ public struct StatusPollView: View {
                   let width = widthForOption(option: option, proxy: proxy)
                   Rectangle()
                     .foregroundColor(theme.tintColor)
-                    .frame(height: .pollBarHeight)
                     .frame(width: width)
                   if width != proxy.size.width {
                     Spacer()
                   }
                 }
+                .transition(.asymmetric(insertion: .push(from: .leading),
+                                        removal: .push(from: .trailing)))
               }
             }
             .foregroundColor(theme.tintColor.opacity(0.40))
-            .frame(height: .pollBarHeight)
             .clipShape(RoundedRectangle(cornerRadius: 8))
-
+          
           HStack {
             buttonImage
             Text(option.title)
               .foregroundColor(theme.labelColor)
               .font(.scaledBody)
+              .lineLimit(3)
               .minimumScaleFactor(0.7)
           }
           .padding(.leading, 12)
         }
       }
-      .frame(height: .pollBarHeight)
     }
     .buttonStyle(.borderless)
+    .frame(minHeight: .pollBarHeight)
   }
 }

@@ -2,7 +2,6 @@ import DesignSystem
 import Env
 import Models
 import Network
-import Shimmer
 import SwiftUI
 
 extension StatusEditor {
@@ -54,7 +53,6 @@ extension StatusEditor {
                   RoundedRectangle(cornerRadius: 8)
                     .fill(Color.gray)
                     .frame(height: 200)
-                    .shimmering()
                 }
               )
             }
@@ -100,11 +98,7 @@ extension StatusEditor {
             }
           }
 
-          ToolbarItem(placement: .navigationBarLeading) {
-            Button("action.cancel") {
-              dismiss()
-            }
-          }
+          CancelToolbarItem()
         }
         .preferredColorScheme(theme.selectedScheme == .dark ? .dark : .light)
       }

@@ -35,11 +35,13 @@ struct DisplaySettingsView: View {
   var body: some View {
     ZStack(alignment: .top) {
       Form {
+        #if !os(visionOS)
         StatusRowView(viewModel: previewStatusViewModel)
           .allowsHitTesting(false)
           .opacity(0)
           .hidden()
         themeSection
+        #endif
         fontSection
         layoutSection
         platformsSection
@@ -74,7 +76,9 @@ struct DisplaySettingsView: View {
         do { try await Task.sleep(for: .microseconds(500)) } catch {}
         theme.fontSizeScale = localValues.fontSizeScale
       }
+      #if !os(visionOS)
       examplePost
+      #endif
     }
   }
 
@@ -243,7 +247,7 @@ struct DisplaySettingsView: View {
     @Bindable var userPreferences = userPreferences
 
     if UIDevice.current.userInterfaceIdiom == .pad {
-      Section("iPad") {
+      Section("settings.display.section.platform") {
         Toggle("settings.display.show-ipad-column", isOn: $userPreferences.showiPadSecondaryColumn)
       }
       #if !os(visionOS)
@@ -255,21 +259,7 @@ struct DisplaySettingsView: View {
   private var resetSection: some View {
     Section {
       Button {
-        theme.followSystemColorScheme = true
-        theme.applySet(set: colorScheme == .dark ? .iceCubeDark : .iceCubeLight)
-        theme.avatarShape = .circle
-        theme.avatarPosition = .leading
-        theme.statusActionsDisplay = .full
-        theme.displayFullUsername = false
-        theme.statusDisplayStyle = .large
-        theme.lineSpacing = 1.2
-        theme.fontSizeScale = 1.0
-
-        localValues.tintColor = theme.tintColor
-        localValues.primaryBackgroundColor = theme.primaryBackgroundColor
-        localValues.secondaryBackgroundColor = theme.secondaryBackgroundColor
-        localValues.labelColor = theme.labelColor
-
+        theme.restoreDefault()
       } label: {
         Text("settings.display.restore")
       }

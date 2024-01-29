@@ -37,38 +37,41 @@ struct StatusRowContextMenu: View {
 
   var body: some View {
     if !viewModel.isRemote {
-      Button { Task {
-        HapticManager.shared.fireHaptic(.notification(.success))
-        SoundEffectManager.shared.playSound(.favorite)
-        await statusDataController.toggleFavorite(remoteStatus: nil)
-      } } label: {
-        Label(statusDataController.isFavorited ? "status.action.unfavorite" : "status.action.favorite", systemImage: statusDataController.isFavorited ? "star.fill" : "star")
+      ControlGroup {
+        Button {
+          #if targetEnvironment(macCatalyst) || os(visionOS)
+            openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: viewModel.status))
+          #else
+            viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
+          #endif
+        } label: {
+          Label("status.action.reply", systemImage: "arrowshape.turn.up.left")
+        }
+        Button { Task {
+          HapticManager.shared.fireHaptic(.notification(.success))
+          SoundEffectManager.shared.playSound(.favorite)
+          await statusDataController.toggleFavorite(remoteStatus: nil)
+        } } label: {
+          Label(statusDataController.isFavorited ? "status.action.unfavorite" : "status.action.favorite", systemImage: statusDataController.isFavorited ? "star.fill" : "star")
+        }
+        Button { Task {
+          HapticManager.shared.fireHaptic(.notification(.success))
+          SoundEffectManager.shared.playSound(.boost)
+          await statusDataController.toggleReblog(remoteStatus: nil)
+        } } label: {
+          boostLabel
+        }
+        .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != account.account?.id)
+        Button { Task {
+          SoundEffectManager.shared.playSound(.bookmark)
+          HapticManager.shared.fireHaptic(.notification(.success))
+          await statusDataController.toggleBookmark(remoteStatus: nil)
+        } } label: {
+          Label(statusDataController.isBookmarked ? "status.action.unbookmark" : "status.action.bookmark",
+                systemImage: statusDataController.isBookmarked ? "bookmark.fill" : "bookmark")
+        }
       }
-      Button { Task {
-        HapticManager.shared.fireHaptic(.notification(.success))
-        SoundEffectManager.shared.playSound(.boost)
-        await statusDataController.toggleReblog(remoteStatus: nil)
-      } } label: {
-        boostLabel
-      }
-      .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != account.account?.id)
-      Button { Task {
-        SoundEffectManager.shared.playSound(.bookmark)
-        HapticManager.shared.fireHaptic(.notification(.success))
-        await statusDataController.toggleBookmark(remoteStatus: nil)
-      } } label: {
-        Label(statusDataController.isBookmarked ? "status.action.unbookmark" : "status.action.bookmark",
-              systemImage: statusDataController.isBookmarked ? "bookmark.fill" : "bookmark")
-      }
-      Button {
-        #if targetEnvironment(macCatalyst) || os(visionOS)
-          openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: viewModel.status))
-        #else
-          viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.status)
-        #endif
-      } label: {
-        Label("status.action.reply", systemImage: "arrowshape.turn.up.left")
-      }
+      .controlGroupStyle(.compactMenu)
       Button {
         #if targetEnvironment(macCatalyst) || os(visionOS)
           openWindow(value: WindowDestinationEditor.quoteStatusEditor(status: viewModel.status))
@@ -194,45 +197,6 @@ struct StatusRowContextMenu: View {
     } else {
       if !viewModel.isRemote {
         Section(viewModel.status.reblog?.account.acct ?? viewModel.status.account.acct) {
-          Button {
-            viewModel.routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .pub)
-          } label: {
-            Label("status.action.mention", systemImage: "at")
-          }
-          Button {
-            viewModel.routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .direct)
-          } label: {
-            Label("status.action.message", systemImage: "tray.full")
-          }
-
-          if viewModel.authorRelationship?.blocking == true {
-            Button {
-              Task {
-                do {
-                  let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
-                  viewModel.authorRelationship = try await client.post(endpoint: Accounts.unblock(id: operationAccount.id))
-                } catch {
-                  print("Error while unblocking: \(error.localizedDescription)")
-                }
-              }
-            } label: {
-              Label("account.action.unblock", systemImage: "person.crop.circle.badge.exclamationmark")
-            }
-          } else {
-            Button {
-              Task {
-                do {
-                  let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
-                  viewModel.authorRelationship = try await client.post(endpoint: Accounts.block(id: operationAccount.id))
-                } catch {
-                  print("Error while blocking: \(error.localizedDescription)")
-                }
-              }
-            } label: {
-              Label("account.action.block", systemImage: "person.crop.circle.badge.xmark")
-            }
-          }
-
           if viewModel.authorRelationship?.muting == true {
             Button {
               Task {
@@ -264,6 +228,14 @@ struct StatusRowContextMenu: View {
               Label("account.action.mute", systemImage: "speaker.slash")
             }
           }
+          
+          #if targetEnvironment(macCatalyst)
+            accountContactMenuItems
+          #else
+          ControlGroup {
+            accountContactMenuItems
+          }
+          #endif
         }
       }
       Section {
@@ -272,6 +244,55 @@ struct StatusRowContextMenu: View {
         } label: {
           Label("status.action.report", systemImage: "exclamationmark.bubble")
         }
+      }
+    }
+  }
+  
+  @ViewBuilder
+  private var accountContactMenuItems: some View {
+    Button {
+      #if targetEnvironment(macCatalyst) || os(visionOS)
+        openWindow(value: WindowDestinationEditor.mentionStatusEditor(account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .pub))
+      #else
+        viewModel.routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .pub)
+      #endif
+    } label: {
+      Label("status.action.mention", systemImage: "at")
+    }
+    Button {
+      #if targetEnvironment(macCatalyst) || os(visionOS)
+        openWindow(value: WindowDestinationEditor.mentionStatusEditor(account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .direct))
+      #else
+        viewModel.routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .direct)
+      #endif
+    } label: {
+      Label("status.action.message", systemImage: "tray.full")
+    }
+    if viewModel.authorRelationship?.blocking == true {
+      Button {
+        Task {
+          do {
+            let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
+            viewModel.authorRelationship = try await client.post(endpoint: Accounts.unblock(id: operationAccount.id))
+          } catch {
+            print("Error while unblocking: \(error.localizedDescription)")
+          }
+        }
+      } label: {
+        Label("account.action.unblock", systemImage: "person.crop.circle.badge.exclamationmark")
+      }
+    } else {
+      Button {
+        Task {
+          do {
+            let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
+            viewModel.authorRelationship = try await client.post(endpoint: Accounts.block(id: operationAccount.id))
+          } catch {
+            print("Error while blocking: \(error.localizedDescription)")
+          }
+        }
+      } label: {
+        Label("account.action.block", systemImage: "person.crop.circle.badge.xmark")
       }
     }
   }

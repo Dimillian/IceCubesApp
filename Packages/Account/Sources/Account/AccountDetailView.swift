@@ -3,7 +3,6 @@ import EmojiText
 import Env
 import Models
 import Network
-import Shimmer
 import StatusKit
 import SwiftUI
 

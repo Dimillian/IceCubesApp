@@ -3,11 +3,12 @@ import DesignSystem
 import Env
 import Observation
 import SwiftUI
+import Models
 
 @MainActor
 @Observable public class MediaUIAttachmentVideoViewModel {
   var player: AVPlayer?
-  private let url: URL
+  let url: URL
   let forceAutoPlay: Bool
   var isPlaying: Bool = false
 
@@ -49,6 +50,12 @@ import SwiftUI
     isPlaying = false
     player?.pause()
   }
+  
+  func stop() {
+    isPlaying = false
+    player?.pause()
+    player = nil
+  }
 
   func play() {
     isPlaying = true
@@ -74,8 +81,9 @@ import SwiftUI
 
 @MainActor
 public struct MediaUIAttachmentVideoView: View {
+  @Environment(\.openWindow) private var openWindow
   @Environment(\.scenePhase) private var scenePhase
-  @Environment(\.isCompact) private var isCompact
+  @Environment(\.isMediaCompact) private var isCompact
   @Environment(UserPreferences.self) private var preferences
   @Environment(Theme.self) private var theme
 
@@ -94,14 +102,20 @@ public struct MediaUIAttachmentVideoView: View {
       viewModel.mute(preferences.muteVideo)
     }
     .onDisappear {
-      viewModel.pause()
+      viewModel.stop()
     }
     .onTapGesture {
       if !preferences.autoPlayVideo && !viewModel.isPlaying {
         viewModel.play()
         return
       }
+      #if targetEnvironment(macCatalyst)
+      viewModel.pause()
+      let attachement = MediaAttachment.videoWith(url: viewModel.url)
+      openWindow(value: WindowDestinationMedia.mediaViewer(attachments: [attachement], selectedAttachment: attachement))
+      #else
       isFullScreen = true
+      #endif
     }
     .fullScreenCover(isPresented: $isFullScreen) {
       NavigationStack {
@@ -112,6 +126,7 @@ public struct MediaUIAttachmentVideoView: View {
                 Image(systemName: "xmark.circle")
               }
             }
+            QuickLookToolbarItem(itemUrl: viewModel.url)
           }
       }
       .onAppear {

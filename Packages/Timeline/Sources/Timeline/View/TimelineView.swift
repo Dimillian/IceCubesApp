@@ -3,7 +3,6 @@ import DesignSystem
 import Env
 import Models
 import Network
-import Shimmer
 import StatusKit
 import SwiftData
 import SwiftUI
@@ -83,12 +82,18 @@ public struct TimelineView: View {
       }
       .safeAreaInset(edge: .top, spacing: 0) {
         if canFilterTimeline, !pinnedFilters.isEmpty {
-          TimelineQuickAccessPills(pinnedFilters: $pinnedFilters, timeline: $timeline)
-            .padding(.vertical, 8)
-            .padding(.horizontal, .layoutPadding)
-            .background(theme.primaryBackgroundColor.opacity(0.50))
-            .background(Material.regular)
+          VStack(spacing: 0) {
+            TimelineQuickAccessPills(pinnedFilters: $pinnedFilters, timeline: $timeline)
+              .padding(.vertical, 8)
+              .padding(.horizontal, .layoutPadding)
+              .background(theme.primaryBackgroundColor.opacity(0.30))
+              .background(Material.ultraThin)
+            Divider()
+          }
         }
+      }
+      .if(canFilterTimeline && !pinnedFilters.isEmpty) { view in
+        view.toolbarBackground(.hidden, for: .navigationBar)
       }
       .onChange(of: viewModel.scrollToIndex) { _, newValue in
         if let collectionView,
@@ -155,12 +160,21 @@ public struct TimelineView: View {
         break
       }
     })
-    .onChange(of: timeline) { _, newValue in
+    .onChange(of: timeline) { oldValue, newValue in
       switch newValue {
       case let .remoteLocal(server, _):
         viewModel.client = Client(server: server)
       default:
-        viewModel.client = client
+        switch oldValue {
+        case let .remoteLocal(server, _):
+          if newValue == .latest {
+            viewModel.client = Client(server: server)
+          } else {
+            viewModel.client = client
+          }
+        default:
+          viewModel.client = client
+        }
       }
       viewModel.timeline = newValue
     }

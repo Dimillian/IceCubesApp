@@ -29,12 +29,17 @@ public struct StatusEmbeddedView: View {
                                        showActions: false))
           .accessibilityLabel(status.content.asRawText)
           .environment(\.isCompact, true)
+          .environment(\.isMediaCompact, true)
           .environment(\.isStatusFocused, false)
       }
       Spacer()
     }
     .padding(8)
+    #if os(visionOS)
+    .background(Material.thickMaterial)
+    #else
     .background(theme.secondaryBackgroundColor)
+    #endif
     .cornerRadius(4)
     .overlay(
       RoundedRectangle(cornerRadius: 4)

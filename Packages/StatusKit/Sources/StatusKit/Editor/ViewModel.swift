@@ -130,6 +130,18 @@ extension StatusEditor {
     var shouldDisablePollButton: Bool {
       !mediaContainers.isEmpty
     }
+      
+    var allMediaHasDescription: Bool {
+        var everyMediaHasAltText: Bool = true;
+        mediaContainers.forEach { mediaContainer in
+            if (((mediaContainer.mediaAttachment?.description) == nil) ||
+                mediaContainer.mediaAttachment?.description?.count == 0) {
+                everyMediaHasAltText = false
+            }
+        }
+        
+        return everyMediaHasAltText;
+    }
 
     var shouldDisplayDismissWarning: Bool {
       var modifiedStatusText = statusText.string.trimmingCharacters(in: .whitespaces)
@@ -188,6 +200,10 @@ extension StatusEditor {
     func postStatus() async -> Status? {
       guard let client else { return nil }
       do {
+        if (!allMediaHasDescription && UserPreferences.shared.appRequireAltText) {
+          throw PostError.missingAltText
+        }
+          
         if postingTimer == nil {
           Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in
             Task { @MainActor in
@@ -249,6 +265,10 @@ extension StatusEditor {
         if let error = error as? Models.ServerError {
           postingError = error.error
           showPostingErrorAlert = true
+        }
+        if let postError = error as? PostError {
+            postingError = postError.description
+            showPostingErrorAlert = true
         }
         isPosting = false
         HapticManager.shared.fireHaptic(.notification(.error))
@@ -451,9 +471,8 @@ extension StatusEditor {
       Task {
         var initialText: String = ""
         for item in items {
-          if let identifier = item.registeredTypeIdentifiers.first,
-             let handledItemType = UTTypeSupported(rawValue: identifier)
-          {
+          if let identifier = item.registeredTypeIdentifiers.first {
+            let handledItemType = UTTypeSupported(value: identifier)
             do {
               let compressor = Compressor()
               let content = try await handledItemType.loadItemContent(item: item)
@@ -591,11 +610,16 @@ extension StatusEditor {
     }
 
     private func resetAutoCompletion() {
-      withAnimation {
-        tagsSuggestions = []
-        mentionsSuggestions = []
-        currentSuggestionRange = nil
-        showRecentsTagsInline = false
+      if !tagsSuggestions.isEmpty ||
+          !mentionsSuggestions.isEmpty ||
+          currentSuggestionRange != nil ||
+          showRecentsTagsInline {
+        withAnimation {
+          tagsSuggestions = []
+          mentionsSuggestions = []
+          currentSuggestionRange = nil
+          showRecentsTagsInline = false
+        }
       }
     }
 
@@ -646,7 +670,7 @@ extension StatusEditor {
       }
     }
 
-    func makeMediaContainer(from pickerItem: PhotosPickerItem) async -> MediaContainer? {
+    nonisolated func makeMediaContainer(from pickerItem: PhotosPickerItem) async -> MediaContainer? {
       await withTaskGroup(of: MediaContainer?.self, returning: MediaContainer?.self) { taskGroup in
         taskGroup.addTask(priority: .high) { await Self.makeImageContainer(from: pickerItem) }
         taskGroup.addTask(priority: .high) { await Self.makeGifContainer(from: pickerItem) }
@@ -868,7 +892,7 @@ extension StatusEditor {
 
         customEmojis.reduce([String: [Emoji]]()) { currentDict, emoji in
           var dict = currentDict
-          let category = emoji.category ?? "Uncategorized"
+          let category = emoji.category ?? "Custom"
 
           if let emojis = dict[category] {
             dict[category] = emojis + [emoji]
@@ -878,8 +902,8 @@ extension StatusEditor {
 
           return dict
         }.sorted(by: { lhs, rhs in
-          if rhs.key == "Uncategorized" { false }
-          else if lhs.key == "Uncategorized" { true }
+          if rhs.key == "Custom" { false }
+          else if lhs.key == "Custom" { true }
           else { lhs.key < rhs.key }
         }).forEach { key, value in
           emojiContainers.append(.init(categoryName: key, emojis: value))
@@ -895,7 +919,7 @@ extension StatusEditor {
 
 extension StatusEditor.ViewModel: DropDelegate {
   public func performDrop(info: DropInfo) -> Bool {
-    let item = info.itemProviders(for: StatusEditor.UTTypeSupported.types())
+    let item = info.itemProviders(for: [.image, .video, .gif, .mpeg4Movie, .quickTimeMovie, .movie])
     processItemsProvider(items: item)
     return true
   }

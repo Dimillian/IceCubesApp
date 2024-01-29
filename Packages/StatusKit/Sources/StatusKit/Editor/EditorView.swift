@@ -24,7 +24,7 @@ extension StatusEditor {
     @Binding var followUpSEVMs: [ViewModel]
     @Binding var editingMediaContainer: MediaContainer?
 
-    @FocusState<UUID?>.Binding var isSpoilerTextFocused: UUID?
+    @FocusState<UUID?> var isSpoilerTextFocused: UUID?
     @FocusState<EditorFocusState?>.Binding var editorFocusState: EditorFocusState?
     let assignedFocusState: EditorFocusState
     let isMain: Bool

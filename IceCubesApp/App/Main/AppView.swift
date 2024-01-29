@@ -18,9 +18,9 @@ struct AppView: View {
   @Environment(Theme.self) private var theme
   @Environment(StreamWatcher.self) private var watcher
   
+  @Environment(\.openWindow) var openWindow
   @Environment(\.horizontalSizeClass) private var horizontalSizeClass
   
-
   @Binding var selectedTab: Tab
   @Binding var appRouterPath: RouterPath
   
@@ -57,7 +57,11 @@ struct AppView: View {
       selectedTab
     }, set: { newTab in
       if newTab == .post {
+        #if os(visionOS)
+        openWindow(value: WindowDestinationEditor.newStatusEditor(visibility: userPreferences.postVisibility))
+        #else
         appRouterPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
+        #endif
         return
       }
       if newTab == selectedTab {
@@ -85,7 +89,7 @@ struct AppView: View {
           }
           .tag(tab)
           .badge(badgeFor(tab: tab))
-          .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .tabBar)
+          .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .tabBar)
       }
     }
     .id(appAccountsManager.currentClient.id)

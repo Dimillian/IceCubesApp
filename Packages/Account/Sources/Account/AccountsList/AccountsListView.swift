@@ -2,7 +2,6 @@ import DesignSystem
 import Env
 import Models
 import Network
-import Shimmer
 import SwiftUI
 
 @MainActor
@@ -90,7 +89,6 @@ public struct AccountsListView: View {
         AccountsListRow(viewModel: .init(account: .placeholder(), relationShip: .placeholder()))
           .redacted(reason: .placeholder)
           .allowsHitTesting(false)
-          .shimmering()
           #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)
           #endif

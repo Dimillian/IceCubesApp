@@ -6,7 +6,6 @@ import Models
 import Network
 import NukeUI
 import SafariServices
-import Shimmer
 import SwiftUI
 
 @MainActor
@@ -89,9 +88,7 @@ struct AddAccountView: View {
       #endif
       .toolbar {
         if !appAccountsManager.availableAccounts.isEmpty {
-          ToolbarItem(placement: .navigationBarLeading) {
-            Button("action.cancel", action: { dismiss() })
-          }
+          CancelToolbarItem()
         }
       }
       .onAppear {
@@ -265,7 +262,6 @@ struct AddAccountView: View {
     }
     .redacted(reason: .placeholder)
     .allowsHitTesting(false)
-    .shimmering()
     #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
     #endif

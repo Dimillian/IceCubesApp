@@ -1,7 +1,6 @@
 import DesignSystem
 import Env
 import RevenueCat
-import Shimmer
 import SwiftUI
 
 @MainActor
@@ -280,6 +279,5 @@ struct SupportAppView: View {
     }
     .redacted(reason: .placeholder)
     .allowsHitTesting(false)
-    .shimmering()
   }
 }

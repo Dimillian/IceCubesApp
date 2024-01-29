@@ -13,6 +13,10 @@ private struct IsCompact: EnvironmentKey {
   static let defaultValue: Bool = false
 }
 
+private struct IsMediaCompact: EnvironmentKey {
+  static let defaultValue: Bool = false
+}
+
 private struct IsModal: EnvironmentKey {
   static let defaultValue: Bool = false
 }
@@ -51,6 +55,11 @@ public extension EnvironmentValues {
   var isCompact: Bool {
     get { self[IsCompact.self] }
     set { self[IsCompact.self] = newValue }
+  }
+  
+  var isMediaCompact: Bool {
+    get { self[IsMediaCompact.self] }
+    set { self[IsMediaCompact.self] = newValue }
   }
   
   var isModal: Bool {

@@ -4,7 +4,6 @@ import Env
 import Foundation
 import Models
 import Network
-import Shimmer
 import SwiftUI
 
 @MainActor
@@ -23,8 +22,12 @@ public struct StatusRowView: View {
   @State private var viewModel: StatusRowViewModel
   @State private var showSelectableText: Bool = false
 
-  public init(viewModel: StatusRowViewModel) {
-    _viewModel = .init(initialValue: viewModel)
+  public enum Context { case timeline, detail }
+  private let context: Context
+
+  public init(viewModel: StatusRowViewModel, context: Context = .timeline) {
+    self._viewModel = .init(initialValue: viewModel)
+    self.context = context
   }
 
   var contextMenu: some View {
@@ -56,7 +59,7 @@ public struct StatusRowView: View {
             EmptyView()
           }
         } else {
-          if !isCompact {
+          if !isCompact && context != .detail {
             Group {
               StatusRowTagView(viewModel: viewModel)
               StatusRowReblogView(viewModel: viewModel)
@@ -104,6 +107,7 @@ public struct StatusRowView: View {
           }
         }
       }
+      .padding(.init(top: isCompact ? 6 : 12, leading: 0, bottom: isFocused ? 12 : 6, trailing: 0))
     }
     .onAppear {
       if !reasons.contains(.placeholder) {
@@ -136,14 +140,14 @@ public struct StatusRowView: View {
     }
     #if os(visionOS)
     .listRowBackground(RoundedRectangle(cornerRadius: 8)
-      .foregroundStyle(Material.regular))
-    .listRowHoverEffect(.lift)
+      .foregroundStyle(.background).hoverEffect())
+    .listRowHoverEffectDisabled()
     #else
     .listRowBackground(viewModel.highlightRowColor)
     #endif
-    .listRowInsets(.init(top: 12,
+    .listRowInsets(.init(top: 0,
                          leading: .layoutPadding,
-                         bottom: isFocused ? 12 : 6,
+                         bottom: 0,
                          trailing: .layoutPadding))
     .accessibilityElement(children: isFocused ? .contain : .combine)
     .accessibilityLabel(isFocused == false && accessibilityVoiceOverEnabled

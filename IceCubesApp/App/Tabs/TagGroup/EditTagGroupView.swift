@@ -5,7 +5,6 @@ import Models
 import Network
 import NukeUI
 import SFSafeSymbols
-import Shimmer
 import SwiftData
 import SwiftUI
 
@@ -63,9 +62,7 @@ struct EditTagGroupView: View {
       .scrollDismissesKeyboard(.interactively)
       #endif
       .toolbar {
-        ToolbarItem(placement: .navigationBarLeading) {
-          Button("action.cancel", action: { dismiss() })
-        }
+        CancelToolbarItem()
         ToolbarItem(placement: .navigationBarTrailing) {
           Button("action.save", action: { save() })
             .disabled(!tagGroup.isValid)

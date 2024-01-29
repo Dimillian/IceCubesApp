@@ -38,12 +38,14 @@ struct StatusRowHeaderView: View {
     HStack(alignment: .center) {
       if theme.avatarPosition == .top {
         AvatarView(viewModel.finalStatus.account.avatar)
+          #if targetEnvironment(macCatalyst)
           .accountPopover(viewModel.finalStatus.account)
+          #endif
       }
       VStack(alignment: .leading, spacing: 2) {
         HStack(alignment: .firstTextBaseline, spacing: 2) {
           Group {
-            EmojiTextApp(.init(stringValue: viewModel.finalStatus.account.safeDisplayName),
+            EmojiTextApp(viewModel.finalStatus.account.cachedDisplayName,
                          emojis: viewModel.finalStatus.account.emojis)
               .font(.scaledSubheadline)
               .foregroundColor(theme.labelColor)
@@ -51,7 +53,9 @@ struct StatusRowHeaderView: View {
               .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
               .fontWeight(.semibold)
               .lineLimit(1)
+              #if targetEnvironment(macCatalyst)
               .accountPopover(viewModel.finalStatus.account)
+              #endif
 
             if !redactionReasons.contains(.placeholder) {
               accountBadgeView
@@ -67,7 +71,9 @@ struct StatusRowHeaderView: View {
              .font(.scaledFootnote)
              .foregroundStyle(.secondary)
              .lineLimit(1)
+          #if targetEnvironment(macCatalyst)
              .accountPopover(viewModel.finalStatus.account)
+           #endif
          }
         }
       }

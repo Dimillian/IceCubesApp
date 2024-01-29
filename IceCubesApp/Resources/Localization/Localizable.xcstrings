@@ -21,7 +21,25 @@
             "value" : ""
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
@@ -336,13 +354,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is already selected"
+            "value" : "%@ è già selezionato"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is already selected"
+            "value" : "%@はすでに選択されています"
           }
         },
         "ko" : {
@@ -360,7 +378,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is already selected"
+            "value" : "%@ is al geselecteerd"
           }
         },
         "pl" : {
@@ -454,13 +472,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ already exists"
+            "value" : "%@ esiste già"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ already exists"
+            "value" : "%@はもう存在しています"
           }
         },
         "ko" : {
@@ -478,7 +496,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ already exists"
+            "value" : "%@ bestaat al"
           }
         },
         "pl" : {
@@ -572,13 +590,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is an invalid SFSymbol name"
+            "value" : "%@ non è un nome simbolo SF valido"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is an invalid SFSymbol name"
+            "value" : "%@は無効な SFSymbol 名です"
           }
         },
         "ko" : {
@@ -596,7 +614,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is an invalid SFSymbol name"
+            "value" : "%@ is geen geldige SFSymbol-naam"
           }
         },
         "pl" : {
@@ -1034,7 +1052,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri il selettore dei suggerimenti."
+            "value" : "Apre le opzioni."
           }
         },
         "ja" : {
@@ -1967,13 +1985,13 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Advertencia"
+            "state" : "translated",
+            "value" : "Advertencia de contenido"
           }
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Edukiari buruzko oharra"
           }
         },
@@ -1985,13 +2003,13 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Avviso di Spoiler"
+            "state" : "translated",
+            "value" : "Avviso di spoiler"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "ネタバレを警告"
           }
         },
@@ -2009,7 +2027,7 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Spoilerwaarschuwing"
           }
         },
@@ -2105,7 +2123,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Modifica il pubblico del post."
+            "value" : "Modifica la visibilità del post."
           }
         },
         "ja" : {
@@ -2701,7 +2719,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Altra descrizione disponibile"
+            "value" : "Testo alternativo aggiuntivo disponibile"
           }
         },
         "ja" : {
@@ -2963,7 +2981,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Animated gif"
+            "value" : "Bewegende GIF"
           }
         },
         "pl" : {
@@ -3296,7 +3314,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ boost %@"
+            "value" : "%@ ha condiviso %@"
           }
         },
         "ja" : {
@@ -3772,7 +3790,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visualizzatore multimediale"
+            "value" : "Apri il visualizzatore dei media"
           }
         },
         "ja" : {
@@ -4843,7 +4861,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Naviga nelle liste."
+            "value" : "Naviga alla lista."
           }
         },
         "ja" : {
@@ -4962,7 +4980,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Naviga nelle liste."
+            "value" : "Naviga alla lista."
           }
         },
         "ja" : {
@@ -5200,7 +5218,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Intestazione dell'immagine"
+            "value" : "Immagine di copertina"
           }
         },
         "ja" : {
@@ -6509,7 +6527,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scorri fino all'elenco."
+            "value" : "Scorre fino all'elenco."
           }
         },
         "ja" : {
@@ -7960,7 +7978,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visit %@"
+            "value" : "Bezoek %@"
           }
         },
         "pl" : {
@@ -8412,7 +8430,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scorri la cronologia."
+            "value" : "Scorre la timeline."
           }
         },
         "ja" : {
@@ -8663,7 +8681,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aggiungi/Rimuovi dalla lista"
+            "value" : "Aggiungi/Rimuovi dalle liste"
           }
         },
         "ja" : {
@@ -8907,7 +8925,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Block %@"
+            "value" : "%@をブロック"
           }
         },
         "ko" : {
@@ -8925,7 +8943,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Block %@"
+            "value" : "Blokkeer %@"
           }
         },
         "pl" : {
@@ -9026,7 +9044,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Do you want to block this user?"
+            "value" : "このユーザーをブロックしますか？"
           }
         },
         "ko" : {
@@ -9044,7 +9062,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Do you want to block this user?"
+            "value" : "Wil je deze gebruiker blokkeren?"
           }
         },
         "pl" : {
@@ -9138,7 +9156,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Modifica filtri"
+            "value" : "Modifica i filtri"
           }
         },
         "ja" : {
@@ -9256,7 +9274,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Modifica informazioni"
+            "value" : "Modifica le informazioni"
           }
         },
         "ja" : {
@@ -10206,13 +10224,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Impostazioni Privacy"
+            "value" : "Impostazioni privacy"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Privacy Settings"
+            "value" : "プライバシー設定"
           }
         },
         "ko" : {
@@ -10230,7 +10248,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Privacy Settings"
+            "value" : "Privacy-instellingen"
           }
         },
         "pl" : {
@@ -10563,7 +10581,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Condividi account"
+            "value" : "Condividi questo account"
           }
         },
         "ja" : {
@@ -11043,7 +11061,7 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "アカウントの追加"
           }
         },
@@ -11061,7 +11079,7 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Account toevoegen"
           }
         },
@@ -12430,7 +12448,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aggiungi un nuovo contenuto"
+            "value" : "Aggiungi un nuovo metadato"
           }
         },
         "ja" : {
@@ -12548,14 +12566,14 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit avatar"
+            "state" : "translated",
+            "value" : "Modifica l'avatar"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit avatar"
+            "state" : "translated",
+            "value" : "アバターの編集"
           }
         },
         "ko" : {
@@ -12572,8 +12590,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit avatar"
+            "state" : "translated",
+            "value" : "Wijzig avatar"
           }
         },
         "pl" : {
@@ -12668,7 +12686,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nome visibile"
+            "value" : "Nome visualizzato"
           }
         },
         "ja" : {
@@ -12787,7 +12805,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Errore durante il salvataggio del tuo profilo, riprova di nuovo."
+            "value" : "Errore durante il salvataggio del tuo profilo, riprova."
           }
         },
         "ja" : {
@@ -13024,14 +13042,14 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit header"
+            "state" : "translated",
+            "value" : "Modifica la copertina"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit header"
+            "state" : "translated",
+            "value" : "ヘッダーの編集"
           }
         },
         "ko" : {
@@ -13048,8 +13066,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit header"
+            "state" : "translated",
+            "value" : "Wijzig header"
           }
         },
         "pl" : {
@@ -13626,7 +13644,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Warning: These settings are overwritten by the global content settings"
+            "value" : "警告: これらの設定はグローバル コンテンツ設定によって上書きされます"
           }
         },
         "ko" : {
@@ -13644,7 +13662,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Warning: These settings are overwritten by the global content settings"
+            "value" : "Waarschuwing: deze instellingen worden overschreven door de algemene inhoudsinstellingen"
           }
         },
         "pl" : {
@@ -15286,7 +15304,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "utente dal"
+            "value" : "iscritto dal"
           }
         },
         "ja" : {
@@ -15589,7 +15607,7 @@
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%2$@ followers"
+                      "value" : "%2$@ follower"
                     }
                   }
                 }
@@ -16973,7 +16991,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Errore durante il salvataggio della nota. Riprova, per favore."
+            "value" : "Errore durante il salvataggio della nota, riprova."
           }
         },
         "ja" : {
@@ -17397,6 +17415,7 @@
     },
     "action.cancel" : {
       "comment" : "MARK: Common strings",
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -18166,7 +18185,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag Group Icon (SFSymbol name)"
+            "value" : "タググループアイコン（SFSymbol名）"
           }
         },
         "ko" : {
@@ -18184,7 +18203,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Symbool taggroep (SFSymbol name)"
+            "value" : "Symbool taggroep (SFSymbol-naam)"
           }
         },
         "pl" : {
@@ -18284,7 +18303,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add tags to the group"
+            "value" : "グループにタグを追加する"
           }
         },
         "ko" : {
@@ -18402,7 +18421,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag"
+            "value" : "タグ"
           }
         },
         "ko" : {
@@ -18514,13 +18533,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Duplicated tag"
+            "value" : "Tag duplicato"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Duplicated tag"
+            "value" : "重複したタグ"
           }
         },
         "ko" : {
@@ -18538,7 +18557,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Duplicated tag"
+            "value" : "Gedupliceerde tag"
           }
         },
         "pl" : {
@@ -18632,13 +18651,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Number of tags is less than 2"
+            "value" : "Il numero di tag è inferiore a 2"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Number of tags is less than 2"
+            "value" : "タグの数が2未満です"
           }
         },
         "ko" : {
@@ -18656,7 +18675,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Number of tags is less than 2"
+            "value" : "Het aantal tags is kleiner dan 2"
           }
         },
         "pl" : {
@@ -18750,13 +18769,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Symbol Found"
+            "value" : "Nessun simbolo trovato"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Symbol Found"
+            "value" : "シンボルが見つかりません"
           }
         },
         "ko" : {
@@ -18774,7 +18793,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Symbol Found"
+            "value" : "Geen symbool gevonden"
           }
         },
         "pl" : {
@@ -18869,13 +18888,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Titolo del gruppo"
+            "value" : "Titolo del gruppo di tag"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag Group Title"
+            "value" : "タググループのタイトル"
           }
         },
         "ko" : {
@@ -18987,13 +19006,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Empty title"
+            "value" : "Titolo vuoto"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Empty title"
+            "value" : "空のタイトル"
           }
         },
         "ko" : {
@@ -19011,7 +19030,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Empty title"
+            "value" : "Lege titel"
           }
         },
         "pl" : {
@@ -19105,13 +19124,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No symbol is selected"
+            "value" : "Nessun simbolo selezionato"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No symbol is selected"
+            "value" : "シンボルが選択されていません"
           }
         },
         "ko" : {
@@ -19129,7 +19148,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No symbol is selected"
+            "value" : "Geen symbool geselecteerd"
           }
         },
         "pl" : {
@@ -19223,7 +19242,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ok"
+            "value" : "OK"
           }
         },
         "ja" : {
@@ -19938,7 +19957,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hey, qui troverai tutti i tuoi messaggi diretti e le menzioni private. 📱❤️"
+            "value" : "Stai cercando un po' di amore social? Qui troverai tutti i tuoi messaggi diretti e le menzioni private. Divertiti con i messaggi! 📱❤️"
           }
         },
         "ja" : {
@@ -20057,7 +20076,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nessuna posta in arrivo"
+            "value" : "Zero posta in arrivo"
           }
         },
         "ja" : {
@@ -20414,7 +20433,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Si è verificato in errore"
+            "value" : "Si è verificato un errore"
           }
         },
         "ja" : {
@@ -20533,7 +20552,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ultimo messaggio"
+            "value" : "Messaggio più recente"
           }
         },
         "ja" : {
@@ -21486,7 +21505,7 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg partecipanti"
+                      "value" : "%arg partecipante"
                     }
                   },
                   "other" : {
@@ -21654,7 +21673,7 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg deelnemers"
+                      "value" : "%arg deelnemer"
                     }
                   },
                   "other" : {
@@ -21674,7 +21693,7 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg posts"
+                      "value" : "%arg post"
                     }
                   },
                   "other" : {
@@ -22036,7 +22055,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Temi"
+            "value" : "Selettore dei temi"
           }
         },
         "ja" : {
@@ -22155,7 +22174,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Anteprima dei Toot"
+            "value" : "Anteprima dei toot"
           }
         },
         "ja" : {
@@ -25615,7 +25634,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "All"
+            "value" : "全て"
           }
         },
         "ko" : {
@@ -25633,7 +25652,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "All"
+            "value" : "Alles"
           }
         },
         "pl" : {
@@ -25728,13 +25747,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hashtags"
+            "value" : "Hashtag"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hashtags"
+            "value" : "ハッシュタグ"
           }
         },
         "ko" : {
@@ -25853,7 +25872,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "People"
+            "value" : "人々"
           }
         },
         "ko" : {
@@ -25871,7 +25890,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "People"
+            "value" : "Mensen"
           }
         },
         "pl" : {
@@ -25972,7 +25991,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Posts"
+            "value" : "投稿"
           }
         },
         "ko" : {
@@ -26085,7 +26104,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Purtroppo richiesta non ha prodotto risultati, provane un'altra."
+            "value" : "Questa richiesta non ha prodotto risultati, provane un'altra."
           }
         },
         "ja" : {
@@ -27870,7 +27889,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nella Home e nelle liste"
+            "value" : "Nella home e nelle liste"
           }
         },
         "ja" : {
@@ -31256,118 +31275,6 @@
         }
       }
     },
-    "iPad" : {
-      "localizations" : {
-        "be" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad-ean"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "iPad"
-          }
-        }
-      }
-    },
     "list.edit.isExclusive" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -31422,7 +31329,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hide these posts from home"
+            "value" : "Nascondi questi post dalla home"
           }
         },
         "ja" : {
@@ -31446,7 +31353,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hide these posts from home"
+            "value" : "Verberg deze posts van start"
           }
         },
         "pl" : {
@@ -31541,7 +31448,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show replies to"
+            "value" : "Mostra le risposte a"
           }
         },
         "ja" : {
@@ -31660,7 +31567,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Title"
+            "value" : "Titolo"
           }
         },
         "ja" : {
@@ -31779,7 +31686,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Any followed user"
+            "value" : "Qualsiasi utente seguito"
           }
         },
         "ja" : {
@@ -31898,7 +31805,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Members of the list"
+            "value" : "Membri della lista"
           }
         },
         "ja" : {
@@ -32017,7 +31924,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No one"
+            "value" : "Nessuno"
           }
         },
         "ja" : {
@@ -32494,13 +32401,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "List settings"
+            "value" : "Impostazioni della lista"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "List settings"
+            "value" : "リスト設定"
           }
         },
         "ko" : {
@@ -32732,13 +32639,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Search users"
+            "value" : "Cerca utenti"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Search users"
+            "value" : "ユーザーを検索"
           }
         },
         "ko" : {
@@ -33561,13 +33468,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "New Window"
+            "value" : "Nuova finestra"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "New Window"
+            "value" : "新しい窓"
           }
         },
         "ko" : {
@@ -33779,13 +33686,13 @@
               "one" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : " e un altro "
+                  "value" : ", insieme ad un altro, "
                 }
               },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : " e %lld altri "
+                  "value" : ", insieme a %lld altri, "
                 }
               }
             }
@@ -34260,7 +34167,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Si è verificato un errore durante il caricamento delle notifiche, per favore riprova più tardi."
+            "value" : "Si è verificato un errore durante il caricamento delle notifiche, per favore riprova."
           }
         },
         "ja" : {
@@ -35142,7 +35049,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🔒 ha richiesto di seguirti: "
+            "value" : "🔒 ha chiesto di seguirti: "
           }
         },
         "ja" : {
@@ -36262,7 +36169,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🖊️ ha inviato: "
+            "value" : "🖊️ ha postato: "
           }
         },
         "ja" : {
@@ -36738,7 +36645,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Chi segui"
+            "value" : "Segui"
           }
         },
         "ja" : {
@@ -36857,7 +36764,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Richieste di amicizia"
+            "value" : "Richieste di seguirti"
           }
         },
         "ja" : {
@@ -38997,7 +38904,7 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "アカウントの追加"
           }
         },
@@ -39015,7 +38922,7 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Account toevoegen"
           }
         },
@@ -39820,7 +39727,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sorgenti (link GitHub)"
+            "value" : "Sorgente (link GitHub)"
           }
         },
         "ja" : {
@@ -40056,7 +39963,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Elimina la cache dei Media"
+            "value" : "Elimina la cache dei media"
           }
         },
         "ja" : {
@@ -40117,125 +40024,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "清除媒體快取"
-          }
-        }
-      }
-    },
-    "settings.content.boosts" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "be" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Павышэння"
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Impulsos"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Boosts"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Boosts"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Boosts"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Boosts"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bultzadak"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Boosts"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Boost"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "ブースト"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "부스트"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Forsterkninger"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Boosts"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Podbicia"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Boosts"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yükseltmeler"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Поширення"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "转发"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "轉嘟"
           }
         }
       }
@@ -40411,7 +40199,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "I post compressi visualizzano alcune righe del contenuto assieme ad un pulsante per visualizzare tutto il post"
+            "value" : "I post compressi visualizzano solo alcune righe del contenuto assieme ad un pulsante per visualizzare il post intero"
           }
         },
         "ja" : {
@@ -40535,7 +40323,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reply Visibility"
+            "value" : "返信の可視性"
           }
         },
         "ko" : {
@@ -41066,125 +40854,6 @@
         }
       }
     },
-    "settings.content.hide-repeated-boosts" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "be" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Схаваць паўторныя павышэння"
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hide repeated boosts"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Wiederholte Boosts verstecken"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hide Repeated Boosts"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hide Repeated Boosts"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ocultar boosts repetidos"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ezkutatu errepikatutako bultzadak"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Masquer les boosts répétés"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nascondi i boost ripetuti"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "度重なるブーストを隠す"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "중복으로 부스트된 글 숨김"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Skjul gjentatte forsterkninger"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Verberg herhaalde boosts"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ukryj powtórzone podbicia"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ocultar boosts repetidos"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tekrarlanan boostları gizle"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Не відображати повторні поширення"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "隐藏重复的转发"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "隱藏多重轉嘟"
-          }
-        }
-      }
-    },
     "settings.content.instance-settings" : {
       "localizations" : {
         "be" : {
@@ -41474,7 +41143,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostra i tag ALT"
+            "value" : "Mostra i testi alternativi"
           }
         },
         "ja" : {
@@ -41893,6 +41562,124 @@
         }
       }
     },
+    "settings.content.require-alt-text" : {
+      "localizations" : {
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Require Alt Text to Post"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Require Alt Text to Post"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Require Alt Text to Post"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Require Alt Text to Post"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Require Alt Text to Post"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Require Alt Text to Post"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Require Alt Text to Post"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Require Alt Text to Post"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Require Alt Text to Post"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Require Alt Text to Post"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Require Alt Text to Post"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Require Alt Text to Post"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Require Alt Text to Post"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Require Alt Text to Post"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Require Alt Text to Post"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Require Alt Text to Post"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Require Alt Text to Post"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Require Alt Text to Post"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Require Alt Text to Post"
+          }
+        }
+      }
+    },
     "settings.content.sharing" : {
       "localizations" : {
         "be" : {
@@ -41952,7 +41739,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sharing"
+            "value" : "共有"
           }
         },
         "ko" : {
@@ -42065,7 +41852,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Link e Testo"
+            "value" : "Link e testo"
           }
         },
         "ja" : {
@@ -42184,7 +41971,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Solo Link"
+            "value" : "Solo link"
           }
         },
         "ja" : {
@@ -42278,7 +42065,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Share Button Behavior"
+            "value" : "Share Button Behaviour"
           }
         },
         "es" : {
@@ -42302,7 +42089,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Condividi il comportamento del pulsante"
+            "value" : "Comportamento del pulsante di condivisione"
           }
         },
         "ja" : {
@@ -43012,7 +42799,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Font della Timeline"
+            "value" : "Font della timeline"
           }
         },
         "ja" : {
@@ -43367,7 +43154,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dimensione del Font: %@"
+            "value" : "Dimensione del font: %@"
           }
         },
         "ja" : {
@@ -43722,14 +43509,14 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Max reply indentation: %@"
+            "state" : "translated",
+            "value" : "Massima indentazione della risposta: %@"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Max reply indentation: %@"
+            "state" : "translated",
+            "value" : "返信の最大インデント: %@"
           }
         },
         "ko" : {
@@ -43746,8 +43533,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Max reply indentation: %@"
+            "state" : "translated",
+            "value" : "Max. inspringen voor antwoorden: %@"
           }
         },
         "pl" : {
@@ -43959,7 +43746,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visualizzare non letto nella parte inferiore dello schermo"
+            "value" : "Visualizza il numero di post non letti in basso"
           }
         },
         "ja" : {
@@ -44078,13 +43865,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostra il pulsante \"In sospeso\" a sinistra"
+            "value" : "Visualizza il numero di post non letti a sinistra"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show Pending Button on the Left"
+            "value" : "左側に保留中のボタンを表示"
           }
         },
         "ko" : {
@@ -44497,6 +44284,581 @@
         }
       }
     },
+    "settings.display.section.platform" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "be" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "ca" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "de" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "en-GB" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "es" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "eu" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "fr" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "it" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "ja" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "ko" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "nb" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "nl" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "pl" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "pt-BR" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "tr" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "uk" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "zh-Hans" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        },
+        "zh-Hant" : {
+          "variations" : {
+            "device" : {
+              "applevision" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Apple Vision"
+                }
+              },
+              "ipad" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPad"
+                }
+              },
+              "iphone" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "iPhone"
+                }
+              },
+              "mac" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Mac"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "settings.display.section.theme" : {
       "localizations" : {
         "be" : {
@@ -44668,7 +45030,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "I colori personalizzati possono essere impostati solo se i colori di sistema sono disabilitati"
+            "value" : "I colori personalizzati possono essere impostati solo se l'impostazione per seguire lo schema di colori del sistema è disabilitata"
           }
         },
         "ja" : {
@@ -44785,14 +45147,14 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Account on Hover"
+            "state" : "translated",
+            "value" : "Mostra account all'hover"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Account on Hover"
+            "state" : "translated",
+            "value" : "マウスオーバーでアカウントを表示"
           }
         },
         "ko" : {
@@ -44809,8 +45171,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Account on Hover"
+            "state" : "translated",
+            "value" : "Toon account bij aanwijzen"
           }
         },
         "pl" : {
@@ -45022,14 +45384,14 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show reply indentation"
+            "state" : "translated",
+            "value" : "Mostra l'intestazione delle risposte"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show reply indentation"
+            "state" : "translated",
+            "value" : "返信のインデントを表示"
           }
         },
         "ko" : {
@@ -45046,8 +45408,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show reply indentation"
+            "state" : "translated",
+            "value" : "Inspringen voor antwoorden"
           }
         },
         "pl" : {
@@ -45141,7 +45503,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visualizza il nome della tab"
+            "value" : "Visualizza il nome del tab"
           }
         },
         "ja" : {
@@ -45376,14 +45738,14 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Secondary status action"
+            "state" : "translated",
+            "value" : "Azione secondaria"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Secondary status action"
+            "state" : "translated",
+            "value" : "二次ステータスアクション"
           }
         },
         "ko" : {
@@ -45400,8 +45762,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Secondary status action"
+            "state" : "translated",
+            "value" : "Secundaire statusactie"
           }
         },
         "pl" : {
@@ -46439,7 +46801,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "In-App Browser"
+            "value" : "Browser in-app"
           }
         },
         "ja" : {
@@ -46557,7 +46919,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Utilizza la modalità lettura del Browser"
+            "value" : "Utilizza la modalità lettura del browser"
           }
         },
         "ja" : {
@@ -47364,14 +47726,14 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Recently Used Tags"
+            "state" : "translated",
+            "value" : "Etiquetas usadas recientemente"
           }
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Recently Used Tags"
+            "state" : "translated",
+            "value" : "Berriki erabilitako traolak"
           }
         },
         "fr" : {
@@ -47382,14 +47744,14 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Recently Used Tags"
+            "state" : "translated",
+            "value" : "Tag usati recentemente"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Recently Used Tags"
+            "state" : "translated",
+            "value" : "最近使用したタグ"
           }
         },
         "ko" : {
@@ -47406,8 +47768,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Recently Used Tags"
+            "state" : "translated",
+            "value" : "Onlangs gebruikte tags"
           }
         },
         "pl" : {
@@ -47596,19 +47958,19 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sidebar Customizations"
+            "value" : "Sidebar Customisations"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Sidebar Customizations"
+            "state" : "translated",
+            "value" : "Personalizaciones de la Barra Lateral"
           }
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Sidebar Customizations"
+            "state" : "translated",
+            "value" : "Albo-barraren pertsonalizazioa"
           }
         },
         "fr" : {
@@ -47619,14 +47981,14 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Sidebar Customizations"
+            "state" : "translated",
+            "value" : "Personalizzazioni della barra laterale"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Sidebar Customizations"
+            "state" : "translated",
+            "value" : "サイドバーのカスタマイズ"
           }
         },
         "ko" : {
@@ -47643,8 +48005,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Sidebar Customizations"
+            "state" : "translated",
+            "value" : "Navigatiekolom-aanpassingen"
           }
         },
         "pl" : {
@@ -47661,8 +48023,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Sidebar Customizations"
+            "state" : "translated",
+            "value" : "Yan Panel Özelleştirmeleri"
           }
         },
         "uk" : {
@@ -47673,8 +48035,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Sidebar Customizations"
+            "state" : "translated",
+            "value" : "边栏自定义"
           }
         },
         "zh-Hant" : {
@@ -47832,7 +48194,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tabs Customizations"
+            "value" : "Tabs Customisations"
           }
         },
         "es" : {
@@ -47856,13 +48218,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Personalizzazione dei Tabs"
+            "value" : "Personalizzazione dei tab"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tabs Customizations"
+            "value" : "タブのカスタマイズ"
           }
         },
         "ko" : {
@@ -48328,7 +48690,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Selezione Tab"
+            "value" : "Selezione dei tab"
           }
         },
         "ja" : {
@@ -48564,7 +48926,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Auto Play dei video"
+            "value" : "Auto-play dei video"
           }
         },
         "ja" : {
@@ -48681,14 +49043,14 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Aggiornamento rapido"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh"
+            "state" : "translated",
+            "value" : "高速リフレッシュ"
           }
         },
         "ko" : {
@@ -48705,8 +49067,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh"
+            "state" : "translated",
+            "value" : "Snel vernieuwen"
           }
         },
         "pl" : {
@@ -48899,14 +49261,14 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Mute Videos"
+            "state" : "translated",
+            "value" : "Silenciar Vídeos"
           }
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Mute Videos"
+            "state" : "translated",
+            "value" : "Mututu bideoak"
           }
         },
         "fr" : {
@@ -48917,14 +49279,14 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Mute Videos"
+            "state" : "translated",
+            "value" : "Muta i video"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Mute Videos"
+            "state" : "translated",
+            "value" : "ビデオをミュートする"
           }
         },
         "ko" : {
@@ -48941,8 +49303,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Mute Videos"
+            "state" : "translated",
+            "value" : "Video’s dempen"
           }
         },
         "pl" : {
@@ -49036,7 +49398,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Social keyboard"
+            "value" : "Tastiera social"
           }
         },
         "ja" : {
@@ -49862,7 +50224,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Chi ti segue"
+            "value" : "Nuovi follower"
           }
         },
         "ja" : {
@@ -49980,7 +50342,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notifiche"
+            "value" : "Notifiche push"
           }
         },
         "ja" : {
@@ -50216,7 +50578,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vieni menzionato"
+            "value" : "Menzioni"
           }
         },
         "ja" : {
@@ -50334,7 +50696,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notifiche"
+            "value" : "Notifiche push"
           }
         },
         "ja" : {
@@ -51513,14 +51875,14 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "L'aggiornamento rapido disattiva la cache della timeline e recupera sempre una timeline nuova quando si torna alla scheda della timeline o all'applicazione."
+            "state" : "translated",
+            "value" : "L'aggiornamento rapido disattiva il salvataggio e il caching della posizione della timeline. Caricherà sempre una nuova timeline."
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh disables timeline position saving and caching. It'll always fetch a fresh timeline."
+            "state" : "translated",
+            "value" : "高速更新では、タイムライン位置の保存とキャッシュが無効になります。常に新鮮なタイムラインを取得します。"
           }
         },
         "ko" : {
@@ -51537,8 +51899,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh disables timeline position saving and caching. It'll always fetch a fresh timeline."
+            "state" : "translated",
+            "value" : "Snel vernieuwen schakelt het bewaren van de tijdlijnpositie en caching uit. Er wordt altijd een nieuwe tijdlijn opgehaald."
           }
         },
         "pl" : {
@@ -51632,7 +51994,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Si è verificato un errore mentre processavamo il tuo pagamento, per favore riprova."
+            "value" : "Si è verificato un errore mentre processavamo il tuo acquisto in-app, per favore riprova."
           }
         },
         "ja" : {
@@ -52222,7 +52584,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ciao! Mi chiamo Thomas e amo da impazzire creare applicativi open source. Ice Cubes è sicuramente uno dei miei progetti di cui sono più orgoglioso al momento e, siamo sinceri, è quello che richiede più lavoro a causa dei continui cambiamenti di Mastodon e dei social media. Se ti stai divertendo ad usare Ice Cubes, considera di fare un piccolo contributo. Ne sarò lieto (e contribuirà a mantenere l'app perfetta per te). 🚀"
+            "value" : "Ciao! Mi chiamo Thomas e adoro creare applicazioni open source. Ice Cubes è sicuramente uno dei miei progetti di cui sono più orgoglioso al momento e, siamo sinceri, è quello che richiede più lavoro a causa dei continui cambiamenti di Mastodon e dei social media. Se ti stai divertendo ad usare Ice Cubes, considera di fare un piccolo contributo. Te ne sarò grato (e contribuirà a mantenere l'app perfetta per te). 🚀"
           }
         },
         "ja" : {
@@ -52694,7 +53056,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Caricamento sottotitoli ..."
+            "value" : "Caricamento sottotitoli..."
           }
         },
         "ja" : {
@@ -52812,7 +53174,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Privacy Policy"
+            "value" : "Privacy policy"
           }
         },
         "ja" : {
@@ -53048,7 +53410,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ripristina la tua sottoscrizione da supporter se non si è sincronizzata automaticamente."
+            "value" : "Ripristina la tua sottoscrizione se non si è sincronizzata automaticamente."
           }
         },
         "ja" : {
@@ -53284,7 +53646,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "La sottoscrizione si rinnova automaticamente a meno che non venga cancellata almeno un giorno prima del prossimo rinnovo."
+            "value" : "La sottoscrizione ti dà accesso ad un badge \"verificato\" visibile solo a te sul tuo profilo. Si rinnova automaticamente ogni mese a meno che non venga cancellata almeno un giorno prima del successivo rinnovo."
           }
         },
         "ja" : {
@@ -53402,7 +53764,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Inviando un contributo mensile ad Ice Cubes, diventerai un supporter, e avrai anche un badge \"verificato\" sul tuo profilo. Solo per i tuoi 👀."
+            "value" : "Inviando un contributo mensile ad Ice Cubes, diventerai un supporter e avrai anche un badge \"verificato\" sul tuo profilo. Solo per i tuoi 👀."
           }
         },
         "ja" : {
@@ -53756,7 +54118,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sei pazzo, grazie mille!"
+            "value" : "Sei tutto matto, grazie mille!"
           }
         },
         "ja" : {
@@ -55294,7 +55656,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Niente"
+            "value" : "Nessuna"
           }
         },
         "ja" : {
@@ -55768,7 +56130,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scorrimento a destra"
+            "value" : "Scorrimento verso destra"
           }
         },
         "ja" : {
@@ -55886,7 +56248,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scorrimento a sinistra"
+            "value" : "Scorrimento verso sinistra"
           }
         },
         "ja" : {
@@ -56322,7 +56684,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fifth Tab"
+            "value" : "Fünfter Tab"
           }
         },
         "en" : {
@@ -56382,7 +56744,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fifth Tab"
+            "value" : "Vijfde tabblad"
           }
         },
         "pl" : {
@@ -56440,7 +56802,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "First Tab"
+            "value" : "Erster Tab"
           }
         },
         "en" : {
@@ -56500,7 +56862,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "First Tab"
+            "value" : "Eerste tabblad"
           }
         },
         "pl" : {
@@ -56558,7 +56920,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fourth Tab"
+            "value" : "Vierter Tab"
           }
         },
         "en" : {
@@ -56618,7 +56980,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fourth Tab"
+            "value" : "Vierde tabblad"
           }
         },
         "pl" : {
@@ -56676,7 +57038,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Second Tab"
+            "value" : "Zweiter Tab"
           }
         },
         "en" : {
@@ -56736,7 +57098,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Second Tab"
+            "value" : "Tweede tabblad"
           }
         },
         "pl" : {
@@ -56794,7 +57156,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Third Tab"
+            "value" : "Dritter Tab"
           }
         },
         "en" : {
@@ -56854,7 +57216,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Third Tab"
+            "value" : "Derde tabblad"
           }
         },
         "pl" : {
@@ -57302,7 +57664,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tipo di token"
+            "value" : "Tipo di chiave"
           }
         },
         "ja" : {
@@ -57426,7 +57788,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Auto detect language"
+            "value" : "言語を自動検出"
           }
         },
         "ko" : {
@@ -57544,7 +57906,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary."
+            "value" : "Ice Cubesは、投稿しようとしている投稿の言語を自動的に検出しようとし、必要に応じて投稿言語を更新するよう提案します。"
           }
         },
         "ko" : {
@@ -57774,7 +58136,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Questa funzione richiede un token API DeepL"
+            "value" : "Questa funzione richiede una chiave API DeepL"
           }
         },
         "ja" : {
@@ -57892,7 +58254,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Token API DeepL"
+            "value" : "Chiave API DeepL"
           }
         },
         "ja" : {
@@ -58249,7 +58611,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Condividi con i followers"
+            "value" : "Condividi con i follower"
           }
         },
         "ja" : {
@@ -59677,7 +60039,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cita il post"
+            "value" : "Cita questo post"
           }
         },
         "ja" : {
@@ -59915,7 +60277,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Segnala il messaggio"
+            "value" : "Segnala il post"
           }
         },
         "ja" : {
@@ -60034,7 +60396,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "I tuoi post"
+            "value" : "Il tuo post"
           }
         },
         "ja" : {
@@ -60152,14 +60514,14 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Select Text"
+            "state" : "translated",
+            "value" : "Seleziona testo"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Select Text"
+            "state" : "translated",
+            "value" : "テキストの選択"
           }
         },
         "ko" : {
@@ -60176,8 +60538,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Select Text"
+            "state" : "translated",
+            "value" : "Selecteer tekst"
           }
         },
         "pl" : {
@@ -61582,7 +61944,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostra nel Browser"
+            "value" : "Mostra nel browser"
           }
         },
         "ja" : {
@@ -62177,7 +62539,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aggiungi #Hashtag al testo"
+            "value" : "Aggiungi #hashtag al testo"
           }
         },
         "ja" : {
@@ -62653,7 +63015,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aggiungi #Hashtag dopo il testo"
+            "value" : "Aggiungi #hashtag dopo il testo"
           }
         },
         "ja" : {
@@ -62897,7 +63259,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Take Photo"
+            "value" : "写真を撮る"
           }
         },
         "ko" : {
@@ -63010,7 +63372,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aggiungi la descrizione"
+            "value" : "Aggiungi una descrizione"
           }
         },
         "ja" : {
@@ -63367,7 +63729,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Emoji Personalizzate"
+            "value" : "Emoji personalizzate"
           }
         },
         "ja" : {
@@ -63604,14 +63966,14 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Type your follow-up content here."
+            "state" : "translated",
+            "value" : "Digita il proseguimento del tuo contenuto qui."
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Type your follow-up content here."
+            "state" : "translated",
+            "value" : "ここにフォローアップのコンテンツを入力します。"
           }
         },
         "ko" : {
@@ -63628,8 +63990,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Type your follow-up content here."
+            "state" : "translated",
+            "value" : "Typ hier je follow-up-inhoud."
           }
         },
         "pl" : {
@@ -64081,7 +64443,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Usato recentemente"
+            "value" : "Usate recentemente"
           }
         },
         "ja" : {
@@ -64318,14 +64680,14 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "🤖 Generate description"
+            "state" : "translated",
+            "value" : "Genera la descrizione"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "🤖 Generate description"
+            "state" : "translated",
+            "value" : "🤖 説明を生成"
           }
         },
         "ko" : {
@@ -64342,8 +64704,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "🤖 Generate description"
+            "state" : "translated",
+            "value" : "🤖 Genereer omschrijving"
           }
         },
         "pl" : {
@@ -65252,13 +65614,13 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Escribe tu advertencia aquí"
+            "state" : "translated",
+            "value" : "Aviso de contenido"
           }
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Edukiari buruzko oharra"
           }
         },
@@ -65270,13 +65632,13 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Testo spoiler"
+            "state" : "translated",
+            "value" : "Avviso sul contenuto"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "ネタバレ"
           }
         },
@@ -65294,8 +65656,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Spoilertekst"
+            "state" : "translated",
+            "value" : "Waarschuwing gevoelig materiaal"
           }
         },
         "pl" : {
@@ -65628,7 +65990,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Si è verificato un errore durante il caricamento dei post, per favore prova più tardi."
+            "value" : "Si è verificato un errore durante il caricamento dei post, per favore riprova."
           }
         },
         "ja" : {
@@ -65747,7 +66109,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Si è verificato un errore durante il caricamento del post, per favore prova più tardi."
+            "value" : "Si è verificato un errore su questo post, per favore riprova."
           }
         },
         "ja" : {
@@ -65812,6 +66174,125 @@
         }
       }
     },
+    "status.error.no-alt-text" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your settings require alt text on all media before posting"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your settings require alt text on all media before posting"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your settings require alt text on all media before posting"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your settings require alt text on all media before posting"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your settings require alt text on all media before posting"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your settings require alt text on all media before posting"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your settings require alt text on all media before posting"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your settings require alt text on all media before posting"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your settings require alt text on all media before posting"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your settings require alt text on all media before posting"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your settings require alt text on all media before posting"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your settings require alt text on all media before posting"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your settings require alt text on all media before posting"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your settings require alt text on all media before posting"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your settings require alt text on all media before posting"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your settings require alt text on all media before posting"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your settings require alt text on all media before posting"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your settings require alt text on all media before posting"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your settings require alt text on all media before posting"
+          }
+        }
+      }
+    },
     "status.error.posting.title" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -65872,7 +66353,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Error while posting"
+            "value" : "投稿時にエラーが発生しました"
           }
         },
         "ko" : {
@@ -65890,7 +66371,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Error while posting"
+            "value" : "Fout tijdens posten"
           }
         },
         "pl" : {
@@ -67597,6 +68078,125 @@
         }
       }
     },
+    "status.poll.hide-results" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "be" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hide Results"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hide Results"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ergebnisse verstecken"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide Results"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide Results"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ocultar Resultados"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Show Results"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hide Results"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nascondi i risultati"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "結果を非表示"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hide Results"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hide Results"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hide Results"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ukryj wyniki"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hide Results"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yanıtları Gizle"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hide Results"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "隐藏结果"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hide Results"
+          }
+        }
+      }
+    },
     "status.poll.n-votes %lld" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -68183,7 +68783,7 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg persone"
+                      "value" : "%arg persona"
                     }
                   },
                   "other" : {
@@ -68203,7 +68803,7 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg voti "
+                      "value" : "%arg voto"
                     }
                   },
                   "other" : {
@@ -68351,7 +68951,7 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg stemmers"
+                      "value" : "%arg stemmer"
                     }
                   },
                   "other" : {
@@ -68371,7 +68971,7 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg stemmen"
+                      "value" : "%arg stem"
                     }
                   },
                   "other" : {
@@ -68917,6 +69517,125 @@
         }
       }
     },
+    "status.poll.show-results" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "be" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Show Results"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Show Results"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ergebnisse zeigen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Results"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show Results"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar resultados"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Show Results"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Show Results"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra i risultati"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "結果を表示"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Show Results"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Show Results"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Show Results"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pokaż wyniki"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Show Results"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yanıtları Göster"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Show Results"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "显示结果"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Show Results"
+          }
+        }
+      }
+    },
     "status.post-from-%@" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -69089,14 +69808,14 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Continues a thread"
+            "state" : "translated",
+            "value" : "Continua un thread"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Continues a thread"
+            "state" : "translated",
+            "value" : "スレッドを継続"
           }
         },
         "ko" : {
@@ -69113,8 +69832,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Continues a thread"
+            "state" : "translated",
+            "value" : "Vervolgt een thread"
           }
         },
         "pl" : {
@@ -69328,7 +70047,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Risposta per %@"
+            "value" : "Risposta a %@"
           }
         },
         "ja" : {
@@ -71587,13 +72306,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mentions"
+            "value" : "Menzioni"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mentions"
+            "value" : "メンション"
           }
         },
         "ko" : {
@@ -72414,13 +73133,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add or remove tag from tag groups"
+            "value" : "Aggiungi o rimuovi dai gruppi di tag"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add or remove tag from tag groups"
+            "value" : "タググループへのタグの追加または削除"
           }
         },
         "ko" : {
@@ -72438,7 +73157,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add or remove tag from tag groups"
+            "value" : "Tags toevoegen aan of verwijderen uit taggroepen"
           }
         },
         "pl" : {
@@ -73471,8 +74190,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Content Filter"
+            "state" : "translated",
+            "value" : "Inhaltsfilter"
           }
         },
         "en" : {
@@ -73489,14 +74208,14 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Content Filter"
+            "state" : "translated",
+            "value" : "Filtro de contenido"
           }
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Content Filter"
+            "state" : "translated",
+            "value" : "Edukiaren iragazkiak"
           }
         },
         "fr" : {
@@ -73507,14 +74226,14 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Content Filter"
+            "state" : "translated",
+            "value" : "Filtro dei contenuti"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Content Filter"
+            "state" : "translated",
+            "value" : "コンテンツフィルター"
           }
         },
         "ko" : {
@@ -73531,14 +74250,14 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Content Filter"
+            "state" : "translated",
+            "value" : "Inhoudfilter"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Content Filter"
+            "state" : "translated",
+            "value" : "Filtr zawartości"
           }
         },
         "pt-BR" : {
@@ -73549,8 +74268,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Content Filter"
+            "state" : "translated",
+            "value" : "İçerik Filtresi"
           }
         },
         "uk" : {
@@ -73561,8 +74280,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Content Filter"
+            "state" : "translated",
+            "value" : "内容筛选"
           }
         },
         "zh-Hant" : {
@@ -73864,13 +74583,13 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nuovo gruppo con tag"
+            "value" : "Nuovo gruppo di tag"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add tag group"
+            "value" : "タググループを追加"
           }
         },
         "ko" : {
@@ -73988,7 +74707,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Edit tag group"
+            "value" : "タググループを編集する"
           }
         },
         "ko" : {
@@ -74300,8 +75019,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Boosts"
+            "state" : "translated",
+            "value" : "Boosts zeigen"
           }
         },
         "en" : {
@@ -74318,14 +75037,14 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Boosts"
+            "state" : "translated",
+            "value" : "Mostrar Boosts"
           }
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Boosts"
+            "state" : "translated",
+            "value" : "Erakutsi bultzadak"
           }
         },
         "fr" : {
@@ -74336,14 +75055,14 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Boosts"
+            "state" : "translated",
+            "value" : "Mostra boost"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Boosts"
+            "state" : "translated",
+            "value" : "ブーストを表示"
           }
         },
         "ko" : {
@@ -74360,14 +75079,14 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Boosts"
+            "state" : "translated",
+            "value" : "Toon boosts"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Boosts"
+            "state" : "translated",
+            "value" : "Pokazuj podbicia"
           }
         },
         "pt-BR" : {
@@ -74378,8 +75097,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Boosts"
+            "state" : "translated",
+            "value" : "Boostları Göster"
           }
         },
         "uk" : {
@@ -74390,8 +75109,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Boosts"
+            "state" : "translated",
+            "value" : "显示转发"
           }
         },
         "zh-Hant" : {
@@ -74419,8 +75138,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Quotes"
+            "state" : "translated",
+            "value" : "Zitate zeigen"
           }
         },
         "en" : {
@@ -74437,14 +75156,14 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Quotes"
+            "state" : "translated",
+            "value" : "Mostrar Citas"
           }
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Quotes"
+            "state" : "translated",
+            "value" : "Erakutsi aipuak"
           }
         },
         "fr" : {
@@ -74455,14 +75174,14 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Quotes"
+            "state" : "translated",
+            "value" : "Mostra citazioni"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Quotes"
+            "state" : "translated",
+            "value" : "引用を表示"
           }
         },
         "ko" : {
@@ -74479,14 +75198,14 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Quotes"
+            "state" : "translated",
+            "value" : "Toon citaten"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Quotes"
+            "state" : "translated",
+            "value" : "Pokazuj cytaty"
           }
         },
         "pt-BR" : {
@@ -74497,8 +75216,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Quotes"
+            "state" : "translated",
+            "value" : "Alıntıları Göster"
           }
         },
         "uk" : {
@@ -74509,8 +75228,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Quotes"
+            "state" : "translated",
+            "value" : "显示引用"
           }
         },
         "zh-Hant" : {
@@ -74538,8 +75257,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Replies"
+            "state" : "translated",
+            "value" : "Antworten zeigen"
           }
         },
         "en" : {
@@ -74556,14 +75275,14 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Replies"
+            "state" : "translated",
+            "value" : "Mostrar Respuestas"
           }
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Replies"
+            "state" : "translated",
+            "value" : "Erakutsi erantzunak"
           }
         },
         "fr" : {
@@ -74574,14 +75293,14 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Replies"
+            "state" : "translated",
+            "value" : "Mostra risposte"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Replies"
+            "state" : "translated",
+            "value" : "返信を表示"
           }
         },
         "ko" : {
@@ -74598,14 +75317,14 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Replies"
+            "state" : "translated",
+            "value" : "Toon antwoorden"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Replies"
+            "state" : "translated",
+            "value" : "Pokazuj odpowiedzi"
           }
         },
         "pt-BR" : {
@@ -74616,8 +75335,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Replies"
+            "state" : "translated",
+            "value" : "Yanıtları Göster"
           }
         },
         "uk" : {
@@ -74628,8 +75347,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Replies"
+            "state" : "translated",
+            "value" : "显示回复"
           }
         },
         "zh-Hant" : {
@@ -74657,8 +75376,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Threads"
+            "state" : "translated",
+            "value" : "Threads zeigen"
           }
         },
         "en" : {
@@ -74675,14 +75394,14 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Threads"
+            "state" : "translated",
+            "value" : "Mostrar Hilos"
           }
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Threads"
+            "state" : "translated",
+            "value" : "Erakutsi hariak"
           }
         },
         "fr" : {
@@ -74693,14 +75412,14 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Threads"
+            "state" : "translated",
+            "value" : "Mostra thread"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Threads"
+            "state" : "translated",
+            "value" : "スレッドを表示"
           }
         },
         "ko" : {
@@ -74717,14 +75436,14 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Threads"
+            "state" : "translated",
+            "value" : "Toon threads"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Threads"
+            "state" : "translated",
+            "value" : "Pokazuj wątki"
           }
         },
         "pt-BR" : {
@@ -74735,8 +75454,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Threads"
+            "state" : "translated",
+            "value" : "Konuları Göster"
           }
         },
         "uk" : {
@@ -74747,8 +75466,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Threads"
+            "state" : "translated",
+            "value" : "显示续接嘟文"
           }
         },
         "zh-Hant" : {
@@ -74818,7 +75537,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag Groups"
+            "value" : "タググループ"
           }
         },
         "ko" : {
@@ -74836,7 +75555,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag Groups"
+            "value" : "Taggroepen"
           }
         },
         "pl" : {
@@ -75119,115 +75838,115 @@
       "localizations" : {
         "be" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Перайсці да апошняга"
           }
         },
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jump to Latest"
+            "value" : "Refresh"
           }
         },
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Zum Neuesten springen"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jump to Latest"
+            "value" : "Refresh"
           }
         },
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Jump to Latest"
+            "value" : "Refresh"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Saltar al más reciente"
           }
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Egin salto berrienera"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aller au plus récent"
+            "value" : "Rafraichir"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Vai all'ultimo post"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "最新情報までジャンプ"
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "완전히 새로고침"
           }
         },
         "nb" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Hopp til siste"
           }
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Spring naar meest recent"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Najnowsze posty"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Ir para o mais recente"
           }
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Sonuncuya Atla"
           }
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Перейти до нових"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "跳转到最新"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "跳至最新"
           }
         }
@@ -75652,14 +76371,14 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Riprendere"
+            "state" : "translated",
+            "value" : "Riprendi"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Resume"
+            "state" : "translated",
+            "value" : "再開する"
           }
         },
         "ko" : {
@@ -75676,8 +76395,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Resume"
+            "state" : "translated",
+            "value" : "Hervat"
           }
         },
         "pl" : {

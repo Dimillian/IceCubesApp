@@ -1,7 +1,6 @@
 import Models
 import Nuke
 import NukeUI
-import Shimmer
 import SwiftUI
 
 @MainActor
@@ -127,6 +126,9 @@ struct AvatarImage: View {
               RoundedRectangle(cornerRadius: config.cornerRadius)
                 .stroke(.primary.opacity(0.25), lineWidth: 1)
             )
+        } else {
+          RoundedRectangle(cornerRadius: config.cornerRadius)
+            .stroke(.primary.opacity(0.25), lineWidth: 1)
         }
       }
     }

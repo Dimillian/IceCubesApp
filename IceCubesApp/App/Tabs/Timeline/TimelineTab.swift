@@ -51,7 +51,7 @@ struct TimelineTab: View {
         .toolbar {
           toolbarView
         }
-        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
+        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
         .id(client.id)
     }
     .onAppear {
@@ -123,16 +123,14 @@ struct TimelineTab: View {
 
   @ViewBuilder
   private var timelineFilterButton: some View {
-    latestOrResumeButtons
-    contentFilterButton
-    Divider()
-    pinMenuButton
-    Divider()
+    headerGroup
     timelineFiltersButtons
     listsFiltersButons
     tagsFiltersButtons
     localTimelinesFiltersButtons
     tagGroupsFiltersButtons
+    Divider()
+    contentFilterButton
   }
 
   private var addAccountButton: some View {
@@ -189,12 +187,14 @@ struct TimelineTab: View {
   }
   
   @ViewBuilder
-  private var latestOrResumeButtons: some View {
-    if timeline.supportNewestPagination {
-      Button {
-        timeline = .latest
-      } label: {
-        Label(TimelineFilter.latest.localizedTitle(), systemImage: TimelineFilter.latest.iconName())
+  private var headerGroup: some View {
+    ControlGroup {
+      if timeline.supportNewestPagination {
+        Button {
+          timeline = .latest
+        } label: {
+          Label(TimelineFilter.latest.localizedTitle(), systemImage: TimelineFilter.latest.iconName())
+        }
       }
       if timeline == .home {
         Button {
@@ -206,11 +206,12 @@ struct TimelineTab: View {
           }
         }
       }
+      pinButton
     }
   }
   
   @ViewBuilder
-  private var pinMenuButton: some View {
+  private var pinButton: some View {
     let index = pinnedFilters.firstIndex(where: { $0.id == timeline.id})
     Button {
       withAnimation {
