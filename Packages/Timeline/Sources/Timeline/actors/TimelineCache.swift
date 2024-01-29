@@ -71,7 +71,7 @@ public actor TimelineCache {
   }
 
   func setLatestSeenStatuses(_ statuses: [Status], for client: Client, filter: String) {
-    var statuses = statuses.sorted(by: { $0.createdAt.asDate > $1.createdAt.asDate })
+    let statuses = statuses.sorted(by: { $0.createdAt.asDate > $1.createdAt.asDate })
     if filter == "Home" {
       UserDefaults.standard.set(statuses.map{ $0.id }, forKey: "timeline-last-seen-\(client.id)")
     } else {

@@ -57,6 +57,7 @@ public enum SheetDestination: Identifiable {
   case report(status: Status)
   case shareImage(image: UIImage, status: Status)
   case editTagGroup(tagGroup: TagGroup, onSaved: ((TagGroup) -> Void)?)
+  case timelineContentFilter
 
   public var id: String {
     switch self {
@@ -85,6 +86,8 @@ public enum SheetDestination: Identifiable {
       "editTagGroup"
     case .settings, .support, .about, .accountPushNotficationsSettings:
       "settings"
+    case .timelineContentFilter:
+      "timelineContentFilter"
     }
   }
 }

@@ -3,7 +3,6 @@ import EmojiText
 import Env
 import Models
 import NukeUI
-import Shimmer
 import SwiftUI
 
 @MainActor
@@ -62,10 +61,6 @@ struct AccountDetailHeaderView: View {
               .overlay(account.haveHeader ? .black.opacity(0.50) : .clear)
               .frame(height: Constants.headerHeight)
               .clipped()
-          } else if state.isLoading {
-            theme.secondaryBackgroundColor
-              .frame(height: Constants.headerHeight)
-              .shimmering()
           } else {
             theme.secondaryBackgroundColor
               .frame(height: Constants.headerHeight)
@@ -83,7 +78,7 @@ struct AccountDetailHeaderView: View {
         return
       }
       let attachement = MediaAttachment.imageWith(url: account.header)
-      #if targetEnvironment(macCatalyst)
+      #if targetEnvironment(macCatalyst) || os(visionOS)
         openWindow(value: WindowDestinationMedia.mediaViewer(
           attachments: [attachement],
           selectedAttachment: attachement
@@ -120,7 +115,7 @@ struct AccountDetailHeaderView: View {
           return
         }
         let attachement = MediaAttachment.imageWith(url: account.avatar)
-        #if targetEnvironment(macCatalyst)
+        #if targetEnvironment(macCatalyst) || os(visionOS)
           openWindow(value: WindowDestinationMedia.mediaViewer(attachments: [attachement],
                                                                selectedAttachment: attachement))
         #else

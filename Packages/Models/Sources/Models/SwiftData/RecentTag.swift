@@ -11,3 +11,9 @@ import SwiftUI
     self.lastUse = Date()
   }
 }
+
+extension RecentTag {
+  public var formattedDate: String {
+    DateFormatterCache.shared.createdAtRelativeFormatter.localizedString(for: lastUse, relativeTo: Date())
+  }
+}

@@ -1,3 +1,4 @@
+import ButtonKit
 import Combine
 import Foundation
 import Models
@@ -13,7 +14,6 @@ import SwiftUI
   public let shouldDisplayNotify: Bool
   public let relationshipUpdated: (Relationship) -> Void
   public private(set) var relationship: Relationship
-  public private(set) var isUpdating: Bool = false
 
   public init(accountId: String,
               relationship: Relationship,
@@ -26,31 +26,29 @@ import SwiftUI
     self.relationshipUpdated = relationshipUpdated
   }
 
-  func follow() async {
+  func follow() async throws {
     guard let client else { return }
-    isUpdating = true
     do {
       relationship = try await client.post(endpoint: Accounts.follow(id: accountId, notify: false, reblogs: true))
       relationshipUpdated(relationship)
     } catch {
       print("Error while following: \(error.localizedDescription)")
+      throw error
     }
-    isUpdating = false
   }
 
-  func unfollow() async {
+  func unfollow() async throws {
     guard let client else { return }
-    isUpdating = true
     do {
       relationship = try await client.post(endpoint: Accounts.unfollow(id: accountId))
       relationshipUpdated(relationship)
     } catch {
       print("Error while unfollowing: \(error.localizedDescription)")
+      throw error
     }
-    isUpdating = false
   }
 
-  func toggleNotify() async {
+  func toggleNotify() async throws {
     guard let client else { return }
     do {
       relationship = try await client.post(endpoint: Accounts.follow(id: accountId,
@@ -59,10 +57,11 @@ import SwiftUI
       relationshipUpdated(relationship)
     } catch {
       print("Error while following: \(error.localizedDescription)")
+      throw error
     }
   }
 
-  func toggleReboosts() async {
+  func toggleReboosts() async throws {
     guard let client else { return }
     do {
       relationship = try await client.post(endpoint: Accounts.follow(id: accountId,
@@ -71,6 +70,7 @@ import SwiftUI
       relationshipUpdated(relationship)
     } catch {
       print("Error while switching reboosts: \(error.localizedDescription)")
+      throw error
     }
   }
 }
@@ -85,13 +85,11 @@ public struct FollowButton: View {
 
   public var body: some View {
     VStack(alignment: .trailing) {
-      Button {
-        Task {
-          if viewModel.relationship.following {
-            await viewModel.unfollow()
-          } else {
-            await viewModel.follow()
-          }
+      AsyncButton {
+        if viewModel.relationship.following {
+          try await viewModel.unfollow()
+        } else {
+          try await viewModel.follow()
         }
       } label: {
         if viewModel.relationship.requested == true {
@@ -106,29 +104,26 @@ public struct FollowButton: View {
          viewModel.shouldDisplayNotify
       {
         HStack {
-          Button {
-            Task {
-              await viewModel.toggleNotify()
-            }
+          AsyncButton {
+            try await viewModel.toggleNotify()
           } label: {
             Image(systemName: viewModel.relationship.notifying ? "bell.fill" : "bell")
           }
           .accessibilityLabel("accessibility.tabs.profile.user-notifications.label")
           .accessibilityValue(viewModel.relationship.notifying ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
-          Button {
-            Task {
-              await viewModel.toggleReboosts()
-            }
+          AsyncButton {
+            try await viewModel.toggleReboosts()
           } label: {
             Image(viewModel.relationship.showingReblogs ? "Rocket.Fill" : "Rocket")
           }
           .accessibilityLabel("accessibility.tabs.profile.user-reblogs.label")
           .accessibilityValue(viewModel.relationship.showingReblogs ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
         }
+        .asyncButtonStyle(.none)
+        .disabledWhenLoading()
       }
     }
     .buttonStyle(.bordered)
-    .disabled(viewModel.isUpdating)
     .onAppear {
       viewModel.client = client
     }

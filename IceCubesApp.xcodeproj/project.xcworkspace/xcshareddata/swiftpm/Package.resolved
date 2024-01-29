@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "buttonkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Dean151/ButtonKit",
+      "state" : {
+        "revision" : "377f5bab4ed047704316d531e0826d4de5ebf6a4",
+        "version" : "0.1.1"
+      }
+    },
+    {
       "identity" : "emojitext",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/divadretlaw/EmojiText",
@@ -59,8 +68,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Nuke",
       "state" : {
-        "revision" : "1694798e876113d44f6ec6ead965d7286695981d",
-        "version" : "12.2.0"
+        "revision" : "15fde63470d782c897816a74bdd516a907e33147",
+        "version" : "12.3.0"
       }
     },
     {
@@ -106,15 +115,6 @@
       "state" : {
         "revision" : "9e1cc02a65b22e09a8251261cccbccce02731fc5",
         "version" : "1.1.1"
-      }
-    },
-    {
-      "identity" : "swiftui-shimmer",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/markiv/SwiftUI-Shimmer",
-      "state" : {
-        "revision" : "965a7cbcbf094cbcf22b9251a2323bdc3432e171",
-        "version" : "1.1.0"
       }
     }
   ],

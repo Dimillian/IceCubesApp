@@ -2,7 +2,7 @@ import Env
 import Models
 import Network
 import Observation
-import Status
+import StatusKit
 import SwiftUI
 
 @MainActor
@@ -16,14 +16,14 @@ import SwiftUI
   }
 
   enum Tab: Int {
-    case statuses, favorites, bookmarks, followedTags, postsAndReplies, media, lists
+    case statuses, favorites, bookmarks, replies, boosts, media
 
     static var currentAccountTabs: [Tab] {
-      [.statuses, .favorites, .bookmarks, .followedTags, .lists]
+      [.statuses, .replies, .boosts, .favorites, .bookmarks]
     }
 
     static var accountTabs: [Tab] {
-      [.statuses, .postsAndReplies, .media]
+      [.statuses, .replies, .boosts, .media]
     }
 
     var iconName: String {
@@ -31,10 +31,9 @@ import SwiftUI
       case .statuses: "bubble.right"
       case .favorites: "star"
       case .bookmarks: "bookmark"
-      case .followedTags: "tag"
-      case .postsAndReplies: "bubble.left.and.bubble.right"
+      case .replies: "bubble.left.and.bubble.right"
+      case .boosts: ""
       case .media: "photo.on.rectangle.angled"
-      case .lists: "list.bullet"
       }
     }
 
@@ -43,34 +42,14 @@ import SwiftUI
       case .statuses: "accessibility.tabs.profile.picker.statuses"
       case .favorites: "accessibility.tabs.profile.picker.favorites"
       case .bookmarks: "accessibility.tabs.profile.picker.bookmarks"
-      case .followedTags: "accessibility.tabs.profile.picker.followed-tags"
-      case .postsAndReplies: "accessibility.tabs.profile.picker.posts-and-replies"
+      case .replies: "accessibility.tabs.profile.picker.posts-and-replies"
+      case .boosts: "accessibility.tabs.profile.picker.boosts"
       case .media: "accessibility.tabs.profile.picker.media"
-      case .lists: "accessibility.tabs.profile.picker.lists"
       }
     }
-  }
-
-  enum TabState {
-    case followedTags
-    case statuses(statusesState: StatusesState)
-    case lists
   }
 
   var accountState: AccountState = .loading
-  var tabState: TabState = .statuses(statusesState: .loading) {
-    didSet {
-      /// Forward viewModel tabState related to statusesState to statusesState property
-      /// for `StatusesFetcher` conformance as we wrap StatusesState in TabState
-      switch tabState {
-      case let .statuses(statusesState):
-        self.statusesState = statusesState
-      default:
-        break
-      }
-    }
-  }
-
   var statusesState: StatusesState = .loading
 
   var relationship: Relationship?
@@ -85,7 +64,7 @@ import SwiftUI
   var selectedTab = Tab.statuses {
     didSet {
       switch selectedTab {
-      case .statuses, .postsAndReplies, .media:
+      case .statuses, .replies, .boosts, .media:
         tabTask?.cancel()
         tabTask = Task {
           await fetchNewestStatuses(pullToRefresh: false)
@@ -105,6 +84,8 @@ import SwiftUI
   private var tabTask: Task<Void, Never>?
 
   private(set) var statuses: [Status] = []
+  
+  var boosts: [Status] = []
 
   /// When coming from a URL like a mention tap in a status.
   init(accountId: String) {
@@ -173,22 +154,28 @@ import SwiftUI
   func fetchNewestStatuses(pullToRefresh: Bool) async {
     guard let client else { return }
     do {
-      tabState = .statuses(statusesState: .loading)
+      statusesState = .loading
+      boosts = []
       statuses =
         try await client.get(endpoint: Accounts.statuses(id: accountId,
                                                          sinceId: nil,
                                                          tag: nil,
-                                                         onlyMedia: selectedTab == .media ? true : nil,
-                                                         excludeReplies: selectedTab == .statuses && !isCurrentUser ? true : nil,
+                                                         onlyMedia: selectedTab == .media,
+                                                         excludeReplies: selectedTab != .replies,
+                                                         excludeReblogs: selectedTab != .boosts,
                                                          pinned: nil))
       StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
+      if selectedTab == .boosts {
+        boosts = statuses.filter{ $0.reblog != nil }
+      }
       if selectedTab == .statuses {
         pinned =
           try await client.get(endpoint: Accounts.statuses(id: accountId,
                                                            sinceId: nil,
                                                            tag: nil,
-                                                           onlyMedia: nil,
-                                                           excludeReplies: nil,
+                                                           onlyMedia: false,
+                                                           excludeReplies: false,
+                                                           excludeReblogs: false,
                                                            pinned: true))
         StatusDataControllerProvider.shared.updateDataControllers(for: pinned, client: client)
       }
@@ -200,7 +187,7 @@ import SwiftUI
       }
       reloadTabState()
     } catch {
-      tabState = .statuses(statusesState: .error(error: error))
+      statusesState = .error(error: error)
     }
   }
 
@@ -208,62 +195,72 @@ import SwiftUI
     guard let client else { return }
     do {
       switch selectedTab {
-      case .statuses, .postsAndReplies, .media:
+      case .statuses, .replies, .boosts, .media:
         guard let lastId = statuses.last?.id else { return }
-        tabState = .statuses(statusesState: .display(statuses: statuses, nextPageState: .loadingNextPage))
+        if selectedTab == .boosts {
+          statusesState = .display(statuses: boosts, nextPageState: .loadingNextPage)
+        } else {
+          statusesState = .display(statuses: statuses, nextPageState: .loadingNextPage)
+        }
         let newStatuses: [Status] =
           try await client.get(endpoint: Accounts.statuses(id: accountId,
                                                            sinceId: lastId,
                                                            tag: nil,
-                                                           onlyMedia: selectedTab == .media ? true : nil,
-                                                           excludeReplies: selectedTab == .statuses && !isCurrentUser ? true : nil,
+                                                           onlyMedia: selectedTab == .media,
+                                                           excludeReplies: selectedTab != .replies,
+                                                           excludeReblogs: selectedTab != .boosts,
                                                            pinned: nil))
         statuses.append(contentsOf: newStatuses)
+        if selectedTab == .boosts {
+          let newBoosts = statuses.filter{ $0.reblog != nil }
+          self.boosts.append(contentsOf: newBoosts)
+        }
         StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
-        tabState = .statuses(statusesState: .display(statuses: statuses,
-                                                     nextPageState: newStatuses.count < 20 ? .none : .hasNextPage))
+        if selectedTab == .boosts {
+          statusesState = .display(statuses: boosts,
+                                   nextPageState: newStatuses.count < 20 ? .none : .hasNextPage)
+        } else {
+          statusesState = .display(statuses: statuses,
+                                   nextPageState: newStatuses.count < 20 ? .none : .hasNextPage)
+        }
       case .favorites:
         guard let nextPageId = favoritesNextPage?.maxId else { return }
         let newFavorites: [Status]
         (newFavorites, favoritesNextPage) = try await client.getWithLink(endpoint: Accounts.favorites(sinceId: nextPageId))
         favorites.append(contentsOf: newFavorites)
         StatusDataControllerProvider.shared.updateDataControllers(for: newFavorites, client: client)
-        tabState = .statuses(statusesState: .display(statuses: favorites, nextPageState: .hasNextPage))
+        statusesState = .display(statuses: favorites, nextPageState: .hasNextPage)
       case .bookmarks:
         guard let nextPageId = bookmarksNextPage?.maxId else { return }
         let newBookmarks: [Status]
         (newBookmarks, bookmarksNextPage) = try await client.getWithLink(endpoint: Accounts.bookmarks(sinceId: nextPageId))
         StatusDataControllerProvider.shared.updateDataControllers(for: newBookmarks, client: client)
         bookmarks.append(contentsOf: newBookmarks)
-        tabState = .statuses(statusesState: .display(statuses: bookmarks, nextPageState: .hasNextPage))
-      case .followedTags, .lists:
-        break
+        statusesState = .display(statuses: bookmarks, nextPageState: .hasNextPage)
       }
     } catch {
-      tabState = .statuses(statusesState: .error(error: error))
+      statusesState = .error(error: error)
     }
   }
 
   private func reloadTabState() {
     switch selectedTab {
-    case .statuses, .postsAndReplies, .media:
-      tabState = .statuses(statusesState: .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage))
+    case .statuses, .replies, .media:
+      statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
+    case .boosts:
+      statusesState = .display(statuses: boosts, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
     case .favorites:
-      tabState = .statuses(statusesState: .display(statuses: favorites,
-                                                   nextPageState: favoritesNextPage != nil ? .hasNextPage : .none))
+      statusesState = .display(statuses: favorites,
+                               nextPageState: favoritesNextPage != nil ? .hasNextPage : .none)
     case .bookmarks:
-      tabState = .statuses(statusesState: .display(statuses: bookmarks,
-                                                   nextPageState: bookmarksNextPage != nil ? .hasNextPage : .none))
-    case .followedTags:
-      tabState = .followedTags
-    case .lists:
-      tabState = .lists
+      statusesState = .display(statuses: bookmarks,
+                               nextPageState: bookmarksNextPage != nil ? .hasNextPage : .none)
     }
   }
 
   func handleEvent(event: any StreamEvent, currentAccount: CurrentAccount) {
     if let event = event as? StreamEventUpdate {
-      if event.status.account.id == currentAccount.account?.id {
+      if event.status.account.id == currentAccount.account?.id, selectedTab == .statuses {
         statuses.insert(event.status, at: 0)
         statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
       }

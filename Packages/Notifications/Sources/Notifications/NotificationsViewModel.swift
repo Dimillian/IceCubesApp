@@ -42,7 +42,7 @@ import SwiftUI
   var selectedType: Models.Notification.NotificationType? {
     didSet {
       guard oldValue != selectedType,
-            let id = client?.id
+            client?.id != nil
       else { return }
 
       if !isLockedType {

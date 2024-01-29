@@ -35,7 +35,7 @@ public struct StatusEditorToolbarItem: ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
       Button {
         Task { @MainActor in
-          #if targetEnvironment(macCatalyst)
+          #if targetEnvironment(macCatalyst) || os(visionOS)
             openWindow(value: WindowDestinationEditor.newStatusEditor(visibility: visibility))
           #else
             routerPath.presentedSheet = .newStatusEditor(visibility: visibility)

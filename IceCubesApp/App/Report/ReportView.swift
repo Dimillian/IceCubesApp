@@ -2,7 +2,7 @@ import DesignSystem
 import Env
 import Models
 import Network
-import Status
+import StatusKit
 import SwiftUI
 
 public struct ReportView: View {
@@ -65,13 +65,7 @@ public struct ReportView: View {
           }
         }
 
-        ToolbarItem(placement: .navigationBarLeading) {
-          Button {
-            dismiss()
-          } label: {
-            Text("action.cancel")
-          }
-        }
+        CancelToolbarItem()
       }
     }
   }

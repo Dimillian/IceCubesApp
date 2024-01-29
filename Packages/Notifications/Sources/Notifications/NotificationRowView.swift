@@ -3,7 +3,7 @@ import EmojiText
 import Env
 import Models
 import Network
-import Status
+import StatusKit
 import SwiftUI
 
 @MainActor
@@ -27,7 +27,7 @@ struct NotificationRowView: View {
                  height: AvatarView.FrameConfig.status.height)
           .accessibilityHidden(true)
       }
-      VStack(alignment: .leading, spacing: 2) {
+      VStack(alignment: .leading, spacing: 0) {
         makeMainLabel(type: notification.type)
           // The main label is redundant for mentions
           .accessibilityHidden(notification.type == .mention)
@@ -160,6 +160,7 @@ struct NotificationRowView: View {
                                          client: client,
                                          routerPath: routerPath,
                                          showActions: true))
+          .environment(\.isMediaCompact, false)
         } else {
           StatusRowView(viewModel: .init(status: status,
                                          client: client,
@@ -167,6 +168,7 @@ struct NotificationRowView: View {
                                          showActions: false,
                                          textDisabled: true))
             .lineLimit(4)
+            .environment(\.isMediaCompact, true)
         }
         Spacer()
       }

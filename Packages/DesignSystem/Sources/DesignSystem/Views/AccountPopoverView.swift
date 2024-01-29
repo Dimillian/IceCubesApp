@@ -2,7 +2,6 @@ import Env
 import Models
 import Nuke
 import NukeUI
-import Shimmer
 import SwiftUI
 
 struct AccountPopoverView: View {
@@ -122,7 +121,7 @@ struct AccountPopoverView: View {
   }
 
   private var adaptiveConfig: AvatarView.FrameConfig {
-    var cornerRadius: CGFloat = if config == .badge || theme.avatarShape == .circle {
+    let cornerRadius: CGFloat = if config == .badge || theme.avatarShape == .circle {
       config.width / 2
     } else {
       config.cornerRadius

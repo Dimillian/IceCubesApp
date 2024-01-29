@@ -107,7 +107,7 @@ It has a dedicated UI with a sidebar on macOS and iPadOS.
 
 <img src="Images/accounts.png" />
 
-* Support for an unlimited of Mastodon accounts.
+* Support for an unlimited number of Mastodon accounts.
 * Easily browse/discover instances and log in!
 * Swap account from any screen on iOS.
 * Swap your account from the macOS/iPadOS sidebar with just one click.

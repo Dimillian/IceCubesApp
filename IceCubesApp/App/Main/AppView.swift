@@ -7,7 +7,7 @@ import KeychainSwift
 import MediaUI
 import Network
 import RevenueCat
-import Status
+import StatusKit
 import SwiftUI
 import Timeline
 
@@ -18,28 +18,38 @@ struct AppView: View {
   @Environment(Theme.self) private var theme
   @Environment(StreamWatcher.self) private var watcher
   
+  @Environment(\.openWindow) var openWindow
   @Environment(\.horizontalSizeClass) private var horizontalSizeClass
   
-
   @Binding var selectedTab: Tab
   @Binding var appRouterPath: RouterPath
   
   @State var popToRootTab: Tab = .other
   @State var iosTabs = iOSTabs.shared
+  @State var sidebarTabs = SidebarTabs.shared
   
   var body: some View {
+    #if os(visionOS)
+    tabBarView
+    #else
     if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
       sidebarView
     } else {
       tabBarView
     }
+    #endif
   }
   
   var availableTabs: [Tab] {
-    if UIDevice.current.userInterfaceIdiom == .phone || horizontalSizeClass == .compact {
-      return appAccountsManager.currentClient.isAuth ? iosTabs.tabs : Tab.loggedOutTab()
+    guard appAccountsManager.currentClient.isAuth else {
+      return Tab.loggedOutTab()
     }
-    return appAccountsManager.currentClient.isAuth ? Tab.loggedInTabs() : Tab.loggedOutTab()
+    if UIDevice.current.userInterfaceIdiom == .phone || horizontalSizeClass == .compact {
+      return iosTabs.tabs
+    } else if UIDevice.current.userInterfaceIdiom == .vision {
+      return Tab.visionOSTab()
+    }
+    return sidebarTabs.tabs.map{ $0.tab }
   }
 
   var tabBarView: some View {
@@ -47,7 +57,11 @@ struct AppView: View {
       selectedTab
     }, set: { newTab in
       if newTab == .post {
+        #if os(visionOS)
+        openWindow(value: WindowDestinationEditor.newStatusEditor(visibility: userPreferences.postVisibility))
+        #else
         appRouterPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
+        #endif
         return
       }
       if newTab == selectedTab {
@@ -68,13 +82,14 @@ struct AppView: View {
           .tabItem {
             if userPreferences.showiPhoneTabLabel {
               tab.label
+                .environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
             } else {
               Image(systemName: tab.iconName)
             }
           }
           .tag(tab)
           .badge(badgeFor(tab: tab))
-          .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .tabBar)
+          .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .tabBar)
       }
     }
     .id(appAccountsManager.currentClient.id)
@@ -90,6 +105,7 @@ struct AppView: View {
     return 0
   }
   
+  #if !os(visionOS)
   var sidebarView: some View {
     SideBarView(selectedTab: $selectedTab,
                 popToRootTab: $popToRootTab,
@@ -122,6 +138,7 @@ struct AppView: View {
     }
     .environment(appRouterPath)
   }
+  #endif
 
   var notificationsSecondaryColumn: some View {
     NotificationsTab(selectedTab: .constant(.notifications),

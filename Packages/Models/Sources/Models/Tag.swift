@@ -16,7 +16,8 @@ public struct Tag: Codable, Identifiable, Equatable, Hashable {
   }
 
   public static func == (lhs: Tag, rhs: Tag) -> Bool {
-    lhs.name == rhs.name
+    lhs.name == rhs.name &&
+    lhs.following == rhs.following
   }
 
   public var id: String {

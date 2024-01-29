@@ -17,11 +17,13 @@ struct SideBarView<Content: View>: View {
   @Environment(StreamWatcher.self) private var watcher
   @Environment(UserPreferences.self) private var userPreferences
   @Environment(RouterPath.self) private var routerPath
-
+  
   @Binding var selectedTab: Tab
   @Binding var popToRootTab: Tab
   var tabs: [Tab]
   @ViewBuilder var content: () -> Content
+  
+  @State private var sidebarTabs = SidebarTabs.shared
 
   private func badgeFor(tab: Tab) -> Int {
     if tab == .notifications, selectedTab != tab,
@@ -41,8 +43,9 @@ struct SideBarView<Content: View>: View {
         makeBadgeView(count: badge)
       }
     }
-    .contentShape(Rectangle())
-    .frame(width: .sidebarWidth, height: 50)
+    .frame(width: .sidebarWidth - 24, height: 50)
+    .background(tab == selectedTab ? theme.secondaryBackgroundColor : .clear,
+                in: RoundedRectangle(cornerRadius: 8))
   }
 
   private func makeBadgeView(count: Int) -> some View {
@@ -59,7 +62,7 @@ struct SideBarView<Content: View>: View {
 
   private var postButton: some View {
     Button {
-      #if targetEnvironment(macCatalyst)
+      #if targetEnvironment(macCatalyst) || os(visionOS)
         openWindow(value: WindowDestinationEditor.newStatusEditor(visibility: userPreferences.postVisibility))
       #else
         routerPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
@@ -107,7 +110,7 @@ struct SideBarView<Content: View>: View {
 
   private var tabsView: some View {
     ForEach(tabs) { tab in
-      if tab != .profile {
+      if tab != .profile && sidebarTabs.isEnabled(tab) {
         Button {
           // ensure keyboard is always dismissed when selecting a tab
           hideKeyboard()
@@ -129,7 +132,6 @@ struct SideBarView<Content: View>: View {
         } label: {
           makeIconForTab(tab: tab)
         }
-        .background(tab == selectedTab ? theme.secondaryBackgroundColor : .clear)
       }
     }
   }
@@ -151,14 +153,19 @@ struct SideBarView<Content: View>: View {
                 }
               }
             }
-            postButton
-              .padding(.top, 12)
-            Spacer()
           }
         }
         .frame(width: .sidebarWidth)
         .scrollContentBackground(.hidden)
         .background(.thinMaterial)
+        .safeAreaInset(edge: .bottom, content: {
+          HStack {
+            postButton
+              .padding(.vertical, 24)
+          }
+          .frame(width: .sidebarWidth)
+          .background(.thinMaterial)
+        })
           Divider().edgesIgnoringSafeArea(.all)
       }
       content()
@@ -182,6 +189,7 @@ private struct SideBarIcon: View {
       .font(.title2)
       .fontWeight(.medium)
       .foregroundColor(isSelected ? theme.tintColor : theme.labelColor)
+      .symbolVariant(isSelected ? .fill : .none)
       .scaleEffect(isHovered ? 0.8 : 1.0)
       .onHover { isHovered in
         withAnimation(.interpolatingSpring(stiffness: 300, damping: 15)) {

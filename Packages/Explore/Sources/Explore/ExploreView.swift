@@ -3,8 +3,7 @@ import DesignSystem
 import Env
 import Models
 import Network
-import Shimmer
-import Status
+import StatusKit
 import SwiftUI
 
 @MainActor
@@ -109,10 +108,7 @@ public struct ExploreView: View {
         }
       }
       .task(id: viewModel.searchQuery) {
-        do {
-          try await Task.sleep(for: .milliseconds(150))
-          await viewModel.search()
-        } catch {}
+        await viewModel.search()
       }
       .onChange(of: scrollToTopSignal) {
         if viewModel.scrollToTopVisible {

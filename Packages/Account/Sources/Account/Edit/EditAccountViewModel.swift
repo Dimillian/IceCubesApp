@@ -3,7 +3,7 @@ import Network
 import Observation
 import SwiftUI
 import PhotosUI
-import Status
+import StatusKit
 
 @MainActor
 @Observable class EditAccountViewModel {
@@ -52,9 +52,9 @@ import Status
         Task {
           if let data = await getItemImageData(item: item) {
             if isChangingAvatar {
-              await uploadAvatar(data: data)
+              _ = await uploadAvatar(data: data)
             } else if isChangingHeader {
-              await uploadHeader(data: data)
+              _ = await uploadHeader(data: data)
             }
             await fetchAccount()
             isChangingAvatar = false
@@ -140,9 +140,9 @@ import Status
   }
   
   private func getItemImageData(item: PhotosPickerItem) async -> Data? {
-    guard let imageFile = try? await item.loadTransferable(type: ImageFileTranseferable.self) else { return nil }
+    guard let imageFile = try? await item.loadTransferable(type: StatusEditor.ImageFileTranseferable.self) else { return nil }
 
-    let compressor = StatusEditorCompressor()
+    let compressor = StatusEditor.Compressor()
 
     guard let compressedData = await compressor.compressImageFrom(url: imageFile.url),
             let image = UIImage(data: compressedData),

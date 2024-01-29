@@ -1,7 +1,6 @@
 import Models
 import Nuke
 import NukeUI
-import Shimmer
 import SwiftUI
 
 @MainActor
@@ -21,7 +20,7 @@ public struct AvatarView: View {
   }
 
   private var adaptiveConfig: FrameConfig {
-    var cornerRadius: CGFloat = if config == .badge || theme.avatarShape == .circle {
+    let cornerRadius: CGFloat = if config == .badge || theme.avatarShape == .circle {
       config.width / 2
     } else {
       config.cornerRadius
@@ -127,6 +126,9 @@ struct AvatarImage: View {
               RoundedRectangle(cornerRadius: config.cornerRadius)
                 .stroke(.primary.opacity(0.25), lineWidth: 1)
             )
+        } else {
+          RoundedRectangle(cornerRadius: config.cornerRadius)
+            .stroke(.primary.opacity(0.25), lineWidth: 1)
         }
       }
     }
