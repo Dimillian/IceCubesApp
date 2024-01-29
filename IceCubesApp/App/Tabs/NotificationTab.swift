@@ -32,16 +32,6 @@ struct NotificationsTab: View {
       NotificationsListView(lockedType: lockedType, scrollToTopSignal: $scrollToTopSignal)
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
-        .toolbar {
-          ToolbarItem(placement: .topBarTrailing) {
-            Button {
-              routerPath.presentedSheet = .accountPushNotficationsSettings
-            } label: {
-              Image(systemName: "bell")
-            }
-          }
-          ToolbarTab(routerPath: $routerPath)
-        }
         .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
         .id(client.id)
     }
