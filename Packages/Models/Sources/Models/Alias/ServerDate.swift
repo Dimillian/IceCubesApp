@@ -19,6 +19,11 @@ public struct ServerDate: Codable, Hashable, Equatable, Sendable {
     }
   }
 
+  public var shortRelativeFormatted: String {
+    let date = asDate
+    return DateFormatterCache.shared.createdAtShortRelativeFormatter.string(from: date, to: Date()) ?? ""
+  }
+
   public var shortDateFormatted: String {
     DateFormatterCache.shared.createdAtShortDateFormatted.string(from: asDate)
   }

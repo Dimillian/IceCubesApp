@@ -115,7 +115,7 @@ struct NotificationRowView: View {
                        .lineLimit(3)
                        .fixedSize(horizontal: false, vertical: true)
           Spacer()
-          Text(notification.createdAt.relativeFormatted)
+          Text(notification.createdAt.shortRelativeFormatted)
             .font(.subheadline)
             .foregroundStyle(.secondary)
           if let status = notification.status, notification.type == .mention {
