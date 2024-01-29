@@ -145,7 +145,7 @@ struct StatusRowActionsView: View {
                     .font(.scaledBody)
                     #else
                     .font(.body)
-                    .dynamicTypeSize(.medium)
+                    .dynamicTypeSize(.large)
                     #endif
                 }
                 .padding(.vertical, 6)
@@ -168,7 +168,7 @@ struct StatusRowActionsView: View {
                     .font(.scaledBody)
                     #else
                     .font(.body)
-                    .dynamicTypeSize(.medium)
+                    .dynamicTypeSize(.large)
                     #endif
                 }
                 .padding(.vertical, 6)
@@ -228,7 +228,7 @@ struct StatusRowActionsView: View {
             .font(.scaledBody)
             #else
             .font(.body)
-            .dynamicTypeSize(.medium)
+            .dynamicTypeSize(.large)
             #endif
         } else {
           action
@@ -237,7 +237,7 @@ struct StatusRowActionsView: View {
             .font(.scaledBody)
             #else
             .font(.body)
-            .dynamicTypeSize(.medium)
+            .dynamicTypeSize(.large)
             #endif
         }
         if !isNarrow,
@@ -254,7 +254,7 @@ struct StatusRowActionsView: View {
             .font(.scaledFootnote)
             #else
             .font(.footnote)
-            .dynamicTypeSize(.small)
+            .dynamicTypeSize(.medium)
             #endif
             .monospacedDigit()
             .opacity(count > 0 ? 1 : 0)
