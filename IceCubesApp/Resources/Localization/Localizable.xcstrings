@@ -68191,8 +68191,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Hide Results"
+            "state" : "translated",
+            "value" : "隱藏結果"
           }
         }
       }
@@ -69630,8 +69630,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Results"
+            "state" : "translated",
+            "value" : "顯示結果"
           }
         }
       }
@@ -75946,8 +75946,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "跳至最新"
+            "state" : "translated",
+            "value" : "更新"
           }
         }
       }
