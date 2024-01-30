@@ -16,13 +16,13 @@ public struct AvatarView: View {
       AvatarImage(avatar, config: adaptiveConfig)
         .frame(width: config.width, height: config.height)
         .overlay {
-          Circle().stroke(.white)
+          Circle().stroke(theme.avatarBorderColor, lineWidth: 2)
         }
     } else {
       AvatarPlaceHolder(config: adaptiveConfig)
-        .overlay {
-          Circle().stroke(.white)
-        }
+//        .overlay {
+//          Circle().stroke(theme.avatarBorderColor, lineWidth: 2)
+//        }
     }
   }
 

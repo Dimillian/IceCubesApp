@@ -17,6 +17,7 @@ public protocol ColorSet {
   var primaryBackgroundColor: Color { get set }
   var secondaryBackgroundColor: Color { get set }
   var labelColor: Color { get set }
+  var avatarBorderColor: Color { get set }
 }
 
 public enum ColorScheme: String {
@@ -58,6 +59,7 @@ public struct IceCubeDark: ColorSet {
   public var primaryBackgroundColor: Color = .init(red: 16 / 255, green: 21 / 255, blue: 35 / 255)
   public var secondaryBackgroundColor: Color = .init(red: 30 / 255, green: 35 / 255, blue: 62 / 255)
   public var labelColor: Color = .white
+  public var avatarBorderColor: Color = .init(hex: 0x23222B)
 
   public init() {}
 }
@@ -69,6 +71,7 @@ public struct IceCubeLight: ColorSet {
   public var primaryBackgroundColor: Color = .white
   public var secondaryBackgroundColor: Color = .init(hex: 0xF0F1F2)
   public var labelColor: Color = .black
+  public var avatarBorderColor: Color = .init(hex: 0xFFFFFF)
 
   public init() {}
 }
@@ -80,6 +83,7 @@ public struct IceCubeNeonDark: ColorSet {
   public var primaryBackgroundColor: Color = .black
   public var secondaryBackgroundColor: Color = .init(red: 19 / 255, green: 0 / 255, blue: 32 / 255)
   public var labelColor: Color = .white
+  public var avatarBorderColor: Color = .init(hex: 0x23222B)
 
   public init() {}
 }
@@ -91,6 +95,7 @@ public struct IceCubeNeonLight: ColorSet {
   public var primaryBackgroundColor: Color = .white
   public var secondaryBackgroundColor: Color = .init(hex: 0xF0F1F2)
   public var labelColor: Color = .black
+  public var avatarBorderColor: Color = .init(hex: 0xFFFFFF)
 
   public init() {}
 }
@@ -102,6 +107,7 @@ public struct DesertDark: ColorSet {
   public var primaryBackgroundColor: Color = .init(hex: 0x433744)
   public var secondaryBackgroundColor: Color = .init(hex: 0x654868)
   public var labelColor: Color = .white
+  public var avatarBorderColor: Color = .init(hex: 0x23222B)
 
   public init() {}
 }
@@ -113,6 +119,7 @@ public struct DesertLight: ColorSet {
   public var primaryBackgroundColor: Color = .init(hex: 0xFCF2EB)
   public var secondaryBackgroundColor: Color = .init(hex: 0xEEEDE7)
   public var labelColor: Color = .black
+  public var avatarBorderColor: Color = .init(hex: 0xFFFFFF)
 
   public init() {}
 }
@@ -124,6 +131,7 @@ public struct NemesisDark: ColorSet {
   public var primaryBackgroundColor: Color = .init(hex: 0x000000)
   public var secondaryBackgroundColor: Color = .init(hex: 0x151E2B)
   public var labelColor: Color = .white
+  public var avatarBorderColor: Color = .init(hex: 0x23222B)
 
   public init() {}
 }
@@ -135,6 +143,7 @@ public struct NemesisLight: ColorSet {
   public var primaryBackgroundColor: Color = .init(hex: 0xFFFFFF)
   public var secondaryBackgroundColor: Color = .init(hex: 0xE8ECEF)
   public var labelColor: Color = .black
+  public var avatarBorderColor: Color = .init(hex: 0xFFFFFF)
 
   public init() {}
 }
@@ -146,6 +155,7 @@ public struct MediumDark: ColorSet {
   public var primaryBackgroundColor: Color = .init(hex: 0x121212)
   public var secondaryBackgroundColor: Color = .init(hex: 0x191919)
   public var labelColor: Color = .white
+  public var avatarBorderColor: Color = .init(hex: 0x23222B)
 
   public init() {}
 }
@@ -157,6 +167,7 @@ public struct MediumLight: ColorSet {
   public var primaryBackgroundColor: Color = .init(hex: 0xFFFFFF)
   public var secondaryBackgroundColor: Color = .init(hex: 0xFAFAFA)
   public var labelColor: Color = .black
+  public var avatarBorderColor: Color = .init(hex: 0xFFFFFF)
 
   public init() {}
 }
@@ -168,6 +179,7 @@ public struct ConstellationDark: ColorSet {
   public var primaryBackgroundColor: Color = .init(hex: 0x09192C)
   public var secondaryBackgroundColor: Color = .init(hex: 0x304C7A)
   public var labelColor: Color = .init(hex: 0xE2E4E2)
+  public var avatarBorderColor: Color = .init(hex: 0x23222B)
 
   public init() {}
 }
@@ -179,6 +191,7 @@ public struct ConstellationLight: ColorSet {
   public var primaryBackgroundColor: Color = .init(hex: 0xF4F5F7)
   public var secondaryBackgroundColor: Color = .init(hex: 0xACC7E5)
   public var labelColor: Color = .black
+  public var avatarBorderColor: Color = .init(hex: 0xFFFFFF)
 
   public init() {}
 }
@@ -190,6 +203,7 @@ public struct ThreadsDark: ColorSet {
   public var primaryBackgroundColor: Color = .init(hex: 0x101010)
   public var secondaryBackgroundColor: Color = .init(hex: 0x181818)
   public var labelColor: Color = .init(hex: 0xE2E4E2)
+  public var avatarBorderColor: Color = .init(hex: 0x23222B)
 
   public init() {}
 }
@@ -201,6 +215,7 @@ public struct ThreadsLight: ColorSet {
   public var primaryBackgroundColor: Color = .init(hex: 0xFFFFFF)
   public var secondaryBackgroundColor: Color = .init(hex: 0xFFFFFF)
   public var labelColor: Color = .black
+  public var avatarBorderColor: Color = .init(hex: 0xFFFFFF)
 
   public init() {}
 }
@@ -212,6 +227,7 @@ public struct MozillaLight: ColorSet {
   public var primaryBackgroundColor: Color = .init(hex: 0xFFFFFF)
   public var secondaryBackgroundColor: Color = .init(hex: 0xFFFFFF)
   public var labelColor: Color = .black
+  public var avatarBorderColor: Color = .init(hex: 0xFFFFFF)
 
   public init() {}
 }
@@ -223,6 +239,7 @@ public struct MozillaDark: ColorSet {
   public var primaryBackgroundColor: Color = .init(hex: 0x101010)
   public var secondaryBackgroundColor: Color = .init(hex: 0x181818)
   public var labelColor: Color = .init(hex: 0xE2E4E2)
+  public var avatarBorderColor: Color = .init(hex: 0x23222B)
 
   public init() {}
 }

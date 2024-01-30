@@ -4,7 +4,7 @@ import SwiftUI
 @Observable public class Theme {
   class ThemeStorage {
     enum ThemeKey: String {
-      case colorScheme, tint, label, primaryBackground, secondaryBackground
+      case colorScheme, tint, label, primaryBackground, secondaryBackground, avatarBorder
       case avatarPosition2, avatarShape2, statusActionsDisplay, statusDisplayStyle
       case selectedSet, selectedScheme
       case followSystemColorSchme
@@ -19,6 +19,7 @@ import SwiftUI
     @AppStorage(ThemeKey.primaryBackground.rawValue) public var primaryBackgroundColor: Color = .white
     @AppStorage(ThemeKey.secondaryBackground.rawValue) public var secondaryBackgroundColor: Color = .gray
     @AppStorage(ThemeKey.label.rawValue) public var labelColor: Color = .black
+    @AppStorage(ThemeKey.avatarBorder.rawValue) public var avatarBorderColor: Color = .white
     @AppStorage(ThemeKey.avatarPosition2.rawValue) var avatarPosition: AvatarPosition = .leading
     @AppStorage(ThemeKey.avatarShape2.rawValue) var avatarShape: AvatarShape = .circle
     @AppStorage(ThemeKey.selectedSet.rawValue) var storedSet: ColorSetName = .iceCubeDark
@@ -188,6 +189,12 @@ import SwiftUI
     }
   }
 
+  public var avatarBorderColor: Color {
+    didSet {
+      themeStorage.avatarBorderColor = avatarBorderColor
+    }
+  }
+
   public var avatarPosition: AvatarPosition {
     didSet {
       themeStorage.avatarPosition = avatarPosition
@@ -281,6 +288,7 @@ import SwiftUI
     primaryBackgroundColor = themeStorage.primaryBackgroundColor
     secondaryBackgroundColor = themeStorage.secondaryBackgroundColor
     labelColor = themeStorage.labelColor
+    avatarBorderColor = themeStorage.avatarBorderColor
     avatarPosition = themeStorage.avatarPosition
     avatarShape = themeStorage.avatarShape
     storedSet = themeStorage.storedSet
@@ -328,6 +336,7 @@ import SwiftUI
     primaryBackgroundColor = colorSet.primaryBackgroundColor
     secondaryBackgroundColor = colorSet.secondaryBackgroundColor
     labelColor = colorSet.labelColor
+    avatarBorderColor = colorSet.avatarBorderColor
     storedSet = name
   }
 }
