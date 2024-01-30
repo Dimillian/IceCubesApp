@@ -15,8 +15,14 @@ public struct AvatarView: View {
     if let avatar {
       AvatarImage(avatar, config: adaptiveConfig)
         .frame(width: config.width, height: config.height)
+        .overlay {
+          Circle().stroke(.white)
+        }
     } else {
       AvatarPlaceHolder(config: adaptiveConfig)
+        .overlay {
+          Circle().stroke(.white)
+        }
     }
   }
 

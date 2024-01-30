@@ -18,15 +18,8 @@ struct NotificationRowView: View {
 
   var body: some View {
     HStack(alignment: .top, spacing: 8) {
-      if notification.accounts.count == 1 {
-        makeAvatarView(type: notification.type)
-          .accessibilityHidden(true)
-      } else {
-        makeNotificationIconView(type: notification.type)
-          .frame(width: AvatarView.FrameConfig.status.width,
-                 height: AvatarView.FrameConfig.status.height)
-          .accessibilityHidden(true)
-      }
+      makeAvatarView(type: notification.type)
+        .accessibilityHidden(true)
       VStack(alignment: .leading, spacing: 2) {
         makeMainLabel(type: notification.type)
           // The main label is redundant for mentions
@@ -52,7 +45,15 @@ struct NotificationRowView: View {
 
   private func makeAvatarView(type: Models.Notification.NotificationType) -> some View {
     ZStack(alignment: .topLeading) {
-      AvatarView(notification.accounts[0].avatar)
+      if notification.accounts.count > 1 {
+        AvatarView(notification.accounts[1].avatar)
+          .scaleEffect(0.75, anchor: .topLeading)
+          .offset(x: 10, y: 8)
+        AvatarView(notification.accounts[0].avatar)
+          .scaleEffect(0.75, anchor: .topLeading)
+      } else {
+        AvatarView(notification.accounts[0].avatar)
+      }
       makeNotificationIconView(type: type)
         .offset(x: -8, y: -8)
     }
@@ -79,21 +80,6 @@ struct NotificationRowView: View {
 
   private func makeMainLabel(type: Models.Notification.NotificationType) -> some View {
     VStack(alignment: .leading, spacing: 4) {
-      if notification.accounts.count > 1 {
-        ScrollView(.horizontal, showsIndicators: false) {
-          LazyHStack(spacing: 8) {
-            ForEach(notification.accounts) { account in
-              AvatarView(account.avatar)
-                .contentShape(Rectangle())
-                .onTapGesture {
-                  routerPath.navigate(to: .accountDetailWithAccount(account: account))
-                }
-            }
-          }
-          .padding(.leading, 1)
-          .frame(height: AvatarView.FrameConfig.status.size.height + 2)
-        }.offset(y: -1)
-      }
       if !reasons.contains(.placeholder) {
         HStack(alignment: .top) {
           EmojiTextApp(.init(stringValue: notification.accounts[0].safeDisplayName),
