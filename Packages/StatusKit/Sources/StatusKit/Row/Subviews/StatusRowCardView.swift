@@ -100,7 +100,7 @@ public struct StatusRowCardView: View {
     VStack(alignment: .leading, spacing: 4) {
       Text(title)
         .font(.scaledHeadline)
-        .lineLimit(1)
+        .lineLimit(2)
       if let description = card.description, !description.isEmpty {
         Text(description)
           .font(.scaledFootnote)
