@@ -20,6 +20,7 @@ struct StatusRowContextMenu: View {
 
   var viewModel: StatusRowViewModel
   @Binding var showTextForSelection: Bool
+  @Binding var isBlockConfirmationPresented: Bool
 
   var boostLabel: some View {
     if viewModel.status.visibility == .priv, viewModel.status.account.id == account.account?.id {
@@ -283,14 +284,7 @@ struct StatusRowContextMenu: View {
       }
     } else {
       Button {
-        Task {
-          do {
-            let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
-            viewModel.authorRelationship = try await client.post(endpoint: Accounts.block(id: operationAccount.id))
-          } catch {
-            print("Error while blocking: \(error.localizedDescription)")
-          }
-        }
+        isBlockConfirmationPresented = true
       } label: {
         Label("account.action.block", systemImage: "person.crop.circle.badge.xmark")
       }

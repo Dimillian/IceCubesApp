@@ -16,6 +16,8 @@ struct StatusRowActionsView: View {
   @Environment(\.horizontalSizeClass) var horizontalSizeClass
   
   @State private var showTextForSelection: Bool = false
+  
+  @Binding var isBlockConfirmationPresented: Bool
 
   var viewModel: StatusRowViewModel
   
@@ -186,7 +188,9 @@ struct StatusRowActionsView: View {
             Spacer()
           } else if action == .menu {
             Menu {
-              StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showTextForSelection)
+              StatusRowContextMenu(viewModel: viewModel, 
+                                   showTextForSelection: $showTextForSelection,
+                                   isBlockConfirmationPresented: $isBlockConfirmationPresented)
                 .onAppear {
                   Task {
                     await viewModel.loadAuthorRelationship()
