@@ -201,9 +201,7 @@ public struct StatusRowView: View {
           do {
             let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
             viewModel.authorRelationship = try await client.post(endpoint: Accounts.block(id: operationAccount.id))
-          } catch {
-            print("Error while blocking: \(error.localizedDescription)")
-          }
+          } catch { }
         }
       }
     }

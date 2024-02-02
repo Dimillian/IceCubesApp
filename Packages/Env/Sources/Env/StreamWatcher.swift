@@ -3,6 +3,7 @@ import Foundation
 import Models
 import Network
 import Observation
+import OSLog
 
 @MainActor
 @Observable public class StreamWatcher {
@@ -26,6 +27,8 @@ import Observation
   public var events: [any StreamEvent] = []
   public var unreadNotificationsCount: Int = 0
   public var latestEvent: (any StreamEvent)?
+  
+  private let logger = Logger(subsystem: "com.icecubesapp", category: "stream")
 
   public static let shared = StreamWatcher()
   
@@ -89,10 +92,11 @@ import Observation
         case let .string(string):
           do {
             guard let data = string.data(using: .utf8) else {
-              print("Error decoding streaming event string")
+              logger.error("Error decoding streaming event string")
               return
             }
             let rawEvent = try decoder.decode(RawStreamEvent.self, from: data)
+            logger.info("Stream update: \(rawEvent.event)")
             if let event = rawEventToEvent(rawEvent: rawEvent) {
               Task { @MainActor in
                 self.events.append(event)
@@ -103,7 +107,7 @@ import Observation
               }
             }
           } catch {
-            print("Error decoding streaming event: \(error.localizedDescription)")
+            logger.error("Error decoding streaming event: \(error.localizedDescription)")
           }
 
         default:
@@ -147,8 +151,8 @@ import Observation
         return nil
       }
     } catch {
-      print("Error decoding streaming event to final event: \(error.localizedDescription)")
-      print("Raw data: \(rawEvent.payload)")
+      logger.error("Error decoding streaming event to final event: \(error.localizedDescription)")
+      logger.error("Raw data: \(rawEvent.payload)")
       return nil
     }
   }

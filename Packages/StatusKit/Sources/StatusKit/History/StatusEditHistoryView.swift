@@ -56,9 +56,7 @@ public struct StatusEditHistoryView: View {
       .task {
         do {
           history = try await client.get(endpoint: Statuses.history(id: statusId))
-        } catch {
-          print(error)
-        }
+        } catch { }
       }
       .listStyle(.plain)
       .scrollContentBackground(.hidden)

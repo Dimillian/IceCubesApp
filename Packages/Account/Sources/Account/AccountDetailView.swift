@@ -366,9 +366,7 @@ public struct AccountDetailView: View {
             Task {
               do {
                 viewModel.relationship = try await client.post(endpoint: Accounts.block(id: account.id))
-              } catch {
-                print("Error while blocking: \(error.localizedDescription)")
-              }
+              } catch { }
             }
           }
         }

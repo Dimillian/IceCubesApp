@@ -835,9 +835,7 @@ extension StatusEditor {
                   error: nil
                 )
               }
-            } catch {
-              print(error.localizedDescription)
-            }
+            } catch { }
           }
           try? await Task.sleep(for: .seconds(5))
         } while !Task.isCancelled
@@ -858,7 +856,7 @@ extension StatusEditor {
             mediaAttachment: media,
             error: nil
           )
-        } catch { print(error) }
+        } catch { }
       }
     }
 

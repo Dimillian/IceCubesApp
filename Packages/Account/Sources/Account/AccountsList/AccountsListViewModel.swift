@@ -2,6 +2,7 @@ import Models
 import Network
 import Observation
 import SwiftUI
+import OSLog
 
 public enum AccountsListMode {
   case following(accountId: String), followers(accountId: String)
@@ -126,7 +127,8 @@ public enum AccountsListMode {
                        relationships: relationships,
                        nextPageState: link?.maxId != nil ? .hasNextPage : .none)
     } catch {
-      print(error)
+      let logger = Logger(subsystem: "com.icecubesapp", category: "UI")
+      logger.log(level: .info, "\(error.localizedDescription)")
     }
   }
   
