@@ -45,7 +45,7 @@ extension StatusEditor {
       }
       .frame(height: 20)
       .padding(.vertical, 12)
-      .background(.thinMaterial)
+      .background(.ultraThickMaterial)
       #endif
     }
 
