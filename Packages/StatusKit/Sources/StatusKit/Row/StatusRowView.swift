@@ -102,7 +102,6 @@ public struct StatusRowView: View {
                 StatusRowActionsView(isBlockConfirmationPresented: $isBlockConfirmationPresented,
                                      viewModel: viewModel)
                   .tint(isFocused ? theme.tintColor : .gray)
-                  .contentShape(Rectangle())
               }
 
               if isFocused, !isCompact {
