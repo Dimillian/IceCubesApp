@@ -47993,8 +47993,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Sidebar Customizations"
+            "state" : "translated",
+            "value" : "사이드바"
           }
         },
         "nb" : {
@@ -68143,8 +68143,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Hide Results"
+            "state" : "translated",
+            "value" : "결과 가리기"
           }
         },
         "nb" : {
@@ -69582,8 +69582,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Results"
+            "state" : "translated",
+            "value" : "결과 보기"
           }
         },
         "nb" : {
@@ -74238,8 +74238,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Content Filter"
+            "state" : "translated",
+            "value" : "글 종류별 필터"
           }
         },
         "nb" : {
@@ -75067,8 +75067,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Boosts"
+            "state" : "translated",
+            "value" : "부스트된 글 표시"
           }
         },
         "nb" : {
@@ -75186,8 +75186,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Quotes"
+            "state" : "translated",
+            "value" : "인용 표시"
           }
         },
         "nb" : {
@@ -75305,8 +75305,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Replies"
+            "state" : "translated",
+            "value" : "다른 사용자에게 남긴 답글 표시"
           }
         },
         "nb" : {
@@ -75424,8 +75424,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Threads"
+            "state" : "translated",
+            "value" : "스스로에게 남긴 답글 표시"
           }
         },
         "nb" : {
@@ -75898,7 +75898,7 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "완전히 새로고침"
           }
         },
@@ -76384,7 +76384,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "마지막 위치로 돌아가기"
+            "value" : "마지막 위치로 이동"
           }
         },
         "nb" : {
