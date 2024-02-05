@@ -48,7 +48,11 @@ import SwiftUI
         votes.append(pollIndex)
       }
     } else {
-      votes = [pollIndex]
+      if votes == [pollIndex] {
+        votes.removeAll()
+      } else {
+        votes = [pollIndex]
+      }
     }
   }
 }

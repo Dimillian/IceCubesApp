@@ -51,50 +51,50 @@ public struct StatusPollView: View {
     return false
   }
 
-  private func buttonImage(option: Poll.Option) -> some View {
-    let isSelected = isSelected(option: option)
-    var imageName = ""
-    if viewModel.poll.multiple {
-      if isSelected {
-        imageName = "checkmark.square"
-      } else {
-        imageName = "square"
-      }
-    } else {
-      if isSelected {
-        imageName = "record.circle"
-      } else {
-        imageName = "circle"
-      }
-    }
-    return Image(systemName: imageName)
-      .foregroundColor(theme.labelColor)
-  }
-
   public var body: some View {
     let isInteractive = viewModel.poll.expired == false && (viewModel.poll.voted ?? true) == false
-    VStack(alignment: .leading) {
+    VStack(alignment: .leading, spacing: 15) {
       ForEach(Array(viewModel.poll.options.enumerated()), id: \.element.id) { index, option in
-        HStack {
-          if status.account.id == currentAccount.account?.id {
-            makeBarView(for: option, buttonImage: EmptyView())
-              .disabled(true)
-          } else {
-            makeBarView(for: option, buttonImage: buttonImage(option: option))
-              .disabled(isInteractive == false)
-          }
-          if viewModel.showResults || status.account.id == currentAccount.account?.id {
-            Spacer()
-            // Make sure they're all the same width using a ZStack with 100% hiding behind the
-            // real percentage.
-            ZStack(alignment: .trailing) {
-              Text("100%")
-                .hidden()
-
-              Text("\(percentForOption(option: option))%")
-                .font(.scaledSubheadline)
+        Group {
+          if viewModel.showResults {
+            VStack {
+              HStack {
+                Text(option.title)
+                Spacer()
+                Text("\(percentForOption(option: option))%")
+              }
+              ProgressView(value: ratioForOption(option: option))
             }
-            .frame(height: .pollBarHeight)
+          } else if isSelected(option: option) {
+            Button(action: {
+              userDidSelectOption(option: option)
+            }) {
+              HStack {
+                Spacer()
+                Text(option.title)
+                Spacer()
+              }
+            }
+            .buttonStyle(.borderedProminent)
+            .clipShape(Capsule())
+          } else {
+            Button(action: {
+              userDidSelectOption(option: option)
+            }) {
+              HStack {
+                Spacer()
+                Text(option.title)
+                  .foregroundStyle(theme.labelColor)
+                  .padding(7)
+                Spacer()
+              }
+              .overlay {
+                Capsule()
+                  .stroke()
+                  .foregroundStyle(.gray)
+              }
+            }
+            .buttonStyle(.plain)
           }
         }
         .accessibilityElement(children: .combine)
@@ -137,6 +137,16 @@ public struct StatusPollView: View {
     .accessibilityLabel(viewModel.poll.expired ? "accessibility.status.poll.finished.label" : "accessibility.status.poll.active.label")
   }
 
+  private func userDidSelectOption(option: Poll.Option) {
+    if !viewModel.poll.expired,
+       let index = viewModel.poll.options.firstIndex(where: { $0.id == option.id })
+    {
+      withAnimation {
+        viewModel.handleSelection(index)
+      }
+    }
+  }
+
   func combinedAccessibilityLabel(for option: Poll.Option, index: Int) -> Text {
     let showPercentage = viewModel.poll.expired || viewModel.poll.voted ?? false
     return Text("accessibility.status.poll.option-prefix-\(index + 1)-of-\(viewModel.poll.options.count)") +
@@ -164,54 +174,5 @@ public struct StatusPollView: View {
     .foregroundStyle(.secondary)
     .accessibilityElement(children: .combine)
     .accessibilityAddTraits(.updatesFrequently)
-  }
-
-  @ViewBuilder
-  private func makeBarView(for option: Poll.Option, buttonImage: some View) -> some View {
-    Button {
-      if !viewModel.poll.expired,
-         let index = viewModel.poll.options.firstIndex(where: { $0.id == option.id })
-      {
-        withAnimation {
-          viewModel.handleSelection(index)
-        }
-      }
-    } label: {
-      GeometryReader { proxy in
-        ZStack(alignment: .leading) {
-          Rectangle()
-            .background {
-              if viewModel.showResults || status.account.id == currentAccount.account?.id {
-                HStack {
-                  let width = widthForOption(option: option, proxy: proxy)
-                  Rectangle()
-                    .foregroundColor(theme.tintColor)
-                    .frame(height: .pollBarHeight)
-                    .frame(width: width)
-                  if width != proxy.size.width {
-                    Spacer()
-                  }
-                }
-                .transition(.asymmetric(insertion: .push(from: .leading),
-                                        removal: .push(from: .trailing)))
-              }
-            }
-            .foregroundColor(theme.tintColor.opacity(0.40))
-            .frame(height: .pollBarHeight)
-            .clipShape(RoundedRectangle(cornerRadius: 8))
-
-          HStack {
-            buttonImage
-            Text(option.title)
-              .foregroundColor(theme.labelColor)
-              .font(.scaledBody)
-              .minimumScaleFactor(0.7)
-          }
-          .padding(.leading, 12)
-        }
-      }
-      .frame(height: .pollBarHeight)
-    }
-    .buttonStyle(.borderless)
   }
 }
