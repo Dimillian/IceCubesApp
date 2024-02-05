@@ -61,10 +61,9 @@ public struct StatusRowMediaPreviewView: View {
       } else {
         ScrollView(.horizontal, showsIndicators: showsScrollIndicators) {
           HStack {
-            makeAttachmentView(for: 0)
-            makeAttachmentView(for: 1)
-            makeAttachmentView(for: 2)
-            makeAttachmentView(for: 3)
+            ForEach(attachments) { attachment in
+              makeAttachmentView(attachment)
+            }
           }
           .padding(.bottom, scrollBottomPadding)
         }
@@ -74,17 +73,18 @@ public struct StatusRowMediaPreviewView: View {
   }
 
   @ViewBuilder
-  private func makeAttachmentView(for index: Int) -> some View {
-    if
-      attachments.count > index,
-      let data = DisplayData(from: attachments[index])
-    {
+  private func makeAttachmentView(_ attachement: MediaAttachment) -> some View {
+    if let data = DisplayData(from: attachement) {
       MediaPreview(
         sensitive: sensitive,
         imageMaxHeight: imageMaxHeight,
         displayData: data
       )
-      .onTapGesture { tabAction(for: index) }
+      .onTapGesture { 
+        if let index = attachments.firstIndex(where: { $0.id == attachement.id }) {
+          tabAction(for: index)
+        }
+      }
     }
   }
 
