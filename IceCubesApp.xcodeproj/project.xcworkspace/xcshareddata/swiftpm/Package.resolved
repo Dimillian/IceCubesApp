@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/divadretlaw/EmojiText",
       "state" : {
-        "revision" : "174a7bc7bd75650ad1acb5679dbb754296093de0",
-        "version" : "4.0.0"
+        "revision" : "c54000aa9ccc048619054a5a2da2ce0576ffea18",
+        "version" : "4.0.1"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Giphy/giphy-ios-sdk",
       "state" : {
-        "revision" : "95c32b862185e76107841b49bfff8ff7230f3b68",
-        "version" : "2.2.7"
+        "revision" : "9c58a350a3381f1641f5a31cdcd162a406274892",
+        "version" : "2.2.8"
       }
     },
     {
@@ -77,8 +77,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RevenueCat/purchases-ios.git",
       "state" : {
-        "revision" : "b8d20ba1c8e13cc73d72e37cf98607d01fd357b6",
-        "version" : "4.31.2"
+        "revision" : "b3597e0aa5e1193b04d9e1ff04eaf5cab3b8737d",
+        "version" : "4.34.0"
       }
     },
     {
