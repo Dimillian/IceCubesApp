@@ -124,8 +124,8 @@ public struct ListEditView: View {
           VStack(alignment: .leading) {
             EmojiTextApp(.init(stringValue: account.safeDisplayName),
                          emojis: account.emojis)
-              .emojiSize(Font.scaledBodyFont.emojiSize)
-              .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
+              .emojiText.size(Font.scaledBodyFont.emojiSize)
+              .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
             Text("@\(account.acct)")
               .foregroundStyle(.secondary)
               .font(.scaledFootnote)
@@ -170,8 +170,8 @@ public struct ListEditView: View {
           VStack(alignment: .leading) {
             EmojiTextApp(.init(stringValue: account.safeDisplayName),
                          emojis: account.emojis)
-              .emojiSize(Font.scaledBodyFont.emojiSize)
-              .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
+              .emojiText.size(Font.scaledBodyFont.emojiSize)
+              .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
             Text("@\(account.acct)")
               .foregroundStyle(.secondary)
               .font(.scaledFootnote)
