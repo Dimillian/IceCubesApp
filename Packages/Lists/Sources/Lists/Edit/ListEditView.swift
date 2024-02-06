@@ -34,7 +34,9 @@ public struct ListEditView: View {
           }
           Toggle("list.edit.isExclusive", isOn: $viewModel.isExclusive)
         }
+        #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
+        #endif
         .disabled(viewModel.isUpdating)
         .onChange(of: viewModel.repliesPolicy) { _, _ in
           Task { await viewModel.update() }
@@ -62,14 +64,16 @@ public struct ListEditView: View {
             listAccountsView
           }
         }
+        #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
+        #endif
         .disabled(viewModel.isUpdating)
       }
       #if !os(visionOS)
       .scrollDismissesKeyboard(.immediately)
-      #endif
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
+      #endif
       .toolbar {
         ToolbarItem {
           Button {

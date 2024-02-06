@@ -169,6 +169,10 @@ public struct ExploreView: View {
             AccountsListRow(viewModel: .init(account: account, relationShip: relationship))
               #if !os(visionOS)
               .listRowBackground(theme.primaryBackgroundColor)
+              #else
+              .listRowBackground(RoundedRectangle(cornerRadius: 8)
+                   .foregroundStyle(.background).hoverEffect())
+              .listRowHoverEffectDisabled()
               #endif
           }
         }
@@ -180,6 +184,10 @@ public struct ExploreView: View {
           TagRowView(tag: tag)
             #if !os(visionOS)
             .listRowBackground(theme.primaryBackgroundColor)
+            #else
+            .listRowBackground(RoundedRectangle(cornerRadius: 8)
+                 .foregroundStyle(.background).hoverEffect())
+            .listRowHoverEffectDisabled()
             #endif
             .padding(.vertical, 4)
         }
@@ -191,6 +199,10 @@ public struct ExploreView: View {
           StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
             #if !os(visionOS)
             .listRowBackground(theme.primaryBackgroundColor)
+            #else
+            .listRowBackground(RoundedRectangle(cornerRadius: 8)
+                 .foregroundStyle(.background).hoverEffect())
+            .listRowHoverEffectDisabled()
             #endif
             .padding(.vertical, 8)
         }
@@ -207,6 +219,10 @@ public struct ExploreView: View {
           AccountsListRow(viewModel: .init(account: account, relationShip: relationship))
             #if !os(visionOS)
             .listRowBackground(theme.primaryBackgroundColor)
+            #else
+            .listRowBackground(RoundedRectangle(cornerRadius: 8)
+                 .foregroundStyle(.background).hoverEffect())
+            .listRowHoverEffectDisabled()
             #endif
         }
       }
@@ -216,6 +232,10 @@ public struct ExploreView: View {
       }
       #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #else
+      .listRowBackground(RoundedRectangle(cornerRadius: 8)
+           .foregroundStyle(.background).hoverEffect())
+      .listRowHoverEffectDisabled()
       #endif
     }
   }
@@ -228,6 +248,10 @@ public struct ExploreView: View {
         TagRowView(tag: tag)
           #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)
+          #else
+          .listRowBackground(RoundedRectangle(cornerRadius: 8)
+               .foregroundStyle(.background).hoverEffect())
+          .listRowHoverEffectDisabled()
           #endif
           .padding(.vertical, 4)
       }
@@ -237,6 +261,10 @@ public struct ExploreView: View {
       }
       #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #else
+      .listRowBackground(RoundedRectangle(cornerRadius: 8)
+           .foregroundStyle(.background).hoverEffect())
+      .listRowHoverEffectDisabled()
       #endif
     }
   }
@@ -249,6 +277,10 @@ public struct ExploreView: View {
         StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
           #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)
+          #else
+          .listRowBackground(RoundedRectangle(cornerRadius: 8)
+               .foregroundStyle(.background).hoverEffect())
+          .listRowHoverEffectDisabled()
           #endif
           .padding(.vertical, 8)
       }
@@ -259,6 +291,10 @@ public struct ExploreView: View {
       }
       #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #else
+      .listRowBackground(RoundedRectangle(cornerRadius: 8)
+           .foregroundStyle(.background).hoverEffect())
+      .listRowHoverEffectDisabled()
       #endif
     }
   }
@@ -271,6 +307,10 @@ public struct ExploreView: View {
         StatusRowCardView(card: card)
           #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)
+          #else
+          .listRowBackground(RoundedRectangle(cornerRadius: 8)
+               .foregroundStyle(.background).hoverEffect())
+          .listRowHoverEffectDisabled()
           #endif
           .padding(.vertical, 8)
       }
@@ -281,6 +321,10 @@ public struct ExploreView: View {
       }
       #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #else
+      .listRowBackground(RoundedRectangle(cornerRadius: 8)
+           .foregroundStyle(.background).hoverEffect())
+      .listRowHoverEffectDisabled()
       #endif
     }
   }

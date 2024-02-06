@@ -172,7 +172,8 @@ public struct NotificationsListView: View {
                                  trailing: .layoutPadding))
             #if os(visionOS)
             .listRowBackground(RoundedRectangle(cornerRadius: 8)
-              .foregroundStyle(notification.type == .mention && lockedType != .mention ? Material.thick : Material.regular))
+              .foregroundStyle(notification.type == .mention && lockedType != .mention ? Material.thick : Material.regular).hoverEffect())
+            .listRowHoverEffectDisabled()
             #else
             .listRowBackground(notification.type == .mention && lockedType != .mention ?
               theme.secondaryBackgroundColor : theme.primaryBackgroundColor)
