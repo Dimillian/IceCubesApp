@@ -85,6 +85,9 @@ public struct StatusRowMediaPreviewView: View {
           tabAction(for: index)
         }
       }
+      #if os(visionOS)
+      .hoverEffect()
+      #endif
     }
   }
 
@@ -275,6 +278,9 @@ struct AltTextButton: View {
       .buttonStyle(.borderless)
       .padding(EdgeInsets(top: 5, leading: 7, bottom: 5, trailing: 7))
       .background(.thinMaterial)
+      #if os(visionOS)
+      .clipShape(Capsule())
+      #endif
       .cornerRadius(4)
       .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
       .alert(
@@ -432,6 +438,9 @@ private struct FeaturedImagePreView: View {
               RoundedRectangle(cornerRadius: 10)
                 .stroke(.gray.opacity(0.35), lineWidth: 1)
             )
+            #if os(visionOS)
+            .hoverEffect()
+            #endif
         }
       }
       .overlay {
