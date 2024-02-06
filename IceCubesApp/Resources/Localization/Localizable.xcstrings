@@ -75928,8 +75928,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Sonuncuya Atla"
+            "state" : "translated",
+            "value" : "Yenile"
           }
         },
         "uk" : {
@@ -75940,7 +75940,7 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "跳转到最新"
           }
         },
