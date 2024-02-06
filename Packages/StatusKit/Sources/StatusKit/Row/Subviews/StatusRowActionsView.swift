@@ -143,6 +143,10 @@ struct StatusRowActionsView: View {
               case .linkOnly:
                 ShareLink(item: url) {
                   action.image(dataController: statusDataController)
+                    .foregroundColor(Color(UIColor.secondaryLabel))
+                    .padding(.vertical, 6)
+                    .padding(.horizontal, 8)
+                    .contentShape(Rectangle())
                     #if targetEnvironment(macCatalyst)
                     .font(.scaledBody)
                     #else
@@ -150,12 +154,8 @@ struct StatusRowActionsView: View {
                     .dynamicTypeSize(.large)
                     #endif
                 }
-                .padding(.vertical, 6)
-                .padding(.horizontal, 8)
-                #if os(visionOS)
                 .buttonStyle(.borderless)
-                #else
-                .buttonStyle(.statusAction())
+                #if !os(visionOS)
                 .offset(x: -8)
                 #endif
                 .accessibilityElement(children: .combine)
@@ -166,6 +166,10 @@ struct StatusRowActionsView: View {
                           message: Text(viewModel.finalStatus.content.asRawText))
                 {
                   action.image(dataController: statusDataController)
+                    .foregroundColor(Color(UIColor.secondaryLabel))
+                    .padding(.vertical, 6)
+                    .padding(.horizontal, 8)
+                    .contentShape(Rectangle())
                     #if targetEnvironment(macCatalyst)
                     .font(.scaledBody)
                     #else
@@ -173,12 +177,8 @@ struct StatusRowActionsView: View {
                     .dynamicTypeSize(.large)
                     #endif
                 }
-                .padding(.vertical, 6)
-                .padding(.horizontal, 8)
-                #if os(visionOS)
                 .buttonStyle(.borderless)
-                #else
-                .buttonStyle(.statusAction())
+                #if !os(visionOS)
                 .offset(x: -8)
                 #endif
                 .accessibilityElement(children: .combine)
@@ -270,6 +270,7 @@ struct StatusRowActionsView: View {
     }
     #if os(visionOS)
     .buttonStyle(.borderless)
+    .foregroundColor(Color(UIColor.secondaryLabel))
     #else
     .buttonStyle(
         .statusAction(

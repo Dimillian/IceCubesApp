@@ -254,7 +254,11 @@ public struct AccountDetailView: View {
         StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
       }
       Rectangle()
+        #if os(visionOS)
+        .fill(Color.clear)
+        #else
         .fill(theme.secondaryBackgroundColor)
+        #endif
         .frame(height: 12)
         .listRowInsets(.init())
         .listRowSeparator(.hidden)
