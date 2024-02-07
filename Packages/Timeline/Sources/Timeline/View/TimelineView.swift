@@ -52,12 +52,12 @@ public struct TimelineView: View {
   }
 
   public var body: some View {
-      SegmentedControl(sources: TimelineFilter.mozillaFilters.map { $0.localizedTitle() }, selected: $selectedTimelineFilter)
-          .onChange(of: selectedTimelineFilter) { newValue in
-              if let selectedTimeline = TimelineFilter.mozillaFilters.first(where: { $0.localizedTitle() == newValue }) {
-                  self.timeline = selectedTimeline
-              }
-          }
+    SegmentedControl(sources: TimelineFilter.mozillaFilters.map { $0.localizedTitle() }, selected: $selectedTimelineFilter)
+      .onChange(of: selectedTimelineFilter) { newValue in
+        if let selectedTimeline = TimelineFilter.mozillaFilters.first(where: { $0.localizedTitle() == newValue }) {
+          self.timeline = selectedTimeline
+        }
+      }
     ScrollViewReader { proxy in
       ZStack(alignment: .top) {
         List {
