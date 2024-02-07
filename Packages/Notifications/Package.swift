@@ -22,6 +22,7 @@ let package = Package(
     .package(name: "Env", path: "../Env"),
     .package(name: "StatusKit", path: "../StatusKit"),
     .package(name: "DesignSystem", path: "../DesignSystem"),
+    .package(url: "https://github.com/MozillaSocial/mozilla-social-ios", branch: "ios17"),
   ],
   targets: [
     .target(
@@ -32,6 +33,7 @@ let package = Package(
         .product(name: "Env", package: "Env"),
         .product(name: "StatusKit", package: "StatusKit"),
         .product(name: "DesignSystem", package: "DesignSystem"),
+        .product(name: "DesignKit", package: "mozilla-social-ios"),
       ],
       swiftSettings: [
         .enableExperimentalFeature("StrictConcurrency"),

@@ -1,4 +1,5 @@
 import DesignSystem
+import DesignKit
 import Env
 import Models
 import Network
@@ -14,37 +15,37 @@ public struct NotificationsListView: View {
   @Environment(RouterPath.self) private var routerPath
   @Environment(CurrentAccount.self) private var account
   @State private var viewModel = NotificationsViewModel()
-  @State private var selectedNotificationFilter: Models.Notification.NotificationType? = nil
+  @State private var selectedFilter: LocalizedStringKey
   @Binding var scrollToTopSignal: Int
 
   let lockedType: Models.Notification.NotificationType?
 
   private let segments: [Models.Notification.NotificationType?] = [nil, Models.Notification.NotificationType.mention, Models.Notification.NotificationType.follow_request]
+  private let segmentTitles: [LocalizedStringKey]
 
   public init(lockedType: Models.Notification.NotificationType?, scrollToTopSignal: Binding<Int>) {
     self.lockedType = lockedType
     _scrollToTopSignal = scrollToTopSignal
-    _selectedNotificationFilter = State(initialValue: lockedType)
+    segmentTitles = segments.map {
+      guard let segment = $0 else {
+        return "notifications.tab.all"
+      }
+
+      return segment.menuTitle()
+    }
+
+    _selectedFilter = State(initialValue: segmentTitles[0])
   }
 
   public var body: some View {
-    Picker("Notification Filter", selection: $selectedNotificationFilter) {
-      ForEach(segments, id: \.self) {
-        if $0 == nil {
-          Text("notifications.navigation-title")
-        } else {
-          Text($0!.menuTitle())
+    SegmentedControl(sources: segmentTitles, selected: $selectedFilter)
+        .onChange(of: selectedFilter) {
+          let selectedNotificationFilter = segments.first(where: { $0?.menuTitle() == selectedFilter }) ?? nil
+          viewModel.selectedType = selectedNotificationFilter
+          Task {
+            await viewModel.fetchNotifications()
+          }
         }
-      }
-    }
-    .pickerStyle(.segmented)
-    .onChange(of: selectedNotificationFilter) {
-      viewModel.selectedType = selectedNotificationFilter
-      Task {
-        await viewModel.fetchNotifications()
-      }
-    }
-//    SegmentedControl(sources: segments, selected: $selectedNotificationFilter)
     ScrollViewReader { proxy in
       List {
         scrollToTopView
