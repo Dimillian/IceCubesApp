@@ -46,6 +46,7 @@ public struct NotificationsListView: View {
             await viewModel.fetchNotifications()
           }
         }
+    Divider()
     ScrollViewReader { proxy in
       List {
         scrollToTopView
