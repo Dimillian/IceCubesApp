@@ -3356,7 +3356,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ kullanıcısı  %@ kullanıcısını boostladı"
+            "value" : "%@ kullanıcısı  %@ kullanıcısını yükseltti"
           }
         },
         "uk" : {
@@ -7164,7 +7164,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Boostları göster"
+            "value" : "Yükseltmeleri göster"
           }
         },
         "uk" : {
@@ -10504,7 +10504,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Boostları göster"
+            "value" : "Yükseltmeleri göster"
           }
         },
         "uk" : {
@@ -11335,7 +11335,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tarafından Geliştirildi"
+            "value" : "Tarafından yükseltildi"
           }
         },
         "uk" : {
@@ -15108,7 +15108,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Takipçiler"
+            "value" : "Takipçi"
           }
         },
         "uk" : {
@@ -16676,7 +16676,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gönderiler"
+            "value" : "Gönderi"
           }
         },
         "uk" : {
@@ -35973,7 +35973,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🚀 Boostlandı: "
+            "value" : "🚀 Yükseltildi: "
           }
         },
         "uk" : {
@@ -55460,7 +55460,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Boost"
+            "value" : "Yükseltme"
           }
         },
         "uk" : {
@@ -58653,7 +58653,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Takipçileri Boostla "
+            "value" : "Takipçileri Yükselt "
           }
         },
         "uk" : {
@@ -75098,7 +75098,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Boostları Göster"
+            "value" : "Yükseltmeleri Göster"
           }
         },
         "uk" : {
@@ -76651,8 +76651,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : ""
+            "state" : "translated",
+            "value" : "%lld kişi konuşuyor"
           }
         },
         "uk" : {
