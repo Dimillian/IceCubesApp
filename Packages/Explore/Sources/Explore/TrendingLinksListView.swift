@@ -30,6 +30,9 @@ public struct TrendingLinksListView: View {
         ProgressView()
         Spacer()
       }
+      #if !os(visionOS)
+      .listRowBackground(theme.primaryBackgroundColor)
+      #endif
       .task {
         defer {
           isLoadingNextPage = false
