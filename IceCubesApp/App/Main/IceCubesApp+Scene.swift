@@ -83,6 +83,8 @@ extension IceCubesApp {
           StatusEditor.MainView(mode: .replyTo(status: status))
         case let .mentionStatusEditor(account, visibility):
           StatusEditor.MainView(mode: .mention(account: account, visibility: visibility))
+        case let .quoteLinkStatusEditor(link):
+          StatusEditor.MainView(mode: .quoteLink(link: link))
         case .none:
           EmptyView()
         }

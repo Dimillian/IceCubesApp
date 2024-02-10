@@ -15,6 +15,7 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
   case post
   case followedTags
   case lists
+  case links
 
   nonisolated var id: Int {
     rawValue
@@ -67,6 +68,8 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
       NavigationTab {
         ListsListView()
       }
+    case .links:
+      NavigationTab { TrendingLinksListView(cards: []) }
     case .post:
       VStack { }
     case .other:
@@ -107,6 +110,8 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
       Label("timeline.filter.tags", systemImage: iconName)
     case .lists:
       Label("timeline.filter.lists", systemImage: iconName)
+    case .links:
+      Label("explore.section.trending.links", systemImage: iconName)
     case .other:
       EmptyView()
       
@@ -145,6 +150,8 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
       "tag"
     case .lists:
       "list.bullet"
+    case .links:
+      "newspaper"
     case .other:
       ""
     }

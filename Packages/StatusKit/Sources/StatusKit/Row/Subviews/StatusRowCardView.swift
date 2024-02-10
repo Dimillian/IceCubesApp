@@ -3,13 +3,17 @@ import Models
 import Nuke
 import NukeUI
 import SwiftUI
+import Env
 
 @MainActor
 public struct StatusRowCardView: View {
   @Environment(\.openURL) private var openURL
+  @Environment(\.openWindow) private var openWindow
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
+  @Environment(\.isCompact) private var isCompact: Bool
 
   @Environment(Theme.self) private var theme
+  @Environment(RouterPath.self) private var routerPath
 
   let card: Card
 
@@ -32,7 +36,7 @@ public struct StatusRowCardView: View {
   }
 
   private var imageHeight: CGFloat {
-    if theme.statusDisplayStyle == .medium {
+    if theme.statusDisplayStyle == .medium || isCompact {
       return 100
     }
     return 200
@@ -47,7 +51,9 @@ public struct StatusRowCardView: View {
       if let title = card.title, let url = URL(string: card.url) {
         VStack(alignment: .leading, spacing: 0) {
           let sitesWithIcons = ["apps.apple.com", "music.apple.com", "open.spotify.com"]
-          if (UIDevice.current.userInterfaceIdiom == .pad ||
+          if isCompact {
+            compactLinkPreview(title, url)
+          } else if (UIDevice.current.userInterfaceIdiom == .pad ||
               UIDevice.current.userInterfaceIdiom == .mac ||
               UIDevice.current.userInterfaceIdiom == .vision),
              let host = url.host(), sitesWithIcons.contains(host) {
@@ -59,16 +65,20 @@ public struct StatusRowCardView: View {
         .frame(maxWidth: maxWidth)
         .fixedSize(horizontal: false, vertical: true)
         #if os(visionOS)
-        .background(.background)
+        .if(!isCompact, transform: { view in
+          view.background(.background)
+        })
         .hoverEffect()
         #else
-        .background(theme.secondaryBackgroundColor)
+        .background(isCompact ? .clear : theme.secondaryBackgroundColor)
         #endif
-        .cornerRadius(10)
-        .overlay(
-          RoundedRectangle(cornerRadius: 10)
-            .stroke(.gray.opacity(0.35), lineWidth: 1)
-        )
+        .cornerRadius(isCompact ? 0 : 10)
+        .overlay {
+          if !isCompact {
+            RoundedRectangle(cornerRadius: 10)
+              .stroke(.gray.opacity(0.35), lineWidth: 1)
+          }
+        }
         .contextMenu {
           ShareLink(item: url) {
             Label("status.card.share", systemImage: "square.and.arrow.up")
@@ -114,6 +124,62 @@ public struct StatusRowCardView: View {
     }
     .frame(maxWidth: .infinity, alignment: .leading)
     .padding(10)
+  }
+  
+  private func compactLinkPreview(_ title: String, _ url: URL) -> some View {
+    HStack(alignment: .top) {
+      if let imageURL = card.image, !isInCaptureMode {
+        LazyResizableImage(url: imageURL) { state, _ in
+          if let image = state.image {
+            image
+              .resizable()
+              .aspectRatio(contentMode: .fill)
+              .frame(width: imageHeight, height: imageHeight)
+              .clipShape(RoundedRectangle(cornerRadius: 8))
+              .clipped()
+          } else if state.isLoading {
+            Rectangle()
+              .fill(Color.gray)
+              .frame(width: imageHeight, height: imageHeight)
+          }
+        }
+        // This image is decorative
+        .accessibilityHidden(true)
+        .frame(width: imageHeight, height: imageHeight)
+      }
+      VStack(alignment: .leading, spacing: 6) {
+        Text(title)
+          .font(.scaledHeadline)
+          .lineLimit(3)
+        Text(url.host() ?? url.absoluteString)
+          .font(.scaledFootnote)
+          .foregroundColor(theme.tintColor)
+          .lineLimit(1)
+        if let history = card.history {
+          let uses = history.compactMap{ Int($0.accounts )}.reduce(0, +)
+          HStack(spacing: 4) {
+            Image(systemName: "bubble.left.and.text.bubble.right")
+            Text("trending-tag-people-talking \(uses)")
+            Spacer()
+            Button {
+              #if targetEnvironment(macCatalyst)
+              openWindow(value: WindowDestinationEditor.quoteLinkStatusEditor(link: url))
+              #else
+              routerPath.presentedSheet = .quoteLinkStatusEditor(link: url)
+              #endif
+            } label: {
+              Image(systemName: "quote.opening")
+            }
+            .buttonStyle(.plain)
+          }
+          .font(.scaledCaption)
+          .foregroundStyle(.secondary)
+          .lineLimit(1)
+          .padding(.top, 12)
+        }
+      }
+      .padding(.horizontal, 8)
+    }
   }
 
   private func iconLinkPreview(_ title: String, _ url: URL) -> some View {

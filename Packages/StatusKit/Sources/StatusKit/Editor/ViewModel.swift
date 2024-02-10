@@ -234,7 +234,7 @@ extension StatusEditor {
                               language: selectedLanguage,
                               mediaAttributes: mediaAttributes)
         switch mode {
-        case .new, .replyTo, .quote, .mention, .shareExtension:
+        case .new, .replyTo, .quote, .mention, .shareExtension, .quoteLink:
           postStatus = try await client.post(endpoint: Statuses.postStatus(json: data))
           if let postStatus {
             StreamWatcher.shared.emmitPostEvent(for: postStatus)
@@ -362,6 +362,9 @@ extension StatusEditor {
           statusText = .init(string: "\n\nFrom: @\(status.reblog?.account.acct ?? status.account.acct)\n\(url)")
           selectedRange = .init(location: 0, length: 0)
         }
+      case let .quoteLink(link):
+        statusText = .init(string: "\n\n\(link)")
+        selectedRange = .init(location: 0, length: 0)
       }
     }
 
