@@ -531,8 +531,8 @@ extension StatusEditor {
           }
         }
         if !initialText.isEmpty {
-          statusText = .init(string: initialText)
-          selectedRange = .init(location: statusText.string.utf16.count, length: 0)
+          statusText = .init(string: "\n\n\(initialText)")
+          selectedRange = .init(location: 0, length: 0)
         }
       }
     }
