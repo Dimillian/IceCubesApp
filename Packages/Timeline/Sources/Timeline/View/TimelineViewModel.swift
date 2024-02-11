@@ -376,11 +376,7 @@ extension TimelineViewModel: StatusesFetcher {
       }
     }
 
-    // We trigger a new fetch so we can get the next new statuses if any.
-    // If none, it'll stop there.
-    // Only do that in the context of the home timeline as other don't worth catching up that much.
-    if timeline == .home,
-       !Task.isCancelled,
+    if !Task.isCancelled,
        let latest = await datasource.get().first
     {
       pendingStatusesObserver.isLoadingNewStatuses = true
