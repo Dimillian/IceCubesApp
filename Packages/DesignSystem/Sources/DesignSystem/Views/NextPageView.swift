@@ -12,7 +12,6 @@ public struct NextPageView: View {
   
   public var body: some View {
     HStack {
-      Spacer()
       if showRetry {
         Button {
           Task {
@@ -29,8 +28,8 @@ public struct NextPageView: View {
           .foregroundStyle(.secondary)
           .symbolEffect(.pulse, value: isLoadingNextPage)
       }
-      Spacer()
     }
+    .frame(maxWidth: .infinity, alignment: .center)
     .task {
       await executeTask()
     }
