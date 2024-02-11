@@ -251,9 +251,12 @@ import SwiftUI
 
   func handleEvent(event: any StreamEvent, currentAccount: CurrentAccount) {
     if let event = event as? StreamEventUpdate {
-      if event.status.account.id == currentAccount.account?.id, selectedTab == .statuses {
-        statuses.insert(event.status, at: 0)
-        statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+      if event.status.account.id == currentAccount.account?.id {
+        if (event.status.inReplyToId == nil && selectedTab == .statuses) ||
+            (event.status.inReplyToId != nil && selectedTab == .replies) {
+          statuses.insert(event.status, at: 0)
+          statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+        }
       }
     } else if let event = event as? StreamEventDelete {
       statuses.removeAll(where: { $0.id == event.status })
