@@ -25,25 +25,13 @@ public struct TrendingLinksListView: View {
           #endif
           .padding(.vertical, 8)
       }
-      HStack {
-        Spacer()
-        ProgressView()
-        Spacer()
+      NextPageView {
+        let nextPage: [Card] = try await client.get(endpoint: Trends.links(offset: links.count))
+        links.append(contentsOf: nextPage)
       }
       #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
       #endif
-      .task {
-        defer {
-          isLoadingNextPage = false
-        }
-        guard !isLoadingNextPage else { return }
-        isLoadingNextPage = true
-        do {
-          let nextPage: [Card] = try await client.get(endpoint: Trends.links(offset: links.count))
-          links.append(contentsOf: nextPage)
-        } catch { }
-      }
     }
     #if os(visionOS)
     .listStyle(.insetGrouped)

@@ -9,7 +9,7 @@ import SwiftUI
 @Observable class NotificationsViewModel {
   public enum State {
     public enum PagingState {
-      case none, hasNextPage, loadingNextPage
+      case none, hasNextPage
     }
 
     case loading
@@ -143,25 +143,20 @@ import SwiftUI
     return allNotifications
   }
 
-  func fetchNextPage() async {
+  func fetchNextPage() async throws {
     guard let client else { return }
-    do {
-      guard let lastId = consolidatedNotifications.last?.notificationIds.last else { return }
-      state = .display(notifications: consolidatedNotifications, nextPageState: .loadingNextPage)
-      let newNotifications: [Models.Notification] =
-        try await client.get(endpoint: Notifications.notifications(minId: nil,
-                                                                   maxId: lastId,
-                                                                   types: queryTypes,
-                                                                   limit: Constants.notificationLimit))
-      await consolidatedNotifications.append(contentsOf: newNotifications.consolidated(selectedType: selectedType))
-      if consolidatedNotifications.contains(where: { $0.type == .follow_request }) {
-        await currentAccount?.fetchFollowerRequests()
-      }
-      state = .display(notifications: consolidatedNotifications,
-                       nextPageState: newNotifications.count < Constants.notificationLimit ? .none : .hasNextPage)
-    } catch {
-      state = .error(error: error)
+    guard let lastId = consolidatedNotifications.last?.notificationIds.last else { return }
+    let newNotifications: [Models.Notification] =
+      try await client.get(endpoint: Notifications.notifications(minId: nil,
+                                                                 maxId: lastId,
+                                                                 types: queryTypes,
+                                                                 limit: Constants.notificationLimit))
+    await consolidatedNotifications.append(contentsOf: newNotifications.consolidated(selectedType: selectedType))
+    if consolidatedNotifications.contains(where: { $0.type == .follow_request }) {
+      await currentAccount?.fetchFollowerRequests()
     }
+    state = .display(notifications: consolidatedNotifications,
+                     nextPageState: newNotifications.count < Constants.notificationLimit ? .none : .hasNextPage)
   }
   
   func markAsRead() {
