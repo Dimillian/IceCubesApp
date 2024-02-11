@@ -9,7 +9,6 @@ public struct TrendingLinksListView: View {
   @Environment(Client.self) private var client
 
   @State private var links: [Card]
-  @State private var isLoadingNextPage = false
 
   public init(cards: [Card]) {
     _links = .init(initialValue: cards)
