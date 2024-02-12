@@ -50,7 +50,7 @@ public struct StatusRowCardView: View {
     } label: {
       if let title = card.title, let url = URL(string: card.url) {
         VStack(alignment: .leading, spacing: 0) {
-          let sitesWithIcons = ["apps.apple.com", "music.apple.com", "open.spotify.com"]
+          let sitesWithIcons = ["apps.apple.com", "music.apple.com", "podcasts.apple.com", "open.spotify.com"]
           if isCompact {
             compactLinkPreview(title, url)
           } else if (UIDevice.current.userInterfaceIdiom == .pad ||
