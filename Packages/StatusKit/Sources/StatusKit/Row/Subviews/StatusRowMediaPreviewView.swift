@@ -177,6 +177,7 @@ struct BlurOverLay: View {
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
   @Environment(UserPreferences.self) private var preferences
   @Environment(\.isMediaCompact) private var isCompact: Bool
+  @Environment(\.self) var environment
 
   @Namespace var buttonSpace
 
@@ -212,7 +213,7 @@ struct BlurOverLay: View {
                   .matchedGeometryEffect(id: "eye", in: buttonSpace)
               }
               .lineLimit(1)
-              .foregroundColor(theme.labelColor)
+              .foregroundColor(contrastingColor(against: theme.tintColor))
             } else {
               Image(systemName: "eye.slash")
                 .transition(.opacity)
@@ -243,6 +244,29 @@ struct BlurOverLay: View {
       case false: true
       }
     default: false
+    }
+  }
+  
+  // return either labelColor or primaryBackgroundColor, whichever contrasts better against
+  // the specified background color
+  private func contrastingColor(against backgroundColor: Color) -> Color {
+    
+    func luminance(_ color: Color.Resolved) -> Float {
+      return 0.299 * color.red + 0.587 * color.green + 0.114 * color.blue;
+    }
+    
+    let resolvedBackgroundColor = backgroundColor.resolve(in: environment)
+    let resolvedLabelColor = theme.labelColor.resolve(in: environment)
+    let resolvedPrimaryBackgroundColor = theme.primaryBackgroundColor.resolve(in: environment)
+    
+    let backgroundLuminance = luminance(resolvedBackgroundColor)
+    let labelLuminance = luminance(resolvedLabelColor)
+    let primaryBackgroundLuminance = luminance(resolvedPrimaryBackgroundColor)
+    
+    if backgroundLuminance < 0.5 {
+      return (labelLuminance > primaryBackgroundLuminance) ? theme.labelColor : theme.primaryBackgroundColor
+    } else {
+      return (labelLuminance < primaryBackgroundLuminance) ? theme.labelColor : theme.primaryBackgroundColor
     }
   }
 }
