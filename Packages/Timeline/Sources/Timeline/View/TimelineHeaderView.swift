@@ -12,7 +12,13 @@ struct TimelineHeaderView<Content: View>: View {
       content()
       Spacer()
     }
+    #if os(visionOS)
+    .listRowBackground(RoundedRectangle(cornerRadius: 8)
+      .foregroundStyle(.background).hoverEffect())
+    .listRowHoverEffectDisabled()
+    #else
     .listRowBackground(theme.secondaryBackgroundColor)
+    #endif
     .listRowSeparator(.hidden)
     .listRowInsets(.init(top: 8,
                          leading: .layoutPadding,

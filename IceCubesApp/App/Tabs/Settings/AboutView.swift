@@ -27,7 +27,7 @@ struct AboutView: View {
   var body: some View {
     List {
       Section {
-        #if !targetEnvironment(macCatalyst)
+        #if !targetEnvironment(macCatalyst) && !os(visionOS)
         HStack {
           Spacer()
           Image(uiImage: .init(named: "AppIconAlternate0")!)

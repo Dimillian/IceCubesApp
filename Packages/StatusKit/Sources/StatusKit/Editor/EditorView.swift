@@ -137,6 +137,12 @@ extension StatusEditor {
           .environment(\.isModal, true)
           .padding(.horizontal, .layoutPadding)
           .padding(.vertical, .statusComponentSpacing)
+          #if os(visionOS)
+          .background(RoundedRectangle(cornerRadius: 8)
+            .foregroundStyle(.background))
+          .buttonStyle(.plain)
+          .padding(.layoutPadding)
+          #endif
         
       } else if let status = viewModel.embeddedStatus {
         StatusEmbeddedView(status: status, client: client, routerPath: RouterPath())

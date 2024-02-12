@@ -4,8 +4,9 @@ import Models
 import Observation
 import os
 import SwiftUI
+import OSLog
 
-@Observable public final class Client: Equatable, Identifiable, Hashable {
+@Observable public final class Client: Equatable, Identifiable, Hashable, @unchecked Sendable {
   public static func == (lhs: Client, rhs: Client) -> Bool {
     let lhsToken = lhs.critical.withLock { $0.oauthToken }
     let rhsToken = rhs.critical.withLock { $0.oauthToken }
@@ -43,6 +44,8 @@ import SwiftUI
   public let version: Version
   private let urlSession: URLSession
   private let decoder = JSONDecoder()
+  
+  private let logger = Logger(subsystem: "com.icecubesapp", category: "networking")
 
   // Putting all mutable state inside an `OSAllocatedUnfairLock` makes `Client`
   // provably `Sendable`. The lock is a struct, but it uses a `ManagedBuffer`
@@ -125,7 +128,7 @@ import SwiftUI
         request.httpBody = jsonData
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
       } catch {
-        print("Client Error encoding JSON: \(error.localizedDescription)")
+        logger.error("Error encoding JSON: \(error.localizedDescription)")
       }
     }
     return request
@@ -141,7 +144,8 @@ import SwiftUI
   }
 
   public func getWithLink<Entity: Decodable>(endpoint: Endpoint) async throws -> (Entity, LinkHandler?) {
-    let (data, httpResponse) = try await urlSession.data(for: makeGet(endpoint: endpoint))
+    let request = try makeGet(endpoint: endpoint)
+    let (data, httpResponse) = try await urlSession.data(for: request)
     var linkHandler: LinkHandler?
     if let response = httpResponse as? HTTPURLResponse,
        let link = response.allHeaderFields["Link"] as? String
@@ -149,6 +153,7 @@ import SwiftUI
       linkHandler = .init(rawLink: link)
     }
     logResponseOnError(httpResponse: httpResponse, data: data)
+    logger.log(level: .info, "\(request)")
     return try (decoder.decode(Entity.self, from: data), linkHandler)
   }
 
@@ -188,6 +193,7 @@ import SwiftUI
     let url = try makeURL(endpoint: endpoint, forceVersion: forceVersion)
     let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: method)
     let (data, httpResponse) = try await urlSession.data(for: request)
+    logger.log(level: .info, "\(request)")
     logResponseOnError(httpResponse: httpResponse, data: data)
     do {
       return try decoder.decode(Entity.self, from: data)
@@ -298,10 +304,8 @@ import SwiftUI
 
   private func logResponseOnError(httpResponse: URLResponse, data: Data) {
     if let httpResponse = httpResponse as? HTTPURLResponse, httpResponse.statusCode > 299 {
-      print(httpResponse)
-      print(String(data: data, encoding: .utf8) ?? "")
+      let error = "HTTP Response error: \(httpResponse.statusCode), response: \(httpResponse), data: \(String(data: data, encoding: .utf8) ?? "")"
+      logger.error("\(error)")
     }
   }
 }
-
-extension Client: Sendable {}

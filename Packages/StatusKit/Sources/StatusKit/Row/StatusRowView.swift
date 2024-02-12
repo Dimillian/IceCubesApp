@@ -18,9 +18,11 @@ public struct StatusRowView: View {
 
   @Environment(QuickLook.self) private var quickLook
   @Environment(Theme.self) private var theme
+  @Environment(Client.self) private var client
 
   @State private var viewModel: StatusRowViewModel
   @State private var showSelectableText: Bool = false
+  @State private var isBlockConfirmationPresented = false
 
   public enum Context { case timeline, detail }
   private let context: Context
@@ -31,7 +33,9 @@ public struct StatusRowView: View {
   }
 
   var contextMenu: some View {
-    StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showSelectableText)
+    StatusRowContextMenu(viewModel: viewModel, 
+                         showTextForSelection: $showSelectableText,
+                         isBlockConfirmationPresented: $isBlockConfirmationPresented)
   }
 
   public var body: some View {
@@ -95,9 +99,9 @@ public struct StatusRowView: View {
               if !reasons.contains(.placeholder),
                   viewModel.showActions, isFocused || theme.statusActionsDisplay != .none,
                  !isInCaptureMode {
-                StatusRowActionsView(viewModel: viewModel)
+                StatusRowActionsView(isBlockConfirmationPresented: $isBlockConfirmationPresented,
+                                     viewModel: viewModel)
                   .tint(isFocused ? theme.tintColor : .gray)
-                  .contentShape(Rectangle())
               }
 
               if isFocused, !isCompact {
@@ -189,6 +193,17 @@ public struct StatusRowView: View {
         secondaryButton: .cancel()
       )
     })
+    .confirmationDialog("",
+                        isPresented: $isBlockConfirmationPresented) {
+      Button("account.action.block", role: .destructive) {
+        Task {
+          do {
+            let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
+            viewModel.authorRelationship = try await client.post(endpoint: Accounts.block(id: operationAccount.id))
+          } catch { }
+        }
+      }
+    }
     .alignmentGuide(.listRowSeparatorLeading) { _ in
       -100
     }

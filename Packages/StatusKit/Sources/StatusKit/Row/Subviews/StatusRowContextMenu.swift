@@ -20,6 +20,7 @@ struct StatusRowContextMenu: View {
 
   var viewModel: StatusRowViewModel
   @Binding var showTextForSelection: Bool
+  @Binding var isBlockConfirmationPresented: Bool
 
   var boostLabel: some View {
     if viewModel.status.visibility == .priv, viewModel.status.account.id == account.account?.id {
@@ -203,9 +204,7 @@ struct StatusRowContextMenu: View {
                 do {
                   let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
                   viewModel.authorRelationship = try await client.post(endpoint: Accounts.unmute(id: operationAccount.id))
-                } catch {
-                  print("Error while unmuting: \(error.localizedDescription)")
-                }
+                } catch { }
               }
             } label: {
               Label("account.action.unmute", systemImage: "speaker")
@@ -218,9 +217,7 @@ struct StatusRowContextMenu: View {
                     do {
                       let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
                       viewModel.authorRelationship = try await client.post(endpoint: Accounts.mute(id: operationAccount.id, json: MuteData(duration: duration.rawValue)))
-                    } catch {
-                      print("Error while muting: \(error.localizedDescription)")
-                    }
+                    } catch { }
                   }
                 }
               }
@@ -274,23 +271,14 @@ struct StatusRowContextMenu: View {
           do {
             let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
             viewModel.authorRelationship = try await client.post(endpoint: Accounts.unblock(id: operationAccount.id))
-          } catch {
-            print("Error while unblocking: \(error.localizedDescription)")
-          }
+          } catch { }
         }
       } label: {
         Label("account.action.unblock", systemImage: "person.crop.circle.badge.exclamationmark")
       }
     } else {
       Button {
-        Task {
-          do {
-            let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
-            viewModel.authorRelationship = try await client.post(endpoint: Accounts.block(id: operationAccount.id))
-          } catch {
-            print("Error while blocking: \(error.localizedDescription)")
-          }
-        }
+        isBlockConfirmationPresented = true
       } label: {
         Label("account.action.block", systemImage: "person.crop.circle.badge.xmark")
       }

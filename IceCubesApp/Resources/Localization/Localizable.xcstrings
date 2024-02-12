@@ -3356,7 +3356,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ kullanıcısı  %@ kullanıcısını boostladı"
+            "value" : "%@ kullanıcısı  %@ kullanıcısını yükseltti"
           }
         },
         "uk" : {
@@ -7164,7 +7164,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Boostları göster"
+            "value" : "Yükseltmeleri göster"
           }
         },
         "uk" : {
@@ -10504,7 +10504,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Boostları göster"
+            "value" : "Yükseltmeleri göster"
           }
         },
         "uk" : {
@@ -11335,7 +11335,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tarafından Geliştirildi"
+            "value" : "Tarafından yükseltildi"
           }
         },
         "uk" : {
@@ -15108,7 +15108,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Takipçiler"
+            "value" : "Takipçi"
           }
         },
         "uk" : {
@@ -16676,7 +16676,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gönderiler"
+            "value" : "Gönderi"
           }
         },
         "uk" : {
@@ -35973,7 +35973,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🚀 Boostlandı: "
+            "value" : "🚀 Yükseltildi: "
           }
         },
         "uk" : {
@@ -47993,8 +47993,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Sidebar Customizations"
+            "state" : "translated",
+            "value" : "사이드바"
           }
         },
         "nb" : {
@@ -55460,7 +55460,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Boost"
+            "value" : "Yükseltme"
           }
         },
         "uk" : {
@@ -58653,7 +58653,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Takipçileri Boostla "
+            "value" : "Takipçileri Yükselt "
           }
         },
         "uk" : {
@@ -68143,8 +68143,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Hide Results"
+            "state" : "translated",
+            "value" : "결과 가리기"
           }
         },
         "nb" : {
@@ -68191,8 +68191,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Hide Results"
+            "state" : "translated",
+            "value" : "隱藏結果"
           }
         }
       }
@@ -69582,8 +69582,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Results"
+            "state" : "translated",
+            "value" : "결과 보기"
           }
         },
         "nb" : {
@@ -69630,8 +69630,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Results"
+            "state" : "translated",
+            "value" : "顯示結果"
           }
         }
       }
@@ -74238,8 +74238,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Content Filter"
+            "state" : "translated",
+            "value" : "글 종류별 필터"
           }
         },
         "nb" : {
@@ -75067,8 +75067,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Boosts"
+            "state" : "translated",
+            "value" : "부스트된 글 표시"
           }
         },
         "nb" : {
@@ -75098,7 +75098,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Boostları Göster"
+            "value" : "Yükseltmeleri Göster"
           }
         },
         "uk" : {
@@ -75186,8 +75186,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Quotes"
+            "state" : "translated",
+            "value" : "인용 표시"
           }
         },
         "nb" : {
@@ -75305,8 +75305,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Replies"
+            "state" : "translated",
+            "value" : "다른 사용자에게 남긴 답글 표시"
           }
         },
         "nb" : {
@@ -75424,8 +75424,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Threads"
+            "state" : "translated",
+            "value" : "스스로에게 남긴 답글 표시"
           }
         },
         "nb" : {
@@ -75898,7 +75898,7 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "완전히 새로고침"
           }
         },
@@ -75916,8 +75916,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Najnowsze posty"
+            "state" : "translated",
+            "value" : "Odśwież"
           }
         },
         "pt-BR" : {
@@ -75928,8 +75928,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Sonuncuya Atla"
+            "state" : "translated",
+            "value" : "Yenile"
           }
         },
         "uk" : {
@@ -75940,14 +75940,14 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "跳转到最新"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "跳至最新"
+            "state" : "translated",
+            "value" : "更新"
           }
         }
       }
@@ -76384,7 +76384,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "마지막 위치로 돌아가기"
+            "value" : "마지막 위치로 이동"
           }
         },
         "nb" : {
@@ -76552,6 +76552,149 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "流行"
+          }
+        }
+      }
+    },
+    "trending-tag-people-talking %lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld people talking"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld people talking"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld people talking"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld people talking"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld people talking"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : ""
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld people talking"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld people talking"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld people talking"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld people talking"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : ""
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld people talking"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld people talking"
+          }
+        },
+        "pl" : {
+          "variations" : {
+            "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld osoby rozmawiają"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld osób rozmawia"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld osób rozmawia"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld osób rozmawia"
+                }
+              }
+            }
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : ""
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld kişi konuşuyor"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld people talking"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld people talking"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld people talking"
           }
         }
       }

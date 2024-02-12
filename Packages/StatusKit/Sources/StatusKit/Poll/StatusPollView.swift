@@ -20,26 +20,17 @@ public struct StatusPollView: View {
     self.status = status
   }
 
-  private func widthForOption(option: Poll.Option, proxy: GeometryProxy) -> CGFloat {
-    if viewModel.poll.safeVotersCount != 0 {
-      let totalWidth = proxy.frame(in: .local).width
-      return totalWidth * ratioForOption(option: option)
-    } else {
-      return 0
-    }
+  private func relativePercent(for vote: Int) -> CGFloat {
+    let biggestVote = viewModel.poll.options.compactMap { $0.votesCount }.max() ?? 0
+    guard biggestVote > 0 else { return 0 }
+
+    return if vote == biggestVote { 100 } else { CGFloat(vote) * 100 / CGFloat(biggestVote) }
   }
 
-  private func percentForOption(option: Poll.Option) -> Int {
-    let percent = ratioForOption(option: option) * 100
-    return Int(round(percent))
-  }
-
-  private func ratioForOption(option: Poll.Option) -> CGFloat {
-    if let votesCount = option.votesCount, viewModel.poll.safeVotersCount != 0 {
-      CGFloat(votesCount) / CGFloat(viewModel.poll.safeVotersCount)
-    } else {
-      0.0
-    }
+  private func absolutePercent(for vote: Int) -> Int {
+    let totalVote = viewModel.poll.safeVotersCount
+    guard totalVote > 0 else { return 0 }
+    return Int(round(CGFloat(vote) * 100 / CGFloat(totalVote)))
   }
 
   private func isSelected(option: Poll.Option) -> Bool {
@@ -84,14 +75,10 @@ public struct StatusPollView: View {
               .disabled(isInteractive == false)
           }
           if viewModel.showResults || status.account.id == currentAccount.account?.id {
-            Spacer()
             // Make sure they're all the same width using a ZStack with 100% hiding behind the
             // real percentage.
-            ZStack(alignment: .trailing) {
-              Text("100%")
-                .hidden()
-
-              Text("\(percentForOption(option: option))%")
+            Text("100%").hidden().overlay(alignment: .trailing) {
+              Text("\(absolutePercent(for:option.votesCount ?? 0))%")
                 .font(.scaledSubheadline)
             }
           }
@@ -106,14 +93,8 @@ public struct StatusPollView: View {
       if !viewModel.poll.expired, !(viewModel.poll.voted ?? false) {
         HStack {
           if !viewModel.votes.isEmpty {
-            Button("status.poll.send") {
-              Task {
-                do {
-                  await viewModel.postVotes()
-                }
-              }
-            }
-            .buttonStyle(.borderedProminent)
+            Button("status.poll.send") { Task { await viewModel.postVotes() } }
+              .buttonStyle(.borderedProminent)
           }
           Button(viewModel.showResults ? "status.poll.hide-results" : "status.poll.show-results") {
             withAnimation {
@@ -123,14 +104,13 @@ public struct StatusPollView: View {
           .buttonStyle(.bordered)
         }
       }
+
       footerView
 
     }.onAppear {
       viewModel.instance = currentInstance.instance
       viewModel.client = client
-      Task {
-        await viewModel.fetchPoll()
-      }
+      Task { await viewModel.fetchPoll() }
     }
     .accessibilityElement(children: .contain)
     .accessibilityLabel(viewModel.poll.expired ? "accessibility.status.poll.finished.label" : "accessibility.status.poll.active.label")
@@ -139,9 +119,9 @@ public struct StatusPollView: View {
   func combinedAccessibilityLabel(for option: Poll.Option, index: Int) -> Text {
     let showPercentage = viewModel.poll.expired || viewModel.poll.voted ?? false
     return Text("accessibility.status.poll.option-prefix-\(index + 1)-of-\(viewModel.poll.options.count)") +
-      Text(", ") +
-      Text(option.title) +
-      Text(showPercentage ? ", \(percentForOption(option: option))%" : "")
+    Text(", ") +
+    Text(option.title) +
+    Text(showPercentage ? ", \(absolutePercent(for:option.votesCount ?? 0))%" : "")
   }
 
   private var footerView: some View {
@@ -176,40 +156,51 @@ public struct StatusPollView: View {
         }
       }
     } label: {
-      GeometryReader { proxy in
-        ZStack(alignment: .leading) {
-          Rectangle()
-            .background {
-              if viewModel.showResults || status.account.id == currentAccount.account?.id {
-                HStack {
-                  let width = widthForOption(option: option, proxy: proxy)
-                  Rectangle()
-                    .foregroundColor(theme.tintColor)
-                    .frame(width: width)
-                  if width != proxy.size.width {
-                    Spacer()
-                  }
-                }
-                .transition(.asymmetric(insertion: .push(from: .leading),
-                                        removal: .push(from: .trailing)))
-              }
-            }
-            .foregroundColor(theme.tintColor.opacity(0.40))
-            .clipShape(RoundedRectangle(cornerRadius: 8))
-          
-          HStack {
-            buttonImage
-            Text(option.title)
-              .foregroundColor(theme.labelColor)
-              .font(.scaledBody)
-              .lineLimit(3)
-              .minimumScaleFactor(0.7)
+      buttonImage
+      Spacer()
+
+      HStack {
+        Text(option.title)
+          .multilineTextAlignment(.leading)
+          .foregroundColor(theme.labelColor)
+          .font(.scaledBody)
+          .lineLimit(3)
+          .minimumScaleFactor(0.7)
+        Spacer()
+      }
+      .padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
+      .background(alignment: .leading) {
+        if viewModel.showResults || status.account.id == currentAccount.account?.id {
+          _PercentWidthLayout(percent: relativePercent(for: option.votesCount ?? 0)) {
+            RoundedRectangle(cornerRadius: 10).foregroundColor(theme.tintColor)
+              .transition(.asymmetric(insertion: .push(from: .leading),
+                                      removal: .push(from: .trailing)))
           }
-          .padding(.leading, 12)
         }
       }
+      .background { RoundedRectangle(cornerRadius: 10).fill(theme.tintColor.opacity(0.4)) }
+      .clipShape(RoundedRectangle(cornerRadius: 10))
     }
     .buttonStyle(.borderless)
     .frame(minHeight: .pollBarHeight)
+  }
+
+  private struct _PercentWidthLayout: Layout {
+    let percent: CGFloat
+
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+      guard let view = subviews.first else { return CGSize.zero }
+      return view.sizeThatFits(proposal)
+    }
+
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+      guard let view = subviews.first,
+            let width = proposal.width
+      else { return }
+
+      view.place(
+        at: bounds.origin,
+        proposal: ProposedViewSize(width: percent / 100 * width, height: proposal.height))
+    }
   }
 }

@@ -2,6 +2,7 @@ import Models
 import Network
 import Observation
 import SwiftUI
+import OSLog
 
 public enum AccountsListMode {
   case following(accountId: String), followers(accountId: String)
@@ -32,7 +33,7 @@ public enum AccountsListMode {
 
   public enum State {
     public enum PagingState {
-      case hasNextPage, loadingNextPage, none
+      case hasNextPage, none
     }
 
     case loading
@@ -93,41 +94,36 @@ public enum AccountsListMode {
     } catch {}
   }
 
-  func fetchNextPage() async {
+  func fetchNextPage() async throws {
     guard let client, let nextPageId else { return }
-    do {
-      state = .display(accounts: accounts, relationships: relationships, nextPageState: .loadingNextPage)
-      let newAccounts: [Account]
-      let link: LinkHandler?
-      switch mode {
-      case let .followers(accountId):
-        (newAccounts, link) = try await client.getWithLink(endpoint: Accounts.followers(id: accountId,
+    let newAccounts: [Account]
+    let link: LinkHandler?
+    switch mode {
+    case let .followers(accountId):
+      (newAccounts, link) = try await client.getWithLink(endpoint: Accounts.followers(id: accountId,
+                                                                                      maxId: nextPageId))
+    case let .following(accountId):
+      (newAccounts, link) = try await client.getWithLink(endpoint: Accounts.following(id: accountId,
+                                                                                      maxId: nextPageId))
+    case let .rebloggedBy(statusId):
+      (newAccounts, link) = try await client.getWithLink(endpoint: Statuses.rebloggedBy(id: statusId,
                                                                                         maxId: nextPageId))
-      case let .following(accountId):
-        (newAccounts, link) = try await client.getWithLink(endpoint: Accounts.following(id: accountId,
+    case let .favoritedBy(statusId):
+      (newAccounts, link) = try await client.getWithLink(endpoint: Statuses.favoritedBy(id: statusId,
                                                                                         maxId: nextPageId))
-      case let .rebloggedBy(statusId):
-        (newAccounts, link) = try await client.getWithLink(endpoint: Statuses.rebloggedBy(id: statusId,
-                                                                                          maxId: nextPageId))
-      case let .favoritedBy(statusId):
-        (newAccounts, link) = try await client.getWithLink(endpoint: Statuses.favoritedBy(id: statusId,
-                                                                                          maxId: nextPageId))
-      case .accountsList:
-        newAccounts = []
-        link = nil
-      }
-      accounts.append(contentsOf: newAccounts)
-      let newRelationships: [Relationship] =
-        try await client.get(endpoint: Accounts.relationships(ids: newAccounts.map(\.id)))
-
-      relationships.append(contentsOf: newRelationships)
-      self.nextPageId = link?.maxId
-      state = .display(accounts: accounts,
-                       relationships: relationships,
-                       nextPageState: link?.maxId != nil ? .hasNextPage : .none)
-    } catch {
-      print(error)
+    case .accountsList:
+      newAccounts = []
+      link = nil
     }
+    accounts.append(contentsOf: newAccounts)
+    let newRelationships: [Relationship] =
+      try await client.get(endpoint: Accounts.relationships(ids: newAccounts.map(\.id)))
+
+    relationships.append(contentsOf: newRelationships)
+    self.nextPageId = link?.maxId
+    state = .display(accounts: accounts,
+                     relationships: relationships,
+                     nextPageState: link?.maxId != nil ? .hasNextPage : .none)
   }
   
   func search() async {

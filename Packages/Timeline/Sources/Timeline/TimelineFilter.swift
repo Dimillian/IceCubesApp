@@ -43,6 +43,10 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
     switch self {
     case let .remoteLocal(server, filter):
       return server + filter.rawValue
+    case let .list(list):
+      return list.id
+    case let .tagGroup(title, tags, _):
+      return title + tags.joined()
     default:
       return title
     }
@@ -50,7 +54,7 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
   }
   
   public func hash(into hasher: inout Hasher) {
-    hasher.combine(title)
+    hasher.combine(id)
   }
 
   public static func availableTimeline(client: Client) -> [TimelineFilter] {

@@ -60,7 +60,7 @@ extension View {
                      scrollToTopSignal: .constant(0),
                      canFilterTimeline: false)
       case let .trendingLinks(cards):
-        CardsListView(cards: cards)
+        TrendingLinksListView(cards: cards)
       case let .tagsList(tags):
         TagsListView(tags: tags)
       }
@@ -81,6 +81,9 @@ extension View {
           .withEnvironments()
       case let .quoteStatusEditor(status):
         StatusEditor.MainView(mode: .quote(status: status))
+          .withEnvironments()
+      case let .quoteLinkStatusEditor(link):
+        StatusEditor.MainView(mode: .quoteLink(link: link))
           .withEnvironments()
       case let .mentionStatusEditor(account, visibility):
         StatusEditor.MainView(mode: .mention(account: account, visibility: visibility))

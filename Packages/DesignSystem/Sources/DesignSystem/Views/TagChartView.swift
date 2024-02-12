@@ -3,7 +3,7 @@ import Models
 import SwiftUI
 
 public struct TagChartView: View {
-  @State private var sortedHistory: [Tag.History] = []
+  @State private var sortedHistory: [History] = []
 
   public init(tag: Tag) {
     _sortedHistory = .init(initialValue: tag.history.sorted {

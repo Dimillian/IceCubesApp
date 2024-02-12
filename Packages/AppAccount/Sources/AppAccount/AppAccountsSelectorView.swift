@@ -96,6 +96,9 @@ public struct AppAccountsSelectorView: View {
             AppAccountView(viewModel: viewModel, isParentPresented: $isPresented)
           }
           addAccountButton
+          #if os(visionOS)
+            .foregroundStyle(theme.labelColor)
+          #endif
         }
         #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)
@@ -107,8 +110,10 @@ public struct AppAccountsSelectorView: View {
             aboutButton
             supportButton
           }
-          #if !os(visionOS)
-            .listRowBackground(theme.primaryBackgroundColor)
+          #if os(visionOS)
+          .foregroundStyle(theme.labelColor)
+          #else
+          .listRowBackground(theme.primaryBackgroundColor)
           #endif
         }
       }

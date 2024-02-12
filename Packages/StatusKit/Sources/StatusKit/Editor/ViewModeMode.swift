@@ -8,6 +8,7 @@ public extension StatusEditor.ViewModel {
     case new(visibility: Models.Visibility)
     case edit(status: Status)
     case quote(status: Status)
+    case quoteLink(link: URL)
     case mention(account: Account, visibility: Models.Visibility)
     case shareExtension(items: [NSItemProvider])
 
@@ -40,7 +41,7 @@ public extension StatusEditor.ViewModel {
 
     var title: LocalizedStringKey {
       switch self {
-      case .new, .mention, .shareExtension:
+      case .new, .mention, .shareExtension, .quoteLink:
         "status.editor.mode.new"
       case .edit:
         "status.editor.mode.edit"

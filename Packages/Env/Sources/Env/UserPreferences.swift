@@ -52,7 +52,7 @@ import SwiftUI
 
     @AppStorage("collapse-long-posts") public var collapseLongPosts = true
 
-    @AppStorage("share-button-behavior") public var shareButtonBehavior: PreferredShareButtonBehavior = .linkAndText
+    @AppStorage("share-button-behavior") public var shareButtonBehavior: PreferredShareButtonBehavior = .linkOnly
     
     @AppStorage("fast_refresh") public var fastRefreshEnabled: Bool = false
 
