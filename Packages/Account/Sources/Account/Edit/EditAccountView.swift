@@ -189,8 +189,8 @@ public struct EditAccountView: View {
           TextField("account.edit.metadata-name-placeholder", text: $field.name)
             .font(.scaledHeadline)
           TextField("account.edit.metadata-value-placeholder", text: $field.value)
-            .emojiSize(Font.scaledBodyFont.emojiSize)
-            .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
+            .emojiText.size(Font.scaledBodyFont.emojiSize)
+            .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
             .foregroundColor(theme.tintColor)
         }
       }

@@ -38,7 +38,9 @@ struct EditTagGroupView: View {
             focusedField: $focusedField
           )
         }
+        #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
+        #endif
 
         Section("add-tag-groups.edit.tags") {
           TagsInputView(
@@ -47,7 +49,9 @@ struct EditTagGroupView: View {
             focusedField: $focusedField
           )
         }
+        #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
+        #endif
       }
       .formStyle(.grouped)
       .navigationTitle(

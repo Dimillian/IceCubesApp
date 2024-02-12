@@ -88,7 +88,7 @@ import SwiftUI
     async let suggestedAccounts: [Account] = client.get(endpoint: Accounts.suggestions)
     async let trendingTags: [Tag] = client.get(endpoint: Trends.tags)
     async let trendingStatuses: [Status] = client.get(endpoint: Trends.statuses(offset: nil))
-    async let trendingLinks: [Card] = client.get(endpoint: Trends.links)
+    async let trendingLinks: [Card] = client.get(endpoint: Trends.links(offset: nil))
     return try await .init(suggestedAccounts: suggestedAccounts,
                            trendingTags: trendingTags,
                            trendingStatuses: trendingStatuses,

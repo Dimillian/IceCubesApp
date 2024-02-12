@@ -172,27 +172,30 @@ public struct NotificationsListView: View {
                                  trailing: .layoutPadding))
             #if os(visionOS)
             .listRowBackground(RoundedRectangle(cornerRadius: 8)
-              .foregroundStyle(notification.type == .mention && lockedType != .mention ? Material.thick : Material.regular))
+              .foregroundStyle(notification.type == .mention && lockedType != .mention ? Material.thick : Material.regular).hoverEffect())
+            .listRowHoverEffectDisabled()
             #else
             .listRowBackground(notification.type == .mention && lockedType != .mention ?
               theme.secondaryBackgroundColor : theme.primaryBackgroundColor)
             #endif
             .id(notification.id)
         }
-      }
-
-      switch nextPageState {
-      case .none:
-        EmptyView()
-      case .hasNextPage:
-        loadingRow
-          .onAppear {
-            Task {
-              await viewModel.fetchNextPage()
-            }
+        
+        switch nextPageState {
+        case .none:
+          EmptyView()
+        case .hasNextPage:
+          NextPageView {
+            try await viewModel.fetchNextPage()
           }
-      case .loadingNextPage:
-        loadingRow
+          .listRowInsets(.init(top: .layoutPadding,
+                               leading: .layoutPadding + 4,
+                               bottom: .layoutPadding,
+                               trailing: .layoutPadding))
+          #if !os(visionOS)
+          .listRowBackground(theme.primaryBackgroundColor)
+          #endif
+        }
       }
 
     case .error:
@@ -209,21 +212,6 @@ public struct NotificationsListView: View {
       #endif
       .listSectionSeparator(.hidden)
     }
-  }
-
-  private var loadingRow: some View {
-    HStack {
-      Spacer()
-      ProgressView()
-      Spacer()
-    }
-    .listRowInsets(.init(top: .layoutPadding,
-                         leading: .layoutPadding + 4,
-                         bottom: .layoutPadding,
-                         trailing: .layoutPadding))
-    #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
-    #endif
   }
 
   private var topPaddingView: some View {

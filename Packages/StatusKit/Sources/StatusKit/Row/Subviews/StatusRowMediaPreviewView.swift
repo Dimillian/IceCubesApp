@@ -61,10 +61,9 @@ public struct StatusRowMediaPreviewView: View {
       } else {
         ScrollView(.horizontal, showsIndicators: showsScrollIndicators) {
           HStack {
-            makeAttachmentView(for: 0)
-            makeAttachmentView(for: 1)
-            makeAttachmentView(for: 2)
-            makeAttachmentView(for: 3)
+            ForEach(attachments) { attachment in
+              makeAttachmentView(attachment)
+            }
           }
           .padding(.bottom, scrollBottomPadding)
         }
@@ -74,17 +73,21 @@ public struct StatusRowMediaPreviewView: View {
   }
 
   @ViewBuilder
-  private func makeAttachmentView(for index: Int) -> some View {
-    if
-      attachments.count > index,
-      let data = DisplayData(from: attachments[index])
-    {
+  private func makeAttachmentView(_ attachement: MediaAttachment) -> some View {
+    if let data = DisplayData(from: attachement) {
       MediaPreview(
         sensitive: sensitive,
         imageMaxHeight: imageMaxHeight,
         displayData: data
       )
-      .onTapGesture { tabAction(for: index) }
+      .onTapGesture { 
+        if let index = attachments.firstIndex(where: { $0.id == attachement.id }) {
+          tabAction(for: index)
+        }
+      }
+      #if os(visionOS)
+      .hoverEffect()
+      #endif
     }
   }
 
@@ -173,7 +176,7 @@ struct BlurOverLay: View {
   @Environment(Theme.self) private var theme
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
   @Environment(UserPreferences.self) private var preferences
-  @Environment(\.isCompact) private var isCompact: Bool
+  @Environment(\.isMediaCompact) private var isCompact: Bool
 
   @Namespace var buttonSpace
 
@@ -249,7 +252,7 @@ struct AltTextButton: View {
   let font: Font?
 
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
-  @Environment(\.isCompact) private var isCompact: Bool
+  @Environment(\.isMediaCompact) private var isCompact: Bool
   @Environment(UserPreferences.self) private var preferences
   @Environment(\.locale) private var locale
   @Environment(Theme.self) private var theme
@@ -275,6 +278,9 @@ struct AltTextButton: View {
       .buttonStyle(.borderless)
       .padding(EdgeInsets(top: 5, leading: 7, bottom: 5, trailing: 7))
       .background(.thinMaterial)
+      #if os(visionOS)
+      .clipShape(Capsule())
+      #endif
       .cornerRadius(4)
       .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
       .alert(
@@ -372,7 +378,7 @@ struct WrapperForPreview: View {
       .environment(UserPreferences.shared)
       .environment(QuickLook.shared)
       .environment(Theme.shared)
-      .environment(\.isCompact, isCompact)
+      .environment(\.isMediaCompact, isCompact)
       .environment(\.isInCaptureMode, isInCaptureMode)
 
       Divider()
@@ -395,7 +401,6 @@ private struct FeaturedImagePreView: View {
 
   @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
   @Environment(Theme.self) private var theme
-  @Environment(\.isCompact) private var isCompact: Bool
   @Environment(\.isModal) private var isModal: Bool
 
   private var originalWidth: CGFloat {
@@ -433,6 +438,9 @@ private struct FeaturedImagePreView: View {
               RoundedRectangle(cornerRadius: 10)
                 .stroke(.gray.opacity(0.35), lineWidth: 1)
             )
+            #if os(visionOS)
+            .hoverEffect()
+            #endif
         }
       }
       .overlay {

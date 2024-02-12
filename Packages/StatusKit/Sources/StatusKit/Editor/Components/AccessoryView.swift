@@ -45,7 +45,7 @@ extension StatusEditor {
       }
       .frame(height: 20)
       .padding(.vertical, 12)
-      .background(.thinMaterial)
+      .background(.ultraThickMaterial)
       #endif
     }
 
@@ -111,7 +111,7 @@ extension StatusEditor {
       }
       .photosPicker(isPresented: $isPhotosPickerPresented,
                     selection: $viewModel.mediaPickers,
-                    maxSelectionCount: 4,
+                    maxSelectionCount: currentInstance.instance?.configuration?.statuses.maxMediaAttachments ?? 4,
                     matching: .any(of: [.images, .videos]),
                     photoLibrary: .shared())
       .fileImporter(isPresented: $isFileImporterPresented,

@@ -376,11 +376,7 @@ extension TimelineViewModel: StatusesFetcher {
       }
     }
 
-    // We trigger a new fetch so we can get the next new statuses if any.
-    // If none, it'll stop there.
-    // Only do that in the context of the home timeline as other don't worth catching up that much.
-    if timeline == .home,
-       !Task.isCancelled,
+    if !Task.isCancelled,
        let latest = await datasource.get().first
     {
       pendingStatusesObserver.isLoadingNewStatuses = true
@@ -417,26 +413,24 @@ extension TimelineViewModel: StatusesFetcher {
     return allStatuses
   }
 
-  func fetchNextPage() async {
-    guard let client else { return }
-    do {
-      let statuses = await datasource.get()
-      guard let lastId = statuses.last?.id else { return }
-      statusesState = await .display(statuses: datasource.getFiltered(), nextPageState: .loadingNextPage)
-      let newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
-                                                                                   maxId: lastId,
-                                                                                   minId: nil,
-                                                                                   offset: statuses.count))
+  enum NextPageError: Error {
+    case internalError
+  }
+  
+  func fetchNextPage() async throws {
+    let statuses = await datasource.get()
+    guard let client, let lastId = statuses.last?.id else { throw NextPageError.internalError }
+    let newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
+                                                                                 maxId: lastId,
+                                                                                 minId: nil,
+                                                                                 offset: statuses.count))
 
 
-      await datasource.append(contentOf: newStatuses)
-      StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
+    await datasource.append(contentOf: newStatuses)
+    StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
 
-      statusesState = await .display(statuses: datasource.getFiltered(),
-                                     nextPageState: newStatuses.count < 20 ? .none : .hasNextPage)
-    } catch {
-      statusesState = .error(error: error)
-    }
+    statusesState = await .display(statuses: datasource.getFiltered(),
+                                   nextPageState: newStatuses.count < 20 ? .none : .hasNextPage)
   }
 
   func statusDidAppear(status: Status) {

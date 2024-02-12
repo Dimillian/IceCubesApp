@@ -5,6 +5,7 @@ import Models
 import Network
 import Observation
 import SwiftUI
+import OSLog
 
 @MainActor
 @Observable public class FollowButtonViewModel {
@@ -32,7 +33,6 @@ import SwiftUI
       relationship = try await client.post(endpoint: Accounts.follow(id: accountId, notify: false, reblogs: true))
       relationshipUpdated(relationship)
     } catch {
-      print("Error while following: \(error.localizedDescription)")
       throw error
     }
   }
@@ -43,7 +43,6 @@ import SwiftUI
       relationship = try await client.post(endpoint: Accounts.unfollow(id: accountId))
       relationshipUpdated(relationship)
     } catch {
-      print("Error while unfollowing: \(error.localizedDescription)")
       throw error
     }
   }
@@ -56,7 +55,6 @@ import SwiftUI
                                                                      reblogs: relationship.showingReblogs))
       relationshipUpdated(relationship)
     } catch {
-      print("Error while following: \(error.localizedDescription)")
       throw error
     }
   }
@@ -69,7 +67,6 @@ import SwiftUI
                                                                      reblogs: !relationship.showingReblogs))
       relationshipUpdated(relationship)
     } catch {
-      print("Error while switching reboosts: \(error.localizedDescription)")
       throw error
     }
   }

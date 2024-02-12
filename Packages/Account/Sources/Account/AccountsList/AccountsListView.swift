@@ -134,21 +134,13 @@ public struct AccountsListView: View {
 
       switch nextPageState {
       case .hasNextPage:
-        loadingRow
-          #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
-          #endif
-          .onAppear {
-            Task {
-              await viewModel.fetchNextPage()
-            }
-          }
-
-      case .loadingNextPage:
-        loadingRow
-          #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
-          #endif
+        NextPageView {
+          try await viewModel.fetchNextPage()
+        }
+        #if !os(visionOS)
+        .listRowBackground(theme.primaryBackgroundColor)
+        #endif
+        
       case .none:
         EmptyView()
       }
@@ -158,14 +150,6 @@ public struct AccountsListView: View {
         #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
         #endif
-    }
-  }
-
-  private var loadingRow: some View {
-    HStack {
-      Spacer()
-      ProgressView()
-      Spacer()
     }
   }
 }
