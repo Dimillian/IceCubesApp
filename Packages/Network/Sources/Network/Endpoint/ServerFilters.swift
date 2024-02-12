@@ -29,10 +29,10 @@ public enum ServerFilters: Endpoint {
   public func queryItems() -> [URLQueryItem]? {
     switch self {
     case let .addKeyword(_, keyword, wholeWord):
-      return [.init(name: "keyword", value: keyword),
-              .init(name: "whole_word", value: wholeWord ? "true" : "false")]
+      [.init(name: "keyword", value: keyword),
+       .init(name: "whole_word", value: wholeWord ? "true" : "false")]
     default:
-      return nil
+      nil
     }
   }
 

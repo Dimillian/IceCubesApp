@@ -1,7 +1,6 @@
 import DesignSystem
 import Env
 import RevenueCat
-import Shimmer
 import SwiftUI
 
 @MainActor
@@ -69,8 +68,10 @@ struct SupportAppView: View {
       linksSection
     }
     .navigationTitle("settings.support.navigation-title")
+    #if !os(visionOS)
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
+    #endif
     .alert("settings.support.alert.title", isPresented: $purchaseSuccessDisplayed, actions: {
       Button { purchaseSuccessDisplayed = false } label: { Text("alert.button.ok") }
     }, message: {
@@ -151,7 +152,9 @@ struct SupportAppView: View {
         Text("settings.support.message-from-dev")
       }
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   private var subscriptionSection: some View {
@@ -188,7 +191,9 @@ struct SupportAppView: View {
         Text("settings.support.supporter.subscription-info")
       }
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   private var tipsSection: some View {
@@ -213,7 +218,9 @@ struct SupportAppView: View {
         }
       }
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   private var restorePurchase: some View {
@@ -232,7 +239,9 @@ struct SupportAppView: View {
     } footer: {
       Text("settings.support.restore-purchase.explanation")
     }
+    #if !os(visionOS)
     .listRowBackground(theme.secondaryBackgroundColor)
+    #endif
   }
 
   private var linksSection: some View {
@@ -252,7 +261,9 @@ struct SupportAppView: View {
         .buttonStyle(.borderless)
       }
     }
+    #if !os(visionOS)
     .listRowBackground(theme.secondaryBackgroundColor)
+    #endif
   }
 
   private var loadingPlaceholder: some View {
@@ -268,6 +279,5 @@ struct SupportAppView: View {
     }
     .redacted(reason: .placeholder)
     .allowsHitTesting(false)
-    .shimmering()
   }
 }

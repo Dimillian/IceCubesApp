@@ -3,7 +3,7 @@ import EmojiText
 import Env
 import Models
 import Network
-import Status
+import StatusKit
 import SwiftUI
 
 @MainActor
@@ -27,7 +27,7 @@ struct NotificationRowView: View {
                  height: AvatarView.FrameConfig.status.height)
           .accessibilityHidden(true)
       }
-      VStack(alignment: .leading, spacing: 2) {
+      VStack(alignment: .leading, spacing: 0) {
         makeMainLabel(type: notification.type)
           // The main label is redundant for mentions
           .accessibilityHidden(notification.type == .mention)
@@ -94,44 +94,50 @@ struct NotificationRowView: View {
           .frame(height: AvatarView.FrameConfig.status.size.height + 2)
         }.offset(y: -1)
       }
-      HStack(spacing: 0) {
-        EmojiTextApp(.init(stringValue: notification.accounts[0].safeDisplayName),
-                     emojis: notification.accounts[0].emojis,
-                     append: {
-                       (notification.accounts.count > 1
-                         ? Text("notifications-others-count \(notification.accounts.count - 1)")
-                         .font(.scaledSubheadline)
-                         .fontWeight(.regular)
-                         : Text(" ")) +
-                         Text(type.label(count: notification.accounts.count))
-                         .font(.scaledSubheadline)
-                         .fontWeight(.regular) +
-                         Text(" ⸱ ")
-                         .font(.scaledFootnote)
-                         .fontWeight(.regular)
-                         .foregroundStyle(.secondary) +
-                         Text(notification.createdAt.relativeFormatted)
-                         .font(.scaledFootnote)
-                         .fontWeight(.regular)
-                         .foregroundStyle(.secondary)
-                     })
-                     .font(.scaledSubheadline)
-                     .emojiSize(Font.scaledSubheadlineFont.emojiSize)
-                     .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
-                     .fontWeight(.semibold)
-                     .lineLimit(3)
-                     .fixedSize(horizontal: false, vertical: true)
-        if let status = notification.status, notification.type == .mention {
-          Group {
-            Text(" ⸱ ")
-            Text(Image(systemName: status.visibility.iconName))
+      if !reasons.contains(.placeholder) {
+        HStack(spacing: 0) {
+          EmojiTextApp(.init(stringValue: notification.accounts[0].safeDisplayName),
+                       emojis: notification.accounts[0].emojis,
+                       append: {
+                         (notification.accounts.count > 1
+                           ? Text("notifications-others-count \(notification.accounts.count - 1)")
+                           .font(.scaledSubheadline)
+                           .fontWeight(.regular)
+                           : Text(" ")) +
+                           Text(type.label(count: notification.accounts.count))
+                           .font(.scaledSubheadline)
+                           .fontWeight(.regular) +
+                           Text(" ⸱ ")
+                           .font(.scaledFootnote)
+                           .fontWeight(.regular)
+                           .foregroundStyle(.secondary) +
+                           Text(notification.createdAt.relativeFormatted)
+                           .font(.scaledFootnote)
+                           .fontWeight(.regular)
+                           .foregroundStyle(.secondary)
+                       })
+                       .font(.scaledSubheadline)
+                       .emojiText.size(Font.scaledSubheadlineFont.emojiSize)
+                       .emojiText.baselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
+                       .fontWeight(.semibold)
+                       .lineLimit(3)
+                       .fixedSize(horizontal: false, vertical: true)
+          if let status = notification.status, notification.type == .mention {
+            Group {
+              Text(" ⸱ ")
+              Text(Image(systemName: status.visibility.iconName))
+            }
+            .accessibilityHidden(true)
+            .font(.scaledFootnote)
+            .fontWeight(.regular)
+            .foregroundStyle(.secondary)
           }
-          .accessibilityHidden(true)
-          .font(.scaledFootnote)
-          .fontWeight(.regular)
-          .foregroundStyle(.secondary)
+          Spacer()
         }
-        Spacer()
+      } else {
+        Text("          ")
+          .font(.scaledSubheadline)
+          .fontWeight(.semibold)
       }
     }
     .contentShape(Rectangle())
@@ -154,6 +160,7 @@ struct NotificationRowView: View {
                                          client: client,
                                          routerPath: routerPath,
                                          showActions: true))
+          .environment(\.isMediaCompact, false)
         } else {
           StatusRowView(viewModel: .init(status: status,
                                          client: client,
@@ -161,6 +168,7 @@ struct NotificationRowView: View {
                                          showActions: false,
                                          textDisabled: true))
             .lineLimit(4)
+            .environment(\.isMediaCompact, true)
         }
         Spacer()
       }
@@ -177,8 +185,8 @@ struct NotificationRowView: View {
             .accessibilityLabel(notification.accounts[0].note.asRawText)
             .lineLimit(3)
             .font(.scaledCallout)
-            .emojiSize(Font.scaledCalloutFont.emojiSize)
-            .emojiBaselineOffset(Font.scaledCalloutFont.emojiBaselineOffset)
+            .emojiText.size(Font.scaledCalloutFont.emojiSize)
+            .emojiText.baselineOffset(Font.scaledCalloutFont.emojiBaselineOffset)
             .foregroundStyle(.secondary)
             .environment(\.openURL, OpenURLAction { url in
               routerPath.handle(url: url)

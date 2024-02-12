@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		065FA1FE29866CD600012EA0 /* LRUCache in Frameworks */ = {isa = PBXBuildFile; productRef = 065FA1FD29866CD600012EA0 /* LRUCache */; };
-		065FA20A298675BA00012EA0 /* LRUCache in Frameworks */ = {isa = PBXBuildFile; productRef = 065FA209298675BA00012EA0 /* LRUCache */; };
 		069709A5298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 069709A3298C8545006E4CB5 /* Atkinson-Hyperlegible-Regular-102.ttf */; };
 		069709A8298C87B5006E4CB5 /* OpenDyslexic-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 069709A7298C87B5006E4CB5 /* OpenDyslexic-Regular.otf */; };
 		069709AA298C9AD7006E4CB5 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069709A9298C9AD7006E4CB5 /* AboutView.swift */; };
 		639CDF9C296AC82F00C35E58 /* SafariRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639CDF9B296AC82F00C35E58 /* SafariRouter.swift */; };
+		9F15D6002B3D6A850008C220 /* NavigationTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F15D5FF2B3D6A850008C220 /* NavigationTab.swift */; };
+		9F15D6022B3D6E280008C220 /* TabbarEntriesSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F15D6012B3D6E280008C220 /* TabbarEntriesSettingsView.swift */; };
+		9F15D6042B3DC2180008C220 /* NavigationSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F15D6032B3DC2180008C220 /* NavigationSheet.swift */; };
 		9F18801229AE477F00D85459 /* tabSelection.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9F18800A29AE477E00D85459 /* tabSelection.wav */; };
 		9F18801329AE477F00D85459 /* share.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9F18800B29AE477E00D85459 /* share.wav */; };
 		9F18801429AE477F00D85459 /* bookmark.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9F18800C29AE477E00D85459 /* bookmark.wav */; };
@@ -40,7 +41,6 @@
 		9F2B92F6295AE04800DE16D0 /* Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92F5295AE04800DE16D0 /* Tabs.swift */; };
 		9F2B92FA295DA7D700DE16D0 /* AddAccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92F9295DA7D700DE16D0 /* AddAccountsView.swift */; };
 		9F2B92FC295DA94500DE16D0 /* InstanceInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92FB295DA94500DE16D0 /* InstanceInfoView.swift */; };
-		9F35DB44294F9A7D00B3281A /* Status in Frameworks */ = {isa = PBXBuildFile; productRef = 9F35DB43294F9A7D00B3281A /* Status */; };
 		9F35DB4729506F6600B3281A /* NotificationTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F35DB4629506F6600B3281A /* NotificationTab.swift */; };
 		9F35DB4A29506FA100B3281A /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 9F35DB4929506FA100B3281A /* Notifications */; };
 		9F35DB4C2952005C00B3281A /* MessagesTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F35DB4B2952005C00B3281A /* MessagesTab.swift */; };
@@ -55,6 +55,8 @@
 		9F55C68D2955968700F94077 /* ExploreTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F55C68C2955968700F94077 /* ExploreTab.swift */; };
 		9F55C6902955993C00F94077 /* Explore in Frameworks */ = {isa = PBXBuildFile; productRef = 9F55C68F2955993C00F94077 /* Explore */; };
 		9F5E581929545BE700A53960 /* Env in Frameworks */ = {isa = PBXBuildFile; productRef = 9F5E581829545BE700A53960 /* Env */; };
+		9F6028562B3F36AE00476078 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6028552B3F36AE00476078 /* AppView.swift */; };
+		9F6028582B3F3B7600476078 /* ToolbarTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F6028572B3F3B7600476078 /* ToolbarTab.swift */; };
 		9F654BEF299AC45B00D27FA5 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F654BEE299AC45B00D27FA5 /* ReportView.swift */; };
 		9F7335EA2966B3F800AFF0BA /* Conversations in Frameworks */ = {isa = PBXBuildFile; productRef = 9F7335E92966B3F800AFF0BA /* Conversations */; };
 		9F7335ED2967463400AFF0BA /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F7335EB2967461B00AFF0BA /* AVKit.framework */; };
@@ -67,8 +69,7 @@
 		9FAD85832971BF7200496AB1 /* Secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9FAD85822971BF7200496AB1 /* Secret.plist */; };
 		9FAD858B29743F7400496AB1 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAD858A29743F7400496AB1 /* ShareViewController.swift */; };
 		9FAD858E29743F7400496AB1 /* (null) in Resources */ = {isa = PBXBuildFile; };
-		9FAD859229743F7400496AB1 /* IceCubesShareExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		9FAD85982974405D00496AB1 /* Status in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD85972974405D00496AB1 /* Status */; };
+		9FAD859229743F7400496AB1 /* IceCubesShareExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */; platformFilters = (ios, maccatalyst, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9FAD859A297440CB00496AB1 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD8599297440CB00496AB1 /* KeychainSwift */; };
 		9FAD859C2974422700496AB1 /* AppAccount in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD859B2974422700496AB1 /* AppAccount */; };
 		9FAD859E2974569B00496AB1 /* Account in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD859D2974569B00496AB1 /* Account */; };
@@ -81,22 +82,25 @@
 		9FB143D12983104700A27BB1 /* glass.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9F2A542B296B1177009B2D7C /* glass.caf */; };
 		9FB143D22983104A00A27BB1 /* glass.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9F2A542D296B1CC0009B2D7C /* glass.wav */; };
 		9FB183222AE9268800BBB692 /* IceCubesApp+Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB183212AE9268800BBB692 /* IceCubesApp+Menu.swift */; };
-		9FB183252AE926E900BBB692 /* IceCubesApp+Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB183242AE926E900BBB692 /* IceCubesApp+Sidebar.swift */; };
-		9FB183272AE9279F00BBB692 /* IceCubesApp+Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB183262AE9279F00BBB692 /* IceCubesApp+Tabbar.swift */; };
 		9FB183292AE9449100BBB692 /* IceCubesApp+Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB183282AE9449100BBB692 /* IceCubesApp+Scene.swift */; };
+		9FBA1D352B4E9B7E00ADB568 /* SidebarEntriesSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBA1D342B4E9B7E00ADB568 /* SidebarEntriesSettingsView.swift */; };
 		9FBFE63D292A715500C250E9 /* IceCubesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBFE63C292A715500C250E9 /* IceCubesApp.swift */; };
 		9FBFE64E292A72BD00C250E9 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 9FBFE64D292A72BD00C250E9 /* Network */; };
+		9FC14EF22B494D180006CEE1 /* TagsGroupSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC14EF12B494D180006CEE1 /* TagsGroupSettingView.swift */; };
+		9FC14EF42B494D940006CEE1 /* RemoteTimelinesSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC14EF32B494D940006CEE1 /* RemoteTimelinesSettingView.swift */; };
+		9FC14EF62B494DFF0006CEE1 /* RecenTagsSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC14EF52B494DFF0006CEE1 /* RecenTagsSettingView.swift */; };
+		9FC2A38B2B49D19A00DFD1C1 /* StatusKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9FC2A38A2B49D19A00DFD1C1 /* StatusKit */; };
+		9FC2A38D2B49D1A200DFD1C1 /* StatusKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9FC2A38C2B49D1A200DFD1C1 /* StatusKit */; };
+		9FC2A38F2B49D1AA00DFD1C1 /* StatusKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9FC2A38E2B49D1AA00DFD1C1 /* StatusKit */; };
 		9FD34823293D06E800DB0EE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FD34822293D06E800DB0EE9 /* Assets.xcassets */; };
 		9FD542E72962D2FF0045321A /* Lists in Frameworks */ = {isa = PBXBuildFile; productRef = 9FD542E62962D2FF0045321A /* Lists */; };
 		9FE151A6293C90F900E9683D /* IconSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FE151A5293C90F900E9683D /* IconSelectorView.swift */; };
 		9FE3DB57296FEFCA00628CB0 /* AppAccount in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE3DB56296FEFCA00628CB0 /* AppAccount */; };
-		9FF614472B2EDCE500F7B0E6 /* GiphyUISDK in Frameworks */ = {isa = PBXBuildFile; productRef = 9FF614462B2EDCE500F7B0E6 /* GiphyUISDK */; };
-		9FF614492B2EDCEC00F7B0E6 /* GiphyUISDK in Frameworks */ = {isa = PBXBuildFile; productRef = 9FF614482B2EDCEC00F7B0E6 /* GiphyUISDK */; };
+		9FE4CCAB2B4C848A00DA5F13 /* GiphyUISDK in Frameworks */ = {isa = PBXBuildFile; platformFilters = (ios, maccatalyst, ); productRef = 9FE4CCAA2B4C848A00DA5F13 /* GiphyUISDK */; };
+		9FE4CCAD2B4C849F00DA5F13 /* GiphyUISDK in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE4CCAC2B4C849F00DA5F13 /* GiphyUISDK */; };
 		9FFF677C299B7B2C00FE700A /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF677B299B7B2C00FE700A /* Notifications */; };
-		9FFF677E299B7D2800FE700A /* Status in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF677D299B7D2800FE700A /* Status */; };
 		9FFF6780299B7D2B00FE700A /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF677F299B7D2B00FE700A /* DesignSystem */; };
 		9FFF6782299B7D3A00FE700A /* Account in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF6781299B7D3A00FE700A /* Account */; };
-		9FFF6784299B7D4400FE700A /* LRUCache in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF6783299B7D4400FE700A /* LRUCache */; };
 		C9B22677297F6C2E001F9EFE /* ContentSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B22676297F6C2E001F9EFE /* ContentSettingsView.swift */; };
 		D08A9C3529956CFA00204A4A /* SwipeActionsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08A9C3429956CFA00204A4A /* SwipeActionsSettingsView.swift */; };
 		DA0B24FB2A6876D50045BDD7 /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = DA0B24FA2A6876D50045BDD7 /* SFSafeSymbols */; };
@@ -107,7 +111,7 @@
 		E9DF41FC29830FEC0003AAD2 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9DF41FB29830FEC0003AAD2 /* UniformTypeIdentifiers.framework */; };
 		E9DF420129830FEC0003AAD2 /* ActionRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DF420029830FEC0003AAD2 /* ActionRequestHandler.swift */; };
 		E9DF420329830FEC0003AAD2 /* Action.js in Resources */ = {isa = PBXBuildFile; fileRef = E9DF420229830FEC0003AAD2 /* Action.js */; };
-		E9DF420729830FEC0003AAD2 /* IceCubesActionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E9DF41FA29830FEC0003AAD2 /* IceCubesActionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E9DF420729830FEC0003AAD2 /* IceCubesActionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E9DF41FA29830FEC0003AAD2 /* IceCubesActionExtension.appex */; platformFilters = (ios, maccatalyst, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		FA31A9AB2A66BF7C00D5F662 /* EditTagGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA31A9AA2A66BF7C00D5F662 /* EditTagGroupView.swift */; };
 /* End PBXBuildFile section */
 
@@ -160,6 +164,9 @@
 		74D6453829945F6200B47B92 /* eu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = eu; path = eu.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8C27D979298471E900CDF593 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9664F1A8299BA5F700CBE70E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9F15D5FF2B3D6A850008C220 /* NavigationTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTab.swift; sourceTree = "<group>"; };
+		9F15D6012B3D6E280008C220 /* TabbarEntriesSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarEntriesSettingsView.swift; sourceTree = "<group>"; };
+		9F15D6032B3DC2180008C220 /* NavigationSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationSheet.swift; sourceTree = "<group>"; };
 		9F18800A29AE477E00D85459 /* tabSelection.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tabSelection.wav; sourceTree = "<group>"; };
 		9F18800B29AE477E00D85459 /* share.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = share.wav; sourceTree = "<group>"; };
 		9F18800C29AE477E00D85459 /* bookmark.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bookmark.wav; sourceTree = "<group>"; };
@@ -186,7 +193,6 @@
 		9F2B92F5295AE04800DE16D0 /* Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabs.swift; sourceTree = "<group>"; };
 		9F2B92F9295DA7D700DE16D0 /* AddAccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountsView.swift; sourceTree = "<group>"; };
 		9F2B92FB295DA94500DE16D0 /* InstanceInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceInfoView.swift; sourceTree = "<group>"; };
-		9F35DB42294F9A2900B3281A /* Status */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Status; path = Packages/Status; sourceTree = "<group>"; };
 		9F35DB45294FA04C00B3281A /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DesignSystem; path = Packages/DesignSystem; sourceTree = "<group>"; };
 		9F35DB4629506F6600B3281A /* NotificationTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTab.swift; sourceTree = "<group>"; };
 		9F35DB4829506F7F00B3281A /* Notifications */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Notifications; path = Packages/Notifications; sourceTree = "<group>"; };
@@ -200,6 +206,8 @@
 		9F55C68C2955968700F94077 /* ExploreTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreTab.swift; sourceTree = "<group>"; };
 		9F55C68E295598F900F94077 /* Explore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Explore; path = Packages/Explore; sourceTree = "<group>"; };
 		9F5E581729545B5500A53960 /* Env */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Env; path = Packages/Env; sourceTree = "<group>"; };
+		9F6028552B3F36AE00476078 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		9F6028572B3F3B7600476078 /* ToolbarTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarTab.swift; sourceTree = "<group>"; };
 		9F62216829A68DA4007B77CA /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9F654BEE299AC45B00D27FA5 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		9F7335E82966B3DC00AFF0BA /* Conversations */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Conversations; path = Packages/Conversations; sourceTree = "<group>"; };
@@ -219,11 +227,14 @@
 		9FAE4AC8293774FF00772766 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9FAE4ACA293783B000772766 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		9FB183212AE9268800BBB692 /* IceCubesApp+Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IceCubesApp+Menu.swift"; sourceTree = "<group>"; };
-		9FB183242AE926E900BBB692 /* IceCubesApp+Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IceCubesApp+Sidebar.swift"; sourceTree = "<group>"; };
-		9FB183262AE9279F00BBB692 /* IceCubesApp+Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IceCubesApp+Tabbar.swift"; sourceTree = "<group>"; };
 		9FB183282AE9449100BBB692 /* IceCubesApp+Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IceCubesApp+Scene.swift"; sourceTree = "<group>"; };
+		9FBA1D342B4E9B7E00ADB568 /* SidebarEntriesSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarEntriesSettingsView.swift; sourceTree = "<group>"; };
 		9FBFE639292A715500C250E9 /* Ice Cubes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ice Cubes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FBFE63C292A715500C250E9 /* IceCubesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceCubesApp.swift; sourceTree = "<group>"; };
+		9FC14EF12B494D180006CEE1 /* TagsGroupSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsGroupSettingView.swift; sourceTree = "<group>"; };
+		9FC14EF32B494D940006CEE1 /* RemoteTimelinesSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteTimelinesSettingView.swift; sourceTree = "<group>"; };
+		9FC14EF52B494DFF0006CEE1 /* RecenTagsSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecenTagsSettingView.swift; sourceTree = "<group>"; };
+		9FC2A3892B49D10000DFD1C1 /* StatusKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = StatusKit; path = Packages/StatusKit; sourceTree = "<group>"; };
 		9FC60CB82AE6C2F600C6EAD2 /* IceCubesActionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IceCubesActionExtension.entitlements; sourceTree = "<group>"; };
 		9FCBB3D22984EFD5009B77EE /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9FCBB3D429859615009B77EE /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -259,11 +270,10 @@
 				9FFF677C299B7B2C00FE700A /* Notifications in Frameworks */,
 				9F7D93942980063100EE6B7A /* AppAccount in Frameworks */,
 				9FFF6780299B7D2B00FE700A /* DesignSystem in Frameworks */,
-				9FFF6784299B7D4400FE700A /* LRUCache in Frameworks */,
 				9F2A5428296AB683009B2D7C /* Models in Frameworks */,
 				9FFF6782299B7D3A00FE700A /* Account in Frameworks */,
+				9FC2A38D2B49D1A200DFD1C1 /* StatusKit in Frameworks */,
 				9F2A5426296AB67E009B2D7C /* KeychainSwift in Frameworks */,
-				9FFF677E299B7D2800FE700A /* Status in Frameworks */,
 				9F2A5424296AB67A009B2D7C /* Env in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,12 +285,11 @@
 				9FAD85A2297456A400496AB1 /* Env in Frameworks */,
 				9FAD85A0297456A100496AB1 /* Models in Frameworks */,
 				9FAD85A4297456A800496AB1 /* DesignSystem in Frameworks */,
-				9FF614492B2EDCEC00F7B0E6 /* GiphyUISDK in Frameworks */,
+				9FE4CCAD2B4C849F00DA5F13 /* GiphyUISDK in Frameworks */,
 				9FAD859E2974569B00496AB1 /* Account in Frameworks */,
 				9FAD859C2974422700496AB1 /* AppAccount in Frameworks */,
+				9FC2A38F2B49D1AA00DFD1C1 /* StatusKit in Frameworks */,
 				9FAD859A297440CB00496AB1 /* KeychainSwift in Frameworks */,
-				9FAD85982974405D00496AB1 /* Status in Frameworks */,
-				065FA20A298675BA00012EA0 /* LRUCache in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,9 +298,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F7335EF29674F7100AFF0BA /* QuickLook.framework in Frameworks */,
+				9FE4CCAB2B4C848A00DA5F13 /* GiphyUISDK in Frameworks */,
 				9F7335ED2967463400AFF0BA /* AVKit.framework in Frameworks */,
 				9F2A540C29699705009B2D7C /* RevenueCat in Frameworks */,
-				065FA1FE29866CD600012EA0 /* LRUCache in Frameworks */,
 				9F2A540E2969A0B0009B2D7C /* StoreKit.framework in Frameworks */,
 				9F55C6902955993C00F94077 /* Explore in Frameworks */,
 				9FAE4ACE29379A5A00772766 /* KeychainSwift in Frameworks */,
@@ -303,11 +312,10 @@
 				9F398AAB2935FFDB00A889F2 /* Models in Frameworks */,
 				9F5E581929545BE700A53960 /* Env in Frameworks */,
 				9F2A540A29699705009B2D7C /* ReceiptParser in Frameworks */,
-				9FF614472B2EDCE500F7B0E6 /* GiphyUISDK in Frameworks */,
-				9F35DB44294F9A7D00B3281A /* Status in Frameworks */,
 				DA0B24FB2A6876D50045BDD7 /* SFSafeSymbols in Frameworks */,
 				9F295540292B6C3400E0E81B /* Timeline in Frameworks */,
 				9F35DB4A29506FA100B3281A /* Notifications in Frameworks */,
+				9FC2A38B2B49D19A00DFD1C1 /* StatusKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +432,9 @@
 				9F55C68C2955968700F94077 /* ExploreTab.swift */,
 				9F2B92F5295AE04800DE16D0 /* Tabs.swift */,
 				9F4A48182976B21900A1A038 /* ProfileTab.swift */,
+				9F15D5FF2B3D6A850008C220 /* NavigationTab.swift */,
+				9F15D6032B3DC2180008C220 /* NavigationSheet.swift */,
+				9F6028572B3F3B7600476078 /* ToolbarTab.swift */,
 			);
 			path = Tabs;
 			sourceTree = "<group>";
@@ -433,9 +444,8 @@
 			children = (
 				9FBFE63C292A715500C250E9 /* IceCubesApp.swift */,
 				9FB183212AE9268800BBB692 /* IceCubesApp+Menu.swift */,
-				9FB183242AE926E900BBB692 /* IceCubesApp+Sidebar.swift */,
-				9FB183262AE9279F00BBB692 /* IceCubesApp+Tabbar.swift */,
 				9FB183282AE9449100BBB692 /* IceCubesApp+Scene.swift */,
+				9F6028552B3F36AE00476078 /* AppView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -458,12 +468,12 @@
 				9F55C68E295598F900F94077 /* Explore */,
 				9F5E581729545B5500A53960 /* Env */,
 				9F398AA32935F90100A889F2 /* Models */,
+				9FC2A3892B49D10000DFD1C1 /* StatusKit */,
 				9FE0346A2ADD59AC00529EA8 /* MediaUI */,
 				9F29553D292B67B600E0E81B /* Network */,
 				9FD542E52962D2CE0045321A /* Lists */,
 				9F35DB4829506F7F00B3281A /* Notifications */,
 				9F29553E292B6AF600E0E81B /* Timeline */,
-				9F35DB42294F9A2900B3281A /* Status */,
 			);
 			sourceTree = "<group>";
 		};
@@ -519,6 +529,11 @@
 				9F2A540629699698009B2D7C /* SupportAppView.swift */,
 				D08A9C3429956CFA00204A4A /* SwipeActionsSettingsView.swift */,
 				9FA6FD6129C04A8800E2312C /* TranslationSettingsView.swift */,
+				9F15D6012B3D6E280008C220 /* TabbarEntriesSettingsView.swift */,
+				9FC14EF12B494D180006CEE1 /* TagsGroupSettingView.swift */,
+				9FC14EF32B494D940006CEE1 /* RemoteTimelinesSettingView.swift */,
+				9FC14EF52B494DFF0006CEE1 /* RecenTagsSettingView.swift */,
+				9FBA1D342B4E9B7E00ADB568 /* SidebarEntriesSettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -566,10 +581,9 @@
 				9F2A5427296AB683009B2D7C /* Models */,
 				9F7D93932980063100EE6B7A /* AppAccount */,
 				9FFF677B299B7B2C00FE700A /* Notifications */,
-				9FFF677D299B7D2800FE700A /* Status */,
 				9FFF677F299B7D2B00FE700A /* DesignSystem */,
 				9FFF6781299B7D3A00FE700A /* Account */,
-				9FFF6783299B7D4400FE700A /* LRUCache */,
+				9FC2A38C2B49D1A200DFD1C1 /* StatusKit */,
 			);
 			productName = IceCubesNotifications;
 			productReference = 9F2A5416296AB631009B2D7C /* IceCubesNotifications.appex */;
@@ -589,15 +603,14 @@
 			);
 			name = IceCubesShareExtension;
 			packageProductDependencies = (
-				9FAD85972974405D00496AB1 /* Status */,
 				9FAD8599297440CB00496AB1 /* KeychainSwift */,
 				9FAD859B2974422700496AB1 /* AppAccount */,
 				9FAD859D2974569B00496AB1 /* Account */,
 				9FAD859F297456A100496AB1 /* Models */,
 				9FAD85A1297456A400496AB1 /* Env */,
 				9FAD85A3297456A800496AB1 /* DesignSystem */,
-				065FA209298675BA00012EA0 /* LRUCache */,
-				9FF614482B2EDCEC00F7B0E6 /* GiphyUISDK */,
+				9FC2A38E2B49D1AA00DFD1C1 /* StatusKit */,
+				9FE4CCAC2B4C849F00DA5F13 /* GiphyUISDK */,
 			);
 			productName = IceCubesShareExtension;
 			productReference = 9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */;
@@ -626,7 +639,6 @@
 				9F398AA82935FFDB00A889F2 /* Account */,
 				9F398AAA2935FFDB00A889F2 /* Models */,
 				9FAE4ACD29379A5A00772766 /* KeychainSwift */,
-				9F35DB43294F9A7D00B3281A /* Status */,
 				9F35DB4929506FA100B3281A /* Notifications */,
 				9F5E581829545BE700A53960 /* Env */,
 				9F55C68F2955993C00F94077 /* Explore */,
@@ -635,9 +647,9 @@
 				9F2A540929699705009B2D7C /* ReceiptParser */,
 				9F2A540B29699705009B2D7C /* RevenueCat */,
 				9FE3DB56296FEFCA00628CB0 /* AppAccount */,
-				065FA1FD29866CD600012EA0 /* LRUCache */,
 				DA0B24FA2A6876D50045BDD7 /* SFSafeSymbols */,
-				9FF614462B2EDCE500F7B0E6 /* GiphyUISDK */,
+				9FC2A38A2B49D19A00DFD1C1 /* StatusKit */,
+				9FE4CCAA2B4C848A00DA5F13 /* GiphyUISDK */,
 			);
 			productName = IceCubesApp;
 			productReference = 9FBFE639292A715500C250E9 /* Ice Cubes.app */;
@@ -712,15 +724,13 @@
 				be,
 				uk,
 				"zh-Hant",
-				Base,
 			);
 			mainGroup = 9FBFE630292A715500C250E9;
 			packageReferences = (
 				9FAE4ACC29379A5A00772766 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				9F2A540829699705009B2D7C /* XCRemoteSwiftPackageReference "purchases-ios" */,
-				065FA1FC29866CD600012EA0 /* XCRemoteSwiftPackageReference "LRUCache" */,
 				DA0B24F92A6876D40045BDD7 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
-				9FF614452B2EDCE500F7B0E6 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */,
+				9FE4CCA92B4C848A00DA5F13 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */,
 			);
 			productRefGroup = 9FBFE63A292A715500C250E9 /* Products */;
 			projectDirPath = "";
@@ -813,16 +823,18 @@
 			files = (
 				9FE151A6293C90F900E9683D /* IconSelectorView.swift in Sources */,
 				9FB183222AE9268800BBB692 /* IceCubesApp+Menu.swift in Sources */,
-				9FB183252AE926E900BBB692 /* IceCubesApp+Sidebar.swift in Sources */,
 				9F7D939A29805DBD00EE6B7A /* AccountSettingView.swift in Sources */,
 				069709AA298C9AD7006E4CB5 /* AboutView.swift in Sources */,
 				9F2B92FC295DA94500DE16D0 /* InstanceInfoView.swift in Sources */,
 				C9B22677297F6C2E001F9EFE /* ContentSettingsView.swift in Sources */,
+				9F15D6042B3DC2180008C220 /* NavigationSheet.swift in Sources */,
 				9FA6FD6229C04A8800E2312C /* TranslationSettingsView.swift in Sources */,
-				9FB183272AE9279F00BBB692 /* IceCubesApp+Tabbar.swift in Sources */,
 				9F35DB4C2952005C00B3281A /* MessagesTab.swift in Sources */,
 				9FAD85CF2975B68900496AB1 /* SideBarView.swift in Sources */,
 				9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */,
+				9FC14EF42B494D940006CEE1 /* RemoteTimelinesSettingView.swift in Sources */,
+				9FC14EF22B494D180006CEE1 /* TagsGroupSettingView.swift in Sources */,
+				9F15D6022B3D6E280008C220 /* TabbarEntriesSettingsView.swift in Sources */,
 				9F7335F92968576500AFF0BA /* DisplaySettingsView.swift in Sources */,
 				9F2A540729699698009B2D7C /* SupportAppView.swift in Sources */,
 				9FB183292AE9449100BBB692 /* IceCubesApp+Scene.swift in Sources */,
@@ -830,6 +842,7 @@
 				FA31A9AB2A66BF7C00D5F662 /* EditTagGroupView.swift in Sources */,
 				9F398AB329360A4C00A889F2 /* TimelineTab.swift in Sources */,
 				9F398AA62935FE8A00A889F2 /* AppRegistry.swift in Sources */,
+				9F15D6002B3D6A850008C220 /* NavigationTab.swift in Sources */,
 				9FBFE63D292A715500C250E9 /* IceCubesApp.swift in Sources */,
 				9F4A48192976B21900A1A038 /* ProfileTab.swift in Sources */,
 				9F2B92FA295DA7D700DE16D0 /* AddAccountsView.swift in Sources */,
@@ -838,9 +851,13 @@
 				9F654BEF299AC45B00D27FA5 /* ReportView.swift in Sources */,
 				D08A9C3529956CFA00204A4A /* SwipeActionsSettingsView.swift in Sources */,
 				9F7335F22967608F00AFF0BA /* AddRemoteTimelineView.swift in Sources */,
+				9FC14EF62B494DFF0006CEE1 /* RecenTagsSettingView.swift in Sources */,
+				9F6028562B3F36AE00476078 /* AppView.swift in Sources */,
 				9F55C68D2955968700F94077 /* ExploreTab.swift in Sources */,
 				9F1E8B47298EBCBB00609F80 /* HapticSettingsView.swift in Sources */,
+				9FBA1D352B4E9B7E00ADB568 /* SidebarEntriesSettingsView.swift in Sources */,
 				9F2A5411296A1429009B2D7C /* PushNotificationsView.swift in Sources */,
+				9F6028582B3F3B7600476078 /* ToolbarTab.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -862,11 +879,19 @@
 		};
 		9FAD859129743F7400496AB1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilters = (
+				ios,
+				maccatalyst,
+			);
 			target = 9FAD858729743F7400496AB1 /* IceCubesShareExtension */;
 			targetProxy = 9FAD859029743F7400496AB1 /* PBXContainerItemProxy */;
 		};
 		E9DF420629830FEC0003AAD2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilters = (
+				ios,
+				maccatalyst,
+			);
 			target = E9DF41F929830FEC0003AAD2 /* IceCubesActionExtension */;
 			targetProxy = E9DF420529830FEC0003AAD2 /* PBXContainerItemProxy */;
 		};
@@ -915,17 +940,18 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.9.18;
+				MARKETING_VERSION = 1.10.32;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesNotifications";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
 			};
 			name = Debug;
 		};
@@ -949,17 +975,18 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.9.18;
+				MARKETING_VERSION = 1.10.32;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesNotifications";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -984,7 +1011,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.9.18;
+				MARKETING_VERSION = 1.10.32;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesShareExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1018,7 +1045,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.9.18;
+				MARKETING_VERSION = 1.10.32;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesShareExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1162,7 +1189,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconAlternate1 AppIconAlternate2 AppIconAlternate3 AppIconAlternate4 AppIconAlternate5 AppIconAlternate6 AppIconAlternate7 AppIconAlternate8 AppIconAlternate9 AppIconAlternate10 AppIconAlternate11 AppIconAlternate12 AppIconAlternate13 AppIconAlternate14 AppIconAlternate15 AppIconAlternate16 AppIconAlternate17 AppIconAlternate19 AppIconAlternate18 AppIconAlternate20 AppIconAlternate21 AppIconAlternate22 AppIconAlternate23 AppIconAlternate24 AppIconAlternate25 AppIconAlternate26 AppIconAlternate27 AppIconAlternate28 AppIconAlternate29 AppIconAlternate30 AppIconAlternate31 AppIconAlternate32 AppIconAlternate33 AppIconAlternate34 AppIconAlternate35 AppIconAlternate36 AppIconAlternate37 AppIconAlternate38 AppIconAlternate39 AppIconAlternate40 AppIconAlternate42 AppIconAlternate41 AppIconAlternate45 AppIconAlternate44 AppIconAlternate47 AppIconAlternate49 AppIconAlternate48 AppIconAlternate46 AppIconAlternate43";
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconAlternate0 AppIconAlternate6 AppIconAlternate7 AppIconAlternate8 AppIconAlternate10 AppIconAlternate11 AppIconAlternate12 AppIconAlternate13 AppIconAlternate14 AppIconAlternate15 AppIconAlternate16 AppIconAlternate17 AppIconAlternate19 AppIconAlternate18 AppIconAlternate20 AppIconAlternate21 AppIconAlternate22 AppIconAlternate23 AppIconAlternate24 AppIconAlternate25 AppIconAlternate26 AppIconAlternate27 AppIconAlternate28 AppIconAlternate29 AppIconAlternate30 AppIconAlternate31 AppIconAlternate32 AppIconAlternate33 AppIconAlternate34 AppIconAlternate35 AppIconAlternate36 AppIconAlternate37 AppIconAlternate38 AppIconAlternate39 AppIconAlternate40 AppIconAlternate42 AppIconAlternate2 AppIconAlternate41 AppIconAlternate45 AppIconAlternate44 AppIconAlternate1 AppIconAlternate4 AppIconAlternate3 AppIconAlternate5 AppIconAlternate46 AppIconAlternate9 AppIconAlternate43";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -1181,7 +1208,7 @@
 				INFOPLIST_FILE = IceCubesApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Ice Cubes";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Upload photos & videos to Mastodon";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Upload photos & videos to attach to your Mastodon posts.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Upload photos & videos to Mastodon";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -1198,17 +1225,17 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.9.18;
+				MARKETING_VERSION = 1.10.32;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp";
 				PRODUCT_NAME = "Ice Cubes";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
 			};
 			name = Debug;
 		};
@@ -1216,7 +1243,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconAlternate1 AppIconAlternate2 AppIconAlternate3 AppIconAlternate4 AppIconAlternate5 AppIconAlternate6 AppIconAlternate7 AppIconAlternate8 AppIconAlternate9 AppIconAlternate10 AppIconAlternate11 AppIconAlternate12 AppIconAlternate13 AppIconAlternate14 AppIconAlternate15 AppIconAlternate16 AppIconAlternate17 AppIconAlternate19 AppIconAlternate18 AppIconAlternate20 AppIconAlternate21 AppIconAlternate22 AppIconAlternate23 AppIconAlternate24 AppIconAlternate25 AppIconAlternate26 AppIconAlternate27 AppIconAlternate28 AppIconAlternate29 AppIconAlternate30 AppIconAlternate31 AppIconAlternate32 AppIconAlternate33 AppIconAlternate34 AppIconAlternate35 AppIconAlternate36 AppIconAlternate37 AppIconAlternate38 AppIconAlternate39 AppIconAlternate40 AppIconAlternate42 AppIconAlternate41 AppIconAlternate45 AppIconAlternate44 AppIconAlternate47 AppIconAlternate49 AppIconAlternate48 AppIconAlternate46 AppIconAlternate43";
+				ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES = "AppIconAlternate0 AppIconAlternate6 AppIconAlternate7 AppIconAlternate8 AppIconAlternate10 AppIconAlternate11 AppIconAlternate12 AppIconAlternate13 AppIconAlternate14 AppIconAlternate15 AppIconAlternate16 AppIconAlternate17 AppIconAlternate19 AppIconAlternate18 AppIconAlternate20 AppIconAlternate21 AppIconAlternate22 AppIconAlternate23 AppIconAlternate24 AppIconAlternate25 AppIconAlternate26 AppIconAlternate27 AppIconAlternate28 AppIconAlternate29 AppIconAlternate30 AppIconAlternate31 AppIconAlternate32 AppIconAlternate33 AppIconAlternate34 AppIconAlternate35 AppIconAlternate36 AppIconAlternate37 AppIconAlternate38 AppIconAlternate39 AppIconAlternate40 AppIconAlternate42 AppIconAlternate2 AppIconAlternate41 AppIconAlternate45 AppIconAlternate44 AppIconAlternate1 AppIconAlternate4 AppIconAlternate3 AppIconAlternate5 AppIconAlternate46 AppIconAlternate9 AppIconAlternate43";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -1235,7 +1262,7 @@
 				INFOPLIST_FILE = IceCubesApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Ice Cubes";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
-				INFOPLIST_KEY_NSCameraUsageDescription = "Upload photos & videos to Mastodon";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Upload photos & videos to attach to your Mastodon posts.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Upload photos & videos to Mastodon";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -1252,17 +1279,17 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 1.9.18;
+				MARKETING_VERSION = 1.10.32;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp";
 				PRODUCT_NAME = "Ice Cubes";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
 				SUPPORTS_MACCATALYST = YES;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,7";
 			};
 			name = Release;
 		};
@@ -1287,7 +1314,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.9.18;
+				MARKETING_VERSION = 1.10.32;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesActionExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1322,7 +1349,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.9.18;
+				MARKETING_VERSION = 1.10.32;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesActionExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
@@ -1388,14 +1415,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		065FA1FC29866CD600012EA0 /* XCRemoteSwiftPackageReference "LRUCache" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/nicklockwood/LRUCache";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		9F2A540829699705009B2D7C /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
@@ -1412,7 +1431,7 @@
 				kind = branch;
 			};
 		};
-		9FF614452B2EDCE500F7B0E6 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */ = {
+		9FE4CCA92B4C848A00DA5F13 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Giphy/giphy-ios-sdk";
 			requirement = {
@@ -1431,16 +1450,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		065FA1FD29866CD600012EA0 /* LRUCache */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 065FA1FC29866CD600012EA0 /* XCRemoteSwiftPackageReference "LRUCache" */;
-			productName = LRUCache;
-		};
-		065FA209298675BA00012EA0 /* LRUCache */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 065FA1FC29866CD600012EA0 /* XCRemoteSwiftPackageReference "LRUCache" */;
-			productName = LRUCache;
-		};
 		9F29553F292B6C3400E0E81B /* Timeline */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Timeline;
@@ -1467,10 +1476,6 @@
 		9F2A5427296AB683009B2D7C /* Models */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Models;
-		};
-		9F35DB43294F9A7D00B3281A /* Status */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Status;
 		};
 		9F35DB4929506FA100B3281A /* Notifications */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1499,10 +1504,6 @@
 		9F7D93932980063100EE6B7A /* AppAccount */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppAccount;
-		};
-		9FAD85972974405D00496AB1 /* Status */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Status;
 		};
 		9FAD8599297440CB00496AB1 /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1538,6 +1539,18 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Network;
 		};
+		9FC2A38A2B49D19A00DFD1C1 /* StatusKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StatusKit;
+		};
+		9FC2A38C2B49D1A200DFD1C1 /* StatusKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StatusKit;
+		};
+		9FC2A38E2B49D1AA00DFD1C1 /* StatusKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StatusKit;
+		};
 		9FD542E62962D2FF0045321A /* Lists */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Lists;
@@ -1546,23 +1559,19 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = AppAccount;
 		};
-		9FF614462B2EDCE500F7B0E6 /* GiphyUISDK */ = {
+		9FE4CCAA2B4C848A00DA5F13 /* GiphyUISDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9FF614452B2EDCE500F7B0E6 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */;
+			package = 9FE4CCA92B4C848A00DA5F13 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */;
 			productName = GiphyUISDK;
 		};
-		9FF614482B2EDCEC00F7B0E6 /* GiphyUISDK */ = {
+		9FE4CCAC2B4C849F00DA5F13 /* GiphyUISDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9FF614452B2EDCE500F7B0E6 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */;
+			package = 9FE4CCA92B4C848A00DA5F13 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */;
 			productName = GiphyUISDK;
 		};
 		9FFF677B299B7B2C00FE700A /* Notifications */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Notifications;
-		};
-		9FFF677D299B7D2800FE700A /* Status */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Status;
 		};
 		9FFF677F299B7D2B00FE700A /* DesignSystem */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -1571,11 +1580,6 @@
 		9FFF6781299B7D3A00FE700A /* Account */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Account;
-		};
-		9FFF6783299B7D4400FE700A /* LRUCache */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 065FA1FC29866CD600012EA0 /* XCRemoteSwiftPackageReference "LRUCache" */;
-			productName = LRUCache;
 		};
 		DA0B24FA2A6876D50045BDD7 /* SFSafeSymbols */ = {
 			isa = XCSwiftPackageProductDependency;

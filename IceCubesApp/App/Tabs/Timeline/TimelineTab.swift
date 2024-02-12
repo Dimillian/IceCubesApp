@@ -29,6 +29,7 @@ struct TimelineTab: View {
   @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
 
   @AppStorage("last_timeline_filter") var lastTimelineFilter: TimelineFilter = .home
+  @AppStorage("timeline_pinned_filters") private var pinnedFilters: [TimelineFilter] = []
 
   private let canFilterTimeline: Bool
 
@@ -41,6 +42,7 @@ struct TimelineTab: View {
   var body: some View {
     NavigationStack(path: $routerPath.path) {
       TimelineView(timeline: $timeline,
+                   pinnedFilters: $pinnedFilters,
                    selectedTagGroup: $selectedTagGroup,
                    scrollToTopSignal: $scrollToTopSignal,
                    canFilterTimeline: canFilterTimeline)
@@ -49,7 +51,7 @@ struct TimelineTab: View {
         .toolbar {
           toolbarView
         }
-        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
+        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
         .id(client.id)
     }
     .onAppear {
@@ -92,8 +94,10 @@ struct TimelineTab: View {
         lastTimelineFilter = newValue
       }
       switch newValue {
-      case .tagGroup:
-        break
+      case let .tagGroup(title, _, _):
+        if let group = tagGroups.first(where: { $0.title == title}) {
+          selectedTagGroup = group
+        }
       default:
         selectedTagGroup = nil
       }
@@ -119,86 +123,14 @@ struct TimelineTab: View {
 
   @ViewBuilder
   private var timelineFilterButton: some View {
-    if timeline.supportNewestPagination {
-      Button {
-        timeline = .latest
-      } label: {
-        Label(TimelineFilter.latest.localizedTitle(), systemImage: TimelineFilter.latest.iconName() ?? "")
-      }
-      Divider()
-    }
-    ForEach(TimelineFilter.availableTimeline(client: client), id: \.self) { timeline in
-      Button {
-        self.timeline = timeline
-      } label: {
-        Label(timeline.localizedTitle(), systemImage: timeline.iconName() ?? "")
-      }
-    }
-    if !currentAccount.lists.isEmpty {
-      Menu("timeline.filter.lists") {
-        ForEach(currentAccount.sortedLists) { list in
-          Button {
-            timeline = .list(list: list)
-          } label: {
-            Label(list.title, systemImage: "list.bullet")
-          }
-        }
-        Button {
-          routerPath.presentedSheet = .listCreate
-        } label: {
-          Label("account.list.create", systemImage: "plus")
-        }
-      }
-    }
-
-    if !currentAccount.tags.isEmpty {
-      Menu("timeline.filter.tags") {
-        ForEach(currentAccount.sortedTags) { tag in
-          Button {
-            timeline = .hashtag(tag: tag.name, accountId: nil)
-          } label: {
-            Label("#\(tag.name)", systemImage: "number")
-          }
-        }
-      }
-    }
-
-    Menu("timeline.filter.local") {
-      ForEach(localTimelines) { remoteLocal in
-        Button {
-          timeline = .remoteLocal(server: remoteLocal.instance, filter: .local)
-        } label: {
-          VStack {
-            Label(remoteLocal.instance, systemImage: "dot.radiowaves.right")
-          }
-        }
-      }
-      Button {
-        routerPath.presentedSheet = .addRemoteLocalTimeline
-      } label: {
-        Label("timeline.filter.add-local", systemImage: "badge.plus.radiowaves.right")
-      }
-    }
-
-    Menu("timeline.filter.tag-groups") {
-      ForEach(tagGroups) { group in
-        Button {
-          selectedTagGroup = group
-          timeline = .tagGroup(title: group.title, tags: group.tags)
-        } label: {
-          VStack {
-            let icon = group.symbolName.isEmpty ? "number" : group.symbolName
-            Label(group.title, systemImage: icon)
-          }
-        }
-      }
-
-      Button {
-        routerPath.presentedSheet = .addTagGroup
-      } label: {
-        Label("timeline.filter.add-tag-groups", systemImage: "plus")
-      }
-    }
+    headerGroup
+    timelineFiltersButtons
+    listsFiltersButons
+    tagsFiltersButtons
+    localTimelinesFiltersButtons
+    tagGroupsFiltersButtons
+    Divider()
+    contentFilterButton
   }
 
   private var addAccountButton: some View {
@@ -218,17 +150,7 @@ struct TimelineTab: View {
       }
     }
     if client.isAuth {
-      if UIDevice.current.userInterfaceIdiom != .pad {
-        ToolbarItem(placement: .navigationBarLeading) {
-          AppAccountsSelectorView(routerPath: routerPath)
-            .id(currentAccount.account?.id)
-        }
-      }
-      statusEditorToolbarItem(routerPath: routerPath,
-                              visibility: preferences.postVisibility)
-      if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn {
-        SecondaryColumnToolbarItem()
-      }
+      ToolbarTab(routerPath: $routerPath)
     } else {
       ToolbarItem(placement: .navigationBarTrailing) {
         addAccountButton
@@ -263,11 +185,146 @@ struct TimelineTab: View {
       }
     }
   }
+  
+  @ViewBuilder
+  private var headerGroup: some View {
+    ControlGroup {
+      if timeline.supportNewestPagination {
+        Button {
+          timeline = .latest
+        } label: {
+          Label(TimelineFilter.latest.localizedTitle(), systemImage: TimelineFilter.latest.iconName())
+        }
+      }
+      if timeline == .home {
+        Button {
+          timeline = .resume
+        } label: {
+          VStack {
+            Label(TimelineFilter.resume.localizedTitle(),
+                  systemImage: TimelineFilter.resume.iconName())
+          }
+        }
+      }
+      pinButton
+    }
+  }
+  
+  @ViewBuilder
+  private var pinButton: some View {
+    let index = pinnedFilters.firstIndex(where: { $0.id == timeline.id})
+    Button {
+      withAnimation {
+        if let index {
+          pinnedFilters.remove(at: index)
+        } else {
+          pinnedFilters.append(timeline)
+        }
+      }
+    } label: {
+      if index != nil  {
+        Label("status.action.unpin", systemImage: "pin.slash")
+      } else {
+        Label("status.action.pin", systemImage: "pin")
+      }
+    }
+  }
+  
+  private var timelineFiltersButtons: some View {
+    ForEach(TimelineFilter.availableTimeline(client: client), id: \.self) { timeline in
+      Button {
+        self.timeline = timeline
+      } label: {
+        Label(timeline.localizedTitle(), systemImage: timeline.iconName())
+      }
+    }
+  }
+  
+  @ViewBuilder
+  private var listsFiltersButons: some View {
+    Menu("timeline.filter.lists") {
+      Button {
+        routerPath.presentedSheet = .listCreate
+      } label: {
+        Label("account.list.create", systemImage: "plus")
+      }
+      ForEach(currentAccount.sortedLists) { list in
+        Button {
+          timeline = .list(list: list)
+        } label: {
+          Label(list.title, systemImage: "list.bullet")
+        }
+      }
+    }
+  }
+  
+  @ViewBuilder
+  private var tagsFiltersButtons: some View {
+    if !currentAccount.tags.isEmpty {
+      Menu("timeline.filter.tags") {
+        ForEach(currentAccount.sortedTags) { tag in
+          Button {
+            timeline = .hashtag(tag: tag.name, accountId: nil)
+          } label: {
+            Label("#\(tag.name)", systemImage: "number")
+          }
+        }
+      }
+    }
+  }
+  
+  private var localTimelinesFiltersButtons: some View {
+    Menu("timeline.filter.local") {
+      ForEach(localTimelines) { remoteLocal in
+        Button {
+          timeline = .remoteLocal(server: remoteLocal.instance, filter: .local)
+        } label: {
+          VStack {
+            Label(remoteLocal.instance, systemImage: "dot.radiowaves.right")
+          }
+        }
+      }
+      Button {
+        routerPath.presentedSheet = .addRemoteLocalTimeline
+      } label: {
+        Label("timeline.filter.add-local", systemImage: "badge.plus.radiowaves.right")
+      }
+    }
+  }
+  
+  private var tagGroupsFiltersButtons: some View {
+    Menu("timeline.filter.tag-groups") {
+      ForEach(tagGroups) { group in
+        Button {
+          timeline = .tagGroup(title: group.title, tags: group.tags, symbolName: group.symbolName)
+        } label: {
+          VStack {
+            let icon = group.symbolName.isEmpty ? "number" : group.symbolName
+            Label(group.title, systemImage: icon)
+          }
+        }
+      }
+
+      Button {
+        routerPath.presentedSheet = .addTagGroup
+      } label: {
+        Label("timeline.filter.add-tag-groups", systemImage: "plus")
+      }
+    }
+  }
+  
+  private var contentFilterButton: some View {
+    Button(action: {
+      routerPath.presentedSheet = .timelineContentFilter
+    }, label: {
+      Label("timeline.content-filter.title", systemSymbol: .line3HorizontalDecrease)
+    })
+  }
 
   private func resetTimelineFilter() {
     if client.isAuth, canFilterTimeline {
       timeline = lastTimelineFilter
-    } else {
+    } else if !client.isAuth {
       timeline = .federated
     }
   }

@@ -13,8 +13,10 @@ struct InstanceInfoView: View {
       InstanceInfoSection(instance: instance)
     }
     .navigationTitle("instance.info.navigation-title")
+    #if !os(visionOS)
     .scrollContentBackground(.hidden)
     .background(theme.secondaryBackgroundColor)
+    #endif
   }
 }
 
@@ -35,7 +37,9 @@ public struct InstanceInfoSection: View {
       LabeledContent("instance.info.posts", value: format(instance.stats.statusCount))
       LabeledContent("instance.info.domains", value: format(instance.stats.domainCount))
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
 
     if let rules = instance.rules {
       Section("instance.info.section.rules") {
@@ -43,7 +47,9 @@ public struct InstanceInfoSection: View {
           Text(rule.text.trimmingCharacters(in: .whitespacesAndNewlines))
         }
       }
+      #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #endif
     }
   }
 

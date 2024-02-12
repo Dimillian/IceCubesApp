@@ -6,7 +6,6 @@ import Models
 import Network
 import NukeUI
 import SafariServices
-import Shimmer
 import SwiftUI
 
 @MainActor
@@ -28,6 +27,9 @@ struct AddAccountView: View {
   @State private var signInClient: Client?
   @State private var instances: [InstanceSocial] = []
   @State private var instanceFetchError: LocalizedStringKey?
+  @State private var instanceSocialClient = InstanceSocialClient()
+  @State private var searchingTask = Task<Void, Never> {}
+  @State private var getInstanceDetailTask = Task<Void, Never> {}
 
   private let instanceNamePublisher = PassthroughSubject<String, Never>()
 
@@ -53,7 +55,9 @@ struct AddAccountView: View {
     NavigationStack {
       Form {
         TextField("instance.url", text: $instanceName)
+        #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)
+        #endif
           .keyboardType(.URL)
           .textContentType(.URL)
           .textInputAutocapitalization(.never)
@@ -77,40 +81,51 @@ struct AddAccountView: View {
       .formStyle(.grouped)
       .navigationTitle("account.add.navigation-title")
       .navigationBarTitleDisplayMode(.inline)
+      #if !os(visionOS)
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
       .scrollDismissesKeyboard(.immediately)
+      #endif
       .toolbar {
         if !appAccountsManager.availableAccounts.isEmpty {
-          ToolbarItem(placement: .navigationBarLeading) {
-            Button("action.cancel", action: { dismiss() })
-          }
+          CancelToolbarItem()
         }
       }
       .onAppear {
         isInstanceURLFieldFocused = true
-        let client = InstanceSocialClient()
         Task {
-          let instances = await client.fetchInstances()
+          let instances = await instanceSocialClient.fetchInstances(keyword: instanceName)
           withAnimation {
             self.instances = instances
           }
         }
         isSigninIn = false
       }
-      .onChange(of: instanceName) { _, newValue in
-        instanceNamePublisher.send(newValue)
-      }
-      .onReceive(instanceNamePublisher.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)) { _ in
-        // let newValue = newValue
-        //  .replacingOccurrences(of: "http://", with: "")
-        //  .replacingOccurrences(of: "https://", with: "")
-        let client = Client(server: sanitizedName)
-        Task {
+      .onChange(of: instanceName) {
+        searchingTask.cancel()
+        searchingTask = Task {
+          try? await Task.sleep(for: .seconds(0.1))
+          guard !Task.isCancelled else { return }
+
+          let instances = await instanceSocialClient.fetchInstances(keyword: instanceName)
+          withAnimation {
+            self.instances = instances
+          }
+        }
+
+        getInstanceDetailTask.cancel()
+        getInstanceDetailTask = Task {
+          try? await Task.sleep(for: .seconds(0.1))
+          guard !Task.isCancelled else { return }
+
           do {
             // bare bones preflight for domain validity
-            if client.server.contains("."), client.server.last != "." {
-              let instance: Instance = try await client.get(endpoint: Instances.instance)
+            let instanceDetailClient = Client(server: sanitizedName)
+            if
+              instanceDetailClient.server.contains("."),
+              instanceDetailClient.server.last != "."
+            {
+              let instance: Instance = try await instanceDetailClient.get(endpoint: Instances.instance)
               withAnimation {
                 self.instance = instance
                 instanceName = sanitizedName // clean up the text box, principally to chop off the username if present so it's clear that you might not wind up siging in as the thing in the box
@@ -164,7 +179,9 @@ struct AddAccountView: View {
       }
       .buttonStyle(.borderedProminent)
     }
+    #if !os(visionOS)
     .listRowBackground(theme.tintColor)
+    #endif
   }
 
   private var instancesListView: some View {
@@ -172,28 +189,63 @@ struct AddAccountView: View {
       if instances.isEmpty {
         placeholderRow
       } else {
-        ForEach(sanitizedName.isEmpty ? instances : instances.filter { $0.name.contains(sanitizedName.lowercased()) }) { instance in
+        ForEach(instances) { instance in
           Button {
             instanceName = instance.name
           } label: {
             VStack(alignment: .leading, spacing: 4) {
-              Text(instance.name)
-                .font(.scaledHeadline)
-                .foregroundColor(.primary)
-              Text(instance.info?.shortDescription ?? "")
-                .font(.scaledBody)
-                .foregroundStyle(Color.secondary)
-              (Text("instance.list.users-\(instance.users)")
-                + Text("  ⸱  ")
-                + Text("instance.list.posts-\(instance.statuses)"))
-                .font(.scaledFootnote)
-                .foregroundStyle(Color.secondary)
+              LazyImage(url: instance.thumbnail) { state in
+                if let image = state.image {
+                  image
+                    .resizable()
+                    .scaledToFill()
+                } else {
+                  Rectangle().fill(theme.tintColor.opacity(0.1))
+                }
+              }
+              .frame(height: 100)
+              .frame(maxWidth: .infinity)
+              .clipped()
+
+              VStack(alignment: .leading) {
+                HStack {
+                  Text(instance.name)
+                    .font(.scaledHeadline)
+                    .foregroundColor(.primary)
+                  Spacer()
+                  (Text("instance.list.users-\(formatAsNumber(instance.users))")
+                   + Text("  ⸱  ")
+                   + Text("instance.list.posts-\(formatAsNumber(instance.statuses))"))
+                  .foregroundStyle(theme.tintColor)
+                }
+                .padding(.bottom, 5)
+                Text(instance.info?.shortDescription?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")
+                  .foregroundStyle(Color.secondary)
+                  .lineLimit(10)
+              }
+              .font(.scaledFootnote)
+              .padding(10)
             }
           }
-          .listRowBackground(theme.primaryBackgroundColor)
+          #if !os(visionOS)
+          .background(theme.primaryBackgroundColor)
+          .listRowBackground(Color.clear)
+          .listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 10, trailing: 0))
+          .listRowSeparator(.hidden)
+          .clipShape(RoundedRectangle(cornerRadius: 4))
+          #endif
         }
       }
     }
+  }
+
+  private func formatAsNumber(_ string: String) -> String {
+    (Int(string) ?? 0)
+      .formatted(
+        .number
+          .notation(.compactName)
+          .locale(.current)
+      )
   }
 
   private var placeholderRow: some View {
@@ -210,15 +262,17 @@ struct AddAccountView: View {
     }
     .redacted(reason: .placeholder)
     .allowsHitTesting(false)
-    .shimmering()
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   private func signIn() async {
     signInClient = .init(server: sanitizedName)
     if let oauthURL = try? await signInClient?.oauthURL(),
        let url = try? await webAuthenticationSession.authenticate(using: oauthURL,
-                                                                 callbackURLScheme: AppInfo.scheme.replacingOccurrences(of: "://", with: "")){
+                                                                  callbackURLScheme: AppInfo.scheme.replacingOccurrences(of: "://", with: ""))
+    {
       await continueSignIn(url: url)
     } else {
       isSigninIn = false
@@ -247,14 +301,4 @@ struct AddAccountView: View {
       isSigninIn = false
     }
   }
-}
-
-struct SafariView: UIViewControllerRepresentable {
-  let url: URL
-
-  func makeUIViewController(context _: UIViewControllerRepresentableContext<SafariView>) -> SFSafariViewController {
-    SFSafariViewController(url: url)
-  }
-
-  func updateUIViewController(_: SFSafariViewController, context _: UIViewControllerRepresentableContext<SafariView>) {}
 }

@@ -13,7 +13,7 @@ import Timeline
 @MainActor
 struct SettingsTabs: View {
   @Environment(\.dismiss) private var dismiss
-  @Environment(\.modelContext) private var context
+  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
   @Environment(PushNotificationsService.self) private var pushNotifications
   @Environment(UserPreferences.self) private var preferences
@@ -29,11 +29,8 @@ struct SettingsTabs: View {
   @State private var timelineCache = TimelineCache()
 
   @Binding var popToRootTab: Tab
-  
-  let isModal: Bool
 
-  @Query(sort: \LocalTimeline.creationDate, order: .reverse) var localTimelines: [LocalTimeline]
-  @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
+  let isModal: Bool
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {
@@ -45,12 +42,14 @@ struct SettingsTabs: View {
         cacheSection
       }
       .scrollContentBackground(.hidden)
+      #if !os(visionOS)
       .background(theme.secondaryBackgroundColor)
+      #endif
       .navigationTitle(Text("settings.title"))
       .navigationBarTitleDisplayMode(.inline)
-      .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
+      .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
       .toolbar {
-        if UIDevice.current.userInterfaceIdiom == .phone || isModal {
+        if isModal {
           ToolbarItem {
             Button {
               dismiss()
@@ -59,7 +58,7 @@ struct SettingsTabs: View {
             }
           }
         }
-        if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn {
+        if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn, !isModal {
           SecondaryColumnToolbarItem()
         }
       }
@@ -98,7 +97,7 @@ struct SettingsTabs: View {
                 .tint(.red)
             }
           }
-          AppAccountView(viewModel: .init(appAccount: account))
+          AppAccountView(viewModel: .init(appAccount: account), isParentPresented: .constant(false))
         }
       }
       .onDelete { indexSet in
@@ -114,7 +113,9 @@ struct SettingsTabs: View {
       }
       addAccountButton
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   private func logoutAccount(account: AppAccount) async {
@@ -144,11 +145,14 @@ struct SettingsTabs: View {
           Label("settings.general.haptic", systemImage: "waveform.path")
         }
       }
-      NavigationLink(destination: remoteLocalTimelinesView) {
+      NavigationLink(destination: RemoteTimelinesSettingView()) {
         Label("settings.general.remote-timelines", systemImage: "dot.radiowaves.right")
       }
-      NavigationLink(destination: tagGroupsView) {
+      NavigationLink(destination: TagsGroupSettingView()) {
         Label("timeline.filter.tag-groups", systemImage: "number")
+      }
+      NavigationLink(destination: RecenTagsSettingView()) {
+        Label("settings.general.recent-tags", systemImage: "clock")
       }
       NavigationLink(destination: ContentSettingsView()) {
         Label("settings.general.content", systemImage: "rectangle.stack")
@@ -156,41 +160,52 @@ struct SettingsTabs: View {
       NavigationLink(destination: SwipeActionsSettingsView()) {
         Label("settings.general.swipeactions", systemImage: "hand.draw")
       }
+      if UIDevice.current.userInterfaceIdiom == .phone || horizontalSizeClass == .compact {
+        NavigationLink(destination: TabbarEntriesSettingsView()) {
+          Label("settings.general.tabbarEntries", systemImage: "platter.filled.bottom.iphone")
+        }
+      } else if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
+        NavigationLink(destination: SidebarEntriesSettingsView()) {
+          Label("settings.general.sidebarEntries", systemImage: "sidebar.squares.leading")
+        }
+      }
       NavigationLink(destination: TranslationSettingsView()) {
         Label("settings.general.translate", systemImage: "captions.bubble")
       }
       #if !targetEnvironment(macCatalyst)
-      Link(destination: URL(string: UIApplication.openSettingsURLString)!) {
-        Label("settings.system", systemImage: "gear")
-      }
-      .tint(theme.labelColor)
+        Link(destination: URL(string: UIApplication.openSettingsURLString)!) {
+          Label("settings.system", systemImage: "gear")
+        }
+        .tint(theme.labelColor)
       #endif
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   @ViewBuilder
   private var otherSections: some View {
     @Bindable var preferences = preferences
-    Section("settings.section.other") {
-#if !targetEnvironment(macCatalyst)
-      Picker(selection: $preferences.preferredBrowser) {
-        ForEach(PreferredBrowser.allCases, id: \.rawValue) { browser in
-          switch browser {
-          case .inAppSafari:
-            Text("settings.general.browser.in-app").tag(browser)
-          case .safari:
-            Text("settings.general.browser.system").tag(browser)
+    Section {
+      #if !targetEnvironment(macCatalyst)
+        Picker(selection: $preferences.preferredBrowser) {
+          ForEach(PreferredBrowser.allCases, id: \.rawValue) { browser in
+            switch browser {
+            case .inAppSafari:
+              Text("settings.general.browser.in-app").tag(browser)
+            case .safari:
+              Text("settings.general.browser.system").tag(browser)
+            }
           }
+        } label: {
+          Label("settings.general.browser", systemImage: "network")
         }
-      } label: {
-        Label("settings.general.browser", systemImage: "network")
-      }
-      Toggle(isOn: $preferences.inAppBrowserReaderView) {
-        Label("settings.general.browser.in-app.readerview", systemImage: "doc.plaintext")
-      }
-      .disabled(preferences.preferredBrowser != PreferredBrowser.inAppSafari)
-#endif
+        Toggle(isOn: $preferences.inAppBrowserReaderView) {
+          Label("settings.general.browser.in-app.readerview", systemImage: "doc.plaintext")
+        }
+        .disabled(preferences.preferredBrowser != PreferredBrowser.inAppSafari)
+      #endif
       Toggle(isOn: $preferences.isOpenAIEnabled) {
         Label("settings.other.hide-openai", systemImage: "faxmachine")
       }
@@ -203,25 +218,31 @@ struct SettingsTabs: View {
       Toggle(isOn: $preferences.fastRefreshEnabled) {
         Label("settings.other.fast-refresh", systemImage: "arrow.clockwise")
       }
+    } header: {
+      Text("settings.section.other")
+    } footer: {
+      Text("settings.section.other.footer")
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   private var appSection: some View {
     Section {
-#if !targetEnvironment(macCatalyst)
-      NavigationLink(destination: IconSelectorView()) {
-        Label {
-          Text("settings.app.icon")
-        } icon: {
-          let icon = IconSelectorView.Icon(string: UIApplication.shared.alternateIconName ?? "AppIcon")
-          Image(uiImage: .init(named: icon.iconName)!)
-            .resizable()
-            .frame(width: 25, height: 25)
-            .cornerRadius(4)
+      #if !targetEnvironment(macCatalyst) && !os(visionOS)
+        NavigationLink(destination: IconSelectorView()) {
+          Label {
+            Text("settings.app.icon")
+          } icon: {
+            let icon = IconSelectorView.Icon(string: UIApplication.shared.alternateIconName ?? "AppIcon")
+            Image(uiImage: .init(named: icon.appIconName)!)
+              .resizable()
+              .frame(width: 25, height: 25)
+              .cornerRadius(4)
+          }
         }
-      }
-#endif
+      #endif
 
       Link(destination: URL(string: "https://github.com/Dimillian/IceCubesApp")!) {
         Label("settings.app.source", systemImage: "link")
@@ -252,7 +273,9 @@ struct SettingsTabs: View {
         Text("settings.section.app.footer \(appVersion)").frame(maxWidth: .infinity, alignment: .center)
       }
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   private var addAccountButton: some View {
@@ -280,61 +303,6 @@ struct SettingsTabs: View {
     }
   }
 
-  private var tagGroupsView: some View {
-    Form {
-      ForEach(tagGroups) { group in
-        Label(group.title, systemImage: group.symbolName)
-          .onTapGesture {
-            routerPath.presentedSheet = .editTagGroup(tagGroup: group, onSaved: nil)
-          }
-      }
-      .onDelete { indexes in
-        if let index = indexes.first {
-          context.delete(tagGroups[index])
-        }
-      }
-      .listRowBackground(theme.primaryBackgroundColor)
-
-      Button {
-        routerPath.presentedSheet = .addTagGroup
-      } label: {
-        Label("timeline.filter.add-tag-groups", systemImage: "plus")
-      }
-      .listRowBackground(theme.primaryBackgroundColor)
-    }
-    .navigationTitle("timeline.filter.tag-groups")
-    .scrollContentBackground(.hidden)
-    .background(theme.secondaryBackgroundColor)
-    .toolbar {
-      EditButton()
-    }
-  }
-
-  private var remoteLocalTimelinesView: some View {
-    Form {
-      ForEach(localTimelines) { timeline in
-        Text(timeline.instance)
-      }.onDelete { indexes in
-        if let index = indexes.first {
-          context.delete(localTimelines[index])
-        }
-      }
-      .listRowBackground(theme.primaryBackgroundColor)
-      Button {
-        routerPath.presentedSheet = .addRemoteLocalTimeline
-      } label: {
-        Label("settings.timeline.add", systemImage: "badge.plus.radiowaves.right")
-      }
-      .listRowBackground(theme.primaryBackgroundColor)
-    }
-    .navigationTitle("settings.general.remote-timelines")
-    .scrollContentBackground(.hidden)
-    .background(theme.secondaryBackgroundColor)
-    .toolbar {
-      EditButton()
-    }
-  }
-
   private var cacheSection: some View {
     Section("settings.section.cache") {
       if cachedRemoved {
@@ -349,6 +317,8 @@ struct SettingsTabs: View {
         }
       }
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 }

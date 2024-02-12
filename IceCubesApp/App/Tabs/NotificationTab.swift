@@ -21,6 +21,8 @@ struct NotificationsTab: View {
   @Environment(PushNotificationsService.self) private var pushNotificationsService
   @State private var routerPath = RouterPath()
   @State private var scrollToTopSignal: Int = 0
+  
+  @Binding var selectedTab: Tab
   @Binding var popToRootTab: Tab
 
   let lockedType: Models.Notification.NotificationType?
@@ -31,29 +33,21 @@ struct NotificationsTab: View {
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbar {
-          if !isSecondaryColumn {
-            statusEditorToolbarItem(routerPath: routerPath,
-                                    visibility: userPreferences.postVisibility)
-            if UIDevice.current.userInterfaceIdiom != .pad {
-              ToolbarItem(placement: .navigationBarLeading) {
-                AppAccountsSelectorView(routerPath: routerPath)
-              }
+          ToolbarItem(placement: .topBarTrailing) {
+            Button {
+              routerPath.presentedSheet = .accountPushNotficationsSettings
+            } label: {
+              Image(systemName: "bell")
             }
           }
-          if UIDevice.current.userInterfaceIdiom == .pad {
-            if (!isSecondaryColumn && !userPreferences.showiPadSecondaryColumn) || isSecondaryColumn {
-              SecondaryColumnToolbarItem()
-            }
-          }
+          ToolbarTab(routerPath: $routerPath)
         }
-        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
+        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
         .id(client.id)
     }
     .onAppear {
       routerPath.client = client
-      if isSecondaryColumn {
-        clearNotifications()
-      }
+      clearNotifications()
     }
     .withSafariRouter()
     .environment(routerPath)
@@ -66,6 +60,9 @@ struct NotificationsTab: View {
         }
       }
     }
+    .onChange(of: selectedTab, { _, newValue in
+      clearNotifications()
+    })
     .onChange(of: pushNotificationsService.handledNotification) { _, newValue in
       if let newValue, let type = newValue.notification.supportedType {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -94,7 +91,7 @@ struct NotificationsTab: View {
   }
 
   private func clearNotifications() {
-    if isSecondaryColumn {
+    if selectedTab == .notifications || isSecondaryColumn {
       if let token = appAccount.currentAccount.oauthToken {
         userPreferences.notificationsCount[token] = 0
       }

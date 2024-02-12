@@ -1,4 +1,3 @@
-import Accounts
 import DesignSystem
 import Env
 import Models
@@ -7,6 +6,8 @@ import SwiftUI
 
 @MainActor
 struct ConversationsListRow: View {
+  @Environment(\.openWindow) private var openWindow
+  
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath
   @Environment(Theme.self) private var theme
@@ -32,8 +33,8 @@ struct ConversationsListRow: View {
                            emojis: conversation.accounts.flatMap(\.emojis))
                 .font(.scaledSubheadline)
                 .foregroundColor(theme.labelColor)
-                .emojiSize(Font.scaledSubheadlineFont.emojiSize)
-                .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
+                .emojiText.size(Font.scaledSubheadlineFont.emojiSize)
+                .emojiText.baselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
                 .fontWeight(.semibold)
                 .foregroundColor(theme.labelColor)
                 .multilineTextAlignment(.leading)
@@ -56,8 +57,8 @@ struct ConversationsListRow: View {
               .multilineTextAlignment(.leading)
               .font(.scaledBody)
               .foregroundColor(theme.labelColor)
-              .emojiSize(Font.scaledBodyFont.emojiSize)
-              .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
+              .emojiText.size(Font.scaledBodyFont.emojiSize)
+              .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
               .accessibilityLabel(conversation.lastStatus?.content.asRawText ?? "")
           }
           Spacer()
@@ -82,16 +83,29 @@ struct ConversationsListRow: View {
       .accessibilityAction(.magicTap) {
         if let lastStatus = conversation.lastStatus {
           HapticManager.shared.fireHaptic(.notification(.success))
-          routerPath.presentedSheet = .replyToStatusEditor(status: lastStatus)
+          #if targetEnvironment(macCatalyst) || os(visionOS)
+            openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: lastStatus))
+          #else
+            routerPath.presentedSheet = .replyToStatusEditor(status: lastStatus)
+          #endif
         }
       }
     }
+    .buttonStyle(.plain)
+    .hoverEffectDisabled()
   }
 
   private var actionsView: some View {
     HStack(spacing: 12) {
       Button {
-        routerPath.presentedSheet = .replyToStatusEditor(status: conversation.lastStatus!)
+        if let lastStatus = conversation.lastStatus {
+          HapticManager.shared.fireHaptic(.notification(.success))
+          #if targetEnvironment(macCatalyst) || os(visionOS)
+            openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: lastStatus))
+          #else
+            routerPath.presentedSheet = .replyToStatusEditor(status: lastStatus)
+          #endif
+        }
       } label: {
         Image(systemName: "arrowshape.turn.up.left.fill")
       }

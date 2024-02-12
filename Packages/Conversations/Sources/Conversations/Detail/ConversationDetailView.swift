@@ -46,7 +46,9 @@ public struct ConversationDetailView: View {
         }
         .padding(.horizontal, .layoutPadding)
       }
+      #if !os(visionOS)
       .scrollDismissesKeyboard(.interactively)
+      #endif
       .safeAreaInset(edge: .bottom) {
         inputTextView
       }
@@ -68,8 +70,10 @@ public struct ConversationDetailView: View {
       }
     }
     .navigationBarTitleDisplayMode(.inline)
+    #if !os(visionOS)
     .scrollContentBackground(.hidden)
     .background(theme.primaryBackgroundColor)
+    #endif
     .toolbar {
       ToolbarItem(placement: .principal) {
         if viewModel.conversation.accounts.count == 1,
@@ -78,8 +82,8 @@ public struct ConversationDetailView: View {
           EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
             .font(.scaledHeadline)
             .foregroundColor(theme.labelColor)
-            .emojiSize(Font.scaledHeadlineFont.emojiSize)
-            .emojiBaselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
+            .emojiText.size(Font.scaledHeadlineFont.emojiSize)
+            .emojiText.baselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
         } else {
           Text("Direct message with \(viewModel.conversation.accounts.count) people")
             .font(.scaledHeadline)

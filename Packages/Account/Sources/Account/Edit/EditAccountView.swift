@@ -1,8 +1,9 @@
 import DesignSystem
+import Env
 import Models
 import Network
-import Env
 import SwiftUI
+import NukeUI
 
 @MainActor
 public struct EditAccountView: View {
@@ -12,25 +13,28 @@ public struct EditAccountView: View {
   @Environment(UserPreferences.self) private var userPrefs
 
   @State private var viewModel = EditAccountViewModel()
-
-  public init() {}
+  
+  public init() { }
 
   public var body: some View {
-    NavigationStack{
+    NavigationStack {
       Form {
         if viewModel.isLoading {
           loadingSection
         } else {
-          aboutSections
+          imagesSection
+          aboutSection
           fieldsSection
           postSettingsSection
           accountSection
         }
       }
       .environment(\.editMode, .constant(.active))
+      #if !os(visionOS)
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
       .scrollDismissesKeyboard(.immediately)
+      #endif
       .navigationTitle("account.edit.navigation-title")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
@@ -56,11 +60,76 @@ public struct EditAccountView: View {
         Spacer()
       }
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
+  }
+  
+  private var imagesSection: some View {
+    Section {
+      ZStack(alignment: .center) {
+        if let header = viewModel.header {
+          ZStack(alignment: .topLeading) {
+            LazyImage(url: header) { state in
+              if let image = state.image {
+                image
+                  .resizable()
+                  .aspectRatio(contentMode: .fill)
+                  .frame(height: 150)
+                  .clipShape(RoundedRectangle(cornerRadius: 8))
+                  .clipped()
+              } else {
+                RoundedRectangle(cornerRadius: 8)
+                  .foregroundStyle(theme.primaryBackgroundColor)
+                  .frame(height: 150)
+              }
+            }
+            .frame(height: 150)
+          }
+        }
+        if let avatar = viewModel.avatar {
+          ZStack(alignment: .bottomLeading) {
+            AvatarView(avatar, config: .account)
+            Menu {
+              Button("account.edit.avatar") {
+                viewModel.isChangingAvatar = true
+                viewModel.isPhotoPickerPresented = true
+              }
+              Button("account.edit.header") {
+                viewModel.isChangingHeader = true
+                viewModel.isPhotoPickerPresented = true
+              }
+            } label: {
+              Image(systemName: "photo.badge.plus")
+                .foregroundStyle(.white)
+            }
+            .buttonStyle(.borderedProminent)
+            .clipShape(Circle())
+            .offset(x: -8, y: 8)
+          }
+        }
+      }
+      .overlay {
+        if viewModel.isChangingAvatar || viewModel.isChangingHeader {
+          ZStack(alignment: .center) {
+            RoundedRectangle(cornerRadius: 8)
+              .foregroundStyle(Color.black.opacity(0.40))
+            ProgressView()
+          }
+        }
+      }
+      .listRowInsets(EdgeInsets())
+    }
+    .listRowBackground(theme.secondaryBackgroundColor)
+    .photosPicker(isPresented: $viewModel.isPhotoPickerPresented,
+                  selection: $viewModel.mediaPickers,
+                  maxSelectionCount: 1,
+                  matching: .any(of: [.images]),
+                  photoLibrary: .shared())
   }
 
   @ViewBuilder
-  private var aboutSections: some View {
+  private var aboutSection: some View {
     Section("account.edit.display-name") {
       TextField("account.edit.display-name", text: $viewModel.displayName)
     }
@@ -69,7 +138,9 @@ public struct EditAccountView: View {
       TextField("account.edit.about", text: $viewModel.note, axis: .vertical)
         .frame(maxHeight: 150)
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   private var postSettingsSection: some View {
@@ -89,7 +160,9 @@ public struct EditAccountView: View {
         Label("account.edit.post-settings.sensitive", systemImage: "eye")
       }
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   private var accountSection: some View {
@@ -104,7 +177,9 @@ public struct EditAccountView: View {
         Label("account.edit.account-settings.discoverable", systemImage: "magnifyingglass")
       }
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   private var fieldsSection: some View {
@@ -114,8 +189,8 @@ public struct EditAccountView: View {
           TextField("account.edit.metadata-name-placeholder", text: $field.name)
             .font(.scaledHeadline)
           TextField("account.edit.metadata-value-placeholder", text: $field.value)
-            .emojiSize(Font.scaledBodyFont.emojiSize)
-            .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
+            .emojiText.size(Font.scaledBodyFont.emojiSize)
+            .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
             .foregroundColor(theme.tintColor)
         }
       }
@@ -138,16 +213,14 @@ public struct EditAccountView: View {
         }
       }
     }
+    #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   @ToolbarContentBuilder
   private var toolbarContent: some ToolbarContent {
-    ToolbarItem(placement: .navigationBarLeading) {
-      Button("action.cancel") {
-        dismiss()
-      }
-    }
+    CancelToolbarItem()
 
     ToolbarItem(placement: .navigationBarTrailing) {
       Button {

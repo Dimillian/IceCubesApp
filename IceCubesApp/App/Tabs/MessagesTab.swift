@@ -5,7 +5,6 @@ import DesignSystem
 import Env
 import Models
 import Network
-import Shimmer
 import SwiftUI
 
 @MainActor
@@ -25,13 +24,9 @@ struct MessagesTab: View {
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbar {
-          if UIDevice.current.userInterfaceIdiom != .pad {
-            ToolbarItem(placement: .navigationBarLeading) {
-              AppAccountsSelectorView(routerPath: routerPath)
-            }
-          }
+          ToolbarTab(routerPath: $routerPath)
         }
-        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
+        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
         .id(client.id)
     }
     .onChange(of: $popToRootTab.wrappedValue) { _, newValue in

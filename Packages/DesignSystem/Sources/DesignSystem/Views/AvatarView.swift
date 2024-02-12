@@ -1,8 +1,7 @@
+import Models
 import Nuke
 import NukeUI
-import Shimmer
 import SwiftUI
-import Models
 
 @MainActor
 public struct AvatarView: View {
@@ -21,11 +20,10 @@ public struct AvatarView: View {
   }
 
   private var adaptiveConfig: FrameConfig {
-    var cornerRadius: CGFloat
-    if config == .badge || theme.avatarShape == .circle {
-      cornerRadius = config.width / 2
+    let cornerRadius: CGFloat = if config == .badge || theme.avatarShape == .circle {
+      config.width / 2
     } else {
-      cornerRadius = config.cornerRadius
+      config.cornerRadius
     }
     return FrameConfig(width: config.width, height: config.height, cornerRadius: cornerRadius)
   }
@@ -42,16 +40,16 @@ public struct AvatarView: View {
     let cornerRadius: CGFloat
 
     init(width: CGFloat, height: CGFloat, cornerRadius: CGFloat = 4) {
-      self.size = CGSize(width: width, height: height)
+      size = CGSize(width: width, height: height)
       self.cornerRadius = cornerRadius
     }
 
     public static let account = FrameConfig(width: 80, height: 80)
-#if targetEnvironment(macCatalyst)
-    public static let status = FrameConfig(width: 48, height: 48)
-#else
-    public static let status = FrameConfig(width: 40, height: 40)
-#endif
+    #if targetEnvironment(macCatalyst)
+      public static let status = FrameConfig(width: 48, height: 48)
+    #else
+      public static let status = FrameConfig(width: 40, height: 40)
+    #endif
     public static let embed = FrameConfig(width: 34, height: 34)
     public static let badge = FrameConfig(width: 28, height: 28, cornerRadius: 14)
     public static let list = FrameConfig(width: 20, height: 20, cornerRadius: 10)
@@ -77,10 +75,10 @@ struct PreviewWrapper: View {
       Toggle("Avatar Shape", isOn: $isCircleAvatar)
     }
     .onChange(of: isCircleAvatar) {
-      Theme.shared.avatarShape = self.isCircleAvatar ? .circle : .rounded
+      Theme.shared.avatarShape = isCircleAvatar ? .circle : .rounded
     }
     .onAppear {
-      Theme.shared.avatarShape = self.isCircleAvatar ? .circle : .rounded
+      Theme.shared.avatarShape = isCircleAvatar ? .circle : .rounded
     }
   }
 
@@ -103,7 +101,8 @@ struct PreviewWrapper: View {
     url: URL(string: "https://nondot.org/sabre/")!,
     source: nil,
     bot: false,
-    discoverable: true)
+    discoverable: true
+  )
 }
 
 struct AvatarImage: View {
@@ -127,6 +126,9 @@ struct AvatarImage: View {
               RoundedRectangle(cornerRadius: config.cornerRadius)
                 .stroke(.primary.opacity(0.25), lineWidth: 1)
             )
+        } else {
+          RoundedRectangle(cornerRadius: config.cornerRadius)
+            .stroke(.primary.opacity(0.25), lineWidth: 1)
         }
       }
     }

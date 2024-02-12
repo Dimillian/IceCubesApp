@@ -29,16 +29,32 @@ public enum RemoteTimelineFilter: String, CaseIterable, Hashable, Equatable {
   }
 }
 
-public enum TimelineFilter: Hashable, Equatable {
+public enum TimelineFilter: Hashable, Equatable, Identifiable {
+  
   case home, local, federated, trending
   case hashtag(tag: String, accountId: String?)
-  case tagGroup(title: String, tags: [String])
+  case tagGroup(title: String, tags: [String], symbolName: String?)
   case list(list: Models.List)
   case remoteLocal(server: String, filter: RemoteTimelineFilter)
   case latest
+  case resume
 
+  public var id: String {
+    switch self {
+    case let .remoteLocal(server, filter):
+      return server + filter.rawValue
+    case let .list(list):
+      return list.id
+    case let .tagGroup(title, tags, _):
+      return title + tags.joined()
+    default:
+      return title
+    }
+
+  }
+  
   public func hash(into hasher: inout Hasher) {
-    hasher.combine(title)
+    hasher.combine(id)
   }
 
   public static func availableTimeline(client: Client) -> [TimelineFilter] {
@@ -63,6 +79,8 @@ public enum TimelineFilter: Hashable, Equatable {
     switch self {
     case .latest:
       "Latest"
+    case .resume:
+      "Resume"
     case .federated:
       "Federated"
     case .local:
@@ -73,7 +91,7 @@ public enum TimelineFilter: Hashable, Equatable {
       "Home"
     case let .hashtag(tag, _):
       "#\(tag)"
-    case let .tagGroup(title, _):
+    case let .tagGroup(title, _, _):
       title
     case let .list(list):
       list.title
@@ -86,6 +104,8 @@ public enum TimelineFilter: Hashable, Equatable {
     switch self {
     case .latest:
       "timeline.latest"
+    case .resume:
+      "timeline.resume"
     case .federated:
       "timeline.federated"
     case .local:
@@ -96,7 +116,7 @@ public enum TimelineFilter: Hashable, Equatable {
       "timeline.home"
     case let .hashtag(tag, _):
       "#\(tag)"
-    case let .tagGroup(title, _):
+    case let .tagGroup(title, _, _):
       LocalizedStringKey(title) // ?? not sure since this can't be localized.
     case let .list(list):
       LocalizedStringKey(list.title)
@@ -105,10 +125,12 @@ public enum TimelineFilter: Hashable, Equatable {
     }
   }
 
-  public func iconName() -> String? {
+  public func iconName() -> String {
     switch self {
     case .latest:
       "arrow.counterclockwise"
+    case .resume:
+      "clock.arrow.2.circlepath"
     case .federated:
       "globe.americas"
     case .local:
@@ -121,8 +143,10 @@ public enum TimelineFilter: Hashable, Equatable {
       "list.bullet"
     case .remoteLocal:
       "dot.radiowaves.right"
-    default:
-      nil
+    case let .tagGroup(_, _, symbolName):
+        symbolName ?? "tag"
+    case .hashtag:
+      "number"
     }
   }
 
@@ -140,22 +164,29 @@ public enum TimelineFilter: Hashable, Equatable {
         return Trends.statuses(offset: offset)
       }
     case .latest: return Timelines.home(sinceId: nil, maxId: nil, minId: nil)
+    case .resume: return Timelines.home(sinceId: nil, maxId: nil, minId: nil)
     case .home: return Timelines.home(sinceId: sinceId, maxId: maxId, minId: minId)
     case .trending: return Trends.statuses(offset: offset)
     case let .list(list): return Timelines.list(listId: list.id, sinceId: sinceId, maxId: maxId, minId: minId)
     case let .hashtag(tag, accountId):
       if let accountId {
-        return Accounts.statuses(id: accountId, sinceId: nil, tag: tag, onlyMedia: nil, excludeReplies: nil, pinned: nil)
+        return Accounts.statuses(id: accountId,
+                                 sinceId: nil,
+                                 tag: tag,
+                                 onlyMedia: false,
+                                 excludeReplies: false,
+                                 excludeReblogs: false, 
+                                 pinned: nil)
       } else {
-        return Timelines.hashtag(tag: tag, additional: nil, maxId: maxId)
+        return Timelines.hashtag(tag: tag, additional: nil, maxId: maxId, minId: minId)
       }
-    case let .tagGroup(_, tags):
+    case let .tagGroup(_, tags, _):
       var tags = tags
       if !tags.isEmpty {
         let tag = tags.removeFirst()
-        return Timelines.hashtag(tag: tag, additional: tags, maxId: maxId)
+        return Timelines.hashtag(tag: tag, additional: tags, maxId: maxId, minId: minId)
       } else {
-        return Timelines.hashtag(tag: "", additional: tags, maxId: maxId)
+        return Timelines.hashtag(tag: "", additional: tags, maxId: maxId, minId: minId)
       }
     }
   }
@@ -172,6 +203,7 @@ extension TimelineFilter: Codable {
     case list
     case remoteLocal
     case latest
+    case resume
   }
 
   public init(from decoder: Decoder) throws {
@@ -195,12 +227,14 @@ extension TimelineFilter: Codable {
         accountId: accountId
       )
     case .tagGroup:
-      var nestedContainer = try container.nestedUnkeyedContainer(forKey: .hashtag)
+      var nestedContainer = try container.nestedUnkeyedContainer(forKey: .tagGroup)
       let title = try nestedContainer.decode(String.self)
       let tags = try nestedContainer.decode([String].self)
+      let symbolName = try? nestedContainer.decode(String.self)
       self = .tagGroup(
         title: title,
-        tags: tags
+        tags: tags,
+        symbolName: symbolName
       )
     case .list:
       let list = try container.decode(
@@ -243,18 +277,21 @@ extension TimelineFilter: Codable {
       var nestedContainer = container.nestedUnkeyedContainer(forKey: .hashtag)
       try nestedContainer.encode(tag)
       try nestedContainer.encode(accountId)
-    case let .tagGroup(title, tags):
+    case let .tagGroup(title, tags, symbolName):
       var nestedContainer = container.nestedUnkeyedContainer(forKey: .tagGroup)
       try nestedContainer.encode(title)
       try nestedContainer.encode(tags)
+      try? nestedContainer.encode(symbolName)
     case let .list(list):
       try container.encode(list, forKey: .list)
     case let .remoteLocal(server, filter):
-      var nestedContainer = container.nestedUnkeyedContainer(forKey: .hashtag)
+      var nestedContainer = container.nestedUnkeyedContainer(forKey: .remoteLocal)
       try nestedContainer.encode(server)
       try nestedContainer.encode(filter)
     case .latest:
       try container.encode(CodingKeys.latest.rawValue, forKey: .latest)
+    case .resume:
+      try container.encode(CodingKeys.resume.rawValue, forKey: .latest)
     }
   }
 }

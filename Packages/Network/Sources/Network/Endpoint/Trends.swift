@@ -3,7 +3,7 @@ import Foundation
 public enum Trends: Endpoint {
   case tags
   case statuses(offset: Int?)
-  case links
+  case links(offset: Int?)
 
   public func path() -> String {
     switch self {
@@ -18,7 +18,7 @@ public enum Trends: Endpoint {
 
   public func queryItems() -> [URLQueryItem]? {
     switch self {
-    case let .statuses(offset):
+    case let .statuses(offset), let .links(offset):
       if let offset {
         return [.init(name: "offset", value: String(offset))]
       }

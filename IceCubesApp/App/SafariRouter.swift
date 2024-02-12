@@ -1,9 +1,9 @@
 import DesignSystem
 import Env
+import Models
 import Observation
 import SafariServices
 import SwiftUI
-import Models
 
 extension View {
   @MainActor func withSafariRouter() -> some View {
@@ -17,7 +17,9 @@ private struct SafariRouter: ViewModifier {
   @Environment(UserPreferences.self) private var preferences
   @Environment(RouterPath.self) private var routerPath
 
+  #if !os(visionOS)
   @State private var safariManager = InAppSafariManager()
+  #endif
 
   func body(content: Content) -> some View {
     content
@@ -43,24 +45,33 @@ private struct SafariRouter: ViewModifier {
               return .handled
             }
           }
-#if !targetEnvironment(macCatalyst)
-          guard preferences.preferredBrowser == .inAppSafari else { return .systemAction }
-#endif
-          // SFSafariViewController only supports initial URLs with http:// or https:// schemes.
-          guard let scheme = url.scheme, ["https", "http"].contains(scheme.lowercased()) else {
+          #if !targetEnvironment(macCatalyst)
+            guard preferences.preferredBrowser == .inAppSafari else { return .systemAction }
+            // SFSafariViewController only supports initial URLs with http:// or https:// schemes.
+            guard let scheme = url.scheme, ["https", "http"].contains(scheme.lowercased()) else {
+              return .systemAction
+            }
+            #if os(visionOS)
             return .systemAction
-          }
-          return safariManager.open(url)
+            #else
+            return safariManager.open(url)
+            #endif
+          #else
+            return .systemAction
+          #endif
         }
       }
+      #if !os(visionOS)
       .background {
         WindowReader { window in
           safariManager.windowScene = window.windowScene
         }
       }
+      #endif
   }
 }
 
+#if !os(visionOS)
 @MainActor
 @Observable private class InAppSafariManager: NSObject, SFSafariViewControllerDelegate {
   var windowScene: UIWindowScene?
@@ -113,6 +124,7 @@ private struct SafariRouter: ViewModifier {
     }
   }
 }
+#endif
 
 private struct WindowReader: UIViewRepresentable {
   var onUpdate: (UIWindow) -> Void

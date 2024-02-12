@@ -26,7 +26,7 @@ public struct AppAccountsSelectorView: View {
   }
 
   private var preferredHeight: CGFloat {
-    var baseHeight: CGFloat = 220
+    var baseHeight: CGFloat = 310
     baseHeight += CGFloat(60 * accountsViewModel.count)
     return baseHeight
   }
@@ -93,25 +93,28 @@ public struct AppAccountsSelectorView: View {
       List {
         Section {
           ForEach(accountsViewModel.sorted { $0.acct < $1.acct }, id: \.appAccount.id) { viewModel in
-            AppAccountView(viewModel: viewModel)
+            AppAccountView(viewModel: viewModel, isParentPresented: $isPresented)
           }
+          addAccountButton
+          #if os(visionOS)
+            .foregroundStyle(theme.labelColor)
+          #endif
         }
-        .listRowBackground(theme.primaryBackgroundColor)
+        #if !os(visionOS)
+          .listRowBackground(theme.primaryBackgroundColor)
+        #endif
 
         if accountCreationEnabled {
           Section {
-            Button {
-              isPresented = false
-              HapticManager.shared.fireHaptic(.buttonPress)
-              DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                routerPath.presentedSheet = .addAccount
-              }
-            } label: {
-              Label("app-account.button.add", systemImage: "person.badge.plus")
-            }
             settingsButton
+            aboutButton
+            supportButton
           }
+          #if os(visionOS)
+          .foregroundStyle(theme.labelColor)
+          #else
           .listRowBackground(theme.primaryBackgroundColor)
+          #endif
         }
       }
       .listStyle(.insetGrouped)
@@ -131,6 +134,18 @@ public struct AppAccountsSelectorView: View {
       .environment(routerPath)
     }
   }
+  
+  private var addAccountButton: some View {
+    Button {
+      isPresented = false
+      HapticManager.shared.fireHaptic(.buttonPress)
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        routerPath.presentedSheet = .addAccount
+      }
+    } label: {
+      Label("app-account.button.add", systemImage: "person.badge.plus")
+    }
+  }
 
   private var settingsButton: some View {
     Button {
@@ -143,11 +158,35 @@ public struct AppAccountsSelectorView: View {
       Label("tab.settings", systemImage: "gear")
     }
   }
+  
+  private var supportButton: some View {
+    Button {
+      isPresented = false
+      HapticManager.shared.fireHaptic(.buttonPress)
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        routerPath.presentedSheet = .support
+      }
+    } label: {
+      Label("settings.app.support", systemImage: "wand.and.stars")
+    }
+  }
+  
+  private var aboutButton: some View {
+    Button {
+      isPresented = false
+      HapticManager.shared.fireHaptic(.buttonPress)
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        routerPath.presentedSheet = .about
+      }
+    } label: {
+      Label("settings.app.about", systemImage: "info.circle")
+    }
+  }
 
   private func refreshAccounts() {
     accountsViewModel = []
     for account in appAccounts.availableAccounts {
-      let viewModel: AppAccountViewModel = .init(appAccount: account, isInNavigation: false, showBadge: true)
+      let viewModel: AppAccountViewModel = .init(appAccount: account, isInSettings: false, showBadge: true)
       accountsViewModel.append(viewModel)
     }
   }

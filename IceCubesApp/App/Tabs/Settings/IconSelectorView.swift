@@ -9,7 +9,7 @@ struct IconSelectorView: View {
     }
 
     init(string: String) {
-      if string == Icon.primary.appIconName {
+      if string == "AppIcon" {
         self = .primary
       } else {
         self = .init(rawValue: Int(String(string.replacing("AppIconAlternate", with: "")))!)!
@@ -17,31 +17,19 @@ struct IconSelectorView: View {
     }
 
     case primary = 0
-    case alt1, alt2, alt3, alt4, alt5, alt6, alt7, alt8
-    case alt9, alt10, alt11, alt12, alt13, alt14
-    case alt15, alt16, alt17, alt18, alt19, alt20, alt21
-    case alt22, alt23, alt24, alt25
-    case alt26, alt27, alt28
-    case alt29, alt30, alt31, alt32
-    case alt33
-    case alt34, alt35
-    case alt36
+    case alt1, alt2, alt3, alt4, alt5, alt6, alt7, alt8, alt9, alt10, alt11, alt12, alt13, alt14, alt15
+    case alt16, alt17, alt18, alt19, alt20, alt21
+    case alt22, alt23, alt24, alt25, alt26
+    case alt27, alt28, alt29
+    case alt30, alt31, alt32, alt33, alt34, alt35, alt36
     case alt37
-    case alt38, alt39
-    case alt40, alt41, alt42
-    case alt43, alt44, alt45, alt46, alt47, alt48, alt49
+    case alt38
+    case alt39, alt40, alt41, alt42, alt43
+    case alt44, alt45
+    case alt46
 
     var appIconName: String {
-      switch self {
-      case .primary:
-        "AppIcon"
-      default:
-        "AppIconAlternate\(rawValue)"
-      }
-    }
-
-    var iconName: String {
-      "icon\(rawValue)"
+      return "AppIconAlternate\(rawValue)"
     }
   }
 
@@ -51,17 +39,18 @@ struct IconSelectorView: View {
     let icons: [Icon]
 
     static let items = [
-      IconSelector(title: "settings.app.icon.official".localized, icons: [.primary, .alt1, .alt2, .alt3, .alt4, .alt5, .alt6, .alt7, .alt8,
-                                                                          .alt9, .alt10, .alt11, .alt12, .alt13, .alt14,
-                                                                          .alt15, .alt16, .alt17, .alt18, .alt19, .alt25, 
-                                                                          .alt43, .alt44, .alt45, .alt46, .alt47]),
-      IconSelector(title: "\("settings.app.icon.designed-by".localized) Albert Kinng", icons: [.alt20, .alt21, .alt22, .alt23, .alt24]),
-      IconSelector(title: "\("settings.app.icon.designed-by".localized) Dan van Moll", icons: [.alt26, .alt27, .alt28]),
-      IconSelector(title: "\("settings.app.icon.designed-by".localized) Chanhwi Joo (GitHub @te6-in)", icons: [.alt29, .alt34, .alt31, .alt35, .alt30, .alt32, .alt40]),
-      IconSelector(title: "\("settings.app.icon.designed-by".localized) W. Kovács Ágnes (@wildgica)", icons: [.alt33]),
-      IconSelector(title: "\("settings.app.icon.designed-by".localized) Duncan Horne", icons: [.alt36]),
-      IconSelector(title: "\("settings.app.icon.designed-by".localized) BeAware@social.beaware.live", icons: [.alt37, .alt41, .alt42, .alt48, .alt49]),
-      IconSelector(title: "\("settings.app.icon.designed-by".localized) Simone Margio", icons: [.alt38, .alt39]),
+      IconSelector(title: "settings.app.icon.official".localized, icons: [
+        .primary, .alt46, .alt1, .alt2, .alt3, .alt4,
+        .alt5, .alt6, .alt7, .alt8,
+        .alt9, .alt10, .alt11, .alt12, .alt13, .alt14, .alt15,
+        .alt16, .alt17, .alt18, .alt19, .alt20, .alt21]),
+      IconSelector(title: "\("settings.app.icon.designed-by".localized) Albert Kinng", icons: [.alt22, .alt23, .alt24, .alt25, .alt26]),
+      IconSelector(title: "\("settings.app.icon.designed-by".localized) Dan van Moll", icons: [.alt27, .alt28, .alt29]),
+      IconSelector(title: "\("settings.app.icon.designed-by".localized) Chanhwi Joo (GitHub @te6-in)", icons: [.alt30, .alt31, .alt32, .alt33, .alt34, .alt35, .alt36]),
+      IconSelector(title: "\("settings.app.icon.designed-by".localized) W. Kovács Ágnes (@wildgica)", icons: [.alt37]),
+      IconSelector(title: "\("settings.app.icon.designed-by".localized) Duncan Horne", icons: [.alt38]),
+      IconSelector(title: "\("settings.app.icon.designed-by".localized) BeAware@social.beaware.live", icons: [.alt39, .alt40, .alt41, .alt42, .alt43]),
+      IconSelector(title: "\("settings.app.icon.designed-by".localized) Simone Margio", icons: [.alt44, .alt45]),
     ]
   }
 
@@ -85,7 +74,9 @@ struct IconSelectorView: View {
       .padding(6)
       .navigationTitle("settings.app.icon.navigation-title")
     }
+    #if !os(visionOS)
     .background(theme.primaryBackgroundColor)
+    #endif
   }
 
   private func makeIconGridView(icons: [Icon]) -> some View {
@@ -103,7 +94,7 @@ struct IconSelectorView: View {
           }
         } label: {
           ZStack(alignment: .bottomTrailing) {
-            Image(uiImage: .init(named: icon.iconName) ?? .init())
+            Image(uiImage: .init(named: icon.appIconName) ?? .init())
               .resizable()
               .aspectRatio(contentMode: .fit)
               .frame(minHeight: 125, maxHeight: 1024)
@@ -116,6 +107,7 @@ struct IconSelectorView: View {
             }
           }
         }
+        .buttonStyle(.plain)
       }
     }
   }

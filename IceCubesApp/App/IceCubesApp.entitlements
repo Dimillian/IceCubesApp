@@ -6,7 +6,7 @@
 	<string>development</string>
 	<key>com.apple.developer.icloud-container-identifiers</key>
 	<array>
-		<string>iCloud.$(BUNDLE_ID_PREFIX).IceCubesApp</string>
+		<string>iCloud.icecubesapp</string>
 	</array>
 	<key>com.apple.developer.icloud-services</key>
 	<array>
@@ -24,7 +24,7 @@
 	<array>
 		<string>group.$(BUNDLE_ID_PREFIX).IceCubesApp</string>
 	</array>
-	<key>com.apple.security.files.user-selected.read-only</key>
+	<key>com.apple.security.files.user-selected.read-write</key>
 	<true/>
 	<key>com.apple.security.network.client</key>
 	<true/>

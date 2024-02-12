@@ -8,6 +8,7 @@ let package = Package(
   defaultLocalization: "en",
   platforms: [
     .iOS(.v17),
+    .visionOS(.v1),
   ],
   products: [
     .library(
@@ -18,8 +19,9 @@ let package = Package(
   dependencies: [
     .package(name: "Network", path: "../Network"),
     .package(name: "Models", path: "../Models"),
-    .package(name: "Status", path: "../Status"),
+    .package(name: "StatusKit", path: "../StatusKit"),
     .package(name: "Env", path: "../Env"),
+    .package(url: "https://github.com/Dean151/ButtonKit", from: "0.1.1"),
   ],
   targets: [
     .target(
@@ -27,8 +29,9 @@ let package = Package(
       dependencies: [
         .product(name: "Network", package: "Network"),
         .product(name: "Models", package: "Models"),
-        .product(name: "Status", package: "Status"),
+        .product(name: "StatusKit", package: "StatusKit"),
         .product(name: "Env", package: "Env"),
+        .product(name: "ButtonKit", package: "ButtonKit")
       ],
       swiftSettings: [
         .enableExperimentalFeature("StrictConcurrency"),

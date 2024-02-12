@@ -2,7 +2,6 @@ import DesignSystem
 import Env
 import Models
 import Network
-import Shimmer
 import SwiftUI
 
 @MainActor
@@ -18,76 +17,25 @@ public struct AccountsListView: View {
   }
 
   public var body: some View {
-    List {
-      switch viewModel.state {
-      case .loading:
-        ForEach(Account.placeholders()) { _ in
-          AccountsListRow(viewModel: .init(account: .placeholder(), relationShip: .placeholder()))
-            .redacted(reason: .placeholder)
-            .allowsHitTesting(false)
-            .shimmering()
-            .listRowBackground(theme.primaryBackgroundColor)
-        }
-      case let .display(accounts, relationships, nextPageState):
-        if case .followers = viewModel.mode,
-           !currentAccount.followRequests.isEmpty
-        {
-          Section(
-            header: Text("account.follow-requests.pending-requests"),
-            footer: Text("account.follow-requests.instructions")
-              .font(.scaledFootnote)
-              .foregroundColor(.secondary)
-              .offset(y: -8)
-          ) {
-            ForEach(currentAccount.followRequests) { account in
-              AccountsListRow(
-                viewModel: .init(account: account),
-                isFollowRequest: true,
-                requestUpdated: {
-                  Task {
-                    await viewModel.fetch()
-                  }
-                }
-              )
-              .listRowBackground(theme.primaryBackgroundColor)
-            }
-          }
-        }
-        Section {
-          ForEach(accounts) { account in
-            if let relationship = relationships.first(where: { $0.id == account.id }) {
-              AccountsListRow(viewModel: .init(account: account,
-                                               relationShip: relationship))
-                .listRowBackground(theme.primaryBackgroundColor)
-            }
-          }
-        }
-
-        switch nextPageState {
-        case .hasNextPage:
-          loadingRow
-            .listRowBackground(theme.primaryBackgroundColor)
-            .onAppear {
-              Task {
-                await viewModel.fetchNextPage()
-              }
-            }
-
-        case .loadingNextPage:
-          loadingRow
-            .listRowBackground(theme.primaryBackgroundColor)
-        case .none:
-          EmptyView()
-        }
-
-      case let .error(error):
-        Text(error.localizedDescription)
-          .listRowBackground(theme.primaryBackgroundColor)
-      }
-    }
+    listView
+    #if !os(visionOS)
     .scrollContentBackground(.hidden)
     .background(theme.primaryBackgroundColor)
+    #endif
     .listStyle(.plain)
+    .toolbar {
+      ToolbarItem(placement: .principal) {
+        VStack {
+          Text(viewModel.mode.title)
+            .font(.headline)
+          if let count = viewModel.totalCount {
+            Text(String(count))
+              .font(.footnote)
+              .foregroundStyle(.secondary)
+          }
+        }
+      }
+    }
     .navigationTitle(viewModel.mode.title)
     .navigationBarTitleDisplayMode(.inline)
     .task {
@@ -97,12 +45,111 @@ public struct AccountsListView: View {
       await viewModel.fetch()
     }
   }
+  
+  @ViewBuilder
+  private var listView: some View {
+    if currentAccount.account?.id == viewModel.accountId {
+      searchableList
+    } else {
+      standardList
+    }
+  }
+  
+  private var searchableList: some View {
+    List {
+      listContent
+    }
+    .searchable(text: $viewModel.searchQuery,
+                placement: .navigationBarDrawer(displayMode: .always))
+    .task(id: viewModel.searchQuery) {
+      if !viewModel.searchQuery.isEmpty {
+        await viewModel.search()
+      }
+    }
+    .onChange(of: viewModel.searchQuery) { _, newValue in
+      if newValue.isEmpty {
+        Task {
+          await viewModel.fetch()
+        }
+      }
+    }
+  }
+  
+  private var standardList: some View {
+    List {
+      listContent
+    }
+  }
+  
+  @ViewBuilder
+  private var listContent: some View {
+    switch viewModel.state {
+    case .loading:
+      ForEach(Account.placeholders()) { _ in
+        AccountsListRow(viewModel: .init(account: .placeholder(), relationShip: .placeholder()))
+          .redacted(reason: .placeholder)
+          .allowsHitTesting(false)
+          #if !os(visionOS)
+          .listRowBackground(theme.primaryBackgroundColor)
+          #endif
+      }
+    case let .display(accounts, relationships, nextPageState):
+      if case .followers = viewModel.mode,
+         !currentAccount.followRequests.isEmpty
+      {
+        Section(
+          header: Text("account.follow-requests.pending-requests"),
+          footer: Text("account.follow-requests.instructions")
+            .font(.scaledFootnote)
+            .foregroundColor(.secondary)
+            .offset(y: -8)
+        ) {
+          ForEach(currentAccount.followRequests) { account in
+            AccountsListRow(
+              viewModel: .init(account: account),
+              isFollowRequest: true,
+              requestUpdated: {
+                Task {
+                  await viewModel.fetch()
+                }
+              }
+            )
+            #if !os(visionOS)
+            .listRowBackground(theme.primaryBackgroundColor)
+            #endif
+          }
+        }
+      }
+      Section {
+        ForEach(accounts) { account in
+          if let relationship = relationships.first(where: { $0.id == account.id }) {
+            AccountsListRow(viewModel: .init(account: account,
+                                             relationShip: relationship))
+              #if !os(visionOS)
+              .listRowBackground(theme.primaryBackgroundColor)
+              #endif
+          }
+        }
+      }
 
-  private var loadingRow: some View {
-    HStack {
-      Spacer()
-      ProgressView()
-      Spacer()
+      switch nextPageState {
+      case .hasNextPage:
+        NextPageView {
+          try await viewModel.fetchNextPage()
+        }
+        #if !os(visionOS)
+        .listRowBackground(theme.primaryBackgroundColor)
+        #endif
+        
+      case .none:
+        EmptyView()
+      }
+
+    case let .error(error):
+      Text(error.localizedDescription)
+        #if !os(visionOS)
+        .listRowBackground(theme.primaryBackgroundColor)
+        #endif
     }
   }
 }

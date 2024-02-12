@@ -9,12 +9,14 @@ public enum Accounts: Endpoint {
   case followedTags
   case featuredTags(id: String)
   case verifyCredentials
+  case updateCredentialsMedia
   case updateCredentials(json: UpdateCredentialsData)
   case statuses(id: String,
                 sinceId: String?,
                 tag: String?,
-                onlyMedia: Bool?,
-                excludeReplies: Bool?,
+                onlyMedia: Bool,
+                excludeReplies: Bool,
+                excludeReblogs: Bool,
                 pinned: Bool?)
   case relationships(ids: [String])
   case follow(id: String, notify: Bool, reblogs: Bool)
@@ -47,9 +49,9 @@ public enum Accounts: Endpoint {
       "accounts/\(id)/featured_tags"
     case .verifyCredentials:
       "accounts/verify_credentials"
-    case .updateCredentials:
+    case .updateCredentials, .updateCredentialsMedia:
       "accounts/update_credentials"
-    case let .statuses(id, _, _, _, _, _):
+    case let .statuses(id, _, _, _, _, _, _):
       "accounts/\(id)/statuses"
     case .relationships:
       "accounts/relationships"
@@ -88,7 +90,7 @@ public enum Accounts: Endpoint {
       return [
         .init(name: "acct", value: name),
       ]
-    case let .statuses(_, sinceId, tag, onlyMedia, excludeReplies, pinned):
+    case let .statuses(_, sinceId, tag, onlyMedia, excludeReplies, excludeReblogs, pinned):
       var params: [URLQueryItem] = []
       if let tag {
         params.append(.init(name: "tagged", value: tag))
@@ -96,12 +98,11 @@ public enum Accounts: Endpoint {
       if let sinceId {
         params.append(.init(name: "max_id", value: sinceId))
       }
-      if let onlyMedia {
-        params.append(.init(name: "only_media", value: onlyMedia ? "true" : "false"))
-      }
-      if let excludeReplies {
-        params.append(.init(name: "exclude_replies", value: excludeReplies ? "true" : "false"))
-      }
+      
+      params.append(.init(name: "only_media", value: onlyMedia ? "true" : "false"))
+      params.append(.init(name: "exclude_replies", value: excludeReplies ? "true" : "false"))
+      params.append(.init(name: "exclude_reblogs", value: excludeReblogs ? "true" : "false"))
+      
       if let pinned {
         params.append(.init(name: "pinned", value: pinned ? "true" : "false"))
       }

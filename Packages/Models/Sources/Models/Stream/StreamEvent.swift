@@ -22,7 +22,7 @@ public struct StreamEventUpdate: StreamEvent {
 
 public struct StreamEventStatusUpdate: StreamEvent {
   public let date = Date()
-  public var id: String { status.id }
+  public var id: String { status.id + (status.editedAt?.asDate.description ?? "")}
   public let status: Status
   public init(status: Status) {
     self.status = status

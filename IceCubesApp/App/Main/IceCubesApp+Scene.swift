@@ -1,12 +1,12 @@
 import Env
 import MediaUI
-import Status
+import StatusKit
 import SwiftUI
 
 extension IceCubesApp {
   var appScene: some Scene {
     WindowGroup(id: "MainWindow") {
-      appView
+      AppView(selectedTab: $selectedTab, appRouterPath: $appRouterPath)
         .applyTheme(theme)
         .onAppear {
           setNewClientsInEnv(client: appAccountsManager.currentClient)
@@ -49,6 +49,11 @@ extension IceCubesApp {
         }
         .withModelContainer()
     }
+    #if targetEnvironment(macCatalyst)
+    .defaultSize(width: userPreferences.showiPadSecondaryColumn ? 1100 : 800, height: 1400)
+    #elseif os(visionOS)
+    .defaultSize(width: 800, height: 1200)
+    #endif
     .commands {
       appMenu
     }
@@ -63,28 +68,23 @@ extension IceCubesApp {
     }
   }
 
-  @ViewBuilder
-  private var appView: some View {
-    if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
-      sidebarView
-    } else {
-      tabBarView
-    }
-  }
-
   @SceneBuilder
   var otherScenes: some Scene {
     WindowGroup(for: WindowDestinationEditor.self) { destination in
       Group {
         switch destination.wrappedValue {
         case let .newStatusEditor(visibility):
-          StatusEditorView(mode: .new(visibility: visibility))
+          StatusEditor.MainView(mode: .new(visibility: visibility))
         case let .editStatusEditor(status):
-          StatusEditorView(mode: .edit(status: status))
+          StatusEditor.MainView(mode: .edit(status: status))
         case let .quoteStatusEditor(status):
-          StatusEditorView(mode: .quote(status: status))
+          StatusEditor.MainView(mode: .quote(status: status))
         case let .replyToStatusEditor(status):
-          StatusEditorView(mode: .replyTo(status: status))
+          StatusEditor.MainView(mode: .replyTo(status: status))
+        case let .mentionStatusEditor(account, visibility):
+          StatusEditor.MainView(mode: .mention(account: account, visibility: visibility))
+        case let .quoteLinkStatusEditor(link):
+          StatusEditor.MainView(mode: .quoteLink(link: link))
         case .none:
           EmptyView()
         }
@@ -96,7 +96,7 @@ extension IceCubesApp {
     }
     .defaultSize(width: 600, height: 800)
     .windowResizability(.contentMinSize)
-    
+
     WindowGroup(for: WindowDestinationMedia.self) { destination in
       Group {
         switch destination.wrappedValue {

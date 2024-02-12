@@ -28,16 +28,16 @@ public struct AccountDetailContextMenu: View {
             Label("account.action.message", systemImage: "tray.full")
           }
 
-          Divider()
+            #if !targetEnvironment(macCatalyst)
+            Divider()
+            #endif
 
           if viewModel.relationship?.blocking == true {
             Button {
               Task {
                 do {
                   viewModel.relationship = try await client.post(endpoint: Accounts.unblock(id: account.id))
-                } catch {
-                  print("Error while unblocking: \(error.localizedDescription)")
-                }
+                } catch { }
               }
             } label: {
               Label("account.action.unblock", systemImage: "person.crop.circle.badge.exclamationmark")
@@ -55,9 +55,7 @@ public struct AccountDetailContextMenu: View {
               Task {
                 do {
                   viewModel.relationship = try await client.post(endpoint: Accounts.unmute(id: account.id))
-                } catch {
-                  print("Error while unmuting: \(error.localizedDescription)")
-                }
+                } catch { }
               }
             } label: {
               Label("account.action.unmute", systemImage: "speaker")
@@ -69,9 +67,7 @@ public struct AccountDetailContextMenu: View {
                   Task {
                     do {
                       viewModel.relationship = try await client.post(endpoint: Accounts.mute(id: account.id, json: MuteData(duration: duration.rawValue)))
-                    } catch {
-                      print("Error while muting: \(error.localizedDescription)")
-                    }
+                    } catch { }
                   }
                 }
               }
@@ -90,9 +86,7 @@ public struct AccountDetailContextMenu: View {
                     viewModel.relationship = try await client.post(endpoint: Accounts.follow(id: account.id,
                                                                                              notify: false,
                                                                                              reblogs: relationship.showingReblogs))
-                  } catch {
-                    print("Error while disabling notifications: \(error.localizedDescription)")
-                  }
+                  } catch { }
                 }
               } label: {
                 Label("account.action.notify-disable", systemImage: "bell.fill")
@@ -104,9 +98,7 @@ public struct AccountDetailContextMenu: View {
                     viewModel.relationship = try await client.post(endpoint: Accounts.follow(id: account.id,
                                                                                              notify: true,
                                                                                              reblogs: relationship.showingReblogs))
-                  } catch {
-                    print("Error while enabling notifications: \(error.localizedDescription)")
-                  }
+                  } catch { }
                 }
               } label: {
                 Label("account.action.notify-enable", systemImage: "bell")
@@ -119,9 +111,7 @@ public struct AccountDetailContextMenu: View {
                     viewModel.relationship = try await client.post(endpoint: Accounts.follow(id: account.id,
                                                                                              notify: relationship.notifying,
                                                                                              reblogs: false))
-                  } catch {
-                    print("Error while disabling reboosts: \(error.localizedDescription)")
-                  }
+                  } catch { }
                 }
               } label: {
                 Label("account.action.reboosts-hide", image: "Rocket.Fill")
@@ -133,9 +123,7 @@ public struct AccountDetailContextMenu: View {
                     viewModel.relationship = try await client.post(endpoint: Accounts.follow(id: account.id,
                                                                                              notify: relationship.notifying,
                                                                                              reblogs: true))
-                  } catch {
-                    print("Error while enabling reboosts: \(error.localizedDescription)")
-                  }
+                  } catch { }
                 }
               } label: {
                 Label("account.action.reboosts-show", image: "Rocket")
@@ -143,7 +131,9 @@ public struct AccountDetailContextMenu: View {
             }
           }
 
-          Divider()
+            #if !targetEnvironment(macCatalyst)
+            Divider()
+            #endif
         }
 
         if let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier {
@@ -173,7 +163,9 @@ public struct AccountDetailContextMenu: View {
           }
         }
 
+        #if !targetEnvironment(macCatalyst)
         Divider()
+        #endif
       }
     }
   }

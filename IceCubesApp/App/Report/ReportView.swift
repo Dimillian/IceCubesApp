@@ -2,7 +2,7 @@ import DesignSystem
 import Env
 import Models
 import Network
-import Status
+import StatusKit
 import SwiftUI
 
 public struct ReportView: View {
@@ -35,9 +35,11 @@ public struct ReportView: View {
       }
       .navigationTitle("report.title")
       .navigationBarTitleDisplayMode(.inline)
+      #if !os(visionOS)
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
       .scrollDismissesKeyboard(.immediately)
+      #endif
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button {
@@ -63,13 +65,7 @@ public struct ReportView: View {
           }
         }
 
-        ToolbarItem(placement: .navigationBarLeading) {
-          Button {
-            dismiss()
-          } label: {
-            Text("action.cancel")
-          }
-        }
+        CancelToolbarItem()
       }
     }
   }

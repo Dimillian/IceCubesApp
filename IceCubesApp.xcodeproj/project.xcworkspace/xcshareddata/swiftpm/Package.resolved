@@ -10,12 +10,21 @@
       }
     },
     {
+      "identity" : "buttonkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Dean151/ButtonKit",
+      "state" : {
+        "revision" : "377f5bab4ed047704316d531e0826d4de5ebf6a4",
+        "version" : "0.1.1"
+      }
+    },
+    {
       "identity" : "emojitext",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/divadretlaw/EmojiText",
       "state" : {
-        "revision" : "4b08e28898ef3de175280d453ccb62d0a82beb7e",
-        "version" : "3.2.0"
+        "revision" : "c54000aa9ccc048619054a5a2da2ce0576ffea18",
+        "version" : "4.0.1"
       }
     },
     {
@@ -23,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Giphy/giphy-ios-sdk",
       "state" : {
-        "revision" : "95c32b862185e76107841b49bfff8ff7230f3b68",
-        "version" : "2.2.7"
+        "revision" : "9c58a350a3381f1641f5a31cdcd162a406274892",
+        "version" : "2.2.8"
       }
     },
     {
@@ -59,8 +68,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Nuke",
       "state" : {
-        "revision" : "1694798e876113d44f6ec6ead965d7286695981d",
-        "version" : "12.2.0"
+        "revision" : "15fde63470d782c897816a74bdd516a907e33147",
+        "version" : "12.3.0"
       }
     },
     {
@@ -68,8 +77,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RevenueCat/purchases-ios.git",
       "state" : {
-        "revision" : "cb3cc43b6181bc5f4482e35742448ee6ddc587e8",
-        "version" : "4.31.4"
+        "revision" : "b3597e0aa5e1193b04d9e1ff04eaf5cab3b8737d",
+        "version" : "4.34.0"
       }
     },
     {
@@ -91,6 +100,24 @@
       }
     },
     {
+      "identity" : "swift-cmark",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-cmark.git",
+      "state" : {
+        "revision" : "f218e5d7691f78b55bfa39b367763f4612486c35",
+        "version" : "0.3.0"
+      }
+    },
+    {
+      "identity" : "swift-markdown",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-markdown",
+      "state" : {
+        "revision" : "e4f95e2dc23097a1a9a1dfdfe3fe3ee44de77378",
+        "version" : "0.3.0"
+      }
+    },
+    {
       "identity" : "swiftsoup",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/scinfu/SwiftSoup.git",
@@ -106,15 +133,6 @@
       "state" : {
         "revision" : "9e1cc02a65b22e09a8251261cccbccce02731fc5",
         "version" : "1.1.1"
-      }
-    },
-    {
-      "identity" : "swiftui-shimmer",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/markiv/SwiftUI-Shimmer",
-      "state" : {
-        "revision" : "965a7cbcbf094cbcf22b9251a2323bdc3432e171",
-        "version" : "1.1.0"
       }
     }
   ],

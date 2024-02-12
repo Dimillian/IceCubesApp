@@ -12,6 +12,15 @@ public extension View {
 }
 
 @MainActor
+public extension ToolbarContent {
+  func statusEditorToolbarItem(routerPath _: RouterPath,
+                               visibility: Models.Visibility) -> some ToolbarContent
+  {
+    StatusEditorToolbarItem(visibility: visibility)
+  }
+}
+
+@MainActor
 public struct StatusEditorToolbarItem: ToolbarContent {
   @Environment(\.openWindow) private var openWindow
   @Environment(RouterPath.self) private var routerPath
@@ -26,12 +35,12 @@ public struct StatusEditorToolbarItem: ToolbarContent {
     ToolbarItem(placement: .navigationBarTrailing) {
       Button {
         Task { @MainActor in
-#if targetEnvironment(macCatalyst)
-          openWindow(value: WindowDestinationEditor.newStatusEditor(visibility: visibility))
-#else
-          routerPath.presentedSheet = .newStatusEditor(visibility: visibility)
-          HapticManager.shared.fireHaptic(.buttonPress)
-#endif
+          #if targetEnvironment(macCatalyst) || os(visionOS)
+            openWindow(value: WindowDestinationEditor.newStatusEditor(visibility: visibility))
+          #else
+            routerPath.presentedSheet = .newStatusEditor(visibility: visibility)
+            HapticManager.shared.fireHaptic(.buttonPress)
+          #endif
         }
       } label: {
         Image(systemName: "square.and.pencil")
@@ -41,6 +50,7 @@ public struct StatusEditorToolbarItem: ToolbarContent {
             LocalizedStringKey("accessibility.tabs.timeline.new-post.inputLabel1"),
             LocalizedStringKey("accessibility.tabs.timeline.new-post.inputLabel2"),
           ])
+          .offset(y: -2)
       }
     }
   }

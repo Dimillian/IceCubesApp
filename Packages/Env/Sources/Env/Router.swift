@@ -30,6 +30,8 @@ public enum WindowDestinationEditor: Hashable, Codable {
   case editStatusEditor(status: Status)
   case replyToStatusEditor(status: Status)
   case quoteStatusEditor(status: Status)
+  case mentionStatusEditor(account: Account, visibility: Models.Visibility)
+  case quoteLinkStatusEditor(link: URL)
 }
 
 public enum WindowDestinationMedia: Hashable, Codable {
@@ -41,6 +43,7 @@ public enum SheetDestination: Identifiable {
   case editStatusEditor(status: Status)
   case replyToStatusEditor(status: Status)
   case quoteStatusEditor(status: Status)
+  case quoteLinkStatusEditor(link: URL)
   case mentionStatusEditor(account: Account, visibility: Models.Visibility)
   case listCreate
   case listEdit(list: Models.List)
@@ -50,15 +53,18 @@ public enum SheetDestination: Identifiable {
   case addTagGroup
   case statusEditHistory(status: String)
   case settings
+  case about
+  case support
   case accountPushNotficationsSettings
   case report(status: Status)
   case shareImage(image: UIImage, status: Status)
   case editTagGroup(tagGroup: TagGroup, onSaved: ((TagGroup) -> Void)?)
+  case timelineContentFilter
 
   public var id: String {
     switch self {
     case .editStatusEditor, .newStatusEditor, .replyToStatusEditor, .quoteStatusEditor,
-         .mentionStatusEditor, .settings, .accountPushNotficationsSettings:
+        .mentionStatusEditor, .quoteLinkStatusEditor:
       "statusEditor"
     case .listCreate:
       "listCreate"
@@ -80,6 +86,10 @@ public enum SheetDestination: Identifiable {
       "shareImage"
     case .editTagGroup:
       "editTagGroup"
+    case .settings, .support, .about, .accountPushNotficationsSettings:
+      "settings"
+    case .timelineContentFilter:
+      "timelineContentFilter"
     }
   }
 }
@@ -136,7 +146,9 @@ public enum SheetDestination: Identifiable {
     {
       navigate(to: .hashTag(tag: tag, account: nil))
       return .handled
-    } else if url.lastPathComponent.first == "@", let host = url.host {
+    } else if url.lastPathComponent.first == "@",
+                let host = url.host,
+              !host.hasPrefix("www") {
       let acct = "\(url.lastPathComponent)@\(host)"
       Task {
         await navigateToAccountFrom(acct: acct, url: url)

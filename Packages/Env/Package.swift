@@ -8,6 +8,7 @@ let package = Package(
   defaultLocalization: "en",
   platforms: [
     .iOS(.v17),
+    .visionOS(.v1),
   ],
   products: [
     .library(
@@ -31,6 +32,10 @@ let package = Package(
       swiftSettings: [
         .enableExperimentalFeature("StrictConcurrency"),
       ]
+    ),
+    .testTarget(
+      name: "EnvTests",
+      dependencies: ["Env"]
     ),
   ]
 )

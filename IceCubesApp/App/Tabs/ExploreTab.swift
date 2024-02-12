@@ -4,7 +4,6 @@ import Env
 import Explore
 import Models
 import Network
-import Shimmer
 import SwiftUI
 
 @MainActor
@@ -22,18 +21,9 @@ struct ExploreTab: View {
       ExploreView(scrollToTopSignal: $scrollToTopSignal)
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
-        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
+        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
         .toolbar {
-          statusEditorToolbarItem(routerPath: routerPath,
-                                  visibility: preferences.postVisibility)
-          if UIDevice.current.userInterfaceIdiom != .pad {
-            ToolbarItem(placement: .navigationBarLeading) {
-              AppAccountsSelectorView(routerPath: routerPath)
-            }
-          }
-          if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn {
-            SecondaryColumnToolbarItem()
-          }
+          ToolbarTab(routerPath: $routerPath)
         }
     }
     .withSafariRouter()
