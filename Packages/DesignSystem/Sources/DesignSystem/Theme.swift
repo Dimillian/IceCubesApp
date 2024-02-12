@@ -167,12 +167,14 @@ import SwiftUI
   public var tintColor: Color {
     didSet {
       themeStorage.tintColor = tintColor
+      computeContrastingTintColor()
     }
   }
 
   public var primaryBackgroundColor: Color {
     didSet {
       themeStorage.primaryBackgroundColor = primaryBackgroundColor
+      computeContrastingTintColor()
     }
   }
 
@@ -185,6 +187,33 @@ import SwiftUI
   public var labelColor: Color {
     didSet {
       themeStorage.labelColor = labelColor
+      computeContrastingTintColor()
+    }
+  }
+
+  public private(set) var contrastingTintColor: Color
+
+  // set contrastingTintColor to either labelColor or primaryBackgroundColor, whichever contrasts
+  // better against the tintColor
+  private func computeContrastingTintColor() {
+    @Environment(\.self) var environment
+
+    func luminance(_ color: Color.Resolved) -> Float {
+      return 0.299 * color.red + 0.587 * color.green + 0.114 * color.blue;
+    }
+
+    let resolvedTintColor = tintColor.resolve(in: environment)
+    let resolvedLabelColor = labelColor.resolve(in: environment)
+    let resolvedPrimaryBackgroundColor = primaryBackgroundColor.resolve(in: environment)
+
+    let tintLuminance = luminance(resolvedTintColor)
+    let labelLuminance = luminance(resolvedLabelColor)
+    let primaryBackgroundLuminance = luminance(resolvedPrimaryBackgroundColor)
+
+    if abs(tintLuminance - labelLuminance) > abs(tintLuminance - primaryBackgroundLuminance) {
+      contrastingTintColor = labelColor
+    } else {
+      contrastingTintColor = primaryBackgroundColor
     }
   }
 
@@ -281,6 +310,7 @@ import SwiftUI
     primaryBackgroundColor = themeStorage.primaryBackgroundColor
     secondaryBackgroundColor = themeStorage.secondaryBackgroundColor
     labelColor = themeStorage.labelColor
+    contrastingTintColor = .red // real work done in computeContrastingTintColor()
     avatarPosition = themeStorage.avatarPosition
     avatarShape = themeStorage.avatarShape
     storedSet = themeStorage.storedSet
@@ -293,6 +323,8 @@ import SwiftUI
     chosenFontData = themeStorage.chosenFontData
     statusActionSecondary = themeStorage.statusActionSecondary
     selectedSet = storedSet
+
+    computeContrastingTintColor()
   }
 
   public static var allColorSet: [ColorSet] {
