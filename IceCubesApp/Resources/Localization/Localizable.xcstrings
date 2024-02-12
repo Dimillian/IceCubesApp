@@ -76693,8 +76693,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%lld people talking"
+            "state" : "translated",
+            "value" : "%lld 人議論中"
           }
         }
       }
