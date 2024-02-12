@@ -8575,8 +8575,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld new posts"
+                  "state" : "translated",
+                  "value" : "%lld new post"
                 }
               },
               "other" : {
@@ -11773,8 +11773,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld posts"
+                  "state" : "translated",
+                  "value" : "%lld post"
                 }
               },
               "other" : {
@@ -12126,8 +12126,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld fields"
+                  "state" : "translated",
+                  "value" : "%lld field"
                 }
               },
               "other" : {
@@ -68877,7 +68877,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld votes"
                 }
               },
@@ -71817,8 +71817,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld boosts"
+                  "state" : "translated",
+                  "value" : "%lld boost"
                 }
               },
               "other" : {
@@ -72170,8 +72170,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld favourites"
+                  "state" : "translated",
+                  "value" : "%lld favourite"
                 }
               },
               "other" : {
@@ -72523,8 +72523,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld replies"
+                  "state" : "translated",
+                  "value" : "%lld reply"
                 }
               },
               "other" : {
@@ -74646,8 +74646,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld mentions"
+                  "state" : "translated",
+                  "value" : "%lld mention"
                 }
               },
               "other" : {
@@ -77850,7 +77850,7 @@
         },
         "en-GB" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "%#@arg1@ recent posts from %#@arg2@ participants"
           },
           "substitutions" : {
@@ -77861,14 +77861,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg recent post"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg recent posts"
                     }
                   }
                 }
@@ -77881,14 +77881,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg participant"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg participants"
                     }
                   }
                 }
@@ -78868,7 +78868,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld people talking"
                 }
               },
