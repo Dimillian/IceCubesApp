@@ -225,13 +225,14 @@ public struct StatusRowCardView: View {
 
 struct DefaultPreviewImage: View {
   @Environment(Theme.self) private var theme
+  @Environment(SceneDelegate.self) private var sceneDelegate
   
   let url: URL
   let originalWidth: CGFloat
   let originalHeight: CGFloat
 
   var body: some View {
-    _Layout(originalWidth: originalWidth, originalHeight: originalHeight) {
+    _Layout(originalWidth: originalWidth, originalHeight: min(originalHeight, sceneDelegate.windowHeight * 0.6)) {
       LazyResizableImage(url: url) { state, _ in
         Rectangle()
           .fill(theme.secondaryBackgroundColor)
