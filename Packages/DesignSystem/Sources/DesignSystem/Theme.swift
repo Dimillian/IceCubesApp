@@ -196,15 +196,13 @@ import SwiftUI
   // set contrastingTintColor to either labelColor or primaryBackgroundColor, whichever contrasts
   // better against the tintColor
   private func computeContrastingTintColor() {
-    @Environment(\.self) var environment
-
     func luminance(_ color: Color.Resolved) -> Float {
       return 0.299 * color.red + 0.587 * color.green + 0.114 * color.blue;
     }
 
-    let resolvedTintColor = tintColor.resolve(in: environment)
-    let resolvedLabelColor = labelColor.resolve(in: environment)
-    let resolvedPrimaryBackgroundColor = primaryBackgroundColor.resolve(in: environment)
+    let resolvedTintColor = tintColor.resolve(in: .init())
+    let resolvedLabelColor = labelColor.resolve(in: .init())
+    let resolvedPrimaryBackgroundColor = primaryBackgroundColor.resolve(in: .init())
 
     let tintLuminance = luminance(resolvedTintColor)
     let labelLuminance = luminance(resolvedLabelColor)
