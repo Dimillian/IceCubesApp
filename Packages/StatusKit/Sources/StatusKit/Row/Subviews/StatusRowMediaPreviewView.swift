@@ -212,7 +212,7 @@ struct BlurOverLay: View {
                   .matchedGeometryEffect(id: "eye", in: buttonSpace)
               }
               .lineLimit(1)
-              .foregroundColor(theme.labelColor)
+              .foregroundColor(theme.contrastingTintColor)
             } else {
               Image(systemName: "eye.slash")
                 .transition(.opacity)
