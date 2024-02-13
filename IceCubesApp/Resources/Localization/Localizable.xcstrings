@@ -8539,7 +8539,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld neuer Beitrag"
                 }
               },
@@ -11737,7 +11737,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld Beitrag"
                 }
               },
@@ -12090,7 +12090,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld Feld"
                 }
               },
@@ -68841,7 +68841,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld Stimme"
                 }
               },
@@ -71781,7 +71781,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld Boost"
                 }
               },
@@ -72134,7 +72134,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld Favorit"
                 }
               },
@@ -72487,7 +72487,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld Antwort"
                 }
               },
@@ -74610,7 +74610,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld Erwähnung"
                 }
               },
@@ -77410,8 +77410,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Zum Neuesten springen"
+            "state" : "translated",
+            "value" : "Aktualisieren"
           }
         },
         "en" : {
@@ -77756,7 +77756,7 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "%#@count_posts@ von %#@count_participants@"
           },
           "substitutions" : {
@@ -77766,13 +77766,13 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg Teilnehmenden"
+                      "state" : "translated",
+                      "value" : "%arg Teilnehmendem"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
+                      "state" : "translated",
                       "value" : "%arg Teilnehmenden"
                     }
                   }
@@ -77785,13 +77785,13 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
+                      "state" : "translated",
                       "value" : "%arg aktueller Beitrag"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
+                      "state" : "translated",
                       "value" : "%arg aktuelle Beiträge"
                     }
                   }
@@ -78832,14 +78832,14 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld people talking"
+                  "state" : "translated",
+                  "value" : "%lld Person redet"
                 }
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld people talking"
+                  "state" : "translated",
+                  "value" : "%lld Personen reden"
                 }
               }
             }
