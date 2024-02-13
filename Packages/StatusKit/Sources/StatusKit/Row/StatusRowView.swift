@@ -329,3 +329,31 @@ public struct StatusRowView: View {
   }
 }
 
+#Preview {
+  List {
+    StatusRowView(viewModel:
+        .init(status: .placeholder(),
+              client: .init(server: ""),
+              routerPath: RouterPath()),
+                  context: .timeline)
+    StatusRowView(viewModel:
+        .init(status: .placeholder(),
+              client: .init(server: ""),
+              routerPath: RouterPath()),
+                  context: .timeline)
+    StatusRowView(viewModel:
+        .init(status: .placeholder(),
+              client: .init(server: ""),
+              routerPath: RouterPath()),
+                  context: .timeline)
+  }.listStyle(.plain)
+    .environment(RouterPath())
+    .environment(Client(server: ""))
+    .environment(CurrentAccount.shared)
+    .environment(UserPreferences.shared)
+    .environment(CurrentInstance.shared)
+    .environment(Theme.shared)
+    .environment(PushNotificationsService.shared)
+    .environment(QuickLook.shared)
+}
+
