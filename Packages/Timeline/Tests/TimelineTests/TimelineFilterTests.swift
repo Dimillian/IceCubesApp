@@ -1,8 +1,7 @@
+import Models
+import Network
 @testable import Timeline
 import XCTest
-import Network
-import Models
-
 
 final class TimelineFilterTests: XCTestCase {
   func testCodableHome() throws {
@@ -15,7 +14,7 @@ final class TimelineFilterTests: XCTestCase {
     XCTAssertTrue(try testCodableOn(filter: .hashtag(tag: "test", accountId: nil)))
     XCTAssertTrue(try testCodableOn(filter: .list(list: .init(id: "test", title: "test"))))
   }
-  
+
   private func testCodableOn(filter: TimelineFilter) throws -> Bool {
     let encoder = JSONEncoder()
     let decoder = JSONDecoder()

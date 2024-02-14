@@ -116,8 +116,8 @@ struct AccountSettingsView: View {
     }
     .navigationTitle(account.safeDisplayName)
     #if !os(visionOS)
-    .scrollContentBackground(.hidden)
-    .background(theme.secondaryBackgroundColor)
+      .scrollContentBackground(.hidden)
+      .background(theme.secondaryBackgroundColor)
     #endif
   }
 }

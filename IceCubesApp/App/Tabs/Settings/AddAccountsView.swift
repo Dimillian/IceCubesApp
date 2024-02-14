@@ -82,75 +82,75 @@ struct AddAccountView: View {
       .navigationTitle("account.add.navigation-title")
       .navigationBarTitleDisplayMode(.inline)
       #if !os(visionOS)
-      .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
-      .scrollDismissesKeyboard(.immediately)
+        .scrollContentBackground(.hidden)
+        .background(theme.secondaryBackgroundColor)
+        .scrollDismissesKeyboard(.immediately)
       #endif
-      .toolbar {
-        if !appAccountsManager.availableAccounts.isEmpty {
-          CancelToolbarItem()
-        }
-      }
-      .onAppear {
-        isInstanceURLFieldFocused = true
-        Task {
-          let instances = await instanceSocialClient.fetchInstances(keyword: instanceName)
-          withAnimation {
-            self.instances = instances
+        .toolbar {
+          if !appAccountsManager.availableAccounts.isEmpty {
+            CancelToolbarItem()
           }
         }
-        isSigninIn = false
-      }
-      .onChange(of: instanceName) {
-        searchingTask.cancel()
-        searchingTask = Task {
-          try? await Task.sleep(for: .seconds(0.1))
-          guard !Task.isCancelled else { return }
-
-          let instances = await instanceSocialClient.fetchInstances(keyword: instanceName)
-          withAnimation {
-            self.instances = instances
-          }
-        }
-
-        getInstanceDetailTask.cancel()
-        getInstanceDetailTask = Task {
-          try? await Task.sleep(for: .seconds(0.1))
-          guard !Task.isCancelled else { return }
-
-          do {
-            // bare bones preflight for domain validity
-            let instanceDetailClient = Client(server: sanitizedName)
-            if
-              instanceDetailClient.server.contains("."),
-              instanceDetailClient.server.last != "."
-            {
-              let instance: Instance = try await instanceDetailClient.get(endpoint: Instances.instance)
-              withAnimation {
-                self.instance = instance
-                instanceName = sanitizedName // clean up the text box, principally to chop off the username if present so it's clear that you might not wind up siging in as the thing in the box
-              }
-              instanceFetchError = nil
-            } else {
-              instance = nil
-              instanceFetchError = nil
+        .onAppear {
+          isInstanceURLFieldFocused = true
+          Task {
+            let instances = await instanceSocialClient.fetchInstances(keyword: instanceName)
+            withAnimation {
+              self.instances = instances
             }
-          } catch _ as DecodingError {
-            instance = nil
-            instanceFetchError = "account.add.error.instance-not-supported"
-          } catch {
-            instance = nil
+          }
+          isSigninIn = false
+        }
+        .onChange(of: instanceName) {
+          searchingTask.cancel()
+          searchingTask = Task {
+            try? await Task.sleep(for: .seconds(0.1))
+            guard !Task.isCancelled else { return }
+
+            let instances = await instanceSocialClient.fetchInstances(keyword: instanceName)
+            withAnimation {
+              self.instances = instances
+            }
+          }
+
+          getInstanceDetailTask.cancel()
+          getInstanceDetailTask = Task {
+            try? await Task.sleep(for: .seconds(0.1))
+            guard !Task.isCancelled else { return }
+
+            do {
+              // bare bones preflight for domain validity
+              let instanceDetailClient = Client(server: sanitizedName)
+              if
+                instanceDetailClient.server.contains("."),
+                instanceDetailClient.server.last != "."
+              {
+                let instance: Instance = try await instanceDetailClient.get(endpoint: Instances.instance)
+                withAnimation {
+                  self.instance = instance
+                  instanceName = sanitizedName // clean up the text box, principally to chop off the username if present so it's clear that you might not wind up siging in as the thing in the box
+                }
+                instanceFetchError = nil
+              } else {
+                instance = nil
+                instanceFetchError = nil
+              }
+            } catch _ as DecodingError {
+              instance = nil
+              instanceFetchError = "account.add.error.instance-not-supported"
+            } catch {
+              instance = nil
+            }
           }
         }
-      }
-      .onChange(of: scenePhase) { _, newValue in
-        switch newValue {
-        case .active:
-          isSigninIn = false
-        default:
-          break
+        .onChange(of: scenePhase) { _, newValue in
+          switch newValue {
+          case .active:
+            isSigninIn = false
+          default:
+            break
+          }
         }
-      }
     }
   }
 
@@ -214,9 +214,9 @@ struct AddAccountView: View {
                     .foregroundColor(.primary)
                   Spacer()
                   (Text("instance.list.users-\(formatAsNumber(instance.users))")
-                   + Text("  ⸱  ")
-                   + Text("instance.list.posts-\(formatAsNumber(instance.statuses))"))
-                  .foregroundStyle(theme.tintColor)
+                    + Text("  ⸱  ")
+                    + Text("instance.list.posts-\(formatAsNumber(instance.statuses))"))
+                    .foregroundStyle(theme.tintColor)
                 }
                 .padding(.bottom, 5)
                 Text(instance.info?.shortDescription?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "")
@@ -263,7 +263,7 @@ struct AddAccountView: View {
     .redacted(reason: .placeholder)
     .allowsHitTesting(false)
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 

@@ -27,11 +27,11 @@ import OSLog
   public var events: [any StreamEvent] = []
   public var unreadNotificationsCount: Int = 0
   public var latestEvent: (any StreamEvent)?
-  
+
   private let logger = Logger(subsystem: "com.icecubesapp", category: "stream")
 
   public static let shared = StreamWatcher()
-  
+
   private init() {
     decoder.keyDecodingStrategy = .convertFromSnakeCase
   }
@@ -65,7 +65,7 @@ import OSLog
       connect()
     }
     watchedStreams = streams
-    streams.forEach { stream in
+    for stream in streams {
       sendMessage(message: StreamMessage(type: "subscribe", stream: stream.rawValue))
     }
   }
@@ -156,22 +156,22 @@ import OSLog
       return nil
     }
   }
-  
+
   public func emmitDeleteEvent(for status: String) {
     let event = StreamEventDelete(status: status)
-    self.events.append(event)
-    self.latestEvent = event
+    events.append(event)
+    latestEvent = event
   }
-  
+
   public func emmitEditEvent(for status: Status) {
     let event = StreamEventStatusUpdate(status: status)
-    self.events.append(event)
-    self.latestEvent = event
+    events.append(event)
+    latestEvent = event
   }
-  
+
   public func emmitPostEvent(for status: Status) {
     let event = StreamEventUpdate(status: status)
-    self.events.append(event)
-    self.latestEvent = event
+    events.append(event)
+    latestEvent = event
   }
 }

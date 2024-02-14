@@ -3,8 +3,8 @@ import Foundation
 import Models
 import Observation
 import os
-import SwiftUI
 import OSLog
+import SwiftUI
 
 @Observable public final class Client: Equatable, Identifiable, Hashable, @unchecked Sendable {
   public static func == (lhs: Client, rhs: Client) -> Bool {
@@ -44,7 +44,7 @@ import OSLog
   public let version: Version
   private let urlSession: URLSession
   private let decoder = JSONDecoder()
-  
+
   private let logger = Logger(subsystem: "com.icecubesapp", category: "networking")
 
   // Putting all mutable state inside an `OSAllocatedUnfairLock` makes `Client`
@@ -263,7 +263,7 @@ import OSLog
       throw error
     }
   }
-  
+
   public func mediaUpload(endpoint: Endpoint,
                           version: Version,
                           method: String,
@@ -280,13 +280,14 @@ import OSLog
     let (_, httpResponse) = try await urlSession.data(for: request)
     return httpResponse as? HTTPURLResponse
   }
-  
+
   private func makeFormDataRequest(endpoint: Endpoint,
                                    version: Version,
                                    method: String,
                                    mimeType: String,
                                    filename: String,
-                                   data: Data) throws -> URLRequest {
+                                   data: Data) throws -> URLRequest
+  {
     let url = try makeURL(endpoint: endpoint, forceVersion: version)
     var request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: method)
     let boundary = UUID().uuidString

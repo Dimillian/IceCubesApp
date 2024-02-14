@@ -6,7 +6,7 @@ import SwiftUI
 struct TabbarEntriesSettingsView: View {
   @Environment(Theme.self) private var theme
   @Environment(UserPreferences.self) private var userPreferences
-  
+
   @State private var tabs = iOSTabs.shared
 
   var body: some View {
@@ -42,7 +42,7 @@ struct TabbarEntriesSettingsView: View {
       #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
       #endif
-      
+
       Section {
         Toggle("settings.display.show-tab-label", isOn: $userPreferences.showiPhoneTabLabel)
       }
@@ -52,8 +52,8 @@ struct TabbarEntriesSettingsView: View {
     }
     .navigationTitle("settings.general.tabbarEntries")
     #if !os(visionOS)
-    .scrollContentBackground(.hidden)
-    .background(theme.secondaryBackgroundColor)
+      .scrollContentBackground(.hidden)
+      .background(theme.secondaryBackgroundColor)
     #endif
   }
 }

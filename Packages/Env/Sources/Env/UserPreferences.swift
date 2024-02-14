@@ -53,7 +53,7 @@ import SwiftUI
     @AppStorage("collapse-long-posts") public var collapseLongPosts = true
 
     @AppStorage("share-button-behavior") public var shareButtonBehavior: PreferredShareButtonBehavior = .linkOnly
-    
+
     @AppStorage("fast_refresh") public var fastRefreshEnabled: Bool = false
 
     @AppStorage("max_reply_indentation") public var maxReplyIndentation: UInt = 7
@@ -164,7 +164,7 @@ import SwiftUI
       storage.appDefaultPostsSensitive = appDefaultPostsSensitive
     }
   }
-    
+
   public var appRequireAltText: Bool {
     didSet {
       storage.appRequireAltText = appRequireAltText
@@ -183,7 +183,6 @@ import SwiftUI
     }
   }
 
-  
   public var alwaysUseDeepl: Bool {
     didSet {
       storage.alwaysUseDeepl = alwaysUseDeepl
@@ -303,7 +302,7 @@ import SwiftUI
       storage.shareButtonBehavior = shareButtonBehavior
     }
   }
-  
+
   public var fastRefreshEnabled: Bool {
     didSet {
       storage.fastRefreshEnabled = fastRefreshEnabled
@@ -415,7 +414,7 @@ import SwiftUI
   }
 
   public var totalNotificationsCount: Int {
-    notificationsCount.compactMap{ $0.value }.reduce(0, +)
+    notificationsCount.compactMap { $0.value }.reduce(0, +)
   }
 
   public func reloadNotificationsCount(tokens: [OauthToken]) {
@@ -509,7 +508,7 @@ extension UInt: RawRepresentable {
   public var rawValue: Int {
     Int(self)
   }
-  
+
   public init?(rawValue: Int) {
     if rawValue >= 0 {
       self.init(rawValue)

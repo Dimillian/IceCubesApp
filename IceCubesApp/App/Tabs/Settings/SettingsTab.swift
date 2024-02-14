@@ -43,27 +43,27 @@ struct SettingsTabs: View {
       }
       .scrollContentBackground(.hidden)
       #if !os(visionOS)
-      .background(theme.secondaryBackgroundColor)
+        .background(theme.secondaryBackgroundColor)
       #endif
-      .navigationTitle(Text("settings.title"))
-      .navigationBarTitleDisplayMode(.inline)
-      .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
-      .toolbar {
-        if isModal {
-          ToolbarItem {
-            Button {
-              dismiss()
-            } label: {
-              Text("action.done").bold()
+        .navigationTitle(Text("settings.title"))
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
+        .toolbar {
+          if isModal {
+            ToolbarItem {
+              Button {
+                dismiss()
+              } label: {
+                Text("action.done").bold()
+              }
             }
           }
+          if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn, !isModal {
+            SecondaryColumnToolbarItem()
+          }
         }
-        if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn, !isModal {
-          SecondaryColumnToolbarItem()
-        }
-      }
-      .withAppRouter()
-      .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
+        .withAppRouter()
+        .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
     }
     .onAppear {
       routerPath.client = client

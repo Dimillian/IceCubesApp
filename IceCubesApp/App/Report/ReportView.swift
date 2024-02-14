@@ -36,37 +36,37 @@ public struct ReportView: View {
       .navigationTitle("report.title")
       .navigationBarTitleDisplayMode(.inline)
       #if !os(visionOS)
-      .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
-      .scrollDismissesKeyboard(.immediately)
+        .scrollContentBackground(.hidden)
+        .background(theme.secondaryBackgroundColor)
+        .scrollDismissesKeyboard(.immediately)
       #endif
-      .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button {
-            isSendingReport = true
-            Task {
-              do {
-                let _: ReportSent =
-                  try await client.post(endpoint: Statuses.report(accountId: status.account.id,
-                                                                  statusId: status.id,
-                                                                  comment: commentText))
-                dismiss()
-                isSendingReport = false
-              } catch {
-                isSendingReport = false
+        .toolbar {
+          ToolbarItem(placement: .navigationBarTrailing) {
+            Button {
+              isSendingReport = true
+              Task {
+                do {
+                  let _: ReportSent =
+                    try await client.post(endpoint: Statuses.report(accountId: status.account.id,
+                                                                    statusId: status.id,
+                                                                    comment: commentText))
+                  dismiss()
+                  isSendingReport = false
+                } catch {
+                  isSendingReport = false
+                }
+              }
+            } label: {
+              if isSendingReport {
+                ProgressView()
+              } else {
+                Text("report.action.send")
               }
             }
-          } label: {
-            if isSendingReport {
-              ProgressView()
-            } else {
-              Text("report.action.send")
-            }
           }
-        }
 
-        CancelToolbarItem()
-      }
+          CancelToolbarItem()
+        }
     }
   }
 }

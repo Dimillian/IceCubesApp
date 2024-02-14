@@ -1,6 +1,6 @@
-import SwiftUI
-import NukeUI
 import Nuke
+import NukeUI
+import SwiftUI
 
 struct QuickLookToolbarItem: ToolbarContent, @unchecked Sendable {
   let itemUrl: URL

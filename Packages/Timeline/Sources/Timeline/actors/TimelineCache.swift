@@ -16,7 +16,7 @@ public actor TimelineCache {
   private let encoder = JSONEncoder()
 
   public init() {}
-  
+
   public func cachedPostsCount(for client: String) async -> Int {
     do {
       let directory = FileManager.Directory.defaultStorageDirectory(appendingPath: client).url
@@ -32,7 +32,7 @@ public actor TimelineCache {
       return 0
     }
   }
-  
+
   public func clearCache(for client: String) async {
     let directory = FileManager.Directory.defaultStorageDirectory(appendingPath: client)
     try? FileManager.default.removeItem(at: directory.url)
@@ -73,9 +73,9 @@ public actor TimelineCache {
   func setLatestSeenStatuses(_ statuses: [Status], for client: Client, filter: String) {
     let statuses = statuses.sorted(by: { $0.createdAt.asDate > $1.createdAt.asDate })
     if filter == "Home" {
-      UserDefaults.standard.set(statuses.map{ $0.id }, forKey: "timeline-last-seen-\(client.id)")
+      UserDefaults.standard.set(statuses.map { $0.id }, forKey: "timeline-last-seen-\(client.id)")
     } else {
-      UserDefaults.standard.set(statuses.map{ $0.id }, forKey: "timeline-last-seen-\(client.id)-\(filter)")
+      UserDefaults.standard.set(statuses.map { $0.id }, forKey: "timeline-last-seen-\(client.id)-\(filter)")
     }
   }
 

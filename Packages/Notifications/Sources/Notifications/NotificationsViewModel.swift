@@ -96,7 +96,7 @@ import SwiftUI
         newNotifications = newNotifications.filter { notification in
           !consolidatedNotifications.contains(where: { $0.id == notification.id })
         }
-        
+
         await consolidatedNotifications.insert(
           contentsOf: newNotifications.consolidated(selectedType: selectedType),
           at: 0
@@ -108,7 +108,7 @@ import SwiftUI
       }
 
       markAsRead()
-      
+
       withAnimation {
         state = .display(notifications: consolidatedNotifications,
                          nextPageState: consolidatedNotifications.isEmpty ? .none : nextPageState)
@@ -158,13 +158,13 @@ import SwiftUI
     state = .display(notifications: consolidatedNotifications,
                      nextPageState: newNotifications.count < Constants.notificationLimit ? .none : .hasNextPage)
   }
-  
+
   func markAsRead() {
     guard let client, let id = consolidatedNotifications.first?.notifications.first?.id else { return }
     Task {
       do {
         let _: Marker = try await client.post(endpoint: Markers.markNotifications(lastReadId: id))
-      } catch { }
+      } catch {}
     }
   }
 

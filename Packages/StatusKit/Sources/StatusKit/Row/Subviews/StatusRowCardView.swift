@@ -1,9 +1,9 @@
 import DesignSystem
+import Env
 import Models
 import Nuke
 import NukeUI
 import SwiftUI
-import Env
 
 @MainActor
 public struct StatusRowCardView: View {
@@ -53,10 +53,11 @@ public struct StatusRowCardView: View {
           let sitesWithIcons = ["apps.apple.com", "music.apple.com", "podcasts.apple.com", "open.spotify.com"]
           if isCompact {
             compactLinkPreview(title, url)
-          } else if (UIDevice.current.userInterfaceIdiom == .pad ||
-              UIDevice.current.userInterfaceIdiom == .mac ||
-              UIDevice.current.userInterfaceIdiom == .vision),
-             let host = url.host(), sitesWithIcons.contains(host) {
+          } else if UIDevice.current.userInterfaceIdiom == .pad ||
+            UIDevice.current.userInterfaceIdiom == .mac ||
+            UIDevice.current.userInterfaceIdiom == .vision,
+            let host = url.host(), sitesWithIcons.contains(host)
+          {
             iconLinkPreview(title, url)
           } else {
             defaultLinkPreview(title, url)
@@ -65,37 +66,37 @@ public struct StatusRowCardView: View {
         .frame(maxWidth: maxWidth)
         .fixedSize(horizontal: false, vertical: true)
         #if os(visionOS)
-        .if(!isCompact, transform: { view in
-          view.background(.background)
-        })
-        .hoverEffect()
+          .if(!isCompact, transform: { view in
+            view.background(.background)
+          })
+          .hoverEffect()
         #else
-        .background(isCompact ? .clear : theme.secondaryBackgroundColor)
+          .background(isCompact ? .clear : theme.secondaryBackgroundColor)
         #endif
-        .cornerRadius(isCompact ? 0 : 10)
-        .overlay {
-          if !isCompact {
-            RoundedRectangle(cornerRadius: 10)
-              .stroke(.gray.opacity(0.35), lineWidth: 1)
+          .cornerRadius(isCompact ? 0 : 10)
+          .overlay {
+            if !isCompact {
+              RoundedRectangle(cornerRadius: 10)
+                .stroke(.gray.opacity(0.35), lineWidth: 1)
+            }
           }
-        }
-        .contextMenu {
-          ShareLink(item: url) {
-            Label("status.card.share", systemImage: "square.and.arrow.up")
+          .contextMenu {
+            ShareLink(item: url) {
+              Label("status.card.share", systemImage: "square.and.arrow.up")
+            }
+            Button { openURL(url) } label: {
+              Label("status.action.view-in-browser", systemImage: "safari")
+            }
+            Divider()
+            Button {
+              UIPasteboard.general.url = url
+            } label: {
+              Label("status.card.copy", systemImage: "doc.on.doc")
+            }
           }
-          Button { openURL(url) } label: {
-            Label("status.action.view-in-browser", systemImage: "safari")
-          }
-          Divider()
-          Button {
-            UIPasteboard.general.url = url
-          } label: {
-            Label("status.card.copy", systemImage: "doc.on.doc")
-          }
-        }
-        .accessibilityElement(children: .combine)
-        .accessibilityAddTraits(.isLink)
-        .accessibilityRemoveTraits(.isStaticText)
+          .accessibilityElement(children: .combine)
+          .accessibilityAddTraits(.isLink)
+          .accessibilityRemoveTraits(.isStaticText)
       }
     }
     .buttonStyle(.plain)
@@ -125,7 +126,7 @@ public struct StatusRowCardView: View {
     .frame(maxWidth: .infinity, alignment: .leading)
     .padding(10)
   }
-  
+
   private func compactLinkPreview(_ title: String, _ url: URL) -> some View {
     HStack(alignment: .top) {
       if let imageURL = card.image, !isInCaptureMode {
@@ -156,16 +157,16 @@ public struct StatusRowCardView: View {
           .foregroundColor(theme.tintColor)
           .lineLimit(1)
         if let history = card.history {
-          let uses = history.compactMap{ Int($0.accounts )}.reduce(0, +)
+          let uses = history.compactMap { Int($0.accounts) }.reduce(0, +)
           HStack(spacing: 4) {
             Image(systemName: "bubble.left.and.text.bubble.right")
             Text("trending-tag-people-talking \(uses)")
             Spacer()
             Button {
               #if targetEnvironment(macCatalyst)
-              openWindow(value: WindowDestinationEditor.quoteLinkStatusEditor(link: url))
+                openWindow(value: WindowDestinationEditor.quoteLinkStatusEditor(link: url))
               #else
-              routerPath.presentedSheet = .quoteLinkStatusEditor(link: url)
+                routerPath.presentedSheet = .quoteLinkStatusEditor(link: url)
               #endif
             } label: {
               Image(systemName: "quote.opening")
@@ -225,7 +226,7 @@ public struct StatusRowCardView: View {
 
 struct DefaultPreviewImage: View {
   @Environment(Theme.self) private var theme
-  
+
   let url: URL
   let originalWidth: CGFloat
   let originalHeight: CGFloat
@@ -250,12 +251,12 @@ struct DefaultPreviewImage: View {
     let originalWidth: CGFloat
     let originalHeight: CGFloat
 
-    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache _: inout ()) -> CGSize {
       guard !subviews.isEmpty else { return CGSize.zero }
       return calculateSize(proposal)
     }
 
-    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache _: inout ()) {
       guard let view = subviews.first else { return }
 
       let size = calculateSize(proposal)

@@ -17,12 +17,12 @@ struct SideBarView<Content: View>: View {
   @Environment(StreamWatcher.self) private var watcher
   @Environment(UserPreferences.self) private var userPreferences
   @Environment(RouterPath.self) private var routerPath
-  
+
   @Binding var selectedTab: Tab
   @Binding var popToRootTab: Tab
   var tabs: [Tab]
   @ViewBuilder var content: () -> Content
-  
+
   @State private var sidebarTabs = SidebarTabs.shared
 
   private func badgeFor(tab: Tab) -> Int {
@@ -166,7 +166,7 @@ struct SideBarView<Content: View>: View {
           .frame(width: .sidebarWidth)
           .background(.thinMaterial)
         })
-          Divider().edgesIgnoringSafeArea(.all)
+        Divider().edgesIgnoringSafeArea(.all)
       }
       content()
     }

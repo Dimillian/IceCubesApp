@@ -1,15 +1,15 @@
-import SwiftUI
-import Models
 import DesignSystem
 import Env
+import Models
+import SwiftUI
 
 struct TimelineTagHeaderView: View {
   @Environment(CurrentAccount.self) private var account
-  
+
   @Binding var tag: Tag?
-  
+
   @State var isLoading: Bool = false
-  
+
   var body: some View {
     if let tag {
       TimelineHeaderView {

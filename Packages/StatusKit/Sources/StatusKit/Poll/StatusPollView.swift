@@ -78,7 +78,7 @@ public struct StatusPollView: View {
             // Make sure they're all the same width using a ZStack with 100% hiding behind the
             // real percentage.
             Text("100%").hidden().overlay(alignment: .trailing) {
-              Text("\(absolutePercent(for:option.votesCount ?? 0))%")
+              Text("\(absolutePercent(for: option.votesCount ?? 0))%")
                 .font(.scaledSubheadline)
             }
           }
@@ -119,9 +119,9 @@ public struct StatusPollView: View {
   func combinedAccessibilityLabel(for option: Poll.Option, index: Int) -> Text {
     let showPercentage = viewModel.poll.expired || viewModel.poll.voted ?? false
     return Text("accessibility.status.poll.option-prefix-\(index + 1)-of-\(viewModel.poll.options.count)") +
-    Text(", ") +
-    Text(option.title) +
-    Text(showPercentage ? ", \(absolutePercent(for:option.votesCount ?? 0))%" : "")
+      Text(", ") +
+      Text(option.title) +
+      Text(showPercentage ? ", \(absolutePercent(for: option.votesCount ?? 0))%" : "")
   }
 
   private var footerView: some View {
@@ -188,19 +188,20 @@ public struct StatusPollView: View {
   private struct _PercentWidthLayout: Layout {
     let percent: CGFloat
 
-    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache _: inout ()) -> CGSize {
       guard let view = subviews.first else { return CGSize.zero }
       return view.sizeThatFits(proposal)
     }
 
-    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache _: inout ()) {
       guard let view = subviews.first,
             let width = proposal.width
       else { return }
 
       view.place(
         at: bounds.origin,
-        proposal: ProposedViewSize(width: percent / 100 * width, height: proposal.height))
+        proposal: ProposedViewSize(width: percent / 100 * width, height: proposal.height)
+      )
     }
   }
 }

@@ -1,11 +1,11 @@
-import SwiftUI
 import DesignSystem
+import SwiftUI
 
 struct TimelineHeaderView<Content: View>: View {
   @Environment(Theme.self) private var theme
-  
+
   var content: () -> Content
-  
+
   var body: some View {
     VStack(alignment: .leading) {
       Spacer()

@@ -69,10 +69,10 @@ import SwiftUI
       }
     }
   }
-  
+
   public enum StatusActionSecondary: String, CaseIterable {
     case share, bookmark
-    
+
     public var description: LocalizedStringKey {
       switch self {
       case .share:
@@ -197,7 +197,7 @@ import SwiftUI
   // better against the tintColor
   private func computeContrastingTintColor() {
     func luminance(_ color: Color.Resolved) -> Float {
-      return 0.299 * color.red + 0.587 * color.green + 0.114 * color.blue;
+      return 0.299 * color.red + 0.587 * color.green + 0.114 * color.blue
     }
 
     let resolvedTintColor = tintColor.resolve(in: .init())
@@ -244,7 +244,7 @@ import SwiftUI
       themeStorage.statusDisplayStyle = statusDisplayStyle
     }
   }
-  
+
   public var statusActionSecondary: StatusActionSecondary {
     didSet {
       themeStorage.statusActionSecondary = statusActionSecondary
@@ -300,7 +300,7 @@ import SwiftUI
     chosenFontData = nil
     statusActionSecondary = .share
   }
-  
+
   private init() {
     isThemePreviouslySet = themeStorage.isThemePreviouslySet
     selectedScheme = themeStorage.selectedScheme
@@ -340,7 +340,7 @@ import SwiftUI
       ConstellationLight(),
       ConstellationDark(),
       ThreadsLight(),
-      ThreadsDark()
+      ThreadsDark(),
     ]
   }
 

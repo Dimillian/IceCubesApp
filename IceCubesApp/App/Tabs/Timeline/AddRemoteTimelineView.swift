@@ -52,29 +52,29 @@ struct AddRemoteTimelineView: View {
       .navigationTitle("timeline.add-remote.title")
       .navigationBarTitleDisplayMode(.inline)
       #if !os(visionOS)
-      .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
-      .scrollDismissesKeyboard(.immediately)
+        .scrollContentBackground(.hidden)
+        .background(theme.secondaryBackgroundColor)
+        .scrollDismissesKeyboard(.immediately)
       #endif
-      .toolbar {
-        CancelToolbarItem()
-      }
-      .onChange(of: instanceName) { _, newValue in
-        instanceNamePublisher.send(newValue)
-      }
-      .onReceive(instanceNamePublisher.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)) { newValue in
-        Task {
-          let client = Client(server: newValue)
-          instance = try? await client.get(endpoint: Instances.instance)
+        .toolbar {
+          CancelToolbarItem()
         }
-      }
-      .onAppear {
-        isInstanceURLFieldFocused = true
-        let client = InstanceSocialClient()
-        Task {
-          instances = await client.fetchInstances(keyword: instanceName)
+        .onChange(of: instanceName) { _, newValue in
+          instanceNamePublisher.send(newValue)
         }
-      }
+        .onReceive(instanceNamePublisher.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)) { newValue in
+          Task {
+            let client = Client(server: newValue)
+            instance = try? await client.get(endpoint: Instances.instance)
+          }
+        }
+        .onAppear {
+          isInstanceURLFieldFocused = true
+          let client = InstanceSocialClient()
+          Task {
+            instances = await client.fetchInstances(keyword: instanceName)
+          }
+        }
     }
   }
 

@@ -1,17 +1,17 @@
-import SwiftUI
-import SwiftData
-import Models
-import Env
 import DesignSystem
+import Env
+import Models
+import SwiftData
+import SwiftUI
 
 struct RecenTagsSettingView: View {
   @Environment(\.modelContext) private var context
-  
+
   @Environment(RouterPath.self) private var routerPath
   @Environment(Theme.self) private var theme
-  
+
   @Query(sort: \RecentTag.lastUse, order: .reverse) var tags: [RecentTag]
-  
+
   var body: some View {
     Form {
       ForEach(tags) { tag in
@@ -35,10 +35,10 @@ struct RecenTagsSettingView: View {
     .navigationTitle("settings.general.recent-tags")
     .scrollContentBackground(.hidden)
     #if !os(visionOS)
-    .background(theme.secondaryBackgroundColor)
+      .background(theme.secondaryBackgroundColor)
     #endif
-    .toolbar {
-      EditButton()
-    }
+      .toolbar {
+        EditButton()
+      }
   }
 }

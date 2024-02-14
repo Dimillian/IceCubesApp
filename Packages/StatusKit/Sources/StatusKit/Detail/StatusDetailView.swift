@@ -54,15 +54,15 @@ public struct StatusDetailView: View {
               loadingContextView
             }
 
-          #if !os(visionOS)
-            Rectangle()
-              .foregroundColor(theme.secondaryBackgroundColor)
-              .frame(minHeight: reader.frame(in: .local).size.height - statusHeight)
-              .listRowSeparator(.hidden)
-              .listRowBackground(theme.secondaryBackgroundColor)
-              .listRowInsets(.init())
-              .accessibilityHidden(true)
-          #endif
+            #if !os(visionOS)
+              Rectangle()
+                .foregroundColor(theme.secondaryBackgroundColor)
+                .frame(minHeight: reader.frame(in: .local).size.height - statusHeight)
+                .listRowSeparator(.hidden)
+                .listRowBackground(theme.secondaryBackgroundColor)
+                .listRowInsets(.init())
+                .accessibilityHidden(true)
+            #endif
 
           case .error:
             errorView
@@ -71,33 +71,33 @@ public struct StatusDetailView: View {
         .environment(\.defaultMinListRowHeight, 1)
         .listStyle(.plain)
         #if !os(visionOS)
-        .scrollContentBackground(.hidden)
-        .background(theme.primaryBackgroundColor)
+          .scrollContentBackground(.hidden)
+          .background(theme.primaryBackgroundColor)
         #endif
-        .onChange(of: viewModel.scrollToId) { _, newValue in
-          if let newValue {
-            viewModel.scrollToId = nil
-            proxy.scrollTo(newValue, anchor: .top)
+          .onChange(of: viewModel.scrollToId) { _, newValue in
+            if let newValue {
+              viewModel.scrollToId = nil
+              proxy.scrollTo(newValue, anchor: .top)
+            }
           }
-        }
-        .onAppear {
-          guard !isLoaded else { return }
-          viewModel.client = client
-          viewModel.routerPath = routerPath
-          Task {
-            let result = await viewModel.fetch()
-            isLoaded = true
+          .onAppear {
+            guard !isLoaded else { return }
+            viewModel.client = client
+            viewModel.routerPath = routerPath
+            Task {
+              let result = await viewModel.fetch()
+              isLoaded = true
 
-            if !result {
-              if let url = viewModel.remoteStatusURL {
-                await UIApplication.shared.open(url)
-              }
-              DispatchQueue.main.async {
-                _ = routerPath.path.popLast()
+              if !result {
+                if let url = viewModel.remoteStatusURL {
+                  await UIApplication.shared.open(url)
+                }
+                DispatchQueue.main.async {
+                  _ = routerPath.path.popLast()
+                }
               }
             }
           }
-        }
       }
       .refreshable {
         Task {
@@ -137,9 +137,9 @@ public struct StatusDetailView: View {
             }
           }
         }
-        #if !os(visionOS)
+      #if !os(visionOS)
         .listRowBackground(viewModel.highlightRowColor)
-        #endif
+      #endif
         .listRowInsets(.init(top: 12,
                              leading: .layoutPadding,
                              bottom: 12,
@@ -179,16 +179,16 @@ public struct StatusDetailView: View {
     .frame(height: 50)
     .listRowSeparator(.hidden)
     #if !os(visionOS)
-    .listRowBackground(theme.secondaryBackgroundColor)
+      .listRowBackground(theme.secondaryBackgroundColor)
     #endif
-    .listRowInsets(.init())
+      .listRowInsets(.init())
   }
 
   private var topPaddingView: some View {
     HStack { EmptyView() }
-      #if !os(visionOS)
+    #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
-      #endif
+    #endif
       .listRowSeparator(.hidden)
       .listRowInsets(.init())
       .frame(height: .layoutPadding)

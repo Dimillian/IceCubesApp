@@ -9,7 +9,7 @@ extension StatusEditor {
   @MainActor
   struct UTTypeSupported {
     let value: String
-    
+
     func loadItemContent(item: NSItemProvider) async throws -> Any? {
       if let transferable = await getVideoTransferable(item: item) {
         return transferable
@@ -79,21 +79,21 @@ extension StatusEditor {
       self.url = url
       _ = url.startAccessingSecurityScopedResource()
     }
-    
+
     deinit {
       url.stopAccessingSecurityScopedResource()
     }
-    
+
     static var transferRepresentation: some TransferRepresentation {
       FileRepresentation(importedContentType: .movie) { receivedTransferrable in
-        return MovieFileTranseferable(url: receivedTransferrable.localURL)
+        MovieFileTranseferable(url: receivedTransferrable.localURL)
       }
       FileRepresentation(importedContentType: .video) { receivedTransferrable in
-        return MovieFileTranseferable(url: receivedTransferrable.localURL)
+        MovieFileTranseferable(url: receivedTransferrable.localURL)
       }
     }
   }
-  
+
   final class GifFileTranseferable: Transferable, Sendable {
     let url: URL
 
@@ -101,18 +101,18 @@ extension StatusEditor {
       self.url = url
       _ = url.startAccessingSecurityScopedResource()
     }
-    
+
     deinit {
       url.stopAccessingSecurityScopedResource()
     }
-    
+
     var data: Data? {
       try? Data(contentsOf: url)
     }
 
     static var transferRepresentation: some TransferRepresentation {
       FileRepresentation(importedContentType: .gif) { receivedTransferrable in
-        return GifFileTranseferable(url: receivedTransferrable.localURL)
+        GifFileTranseferable(url: receivedTransferrable.localURL)
       }
     }
   }
@@ -121,19 +121,19 @@ extension StatusEditor {
 public extension StatusEditor {
   final class ImageFileTranseferable: Transferable, Sendable {
     public let url: URL
-    
+
     init(url: URL) {
       self.url = url
       _ = url.startAccessingSecurityScopedResource()
     }
-    
+
     deinit {
       url.stopAccessingSecurityScopedResource()
     }
 
     public static var transferRepresentation: some TransferRepresentation {
       FileRepresentation(importedContentType: .image) { receivedTransferrable in
-        return ImageFileTranseferable(url: receivedTransferrable.localURL)
+        ImageFileTranseferable(url: receivedTransferrable.localURL)
       }
     }
   }
@@ -141,15 +141,15 @@ public extension StatusEditor {
 
 public extension ReceivedTransferredFile {
   var localURL: URL {
-    if self.isOriginalFile {
+    if isOriginalFile {
       return file
     }
-    let copy = URL.temporaryDirectory.appending(path: "\(UUID().uuidString).\(self.file.pathExtension)")
-    try? FileManager.default.copyItem(at: self.file, to: copy)
+    let copy = URL.temporaryDirectory.appending(path: "\(UUID().uuidString).\(file.pathExtension)")
+    try? FileManager.default.copyItem(at: file, to: copy)
     return copy
   }
-
 }
+
 public extension URL {
   func mimeType() -> String {
     if let mimeType = UTType(filenameExtension: pathExtension)?.preferredMIMEType {

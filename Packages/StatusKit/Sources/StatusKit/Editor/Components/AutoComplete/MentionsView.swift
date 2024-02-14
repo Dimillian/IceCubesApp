@@ -1,17 +1,16 @@
 import DesignSystem
 import EmojiText
 import Foundation
-import SwiftUI
 import Models
 import SwiftData
+import SwiftUI
 
-
-extension StatusEditor.AutoCompleteView  {
+extension StatusEditor.AutoCompleteView {
   struct MentionsView: View {
     @Environment(Theme.self) private var theme
-    
+
     var viewModel: StatusEditor.ViewModel
-  
+
     var body: some View {
       ForEach(viewModel.mentionsSuggestions) { account in
         Button {

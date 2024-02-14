@@ -1,1 +1,1 @@
-public enum StatusEditor { }
+public enum StatusEditor {}

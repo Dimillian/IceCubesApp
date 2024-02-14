@@ -249,5 +249,4 @@ extension StatusEditor {
       .cornerRadius(8)
     }
   }
-
 }

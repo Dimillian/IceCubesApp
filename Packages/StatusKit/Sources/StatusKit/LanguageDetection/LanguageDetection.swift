@@ -8,7 +8,7 @@ private func stripToPureLanguage(inText: String) -> String {
 
   var resultStr = inText
 
-  [hashtagRegex, emojiRegex, atRegex].forEach { regex in
+  for regex in [hashtagRegex, emojiRegex, atRegex] {
     let splitArray = resultStr.split(separator: regex, omittingEmptySubsequences: true)
     resultStr = splitArray.joined() as String
   }

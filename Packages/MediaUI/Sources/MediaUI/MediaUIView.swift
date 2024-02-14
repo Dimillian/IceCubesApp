@@ -1,8 +1,8 @@
+import AVFoundation
 import Models
 import Nuke
 import QuickLook
 import SwiftUI
-import AVFoundation
 
 public struct MediaUIView: View, @unchecked Sendable {
   private let data: [DisplayData]

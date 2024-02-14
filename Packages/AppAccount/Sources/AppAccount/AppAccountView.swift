@@ -13,7 +13,7 @@ public struct AppAccountView: View {
   @State var viewModel: AppAccountViewModel
 
   @Binding var isParentPresented: Bool
-  
+
   public init(viewModel: AppAccountViewModel, isParentPresented: Binding<Bool>) {
     self.viewModel = viewModel
     _isParentPresented = isParentPresented

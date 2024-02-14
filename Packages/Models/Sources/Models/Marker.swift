@@ -6,7 +6,7 @@ public struct Marker: Codable, Sendable {
     public let version: Int
     public let updatedAt: ServerDate
   }
-  
+
   public let notifications: Content?
   public let home: Content?
 }

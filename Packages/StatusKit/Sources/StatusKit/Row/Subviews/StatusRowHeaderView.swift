@@ -1,8 +1,8 @@
 import DesignSystem
 import Env
 import Models
-import SwiftUI
 import Network
+import SwiftUI
 
 @MainActor
 struct StatusRowHeaderView: View {
@@ -38,9 +38,9 @@ struct StatusRowHeaderView: View {
     HStack(alignment: .center) {
       if theme.avatarPosition == .top {
         AvatarView(viewModel.finalStatus.account.avatar)
-          #if targetEnvironment(macCatalyst)
+        #if targetEnvironment(macCatalyst)
           .accountPopover(viewModel.finalStatus.account)
-          #endif
+        #endif
       }
       VStack(alignment: .leading, spacing: 2) {
         HStack(alignment: .firstTextBaseline, spacing: 2) {
@@ -53,9 +53,9 @@ struct StatusRowHeaderView: View {
               .emojiText.baselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
               .fontWeight(.semibold)
               .lineLimit(1)
-              #if targetEnvironment(macCatalyst)
+            #if targetEnvironment(macCatalyst)
               .accountPopover(viewModel.finalStatus.account)
-              #endif
+            #endif
 
             if !redactionReasons.contains(.placeholder) {
               accountBadgeView
@@ -65,16 +65,17 @@ struct StatusRowHeaderView: View {
           .layoutPriority(1)
         }
         if !redactionReasons.contains(.placeholder) {
-         if (theme.displayFullUsername && theme.avatarPosition == .leading) ||
-              theme.avatarPosition == .top {
-           Text("@\(theme.displayFullUsername ? viewModel.finalStatus.account.acct : viewModel.finalStatus.account.username)")
-             .font(.scaledFootnote)
-             .foregroundStyle(.secondary)
-             .lineLimit(1)
-          #if targetEnvironment(macCatalyst)
-             .accountPopover(viewModel.finalStatus.account)
-           #endif
-         }
+          if (theme.displayFullUsername && theme.avatarPosition == .leading) ||
+            theme.avatarPosition == .top
+          {
+            Text("@\(theme.displayFullUsername ? viewModel.finalStatus.account.acct : viewModel.finalStatus.account.username)")
+              .font(.scaledFootnote)
+              .foregroundStyle(.secondary)
+              .lineLimit(1)
+            #if targetEnvironment(macCatalyst)
+              .accountPopover(viewModel.finalStatus.account)
+            #endif
+          }
         }
       }
     }
@@ -92,8 +93,8 @@ struct StatusRowHeaderView: View {
   private var dateView: some View {
     Group {
       Text(Image(systemName: viewModel.finalStatus.visibility.iconName)) +
-      Text(" ⸱ ") +
-      Text(viewModel.finalStatus.createdAt.relativeFormatted)
+        Text(" ⸱ ") +
+        Text(viewModel.finalStatus.createdAt.relativeFormatted)
     }
     .font(.scaledFootnote)
     .foregroundStyle(.secondary)

@@ -53,7 +53,7 @@ public struct MediaAttachment: Codable, Identifiable, Hashable, Equatable {
           description: nil,
           meta: nil)
   }
-  
+
   public static func videoWith(url: URL) -> MediaAttachment {
     .init(id: UUID().uuidString,
           type: "video",

@@ -204,7 +204,7 @@ struct StatusRowContextMenu: View {
                 do {
                   let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
                   viewModel.authorRelationship = try await client.post(endpoint: Accounts.unmute(id: operationAccount.id))
-                } catch { }
+                } catch {}
               }
             } label: {
               Label("account.action.unmute", systemImage: "speaker")
@@ -217,7 +217,7 @@ struct StatusRowContextMenu: View {
                     do {
                       let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
                       viewModel.authorRelationship = try await client.post(endpoint: Accounts.mute(id: operationAccount.id, json: MuteData(duration: duration.rawValue)))
-                    } catch { }
+                    } catch {}
                   }
                 }
               }
@@ -225,13 +225,13 @@ struct StatusRowContextMenu: View {
               Label("account.action.mute", systemImage: "speaker.slash")
             }
           }
-          
+
           #if targetEnvironment(macCatalyst)
             accountContactMenuItems
           #else
-          ControlGroup {
-            accountContactMenuItems
-          }
+            ControlGroup {
+              accountContactMenuItems
+            }
           #endif
         }
       }
@@ -244,7 +244,7 @@ struct StatusRowContextMenu: View {
       }
     }
   }
-  
+
   @ViewBuilder
   private var accountContactMenuItems: some View {
     Button {
@@ -271,7 +271,7 @@ struct StatusRowContextMenu: View {
           do {
             let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
             viewModel.authorRelationship = try await client.post(endpoint: Accounts.unblock(id: operationAccount.id))
-          } catch { }
+          } catch {}
         }
       } label: {
         Label("account.action.unblock", systemImage: "person.crop.circle.badge.exclamationmark")

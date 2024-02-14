@@ -34,8 +34,8 @@ public struct InstanceSocialClient: Sendable {
   }
 }
 
-extension Array where Self.Element == InstanceSocial {
-  fileprivate func sorted(by keyword: String) -> Self {
+private extension Array where Self.Element == InstanceSocial {
+  func sorted(by keyword: String) -> Self {
     let keyword = keyword.trimmingCharacters(in: .whitespacesAndNewlines)
     var newArray = self
 

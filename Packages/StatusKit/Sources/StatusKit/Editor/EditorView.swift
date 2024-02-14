@@ -19,7 +19,7 @@ extension StatusEditor {
     #else
       @Environment(\.dismiss) private var dismiss
     #endif
-    
+
     @Bindable var viewModel: ViewModel
     @Binding var followUpSEVMs: [ViewModel]
     @Binding var editingMediaContainer: MediaContainer?
@@ -137,13 +137,13 @@ extension StatusEditor {
           .environment(\.isModal, true)
           .padding(.horizontal, .layoutPadding)
           .padding(.vertical, .statusComponentSpacing)
-          #if os(visionOS)
+        #if os(visionOS)
           .background(RoundedRectangle(cornerRadius: 8)
             .foregroundStyle(.background))
           .buttonStyle(.plain)
           .padding(.layoutPadding)
-          #endif
-        
+        #endif
+
       } else if let status = viewModel.embeddedStatus {
         StatusEmbeddedView(status: status, client: client, routerPath: RouterPath())
           .padding(.horizontal, .layoutPadding)
@@ -158,15 +158,14 @@ extension StatusEditor {
           .padding(.horizontal)
       }
     }
-    
-    
+
     @ViewBuilder
     private var characterCountAndLangView: some View {
       let value = (currentInstance.instance?.configuration?.statuses.maxCharacters ?? 500) + viewModel.statusTextCharacterLength
       HStack(alignment: .center) {
         LangButton(viewModel: viewModel)
           .padding(.leading, .layoutPadding)
-        
+
         Button {
           withAnimation {
             viewModel.showPoll.toggle()
@@ -189,9 +188,9 @@ extension StatusEditor {
         }
         .buttonStyle(.bordered)
         .accessibilityLabel("accessibility.editor.button.spoiler")
-        
+
         Spacer()
-        
+
         Text("\(value)")
           .foregroundColor(value < 0 ? .red : .secondary)
           .font(.callout.monospacedDigit())
@@ -204,7 +203,7 @@ extension StatusEditor {
       }
       .padding(.vertical, 8)
     }
-    
+
     private func setupViewModel() {
       viewModel.client = client
       viewModel.currentAccount = currentAccount.account
@@ -223,5 +222,4 @@ extension StatusEditor {
       Task { await viewModel.fetchCustomEmojis() }
     }
   }
-
 }

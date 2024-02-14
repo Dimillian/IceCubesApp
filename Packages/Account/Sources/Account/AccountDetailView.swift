@@ -27,7 +27,7 @@ public struct AccountDetailView: View {
   @State private var isEditingAccount: Bool = false
   @State private var isEditingFilters: Bool = false
   @State private var isEditingRelationshipNote: Bool = false
-  
+
   @State private var displayTitle: Bool = false
 
   @Binding var scrollToTopSignal: Int
@@ -88,14 +88,14 @@ public struct AccountDetailView: View {
       .environment(\.defaultMinListRowHeight, 1)
       .listStyle(.plain)
       #if !os(visionOS)
-      .scrollContentBackground(.hidden)
-      .background(theme.primaryBackgroundColor)
+        .scrollContentBackground(.hidden)
+        .background(theme.primaryBackgroundColor)
       #endif
-      .onChange(of: scrollToTopSignal) {
-        withAnimation {
-          proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
+        .onChange(of: scrollToTopSignal) {
+          withAnimation {
+            proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
+          }
         }
-      }
     }
     .onAppear {
       guard reasons != .placeholder else { return }
@@ -220,7 +220,6 @@ public struct AccountDetailView: View {
                 AvatarView(account.avatar, config: .badge)
                   .padding(.leading, -4)
                   .accessibilityLabel(account.safeDisplayName)
-
               }
               .accessibilityAddTraits(.isImage)
               .buttonStyle(.plain)
@@ -247,18 +246,18 @@ public struct AccountDetailView: View {
                              bottom: 0,
                              trailing: .layoutPadding))
         .listRowSeparator(.hidden)
-        #if !os(visionOS)
+      #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
-        #endif
+      #endif
       ForEach(viewModel.pinned) { status in
         StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
       }
       Rectangle()
-        #if os(visionOS)
+      #if os(visionOS)
         .fill(Color.clear)
-        #else
+      #else
         .fill(theme.secondaryBackgroundColor)
-        #endif
+      #endif
         .frame(height: 12)
         .listRowInsets(.init())
         .listRowSeparator(.hidden)
@@ -288,7 +287,6 @@ public struct AccountDetailView: View {
               routerPath.presentedSheet = .mentionStatusEditor(account: account,
                                                                visibility: preferences.postVisibility)
             #endif
-  
           }
         } label: {
           Image(systemName: "arrowshape.turn.up.left")
@@ -370,7 +368,7 @@ public struct AccountDetailView: View {
             Task {
               do {
                 viewModel.relationship = try await client.post(endpoint: Accounts.block(id: account.id))
-              } catch { }
+              } catch {}
             }
           }
         }
@@ -385,9 +383,9 @@ extension View {
   func applyAccountDetailsRowStyle(theme: Theme) -> some View {
     listRowInsets(.init())
       .listRowSeparator(.hidden)
-      #if !os(visionOS)
+    #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
-      #endif
+    #endif
   }
 }
 
