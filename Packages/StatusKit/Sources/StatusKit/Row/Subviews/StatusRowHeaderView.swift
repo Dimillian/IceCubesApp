@@ -15,12 +15,12 @@ struct StatusRowHeaderView: View {
   let viewModel: StatusRowViewModel
   var body: some View {
     HStack(alignment: theme.avatarPosition == .top ? .center : .top) {
-      Button {
-        viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
-      } label: {
-        accountView
-      }
-      .buttonStyle(.plain)
+      accountView
+        .hoverEffect()
+        .accessibilityAddTraits(.isButton)
+        .onTapGesture {
+          viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
+        }
       Spacer()
       if !redactionReasons.contains(.placeholder) {
         dateView

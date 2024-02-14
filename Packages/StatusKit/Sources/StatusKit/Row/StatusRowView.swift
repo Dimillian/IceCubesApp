@@ -75,11 +75,13 @@ public struct StatusRowView: View {
             if !isCompact,
                theme.avatarPosition == .leading
             {
-              Button {
-                viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
-              } label: {
-                AvatarView(viewModel.finalStatus.account.avatar)
-              }
+              AvatarView(viewModel.finalStatus.account.avatar)
+                .accessibility(addTraits: .isButton)
+                .contentShape(Circle())
+                .hoverEffect()
+                .onTapGesture {
+                  viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
+                }
             }
             VStack(alignment: .leading, spacing: .statusComponentSpacing) {
               if !isCompact {
