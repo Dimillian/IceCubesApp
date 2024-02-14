@@ -42251,7 +42251,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Require Alt Text to Post"
+            "value" : "Wymagaj tekstu alternatywnego przy publikowaniu"
           }
         },
         "pt-BR" : {
@@ -66864,7 +66864,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your settings require alt text on all media before posting"
+            "value" : "Twoje ustawienia wymagają tekstu alternatywnego na wszystkich materiałach przed ich opublikowaniem"
           }
         },
         "pt-BR" : {
