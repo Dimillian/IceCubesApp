@@ -42179,7 +42179,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Require Alt Text to Post"
+            "value" : "Alternativtext ist erforderlich"
           }
         },
         "en" : {
@@ -66792,7 +66792,7 @@
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your settings require alt text on all media before posting"
+            "value" : "Deine Einstellung erfordern einen Alternativtext für alle Medien vor der Veröffentlichung"
           }
         },
         "en" : {
