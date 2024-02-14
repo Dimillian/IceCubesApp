@@ -350,13 +350,8 @@ public struct StatusRowView: View {
             client: .init(server: ""),
             routerPath: RouterPath()),
       context: .timeline)
-  }.listStyle(.plain)
-    .environment(RouterPath())
-    .environment(Client(server: ""))
-    .environment(CurrentAccount.shared)
-    .environment(UserPreferences.shared)
-    .environment(CurrentInstance.shared)
-    .environment(Theme.shared)
-    .environment(PushNotificationsService.shared)
-    .environment(QuickLook.shared)
+  }
+  .listStyle(.plain)
+  .withPreviewsEnv()
+  .environment(Theme.shared)
 }

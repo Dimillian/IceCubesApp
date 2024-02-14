@@ -153,7 +153,7 @@ public struct NotificationsListView: View {
 
     case let .display(notifications, nextPageState):
       if notifications.isEmpty {
-        EmptyView(iconName: "bell.slash",
+        PlaceholderView(iconName: "bell.slash",
                   title: "notifications.empty.title",
                   message: "notifications.empty.message")
         #if !os(visionOS)

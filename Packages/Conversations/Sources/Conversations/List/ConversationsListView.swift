@@ -48,7 +48,7 @@ public struct ConversationsListView: View {
                 Divider()
               }
             } else if conversations.isEmpty, !viewModel.isLoadingFirstPage, !viewModel.isError {
-              EmptyView(iconName: "tray",
+              PlaceholderView(iconName: "tray",
                         title: "conversations.empty.title",
                         message: "conversations.empty.message")
             } else if viewModel.isError {

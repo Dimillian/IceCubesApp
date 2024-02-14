@@ -50,3 +50,14 @@ public struct NextPageView: View {
     }
   }
 }
+
+
+#Preview {
+  List {
+    Text("Item 1")
+    NextPageView {
+      
+    }
+  }
+  .listStyle(.plain)
+}

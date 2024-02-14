@@ -153,3 +153,13 @@ public struct AccountsListView: View {
     }
   }
 }
+
+#Preview {
+  List {
+    AccountsListRow(viewModel: .init(account: .placeholder(),
+                                     relationShip: .placeholder()))
+  }
+  .listStyle(.plain)
+  .withPreviewsEnv()
+  .environment(Theme.shared)
+}
