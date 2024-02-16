@@ -8735,10 +8735,16 @@
         "pl" : {
           "variations" : {
             "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld nowe posty"
+                }
+              },
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld nowych postów"
+                  "state" : "translated",
+                  "value" : "%lld nowy post"
                 }
               },
               "other" : {
@@ -11941,7 +11947,7 @@
               },
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld post"
                 }
               },
@@ -12294,7 +12300,7 @@
               },
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld pole"
                 }
               },
@@ -16315,13 +16321,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%2$@ follower"
+                      "value" : "%2$@ obserwujący"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%2$@ followers"
+                      "value" : "%2$@ obserwujących"
                     }
                   }
                 }
@@ -42245,7 +42251,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Require Alt Text to Post"
+            "value" : "Wymagaj tekstu alternatywnego przy publikowaniu"
           }
         },
         "pt-BR" : {
@@ -66858,7 +66864,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your settings require alt text on all media before posting"
+            "value" : "Twoje ustawienia wymagają tekstu alternatywnego na wszystkich materiałach przed ich opublikowaniem"
           }
         },
         "pt-BR" : {
@@ -69045,7 +69051,7 @@
               },
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld głos"
                 }
               },
@@ -71985,7 +71991,7 @@
               },
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld podbicie"
                 }
               },
@@ -72338,7 +72344,7 @@
               },
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld polubienie"
                 }
               },
@@ -72685,7 +72691,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld odpowiedź"
                 }
               },
@@ -74814,7 +74820,7 @@
               },
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld wzmianka"
                 }
               },
@@ -78258,7 +78264,7 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "%#@count_posts@ %#@count_participants@"
           },
           "substitutions" : {
@@ -78268,13 +78274,13 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
+                      "state" : "translated",
                       "value" : "od %arg uczestnika"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
+                      "state" : "translated",
                       "value" : "od %arg uczestników"
                     }
                   }
@@ -78287,19 +78293,19 @@
                 "plural" : {
                   "few" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
+                      "state" : "translated",
                       "value" : "%arg ostatnie posty"
                     }
                   },
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
+                      "state" : "translated",
                       "value" : "%arg ostatni post"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
+                      "state" : "translated",
                       "value" : "%arg ostatnich postów"
                     }
                   }
@@ -79042,8 +79048,8 @@
               },
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld osób rozmawia"
+                  "state" : "translated",
+                  "value" : "%lld osoba rozmawia"
                 }
               },
               "other" : {
