@@ -8647,8 +8647,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld nuovi post"
+                  "state" : "translated",
+                  "value" : "%lld nuovo post"
                 }
               },
               "other" : {
@@ -11851,7 +11851,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld post"
                 }
               },
@@ -12204,8 +12204,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld campi"
+                  "state" : "translated",
+                  "value" : "%lld campo"
                 }
               },
               "other" : {
@@ -60288,7 +60288,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Invia messaggio"
+            "value" : "Messaggio"
           }
         },
         "ja" : {
@@ -68955,8 +68955,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld voti"
+                  "state" : "translated",
+                  "value" : "%lld voto"
                 }
               },
               "other" : {
@@ -71895,7 +71895,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld boost"
                 }
               },
@@ -72248,8 +72248,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld preferiti"
+                  "state" : "translated",
+                  "value" : "%lld preferito"
                 }
               },
               "other" : {
@@ -72601,8 +72601,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld risposte"
+                  "state" : "translated",
+                  "value" : "%lld risposta"
                 }
               },
               "other" : {
@@ -74724,8 +74724,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld menzioni"
+                  "state" : "translated",
+                  "value" : "%lld menzione"
                 }
               },
               "other" : {
@@ -77452,8 +77452,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Vai all'ultimo post"
+            "state" : "translated",
+            "value" : "Aggiorna"
           }
         },
         "ja" : {
@@ -78048,8 +78048,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@arg1@ post recenti da %#@arg2@ partecipanti"
+            "state" : "translated",
+            "value" : "%#@arg1@ da %#@arg2@"
           },
           "substitutions" : {
             "arg1" : {
@@ -78059,14 +78059,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg post recente"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg post recenti"
                     }
                   }
                 }
@@ -78079,14 +78079,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg partecipante"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg partecipanti"
                     }
                   }
                 }
@@ -78946,14 +78946,14 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld people talking"
+                  "state" : "translated",
+                  "value" : "%lld persona ne parla"
                 }
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld people talking"
+                  "state" : "translated",
+                  "value" : "%lld persone ne parlano"
                 }
               }
             }
