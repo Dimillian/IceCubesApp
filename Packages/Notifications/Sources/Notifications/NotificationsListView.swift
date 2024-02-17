@@ -2,7 +2,6 @@ import DesignSystem
 import Env
 import Models
 import Network
-import Shimmer
 import SwiftUI
 
 @MainActor
@@ -89,44 +88,44 @@ public struct NotificationsListView: View {
     }
     .navigationBarTitleDisplayMode(.inline)
     #if !os(visionOS)
-    .scrollContentBackground(.hidden)
-    .background(theme.primaryBackgroundColor)
+      .scrollContentBackground(.hidden)
+      .background(theme.primaryBackgroundColor)
     #endif
-    .onAppear {
-      viewModel.client = client
-      viewModel.currentAccount = account
-      if let lockedType {
-        viewModel.isLockedType = true
-        viewModel.selectedType = lockedType
-      } else {
-        viewModel.loadSelectedType()
-      }
-      Task {
-        await viewModel.fetchNotifications()
-      }
-    }
-    .refreshable {
-      SoundEffectManager.shared.playSound(.pull)
-      HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.3))
-      await viewModel.fetchNotifications()
-      HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.7))
-      SoundEffectManager.shared.playSound(.refresh)
-    }
-    .onChange(of: watcher.latestEvent?.id) {
-      if let latestEvent = watcher.latestEvent {
-        viewModel.handleEvent(event: latestEvent)
-      }
-    }
-    .onChange(of: scenePhase) { _, newValue in
-      switch newValue {
-      case .active:
+      .onAppear {
+        viewModel.client = client
+        viewModel.currentAccount = account
+        if let lockedType {
+          viewModel.isLockedType = true
+          viewModel.selectedType = lockedType
+        } else {
+          viewModel.loadSelectedType()
+        }
         Task {
           await viewModel.fetchNotifications()
         }
-      default:
-        break
       }
-    }
+      .refreshable {
+        SoundEffectManager.shared.playSound(.pull)
+        HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.3))
+        await viewModel.fetchNotifications()
+        HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.7))
+        SoundEffectManager.shared.playSound(.refresh)
+      }
+      .onChange(of: watcher.latestEvent?.id) {
+        if let latestEvent = watcher.latestEvent {
+          viewModel.handleEvent(event: latestEvent)
+        }
+      }
+      .onChange(of: scenePhase) { _, newValue in
+        switch newValue {
+        case .active:
+          Task {
+            await viewModel.fetchNotifications()
+          }
+        default:
+          break
+        }
+      }
   }
 
   @ViewBuilder
@@ -140,26 +139,26 @@ public struct NotificationsListView: View {
                             followRequests: account.followRequests)
           .listRowInsets(.init(top: 12,
                                leading: .layoutPadding + 4,
-                               bottom: 12,
+                               bottom: 0,
                                trailing: .layoutPadding))
-          #if os(visionOS)
+        #if os(visionOS)
           .listRowBackground(RoundedRectangle(cornerRadius: 8)
             .foregroundStyle(.background))
-          #else
-           .listRowBackground(theme.primaryBackgroundColor)
-          #endif
-          .redacted(reason: .placeholder)
-          .allowsHitTesting(false)
+        #else
+            .listRowBackground(theme.primaryBackgroundColor)
+        #endif
+            .redacted(reason: .placeholder)
+            .allowsHitTesting(false)
       }
 
     case let .display(notifications, nextPageState):
       if notifications.isEmpty {
-        EmptyView(iconName: "bell.slash",
+        PlaceholderView(iconName: "bell.slash",
                   title: "notifications.empty.title",
                   message: "notifications.empty.message")
-          #if !os(visionOS)
+        #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)
-          #endif
+        #endif
           .listSectionSeparator(.hidden)
       } else {
         ForEach(notifications) { notification in
@@ -169,31 +168,34 @@ public struct NotificationsListView: View {
                               followRequests: account.followRequests)
             .listRowInsets(.init(top: 12,
                                  leading: .layoutPadding + 4,
-                                 bottom: 12,
+                                 bottom: 6,
                                  trailing: .layoutPadding))
-            #if os(visionOS)
+          #if os(visionOS)
             .listRowBackground(RoundedRectangle(cornerRadius: 8)
-              .foregroundStyle(notification.type == .mention && lockedType != .mention ? Material.thick : Material.regular))
-            #else
+              .foregroundStyle(notification.type == .mention && lockedType != .mention ? Material.thick : Material.regular).hoverEffect())
+            .listRowHoverEffectDisabled()
+          #else
             .listRowBackground(notification.type == .mention && lockedType != .mention ?
               theme.secondaryBackgroundColor : theme.primaryBackgroundColor)
-            #endif
+          #endif
             .id(notification.id)
         }
-      }
 
-      switch nextPageState {
-      case .none:
-        EmptyView()
-      case .hasNextPage:
-        loadingRow
-          .onAppear {
-            Task {
-              await viewModel.fetchNextPage()
-            }
+        switch nextPageState {
+        case .none:
+          EmptyView()
+        case .hasNextPage:
+          NextPageView {
+            try await viewModel.fetchNextPage()
           }
-      case .loadingNextPage:
-        loadingRow
+          .listRowInsets(.init(top: .layoutPadding,
+                               leading: .layoutPadding + 4,
+                               bottom: .layoutPadding,
+                               trailing: .layoutPadding))
+          #if !os(visionOS)
+            .listRowBackground(theme.primaryBackgroundColor)
+          #endif
+        }
       }
 
     case .error:
@@ -210,21 +212,6 @@ public struct NotificationsListView: View {
       #endif
       .listSectionSeparator(.hidden)
     }
-  }
-
-  private var loadingRow: some View {
-    HStack {
-      Spacer()
-      ProgressView()
-      Spacer()
-    }
-    .listRowInsets(.init(top: .layoutPadding,
-                         leading: .layoutPadding + 4,
-                         bottom: .layoutPadding,
-                         trailing: .layoutPadding))
-    #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
-    #endif
   }
 
   private var topPaddingView: some View {

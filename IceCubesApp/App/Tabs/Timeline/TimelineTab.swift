@@ -51,7 +51,7 @@ struct TimelineTab: View {
         .toolbar {
           toolbarView
         }
-        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
+        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
         .id(client.id)
     }
     .onAppear {
@@ -95,7 +95,7 @@ struct TimelineTab: View {
       }
       switch newValue {
       case let .tagGroup(title, _, _):
-        if let group = tagGroups.first(where: { $0.title == title}) {
+        if let group = tagGroups.first(where: { $0.title == title }) {
           selectedTagGroup = group
         }
       default:
@@ -123,16 +123,14 @@ struct TimelineTab: View {
 
   @ViewBuilder
   private var timelineFilterButton: some View {
-    latestOrResumeButtons
-    contentFilterButton
-    Divider()
-    pinMenuButton
-    Divider()
+    headerGroup
     timelineFiltersButtons
     listsFiltersButons
     tagsFiltersButtons
     localTimelinesFiltersButtons
     tagGroupsFiltersButtons
+    Divider()
+    contentFilterButton
   }
 
   private var addAccountButton: some View {
@@ -187,14 +185,16 @@ struct TimelineTab: View {
       }
     }
   }
-  
+
   @ViewBuilder
-  private var latestOrResumeButtons: some View {
-    if timeline.supportNewestPagination {
-      Button {
-        timeline = .latest
-      } label: {
-        Label(TimelineFilter.latest.localizedTitle(), systemImage: TimelineFilter.latest.iconName())
+  private var headerGroup: some View {
+    ControlGroup {
+      if timeline.supportNewestPagination {
+        Button {
+          timeline = .latest
+        } label: {
+          Label(TimelineFilter.latest.localizedTitle(), systemImage: TimelineFilter.latest.iconName())
+        }
       }
       if timeline == .home {
         Button {
@@ -206,12 +206,13 @@ struct TimelineTab: View {
           }
         }
       }
+      pinButton
     }
   }
-  
+
   @ViewBuilder
-  private var pinMenuButton: some View {
-    let index = pinnedFilters.firstIndex(where: { $0.id == timeline.id})
+  private var pinButton: some View {
+    let index = pinnedFilters.firstIndex(where: { $0.id == timeline.id })
     Button {
       withAnimation {
         if let index {
@@ -221,14 +222,14 @@ struct TimelineTab: View {
         }
       }
     } label: {
-      if index != nil  {
+      if index != nil {
         Label("status.action.unpin", systemImage: "pin.slash")
       } else {
         Label("status.action.pin", systemImage: "pin")
       }
     }
   }
-  
+
   private var timelineFiltersButtons: some View {
     ForEach(TimelineFilter.availableTimeline(client: client), id: \.self) { timeline in
       Button {
@@ -238,7 +239,7 @@ struct TimelineTab: View {
       }
     }
   }
-  
+
   @ViewBuilder
   private var listsFiltersButons: some View {
     Menu("timeline.filter.lists") {
@@ -256,7 +257,7 @@ struct TimelineTab: View {
       }
     }
   }
-  
+
   @ViewBuilder
   private var tagsFiltersButtons: some View {
     if !currentAccount.tags.isEmpty {
@@ -271,7 +272,7 @@ struct TimelineTab: View {
       }
     }
   }
-  
+
   private var localTimelinesFiltersButtons: some View {
     Menu("timeline.filter.local") {
       ForEach(localTimelines) { remoteLocal in
@@ -290,7 +291,7 @@ struct TimelineTab: View {
       }
     }
   }
-  
+
   private var tagGroupsFiltersButtons: some View {
     Menu("timeline.filter.tag-groups") {
       ForEach(tagGroups) { group in
@@ -311,7 +312,7 @@ struct TimelineTab: View {
       }
     }
   }
-  
+
   private var contentFilterButton: some View {
     Button(action: {
       routerPath.presentedSheet = .timelineContentFilter

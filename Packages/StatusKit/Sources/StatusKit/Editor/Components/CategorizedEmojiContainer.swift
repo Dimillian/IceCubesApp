@@ -7,5 +7,4 @@ extension StatusEditor {
     let categoryName: String
     var emojis: [Emoji]
   }
-
 }

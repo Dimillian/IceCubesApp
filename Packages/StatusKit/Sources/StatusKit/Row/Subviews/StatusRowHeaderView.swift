@@ -1,8 +1,8 @@
 import DesignSystem
 import Env
 import Models
-import SwiftUI
 import Network
+import SwiftUI
 
 @MainActor
 struct StatusRowHeaderView: View {
@@ -15,12 +15,12 @@ struct StatusRowHeaderView: View {
   let viewModel: StatusRowViewModel
   var body: some View {
     HStack(alignment: theme.avatarPosition == .top ? .center : .top) {
-      Button {
-        viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
-      } label: {
-        accountView
-      }
-      .buttonStyle(.plain)
+      accountView
+        .hoverEffect()
+        .accessibilityAddTraits(.isButton)
+        .onTapGesture {
+          viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
+        }
       Spacer()
       if !redactionReasons.contains(.placeholder) {
         dateView
@@ -38,20 +38,24 @@ struct StatusRowHeaderView: View {
     HStack(alignment: .center) {
       if theme.avatarPosition == .top {
         AvatarView(viewModel.finalStatus.account.avatar)
+        #if targetEnvironment(macCatalyst)
           .accountPopover(viewModel.finalStatus.account)
+        #endif
       }
       VStack(alignment: .leading, spacing: 2) {
         HStack(alignment: .firstTextBaseline, spacing: 2) {
           Group {
-            EmojiTextApp(.init(stringValue: viewModel.finalStatus.account.safeDisplayName),
+            EmojiTextApp(viewModel.finalStatus.account.cachedDisplayName,
                          emojis: viewModel.finalStatus.account.emojis)
               .font(.scaledSubheadline)
               .foregroundColor(theme.labelColor)
-              .emojiSize(Font.scaledSubheadlineFont.emojiSize)
-              .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
+              .emojiText.size(Font.scaledSubheadlineFont.emojiSize)
+              .emojiText.baselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
               .fontWeight(.semibold)
               .lineLimit(1)
+            #if targetEnvironment(macCatalyst)
               .accountPopover(viewModel.finalStatus.account)
+            #endif
 
             if !redactionReasons.contains(.placeholder) {
               accountBadgeView
@@ -61,14 +65,17 @@ struct StatusRowHeaderView: View {
           .layoutPriority(1)
         }
         if !redactionReasons.contains(.placeholder) {
-         if (theme.displayFullUsername && theme.avatarPosition == .leading) ||
-              theme.avatarPosition == .top {
-           Text("@\(theme.displayFullUsername ? viewModel.finalStatus.account.acct : viewModel.finalStatus.account.username)")
-             .font(.scaledFootnote)
-             .foregroundStyle(.secondary)
-             .lineLimit(1)
-             .accountPopover(viewModel.finalStatus.account)
-         }
+          if (theme.displayFullUsername && theme.avatarPosition == .leading) ||
+            theme.avatarPosition == .top
+          {
+            Text("@\(theme.displayFullUsername ? viewModel.finalStatus.account.acct : viewModel.finalStatus.account.username)")
+              .font(.scaledFootnote)
+              .foregroundStyle(.secondary)
+              .lineLimit(1)
+            #if targetEnvironment(macCatalyst)
+              .accountPopover(viewModel.finalStatus.account)
+            #endif
+          }
         }
       }
     }
@@ -86,8 +93,8 @@ struct StatusRowHeaderView: View {
   private var dateView: some View {
     Group {
       Text(Image(systemName: viewModel.finalStatus.visibility.iconName)) +
-      Text(" ⸱ ") +
-      Text(viewModel.finalStatus.createdAt.relativeFormatted)
+        Text(" ⸱ ") +
+        Text(viewModel.finalStatus.createdAt.relativeFormatted)
     }
     .font(.scaledFootnote)
     .foregroundStyle(.secondary)

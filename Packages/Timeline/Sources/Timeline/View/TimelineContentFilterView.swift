@@ -1,13 +1,13 @@
-import SwiftUI
 import DesignSystem
+import SwiftUI
 
 public struct TimelineContentFilterView: View {
   @Environment(Theme.self) private var theme
-  
+
   @State private var contentFilter = TimelineContentFilter.shared
-    
+
   public init() {}
-  
+
   public var body: some View {
     Form {
       Section {
@@ -30,9 +30,6 @@ public struct TimelineContentFilterView: View {
     }
     .navigationTitle("timeline.content-filter.title")
     .navigationBarTitleDisplayMode(.inline)
-    #if !os(visionOS)
     .scrollContentBackground(.hidden)
-    .background(theme.secondaryBackgroundColor)
-    #endif
   }
 }

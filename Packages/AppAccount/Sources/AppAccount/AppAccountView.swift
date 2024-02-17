@@ -13,7 +13,7 @@ public struct AppAccountView: View {
   @State var viewModel: AppAccountViewModel
 
   @Binding var isParentPresented: Bool
-  
+
   public init(viewModel: AppAccountViewModel, isParentPresented: Binding<Bool>) {
     self.viewModel = viewModel
     _isParentPresented = isParentPresented
@@ -104,8 +104,8 @@ public struct AppAccountView: View {
               .foregroundColor(theme.labelColor)
             Text("\(account.username)@\(viewModel.appAccount.server)")
               .font(.scaledSubheadline)
-              .emojiSize(Font.scaledSubheadlineFont.emojiSize)
-              .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
+              .emojiText.size(Font.scaledSubheadlineFont.emojiSize)
+              .emojiText.baselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
               .foregroundStyle(Color.secondary)
           }
         }

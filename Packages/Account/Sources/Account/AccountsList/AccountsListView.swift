@@ -2,7 +2,6 @@ import DesignSystem
 import Env
 import Models
 import Network
-import Shimmer
 import SwiftUI
 
 @MainActor
@@ -46,7 +45,7 @@ public struct AccountsListView: View {
       await viewModel.fetch()
     }
   }
-  
+
   @ViewBuilder
   private var listView: some View {
     if currentAccount.account?.id == viewModel.accountId {
@@ -55,7 +54,7 @@ public struct AccountsListView: View {
       standardList
     }
   }
-  
+
   private var searchableList: some View {
     List {
       listContent
@@ -75,13 +74,13 @@ public struct AccountsListView: View {
       }
     }
   }
-  
+
   private var standardList: some View {
     List {
       listContent
     }
   }
-  
+
   @ViewBuilder
   private var listContent: some View {
     switch viewModel.state {
@@ -90,10 +89,9 @@ public struct AccountsListView: View {
         AccountsListRow(viewModel: .init(account: .placeholder(), relationShip: .placeholder()))
           .redacted(reason: .placeholder)
           .allowsHitTesting(false)
-          .shimmering()
-          #if !os(visionOS)
+        #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)
-          #endif
+        #endif
       }
     case let .display(accounts, relationships, nextPageState):
       if case .followers = viewModel.mode,
@@ -127,47 +125,41 @@ public struct AccountsListView: View {
           if let relationship = relationships.first(where: { $0.id == account.id }) {
             AccountsListRow(viewModel: .init(account: account,
                                              relationShip: relationship))
-              #if !os(visionOS)
+            #if !os(visionOS)
               .listRowBackground(theme.primaryBackgroundColor)
-              #endif
+            #endif
           }
         }
       }
 
       switch nextPageState {
       case .hasNextPage:
-        loadingRow
-          #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
-          #endif
-          .onAppear {
-            Task {
-              await viewModel.fetchNextPage()
-            }
-          }
+        NextPageView {
+          try await viewModel.fetchNextPage()
+        }
+        #if !os(visionOS)
+        .listRowBackground(theme.primaryBackgroundColor)
+        #endif
 
-      case .loadingNextPage:
-        loadingRow
-          #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
-          #endif
       case .none:
         EmptyView()
       }
 
     case let .error(error):
       Text(error.localizedDescription)
-        #if !os(visionOS)
+      #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
-        #endif
+      #endif
     }
   }
+}
 
-  private var loadingRow: some View {
-    HStack {
-      Spacer()
-      ProgressView()
-      Spacer()
-    }
+#Preview {
+  List {
+    AccountsListRow(viewModel: .init(account: .placeholder(),
+                                     relationShip: .placeholder()))
   }
+  .listStyle(.plain)
+  .withPreviewsEnv()
+  .environment(Theme.shared)
 }

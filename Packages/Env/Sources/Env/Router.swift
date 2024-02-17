@@ -31,6 +31,7 @@ public enum WindowDestinationEditor: Hashable, Codable {
   case replyToStatusEditor(status: Status)
   case quoteStatusEditor(status: Status)
   case mentionStatusEditor(account: Account, visibility: Models.Visibility)
+  case quoteLinkStatusEditor(link: URL)
 }
 
 public enum WindowDestinationMedia: Hashable, Codable {
@@ -42,6 +43,7 @@ public enum SheetDestination: Identifiable {
   case editStatusEditor(status: Status)
   case replyToStatusEditor(status: Status)
   case quoteStatusEditor(status: Status)
+  case quoteLinkStatusEditor(link: URL)
   case mentionStatusEditor(account: Account, visibility: Models.Visibility)
   case listCreate
   case listEdit(list: Models.List)
@@ -62,7 +64,7 @@ public enum SheetDestination: Identifiable {
   public var id: String {
     switch self {
     case .editStatusEditor, .newStatusEditor, .replyToStatusEditor, .quoteStatusEditor,
-         .mentionStatusEditor:
+         .mentionStatusEditor, .quoteLinkStatusEditor:
       "statusEditor"
     case .listCreate:
       "listCreate"
@@ -145,8 +147,9 @@ public enum SheetDestination: Identifiable {
       navigate(to: .hashTag(tag: tag, account: nil))
       return .handled
     } else if url.lastPathComponent.first == "@",
-                let host = url.host,
-              !host.hasPrefix("www") {
+              let host = url.host,
+              !host.hasPrefix("www")
+    {
       let acct = "\(url.lastPathComponent)@\(host)"
       Task {
         await navigateToAccountFrom(acct: acct, url: url)

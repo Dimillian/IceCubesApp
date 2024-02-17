@@ -24,16 +24,13 @@ extension NotificationService {
     var _plaintext: Data?
     do {
       _plaintext = try AES.GCM.open(sealedBox, using: key)
-    } catch {
-      print(error)
-    }
+    } catch {}
     guard let plaintext = _plaintext else {
       return nil
     }
 
     let paddingLength = Int(plaintext[0]) * 256 + Int(plaintext[1])
     guard plaintext.count >= 2 + paddingLength else {
-      print("1")
       fatalError()
     }
     let unpadded = plaintext.suffix(from: paddingLength + 2)

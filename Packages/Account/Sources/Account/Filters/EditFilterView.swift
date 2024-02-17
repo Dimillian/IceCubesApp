@@ -71,20 +71,20 @@ struct EditFilterView: View {
     .navigationTitle(filter?.title ?? NSLocalizedString("filter.new", comment: ""))
     .navigationBarTitleDisplayMode(.inline)
     #if !os(visionOS)
-    .scrollContentBackground(.hidden)
-    .scrollDismissesKeyboard(.interactively)
-    .background(theme.secondaryBackgroundColor)
+      .scrollContentBackground(.hidden)
+      .scrollDismissesKeyboard(.interactively)
+      .background(theme.secondaryBackgroundColor)
     #endif
-    .onAppear {
-      if filter == nil {
-        focusedField = .title
+      .onAppear {
+        if filter == nil {
+          focusedField = .title
+        }
       }
-    }
-    .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
-        saveButton
+      .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          saveButton
+        }
       }
-    }
   }
 
   private var expirySection: some View {

@@ -1,17 +1,17 @@
-import SwiftUI
-import SwiftData
-import Models
-import Env
 import DesignSystem
+import Env
+import Models
+import SwiftData
+import SwiftUI
 
 struct RemoteTimelinesSettingView: View {
   @Environment(\.modelContext) private var context
-  
+
   @Environment(RouterPath.self) private var routerPath
   @Environment(Theme.self) private var theme
-  
+
   @Query(sort: \LocalTimeline.creationDate, order: .reverse) var localTimelines: [LocalTimeline]
-  
+
   var body: some View {
     Form {
       ForEach(localTimelines) { timeline in
@@ -36,10 +36,10 @@ struct RemoteTimelinesSettingView: View {
     .navigationTitle("settings.general.remote-timelines")
     .scrollContentBackground(.hidden)
     #if !os(visionOS)
-    .background(theme.secondaryBackgroundColor)
+      .background(theme.secondaryBackgroundColor)
     #endif
-    .toolbar {
-      EditButton()
-    }
+      .toolbar {
+        EditButton()
+      }
   }
 }

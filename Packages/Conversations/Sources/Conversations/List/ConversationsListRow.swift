@@ -7,7 +7,7 @@ import SwiftUI
 @MainActor
 struct ConversationsListRow: View {
   @Environment(\.openWindow) private var openWindow
-  
+
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath
   @Environment(Theme.self) private var theme
@@ -33,8 +33,8 @@ struct ConversationsListRow: View {
                            emojis: conversation.accounts.flatMap(\.emojis))
                 .font(.scaledSubheadline)
                 .foregroundColor(theme.labelColor)
-                .emojiSize(Font.scaledSubheadlineFont.emojiSize)
-                .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
+                .emojiText.size(Font.scaledSubheadlineFont.emojiSize)
+                .emojiText.baselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
                 .fontWeight(.semibold)
                 .foregroundColor(theme.labelColor)
                 .multilineTextAlignment(.leading)
@@ -57,8 +57,8 @@ struct ConversationsListRow: View {
               .multilineTextAlignment(.leading)
               .font(.scaledBody)
               .foregroundColor(theme.labelColor)
-              .emojiSize(Font.scaledBodyFont.emojiSize)
-              .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
+              .emojiText.size(Font.scaledBodyFont.emojiSize)
+              .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
               .accessibilityLabel(conversation.lastStatus?.content.asRawText ?? "")
           }
           Spacer()

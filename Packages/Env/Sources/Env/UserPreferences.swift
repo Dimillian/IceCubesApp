@@ -22,6 +22,7 @@ import SwiftUI
     @AppStorage("app_default_post_visibility") public var appDefaultPostVisibility: Models.Visibility = .pub
     @AppStorage("app_default_reply_visibility") public var appDefaultReplyVisibility: Models.Visibility = .pub
     @AppStorage("app_default_posts_sensitive") public var appDefaultPostsSensitive = false
+    @AppStorage("app_require_alt_text") public var appRequireAltText = false
     @AppStorage("autoplay_video") public var autoPlayVideo = true
     @AppStorage("mute_video") public var muteVideo = true
     @AppStorage("always_use_deepl") public var alwaysUseDeepl = false
@@ -51,8 +52,8 @@ import SwiftUI
 
     @AppStorage("collapse-long-posts") public var collapseLongPosts = true
 
-    @AppStorage("share-button-behavior") public var shareButtonBehavior: PreferredShareButtonBehavior = .linkAndText
-    
+    @AppStorage("share-button-behavior") public var shareButtonBehavior: PreferredShareButtonBehavior = .linkOnly
+
     @AppStorage("fast_refresh") public var fastRefreshEnabled: Bool = false
 
     @AppStorage("max_reply_indentation") public var maxReplyIndentation: UInt = 7
@@ -164,6 +165,12 @@ import SwiftUI
     }
   }
 
+  public var appRequireAltText: Bool {
+    didSet {
+      storage.appRequireAltText = appRequireAltText
+    }
+  }
+
   public var autoPlayVideo: Bool {
     didSet {
       storage.autoPlayVideo = autoPlayVideo
@@ -176,7 +183,6 @@ import SwiftUI
     }
   }
 
-  
   public var alwaysUseDeepl: Bool {
     didSet {
       storage.alwaysUseDeepl = alwaysUseDeepl
@@ -296,7 +302,7 @@ import SwiftUI
       storage.shareButtonBehavior = shareButtonBehavior
     }
   }
-  
+
   public var fastRefreshEnabled: Bool {
     didSet {
       storage.fastRefreshEnabled = fastRefreshEnabled
@@ -408,7 +414,7 @@ import SwiftUI
   }
 
   public var totalNotificationsCount: Int {
-    notificationsCount.compactMap{ $0.value }.reduce(0, +)
+    notificationsCount.compactMap { $0.value }.reduce(0, +)
   }
 
   public func reloadNotificationsCount(tokens: [OauthToken]) {
@@ -466,6 +472,7 @@ import SwiftUI
     appDefaultPostVisibility = storage.appDefaultPostVisibility
     appDefaultReplyVisibility = storage.appDefaultReplyVisibility
     appDefaultPostsSensitive = storage.appDefaultPostsSensitive
+    appRequireAltText = storage.appRequireAltText
     autoPlayVideo = storage.autoPlayVideo
     alwaysUseDeepl = storage.alwaysUseDeepl
     userDeeplAPIFree = storage.userDeeplAPIFree
@@ -501,7 +508,7 @@ extension UInt: RawRepresentable {
   public var rawValue: Int {
     Int(self)
   }
-  
+
   public init?(rawValue: Int) {
     if rawValue >= 0 {
       self.init(rawValue)

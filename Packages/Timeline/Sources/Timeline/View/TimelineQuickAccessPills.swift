@@ -1,20 +1,20 @@
-import SwiftUI
+import DesignSystem
 import Env
 import Models
-import DesignSystem
 import Network
+import SwiftUI
 
 @MainActor
 struct TimelineQuickAccessPills: View {
   @Environment(Client.self) private var client
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var currentAccount
-  
+
   @Binding var pinnedFilters: [TimelineFilter]
   @Binding var timeline: TimelineFilter
-  
+
   @State private var draggedFilter: TimelineFilter?
-  
+
   var body: some View {
     ScrollView(.horizontal) {
       HStack {
@@ -25,14 +25,15 @@ struct TimelineQuickAccessPills: View {
     }
     .scrollClipDisabled()
     .scrollIndicators(.never)
-    .onChange(of: currentAccount.lists, { _, lists in
+    .onChange(of: currentAccount.lists) { _, lists in
       guard client.isAuth else { return }
       var filters = pinnedFilters
       for (index, filter) in filters.enumerated() {
         switch filter {
-        case .list(let list):
+        case let .list(list):
           if let accountList = lists.first(where: { $0.id == list.id }),
-             accountList.title != list.title {
+             accountList.title != list.title
+          {
             filters[index] = .list(list: accountList)
           }
         default:
@@ -40,9 +41,9 @@ struct TimelineQuickAccessPills: View {
         }
       }
       pinnedFilters = filters
-    })
+    }
   }
-  
+
   @ViewBuilder
   private func makePill(_ filter: TimelineFilter) -> some View {
     if !isFilterSupported(filter) {
@@ -55,7 +56,7 @@ struct TimelineQuickAccessPills: View {
         .buttonStyle(.bordered)
     }
   }
-  
+
   private func makeButton(_ filter: TimelineFilter) -> some View {
     Button {
       timeline = filter
@@ -84,10 +85,10 @@ struct TimelineQuickAccessPills: View {
                                                     items: $pinnedFilters,
                                                     draggedItem: $draggedFilter))
   }
-  
+
   private func isFilterSupported(_ filter: TimelineFilter) -> Bool {
     switch filter {
-    case .list(let list):
+    case let .list(list):
       return currentAccount.lists.contains(where: { $0.id == list.id })
     default:
       return true
@@ -99,24 +100,24 @@ struct PillDropDelegate: DropDelegate {
   let destinationItem: TimelineFilter
   @Binding var items: [TimelineFilter]
   @Binding var draggedItem: TimelineFilter?
-  
-  func dropUpdated(info: DropInfo) -> DropProposal? {
+
+  func dropUpdated(info _: DropInfo) -> DropProposal? {
     return DropProposal(operation: .move)
   }
-  
-  func performDrop(info: DropInfo) -> Bool {
+
+  func performDrop(info _: DropInfo) -> Bool {
     draggedItem = nil
     return true
   }
-  
-  func dropEntered(info: DropInfo) {
+
+  func dropEntered(info _: DropInfo) {
     if let draggedItem {
       let fromIndex = items.firstIndex(of: draggedItem)
       if let fromIndex {
         let toIndex = items.firstIndex(of: destinationItem)
         if let toIndex, fromIndex != toIndex {
           withAnimation {
-            self.items.move(fromOffsets: IndexSet(integer: fromIndex), toOffset: (toIndex > fromIndex ? (toIndex + 1) : toIndex))
+            self.items.move(fromOffsets: IndexSet(integer: fromIndex), toOffset: toIndex > fromIndex ? (toIndex + 1) : toIndex)
           }
         }
       }

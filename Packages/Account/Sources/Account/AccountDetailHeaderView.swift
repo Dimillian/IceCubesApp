@@ -3,7 +3,6 @@ import EmojiText
 import Env
 import Models
 import NukeUI
-import Shimmer
 import SwiftUI
 
 @MainActor
@@ -62,10 +61,6 @@ struct AccountDetailHeaderView: View {
               .overlay(account.haveHeader ? .black.opacity(0.50) : .clear)
               .frame(height: Constants.headerHeight)
               .clipped()
-          } else if state.isLoading {
-            theme.secondaryBackgroundColor
-              .frame(height: Constants.headerHeight)
-              .shimmering()
           } else {
             theme.secondaryBackgroundColor
               .frame(height: Constants.headerHeight)
@@ -177,8 +172,8 @@ struct AccountDetailHeaderView: View {
             EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
               .font(.scaledHeadline)
               .foregroundColor(theme.labelColor)
-              .emojiSize(Font.scaledHeadlineFont.emojiSize)
-              .emojiBaselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
+              .emojiText.size(Font.scaledHeadlineFont.emojiSize)
+              .emojiText.baselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
               .accessibilityAddTraits(.isHeader)
 
             // The views here are wrapped in ZStacks as a Text(Image) does not provide an `accessibilityLabel`.
@@ -241,8 +236,8 @@ struct AccountDetailHeaderView: View {
       EmojiTextApp(account.note, emojis: account.emojis)
         .font(.scaledBody)
         .foregroundColor(theme.labelColor)
-        .emojiSize(Font.scaledBodyFont.emojiSize)
-        .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
+        .emojiText.size(Font.scaledBodyFont.emojiSize)
+        .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
         .padding(.top, 8)
         .textSelection(.enabled)
         .environment(\.openURL, OpenURLAction { url in
@@ -343,8 +338,8 @@ struct AccountDetailHeaderView: View {
           HStack {
             VStack(alignment: .leading, spacing: 2) {
               EmojiTextApp(.init(stringValue: field.name), emojis: viewModel.account?.emojis ?? [])
-                .emojiSize(Font.scaledHeadlineFont.emojiSize)
-                .emojiBaselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
+                .emojiText.size(Font.scaledHeadlineFont.emojiSize)
+                .emojiText.baselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
                 .font(.scaledHeadline)
               HStack {
                 if field.verifiedAt != nil {
@@ -353,8 +348,8 @@ struct AccountDetailHeaderView: View {
                     .accessibilityHidden(true)
                 }
                 EmojiTextApp(field.value, emojis: viewModel.account?.emojis ?? [])
-                  .emojiSize(Font.scaledBodyFont.emojiSize)
-                  .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
+                  .emojiText.size(Font.scaledBodyFont.emojiSize)
+                  .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
                   .foregroundColor(theme.tintColor)
                   .environment(\.openURL, OpenURLAction { url in
                     routerPath.handle(url: url)
@@ -377,15 +372,15 @@ struct AccountDetailHeaderView: View {
       .accessibilityElement(children: .contain)
       .accessibilityLabel("accessibility.tabs.profile.fields.container.label")
       #if os(visionOS)
-      .background(Material.thick)
+        .background(Material.thick)
       #else
-      .background(theme.secondaryBackgroundColor)
+        .background(theme.secondaryBackgroundColor)
       #endif
-      .cornerRadius(4)
-      .overlay(
-        RoundedRectangle(cornerRadius: 4)
-          .stroke(.gray.opacity(0.35), lineWidth: 1)
-      )
+        .cornerRadius(4)
+        .overlay(
+          RoundedRectangle(cornerRadius: 4)
+            .stroke(.gray.opacity(0.35), lineWidth: 1)
+        )
     }
   }
 }

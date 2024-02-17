@@ -2,7 +2,6 @@ import Env
 import Models
 import Nuke
 import NukeUI
-import Shimmer
 import SwiftUI
 
 struct AccountPopoverView: View {
@@ -39,8 +38,8 @@ struct AccountPopoverView: View {
         EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
           .font(.headline)
           .foregroundColor(theme.labelColor)
-          .emojiSize(Font.scaledHeadlineFont.emojiSize)
-          .emojiBaselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
+          .emojiText.size(Font.scaledHeadlineFont.emojiSize)
+          .emojiText.baselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
           .accessibilityAddTraits(.isHeader)
           .help(account.safeDisplayName)
 
@@ -63,8 +62,8 @@ struct AccountPopoverView: View {
 
         EmojiTextApp(account.note, emojis: account.emojis, lineLimit: 5)
           .font(.body)
-          .emojiSize(Font.scaledFootnoteFont.emojiSize)
-          .emojiBaselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
+          .emojiText.size(Font.scaledFootnoteFont.emojiSize)
+          .emojiText.baselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
           .padding(.top, 3)
       }
       .padding([.leading, .trailing, .bottom])

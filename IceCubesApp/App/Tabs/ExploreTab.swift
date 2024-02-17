@@ -4,7 +4,6 @@ import Env
 import Explore
 import Models
 import Network
-import Shimmer
 import SwiftUI
 
 @MainActor
@@ -22,7 +21,7 @@ struct ExploreTab: View {
       ExploreView(scrollToTopSignal: $scrollToTopSignal)
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
-        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
+        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
         .toolbar {
           ToolbarTab(routerPath: $routerPath)
         }

@@ -7,10 +7,9 @@ import Network
 import PhotosUI
 import SwiftUI
 
-extension StatusEditor {
-  
+public extension StatusEditor {
   @MainActor
-  @Observable public class ViewModel: NSObject, Identifiable {
+  @Observable class ViewModel: NSObject, Identifiable {
     public let id = UUID()
 
     var mode: Mode
@@ -90,7 +89,7 @@ extension StatusEditor {
     var postingProgress: Double = 0.0
     var postingTimer: Timer?
     var isPosting: Bool = false
-    
+
     var mediaPickers: [PhotosPickerItem] = [] {
       didSet {
         if mediaPickers.count > 4 {
@@ -129,6 +128,19 @@ extension StatusEditor {
 
     var shouldDisablePollButton: Bool {
       !mediaContainers.isEmpty
+    }
+
+    var allMediaHasDescription: Bool {
+      var everyMediaHasAltText = true
+      for mediaContainer in mediaContainers {
+        if ((mediaContainer.mediaAttachment?.description) == nil) ||
+          mediaContainer.mediaAttachment?.description?.count == 0
+        {
+          everyMediaHasAltText = false
+        }
+      }
+
+      return everyMediaHasAltText
     }
 
     var shouldDisplayDismissWarning: Bool {
@@ -188,8 +200,12 @@ extension StatusEditor {
     func postStatus() async -> Status? {
       guard let client else { return nil }
       do {
+        if !allMediaHasDescription && UserPreferences.shared.appRequireAltText {
+          throw PostError.missingAltText
+        }
+
         if postingTimer == nil {
-          Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in
+          Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
             Task { @MainActor in
               if self.postingProgress < 100 {
                 self.postingProgress += 0.5
@@ -218,7 +234,7 @@ extension StatusEditor {
                               language: selectedLanguage,
                               mediaAttributes: mediaAttributes)
         switch mode {
-        case .new, .replyTo, .quote, .mention, .shareExtension:
+        case .new, .replyTo, .quote, .mention, .shareExtension, .quoteLink:
           postStatus = try await client.post(endpoint: Statuses.postStatus(json: data))
           if let postStatus {
             StreamWatcher.shared.emmitPostEvent(for: postStatus)
@@ -229,25 +245,29 @@ extension StatusEditor {
             StreamWatcher.shared.emmitEditEvent(for: postStatus)
           }
         }
-        
+
         postingTimer?.invalidate()
         postingTimer = nil
-        
+
         withAnimation {
           postingProgress = 99.0
         }
         try await Task.sleep(for: .seconds(0.5))
         HapticManager.shared.fireHaptic(.notification(.success))
-        
+
         if hasExplicitlySelectedLanguage, let selectedLanguage {
           preferences?.markLanguageAsSelected(isoCode: selectedLanguage)
         }
         isPosting = false
-        
+
         return postStatus
       } catch {
         if let error = error as? Models.ServerError {
           postingError = error.error
+          showPostingErrorAlert = true
+        }
+        if let postError = error as? PostError {
+          postingError = postError.description
           showPostingErrorAlert = true
         }
         isPosting = false
@@ -342,6 +362,9 @@ extension StatusEditor {
           statusText = .init(string: "\n\nFrom: @\(status.reblog?.account.acct ?? status.account.acct)\n\(url)")
           selectedRange = .init(location: 0, length: 0)
         }
+      case let .quoteLink(link):
+        statusText = .init(string: "\n\n\(link)")
+        selectedRange = .init(location: 0, length: 0)
       }
     }
 
@@ -451,9 +474,8 @@ extension StatusEditor {
       Task {
         var initialText: String = ""
         for item in items {
-          if let identifier = item.registeredTypeIdentifiers.first,
-             let handledItemType = UTTypeSupported(rawValue: identifier)
-          {
+          if let identifier = item.registeredTypeIdentifiers.first {
+            let handledItemType = UTTypeSupported(value: identifier)
             do {
               let compressor = Compressor()
               let content = try await handledItemType.loadItemContent(item: item)
@@ -509,8 +531,8 @@ extension StatusEditor {
           }
         }
         if !initialText.isEmpty {
-          statusText = .init(string: initialText)
-          selectedRange = .init(location: statusText.string.utf16.count, length: 0)
+          statusText = .init(string: "\n\n\(initialText)")
+          selectedRange = .init(location: 0, length: 0)
         }
       }
     }
@@ -592,9 +614,10 @@ extension StatusEditor {
 
     private func resetAutoCompletion() {
       if !tagsSuggestions.isEmpty ||
-          !mentionsSuggestions.isEmpty ||
-          currentSuggestionRange != nil ||
-          showRecentsTagsInline {
+        !mentionsSuggestions.isEmpty ||
+        currentSuggestionRange != nil ||
+        showRecentsTagsInline
+      {
         withAnimation {
           tagsSuggestions = []
           mentionsSuggestions = []
@@ -651,7 +674,7 @@ extension StatusEditor {
       }
     }
 
-    func makeMediaContainer(from pickerItem: PhotosPickerItem) async -> MediaContainer? {
+    nonisolated func makeMediaContainer(from pickerItem: PhotosPickerItem) async -> MediaContainer? {
       await withTaskGroup(of: MediaContainer?.self, returning: MediaContainer?.self) { taskGroup in
         taskGroup.addTask(priority: .high) { await Self.makeImageContainer(from: pickerItem) }
         taskGroup.addTask(priority: .high) { await Self.makeGifContainer(from: pickerItem) }
@@ -816,9 +839,7 @@ extension StatusEditor {
                   error: nil
                 )
               }
-            } catch {
-              print(error.localizedDescription)
-            }
+            } catch {}
           }
           try? await Task.sleep(for: .seconds(5))
         } while !Task.isCancelled
@@ -839,7 +860,7 @@ extension StatusEditor {
             mediaAttachment: media,
             error: nil
           )
-        } catch { print(error) }
+        } catch {}
       }
     }
 
@@ -873,7 +894,7 @@ extension StatusEditor {
 
         customEmojis.reduce([String: [Emoji]]()) { currentDict, emoji in
           var dict = currentDict
-          let category = emoji.category ?? "Uncategorized"
+          let category = emoji.category ?? "Custom"
 
           if let emojis = dict[category] {
             dict[category] = emojis + [emoji]
@@ -883,8 +904,8 @@ extension StatusEditor {
 
           return dict
         }.sorted(by: { lhs, rhs in
-          if rhs.key == "Uncategorized" { false }
-          else if lhs.key == "Uncategorized" { true }
+          if rhs.key == "Custom" { false }
+          else if lhs.key == "Custom" { true }
           else { lhs.key < rhs.key }
         }).forEach { key, value in
           emojiContainers.append(.init(categoryName: key, emojis: value))
@@ -900,7 +921,7 @@ extension StatusEditor {
 
 extension StatusEditor.ViewModel: DropDelegate {
   public func performDrop(info: DropInfo) -> Bool {
-    let item = info.itemProviders(for: StatusEditor.UTTypeSupported.types())
+    let item = info.itemProviders(for: [.image, .video, .gif, .mpeg4Movie, .quickTimeMovie, .movie])
     processItemsProvider(items: item)
     return true
   }

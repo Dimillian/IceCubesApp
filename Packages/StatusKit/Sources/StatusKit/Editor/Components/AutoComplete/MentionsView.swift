@@ -1,17 +1,16 @@
 import DesignSystem
 import EmojiText
 import Foundation
-import SwiftUI
 import Models
 import SwiftData
+import SwiftUI
 
-
-extension StatusEditor.AutoCompleteView  {
+extension StatusEditor.AutoCompleteView {
   struct MentionsView: View {
     @Environment(Theme.self) private var theme
-    
+
     var viewModel: StatusEditor.ViewModel
-  
+
     var body: some View {
       ForEach(viewModel.mentionsSuggestions) { account in
         Button {
@@ -22,8 +21,8 @@ extension StatusEditor.AutoCompleteView  {
             VStack(alignment: .leading) {
               EmojiTextApp(.init(stringValue: account.safeDisplayName),
                            emojis: account.emojis)
-                .emojiSize(Font.scaledFootnoteFont.emojiSize)
-                .emojiBaselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
+                .emojiText.size(Font.scaledFootnoteFont.emojiSize)
+                .emojiText.baselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
                 .font(.scaledFootnote)
                 .fontWeight(.bold)
                 .foregroundColor(theme.labelColor)

@@ -7,7 +7,7 @@ import SwiftUI
 struct StatusRowTextView: View {
   @Environment(Theme.self) private var theme
   @Environment(\.isStatusFocused) private var isFocused
-  
+
   @Environment(StatusDataController.self) private var statusDataController
 
   var viewModel: StatusRowViewModel
@@ -22,8 +22,8 @@ struct StatusRowTextView: View {
           .font(isFocused ? .scaledBodyFocused : .scaledBody)
           .lineSpacing(CGFloat(theme.lineSpacing))
           .foregroundColor(viewModel.textDisabled ? .gray : theme.labelColor)
-          .emojiSize(isFocused ? Font.scaledBodyFocusedFont.emojiSize : Font.scaledBodyFont.emojiSize)
-          .emojiBaselineOffset(isFocused ? Font.scaledBodyFocusedFont.emojiBaselineOffset : Font.scaledBodyFont.emojiBaselineOffset)
+          .emojiText.size(isFocused ? Font.scaledBodyFocusedFont.emojiSize : Font.scaledBodyFont.emojiSize)
+          .emojiText.baselineOffset(isFocused ? Font.scaledBodyFocusedFont.emojiBaselineOffset : Font.scaledBodyFont.emojiBaselineOffset)
           .environment(\.openURL, OpenURLAction { url in
             viewModel.routerPath.handleStatus(status: viewModel.finalStatus, url: url)
           })

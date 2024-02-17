@@ -1,8 +1,8 @@
+import AVFoundation
 import Models
 import Nuke
 import QuickLook
 import SwiftUI
-import AVFoundation
 
 public struct MediaUIView: View, @unchecked Sendable {
   private let data: [DisplayData]
@@ -189,73 +189,6 @@ private struct SavePhotoToolbarItem: ToolbarContent, @unchecked Sendable {
   }
 }
 
-private struct QuickLookToolbarItem: ToolbarContent, @unchecked Sendable {
-  let itemUrl: URL
-  @State private var localPath: URL?
-  @State private var isLoading = false
-
-  var body: some ToolbarContent {
-    ToolbarItem(placement: .topBarTrailing) {
-      Button {
-        Task {
-          isLoading = true
-          localPath = await localPathFor(url: itemUrl)
-          isLoading = false
-        }
-      } label: {
-        if isLoading {
-          ProgressView()
-        } else {
-          Image(systemName: "info.circle")
-        }
-      }
-      .quickLookPreview($localPath)
-    }
-  }
-
-  private func imageData(_ url: URL) async -> Data? {
-    var data = ImagePipeline.shared.cache.cachedData(for: .init(url: url))
-    if data == nil {
-      data = try? await URLSession.shared.data(from: url).0
-    }
-    return data
-  }
-
-  private func localPathFor(url: URL) async -> URL {
-    try? FileManager.default.removeItem(at: quickLookDir)
-    try? FileManager.default.createDirectory(at: quickLookDir, withIntermediateDirectories: true)
-    let path = quickLookDir.appendingPathComponent(url.lastPathComponent)
-    let data = await imageData(url)
-    try? data?.write(to: path)
-    return path
-  }
-
-  private var quickLookDir: URL {
-    try! FileManager.default.url(for: .cachesDirectory,
-                                 in: .userDomainMask,
-                                 appropriateFor: nil,
-                                 create: false)
-      .appending(component: "quicklook")
-  }
-}
-
-private struct ShareToolbarItem: ToolbarContent, @unchecked Sendable {
-  let url: URL
-  let type: DisplayType
-
-  var body: some ToolbarContent {
-    ToolbarItem(placement: .topBarTrailing) {
-      if type == .image {
-        let transferable = MediaUIImageTransferable(url: url)
-        ShareLink(item: transferable, preview: .init("status.media.contextmenu.share",
-                                                     image: transferable))
-      } else {
-        ShareLink(item: url)
-      }
-    }
-  }
-}
-
 private struct DisplayData: Identifiable, Hashable {
   let id: String
   let url: URL
@@ -270,20 +203,6 @@ private struct DisplayData: Identifiable, Hashable {
     self.url = url
     description = attachment.description
     self.type = DisplayType(from: type)
-  }
-}
-
-private enum DisplayType {
-  case image
-  case av
-
-  init(from attachmentType: MediaAttachment.SupportedType) {
-    switch attachmentType {
-    case .image:
-      self = .image
-    case .video, .gifv, .audio:
-      self = .av
-    }
   }
 }
 

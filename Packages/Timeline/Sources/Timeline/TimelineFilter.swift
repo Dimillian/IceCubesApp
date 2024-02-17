@@ -30,7 +30,6 @@ public enum RemoteTimelineFilter: String, CaseIterable, Hashable, Equatable {
 }
 
 public enum TimelineFilter: Hashable, Equatable, Identifiable {
-  
   case home, local, federated, trending
   case hashtag(tag: String, accountId: String?)
   case tagGroup(title: String, tags: [String], symbolName: String?)
@@ -40,11 +39,20 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
   case resume
 
   public var id: String {
-    title
+    switch self {
+    case let .remoteLocal(server, filter):
+      return server + filter.rawValue
+    case let .list(list):
+      return list.id
+    case let .tagGroup(title, tags, _):
+      return title + tags.joined()
+    default:
+      return title
+    }
   }
-  
+
   public func hash(into hasher: inout Hasher) {
-    hasher.combine(title)
+    hasher.combine(id)
   }
 
   public static func availableTimeline(client: Client) -> [TimelineFilter] {
@@ -134,7 +142,7 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
     case .remoteLocal:
       "dot.radiowaves.right"
     case let .tagGroup(_, _, symbolName):
-        symbolName ?? "tag"
+      symbolName ?? "tag"
     case .hashtag:
       "number"
     }
@@ -165,7 +173,7 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
                                  tag: tag,
                                  onlyMedia: false,
                                  excludeReplies: false,
-                                 excludeReblogs: false, 
+                                 excludeReblogs: false,
                                  pinned: nil)
       } else {
         return Timelines.hashtag(tag: tag, additional: nil, maxId: maxId, minId: minId)

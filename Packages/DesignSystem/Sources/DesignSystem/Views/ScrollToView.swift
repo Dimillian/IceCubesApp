@@ -11,7 +11,7 @@ public struct ScrollToView: View {
   public init() {}
 
   public var body: some View {
-    HStack { SwiftUI.EmptyView() }
+    HStack { EmptyView() }
       .listRowBackground(Color.clear)
       .listRowSeparator(.hidden)
       .listRowInsets(.init())

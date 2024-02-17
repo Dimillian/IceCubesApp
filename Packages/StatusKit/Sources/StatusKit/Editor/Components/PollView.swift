@@ -121,5 +121,4 @@ extension StatusEditor {
       return index == count - 1 && count < maxEntries
     }
   }
-
 }

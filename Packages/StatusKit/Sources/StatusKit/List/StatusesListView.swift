@@ -2,7 +2,6 @@ import DesignSystem
 import Env
 import Models
 import Network
-import Shimmer
 import SwiftUI
 
 @MainActor
@@ -61,29 +60,17 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
       }
       switch nextPageState {
       case .hasNextPage:
-        loadingRow
-          .id(UUID().uuidString)
-          .onAppear {
-            Task {
-              await fetcher.fetchNextPage()
-            }
-          }
-      case .loadingNextPage:
-        loadingRow
-          .id(UUID().uuidString)
+        NextPageView {
+          try await fetcher.fetchNextPage()
+        }
+        .padding(.horizontal, .layoutPadding)
+        #if !os(visionOS)
+          .listRowBackground(theme.primaryBackgroundColor)
+        #endif
+
       case .none:
         EmptyView()
       }
     }
-  }
-
-  private var loadingRow: some View {
-    HStack {
-      Spacer()
-      ProgressView()
-      Spacer()
-    }
-    .padding(.horizontal, .layoutPadding)
-    .listRowBackground(theme.primaryBackgroundColor)
   }
 }

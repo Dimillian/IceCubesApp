@@ -1,10 +1,10 @@
 import DesignSystem
 import EmojiText
+import Env
 import Foundation
-import SwiftUI
 import Models
 import SwiftData
-import Env
+import SwiftUI
 
 extension StatusEditor.AutoCompleteView {
   @MainActor
@@ -12,12 +12,12 @@ extension StatusEditor.AutoCompleteView {
     @Environment(\.modelContext) private var context
     @Environment(Theme.self) private var theme
     @Environment(CurrentAccount.self) private var currentAccount
-    
+
     var viewModel: StatusEditor.ViewModel
     @Binding var isTagSuggestionExpanded: Bool
-    
+
     @Query(sort: \RecentTag.lastUse, order: .reverse) var recentTags: [RecentTag]
-    
+
     var body: some View {
       TabView {
         recentTagsPage
@@ -26,7 +26,7 @@ extension StatusEditor.AutoCompleteView {
       .tabViewStyle(.page(indexDisplayMode: .always))
       .frame(height: 200)
     }
-    
+
     private var recentTagsPage: some View {
       ScrollView(.vertical) {
         LazyVStack(alignment: .leading, spacing: 12) {
@@ -60,7 +60,7 @@ extension StatusEditor.AutoCompleteView {
         .padding(.horizontal, .layoutPadding)
       }
     }
-    
+
     private var followedTagsPage: some View {
       ScrollView(.vertical) {
         LazyVStack(alignment: .leading, spacing: 12) {

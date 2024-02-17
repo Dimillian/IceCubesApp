@@ -40,9 +40,7 @@ extension StatusEditor {
           }
         }
         .toolbar {
-          ToolbarItem(placement: .navigationBarLeading) {
-            Button("action.cancel", action: { dismiss() })
-          }
+          CancelToolbarItem()
         }
         .scrollContentBackground(.hidden)
         .background(theme.secondaryBackgroundColor)
@@ -51,5 +49,4 @@ extension StatusEditor {
       }
     }
   }
-
 }

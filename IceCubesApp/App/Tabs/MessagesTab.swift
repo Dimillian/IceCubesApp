@@ -5,7 +5,6 @@ import DesignSystem
 import Env
 import Models
 import Network
-import Shimmer
 import SwiftUI
 
 @MainActor
@@ -27,7 +26,7 @@ struct MessagesTab: View {
         .toolbar {
           ToolbarTab(routerPath: $routerPath)
         }
-        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.50), for: .navigationBar)
+        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
         .id(client.id)
     }
     .onChange(of: $popToRootTab.wrappedValue) { _, newValue in

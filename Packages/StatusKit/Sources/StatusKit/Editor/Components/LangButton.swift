@@ -1,19 +1,18 @@
 import DesignSystem
 import Env
-import SwiftUI
 import Models
+import SwiftUI
 
 extension StatusEditor {
-  
   @MainActor
   struct LangButton: View {
     @Environment(Theme.self) private var theme
     @Environment(CurrentInstance.self) private var currentInstance
     @Environment(UserPreferences.self) private var preferences
-    
+
     @State private var isLanguageSheetDisplayed: Bool = false
     @State private var languageSearch: String = ""
-    
+
     var viewModel: ViewModel
 
     var body: some View {
@@ -35,16 +34,11 @@ extension StatusEditor {
         viewModel.setInitialLanguageSelection(preference: preferences.recentlyUsedLanguages.first ?? preferences.serverPreferences?.postLanguage)
       }
       .accessibilityLabel("accessibility.editor.button.language")
-      .popover(isPresented: $isLanguageSheetDisplayed) {
-        if UIDevice.current.userInterfaceIdiom == .phone {
-          languageSheetView
-        } else {
-          languageSheetView
-            .frame(width: 400, height: 500)
-        }
+      .sheet(isPresented: $isLanguageSheetDisplayed) {
+        languageSheetView
       }
     }
-    
+
     private var languageSheetView: some View {
       NavigationStack {
         List {
@@ -61,7 +55,7 @@ extension StatusEditor {
             languageSheetSection(languages: languageSearchResult(query: languageSearch))
           }
         }
-        .searchable(text: $languageSearch)
+        .searchable(text: $languageSearch, placement: .navigationBarDrawer)
         .toolbar {
           ToolbarItem(placement: .navigationBarLeading) {
             Button("action.cancel", action: { isLanguageSheetDisplayed = false })
@@ -73,7 +67,7 @@ extension StatusEditor {
         .background(theme.secondaryBackgroundColor)
       }
     }
-    
+
     @ViewBuilder
     private func languageTextView(isoCode: String, nativeName: String?, name: String?) -> some View {
       if let nativeName, let name {
@@ -105,7 +99,7 @@ extension StatusEditor {
         }
       }
     }
-    
+
     private var recentlyUsedLanguages: [Language] {
       preferences.recentlyUsedLanguages.compactMap { isoCode in
         Language.allAvailableLanguages.first { $0.isoCode == isoCode }

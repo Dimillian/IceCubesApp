@@ -44,6 +44,7 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
   public let id: String
   public let username: String
   public let displayName: String?
+  public let cachedDisplayName: HTMLString
   public let avatar: URL
   public let header: URL
   public let acct: String
@@ -89,6 +90,62 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
     self.source = source
     self.bot = bot
     self.discoverable = discoverable
+
+    if let displayName, !displayName.isEmpty {
+      cachedDisplayName = .init(stringValue: displayName)
+    } else {
+      cachedDisplayName = .init(stringValue: "@\(username)")
+    }
+  }
+
+  public enum CodingKeys: CodingKey {
+    case id
+    case username
+    case displayName
+    case avatar
+    case header
+    case acct
+    case note
+    case createdAt
+    case followersCount
+    case followingCount
+    case statusesCount
+    case lastStatusAt
+    case fields
+    case locked
+    case emojis
+    case url
+    case source
+    case bot
+    case discoverable
+  }
+
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    id = try container.decode(String.self, forKey: .id)
+    username = try container.decode(String.self, forKey: .username)
+    displayName = try container.decodeIfPresent(String.self, forKey: .displayName)
+    avatar = try container.decode(URL.self, forKey: .avatar)
+    header = try container.decode(URL.self, forKey: .header)
+    acct = try container.decode(String.self, forKey: .acct)
+    note = try container.decode(HTMLString.self, forKey: .note)
+    createdAt = try container.decode(ServerDate.self, forKey: .createdAt)
+    followersCount = try container.decodeIfPresent(Int.self, forKey: .followersCount)
+    followingCount = try container.decodeIfPresent(Int.self, forKey: .followingCount)
+    statusesCount = try container.decodeIfPresent(Int.self, forKey: .statusesCount)
+    lastStatusAt = try container.decodeIfPresent(String.self, forKey: .lastStatusAt)
+    fields = try container.decode([Account.Field].self, forKey: .fields)
+    locked = try container.decode(Bool.self, forKey: .locked)
+    emojis = try container.decode([Emoji].self, forKey: .emojis)
+    url = try container.decodeIfPresent(URL.self, forKey: .url)
+    source = try container.decodeIfPresent(Account.Source.self, forKey: .source)
+    bot = try container.decode(Bool.self, forKey: .bot)
+    discoverable = try container.decodeIfPresent(Bool.self, forKey: .discoverable)
+    if let displayName, !displayName.isEmpty {
+      cachedDisplayName = .init(stringValue: displayName)
+    } else {
+      cachedDisplayName = .init(stringValue: "@\(username)")
+    }
   }
 
   public static func placeholder() -> Account {

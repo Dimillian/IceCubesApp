@@ -3,6 +3,7 @@ import Foundation
 import Models
 import Network
 import Observation
+import OSLog
 
 @MainActor
 @Observable public class StreamWatcher {
@@ -27,8 +28,10 @@ import Observation
   public var unreadNotificationsCount: Int = 0
   public var latestEvent: (any StreamEvent)?
 
+  private let logger = Logger(subsystem: "com.icecubesapp", category: "stream")
+
   public static let shared = StreamWatcher()
-  
+
   private init() {
     decoder.keyDecodingStrategy = .convertFromSnakeCase
   }
@@ -62,7 +65,7 @@ import Observation
       connect()
     }
     watchedStreams = streams
-    streams.forEach { stream in
+    for stream in streams {
       sendMessage(message: StreamMessage(type: "subscribe", stream: stream.rawValue))
     }
   }
@@ -89,10 +92,11 @@ import Observation
         case let .string(string):
           do {
             guard let data = string.data(using: .utf8) else {
-              print("Error decoding streaming event string")
+              logger.error("Error decoding streaming event string")
               return
             }
             let rawEvent = try decoder.decode(RawStreamEvent.self, from: data)
+            logger.info("Stream update: \(rawEvent.event)")
             if let event = rawEventToEvent(rawEvent: rawEvent) {
               Task { @MainActor in
                 self.events.append(event)
@@ -103,7 +107,7 @@ import Observation
               }
             }
           } catch {
-            print("Error decoding streaming event: \(error.localizedDescription)")
+            logger.error("Error decoding streaming event: \(error.localizedDescription)")
           }
 
         default:
@@ -147,27 +151,27 @@ import Observation
         return nil
       }
     } catch {
-      print("Error decoding streaming event to final event: \(error.localizedDescription)")
-      print("Raw data: \(rawEvent.payload)")
+      logger.error("Error decoding streaming event to final event: \(error.localizedDescription)")
+      logger.error("Raw data: \(rawEvent.payload)")
       return nil
     }
   }
-  
+
   public func emmitDeleteEvent(for status: String) {
     let event = StreamEventDelete(status: status)
-    self.events.append(event)
-    self.latestEvent = event
+    events.append(event)
+    latestEvent = event
   }
-  
+
   public func emmitEditEvent(for status: Status) {
     let event = StreamEventStatusUpdate(status: status)
-    self.events.append(event)
-    self.latestEvent = event
+    events.append(event)
+    latestEvent = event
   }
-  
+
   public func emmitPostEvent(for status: Status) {
     let event = StreamEventUpdate(status: status)
-    self.events.append(event)
-    self.latestEvent = event
+    events.append(event)
+    latestEvent = event
   }
 }

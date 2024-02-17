@@ -35,11 +35,13 @@ struct DisplaySettingsView: View {
   var body: some View {
     ZStack(alignment: .top) {
       Form {
-        StatusRowView(viewModel: previewStatusViewModel)
-          .allowsHitTesting(false)
-          .opacity(0)
-          .hidden()
-        themeSection
+        #if !os(visionOS)
+          StatusRowView(viewModel: previewStatusViewModel)
+            .allowsHitTesting(false)
+            .opacity(0)
+            .hidden()
+          themeSection
+        #endif
         fontSection
         layoutSection
         platformsSection
@@ -47,34 +49,36 @@ struct DisplaySettingsView: View {
       }
       .navigationTitle("settings.display.navigation-title")
       #if !os(visionOS)
-      .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
+        .scrollContentBackground(.hidden)
+        .background(theme.secondaryBackgroundColor)
       #endif
-      .task(id: localValues.tintColor) {
-        do { try await Task.sleep(for: .microseconds(500)) } catch {}
-        theme.tintColor = localValues.tintColor
-      }
-      .task(id: localValues.primaryBackgroundColor) {
-        do { try await Task.sleep(for: .microseconds(500)) } catch {}
-        theme.primaryBackgroundColor = localValues.primaryBackgroundColor
-      }
-      .task(id: localValues.secondaryBackgroundColor) {
-        do { try await Task.sleep(for: .microseconds(500)) } catch {}
-        theme.secondaryBackgroundColor = localValues.secondaryBackgroundColor
-      }
-      .task(id: localValues.labelColor) {
-        do { try await Task.sleep(for: .microseconds(500)) } catch {}
-        theme.labelColor = localValues.labelColor
-      }
-      .task(id: localValues.lineSpacing) {
-        do { try await Task.sleep(for: .microseconds(500)) } catch {}
-        theme.lineSpacing = localValues.lineSpacing
-      }
-      .task(id: localValues.fontSizeScale) {
-        do { try await Task.sleep(for: .microseconds(500)) } catch {}
-        theme.fontSizeScale = localValues.fontSizeScale
-      }
-      examplePost
+        .task(id: localValues.tintColor) {
+          do { try await Task.sleep(for: .microseconds(500)) } catch {}
+          theme.tintColor = localValues.tintColor
+        }
+        .task(id: localValues.primaryBackgroundColor) {
+          do { try await Task.sleep(for: .microseconds(500)) } catch {}
+          theme.primaryBackgroundColor = localValues.primaryBackgroundColor
+        }
+        .task(id: localValues.secondaryBackgroundColor) {
+          do { try await Task.sleep(for: .microseconds(500)) } catch {}
+          theme.secondaryBackgroundColor = localValues.secondaryBackgroundColor
+        }
+        .task(id: localValues.labelColor) {
+          do { try await Task.sleep(for: .microseconds(500)) } catch {}
+          theme.labelColor = localValues.labelColor
+        }
+        .task(id: localValues.lineSpacing) {
+          do { try await Task.sleep(for: .microseconds(500)) } catch {}
+          theme.lineSpacing = localValues.lineSpacing
+        }
+        .task(id: localValues.fontSizeScale) {
+          do { try await Task.sleep(for: .microseconds(500)) } catch {}
+          theme.fontSizeScale = localValues.fontSizeScale
+        }
+      #if !os(visionOS)
+        examplePost
+      #endif
     }
   }
 

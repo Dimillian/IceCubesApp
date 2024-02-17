@@ -5,7 +5,7 @@ import SwiftUI
 
 public enum StatusesState {
   public enum PagingState {
-    case hasNextPage, loadingNextPage, none
+    case hasNextPage, none
   }
 
   case loading
@@ -17,7 +17,7 @@ public enum StatusesState {
 public protocol StatusesFetcher {
   var statusesState: StatusesState { get }
   func fetchNewestStatuses(pullToRefresh: Bool) async
-  func fetchNextPage() async
+  func fetchNextPage() async throws
   func statusDidAppear(status: Status)
   func statusDidDisappear(status: Status)
 }

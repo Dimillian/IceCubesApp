@@ -4,7 +4,6 @@ import Env
 import Models
 import Network
 import NukeUI
-import Shimmer
 import SwiftUI
 
 @MainActor
@@ -53,31 +52,29 @@ struct AddRemoteTimelineView: View {
       .navigationTitle("timeline.add-remote.title")
       .navigationBarTitleDisplayMode(.inline)
       #if !os(visionOS)
-      .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
-      .scrollDismissesKeyboard(.immediately)
+        .scrollContentBackground(.hidden)
+        .background(theme.secondaryBackgroundColor)
+        .scrollDismissesKeyboard(.immediately)
       #endif
-      .toolbar {
-        ToolbarItem(placement: .navigationBarLeading) {
-          Button("action.cancel", action: { dismiss() })
+        .toolbar {
+          CancelToolbarItem()
         }
-      }
-      .onChange(of: instanceName) { _, newValue in
-        instanceNamePublisher.send(newValue)
-      }
-      .onReceive(instanceNamePublisher.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)) { newValue in
-        Task {
-          let client = Client(server: newValue)
-          instance = try? await client.get(endpoint: Instances.instance)
+        .onChange(of: instanceName) { _, newValue in
+          instanceNamePublisher.send(newValue)
         }
-      }
-      .onAppear {
-        isInstanceURLFieldFocused = true
-        let client = InstanceSocialClient()
-        Task {
-          instances = await client.fetchInstances(keyword: instanceName)
+        .onReceive(instanceNamePublisher.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)) { newValue in
+          Task {
+            let client = Client(server: newValue)
+            instance = try? await client.get(endpoint: Instances.instance)
+          }
         }
-      }
+        .onAppear {
+          isInstanceURLFieldFocused = true
+          let client = InstanceSocialClient()
+          Task {
+            instances = await client.fetchInstances(keyword: instanceName)
+          }
+        }
     }
   }
 

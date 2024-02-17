@@ -73,7 +73,7 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
   public let filtered: [Filtered]?
   public let sensitive: Bool
   public let language: String?
-  
+
   public var isHidden: Bool {
     filtered?.first?.filter.filterAction == .hide
   }
@@ -119,9 +119,9 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
           reblog: nil,
           mediaAttachments: [],
           mentions: [],
-          repliesCount: 0,
-          reblogsCount: 0,
-          favouritesCount: 0,
+          repliesCount: 34,
+          reblogsCount: 8,
+          favouritesCount: 150,
           card: nil,
           favourited: false,
           reblogged: false,
@@ -214,7 +214,7 @@ public final class ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Ha
   public let filtered: [Filtered]?
   public let sensitive: Bool
   public let language: String?
-  
+
   public var isHidden: Bool {
     filtered?.first?.filter.filterAction == .hide
   }

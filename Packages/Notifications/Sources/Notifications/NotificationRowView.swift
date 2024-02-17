@@ -27,7 +27,7 @@ struct NotificationRowView: View {
                  height: AvatarView.FrameConfig.status.height)
           .accessibilityHidden(true)
       }
-      VStack(alignment: .leading, spacing: 2) {
+      VStack(alignment: .leading, spacing: 0) {
         makeMainLabel(type: notification.type)
           // The main label is redundant for mentions
           .accessibilityHidden(notification.type == .mention)
@@ -117,8 +117,8 @@ struct NotificationRowView: View {
                            .foregroundStyle(.secondary)
                        })
                        .font(.scaledSubheadline)
-                       .emojiSize(Font.scaledSubheadlineFont.emojiSize)
-                       .emojiBaselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
+                       .emojiText.size(Font.scaledSubheadlineFont.emojiSize)
+                       .emojiText.baselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
                        .fontWeight(.semibold)
                        .lineLimit(3)
                        .fixedSize(horizontal: false, vertical: true)
@@ -160,6 +160,7 @@ struct NotificationRowView: View {
                                          client: client,
                                          routerPath: routerPath,
                                          showActions: true))
+            .environment(\.isMediaCompact, false)
         } else {
           StatusRowView(viewModel: .init(status: status,
                                          client: client,
@@ -167,6 +168,7 @@ struct NotificationRowView: View {
                                          showActions: false,
                                          textDisabled: true))
             .lineLimit(4)
+            .environment(\.isMediaCompact, true)
         }
         Spacer()
       }
@@ -183,8 +185,8 @@ struct NotificationRowView: View {
             .accessibilityLabel(notification.accounts[0].note.asRawText)
             .lineLimit(3)
             .font(.scaledCallout)
-            .emojiSize(Font.scaledCalloutFont.emojiSize)
-            .emojiBaselineOffset(Font.scaledCalloutFont.emojiBaselineOffset)
+            .emojiText.size(Font.scaledCalloutFont.emojiSize)
+            .emojiText.baselineOffset(Font.scaledCalloutFont.emojiBaselineOffset)
             .foregroundStyle(.secondary)
             .environment(\.openURL, OpenURLAction { url in
               routerPath.handle(url: url)

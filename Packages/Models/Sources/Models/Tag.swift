@@ -1,23 +1,13 @@
 import Foundation
 
 public struct Tag: Codable, Identifiable, Equatable, Hashable {
-  public struct History: Codable, Identifiable {
-    public var id: String {
-      day
-    }
-
-    public let day: String
-    public let accounts: String
-    public let uses: String
-  }
-
   public func hash(into hasher: inout Hasher) {
     hasher.combine(name)
   }
 
   public static func == (lhs: Tag, rhs: Tag) -> Bool {
     lhs.name == rhs.name &&
-    lhs.following == rhs.following
+      lhs.following == rhs.following
   }
 
   public var id: String {
@@ -65,5 +55,4 @@ public struct FeaturedTag: Codable, Identifiable {
 }
 
 extension Tag: Sendable {}
-extension Tag.History: Sendable {}
 extension FeaturedTag: Sendable {}

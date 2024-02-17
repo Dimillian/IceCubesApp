@@ -1,5 +1,5 @@
-import SwiftUI
 import Models
+import SwiftUI
 
 /// A utility that creates a suitable combined accessibility label for a `StatusRowView` that is not focused.
 @MainActor

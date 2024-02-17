@@ -3,7 +3,6 @@ import DesignSystem
 import Env
 import Models
 import Network
-import Shimmer
 import StatusKit
 import SwiftUI
 
@@ -33,7 +32,7 @@ public struct ExploreView: View {
         } else if !viewModel.searchQuery.isEmpty {
           if let results = viewModel.results[viewModel.searchQuery] {
             if results.isEmpty, !viewModel.isSearching {
-              EmptyView(iconName: "magnifyingglass",
+              PlaceholderView(iconName: "magnifyingglass",
                         title: "explore.search.empty.title",
                         message: "explore.search.empty.message")
                 .listRowBackground(theme.secondaryBackgroundColor)
@@ -54,12 +53,12 @@ public struct ExploreView: View {
             .id(UUID())
           }
         } else if viewModel.allSectionsEmpty {
-          EmptyView(iconName: "magnifyingglass",
+          PlaceholderView(iconName: "magnifyingglass",
                     title: "explore.search.title",
                     message: "explore.search.message-\(client.server)")
-            #if !os(visionOS)
+          #if !os(visionOS)
             .listRowBackground(theme.secondaryBackgroundColor)
-            #endif
+          #endif
             .listRowSeparator(.hidden)
         } else {
           quickAccessView
@@ -95,49 +94,52 @@ public struct ExploreView: View {
       }
       .listStyle(.plain)
       #if !os(visionOS)
-      .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
+        .scrollContentBackground(.hidden)
+        .background(theme.secondaryBackgroundColor)
       #endif
-      .navigationTitle("explore.navigation-title")
-      .searchable(text: $viewModel.searchQuery,
-                  isPresented: $viewModel.isSearchPresented,
-                  placement: .navigationBarDrawer(displayMode: .always),
-                  prompt: Text("explore.search.prompt"))
-      .searchScopes($viewModel.searchScope) {
-        ForEach(ExploreViewModel.SearchScope.allCases, id: \.self) { scope in
-          Text(scope.localizedString)
-        }
-      }
-      .task(id: viewModel.searchQuery) {
-        do {
-          await viewModel.search()
-        } catch {}
-      }
-      .onChange(of: scrollToTopSignal) {
-        if viewModel.scrollToTopVisible {
-          viewModel.isSearchPresented.toggle()
-        } else {
-          withAnimation {
-            proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
+        .navigationTitle("explore.navigation-title")
+        .navigationBarTitleDisplayMode(.inline)
+        .searchable(text: $viewModel.searchQuery,
+                    isPresented: $viewModel.isSearchPresented,
+                    placement: .navigationBarDrawer(displayMode: .always),
+                    prompt: Text("explore.search.prompt"))
+        .searchScopes($viewModel.searchScope) {
+          ForEach(ExploreViewModel.SearchScope.allCases, id: \.self) { scope in
+            Text(scope.localizedString)
           }
         }
-      }
+        .task(id: viewModel.searchQuery) {
+          await viewModel.search()
+        }
+        .onChange(of: scrollToTopSignal) {
+          if viewModel.scrollToTopVisible {
+            viewModel.isSearchPresented.toggle()
+          } else {
+            withAnimation {
+              proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
+            }
+          }
+        }
     }
   }
 
   private var quickAccessView: some View {
     ScrollView(.horizontal) {
       HStack {
-        Button("explore.section.trending.tags") {
-          routerPath.navigate(to: RouterDestination.tagsList(tags: viewModel.trendingTags))
+        Button("explore.section.trending.links") {
+          routerPath.navigate(to: RouterDestination.trendingLinks(cards: viewModel.trendingLinks))
+        }
+        .buttonStyle(.bordered)
+        Button("explore.section.trending.posts") {
+          routerPath.navigate(to: RouterDestination.trendingTimeline)
         }
         .buttonStyle(.bordered)
         Button("explore.section.suggested-users") {
           routerPath.navigate(to: RouterDestination.accountsList(accounts: viewModel.suggestedAccounts))
         }
         .buttonStyle(.bordered)
-        Button("explore.section.trending.posts") {
-          routerPath.navigate(to: RouterDestination.trendingTimeline)
+        Button("explore.section.trending.tags") {
+          routerPath.navigate(to: RouterDestination.tagsList(tags: viewModel.trendingTags))
         }
         .buttonStyle(.bordered)
       }
@@ -146,9 +148,9 @@ public struct ExploreView: View {
     .scrollIndicators(.never)
     .listRowInsets(EdgeInsets())
     #if !os(visionOS)
-    .listRowBackground(theme.secondaryBackgroundColor)
+      .listRowBackground(theme.secondaryBackgroundColor)
     #endif
-    .listRowSeparator(.hidden)
+      .listRowSeparator(.hidden)
   }
 
   private var loadingView: some View {
@@ -157,9 +159,9 @@ public struct ExploreView: View {
         .padding(.vertical, 8)
         .redacted(reason: .placeholder)
         .allowsHitTesting(false)
-        #if !os(visionOS)
+      #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
-        #endif
+      #endif
     }
   }
 
@@ -170,9 +172,13 @@ public struct ExploreView: View {
         ForEach(results.accounts) { account in
           if let relationship = results.relationships.first(where: { $0.id == account.id }) {
             AccountsListRow(viewModel: .init(account: account, relationShip: relationship))
-              #if !os(visionOS)
+            #if !os(visionOS)
               .listRowBackground(theme.primaryBackgroundColor)
-              #endif
+            #else
+              .listRowBackground(RoundedRectangle(cornerRadius: 8)
+                .foregroundStyle(.background).hoverEffect())
+              .listRowHoverEffectDisabled()
+            #endif
           }
         }
       }
@@ -181,9 +187,13 @@ public struct ExploreView: View {
       Section("explore.section.tags") {
         ForEach(results.hashtags) { tag in
           TagRowView(tag: tag)
-            #if !os(visionOS)
+          #if !os(visionOS)
             .listRowBackground(theme.primaryBackgroundColor)
-            #endif
+          #else
+            .listRowBackground(RoundedRectangle(cornerRadius: 8)
+              .foregroundStyle(.background).hoverEffect())
+            .listRowHoverEffectDisabled()
+          #endif
             .padding(.vertical, 4)
         }
       }
@@ -192,9 +202,13 @@ public struct ExploreView: View {
       Section("explore.section.posts") {
         ForEach(results.statuses) { status in
           StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
-            #if !os(visionOS)
+          #if !os(visionOS)
             .listRowBackground(theme.primaryBackgroundColor)
-            #endif
+          #else
+            .listRowBackground(RoundedRectangle(cornerRadius: 8)
+              .foregroundStyle(.background).hoverEffect())
+            .listRowHoverEffectDisabled()
+          #endif
             .padding(.vertical, 8)
         }
       }
@@ -208,9 +222,13 @@ public struct ExploreView: View {
       { account in
         if let relationship = viewModel.suggestedAccountsRelationShips.first(where: { $0.id == account.id }) {
           AccountsListRow(viewModel: .init(account: account, relationShip: relationship))
-            #if !os(visionOS)
+          #if !os(visionOS)
             .listRowBackground(theme.primaryBackgroundColor)
-            #endif
+          #else
+            .listRowBackground(RoundedRectangle(cornerRadius: 8)
+              .foregroundStyle(.background).hoverEffect())
+            .listRowHoverEffectDisabled()
+          #endif
         }
       }
       NavigationLink(value: RouterDestination.accountsList(accounts: viewModel.suggestedAccounts)) {
@@ -219,6 +237,10 @@ public struct ExploreView: View {
       }
       #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #else
+      .listRowBackground(RoundedRectangle(cornerRadius: 8)
+        .foregroundStyle(.background).hoverEffect())
+      .listRowHoverEffectDisabled()
       #endif
     }
   }
@@ -229,9 +251,13 @@ public struct ExploreView: View {
         .prefix(upTo: viewModel.trendingTags.count > 5 ? 5 : viewModel.trendingTags.count))
       { tag in
         TagRowView(tag: tag)
-          #if !os(visionOS)
+        #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)
-          #endif
+        #else
+          .listRowBackground(RoundedRectangle(cornerRadius: 8)
+            .foregroundStyle(.background).hoverEffect())
+          .listRowHoverEffectDisabled()
+        #endif
           .padding(.vertical, 4)
       }
       NavigationLink(value: RouterDestination.tagsList(tags: viewModel.trendingTags)) {
@@ -240,6 +266,10 @@ public struct ExploreView: View {
       }
       #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #else
+      .listRowBackground(RoundedRectangle(cornerRadius: 8)
+        .foregroundStyle(.background).hoverEffect())
+      .listRowHoverEffectDisabled()
       #endif
     }
   }
@@ -250,9 +280,13 @@ public struct ExploreView: View {
         .prefix(upTo: viewModel.trendingStatuses.count > 3 ? 3 : viewModel.trendingStatuses.count))
       { status in
         StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
-          #if !os(visionOS)
+        #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)
-          #endif
+        #else
+          .listRowBackground(RoundedRectangle(cornerRadius: 8)
+            .foregroundStyle(.background).hoverEffect())
+          .listRowHoverEffectDisabled()
+        #endif
           .padding(.vertical, 8)
       }
 
@@ -262,6 +296,10 @@ public struct ExploreView: View {
       }
       #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #else
+      .listRowBackground(RoundedRectangle(cornerRadius: 8)
+        .foregroundStyle(.background).hoverEffect())
+      .listRowHoverEffectDisabled()
       #endif
     }
   }
@@ -272,9 +310,14 @@ public struct ExploreView: View {
         .prefix(upTo: viewModel.trendingLinks.count > 3 ? 3 : viewModel.trendingLinks.count))
       { card in
         StatusRowCardView(card: card)
-          #if !os(visionOS)
+          .environment(\.isCompact, true)
+        #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)
-          #endif
+        #else
+          .listRowBackground(RoundedRectangle(cornerRadius: 8)
+            .foregroundStyle(.background).hoverEffect())
+          .listRowHoverEffectDisabled()
+        #endif
           .padding(.vertical, 8)
       }
 
@@ -284,6 +327,10 @@ public struct ExploreView: View {
       }
       #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
+      #else
+      .listRowBackground(RoundedRectangle(cornerRadius: 8)
+        .foregroundStyle(.background).hoverEffect())
+      .listRowHoverEffectDisabled()
       #endif
     }
   }

@@ -30,5 +30,4 @@ extension StatusEditor {
       }
     }
   }
-
 }

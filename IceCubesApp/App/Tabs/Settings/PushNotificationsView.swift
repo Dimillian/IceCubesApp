@@ -111,12 +111,12 @@ struct PushNotificationsView: View {
     }
     .navigationTitle("settings.push.navigation-title")
     #if !os(visionOS)
-    .scrollContentBackground(.hidden)
-    .background(theme.secondaryBackgroundColor)
+      .scrollContentBackground(.hidden)
+      .background(theme.secondaryBackgroundColor)
     #endif
-    .task {
-      await subscription.fetchSubscription()
-    }
+      .task {
+        await subscription.fetchSubscription()
+      }
   }
 
   private func updateSubscription() {

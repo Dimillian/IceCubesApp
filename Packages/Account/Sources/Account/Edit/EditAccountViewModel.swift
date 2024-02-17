@@ -1,9 +1,9 @@
 import Models
 import Network
 import Observation
-import SwiftUI
 import PhotosUI
 import StatusKit
+import SwiftUI
 
 @MainActor
 @Observable class EditAccountViewModel {
@@ -30,22 +30,23 @@ import StatusKit
   var fields: [FieldEditViewModel] = []
   var avatar: URL?
   var header: URL?
-  
+
   var isPhotoPickerPresented: Bool = false {
     didSet {
-      if !isPhotoPickerPresented && mediaPickers.isEmpty {
+      if !isPhotoPickerPresented, mediaPickers.isEmpty {
         isChangingAvatar = false
         isChangingHeader = false
       }
     }
   }
+
   var isChangingAvatar: Bool = false
   var isChangingHeader: Bool = false
 
   var isLoading: Bool = true
   var isSaving: Bool = false
   var saveError: Bool = false
-  
+
   var mediaPickers: [PhotosPickerItem] = [] {
     didSet {
       if let item = mediaPickers.first {
@@ -108,47 +109,47 @@ import StatusKit
       saveError = true
     }
   }
-  
+
   private func uploadHeader(data: Data) async -> Bool {
     guard let client else { return false }
     do {
       let response = try await client.mediaUpload(endpoint: Accounts.updateCredentialsMedia,
-                                                   version: .v1,
-                                                   method: "PATCH",
-                                                   mimeType: "image/jpeg",
-                                                   filename: "header",
-                                                   data: data)
+                                                  version: .v1,
+                                                  method: "PATCH",
+                                                  mimeType: "image/jpeg",
+                                                  filename: "header",
+                                                  data: data)
       return response?.statusCode == 200
     } catch {
       return false
     }
   }
-  
+
   private func uploadAvatar(data: Data) async -> Bool {
     guard let client else { return false }
     do {
       let response = try await client.mediaUpload(endpoint: Accounts.updateCredentialsMedia,
-                                                   version: .v1,
-                                                   method: "PATCH",
-                                                   mimeType: "image/jpeg",
-                                                   filename: "avatar",
-                                                   data: data)
+                                                  version: .v1,
+                                                  method: "PATCH",
+                                                  mimeType: "image/jpeg",
+                                                  filename: "avatar",
+                                                  data: data)
       return response?.statusCode == 200
     } catch {
       return false
     }
   }
-  
+
   private func getItemImageData(item: PhotosPickerItem) async -> Data? {
     guard let imageFile = try? await item.loadTransferable(type: StatusEditor.ImageFileTranseferable.self) else { return nil }
 
     let compressor = StatusEditor.Compressor()
 
     guard let compressedData = await compressor.compressImageFrom(url: imageFile.url),
-            let image = UIImage(data: compressedData),
-            let uploadData = try? await compressor.compressImageForUpload(image)
+          let image = UIImage(data: compressedData),
+          let uploadData = try? await compressor.compressImageForUpload(image)
     else { return nil }
-    
+
     return uploadData
   }
 }

@@ -4,7 +4,6 @@ import Env
 import Foundation
 import Models
 import Network
-import Shimmer
 import SwiftUI
 
 @MainActor
@@ -19,16 +18,24 @@ public struct StatusRowView: View {
 
   @Environment(QuickLook.self) private var quickLook
   @Environment(Theme.self) private var theme
+  @Environment(Client.self) private var client
 
   @State private var viewModel: StatusRowViewModel
   @State private var showSelectableText: Bool = false
+  @State private var isBlockConfirmationPresented = false
 
-  public init(viewModel: StatusRowViewModel) {
+  public enum Context { case timeline, detail }
+  private let context: Context
+
+  public init(viewModel: StatusRowViewModel, context: Context = .timeline) {
     _viewModel = .init(initialValue: viewModel)
+    self.context = context
   }
 
   var contextMenu: some View {
-    StatusRowContextMenu(viewModel: viewModel, showTextForSelection: $showSelectableText)
+    StatusRowContextMenu(viewModel: viewModel,
+                         showTextForSelection: $showSelectableText,
+                         isBlockConfirmationPresented: $isBlockConfirmationPresented)
   }
 
   public var body: some View {
@@ -56,7 +63,7 @@ public struct StatusRowView: View {
             EmptyView()
           }
         } else {
-          if !isCompact {
+          if !isCompact && context != .detail {
             Group {
               StatusRowTagView(viewModel: viewModel)
               StatusRowReblogView(viewModel: viewModel)
@@ -68,11 +75,13 @@ public struct StatusRowView: View {
             if !isCompact,
                theme.avatarPosition == .leading
             {
-              Button {
-                viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
-              } label: {
-                AvatarView(viewModel.finalStatus.account.avatar)
-              }
+              AvatarView(viewModel.finalStatus.account.avatar)
+                .accessibility(addTraits: .isButton)
+                .contentShape(Circle())
+                .hoverEffect()
+                .onTapGesture {
+                  viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
+                }
             }
             VStack(alignment: .leading, spacing: .statusComponentSpacing) {
               if !isCompact {
@@ -90,11 +99,12 @@ public struct StatusRowView: View {
                   }
                 }
               if !reasons.contains(.placeholder),
-                  viewModel.showActions, isFocused || theme.statusActionsDisplay != .none,
-                 !isInCaptureMode {
-                StatusRowActionsView(viewModel: viewModel)
+                 viewModel.showActions, isFocused || theme.statusActionsDisplay != .none,
+                 !isInCaptureMode
+              {
+                StatusRowActionsView(isBlockConfirmationPresented: $isBlockConfirmationPresented,
+                                     viewModel: viewModel)
                   .tint(isFocused ? theme.tintColor : .gray)
-                  .contentShape(Rectangle())
               }
 
               if isFocused, !isCompact {
@@ -104,6 +114,7 @@ public struct StatusRowView: View {
           }
         }
       }
+      .padding(.init(top: isCompact ? 6 : 12, leading: 0, bottom: isFocused ? 12 : 6, trailing: 0))
     }
     .onAppear {
       if !reasons.contains(.placeholder) {
@@ -141,9 +152,9 @@ public struct StatusRowView: View {
     #else
     .listRowBackground(viewModel.highlightRowColor)
     #endif
-    .listRowInsets(.init(top: 12,
+    .listRowInsets(.init(top: 0,
                          leading: .layoutPadding,
-                         bottom: isFocused ? 12 : 6,
+                         bottom: 0,
                          trailing: .layoutPadding))
     .accessibilityElement(children: isFocused ? .contain : .combine)
     .accessibilityLabel(isFocused == false && accessibilityVoiceOverEnabled
@@ -185,6 +196,18 @@ public struct StatusRowView: View {
         secondaryButton: .cancel()
       )
     })
+    .confirmationDialog("",
+                        isPresented: $isBlockConfirmationPresented)
+    {
+      Button("account.action.block", role: .destructive) {
+        Task {
+          do {
+            let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
+            viewModel.authorRelationship = try await client.post(endpoint: Accounts.block(id: operationAccount.id))
+          } catch {}
+        }
+      }
+    }
     .alignmentGuide(.listRowSeparatorLeading) { _ in
       -100
     }
@@ -310,3 +333,25 @@ public struct StatusRowView: View {
   }
 }
 
+#Preview {
+  List {
+    StatusRowView(viewModel:
+      .init(status: .placeholder(),
+            client: .init(server: ""),
+            routerPath: RouterPath()),
+      context: .timeline)
+    StatusRowView(viewModel:
+      .init(status: .placeholder(),
+            client: .init(server: ""),
+            routerPath: RouterPath()),
+      context: .timeline)
+    StatusRowView(viewModel:
+      .init(status: .placeholder(),
+            client: .init(server: ""),
+            routerPath: RouterPath()),
+      context: .timeline)
+  }
+  .listStyle(.plain)
+  .withPreviewsEnv()
+  .environment(Theme.shared)
+}

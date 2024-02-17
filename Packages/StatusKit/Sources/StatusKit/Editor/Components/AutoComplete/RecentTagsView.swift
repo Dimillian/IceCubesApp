@@ -1,20 +1,19 @@
 import DesignSystem
 import EmojiText
 import Foundation
-import SwiftUI
 import Models
 import SwiftData
+import SwiftUI
 
-
-extension StatusEditor.AutoCompleteView  {
+extension StatusEditor.AutoCompleteView {
   struct RecentTagsView: View {
     @Environment(Theme.self) private var theme
-    
+
     var viewModel: StatusEditor.ViewModel
     @Binding var isTagSuggestionExpanded: Bool
-    
+
     @Query(sort: \RecentTag.lastUse, order: .reverse) var recentTags: [RecentTag]
-    
+
     var body: some View {
       ForEach(recentTags) { tag in
         Button {

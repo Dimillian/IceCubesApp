@@ -1,7 +1,6 @@
 import DesignSystem
 import Env
 import RevenueCat
-import Shimmer
 import SwiftUI
 
 @MainActor
@@ -70,24 +69,24 @@ struct SupportAppView: View {
     }
     .navigationTitle("settings.support.navigation-title")
     #if !os(visionOS)
-    .scrollContentBackground(.hidden)
-    .background(theme.secondaryBackgroundColor)
+      .scrollContentBackground(.hidden)
+      .background(theme.secondaryBackgroundColor)
     #endif
-    .alert("settings.support.alert.title", isPresented: $purchaseSuccessDisplayed, actions: {
-      Button { purchaseSuccessDisplayed = false } label: { Text("alert.button.ok") }
-    }, message: {
-      Text("settings.support.alert.message")
-    })
-    .alert("alert.error", isPresented: $purchaseErrorDisplayed, actions: {
-      Button { purchaseErrorDisplayed = false } label: { Text("alert.button.ok") }
-    }, message: {
-      Text("settings.support.alert.error.message")
-    })
-    .onAppear {
-      loadingProducts = true
-      fetchStoreProducts()
-      refreshUserInfo()
-    }
+      .alert("settings.support.alert.title", isPresented: $purchaseSuccessDisplayed, actions: {
+        Button { purchaseSuccessDisplayed = false } label: { Text("alert.button.ok") }
+      }, message: {
+        Text("settings.support.alert.message")
+      })
+      .alert("alert.error", isPresented: $purchaseErrorDisplayed, actions: {
+        Button { purchaseErrorDisplayed = false } label: { Text("alert.button.ok") }
+      }, message: {
+        Text("settings.support.alert.error.message")
+      })
+      .onAppear {
+        loadingProducts = true
+        fetchStoreProducts()
+        refreshUserInfo()
+      }
   }
 
   private func purchase(product: StoreProduct) async {
@@ -280,6 +279,5 @@ struct SupportAppView: View {
     }
     .redacted(reason: .placeholder)
     .allowsHitTesting(false)
-    .shimmering()
   }
 }

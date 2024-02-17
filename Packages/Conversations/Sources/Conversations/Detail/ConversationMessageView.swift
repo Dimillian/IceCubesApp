@@ -36,8 +36,8 @@ struct ConversationMessageView: View {
           EmojiTextApp(message.content, emojis: message.emojis)
             .font(.scaledBody)
             .foregroundColor(theme.labelColor)
-            .emojiSize(Font.scaledBodyFont.emojiSize)
-            .emojiBaselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
+            .emojiText.size(Font.scaledBodyFont.emojiSize)
+            .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
             .padding(6)
             .environment(\.openURL, OpenURLAction { url in
               routerPath.handleStatus(status: message, url: url)
@@ -205,12 +205,12 @@ struct ConversationMessageView: View {
     .frame(height: 200)
     .contentShape(Rectangle())
     .onTapGesture {
-#if targetEnvironment(macCatalyst) || os(visionOS)
-      openWindow(value: WindowDestinationMedia.mediaViewer(attachments: [attachement],
-                                                           selectedAttachment: attachement))
-#else
-      quickLook.prepareFor(selectedMediaAttachment: attachement, mediaAttachments: [attachement])
-#endif
+      #if targetEnvironment(macCatalyst) || os(visionOS)
+        openWindow(value: WindowDestinationMedia.mediaViewer(attachments: [attachement],
+                                                             selectedAttachment: attachement))
+      #else
+        quickLook.prepareFor(selectedMediaAttachment: attachement, mediaAttachments: [attachement])
+      #endif
     }
   }
 

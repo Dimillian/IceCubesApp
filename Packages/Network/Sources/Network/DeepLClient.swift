@@ -1,7 +1,7 @@
 import Foundation
 import Models
 
-public struct DeepLClient {
+public struct DeepLClient: Sendable {
   public enum DeepLError: Error {
     case notFound
   }

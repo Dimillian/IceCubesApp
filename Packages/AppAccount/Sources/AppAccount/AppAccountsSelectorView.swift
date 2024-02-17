@@ -96,9 +96,12 @@ public struct AppAccountsSelectorView: View {
             AppAccountView(viewModel: viewModel, isParentPresented: $isPresented)
           }
           addAccountButton
+          #if os(visionOS)
+          .foregroundStyle(theme.labelColor)
+          #endif
         }
         #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
         #endif
 
         if accountCreationEnabled {
@@ -107,8 +110,10 @@ public struct AppAccountsSelectorView: View {
             aboutButton
             supportButton
           }
-          #if !os(visionOS)
-            .listRowBackground(theme.primaryBackgroundColor)
+          #if os(visionOS)
+          .foregroundStyle(theme.labelColor)
+          #else
+          .listRowBackground(theme.primaryBackgroundColor)
           #endif
         }
       }
@@ -129,7 +134,7 @@ public struct AppAccountsSelectorView: View {
       .environment(routerPath)
     }
   }
-  
+
   private var addAccountButton: some View {
     Button {
       isPresented = false
@@ -153,7 +158,7 @@ public struct AppAccountsSelectorView: View {
       Label("tab.settings", systemImage: "gear")
     }
   }
-  
+
   private var supportButton: some View {
     Button {
       isPresented = false
@@ -165,7 +170,7 @@ public struct AppAccountsSelectorView: View {
       Label("settings.app.support", systemImage: "wand.and.stars")
     }
   }
-  
+
   private var aboutButton: some View {
     Button {
       isPresented = false

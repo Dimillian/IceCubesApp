@@ -5,7 +5,6 @@ import Models
 import Network
 import NukeUI
 import SFSafeSymbols
-import Shimmer
 import SwiftData
 import SwiftUI
 
@@ -39,7 +38,9 @@ struct EditTagGroupView: View {
             focusedField: $focusedField
           )
         }
+        #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
+        #endif
 
         Section("add-tag-groups.edit.tags") {
           TagsInputView(
@@ -48,7 +49,9 @@ struct EditTagGroupView: View {
             focusedField: $focusedField
           )
         }
+        #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
+        #endif
       }
       .formStyle(.grouped)
       .navigationTitle(
@@ -58,22 +61,20 @@ struct EditTagGroupView: View {
       )
       .navigationBarTitleDisplayMode(.inline)
       #if !os(visionOS)
-      .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
-      .scrollDismissesKeyboard(.interactively)
+        .scrollContentBackground(.hidden)
+        .background(theme.secondaryBackgroundColor)
+        .scrollDismissesKeyboard(.interactively)
       #endif
-      .toolbar {
-        ToolbarItem(placement: .navigationBarLeading) {
-          Button("action.cancel", action: { dismiss() })
+        .toolbar {
+          CancelToolbarItem()
+          ToolbarItem(placement: .navigationBarTrailing) {
+            Button("action.save", action: { save() })
+              .disabled(!tagGroup.isValid)
+          }
         }
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button("action.save", action: { save() })
-            .disabled(!tagGroup.isValid)
+        .onAppear {
+          focusedField = .title
         }
-      }
-      .onAppear {
-        focusedField = .title
-      }
     }
   }
 

@@ -18,7 +18,7 @@ private struct SafariRouter: ViewModifier {
   @Environment(RouterPath.self) private var routerPath
 
   #if !os(visionOS)
-  @State private var safariManager = InAppSafariManager()
+    @State private var safariManager = InAppSafariManager()
   #endif
 
   func body(content: Content) -> some View {
@@ -52,78 +52,78 @@ private struct SafariRouter: ViewModifier {
               return .systemAction
             }
             #if os(visionOS)
-            return .systemAction
+              return .systemAction
             #else
-            return safariManager.open(url)
+              return safariManager.open(url)
             #endif
           #else
             return .systemAction
           #endif
         }
       }
-      #if !os(visionOS)
+    #if !os(visionOS)
       .background {
         WindowReader { window in
           safariManager.windowScene = window.windowScene
         }
       }
-      #endif
+    #endif
   }
 }
 
 #if !os(visionOS)
-@MainActor
-@Observable private class InAppSafariManager: NSObject, SFSafariViewControllerDelegate {
-  var windowScene: UIWindowScene?
-  let viewController: UIViewController = .init()
-  var window: UIWindow?
-
   @MainActor
-  func open(_ url: URL) -> OpenURLAction.Result {
-    guard let windowScene else { return .systemAction }
+  @Observable private class InAppSafariManager: NSObject, SFSafariViewControllerDelegate {
+    var windowScene: UIWindowScene?
+    let viewController: UIViewController = .init()
+    var window: UIWindow?
 
-    window = setupWindow(windowScene: windowScene)
+    @MainActor
+    func open(_ url: URL) -> OpenURLAction.Result {
+      guard let windowScene else { return .systemAction }
 
-    let configuration = SFSafariViewController.Configuration()
-    configuration.entersReaderIfAvailable = UserPreferences.shared.inAppBrowserReaderView
+      window = setupWindow(windowScene: windowScene)
 
-    let safari = SFSafariViewController(url: url, configuration: configuration)
-    safari.preferredBarTintColor = UIColor(Theme.shared.primaryBackgroundColor)
-    safari.preferredControlTintColor = UIColor(Theme.shared.tintColor)
-    safari.delegate = self
+      let configuration = SFSafariViewController.Configuration()
+      configuration.entersReaderIfAvailable = UserPreferences.shared.inAppBrowserReaderView
 
-    DispatchQueue.main.async { [weak self] in
-      self?.viewController.present(safari, animated: true)
+      let safari = SFSafariViewController(url: url, configuration: configuration)
+      safari.preferredBarTintColor = UIColor(Theme.shared.primaryBackgroundColor)
+      safari.preferredControlTintColor = UIColor(Theme.shared.tintColor)
+      safari.delegate = self
+
+      DispatchQueue.main.async { [weak self] in
+        self?.viewController.present(safari, animated: true)
+      }
+
+      return .handled
     }
 
-    return .handled
-  }
+    func setupWindow(windowScene: UIWindowScene) -> UIWindow {
+      let window = window ?? UIWindow(windowScene: windowScene)
 
-  func setupWindow(windowScene: UIWindowScene) -> UIWindow {
-    let window = window ?? UIWindow(windowScene: windowScene)
+      window.rootViewController = viewController
+      window.makeKeyAndVisible()
 
-    window.rootViewController = viewController
-    window.makeKeyAndVisible()
+      switch Theme.shared.selectedScheme {
+      case .dark:
+        window.overrideUserInterfaceStyle = .dark
+      case .light:
+        window.overrideUserInterfaceStyle = .light
+      }
 
-    switch Theme.shared.selectedScheme {
-    case .dark:
-      window.overrideUserInterfaceStyle = .dark
-    case .light:
-      window.overrideUserInterfaceStyle = .light
+      self.window = window
+      return window
     }
 
-    self.window = window
-    return window
-  }
-
-  nonisolated func safariViewControllerDidFinish(_: SFSafariViewController) {
-    Task { @MainActor in
-      window?.resignKey()
-      window?.isHidden = false
-      window = nil
+    nonisolated func safariViewControllerDidFinish(_: SFSafariViewController) {
+      Task { @MainActor in
+        window?.resignKey()
+        window?.isHidden = false
+        window = nil
+      }
     }
   }
-}
 #endif
 
 private struct WindowReader: UIViewRepresentable {

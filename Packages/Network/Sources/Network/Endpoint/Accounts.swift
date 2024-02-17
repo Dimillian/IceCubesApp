@@ -98,11 +98,11 @@ public enum Accounts: Endpoint {
       if let sinceId {
         params.append(.init(name: "max_id", value: sinceId))
       }
-      
+
       params.append(.init(name: "only_media", value: onlyMedia ? "true" : "false"))
       params.append(.init(name: "exclude_replies", value: excludeReplies ? "true" : "false"))
       params.append(.init(name: "exclude_reblogs", value: excludeReblogs ? "true" : "false"))
-      
+
       if let pinned {
         params.append(.init(name: "pinned", value: pinned ? "true" : "false"))
       }

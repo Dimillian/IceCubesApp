@@ -29,23 +29,24 @@ public struct StatusEmbeddedView: View {
                                        showActions: false))
           .accessibilityLabel(status.content.asRawText)
           .environment(\.isCompact, true)
+          .environment(\.isMediaCompact, true)
           .environment(\.isStatusFocused, false)
       }
       Spacer()
     }
     .padding(8)
     #if os(visionOS)
-    .background(Material.thickMaterial)
+      .background(Material.thickMaterial)
     #else
-    .background(theme.secondaryBackgroundColor)
+      .background(theme.secondaryBackgroundColor)
     #endif
-    .cornerRadius(4)
-    .overlay(
-      RoundedRectangle(cornerRadius: 4)
-        .stroke(.gray.opacity(0.35), lineWidth: 1)
-    )
-    .padding(.top, 8)
-    .accessibilityElement(children: .combine)
+      .cornerRadius(4)
+      .overlay(
+        RoundedRectangle(cornerRadius: 4)
+          .stroke(.gray.opacity(0.35), lineWidth: 1)
+      )
+      .padding(.top, 8)
+      .accessibilityElement(children: .combine)
   }
 
   private func makeAccountView(account: Account) -> some View {
@@ -54,8 +55,8 @@ public struct StatusEmbeddedView: View {
       VStack(alignment: .leading, spacing: 0) {
         EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
           .font(.scaledFootnote)
-          .emojiSize(Font.scaledFootnoteFont.emojiSize)
-          .emojiBaselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
+          .emojiText.size(Font.scaledFootnoteFont.emojiSize)
+          .emojiText.baselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
           .fontWeight(.semibold)
         Group {
           Text("@\(account.acct)") +

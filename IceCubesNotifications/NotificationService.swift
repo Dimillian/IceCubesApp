@@ -9,12 +9,11 @@ import Notifications
 import UIKit
 import UserNotifications
 
-@MainActor
 class NotificationService: UNNotificationServiceExtension {
   var contentHandler: ((UNNotificationContent) -> Void)?
   var bestAttemptContent: UNMutableNotificationContent?
 
-  override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
+  @MainActor override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
     self.contentHandler = contentHandler
     bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
 
@@ -124,6 +123,7 @@ class NotificationService: UNNotificationServiceExtension {
     }
   }
 
+  @MainActor
   private func toRemoteNotification(localNotification: MastodonPushNotification) async -> Models.Notification? {
     do {
       if let account = AppAccountsManager.shared.availableAccounts.first(where: { $0.oauthToken?.accessToken == localNotification.accessToken }) {
@@ -137,6 +137,7 @@ class NotificationService: UNNotificationServiceExtension {
     return nil
   }
 
+  @MainActor
   private func buildMessageIntent(remoteNotification: Models.Notification,
                                   currentUser: String,
                                   avatarURL: URL) -> INSendMessageIntent
