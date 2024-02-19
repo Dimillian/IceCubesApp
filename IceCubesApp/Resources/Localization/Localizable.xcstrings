@@ -8611,8 +8611,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld bidalketa berri"
+                  "state" : "translated",
+                  "value" : "Bidalketa berri %lld"
                 }
               },
               "other" : {
@@ -11815,7 +11815,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "Bidalketa %lld"
                 }
               },
@@ -12168,7 +12168,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "Eremu %lld"
                 }
               },
@@ -68725,8 +68725,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Results"
+            "state" : "translated",
+            "value" : "Ezkutatu emaitzak"
           }
         },
         "fr" : {
@@ -68919,7 +68919,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "Boto %lld"
                 }
               },
@@ -70356,8 +70356,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Results"
+            "state" : "translated",
+            "value" : "Erakutsi emaitzak"
           }
         },
         "fr" : {
@@ -71859,7 +71859,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "Bultzada %lld"
                 }
               },
@@ -72212,7 +72212,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "Batek gogoko"
                 }
               },
@@ -72565,7 +72565,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "Erantzun %lld"
                 }
               },
@@ -74688,8 +74688,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "aipamen %lld"
+                  "state" : "translated",
+                  "value" : "Aipamen %lld"
                 }
               },
               "other" : {
@@ -77440,8 +77440,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Egin salto berrienera"
+            "state" : "translated",
+            "value" : "Freskatu"
           }
         },
         "fr" : {
@@ -77952,7 +77952,7 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "%#@count_participants@ %#@count_posts@"
           },
           "substitutions" : {
@@ -77963,13 +77963,13 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
+                      "state" : "translated",
                       "value" : "Partaide batek egindako"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
+                      "state" : "translated",
                       "value" : "%lld partaidek egindako"
                     }
                   }
@@ -77983,13 +77983,13 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
+                      "state" : "translated",
                       "value" : "bidalketa %lld"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
+                      "state" : "translated",
                       "value" : "%lld bidalketa"
                     }
                   }
@@ -78910,14 +78910,14 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld people talking"
+                  "state" : "translated",
+                  "value" : "Pertsona batek hizpide"
                 }
               },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "%lld people talking"
+                  "value" : "%lld pertsonak hizpide"
                 }
               }
             }
