@@ -23,9 +23,6 @@ public struct AccountDetailView: View {
   @State private var viewModel: AccountDetailViewModel
   @State private var isCurrentUser: Bool = false
   @State private var showBlockConfirmation: Bool = false
-
-  @State private var isEditingAccount: Bool = false
-  @State private var isEditingFilters: Bool = false
   @State private var isEditingRelationshipNote: Bool = false
 
   @State private var displayTitle: Bool = false
@@ -136,20 +133,14 @@ public struct AccountDetailView: View {
         viewModel.handleEvent(event: latestEvent, currentAccount: currentAccount)
       }
     }
-    .onChange(of: isEditingAccount) { _, newValue in
-      if !newValue {
+    .onChange(of: routerPath.presentedSheet) { oldValue, newValue in
+      if oldValue == .accountEditInfo || newValue == .accountEditInfo {
         Task {
           await viewModel.fetchAccount()
           await preferences.refreshServerPreferences()
         }
       }
     }
-    .sheet(isPresented: $isEditingAccount, content: {
-      EditAccountView()
-    })
-    .sheet(isPresented: $isEditingFilters, content: {
-      FiltersListView()
-    })
     .sheet(isPresented: $isEditingRelationshipNote, content: {
       EditRelationshipNoteView(accountDetailViewModel: viewModel)
     })
@@ -306,7 +297,7 @@ public struct AccountDetailView: View {
 
         if isCurrentUser {
           Button {
-            isEditingAccount = true
+            routerPath.presentedSheet = .accountEditInfo
           } label: {
             Label("account.action.edit-info", systemImage: "pencil")
           }
@@ -321,7 +312,7 @@ public struct AccountDetailView: View {
 
           if currentInstance.isFiltersSupported {
             Button {
-              isEditingFilters = true
+              routerPath.presentedSheet = .accountFiltersList
             } label: {
               Label("account.action.edit-filters", systemImage: "line.3.horizontal.decrease.circle")
             }

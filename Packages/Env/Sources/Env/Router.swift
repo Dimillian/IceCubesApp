@@ -38,7 +38,15 @@ public enum WindowDestinationMedia: Hashable, Codable {
   case mediaViewer(attachments: [MediaAttachment], selectedAttachment: MediaAttachment)
 }
 
-public enum SheetDestination: Identifiable {
+public enum SheetDestination: Identifiable, Hashable {
+  public static func == (lhs: SheetDestination, rhs: SheetDestination) -> Bool {
+    lhs.id == rhs.id
+  }
+  
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(id)
+  }
+  
   case newStatusEditor(visibility: Models.Visibility)
   case editStatusEditor(status: Status)
   case replyToStatusEditor(status: Status)
@@ -60,6 +68,8 @@ public enum SheetDestination: Identifiable {
   case shareImage(image: UIImage, status: Status)
   case editTagGroup(tagGroup: TagGroup, onSaved: ((TagGroup) -> Void)?)
   case timelineContentFilter
+  case accountEditInfo
+  case accountFiltersList
 
   public var id: String {
     switch self {
@@ -90,6 +100,10 @@ public enum SheetDestination: Identifiable {
       "settings"
     case .timelineContentFilter:
       "timelineContentFilter"
+    case .accountEditInfo:
+      "accountEditInfo"
+    case .accountFiltersList:
+      "accountFiltersList"
     }
   }
 }

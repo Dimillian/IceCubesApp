@@ -1,10 +1,14 @@
 import DesignSystem
 import SwiftUI
+import Env
 
 public struct TimelineContentFilterView: View {
   @Environment(Theme.self) private var theme
+  @Environment(CurrentInstance.self) private var currentInstance
+  @Environment(RouterPath.self) private var routerPath
 
   @State private var contentFilter = TimelineContentFilter.shared
+  @State private var isEditingFilters = false
 
   public init() {}
 
@@ -22,6 +26,22 @@ public struct TimelineContentFilterView: View {
         }
         Toggle(isOn: $contentFilter.showQuotePosts) {
           Label("timeline.filter.show-quote", systemImage: "quote.bubble")
+        }
+      }
+      #if !os(visionOS)
+      .listRowBackground(theme.primaryBackgroundColor)
+      #endif
+      
+      Section {
+        if currentInstance.isFiltersSupported {
+          Button {
+            routerPath.presentedSheet = .accountFiltersList
+          } label: {
+            Label("account.action.edit-filters", systemImage: "line.3.horizontal.decrease.circle")
+              .frame(maxWidth: .infinity, alignment: .leading)
+              .contentShape(Rectangle())
+          }
+          .buttonStyle(.plain)
         }
       }
       #if !os(visionOS)
