@@ -79,9 +79,6 @@ public struct EditAccountView: View {
                   .clipShape(RoundedRectangle(cornerRadius: 8))
                   .clipped()
                   .frame(height: 150)
-                  .onAppear() {
-                      print("Showing preview")
-                  }
               }
             } else {
               LazyImage(url: header) { state in
@@ -141,11 +138,6 @@ public struct EditAccountView: View {
                   maxSelectionCount: 1,
                   matching: .any(of: [.images]),
                   photoLibrary: .shared())
-    .onAppear() {
-        if let header = viewModel.header {
-            print("Header URL is: \(header)")
-        }
-    }
   }
 
   @ViewBuilder

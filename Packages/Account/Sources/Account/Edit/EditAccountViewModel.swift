@@ -59,10 +59,8 @@ import SwiftUI
           if let data = await getItemImageData(item: item) {
             if isChangingAvatar {
               temporaryAvatarData = data
-              print("New avatar temporary save")
             } else if isChangingHeader {
               temporaryHeaderData = data
-              print("New header temporary save")
             }
             isChangingAvatar = false
             isChangingHeader = false
@@ -101,16 +99,13 @@ import SwiftUI
       // Upload new images
       if let temporaryAvatarData {
         _ = await uploadAvatar(data: temporaryAvatarData)
-        print("Uploading avatar")
       }
       if let temporaryHeaderData {
          _ = await uploadHeader(data: temporaryHeaderData)
-        print("Uploading header")
       }
       // Clear preview data
       temporaryAvatarData = nil
       temporaryHeaderData = nil
-      print("cleared temporary avatar and header")
       // Fetch account to set header and avatar
       await fetchAccount()
         
