@@ -70,21 +70,36 @@ public struct EditAccountView: View {
       ZStack(alignment: .center) {
         if let header = viewModel.header {
           ZStack(alignment: .topLeading) {
-            LazyImage(url: header) { state in
-              if let image = state.image {
-                image
+            if let previewHeaderData = viewModel.temporaryHeaderData {
+              if let uiImage = UIImage(data: previewHeaderData) {
+                Image(uiImage: uiImage)
                   .resizable()
                   .aspectRatio(contentMode: .fill)
                   .frame(height: 150)
                   .clipShape(RoundedRectangle(cornerRadius: 8))
                   .clipped()
-              } else {
-                RoundedRectangle(cornerRadius: 8)
-                  .foregroundStyle(theme.primaryBackgroundColor)
                   .frame(height: 150)
+                  .onAppear() {
+                      print("Showing preview")
+                  }
               }
+            } else {
+              LazyImage(url: header) { state in
+                if let image = state.image {
+                  image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(height: 150)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .clipped()
+                } else {
+                  RoundedRectangle(cornerRadius: 8)
+                    .foregroundStyle(theme.primaryBackgroundColor)
+                    .frame(height: 150)
+                }
+              }
+              .frame(height: 150)
             }
-            .frame(height: 150)
           }
         }
         if let avatar = viewModel.avatar {
@@ -126,6 +141,11 @@ public struct EditAccountView: View {
                   maxSelectionCount: 1,
                   matching: .any(of: [.images]),
                   photoLibrary: .shared())
+    .onAppear() {
+        if let header = viewModel.header {
+            print("Header URL is: \(header)")
+        }
+    }
   }
 
   @ViewBuilder
