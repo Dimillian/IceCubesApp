@@ -103,7 +103,7 @@ import SwiftUI
       if let temporaryHeaderData {
          _ = await uploadHeader(data: temporaryHeaderData)
       }
-      // Clear preview data
+      // Clear preview data to show fetched avatar and header
       temporaryAvatarData = nil
       temporaryHeaderData = nil
       // Fetch account to set header and avatar
