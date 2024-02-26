@@ -21908,7 +21908,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%#@count_posts@ from %#@count_participants@"
+            "value" : "%#@count_posts@ posts from %#@count_participants@ participants"
           },
           "substitutions" : {
             "count_participants" : {
@@ -77857,7 +77857,7 @@
         "en-GB" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%#@arg1@ recent posts from %#@arg2@ participants"
+            "value" : "%#@arg1@ from %#@arg2@"
           },
           "substitutions" : {
             "arg1" : {
