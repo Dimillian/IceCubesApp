@@ -234,13 +234,11 @@ struct DefaultPreviewImage: View {
   var body: some View {
     _Layout(originalWidth: originalWidth, originalHeight: originalHeight) {
       LazyResizableImage(url: url) { state, _ in
-        Rectangle()
-          .fill(theme.secondaryBackgroundColor)
-          .overlay {
-            if let image = state.image {
-              image.resizable().scaledToFill()
-            }
-          }
+        if let image = state.image?.resizable() {
+          Rectangle().fill(theme.secondaryBackgroundColor)
+            .overlay { image.scaledToFill().blur(radius: 50) }
+            .overlay { image.scaledToFit() }
+        }
       }
       .accessibilityHidden(true) // This image is decorative
       .clipped()
@@ -264,7 +262,7 @@ struct DefaultPreviewImage: View {
     }
 
     private func calculateSize(_ proposal: ProposedViewSize) -> CGSize {
-      switch (proposal.width, proposal.height) {
+      var size = switch (proposal.width, proposal.height) {
       case (nil, nil):
         CGSize(width: originalWidth, height: originalWidth)
       case let (nil, .some(height)):
@@ -278,6 +276,9 @@ struct DefaultPreviewImage: View {
           CGSize(width: width, height: width / originalWidth * originalHeight)
         }
       }
+
+      size.height = min(size.height, 450)
+      return size
     }
   }
 }
