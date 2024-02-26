@@ -101,7 +101,25 @@ public struct EditAccountView: View {
         }
         if let avatar = viewModel.avatar {
           ZStack(alignment: .bottomLeading) {
-            AvatarView(avatar, config: .account)
+            if let previewAvatarData = viewModel.temporaryAvatarData {
+              if let uiImage = UIImage(data: previewAvatarData) {
+                let config = AvatarView.FrameConfig.account
+                // Corner radius taken from AvatarView.FrameConfig.account, and
+                // put here because can't have internal access.
+                // Image instead of LazyImage with resize processor, because don't have URL.
+                Image(uiImage: uiImage)
+                  .resizable()
+                  .aspectRatio(contentMode: .fill)
+                  .frame(width: config.width, height: config.height)
+                  .clipShape(RoundedRectangle(cornerRadius: config.width/2))
+                  .overlay(
+                    RoundedRectangle(cornerRadius: config.width/2)
+                      .stroke(.primary.opacity(0.25), lineWidth: 1)
+                  )
+              }
+            } else {
+              AvatarView(avatar, config: .account)
+            }
             Menu {
               Button("account.edit.avatar") {
                 viewModel.isChangingAvatar = true
